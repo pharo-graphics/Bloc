@@ -21,8 +21,8 @@ before_install:
        declare -r SSH_FILE="$(mktemp -u $HOME/.ssh/$GITHUB_SSH_FILE)"
        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
        openssl aes-256-cbc \
-         -K $encrypted_269aad325b32_key \
-         -iv $encrypted_269aad325b32_iv \
+         -K $encrypted_b54d1cff7fb3_key \
+         -iv $encrypted_b54d1cff7fb3_iv \
          -in ".travis/travis_id_rsa.enc" \
          -out "$SSH_FILE" -d
        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
