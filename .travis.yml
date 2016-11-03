@@ -1,15 +1,11 @@
 language: smalltalk
 
-env:
-  - IMGNAME=Bloc
-  - REPO='github://pharo-graphics/Bloc/src'
 
 install: 
   - wget -O - get.pharo.org/60+vm | bash
-  - ./pharo Pharo.image save $IMGNAME --delete-old
-  - ./pharo $IMGNAME.image eval "Metacello new baseline: '$IMGNAME'; repository: '$REPO'; load."
-  
+  - |
+    ./pharo Bloc.image eval "Metacello new baseline: 'Bloc'; repository: 'github://pharo-graphics/Bloc/src'; load."
+
+
 script:
   - ./pharo $IMGNAME.image test --no-xterm --fail-on-failure "Bloc.*"
-
-
