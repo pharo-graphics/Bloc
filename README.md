@@ -9,11 +9,29 @@ Main maintainers : [Glenn Cavarlé](https://github.com/GlennCavarle) & [Aliaksei
 
 ## Bloc Zeroconf Script
 
-This script downloads the latest Pharo 60 Image.
-
-This script downloads the stable Pharo VM for 60.
-
-This script install the latest Bloc version.
+This script downloads the latest Pharo 60 Image + the stable Pharo VM for 60 and installs the latest Bloc version.
 
 `wget -O- https://goo.gl/YYHH5a | bash`
 
+## Manual installation
+
+Iceberg is mendatory to be able to commit on Bloc (for developers only).
+
+```smalltalk
+Metacello new
+    baseline: 'Iceberg';
+    repository: 'github://npasserini/iceberg';
+    load.
+```
+Install Bloc in a Pharo 60 image by evaluating this script in a playground:
+
+```smalltalk
+Metacello new
+    baseline: 'Bloc';
+    repository: 'github://pharo-graphics/Bloc/src';
+    load
+```
+
+
+
+```
