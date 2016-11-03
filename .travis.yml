@@ -25,13 +25,17 @@ before_install:
          -iv $encrypted_b54d1cff7fb3_iv \
          -in ".travis/travis_id_rsa.enc" \
          -out "$SSH_FILE" -d
+         
        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+       
        # Enable SSH authentication
+       
        chmod 600 "$SSH_FILE" \
          && printf "%s\n" \
               "Host github.com" \
               "  IdentityFile $SSH_FILE" \
               "  LogLevel ERROR" >> ~/.ssh/config
+              
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       sudo dpkg --add-architecture i386;
       sudo apt-get update;
