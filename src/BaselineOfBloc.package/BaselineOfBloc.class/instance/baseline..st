@@ -2,17 +2,12 @@ as yet unclassified
 baseline: spec
 	<baseline>
 	spec for: #common do: [ 
-		 spec project: 'Sparta' with: [
+		 spec baseline: 'Sparta' with: [
 				spec
-					className: #BaselineOfSparta;
-					versionString: 'baseline';
 					loads: #(#'file:development' );
 					repository: 'github://syrel/sparta/src' ];
-			project: 'TaskIt' with: [
-				spec
-					className: #BaselineOfTaskIt;
-					versionString: 'baseline';
-					repository: 'github://sbragagnolo/taskit-2:dev-0.3' ];
+			baseline: 'TaskIt' with: [
+				spec repository: 'github://sbragagnolo/taskit-2:dev-0.3' ];
 			project: 'OSWindow' with: [
 				spec
 					className: #ConfigurationOfOSWindow;
