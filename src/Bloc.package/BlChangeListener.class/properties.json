@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GlennCavarle 6/22/2016 16:06",
+	"super" : "Object",
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlChangeListener",
+	"type" : "normal"
+}

@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Style-Util",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"AkStyleTransition"
+	],
+	"instvars" : [
+		"selector",
+		"declarations",
+		"transitions",
+		"conditions"
+	],
+	"name" : "BlMatchedRule",
+	"type" : "normal"
+}

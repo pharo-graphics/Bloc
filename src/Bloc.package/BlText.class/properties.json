@@ -1,0 +1,20 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text",
+		"font",
+		"txtExtentsCache",
+		"layoutView",
+		"wrappingWidth",
+		"textModel",
+		"fill",
+		"stroke"
+	],
+	"name" : "BlText",
+	"type" : "normal"
+}

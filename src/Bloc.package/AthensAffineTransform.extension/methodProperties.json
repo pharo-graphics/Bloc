@@ -1,0 +1,18 @@
+{
+	"instance" : {
+		"scale:" : "GlennCavarle 1/23/2016 14:20",
+		"isTranslationOrIdentity" : "GlennCavarle 5/12/2016 15:34",
+		"rotateByRadians:center:" : "GlennCavarle 5/13/2016 15:01",
+		"localPointToGlobal:" : "GlennCavarle 1/22/2016 19:50",
+		"=" : "GlennCavarle 1/23/2016 14:20",
+		"isPureTranslation" : "GlennCavarle 1/21/2016 05:31",
+		"rotateByDegrees:center:" : "GlennCavarle 5/13/2016 14:45",
+		"isIdentity" : "GlennCavarle 1/21/2016 05:31",
+		"asAthensAffineTransform" : "GlennCavarle 5/5/2016 12:00",
+		"globalPointToLocal:" : "GlennCavarle 1/21/2016 05:31",
+		"hash" : "GlennCavarle 1/23/2016 14:20",
+		"multiplyBy:" : "GlennCavarle 1/23/2016 14:19",
+		"loadAffineTransform:" : "GlennCavarle 1/23/2016 14:20"
+	},
+	"class" : { }
+}

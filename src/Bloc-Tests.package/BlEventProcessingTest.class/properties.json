@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEventTestCase",
+	"category" : "Bloc-Tests-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEventProcessingTest",
+	"type" : "normal"
+}

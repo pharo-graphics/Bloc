@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"from",
+		"to",
+		"fromListener",
+		"toListener"
+	],
+	"name" : "BlPropertyBinding",
+	"type" : "normal"
+}

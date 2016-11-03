@@ -1,0 +1,3 @@
+numeric
+numeric7BoxMultipleOutlineIcon
+^ self numeric7BoxMultipleOutlineSvg asElement

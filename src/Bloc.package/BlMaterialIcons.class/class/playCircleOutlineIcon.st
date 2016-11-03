@@ -1,0 +1,3 @@
+play
+playCircleOutlineIcon
+^ self playCircleOutlineSvg asElement

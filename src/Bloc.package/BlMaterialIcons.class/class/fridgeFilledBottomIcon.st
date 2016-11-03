@@ -1,0 +1,3 @@
+fridge
+fridgeFilledBottomIcon
+^ self fridgeFilledBottomSvg asElement

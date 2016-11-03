@@ -1,0 +1,3 @@
+calendar
+calendarSelectIcon
+^ self calendarSelectSvg asElement

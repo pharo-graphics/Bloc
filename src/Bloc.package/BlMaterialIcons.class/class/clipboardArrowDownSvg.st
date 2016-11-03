@@ -1,0 +1,3 @@
+clipboard
+clipboardArrowDownSvg
+^ BlSvgPath fromStream: self clipboardArrowDownSrc

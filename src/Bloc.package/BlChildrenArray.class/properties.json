@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "GlennCavarle 6/22/2016 16:08",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"array",
+		"zArray",
+		"zReversedArray",
+		"managedArray"
+	],
+	"name" : "BlChildrenArray",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+account
+accountCircleIcon
+^ self accountCircleSvg asElement

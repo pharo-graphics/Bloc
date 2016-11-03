@@ -1,0 +1,3 @@
+football
+footballHelmetIcon
+^ self footballHelmetSvg asElement

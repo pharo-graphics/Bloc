@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGridAlignment",
+	"category" : "Bloc-Layout-Grid-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGridBaselineAlignment",
+	"type" : "normal"
+}

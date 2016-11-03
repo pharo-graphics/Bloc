@@ -1,0 +1,3 @@
+brightness
+brightnessAutoIcon
+^ self brightnessAutoSvg asElement

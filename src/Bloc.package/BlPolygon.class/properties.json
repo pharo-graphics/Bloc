@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGeometry",
+	"category" : "Bloc-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"vertices"
+	],
+	"name" : "BlPolygon",
+	"type" : "normal"
+}

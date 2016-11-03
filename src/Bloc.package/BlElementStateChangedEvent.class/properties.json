@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlElementStateChangedEvent",
+	"type" : "normal"
+}

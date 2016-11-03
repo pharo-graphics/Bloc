@@ -1,0 +1,3 @@
+keyboard
+keyboardBackspaceIcon
+^ self keyboardBackspaceSvg asElement

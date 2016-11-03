@@ -1,0 +1,11 @@
+{
+	"instance" : {
+		"onInstalledIn:" : "GlennCavarle 5/9/2016 13:32",
+		"applyStyles" : "GlennCavarle 7/1/2016 23:10",
+		"elementAddedEvent:" : "GlennCavarle 6/28/2016 20:50",
+		"elementRemovedEvent:" : "GlennCavarle 6/30/2016 15:57",
+		"elementStateChangedEvent:" : "GlennCavarle 6/28/2016 20:52",
+		"computeStyles" : "GlennCavarle 5/8/2016 19:28"
+	},
+	"class" : { }
+}

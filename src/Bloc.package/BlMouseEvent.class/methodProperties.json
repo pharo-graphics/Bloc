@@ -1,0 +1,32 @@
+{
+	"instance" : {
+		"asMouseLeaveEvent" : "GlennCavarle 6/25/2016 12:53",
+		"sendTo:" : "GlennCavarle 1/25/2016 16:56",
+		"asDragStartEvent" : "GlennCavarle 6/25/2016 12:53",
+		"asDragEvent" : "GlennCavarle 6/25/2016 12:53",
+		"isMouse" : "GlennCavarle 1/22/2016 19:31",
+		"asDragLeaveEvent" : "GlennCavarle 6/25/2016 12:53",
+		"asDragEnterEvent" : "GlennCavarle 6/25/2016 12:53",
+		"asDropEvent" : "GlennCavarle 6/25/2016 12:53",
+		"asDragEndEvent" : "GlennCavarle 7/1/2016 16:36",
+		"delta" : "RonieSalgado 7/16/2016 01:58",
+		"primaryButtonPressed" : "GlennCavarle 7/18/2016 23:35",
+		"delta:" : "RonieSalgado 7/16/2016 01:58",
+		"middleButtonPressed" : "GlennCavarle 7/18/2016 23:34",
+		"secondaryButtonPressed" : "GlennCavarle 7/18/2016 23:35",
+		"asMouseEnterEvent" : "GlennCavarle 6/25/2016 12:53",
+		"asMouseOutEvent" : "GlennCavarle 6/25/2016 12:53",
+		"asMouseOverEvent" : "GlennCavarle 6/25/2016 12:53",
+		"anyButtonPressed" : "GlennCavarle 7/18/2016 23:45",
+		"asDragOverEvent" : "GlennCavarle 6/25/2016 12:53"
+	},
+	"class" : {
+		"middleButton" : "GlennCavarle 7/18/2016 16:37",
+		"anyButton" : "GlennCavarle 1/22/2016 20:21",
+		"button5" : "GlenCavarle 8/6/2016 13:13",
+		"secondaryButton" : "GlennCavarle 7/18/2016 16:35",
+		"primaryButton" : "GlennCavarle 7/18/2016 16:35",
+		"button6" : "GlenCavarle 8/6/2016 13:13",
+		"button4" : "GlenCavarle 8/6/2016 13:13"
+	}
+}

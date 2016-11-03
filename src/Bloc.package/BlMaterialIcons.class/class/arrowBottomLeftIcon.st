@@ -1,0 +1,3 @@
+arrow
+arrowBottomLeftIcon
+^ self arrowBottomLeftSvg asElement

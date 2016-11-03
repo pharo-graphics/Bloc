@@ -1,0 +1,3 @@
+eyedropper
+eyedropperVariantSvg
+^ BlSvgPath fromStream: self eyedropperVariantSrc

@@ -1,0 +1,3 @@
+clipboard
+clipboardArrowLeftIcon
+^ self clipboardArrowLeftSvg asElement

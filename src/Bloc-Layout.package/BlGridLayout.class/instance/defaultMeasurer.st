@@ -1,0 +1,3 @@
+initialization
+defaultMeasurer
+	^ BlGridMeasurer new

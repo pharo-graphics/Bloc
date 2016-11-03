@@ -1,0 +1,10 @@
+{
+	"instance" : {
+		"removeAnimation:" : "GlennCavarle 8/9/2016 00:42",
+		"addAnimation:" : "GlennCavarle 8/9/2016 00:42",
+		"initialize" : "GlennCavarle 7/4/2016 23:06",
+		"pulse" : "GlennCavarle 7/5/2016 17:03",
+		"clear" : "GlennCavarle 7/5/2016 13:56"
+	},
+	"class" : { }
+}

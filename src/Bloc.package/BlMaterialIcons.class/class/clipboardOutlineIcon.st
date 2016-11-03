@@ -1,0 +1,3 @@
+clipboard
+clipboardOutlineIcon
+^ self clipboardOutlineSvg asElement

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlBaseDragEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlDragEnterEvent",
+	"type" : "normal"
+}

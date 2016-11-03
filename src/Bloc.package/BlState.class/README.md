@@ -1,0 +1,1 @@
+My subclasses represent the interaction states basically available for a graphics object. 

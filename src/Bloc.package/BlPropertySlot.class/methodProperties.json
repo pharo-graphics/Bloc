@@ -1,0 +1,19 @@
+{
+	"instance" : {
+		"accessingPropertyProtocol" : "GlennCavarle 1/23/2016 19:20",
+		"installingWriterIn:" : "GlennCavarle 1/23/2016 19:19",
+		"installingReaderIn:" : "GlennCavarle 1/23/2016 19:19",
+		"installingPropertyIn:" : "GlennCavarle 1/23/2016 19:19",
+		"read:" : "GlennCavarle 1/28/2016 18:50",
+		"instantiateIn:" : "GlennCavarle 5/11/2016 19:47",
+		"accessingProtocol" : "GlennCavarle 1/23/2016 19:20",
+		"removingFrom:" : "GlennCavarle 1/28/2016 18:28",
+		"installingIn:" : "GlennCavarle 1/28/2016 18:25",
+		"emitValue:" : "GlennCavarle 1/28/2016 18:49",
+		"emitStore:" : "GlennCavarle 1/28/2016 18:49",
+		"compileMethod:class:protocol:" : "GlennCavarle 1/23/2016 19:20",
+		"propertyClass" : "GlennCavarle 6/25/2016 12:53",
+		"wantsInitalization" : "GlennCavarle 1/23/2016 19:20"
+	},
+	"class" : { }
+}

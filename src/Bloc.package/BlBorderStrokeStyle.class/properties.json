@@ -1,0 +1,23 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Dashed",
+		"Dotted",
+		"None",
+		"Solid"
+	],
+	"instvars" : [
+		"lineCap",
+		"lineJoin",
+		"miterLimit",
+		"type",
+		"dashArray",
+		"dashOffset"
+	],
+	"name" : "BlBorderStrokeStyle",
+	"type" : "normal"
+}

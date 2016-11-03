@@ -1,0 +1,3 @@
+music
+musicNoteBluetoothOffSvg
+^ BlSvgPath fromStream: self musicNoteBluetoothOffSrc

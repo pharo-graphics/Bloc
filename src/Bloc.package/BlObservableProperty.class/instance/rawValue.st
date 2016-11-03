@@ -1,0 +1,3 @@
+private
+rawValue
+	^ rawValue

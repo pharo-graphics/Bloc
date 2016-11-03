@@ -1,0 +1,3 @@
+stethoscope
+stethoscopeIcon
+^ self stethoscopeSvg asElement

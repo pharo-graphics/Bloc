@@ -1,0 +1,3 @@
+cellphone
+cellphoneSettingsSvg
+^ BlSvgPath fromStream: self cellphoneSettingsSrc

@@ -1,0 +1,1 @@
+A helper class containing the help for Grid layout.

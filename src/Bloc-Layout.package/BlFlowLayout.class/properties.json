@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLayout",
+	"category" : "Bloc-Layout-Flow",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFlowLayout",
+	"type" : "normal"
+}

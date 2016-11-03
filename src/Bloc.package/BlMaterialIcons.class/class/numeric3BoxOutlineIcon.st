@@ -1,0 +1,3 @@
+numeric
+numeric3BoxOutlineIcon
+^ self numeric3BoxOutlineSvg asElement

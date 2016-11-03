@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "GlennCavarle 6/26/2016 00:08",
+	"super" : "BlAbstractSpace",
+	"category" : "Bloc-Space",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"title",
+		"icon",
+		"decorated",
+		"fullscreen",
+		"maximize"
+	],
+	"name" : "BlSpace",
+	"type" : "normal"
+}

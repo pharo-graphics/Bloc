@@ -1,0 +1,3 @@
+octagon
+octagonOutlineIcon
+^ self octagonOutlineSvg asElement

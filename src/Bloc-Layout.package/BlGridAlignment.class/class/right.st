@@ -1,0 +1,3 @@
+factory
+right
+	^ self end

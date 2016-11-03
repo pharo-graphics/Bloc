@@ -1,0 +1,3 @@
+comment
+commentProcessingIcon
+^ self commentProcessingSvg asElement

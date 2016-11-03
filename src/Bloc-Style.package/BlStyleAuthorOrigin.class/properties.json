@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GlennCavarle 9/12/2015 13:32",
+	"super" : "BlStyleOrigin",
+	"category" : "Bloc-Style-CSS",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlStyleAuthorOrigin",
+	"type" : "normal"
+}

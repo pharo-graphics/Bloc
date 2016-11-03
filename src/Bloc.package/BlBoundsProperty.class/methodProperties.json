@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"value" : "GlennCavarle 5/11/2016 19:20",
+		"computeBlock:" : "GlennCavarle 5/11/2016 19:41",
+		"initialize" : "GlennCavarle 8/3/2016 11:12",
+		"computeBounds" : "GlennCavarle 5/11/2016 19:41",
+		"computeBlock" : "GlennCavarle 5/11/2016 19:41",
+		"invalidate" : "GlennCavarle 5/13/2016 02:29"
+	},
+	"class" : {
+		"on:named:compute:" : "GlennCavarle 5/11/2016 19:49"
+	}
+}

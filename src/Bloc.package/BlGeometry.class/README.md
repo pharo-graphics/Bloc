@@ -1,0 +1,1 @@
+The geometry is used to define the geometry to be drawn and the interaction area.

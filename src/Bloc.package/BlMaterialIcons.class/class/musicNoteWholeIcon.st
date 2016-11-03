@@ -1,0 +1,3 @@
+music
+musicNoteWholeIcon
+^ self musicNoteWholeSvg asElement

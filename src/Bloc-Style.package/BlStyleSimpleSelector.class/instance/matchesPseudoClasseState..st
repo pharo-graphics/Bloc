@@ -1,0 +1,3 @@
+testing
+matchesPseudoClasseState: aPseudoClassState
+	^ aPseudoClassState includesAll: pseudoClasses

@@ -1,0 +1,3 @@
+testing
+isBaseDrag
+	^ true

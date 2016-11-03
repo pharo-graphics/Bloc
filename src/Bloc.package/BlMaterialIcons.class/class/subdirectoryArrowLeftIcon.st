@@ -1,0 +1,3 @@
+subdirectory
+subdirectoryArrowLeftIcon
+^ self subdirectoryArrowLeftSvg asElement

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlKeyboardEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlKeyDownEvent",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+skip
+skipPreviousCircleOutlineSvg
+^ BlSvgPath fromStream: self skipPreviousCircleOutlineSrc

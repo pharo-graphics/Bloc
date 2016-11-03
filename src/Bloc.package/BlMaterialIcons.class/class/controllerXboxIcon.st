@@ -1,0 +1,3 @@
+controller
+controllerXboxIcon
+^ self controllerXboxSvg asElement

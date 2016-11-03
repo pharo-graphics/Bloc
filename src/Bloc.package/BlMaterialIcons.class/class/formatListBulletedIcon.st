@@ -1,0 +1,3 @@
+format
+formatListBulletedIcon
+^ self formatListBulletedSvg asElement

@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"wrapAttribute",
+		"font",
+		"layoutView",
+		"wrappingWidth",
+		"textModel",
+		"fill",
+		"stroke"
+	],
+	"name" : "BlSpartaText",
+	"type" : "normal"
+}

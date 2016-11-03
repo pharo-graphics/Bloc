@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlMorphicWindowEvent",
+	"category" : "BlocHost-Morphic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"width",
+		"height"
+	],
+	"name" : "BlMorphicWindowResizeEvent",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PPCSSGrammar",
+	"category" : "Bloc-Style-Util",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlStylesheetLoader",
+	"type" : "normal"
+}

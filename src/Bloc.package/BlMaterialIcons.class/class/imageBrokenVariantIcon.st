@@ -1,0 +1,3 @@
+image
+imageBrokenVariantIcon
+^ self imageBrokenVariantSvg asElement

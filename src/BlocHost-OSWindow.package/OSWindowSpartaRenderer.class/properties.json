@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "GlennCavarle 10/6/2016 23:14",
+	"super" : "OSWindowRenderer",
+	"category" : "BlocHost-OSWindow-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"spartaCanvas",
+		"session"
+	],
+	"name" : "OSWindowSpartaRenderer",
+	"type" : "normal"
+}

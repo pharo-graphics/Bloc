@@ -1,0 +1,3 @@
+accessing
+cornerRadius
+	^ cornerRadii topLeft 

@@ -1,0 +1,3 @@
+effect
+computeGeomBoundsFrom: anInputGeomBounds
+	^ anInputGeomBounds

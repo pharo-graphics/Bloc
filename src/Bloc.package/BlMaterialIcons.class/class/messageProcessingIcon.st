@@ -1,0 +1,3 @@
+message
+messageProcessingIcon
+^ self messageProcessingSvg asElement

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlTransition",
+	"category" : "Bloc-Animation-Transition",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlNumberTransition",
+	"type" : "normal"
+}

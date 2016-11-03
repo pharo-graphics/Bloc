@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"layout:in:" : "GlennCavarle 8/3/2016 00:27",
+		"align:bounds:in:" : "AliakseiSyrel 5/20/2016 21:05",
+		"isMeasureAllChildren" : "AliakseiSyrel 5/20/2016 14:35",
+		"initialize" : "AliakseiSyrel 5/20/2016 14:34",
+		"measure:with:" : "AliakseiSyrel 5/20/2016 22:01",
+		"measureChildren:with:" : "GlennCavarle 8/2/2016 23:22",
+		"measureMatching:of:with:" : "GlennCavarle 8/2/2016 23:23",
+		"defaultMeasureAllChildren" : "AliakseiSyrel 5/20/2016 14:34"
+	},
+	"class" : { }
+}

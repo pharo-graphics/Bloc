@@ -1,0 +1,3 @@
+google
+googleCirclesExtendedIcon
+^ self googleCirclesExtendedSvg asElement

@@ -1,0 +1,3 @@
+account
+accountCardDetailsSvg
+^ BlSvgPath fromStream: self accountCardDetailsSrc

@@ -1,0 +1,3 @@
+numeric
+numeric9PlusBoxIcon
+^ self numeric9PlusBoxSvg asElement

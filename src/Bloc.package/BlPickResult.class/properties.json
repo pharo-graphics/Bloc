@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "OrderedCollection",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlPickResult",
+	"type" : "normal"
+}

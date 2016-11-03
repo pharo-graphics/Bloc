@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Grid-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"HORIZONTAL",
+		"VERTICAL"
+	],
+	"instvars" : [ ],
+	"name" : "BlGridOrientation",
+	"type" : "normal"
+}

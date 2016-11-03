@@ -1,0 +1,3 @@
+arrow
+arrowDownDropCircleSvg
+^ BlSvgPath fromStream: self arrowDownDropCircleSrc

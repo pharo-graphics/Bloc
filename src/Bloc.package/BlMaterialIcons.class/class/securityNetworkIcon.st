@@ -1,0 +1,3 @@
+security
+securityNetworkIcon
+^ self securityNetworkSvg asElement

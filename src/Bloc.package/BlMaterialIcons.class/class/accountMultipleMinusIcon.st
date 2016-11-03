@@ -1,0 +1,3 @@
+account
+accountMultipleMinusIcon
+^ self accountMultipleMinusSvg asElement

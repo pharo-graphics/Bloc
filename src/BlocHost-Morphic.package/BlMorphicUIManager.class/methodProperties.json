@@ -1,0 +1,10 @@
+{
+	"instance" : {
+		"defer:" : "GlennCavarle 7/10/2016 11:24",
+		"terminateUIProcess" : "GlennCavarle 6/25/2016 12:53",
+		"resumeUIProcess:" : "GlennCavarle 6/25/2016 12:53",
+		"spawnNewProcess" : "GlennCavarle 6/25/2016 12:53",
+		"uiProcess" : "GlennCavarle 6/25/2016 12:53"
+	},
+	"class" : { }
+}

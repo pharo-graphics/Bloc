@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementEventListener",
+	"category" : "Bloc-DevTool-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"selectionRect",
+		"client",
+		"startPosition",
+		"endPosition",
+		"currentSelections"
+	],
+	"name" : "BlSelectionTool",
+	"type" : "normal"
+}

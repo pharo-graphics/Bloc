@@ -1,0 +1,3 @@
+multiplication
+multiplicationIcon
+^ self multiplicationSvg asElement

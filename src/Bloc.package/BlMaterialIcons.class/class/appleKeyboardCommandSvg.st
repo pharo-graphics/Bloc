@@ -1,0 +1,3 @@
+apple
+appleKeyboardCommandSvg
+^ BlSvgPath fromStream: self appleKeyboardCommandSrc

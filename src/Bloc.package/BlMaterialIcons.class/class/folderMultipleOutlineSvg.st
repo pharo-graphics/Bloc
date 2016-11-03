@@ -1,0 +1,3 @@
+folder
+folderMultipleOutlineSvg
+^ BlSvgPath fromStream: self folderMultipleOutlineSrc

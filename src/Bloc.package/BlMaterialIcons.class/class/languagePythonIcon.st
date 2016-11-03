@@ -1,0 +1,3 @@
+language
+languagePythonIcon
+^ self languagePythonSvg asElement

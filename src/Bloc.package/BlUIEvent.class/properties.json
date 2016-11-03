@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"position",
+		"screenPosition",
+		"modifiers",
+		"button"
+	],
+	"name" : "BlUIEvent",
+	"type" : "normal"
+}

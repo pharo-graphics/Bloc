@@ -1,0 +1,3 @@
+table
+tableColumnPlusAfterSvg
+^ BlSvgPath fromStream: self tableColumnPlusAfterSrc

@@ -1,0 +1,3 @@
+cellphone
+cellphoneAndroidIcon
+^ self cellphoneAndroidSvg asElement

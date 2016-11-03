@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Butt",
+		"Round",
+		"Square"
+	],
+	"instvars" : [
+		"value"
+	],
+	"name" : "BlStrokeLineCap",
+	"type" : "normal"
+}

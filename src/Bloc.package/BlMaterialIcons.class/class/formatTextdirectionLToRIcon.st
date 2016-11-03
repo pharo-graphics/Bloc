@@ -1,0 +1,3 @@
+format
+formatTextdirectionLToRIcon
+^ self formatTextdirectionLToRSvg asElement

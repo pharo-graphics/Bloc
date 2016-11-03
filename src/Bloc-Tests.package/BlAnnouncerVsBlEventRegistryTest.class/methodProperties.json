@@ -1,0 +1,12 @@
+{
+	"instance" : {
+		"testCompareManyDispatchForOneHandlerUsingSubclass" : "GlennCavarle 8/24/2016 17:42",
+		"testCompareOneDispatchForManyHandlers" : "GlennCavarle 8/24/2016 17:44",
+		"testCompareManyDispatchForManyHandlers" : "GlennCavarle 8/31/2016 08:54",
+		"testCompareAddManyHandlers" : "GlennCavarle 8/24/2016 17:51",
+		"testCompareManyDispatchForNoHandler" : "GlennCavarle 8/31/2016 22:29",
+		"testCompareManyDispatchForOneHandler" : "GlennCavarle 8/31/2016 08:52",
+		"testCompareOneDispatchForManyHandlersUsingSubclass" : "GlennCavarle 8/24/2016 17:46"
+	},
+	"class" : { }
+}

@@ -1,0 +1,3 @@
+apple
+appleKeyboardOptionIcon
+^ self appleKeyboardOptionSvg asElement

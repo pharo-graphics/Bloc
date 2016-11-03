@@ -1,0 +1,3 @@
+package
+packageVariantClosedSvg
+^ BlSvgPath fromStream: self packageVariantClosedSrc

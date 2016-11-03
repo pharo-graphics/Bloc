@@ -1,0 +1,3 @@
+comment
+commentRemoveOutlineIcon
+^ self commentRemoveOutlineSvg asElement

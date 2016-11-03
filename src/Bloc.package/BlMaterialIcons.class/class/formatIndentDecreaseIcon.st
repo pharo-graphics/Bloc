@@ -1,0 +1,3 @@
+format
+formatIndentDecreaseIcon
+^ self formatIndentDecreaseSvg asElement

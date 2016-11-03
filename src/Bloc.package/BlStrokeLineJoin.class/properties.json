@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Bevel",
+		"Miter",
+		"Round"
+	],
+	"instvars" : [
+		"value"
+	],
+	"name" : "BlStrokeLineJoin",
+	"type" : "normal"
+}

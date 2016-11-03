@@ -1,0 +1,3 @@
+vector
+vectorSelectionIcon
+^ self vectorSelectionSvg asElement

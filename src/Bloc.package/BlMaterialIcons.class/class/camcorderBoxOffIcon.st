@@ -1,0 +1,3 @@
+camcorder
+camcorderBoxOffIcon
+^ self camcorderBoxOffSvg asElement

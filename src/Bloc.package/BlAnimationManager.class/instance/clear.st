@@ -1,0 +1,3 @@
+initialisation
+clear
+	animations removeAll

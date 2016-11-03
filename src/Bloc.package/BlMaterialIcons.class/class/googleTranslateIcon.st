@@ -1,0 +1,3 @@
+google
+googleTranslateIcon
+^ self googleTranslateSvg asElement

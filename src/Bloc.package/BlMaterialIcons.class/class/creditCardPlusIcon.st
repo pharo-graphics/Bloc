@@ -1,0 +1,3 @@
+credit
+creditCardPlusIcon
+^ self creditCardPlusSvg asElement

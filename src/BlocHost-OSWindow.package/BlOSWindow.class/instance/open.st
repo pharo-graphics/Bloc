@@ -1,0 +1,3 @@
+displaying
+open
+	window show

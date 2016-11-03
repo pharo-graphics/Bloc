@@ -1,0 +1,3 @@
+white
+whiteBalanceIncandescentSvg
+^ BlSvgPath fromStream: self whiteBalanceIncandescentSrc

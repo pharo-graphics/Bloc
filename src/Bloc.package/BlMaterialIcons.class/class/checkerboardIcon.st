@@ -1,0 +1,3 @@
+checkerboard
+checkerboardIcon
+^ self checkerboardSvg asElement

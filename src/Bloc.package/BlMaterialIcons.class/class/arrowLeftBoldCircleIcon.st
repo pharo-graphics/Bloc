@@ -1,0 +1,3 @@
+arrow
+arrowLeftBoldCircleIcon
+^ self arrowLeftBoldCircleSvg asElement

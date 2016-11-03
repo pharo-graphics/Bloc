@@ -1,0 +1,3 @@
+vector
+vectorIntersectionIcon
+^ self vectorIntersectionSvg asElement

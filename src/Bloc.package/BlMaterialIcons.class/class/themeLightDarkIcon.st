@@ -1,0 +1,3 @@
+theme
+themeLightDarkIcon
+^ self themeLightDarkSvg asElement

@@ -1,0 +1,3 @@
+format
+formatFloatNoneIcon
+^ self formatFloatNoneSvg asElement

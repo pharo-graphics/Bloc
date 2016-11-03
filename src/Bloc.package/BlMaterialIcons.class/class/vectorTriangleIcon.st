@@ -1,0 +1,3 @@
+vector
+vectorTriangleIcon
+^ self vectorTriangleSvg asElement

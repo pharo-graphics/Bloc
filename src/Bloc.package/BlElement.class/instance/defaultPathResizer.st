@@ -1,0 +1,3 @@
+initialization
+defaultPathResizer
+	^ BlGeomMatchResizer new

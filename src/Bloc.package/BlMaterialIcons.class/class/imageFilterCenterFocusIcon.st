@@ -1,0 +1,3 @@
+image
+imageFilterCenterFocusIcon
+^ self imageFilterCenterFocusSvg asElement

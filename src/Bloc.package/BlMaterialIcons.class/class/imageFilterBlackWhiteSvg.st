@@ -1,0 +1,3 @@
+image
+imageFilterBlackWhiteSvg
+^ BlSvgPath fromStream: self imageFilterBlackWhiteSrc

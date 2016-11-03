@@ -1,0 +1,3 @@
+format
+formatHorizontalAlignRightIcon
+^ self formatHorizontalAlignRightSvg asElement

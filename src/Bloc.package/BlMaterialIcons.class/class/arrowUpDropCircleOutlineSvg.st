@@ -1,0 +1,3 @@
+arrow
+arrowUpDropCircleOutlineSvg
+^ BlSvgPath fromStream: self arrowUpDropCircleOutlineSrc

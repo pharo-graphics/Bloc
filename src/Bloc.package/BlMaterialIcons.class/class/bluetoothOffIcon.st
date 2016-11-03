@@ -1,0 +1,3 @@
+bluetooth
+bluetoothOffIcon
+^ self bluetoothOffSvg asElement

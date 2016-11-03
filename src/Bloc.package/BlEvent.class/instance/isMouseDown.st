@@ -1,0 +1,3 @@
+testing
+isMouseDown
+	^ false

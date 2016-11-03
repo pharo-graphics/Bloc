@@ -1,0 +1,3 @@
+content
+contentDuplicateIcon
+^ self contentDuplicateSvg asElement

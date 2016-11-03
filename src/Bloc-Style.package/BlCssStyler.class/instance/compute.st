@@ -1,0 +1,3 @@
+private
+compute
+	self stylesheets computeStyleNodes

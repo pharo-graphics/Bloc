@@ -1,0 +1,3 @@
+focus managing
+focusOwner
+	^ focusOwner

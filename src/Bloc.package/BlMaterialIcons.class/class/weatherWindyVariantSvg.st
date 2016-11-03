@@ -1,0 +1,3 @@
+weather
+weatherWindyVariantSvg
+^ BlSvgPath fromStream: self weatherWindyVariantSrc

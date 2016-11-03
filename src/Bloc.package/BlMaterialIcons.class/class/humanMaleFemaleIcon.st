@@ -1,0 +1,3 @@
+human
+humanMaleFemaleIcon
+^ self humanMaleFemaleSvg asElement

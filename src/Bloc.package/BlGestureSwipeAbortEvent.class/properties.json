@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGestureBaseSwipeEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGestureSwipeAbortEvent",
+	"type" : "normal"
+}

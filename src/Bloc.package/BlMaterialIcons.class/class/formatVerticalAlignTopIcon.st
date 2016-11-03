@@ -1,0 +1,3 @@
+format
+formatVerticalAlignTopIcon
+^ self formatVerticalAlignTopSvg asElement

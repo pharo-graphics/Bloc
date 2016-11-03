@@ -1,0 +1,3 @@
+factory
+inflexible
+	^ BlGridInflexible uniqueInstance

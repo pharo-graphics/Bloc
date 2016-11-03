@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlStrokeType",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlStrokeTypeOutside",
+	"type" : "normal"
+}

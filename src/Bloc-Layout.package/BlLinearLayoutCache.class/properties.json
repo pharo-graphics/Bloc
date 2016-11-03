@@ -1,0 +1,23 @@
+{
+	"commentStamp" : "AliakseiSyrel 2/14/2016 11:42",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Linear",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"widthMode",
+		"heightMode",
+		"widthMeasureSpec",
+		"heightMeasureSpec",
+		"length",
+		"matchBreadth",
+		"totalLength",
+		"totalWeight",
+		"alternativeMaxBreadth",
+		"matchingMaxBreadth",
+		"maxBreadth"
+	],
+	"name" : "BlLinearLayoutCache",
+	"type" : "normal"
+}

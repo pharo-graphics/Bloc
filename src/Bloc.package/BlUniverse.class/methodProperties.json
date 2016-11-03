@@ -1,0 +1,35 @@
+{
+	"instance" : {
+		"start" : "GlennCavarle 1/20/2016 22:41",
+		"useOSWindowSpartaHost" : "GlennCavarle 10/6/2016 19:47",
+		"initialize" : "GlennCavarle 8/9/2016 00:30",
+		"pulseRequested" : "GlennCavarle 7/9/2016 18:28",
+		"pulseLoop:" : "GlennCavarle 1/20/2016 18:02",
+		"addPulseListener:" : "GlennCavarle 6/25/2016 12:53",
+		"useMorphicHost" : "GlennCavarle 6/25/2016 12:53",
+		"createSpaceWindow:" : "GlennCavarle 8/3/2016 14:07",
+		"isUIProcess:" : "GlennCavarle 10/12/2016 14:10",
+		"removePulseListener:" : "GlennCavarle 1/31/2016 03:24",
+		"tryToRunDeferredActions" : "GlennCavarle 10/12/2016 14:20",
+		"defer:" : "GlennCavarle 7/10/2016 11:23",
+		"spaceManager" : "GlennCavarle 7/4/2016 22:55",
+		"defaultHost" : "GlennCavarle 10/6/2016 19:46",
+		"firePulse:" : "GlennCavarle 8/9/2016 00:20",
+		"stop" : "GlennCavarle 7/5/2016 13:56",
+		"useOSWindowAthensHost" : "GlennCavarle 10/6/2016 19:47",
+		"host" : "GlennCavarle 4/22/2016 15:34",
+		"host:" : "GlennCavarle 10/6/2016 19:49",
+		"animationManager" : "GlennCavarle 7/5/2016 13:48",
+		"closeSpaceWindow:" : "GlennCavarle 7/5/2016 14:18",
+		"allSpacesDo:" : "GlennCavarle 7/4/2016 22:56",
+		"pulseLoop" : "GlennCavarle 1/20/2016 18:02",
+		"mainLoopPriority" : "GlennCavarle 1/31/2016 02:46",
+		"defaultPulseLoop" : "GlennCavarle 6/25/2016 12:53",
+		"requestNextPulse" : "GlennCavarle 7/9/2016 15:42"
+	},
+	"class" : {
+		"defer:" : "GlennCavarle 7/10/2016 12:07",
+		"reset" : "GlennCavarle 1/24/2016 01:39",
+		"default" : "GlennCavarle 6/22/2016 12:02"
+	}
+}

@@ -1,0 +1,3 @@
+table
+tableRowPlusAfterIcon
+^ self tableRowPlusAfterSvg asElement

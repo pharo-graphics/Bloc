@@ -1,0 +1,3 @@
+*Bloc
+asForm
+	^ self

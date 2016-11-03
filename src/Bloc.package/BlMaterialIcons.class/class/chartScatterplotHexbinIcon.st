@@ -1,0 +1,3 @@
+chart
+chartScatterplotHexbinIcon
+^ self chartScatterplotHexbinSvg asElement

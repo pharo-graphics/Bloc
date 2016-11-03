@@ -1,0 +1,3 @@
+arrow
+arrowUpBoldCircleIcon
+^ self arrowUpBoldCircleSvg asElement

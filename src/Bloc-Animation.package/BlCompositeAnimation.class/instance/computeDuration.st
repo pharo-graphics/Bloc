@@ -1,0 +1,3 @@
+adding
+computeDuration
+	self subclassResponsibility 

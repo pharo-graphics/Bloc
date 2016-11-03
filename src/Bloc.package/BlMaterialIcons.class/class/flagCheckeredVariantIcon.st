@@ -1,0 +1,3 @@
+flag
+flagCheckeredVariantIcon
+^ self flagCheckeredVariantSvg asElement

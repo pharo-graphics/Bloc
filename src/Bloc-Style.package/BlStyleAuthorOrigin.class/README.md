@@ -1,0 +1,1 @@
+Default stylesheet of the styleable (the ui theme)

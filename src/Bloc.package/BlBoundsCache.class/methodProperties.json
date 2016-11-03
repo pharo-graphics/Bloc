@@ -1,0 +1,17 @@
+{
+	"instance" : {
+		"fxBoundsInSpace" : "GlennCavarle 8/3/2016 11:12",
+		"boundsInLocal" : "GlenCavarle 8/6/2016 13:46",
+		"layoutBoundsInSpace" : "GlennCavarle 8/3/2016 11:13",
+		"boundsInParent" : "GlennCavarle 7/28/2016 23:17",
+		"owner:" : "GlennCavarle 7/28/2016 23:39",
+		"boundsInSpace" : "GlennCavarle 7/28/2016 23:16",
+		"txBounds" : "GlennCavarle 8/3/2016 11:13",
+		"owner" : "GlennCavarle 7/28/2016 23:27",
+		"invalidateBoundsInSpace" : "GlennCavarle 8/3/2016 16:10",
+		"geomBoundsInSpace" : "GlennCavarle 8/3/2016 11:12"
+	},
+	"class" : {
+		"on:" : "GlennCavarle 7/28/2016 23:26"
+	}
+}

@@ -1,0 +1,3 @@
+gamepad
+gamepadVariantIcon
+^ self gamepadVariantSvg asElement

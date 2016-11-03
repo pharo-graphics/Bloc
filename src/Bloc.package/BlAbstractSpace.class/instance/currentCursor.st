@@ -1,0 +1,3 @@
+cursor managing
+currentCursor
+	^ currentCursor 

@@ -1,0 +1,2 @@
+installation
+onUninstalledIn: anObject

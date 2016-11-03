@@ -1,0 +1,3 @@
+arrow
+arrowExpandAllIcon
+^ self arrowExpandAllSvg asElement

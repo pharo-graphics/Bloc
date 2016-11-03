@@ -1,0 +1,3 @@
+close
+closeOctagonOutlineIcon
+^ self closeOctagonOutlineSvg asElement

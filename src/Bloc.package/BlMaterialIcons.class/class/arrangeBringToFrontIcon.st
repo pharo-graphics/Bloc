@@ -1,0 +1,3 @@
+arrange
+arrangeBringToFrontIcon
+^ self arrangeBringToFrontSvg asElement

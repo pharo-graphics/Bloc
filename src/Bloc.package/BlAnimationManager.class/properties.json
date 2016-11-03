@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "GlennCavarle 7/12/2016 15:44",
+	"super" : "Object",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"animations"
+	],
+	"name" : "BlAnimationManager",
+	"type" : "normal"
+}

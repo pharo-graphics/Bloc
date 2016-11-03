@@ -1,0 +1,3 @@
+calendar
+calendarMultipleIcon
+^ self calendarMultipleSvg asElement

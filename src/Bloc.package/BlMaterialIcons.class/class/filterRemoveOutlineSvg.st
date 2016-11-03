@@ -1,0 +1,3 @@
+filter
+filterRemoveOutlineSvg
+^ BlSvgPath fromStream: self filterRemoveOutlineSrc

@@ -1,0 +1,3 @@
+screen
+screenRotationIcon
+^ self screenRotationSvg asElement

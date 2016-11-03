@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEventListener",
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"space"
+	],
+	"name" : "BlSpaceEventListener",
+	"type" : "normal"
+}

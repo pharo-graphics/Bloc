@@ -1,0 +1,3 @@
+account
+accountMultipleOutlineIcon
+^ self accountMultipleOutlineSvg asElement

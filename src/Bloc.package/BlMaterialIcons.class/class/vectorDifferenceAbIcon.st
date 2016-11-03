@@ -1,0 +1,3 @@
+vector
+vectorDifferenceAbIcon
+^ self vectorDifferenceAbSvg asElement

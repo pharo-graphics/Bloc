@@ -1,0 +1,3 @@
+testing
+isTouch
+	^ false

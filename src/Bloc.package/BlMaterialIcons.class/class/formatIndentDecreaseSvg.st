@@ -1,0 +1,3 @@
+format
+formatIndentDecreaseSvg
+^ BlSvgPath fromStream: self formatIndentDecreaseSrc

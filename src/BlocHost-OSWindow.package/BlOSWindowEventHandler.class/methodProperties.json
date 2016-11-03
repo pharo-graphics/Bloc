@@ -1,0 +1,35 @@
+{
+	"instance" : {
+		"visitWindowFocusInEvent:" : "GlennCavarle 8/9/2016 02:48",
+		"visitMouseMoveEvent:" : "GlenCavarle 8/5/2016 14:31",
+		"visitWindowCloseEvent:" : "GlennCavarle 6/25/2016 12:53",
+		"window" : "GlennCavarle 4/22/2016 13:56",
+		"windowResized:" : "GlennCavarle 6/25/2016 12:53",
+		"visitUnknownEvent:" : "GlennCavarle 4/22/2016 13:49",
+		"visitWindowMaximizedEvent:" : "GlennCavarle 4/22/2016 14:23",
+		"enqueue:" : "GlennCavarle 4/22/2016 14:19",
+		"visitMouseButtonPressEvent:" : "GlenCavarle 8/6/2016 13:08",
+		"visitMouseButtonReleaseEvent:" : "RonieSalgado 9/28/2016 20:23",
+		"visitWindowFocusOutEvent:" : "GlennCavarle 8/9/2016 02:48",
+		"visitMouseWheelEvent:" : "GlenCavarle 8/6/2016 13:12",
+		"visitWindowExposeEvent:" : "RonieSalgado 9/28/2016 22:36",
+		"visitWindowMinimizedEvent:" : "GlennCavarle 4/22/2016 14:23",
+		"visitKeyUpEvent:" : "GlenCavarle 8/5/2016 14:31",
+		"visitWindowMoveEvent:" : "GlennCavarle 7/16/2016 22:26",
+		"visitKeyDownEvent:" : "GlenCavarle 8/5/2016 14:31",
+		"mapSymbolToKeyValue:" : "GlennCavarle 4/22/2016 13:38",
+		"visitTextInputEvent:" : "GlennCavarle 7/21/2016 16:31",
+		"window:" : "GlennCavarle 4/22/2016 13:56",
+		"handleEvent:" : "GlenCavarle 8/5/2016 14:30",
+		"visitWindowMouseLeaveEvent:" : "GlennCavarle 6/25/2016 12:53",
+		"visitWindowMouseEnterEvent:" : "GlennCavarle 6/25/2016 12:53",
+		"convertModifiers:" : "GlennCavarle 4/22/2016 13:38",
+		"convertKeyModifiers:" : "GlennCavarle 7/21/2016 00:49",
+		"visitWindowResizeEvent:" : "GlennCavarle 4/22/2016 14:23",
+		"convertButton:" : "GlenCavarle 8/6/2016 13:16"
+	},
+	"class" : {
+		"initialize" : "GlennCavarle 4/22/2016 13:37",
+		"window:" : "GlennCavarle 4/22/2016 13:56"
+	}
+}

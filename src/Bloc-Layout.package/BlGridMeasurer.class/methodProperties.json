@@ -1,0 +1,18 @@
+{
+	"instance" : {
+		"measurementWithMarginOf:isHorizontal:" : "AliakseiSyrel 5/22/2016 23:00",
+		"element:" : "AliakseiSyrel 5/19/2016 22:57",
+		"measureChildren:parentSpec:isFirstPass:" : "GlennCavarle 7/5/2016 17:29",
+		"layout" : "AliakseiSyrel 5/20/2016 00:00",
+		"totalMarginOf:isHorizontal:" : "AliakseiSyrel 5/20/2016 13:55",
+		"element" : "AliakseiSyrel 5/19/2016 22:57",
+		"cellSpacingOf:isHorizontal:isLeading:" : "AliakseiSyrel 5/20/2016 13:59",
+		"improvedMeasureChild:parentSpec:" : "AliakseiSyrel 5/22/2016 22:18",
+		"marginOf:isHorizontal:isLeading:" : "AliakseiSyrel 5/20/2016 13:51",
+		"alignedMarginOf:isHorizontal:isLeading:" : "AliakseiSyrel 5/20/2016 13:55",
+		"measurementOf:isHorizontal:" : "AliakseiSyrel 5/20/2016 00:17",
+		"naiveMeasureChild:parentSpec:" : "AliakseiSyrel 5/20/2016 13:25",
+		"measureChild:parentSpec:widthResizer:heightResizer:" : "AliakseiSyrel 5/20/2016 13:03"
+	},
+	"class" : { }
+}

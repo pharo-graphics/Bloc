@@ -1,0 +1,3 @@
+comparing
+andCanStretch: aFlexibility
+	^ self

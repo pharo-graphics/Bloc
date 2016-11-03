@@ -1,0 +1,3 @@
+testing
+isWindowClose
+	^ false

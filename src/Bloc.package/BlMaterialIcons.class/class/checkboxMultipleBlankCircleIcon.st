@@ -1,0 +1,3 @@
+checkbox
+checkboxMultipleBlankCircleIcon
+^ self checkboxMultipleBlankCircleSvg asElement

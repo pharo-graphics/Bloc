@@ -1,0 +1,3 @@
+event managing
+addEventHandler: anEventHandler
+	self eventDispatcher addEventHandler: anEventHandler

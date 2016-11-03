@@ -1,0 +1,3 @@
+arrange
+arrangeBringToFrontSvg
+^ BlSvgPath fromStream: self arrangeBringToFrontSrc

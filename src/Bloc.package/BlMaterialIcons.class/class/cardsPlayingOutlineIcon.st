@@ -1,0 +1,3 @@
+cards
+cardsPlayingOutlineIcon
+^ self cardsPlayingOutlineSvg asElement

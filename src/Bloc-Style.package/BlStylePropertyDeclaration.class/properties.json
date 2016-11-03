@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlStyleDeclaration",
+	"category" : "Bloc-Style-CSS",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"value"
+	],
+	"name" : "BlStylePropertyDeclaration",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+apple
+appleKeyboardShiftIcon
+^ self appleKeyboardShiftSvg asElement

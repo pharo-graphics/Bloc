@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"globalBoundsToLocal:" : "GlennCavarle 1/23/2016 14:19",
+		"localPointToGlobal:" : "GlennCavarle 1/22/2016 19:53",
+		"localBoundsToGlobal:" : "GlennCavarle 5/13/2016 12:45",
+		"globalPointToLocal:" : "GlennCavarle 1/23/2016 14:19",
+		"multiplyBy:" : "GlennCavarle 1/22/2016 19:53",
+		"copyMultipliedBy:" : "GlennCavarle 1/23/2016 14:21",
+		"globalPointsToLocal:" : "GlennCavarle 1/22/2016 19:53",
+		"localPointsToGlobal:" : "GlennCavarle 1/22/2016 19:53"
+	},
+	"class" : { }
+}

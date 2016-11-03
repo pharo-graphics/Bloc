@@ -1,0 +1,3 @@
+numeric
+numeric8BoxOutlineIcon
+^ self numeric8BoxOutlineSvg asElement

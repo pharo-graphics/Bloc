@@ -1,0 +1,3 @@
+arrow
+arrowLeftBoldHexagonOutlineSvg
+^ BlSvgPath fromStream: self arrowLeftBoldHexagonOutlineSrc

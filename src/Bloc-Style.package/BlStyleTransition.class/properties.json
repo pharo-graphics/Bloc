@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GlennCavarle 5/9/2016 00:52",
+	"super" : "BlStyle",
+	"category" : "Bloc-Style-Util",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlStyleTransition",
+	"type" : "normal"
+}

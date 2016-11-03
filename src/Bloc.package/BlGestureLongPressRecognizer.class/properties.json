@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGestureRecognizer",
+	"category" : "Bloc-Gesture",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGestureLongPressRecognizer",
+	"type" : "normal"
+}

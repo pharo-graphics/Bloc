@@ -1,0 +1,3 @@
+emoticon
+emoticonDevilIcon
+^ self emoticonDevilSvg asElement

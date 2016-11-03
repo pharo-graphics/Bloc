@@ -1,0 +1,3 @@
+folder
+folderMultipleIcon
+^ self folderMultipleSvg asElement

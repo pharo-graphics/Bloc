@@ -1,0 +1,17 @@
+{
+	"classtraitcomposition" : "TBlHostWindow classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"window",
+		"renderer",
+		"eventFetcher"
+	],
+	"name" : "BlOSWindow",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlHostWindow",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-OSWindow-Core"
+}

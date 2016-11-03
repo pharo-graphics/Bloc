@@ -1,0 +1,18 @@
+{
+	"instance" : {
+		"dragOffset:" : "GlennCavarle 4/29/2016 17:28",
+		"dragOffset" : "GlennCavarle 4/29/2016 17:28",
+		"updateActionsPosition" : "GlennCavarle 7/29/2016 00:29",
+		"on:" : "GlennCavarle 6/28/2016 21:28",
+		"initialize" : "GlennCavarle 6/25/2016 12:53",
+		"client:" : "GlennCavarle 4/28/2016 12:22",
+		"clientUpdated" : "GlennCavarle 9/11/2016 17:52",
+		"initializeActions" : "GlennCavarle 9/11/2016 17:51",
+		"show" : "GlennCavarle 7/12/2016 13:56",
+		"initializeHandlers" : "GlennCavarle 6/28/2016 21:30",
+		"client" : "GlennCavarle 1/29/2016 01:51"
+	},
+	"class" : {
+		"on:" : "GlennCavarle 4/30/2016 18:15"
+	}
+}

@@ -1,0 +1,3 @@
+folder
+folderMultipleImageSvg
+^ BlSvgPath fromStream: self folderMultipleImageSrc

@@ -1,0 +1,19 @@
+{
+	"classtraitcomposition" : "TBlHostWindow classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"eventFetcher",
+		"eventHandler",
+		"drawingLock",
+		"renderer",
+		"internalEventHandler"
+	],
+	"name" : "BlMorphicWindow",
+	"commentStamp" : "",
+	"super" : "StandardWindow",
+	"traitcomposition" : "TBlHostWindow",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-Morphic"
+}

@@ -1,0 +1,3 @@
+lightbulb
+lightbulbOutlineIcon
+^ self lightbulbOutlineSvg asElement

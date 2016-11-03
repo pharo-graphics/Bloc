@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlMouseProcessor",
+	"category" : "Bloc-Tests-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"firedEvents"
+	],
+	"name" : "BlTestMouseEventProcessor",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+shape
+shapeSquarePlusIcon
+^ self shapeSquarePlusSvg asElement

@@ -1,0 +1,3 @@
+alignment mode
+alignBounds
+	self alignmentMode: BlGridAlignmentMode alignBounds

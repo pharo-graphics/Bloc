@@ -1,0 +1,42 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/18/2016 19:47",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Grid-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlGridLayoutConstants"
+	],
+	"classvars" : [
+		"COMPLETE",
+		"NEW",
+		"PENDING"
+	],
+	"instvars" : [
+		"element",
+		"isHorizontal",
+		"maxIndex",
+		"definedCount",
+		"orderPreserved",
+		"groupBounds",
+		"groupBoundsValid",
+		"deltas",
+		"forwardLinks",
+		"forwardLinksValid",
+		"backwardLinks",
+		"backwardLinksValid",
+		"parentMin",
+		"parentMax",
+		"arcs",
+		"arcsValid",
+		"leadingMargins",
+		"trailingMargins",
+		"leadingMarginsValid",
+		"trailingMarginsValid",
+		"hasWeightsValid",
+		"hasWeights",
+		"locations",
+		"locationsValid"
+	],
+	"name" : "BlGridLayoutAxis",
+	"type" : "normal"
+}

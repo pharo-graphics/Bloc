@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"requestingLayout",
+		"previousMeasurementSpec",
+		"measuredExtent",
+		"element"
+	],
+	"name" : "BlLayout",
+	"type" : "normal"
+}

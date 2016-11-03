@@ -1,0 +1,3 @@
+white
+whiteBalanceIncandescentIcon
+^ self whiteBalanceIncandescentSvg asElement

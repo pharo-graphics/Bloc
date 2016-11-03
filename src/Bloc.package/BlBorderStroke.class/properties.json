@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "GlennCavarle 4/25/2016 11:05",
+	"super" : "Object",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"paint",
+		"style",
+		"cornerRadii",
+		"width",
+		"innerEdge",
+		"outerEdge"
+	],
+	"name" : "BlBorderStroke",
+	"type" : "normal"
+}

@@ -1,0 +1,21 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/20/2016 12:39",
+	"super" : "BlLayout",
+	"category" : "Bloc-Layout-Grid",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlGridLayoutConstants"
+	],
+	"classvars" : [ ],
+	"instvars" : [
+		"horizontalAxis",
+		"verticalAxis",
+		"alignmentMode",
+		"orientation",
+		"lastLayoutParamsHashCode",
+		"measurer",
+		"cellSpacing"
+	],
+	"name" : "BlGridLayout",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlStyleValue",
+	"category" : "Bloc-Style-Value",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlColorValue",
+	"type" : "normal"
+}

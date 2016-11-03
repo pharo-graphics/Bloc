@@ -1,0 +1,3 @@
+displaying
+hide
+	super minimize

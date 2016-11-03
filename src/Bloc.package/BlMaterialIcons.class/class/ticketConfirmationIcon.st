@@ -1,0 +1,3 @@
+ticket
+ticketConfirmationIcon
+^ self ticketConfirmationSvg asElement

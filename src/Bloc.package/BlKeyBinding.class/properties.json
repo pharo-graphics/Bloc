@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"charCode",
+		"action",
+		"modifiers"
+	],
+	"name" : "BlKeyBinding",
+	"type" : "normal"
+}

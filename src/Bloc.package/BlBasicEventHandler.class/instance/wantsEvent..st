@@ -1,0 +1,3 @@
+events
+wantsEvent: anEvent
+	^ true

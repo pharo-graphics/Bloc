@@ -1,0 +1,3 @@
+layout
+lengthSpec
+	^ self subclassResponsibility

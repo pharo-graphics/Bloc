@@ -1,0 +1,3 @@
+weather
+weatherSnowyRainyIcon
+^ self weatherSnowyRainySvg asElement

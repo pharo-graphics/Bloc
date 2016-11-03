@@ -1,0 +1,20 @@
+{
+	"instance" : {
+		"=" : "AliakseiSyrel 5/17/2016 11:53",
+		"shouldMeasure" : "AliakseiSyrel 5/22/2016 22:56",
+		"hash" : "AliakseiSyrel 5/17/2016 11:53",
+		"isVisible" : "AliakseiSyrel 5/16/2016 21:42",
+		"isHidden" : "AliakseiSyrel 5/16/2016 21:42",
+		"isGone" : "AliakseiSyrel 5/16/2016 21:42",
+		"shouldDraw" : "AliakseiSyrel 5/22/2016 22:57",
+		"shouldLayout" : "AliakseiSyrel 5/22/2016 22:57"
+	},
+	"class" : {
+		"gone" : "AliakseiSyrel 5/16/2016 21:47",
+		"initialize" : "AliakseiSyrel 5/22/2016 23:17",
+		"isAbstract" : "AliakseiSyrel 5/22/2016 22:43",
+		"visible" : "AliakseiSyrel 5/16/2016 21:47",
+		"hidden" : "AliakseiSyrel 5/16/2016 21:47",
+		"floating" : "AliakseiSyrel 5/22/2016 23:17"
+	}
+}

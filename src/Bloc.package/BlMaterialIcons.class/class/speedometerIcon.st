@@ -1,0 +1,3 @@
+speedometer
+speedometerIcon
+^ self speedometerSvg asElement

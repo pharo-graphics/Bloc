@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlSpaceEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"start",
+		"end"
+	],
+	"name" : "BlSpaceEventProcessEndEvent",
+	"type" : "normal"
+}

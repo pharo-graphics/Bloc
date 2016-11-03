@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Empty"
+	],
+	"instvars" : [
+		"topLeft",
+		"topRight",
+		"bottomLeft",
+		"bottomRight"
+	],
+	"name" : "BlCornerRadii",
+	"type" : "normal"
+}

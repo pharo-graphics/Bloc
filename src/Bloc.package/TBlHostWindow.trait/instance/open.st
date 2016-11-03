@@ -1,0 +1,3 @@
+displaying
+open
+	self subclassResponsibility 

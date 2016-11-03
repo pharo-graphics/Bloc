@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GlennCavarle 6/26/2016 00:04",
+	"super" : "Object",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlHost",
+	"type" : "normal"
+}

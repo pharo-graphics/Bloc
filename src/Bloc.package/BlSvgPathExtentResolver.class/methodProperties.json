@@ -1,0 +1,27 @@
+{
+	"instance" : {
+		"computePoints:" : "GlennCavarle 7/30/2016 11:55",
+		"close" : "GlennCavarle 7/30/2016 12:04",
+		"extent" : "GlennCavarle 8/3/2016 01:15",
+		"initialize" : "GlennCavarle 7/30/2016 12:10",
+		"isRelative" : "GlennCavarle 7/30/2016 11:38",
+		"hLineTo:" : "GlennCavarle 7/30/2016 14:37",
+		"reflectedCurveVia:to:" : "GlennCavarle 7/30/2016 11:59",
+		"maxPoint" : "GlennCavarle 8/3/2016 01:15",
+		"vLineTo:" : "GlennCavarle 7/30/2016 14:37",
+		"curveVia:and:to:" : "GlennCavarle 7/30/2016 11:57",
+		"string:font:" : "GlennCavarle 7/30/2016 11:36",
+		"absolute" : "GlennCavarle 7/30/2016 11:36",
+		"ccwArcTo:angle:" : "GlennCavarle 7/30/2016 11:58",
+		"ifRelative:ifAbsolute:" : "GlennCavarle 7/30/2016 11:43",
+		"curveVia:to:" : "GlennCavarle 7/30/2016 11:57",
+		"computeExtentFor:" : "GlennCavarle 8/3/2016 01:15",
+		"cwArcTo:angle:" : "GlennCavarle 7/30/2016 11:57",
+		"relative" : "GlennCavarle 7/30/2016 11:36",
+		"convertToAbsolutePoint:" : "GlennCavarle 7/30/2016 11:43",
+		"lineTo:" : "GlennCavarle 7/30/2016 11:55",
+		"moveTo:" : "GlennCavarle 7/30/2016 11:56",
+		"minPoint" : "GlennCavarle 8/3/2016 01:15"
+	},
+	"class" : { }
+}

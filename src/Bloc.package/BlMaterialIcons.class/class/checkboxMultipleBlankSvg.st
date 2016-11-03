@@ -1,0 +1,3 @@
+checkbox
+checkboxMultipleBlankSvg
+^ BlSvgPath fromStream: self checkboxMultipleBlankSrc

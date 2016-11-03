@@ -1,0 +1,3 @@
+airplane
+airplaneTakeoffIcon
+^ self airplaneTakeoffSvg asElement

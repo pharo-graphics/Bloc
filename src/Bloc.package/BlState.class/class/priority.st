@@ -1,0 +1,3 @@
+comparing
+priority
+	self subclassResponsibility

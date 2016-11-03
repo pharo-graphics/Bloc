@@ -1,0 +1,3 @@
+message
+messageTextOutlineIcon
+^ self messageTextOutlineSvg asElement

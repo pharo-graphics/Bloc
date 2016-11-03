@@ -1,0 +1,3 @@
+wallet
+walletMembershipIcon
+^ self walletMembershipSvg asElement

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/30/2016 17:51",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"spec"
+	],
+	"name" : "BlMeasurementMode",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+*Bloc-Style
+em
+	^ self

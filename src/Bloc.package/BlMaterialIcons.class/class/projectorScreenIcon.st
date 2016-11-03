@@ -1,0 +1,3 @@
+projector
+projectorScreenIcon
+^ self projectorScreenSvg asElement

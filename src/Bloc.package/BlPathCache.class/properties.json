@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"owner",
+		"geomPath",
+		"innerPath",
+		"borderPath"
+	],
+	"name" : "BlPathCache",
+	"type" : "normal"
+}

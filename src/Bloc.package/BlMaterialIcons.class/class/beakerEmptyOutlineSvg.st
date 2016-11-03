@@ -1,0 +1,3 @@
+beaker
+beakerEmptyOutlineSvg
+^ BlSvgPath fromStream: self beakerEmptyOutlineSrc

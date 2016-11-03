@@ -1,0 +1,3 @@
+camera
+cameraRearVariantIcon
+^ self cameraRearVariantSvg asElement

@@ -1,0 +1,12 @@
+{
+	"instance" : {
+		"drawPathOn:" : "GlennCavarle 9/11/2016 18:04",
+		"initialize" : "GlennCavarle 9/11/2016 18:05",
+		"target" : "GlennCavarle 9/9/2016 20:34",
+		"updateFromCursorPosition:" : "GlennCavarle 9/10/2016 19:31",
+		"target:" : "GlennCavarle 9/10/2016 20:29"
+	},
+	"class" : {
+		"on:" : "GlennCavarle 9/10/2016 18:44"
+	}
+}

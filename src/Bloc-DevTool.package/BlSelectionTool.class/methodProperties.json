@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"buildSelection" : "GlenCavarle 8/7/2016 14:54",
+		"dragStartEvent:" : "GlennCavarle 5/31/2016 17:28",
+		"initialize" : "GlennCavarle 8/3/2016 12:46",
+		"clickEvent:" : "GlennCavarle 6/1/2016 20:16",
+		"dragEvent:" : "GlennCavarle 5/31/2016 17:16",
+		"onInstalledIn:" : "GlennCavarle 5/31/2016 17:09",
+		"dragEndEvent:" : "GlennCavarle 6/2/2016 12:03",
+		"resetCurrentSelections" : "GlennCavarle 5/31/2016 17:29"
+	},
+	"class" : { }
+}

@@ -1,0 +1,3 @@
+alignment mode
+alignMargins
+	self alignmentMode: BlGridAlignmentMode alignMargins

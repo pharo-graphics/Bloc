@@ -1,0 +1,3 @@
+eyedropper
+eyedropperVariantIcon
+^ self eyedropperVariantSvg asElement

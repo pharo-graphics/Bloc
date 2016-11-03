@@ -1,0 +1,3 @@
+format
+formatAlignJustifyIcon
+^ self formatAlignJustifySvg asElement

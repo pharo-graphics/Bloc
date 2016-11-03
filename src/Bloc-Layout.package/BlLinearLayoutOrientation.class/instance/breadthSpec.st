@@ -1,0 +1,3 @@
+orientation
+breadthSpec
+	^ self subclassResponsibility

@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"isAlignBounds" : "AliakseiSyrel 5/16/2016 23:34",
+		"marginOf:in:isHorizontal:isLeading:" : "AliakseiSyrel 5/19/2016 23:51",
+		"=" : "AliakseiSyrel 5/16/2016 23:27",
+		"isAlignMargins" : "AliakseiSyrel 5/16/2016 23:34"
+	},
+	"class" : {
+		"alignMargins" : "AliakseiSyrel 5/16/2016 23:27",
+		"initialize" : "AliakseiSyrel 5/16/2016 23:29",
+		"alignBounds" : "AliakseiSyrel 5/16/2016 23:29"
+	}
+}

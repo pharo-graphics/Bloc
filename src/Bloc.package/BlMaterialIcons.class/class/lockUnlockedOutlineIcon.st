@@ -1,0 +1,3 @@
+lock
+lockUnlockedOutlineIcon
+^ self lockUnlockedOutlineSvg asElement

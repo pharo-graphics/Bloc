@@ -1,0 +1,23 @@
+{
+	"instance" : {
+		"lengthMode" : "AliakseiSyrel 2/13/2016 00:15",
+		"marginLength:" : "GlennCavarle 8/2/2016 23:25",
+		"measuredLength:" : "AliakseiSyrel 2/12/2016 23:56",
+		"breadthMode" : "AliakseiSyrel 2/13/2016 00:28",
+		"extentBreadth:lengthSpec:" : "AliakseiSyrel 2/12/2016 23:56",
+		"measuredBreadth:" : "AliakseiSyrel 2/12/2016 23:56",
+		"paddingLength:" : "GlennCavarle 6/28/2016 12:29",
+		"breadthProperties:" : "AliakseiSyrel 5/14/2016 22:12",
+		"lengthSpec" : "AliakseiSyrel 2/13/2016 00:31",
+		"breadthSpec" : "AliakseiSyrel 2/13/2016 00:11",
+		"minimalBreadth:" : "GlennCavarle 7/29/2016 17:13",
+		"paddingBreadth:" : "GlennCavarle 6/28/2016 12:29",
+		"lengthProperties:" : "AliakseiSyrel 5/14/2016 22:12",
+		"marginBreadth:" : "GlennCavarle 8/2/2016 23:25",
+		"measureChildWithMargin:parentSpec:breadthUsed:lengthUsed:" : "AliakseiSyrel 5/20/2016 14:37",
+		"minimalLength:" : "GlennCavarle 7/29/2016 17:13",
+		"extentSpecBreadth:lengthSpec:" : "AliakseiSyrel 2/12/2016 23:56",
+		"layout:in:" : "GlennCavarle 8/2/2016 23:32"
+	},
+	"class" : { }
+}

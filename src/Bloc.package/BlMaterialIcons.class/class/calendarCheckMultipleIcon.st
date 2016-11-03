@@ -1,0 +1,3 @@
+calendar
+calendarCheckMultipleIcon
+^ self calendarCheckMultipleSvg asElement

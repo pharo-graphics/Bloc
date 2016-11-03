@@ -1,0 +1,3 @@
+adding
+removeEventHandler: anEventHandler
+	self eventDispatcher removeEventHandler: anEventHandler

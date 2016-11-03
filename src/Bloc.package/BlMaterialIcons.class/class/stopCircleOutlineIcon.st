@@ -1,0 +1,3 @@
+stop
+stopCircleOutlineIcon
+^ self stopCircleOutlineSvg asElement

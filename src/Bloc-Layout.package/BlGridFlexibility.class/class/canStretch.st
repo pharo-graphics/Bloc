@@ -1,0 +1,3 @@
+factory
+canStretch
+	^ BlGridCanStretch uniqueInstance

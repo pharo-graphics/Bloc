@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGeomResizer",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGeomExactResizer",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+converting
+asBlPaint
+	^ self paint

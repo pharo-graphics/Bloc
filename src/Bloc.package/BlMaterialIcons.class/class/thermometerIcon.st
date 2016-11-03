@@ -1,0 +1,3 @@
+thermometer
+thermometerIcon
+^ self thermometerSvg asElement

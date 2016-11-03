@@ -1,0 +1,3 @@
+bookmark
+bookmarkOutlinePlusIcon
+^ self bookmarkOutlinePlusSvg asElement

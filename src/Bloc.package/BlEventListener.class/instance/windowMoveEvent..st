@@ -1,0 +1,2 @@
+window handlers
+windowMoveEvent: anEvent

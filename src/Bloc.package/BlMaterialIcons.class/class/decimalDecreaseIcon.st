@@ -1,0 +1,3 @@
+decimal
+decimalDecreaseIcon
+^ self decimalDecreaseSvg asElement

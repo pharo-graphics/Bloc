@@ -1,0 +1,3 @@
+image
+imageFilterVintageIcon
+^ self imageFilterVintageSvg asElement

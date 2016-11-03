@@ -1,0 +1,3 @@
+vector
+vectorDifferenceBaSvg
+^ BlSvgPath fromStream: self vectorDifferenceBaSrc

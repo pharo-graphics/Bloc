@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "GlennCavarle 6/22/2016 16:24",
+	"super" : "Object",
+	"category" : "Bloc-Effect",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"input",
+		"localBounds",
+		"geomBounds"
+	],
+	"name" : "BlElementEffect",
+	"type" : "normal"
+}

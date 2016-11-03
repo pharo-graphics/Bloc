@@ -1,0 +1,3 @@
+google
+googleCirclesCommunitiesIcon
+^ self googleCirclesCommunitiesSvg asElement

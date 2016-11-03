@@ -1,0 +1,3 @@
+account
+accountSettingsVariantIcon
+^ self accountSettingsVariantSvg asElement

@@ -1,0 +1,32 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Space",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"extent",
+		"position",
+		"root",
+		"glass",
+		"parent",
+		"resizable",
+		"borderless",
+		"rootStyler",
+		"dirtyAreas",
+		"hostWindow",
+		"eventDispatcher",
+		"eventListener",
+		"mouseProcessor",
+		"focusProcessor",
+		"keyboardProcessor",
+		"focusOwner",
+		"dragboard",
+		"nextPulseRequested",
+		"currentCursor",
+		"session"
+	],
+	"name" : "BlAbstractSpace",
+	"type" : "normal"
+}

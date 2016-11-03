@@ -1,0 +1,3 @@
+radioactive
+radioactiveIcon
+^ self radioactiveSvg asElement

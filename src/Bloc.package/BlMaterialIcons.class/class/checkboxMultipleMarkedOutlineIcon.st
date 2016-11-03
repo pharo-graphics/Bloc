@@ -1,0 +1,3 @@
+checkbox
+checkboxMultipleMarkedOutlineIcon
+^ self checkboxMultipleMarkedOutlineSvg asElement

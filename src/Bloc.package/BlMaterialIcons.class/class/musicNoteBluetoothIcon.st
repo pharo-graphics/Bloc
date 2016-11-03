@@ -1,0 +1,3 @@
+music
+musicNoteBluetoothIcon
+^ self musicNoteBluetoothSvg asElement

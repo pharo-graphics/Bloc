@@ -1,0 +1,3 @@
+google
+googleControllerIcon
+^ self googleControllerSvg asElement

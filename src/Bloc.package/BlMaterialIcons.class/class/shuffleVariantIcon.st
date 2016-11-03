@@ -1,0 +1,3 @@
+shuffle
+shuffleVariantIcon
+^ self shuffleVariantSvg asElement

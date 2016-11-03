@@ -1,0 +1,3 @@
+format
+formatColorFillIcon
+^ self formatColorFillSvg asElement

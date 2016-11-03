@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEventListener",
+	"category" : "Bloc-Gesture",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGestureRecognizer",
+	"type" : "normal"
+}

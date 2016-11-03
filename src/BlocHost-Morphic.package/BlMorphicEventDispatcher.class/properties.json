@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlBubblingEventDispatcher",
+	"category" : "BlocHost-Morphic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMorphicEventDispatcher",
+	"type" : "normal"
+}

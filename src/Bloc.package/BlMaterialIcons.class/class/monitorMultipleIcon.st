@@ -1,0 +1,3 @@
+monitor
+monitorMultipleIcon
+^ self monitorMultipleSvg asElement

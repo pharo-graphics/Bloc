@@ -1,0 +1,3 @@
+comment
+commentAccountIcon
+^ self commentAccountSvg asElement

@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "BlHostEventFetcher",
+	"category" : "BlocHost-OSWindow-Core",
+	"classinstvars" : [ ],
+	"pools" : [
+		"OSKeySymbols"
+	],
+	"classvars" : [
+		"SymbolCharacterMapping"
+	],
+	"instvars" : [
+		"eventQueue"
+	],
+	"name" : "BlOSWindowEventFetcher",
+	"type" : "normal"
+}

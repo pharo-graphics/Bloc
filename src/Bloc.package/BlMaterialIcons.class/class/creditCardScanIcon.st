@@ -1,0 +1,3 @@
+credit
+creditCardScanIcon
+^ self creditCardScanSvg asElement

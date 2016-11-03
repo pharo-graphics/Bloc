@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlOSWindowHost",
+	"category" : "BlocHost-OSWindow-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlOSWindowSpartaHost",
+	"type" : "normal"
+}

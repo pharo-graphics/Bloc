@@ -1,0 +1,3 @@
+layout
+isManaged
+	^ self managed

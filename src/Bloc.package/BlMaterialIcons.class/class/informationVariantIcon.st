@@ -1,0 +1,3 @@
+information
+informationVariantIcon
+^ self informationVariantSvg asElement

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlTouchEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlTouchDownEvent",
+	"type" : "normal"
+}

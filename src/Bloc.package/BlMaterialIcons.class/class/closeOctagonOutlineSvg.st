@@ -1,0 +1,3 @@
+close
+closeOctagonOutlineSvg
+^ BlSvgPath fromStream: self closeOctagonOutlineSrc

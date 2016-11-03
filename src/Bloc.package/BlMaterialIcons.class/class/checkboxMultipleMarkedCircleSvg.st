@@ -1,0 +1,3 @@
+checkbox
+checkboxMultipleMarkedCircleSvg
+^ BlSvgPath fromStream: self checkboxMultipleMarkedCircleSrc

@@ -1,0 +1,3 @@
+flag
+flagCheckeredVariantSvg
+^ BlSvgPath fromStream: self flagCheckeredVariantSrc

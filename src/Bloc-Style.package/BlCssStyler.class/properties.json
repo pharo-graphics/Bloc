@@ -1,0 +1,24 @@
+{
+	"commentStamp" : "",
+	"super" : "BlAbstractStyler",
+	"category" : "Bloc-Style-Styler",
+	"classinstvars" : [
+		"DefaultStylesheet"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"styleable",
+		"styles",
+		"styleProperties",
+		"transitions",
+		"children",
+		"styleClasses",
+		"styleId",
+		"stylesheets",
+		"pseudoClassStates",
+		"inlineOrdinalCnt"
+	],
+	"name" : "BlCssStyler",
+	"type" : "normal"
+}

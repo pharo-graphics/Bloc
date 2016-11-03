@@ -1,0 +1,3 @@
+testing
+isBlur
+	^ true

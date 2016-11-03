@@ -1,0 +1,3 @@
+visualstudio
+visualstudioIcon
+^ self visualstudioSvg asElement

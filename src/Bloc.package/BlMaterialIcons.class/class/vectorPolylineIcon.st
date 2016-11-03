@@ -1,0 +1,3 @@
+vector
+vectorPolylineIcon
+^ self vectorPolylineSvg asElement

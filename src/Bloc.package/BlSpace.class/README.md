@@ -1,0 +1,1 @@
+I am the logical representationn of a window in Bloc regardless the current Host in use.

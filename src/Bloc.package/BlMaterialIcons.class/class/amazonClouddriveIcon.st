@@ -1,0 +1,3 @@
+amazon
+amazonClouddriveIcon
+^ self amazonClouddriveSvg asElement

@@ -1,0 +1,24 @@
+{
+	"instance" : {
+		"image" : "GlennCavarle 4/27/2016 22:42",
+		"outsets" : "GlennCavarle 4/25/2016 10:39",
+		"initialize" : "StephaneDucasse 7/25/2016 20:36",
+		"insets" : "GlennCavarle 1/22/2016 15:12",
+		"stroke" : "GlennCavarle 4/27/2016 22:42",
+		"stroke:image:" : "GlennCavarle 4/27/2016 22:36",
+		"computeInsetsOutsets" : "GlennCavarle 6/25/2016 12:53",
+		"applyTransformOn:extent:" : "GlennCavarle 8/2/2016 23:56"
+	},
+	"class" : {
+		"color:width:radius:style:" : "GlennCavarle 6/25/2016 12:53",
+		"radius:" : "GlenCavarle 8/4/2016 18:54",
+		"color:width:" : "GlennCavarle 4/27/2016 23:09",
+		"empty" : "StephaneDucasse 7/25/2016 20:36",
+		"stroke:image:" : "GlennCavarle 6/25/2016 12:53",
+		"reset" : "GlennCavarle 6/22/2016 13:27",
+		"stroke:" : "GlennCavarle 4/27/2016 23:10",
+		"new" : "GlennCavarle 4/27/2016 22:56",
+		"image:" : "GlennCavarle 4/27/2016 22:56",
+		"color:width:radius:" : "GlennCavarle 4/27/2016 23:09"
+	}
+}

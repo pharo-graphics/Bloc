@@ -1,0 +1,3 @@
+format
+formatStrikethroughVariantSvg
+^ BlSvgPath fromStream: self formatStrikethroughVariantSrc

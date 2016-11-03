@@ -1,0 +1,3 @@
+alignment mode
+alignmentMode
+	^ alignmentMode

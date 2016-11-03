@@ -1,0 +1,3 @@
+testing
+isGone
+	^ false

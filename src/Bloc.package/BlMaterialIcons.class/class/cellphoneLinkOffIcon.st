@@ -1,0 +1,3 @@
+cellphone
+cellphoneLinkOffIcon
+^ self cellphoneLinkOffSvg asElement

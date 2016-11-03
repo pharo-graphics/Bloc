@@ -1,0 +1,3 @@
+airplane
+airplaneLandingIcon
+^ self airplaneLandingSvg asElement

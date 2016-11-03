@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlBaseProcessor",
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlKeyboardProcessor",
+	"type" : "normal"
+}

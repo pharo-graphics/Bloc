@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "RonieSalgado 7/16/2016 00:58",
+	"super" : "BlUIEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text"
+	],
+	"name" : "BlTextInputEvent",
+	"type" : "normal"
+}

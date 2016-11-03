@@ -1,0 +1,3 @@
+bell
+bellRingOutlineIcon
+^ self bellRingOutlineSvg asElement

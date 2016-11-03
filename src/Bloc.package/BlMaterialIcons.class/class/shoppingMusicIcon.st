@@ -1,0 +1,3 @@
+shopping
+shoppingMusicIcon
+^ self shoppingMusicSvg asElement

@@ -1,0 +1,3 @@
+book
+bookOpenPageVariantIcon
+^ self bookOpenPageVariantSvg asElement

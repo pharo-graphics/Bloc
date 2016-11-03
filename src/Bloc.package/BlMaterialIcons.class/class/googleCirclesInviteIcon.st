@@ -1,0 +1,3 @@
+google
+googleCirclesInviteIcon
+^ self googleCirclesInviteSvg asElement

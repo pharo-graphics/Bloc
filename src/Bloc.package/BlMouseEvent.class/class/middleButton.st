@@ -1,0 +1,3 @@
+constants
+middleButton
+	^ 2

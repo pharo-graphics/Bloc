@@ -1,0 +1,3 @@
+file
+fileDocumentBoxIcon
+^ self fileDocumentBoxSvg asElement

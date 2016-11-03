@@ -1,0 +1,3 @@
+format
+formatHeaderDownIcon
+^ self formatHeaderDownSvg asElement

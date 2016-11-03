@@ -1,0 +1,3 @@
+initialize-release
+defaultHorizontalProperties
+	^ BlGridAxisConstraints new

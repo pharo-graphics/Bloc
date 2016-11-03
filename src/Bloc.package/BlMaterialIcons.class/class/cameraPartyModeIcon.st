@@ -1,0 +1,3 @@
+camera
+cameraPartyModeIcon
+^ self cameraPartyModeSvg asElement

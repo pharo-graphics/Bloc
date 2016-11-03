@@ -1,0 +1,3 @@
+testing
+isMouseTransparent
+	^ misc mouseTransparent 

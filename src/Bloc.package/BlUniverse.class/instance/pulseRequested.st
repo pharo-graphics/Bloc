@@ -1,0 +1,3 @@
+pulse managing
+pulseRequested
+	^ nextPulseRequested

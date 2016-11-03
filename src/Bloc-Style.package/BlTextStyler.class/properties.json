@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementStyler",
+	"category" : "Bloc-Style-Styler",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlTextStyler",
+	"type" : "normal"
+}

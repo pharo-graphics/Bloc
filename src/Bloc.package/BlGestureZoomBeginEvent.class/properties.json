@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGestureBaseZoomEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGestureZoomBeginEvent",
+	"type" : "normal"
+}

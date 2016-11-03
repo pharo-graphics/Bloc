@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 2/5/2016 11:43",
+	"super" : "BlElementAlignment",
+	"category" : "Bloc-Layout-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMiddleAlignment",
+	"type" : "normal"
+}

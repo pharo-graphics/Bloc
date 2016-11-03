@@ -1,0 +1,3 @@
+ethernet
+ethernetCableIcon
+^ self ethernetCableSvg asElement

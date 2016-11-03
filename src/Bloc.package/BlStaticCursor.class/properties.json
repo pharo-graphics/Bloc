@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlCursor",
+	"category" : "Bloc-Space",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"image"
+	],
+	"name" : "BlStaticCursor",
+	"type" : "normal"
+}

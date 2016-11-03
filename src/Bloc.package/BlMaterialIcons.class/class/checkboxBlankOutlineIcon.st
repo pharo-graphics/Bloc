@@ -1,0 +1,3 @@
+checkbox
+checkboxBlankOutlineIcon
+^ self checkboxBlankOutlineSvg asElement

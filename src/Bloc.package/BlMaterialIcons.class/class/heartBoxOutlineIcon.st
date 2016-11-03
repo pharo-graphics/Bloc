@@ -1,0 +1,3 @@
+heart
+heartBoxOutlineIcon
+^ self heartBoxOutlineSvg asElement

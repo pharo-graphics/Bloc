@@ -1,0 +1,3 @@
+google
+googleCirclesExtendedSvg
+^ BlSvgPath fromStream: self googleCirclesExtendedSrc

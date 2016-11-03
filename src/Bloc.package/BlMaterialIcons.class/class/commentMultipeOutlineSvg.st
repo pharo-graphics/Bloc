@@ -1,0 +1,3 @@
+comment
+commentMultipeOutlineSvg
+^ BlSvgPath fromStream: self commentMultipeOutlineSrc

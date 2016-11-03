@@ -1,0 +1,3 @@
+accessing
+declaration
+	^ declaration

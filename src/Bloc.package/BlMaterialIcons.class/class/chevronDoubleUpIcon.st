@@ -1,0 +1,3 @@
+chevron
+chevronDoubleUpIcon
+^ self chevronDoubleUpSvg asElement

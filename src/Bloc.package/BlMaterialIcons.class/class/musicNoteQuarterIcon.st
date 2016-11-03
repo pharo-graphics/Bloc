@@ -1,0 +1,3 @@
+music
+musicNoteQuarterIcon
+^ self musicNoteQuarterSvg asElement

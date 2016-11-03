@@ -1,0 +1,3 @@
+account
+accountCardDetailsIcon
+^ self accountCardDetailsSvg asElement

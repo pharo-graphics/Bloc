@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlUIEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGestureEvent",
+	"type" : "normal"
+}

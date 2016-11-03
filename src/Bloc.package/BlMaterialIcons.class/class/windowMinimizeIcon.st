@@ -1,0 +1,3 @@
+window
+windowMinimizeIcon
+^ self windowMinimizeSvg asElement

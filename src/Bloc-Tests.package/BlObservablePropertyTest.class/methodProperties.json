@@ -1,0 +1,9 @@
+{
+	"instance" : {
+		"testBinding" : "GlennCavarle 7/5/2016 12:12",
+		"testChangeListener" : "GlennCavarle 7/5/2016 12:30",
+		"testBindingBidirectional" : "GlennCavarle 7/5/2016 12:25",
+		"testDelegate" : "GlennCavarle 7/5/2016 12:22"
+	},
+	"class" : { }
+}

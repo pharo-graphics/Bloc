@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlPaint",
+	"category" : "Bloc-Paint-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGradientPaint",
+	"type" : "normal"
+}

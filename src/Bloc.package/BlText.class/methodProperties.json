@@ -1,0 +1,39 @@
+{
+	"instance" : {
+		"updateTextModel" : "GlennCavarle 7/6/2016 14:23",
+		"stroke" : "GlennCavarle 8/3/2016 11:34",
+		"updateTextModelStroke" : "GlennCavarle 7/6/2016 14:27",
+		"viewChanged:" : "GlennCavarle 7/25/2016 20:42",
+		"initialize" : "GlennCavarle 8/3/2016 11:47",
+		"textModel" : "GlennCavarle 7/6/2016 16:13",
+		"drawOn:" : "GlennCavarle 8/3/2016 11:50",
+		"font" : "GlennCavarle 4/28/2016 01:05",
+		"text:" : "GlennCavarle 7/6/2016 19:23",
+		"computeExtent" : "GlennCavarle 8/3/2016 12:04",
+		"layoutView" : "GlennCavarle 8/3/2016 11:38",
+		"fill" : "GlennCavarle 8/3/2016 11:34",
+		"extent:" : "GlennCavarle 8/3/2016 12:04",
+		"wrappingChanged" : "GlennCavarle 7/6/2016 13:22",
+		"updateTextModelFont" : "GlennCavarle 7/6/2016 14:50",
+		"wrappingWidth:" : "GlennCavarle 7/25/2016 20:41",
+		"highestLineWidth" : "GlennCavarle 8/3/2016 11:38",
+		"updateTextModelFill" : "GlennCavarle 7/6/2016 14:30",
+		"textModel:" : "GlennCavarle 7/6/2016 16:16",
+		"wrappingWidth" : "GlennCavarle 7/6/2016 13:11",
+		"text" : "GlennCavarle 7/6/2016 14:42",
+		"defaultPath" : "GlennCavarle 8/3/2016 11:33",
+		"buildPathOn:" : "GlennCavarle 7/6/2016 14:31",
+		"textPositionAt:" : "GlennCavarle 7/21/2016 15:27",
+		"stroke:" : "GlennCavarle 8/3/2016 11:33",
+		"fill:" : "GlennCavarle 8/3/2016 11:33",
+		"font:" : "GlennCavarle 8/3/2016 11:49",
+		"defaultFill" : "GlennCavarle 8/3/2016 11:31",
+		"isEmpty" : "GlennCavarle 7/6/2016 14:40",
+		"defaultStroke" : "GlennCavarle 8/3/2016 11:31",
+		"layoutIsAboutToResetIn:" : "GlennCavarle 7/25/2016 20:43",
+		"totalTextHeight" : "GlennCavarle 8/3/2016 11:38"
+	},
+	"class" : {
+		"text:" : "GlennCavarle 7/10/2016 13:00"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"managed",
+		"clipChildren",
+		"focused",
+		"mouseTransparent",
+		"userData"
+	],
+	"name" : "BlMiscProperties",
+	"type" : "normal"
+}

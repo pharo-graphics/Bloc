@@ -1,0 +1,3 @@
+initialization
+defaultOrientation
+	^ BlGridOrientation horizontal

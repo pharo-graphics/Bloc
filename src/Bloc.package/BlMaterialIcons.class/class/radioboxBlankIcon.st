@@ -1,0 +1,3 @@
+radiobox
+radioboxBlankIcon
+^ self radioboxBlankSvg asElement

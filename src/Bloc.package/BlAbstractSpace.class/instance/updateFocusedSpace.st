@@ -1,0 +1,2 @@
+focus managing
+updateFocusedSpace

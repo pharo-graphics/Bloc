@@ -1,0 +1,3 @@
+raspberrypi
+raspberrypiIcon
+^ self raspberrypiSvg asElement

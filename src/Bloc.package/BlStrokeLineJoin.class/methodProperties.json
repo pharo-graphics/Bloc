@@ -1,0 +1,14 @@
+{
+	"instance" : {
+		"beMiter" : "GlennCavarle 4/25/2016 16:33",
+		"beRound" : "GlennCavarle 4/25/2016 16:33",
+		"applyOnAthensStrokePaint:" : "GlennCavarle 4/25/2016 14:37",
+		"beBevel" : "GlennCavarle 4/25/2016 16:33"
+	},
+	"class" : {
+		"BEVEL" : "GlennCavarle 4/25/2016 10:13",
+		"ROUND" : "GlennCavarle 4/25/2016 10:13",
+		"MITER" : "GlennCavarle 4/25/2016 10:13",
+		"reset" : "GlennCavarle 4/25/2016 16:35"
+	}
+}

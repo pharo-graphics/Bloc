@@ -1,0 +1,3 @@
+drawing
+contentExtent
+	self subclassResponsibility

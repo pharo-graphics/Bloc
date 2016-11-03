@@ -1,0 +1,17 @@
+{
+	"classtraitcomposition" : "TBlWindowRenderer classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"renderer",
+		"dirtyAreas",
+		"presentNeeded"
+	],
+	"name" : "BlOSWindowRenderer",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlWindowRenderer",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-OSWindow-Core"
+}

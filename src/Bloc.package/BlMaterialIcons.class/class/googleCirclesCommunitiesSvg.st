@@ -1,0 +1,3 @@
+google
+googleCirclesCommunitiesSvg
+^ BlSvgPath fromStream: self googleCirclesCommunitiesSrc

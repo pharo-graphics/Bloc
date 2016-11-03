@@ -1,0 +1,3 @@
+clipboard
+clipboardTextIcon
+^ self clipboardTextSvg asElement

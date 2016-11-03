@@ -1,0 +1,3 @@
+multiplication
+multiplicationBoxIcon
+^ self multiplicationBoxSvg asElement

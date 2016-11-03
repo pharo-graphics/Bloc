@@ -1,0 +1,3 @@
+vector
+vectorCircleVariantSvg
+^ BlSvgPath fromStream: self vectorCircleVariantSrc

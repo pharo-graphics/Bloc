@@ -1,0 +1,3 @@
+access
+accessPointNetworkSvg
+^ BlSvgPath fromStream: self accessPointNetworkSrc

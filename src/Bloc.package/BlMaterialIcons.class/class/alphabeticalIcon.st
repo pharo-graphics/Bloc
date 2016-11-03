@@ -1,0 +1,3 @@
+alphabetical
+alphabeticalIcon
+^ self alphabeticalSvg asElement

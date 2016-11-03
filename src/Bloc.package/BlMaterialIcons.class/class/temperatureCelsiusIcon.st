@@ -1,0 +1,3 @@
+temperature
+temperatureCelsiusIcon
+^ self temperatureCelsiusSvg asElement

@@ -1,0 +1,3 @@
+initialize-release
+initDispatcher
+	self eventDispatcher addEventFilter: self eventListener

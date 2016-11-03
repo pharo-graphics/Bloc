@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlHost",
+	"category" : "BlocHost-Morphic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMorphicHost",
+	"type" : "normal"
+}

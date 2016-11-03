@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEasing",
+	"category" : "Bloc-Animation-Easing",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEasingBaseBounce",
+	"type" : "normal"
+}

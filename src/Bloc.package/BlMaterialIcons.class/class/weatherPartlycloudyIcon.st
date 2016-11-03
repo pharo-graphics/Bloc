@@ -1,0 +1,3 @@
+weather
+weatherPartlycloudyIcon
+^ self weatherPartlycloudySvg asElement

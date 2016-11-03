@@ -1,0 +1,17 @@
+{
+	"instance" : {
+		"renderer:" : "RonieSalgado 9/28/2016 21:37",
+		"presentNeeded" : "RonieSalgado 9/28/2016 22:37",
+		"render:" : "",
+		"initialize" : "RonieSalgado 9/28/2016 22:37",
+		"clearDirtyAreasFor:" : "",
+		"doRender:" : "GlennCavarle 10/7/2016 17:36",
+		"renderer" : "RonieSalgado 9/28/2016 21:37",
+		"dirtyAreas" : "RonieSalgado 9/28/2016 21:38",
+		"renderNeeded" : "",
+		"dirtyAreas:" : "RonieSalgado 9/28/2016 21:38"
+	},
+	"class" : {
+		"for:" : "RonieSalgado 9/28/2016 21:38"
+	}
+}

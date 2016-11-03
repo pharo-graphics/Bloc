@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlState",
+	"category" : "Bloc-State",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlPressedState",
+	"type" : "normal"
+}

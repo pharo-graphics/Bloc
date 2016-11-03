@@ -1,0 +1,3 @@
+keyboard
+keyboardReturnIcon
+^ self keyboardReturnSvg asElement

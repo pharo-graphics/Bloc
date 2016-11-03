@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlSimpleEventDispatcher",
+	"category" : "Bloc-EventHandling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlBubblingEventDispatcher",
+	"type" : "normal"
+}

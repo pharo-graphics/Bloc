@@ -1,0 +1,3 @@
+screen
+screenRotationLockSvg
+^ BlSvgPath fromStream: self screenRotationLockSrc

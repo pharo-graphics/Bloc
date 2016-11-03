@@ -1,0 +1,3 @@
+testing
+shouldDraw
+	^ self isVisible

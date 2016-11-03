@@ -1,0 +1,3 @@
+fridge
+fridgeFilledBottomSvg
+^ BlSvgPath fromStream: self fridgeFilledBottomSrc

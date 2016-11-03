@@ -1,0 +1,3 @@
+format
+formatFloatLeftIcon
+^ self formatFloatLeftSvg asElement

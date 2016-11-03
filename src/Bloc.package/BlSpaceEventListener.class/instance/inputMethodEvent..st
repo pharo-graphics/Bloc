@@ -1,0 +1,2 @@
+other handlers
+inputMethodEvent: anEvent

@@ -1,0 +1,1 @@
+I am an Sparta renderer which uses SDL2.

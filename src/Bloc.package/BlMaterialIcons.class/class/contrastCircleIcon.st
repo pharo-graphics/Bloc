@@ -1,0 +1,3 @@
+contrast
+contrastCircleIcon
+^ self contrastCircleSvg asElement

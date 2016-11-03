@@ -1,0 +1,3 @@
+white
+whiteBalanceSunnyIcon
+^ self whiteBalanceSunnySvg asElement

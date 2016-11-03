@@ -1,0 +1,3 @@
+tooltip
+tooltipOutlinePlusIcon
+^ self tooltipOutlinePlusSvg asElement

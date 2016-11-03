@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "BlPaint",
+	"category" : "Bloc-Paint-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"paint",
+		"width",
+		"joinStyle",
+		"lineStyle",
+		"miterLimit"
+	],
+	"name" : "BlStrokePaint",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+arrow
+arrowLeftDropCircleOutlineIcon
+^ self arrowLeftDropCircleOutlineSvg asElement

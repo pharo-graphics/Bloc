@@ -1,0 +1,3 @@
+plus
+plusCircleMultipleOutlineIcon
+^ self plusCircleMultipleOutlineSvg asElement

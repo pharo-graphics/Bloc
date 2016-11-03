@@ -1,0 +1,3 @@
+format
+formatSubscriptIcon
+^ self formatSubscriptSvg asElement

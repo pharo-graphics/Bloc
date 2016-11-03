@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGestureBaseScrollEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGestureScrollEndEvent",
+	"type" : "normal"
+}

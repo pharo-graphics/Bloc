@@ -1,0 +1,3 @@
+factory
+left
+	^ self start

@@ -1,0 +1,3 @@
+code
+codeGreaterThanOrEqualIcon
+^ self codeGreaterThanOrEqualSvg asElement

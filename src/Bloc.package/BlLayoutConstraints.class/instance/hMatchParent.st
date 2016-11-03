@@ -1,0 +1,3 @@
+resizing
+hMatchParent
+	self horizontal matchParent

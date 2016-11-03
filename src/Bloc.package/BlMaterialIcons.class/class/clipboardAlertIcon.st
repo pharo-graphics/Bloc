@@ -1,0 +1,3 @@
+clipboard
+clipboardAlertIcon
+^ self clipboardAlertSvg asElement

@@ -1,0 +1,8 @@
+{
+	"instance" : {
+		"dispatchEvent:chain:" : "GlennCavarle 7/5/2016 19:42",
+		"dispatchCapturingEvent:" : "GlennCavarle 1/22/2016 17:44",
+		"dispatchBubblingEvent:" : "GlennCavarle 1/22/2016 17:44"
+	},
+	"class" : { }
+}

@@ -1,0 +1,3 @@
+numeric
+numeric2BoxOutlineSvg
+^ BlSvgPath fromStream: self numeric2BoxOutlineSrc

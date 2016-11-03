@@ -1,0 +1,3 @@
+displaying
+close
+	^ super delete

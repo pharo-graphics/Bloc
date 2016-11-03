@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"image",
+		"innerEdge",
+		"outerEdge"
+	],
+	"name" : "BlBorderImage",
+	"type" : "normal"
+}

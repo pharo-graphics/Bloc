@@ -1,0 +1,14 @@
+{
+	"instance" : {
+		"action:" : "GlennCavarle 1/21/2016 17:59",
+		"eventClass" : "GlennCavarle 1/21/2016 17:59",
+		"action" : "GlennCavarle 1/21/2016 17:59",
+		"wantsEvent:" : "GlennCavarle 1/25/2016 01:36",
+		"eventClass:" : "GlennCavarle 1/21/2016 17:59",
+		"handleEvent:" : "GlennCavarle 1/21/2016 18:02"
+	},
+	"class" : {
+		"on:sendTo:" : "GlennCavarle 1/25/2016 00:43",
+		"on:do:" : "GlennCavarle 1/21/2016 17:59"
+	}
+}

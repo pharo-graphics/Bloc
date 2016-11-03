@@ -1,0 +1,3 @@
+resize
+resizeBottomRightIcon
+^ self resizeBottomRightSvg asElement

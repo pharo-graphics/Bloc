@@ -1,0 +1,3 @@
+format
+formatHorizontalAlignCenterIcon
+^ self formatHorizontalAlignCenterSvg asElement

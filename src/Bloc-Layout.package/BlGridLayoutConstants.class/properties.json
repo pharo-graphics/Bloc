@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "SharedPool",
+	"category" : "Bloc-Layout-Grid-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"UNDEFINED"
+	],
+	"instvars" : [ ],
+	"name" : "BlGridLayoutConstants",
+	"type" : "normal"
+}

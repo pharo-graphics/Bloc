@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlUIEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"delta"
+	],
+	"name" : "BlMouseEvent",
+	"type" : "normal"
+}

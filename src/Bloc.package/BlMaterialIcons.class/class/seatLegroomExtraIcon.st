@@ -1,0 +1,3 @@
+seat
+seatLegroomExtraIcon
+^ self seatLegroomExtraSvg asElement

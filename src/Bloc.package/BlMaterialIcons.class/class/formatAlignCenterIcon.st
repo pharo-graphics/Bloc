@@ -1,0 +1,3 @@
+format
+formatAlignCenterIcon
+^ self formatAlignCenterSvg asElement

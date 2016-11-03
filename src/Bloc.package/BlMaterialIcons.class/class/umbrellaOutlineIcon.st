@@ -1,0 +1,3 @@
+umbrella
+umbrellaOutlineIcon
+^ self umbrellaOutlineSvg asElement

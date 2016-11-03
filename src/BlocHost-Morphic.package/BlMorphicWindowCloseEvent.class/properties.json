@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlMorphicWindowEvent",
+	"category" : "BlocHost-Morphic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMorphicWindowCloseEvent",
+	"type" : "normal"
+}

@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/22/2016 22:54",
+	"super" : "BlVisibility",
+	"category" : "Bloc-Layout-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"element",
+		"gone",
+		"hidden",
+		"visible"
+	],
+	"name" : "BlVisibilityPluggable",
+	"type" : "normal"
+}

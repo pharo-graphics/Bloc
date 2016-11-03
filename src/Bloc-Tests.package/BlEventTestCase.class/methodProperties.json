@@ -1,0 +1,15 @@
+{
+	"instance" : {
+		"space" : "GlennCavarle 6/29/2016 09:45",
+		"assertFiredEventIs:target:withPropagation:" : "GlennCavarle 6/29/2016 10:31",
+		"firedEvents" : "GlennCavarle 7/1/2016 17:24",
+		"child" : "GlennCavarle 6/29/2016 09:45",
+		"root" : "GlennCavarle 6/29/2016 09:45",
+		"initSpace" : "GlennCavarle 7/1/2016 17:14",
+		"sendInsideTargetEvent:" : "GlennCavarle 6/29/2016 09:45",
+		"sendEvent:" : "GlennCavarle 6/29/2016 09:45",
+		"sendOutsideTargetEvent:" : "GlennCavarle 6/29/2016 09:45",
+		"setUp" : "GlennCavarle 6/29/2016 09:45"
+	},
+	"class" : { }
+}

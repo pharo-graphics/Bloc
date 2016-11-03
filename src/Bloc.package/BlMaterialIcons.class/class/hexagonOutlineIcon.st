@@ -1,0 +1,3 @@
+hexagon
+hexagonOutlineIcon
+^ self hexagonOutlineSvg asElement

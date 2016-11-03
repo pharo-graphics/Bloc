@@ -1,0 +1,3 @@
+format
+formatObjectInlineSvg
+^ BlSvgPath fromStream: self formatObjectInlineSrc

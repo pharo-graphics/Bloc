@@ -1,0 +1,3 @@
+battery
+batteryUnknownIcon
+^ self batteryUnknownSvg asElement

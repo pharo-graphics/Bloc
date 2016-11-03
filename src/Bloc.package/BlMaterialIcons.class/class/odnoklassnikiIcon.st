@@ -1,0 +1,3 @@
+odnoklassniki
+odnoklassnikiIcon
+^ self odnoklassnikiSvg asElement

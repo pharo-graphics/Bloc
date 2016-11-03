@@ -1,0 +1,3 @@
+apple
+appleKeyboardControlIcon
+^ self appleKeyboardControlSvg asElement

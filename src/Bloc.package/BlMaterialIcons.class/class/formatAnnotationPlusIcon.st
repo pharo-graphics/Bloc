@@ -1,0 +1,3 @@
+format
+formatAnnotationPlusIcon
+^ self formatAnnotationPlusSvg asElement

@@ -1,0 +1,3 @@
+google
+googleControllerOffSvg
+^ BlSvgPath fromStream: self googleControllerOffSrc

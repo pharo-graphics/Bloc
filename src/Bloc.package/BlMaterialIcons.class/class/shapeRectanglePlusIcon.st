@@ -1,0 +1,3 @@
+shape
+shapeRectanglePlusIcon
+^ self shapeRectanglePlusSvg asElement

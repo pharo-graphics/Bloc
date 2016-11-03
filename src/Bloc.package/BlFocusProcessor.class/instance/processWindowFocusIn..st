@@ -1,0 +1,2 @@
+focus request
+processWindowFocusIn: anEvent

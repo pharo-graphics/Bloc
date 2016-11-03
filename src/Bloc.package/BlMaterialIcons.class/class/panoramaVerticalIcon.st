@@ -1,0 +1,3 @@
+panorama
+panoramaVerticalIcon
+^ self panoramaVerticalSvg asElement

@@ -1,0 +1,4 @@
+change reporting
+pulseRequested
+	^ nextPulseRequested.
+	

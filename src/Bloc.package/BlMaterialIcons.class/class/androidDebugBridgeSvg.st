@@ -1,0 +1,3 @@
+android
+androidDebugBridgeSvg
+^ BlSvgPath fromStream: self androidDebugBridgeSrc

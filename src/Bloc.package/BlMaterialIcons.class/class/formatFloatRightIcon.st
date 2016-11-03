@@ -1,0 +1,3 @@
+format
+formatFloatRightIcon
+^ self formatFloatRightSvg asElement

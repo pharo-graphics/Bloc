@@ -1,0 +1,1 @@
+Default styles declared for the whole Smalltalk image

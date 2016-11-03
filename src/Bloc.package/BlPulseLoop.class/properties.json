@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "GlennCavarle 6/25/2016 23:56",
+	"super" : "Object",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"pulseEvent",
+		"pulseStartTime",
+		"lastElpasedTime",
+		"waitingDelay",
+		"loopProcess",
+		"pulsePeriod"
+	],
+	"name" : "BlPulseLoop",
+	"type" : "normal"
+}

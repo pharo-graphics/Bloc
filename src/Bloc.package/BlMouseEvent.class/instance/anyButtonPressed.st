@@ -1,0 +1,3 @@
+testing
+anyButtonPressed
+	^ button isNotNil

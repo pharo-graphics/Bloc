@@ -1,0 +1,2 @@
+mouse handlers
+clickEvent: anEvent

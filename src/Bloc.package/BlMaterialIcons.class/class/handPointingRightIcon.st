@@ -1,0 +1,3 @@
+hand
+handPointingRightIcon
+^ self handPointingRightSvg asElement

@@ -1,0 +1,3 @@
+initialization
+defaultJoinStyle
+	^ #joinMiter

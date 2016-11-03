@@ -1,0 +1,18 @@
+{
+	"classtraitcomposition" : "TBlWindowRenderer classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"surface",
+		"session",
+		"dirtyAreas",
+		"lock"
+	],
+	"name" : "BlMorphicAthensRenderer",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlWindowRenderer",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-Morphic"
+}

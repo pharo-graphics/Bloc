@@ -1,0 +1,3 @@
+format
+formatVerticalAlignTopSvg
+^ BlSvgPath fromStream: self formatVerticalAlignTopSrc

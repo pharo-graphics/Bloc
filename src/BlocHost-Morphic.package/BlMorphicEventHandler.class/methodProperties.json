@@ -1,0 +1,25 @@
+{
+	"instance" : {
+		"handleWindowEvent:" : "GlennCavarle 4/22/2016 14:16",
+		"handleKeystroke:" : "GlennCavarle 1/25/2016 16:14",
+		"convertMousePosition:andDo:" : "GlennCavarle 4/29/2016 19:22",
+		"handleMouseMove:" : "GlennCavarle 7/18/2016 23:36",
+		"handleKeyDown:" : "GlennCavarle 1/25/2016 16:14",
+		"handleDropMorph:" : "GlennCavarle 4/29/2016 17:30",
+		"handleMouseUp:" : "GlennCavarle 7/18/2016 23:36",
+		"handleMouseOver:" : "GlennCavarle 4/22/2016 14:15",
+		"handleMouseWheel:" : "GlennCavarle 4/22/2016 14:15",
+		"window" : "GlennCavarle 1/25/2016 16:27",
+		"enqueue:" : "GlennCavarle 6/25/2016 12:53",
+		"handleMouseEnter:" : "GlennCavarle 4/22/2016 14:14",
+		"handleMouseDown:" : "GlennCavarle 7/18/2016 23:36",
+		"handleWindowClose:" : "GlennCavarle 6/25/2016 12:53",
+		"handleKeyUp:" : "GlennCavarle 1/25/2016 16:14",
+		"handleWindowResize:" : "GlennCavarle 6/25/2016 12:53",
+		"window:" : "GlennCavarle 1/25/2016 16:36",
+		"handleMouseLeave:" : "GlennCavarle 4/22/2016 14:14"
+	},
+	"class" : {
+		"window:" : "GlennCavarle 1/25/2016 16:19"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlWindowEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"position"
+	],
+	"name" : "BlWindowMoveEvent",
+	"type" : "normal"
+}

@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
+	"super" : "Object",
+	"category" : "Bloc-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"position",
+		"extent"
+	],
+	"name" : "BlGeometry",
+	"type" : "normal"
+}

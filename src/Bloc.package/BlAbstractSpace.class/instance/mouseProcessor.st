@@ -1,0 +1,3 @@
+accessing
+mouseProcessor
+	^ mouseProcessor

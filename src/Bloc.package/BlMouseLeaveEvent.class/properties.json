@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlMouseEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMouseLeaveEvent",
+	"type" : "normal"
+}

@@ -1,0 +1,12 @@
+{
+	"instance" : {
+		"keyBindings" : "GlennCavarle 7/21/2016 00:45",
+		"remove:" : "GlennCavarle 7/21/2016 01:43",
+		"initialize" : "GlennCavarle 7/21/2016 00:46",
+		"add:" : "GlennCavarle 7/21/2016 01:42",
+		"keyBindings:" : "GlennCavarle 7/21/2016 00:45",
+		"addAll:" : "GlennCavarle 7/21/2016 01:43",
+		"keyBindingForEvent:" : "GlennCavarle 7/22/2016 15:23"
+	},
+	"class" : { }
+}

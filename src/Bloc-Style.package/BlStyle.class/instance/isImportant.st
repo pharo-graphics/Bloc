@@ -1,0 +1,3 @@
+testing
+isImportant
+	^ declaration isImportant

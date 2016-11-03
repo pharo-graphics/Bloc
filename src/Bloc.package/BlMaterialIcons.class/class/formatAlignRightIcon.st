@@ -1,0 +1,3 @@
+format
+formatAlignRightIcon
+^ self formatAlignRightSvg asElement

@@ -1,0 +1,3 @@
+format
+formatHeaderIncreaseSvg
+^ BlSvgPath fromStream: self formatHeaderIncreaseSrc

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLinearLayoutOrientation",
+	"category" : "Bloc-Layout-Linear",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlLinearLayoutVerticalOrientation",
+	"type" : "normal"
+}

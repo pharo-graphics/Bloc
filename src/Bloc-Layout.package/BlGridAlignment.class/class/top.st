@@ -1,0 +1,3 @@
+factory
+top
+	^ self leading

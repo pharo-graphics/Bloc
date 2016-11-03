@@ -1,0 +1,23 @@
+{
+	"instance" : {
+		"lineCap" : "GlennCavarle 4/24/2016 21:00",
+		"miterLimit" : "GlennCavarle 4/24/2016 21:00",
+		"lineJoin" : "GlennCavarle 4/24/2016 21:00",
+		"dashOffset" : "GlennCavarle 4/24/2016 21:00",
+		"lineJoin:" : "GlennCavarle 4/24/2016 21:00",
+		"type:lineJoin:lineCap:miterLimit:dashOffset:dashArray:" : "GlennCavarle 4/24/2016 21:30",
+		"applyOnAthensStrokePaint:" : "GlennCavarle 6/22/2016 13:22",
+		"type" : "GlennCavarle 4/24/2016 21:00",
+		"dashArray" : "GlennCavarle 4/24/2016 21:00"
+	},
+	"class" : {
+		"SOLID" : "GlennCavarle 8/2/2016 23:51",
+		"NONE" : "GlennCavarle 8/2/2016 23:51",
+		"DASHED" : "GlennCavarle 8/2/2016 23:51",
+		"reset" : "GlennCavarle 4/25/2016 16:38",
+		"DOTTED" : "GlennCavarle 8/2/2016 23:51",
+		"type:" : "GlennCavarle 6/25/2016 12:53",
+		"type:lineJoin:lineCap:" : "GlennCavarle 6/22/2016 13:23",
+		"type:lineJoin:lineCap:miterLimit:dashOffset:dashArray:" : "GlennCavarle 4/24/2016 21:31"
+	}
+}

@@ -1,0 +1,3 @@
+pencil
+pencilBoxOutlineIcon
+^ self pencilBoxOutlineSvg asElement

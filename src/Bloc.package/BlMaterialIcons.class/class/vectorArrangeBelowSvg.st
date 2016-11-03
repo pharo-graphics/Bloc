@@ -1,0 +1,3 @@
+vector
+vectorArrangeBelowSvg
+^ BlSvgPath fromStream: self vectorArrangeBelowSrc

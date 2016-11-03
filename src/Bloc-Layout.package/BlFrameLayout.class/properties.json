@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "GlennCavarle 6/27/2016 15:51",
+	"super" : "BlLayout",
+	"category" : "Bloc-Layout-Frame",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"measureAllChildren"
+	],
+	"name" : "BlFrameLayout",
+	"type" : "normal"
+}

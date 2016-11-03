@@ -1,0 +1,3 @@
+language
+languageJavascriptSvg
+^ BlSvgPath fromStream: self languageJavascriptSrc

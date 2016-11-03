@@ -1,0 +1,3 @@
+accessing
+elapsedTime
+	^ elapsedTime

@@ -1,0 +1,3 @@
+account
+accountNetworkIcon
+^ self accountNetworkSvg asElement

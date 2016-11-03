@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLayoutAxisConstraints",
+	"category" : "Bloc-Layout-Grid",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGridAxisConstraints",
+	"type" : "normal"
+}

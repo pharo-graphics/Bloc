@@ -1,0 +1,3 @@
+bluetooth
+bluetoothAudioIcon
+^ self bluetoothAudioSvg asElement

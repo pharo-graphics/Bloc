@@ -1,0 +1,3 @@
+accessing
+canStretch
+	^ BlGridFlexibility canStretch

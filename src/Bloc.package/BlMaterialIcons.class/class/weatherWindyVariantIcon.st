@@ -1,0 +1,3 @@
+weather
+weatherWindyVariantIcon
+^ self weatherWindyVariantSvg asElement

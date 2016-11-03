@@ -1,0 +1,3 @@
+account
+accountMultiplePlusIcon
+^ self accountMultiplePlusSvg asElement

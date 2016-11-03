@@ -1,0 +1,3 @@
+accessing
+dirtyAreas
+	^ self subclassResponsibility 

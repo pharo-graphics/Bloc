@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Style-CSS",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"rule",
+		"specificity",
+		"matchOnId",
+		"matchOnName",
+		"matchOnStyleClass"
+	],
+	"name" : "BlStyleSelector",
+	"type" : "normal"
+}

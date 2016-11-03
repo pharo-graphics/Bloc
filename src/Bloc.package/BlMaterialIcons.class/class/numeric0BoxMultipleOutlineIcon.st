@@ -1,0 +1,3 @@
+numeric
+numeric0BoxMultipleOutlineIcon
+^ self numeric0BoxMultipleOutlineSvg asElement

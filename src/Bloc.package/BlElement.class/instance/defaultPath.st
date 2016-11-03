@@ -1,0 +1,3 @@
+initialization
+defaultPath
+	^ BlRectangle new

@@ -1,0 +1,3 @@
+cursor
+cursorDefaultOutlineIcon
+^ self cursorDefaultOutlineSvg asElement

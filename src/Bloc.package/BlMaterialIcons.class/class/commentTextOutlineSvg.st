@@ -1,0 +1,3 @@
+comment
+commentTextOutlineSvg
+^ BlSvgPath fromStream: self commentTextOutlineSrc

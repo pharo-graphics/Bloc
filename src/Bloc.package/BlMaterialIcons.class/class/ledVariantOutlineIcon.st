@@ -1,0 +1,3 @@
+led
+ledVariantOutlineIcon
+^ self ledVariantOutlineSvg asElement

@@ -1,0 +1,3 @@
+comment
+commentRemoveOutlineSvg
+^ BlSvgPath fromStream: self commentRemoveOutlineSrc

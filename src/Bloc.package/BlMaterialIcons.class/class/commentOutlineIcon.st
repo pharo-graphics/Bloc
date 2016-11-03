@@ -1,0 +1,3 @@
+comment
+commentOutlineIcon
+^ self commentOutlineSvg asElement

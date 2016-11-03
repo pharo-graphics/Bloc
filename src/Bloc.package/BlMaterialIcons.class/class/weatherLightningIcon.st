@@ -1,0 +1,3 @@
+weather
+weatherLightningIcon
+^ self weatherLightningSvg asElement

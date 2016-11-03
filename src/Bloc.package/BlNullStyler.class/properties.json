@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlAbstractStyler",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlNullStyler",
+	"type" : "normal"
+}

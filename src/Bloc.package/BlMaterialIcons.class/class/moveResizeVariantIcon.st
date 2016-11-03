@@ -1,0 +1,3 @@
+move
+moveResizeVariantIcon
+^ self moveResizeVariantSvg asElement

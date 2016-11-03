@@ -1,0 +1,3 @@
+factory
+undefined
+	^ BlGridUndefinedAlignment uniqueInstance

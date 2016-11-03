@@ -1,0 +1,3 @@
+arrow
+arrowUpBoldHexagonOutlineIcon
+^ self arrowUpBoldHexagonOutlineSvg asElement

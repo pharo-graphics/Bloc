@@ -1,0 +1,3 @@
+testing
+shouldMeasure
+	^ self isVisible

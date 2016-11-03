@@ -1,0 +1,3 @@
+rotate
+rotateRightVariantSvg
+^ BlSvgPath fromStream: self rotateRightVariantSrc

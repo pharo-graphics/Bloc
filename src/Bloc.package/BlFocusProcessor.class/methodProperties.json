@@ -1,0 +1,16 @@
+{
+	"instance" : {
+		"processFocus:" : "GlennCavarle 7/1/2016 17:11",
+		"requestFor:" : "GlennCavarle 7/21/2016 15:53",
+		"processMouseDown:" : "GlennCavarle 7/21/2016 15:58",
+		"processWindowFocusOut:" : "GlennCavarle 8/9/2016 02:48",
+		"processWindowFocusIn:" : "GlennCavarle 8/9/2016 02:48",
+		"fireAsFocusInEvent:" : "GlennCavarle 7/1/2016 16:35",
+		"processBlur:" : "GlennCavarle 7/1/2016 17:10",
+		"lastFocusOwner" : "GlennCavarle 7/6/2016 18:56",
+		"fireAsBlurEvent:" : "GlennCavarle 7/1/2016 17:26",
+		"fireAsFocusOutEvent:" : "GlennCavarle 7/1/2016 16:35",
+		"fireAsFocusEvent:" : "GlennCavarle 7/1/2016 16:33"
+	},
+	"class" : { }
+}

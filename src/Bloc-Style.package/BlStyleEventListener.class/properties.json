@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementEventListener",
+	"category" : "Bloc-Style-EventListener",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"styleable"
+	],
+	"name" : "BlStyleEventListener",
+	"type" : "normal"
+}

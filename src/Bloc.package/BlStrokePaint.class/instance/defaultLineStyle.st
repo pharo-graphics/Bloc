@@ -1,0 +1,3 @@
+initialization
+defaultLineStyle
+	^ BlStrokeLineStyle new
