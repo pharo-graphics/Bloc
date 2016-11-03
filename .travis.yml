@@ -1,11 +1,12 @@
 language: smalltalk
 
+dist: xenial
 
-install: 
-  - wget -O - get.pharo.org/60+vm | bash
-  - |
-    ./pharo Pharo.image eval "Metacello new baseline: 'Bloc'; repository: 'github://pharo-graphics/Bloc/src'; load."
+sudo: true
 
+os:
+  - linux
+  - osx
 
-script:
-  - ./pharo Pharo.image test --no-xterm --fail-on-failure "Bloc.*"
+smalltalk:
+  - Pharo-6.0
