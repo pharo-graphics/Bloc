@@ -4,4 +4,4 @@ createWindowFor: aSpace
 	attrs := self createAttributesFor: aSpace.
 	win := BlOSWindow createWithAttributes: attrs.
 	win withAthensRenderer.
-	aSpace hostWindow: win
+	aSpace hostSpace: win

@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementAlignment",
+	"category" : "Bloc-LLayout-Support",
+	"classinstvars" : [
+		"bottom",
+		"center",
+		"top"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlVerticalAlignment",
+	"type" : "normal"
+}

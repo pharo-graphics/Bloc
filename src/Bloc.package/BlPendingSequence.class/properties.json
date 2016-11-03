@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"combination",
+		"index",
+		"terminated"
+	],
+	"name" : "BlPendingSequence",
+	"type" : "normal"
+}

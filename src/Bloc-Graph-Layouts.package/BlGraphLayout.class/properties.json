@@ -1,0 +1,17 @@
+{
+	"classtraitcomposition" : "TBGraphLayoutUtils classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"affectedNodes",
+		"translator",
+		"isStopped"
+	],
+	"name" : "BlGraphLayout",
+	"commentStamp" : "AliakseiSyrel 8/28/2016 16:11",
+	"super" : "BlLayout",
+	"traitcomposition" : "TBGraphLayoutUtils",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Graph-Layouts-Basic"
+}

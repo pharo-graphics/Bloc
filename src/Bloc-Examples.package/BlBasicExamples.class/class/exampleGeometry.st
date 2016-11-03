@@ -14,7 +14,7 @@ exampleGeometry
 		addChild: (self newCircle position: 250 @ 200);
 		addChild: (self newSquare position: 400 @ 200);
 		addChild: (self newSvg position: 500 @ 200);
-		addChild: (self newLine position: 100 @ 300);
+		addChild: (self newLine);
 		addChild: ( BlText new
 		position:150@50;
 		fill: Color red;

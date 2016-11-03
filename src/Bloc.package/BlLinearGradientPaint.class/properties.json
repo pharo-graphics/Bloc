@@ -5,7 +5,10 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"start",
+		"end"
+	],
 	"name" : "BlLinearGradientPaint",
 	"type" : "normal"
 }

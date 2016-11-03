@@ -1,0 +1,35 @@
+{
+	"instance" : {
+		"initialize" : "GlennCavarle 11/2/2016 16:32"
+	},
+	"class" : {
+		"pxSpeakerWidth" : "GlennCavarle 11/2/2016 15:10",
+		"pxScreenWidth" : "GlennCavarle 11/2/2016 15:10",
+		"mmScreenWidth" : "GlennCavarle 11/2/2016 15:09",
+		"mmCameraTopMargin" : "GlennCavarle 11/2/2016 15:09",
+		"pxBodyWidth" : "GlennCavarle 11/2/2016 15:09",
+		"mmSpeakerWidth" : "GlennCavarle 11/2/2016 15:09",
+		"pxCameraTopMargin" : "GlennCavarle 11/2/2016 15:10",
+		"pxHomeButtonDiameter" : "GlennCavarle 11/2/2016 15:10",
+		"pxBottomHeight" : "GlennCavarle 11/2/2016 15:09",
+		"mmTopHeight" : "GlennCavarle 11/2/2016 15:09",
+		"mmHomeButtonTopMargin" : "GlennCavarle 11/2/2016 15:09",
+		"pxHomeButtonTopMargin" : "GlennCavarle 11/2/2016 15:10",
+		"mmBottomHeight" : "GlennCavarle 11/2/2016 15:08",
+		"mmCameraDiameter" : "GlennCavarle 11/2/2016 15:09",
+		"mmSpeakerHeight" : "GlennCavarle 11/2/2016 15:09",
+		"multFactor" : "GlennCavarle 11/2/2016 15:09",
+		"mmScreenMargin" : "GlennCavarle 11/2/2016 15:09",
+		"pxTopHeight" : "GlennCavarle 11/2/2016 15:10",
+		"mmScreenHeight" : "GlennCavarle 11/2/2016 15:09",
+		"pxScreenMargin" : "GlennCavarle 11/2/2016 15:10",
+		"open" : "GlennCavarle 11/2/2016 16:35",
+		"pxScreenHeight" : "GlennCavarle 11/2/2016 15:10",
+		"mmBodyHeight" : "GlennCavarle 11/2/2016 15:08",
+		"mmHomeButtonDiameter" : "GlennCavarle 11/2/2016 15:09",
+		"pxCameraDiameter" : "GlennCavarle 11/2/2016 15:09",
+		"pxSpeakerHeight" : "GlennCavarle 11/2/2016 15:10",
+		"mmBodyWidth" : "GlennCavarle 11/2/2016 15:08",
+		"pxBodyHeight" : "GlennCavarle 11/2/2016 15:09"
+	}
+}

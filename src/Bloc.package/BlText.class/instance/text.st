@@ -1,3 +1,3 @@
 accessing
 text
-	^ textModel asString
+	^ textModel rope asString

@@ -5,7 +5,10 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"center",
+		"radius"
+	],
 	"name" : "BlRadialGradientPaint",
 	"type" : "normal"
 }

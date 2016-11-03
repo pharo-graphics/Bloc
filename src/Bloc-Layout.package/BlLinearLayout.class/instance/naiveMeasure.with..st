@@ -3,14 +3,15 @@ naiveMeasure: anElement with: anExtentMeasurementSpec
 	"First naive pass to measure children with exact dimension or those who wrap to content"
 
 	anElement managedChildrenDo: [ :child |
-		| childMatchBreadth measuredBreadth matchingBreadth |
+		| childMatchBreadth measuredBreadth matchingBreadth childConstraints |
+		childConstraints := child constraints linear.
 		"we need a local flag to know if one particular child want to match breadth of a parent.
 		there is a global flag to detect if any of the children wants to match breadth"
 		childMatchBreadth := false.
 
 		"We care about weight only if child is matching parent"
 		(self orientation lengthProperties: child) resizer
-			ifMatchParent: [ self cache totalWeight: self cache totalWeight + child constraints weight ].
+			ifMatchParent: [ self cache totalWeight: self cache totalWeight + childConstraints weight ].
 
 		"Measure child during first pass if we don't skip it"
 		(self shouldSkipNaiveMeasure: child)

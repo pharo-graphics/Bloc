@@ -1,3 +1,3 @@
 layout constraints
 minExtent
-	^ self constraints minExtent
+	^ self minWidth @ self minHeight

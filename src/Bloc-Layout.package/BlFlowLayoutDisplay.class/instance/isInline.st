@@ -1,0 +1,3 @@
+testing
+isInline
+	^ self subclassResponsibility

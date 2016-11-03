@@ -1,3 +1,3 @@
 as yet unclassified
 shiftMask
-	^ 2r0001
+	^ 2r000001

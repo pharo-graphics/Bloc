@@ -2,10 +2,10 @@ initialization
 initialize
 	super initialize.
 	boundsCache := BlBoundsCache on: self.
-	transform := AthensAffineTransform new.
+	transform := SpartaMatrix new.
 	eventDispatcher := BlBubblingEventDispatcher on: self.
 	zIndex := 10.
-	constraints := BlLayoutConstraints new.
+	constraints := BlLayoutCommonConstraints new.
 	dirty := true.
 	self resetChildrenArray.
 	geometry := self defaultPath.

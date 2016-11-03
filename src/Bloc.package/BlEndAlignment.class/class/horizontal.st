@@ -1,0 +1,3 @@
+factory
+horizontal
+	^ BlHorizontalAlignment end

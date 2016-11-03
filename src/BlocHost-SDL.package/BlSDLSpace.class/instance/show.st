@@ -1,0 +1,3 @@
+displaying
+show
+	sdlWindow show

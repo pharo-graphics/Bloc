@@ -5,7 +5,9 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"stops"
+	],
 	"name" : "BlGradientPaint",
 	"type" : "normal"
 }

@@ -1,0 +1,3 @@
+testing
+isLeftToRight
+	^ true

@@ -1,0 +1,3 @@
+accessing
+lastLine
+	^ lines last

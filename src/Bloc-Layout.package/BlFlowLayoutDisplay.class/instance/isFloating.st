@@ -1,0 +1,3 @@
+testing
+isFloating
+	^ self subclassResponsibility

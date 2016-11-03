@@ -1,3 +1,4 @@
 accessing
 borderless
-	^ self borderlessProperty value
+	self hostSpace ifNotNil: [ :hw | ^ hw borderless ].
+	^ borderless

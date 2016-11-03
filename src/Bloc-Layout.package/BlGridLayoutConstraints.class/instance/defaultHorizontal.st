@@ -1,0 +1,3 @@
+initialize-release
+defaultHorizontal
+	^ BlGridLayoutConstraintsHorizontal new

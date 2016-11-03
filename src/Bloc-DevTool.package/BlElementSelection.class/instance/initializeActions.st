@@ -12,10 +12,9 @@ initializeActions
 	
 	brBtn addEventHandler: (BlEventHandler on: BlDragStartEvent do: [ :evt | evt consumed: true.]).
 	brBtn addEventHandler: (BlEventHandler on: BlDragEndEvent do: [ :evt |  evt consumed: true.]).
-	brBtn addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt | 
+	brBtn addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt | ||
 					evt consumed: true.
-					
-					self client extent:((evt position) - self client position).
+					self client extent: (evt position - self client globalPosition).
 					self extent: (self client geomBoundsInSpace extent + (10@10)).
 					self updateActionsPosition.
 					]).

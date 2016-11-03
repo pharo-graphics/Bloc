@@ -1,3 +1,5 @@
 accessing
-position: anObject
-	 self positionProperty value: anObject
+position: aPoint
+	position := aPoint.
+	self hostSpace ifNotNil: [ :hw | 
+			hw position = aPoint ifFalse: [ hw position: aPoint ] ]

@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "TBlHostWindow classTrait",
+	"classtraitcomposition" : "TBlHostSpace classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"window",
@@ -9,7 +9,7 @@
 	"name" : "BlOSWindow",
 	"commentStamp" : "",
 	"super" : "Object",
-	"traitcomposition" : "TBlHostWindow",
+	"traitcomposition" : "TBlHostSpace",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

@@ -1,3 +1,4 @@
 displaying
 close
-	self hostWindow ifNotNil: [ :hw | hw close ]
+	BlUniverse default closeSpaceWindow: self.
+	hostSpace := nil

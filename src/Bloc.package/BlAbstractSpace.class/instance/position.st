@@ -1,3 +1,4 @@
 accessing
 position
-	^ self positionProperty value
+	self hostSpace ifNotNil: [ :hw | ^ hw position ].
+	^ position

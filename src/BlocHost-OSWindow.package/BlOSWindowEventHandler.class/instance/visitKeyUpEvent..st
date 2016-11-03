@@ -5,6 +5,7 @@ visitKeyUpEvent: anEvent
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
+		repeat: anEvent repeat;
 		keyValue: anEvent symbol;
 		scanCode: anEvent scanCode;
 		charCode: (self mapSymbolToKeyValue: anEvent symbol);

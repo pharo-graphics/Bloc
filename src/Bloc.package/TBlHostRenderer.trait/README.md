@@ -1,0 +1,1 @@
+I define the public API that host renderers must provide.

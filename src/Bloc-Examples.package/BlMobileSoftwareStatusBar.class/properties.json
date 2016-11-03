@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlMobileSubElement",
+	"category" : "Bloc-Examples-MobilePhone",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMobileSoftwareStatusBar",
+	"type" : "normal"
+}

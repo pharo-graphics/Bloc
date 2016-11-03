@@ -1,3 +1,3 @@
-initialize-release
+initialization
 defaultEventListener
 	^ BlSpaceEventListener space: self

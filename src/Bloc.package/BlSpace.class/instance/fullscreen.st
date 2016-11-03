@@ -1,3 +1,4 @@
 accessing
 fullscreen
-	^ self fullscreenProperty value
+	self hostSpace ifNotNil: [ :hw | ^ hw fullscreen ].
+	^ fullscreen

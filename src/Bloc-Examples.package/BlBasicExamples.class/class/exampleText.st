@@ -4,10 +4,10 @@ exampleText
 	space := BlSpace new
 		extent: 600 @ 350;
 		title: 'Text example'.
-	
+
 	txt := BlText new
-		wrappingWidth: 250;
-		position:200@100;
+		wrappingWidth: 200;
+		position: 200@100;
 		border: (BlBorder color: Color blue width: 2);
 		background: (BlBackground fill: Color green);
 		fill: Color blue;
@@ -20,7 +20,7 @@ exampleText
 	
 	space root
 		addChild: (BlBenchmarkConsole on:space);
-		addChildren:{txt. txt2}.
+		addChildren: {txt. txt2}.
 	
 	space root addEventHandler:
 			(BlEventHandler

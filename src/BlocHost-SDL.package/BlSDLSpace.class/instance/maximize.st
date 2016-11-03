@@ -1,0 +1,4 @@
+displaying
+maximize
+
+	sdlWindow maximize.

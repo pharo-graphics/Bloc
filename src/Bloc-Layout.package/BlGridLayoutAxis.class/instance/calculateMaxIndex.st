@@ -2,13 +2,14 @@ computing
 calculateMaxIndex
 	|result|
 	result := -1.
-	self element managedChildrenDo: [ :child |
+	self element managedChildren withIndexDo: [ :child :index |
 		| spec span |
-		spec := self specOf: child.
+		spec := (childConstraints at: index) spec.
 		span := spec span.
-		result := result max: span first - 1.
-		result := result max: span last - 1.
-		result := result max: span size - 1 ].
-	^ result = -1
+		result := result max: span first.
+		result := result max: span last.
+		result := result max: span size - 1.
+		result := result ].
+	^ result < 0
 		ifTrue: [ UNDEFINED ]
 		ifFalse: [ result ]

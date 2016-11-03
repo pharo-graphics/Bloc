@@ -9,7 +9,7 @@ shareOutDelta: totalDelta totalWeight: totalWeight
 	self element managedChildren withIndexDo: [ :child :index |
 		child visibility shouldLayout ifTrue: [ 
 			| spec weight |
-			spec := self specOf: child.
+			spec := (childConstraints at: index) spec.
 			weight := spec weight asFloat.
 			weight ~= 0 ifTrue: [ 
 				| delta |

@@ -3,9 +3,9 @@ improvedMeasureChild: aChildElement parentSpec: anExtentSpec
 	| horizontal spec span axis locations cellSize childSize|
 	horizontal := self layout orientation isHorizontal.
 	spec := horizontal
-		ifTrue: [ aChildElement constraints horizontal spec ]
-		ifFalse: [ aChildElement constraints vertical spec ].
-		
+		ifTrue: [ aChildElement constraints grid horizontal spec ]
+		ifFalse: [ aChildElement constraints grid vertical spec ].
+
 	(spec absoluteAlignment: horizontal) isFill
 		ifFalse: [ ^ self ].
 

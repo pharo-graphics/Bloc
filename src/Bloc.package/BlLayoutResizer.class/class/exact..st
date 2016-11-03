@@ -1,3 +1,3 @@
 instance creation
 exact: aNumber
-	^ BlLayoutExactResizer new size: aNumber
+	^ BlLayoutExactResizer size: aNumber

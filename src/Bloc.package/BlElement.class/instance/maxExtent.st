@@ -1,4 +1,3 @@
 layout constraints
 maxExtent
-	^ self constraints maxExtent
-	
+	^ self maxWidth @ self maxHeight

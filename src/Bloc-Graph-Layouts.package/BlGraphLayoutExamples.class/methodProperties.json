@@ -1,0 +1,18 @@
+{
+	"instance" : {
+		"nodes:" : "AliakseiSyrel 8/28/2016 14:57",
+		"connect:from:" : "AliakseiSyrel 5/23/2016 14:09",
+		"edgeFrom:to:" : "AliakseiSyrel 10/26/2016 20:14",
+		"shouldCreateEdgeFrom:to:" : "AliakseiSyrel 5/22/2016 17:41",
+		"view" : "AliakseiSyrel 8/28/2016 14:54",
+		"defaultNode" : "AliakseiSyrel 10/26/2016 20:11",
+		"applyLayoutIn:" : "AliakseiSyrel 8/28/2016 14:48",
+		"createEdgeIfNecessaryFrom:to:" : "AliakseiSyrel 5/23/2016 14:07",
+		"defaultView" : "AliakseiSyrel 8/28/2016 15:05",
+		"connect:from:to:" : "AliakseiSyrel 8/28/2016 15:06",
+		"nodeFor:" : "AliakseiSyrel 5/23/2016 15:38"
+	},
+	"class" : {
+		"gtExamplesProvider" : "AliakseiSyrel 8/28/2016 14:51"
+	}
+}

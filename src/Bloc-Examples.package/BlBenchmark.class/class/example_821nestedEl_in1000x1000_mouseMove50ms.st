@@ -17,8 +17,8 @@ anim := BlAnimation new
 	onFinishedDo: [ 
 		|pos|
 		pos := (900 atRandom)@(900 atRandom).
-		space hostWindow ifNil:[^ self].
-		space hostWindow eventFetcher enqueue: (BlMouseMoveEvent new
+		space hostSpace ifNil:[^ self].
+		space hostSpace enqueueEvent: (BlMouseMoveEvent new
 		position: pos).
 		
 	 ].

@@ -1,0 +1,3 @@
+accessing
+noFill
+	^ ASNoFill soleInstance 

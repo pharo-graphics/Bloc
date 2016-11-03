@@ -1,3 +1,0 @@
-initialization
-defaultAlignmentMode
-	^ BlGridAlignmentMode alignMargins

@@ -7,6 +7,7 @@ visitKeyDownEvent: anEvent
 		modifiers: (self convertKeyModifiers: mods);
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
+		repeat: anEvent repeat;
 		keyValue: anEvent symbol;
 		charCode: (self mapSymbolToKeyValue: anEvent symbol);
 		scanCode: anEvent scanCode;

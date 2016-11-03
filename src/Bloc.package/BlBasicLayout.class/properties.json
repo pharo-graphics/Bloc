@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlLayout",
-	"category" : "Bloc-Layout-Basic",
+	"category" : "Bloc-LLayout-Basic",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

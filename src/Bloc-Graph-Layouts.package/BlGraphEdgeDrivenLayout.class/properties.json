@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGraphLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"edges",
+		"userDefinedEdges",
+		"fromPositions",
+		"toPositions",
+		"shouldSetDefaultAttachPoint"
+	],
+	"name" : "BlGraphEdgeDrivenLayout",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+initialization
+defaultDisplay
+	^ BlFlowLayoutDisplay inline

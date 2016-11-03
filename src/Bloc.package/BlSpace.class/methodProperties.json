@@ -1,13 +1,15 @@
 {
 	"instance" : {
-		"fullscreen" : "GlennCavarle 7/1/2016 08:57",
-		"maximize" : "GlennCavarle 7/1/2016 08:23",
-		"title:" : "GlennCavarle 6/23/2016 19:16",
-		"minimize" : "GlennCavarle 7/1/2016 08:25",
-		"fullscreenProperty" : "GlennCavarle 7/1/2016 08:56",
+		"minimized" : "GlennCavarle 10/28/2016 16:01",
+		"fullscreen" : "GlennCavarle 10/28/2016 16:01",
+		"maximize" : "GlennCavarle 10/28/2016 16:01",
+		"minimize" : "GlennCavarle 10/28/2016 16:01",
 		"title" : "GlennCavarle 6/23/2016 19:16",
-		"fullscreen:" : "GlennCavarle 7/1/2016 08:57",
-		"titleProperty" : "GlennCavarle 6/25/2016 12:53"
+		"title:" : "GlennCavarle 6/23/2016 19:16",
+		"fullscreen:" : "GlennCavarle 10/28/2016 16:01",
+		"initialize" : "GlennCavarle 10/28/2016 14:09",
+		"titleProperty" : "GlennCavarle 10/28/2016 16:02",
+		"maximized" : "GlennCavarle 10/28/2016 16:01"
 	},
 	"class" : { }
 }

@@ -1,3 +1,3 @@
 accessing
 position
-	^ self transform translation
+	^ self positionProperty value

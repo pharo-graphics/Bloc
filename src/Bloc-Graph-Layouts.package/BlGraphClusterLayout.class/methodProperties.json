@@ -1,0 +1,10 @@
+{
+	"instance" : {
+		"initialize" : "AlexandreBergel 1/9/2014 22:18",
+		"doExecute:" : "AliakseiSyrel 5/22/2016 16:40",
+		"draw:" : "JurajKubelka 1/29/2014 17:35",
+		"initializeNode:" : "AliakseiSyrel 5/22/2016 16:40",
+		"computePosition:" : "AliakseiSyrel 5/22/2016 16:39"
+	},
+	"class" : { }
+}

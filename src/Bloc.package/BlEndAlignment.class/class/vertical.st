@@ -1,0 +1,3 @@
+factory
+vertical
+	^ BlVerticalAlignment bottom

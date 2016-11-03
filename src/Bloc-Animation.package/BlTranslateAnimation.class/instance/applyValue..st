@@ -1,3 +1,3 @@
 pulse
 applyValue: aValue
-	self target relocate: aValue
+	self target translateTo: aValue

@@ -5,7 +5,12 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"measurer",
+		"orientation",
+		"horizontalAlignment",
+		"verticalAlignment"
+	],
 	"name" : "BlFlowLayout",
 	"type" : "normal"
 }

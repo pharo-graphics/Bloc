@@ -1,9 +1,15 @@
 {
 	"instance" : {
+		"vertical" : "AliakseiSyrel 10/28/2016 23:39",
 		"ifNotNull:" : "AliakseiSyrel 2/10/2016 00:14",
-		"horizontalTranslationFor:in:" : "StephaneDucasse 3/5/2016 17:51",
-		"verticalTranslationFor:in:" : "StephaneDucasse 3/5/2016 17:51",
-		"ifNull:" : "AliakseiSyrel 2/5/2016 11:59"
+		"leftToRight" : "AliakseiSyrel 10/28/2016 23:40",
+		"ifNull:" : "AliakseiSyrel 2/5/2016 11:59",
+		"horizontal" : "AliakseiSyrel 10/28/2016 23:39",
+		"oriented:" : "AliakseiSyrel 10/28/2016 20:56",
+		"rightToLeft" : "AliakseiSyrel 10/28/2016 23:40",
+		"directed:" : "AliakseiSyrel 10/28/2016 23:40"
 	},
-	"class" : { }
+	"class" : {
+		"initialize" : "AliakseiSyrel 10/28/2016 23:38"
+	}
 }

@@ -1,3 +1,3 @@
 accessing
 add: aKeyBinding
-	self keyBindings add: aKeyBinding
+	keyBindings add: aKeyBinding

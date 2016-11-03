@@ -1,0 +1,3 @@
+testing
+isCheckCanFit
+	^ checkCanFit

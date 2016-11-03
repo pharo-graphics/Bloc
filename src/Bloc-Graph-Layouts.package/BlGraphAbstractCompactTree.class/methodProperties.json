@@ -1,0 +1,26 @@
+{
+	"instance" : {
+		"leftSiblingOf:" : "AliakseiSyrel 5/22/2016 14:33",
+		"draw:withMod:" : "AliakseiSyrel 5/22/2016 14:33",
+		"greedyCycleRemoval:" : "AliakseiSyrel 5/22/2016 14:33",
+		"nodeAbcissaWithNeighbor:" : "AliakseiSyrel 5/22/2016 14:33",
+		"followLeftContour:toLayer:" : "AliakseiSyrel 5/22/2016 14:33",
+		"childrenFor:" : "AliakseiSyrel 5/22/2016 14:33",
+		"initialize" : "AliakseiSyrel 5/22/2016 14:33",
+		"getAbcissaOf:inSubtreeFromLayer:" : "AliakseiSyrel 5/22/2016 14:33",
+		"root:" : "AliakseiSyrel 5/22/2016 14:33",
+		"compareContourOf:with:" : "AliakseiSyrel 5/22/2016 14:33",
+		"doExecute:" : "AliakseiSyrel 5/22/2016 14:33",
+		"followRightContour:toLayer:" : "AliakseiSyrel 5/22/2016 14:33",
+		"coordinate:withMod:" : "AliakseiSyrel 5/22/2016 14:33",
+		"computePosition:" : "AliakseiSyrel 5/22/2016 14:33",
+		"initialize:whoseFatherIs:" : "AliakseiSyrel 5/22/2016 14:33",
+		"initialLayout:" : "AliakseiSyrel 5/22/2016 14:33"
+	},
+	"class" : {
+		"horizontalGap:" : "AliakseiSyrel 5/22/2016 14:33",
+		"horizontalGap:verticalGap:" : "AliakseiSyrel 5/22/2016 14:33",
+		"isAbstract" : "AliakseiSyrel 5/22/2016 19:32",
+		"verticalGap:" : "AliakseiSyrel 5/22/2016 14:33"
+	}
+}

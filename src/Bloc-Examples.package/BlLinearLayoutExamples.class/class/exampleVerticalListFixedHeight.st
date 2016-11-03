@@ -1,29 +1,29 @@
-as yet unclassified
+examples
 exampleVerticalListFixedHeight
-<example>
+	<example>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
-		constraintsDo: [ :c | c hMatchParent  ];
+		constraintsDo: [ :c | c horizontal matchParent ];
 		border: (BlBorder color: Color darkGray width: 4);
-		background: (BlBackground fill: Color red).
-	
+		background: Color red.
+
 	e2 := BlElement new
-		constraintsDo: [ :c | c hMatchParent ];
+		constraintsDo: [ :c | c horizontal matchParent ];
 		border: (BlBorder color: Color black width: 4);
-		background: (BlBackground fill: Color green).
+		background: Color yellow.
 	
 	e3 := BlElement new
-		constraintsDo: [ :c | c hMatchParent ];
+		constraintsDo: [ :c | c horizontal matchParent ];
 		border: (BlBorder color: Color lightGray width: 4);
-		background: (BlBackground fill: Color red).
+		background: Color green.
 	
 	el := BlElement new
 		layout: BlLinearLayout vertical;
 		extent: 80@300;
 		position: 200 @ 100;
 		padding:(BlInsets all: 10);
-		background: (BlBackground fill: Color blue);
+		background: Color blue;
 		addChildren: {e1. e2. e3}.
 	
 	space := BlSpace new.

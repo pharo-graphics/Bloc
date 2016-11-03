@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGraphAbstractCircleLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphCircleLayout",
+	"type" : "normal"
+}

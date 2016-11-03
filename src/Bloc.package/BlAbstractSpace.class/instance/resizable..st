@@ -1,3 +1,4 @@
 accessing
-resizable: anObject
-	self resizableProperty value: anObject
+resizable: aBoolean
+	resizable := aBoolean.
+	self hostSpace ifNotNil: [ :hw | hw resizable: aBoolean ]

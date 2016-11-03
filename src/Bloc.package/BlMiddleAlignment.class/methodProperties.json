@@ -1,7 +1,7 @@
 {
-	"instance" : {
-		"horizontalTranslationFor:in:" : "StephaneDucasse 3/5/2016 17:51",
-		"verticalTranslationFor:in:" : "StephaneDucasse 3/5/2016 17:51"
-	},
-	"class" : { }
+	"instance" : { },
+	"class" : {
+		"vertical" : "AliakseiSyrel 10/28/2016 20:24",
+		"horizontal" : "AliakseiSyrel 10/28/2016 20:46"
+	}
 }

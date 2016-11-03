@@ -1,3 +1,3 @@
 displaying
 hide
-	self hostWindow ifNotNil: [ :hw | hw hide ]
+	self hostSpace ifNotNil: [ :hw | hw hide ]

@@ -1,20 +1,13 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Bloc-Layout-Support",
+	"category" : "Bloc-LLayout-Basic",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"margin",
-		"padding",
 		"vertical",
-		"horizontal",
-		"visibility",
-		"element",
-		"weight",
-		"minExtent",
-		"maxExtent"
+		"horizontal"
 	],
 	"name" : "BlLayoutConstraints",
 	"type" : "normal"

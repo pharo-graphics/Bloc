@@ -1,0 +1,14 @@
+{
+	"instance" : {
+		"with:inject:into:" : "AliakseiSyrel 10/28/2016 22:07",
+		"isRightToLeft" : "AliakseiSyrel 10/28/2016 19:55",
+		"of:" : "AliakseiSyrel 10/28/2016 20:28",
+		"isLeftToRight" : "AliakseiSyrel 10/28/2016 19:55",
+		"with:do:" : "AliakseiSyrel 10/28/2016 22:02"
+	},
+	"class" : {
+		"initialize" : "AliakseiSyrel 10/28/2016 21:15",
+		"rightToLeft" : "AliakseiSyrel 10/28/2016 21:15",
+		"leftToRight" : "AliakseiSyrel 10/28/2016 21:15"
+	}
+}

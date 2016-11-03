@@ -1,4 +1,0 @@
-change reporting
-wrappingChanged
-	self computeExtent
-	

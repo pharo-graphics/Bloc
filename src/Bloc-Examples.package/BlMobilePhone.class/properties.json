@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GlennCavarle 11/2/2016 16:37",
+	"super" : "BlElement",
+	"category" : "Bloc-Examples-MobilePhone",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMobilePhone",
+	"type" : "normal"
+}

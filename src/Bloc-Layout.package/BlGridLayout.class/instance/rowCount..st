@@ -1,3 +1,3 @@
 accessing
 rowCount: aNumber
-	verticalAxis count: aNumber
+	impl rowCount: aNumber

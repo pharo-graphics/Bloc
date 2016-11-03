@@ -1,3 +1,0 @@
-initialize-release
-createDefaultEventHandler
-	^ self subclassResponsibility

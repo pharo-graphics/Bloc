@@ -1,5 +1,6 @@
 pulse
 initStart
-	super initStart.
+	
 	children ifEmpty: [ ^ self ].
-	(children at: currentIndex) initStart
+	(children at: currentIndex) initStart.
+	super initStart.

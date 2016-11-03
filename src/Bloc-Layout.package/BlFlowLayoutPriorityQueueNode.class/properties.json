@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Flow-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"value",
+		"priority",
+		"queueIndex",
+		"insertionIndex"
+	],
+	"name" : "BlFlowLayoutPriorityQueueNode",
+	"type" : "normal"
+}

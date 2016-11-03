@@ -1,3 +1,4 @@
 accessing
 resizable
-	^ self resizableProperty value
+	self hostSpace ifNotNil: [ :hw | ^ hw resizable ].
+	^ resizable

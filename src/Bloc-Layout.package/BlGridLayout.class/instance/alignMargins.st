@@ -1,3 +1,3 @@
-alignment mode
+accessing
 alignMargins
-	self alignmentMode: BlGridAlignmentMode alignMargins
+	alignment := BlGridAlignmentMode alignMargins

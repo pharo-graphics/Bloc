@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLayoutConstraints",
+	"category" : "Bloc-Layout-Linear",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"weight"
+	],
+	"name" : "BlLinearLayoutConstraints",
+	"type" : "normal"
+}

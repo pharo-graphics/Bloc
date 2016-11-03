@@ -20,12 +20,14 @@
 		"bottomLeft" : "GlennCavarle 5/7/2016 01:07"
 	},
 	"class" : {
+		"left:right:" : "GlennCavarle 11/2/2016 15:26",
 		"empty" : "StephaneDucasse 7/25/2016 20:36",
 		"top:right:bottom:left:" : "GlennCavarle 4/25/2016 11:15",
 		"bottom:" : "GlennCavarle 6/30/2016 15:30",
 		"right:" : "GlennCavarle 6/30/2016 15:30",
 		"all:" : "GlennCavarle 4/25/2016 11:15",
 		"left:" : "GlennCavarle 6/30/2016 15:30",
-		"top:" : "GlennCavarle 6/30/2016 15:29"
+		"top:" : "GlennCavarle 6/30/2016 15:29",
+		"top:bottom:" : "GlennCavarle 11/2/2016 15:26"
 	}
 }

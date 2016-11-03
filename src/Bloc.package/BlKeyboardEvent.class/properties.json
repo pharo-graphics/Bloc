@@ -8,7 +8,8 @@
 	"instvars" : [
 		"keyValue",
 		"charCode",
-		"scanCode"
+		"scanCode",
+		"repeat"
 	],
 	"name" : "BlKeyboardEvent",
 	"type" : "normal"

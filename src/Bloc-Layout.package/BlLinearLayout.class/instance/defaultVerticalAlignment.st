@@ -4,4 +4,4 @@ defaultVerticalAlignment
 	so to not deal with nils use null object"
 	<return: #BlNullAlignment>
 	
-	^ BlNullAlignment new
+	^ BlElementAlignment null vertical

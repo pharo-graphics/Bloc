@@ -1,3 +1,4 @@
+[DEPRECATED @see BlPulseService ]
 I am the Bloc main loop.
 I indicate to the Universe that is time to synchronize the state of the elements. 
 

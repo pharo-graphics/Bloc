@@ -1,7 +1,8 @@
 private
 updateTextModelFont
 	self font ifNil: [ ^ self ].
-	(textModel startPosition selectTo: textModel endPosition)
-		applyAttribute: (TxFontAttribute with: self font).
-	layoutView resetLayout.
-	
+	textModel  attributes:
+			{SpFontGenericFamilyAttribute new sansSerif.
+			(SpFontSizeAttribute size: self font pointSize)}
+		from: 1
+		to: textModel size

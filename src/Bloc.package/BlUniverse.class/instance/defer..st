@@ -4,4 +4,5 @@ defer: aValuable
 You can use it to update the GUI states from any other thread.
 The valuable will be evaluated as soon as possible.
 "
-	deferredActions nextPut: aValuable
+	deferredActions nextPut: aValuable.
+	self requestNextPulse

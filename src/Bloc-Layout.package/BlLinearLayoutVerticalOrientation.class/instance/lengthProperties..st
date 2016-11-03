@@ -1,3 +1,3 @@
 orientation
-lengthProperties: anElement
-	^ anElement constraints vertical
+lengthProperties: aChildElement
+	^ aChildElement constraints vertical

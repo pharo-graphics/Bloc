@@ -1,3 +1,3 @@
 pulse
 valueForStep: aDelta
-	^ (to - from) * aDelta + from
+	^ ((to - from) * aDelta + from)

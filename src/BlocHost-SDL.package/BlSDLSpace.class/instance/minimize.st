@@ -1,0 +1,4 @@
+displaying
+minimize
+
+	sdlWindow minimize.

@@ -8,6 +8,3 @@ initialize
 	nextPulseRequested :=true.
 	spaceManager := BlSpaceManager new.
 	animationManager := BlAnimationManager new.
-	self addPulseListener: animationManager.
-	self addPulseListener: spaceManager.
-	

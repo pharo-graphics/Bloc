@@ -1,8 +1,8 @@
 window managing
 createSpaceWindow: aSpace
-	self assert: aSpace hostWindow isNil.
+	self assert: aSpace hostSpace isNil.
 	self start.
-	 self host createWindowFor: aSpace.
+	self host createHostSpaceFor: aSpace.
 	self spaceManager addSpace: aSpace.
-	aSpace hostWindow open.
+	aSpace hostSpace open.
 	

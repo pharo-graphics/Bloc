@@ -6,9 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"text",
+		"wrapAttribute",
 		"font",
-		"txtExtentsCache",
 		"layoutView",
 		"wrappingWidth",
 		"textModel",

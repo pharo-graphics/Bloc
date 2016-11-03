@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"fullDrawOnSpartaCanvas:" : "GlennCavarle 11/2/2016 00:06",
+		"drawPathOnSpartaCanvas:" : "AliakseiSyrel 10/20/2016 21:06",
+		"drawChildrenOnSpartaCanvas:" : "AliakseiSyrel 8/13/2016 23:02",
+		"drawOnSpartaCanvas:" : "GlennCavarle 10/12/2016 15:31",
+		"applyEffectOnSpartaCanvas:for:around:" : "GlennCavarle 10/12/2016 15:44",
+		"asSpartaForm" : "AliakseiSyrel 10/23/2016 16:30",
+		"gtInspectorPreviewIn:" : "AliakseiSyrel 8/18/2016 22:03",
+		"gtInspectorSubelementsIn:" : "AliakseiSyrel 10/23/2016 19:42"
+	},
+	"class" : { }
+}

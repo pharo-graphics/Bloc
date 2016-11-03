@@ -1,5 +1,5 @@
 private
 updateTextModelFill
 	self fill ifNil:[^ self].
-	(textModel startPosition selectTo: textModel endPosition)
-		applyAttribute: (TxForeColorAttribute with: self fill color)
+	textModel  attributes: {SpForegroundColorAttribute color: self fill color } from: 1 to: textModel size
+		

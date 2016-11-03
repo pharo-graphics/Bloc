@@ -1,3 +1,4 @@
 accessing
-borderless: anObject
-	self borderlessProperty value: anObject
+borderless: aBoolean
+	borderless := aBoolean.
+	 self hostSpace ifNotNil: [ :hw | hw borderless: aBoolean ].

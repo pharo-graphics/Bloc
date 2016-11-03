@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlNullAlignment",
+	"category" : "Bloc-LLayout-Support",
+	"classinstvars" : [
+		"rightToLeft",
+		"leftToRight"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlNullHorizontalAlignment",
+	"type" : "normal"
+}

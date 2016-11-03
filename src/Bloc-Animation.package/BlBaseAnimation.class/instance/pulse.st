@@ -2,7 +2,7 @@ pulse
 pulse
 	BlUniverse default requestNextPulse.
 	
-	elapsedTime := Time millisecondClockValue - (startTime + delay).
+	elapsedTime := self computeElapsedTime.
 	progress := elapsedTime / duration.
 	(Time millisecondClockValue < (startTime + delay)) ifTrue: [].
 	progress >= 1 ifTrue:[

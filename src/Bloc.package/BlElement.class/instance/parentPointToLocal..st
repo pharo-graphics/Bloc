@@ -1,3 +1,3 @@
 geometry position convertion
 parentPointToLocal: aPoint
-	^ self transform globalPointToLocal: aPoint 
+	^ aPoint translateBy: self position negated.

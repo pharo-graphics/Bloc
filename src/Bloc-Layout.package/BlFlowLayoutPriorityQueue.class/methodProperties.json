@@ -1,0 +1,21 @@
+{
+	"instance" : {
+		"swap:and:" : "AliakseiSyrel 10/31/2016 22:34",
+		"top" : "AliakseiSyrel 11/1/2016 00:00",
+		"cascadeUp:" : "AliakseiSyrel 10/31/2016 23:58",
+		"hasHigherPriority:than:" : "AliakseiSyrel 10/31/2016 23:02",
+		"priorityBlock:" : "AliakseiSyrel 10/31/2016 23:17",
+		"initialize" : "AliakseiSyrel 10/31/2016 23:18",
+		"dequeue" : "AliakseiSyrel 10/31/2016 23:58",
+		"asDictionary" : "AliakseiSyrel 10/31/2016 23:26",
+		"remove:" : "AliakseiSyrel 10/31/2016 23:48",
+		"enqueue:" : "AliakseiSyrel 10/31/2016 23:42",
+		"size" : "AliakseiSyrel 10/31/2016 22:31",
+		"gtInspectorItemsIn:" : "AliakseiSyrel 10/31/2016 23:22",
+		"cascadeDown:" : "AliakseiSyrel 10/31/2016 23:59",
+		"nodeUpdated:" : "AliakseiSyrel 10/31/2016 23:49"
+	},
+	"class" : {
+		"priority:" : "AliakseiSyrel 10/31/2016 23:17"
+	}
+}

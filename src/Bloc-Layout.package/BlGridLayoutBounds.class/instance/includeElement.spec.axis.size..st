@@ -1,8 +1,14 @@
 accessing
 includeElement: anElement spec: aSpec axis: anAxis size: size
-	|isHorizontal alignment newBefore|
+	| alignment newBefore newAfter |
 	flexibility := flexibility and: aSpec flexibility.
-	isHorizontal := anAxis horizontal.
-	alignment := aSpec absoluteAlignment: isHorizontal.
+	alignment := aSpec absoluteAlignment: anAxis horizontal.
 	newBefore := alignment alignmentValue: anElement viewSize: size.
-	self includeBefore: newBefore after: size - newBefore
+	newAfter := size - newBefore.
+	
+	before < newBefore
+		ifTrue: [	 before := newBefore ].
+	after < newAfter
+		ifTrue: [ after := newAfter ].
+		
+	self includeBefore: newBefore after: newAfter

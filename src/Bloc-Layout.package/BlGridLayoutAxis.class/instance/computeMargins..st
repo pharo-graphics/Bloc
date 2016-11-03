@@ -6,13 +6,13 @@ computeMargins: isLeading
 		ifTrue: [ leadingMargins ]
 		ifFalse: [ trailingMargins ].
 
-	self element managedChildrenDo: [ :child |
+	self element managedChildren withIndexDo: [ :child :anIndex |
 		child visibility shouldLayout ifTrue: [ 
 			| spec span index margin |
-			spec := self specOf: child.
+			spec := (childConstraints at: anIndex) spec.
 			span := spec span.
 			index := isLeading
 				ifTrue: [ span first ]
 				ifFalse: [ span last ].
-			margin := (margins at: index) max: (self element layout measurer marginOf: child isHorizontal: self horizontal isLeading: isLeading).
+			margin := (margins at: index) max: (self layout measurer marginOf: child isHorizontal: self horizontal isLeading: isLeading).
 			margins at: index put: margin ] ]

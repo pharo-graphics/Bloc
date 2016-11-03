@@ -1,3 +1,3 @@
 testing
 isEmpty
-	^ textModel isEmpty
+	^ textModel size = 0

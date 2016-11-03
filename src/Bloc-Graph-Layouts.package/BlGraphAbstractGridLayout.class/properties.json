@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGraphLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"gapSize",
+		"lineItemsCountBlock"
+	],
+	"name" : "BlGraphAbstractGridLayout",
+	"type" : "normal"
+}

@@ -1,5 +1,5 @@
 initialization
 initialize
 	super initialize.
-	hashKey := 2r0000
+	hashKey := 2r000000
 	

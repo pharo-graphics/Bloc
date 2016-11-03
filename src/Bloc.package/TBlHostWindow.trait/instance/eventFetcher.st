@@ -1,3 +1,0 @@
-events
-eventFetcher
-	self subclassResponsibility

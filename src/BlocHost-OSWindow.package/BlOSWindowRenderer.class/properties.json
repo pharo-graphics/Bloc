@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "TBlWindowRenderer classTrait",
+	"classtraitcomposition" : "TBlHostRenderer classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"renderer",
@@ -9,7 +9,7 @@
 	"name" : "BlOSWindowRenderer",
 	"commentStamp" : "",
 	"super" : "Object",
-	"traitcomposition" : "TBlWindowRenderer",
+	"traitcomposition" : "TBlHostRenderer",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

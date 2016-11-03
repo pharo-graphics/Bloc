@@ -1,2 +1,3 @@
 I am the abstract class for a Host.
-I define an environment that can be used to provide windows and rendering. As an example, the OSWindowHost provides native SDL windows and an SDL surface.
+I define an environment that can be used to provide actual screen spaces and rendering.
+An Host can be compared to a driver that communicate with native multimedia API.

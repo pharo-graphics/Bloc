@@ -1,0 +1,15 @@
+{
+	"classtraitcomposition" : "TBlLayoutBuilderComposite classTrait + TBlLayoutBuilderNode classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"nodes"
+	],
+	"name" : "BlLayoutBuilder",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlLayoutBuilderComposite + TBlLayoutBuilderNode",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Sparta-Text"
+}

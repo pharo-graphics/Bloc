@@ -4,9 +4,7 @@ initialize
 	fill := self defaultFill. 
 	stroke := self defaultStroke.
 	wrappingWidth := 0.
-	layoutView := TxAthensLayoutView new.
-	layoutView container: self.
-	textModel := '' asTxModel.
-	layoutView initWithPosition: textModel startPosition extent: self extent. 
-	layoutView layoutStrategy: TxAthensNoWrapStrategy new.
+	textModel := SpText fromString:''.
+	wrapAttribute := SpTextWrapAttribute new none.
+	textModel attributes: { wrapAttribute } from: 1 to: textModel size.
 	

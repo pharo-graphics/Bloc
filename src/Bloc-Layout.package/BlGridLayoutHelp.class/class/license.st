@@ -1,8 +1,7 @@
 pages
 license
 	"This method was automatically generated."
-	<script: 'self edit: #license'>
-	^HelpTopic
+	^ HelpTopic
 		title: 'License'
 		contents: 
 'Copyright (C) 2011 The Android Open Source Project

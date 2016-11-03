@@ -1,0 +1,30 @@
+{
+	"instance" : {
+		"orientation" : "AliakseiSyrel 10/29/2016 18:52",
+		"maxLength" : "AliakseiSyrel 10/29/2016 20:19",
+		"initialize" : "AliakseiSyrel 10/29/2016 18:05",
+		"measure:with:" : "AliakseiSyrel 10/31/2016 21:46",
+		"layout:" : "AliakseiSyrel 10/29/2016 18:44",
+		"measureLine:" : "AliakseiSyrel 10/29/2016 18:38",
+		"lengthMode" : "AliakseiSyrel 10/29/2016 20:17",
+		"calculatePositions:" : "AliakseiSyrel 11/1/2016 17:31",
+		"isCheckCanFit" : "AliakseiSyrel 10/29/2016 20:16",
+		"maxBreadth" : "AliakseiSyrel 10/29/2016 20:17",
+		"maxWidth" : "AliakseiSyrel 10/29/2016 20:06",
+		"beHorizontal" : "AliakseiSyrel 10/29/2016 18:53",
+		"fillLines:with:" : "AliakseiSyrel 11/1/2016 20:29",
+		"widthMode" : "AliakseiSyrel 10/29/2016 20:06",
+		"heightMode" : "AliakseiSyrel 10/29/2016 20:06",
+		"size:max:for:" : "AliakseiSyrel 10/29/2016 18:30",
+		"direction" : "AliakseiSyrel 10/29/2016 20:23",
+		"alignLines:within:" : "AliakseiSyrel 10/31/2016 11:34",
+		"beVertical" : "AliakseiSyrel 10/29/2016 18:53",
+		"layout:in:" : "AliakseiSyrel 10/29/2016 18:52",
+		"alignLine:" : "AliakseiSyrel 11/1/2016 19:04",
+		"maxHeight" : "AliakseiSyrel 10/29/2016 20:06",
+		"breadthMode" : "AliakseiSyrel 10/29/2016 20:17"
+	},
+	"class" : {
+		"for:" : "AliakseiSyrel 10/29/2016 19:01"
+	}
+}

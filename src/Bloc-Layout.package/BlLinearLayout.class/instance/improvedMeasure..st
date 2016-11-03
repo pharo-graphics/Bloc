@@ -8,18 +8,19 @@ improvedMeasure: anElement
 		ifFalse: [ self cache totalWeight ].
 	"because we perform improved measurement we need to recalculate totalLength"
 	self cache totalLength: 0.
-	
+
 	anElement managedChildrenDo: [ :child |
-		| marginBreadth marginLength measuredBreadth childMatchBreadth |
+		| marginBreadth marginLength measuredBreadth childMatchBreadth childConstraints |
+		childConstraints := child constraints linear.
 		marginBreadth := self orientation marginBreadth: child.
 		marginLength := self orientation marginLength: child.
 		"improve children that match parent along length axis"
 		(self orientation lengthProperties: child) resizer isMatchParent ifTrue: [ 
-			| sharedLength childBreadthSpec|
+			| sharedLength childBreadthSpec |
 			"compute child's length it takes depending on weight"
-			sharedLength := (child constraints weight * deltaLength / currentWeightSum) asFloat.
+			sharedLength := (childConstraints weight * deltaLength / currentWeightSum) asFloat.
 			"reduce current weight and delta length for the next iteration"
-			currentWeightSum := currentWeightSum - child constraints weight.
+			currentWeightSum := currentWeightSum - childConstraints weight.
 			deltaLength := deltaLength - sharedLength.
 			"take child's margin into account and check against negative values"
 			sharedLength := (sharedLength - marginLength) max: 0.

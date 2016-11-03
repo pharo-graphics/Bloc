@@ -1,0 +1,18 @@
+{
+	"instance" : {
+		"defaultPulsePeriod" : "GlennCavarle 10/13/2016 09:55",
+		"loopProcess" : "GlennCavarle 10/13/2016 10:24",
+		"tearDown" : "GlennCavarle 10/13/2016 09:54",
+		"timeIsUp" : "GlennCavarle 10/13/2016 09:56",
+		"wait" : "GlennCavarle 10/13/2016 09:57",
+		"kill" : "GlennCavarle 10/20/2016 15:56",
+		"pulseEvent" : "GlennCavarle 10/13/2016 09:55",
+		"name" : "GlennCavarle 10/13/2016 09:55",
+		"pulsePeriod:" : "GlennCavarle 10/13/2016 10:02",
+		"lastElpasedTime" : "GlennCavarle 10/13/2016 09:55",
+		"pulsePeriod" : "GlennCavarle 10/13/2016 10:02",
+		"stepService" : "GlennCavarle 10/13/2016 09:56",
+		"setUp" : "GlennCavarle 10/13/2016 10:01"
+	},
+	"class" : { }
+}

@@ -6,4 +6,5 @@ initialize
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
 	cache := self defaultCache.
-	self orientation: self defaultOrientation
+	
+	self orientation: self defaultOrientation.

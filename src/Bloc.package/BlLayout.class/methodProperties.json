@@ -3,18 +3,23 @@
 		"previousMeasurementSpec" : "AliakseiSyrel 4/5/2016 11:18",
 		"measuredExtent:" : "AliakseiSyrel 4/5/2016 11:18",
 		"measureChildWithMargins:parentSpec:widthUsed:heightUsed:" : "GlennCavarle 8/2/2016 23:21",
-		"measurementSpecFor:usedSize:resizer:" : "AliakseiSyrel 5/20/2016 14:47",
-		"requestingLayout" : "AliakseiSyrel 2/13/2016 17:19",
+		"leftToRight" : "AliakseiSyrel 10/28/2016 22:04",
+		"direction:" : "AliakseiSyrel 10/28/2016 22:04",
 		"measureChildWithMargins:parentSpec:" : "AliakseiSyrel 5/20/2016 14:37",
-		"initialize" : "AliakseiSyrel 4/5/2016 11:22",
+		"measurementSpecFor:usedSize:resizer:" : "AliakseiSyrel 5/20/2016 14:47",
+		"initialize" : "AliakseiSyrel 10/28/2016 22:04",
+		"requestingLayout" : "AliakseiSyrel 2/13/2016 17:19",
 		"measureChild:parentSpec:widthUsed:heightUsed:" : "AliakseiSyrel 5/20/2016 13:07",
 		"measuredExtent" : "AliakseiSyrel 4/5/2016 11:18",
 		"measure:with:" : "GlennCavarle 8/2/2016 23:20",
+		"direction" : "AliakseiSyrel 10/28/2016 22:04",
+		"defaultDirection" : "AliakseiSyrel 10/28/2016 22:03",
 		"requestingLayout:" : "AliakseiSyrel 2/13/2016 17:19",
-		"detachedFrom:" : "AliakseiSyrel 5/23/2016 17:35",
+		"rightToLeft" : "AliakseiSyrel 10/28/2016 22:04",
 		"layout:in:" : "AliakseiSyrel 1/30/2016 17:22",
-		"previousMeasurementSpec:" : "AliakseiSyrel 4/5/2016 11:18",
-		"attachedTo:" : "AliakseiSyrel 5/23/2016 17:34"
+		"previousMeasurementSpec:" : "AliakseiSyrel 4/5/2016 11:18"
 	},
-	"class" : { }
+	"class" : {
+		"constraints" : "AliakseiSyrel 10/25/2016 08:36"
+	}
 }

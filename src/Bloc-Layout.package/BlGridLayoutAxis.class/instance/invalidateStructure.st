@@ -15,4 +15,14 @@ invalidateStructure
 	deltas := nil.
 	hasWeightsValid := false.
 
-	self invalidateValues
+	self invalidateValues.
+	
+	element ifNil: [ ^ self ].
+	
+	childConstraints := self element managedChildren collect: [ :child |
+		self horizontal
+			ifTrue: [ child constraints grid horizontal ]
+			ifFalse: [ child constraints grid vertical ] ].
+		
+	"totalMargins := self element managedChildren collect: [ :child |
+			self layout measurer totalMarginOf: child isHorizontal: self horizontal ]."

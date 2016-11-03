@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Bloc-Layout-Linear",
+	"category" : "Bloc-Layout-Linear-Utilities",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

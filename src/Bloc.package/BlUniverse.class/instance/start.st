@@ -1,3 +1,6 @@
 life cycle
 start
-	self pulseLoop start.
+	self host start.
+	self pulseLoop isRunning not
+		ifTrue: [ self pulseLoop launch ].
+	

@@ -1,0 +1,3 @@
+accessing
+cellSpacing
+	^ layout cellSpacing

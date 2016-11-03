@@ -1,31 +1,37 @@
-as yet unclassified
+examples
 example1
 <example>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
-		constraintsDo: [ :c | c vhMatchParent ];
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent ];
 		border: (BlBorder color: Color darkGray width: 4);
-		background: (BlBackground fill: Color red).
+		background: Color yellow.
 	
 	e2 := BlElement new
 		extent: 200@200;
-		constraintsDo: [ :c | c alignBottomRight ];
+		constraintsDo: [ :c |
+			c frame horizontal alignRight.
+			c frame vertical alignBottom ];
 		border: (BlBorder color: Color black width: 4);
-		background: (BlBackground fill: Color green).
+		background: Color green.
 	
 	e3 := BlElement new
 		extent: 100@100;
-		constraintsDo: [ :c| c alignCenter];
+		constraintsDo: [ :c|
+			c frame horizontal alignCenter.
+			c frame vertical alignCenter ];
 		border: (BlBorder color: Color lightGray width: 4);
-		background: (BlBackground fill: Color red).
+		background: Color red.
 	
 	el := BlElement new
 		layout: BlFrameLayout new;
-		extent: 300@300;
+		extent: 350@350;
 		position: 200 @ 100;
-		padding:(BlInsets all: 10);
-		background: (BlBackground fill: Color blue);
+		padding: (BlInsets all: 10);
+		background: Color blue;
 		addChildren: {e1. e2. e3}.
 	
 	space := BlSpace new.

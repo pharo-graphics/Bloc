@@ -6,7 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"keyBindings"
+		"keyBindings",
+		"keyCombinations",
+		"pendingCombinations"
 	],
 	"name" : "BlKeyBindingRegistry",
 	"type" : "normal"

@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 virtualScreenPositionForEvent: anEvent
 	^ anEvent screenPosition

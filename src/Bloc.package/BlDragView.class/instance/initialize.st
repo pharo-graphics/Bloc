@@ -1,4 +1,4 @@
-as yet unclassified
+initialization
 initialize
 	super initialize.
 	self border: (BlBorder color: Color veryLightGray width: 1).

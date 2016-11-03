@@ -1,8 +1,15 @@
 {
 	"commentStamp" : "AliakseiSyrel 2/5/2016 11:42",
 	"super" : "Object",
-	"category" : "Bloc-Layout-Support",
-	"classinstvars" : [ ],
+	"category" : "Bloc-LLayout-Support",
+	"classinstvars" : [
+		"end",
+		"horizontal",
+		"middle",
+		"null",
+		"start",
+		"vertical"
+	],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],

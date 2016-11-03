@@ -1,0 +1,3 @@
+testing
+isRightToLeft
+	^ self subclassResponsibility

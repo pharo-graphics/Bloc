@@ -8,14 +8,14 @@ cellSpacingOf: aChildElement isHorizontal: isHorizontal isLeading: isLeading
 
 	| spec axis span isAtEdge |
 	spec := isHorizontal
-		ifTrue: [ aChildElement constraints horizontal spec ]
-		ifFalse: [ aChildElement constraints vertical spec ].
+		ifTrue: [ aChildElement constraints grid horizontal spec ]
+		ifFalse: [ aChildElement constraints grid vertical spec ].
 
 	axis := self layout axis: isHorizontal.
 	span := spec span.
-
+	
 	isAtEdge := isLeading
 		ifTrue: [ span first = 1 ]
-		ifFalse: [ span last = (axis count + 1) ].
+		ifFalse: [ span last = axis count ].
 
 	^ self layout cellSpacingOf: aChildElement isAtEdge: isAtEdge isHorizontal: isHorizontal isLeading: isLeading

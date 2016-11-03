@@ -1,11 +1,17 @@
 {
 	"instance" : { },
 	"class" : {
-		"exampleVerticalList" : "GlenCavarle 8/7/2016 14:54",
-		"exampleVerticalListFixedHeight" : "GlenCavarle 8/7/2016 14:54",
-		"exampleHorizontalListFixedWidth" : "GlenCavarle 8/7/2016 14:54",
-		"exampleHorizontalList" : "GlenCavarle 8/7/2016 14:54",
-		"exampleHorizontalUsingWeight" : "GlenCavarle 8/7/2016 14:54",
-		"exampleHorizontalTopCenterBottom" : "GlenCavarle 8/7/2016 14:54"
+		"exampleHorizontalTopCenterBottomRTL" : "AliakseiSyrel 10/29/2016 00:16",
+		"exampleVerticalListFixedHeight" : "AliakseiSyrel 10/29/2016 00:19",
+		"exampleHorizontalTopCenterBottomLTR" : "AliakseiSyrel 10/29/2016 00:16",
+		"exampleHorizontalListFixedWidthRTL" : "AliakseiSyrel 10/29/2016 14:05",
+		"exampleVerticalList" : "AliakseiSyrel 10/26/2016 19:58",
+		"exampleHorizontalListFixedWidthLTR" : "AliakseiSyrel 10/29/2016 14:05",
+		"exampleHorizontalListLTR" : "AliakseiSyrel 10/28/2016 22:15",
+		"exampleHorizontalListRTL" : "AliakseiSyrel 10/28/2016 22:41",
+		"exampleHorizontalUsingWeightLTR" : "AliakseiSyrel 10/29/2016 00:18",
+		"exampleVerticalLeftCenterRightLRT" : "AliakseiSyrel 10/29/2016 00:10",
+		"exampleHorizontalUsingWeightRTL" : "AliakseiSyrel 10/29/2016 00:18",
+		"exampleVerticalLeftCenterRightRTL" : "AliakseiSyrel 10/29/2016 00:10"
 	}
 }

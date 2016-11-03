@@ -1,0 +1,21 @@
+{
+	"classtraitcomposition" : "TBlHostSpace classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"renderer",
+		"sdlWindow",
+		"eventQueue",
+		"iconSurface",
+		"currentCursor"
+	],
+	"name" : "BlSDLSpace",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlHostSpace",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"SDL2Constants"
+	],
+	"category" : "BlocHost-SDL"
+}

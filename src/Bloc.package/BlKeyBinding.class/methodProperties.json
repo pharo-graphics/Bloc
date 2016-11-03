@@ -1,19 +1,17 @@
 {
 	"instance" : {
-		"shift" : "GlennCavarle 7/21/2016 01:25",
-		"cmd" : "GlennCavarle 7/21/2016 01:25",
-		"char:" : "GlennCavarle 7/21/2016 00:54",
-		"charCode:" : "GlennCavarle 7/21/2016 00:42",
-		"initialize" : "GlennCavarle 7/21/2016 02:14",
-		"action" : "GlennCavarle 7/21/2016 00:42",
-		"ctrl" : "GlennCavarle 7/21/2016 01:25",
-		"modifiers" : "GlennCavarle 7/21/2016 02:14",
-		"alt" : "GlennCavarle 7/21/2016 01:25",
-		"action:" : "GlennCavarle 7/21/2016 00:42",
-		"charCode" : "GlennCavarle 7/21/2016 00:42",
-		"modifiers:" : "GlennCavarle 7/21/2016 01:24"
+		"match:" : "GlennCavarle 10/29/2016 17:34",
+		"shift" : "GlennCavarle 10/29/2016 17:34",
+		"cmd" : "GlennCavarle 10/29/2016 17:34",
+		"char:" : "GlennCavarle 10/29/2016 17:34",
+		"charCode:" : "GlennCavarle 10/29/2016 17:34",
+		"initialize" : "GlennCavarle 10/29/2016 17:38",
+		"printOn:" : "GlennCavarle 10/29/2016 17:34",
+		"ctrl" : "GlennCavarle 10/29/2016 17:34",
+		"modifiers" : "GlennCavarle 10/29/2016 17:34",
+		"alt" : "GlennCavarle 10/29/2016 17:34",
+		"charCode" : "GlennCavarle 10/29/2016 17:34",
+		"modifiers:" : "GlennCavarle 10/29/2016 17:34"
 	},
-	"class" : {
-		"char:action:" : "GlennCavarle 7/21/2016 00:45"
-	}
+	"class" : { }
 }

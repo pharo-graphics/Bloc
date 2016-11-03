@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGraphLayoutTranslator",
+	"category" : "Bloc-Graph-Layouts-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphDirectLayoutTranslator",
+	"type" : "normal"
+}

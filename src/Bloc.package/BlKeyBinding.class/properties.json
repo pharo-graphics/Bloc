@@ -7,7 +7,6 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"charCode",
-		"action",
 		"modifiers"
 	],
 	"name" : "BlKeyBinding",

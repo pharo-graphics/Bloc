@@ -1,3 +1,4 @@
 accessing
 extent
-	^ self extentProperty value
+	self hostSpace ifNotNil: [ :hw | ^ hw extent ].
+	^ extent

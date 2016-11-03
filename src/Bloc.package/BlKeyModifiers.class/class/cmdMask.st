@@ -1,3 +1,3 @@
 as yet unclassified
 cmdMask
-	^ 2r1000
+	^ 2r001000

@@ -8,13 +8,10 @@
 	],
 	"classvars" : [ ],
 	"instvars" : [
-		"horizontalAxis",
-		"verticalAxis",
-		"alignmentMode",
+		"impl",
+		"cellSpacing",
 		"orientation",
-		"lastLayoutParamsHashCode",
-		"measurer",
-		"cellSpacing"
+		"alignment"
 	],
 	"name" : "BlGridLayout",
 	"type" : "normal"

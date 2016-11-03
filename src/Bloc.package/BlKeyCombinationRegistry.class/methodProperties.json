@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"pendingCombinations" : "GlennCavarle 10/29/2016 16:30",
+		"keyCombinations:" : "GlennCavarle 10/29/2016 16:30",
+		"initialize" : "GlennCavarle 10/29/2016 16:30",
+		"keyCombinations" : "GlennCavarle 10/29/2016 16:30",
+		"add:" : "GlennCavarle 10/29/2016 16:30",
+		"processEvent:" : "GlennCavarle 10/29/2016 16:30",
+		"addAll:" : "GlennCavarle 10/29/2016 16:30",
+		"remove:" : "GlennCavarle 10/29/2016 16:30"
+	},
+	"class" : { }
+}

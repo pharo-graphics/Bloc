@@ -1,3 +1,0 @@
-drawing
-contentExtent
-	^ window extent

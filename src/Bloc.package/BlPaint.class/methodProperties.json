@@ -1,13 +1,11 @@
 {
 	"instance" : {
-		"asFillOn:" : "GlennCavarle 4/28/2016 02:13",
-		"origin" : "GlennCavarle 1/22/2016 16:23",
-		"asBlBackground" : "GlennCavarle 6/25/2016 12:54",
 		"origin:" : "GlennCavarle 1/22/2016 16:23",
+		"asBlBackground" : "GlennCavarle 6/25/2016 12:54",
 		"asBlPaint" : "GlennCavarle 6/25/2016 12:54",
 		"isTransparent" : "GlennCavarle 1/22/2016 16:24",
 		"asBlStrokePaint" : "GlennCavarle 6/25/2016 12:54",
-		"asAthensPaintOn:" : "GlennCavarle 1/22/2016 16:22"
+		"origin" : "GlennCavarle 1/22/2016 16:23"
 	},
 	"class" : { }
 }

@@ -1,3 +1,3 @@
 as yet unclassified
 computeDuration
-	duration := self children max: [ :each | each duration + each delay ]
+	duration := self childrenMaxValue: [ :each | each duration + each delay ] default: 0

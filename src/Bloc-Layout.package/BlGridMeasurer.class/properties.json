@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"element"
+		"element",
+		"layout"
 	],
 	"name" : "BlGridMeasurer",
 	"type" : "normal"

@@ -1,3 +1,3 @@
 as yet unclassified
 txBounds
-	^ (self owner  localBoundsToGlobal: self owner geomBounds) 
+	^ (self owner transform localBoundsToGlobal: self owner geomBounds)

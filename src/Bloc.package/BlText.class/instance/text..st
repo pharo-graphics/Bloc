@@ -1,10 +1,7 @@
 accessing
 text: aString
-	
-	textModel := aString asTxModel.
+	textModel initializeWith: (SpRope fromCollection: aString).
 	self updateTextModel.
-	
-	layoutView
-		initWithStrategy: layoutView layoutStrategy
-		position: textModel startPosition
-		extent: 100 @ 100
+	textModel attributes: { wrapAttribute } from: 1 to: textModel size.
+	self computeExtent.
+	self invalidate.

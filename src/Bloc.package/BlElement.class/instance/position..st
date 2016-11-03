@@ -1,9 +1,8 @@
 accessing
 position: aPoint
-	| delta |
-	delta := (aPoint - self position) asPoint asIntegerPoint.
-	delta isZero ifTrue: [ ^ self ].
+	
+	self position = aPoint ifTrue:[^ self].
 	self invalidate.
-	self transform translation: self position + delta asPoint.
+	self positionProperty value: aPoint asIntegerPoint.
 	self notifyPositionChanged.
 	self changed.

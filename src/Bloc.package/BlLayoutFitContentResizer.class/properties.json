@@ -1,8 +1,10 @@
 {
 	"commentStamp" : "",
 	"super" : "BlLayoutResizer",
-	"category" : "Bloc-Layout-Support",
-	"classinstvars" : [ ],
+	"category" : "Bloc-LLayout-Support",
+	"classinstvars" : [
+		"uniqueInstance"
+	],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],

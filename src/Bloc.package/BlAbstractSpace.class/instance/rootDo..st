@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 rootDo: aBlock
 	aBlock value: self root

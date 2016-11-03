@@ -10,6 +10,7 @@ matchesStyleable: aNode pseudoClassStates: aPseudoClassStateList selectorIndex: 
 		ifTrue: [ ^ true ].	"no more selectors, so it matches"
 	relation := relationships at: aSelectorIndex - 1.
 	parent := aNode parent.
+	parent ifNil:[^ false].
 	relation isChild
 		ifTrue: [ ^ self matchesStyleable: parent pseudoClassStates: aPseudoClassStateList allButLast selectorIndex: aSelectorIndex - 1 ].
 	relation isDescendant

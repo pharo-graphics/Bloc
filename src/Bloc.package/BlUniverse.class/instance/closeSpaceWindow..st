@@ -1,6 +1,6 @@
 window managing
 closeSpaceWindow: aSpace
-	self assert: aSpace hostWindow isNotNil.
-	aSpace hostWindow close.
+	self assert: aSpace hostSpace isNotNil.
+	aSpace hostSpace close.
 	self spaceManager removeSpace: aSpace.
 	

@@ -1,4 +1,4 @@
 initialization
 initialize
 	super initialize.
-	scaleToX := scaleToY := 0
+	scaleToX := scaleToY := 1

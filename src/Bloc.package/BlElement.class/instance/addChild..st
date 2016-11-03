@@ -12,4 +12,4 @@ addChild: anElement
 	"send hook after element has been added"
 	anElement notifyAddedInParent.
 	"finally requesting children changed"
-	self managedChildrenChanged
+	self managedChildrenChanged.

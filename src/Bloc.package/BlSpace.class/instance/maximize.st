@@ -1,3 +1,3 @@
 displaying
 maximize
-	self hostWindow ifNotNil: [ :hw | hw maximize ]
+	self hostSpace ifNotNil: [ :hw | hw maximize ]

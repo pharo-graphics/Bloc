@@ -8,7 +8,7 @@ layout: anElement in: aRectangle
 	left := anElement insets left. 
 	right := left.
 	bottom := top.
-	
+
 	anElement managedChildrenDo: [ :child | 
 		right := right max: child measuredWidth + (child outsets width max: 0).
 		bottom := bottom + child measuredHeight + (child outsets height max: 0) ].
@@ -16,31 +16,34 @@ layout: anElement in: aRectangle
 	majorBounds := (left@top corner: right@bottom).
 	elementInnerBounds := anElement innerBounds.
 	majorBounds = elementInnerBounds ifFalse: [
-		|x y|
-		x := self layout horizontalAlignment horizontalTranslationFor: majorBounds in: elementInnerBounds.
-		y := self layout verticalAlignment verticalTranslationFor: majorBounds in: elementInnerBounds.
-		majorBounds := majorBounds translateBy: x@y ].
+		| translation |
+		translation := self layout verticalAlignment translate: majorBounds in: elementInnerBounds.
+		majorBounds := majorBounds translateBy: translation ].
 
 	right := majorBounds right.
 	bottom := majorBounds bottom.
 	left := majorBounds left.
 	top := majorBounds top.
-	
+
 	anElement managedChildren
 		inject: left @ top
 		into: [ :origin :child |
-			| childBounds |
+			| childBounds childConstraints |
+			childConstraints := child constraints linear.
 			childBounds := origin + (child outsets topLeft max: 0@0) extent: child measuredExtent.
+			
 			self layout horizontalAlignment ifNotNull: [ 
-				| x allowedBounds |
+				| translation allowedBounds |
 				allowedBounds := origin extent: (right - left) @ child measuredHeight.
-				x := self layout horizontalAlignment horizontalTranslationFor: childBounds in: allowedBounds.
-				childBounds := childBounds translateBy: x@0 ].
+				translation := (self layout horizontalAlignment directed: self layout direction) translate: childBounds in: allowedBounds.
+				childBounds := childBounds translateBy: translation ].
+
 			self layout horizontalAlignment ifNull: [ 
-				| x allowedBounds |
+				| translation allowedBounds |
 				allowedBounds := origin extent: elementInnerBounds width @ child measuredHeight.
-				x := child constraints horizontal alignment horizontalTranslationFor: childBounds in: allowedBounds.
-				childBounds := childBounds translateBy: x@0 ].
+				translation := (childConstraints horizontal alignment directed: self layout direction) translate: childBounds in: allowedBounds.
+				childBounds := childBounds translateBy: translation ].
+			
 			"telling each subnode what bounds to use for layouting process.
 			Because measuring process does not modify actual extent
 			we need to use a measured one"

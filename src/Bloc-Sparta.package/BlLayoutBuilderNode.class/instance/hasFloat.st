@@ -1,0 +1,3 @@
+testing
+hasFloat
+	^ float isNotNil

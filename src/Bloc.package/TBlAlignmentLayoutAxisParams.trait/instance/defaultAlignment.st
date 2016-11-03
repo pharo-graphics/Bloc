@@ -1,3 +1,0 @@
-initialization
-defaultAlignment
-	^ BlNullAlignment new

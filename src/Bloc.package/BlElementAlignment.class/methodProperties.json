@@ -1,11 +1,24 @@
 {
 	"instance" : {
 		"ifNotNull:" : "AliakseiSyrel 2/10/2016 00:14",
-		"verticalTranslationFor:in:" : "AliakseiSyrel 2/4/2016 21:17",
+		"+" : "AliakseiSyrel 10/28/2016 21:31",
+		"ifNull:" : "AliakseiSyrel 2/5/2016 11:59",
 		"=" : "AliakseiSyrel 5/17/2016 11:57",
-		"horizontalTranslationFor:in:" : "AliakseiSyrel 2/4/2016 21:17",
 		"hash" : "AliakseiSyrel 5/17/2016 11:57",
-		"ifNull:" : "AliakseiSyrel 2/5/2016 11:59"
+		"initialize" : "AliakseiSyrel 10/28/2016 19:47",
+		"translate:in:" : "AliakseiSyrel 10/28/2016 20:00"
 	},
-	"class" : { }
+	"class" : {
+		"end" : "AliakseiSyrel 10/28/2016 20:42",
+		"right" : "AliakseiSyrel 10/29/2016 21:45",
+		"horizontal" : "AliakseiSyrel 10/28/2016 21:40",
+		"bottom" : "AliakseiSyrel 10/28/2016 21:40",
+		"start" : "AliakseiSyrel 10/28/2016 20:42",
+		"vertical" : "AliakseiSyrel 10/28/2016 21:40",
+		"initialize" : "AliakseiSyrel 10/28/2016 21:40",
+		"null" : "AliakseiSyrel 10/28/2016 20:57",
+		"center" : "AliakseiSyrel 10/28/2016 21:37",
+		"left" : "AliakseiSyrel 10/29/2016 21:45",
+		"top" : "AliakseiSyrel 10/28/2016 21:40"
+	}
 }

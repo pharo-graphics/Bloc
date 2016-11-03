@@ -1,4 +1,10 @@
 {
-	"instance" : { },
+	"instance" : {
+		"radius:" : "GlennCavarle 11/2/2016 15:45",
+		"asSpartaPaintOn:" : "GlennCavarle 11/2/2016 15:53",
+		"center" : "GlennCavarle 11/2/2016 15:45",
+		"center:" : "GlennCavarle 11/2/2016 15:45",
+		"radius" : "GlennCavarle 11/2/2016 15:45"
+	},
 	"class" : { }
 }

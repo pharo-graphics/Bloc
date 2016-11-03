@@ -1,4 +1,3 @@
 pulse
 render
-	self hostWindow render: self.
-	
+	self hostSpace ifNotNil: [ :hs | hs render: self ]

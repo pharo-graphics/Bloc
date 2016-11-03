@@ -1,3 +1,0 @@
-initialize-release
-defaultVerticalProperties
-	^ BlLayoutAxisConstraints new

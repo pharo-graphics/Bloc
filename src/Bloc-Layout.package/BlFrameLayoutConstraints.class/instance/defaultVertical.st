@@ -1,0 +1,3 @@
+initialization
+defaultVertical
+	^ BlFrameLayoutConstraintsVertical new

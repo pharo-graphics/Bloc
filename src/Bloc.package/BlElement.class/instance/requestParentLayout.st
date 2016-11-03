@@ -1,5 +1,3 @@
 layout
 requestParentLayout
-	| p |
-	p := self parent.
-	p ifNotNil: [ p requestLayout ]
+	self parent ifNotNil: [:p| p requestLayout ]

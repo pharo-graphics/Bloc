@@ -8,12 +8,14 @@ els := OrderedCollection new.
 		ii := i % 25.
 		el :=(BlEllipse diameter: 30) asElement 
 		background: (Color random alpha: 1);
-		position: (ii*30)@100.
+		position: (ii*15)@10.
+		
 		tr := BlTranslateAnimation new
 			target: el;
-			to: el position x @(500 -(30*((i/25)ceiling) ));
-			delay: i*50;duration: 300;
+			to: (ii*15) @(500 -(30*((i/25)ceiling) ));
+			delay: i*80;duration: 500;
 			easing: BlEasing bounceOut.
+			
 		alp := BlColorTransition new
 					from: (Color white alpha: 0);
 					to: Color random;

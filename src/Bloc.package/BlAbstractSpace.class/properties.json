@@ -15,7 +15,7 @@
 		"borderless",
 		"rootStyler",
 		"dirtyAreas",
-		"hostWindow",
+		"hostSpace",
 		"eventDispatcher",
 		"eventListener",
 		"mouseProcessor",

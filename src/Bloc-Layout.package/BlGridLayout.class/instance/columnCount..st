@@ -1,3 +1,3 @@
 accessing
 columnCount: aNumber
-	horizontalAxis count: aNumber
+	impl columnCount: aNumber

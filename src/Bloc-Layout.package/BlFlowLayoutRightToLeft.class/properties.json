@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlFlowLayoutDirection",
+	"category" : "Bloc-Layout-Flow-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFlowLayoutRightToLeft",
+	"type" : "normal"
+}

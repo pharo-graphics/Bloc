@@ -6,11 +6,11 @@ doUpdateLayout
 	done := false.
 	
 	self root measure: (BlExtentMeasurementSpec new
-		widthSpec: (self  root
+		widthSpec: (self root layout
 			measurementSpecFor: (BlMeasurementSpec new beExact: self width)
 			usedSize:  0
 			resizer: BlLayoutMatchParentResizer new);
-		heightSpec: (self root
+		heightSpec: (self root layout
 			measurementSpecFor: (BlMeasurementSpec new beExact: self height)
 			usedSize:  0
 			resizer: BlLayoutMatchParentResizer new)).

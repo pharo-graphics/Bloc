@@ -1,4 +1,4 @@
 testing
 isVisible
-	self hostWindow ifNotNil: [ ^ self hostWindow isVisible ].
+	self hostSpace ifNotNil: [ ^ self hostSpace isVisible ].
 	^ false

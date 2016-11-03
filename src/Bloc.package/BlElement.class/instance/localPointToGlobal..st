@@ -1,4 +1,7 @@
 geometry position convertion
 localPointToGlobal: aPoint
-	self parent ifNil: [ ^ self transform localPointToGlobal: aPoint ].
-	 ^  self parent localPointToGlobal: (self transform localPointToGlobal: aPoint)
+	| pt |
+	pt := self parent
+		ifNil: [ self transform transform: aPoint ]
+		ifNotNil: [ :p | p localPointToGlobal: (self transform transform: aPoint) ].
+	^ pt translateBy: self position

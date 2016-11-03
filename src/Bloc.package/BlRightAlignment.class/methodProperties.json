@@ -1,7 +1,12 @@
 {
 	"instance" : {
-		"horizontalTranslationFor:in:" : "StephaneDucasse 3/5/2016 17:51",
-		"verticalTranslationFor:in:" : "StephaneDucasse 3/5/2016 17:51"
+		"translate:in:" : "AliakseiSyrel 10/28/2016 20:02",
+		"inverted" : "AliakseiSyrel 10/29/2016 20:57",
+		"swap" : "AliakseiSyrel 10/29/2016 21:45"
 	},
-	"class" : { }
+	"class" : {
+		"initialize" : "AliakseiSyrel 10/29/2016 21:29",
+		"rightToLeft" : "AliakseiSyrel 10/29/2016 21:30",
+		"leftToRight" : "AliakseiSyrel 10/29/2016 21:30"
+	}
 }

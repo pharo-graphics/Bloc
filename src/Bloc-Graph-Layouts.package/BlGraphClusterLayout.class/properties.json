@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGraphAbstractGraphLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"externalLayer",
+		"maxLayer",
+		"maxAbcissa"
+	],
+	"name" : "BlGraphClusterLayout",
+	"type" : "normal"
+}

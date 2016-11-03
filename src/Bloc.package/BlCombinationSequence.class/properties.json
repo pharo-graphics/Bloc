@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlKeyCombination",
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"sequence"
+	],
+	"name" : "BlCombinationSequence",
+	"type" : "normal"
+}

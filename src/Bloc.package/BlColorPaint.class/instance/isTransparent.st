@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 isTransparent
 	^color isTransparent

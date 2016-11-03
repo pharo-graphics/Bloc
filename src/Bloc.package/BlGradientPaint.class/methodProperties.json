@@ -1,4 +1,7 @@
 {
-	"instance" : { },
+	"instance" : {
+		"stops:" : "GlennCavarle 11/2/2016 15:55",
+		"stops" : "GlennCavarle 11/2/2016 15:51"
+	},
 	"class" : { }
 }

@@ -1,16 +1,12 @@
 {
 	"instance" : {
-		"geomPathOn:" : "GlennCavarle 8/2/2016 17:21",
-		"owner:" : "GlennCavarle 8/2/2016 16:57",
-		"borderBounds" : "GlennCavarle 8/8/2016 23:08",
 		"borderPath:" : "GlennCavarle 8/2/2016 17:13",
 		"innerPath:" : "GlennCavarle 8/2/2016 14:37",
-		"innerPathOn:" : "GlennCavarle 8/2/2016 17:33",
 		"releaseCache" : "GlennCavarle 8/2/2016 17:40",
-		"borderPathOn:" : "GlennCavarle 8/2/2016 17:22",
+		"geomPath:" : "GlennCavarle 8/2/2016 14:37",
 		"owner" : "GlennCavarle 8/2/2016 16:57",
-		"pathOn:inBounds:" : "GlennCavarle 8/3/2016 15:01",
-		"geomPath:" : "GlennCavarle 8/2/2016 14:37"
+		"owner:" : "GlennCavarle 8/2/2016 16:57",
+		"borderBounds" : "GlennCavarle 8/8/2016 23:08"
 	},
 	"class" : {
 		"on:" : "GlennCavarle 8/2/2016 16:57"

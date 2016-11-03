@@ -1,3 +1,3 @@
 accessing
 offset: anObject
-	offset := anObject
+	offset := anObject asPoint

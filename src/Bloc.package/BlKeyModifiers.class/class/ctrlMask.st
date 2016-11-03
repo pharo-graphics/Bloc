@@ -1,3 +1,3 @@
 as yet unclassified
 ctrlMask
-	^ 2r0010
+	^ 2r000010

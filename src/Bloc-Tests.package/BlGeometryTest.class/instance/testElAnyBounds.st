@@ -23,11 +23,21 @@ testElAnyBounds
 	self assert: c2 geomBounds = ((0 @ 0) corner:(400@300)).
 	self assert: c1 geomBounds = ((0 @ 0) corner:(200@100)).
 	
-
+	self assert: g fxBounds = ((0 @ 0) corner:(700@500)).
+	self assert: c2 fxBounds = ((0 @ 0) corner:(400@300)).
+	self assert: c1 fxBounds = ((0 @ 0) corner:(200@100)).
+	
+	self assert: g boundsInLocal = ((0 @ 0) corner:(700@500)).
+	self assert: c2 boundsInLocal = ((0 @ 0) corner:(400@300)).
+	self assert: c1 boundsInLocal = ((0 @ 0) corner:(200@100)).
+	
+	self assert: g boundsInParent = ((0 @ 0) corner:(700@500)).
+	self assert: c2 boundsInParent = ((100 @ 100) corner:(500@400)).
+	self assert: c1 boundsInParent = ((100 @ 100) corner:(300@200)).
 	
 	self assert: g txBounds = ((0 @ 0) corner:(700@500)).
-	self assert: c2 txBounds = ((100 @ 100) corner:(500@400)).
-	self assert: c1 txBounds = ((200 @ 200) corner:(400@300)).
+	self assert: c2 txBounds = ((0 @ 0) corner:(400@300)).
+	self assert: c1 txBounds = ((0 @ 0) corner:(200@100)).
 	
 	self assert: g geomBoundsInSpace = ((0 @ 0) corner:(700@500)).
 	self assert: c2 geomBoundsInSpace = ((100 @ 100) corner:(500@400)).

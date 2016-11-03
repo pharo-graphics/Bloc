@@ -1,37 +1,35 @@
-as yet unclassified
+examples
 exampleSimple2x2Grid
-<example>
+	<example>
 	| e1 e2 e3 e4 el space|
 	
 	e1 := BlElement new
 		extent: 150 asPoint;
-		border: (BlBorder color: Color darkGray width: 4);
-		background: (BlBackground fill: Color pink).
+		background: Color pink.
 	
 	e2 := BlElement new
 		extent: 150 asPoint;
-		border: (BlBorder color: Color black width: 4);
-		background: (BlBackground fill: Color green).
+		background: Color green.
 	
 	e3 := BlElement new
 		extent: 150 asPoint;
-		border: (BlBorder color: Color lightGray width: 4);
-		background: (BlBackground fill: Color red).
+		background: Color red.
 	
 	e4 := BlElement new
 		extent: 150 asPoint;
-		border: (BlBorder color: Color brown width: 4);
-		background: (BlBackground fill: Color yellow).
+		background: Color yellow.
 	
 	el := BlElement new
-		layout: (BlGridLayout new columnCount:3;cellSpacing:4);
-		extent: 300@300;
+		layout: (BlGridLayout new columnCount: 2);
+		extent: 400@400;
 		position: 200 @ 100;
-		background: (BlBackground fill: Color blue);
-		addChildren: {e1. e2. e3. e4}.
+		background: Color blue;
+		addChildren: { e1. e2. e3. e4 };
+		yourself.
 	
+	el forceLayout.
 	space := BlSpace new.
-	space root addChild:el.
+	space root addChild: el.
 	BlElementSelection on: el.
 	space	show
 	

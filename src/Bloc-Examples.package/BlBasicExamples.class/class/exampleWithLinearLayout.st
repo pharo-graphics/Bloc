@@ -3,16 +3,16 @@ exampleWithLinearLayout
 	|c1 c2 c3 sp p |
 	
 	c1 := BlElement new
-		constraintsDo: [:c| c vertical alignBottom];
-		background:(BlBackground fill: Color red).
-	
+		constraintsDo: [ :c | c linear vertical alignBottom ];
+		background: Color red.
+
 	c2 := BlElement new
-		constraintsDo: [:c| c horizontal matchParent];
-		background:(BlBackground fill: Color green).
+		constraintsDo: [ :c | c horizontal matchParent];
+		background: Color green.
 	
 	c3 := BlElement new
-		constraintsDo: [:c| c vertical alignBottom];
-		background:(BlBackground fill: Color red).
+		constraintsDo: [:c| c linear vertical alignBottom];
+		background: Color yellow.
 	
 	
 	p := BlElement new

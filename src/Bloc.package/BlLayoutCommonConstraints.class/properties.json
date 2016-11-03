@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "AliakseiSyrel 10/25/2016 09:29",
+	"super" : "BlLayoutConstraints",
+	"category" : "Bloc-LLayout-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"constraints",
+		"margin",
+		"padding",
+		"minHeight",
+		"minWidth",
+		"maxHeight",
+		"maxWidth"
+	],
+	"name" : "BlLayoutCommonConstraints",
+	"type" : "normal"
+}

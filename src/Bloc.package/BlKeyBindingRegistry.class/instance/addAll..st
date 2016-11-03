@@ -1,3 +1,3 @@
 accessing
 addAll: aCollection
-	self keyBindings addAll: aCollection
+	keyBindings addAll: aCollection

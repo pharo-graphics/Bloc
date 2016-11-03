@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "GlennCavarle 10/13/2016 16:49",
+	"super" : "TKTService",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"pulseEvent",
+		"pulseStartTime",
+		"lastElpasedTime",
+		"pulsePeriod"
+	],
+	"name" : "BlPulseService",
+	"type" : "normal"
+}

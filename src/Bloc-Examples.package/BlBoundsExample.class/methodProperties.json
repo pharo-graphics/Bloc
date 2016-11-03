@@ -1,0 +1,15 @@
+{
+	"instance" : { },
+	"class" : {
+		"boundsInLocalOf:in:" : "GlennCavarle 10/31/2016 17:27",
+		"newLineGroupFor:in:color:width:" : "GlennCavarle 10/31/2016 17:36",
+		"fxBoundsOf:in:" : "GlennCavarle 11/2/2016 02:05",
+		"txBoundsOf:in:" : "GlennCavarle 11/2/2016 02:10",
+		"geomBoundsOf:in:" : "GlennCavarle 10/31/2016 17:31",
+		"newLineFrom:to:color:width:" : "GlennCavarle 11/2/2016 02:02",
+		"innerBoundsOf:in:" : "GlennCavarle 10/31/2016 17:34",
+		"exampleElementBounds" : "GlennCavarle 11/2/2016 02:13",
+		"layoutBoundsOf:in:" : "GlennCavarle 10/31/2016 17:34",
+		"boundsInParentOf:in:" : "GlennCavarle 10/31/2016 17:27"
+	}
+}

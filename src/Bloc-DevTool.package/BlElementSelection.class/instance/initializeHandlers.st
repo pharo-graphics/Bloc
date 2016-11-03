@@ -8,11 +8,12 @@ self
 					
 					evt consumed: true.
 					self space root addChild: self client.
-					self dragOffset: (evt position -  self position).
+					self dragOffset: (evt position -  self client globalPosition).
 					self clientUpdated.
 					]);
-			addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt | 
+			addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt | |pt|
 					evt consumed: true.
-					self client relocate: ((evt position - self dragOffset) + (5 @ 5)).
+					pt :=  ((evt position - self dragOffset) + (5 @ 5)).
+					self client relocate: pt.
 					self clientUpdated.
 					 ])

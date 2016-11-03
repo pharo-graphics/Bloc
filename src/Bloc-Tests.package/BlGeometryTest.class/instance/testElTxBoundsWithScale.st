@@ -6,7 +6,7 @@ testElTxBoundsWithScale
 		position: 10 @ 10;
 		yourself.
 	g := BlElement new
-		extent: 100 @ 100;
+		extent: 200 @ 200;
 		position: 10 @ 10;
 		addChild: n;
 		yourself.
@@ -15,6 +15,6 @@ testElTxBoundsWithScale
 	self assert: g position = (10 @ 10).
 	self assert: n position = (10 @ 10).
 	self assert: g globalPosition = (10 @ 10).
-	self assert: n globalPosition = (30 @ 30).
-	self assert: n txBounds  = ((30@30) corner:(430@430)).
-	self assert: g txBounds  = ((10@10) corner:(210@210)).
+	self assert: n globalPosition = (20 @ 20).
+	self assert: n txBounds  = ((0@0) corner: (200@200)).
+	self assert: g txBounds  = ((0@0) corner: (400@400)).

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLayoutConstraintsAxis",
+	"category" : "Bloc-Layout-Frame",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"alignment"
+	],
+	"name" : "BlFrameLayoutConstraintsVertical",
+	"type" : "normal"
+}

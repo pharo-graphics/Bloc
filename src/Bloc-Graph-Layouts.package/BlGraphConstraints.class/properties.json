@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLayoutConstraints",
+	"category" : "Bloc-Graph-Layouts-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"connectedEdges",
+		"radius"
+	],
+	"name" : "BlGraphConstraints",
+	"type" : "normal"
+}

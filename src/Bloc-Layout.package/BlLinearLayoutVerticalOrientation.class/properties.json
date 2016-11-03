@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlLinearLayoutOrientation",
-	"category" : "Bloc-Layout-Linear",
+	"category" : "Bloc-Layout-Linear-Utilities",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

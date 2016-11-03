@@ -1,0 +1,3 @@
+*Bloc-Athens
+asAthensAffineTransform
+	^ self

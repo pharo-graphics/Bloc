@@ -1,3 +1,4 @@
 accessing
-fullscreen: anObject
-	 self fullscreenProperty value: anObject
+fullscreen: aBoolean
+	fullscreen := aBoolean.
+	 self hostSpace ifNotNil: [ :hw | hw fullscreen: aBoolean ].

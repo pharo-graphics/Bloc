@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 defaultRoot
 	^ BlElement new
 		space: self;

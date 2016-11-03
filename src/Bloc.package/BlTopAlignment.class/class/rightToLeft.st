@@ -1,0 +1,3 @@
+factory
+rightToLeft
+	^ self top

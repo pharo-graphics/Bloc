@@ -1,3 +1,3 @@
 displaying
 minimize
-	self hostWindow ifNotNil: [ :hw | hw minimize ]
+	self hostSpace ifNotNil: [ :hw | hw minimize ]

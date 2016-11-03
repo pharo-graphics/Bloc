@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 cursorPosition
 	^ self mouseProcessor lastPosition

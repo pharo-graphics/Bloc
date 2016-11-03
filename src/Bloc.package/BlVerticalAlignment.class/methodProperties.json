@@ -1,0 +1,22 @@
+{
+	"instance" : {
+		"start" : "AliakseiSyrel 10/28/2016 21:42",
+		"+" : "AliakseiSyrel 10/28/2016 21:30",
+		"leftToRight" : "AliakseiSyrel 10/28/2016 20:50",
+		"end" : "AliakseiSyrel 10/28/2016 21:42",
+		"center" : "AliakseiSyrel 10/28/2016 21:42",
+		"directed:" : "AliakseiSyrel 10/28/2016 20:50",
+		"rightToLeft" : "AliakseiSyrel 10/28/2016 20:50"
+	},
+	"class" : {
+		"rightToLeft" : "AliakseiSyrel 10/28/2016 20:39",
+		"start" : "AliakseiSyrel 10/28/2016 21:37",
+		"leftToRight" : "AliakseiSyrel 10/28/2016 20:39",
+		"initialize" : "AliakseiSyrel 10/28/2016 20:21",
+		"end" : "AliakseiSyrel 10/28/2016 21:36",
+		"top" : "AliakseiSyrel 10/28/2016 20:21",
+		"center" : "AliakseiSyrel 10/28/2016 20:21",
+		"bottom" : "AliakseiSyrel 10/28/2016 20:21",
+		"directed:" : "AliakseiSyrel 10/28/2016 20:39"
+	}
+}

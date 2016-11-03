@@ -1,0 +1,2 @@
+api
+createWindowFor: aSpace

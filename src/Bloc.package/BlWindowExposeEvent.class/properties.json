@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlWindowEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlWindowExposeEvent",
+	"type" : "normal"
+}

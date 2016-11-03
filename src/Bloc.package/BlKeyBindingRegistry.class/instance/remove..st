@@ -1,3 +1,3 @@
 accessing
 remove: aKeyBinding
-	self keyBindings remove: aKeyBinding
+	keyBindings remove: aKeyBinding

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLayoutBuilderNode",
+	"category" : "Bloc-Sparta-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlLayoutBuilderImage",
+	"type" : "normal"
+}

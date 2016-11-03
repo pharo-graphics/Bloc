@@ -1,3 +1,3 @@
-accessing
+private
 previousMeasurementSpec: anObject
 	previousMeasurementSpec := anObject

@@ -1,3 +1,0 @@
-alignment
-alignment
-	^ alignment

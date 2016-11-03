@@ -1,15 +1,12 @@
 {
 	"instance" : {
-		"applyEffectOn:for:around:" : "GlennCavarle 6/22/2016 11:29",
-		"input:" : "GlennCavarle 5/8/2016 14:14",
-		"computeGeomBounds" : "GlennCavarle 5/9/2016 00:37",
 		"on:" : "StephaneDucasse 7/25/2016 18:46",
-		"computeGeomBoundsFrom:" : "GlennCavarle 5/9/2016 00:37",
-		"applyAfterOn:for:" : "GlennCavarle 6/22/2016 11:29",
 		"geomBounds:" : "GlennCavarle 5/9/2016 00:38",
-		"applyBeforeOn:for:" : "GlennCavarle 6/22/2016 11:29",
+		"input:" : "GlennCavarle 5/8/2016 14:14",
+		"geomBounds" : "GlennCavarle 5/9/2016 00:37",
 		"input" : "GlennCavarle 5/8/2016 14:14",
-		"geomBounds" : "GlennCavarle 5/9/2016 00:37"
+		"computeGeomBoundsFrom:" : "GlennCavarle 5/9/2016 00:37",
+		"computeGeomBounds" : "GlennCavarle 5/9/2016 00:37"
 	},
 	"class" : {
 		"on:" : "GlennCavarle 5/8/2016 15:39"

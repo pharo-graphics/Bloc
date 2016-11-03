@@ -1,3 +1,3 @@
 as yet unclassified
 altMask
-	^ 2r0100
+	^ 2r000100
