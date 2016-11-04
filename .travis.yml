@@ -1,4 +1,4 @@
-language: generic
+language: smalltalk
 sudo: true
 
 dist: xenial
@@ -9,9 +9,10 @@ os:
 
 smalltalk:
   - Pharo-6.0
-  
+
 env:
 - ARCH="i386"
+
 
 
 before_install:
@@ -55,16 +56,9 @@ before_install:
       sudo apt-get install libssl1.0.0:i386;
     fi
 
-install: 
-  - wget -O - http://get.pharo.org/60+vm | bash
-  - ./pharo Pharo.image eval "Metacello new baseline:'Bloc';repository:'github://pharo-graphics/Bloc/src';load.Smalltalk snapshot:true andQuit:true."
-    
+
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" && "$ARCH" == "i386" ]]; then
       export DISPLAY=:99.0;
       sh -e /etc/init.d/xvfb start;
     fi
-    
-script:
-  - ./pharo Pharo.image test --junit-xml-output "Bloc-.*"
-  - ./pharo Pharo.image eval --save "SystemSettingsPersistence cleanUp"
