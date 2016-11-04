@@ -16,7 +16,7 @@ baseline: spec
 			project: 'PetitCSS' with: [
 				spec
 					className: #ConfigurationOfPetitCSS;
-					versionString: '1.1';
+					versionString: '0.2-baseline';
 					repository: 'http://smalltalkhub.com/mc/GlennCavarle/PetitCSS/main/' ].
 		spec 
 			package: #Bloc;
