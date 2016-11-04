@@ -42,7 +42,7 @@ before_install:
       export PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig/;
       
       echo "Installing c++ libraries";
-      sudo apt install libstdc++6:i386;
+      sudo apt-get install libstdc++6:i386;
       
       echo "Installing GTK-2.0...";
       sudo apt-get install libgtk2.0-0:i386;
