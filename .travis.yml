@@ -1,5 +1,4 @@
-language: smalltalk
-sudo: true
+language: generic
 
 dist: xenial
 
@@ -12,6 +11,7 @@ smalltalk:
   
 env:
 - ARCH="i386"
+
 
 before_install:
   - |
@@ -50,9 +50,16 @@ before_install:
       echo "Installing GTK-3.0...";
       sudo apt-get install libgtk-3-0:i386;
     fi
+
+install: 
+  - ./scripts/get
     
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" && "$ARCH" == "i386" ]]; then
       export DISPLAY=:99.0;
       sh -e /etc/init.d/xvfb start;
     fi
+    
+script:
+  - ./pharo Pharo.image test --junit-xml-output "Bloc-.*"
+  - ./pharo Pharo.image eval --save "SystemSettingsPersistence cleanUp"

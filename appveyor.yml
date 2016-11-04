@@ -4,17 +4,19 @@ environment:
   CYG_CACHE: C:\cygwin\var\cache\setup
   CYG_EXE: C:\cygwin\setup-x86.exe
   CYG_MIRROR: http://cygwin.mirror.constant.com
-  SCI_RUN: /cygdrive/c/smalltalkCI-master/run.sh
+  SCI_RUN: /cygdrive/c/SMALLTALKCI-master/run.sh
+  
   matrix:
     - SMALLTALK: Pharo-6.0
+
 
 platform:
   - x86
 
 install:
   - '%CYG_EXE% -qnNdO -R "%CYG_ROOT%" -s "%CYG_MIRROR%" -l "%CYG_CACHE%" -P unzip'
-  - ps: Start-FileDownload "https://github.com/hpi-swa/smalltalkCI/archive/master.zip" "C:\smalltalkCI.zip"
-  - 7z x C:\smalltalkCI.zip -oC:\ -y > NULL
+  - ps: Start-FileDownload "https://github.com/hpi-swa/SMALLTALKCI/archive/master.zip" "C:\SMALLTALKCI.zip"
+  - 7z x C:\SMALLTALKCI.zip -oC:\ -y > NULL
 
 build: false
 
