@@ -52,7 +52,8 @@ before_install:
     fi
 
 install: 
-  - ./scripts/get
+  - wget -O - http://get.pharo.org/60+vm | bash
+  - ./pharo Pharo.image eval "Metacello new baseline:'Bloc';repository:'github://pharo-graphics/Bloc/src';load.Smalltalk snapshot:true andQuit:true."
     
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" && "$ARCH" == "i386" ]]; then
