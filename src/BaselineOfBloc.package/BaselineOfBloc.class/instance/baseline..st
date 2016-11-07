@@ -24,7 +24,7 @@ baseline: spec
 			package: #Bloc with: [ spec requires: #(#TaskIt #Sparta). ];
 			package: #'Bloc-Animation' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc ). ];
-			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-Style' #'Bloc-DevTool' ). ];
+			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' ). ];
 			package: #'Bloc-Extension' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Layout' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Sparta' with: [ spec requires: #(#Bloc #Sparta). ];
