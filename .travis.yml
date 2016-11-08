@@ -11,8 +11,7 @@ smalltalk:
   - Pharo-6.0
 
 env:
-- ARCH="i386"
-- SMALLTALK_CI_TIMEOUT=25
+- ARCH="i386" SMALLTALK_CI_TIMEOUT=25
 
 
 before_install:
