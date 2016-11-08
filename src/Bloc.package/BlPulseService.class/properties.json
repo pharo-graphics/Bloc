@@ -9,7 +9,8 @@
 		"pulseEvent",
 		"pulseStartTime",
 		"lastElpasedTime",
-		"pulsePeriod"
+		"pulsePeriod",
+		"session"
 	],
 	"name" : "BlPulseService",
 	"type" : "normal"
