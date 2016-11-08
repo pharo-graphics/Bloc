@@ -1,6 +1,9 @@
 # Bloc
+[![Build Status](https://ci.inria.fr/pharo-contribution/buildStatus/icon?job=Bloc)](https://ci.inria.fr/pharo-contribution/job/Bloc/)
 
-[![Build status](https://travis-ci.org/pharo-graphics/Bloc.svg?branch=master)](https://travis-ci.org/pharo-graphics/Bloc) [![Build status](https://ci.appveyor.com/api/projects/status/x6vjn4ccy37xasrd?svg=true)](https://ci.appveyor.com/project/GlennCavarle/bloc) [![Coverage Status](https://coveralls.io/repos/github/pharo-graphics/Bloc/badge.svg?branch=master)](https://coveralls.io/github/pharo-graphics/Bloc?branch=master)
+[![Build status](https://travis-ci.org/pharo-graphics/Bloc.svg?branch=master)](https://travis-ci.org/pharo-graphics/Bloc)
+[![Build status](https://ci.appveyor.com/api/projects/status/x6vjn4ccy37xasrd?svg=true)](https://ci.appveyor.com/project/GlennCavarle/bloc)
+[![Coverage Status](https://coveralls.io/repos/github/pharo-graphics/Bloc/badge.svg?branch=master)](https://coveralls.io/github/pharo-graphics/Bloc?branch=master)
 
 ## Bloc is a low-level UI framework for Pharo
 
