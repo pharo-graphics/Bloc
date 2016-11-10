@@ -1,9 +1,0 @@
-{
-	"instance" : {
-		"onInstalledIn:" : "GlennCavarle 5/8/2016 19:19",
-		"wantsEvent:" : "GlennCavarle 1/25/2016 01:03",
-		"handleEvent:" : "GlennCavarle 1/22/2016 16:54",
-		"onUninstalledIn:" : "GlennCavarle 5/8/2016 19:19"
-	},
-	"class" : { }
-}

@@ -1,15 +1,16 @@
 {
-	"commentStamp" : "GlennCavarle 7/12/2016 19:17",
-	"super" : "Object",
 	"category" : "Bloc-Paint-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "GlennCavarle 7/12/2016 19:17",
 	"instvars" : [
 		"fill",
 		"image",
-		"outsets"
-	],
+		"outsets" ],
 	"name" : "BlBackground",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

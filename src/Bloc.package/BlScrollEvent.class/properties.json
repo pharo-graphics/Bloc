@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlMouseEvent",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"direction"
-	],
+		"direction" ],
 	"name" : "BlScrollEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlMouseEvent",
+	"type" : "normal" }

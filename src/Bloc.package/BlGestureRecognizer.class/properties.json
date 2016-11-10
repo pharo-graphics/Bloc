@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlEventListener",
 	"category" : "Bloc-Gesture",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlGestureRecognizer",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlEventListener",
+	"type" : "normal" }

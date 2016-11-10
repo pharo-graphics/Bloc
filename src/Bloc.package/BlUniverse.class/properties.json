@@ -1,12 +1,10 @@
 {
-	"commentStamp" : "GlennCavarle 6/26/2016 00:06",
-	"super" : "Object",
 	"category" : "Bloc-Universe",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classinstvars" : [
+		 ],
 	"classvars" : [
-		"Default"
-	],
+		"Default" ],
+	"commentStamp" : "GlennCavarle 6/26/2016 00:06",
 	"instvars" : [
 		"pulseLoop",
 		"host",
@@ -15,8 +13,9 @@
 		"animationManager",
 		"announcer",
 		"deferredActions",
-		"nextPulseRequested"
-	],
+		"nextPulseRequested" ],
 	"name" : "BlUniverse",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

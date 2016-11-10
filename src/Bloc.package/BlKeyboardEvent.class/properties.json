@@ -1,16 +1,17 @@
 {
-	"commentStamp" : "",
-	"super" : "BlUIEvent",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"keyValue",
 		"charCode",
 		"scanCode",
-		"repeat"
-	],
+		"repeat" ],
 	"name" : "BlKeyboardEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlUIEvent",
+	"type" : "normal" }

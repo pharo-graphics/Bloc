@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlElement",
 	"category" : "Bloc-Space-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"target"
-	],
+		"target" ],
 	"name" : "BlDragView",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlElement",
+	"type" : "normal" }

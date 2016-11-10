@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlVerticalAlignment",
 	"category" : "Bloc-LLayout-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlVerticalCenterAlignment",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlVerticalAlignment",
+	"type" : "normal" }

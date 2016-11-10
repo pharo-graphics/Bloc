@@ -1,3 +1,3 @@
 initialize-release
 defaultPulseLoop
-	^ BlPulseService new
+	^ BlPulseLoop new

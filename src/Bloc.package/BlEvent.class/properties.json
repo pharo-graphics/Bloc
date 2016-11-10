@@ -1,18 +1,19 @@
 {
-	"commentStamp" : "",
-	"super" : "Announcement",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"source",
 		"target",
 		"currentTarget",
 		"timestamp",
 		"canBePropagated",
-		"consumed"
-	],
+		"consumed" ],
 	"name" : "BlEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Announcement",
+	"type" : "normal" }

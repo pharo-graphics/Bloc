@@ -1,9 +1,0 @@
-{
-	"instance" : {
-		"initialize" : "GlennCavarle 6/29/2016 10:27",
-		"fireEvent:" : "GlennCavarle 6/29/2016 09:18",
-		"firedEvents" : "GlennCavarle 6/29/2016 09:19",
-		"dispatchEvent:target:" : "GlennCavarle 6/29/2016 10:28"
-	},
-	"class" : { }
-}

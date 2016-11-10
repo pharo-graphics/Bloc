@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/30/2016 17:52",
-	"super" : "BlMeasurementMode",
 	"category" : "Bloc-LLayout-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 1/30/2016 17:52",
+	"instvars" : [
+		 ],
 	"name" : "BlMeasurementExactMode",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlMeasurementMode",
+	"type" : "normal" }

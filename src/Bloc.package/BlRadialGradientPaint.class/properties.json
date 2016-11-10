@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGradientPaint",
 	"category" : "Bloc-Paint-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"center",
-		"radius"
-	],
+		"radius" ],
 	"name" : "BlRadialGradientPaint",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGradientPaint",
+	"type" : "normal" }

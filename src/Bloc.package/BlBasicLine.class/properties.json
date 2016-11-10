@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "BlElement",
 	"category" : "Bloc-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"from",
-		"to"
-	],
+		"to" ],
 	"name" : "BlBasicLine",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlElement",
+	"type" : "normal" }

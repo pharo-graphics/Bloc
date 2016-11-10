@@ -1,10 +1,10 @@
 {
-	"commentStamp" : "GlennCavarle 6/22/2016 16:43",
-	"super" : "BlBaseProcessor",
 	"category" : "Bloc-Space-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "GlennCavarle 6/22/2016 16:43",
 	"instvars" : [
 		"lastMouseEvent",
 		"lastEnteredTargets",
@@ -16,8 +16,9 @@
 		"lastMouseTarget",
 		"dndInProgress",
 		"currentEnteredTargets",
-		"dragStartMask"
-	],
+		"dragStartMask" ],
 	"name" : "BlMouseProcessor",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlBaseProcessor",
+	"type" : "normal" }

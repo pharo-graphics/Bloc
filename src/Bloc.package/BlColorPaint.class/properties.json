@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlPaint",
 	"category" : "Bloc-Paint-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"color"
-	],
+		"color" ],
 	"name" : "BlColorPaint",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlPaint",
+	"type" : "normal" }

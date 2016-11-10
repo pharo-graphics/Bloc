@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "WeakArray",
 	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlWeakRef",
-	"type" : "weak"
-}
+	"pools" : [
+		 ],
+	"super" : "WeakArray",
+	"type" : "weak" }

@@ -1,10 +1,10 @@
 {
-	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
-	"super" : "Object",
 	"category" : "Bloc-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
 	"instvars" : [
 		"position",
 		"extent",
@@ -29,8 +29,9 @@
 		"cursor",
 		"space",
 		"styler",
-		"misc"
-	],
+		"misc" ],
 	"name" : "BlElement",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

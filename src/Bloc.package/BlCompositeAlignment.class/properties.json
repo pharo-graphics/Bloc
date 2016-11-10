@@ -1,15 +1,16 @@
 {
-	"commentStamp" : "",
-	"super" : "BlElementAlignment",
 	"category" : "Bloc-LLayout-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"vertical",
 		"horizontal",
-		"direction"
-	],
+		"direction" ],
 	"name" : "BlCompositeAlignment",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlElementAlignment",
+	"type" : "normal" }

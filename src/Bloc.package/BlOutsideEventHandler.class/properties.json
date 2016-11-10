@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "GlennCavarle 6/28/2016 20:52",
-	"super" : "BlEventHandler",
 	"category" : "Bloc-EventHandling",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "GlennCavarle 6/28/2016 20:52",
 	"instvars" : [
-		"client"
-	],
+		"client" ],
 	"name" : "BlOutsideEventHandler",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlEventHandler",
+	"type" : "normal" }

@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "Color",
 	"category" : "Bloc-Theme",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"colorName"
-	],
+		"colorName" ],
 	"name" : "BlMaterialColor",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Color",
+	"type" : "normal" }

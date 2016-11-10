@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "OrderedCollection",
 	"category" : "Bloc-EventHandling",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"currentIndex"
-	],
+		"currentIndex" ],
 	"name" : "BlEventDispatcherChain",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "OrderedCollection",
+	"type" : "normal" }

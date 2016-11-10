@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlHorizontalAlignment",
 	"category" : "Bloc-LLayout-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlHorizontalEndAlignment",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlHorizontalAlignment",
+	"type" : "normal" }

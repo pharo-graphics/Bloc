@@ -1,5 +1,5 @@
-life cycle
+accessing
 stop
 	pulseListeners do: [ :each | each clear ].
-	self pulseLoop isRunning ifTrue:[self pulseLoop kill].
+	self pulseLoop isRunning ifTrue:[self pulseLoop stop].
 	self host stop.

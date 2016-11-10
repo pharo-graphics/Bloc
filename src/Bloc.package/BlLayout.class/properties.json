@@ -1,16 +1,17 @@
 {
-	"commentStamp" : "AliakseiSyrel 10/23/2016 20:02",
-	"super" : "Object",
 	"category" : "Bloc-LLayout-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 10/23/2016 20:02",
 	"instvars" : [
 		"requestingLayout",
 		"previousMeasurementSpec",
 		"measuredExtent",
-		"direction"
-	],
+		"direction" ],
 	"name" : "BlLayout",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

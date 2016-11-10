@@ -15,5 +15,4 @@ SystemOrganization addCategory: 'Bloc-Space'!
 SystemOrganization addCategory: 'Bloc-Space-Support'!
 SystemOrganization addCategory: 'Bloc-State'!
 SystemOrganization addCategory: 'Bloc-Theme'!
-SystemOrganization addCategory: 'Bloc-Thread-Support'!
 SystemOrganization addCategory: 'Bloc-Universe'!

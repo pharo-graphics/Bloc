@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlLayoutResizer",
 	"category" : "Bloc-LLayout-Support",
 	"classinstvars" : [
-		"uniqueInstance"
-	],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+		"uniqueInstance" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlLayoutMatchParentResizer",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlLayoutResizer",
+	"type" : "normal" }

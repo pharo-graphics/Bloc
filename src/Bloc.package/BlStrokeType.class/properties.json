@@ -1,17 +1,16 @@
 {
-	"commentStamp" : "GlennCavarle 6/22/2016 17:31",
-	"super" : "Object",
 	"category" : "Bloc-Paint-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classinstvars" : [
+		 ],
 	"classvars" : [
 		"Centered",
 		"Inside",
-		"Outside"
-	],
+		"Outside" ],
+	"commentStamp" : "GlennCavarle 6/22/2016 17:31",
 	"instvars" : [
-		"value"
-	],
+		"value" ],
 	"name" : "BlStrokeType",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

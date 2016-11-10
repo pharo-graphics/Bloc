@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlObjectProperty",
 	"category" : "Bloc-Property",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlShapeExtentProperty",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlObjectProperty",
+	"type" : "normal" }

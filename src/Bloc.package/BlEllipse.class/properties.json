@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGeometry",
 	"category" : "Bloc-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlEllipse",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGeometry",
+	"type" : "normal" }

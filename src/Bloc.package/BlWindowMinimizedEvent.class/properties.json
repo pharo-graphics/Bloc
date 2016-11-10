@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlWindowResizeEvent",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlWindowMinimizedEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlWindowResizeEvent",
+	"type" : "normal" }

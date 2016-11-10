@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlBaseDragEvent",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlDragEndEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlBaseDragEvent",
+	"type" : "normal" }

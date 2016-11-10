@@ -1,10 +1,10 @@
 {
-	"commentStamp" : "AliakseiSyrel 10/25/2016 09:29",
-	"super" : "BlLayoutConstraints",
 	"category" : "Bloc-LLayout-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 10/25/2016 09:29",
 	"instvars" : [
 		"constraints",
 		"margin",
@@ -12,8 +12,9 @@
 		"minHeight",
 		"minWidth",
 		"maxHeight",
-		"maxWidth"
-	],
+		"maxWidth" ],
 	"name" : "BlLayoutCommonConstraints",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlLayoutConstraints",
+	"type" : "normal" }

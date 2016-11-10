@@ -1,15 +1,16 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
 	"category" : "Bloc-KeyBinding",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"keyBindings",
 		"keyCombinations",
-		"pendingCombinations"
-	],
+		"pendingCombinations" ],
 	"name" : "BlKeyBindingRegistry",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,5 +1,7 @@
-loop process
+accessing
 start
 	^ loopProcess
-		ifNil: [ loopProcess := self createLoopProcess.
+		ifNil: [ 
+			session := Smalltalk session.
+			loopProcess := self createLoopProcess.
 			loopProcess resume ]

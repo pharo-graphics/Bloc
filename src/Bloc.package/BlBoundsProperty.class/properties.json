@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlReadOnlyProperty",
 	"category" : "Bloc-Property",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"computeBlock"
-	],
+		"computeBlock" ],
 	"name" : "BlBoundsProperty",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlReadOnlyProperty",
+	"type" : "normal" }

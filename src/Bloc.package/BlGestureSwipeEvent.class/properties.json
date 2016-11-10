@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGestureBaseSwipeEvent",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlGestureSwipeEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGestureBaseSwipeEvent",
+	"type" : "normal" }

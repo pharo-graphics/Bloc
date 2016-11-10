@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGestureBaseRotationEvent",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlGestureRotationEndEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGestureBaseRotationEvent",
+	"type" : "normal" }

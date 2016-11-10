@@ -1,9 +1,0 @@
-{
-	"instance" : {
-		"testCompareAddManyHandlers" : "GlennCavarle 8/31/2016 22:29",
-		"testCompareManyChangesForOneHandler" : "GlennCavarle 8/31/2016 22:29",
-		"testCompareOneChangeForManyHandlers" : "GlennCavarle 8/31/2016 22:29",
-		"testCompareManyChangesForManyHandlers" : "GlennCavarle 8/31/2016 22:29"
-	},
-	"class" : { }
-}

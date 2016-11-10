@@ -1,4 +1,4 @@
-as yet unclassified
+baselines
 baseline: spec
 	<baseline>
 	spec for: #common do: [ spec
@@ -21,7 +21,7 @@ baseline: spec
 				versionString: '1.1';
 				repository: 'http://smalltalkhub.com/mc/GlennCavarle/PetitCSS/main/' ];
 			 
-			package: #Bloc with: [ spec requires: #(#TaskIt #Sparta). ];
+			package: #Bloc with: [ spec requires: #(#Sparta). ];
 			package: #'Bloc-Animation' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' ). ];
@@ -31,6 +31,7 @@ baseline: spec
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'Bloc-Tests' with: [ spec requires: #('Bloc-Examples' ). ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ]; 
+			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 			
 			"groups with only sources"
 			group: 'file:core' 

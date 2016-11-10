@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlFocusProcessor",
 	"category" : "Bloc-Tests-Universe",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"firedEvents"
-	],
+		"firedEvents" ],
 	"name" : "BlTestFocusProcessor",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlFocusProcessor",
+	"type" : "normal" }

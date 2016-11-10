@@ -1,10 +1,10 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
 	"category" : "Bloc-Space",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"extent",
 		"position",
@@ -25,8 +25,9 @@
 		"dragboard",
 		"nextPulseRequested",
 		"currentCursor",
-		"session"
-	],
+		"session" ],
 	"name" : "BlAbstractSpace",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

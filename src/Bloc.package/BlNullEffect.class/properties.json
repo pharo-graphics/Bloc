@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlElementEffect",
 	"category" : "Bloc-Effect",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlNullEffect",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlElementEffect",
+	"type" : "normal" }

@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlWindowEvent",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlWindowFocusInEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlWindowEvent",
+	"type" : "normal" }

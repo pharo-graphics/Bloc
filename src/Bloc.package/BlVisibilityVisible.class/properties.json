@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/17/2016 11:05",
-	"super" : "BlVisibility",
 	"category" : "Bloc-LLayout-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/17/2016 11:05",
+	"instvars" : [
+		 ],
 	"name" : "BlVisibilityVisible",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlVisibility",
+	"type" : "normal" }

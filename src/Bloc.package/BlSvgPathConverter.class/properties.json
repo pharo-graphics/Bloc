@@ -1,18 +1,19 @@
 {
-	"commentStamp" : "GlennCavarle 10/12/2016 15:08",
-	"super" : "Object",
 	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "GlennCavarle 10/12/2016 15:08",
 	"instvars" : [
 		"stream",
 		"segments",
 		"path",
 		"absolute",
 		"min",
-		"max"
-	],
+		"max" ],
 	"name" : "BlSvgPathConverter",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

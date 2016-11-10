@@ -1,4 +1,4 @@
-loop process
+initialization
 initialize
 	super initialize.
 	pulseEvent := BlPulseEvent new.

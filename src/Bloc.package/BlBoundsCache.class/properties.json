@@ -1,18 +1,19 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
 	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"owner",
 		"layoutBounds",
 		"txBounds",
 		"boundsInSpace",
 		"geomBoundsInSpace",
-		"layoutBoundsInSpace"
-	],
+		"layoutBoundsInSpace" ],
 	"name" : "BlBoundsCache",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

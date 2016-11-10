@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlKeyboardEvent",
 	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlKeyUpEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlKeyboardEvent",
+	"type" : "normal" }

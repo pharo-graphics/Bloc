@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlLayoutConstraintsAxis",
 	"category" : "Bloc-LLayout-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"resizer"
-	],
+		"resizer" ],
 	"name" : "BlLayoutCommonConstraintsAxis",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlLayoutConstraintsAxis",
+	"type" : "normal" }

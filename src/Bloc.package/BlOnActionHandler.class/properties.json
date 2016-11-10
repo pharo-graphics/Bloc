@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlActionHandler",
 	"category" : "Bloc-EventHandling",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"action"
-	],
+		"action" ],
 	"name" : "BlOnActionHandler",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlActionHandler",
+	"type" : "normal" }
