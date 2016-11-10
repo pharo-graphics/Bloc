@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 isUIProcess
-	^ self pulseLoop loopProcess isRunningInTheSameProcess
+	^ self pulseLoop isRunningInTheSameProcess
