@@ -1,5 +1,5 @@
 tests
-testSequentialAnimation
+skipTestSequentialAnimation
 |anim animNum resultNum finishNumFlag currenTimeNum
 animColor resultColor finishColorFlag currenTimeColor |
 
