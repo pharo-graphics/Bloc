@@ -1,0 +1,3 @@
+period
+defaultPulsePeriod
+	^ 16

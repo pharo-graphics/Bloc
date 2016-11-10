@@ -1,0 +1,16 @@
+{
+	"category" : "Bloc-ThreadSupport",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"valuable",
+		"progress",
+		"message" ],
+	"name" : "BlTask",
+	"pools" : [
+		 ],
+	"super" : "TKTTask",
+	"type" : "normal" }

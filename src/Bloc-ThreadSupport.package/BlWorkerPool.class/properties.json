@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-ThreadSupport",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlWorkerPool",
+	"pools" : [
+		 ],
+	"super" : "TKTWorkerPool",
+	"type" : "normal" }
