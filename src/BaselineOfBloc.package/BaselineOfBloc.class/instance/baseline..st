@@ -13,7 +13,7 @@ baseline: spec
 			
 			project: 'OSWindow' with: [ spec
 				className: #ConfigurationOfOSWindow;
-				versionString: '0.8-baseline';
+				versionString: '1.2.15';
 				repository: 'http://smalltalkhub.com/mc/Pharo/OSWindow/main/' ];
 			
 			project: 'PetitCSS' with: [ spec
