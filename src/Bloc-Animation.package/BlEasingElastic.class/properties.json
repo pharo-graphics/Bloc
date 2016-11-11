@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlEasing",
 	"category" : "Bloc-Animation-Easing",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlEasingElastic",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlEasing",
+	"type" : "normal" }

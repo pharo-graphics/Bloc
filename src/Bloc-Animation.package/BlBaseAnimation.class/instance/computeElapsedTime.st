@@ -1,3 +1,3 @@
-as yet unclassified
+adding
 computeElapsedTime
-	^ Time millisecondClockValue - (startTime + delay)
+	^ (Time millisecondClockValue - (startTime + delay)) min: self duration

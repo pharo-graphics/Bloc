@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlBaseAnimation",
 	"category" : "Bloc-Animation-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"easing"
-	],
+		"easing" ],
 	"name" : "BlAnimation",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlBaseAnimation",
+	"type" : "normal" }

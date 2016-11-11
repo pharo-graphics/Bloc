@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlCompositeAnimation",
 	"category" : "Bloc-Animation-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlParallelAnimation",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlCompositeAnimation",
+	"type" : "normal" }

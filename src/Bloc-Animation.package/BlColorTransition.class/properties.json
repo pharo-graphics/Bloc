@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlTransition",
 	"category" : "Bloc-Animation-Transition",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlColorTransition",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlTransition",
+	"type" : "normal" }

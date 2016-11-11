@@ -1,10 +1,10 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
 	"category" : "Bloc-Animation-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"running",
 		"startTime",
@@ -16,8 +16,9 @@
 		"parent",
 		"delay",
 		"actionHandlers",
-		"target"
-	],
+		"target" ],
 	"name" : "BlBaseAnimation",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

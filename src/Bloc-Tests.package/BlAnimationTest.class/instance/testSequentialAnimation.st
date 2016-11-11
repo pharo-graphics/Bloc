@@ -1,9 +1,8 @@
 tests
-skipTestSequentialAnimation
+testSequentialAnimation
 |anim animNum resultNum finishNumFlag currenTimeNum
 animColor resultColor finishColorFlag currenTimeColor |
 
-self skip.
 "I don't know why sometime this test failed..."
 
 currenTimeNum := Time millisecondClockValue.
@@ -41,7 +40,7 @@ self assert:anim isRunning.
 self assert:animNum isRunning.
 self assert: (BlUniverse default animationManager includesAnimation: anim).
 
-(Delay forMilliseconds: 550) wait.
+(Delay forMilliseconds: 800) wait.
 self assert:animNum isRunning not.
 self assert:animColor isRunning.
 

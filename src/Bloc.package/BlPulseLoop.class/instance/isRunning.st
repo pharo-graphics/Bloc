@@ -1,3 +1,3 @@
 testing
 isRunning
-	^ loopProcess isNotNil
+	^ loopProcess isNotNil and: [ loopProcess isTerminated not ]
