@@ -13,9 +13,13 @@ Main maintainers : [Glenn Cavarlé](https://github.com/GlennCavarle) & [Aliaksei
 
 ## Bloc Zeroconf Script
 
-This script downloads the latest Pharo 60 Image + the stable Pharo VM for 60 and installs the latest version of Bloc.
+These scripts download the latest Pharo 60 Image + the stable Pharo VM for 60 and installs the latest version of Bloc.
 
-`wget -O- https://goo.gl/YYHH5a | bash`
+(All-in-one "user" versions)
+`wget -O- https://goo.gl/YYHH5a | bash` 
+
+(All-in-one "developer" versions)
+`wget -O- https://goo.gl/HQAPI5 | bash` 
 
 
 ## Last version based on [Athens](http://smalltalkhub.com/#!/~Pharo/Athens)

@@ -1,2 +1,2 @@
 wget -O - http://get.pharo.org/60+vm | bash
-./pharo Pharo.image eval "Metacello new baseline:'Bloc';repository:'github://pharo-graphics/Bloc/src';load.Smalltalk snapshot:true andQuit:true."
+./pharo Pharo.image eval --save "Metacello new baseline:'Bloc';repository:'github://pharo-graphics/Bloc/src';load."
