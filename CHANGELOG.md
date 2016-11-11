@@ -1,5 +1,4 @@
 # CHANGELOG
-***
 
 # v0.11
 ## Major Features
