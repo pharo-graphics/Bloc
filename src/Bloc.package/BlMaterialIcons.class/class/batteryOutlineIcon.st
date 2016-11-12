@@ -1,3 +1,0 @@
-battery
-batteryOutlineIcon
-^ self batteryOutlineSvg asElement

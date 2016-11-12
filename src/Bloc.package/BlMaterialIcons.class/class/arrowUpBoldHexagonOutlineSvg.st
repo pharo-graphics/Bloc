@@ -1,3 +1,0 @@
-arrow
-arrowUpBoldHexagonOutlineSvg
-^ BlSvgPath fromStream: self arrowUpBoldHexagonOutlineSrc

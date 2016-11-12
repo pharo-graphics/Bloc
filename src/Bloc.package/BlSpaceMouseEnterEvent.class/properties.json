@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Event",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlSpaceMouseEnterEvent",
+	"pools" : [
+		 ],
+	"super" : "BlSpaceEvent",
+	"type" : "normal" }

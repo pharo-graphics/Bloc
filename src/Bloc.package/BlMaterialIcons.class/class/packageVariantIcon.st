@@ -1,3 +1,0 @@
-package
-packageVariantIcon
-^ self packageVariantSvg asElement

@@ -1,3 +1,0 @@
-image
-imageFilterCenterFocusWeakSvg
-^ BlSvgPath fromStream: self imageFilterCenterFocusWeakSrc

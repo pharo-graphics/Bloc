@@ -1,3 +1,0 @@
-format
-formatHeaderDecreaseSvg
-^ BlSvgPath fromStream: self formatHeaderDecreaseSrc

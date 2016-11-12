@@ -1,17 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "OSWindowEventVisitor",
 	"category" : "BlocHost-OSWindow-Core",
-	"classinstvars" : [ ],
-	"pools" : [
-		"OSKeySymbols"
-	],
+	"classinstvars" : [
+		 ],
 	"classvars" : [
-		"SymbolCharacterMapping"
-	],
+		"SymbolCharacterMapping" ],
+	"commentStamp" : "",
 	"instvars" : [
-		"window"
-	],
+		"window" ],
 	"name" : "BlOSWindowEventHandler",
-	"type" : "normal"
-}
+	"pools" : [
+		"OSKeySymbols" ],
+	"super" : "OSWindowEventVisitor",
+	"type" : "normal" }

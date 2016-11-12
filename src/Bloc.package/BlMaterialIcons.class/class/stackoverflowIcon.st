@@ -1,3 +1,0 @@
-stackoverflow
-stackoverflowIcon
-^ self stackoverflowSvg asElement

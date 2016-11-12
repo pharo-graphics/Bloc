@@ -1,10 +1,10 @@
 accessing
 initializeActions
 |previousPos|
-	tlBtn := BlElementSelectionButton icon: BlMaterialIcons closeCircleSvg extent: 15@15.
-	trBtn := BlElementSelectionButton icon: BlMaterialIcons rotateLeftSvg extent: 15@15.
-	blBtn := BlElementSelectionButton icon: BlMaterialIcons settingsSvg  extent: 15@15.
-	brBtn := BlElementSelectionButton icon: BlMaterialIcons arrowExpandAllSvg extent: 15@15.
+	tlBtn := BlElementSelectionButton icon: BlIcons closeCircleSvg extent: 15@15.
+	trBtn := BlElementSelectionButton icon: BlIcons rotateLeftSvg extent: 15@15.
+	blBtn := BlElementSelectionButton icon: BlIcons settingsSvg  extent: 15@15.
+	brBtn := BlElementSelectionButton icon: BlIcons arrowExpandAllSvg extent: 15@15.
 	
 	tlBtn addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt |
 		 self client delete.

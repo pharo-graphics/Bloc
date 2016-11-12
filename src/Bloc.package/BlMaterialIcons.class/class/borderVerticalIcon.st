@@ -1,3 +1,0 @@
-border
-borderVerticalIcon
-^ self borderVerticalSvg asElement

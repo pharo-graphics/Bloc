@@ -1,3 +1,0 @@
-chart
-chartAreasplineIcon
-^ self chartAreasplineSvg asElement

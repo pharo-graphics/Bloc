@@ -1,3 +1,0 @@
-surround
-surroundSoundIcon
-^ self surroundSoundSvg asElement

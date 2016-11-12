@@ -1,3 +1,0 @@
-briefcase
-briefcaseDownloadIcon
-^ self briefcaseDownloadSvg asElement

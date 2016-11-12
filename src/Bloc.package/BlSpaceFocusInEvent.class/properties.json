@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Event",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlSpaceFocusInEvent",
+	"pools" : [
+		 ],
+	"super" : "BlSpaceEvent",
+	"type" : "normal" }

@@ -1,3 +1,0 @@
-arrow
-arrowDownBoldCircleIcon
-^ self arrowDownBoldCircleSvg asElement

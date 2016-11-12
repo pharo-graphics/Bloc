@@ -1,3 +1,0 @@
-wheelchair
-wheelchairAccessibilitySvg
-^ BlSvgPath fromStream: self wheelchairAccessibilitySrc

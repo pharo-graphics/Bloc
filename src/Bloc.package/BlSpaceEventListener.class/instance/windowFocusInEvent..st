@@ -1,3 +1,0 @@
-window handlers
-windowFocusInEvent: anEvent
-	

@@ -1,3 +1,0 @@
-alert
-alertCircleOutlineIcon
-^ self alertCircleOutlineSvg asElement

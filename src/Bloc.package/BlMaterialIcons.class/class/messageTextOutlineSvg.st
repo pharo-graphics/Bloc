@@ -1,3 +1,0 @@
-message
-messageTextOutlineSvg
-^ BlSvgPath fromStream: self messageTextOutlineSrc

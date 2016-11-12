@@ -1,3 +1,0 @@
-map
-mapMarkerRadiusIcon
-^ self mapMarkerRadiusSvg asElement

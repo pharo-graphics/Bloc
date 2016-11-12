@@ -1,3 +1,0 @@
-satellite
-satelliteVariantIcon
-^ self satelliteVariantSvg asElement

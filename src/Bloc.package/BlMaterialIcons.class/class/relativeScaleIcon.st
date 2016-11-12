@@ -1,3 +1,0 @@
-relative
-relativeScaleIcon
-^ self relativeScaleSvg asElement

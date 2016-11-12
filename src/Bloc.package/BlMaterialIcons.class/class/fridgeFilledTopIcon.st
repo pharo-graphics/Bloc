@@ -1,3 +1,0 @@
-fridge
-fridgeFilledTopIcon
-^ self fridgeFilledTopSvg asElement

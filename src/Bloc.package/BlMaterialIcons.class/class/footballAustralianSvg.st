@@ -1,3 +1,0 @@
-football
-footballAustralianSvg
-^ BlSvgPath fromStream: self footballAustralianSrc

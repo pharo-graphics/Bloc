@@ -1,3 +1,0 @@
-account
-accountSearchIcon
-^ self accountSearchSvg asElement

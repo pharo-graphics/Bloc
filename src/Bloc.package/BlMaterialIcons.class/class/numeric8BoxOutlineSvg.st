@@ -1,3 +1,0 @@
-numeric
-numeric8BoxOutlineSvg
-^ BlSvgPath fromStream: self numeric8BoxOutlineSrc

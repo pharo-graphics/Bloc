@@ -1,3 +1,0 @@
-language
-languagePythonTextIcon
-^ self languagePythonTextSvg asElement

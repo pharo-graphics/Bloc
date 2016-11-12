@@ -1,3 +1,0 @@
-note
-notePlusOutlineIcon
-^ self notePlusOutlineSvg asElement

@@ -1,3 +1,0 @@
-elevation
-elevationDeclineIcon
-^ self elevationDeclineSvg asElement

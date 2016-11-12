@@ -1,3 +1,0 @@
-internet
-internetExplorerIcon
-^ self internetExplorerSvg asElement

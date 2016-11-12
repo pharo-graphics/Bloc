@@ -1,3 +1,0 @@
-pause
-pauseOctagonOutlineSvg
-^ BlSvgPath fromStream: self pauseOctagonOutlineSrc

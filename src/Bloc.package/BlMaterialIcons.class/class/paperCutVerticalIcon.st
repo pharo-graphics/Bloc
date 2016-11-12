@@ -1,3 +1,0 @@
-paper
-paperCutVerticalIcon
-^ self paperCutVerticalSvg asElement

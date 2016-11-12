@@ -1,3 +1,0 @@
-playlist
-playlistRemoveIcon
-^ self playlistRemoveSvg asElement

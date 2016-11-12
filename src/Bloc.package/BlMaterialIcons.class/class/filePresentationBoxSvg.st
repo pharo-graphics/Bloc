@@ -1,3 +1,0 @@
-file
-filePresentationBoxSvg
-^ BlSvgPath fromStream: self filePresentationBoxSrc

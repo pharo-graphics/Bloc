@@ -1,3 +1,0 @@
-briefcase
-briefcaseCheckedIcon
-^ self briefcaseCheckedSvg asElement

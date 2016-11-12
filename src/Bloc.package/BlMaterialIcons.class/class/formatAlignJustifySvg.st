@@ -1,3 +1,0 @@
-format
-formatAlignJustifySvg
-^ BlSvgPath fromStream: self formatAlignJustifySrc

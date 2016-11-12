@@ -1,3 +1,0 @@
-crosshairs
-crosshairsGpsIcon
-^ self crosshairsGpsSvg asElement

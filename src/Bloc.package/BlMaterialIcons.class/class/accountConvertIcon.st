@@ -1,3 +1,0 @@
-account
-accountConvertIcon
-^ self accountConvertSvg asElement

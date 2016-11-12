@@ -1,3 +1,0 @@
-format
-formatStrikethroughIcon
-^ self formatStrikethroughSvg asElement

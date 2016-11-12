@@ -1,3 +1,0 @@
-microphone
-microphoneVariantIcon
-^ self microphoneVariantSvg asElement

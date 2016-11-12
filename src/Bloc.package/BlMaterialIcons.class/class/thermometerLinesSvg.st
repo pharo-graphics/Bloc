@@ -1,3 +1,0 @@
-thermometer
-thermometerLinesSvg
-^ BlSvgPath fromStream: self thermometerLinesSrc

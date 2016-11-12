@@ -1,3 +1,0 @@
-microphone
-microphoneOutlineIcon
-^ self microphoneOutlineSvg asElement

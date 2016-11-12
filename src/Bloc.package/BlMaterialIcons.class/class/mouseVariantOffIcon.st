@@ -1,3 +1,0 @@
-mouse
-mouseVariantOffIcon
-^ self mouseVariantOffSvg asElement

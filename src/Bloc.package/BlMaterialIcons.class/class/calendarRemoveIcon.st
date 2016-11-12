@@ -1,3 +1,0 @@
-calendar
-calendarRemoveIcon
-^ self calendarRemoveSvg asElement

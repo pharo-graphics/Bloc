@@ -1,3 +1,0 @@
-image
-imageAreaCloseIcon
-^ self imageAreaCloseSvg asElement

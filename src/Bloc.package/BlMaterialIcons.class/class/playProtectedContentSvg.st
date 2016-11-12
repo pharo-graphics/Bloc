@@ -1,3 +1,0 @@
-play
-playProtectedContentSvg
-^ BlSvgPath fromStream: self playProtectedContentSrc

@@ -1,3 +1,0 @@
-camera
-cameraFrontVariantSvg
-^ BlSvgPath fromStream: self cameraFrontVariantSrc

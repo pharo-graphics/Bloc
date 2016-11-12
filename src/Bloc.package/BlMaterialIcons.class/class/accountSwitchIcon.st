@@ -1,3 +1,0 @@
-account
-accountSwitchIcon
-^ self accountSwitchSvg asElement

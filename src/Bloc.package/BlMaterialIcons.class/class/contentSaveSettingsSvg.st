@@ -1,3 +1,0 @@
-content
-contentSaveSettingsSvg
-^ BlSvgPath fromStream: self contentSaveSettingsSrc

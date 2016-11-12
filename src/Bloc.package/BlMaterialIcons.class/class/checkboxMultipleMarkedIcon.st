@@ -1,3 +1,0 @@
-checkbox
-checkboxMultipleMarkedIcon
-^ self checkboxMultipleMarkedSvg asElement

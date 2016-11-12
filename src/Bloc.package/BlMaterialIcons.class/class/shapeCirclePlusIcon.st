@@ -1,3 +1,0 @@
-shape
-shapeCirclePlusIcon
-^ self shapeCirclePlusSvg asElement

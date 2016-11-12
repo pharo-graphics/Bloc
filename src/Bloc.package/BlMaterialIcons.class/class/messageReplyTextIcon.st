@@ -1,3 +1,0 @@
-message
-messageReplyTextIcon
-^ self messageReplyTextSvg asElement

@@ -1,10 +1,10 @@
 {
-	"commentStamp" : "",
-	"super" : "ComposableModel",
 	"category" : "Bloc-DevTool",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"fpsLabel",
 		"renderTimeLabel",
@@ -14,8 +14,9 @@
 		"renderTime",
 		"layoutTime",
 		"eventTime",
-		"space"
-	],
+		"space" ],
 	"name" : "BlBenchmarkConsoleSpecModel",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "ComposableModel",
+	"type" : "normal" }

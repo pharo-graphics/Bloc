@@ -1,3 +1,0 @@
-apple
-appleKeyboardControlSvg
-^ BlSvgPath fromStream: self appleKeyboardControlSrc

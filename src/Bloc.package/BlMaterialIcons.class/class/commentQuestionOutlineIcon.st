@@ -1,3 +1,0 @@
-comment
-commentQuestionOutlineIcon
-^ self commentQuestionOutlineSvg asElement

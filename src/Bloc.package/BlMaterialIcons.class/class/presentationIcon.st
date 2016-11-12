@@ -1,3 +1,0 @@
-presentation
-presentationIcon
-^ self presentationSvg asElement

@@ -1,3 +1,0 @@
-music
-musicNoteSixteenthIcon
-^ self musicNoteSixteenthSvg asElement

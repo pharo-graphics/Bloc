@@ -1,3 +1,0 @@
-compass
-compassOutlineIcon
-^ self compassOutlineSvg asElement

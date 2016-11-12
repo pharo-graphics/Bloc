@@ -1,3 +1,0 @@
-comment
-commentAccountOutlineIcon
-^ self commentAccountOutlineSvg asElement

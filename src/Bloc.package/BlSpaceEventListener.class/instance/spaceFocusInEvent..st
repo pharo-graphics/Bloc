@@ -1,0 +1,3 @@
+window handlers
+spaceFocusInEvent: anEvent
+	

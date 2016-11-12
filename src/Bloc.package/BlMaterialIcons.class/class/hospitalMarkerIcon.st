@@ -1,3 +1,0 @@
-hospital
-hospitalMarkerIcon
-^ self hospitalMarkerSvg asElement

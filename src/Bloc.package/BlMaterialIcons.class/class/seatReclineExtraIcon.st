@@ -1,3 +1,0 @@
-seat
-seatReclineExtraIcon
-^ self seatReclineExtraSvg asElement

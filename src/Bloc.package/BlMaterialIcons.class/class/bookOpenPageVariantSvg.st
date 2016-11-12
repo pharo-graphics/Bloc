@@ -1,3 +1,0 @@
-book
-bookOpenPageVariantSvg
-^ BlSvgPath fromStream: self bookOpenPageVariantSrc

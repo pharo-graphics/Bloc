@@ -1,3 +1,0 @@
-google
-googlePhysicalWebIcon
-^ self googlePhysicalWebSvg asElement

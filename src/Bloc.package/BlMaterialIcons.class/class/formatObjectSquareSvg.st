@@ -1,3 +1,0 @@
-format
-formatObjectSquareSvg
-^ BlSvgPath fromStream: self formatObjectSquareSrc

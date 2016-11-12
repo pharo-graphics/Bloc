@@ -1,3 +1,0 @@
-bluetooth
-bluetoothTransferSvg
-^ BlSvgPath fromStream: self bluetoothTransferSrc

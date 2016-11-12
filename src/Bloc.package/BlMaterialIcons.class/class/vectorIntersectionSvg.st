@@ -1,3 +1,0 @@
-vector
-vectorIntersectionSvg
-^ BlSvgPath fromStream: self vectorIntersectionSrc

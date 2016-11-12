@@ -1,3 +1,0 @@
-playlist
-playlistCheckIcon
-^ self playlistCheckSvg asElement

@@ -1,3 +1,0 @@
-briefcase
-briefcaseUploadIcon
-^ self briefcaseUploadSvg asElement

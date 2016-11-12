@@ -1,3 +1,0 @@
-comment
-commentCheckOutlineIcon
-^ self commentCheckOutlineSvg asElement

@@ -1,3 +1,0 @@
-format
-formatHorizontalAlignLeftSvg
-^ BlSvgPath fromStream: self formatHorizontalAlignLeftSrc

@@ -1,3 +1,0 @@
-format
-formatHeaderUpIcon
-^ self formatHeaderUpSvg asElement

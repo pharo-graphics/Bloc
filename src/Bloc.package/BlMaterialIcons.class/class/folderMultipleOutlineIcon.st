@@ -1,3 +1,0 @@
-folder
-folderMultipleOutlineIcon
-^ self folderMultipleOutlineSvg asElement

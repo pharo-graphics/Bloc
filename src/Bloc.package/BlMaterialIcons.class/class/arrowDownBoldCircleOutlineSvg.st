@@ -1,3 +1,0 @@
-arrow
-arrowDownBoldCircleOutlineSvg
-^ BlSvgPath fromStream: self arrowDownBoldCircleOutlineSrc

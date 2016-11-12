@@ -1,3 +1,0 @@
-pause
-pauseCircleOutlineIcon
-^ self pauseCircleOutlineSvg asElement

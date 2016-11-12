@@ -1,3 +1,0 @@
-checkbox
-checkboxMultipleBlankCircleOutlineIcon
-^ self checkboxMultipleBlankCircleOutlineSvg asElement

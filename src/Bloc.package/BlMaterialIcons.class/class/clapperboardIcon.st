@@ -1,3 +1,0 @@
-clapperboard
-clapperboardIcon
-^ self clapperboardSvg asElement

@@ -1,3 +1,0 @@
-help
-helpCircleOutlineIcon
-^ self helpCircleOutlineSvg asElement

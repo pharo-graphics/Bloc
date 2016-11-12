@@ -1,3 +1,0 @@
-calendar
-calendarRangeIcon
-^ self calendarRangeSvg asElement

@@ -1,3 +1,0 @@
-format
-formatListBulletedSvg
-^ BlSvgPath fromStream: self formatListBulletedSrc

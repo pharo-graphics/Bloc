@@ -1,3 +1,0 @@
-arrow
-arrowLeftDropCircleIcon
-^ self arrowLeftDropCircleSvg asElement

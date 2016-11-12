@@ -1,3 +1,0 @@
-checkbox
-checkboxMarkedCircleOutlineSvg
-^ BlSvgPath fromStream: self checkboxMarkedCircleOutlineSrc

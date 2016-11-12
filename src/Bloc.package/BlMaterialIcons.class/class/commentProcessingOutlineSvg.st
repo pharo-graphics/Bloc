@@ -1,3 +1,0 @@
-comment
-commentProcessingOutlineSvg
-^ BlSvgPath fromStream: self commentProcessingOutlineSrc

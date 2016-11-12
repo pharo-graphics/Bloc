@@ -1,3 +1,0 @@
-chemical
-chemicalWeaponIcon
-^ self chemicalWeaponSvg asElement

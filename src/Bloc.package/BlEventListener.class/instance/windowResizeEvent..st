@@ -1,2 +1,0 @@
-window handlers
-windowResizeEvent: anEvent

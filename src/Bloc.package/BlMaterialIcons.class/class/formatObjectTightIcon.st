@@ -1,3 +1,0 @@
-format
-formatObjectTightIcon
-^ self formatObjectTightSvg asElement

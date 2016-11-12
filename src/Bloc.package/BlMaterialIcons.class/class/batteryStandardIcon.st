@@ -1,3 +1,0 @@
-battery
-batteryStandardIcon
-^ self batteryStandardSvg asElement

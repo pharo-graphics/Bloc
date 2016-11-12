@@ -1,3 +1,0 @@
-white
-whiteBalanceIrradescentIcon
-^ self whiteBalanceIrradescentSvg asElement

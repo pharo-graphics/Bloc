@@ -1,3 +1,0 @@
-panorama
-panoramaHorizontalSvg
-^ BlSvgPath fromStream: self panoramaHorizontalSrc

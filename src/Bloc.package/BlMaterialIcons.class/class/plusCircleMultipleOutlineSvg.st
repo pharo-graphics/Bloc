@@ -1,3 +1,0 @@
-plus
-plusCircleMultipleOutlineSvg
-^ BlSvgPath fromStream: self plusCircleMultipleOutlineSrc

@@ -1,3 +1,0 @@
-information
-informationIcon
-^ self informationSvg asElement

@@ -1,3 +1,0 @@
-chart
-chartHistogramIcon
-^ self chartHistogramSvg asElement

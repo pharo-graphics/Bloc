@@ -1,3 +1,0 @@
-flashlight
-flashlightOffIcon
-^ self flashlightOffSvg asElement

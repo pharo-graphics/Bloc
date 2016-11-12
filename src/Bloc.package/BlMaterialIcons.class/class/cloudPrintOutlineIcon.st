@@ -1,3 +1,0 @@
-cloud
-cloudPrintOutlineIcon
-^ self cloudPrintOutlineSvg asElement

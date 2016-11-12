@@ -1,3 +1,0 @@
-tooltip
-tooltipOutlinePlusSvg
-^ BlSvgPath fromStream: self tooltipOutlinePlusSrc

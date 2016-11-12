@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Event",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlSpaceMouseLeaveEvent",
+	"pools" : [
+		 ],
+	"super" : "BlSpaceEvent",
+	"type" : "normal" }

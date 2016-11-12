@@ -1,3 +1,0 @@
-code
-codeGreaterThanOrEqualSvg
-^ BlSvgPath fromStream: self codeGreaterThanOrEqualSrc

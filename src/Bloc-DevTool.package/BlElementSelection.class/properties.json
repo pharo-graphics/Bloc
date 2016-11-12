@@ -1,18 +1,19 @@
 {
-	"commentStamp" : "",
-	"super" : "BlElement",
 	"category" : "Bloc-DevTool-Core",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"client",
 		"dragOffset",
 		"tlBtn",
 		"trBtn",
 		"blBtn",
-		"brBtn"
-	],
+		"brBtn" ],
 	"name" : "BlElementSelection",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlElement",
+	"type" : "normal" }

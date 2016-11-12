@@ -1,3 +1,0 @@
-folder
-folderLockOpenIcon
-^ self folderLockOpenSvg asElement

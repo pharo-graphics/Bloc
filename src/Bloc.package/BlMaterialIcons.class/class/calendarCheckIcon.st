@@ -1,3 +1,0 @@
-calendar
-calendarCheckIcon
-^ self calendarCheckSvg asElement

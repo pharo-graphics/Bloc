@@ -1,3 +1,0 @@
-information
-informationVariantSvg
-^ BlSvgPath fromStream: self informationVariantSrc

@@ -1,3 +1,0 @@
-bookmark
-bookmarkOutlinePlusSvg
-^ BlSvgPath fromStream: self bookmarkOutlinePlusSrc

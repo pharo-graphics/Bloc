@@ -1,3 +1,0 @@
-account
-accountMultipleOutlineSvg
-^ BlSvgPath fromStream: self accountMultipleOutlineSrc

@@ -1,3 +1,0 @@
-checkbox
-checkboxMarkedCircleOutlineIcon
-^ self checkboxMarkedCircleOutlineSvg asElement

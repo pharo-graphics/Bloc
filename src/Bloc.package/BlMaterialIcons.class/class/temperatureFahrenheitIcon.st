@@ -1,3 +1,0 @@
-temperature
-temperatureFahrenheitIcon
-^ self temperatureFahrenheitSvg asElement

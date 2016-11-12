@@ -1,3 +1,0 @@
-pause
-pauseOctagonOutlineIcon
-^ self pauseOctagonOutlineSvg asElement

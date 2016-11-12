@@ -1,3 +1,0 @@
-format
-formatObjectTopBottomSvg
-^ BlSvgPath fromStream: self formatObjectTopBottomSrc

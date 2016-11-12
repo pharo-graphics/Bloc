@@ -1,3 +1,0 @@
-wheelchair
-wheelchairAccessibilityIcon
-^ self wheelchairAccessibilitySvg asElement

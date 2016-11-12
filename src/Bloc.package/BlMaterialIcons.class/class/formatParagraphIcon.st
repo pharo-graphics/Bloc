@@ -1,3 +1,0 @@
-format
-formatParagraphIcon
-^ self formatParagraphSvg asElement

@@ -1,3 +1,0 @@
-playstation
-playstationIcon
-^ self playstationSvg asElement

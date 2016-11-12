@@ -1,3 +1,0 @@
-content
-contentSaveSettingsIcon
-^ self contentSaveSettingsSvg asElement

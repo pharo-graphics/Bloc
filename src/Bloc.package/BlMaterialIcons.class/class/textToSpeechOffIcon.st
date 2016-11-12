@@ -1,3 +1,0 @@
-text
-textToSpeechOffIcon
-^ self textToSpeechOffSvg asElement

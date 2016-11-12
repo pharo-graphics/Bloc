@@ -1,3 +1,0 @@
-format
-formatTextdirectionRToLIcon
-^ self formatTextdirectionRToLSvg asElement

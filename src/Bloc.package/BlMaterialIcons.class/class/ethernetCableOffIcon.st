@@ -1,3 +1,0 @@
-ethernet
-ethernetCableOffIcon
-^ self ethernetCableOffSvg asElement

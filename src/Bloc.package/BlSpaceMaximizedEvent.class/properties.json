@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Event",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlSpaceMaximizedEvent",
+	"pools" : [
+		 ],
+	"super" : "BlSpaceResizeEvent",
+	"type" : "normal" }

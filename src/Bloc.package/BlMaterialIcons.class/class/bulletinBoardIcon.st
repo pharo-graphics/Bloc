@@ -1,3 +1,0 @@
-bulletin
-bulletinBoardIcon
-^ self bulletinBoardSvg asElement

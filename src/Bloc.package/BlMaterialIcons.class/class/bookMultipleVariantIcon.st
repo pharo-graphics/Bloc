@@ -1,3 +1,0 @@
-book
-bookMultipleVariantIcon
-^ self bookMultipleVariantSvg asElement

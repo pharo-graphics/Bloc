@@ -1,3 +1,0 @@
-format
-formatObjectInlineIcon
-^ self formatObjectInlineSvg asElement

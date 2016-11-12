@@ -1,3 +1,0 @@
-panorama
-panoramaHorizontalIcon
-^ self panoramaHorizontalSvg asElement

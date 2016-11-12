@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlMobileSubElement",
 	"category" : "Bloc-Examples-MobilePhone",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlMobileCamera",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlMobileSubElement",
+	"type" : "normal" }

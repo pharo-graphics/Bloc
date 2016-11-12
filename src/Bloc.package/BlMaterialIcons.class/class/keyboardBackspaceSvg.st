@@ -1,3 +1,0 @@
-keyboard
-keyboardBackspaceSvg
-^ BlSvgPath fromStream: self keyboardBackspaceSrc

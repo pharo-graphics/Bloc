@@ -1,3 +1,0 @@
-stackexchange
-stackexchangeIcon
-^ self stackexchangeSvg asElement

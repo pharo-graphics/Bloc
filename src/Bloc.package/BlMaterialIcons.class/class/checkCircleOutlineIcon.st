@@ -1,3 +1,0 @@
-check
-checkCircleOutlineIcon
-^ self checkCircleOutlineSvg asElement

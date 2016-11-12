@@ -1,3 +1,0 @@
-format
-formatVerticalAlignBottomSvg
-^ BlSvgPath fromStream: self formatVerticalAlignBottomSrc

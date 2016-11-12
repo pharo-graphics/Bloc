@@ -1,3 +1,0 @@
-cellphone
-cellphoneDockIcon
-^ self cellphoneDockSvg asElement

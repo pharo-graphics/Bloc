@@ -1,3 +1,0 @@
-testing
-isWindowResize
-	^ false

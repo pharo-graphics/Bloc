@@ -1,3 +1,0 @@
-inbox
-inboxArrowDownIcon
-^ self inboxArrowDownSvg asElement

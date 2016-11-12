@@ -1,3 +1,0 @@
-folder
-folderOutlineLockIcon
-^ self folderOutlineLockSvg asElement

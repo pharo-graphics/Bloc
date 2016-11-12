@@ -1,3 +1,0 @@
-subdirectory
-subdirectoryArrowRightSvg
-^ BlSvgPath fromStream: self subdirectoryArrowRightSrc

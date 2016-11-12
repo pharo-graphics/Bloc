@@ -1,3 +1,0 @@
-vector
-vectorRectangleIcon
-^ self vectorRectangleSvg asElement

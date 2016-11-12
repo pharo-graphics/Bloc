@@ -1,3 +1,0 @@
-emoticon
-emoticonNeutralIcon
-^ self emoticonNeutralSvg asElement

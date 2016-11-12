@@ -1,3 +1,0 @@
-silverware
-silverwareVariantSvg
-^ BlSvgPath fromStream: self silverwareVariantSrc

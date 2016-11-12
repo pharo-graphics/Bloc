@@ -1,3 +1,0 @@
-access
-accessPointNetworkIcon
-^ self accessPointNetworkSvg asElement

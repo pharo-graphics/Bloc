@@ -1,3 +1,0 @@
-toggle
-toggleSwitchOnIcon
-^ self toggleSwitchOnSvg asElement

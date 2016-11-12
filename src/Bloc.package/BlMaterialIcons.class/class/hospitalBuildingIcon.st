@@ -1,3 +1,0 @@
-hospital
-hospitalBuildingIcon
-^ self hospitalBuildingSvg asElement

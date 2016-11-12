@@ -1,3 +1,0 @@
-credit
-creditCardMultipleIcon
-^ self creditCardMultipleSvg asElement

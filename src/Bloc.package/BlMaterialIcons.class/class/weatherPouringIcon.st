@@ -1,3 +1,0 @@
-weather
-weatherPouringIcon
-^ self weatherPouringSvg asElement

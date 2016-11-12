@@ -1,3 +1,0 @@
-arrow
-arrowBottomRightIcon
-^ self arrowBottomRightSvg asElement

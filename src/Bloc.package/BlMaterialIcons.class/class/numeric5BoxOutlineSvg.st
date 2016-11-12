@@ -1,3 +1,0 @@
-numeric
-numeric5BoxOutlineSvg
-^ BlSvgPath fromStream: self numeric5BoxOutlineSrc

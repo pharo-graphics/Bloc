@@ -1,3 +1,0 @@
-numeric
-numeric8BoxMultipleOutlineIcon
-^ self numeric8BoxMultipleOutlineSvg asElement

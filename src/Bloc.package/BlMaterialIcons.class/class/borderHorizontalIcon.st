@@ -1,3 +1,0 @@
-border
-borderHorizontalIcon
-^ self borderHorizontalSvg asElement

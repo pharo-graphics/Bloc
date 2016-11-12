@@ -1,3 +1,0 @@
-silverware
-silverwareForkIcon
-^ self silverwareForkSvg asElement

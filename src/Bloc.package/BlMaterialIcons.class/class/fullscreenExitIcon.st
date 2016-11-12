@@ -1,3 +1,0 @@
-fullscreen
-fullscreenExitIcon
-^ self fullscreenExitSvg asElement

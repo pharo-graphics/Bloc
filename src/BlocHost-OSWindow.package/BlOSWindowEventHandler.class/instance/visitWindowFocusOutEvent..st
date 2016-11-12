@@ -1,5 +1,5 @@
 visiting window
 visitWindowFocusOutEvent: anEvent
-	^ BlWindowFocusOutEvent new
+	^ BlSpaceFocusOutEvent new
 		timestamp: Time millisecondClockValue;
 		yourself

@@ -1,3 +1,0 @@
-clipboard
-clipboardAccountIcon
-^ self clipboardAccountSvg asElement

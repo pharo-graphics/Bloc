@@ -1,3 +1,0 @@
-washing
-washingMachineIcon
-^ self washingMachineSvg asElement

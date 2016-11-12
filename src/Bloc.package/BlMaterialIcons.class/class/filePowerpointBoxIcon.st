@@ -1,3 +1,0 @@
-file
-filePowerpointBoxIcon
-^ self filePowerpointBoxSvg asElement

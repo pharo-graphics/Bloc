@@ -1,3 +1,0 @@
-presentation
-presentationPlaySvg
-^ BlSvgPath fromStream: self presentationPlaySrc

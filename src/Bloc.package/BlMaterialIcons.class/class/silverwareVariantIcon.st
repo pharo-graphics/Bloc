@@ -1,3 +1,0 @@
-silverware
-silverwareVariantIcon
-^ self silverwareVariantSvg asElement

@@ -1,3 +1,0 @@
-bluetooth
-bluetoothSettingsSvg
-^ BlSvgPath fromStream: self bluetoothSettingsSrc

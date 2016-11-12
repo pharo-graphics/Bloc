@@ -1,3 +1,0 @@
-format
-formatObjectSquareIcon
-^ self formatObjectSquareSvg asElement

@@ -1,3 +1,0 @@
-readability
-readabilityIcon
-^ self readabilitySvg asElement

@@ -1,3 +1,0 @@
-format
-formatTextdirectionLToRSvg
-^ BlSvgPath fromStream: self formatTextdirectionLToRSrc

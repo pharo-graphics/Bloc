@@ -1,3 +1,0 @@
-format
-formatIndentIncreaseIcon
-^ self formatIndentIncreaseSvg asElement

@@ -1,3 +1,0 @@
-arrange
-arrangeBringForwardIcon
-^ self arrangeBringForwardSvg asElement

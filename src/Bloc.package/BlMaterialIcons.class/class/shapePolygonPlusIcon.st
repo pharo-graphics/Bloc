@@ -1,3 +1,0 @@
-shape
-shapePolygonPlusIcon
-^ self shapePolygonPlusSvg asElement

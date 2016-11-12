@@ -1,3 +1,0 @@
-battery
-batteryCharging30Icon
-^ self batteryCharging30Svg asElement

@@ -1,3 +1,0 @@
-credit
-creditCardMultipleSvg
-^ BlSvgPath fromStream: self creditCardMultipleSrc

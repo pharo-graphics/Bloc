@@ -1,3 +1,0 @@
-professional
-professionalHexagonIcon
-^ self professionalHexagonSvg asElement

@@ -1,3 +1,0 @@
-format
-formatUnderlineIcon
-^ self formatUnderlineSvg asElement

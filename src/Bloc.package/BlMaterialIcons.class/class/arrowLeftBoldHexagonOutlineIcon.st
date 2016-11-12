@@ -1,3 +1,0 @@
-arrow
-arrowLeftBoldHexagonOutlineIcon
-^ self arrowLeftBoldHexagonOutlineSvg asElement

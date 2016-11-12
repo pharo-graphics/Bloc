@@ -1,3 +1,0 @@
-arrange
-arrangeBringForwardSvg
-^ BlSvgPath fromStream: self arrangeBringForwardSrc

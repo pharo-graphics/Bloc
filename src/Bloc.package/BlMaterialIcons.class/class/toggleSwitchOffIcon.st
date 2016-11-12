@@ -1,3 +1,0 @@
-toggle
-toggleSwitchOffIcon
-^ self toggleSwitchOffSvg asElement

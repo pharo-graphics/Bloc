@@ -1,3 +1,0 @@
-cursor
-cursorDefaultOutlineSvg
-^ BlSvgPath fromStream: self cursorDefaultOutlineSrc

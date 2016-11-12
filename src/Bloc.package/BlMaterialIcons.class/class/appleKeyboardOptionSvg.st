@@ -1,3 +1,0 @@
-apple
-appleKeyboardOptionSvg
-^ BlSvgPath fromStream: self appleKeyboardOptionSrc

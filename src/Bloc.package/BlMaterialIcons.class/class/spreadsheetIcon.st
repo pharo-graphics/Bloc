@@ -1,3 +1,0 @@
-spreadsheet
-spreadsheetIcon
-^ self spreadsheetSvg asElement

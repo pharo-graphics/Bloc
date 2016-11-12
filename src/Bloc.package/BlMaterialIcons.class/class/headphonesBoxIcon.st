@@ -1,3 +1,0 @@
-headphones
-headphonesBoxIcon
-^ self headphonesBoxSvg asElement

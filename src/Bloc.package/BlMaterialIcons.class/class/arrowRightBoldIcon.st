@@ -1,3 +1,0 @@
-arrow
-arrowRightBoldIcon
-^ self arrowRightBoldSvg asElement

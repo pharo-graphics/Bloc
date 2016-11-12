@@ -1,3 +1,0 @@
-bookmark
-bookmarkCheckIcon
-^ self bookmarkCheckSvg asElement

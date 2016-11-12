@@ -1,3 +1,0 @@
-weather
-weatherLightningRainySvg
-^ BlSvgPath fromStream: self weatherLightningRainySrc

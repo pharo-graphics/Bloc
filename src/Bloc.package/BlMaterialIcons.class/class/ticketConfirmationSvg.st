@@ -1,3 +1,0 @@
-ticket
-ticketConfirmationSvg
-^ BlSvgPath fromStream: self ticketConfirmationSrc

@@ -1,3 +1,0 @@
-transcribe
-transcribeCloseIcon
-^ self transcribeCloseSvg asElement

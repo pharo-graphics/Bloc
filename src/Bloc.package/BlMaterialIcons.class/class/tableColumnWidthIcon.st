@@ -1,3 +1,0 @@
-table
-tableColumnWidthIcon
-^ self tableColumnWidthSvg asElement

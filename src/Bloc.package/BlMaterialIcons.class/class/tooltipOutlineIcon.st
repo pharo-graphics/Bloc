@@ -1,3 +1,0 @@
-tooltip
-tooltipOutlineIcon
-^ self tooltipOutlineSvg asElement

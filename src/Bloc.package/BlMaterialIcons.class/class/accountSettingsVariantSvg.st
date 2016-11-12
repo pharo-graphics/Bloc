@@ -1,3 +1,0 @@
-account
-accountSettingsVariantSvg
-^ BlSvgPath fromStream: self accountSettingsVariantSrc

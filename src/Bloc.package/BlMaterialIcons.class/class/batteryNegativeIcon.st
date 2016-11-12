@@ -1,3 +1,0 @@
-battery
-batteryNegativeIcon
-^ self batteryNegativeSvg asElement

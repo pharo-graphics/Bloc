@@ -1,3 +1,0 @@
-battery
-batteryCharging100Svg
-^ BlSvgPath fromStream: self batteryCharging100Src

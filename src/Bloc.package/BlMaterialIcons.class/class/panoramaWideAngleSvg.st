@@ -1,3 +1,0 @@
-panorama
-panoramaWideAngleSvg
-^ BlSvgPath fromStream: self panoramaWideAngleSrc

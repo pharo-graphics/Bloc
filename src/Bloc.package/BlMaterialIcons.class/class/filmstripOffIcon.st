@@ -1,3 +1,0 @@
-filmstrip
-filmstripOffIcon
-^ self filmstripOffSvg asElement

@@ -1,3 +1,0 @@
-language
-languageHtml5Icon
-^ self languageHtml5Svg asElement

@@ -1,3 +1,0 @@
-clipboard
-clipboardCheckIcon
-^ self clipboardCheckSvg asElement

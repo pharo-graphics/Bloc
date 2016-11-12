@@ -1,3 +1,0 @@
-content
-contentSaveAllIcon
-^ self contentSaveAllSvg asElement

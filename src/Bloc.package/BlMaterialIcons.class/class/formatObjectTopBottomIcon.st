@@ -1,3 +1,0 @@
-format
-formatObjectTopBottomIcon
-^ self formatObjectTopBottomSvg asElement

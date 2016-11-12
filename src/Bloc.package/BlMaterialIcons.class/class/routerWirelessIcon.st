@@ -1,3 +1,0 @@
-router
-routerWirelessIcon
-^ self routerWirelessSvg asElement

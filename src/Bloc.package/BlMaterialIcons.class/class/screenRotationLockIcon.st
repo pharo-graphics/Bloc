@@ -1,3 +1,0 @@
-screen
-screenRotationLockIcon
-^ self screenRotationLockSvg asElement

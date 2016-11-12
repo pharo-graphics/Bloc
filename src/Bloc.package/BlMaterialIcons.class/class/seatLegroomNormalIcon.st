@@ -1,3 +1,0 @@
-seat
-seatLegroomNormalIcon
-^ self seatLegroomNormalSvg asElement

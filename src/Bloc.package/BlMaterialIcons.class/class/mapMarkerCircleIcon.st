@@ -1,3 +1,0 @@
-map
-mapMarkerCircleIcon
-^ self mapMarkerCircleSvg asElement

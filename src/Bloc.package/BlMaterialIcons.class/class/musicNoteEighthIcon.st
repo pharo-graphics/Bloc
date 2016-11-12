@@ -1,3 +1,0 @@
-music
-musicNoteEighthIcon
-^ self musicNoteEighthSvg asElement

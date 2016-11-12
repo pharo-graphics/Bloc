@@ -1,3 +1,0 @@
-sort
-sortAlphabeticalIcon
-^ self sortAlphabeticalSvg asElement

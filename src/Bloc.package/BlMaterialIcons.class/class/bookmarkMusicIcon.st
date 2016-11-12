@@ -1,3 +1,0 @@
-bookmark
-bookmarkMusicIcon
-^ self bookmarkMusicSvg asElement

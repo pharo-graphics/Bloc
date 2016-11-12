@@ -1,3 +1,0 @@
-decimal
-decimalIncreaseIcon
-^ self decimalIncreaseSvg asElement

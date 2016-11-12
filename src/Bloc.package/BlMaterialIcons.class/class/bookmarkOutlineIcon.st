@@ -1,3 +1,0 @@
-bookmark
-bookmarkOutlineIcon
-^ self bookmarkOutlineSvg asElement

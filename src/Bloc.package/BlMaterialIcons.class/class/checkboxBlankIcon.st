@@ -1,3 +1,0 @@
-checkbox
-checkboxBlankIcon
-^ self checkboxBlankSvg asElement

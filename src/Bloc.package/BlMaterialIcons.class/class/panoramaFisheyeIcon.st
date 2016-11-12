@@ -1,3 +1,0 @@
-panorama
-panoramaFisheyeIcon
-^ self panoramaFisheyeSvg asElement

@@ -2,49 +2,49 @@ event handling
 visitWindowEvent: windowEvent
 	
 	windowEvent event = SDL_WINDOWEVENT_EXPOSED ifTrue: [
-		^ BlWindowExposeEvent new
+		^ BlSpaceExposeEvent new
 			timestamp: Time millisecondClockValue.
 	].
 	windowEvent event = SDL_WINDOWEVENT_CLOSE ifTrue: [ 
-		^ BlWindowCloseEvent new
+		^ BlSpaceCloseEvent new
 			timestamp: Time millisecondClockValue
 	].
 	windowEvent event = SDL_WINDOWEVENT_MOVED ifTrue: [ 
-		^ BlWindowMoveEvent new
+		^ BlSpaceMoveEvent new
 			timestamp: Time millisecondClockValue;
 			position: self hostSpace position
 	].
 	windowEvent event = SDL_WINDOWEVENT_RESIZED ifTrue: [ 
-		^ BlWindowResizeEvent new
+		^ BlSpaceResizeEvent new
 			extent: windowEvent data1 @ windowEvent data2;
 			timestamp: Time millisecondClockValue
 	].
 	windowEvent event = SDL_WINDOWEVENT_ENTER ifTrue: [ 
-		^ BlWindowMouseEnterEvent new
+		^ BlSpaceMouseEnterEvent new
 			timestamp: Time millisecondClockValue
 	].
 	windowEvent event = SDL_WINDOWEVENT_LEAVE ifTrue: [ 
-		^ BlWindowMouseLeaveEvent new
+		^ BlSpaceMouseLeaveEvent new
 			timestamp: Time millisecondClockValue;
 			yourself
 	].
 	windowEvent event = SDL_WINDOWEVENT_FOCUS_GAINED ifTrue: [ 
-		^ BlWindowFocusInEvent new
+		^ BlSpaceFocusInEvent new
 			timestamp: Time millisecondClockValue;
 			yourself
 	].
 	windowEvent event = SDL_WINDOWEVENT_FOCUS_LOST ifTrue: [ 
-		^ BlWindowFocusOutEvent new
+		^ BlSpaceFocusOutEvent new
 			timestamp: Time millisecondClockValue
 	].
 	windowEvent event = SDL_WINDOWEVENT_MAXIMIZED ifTrue: [ 
-		^ BlWindowMaximizedEvent new
+		^ BlSpaceMaximizedEvent new
 			timestamp: Time millisecondClockValue
 	].
 	windowEvent event = SDL_WINDOWEVENT_MINIMIZED ifTrue: [ 
-		^ BlWindowMinimizedEvent new
+		^ BlSpaceMinimizedEvent new
 			timestamp: Time millisecondClockValue
 	].
 
-^ BlWindowEvent new
+^ BlSpaceEvent new
 	timestamp: Time millisecondClockValue

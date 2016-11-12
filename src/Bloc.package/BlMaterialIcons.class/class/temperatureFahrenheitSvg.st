@@ -1,3 +1,0 @@
-temperature
-temperatureFahrenheitSvg
-^ BlSvgPath fromStream: self temperatureFahrenheitSrc

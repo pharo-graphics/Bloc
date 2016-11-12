@@ -1,3 +1,0 @@
-emoticon
-emoticonHappyIcon
-^ self emoticonHappySvg asElement

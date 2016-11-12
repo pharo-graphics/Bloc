@@ -1,3 +1,0 @@
-bluetooth
-bluetoothTransferIcon
-^ self bluetoothTransferSvg asElement

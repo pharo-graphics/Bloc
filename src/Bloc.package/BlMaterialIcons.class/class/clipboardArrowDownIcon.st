@@ -1,3 +1,0 @@
-clipboard
-clipboardArrowDownIcon
-^ self clipboardArrowDownSvg asElement

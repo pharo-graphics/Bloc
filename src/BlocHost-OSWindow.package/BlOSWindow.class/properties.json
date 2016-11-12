@@ -1,17 +1,18 @@
 {
+	"category" : "BlocHost-OSWindow-Core",
+	"classinstvars" : [
+		 ],
 	"classtraitcomposition" : "TBlHostSpace classTrait",
-	"classvars" : [ ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"window",
 		"renderer",
-		"eventFetcher"
-	],
+		"eventFetcher" ],
 	"name" : "BlOSWindow",
-	"commentStamp" : "",
+	"pools" : [
+		 ],
 	"super" : "Object",
 	"traitcomposition" : "TBlHostSpace",
-	"type" : "normal",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"category" : "BlocHost-OSWindow-Core"
-}
+	"type" : "normal" }

@@ -1,3 +1,0 @@
-image
-imageFilterTiltShiftSvg
-^ BlSvgPath fromStream: self imageFilterTiltShiftSrc

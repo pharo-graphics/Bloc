@@ -1,3 +1,0 @@
-seat
-seatIndividualSuiteIcon
-^ self seatIndividualSuiteSvg asElement

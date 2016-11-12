@@ -1,3 +1,0 @@
-google
-googleCirclesInviteSvg
-^ BlSvgPath fromStream: self googleCirclesInviteSrc

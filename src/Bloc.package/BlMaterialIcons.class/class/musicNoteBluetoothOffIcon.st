@@ -1,3 +1,0 @@
-music
-musicNoteBluetoothOffIcon
-^ self musicNoteBluetoothOffSvg asElement

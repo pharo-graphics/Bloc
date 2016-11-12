@@ -1,3 +1,0 @@
-numeric
-numeric9PlusBoxMultipleOutlineIcon
-^ self numeric9PlusBoxMultipleOutlineSvg asElement

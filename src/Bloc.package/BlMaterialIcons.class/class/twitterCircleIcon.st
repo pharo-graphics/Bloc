@@ -1,3 +1,0 @@
-twitter
-twitterCircleIcon
-^ self twitterCircleSvg asElement

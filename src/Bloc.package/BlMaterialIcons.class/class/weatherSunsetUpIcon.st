@@ -1,3 +1,0 @@
-weather
-weatherSunsetUpIcon
-^ self weatherSunsetUpSvg asElement

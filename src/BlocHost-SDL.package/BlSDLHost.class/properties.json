@@ -1,16 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "BlHost",
 	"category" : "BlocHost-SDL",
-	"classinstvars" : [ ],
-	"pools" : [
-		"SDL2Constants"
-	],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"hostSpaces",
-		"eventHandler"
-	],
+		"eventHandler" ],
 	"name" : "BlSDLHost",
-	"type" : "normal"
-}
+	"pools" : [
+		"SDL2Constants" ],
+	"super" : "BlHost",
+	"type" : "normal" }

@@ -1,3 +1,0 @@
-white
-whiteBalanceAutoIcon
-^ self whiteBalanceAutoSvg asElement

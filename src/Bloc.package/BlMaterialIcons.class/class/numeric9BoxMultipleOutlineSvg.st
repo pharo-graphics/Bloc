@@ -1,3 +1,0 @@
-numeric
-numeric9BoxMultipleOutlineSvg
-^ BlSvgPath fromStream: self numeric9BoxMultipleOutlineSrc

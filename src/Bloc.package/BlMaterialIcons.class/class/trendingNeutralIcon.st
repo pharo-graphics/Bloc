@@ -1,3 +1,0 @@
-trending
-trendingNeutralIcon
-^ self trendingNeutralSvg asElement

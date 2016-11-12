@@ -1,3 +1,0 @@
-account
-accountRemoveIcon
-^ self accountRemoveSvg asElement

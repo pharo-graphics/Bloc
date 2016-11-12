@@ -1,3 +1,0 @@
-flag
-flagOutlineVariantIcon
-^ self flagOutlineVariantSvg asElement

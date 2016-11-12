@@ -1,3 +1,0 @@
-format
-formatHeaderPoundIcon
-^ self formatHeaderPoundSvg asElement

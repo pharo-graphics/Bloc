@@ -1,3 +1,0 @@
-cellphone
-cellphoneIphoneIcon
-^ self cellphoneIphoneSvg asElement

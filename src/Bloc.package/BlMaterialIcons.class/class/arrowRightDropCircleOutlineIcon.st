@@ -1,3 +1,0 @@
-arrow
-arrowRightDropCircleOutlineIcon
-^ self arrowRightDropCircleOutlineSvg asElement

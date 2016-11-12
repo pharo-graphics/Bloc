@@ -1,3 +1,0 @@
-bluetooth
-bluetoothConnectIcon
-^ self bluetoothConnectSvg asElement

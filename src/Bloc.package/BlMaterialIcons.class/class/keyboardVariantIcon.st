@@ -1,3 +1,0 @@
-keyboard
-keyboardVariantIcon
-^ self keyboardVariantSvg asElement

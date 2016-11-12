@@ -1,3 +1,0 @@
-apple
-appleKeyboardCommandIcon
-^ self appleKeyboardCommandSvg asElement

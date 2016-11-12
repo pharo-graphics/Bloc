@@ -1,3 +1,0 @@
-email
-emailOpenOutlineIcon
-^ self emailOpenOutlineSvg asElement

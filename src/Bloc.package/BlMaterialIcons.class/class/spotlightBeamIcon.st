@@ -1,3 +1,0 @@
-spotlight
-spotlightBeamIcon
-^ self spotlightBeamSvg asElement

@@ -1,3 +1,0 @@
-format
-formatHeaderEqualIcon
-^ self formatHeaderEqualSvg asElement

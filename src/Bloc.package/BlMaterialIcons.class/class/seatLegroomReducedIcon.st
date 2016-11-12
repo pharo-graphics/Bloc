@@ -1,3 +1,0 @@
-seat
-seatLegroomReducedIcon
-^ self seatLegroomReducedSvg asElement

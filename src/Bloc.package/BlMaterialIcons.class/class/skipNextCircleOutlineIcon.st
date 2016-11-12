@@ -1,3 +1,0 @@
-skip
-skipNextCircleOutlineIcon
-^ self skipNextCircleOutlineSvg asElement

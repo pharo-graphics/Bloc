@@ -1,3 +1,0 @@
-laptop
-laptopChromebookIcon
-^ self laptopChromebookSvg asElement

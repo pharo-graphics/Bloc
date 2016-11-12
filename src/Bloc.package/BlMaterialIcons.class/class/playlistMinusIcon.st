@@ -1,3 +1,0 @@
-playlist
-playlistMinusIcon
-^ self playlistMinusSvg asElement

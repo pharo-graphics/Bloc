@@ -1,3 +1,0 @@
-account
-accountMultipleMinusSvg
-^ BlSvgPath fromStream: self accountMultipleMinusSrc

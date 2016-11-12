@@ -1,3 +1,0 @@
-account
-accountBoxOutlineIcon
-^ self accountBoxOutlineSvg asElement

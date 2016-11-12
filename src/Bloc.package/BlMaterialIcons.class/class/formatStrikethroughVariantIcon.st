@@ -1,3 +1,0 @@
-format
-formatStrikethroughVariantIcon
-^ self formatStrikethroughVariantSvg asElement

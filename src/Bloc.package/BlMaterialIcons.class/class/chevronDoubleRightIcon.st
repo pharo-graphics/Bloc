@@ -1,3 +1,0 @@
-chevron
-chevronDoubleRightIcon
-^ self chevronDoubleRightSvg asElement

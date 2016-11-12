@@ -1,3 +1,0 @@
-cellphone
-cellphoneLinkIcon
-^ self cellphoneLinkSvg asElement

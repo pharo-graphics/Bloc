@@ -1,3 +1,0 @@
-minus
-minusCircleOutlineIcon
-^ self minusCircleOutlineSvg asElement

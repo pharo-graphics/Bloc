@@ -1,3 +1,0 @@
-information
-informationOutlineIcon
-^ self informationOutlineSvg asElement

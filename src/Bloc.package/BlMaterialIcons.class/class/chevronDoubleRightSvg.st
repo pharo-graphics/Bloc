@@ -1,3 +1,0 @@
-chevron
-chevronDoubleRightSvg
-^ BlSvgPath fromStream: self chevronDoubleRightSrc

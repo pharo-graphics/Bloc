@@ -1,3 +1,0 @@
-language
-languagePythonTextSvg
-^ BlSvgPath fromStream: self languagePythonTextSrc

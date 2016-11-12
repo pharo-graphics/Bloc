@@ -1,3 +1,0 @@
-camera
-cameraFrontVariantIcon
-^ self cameraFrontVariantSvg asElement

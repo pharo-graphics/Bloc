@@ -1,3 +1,0 @@
-seat
-seatIndividualSuiteSvg
-^ BlSvgPath fromStream: self seatIndividualSuiteSrc

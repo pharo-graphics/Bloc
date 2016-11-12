@@ -1,3 +1,0 @@
-window
-windowMaximizeIcon
-^ self windowMaximizeSvg asElement

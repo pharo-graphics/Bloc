@@ -1,3 +1,0 @@
-table
-tableColumnPlusBeforeIcon
-^ self tableColumnPlusBeforeSvg asElement

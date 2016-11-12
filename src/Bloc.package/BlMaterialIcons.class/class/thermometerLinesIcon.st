@@ -1,3 +1,0 @@
-thermometer
-thermometerLinesIcon
-^ self thermometerLinesSvg asElement

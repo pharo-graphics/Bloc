@@ -1,3 +1,0 @@
-google
-googleCardboardIcon
-^ self googleCardboardSvg asElement

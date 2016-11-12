@@ -1,3 +1,0 @@
-shuffle
-shuffleDisabledIcon
-^ self shuffleDisabledSvg asElement

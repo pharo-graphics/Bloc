@@ -1,3 +1,0 @@
-image
-imageFilterTiltShiftIcon
-^ self imageFilterTiltShiftSvg asElement

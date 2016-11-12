@@ -3,14 +3,14 @@ exampleElementBounds
 	| el parent |
 	el := BlElement new
 		extent: 200 @ 200;
-		background: BlMaterialColor green100;
+		background: Color green;
 		padding: (BlInsets all: 30);
 		margin: (BlInsets all: 30);
 		position: 100 @ 100;
 		effect: (BlDropShadowEffect color: Color black width: 15 offset: 0).
 	parent := BlElement new
 		extent: 400 @ 400;
-		background: BlMaterialColor blue100;
+		background: Color blue;
 		effect: (BlDropShadowEffect color: Color black width: 10 offset: 0);
 		position: 100 @ 100;
 		addChild: el.

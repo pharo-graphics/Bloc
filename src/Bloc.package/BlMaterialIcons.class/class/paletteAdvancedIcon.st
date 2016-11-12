@@ -1,3 +1,0 @@
-palette
-paletteAdvancedIcon
-^ self paletteAdvancedSvg asElement

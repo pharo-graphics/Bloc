@@ -1,3 +1,0 @@
-image
-imageFilterBlackWhiteIcon
-^ self imageFilterBlackWhiteSvg asElement

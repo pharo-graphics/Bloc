@@ -1,3 +1,0 @@
-trophy
-trophyVariantOutlineSvg
-^ BlSvgPath fromStream: self trophyVariantOutlineSrc

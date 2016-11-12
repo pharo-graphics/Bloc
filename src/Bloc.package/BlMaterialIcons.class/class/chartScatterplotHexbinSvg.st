@@ -1,3 +1,0 @@
-chart
-chartScatterplotHexbinSvg
-^ BlSvgPath fromStream: self chartScatterplotHexbinSrc

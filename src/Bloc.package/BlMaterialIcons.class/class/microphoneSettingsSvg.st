@@ -1,3 +1,0 @@
-microphone
-microphoneSettingsSvg
-^ BlSvgPath fromStream: self microphoneSettingsSrc

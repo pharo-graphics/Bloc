@@ -1,3 +1,0 @@
-information
-informationOutlineSvg
-^ BlSvgPath fromStream: self informationOutlineSrc

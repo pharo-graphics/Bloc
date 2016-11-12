@@ -1,3 +1,0 @@
-vector
-vectorArrangeAboveSvg
-^ BlSvgPath fromStream: self vectorArrangeAboveSrc

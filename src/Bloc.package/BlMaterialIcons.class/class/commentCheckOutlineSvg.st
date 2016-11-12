@@ -1,3 +1,0 @@
-comment
-commentCheckOutlineSvg
-^ BlSvgPath fromStream: self commentCheckOutlineSrc

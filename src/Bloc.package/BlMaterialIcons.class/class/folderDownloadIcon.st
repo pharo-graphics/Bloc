@@ -1,3 +1,0 @@
-folder
-folderDownloadIcon
-^ self folderDownloadSvg asElement

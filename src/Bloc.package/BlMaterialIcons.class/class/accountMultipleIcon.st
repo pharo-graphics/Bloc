@@ -1,3 +1,0 @@
-account
-accountMultipleIcon
-^ self accountMultipleSvg asElement
