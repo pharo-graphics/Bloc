@@ -1,5 +1,7 @@
-as yet unclassified
+actions
 postLoadGit: aSpecLoader
+	"I load bloc using Iceberg from provided git repository.
+	I exract target group (core / development) from baseline specification of a spec loader"
 	|group loadDirective packages|
 
 	group := (aSpecLoader spec required difference: aSpecLoader spec packages keys) asArray first asSymbol.

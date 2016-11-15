@@ -1,4 +1,4 @@
-as yet unclassified
+private
 loadBlocInIceberg: anOrderedPackageList
 	| repository |
 	repository := (Smalltalk classNamed: #IceRepository) origin: 'git@github.com:pharo-graphics/Bloc.git'.

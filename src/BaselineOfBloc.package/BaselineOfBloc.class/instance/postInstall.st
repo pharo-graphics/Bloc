@@ -1,4 +1,4 @@
-as yet unclassified
+actions
 postInstall
 	|pragmas|
 	pragmas := OrderedCollection new.

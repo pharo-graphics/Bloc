@@ -1,4 +1,4 @@
-as yet unclassified
+private
 ensureIceberg
 	(Smalltalk hasClassNamed: #Iceberg)
 		ifTrue: [ ^ self ].

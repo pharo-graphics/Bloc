@@ -1,4 +1,4 @@
-as yet unclassified
+actions
 postLoadActions: aSpecLoader
 	| group protocol columnIndex |
 	group := (aSpecLoader spec required difference: aSpecLoader spec packages keys) asArray first asSymbol.
