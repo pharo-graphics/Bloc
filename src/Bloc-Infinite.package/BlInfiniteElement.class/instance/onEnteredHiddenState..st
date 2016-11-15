@@ -1,0 +1,2 @@
+hook
+onEnteredHiddenState: aChildElement

@@ -1,0 +1,3 @@
+testing
+isItemRemoved
+	^ holder isRemoved

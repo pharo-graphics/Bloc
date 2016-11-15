@@ -1,0 +1,3 @@
+accessing
+itemCount
+	^ self subclassResponsibility

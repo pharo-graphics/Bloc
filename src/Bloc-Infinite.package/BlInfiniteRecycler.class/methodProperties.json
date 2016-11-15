@@ -1,0 +1,20 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"attachedScrap" : "AliakseiSyrel 5/25/2016 21:27",
+		"attachedTo:" : "AliakseiSyrel 5/25/2016 21:06",
+		"cachedScrap" : "AliakseiSyrel 5/25/2016 21:47",
+		"changedScrap" : "AliakseiSyrel 5/25/2016 20:52",
+		"context" : "AliakseiSyrel 5/25/2016 21:06",
+		"customCache" : "AliakseiSyrel 5/26/2016 12:34",
+		"defaultFetcher" : "AliakseiSyrel 5/26/2016 13:22",
+		"detachedFrom:" : "AliakseiSyrel 5/25/2016 21:06",
+		"elementFor:" : "AliakseiSyrel 5/26/2016 13:45",
+		"elementFor:dryRun:" : "AliakseiSyrel 5/26/2016 13:45",
+		"initialize" : "AliakseiSyrel 5/26/2016 13:22",
+		"pool" : "AliakseiSyrel 5/26/2016 13:01",
+		"privateRecycleHolder:" : "AliakseiSyrel 5/25/2016 23:30",
+		"quickRecycleScrap:" : "AliakseiSyrel 11/15/2016 09:01",
+		"recycleCachedAt:" : "AliakseiSyrel 5/26/2016 12:19",
+		"unscrapHolder:" : "AliakseiSyrel 5/25/2016 23:20" } }

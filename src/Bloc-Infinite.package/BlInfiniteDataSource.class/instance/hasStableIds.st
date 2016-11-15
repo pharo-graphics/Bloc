@@ -1,0 +1,3 @@
+testing
+hasStableIds
+	^ self subclassResponsibility

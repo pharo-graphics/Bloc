@@ -1,0 +1,19 @@
+{
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/20/2016 23:42",
+	"instvars" : [
+		"dataSource",
+		"dataSourceController",
+		"childrenController",
+		"state",
+		"recycler",
+		"itemAnimator" ],
+	"name" : "BlInfiniteElement",
+	"pools" : [
+		 ],
+	"super" : "BlElement",
+	"type" : "normal" }

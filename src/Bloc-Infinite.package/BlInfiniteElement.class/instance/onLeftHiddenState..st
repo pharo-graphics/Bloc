@@ -1,0 +1,2 @@
+hook
+onLeftHiddenState: aChildElement

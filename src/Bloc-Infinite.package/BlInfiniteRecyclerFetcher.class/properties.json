@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Recycler",
+	"classinstvars" : [
+		"instance" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"nextFetcher" ],
+	"name" : "BlInfiniteRecyclerFetcher",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

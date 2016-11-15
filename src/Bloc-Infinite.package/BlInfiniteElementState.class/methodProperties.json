@@ -1,0 +1,16 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"at:" : "AliakseiSyrel 5/25/2016 13:20",
+		"at:put:" : "AliakseiSyrel 5/25/2016 13:21",
+		"didStructureChange" : "AliakseiSyrel 5/25/2016 13:23",
+		"hasTargetScrollPosition" : "AliakseiSyrel 5/25/2016 13:23",
+		"initialize" : "AliakseiSyrel 5/25/2016 13:15",
+		"isPreLayout" : "AliakseiSyrel 5/25/2016 20:45",
+		"itemCount" : "AliakseiSyrel 5/25/2016 13:24",
+		"remove:" : "AliakseiSyrel 5/25/2016 13:19",
+		"reset" : "AliakseiSyrel 5/25/2016 13:17",
+		"targetScrollPosition" : "AliakseiSyrel 5/25/2016 13:22",
+		"willRunPredictiveAnimations" : "AliakseiSyrel 5/25/2016 13:18",
+		"willRunSimpleAnimations" : "AliakseiSyrel 5/25/2016 13:18" } }

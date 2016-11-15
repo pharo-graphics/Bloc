@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-DataSource",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/25/2016 13:25",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteDataSourceCommandTypeRemove",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteDataSourceCommandType",
+	"type" : "normal" }

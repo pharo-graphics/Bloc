@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-Infinite-Layout",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/20/2016 23:49",
+	"instvars" : [
+		"holder",
+		"pendingInvalidate" ],
+	"name" : "BlInfiniteConstraints",
+	"pools" : [
+		 ],
+	"super" : "BlLayoutConstraints",
+	"type" : "normal" }

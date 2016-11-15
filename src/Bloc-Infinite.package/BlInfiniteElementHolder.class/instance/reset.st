@@ -1,0 +1,3 @@
+private invalidate
+reset
+	self shouldBeImplemented

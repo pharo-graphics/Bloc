@@ -1,0 +1,3 @@
+testing
+isItemChanged
+	^ holder isChanged

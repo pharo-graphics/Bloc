@@ -1,0 +1,3 @@
+testing
+hasPendingCommands
+	^ pendingCommands isNotEmpty

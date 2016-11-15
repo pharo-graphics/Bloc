@@ -1,0 +1,2 @@
+hook
+dispatchChildAttached: aChildElement

@@ -1,0 +1,3 @@
+testing
+isElementInvalid
+	^ holder isInvalid

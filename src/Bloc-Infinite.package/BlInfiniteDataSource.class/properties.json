@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-DataSource",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/20/2016 23:44",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteDataSource",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,3 @@
+initialization
+defaultNext
+	^ BlInfiniteRecyclerCustomCacheFetcher instance

@@ -1,0 +1,11 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"canScrollHorizontally" : "AliakseiSyrel 5/23/2016 17:44",
+		"canScrollVertically" : "AliakseiSyrel 5/23/2016 17:44",
+		"onItemsAddedAt:count:" : "AliakseiSyrel 5/24/2016 14:02",
+		"onItemsMovedFrom:to:itemCount:" : "AliakseiSyrel 5/24/2016 14:04",
+		"onItemsRemovedAt:count:" : "AliakseiSyrel 5/24/2016 14:02",
+		"onItemsUpdatedAt:count:payload:" : "AliakseiSyrel 5/24/2016 14:02",
+		"scrollToPosition:" : "AliakseiSyrel 5/23/2016 17:46" } }

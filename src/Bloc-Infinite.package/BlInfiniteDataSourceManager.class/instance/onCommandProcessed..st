@@ -1,0 +1,2 @@
+commands processing
+onCommandProcessed: aCommand

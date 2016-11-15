@@ -1,0 +1,1 @@
+I represent a concrete "move" command type

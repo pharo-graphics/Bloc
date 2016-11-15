@@ -1,0 +1,3 @@
+initialization
+defaultChildrenManager
+	^ BlInfiniteChildrenManager new

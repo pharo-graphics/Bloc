@@ -1,0 +1,2 @@
+hooks
+onChildAdded: aHolder

@@ -1,0 +1,3 @@
+dispatch
+positionMultiplier
+	^ self subclassResponsibility

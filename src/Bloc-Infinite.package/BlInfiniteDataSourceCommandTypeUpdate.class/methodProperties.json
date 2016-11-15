@@ -1,0 +1,16 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"apply:on:" : "AliakseiSyrel 5/24/2016 21:06",
+		"apply:onPosition:" : "AliakseiSyrel 5/24/2016 23:58",
+		"continuous:start:" : "AliakseiSyrel 5/24/2016 21:09",
+		"dispatch:toLayout:" : "AliakseiSyrel 5/24/2016 21:11",
+		"dispatchOn:start:count:payload:" : "AliakseiSyrel 5/24/2016 21:05",
+		"isUpdate" : "AliakseiSyrel 5/24/2016 21:27",
+		"positionMultiplier" : "AliakseiSyrel 5/24/2016 21:13",
+		"postponeOn:start:count:payload:" : "AliakseiSyrel 5/24/2016 21:06",
+		"swapMoveOn:in:badMoveIndex:nextIndex:" : "AliakseiSyrel 5/24/2016 21:53",
+		"updateElementHoldersOn:command:" : "AliakseiSyrel 5/24/2016 21:15",
+		"updateElementHoldersOn:offset:command:" : "AliakseiSyrel 5/24/2016 21:18",
+		"updatePosition:with:from:" : "AliakseiSyrel 5/24/2016 21:24" } }

@@ -1,0 +1,23 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"applyPendingCommandsOnPosition:" : "AliakseiSyrel 5/25/2016 00:02",
+		"computePositionOffset:" : "AliakseiSyrel 5/25/2016 21:04",
+		"consumeCommandsInOnePass" : "AliakseiSyrel 5/24/2016 23:53",
+		"consumePostponedCommands" : "AliakseiSyrel 5/24/2016 23:50",
+		"elementHolderAt:" : "AliakseiSyrel 6/9/2016 11:14",
+		"hasPendingCommands" : "AliakseiSyrel 5/25/2016 00:03",
+		"markElementHoldersUpdated:itemCount:payload:" : "AliakseiSyrel 5/24/2016 19:51",
+		"offsetPositions:forAdd:" : "AliakseiSyrel 5/24/2016 19:42",
+		"offsetPositions:forMove:" : "AliakseiSyrel 5/24/2016 19:41",
+		"offsetPositions:forRemovingInvisible:" : "AliakseiSyrel 5/24/2016 20:00",
+		"offsetPositions:forRemovingLaidOutOrNewElement:" : "AliakseiSyrel 5/24/2016 19:44",
+		"onDispatchFirstPass:" : "AliakseiSyrel 5/24/2016 20:00",
+		"onDispatchSecondPass:" : "AliakseiSyrel 5/24/2016 20:00",
+		"onItemRangeChanged:itemCount:payload:" : "AliakseiSyrel 5/25/2016 00:11",
+		"onItemRangeInserted:itemCount:" : "AliakseiSyrel 5/25/2016 00:11",
+		"onItemRangeMoved:toPosition:itemCount:" : "AliakseiSyrel 5/25/2016 00:13",
+		"onItemRangeRemoved:itemCount:" : "AliakseiSyrel 5/25/2016 00:11",
+		"preProcessCommands" : "AliakseiSyrel 5/25/2016 00:04",
+		"reset" : "AliakseiSyrel 5/25/2016 00:27" } }

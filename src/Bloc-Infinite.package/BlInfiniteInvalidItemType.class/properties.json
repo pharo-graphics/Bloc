@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/23/2016 22:10",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteInvalidItemType",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteItemType",
+	"type" : "normal" }

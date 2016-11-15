@@ -1,0 +1,2 @@
+I am layout supposed to be used by infinite element to position children within visible bounds.
+Concrete layouting algorithms used to support infinite amount of children differs from non-infinite case, meaning that normal layouts can not be used by infinite element

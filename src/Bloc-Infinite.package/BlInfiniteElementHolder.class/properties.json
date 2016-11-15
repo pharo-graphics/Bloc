@@ -1,0 +1,20 @@
+{
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/23/2016 22:30",
+	"instvars" : [
+		"position",
+		"preLayoutPosition",
+		"flags",
+		"itemType",
+		"scrapContainer",
+		"itemElement",
+		"context" ],
+	"name" : "BlInfiniteElementHolder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

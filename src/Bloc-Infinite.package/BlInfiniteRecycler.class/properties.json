@@ -1,0 +1,20 @@
+{
+	"category" : "Bloc-Infinite-Recycler",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 11/15/2016 09:09",
+	"instvars" : [
+		"recyclerPool",
+		"context",
+		"changedScrap",
+		"attachedScrap",
+		"cachedScrap",
+		"customCache",
+		"fetcher" ],
+	"name" : "BlInfiniteRecycler",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,23 @@
+{
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 11/15/2016 09:05",
+	"instvars" : [
+		"targetPosition",
+		"itemCount",
+		"previousLayoutItemCount",
+		"deletedInvisibleItemCountSincePreviousLayout",
+		"structureChanged",
+		"inPreLayout",
+		"runSimpleAnimations",
+		"runPredictiveAnimations",
+		"trackOldChangeHolders",
+		"data" ],
+	"name" : "BlInfiniteElementState",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

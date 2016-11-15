@@ -1,0 +1,3 @@
+testing
+willRunSimpleAnimations
+	^ runSimpleAnimations

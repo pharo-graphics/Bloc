@@ -1,0 +1,3 @@
+enum
+typeInvisible
+	^ 0

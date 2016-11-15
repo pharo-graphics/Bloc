@@ -1,0 +1,14 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"clear:" : "AliakseiSyrel 5/23/2016 21:04",
+		"countOnesBefore:" : "AliakseiSyrel 5/23/2016 21:27",
+		"ensureNext" : "AliakseiSyrel 5/23/2016 20:43",
+		"get:" : "AliakseiSyrel 5/23/2016 21:05",
+		"initialize" : "AliakseiSyrel 5/23/2016 20:39",
+		"insert:at:" : "AliakseiSyrel 5/23/2016 21:00",
+		"newArray" : "AliakseiSyrel 5/23/2016 20:51",
+		"remove:" : "AliakseiSyrel 5/23/2016 21:06",
+		"reset" : "AliakseiSyrel 5/23/2016 20:51",
+		"set:" : "AliakseiSyrel 5/23/2016 21:05" } }

@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-Infinite-Utils",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/23/2016 21:28",
+	"instvars" : [
+		"array",
+		"next" ],
+	"name" : "BlInfiniteBucket",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

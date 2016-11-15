@@ -1,0 +1,3 @@
+initialization
+defaultCommandsReorderer
+	^ BlInfiniteDataSourceCommandsReorderer new

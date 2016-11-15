@@ -1,0 +1,3 @@
+initialization
+defaultDataSourceController
+	^ BlInfiniteDefaultDataSourceController new

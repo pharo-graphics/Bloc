@@ -1,0 +1,18 @@
+{
+	"class" : {
+		"cleanUp" : "AliakseiSyrel 5/24/2016 22:05",
+		"instance" : "AliakseiSyrel 5/24/2016 22:04" },
+	"instance" : {
+		"apply:on:" : "AliakseiSyrel 5/24/2016 20:35",
+		"apply:onPosition:" : "AliakseiSyrel 5/24/2016 23:58",
+		"continuous:start:" : "AliakseiSyrel 5/24/2016 21:09",
+		"dispatch:toLayout:" : "AliakseiSyrel 5/24/2016 20:36",
+		"isAdd" : "AliakseiSyrel 5/24/2016 20:38",
+		"isMove" : "AliakseiSyrel 5/24/2016 20:39",
+		"isRemove" : "AliakseiSyrel 5/24/2016 20:38",
+		"isUpdate" : "AliakseiSyrel 5/24/2016 20:39",
+		"positionMultiplier" : "AliakseiSyrel 5/24/2016 20:39",
+		"swapMoveOn:in:badMoveIndex:nextIndex:" : "AliakseiSyrel 5/24/2016 21:51",
+		"updateElementHoldersOn:command:" : "AliakseiSyrel 5/24/2016 20:39",
+		"updateElementHoldersOn:offset:command:" : "AliakseiSyrel 5/24/2016 20:39",
+		"updatePosition:with:from:" : "AliakseiSyrel 5/24/2016 20:40" } }

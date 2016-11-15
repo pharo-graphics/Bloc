@@ -1,0 +1,3 @@
+constants
+noPosition
+	^ 0
