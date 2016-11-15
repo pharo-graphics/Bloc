@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGridFlexibility",
 	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlGridCanStretch",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGridFlexibility",
+	"type" : "normal" }

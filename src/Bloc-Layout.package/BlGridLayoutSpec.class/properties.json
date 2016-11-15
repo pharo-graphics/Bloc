@@ -1,18 +1,17 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/18/2016 19:28",
-	"super" : "Object",
 	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlGridLayoutConstants"
-	],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/18/2016 19:28",
 	"instvars" : [
 		"startDefined",
 		"span",
 		"alignment",
-		"weight"
-	],
+		"weight" ],
 	"name" : "BlGridLayoutSpec",
-	"type" : "normal"
-}
+	"pools" : [
+		"BlGridLayoutConstants" ],
+	"super" : "Object",
+	"type" : "normal" }

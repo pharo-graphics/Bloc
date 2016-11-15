@@ -2,4 +2,4 @@ initialization
 initialize
 	super initialize.
 	
-	alignment := BlNullAlignment uniqueInstance
+	alignment := BlElementAlignment horizontal null

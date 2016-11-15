@@ -1,3 +1,3 @@
 alignment
 alignLeft
-	alignment := BlLeftAlignment uniqueInstance
+	alignment := BlElementAlignment horizontal start

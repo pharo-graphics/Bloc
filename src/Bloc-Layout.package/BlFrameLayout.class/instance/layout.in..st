@@ -2,7 +2,7 @@ layout
 layout: anElement in: aRectangle
 	| parentBounds |
 	"first store parent's local bounds"
-	parentBounds := 0@0 extent: aRectangle extent.
+	parentBounds := anElement constraints padding inset: (0@0 extent: aRectangle extent).
 
 	anElement managedChildren
 		select: [ :child | child visibility shouldLayout ]

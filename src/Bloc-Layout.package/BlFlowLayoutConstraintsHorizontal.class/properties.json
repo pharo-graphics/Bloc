@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlLayoutConstraintsAxis",
 	"category" : "Bloc-Layout-Flow",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"alignment"
-	],
+		"alignment" ],
 	"name" : "BlFlowLayoutConstraintsHorizontal",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlLayoutConstraintsAxis",
+	"type" : "normal" }

@@ -1,9 +1,0 @@
-{
-	"instance" : {
-		"tearDown" : "AliakseiSyrel 10/26/2016 16:57",
-		"testConstraintsConsistent" : "AliakseiSyrel 10/26/2016 16:58",
-		"setUp" : "AliakseiSyrel 10/26/2016 16:59",
-		"testConstraintsExist" : "AliakseiSyrel 10/26/2016 17:00"
-	},
-	"class" : { }
-}

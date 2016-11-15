@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGridOrientation",
 	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlGridVerticalOrientation",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGridOrientation",
+	"type" : "normal" }

@@ -1,3 +1,3 @@
 alignment
 alignCenter
-	alignment := BlMiddleAlignment uniqueInstance
+	alignment := BlElementAlignment vertical center

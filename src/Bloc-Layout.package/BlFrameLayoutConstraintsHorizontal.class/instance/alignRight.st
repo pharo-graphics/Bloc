@@ -1,3 +1,3 @@
 alignment
 alignRight
-	alignment := BlRightAlignment uniqueInstance
+	alignment := BlElementAlignment horizontal end

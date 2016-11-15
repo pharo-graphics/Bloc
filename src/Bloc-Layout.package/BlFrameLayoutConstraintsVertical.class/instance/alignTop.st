@@ -1,3 +1,3 @@
 alignment
 alignTop
-	alignment := BlLeftAlignment uniqueInstance
+	alignment := BlElementAlignment vertical start

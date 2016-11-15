@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGridLayoutBounds",
 	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"size"
-	],
+		"size" ],
 	"name" : "BlGridLayoutBaselineBounds",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGridLayoutBounds",
+	"type" : "normal" }

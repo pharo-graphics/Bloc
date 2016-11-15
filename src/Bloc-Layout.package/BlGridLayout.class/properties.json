@@ -1,18 +1,17 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/20/2016 12:39",
-	"super" : "BlLayout",
 	"category" : "Bloc-Layout-Grid",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlGridLayoutConstants"
-	],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 5/20/2016 12:39",
 	"instvars" : [
 		"impl",
 		"cellSpacing",
 		"orientation",
-		"alignment"
-	],
+		"alignment" ],
 	"name" : "BlGridLayout",
-	"type" : "normal"
-}
+	"pools" : [
+		"BlGridLayoutConstants" ],
+	"super" : "BlLayout",
+	"type" : "normal" }
