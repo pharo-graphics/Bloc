@@ -1,0 +1,26 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"setUp" : "AliakseiSyrel 11/15/2016 09:59",
+		"tearDown" : "AliakseiSyrel 11/15/2016 09:59",
+		"testOneChildMatchExactParent" : "AliakseiSyrel 11/15/2016 10:01",
+		"testOneChildMatchExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:02",
+		"testOneExactChildAlignBottomCenterInExactParent" : "AliakseiSyrel 11/15/2016 10:18",
+		"testOneExactChildAlignBottomCenterInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:37",
+		"testOneExactChildAlignBottomLeftInExactParent" : "AliakseiSyrel 11/15/2016 10:07",
+		"testOneExactChildAlignBottomLeftInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:32",
+		"testOneExactChildAlignBottomRightInExactParent" : "AliakseiSyrel 11/15/2016 10:07",
+		"testOneExactChildAlignBottomRightInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:28",
+		"testOneExactChildAlignCenterInExactParent" : "AliakseiSyrel 11/15/2016 10:06",
+		"testOneExactChildAlignCenterInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:40",
+		"testOneExactChildAlignCenterLeftInExactParent" : "AliakseiSyrel 11/15/2016 10:09",
+		"testOneExactChildAlignCenterLeftInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:38",
+		"testOneExactChildAlignCenterRightInExactParent" : "AliakseiSyrel 11/15/2016 10:08",
+		"testOneExactChildAlignCenterRightInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:39",
+		"testOneExactChildAlignTopCenterInExactParent" : "AliakseiSyrel 11/15/2016 10:17",
+		"testOneExactChildAlignTopCenterInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:39",
+		"testOneExactChildAlignTopLeftInExactParent" : "AliakseiSyrel 11/15/2016 10:07",
+		"testOneExactChildAlignTopLeftInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:31",
+		"testOneExactChildAlignTopRightInExactParent" : "AliakseiSyrel 11/15/2016 10:08",
+		"testOneExactChildAlignTopRightInExactParentWithPadding" : "AliakseiSyrel 11/15/2016 10:30" } }

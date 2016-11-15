@@ -1,0 +1,13 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"setUp" : "AliakseiSyrel 10/26/2016 16:26",
+		"tearDown" : "AliakseiSyrel 10/26/2016 16:26",
+		"testOneChildMatchInExactParentPadding" : "AliakseiSyrel 10/29/2016 14:12",
+		"testOneChildMatchOneExactInFitParent" : "AliakseiSyrel 10/26/2016 16:30",
+		"testThreeMatchChildrenInExactParent" : "AliakseiSyrel 10/26/2016 16:28",
+		"testThreeMatchChildrenInExactParentRTL" : "AliakseiSyrel 10/28/2016 22:17",
+		"testTwoChildrenMatchInExactParentPadding" : "AliakseiSyrel 10/29/2016 14:15",
+		"testTwoExactChildrenInFitContent" : "AliakseiSyrel 10/26/2016 16:27",
+		"testTwoMatchChildrenInExactParent" : "AliakseiSyrel 10/26/2016 16:28" } }

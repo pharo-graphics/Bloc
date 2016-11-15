@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-Layout-Tests-Frame",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"parent",
+		"child" ],
+	"name" : "BlFrameLayoutConstraintsTests",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-Layout-Tests-Grid",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"parent",
+		"child" ],
+	"name" : "BlGridLayoutConstraintsTests",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

@@ -1,0 +1,16 @@
+{
+	"category" : "Bloc-Layout-Tests-Grid",
+	"classinstvars" : [
+		 ],
+	"classtraitcomposition" : "TBlLayoutTests classTrait",
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 11/15/2016 09:55",
+	"instvars" : [
+		"parent" ],
+	"name" : "BlGridLayoutTests",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"traitcomposition" : "TBlLayoutTests",
+	"type" : "normal" }

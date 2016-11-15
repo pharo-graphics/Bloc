@@ -1,0 +1,16 @@
+{
+	"category" : "Bloc-Layout-Tests-Frame",
+	"classinstvars" : [
+		 ],
+	"classtraitcomposition" : "TBlLayoutTests classTrait",
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"parent" ],
+	"name" : "BlFrameLayoutTests",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"traitcomposition" : "TBlLayoutTests",
+	"type" : "normal" }
