@@ -1,7 +1,7 @@
 element examples
 exampleRectWithElChildren
 	|c1 c2 sp p |
-	
+
 	c1 := BlElement new
 		extent: 80 @ 80;
 		background:(BlBackground fill: Color green).
