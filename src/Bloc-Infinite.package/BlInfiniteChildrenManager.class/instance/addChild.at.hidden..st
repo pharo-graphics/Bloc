@@ -1,13 +1,16 @@
 children add/remove
-addChild: aChildElement at: index hidden: isHidden
-	| offset |
-	index <= 0
-		ifTrue: [ offset := controller childrenCount ]
-		ifFalse: [  offset := self computeOffset: index ].
-	
-	bucket insert: isHidden at: offset.
+addChild: aChildElement at: anIndex hidden: isHidden
+	"Adds a child at an index and makes it hidden if isHidden is true.
+	If an Index is less or equal 0 child will be appended to the end"
+	| anOffset |
+
+	anIndex <= 0
+		ifTrue: [ anOffset := controller childrenCount ]
+		ifFalse: [  anOffset := self computeOffset: anIndex ].
+
+	bucket insert: isHidden at: anOffset.
 	
 	isHidden ifTrue: [
 		self hideChildInternal: aChildElement ].
 	
-	controller addChild: aChildElement at: offset
+	controller addChild: aChildElement at: anOffset

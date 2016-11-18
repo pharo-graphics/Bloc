@@ -1,5 +1,3 @@
 element -> manager
-onItemRangeRemoved: startPosition itemCount: itemCount
-
-	self dataSourceManager addPendingCommand: (self createRemoveCommand: startPosition itemCount: itemCount).
-	^ self dataSourceManager pendingCommandsCount = 1
+onItemRangeRemoved: aStartPosition itemCount: anItemCount
+	^ self dataSourceManager onItemRangeRemoved: aStartPosition itemCount: anItemCount

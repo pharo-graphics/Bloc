@@ -1,4 +1,4 @@
-helper
+private
 postponeAndUpdateElementHolders: aCommand
 	
 	postponedCommands add: aCommand.

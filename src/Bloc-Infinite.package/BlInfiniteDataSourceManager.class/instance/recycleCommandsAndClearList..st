@@ -1,6 +1,6 @@
-private
+commands recycling
 recycleCommandsAndClearList: aCollectionOfCommands
-	"Recycle and remove all commands in aCollectionOfCommands.
+	"Recycle and remove all commands from aCollectionOfCommands.
 	aCollectionOfCommands must not be nil"
 	self assert: aCollectionOfCommands isNotNil.
 	

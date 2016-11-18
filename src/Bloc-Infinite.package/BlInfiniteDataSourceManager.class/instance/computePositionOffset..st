@@ -1,4 +1,4 @@
 helper
 computePositionOffset: aPosition
 
-	^ self findPositionOffset: aPosition firstPostponedItem: 1
+	^ self computePositionOffset: aPosition firstPostponedItem: 1

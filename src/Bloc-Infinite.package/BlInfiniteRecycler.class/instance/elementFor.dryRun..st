@@ -1,30 +1,36 @@
-private recycling
+private
 elementFor: aPosition dryRun: dryRun
+	"I do a hard work obtaining element for the data at a position in data source.
+	@see elementFor: for more information"
+	<return: #BlElement>
+
 	| holder  fromScrap fetchedResult bound itemElement|
-	(aPosition < 1 and: [ aPosition > self context dataSource itemCount ])
+	
+	(aPosition < 1 and: [ aPosition > self controller dataSourceItemCount ])
 		ifTrue: [ Error signal: 'Position is out of bounds!' ].
 
-	fetchedResult := fetcher elementFor: aPosition dryRun: dryRun context: self context.
+	fetchedResult := fetcher elementFor: aPosition dryRun: dryRun controller: self controller.
 	holder := fetchedResult key.
 	fromScrap := fetchedResult value.
-	
+
 	self assert: holder isNotNil.
 	self assert: fromScrap isNotNil.
-	
+
 	bound := false.
-	(self context state isPreLayout and: [ holder isBound ])
+	(self controller isPreLayout and: [ holder isBound ])
 		ifTrue: [ holder preLayoutPosition: aPosition ]
 		ifFalse: [
 			(holder isBound not or: [ holder needsUpdate or: [ holder isInvalid ] ]) ifTrue: [
 				| offsetPosition |
 				holder isRemoved ifTrue: [ Error signal: 'Removed holder should come here only in pre-layout!' ].
-				offsetPosition := self context dataSourceController computePositionOffset: aPosition.
-				holder context: self context.
-				self context dataSource bindHolder: holder at: offsetPosition.
+				offsetPosition := self controller computePositionOffset: aPosition.
+				holder context: self controller element.
+				self controller bindHolder: holder at: offsetPosition.
 				bound := true.
-				self context state isPreLayout
+				self controller isPreLayout
 					ifTrue: [ holder preLayoutPosition: aPosition ] ] ].
 	
+	self flag: 'Update to use layout specific constraints!'.
 	itemElement := holder itemElement.
 	itemElement constraints holder: holder.
 	itemElement constraints pendingInvalidate: (fromScrap and: [ bound ]).

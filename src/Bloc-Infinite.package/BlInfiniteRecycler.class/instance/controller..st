@@ -1,0 +1,3 @@
+accessing
+controller: aBlInfiniteRecyclerController
+	^ controller

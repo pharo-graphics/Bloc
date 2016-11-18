@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testFocus
 	self assert: self child focused not.
 	self assert: self root focused not.

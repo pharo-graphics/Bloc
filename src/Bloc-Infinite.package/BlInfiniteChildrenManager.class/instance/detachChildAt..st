@@ -1,6 +1,8 @@
 children add/remove
-detachChildAt: index
+detachChildAt: anIndex
+	"Detaches a child element at anIndex from infinite element"
 	| offset |
-	offset := self computeOffset: index.
-	bucket remove: offset.	
+	
+	offset := self computeOffset: anIndex.
+	bucket remove: offset.
 	controller detachChildAt: offset

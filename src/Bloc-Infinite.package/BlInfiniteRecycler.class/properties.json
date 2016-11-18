@@ -4,15 +4,17 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "AliakseiSyrel 11/15/2016 09:09",
+	"commentStamp" : "AliakseiSyrel 11/18/2016 15:13",
 	"instvars" : [
 		"recyclerPool",
-		"context",
+		"controller",
 		"changedScrap",
 		"attachedScrap",
 		"cachedScrap",
 		"customCache",
-		"fetcher" ],
+		"fetcher",
+		"cacheSize",
+		"requestedCacheSize" ],
 	"name" : "BlInfiniteRecycler",
 	"pools" : [
 		 ],

@@ -12,6 +12,7 @@
 		"deletedInvisibleItemCountSincePreviousLayout",
 		"structureChanged",
 		"inPreLayout",
+		"isMeasuring",
 		"runSimpleAnimations",
 		"runPredictiveAnimations",
 		"trackOldChangeHolders",

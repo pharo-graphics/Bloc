@@ -1,5 +1,5 @@
 element -> manager
-onItemRangeChanged: startPosition itemCount: itemCount payload: anObject
+onItemRangeChanged: aStartPosition itemCount: anItemCount payload: aPayloadObject
 	"Ask data source manager to enqueue a corresponding command that items were changed.
 	Return true if commands should be processed, false otherwise.
 	startPosition must not be nil.

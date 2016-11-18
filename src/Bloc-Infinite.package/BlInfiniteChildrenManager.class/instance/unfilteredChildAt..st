@@ -1,3 +1,7 @@
 children accessing
-unfilteredChildAt: index
-	^ controller childAt: index
+unfilteredChildAt: anIndex
+	"Return a child element by infinite element's offset.
+	I will not offset this index"
+	<return: #BlElement>
+
+	^ controller childAt: anIndex

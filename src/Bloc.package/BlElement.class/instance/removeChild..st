@@ -5,10 +5,9 @@ removeChild: anElement
 	anElement must not be nil.
 	anElement must be my direct child"
 	self assert: anElement isNotNil.
-	self assert: anElement parent = self.
+	self assert: anElement parent == self.
 
 	anElement parent: nil.
 	self children remove: anElement.
-	"send hook to the element that it was removed"
 	anElement notifyRemovedFromParent.
-	self managedChildrenChanged 
+	self managedChildrenChanged.

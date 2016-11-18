@@ -1,0 +1,3 @@
+initialization
+defaultCacheSize
+	^ 2

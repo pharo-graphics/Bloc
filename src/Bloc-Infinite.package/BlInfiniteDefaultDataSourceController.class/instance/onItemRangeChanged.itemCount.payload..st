@@ -1,5 +1,3 @@
 element -> manager
-onItemRangeChanged: startPosition itemCount: itemCount payload: anObject
-
-	self dataSourceManager addPendingCommand: (self createUpdateCommand: startPosition itemCount: itemCount payload: anObject).
-	^ self dataSourceManager pendingCommandsCount = 1
+onItemRangeChanged: aStartPosition itemCount: anItemCount payload: aPayloadObject
+	^ self dataSourceManager onItemRangeChanged: aStartPosition itemCount: anItemCount payload: aPayloadObject

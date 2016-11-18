@@ -1,5 +1,6 @@
 children add/remove
 removeAllChildrenUnfiltered
+	"Remove all children from the infinite element including the hidden ones"
 
 	bucket reset.
 	

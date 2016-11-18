@@ -1,21 +1,22 @@
 private
-computeOffset: index
-	| limit offset |
-	
-	index <= 0
+computeOffset: anIndex
+	"Compute an offset from item index within data source to child index within infinite element"
+	| aLimit anOffset |
+
+	anIndex <= 0
 		ifTrue: [ ^ 0 ].
 	
-	limit := controller childrenCount.
-	offset := index.
+	aLimit := controller childrenCount.
+	anOffset := anIndex.
 	
-	[ offset <= limit ] whileTrue: [ 
+	[ anOffset <= aLimit ] whileTrue: [ 
 		| removedBefore diff |
-		removedBefore := bucket countOnesBefore: offset.
-		diff := index - (offset - removedBefore).
+		removedBefore := bucket countOnesBefore: anOffset.
+		diff := anIndex - (anOffset - removedBefore).
 		diff = 0
 			ifTrue: [ 
-				[ bucket get: offset ]
-					whileTrue: [ offset := offset + 1 ].
-				^ offset ]
-		ifFalse: [ offset := offset + diff ] ].
+				[ bucket get: anOffset ]
+					whileTrue: [ anOffset := anOffset + 1 ].
+				^ anOffset ]
+		ifFalse: [ anOffset := anOffset + diff ] ].
 	^ 0
