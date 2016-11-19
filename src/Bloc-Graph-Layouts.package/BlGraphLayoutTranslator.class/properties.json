@@ -1,15 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
 	"category" : "Bloc-Graph-Layouts-Basic",
 	"classinstvars" : [
-		"defaultTranslator"
-	],
-	"pools" : [ ],
-	"classvars" : [ ],
+		"defaultTranslator" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"view"
-	],
+		"view" ],
 	"name" : "BlGraphLayoutTranslator",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

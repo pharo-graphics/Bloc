@@ -1,14 +1,12 @@
 accessing - position
 preLayoutPositionToPostLayout: aPosition
-	self flag: 'Update comment'.
 	"Infinite element provides artificial position range (item count) in pre-layout state and 
-	automatically maps these positions to DataSource positions when
-	{@link #getViewForPosition(int)} or {@link #bindViewToPosition(View, int)} is called.
+	automatically maps these positions to DataSource positions when #elementFor: is sent.
 
 	Usually, Layout does not need to worry about this. However, in some cases, your
 	Layout may need to call some custom component with item positions in which
 	case you need the actual data source position instead of the pre layout position. You
-	can use this method to convert a pre-layout position to data source (post layout) position.
+	can use me to convert a pre-layout position to data source (post layout) position.
 
 	Note that if the provided position belongs to a deleted ElementHolder, this method will return 0.
 	Using me in post-layout state returns the same value back.

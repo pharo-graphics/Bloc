@@ -1,3 +1,3 @@
-private
+recycling
 recycleElementHolder: aHolder
 	self shouldBeImplemented

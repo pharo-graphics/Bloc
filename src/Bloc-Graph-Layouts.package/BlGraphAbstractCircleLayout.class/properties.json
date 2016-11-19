@@ -1,16 +1,17 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGraphLayout",
 	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"initialAngle",
 		"initialIncrementalAngle",
 		"initialRadius",
-		"factor"
-	],
+		"factor" ],
 	"name" : "BlGraphAbstractCircleLayout",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGraphLayout",
+	"type" : "normal" }

@@ -1,5 +1,4 @@
 {
-	"name" : "TBGraphLayoutUtils",
+	"category" : "Bloc-Graph-Layouts-Basic",
 	"commentStamp" : "",
-	"category" : "Bloc-Graph-Layouts-Basic"
-}
+	"name" : "TBGraphLayoutUtils" }

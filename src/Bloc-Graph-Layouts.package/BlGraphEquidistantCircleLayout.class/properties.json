@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "AlexandreBergel 3/20/2015 16:51",
-	"super" : "BlGraphAbstractWeightedCircleLayout",
 	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AlexandreBergel 3/20/2015 16:51",
+	"instvars" : [
+		 ],
 	"name" : "BlGraphEquidistantCircleLayout",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGraphAbstractWeightedCircleLayout",
+	"type" : "normal" }

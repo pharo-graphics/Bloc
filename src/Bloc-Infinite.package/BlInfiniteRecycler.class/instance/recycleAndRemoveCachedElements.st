@@ -1,3 +1,5 @@
 recycling
 recycleAndRemoveCachedElements
-	self shouldBeImplemented
+	
+	cachedScrap size to: 1 do: [ :index | self recycleCachedAt: index ].
+	cachedScrap removeAll

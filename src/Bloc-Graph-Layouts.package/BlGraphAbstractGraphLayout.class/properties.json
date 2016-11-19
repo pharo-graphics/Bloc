@@ -1,17 +1,18 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGraphEdgeDrivenLayout",
 	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"verticalGap",
 		"horizontalGap",
 		"cachedChildren",
 		"cachedParents",
-		"cachedParentsWithHighestNestings"
-	],
+		"cachedParentsWithHighestNestings" ],
 	"name" : "BlGraphAbstractGraphLayout",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGraphEdgeDrivenLayout",
+	"type" : "normal" }

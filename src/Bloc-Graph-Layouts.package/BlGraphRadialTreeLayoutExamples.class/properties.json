@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlGraphLayoutExamples",
 	"category" : "Bloc-Graph-Layouts-Examples",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlGraphRadialTreeLayoutExamples",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlGraphLayoutExamples",
+	"type" : "normal" }
