@@ -44,7 +44,7 @@ Before creating issues, please check [this list](https://github.com/issues?q=is%
 
 ### Submitting changes
 
-Like most projects, we proposes a standard [GitHub Flow](https://guides.github.com/introduction/flow/index.html) for contributions:
+Like most projects, we propose a standard [GitHub Flow](https://guides.github.com/introduction/flow/index.html) for contributions:
 
 1. Fork
 2. Create a topic branch
