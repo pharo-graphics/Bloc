@@ -8,8 +8,6 @@ SmalltalkCISpec {
     }
   ],
   #testing : {
-      #coverage : {
-        #packages : [ 'Bloc.*' ]
-      }
+      #packages : [ 'Bloc.*' ]
   }
 }
