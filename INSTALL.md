@@ -9,7 +9,7 @@
   * [All-in-one "User" versions](#all-in-one-user-versions)
   * [All-in-one "Developer" versions](#all-in-one-developer-versions)
   * [Code-only versions](#code-only-versions)
-  * [Last version based on Athens](last-version-based-on-athens) (no support)
+  * [Last version based on Athens](#last-version-based-on-athens) (no support)
 
 
 ## What should I know before I get started?
