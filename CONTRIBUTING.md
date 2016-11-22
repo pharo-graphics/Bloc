@@ -14,20 +14,10 @@ The following is a set of guidelines for contributing to [Bloc](https://github.c
 
 ### *User* and *Developer* versions
 
-To load the sources in a Pharo image, you have the choice between the [User]() and [Developer]() versions. 
+To load the sources in a Pharo image, you have the choice between the *User* and *Developer* versions. 
+More detailed informations are available [here](INSTALL.md).
 
-- The *User* version is **read-only**. This version is typically used for discovery and testing purposes but also as a Metacello dependency.  **You cannot contribute** using the *User* version but you can freely load it and use it as a dependency in your project, adding the following in your metacello configuration or baseline:
-
-```smalltalk
- spec 
-	 baseline: 'Bloc' 
-	 with: [ spec 
-		 loads: #core;
-		 repository: 'github://pharo-graphics/Bloc/src:[master|v*]']
-```
-
-- The *Developer* version includes the installation of [Iceberg](https://github.com/npasserini/iceberg). As mentioned in [Iceberg prerequisites](https://github.com/npasserini/iceberg#prerequisites), you should ensure that you have  [registered an SSH key](https://help.github.com/articles/generating-an-ssh-key/) on Github before loading this version.   you might need to refer to the [Iceberg wiki](https://github.com/npasserini/iceberg/wiki) if you are not used to *Iceberg*. This version **automatically** installs *Iceberg*, you don't have to install it manually.
-Being able to load this version does not necessarily mean that you are allowed to contribute directly on the master branch. Only members of the [Pharo Graphics Organization](https://github.com/orgs/pharo-graphics/people) are able to make direct contributions ([How Can I Contribute?](#how-can-i-contribute)).
+Being able to load the *Developer* version does not necessarily mean that you are allowed to contribute directly on the *master* branch. Only members of the [Pharo Graphics Organization](https://github.com/orgs/pharo-graphics/people) are able to make direct contributions ([How Can I Contribute?](#how-can-i-contribute)).
   
 
 ### Design Decisions
