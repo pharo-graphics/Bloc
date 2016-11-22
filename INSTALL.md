@@ -114,9 +114,9 @@ Metacello new
     load:#file:development
 ```
 
-### Last version based on [Athens](http://smalltalkhub.com/#!/~Pharo/Athens)
+### Last version based on Athens
 
-Version v0.10 is the last version with Athens support "out of the box".
+Version v0.10 is the last version with [Athens](http://smalltalkhub.com/#!/~Pharo/Athens) support "out of the box".
 
 This means that libMoz2D binary is not needed for this version.
 
