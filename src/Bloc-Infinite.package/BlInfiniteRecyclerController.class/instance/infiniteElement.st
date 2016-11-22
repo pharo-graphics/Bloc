@@ -1,3 +1,3 @@
 accessing
-element
+infiniteElement
 	^ self shouldBeImplemented

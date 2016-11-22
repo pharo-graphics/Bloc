@@ -1,5 +1,5 @@
 accessing
 dataSourcePosition
-	^ context
+	^ infiniteElement
 		ifNil: [ BlInfiniteElement noPosition ]
 		ifNotNil: [ :ctx | ctx dataSourcePositionOf: self ]

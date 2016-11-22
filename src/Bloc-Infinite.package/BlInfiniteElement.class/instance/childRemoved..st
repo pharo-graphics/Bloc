@@ -1,7 +1,5 @@
 children add/remove hooks
 childRemoved: anElement
-
-	super childRemoved: anElement.
 	
 	(self childHolderOf:anElement)
 		ifNotNil: [ :holder |

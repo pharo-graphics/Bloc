@@ -1,3 +1,3 @@
 private
 unscrap
-	scrapContainer unscrapHolder: self
+	recycler unscrapHolder: self

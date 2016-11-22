@@ -1,4 +1,4 @@
-I am item recycler.
+I am an element recycler.
 
 I keep track of items outside of current viewport. I use object pool in order to reuse already created objects.
 I am used by infinite element.

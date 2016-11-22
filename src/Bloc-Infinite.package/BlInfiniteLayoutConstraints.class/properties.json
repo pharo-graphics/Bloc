@@ -8,7 +8,7 @@
 	"instvars" : [
 		"holder",
 		"pendingInvalidate" ],
-	"name" : "BlInfiniteConstraints",
+	"name" : "BlInfiniteLayoutConstraints",
 	"pools" : [
 		 ],
 	"super" : "BlLayoutConstraints",

@@ -6,4 +6,5 @@ SystemOrganization addCategory: 'Bloc-Infinite-DataSource'!
 SystemOrganization addCategory: 'Bloc-Infinite-Layout'!
 SystemOrganization addCategory: 'Bloc-Infinite-Pool'!
 SystemOrganization addCategory: 'Bloc-Infinite-Recycler'!
+SystemOrganization addCategory: 'Bloc-Infinite-Tests'!
 SystemOrganization addCategory: 'Bloc-Infinite-Utils'!

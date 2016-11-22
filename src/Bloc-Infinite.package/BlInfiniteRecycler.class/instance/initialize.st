@@ -8,4 +8,5 @@ initialize
 	fetcher := self defaultFetcher.
 	
 	cacheSize := self defaultCacheSize.
-	requestedCacheSize := self defaultCacheSize
+	requestedCacheSize := self defaultCacheSize.
+	recyclerPool := self defaultRecyclerPool

@@ -3,7 +3,7 @@ validateElementHolderForOffsetPosition: anElementHolder
 	"Checks whether a given element holder can be used for the provided position.
 	Position is taken from element holder itself.
 	Return true if anElementHolder matches the provided position, false otherwise.
-	anElementHolder can not be nil"
+	anElementHolder must not be nil"
 	<return: #Boolean>
 	self assert: anElementHolder isNotNil.
 	

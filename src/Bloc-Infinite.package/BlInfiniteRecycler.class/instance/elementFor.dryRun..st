@@ -24,7 +24,7 @@ elementFor: aPosition dryRun: dryRun
 				| offsetPosition |
 				holder isRemoved ifTrue: [ Error signal: 'Removed holder should come here only in pre-layout!' ].
 				offsetPosition := self controller computePositionOffset: aPosition.
-				holder context: self controller element.
+				holder infiniteElement: self controller infiniteElement.
 				self controller bindHolder: holder at: offsetPosition.
 				bound := true.
 				self controller isPreLayout

@@ -2,7 +2,7 @@ element fetching
 elementFor: aPosition dryRun: dryRun controller: aRecyclerController
 	| holder |
 	
-	aRecyclerController customCache ifNotNil: [ :customCache |
+	aRecyclerController userCache ifNotNil: [ :customCache |
 		|element|
 		element := customCache
 			elementFor: aRecyclerController recycler

@@ -6,7 +6,6 @@ recycleElement: anElement
 	If the element is scrapped, it will be removed from scrap list
 
 	Notice: I try to make element recycle-able since layout intended to recycle this element (e.g. even if it is in scrap or change cache)"
-	
 	| anElementHolder |
 	
 	anElementHolder := self controller childHolderOf: anElement.
