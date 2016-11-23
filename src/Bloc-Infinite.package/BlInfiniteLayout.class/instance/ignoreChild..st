@@ -1,4 +1,4 @@
-children state
+children - state
 ignoreChild: anElement
 	"Flags an element so that it will not be scrapped or recycled"
 	| anElementHolder |

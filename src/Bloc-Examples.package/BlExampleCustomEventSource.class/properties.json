@@ -1,0 +1,16 @@
+{
+	"category" : "Bloc-Examples-Events",
+	"classinstvars" : [
+		 ],
+	"classtraitcomposition" : "TBlEventSource classTrait",
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"eventDispatcher" ],
+	"name" : "BlExampleCustomEventSource",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"traitcomposition" : "TBlEventSource",
+	"type" : "normal" }

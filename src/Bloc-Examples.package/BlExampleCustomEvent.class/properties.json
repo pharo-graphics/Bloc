@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Examples-Events",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"payload" ],
+	"name" : "BlExampleCustomEvent",
+	"pools" : [
+		 ],
+	"super" : "BlEvent",
+	"type" : "normal" }

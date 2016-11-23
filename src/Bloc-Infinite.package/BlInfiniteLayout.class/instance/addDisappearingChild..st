@@ -1,4 +1,4 @@
-children add/remove
+children - add/remove
 addDisappearingChild: anElement
 	"To be used only during #layoutChildren to add an element to the layout that is known to be going away,
 	either because it has been removed or because it is actually not in the visible portion of the container

@@ -1,4 +1,4 @@
-children accessing
+children - accessing
 childContainingItemElement: anElement
 	"Traverses the ancestors of the given element and returns the item view that contains it and
 	also my direct child. Returned element can be used to get the ElementHolder by sending #childHolderOf:

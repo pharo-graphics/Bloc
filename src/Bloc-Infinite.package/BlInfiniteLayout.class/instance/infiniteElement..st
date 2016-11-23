@@ -1,4 +1,4 @@
-private - accessing
+initialization
 infiniteElement: anInfiniteElement
 	"Attach infinite layout to its element.
 	It is only possible to attach infinite element once!

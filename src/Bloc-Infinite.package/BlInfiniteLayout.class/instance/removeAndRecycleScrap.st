@@ -1,4 +1,4 @@
-children add/remove
+children - add/remove
 removeAndRecycleScrap
 	"Recycle the scrapped elements. 
     When an element is detached and removed, it does not trigger a BlElement>>#changed.

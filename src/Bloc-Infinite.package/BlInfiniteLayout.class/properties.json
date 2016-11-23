@@ -13,7 +13,8 @@
 		"heightSpec",
 		"widthSpec",
 		"autoMeasure",
-		"itemPrefetchEnabled" ],
+		"itemPrefetchEnabled",
+		"measurementCacheEnabled" ],
 	"name" : "BlInfiniteLayout",
 	"pools" : [
 		 ],

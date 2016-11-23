@@ -1,3 +1,0 @@
-event managing
-removeEventHandler: anEventHandler
-	self eventDispatcher removeEventHandler: anEventHandler

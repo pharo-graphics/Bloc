@@ -1,4 +1,4 @@
-children add/remove
+children - add/remove
 detachAndScrapAttachedChildren
 	"Temporarily detach and scrap all currently attached child element.
 	Elements will be scrapped into the InfiniteRecycler.

@@ -1,4 +1,4 @@
-children add/remove
+children - add/remove
 addChild: anElement at: anIndex
 	"If anIndex == 0 child will be added at the end"
 

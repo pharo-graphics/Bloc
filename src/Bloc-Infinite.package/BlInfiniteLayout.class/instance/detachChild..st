@@ -1,4 +1,4 @@
-children add/remove
+children - add/remove
 detachChild: anElement
 	"Temporarily detach a child element"
 

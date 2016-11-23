@@ -1,4 +1,4 @@
-private - accessing
+initialization
 measurementSpec: anExtentMeasurementSpec
 	"Update measurement specifications. I am sent from onMeasure: by infinite element.
 	anExtentMeasurementSpec must not be nil"

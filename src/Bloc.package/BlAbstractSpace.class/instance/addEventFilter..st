@@ -1,3 +1,0 @@
-adding
-addEventFilter: anEventHandler
-	self eventDispatcher addEventFilter: anEventHandler

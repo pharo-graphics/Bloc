@@ -1,4 +1,4 @@
-children add/remove
+children - add/remove
 removeChildAt: anIndex
 	"Remove an element at the index from the currently attached infinite element if needed.
 	InfiniteLayouts should use this method to completely remove a child view that is no longer needed.

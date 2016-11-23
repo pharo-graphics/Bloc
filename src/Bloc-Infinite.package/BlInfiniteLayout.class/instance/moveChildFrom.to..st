@@ -1,4 +1,4 @@
-children add/remove
+children - add/remove
 moveChildFrom: aFromIndex to: aToIndex
 	"Moves a child element from one position to another"
 	| anElement |

@@ -1,4 +1,4 @@
-children accessing
+children - accessing
 childAtPosition: aPosition
 	"Finds the element which represents the given datasource position.
 	I traverse each child since I have no information about child order.

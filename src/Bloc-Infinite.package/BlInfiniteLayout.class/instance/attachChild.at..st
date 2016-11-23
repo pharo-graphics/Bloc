@@ -1,4 +1,4 @@
-children add/remove
+children - add/remove
 attachChild: anElement at: anIndex
 	"Reattach a previously detached child element.
 	If anIndex == 0 child will be attached at the end"

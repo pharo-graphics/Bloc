@@ -1,3 +1,3 @@
-event processing
+event management
 buildEventDispatchChain: aTail
 	^ aTail

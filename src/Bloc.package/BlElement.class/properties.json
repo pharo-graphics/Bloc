@@ -2,6 +2,7 @@
 	"category" : "Bloc-Basic",
 	"classinstvars" : [
 		 ],
+	"classtraitcomposition" : "TBlEventSource classTrait",
 	"classvars" : [
 		 ],
 	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
@@ -34,4 +35,5 @@
 	"pools" : [
 		 ],
 	"super" : "Object",
+	"traitcomposition" : "TBlEventSource",
 	"type" : "normal" }
