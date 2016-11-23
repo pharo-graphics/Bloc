@@ -1,0 +1,3 @@
+private
+endAnimation: anElementHolder
+	self shouldBeImplemented

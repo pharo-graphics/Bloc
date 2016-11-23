@@ -15,7 +15,11 @@
 		"flags",
 		"recycler",
 		"isInChangeScrap",
-		"infiniteElement" ],
+		"infiniteElement",
+		"recyclableCount",
+		"shadowedHolder",
+		"shadowingHolder",
+		"payloads" ],
 	"name" : "BlInfiniteElementHolder",
 	"pools" : [
 		 ],

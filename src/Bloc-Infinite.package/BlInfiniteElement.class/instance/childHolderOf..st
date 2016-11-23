@@ -1,7 +1,7 @@
 private
 childHolderOf: aChildElement
-	"Return an element holder assigned to aChildElement
-	or nil if it is not assigned"
-	<return: #BlInfiniteHolder or: nil>
+	"Return an element holder assigned to aChildElement.
+	Element holder can not be nil"
+	<return: #BlInfiniteElementHolder>
 	
-	^ aChildElement constraints holder
+	^ aChildElement constraints infinite holder

@@ -11,6 +11,4 @@ offsetPositionBy: anOffset applyToPreLayout: shouldApplyOnPreLayout
 		ifTrue: [ preLayoutPosition := preLayoutPosition + anOffset ].
 	
 	position := position + anOffset.
-	
-	self flag: 'Fix layout constraints'
-	"itemElement constraints infinite markInsetsDirty."
+	itemElement constraints infinite insetsDirty: true

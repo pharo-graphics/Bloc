@@ -1,7 +1,7 @@
 manager -> element
 childHolderOf: aChildElement
-	"Return an element holder of child or nil
-	if it does not have event holder associated"
-	<return: #BlInfiniteElementHolder or: nil>
+	"Return an element holder of the child element.
+	ElementHolder can not be nil"
+	<return: #BlInfiniteElementHolder>
 
 	^ self subclassResponsibility

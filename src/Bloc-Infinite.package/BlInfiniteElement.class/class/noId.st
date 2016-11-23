@@ -1,0 +1,3 @@
+constants
+noId
+	^ 0

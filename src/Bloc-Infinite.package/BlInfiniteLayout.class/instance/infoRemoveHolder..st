@@ -1,0 +1,2 @@
+private - children
+infoRemoveHolder: anElementHolder

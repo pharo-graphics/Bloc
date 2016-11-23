@@ -16,7 +16,7 @@ elementFor: aPosition dryRun: dryRun controller: aRecyclerController
 								holder itemElement notifyRemovedFromParent.
 								holder unscrap ]
 							ifFalse: [ holder wasReturnedFromScrap
-								ifTrue: [ holder flagReturnedFromScrap: false ] ].
+								ifTrue: [ holder clearReturnedFromScrapFlag ] ].
 							aRecyclerController recycleElementHolder: holder ].
 					holder := nil ]
 				ifTrue: [

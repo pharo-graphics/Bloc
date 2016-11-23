@@ -4,7 +4,7 @@ childRemoved: anElement
 	(self childHolderOf:anElement)
 		ifNotNil: [ :holder |
 			holder isTmpDetached
-				ifTrue: [ holder flagTmpDetached: false ]
+				ifTrue: [ holder clearTmpDetachFlag ]
 				ifFalse: [ holder shouldIgnore
 					ifFalse: [ Error signal: 'Can not remove child which is not flagged at temporary detached!' ] ].
 

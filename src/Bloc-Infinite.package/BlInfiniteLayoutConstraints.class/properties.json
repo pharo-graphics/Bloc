@@ -7,6 +7,7 @@
 	"commentStamp" : "AliakseiSyrel 5/20/2016 23:49",
 	"instvars" : [
 		"holder",
+		"insertsDirty",
 		"pendingInvalidate" ],
 	"name" : "BlInfiniteLayoutConstraints",
 	"pools" : [

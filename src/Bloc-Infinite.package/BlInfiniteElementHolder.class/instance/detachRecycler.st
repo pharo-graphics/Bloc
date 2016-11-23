@@ -4,4 +4,4 @@ detachRecycler
 	Additionally set returned from scrap flag to false"
 	recycler := nil.
 	isInChangeScrap := false.
-	self flagReturnedFromScrap: false
+	self clearReturnedFromScrapFlag

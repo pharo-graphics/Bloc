@@ -1,3 +1,3 @@
-private flags testing
+private - flags testing
 shouldIgnore
 	^ flags at: #ignore ifAbsent: [ false ]

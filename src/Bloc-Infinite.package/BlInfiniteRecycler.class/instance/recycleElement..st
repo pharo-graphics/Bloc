@@ -15,6 +15,6 @@ recycleElement: anElement
 	anElementHolder isScrap
 		ifTrue: [ anElementHolder unscrap ]
 		ifFalse: [ anElementHolder wasReturnedFromScrap
-			ifTrue: [ anElementHolder flagReturnedFromScrap: false ] ].
+			ifTrue: [ anElementHolder clearReturnedFromScrapFlag ] ].
 	
 	self recycleElementHolder: anElementHolder

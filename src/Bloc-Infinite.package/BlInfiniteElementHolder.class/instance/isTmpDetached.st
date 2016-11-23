@@ -1,3 +1,3 @@
-private flags testing
+private - flags testing
 isTmpDetached
 	^ flags at: #tmpDetached ifAbsent: [ false ]

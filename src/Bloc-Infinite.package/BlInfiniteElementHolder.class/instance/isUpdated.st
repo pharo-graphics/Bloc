@@ -1,3 +1,3 @@
-private flags testing
+private - flags testing
 isUpdated
 	^ flags at: #update ifAbsent: [ false ]
