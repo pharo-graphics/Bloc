@@ -8,6 +8,6 @@ SmalltalkCISpec {
     }
   ],
   #testing : {
-      #packages : [ 'Bloc.*' ]
+      #packages : [ 'Bloc.*', ''Sparta.*' ]
   }
 }
