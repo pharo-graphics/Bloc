@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testParallelAnimation
 |anim animNum resultNum finishNumFlag currenTimeNum
 animColor resultColor finishColorFlag currenTimeColor |

@@ -11,7 +11,9 @@
 		"childrenController",
 		"state",
 		"recycler",
-		"itemAnimator" ],
+		"itemAnimator",
+		"hasFixedSize",
+		"layoutOrScrollCounter" ],
 	"name" : "BlInfiniteElement",
 	"pools" : [
 		 ],

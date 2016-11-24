@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testNumberTransition
 |anim result finishFlag currenTime |
 result := 0. 
