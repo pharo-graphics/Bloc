@@ -8,7 +8,7 @@
 	"commentStamp" : "",
 	"instvars" : [
 		"eventDispatcher" ],
-	"name" : "BlExampleCustomEventSource",
+	"name" : "BlExampleCustomEventTarget",
 	"pools" : [
 		 ],
 	"super" : "Object",
