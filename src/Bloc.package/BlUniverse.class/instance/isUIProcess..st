@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 isUIProcess: aProcess
 	^ aProcess = self pulseLoop loopProcess

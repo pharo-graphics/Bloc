@@ -13,7 +13,11 @@
 		"recycler",
 		"itemAnimator",
 		"hasFixedSize",
-		"layoutOrScrollCounter" ],
+		"layoutOrScrollCounter",
+		"dispatchScrollCounter",
+		"eatRequestLayout",
+		"layoutFrozen",
+		"layoutRequestEaten" ],
 	"name" : "BlInfiniteElement",
 	"pools" : [
 		 ],
