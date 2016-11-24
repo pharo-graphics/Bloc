@@ -2,7 +2,7 @@
 	"category" : "Bloc-Space",
 	"classinstvars" : [
 		 ],
-	"classtraitcomposition" : "TBlEventSource classTrait",
+	"classtraitcomposition" : "TBlEventTarget classTrait",
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
@@ -31,5 +31,5 @@
 	"pools" : [
 		 ],
 	"super" : "Object",
-	"traitcomposition" : "TBlEventSource",
+	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal" }
