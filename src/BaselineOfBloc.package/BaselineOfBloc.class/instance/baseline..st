@@ -33,12 +33,12 @@ baseline: spec
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'Bloc-Tests' with: [ spec requires: #('Bloc-Examples' ). ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
-			package: #'BlocHost-SDL2' with: [ spec requires: #(#Bloc #OSWindow). ];  
+			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 			
 			"groups with only sources"
 			group: 'file:core' 
-				with: #( 'BlocHost-SDL2' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' );
+				with: #( 'BlocHost-SDL' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' );
 			group: 'file:development' with: #('file:core' 'Bloc-Tests' 'Bloc-Layout-Tests');
 			
 			"groups with sources and plugin installation"
