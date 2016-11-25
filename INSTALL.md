@@ -8,6 +8,7 @@
   * [Bloc Zeroconf Scripts](#bloc-zeroconf-script)
   * [All-in-one "User" versions](#all-in-one-user-versions)
   * [All-in-one "Developer" versions](#all-in-one-developer-versions)
+  * [Manual "Developer" versions](#manual-developer-versions)
   * [Code-only versions](#code-only-versions)
   * [Last version based on Athens](#last-version-based-on-athens) (no support)
 
@@ -80,6 +81,7 @@ Metacello new
     load:#development
 ```
 
+
 ### All-in-one "Developer" versions 
 [Bloc](https://github.com/pharo-graphics/Bloc) + [Sparta](https://github.com/syrel/Sparta) + [Moz2D](https://github.com/syrel/Moz2D) + [Iceberg](https://github.com/npasserini/iceberg)
 
@@ -96,6 +98,18 @@ Metacello new
     repository: 'github://pharo-graphics/Bloc/src';
     load:#git:development
 ```
+
+### Manual "Developer" versions 
+If you face some issues with the *All-in-one "Developer" versions*, you can also use this alternative.
+First, load Iceberg:
+
+```smalltalk
+Metacello new
+    baseline: 'Iceberg';
+    repository: 'github://npasserini/iceberg';
+    load
+```
+and after, load the disired ["User" version](#all-in-one-user-versions). 
 
 ### Code-only versions 
 [Bloc](https://github.com/pharo-graphics/Bloc) + [Sparta](https://github.com/syrel/Sparta)
