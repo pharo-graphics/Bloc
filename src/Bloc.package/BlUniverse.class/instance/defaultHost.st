@@ -1,3 +1,3 @@
 initialize-release
 defaultHost
-	^ BlOSWindowSpartaHost new
+	^ BlSDLHost new
