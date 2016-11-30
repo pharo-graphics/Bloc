@@ -14,6 +14,7 @@ baseline: spec
 			project: 'OSWindow' with: [ spec
 				className: #ConfigurationOfOSWindow;
 				versionString: '1.2.15';
+				loads:#(#SDL2);
 				repository: 'http://smalltalkhub.com/mc/Pharo/OSWindow/main/' ];
 			
 			project: 'PetitCSS' with: [ spec
@@ -31,12 +32,13 @@ baseline: spec
 			package: #'Bloc-Sparta' with: [ spec requires: #(#Bloc #Sparta). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'Bloc-Tests' with: [ spec requires: #('Bloc-Examples' ). ];
-			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ]; 
+			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
+			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 			
 			"groups with only sources"
 			group: 'file:core' 
-				with: #( 'BlocHost-OSWindow' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' );
+				with: #( 'BlocHost-SDL' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' );
 			group: 'file:development' with: #('file:core' 'Bloc-Tests' 'Bloc-Layout-Tests');
 			
 			"groups with sources and plugin installation"
