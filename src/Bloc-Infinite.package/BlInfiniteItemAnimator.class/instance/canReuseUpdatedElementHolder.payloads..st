@@ -1,3 +1,3 @@
 testing
 canReuseUpdatedElementHolder: anElementHolder payloads: aCollectionOfPayloads
-	self shouldBeImplemented
+	^ self canReuseUpdatedElementHolder: anElementHolder

@@ -1,0 +1,28 @@
+{
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Ballistic",
+		"Cubic",
+		"DecelerationRate",
+		"EndTension",
+		"Gravity",
+		"GravityEarth",
+		"Inflexion",
+		"NbSamples",
+		"P1",
+		"P2",
+		"ScrollFriction",
+		"Spline",
+		"SplinePosition",
+		"SplineTime",
+		"StartTension" ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlScrollerConstants",
+	"pools" : [
+		 ],
+	"super" : "SharedPool",
+	"type" : "normal" }

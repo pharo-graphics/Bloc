@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Utils",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteLayoutStepNone",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteLayoutStep",
+	"type" : "normal" }

@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 11/29/2016 23:45",
+	"instvars" : [
+		"layoutHolderMap",
+		"oldChangedHolders" ],
+	"name" : "BlInfiniteElementInfoStore",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

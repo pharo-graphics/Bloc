@@ -1,0 +1,3 @@
+animations
+animateAppearance: anElementHolder preLayoutInfo: aPreLayoutInfo postLayoutInfo: aPostLayoutInfo
+	self subclassResponsibility

@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-Infinite-Animator",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"itemAnimator",
+		"isPosted" ],
+	"name" : "BlInfiniteItemAnimatorRunner",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteRunnable",
+	"type" : "normal" }

@@ -1,3 +1,4 @@
-private
+accessing
 itemAnimator
+	<return: #BlInfiniteItemAnimator>
 	^ itemAnimator

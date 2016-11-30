@@ -1,0 +1,28 @@
+{
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"startPosition",
+		"currentPosition",
+		"finalPosition",
+		"startVelocity",
+		"currentVelocity",
+		"deceleration",
+		"startTime",
+		"duration",
+		"splineDuration",
+		"splineDistance",
+		"isFinished",
+		"overshotDistance",
+		"flingFriction",
+		"state",
+		"physicalCoefficient" ],
+	"name" : "BlSplineOverScroller",
+	"pools" : [
+		"BlScrollerConstants" ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,2 +1,2 @@
-hook
+hooks - children
 dispatchChildAttached: aChildElement

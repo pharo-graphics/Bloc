@@ -1,0 +1,3 @@
+notifying
+notifyAnimationFinished: anElementHolder
+	self shouldBeImplemented

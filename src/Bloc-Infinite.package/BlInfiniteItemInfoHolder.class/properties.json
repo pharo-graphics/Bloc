@@ -1,0 +1,16 @@
+{
+	"category" : "Bloc-Infinite-Animator",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"position",
+		"extent",
+		"flags" ],
+	"name" : "BlInfiniteItemInfoHolder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

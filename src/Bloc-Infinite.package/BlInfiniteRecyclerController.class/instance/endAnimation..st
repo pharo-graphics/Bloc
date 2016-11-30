@@ -1,3 +1,3 @@
 recycler -> animator
-endAnimationOf: aChildHolder
+endAnimation: aChildHolder
 	^ self shouldBeImplemented

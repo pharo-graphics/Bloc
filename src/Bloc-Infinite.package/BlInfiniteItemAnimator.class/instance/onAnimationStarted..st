@@ -1,0 +1,2 @@
+hooks
+onAnimationStarted: anElementHolder

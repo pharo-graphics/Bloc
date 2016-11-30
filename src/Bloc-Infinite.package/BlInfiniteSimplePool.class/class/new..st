@@ -1,3 +1,3 @@
 instance creation
 new: anInteger
-^ self basicNew setPool: (self arrayType new: anInteger); initialize
+	^ self basicNew setPool: (self arrayType new: anInteger); initialize

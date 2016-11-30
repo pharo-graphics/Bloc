@@ -1,0 +1,3 @@
+animations
+endAnimations
+	self subclassResponsibility

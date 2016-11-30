@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Flags",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"value" ],
+	"name" : "BlInfiniteFlags",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

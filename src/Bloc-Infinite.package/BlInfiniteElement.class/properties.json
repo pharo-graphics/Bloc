@@ -17,7 +17,11 @@
 		"dispatchScrollCounter",
 		"eatRequestLayout",
 		"layoutFrozen",
-		"layoutRequestEaten" ],
+		"layoutRequestEaten",
+		"itemAnimationRunner",
+		"itemDecorations",
+		"dataSourceChangedAfterLayout",
+		"firstLayoutComplete" ],
 	"name" : "BlInfiniteElement",
 	"pools" : [
 		 ],

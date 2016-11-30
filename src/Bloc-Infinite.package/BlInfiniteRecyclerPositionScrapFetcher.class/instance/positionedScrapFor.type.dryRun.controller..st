@@ -7,6 +7,6 @@ positionedScrapFor: aPosition type: itemType dryRun: dryRun controller: aRecycle
 	dryRun ifFalse: [ 
 		(aRecyclerController findHiddenNonRemovedChildAt: aPosition type: itemType)
 			ifNotNil: [ :child |
-				aRecyclerController endAnimationOf: (aRecyclerController childHolderOf: child) ] ].
+				aRecyclerController endAnimation: (aRecyclerController childHolderOf: child) ] ].
 		
 	^ self cachedFor: aPosition type: itemType dryRun: dryRun controller: aRecyclerController

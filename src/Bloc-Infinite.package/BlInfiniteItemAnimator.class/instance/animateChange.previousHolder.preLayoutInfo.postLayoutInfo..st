@@ -1,0 +1,3 @@
+animations
+animateChange: anElementHolder previousHolder: anOldElementHolder preLayoutInfo: aPreLayoutInfo postLayoutInfo: aPostLayoutInfo
+	self subclassResponsibility

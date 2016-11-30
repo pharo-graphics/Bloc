@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Animator",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 11/29/2016 21:27",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteItemAnimationsFinished",
+	"pools" : [
+		 ],
+	"super" : "BlEvent",
+	"type" : "normal" }
