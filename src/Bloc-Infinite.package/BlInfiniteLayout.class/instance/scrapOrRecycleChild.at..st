@@ -2,7 +2,7 @@ private - children
 scrapOrRecycleChild: anElement at: anIndex
 	| anElementHolder |
 	
-	anElementHolder := self childHolderOf: anElement.
+	anElementHolder := self elementHolderOf: anElement.
 	anElementHolder shouldIgnore
 		ifTrue: [ ^ self ].
 

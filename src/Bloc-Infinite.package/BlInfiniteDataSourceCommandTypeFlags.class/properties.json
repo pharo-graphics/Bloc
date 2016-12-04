@@ -1,0 +1,17 @@
+{
+	"category" : "Bloc-Infinite-Flags",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Add",
+		"Move",
+		"Remove",
+		"Update" ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteDataSourceCommandTypeFlags",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteFlags",
+	"type" : "normal" }

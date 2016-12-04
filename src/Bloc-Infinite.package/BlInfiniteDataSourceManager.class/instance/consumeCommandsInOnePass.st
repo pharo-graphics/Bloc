@@ -11,4 +11,5 @@ consumeCommandsInOnePass
 		command applyOn: self.
 		self onCommandProcessed: command ].
 
-	self recycleCommandsAndClearList: pendingCommands
+	self recycleCommandsAndClearList: pendingCommands.
+	existingCommandTypes clear

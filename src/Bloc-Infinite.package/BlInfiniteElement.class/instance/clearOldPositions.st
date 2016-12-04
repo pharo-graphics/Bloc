@@ -1,9 +1,9 @@
-private
+private - positions
 clearOldPositions
 
-	childrenController unfilteredChildrenDo: [ :anElement |
+	childrenManager unfilteredChildrenDo: [ :anElement |
 		| anElementHolder |
-		anElementHolder := self childHolderOf: anElement.
+		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder shouldIgnore
 			ifFalse: [ anElementHolder clearOldPosition ] ].
 		

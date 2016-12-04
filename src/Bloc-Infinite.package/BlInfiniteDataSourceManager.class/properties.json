@@ -11,7 +11,8 @@
 		"controller",
 		"shouldRecycle",
 		"commandsPool",
-		"commandsReorderer" ],
+		"commandsReorderer",
+		"existingCommandTypes" ],
 	"name" : "BlInfiniteDataSourceManager",
 	"pools" : [
 		 ],

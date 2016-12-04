@@ -14,7 +14,8 @@
 		"widthSpec",
 		"autoMeasure",
 		"itemPrefetchEnabled",
-		"measurementCacheEnabled" ],
+		"measurementCacheEnabled",
+		"requestedSimpleAnimations" ],
 	"name" : "BlInfiniteLayout",
 	"pools" : [
 		 ],

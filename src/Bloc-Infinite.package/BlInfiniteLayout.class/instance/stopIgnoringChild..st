@@ -4,7 +4,7 @@ stopIgnoringChild: anElement
 	Note that I remove all information in the element holder"
 	| anElementHolder |
 
-	anElementHolder := self childHolderOf: anElement.
+	anElementHolder := self elementHolderOf: anElement.
 	anElementHolder stopIgnoring.
 	anElementHolder reset.
-	anElementHolder flagInvalid: true
+	anElementHolder flags addInvalid

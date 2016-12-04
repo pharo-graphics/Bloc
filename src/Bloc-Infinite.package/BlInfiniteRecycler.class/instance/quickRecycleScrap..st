@@ -8,6 +8,6 @@ quickRecycleScrap: anElement
 		assert: [ anElement isNotNil ]
 		description: [ 'Can not recycle nil element' ].
 
-	anElementHolder := self controller childHolderOf: anElement.
+	anElementHolder := self controller elementHolderOf: anElement.
 	anElementHolder detachRecycler.
 	self recycleElementHolder: anElementHolder

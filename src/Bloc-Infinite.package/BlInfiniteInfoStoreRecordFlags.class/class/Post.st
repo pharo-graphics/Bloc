@@ -1,4 +1,4 @@
 accessing - flags
 Post
 	"This method was automatically generated"
-	^ Post
+	^ Post value

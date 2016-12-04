@@ -8,13 +8,13 @@ recycleElement: anElement
 	Notice: I try to make element recycle-able since layout intended to recycle this element (e.g. even if it is in scrap or change cache)"
 	| anElementHolder |
 	
-	anElementHolder := self controller childHolderOf: anElement.
+	anElementHolder := self controller elementHolderOf: anElement.
 	anElementHolder isTmpDetached
 		ifTrue: [ self controller removeDetachedChild: anElement ].
 	
 	anElementHolder isScrap
 		ifTrue: [ anElementHolder unscrap ]
 		ifFalse: [ anElementHolder wasReturnedFromScrap
-			ifTrue: [ anElementHolder clearReturnedFromScrapFlag ] ].
+			ifTrue: [ anElementHolder clearReturnedFromScrap ] ].
 	
 	self recycleElementHolder: anElementHolder

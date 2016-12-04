@@ -7,6 +7,6 @@ ignoreChild: anElement
 		or: [ (infiniteElement childIndexOf: anElement) = 0 ])
 			ifTrue: [ self error: 'Not attached element can not be ignored' ].
 	
-	anElementHolder := self childHolderOf: anElement.
-	anElementHolder flagIgnore: true.
+	anElementHolder := self elementHolderOf: anElement.
+	anElementHolder flags addIgnore.
 	self infoRemoveHolder: anElementHolder

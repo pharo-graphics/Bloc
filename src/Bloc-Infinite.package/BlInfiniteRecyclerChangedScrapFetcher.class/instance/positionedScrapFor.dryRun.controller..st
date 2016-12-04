@@ -5,6 +5,6 @@ positionedScrapFor: aPosition dryRun: dryRun controller: aRecyclerController
 		detect: [ :holder |
 			holder wasReturnedFromScrap not and: [ holder layoutPosition = aPosition ] ]
 		ifFound: [ :holder |
-			holder flagReturnedFromScrap: true.
+			holder flags addReturnedFromScrap.
 			holder ]
 		ifNone: [ nil ]

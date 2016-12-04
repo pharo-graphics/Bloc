@@ -11,6 +11,6 @@ idScrapFor: aPosition dryRun: dryRun controller: aRecyclerController
 				detect: [ :holder |
 					holder wasReturnedFromScrap not and: [ holder itemId = id ] ]
 				ifFound: [ :holder |
-					holder flagReturnedFromScrap: true.
+					holder flags addReturnedFromScrap.
 					^ holder ] ] ].
 	^ nil

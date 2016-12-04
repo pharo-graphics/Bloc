@@ -12,6 +12,6 @@ exactScrapFor: aPosition type: itemType dryRun: dryRun controller: aRecyclerCont
 				or: [ holder itemType = itemType ])
 					ifFalse: [ 
 						Error signal: 'Scrap holder has wrong item type!' ].
-			holder flagReturnedFromScrap: true.
+			holder flags addReturnedFromScrap.
 			holder ]
 		ifNone: [ nil ]

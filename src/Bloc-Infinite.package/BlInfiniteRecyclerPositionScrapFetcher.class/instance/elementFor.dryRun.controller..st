@@ -9,14 +9,14 @@ elementFor: aPosition dryRun: dryRun controller: aRecyclerController
 			(self validateHolder: holder controller: aRecyclerController)
 				ifFalse: [
 					dryRun ifFalse: [ 
-						holder flagInvalid: true.
+						holder flags addInvalid.
 						holder isScrap
 							ifTrue: [ 
 								aRecyclerController childRemoved: holder itemElement.
 								holder itemElement notifyRemovedFromParent.
 								holder unscrap ]
 							ifFalse: [ holder wasReturnedFromScrap
-								ifTrue: [ holder clearReturnedFromScrapFlag ] ].
+								ifTrue: [ holder clearReturnedFromScrap ] ].
 							aRecyclerController recycleElementHolder: holder ].
 					holder := nil ]
 				ifTrue: [

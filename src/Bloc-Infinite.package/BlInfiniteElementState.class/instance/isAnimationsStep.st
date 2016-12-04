@@ -1,3 +1,3 @@
 testing - step
 isAnimationsStep
-	^ layoutStep = BlInfiniteLayoutStep animations
+	^ layoutStep hasAnimations

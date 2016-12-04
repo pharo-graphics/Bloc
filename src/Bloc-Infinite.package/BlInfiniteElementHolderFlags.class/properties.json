@@ -1,0 +1,27 @@
+{
+	"category" : "Bloc-Infinite-Flags",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"AppearedInPreLayout",
+		"BouncedFromHiddenList",
+		"Bound",
+		"DataSourceFullUpdate",
+		"DataSourcePositionUnknown",
+		"Ignore",
+		"Invalid",
+		"Moved",
+		"NotRecyclable",
+		"PendingAccessibilityStateNotSet",
+		"Removed",
+		"ReturnedFromScrap",
+		"TmpDetached",
+		"Update" ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteElementHolderFlags",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteFlags",
+	"type" : "normal" }

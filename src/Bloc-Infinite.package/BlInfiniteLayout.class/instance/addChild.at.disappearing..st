@@ -4,7 +4,7 @@ addChild: anElement at: anIndex disappearing: isDisappearing
 
 	| anElementHolder anInfiniteConstraints |
 	
-	anElementHolder := self childHolderOf: anElement.
+	anElementHolder := self elementHolderOf: anElement.
 	
 	(isDisappearing or: [ anElementHolder isRemoved ])
 		ifTrue: [ self addToDisappearedInLayout: anElementHolder ]
@@ -16,7 +16,7 @@ addChild: anElement at: anIndex disappearing: isDisappearing
 		ifTrue: [
 			anElementHolder isScrap
 				ifTrue: [ anElementHolder unscrap ]
-				ifFalse: [ anElementHolder clearReturnedFromScrapFlag ].
+				ifFalse: [ anElementHolder clearReturnedFromScrap ].
 			childManager attachChildToParent: anElement at: anIndex hidden: false ]
 		ifFalse: [ 
 			anElement parent == infiniteElement

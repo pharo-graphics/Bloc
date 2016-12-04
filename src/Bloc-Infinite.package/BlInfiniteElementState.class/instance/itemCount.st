@@ -1,4 +1,4 @@
-testing
+accessing
 itemCount
 	^ inPreLayout
 		ifTrue: [ previousLayoutItemCount - deletedInvisibleItemCountSincePreviousLayout ]

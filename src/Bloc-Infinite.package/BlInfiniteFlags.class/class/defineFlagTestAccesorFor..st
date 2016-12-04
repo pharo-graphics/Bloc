@@ -4,7 +4,7 @@ defineFlagTestAccesorFor: flagName
 	
 	code := 'has', flagName, '
 	"This method was automatically generated"
-	^ (value & ', flagName, ') ~= 0'.
+	^ (value & ', flagName, ' value) ~= 0'.
 
 	self 
 		compile: code 

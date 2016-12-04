@@ -1,0 +1,4 @@
+recycling
+removeChangedScrap
+
+	changedScrap removeAll

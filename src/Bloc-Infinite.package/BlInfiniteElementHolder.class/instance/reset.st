@@ -1,7 +1,7 @@
 private - invalidate
 reset
 
-	flags removeAll.
+	flags clear.
 	position := BlInfiniteElement noPosition.
 	previousPosition := BlInfiniteElement noPosition.
 	itemId := BlInfiniteElement noId.

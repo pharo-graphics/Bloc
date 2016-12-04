@@ -4,7 +4,7 @@ defineFlagClearAccesorFor: flagName
 	
 	code := 'clear', flagName, '
 	"This method was automatically generated"
-	value := value & (', flagName, ' bitInvert)'.
+	value := value & (', flagName, ' value bitInvert)'.
 
 	self 
 		compile: code 

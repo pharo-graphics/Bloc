@@ -4,7 +4,7 @@ attachChild: anElement at: anIndex
 	If anIndex == 0 child will be attached at the end"
 	| anElementHolder |
 
-	anElementHolder := self childHolderOf: anElement.
+	anElementHolder := self elementHolderOf: anElement.
 	self
 		assert: [ anElementHolder isNotNil ]
 		description: [ 'Temporary detached child must have element holder' ].

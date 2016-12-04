@@ -14,5 +14,6 @@ onItemRangeRemoved: aPositionStart itemCount: anItemCount
 		positionStart: aPositionStart
 		itemCount: anItemCount
 		payload: nil).
+	existingCommandTypes addRemove.
 
 	^ pendingCommands size = 1

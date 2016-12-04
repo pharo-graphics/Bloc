@@ -1,9 +1,9 @@
-private
+private - positions
 saveOldPositions
 
-	childrenController unfilteredChildrenDo: [ :anElement |
+	childrenManager unfilteredChildrenDo: [ :anElement |
 		| anElementHolder |
-		anElementHolder := self childHolderOf: anElement.
+		anElementHolder := self elementHolderOf: anElement.
 		(anElementHolder position = self class noPosition and: [ anElementHolder isRemoved not ])
 			ifTrue: [ self error: 'Element holder can not have undefined position unless it is removed' ].
 		anElementHolder shouldIgnore

@@ -1,4 +1,4 @@
 flags - testing
 hasAppear
 	"This method was automatically generated"
-	^ (value & Appear) ~= 0
+	^ (value & Appear value) ~= 0

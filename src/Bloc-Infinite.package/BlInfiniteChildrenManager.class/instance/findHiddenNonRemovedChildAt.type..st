@@ -7,7 +7,7 @@ findHiddenNonRemovedChildAt: aPosition type: anItemType
 	^ hiddenChildren
 		detect: [ :child |
 			| holder |
-			holder := controller childHolderOf: child.
+			holder := controller elementHolderOf: child.
 			holder layoutPosition = aPosition
 				and: [ holder isInvalid not
 					and: [ holder isRemoved not

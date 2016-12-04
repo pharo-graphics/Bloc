@@ -4,7 +4,7 @@ defineFlagAddAccesorFor: flagName
 	
 	code := 'add', flagName, '
 	"This method was automatically generated"
-	value := value | ', flagName.
+	value := value | ', flagName, ' value'.
 
 	self 
 		compile: code 

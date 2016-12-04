@@ -1,0 +1,16 @@
+{
+	"category" : "Bloc-Infinite-Flags",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Animations",
+		"Layout",
+		"Start" ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteLayoutStepFlags",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteFlags",
+	"type" : "normal" }

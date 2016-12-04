@@ -6,7 +6,7 @@ initialize
 	previousPosition := BlInfiniteElement noPosition.
 	preLayoutPosition := BlInfiniteElement noPosition.
 	itemId := BlInfiniteElement noId.
-	flags := Dictionary new.
+	flags := BlInfiniteElementHolderFlags new.
 	itemType := BlInfiniteItemType invalid.
 	isInChangeScrap := false.
 	recyclableCount := 0
