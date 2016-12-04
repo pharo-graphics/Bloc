@@ -16,6 +16,11 @@ baseline: spec
 				versionString: '1.2.15';
 				loads:#(#SDL2);
 				repository: 'http://smalltalkhub.com/mc/Pharo/OSWindow/main/' ];
+		
+		   project: 'XMLParser' with: [ spec
+				className: #ConfigurationOfXMLParser;
+				versionString: '2.9.8';
+				repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ];
 			
 			project: 'PetitCSS' with: [ spec
 				className: #ConfigurationOfPetitCSS;
@@ -24,11 +29,11 @@ baseline: spec
 			 
 			package: #Bloc with: [ spec requires: #(#Sparta). ];
 			package: #'Bloc-Animation' with: [ spec requires: #(#Bloc ). ];
-			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' ). ];
 			package: #'Bloc-Extension' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Layout' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Layout-Tests' with: [ spec requires: #(#'Bloc-Layout' ). ];
+			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout' #XMLParser). ];
 			package: #'Bloc-Sparta' with: [ spec requires: #(#Bloc #Sparta). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'Bloc-Tests' with: [ spec requires: #('Bloc-Examples' ). ];
