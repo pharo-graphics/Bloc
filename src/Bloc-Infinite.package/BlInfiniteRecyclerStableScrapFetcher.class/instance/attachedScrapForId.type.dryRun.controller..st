@@ -5,11 +5,12 @@ attachedScrapForId: anItemId type: anItemType dryRun: dryRun controller: aRecycl
 		(holder itemId = anItemId and: [ holder wasReturnedFromScrap not ]) ifTrue: [ 
 			anItemType = holder itemType
 				ifTrue: [ 
-					holder flagReturnedFromScrap: true.
+					holder flags addReturnedFromScrap.
 					(holder isRemoved and: [ aRecyclerController isPreLayout not ]) ifTrue: [ 
-						holder flagUpdate: true.
-						holder flagInvalid: false.
-						holder flagRemoved: false ].
+						holder flags
+							addUpdate;
+							clearInvalid;
+							clearRemoved ].
 					^ holder ]
 				ifFalse: [
 					 dryRun ifFalse: [

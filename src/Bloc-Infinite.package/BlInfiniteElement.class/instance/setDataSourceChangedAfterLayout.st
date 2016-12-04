@@ -6,10 +6,10 @@ setDataSourceChangedAfterLayout
 		ifTrue: [ ^ self ].
 		
 	dataSourceChangedAfterLayout := true.
-	childrenController unfilteredChildrenDo: [ :anElement |
+	childrenManager unfilteredChildrenDo: [ :anElement |
 		| anElementHolder |
-		anElementHolder := self childHolderOf: anElement.
+		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder shouldIgnore
-			ifFalse: [ anElementHolder flagDataSourcePositionUnknown: true ] ].
+			ifFalse: [ anElementHolder flags addDataSourcePositionUnknown ] ].
 	
 	recycler setDataSourcePositionsAsUnknown

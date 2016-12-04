@@ -8,7 +8,7 @@ dispatchLayout
 			self layout exactMeasurementSpecFrom: self.
 			self dispatchLayoutSecondStep ]
 		ifFalse: [ 
-			(dataSourceController hasCommands or: [
+			(dataSourceManager hasCommands or: [
 				layout width ~= self width or: [ 
 					layout height ~= self height ] ])
 				ifTrue: [

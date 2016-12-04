@@ -1,4 +1,4 @@
 flags - testing
 hasPost
 	"This method was automatically generated"
-	^ (value & Post) ~= 0
+	^ (value & Post value) ~= 0

@@ -8,7 +8,7 @@ childAtPosition: aPosition
 	1 to: self childrenCount do: [ :anIndex |
 		| anElement anElementHolder |
 		anElement := self childAt: anIndex.
-		anElementHolder := self childHolderOf: anElement.
+		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder ifNotNil: [ :aHolder | 
 			(aHolder layoutPosition = aPosition and: [
 				aHolder shouldIgnore not and: [ 

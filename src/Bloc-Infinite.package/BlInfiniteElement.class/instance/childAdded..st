@@ -1,7 +1,7 @@
 children - add/remove hooks
 childAdded: anElement
 	
-	(self childHolderOf: anElement)
+	(self elementHolderOf: anElement)
 		ifNotNil: [ :holder |
 			"Notify data source that child was added"
-			self dataSource onChildAdded: holder ]
+			self dataSource onElementAdded: holder ]

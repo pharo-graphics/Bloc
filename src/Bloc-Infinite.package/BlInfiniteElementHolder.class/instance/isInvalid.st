@@ -1,3 +1,3 @@
 private - flags testing
 isInvalid
-	^ flags at: #invalid ifAbsent: [ false ]
+	^ self flags hasInvalid

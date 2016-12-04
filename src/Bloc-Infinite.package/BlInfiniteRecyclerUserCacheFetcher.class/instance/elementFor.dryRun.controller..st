@@ -10,7 +10,7 @@ elementFor: aPosition dryRun: dryRun controller: aRecyclerController
 			type: (aRecyclerController itemTypeAt: aPosition).
 			
 		element ifNotNil: [ :el |
-			holder := aRecyclerController childHolderOf: el.
+			holder := aRecyclerController elementHolderOf: el.
 			holder ifNil: [ Error signal: 'Returned by custom cache element must have Holder!' ].
 			holder shouldIgnore ifTrue: [ Error signal: 'Element can not be in ignore mode! You need to remove #ignore flag first' ] ] ].
 	

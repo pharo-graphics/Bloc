@@ -1,4 +1,4 @@
-testing
+testing - commands
 hasPostponedCommands
 	"Return true if there are postponed commands,
 	false otherwise"

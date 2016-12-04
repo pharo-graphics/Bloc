@@ -1,4 +1,4 @@
 flags - clear
 clearDisappeared
 	"This method was automatically generated"
-	value := value & (Disappeared bitInvert)
+	value := value & (Disappeared value bitInvert)

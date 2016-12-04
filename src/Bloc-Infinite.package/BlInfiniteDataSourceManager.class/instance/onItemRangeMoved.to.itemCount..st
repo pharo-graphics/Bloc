@@ -17,5 +17,6 @@ onItemRangeMoved: aPositionStart to: aPositionEnd itemCount: anItemCount
 		positionStart: aPositionStart
 		itemCount: aPositionEnd
 		payload: nil).
+	existingCommandTypes addMove.
 
 	^ pendingCommands size = 1

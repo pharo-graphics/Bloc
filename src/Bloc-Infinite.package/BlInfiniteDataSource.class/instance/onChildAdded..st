@@ -1,2 +1,0 @@
-hooks
-onChildAdded: aHolder

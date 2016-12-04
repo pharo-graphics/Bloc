@@ -2,13 +2,16 @@
 	"category" : "Bloc-Infinite-DataSource",
 	"classinstvars" : [
 		 ],
+	"classtraitcomposition" : "TBlEventTarget classTrait",
 	"classvars" : [
 		 ],
-	"commentStamp" : "AliakseiSyrel 5/20/2016 23:44",
+	"commentStamp" : "AliakseiSyrel 12/4/2016 18:06",
 	"instvars" : [
-		 ],
+		"eventDispatcher",
+		"hasStableIds" ],
 	"name" : "BlInfiniteDataSource",
 	"pools" : [
 		 ],
 	"super" : "Object",
+	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal" }

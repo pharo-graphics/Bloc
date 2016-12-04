@@ -1,12 +1,12 @@
 private - invalidation
 markKnownElementsInvalid
 	
-	childrenController unfilteredChildrenDo: [ :anElement |
+	childrenManager unfilteredChildrenDo: [ :anElement |
 		| anElementHolder |
-		anElementHolder := self childHolderOf: anElement.
+		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder shouldIgnore ifFalse: [ 
-			anElementHolder flagUpdate: true.
-			anElementHolder flagInvalid: true ] ].
+			anElementHolder flags addUpdate.
+			anElementHolder flag addInvalid ] ].
 	
 	self markItemDecorInsetsDirty.
 	recycler markKnownElementsInvalid

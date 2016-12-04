@@ -9,5 +9,5 @@ offsetPositions: aStartPosition forRemove: anItemCount applyToPreLayout: shouldA
 		aHolder position >= removedEnd
 			ifTrue: [ aHolder offsetPositionBy: anItemCount negated applyToPreLayout: shouldApplyToPreLayout ]
 			ifFalse: [
-				aHolder flagRemoved: true.
+				aHolder flags addRemoved.
 				self recycleCachedAt: anIndex ] ]

@@ -5,7 +5,7 @@ defineFlagAccesorFor: flagName
 	
 	code := flagName, '
 	"This method was automatically generated"
-	^ ', flagName.
+	^ ', flagName, ' value'.
 	
 	self class 
 		compile: code 

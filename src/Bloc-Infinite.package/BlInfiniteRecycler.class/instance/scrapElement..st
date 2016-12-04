@@ -6,7 +6,7 @@ scrapElement: anElement
 	anElement must not be nil"
 	| anElementHolder |
 	
-	anElementHolder := self controller childHolderOf: anElement.
+	anElementHolder := self controller elementHolderOf: anElement.
 
 	(anElementHolder isRemoved or: [
 		anElementHolder isInvalid or: [ 

@@ -7,3 +7,4 @@ initialize
 	commandsPool := self defaultCommandsPool.
 	shouldRecycle := self defaultShouldRecycle.
 	commandsReorderer := self defaultCommandsReorderer dataSourceManager: self.
+	existingCommandTypes := BlInfiniteDataSourceCommandTypeFlags new

@@ -14,5 +14,6 @@ onItemRangeInserted: aPositionStart itemCount: anItemCount
 		positionStart: aPositionStart
 		itemCount: anItemCount
 		payload: nil).
+	existingCommandTypes addAdd.
 
 	^ pendingCommands size = 1

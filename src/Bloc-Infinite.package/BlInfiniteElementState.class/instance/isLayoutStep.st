@@ -1,3 +1,3 @@
 testing - step
 isLayoutStep
-	^ layoutStep = BlInfiniteLayoutStep layout
+	^ layoutStep hasLayout
