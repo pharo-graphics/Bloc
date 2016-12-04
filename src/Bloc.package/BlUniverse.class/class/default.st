@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 default
 	^ Default ifNil: [ Default := self new ]

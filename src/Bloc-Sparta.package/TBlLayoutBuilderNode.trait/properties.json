@@ -1,5 +1,4 @@
 {
-	"name" : "TBlLayoutBuilderNode",
+	"category" : "Bloc-Sparta-Text",
 	"commentStamp" : "",
-	"category" : "Bloc-Sparta-Text"
-}
+	"name" : "TBlLayoutBuilderNode" }

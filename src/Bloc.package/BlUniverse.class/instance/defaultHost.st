@@ -1,3 +1,3 @@
 initialize-release
 defaultHost
-	^ BlSDLHost new
+	^ BlHost current

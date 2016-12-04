@@ -1,15 +1,16 @@
 {
+	"category" : "Bloc-Sparta-Text",
+	"classinstvars" : [
+		 ],
 	"classtraitcomposition" : "TBlLayoutBuilderComposite classTrait + TBlLayoutBuilderNode classTrait",
-	"classvars" : [ ],
-	"instvars" : [
-		"nodes"
-	],
-	"name" : "BlLayoutBuilder",
+	"classvars" : [
+		 ],
 	"commentStamp" : "",
+	"instvars" : [
+		"nodes" ],
+	"name" : "BlLayoutBuilder",
+	"pools" : [
+		 ],
 	"super" : "Object",
 	"traitcomposition" : "TBlLayoutBuilderComposite + TBlLayoutBuilderNode",
-	"type" : "normal",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"category" : "Bloc-Sparta-Text"
-}
+	"type" : "normal" }

@@ -1,3 +1,3 @@
 *BlocHost-OSWindow
 useOSWindowSpartaHost
-	self host: BlOSWindowSpartaHost new
+	self preferableHost: BlOSWindowSpartaHost new

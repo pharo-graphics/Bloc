@@ -3,7 +3,8 @@
 	"classinstvars" : [
 		 ],
 	"classvars" : [
-		 ],
+		"Current",
+		"Session" ],
 	"commentStamp" : "GlennCavarle 11/1/2016 13:41",
 	"instvars" : [
 		 ],
