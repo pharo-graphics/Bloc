@@ -6,5 +6,11 @@ shouldReMeasureChild: anElement spec: anExtentSpec
 	<return: #Boolean>
 	
 	^ (self measurementCacheEnabled and: [
-			(self isMeasurementUpToDate: anElement measuredWidth spec: anExtentSpec widthSpec resizer: anElement constraints horizontal resizer) and: [ 
-				self isMeasurementUpToDate: anElement measuredHeight spec: anExtentSpec heightSpec resizer: anElement constraints vertical resizer ] ]) not
+			(self
+				isMeasurementUpToDate: anElement measuredWidth
+				spec: anExtentSpec widthSpec
+				resizer: anElement constraints horizontal resizer) and: [ 
+					self
+						isMeasurementUpToDate: anElement measuredHeight
+						spec: anExtentSpec heightSpec
+						resizer: anElement constraints vertical resizer ] ]) not

@@ -1,2 +1,0 @@
-accessing
-elementHolderAt: aPosition checkNewPosition: checkNewPosition

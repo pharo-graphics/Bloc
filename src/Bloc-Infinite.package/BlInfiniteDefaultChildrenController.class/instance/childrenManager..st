@@ -1,4 +1,4 @@
 accessing
-childManager: anObject
+childrenManager: anObject
 	childManager := anObject.
 	childManager controller: self

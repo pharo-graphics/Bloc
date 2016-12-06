@@ -4,4 +4,5 @@ removeAllChildren
 	This will not recycle any of the affected element; the InfiniteLayout is responsible for doing so if desired."
 
 	"Only remove non-animating elements"
-	self childrenCount to: 1 do: [ :anIndex | childManager removeChildAt: anIndex ]
+	self reverseChildrenDo: [ :anElement :anIndex |
+		childManager removeChildAt: anIndex ]

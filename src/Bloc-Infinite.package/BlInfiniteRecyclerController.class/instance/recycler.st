@@ -1,3 +1,3 @@
 accessing
 recycler
-	^ self shouldBeImplemented
+	^ infiniteElement recycler

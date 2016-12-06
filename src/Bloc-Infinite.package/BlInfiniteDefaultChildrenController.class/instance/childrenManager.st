@@ -1,3 +1,3 @@
 accessing
-childManager
+childrenManager
 	^ childManager

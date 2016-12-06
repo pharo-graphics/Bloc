@@ -5,6 +5,6 @@ recycleCachedAt: anIndex
 	| anElementHolder |
 	
 	anElementHolder := cachedScrap at: anIndex.
-	
+
 	self addHolderToRecyclerPool: anElementHolder.
 	cachedScrap removeAt: anIndex

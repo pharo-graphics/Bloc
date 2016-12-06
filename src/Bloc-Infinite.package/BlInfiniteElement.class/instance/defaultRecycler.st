@@ -1,0 +1,3 @@
+initialization
+defaultRecycler
+	^ BlInfiniteRecycler new

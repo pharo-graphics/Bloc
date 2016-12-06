@@ -1,0 +1,3 @@
+initialization
+defaultInfoStore
+	^ BlInfiniteElementInfoStore new

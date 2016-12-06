@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Layout",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 12/6/2016 16:22",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteBasicLayout",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteLayout",
+	"type" : "normal" }

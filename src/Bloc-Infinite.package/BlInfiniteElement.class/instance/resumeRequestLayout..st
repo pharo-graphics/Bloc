@@ -1,13 +1,13 @@
 layout
 resumeRequestLayout: shouldPerformLayout
 	
-	eatRequestLayout < 1
+	eatRequestLayoutCounter < 1
 		ifTrue: [ self error: 'Invalid eat request layout count' ].
 
 	shouldPerformLayout
 		ifFalse: [ layoutRequestEaten := false ].
 	
-	eatRequestLayout = 1 ifTrue: [ 
+	eatRequestLayoutCounter = 1 ifTrue: [ 
 		(shouldPerformLayout and: [
 			layoutRequestEaten and: [ 
 				layoutFrozen not ] ])
@@ -15,4 +15,4 @@ resumeRequestLayout: shouldPerformLayout
 		layoutFrozen
 			ifFalse: [ layoutRequestEaten := false ] ].
 		
-	eatRequestLayout := eatRequestLayout - 1
+	eatRequestLayoutCounter := eatRequestLayoutCounter - 1

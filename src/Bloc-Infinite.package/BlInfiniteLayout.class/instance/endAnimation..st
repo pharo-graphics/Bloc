@@ -1,3 +1,3 @@
-private
+animations
 endAnimation: anElementHolder
 	self shouldBeImplemented

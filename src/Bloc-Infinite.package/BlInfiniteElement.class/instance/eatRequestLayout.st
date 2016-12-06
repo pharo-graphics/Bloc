@@ -1,6 +1,6 @@
 layout
 eatRequestLayout
 
-	eatRequestLayout := eatRequestLayout + 1.
-	(eatRequestLayout = 1 and: [ layoutFrozen not ])
+	eatRequestLayoutCounter := eatRequestLayoutCounter + 1.
+	(eatRequestLayoutCounter = 1 and: [ layoutFrozen not ])
 		ifTrue: [ layoutRequestEaten := false ]

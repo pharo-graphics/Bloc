@@ -3,7 +3,8 @@ recycleAndRemoveCachedElements
 	"Recycle and remove all cached elements"
 	
 	"iterate in reversed order since we delete cached elements from collection by index"
-	cachedScrap size to: 1 do: [ :index | self recycleCachedAt: index ].
+	cachedScrap reverseWithIndexDo: [ :anElementHolder :anIndex |
+		self recycleCachedAt: anIndex ].
 	
 	"post-condition to make sure recycling worked well"
 	self

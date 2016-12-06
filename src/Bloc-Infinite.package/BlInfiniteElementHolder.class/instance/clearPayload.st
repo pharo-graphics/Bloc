@@ -1,4 +1,4 @@
-private - invalidate
+accessing - payload
 clearPayload
 
 	payloads ifNotNil: [ payloads removeAll ].

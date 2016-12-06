@@ -15,7 +15,8 @@
 		"autoMeasure",
 		"itemPrefetchEnabled",
 		"measurementCacheEnabled",
-		"requestedSimpleAnimations" ],
+		"requestedSimpleAnimations",
+		"smoothScroller" ],
 	"name" : "BlInfiniteLayout",
 	"pools" : [
 		 ],

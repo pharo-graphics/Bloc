@@ -8,7 +8,7 @@ infiniteElement: anInfiniteElement
 	self assert: [ anInfiniteElement isNotNil ] description: [ 'Can not attach nil infinite element' ].
 	
 	infiniteElement := anInfiniteElement.
-	childManager := infiniteElement childManager.
+	childManager := infiniteElement childrenManager.
 	width := infiniteElement width.
 	height := infiniteElement height.
 

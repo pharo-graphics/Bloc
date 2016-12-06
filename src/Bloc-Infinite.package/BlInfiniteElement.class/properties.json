@@ -17,7 +17,6 @@
 		"hasFixedSize",
 		"layoutOrScrollCounter",
 		"dispatchScrollCounter",
-		"eatRequestLayout",
 		"layoutFrozen",
 		"layoutRequestEaten",
 		"itemAnimationRunner",
@@ -30,7 +29,8 @@
 		"preserveFocusAfterLayout",
 		"layoutPositionsRange",
 		"infoStoreProcessor",
-		"dataSourceChangedDuringMeasure" ],
+		"dataSourceChangedDuringMeasure",
+		"eatRequestLayoutCounter" ],
 	"name" : "BlInfiniteElement",
 	"pools" : [
 		 ],

@@ -3,11 +3,9 @@ offsetPositions: aStartPosition forRemove: anItemCount applyToPreLayout: shouldA
 	| removedEnd |
 	
 	removedEnd := aStartPosition + anItemCount.
-	cachedScrap size to: 1 do: [ :anIndex |
-		| aHolder |
-		aHolder := cachedScrap at: anIndex.
-		aHolder position >= removedEnd
-			ifTrue: [ aHolder offsetPositionBy: anItemCount negated applyToPreLayout: shouldApplyToPreLayout ]
+	cachedScrap reverseWithIndexDo: [ :anElementHolder :anIndex |
+		anElementHolder position >= removedEnd
+			ifTrue: [ anElementHolder offsetPositionBy: anItemCount negated applyToPreLayout: shouldApplyToPreLayout ]
 			ifFalse: [
-				aHolder flags addRemoved.
+				anElementHolder flags addRemoved.
 				self recycleCachedAt: anIndex ] ]

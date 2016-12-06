@@ -1,3 +1,3 @@
-private - flags testing
+private - testing
 isRecyclable
 	^ self flags hasNotRecyclable not

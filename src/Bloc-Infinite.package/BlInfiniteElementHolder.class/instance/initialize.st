@@ -9,4 +9,5 @@ initialize
 	flags := BlInfiniteElementHolderFlags new.
 	itemType := BlInfiniteItemType invalid.
 	isInChangeScrap := false.
-	recyclableCount := 0
+	recyclableCount := 0.
+	payloads := OrderedCollection new

@@ -1,0 +1,3 @@
+animations
+requestSimpleAnimationsInNextLayout
+	requestedSimpleAnimations := true

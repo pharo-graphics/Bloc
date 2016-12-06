@@ -6,7 +6,7 @@
 		 ],
 	"commentStamp" : "AliakseiSyrel 5/25/2016 12:58",
 	"instvars" : [
-		"element",
+		"infiniteElement",
 		"childManager" ],
 	"name" : "BlInfiniteDefaultChildrenController",
 	"pools" : [
