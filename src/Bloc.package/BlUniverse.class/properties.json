@@ -3,11 +3,12 @@
 	"classinstvars" : [
 		 ],
 	"classvars" : [
-		"Default" ],
+		"Default",
+		"Session" ],
 	"commentStamp" : "GlennCavarle 6/26/2016 00:06",
 	"instvars" : [
 		"pulseLoop",
-		"host",
+		"preferableHost",
 		"pulseListeners",
 		"spaceManager",
 		"animationManager",

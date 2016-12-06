@@ -1,3 +1,3 @@
 accessing
 host
-	^ host ifNil:[host := self defaultHost]
+	^ preferableHost ifNil: [ BlHost current ]

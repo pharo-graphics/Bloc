@@ -1,4 +1,6 @@
 accessing
-host: anObject
-	self stop.
-	host := anObject
+host: anHost
+	self deprecated: 'Use preferableHost: instead'.
+	self preferableHost: anHost
+	
+	
