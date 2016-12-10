@@ -5,5 +5,5 @@ set: index
 		ifTrue: [ 
 			self ensureNext.
 			next set: index - array size ]
-		ifFalse: [ 
+		ifFalse: [
 			array byteAt: index put: true asBit ]

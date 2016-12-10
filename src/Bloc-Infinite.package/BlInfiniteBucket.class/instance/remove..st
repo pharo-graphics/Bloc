@@ -8,5 +8,10 @@ remove: index
 		ifFalse: [ 
 			| value |
 			value := array byteAt: index.
-			array := array copyWithout: index.
-			value = true asBit ]
+			array replaceFrom: index to: array size - 1 with: array startingAt: index + 1.
+			array byteAt: array size put: (next
+				ifNil: [ false asBit ]
+				ifNotNil: [ (next get: 1) asBit ]).
+			next
+				ifNotNil: [ next remove: 1 ].
+			value ]

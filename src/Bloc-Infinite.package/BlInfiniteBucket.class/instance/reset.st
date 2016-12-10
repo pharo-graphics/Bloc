@@ -1,4 +1,4 @@
 accessing
 reset
-	array := self newArray.
 	next ifNotNil: #reset.
+	array := self newArray

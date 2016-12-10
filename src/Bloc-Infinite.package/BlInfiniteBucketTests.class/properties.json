@@ -4,12 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "AliakseiSyrel 5/23/2016 21:28",
+	"commentStamp" : "",
 	"instvars" : [
-		"next",
-		"array" ],
-	"name" : "BlInfiniteBucket",
+		"bucket" ],
+	"name" : "BlInfiniteBucketTests",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "TestCase",
 	"type" : "normal" }
