@@ -1,0 +1,3 @@
+initialization
+defaultAnchorInfo
+	^ BlInfiniteLinearLayoutAnchorInfo new

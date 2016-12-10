@@ -1,0 +1,25 @@
+{
+	"category" : "Bloc-Infinite-Layouts-Linear-Utilities",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"allowRecycling",
+		"availableSpace",
+		"extraSpace",
+		"currentPosition",
+		"lastScrolledDelta",
+		"scrapList",
+		"isPreLayout",
+		"itemDirection",
+		"scrollingOffset",
+		"isInfinite",
+		"layoutDirection",
+		"offset" ],
+	"name" : "BlInfiniteLinearLayoutState",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

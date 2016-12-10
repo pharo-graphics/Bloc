@@ -1,0 +1,3 @@
+orientation
+beHorizontal
+	self orientation: BlInfiniteHorizontalOrientation new

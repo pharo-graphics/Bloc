@@ -1,0 +1,17 @@
+{
+	"category" : "Bloc-Infinite-Layouts-Linear-Utilities",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"position",
+		"coordinate",
+		"layoutFromEnd",
+		"valid" ],
+	"name" : "BlInfiniteLinearLayoutAnchorInfo",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

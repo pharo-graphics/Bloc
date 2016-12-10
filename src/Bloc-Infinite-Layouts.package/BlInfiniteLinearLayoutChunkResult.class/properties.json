@@ -1,0 +1,17 @@
+{
+	"category" : "Bloc-Infinite-Layouts-Linear-Utilities",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"finished",
+		"ignoreConsumed",
+		"focusable",
+		"consumedSpace" ],
+	"name" : "BlInfiniteLinearLayoutChunkResult",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,3 @@
+accessing
+scrapList: aCollectionOfScrappedElement
+	scrapList := aCollectionOfScrappedElement

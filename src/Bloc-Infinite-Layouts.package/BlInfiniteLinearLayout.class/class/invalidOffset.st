@@ -1,0 +1,3 @@
+accessing
+invalidOffset
+	^ Float negativeInfinity
