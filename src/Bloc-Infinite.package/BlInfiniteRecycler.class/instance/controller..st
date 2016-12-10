@@ -1,3 +1,3 @@
 accessing
 controller: aBlInfiniteRecyclerController
-	^ controller
+	controller := aBlInfiniteRecyclerController

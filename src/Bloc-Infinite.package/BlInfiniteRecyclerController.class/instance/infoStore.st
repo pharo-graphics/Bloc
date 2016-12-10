@@ -1,0 +1,3 @@
+accessing
+infoStore
+	^ infiniteElement infoStore

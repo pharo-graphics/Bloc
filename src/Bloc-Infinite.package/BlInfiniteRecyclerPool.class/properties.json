@@ -6,7 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
+		"scrap",
+		"maxScrap",
+		"attachCount" ],
 	"name" : "BlInfiniteRecyclerPool",
 	"pools" : [
 		 ],

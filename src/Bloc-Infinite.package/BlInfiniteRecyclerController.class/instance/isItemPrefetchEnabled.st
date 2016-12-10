@@ -1,3 +1,3 @@
 recycler -> element
 isItemPrefetchEnabled
-	^ self shouldBeImplemented
+	^ infiniteElement layout isItemPrefetchEnabled

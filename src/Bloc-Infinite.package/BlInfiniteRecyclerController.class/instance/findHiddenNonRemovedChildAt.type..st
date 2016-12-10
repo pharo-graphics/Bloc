@@ -1,3 +1,3 @@
 recycler -> children
 findHiddenNonRemovedChildAt: aPosition type: anItemType
-	^ self shouldBeImplemented
+	^ self childrenManager findHiddenNonRemovedChildAt: aPosition type: anItemType

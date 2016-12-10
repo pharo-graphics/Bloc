@@ -1,3 +1,3 @@
 recycler -> element
-elementHolderOf: aChildElement
-	^ self shouldBeImplemented
+elementHolderOf: anElement
+	^ infiniteElement elementHolderOf: anElement

@@ -1,3 +1,3 @@
 recycler -> data source
 itemIdAt: aPosition
-	^ self shouldBeImplemented
+	^ self dataSource itemIdAt: aPosition

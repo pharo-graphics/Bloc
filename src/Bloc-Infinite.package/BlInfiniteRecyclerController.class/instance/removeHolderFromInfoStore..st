@@ -1,3 +1,3 @@
 recycler -> state
 removeHolderFromInfoStore: anElementHolder
-	self shouldBeImplemented
+	self infoStore removeHolder: anElementHolder

@@ -1,3 +1,3 @@
 scrap fetcher -> recycler
 userCache
-	^ self shouldBeImplemented
+	^ self recycler userCache

@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-Infinite-Layout",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 12/7/2016 08:54",
+	"instvars" : [
+		"lastTotalSpace",
+		"layout" ],
+	"name" : "BlInfiniteLayoutOrientation",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

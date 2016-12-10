@@ -1,3 +1,3 @@
 recycler -> data source
 computePositionOffset: aPosition
-	^ self shouldBeImplemented
+	^ self dataSourceManager computePositionOffset: aPosition

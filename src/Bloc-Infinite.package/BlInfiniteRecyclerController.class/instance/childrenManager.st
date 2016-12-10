@@ -1,0 +1,3 @@
+accessing
+childrenManager
+	^ infiniteElement childrenManager

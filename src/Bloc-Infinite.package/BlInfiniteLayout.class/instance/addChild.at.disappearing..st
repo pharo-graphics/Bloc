@@ -17,7 +17,7 @@ addChild: anElement at: anIndex disappearing: isDisappearing
 			anElementHolder isScrap
 				ifTrue: [ anElementHolder unscrap ]
 				ifFalse: [ anElementHolder clearReturnedFromScrap ].
-			childManager attachChildToParent: anElement at: anIndex hidden: false ]
+			childManager attachChild: anElement at: anIndex hidden: false ]
 		ifFalse: [ 
 			anElement parent == infiniteElement
 				ifTrue: [ 

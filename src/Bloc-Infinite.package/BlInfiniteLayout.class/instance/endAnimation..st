@@ -1,3 +1,3 @@
 animations
 endAnimation: anElementHolder
-	self shouldBeImplemented
+	

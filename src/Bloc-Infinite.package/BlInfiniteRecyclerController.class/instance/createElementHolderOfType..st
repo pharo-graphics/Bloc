@@ -1,3 +1,5 @@
-recycler -> element
-createElementHolderOfType: aType
-	^ self shouldBeImplemented
+recycler -> data source
+createElementHolderOfType: anItemType
+	<return: #BlInfiniteElementHolder>
+
+	^ self dataSource createHolder: infiniteElement type: anItemType

@@ -1,3 +1,3 @@
 invalidate
 clear
-	self shouldBeImplemented
+	scrap removeAll

@@ -1,3 +1,3 @@
 recycler -> state
 isPreLayout
-	^ self shouldBeImplemented
+	^ self state isPreLayout

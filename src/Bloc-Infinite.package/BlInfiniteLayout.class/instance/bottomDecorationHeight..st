@@ -5,4 +5,4 @@ bottomDecorationHeight: anElement
 	| anInsets |
 
 	anInsets := anElement constraints infinite decorationInsets.
-	^ anElement bottom
+	^ anInsets bottom

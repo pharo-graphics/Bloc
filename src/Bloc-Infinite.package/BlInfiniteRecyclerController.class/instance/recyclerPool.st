@@ -1,3 +1,3 @@
 scrap fetcher -> recycler
 recyclerPool
-	^ self shouldBeImplemented
+	^ self recycler pool

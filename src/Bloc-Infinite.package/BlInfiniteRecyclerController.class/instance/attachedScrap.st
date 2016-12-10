@@ -1,3 +1,3 @@
 scrap fetcher -> recycler
 attachedScrap
-	^ self shouldBeImplemented
+	^ self recycler attachedScrap

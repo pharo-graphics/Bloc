@@ -5,4 +5,4 @@ leftDecorationWidth: anElement
 	| anInsets |
 
 	anInsets := anElement constraints infinite decorationInsets.
-	^ anElement left
+	^ anInsets left

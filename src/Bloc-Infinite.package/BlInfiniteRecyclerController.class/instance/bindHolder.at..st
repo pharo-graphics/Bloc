@@ -1,3 +1,3 @@
 recycler -> data source
 bindHolder: aHolder at: aPosition
-	^ self shouldBeImplemented
+	self dataSource bindHolder: aHolder at: aPosition

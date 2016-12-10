@@ -5,9 +5,8 @@ removeAndRecycleScrap
 	"Store amount of scrapped element in order to decide if we need to invalidate
 	infinite element later"
 	aScrapCount := self recycler scrapCount.
-	self recycler reverseScrapDo: [ :anIndex |
-		| aScrappedElement anElementHolder |
-		aScrappedElement := self recycler scrappedElementAt: anIndex.
+	self recycler reverseScrapDo: [ :aScrappedElement :anIndex |
+		| anElementHolder |
 		anElementHolder := self elementHolderOf: aScrappedElement.
 		anElementHolder shouldIgnore
 			ifFalse: [ 

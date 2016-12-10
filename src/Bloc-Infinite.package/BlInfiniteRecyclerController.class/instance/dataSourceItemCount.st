@@ -1,3 +1,3 @@
 recycler -> data source
 dataSourceItemCount
-	^ self shouldBeImplemented
+	^ self dataSource itemCount

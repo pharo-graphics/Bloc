@@ -1,3 +1,3 @@
 scrap fetcher -> recycler
 changedScrap
-	^ self shouldBeImplemented
+	^ self recycler changedScrap

@@ -4,7 +4,7 @@ elementFor: aPosition dryRun: dryRun
 	@see elementFor: for more information"
 	<return: #BlElement>
 
-	| holder  fromScrap fetchedResult bound itemElement|
+	| holder fromScrap fetchedResult bound itemElement anInfiniteConstraints |
 	
 	(aPosition < 1 and: [ aPosition > self controller dataSourceItemCount ])
 		ifTrue: [ Error signal: 'Position is out of bounds!' ].
@@ -30,8 +30,8 @@ elementFor: aPosition dryRun: dryRun
 				self controller isPreLayout
 					ifTrue: [ holder preLayoutPosition: aPosition ] ] ].
 	
-	self flag: 'Update to use layout specific constraints!'.
 	itemElement := holder itemElement.
-	itemElement constraints holder: holder.
-	itemElement constraints pendingInvalidate: (fromScrap and: [ bound ]).
+	anInfiniteConstraints := itemElement constraints infinite.
+	anInfiniteConstraints holder: holder.
+	anInfiniteConstraints pendingInvalidate: (fromScrap and: [ bound ]).
 	^ itemElement

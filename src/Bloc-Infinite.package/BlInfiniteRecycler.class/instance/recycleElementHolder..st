@@ -16,7 +16,7 @@ recycleElementHolder: anElementHolder
 	cached := false.
 	recycled := false.
 
-	(cachedScrap contains: anElementHolder)
+	(cachedScrap includes: anElementHolder)
 		ifTrue: [ self error: 'Trying to recycle already cached element' ].
 
 	anElementHolder isRecyclable ifTrue: [ 
@@ -46,7 +46,7 @@ recycleElementHolder: anElementHolder
 								ifTrue: [ cacheIndex := cacheIndex - 1 ]
 								ifFalse: [ break := true ] ].
 						targetCacheIndex := cacheIndex + 1 ].
-				cachedScrap add: anElementHolder beforeIndex: targetCacheIndex.
+				cachedScrap add: anElementHolder afterIndex: targetCacheIndex.
 				cached := true ].
 			cached ifFalse: [ 
 				self addHolderToRecyclerPool: anElementHolder.
