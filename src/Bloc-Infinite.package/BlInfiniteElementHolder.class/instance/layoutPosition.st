@@ -4,5 +4,5 @@ layoutPosition
 	<return: #Number>
 
 	^ preLayoutPosition = BlInfiniteElement noPosition
-		ifTrue: [ preLayoutPosition ]
-		ifFalse: [ position ]
+		ifTrue: [ position ]
+		ifFalse: [ preLayoutPosition ]

@@ -11,4 +11,5 @@ detachChildAt: anIndex
 		anElement shouldIgnore not ])
 			ifTrue: [ self error: 'Can not detach aleady detached child!' ].
 	
+	anElementHolder flags addTmpDetached.
 	infiniteElement detachChild: anElement

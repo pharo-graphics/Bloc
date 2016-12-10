@@ -1,4 +1,4 @@
-children - add/remove hooks
+hooks - children
 childAdded: anElement
 	
 	(self elementHolderOf: anElement)

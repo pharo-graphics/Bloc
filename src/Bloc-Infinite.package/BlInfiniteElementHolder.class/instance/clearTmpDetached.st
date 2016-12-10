@@ -1,3 +1,3 @@
 private - flags changing
-clearTmpDetach
+clearTmpDetached
 	self flags clearTmpDetached

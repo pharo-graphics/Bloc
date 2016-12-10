@@ -31,4 +31,4 @@ recycleChildrenFromStart: anOffset
 		((self orientation decoratedEnd: anElement) > aLimit
 			or: [ (self orientation decoratedEndInParent: anElement) > aLimit ])
 				"stop here"
-				ifTrue: [ ^ self recycleChildrenWithin: (aStart to: anIndex) ] ]
+				ifTrue: [ ^ self recycleChildrenWithin: (anIndex - 1 to: aStart) inversed ] ]

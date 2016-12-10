@@ -7,7 +7,7 @@ layoutChildren
 			4) scroll to fulfill requirements like stack from bottom.
 				create layout state"
 	| anExtraSpace anOffsetSpace |
-	
+		
 	(self hasPendingScrollPosition
 		and: [ self state itemCount isZero ])
 			ifTrue: [ ^ self removeAndRecycleAllChildren ].
@@ -22,7 +22,7 @@ layoutChildren
 	self detachAndScrapAttachedChildren.
 	layoutState isInfinite: self resolveIsInfinite.
 	layoutState isPreLayout: self state isPreLayout.
-	
+
 	anOffsetSpace := self layoutChildrenFill: anExtraSpace.
 	anOffsetSpace := self layoutChildrenFixGaps: anOffsetSpace.
 	self layoutChildrenForPredictiveAnimations: anOffsetSpace.

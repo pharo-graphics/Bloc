@@ -1,3 +1,3 @@
 accessing
 itemCount
-	^ Color registeredColorNames size
+	^ colors size
