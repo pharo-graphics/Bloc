@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Examples-Linear",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteLinearLayoutExamples",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

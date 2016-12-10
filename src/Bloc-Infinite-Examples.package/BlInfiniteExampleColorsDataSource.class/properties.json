@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Examples-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteExampleColorsDataSource",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteDataSource",
+	"type" : "normal" }
