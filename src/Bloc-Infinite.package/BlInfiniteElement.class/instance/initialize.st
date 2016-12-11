@@ -10,13 +10,16 @@ initialize
 	layoutFrozen := false.
 	layoutRequestEaten := false.
 	dataSourceChangedAfterLayout := false.
-	dataSourceChangedDuringMeasure := false.
+	dataSourceChangeDuringMeasure := false.
 	itemsAddedOrRemoved := false.
 	itemsChanged := false.
 	preserveFocusAfterLayout := true.
-	
+
+	itemAnimator := self defaultItemAnimator.
 	infoStore := self defaultInfoStore.
+	infoStoreProcessor := self defaultInfoStoreProcessor on: self.
 	state := self defaultState.
+	childrenUpdateRunnable := self defaultChildrenUpdateRunnable on: self.
 	self initializeChildrenManager.
 	self initializeDataSource.
 	self initializeRecycler.

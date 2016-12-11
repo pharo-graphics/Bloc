@@ -8,7 +8,7 @@ measure: anExtentMeasurementSpec
 	
 	"Fast exit if I or any of my children did not request layout update
 	and my previous measurement specification equals to new one"
-	(self requestingLayout not
+	(self isLayoutRequested not
 		and: [ self layout previousMeasurementSpec = anExtentMeasurementSpec ])
 		ifTrue: [ ^ self ].
 		

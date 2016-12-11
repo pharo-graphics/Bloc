@@ -1,4 +1,4 @@
-notifying
+event firing
 notifyItemsInserted: anInterval
 	"Notify any registered observers that the currently reflected ===anInterval size===
 	items starting at ===anInterval first=== have been newly inserted. The items

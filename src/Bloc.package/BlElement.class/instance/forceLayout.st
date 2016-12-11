@@ -3,7 +3,7 @@ forceLayout
 	| relayoutCounter maxRelayoutCount|
 	relayoutCounter := 0.
 	maxRelayoutCount := 100.
-	[ self layout requestingLayout
+	[ self isLayoutRequested
 		and: [ relayoutCounter < maxRelayoutCount ] ]
 		whileTrue: [
 			self measure: (BlExtentMeasurementSpec new

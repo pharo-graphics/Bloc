@@ -1,4 +1,4 @@
-layout - testing
+testing
 isComputingLayout
 	"Returns whether InfiniteElement is currently computing a layout.
 	If this method returns true, it means that InfiniteElement is in a lockdown state and any

@@ -1,9 +1,9 @@
 manager -> element
-offsetPositions: startPosition forRemovingLaidOutOrNewElement: itemCount
+offsetPositions: aStartPosition forRemovingLaidOutOrNewElement: anItemCount
 	"Ask infinite element to update item positions starting
-	at startPosition in order to remove by itemCount defined amount
+	at aStartPosition in order to remove by anItemCount defined amount
 	of already laid out or new elements.
-	startPosition must not be nil.
-	itemCount must not be nil"
+	aStartPosition must not be nil.
+	anItemCount must not be nil"
 
 	^ self subclassResponsibility

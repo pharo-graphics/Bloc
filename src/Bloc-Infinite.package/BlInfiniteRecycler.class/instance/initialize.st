@@ -9,4 +9,6 @@ initialize
 	
 	cacheSize := self defaultCacheSize.
 	requestedCacheSize := self defaultCacheSize.
-	recyclerPool := self defaultRecyclerPool
+	recyclerPool := self defaultRecyclerPool.
+
+	eventDispatcher := self defaultEventDispatcher on: self

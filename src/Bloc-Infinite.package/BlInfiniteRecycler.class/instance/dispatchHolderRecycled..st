@@ -1,3 +1,0 @@
-private
-dispatchHolderRecycled: anElementHolder
-	self controller onElementHolderRecycled: anElementHolder

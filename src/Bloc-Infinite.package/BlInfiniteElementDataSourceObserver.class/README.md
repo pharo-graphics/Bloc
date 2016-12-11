@@ -1,0 +1,1 @@
+I am a data source observer registered by infinite element to support internal synchronisation of data and its representation.

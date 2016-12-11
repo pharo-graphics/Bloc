@@ -3,4 +3,7 @@ canReuseUpdatedElementHolder: anElementHolder
 	"Return true if changed element holder can be reused"
 	<return: #Boolean>
 	
-	self shouldBeImplemented
+	^ infiniteElement itemAnimator supportsAnimations and: [ 
+			infiniteElement itemAnimator
+				canReuseUpdatedElementHolder: anElementHolder
+				payloads: anElementHolder payloads ]

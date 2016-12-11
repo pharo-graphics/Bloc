@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Events",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"dataSource" ],
+	"name" : "BlInfiniteDataSourceEvent",
+	"pools" : [
+		 ],
+	"super" : "BlEvent",
+	"type" : "normal" }

@@ -1,12 +1,11 @@
 pulse
 doLayout
-| relayoutCounter maxRelayoutCount  |
-
+	| relayoutCounter maxRelayoutCount |
 	
 	relayoutCounter := 0.
 	maxRelayoutCount := 100.
 	
-	[ self root requestingLayout
+	[ self root isLayoutRequested
 		and: [ relayoutCounter < maxRelayoutCount ] ]
 		whileTrue: [
 			self doUpdateLayout.

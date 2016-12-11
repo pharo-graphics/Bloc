@@ -6,7 +6,7 @@ onMeasureCustom: anExtentMeasurementSpec
 	
 	"custom onMeasure"
 	
-	dataSourceChangedDuringMeasure ifTrue: [ 
+	dataSourceChangeDuringMeasure ifTrue: [ 
 		self eatRequestLayout.
 		self processDataSourceCommandsAndSetAnimationFlags.
 		
@@ -15,7 +15,7 @@ onMeasureCustom: anExtentMeasurementSpec
 			ifFalse: [ 
 				dataSourceManager consumeCommandsInOnePass.
 				self state isPreLayout: false ].
-		dataSourceChangedDuringMeasure := false.
+		dataSourceChangeDuringMeasure := false.
 		self resumeRequestLayout: false ].
 	
 	self state itemCount: dataSource itemCount.

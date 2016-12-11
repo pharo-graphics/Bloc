@@ -1,4 +1,4 @@
-notifying
+event firing
 notifyItemsRemoved: anInterval
 	"Notify any registered event handlers that the ===anInterval size=== items previously
 	located at ===anInterval first=== have been removed from the data set. The items

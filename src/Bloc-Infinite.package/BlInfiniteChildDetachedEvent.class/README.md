@@ -1,1 +1,0 @@
-Sent when an element is detached from InfiniteElement

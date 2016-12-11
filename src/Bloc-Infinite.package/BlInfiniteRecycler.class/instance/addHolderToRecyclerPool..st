@@ -1,6 +1,6 @@
 private
 addHolderToRecyclerPool: anElementHolder
 
-	self dispatchHolderRecycled: anElementHolder.
+	self dispatchElementRecycled: anElementHolder.
 	anElementHolder detachInfiniteElement.
 	self pool put: anElementHolder

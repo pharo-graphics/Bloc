@@ -1,0 +1,3 @@
+events
+eventClass
+	^ BlInfiniteDataSourceEvent

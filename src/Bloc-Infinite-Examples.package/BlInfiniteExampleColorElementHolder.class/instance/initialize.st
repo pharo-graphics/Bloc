@@ -5,10 +5,9 @@ initialize
 	itemElement := BlElement new
 		constraintsDo: [ :c |
 			c horizontal matchParent.
-			c vertical exact: 3 ];
+			c vertical exact: 40 ];
 		addEventHandlerOn: BlClickEvent do: [ :e |
 			| aPosition |
 			aPosition := e target constraints infinite holder dataSourcePosition.
-			e inform: aPosition asString.
-			infiniteElement dataSource removeColorAt: aPosition ];
+			infiniteElement dataSource moveColorDownAt: aPosition ];
 		yourself

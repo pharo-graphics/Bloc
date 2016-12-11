@@ -1,5 +1,5 @@
 dispatch
 updateElementHoldersOn: aContext command: aCommand
 	aContext controller
-		offsetPositions: aCommand startPosition
+		offsetPositions: aCommand positionStart
 		forRemovingLaidOutOrNewElement: aCommand itemCount

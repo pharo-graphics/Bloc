@@ -4,11 +4,12 @@ consumeCommandsInOnePass
 
 	"we still consume postponed updates (if there is) in case there was a pre-process call
 	w/o a matching consumePostponedUpdates."
+		
 	self consumePostponedCommands.
 
 	pendingCommands do: [ :command |
 		self controller onDispatchSecondPass: command.
-		command applyOn: self.
+		command offsetPositionsOn: self controller.
 		self onCommandProcessed: command ].
 
 	self recycleCommandsAndClearList: pendingCommands.

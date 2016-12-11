@@ -1,4 +1,4 @@
-notifying
+event firing
 notifyItemsChanged: anInterval
 	"Notify any registered event handlers that the itemCount items starting at aPosition have changed.
 	This is an item change event, not a structural change event. It indicates that

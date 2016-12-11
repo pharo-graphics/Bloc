@@ -1,3 +1,4 @@
 layout
 requestParentLayout
-	self parent ifNotNil: [:p| p requestLayout ]
+	self parent
+		ifNotNil: [ :anElement | anElement requestLayout ]

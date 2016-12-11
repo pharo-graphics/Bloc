@@ -8,7 +8,6 @@ exampleColors
 		extent: 300 @ 500;
 		constraintsDo: [ :c | c padding: (BlInsets all: 20) ];
 		background: Color gray;
-		forceLayout;
 		yourself.
 	space root addChild: element.
 	space root

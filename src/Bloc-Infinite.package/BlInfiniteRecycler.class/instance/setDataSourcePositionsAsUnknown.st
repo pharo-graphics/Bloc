@@ -1,3 +1,5 @@
 invalidation
 setDataSourcePositionsAsUnknown
-	self shouldBeImplemented
+	
+	self cachedScrap do: [ :anElementHolder |
+		anElementHolder flags addDataSourcePositionUnknown ]

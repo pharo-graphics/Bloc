@@ -4,4 +4,4 @@ and: aFlagsOrNumber
 	with provided flags or a number"
 	<return: #BlInfiniteFlags>
 
-	^ self class fromValue: (self value & aFlagsOrNumber value)
+	^ self class fromValue: (self value & (aFlagsOrNumber value))

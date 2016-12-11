@@ -7,7 +7,7 @@ buildDataSourceChangeFlagsForAnimations: anElementHolder
 		ifTrue: [ ^ BlInfiniteItemAnimatorFlags new addInvalidated ].
 	
 	theFlags := (BlInfiniteItemAnimatorFlags fromFlags: anElementHolder flags)
-		and: [ BlInfiniteItemAnimatorFlags new addInvalidated; addRemoved; addChanged; yourself ].
+		and: [ BlInfiniteItemAnimatorFlags new addInvalidated; addRemoved; addChanged; value ].
 		
 	theFlags hasInvalidated
 		ifFalse: [ 

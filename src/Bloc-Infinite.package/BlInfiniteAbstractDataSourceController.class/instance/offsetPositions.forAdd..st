@@ -1,8 +1,8 @@
 manager -> element
-offsetPositions: startPosition forAdd: itemCount
+offsetPositions: aStartPosition forAdd: anItemCount
 	"Ask infinite element to update item positions from startPosition
-	in order to add itemCount amount of new items.
-	startPosition must not be nil
-	itemCount must not be nil"
+	in order to add anItemCount amount of new items.
+	aStartPosition must not be nil
+	anItemCount must not be nil"
 	
 	^ self subclassResponsibility

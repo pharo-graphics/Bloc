@@ -20,6 +20,7 @@ dispatchLayoutSecondStep
 	self state structureChanged: false.
 	
 	"layoutChildren may have caused user code to disable item animations; re-check"
+	self state runSimpleAnimations: (self state willRunSimpleAnimations and: [ itemAnimator supportsAnimations ]).
 	self state beStepAnimations.
 	self onExitLayoutOrScroll.
 	self resumeRequestLayout: false

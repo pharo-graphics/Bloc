@@ -9,7 +9,7 @@ applyLayoutIn: aBounds
 	self assert: aBounds isNotNil.
 	"Fast exit if I or any of my children did not request layout update
 	and if my current bounds are the same as aBounds"
-	(self requestingLayout not and: [ aBounds = self boundsInParent ])
+	(self isLayoutRequested not and: [ aBounds = self boundsInParent ])
 		ifTrue: [ ^ self ].
 	oldExtent := self extent.
 	"! actually change my position and extent !"
@@ -17,6 +17,6 @@ applyLayoutIn: aBounds
 	self resize: aBounds extent.
 	"if my extent did not change and I and any of my children
 	did not request layout update there no need to layout them"
-	((oldExtent = self extent) not or: [ self requestingLayout ])
+	((oldExtent = self extent) not or: [ self isLayoutRequested ])
 		ifTrue: [ self onLayout: aBounds ].
-	self requestingLayout: false.
+	self layout requestingLayout: false.

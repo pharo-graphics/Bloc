@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Tasks",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 12/11/2016 16:02",
+	"instvars" : [
+		"infiniteElement" ],
+	"name" : "BlInfiniteChildrenUpdateRunnable",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteRunnable",
+	"type" : "normal" }

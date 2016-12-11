@@ -7,7 +7,7 @@ remove: index
 			next remove: index - array size ]
 		ifFalse: [ 
 			| value |
-			value := array byteAt: index.
+			value := (array byteAt: index) = true asBit.
 			array replaceFrom: index to: array size - 1 with: array startingAt: index + 1.
 			array byteAt: array size put: (next
 				ifNil: [ false asBit ]

@@ -1,7 +1,7 @@
 recycling
 recycleElementHolder: anElementHolder
-	| transientStatePreventsRecycling forceRecycle cached recycled |
-	
+	| cached recycled |
+
 	(anElementHolder isScrap or: [ anElementHolder itemElement hasParent ])
 		ifTrue: [ self error: 'Scrapped or attached elements can not be recycled' ].
 
@@ -11,8 +11,6 @@ recycleElementHolder: anElementHolder
 	anElementHolder shouldIgnore
 		ifTrue: [ self error: 'Can not recycle an ignored element holder' ].
 
-	transientStatePreventsRecycling := false.
-	forceRecycle := false.
 	cached := false.
 	recycled := false.
 

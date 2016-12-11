@@ -1,4 +1,5 @@
 running
 run
-	itemAnimator runPendingAnimations.
+	itemAnimator supportsAnimations
+		ifTrue: [ itemAnimator runPendingAnimations ].
 	isPosted := false

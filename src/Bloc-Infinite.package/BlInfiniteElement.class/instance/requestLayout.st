@@ -1,6 +1,6 @@
 layout
 requestLayout
-	
+
 	(eatRequestLayoutCounter isZero and: [ layoutFrozen not ])
 		ifTrue: [ super requestLayout ]
-		ifFalse: [ layoutRequestEaten := true ]
+		ifFalse: [ self markLayoutRequestEaten ]

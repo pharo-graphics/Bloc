@@ -7,5 +7,4 @@ markKnownElementsInvalid
 				anElementHolder flags addUpdate; addInvalid.
 				anElementHolder addEmptyPayload ] ]
 		"we cannot re-use cached elements in this case. Recycle them all"
-		ifFalse: [ 
-			self recycleAndRemoveCachedElements ]
+		ifFalse: [ self recycleAndRemoveCachedElements ]

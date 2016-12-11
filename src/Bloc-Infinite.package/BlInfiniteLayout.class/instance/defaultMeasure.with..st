@@ -1,7 +1,7 @@
 measurement
 defaultMeasure: anElement with: anExtentSpec
 	| aWidth aHeight |
-	
+
 	aWidth := self
 		calculateSize: anExtentSpec widthSpec
 		desired: self paddingLeft + self paddingRight

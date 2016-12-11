@@ -1,4 +1,5 @@
 private - testing
 predictiveItemAnimationsEnabled
 	<return: #Boolean>
-	^ layout supportsPredictiveItemAnimations
+	^ itemAnimator supportsAnimations
+		and: [ layout supportsPredictiveItemAnimations ]

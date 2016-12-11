@@ -1,0 +1,3 @@
+dispatch
+offsetPositions: aCommand on: aDataSourceController
+	self subclassResponsibility

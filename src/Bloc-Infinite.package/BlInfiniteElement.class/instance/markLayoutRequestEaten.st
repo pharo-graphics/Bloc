@@ -1,0 +1,3 @@
+layout
+markLayoutRequestEaten
+	layoutRequestEaten := true

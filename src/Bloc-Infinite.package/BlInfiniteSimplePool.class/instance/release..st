@@ -7,7 +7,7 @@ release: anObject
 	self assert: anObject isNotNil.
 
 	(self isInPool: anObject)
-		ifTrue: [ Error signal: anObject asString, ' is already in the pool!' ].
+		ifTrue: [ self error: anObject asString, ' is already in the pool!' ].
 
 	^ (poolSize < pool size)
 		ifTrue: [ 

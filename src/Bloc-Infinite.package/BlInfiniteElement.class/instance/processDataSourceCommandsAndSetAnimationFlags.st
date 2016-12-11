@@ -18,8 +18,9 @@ processDataSourceCommandsAndSetAnimationFlags
 
 	animationTypeSupported := itemsAddedOrRemoved or: [ itemsChanged ].
 	self state runSimpleAnimations: (firstLayoutComplete and: [
-		(dataSourceChangedAfterLayout or: [ animationTypeSupported or: [ layout requestedSimpleAnimations ] ])
-			and: [ dataSourceChangedAfterLayout not or: [ dataSource hasStableIds ] ] ]).
+		itemAnimator supportsAnimations and: [ 
+			(dataSourceChangedAfterLayout or: [ animationTypeSupported or: [ layout requestedSimpleAnimations ] ])
+				and: [ dataSourceChangedAfterLayout not or: [ dataSource hasStableIds ] ] ] ]).
 	
 	self state runPredictiveAnimations: (self state willRunSimpleAnimations and: [
 		animationTypeSupported and: [ dataSourceChangedAfterLayout not and: [ self predictiveItemAnimationsEnabled ] ] ])

@@ -1,0 +1,3 @@
+layout
+markDataSourceChangeDuringMeasure
+	dataSourceChangeDuringMeasure := true

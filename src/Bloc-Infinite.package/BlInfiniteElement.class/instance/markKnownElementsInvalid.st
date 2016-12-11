@@ -6,7 +6,7 @@ markKnownElementsInvalid
 		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder shouldIgnore ifFalse: [ 
 			anElementHolder flags addUpdate.
-			anElementHolder flag addInvalid ] ].
+			anElementHolder flags addInvalid ] ].
 	
 	self markItemDecorInsetsDirty.
 	recycler markKnownElementsInvalid

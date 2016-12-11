@@ -1,4 +1,4 @@
-notifying
+event firing
 notifyItemMoved: aFromPosition to: aToPosition
 	"Notify any registered event handlers that the item reflected at aFromPosition
 	has been moved to aToPosition.

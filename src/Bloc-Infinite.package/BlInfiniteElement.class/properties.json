@@ -29,8 +29,10 @@
 		"preserveFocusAfterLayout",
 		"layoutPositionsRange",
 		"infoStoreProcessor",
-		"dataSourceChangedDuringMeasure",
-		"eatRequestLayoutCounter" ],
+		"eatRequestLayoutCounter",
+		"childrenUpdateRunnable",
+		"dataSourceChangeDuringMeasure",
+		"dataSourceObserver" ],
 	"name" : "BlInfiniteElement",
 	"pools" : [
 		 ],
