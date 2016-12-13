@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testCombinationSequence2
 	| kb kbr evt1 evt2 flag |
 	flag := false.
@@ -9,11 +9,13 @@ testCombinationSequence2
 	evt2 := BlKeyboardEvent new
 		charCode: $d asInteger.
 		
-	kb := ($c alt control , $d) asBlKeyCombination.
-		
-	kb action:[flag := true].
+	kb := BlShortcut new
+		combination:(BlCombinationSequence new 
+				add: (BlKeyCodeCombination new alt;ctrl;char:$c);
+				add: (BlKeyCodeCombination new char:$d) );
+		action:[flag := true].
 	
-	kbr := BlKeyCombinationRegistry new.
+	kbr := BlShortcutRegistry new.
 	kbr add: kb.
 	
 	kbr processEvent: evt1.

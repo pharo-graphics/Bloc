@@ -1,2 +1,2 @@
-*Bloc
+*Bloc-KeyBinding
 asBlKeyCombination

@@ -1,3 +1,0 @@
-accessing
-keyCombinations
-	^ keyCombinations

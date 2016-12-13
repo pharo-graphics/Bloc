@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"shortcut",
+		"terminated" ],
+	"name" : "BlPendingShortcut",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

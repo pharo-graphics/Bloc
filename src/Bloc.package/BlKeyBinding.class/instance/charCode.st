@@ -1,3 +1,0 @@
-accessing
-charCode
-	^ charCode

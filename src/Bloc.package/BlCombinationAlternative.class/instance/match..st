@@ -1,3 +1,3 @@
-as yet unclassified
-match: aKeyEvent
-	^ alternative anySatisfy: [ :each | each match: aKeyEvent ]
+accessing
+match: anEventBuffer
+	^ alternative anySatisfy: [ :each | each match: anEventBuffer ]

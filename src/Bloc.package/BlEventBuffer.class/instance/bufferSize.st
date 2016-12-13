@@ -1,0 +1,3 @@
+accessing
+bufferSize
+	^ events size
