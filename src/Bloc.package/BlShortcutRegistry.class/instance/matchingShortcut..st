@@ -1,7 +1,7 @@
 events-processing
 matchingShortcut: anEventBuffer
 	
-	"pending shortcuts have prioirty"
+	"pending shortcuts have priority"
 	self pendingShortcuts do: [ :each | 
 			(each match: eventBuffer) ifTrue: [ ^ each shortcut ] ].
 	"remove pending shortcuts which have failed"

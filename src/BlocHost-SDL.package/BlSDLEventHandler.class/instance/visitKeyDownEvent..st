@@ -1,7 +1,6 @@
 event handling
 visitKeyDownEvent: event
 	| keyEvent keysym |
-	event logCr.
 	keysym := event keysym.
 	keyEvent := BlKeyDownEvent new
 		modifiers: (self convertKeyModifiersFromModState: keysym mod);

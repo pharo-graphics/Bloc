@@ -1,3 +1,3 @@
-as yet unclassified
+adding
 addEvent: anEvent
 	events add: anEvent
