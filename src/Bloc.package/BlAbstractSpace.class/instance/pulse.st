@@ -1,6 +1,7 @@
 pulse
 pulse
 	self checkSession.
+	self doUpdateFocus.
 	self dispatchTimeEvent: BlSpaceEventProcessEndEvent during: [ self processEvents ].
 	self dispatchTimeEvent: BlSpaceLayoutEndEvent during: [ 
 		self pulseRequested ifFalse:[^ self].

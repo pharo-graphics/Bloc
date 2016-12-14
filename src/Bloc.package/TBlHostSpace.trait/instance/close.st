@@ -1,3 +1,3 @@
 displaying
 close
-	self subclassResponsibility 
+	self shouldBeImplemented 

@@ -1,3 +1,3 @@
 events
 enqueueEvent: anEvent
-	self subclassResponsibility
+	self shouldBeImplemented

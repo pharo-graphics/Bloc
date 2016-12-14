@@ -1,3 +1,3 @@
 accessing
 extent
-	self subclassResponsibility
+	self shouldBeImplemented

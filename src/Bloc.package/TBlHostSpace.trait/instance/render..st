@@ -1,3 +1,3 @@
 drawing
 render: aNode
-	^ self subclassResponsibility
+	^ self shouldBeImplemented

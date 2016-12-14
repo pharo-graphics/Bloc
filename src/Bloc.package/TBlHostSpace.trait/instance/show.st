@@ -1,3 +1,3 @@
 displaying
 show
-	self subclassResponsibility 
+	self shouldBeImplemented 
