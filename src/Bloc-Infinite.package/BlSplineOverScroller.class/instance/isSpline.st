@@ -1,0 +1,3 @@
+testing
+isSpline
+	^ state = Spline

@@ -1,4 +1,4 @@
-accessing
+manager -> element
 attachChild: anElement at: anIndex
 	| anElementHolder |
 

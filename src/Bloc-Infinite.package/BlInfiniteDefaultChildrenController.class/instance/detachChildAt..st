@@ -1,4 +1,4 @@
-accessing
+manager -> element
 detachChildAt: anIndex
 	| anElement anElementHolder |
 	anElement := infiniteElement children 

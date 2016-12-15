@@ -1,0 +1,3 @@
+initialization
+defaultSplineScroller
+	^ BlSplineOverScroller new

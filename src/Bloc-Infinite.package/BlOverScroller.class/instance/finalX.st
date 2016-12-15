@@ -1,0 +1,3 @@
+accessing
+finalX
+	^ scrollerX finalPosition

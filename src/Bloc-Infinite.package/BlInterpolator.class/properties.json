@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlInterpolator",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,4 +1,4 @@
-removing
+manager -> element
 removeAllChildren
 	
 	1 to: self childrenCount do: [ :anIndex |

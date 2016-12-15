@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Tasks",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"infiniteElement" ],
+	"name" : "BlInfiniteScrollerRunnable",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteRunnable",
+	"type" : "normal" }

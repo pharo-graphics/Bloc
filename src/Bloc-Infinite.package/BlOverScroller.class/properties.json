@@ -1,0 +1,19 @@
+{
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Fling",
+		"Scroll" ],
+	"commentStamp" : "",
+	"instvars" : [
+		"interpolator",
+		"scrollerX",
+		"scrollerY",
+		"mode",
+		"isFlywheel" ],
+	"name" : "BlOverScroller",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

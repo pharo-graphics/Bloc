@@ -1,4 +1,4 @@
-removing
+manager -> element
 removeChildAt: anIndex
 	| anElement |
 	anElement := infiniteElement children 

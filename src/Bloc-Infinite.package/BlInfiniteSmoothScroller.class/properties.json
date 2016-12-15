@@ -1,0 +1,19 @@
+{
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"infiniteElement",
+		"infiniteLayout",
+		"targetPosition",
+		"isRunning",
+		"pendingInitialRun",
+		"targetElement" ],
+	"name" : "BlInfiniteSmoothScroller",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

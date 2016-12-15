@@ -16,7 +16,7 @@ attachedScrapForId: anItemId type: anItemType dryRun: dryRun controller: aRecycl
 					 dryRun ifFalse: [
 						aRecyclerController attachedScrap removeAt: index.
 						aRecyclerController childRemoved: holder itemElement.
-						holder itemElement notifyRemovedFromParent.
+						holder itemElement dispatchRemovedFromParent.
 						aRecyclerController quickRecycleScrap: holder itemElement ] ] ] ].
 		
 	^ nil

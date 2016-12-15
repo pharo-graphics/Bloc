@@ -1,0 +1,3 @@
+accessing
+startX
+	^ scrollerX startPosition

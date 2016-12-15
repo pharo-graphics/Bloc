@@ -1,0 +1,3 @@
+initialization
+defaultInterpolator
+	^ BlViscousFluidInterpolator

@@ -1,0 +1,3 @@
+initialization
+defaultDuration
+	^ 200
