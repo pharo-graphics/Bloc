@@ -1,8 +1,9 @@
 children add/remove
 addChild: anElement at: anIndex
 	"Add anElement at an index moving other children to the right.
-	anElement must not be a direct child of any other elements!
-	anElement must not be nil."
+	anElement must not be a direct child of any other element!
+	anElement must not be nil
+	anIndex must be greater or equal to 1 and less or equal than amount of existing children + 1"
 	self
 		assert: [ anElement isNotNil ]
 		description: [ 'Can not add nil element' ].
@@ -17,7 +18,7 @@ addChild: anElement at: anIndex
 	anElement parent: self.
 	"actually add child"
 	self children add: anElement at: anIndex.
-	"send hook after element has been added"
-	anElement notifyAddedInParent.
+	"dispatch events/hooks after element has been added"
+	self dispatchChildAdded: anElement.
 	"finally requesting children changed"
 	self managedChildrenChanged.

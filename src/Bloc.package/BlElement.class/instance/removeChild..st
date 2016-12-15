@@ -9,5 +9,5 @@ removeChild: anElement
 
 	anElement parent: nil.
 	self children remove: anElement.
-	anElement notifyRemovedFromParent.
+	self dispatchChildRemoved: anElement.
 	self managedChildrenChanged.

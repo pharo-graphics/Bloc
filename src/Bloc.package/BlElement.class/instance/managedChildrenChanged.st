@@ -1,4 +1,4 @@
-change reporting
+children dispatching
 managedChildrenChanged
 	self children managedArrayChanged.
 	self requestLayout.

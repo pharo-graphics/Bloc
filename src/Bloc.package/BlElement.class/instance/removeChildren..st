@@ -6,8 +6,11 @@ removeChildren: aListOfElements
 	@see BlElement>>#removeChild: for more info
 	aListOfElements must not be nil."
 	self assert: aListOfElements isNotNil.
+	self
+		assert: [ aListOfElements allSatisfy: [ :anElement | anElement parent == self ] ]
+		description: [ 'I can only remove my direct children!' ].
 	
 	aListOfElements do: [ :aNode | aNode parent: nil ].
 	self children removeAll: aListOfElements.
-	aListOfElements do: #notifyRemovedFromParent.
+	aListOfElements do: [ :anElement | self dispatchChildRemoved: anElement ].
 	self managedChildrenChanged

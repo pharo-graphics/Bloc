@@ -5,17 +5,21 @@ addChildren: aListOfElements
 	aListOfElements must not be nil.
 	all elements from aListOfElements must not be added to any other element
 	@see BlElement>>#addChild: for more documentation"
-	self assert: aListOfElements isNotNil.
-	
+	self
+		assert: [ aListOfElements isNotNil ]
+		description: [ 'List of elements to add must not be nil' ].
+	self
+		assert: [ aListOfElements allSatisfy: [ :anElement | anElement parent isNil ] ]
+		description: [ 'All elements must not have parent' ].
+
 	"fast exit if there are no elements to add"
-	aListOfElements ifEmpty: [ ^ self ].
+	aListOfElements
+		ifEmpty: [ ^ self ].
 	"update parents"
-	aListOfElements do: [ :anElement | 
-			anElement parent ifNotNil: [ :p | p removeChild: anElement ].
-			anElement parent: self ].
+	aListOfElements do: [ :anElement | anElement parent: self ].
 	"actually add children"	
 	self children addAll: aListOfElements.
 	"send hook after elements have been added"
-	aListOfElements do: #notifyAddedInParent.
+	aListOfElements do: [ :anElement | self dispatchChildAdded: anElement ].
 	"finally requesting children changed"
 	self managedChildrenChanged
