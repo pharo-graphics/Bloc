@@ -26,7 +26,8 @@
 		"dragboard",
 		"nextPulseRequested",
 		"currentCursor",
-		"session" ],
+		"session",
+		"focused" ],
 	"name" : "BlAbstractSpace",
 	"pools" : [
 		 ],

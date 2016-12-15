@@ -1,0 +1,3 @@
+*Bloc-KeyBinding
+modifiers 
+	^ { self }

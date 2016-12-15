@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Tests-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlExampleWithKeyCombination",
+	"pools" : [
+		 ],
+	"super" : "BlElement",
+	"type" : "normal" }

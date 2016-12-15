@@ -1,0 +1,3 @@
+displaying
+toFront
+	sdlWindow raiseWindow

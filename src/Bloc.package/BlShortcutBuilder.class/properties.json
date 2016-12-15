@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"target" ],
+	"name" : "BlShortcutBuilder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,3 @@
+accessing
+match: anEventBuffer
+	self subclassResponsibility

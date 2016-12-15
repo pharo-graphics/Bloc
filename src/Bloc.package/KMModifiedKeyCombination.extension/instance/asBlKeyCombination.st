@@ -1,4 +1,4 @@
-*Bloc
+*Bloc-KeyBinding
 asBlKeyCombination
 	| blkc mods |
 	mods := self modifier modifiers.

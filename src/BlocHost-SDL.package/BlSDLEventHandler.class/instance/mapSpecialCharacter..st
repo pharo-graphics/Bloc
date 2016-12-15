@@ -1,3 +1,3 @@
-as yet unclassified
+event handling
 mapSpecialCharacter: symbol
-	^ SDL2SpecialCharacterMapping mapKeySymbol: symbol ifAbsent: [ ^ nil ]
+	^ SDL2SpecialCharacterMapping mapKeySymbol: symbol ifAbsent: [ ^ symbol ]

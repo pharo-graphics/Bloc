@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testCombinationAlternative
 	| kb kbr evt1 evt2 evt3 flag |
 	flag := false.
@@ -13,11 +13,15 @@ testCombinationAlternative
 		charCode: $e asInteger;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
 		
-	kb := 	(($c alt control),($d alt ctrl)| ($e alt control)) asBlKeyCombination.
-		
-	kb action:[flag := true].
+	kb := BlShortcut new
+		combination:( BlCombinationAlternative new
+			add: (BlCombinationSequence new 
+				add: (BlKeyCodeCombination new alt;ctrl;char:$c);
+				add: (BlKeyCodeCombination new alt;ctrl;char:$d) );
+			add:(BlKeyCodeCombination new alt;ctrl;char:$e ));
+	   action:[flag := true].
 	
-	kbr := BlKeyCombinationRegistry new.
+	kbr := BlShortcutRegistry new.
 	kbr add: kb.
 	
 	kbr processEvent: evt1.

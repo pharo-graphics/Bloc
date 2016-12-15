@@ -1,3 +1,3 @@
 displaying
 open
-	self subclassResponsibility 
+	self shouldBeImplemented

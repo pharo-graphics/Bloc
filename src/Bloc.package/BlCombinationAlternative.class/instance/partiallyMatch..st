@@ -1,3 +1,3 @@
-as yet unclassified
-partiallyMatch: aKeyEvent
-	^ alternative anySatisfy: [ :each | each partiallyMatch: aKeyEvent ]
+testing
+partiallyMatch: anEventBuffer
+	^ alternative anySatisfy: [ :each | each partiallyMatch: anEventBuffer ]

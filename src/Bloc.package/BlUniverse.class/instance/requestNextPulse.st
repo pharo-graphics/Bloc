@@ -1,5 +1,5 @@
 pulse managing
 requestNextPulse
 	self flag: #'warningMayNeedsToBeThreadSafe'.
-	self start.
+	self pulseLoop isRunning not ifTrue: [ self pulseLoop start ].
 	nextPulseRequested := true

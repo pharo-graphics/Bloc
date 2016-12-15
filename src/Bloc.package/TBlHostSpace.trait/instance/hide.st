@@ -1,3 +1,3 @@
 displaying
 hide
-	self subclassResponsibility 
+	self shouldBeImplemented 
