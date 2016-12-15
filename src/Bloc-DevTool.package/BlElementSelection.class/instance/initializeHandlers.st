@@ -7,6 +7,8 @@ self
 			addEventHandler: (BlEventHandler on: BlDragStartEvent do: [ :evt | 
 					
 					evt consumed: true.
+					(self space root childIndexOf: self client) isZero
+						ifFalse: [ self space root removeChild: self client ].
 					self space root addChild: self client.
 					self dragOffset: (evt position -  self client globalPosition).
 					self clientUpdated.
