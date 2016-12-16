@@ -1,3 +1,5 @@
 api
 stop
-	SDL2 quit
+	EventLoopProcess ifNotNil:[EventLoopProcess terminate].
+	SDL2 quit.
+	super stop

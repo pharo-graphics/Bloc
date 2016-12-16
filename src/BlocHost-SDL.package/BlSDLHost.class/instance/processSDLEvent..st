@@ -1,8 +1,6 @@
-api
-pollEvents
-	| sdlEvent mappedEvent blocEvent hostSpace|
-	sdlEvent := SDL_Event new.
-	[ (SDL2 pollEvent: sdlEvent) > 0 ] whileTrue: [ 
+private
+processSDLEvent: sdlEvent
+	| mappedEvent blocEvent hostSpace|
 	
 	mappedEvent := sdlEvent mapped ifNil: [ ^ self ].
 	mappedEvent windowID ifNil: [ ^ self  ].
@@ -12,4 +10,4 @@ pollEvents
 	blocEvent := self convertSDLEvent: mappedEvent hostSpace: hostSpace.
 	hostSpace ifNotNil:[:hs| hs enqueueEvent: blocEvent].
 	BlUniverse default requestNextPulse
-	 ]
+	

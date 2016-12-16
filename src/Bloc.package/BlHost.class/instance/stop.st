@@ -1,2 +1,3 @@
 api
 stop
+	Current := nil
