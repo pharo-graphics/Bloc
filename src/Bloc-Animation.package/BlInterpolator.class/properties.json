@@ -4,11 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 12/16/2016 15:33",
 	"instvars" : [
 		 ],
-	"name" : "BlEasing",
+	"name" : "BlInterpolator",
 	"pools" : [
 		 ],
-	"super" : "BlInterpolator",
+	"super" : "Object",
 	"type" : "normal" }

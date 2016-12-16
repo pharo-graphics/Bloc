@@ -1,13 +1,16 @@
 {
 	"category" : "Bloc-Animation-Easing",
 	"classinstvars" : [
-		 ],
+		"FluidScale",
+		"FluidNormalize",
+		"FluidOffset",
+		"InvertedExponent" ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
 		 ],
-	"name" : "BlEasing",
+	"name" : "BlViscousFluidInterpolator",
 	"pools" : [
 		 ],
 	"super" : "BlInterpolator",

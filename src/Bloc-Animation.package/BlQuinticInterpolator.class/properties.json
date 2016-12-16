@@ -4,10 +4,10 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 12/16/2016 14:57",
 	"instvars" : [
 		 ],
-	"name" : "BlEasing",
+	"name" : "BlQuinticInterpolator",
 	"pools" : [
 		 ],
 	"super" : "BlInterpolator",
