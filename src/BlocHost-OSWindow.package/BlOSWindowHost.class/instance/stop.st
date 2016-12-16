@@ -1,3 +1,4 @@
 api
 stop
-	OSWindowDriver current reset
+	OSWindowDriver current reset.
+	super stop
