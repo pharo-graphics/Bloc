@@ -7,8 +7,8 @@ initializeActions
 	brBtn := BlElementSelectionButton icon: BlIcons arrowExpandAllSvg extent: 15@15.
 	
 	tlBtn addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt |
-		 self client delete.
-		self delete]).
+		self client removeFromParent.
+		self removeFromParent]).
 	
 	brBtn addEventHandler: (BlEventHandler on: BlDragStartEvent do: [ :evt | evt consumed: true.]).
 	brBtn addEventHandler: (BlEventHandler on: BlDragEndEvent do: [ :evt |  evt consumed: true.]).
