@@ -7,8 +7,8 @@ apply: aCommand onPosition: aPosition
 		ifTrue: [
 			| end |
 			end := aCommand positionStart + aCommand itemCount.
-			end > aPosition ifTrue: [
-				^ BlInfiniteElement noPosition ].	
+			end > aPosition
+				ifTrue: [ ^ NoPosition ].	
 			newPosition := aPosition - aCommand itemCount ].
 		
 	^ newPosition

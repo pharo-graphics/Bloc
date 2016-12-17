@@ -1,0 +1,20 @@
+{
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"infiniteElement",
+		"reSchedulePostAnimationCallback",
+		"eatRunOnAnimationRequest",
+		"lastFlingX",
+		"lastFlingY",
+		"scroller",
+		"interpolator" ],
+	"name" : "BlInfiniteScrollFlinger",
+	"pools" : [
+		"BlInfiniteConstants" ],
+	"super" : "BlInfiniteRunnable",
+	"type" : "normal" }

@@ -1,6 +1,5 @@
 running
 run
-	self halt.
 	(infiniteElement isFirstLayoutComplete not or: [
 		infiniteElement isLayoutRequested ])
 			"a layout request will happen, we should not do layout here."

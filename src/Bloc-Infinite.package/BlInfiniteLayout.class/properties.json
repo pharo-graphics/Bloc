@@ -19,6 +19,6 @@
 		"smoothScroller" ],
 	"name" : "BlInfiniteLayout",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "BlLayout",
 	"type" : "normal" }

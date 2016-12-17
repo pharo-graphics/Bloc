@@ -2,4 +2,4 @@ testing
 hasPendingScrollPosition
 	<return: #Boolean>
 	
-	^ pendingScrollPosition ~= BlInfiniteElement noPosition
+	^ pendingScrollPosition ~= NoPosition

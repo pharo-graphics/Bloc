@@ -14,6 +14,6 @@
 		"targetElement" ],
 	"name" : "BlInfiniteSmoothScroller",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "Object",
 	"type" : "normal" }

@@ -21,10 +21,10 @@ scrollBy: aNumber
 	aConsumedSpace < 0
 		"Don't have any more elements to scroll"
 		ifTrue: [ ^ 0 ].
-	
+
 	aScrolledDistance := anAbsoluteDelta > aConsumedSpace
 		ifTrue: [ aLayoutDirection multiplier * aConsumedSpace ]
-		ifFalse: [ anAbsoluteDelta ].
+		ifFalse: [ aNumber ].
 		
 	self orientation moveChildrenBy: aScrolledDistance negated.
 	layoutState lastScrolledDelta: aScrolledDistance.

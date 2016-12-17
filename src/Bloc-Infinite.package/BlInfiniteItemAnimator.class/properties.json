@@ -14,7 +14,7 @@
 		"changeDuration" ],
 	"name" : "BlInfiniteItemAnimator",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal" }

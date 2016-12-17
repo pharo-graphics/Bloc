@@ -1,4 +1,5 @@
 children - geometry
 offsetChildrenVerticallyBy: aNumber
-	self childrenDo: [ :anElement |
+	
+	childrenManager childrenDo: [ :anElement |
 		anElement position: anElement position x @ (anElement position y + aNumber) ]

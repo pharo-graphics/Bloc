@@ -1,0 +1,2 @@
+private - scrolling
+absorbGlows: aVelocityPoint

@@ -11,7 +11,7 @@
 		"hasStableIds" ],
 	"name" : "BlInfiniteDataSource",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal" }

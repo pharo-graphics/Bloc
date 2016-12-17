@@ -4,5 +4,5 @@ assignPositionFromScrapList: anIgnoredElement
 	
 	aClosestElement := self nextElementInLimitedList: anIgnoredElement.
 	currentPosition := aClosestElement
-		ifNil: [ BlInfiniteElement noPosition ]
+		ifNil: [ NoPosition ]
 		ifNotNil: [ :anElement | anElement constraints infinite elementLayoutPosition ]

@@ -6,6 +6,6 @@ dataSourcePositionOf: anElementHolder
 		anElementHolder flags hasRemoved or: [ 
 			anElementHolder flags hasDataSourcePositionUnknown or: [
 				anElementHolder isBound not ] ] ])
-		ifTrue: [ ^ self class noPosition ].
+		ifTrue: [ ^ NoPosition ].
 		
 	^ self dataSourceManager applyPendingCommandsOnPosition: anElementHolder position

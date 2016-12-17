@@ -19,8 +19,8 @@ saveFocusInfo
 		ifNotNil: [ 
 			self state focusedItemId: (dataSource hasStableIds
 				ifTrue: [ aFocusedElementHolder itemId ]
-				ifFalse: [ BlInfiniteElement noId ]).
+				ifFalse: [ NoId ]).
 			self state focusedItemPosition: (dataSourceChangedAfterLayout
-				ifTrue: [ BlInfiniteElement noPosition ]
+				ifTrue: [ NoPosition ]
 				ifFalse: [ aFocusedElementHolder dataSourcePosition ]).
 			self state focusedSubChild: (self deepestFocusedChildIn: aFocusedElementHolder itemElement) ]

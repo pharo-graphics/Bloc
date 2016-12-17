@@ -1,0 +1,2 @@
+private - scrolling
+considerReleasingGlowsOnScroll: aDeltaPoint

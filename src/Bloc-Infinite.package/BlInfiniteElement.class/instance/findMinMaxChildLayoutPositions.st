@@ -5,7 +5,7 @@ findMinMaxChildLayoutPositions
 	| minPositionPreLayout maxPositionPreLayout |
 	
 	childrenManager hasChildren
-		ifFalse: [ ^ self class noPosition to: self class noPosition ].
+		ifFalse: [ ^ NoPosition to: NoPosition ].
 
 	minPositionPreLayout := Float infinity.
 	maxPositionPreLayout := Float negativeInfinity.

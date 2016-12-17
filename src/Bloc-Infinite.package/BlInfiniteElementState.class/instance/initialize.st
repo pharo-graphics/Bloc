@@ -2,7 +2,7 @@ initialization
 initialize
 	super initialize.
 	
-	targetPosition := BlInfiniteElement noPosition.
+	targetPosition := NoPosition.
 
 	layoutStep := self defaultLayoutStep.
 
@@ -19,6 +19,6 @@ initialize
 	trackOldChangeHolders := false.
 	isMeasuring := false.
 	
-	focusedItemPosition := BlInfiniteElement noPosition.
-	focusedItemId := BlInfiniteElement noId.
+	focusedItemPosition := NoPosition.
+	focusedItemId := NoId.
 	focusedSubChild := nil

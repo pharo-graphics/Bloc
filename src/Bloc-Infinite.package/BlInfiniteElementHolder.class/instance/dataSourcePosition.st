@@ -4,5 +4,5 @@ dataSourcePosition
 	<return: #Number>
 
 	^ infiniteElement
-		ifNil: [ BlInfiniteElement noPosition ]
+		ifNil: [ NoPosition ]
 		ifNotNil: [ :infEl | infEl dataSourcePositionOf: self ]

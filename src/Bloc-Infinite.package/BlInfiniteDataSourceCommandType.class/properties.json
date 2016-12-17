@@ -9,6 +9,6 @@
 		 ],
 	"name" : "BlInfiniteDataSourceCommandType",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "Object",
 	"type" : "normal" }

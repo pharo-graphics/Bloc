@@ -1,2 +1,9 @@
-scrolling
-dispatchOnScrolled: aDeltaPoint
+dispatching
+dispatchOnScrolled: aPoint
+
+	dispatchScrollCounter := dispatchScrollCounter + 1.
+	
+	self onScrolled: aPoint.
+	self notifyScrolled: aPoint.
+	
+	dispatchScrollCounter := dispatchScrollCounter - 1

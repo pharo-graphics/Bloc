@@ -14,15 +14,20 @@ initialize
 	itemsAddedOrRemoved := false.
 	itemsChanged := false.
 	preserveFocusAfterLayout := true.
-
+	
+	itemDecorations := OrderedCollection new.
 	itemAnimator := self defaultItemAnimator.
 	infoStore := self defaultInfoStore.
 	infoStoreProcessor := self defaultInfoStoreProcessor on: self.
 	state := self defaultState.
 	childrenUpdateRunnable := self defaultChildrenUpdateRunnable on: self.
+	overScrollMode := self defaultOverScrollMode.
+	scrollFlinger := self defaultScrollFlinger on: self.
 	self initializeChildrenManager.
 	self initializeDataSource.
 	self initializeRecycler.
 	
 	"Should be initialized last"
-	layout infiniteElement: self
+	layout infiniteElement: self.
+	
+	self initializeEventHandlers

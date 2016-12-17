@@ -1,0 +1,1 @@
+I store constants used along infinite classes

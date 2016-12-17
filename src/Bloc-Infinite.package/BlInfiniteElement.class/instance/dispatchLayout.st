@@ -1,6 +1,6 @@
 layout
 dispatchLayout
-	
+
 	self state isMeasuring: false.
 	self state isStartStep
 		ifTrue: [

@@ -2,6 +2,6 @@ layout
 layoutCompleted
 	super layoutCompleted.
 
-	pendingScrollPosition := BlInfiniteElement noPosition.
+	pendingScrollPosition := NoPosition.
 	pendingScrollPositionOffset := self class invalidOffset.
 	anchorInfo reset

@@ -1,0 +1,3 @@
+initialization
+defaultOverScrollMode
+	^ BlOverScrollMode never

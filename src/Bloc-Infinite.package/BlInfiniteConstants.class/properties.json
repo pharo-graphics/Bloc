@@ -1,0 +1,18 @@
+{
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"NoId",
+		"NoPosition",
+		"ScrollDragging",
+		"ScrollIdle",
+		"ScrollSettling" ],
+	"commentStamp" : "AliakseiSyrel 12/16/2016 19:16",
+	"instvars" : [
+		 ],
+	"name" : "BlInfiniteConstants",
+	"pools" : [
+		 ],
+	"super" : "SharedPool",
+	"type" : "normal" }

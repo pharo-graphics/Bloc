@@ -1,10 +1,10 @@
 private
 offsetPositionBy: anOffset applyToPreLayout: shouldApplyOnPreLayout
 	
-	previousPosition = BlInfiniteElement noPosition
+	previousPosition = NoPosition
 		ifTrue: [ previousPosition := position ].
 	
-	preLayoutPosition = BlInfiniteElement noPosition
+	preLayoutPosition = NoPosition
 		ifTrue: [ preLayoutPosition := position ].
 	
 	shouldApplyOnPreLayout

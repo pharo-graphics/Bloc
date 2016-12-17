@@ -14,8 +14,8 @@ buildDataSourceChangeFlagsForAnimations: anElementHolder
 			| anOldPosition aNewPosition |
 			anOldPosition := anElementHolder previousPosition.
 			aNewPosition := anElementHolder dataSourcePosition.
-			(anOldPosition ~= BlInfiniteElement noPosition and: [
-				aNewPosition ~= BlInfiniteElement noPosition and: [ 
+			(anOldPosition ~= NoPosition and: [
+				aNewPosition ~= NoPosition and: [ 
 					anOldPosition ~= aNewPosition ] ])
 				ifTrue: [ theFlags addMoved ] ].
 

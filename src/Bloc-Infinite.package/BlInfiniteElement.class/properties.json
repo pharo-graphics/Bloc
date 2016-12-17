@@ -7,10 +7,8 @@
 	"commentStamp" : "AliakseiSyrel 12/10/2016 20:33",
 	"instvars" : [
 		"dataSource",
-		"dataSourceController",
 		"dataSourceManager",
 		"childrenManager",
-		"childrenController",
 		"state",
 		"recycler",
 		"itemAnimator",
@@ -32,9 +30,12 @@
 		"eatRequestLayoutCounter",
 		"childrenUpdateRunnable",
 		"dataSourceChangeDuringMeasure",
-		"dataSourceObserver" ],
+		"dataSourceObserver",
+		"scrollFlinger",
+		"scrollState",
+		"overScrollMode" ],
 	"name" : "BlInfiniteElement",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "BlElement",
 	"type" : "normal" }

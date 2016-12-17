@@ -1,3 +1,0 @@
-constants
-noId
-	^ 0

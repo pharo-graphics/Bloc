@@ -1,6 +1,6 @@
 initialization
 reset
-	position := BlInfiniteElement noPosition.
+	position := NoPosition.
 	coordinate := BlInfiniteLinearLayout invalidOffset.
 	layoutFromEnd := false.
 	valid := false

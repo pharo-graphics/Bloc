@@ -5,9 +5,9 @@ stop
 		ifFalse: [ ^ self ].
 	
 	self onStop.
-	infiniteElement state targetPosition: BlInfiniteElement noPosition.
+	infiniteElement state targetPosition: NoPosition.
 	targetElement := nil.
-	targetPosition :=  BlInfiniteElement noPosition.
+	targetPosition :=  NoPosition.
 	pendingInitialRun := false.
 	isRunning := false.
 	

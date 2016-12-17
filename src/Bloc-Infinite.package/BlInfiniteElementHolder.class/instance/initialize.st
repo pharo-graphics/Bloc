@@ -2,10 +2,10 @@ initialization
 initialize
 	super initialize.
 	
-	position := BlInfiniteElement noPosition.
-	previousPosition := BlInfiniteElement noPosition.
-	preLayoutPosition := BlInfiniteElement noPosition.
-	itemId := BlInfiniteElement noId.
+	position := NoPosition.
+	previousPosition := NoPosition.
+	preLayoutPosition := NoPosition.
+	itemId := NoId.
 	flags := BlInfiniteElementHolderFlags new.
 	itemType := BlInfiniteItemType invalid.
 	isInChangeScrap := false.

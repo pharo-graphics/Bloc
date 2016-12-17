@@ -1,6 +1,6 @@
 invalidate
 reset
-	targetPosition := BlInfiniteElement noPosition.
+	targetPosition := NoPosition.
 	data removeAll.
 	itemCount := 0.
 	structureChanged := false

@@ -20,6 +20,6 @@
 		"offset" ],
 	"name" : "BlInfiniteLinearLayoutState",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "Object",
 	"type" : "normal" }

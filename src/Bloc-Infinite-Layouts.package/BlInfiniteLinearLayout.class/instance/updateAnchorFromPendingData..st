@@ -10,7 +10,7 @@ updateAnchorFromPendingData: anAnchorInfo
 	"validate scroll position"
 	(pendingScrollPosition between: 1 and: self state itemCount)
 		ifFalse: [ 
-			pendingScrollPosition := BlInfiniteElement noPosition.
+			pendingScrollPosition := NoPosition.
 			pendingScrollPositionOffset := self class invalidOffset.
 			^ false ].
 

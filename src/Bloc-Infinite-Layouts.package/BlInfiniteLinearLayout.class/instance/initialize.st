@@ -11,5 +11,5 @@ initialize
 	"Initialize cache inst.vars"
 	lastStackFromEnd := false.
 	shouldReverseLayout := false.
-	pendingScrollPosition := BlInfiniteElement noPosition.
+	pendingScrollPosition := NoPosition.
 	pendingScrollPositionOffset := self class invalidOffset

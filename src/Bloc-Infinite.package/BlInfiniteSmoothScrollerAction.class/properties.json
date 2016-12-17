@@ -6,9 +6,15 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
+		"deltaX",
+		"deltaY",
+		"duration",
+		"jumpPosition",
+		"interpolator",
+		"isChanged",
+		"consecutiveUpdates" ],
 	"name" : "BlInfiniteSmoothScrollerAction",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "Object",
 	"type" : "normal" }

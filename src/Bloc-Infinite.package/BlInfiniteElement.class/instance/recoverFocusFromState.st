@@ -15,11 +15,11 @@ recoverFocusFromState
 	
 	aFocusTarget := nil.
 	
-	(self state focusedItemPosition ~= self class noPosition)
+	(self state focusedItemPosition ~= NoPosition)
 		ifTrue: [ aFocusTarget := self findElementHolderForDataSourcePosition: self state focusedItemPosition ].
 	
 	(aFocusTarget isNil and: [
-		self state focusedItemId ~= self class noId and: [
+		self state focusedItemId ~= NoId and: [
 			dataSource hasStableIds ] ])
 				ifTrue: [ aFocusTarget := self findElementHolderForItemId: self state focusedItemId ].
 				

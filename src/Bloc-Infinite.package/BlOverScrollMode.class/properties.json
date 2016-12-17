@@ -1,0 +1,16 @@
+{
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [
+		"always",
+		"ifContentScrolls",
+		"never" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlOverScrollMode",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

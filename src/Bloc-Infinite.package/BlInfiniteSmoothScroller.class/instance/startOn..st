@@ -13,7 +13,7 @@ startOn: anInfiniteElement
 	infiniteElement := anInfiniteElement.
 	infiniteLayout := anInfiniteElement layout.
 	
-	(targetPosition isNil or: [ targetPosition = BlInfiniteElement noPosition ])
+	(targetPosition isNil or: [ targetPosition = NoPosition ])
 		ifTrue: [ self error: 'Invalid target position: ', targetPosition asString ].
 	
 	infiniteElement state targetScrollPosition: targetPosition.

@@ -1,5 +1,5 @@
 private - position
 saveOldPosition
 
-	previousPosition = BlInfiniteElement noPosition
+	previousPosition = NoPosition
 		ifTrue: [ previousPosition := position ]

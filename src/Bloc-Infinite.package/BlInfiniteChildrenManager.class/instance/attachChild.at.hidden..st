@@ -6,7 +6,7 @@ attachChild: aChildElement at: anIndex hidden: isHidden
 	
 	anIndex <= 0
 		ifTrue: [ offset := controller childrenCount + 1 ]
-		ifFalse: [ offset := self computeOffset: anIndex ].
+		ifFalse: [ offset := (self computeOffset: anIndex) + 1 ].
 	
 	bucket insert: isHidden at: offset.
 

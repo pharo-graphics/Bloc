@@ -1,0 +1,3 @@
+initialization
+defaultMouseScrollEventHandler
+	^ BlInfiniteMouseScrollListener new

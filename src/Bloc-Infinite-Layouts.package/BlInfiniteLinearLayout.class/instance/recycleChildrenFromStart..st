@@ -3,7 +3,10 @@ recycleChildrenFromStart: anOffset
 	"Recycle elements that went out of bounds after scrolling towards the end of the layout.
 	Checks both layout position and visible position to guarantee that the element is not visible"
 	| aLimit aChildCount aStep aStart anEnd |
-
+	
+	anOffset < 0
+		ifTrue: [ ^ self ].
+	
 	self
 		assert: [ anOffset >= 0 ]
 		description: 'anOffset must not be negative'.

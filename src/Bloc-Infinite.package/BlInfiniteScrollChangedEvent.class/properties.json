@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Events",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"scrollState" ],
+	"name" : "BlInfiniteScrollChangedEvent",
+	"pools" : [
+		 ],
+	"super" : "BlEvent",
+	"type" : "normal" }

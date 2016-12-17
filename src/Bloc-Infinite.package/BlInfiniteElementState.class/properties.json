@@ -23,6 +23,6 @@
 		"focusedSubChild" ],
 	"name" : "BlInfiniteElementState",
 	"pools" : [
-		 ],
+		"BlInfiniteConstants" ],
 	"super" : "Object",
 	"type" : "normal" }
