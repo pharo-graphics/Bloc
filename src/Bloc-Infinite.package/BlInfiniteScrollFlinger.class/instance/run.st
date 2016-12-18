@@ -1,6 +1,7 @@
 running
 run
 	| aScroller aSmoothScroller |
+
 	self disableRunOnAnimationRequests.
 	infiniteElement consumePendingDataSourceCommands.
 	
@@ -42,7 +43,6 @@ run
 	aSmoothScroller ifNotNil: [ 
 		aSmoothScroller isPendingInitialRun
 			ifTrue: [ aSmoothScroller onScrollBy: 0@0 ].
-			
 		"stop if it does not trigger any scroll"
 		reSchedulePostAnimationCallback
 			ifFalse: [ aSmoothScroller stop ] ].

@@ -1,0 +1,3 @@
+initialization
+defaultSmoothScroller
+	^ BlInfiniteLinearSmoothScroller new

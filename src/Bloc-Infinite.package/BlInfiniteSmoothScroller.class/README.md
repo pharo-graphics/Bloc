@@ -1,0 +1,1 @@
+I am a base class for smooth scrolling. I handle basic tracking of the target element position and provide methods to trigger a programmatic scroll.

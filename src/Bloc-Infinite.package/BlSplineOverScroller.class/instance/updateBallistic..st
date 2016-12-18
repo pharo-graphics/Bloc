@@ -5,5 +5,5 @@ updateBallistic: aDeltaTime
 	| aTime |
 
 	aTime := aDeltaTime / 1000.0.
-	currentVelocity := startVelocity + (deceleration * aTime).
+	self currentVelocity: startVelocity + (deceleration * aTime).
 	^ (startVelocity * aTime) + (deceleration * aTime * aTime / 2.0)

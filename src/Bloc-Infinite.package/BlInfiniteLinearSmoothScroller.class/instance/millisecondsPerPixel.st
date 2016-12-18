@@ -1,0 +1,3 @@
+accessing
+millisecondsPerPixel
+	^ self calculateSpeedPerPixel

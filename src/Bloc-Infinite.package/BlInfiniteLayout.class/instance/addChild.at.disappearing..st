@@ -33,8 +33,10 @@ addChild: anElement at: anIndex disappearing: isDisappearing
 				ifFalse: [ 
 					childManager addChild: anElement at: anIndex hidden: false.
 					anInfiniteConstraints insetsDirty: true.
-					self flag: 'smooth scroller'
-					"smoothScroller onChildAttached: anElement" ] ].
+					"If smooth scroller is currently running, let it know that a new element was attached"
+					self smoothScroller ifNotNil: [ :aSmoothScroller |
+						aSmoothScroller isRunning ifTrue: [
+							aSmoothScroller onChildAttached: anElement ] ] ] ].
 			
 	anInfiniteConstraints pendingInvalidate ifTrue: [ 
 		anElementHolder itemElement changed.

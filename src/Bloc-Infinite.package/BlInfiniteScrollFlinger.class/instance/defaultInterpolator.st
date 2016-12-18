@@ -1,3 +1,3 @@
 initialization
 defaultInterpolator
-	^ BlQuinticInterpolator
+	^ BlQuinticInterpolator default

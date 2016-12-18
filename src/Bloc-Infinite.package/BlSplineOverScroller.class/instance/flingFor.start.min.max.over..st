@@ -4,7 +4,7 @@ flingFor: aVelocity start: aStart min: aMin max: aMax over: anOvershotDistance
 	
 	overshotDistance := anOvershotDistance.
 	isFinished := false.
-	currentVelocity := aVelocity.
+	self currentVelocity: aVelocity.
 	startVelocity := aVelocity.
 	splineDuration := 0.
 	duration := 0.

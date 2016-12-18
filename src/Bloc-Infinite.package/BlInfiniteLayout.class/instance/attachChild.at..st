@@ -13,4 +13,4 @@ attachChild: anElement at: anIndex
 		ifTrue: [ self addToDisappearedInLayout: anElementHolder ]
 		ifFalse: [ self removeFromDisappearedInLayout: anElementHolder ].
 
-	childManager attachChildToParent: anElement at: anIndex hidden: anElementHolder isRemoved
+	childManager attachChild: anElement at: anIndex hidden: anElementHolder isRemoved

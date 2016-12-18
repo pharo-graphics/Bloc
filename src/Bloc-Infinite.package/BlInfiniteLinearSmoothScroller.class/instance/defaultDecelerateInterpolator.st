@@ -1,0 +1,3 @@
+initialization
+defaultDecelerateInterpolator
+	^ BlDecelerateInterpolator default

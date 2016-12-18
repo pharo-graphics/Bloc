@@ -17,5 +17,5 @@ updateSpline: aDeltaTime
 			aVelocityCoef := (dSup - dInf) / (tSup - tInf).
 			aDistanceCoef := dInf + ((aTime - tInf) * aVelocityCoef) ].
 	
-	currentVelocity := aVelocityCoef * splineDistance / splineDuration * 1000.0.
+	self currentVelocity: aVelocityCoef * splineDistance / splineDuration * 1000.0.
 	^ aDistanceCoef * splineDistance

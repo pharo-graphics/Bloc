@@ -1,0 +1,19 @@
+{
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"SnapToAny",
+		"SnapToEnd",
+		"SnapToStart" ],
+	"commentStamp" : "AliakseiSyrel 12/18/2016 16:42",
+	"instvars" : [
+		"targetVector",
+		"interimTarget",
+		"linearInterpolator",
+		"decelerateInterpolator" ],
+	"name" : "BlInfiniteLinearSmoothScroller",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteSmoothScroller",
+	"type" : "normal" }

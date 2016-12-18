@@ -4,14 +4,15 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 12/18/2016 16:43",
 	"instvars" : [
 		"infiniteElement",
 		"infiniteLayout",
 		"targetPosition",
 		"isRunning",
 		"pendingInitialRun",
-		"targetElement" ],
+		"targetElement",
+		"action" ],
 	"name" : "BlInfiniteSmoothScroller",
 	"pools" : [
 		"BlInfiniteConstants" ],

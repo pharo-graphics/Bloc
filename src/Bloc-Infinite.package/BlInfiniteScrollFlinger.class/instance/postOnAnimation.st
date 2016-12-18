@@ -1,6 +1,6 @@
 scheduling
 postOnAnimation
-	
+
 	eatRunOnAnimationRequest
 		ifTrue: [ reSchedulePostAnimationCallback := true ]
 		ifFalse: [ 

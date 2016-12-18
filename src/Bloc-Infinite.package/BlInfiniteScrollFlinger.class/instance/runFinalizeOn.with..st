@@ -13,8 +13,8 @@ runFinalizeOn: anOverScroller with: aState
 	fullyConsumedAny := aState dX isZero and: [
 		aState dY isZero and: [
 			fullyConsumedHorizontal or: [ fullyConsumedVertical ] ] ].
-		
-	(anOverScroller isFinished or: [ fullyConsumedAny not ])
+	
+	(anOverScroller isFinished or: [ fullyConsumedHorizontal and: [ fullyConsumedVertical ] ])
 		ifTrue: [ 
 			infiniteElement scrollState: ScrollIdle.
 			infiniteElement prefetchingAllowed

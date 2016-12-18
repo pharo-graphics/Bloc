@@ -10,4 +10,6 @@ initialize
 	measurementCacheEnabled := true.
 	
 	"disable until not implemented"
-	itemPrefetchEnabled := false
+	itemPrefetchEnabled := false.
+	
+	smoothScroller := nil "when not running smoothScroller is nil"

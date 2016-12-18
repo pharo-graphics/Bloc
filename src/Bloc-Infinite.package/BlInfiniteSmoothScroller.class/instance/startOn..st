@@ -21,4 +21,4 @@ startOn: anInfiniteElement
 	pendingInitialRun := true.
 	targetElement := self childAtPosition: targetPosition.
 	self onStart.
-	infiniteElement postScroller
+	infiniteElement postSmoothScroller

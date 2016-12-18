@@ -1,0 +1,3 @@
+initialization
+defaultLinearInterpolator
+	^ BlLinearInterpolator default
