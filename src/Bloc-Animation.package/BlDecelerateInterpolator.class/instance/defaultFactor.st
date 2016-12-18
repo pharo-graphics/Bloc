@@ -1,0 +1,3 @@
+initialization
+defaultFactor
+	^ 1

@@ -1,3 +1,3 @@
 factory
 linear
-	^ BlEasingLinear
+	^ BlLinearInterpolator default

@@ -1,3 +1,3 @@
 factory
 bounceInOut
-	^ BlEasingBounceInOut
+	^ BlEasingBounceInOut default

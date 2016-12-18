@@ -3,14 +3,11 @@
 	"classinstvars" : [
 		 ],
 	"classvars" : [
-		"FluidNormalize",
-		"FluidOffset",
-		"FluidScale",
-		"InvertedExponent" ],
-	"commentStamp" : "",
-	"instvars" : [
 		 ],
-	"name" : "BlViscousFluidInterpolator",
+	"commentStamp" : "AliakseiSyrel 12/18/2016 15:09",
+	"instvars" : [
+		"factor" ],
+	"name" : "BlDecelerateInterpolator",
 	"pools" : [
 		 ],
 	"super" : "BlInterpolator",
