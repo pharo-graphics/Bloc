@@ -9,7 +9,6 @@ updateLayoutState: aLayoutDirection requiredSpace: aRequiredSpace canUseExisting
 	aScrollingOffset := (aLayoutDirection isStart
 		ifTrue: [ self updateLayoutStateStart ]
 		ifFalse: [self updateLayoutStateEnd ]).
-		
 	layoutState availableSpace: aRequiredSpace.
 	canUseExistingSpace
 		ifTrue: [ layoutState availableSpace: layoutState availableSpace - aScrollingOffset ].

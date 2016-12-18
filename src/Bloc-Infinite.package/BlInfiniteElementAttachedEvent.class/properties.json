@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Events",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 12/18/2016 14:10",
+	"instvars" : [
+		"element" ],
+	"name" : "BlInfiniteElementAttachedEvent",
+	"pools" : [
+		 ],
+	"super" : "BlEvent",
+	"type" : "normal" }

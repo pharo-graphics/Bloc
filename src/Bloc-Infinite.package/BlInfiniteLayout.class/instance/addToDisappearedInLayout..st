@@ -1,2 +1,3 @@
-private - children
+adding
 addToDisappearedInLayout: anElementHolder
+	infiniteElement infoStore addToDisappearedInLayout: anElementHolder

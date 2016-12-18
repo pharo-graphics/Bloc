@@ -11,7 +11,7 @@ scrollBy: aNumber
 		ifTrue: [ BlInfiniteLinearLayoutDirection end ]
 		ifFalse: [ BlInfiniteLinearLayoutDirection start ].
 	anAbsoluteDelta := aNumber abs.
-	
+
 	self
 		updateLayoutState: aLayoutDirection
 		requiredSpace: anAbsoluteDelta

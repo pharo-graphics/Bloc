@@ -5,7 +5,7 @@ exampleColors
 		extent: 800 @ 650;
 		title: 'Infinite list example'.
 	element := BlInfiniteExampleColorsListElement new
-		extent: 300 @ 150;
+		extent: 300 @ 450;
 		constraintsDo: [ :c | c padding: (BlInsets all: 20) ];
 		background: Color gray;
 		yourself.

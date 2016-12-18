@@ -2,7 +2,11 @@ children accessing
 childAt: anIndex
 	"Returns the child at anIndex"
 	<return: #BlElement>
+	| anOffset |
+	
+	anOffset := self computeOffset: anIndex.
+	self
+		assert: [ anOffset >= 0 ]
+		description: [ 'Index must be positive!' ].
 
-	|offset|
-	offset := self computeOffset: anIndex.
-	^ controller childAt: offset
+	^ controller childAt: anOffset

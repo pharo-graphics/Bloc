@@ -6,11 +6,11 @@ fillLayout: shouldStopOnFocusable
 	aStart := layoutState availableSpace.
 	"We can only recycle if scrolling offset is set"
 	layoutState hasScrollingOffset
-		ifTrue: [ 
+		ifTrue: [
 			layoutState availableSpace < 0
 				ifTrue: [ layoutState scrollingOffset: layoutState scrollingOffset + layoutState availableSpace ]. 
 			self recycleChildren ].
-	
+
 	aRemainingSpace := layoutState availableSpace + layoutState extraSpace.
 	aBreak := false.
 	[ aBreak not and: [

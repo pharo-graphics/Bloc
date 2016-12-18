@@ -4,10 +4,10 @@ addChild: aChildElement at: anIndex hidden: isHidden
 	If an Index is less or equal 0 child will be appended to the end"
 	| anOffset |
 
-	anIndex <= 0
-		ifTrue: [ anOffset := controller childrenCount + 1 ]
-		ifFalse: [  anOffset := (self computeOffset: anIndex) + 1 ].
-
+	anOffset := (anIndex <= 0
+		ifTrue: [ controller childrenCount + 1 ]
+		ifFalse: [  (self computeOffset: anIndex) ]) max: 1.
+	
 	bucket insert: isHidden at: anOffset.
 	
 	isHidden ifTrue: [

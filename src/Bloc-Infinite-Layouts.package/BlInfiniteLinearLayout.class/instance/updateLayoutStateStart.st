@@ -14,5 +14,5 @@ updateLayoutStateStart
 	
 	layoutState currentPosition: (self childPositionOf: anElement) + layoutState itemDirection multiplier.
 	layoutState offset: (self orientation decoratedStart: anElement).
-	
+		
 	^ self orientation startWithPadding - (self orientation decoratedStart: anElement)

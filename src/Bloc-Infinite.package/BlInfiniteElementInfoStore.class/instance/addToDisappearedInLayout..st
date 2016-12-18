@@ -1,5 +1,5 @@
 adding/removing
-addToDisappearedInLayout: anElementHolder itemHolder: anItemHolder
+addToDisappearedInLayout: anElementHolder
 	"An ElementHolder might be added by the InfiniteLayout just to animate its disappearance.
 	This list holds such items so that we can animate / recycle these ElementHolders properly."
 	| aRecord |
