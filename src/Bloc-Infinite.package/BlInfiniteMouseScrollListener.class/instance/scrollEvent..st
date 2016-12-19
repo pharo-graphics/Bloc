@@ -2,8 +2,8 @@ mouse handlers
 scrollEvent: anEvent
 	| dX dY anAmount |
 	
-	anAmount := 60.
-	
+	anAmount := 200.
+
 	dX := anEvent isScrollLeft
 		ifTrue: [ anAmount ]
 		ifFalse: [ anEvent isScrollRight
@@ -16,4 +16,4 @@ scrollEvent: anEvent
 			ifTrue: [ anAmount negated ]
 			ifFalse: [ 0 ] ].
 	
-	anEvent currentTarget scrollBy: dX @ dY
+	anEvent currentTarget fling: dX @ dY
