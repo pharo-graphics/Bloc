@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Infinite-Examples-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"class" ],
+	"name" : "BlInfiniteExampleClassElementHolder",
+	"pools" : [
+		 ],
+	"super" : "BlInfiniteElementHolder",
+	"type" : "normal" }

@@ -9,7 +9,7 @@ scrollEvent: anEvent
 		ifFalse: [ anEvent isScrollRight
 			ifTrue: [ anAmount negated ]
 			ifFalse: [ 0 ] ].
-		
+
 	dY := anEvent isScrollDown
 		ifTrue: [ anAmount ]
 		ifFalse: [ anEvent isScrollUp
