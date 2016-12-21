@@ -4,7 +4,7 @@ icebergLoad: thePackages from: aRepositoryUrl
 
 	self ensureIceberg.
 
-	aRepository := (Smalltalk classNamed: #Iceberg) mcRepositoryFor: aRepositoryUrl.
+	aRepository := ((Smalltalk classNamed: #Iceberg) mcRepositoryFor: aRepositoryUrl) repository.
 	aRepository checkoutBranch: self gitBranch.
 	aRepository register.
 	
