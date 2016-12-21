@@ -2,12 +2,13 @@ baselines
 baseline: spec
 	<baseline>
 	spec for: #common do: [ spec
-			postLoadDoIt: #postLoadActions:;
-		
+			preLoadDoIt:  #preLoadActions:;
+			postLoadDoIt: #postLoadBloc:;
 		   baseline: 'Sparta' with: [ spec
-				loads: #(#'core' );
+				postLoadDoIt: #postLoadSparta:;
+				loads: #(#core);
 				repository: 'github://syrel/sparta/src' ];
-			
+
 			baseline: 'TaskIt' with: [ spec
 				repository: 'github://sbragagnolo/taskit-2:dev-0.3' ];
 			
@@ -39,7 +40,6 @@ baseline: spec
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
-			
 			"groups with only sources"
 			group: 'file:core' 
 				with: #( 'BlocHost-SDL' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' );

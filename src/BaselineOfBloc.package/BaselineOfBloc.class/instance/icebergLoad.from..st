@@ -1,0 +1,16 @@
+loading - git
+icebergLoad: thePackages from: aRepositoryUrl
+	| aRepository |
+
+	self ensureIceberg.
+
+	aRepository := (Smalltalk classNamed: #Iceberg) mcRepositoryFor: aRepositoryUrl.
+	aRepository checkoutBranch: self gitBranch.
+	aRepository register.
+	
+	NonInteractiveTranscript stdout cr.
+	thePackages do: [ :aPackage | 
+			NonInteractiveTranscript stdout show: 'Loading latest version of ' , aPackage , '...';cr.
+			aRepository updatePackage: aPackage ].
+
+	aRepository pull
