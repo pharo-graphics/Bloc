@@ -25,7 +25,7 @@ scrollBy: aNumber
 	aScrolledDistance := anAbsoluteDelta > aConsumedSpace
 		ifTrue: [ aLayoutDirection multiplier * aConsumedSpace ]
 		ifFalse: [ aNumber ].
-		
+	
 	self orientation moveChildrenBy: aScrolledDistance negated.
 	layoutState lastScrolledDelta: aScrolledDistance.
 
