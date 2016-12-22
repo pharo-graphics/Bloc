@@ -53,6 +53,7 @@ baseline: spec
 			group: 'git:core' with: #('core');
 			group: 'git:development' with: #('development');
 			
+			group: 'stub' with: #();
 			group: 'default' with: #('core')
 		].
 
