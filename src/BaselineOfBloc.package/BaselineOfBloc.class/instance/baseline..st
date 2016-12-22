@@ -6,7 +6,7 @@ baseline: spec
 			postLoadDoIt: #postLoadBloc:;
 		   baseline: 'Sparta' with: [ spec
 				postLoadDoIt: #postLoadSparta:;
-				loads: #(#core);
+				loads: #(stub); "Stub does not load anything here. We load sparta in postLoadSparta:"
 				repository: 'github://syrel/sparta/src' ];
 
 			baseline: 'TaskIt' with: [ spec
