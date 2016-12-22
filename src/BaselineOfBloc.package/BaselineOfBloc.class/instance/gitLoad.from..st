@@ -16,11 +16,11 @@ gitLoad: aBaselineName from: aRepositoryName
 				do: [ :aDirective | 
 					| aProject |
 					aProject := aDirective spec project.
-					aProject spec repositories keys first = aRepositoryName
-					ifTrue: [ 
-						aDirective
-							packageDirectivesDo: [ :aPackage | 
-								aPackage spec project = aProject
-									ifTrue: [ aStream nextPut: aPackage spec name ] ] ] ] ].
+					aDirective packageDirectivesDo: [ :aPackage | 
+						| theRepositories repositoryMatches |
+						theRepositories :=  aPackage spec repositories map keys.
+						repositoryMatches := theRepositories isEmpty or: [ theRepositories first = aRepositoryName ].
+						(repositoryMatches and: [ aPackage spec project = aProject ])
+							ifTrue: [ aStream nextPut: aPackage spec name ] ] ] ].
 
 	self icebergLoad: thePackages from: aRepositoryName

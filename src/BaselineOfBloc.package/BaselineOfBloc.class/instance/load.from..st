@@ -16,6 +16,6 @@ load: aBaselineName from: aRepository
 
 	"we load code + iceberg"
 	aDirective = #git
-		ifTrue: [ self gitLoad: aBaselineName from: aRepository ].
+		ifTrue: [ ^ self gitLoad: aBaselineName from: aRepository ].
 
 	Error signal: 'Unknown load directive ' , aDirective asString
