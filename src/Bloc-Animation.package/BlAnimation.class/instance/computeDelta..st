@@ -1,3 +1,3 @@
 delta computing
 computeDelta: aProgress
-	^ easing deltaByProgress: aProgress
+	^ easing interpolate: aProgress

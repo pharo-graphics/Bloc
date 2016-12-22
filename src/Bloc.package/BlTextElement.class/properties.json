@@ -1,0 +1,15 @@
+{
+	"category" : "Bloc-Basic",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 12/22/2016 19:41",
+	"instvars" : [
+		"textLayout",
+		"text" ],
+	"name" : "BlTextElement",
+	"pools" : [
+		 ],
+	"super" : "BlElement",
+	"type" : "normal" }

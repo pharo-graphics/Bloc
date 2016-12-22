@@ -1,13 +1,13 @@
 {
-	"category" : "Bloc-Infinite-Examples-Core - Colors",
+	"category" : "Bloc-Infinite-Examples-Core - Text",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"color" ],
-	"name" : "BlInfiniteExampleColorElementHolder",
+		 ],
+	"name" : "BlInfiniteExampleTextElementHolder",
 	"pools" : [
 		 ],
 	"super" : "BlInfiniteElementHolder",
