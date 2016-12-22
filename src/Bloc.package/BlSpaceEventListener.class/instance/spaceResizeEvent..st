@@ -1,3 +1,3 @@
 window handlers
 spaceResizeEvent: anEvent
-	self space extent: anEvent extent.
+	self space windowExtent: anEvent extent

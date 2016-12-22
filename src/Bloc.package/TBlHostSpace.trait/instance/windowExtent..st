@@ -1,3 +1,3 @@
 accessing
-extent: anExtent
+windowExtent: anExtent
 	self shouldBeImplemented

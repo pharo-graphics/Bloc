@@ -1,5 +1,6 @@
 event handling
 visitMouseMotionEvent: event
+	
 	^ BlMouseMoveEvent new
 		position: event x @ event y;
 		screenPosition: (self globalMousePositionForEvent: event);

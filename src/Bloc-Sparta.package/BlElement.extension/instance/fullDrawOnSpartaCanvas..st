@@ -1,10 +1,13 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
-
+	| aBoundsInWindow |
+	
+	aBoundsInWindow := self boundsInWindow.
+	
 	"No need to render elements smaller than half of a pixel"
-	(self boundsInSpace width min: self boundsInSpace height) < 1 ifTrue: [ ^ self ].
+	(aBoundsInWindow width min: aBoundsInWindow height) < 1 ifTrue: [ ^ self ].
 
-	(aCanvas clip containsGlobal: self boundsInSpace)
+	(aCanvas clip containsGlobal: aBoundsInWindow)
 		ifFalse: [ ^ self ].
 		
 	(self isVisible and: [ self isInDirtyAreas ])

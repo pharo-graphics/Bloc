@@ -1,6 +1,7 @@
 drawing
 drawOnSpartaCanvas: aCanvas
 	| aTextPainter aFont aBounds aBaseline |
+
 	super drawOnSpartaCanvas: aCanvas.
 	
 	aFont := aCanvas font

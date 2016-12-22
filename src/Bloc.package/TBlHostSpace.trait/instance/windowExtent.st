@@ -1,0 +1,3 @@
+accessing
+windowExtent
+	^ self shouldBeImplemented

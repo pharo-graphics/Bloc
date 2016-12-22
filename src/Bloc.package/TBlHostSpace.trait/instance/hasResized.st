@@ -1,0 +1,3 @@
+testing
+hasResized
+	^ self explicitRequirement
