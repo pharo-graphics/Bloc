@@ -7,10 +7,20 @@ gitLoad: aBaselineName from: aRepositoryName
 	aLoader := Metacello new
   		baseline: aBaselineName;
   		repository: aRepositoryName;
-		"We only fetch, without actuall loading in the image. Loading will be done by iceberg"
-  		fetch: self target.
+		"We only record packages that need to be loaded, without actuall loading in the image. Loading will be done by iceberg"
+  		record: self target.
 
-	thePackages := OrderedCollection new.
-	aLoader packageDirectivesDo: [ :package | thePackages add: package spec name ].
+	thePackages := Array
+		streamContents: [ :aStream | 
+			aLoader loadDirectives
+				do: [ :aDirective | 
+					| aProject |
+					aProject := aDirective spec project.
+					aProject spec repositories keys first = aRepositoryName
+					ifTrue: [ 
+						aDirective
+							packageDirectivesDo: [ :aPackage | 
+								aPackage spec project = aProject
+									ifTrue: [ aStream nextPut: aPackage spec name ] ] ] ] ].
 
 	self icebergLoad: thePackages from: aRepositoryName

@@ -6,7 +6,7 @@ icebergLoad: thePackages from: aRepositoryUrl
 
 	aRepository := ((Smalltalk classNamed: #Iceberg) mcRepositoryFor: aRepositoryUrl) repository.
 	aRepository checkoutBranch: self gitBranch.
-	aRepository register.
+	"No need to register here. It was already done in mcRepositoryFor:"
 	
 	NonInteractiveTranscript stdout cr.
 	thePackages do: [ :aPackage | 
