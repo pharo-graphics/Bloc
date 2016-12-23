@@ -9,7 +9,8 @@ exampleClasses
 		layout: BlLinearLayout horizontal;
 		constraintsDo: [ :c |
 			c horizontal matchParent.
-			c vertical matchParent ];
+			c vertical matchParent.
+			c padding: (BlInsets top: 5) ];
 		yourself.	
 	
 	controls := BlElement new

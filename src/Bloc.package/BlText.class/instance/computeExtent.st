@@ -5,7 +5,7 @@ computeExtent
 	layoutView := SpTextLayout
 		rope: textModel rope
 		properties: { #maxWidth -> wrappingWidth }.
-	layoutView initializeOn: (MozCanvas extent: 1@1).
+	layoutView initializeOn: MozOffscreenCanvas uniqueInstance.
 	w := (self wrappingWidth > 0)
 		ifTrue: [ self wrappingWidth  ]
 		ifFalse: [ layoutView width].
