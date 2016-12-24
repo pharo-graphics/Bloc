@@ -7,7 +7,7 @@ example
 		SpFontSizeAttribute size: 16.
 		SpFontStyleAttribute italic } from: 1 to: text size. "the whole text"
 	text attributes: {
-		SpForegroundColorAttribute color: Color red.
+		SpTextForegroundAttribute paint: Color red.
 		SpFontStyleAttribute normal  } from: 1 to: 12. "Hello world!"
 	text attributes: {
 		SpFontSizeAttribute size: 20.
