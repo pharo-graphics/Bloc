@@ -1,3 +1,3 @@
 testing
 isTransparent
-	^color isTransparent
+	^ color isTransparent

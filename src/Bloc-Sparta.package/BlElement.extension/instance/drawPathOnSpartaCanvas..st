@@ -7,13 +7,19 @@ drawPathOnSpartaCanvas: aCanvas
 		"apply using ffi call once!"
 		aTransform apply.
 
-		aCanvas fill
-			paint: background fill;
-			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
-			draw.
+		"If background is transparent there is no need to render it"
+		background isTransparent ifFalse: [
+			aCanvas fill
+				paint: background fill;
+				path: (pathCache geomPathOnSpartaCanvas: aCanvas);
+				draw ].
+
+		"If border is transparent there is no need to render it"
+		border isTransparent ifFalse: [
+			aCanvas stroke
+				paint: border stroke;
+				path: (pathCache geomPathOnSpartaCanvas: aCanvas);
+				width: border stroke width;
+				draw ] ]
 		
-		aCanvas stroke
-			paint: border stroke;
-			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
-			width: border stroke width;
-			draw ]
+		
