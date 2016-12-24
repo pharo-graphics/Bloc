@@ -12,7 +12,7 @@ example
 	text attributes: {
 		SpFontSizeAttribute size: 20.
 		SpFontGenericFamilyAttribute monospace  } from: 13 to: text size. "How are you?"
-		
+
 	textElement := BlTextElement new.
 	textElement text: text.
 	textElement constraintsDo: [ :c |

@@ -2,4 +2,4 @@ accessing
 text: aText
 
 	text := aText.
-	linesCount := self countLines: aText
+	lines := self splitLines: aText

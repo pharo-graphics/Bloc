@@ -1,3 +1,3 @@
 accessing
 itemCount
-	^ linesCount
+	^ lines size

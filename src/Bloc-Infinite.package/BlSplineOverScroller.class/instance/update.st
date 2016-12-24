@@ -3,7 +3,7 @@ update
 	| aTime aDeltaTime aDistance|
 
 	aTime := DateAndTime millisecondClockValue.
-	aDeltaTime := aTime - startTime.
+	aDeltaTime := (aTime - startTime) max: 1.
 	
 	"almost zero"
 	(aDeltaTime abs < 0.0001)
