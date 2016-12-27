@@ -8,5 +8,5 @@ class: aClass
 	
 	aText := SpText fromString: class name.
 	aText attributes: { SpFontSizeAttribute size: 13 } from: 1 to: aText size.
-	"color changed, update element to represent new color"
+	aText attributes: { SpTextWrapAttribute none } from: 1 to: aText size.
 	itemElement text: aText
