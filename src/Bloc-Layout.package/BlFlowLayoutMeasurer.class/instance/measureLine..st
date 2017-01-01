@@ -2,4 +2,7 @@ calculating
 measureLine: aLine
 	
 	aLine children do: [ :aChild |
-		aChild element measure: (BlExtentMeasurementSpec exact: aChild width @ aChild height) ]
+		| aRequestedExtent |
+		aRequestedExtent := aChild width @ aChild height.
+		aChild element measuredExtent = aRequestedExtent ifFalse: [ 
+			aChild element measure: (BlExtentMeasurementSpec exact: aRequestedExtent) ] ]

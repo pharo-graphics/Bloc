@@ -5,14 +5,16 @@ resetResources
 
 	windowSize := self sdlSpace windowExtent.
 	extent := self sdlSpace extent.
+	scaleFactor := (extent / windowSize) asFloatPoint.
 	self createSDLSurfaceWithExtent: extent.
 	spartaCanvas := MozCanvas
 		createForData: sdlSurface pixels
+		type: MozBackendType SKIA
 		extent: extent
 		stride: sdlSurface pitch
 		format: MozSurfaceFormat B8G8R8A8.
 	spartaCanvas transform
-			scaleBy: (extent / windowSize) asFloatPoint;
+			scaleBy: scaleFactor;
 			apply.
 	texture := sdlRenderer 
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888 

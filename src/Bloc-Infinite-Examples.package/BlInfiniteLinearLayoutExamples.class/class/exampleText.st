@@ -38,8 +38,12 @@ exampleText
 		extent: 200@40;
 		addEventHandlerOn: BlClickEvent do: [ list smoothScrollBy: 0@400 negated ];
 		yourself.
-	
+
 	controls addChildren: { smoothScrollByNegated . smoothScrollBy }.
 	container addChildren: { list . controls }.
 	space root addChild: container.
+	space root addEventHandler:
+			(BlEventHandler
+				on: BlDblClickEvent
+				do: [ :evt | BlElementSelection on: evt target ]).
 	space show

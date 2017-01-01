@@ -18,7 +18,8 @@
 		"pitch",
 		"sdlSurface",
 		"textureExtent",
-		"surfaceForm" ],
+		"surfaceForm",
+		"scaleFactor" ],
 	"name" : "BlSDLSpartaRenderer",
 	"pools" : [
 		"SDL2Constants" ],

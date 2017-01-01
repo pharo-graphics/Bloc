@@ -3,7 +3,7 @@ exampleClasses
 	| space list container controls  smoothScrollBy smoothScrollByNegated |
 	space := BlSpace new
 		extent: 800 @ 650;
-		title: 'Infinite list example'.
+		title: 'Smalltalk allClasses'.
 		
 	container := BlElement new
 		layout: BlLinearLayout horizontal;
@@ -41,7 +41,7 @@ exampleClasses
 		yourself.
 	
 	controls addChildren: { smoothScrollByNegated .smoothScrollBy }.
-	container addChildren: { list . controls }.
+	container addChildren: { list . "controls" }.
 	
 	space root addChild: container.
 	"space root

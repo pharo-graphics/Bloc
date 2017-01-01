@@ -22,5 +22,5 @@ measurementSpecFor: parentSpec usedSize: usedSize resizer: childResizer
 	<return: #BlMeasurementSpec>
 
 	| size |
-   size := 0 max: (parentSpec size - usedSize).
+   size := 0 max: ((parentSpec size ifNil: [ 0 ]) - usedSize).
 	^ parentSpec mode measurement: childResizer with: size

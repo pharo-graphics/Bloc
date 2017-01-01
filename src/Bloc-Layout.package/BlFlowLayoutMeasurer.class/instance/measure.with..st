@@ -56,4 +56,4 @@ measure: anElement with: anExtentSpec
 		totalContentWidth := totalContentWidth + contentBreadth.
 		totalContentHeight := totalContentHeight + contentLength ].
 	
-	anElement measuredExtent: (anExtentSpec sizeFor: totalContentWidth @ totalContentWidth)
+	anElement measuredExtent: (anExtentSpec sizeFor: totalContentWidth @ totalContentHeight)

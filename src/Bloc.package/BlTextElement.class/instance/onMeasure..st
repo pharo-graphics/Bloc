@@ -3,10 +3,14 @@ onMeasure: anExtentMeasurementSpec
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
 	| aProperties aHeightSpec aWidthSpec aMaxHeight aMaxWidth aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
+		
 
 	self
 		assert: [ text isNotNil ]
 		description: [ 'Text model must be nil!' ].
+
+	(self shouldMeasure: anExtentMeasurementSpec)
+		ifFalse: [ ^ self ].
 
 	aProperties := Dictionary new.
 	aMaxWidth := self constraints maxWidth.
@@ -21,7 +25,13 @@ onMeasure: anExtentMeasurementSpec
 		"Unspecified means that layout may take as much space horizontally as it wishes"
 	aHeightSpec isUnspecified
 		ifFalse: [ aMaxHeight := aMaxHeight min: aHeightSpec size ].
-
+	
+	"Exact spec limits max height and width to specific values"
+	aWidthSpec isExact ifTrue: [ 
+		aMaxWidth := aWidthSpec size ].
+	aHeightSpec isExact ifTrue: [ 
+		aMaxHeight := aHeightSpec size ].
+	
 	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
 	aMaxHeight := (aMaxHeight - aPadding height) max: 0.
 	
@@ -34,7 +44,7 @@ onMeasure: anExtentMeasurementSpec
 
 	textLayout initializeOn: self defaultOffscreenCanvas.
 	"text layout is measured at this point"
-	
+
 	aMeasuredWidth := textLayout width.
 	aMeasuredHeight := textLayout height.
 	

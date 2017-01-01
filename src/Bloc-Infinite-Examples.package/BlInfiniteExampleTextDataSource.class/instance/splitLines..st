@@ -1,11 +1,10 @@
 private
 splitLines: aSpText
-	| theLines aRope aLineIterator |
+	| theLines aLineIterator |
 
 	theLines := OrderedCollection new.
-	aRope := aSpText rope.
-	aLineIterator := aRope iterator: 1 to: aRope size.
-	
+	aLineIterator := aSpText rope iterator.
+
 	[ aLineIterator hasNext ] whileTrue: [ 
 		theLines add: aLineIterator nextLine ].
 

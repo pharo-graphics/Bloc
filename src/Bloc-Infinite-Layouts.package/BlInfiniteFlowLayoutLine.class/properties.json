@@ -1,0 +1,17 @@
+{
+	"category" : "Bloc-Infinite-Layouts-Flow-Utilities",
+	"classinstvars" : [
+		"empty" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"itemCount",
+		"totalWidth",
+		"maxHeight",
+		"maxHeightIndex" ],
+	"name" : "BlInfiniteFlowLayoutLine",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -5,5 +5,5 @@ windowScale
 	<return: #Number>
 
 	^ self hostSpace
-		ifNotNil: [ :aHostSpace | (aHostSpace extent / aHostSpace windowExtent) asFloatPoint ]
+		ifNotNil: [ :aHostSpace | aHostSpace scaleFactor ]
 		ifNil: [ 1.0 asPoint ]
