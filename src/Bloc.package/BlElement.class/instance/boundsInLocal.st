@@ -1,3 +1,3 @@
 geometry bounds
 boundsInLocal
-	^ boundsCache boundsInLocal 
+	^ boundsCache boundsInLocal

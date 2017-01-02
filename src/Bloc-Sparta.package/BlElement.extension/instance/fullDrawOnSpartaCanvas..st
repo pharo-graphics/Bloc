@@ -1,14 +1,17 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
-	| aBoundsInWindow |
+	| aBoundsInSpace |
 	
-	aBoundsInWindow := self boundsInWindow.
+	aBoundsInSpace := self boundsInSpace.
 	
 	"No need to render elements smaller than half of a pixel"
-	(aBoundsInWindow width min: aBoundsInWindow height) < 1 ifTrue: [ ^ self ].
+	(aBoundsInSpace width min: aBoundsInSpace height) < 1 ifTrue: [ ^ self ].
 
-	(aCanvas clip containsGlobal: aBoundsInWindow)
-		ifFalse: [ ^ self ].
+	self isAttachedToSceneGraph
+		ifTrue: [ (aCanvas clip containsGlobal: aBoundsInSpace scaledBy: self space windowScale)
+			ifFalse: [ ^ self ]. ]
+		ifFalse: [ (aCanvas clip containsGlobal: aBoundsInSpace)
+			ifFalse: [ ^ self ] ].
 		
 	(self isVisible and: [ self isInDirtyAreas ])
 		ifFalse: [ ^ self ].
@@ -18,7 +21,7 @@ fullDrawOnSpartaCanvas: aCanvas
 		translateBy: self position;
 		multiplyBy: self transform;
 		apply.
-		
+
 	aCanvas clip
 		push: self boundsInLocal.
 

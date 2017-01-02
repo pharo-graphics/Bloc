@@ -33,10 +33,13 @@ onMeasure: anExtentMeasurementSpec
 	
 	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
 	aMaxHeight := (aMaxHeight - aPadding height) max: 0.
-	
+
 	aProperties at: #maxWidth put: aMaxWidth.
 	aProperties at: #maxHeight put: aMaxHeight.
-	
+	"do not mark as auto release if I am attached to scene graph.
+	Resource freeing will happen in onRemovedFromSceneGraph"
+	aProperties at: #autoRelease put: self isAttachedToSceneGraph not.
+
 	"Create a new text layout"
 	textLayout := self defaultTextLayout.
 	textLayout rope: text rope properties: aProperties.

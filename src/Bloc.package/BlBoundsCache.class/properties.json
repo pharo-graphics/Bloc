@@ -7,11 +7,9 @@
 	"commentStamp" : "",
 	"instvars" : [
 		"owner",
-		"layoutBounds",
 		"txBounds",
 		"boundsInSpace",
-		"geomBoundsInSpace",
-		"layoutBoundsInSpace" ],
+		"geomBoundsInSpace" ],
 	"name" : "BlBoundsCache",
 	"pools" : [
 		 ],

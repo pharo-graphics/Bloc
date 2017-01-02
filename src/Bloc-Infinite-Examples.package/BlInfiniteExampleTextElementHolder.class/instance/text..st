@@ -1,25 +1,35 @@
 accessing
 text: aSpText
-	| theWords aWordIterator aBreak |
+	| theWords theChildren aWordIterator aSize theManagedChildren |
 	
-	itemElement removeChildren.
+	aSize := itemElement childrenCount.
 
 	theWords := OrderedCollection new.
 	aWordIterator := aSpText rope iterator.
-	aBreak := true.
+	
 	[ aWordIterator hasNext ] whileTrue: [
 		| aWord aText |
 		aWord := aWordIterator nextWord.
 		aText := SpText fromRope: aWord.
 		aText attributes: { SpTextWrapAttribute none }.
-		
-		theWords	add: (BlTextElement new
-			constraintsDo: [ :c | 
-				c horizontal fitContent.
-				c vertical fitContent.
-				c flow newLine: aBreak ];
-			text: aText;
-			yourself).
-		aBreak := false ].
+		theWords	add: aText ].
+	
+	"remove unneeded elements"
+	theWords size < aSize
+		ifTrue: [ itemElement removeChildren: (itemElement managedChildren last: aSize - theWords size ) ].
 
-	itemElement addChildren: theWords
+	"create needed elements"
+	theChildren := #().
+	theWords size > aSize ifTrue: [
+		theChildren := (1 to: theWords size - aSize) collect: [ :anIndex |
+			BlTextElement new
+				constraintsDo: [ :c | 
+					c horizontal fitContent.
+					c vertical fitContent ];
+			yourself ] ].
+	itemElement addChildren: theChildren.
+	
+	theManagedChildren := itemElement managedChildren.
+	theWords withIndexDo: [ :aText :anIndex |
+		(theManagedChildren at: anIndex)
+			text: aText ]

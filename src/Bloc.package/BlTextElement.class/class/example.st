@@ -1,7 +1,7 @@
 example
 example
 	| space text textElement |
-	
+
 	text := SpText fromString: 'Hello world!', String cr, 'How are you?'.
 	text attributes: {
 		SpFontSizeAttribute size: 16.

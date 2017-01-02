@@ -9,4 +9,4 @@ dispatchChildRemoved: anElement
 	"If an only if I am attached to scene graph we let child know
 	that it is not a part of the scene graph anymore"
 	self isAttachedToSceneGraph
-		ifTrue: [ anElement dispatchRemovedFromParent ].
+		ifTrue: [ anElement dispatchRemovedFromSceneGraph ].

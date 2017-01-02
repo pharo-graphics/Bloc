@@ -4,5 +4,5 @@ color: aColor width: aWNumber radius: aRNumber style: aBorderStrokeStyle
 		paint: aColor asBlPaint
 			style: (aBorderStrokeStyle ifNil: [ BlBorderStrokeStyle SOLID ])
 			radii: (aRNumber ifNil: [ BlCornerRadii empty ] ifNotNil: [ BlCornerRadii radius: aRNumber ])
-			width: (aWNumber ifNil:[0]);
+			width: (aWNumber ifNil:[0.0]);
 		yourself
