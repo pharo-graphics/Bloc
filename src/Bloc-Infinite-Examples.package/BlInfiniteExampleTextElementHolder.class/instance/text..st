@@ -8,14 +8,17 @@ text: aSpText
 	aWordIterator := aSpText rope iterator.
 	aBreak := true.
 	[ aWordIterator hasNext ] whileTrue: [
-		| aWord |
+		| aWord aText |
 		aWord := aWordIterator nextWord.
+		aText := SpText fromRope: aWord.
+		aText attributes: { SpTextWrapAttribute none }.
+		
 		theWords	add: (BlTextElement new
 			constraintsDo: [ :c | 
 				c horizontal fitContent.
 				c vertical fitContent.
 				c flow newLine: aBreak ];
-			text: (SpText fromRope: aWord);
+			text: aText;
 			yourself).
 		aBreak := false ].
 

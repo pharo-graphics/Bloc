@@ -14,7 +14,7 @@ drawOnSpartaCanvas: aCanvas
 		font: aFont;
 		yourself.
 
-	aBounds := aTextPainter measure textMetrics boundingBox.
+	aBounds := aTextPainter measure textMetrics bounds.
 	
 	aBaseline := (aBounds origin negated) + (((self width - aBounds width) @ (self height - aBounds height)) / 2).
 	

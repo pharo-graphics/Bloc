@@ -3,7 +3,6 @@ onMeasure: anExtentMeasurementSpec
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
 	| aProperties aHeightSpec aWidthSpec aMaxHeight aMaxWidth aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
-		
 
 	self
 		assert: [ text isNotNil ]
