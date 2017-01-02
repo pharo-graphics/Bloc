@@ -40,7 +40,7 @@ exampleText
 		yourself.
 
 	controls addChildren: { smoothScrollByNegated . smoothScrollBy }.
-	container addChildren: { list . controls }.
+	container addChildren: { list ." controls" }.
 	space root addChild: container.
 	space root addEventHandler:
 			(BlEventHandler

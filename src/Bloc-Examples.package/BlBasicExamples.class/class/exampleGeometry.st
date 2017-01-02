@@ -4,7 +4,7 @@ exampleGeometry
 	space := BlSpace new
 		extent: 600 @ 450;
 		title: 'Shape example'.
-		
+
 	space root
 		"addChild: (BlBenchmarkConsole on:space);"
 		addChild: (self newRectangle position: 10 @ 50);
