@@ -29,5 +29,4 @@ fullDrawOnSpartaCanvas: aCanvas
 		"We should pop clip and transform in reversed exact order,
 		otherwise backend transformation matrix may become broken"
 		aCanvas clip pop.
-		aCanvas transform pop.
-		self dirty: false ]
+		aCanvas transform pop ]

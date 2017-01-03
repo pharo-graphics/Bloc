@@ -6,7 +6,6 @@ initialize
 	eventDispatcher := BlBubblingEventDispatcher on: self.
 	zIndex := 10.
 	constraints := BlLayoutCommonConstraints new.
-	dirty := true.
 	self resetChildrenArray.
 	geometry := self defaultPath.
 	border := BlBorder empty.
