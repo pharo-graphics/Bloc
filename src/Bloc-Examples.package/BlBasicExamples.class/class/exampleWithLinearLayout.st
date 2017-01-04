@@ -17,7 +17,7 @@ exampleWithLinearLayout
 	
 	p := BlElement new
 		layout: BlLinearLayout horizontal;
-		extent: 200 @ 300;
+		size: 200 @ 300;
 		position: 200@100;
 		background:(BlBackground fill: Color blue);
 		padding: (BlInsets all:10);

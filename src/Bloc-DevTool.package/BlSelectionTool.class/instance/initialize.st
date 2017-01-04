@@ -1,10 +1,10 @@
-as yet unclassified
+initialization
 initialize
 	super initialize.
 	currentSelections := OrderedCollection new.
 	selectionRect := BlElement new
 		zIndex: 1000;
-		extent: 50@50;
+		size: 50@50;
 		background: Color transparent;
 		border:
 			(BlBorder

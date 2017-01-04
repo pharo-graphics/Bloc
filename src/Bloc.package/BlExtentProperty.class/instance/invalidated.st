@@ -1,3 +1,3 @@
 change management
 invalidated
-	self owner changed
+	"self owner changed"

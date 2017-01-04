@@ -40,11 +40,11 @@ text: aSpText
 			yourself ] ].
 	"we don't have enough children, add new ones"
 	itemElement addChildren: theChildren.
-	
+
 	theManagedChildren := itemElement children all.
 	theWords withIndexDo: [ :aText :anIndex |
 		(theManagedChildren at: anIndex)
 			managed: true;
 			visibility: BlVisibility visible;
-			extent: 50@20
+			size: 50@20
 			"text: aText" ]

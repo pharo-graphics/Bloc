@@ -3,7 +3,7 @@ createSquareAnd9SubSquaresLength: aLength min: aMin
 |theRoot pos|
 theRoot := BlElement new
 	background:(BlBackground fill: Color random);
-	extent: (aLength ) asPoint;
+	size: (aLength ) asPoint;
 	addEventHandler: (BlOnMouseOverHandler do:[:e| e target background: Color random asBlBackground]).
 
 (aLength <= aMin) ifTrue:[^ theRoot] .

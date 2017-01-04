@@ -9,7 +9,15 @@ removeChildren
 	
 	"first update element's parent to nil"
 	oldChildren := self children.
-	oldChildren do: [ :aNode | aNode parent: nil ].
+
+	oldChildren do: [ :anElement |
+		"First of all, we have to damage area occupied by removed element"
+		anElement invalidate.
+		"then we request layout update while element is not yet removed"
+		anElement requestLayout.
+
+		anElement parent: nil ].
+
 	"actually remove children"
 	self resetChildrenArray.
 	"send hook after elements has been removes"

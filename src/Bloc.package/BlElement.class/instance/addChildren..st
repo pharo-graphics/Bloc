@@ -17,9 +17,11 @@ addChildren: aListOfElements
 		ifEmpty: [ ^ self ].
 	"update parents"
 	aListOfElements do: [ :anElement | anElement parent: self ].
-	"actually add children"	
+	"actually add children"
 	self children addAll: aListOfElements.
 	"send hook after elements have been added"
 	aListOfElements do: [ :anElement | self dispatchChildAdded: anElement ].
 	"finally requesting children changed"
-	self managedChildrenChanged
+	self managedChildrenChanged.
+	"We should request layout from newly added elements to mark them as dirty too"
+	aListOfElements do: [ :anElement | anElement requestLayout ]

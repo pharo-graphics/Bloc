@@ -1,7 +1,20 @@
 geometry bounds convertion
-localBoundsToGlobal: aRectangle
-	| r |
-	r := self parent
-		ifNil: [  transform localBoundsToGlobal: aRectangle ]
-		ifNotNil: [ :p | p localBoundsToGlobal: (transform localBoundsToGlobal: aRectangle) ].
-	^ r translateBy: self position
+localBoundsToGlobal: aSpartaRectangle
+	"In-place transform bounds from local coordinates to global space coordinates.
+	Note, that I do not return a new rectangle and instead mutate provided one,
+	so do not forget to send #asRectangle to given mutable rectangle in order to get
+	immutable one that can be safely stored as instance variable."
+	<return: #SpartaRectangle>
+
+	"first apply transformation"
+	transform transformRectangle: aSpartaRectangle.
+
+	"then translate according to my position within the parent.
+	Note, that an element might have a position even if it does not have a parent"
+	aSpartaRectangle translateBy: self position.
+
+	"and finally delegate to my parent if I have one"
+	self hasParent
+		ifTrue: [ self parent localBoundsToGlobal: aSpartaRectangle ].
+
+	^ aSpartaRectangle

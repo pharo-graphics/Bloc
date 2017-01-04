@@ -6,8 +6,15 @@ removeChild: anElement
 	anElement must be my direct child"
 	self assert: anElement isNotNil.
 	self assert: anElement parent == self.
+	
+	"First of all, we have to damage area occupied by removed element"
+	anElement invalidate.
+	"then we request layout update while element is not yet removed"
+	anElement requestLayout.
 
 	anElement parent: nil.
 	self children remove: anElement.
 	self dispatchChildRemoved: anElement.
-	self managedChildrenChanged.
+	
+	"child removed"
+	self managedChildrenChanged

@@ -9,7 +9,9 @@
 		"owner",
 		"txBounds",
 		"boundsInSpace",
-		"geomBoundsInSpace" ],
+		"geomBoundsInSpace",
+		"boundsInLocal",
+		"geomBoundsInLocal" ],
 	"name" : "BlBoundsCache",
 	"pools" : [
 		 ],

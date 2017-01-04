@@ -1,9 +1,9 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
 	| aBoundsInSpace |
-	
+
 	aBoundsInSpace := self boundsInSpace.
-	
+
 	"No need to render elements smaller than half of a pixel"
 	(aBoundsInSpace width min: aBoundsInSpace height) < 1 ifTrue: [ ^ self ].
 

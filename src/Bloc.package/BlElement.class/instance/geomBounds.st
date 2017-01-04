@@ -1,3 +1,3 @@
 geometry bounds
 geomBounds
-	^ self geomBoundsProperty value
+	^ boundsCache geomBoundsInLocal

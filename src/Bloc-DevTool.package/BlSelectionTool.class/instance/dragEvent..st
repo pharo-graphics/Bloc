@@ -1,3 +1,3 @@
-as yet unclassified
+dnd handlers
 dragEvent: anEvent
-	selectionRect extent: anEvent position - startPosition
+	selectionRect size: anEvent position - startPosition

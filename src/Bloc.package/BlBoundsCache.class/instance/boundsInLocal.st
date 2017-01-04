@@ -1,3 +1,4 @@
-as yet unclassified
+accessing
 boundsInLocal
-	^ self owner geomBounds quickMerge: self owner fxBounds 
+	^ boundsInLocal ifNil: [
+		boundsInLocal := (self owner boundsInLocal: SpartaRectangle new) asRectangle ]

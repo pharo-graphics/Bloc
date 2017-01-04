@@ -11,7 +11,5 @@ windowExtent: aNewExtent
 			aHostSpace windowExtent: aNewExtent ].
 
 	extent := aWindowSize.
-	self root extent: extent.
-	self glass extent: extent.
-	self beDirtyArea.
-	self requestNextPulse
+	self root size: extent.
+	self glass size: extent

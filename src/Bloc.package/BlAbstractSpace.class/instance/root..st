@@ -3,6 +3,6 @@ root: anElement
 	self assert: anElement space isNil.
 	anElement
 		space: self;
-		extent: self extent.
+		size: self extent.
 	root := anElement.
 	rootStyler := self defaultRootStyler.

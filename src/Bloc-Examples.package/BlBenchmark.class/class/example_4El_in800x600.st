@@ -7,7 +7,7 @@ example_4El_in800x600
 			| s currentPosition |
 			currentPosition := (x * 50) @ (y * 50).
 			s := BlElement new
-				extent: 50 @ 50;
+				size: 50 @ 50;
 				position: currentPosition;
 				background: Color random;
 				border: (BlBorder color: Color random width: 5);

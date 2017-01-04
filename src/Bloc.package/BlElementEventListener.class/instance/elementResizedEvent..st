@@ -1,2 +1,0 @@
-element handlers
-elementResizedEvent: anEvent

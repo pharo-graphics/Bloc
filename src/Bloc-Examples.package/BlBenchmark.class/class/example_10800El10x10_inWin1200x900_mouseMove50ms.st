@@ -8,7 +8,7 @@ example_10800El10x10_inWin1200x900_mouseMove50ms
 		|s currentPosition|	
 			currentPosition := (x*10) @ (y*10).
 			s := BlElement new
-					extent: 10@10;
+					size: 10@10;
 					position: currentPosition;
 					background: Color random;
 					border: (BlBorder color:Color random width:1);

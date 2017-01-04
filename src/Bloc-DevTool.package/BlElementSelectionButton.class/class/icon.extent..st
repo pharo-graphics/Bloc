@@ -2,5 +2,5 @@ as yet unclassified
 icon: anSvgIcon extent: aPoint.
 	^ self new
 		geometry: anSvgIcon;
-		extent: aPoint;
+		size: aPoint;
 		yourself

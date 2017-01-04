@@ -7,4 +7,4 @@ exampleSpaceRootIsAnElement
 			(BlElement new
 				background: (BlBackground fill: Color red);
 				yourself).
-	space show.
+	space show

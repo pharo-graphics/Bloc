@@ -2,7 +2,7 @@ initialization
 initialize
 	super initialize.
 	session := Smalltalk session.
-	dirtyAreas := OrderedCollection new.
+	dirtyAreas := SortedCollection sortBlock: [ :a :b | a left < b left ].
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
 	mouseProcessor := BlMouseProcessor space: self.

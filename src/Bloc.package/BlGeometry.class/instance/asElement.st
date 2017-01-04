@@ -3,4 +3,4 @@ asElement
 	^ BlElement new
 		geometry: self;
 		background: Color black;
-		extent: self extent
+		size: self extent
