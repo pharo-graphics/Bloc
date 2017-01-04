@@ -20,7 +20,7 @@ exampleVerticalListFixedHeight
 	
 	el := BlElement new
 		layout: BlLinearLayout vertical;
-		extent: 80@300;
+		size: 80@300;
 		position: 200 @ 100;
 		padding:(BlInsets all: 10);
 		background: Color blue;

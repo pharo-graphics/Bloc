@@ -7,5 +7,5 @@ invalidate
 	"If I am not added to scene graph, there is no need to invalidate damaged area"
 	self isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
-	
-	self invalidRect: self boundsInSpace
+
+	self invalidRect: (self boundsInLocal: SpartaRectangle new)

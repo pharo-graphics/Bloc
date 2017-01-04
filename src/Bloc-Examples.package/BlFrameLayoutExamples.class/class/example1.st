@@ -11,7 +11,7 @@ example1
 		background: Color yellow.
 	
 	e2 := BlElement new
-		extent: 200@200;
+		size: 200@200;
 		constraintsDo: [ :c |
 			c frame horizontal alignRight.
 			c frame vertical alignBottom ];
@@ -19,7 +19,7 @@ example1
 		background: Color green.
 	
 	e3 := BlElement new
-		extent: 100@100;
+		size: 100@100;
 		constraintsDo: [ :c|
 			c frame horizontal alignCenter.
 			c frame vertical alignCenter ];
@@ -28,7 +28,7 @@ example1
 	
 	el := BlElement new
 		layout: BlFrameLayout new;
-		extent: 350@350;
+		size: 350@350;
 		position: 200 @ 100;
 		padding: (BlInsets all: 10);
 		background: Color blue;

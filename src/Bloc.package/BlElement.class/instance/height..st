@@ -1,3 +1,3 @@
 accessing
 height: aNumber
-	self extent: self width@aNumber
+	self extent: self width @ aNumber

@@ -1,4 +1,4 @@
-as yet unclassified
+initialization
 initialize
 	super initialize.
 	self geometry: BlEllipse new.
@@ -7,4 +7,4 @@ initialize
 		color: Color black lighter 
 		width: (BlMobilePhone pxCameraDiameter * 0.2) asInteger).
 	self constraintsDo: [ :c| c linear horizontal alignCenter  ].
-	self extent:  BlMobilePhone pxCameraDiameter asPoint
+	self size:  BlMobilePhone pxCameraDiameter asPoint

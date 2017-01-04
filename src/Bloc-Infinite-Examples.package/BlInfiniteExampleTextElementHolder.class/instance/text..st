@@ -33,7 +33,7 @@ text: aSpText
 	theWords size > aSize ifTrue: [
 		theChildren := (1 to: theWords size - aSize) collect: [ :anIndex |
 			BlElement new
-				background: Color random;
+				background: ((anIndex % 2 = 0) ifTrue: [ Color gray ] ifFalse: [ Color lightGray ]);
 				constraintsDo: [ :c | 
 					c horizontal fitContent.
 					c vertical fitContent ];

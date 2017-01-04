@@ -6,14 +6,10 @@ localBoundsToGlobal: aSpartaRectangle
 	immutable one that can be safely stored as instance variable."
 	<return: #SpartaRectangle>
 
-	"first apply transformation"
-	transform transformRectangle: aSpartaRectangle.
+	"First we need to transform provided bounds from my local coordinates to parent ones"
+	self localBoundsToParent: aSpartaRectangle.
 
-	"then translate according to my position within the parent.
-	Note, that an element might have a position even if it does not have a parent"
-	aSpartaRectangle translateBy: self position.
-
-	"and finally delegate to my parent if I have one"
+	"and then delegate transformation to my parent if I have one"
 	self hasParent
 		ifTrue: [ self parent localBoundsToGlobal: aSpartaRectangle ].
 

@@ -11,16 +11,15 @@ exampleHorizontalListOnlyFloats
 				c margin: (BlInsets top: 3 right: 0 bottom: 0 left: 3) ];
 			background: Color veryVeryLightGray;
 			yourself ].
-		
+
 	parent := BlElement new
 		layout: BlFlowLayout new horizontal;
-		extent: 560@400;
+		size: 560@400;
 		position: 100 @ 50;
 		background: Color white;
 		addChildren: floats;
 		yourself.
 	
-	parent forceLayout.
 	space := BlSpace new.
 	space root addChild: parent.
 	BlElementSelection on: parent.

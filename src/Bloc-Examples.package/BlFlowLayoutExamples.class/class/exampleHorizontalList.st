@@ -16,21 +16,20 @@ exampleHorizontalList
 		background: Color green.
 	
 	e3 := BlElement new
-		extent: 50 asPoint;
+		size: 50 asPoint;
 		background: Color yellow.
 
 	e4 := BlElement new
-		extent: 50 asPoint;
+		size: 50 asPoint;
 		background: Color magenta.
 
 	el := BlElement new
 		layout: BlFlowLayout new horizontal;
-		extent: 150@100;
+		size: 150@200;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 }.
-	
-	el forceLayout.
+
 	space := BlSpace new.
 	space root addChild:el.
 	BlElementSelection on: el.

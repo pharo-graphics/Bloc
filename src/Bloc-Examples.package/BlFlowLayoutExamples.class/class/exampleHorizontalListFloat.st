@@ -48,7 +48,7 @@ exampleHorizontalListFloat
 		
 	parent := BlElement new
 		layout: BlFlowLayout new horizontal;
-		extent: 560@400;
+		size: 560@400;
 		position: 100 @ 50;
 		background: Color white;
 		addChildren: before;
@@ -58,7 +58,6 @@ exampleHorizontalListFloat
 		addChildren: after;
 		yourself.
 	
-	parent forceLayout.
 	space := BlSpace new.
 	space root addChild: parent.
 	BlElementSelection on: parent.

@@ -46,7 +46,6 @@ exampleText
 		addChildren: theWords;
 		yourself.
 
-	aParent forceLayout.
 	aSpace := BlSpace new.
 	aSpace root addChild: aParent.
 	BlElementSelection on: aParent.

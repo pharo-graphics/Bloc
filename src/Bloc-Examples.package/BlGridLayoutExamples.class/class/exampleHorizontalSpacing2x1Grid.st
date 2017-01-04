@@ -17,7 +17,7 @@ exampleHorizontalSpacing2x1Grid
 
 	el := BlElement new
 		layout: (BlGridLayout horizontal cellSpacing: 20);
-		extent: 400@200;
+		size: 400@200;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2 };

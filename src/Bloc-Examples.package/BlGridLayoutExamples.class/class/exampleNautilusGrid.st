@@ -36,7 +36,7 @@ exampleNautilusGrid
 	
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 4; cellSpacing: 10);
-		extent: 300@300;
+		size: 300@300;
 		position: 200 @ 100;
 		background: Color veryLightGray;
 		addChildren: { e1. e2. e3. e4. e5 };

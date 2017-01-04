@@ -26,7 +26,7 @@ exampleDistributedWithSpan2x2Grid
 	
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
-		extent: 300@300;
+		size: 300@300;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 };

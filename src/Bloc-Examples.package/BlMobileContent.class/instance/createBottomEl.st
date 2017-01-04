@@ -2,7 +2,8 @@ as yet unclassified
 createBottomEl
 	^ BlMobileSubElement new
 		layout: BlLinearLayout vertical;
-		height: BlMobilePhone pxBottomHeight;
-		constraintsDo: [ :c| c horizontal matchParent ];
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical exact: BlMobilePhone pxBottomHeight ];
 		addChild: BlMobileHomeButton new;
 		yourself

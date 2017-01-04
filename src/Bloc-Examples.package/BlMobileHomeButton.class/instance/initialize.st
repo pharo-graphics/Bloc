@@ -1,4 +1,4 @@
-as yet unclassified
+initialization
 initialize
 	super initialize.
 	self geometry: BlEllipse new.
@@ -6,4 +6,4 @@ initialize
 	self border: (BlBorder color: self createGradientPaint width: 3).
 	self margin: (BlInsets top: BlMobilePhone pxHomeButtonTopMargin ).
 	self constraintsDo: [ :c| c linear horizontal alignCenter  ].
-	self extent:  BlMobilePhone pxHomeButtonDiameter asPoint
+	self size:  BlMobilePhone pxHomeButtonDiameter asPoint

@@ -6,9 +6,9 @@ boundsInParent: anElement includeDecoration: shouldIncludeDecoration
 	the Elements's matrix so that the decor offsets also go through the same transformation"
 	<return: #Rectangle>
 	| aLocalBounds |
-	
+
 	aLocalBounds := shouldIncludeDecoration
 		ifTrue: [ anElement constraints infinite decorationInsets expand: anElement boundsInLocal ]
 		ifFalse: [ anElement boundsInLocal ].
 	
-	^ anElement localBoundsToParent: aLocalBounds
+	^ (anElement localBoundsToParent: (SpartaRectangle fromRectangle: aLocalBounds)) asRectangle

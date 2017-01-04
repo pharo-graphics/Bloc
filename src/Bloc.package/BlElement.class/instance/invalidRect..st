@@ -1,5 +1,6 @@
 change reporting
-invalidRect: aDirtyRect
-	"Invalidate a dirty rectangle of the display"
-	
-	self invalidRect: aDirtyRect from: self
+invalidRect: aSpartaRectangle
+	"Invalidate a dirty rectangle of the display.
+	aSpartaRectangle must be given in my own coordinates"
+
+	self invalidRect: aSpartaRectangle from: self
