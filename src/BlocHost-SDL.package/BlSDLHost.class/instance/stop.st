@@ -1,5 +1,15 @@
 api
 stop
-	EventLoopProcess ifNotNil:[EventLoopProcess terminate].
+
+	self
+		assert: [ hostSpaces isNotNil and: [ hostSpaces isEmpty ] ]
+		description: [ 'Can not stop SDL host with registered spaces!' ].
+	
+	self
+		assert: [ self isRunning ]
+		description: [ 'SDL host must be running in order to be stopped' ].
+
+	self stopEventLoop.
 	SDL2 quit.
-	super stop
+	hostSpaces := nil.
+	eventHandler := nil

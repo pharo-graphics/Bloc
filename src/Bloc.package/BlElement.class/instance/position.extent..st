@@ -2,7 +2,7 @@ accessing
 position: aPosition extent: anExtent
 	| isPositionChanged isExtentChanged aPreviousExtent isGrowing isShrinking | 
 	"Note, I do not request layout update"
-
+		
 	isPositionChanged := self position ~= aPosition.
 	isExtentChanged := self extent ~= anExtent.
 

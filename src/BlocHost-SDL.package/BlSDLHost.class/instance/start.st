@@ -1,6 +1,11 @@
 api
 start
-	((SDL2 wasInit: SDL_INIT_VIDEO) =  0)
-		ifTrue: [ SDL2 initVideo ].
+
+	self
+		assert: [ self isRunning not ]
+		description: [ 'SDL host must not be running!' ].
+
+	hostSpaces := Dictionary new. "(windowId -> BlSDLSpaceL)"
+	eventHandler := BlSDLEventHandler new.
+	SDL2 initVideo.
 	self setupEventLoop
-	

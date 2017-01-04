@@ -39,10 +39,12 @@ visitWindowEvent: windowEvent
 	].
 	windowEvent event = SDL_WINDOWEVENT_MAXIMIZED ifTrue: [ 
 		^ BlSpaceMaximizedEvent new
+			extent: hostSpace windowExtent;
 			timestamp: Time millisecondClockValue
 	].
 	windowEvent event = SDL_WINDOWEVENT_MINIMIZED ifTrue: [ 
 		^ BlSpaceMinimizedEvent new
+			extent: hostSpace windowExtent;
 			timestamp: Time millisecondClockValue
 	].
 

@@ -1,0 +1,3 @@
+api
+destroyHostSpaceFor: aSpace
+	self subclassResponsibility

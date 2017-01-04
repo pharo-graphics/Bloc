@@ -1,3 +1,3 @@
 period
 pulsePeriod
-^ pulsePeriod ifNil: [pulsePeriod :=self defaultPulsePeriod]
+	^ pulsePeriod ifNil: [ pulsePeriod := self defaultPulsePeriod ]

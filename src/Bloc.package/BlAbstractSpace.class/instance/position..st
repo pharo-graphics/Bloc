@@ -9,4 +9,7 @@ position: aPoint
 			perform window resize operation. As result it will create
 			a new rendering canvas with different size"
 			aHostSpace hasResized
-				ifTrue: [ self windowExtent: aHostSpace windowExtent ] ]
+				ifTrue: [
+					self windowExtent: aHostSpace windowExtent.
+					"space resized, let's redraw"
+					self beDirtyArea ] ]

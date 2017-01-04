@@ -1,3 +1,3 @@
 loop process
 createLoopTask
-	^ [[ self firePulse ] repeat. ]
+	^ [ [ self firePulse ] repeat ]

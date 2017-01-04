@@ -1,3 +1,3 @@
 pulse
 pulse
-	spaces do:[:sp| sp ifNotNil:[ sp pulse]]
+	spaces do: [ :aSpace | aSpace pulse ]

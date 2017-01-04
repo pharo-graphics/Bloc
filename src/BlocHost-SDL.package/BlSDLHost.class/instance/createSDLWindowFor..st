@@ -1,10 +1,19 @@
 private
 createSDLWindowFor: aSpace
-	| flags sdlWindow glAttributes x y |
+	"Note, that I use given space only to find out what window
+	properties (flag) to use for created window.
+	I do not create any strong or weak references to provided space"
+	| flags sdlWindow x y |
+
+	flags := aSpace isVisible
+		ifTrue: [ SDL_WINDOW_SHOWN ]
+		ifFalse: [ SDL_WINDOW_HIDDEN ].
+
+	aSpace fullscreen
+		ifTrue: [ flags := flags | SDL_WINDOW_FULLSCREEN_DESKTOP ].
+	aSpace borderless
+		ifTrue: [ flags := flags | SDL_WINDOW_BORDERLESS ].
 	
-	flags := aSpace isVisible ifTrue: [ SDL_WINDOW_SHOWN ] ifFalse: [ SDL_WINDOW_HIDDEN ].
-	aSpace fullscreen ifTrue: [ flags := flags | SDL_WINDOW_FULLSCREEN_DESKTOP ].
-	aSpace borderless ifTrue: [ flags := flags | SDL_WINDOW_BORDERLESS ].
 	flags := flags | SDL_WINDOW_ALLOW_HIGHDPI.
 	
 	" Set the OpenGL attributes."

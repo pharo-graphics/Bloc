@@ -1,4 +1,8 @@
 adding
 removeSpace: aSpace
-	(spaces includes: aSpace) ifFalse:[^ self].
+
+	self
+		assert: [ spaces includes: aSpace ]
+		description: [ 'Can not remove space that is not managed!' ].
+
 	spaces remove: aSpace

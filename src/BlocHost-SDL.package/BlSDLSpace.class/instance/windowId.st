@@ -1,3 +1,3 @@
 private
-windowId
+windowID
 	^ sdlWindow windowID
