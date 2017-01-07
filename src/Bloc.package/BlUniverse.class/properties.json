@@ -5,7 +5,7 @@
 	"classvars" : [
 		"Default",
 		"Session" ],
-	"commentStamp" : "GlennCavarle 6/26/2016 00:06",
+	"commentStamp" : "AliakseiSyrel 1/7/2017 20:21",
 	"instvars" : [
 		"pulseLoop",
 		"preferableHost",

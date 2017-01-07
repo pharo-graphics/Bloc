@@ -5,8 +5,7 @@ firePulse: aPulseEvent
 			nextPulseRequested := false.
 			announcer announce: (aPulseEvent timestamp: Time millisecondClockValue).
 			self animationManager pulse.
-			self spaceManager pulse.
-		].
+			self spaceManager pulse ].
 		self tryToRunDeferredActions.
 	
 	] on: Error do: [ :err | 

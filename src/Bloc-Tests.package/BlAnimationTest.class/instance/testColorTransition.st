@@ -1,7 +1,6 @@
 tests
-fixTestColorTransition
+testColorTransition
 	| anim result finishFlag currenTime |
-	self flag: 'Fix me'.
 
 	result := Color black alpha: 0.
 	finishFlag := false.

@@ -13,7 +13,7 @@ fullDrawOnSpartaCanvas: aCanvas
 		ifFalse: [ (aCanvas clip containsGlobal: aBoundsInSpace)
 			ifFalse: [ ^ self ] ].
 		
-	(self isVisible and: [ self isInDirtyAreas ])
+	self isVisible
 		ifFalse: [ ^ self ].
 
 	aCanvas transform

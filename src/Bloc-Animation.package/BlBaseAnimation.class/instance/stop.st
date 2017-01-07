@@ -1,11 +1,15 @@
 pulse
 stop
-	self isRunning
-		ifFalse: [ ^ self ].
 	
+	self
+		assert: [ self isRunning ]
+		description: [ 'Animation is not running' ].
+
 	running := false.
 	loopCount := 0.
-	"if i have a parent, i am not registred in the animation manager"
-	self parent ifNotNil: [ ^ self ].
-	self animationManager removeAnimation: self.
-	
+
+	"I am a sub-animation, so I am not registred in the animation manager"
+	self isSubAnimation
+		ifTrue: [ ^ self ].
+
+	self animationManager removeAnimation: self

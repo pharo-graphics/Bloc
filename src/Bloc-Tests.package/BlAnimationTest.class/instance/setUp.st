@@ -1,3 +1,4 @@
 initialization
 setUp
-	BlUniverse reset
+	BlUniverse reset.
+	BlUniverse default start

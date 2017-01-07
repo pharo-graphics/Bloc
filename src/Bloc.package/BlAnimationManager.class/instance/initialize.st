@@ -1,4 +1,7 @@
-initialisation
+initialization
 initialize
 	super initialize.
-	animations := OrderedCollection new
+	
+	"Animations collection must be immutable array to support
+	robust removing of animations while running animations"
+	animations := Array new

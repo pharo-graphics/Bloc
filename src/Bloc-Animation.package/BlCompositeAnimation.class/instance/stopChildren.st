@@ -1,3 +1,5 @@
 pulse
 stopChildren
-	children do:[:each| each stop]
+	children
+		select: [ :anAnimation | anAnimation isRunning ]
+		thenDo: [ :anAnimation | anAnimation stop ]

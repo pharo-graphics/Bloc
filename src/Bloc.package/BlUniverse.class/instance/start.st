@@ -1,4 +1,5 @@
 accessing
 start
 	self host start.
-	self requestNextPulse.
+	self pulseLoop start.
+	self requestNextPulse

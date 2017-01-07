@@ -1,3 +1,0 @@
-initialisation
-clear
-	animations removeAll

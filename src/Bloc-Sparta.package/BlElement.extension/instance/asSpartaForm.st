@@ -1,16 +1,32 @@
 *Bloc-Sparta
 asSpartaForm
-	|canvas margin aBounds|
+	| aCanvas aFinalCanvas margin aBoundsInWindow aBoundsInSpace |
 	margin := 0.
 
-	aBounds := (self transform localBoundsToGlobal: self boundsInLocal).
+	aBoundsInWindow := self boundsInWindow.
+	aBoundsInSpace := self boundsInSpace.
 
-	canvas := MozCanvas checker: (aBounds extent max: 1@1).
+	aCanvas := MozCanvas checker: (aBoundsInWindow corner max: 1@1).
 
-	canvas transform
-		translateBy: aBounds origin negated + (margin / 2.0);
+	aCanvas transform
+		push;
+		scaleBy: (self isAttachedToSceneGraph
+			ifTrue: [ self space windowScale ]
+			ifFalse: [ 1 ]);
 		apply.
 
-	self fullDrawOnSpartaCanvas: canvas.
+	aCanvas clip
+		by: aBoundsInSpace
+		during: [ self fullDrawOnSpartaCanvas: aCanvas ].
 
-	^ canvas asForm
+	aCanvas transform pop.
+
+	aFinalCanvas := MozCanvas extent: (aBoundsInWindow extent max: 1@1).
+	aFinalCanvas fill
+		path: aFinalCanvas bounds;
+		paint: (aCanvas paint surface
+			source: aCanvas;
+			translateBy: aBoundsInWindow origin negated);
+		draw.
+
+	^ aFinalCanvas asForm
