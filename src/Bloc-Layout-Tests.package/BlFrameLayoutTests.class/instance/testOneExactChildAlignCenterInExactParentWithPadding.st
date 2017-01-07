@@ -6,7 +6,7 @@ testOneExactChildAlignCenterInExactParentWithPadding
 	child constraints frame vertical alignCenter.
 	parent constraints padding: (BlInsets top: 10 right: 20 bottom: 30 left: 40).
 
-	parent extent: 400@300.
+	parent size: 400@300.
 	
 	parent addChild: child.
 

@@ -2,7 +2,7 @@ tests
 testOneChildMatchExactParent
 	| child |
 	child := self matchParent.
-	parent extent: 400@300.
+	parent size: 400@300.
 	
 	parent addChild: child.
 	

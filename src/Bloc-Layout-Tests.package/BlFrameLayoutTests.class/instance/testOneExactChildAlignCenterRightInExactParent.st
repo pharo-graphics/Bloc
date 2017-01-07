@@ -5,7 +5,7 @@ testOneExactChildAlignCenterRightInExactParent
 	child constraints frame horizontal alignRight.
 	child constraints frame vertical alignCenter.
 
-	parent extent: 400@300.
+	parent size: 400@300.
 	
 	parent addChild: child.
 

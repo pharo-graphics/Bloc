@@ -2,7 +2,7 @@ tests
 testOneChildMatchExactParentWithPadding
 	| child |
 	child := self matchParent.
-	parent extent: 400@300.
+	parent size: 400@300.
 	parent constraints padding: (BlInsets top: 10 right: 20 bottom: 30 left: 40).
 	
 	parent addChild: child.

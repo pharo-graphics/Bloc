@@ -5,7 +5,7 @@ testOneExactChildAlignTopLeftInExactParent
 	child constraints frame horizontal alignLeft.
 	child constraints frame vertical alignTop.
 
-	parent extent: 400@300.
+	parent size: 400@300.
 	
 	parent addChild: child.
 
