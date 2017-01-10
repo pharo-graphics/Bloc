@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testMouseMove
 	
 	self sendInsideTargetEvent: (BlMouseMoveEvent new button: BlMouseEvent primaryButton).

@@ -1,3 +1,3 @@
 accessing
-color: anObject
-	color := anObject
+color: aColor
+	color := aColor

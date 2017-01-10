@@ -1,3 +1,3 @@
 geometry bounds
 innerBounds
-	^ self insets inset: self geomBounds 
+	^ self insets inset: self geometryBounds 

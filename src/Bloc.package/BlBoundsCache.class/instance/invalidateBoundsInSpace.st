@@ -1,8 +1,11 @@
-as yet unclassified
+invalidation
 invalidateBoundsInSpace
-	boundsInSpace ifNil: [ ^ self ].
+
+	boundsInSpace
+		ifNil: [ ^ self ].
 
 	boundsInSpace := nil.
-	geomBoundsInSpace := nil.
-	
-	self owner children do: [ :c | c boundsCache invalidateBoundsInSpace ]
+	geometryBoundsInSpace := nil.
+
+	self owner children do: [ :anElement |
+		anElement boundsCache invalidateBoundsInSpace ]

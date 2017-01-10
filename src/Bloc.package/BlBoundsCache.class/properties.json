@@ -7,11 +7,11 @@
 	"commentStamp" : "",
 	"instvars" : [
 		"owner",
-		"txBounds",
 		"boundsInSpace",
-		"geomBoundsInSpace",
 		"boundsInLocal",
-		"geomBoundsInLocal" ],
+		"transformedBounds",
+		"geometryBounds",
+		"geometryBoundsInSpace" ],
 	"name" : "BlBoundsCache",
 	"pools" : [
 		 ],

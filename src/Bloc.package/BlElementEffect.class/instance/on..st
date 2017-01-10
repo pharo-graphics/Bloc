@@ -1,5 +1,5 @@
 initialization
-on: aNode
+on: anElement
 	self input 
-		ifNil: [ self input: aNode ] 
-		ifNotNil: [ :in | in on: aNode ]
+		ifNil: [ self input: anElement ] 
+		ifNotNil: [ :anInput | anInput on: anElement ]

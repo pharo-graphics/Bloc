@@ -19,9 +19,9 @@ testElAnyBounds
 	self assert: c2 globalPosition = (100 @ 100).
 	self assert: c1 globalPosition = (200 @ 200).
 	
-	self assert: g geomBoundsInSpace = ((0 @ 0) corner:(700@500)).
-	self assert: c2 geomBounds = ((0 @ 0) corner:(400@300)).
-	self assert: c1 geomBounds = ((0 @ 0) corner:(200@100)).
+	self assert: g geometryBoundsInSpace = ((0 @ 0) corner:(700@500)).
+	self assert: c2 geometryBounds = ((0 @ 0) corner:(400@300)).
+	self assert: c1 geometryBounds = ((0 @ 0) corner:(200@100)).
 	
 	self assert: g fxBounds = ((0 @ 0) corner:(700@500)).
 	self assert: c2 fxBounds = ((0 @ 0) corner:(400@300)).
@@ -39,8 +39,8 @@ testElAnyBounds
 	self assert: c2 txBounds = ((0 @ 0) corner:(400@300)).
 	self assert: c1 txBounds = ((0 @ 0) corner:(200@100)).
 	
-	self assert: g geomBoundsInSpace = ((0 @ 0) corner:(700@500)).
-	self assert: c2 geomBoundsInSpace = ((100 @ 100) corner:(500@400)).
-	self assert: c1 geomBoundsInSpace = ((200 @ 200) corner:(400@300)).
+	self assert: g geometryBoundsInSpace = ((0 @ 0) corner:(700@500)).
+	self assert: c2 geometryBoundsInSpace = ((100 @ 100) corner:(500@400)).
+	self assert: c1 geometryBoundsInSpace = ((200 @ 200) corner:(400@300)).
 	
 	

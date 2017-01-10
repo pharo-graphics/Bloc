@@ -18,7 +18,6 @@ exampleElementBounds
 		rootDo: [ :r | 
 			r
 				addChild: parent;
-				addChild: (self fxBoundsOf: el in: r);
 				addChild: (self txBoundsOf: el in: r);
 				addChild: (self geomBoundsOf: el in: r);
 				addChild: (self innerBoundsOf: el in: r) ];

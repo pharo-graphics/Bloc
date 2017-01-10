@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testDragCreation
 	self sendInsideTargetEvent: (BlMouseDownEvent new button: BlMouseEvent primaryButton).
 	self assertFiredEventIs: BlMouseDownEvent target: self child withPropagation: true.

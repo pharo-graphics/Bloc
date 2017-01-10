@@ -1,3 +1,3 @@
 geometry testing
 containsPoint: aPoint
-	^ self containsPoint: aPoint within: self geomBounds
+	^ self containsPoint: aPoint within: self geometryBounds

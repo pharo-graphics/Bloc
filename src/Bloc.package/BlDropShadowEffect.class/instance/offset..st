@@ -1,3 +1,3 @@
 accessing
-offset: anObject
-	offset := anObject asPoint
+offset: aPointOrNumber
+	offset := aPointOrNumber asPoint

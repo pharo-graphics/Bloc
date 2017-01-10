@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testDblClickCreation
 
 	self sendInsideTargetEvent: (BlMouseDownEvent new button: BlMouseEvent primaryButton).

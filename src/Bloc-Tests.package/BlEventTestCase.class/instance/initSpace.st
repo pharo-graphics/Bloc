@@ -1,4 +1,4 @@
-as yet unclassified
+initialization
 initSpace
 	space := BlSpace new extent: 200 @ 200.
 	space mouseProcessor: (BlTestMouseEventProcessor space: space).

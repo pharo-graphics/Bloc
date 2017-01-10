@@ -1,3 +1,3 @@
 geometry bounds
-geomBounds
+geometryBounds
 	^ self position extent: self extent

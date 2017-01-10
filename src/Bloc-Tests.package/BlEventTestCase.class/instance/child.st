@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 child
 	^ self space root children at: 1

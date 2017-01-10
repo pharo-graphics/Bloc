@@ -1,6 +1,6 @@
 geometry bounds
 geomBoundsInSpace: aSpartaRectangle
 	
-	self geomBounds: aSpartaRectangle.
+	self geometryBounds: aSpartaRectangle.
 	self localBoundsToGlobal: aSpartaRectangle.
 	^ aSpartaRectangle

@@ -15,7 +15,7 @@ initializeActions
 	brBtn addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt | ||
 					evt consumed: true.
 					self client size: (evt position - self client globalPosition).
-					self size: (self client geomBoundsInSpace extent + (10@10)).
+					self size: (self client geometryBoundsInSpace extent + (10@10)).
 					self updateActionsPosition.
 					]).
 				
@@ -30,7 +30,7 @@ initializeActions
 		| ptPos pivot theta a2 a1|
 		evt consumed: true.
 		ptPos := (evt position -15).
-		pivot := evt target geomBoundsInSpace origin.
+		pivot := evt target geometryBoundsInSpace origin.
 		a1 := (ptPos y - pivot y) arcTan: (ptPos x - pivot x).
 		a2 := (previousPos y - pivot y) arcTan: (previousPos x - pivot x).
 		theta := (a2 - a1).

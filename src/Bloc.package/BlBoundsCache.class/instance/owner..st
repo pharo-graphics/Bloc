@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 owner: anElement
 	owner := anElement

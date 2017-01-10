@@ -8,4 +8,4 @@ invalidate
 	self isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
 
-	self invalidRect: (self boundsInLocal: SpartaRectangle new)
+	self invalidRect: ((self effectBounds: SpartaRectangle new) merge: self boundsInLocal)

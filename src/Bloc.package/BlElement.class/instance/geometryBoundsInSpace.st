@@ -1,0 +1,3 @@
+geometry bounds
+geometryBoundsInSpace
+	^ boundsCache geometryBoundsInSpace

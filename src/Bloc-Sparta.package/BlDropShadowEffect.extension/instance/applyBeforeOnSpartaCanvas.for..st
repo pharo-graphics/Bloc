@@ -1,26 +1,27 @@
 *Bloc-Sparta
 applyBeforeOnSpartaCanvas: anSpartaCanvas for: anElement
-	|shadowCanvas|
-	shadowCanvas := anSpartaCanvas similar: anElement fxBounds extent.
-		
-	shadowCanvas transform
+	| aShadowCanvas anEffectBounds |
+
+	anEffectBounds := anElement effectBounds.
+	aShadowCanvas := anSpartaCanvas similar: anEffectBounds extent.
+
+	aShadowCanvas transform
 		push;
-		translateBy: ((self offset ) max: 0@0 );
+		translateBy: (self offset max: 0@0);
 		apply.	
-	shadowCanvas fill
-		paint: self color ;
-		path: (anElement pathCache geomPathOnSpartaCanvas: shadowCanvas);
+
+	aShadowCanvas fill
+		paint: self color;
+		path: (anElement pathCache geomPathOnSpartaCanvas: aShadowCanvas);
 		draw.
-		
+
 	anSpartaCanvas filter
-		area: anElement fxBounds;
-		type: (shadowCanvas gaussianBlurFilter
-			stdDeviation: ((self width/2) asFloat max: 0);
-			source: shadowCanvas surface);
-		drawOptions: (shadowCanvas drawOptions
-			alpha: 1);
+		area: anEffectBounds;
+		type: (aShadowCanvas gaussianBlurFilter
+			stdDeviation: (self width / 2.0 max: 0);
+			source: aShadowCanvas);
 		draw.
-		
-	shadowCanvas transform pop.
+
+	aShadowCanvas transform pop.
 	
 	

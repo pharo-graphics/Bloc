@@ -1,3 +1,4 @@
 geometry bounds
 fxBounds
-	^ self effect geomBounds 
+	self deprecated: 'Use #effectBounds'.
+	^ self effectBounds

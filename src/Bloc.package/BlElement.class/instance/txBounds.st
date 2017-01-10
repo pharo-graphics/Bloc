@@ -1,3 +1,5 @@
 geometry bounds
 txBounds
-	^ boundsCache txBounds 
+	self deprecated: 'Use #transformedBounds'.
+
+	^ self transformedBounds

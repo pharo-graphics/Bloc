@@ -4,4 +4,5 @@ initialize
 	mouseTransparent := false.
 	managed := true.
 	clipChildren := true.
-	userData := Dictionary new
+	userData := Dictionary new.
+	debug := false

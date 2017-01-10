@@ -23,10 +23,14 @@ fullDrawOnSpartaCanvas: aCanvas
 		apply.
 
 	aCanvas clip
-		push: self boundsInLocal.
+		push: self effectBounds.
 
 	[ self drawOnSpartaCanvas: aCanvas ] ensure: [
 		"We should pop clip and transform in reversed exact order,
 		otherwise backend transformation matrix may become broken"
 		aCanvas clip pop.
+
+		misc debug ifTrue: [
+			self drawDebugInfoOnSpartaCanvas: aCanvas ].
+
 		aCanvas transform pop ]

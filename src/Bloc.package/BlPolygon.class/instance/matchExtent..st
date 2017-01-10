@@ -1,4 +1,4 @@
 accessing
 matchExtent: anExtent
 	extent := anExtent.
-	self vertices: (self verticesForBounds: self geomBounds)
+	self vertices: (self verticesForBounds: self geometryBounds)

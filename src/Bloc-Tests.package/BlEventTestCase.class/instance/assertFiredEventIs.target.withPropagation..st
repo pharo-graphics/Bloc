@@ -1,4 +1,4 @@
-as yet unclassified
+asserting
 assertFiredEventIs: anEventClass target: aTarget withPropagation: aBoolean
 	| evt |
 	evt := self firedEvents removeFirst.

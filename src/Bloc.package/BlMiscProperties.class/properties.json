@@ -10,7 +10,8 @@
 		"clipChildren",
 		"focused",
 		"mouseTransparent",
-		"userData" ],
+		"userData",
+		"debug" ],
 	"name" : "BlMiscProperties",
 	"pools" : [
 		 ],
