@@ -1,3 +1,0 @@
-converting
-asBlBorderStroke
-	^ self

@@ -2,7 +2,7 @@ as yet unclassified
 initialize
 	super initialize.
 	self extent: 150 @ 100.
-	self border:(BlBorder color: Color black width:2).
+	self border:(BlBorder paint: Color black width: 2).
 		fpsShape := BlText new
 		text: 'test';
 		fill: Color black.

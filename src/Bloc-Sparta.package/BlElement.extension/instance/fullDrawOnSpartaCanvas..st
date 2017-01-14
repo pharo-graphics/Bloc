@@ -1,6 +1,6 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
-	| aBoundsInSpace |
+	| aBoundsInSpace aClippingBounds |
 
 	aBoundsInSpace := self boundsInSpace.
 
@@ -22,8 +22,10 @@ fullDrawOnSpartaCanvas: aCanvas
 		multiplyBy: self transform;
 		apply.
 
+	aClippingBounds := (self visualBounds: SpartaRectangle new on: aCanvas) merge: self effectBounds.
+	
 	aCanvas clip
-		push: self effectBounds.
+		push: aClippingBounds.
 
 	[ self drawOnSpartaCanvas: aCanvas ] ensure: [
 		"We should pop clip and transform in reversed exact order,

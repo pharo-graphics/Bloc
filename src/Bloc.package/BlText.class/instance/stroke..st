@@ -1,5 +1,5 @@
 accessing
 stroke: aStroke
-	stroke := aStroke asBlBorderStroke. 
+	stroke := aStroke.
 	self updateTextModelStroke.
 	self invalidate.

@@ -6,8 +6,8 @@ drawPathOnSpartaCanvas: aCanvas
 		aTransform apply.
 		
 		aCanvas stroke
-			paint: border stroke;
+			paint: border;
 			path: (self pathOnSpartaCanvas: aCanvas);
-			width: border stroke width;
+			width: border width;
 			draw ]
 	

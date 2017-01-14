@@ -1,15 +1,14 @@
 {
 	"category" : "Bloc-Paint-Support",
 	"classinstvars" : [
-		 ],
+		"empty" ],
 	"classvars" : [
-		"Empty" ],
-	"commentStamp" : "GlennCavarle 7/12/2016 19:21",
+		 ],
+	"commentStamp" : "AliakseiSyrel 1/14/2017 12:10",
 	"instvars" : [
-		"stroke",
-		"image",
-		"insets",
-		"outsets" ],
+		"paint",
+		"style",
+		"width" ],
 	"name" : "BlBorder",
 	"pools" : [
 		 ],

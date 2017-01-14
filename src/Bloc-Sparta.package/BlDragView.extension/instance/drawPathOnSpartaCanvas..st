@@ -3,8 +3,6 @@ drawPathOnSpartaCanvas: aCanvas
 	
 	
 	aCanvas transform during: [ :aTransform |
-		"all matrix modifications happen on image side"
-		border applyTransformOnSpartaTransform: aTransform extent: self extent.
 		"apply using ffi call once!"
 		aTransform apply.
 
@@ -19,8 +17,8 @@ drawPathOnSpartaCanvas: aCanvas
 			draw.
 
 		aCanvas stroke
-			paint: border stroke;
+			paint: border;
 			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
-			width: border stroke width;
+			width: border width;
 			draw ]
 	

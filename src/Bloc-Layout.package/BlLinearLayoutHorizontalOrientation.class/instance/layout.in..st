@@ -14,7 +14,7 @@ layout: anElement in: aRectangle
 		bottom := bottom max: child measuredHeight + (child outsets height max: 0) ].
 	
 	majorBounds := (left@top corner: right@bottom).
-	elementInnerBounds := anElement innerBounds.
+	elementInnerBounds := anElement padding inset: anElement boundsInLocal.
 	majorBounds = elementInnerBounds ifFalse: [
 		| translation |
 		translation := (self layout horizontalAlignment directed: self layout direction) translate: majorBounds in: elementInnerBounds.

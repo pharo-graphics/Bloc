@@ -1,3 +1,3 @@
-instance creation
+accessing
 empty
-	^ Empty ifNil: [ Empty := self color: Color transparent width: 0 ]
+	^ empty ifNil: [ empty := self paint: Color transparent width: 0 ]

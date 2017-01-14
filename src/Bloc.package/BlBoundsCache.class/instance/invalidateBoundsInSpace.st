@@ -1,9 +1,6 @@
 invalidation
 invalidateBoundsInSpace
 
-	boundsInSpace
-		ifNil: [ ^ self ].
-
 	boundsInSpace := nil.
 	geometryBoundsInSpace := nil.
 

@@ -1,3 +1,3 @@
 as yet unclassified
 defaultStroke
-	^ Color transparent asBlBorderStroke
+	^ BlBorder paint: Color transparent

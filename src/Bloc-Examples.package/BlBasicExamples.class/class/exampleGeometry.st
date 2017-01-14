@@ -14,12 +14,7 @@ exampleGeometry
 		addChild: (self newCircle position: 250 @ 200);
 		addChild: (self newSquare position: 400 @ 200);
 		addChild: (self newSvg position: 500 @ 200);
-		addChild: (self newLine);
-		addChild: ( BlText new
-		position:150@50;
-		fill: Color red;
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit').
-		"addChild: (self newImage position: 300 @ 300)"
+		addChild: (self newLine).
 	space root addEventHandler:
 			(BlEventHandler
 				on: BlDblClickEvent

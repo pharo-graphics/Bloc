@@ -1,1 +1,0 @@
-Only uniform stroke are available

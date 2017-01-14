@@ -8,8 +8,8 @@ initialize
 		background: Color transparent;
 		border:
 			(BlBorder
-				color: Color black
+				paint: Color black
 				width: 1
 				radius: 0
-				style: BlBorderStrokeStyle DOTTED);
+				style: BlStrokeStyle DOTTED);
 		yourself

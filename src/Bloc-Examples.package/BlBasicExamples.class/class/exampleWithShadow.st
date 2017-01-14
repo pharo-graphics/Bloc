@@ -5,10 +5,9 @@ exampleWithShadow
 	anElement := BlElement new
 		size: 100@50;
 		position: 200@150;
-		border: (BlBorder color: Color black width: 2 radius: 8);
+		border: (BlBorder paint: Color black width: 2);
 		background: Color red;
 		effect: (BlDropShadowEffect color: Color black width: 20 offset: 5@5);
-		scaleBy: 2;
 		yourself.
 
 	BlSpace new

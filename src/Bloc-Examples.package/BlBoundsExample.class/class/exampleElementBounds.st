@@ -19,6 +19,5 @@ exampleElementBounds
 			r
 				addChild: parent;
 				addChild: (self txBoundsOf: el in: r);
-				addChild: (self geomBoundsOf: el in: r);
-				addChild: (self innerBoundsOf: el in: r) ];
+				addChild: (self geomBoundsOf: el in: r) ];
 		show
