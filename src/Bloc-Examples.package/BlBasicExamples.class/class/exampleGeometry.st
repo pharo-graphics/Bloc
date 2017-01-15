@@ -2,7 +2,7 @@ shape examples
 exampleGeometry
 	| space |
 	space := BlSpace new
-		extent: 600 @ 450;
+		extent: 600 @ 550;
 		title: 'Shape example'.
 
 	space root

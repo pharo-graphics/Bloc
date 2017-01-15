@@ -1,4 +1,3 @@
 change report
-clearDirtyAreasFor: aStage
-	aStage dirtyAreas removeAll.
-	
+clearDirtyAreasFor: aSpace
+	aSpace dirtyAreas removeAll

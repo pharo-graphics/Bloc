@@ -10,7 +10,7 @@ example_2500El_in_1800x960
 					size: 50@50;
 					position: currentPosition;
 					background: Color random;
-					border: (BlBorder color:Color random width:2);
+					border: (BlBorder paint: Color random width: 2);
 					addEventHandler: (BlOnMouseOverHandler do:[:e| e target background: Color random]);
 					yourself.
 			sp root addChild:s

@@ -5,6 +5,6 @@ exampleSpaceRootIsAnElement
 	space
 		root:
 			(BlElement new
-				background: (BlBackground fill: Color red);
+				background: (BlBackground fill: Color blue);
 				yourself).
 	space show

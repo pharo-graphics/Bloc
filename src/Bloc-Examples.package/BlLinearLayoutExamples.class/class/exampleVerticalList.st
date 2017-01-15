@@ -7,21 +7,21 @@ exampleVerticalList
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
-		border: (BlBorder color: Color darkGray width: 4);
+		border: (BlBorder paint: Color darkGray width: 4);
 		background: Color red.
 	
 	e2 := BlElement new
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
-		border: (BlBorder color: Color black width: 4);
+		border: (BlBorder paint: Color black width: 4);
 		background: Color yellow.
 	
 	e3 := BlElement new
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
-		border: (BlBorder color: Color lightGray width: 4);
+		border: (BlBorder paint: Color lightGray width: 4);
 		background: Color green.
 	
 	el := BlElement new

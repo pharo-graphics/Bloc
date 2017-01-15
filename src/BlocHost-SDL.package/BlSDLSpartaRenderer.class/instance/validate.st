@@ -1,6 +1,6 @@
-as yet unclassified
+development support
 validate
 	self checkSession.
 	(texture isNil or: [ texture isNull ]) ifTrue: [ ^ false ].	
-	sdlSpace extent ~= textureExtent ifTrue: [ ^ false ].
+	sdlSpace rendererExtent ~= textureExtent ifTrue: [ ^ false ].
 	^ true

@@ -10,7 +10,7 @@ exampleText
 		constraintsDo: [ :c |
 			c horizontal exact: 200.
 			c vertical fitContent ];
-		border: (BlBorder color: Color blue width: 2);
+		border: (BlBorder paint: Color blue width: 2);
 		background: (BlBackground fill: Color green);
 		text: (SpText fromString: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sodales tempus porttitor. Donec ac lacus luctus, malesuada ligula in, gravida sapien. Sed varius nibh eget convallis accumsan').
 

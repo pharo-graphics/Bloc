@@ -1,4 +1,4 @@
-as yet unclassified
+private
 createSDLSurfaceWithExtent: extent
 	surfaceForm ifNotNil: [ surfaceForm destroySurface ].
 	sdlSurface := SDL2 createRGBSurfaceForCairoWidth: extent x height: extent y.

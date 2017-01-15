@@ -11,7 +11,7 @@ example_10800El10x10_inWin1200x900_mouseMove50ms
 					size: 10@10;
 					position: currentPosition;
 					background: Color random;
-					border: (BlBorder color:Color random width:1);
+					border: (BlBorder paint: Color random width: 1);
 					addEventHandler: (BlOnMouseOverHandler do:[:e| e target background: Color random]);
 					yourself.
 			space root addChild:s

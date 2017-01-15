@@ -11,7 +11,7 @@ example_3LevelsOf100El
 					size: 50@50;
 					position: currentPosition;
 					background: Color random;
-					border: (BlBorder color:Color random width:2);
+					border: (BlBorder paint: Color random width:2);
 					yourself.
 				space root addChild:s
   ]]].

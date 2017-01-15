@@ -7,7 +7,7 @@ example1
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
-		border: (BlBorder color: Color darkGray width: 4);
+		border: (BlBorder paint: Color darkGray width: 4);
 		background: Color yellow.
 	
 	e2 := BlElement new
@@ -15,7 +15,7 @@ example1
 		constraintsDo: [ :c |
 			c frame horizontal alignRight.
 			c frame vertical alignBottom ];
-		border: (BlBorder color: Color black width: 4);
+		border: (BlBorder paint: Color black width: 4);
 		background: Color green.
 	
 	e3 := BlElement new
@@ -23,7 +23,7 @@ example1
 		constraintsDo: [ :c|
 			c frame horizontal alignCenter.
 			c frame vertical alignCenter ];
-		border: (BlBorder color: Color lightGray width: 4);
+		border: (BlBorder paint: Color lightGray width: 4);
 		background: Color red.
 	
 	el := BlElement new

@@ -1,4 +1,4 @@
-as yet unclassified
+initialize
 destroy
 	sdlSpace := nil.
 	spartaCanvas := nil.

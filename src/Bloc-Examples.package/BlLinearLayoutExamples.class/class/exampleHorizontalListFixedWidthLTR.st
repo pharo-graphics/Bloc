@@ -3,21 +3,21 @@ exampleHorizontalListFixedWidthLTR
 	<example>
 	| e1 e2 e3 el space |
 	e1 := BlElement new
-		border: (BlBorder color: Color darkGray width: 4);
+		border: (BlBorder paint: Color darkGray width: 4);
 		constraintsDo: [ :c |
 			c horizontal exact: 80.
 			c vertical matchParent ];
 		background: Color red.
 
 	e2 := BlElement new
-		border: (BlBorder color: Color black width: 4);
+		border: (BlBorder paint: Color black width: 4);
 		constraintsDo: [ :c |
 			c horizontal exact: 80.
 			c vertical matchParent ];
 		background: Color green.
 	
 	e3 := BlElement new
-		border: (BlBorder color: Color lightGray width: 4);
+		border: (BlBorder paint: Color lightGray width: 4);
 		constraintsDo: [ :c |
 			c horizontal exact: 80.
 			c vertical matchParent ];

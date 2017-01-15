@@ -1,4 +1,4 @@
-as yet unclassified
+updating screen
 updateRectangle: aRectangle
 	| intersection pitchHolder externalForm |
 	self validate ifFalse: [ ^ self ].

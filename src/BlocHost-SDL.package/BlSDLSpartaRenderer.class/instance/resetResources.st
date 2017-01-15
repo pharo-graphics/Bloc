@@ -4,7 +4,7 @@ resetResources
 	self checkSession.
 
 	windowSize := self sdlSpace windowExtent.
-	extent := self sdlSpace extent.
+	extent := self sdlSpace rendererExtent.
 	scaleFactor := (extent / windowSize) asFloatPoint.
 	self createSDLSurfaceWithExtent: extent.
 	spartaCanvas := MozCanvas

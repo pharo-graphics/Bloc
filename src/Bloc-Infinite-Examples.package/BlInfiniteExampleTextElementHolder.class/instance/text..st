@@ -32,9 +32,11 @@ text: aSpText
 	theChildren := #().
 	theWords size > aSize ifTrue: [
 		theChildren := (1 to: theWords size - aSize) collect: [ :anIndex |
-			BlTextElement new
-				"background: ((anIndex % 2 = 0) ifTrue: [ Color gray ] ifFalse: [ Color lightGray ]);"
+			"BlTextElement new"
+			BlElement new
+				background: Color random;
 				constraintsDo: [ :c | 
+					c margin: (BlInsets top: 0 right: 3 bottom: 2 left: 0).
 					c horizontal fitContent.
 					c vertical fitContent ];
 			yourself ] ].
@@ -46,5 +48,5 @@ text: aSpText
 		(theManagedChildren at: anIndex)
 			managed: true;
 			visibility: BlVisibility visible;
-			"size: 50@20"
-			text: aText ]
+			size: 50@20
+			"text: aText" ]

@@ -1,4 +1,4 @@
-as yet unclassified
+drawing
 drawDuring: aBlock
 	self prepareForDrawing.
 	aBlock value: self spartaCanvas

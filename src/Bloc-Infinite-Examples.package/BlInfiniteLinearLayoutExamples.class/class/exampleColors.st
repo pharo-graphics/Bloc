@@ -4,7 +4,7 @@ exampleColors
 	space := BlSpace new
 		extent: 800 @ 650;
 		title: 'Infinite list example'.
-		
+
 	container := BlElement new
 		layout: BlLinearLayout horizontal;
 		constraintsDo: [ :c |

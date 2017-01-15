@@ -15,12 +15,17 @@ createSDLWindowFor: aSpace
 		ifTrue: [ flags := flags | SDL_WINDOW_BORDERLESS ].
 	
 	flags := flags | SDL_WINDOW_ALLOW_HIGHDPI.
+		
+	SDL2 glSetAttribute: SDL_GL_RED_SIZE value: 8.
+	SDL2 glSetAttribute: SDL_GL_BLUE_SIZE value: 8.
+	SDL2 glSetAttribute: SDL_GL_GREEN_SIZE value: 8.
+	SDL2 glSetAttribute: SDL_GL_ALPHA_SIZE value: 8.
+	SDL2 glSetAttribute: SDL_GL_DEPTH_SIZE value: 0.
+	SDL2 glSetAttribute: SDL_GL_STENCIL_SIZE value: 8.
+	SDL2 glSetAttribute: SDL_GL_DOUBLEBUFFER value: 1.
+	SDL2 glSetAttribute: SDL_GL_ACCELERATED_VISUAL value: 1.
 	
-	" Set the OpenGL attributes."
-	"glAttributes := self glAttributes.
-	glAttributes ifNotNil: [ 
-		flags := flags | SDL_WINDOW_OPENGL.
-		self setGLAttributes: glAttributes ]."
+	flags := flags | SDL_WINDOW_OPENGL.
 	
 	"Get the actual initial position value."
 	x := aSpace position x.

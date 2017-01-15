@@ -10,8 +10,12 @@ createHostSpaceFor: aSpace
 	aWindow := self createSDLWindowFor: aSpace.
 
 	aHostSpace := BlSDLSpace new 
-		sdlWindow: aWindow;
-		withSpartaRendereer.
+		sdlWindow: aWindow.
+		
+	SkiaCanvas isSupported
+		"Use OpenGL if available"
+		ifTrue: [ aHostSpace withSkiaRendereer ]
+		ifFalse: [ aHostSpace withSpartaRendereer ].
 
 	self registerHostSpace: aHostSpace.
 	aSpace hostSpace: aHostSpace

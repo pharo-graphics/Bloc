@@ -1,4 +1,4 @@
-as yet unclassified
+rendering
 present
 	self validate ifFalse: [ ^ self ].
 	sdlRenderer

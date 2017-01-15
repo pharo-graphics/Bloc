@@ -1,4 +1,4 @@
-as yet unclassified
+instance creation
 for: anSDLSpace
 	^ self new
 		sdlSpace: anSDLSpace;

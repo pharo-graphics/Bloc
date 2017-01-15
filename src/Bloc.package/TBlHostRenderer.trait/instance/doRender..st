@@ -1,3 +1,3 @@
 rendering
-doRender: aNode
+doRender: aSpace
 	^ self subclassResponsibility

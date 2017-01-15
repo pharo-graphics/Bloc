@@ -1,4 +1,4 @@
-as yet unclassified
+updating screen
 updateRectangles: allDamage
 	| pitchHolder externalForm intersection |
 	self validate
@@ -15,7 +15,7 @@ updateRectangles: allDamage
 		externalForm := ExternalForm extent: textureExtent depth: 32 bits: pixels.
 		allDamage do: [ :rectangle |
 			intersection := rectangle
-				intersect: (0 @ 0 corner: sdlSpace extent)
+				intersect: (0 @ 0 corner: sdlSpace rendererExtent)
 				ifNone: [ nil ].
 		
 			intersection ifNotNil: [

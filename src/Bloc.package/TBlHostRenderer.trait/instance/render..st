@@ -1,6 +1,6 @@
 rendering
-render: aStage
-	self dirtyAreas: aStage dirtyAreas.
+render: aSpace
+	self dirtyAreas: aSpace dirtyAreas.
 	self renderNeeded
 	   ifTrue: [
-			self doRender:aStage ]
+			self doRender: aSpace ]

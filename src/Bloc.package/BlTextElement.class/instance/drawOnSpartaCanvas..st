@@ -2,7 +2,7 @@ drawing
 drawOnSpartaCanvas: aCanvas
 	| aRenderer |
 	super drawOnSpartaCanvas: aCanvas.
-
+	
 	"Text layout is not yet measured, nothing to render"
 	textLayout
 		ifNil: [ ^ self ].

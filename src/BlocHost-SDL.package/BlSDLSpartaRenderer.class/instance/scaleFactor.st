@@ -1,4 +1,4 @@
 accessing
 scaleFactor
 	^ scaleFactor ifNil: [
-		(self sdlSpace extent / self sdlSpace windowExtent) asFloatPoint ]
+		(self sdlSpace rendererExtent / self sdlSpace windowExtent) asFloatPoint ]

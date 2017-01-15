@@ -1,4 +1,4 @@
-as yet unclassified
+drawing
 prepareForDrawing
-	textureExtent ~= sdlSpace extent
+	self hasResized
 		ifTrue: [ self resized ]
