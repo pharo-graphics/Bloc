@@ -53,6 +53,9 @@ before_install:
       
       echo "Installing libssl1.0.0...";
       sudo apt-get install libssl1.0.0:i386;
+      
+      echo "Installing libGL...";
+      sudo apt-get install libglu1-mesa:i386;
     fi
 
 
