@@ -44,7 +44,7 @@ onMeasure: anExtentMeasurementSpec
 	textLayout := self defaultTextLayout.
 	textLayout rope: text rope properties: aProperties.
 
-	textLayout initializeOn: self defaultOffscreenCanvas.
+	textLayout measureOn: self defaultOffscreenCanvas.
 	"text layout is measured at this point"
 
 	aMeasuredWidth := textLayout width.

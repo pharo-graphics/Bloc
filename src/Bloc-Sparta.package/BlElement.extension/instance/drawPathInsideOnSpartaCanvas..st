@@ -1,19 +1,29 @@
 *Bloc-Sparta
 drawPathInsideOnSpartaCanvas: aCanvas
 	"I draw border inside"
-
-	aCanvas layer
-		push.
+	| isBackgroundTransparent isBorderTransparent areBothTransparent areBothVisible |
+	
+	isBackgroundTransparent := background isTransparent.
+	isBorderTransparent := border isTransparent.
+	areBothTransparent := isBackgroundTransparent and: [ isBorderTransparent ].
+	areBothVisible := (isBackgroundTransparent or: [ isBorderTransparent ]) not.
+	
+	areBothTransparent
+		ifTrue: [ ^ self ].
+	
+	areBothVisible
+		"We create a new virtual layer in order to blend only if background and border visible"
+		ifTrue: [ aCanvas layer push ].
 
 	"If background is transparent there is no need to render it"
-	background isTransparent
+	isBackgroundTransparent
 		ifFalse: [ aCanvas fill
 				paint: background fill;
 				path: (pathCache geomPathOnSpartaCanvas: aCanvas);
 				draw ].
 	
 	"If border is transparent there is no need to render it"
-	border isTransparent
+	isBorderTransparent
 		ifFalse: [ aCanvas clip by: (pathCache geomPathOnSpartaCanvas: aCanvas) during: [
 			"remove background where we will stroke"
 			aCanvas stroke
@@ -28,5 +38,7 @@ drawPathInsideOnSpartaCanvas: aCanvas
 				width: border width * 2.0;
 				path: (pathCache geomPathOnSpartaCanvas: aCanvas);
 				draw ] ].
-
-	aCanvas layer pop
+		
+	areBothVisible
+		"We created a virtual layer only if background and border visible"
+		ifTrue: [ aCanvas layer pop ]
