@@ -32,6 +32,15 @@ These scripts download the latest Pharo 60 Image + the stable Pharo VM for 60 an
 
 **More detailed installation guide is described [here](INSTALL.md)**
 
+## Ubuntu 64bit
+
+In order to run Bloc on top of 32bit Pharo on 64bit machine you have to install 32bit compatibility packages:
+
+    sudo dpkg --add-architecture i386
+    sudo apt-get update
+    sudo apt-get install libstdc++6:i386 libx11-6:i386 libglu1-mesa:i386 libfontconfig1:i386 libssl1.0.0:i386
+    sudo apt-get install libgtk2.0-0:i386 libgtk-3-0:i386
+
 ## Windows
 
 Sparta/Moz2D graphics API requires Visual C++ Redistributable for Visual Studio 2015:<br>
