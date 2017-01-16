@@ -1,9 +1,9 @@
 *Bloc-Sparta
-applyBeforeOnSpartaCanvas: anSpartaCanvas for: anElement
+applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement
 	| aShadowCanvas anEffectBounds |
 
 	anEffectBounds := anElement effectBounds.
-	aShadowCanvas := anSpartaCanvas similar: anEffectBounds extent.
+	aShadowCanvas := aSpartaCanvas similar: anEffectBounds extent.
 
 	aShadowCanvas transform
 		push;
@@ -15,7 +15,7 @@ applyBeforeOnSpartaCanvas: anSpartaCanvas for: anElement
 		path: (anElement pathCache geomPathOnSpartaCanvas: aShadowCanvas);
 		draw.
 
-	anSpartaCanvas filter
+	aSpartaCanvas filter
 		area: anEffectBounds;
 		type: (aShadowCanvas gaussianBlurFilter
 			stdDeviation: (self width / 2.0 max: 0);

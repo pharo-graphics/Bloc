@@ -16,5 +16,5 @@ validateHolder: aHolder controller: aRecyclerController
 			ifFalse: [ ^ false ] ].
 
 	^ aRecyclerController hasStableIds
-		ifTrue: [ aHolder itemId = aRecyclerController itemIdAt: aHolder position ]
+		ifTrue: [ aHolder itemId = (aRecyclerController itemIdAt: aHolder position) ]
 		ifFalse: [ true ]

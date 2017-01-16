@@ -1,6 +1,6 @@
 examples
 exampleText
-	| space list container controls  smoothScrollBy smoothScrollByNegated |
+	| space list container |
 	space := BlSpace new
 		extent: 800 @ 650;
 		title: 'Infinite list example'.
@@ -12,35 +12,13 @@ exampleText
 			c vertical matchParent ];
 		yourself.	
 	
-	controls := BlElement new
-		layout: (BlGridLayout vertical cellSpacing: 5);
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself.	
-	
 	list := BlInfiniteExampleTextListElement new
 		constraintsDo: [ :c |
 			c horizontal exact: 400.
 			c vertical matchParent ];
 		yourself.
-		
-	smoothScrollBy := BlInfiniteExampleControlElement new
-		label: 'Smooth down';
-		background: Color veryLightGray;
-		extent: 200@40;
-		addEventHandlerOn: BlClickEvent do: [ list smoothScrollBy: 0@400 ];
-		yourself.
-		
-	smoothScrollByNegated := BlInfiniteExampleControlElement new
-		label: 'Smooth up';
-		background: Color veryLightGray;
-		extent: 200@40;
-		addEventHandlerOn: BlClickEvent do: [ list smoothScrollBy: 0@400 negated ];
-		yourself.
 
-	controls addChildren: { smoothScrollByNegated . smoothScrollBy }.
-	container addChildren: { list ." controls" }.
+	container addChildren: { list }.
 	space root addChild: container.
 	space root addEventHandler:
 			(BlEventHandler

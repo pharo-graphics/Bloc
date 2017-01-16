@@ -1,2 +1,2 @@
 *Bloc-Sparta
-applyAfterOnSpartaCanvas: anSpartaCanvas for: anElement
+applyAfterOnSpartaCanvas: aSpartaCanvas for: anElement

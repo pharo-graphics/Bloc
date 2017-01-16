@@ -1,0 +1,3 @@
+initialization
+defaultWidth
+	^ 500

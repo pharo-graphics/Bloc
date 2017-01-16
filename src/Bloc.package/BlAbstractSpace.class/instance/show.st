@@ -4,4 +4,8 @@ show
 
 	"delegate showing work to the Universe"
 	BlUniverse default showSpaceWindow: self.
+	
+	"Notify root element that it is now visible to the user"
+	root dispatchAddedToSceneGraph.
+	
 	self requestNextPulse.

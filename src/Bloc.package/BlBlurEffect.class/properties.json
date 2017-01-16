@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Effect",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"radius" ],
+	"name" : "BlBlurEffect",
+	"pools" : [
+		 ],
+	"super" : "BlElementEffect",
+	"type" : "normal" }

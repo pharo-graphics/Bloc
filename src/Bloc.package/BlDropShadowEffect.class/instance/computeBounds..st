@@ -1,4 +1,4 @@
-effect
+geometry
 computeBounds: aSpartaRectangle
 	| aLeft aTop aRight aBottom |
 
