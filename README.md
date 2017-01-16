@@ -34,7 +34,7 @@ These scripts download the latest Pharo 60 Image + the stable Pharo VM for 60 an
 
 ## Windows
 
-Sparta/Moz2D graphics API requires Visual C++ Redistributable for Visual Studio 2015:
+Sparta/Moz2D graphics API requires Visual C++ Redistributable for Visual Studio 2015:<br>
 https://www.microsoft.com/en-US/download/details.aspx?id=48145
 
 ## Contributing
