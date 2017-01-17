@@ -55,8 +55,8 @@ exampleGallery
 	space root background: Color veryVeryDarkGray.
 	space root layout: BlLinearLayout horizontal.
 	space root layout weightSum: 1.
-	space root addEventHandler:
+"	space root addEventHandler:
 			(BlEventHandler
 				on: BlDblClickEvent
-				do: [ :evt | BlElementSelection on: evt target ]).
+				do: [ :evt | BlElementSelection on: evt target ])."
 	space show

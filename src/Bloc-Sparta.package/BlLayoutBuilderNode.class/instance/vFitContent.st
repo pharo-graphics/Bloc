@@ -1,2 +1,0 @@
-resizing
-vFitContent

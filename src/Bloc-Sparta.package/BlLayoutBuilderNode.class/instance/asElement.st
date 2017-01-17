@@ -1,3 +1,0 @@
-converting
-asElement
-	^ self subclassResponsibility
