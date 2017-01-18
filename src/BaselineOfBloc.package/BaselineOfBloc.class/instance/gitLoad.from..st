@@ -1,4 +1,4 @@
-loading - git
+private
 gitLoad: aBaselineName from: aRepositoryName
 	"I load a baseline defined by aBaselineName using Iceberg from provided git repository.
 	I exract target group (core / development) from baseline specification of a spec loader"

@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Effect",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlOverlayAboveEffect",
+	"pools" : [
+		 ],
+	"super" : "BlOverlayEffect",
+	"type" : "normal" }

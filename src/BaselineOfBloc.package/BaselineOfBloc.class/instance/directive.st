@@ -1,4 +1,4 @@
-accessing
+private
 directive
 	"Return current group's directive as symbol.
 	For example if group is #'git:development' I return #'git' "

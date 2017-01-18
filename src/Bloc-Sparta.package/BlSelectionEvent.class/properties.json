@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Sparta-Text",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"area" ],
+	"name" : "BlSelectionEvent",
+	"pools" : [
+		 ],
+	"super" : "BlMouseEvent",
+	"type" : "normal" }

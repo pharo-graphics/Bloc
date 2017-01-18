@@ -1,4 +1,6 @@
 event managing
 dispatchEvent: anEvent
-	self handlers size = 0 ifTrue:[^ self].
-	(self handlers select: [ :h | h wantsEvent: anEvent ]) do: [ :h | h handleEvent: anEvent ]
+	self handlers ifEmpty: [ ^ self ].
+	self handlers
+		select: [ :h | h wantsEvent: anEvent ]
+		thenDo: [ :h | h handleEvent: anEvent ]

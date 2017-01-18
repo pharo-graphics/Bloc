@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Sparta-Text",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlElementSelectionExample",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

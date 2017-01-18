@@ -1,8 +1,8 @@
-loading - git
+private
 icebergLoad: thePackages from: aRepositoryUrl
 	| aRepository |
 
-	self ensureIceberg.
+	self class ensureIceberg.
 
 	aRepository := ((Smalltalk classNamed: #Iceberg) mcRepositoryFor: aRepositoryUrl) repository.
 	aRepository checkoutBranch: self gitBranch.

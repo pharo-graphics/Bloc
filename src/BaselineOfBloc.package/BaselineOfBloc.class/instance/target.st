@@ -1,4 +1,4 @@
-accessing
+private
 target
 	"Return current group's target as symbol.
 	For example if group is #'git:development' I return #'development'"

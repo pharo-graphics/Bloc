@@ -1,4 +1,4 @@
-testing
+private
 hasDirective
 	"Return true if there is a special directive defined by group prefix.
 	For example if group is 'git:development', then directive is 'git' and I return true.

@@ -1,4 +1,5 @@
 initialization
 initialize
 	super initialize.
-	modifiers := BlKeyModifiers new.
+	
+	paint := Color transparent

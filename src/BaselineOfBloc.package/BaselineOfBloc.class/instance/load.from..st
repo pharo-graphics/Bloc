@@ -1,4 +1,4 @@
-loading
+private
 load: aBaselineName from: aRepository
 	"I choose appropriate loading method for a baseline from repository
 	depending on requested directive"
