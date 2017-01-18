@@ -33,6 +33,9 @@ baseline: spec
 			package: #'Bloc-Extension' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Layout' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Layout-Tests' with: [ spec requires: #(#'Bloc-Layout' ). ];
+			package: #'Bloc-Infinite' with: [ spec requires: #(#'Bloc' ). ];
+			package: #'Bloc-Infinite-Layouts' with: [ spec requires: #(#'Bloc' ). ];
+			package: #'Bloc-Infinite-Examples' with: [ spec requires: #(#'Bloc' ). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'Bloc-Sparta' with: [ spec requires: #(#Bloc #Sparta). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
@@ -44,7 +47,7 @@ baseline: spec
 			group: 'file:core' 
 				with: #( 'BlocHost-SDL' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' );
 			group: 'file:development' with: #('file:core' 'Bloc-Tests' 'Bloc-Layout-Tests');
-			
+
 			"groups with sources and plugin installation"
 			group: 'core' with: #('file:core');
 			group: 'development' with: #('file:development');
