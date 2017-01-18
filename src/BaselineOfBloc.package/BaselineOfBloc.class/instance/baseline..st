@@ -45,7 +45,7 @@ baseline: spec
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 			"groups with only sources"
 			group: 'file:core' 
-				with: #( 'BlocHost-SDL' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' );
+				with: #( 'BlocHost-SDL' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' 'Bloc-Infinite' 'Bloc-Infinite-Layouts' 'Bloc-Infinite-Examples');
 			group: 'file:development' with: #('file:core' 'Bloc-Tests' 'Bloc-Layout-Tests');
 
 			"groups with sources and plugin installation"
