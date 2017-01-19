@@ -12,9 +12,10 @@
 		"hostSpace",
 		"spartaCanvas",
 		"session",
-		"textureExtent",
 		"cairoContext",
-		"cairoSurface" ],
+		"cairoSurface",
+		"extent",
+		"scaleFactor" ],
 	"name" : "BlGtkSpartaRenderer",
 	"pools" : [
 		 ],

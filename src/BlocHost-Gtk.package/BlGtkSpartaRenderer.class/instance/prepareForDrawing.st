@@ -1,3 +1,4 @@
 initialization
 prepareForDrawing
-	 self resetResources
+	 self hasResized
+		ifTrue: [ self resized ].

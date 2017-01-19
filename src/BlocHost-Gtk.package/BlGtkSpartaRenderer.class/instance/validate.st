@@ -1,5 +1,5 @@
 initialization
 validate
 	self checkSession.
-	hostSpace extent ~= textureExtent ifTrue: [ ^ false ].
+	hostSpace windowExtent ~= extent ifTrue: [ ^ false ].
 	^ true
