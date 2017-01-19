@@ -6,7 +6,7 @@ start
 		description: [ 'Gtk host must not be running!' ].
 
 	hostSpaces := Dictionary new. "(windowId -> BlGtkSpace)"
-	eventHandler := BlSDLEventHandler new.
+	eventHandler := BlGtkEventHandler new.
 	Gtk primInit.
 	self setupEventLoop.
 	isRunning := true.

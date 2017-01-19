@@ -9,7 +9,8 @@
 	"instvars" : [
 		"eventQueue",
 		"hostWindow",
-		"renderer" ],
+		"renderer",
+		"windowID" ],
 	"name" : "BlGtkSpace",
 	"pools" : [
 		 ],

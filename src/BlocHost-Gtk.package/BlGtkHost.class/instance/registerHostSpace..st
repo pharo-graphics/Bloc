@@ -1,6 +1,6 @@
 private- host space
 registerHostSpace: anHostSpace
-	
+
 	self
 		assert: [ anHostSpace isNotNil ]
 		description: [ 'Host space must not be nil' ].

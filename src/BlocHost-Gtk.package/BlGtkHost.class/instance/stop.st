@@ -7,10 +7,10 @@ stop
 	
 	self
 		assert: [ self isRunning ]
-		description: [ 'SDL host must be running in order to be stopped' ].
+		description: [ 'Gtk host must be running in order to be stopped' ].
 
 	self stopEventLoop.
-	Gtk quit.
+	Gtk primMainQuit.
 	
 	hostSpaces := nil.
 	eventHandler := nil.
