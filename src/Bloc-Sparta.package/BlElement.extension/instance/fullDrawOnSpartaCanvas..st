@@ -1,18 +1,15 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
-	| aBoundsInSpace aClippingBounds |
-
-	aBoundsInSpace := self boundsInSpace.
-
+	| aClippingBounds anEffectBounds |
+	
+	anEffectBounds := self effectBounds: SpartaRectangle new.
 	"No need to render elements smaller than half of a pixel"
-	(aBoundsInSpace width min: aBoundsInSpace height) < 1 ifTrue: [ ^ self ].
+	(anEffectBounds width min: anEffectBounds height) < 1
+		ifTrue: [ ^ self ].
 
-	self isAttachedToSceneGraph
-		ifTrue: [ (aCanvas clip containsGlobal: aBoundsInSpace scaledBy: self space windowScale)
-			ifFalse: [ ^ self ]. ]
-		ifFalse: [ (aCanvas clip containsGlobal: aBoundsInSpace)
-			ifFalse: [ ^ self ] ].
-		
+	(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
+		ifFalse: [ ^ self ].
+
 	self isVisible
 		ifFalse: [ ^ self ].
 
@@ -22,8 +19,8 @@ fullDrawOnSpartaCanvas: aCanvas
 		multiplyBy: self transform;
 		apply.
 
-	aClippingBounds := (self visualBounds: SpartaRectangle new on: aCanvas) merge: self effectBounds.
-	
+	aClippingBounds := (self visualBounds: SpartaRectangle new on: aCanvas) merge: anEffectBounds.
+
 	aCanvas clip
 		push: aClippingBounds.
 

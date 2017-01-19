@@ -1,4 +1,9 @@
 change management
 removeChangeListener: aListener
-	"Remove the argument from the list of listeners, if it was not there do nothing."
-	changeListeners remove: aListener ifAbsent: [ nil ]
+	"Remove the argument from the list of listeners"
+
+	self
+		assert: [ (changeListeners includes: aListener) ]
+		description: [ 'Listener must exist!' ].
+	
+	changeListeners := changeListeners copyWithout: aListener
