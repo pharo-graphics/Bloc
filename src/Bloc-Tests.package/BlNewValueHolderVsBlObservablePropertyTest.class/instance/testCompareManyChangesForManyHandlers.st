@@ -1,8 +1,8 @@
-as yet unclassified
+tests
 testCompareManyChangesForManyHandlers
  |vh prop t1 t2 c1 c2 counter|
 	c1 := c2 := 0.
-	counter := 2000.
+	counter := 5000.
 	vh := NewValueHolder new.
 	prop := BlObjectProperty new.
 	

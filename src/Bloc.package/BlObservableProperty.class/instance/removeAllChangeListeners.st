@@ -1,3 +1,3 @@
 change management
 removeAllChangeListeners
-	changeListeners removeAll
+	changeListeners := #()

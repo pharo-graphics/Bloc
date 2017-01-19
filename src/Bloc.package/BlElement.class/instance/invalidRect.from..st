@@ -3,6 +3,7 @@ invalidRect: aSpartaRectangle from: anElement
 	"Translate dirty reports from an Element.
 	A rectangle is given in my own coordinates"
 
+	"we are guarding owerselves from unnecessary computations of rectangle transformation"
 	self isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
 

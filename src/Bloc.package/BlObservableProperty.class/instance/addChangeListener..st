@@ -1,3 +1,8 @@
 change management
 addChangeListener: aListener
-	changeListeners add: aListener
+
+	self
+		assert: [ (changeListeners includes: aListener) not ]
+		description: [ 'Listener must not be already added!' ].
+
+	changeListeners := changeListeners copyWith: aListener
