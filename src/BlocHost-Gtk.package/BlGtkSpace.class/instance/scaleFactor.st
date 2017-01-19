@@ -1,3 +1,3 @@
 accessing
 scaleFactor
-	^ hostWindow  primGetScaleFactor
+	^ hostWindow  primGetScaleFactor asPoint

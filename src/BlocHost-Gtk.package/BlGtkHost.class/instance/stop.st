@@ -3,7 +3,7 @@ stop
 	
 	self
 		assert: [ hostSpaces isNotNil and: [ hostSpaces isEmpty ] ]
-		description: [ 'Can not stop SDL host with registered spaces!' ].
+		description: [ 'Can not stop Gtk host with registered spaces!' ].
 	
 	self
 		assert: [ self isRunning ]
