@@ -1,6 +1,9 @@
 event managing
 dispatchEvent: anEvent
-	self handlers ifEmpty: [ ^ self ].
-	self handlers
-		select: [ :h | h wantsEvent: anEvent ]
-		thenDo: [ :h | h handleEvent: anEvent ]
+	"inlined version of select:thenDo:"
+
+	| theHandlers |
+	theHandlers := self handlers.
+	1 to: theHandlers size do: [ :index | | each |
+		((each := theHandlers at: index) wantsEvent: anEvent)
+			ifTrue: [ each handleEvent: anEvent ] ]
