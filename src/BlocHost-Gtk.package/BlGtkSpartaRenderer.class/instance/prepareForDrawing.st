@@ -1,0 +1,3 @@
+initialization
+prepareForDrawing
+	 self resetResources

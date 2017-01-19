@@ -1,0 +1,18 @@
+{
+	"category" : "BlocHost-Gtk",
+	"classinstvars" : [
+		 ],
+	"classtraitcomposition" : "TBlHostSpace classTrait",
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"eventQueue",
+		"hostWindow",
+		"renderer" ],
+	"name" : "BlGtkSpace",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"traitcomposition" : "TBlHostSpace",
+	"type" : "normal" }

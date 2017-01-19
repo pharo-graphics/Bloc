@@ -1,0 +1,3 @@
+accessing
+maximized
+	^ hostWindow primIsMaximized 

@@ -1,0 +1,3 @@
+initialization
+spartaCanvas
+	^ spartaCanvas

@@ -1,0 +1,3 @@
+displaying
+minimize
+	hostWindow primIconify

@@ -1,0 +1,23 @@
+{
+	"category" : "BlocHost-Gtk",
+	"classinstvars" : [
+		 ],
+	"classtraitcomposition" : "TBlHostRenderer classTrait",
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"dirtyAreas",
+		"presentNeeded",
+		"hostSpace",
+		"spartaCanvas",
+		"session",
+		"textureExtent",
+		"cairoContext",
+		"cairoSurface" ],
+	"name" : "BlGtkSpartaRenderer",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"traitcomposition" : "TBlHostRenderer",
+	"type" : "normal" }

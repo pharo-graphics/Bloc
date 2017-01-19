@@ -1,0 +1,3 @@
+accessing
+hostWindow
+	^ hostWindow 

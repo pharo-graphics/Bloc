@@ -1,0 +1,3 @@
+accessing
+visitExposeEvent: aGdkEvent
+	 ^ nil

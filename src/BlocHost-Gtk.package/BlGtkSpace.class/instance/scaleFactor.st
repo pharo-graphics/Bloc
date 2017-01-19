@@ -1,0 +1,3 @@
+accessing
+scaleFactor
+	^ hostWindow  primGetScaleFactor

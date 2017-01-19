@@ -1,0 +1,3 @@
+accessing
+minimized
+	^ self shouldBeImplemented

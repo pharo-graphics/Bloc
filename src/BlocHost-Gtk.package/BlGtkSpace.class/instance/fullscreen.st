@@ -1,0 +1,3 @@
+accessing
+fullscreen
+	self shouldBeImplemented 

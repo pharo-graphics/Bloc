@@ -1,0 +1,3 @@
+displaying
+maximize
+	hostWindow primMaximize

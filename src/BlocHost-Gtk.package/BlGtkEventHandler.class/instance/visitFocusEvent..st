@@ -1,0 +1,3 @@
+accessing
+visitFocusEvent: aGdkEvent
+	 ^ nil

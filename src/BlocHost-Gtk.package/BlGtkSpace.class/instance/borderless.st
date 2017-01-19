@@ -1,0 +1,3 @@
+accessing
+borderless
+	^ hostWindow primGetDecorated

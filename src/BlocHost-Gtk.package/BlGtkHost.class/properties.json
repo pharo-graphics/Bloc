@@ -1,0 +1,16 @@
+{
+	"category" : "BlocHost-Gtk",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"EventLoopProcess" ],
+	"commentStamp" : "",
+	"instvars" : [
+		"hostSpaces",
+		"eventHandler",
+		"isRunning" ],
+	"name" : "BlGtkHost",
+	"pools" : [
+		 ],
+	"super" : "BlHost",
+	"type" : "normal" }

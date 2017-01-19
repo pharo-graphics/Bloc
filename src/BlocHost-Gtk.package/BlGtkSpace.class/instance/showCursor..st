@@ -1,0 +1,2 @@
+cursor managing
+showCursor: aBoolean

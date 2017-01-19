@@ -1,0 +1,14 @@
+{
+	"category" : "BlocHost-Gtk",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"hostSpace" ],
+	"name" : "BlGtkEventHandler",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
