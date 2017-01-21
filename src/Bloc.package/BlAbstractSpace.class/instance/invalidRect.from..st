@@ -3,7 +3,7 @@ invalidRect: aSpartaRectangle from: anElement
 
 	aSpartaRectangle expanded.
 	self dirtyAreas
-		ifEmpty: [ self dirtyAreas add: aSpartaRectangle asRectangle ]
-		ifNotEmpty: [ :aCollection | aCollection at: 1 put: (aSpartaRectangle merge: aCollection first) asRectangle ].
+		ifEmpty: [ self dirtyAreas add: aSpartaRectangle copy ]
+		ifNotEmpty: [ :aCollection | aCollection first merge: aSpartaRectangle ].
 
 	self requestNextPulse

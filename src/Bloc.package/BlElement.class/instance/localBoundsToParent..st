@@ -6,7 +6,7 @@ localBoundsToParent: aSpartaRectangle
 	immutable one that can be safely stored as instance variable."
 	<return: #SpartaRectangle>
 
-	"first apply transformation"
+	"first apply transformation if we have one"
 	transform transformRectangle: aSpartaRectangle.
 
 	"then translate according to my position within the parent.

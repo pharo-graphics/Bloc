@@ -1,4 +1,5 @@
 enumerating
-do: aBlock 
-	self handlers size = 0 ifTrue:[^ self].
-	self handlers do: aBlock
+do: aBlock
+	"Evaluate aBlock with each registered handler as the argument"
+	
+	handlers do: aBlock

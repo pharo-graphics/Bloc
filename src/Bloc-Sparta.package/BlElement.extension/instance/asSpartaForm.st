@@ -1,7 +1,6 @@
 *Bloc-Sparta
 asSpartaForm
-	| aCanvas aFinalCanvas margin aBoundsInWindow aBoundsInSpace |
-	margin := 0.
+	| aCanvas aFinalCanvas aBoundsInWindow aBoundsInSpace |
 
 	aBoundsInWindow := self boundsInWindow.
 	aBoundsInSpace := self boundsInSpace.

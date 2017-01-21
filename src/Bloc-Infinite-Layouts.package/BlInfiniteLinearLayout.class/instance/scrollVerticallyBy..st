@@ -5,5 +5,5 @@ scrollVerticallyBy: aNumber
 	
 	self orientation isHorizontal
 		ifTrue: [ ^ 0 ].
-		
+
 	^ self scrollBy: aNumber

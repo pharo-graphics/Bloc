@@ -1,7 +1,7 @@
 {
 	"category" : "Bloc-Basic",
 	"classinstvars" : [
-		 ],
+		"invalidateRectangle" ],
 	"classtraitcomposition" : "TBlEventTarget classTrait",
 	"classvars" : [
 		 ],

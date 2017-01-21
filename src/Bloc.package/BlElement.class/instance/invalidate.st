@@ -14,4 +14,4 @@ invalidate
 	self isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
 
-	self invalidRect: (self invalidationBounds: SpartaRectangle new)
+	self invalidRect: (self invalidationBounds: self class invalidateRectangle)

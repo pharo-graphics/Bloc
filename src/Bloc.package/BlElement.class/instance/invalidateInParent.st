@@ -5,7 +5,7 @@ invalidateInParent
 	self isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
 
-	aSpartaRectangle := self invalidationBounds: SpartaRectangle new.
+	aSpartaRectangle := self invalidationBounds: self class invalidateRectangle.
 	self localBoundsToParent: aSpartaRectangle.
 	self hasParent
 		ifTrue: [ self parent invalidRect: aSpartaRectangle ]

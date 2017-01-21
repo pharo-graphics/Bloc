@@ -4,7 +4,7 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 1/20/2017 19:49",
 	"instvars" : [
 		"handlers" ],
 	"name" : "BlHandlerRegistry",

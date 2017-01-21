@@ -1,6 +1,6 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
-	| aClippingBounds anEffectBounds |
+	| aClippingBounds anEffectBounds needsTransformation aTransformationBuilder |
 	
 	anEffectBounds := self effectBounds: SpartaRectangle new.
 	"No need to render elements smaller than half of a pixel"
@@ -13,11 +13,13 @@ fullDrawOnSpartaCanvas: aCanvas
 	self isVisible
 		ifFalse: [ ^ self ].
 
-	aCanvas transform
-		push;
-		translateBy: self position;
-		multiplyBy: self transform;
-		apply.
+	needsTransformation := (self position isZero and: [ transform isPureTranslation ]) not.
+	needsTransformation ifTrue: [ 
+		aTransformationBuilder := aCanvas transform
+			push;
+			translateBy: self position;
+			multiplyBy: transform;
+			apply ].
 
 	aClippingBounds := (self visualBounds: SpartaRectangle new on: aCanvas) merge: anEffectBounds.
 
@@ -32,4 +34,5 @@ fullDrawOnSpartaCanvas: aCanvas
 		misc debug ifTrue: [
 			self drawDebugInfoOnSpartaCanvas: aCanvas ].
 
-		aCanvas transform pop ]
+		needsTransformation
+			ifTrue: [ aTransformationBuilder pop ] ]

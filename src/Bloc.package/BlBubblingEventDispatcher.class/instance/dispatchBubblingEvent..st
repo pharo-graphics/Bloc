@@ -1,4 +1,8 @@
 dispatching
 dispatchBubblingEvent: anEvent
-	self handlers dispatchEvent: anEvent.
+	
+	"handlers initialized lazily, do nothing if there are none of them"
+	handlers ifNotNil: [ :theHandlers |
+		theHandlers dispatchEvent: anEvent ].
+
 	^ anEvent

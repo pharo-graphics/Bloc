@@ -4,5 +4,14 @@ wantsEvent: anEvent
 	false otherwise"
 	<return: #Boolean>
 
-	^ (self filters anySatisfy: [ :aFilter | aFilter wantsEvent: anEvent ])
-		or: [ self handlers anySatisfy: [ :aHandler | aHandler wantsEvent: anEvent ] ]
+	"first ask shortcutHandler because it always presents"
+	(shortcutHandler wantsEvent: filters)
+		ifTrue: [ ^ true ].
+
+	(filters isNotNil and: [ filters anySatisfy: [ :aFilter | aFilter wantsEvent: anEvent ] ])
+		ifTrue: [ ^ true ].
+
+	(handlers isNotNil and: [ handlers anySatisfy: [ :aHandler | aHandler wantsEvent: anEvent ] ])
+		ifTrue: [ ^ true ].
+
+	^ false

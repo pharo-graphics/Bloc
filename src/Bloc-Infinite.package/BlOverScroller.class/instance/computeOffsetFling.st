@@ -9,4 +9,4 @@ computeOffsetFling
 	(scrollerY isFinished or: [
 		scrollerY update or: [ 
 			scrollerY continueWhenFinished ] ])
-		ifFalse: [ scrollerX finish ]
+		ifFalse: [ scrollerY finish ]

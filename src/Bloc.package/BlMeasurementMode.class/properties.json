@@ -1,12 +1,14 @@
 {
 	"category" : "Bloc-LLayout-Support",
 	"classinstvars" : [
-		 ],
+		"atMost",
+		"exact",
+		"unspecified" ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "AliakseiSyrel 1/30/2016 17:51",
 	"instvars" : [
-		"spec" ],
+		 ],
 	"name" : "BlMeasurementMode",
 	"pools" : [
 		 ],

@@ -1,8 +1,7 @@
 enumerating
 anySatisfy: aBlock
-	"Evaluate aBlock with the elements of the receiver.
-	If aBlock returns true for any element return true.
-	Otherwise return false."
+	"Evaluate aBlock with registered handlers.
+	If aBlock returns true for any element return true, otherwise return false."
+	<return: #Boolean>
 
-	self do: [ :each | (aBlock value: each) ifTrue: [ ^ true ] ].
-	^ false
+	^ handlers anySatisfy: aBlock

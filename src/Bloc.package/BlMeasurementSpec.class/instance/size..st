@@ -1,3 +1,3 @@
 accessing
-size: anObject
-	size := anObject
+size: aNumber
+	size := aNumber

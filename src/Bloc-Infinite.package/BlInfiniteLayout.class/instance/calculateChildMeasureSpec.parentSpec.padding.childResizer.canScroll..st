@@ -24,7 +24,7 @@ calculateChildMeasureSpec: aParentSize parentSpec: aParentSpec padding: aPadding
 						ifTrue: [ ^ BlMeasurementSpec unspecified ] ] ]
 		ifFalse: [ 
 			aChildResizer isMatchParent
-				ifTrue: [ ^ BlMeasurementSpec size: aSize mode: aParentSpec mode similar ].
+				ifTrue: [ ^ BlMeasurementSpec size: aSize mode: aParentSpec mode ].
 			aChildResizer isFitContent
 				ifTrue: [ 
 					(aParentSpec isAtMost or: [ aParentSpec isExact ])

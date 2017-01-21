@@ -2,9 +2,9 @@ geometry extent
 computeExtent
 | w h|
 	self invalidate.
-	layoutView := SpMultilineTextLayout
+	layoutView := SpMultilineTextLayout new
 		rope: textModel rope
-		properties: { #maxWidth -> wrappingWidth }.
+		maxWidth: wrappingWidth.
 	layoutView measureOn: MozOffscreenCanvas uniqueInstance.
 	w := (self wrappingWidth > 0)
 		ifTrue: [ self wrappingWidth  ]

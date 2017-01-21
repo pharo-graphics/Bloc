@@ -2,7 +2,7 @@ layout
 onMeasure: anExtentMeasurementSpec
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
-	| aProperties aHeightSpec aWidthSpec aMaxHeight aMaxWidth aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
+	| aHeightSpec aWidthSpec aMaxHeight aMaxWidth aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
 
 	self
 		assert: [ text isNotNil ]
@@ -10,8 +10,7 @@ onMeasure: anExtentMeasurementSpec
 
 	(self shouldMeasure: anExtentMeasurementSpec)
 		ifFalse: [ ^ self ].
-
-	aProperties := Dictionary new.
+		
 	aMaxWidth := self constraints maxWidth.
 	aMaxHeight := self constraints maxHeight.
 	aWidthSpec := anExtentMeasurementSpec widthSpec.
@@ -33,16 +32,18 @@ onMeasure: anExtentMeasurementSpec
 	
 	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
 	aMaxHeight := (aMaxHeight - aPadding height) max: 0.
+	
+	textLayout
+		"Create a new text layout"
+		ifNil: [ textLayout := self defaultTextLayout ]
+		"or reuse existing"
+		ifNotNil: [ textLayout reset ].
 
-	aProperties at: #maxWidth put: aMaxWidth.
-	aProperties at: #maxHeight put: aMaxHeight.
-	"do not mark as auto release if I am attached to scene graph.
-	Resource freeing will happen in onRemovedFromSceneGraph"
-	aProperties at: #autoRelease put: self isAttachedToSceneGraph not.
-
-	"Create a new text layout"
-	textLayout := self defaultTextLayout.
-	textLayout rope: text rope properties: aProperties.
+	textLayout
+		rope: self rope
+		 maxWidth: aMaxWidth
+		maxHeight: aMaxHeight
+		autoRelease: self isAttachedToSceneGraph not.
 
 	textLayout measureOn: self defaultOffscreenCanvas.
 	"text layout is measured at this point"

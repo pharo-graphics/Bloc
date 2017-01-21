@@ -1,0 +1,1 @@
+I am an event handler registry used by dispatchers in order to manage event listeners

@@ -1,3 +1,3 @@
 geometry
 sizeFor: aNumber
-	^ self mode sizeFor: aNumber
+	^ self mode size: aNumber with: size

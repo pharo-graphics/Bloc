@@ -4,7 +4,7 @@ run
 
 	self disableRunOnAnimationRequests.
 	infiniteElement consumePendingDataSourceCommands.
-	
+
 	"keep a local reference so that if it is changed during onScrollBy: method,
 	it won't cause unexpected behaviors"
 	

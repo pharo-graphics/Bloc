@@ -1,5 +1,5 @@
 geometry
-sizeFor: aNumber
+size: aNumber with: aSpecSize
 	<return: #Number>
 	
 	^ aNumber

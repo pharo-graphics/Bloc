@@ -1,7 +1,10 @@
 geometry bounds convertion
 globalBoundsToLocal: aRectangle
-	| r |
+	| r aTransformed |
+
+	aTransformed := transform globalBoundsToLocal: aRectangle.
 	r := self parent
-		ifNil: [ transform globalBoundsToLocal: aRectangle ]
-		ifNotNil: [ :p | p globalBoundsToLocal: (transform globalBoundsToLocal: aRectangle) ].
+		ifNil: [ aTransformed ]
+		ifNotNil: [ :p | p globalBoundsToLocal: aTransformed ].
+
 	^ r translateBy: self position negated

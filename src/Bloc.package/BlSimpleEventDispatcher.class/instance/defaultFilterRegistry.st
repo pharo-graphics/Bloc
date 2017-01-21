@@ -1,0 +1,3 @@
+initialization
+defaultFilterRegistry
+	^ BlHandlerRegistry new
