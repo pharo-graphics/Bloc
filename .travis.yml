@@ -13,12 +13,10 @@ smalltalk:
 
 matrix:
   include:
-  - smalltalk_config: development.ston
-  - smalltalk_config: minimal.ston
-
-env:
-  - ARCH="i386"
-
+  - smalltalk: Pharo-5.0
+    smalltalk_config: minimal.ston
+  - smalltalk: Pharo-6.0
+    smalltalk_config: minimal.ston
 
 before_install:
   - |
@@ -66,7 +64,7 @@ before_install:
 
 
 before_script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$ARCH" == "i386" ]]; then
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       export DISPLAY=:99.0;
       sh -e /etc/init.d/xvfb start;
     fi
