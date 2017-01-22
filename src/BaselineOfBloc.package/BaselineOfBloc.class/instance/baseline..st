@@ -31,26 +31,51 @@ baseline: spec
 				className: #ConfigurationOfPetitCSS;
 				versionString: '1.1';
 				repository: 'http://smalltalkhub.com/mc/GlennCavarle/PetitCSS/main/' ];
+			
+			"main core package, implements element composition, event handling and universe infrastructure.
+			*core* must not depend on anything"
+			package: #Bloc;
+			package: #'Bloc-Tests';
+			
+			"contains most common layout types. May be optional"
+			package: #'Bloc-Layout' with: [ spec requires: #(Bloc) ];
+			package: #'Bloc-Layout-Tests' with: [ spec requires: #('Bloc-Layout' ) ];
+			
+			"implements a scrolling element (practically infinite) for displaying large data sets"
+			package: #'Bloc-Infinite' with: [ spec requires: #(Bloc) ];
+			"adds most common layout types for infinite element"
+			package: #'Bloc-Infinite-Layouts' with: [ spec requires: #('Bloc-Infinite') ];
+			package: #'Bloc-Infinite-Examples' with: [ spec requires: #('Bloc-Infinite' 'Bloc-Infinite-Layouts') ];
+			
+			"adds high level support of animations"
+			package: #'Bloc-Animation' with: [ spec requires: #(Bloc) ];
 
-			package: #Bloc with: [ spec requires: #(#Sparta). ];
-			package: #'Bloc-Animation' with: [ spec requires: #(#Bloc ). ];
+			"Sparta provides us with a canvas and text support"
+			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc Sparta) ];
+
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' ). ];
-			package: #'Bloc-Extension' with: [ spec requires: #(#Bloc ). ];
-			package: #'Bloc-Layout' with: [ spec requires: #(#Bloc ). ];
-			package: #'Bloc-Layout-Tests' with: [ spec requires: #(#'Bloc-Layout' ). ];
-			package: #'Bloc-Infinite' with: [ spec requires: #(#'Bloc' ). ];
-			package: #'Bloc-Infinite-Layouts' with: [ spec requires: #(#'Bloc' ). ];
-			package: #'Bloc-Infinite-Examples' with: [ spec requires: #(#'Bloc' ). ];
+			package: #'Bloc-Extension' with: [ spec requires: #(Bloc) ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
-			package: #'Bloc-Sparta' with: [ spec requires: #(#Bloc #Sparta). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
-			package: #'Bloc-Tests' with: [ spec requires: #('Bloc-Examples' ) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
+
 			"groups with only sources"
-			group: 'file:core' 
-				with: #( 'BlocHost-SDL' 'Bloc-Animation' 'Bloc-Examples' 'Bloc-Sparta' 'Bloc-Extension' 'Bloc-Infinite' 'Bloc-Infinite-Layouts' 'Bloc-Infinite-Examples');
+			group: 'file:core' with: #(
+				'Bloc' "main core package"
+				'Bloc-Layout'
+
+				'BlocHost-SDL'
+				'Bloc-Animation'
+				'Bloc-Examples'
+				'Bloc-Sparta'
+				'Bloc-Extension'
+
+				'Bloc-Infinite'
+				'Bloc-Infinite-Layouts'
+				'Bloc-Infinite-Examples');
+
 			group: 'file:development' with: #('file:core' 'Bloc-Tests' 'Bloc-Layout-Tests');
 
 			"groups with sources and plugin installation"
@@ -62,6 +87,9 @@ baseline: spec
 			group: 'git:development' with: #('development');
 			
 			group: 'stub' with: #();
-			group: 'default' with: #('core')
-		].
-
+			group: 'default' with: #('core');
+			
+			"below we define groups to load only specific packages in order to test dependencies"
+			group: 'minimal:bloc' with: #(Bloc 'Bloc-Tests');
+			group: 'minimal:bloc+layout' with: #('minimal:bloc' 'Bloc-Layout' 'Bloc-Layout-Tests')
+		]
