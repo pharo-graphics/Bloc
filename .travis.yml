@@ -11,12 +11,13 @@ smalltalk:
   - Pharo-5.0
   - Pharo-6.0
 
-smalltalk_config:
-  - development.ston
-  - minimal.ston
+matrix:
+  include:
+  - smalltalk_config: development.ston
+  - smalltalk_config: minimal.ston
 
 env:
-- ARCH="i386"
+  - ARCH="i386"
 
 
 before_install:
