@@ -76,7 +76,11 @@ baseline: spec
 				'Bloc-Infinite-Layouts'
 				'Bloc-Infinite-Examples');
 
-			group: 'file:development' with: #('file:core' 'Bloc-Tests' 'Bloc-Layout-Tests');
+			group: 'file:development' with: #(
+				'file:core'
+				'Bloc-Tests'
+				'Bloc-Layout-Tests'
+				'Bloc-Animation-Tests');
 
 			"groups with sources and plugin installation"
 			group: 'core' with: #('file:core');

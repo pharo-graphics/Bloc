@@ -6,12 +6,12 @@ testCompareOneChangeForManyHandlers
 	vh := NewValueHolder new.
 	prop := BlObjectProperty new.
 	
-	counter timesRepeat: [vh whenChangedDo: [c1 := c1+1] ].
-	counter timesRepeat: [ prop onChangedDo:[c2 := c2+1] ].
+	counter timesRepeat: [ vh whenChangedDo: [ c1 := c1 + 1 ] ].
+	counter timesRepeat: [ prop onChangedDo: [ c2 := c2 + 1 ] ].
 	
 	t1 := [ vh value: Object new ] timeToRunWithoutGC.
 	t2 := [ prop value: Object new ] timeToRunWithoutGC.
 
-	self assert: t1>t2.
+	self assert: t1 >= t2.
 	self assert: c1 = counter.
 	self assert: c2 = counter

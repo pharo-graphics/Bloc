@@ -2,7 +2,7 @@ as yet unclassified
 testCompareOneDispatchForManyHandlersUsingSubclass
  |ann reg t1 t2 c1 c2 counter|
 	c1 := c2 := 0.
-	counter := 100000.
+	counter := 2000.
 	ann := Announcer new.
 	reg := BlHandlerRegistry new.
 	
@@ -12,6 +12,6 @@ testCompareOneDispatchForManyHandlersUsingSubclass
 	t1 := [ann announce: BlClickEvent new] timeToRun.
 	t2 := [reg dispatchEvent: BlClickEvent new] timeToRun.
 	
-	self assert: t1>t2.
+	self assert: t1 >= t2.
 	self assert: c1 = counter.
 	self assert: c2 = counter
