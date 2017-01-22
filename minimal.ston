@@ -1,0 +1,13 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Bloc',
+      #directory : 'src',
+      #platforms : [ #pharo ],
+      #load : [ 'minimal:bloc' ]
+    }
+  ],
+  #testing : {
+      #packages : [ 'Bloc-Tests' ]
+  }
+}
