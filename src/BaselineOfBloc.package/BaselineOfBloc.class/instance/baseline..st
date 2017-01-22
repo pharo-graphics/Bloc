@@ -90,7 +90,7 @@ baseline: spec
 			"groups with sources, plugin installion and git support"
 			group: 'git:core' with: #('core');
 			group: 'git:development' with: #('development');
-			
+
 			group: 'stub' with: #();
 			group: 'default' with: #('core');
 			

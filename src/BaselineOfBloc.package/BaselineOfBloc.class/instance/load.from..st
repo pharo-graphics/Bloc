@@ -17,5 +17,9 @@ load: aBaselineName from: aRepository
 	"we load code + iceberg"
 	aDirective = #git
 		ifTrue: [ ^ self gitLoad: aBaselineName from: aRepository ].
+	
+	"we do nothing for minimal directive"
+	aDirective = #minimal
+		ifTrue: [ ^ self ].
 
-	Error signal: 'Unknown load directive ' , aDirective asString
+	Warning signal: 'Unknown load directive ' , aDirective asString
