@@ -1,3 +1,3 @@
-as yet unclassified
-adapt: aPath to: anElement
-	
+resizing
+adapt: aGeometry to: anElement
+	self subclassResponsibility

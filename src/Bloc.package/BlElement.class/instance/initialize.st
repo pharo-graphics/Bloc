@@ -8,8 +8,10 @@ initialize
 	constraints := BlLayoutCommonConstraints new.
 	self resetChildrenArray.
 	geometry := self defaultPath.
+	
 	border := BlBorder empty.
-	background := Color transparent asBlBackground.
+	background := self defaultBackground asBlBackground.
+	
 	layout := self defaultLayout.
 	pathCache := BlPathCache on: self.
 	geomResizer := self defaultPathResizer.

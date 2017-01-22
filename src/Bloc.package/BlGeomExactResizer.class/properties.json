@@ -4,9 +4,9 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 1/22/2017 17:19",
 	"instvars" : [
-		 ],
+		"extent" ],
 	"name" : "BlGeomExactResizer",
 	"pools" : [
 		 ],

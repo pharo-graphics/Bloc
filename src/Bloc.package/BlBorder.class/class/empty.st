@@ -1,3 +1,3 @@
 accessing
 empty
-	^ empty ifNil: [ empty := self paint: Color transparent width: 0 ]
+	^ empty ifNil: [ empty := self paint: BlPaint transparent width: 0 ]

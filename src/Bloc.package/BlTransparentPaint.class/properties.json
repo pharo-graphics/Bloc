@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Paint-Basic",
+	"classinstvars" : [
+		"uniqueInstance" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 1/22/2017 17:30",
+	"instvars" : [
+		 ],
+	"name" : "BlTransparentPaint",
+	"pools" : [
+		 ],
+	"super" : "BlColorPaint",
+	"type" : "normal" }

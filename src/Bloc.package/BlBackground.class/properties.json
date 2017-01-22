@@ -4,11 +4,10 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "GlennCavarle 7/12/2016 19:17",
+	"commentStamp" : "AliakseiSyrel 1/22/2017 17:26",
 	"instvars" : [
 		"fill",
-		"image",
-		"outsets" ],
+		"image" ],
 	"name" : "BlBackground",
 	"pools" : [
 		 ],

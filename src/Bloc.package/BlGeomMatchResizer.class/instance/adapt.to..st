@@ -1,3 +1,3 @@
-as yet unclassified
-adapt: aPath to: anElement
-	aPath matchElement: anElement
+resizing
+adapt: aGeometry to: anElement
+	aGeometry matchElement: anElement

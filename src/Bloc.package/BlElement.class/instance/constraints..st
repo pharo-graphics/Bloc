@@ -1,8 +1,11 @@
 accessing
-constraints: anElementConstraints
-	"Set new element constraints and request layout update.
-	anElementConstraints must not be nil"
-	self assert: anElementConstraints isNotNil.
-	constraints := anElementConstraints.
+constraints: aLayoutConstraints
+	"Set new layout constraints and request layout update.
+	aLayoutConstraints must not be nil"
+	
+	self
+		assert: [ aLayoutConstraints isNotNil]
+		description: [ 'Constraints must not be nil' ].
 
+	constraints := aLayoutConstraints.
 	self requestLayout

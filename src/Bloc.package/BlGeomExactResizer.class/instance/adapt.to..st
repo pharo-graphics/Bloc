@@ -1,3 +1,3 @@
-as yet unclassified
-adapt: aPath to: anElement
-	anElement extent: aPath position + aPath extent
+resizing
+adapt: aGeometry to: anElement
+	aGeometry matchExtent: self extent

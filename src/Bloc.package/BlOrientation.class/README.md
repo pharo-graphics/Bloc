@@ -1,1 +1,0 @@
-I am a simple enum for device orientation.

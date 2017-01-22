@@ -1,10 +1,10 @@
 {
 	"category" : "Bloc-Basic-Support",
 	"classinstvars" : [
-		 ],
+		"uniqueInstance" ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 1/22/2017 17:20",
 	"instvars" : [
 		 ],
 	"name" : "BlGeomMatchResizer",

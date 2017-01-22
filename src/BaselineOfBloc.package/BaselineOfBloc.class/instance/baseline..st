@@ -41,7 +41,7 @@ baseline: spec
 			package: #'Bloc-Layout' with: [ spec requires: #(Bloc) ];
 			package: #'Bloc-Layout-Tests' with: [ spec requires: #('Bloc-Layout' ) ];
 			
-			"implements a scrolling element (practically infinite) for displaying large data sets"
+			"implements a scrolling element (practically infinite) that displays large data sets"
 			package: #'Bloc-Infinite' with: [ spec requires: #(Bloc) ];
 			"adds most common layout types for infinite element"
 			package: #'Bloc-Infinite-Layouts' with: [ spec requires: #('Bloc-Infinite') ];
