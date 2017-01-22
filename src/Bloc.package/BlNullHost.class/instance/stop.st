@@ -1,0 +1,3 @@
+api
+stop
+	isRunning := false

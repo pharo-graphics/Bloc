@@ -49,6 +49,7 @@ baseline: spec
 			
 			"adds high level support of animations"
 			package: #'Bloc-Animation' with: [ spec requires: #(Bloc) ];
+			package: #'Bloc-Animation-Tests' with: [ spec requires: #('Bloc-Animation') ];
 
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc Sparta) ];

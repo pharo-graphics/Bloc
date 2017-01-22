@@ -1,2 +1,3 @@
 api
 start
+	self subclassResponsibility

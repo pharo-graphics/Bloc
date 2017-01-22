@@ -1,3 +1,3 @@
 api
 stop
-	Current := nil
+	^ self subclassResponsibility
