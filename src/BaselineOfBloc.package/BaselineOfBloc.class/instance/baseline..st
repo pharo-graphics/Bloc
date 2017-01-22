@@ -31,7 +31,7 @@ baseline: spec
 				className: #ConfigurationOfPetitCSS;
 				versionString: '1.1';
 				repository: 'http://smalltalkhub.com/mc/GlennCavarle/PetitCSS/main/' ];
-			 
+
 			package: #Bloc with: [ spec requires: #(#Sparta). ];
 			package: #'Bloc-Animation' with: [ spec requires: #(#Bloc ). ];
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' ). ];
@@ -45,7 +45,6 @@ baseline: spec
 			package: #'Bloc-Sparta' with: [ spec requires: #(#Bloc #Sparta). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'Bloc-Tests' with: [ spec requires: #('Bloc-Examples' ) ];
-			package: #OSWindow with: [ spec requires: #(#UnifiedFFI) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
