@@ -1,3 +1,3 @@
 accessing
 boundsInParent
-	^ (self owner localBoundsToParent: (SpartaRectangle fromRectangle: self boundsInLocal)) asRectangle
+	^ (self owner localBoundsToParent: (BlBounds fromRectangle: self boundsInLocal)) asRectangle

@@ -2,7 +2,7 @@ initialization
 initialize
 	super initialize.
 	boundsCache := BlBoundsCache on: self.
-	transform := SpartaMatrix new.
+	transform := BlTransformation new.
 	eventDispatcher := BlBubblingEventDispatcher on: self.
 	zIndex := 10.
 	constraints := BlLayoutCommonConstraints new.

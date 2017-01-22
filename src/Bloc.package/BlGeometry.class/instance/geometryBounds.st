@@ -5,4 +5,4 @@ geometryBounds
 	Override geometryBounds: to customize computation"
 	<return: #Rectangle>
 
-	^ (self geometryBounds: SpartaRectangle new) asRectangle
+	^ (self geometryBounds: BlBounds new) asRectangle

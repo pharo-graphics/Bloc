@@ -1,0 +1,3 @@
+accessing
+height
+	^ bottom - top

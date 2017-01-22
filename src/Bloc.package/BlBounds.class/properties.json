@@ -1,0 +1,17 @@
+{
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"left",
+		"top",
+		"right",
+		"bottom" ],
+	"name" : "BlBounds",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

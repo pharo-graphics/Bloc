@@ -7,6 +7,6 @@ invalidateRectangle
 	By convention invalidation must happens on UI thread, so at any time there is only one
 	rectangle involved in invalidation process. It makes a lot of sense to make it a singleton.
 	I must only be used on UI thread! Always make a copy if you want to store this rectangle!"
-	<return: #SpartaRectangle>
+	<return: #BlBounds>
 
-	^ invalidateRectangle ifNil: [ invalidateRectangle := SpartaRectangle new ]
+	^ invalidateRectangle ifNil: [ invalidateRectangle := BlBounds new ]

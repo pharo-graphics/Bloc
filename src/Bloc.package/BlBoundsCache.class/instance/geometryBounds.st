@@ -1,4 +1,4 @@
 accessing
 geometryBounds
 	^ geometryBounds ifNil: [
-		geometryBounds := (self owner geometryBounds: SpartaRectangle new) asRectangle ]
+		geometryBounds := (self owner geometryBounds: BlBounds new) asRectangle ]

@@ -2,7 +2,7 @@
 fullDrawOnSpartaCanvas: aCanvas
 	| aClippingBounds anEffectBounds needsTransformation aTransformationBuilder |
 	
-	anEffectBounds := self effectBounds: SpartaRectangle new.
+	anEffectBounds := self effectBounds: BlBounds new.
 	"No need to render elements smaller than half of a pixel"
 	(anEffectBounds width min: anEffectBounds height) < 1
 		ifTrue: [ ^ self ].
@@ -21,7 +21,7 @@ fullDrawOnSpartaCanvas: aCanvas
 			multiplyBy: transform;
 			apply ].
 
-	aClippingBounds := (self visualBounds: SpartaRectangle new on: aCanvas) merge: anEffectBounds.
+	aClippingBounds := (self visualBounds: BlBounds new on: aCanvas) merge: anEffectBounds.
 
 	aCanvas clip
 		push: aClippingBounds.

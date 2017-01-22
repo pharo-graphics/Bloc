@@ -2,7 +2,7 @@
 applyOnSpartaCanvas: aSpartaCanvas for: anElement
 	| anEffectBounds aWindowScale skipTransformation |
 
-	anEffectBounds := anElement localBoundsToWindow: (anElement effectBounds: SpartaRectangle new).
+	anEffectBounds := anElement localBoundsToWindow: (anElement effectBounds: BlBounds new).
 
 	aWindowScale := anElement isAttachedToSceneGraph
 		ifTrue: [ anElement space windowScale ]

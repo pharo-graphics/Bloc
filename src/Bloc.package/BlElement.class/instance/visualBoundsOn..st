@@ -1,3 +1,3 @@
 geometry bounds
 visualBoundsOn: aCanvas
-	^ (self visualBounds: SpartaRectangle new on: aCanvas) asRectangle
+	^ (self visualBounds: BlBounds new on: aCanvas) asRectangle

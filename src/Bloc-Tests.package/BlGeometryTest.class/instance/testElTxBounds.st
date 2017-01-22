@@ -14,5 +14,5 @@ testElTxBounds
 	self assert: n position = (10 @ 10).
 	self assert: g globalPosition = (10 @ 10).
 	self assert: n globalPosition = (20 @ 20).
-	self assert: n txBounds  = ((0@0) corner:(100@100)).
-	self assert: g txBounds  = ((0@0) corner:(100@100)).
+	self assert: n transformedBounds  = ((0@0) corner:(100@100)).
+	self assert: g transformedBounds  = ((0@0) corner:(100@100)).

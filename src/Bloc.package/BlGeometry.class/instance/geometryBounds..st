@@ -1,9 +1,9 @@
 geometry bounds
-geometryBounds: aSpartaRectangle
+geometryBounds: aBounds
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #SpartaRectangle>
+	<return: #BlBounds>
 
-	^ aSpartaRectangle
+	^ aBounds
 		origin: self position
 		extent: self extent

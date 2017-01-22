@@ -1,6 +1,6 @@
 visual bounds
-strokedBoundsInside: aSpartaRectangle of: anElement on: aCanvas
+strokedBoundsInside: aBounds of: anElement on: aCanvas
 	"Stroked inside bounds property is equal to geometry bounds"
-	<return: #SpartaRectangle>
+	<return: #BlBounds>
 
-	^ self geometryBounds: aSpartaRectangle
+	^ self geometryBounds: aBounds

@@ -1,4 +1,4 @@
 accessing
 transformedBounds
 	^ transformedBounds ifNil: [
-		transformedBounds := (self owner transformedBounds: SpartaRectangle new) asRectangle ]
+		transformedBounds := (self owner transformedBounds: BlBounds new) asRectangle ]

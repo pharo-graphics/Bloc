@@ -11,4 +11,4 @@ boundsInParent: anElement includeDecoration: shouldIncludeDecoration
 		ifTrue: [ anElement constraints infinite decorationInsets expand: anElement boundsInLocal ]
 		ifFalse: [ anElement boundsInLocal ].
 	
-	^ (anElement localBoundsToParent: (SpartaRectangle fromRectangle: aLocalBounds)) asRectangle
+	^ (anElement localBoundsToParent: (BlBounds fromRectangle: aLocalBounds)) asRectangle

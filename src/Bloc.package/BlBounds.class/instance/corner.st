@@ -1,0 +1,3 @@
+accessing
+corner
+	^ right @ bottom

@@ -1,7 +1,7 @@
 geometry bounds
-invalidationBounds: aSpartaRectangle
+invalidationBounds: aBounds
 	"I compute and load damaged area in my local coordinates that would be invalidated
 	if #invalidate would be sent to me"
-	<return: #SpartaRectangle>
+	<return: #BlBounds>
 
-	^ (self effectBounds: aSpartaRectangle) merge: self boundsInLocal
+	^ (self effectBounds: aBounds) merge: self boundsInLocal
