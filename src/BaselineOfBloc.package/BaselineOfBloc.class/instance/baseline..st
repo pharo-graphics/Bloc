@@ -12,9 +12,14 @@ baseline: spec
 			baseline: 'TaskIt' with: [ spec
 				repository: 'github://sbragagnolo/taskit-2:dev-0.3' ];
 			
+			project: 'UnifiedFFI' with: [ spec
+				className: #ConfigurationOfUnifiedFFI;
+				versionString: '0.25.1';
+				repository: 'http://smalltalkhub.com/mc/Pharo/FFI-NB/main/' ];
+			
 			project: 'OSWindow' with: [ spec
 				className: #ConfigurationOfOSWindow;
-				versionString: '1.2.15';
+				versionString: '1.2.16';
 				loads:#(#SDL2);
 				repository: 'http://smalltalkhub.com/mc/Pharo/OSWindow/main/' ];
 		
@@ -39,7 +44,8 @@ baseline: spec
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'Bloc-Sparta' with: [ spec requires: #(#Bloc #Sparta). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
-			package: #'Bloc-Tests' with: [ spec requires: #('Bloc-Examples' ). ];
+			package: #'Bloc-Tests' with: [ spec requires: #('Bloc-Examples' ) ];
+			package: #OSWindow with: [ spec requires: #(#UnifiedFFI) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
