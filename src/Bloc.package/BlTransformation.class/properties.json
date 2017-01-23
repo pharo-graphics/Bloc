@@ -4,14 +4,10 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 1/23/2017 19:51",
 	"instvars" : [
-		"sx",
-		"shx",
-		"x",
-		"shy",
-		"sy",
-		"y" ],
+		"matrix2D",
+		"matrix3D" ],
 	"name" : "BlTransformation",
 	"pools" : [
 		 ],

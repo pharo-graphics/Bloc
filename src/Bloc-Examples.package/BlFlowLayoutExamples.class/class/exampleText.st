@@ -1,11 +1,11 @@
 examples
 exampleText
 	<example>
-	| aText aLineIterator  theWords aParent aSpace floatA |
+	| aText aLineIterator  theWords aParent aSpace floatA aFloatIndex |
 
 	theWords := OrderedCollection new.
 
-	aText := SpText fromString: (String loremIpsum: 10000).
+	aText := SpText fromString: (String loremIpsum: 2000).
 
 	aLineIterator := aText rope iterator.
 
@@ -27,28 +27,38 @@ exampleText
 			aBreak := false ] ].
 
 	floatA := BlElement new
+		geometry: (BlRectangle cornerRadius: 5);
 		constraintsDo: [ :c | 
 			c flow float.
 			c horizontal exact: 63.
-			c vertical exact: 65.
+			c vertical exact: 155.
 			c margin: (BlInsets top: 3 right: 3 bottom: 0 left: 3) ];
-		background: Color magenta.
+		background: Color red.
 
-	theWords add: floatA afterIndex: (theWords size / 3) asInteger.
-
+	aFloatIndex := (theWords size / 3) asInteger.
+	
+	theWords add: floatA afterIndex: aFloatIndex.
+	aFloatIndex + 2 to: theWords size do: [ :anIndex |
+		| anElement |
+		anElement := (theWords at: anIndex).
+		anElement text attributes: { SpTextForegroundAttribute paint: (Color red) }.
+		anElement text: anElement text ].
+	
 	aParent := BlElement new
 		layout: BlFlowLayout new horizontal;
 		constraintsDo: [ :c |
-			c horizontal exact: 560.
-			c vertical fitContent ];
+			c horizontal exact: 600.
+			c vertical fitContent.
+			c padding: (BlInsets all: 10) ];
 		position: 100 @ 50;
-		background: Color white;
+		background: Color veryVeryLightGray;
+		border: (BlBorder paint: Color lightGray width: 8);
 		addChildren: theWords;
 		yourself.
 
 	aSpace := BlSpace new.
 	aSpace root addChild: aParent.
-	BlElementSelection on: aParent.
+	
 	aSpace root addEventHandler:
 			(BlEventHandler
 				on: BlDblClickEvent

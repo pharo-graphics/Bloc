@@ -1,4 +1,4 @@
 geometry bounds
 transformedBounds: aSpartaRectangle
 
-	^ transform transformRectangle: (self boundsInLocal: aSpartaRectangle)
+	^ transform transformBounds: (self boundsInLocal: aSpartaRectangle)

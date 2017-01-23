@@ -1,3 +1,7 @@
-initialize-release
+initialization
 initialize
-	self loadIdentity
+	super initialize.
+	
+	"we initialize lazily"	
+	matrix2D := nil.
+	matrix3D := nil

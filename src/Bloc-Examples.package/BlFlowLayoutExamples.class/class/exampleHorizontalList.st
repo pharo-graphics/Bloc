@@ -1,7 +1,7 @@
 examples
 exampleHorizontalList
 	<example>
-	| e1 e2 e3 e4 el space|
+	| e1 e2 e3 e4 el space e5 |
 
 	e1 := BlElement new
 		constraintsDo: [ :c | 
@@ -22,13 +22,20 @@ exampleHorizontalList
 	e4 := BlElement new
 		size: 50 asPoint;
 		background: Color magenta.
+	
+	e5 := BlElement new
+		size: 50 asPoint;
+		geometry: BlEllipse new;
+		background: Color orange.
 
 	el := BlElement new
 		layout: BlFlowLayout new horizontal;
-		size: 150@200;
+		size: 166@300;
 		position: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2. e3. e4 }.
+		background: Color veryLightGray;
+		border: (BlBorder paint: Color lightGray width: 8);
+		padding: (BlInsets all: 8);
+		addChildren: { e1. e2. e3. e4 . e5 }.
 
 	space := BlSpace new.
 	space root addChild:el.

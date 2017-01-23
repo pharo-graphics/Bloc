@@ -1,0 +1,3 @@
+accessing
+shy
+	^ a12

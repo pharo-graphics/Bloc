@@ -7,7 +7,7 @@ localBoundsToParent: aBounds
 	<return: #BlBounds>
 
 	"first apply transformation if we have one"
-	transform transformRectangle: aBounds.
+	transform transformBounds: aBounds.
 
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"

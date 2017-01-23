@@ -13,7 +13,7 @@ fullDrawOnSpartaCanvas: aCanvas
 	self isVisible
 		ifFalse: [ ^ self ].
 
-	needsTransformation := (self position isZero and: [ transform isPureTranslation ]) not.
+	needsTransformation := (self position isZero and: [ transform isIdentity ]) not.
 	needsTransformation ifTrue: [ 
 		aTransformationBuilder := aCanvas transform
 			push;

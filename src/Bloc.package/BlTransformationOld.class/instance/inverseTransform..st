@@ -1,5 +1,5 @@
 vector-transform
-inverseTransform: aPoint 
+inverseTransform: aPoint
 "  (we assume matrix is never degenerate)"
 	| px py y0 x0 |
 	

@@ -1,0 +1,1 @@
+I am signaled when matrix is singular and therefor can not be used for mathematical operations such as inverse

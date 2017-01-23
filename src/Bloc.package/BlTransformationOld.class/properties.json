@@ -1,0 +1,19 @@
+{
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"sx",
+		"shx",
+		"x",
+		"shy",
+		"sy",
+		"y" ],
+	"name" : "BlTransformationOld",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

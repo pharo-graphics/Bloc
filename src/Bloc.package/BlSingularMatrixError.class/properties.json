@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 1/23/2017 19:40",
+	"instvars" : [
+		 ],
+	"name" : "BlSingularMatrixError",
+	"pools" : [
+		 ],
+	"super" : "ArithmeticError",
+	"type" : "normal" }

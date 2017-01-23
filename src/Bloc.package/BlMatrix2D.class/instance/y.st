@@ -1,0 +1,3 @@
+accessing
+y
+	^ a32

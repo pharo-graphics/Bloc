@@ -1,0 +1,17 @@
+{
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"x",
+		"y",
+		"z",
+		"w" ],
+	"name" : "BlPoint4D",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

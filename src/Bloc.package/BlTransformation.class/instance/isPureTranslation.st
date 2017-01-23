@@ -1,5 +1,14 @@
 testing
 isPureTranslation
-	"Return true if the receiver specifies no rotation or scaling."
-
-	^ sx = 1.0 and: [sy = 1.0 and: [ shx = 0.0 and: [ shy = 0.0 ] ] ]
+	"Return true if the receiver specifies no rotation or scaling and represents only translation in xy plane"
+	<return: #Boolean>
+	
+	self hasMatrix
+		ifFalse: [ ^ true ].
+	
+	^ self is2D
+		ifTrue: [ 
+			self ensure2D.
+			matrix2D isPureTranslation ]
+		ifFalse: [ 
+			self shouldBeImplemented ]
