@@ -11,8 +11,14 @@ measure: anExtentMeasurementSpec
 	(self isLayoutRequested not
 		and: [ self layout previousMeasurementSpec = anExtentMeasurementSpec ])
 		ifTrue: [ ^ self ].
-		
 	
+	"we have to eat layout request first marking it as false in order
+	to do a second or third layout pass if needed.
+	It works as follows: if during measurement or layout an element
+	requests a layout (because of event for example) #waitingLayout
+	is put back to true and we will do another layout pass as result"
+	self layout waitingLayout: false.
+
 	"Perform measuring algorithm"
 	self onMeasure: anExtentMeasurementSpec.
 	"Store extent specification to be used for checking next time measure: is sent"

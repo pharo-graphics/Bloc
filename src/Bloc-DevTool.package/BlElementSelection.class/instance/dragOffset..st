@@ -1,3 +1,3 @@
 accessing
-dragOffset: anObject
-	dragOffset := anObject
+dragOffset: aPoint
+	dragOffset := aPoint

@@ -1,5 +1,6 @@
-as yet unclassified
-icon: anSvgIcon extent: aPoint.
+instance creation
+icon: anSvgIcon extent: aPoint
+
 	^ self new
 		geometry: anSvgIcon;
 		size: aPoint;

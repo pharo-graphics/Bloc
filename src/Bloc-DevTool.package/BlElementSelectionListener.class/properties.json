@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-DevTool-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"selection" ],
+	"name" : "BlElementSelectionListener",
+	"pools" : [
+		 ],
+	"super" : "BlElementEventListener",
+	"type" : "normal" }

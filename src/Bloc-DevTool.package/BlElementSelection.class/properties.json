@@ -7,11 +7,11 @@
 	"commentStamp" : "",
 	"instvars" : [
 		"client",
+		"clientListener",
 		"dragOffset",
-		"tlBtn",
-		"trBtn",
-		"blBtn",
-		"brBtn" ],
+		"resizeButton",
+		"removeButton",
+		"inspectButton" ],
 	"name" : "BlElementSelection",
 	"pools" : [
 		 ],

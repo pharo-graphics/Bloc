@@ -1,44 +1,24 @@
-accessing
+initialization
 initializeActions
-|previousPos|
-	tlBtn := BlElementSelectionButton icon: BlIcons closeCircleSvg extent: 15@15.
-	trBtn := BlElementSelectionButton icon: BlIcons rotateLeftSvg extent: 15@15.
-	blBtn := BlElementSelectionButton icon: BlIcons settingsSvg  extent: 15@15.
-	brBtn := BlElementSelectionButton icon: BlIcons arrowExpandAllSvg extent: 15@15.
 	
-	tlBtn addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt |
-		self client removeFromParent.
-		self removeFromParent]).
-	
-	brBtn addEventHandler: (BlEventHandler on: BlDragStartEvent do: [ :evt | evt consumed: true.]).
-	brBtn addEventHandler: (BlEventHandler on: BlDragEndEvent do: [ :evt |  evt consumed: true.]).
-	brBtn addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt | ||
-					evt consumed: true.
-					self client size: (evt position - self client globalPosition).
-					self size: (self client geometryBoundsInSpace extent + (10@10)).
-					self updateActionsPosition.
-					]).
-				
-	blBtn addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt | 
+	removeButton := BlElementSelectionButton icon: BlIcons closeCircleSvg extent: 15@15.
+	inspectButton := BlElementSelectionButton icon: BlIcons settingsSvg  extent: 15@15.
+	resizeButton := BlElementSelectionButton icon: BlIcons arrowExpandAllSvg extent: 15@15.
+
+	removeButton addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt |
+		"we will close automatically"
+		self client removeFromParent ]).
+
+	resizeButton addEventHandler: (BlEventHandler on: BlDragStartEvent do: [ :evt | evt consumed: true.]).
+	resizeButton addEventHandler: (BlEventHandler on: BlDragEndEvent do: [ :evt |  evt consumed: true.]).
+	resizeButton addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt |
+		evt consumed: true.
+		self client size: (evt position - self client globalPosition) ]).
+
+	inspectButton addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt | 
 		evt consumed: true.
 		self client inspect]).
-	trBtn addEventHandler: (BlEventHandler on: BlDragStartEvent do: [ :evt | 
-		evt consumed: true.
-		previousPos := evt position. ]).
 	
-	trBtn addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt | 
-		| ptPos pivot theta a2 a1|
-		evt consumed: true.
-		ptPos := (evt position -15).
-		pivot := evt target geometryBoundsInSpace origin.
-		a1 := (ptPos y - pivot y) arcTan: (ptPos x - pivot x).
-		a2 := (previousPos y - pivot y) arcTan: (previousPos x - pivot x).
-		theta := (a2 - a1).
-		self client centerRotateByRadians: theta negated.
-		previousPos := ptPos.
-		]).
-	
-	self addChild: tlBtn.
-	self addChild: trBtn.
-	self addChild: blBtn.
-	self addChild: brBtn
+	self addChild: removeButton.
+	self addChild: inspectButton.
+	self addChild: resizeButton

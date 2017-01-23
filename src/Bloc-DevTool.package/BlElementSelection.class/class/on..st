@@ -1,3 +1,5 @@
-as yet unclassified
-on: aNode
-	^ self new on: aNode
+instance creation
+on: anElement
+	^ self new
+		showOn: anElement;
+		yourself

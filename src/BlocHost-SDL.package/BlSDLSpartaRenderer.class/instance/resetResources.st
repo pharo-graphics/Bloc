@@ -6,6 +6,7 @@ resetResources
 	windowSize := self sdlSpace windowExtent.
 	extent := self sdlSpace rendererExtent.
 	scaleFactor := (extent / windowSize) asFloatPoint.
+	SDL2 glSetSwapInterval: 1.
 	self createSDLSurfaceWithExtent: extent.
 	spartaCanvas := MozCanvas
 		createForData: sdlSurface pixels

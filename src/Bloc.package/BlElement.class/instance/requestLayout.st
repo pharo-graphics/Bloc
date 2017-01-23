@@ -13,5 +13,5 @@ requestLayout
 		ifNotNil: [ :aParent | aParent requestLayout ]
 		"There is no parent, probably I am a root element, let's check Space"
 		ifNil: [ self space
-			"If my parent is nil, but I am added to space, we need to request next pulse"
+			"If my parent is nil, but I am added to space, we need to let it know that we requested a layout by asking for a next pulse"
 			ifNotNil: [ :aSpace | aSpace requestNextPulse ] ]

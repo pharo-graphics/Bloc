@@ -5,7 +5,7 @@ applyLayoutIn: aRectangle
 	store or refer it without making a copy!
 	Note: subclasses should not override me, instead override onLayout: for concrete implementation.
 	aRectangle must not be nil"
-	| oldExtent newExtent newPosition extentChanged isLayoutRequested |
+	| oldExtent newExtent newPosition extentChanged |
 
 	oldExtent := self extent.
 	newPosition := aRectangle origin.

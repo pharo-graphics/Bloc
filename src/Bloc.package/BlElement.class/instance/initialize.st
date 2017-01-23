@@ -1,18 +1,19 @@
 initialization
 initialize
 	super initialize.
+
 	boundsCache := BlBoundsCache on: self.
-	transform := BlTransformation new.
 	eventDispatcher := BlBubblingEventDispatcher on: self.
 	zIndex := 10.
 	constraints := BlLayoutCommonConstraints new.
 	self resetChildrenArray.
+
+	transform := self defaultTransformation.
 	geometry := self defaultPath.
-	
-	border := BlBorder empty.
-	background := self defaultBackground asBlBackground.
-	
-	layout := self defaultLayout.
-	pathCache := BlPathCache on: self.
 	geomResizer := self defaultPathResizer.
+	border := self defaultBorder.
+	background := self defaultBackground asBlBackground.
+	layout := self defaultLayout.
+
+	pathCache := BlPathCache on: self.
 	misc := BlMiscProperties new

@@ -1,9 +1,12 @@
 *Bloc-Sparta
 asSpartaForm
-	| aCanvas aFinalCanvas aBoundsInWindow aBoundsInSpace |
-
-	aBoundsInWindow := self boundsInWindow.
-	aBoundsInSpace := self boundsInSpace.
+	| aCanvas aFinalCanvas aBoundsInWindow aBoundsInSpace aBoundsInLocal |
+	
+	self forceLayout.
+	
+	aBoundsInLocal := (self effectBounds: BlBounds new) merge: self boundsInLocal.
+	aBoundsInWindow := self localBoundsToWindow: aBoundsInLocal.
+	aBoundsInSpace := self localBoundsToGlobal: aBoundsInLocal.
 
 	aCanvas := MozCanvas checker: (aBoundsInWindow corner max: 1@1).
 

@@ -7,8 +7,8 @@ SystemOrganization addCategory: 'Bloc-Event'!
 SystemOrganization addCategory: 'Bloc-EventHandling'!
 SystemOrganization addCategory: 'Bloc-Gesture'!
 SystemOrganization addCategory: 'Bloc-KeyBinding'!
-SystemOrganization addCategory: 'Bloc-LLayout-Basic'!
-SystemOrganization addCategory: 'Bloc-LLayout-Support'!
+SystemOrganization addCategory: 'Bloc-Layouts-Basic'!
+SystemOrganization addCategory: 'Bloc-Layouts-Support'!
 SystemOrganization addCategory: 'Bloc-Paint-Basic'!
 SystemOrganization addCategory: 'Bloc-Paint-Support'!
 SystemOrganization addCategory: 'Bloc-Property'!

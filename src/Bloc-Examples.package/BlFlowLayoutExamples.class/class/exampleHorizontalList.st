@@ -32,5 +32,8 @@ exampleHorizontalList
 
 	space := BlSpace new.
 	space root addChild:el.
-	BlElementSelection on: el.
+	space root addEventHandler:
+			(BlEventHandler
+				on: BlDblClickEvent
+				do: [ :evt | BlElementSelection on: evt target ]).
 	space show

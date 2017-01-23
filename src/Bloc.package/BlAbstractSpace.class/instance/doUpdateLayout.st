@@ -1,6 +1,7 @@
 pulse
 doUpdateLayout
 	"Start layouting process"
+	
 	"first we measure.."
 	self root measure: (BlExtentMeasurementSpec new
 		widthSpec: (self root layout

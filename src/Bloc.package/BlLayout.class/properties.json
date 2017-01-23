@@ -1,5 +1,5 @@
 {
-	"category" : "Bloc-LLayout-Basic",
+	"category" : "Bloc-Layouts-Basic",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
@@ -9,7 +9,8 @@
 		"requestingLayout",
 		"previousMeasurementSpec",
 		"measuredExtent",
-		"direction" ],
+		"direction",
+		"waitingLayout" ],
 	"name" : "BlLayout",
 	"pools" : [
 		 ],

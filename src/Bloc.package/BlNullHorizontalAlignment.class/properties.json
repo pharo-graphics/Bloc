@@ -1,5 +1,5 @@
 {
-	"category" : "Bloc-LLayout-Support",
+	"category" : "Bloc-Layouts-Support",
 	"classinstvars" : [
 		"rightToLeft",
 		"leftToRight" ],
