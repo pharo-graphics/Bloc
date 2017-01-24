@@ -1,3 +1,3 @@
 accessing
-to: anObject
-	to := anObject
+to: aNumber
+	to := aNumber
