@@ -9,5 +9,5 @@ postScaleX: aX Y: aY
 	a12 := a12 * aY.
 	a21 := a21 * aX.
 	a22 := a22 * aY.
-	a31 := a21 * aX.
-	a32 := a22 * aY.
+	a31 := a31 * aX.
+	a32 := a32 * aY.

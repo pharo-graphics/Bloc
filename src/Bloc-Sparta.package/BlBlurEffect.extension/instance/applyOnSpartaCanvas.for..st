@@ -11,19 +11,20 @@ applyOnSpartaCanvas: aSpartaCanvas for: anElement
 	"check if we may skip transformation"
 	skipTransformation := aWindowScale = 1 or: [ aWindowScale x = 1 and: [ aWindowScale y = 1 ] ].
 	
-	skipTransformation ifFalse: [ 
-		aSpartaCanvas transform
-			push;
-			scaleBy: 1.0 / aWindowScale;	"window scale is never 0"
-			apply ].
+	aSpartaCanvas clip by: (anElement pathCache geomPathOnSpartaCanvas: aSpartaCanvas) during: [
+		skipTransformation ifFalse: [ 
+			aSpartaCanvas transform
+				push;
+				scaleBy: 1.0 / aWindowScale;	"window scale is never 0"
+				apply ].
+	
+		aSpartaCanvas filter
+			area: anEffectBounds; "source in device window coordinates"
+			to: 0@0; "destination in local coordinates of canvas"
+			type: (aSpartaCanvas gaussianBlurFilter
+				stdDeviation: self radius;
+				source: aSpartaCanvas);
+			draw.
 
-	aSpartaCanvas filter
-		area: anEffectBounds; "source in device window coordinates"
-		to: 0@0; "destination in local coordinates of canvas"
-		type: (aSpartaCanvas gaussianBlurFilter
-			stdDeviation: self radius;
-			source: aSpartaCanvas);
-		draw.
-
-	skipTransformation
-		ifFalse: [ aSpartaCanvas transform pop ]
+		skipTransformation
+			ifFalse: [ aSpartaCanvas transform pop ] ].

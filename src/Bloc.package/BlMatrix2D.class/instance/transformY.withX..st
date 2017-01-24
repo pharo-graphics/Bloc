@@ -1,4 +1,4 @@
 transforming points
-transformY: aX withX: aY
+transformY: aY withX: aX
 
 	^ (aX * a12) + (aY * a22) + a32

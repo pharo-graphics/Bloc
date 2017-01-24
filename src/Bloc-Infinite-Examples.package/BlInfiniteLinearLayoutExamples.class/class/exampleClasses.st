@@ -2,7 +2,7 @@ examples
 exampleClasses
 	| space list container controls  smoothScrollBy smoothScrollByNegated |
 	space := BlSpace new
-		extent: 800 @ 650;
+		extent: 500 @ 650;
 		title: 'Smalltalk allClasses'.
 		
 	container := BlElement new

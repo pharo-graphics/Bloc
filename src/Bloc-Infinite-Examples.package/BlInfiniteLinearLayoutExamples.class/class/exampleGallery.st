@@ -2,7 +2,7 @@ examples
 exampleGallery
 	| space list container header headerText |
 	space := BlSpace new
-		extent: 800 @ 650;
+		extent: 400 @ 650;
 		title: 'Gallery'.
 
 	container := BlElement new
@@ -11,8 +11,8 @@ exampleGallery
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent.
-			"will take 50% of the parent"
-			c linear weight: 0.5 ];
+			"will take 100% of the parent"
+			c linear weight: 1 ];
 		yourself.	
 
 	header := BlElement new

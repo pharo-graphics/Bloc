@@ -10,11 +10,12 @@ testElTxBoundsWithScale
 		position: 10 @ 10;
 		addChild: n;
 		yourself.
-	n scaleBy:2.
-	g scaleBy:2.
+
+	n scaleBy: 2@2.
+	g scaleBy: 2@2.
 	self assert: g position = (10 @ 10).
 	self assert: n position = (10 @ 10).
 	self assert: g globalPosition = (10 @ 10).
 	self assert: n globalPosition = (20 @ 20).
-	self assert: n transformedBounds  = ((0@0) corner: (200@200)).
-	self assert: g transformedBounds  = ((0@0) corner: (400@400)).
+	self assert: n transformedBounds equals: ((0@0) corner: (200@200)).
+	self assert: g transformedBounds equals: ((0@0) corner: (400@400)).

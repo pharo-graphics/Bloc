@@ -8,7 +8,8 @@
 	"instvars" : [
 		"image",
 		"loader",
-		"form" ],
+		"form",
+		"itemElement" ],
 	"name" : "BlInfiniteExampleGalleryImageElement",
 	"pools" : [
 		 ],

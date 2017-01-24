@@ -1,6 +1,7 @@
 layout
 onMeasure: anExtentMeasurementSpec
 	| aWidth aHeight aWidthSpec aHeightSpec |
+	super onMeasure: anExtentMeasurementSpec.
 	
 	aWidthSpec := anExtentMeasurementSpec widthSpec.
 	aHeightSpec := anExtentMeasurementSpec heightSpec.

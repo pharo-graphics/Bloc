@@ -2,7 +2,7 @@ examples
 exampleText
 	| space list container |
 	space := BlSpace new
-		extent: 800 @ 650;
+		extent: 550 @ 750;
 		title: 'Infinite list example'.
 
 	container := BlElement new
@@ -14,7 +14,7 @@ exampleText
 	
 	list := BlInfiniteExampleTextListElement new
 		constraintsDo: [ :c |
-			c horizontal exact: 400.
+			c horizontal matchParent.
 			c vertical matchParent ];
 		yourself.
 
