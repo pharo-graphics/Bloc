@@ -1,6 +1,6 @@
 geometry transform
 scaleTo: aFactorPoint
 	self invalidate.
-	self transform scale: aFactorPoint.
+	self transform scaleTo: aFactorPoint.
 	self boundsCache invalidateBoundsInSpace.
 	self invalidate
