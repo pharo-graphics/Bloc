@@ -1,3 +1,3 @@
-as yet unclassified
+benchmark
 eventProcessingTime: aNumber
-	eventProcessingShape text: 'event time: ', aNumber asString
+	eventProcessingShape text: (SpText fromString: 'event time: ', aNumber asString)

@@ -1,3 +1,3 @@
-as yet unclassified
+benchmark
 layoutTime: aNumber
-	layoutingShape text: 'layout time: ', aNumber asString
+	layoutingShape text: (SpText fromString: 'layout time: ', aNumber asString)

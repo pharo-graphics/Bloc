@@ -1,3 +1,3 @@
-as yet unclassified
+benchmark
 fps: aNumber
-	fpsShape text: 'fps: ', aNumber asString
+	fpsShape text: (SpText fromString: 'fps: ', aNumber asString)

@@ -1,3 +1,3 @@
-as yet unclassified
+benchmark
 renderTime: aNumber
-	renderTimeShape text: 'render time: ', aNumber asString
+	renderTimeShape text: (SpText fromString: 'render time: ', aNumber asString)

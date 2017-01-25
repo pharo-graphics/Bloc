@@ -44,6 +44,7 @@ exampleClasses
 	container addChildren: { list . "controls" }.
 	
 	space root addChild: container.
+	space root addChild: (BlBenchmarkConsole on:space).
 	"space root
 		addEventHandler:
 			(BlEventHandler

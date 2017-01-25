@@ -7,8 +7,8 @@ measure: anElement with: anExtentSpec
 			parentSpec: anExtentSpec
 			widthUsed: 0
 			heightUsed: 0.
-		each relocate: each measuredBounds origin.
-		each resize: each measuredBounds extent ].
+		each position: each measuredBounds origin.
+		each size: each measuredBounds extent ].
 
 	self applyOn: anElement managedChildren.
 	self fit: anElement with: anExtentSpec
