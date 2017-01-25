@@ -25,10 +25,10 @@ Main maintainers : [Glenn Cavarlé](https://github.com/GlennCavarle) & [Aliaksei
 These scripts download the latest Pharo 60 Image + the stable Pharo VM for 60 and installs the latest version of Bloc.
 
 (All-in-one "user" versions)
-`wget -O- https://goo.gl/YYHH5a | bash` 
+`wget -O- --no-check-certificate https://goo.gl/YYHH5a | bash`
 
 (All-in-one "developer" versions)
-`wget -O- https://goo.gl/HQAPI5 | bash` 
+`wget -O- --no-check-certificate https://goo.gl/HQAPI5 | bash` 
 
 **More detailed installation guide is described [here](INSTALL.md)**
 
