@@ -12,6 +12,8 @@ scaleBy: aFactor
 			ifFalse: [ aFactor isPoint3D
 				ifTrue: [ self scaleX: aFactor x Y: aFactor y Z: aFactor z ]
 				ifFalse: [ self error: 'Unsupported Point type: ', aFactor asString ] ] ]
+
+		"exotic cases when factor is not a point"
 		ifFalse: [ aFactor isNumber
 			ifTrue: [ self scaleX: aFactor Y: aFactor Z: aFactor ]
 			ifFalse: [ aFactor isBlock 

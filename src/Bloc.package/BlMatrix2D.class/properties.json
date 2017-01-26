@@ -4,14 +4,14 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "AliakseiSyrel 1/23/2017 00:29",
+	"commentStamp" : "AliakseiSyrel 1/26/2017 10:43",
 	"instvars" : [
-		"a11",
-		"a12",
-		"a21",
-		"a22",
-		"a31",
-		"a32" ],
+		"x",
+		"y",
+		"shx",
+		"shy",
+		"sx",
+		"sy" ],
 	"name" : "BlMatrix2D",
 	"pools" : [
 		 ],

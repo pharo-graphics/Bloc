@@ -1,4 +1,4 @@
 transforming points
 transformX: aX withY: aY
 
-	^ (aX * a11) + (aY * a21) + a31
+	^ (aX * sx) + (aY * shx) + x

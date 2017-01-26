@@ -3,6 +3,6 @@ https://en.wikipedia.org/wiki/Matrix_(mathematics)
 
 My components are named according to mathematical convention:
 
- |  a11  a12  |
- |  a21  a22  |
- |  a31  a32  |
+ |  a11  a12  |                 |   sx     shy  |
+ |  a21  a22  |       =>     |  shx    sy    |
+ |  a31  a32  |                 |    x        y     |

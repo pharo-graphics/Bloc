@@ -1,11 +1,6 @@
 accessing
 shx
-	^ a21
-	
+	"Returns the X coordinate shearing element of the affine transformation matrix"
+	<return: #Number>
 
-"sx: (anArray at: 1);
-		shy: (anArray at: 2);
-		shx: (anArray at: 3);
-		sy: (anArray at: 4);
-		x: (anArray at: 5);
-		y: (anArray at: 6);"
+	^ shx

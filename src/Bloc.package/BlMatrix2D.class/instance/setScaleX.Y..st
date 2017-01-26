@@ -1,5 +1,5 @@
 transformations
 setScaleX: aX Y: aY
 	
-	a11 := aX.
-	a22 := aY
+	sx := aX.
+	sy := aY

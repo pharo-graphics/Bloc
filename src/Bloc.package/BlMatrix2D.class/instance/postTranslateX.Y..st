@@ -5,5 +5,5 @@ postTranslateX: aX Y: aY
 	will first be transformed by the original transform,
 	then be translated by given translation"
 
-	a31 := a31 + aX.
-	a32 := a32 + aY
+	x := x + aX.
+	y := y + aY

@@ -1,3 +1,6 @@
 accessing
 y
-	^ a32
+	"Returns the Y coordinate of the translation element of the affine transformation matrix"
+	<return: #Number>
+
+	^ y
