@@ -1,0 +1,3 @@
+initialization
+defaultBackground
+	^ Color yellow

@@ -1,14 +1,14 @@
 {
-	"category" : "Bloc-Sparta-Text",
+	"category" : "Bloc-Examples-Chicken",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"area" ],
-	"name" : "BlSelectionEvent",
+		 ],
+	"name" : "BlChickenHead",
 	"pools" : [
 		 ],
-	"super" : "BlMouseEvent",
+	"super" : "BlElement",
 	"type" : "normal" }

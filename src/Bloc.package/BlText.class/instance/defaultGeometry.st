@@ -1,3 +1,3 @@
 initialization
-defaultPath
+defaultGeometry
 	^ BlRectangle new

@@ -1,5 +1,5 @@
 {
-	"category" : "Bloc-Sparta-Text",
+	"category" : "Bloc-Examples-Chicken",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
@@ -7,8 +7,8 @@
 	"commentStamp" : "",
 	"instvars" : [
 		 ],
-	"name" : "BlElementSelectionExample",
+	"name" : "BlChicken",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "BlElement",
 	"type" : "normal" }

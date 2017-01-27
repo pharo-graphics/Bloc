@@ -9,7 +9,7 @@ initialize
 	self resetChildrenArray.
 
 	transform := self defaultTransformation.
-	geometry := self defaultPath.
+	geometry := self defaultGeometry.
 	geomResizer := self defaultPathResizer.
 	border := self defaultBorder.
 	background := self defaultBackground asBlBackground.

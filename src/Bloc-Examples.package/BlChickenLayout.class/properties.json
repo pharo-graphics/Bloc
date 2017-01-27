@@ -1,0 +1,14 @@
+{
+	"category" : "Bloc-Examples-Chicken",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "BlChickenLayout",
+	"pools" : [
+		 ],
+	"super" : "BlFrameLayout",
+	"type" : "normal" }
