@@ -1,3 +1,0 @@
-drawing
-renderNeeded
-	renderer presentNeeded

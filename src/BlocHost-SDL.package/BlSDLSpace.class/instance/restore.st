@@ -1,3 +1,0 @@
-displaying
-restore
-	sdlWindow restore

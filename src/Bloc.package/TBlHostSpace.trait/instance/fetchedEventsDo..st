@@ -1,3 +1,5 @@
-events
+host space - events
 fetchedEventsDo: aBlock
-	self shouldBeImplemented
+	"Flush event queue and evaluate a given block with every queued event as argument"
+
+	self explicitRequirement

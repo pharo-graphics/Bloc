@@ -1,3 +1,5 @@
 pulse
 render
-	self hostSpace ifNotNil: [ :hs | hs render: self ]
+
+	self hostSpace ifNotNil: [ :aHostSpace |
+		aHostSpace render: self ]

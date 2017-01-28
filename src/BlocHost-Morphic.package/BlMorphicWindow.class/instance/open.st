@@ -1,3 +1,0 @@
-displaying
-open
-	self openInWorld

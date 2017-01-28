@@ -1,3 +1,3 @@
-rendering
+private - accessing
 hostSpace
 	^ hostSpace

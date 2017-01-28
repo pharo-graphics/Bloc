@@ -1,9 +1,13 @@
 event handling
 handleMouseUp: anEvent
+
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
-		| akEvt |
-		akEvt := BlMouseUpEvent new
-			timestamp: aMorphicEvent timeStamp;
+		| aBlEvent |
+		aBlEvent := BlMouseUpEvent new
 			position: aMorphicEvent position;
+			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
+			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
+			button: (self convertButtonFromMouseButtonEvent: aMorphicEvent);
+			timestamp: Time millisecondClockValue
 			yourself.
-		self enqueue: akEvt]
+		self enqueue: aBlEvent ]

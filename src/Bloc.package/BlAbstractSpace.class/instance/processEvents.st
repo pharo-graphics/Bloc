@@ -1,6 +1,8 @@
 pulse
 processEvents
 
-	self hostSpace ifNotNil:[:hs| 
-		hs fetchedEventsDo: [ :evt | self eventDispatcher dispatchEvent: evt ]].
-	self mouseProcessor generateEvents.
+	self hostSpace ifNotNil: [ :aHostSpace | 
+		aHostSpace fetchedEventsDo: [ :anEvent |
+			self eventDispatcher dispatchEvent: anEvent ] ].
+
+	self mouseProcessor generateEvents

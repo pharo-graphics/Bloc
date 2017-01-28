@@ -1,4 +1,4 @@
-rendering
+renderer - rendering
 doRender: aSpace
 
 	self prepareForDrawing.

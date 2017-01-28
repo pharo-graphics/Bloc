@@ -1,4 +1,4 @@
-as yet unclassified
+converting
 convertButtonFromMouseEvent: aGdkEvent
 
 	aGdkEvent button = 1

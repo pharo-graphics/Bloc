@@ -1,3 +1,5 @@
-events
-enqueueEvent: anSDLEvent
-	eventQueue nextPut: anSDLEvent
+host space - events
+enqueueEvent: aBlEvent
+
+	eventQueue nextPut: aBlEvent.
+	BlUniverse default requestNextPulse

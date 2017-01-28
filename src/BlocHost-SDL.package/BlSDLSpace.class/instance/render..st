@@ -1,3 +1,3 @@
-drawing
-render: aStage
-	^ renderer render: aStage
+host space - drawing
+render: aSpace
+	renderer render: aSpace

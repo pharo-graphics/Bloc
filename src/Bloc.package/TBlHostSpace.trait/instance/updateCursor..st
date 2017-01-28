@@ -1,2 +1,0 @@
-cursor managing
-updateCursor: aCursor

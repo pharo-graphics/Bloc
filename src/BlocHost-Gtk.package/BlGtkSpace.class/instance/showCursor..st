@@ -1,2 +1,0 @@
-cursor managing
-showCursor: aBoolean

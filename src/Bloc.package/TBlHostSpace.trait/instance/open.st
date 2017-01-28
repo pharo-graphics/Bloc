@@ -1,3 +1,3 @@
-displaying
+host space - displaying
 open
-	self shouldBeImplemented
+	self explicitRequirement

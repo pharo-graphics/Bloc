@@ -1,4 +1,4 @@
-initialization
+private - updating resources
 resetResources
 	
 	self checkSession.

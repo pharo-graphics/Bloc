@@ -1,3 +1,3 @@
-displaying
+host space - displaying
 maximize
 	hostWindow primMaximize

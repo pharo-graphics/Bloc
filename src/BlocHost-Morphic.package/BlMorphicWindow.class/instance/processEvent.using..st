@@ -1,7 +1,8 @@
-morphic events handling
+events-processing
 processEvent: anEvent using: defaultDispatcher
-	(self isInDrawingArea: anEvent)
+
+	(self isInSpaceArea: anEvent)
 		ifFalse: [ ^ super processEvent: anEvent using: defaultDispatcher ].
-	
-	anEvent sentTo: self internalEventHandler.
-	anEvent wasHandled:true.
+
+	anEvent sentTo: eventHandler.
+	anEvent wasHandled: true

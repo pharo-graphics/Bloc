@@ -1,3 +1,0 @@
-drawing
-renderer
-	^ renderer

@@ -1,4 +1,4 @@
-accessing
+host space - accessing
 icon: aForm
 	| convertedIcon surface |
 	aForm ifNil: [ ^self ].

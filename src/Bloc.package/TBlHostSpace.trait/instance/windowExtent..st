@@ -1,3 +1,3 @@
-accessing
+host space - accessing
 windowExtent: anExtent
-	self shouldBeImplemented
+	self explicitRequirement

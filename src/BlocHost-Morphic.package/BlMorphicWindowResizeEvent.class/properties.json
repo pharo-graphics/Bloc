@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "BlMorphicWindowEvent",
-	"category" : "BlocHost-Morphic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"category" : "BlocHost-Morphic-Events",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 1/28/2017 23:52",
 	"instvars" : [
 		"width",
-		"height"
-	],
+		"height" ],
 	"name" : "BlMorphicWindowResizeEvent",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlMorphicWindowEvent",
+	"type" : "normal" }

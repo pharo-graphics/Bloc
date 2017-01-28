@@ -14,6 +14,7 @@ exampleGeometry
 		addChild: (self newSvg position: 500 @ 200; size: 100@100);
 		addChild: (self newLine);
 		addChild: (self newRectangle position: 10 @ 150).
+
 	space root addEventHandler:
 			(BlEventHandler
 				on: BlDblClickEvent

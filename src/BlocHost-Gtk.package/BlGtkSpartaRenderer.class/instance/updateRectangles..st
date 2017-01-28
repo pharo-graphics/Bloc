@@ -1,4 +1,4 @@
-initialization
+private - rendering
 updateRectangles: allDamage
 	| intersection |
 	self validate

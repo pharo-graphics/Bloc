@@ -1,4 +1,4 @@
-accessing
+private - accessing
 mousePosition
 	| x y |
 	x := ByteArray new: ExternalType long byteSize.

@@ -1,4 +1,4 @@
-accessing
+host space - accessing
 position
 	| x y |
 	self flag: 'Why is sdlWindow nil sometimes?'.

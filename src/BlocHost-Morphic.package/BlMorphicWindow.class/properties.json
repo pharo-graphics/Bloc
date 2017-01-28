@@ -1,19 +1,19 @@
 {
-	"classtraitcomposition" : "TBlHostWindow classTrait",
-	"classvars" : [ ],
+	"category" : "BlocHost-Morphic-Morphs",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 1/28/2017 23:49",
 	"instvars" : [
-		"eventFetcher",
+		"form",
+		"spaceForm",
 		"eventHandler",
-		"drawingLock",
-		"renderer",
-		"internalEventHandler"
-	],
+		"hostSpace",
+		"mutex",
+		"preventResize" ],
 	"name" : "BlMorphicWindow",
-	"commentStamp" : "",
+	"pools" : [
+		 ],
 	"super" : "StandardWindow",
-	"traitcomposition" : "TBlHostWindow",
-	"type" : "normal",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"category" : "BlocHost-Morphic"
-}
+	"type" : "normal" }

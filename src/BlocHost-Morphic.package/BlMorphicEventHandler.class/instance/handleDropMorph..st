@@ -1,6 +1,6 @@
 event handling
 handleDropMorph: anEvent
-	| pos |
+	"| pos |
 	pos := anEvent position - self window position.
 	anEvent setPosition: pos contents: anEvent contents hand: anEvent hand.
-	self enqueue: anEvent
+	self enqueue: anEvent"

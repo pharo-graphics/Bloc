@@ -1,3 +1,0 @@
-initialize-release
-createDefaultRenderer
-	self renderer: BlMorphicAthensRenderer new

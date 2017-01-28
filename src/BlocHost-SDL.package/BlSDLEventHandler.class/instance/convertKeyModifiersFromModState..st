@@ -7,4 +7,4 @@ convertKeyModifiersFromModState: modState
 	alt := (modState bitAnd: KMOD_LALT) ~= 0.
 	gui := (modState bitAnd: KMOD_GUI) ~= 0.
 	
-	^ BlKeyModifiers shift: shift ctrl: ctrl alt: alt cmd:gui
+	^ BlKeyModifiers shift: shift ctrl: ctrl alt: alt cmd: gui

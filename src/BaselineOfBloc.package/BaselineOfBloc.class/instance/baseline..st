@@ -60,6 +60,7 @@ baseline: spec
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
+			package: #'BlocHost-Morphic' with: [ spec requires: #(#Bloc). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 
 			"groups with only sources"
@@ -68,6 +69,7 @@ baseline: spec
 				'Bloc-Layout'
 
 				'BlocHost-SDL'
+				'BlocHost-Morphic'
 				'Bloc-Animation'
 				'Bloc-Examples'
 				'Bloc-Sparta'

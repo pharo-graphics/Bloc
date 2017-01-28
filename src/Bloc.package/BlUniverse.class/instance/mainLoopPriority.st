@@ -1,3 +1,3 @@
 pulse managing
 mainLoopPriority
-	^ Processor userInterruptPriority
+	^ self host mainLoopPriority

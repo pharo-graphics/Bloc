@@ -1,4 +1,4 @@
-displaying
+host space - displaying
 close
 	self hostWindowDo: [ :hw | hw primClose. hw primDestroy ].
 	renderer := nil.

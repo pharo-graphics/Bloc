@@ -1,4 +1,4 @@
-initialization
+private - rendering
 updateRectangle: aRectangle
 	"hostSpace hostWindow primGetWindow primInvalidateRect: (GdkRectangle fromRect: aRectangle) autoRelease."
 

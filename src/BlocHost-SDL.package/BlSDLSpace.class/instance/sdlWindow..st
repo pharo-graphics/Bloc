@@ -1,3 +1,3 @@
-private
+private - accessing
 sdlWindow: anObject
 	sdlWindow := anObject

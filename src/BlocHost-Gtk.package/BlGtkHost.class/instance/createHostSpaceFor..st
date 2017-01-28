@@ -1,4 +1,4 @@
-api
+host - api
 createHostSpaceFor: aSpace
 	| aWindow aHostSpace|
 	

@@ -1,4 +1,4 @@
-accessing
+host space - displaying
 fullscreen: aBoolean
 	aBoolean ifTrue: [
 		hostWindow primFullscreen

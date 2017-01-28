@@ -1,3 +1,8 @@
-accessing
+host space - accessing
 windowExtent
-	^ self shouldBeImplemented
+	"Return the window size in screen coordinates.
+	This size may differ from the size in pixels of underlying surface 
+	on high dpi (retina) screens"
+	<return: #Point>
+
+	self explicitRequirement

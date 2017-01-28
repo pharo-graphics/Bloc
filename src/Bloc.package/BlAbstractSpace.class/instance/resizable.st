@@ -1,4 +1,6 @@
 accessing
 resizable
-	self hostSpace ifNotNil: [ :hw | ^ hw resizable ].
-	^ resizable
+
+	^ self hostSpace
+		ifNotNil: [ :aHostSpace | aHostSpace resizable ]
+		ifNil: [ resizable ]

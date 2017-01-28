@@ -5,7 +5,7 @@
 	"classtraitcomposition" : "TBlHostSpace classTrait",
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 1/29/2017 00:19",
 	"instvars" : [
 		"eventQueue",
 		"hostWindow",

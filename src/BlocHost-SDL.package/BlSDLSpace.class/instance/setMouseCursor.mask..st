@@ -1,4 +1,4 @@
-cursor managing
+private - cursor
 setMouseCursor: cursor mask: mask
 	| cursorBits maskBits extent offset sdlCursor |
 	cursorBits := self convertCursor: cursor.

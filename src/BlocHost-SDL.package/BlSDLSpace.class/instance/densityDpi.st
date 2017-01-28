@@ -1,8 +1,8 @@
-accessing
+host space - accessing
 densityDpi
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
-	| anIndex aDDPI aHDPI aVDPI |
+	| anIndex |
 	
 	anIndex := self sdlWindow getDisplayIndex.
 	anIndex < 0

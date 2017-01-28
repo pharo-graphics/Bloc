@@ -1,4 +1,4 @@
-accessing
+private - accessing
 drawableExtent
 	"Return the size of a window's underlying OpenGL drawable in pixels.
 	Returned extent may differ from #extent on high dpi (retina) displays"

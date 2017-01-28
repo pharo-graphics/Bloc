@@ -1,3 +1,3 @@
-private
+private - accessing
 getFlags
 	^ sdlWindow getFlags

@@ -1,3 +1,3 @@
 accessing
-enqueue: anBlEvent
-	self window eventFetcher enqueue: anBlEvent
+enqueue: aBlEvent
+	self window hostSpace enqueueEvent: aBlEvent

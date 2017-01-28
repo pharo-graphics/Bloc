@@ -1,0 +1,3 @@
+renderer - accessing
+dirtyAreas
+	^ dirtyAreas

@@ -1,8 +1,8 @@
 event handling
 handleWindowResize: aMorphicEvent
-	| akEvt |
-	akEvt := BlWindowResizeEvent new
+	| aBlEvent |
+	aBlEvent := BlSpaceResizeEvent new
 		extent: aMorphicEvent width @ aMorphicEvent height;
-		timestamp: aMorphicEvent timeStamp;
+		timestamp: Time millisecondClockValue;
 		yourself.
-	self enqueue: akEvt
+	self enqueue: aBlEvent

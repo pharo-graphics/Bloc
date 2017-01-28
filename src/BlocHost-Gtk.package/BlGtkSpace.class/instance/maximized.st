@@ -1,3 +1,3 @@
-accessing
+host space - displaying
 maximized
 	^ hostWindow primIsMaximized 

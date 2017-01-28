@@ -1,4 +1,4 @@
-as yet unclassified
+converting
 convertKeyModifiersFromModState: modState 
 	| shift ctrl alt gui |
 	shift := (modState bitAnd: GdkModifierType GDK_SHIFT_MASK value) ~= 0.

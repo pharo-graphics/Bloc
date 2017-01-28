@@ -4,7 +4,7 @@
 		 ],
 	"classvars" : [
 		"EventLoopProcess" ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 1/29/2017 00:19",
 	"instvars" : [
 		"hostSpaces",
 		"eventHandler",

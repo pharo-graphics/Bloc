@@ -1,4 +1,4 @@
-accessing
+host space - accessing
 windowExtent: newExtent
 	"Change window size to a newExtent"
 

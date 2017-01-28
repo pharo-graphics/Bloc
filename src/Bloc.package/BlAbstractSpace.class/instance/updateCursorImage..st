@@ -1,3 +1,5 @@
 cursor managing
 updateCursorImage: anImage
-	self hostSpace ifNotNil:[:ws|  ws updateCursor: anImage]
+
+	self hostSpace ifNotNil: [ :aHostSpace |
+		aHostSpace cursor: anImage ]

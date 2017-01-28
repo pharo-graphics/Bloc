@@ -1,4 +1,4 @@
-private
+private - accessing
 getWMInfo
 	| wmInfo |
 	wmInfo := SDL_SysWMinfo new version: SDL_Version bindingVersion.

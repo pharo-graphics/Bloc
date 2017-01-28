@@ -1,4 +1,5 @@
 accessing
 borderless
-	self hostSpace ifNotNil: [ :hw | ^ hw borderless ].
-	^ borderless
+	^ self hostSpace
+		ifNotNil: [ :aHostSpace | aHostSpace borderless ]
+		ifNil: [ borderless ]

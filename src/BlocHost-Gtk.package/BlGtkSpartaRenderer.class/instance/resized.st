@@ -1,3 +1,3 @@
-updating screen
+private - updating resources
 resized
 	self resetResources

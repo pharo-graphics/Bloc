@@ -1,4 +1,4 @@
-accessing
+private - accessing
 rendererExtent
 	"Return the size of a window's underlying drawable in pixels.
 	Returned extent may differ from #extent on high dpi (retina) displays"

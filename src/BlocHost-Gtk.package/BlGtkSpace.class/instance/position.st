@@ -1,4 +1,4 @@
-accessing
+host space - accessing
 position
 	| x y |
 	x := ByteArray new: ExternalType ulong byteSize.

@@ -1,5 +1,7 @@
-accessing
+host space - accessing
 icon: aForm
-	aForm ifNil: [ ^self ].
+	"Change window icon to the given one"
+		
+	aForm ifNil: [ ^ self ].
 	
 	"hostWindow primSetIcon: anIcon"

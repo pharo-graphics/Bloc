@@ -1,7 +1,8 @@
 event handling
 handleWindowClose: aMorphicEvent
-	| akEvt |
-	akEvt := BlWindowCloseEvent new
-		timestamp: aMorphicEvent timeStamp;
-		yourself.
-	self enqueue: akEvt
+	| aBlEvent |
+	
+	aBlEvent := BlSpaceCloseEvent new
+		timestamp: Time millisecondClockValue.
+	
+	self enqueue: aBlEvent

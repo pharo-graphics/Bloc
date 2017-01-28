@@ -1,4 +1,4 @@
-initialization
+private - rendering
 present
 	self validate ifFalse: [ ^ self ].
 

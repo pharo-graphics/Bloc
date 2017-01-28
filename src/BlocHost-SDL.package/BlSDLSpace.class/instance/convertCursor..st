@@ -1,4 +1,4 @@
-cursor managing
+private - cursor
 convertCursor: aCursor
 	| result bits|
 	aCursor unhibernate.

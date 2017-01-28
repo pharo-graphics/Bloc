@@ -1,3 +1,3 @@
-initialization
+private - accessing
 spartaCanvas
 	^ spartaCanvas

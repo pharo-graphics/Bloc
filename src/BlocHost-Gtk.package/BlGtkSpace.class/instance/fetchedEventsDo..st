@@ -1,4 +1,4 @@
-events
+host space - events
 fetchedEventsDo: aBlock
 	| events |
 	events := LinkedList new.

@@ -1,3 +1,3 @@
-as yet unclassified
+converting
 globalMousePositionForEvent: aGdkEvent
 	^ aGdkEvent x_root @ aGdkEvent y_root

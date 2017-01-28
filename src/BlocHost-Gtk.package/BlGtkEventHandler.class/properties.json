@@ -4,7 +4,7 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 1/29/2017 00:20",
 	"instvars" : [
 		"hostSpace" ],
 	"name" : "BlGtkEventHandler",

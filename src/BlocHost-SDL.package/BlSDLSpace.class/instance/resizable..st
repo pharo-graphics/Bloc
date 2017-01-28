@@ -1,3 +1,3 @@
-accessing
+host space - accessing
 resizable: aBoolean
-	"This is not supported."
+	"This is not supported"
