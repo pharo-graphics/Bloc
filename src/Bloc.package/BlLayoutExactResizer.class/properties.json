@@ -1,15 +1,16 @@
 {
+	"commentStamp" : "",
+	"super" : "BlLayoutResizer",
 	"category" : "Bloc-Layouts-Support",
 	"classinstvars" : [
 		"zero",
-		"fifty" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
+		"fifty"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
-		"size" ],
+		"size"
+	],
 	"name" : "BlLayoutExactResizer",
-	"pools" : [
-		 ],
-	"super" : "BlLayoutResizer",
-	"type" : "normal" }
+	"type" : "normal"
+}

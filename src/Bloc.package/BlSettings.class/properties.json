@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/29/2017 23:17",
+	"super" : "Object",
+	"category" : "Bloc-Settings",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"PreferableHostClass"
+	],
+	"instvars" : [ ],
+	"name" : "BlSettings",
+	"type" : "normal"
+}

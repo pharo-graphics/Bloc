@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-EventHandling",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlBubblingEventDispatcher",
-	"pools" : [
-		 ],
 	"super" : "BlSimpleEventDispatcher",
-	"type" : "normal" }
+	"category" : "Bloc-EventHandling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlBubblingEventDispatcher",
+	"type" : "normal"
+}

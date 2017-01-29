@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-KeyBinding",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlKeyCombination",
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"charCode",
-		"modifiers" ],
+		"modifiers"
+	],
 	"name" : "BlKeyCodeCombination",
-	"pools" : [
-		 ],
-	"super" : "BlKeyCombination",
-	"type" : "normal" }
+	"type" : "normal"
+}

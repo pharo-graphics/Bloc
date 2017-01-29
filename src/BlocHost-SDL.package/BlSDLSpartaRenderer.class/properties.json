@@ -1,11 +1,6 @@
 {
-	"category" : "BlocHost-SDL",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlHostRenderer classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
+	"classvars" : [ ],
 	"instvars" : [
 		"dirtyAreas",
 		"presentNeeded",
@@ -19,10 +14,16 @@
 		"sdlSurface",
 		"textureExtent",
 		"surfaceForm",
-		"scaleFactor" ],
+		"scaleFactor"
+	],
 	"name" : "BlSDLSpartaRenderer",
-	"pools" : [
-		"SDL2Constants" ],
+	"commentStamp" : "",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostRenderer",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"SDL2Constants"
+	],
+	"category" : "BlocHost-SDL"
+}

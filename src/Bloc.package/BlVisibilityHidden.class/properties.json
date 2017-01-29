@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Layouts-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 5/17/2016 11:05",
-	"instvars" : [
-		 ],
-	"name" : "BlVisibilityHidden",
-	"pools" : [
-		 ],
 	"super" : "BlVisibility",
-	"type" : "normal" }
+	"category" : "Bloc-Layouts-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlVisibilityHidden",
+	"type" : "normal"
+}

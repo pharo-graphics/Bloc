@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Space",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlCursor",
+	"category" : "Bloc-Space",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"images",
 		"animation",
-		"imgIndex" ],
+		"imgIndex"
+	],
 	"name" : "BlAnimatedCursor",
-	"pools" : [
-		 ],
-	"super" : "BlCursor",
-	"type" : "normal" }
+	"type" : "normal"
+}

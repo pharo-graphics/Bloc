@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlGeometry",
+	"category" : "Bloc-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"width",
 		"height",
-		"pathData" ],
+		"pathData"
+	],
 	"name" : "BlSvgPath",
-	"pools" : [
-		 ],
-	"super" : "BlGeometry",
-	"type" : "normal" }
+	"type" : "normal"
+}

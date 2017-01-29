@@ -1,21 +1,22 @@
 {
-	"category" : "BlocHost-SDL",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlHostRenderer classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
+	"classvars" : [ ],
 	"instvars" : [
 		"dirtyAreas",
 		"sdlSpace",
 		"skiaCanvas",
 		"glContext",
 		"scaleFactor",
-		"drawableExtent" ],
+		"drawableExtent"
+	],
 	"name" : "BlSDLSkiaRenderer",
-	"pools" : [
-		"SDL2Constants" ],
+	"commentStamp" : "",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostRenderer",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"SDL2Constants"
+	],
+	"category" : "BlocHost-SDL"
+}

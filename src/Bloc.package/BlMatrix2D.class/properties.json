@@ -1,19 +1,18 @@
 {
-	"category" : "Bloc-Basic-Math",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/26/2017 10:43",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"x",
 		"y",
 		"shx",
 		"shy",
 		"sx",
-		"sy" ],
+		"sy"
+	],
 	"name" : "BlMatrix2D",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

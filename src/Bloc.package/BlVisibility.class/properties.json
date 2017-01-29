@@ -1,17 +1,16 @@
 {
+	"commentStamp" : "AliakseiSyrel 5/17/2016 11:03",
+	"super" : "Object",
 	"category" : "Bloc-Layouts-Support",
-	"classinstvars" : [
-		 ],
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [
 		"FLOATING",
 		"GONE",
 		"HIDDEN",
-		"VISIBLE" ],
-	"commentStamp" : "AliakseiSyrel 5/17/2016 11:03",
-	"instvars" : [
-		 ],
+		"VISIBLE"
+	],
+	"instvars" : [ ],
 	"name" : "BlVisibility",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

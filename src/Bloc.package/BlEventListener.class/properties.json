@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-EventHandling",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlEventListener",
-	"pools" : [
-		 ],
 	"super" : "BlBasicEventHandler",
-	"type" : "normal" }
+	"category" : "Bloc-EventHandling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEventListener",
+	"type" : "normal"
+}

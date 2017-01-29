@@ -1,14 +1,11 @@
 {
-	"category" : "BlocHost-OSWindow-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlOSWindowHost",
-	"pools" : [
-		 ],
 	"super" : "BlHost",
-	"type" : "normal" }
+	"category" : "BlocHost-OSWindow-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlOSWindowHost",
+	"type" : "normal"
+}

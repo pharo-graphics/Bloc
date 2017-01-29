@@ -1,14 +1,13 @@
 {
-	"category" : "BlocHost-Morphic-Host",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/28/2017 23:42",
-	"instvars" : [
-		"isRunning" ],
-	"name" : "BlMorphicHost",
-	"pools" : [
-		 ],
 	"super" : "BlHost",
-	"type" : "normal" }
+	"category" : "BlocHost-Morphic-Host",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"isRunning"
+	],
+	"name" : "BlMorphicHost",
+	"type" : "normal"
+}

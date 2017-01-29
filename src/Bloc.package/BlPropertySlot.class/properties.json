@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Property",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 6/22/2016 16:03",
-	"instvars" : [
-		 ],
-	"name" : "BlPropertySlot",
-	"pools" : [
-		 ],
 	"super" : "InstanceVariableSlot",
-	"type" : "normal" }
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlPropertySlot",
+	"type" : "normal"
+}

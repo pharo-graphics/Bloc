@@ -1,16 +1,17 @@
 {
+	"commentStamp" : "AliakseiSyrel 1/14/2017 12:10",
+	"super" : "Object",
 	"category" : "Bloc-Paint-Support",
 	"classinstvars" : [
-		"empty" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 1/14/2017 12:10",
+		"empty"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"paint",
 		"style",
-		"width" ],
+		"width"
+	],
 	"name" : "BlBorder",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

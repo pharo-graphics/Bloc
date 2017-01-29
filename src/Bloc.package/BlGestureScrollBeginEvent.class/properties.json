@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Event",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGestureScrollBeginEvent",
-	"pools" : [
-		 ],
 	"super" : "BlGestureBaseScrollEvent",
-	"type" : "normal" }
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGestureScrollBeginEvent",
+	"type" : "normal"
+}

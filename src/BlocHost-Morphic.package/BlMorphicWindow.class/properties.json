@@ -1,19 +1,18 @@
 {
-	"category" : "BlocHost-Morphic-Morphs",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/28/2017 23:49",
+	"super" : "StandardWindow",
+	"category" : "BlocHost-Morphic-Morphs",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"form",
 		"spaceForm",
 		"eventHandler",
 		"hostSpace",
 		"mutex",
-		"preventResize" ],
+		"preventResize"
+	],
 	"name" : "BlMorphicWindow",
-	"pools" : [
-		 ],
-	"super" : "StandardWindow",
-	"type" : "normal" }
+	"type" : "normal"
+}

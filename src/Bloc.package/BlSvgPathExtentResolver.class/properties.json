@@ -1,18 +1,17 @@
 {
-	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"relative",
 		"previousPoint",
 		"maxPoint",
 		"minPoint",
-		"extent" ],
+		"extent"
+	],
 	"name" : "BlSvgPathExtentResolver",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

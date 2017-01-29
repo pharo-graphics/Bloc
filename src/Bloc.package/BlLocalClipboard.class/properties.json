@@ -1,14 +1,15 @@
 {
-	"category" : "Bloc-Universe",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		"Default" ],
 	"commentStamp" : "",
-	"instvars" : [
-		"clipData" ],
-	"name" : "BlLocalClipboard",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Default"
+	],
+	"instvars" : [
+		"clipData"
+	],
+	"name" : "BlLocalClipboard",
+	"type" : "normal"
+}

@@ -1,18 +1,17 @@
 {
-	"category" : "BlocHost-OSWindow-Core",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlHostRenderer classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
+	"classvars" : [ ],
 	"instvars" : [
 		"renderer",
 		"dirtyAreas",
-		"presentNeeded" ],
+		"presentNeeded"
+	],
 	"name" : "BlOSWindowRenderer",
-	"pools" : [
-		 ],
+	"commentStamp" : "",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostRenderer",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-OSWindow-Core"
+}

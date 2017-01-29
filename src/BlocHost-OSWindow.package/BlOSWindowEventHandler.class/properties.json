@@ -1,14 +1,17 @@
 {
-	"category" : "BlocHost-OSWindow-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		"SymbolCharacterMapping" ],
 	"commentStamp" : "",
-	"instvars" : [
-		"window" ],
-	"name" : "BlOSWindowEventHandler",
-	"pools" : [
-		"OSKeySymbols" ],
 	"super" : "OSWindowEventVisitor",
-	"type" : "normal" }
+	"category" : "BlocHost-OSWindow-Core",
+	"classinstvars" : [ ],
+	"pools" : [
+		"OSKeySymbols"
+	],
+	"classvars" : [
+		"SymbolCharacterMapping"
+	],
+	"instvars" : [
+		"window"
+	],
+	"name" : "BlOSWindowEventHandler",
+	"type" : "normal"
+}

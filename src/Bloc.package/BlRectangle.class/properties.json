@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"cornerRadii" ],
-	"name" : "BlRectangle",
-	"pools" : [
-		 ],
 	"super" : "BlGeometry",
-	"type" : "normal" }
+	"category" : "Bloc-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"cornerRadii"
+	],
+	"name" : "BlRectangle",
+	"type" : "normal"
+}

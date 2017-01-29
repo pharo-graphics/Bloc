@@ -1,11 +1,6 @@
 {
-	"category" : "Bloc-Basic",
-	"classinstvars" : [
-		"invalidateRectangle" ],
 	"classtraitcomposition" : "TBlEventTarget classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
+	"classvars" : [ ],
 	"instvars" : [
 		"position",
 		"extent",
@@ -28,10 +23,16 @@
 		"cursor",
 		"space",
 		"styler",
-		"misc" ],
+		"misc"
+	],
 	"name" : "BlElement",
-	"pools" : [
-		 ],
+	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [
+		"invalidateRectangle"
+	],
+	"pools" : [ ],
+	"category" : "Bloc-Basic"
+}

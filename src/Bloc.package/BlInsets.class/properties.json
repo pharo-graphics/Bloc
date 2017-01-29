@@ -1,17 +1,18 @@
 {
-	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		"Empty" ],
 	"commentStamp" : "GlennCavarle 6/22/2016 16:14",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Empty"
+	],
 	"instvars" : [
 		"top",
 		"left",
 		"bottom",
-		"right" ],
+		"right"
+	],
 	"name" : "BlInsets",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,11 +1,6 @@
 {
-	"category" : "BlocHost-Gtk",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlHostRenderer classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 1/29/2017 00:20",
+	"classvars" : [ ],
 	"instvars" : [
 		"dirtyAreas",
 		"presentNeeded",
@@ -15,10 +10,14 @@
 		"cairoContext",
 		"cairoSurface",
 		"extent",
-		"scaleFactor" ],
+		"scaleFactor"
+	],
 	"name" : "BlGtkSpartaRenderer",
-	"pools" : [
-		 ],
+	"commentStamp" : "AliakseiSyrel 1/29/2017 00:20",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostRenderer",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-Gtk"
+}

@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Layouts-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlElementAlignment",
+	"category" : "Bloc-Layouts-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"vertical",
 		"horizontal",
-		"direction" ],
+		"direction"
+	],
 	"name" : "BlCompositeAlignment",
-	"pools" : [
-		 ],
-	"super" : "BlElementAlignment",
-	"type" : "normal" }
+	"type" : "normal"
+}

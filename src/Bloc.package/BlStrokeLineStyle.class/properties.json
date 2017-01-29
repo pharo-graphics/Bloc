@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Paint-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Paint-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"capStyle",
 		"dashes",
-		"dashesOffset" ],
+		"dashesOffset"
+	],
 	"name" : "BlStrokeLineStyle",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

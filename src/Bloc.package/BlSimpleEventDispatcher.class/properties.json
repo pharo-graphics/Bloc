@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-EventHandling",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlBasicEventDispatcher",
+	"category" : "Bloc-EventHandling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"filters",
 		"handlers",
-		"shortcutHandler" ],
+		"shortcutHandler"
+	],
 	"name" : "BlSimpleEventDispatcher",
-	"pools" : [
-		 ],
-	"super" : "BlBasicEventDispatcher",
-	"type" : "normal" }
+	"type" : "normal"
+}

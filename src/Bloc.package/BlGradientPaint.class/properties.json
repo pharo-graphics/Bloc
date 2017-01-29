@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Paint-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"stops" ],
-	"name" : "BlGradientPaint",
-	"pools" : [
-		 ],
 	"super" : "BlPaint",
-	"type" : "normal" }
+	"category" : "Bloc-Paint-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"stops"
+	],
+	"name" : "BlGradientPaint",
+	"type" : "normal"
+}

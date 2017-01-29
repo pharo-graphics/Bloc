@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Property",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlVisibilityProperty",
-	"pools" : [
-		 ],
 	"super" : "BlObjectProperty",
-	"type" : "normal" }
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlVisibilityProperty",
+	"type" : "normal"
+}

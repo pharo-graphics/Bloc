@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Space-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlKeyboardProcessor",
-	"pools" : [
-		 ],
 	"super" : "BlBaseProcessor",
-	"type" : "normal" }
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlKeyboardProcessor",
+	"type" : "normal"
+}

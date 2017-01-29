@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Property",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 6/22/2016 15:56",
-	"instvars" : [
-		 ],
-	"name" : "BlObjectProperty",
-	"pools" : [
-		 ],
 	"super" : "BlObservableProperty",
-	"type" : "normal" }
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlObjectProperty",
+	"type" : "normal"
+}

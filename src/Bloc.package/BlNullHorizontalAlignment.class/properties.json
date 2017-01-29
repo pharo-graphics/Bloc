@@ -1,15 +1,14 @@
 {
+	"commentStamp" : "",
+	"super" : "BlNullAlignment",
 	"category" : "Bloc-Layouts-Support",
 	"classinstvars" : [
 		"rightToLeft",
-		"leftToRight" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
-	"instvars" : [
-		 ],
+		"leftToRight"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
 	"name" : "BlNullHorizontalAlignment",
-	"pools" : [
-		 ],
-	"super" : "BlNullAlignment",
-	"type" : "normal" }
+	"type" : "normal"
+}

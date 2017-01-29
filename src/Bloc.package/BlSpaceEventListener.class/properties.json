@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Space-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"space" ],
-	"name" : "BlSpaceEventListener",
-	"pools" : [
-		 ],
 	"super" : "BlEventListener",
-	"type" : "normal" }
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"space"
+	],
+	"name" : "BlSpaceEventListener",
+	"type" : "normal"
+}

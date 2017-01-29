@@ -1,4 +1,5 @@
 {
-	"category" : "Bloc-EventHandling",
+	"name" : "TBlEventTarget",
 	"commentStamp" : "AliakseiSyrel 11/23/2016 20:26",
-	"name" : "TBlEventTarget" }
+	"category" : "Bloc-EventHandling"
+}

@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Effect",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlElementEffect",
+	"category" : "Bloc-Effect",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"color",
 		"width",
-		"offset" ],
+		"offset"
+	],
 	"name" : "BlDropShadowEffect",
-	"pools" : [
-		 ],
-	"super" : "BlElementEffect",
-	"type" : "normal" }
+	"type" : "normal"
+}

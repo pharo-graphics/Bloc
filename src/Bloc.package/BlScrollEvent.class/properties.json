@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Event",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"direction" ],
-	"name" : "BlScrollEvent",
-	"pools" : [
-		 ],
 	"super" : "BlMouseEvent",
-	"type" : "normal" }
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"direction"
+	],
+	"name" : "BlScrollEvent",
+	"type" : "normal"
+}

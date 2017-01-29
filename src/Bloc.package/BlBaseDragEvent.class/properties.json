@@ -1,17 +1,16 @@
 {
-	"category" : "Bloc-Event",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlMouseEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"gestureSource",
 		"gestureTarget",
 		"dragboard",
-		"startButtons" ],
+		"startButtons"
+	],
 	"name" : "BlBaseDragEvent",
-	"pools" : [
-		 ],
-	"super" : "BlMouseEvent",
-	"type" : "normal" }
+	"type" : "normal"
+}

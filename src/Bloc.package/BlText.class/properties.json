@@ -1,10 +1,10 @@
 {
-	"category" : "Bloc-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"wrapAttribute",
 		"font",
@@ -12,9 +12,8 @@
 		"wrappingWidth",
 		"textModel",
 		"fill",
-		"stroke" ],
+		"stroke"
+	],
 	"name" : "BlText",
-	"pools" : [
-		 ],
-	"super" : "BlElement",
-	"type" : "normal" }
+	"type" : "normal"
+}

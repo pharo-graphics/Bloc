@@ -1,14 +1,13 @@
 {
-	"category" : "BlocHost-Morphic-Host",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/28/2017 23:35",
-	"instvars" : [
-		"window" ],
-	"name" : "BlMorphicEventHandler",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "BlocHost-Morphic-Host",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"window"
+	],
+	"name" : "BlMorphicEventHandler",
+	"type" : "normal"
+}

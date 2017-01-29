@@ -12,6 +12,7 @@ SystemOrganization addCategory: 'Bloc-Layouts-Support'!
 SystemOrganization addCategory: 'Bloc-Paint-Basic'!
 SystemOrganization addCategory: 'Bloc-Paint-Support'!
 SystemOrganization addCategory: 'Bloc-Property'!
+SystemOrganization addCategory: 'Bloc-Settings'!
 SystemOrganization addCategory: 'Bloc-Space'!
 SystemOrganization addCategory: 'Bloc-Space-Support'!
 SystemOrganization addCategory: 'Bloc-State'!

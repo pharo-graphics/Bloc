@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Space-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"lastFocusOwner" ],
-	"name" : "BlFocusProcessor",
-	"pools" : [
-		 ],
 	"super" : "BlBaseProcessor",
-	"type" : "normal" }
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"lastFocusOwner"
+	],
+	"name" : "BlFocusProcessor",
+	"type" : "normal"
+}

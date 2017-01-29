@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Layouts-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/30/2016 17:52",
-	"instvars" : [
-		 ],
-	"name" : "BlMeasurementAtMostMode",
-	"pools" : [
-		 ],
 	"super" : "BlMeasurementMode",
-	"type" : "normal" }
+	"category" : "Bloc-Layouts-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMeasurementAtMostMode",
+	"type" : "normal"
+}

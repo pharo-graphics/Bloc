@@ -1,16 +1,15 @@
 {
+	"commentStamp" : "AliakseiSyrel 1/30/2016 17:51",
+	"super" : "Object",
 	"category" : "Bloc-Layouts-Support",
 	"classinstvars" : [
 		"atMost",
 		"exact",
-		"unspecified" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 1/30/2016 17:51",
-	"instvars" : [
-		 ],
+		"unspecified"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
 	"name" : "BlMeasurementMode",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

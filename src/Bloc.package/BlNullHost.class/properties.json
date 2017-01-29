@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Universe",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/22/2017 15:19",
-	"instvars" : [
-		"isRunning" ],
-	"name" : "BlNullHost",
-	"pools" : [
-		 ],
 	"super" : "BlHost",
-	"type" : "normal" }
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"isRunning"
+	],
+	"name" : "BlNullHost",
+	"type" : "normal"
+}

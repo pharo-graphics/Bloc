@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-State",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlSelectedState",
-	"pools" : [
-		 ],
 	"super" : "BlState",
-	"type" : "normal" }
+	"category" : "Bloc-State",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlSelectedState",
+	"type" : "normal"
+}

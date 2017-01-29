@@ -1,11 +1,13 @@
 {
+	"commentStamp" : "AliakseiSyrel 1/7/2017 20:21",
+	"super" : "Object",
 	"category" : "Bloc-Universe",
-	"classinstvars" : [
-		 ],
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [
 		"Default",
-		"Session" ],
-	"commentStamp" : "AliakseiSyrel 1/7/2017 20:21",
+		"Session"
+	],
 	"instvars" : [
 		"pulseLoop",
 		"preferableHost",
@@ -14,9 +16,8 @@
 		"animationManager",
 		"announcer",
 		"deferredActions",
-		"nextPulseRequested" ],
+		"nextPulseRequested"
+	],
 	"name" : "BlUniverse",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Layouts-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlEndAlignment",
-	"pools" : [
-		 ],
 	"super" : "BlRelativeAlignment",
-	"type" : "normal" }
+	"category" : "Bloc-Layouts-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEndAlignment",
+	"type" : "normal"
+}

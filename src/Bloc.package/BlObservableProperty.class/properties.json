@@ -1,19 +1,18 @@
 {
-	"category" : "Bloc-Property",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 6/22/2016 16:04",
+	"super" : "Object",
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"name",
 		"owner",
 		"rawValue",
 		"changeListeners",
 		"isValid",
-		"binding" ],
+		"binding"
+	],
 	"name" : "BlObservableProperty",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

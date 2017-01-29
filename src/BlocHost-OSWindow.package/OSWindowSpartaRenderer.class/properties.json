@@ -1,15 +1,14 @@
 {
-	"category" : "BlocHost-OSWindow-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 10/6/2016 23:14",
+	"super" : "OSWindowRenderer",
+	"category" : "BlocHost-OSWindow-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"spartaCanvas",
-		"session" ],
+		"session"
+	],
 	"name" : "OSWindowSpartaRenderer",
-	"pools" : [
-		 ],
-	"super" : "OSWindowRenderer",
-	"type" : "normal" }
+	"type" : "normal"
+}

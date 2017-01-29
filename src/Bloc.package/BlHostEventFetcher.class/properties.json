@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Universe",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 6/26/2016 00:02",
-	"instvars" : [
-		 ],
-	"name" : "BlHostEventFetcher",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlHostEventFetcher",
+	"type" : "normal"
+}

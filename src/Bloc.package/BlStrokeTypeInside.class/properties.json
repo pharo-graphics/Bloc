@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Paint-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlStrokeTypeInside",
-	"pools" : [
-		 ],
 	"super" : "BlStrokeType",
-	"type" : "normal" }
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlStrokeTypeInside",
+	"type" : "normal"
+}

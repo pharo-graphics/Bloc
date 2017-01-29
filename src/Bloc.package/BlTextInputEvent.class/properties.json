@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Event",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "RonieSalgado 7/16/2016 00:58",
-	"instvars" : [
-		"text" ],
-	"name" : "BlTextInputEvent",
-	"pools" : [
-		 ],
 	"super" : "BlUIEvent",
-	"type" : "normal" }
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text"
+	],
+	"name" : "BlTextInputEvent",
+	"type" : "normal"
+}

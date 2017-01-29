@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Universe",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 7/12/2016 15:44",
-	"instvars" : [
-		"animations" ],
-	"name" : "BlAnimationManager",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"animations"
+	],
+	"name" : "BlAnimationManager",
+	"type" : "normal"
+}

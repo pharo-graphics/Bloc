@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Property",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlObjectProperty",
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"property",
-		"delegationBlock" ],
+		"delegationBlock"
+	],
 	"name" : "BlDelegateProperty",
-	"pools" : [
-		 ],
-	"super" : "BlObjectProperty",
-	"type" : "normal" }
+	"type" : "normal"
+}

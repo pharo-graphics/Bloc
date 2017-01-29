@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Space",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 6/22/2016 16:27",
-	"instvars" : [
-		 ],
-	"name" : "BlCursor",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Space",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlCursor",
+	"type" : "normal"
+}

@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-KeyBinding",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"events" ],
-	"name" : "BlEventBuffer",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"events"
+	],
+	"name" : "BlEventBuffer",
+	"type" : "normal"
+}

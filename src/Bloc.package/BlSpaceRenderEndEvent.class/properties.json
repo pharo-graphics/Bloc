@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Event",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlSpaceEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"start",
-		"end" ],
+		"end"
+	],
 	"name" : "BlSpaceRenderEndEvent",
-	"pools" : [
-		 ],
-	"super" : "BlSpaceEvent",
-	"type" : "normal" }
+	"type" : "normal"
+}

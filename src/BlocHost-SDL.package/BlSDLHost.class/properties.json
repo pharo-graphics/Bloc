@@ -1,16 +1,19 @@
 {
-	"category" : "BlocHost-SDL",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		"EventLoopProcess" ],
 	"commentStamp" : "",
+	"super" : "BlHost",
+	"category" : "BlocHost-SDL",
+	"classinstvars" : [ ],
+	"pools" : [
+		"SDL2Constants"
+	],
+	"classvars" : [
+		"EventLoopProcess"
+	],
 	"instvars" : [
 		"hostSpaces",
 		"eventHandler",
-		"inputSemaphore" ],
+		"inputSemaphore"
+	],
 	"name" : "BlSDLHost",
-	"pools" : [
-		"SDL2Constants" ],
-	"super" : "BlHost",
-	"type" : "normal" }
+	"type" : "normal"
+}

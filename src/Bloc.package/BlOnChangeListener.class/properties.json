@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Property",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 6/22/2016 16:08",
-	"instvars" : [
-		"action" ],
-	"name" : "BlOnChangeListener",
-	"pools" : [
-		 ],
 	"super" : "BlChangeListener",
-	"type" : "normal" }
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"action"
+	],
+	"name" : "BlOnChangeListener",
+	"type" : "normal"
+}

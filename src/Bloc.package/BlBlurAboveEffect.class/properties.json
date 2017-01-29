@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Effect",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlBlurAboveEffect",
-	"pools" : [
-		 ],
 	"super" : "BlBlurEffect",
-	"type" : "normal" }
+	"category" : "Bloc-Effect",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlBlurAboveEffect",
+	"type" : "normal"
+}

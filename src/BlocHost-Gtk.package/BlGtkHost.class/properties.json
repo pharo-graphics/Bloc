@@ -1,16 +1,17 @@
 {
-	"category" : "BlocHost-Gtk",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		"EventLoopProcess" ],
 	"commentStamp" : "AliakseiSyrel 1/29/2017 00:19",
+	"super" : "BlHost",
+	"category" : "BlocHost-Gtk",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"EventLoopProcess"
+	],
 	"instvars" : [
 		"hostSpaces",
 		"eventHandler",
-		"isRunning" ],
+		"isRunning"
+	],
 	"name" : "BlGtkHost",
-	"pools" : [
-		 ],
-	"super" : "BlHost",
-	"type" : "normal" }
+	"type" : "normal"
+}

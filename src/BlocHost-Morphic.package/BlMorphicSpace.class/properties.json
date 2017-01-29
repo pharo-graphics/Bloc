@@ -1,18 +1,17 @@
 {
-	"category" : "BlocHost-Morphic-Host",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlHostSpace classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 1/28/2017 23:44",
+	"classvars" : [ ],
 	"instvars" : [
 		"morphicWindow",
 		"renderer",
-		"eventQueue" ],
+		"eventQueue"
+	],
 	"name" : "BlMorphicSpace",
-	"pools" : [
-		 ],
+	"commentStamp" : "AliakseiSyrel 1/28/2017 23:44",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostSpace",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-Morphic-Host"
+}

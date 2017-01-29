@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Layouts-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 10/28/2016 19:54",
-	"instvars" : [
-		 ],
-	"name" : "BlLayoutLeftToRight",
-	"pools" : [
-		 ],
 	"super" : "BlLayoutDirection",
-	"type" : "normal" }
+	"category" : "Bloc-Layouts-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlLayoutLeftToRight",
+	"type" : "normal"
+}

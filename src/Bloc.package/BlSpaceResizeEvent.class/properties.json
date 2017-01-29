@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Event",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"extent" ],
-	"name" : "BlSpaceResizeEvent",
-	"pools" : [
-		 ],
 	"super" : "BlSpaceEvent",
-	"type" : "normal" }
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"extent"
+	],
+	"name" : "BlSpaceResizeEvent",
+	"type" : "normal"
+}

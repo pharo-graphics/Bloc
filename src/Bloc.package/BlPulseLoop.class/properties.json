@@ -1,10 +1,10 @@
 {
-	"category" : "Bloc-Universe",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 10/13/2016 16:50",
+	"super" : "Object",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"pulseEvent",
 		"pulseStartTime",
@@ -12,9 +12,8 @@
 		"waitingDelay",
 		"loopProcess",
 		"pulsePeriod",
-		"session" ],
+		"session"
+	],
 	"name" : "BlPulseLoop",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

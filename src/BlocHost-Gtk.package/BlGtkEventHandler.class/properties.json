@@ -1,14 +1,13 @@
 {
-	"category" : "BlocHost-Gtk",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/29/2017 00:20",
-	"instvars" : [
-		"hostSpace" ],
-	"name" : "BlGtkEventHandler",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "BlocHost-Gtk",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"hostSpace"
+	],
+	"name" : "BlGtkEventHandler",
+	"type" : "normal"
+}

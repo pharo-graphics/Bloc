@@ -1,21 +1,20 @@
 {
-	"category" : "BlocHost-Morphic-Host",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlHostRenderer classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 1/28/2017 23:48",
+	"classvars" : [ ],
 	"instvars" : [
 		"dirtyAreas",
 		"morphicSpace",
 		"spartaCanvas",
 		"session",
 		"windowSize",
-		"externalForm" ],
+		"externalForm"
+	],
 	"name" : "BlMorphicSpartaRenderer",
-	"pools" : [
-		 ],
+	"commentStamp" : "AliakseiSyrel 1/28/2017 23:48",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostRenderer",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-Morphic-Host"
+}

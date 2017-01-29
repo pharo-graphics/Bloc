@@ -1,19 +1,18 @@
 {
-	"category" : "BlocHost-Gtk",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlHostSpace classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 1/29/2017 00:19",
+	"classvars" : [ ],
 	"instvars" : [
 		"eventQueue",
 		"hostWindow",
 		"renderer",
-		"windowID" ],
+		"windowID"
+	],
 	"name" : "BlGtkSpace",
-	"pools" : [
-		 ],
+	"commentStamp" : "AliakseiSyrel 1/29/2017 00:19",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostSpace",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-Gtk"
+}
