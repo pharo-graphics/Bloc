@@ -2,4 +2,5 @@ initialization
 initialize
 	super initialize.
 
-	eventQueue := WaitfreeQueue new
+	eventQueue := WaitfreeQueue new.
+	mutex := Mutex new

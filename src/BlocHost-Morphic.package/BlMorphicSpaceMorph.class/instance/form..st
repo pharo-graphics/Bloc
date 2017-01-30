@@ -1,5 +1,12 @@
 accessing
 form: aForm
+	
 	form := aForm.
 	
-	self defer: [ self changed ]
+	defered
+		ifTrue: [ ^ self ].
+	 
+	defered := true.
+	self defer: [
+		defered := false.
+		self changed ]

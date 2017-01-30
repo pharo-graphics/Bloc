@@ -6,7 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"form"
+		"form",
+		"hostSpace",
+		"defered"
 	],
 	"name" : "BlMorphicSpaceMorph",
 	"type" : "normal"

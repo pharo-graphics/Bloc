@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/30/2017 00:59",
+	"super" : "ExternalForm",
+	"category" : "BlocHost-Morphic-Host",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMorphicExternalForm",
+	"type" : "normal"
+}

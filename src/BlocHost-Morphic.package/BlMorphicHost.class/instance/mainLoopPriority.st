@@ -1,3 +1,3 @@
 host - api
 mainLoopPriority
-	^ Processor userSchedulingPriority
+	^ Processor userSchedulingPriority - 1

@@ -8,8 +8,9 @@ doRender: aSpace
 
 	dirtyAreas
 		ifEmpty: [ ^ self ].
-			
-	aSpace fullDrawOn: spartaCanvas.
-	self updateRectangles: dirtyAreas.
+	
+	morphicSpace lock critical: [ 
+		aSpace fullDrawOn: spartaCanvas.
+		self updateRectangles: dirtyAreas ].
 
 	self clearDirtyAreasFor: aSpace

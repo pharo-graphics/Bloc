@@ -1,8 +1,15 @@
 initialization
 initializeAnnouncement
+	
+	self
+		onAnnouncement: WindowOpened
+		do: [ :evt | spaceForm startStepping ].
+
 	self
 		onAnnouncement: WindowClosed
-		do: [ :evt | BlMorphicWindowCloseEvent new sentTo: eventHandler ].
+		do: [ :evt | spaceForm stopStepping. BlMorphicWindowCloseEvent new sentTo: eventHandler ].
+		
+	
 	self
 		onAnnouncement: WindowResizing
 		do: [ :evt | 

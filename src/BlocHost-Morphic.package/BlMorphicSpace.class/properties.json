@@ -4,7 +4,8 @@
 	"instvars" : [
 		"morphicWindow",
 		"renderer",
-		"eventQueue"
+		"eventQueue",
+		"mutex"
 	],
 	"name" : "BlMorphicSpace",
 	"commentStamp" : "AliakseiSyrel 1/28/2017 23:44",

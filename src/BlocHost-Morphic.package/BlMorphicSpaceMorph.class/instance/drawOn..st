@@ -2,5 +2,7 @@ drawing
 drawOn: aCanvas
 	super drawOn: aCanvas.
 	
-	aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
-		aClippedCanvas drawImage: form at: self position ]
+	hostSpace ifNotNil: [ 
+		hostSpace lock critical: [
+			aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
+				aClippedCanvas drawImage: form at: self position ] ] ]
