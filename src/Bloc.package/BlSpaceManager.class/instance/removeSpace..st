@@ -5,4 +5,4 @@ removeSpace: aSpace
 		assert: [ spaces includes: aSpace ]
 		description: [ 'Can not remove space that is not managed!' ].
 
-	spaces remove: aSpace
+	spaces := spaces copyWithout: aSpace
