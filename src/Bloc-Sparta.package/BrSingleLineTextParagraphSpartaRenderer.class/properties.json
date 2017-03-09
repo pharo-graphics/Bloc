@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextParagraphSpartaRenderer",
+	"category" : "Bloc-Sparta-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrSingleLineTextParagraphSpartaRenderer",
+	"type" : "normal"
+}

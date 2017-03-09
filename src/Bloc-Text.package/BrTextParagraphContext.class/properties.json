@@ -5,7 +5,13 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BrTextParagraphRenderer",
+	"instvars" : [
+		"maxHeight",
+		"maxWidth",
+		"accumulatedHeight",
+		"accumulatedWidth",
+		"position"
+	],
+	"name" : "BrTextParagraphContext",
 	"type" : "normal"
 }

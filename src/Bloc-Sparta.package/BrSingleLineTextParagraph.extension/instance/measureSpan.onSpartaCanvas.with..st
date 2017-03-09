@@ -21,7 +21,7 @@ measureSpan: aSpan onSpartaCanvas: aSpartaCanvas with: aContext
 		expanded on full screen may contain a few thousands of small text pieces where each of them
 		own a text layout. It means that with such a simple optimization we prevent many thousands
 		of matrix objects from being created and later garbage collected. Worth it!"
-	aTextPainter := self createPainter: aSpan on: aSpartaCanvas.
+	aTextPainter := self createSpartaTextPainter: aSpan on: aSpartaCanvas.
 	"Since I am a single line layout we want to force disable breaks in order
 	to prevent hyphenation computations which is rather slow"
 	aTextPainter breakNone.

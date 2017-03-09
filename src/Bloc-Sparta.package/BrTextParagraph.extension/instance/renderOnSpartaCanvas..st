@@ -1,3 +1,5 @@
 *Bloc-Sparta
 renderOnSpartaCanvas: aSpartaCanvas
-	self subclassResponsibility
+	(self rendererOnSpartaCanvas: aSpartaCanvas)
+		render: self
+		on: aSpartaCanvas

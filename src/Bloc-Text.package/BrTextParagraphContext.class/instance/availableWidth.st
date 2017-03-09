@@ -1,0 +1,3 @@
+accessing
+availableWidth
+	^ maxWidth - accumulatedWidth

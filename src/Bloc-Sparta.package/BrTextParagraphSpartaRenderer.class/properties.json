@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Bloc-Text-Text",
+	"super" : "BrTextParagraphRenderer",
+	"category" : "Bloc-Sparta-Text",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BrTextParagraphRenderer",
+	"name" : "BrTextParagraphSpartaRenderer",
 	"type" : "normal"
 }

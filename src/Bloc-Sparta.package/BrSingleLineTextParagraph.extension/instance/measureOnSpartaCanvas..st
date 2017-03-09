@@ -4,8 +4,7 @@ measureOnSpartaCanvas: aSpartaCanvas
 	based on attributes and layout properties (maximum width / height)"
 	| anIterator aContext |
 
-	aContext := SpSingleLineTextLayoutContext new.
-	aContext text: text.
+	aContext := BrSingleLineTextParagraphContext new.
 	aContext maxWidth: maxWidth.
 	aContext maxHeight: maxHeight.
 

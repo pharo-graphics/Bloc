@@ -1,11 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "BrTextParagraphContext",
 	"category" : "Bloc-Text-Text",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BrTextParagraphRenderer",
+	"instvars" : [
+		"spans"
+	],
+	"name" : "BrSingleLineTextParagraphContext",
 	"type" : "normal"
 }
