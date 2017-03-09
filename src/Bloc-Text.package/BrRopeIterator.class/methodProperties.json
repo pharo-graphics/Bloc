@@ -1,0 +1,22 @@
+{
+	"instance" : {
+		"attributes" : "AliakseiSyrel 2/13/2017 15:01",
+		"next" : "AliakseiSyrel 2/12/2017 14:07",
+		"hasNext" : "AliakseiSyrel 2/12/2017 14:18",
+		"rope" : "AliakseiSyrel 2/12/2017 01:33",
+		"hasPrevious" : "AliakseiSyrel 2/12/2017 14:18",
+		"peek" : "AliakseiSyrel 2/12/2017 14:21",
+		"nextSpan" : "AliakseiSyrel 2/12/2017 01:33",
+		"nextSegmentIncluding:" : "AliakseiSyrel 2/12/2017 01:33",
+		"previous" : "AliakseiSyrel 2/12/2017 14:08",
+		"previousAttributes" : "AliakseiSyrel 2/12/2017 01:39",
+		"skip:" : "AliakseiSyrel 2/12/2017 14:24",
+		"nextSegment:" : "AliakseiSyrel 2/12/2017 01:33",
+		"position" : "AliakseiSyrel 2/12/2017 14:12",
+		"nextAttributes" : "AliakseiSyrel 2/12/2017 01:33",
+		"rope:from:to:" : "AliakseiSyrel 2/13/2017 14:51"
+	},
+	"class" : {
+		"rope:from:to:" : "AliakseiSyrel 2/12/2017 01:33"
+	}
+}

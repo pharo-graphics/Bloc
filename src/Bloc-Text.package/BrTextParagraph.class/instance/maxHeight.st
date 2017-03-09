@@ -1,0 +1,3 @@
+paragraph - geometry
+maxHeight
+	^ maxHeight

@@ -1,0 +1,22 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextStyler",
+	"category" : "Bloc-Text-Text-Styler",
+	"classinstvars" : [
+		"styleTable",
+		"textAttributesByPixelHeight",
+		"textAttributes"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"classOrMetaClass",
+		"workspace",
+		"font",
+		"parser",
+		"environment",
+		"pixelHeight"
+	],
+	"name" : "BrTextStylerST80",
+	"type" : "normal"
+}

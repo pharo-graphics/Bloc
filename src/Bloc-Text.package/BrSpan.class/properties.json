@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 2/14/2017 10:26",
+	"super" : "BrText",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrSpan",
+	"type" : "normal"
+}

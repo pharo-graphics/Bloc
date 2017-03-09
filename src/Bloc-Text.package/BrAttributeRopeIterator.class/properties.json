@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BrRopeIterator",
+	"category" : "Bloc-Text-Rope",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"position",
+		"subIterator"
+	],
+	"name" : "BrAttributeRopeIterator",
+	"type" : "normal"
+}

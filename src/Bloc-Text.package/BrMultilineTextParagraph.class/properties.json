@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextParagraph",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"lines"
+	],
+	"name" : "BrMultilineTextParagraph",
+	"type" : "normal"
+}

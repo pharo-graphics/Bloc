@@ -1,0 +1,34 @@
+{
+	"instance" : {
+		"assertAccessInsert:" : "AliakseiSyrel 2/10/2017 13:34",
+		"from:to:do:" : "AliakseiSyrel 2/10/2017 13:30",
+		"iterator" : "AliakseiSyrel 2/12/2017 01:35",
+		"clearAttributes:to:if:" : "AliakseiSyrel 2/11/2017 21:11",
+		"attributes:from:to:" : "AliakseiSyrel 2/9/2017 22:35",
+		"putOn:from:to:" : "AliakseiSyrel 2/10/2017 14:04",
+		"size" : "AliakseiSyrel 2/9/2017 22:15",
+		"from:to:" : "AliakseiSyrel 2/9/2017 22:17",
+		"do:" : "AliakseiSyrel 2/10/2017 13:30",
+		"iterator:to:" : "AliakseiSyrel 2/12/2017 01:35",
+		"insertItems:at:" : "AliakseiSyrel 2/10/2017 13:05",
+		"attributes:" : "AliakseiSyrel 2/11/2017 22:03",
+		"isLeaf" : "AliakseiSyrel 2/9/2017 22:15",
+		"at:" : "AliakseiSyrel 2/9/2017 22:14",
+		"append:" : "AliakseiSyrel 2/9/2017 22:37",
+		"isConcatenation" : "AliakseiSyrel 2/9/2017 22:56",
+		"clearAttributes:to:" : "AliakseiSyrel 2/11/2017 21:11",
+		"insert:at:" : "AliakseiSyrel 2/9/2017 23:44",
+		"assertIndexForInsert:" : "AliakseiSyrel 2/9/2017 23:59",
+		"printOn:" : "AliakseiSyrel 2/10/2017 14:07",
+		"isEmpty" : "AliakseiSyrel 2/9/2017 22:55",
+		"putOn:" : "AliakseiSyrel 2/10/2017 14:05"
+	},
+	"class" : {
+		"collectionRope" : "AliakseiSyrel 2/9/2017 22:19",
+		"combineLength" : "AliakseiSyrel 2/9/2017 22:27",
+		"subRope" : "AliakseiSyrel 2/9/2017 22:19",
+		"concatenationRope" : "AliakseiSyrel 2/9/2017 23:04",
+		"concatenate:and:" : "AliakseiSyrel 2/10/2017 01:57",
+		"attributeRope" : "AliakseiSyrel 2/9/2017 22:33"
+	}
+}

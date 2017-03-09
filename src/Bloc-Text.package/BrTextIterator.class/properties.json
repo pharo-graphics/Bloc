@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 2/12/2017 00:43",
+	"super" : "Object",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrTextIterator",
+	"type" : "normal"
+}

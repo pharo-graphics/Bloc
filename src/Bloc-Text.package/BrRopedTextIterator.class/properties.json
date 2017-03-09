@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 2/12/2017 00:44",
+	"super" : "BrTextIterator",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"rope",
+		"iterator"
+	],
+	"name" : "BrRopedTextIterator",
+	"type" : "normal"
+}

@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Text-Text-Styler",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"backgroundProcess",
+		"text",
+		"monitor",
+		"view",
+		"stylingEnabled"
+	],
+	"name" : "BrTextStyler",
+	"type" : "normal"
+}

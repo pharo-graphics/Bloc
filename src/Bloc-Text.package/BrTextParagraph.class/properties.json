@@ -1,0 +1,22 @@
+{
+	"commentStamp" : "AliakseiSyrel 2/11/2017 23:39",
+	"super" : "Object",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [
+		"matrix"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"maxHeight",
+		"maxWidth",
+		"height",
+		"width",
+		"end",
+		"autoRelease",
+		"text",
+		"offset"
+	],
+	"name" : "BrTextParagraph",
+	"type" : "normal"
+}
