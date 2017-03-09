@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Layout-Grid",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGridLayoutConstraintsHorizontal",
-	"pools" : [
-		 ],
 	"super" : "BlGridLayoutConstraintsAxis",
-	"type" : "normal" }
+	"category" : "Bloc-Layout-Grid",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGridLayoutConstraintsHorizontal",
+	"type" : "normal"
+}

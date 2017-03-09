@@ -1,15 +1,14 @@
 {
+	"commentStamp" : "",
+	"super" : "Object",
 	"category" : "Bloc-Infinite-Layouts-Linear-Utilities",
 	"classinstvars" : [
 		"head",
-		"tail" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
-	"instvars" : [
-		 ],
+		"tail"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
 	"name" : "BlInfiniteLinearLayoutItemDirection",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

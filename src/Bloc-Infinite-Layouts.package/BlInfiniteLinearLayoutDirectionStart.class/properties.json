@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Infinite-Layouts-Linear-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlInfiniteLinearLayoutDirectionStart",
-	"pools" : [
-		 ],
 	"super" : "BlInfiniteLinearLayoutDirection",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Layouts-Linear-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteLinearLayoutDirectionStart",
+	"type" : "normal"
+}

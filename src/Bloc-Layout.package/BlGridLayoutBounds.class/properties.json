@@ -1,16 +1,17 @@
 {
-	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Grid-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlGridLayoutConstants"
+	],
+	"classvars" : [ ],
 	"instvars" : [
 		"before",
 		"after",
-		"flexibility" ],
+		"flexibility"
+	],
 	"name" : "BlGridLayoutBounds",
-	"pools" : [
-		"BlGridLayoutConstants" ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

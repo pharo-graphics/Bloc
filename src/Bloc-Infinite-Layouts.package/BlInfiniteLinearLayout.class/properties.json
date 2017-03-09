@@ -1,10 +1,10 @@
 {
-	"category" : "Bloc-Infinite-Layouts-Linear",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlInfiniteLayout",
+	"category" : "Bloc-Infinite-Layouts-Linear",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"shouldReverseLayout",
 		"orientation",
@@ -14,9 +14,8 @@
 		"pendingScrollPositionOffset",
 		"lastStackFromEnd",
 		"anchorInfo",
-		"stackFromEnd" ],
+		"stackFromEnd"
+	],
 	"name" : "BlInfiniteLinearLayout",
-	"pools" : [
-		 ],
-	"super" : "BlInfiniteLayout",
-	"type" : "normal" }
+	"type" : "normal"
+}

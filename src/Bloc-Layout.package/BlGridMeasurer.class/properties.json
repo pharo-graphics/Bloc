@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Grid-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"element",
-		"layout" ],
+		"layout"
+	],
 	"name" : "BlGridMeasurer",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

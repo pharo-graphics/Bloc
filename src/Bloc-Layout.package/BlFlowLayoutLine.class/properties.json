@@ -1,10 +1,10 @@
 {
-	"category" : "Bloc-Layout-Flow-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Flow-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"children",
 		"startLength",
@@ -12,9 +12,8 @@
 		"length",
 		"breadth",
 		"measurer",
-		"index" ],
+		"index"
+	],
 	"name" : "BlFlowLayoutLine",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

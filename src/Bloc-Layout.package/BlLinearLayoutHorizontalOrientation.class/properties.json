@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Layout-Linear-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlLinearLayoutHorizontalOrientation",
-	"pools" : [
-		 ],
 	"super" : "BlLinearLayoutOrientation",
-	"type" : "normal" }
+	"category" : "Bloc-Layout-Linear-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlLinearLayoutHorizontalOrientation",
+	"type" : "normal"
+}

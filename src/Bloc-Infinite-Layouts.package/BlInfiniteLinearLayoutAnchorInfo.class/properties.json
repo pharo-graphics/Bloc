@@ -1,17 +1,18 @@
 {
-	"category" : "Bloc-Infinite-Layouts-Linear-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Layouts-Linear-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"classvars" : [ ],
 	"instvars" : [
 		"position",
 		"coordinate",
 		"layoutFromEnd",
-		"valid" ],
+		"valid"
+	],
 	"name" : "BlInfiniteLinearLayoutAnchorInfo",
-	"pools" : [
-		"BlInfiniteConstants" ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

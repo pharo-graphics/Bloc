@@ -1,12 +1,16 @@
 {
+	"commentStamp" : "AliakseiSyrel 5/18/2016 19:47",
+	"super" : "Object",
 	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [
-		 ],
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlGridLayoutConstants"
+	],
 	"classvars" : [
 		"COMPLETE",
 		"NEW",
-		"PENDING" ],
-	"commentStamp" : "AliakseiSyrel 5/18/2016 19:47",
+		"PENDING"
+	],
 	"instvars" : [
 		"element",
 		"layout",
@@ -34,9 +38,8 @@
 		"locations",
 		"locationsValid",
 		"childConstraints",
-		"totalMargins" ],
+		"totalMargins"
+	],
 	"name" : "BlGridLayoutAxis",
-	"pools" : [
-		"BlGridLayoutConstants" ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}
