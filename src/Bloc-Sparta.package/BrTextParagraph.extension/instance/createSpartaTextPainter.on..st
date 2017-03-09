@@ -12,8 +12,8 @@ createSpartaTextPainter: aBrSpan on: aSpartaCanvas
 	aFontBuilder := aSpartaCanvas font.
 
 	theAttributes do: [ :anAttribute |
-		anAttribute applyOnFont: aFontBuilder with: aBrSpan.
-		anAttribute applyOnText: aTextPainter with: aBrSpan ].
+		anAttribute applyOnSpartaFontBuilder: aFontBuilder with: aBrSpan.
+		anAttribute applyOnSpartaTextPainter: aTextPainter with: aBrSpan ].
 
 	aTextPainter font: aFontBuilder build.
 	aTextPainter string: (String new: aBrSpan size streamContents: [ :aStream | aStream nextPutAll: aBrSpan asString ]).

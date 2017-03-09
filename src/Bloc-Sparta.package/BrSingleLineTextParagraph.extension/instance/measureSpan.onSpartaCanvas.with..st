@@ -1,19 +1,19 @@
 *Bloc-Sparta
 measureSpan: aSpan onSpartaCanvas: aSpartaCanvas with: aContext
-	| attributes aTextPainter aLength aStart aTransformation anInvertedTransformation aMetricsProvider aTextRun aMetrics |
+	| attributes aTextPainter aLength aStart aBlTransformation anInvertedTransformation aMetricsProvider aTextRun aMetrics |
 	self
 		assert: [ aSpan isNotEmpty ]
 		description: [ 'Span must be non-empty!' ].
-	aTransformation := self class matrix loadIdentity.
+	aBlTransformation := self class matrix loadIdentity.
 	attributes := aSpan attributes.
 	attributes
 		do:
-			[ :attribute | attribute applyOnTransform: aTransformation with: aSpan ].
+			[ :attribute | attribute applyOnTransform: aBlTransformation with: aSpan ].
 
 	"Only compute inverted matrix if we actually have custom transformation"
-	anInvertedTransformation := aTransformation isIdentity
-		ifTrue: [ aTransformation := nil ]
-		ifFalse: [ aTransformation inverted ].
+	anInvertedTransformation := aBlTransformation isIdentity
+		ifTrue: [ aBlTransformation := nil ]
+		ifFalse: [ aBlTransformation inverted ].
 	"nil transform and inverted transform means that we don't have any transformation.
 		Please note, that this is done to prevent unneseccary object creation and
 		garbage collection in the future. Text measurement must be optimized as much as possible
@@ -41,11 +41,11 @@ measureSpan: aSpan onSpartaCanvas: aSpartaCanvas with: aContext
 	[ aStart <= aLength and: [ aContext availableWidth > 0 ] ]
 		whileTrue: [ | span anEnd aMaxWidth |
 			"compute width limit based on existance of custom transformation"
-			aMaxWidth := (aTransformation isNil
+			aMaxWidth := (aBlTransformation isNil
 				or: [ anInvertedTransformation isNil ])
 				ifTrue: [ aContext availableWidth ]
 				ifFalse: [ (anInvertedTransformation transformX: aContext availableWidth)
-						- aTransformation translation x ].
+						- aBlTransformation translation x ].
 			aMetrics width: aMaxWidth.
 			aMetrics start: aStart.
 			aMetricsProvider measure: aTextRun in: aMetrics.
@@ -56,7 +56,7 @@ measureSpan: aSpan onSpartaCanvas: aSpartaCanvas with: aContext
 					aMetrics length: aStart - aMetrics start + 1.
 					aMetricsProvider measure: aTextRun in: aMetrics.
 					anEnd := aMetrics wrappedEnd ].
-			span := (aTransformation isNil
+			span := (aBlTransformation isNil
 				or: [ anInvertedTransformation isNil ])
 				ifTrue: [ SpTextSpan
 						rope: text
@@ -76,7 +76,7 @@ measureSpan: aSpan onSpartaCanvas: aSpartaCanvas with: aContext
 						from: aContext position
 						to: aContext position + (anEnd - aStart)
 						metrics: aMetrics
-						transform: aTransformation
+						transform: aBlTransformation
 						transformInverted: anInvertedTransformation
 						textRun: aTextRun
 						attributes: attributes	"should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)"	"should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)" ].

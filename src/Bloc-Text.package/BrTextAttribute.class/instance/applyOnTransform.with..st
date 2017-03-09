@@ -1,0 +1,2 @@
+properties
+applyOnTransform: aBlTransformation with: aBrSpan

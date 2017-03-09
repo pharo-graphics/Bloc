@@ -1,0 +1,2 @@
+style - text
+textForeground: aBlPaint

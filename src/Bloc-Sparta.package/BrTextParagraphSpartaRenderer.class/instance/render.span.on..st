@@ -10,8 +10,8 @@ render: aTextParagraph span: aSpan on: aCanvas
 	aTextPainter := aCanvas text.
 	attributes
 		do: [ :attribute |
-			attribute drawBelowOn: aCanvas with: aSpan.
-			attribute applyOnText: aTextPainter with: aSpan ].
+			attribute drawBelowOnSpartaCanvas: aCanvas with: aSpan.
+			attribute applyOnSpartaTextPainter: aTextPainter with: aSpan ].
 	
 	aBaseline := hasTransformation
 		ifTrue: [ aTransformationInverted transform: (aSpan baseline + aTransformation translation) ]
@@ -35,4 +35,4 @@ render: aTextParagraph span: aSpan on: aCanvas
 
 	"And finally let attributes to render above the text"
 	attributes
-		do: [ :attribute | attribute drawAboveOn: aCanvas with: aSpan ].
+		do: [ :attribute | attribute drawAboveOnSpartaCanvas: aCanvas with: aSpan ].
