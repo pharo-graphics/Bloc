@@ -1,3 +1,0 @@
-accessing
-combineLength
-	^ 16

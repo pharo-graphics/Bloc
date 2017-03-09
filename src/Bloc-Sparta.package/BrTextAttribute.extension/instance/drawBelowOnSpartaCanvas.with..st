@@ -1,3 +1,3 @@
 *Bloc-Sparta
-drawBelowOnSpartaCanvas: aSpartaCanvas with: aBrSpan
+drawBelowOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan
 	"Attribute may add additional visual effects"

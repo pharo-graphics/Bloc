@@ -1,3 +1,0 @@
-rope - testing
-isLeaf
-	^ false

@@ -1,2 +1,2 @@
 *Bloc-Sparta
-applyOnSpartaTextPainter: aTextPainter with: aBrSpan
+applyOnSpartaTextPainter: aTextPainter with: aSpartaSpan

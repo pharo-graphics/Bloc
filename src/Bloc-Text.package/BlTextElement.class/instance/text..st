@@ -11,7 +11,7 @@ text: aTextModel
 	text := aTextModel.
 	"text layout is no more valid, remove it"
 	textLayout := nil.
-	
+
 	"request redraw and layout"
 	self requestLayout.
 	self invalidate

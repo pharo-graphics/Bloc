@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/9/2017 20:36",
+	"super" : "BrTextAttribute",
+	"category" : "Bloc-Text-Text-Attributes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"paint"
+	],
+	"name" : "BrTextBackgroundAttribute",
+	"type" : "normal"
+}

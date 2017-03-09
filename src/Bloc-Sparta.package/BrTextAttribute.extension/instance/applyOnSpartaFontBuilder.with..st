@@ -1,2 +1,2 @@
 *Bloc-Sparta
-applyOnSpartaFontBuilder: aFontBuilder with: aBrSpan
+applyOnSpartaFontBuilder: aFontBuilder with: aSpartaSpan
