@@ -52,7 +52,8 @@ baseline: spec
 			package: #'Bloc-Animation-Tests' with: [ spec requires: #('Bloc-Animation') ];
 			
 			package: #'Bloc-Text' with: [ spec requires: #(Bloc). ];
-			package: #'Bloc-Text-Tests' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
+			package: #'Bloc-Text-Rope' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
+			package: #'Bloc-Text-Tests' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope'). ];
 			
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
