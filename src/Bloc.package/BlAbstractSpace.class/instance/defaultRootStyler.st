@@ -1,3 +1,0 @@
-style hooks
-defaultRootStyler
-	^ nil

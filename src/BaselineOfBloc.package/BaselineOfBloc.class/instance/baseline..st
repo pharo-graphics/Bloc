@@ -50,10 +50,13 @@ baseline: spec
 			"adds high level support of animations"
 			package: #'Bloc-Animation' with: [ spec requires: #(Bloc) ];
 			package: #'Bloc-Animation-Tests' with: [ spec requires: #('Bloc-Animation') ];
-
+			
+			package: #'Bloc-Text' with: [ spec requires: #(Bloc). ];
+			package: #'Bloc-Text-Tests' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
+			
 			"Sparta provides us with a canvas and text support"
-			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc Sparta) ];
-
+			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
+			
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' ). ];
 			package: #'Bloc-Extension' with: [ spec requires: #(Bloc) ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
@@ -67,7 +70,8 @@ baseline: spec
 			group: 'file:core' with: #(
 				'Bloc' "main core package"
 				'Bloc-Layout'
-
+				'Bloc-Text'
+				
 				'BlocHost-SDL'
 				'BlocHost-Morphic'
 				'Bloc-Animation'
@@ -82,6 +86,7 @@ baseline: spec
 			group: 'file:development' with: #(
 				'file:core'
 				'Bloc-Tests'
+				'Bloc-Text-Tests'
 				'Bloc-Layout-Tests'
 				'Bloc-Animation-Tests');
 
