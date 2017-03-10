@@ -17,11 +17,11 @@ measureOnSpartaCanvas: aSpartaCanvas
 		aSpan := anIterator nextSpan.
 		self measureSpan: aSpan onSpartaCanvas: aSpartaCanvas with: aContext ].
 
-	height := 0.
-	width := 0.
+	height := 0.0.
+	width := 0.0.
 	aContext spans do: [ :aSpan |
 		aSpan baseline: width @ (height + aSpan ascent).
-		height := height max: aSpan box height.
+		height := height max: aSpan box height ceiling.
 		width := width + aSpan box width ].
 
 	spans := aContext spans asArray.
