@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "AliakseiSyrel 1/30/2017 00:59",
-	"super" : "ExternalForm",
+	"super" : "SpartaExternalForm",
 	"category" : "BlocHost-Morphic-Host",
 	"classinstvars" : [ ],
 	"pools" : [ ],
