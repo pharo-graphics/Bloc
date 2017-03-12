@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlLayoutConstraintsAxis",
 	"category" : "Bloc-Layout-Grid",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"spec"
-	],
+		"spec" ],
 	"name" : "BlGridLayoutConstraintsAxis",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlLayoutConstraintsAxis",
+	"type" : "normal" }

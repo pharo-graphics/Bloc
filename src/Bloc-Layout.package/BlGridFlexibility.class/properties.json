@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
 	"category" : "Bloc-Layout-Grid-Utilities",
 	"classinstvars" : [
-		"uniqueInstance"
-	],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+		"uniqueInstance" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlGridFlexibility",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -35,7 +35,7 @@ layout: anElement in: aRectangle
 			
 			self layout verticalAlignment ifNotNull: [ 
 				| translation allowedBounds |
-				allowedBounds := origin extent: child measuredWidth @ (bottom - top).
+				allowedBounds := origin extent: child measuredWidth @ elementInnerBounds height.
 				translation := self layout verticalAlignment translate: childBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 

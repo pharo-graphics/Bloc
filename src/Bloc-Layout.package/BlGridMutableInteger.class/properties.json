@@ -1,15 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
 	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlGridLayoutConstants"
-	],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"value"
-	],
+		"value" ],
 	"name" : "BlGridMutableInteger",
-	"type" : "normal"
-}
+	"pools" : [
+		"BlGridLayoutConstants" ],
+	"super" : "Object",
+	"type" : "normal" }

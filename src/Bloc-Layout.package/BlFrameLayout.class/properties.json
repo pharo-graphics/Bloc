@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/15/2016 10:03",
-	"super" : "BlLayout",
 	"category" : "Bloc-Layout-Frame",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "AliakseiSyrel 11/15/2016 10:03",
 	"instvars" : [
-		"measureAllChildren"
-	],
+		"measureAllChildren" ],
 	"name" : "BlFrameLayout",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlLayout",
+	"type" : "normal" }

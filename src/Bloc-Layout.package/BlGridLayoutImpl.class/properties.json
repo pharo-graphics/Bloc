@@ -1,19 +1,18 @@
 {
-	"commentStamp" : "",
-	"super" : "BlLayout",
 	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlGridLayoutConstants"
-	],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"horizontalAxis",
 		"verticalAxis",
 		"lastLayoutParamsHashCode",
 		"measurer",
-		"layout"
-	],
+		"layout" ],
 	"name" : "BlGridLayoutImpl",
-	"type" : "normal"
-}
+	"pools" : [
+		"BlGridLayoutConstants" ],
+	"super" : "BlLayout",
+	"type" : "normal" }

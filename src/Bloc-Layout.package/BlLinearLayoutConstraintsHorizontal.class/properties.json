@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlLayoutConstraintsAxis",
 	"category" : "Bloc-Layout-Linear",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"alignment"
-	],
+		"alignment" ],
 	"name" : "BlLinearLayoutConstraintsHorizontal",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlLayoutConstraintsAxis",
+	"type" : "normal" }

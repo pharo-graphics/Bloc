@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BlFlowLayoutChild",
 	"category" : "Bloc-Layout-Flow-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BlFlowLayoutInlineChild",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlFlowLayoutChild",
+	"type" : "normal" }

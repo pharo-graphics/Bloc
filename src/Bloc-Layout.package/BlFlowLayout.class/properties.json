@@ -1,16 +1,17 @@
 {
-	"commentStamp" : "",
-	"super" : "BlLayout",
 	"category" : "Bloc-Layout-Flow",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"measurer",
 		"orientation",
 		"horizontalAlignment",
-		"verticalAlignment"
-	],
+		"verticalAlignment" ],
 	"name" : "BlFlowLayout",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BlLayout",
+	"type" : "normal" }
