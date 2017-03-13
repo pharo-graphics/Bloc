@@ -72,6 +72,7 @@ baseline: spec
 				'Bloc' "main core package"
 				'Bloc-Layout'
 				'Bloc-Text'
+				'Bloc-Text-Rope'
 				
 				'BlocHost-SDL'
 				'BlocHost-Morphic'
