@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Examples-Layout",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 10/26/2016 17:26",
-	"instvars" : [
-		 ],
-	"name" : "BlGridLayoutExamples",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Examples-Layout",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGridLayoutExamples",
+	"type" : "normal"
+}

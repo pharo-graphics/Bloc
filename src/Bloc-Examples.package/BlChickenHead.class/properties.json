@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Examples-Chicken",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlChickenHead",
-	"pools" : [
-		 ],
 	"super" : "BlElement",
-	"type" : "normal" }
+	"category" : "Bloc-Examples-Chicken",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlChickenHead",
+	"type" : "normal"
+}

@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Examples-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/24/2017 15:10",
-	"instvars" : [
-		 ],
-	"name" : "BlBasicExamples",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Examples-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlBasicExamples",
+	"type" : "normal"
+}

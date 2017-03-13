@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Examples-Layout",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 1/24/2017 15:12",
-	"instvars" : [
-		 ],
-	"name" : "BlFlowLayoutExamples",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Examples-Layout",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFlowLayoutExamples",
+	"type" : "normal"
+}

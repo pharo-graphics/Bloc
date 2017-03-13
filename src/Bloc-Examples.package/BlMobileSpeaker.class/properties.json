@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Examples-MobilePhone",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlMobileSpeaker",
-	"pools" : [
-		 ],
 	"super" : "BlMobileSubElement",
-	"type" : "normal" }
+	"category" : "Bloc-Examples-MobilePhone",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMobileSpeaker",
+	"type" : "normal"
+}

@@ -14,10 +14,9 @@ exampleText
 		background: (BlBackground fill: Color green);
 		text: (SpText fromString: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sodales tempus porttitor. Donec ac lacus luctus, malesuada ligula in, gravida sapien. Sed varius nibh eget convallis accumsan').
 
-	txt2 := BlText new
+	txt2 := BlTextElement new
 		position:150@50;
-		fill: Color green;
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'.
+		text: (BrRopedText string: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit').
 	
 	space root
 		addChild: (BlBenchmarkConsole on:space);
