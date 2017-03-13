@@ -1,14 +1,13 @@
 {
+	"commentStamp" : "AliakseiSyrel 12/16/2016 15:33",
+	"super" : "Object",
 	"category" : "Bloc-Animation-Easing",
 	"classinstvars" : [
-		"default" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 12/16/2016 15:33",
-	"instvars" : [
-		 ],
+		"default"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
 	"name" : "BlInterpolator",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

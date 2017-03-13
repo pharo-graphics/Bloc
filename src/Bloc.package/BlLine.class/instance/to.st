@@ -1,3 +1,0 @@
-accessing
-to
-	^ self extent

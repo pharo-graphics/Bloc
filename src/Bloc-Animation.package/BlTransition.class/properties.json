@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Animation-Transition",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlAnimation",
+	"category" : "Bloc-Animation-Transition",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"from",
 		"to",
-		"stepAction" ],
+		"stepAction"
+	],
 	"name" : "BlTransition",
-	"pools" : [
-		 ],
-	"super" : "BlAnimation",
-	"type" : "normal" }
+	"type" : "normal"
+}

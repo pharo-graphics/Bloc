@@ -1,3 +1,3 @@
 accessing
-cornerRadii: anObject
-	cornerRadii := anObject
+cornerRadii: aBlCornerRadii
+	cornerRadii := aBlCornerRadii

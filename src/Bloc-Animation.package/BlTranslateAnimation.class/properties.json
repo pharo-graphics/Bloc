@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Animation-Animation",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlAnimation",
+	"category" : "Bloc-Animation-Animation",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"to",
 		"from",
-		"by" ],
+		"by"
+	],
 	"name" : "BlTranslateAnimation",
-	"pools" : [
-		 ],
-	"super" : "BlAnimation",
-	"type" : "normal" }
+	"type" : "normal"
+}

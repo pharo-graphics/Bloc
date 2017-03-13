@@ -10,7 +10,7 @@ onMeasure: anExtentMeasurementSpec
 
 	(self shouldMeasure: anExtentMeasurementSpec)
 		ifFalse: [ ^ self ].
-		
+
 	aMaxWidth := self constraints maxWidth.
 	aMaxHeight := self constraints maxHeight.
 	aWidthSpec := anExtentMeasurementSpec widthSpec.

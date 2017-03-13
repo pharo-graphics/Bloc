@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlCursor",
-	"category" : "Bloc-Space",
+	"category" : "Bloc-Animation-Cursor",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Animation-Animation",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"angle" ],
-	"name" : "BlRotateAnimation",
-	"pools" : [
-		 ],
 	"super" : "BlAnimation",
-	"type" : "normal" }
+	"category" : "Bloc-Animation-Animation",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"angle"
+	],
+	"name" : "BlRotateAnimation",
+	"type" : "normal"
+}

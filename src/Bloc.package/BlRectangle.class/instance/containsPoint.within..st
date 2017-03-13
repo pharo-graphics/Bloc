@@ -1,9 +1,8 @@
 geometry testing
 containsPoint: aPoint within: aBounds
-
-"check if aPoint is in the basic rectangle"
-
-	|w h isBottomSide isRightSide center radius maxRadius|
+	"check if aPoint is in the basic rectangle"
+	| w h isBottomSide isRightSide center radius maxRadius |
+	
 	w := aBounds extent x.
 	h := aBounds extent y.
 	maxRadius := self cornerRadii max.

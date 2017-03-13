@@ -1,3 +1,3 @@
-public creation - geometry
+factory
 extent: anExtent
 	^ self new extent: anExtent

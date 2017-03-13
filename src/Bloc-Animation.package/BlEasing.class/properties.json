@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Animation-Easing",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlEasing",
-	"pools" : [
-		 ],
 	"super" : "BlInterpolator",
-	"type" : "normal" }
+	"category" : "Bloc-Animation-Easing",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEasing",
+	"type" : "normal"
+}

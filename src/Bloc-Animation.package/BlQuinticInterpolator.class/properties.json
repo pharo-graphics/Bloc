@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Animation-Easing",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 12/16/2016 14:57",
-	"instvars" : [
-		 ],
-	"name" : "BlQuinticInterpolator",
-	"pools" : [
-		 ],
 	"super" : "BlInterpolator",
-	"type" : "normal" }
+	"category" : "Bloc-Animation-Easing",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlQuinticInterpolator",
+	"type" : "normal"
+}

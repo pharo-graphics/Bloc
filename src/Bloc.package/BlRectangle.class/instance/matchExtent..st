@@ -1,3 +1,3 @@
 accessing
-matchExtent: anExtent
-	extent := anExtent
+matchExtent: aPoint
+	extent := aPoint

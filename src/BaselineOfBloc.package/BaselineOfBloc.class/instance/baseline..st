@@ -73,7 +73,7 @@ baseline: spec
 				'Bloc-Layout'
 				'Bloc-Text'
 				'Bloc-Text-Rope'
-				
+
 				'BlocHost-SDL'
 				'BlocHost-Morphic'
 				'Bloc-Animation'
@@ -95,7 +95,7 @@ baseline: spec
 			"groups with sources and plugin installation"
 			group: 'core' with: #('file:core');
 			group: 'development' with: #('file:development');
-			
+
 			"groups with sources, plugin installion and git support"
 			group: 'git:core' with: #('core');
 			group: 'git:development' with: #('development');
