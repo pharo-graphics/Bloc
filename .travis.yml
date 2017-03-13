@@ -15,8 +15,10 @@ matrix:
   include:
   - smalltalk: Pharo-5.0
     smalltalk_config: minimal.ston
+    smalltalk_config: minimal+layout.ston
   - smalltalk: Pharo-6.0
     smalltalk_config: minimal.ston
+    smalltalk_config: minimal+layout.ston
 
 before_install:
   - |
