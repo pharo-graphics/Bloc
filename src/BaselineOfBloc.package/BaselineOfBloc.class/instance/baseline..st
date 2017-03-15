@@ -40,6 +40,9 @@ baseline: spec
 			"contains most common layout types. May be optional"
 			package: #'Bloc-Layout' with: [ spec requires: #(Bloc) ];
 			package: #'Bloc-Layout-Tests' with: [ spec requires: #('Bloc-Layout' ) ];
+
+			"contains geometry elements that provide anchor and attachment points"
+			package: #'Bloc-Geometry' with: [ spec requires: #(Bloc) ];
 			
 			"implements a scrolling element (practically infinite) that displays large data sets"
 			package: #'Bloc-Infinite' with: [ spec requires: #(Bloc) ];
@@ -50,7 +53,7 @@ baseline: spec
 			"adds high level support of animations"
 			package: #'Bloc-Animation' with: [ spec requires: #(Bloc) ];
 			package: #'Bloc-Animation-Tests' with: [ spec requires: #('Bloc-Animation') ];
-			
+
 			package: #'Bloc-Text' with: [ spec requires: #(Bloc). ];
 			package: #'Bloc-Text-Rope' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
 			package: #'Bloc-Text-Tests' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope'). ];
@@ -70,6 +73,7 @@ baseline: spec
 			"groups with only sources"
 			group: 'file:core' with: #(
 				'Bloc' "main core package"
+				'Bloc-Geometry'
 				'Bloc-Layout'
 				'Bloc-Text'
 				'Bloc-Text-Rope'
