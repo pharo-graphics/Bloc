@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGridUndefinedAlignment",
-	"pools" : [
-		 ],
 	"super" : "BlGridAlignment",
-	"type" : "normal" }
+	"category" : "Bloc-Layout-Grid-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGridUndefinedAlignment",
+	"type" : "normal"
+}

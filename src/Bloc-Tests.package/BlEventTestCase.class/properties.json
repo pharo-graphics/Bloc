@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Tests-Universe",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"space" ],
-	"name" : "BlEventTestCase",
-	"pools" : [
-		 ],
 	"super" : "TestCase",
-	"type" : "normal" }
+	"category" : "Bloc-Tests-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"space"
+	],
+	"name" : "BlEventTestCase",
+	"type" : "normal"
+}

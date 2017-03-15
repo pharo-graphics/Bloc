@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Layout-Frame",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlFrameLayoutConstraints",
-	"pools" : [
-		 ],
 	"super" : "BlLayoutConstraints",
-	"type" : "normal" }
+	"category" : "Bloc-Layout-Frame",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFrameLayoutConstraints",
+	"type" : "normal"
+}

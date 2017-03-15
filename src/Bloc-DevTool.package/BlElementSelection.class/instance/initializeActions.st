@@ -13,7 +13,7 @@ initializeActions
 	resizeButton addEventHandler: (BlEventHandler on: BlDragEndEvent do: [ :evt |  evt consumed: true.]).
 	resizeButton addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt |
 		evt consumed: true.
-		self client size: (evt position - self client globalPosition) ]).
+		self client size: (evt position - self client positionInSpace) ]).
 
 	inspectButton addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt | 
 		evt consumed: true.

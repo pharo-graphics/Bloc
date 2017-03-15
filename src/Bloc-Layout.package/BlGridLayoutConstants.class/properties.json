@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		"UNDEFINED" ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGridLayoutConstants",
-	"pools" : [
-		 ],
 	"super" : "SharedPool",
-	"type" : "normal" }
+	"category" : "Bloc-Layout-Grid-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"UNDEFINED"
+	],
+	"instvars" : [ ],
+	"name" : "BlGridLayoutConstants",
+	"type" : "normal"
+}

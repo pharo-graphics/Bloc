@@ -1,14 +1,15 @@
 {
+	"commentStamp" : "",
+	"super" : "Object",
 	"category" : "Bloc-Layout-Grid-Utilities",
 	"classinstvars" : [
-		"uniqueInstance" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGridAlignment",
+		"uniqueInstance"
+	],
 	"pools" : [
-		"BlGridLayoutConstants" ],
-	"super" : "Object",
-	"type" : "normal" }
+		"BlGridLayoutConstants"
+	],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGridAlignment",
+	"type" : "normal"
+}

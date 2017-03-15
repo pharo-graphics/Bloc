@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Tests-Universe",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlEventProcessingTest",
-	"pools" : [
-		 ],
 	"super" : "BlEventTestCase",
-	"type" : "normal" }
+	"category" : "Bloc-Tests-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEventProcessingTest",
+	"type" : "normal"
+}

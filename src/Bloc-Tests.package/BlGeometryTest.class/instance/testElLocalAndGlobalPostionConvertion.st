@@ -2,16 +2,20 @@ position tests
 testElLocalAndGlobalPostionConvertion
 	| g n |
 	n := BlElement new
-		extent: 100 @ 100;
-		position: 10 @ 10;
+		size: 100 @ 100;
+		relocate: 10 @ 10;
 		yourself.
+		
 	g := BlElement new
-		extent: 100 @ 100;
-		position: 10 @ 10;
+		size: 100 @ 100;
+		relocate: 10 @ 10;
 		addChild: n;
 		yourself.
-	self assert: g position = (10 @ 10).
-	self assert: n position = (10 @ 10).
-	self assert: g globalPosition = (10 @ 10).
-	self assert: n globalPosition = (20 @ 20).
-	self assert: (n parentPointToLocal:  n position) = (0@0).
+
+	g forceLayout.
+
+	self assert: g position equals: (10 @ 10).
+	self assert: n position equals: (10 @ 10).
+	self assert: g positionInSpace equals: (10 @ 10).
+	self assert: n positionInSpace equals: (20 @ 20).
+	self assert: (n parentPointToLocal: n position) equals: (0@0).

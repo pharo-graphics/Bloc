@@ -1,17 +1,16 @@
 {
-	"category" : "Bloc-DevTool-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-DevTool-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"fpsShape",
 		"renderTimeShape",
 		"eventProcessingShape",
-		"layoutingShape" ],
+		"layoutingShape"
+	],
 	"name" : "BlBenchmarkConsole",
-	"pools" : [
-		 ],
-	"super" : "BlElement",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -15,7 +15,7 @@ initializeHandlers
 					| aClientOldGlobalPosition aClientNewGlobalPosition |
 					anEvent consumed: true.
 					
-					aClientOldGlobalPosition := self client globalPosition.
+					aClientOldGlobalPosition := self client positionInSpace.
 					aClientNewGlobalPosition := self space root globalPointToLocal: aClientOldGlobalPosition.
 					aClientNewGlobalPosition := aClientNewGlobalPosition.
 					

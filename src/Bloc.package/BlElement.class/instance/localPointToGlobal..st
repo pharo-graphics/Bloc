@@ -1,7 +1,10 @@
 geometry position convertion
 localPointToGlobal: aPoint
+	"Transform a given point from my local coordinates to the coordinates of the root most parent"
+	<return: #Point>
 	| pt |
-	pt := self parent
-		ifNil: [ self transform transform: aPoint ]
-		ifNotNil: [ :p | p localPointToGlobal: (self transform transform: aPoint) ].
-	^ pt translateBy: self position
+
+	pt := self localPointToParent: aPoint.
+	^ self hasParent
+		ifTrue: [ self parent localPointToGlobal: pt ]
+		ifFalse: [ pt ]

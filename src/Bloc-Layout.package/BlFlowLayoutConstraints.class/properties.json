@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Layout-Flow",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlLayoutConstraints",
+	"category" : "Bloc-Layout-Flow",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"newLine",
 		"weight",
-		"display" ],
+		"display"
+	],
 	"name" : "BlFlowLayoutConstraints",
-	"pools" : [
-		 ],
-	"super" : "BlLayoutConstraints",
-	"type" : "normal" }
+	"type" : "normal"
+}

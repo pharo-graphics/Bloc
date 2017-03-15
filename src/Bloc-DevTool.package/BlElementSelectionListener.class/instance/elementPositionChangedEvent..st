@@ -1,4 +1,4 @@
 element handlers
 elementPositionChangedEvent: anEvent
 
-	self selection relocate: anEvent target globalPosition - self selection padding topLeft
+	self selection relocate: anEvent target positionInSpace - self selection padding topLeft

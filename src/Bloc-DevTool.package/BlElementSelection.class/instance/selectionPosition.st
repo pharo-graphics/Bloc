@@ -1,4 +1,4 @@
 geometry
 selectionPosition
 
-	^ self client globalPosition - self padding topLeft
+	^ self client positionInSpace - self padding topLeft

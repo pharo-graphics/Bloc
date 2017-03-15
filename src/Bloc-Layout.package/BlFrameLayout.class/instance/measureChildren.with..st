@@ -9,8 +9,7 @@ measureChildren: anElement with: anExtentSpec
 	maxHeight := 0.
 
 	anElement managedChildren
-		select: [ :child | self isMeasureAllChildren
-			or: [ child visibility shouldMeasure ] ]
+		select: [ :child | self isMeasureAllChildren or: [ child visibility shouldMeasure ] ]
 		thenDo: [ :child | 
 			self measureChildWithMargins: child parentSpec: anExtentSpec.
 			maxWidth := maxWidth max: (child measuredWidth + child outsets width).

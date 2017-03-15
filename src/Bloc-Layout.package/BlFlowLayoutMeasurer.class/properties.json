@@ -1,10 +1,10 @@
 {
-	"category" : "Bloc-Layout-Flow-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Layout-Flow-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"layout",
 		"children",
@@ -14,9 +14,8 @@
 		"maxHeight",
 		"widthMode",
 		"heightMode",
-		"checkCanFit" ],
+		"checkCanFit"
+	],
 	"name" : "BlFlowLayoutMeasurer",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

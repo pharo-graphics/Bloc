@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Tests-Universe",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"firedEvents" ],
-	"name" : "BlTestMouseEventProcessor",
-	"pools" : [
-		 ],
 	"super" : "BlMouseProcessor",
-	"type" : "normal" }
+	"category" : "Bloc-Tests-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"firedEvents"
+	],
+	"name" : "BlTestMouseEventProcessor",
+	"type" : "normal"
+}

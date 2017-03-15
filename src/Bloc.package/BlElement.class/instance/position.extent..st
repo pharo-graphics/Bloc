@@ -1,6 +1,6 @@
 accessing
 position: aPosition extent: anExtent
-	"I do hard work of changing element's position and extent.
+	"I do a hard work of changing element's position and extent.
 	This action must be very optimized in the sense of invalidation.
 	For example if element becomes smaller in both axis (horizontal and vertical)
 	it is enough to invalidate damaged area only once within old bounds,
@@ -19,9 +19,9 @@ position: aPosition extent: anExtent
 
 	aPreviousExtent := self extent.
 
-	"If we are growing there is no need to invalidate before extent change"
+	"If we are growing, there is no need to invalidate before extent change"
 	isGrowing := aPreviousExtent <= anExtent.
-	"if we are shrinking there is no need to invalidate after extent change"
+	"if we are shrinking, there is no need to invalidate after extent change"
 	isShrinking := aPreviousExtent >= anExtent.
 
 	"damage area according to my previous space bounds"
@@ -36,7 +36,7 @@ position: aPosition extent: anExtent
 	isPositionChanged ifTrue: [
 		"change my position"
 		self positionProperty value: aPosition.
-		self notifyPositionChanged.
+		self onPositionChanged.
 		"position changed without extent => invalidate cached space bounds.
 		Note, that if extent changes we invalidate bounds cache anyway"
 		isExtentChanged ifFalse: [ boundsCache invalidateBoundsInSpace ] ].

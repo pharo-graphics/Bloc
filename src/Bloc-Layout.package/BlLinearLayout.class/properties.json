@@ -1,18 +1,17 @@
 {
-	"category" : "Bloc-Layout-Linear",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "GlennCavarle 6/27/2016 15:22",
+	"super" : "BlLayout",
+	"category" : "Bloc-Layout-Linear",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"weightSum",
 		"verticalAlignment",
 		"horizontalAlignment",
 		"cache",
-		"orientation" ],
+		"orientation"
+	],
 	"name" : "BlLinearLayout",
-	"pools" : [
-		 ],
-	"super" : "BlLayout",
-	"type" : "normal" }
+	"type" : "normal"
+}
