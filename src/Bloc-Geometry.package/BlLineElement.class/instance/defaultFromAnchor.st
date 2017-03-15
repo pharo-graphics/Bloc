@@ -1,0 +1,3 @@
+initialization
+defaultFromAnchor
+	^ BlLineTopLeftCornerAnchor new

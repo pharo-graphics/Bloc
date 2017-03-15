@@ -1,0 +1,22 @@
+{
+	"instance" : {
+		"addShortcut:" : "",
+		"removeEventHandler:" : "",
+		"positionWithin:" : "AliakseiSyrel 3/15/2017 13:03",
+		"dispatchEvent:" : "",
+		"removeShortcut:" : "",
+		"eventDispatcher" : "AliakseiSyrel 3/13/2017 19:31",
+		"shortcuts" : "",
+		"addEventHandler:" : "",
+		"initialize" : "AliakseiSyrel 3/13/2017 19:31",
+		"removeEventFilter:" : "",
+		"addEventFilter:" : "",
+		"addEventHandlerOn:do:" : "",
+		"fireEvent:" : "",
+		"defaultEventDispatcher" : "AliakseiSyrel 3/13/2017 19:30",
+		"addEventFilterOn:do:" : "",
+		"nextEventTarget" : "",
+		"buildEventDispatchChain:" : ""
+	},
+	"class" : { }
+}

@@ -1,0 +1,3 @@
+initialization
+defaultLayout
+	^ BlGeometryLayout new

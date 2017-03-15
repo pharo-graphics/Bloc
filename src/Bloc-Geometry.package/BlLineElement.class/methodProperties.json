@@ -1,0 +1,25 @@
+{
+	"instance" : {
+		"toAnchor" : "AliakseiSyrel 3/15/2017 13:25",
+		"updateBounds" : "AliakseiSyrel 3/15/2017 14:51",
+		"defaultFromAnchor" : "AliakseiSyrel 3/15/2017 13:12",
+		"initialize" : "AliakseiSyrel 3/15/2017 13:12",
+		"onToAnchorMoved" : "AliakseiSyrel 3/15/2017 14:04",
+		"fromAttach" : "AliakseiSyrel 3/13/2017 19:27",
+		"toAnchor:" : "AliakseiSyrel 3/15/2017 14:36",
+		"containsPoint:" : "AliakseiSyrel 3/13/2017 19:26",
+		"onExtentChanged" : "AliakseiSyrel 3/15/2017 13:53",
+		"onFromAnchorMoved" : "AliakseiSyrel 3/15/2017 14:04",
+		"toAttach" : "AliakseiSyrel 3/13/2017 19:27",
+		"fromAnchor" : "AliakseiSyrel 3/15/2017 13:24",
+		"originPosition" : "AliakseiSyrel 3/15/2017 13:28",
+		"updateAttachPoints" : "AliakseiSyrel 3/15/2017 14:50",
+		"onPositionInSpaceChanged" : "AliakseiSyrel 3/15/2017 13:35",
+		"cornerPosition" : "AliakseiSyrel 3/15/2017 13:28",
+		"fromAnchor:" : "AliakseiSyrel 3/15/2017 14:35",
+		"defaultToAnchor" : "AliakseiSyrel 3/15/2017 13:12",
+		"defaultGeometry" : "AliakseiSyrel 3/13/2017 18:48",
+		"createAttachPoints" : "AliakseiSyrel 3/13/2017 19:44"
+	},
+	"class" : { }
+}

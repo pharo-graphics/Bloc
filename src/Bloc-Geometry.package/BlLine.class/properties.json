@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGeometry",
+	"category" : "Bloc-Geometry-Line",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"width",
+		"from",
+		"to"
+	],
+	"name" : "BlLine",
+	"type" : "normal"
+}

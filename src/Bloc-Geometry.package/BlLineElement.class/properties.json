@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/13/2017 11:22",
+	"super" : "BlGeometryElement",
+	"category" : "Bloc-Geometry-Line",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"fromAnchor",
+		"toAnchor",
+		"fromAttach",
+		"toAttach"
+	],
+	"name" : "BlLineElement",
+	"type" : "normal"
+}

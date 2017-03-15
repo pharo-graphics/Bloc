@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/13/2017 14:53",
+	"super" : "BlLayout",
+	"category" : "Bloc-Geometry",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGeometryLayout",
+	"type" : "normal"
+}

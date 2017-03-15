@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/13/2017 19:21",
+	"super" : "BlGeometryAnchor",
+	"category" : "Bloc-Geometry-Attach",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"attachPoint",
+		"moveDispatched"
+	],
+	"name" : "BlGeometryAttachPointAnchor",
+	"type" : "normal"
+}
