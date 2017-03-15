@@ -44,7 +44,7 @@ position: aPosition extent: anExtent
 	isExtentChanged ifTrue: [ 
 		"change my extent"
 		self extentProperty value: anExtent.
-		self notifyExtentChanged.
+		self onExtentChanged.
 
 		"extent changed => invalidate cached local bounds"
 		boundsCache invalidateBoundsInLocal.
