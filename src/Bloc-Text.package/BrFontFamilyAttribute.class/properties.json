@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextAttribute",
+	"category" : "Bloc-Text-Text-Attributes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"name"
+	],
+	"name" : "BrFontFamilyAttribute",
+	"type" : "normal"
+}

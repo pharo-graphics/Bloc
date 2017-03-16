@@ -6,7 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"position",
 		"subIterator"
 	],
 	"name" : "BrAttributeRopeIterator",

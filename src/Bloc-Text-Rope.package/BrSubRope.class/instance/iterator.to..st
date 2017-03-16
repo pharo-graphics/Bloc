@@ -1,3 +1,3 @@
 rope - enumeration
 iterator: aStart to: anEnd
-	^ rope iterator: aStart + offset to: anEnd + offset
+	^ BrSubRopeIterator rope: self from: aStart to: anEnd

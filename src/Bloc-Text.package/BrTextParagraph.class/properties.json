@@ -15,7 +15,8 @@
 		"end",
 		"autoRelease",
 		"text",
-		"offset"
+		"offset",
+		"tabWidth"
 	],
 	"name" : "BrTextParagraph",
 	"type" : "normal"

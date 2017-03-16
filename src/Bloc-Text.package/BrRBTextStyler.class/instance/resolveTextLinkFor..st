@@ -2,6 +2,6 @@ private
 resolveTextLinkFor: aVariableNode
 
 	aVariableNode binding isGlobalVariable
-		ifTrue: [ ^ TextClassLink className: aVariableNode name ].
+		ifTrue: [ ^ BrTextClassLink className: aVariableNode name ].
 		
-	^ TextVariableLink variableName: aVariableNode name
+	^ BrTextVariableLink variableName: aVariableNode name

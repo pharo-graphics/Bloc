@@ -5,9 +5,8 @@ exampleText
 
 	theWords := OrderedCollection new.
 
-	aText := SpText fromString: (String loremIpsum: 2000).
-
-	aLineIterator := aText rope iterator.
+	aText := BrRopedText string: (String loremIpsum: 2000).
+	aLineIterator := aText iterator.
 
 	[ aLineIterator hasNext ] whileTrue: [ 
 		| aLine aWordIterator aBreak |

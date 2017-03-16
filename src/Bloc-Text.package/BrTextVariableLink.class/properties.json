@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextLinkAttribute",
+	"category" : "Bloc-Text-Text-Attributes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrTextVariableLink",
+	"type" : "normal"
+}

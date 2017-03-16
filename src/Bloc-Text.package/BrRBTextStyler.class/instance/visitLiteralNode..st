@@ -4,5 +4,5 @@ visitLiteralNode: aLiteralNode
 	value := aLiteralNode value.
 	self 
 		addStyle: (self literalStyleSymbol: value)
-		attribute: (TextClassLink class: value class)
+		attribute: (BrTextClassLink class: value class)
 		forNode: aLiteralNode

@@ -5,16 +5,16 @@ addLinkAttributesFor: ranges in: aText to: charAttributes
 	links := Dictionary new.
 	
 	"see SHTextStylerST80 class >> #defaultStyleTable for more types"
-	links at: #instVar put: [ :aString| TextVariableLink variableName: aString ].
-	links at: #globalVar put: [ :aString| TextClassLink className: aString ].
+	links at: #instVar put: [ :aString| BrTextVariableLink variableName: aString ].
+	links at: #globalVar put: [ :aString| BrTextClassLink className: aString ].
 	#(binary unary  keyword) do: [ :type|
-		links at: type put: [ :aString| TextMethodLink selector: aString ]].
+		links at: type put: [ :aString| BrTextMethodLink selector: aString ]].
 	#(pragmaUnary pragmaBinary patternBinary patternUnary patternKeyword) do: [ :type|
-		links at: type put: [ :aString| TextMethodLink selector: aString senders: true]].
-	links at: #true put: [ :aString| TextClassLink class: True ].
-	links at: #false put: [ :aString| TextClassLink class: False ].
-	links at: #nil put: [ :aString| TextClassLink class: UndefinedObject ].
-	links at: #character put: [ :aString| TextClassLink class: Character ].
+		links at: type put: [ :aString| BrTextMethodLink selector: aString senders: true]].
+	links at: #true put: [ :aString| BrTextClassLink class: True ].
+	links at: #false put: [ :aString| BrTextClassLink class: False ].
+	links at: #nil put: [ :aString| BrTextClassLink class: UndefinedObject ].
+	links at: #character put: [ :aString| BrTextClassLink class: Character ].
 	
 	"set the attrinbutes on the text"
 	ranges do: [ :range|
