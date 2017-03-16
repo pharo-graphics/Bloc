@@ -5,10 +5,8 @@ environment:
   CYG_EXE: C:\cygwin\setup-x86.exe
   CYG_MIRROR: http://cygwin.mirror.constant.com
   SCI_RUN: /cygdrive/c/SMALLTALKCI-master/run.sh
-  
   matrix:
     - SMALLTALK: Pharo-6.0
-
 
 platform:
   - x86
