@@ -12,6 +12,7 @@ baseline: spec
 			"GT-Examples is examples and testing framework"
 			project: 'GTExamples' with: [ spec
 				className: #ConfigurationOfGTExamples;
+				loads: #('GT-Examples');
 				repository: 'http://smalltalkhub.com/mc/Moose/GToolkit/main/' ];
 
 			baseline: 'TaskIt' with: [ spec
