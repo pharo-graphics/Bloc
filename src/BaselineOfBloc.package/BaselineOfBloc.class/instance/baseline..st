@@ -9,14 +9,14 @@ baseline: spec
 				loads: #(stub); "Stub does not load anything here. We load sparta in postLoadSparta:"
 				repository: 'github://syrel/sparta/src' ];
 
+			"GT-Examples is examples and testing framework"
+			project: 'GTExamples' with: [ spec
+				className: #ConfigurationOfGTExamples;
+				repository: 'http://smalltalkhub.com/mc/Moose/GToolkit/main/' ];
+
 			baseline: 'TaskIt' with: [ spec
 				repository: 'github://sbragagnolo/taskit-2:dev-0.3' ];
-			
-			project: 'UnifiedFFI' with: [ spec
-				className: #ConfigurationOfUnifiedFFI;
-				versionString: '0.25.1';
-				repository: 'http://smalltalkhub.com/mc/Pharo/FFI-NB/main/' ];
-			
+
 			project: 'OSWindow' with: [ spec
 				className: #ConfigurationOfOSWindow;
 				versionString: '1.2.16';
@@ -35,11 +35,11 @@ baseline: spec
 			"main core package, implements element composition, event handling and universe infrastructure.
 			*core* must not depend on anything"
 			package: #Bloc;
-			package: #'Bloc-Tests';
-			
+			package: #'Bloc-Tests' with: [ spec requires: #(Bloc GTExamples) ];
+	
 			"contains most common layout types. May be optional"
 			package: #'Bloc-Layout' with: [ spec requires: #(Bloc) ];
-			package: #'Bloc-Layout-Tests' with: [ spec requires: #('Bloc-Layout' ) ];
+			package: #'Bloc-Layout-Tests' with: [ spec requires: #('Bloc-Layout' GTExamples) ];
 
 			"contains geometry elements that provide anchor and attachment points"
 			package: #'Bloc-Geometry' with: [ spec requires: #(Bloc) ];
@@ -48,20 +48,20 @@ baseline: spec
 			package: #'Bloc-Infinite' with: [ spec requires: #(Bloc) ];
 			"adds most common layout types for infinite element"
 			package: #'Bloc-Infinite-Layouts' with: [ spec requires: #('Bloc-Infinite') ];
-			package: #'Bloc-Infinite-Examples' with: [ spec requires: #('Bloc-Infinite' 'Bloc-Infinite-Layouts') ];
+			package: #'Bloc-Infinite-Examples' with: [ spec requires: #('Bloc-Infinite' 'Bloc-Infinite-Layouts' GTExamples) ];
 			
 			"adds high level support of animations"
 			package: #'Bloc-Animation' with: [ spec requires: #(Bloc) ];
-			package: #'Bloc-Animation-Tests' with: [ spec requires: #('Bloc-Animation') ];
+			package: #'Bloc-Animation-Tests' with: [ spec requires: #('Bloc-Animation' GTExamples) ];
 
 			package: #'Bloc-Text' with: [ spec requires: #(Bloc). ];
 			package: #'Bloc-Text-Rope' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
-			package: #'Bloc-Text-Tests' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope'). ];
+			package: #'Bloc-Text-Tests' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope' GTExamples). ];
 			
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
 			
-			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' ). ];
+			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GTExamples). ];
 			package: #'Bloc-Extension' with: [ spec requires: #(Bloc) ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
