@@ -1,0 +1,1 @@
+I am a special iterator used to iterate over attribute rope

@@ -6,9 +6,9 @@ attributes: anAttributesCollection from: aStart to: anEnd
 
 	anAttributesCollection
 		ifEmpty: [ ^ self ].
-
+	
 	anAttributeRope := (self rope from: aStart to: anEnd)
-		attributes: anAttributesCollection asSet, self attributes
+		attributes: (self class mergeAttributes: self attributes and: anAttributesCollection)
 		from: 1
 		to: anEnd - aStart + 1.
 

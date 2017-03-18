@@ -1,0 +1,3 @@
+paragraph - accessing
+lineSpacing
+	^ lineSpacing

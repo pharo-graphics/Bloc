@@ -1,3 +1,3 @@
 benchmark
 eventProcessingTime: aNumber
-	eventProcessingShape text: (SpText fromString: 'event time: ', aNumber asString)
+	eventProcessingShape text: (BrRopedText string: 'event time: ', aNumber asString)

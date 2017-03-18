@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BrFontEmphasisAttribute",
+	"category" : "Bloc-Text-Text-Attributes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrFontLightAttribute",
+	"type" : "normal"
+}

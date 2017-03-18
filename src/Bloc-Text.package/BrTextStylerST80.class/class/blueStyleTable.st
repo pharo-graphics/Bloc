@@ -12,7 +12,7 @@ blueStyleTable
 			(invalid 									red)
 			(excessCode 							red)
 			
-			(comment 								(gray darker))
+			(comment 								(gray darker) light)
 			(unfinishedComment 					(red muchDarker))
 			
 			(#'$' 									(red muchDarker))

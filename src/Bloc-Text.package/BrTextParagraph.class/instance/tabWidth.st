@@ -1,0 +1,3 @@
+paragraph - accessing
+tabWidth
+	^ tabWidth

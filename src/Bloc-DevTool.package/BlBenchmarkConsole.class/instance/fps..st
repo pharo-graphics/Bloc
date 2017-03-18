@@ -1,3 +1,3 @@
 benchmark
 fps: aNumber
-	fpsShape text: (SpText fromString: 'fps: ', aNumber asString)
+	fpsShape text: (BrRopedText string: 'fps: ', aNumber asString)

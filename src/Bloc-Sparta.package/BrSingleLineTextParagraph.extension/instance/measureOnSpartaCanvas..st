@@ -20,7 +20,7 @@ measureOnSpartaCanvas: aSpartaCanvas
 	height := 0.0.
 	width := 0.0.
 	aContext spans do: [ :aSpan |
-		aSpan baseline: width @ (height + aSpan ascent).
+		aSpan baseline: width @ aSpan ascent.
 		height := height max: aSpan height.
 		width := width + aSpan width ].
 

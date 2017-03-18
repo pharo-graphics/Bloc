@@ -1,3 +1,3 @@
 benchmark
 renderTime: aNumber
-	renderTimeShape text: (SpText fromString: 'render time: ', aNumber asString)
+	renderTimeShape text: (BrRopedText string: 'render time: ', aNumber asString)

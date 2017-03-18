@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"lines"
+		"lines",
+		"lineSpacing"
 	],
 	"name" : "BrMultilineTextParagraph",
 	"type" : "normal"
