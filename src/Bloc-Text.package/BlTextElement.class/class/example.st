@@ -2,16 +2,16 @@ example
 example
 	| space text textElement |
 
-	text := SpText fromString: 'Hello world!', String cr, 'How are you?'.
+	text := BrRopedText string: 'Hello world!', String cr, 'How are you?'.
 	text attributes: {
-		SpFontSizeAttribute size: 16.
-		SpFontStyleAttribute italic } from: 1 to: text size. "the whole text"
+		BrFontSizeAttribute size: 16.
+		BrFontEmphasisAttribute italic } from: 1 to: text size. "the whole text"
 	text attributes: {
-		SpTextForegroundAttribute paint: Color red.
-		SpFontStyleAttribute normal  } from: 1 to: 12. "Hello world!"
+		BrTextForegroundAttribute paint: Color red.
+		BrFontEmphasisAttribute normal  } from: 1 to: 12. "Hello world!"
 	text attributes: {
-		SpFontSizeAttribute size: 20.
-		SpFontGenericFamilyAttribute monospace  } from: 13 to: text size. "How are you?"
+		BrFontSizeAttribute size: 20.
+		BrFontGenericFamilyAttribute monospace  } from: 13 to: text size. "How are you?"
 
 	textElement := BlTextElement new.
 	textElement text: text.

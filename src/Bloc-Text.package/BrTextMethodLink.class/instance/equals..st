@@ -1,0 +1,3 @@
+comparing
+equals: aTextAttribute
+	^ true
