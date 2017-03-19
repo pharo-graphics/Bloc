@@ -5,4 +5,8 @@ processEvent: anEvent using: defaultDispatcher
 		ifFalse: [ ^ super processEvent: anEvent using: defaultDispatcher ].
 
 	anEvent sentTo: eventHandler.
-	anEvent wasHandled: true
+	
+	"quick fix for issue #15 : 
+	In morphic, if the drop event is mark as handled, the dragged window is removed"
+	anEvent isDropEvent
+		ifFalse: [ anEvent wasHandled: true ]
