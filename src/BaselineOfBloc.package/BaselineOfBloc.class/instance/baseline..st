@@ -78,6 +78,7 @@ baseline: spec
 				'Bloc-Layout'
 				'Bloc-Text'
 				'Bloc-Text-Rope'
+				'Bloc-Text-Rope-Examples'
 
 				'BlocHost-SDL'
 				'BlocHost-Morphic'
@@ -93,7 +94,6 @@ baseline: spec
 			group: 'file:development' with: #(
 				'file:core'
 				'Bloc-Tests'
-				'Bloc-Text-Tests'
 				'Bloc-Layout-Tests'
 				'Bloc-Animation-Tests');
 
