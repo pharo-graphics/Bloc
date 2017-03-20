@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/17/2017 00:36",
+	"super" : "TestCase",
+	"category" : "Bloc-Text-Rope-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrConcatenationRopeExamples",
+	"type" : "normal"
+}

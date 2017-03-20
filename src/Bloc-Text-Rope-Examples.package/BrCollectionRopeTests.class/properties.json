@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Bloc-Text-Tests",
+	"super" : "TestCase",
+	"category" : "Bloc-Text-Rope-Examples",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BrSpanTests",
+	"name" : "BrCollectionRopeTests",
 	"type" : "normal"
 }
