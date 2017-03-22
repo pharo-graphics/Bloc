@@ -1,9 +1,7 @@
 initialization
 rope: aRope segment: aSpanRope start: aStart end: anEnd from: aTextFrom to: aTextTo metrics: aMetrics transform: aSpartaMatrix transformInverted: anInvertedSpartaMatrix textRun: aTextRun attributes: theAttributes
-	rope := aRope.
+
 	span := aSpanRope.
-	start := aStart.
-	end := anEnd.
 	from := aTextFrom.
 	to := aTextTo.
 	length := anEnd - aStart + 1.
@@ -18,4 +16,3 @@ rope: aRope segment: aSpanRope start: aStart end: anEnd from: aTextFrom to: aTex
 	transformation := aSpartaMatrix.
 	transformationInverted := anInvertedSpartaMatrix.
 	textRun := aTextRun.
-	attributes := theAttributes

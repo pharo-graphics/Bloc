@@ -1,0 +1,3 @@
+initialization
+defaultMeasurer
+	^ BrSingleLineTextParagraphMeasurer new

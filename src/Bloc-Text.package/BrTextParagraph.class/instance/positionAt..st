@@ -1,3 +1,7 @@
 paragraph - geometry
 positionAt: anIndex
-	^ self subclassResponsibility
+	<return: #Point>
+	| aParagraphSpan |
+	
+	aParagraphSpan := self spanAtIndex: anIndex.
+	^ aParagraphSpan positionAt: anIndex

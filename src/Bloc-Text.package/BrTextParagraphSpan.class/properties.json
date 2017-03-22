@@ -6,15 +6,17 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"start",
-		"end",
-		"attributes",
 		"textRun",
 		"transformation",
 		"strikethroughOffset",
 		"strikethroughSize",
 		"transformationInverted",
-		"span"
+		"span",
+		"textRunStart",
+		"textRunEnd",
+		"spanStart",
+		"spanEnd",
+		"measurer"
 	],
 	"name" : "BrTextParagraphSpan",
 	"type" : "normal"

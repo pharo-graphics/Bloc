@@ -1,0 +1,3 @@
+text - accessing
+textPosition
+	^ textPosition

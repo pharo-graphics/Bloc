@@ -10,7 +10,7 @@ text: aTextModel
 	
 	text := aTextModel.
 	"text layout is no more valid, remove it"
-	textLayout := nil.
+	paragraph := nil.
 
 	"request redraw and layout"
 	self requestLayout.

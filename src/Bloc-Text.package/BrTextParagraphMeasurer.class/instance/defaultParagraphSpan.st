@@ -1,0 +1,3 @@
+initialization
+defaultParagraphSpan
+	^ BrTextParagraphSpan new

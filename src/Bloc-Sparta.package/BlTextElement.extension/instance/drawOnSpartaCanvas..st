@@ -2,7 +2,7 @@
 drawOnSpartaCanvas: aCanvas
 	super drawOnSpartaCanvas: aCanvas.
 	
-	textLayout
+	paragraph
 		ifNil: [ ^ self ].
 
-	textLayout renderOn: aCanvas
+	paragraph renderOn: aCanvas

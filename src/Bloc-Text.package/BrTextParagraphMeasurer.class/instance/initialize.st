@@ -6,4 +6,4 @@ initialize
 	maxHeight := Float infinity.
 	accumulatedWidth := 0.
 	accumulatedHeight := 0.
-	position := 0.
+	textPosition := 0

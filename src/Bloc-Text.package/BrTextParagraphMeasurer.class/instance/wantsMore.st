@@ -4,4 +4,4 @@ wantsMore
 	false otherwise"
 	<return: #Boolean>
 	
-	^ self start <= self length and: [ self availableWidth > 0 ]
+	^ self textRunStart <= self textRunSize and: [ self availableWidth > 0 ]

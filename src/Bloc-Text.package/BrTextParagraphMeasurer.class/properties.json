@@ -12,12 +12,17 @@
 		"maxWidth",
 		"accumulatedHeight",
 		"accumulatedWidth",
-		"position",
 		"transformation",
 		"inverseTransformation",
-		"start",
-		"length",
-		"span"
+		"span",
+		"text",
+		"textRun",
+		"textRunStart",
+		"textRunEnd",
+		"textRunSize",
+		"spanStart",
+		"spanEnd",
+		"textPosition"
 	],
 	"name" : "BrTextParagraphMeasurer",
 	"type" : "normal"

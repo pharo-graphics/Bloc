@@ -1,3 +1,3 @@
 accessing
 movePosition: aNumber
-	position := aNumber
+	textPosition := aNumber

@@ -2,8 +2,8 @@ children hooks
 onRemovedFromSceneGraph
 	super onRemovedFromSceneGraph.
 	
-	textLayout
+	paragraph
 		ifNil: [ ^ self ].
 
-	textLayout wantsAutoRelease
-		ifFalse: [ textLayout finalize ]
+	paragraph wantsAutoRelease
+		ifFalse: [ paragraph finalize ]

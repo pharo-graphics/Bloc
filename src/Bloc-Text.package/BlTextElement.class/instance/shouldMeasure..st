@@ -3,7 +3,7 @@ shouldMeasure: anExtentMeasurementSpec
 	| aHeightSpec aWidthSpec isWidthValid isHeightValid |
 		
 	"If we don't have text layout we must re-measure"
-	textLayout
+	paragraph
 		ifNil: [ ^ true ].
 
 	self isLayoutRequested
@@ -18,10 +18,10 @@ shouldMeasure: anExtentMeasurementSpec
 
 	isWidthValid := aWidthSpec isUnspecified or: [ 
 		"at most size"
-		aWidthSpec size >= textLayout width ].
+		aWidthSpec size >= paragraph width ].
 	
 	isHeightValid := aHeightSpec isUnspecified or: [ 
 		"at most size"
-		aHeightSpec size >= textLayout height ].
+		aHeightSpec size >= paragraph height ].
 	
 	^ (isWidthValid and: [ isHeightValid ]) not

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextParagraphMeasurer",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"spans"
+	],
+	"name" : "BrSingleLineTextParagraphMeasurer",
+	"type" : "normal"
+}

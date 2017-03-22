@@ -1,6 +1,6 @@
 events-processing
 processEvent: anEvent using: defaultDispatcher
-
+	
 	(self isInSpaceArea: anEvent)
 		ifFalse: [ ^ super processEvent: anEvent using: defaultDispatcher ].
 

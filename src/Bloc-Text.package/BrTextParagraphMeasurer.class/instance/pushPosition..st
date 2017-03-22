@@ -1,3 +1,3 @@
 accessing
 pushPosition: aNumber
-	position := position + aNumber
+	textPosition := textPosition + aNumber

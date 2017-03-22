@@ -1,3 +1,3 @@
-accessing
+paragraph - properties
 maxHeight: aNumber
 	maxHeight := aNumber

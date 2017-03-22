@@ -3,6 +3,7 @@ onMeasure: anExtentMeasurementSpec
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
 	| aHeightSpec aWidthSpec aMaxHeight aMaxWidth aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
+	super onMeasure: anExtentMeasurementSpec.
 
 	self
 		assert: [ text isNotNil ]
@@ -33,22 +34,22 @@ onMeasure: anExtentMeasurementSpec
 	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
 	aMaxHeight := (aMaxHeight - aPadding height) max: 0.
 	
-	textLayout
+	paragraph
 		"Create a new text layout"
-		ifNil: [ textLayout := self defaultTextParagraph ]
+		ifNil: [ paragraph := self defaultTextParagraph ]
 		"or reuse existing"
-		ifNotNil: [ textLayout reset ].
+		ifNotNil: [ paragraph reset ].
 
-	textLayout
+	paragraph
 		text: self text;
 		maxWidth: aMaxWidth;
 		maxHeight: aMaxHeight.
 
-	textLayout measureOn: self defaultOffscreenCanvas.
+	paragraph measureOn: self defaultOffscreenCanvas.
 	"text layout is measured at this point"
 
-	aMeasuredWidth := textLayout width.
-	aMeasuredHeight := textLayout height.
+	aMeasuredWidth := paragraph width.
+	aMeasuredHeight := paragraph height.
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
 	aWidthSpec isExact ifTrue: [ 

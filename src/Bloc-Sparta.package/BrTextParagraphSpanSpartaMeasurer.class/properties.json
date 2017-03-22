@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextParagraphSpanMeasurer",
+	"category" : "Bloc-Sparta-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"textRun",
+		"textRunIterator",
+		"metrics",
+		"textRunStart",
+		"textRunEnd",
+		"spanStart",
+		"spanEnd"
+	],
+	"name" : "BrTextParagraphSpanSpartaMeasurer",
+	"type" : "normal"
+}

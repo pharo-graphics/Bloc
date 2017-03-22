@@ -10,4 +10,6 @@ handleMouseDown: anEvent
 			button: (self convertButtonFromMouseButtonEvent: aMorphicEvent);
 			timestamp: Time millisecondClockValue
 			yourself.
-		self enqueue: aBlEvent ]
+		self enqueue: aBlEvent ].
+	
+	window takeKeyboardFocus

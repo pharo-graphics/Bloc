@@ -1,3 +1,3 @@
-accessing
+text - accessing
 position
-	^ position
+	^ textPosition

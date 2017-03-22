@@ -1,3 +1,3 @@
 printing
 printOn: aStream
-	span putOn: aStream from: start to: end
+	span putOn: aStream from: textRunStart to: textRunEnd

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/22/2017 15:45",
+	"super" : "Object",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrTextParagraphSpanMeasurer",
+	"type" : "normal"
+}

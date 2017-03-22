@@ -9,7 +9,14 @@ initializeAnnouncement
 		onAnnouncement: WindowClosed
 		do: [ :evt | spaceForm stopStepping. BlMorphicWindowCloseEvent new sentTo: eventHandler ].
 		
-	
+	self
+		onAnnouncement: MorphGotFocus
+		do: [ :evt | ].
+		
+	self
+		onAnnouncement: MorphLostFocus
+		do: [ :evt | ].
+
 	self
 		onAnnouncement: WindowResizing
 		do: [ :evt | 
