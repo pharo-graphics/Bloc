@@ -2,7 +2,7 @@
 measureOnSpartaCanvas: aSpartaCanvas
 	"Measure and create lines with text spans from provided rope
 	based on attributes and layout properties (maximum width / height)"
-	| anIterator aContext |
+	| anIterator aContext anAscent |
 
 	aContext := BrSingleLineTextParagraphContext new.
 	aContext maxWidth: maxWidth.
@@ -10,17 +10,22 @@ measureOnSpartaCanvas: aSpartaCanvas
 
 	anIterator := text iterator.
 	[ anIterator hasNext ] whileTrue: [ 
-		| aSpan |
+		| aBrSpan |
 		"If we pass while-check we definitely moved to the next line,
 		so can do the same with position"
 		aContext movePosition: anIterator position.
-		aSpan := anIterator nextSpan.
-		self measureSpan: aSpan onSpartaCanvas: aSpartaCanvas with: aContext ].
+		aBrSpan := anIterator nextSpan.
+		self measureSpan: aBrSpan onSpartaCanvas: aSpartaCanvas with: aContext ].
 
 	height := 0.0.
 	width := 0.0.
+	anAscent := 0.0.
+	
 	aContext spans do: [ :aSpan |
-		aSpan baseline: width @ aSpan ascent.
+		anAscent := anAscent max: aSpan ascent ].
+	
+	aContext spans do: [ :aSpan |
+		aSpan baseline: width @ anAscent.
 		height := height max: aSpan height.
 		width := width + aSpan width ].
 

@@ -1,3 +1,3 @@
-accessing
+geometry - accessing
 availableWidth
 	^ maxWidth - accumulatedWidth

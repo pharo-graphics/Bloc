@@ -1,17 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "BrTextParagraphSegment",
 	"category" : "Bloc-Text-Text",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"maxHeight",
-		"maxWidth",
-		"accumulatedHeight",
-		"accumulatedWidth",
-		"position"
+		"spans"
 	],
-	"name" : "BrTextParagraphContext",
+	"name" : "BrTextParagraphLine",
 	"type" : "normal"
 }

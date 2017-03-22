@@ -1,0 +1,24 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/21/2017 09:33",
+	"super" : "Object",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [
+		"matrix"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"maxHeight",
+		"maxWidth",
+		"accumulatedHeight",
+		"accumulatedWidth",
+		"position",
+		"transformation",
+		"inverseTransformation",
+		"start",
+		"length",
+		"span"
+	],
+	"name" : "BrTextParagraphMeasurer",
+	"type" : "normal"
+}

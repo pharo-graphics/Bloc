@@ -1,85 +1,73 @@
 *Bloc-Sparta
 measureSpan: aSpan onSpartaCanvas: aSpartaCanvas with: aContext
-	| attributes aTextPainter aLength aStart aBlTransformation anInvertedTransformation aMetricsProvider aTextRun aMetrics |
+	| aTextPainter aMetricsProvider aTextRun aTextRunIterator aMetrics anEndOffset |
+
 	self
 		assert: [ aSpan isNotEmpty ]
 		description: [ 'Span must be non-empty!' ].
-	aBlTransformation := self class matrix loadIdentity.
-	attributes := aSpan attributes.
-	attributes
-		do:
-			[ :attribute | attribute applyOnSpartaMatrix: aBlTransformation with: aSpan ].
+	
+	aContext span: aSpan.
 
-	"Only compute inverted matrix if we actually have custom transformation"
-	anInvertedTransformation := aBlTransformation isIdentity
-		ifTrue: [ aBlTransformation := nil ]
-		ifFalse: [ aBlTransformation inverted ].
-	"nil transform and inverted transform means that we don't have any transformation.
-		Please note, that this is done to prevent unneseccary object creation and
-		garbage collection in the future. Text measurement must be optimized as much as possible
-		in terms of object creation. It is also important to mention that a single text editor
-		expanded on full screen may contain a few thousands of small text pieces where each of them
-		own a text layout. It means that with such a simple optimization we prevent many thousands
-		of matrix objects from being created and later garbage collected. Worth it!"
+	
 	aTextPainter := self createSpartaTextPainter: aSpan on: aSpartaCanvas.
-	"Since I am a single line layout we want to force disable breaks in order
-	to prevent hyphenation computations which is rather slow"
-	aTextPainter breakNone.
+	aContext maxWidth isInfinite
+		ifTrue: [ aTextPainter breakNone ]
+		ifFalse: [ aTextPainter breakWordWrap ].
 	aMetrics := aTextPainter metrics.
 	aMetricsProvider := aTextPainter metricsProvider.
 	aTextRun := aTextPainter textRun.
 	self wantsAutoRelease
 		ifTrue: [ aTextRun autoRelease ].
-
-	"Length is amount of glyphs, not characters!"
-	aLength := aTextRun length.
 	self
 		assert: [ aTextRun isNull not ]
 		description: [ 'Created text run must not be nullptr' ].
 	aTextRun metricsProvider: aMetricsProvider.
-	aStart := 1.
-	[ aStart <= aLength and: [ aContext availableWidth > 0 ] ]
-		whileTrue: [ | span anEnd aMaxWidth |
-			"compute width limit based on existance of custom transformation"
-			aMaxWidth := (aBlTransformation isNil
-				or: [ anInvertedTransformation isNil ])
-				ifTrue: [ aContext availableWidth ]
-				ifFalse: [ (anInvertedTransformation transformX: aContext availableWidth)
-						- aBlTransformation translation x ].
-			aMetrics width: aMaxWidth.
-			aMetrics start: aStart.
+
+	aContext start: 1.
+	aContext length: aTextRun size.
+
+	anEndOffset := 0.
+	aTextRunIterator := aTextRun iterator.
+
+	[ aContext wantsMore ] whileTrue: [
+		| span anEnd aFromOffset  |
+
+			aMetrics width: aContext transformedAvailableWidth.
+			aMetrics start: aContext start.
+
+
 			aMetricsProvider measure: aTextRun in: aMetrics.
+			"wrapped end is index of last visible glyph, not character"
 			anEnd := aMetrics wrappedEnd.
-			"to can be less than from, meaning that there are no fully visible characters that fit in available width"
-			anEnd < aStart
-				ifTrue: [ aMetrics width: Float infinity.
-					aMetrics length: aStart - aMetrics start + 1.
-					aMetricsProvider measure: aTextRun in: aMetrics.
-					anEnd := aMetrics wrappedEnd ].
-			span := (aBlTransformation isNil
-				or: [ anInvertedTransformation isNil ])
-				ifTrue: [ SpTextSpan
-						rope: text
-						segment: aSpan
-						start: aStart
-						end: anEnd
-						from: aContext position
-						to: aContext position + (anEnd - aStart)
-						metrics: aMetrics
-						textRun: aTextRun
-						attributes: attributes	"should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)"	"should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)" ]
+
+			aFromOffset := aTextRunIterator position - 1.
+			aTextRunIterator skipUnits: anEnd - aContext start + 1.
+			anEndOffset := aTextRunIterator position - 2.
+
+			span := aContext hasTransformation
 				ifFalse: [ SpTextSpan
 						rope: text
 						segment: aSpan
-						start: aStart
-						end: anEnd
-						from: aContext position
-						to: aContext position + (anEnd - aStart)
+						start: aContext start "should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)"	
+						end: anEnd "should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)"
+						from: aContext position + aFromOffset
+						to: aContext position + anEndOffset
 						metrics: aMetrics
-						transform: aBlTransformation
-						transformInverted: anInvertedTransformation
 						textRun: aTextRun
-						attributes: attributes	"should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)"	"should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)" ].
+						attributes: aContext span attributes ]
+				ifTrue: [ SpTextSpan
+						rope: text
+						segment: aSpan
+						start: aContext start "should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)"	
+						end: anEnd "should be in string buffer coordinates (respecting 1 vs 2 vs 4 bits per character)"	
+						from: aContext position + aFromOffset
+						to: aContext position + anEndOffset
+						metrics: aMetrics
+						transform: aContext transformation
+						transformInverted: aContext inverseTransformation
+						textRun: aTextRun
+						attributes: aContext span attributes ].
+
 			aContext pushSpan: span.
-			aStart := anEnd + 1 ].
-	aContext pushPosition: aStart - 1 - aLength
+			aContext start: anEnd + 1 ].
+	aContext pushPosition: anEndOffset

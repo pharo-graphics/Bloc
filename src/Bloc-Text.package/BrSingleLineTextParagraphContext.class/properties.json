@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BrTextParagraphContext",
+	"super" : "BrTextParagraphMeasurer",
 	"category" : "Bloc-Text-Text",
 	"classinstvars" : [ ],
 	"pools" : [ ],

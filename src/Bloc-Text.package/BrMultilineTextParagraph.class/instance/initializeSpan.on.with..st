@@ -7,7 +7,7 @@ initializeSpan: aSpan on: aCanvas with: aContext
 	attributes := aSpan attributes.
 	transform := SpartaMatrix new.
 	attributes
-		do: [ :attribute | attribute applyOnSpartaMatrix: transform with: aSpan ].
+		do: [ :attribute | attribute applyOnTransformation: transform with: aSpan ].
 	aTextPainter := self createPainter: aSpan on: aCanvas.
 	aStart := 1.
 	transformInverted := transform inverted.

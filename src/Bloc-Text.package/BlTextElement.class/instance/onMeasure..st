@@ -49,7 +49,7 @@ onMeasure: anExtentMeasurementSpec
 
 	aMeasuredWidth := textLayout width.
 	aMeasuredHeight := textLayout height.
-	
+
 	"If measurement spec is exact I must ignore size measured by textLayout"
 	aWidthSpec isExact ifTrue: [ 
 		aMeasuredWidth := aWidthSpec size ].

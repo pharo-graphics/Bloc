@@ -1,0 +1,21 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextParagraphSegment",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"start",
+		"end",
+		"attributes",
+		"textRun",
+		"transformation",
+		"strikethroughOffset",
+		"strikethroughSize",
+		"transformationInverted",
+		"span"
+	],
+	"name" : "BrTextParagraphSpan",
+	"type" : "normal"
+}
