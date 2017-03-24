@@ -1,3 +1,3 @@
 event handling
 handleKeyUp: anEvent
-	^ super handleKeyUp: anEvent
+	anEvent sentTo: eventHandler

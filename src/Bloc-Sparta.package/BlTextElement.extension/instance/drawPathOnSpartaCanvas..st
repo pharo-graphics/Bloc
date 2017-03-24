@@ -1,6 +1,6 @@
 *Bloc-Sparta
-drawOnSpartaCanvas: aCanvas
-	super drawOnSpartaCanvas: aCanvas.
+drawPathOnSpartaCanvas: aCanvas
+	super drawPathOnSpartaCanvas: aCanvas.
 	
 	paragraph
 		ifNil: [ ^ self ].

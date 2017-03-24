@@ -5,9 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"cursor"
-	],
+	"instvars" : [ ],
 	"name" : "BlTextEditListener",
 	"type" : "normal"
 }

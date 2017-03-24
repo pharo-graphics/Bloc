@@ -8,6 +8,6 @@
 	"instvars" : [
 		"textIndex"
 	],
-	"name" : "BlCursorElement",
+	"name" : "BlTextCursorElement",
 	"type" : "normal"
 }

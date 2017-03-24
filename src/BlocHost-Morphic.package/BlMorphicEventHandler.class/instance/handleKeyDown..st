@@ -1,12 +1,14 @@
 event handling
 handleKeyDown: aMorphicEvent
+	| aBlEvent |
+	
+	aBlEvent := BlKeyDownEvent new
+		keyValue: aMorphicEvent keyValue;
+		charCode: aMorphicEvent keyCharacter;
+		scanCode: aMorphicEvent scanCode;
+		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
+		timestamp: Time millisecondClockValue;
+		position: aMorphicEvent position;
+		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
 
-	"| aBlEvent |
-	aBlEvent := BlMouseDownEvent new
-			position: aMorphicEvent position;
-			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			button: (self convertButtonFromMouseButtonEvent: aMorphicEvent);
-			timestamp: Time millisecondClockValue
-			yourself.
-		self enqueue: aBlEvent"
+	self enqueue: aBlEvent

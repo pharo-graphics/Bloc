@@ -1,4 +1,3 @@
 event handling
 handleKeystroke: anEvent
-
-	^ super handleKeystroke: anEvent
+	anEvent sentTo: eventHandler

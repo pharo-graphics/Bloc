@@ -20,10 +20,10 @@
 		"effect",
 		"zIndex",
 		"visibility",
-		"cursor",
 		"space",
 		"styler",
-		"misc"
+		"misc",
+		"mouseCursor"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "GlennCavarle 8/8/2016 11:44",

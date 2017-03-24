@@ -1,16 +1,12 @@
 mouse handlers
 clickEvent: anEvent
-	| aTextElement aParagraphSpan aTextIndex aClickPosition |
-	
-	aTextElement := anEvent currentTarget.
-	aClickPosition := aTextElement globalPointToLocal: anEvent position.
-	
-	aParagraphSpan := aTextElement paragraph spanAtPoint: aClickPosition.
-	aTextIndex := aParagraphSpan charAtPoint: aClickPosition.
-	
-	self
-		moveCursorAt: aTextIndex
-		of: aTextElement
-		in: aParagraphSpan.
+	| aTextEditElement aClickPosition |
 
-	aTextElement requestFocus
+	aTextEditElement := anEvent currentTarget.
+	aTextEditElement requestFocus.
+	
+	anEvent modifiers isCmd
+		ifFalse: [ aTextEditElement removeCursors ].
+
+	aClickPosition := aTextEditElement globalPointToLocal: anEvent position.
+	self addCursorAtPosition:  aClickPosition in: aTextEditElement
