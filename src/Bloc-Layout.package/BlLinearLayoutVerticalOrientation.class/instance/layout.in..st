@@ -34,13 +34,13 @@ layout: anElement in: aRectangle
 			
 			self layout horizontalAlignment ifNotNull: [ 
 				| translation allowedBounds |
-				allowedBounds := origin extent: elementInnerBounds width @ child measuredHeight.
+				allowedBounds := childBounds origin extent: elementInnerBounds width @ child measuredHeight.
 				translation := (self layout horizontalAlignment directed: self layout direction) translate: childBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 
 			self layout horizontalAlignment ifNull: [ 
 				| translation allowedBounds |
-				allowedBounds := origin extent: elementInnerBounds width @ child measuredHeight.
+				allowedBounds := childBounds origin extent: elementInnerBounds width @ child measuredHeight.
 				translation := (childConstraints horizontal alignment directed: self layout direction) translate: childBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 			

@@ -3,12 +3,13 @@ layout: anElement in: aRectangle
 	|top right bottom left majorBounds elementInnerBounds|
 	"Layout subnodes vertically in column one by one
 	based on previousely measured extent"
-	
+
 	top := anElement insets top.
 	left := anElement insets left. 
 	right := left.
 	bottom := top.
-
+	
+	
 	self layout direction with: anElement managedChildren do: [ :child |
 		right := right + child measuredWidth + (child outsets width max: 0).
 		bottom := bottom max: child measuredHeight + (child outsets height max: 0) ].
@@ -35,13 +36,13 @@ layout: anElement in: aRectangle
 			
 			self layout verticalAlignment ifNotNull: [ 
 				| translation allowedBounds |
-				allowedBounds := origin extent: child measuredWidth @ elementInnerBounds height.
+				allowedBounds := childBounds origin extent: child measuredWidth @ elementInnerBounds height.
 				translation := self layout verticalAlignment translate: childBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 
 			self layout verticalAlignment ifNull: [ 
 				| translation allowedBounds |
-				allowedBounds := origin extent: child measuredWidth @ elementInnerBounds height.
+				allowedBounds := childBounds origin extent: child measuredWidth @ elementInnerBounds height.
 				translation := childConstraints vertical alignment translate: childBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 			
@@ -49,5 +50,5 @@ layout: anElement in: aRectangle
 			Because measuring process does not modify actual extent
 			we need to use a measured one"
 			child applyLayoutIn: childBounds.
-			"translating origin vertically down for next subnode"
+			"translating origin horizontally right for next subnode"
 			(origin x + child measuredWidth + (child outsets width max: 0)) @ origin y ]

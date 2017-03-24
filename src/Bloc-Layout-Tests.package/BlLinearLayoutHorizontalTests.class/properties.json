@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Layout-Tests-Linear",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlLayoutTests classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
+	"classvars" : [ ],
 	"instvars" : [
-		"parent" ],
+		"parent"
+	],
 	"name" : "BlLinearLayoutHorizontalTests",
-	"pools" : [
-		 ],
+	"commentStamp" : "",
 	"super" : "TestCase",
 	"traitcomposition" : "TBlLayoutTests",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Layout-Tests-Linear"
+}

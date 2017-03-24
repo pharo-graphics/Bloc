@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Layout-Tests-Linear",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Bloc-Layout-Tests-Linear",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"parent",
-		"child" ],
+		"child"
+	],
 	"name" : "BlLinearLayoutConstraintsTests",
-	"pools" : [
-		 ],
-	"super" : "TestCase",
-	"type" : "normal" }
+	"type" : "normal"
+}
