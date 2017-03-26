@@ -1,6 +1,6 @@
 focus testing
 hasFocus
-	"Return true if I have or contain focused element, false otherwise"
+	"Return true if I have or contain a focused element, false otherwise"
 	<return: #Boolean>
 
 	^ self isFocused or: [

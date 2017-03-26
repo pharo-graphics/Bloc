@@ -1,0 +1,3 @@
+events
+wantedEvents
+	^ { BlTextCursorEntersFromRightBound . BlTextCursorEntersFromLeftBound }

@@ -1,0 +1,1 @@
+Is sent when cursor reaches the right editor bound

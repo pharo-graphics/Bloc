@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/24/2017 14:52",
+	"super" : "BlEvent",
+	"category" : "Bloc-Text-Element",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlTextCursorEntersFromLeftBound",
+	"type" : "normal"
+}

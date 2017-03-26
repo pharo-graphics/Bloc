@@ -5,4 +5,4 @@ hasFocusable
 	<return: #Boolean>
 
 	^ self isFocusable or: [
-		self children anySatisfy: [ :anElement | anElement isFocusable ] ]
+		self children anySatisfy: [ :anElement | anElement hasFocusable ] ]

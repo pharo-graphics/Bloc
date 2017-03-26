@@ -5,11 +5,12 @@ moveCursor: aCursorElement to: aTextIndex in: aTextElement
 	self
 		assert: [ aTextIndex >= 0 ]
 		description: [ 'Text index must not be negative' ].
+		
+	self
+		assert: [ aTextIndex <= aTextElement text size ]
+		description: [ 'Text index must be within text size' ].
 
 	aTextIndex = aCursorElement textIndex
-		ifTrue: [ ^ self ].
-		
-	(aTextIndex min: aTextElement text size) = aCursorElement textIndex
 		ifTrue: [ ^ self ].
 	
 	aParagraphSpan := aTextElement paragraph spanAtIndex: aTextIndex.

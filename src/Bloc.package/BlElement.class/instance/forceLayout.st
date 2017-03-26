@@ -1,6 +1,6 @@
 layout
 forceLayout
-	| relayoutCounter maxRelayoutCount|
+	| relayoutCounter maxRelayoutCount |
 	relayoutCounter := 0.
 	maxRelayoutCount := 100.
 	[ self isLayoutRequested
