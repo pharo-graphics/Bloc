@@ -31,7 +31,7 @@
 	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal",
 	"classinstvars" : [
-		"invalidateRectangle"
+		"invalidateBounds"
 	],
 	"pools" : [ ],
 	"category" : "Bloc-Basic"

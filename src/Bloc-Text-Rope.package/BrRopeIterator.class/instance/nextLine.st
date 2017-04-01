@@ -1,11 +1,18 @@
 accessing
 nextLine
+	| lineFound initialValue aSegment |
 
-	"The last item is carriage return, we don't want it to be a new line"
-	(self position = end and: [
-		(self isNewLine: self peek) ])
-			ifTrue: [
-				"Move iterator to the next, to make sure that hasNext returns false"
-				self next.
-				^ BrCollectionRope collection: #() ].
-	^ self nextSegment: [ :item | self isNewLine: item ]
+	initialValue := self isNewLine: self peek.		
+	lineFound := false.
+
+	aSegment := self nextSegment: [ :item |
+		lineFound
+			ifFalse: [ (self isNewLine: item)
+				ifTrue: [ lineFound := true ]
+				ifFalse: [ initialValue ] ]
+			ifTrue: [ initialValue not ] ].
+
+	(self hasNext and: [ self isNewLine: self peek ])
+		ifTrue: [ self next ].
+
+	^ aSegment

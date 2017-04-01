@@ -1,0 +1,1 @@
+I represent an abstract direction in which the next focusable element should be searched

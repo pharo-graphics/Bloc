@@ -5,7 +5,7 @@ clickEvent: anEvent
 	aTextEditElement := anEvent currentTarget.
 	aTextEditElement requestFocus.
 	
-	true"anEvent modifiers isCmd"
+	anEvent modifiers isCmd
 		ifFalse: [ aTextEditElement removeCursors ].
 
 	aClickPosition := aTextEditElement globalPointToLocal: anEvent position.

@@ -1,6 +1,6 @@
 geometry bounds convertion
 globalBoundsToLocal: aBounds
-"In-place transform bounds from global space coordinates to local coordinates.
+	"In-place transform bounds from global space coordinates to local coordinates.
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."

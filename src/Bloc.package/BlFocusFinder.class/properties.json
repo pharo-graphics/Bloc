@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/27/2017 10:56",
+	"super" : "Object",
+	"category" : "Bloc-Focus",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFocusFinder",
+	"type" : "normal"
+}

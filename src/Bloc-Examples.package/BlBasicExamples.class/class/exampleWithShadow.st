@@ -9,7 +9,7 @@ exampleWithShadow
 		background: Color red;
 		effect: (BlDropShadowEffect color: Color black width: 20 offset: 10@10);
 		yourself.
-		
+
 	anEllipse := BlElement new
 		size: 300@150;
 		geometry: BlEllipse new;

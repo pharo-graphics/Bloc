@@ -1,3 +1,3 @@
 geometry
-effectBounds: aSpartaRectangle
-	^ self computeBounds: (self input boundsInLocal: aSpartaRectangle)
+effectBounds: aBlBounds
+	^ self computeBounds: (self input geometryBounds: aBlBounds)

@@ -1,7 +1,7 @@
 iterator - enumeration
-nextWord
+nextWhitespace
 	"Return an instance of BrText which represents a piece of text from current position
-	until the first space character not including spaces"
+	until the first non-whitespace character without including it"
 	<return: #BrText>
 
-	^ BrRopedText rope: iterator nextWord
+	^ BrRopedText rope: iterator nextWhitespace
