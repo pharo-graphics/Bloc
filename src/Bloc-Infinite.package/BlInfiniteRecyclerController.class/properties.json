@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Infinite-Recycler",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 11/18/2016 15:18",
-	"instvars" : [
-		"infiniteElement" ],
-	"name" : "BlInfiniteRecyclerController",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Recycler",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"infiniteElement"
+	],
+	"name" : "BlInfiniteRecyclerController",
+	"type" : "normal"
+}

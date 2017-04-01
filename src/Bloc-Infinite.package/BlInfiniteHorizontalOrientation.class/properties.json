@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Infinite-Layout",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlInfiniteHorizontalOrientation",
-	"pools" : [
-		 ],
 	"super" : "BlInfiniteLayoutOrientation",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Layout",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteHorizontalOrientation",
+	"type" : "normal"
+}

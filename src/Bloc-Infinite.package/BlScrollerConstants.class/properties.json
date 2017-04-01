@@ -1,7 +1,9 @@
 {
+	"commentStamp" : "",
+	"super" : "SharedPool",
 	"category" : "Bloc-Infinite-Scroller",
-	"classinstvars" : [
-		 ],
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [
 		"Ballistic",
 		"Cubic",
@@ -17,12 +19,9 @@
 		"Spline",
 		"SplinePosition",
 		"SplineTime",
-		"StartTension" ],
-	"commentStamp" : "",
-	"instvars" : [
-		 ],
+		"StartTension"
+	],
+	"instvars" : [ ],
 	"name" : "BlScrollerConstants",
-	"pools" : [
-		 ],
-	"super" : "SharedPool",
-	"type" : "normal" }
+	"type" : "normal"
+}

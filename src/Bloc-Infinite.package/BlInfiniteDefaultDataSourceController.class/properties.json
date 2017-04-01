@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Infinite-DataSource-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 5/24/2016 20:04",
-	"instvars" : [
-		"element",
-		"dataSourceManager" ],
-	"name" : "BlInfiniteDefaultDataSourceController",
-	"pools" : [
-		 ],
 	"super" : "BlInfiniteAbstractDataSourceController",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-DataSource-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"dataSourceManager",
+		"infiniteElement"
+	],
+	"name" : "BlInfiniteDefaultDataSourceController",
+	"type" : "normal"
+}

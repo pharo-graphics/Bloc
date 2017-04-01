@@ -1,5 +1,5 @@
 accessing - position
-offsetPositions: aStartPosition forInsert: anItemCount
+offsetPositionRecordsForInsert: aStartPosition itemCount: anItemCount
 
 	cachedScrap
 		select: [ :aHolder | aHolder position >= aStartPosition ]

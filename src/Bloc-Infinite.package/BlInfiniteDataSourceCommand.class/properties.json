@@ -1,17 +1,16 @@
 {
-	"category" : "Bloc-Infinite-DataSource-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 11/19/2016 21:25",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-DataSource-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"positionStart",
 		"payload",
 		"itemCount",
-		"type" ],
+		"type"
+	],
 	"name" : "BlInfiniteDataSourceCommand",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

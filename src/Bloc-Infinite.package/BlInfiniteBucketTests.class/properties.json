@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Infinite-Utils",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"bucket" ],
-	"name" : "BlInfiniteBucketTests",
-	"pools" : [
-		 ],
 	"super" : "TestCase",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Utils",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"bucket"
+	],
+	"name" : "BlInfiniteBucketTests",
+	"type" : "normal"
+}

@@ -1,11 +1,6 @@
 {
-	"category" : "Bloc-Infinite-Recycler",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBlEventTarget classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 11/21/2016 16:48",
+	"classvars" : [ ],
 	"instvars" : [
 		"recyclerPool",
 		"controller",
@@ -16,10 +11,14 @@
 		"cacheSize",
 		"requestedCacheSize",
 		"userCache",
-		"eventDispatcher" ],
+		"eventDispatcher"
+	],
 	"name" : "BlInfiniteRecycler",
-	"pools" : [
-		 ],
+	"commentStamp" : "AliakseiSyrel 11/21/2016 16:48",
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Infinite-Recycler"
+}

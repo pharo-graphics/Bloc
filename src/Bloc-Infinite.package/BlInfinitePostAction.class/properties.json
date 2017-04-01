@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Infinite-Tasks",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"action" ],
-	"name" : "BlInfinitePostAction",
-	"pools" : [
-		 ],
 	"super" : "BlInfiniteRunnable",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Tasks",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"action"
+	],
+	"name" : "BlInfinitePostAction",
+	"type" : "normal"
+}

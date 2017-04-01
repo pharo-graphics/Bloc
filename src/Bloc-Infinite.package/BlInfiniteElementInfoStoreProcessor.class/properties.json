@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Infinite-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 12/11/2016 22:31",
-	"instvars" : [
-		 ],
-	"name" : "BlInfiniteElementInfoStoreProcessor",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteElementInfoStoreProcessor",
+	"type" : "normal"
+}

@@ -1,10 +1,12 @@
 {
-	"category" : "Bloc-Infinite-Layout",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 5/20/2016 23:47",
+	"super" : "BlLayout",
+	"category" : "Bloc-Infinite-Layout",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"classvars" : [ ],
 	"instvars" : [
 		"childManager",
 		"infiniteElement",
@@ -16,9 +18,8 @@
 		"itemPrefetchEnabled",
 		"measurementCacheEnabled",
 		"requestedSimpleAnimations",
-		"smoothScroller" ],
+		"smoothScroller"
+	],
 	"name" : "BlInfiniteLayout",
-	"pools" : [
-		"BlInfiniteConstants" ],
-	"super" : "BlLayout",
-	"type" : "normal" }
+	"type" : "normal"
+}

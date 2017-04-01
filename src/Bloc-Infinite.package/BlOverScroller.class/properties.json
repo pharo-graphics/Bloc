@@ -1,19 +1,20 @@
 {
+	"commentStamp" : "",
+	"super" : "Object",
 	"category" : "Bloc-Infinite-Scroller",
-	"classinstvars" : [
-		 ],
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [
 		"Fling",
-		"Scroll" ],
-	"commentStamp" : "",
+		"Scroll"
+	],
 	"instvars" : [
 		"interpolator",
 		"scrollerX",
 		"scrollerY",
 		"mode",
-		"isFlywheel" ],
+		"isFlywheel"
+	],
 	"name" : "BlOverScroller",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

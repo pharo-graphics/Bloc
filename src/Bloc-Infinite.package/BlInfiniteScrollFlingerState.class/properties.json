@@ -1,10 +1,12 @@
 {
-	"category" : "Bloc-Infinite-Scroller",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"classvars" : [ ],
 	"instvars" : [
 		"x",
 		"y",
@@ -13,9 +15,8 @@
 		"hResult",
 		"vResult",
 		"overscrollX",
-		"overscrollY" ],
+		"overscrollY"
+	],
 	"name" : "BlInfiniteScrollFlingerState",
-	"pools" : [
-		"BlInfiniteConstants" ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

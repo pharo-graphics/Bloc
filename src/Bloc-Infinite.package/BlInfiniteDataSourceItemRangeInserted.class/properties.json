@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Infinite-Events",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 12/11/2016 14:03",
+	"super" : "BlInfiniteDataSourceEvent",
+	"category" : "Bloc-Infinite-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"position",
-		"itemCount" ],
+		"itemCount"
+	],
 	"name" : "BlInfiniteDataSourceItemRangeInserted",
-	"pools" : [
-		 ],
-	"super" : "BlInfiniteDataSourceEvent",
-	"type" : "normal" }
+	"type" : "normal"
+}

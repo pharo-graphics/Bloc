@@ -1,5 +1,5 @@
 dispatch
 updateElementHoldersOn: aContext command: aCommand
 	aContext controller
-		offsetPositionRecordsForMove: aCommand startPosition
+		offsetPositionsForMove: aCommand startPosition
 		to: aCommand itemCount

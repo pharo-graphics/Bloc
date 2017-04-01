@@ -1,18 +1,17 @@
 {
+	"commentStamp" : "",
+	"super" : "BlInfiniteFlags",
 	"category" : "Bloc-Infinite-Flags",
-	"classinstvars" : [
-		 ],
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [
 		"AppearedInPreLayout",
 		"Changed",
 		"Invalidated",
 		"Moved",
-		"Removed" ],
-	"commentStamp" : "",
-	"instvars" : [
-		 ],
+		"Removed"
+	],
+	"instvars" : [ ],
 	"name" : "BlInfiniteItemAnimatorFlags",
-	"pools" : [
-		 ],
-	"super" : "BlInfiniteFlags",
-	"type" : "normal" }
+	"type" : "normal"
+}

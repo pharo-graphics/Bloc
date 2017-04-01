@@ -1,8 +1,9 @@
 manager -> element
 offsetPositions: aStartPosition forRemovingLaidOutOrNewElement: anItemCount
-	element
+
+	infiniteElement
 		offsetPositionRecordsForRemove: aStartPosition
 		itemCount: anItemCount
 		applyToPreLayout: true.
 	
-	element markItemsAddedOrRemoved
+	infiniteElement markItemsAddedOrRemoved

@@ -1,7 +1,9 @@
 {
+	"commentStamp" : "",
+	"super" : "BlInfiniteFlags",
 	"category" : "Bloc-Infinite-Flags",
-	"classinstvars" : [
-		 ],
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [
 		"AppearedInPreLayout",
 		"BouncedFromHiddenList",
@@ -16,12 +18,9 @@
 		"Removed",
 		"ReturnedFromScrap",
 		"TmpDetached",
-		"Update" ],
-	"commentStamp" : "",
-	"instvars" : [
-		 ],
+		"Update"
+	],
+	"instvars" : [ ],
 	"name" : "BlInfiniteElementHolderFlags",
-	"pools" : [
-		 ],
-	"super" : "BlInfiniteFlags",
-	"type" : "normal" }
+	"type" : "normal"
+}

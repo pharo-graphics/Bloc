@@ -1,10 +1,10 @@
 {
-	"category" : "Bloc-Infinite-DataSource-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 11/18/2016 13:33",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-DataSource-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"pendingCommands",
 		"postponedCommands",
@@ -12,9 +12,8 @@
 		"shouldRecycle",
 		"commandsPool",
 		"commandsReorderer",
-		"existingCommandTypes" ],
+		"existingCommandTypes"
+	],
 	"name" : "BlInfiniteDataSourceManager",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Infinite-Recycler",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Recycler",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"scrap",
 		"maxScrap",
-		"attachCount" ],
+		"attachCount"
+	],
 	"name" : "BlInfiniteRecyclerPool",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Infinite-Events",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 12/11/2016 15:45",
+	"super" : "BlInfiniteDataSourceEvent",
+	"category" : "Bloc-Infinite-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"position",
-		"itemCount" ],
+		"itemCount"
+	],
 	"name" : "BlInfiniteDataSourceItemRangeRemoved",
-	"pools" : [
-		 ],
-	"super" : "BlInfiniteDataSourceEvent",
-	"type" : "normal" }
+	"type" : "normal"
+}

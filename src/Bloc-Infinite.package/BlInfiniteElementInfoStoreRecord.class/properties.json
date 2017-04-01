@@ -1,16 +1,17 @@
 {
+	"commentStamp" : "",
+	"super" : "Object",
 	"category" : "Bloc-Infinite-Basic",
 	"classinstvars" : [
-		"pool" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
+		"pool"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"flags",
 		"preInfo",
-		"postInfo" ],
+		"postInfo"
+	],
 	"name" : "BlInfiniteElementInfoStoreRecord",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

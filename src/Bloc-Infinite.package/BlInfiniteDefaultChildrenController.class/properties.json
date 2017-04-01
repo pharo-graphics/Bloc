@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Infinite-Children",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 5/25/2016 12:58",
+	"super" : "BlInfiniteAbstractChildrenController",
+	"category" : "Bloc-Infinite-Children",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"infiniteElement",
-		"childManager" ],
+		"childManager"
+	],
 	"name" : "BlInfiniteDefaultChildrenController",
-	"pools" : [
-		 ],
-	"super" : "BlInfiniteAbstractChildrenController",
-	"type" : "normal" }
+	"type" : "normal"
+}

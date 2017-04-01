@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Infinite-Tasks",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 11/29/2016 22:47",
-	"instvars" : [
-		 ],
-	"name" : "BlInfiniteRunnable",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Tasks",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteRunnable",
+	"type" : "normal"
+}

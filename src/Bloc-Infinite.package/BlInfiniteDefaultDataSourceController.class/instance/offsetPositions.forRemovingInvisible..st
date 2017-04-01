@@ -1,11 +1,13 @@
 manager -> element
 offsetPositions: aStartPosition forRemovingInvisible: anItemCount
 	| newDeletedCount |
-	element
+
+	infiniteElement
 		offsetPositionRecordsForRemove: aStartPosition
 		itemCount: anItemCount
 		applyToPreLayout: true.
 	
-	element markItemsAddedOrRemoved.
-	newDeletedCount := element state deletedInvisibleItemCountSincePreviousLayout + anItemCount.
-	element state deletedInvisibleItemCountSincePreviousLayout: newDeletedCount
+	infiniteElement markItemsAddedOrRemoved.
+
+	newDeletedCount := infiniteElement state deletedInvisibleItemCountSincePreviousLayout + anItemCount.
+	infiniteElement state deletedInvisibleItemCountSincePreviousLayout: newDeletedCount

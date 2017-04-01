@@ -1,5 +1,5 @@
 dispatch
 offsetPositions: aCommand on: aDataSourceController
 	aDataSourceController
-		offsetPositionRecordsForMove: aCommand positionStart
+		offsetPositionsForMove: aCommand positionStart
 		to: aCommand itemCount

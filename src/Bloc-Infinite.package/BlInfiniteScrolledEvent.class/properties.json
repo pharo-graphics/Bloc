@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Infinite-Events",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"delta" ],
-	"name" : "BlInfiniteScrolledEvent",
-	"pools" : [
-		 ],
 	"super" : "BlEvent",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"delta"
+	],
+	"name" : "BlInfiniteScrolledEvent",
+	"type" : "normal"
+}

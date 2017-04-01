@@ -1,10 +1,12 @@
 {
-	"category" : "Bloc-Infinite-Scroller",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 12/18/2016 18:38",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"classvars" : [ ],
 	"instvars" : [
 		"deltaX",
 		"deltaY",
@@ -12,9 +14,8 @@
 		"jumpPosition",
 		"interpolator",
 		"isChanged",
-		"consecutiveUpdates" ],
+		"consecutiveUpdates"
+	],
 	"name" : "BlInfiniteSmoothScrollerAction",
-	"pools" : [
-		"BlInfiniteConstants" ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

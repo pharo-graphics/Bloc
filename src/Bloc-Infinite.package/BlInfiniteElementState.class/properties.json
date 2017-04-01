@@ -1,10 +1,12 @@
 {
-	"category" : "Bloc-Infinite-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 11/15/2016 09:05",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"classvars" : [ ],
 	"instvars" : [
 		"targetPosition",
 		"layoutStep",
@@ -20,9 +22,8 @@
 		"isMeasuring",
 		"focusedItemPosition",
 		"focusedItemId",
-		"focusedSubChild" ],
+		"focusedSubChild"
+	],
 	"name" : "BlInfiniteElementState",
-	"pools" : [
-		"BlInfiniteConstants" ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

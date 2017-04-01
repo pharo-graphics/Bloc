@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Infinite-Children",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 11/15/2016 09:07",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Children",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"bucket",
 		"hiddenChildren",
-		"controller" ],
+		"controller"
+	],
 	"name" : "BlInfiniteChildrenManager",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

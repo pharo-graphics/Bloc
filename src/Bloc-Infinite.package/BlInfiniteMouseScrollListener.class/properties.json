@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Infinite-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlInfiniteMouseScrollListener",
-	"pools" : [
-		 ],
 	"super" : "BlBasicEventHandler",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteMouseScrollListener",
+	"type" : "normal"
+}

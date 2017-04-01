@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Infinite-Pool",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 5/24/2016 11:37",
+	"super" : "BlInfinitePool",
+	"category" : "Bloc-Infinite-Pool",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"pool",
-		"poolSize" ],
+		"poolSize"
+	],
 	"name" : "BlInfiniteSimplePool",
-	"pools" : [
-		 ],
-	"super" : "BlInfinitePool",
-	"type" : "normal" }
+	"type" : "normal"
+}

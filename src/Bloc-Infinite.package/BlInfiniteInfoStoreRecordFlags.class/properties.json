@@ -1,17 +1,16 @@
 {
+	"commentStamp" : "",
+	"super" : "BlInfiniteFlags",
 	"category" : "Bloc-Infinite-Flags",
-	"classinstvars" : [
-		 ],
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [
 		"Appear",
 		"Disappeared",
 		"Post",
-		"Pre" ],
-	"commentStamp" : "",
-	"instvars" : [
-		 ],
+		"Pre"
+	],
+	"instvars" : [ ],
 	"name" : "BlInfiniteInfoStoreRecordFlags",
-	"pools" : [
-		 ],
-	"super" : "BlInfiniteFlags",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,10 +1,12 @@
 {
-	"category" : "Bloc-Infinite-Scroller",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlScrollerConstants"
+	],
+	"classvars" : [ ],
 	"instvars" : [
 		"startPosition",
 		"currentPosition",
@@ -20,9 +22,8 @@
 		"overshotDistance",
 		"flingFriction",
 		"state",
-		"physicalCoefficient" ],
+		"physicalCoefficient"
+	],
 	"name" : "BlSplineOverScroller",
-	"pools" : [
-		"BlScrollerConstants" ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

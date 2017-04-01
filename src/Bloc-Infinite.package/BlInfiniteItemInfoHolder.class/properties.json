@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Infinite-Animator",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Animator",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"position",
 		"extent",
-		"flags" ],
+		"flags"
+	],
 	"name" : "BlInfiniteItemInfoHolder",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

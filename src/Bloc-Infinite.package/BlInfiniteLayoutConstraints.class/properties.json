@@ -1,17 +1,16 @@
 {
-	"category" : "Bloc-Infinite-Layout",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 5/20/2016 23:49",
+	"super" : "BlLayoutConstraints",
+	"category" : "Bloc-Infinite-Layout",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"holder",
 		"decorationInsets",
 		"insertsDirty",
-		"pendingInvalidate" ],
+		"pendingInvalidate"
+	],
 	"name" : "BlInfiniteLayoutConstraints",
-	"pools" : [
-		 ],
-	"super" : "BlLayoutConstraints",
-	"type" : "normal" }
+	"type" : "normal"
+}

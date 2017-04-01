@@ -1,14 +1,13 @@
 {
-	"category" : "Bloc-Infinite-Events",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 12/11/2016 13:27",
-	"instvars" : [
-		"holder" ],
-	"name" : "BlInfiniteElementRecycledEvent",
-	"pools" : [
-		 ],
 	"super" : "BlEvent",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"holder"
+	],
+	"name" : "BlInfiniteElementRecycledEvent",
+	"type" : "normal"
+}

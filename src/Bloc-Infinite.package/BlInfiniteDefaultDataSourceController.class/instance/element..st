@@ -1,3 +1,3 @@
 accessing
 element: anInfiniteElement
-	element := anInfiniteElement
+	infiniteElement := anInfiniteElement

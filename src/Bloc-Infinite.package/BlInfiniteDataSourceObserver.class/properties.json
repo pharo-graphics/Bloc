@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Infinite-DataSource",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 12/11/2016 15:47",
-	"instvars" : [
-		 ],
-	"name" : "BlInfiniteDataSourceObserver",
-	"pools" : [
-		 ],
 	"super" : "BlBasicEventHandler",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-DataSource",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteDataSourceObserver",
+	"type" : "normal"
+}
