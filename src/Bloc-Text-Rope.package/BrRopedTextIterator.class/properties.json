@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"rope",
-		"iterator"
+		"iterator",
+		"text"
 	],
 	"name" : "BrRopedTextIterator",
 	"type" : "normal"

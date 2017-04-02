@@ -8,5 +8,9 @@ privateStyle: aText
 				forSyntaxHighlighting: true;
             requestor: workspace).
     ast doSemanticAnalysis.
+
+
     self style: aText ast: ast.
+	self styledParse: aText.
+
     ^ aText

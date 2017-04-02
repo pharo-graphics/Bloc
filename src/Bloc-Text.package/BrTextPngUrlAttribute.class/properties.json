@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextReplacementAttribute",
+	"category" : "Bloc-Text-Text-Attributes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"url"
+	],
+	"name" : "BrTextPngUrlAttribute",
+	"type" : "normal"
+}

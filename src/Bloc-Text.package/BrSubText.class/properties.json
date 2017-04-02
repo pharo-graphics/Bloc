@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "BrText",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text",
+		"start",
+		"end",
+		"locked"
+	],
+	"name" : "BrSubText",
+	"type" : "normal"
+}

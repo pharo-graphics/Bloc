@@ -1,16 +1,17 @@
 keyboard handlers
 keystrokeEvent: anEvent
-	| aTextEditElement aRope aDelta |
+	| aTextEditElement aText aDelta |
 
 	aTextEditElement := anEvent currentTarget.
-	aRope := aTextEditElement text rope.
+	
+	aText := aTextEditElement text.
 
 	anEvent charCode = Character arrowLeft
 		ifTrue: [ ^ self moveCursorsLeft: aTextEditElement ].
 
 	anEvent charCode = Character arrowRight
 		ifTrue: [ ^ self moveCursorsRight: aTextEditElement ].
-		
+
 	anEvent charCode = Character backspace
 		ifTrue: [ ^ self ].
 	
@@ -18,8 +19,8 @@ keystrokeEvent: anEvent
 	aTextEditElement cursors
 		select: #hasParent
 		thenDo: [ :aCursor |
-			aRope := aRope insertItems: { anEvent charCode } at: aCursor textIndex + aDelta.
+			aText insertString: anEvent charCode asString at: aCursor textIndex + aDelta.
+			aTextEditElement dispatchEvent: (BrTextInsertedEvent new start: aCursor textIndex + aDelta + aText start; length: 1). 
 			aDelta := aDelta + 1 ].
+		
 	
-	
-	aTextEditElement text: (BrRopedText rope: aRope)

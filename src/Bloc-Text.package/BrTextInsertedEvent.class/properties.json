@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEvent",
+	"category" : "Bloc-Text-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"start",
+		"length"
+	],
+	"name" : "BrTextInsertedEvent",
+	"type" : "normal"
+}

@@ -1,11 +1,15 @@
 {
+	"classtraitcomposition" : "TBlEventTarget classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"eventDispatcher"
+	],
+	"name" : "BrText",
 	"commentStamp" : "AliakseiSyrel 2/12/2017 00:25",
 	"super" : "Object",
-	"category" : "Bloc-Text-Text",
+	"traitcomposition" : "TBlEventTarget",
+	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BrText",
-	"type" : "normal"
+	"category" : "Bloc-Text-Text"
 }
