@@ -1,3 +1,3 @@
 accessing
 eventClass 
- 	^ BlKeyDownEvent
+ 	^ BlKeystrokeEvent

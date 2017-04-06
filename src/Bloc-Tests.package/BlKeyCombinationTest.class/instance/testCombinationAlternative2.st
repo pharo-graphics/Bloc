@@ -4,13 +4,13 @@ testCombinationAlternative2
 	flag := false.
 	
 	evt1 := BlKeyboardEvent new
-		charCode: $c asInteger;
+		charCode: $c;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
 	evt2 := BlKeyboardEvent new
-		charCode: $d asInteger;
+		charCode: $d;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
 	evt3 := BlKeyboardEvent new
-		charCode: $e asInteger;
+		charCode: $e;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
 		
 	kb := BlShortcut new

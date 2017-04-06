@@ -5,6 +5,7 @@ handleKeyUp: aMorphicEvent
 	aBlEvent := BlKeyUpEvent new
 		keyValue: aMorphicEvent keyValue;
 		charCode: aMorphicEvent keyCharacter;
+		button: aMorphicEvent keyCharacter;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 		timestamp: Time millisecondClockValue;

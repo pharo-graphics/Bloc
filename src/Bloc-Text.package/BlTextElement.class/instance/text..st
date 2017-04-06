@@ -9,6 +9,8 @@ text: aTextModel
 		description: [ 'A text model must not be nil' ].
 	
 	text := aTextModel.
+	"text attributes: { BrTextForegroundAttribute paint: Color transparent }."
+
 	"text layout is no more valid, remove it"
 	paragraph := nil.
 

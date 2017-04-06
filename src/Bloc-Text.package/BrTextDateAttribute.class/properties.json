@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextFormAttribute",
+	"category" : "Bloc-Text-Text-Attributes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"date"
+	],
+	"name" : "BrTextDateAttribute",
+	"type" : "normal"
+}

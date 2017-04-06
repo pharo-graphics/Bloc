@@ -1,3 +1,3 @@
 accessing
 charCode: anObject
-	charCode := anObject
+	character := anObject

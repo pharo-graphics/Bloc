@@ -1,8 +1,9 @@
 events-processing
 processEvent: aKeyEvent
 	| sc |
+
 	"no process for repeated key events"
-	aKeyEvent repeat = 0 ifFalse: [ ^ self ].
+	aKeyEvent repeat isZero ifFalse: [ ^ self ].
 	eventBuffer removeConsumed.
 	eventBuffer addEvent: aKeyEvent.
 	sc := self matchingShortcut: eventBuffer.

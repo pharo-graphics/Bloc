@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextReplacementAttribute",
+	"category" : "Bloc-Text-Text-Attributes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"formBlock",
+		"extent",
+		"append"
+	],
+	"name" : "BrTextFormAttribute",
+	"type" : "normal"
+}

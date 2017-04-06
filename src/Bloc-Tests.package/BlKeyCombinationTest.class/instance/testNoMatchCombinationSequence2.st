@@ -4,10 +4,10 @@ testNoMatchCombinationSequence2
 	flag := false.
 	
 	evt1 := BlKeyboardEvent new
-		charCode: $c asInteger;
+		charCode: $c;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
 	evt2 := BlKeyboardEvent new
-		charCode: $d asInteger.
+		charCode: $d.
 		
 	kb := BlShortcut new
 		combination:(BlCombinationSequence new 

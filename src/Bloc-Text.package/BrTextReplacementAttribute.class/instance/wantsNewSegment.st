@@ -1,0 +1,3 @@
+testing
+wantsNewSegment
+	^ newSegment

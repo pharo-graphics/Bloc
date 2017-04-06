@@ -4,7 +4,7 @@ testKeyCodeCombination
 	flag := false.
 	
 	evt := BlKeyboardEvent new
-		charCode: $c asInteger;
+		charCode: $c;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
 		
 	kb := 	BlShortcut new 

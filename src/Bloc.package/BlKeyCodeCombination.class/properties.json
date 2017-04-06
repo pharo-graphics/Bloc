@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"charCode",
-		"modifiers"
+		"modifiers",
+		"character"
 	],
 	"name" : "BlKeyCodeCombination",
 	"type" : "normal"

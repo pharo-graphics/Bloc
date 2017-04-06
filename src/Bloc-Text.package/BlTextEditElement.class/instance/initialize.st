@@ -6,4 +6,5 @@ initialize
 	self mouseCursor: BlCursor overEditableText.
 	
 	cursors := OrderedCollection new.
-	self clipChildren: false
+	self clipChildren: false.
+	
