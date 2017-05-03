@@ -1,0 +1,2 @@
+presenting
+presentAreas: aCollectionOfRectangles

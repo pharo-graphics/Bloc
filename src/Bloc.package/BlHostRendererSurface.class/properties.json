@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 4/11/2017 13:10",
+	"super" : "Object",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"hostSpace",
+		"hostRenderer",
+		"canvasExtent"
+	],
+	"name" : "BlHostRendererSurface",
+	"type" : "normal"
+}

@@ -18,7 +18,6 @@ doRender: aSpace
 	renderer drawDuring: [:aCanvas| aSpace fullDrawOn: aCanvas ].
 	
 	renderer
-		updateRectangles: dirtyAreas;
+		presentAreas: dirtyAreas;
 		present.
-	presentNeeded := false.
-	self clearDirtyAreasFor: aSpace
+	presentNeeded := false

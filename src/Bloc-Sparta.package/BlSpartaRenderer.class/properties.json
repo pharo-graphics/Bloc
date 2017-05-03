@@ -1,0 +1,20 @@
+{
+	"classtraitcomposition" : "TBlHostRenderer classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"spartaCanvas",
+		"session",
+		"surface",
+		"windowExtent"
+	],
+	"name" : "BlSpartaRenderer",
+	"commentStamp" : "AliakseiSyrel 5/3/2017 17:35",
+	"super" : "Object",
+	"traitcomposition" : "TBlHostRenderer",
+	"type" : "normal",
+	"classinstvars" : [
+		"defaultCanvasBuilder"
+	],
+	"pools" : [ ],
+	"category" : "Bloc-Sparta"
+}

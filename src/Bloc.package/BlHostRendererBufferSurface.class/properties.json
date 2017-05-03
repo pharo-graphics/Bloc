@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlHostRendererSurface",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlHostRendererBufferSurface",
+	"type" : "normal"
+}

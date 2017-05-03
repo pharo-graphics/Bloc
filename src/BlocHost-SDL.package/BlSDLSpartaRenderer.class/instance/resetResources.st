@@ -8,6 +8,7 @@ resetResources
 	scaleFactor := (extent / windowSize) asFloatPoint.
 	SDL2 glSetSwapInterval: 1.
 	self createSDLSurfaceWithExtent: extent.
+	
 	spartaCanvas := MozCanvas
 		createForData: sdlSurface pixels
 		type: MozBackendType SKIA
@@ -17,6 +18,7 @@ resetResources
 	spartaCanvas transform
 			scaleBy: scaleFactor;
 			apply.
+
 	texture := sdlRenderer 
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888 
 		access: SDL_TEXTUREACCESS_STREAMING 

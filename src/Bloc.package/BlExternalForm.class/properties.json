@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 4/12/2017 08:36",
+	"super" : "Form",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"pointer"
+	],
+	"name" : "BlExternalForm",
+	"type" : "normal"
+}
