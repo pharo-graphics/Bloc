@@ -1,0 +1,21 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"translateX",
+		"translateY",
+		"translateZ",
+		"scaleX",
+		"scaleY",
+		"scaleZ",
+		"rotateAngle",
+		"rotateAxis",
+		"matrix2D"
+	],
+	"name" : "BlElementTransform",
+	"type" : "normal"
+}
