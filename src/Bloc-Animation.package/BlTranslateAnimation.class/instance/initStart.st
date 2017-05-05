@@ -1,4 +1,4 @@
 pulse
 initStart
 	super initStart.
-	from := self target position.
+	from := self target transform translateXY .

@@ -1,3 +1,3 @@
 accessing
-by: aNumber
-	by := aNumber
+by: aPoint
+	by := aPoint

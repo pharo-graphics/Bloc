@@ -1,3 +1,3 @@
 accessing
-to: aNumber
-	to := aNumber
+to: aPoint
+	to := aPoint

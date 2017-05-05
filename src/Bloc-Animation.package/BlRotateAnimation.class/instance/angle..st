@@ -1,3 +1,3 @@
 accessing
-angle: anObject
-	angle := anObject
+angle: aDegreeNumber
+	angle := aDegreeNumber

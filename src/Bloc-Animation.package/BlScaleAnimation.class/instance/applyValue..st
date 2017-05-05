@@ -4,4 +4,4 @@ applyValue: aValue
 	oldExtent := self target transformedBounds extent.
 	self target scaleTo: aValue.
 	tslt := self target transformedBounds extent - oldExtent.
-	self target relocate: self target position - (tslt/2)
+	self target translateBy: (tslt/2) negated
