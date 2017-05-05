@@ -7,6 +7,6 @@ scaleTo: aPoint
 	aPoint isPoint
 		ifTrue: [ (aPoint isPoint2D )
 			ifTrue: [ 
-				self setScaleX: aPoint x Y: aPoint y ]
+				self scaleX: aPoint x Y: aPoint]
 			ifFalse: [ self shouldBeImplemented ] ]
 		ifFalse: [ self shouldBeImplemented ]

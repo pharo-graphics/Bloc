@@ -4,4 +4,4 @@ translateX: aX Y: aY Z: aZ
 
 	(aX isZero and: [ aY isZero and: [ aZ isZero ] ])
 		ifTrue: [ ^ self ].
-	self setTranslateX: aX Y: aY
+	self setTranslateX: aX Y: aY Z: aZ
