@@ -6,5 +6,5 @@ ensureIceberg
 	"Iceberg is not installed, installing..."
 	Metacello new
 		baseline: 'Iceberg';
-		repository: 'github://pharo-vcs/iceberg';
+		repository: 'github://pharo-vcs/iceberg-dev:0.4';
 		load

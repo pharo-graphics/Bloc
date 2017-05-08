@@ -8,7 +8,7 @@ asSpartaForm
 	aBoundsInWindow := self localBoundsToWindow: aBoundsInLocal.
 	aBoundsInSpace := self localBoundsToGlobal: aBoundsInLocal.
 
-	aCanvas := MozCanvas checker: (aBoundsInWindow corner max: 1@1).
+	aCanvas := BlSettings preferableSpartaCanvas checker: (aBoundsInWindow corner max: 1@1).
 
 	aCanvas transform
 		push;
@@ -23,7 +23,7 @@ asSpartaForm
 
 	aCanvas transform pop.
 
-	aFinalCanvas := MozCanvas extent: (aBoundsInWindow extent max: 1@1).
+	aFinalCanvas := BlSettings preferableSpartaCanvas extent: (aBoundsInWindow extent max: 1@1).
 	aFinalCanvas fill
 		path: aFinalCanvas bounds;
 		paint: (aCanvas paint surface

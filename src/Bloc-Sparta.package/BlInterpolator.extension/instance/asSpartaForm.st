@@ -6,7 +6,7 @@ asSpartaForm
 	aZeroDelta := 20.
 	aStep := 0.001.
 
-	aCanvas := MozCanvas extent: anExtent.
+	aCanvas := BlSettings preferableSpartaCanvas extent: anExtent.
 	aCanvas fill
 		paint: Color white;
 		path: aCanvas bounds;

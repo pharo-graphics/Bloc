@@ -10,5 +10,5 @@ initializeFormOn: aFormSurface
 	spartaCanvas := self class defaultCanvasBuilder forDataOn: aFormSurface.
 
 	spartaCanvas transform
-			scaleBy: scaleFactor;
-			apply
+		scaleBy: scaleFactor;
+		apply
