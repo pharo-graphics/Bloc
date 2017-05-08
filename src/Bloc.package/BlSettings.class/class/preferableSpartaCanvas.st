@@ -1,3 +1,4 @@
 accessing
 preferableSpartaCanvas
-	^ PreferableSpartaCanvasBuilder ifNil: [ (self environment at: #BlSpartaRenderer) defaultCanvasBuilder ]
+	^ PreferableSpartaCanvasBuilder ifNil: [
+		PreferableSpartaCanvasBuilder := (self environment at: #BlSpartaRenderer) defaultCanvasBuilder class ]
