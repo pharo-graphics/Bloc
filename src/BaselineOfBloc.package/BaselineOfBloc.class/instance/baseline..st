@@ -79,9 +79,10 @@ baseline: spec
 				'Bloc-Text'
 				'Bloc-Text-Rope'
 				'Bloc-Text-Rope-Examples'
-
-				'BlocHost-SDL'
+				
+				"core only loads very basic stuff"
 				'BlocHost-Morphic'
+
 				'Bloc-Animation'
 				'Bloc-Examples'
 				'Bloc-Sparta'
@@ -93,6 +94,7 @@ baseline: spec
 
 			group: 'file:development' with: #(
 				'file:core'
+				'BlocHost-SDL'
 				'Bloc-Tests'
 				'Bloc-Layout-Tests'
 				'Bloc-Animation-Tests');
