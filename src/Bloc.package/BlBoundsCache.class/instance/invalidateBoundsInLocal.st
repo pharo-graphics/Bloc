@@ -4,6 +4,5 @@ invalidateBoundsInLocal
 
 	boundsInLocal := nil.
 	geometryBounds := nil.
-	transformedBounds := nil.
 
 	self invalidateBoundsInSpace

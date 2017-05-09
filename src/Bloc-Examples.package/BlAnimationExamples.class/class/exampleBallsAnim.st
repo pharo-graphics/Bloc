@@ -7,7 +7,7 @@ els := OrderedCollection new.
 	(1 to:100) do: [:i| |el tr alp ii| 
 		ii := i % 25.
 		el :=(BlEllipse diameter: 30) asElement 
-		background: (Color random alpha: 1);
+		background: (Color white alpha: 0);
 		position: (ii*15)@10.
 		
 		tr := BlTranslateAnimation new
@@ -19,9 +19,9 @@ els := OrderedCollection new.
 		alp := BlColorTransition new
 					from: (Color white alpha: 0);
 					to: Color random;
-					delay: i*10;duration: 100;
+					delay: i*80;duration: 100;
 					onStepDo:[:c| el background: c].
-		anims addAll: {tr}.els add: el.
+		anims addAll: {tr.alp}.els add: el.
 		].
 
 	space := BlSpace new.
