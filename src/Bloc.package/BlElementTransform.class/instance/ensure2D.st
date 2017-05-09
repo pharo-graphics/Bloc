@@ -16,7 +16,6 @@ ensure2D
 		matrix2D preMultiplyBy: rm.
 		
 			].
-	
 	 matrix2D preScaleX: scaleX Y: scaleY.
 	
 	
