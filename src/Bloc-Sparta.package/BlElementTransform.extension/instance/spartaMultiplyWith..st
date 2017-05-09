@@ -1,5 +1,5 @@
 *Bloc-Sparta
 spartaMultiplyWith: aSpartaMatrix
-	self ensure2D.
+	self ensureMatrix.
 	aSpartaMatrix isIdentity
-		ifFalse: [ aSpartaMatrix multiplyBy: matrix2D ]
+		ifFalse: [ aSpartaMatrix multiplyBy: matrix ]

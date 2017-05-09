@@ -21,6 +21,6 @@ testElTxBoundsWithScale
 	self assert: g position equals: (10 @ 10).
 	self assert: n position equals: (10 @ 10).
 	self assert: g positionInSpace equals: (10 @ 10).
-	self assert: n positionInSpace equals: (30 @ 30). "= (10@10) * 2 + (10@10)"
+	self assert: n positionInSpace equals: (30 @ 30). 
 	self assert: n transformedBounds equals: ((0@0) corner: (200@200)).
 	self assert: g transformedBounds equals: ((0@0) corner: (400@400)).

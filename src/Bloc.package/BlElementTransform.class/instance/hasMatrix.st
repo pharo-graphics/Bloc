@@ -4,4 +4,4 @@ hasMatrix
 	Note: I am useful for fast exits"
 	<return: #Boolean>
 	
-	^ matrix2D isNotNil or: [ matrix3D isNotNil ]
+	^ matrix isNotNil 

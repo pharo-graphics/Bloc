@@ -4,6 +4,6 @@ transformBounds: aBounds
 	(local to global transformation)"
 
 	<return: #BlBounds>
-	self ensure2D.
-	matrix2D transformBounds: aBounds.
+	self ensureMatrix.
+	matrix transformBounds: aBounds.
 	^ aBounds

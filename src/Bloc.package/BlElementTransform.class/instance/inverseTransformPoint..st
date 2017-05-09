@@ -6,5 +6,5 @@ inverseTransformPoint: aPoint
 	<return: #Point>
 	aPoint isPoint
 		ifFalse: [ self error: 'Only points can be transformed!' ].
-	self ensure2D.
-	^ matrix2D inverted transformPoint: aPoint
+	self ensureMatrix.
+	^ matrix inverted transformPoint: aPoint

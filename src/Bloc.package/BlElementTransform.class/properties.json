@@ -14,8 +14,7 @@
 		"scaleZ",
 		"rotateAngle",
 		"rotateAxis",
-		"matrix2D",
-		"matrix3D"
+		"matrix"
 	],
 	"name" : "BlElementTransform",
 	"type" : "normal"

@@ -3,12 +3,12 @@ exampleBounceOut
 	<example>
 	| sp el anim |
 	sp := BlSpace new.
-	el := BlTextElement new
-		text: (BrRopedText string: 'click me');
+	el := BlElement new
+		background: Color blue;
 		position: 100 @ 100.
 	anim := BlTranslateAnimation new
 		easing: BlEasing bounceOut;
-		to: 100 @ 400;
+		to: 0 @ 400;
 		duration: 1000;
 		target: el. 
 	el

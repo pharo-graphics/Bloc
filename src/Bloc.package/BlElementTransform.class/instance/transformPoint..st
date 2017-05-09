@@ -4,5 +4,5 @@ transformPoint: aPoint
 	(local to global transformation)"
 
 	<return: #Point>
-	self ensure2D.
-	^ matrix2D transformPoint: aPoint
+	self ensureMatrix.
+	^ matrix transformPoint: aPoint
