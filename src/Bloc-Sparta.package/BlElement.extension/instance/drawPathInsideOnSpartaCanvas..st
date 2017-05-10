@@ -15,12 +15,7 @@ drawPathInsideOnSpartaCanvas: aCanvas
 		"We create a new virtual layer in order to blend only if background and border visible"
 		ifTrue: [ aCanvas layer push ].
 
-	"If background is transparent there is no need to render it"
-	isBackgroundTransparent
-		ifFalse: [ aCanvas fill
-				paint: background fill;
-				path: (pathCache geomPathOnSpartaCanvas: aCanvas);
-				draw ].
+	self drawElementOnSpartaCanvas: aCanvas.
 	
 	"If border is transparent there is no need to render it"
 	isBorderTransparent

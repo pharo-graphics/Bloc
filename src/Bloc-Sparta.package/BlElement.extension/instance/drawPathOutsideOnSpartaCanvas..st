@@ -20,14 +20,8 @@ drawPathOutsideOnSpartaCanvas: aCanvas
 			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
 			paint: Color white;
 			drawOptions: (aCanvas drawOptions composeDestOut; antialiasGray);
-			draw.
-	].
+			draw ].
 	
-	"If background is transparent there is no need to render it"
-	background isTransparent
-		ifFalse: [ aCanvas fill
-				paint: background fill;
-				path: (pathCache geomPathOnSpartaCanvas: aCanvas);
-				draw ].
+	self drawElementOnSpartaCanvas: aCanvas.
 			
 	aCanvas layer pop

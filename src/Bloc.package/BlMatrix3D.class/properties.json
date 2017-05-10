@@ -1,11 +1,28 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 5/10/2017 20:17",
 	"super" : "Object",
 	"category" : "Bloc-Basic-Math",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"sx",
+		"shy0",
+		"shz0",
+		"wx",
+		"shx0",
+		"sy",
+		"shz1",
+		"wy",
+		"shx1",
+		"shy1",
+		"sz",
+		"wz",
+		"x",
+		"y",
+		"z",
+		"w"
+	],
 	"name" : "BlMatrix3D",
 	"type" : "normal"
 }

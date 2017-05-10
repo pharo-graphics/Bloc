@@ -1,5 +1,3 @@
-instance creation
-extent: aPoint
-	<return: #SpartaCanvas>
-	
-	^ self subclassResponsibility
+accessing
+extent: anExtent
+	^ self class extent: anExtent

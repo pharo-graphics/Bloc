@@ -1,5 +1,3 @@
-instance creation
-checker: aPoint
-	<return: #SpartaCanvas>
-	
-	^ self subclassResponsibility
+accessing
+checker: anExtent
+	^ self class checker: anExtent
