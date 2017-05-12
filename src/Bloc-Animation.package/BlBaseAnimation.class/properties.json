@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Bloc-Animation-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlEventTarget classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"running",
@@ -19,5 +15,11 @@
 		"target"
 	],
 	"name" : "BlBaseAnimation",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlEventTarget",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Animation-Basic"
 }

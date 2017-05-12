@@ -1,4 +1,4 @@
-mathimatical functions
+matrix - mathimatical functions
 inverse
 	"In-place inverse me.
 	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"

@@ -1,4 +1,4 @@
-transformations
+matrix - transformations
 setTranslateX: aX Y: aY
 	
 	x := aX.

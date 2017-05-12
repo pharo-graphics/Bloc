@@ -1,4 +1,4 @@
-transformations
+matrix - transformations
 postMultiplyBy: aMatrix2D
 	| r11 r12 r21 r22 r31 r32 |
 	

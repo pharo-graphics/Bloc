@@ -1,4 +1,4 @@
-transformations
+matrix - transformations
 preTranslateX: aX Y: aY
 	"Apply the translation BEFORE my existing transformation.
 	Any vector that is multiplied by the resulting matrix will first be translated,

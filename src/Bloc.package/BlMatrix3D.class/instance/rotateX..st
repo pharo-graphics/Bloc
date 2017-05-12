@@ -1,4 +1,4 @@
-transformations
+matrix - transformations
 rotateX: aTheta
 	"Rotate me around X-axis by aTheta degrees in radians"
 	| cosTheta sinTheta temp |

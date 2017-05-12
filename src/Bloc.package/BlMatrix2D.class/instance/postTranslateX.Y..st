@@ -1,4 +1,4 @@
-transformations
+matrix - transformations
 postTranslateX: aX Y: aY
 	"Apply the translation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix

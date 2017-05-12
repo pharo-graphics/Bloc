@@ -63,7 +63,6 @@ baseline: spec
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
 			
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GTExamples). ];
-			package: #'Bloc-Extension' with: [ spec requires: #(Bloc) ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
@@ -71,6 +70,10 @@ baseline: spec
 			package: #'BlocHost-Morphic' with: [ spec requires: #(#Bloc). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 
+			"Contains moldable extensions to various GT tools
+				- requires sparta to perform custom rendering"
+			package: #'Bloc-Extensions' with: [ spec requires: #('Bloc' 'Bloc-Sparta' 'Bloc-Animation') ];
+			
 			"groups with only sources"
 			group: 'file:core' with: #(
 				'Bloc' "main core package"
@@ -86,11 +89,12 @@ baseline: spec
 				'Bloc-Animation'
 				'Bloc-Examples'
 				'Bloc-Sparta'
-				'Bloc-Extension'
 
 				'Bloc-Infinite'
 				'Bloc-Infinite-Layouts'
-				'Bloc-Infinite-Examples');
+				'Bloc-Infinite-Examples'
+				
+				'Bloc-Extensions');
 
 			group: 'file:development' with: #(
 				'file:core'

@@ -1,4 +1,4 @@
-transforming points
+matrix - transforming points
 transformPoint: aPoint
 	| aX aY |
 	

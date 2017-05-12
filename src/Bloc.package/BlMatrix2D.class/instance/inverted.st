@@ -1,4 +1,4 @@
-mathimatical functions
+matrix - mathimatical functions
 inverted
 	"Return a new instance of matrix which is an inverse of me.
 	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"

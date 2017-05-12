@@ -1,4 +1,4 @@
-transformations
+matrix - transformations
 setScaleX: aX Y: aY
 	
 	sx := aX.

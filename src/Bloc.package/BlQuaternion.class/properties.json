@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/11/2017 11:40",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"x",
+		"y",
+		"z",
+		"w"
+	],
+	"name" : "BlQuaternion",
+	"type" : "normal"
+}

@@ -1,4 +1,4 @@
-transformations
+matrix - transformations
 preRotate: anAngle
 	"Apply the rotation by the given angle in radians BEFORE my existing transformation.
 	Any vector that is multiplied by the resulting matrix will first be rotated,

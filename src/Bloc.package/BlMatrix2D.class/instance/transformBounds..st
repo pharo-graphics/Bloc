@@ -1,4 +1,4 @@
-transforming points
+matrix - transforming points
 transformBounds: aBounds
 	"In-place transform given BlBounds according to my transformation.
 	(local to global transformation)"

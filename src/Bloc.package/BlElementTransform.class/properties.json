@@ -12,8 +12,9 @@
 		"scaleX",
 		"scaleY",
 		"scaleZ",
-		"rotateAngle",
+		"rotationQuaternion",
 		"rotateAxis",
+		"rotateAngle",
 		"matrix"
 	],
 	"name" : "BlElementTransform",
