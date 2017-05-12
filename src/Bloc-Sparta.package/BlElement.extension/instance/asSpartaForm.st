@@ -1,19 +1,15 @@
 *Bloc-Sparta
 asSpartaForm
 	| aCanvas aFinalCanvas aBoundsInWindow aBoundsInSpace aBoundsInLocal |
-	
+
 	self forceLayout.
-	
+
 	aBoundsInLocal := (self effectBounds: BlBounds new) merge: self boundsInLocal.
-	aBoundsInWindow := self localBoundsToWindow: aBoundsInLocal.
-	aBoundsInSpace := self localBoundsToGlobal: aBoundsInLocal.
+
+	aBoundsInWindow := self localBoundsToWindow: aBoundsInLocal copy.
+	aBoundsInSpace := self localBoundsToGlobal: aBoundsInLocal copy.
 
 	aCanvas := BlSettings preferableSpartaCanvas checker: (aBoundsInWindow corner max: 1@1).
-	
-	"aCanvas stroke
-		paint: Color blue;
-		path: (0@0 extent: self extent);
-		draw."
 
 	aCanvas transform
 		push;
