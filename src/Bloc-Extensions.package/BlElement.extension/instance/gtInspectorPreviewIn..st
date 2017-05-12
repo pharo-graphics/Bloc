@@ -1,4 +1,4 @@
-*Bloc-Sparta
+*Bloc-Extensions-Inspector
 gtInspectorPreviewIn: composite
 	<gtInspectorPresentationOrder: 90>  
 	| morphPresentation |

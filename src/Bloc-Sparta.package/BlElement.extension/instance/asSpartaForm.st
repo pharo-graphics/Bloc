@@ -9,6 +9,11 @@ asSpartaForm
 	aBoundsInSpace := self localBoundsToGlobal: aBoundsInLocal.
 
 	aCanvas := BlSettings preferableSpartaCanvas checker: (aBoundsInWindow corner max: 1@1).
+	
+	"aCanvas stroke
+		paint: Color blue;
+		path: (0@0 extent: self extent);
+		draw."
 
 	aCanvas transform
 		push;
