@@ -11,8 +11,8 @@ exampleRotate
 	a2 := BlRotateAnimation new
 		easing: BlEasing bounceOut;
 		angle:180;
-		duration: 2000;
-		delay:2000;
+		duration: 1000;
+		delay:1000;
 		loop:2;
 		target: el.
 	
