@@ -1,3 +1,3 @@
 pulse
 valueForStep: aDelta
-	^ angle * aDelta
+	^ fromAngle + (angle * aDelta)

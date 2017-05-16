@@ -5,12 +5,12 @@ ensure2D
 	matrix := self defaultMatrix2D.
 	
 	ax := ((rotateAxis x * scaleX) @ (rotateAxis y * scaleY)) .
-	
 	matrix preTranslateX: translateX Y: translateY.
 	rotateAngle isZero ifFalse: [ |rm|
-		
 		rm := BlMatrix2D new.
-		rm preTranslateX:  ax x Y: ax y.
+		"temp fix"
+		matrix preTranslateX:  ax x Y: ax y.
+		"rm preTranslateX:  ax x Y: ax y."
 		rm preRotate: rotateAngle degreesToRadians.
 		rm preTranslateX: ax x negated Y: ax y negated.
 		matrix preMultiplyBy: rm.

@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"angle"
+		"angle",
+		"fromAngle"
 	],
 	"name" : "BlRotateAnimation",
 	"type" : "normal"
