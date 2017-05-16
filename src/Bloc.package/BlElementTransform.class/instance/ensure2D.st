@@ -1,18 +1,18 @@
 private
 ensure2D
-|rAxis|
+|ax|
 	matrix ifNotNil: [ ^ self ].
 	matrix := self defaultMatrix2D.
 	
-	rAxis := ((rotateAxis x * scaleX) @ (rotateAxis y * scaleY)) .
-	
+	ax := ((rotateAxis x * scaleX) @ (rotateAxis y * scaleY)) .
 	matrix preTranslateX: translateX Y: translateY.
 	rotateAngle isZero ifFalse: [ |rm|
-		
 		rm := BlMatrix2D new.
-		rm preTranslateX: rAxis x Y: rAxis y.
+		"temp fix"
+		matrix preTranslateX:  ax x Y: ax y.
+		"rm preTranslateX:  ax x Y: ax y."
 		rm preRotate: rotateAngle degreesToRadians.
-		rm preTranslateX: rAxis x negated Y: rAxis y negated.
+		rm preTranslateX: ax x negated Y: ax y negated.
 		matrix preMultiplyBy: rm.
 		
 			].
