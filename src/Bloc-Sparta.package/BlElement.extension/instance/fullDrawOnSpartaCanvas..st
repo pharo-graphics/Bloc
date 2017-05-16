@@ -1,6 +1,22 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
-	| aClippingBounds anEffectBounds needsTransformation aTransformationBuilder |
+	| aClippingBounds anEffectBounds needsTransformation aTransformationBuilder isTranslucent |
+	
+	"We do not draw transparent elements at all"
+	self isTransparent
+		ifTrue: [ ^ self ].
+	
+	"invisible elements are not rendered too"
+	self isVisible
+		ifFalse: [ ^ self ].
+	
+	isTranslucent := self isTranslucent.	
+	
+	[ isTranslucent
+			ifTrue: [
+				aCanvas layer
+					alpha: self opacity;
+					push ].
 	
 	anEffectBounds := self effectBounds: BlBounds new.
 	"No need to render elements smaller than half of a pixel"
@@ -8,9 +24,6 @@ fullDrawOnSpartaCanvas: aCanvas
 		ifTrue: [ ^ self ].
 
 	(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
-		ifFalse: [ ^ self ].
-
-	self isVisible
 		ifFalse: [ ^ self ].
 
 	needsTransformation := (self position isZero and: [ transform isIdentity ]) not.
@@ -34,4 +47,6 @@ fullDrawOnSpartaCanvas: aCanvas
 			self drawDebugInfoOnSpartaCanvas: aCanvas ].
 
 		needsTransformation
-			ifTrue: [ aTransformationBuilder pop ] ]
+			ifTrue: [ aTransformationBuilder pop ] ] ]
+	ensure: [ 
+		isTranslucent ifTrue: [ aCanvas layer pop ] ].

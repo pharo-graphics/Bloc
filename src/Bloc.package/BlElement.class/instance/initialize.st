@@ -16,4 +16,5 @@ initialize
 	layout := self defaultLayout.
 
 	pathCache := BlPathCache on: self.
-	misc := BlMiscProperties new
+	misc := BlMiscProperties new.
+	opacity := 1.0
