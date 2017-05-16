@@ -27,7 +27,7 @@
 		"opacity"
 	],
 	"name" : "BlElement",
-	"commentStamp" : "AliakseiSyrel 5/16/2017 17:24",
+	"commentStamp" : "AliakseiSyrel 5/16/2017 19:08",
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal",

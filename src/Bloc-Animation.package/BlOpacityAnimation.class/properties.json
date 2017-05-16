@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/16/2017 17:56",
+	"super" : "BlAnimation",
+	"category" : "Bloc-Animation-Animation",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"to",
+		"from"
+	],
+	"name" : "BlOpacityAnimation",
+	"type" : "normal"
+}

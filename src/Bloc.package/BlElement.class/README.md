@@ -5,4 +5,4 @@ I am the superclass to create widgets.
 
 I have the following propeties:
 
- - opacity - defines transparancy degree of an element and takes a value in range [ 0...1 ]. Opacity influences children too, meaning that the whole element including its children will become transparent
+ - opacity - defines transparency degree of an element and takes a value in range [ 0...1 ]. Opacity influences children too, meaning that the whole element including its children will become transparent
