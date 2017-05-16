@@ -4,6 +4,6 @@ forDataOn: aRendererSurface
 
 	^ #SpartaCairoCanvas asClass
 		createForData: aRendererSurface data
-		extent: aRendererSurface canvasExtent
+		extent: aRendererSurface extent
 		stride: aRendererSurface stride
 		format: #SpartaCairoSurfaceFormat asClass CAIRO_FORMAT_ARGB32

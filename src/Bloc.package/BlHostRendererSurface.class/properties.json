@@ -7,8 +7,7 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"hostSpace",
-		"hostRenderer",
-		"canvasExtent"
+		"hostRenderer"
 	],
 	"name" : "BlHostRendererSurface",
 	"type" : "normal"

@@ -5,6 +5,6 @@ forDataOn: aRendererSurface
 	^ (self class environment at: #MozCanvas)
 		createForData: aRendererSurface data
 		type: (self class environment at: #MozBackendType) SKIA
-		extent: aRendererSurface canvasExtent
+		extent: aRendererSurface extent
 		stride: aRendererSurface stride
 		format: (self class environment at: #MozSurfaceFormat) B8G8R8A8

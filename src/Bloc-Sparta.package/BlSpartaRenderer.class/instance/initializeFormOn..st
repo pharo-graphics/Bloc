@@ -8,6 +8,9 @@ initializeFormOn: aFormSurface
 
 	scaleFactor := (canvasExtent / windowExtent) asFloatPoint.
 	spartaCanvas := self class defaultCanvasBuilder forDataOn: aFormSurface.
+	self
+		assert: [ spartaCanvas isValid ]
+		description: [ 'Failed to create sparta canvas' ].
 
 	spartaCanvas transform
 		scaleBy: scaleFactor;
