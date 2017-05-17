@@ -1,11 +1,11 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
 	| aClippingBounds anEffectBounds needsTransformation aTransformationBuilder isTranslucent |
-	
+
 	"We do not draw transparent elements at all"
 	self isTransparent
 		ifTrue: [ ^ self ].
-	
+
 	"invisible elements are not rendered too"
 	self isVisible
 		ifFalse: [ ^ self ].

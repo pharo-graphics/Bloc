@@ -1,5 +1,5 @@
 instance creation
-forDataOn: aRendererSurface
+forFormOn: aRendererSurface
 	<return: #SpartaCanvas>
 	
 	^ self subclassResponsibility

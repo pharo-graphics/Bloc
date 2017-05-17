@@ -1,3 +1,3 @@
 accessing
-data
+pointer
 	^ externalForm pointer

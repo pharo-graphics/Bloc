@@ -5,7 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"stride",
+		"buffer",
+		"extent"
+	],
 	"name" : "BlHostRendererBufferSurface",
 	"type" : "normal"
 }

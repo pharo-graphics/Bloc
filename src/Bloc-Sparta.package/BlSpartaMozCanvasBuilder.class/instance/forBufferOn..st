@@ -1,9 +1,9 @@
 instance creation
-forDataOn: aRendererSurface
+forBufferOn: aRendererSurface
 	<return: #SpartaCanvas>
 
 	^ (self class environment at: #MozCanvas)
-		createForData: aRendererSurface data
+		createForData: aRendererSurface buffer
 		type: (self class environment at: #MozBackendType) SKIA
 		extent: aRendererSurface extent
 		stride: aRendererSurface stride

@@ -1,0 +1,3 @@
+initialization
+initializeResourcesOn: aHostRenderer
+	aHostRenderer initializeBufferOn: self

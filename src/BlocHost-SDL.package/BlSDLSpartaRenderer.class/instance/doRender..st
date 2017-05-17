@@ -2,7 +2,7 @@ accessing
 doRender: aSpace
 	| aWindowScale |
 	"collect the dirty area to be updated"
-	dirtyAreas := self dirtyAreas 
+	dirtyAreas := aSpace dirtyAreas 
 			collect: [ :each | each intersect: (0@0 extent: self sdlSpace windowExtent) ifNone: [ nil ] ]
 			thenSelect: [ :each | each isNotNil and: [ each hasPositiveExtent ] ].
 	
