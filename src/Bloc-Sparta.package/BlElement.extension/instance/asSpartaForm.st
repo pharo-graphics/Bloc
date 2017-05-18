@@ -25,11 +25,23 @@ asSpartaForm
 	aCanvas transform pop.
 
 	aFinalCanvas := BlSettings preferableSpartaCanvas extent: (aBoundsInWindow extent max: 1@1).
-	aFinalCanvas fill
+	aFinalCanvas transform
+		push;
+		scaleBy: (self isAttachedToSceneGraph
+			ifTrue: [ self space windowScale ]
+			ifFalse: [ 1 ]);
+		apply.
+
+	aFinalCanvas clip
+		by: aBoundsInSpace
+		during: [ self fullDrawOnSpartaCanvas: aFinalCanvas ].
+
+	aFinalCanvas transform pop.
+	"aFinalCanvas fill
 		path: aFinalCanvas bounds;
 		paint: (aCanvas paint surface
 			source: aCanvas;
 			translateBy: aBoundsInWindow origin negated);
-		draw.
+		draw."
 
 	^ aFinalCanvas asForm
