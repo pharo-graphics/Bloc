@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Infinite-Examples-Core - Colors",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlInfiniteExampleColorsListElement",
-	"pools" : [
-		 ],
 	"super" : "BlInfiniteElement",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Examples-Core - Colors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteExampleColorsListElement",
+	"type" : "normal"
+}

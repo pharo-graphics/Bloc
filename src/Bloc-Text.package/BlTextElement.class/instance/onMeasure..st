@@ -63,6 +63,7 @@ onMeasure: anExtentMeasurementSpec
 	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
 	"Take padding into account"
 	aMeasuredExtent := aMeasuredExtent + (aPadding width @ aPadding height).
+	paragraph offset: (aPadding left @ aPadding top).
 	
 	"Finally set measured extent"
 	self measuredExtent: aMeasuredExtent

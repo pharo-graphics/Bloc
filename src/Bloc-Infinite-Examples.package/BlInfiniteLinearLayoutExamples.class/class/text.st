@@ -1,5 +1,6 @@
 examples
-exampleText
+text
+	"Does not work"
 	| space list container |
 	space := BlSpace new
 		extent: 550 @ 750;

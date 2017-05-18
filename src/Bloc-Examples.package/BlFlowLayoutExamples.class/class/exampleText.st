@@ -21,7 +21,7 @@ exampleText
 					c horizontal fitContent.
 					c vertical fitContent.
 					c flow newLine: aBreak ];
-				text: (SpText fromRope: aWord);
+				text: aWord;
 				yourself).
 			aBreak := false ] ].
 
@@ -40,7 +40,7 @@ exampleText
 	aFloatIndex + 2 to: theWords size do: [ :anIndex |
 		| anElement |
 		anElement := (theWords at: anIndex).
-		anElement text attributes: { SpTextForegroundAttribute paint: (Color red) }.
+		anElement text attributes: { BrTextForegroundAttribute paint: (Color red) }.
 		anElement text: anElement text ].
 	
 	aParent := BlElement new

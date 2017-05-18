@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Infinite-Examples-Core - Classes",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlInfiniteExampleClassesListElement",
-	"pools" : [
-		 ],
 	"super" : "BlInfiniteElement",
-	"type" : "normal" }
+	"category" : "Bloc-Infinite-Examples-Core - Classes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteExampleClassesListElement",
+	"type" : "normal"
+}

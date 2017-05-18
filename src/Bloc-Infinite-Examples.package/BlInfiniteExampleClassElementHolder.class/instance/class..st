@@ -6,7 +6,6 @@ class: aClass
 
 	class := aClass.
 	
-	aText := SpText fromString: class name.
-	aText attributes: { SpFontSizeAttribute size: 13 } from: 1 to: aText size.
-	aText attributes: { SpTextWrapAttribute none } from: 1 to: aText size.
+	aText := BrRopedText string: class name.
+	aText attributes: { BrFontSizeAttribute size: 13 }.
 	itemElement text: aText

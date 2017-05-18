@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Infinite-Examples-Core - Text",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlInfiniteDataSource",
+	"category" : "Bloc-Infinite-Examples-Core - Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"text",
-		"lines" ],
+		"lines"
+	],
 	"name" : "BlInfiniteExampleTextDataSource",
-	"pools" : [
-		 ],
-	"super" : "BlInfiniteDataSource",
-	"type" : "normal" }
+	"type" : "normal"
+}

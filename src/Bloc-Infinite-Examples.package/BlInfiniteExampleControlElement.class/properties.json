@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Infinite-Examples-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Infinite-Examples-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"label",
-		"fontSize" ],
+		"fontSize"
+	],
 	"name" : "BlInfiniteExampleControlElement",
-	"pools" : [
-		 ],
-	"super" : "BlElement",
-	"type" : "normal" }
+	"type" : "normal"
+}

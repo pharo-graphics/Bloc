@@ -6,13 +6,12 @@ image: aGalleryImage
 	
 	form := nil.
 	image := aGalleryImage.
-	itemElement text: ((SpText fromString: aGalleryImage id asString)
+	itemElement text: ((BrRopedText string: aGalleryImage id asString)
 		attributes: {
-			SpTextForegroundAttribute paint: Color white.
-			SpTextSpacingAttribute spacing: 2.
-			SpFontSizeAttribute size: 14.
-			SpFontWeightAttribute weight: 50.
-			SpFontFamilyAttribute named: 'Helvetica Neue'
+			BrTextForegroundAttribute paint: Color white.
+			BrFontSizeAttribute size: 14.
+			BrFontWeightAttribute weight: 50.
+			BrFontFamilyAttribute named: 'Helvetica Neue'
 		}).
 	
 	self loadImage

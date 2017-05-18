@@ -27,12 +27,12 @@ exampleGallery
 		yourself.
 
 	headerText := BlTextElement new
-		text: ((SpText fromString: 'bloc gallery')
+		text: ((BrRopedText string: 'bloc gallery')
 			attributes: { 
-				SpTextForegroundAttribute paint: (Color white alpha: 0.8).
-				SpFontSizeAttribute size: 20.
-				SpFontWeightAttribute weight: 50.
-				SpFontFamilyAttribute named: 'Helvetica Neue'
+				BrTextForegroundAttribute paint: (Color white alpha: 0.8).
+				BrFontSizeAttribute size: 20.
+				BrFontWeightAttribute weight: 50.
+				BrFontFamilyAttribute named: 'Helvetica Neue'
 			};
 			yourself);
 		constraintsDo: [ :c |

@@ -1,10 +1,10 @@
 {
-	"category" : "Bloc-Infinite-Examples-Core - Gallery",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Examples-Core - Gallery",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"format",
 		"filename",
@@ -14,9 +14,8 @@
 		"width",
 		"postUrl",
 		"id",
-		"form" ],
+		"form"
+	],
 	"name" : "BlInfiniteExampleGalleryImage",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}
