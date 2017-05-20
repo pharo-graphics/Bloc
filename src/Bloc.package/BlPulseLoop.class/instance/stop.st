@@ -1,7 +1,11 @@
-loop process
+lifecycle
 stop
-	loopProcess
-		ifNotNil: [ | tmp |
-			tmp := loopProcess.
-			loopProcess := nil.
-			tmp terminate ].
+	| currentProcess |
+	
+	self
+		assert: [ loopProcess isNotNil ]
+		description: [ 'Loop process must exist!' ].
+
+	currentProcess := loopProcess.
+	loopProcess := nil.
+	currentProcess terminate

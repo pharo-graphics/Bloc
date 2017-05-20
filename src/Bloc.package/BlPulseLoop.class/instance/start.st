@@ -1,7 +1,8 @@
-accessing
+lifecycle
 start
-	^ loopProcess
-		ifNil: [ 
-			session := Smalltalk session.
-			loopProcess := self createLoopProcess.
-			loopProcess resume ]
+	self
+		assert: [ loopProcess isNil ]
+		description: [ 'Loop process must not exist' ].
+
+	loopProcess := self createLoopProcess.
+	loopProcess resume

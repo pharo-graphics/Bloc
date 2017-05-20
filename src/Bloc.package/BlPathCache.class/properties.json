@@ -9,7 +9,8 @@
 		"owner",
 		"geomPath",
 		"innerPath",
-		"borderPath"
+		"borderPath",
+		"session"
 	],
 	"name" : "BlPathCache",
 	"type" : "normal"
