@@ -1,17 +1,16 @@
 {
-	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlGraphAbstractGraphLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"sonsDictionary",
 		"root",
 		"initialLayout",
-		"margin" ],
+		"margin"
+	],
 	"name" : "BlGraphAbstractCompactTree",
-	"pools" : [
-		 ],
-	"super" : "BlGraphAbstractGraphLayout",
-	"type" : "normal" }
+	"type" : "normal"
+}

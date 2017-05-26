@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Graph-Layouts-Examples",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGraphGridLayoutExamples",
-	"pools" : [
-		 ],
 	"super" : "BlGraphLayoutExamples",
-	"type" : "normal" }
+	"category" : "Bloc-Graph-Layouts-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphGridLayoutExamples",
+	"type" : "normal"
+}

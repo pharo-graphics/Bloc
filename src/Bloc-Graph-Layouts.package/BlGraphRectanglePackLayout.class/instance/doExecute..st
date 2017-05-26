@@ -4,7 +4,7 @@ doExecute: elements
 	bounds := 0@0.
 	
 	maxSpace := elements inject: 0@0 into: [ :sum :el |
-			sum + el extent ].
+			sum + el measuredExtent ].
 		
 	padding := maxSpace / elements size * gap / 2.
 	

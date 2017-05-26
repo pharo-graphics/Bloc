@@ -1,18 +1,17 @@
 {
-	"category" : "Bloc-Graph-Layouts-Basic",
-	"classinstvars" : [
-		 ],
 	"classtraitcomposition" : "TBGraphLayoutUtils classTrait",
-	"classvars" : [
-		 ],
-	"commentStamp" : "AliakseiSyrel 8/28/2016 16:11",
+	"classvars" : [ ],
 	"instvars" : [
 		"affectedNodes",
 		"translator",
-		"isStopped" ],
+		"isStopped"
+	],
 	"name" : "BlGraphLayout",
-	"pools" : [
-		 ],
+	"commentStamp" : "AliakseiSyrel 8/28/2016 16:11",
 	"super" : "BlLayout",
 	"traitcomposition" : "TBGraphLayoutUtils",
-	"type" : "normal" }
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Graph-Layouts-Basic"
+}

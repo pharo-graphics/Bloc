@@ -1,15 +1,14 @@
 {
-	"category" : "Bloc-Graph-Layouts-Basic",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AliakseiSyrel 5/23/2016 16:30",
+	"super" : "Object",
+	"category" : "Bloc-Graph-Layouts-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"from",
-		"to" ],
+		"to"
+	],
 	"name" : "BlGraphEdge",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

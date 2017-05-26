@@ -1,17 +1,16 @@
 {
-	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "YuriyTymchuk 2/19/2015 15:18",
+	"super" : "BlGraphLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"freeSpace",
 		"gap",
 		"padding",
-		"bounds" ],
+		"bounds"
+	],
 	"name" : "BlGraphRectanglePackLayout",
-	"pools" : [
-		 ],
-	"super" : "BlGraphLayout",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Graph-Layouts-Examples",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGraphRectanglePackLayoutExamples",
-	"pools" : [
-		 ],
 	"super" : "BlGraphLayoutExamples",
-	"type" : "normal" }
+	"category" : "Bloc-Graph-Layouts-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphRectanglePackLayoutExamples",
+	"type" : "normal"
+}

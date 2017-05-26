@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGraphRadialTreeLayout",
-	"pools" : [
-		 ],
 	"super" : "BlGraphAbstractCompactTree",
-	"type" : "normal" }
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphRadialTreeLayout",
+	"type" : "normal"
+}

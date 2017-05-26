@@ -2,7 +2,7 @@ space-calculation
 bestSpaceFor: anElement
 	| elementsPadedBox suitableSpaces |
 	
-	elementsPadedBox := anElement boundsInParent extendBy: padding * 2.
+	elementsPadedBox := anElement measuredBounds extendBy: padding * 2.
 	
 	suitableSpaces := freeSpace select: [ :space |
 		elementsPadedBox width <= space width and:

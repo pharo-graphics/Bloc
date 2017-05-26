@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlGraphAbstractGraphLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"externalLayer",
 		"maxLayer",
-		"maxAbcissa" ],
+		"maxAbcissa"
+	],
 	"name" : "BlGraphClusterLayout",
-	"pools" : [
-		 ],
-	"super" : "BlGraphAbstractGraphLayout",
-	"type" : "normal" }
+	"type" : "normal"
+}

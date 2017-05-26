@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "BlGraphCircleLayout",
-	"pools" : [
-		 ],
 	"super" : "BlGraphAbstractCircleLayout",
-	"type" : "normal" }
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphCircleLayout",
+	"type" : "normal"
+}

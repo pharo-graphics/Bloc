@@ -1,16 +1,15 @@
 {
-	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "<historical>",
+	"super" : "BlGraphAbstractGridLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"inCellPosition",
 		"translateElement",
-		"align" ],
+		"align"
+	],
 	"name" : "BlGraphCellLayout",
-	"pools" : [
-		 ],
-	"super" : "BlGraphAbstractGridLayout",
-	"type" : "normal" }
+	"type" : "normal"
+}

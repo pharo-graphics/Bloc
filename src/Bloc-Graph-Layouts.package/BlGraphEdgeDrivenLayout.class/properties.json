@@ -1,18 +1,17 @@
 {
-	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "BlGraphLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"edges",
 		"userDefinedEdges",
 		"fromPositions",
 		"toPositions",
-		"shouldSetDefaultAttachPoint" ],
+		"shouldSetDefaultAttachPoint"
+	],
 	"name" : "BlGraphEdgeDrivenLayout",
-	"pools" : [
-		 ],
-	"super" : "BlGraphLayout",
-	"type" : "normal" }
+	"type" : "normal"
+}

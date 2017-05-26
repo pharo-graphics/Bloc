@@ -1,14 +1,11 @@
 {
-	"category" : "Bloc-Graph-Layouts-Layouts",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "AlexandreBergel 3/20/2015 16:52",
-	"instvars" : [
-		 ],
-	"name" : "BlGraphWeightedCircleLayout",
-	"pools" : [
-		 ],
 	"super" : "BlGraphAbstractWeightedCircleLayout",
-	"type" : "normal" }
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphWeightedCircleLayout",
+	"type" : "normal"
+}
