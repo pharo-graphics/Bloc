@@ -2,9 +2,9 @@ predefined instances
 NONE
 	^ None
 		ifNil: [ None := self
-				type: BlStrokeType INSIDE
+				type: BlBorderType inside
 				lineJoin: BlStrokeLineJoin MITER
-				lineCap: BlStrokeLineCap BUTT
+				lineCap: BlStrokeLineCap butt
 				miterLimit: 0
 				dashOffset: 0
 				dashArray: #() ]

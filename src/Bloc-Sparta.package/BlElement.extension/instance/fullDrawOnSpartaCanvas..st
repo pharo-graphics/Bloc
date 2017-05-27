@@ -38,7 +38,12 @@ fullDrawOnSpartaCanvas: aCanvas
 		aClippingBounds := (self visualBounds: BlBounds new on: aCanvas) merge: anEffectBounds.
 		aCanvas clip push: aClippingBounds ].
 
-	[ self drawOnSpartaCanvas: aCanvas ] ensure: [
+	[ self effect
+		applyEffectOnSpartaCanvas: aCanvas
+		for: self
+		around: [ 
+			self drawOnSpartaCanvas: aCanvas.
+			self drawChildrenOnSpartaCanvas: aCanvas ] ] ensure: [
 		"We should pop clip and transform in reversed exact order,
 		otherwise backend transformation matrix may become broken"
 		self clipChildren ifTrue: [ aCanvas clip pop ].

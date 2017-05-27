@@ -1,3 +1,3 @@
 predefined instances
-BUTT
+butt
 	^ Butt ifNil: [ Butt := self new beButt ]

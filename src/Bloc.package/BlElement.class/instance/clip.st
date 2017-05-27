@@ -1,3 +1,0 @@
-clipping
-clip
-	^ clip

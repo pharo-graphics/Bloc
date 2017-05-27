@@ -1,3 +1,3 @@
 predefined instances
-ROUND
+round
 	^ Round ifNil: [ Round := self new beRound ]

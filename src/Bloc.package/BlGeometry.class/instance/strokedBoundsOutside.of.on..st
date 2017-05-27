@@ -1,3 +1,3 @@
 visual bounds
-strokedBoundsOutside: aSpartaRectangle of: anElement on: aCanvas
+strokedBoundsOutside: aBlBounds of: anElement on: aCanvas
 	^ self subclassResponsibility

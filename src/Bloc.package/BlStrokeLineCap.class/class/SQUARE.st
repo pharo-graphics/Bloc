@@ -1,3 +1,3 @@
 predefined instances
-SQUARE
+square
 	^ Square ifNil: [ Square := self new beSquare ]

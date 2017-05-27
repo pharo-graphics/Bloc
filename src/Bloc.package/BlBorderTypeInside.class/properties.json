@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlBorderType",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlBorderTypeInside",
+	"type" : "normal"
+}

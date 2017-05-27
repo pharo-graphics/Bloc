@@ -1,1 +1,0 @@
-I define the strategy to be used to draw the stroke (inside/outside/centered)

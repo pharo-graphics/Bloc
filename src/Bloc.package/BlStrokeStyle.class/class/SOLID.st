@@ -2,9 +2,9 @@ predefined instances
 SOLID
 	^ Solid
 		ifNil: [ Solid := self
-				type: BlStrokeType INSIDE
+				type: BlBorderType inside
 				lineJoin: BlStrokeLineJoin MITER
-				lineCap: BlStrokeLineCap BUTT 
+				lineCap: BlStrokeLineCap butt 
 				miterLimit: 10
 				dashOffset: 0
 				dashArray: #() ]
