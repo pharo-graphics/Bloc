@@ -8,7 +8,7 @@ drawDebugInfoOnSpartaCanvas: aCanvas
 		draw.
 
 	aCanvas stroke
-		path: (self visualBoundsOn: aCanvas);
+		path: (self visualBounds);
 		paint: Color blue;
 		draw.
 

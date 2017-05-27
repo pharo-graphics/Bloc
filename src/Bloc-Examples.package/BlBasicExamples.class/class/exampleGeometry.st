@@ -11,7 +11,7 @@ exampleGeometry
 		addChild: (self newRoundedRectangle position: 430 @ 50);
 		addChild: (self newCircle position: 250 @ 200);
 		addChild: (self newSquare position: 400 @ 200);
-		addChild: (self newSvg position: 500 @ 200; size: 100@100);
+		addChild: (self newSvg position: 500 @ 200);
 		"addChild: (self newLine);"
 		addChild: (self newRectangle position: 10 @ 150).
 

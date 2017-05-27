@@ -1,3 +1,3 @@
 geometry bounds
-visualBounds: aSpartaRectangle on: aCanvas
-	^ self geometry strokedBounds: aSpartaRectangle of: self on: aCanvas
+visualBounds: aBlBounds on: aCanvas
+	^ self geometry strokedBounds: aBlBounds of: self on: aCanvas

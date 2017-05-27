@@ -10,15 +10,21 @@ initialize
 
 	paddingMetric := self newMetric.
 	paddingMetric label: 'padding'.
-	paddingMetric border: (BlBorder paint: (Color red alpha: 0.7) width: 1 style: BlStrokeStyle SOLID).
+	paddingMetric border: (BlBorder paint: (Color green muchDarker alpha: 0.7) width: 1 style: BlStrokeStyle DASHED).
+	paddingMetric background: Color paleGreen.
 	paddingMetric content: extentMetric.
-	paddingMetric background: Color paleRed.
+	
+	borderMetric := self newMetric.
+	borderMetric label: 'border'.
+	borderMetric border: (BlBorder paint: (Color red alpha: 0.7) width: 1 style: BlStrokeStyle SOLID).
+	borderMetric background: Color paleRed.
+	borderMetric content: paddingMetric.
 
 	marginMetric := self newMetric.
 	marginMetric label: 'margin'.
 	marginMetric border: (BlBorder paint: Color blue lighter width: 1 style: BlStrokeStyle DASHED).	
-	marginMetric content: paddingMetric.
 	marginMetric background: Color blue muchLighter lighter lighter.
+	marginMetric content: borderMetric.
 
 	self constraintsDo: [ :c |
 		c horizontal fitContent.

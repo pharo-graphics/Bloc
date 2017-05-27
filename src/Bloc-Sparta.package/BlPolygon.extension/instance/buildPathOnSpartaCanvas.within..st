@@ -1,8 +1,7 @@
 *Bloc-Sparta
 buildPathOnSpartaCanvas: aCanvas within: aBounds
-	
 	| aCollection pathBuilder |
-	aCollection := self verticesForBounds: aBounds.
+	aCollection := self vertices"ForBounds: aBounds".
 	pathBuilder := aCanvas path
 		absolute;
 		moveTo: aCollection first.

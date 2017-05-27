@@ -1,3 +1,11 @@
 visual bounds
 strokedBoundsCentered: aBlBounds of: anElement on: aCanvas
-	^ self subclassResponsibility
+	| spartaPath strokeOptions strokedBounds |
+
+	spartaPath := anElement pathCache geomPathOnSpartaCanvas: aCanvas.
+	strokeOptions := aCanvas stroke
+		in: [ :aPainter | anElement border applyOn: aPainter ];
+		strokeOptions.
+
+	strokedBounds := spartaPath strokedBounds: strokeOptions.
+	^ aBlBounds rectangle: strokedBounds

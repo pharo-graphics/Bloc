@@ -4,7 +4,9 @@ asSpartaForm
 
 	self forceLayout.
 
-	aBoundsInLocal := (self effectBounds: BlBounds new) merge: self boundsInLocal.
+	aBoundsInLocal := (self effectBounds: BlBounds new)
+		merge: self boundsInLocal;
+		merge: self visualBounds.
 
 	aBoundsInWindow := self localBoundsToWindow: aBoundsInLocal copy.
 	aBoundsInSpace := self localBoundsToGlobal: aBoundsInLocal copy.
@@ -13,6 +15,7 @@ asSpartaForm
 
 	aCanvas transform
 		push;
+		translateBy: (aBoundsInSpace origin) negated + (100@100);
 		scaleBy: (self isAttachedToSceneGraph
 			ifTrue: [ self space windowScale ]
 			ifFalse: [ 1 ]);
@@ -27,6 +30,7 @@ asSpartaForm
 	aFinalCanvas := BlSettings preferableSpartaCanvas extent: (aBoundsInWindow extent max: 1@1).
 	aFinalCanvas transform
 		push;
+		translateBy: aBoundsInSpace origin negated;
 		scaleBy: (self isAttachedToSceneGraph
 			ifTrue: [ self space windowScale ]
 			ifFalse: [ 1 ]);

@@ -9,7 +9,6 @@ doRender: aSpace
 
 	theDirtyAreas
 		ifEmpty: [ ^ self ].
-	
-	'doRender' logCr.
+
 	aSpace fullDrawOn: spartaCanvas.
 	self presentAreas: theDirtyAreas
