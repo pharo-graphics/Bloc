@@ -8,12 +8,8 @@ drawPathOutsideOnSpartaCanvas: aCanvas
 	"If border is transparent there is no need to render it"
 	border isTransparent
 		ifFalse: [
-			aCanvas stroke
-				paint: border;
-				path: (pathCache geomPathOnSpartaCanvas: aCanvas);
-				width: border width * 2.0;
-				draw ].
-	
+			border drawOutside: self on: aCanvas ].
+
 	"remove border where we fill"	
 	aCanvas clip by: (pathCache geomPathOnSpartaCanvas: aCanvas) during: [ 
 		aCanvas fill

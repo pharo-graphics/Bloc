@@ -2,4 +2,4 @@ initialization
 initialize
 	super initialize.
 
-	handlers := #()
+	handlers := Array new

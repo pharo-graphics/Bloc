@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/27/2017 15:39",
+	"super" : "BlElement",
+	"category" : "Bloc-DevTool-Metrics",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"marginMetric",
+		"paddingMetric",
+		"extentMetric"
+	],
+	"name" : "BlMetricsInspector",
+	"type" : "normal"
+}

@@ -7,4 +7,4 @@ SOLID
 				lineCap: BlStrokeLineCap BUTT 
 				miterLimit: 10
 				dashOffset: 0
-				dashArray: nil]
+				dashArray: #() ]
