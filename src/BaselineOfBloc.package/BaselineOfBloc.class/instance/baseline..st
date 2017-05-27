@@ -72,7 +72,7 @@ baseline: spec
 
 			"Contains moldable extensions to various GT tools
 				- requires sparta to perform custom rendering"
-			package: #'Bloc-Extensions' with: [ spec requires: #('Bloc' 'Bloc-Sparta' 'Bloc-Animation') ];
+			package: #'Bloc-Extensions' with: [ spec requires: #('Bloc' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool') ];
 			
 			"groups with only sources"
 			group: 'file:core' with: #(
