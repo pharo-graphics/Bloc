@@ -1,5 +1,4 @@
 accessing
 geometry: anObject
 	geometry := anObject.
-	pathCache releaseCache.
-	self invalidate
+	self changed

@@ -3,6 +3,7 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"morphicWindow",
+		"mirrowWindows",
 		"renderer",
 		"eventQueue",
 		"mutex"

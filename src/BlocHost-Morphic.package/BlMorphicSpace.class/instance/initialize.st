@@ -3,4 +3,5 @@ initialize
 	super initialize.
 
 	eventQueue := WaitfreeQueue new.
-	mutex := Mutex new
+	mutex := Mutex new.
+	mirrowWindows := OrderedCollection new

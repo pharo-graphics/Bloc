@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/28/2017 01:25",
+	"super" : "GLMPresentation",
+	"category" : "Bloc-Extensions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"elementBuilder"
+	],
+	"name" : "GLMBlocPresentation",
+	"type" : "normal"
+}

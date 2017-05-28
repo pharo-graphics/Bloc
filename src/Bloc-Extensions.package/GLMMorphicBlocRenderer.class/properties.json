@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/28/2017 01:30",
+	"super" : "GLMMorphicWidgetRenderer",
+	"category" : "Bloc-Extensions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"space"
+	],
+	"name" : "GLMMorphicBlocRenderer",
+	"type" : "normal"
+}
