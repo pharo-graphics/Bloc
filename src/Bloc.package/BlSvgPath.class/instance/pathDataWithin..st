@@ -1,7 +1,9 @@
 private
 pathDataWithin: aBounds
 	| scaleFactor  translation newPathData|
-	scaleFactor := aBounds extent / self extent.
+	scaleFactor := (self extent x isZero or: [ self extent y isZero ])
+		ifTrue: [ 1.0 asPoint ]
+		ifFalse: [ aBounds extent / self extent ].
 	translation :=  aBounds origin -  self position.
 	newPathData := pathData deepCopy.
 	newPathData do: [ :cmd | 
