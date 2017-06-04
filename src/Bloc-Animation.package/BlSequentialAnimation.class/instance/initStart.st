@@ -2,5 +2,6 @@ pulse
 initStart
 	
 	children ifEmpty: [ ^ self ].
-	(children at: currentIndex) initStart.
+	currentIndex := 1.
+	children do: [ :each | each initStart ].
 	super initStart.

@@ -2,5 +2,5 @@ pulse
 doStep
 	| runningAnims |
 	runningAnims := children select: [ :each | each isRunning ].
-	runningAnims ifEmpty: [ ^ self stop ].
+	runningAnims ifEmpty: [ ^ self].
 	runningAnims do: [ :each | each pulse ].

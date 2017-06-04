@@ -7,7 +7,7 @@ pulse
 
 	elapsedTime := self computeElapsedTime.
 	progress := (elapsedTime / duration) asFloat.
-
+	
 	progress >= 1
 		ifFalse: [
 			"Animation is not over yet, perform a step and request a next one"
@@ -17,6 +17,7 @@ pulse
 			"We have done an animation loop, notify listeners"
 			self notifyOnFinishedHandlers.
 			loopCount := loopCount + 1.
+			
 			(self isInfinite or: [ loopCount < loop ])
 				"If I am an infinite animation and loop limit is not hit
 				we prepare ourselves for a next loop and request a step"

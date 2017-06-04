@@ -7,7 +7,7 @@ stop
 
 	running := false.
 	loopCount := 0.
-
+	
 	"I am a sub-animation, so I am not registred in the animation manager"
 	self isSubAnimation
 		ifTrue: [ ^ self ].
