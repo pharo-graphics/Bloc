@@ -19,6 +19,15 @@ Main maintainers : [Glenn Cavarlé](https://github.com/GlennCavarle) & [Aliaksei
 
 ## Installation
 
+The following script installs Bloc and its dependencies in Pharo 6:<br>
+*(Use it if you don't know what to do)*
+
+```smalltalk
+Metacello new
+   baseline: 'Bloc';
+   repository: 'github://pharo-graphics/Bloc/src';
+   load: #core
+```
 
 ### Bloc Zeroconf Script
 
