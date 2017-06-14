@@ -3,4 +3,4 @@ paint: aPaint
 
 	^ self
 		paint: aPaint
-		width: 0
+		width: 1

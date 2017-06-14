@@ -1,3 +1,6 @@
-accessing
+window - properties
 title
+	"Return window's title as a string"
+	<return: #String>
+
 	^ self titleProperty value

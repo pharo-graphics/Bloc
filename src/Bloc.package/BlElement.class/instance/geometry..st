@@ -1,4 +1,5 @@
 accessing
-geometry: anObject
-	geometry := anObject.
+geometry: aBlGeometry
+	geometry := aBlGeometry.
+	self updatePath.
 	self changed

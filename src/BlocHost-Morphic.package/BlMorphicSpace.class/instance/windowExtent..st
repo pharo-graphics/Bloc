@@ -1,7 +1,3 @@
 host space - accessing
-windowExtent: anExtent
-	
-	"anExtent = renderer windowExtent
-		ifTrue: [ ^ self ]."
-	
+windowExtent: anExtent	
 	morphicWindow spaceExtent: anExtent

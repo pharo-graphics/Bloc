@@ -1,7 +1,7 @@
-change reporting
+updating
 changed
 	self invalidate.
-	boundsCache invalidateBoundsInSpace.
-	self requestParentLayout.
+	boundsCache invalidateBoundsInLocal.
+	self requestLayout.
 	pathCache releaseCache.
 	self invalidate

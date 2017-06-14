@@ -7,10 +7,10 @@ privateActionIcon
 		(each mixed: 0.6 with: Color blue) lighter lighter lighter lighter alpha: each alpha ].
 
 	^ IconicButton new 
-			target: method originMethod;
+			target: self traits first;
 			actionSelector: #browse;
 			labelGraphic: anIcon;
 			color: Color transparent;
 			extent: self iconExtent;
-			helpText: 'Browse the trait';
+			helpText: 'Browse the overriden trait';
 			borderWidth: 0
