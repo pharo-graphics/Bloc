@@ -3,9 +3,9 @@ rendererExtent
 	"Return the size of a window's underlying drawable in pixels.
 	Returned extent may differ from #extent on high dpi (retina) displays"
 	<return: #Point>
-	| w h |
+	| width height |
 	
-	w := ByteArray new: ExternalType long byteSize.
-	h := ByteArray new: ExternalType long byteSize.
-	sdlWindow getRendererSize: sdlWindow getRenderer w: w h: h.
-	^ (w signedLongAt: 1) @ (h signedLongAt: 1)
+	width := FFIExternalArray newType: 'int' size: 1.
+	height := FFIExternalArray newType: 'int' size: 1.
+	sdlWindow getRendererSize: sdlWindow getRenderer w: width h: height.
+	^ (width signedLongAt: 1) @ (height signedLongAt: 1)

@@ -15,7 +15,7 @@ createHostSpaceFor: aSpace
 	SkiaCanvas isSupported
 		"Use OpenGL if available"
 		ifTrue: [ aHostSpace withSkiaRendereer ]
-		ifFalse: [ aHostSpace withSpartaRendereer ].
+		ifFalse: [ aHostSpace withSpartaRenderer ].
 
 	self registerHostSpace: aHostSpace.
 	aSpace hostSpace: aHostSpace

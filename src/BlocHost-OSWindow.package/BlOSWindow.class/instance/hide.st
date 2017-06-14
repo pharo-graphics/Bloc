@@ -1,3 +1,0 @@
-displaying
-hide
-	window hide

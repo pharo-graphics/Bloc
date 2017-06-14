@@ -1,3 +1,4 @@
 drawing
 prepareForDrawing
-	textureExtent ~= window extent ifTrue: [ self resized ].
+	self hasResized
+		ifTrue: [ self resized ]

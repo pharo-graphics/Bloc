@@ -1,3 +1,0 @@
-displaying
-open
-	window show

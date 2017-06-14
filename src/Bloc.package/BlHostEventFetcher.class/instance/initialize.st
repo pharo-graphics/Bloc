@@ -1,3 +1,5 @@
 initialize-release
 initialize
-	super initialize
+	super initialize.
+
+	eventQueue := WaitfreeQueue new

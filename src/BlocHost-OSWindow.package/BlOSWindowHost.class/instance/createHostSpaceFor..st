@@ -1,3 +1,13 @@
-api
+host - api
 createHostSpaceFor: aSpace
-	^ self createWindowFor: aSpace
+	"Create and assign a new oswindow host space for given bloc space"
+	| aHostSpace|
+	
+	self
+		assert: [ aSpace hasHost not ]
+		description: [ 'Space must not have a host!' ].
+		
+	aHostSpace := self createWindowSpaceFor: aSpace.
+	aHostSpace withSpartaRenderer.
+	
+	aSpace hostSpace: aHostSpace

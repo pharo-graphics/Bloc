@@ -1,5 +1,6 @@
 instance creation
 for: aWindowHandle
-	^ self basicNew 
+	^ self basicNew
+		initialize;
 		initializeWindowHandle: aWindowHandle;
 		yourself

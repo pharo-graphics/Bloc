@@ -1,7 +1,7 @@
 rendering
 doRender: aSpace
 	"collect the dirty area to be updated"
-	dirtyAreas := self dirtyAreas 
+	dirtyAreas := aSpace dirtyAreas 
 			collect: [ :each | each intersect: (0@0 extent: renderer window extent) ifNone: [ nil ] ]
 			thenSelect: [ :each | each isNotNil and: [ each hasPositiveExtent ] ].
 	dirtyAreas ifEmpty: [
@@ -18,6 +18,6 @@ doRender: aSpace
 	renderer drawDuring: [:aCanvas| aSpace fullDrawOn: aCanvas ].
 	
 	renderer
-		presentAreas: dirtyAreas;
+		updateRectangles: dirtyAreas;
 		present.
 	presentNeeded := false

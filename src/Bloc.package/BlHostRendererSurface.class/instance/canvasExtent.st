@@ -1,6 +1,6 @@
 geometry
 canvasExtent
-	"Return a canvas extent in pixels as a Point.
+	"Return current canvas extent in pixels as a Point.
 	Note, that canvas extent is different from windowExtent
 	and is normally x2 bigger on retina screens"
 	<return: #Point>

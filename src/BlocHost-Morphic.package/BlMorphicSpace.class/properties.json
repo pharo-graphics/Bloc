@@ -5,8 +5,8 @@
 		"morphicWindow",
 		"mirrowWindows",
 		"renderer",
-		"eventQueue",
-		"mutex"
+		"mutex",
+		"eventFetcher"
 	],
 	"name" : "BlMorphicSpace",
 	"commentStamp" : "AliakseiSyrel 5/3/2017 18:05",

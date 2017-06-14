@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "AbstractMethodIconAction",
+	"category" : "Bloc-DevTool",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MethodFromTraitOverrideAction",
+	"type" : "normal"
+}

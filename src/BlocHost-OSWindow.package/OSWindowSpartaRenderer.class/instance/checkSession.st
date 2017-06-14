@@ -1,4 +1,4 @@
 session management
-checkSession
+checkSession	
 	session == Smalltalk session 
-		ifFalse: [ self error: 'Cannot use this renderer (created in a previous session or in a closed window)' ].
+		ifFalse: [ self error: 'Cannot use this renderer (created in a previous session or in a closed window)' ]

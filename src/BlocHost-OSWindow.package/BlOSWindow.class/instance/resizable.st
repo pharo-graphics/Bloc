@@ -1,3 +1,0 @@
-accessing
-resizable
-	^ window resizable

@@ -1,0 +1,4 @@
+initialization
+initHostWindow
+	self createDefaultEventHandler.
+	

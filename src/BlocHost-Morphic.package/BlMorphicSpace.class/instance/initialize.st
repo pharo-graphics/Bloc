@@ -2,6 +2,6 @@ initialization
 initialize
 	super initialize.
 
-	eventQueue := WaitfreeQueue new.
+	eventFetcher := BlHostEventFetcher new.
 	mutex := Mutex new.
 	mirrowWindows := OrderedCollection new

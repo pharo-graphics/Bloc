@@ -1,3 +1,0 @@
-accessing
-borderless
-	^ window borderless
