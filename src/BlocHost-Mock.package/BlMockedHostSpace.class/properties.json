@@ -1,0 +1,24 @@
+{
+	"classtraitcomposition" : "TBlHostSpace classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"borderless",
+		"cursor",
+		"maximized",
+		"minimized",
+		"eventFetcher",
+		"visible",
+		"opened",
+		"windowExtent",
+		"canvasExtent",
+		"densityDpi"
+	],
+	"name" : "BlMockedHostSpace",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlHostSpace",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-Mock-Host"
+}

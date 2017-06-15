@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlHost",
+	"category" : "BlocHost-Mock-Host",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"isRunning"
+	],
+	"name" : "BlMockedHost",
+	"type" : "normal"
+}
