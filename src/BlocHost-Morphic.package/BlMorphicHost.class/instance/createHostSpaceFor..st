@@ -8,7 +8,7 @@ createHostSpaceFor: aSpace
 		description: [ 'Space must not have a host!' ].
 		
 	aWindow := self createMorphicWindowFor: aSpace.
-	aHostSpace := BlMorphicSpace new morphicWindow: aWindow.
+	aHostSpace := BlMorphicHostSpace new morphicWindow: aWindow.
 
 	aHostSpace withSpartaRenderer.
 	aSpace hostSpace: aHostSpace

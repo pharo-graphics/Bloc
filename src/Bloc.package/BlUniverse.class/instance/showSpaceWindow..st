@@ -16,8 +16,13 @@ showSpaceWindow: aSpace
 	"First of all we need to add space to the space manager"
 	self spaceManager addSpace: aSpace.
 
+	aSpace host
+		ifNil: [ aSpace host: self host ].
+	aSpace host isRunning
+		ifFalse: [ aSpace host start ].
+
 	"then create and show it in a host space"
-	self host createHostSpaceFor: aSpace.
+	aSpace host createHostSpaceFor: aSpace.
 	aSpace hostSpace show.
 
 	self

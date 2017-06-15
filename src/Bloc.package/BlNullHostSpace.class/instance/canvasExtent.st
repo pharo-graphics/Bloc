@@ -5,4 +5,4 @@ canvasExtent
 	In most cases canvas is x2 larger than window in pixel on retina screens."
 	<return: #Point>
 
-	^ self explicitRequirement
+	^ 0@0

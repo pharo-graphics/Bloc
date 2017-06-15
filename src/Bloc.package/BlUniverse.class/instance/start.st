@@ -1,5 +1,5 @@
 accessing
 start
 	self pulseLoop start.
-	self host start.
+	self allSpacesDo: [ :aSpace | aSpace host isRunning ifFalse: [ aSpace host start ] ].
 	self requestNextPulse

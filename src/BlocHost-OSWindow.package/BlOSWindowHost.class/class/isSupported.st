@@ -1,3 +1,3 @@
 driver selection
 isSupported
-	^ false
+	^ true

@@ -8,7 +8,7 @@
 		"mutex",
 		"eventFetcher"
 	],
-	"name" : "BlMorphicSpace",
+	"name" : "BlMorphicHostSpace",
 	"commentStamp" : "AliakseiSyrel 5/3/2017 18:05",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostSpace",

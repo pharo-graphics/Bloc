@@ -1,3 +1,3 @@
 host - api
 stop
-	^ self subclassResponsibility
+	self subclassResponsibility

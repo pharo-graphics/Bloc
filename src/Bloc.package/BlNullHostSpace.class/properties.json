@@ -1,0 +1,15 @@
+{
+	"classtraitcomposition" : "TBlHostSpace classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"eventFetcher"
+	],
+	"name" : "BlNullHostSpace",
+	"commentStamp" : "AliakseiSyrel 6/15/2017 17:35",
+	"super" : "Object",
+	"traitcomposition" : "TBlHostSpace",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Universe"
+}
