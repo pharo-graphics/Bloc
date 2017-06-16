@@ -1,7 +1,7 @@
-*Bloc-Extensions-Inspector
+*Bloc-Extensions
 gtInspectorAvailableBackendsIn: composite
 	<gtInspectorPresentationOrder: 0> 
-	^ (composite fastList)
+	^ composite fastList
 		title: 'Backends';
 		display: [ 
 			"The FastTable renderer needs to access elements by index so we transform

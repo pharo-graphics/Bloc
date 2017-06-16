@@ -1,3 +1,3 @@
 predefined instances
 square
-	^ Square ifNil: [ Square := self new beSquare ]
+	^ square ifNil: [ square := BlStrokeLineSquareCap new ]

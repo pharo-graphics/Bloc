@@ -13,7 +13,7 @@ drawOnSpartaCanvas: aCanvas
 	"We create a new virtual layer in order to blend background and border only if they are both visible"
 	aCanvas layer
 		when: [ areBothVisible ]
-		during: [ self border "is it border's responsibility?"
+		during: [ self outskirts
 			drawBackground: [ self drawBackgroundOnSpartaCanvas: aCanvas ]
 			border: [ self drawBorderOnSpartaCanvas: aCanvas ]
 			of: self

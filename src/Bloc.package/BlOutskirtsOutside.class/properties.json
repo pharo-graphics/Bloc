@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlOutskirts",
+	"category" : "Bloc-Basic-Visual",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlOutskirtsOutside",
+	"type" : "normal"
+}

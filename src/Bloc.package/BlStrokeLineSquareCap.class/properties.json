@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 6/17/2017 00:15",
+	"super" : "BlStrokeLineCap",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlStrokeLineSquareCap",
+	"type" : "normal"
+}

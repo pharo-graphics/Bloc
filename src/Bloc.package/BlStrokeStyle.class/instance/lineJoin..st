@@ -1,3 +1,3 @@
 accessing
-lineJoin: anObject
-	lineJoin := anObject
+lineJoin: aBlStrokeLineJoin
+	lineJoin := aBlStrokeLineJoin

@@ -1,17 +1,15 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 6/17/2017 00:13",
 	"super" : "Object",
 	"category" : "Bloc-Paint-Support",
-	"classinstvars" : [ ],
+	"classinstvars" : [
+		"butt",
+		"round",
+		"square"
+	],
 	"pools" : [ ],
-	"classvars" : [
-		"Butt",
-		"Round",
-		"Square"
-	],
-	"instvars" : [
-		"value"
-	],
+	"classvars" : [ ],
+	"instvars" : [ ],
 	"name" : "BlStrokeLineCap",
 	"type" : "normal"
 }

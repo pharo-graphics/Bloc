@@ -7,4 +7,4 @@ initialize
 	pulseLoop := self defaultPulseLoop.
 	nextPulseRequested :=true.
 	spaceManager := BlSpaceManager new.
-	animationManager := BlAnimationManager new.
+	animationManager := BlAnimationManager new

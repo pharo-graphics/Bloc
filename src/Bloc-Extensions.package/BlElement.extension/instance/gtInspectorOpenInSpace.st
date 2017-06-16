@@ -1,4 +1,4 @@
-*Bloc-Extensions-Inspector
+*Bloc-Extensions
 gtInspectorOpenInSpace
 	<gtInspectorAction>
 	^ GLMGenericAction new

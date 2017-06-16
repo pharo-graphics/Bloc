@@ -11,6 +11,7 @@ initialize
 	transform := self defaultTransformation.
 	geometry := self defaultGeometry.
 	geomResizer := self defaultPathResizer.
+	outskirts := self defaultOutskirts.
 	border := self defaultBorder.
 	background := self defaultBackground asBlBackground.
 	layout := self defaultLayout.

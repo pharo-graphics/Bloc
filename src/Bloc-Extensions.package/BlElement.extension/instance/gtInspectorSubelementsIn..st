@@ -1,4 +1,4 @@
-*Bloc-Extensions-Inspector
+*Bloc-Extensions
 gtInspectorSubelementsIn: composite
 	<gtInspectorPresentationOrder: 80>  
 	composite tree 

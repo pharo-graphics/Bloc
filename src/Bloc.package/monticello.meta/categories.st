@@ -2,6 +2,7 @@ SystemOrganization addCategory: #Bloc!
 SystemOrganization addCategory: 'Bloc-Basic'!
 SystemOrganization addCategory: 'Bloc-Basic-Math'!
 SystemOrganization addCategory: 'Bloc-Basic-Support'!
+SystemOrganization addCategory: 'Bloc-Basic-Visual'!
 SystemOrganization addCategory: 'Bloc-Effect'!
 SystemOrganization addCategory: 'Bloc-Event'!
 SystemOrganization addCategory: 'Bloc-EventHandling'!
@@ -10,7 +11,7 @@ SystemOrganization addCategory: 'Bloc-Gesture'!
 SystemOrganization addCategory: 'Bloc-KeyBinding'!
 SystemOrganization addCategory: 'Bloc-Layouts-Basic'!
 SystemOrganization addCategory: 'Bloc-Layouts-Support'!
-SystemOrganization addCategory: 'Bloc-Paint-Basic'!
+SystemOrganization addCategory: 'Bloc-Paint'!
 SystemOrganization addCategory: 'Bloc-Paint-Support'!
 SystemOrganization addCategory: 'Bloc-Property'!
 SystemOrganization addCategory: 'Bloc-Settings'!

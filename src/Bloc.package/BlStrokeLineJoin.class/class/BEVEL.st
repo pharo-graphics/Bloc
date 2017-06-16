@@ -1,3 +1,3 @@
 predefined instances
-BEVEL
-	^ Bevel ifNil: [ Bevel := self new beBevel ]
+bevel
+	^ bevel ifNil: [ bevel := BlStrokeLineBevelJoin new ]

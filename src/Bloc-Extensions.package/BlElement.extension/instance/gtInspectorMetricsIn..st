@@ -1,4 +1,4 @@
-*Bloc-Extensions-Inspector
+*Bloc-Extensions
 gtInspectorMetricsIn: composite
 	<gtInspectorPresentationOrder: 100>  
 	| morphPresentation |

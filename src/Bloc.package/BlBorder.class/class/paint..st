@@ -1,6 +1,6 @@
 instance creation
 paint: aPaint
 
-	^ self
-		paint: aPaint
-		width: 1
+	^ self builder
+		paint: aPaint;
+		build

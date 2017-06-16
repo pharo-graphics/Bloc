@@ -36,7 +36,7 @@ baseline: spec
 			"main core package, implements element composition, event handling and universe infrastructure.
 			*core* must not depend on anything"
 			package: #Bloc;
-			package: #'Bloc-Tests' with: [ spec requires: #(Bloc GTExamples) ];
+			package: #'Bloc-Tests' with: [ spec requires: #(Bloc GTExamples 'BlocHost-Mock') ];
 	
 			"contains most common layout types. May be optional"
 			package: #'Bloc-Layout' with: [ spec requires: #(Bloc) ];
@@ -65,6 +65,7 @@ baseline: spec
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GTExamples). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
+			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
 			package: #'BlocHost-Morphic' with: [ spec requires: #(#Bloc). ];  
@@ -99,6 +100,7 @@ baseline: spec
 			group: 'file:development' with: #(
 				'file:core'
 				'BlocHost-SDL'
+				'BlocHost-Mock'
 				'Bloc-Tests'
 				'Bloc-Layout-Tests'
 				'Bloc-Animation-Tests');

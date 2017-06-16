@@ -5,4 +5,4 @@ strokedBounds: aBlBounds of: anElement on: aCanvas
 	Dispatch through border's BlStrokeType first"
 	<return: #BlBounds>
 
-	^ anElement border type strokedBounds: aBlBounds of: anElement on: aCanvas
+	^ anElement outskirts strokedBounds: aBlBounds of: anElement on: aCanvas

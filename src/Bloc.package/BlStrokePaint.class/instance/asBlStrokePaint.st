@@ -1,3 +1,0 @@
-converting
-asBlStrokePaint
-	^ self

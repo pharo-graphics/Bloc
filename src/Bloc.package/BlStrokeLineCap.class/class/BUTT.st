@@ -1,3 +1,3 @@
 predefined instances
 butt
-	^ Butt ifNil: [ Butt := self new beButt ]
+	^ butt ifNil: [ butt := BlStrokeLineButtCap new ]

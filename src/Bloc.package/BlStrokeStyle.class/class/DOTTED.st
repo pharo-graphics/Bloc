@@ -2,8 +2,7 @@ predefined instances
 DOTTED
 	^ Dotted
 		ifNil: [ Dotted := self
-				type: BlBorderType inside
-				lineJoin: BlStrokeLineJoin MITER
+				lineJoin: BlStrokeLineJoin miter
 				lineCap: BlStrokeLineCap round
 				miterLimit: 10
 				dashOffset: 0

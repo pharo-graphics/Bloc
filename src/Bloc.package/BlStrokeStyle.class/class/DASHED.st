@@ -2,8 +2,7 @@ predefined instances
 DASHED
 	^ Dashed
 		ifNil: [ Dashed := self
-				type: BlBorderType inside
-				lineJoin: BlStrokeLineJoin MITER
+				lineJoin: BlStrokeLineJoin miter
 				lineCap: BlStrokeLineCap round
 				miterLimit: 10
 				dashOffset: 0

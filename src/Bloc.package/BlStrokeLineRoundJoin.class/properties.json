@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 6/17/2017 00:16",
+	"super" : "BlStrokeLineJoin",
+	"category" : "Bloc-Paint-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlStrokeLineRoundJoin",
+	"type" : "normal"
+}

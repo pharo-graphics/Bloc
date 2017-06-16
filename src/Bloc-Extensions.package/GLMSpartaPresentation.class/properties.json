@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 6/16/2017 20:50",
+	"super" : "GLMPresentation",
+	"category" : "Bloc-Extensions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"extentBlock",
+		"canvasBlock",
+		"drawBlock"
+	],
+	"name" : "GLMSpartaPresentation",
+	"type" : "normal"
+}

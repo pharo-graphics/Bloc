@@ -23,7 +23,8 @@
 		"styler",
 		"misc",
 		"mouseCursor",
-		"opacity"
+		"opacity",
+		"outskirts"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 5/16/2017 19:08",

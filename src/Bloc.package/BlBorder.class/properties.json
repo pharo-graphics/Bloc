@@ -1,7 +1,7 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/14/2017 12:10",
+	"commentStamp" : "AliakseiSyrel 6/17/2017 00:57",
 	"super" : "Object",
-	"category" : "Bloc-Paint-Support",
+	"category" : "Bloc-Basic-Visual",
 	"classinstvars" : [
 		"empty"
 	],
@@ -9,8 +9,9 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"paint",
+		"width",
 		"style",
-		"width"
+		"opacity"
 	],
 	"name" : "BlBorder",
 	"type" : "normal"

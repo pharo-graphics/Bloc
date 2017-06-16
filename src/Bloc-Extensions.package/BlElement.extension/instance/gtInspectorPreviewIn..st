@@ -1,6 +1,6 @@
-*Bloc-Extensions-Inspector
+*Bloc-Extensions
 gtInspectorPreviewIn: composite
-	<gtInspectorPresentationOrder: 15>  
+	<gtInspectorPresentationOrder: 15>
 	| morphPresentation |
 	morphPresentation := composite morph.
 	morphPresentation 

@@ -4,4 +4,8 @@ applyOn: aStrokePainter
 	
 	aStrokePainter
 		dashOffset: self dashOffset;
-		dashPattern: self dashArray
+		dashPattern: self dashArray;
+		miterLimit: self miterLimit.
+		
+	self lineCap applyOn: aStrokePainter.
+	self lineJoin applyOn: aStrokePainter

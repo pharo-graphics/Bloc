@@ -1,4 +1,4 @@
-*Bloc-Extensions-Inspector
+*Bloc-Extensions
 gtInspectorItemsIn: composite
 	<gtInspectorPresentationOrder: 0>  
 	^ composite list

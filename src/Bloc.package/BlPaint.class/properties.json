@@ -1,13 +1,11 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 6/16/2017 20:05",
 	"super" : "Object",
-	"category" : "Bloc-Paint-Basic",
+	"category" : "Bloc-Paint",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"paintCache"
-	],
+	"instvars" : [ ],
 	"name" : "BlPaint",
 	"type" : "normal"
 }

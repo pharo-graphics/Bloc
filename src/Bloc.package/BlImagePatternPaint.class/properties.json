@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlPaint",
-	"category" : "Bloc-Paint-Basic",
+	"category" : "Bloc-Paint",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

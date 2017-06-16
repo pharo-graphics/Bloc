@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 1/22/2017 17:39",
 	"super" : "BlBackground",
-	"category" : "Bloc-Paint-Support",
+	"category" : "Bloc-Basic-Visual",
 	"classinstvars" : [
 		"uniqueInstance"
 	],

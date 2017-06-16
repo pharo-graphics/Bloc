@@ -1,3 +1,3 @@
 predefined instances
 round
-	^ Round ifNil: [ Round := self new beRound ]
+	^ round ifNil: [ round := BlStrokeLineRoundJoin new ]

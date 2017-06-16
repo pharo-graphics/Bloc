@@ -1,0 +1,20 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Visual",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"paint",
+		"width",
+		"lineCap",
+		"lineJoin",
+		"miterLimit",
+		"dashArray",
+		"dashOffset",
+		"opacity"
+	],
+	"name" : "BlBorderBuilder",
+	"type" : "normal"
+}

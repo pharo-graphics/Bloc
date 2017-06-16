@@ -1,3 +1,3 @@
 predefined instances
-MITER
-	^ Miter ifNil: [ Miter := self new beMiter ]
+miter
+	^ miter ifNil: [ miter := BlStrokeLineMiterJoin new ]

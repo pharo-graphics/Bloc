@@ -1,3 +1,3 @@
 accessing
-form: anObject
-	form := anObject
+form: aForm
+	form := aForm
