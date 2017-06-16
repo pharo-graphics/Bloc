@@ -11,7 +11,9 @@
 		"opened",
 		"windowExtent",
 		"canvasExtent",
-		"densityDpi"
+		"densityDpi",
+		"renderCount",
+		"space"
 	],
 	"name" : "BlMockedHostSpace",
 	"commentStamp" : "",

@@ -6,7 +6,7 @@ closeSpaceWindow: aSpace
 		description: [ 'Space must not be nil' ].
 
 	self
-		assert: [ aSpace hasHost ]
+		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
 
 	"First destroy host space and "
@@ -23,5 +23,5 @@ closeSpaceWindow: aSpace
 		ifFalse: [ self stop ].
 
 	self
-		assert: [ aSpace hasHost not ]
+		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Host space must not have a host!' ]

@@ -1,3 +1,3 @@
 api
 destroyHostSpaceFor: aSpace
-	aSpace hostSpace: nil
+	aSpace detachHostSpace

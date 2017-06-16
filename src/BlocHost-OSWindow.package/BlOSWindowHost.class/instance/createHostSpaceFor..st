@@ -4,7 +4,7 @@ createHostSpaceFor: aSpace
 	| aHostSpace|
 	
 	self
-		assert: [ aSpace hasHost not ]
+		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host!' ].
 		
 	aHostSpace := self createWindowSpaceFor: aSpace.

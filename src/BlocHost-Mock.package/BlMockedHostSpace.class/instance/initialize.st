@@ -12,4 +12,5 @@ initialize
 
 	canvasExtent := self defaultCanvasExtent.
 	windowExtent := self defaultWindowExtent.
-	densityDpi := self defaultDensityDpi
+	densityDpi := self defaultDensityDpi.
+	renderCount := 0

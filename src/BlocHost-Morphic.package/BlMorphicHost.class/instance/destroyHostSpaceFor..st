@@ -2,8 +2,8 @@ host - api
 destroyHostSpaceFor: aSpace
 
 	self
-		assert: [ aSpace hasHost ]
+		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
 	
 	aSpace hostSpace close.
-	aSpace hostSpace: nil
+	aSpace detachHostSpace

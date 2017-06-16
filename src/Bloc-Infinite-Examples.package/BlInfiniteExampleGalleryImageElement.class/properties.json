@@ -9,7 +9,8 @@
 		"image",
 		"loader",
 		"form",
-		"itemElement"
+		"itemElement",
+		"bitmap"
 	],
 	"name" : "BlInfiniteExampleGalleryImageElement",
 	"type" : "normal"

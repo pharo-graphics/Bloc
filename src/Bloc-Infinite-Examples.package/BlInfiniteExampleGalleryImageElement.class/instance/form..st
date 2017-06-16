@@ -9,5 +9,6 @@ form: aForm
 		description: [ 'Form must belong to current image' ].
 
 	form := aForm.
+	bitmap := nil.
 	self requestLayout.
 	self invalidate

@@ -1,12 +1,15 @@
 pulse
 doLayout
-	| relayoutCounter maxRelayoutCount |
+	| layoutCounter maxLayoutCount |
 
-	relayoutCounter := 0.
-	maxRelayoutCount := 100.
+	self
+		assert: [ self isLayoutRequested ]
+		description: [ 'Root element must request layout in order to update it' ].
 
-	[ self root isLayoutRequested and: [
-			relayoutCounter < maxRelayoutCount ] ]
+	layoutCounter := 0.
+	maxLayoutCount := 100.
+
+	[ self root isLayoutRequested and: [ layoutCounter < maxLayoutCount ] ]
 		whileTrue: [
 			self doUpdateLayout.
-			relayoutCounter := relayoutCounter + 1 ]
+			layoutCounter := layoutCounter + 1 ]

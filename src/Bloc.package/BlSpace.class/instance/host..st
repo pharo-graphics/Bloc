@@ -1,3 +1,3 @@
-accessing
+host - accessing
 host: aHost
 	host := aHost

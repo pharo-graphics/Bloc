@@ -1,4 +1,6 @@
 change reporting
 pulseRequested
-	^ nextPulseRequested.
-	
+	"Return true if space pulse was requested, false otherwise"
+	<return: #Boolean>
+
+	^ nextPulseRequested

@@ -1,9 +1,9 @@
 change reporting
-invalidRect: aSpartaRectangle from: anElement
+invalidRect: aBlBounds from: anElement
 
-	aSpartaRectangle expanded.
+	aBlBounds expanded.
 	self dirtyAreas
-		ifEmpty: [ self dirtyAreas add: aSpartaRectangle copy ]
-		ifNotEmpty: [ :aCollection | aCollection first merge: aSpartaRectangle ].
+		ifEmpty: [ self dirtyAreas add: aBlBounds copy ]
+		ifNotEmpty: [ :aCollection | aCollection first merge: aBlBounds ].
 
 	self requestNextPulse

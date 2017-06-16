@@ -5,6 +5,8 @@ drawOnSpartaCanvas: aCanvas
 	
 	form
 		ifNil: [ ^ self ].
+
+	bitmap ifNil: [ bitmap := aCanvas bitmap fromForm: form ].
 	
 	aScale := (self extent / form extent) asFloatPoint.
 	
@@ -13,10 +15,10 @@ drawOnSpartaCanvas: aCanvas
 			push;
 			scaleBy: aScale;
 			apply ].
-	
+
 	aCanvas fill
 		path: (0@0 extent: form extent);
-		paint: form;
+		paint: bitmap;
 		draw.
 		
 	aScale ~= (1@1) ifTrue: [ 

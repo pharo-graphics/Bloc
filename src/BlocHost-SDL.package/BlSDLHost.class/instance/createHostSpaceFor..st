@@ -4,7 +4,7 @@ createHostSpaceFor: aSpace
 	| aWindow aHostSpace|
 	
 	self
-		assert: [ aSpace hasHost not ]
+		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host!' ].
 		
 	aWindow := self createSDLWindowFor: aSpace.

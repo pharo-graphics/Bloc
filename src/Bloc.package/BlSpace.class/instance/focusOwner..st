@@ -1,3 +1,3 @@
 focus managing
-focusOwner: anObject
-	focusOwner := anObject
+focusOwner: anElement
+	focusOwner := anElement

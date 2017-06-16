@@ -6,7 +6,7 @@ showSpaceWindow: aSpace
 		description: [ 'Space must not be nil' ].
 
 	self
-		assert: [ aSpace hasHost not ]
+		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host!' ].
 
 	"We are going to register first space, let's start the Universe"
@@ -26,5 +26,5 @@ showSpaceWindow: aSpace
 	aSpace hostSpace show.
 
 	self
-		assert: [ aSpace hasHost ]
+		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].

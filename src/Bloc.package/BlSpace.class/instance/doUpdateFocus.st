@@ -1,7 +1,9 @@
 pulse
 doUpdateFocus
-	self focusOwner isNil ifTrue: [ 
-		^ self initializeFocus ].
-	self focusOwner space ~= self ifTrue: [ 
-		self focusOwner: nil.
-		^ self initializeFocus ]
+	self focusOwner
+		ifNil: [ self initializeFocus ]
+		ifNotNil: [ :anElement |
+			anElement space == self
+				ifFalse: [
+					self focusOwner: nil.
+					self initializeFocus ] ]

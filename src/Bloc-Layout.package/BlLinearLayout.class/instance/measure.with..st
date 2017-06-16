@@ -4,6 +4,14 @@ measure: anElement with: anExtentSpec
 	
 	self cache initializeCaches: anElement with: anExtentSpec.
 	
+	self
+		assert: [ self cache heightMode isNotNil ]
+		description: [ 'Height mode must not be nil' ].
+		
+	self
+		assert: [ self cache widthMode isNotNil ]
+		description: [ 'Width mode must not be nil' ].
+	
 	"first perform naive pass to measure children who already know their size"
 	self naiveMeasure: anElement with: anExtentSpec.
 	

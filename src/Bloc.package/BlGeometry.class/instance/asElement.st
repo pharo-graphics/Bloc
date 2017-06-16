@@ -1,6 +1,6 @@
 instance creation
 asElement
 	^ BlElement new
-		geometry: self;
+		size: self extent;
 		background: Color black;
-		size: self extent
+		geometry: self

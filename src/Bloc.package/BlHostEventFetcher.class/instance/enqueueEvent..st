@@ -1,7 +1,6 @@
 event processing
 enqueueEvent: aBlEvent
 	"Enqueue a given Bloc Event in the event queue.
-	I can be used for testing and benchmark purposes"
+	Do not use me directly, instead rely on #enqueueEvent: from HostSpace"
 
-	eventQueue nextPut: aBlEvent.
-	BlUniverse default requestNextPulse
+	eventQueue nextPut: aBlEvent
