@@ -1,3 +1,3 @@
 accessing
 loadUrl: anExtent
-	^ 'https://unsplash.it/', anExtent x asString, '/', anExtent y asString,'?image=', self id asString
+	^ 'https://unsplash.it/', (anExtent x min: 4096) asString, '/', (anExtent y min: 4096) asString,'?image=', self id asString

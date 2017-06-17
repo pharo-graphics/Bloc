@@ -1,3 +1,3 @@
 testing
 renderNeeded
-	self isValid ifTrue: [ renderer presentNeeded ]
+	"self isValid ifTrue: [ renderer presentNeeded ]"

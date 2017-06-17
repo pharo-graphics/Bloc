@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"wasRunning"
+		"wasRunning",
+		"isRunning"
 	],
 	"name" : "BlOSWindowHost",
 	"type" : "normal"

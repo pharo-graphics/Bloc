@@ -1,12 +1,12 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 6/17/2017 14:29",
 	"super" : "Object",
 	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [
-		"Empty"
+	"classinstvars" : [
+		"empty"
 	],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"topLeft",
 		"topRight",

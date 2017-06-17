@@ -4,7 +4,8 @@
 	"instvars" : [
 		"window",
 		"renderer",
-		"eventFetcher"
+		"eventFetcher",
+		"space"
 	],
 	"name" : "BlOSWindowSpace",
 	"commentStamp" : "AliakseiSyrel 6/14/2017 16:57",

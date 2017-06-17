@@ -8,7 +8,7 @@ gtInspectorItemsIn: composite
 		withSmalltalkSearch;		
 		format: [ :each | GTObjectPrinter new asTruncatedTextFrom: each ];
 		send: [ :result | result isNil 
-			ifTrue:[nil]
+			ifTrue:[ nil ]
 			ifFalse:[ (result size = 1) 
 				ifTrue: [result anyOne] 
 				ifFalse: [array species withAll: result]]];

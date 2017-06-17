@@ -9,7 +9,5 @@ initialize
 		border:
 			(BlBorder
 				paint: Color black
-				width: 1
-				radius: 0
-				style: BlStrokeStyle DOTTED);
+				width: 1);
 		yourself

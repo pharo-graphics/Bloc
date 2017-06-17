@@ -4,10 +4,7 @@
 	"category" : "Bloc-Universe",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [
-		"Current",
-		"Session"
-	],
+	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlHost",
 	"type" : "normal"

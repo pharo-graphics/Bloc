@@ -1,3 +1,3 @@
 testing
 isRunningInTheSameProcess
-	^ Processor activeProcess effectiveProcess = loopProcess
+	^ Processor activeProcess effectiveProcess == loopProcess

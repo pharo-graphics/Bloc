@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "<historical>",
 	"super" : "TestCase",
-	"category" : "Bloc-Tests-Core",
+	"category" : "Bloc-Tests-Basic",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

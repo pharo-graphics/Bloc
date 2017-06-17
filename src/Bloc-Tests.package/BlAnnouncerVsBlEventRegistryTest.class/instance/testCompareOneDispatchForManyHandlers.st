@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testCompareOneDispatchForManyHandlers
  |ann reg t1 t2 c1 c2 counter|
 	c1 := c2 := 0.

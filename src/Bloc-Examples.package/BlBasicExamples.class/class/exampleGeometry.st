@@ -20,6 +20,6 @@ exampleGeometry
 				on: BlDblClickEvent
 				do: [ :evt | BlElementSelection on: evt target ]).
 				
-	space show.
+	space show
 	
 	

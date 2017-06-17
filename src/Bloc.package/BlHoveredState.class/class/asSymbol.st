@@ -1,3 +1,3 @@
-as yet unclassified
+converting
 asSymbol
 	^ #hovered

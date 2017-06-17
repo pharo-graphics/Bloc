@@ -9,7 +9,7 @@ windowExtent
 	width := FFIExternalArray externalNewType: 'int' size: 1.
 	height := FFIExternalArray externalNewType: 'int' size: 1.
 	
-	window handle handle getSizeW: width h: height.
+	window handle handle getSizeW: width getHandle h: height getHandle.
 	extent := (width at: 1) @ (height at: 1).
 
 	width free.

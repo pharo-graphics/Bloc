@@ -1,3 +1,0 @@
-reversing
-reverse
-	array reverse

@@ -1,3 +1,3 @@
 accessing
 host
-	^ preferableHost ifNil: [ BlHost current ]
+	^ preferableHost ifNil: [ BlHost pickHost ]
