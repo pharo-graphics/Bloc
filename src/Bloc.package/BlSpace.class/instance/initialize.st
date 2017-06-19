@@ -19,4 +19,3 @@ initialize
 	nextPulseRequested := true.
 	self initDispatcher.
 	self updateCursorImage: Cursor normal
-	

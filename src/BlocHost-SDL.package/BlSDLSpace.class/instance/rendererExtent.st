@@ -5,7 +5,10 @@ rendererExtent
 	<return: #Point>
 	| width height |
 	
-	width := FFIExternalArray newType: 'int' size: 1.
-	height := FFIExternalArray newType: 'int' size: 1.
-	sdlWindow getRendererSize: sdlWindow getRenderer w: width h: height.
-	^ (width signedLongAt: 1) @ (height signedLongAt: 1)
+	width := FFIExternalArray externalNewType: 'int' size: 1.
+	height := FFIExternalArray externalNewType: 'int' size: 1.
+	sdlWindow
+		getRendererSize: sdlWindow getRenderer
+		w: width getHandle
+		h: height getHandle.
+	^ (width at: 1) @ (height at: 1)

@@ -3,4 +3,5 @@ destroy
 	super destroy.
 	
 	texture := nil.
-	renderer := nil
+	renderer := nil.
+	sdlSurface := nil

@@ -4,7 +4,7 @@ withSpartaRenderer
 
 	renderer := BlSpartaRenderer for: self.
 
-	surface := BlHostRendererFormSurface new.
+	surface := BlHostRendererBufferSurface new.
 	surface hostSpace: self.
 	surface hostRenderer: renderer.
 

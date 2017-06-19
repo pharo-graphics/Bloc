@@ -6,7 +6,8 @@
 		"sdlWindow",
 		"eventQueue",
 		"iconSurface",
-		"currentCursor"
+		"currentCursor",
+		"space"
 	],
 	"name" : "BlSDLSpace",
 	"commentStamp" : "",

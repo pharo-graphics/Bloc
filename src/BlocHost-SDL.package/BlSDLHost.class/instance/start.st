@@ -7,5 +7,5 @@ start
 
 	hostSpaces := Dictionary new. "(windowId -> BlSDLSpaceL)"
 	eventHandler := BlSDLEventHandler new.
-	SDL2 initVideo.
-	self setupEventLoop
+	self setupEventLoop.
+	isRunning := true

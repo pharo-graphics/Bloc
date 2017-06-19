@@ -10,6 +10,6 @@ stop
 		description: [ 'SDL host must be running in order to be stopped' ].
 
 	self stopEventLoop.
-	SDL2 quit.
 	hostSpaces := nil.
-	eventHandler := nil
+	eventHandler := nil.
+	isRunning := false

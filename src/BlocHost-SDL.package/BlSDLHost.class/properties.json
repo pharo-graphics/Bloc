@@ -12,7 +12,8 @@
 	"instvars" : [
 		"hostSpaces",
 		"eventHandler",
-		"inputSemaphore"
+		"inputSemaphore",
+		"isRunning"
 	],
 	"name" : "BlSDLHost",
 	"type" : "normal"

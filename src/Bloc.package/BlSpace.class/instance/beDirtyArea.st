@@ -1,3 +1,3 @@
 change reporting
 beDirtyArea
-	self dirtyAreas add: (0 @ 0 corner: self extent).
+	self makeDirty: (BlBounds origin: 0 @ 0 extent: self extent)
