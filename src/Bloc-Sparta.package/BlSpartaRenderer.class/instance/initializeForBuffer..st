@@ -1,12 +1,12 @@
 initialization
 initializeForBuffer: aBufferSurface
-	"Initalize sparta canvas to be used with a form surface"
-	| scaleFactor canvasExtent |
+	"Initalize sparta canvas to be used with a pixel buffer surface"
+	| scaleFactor |
 
 	windowExtent := aBufferSurface windowExtent.
 	canvasExtent := aBufferSurface canvasExtent.
 
-	scaleFactor := (canvasExtent / windowExtent) asFloatPoint.
+	scaleFactor := aBufferSurface scaleFactor.
 	spartaCanvas := self class defaultCanvasBuilder forBufferOn: aBufferSurface.
 	self
 		assert: [ spartaCanvas isValid ]

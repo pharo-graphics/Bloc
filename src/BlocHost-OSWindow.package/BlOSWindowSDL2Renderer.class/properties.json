@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "AliakseiSyrel 6/19/2017 14:03",
+	"super" : "BlOSWindowRenderer",
+	"category" : "BlocHost-OSWindow-Support",
+	"classinstvars" : [ ],
+	"pools" : [
+		"SDL2Constants"
+	],
+	"classvars" : [ ],
+	"instvars" : [
+		"texture",
+		"renderer",
+		"textureExtent",
+		"surfaceForm",
+		"sdlSurface"
+	],
+	"name" : "BlOSWindowSDL2Renderer",
+	"type" : "normal"
+}

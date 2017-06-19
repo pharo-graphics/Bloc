@@ -1,0 +1,3 @@
+host space - drawing
+presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas
+	osWindowRenderer presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas

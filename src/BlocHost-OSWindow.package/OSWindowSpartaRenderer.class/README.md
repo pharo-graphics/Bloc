@@ -1,1 +1,0 @@
-I am an abstract Sparta renderer. 

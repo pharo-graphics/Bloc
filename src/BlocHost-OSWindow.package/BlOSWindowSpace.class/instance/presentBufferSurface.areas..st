@@ -1,0 +1,3 @@
+host space - drawing
+presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas
+	osWindowRenderer presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas

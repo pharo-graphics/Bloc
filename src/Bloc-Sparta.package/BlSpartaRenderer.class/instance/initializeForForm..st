@@ -1,12 +1,12 @@
 initialization
 initializeForForm: aFormSurface
 	"Initalize sparta canvas to be used with a form surface"
-	| scaleFactor canvasExtent |
+	| scaleFactor |
 
 	windowExtent := aFormSurface windowExtent.
 	canvasExtent := aFormSurface canvasExtent.
 
-	scaleFactor := (canvasExtent / windowExtent) asFloatPoint.
+	scaleFactor := aFormSurface scaleFactor.
 	spartaCanvas := self class defaultCanvasBuilder forFormOn: aFormSurface.
 	self
 		assert: [ spartaCanvas isValid ]

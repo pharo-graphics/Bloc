@@ -1,5 +1,5 @@
 host space - drawing
-presentFormSurface: aRendererSurface areas: aCollectionOfAreas
+presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas
 
-	morphicWindow form: aRendererSurface form.
-	mirrowWindows do: [ :each | each form: aRendererSurface form ]
+	morphicWindow form: aBlHostRendererFormSurface form.
+	mirrowWindows do: [ :each | each form: aBlHostRendererFormSurface form ]

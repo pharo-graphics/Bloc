@@ -1,5 +1,9 @@
 host space - drawing
-render: aStage
+render: aSpace
 	self isValid
 		ifFalse: [ ^ self ].
-	^ renderer render: aStage
+
+	self hasResized
+		ifTrue: [ osWindowRenderer resetResources ].
+
+	renderer render: aSpace

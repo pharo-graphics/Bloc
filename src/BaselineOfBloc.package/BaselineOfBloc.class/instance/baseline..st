@@ -67,7 +67,7 @@ baseline: spec
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
-			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];  
+			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-Morphic' with: [ spec requires: #(#Bloc). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 
@@ -86,6 +86,7 @@ baseline: spec
 				
 				"core only loads very basic stuff"
 				'BlocHost-Morphic'
+				'BlocHost-OSWindow'
 
 				'Bloc-Animation'
 				'Bloc-Examples'

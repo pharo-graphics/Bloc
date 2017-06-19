@@ -5,7 +5,8 @@
 		"window",
 		"renderer",
 		"eventFetcher",
-		"space"
+		"space",
+		"osWindowRenderer"
 	],
 	"name" : "BlOSWindowSpace",
 	"commentStamp" : "AliakseiSyrel 6/14/2017 16:57",

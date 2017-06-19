@@ -1,0 +1,3 @@
+updating screen
+updateAll
+	self shouldNotImplement
