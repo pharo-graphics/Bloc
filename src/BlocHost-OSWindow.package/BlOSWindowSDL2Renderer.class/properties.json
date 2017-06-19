@@ -10,9 +10,7 @@
 	"instvars" : [
 		"texture",
 		"renderer",
-		"textureExtent",
-		"surfaceForm",
-		"sdlSurface"
+		"textureExtent"
 	],
 	"name" : "BlOSWindowSDL2Renderer",
 	"type" : "normal"

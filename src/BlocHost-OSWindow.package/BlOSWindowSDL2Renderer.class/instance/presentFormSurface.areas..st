@@ -17,9 +17,6 @@ presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas
 		dirtyAreas := aCollectionOfAreas collect: [ :aRectangle | aRectangle scaleBy: aWindowScale ].
 		dirtyAreas do: [ :rectangle |
 			destinationForm copy: rectangle from: aBlHostRendererFormSurface form to: rectangle origin rule: Form over ].
-	]
-	ensure: [
-		texture unlock.
-	].
+	] ensure: [ texture unlock ].
 
 	self present

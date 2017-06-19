@@ -6,6 +6,14 @@ present
 	The backbuffer should be considered invalidated after each present; do not assume that previous contents will exist between frames.
 	You are strongly encouraged to call SDL_RenderClear() to initialize the backbuffer before starting each new frame's drawing, even if you plan to overwrite every pixel
 	https://wiki.libsdl.org/SDL_RenderPresent?highlight=%28%5CbCategoryRender%5Cb%29%7C%28CategoryEnum%29%7C%28CategoryStruct%29"
+	
+	self
+		assert: [ renderer isNotNil ]
+		description: [ 'Renderer mut not be nil' ].
+	
+	self
+		assert: [ texture isNotNil ]
+		description: [ 'Texture mut not be nil' ].
 
 	renderer
 		clear;

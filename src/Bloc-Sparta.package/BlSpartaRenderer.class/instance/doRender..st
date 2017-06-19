@@ -11,4 +11,5 @@ doRender: aSpace
 		ifEmpty: [ ^ self ].
 
 	aSpace fullDrawOn: spartaCanvas.
+
 	self presentAreas: theDirtyAreas

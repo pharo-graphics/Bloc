@@ -13,13 +13,12 @@ exampleGeometry
 		addChild: (self newSquare position: 400 @ 200);
 		addChild: (self newSvg position: 500 @ 200);
 		"addChild: (self newLine);"
-		addChild: (self newRectangle position: 10 @ 150).
+		addChild: (self newRectangle position: 10 @ 150);
+		yourself.
 
 	space root addEventHandler:
 			(BlEventHandler
 				on: BlDblClickEvent
 				do: [ :evt | BlElementSelection on: evt target ]).
-				
+
 	space show
-	
-	

@@ -1,3 +1,0 @@
-initialization
-initializeForBuffer: aBlHostRendererBufferSurface
-	self subclassResponsibility

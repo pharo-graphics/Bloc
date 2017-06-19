@@ -2,7 +2,5 @@ initialization
 initialize
 	super initialize.
 
-	sdlSurface := nil.
 	texture := nil.
-	renderer := nil.
-	surfaceForm := nil.
+	renderer := nil

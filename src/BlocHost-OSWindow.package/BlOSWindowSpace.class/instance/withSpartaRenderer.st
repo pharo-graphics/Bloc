@@ -1,11 +1,10 @@
 initialization
 withSpartaRenderer
-	"renderer := BlOSWindowRenderer for: (window newSpartaRenderer)."
 	| surface |
 
 	renderer := BlSpartaRenderer for: self.
 
-	surface := BlHostRendererBufferSurface new.
+	surface := BlHostRendererFormSurface new.
 	surface hostSpace: self.
 	surface hostRenderer: renderer.
 
