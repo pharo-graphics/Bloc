@@ -1,3 +1,3 @@
 updating resources
 resetResources
-	surface initializeResourcesOn: self
+	surface initializeOn: self

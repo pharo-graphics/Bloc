@@ -1,4 +1,0 @@
-initialization
-initHostWindow
-	self createDefaultEventHandler.
-	

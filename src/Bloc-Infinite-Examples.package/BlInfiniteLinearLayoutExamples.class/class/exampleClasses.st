@@ -22,7 +22,7 @@ exampleClasses
 	container addChild: list.
 	
 	space root addChild: container.
-	space root addChild: (BlBenchmarkConsole on:space).
+	"space root addChild: (BlBenchmarkLogger new)."
 	"space root
 		addEventHandler:
 			(BlEventHandler

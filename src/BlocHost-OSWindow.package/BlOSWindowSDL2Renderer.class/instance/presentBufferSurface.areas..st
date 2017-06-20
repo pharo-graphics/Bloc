@@ -12,6 +12,8 @@ presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas
 		destinationForm := BlExternalForm extent: textureExtent depth: 32 bits: pixels.
 		sourceForm := BlExternalForm extent: aBlHostRendererBufferSurface extent depth: 32 bits: aBlHostRendererBufferSurface buffer.
 		
+		"Damaged rectangles are defined in user coordinates (bloc space).
+		We have to convert damage to window space, since we want to support high dpi displays"
 		aWindowScale := aBlHostRendererBufferSurface scaleFactor.
 		dirtyAreas := aCollectionOfAreas collect: [ :aRectangle | aRectangle scaleBy: aWindowScale ].
 		dirtyAreas do: [ :rectangle |

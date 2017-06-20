@@ -1,0 +1,3 @@
+presenting
+presentAreas: aCollectionOfRectangles
+	hostSpace presentOpenGLSurface: self areas: aCollectionOfRectangles

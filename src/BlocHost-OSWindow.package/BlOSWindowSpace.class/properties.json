@@ -6,7 +6,9 @@
 		"renderer",
 		"eventFetcher",
 		"space",
-		"osWindowRenderer"
+		"osWindowRenderer",
+		"surface",
+		"host"
 	],
 	"name" : "BlOSWindowSpace",
 	"commentStamp" : "AliakseiSyrel 6/14/2017 16:57",
@@ -14,6 +16,8 @@
 	"traitcomposition" : "TBlHostSpace",
 	"type" : "normal",
 	"classinstvars" : [ ],
-	"pools" : [ ],
+	"pools" : [
+		"UFFIOpenGLConstants"
+	],
 	"category" : "BlocHost-OSWindow-Host"
 }

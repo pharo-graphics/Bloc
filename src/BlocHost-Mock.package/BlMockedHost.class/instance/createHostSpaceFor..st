@@ -1,3 +1,3 @@
 host - api
 createHostSpaceFor: aSpace
-	aSpace hostSpace: BlMockedHostSpace new
+	aSpace hostSpace: (BlMockedHostSpace new host: self)

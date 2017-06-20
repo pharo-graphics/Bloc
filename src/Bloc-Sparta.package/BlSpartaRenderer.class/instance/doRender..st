@@ -10,6 +10,11 @@ doRender: aSpace
 	theDirtyAreas
 		ifEmpty: [ ^ self ].
 
-	aSpace fullDrawOn: spartaCanvas.
+	theDirtyAreas do: [ :aBlBounds | 
+		spartaCanvas clip by: aBlBounds during: [ 
+			aSpace fullDrawOn: spartaCanvas
+		].
+	].
+	spartaCanvas flush.
 
 	self presentAreas: theDirtyAreas

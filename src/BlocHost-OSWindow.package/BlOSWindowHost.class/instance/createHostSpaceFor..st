@@ -8,6 +8,8 @@ createHostSpaceFor: aSpace
 		description: [ 'Space must not have a host!' ].
 		
 	aHostSpace := self createWindowSpaceFor: aSpace.
+	aHostSpace host: self.
+	aHostSpace space: aSpace.
 	aHostSpace withSpartaRenderer.
-	
+
 	aSpace hostSpace: aHostSpace

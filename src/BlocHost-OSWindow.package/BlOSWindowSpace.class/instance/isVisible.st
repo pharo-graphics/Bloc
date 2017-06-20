@@ -5,4 +5,4 @@ isVisible
 	Window can become invisible by asking it to hide"
 	<return: #Boolean>
 
-	^ self isVisible
+	^ window isVisible

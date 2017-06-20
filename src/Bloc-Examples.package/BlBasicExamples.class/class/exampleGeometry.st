@@ -2,7 +2,7 @@ shape examples
 exampleGeometry
 	| space |
 	space := BlSpace new
-		extent: 800 @ 650;
+		extent: 600 @ 450;
 		title: 'Shape example'.
 
 	space root
@@ -13,7 +13,7 @@ exampleGeometry
 		addChild: (self newSquare position: 400 @ 200);
 		addChild: (self newSvg position: 500 @ 200);
 		"addChild: (self newLine);"
-		addChild: (self newRectangle position: 10 @ 150);
+		"addChild: (self newRectangle position: 10 @ 150);"
 		yourself.
 
 	space root addEventHandler:

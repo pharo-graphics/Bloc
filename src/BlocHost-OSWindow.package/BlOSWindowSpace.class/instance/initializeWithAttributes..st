@@ -1,4 +1,4 @@
 initialization
 initializeWithAttributes: initialAttributes
-	window := OSWindow createWithAttributes: initialAttributes.
-	self initHostWindow
+	window := OSWindowAnimated createWithAttributes: initialAttributes.
+	window eventHandler: (BlOSWindowEventHandler window: self)

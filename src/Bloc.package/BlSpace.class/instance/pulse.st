@@ -4,7 +4,7 @@ pulse
 
 	self pulseRequested
 		ifFalse: [ ^ self ].
-
+	
 	"We must update focused element before processing events, otherwise keyboard events,
 	for example, will be handled by the wrong element"
 	self doUpdateFocus.

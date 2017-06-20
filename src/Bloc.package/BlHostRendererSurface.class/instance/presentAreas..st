@@ -1,2 +1,3 @@
 presenting
 presentAreas: aCollectionOfRectangles
+	self subclassResponsibility

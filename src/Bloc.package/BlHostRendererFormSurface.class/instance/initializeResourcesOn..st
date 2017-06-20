@@ -5,4 +5,4 @@ initializeResourcesOn: aHostRenderer
 	externalForm allocateSpace.
 	externalForm fillColor: Color transparent.
 
-	aHostRenderer initializeForForm: self
+	self initializeOn: aHostRenderer

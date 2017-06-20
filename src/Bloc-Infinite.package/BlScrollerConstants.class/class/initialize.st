@@ -6,7 +6,7 @@ initialize
 	Gravity := 2000.0.
 	GravityEarth := 9.80665.
 	ScrollFriction := 0.015.
-	Inflexion := 0.35.
+	Inflexion := 0.15.
 	StartTension := 0.5.
 	EndTension := 1.0.
 	P1 := StartTension * Inflexion.

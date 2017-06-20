@@ -20,10 +20,10 @@ baseline: spec
 
 			project: 'OSWindow' with: [ spec
 				className: #ConfigurationOfOSWindow;
-				versionString: '1.2.16';
-				loads:#(#SDL2);
+				versionString: '1.2.17';
+				loads: #(WithOpenGL);
 				repository: 'http://smalltalkhub.com/mc/Pharo/OSWindow/main/' ];
-		
+
 		   project: 'XMLParser' with: [ spec
 				className: #ConfigurationOfXMLParser;
 				repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ];

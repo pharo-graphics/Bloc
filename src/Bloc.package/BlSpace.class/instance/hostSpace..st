@@ -8,6 +8,5 @@ hostSpace: aHostSpace
 		assert: [ aHostSpace isNotNil ]
 		description: [ 'Host space must not be nil!' ].
 
-	aHostSpace space: self.
 	self hostSpaceProperty value: aHostSpace.
 	self hostSpaceChanged.

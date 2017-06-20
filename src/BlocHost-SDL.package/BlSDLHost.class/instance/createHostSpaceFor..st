@@ -10,6 +10,7 @@ createHostSpaceFor: aSpace
 	aWindow := self createSDLWindowFor: aSpace.
 
 	aHostSpace := BlSDLSpace new 
+		host: self;
 		sdlWindow: aWindow.
 
 	SkiaCanvas isSupported

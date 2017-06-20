@@ -18,4 +18,6 @@ initialize
 	self fullscreen: false.
 	nextPulseRequested := true.
 	self initDispatcher.
-	self updateCursorImage: Cursor normal
+	self updateCursorImage: Cursor normal.
+	
+	"self root addChild: BlBenchmarkLogger new"

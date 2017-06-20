@@ -6,6 +6,6 @@ render: aSpace
 	(self renderNeeded: aSpace)
 		ifFalse: [ ^ self ].
 
-	self prepareToRender: aSpace.
-	 [ self doRender: aSpace ]
+	self surface prepareToRender: aSpace.
+	 [ self surface renderFor: aSpace ]
 		ensure: [ self finishedRender: aSpace ]

@@ -5,4 +5,4 @@ hasResized
 	e.g. from normal display to retina"
 	<return: #Boolean>
 
-	^ self explicitRequirement
+	^ self renderer hasResized
