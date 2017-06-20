@@ -8,4 +8,4 @@ testInitialization
 	self assert: space pulseRequested.
 	
 	"Space must have its whole area being dirty"
-	self assert: space dirtyAreas asArray equals: { 0@0 extent: space extent }.
+	self assert: self dirtyAreas equals: { 0@0 extent: space extent }
