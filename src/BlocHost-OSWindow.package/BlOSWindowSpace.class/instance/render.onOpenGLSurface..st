@@ -6,13 +6,14 @@ render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface
 	
 	context := aBlHostRendererOpenGLSurface context.
 	gl := context gl.
-	
+
 	context withWindow: window validHandle do: [
 		gl
 			clearColor_red: 0.0 green: 1.0 blue: 1.0 alpha: 1.0;
-			clear: GL_COLOR_BUFFER_BIT.
+			clearDepth: 1.0;
+			clear: GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT.
 		aBlSpace beDirtyArea.
-		self renderer doRender: aBlSpace.
-		
-		context swapBuffers: window validHandle
+		self renderer doRender: aBlSpace.		
+		context swapBuffers: window validHandle.
+		context checkErrors.
 	].

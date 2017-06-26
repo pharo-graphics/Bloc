@@ -7,7 +7,6 @@
 		"eventFetcher",
 		"space",
 		"osWindowRenderer",
-		"surface",
 		"host"
 	],
 	"name" : "BlOSWindowSpace",

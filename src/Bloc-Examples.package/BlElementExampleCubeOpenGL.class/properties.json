@@ -1,0 +1,21 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Examples-Basic",
+	"classinstvars" : [ ],
+	"pools" : [
+		"UFFIOpenGLConstants",
+		"UFFIOpenGLTypes"
+	],
+	"classvars" : [ ],
+	"instvars" : [
+		"rotateX",
+		"rotateY",
+		"rotateZ",
+		"count",
+		"ctx",
+		"fb"
+	],
+	"name" : "BlElementExampleCubeOpenGL",
+	"type" : "normal"
+}

@@ -7,4 +7,4 @@ render
 		description: [ 'I must have dirty areas in order to be rendered' ].
 
 	self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace render: self ]
+		ifNotNil: [ :aHostSpace | BlBenchmarkLogger named: #renderTime on: [ aHostSpace render: self ] ]

@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "OSWindowEventVisitor",
-	"category" : "BlocHost-OSWindow-Core",
+	"category" : "BlocHost-OSWindow-Support",
 	"classinstvars" : [ ],
 	"pools" : [
 		"OSKeySymbols"

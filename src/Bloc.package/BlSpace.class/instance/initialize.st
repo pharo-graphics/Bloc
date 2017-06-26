@@ -20,4 +20,4 @@ initialize
 	self initDispatcher.
 	self updateCursorImage: Cursor normal.
 	
-	"self root addChild: BlBenchmarkLogger new"
+	self root addChild: BlBenchmarkLogger new
