@@ -23,7 +23,13 @@ baseline: spec
 				versionString: '1.2.17';
 				loads: #(WithOpenGL);
 				repository: 'http://smalltalkhub.com/mc/Pharo/OSWindow/main/' ];
-
+			
+			project: 'UFFIOpenGL' with: [
+				spec
+					className: #ConfigurationOfUFFIOpenGL;
+					versionString: #'stable';
+					repository: 'http://smalltalkhub.com/mc/ronsaldo/UFFIOpenGL/main/' ];
+			
 		   project: 'XMLParser' with: [ spec
 				className: #ConfigurationOfXMLParser;
 				repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ];
@@ -62,12 +68,12 @@ baseline: spec
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
 			
-			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GTExamples). ];
+			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GTExamples UFFIOpenGL). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'Bloc-Style' with: [ spec requires: #(#Bloc #PetitCSS). ];
 			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
-			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow). ];
+			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow UFFIOpenGL). ];
 			package: #'BlocHost-Morphic' with: [ spec requires: #(#Bloc). ];  
 			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 
