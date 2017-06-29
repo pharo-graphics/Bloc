@@ -105,7 +105,7 @@ baseline: spec
 				'Bloc-Extensions');
 
 			group: 'development' with: #(
-				'file:core'
+				'core'
 				'BlocHost-SDL'
 				'BlocHost-Mock'
 				'Bloc-Tests'
