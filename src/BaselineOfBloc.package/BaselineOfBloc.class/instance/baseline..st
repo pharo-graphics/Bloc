@@ -23,7 +23,7 @@ baseline: spec
 				versionString: '1.2.17';
 				loads: #(WithOpenGL);
 				repository: 'http://smalltalkhub.com/mc/Pharo/OSWindow/main/' ];
-			
+
 			project: 'UFFIOpenGL' with: [
 				spec
 					className: #ConfigurationOfUFFIOpenGL;
@@ -64,7 +64,7 @@ baseline: spec
 			package: #'Bloc-Text' with: [ spec requires: #(Bloc). ];
 			package: #'Bloc-Text-Rope' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
 			package: #'Bloc-Text-Rope-Examples' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope' GTExamples). ];
-			
+
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
 			
@@ -82,7 +82,7 @@ baseline: spec
 			package: #'Bloc-Extensions' with: [ spec requires: #('Bloc' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool') ];
 			
 			"groups with only sources"
-			group: 'file:core' with: #(
+			group: 'core' with: #(
 				'Bloc' "main core package"
 				'Bloc-Geometry'
 				'Bloc-Layout'
@@ -104,21 +104,13 @@ baseline: spec
 				
 				'Bloc-Extensions');
 
-			group: 'file:development' with: #(
+			group: 'development' with: #(
 				'file:core'
 				'BlocHost-SDL'
 				'BlocHost-Mock'
 				'Bloc-Tests'
 				'Bloc-Layout-Tests'
 				'Bloc-Animation-Tests');
-
-			"groups with sources and plugin installation"
-			group: 'core' with: #('file:core');
-			group: 'development' with: #('file:development');
-
-			"groups with sources, plugin installion and git support"
-			group: 'git:core' with: #('core');
-			group: 'git:development' with: #('development');
 
 			group: 'stub' with: #();
 			group: 'default' with: #('core');

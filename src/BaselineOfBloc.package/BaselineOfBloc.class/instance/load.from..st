@@ -9,14 +9,6 @@ load: aBaselineName from: aRepository
 		ifFalse: [ ^ self ].
 	
 	aDirective := self directive.
-
-	"we load code only without Iceberg"
-	aDirective = #file
-		ifTrue: [ ^ self ].
-
-	"we load code + iceberg"
-	aDirective = #git
-		ifTrue: [ ^ self gitLoad: aBaselineName from: aRepository ].
 	
 	"we do nothing for minimal directive"
 	aDirective = #minimal
