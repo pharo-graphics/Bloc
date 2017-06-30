@@ -1,0 +1,1 @@
+I wrap a morphic host space window and listen for SystemWindow close events in order to close underlying bloc host window

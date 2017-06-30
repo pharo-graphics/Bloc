@@ -1,5 +1,7 @@
-shape creation
+instance creation
 newRectangle
+	<gtExample>
+	
 	^ (BlRectangle extent: 200 @ 100) asElement
 		background: Color transparent;
 		effect: (BlBlurBelowEffect radius: 4);

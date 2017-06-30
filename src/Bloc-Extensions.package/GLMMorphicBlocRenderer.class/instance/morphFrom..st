@@ -1,6 +1,9 @@
 rendering
 morphFrom: aBlocPresentation
-	| element universe host window |
+	| element universe host window wrapper |
+
+	wrapper := GLMMorphicBlocWrapperMorph new.
+	wrapper changeTableLayout.
 	
 	element := aBlocPresentation element.
 
@@ -29,9 +32,15 @@ morphFrom: aBlocPresentation
 					on: BlDblClickEvent
 					do: [ :evt | BlElementSelection on: evt target ]).
 			host := BlMorphicHost new.
+			space host: host.
 			universe spaceManager addSpace: space.
 			"then create a host space"
 			host createHostSpaceFor: space.
-			window := space hostSpace morphicWindow ].
-
-	^ window
+			window := space hostSpace morphicWindow.
+			
+			wrapper space: space ].
+	
+	wrapper addMorph: window.
+	window vResizing: #spaceFill.
+	window hResizing: #spaceFill.
+	^ wrapper

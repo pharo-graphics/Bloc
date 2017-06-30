@@ -1,5 +1,10 @@
-shape creation
+instance creation
 newLine
-	"^ (BlLineElement from:10@10 to:100@100)
+	<gtExample>
+
+	^ BlLineElement new
+		fromAnchor: (BlGeometryStaticAnchor position: 100 @ 100);
+		toAnchor: (BlGeometryStaticAnchor position: 200 @ 200);
 		border: (BlBorder paint: Color red width: 4);
-		yourself"
+		showAttachPoints;
+		yourself

@@ -1,12 +1,15 @@
 shape examples
-example3D
+exampleWithImage
 	| space |
 	space := BlSpace new
 		extent: 600 @ 450;
-		title: 'Shape example'.
+		title: 'Image example'.
 
 	space root
-		addChild: (self newCube3D position: 25@25);
+		addChild: (
+		((BlRectangle extent: 300@200) cornerRadius: 40) asElement
+		background: (BlImagePatternPaint form: PolymorphSystemSettings pharoLogoForm);
+		position: 100 @ 100);
 		yourself.
 
 	space root addEventHandler:

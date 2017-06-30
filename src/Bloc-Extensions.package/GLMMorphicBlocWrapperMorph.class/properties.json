@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 6/30/2017 11:09",
+	"super" : "Morph",
+	"category" : "Bloc-Extensions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"space"
+	],
+	"name" : "GLMMorphicBlocWrapperMorph",
+	"type" : "normal"
+}
