@@ -1,6 +1,6 @@
 instance creation
 newCube3D
-	<gtExample>
+	"<gtExample>"
 
 	^ BlElementExampleCubeOpenGL new
 		size: 550@400;
