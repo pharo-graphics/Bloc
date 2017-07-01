@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlFocusSearchDirectionAbsolute",
+	"category" : "Bloc-Focus",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFocusSearchDirectionDown",
+	"type" : "normal"
+}

@@ -5,7 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"bestCandidateBounds",
+		"temporaryBounds",
+		"focusedBounds"
+	],
 	"name" : "BlFocusFinder",
 	"type" : "normal"
 }

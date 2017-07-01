@@ -21,4 +21,42 @@ value: aFirstElement value: aSecondElement
 	|    A    |  |    B    |
 	|_________|  |_________|
 	"
+	<return: #Number>
 	
+	self bounds: firstBounds of: aFirstElement.
+	self bounds: secondBounds of: aSecondElement.
+	
+	(firstBounds top < secondBounds top)
+		ifTrue: [ ^ -1 ].
+	
+	(firstBounds top > secondBounds top)
+		ifTrue: [ ^ 1 ].
+	
+	(firstBounds left < secondBounds left)
+		ifTrue: [ ^ self isRightToLeft
+			ifTrue: [ 1 ]
+			ifFalse: [ -1 ] ].
+	
+	(firstBounds left > secondBounds left)
+		ifTrue: [ ^ self isRightToLeft
+			ifTrue: [ -1 ]
+			ifFalse: [ 1 ] ].
+	
+	(firstBounds bottom < secondBounds bottom)
+		ifTrue: [ ^ -1 ].
+	
+	(firstBounds bottom > secondBounds bottom)
+		ifTrue: [ ^ 1 ].
+	
+	(firstBounds right < secondBounds right)
+		ifTrue: [ ^ self isRightToLeft
+			ifTrue: [ 1 ]
+			ifFalse: [ -1 ] ].
+	
+	(firstBounds right > secondBounds right)
+		ifTrue: [ ^ self isRightToLeft
+			ifTrue: [ -1 ]
+			ifFalse: [ 1 ] ].
+	
+	"elements are distinct, treat them as equal"
+	^ 0

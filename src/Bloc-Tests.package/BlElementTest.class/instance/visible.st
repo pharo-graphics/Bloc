@@ -1,0 +1,3 @@
+initialization
+visible
+	^ self element
