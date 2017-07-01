@@ -1,0 +1,3 @@
+*Bloc
+keyValue
+	^ value

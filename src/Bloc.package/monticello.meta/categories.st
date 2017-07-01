@@ -1,6 +1,7 @@
 SystemOrganization addCategory: #Bloc!
 SystemOrganization addCategory: 'Bloc-Basic'!
 SystemOrganization addCategory: 'Bloc-Basic-Math'!
+SystemOrganization addCategory: 'Bloc-Basic-Properties'!
 SystemOrganization addCategory: 'Bloc-Basic-Support'!
 SystemOrganization addCategory: 'Bloc-Basic-Visual'!
 SystemOrganization addCategory: 'Bloc-Effect'!

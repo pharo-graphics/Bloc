@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlFocusability",
+	"category" : "Bloc-Basic-Properties",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFocusabilityBefore",
+	"type" : "normal"
+}

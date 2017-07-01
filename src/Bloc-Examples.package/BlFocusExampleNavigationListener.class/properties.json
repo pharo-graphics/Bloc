@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementEventListener",
+	"category" : "Bloc-Examples-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFocusExampleNavigationListener",
+	"type" : "normal"
+}

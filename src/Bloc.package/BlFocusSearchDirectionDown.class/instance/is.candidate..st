@@ -6,4 +6,4 @@ is: aDestinationBlBounds candidate: aSourceBlBounds
 
 	^ (aSourceBlBounds top < aDestinationBlBounds top
 		or: [ aSourceBlBounds bottom <= aDestinationBlBounds top ])
-			and: [ aSourceBlBounds bottom < aDestinationBlBounds bounds ]
+			and: [ aSourceBlBounds bottom < aDestinationBlBounds bottom ]

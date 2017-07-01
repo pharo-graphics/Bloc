@@ -5,7 +5,7 @@ nextFocus: aFocusedElement within: aFocusRootElement from: aFocusedBounds along:
 	nextFocus := nil.
 	theFocusables := OrderedCollection new.
 	
-	aFocusRootElement addFocusablesIn: theFocusables along: aBlFocusSearchDirection.
+	aFocusRootElement focusables: theFocusables along: aBlFocusSearchDirection.
 	theFocusables ifNotEmpty: [ 
 		nextFocus := self
 			nextFocus: aFocusedElement

@@ -7,7 +7,8 @@ initialize
 	zIndex := 10.
 	constraints := BlLayoutCommonConstraints new.
 	self resetChildrenArray.
-
+	
+	focusability := self defaultFocusability.
 	transform := self defaultTransformation.
 	geometry := self defaultGeometry.
 	geomResizer := self defaultPathResizer.

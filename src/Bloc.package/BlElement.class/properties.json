@@ -19,6 +19,7 @@
 		"effect",
 		"zIndex",
 		"visibility",
+		"focusability",
 		"space",
 		"styler",
 		"misc",

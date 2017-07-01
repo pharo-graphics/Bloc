@@ -1,7 +1,7 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/17/2016 11:05",
+	"commentStamp" : "AliakseiSyrel 7/1/2017 19:28",
 	"super" : "BlVisibility",
-	"category" : "Bloc-Layouts-Support",
+	"category" : "Bloc-Basic-Properties",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

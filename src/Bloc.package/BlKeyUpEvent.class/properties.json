@@ -5,7 +5,9 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"key"
+	],
 	"name" : "BlKeyUpEvent",
 	"type" : "normal"
 }
