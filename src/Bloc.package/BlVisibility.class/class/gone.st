@@ -1,3 +1,3 @@
 visibilities
 gone
-	^ GONE
+	^ gone ifNil: [ gone := BlVisibilityGone new ]

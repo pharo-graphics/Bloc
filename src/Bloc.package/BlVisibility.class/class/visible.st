@@ -1,3 +1,3 @@
 visibilities
 visible
-	^ VISIBLE
+	^ visible ifNil: [ BlVisibilityVisible new ]

@@ -1,3 +1,3 @@
 visibilities
 hidden
-	^ HIDDEN
+	^ hidden ifNil: [ hidden := BlVisibilityHidden new ]

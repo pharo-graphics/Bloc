@@ -1,3 +1,0 @@
-accessing
-gone
-	^ gone

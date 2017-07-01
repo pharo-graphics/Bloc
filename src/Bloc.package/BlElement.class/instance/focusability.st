@@ -2,4 +2,4 @@ accessing
 focusability
 	<return: #BlFocusability>
 
-	^ focusability
+	^ self focusabilityProperty value

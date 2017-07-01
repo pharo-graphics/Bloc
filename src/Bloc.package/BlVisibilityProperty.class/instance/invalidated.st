@@ -1,3 +1,5 @@
 change management
 invalidated
-	self owner requestParentLayout
+	self owner
+		requestLayout;
+		invalidate

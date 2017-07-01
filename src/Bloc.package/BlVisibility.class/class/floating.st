@@ -1,3 +1,0 @@
-visibilities
-floating
-	^ FLOATING

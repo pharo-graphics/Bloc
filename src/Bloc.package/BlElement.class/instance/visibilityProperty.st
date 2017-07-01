@@ -4,4 +4,4 @@ visibilityProperty
 			[ visibility := BlVisibilityProperty 
 				on: self 
 				named: #visibility 
-				default: BlVisibility visible ]
+				default: self defaultVisibility ]

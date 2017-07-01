@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlObjectProperty",
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFocusabilityProperty",
+	"type" : "normal"
+}

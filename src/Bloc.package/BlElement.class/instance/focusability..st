@@ -1,3 +1,3 @@
 accessing
-focusability: aBlFocusability
-	focusability := aBlFocusability
+focusability: aFocusability
+	self focusabilityProperty value: aFocusability
