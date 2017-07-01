@@ -1,3 +1,4 @@
 event firing
 fireAsFocusInEvent: anEvent
-	self dispatchEvent: anEvent asFocusInEvent target: anEvent target
+	"Send focusIn event that should bubble"
+	self fireEvent: anEvent asFocusInEvent

@@ -1,3 +1,4 @@
 event firing
 fireAsBlurEvent: anEvent
-	self fireEvent: anEvent asBlurEvent
+	"Send blur event that doesn't bubble, perform simple direct dispatch to the target"
+	self dispatchEvent: anEvent asBlurEvent target: anEvent target

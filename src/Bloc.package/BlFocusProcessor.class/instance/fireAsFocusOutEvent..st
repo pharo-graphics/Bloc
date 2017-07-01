@@ -1,3 +1,4 @@
 event firing
 fireAsFocusOutEvent: anEvent
-	self dispatchEvent: anEvent asFocusOutEvent target: anEvent target
+	"Send focusOut event that should bubble"
+	self fireEvent: anEvent asFocusOutEvent
