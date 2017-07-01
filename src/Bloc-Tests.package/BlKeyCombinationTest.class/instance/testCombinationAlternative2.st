@@ -2,23 +2,23 @@ tests
 testCombinationAlternative2
 	| kb kbr evt1 evt2 evt3 flag |
 	flag := false.
-	
-	evt1 := BlKeyboardEvent new
-		charCode: $c;
+
+	evt1 := BlKeyDownEvent new
+		key: Key c;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
-	evt2 := BlKeyboardEvent new
-		charCode: $d;
+	evt2 := BlKeyDownEvent new
+		key: Key d;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
-	evt3 := BlKeyboardEvent new
-		charCode: $e;
+	evt3 := BlKeyDownEvent new
+		key: Key e;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
-		
+
 	kb := BlShortcut new
 		combination:( BlCombinationAlternative new
 			add: (BlCombinationSequence new 
-				add: (BlKeyCodeCombination new alt;ctrl;char:$c);
-				add: (BlKeyCodeCombination new alt;ctrl;char:$e) );
-			add:(BlKeyCodeCombination new alt;ctrl;char:$d ));
+				add: (BlKeyCodeCombination new alt;ctrl;char: $c);
+				add: (BlKeyCodeCombination new alt;ctrl;char: $e) );
+			add:(BlKeyCodeCombination new alt;ctrl;char: $d));
 	   action:[flag := true].
 	
 	kbr := BlShortcutRegistry new.

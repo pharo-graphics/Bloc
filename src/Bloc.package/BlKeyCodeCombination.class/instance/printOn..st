@@ -6,5 +6,5 @@ printOn: aStream
 			print: self modifiers;
 			nextPut: $+ ].
 	aStream
-		nextPut: self charCode asCharacter asUppercase;
+		nextPut: self key asString;
 		nextPut: $]

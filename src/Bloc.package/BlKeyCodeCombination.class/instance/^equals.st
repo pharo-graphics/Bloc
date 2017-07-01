@@ -1,5 +1,5 @@
 comparing
 = aKeyCodeCombination
 self class = aKeyCodeCombination class ifFalse: [ ^ false ].
-	^ self charCode = aKeyCodeCombination charCode
+	^ self key = aKeyCodeCombination key
 		and: [ self modifiers = aKeyCodeCombination modifiers ]

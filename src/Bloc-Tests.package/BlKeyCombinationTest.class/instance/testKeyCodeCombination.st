@@ -3,8 +3,8 @@ testKeyCodeCombination
 	| kb kbr evt flag |
 	flag := false.
 	
-	evt := BlKeyboardEvent new
-		charCode: $c;
+	evt := BlKeyDownEvent new
+		key: Key c;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
 		
 	kb := 	BlShortcut new 
@@ -14,8 +14,8 @@ testKeyCodeCombination
 	kbr := BlShortcutRegistry new.
 	kbr add: kb.
 	(kbr processEvent: evt).
-	self assert: kb combination modifiers = evt modifiers.
-	self assert: kb combination charCode = evt charCode.
+	self assert: kb combination modifiers equals: evt modifiers.
+	self assert: kb combination key equals: evt key.
 	self assert: flag
 	
 	

@@ -1,3 +1,3 @@
 accessing
-char: aChar
-	self charCode: aChar
+char: aCharacter
+	self key: (Key character: aCharacter)

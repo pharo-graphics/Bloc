@@ -3,11 +3,11 @@ testCombinationSequence
 	| kb kbr evt1 evt2 flag |
 	flag := false.
 	
-	evt1 := BlKeyboardEvent new
-		charCode: $c;
+	evt1 := BlKeyDownEvent new
+		key: Key c;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
-	evt2 := BlKeyboardEvent new
-		charCode: $d;
+	evt2 := BlKeyDownEvent new
+		key: Key d;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
 	
 	kb := BlShortcut new

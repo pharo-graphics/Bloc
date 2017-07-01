@@ -1,3 +1,4 @@
 testing
 matchEvent: aKeyEvent
-	^ self charCode = aKeyEvent charCode and: [ self modifiers = aKeyEvent modifiers ]
+	^ self key = aKeyEvent key
+		and: [ self modifiers = aKeyEvent modifiers ]

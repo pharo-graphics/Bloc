@@ -3,11 +3,11 @@ testPendingCombinationSequence
 	| kb kbr evt1 evt2 flag |
 	flag := false.
 	
-	evt1 := BlKeyboardEvent new
-		charCode: $c;
+	evt1 := BlKeyDownEvent new
+		key: Key c;
 		modifiers: (BlKeyModifiers shift: false ctrl: true alt: true cmd: false).
-	evt2 := BlKeyboardEvent new
-		charCode: $d.
+	evt2 := BlKeyDownEvent new
+		key: Key d.
 		
 	kb := BlShortcut new
 		combination:(BlCombinationSequence new 
@@ -19,10 +19,10 @@ testPendingCombinationSequence
 	kbr add: kb.
 	
 	kbr processEvent: evt1.
-	self assert: kbr pendingShortcuts size = 1.
+	self assert: kbr pendingShortcuts size equals: 1.
 	
 	kbr processEvent: evt2.
-	self assert: kbr pendingShortcuts size = 0.
+	self assert: kbr pendingShortcuts size equals: 0.
 	
 	
 	
