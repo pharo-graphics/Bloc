@@ -1,3 +1,3 @@
 resizing
 fitContent
-	resizer := BlLayoutFitContentResizer uniqueInstance
+	resizer := BlLayoutResizer fitContent

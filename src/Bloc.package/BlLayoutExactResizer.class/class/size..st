@@ -5,6 +5,9 @@ size: aNumber
 		
 	aNumber = 50
 		ifTrue: [ ^ self fifty ].
+		
+	aNumber = 100
+		ifTrue: [ ^ self hundred ].
 
 	^ self new
 		size: aNumber;

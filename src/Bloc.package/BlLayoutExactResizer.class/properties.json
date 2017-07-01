@@ -4,7 +4,8 @@
 	"category" : "Bloc-Layouts-Support",
 	"classinstvars" : [
 		"zero",
-		"fifty"
+		"fifty",
+		"hundred"
 	],
 	"pools" : [ ],
 	"classvars" : [ ],

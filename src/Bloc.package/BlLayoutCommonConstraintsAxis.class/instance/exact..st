@@ -1,3 +1,3 @@
 resizing
 exact: aNumber
-	resizer := BlLayoutExactResizer size: aNumber
+	resizer := BlLayoutResizer exact: aNumber

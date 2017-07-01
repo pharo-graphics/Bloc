@@ -1,3 +1,3 @@
 accessing
 from: aFromProperty to: aToProperty
-	^ self from: aFromProperty to: aToProperty bidirectional: false
+	self from: aFromProperty to: aToProperty bidirectional: false

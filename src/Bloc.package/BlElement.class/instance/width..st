@@ -1,3 +1,11 @@
-accessing
+geometry extent
 width: aNumber
-	self extent: aNumber@self height
+	| aLayoutConstraints |
+
+	aLayoutConstraints := self constraints.
+	(aLayoutConstraints horizontal resizer isExact and: [ 
+		aLayoutConstraints horizontal resizer size = aNumber ])
+		ifTrue: [ ^ self ].
+
+	self constraintsDo: [ :c |
+		c horizontal exact: aNumber ]

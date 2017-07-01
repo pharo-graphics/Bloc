@@ -1,3 +1,3 @@
 accessing
-action: anObject
-	action := anObject
+action: aBlock
+	action := aBlock

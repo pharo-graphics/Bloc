@@ -3,4 +3,5 @@ cleanUp
 	super cleanUp.
 	
 	zero := nil.
-	fifty := nil
+	fifty := nil.
+	hundred := nil

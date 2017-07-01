@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Bloc-Tests-Space",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"space",
+		"host"
+	],
+	"name" : "BlSpaceTest",
+	"type" : "normal"
+}

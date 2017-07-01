@@ -1,2 +1,0 @@
-change management
-invalidated 

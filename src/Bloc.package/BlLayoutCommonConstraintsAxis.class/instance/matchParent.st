@@ -1,3 +1,3 @@
 resizing
 matchParent
-	resizer := BlLayoutMatchParentResizer uniqueInstance
+	resizer := BlLayoutResizer matchParent

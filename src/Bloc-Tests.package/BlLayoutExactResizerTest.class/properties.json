@@ -1,14 +1,13 @@
 {
 	"commentStamp" : "",
 	"super" : "TestCase",
-	"category" : "Bloc-Tests-Space",
+	"category" : "Bloc-Tests-Layouts-Support",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"space",
-		"host"
+		"resizer"
 	],
-	"name" : "BlSpaceTests",
+	"name" : "BlLayoutExactResizerTest",
 	"type" : "normal"
 }

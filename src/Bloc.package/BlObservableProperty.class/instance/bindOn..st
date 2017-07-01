@@ -1,3 +1,3 @@
 binding
 bindOn: aProperty
-	^ self bindOn: aProperty bidirectional: false
+	self bindOn: aProperty bidirectional: false

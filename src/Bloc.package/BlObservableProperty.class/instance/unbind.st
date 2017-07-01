@@ -1,4 +1,4 @@
 binding
 unbind
-	binding ifNotNil: [ binding unbind ].
+	binding ifNotNil: #unbind.
 	binding := nil
