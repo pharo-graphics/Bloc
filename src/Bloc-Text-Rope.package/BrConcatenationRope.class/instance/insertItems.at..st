@@ -1,4 +1,4 @@
-rope - accessing
+rope - inserting
 insertItems: aCollection at: anIndex
 	| leftSize aNewLeft aNewRight |
 	self assertIndexForInsert: anIndex.

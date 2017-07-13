@@ -2,8 +2,8 @@ rope - enumeration
 from: aStart to: anEnd do: aBlock
 	| leftSize isReversed |
 	
-	self assertAccessInsert: aStart.
-	self assertAccessInsert: anEnd.
+	self assertAccess: aStart.
+	self assertAccess: anEnd.
 	
 	leftSize := left size.
 	isReversed := anEnd < aStart.

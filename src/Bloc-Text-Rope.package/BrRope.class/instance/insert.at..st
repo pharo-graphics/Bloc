@@ -1,4 +1,4 @@
-rope - accessing
+rope - inserting
 insert: aRope at: anIndex
 	"Insert aRope after anIndex"
 	anIndex = 0

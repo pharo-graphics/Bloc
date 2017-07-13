@@ -1,8 +1,8 @@
 rope - accessing
 clearAttributes: aStart to: anEnd if: aBlock
 	| leftSize newLeft newRight |
-	self assertAccessInsert: aStart.
-	self assertAccessInsert: anEnd.
+	self assertAccess: aStart.
+	self assertAccess: anEnd.
 	
 
 	(aStart = 1 and: [ anEnd = self size ])

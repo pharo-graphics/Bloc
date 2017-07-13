@@ -1,8 +1,8 @@
 rope - accessing
 clearAttributes: aStart to: anEnd if: aBlock
 	| anClearedRope selectedAttributes |
-	self assertAccessInsert: aStart.
-	self assertAccessInsert: anEnd.
+	self assertAccess: aStart.
+	self assertAccess: anEnd.
 
 	selectedAttributes := self attributes reject: [ :anAssociation | aBlock value: anAssociation value ].
 

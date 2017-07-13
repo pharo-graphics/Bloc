@@ -1,8 +1,8 @@
 rope - accessing
 attributes: anAttributesCollection from: aStart to: anEnd
 	| anAttributeRope |
-	self assertAccessInsert: aStart.
-	self assertAccessInsert: anEnd.
+	self assertAccess: aStart.
+	self assertAccess: anEnd.
 	
 	anAttributesCollection
 		ifEmpty: [ ^ self ].

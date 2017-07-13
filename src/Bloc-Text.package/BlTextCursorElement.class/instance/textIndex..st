@@ -1,3 +1,4 @@
 accessing
-textIndex: anObject
-	textIndex := anObject
+textIndex: aNumber
+	textIndex := aNumber.
+	self requestLayout

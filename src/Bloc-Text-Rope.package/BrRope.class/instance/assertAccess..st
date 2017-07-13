@@ -1,5 +1,5 @@
 private - asserting
-assertAccessInsert: anIndex
+assertAccess: anIndex
 	"I am an index invariant; I make sure that rope operation that require
 	access by index do not go out of rope bounds"
 

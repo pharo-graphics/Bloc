@@ -1,7 +1,7 @@
 mouse handlers
 clickEvent: anEvent
 	| aTextEditElement aClickPosition |
-
+		
 	aTextEditElement := anEvent currentTarget.
 	aTextEditElement requestFocus.
 	
