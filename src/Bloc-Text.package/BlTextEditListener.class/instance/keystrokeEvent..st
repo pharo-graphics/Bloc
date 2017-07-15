@@ -22,6 +22,7 @@ keystrokeEvent: anEvent
 				along: BlFocusSearchDirectionUp new.
 			focusUp ifNotNil: #requestFocus.
 			^ self ].
+		
 	anEvent char = Character arrowDown
 		ifTrue: [
 			| focusFinder focusDown |
@@ -35,7 +36,7 @@ keystrokeEvent: anEvent
 
 	anEvent char = Character backspace
 		ifTrue: [ ^ self handleBackspace: anEvent ].
-		
+
 	anEvent char = Character delete
 		ifTrue: [ ^ self handleDelete: anEvent ].
 	

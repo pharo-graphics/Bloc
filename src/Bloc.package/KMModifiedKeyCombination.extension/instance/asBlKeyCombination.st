@@ -2,7 +2,9 @@
 asBlKeyCombination
 	| blkc mods |
 	mods := self modifier modifiers.
-	blkc := BlKeyCodeCombination new char: self character key.
+	blkc := BlKeyCodeCombination new
+		key:
+			(Key character: self character key).
 	blkc modifiers
 		ctrl: (mods includes: KMModifier ctrl);
 		shift: (mods includes: KMModifier shift);
