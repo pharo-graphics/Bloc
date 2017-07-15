@@ -6,6 +6,6 @@ charAtPoint: aPoint
 	aParagraphSpan := self
 		spanAtPoint: aPoint
 		ifFound: #yourself
-		ifNone: #youself.
+		ifNone: #yourself.
 
 	^ aParagraphSpan charAtPoint: aPoint

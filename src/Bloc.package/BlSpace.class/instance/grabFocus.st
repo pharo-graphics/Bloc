@@ -1,3 +1,3 @@
 focus managing
 grabFocus
-	self focused: true.
+	self focused: true

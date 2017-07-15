@@ -1,10 +1,4 @@
-focus request
+focus - processing
 processWindowFocusOut: anEvent
-	|evt|
-	self space ungrabFocus.
-	
-	evt := BlBaseFocusEvent new
-		target: lastFocusOwner;
-		yourself.
-		
-	self processBlur: evt.
+
+	self space ungrabFocus

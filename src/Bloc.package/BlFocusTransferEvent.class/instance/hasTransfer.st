@@ -1,0 +1,3 @@
+testing
+hasTransfer
+	^ transfer isNotNil

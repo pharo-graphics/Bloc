@@ -11,6 +11,6 @@ handleBackspace: anEvent
 		thenDo: [ :aCursor |
 			aText delete: aCursor textIndex + aDelta to: aCursor textIndex + aDelta.
 			aDelta := aDelta - 1.
-			self moveCursorLeft: aCursor in: aTextEditElement ].
+			self moveCursorLeft: aTextEditElement ].
 
 	aTextEditElement text: aText

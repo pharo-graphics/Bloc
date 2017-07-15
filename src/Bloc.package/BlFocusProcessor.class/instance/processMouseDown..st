@@ -1,9 +1,11 @@
-focus request
+focus - processing
 processMouseDown: anEvent
+	self hasFocusOwner
+		ifFalse: [ ^ self ].
 
-	(lastFocusOwner isNotNil and:[(anEvent target = lastFocusOwner) not]) ifTrue: [ 
-		self processBlur:(BlBaseFocusEvent new
-			target: lastFocusOwner;
-			yourself).
-		lastFocusOwner := nil 
-	]
+	(anEvent target = lastFocusOwner)
+		ifTrue: [ ^ self ].
+
+	self processBlur: lastFocusOwner.
+	"don't forget to forget focused element"
+	lastFocusOwner := nil

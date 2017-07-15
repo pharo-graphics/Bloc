@@ -3,5 +3,5 @@ blurEvent: anEvent
 	super blurEvent: anEvent.
 	
 	anEvent currentTarget
-		hideCursors;
+		hideCursor;
 		border: BlBorder empty

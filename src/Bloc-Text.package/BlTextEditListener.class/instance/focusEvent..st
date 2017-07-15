@@ -3,5 +3,5 @@ focusEvent: anEvent
 	super focusEvent: anEvent.
 
 	anEvent currentTarget
-		showCursors;
+		showCursor;
 		border: (BlBorder paint: (Color blue alpha: 0.5) width: 1)

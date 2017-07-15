@@ -1,6 +1,6 @@
 adding
-addCursorAtIndex: aTextIndex in: aTextEditElement
+addCursorAtIndex: aTextIndex in: aTextEditElement	
+	aTextEditElement showCursor.
 	self
-		moveCursor: aTextEditElement addCursor
-		to: aTextIndex
+		moveCursorTo: aTextIndex
 		in: aTextEditElement

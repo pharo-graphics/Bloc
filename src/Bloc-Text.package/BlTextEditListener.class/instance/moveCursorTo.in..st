@@ -1,5 +1,5 @@
 cursor - management
-moveCursor: aCursorElement to: aTextIndex in: aTextElement
+moveCursorTo: aTextIndex in: aTextElement
 	
 	self
 		assert: [ aTextIndex >= 0 ]
@@ -9,4 +9,4 @@ moveCursor: aCursorElement to: aTextIndex in: aTextElement
 		assert: [ aTextIndex <= aTextElement text size ]
 		description: [ 'Text index must be within text size' ].
 
-	aCursorElement textIndex: aTextIndex.
+	aTextElement showCursorAt: aTextIndex

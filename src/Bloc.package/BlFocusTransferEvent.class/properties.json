@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlBaseFocusEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"transfer"
+	],
+	"name" : "BlFocusTransferEvent",
+	"type" : "normal"
+}

@@ -1,9 +1,8 @@
 cursor - management
-addCursorAtPosition: aPoint in: aTextEditElement
+moveCursorAtPosition: aPoint in: aTextEditElement
 	| aTextIndex |
 	
 	aTextIndex := aTextEditElement paragraph charAtPoint: aPoint.
 	self
-		moveCursor: aTextEditElement addCursor
-		to: aTextIndex
+		moveCursorTo: aTextIndex
 		in: aTextEditElement
