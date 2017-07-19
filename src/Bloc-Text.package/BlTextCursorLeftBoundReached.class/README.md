@@ -1,1 +1,0 @@
-Is sent when cursor reaches the left editor bound

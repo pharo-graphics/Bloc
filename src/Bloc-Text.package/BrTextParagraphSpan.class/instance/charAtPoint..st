@@ -5,7 +5,7 @@ charAtPoint: aPoint
 
 	aWidth := (aPoint x - self origin x) max: 0.
 	aMeasurer := self measurer.
-	
+
 	aMeasurer
 		reset;
 		measure: self textRun

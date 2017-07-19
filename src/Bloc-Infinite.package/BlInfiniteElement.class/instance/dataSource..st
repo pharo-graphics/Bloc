@@ -1,3 +1,7 @@
 accessing
-dataSource: anObject
-	dataSource := anObject
+dataSource: aDataSource
+	dataSource
+		ifNotNil: [ dataSource removeEventHandler: dataSourceObserver ].
+	
+	dataSource := aDataSource.
+	dataSource addEventHandler: dataSourceObserver

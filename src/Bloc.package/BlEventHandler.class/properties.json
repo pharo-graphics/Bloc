@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"action"
+		"action",
+		"eventClass"
 	],
 	"name" : "BlEventHandler",
 	"type" : "normal"

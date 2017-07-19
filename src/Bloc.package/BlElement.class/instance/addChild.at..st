@@ -21,6 +21,6 @@ addChild: anElement at: anIndex
 	"dispatch events/hooks after element has been added"
 	self dispatchChildAdded: anElement.
 	"mt managed children changed, request invalidation"
-	self managedChildrenChanged.
+	self managedChildrenChanged.	
 	"We should request layout from newly added element to mark it as dirty too"
 	anElement requestLayout.

@@ -5,9 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"eventClass"
-	],
+	"instvars" : [ ],
 	"name" : "BlBasicEventHandler",
 	"type" : "normal"
 }

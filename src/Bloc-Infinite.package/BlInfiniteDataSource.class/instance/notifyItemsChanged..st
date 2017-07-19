@@ -4,7 +4,7 @@ notifyItemsChanged: anInterval
 	This is an item change event, not a structural change event. It indicates that
 	any reflection of the data in the given position range is out of date and should
 	be updated. The items in the given range retain the same identity"
-
+	
 	self fireEvent: (BlInfiniteDataSourceItemRangeChanged
 		position: anInterval first
 		itemCount: anInterval size)

@@ -6,8 +6,16 @@ exampleText
 	text attributes: { BrFontWeightAttribute bold }.
 
 	textElement := self new.
+	textElement editListener: BlTextEditListener new.
 	textElement position: 50@50.
 	textElement text: text.
+	"textElement addShortcut: (
+		BlShortcut new
+			combination: (
+				BlKeyCodeCombination new
+					cmd;
+					key: Key arrowLeft);
+		action: [ self inform: 'Triggered!' ])."
 	textElement constraintsDo: [ :c |
 		c horizontal fitContent.
 		c vertical fitContent. ].
@@ -15,4 +23,14 @@ exampleText
 
 	space := BlSpace new.
 	space root addChild: textElement.
-	space show
+	space show.
+	
+	"textElement addShortcut: (
+		BlShortcut new
+			combination: (
+				BlKeyCodeCombination new
+					cmd;
+					key: Key arrowLeft);
+		action: [ self inform: 'Triggered!' ])."
+		
+	^ textElement

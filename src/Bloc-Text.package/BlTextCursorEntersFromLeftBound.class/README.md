@@ -1,1 +1,0 @@
-I am sent when a cursor want to enter a text edit element from left side

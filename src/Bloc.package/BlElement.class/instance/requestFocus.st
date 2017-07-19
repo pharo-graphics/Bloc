@@ -1,3 +1,5 @@
 focus requesting
 requestFocus
-	self space requestFocusFor: self
+	self isAttachedToSceneGraph
+		ifTrue: [ self space requestFocusFor: self ]
+		ifFalse: [ self focused: true ]

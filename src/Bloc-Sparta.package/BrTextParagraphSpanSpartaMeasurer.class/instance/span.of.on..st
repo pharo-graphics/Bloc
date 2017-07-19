@@ -18,3 +18,5 @@ span: aBrSpan of: aTextParagraph on: aSpartaCanvas
 
 	textRunIterator := textRun iterator.
 	metrics := aTextPainter metrics.
+	textParagraph := aTextParagraph.
+	textSpan := aBrSpan

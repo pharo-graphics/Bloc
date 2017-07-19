@@ -12,7 +12,9 @@
 		"textRunStart",
 		"textRunEnd",
 		"spanStart",
-		"spanEnd"
+		"spanEnd",
+		"textParagraph",
+		"textSpan"
 	],
 	"name" : "BrTextParagraphSpanSpartaMeasurer",
 	"type" : "normal"

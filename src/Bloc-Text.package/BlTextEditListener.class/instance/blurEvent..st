@@ -4,4 +4,5 @@ blurEvent: anEvent
 	
 	anEvent currentTarget
 		hideCursor;
-		border: BlBorder empty
+		border: BlBorder empty;
+		background: BlBackground transparent
