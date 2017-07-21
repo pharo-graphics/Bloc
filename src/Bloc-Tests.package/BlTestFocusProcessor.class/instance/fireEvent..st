@@ -1,3 +1,3 @@
-as yet unclassified
+event firing
 fireEvent: anEvent
 	firedEvents add: anEvent

@@ -1,4 +1,4 @@
-as yet unclassified
+composition
 + aKeyCodeCombination
 	self assert: [ self class = aKeyCodeCombination class ].
 	^ BlCombinationSequence withAll: { self . aKeyCodeCombination }

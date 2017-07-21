@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "AliakseiSyrel 1/22/2017 17:20",
-	"super" : "BlGeomResizer",
+	"super" : "BlGeometryResizer",
 	"category" : "Bloc-Basic-Support",
 	"classinstvars" : [
 		"uniqueInstance"

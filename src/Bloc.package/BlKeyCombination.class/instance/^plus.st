@@ -1,3 +1,3 @@
-as yet unclassified
+composition
 + aKeyCombination
 	^ BlCombinationSequence withAll:{self. aKeyCombination}

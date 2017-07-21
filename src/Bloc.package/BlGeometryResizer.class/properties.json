@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlGeomResizer",
+	"name" : "BlGeometryResizer",
 	"type" : "normal"
 }

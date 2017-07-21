@@ -7,5 +7,4 @@ isAttachedToSceneGraph
 	"To support temporary detachment/attachment which sets parent to nil but
 	preserves reference to space we can not recursively go up in parent's hierarchy
 	and have to check space reference existence instead"
-	^ self space isNotNil and: [
-		self space hostSpace isNotNil ]
+	^ self space isNotNil "and: [ self space hostSpace isNotNil ]"

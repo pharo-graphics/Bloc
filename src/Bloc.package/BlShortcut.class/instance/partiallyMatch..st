@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 partiallyMatch: anEventBuffer
 	^ self combination partiallyMatch: anEventBuffer

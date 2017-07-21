@@ -2,7 +2,7 @@ tests
 testFocus
 	self assert: self child focused not.
 	self assert: self root focused not.
-
+	
 	self child requestFocus.
 	
 	self assertFiredEventIs: BlFocusInEvent target: self child withPropagation: false.

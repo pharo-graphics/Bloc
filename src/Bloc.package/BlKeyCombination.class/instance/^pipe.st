@@ -1,3 +1,3 @@
-as yet unclassified
+composition
 | aKeyCombination
 	^ BlCombinationAlternative withAll:{self. aKeyCombination}
