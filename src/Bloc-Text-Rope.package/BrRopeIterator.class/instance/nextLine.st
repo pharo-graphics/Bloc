@@ -1,18 +1,17 @@
 accessing
 nextLine
-	| lineFound initialValue aSegment |
+	| aSegment |
+	
+	self hasNext
+		ifFalse: [ self error: 'reached end of rope' ].
+	
+	(self isNewLine: self peek) ifTrue: [
+		self hasNext ifTrue: [ self next ].
+		^ BrCollectionRope collection: '' ].
+	
+	aSegment := self nextSegment: [ :anItem | self isNewLine: anItem ].
 
-	initialValue := self isNewLine: self peek.		
-	lineFound := false.
-
-	aSegment := self nextSegment: [ :item |
-		lineFound
-			ifFalse: [ (self isNewLine: item)
-				ifTrue: [ lineFound := true ]
-				ifFalse: [ initialValue ] ]
-			ifTrue: [ initialValue not ] ].
-
-	(self hasNext and: [ self isNewLine: self peek ])
+	(self hasNext and: [ (self isNewLine: self peek) and: [ self position + 1 < self rope size ] ])
 		ifTrue: [ self next ].
-
+		
 	^ aSegment
