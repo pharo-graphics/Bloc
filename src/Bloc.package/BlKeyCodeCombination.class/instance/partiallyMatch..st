@@ -1,3 +1,0 @@
-testing
-partiallyMatch: aKeyEvent
-	^ false

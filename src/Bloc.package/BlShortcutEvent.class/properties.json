@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 7/25/2017 12:54",
+	"super" : "BlKeyboardEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"buffer"
+	],
+	"name" : "BlShortcutEvent",
+	"type" : "normal"
+}

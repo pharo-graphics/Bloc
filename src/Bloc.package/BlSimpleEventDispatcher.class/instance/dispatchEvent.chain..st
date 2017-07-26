@@ -12,5 +12,5 @@ dispatchEvent: anEvent chain: aTail
 		theHandlers dispatchEvent: anEvent ].
 	
 	"shortcutHandler is special case, treat it differently"
-	(shortcutHandler wantsEvent: anEvent) ifTrue: [
-		shortcutHandler handleEvent: anEvent ]
+	(anEvent isConsumed not and: [ shortcutHandler wantsEvent: anEvent ])
+		ifTrue: [ shortcutHandler handleEvent: anEvent ]

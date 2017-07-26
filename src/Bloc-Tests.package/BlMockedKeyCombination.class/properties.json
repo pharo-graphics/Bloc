@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 7/22/2017 13:06",
+	"super" : "BlKeyCombination",
+	"category" : "Bloc-Tests-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"shouldMatch"
+	],
+	"name" : "BlMockedKeyCombination",
+	"type" : "normal"
+}

@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 7/25/2017 20:53",
 	"super" : "Object",
 	"category" : "Bloc-KeyBinding",
 	"classinstvars" : [ ],
@@ -7,8 +7,6 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"name",
-		"target",
-		"category",
 		"description",
 		"combination",
 		"action"

@@ -3,9 +3,9 @@ processMouseDown: anEvent
 	self hasFocusOwner
 		ifFalse: [ ^ self ].
 
-	(anEvent target = lastFocusOwner)
+	(anEvent target = focusOwner)
 		ifTrue: [ ^ self ].
 
-	self processBlur: lastFocusOwner.
+	self processBlur: focusOwner.
 	"don't forget to forget focused element"
-	lastFocusOwner := nil
+	focusOwner := nil

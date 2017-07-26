@@ -1,3 +1,3 @@
-accessing
-add: aKeyBinding
-	self shortcuts add: aKeyBinding
+adding / removing
+add: aBlShortcut
+	self shortcuts add: aBlShortcut

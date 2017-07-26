@@ -4,11 +4,11 @@ processFocus: anElement
 		assert: [ anElement isNotNil ]
 		description: [ 'Can not give focus to nil' ].
 	self
-		assert: [ anElement ~= lastFocusOwner ]
+		assert: [ anElement ~= focusOwner ]
 		description: [ 'Can not give focus to the already focused element' ].
 
 	"first make element to be focused"
-	lastFocusOwner := anElement.
+	focusOwner := anElement.
 	self space focusOwner: anElement.
 	anElement focused: true.
 

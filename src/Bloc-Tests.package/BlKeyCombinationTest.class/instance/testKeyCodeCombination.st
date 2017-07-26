@@ -1,26 +1,23 @@
 tests
 testKeyCodeCombination
-	| kb kbr evt flag |
+	| shortcut flag |
+	<gtExample>
+	self setUp.
 	flag := false.
-	evt := BlKeyDownEvent new
-		key: Key c;
-		modifiers:
-			(BlKeyModifiers
-				shift: false
-				ctrl: true
-				alt: true
-				cmd: false).
-	kb := BlShortcut new
-		combination:
-			(BlKeyCodeCombination new
-				alt;
-				ctrl;
-				key:
-					(Key character: $c));
+	
+	buffer pressed: true key: Key leftControl.
+	buffer pressed: false key: Key rightControl.
+	buffer pressed: true key: Key leftAlt.
+	buffer pressed: false key: Key rightAlt.
+	buffer pressed: true key: Key c.
+				
+	shortcut := BlShortcut new
+		combination: (BlKeyCombination builder alt; control; key: Key c; build);
 		action: [ flag := true ].
-	kbr := BlShortcutRegistry new.
-	kbr add: kb.
-	kbr processEvent: evt.
-	self assert: kb combination modifiers equals: evt modifiers.
-	self assert: kb combination key equals: evt key.
-	self assert: flag
+
+	handler shortcutRegistry add: shortcut.
+	handler handleEvent: event.
+	
+	self assert: flag.
+
+	self tearDown

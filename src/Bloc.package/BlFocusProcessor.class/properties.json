@@ -6,7 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"lastFocusOwner"
+		"focusOwner"
 	],
 	"name" : "BlFocusProcessor",
 	"type" : "normal"

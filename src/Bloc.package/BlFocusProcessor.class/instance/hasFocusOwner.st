@@ -5,4 +5,4 @@ hasFocusOwner
 	Note: focus owner may not exist during space initialization or inbetween blur and focus events"
 	<return: #Boolean>
 	
-	^ lastFocusOwner isNotNil
+	^ focusOwner isNotNil

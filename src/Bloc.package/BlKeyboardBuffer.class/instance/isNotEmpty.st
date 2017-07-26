@@ -1,0 +1,3 @@
+testing
+isNotEmpty
+	^ events isNotEmpty

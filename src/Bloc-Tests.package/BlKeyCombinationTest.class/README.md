@@ -1,0 +1,1 @@
+I am an integration test of all key combinations

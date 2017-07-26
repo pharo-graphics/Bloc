@@ -1,3 +1,10 @@
-as yet unclassified
+event processing
 processKeystroke: anEvent
-	self preProcess: anEvent
+	| aTarget |
+	
+	self keystrokesAllowed
+		ifFalse: [ ^ self ].
+
+	aTarget := self findTarget: anEvent.
+	anEvent target: aTarget.
+	self fireEvent: anEvent.

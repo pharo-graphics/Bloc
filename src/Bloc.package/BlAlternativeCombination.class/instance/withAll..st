@@ -1,0 +1,3 @@
+adding
+withAll: aCollectionOfCombinations
+	self combinations addAll: aCollectionOfCombinations

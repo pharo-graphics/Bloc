@@ -1,11 +1,19 @@
-as yet unclassified
+event processing
 processKeyDown: anEvent
+	| aTarget aShortcutEvent |
 
-	self preProcess: anEvent.
-	anEvent isConsumed
+	(self buffer hasEvent: anEvent key)
 		ifTrue: [ ^ self ].
-	anEvent key = Key tab
-		ifTrue: [ 
-			anEvent modifiers isShift
-				ifTrue: [ self previousFocusable requestFocus ]
-				ifFalse: [ self nextFocusable requestFocus ] ]
+
+	self buffer add: anEvent.
+	
+	aTarget := self findTarget: anEvent.
+	anEvent target: aTarget.
+	self fireEvent: anEvent.
+	
+	aShortcutEvent := BlShortcutEvent new.
+	aShortcutEvent buffer: self buffer.
+	aShortcutEvent target: aTarget.
+	self fireEvent: aShortcutEvent.
+
+	preventKeystrokes := aShortcutEvent isConsumed

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 7/26/2017 08:11",
+	"super" : "Object",
+	"category" : "Bloc-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlTestToExample",
+	"type" : "normal"
+}

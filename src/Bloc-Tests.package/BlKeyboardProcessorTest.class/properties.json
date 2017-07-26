@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Bloc-Tests-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"processor",
+		"space"
+	],
+	"name" : "BlKeyboardProcessorTest",
+	"type" : "normal"
+}

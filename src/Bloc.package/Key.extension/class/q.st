@@ -1,3 +1,3 @@
 *Bloc
 q
-	^ self character: $q
+	^ self character: $Q

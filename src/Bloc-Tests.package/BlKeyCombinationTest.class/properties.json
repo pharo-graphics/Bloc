@@ -1,11 +1,15 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 7/22/2017 13:07",
 	"super" : "TestCase",
-	"category" : "Bloc-Tests-Core",
+	"category" : "Bloc-Tests-KeyBinding",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"buffer",
+		"event",
+		"handler"
+	],
 	"name" : "BlKeyCombinationTest",
 	"type" : "normal"
 }

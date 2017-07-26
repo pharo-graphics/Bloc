@@ -5,7 +5,10 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"buffer",
+		"preventKeystrokes"
+	],
 	"name" : "BlKeyboardProcessor",
 	"type" : "normal"
 }

@@ -1,7 +1,7 @@
 focus - requesting
 looseFor: anElement
 	| evt |
-	lastFocusOwner ~= anElement
+	focusOwner ~= anElement
 		ifTrue: [ ^ self ].
 	
 	evt := BlBaseFocusEvent new
@@ -10,4 +10,4 @@ looseFor: anElement
 		
 	self processBlur: evt.
 	"don't forget to forget focused element"
-	lastFocusOwner := nil
+	focusOwner := nil

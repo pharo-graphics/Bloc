@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 7/23/2017 16:12",
+	"super" : "BlKeyCombinationVisitor",
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlKeyCombinationConverterDNF",
+	"type" : "normal"
+}

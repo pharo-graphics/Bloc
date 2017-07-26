@@ -1,3 +1,0 @@
-accessing
-matchEvent: aKeyEvent
-	self subclassResponsibility

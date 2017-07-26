@@ -1,3 +1,3 @@
 *Bloc
 y
-	^ self character: $y
+	^ self character: $Y

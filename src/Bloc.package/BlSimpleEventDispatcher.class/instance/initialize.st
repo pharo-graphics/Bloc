@@ -10,4 +10,4 @@ initialize
 	not visible to users, think of it as implementation detail"
 	filters := nil. "BlHandlerRegistry"
 	handlers := nil. "BlHandlerRegistry"
-	shortcutHandler := BlShorcutHandler new
+	shortcutHandler := BlShortcutHandler new

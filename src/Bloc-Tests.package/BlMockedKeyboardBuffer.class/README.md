@@ -1,0 +1,1 @@
+I am a special mocked keyboard buffer with configurable key pressed state for testing purposes

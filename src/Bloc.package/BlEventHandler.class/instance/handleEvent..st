@@ -1,3 +1,3 @@
-as yet unclassified
+events
 handleEvent: anEvent
 	self action cull: anEvent

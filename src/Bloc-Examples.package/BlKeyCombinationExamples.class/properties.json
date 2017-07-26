@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 7/22/2017 19:27",
+	"super" : "Object",
+	"category" : "Bloc-Examples-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlKeyCombinationExamples",
+	"type" : "normal"
+}

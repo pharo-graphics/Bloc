@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Bloc-Tests-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"shortcut"
+	],
+	"name" : "BlShortcutTest",
+	"type" : "normal"
+}

@@ -1,3 +1,7 @@
-as yet unclassified
+event processing
 processTextInput: anEvent
-	self preProcess: anEvent
+	| aTarget |
+	
+	aTarget := self findTarget: anEvent.
+	anEvent target: aTarget.
+	self fireEvent: anEvent.

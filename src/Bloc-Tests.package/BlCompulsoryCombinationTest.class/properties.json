@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Bloc-Tests-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"combination",
+		"buffer"
+	],
+	"name" : "BlCompulsoryCombinationTest",
+	"type" : "normal"
+}

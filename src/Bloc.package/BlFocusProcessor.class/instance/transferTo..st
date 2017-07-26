@@ -8,7 +8,7 @@ transferTo: anElement
 		ifFalse: [ ^ self requestFor: anElement ].
 
 	self processTransfer: anElement.
-	self processBlur: lastFocusOwner.
+	self processBlur: focusOwner.
 	"don't forget to forget focused element"
-	lastFocusOwner := nil.
+	focusOwner := nil.
 	self processFocus: anElement

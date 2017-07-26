@@ -1,3 +1,3 @@
-accessing
-addAll: aCollection
-	self shortcuts addAll: aCollection
+adding / removing
+addAll: aCollectionOfaBlShortcut
+	self shortcuts addAll: aCollectionOfaBlShortcut

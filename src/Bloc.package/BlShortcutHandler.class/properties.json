@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 7/23/2017 17:45",
+	"super" : "BlEventHandler",
+	"category" : "Bloc-KeyBinding",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"shortcutRegistry"
+	],
+	"name" : "BlShortcutHandler",
+	"type" : "normal"
+}

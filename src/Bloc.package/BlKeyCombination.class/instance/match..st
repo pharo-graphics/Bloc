@@ -1,3 +1,5 @@
-accessing
-match: anEventBuffer
-	self subclassResponsibility
+key matching
+match: aKeyboardBuffer
+	<return: #Number>
+
+	^ self subclassResponsibility
