@@ -8,8 +8,8 @@ updateAttachPoints
 	aFromAttachPosition := (aFromPoint - (fromAttach extent / 2.0)).
 	aToAttachPosition := (aToPoint - (toAttach extent / 2.0)).
 	
-	fromAttach relocate: aFromAttachPosition.
-	toAttach relocate: aToAttachPosition.
+	fromAttach position: aFromAttachPosition.
+	toAttach position: aToAttachPosition.
 
 	self geometry from: aFromPoint.
 	self geometry to: aToPoint
