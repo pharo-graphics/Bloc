@@ -1,7 +1,7 @@
 layout constraints
 constraintsDo: aBlock
 	"Perform aBlock with my constraints as argument.
-	After evaluation requests layout update!
+	Note: After evaluation I request a layout update!
 	aBlock must not be nil.
 	aBlock must accept exactly one argument"
 	self assert: aBlock isNotNil.

@@ -19,4 +19,4 @@ removeChildren: aListOfElements
 	self children removeAll: aListOfElements.
 	aListOfElements do: [ :anElement | self dispatchChildRemoved: anElement ].
 
-	self managedChildrenChanged
+	self childrenChanged

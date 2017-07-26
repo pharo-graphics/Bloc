@@ -22,6 +22,6 @@ addChildren: aListOfElements
 	"send hook after elements have been added"
 	aListOfElements do: [ :anElement | self dispatchChildAdded: anElement ].
 	"finally requesting children changed"
-	self managedChildrenChanged.
+	self childrenChanged.
 	"We should request layout from newly added elements to mark them as dirty too"
 	aListOfElements do: [ :anElement | anElement requestLayout ]

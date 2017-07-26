@@ -1,5 +1,5 @@
 layout
-onLayout: aBounds
+onLayout: aBounds	
 	super onLayout: aBounds.
 
 	self updateAttachPoints

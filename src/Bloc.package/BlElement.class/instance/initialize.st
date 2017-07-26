@@ -4,7 +4,7 @@ initialize
 
 	boundsCache := BlBoundsCache on: self.
 	eventDispatcher := BlBubblingEventDispatcher on: self.
-	zIndex := 10.
+	zIndex := 0.
 	constraints := BlLayoutCommonConstraints new.
 	self resetChildrenArray.
 

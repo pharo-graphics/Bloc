@@ -1,4 +1,4 @@
-testing
+key matching
 matches: aKeyboardBuffer
 	<return: #Boolean>
 

@@ -1,14 +1,15 @@
 attach points
 updateAttachPoints
-	| aFromPoint aToPoint |
+	| aFromPoint aToPoint aFromAttachPosition aToAttachPosition |
 
 	aFromPoint := fromAnchor positionWithin: self.
 	aToPoint := toAnchor positionWithin: self.
-
-	fromAttach positionAt: aFromPoint.
-	toAttach positionAt: aToPoint.
+	
+	aFromAttachPosition := (aFromPoint - (fromAttach extent / 2.0)).
+	aToAttachPosition := (aToPoint - (toAttach extent / 2.0)).
+	
+	fromAttach relocate: aFromAttachPosition.
+	toAttach relocate: aToAttachPosition.
 
 	self geometry from: aFromPoint.
-	self geometry to: aToPoint.
-
-	self boundsCache invalidateBoundsInLocal
+	self geometry to: aToPoint

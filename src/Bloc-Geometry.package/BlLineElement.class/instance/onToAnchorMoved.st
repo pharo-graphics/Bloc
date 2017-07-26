@@ -1,4 +1,4 @@
 anchor - hooks
 onToAnchorMoved
-	"I am sent when from anchor moved"
+	"I am sent when to-anchor moved"
 	self updateBounds

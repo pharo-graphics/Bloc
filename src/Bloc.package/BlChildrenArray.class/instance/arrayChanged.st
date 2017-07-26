@@ -1,3 +1,5 @@
 initialization
 arrayChanged
-	zArray := zReversedArray := managedArray := nil.
+	zArray := nil.
+	zReversedArray := nil.
+	managedArray := nil.

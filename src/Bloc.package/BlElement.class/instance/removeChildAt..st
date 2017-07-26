@@ -18,4 +18,4 @@ removeChildAt: anIndex
 	anElement parent: nil.
 	self children removeAt: anIndex.
 	self dispatchChildRemoved: anElement.
-	self managedChildrenChanged.
+	self childrenChanged.

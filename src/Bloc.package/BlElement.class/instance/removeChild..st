@@ -17,4 +17,4 @@ removeChild: anElement
 	self dispatchChildRemoved: anElement.
 	
 	"child removed"
-	self managedChildrenChanged
+	self childrenChanged

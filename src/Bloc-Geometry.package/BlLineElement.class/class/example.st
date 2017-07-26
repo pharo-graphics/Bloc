@@ -18,7 +18,7 @@ example
 	line1 fromAnchor: (BlGeometryStaticAnchor position: 100 @ 100).
 	line1 toAnchor: (BlGeometryAttachPointAnchor attachPoint: attachPoint).
 
-	line2 fromAnchor: (BlGeometryAttachPointAnchor attachPoint: attachPoint).
+	line2 fromAnchor: (BlGeometryAttachPointAnchor attachPoint: line1 toAttach).
 	line2 toAnchor: (BlGeometryStaticAnchor position: 500 @ 500).
 	
 	space := BlSpace new.

@@ -5,9 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"anchor"
-	],
+	"instvars" : [ ],
 	"name" : "BlAttachPoint",
 	"type" : "normal"
 }

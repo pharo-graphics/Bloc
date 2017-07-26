@@ -23,4 +23,4 @@ removeChildren
 	"send hook after elements has been removes"
 	oldChildren do: [ :anElement | self dispatchChildRemoved: anElement ].
 	"finally requesting children changed"
-	self managedChildrenChanged
+	self childrenChanged
