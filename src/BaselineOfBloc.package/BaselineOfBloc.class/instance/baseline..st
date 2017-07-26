@@ -15,9 +15,6 @@ baseline: spec
 				loads: #('GT-Examples' 'GT-Examples-UI');
 				repository: 'http://smalltalkhub.com/mc/Moose/GToolkit/main/' ];
 
-			baseline: 'TaskIt' with: [ spec
-				repository: 'github://sbragagnolo/taskit-2:dev-0.3' ];
-
 			project: 'OSWindow' with: [ spec
 				className: #ConfigurationOfOSWindow;
 				versionString: '1.2.17';
@@ -29,15 +26,6 @@ baseline: spec
 					className: #ConfigurationOfUFFIOpenGL;
 					versionString: #'stable';
 					repository: 'http://smalltalkhub.com/mc/ronsaldo/UFFIOpenGL/main/' ];
-			
-		   project: 'XMLParser' with: [ spec
-				className: #ConfigurationOfXMLParser;
-				repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ];
-			
-			project: 'PetitCSS' with: [ spec
-				className: #ConfigurationOfPetitCSS;
-				versionString: '1.1';
-				repository: 'http://smalltalkhub.com/mc/GlennCavarle/PetitCSS/main/' ];
 			
 			"main core package, implements element composition, event handling and universe infrastructure.
 			*core* must not depend on anything"
@@ -75,7 +63,6 @@ baseline: spec
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow UFFIOpenGL). ];
 			package: #'BlocHost-Morphic' with: [ spec requires: #(#Bloc). ];  
-			package: #'Bloc-ThreadSupport' with: [ spec requires: #(#Bloc #TaskIt). ]; 
 
 			"Contains moldable extensions to various GT tools
 				- requires sparta to perform custom rendering"
@@ -92,7 +79,6 @@ baseline: spec
 				
 				"core only loads very basic stuff"
 				'BlocHost-Morphic'
-				'BlocHost-OSWindow'
 
 				'Bloc-Animation'
 				'Bloc-Examples'
@@ -106,6 +92,7 @@ baseline: spec
 
 			group: 'development' with: #(
 				'core'
+				'BlocHost-OSWindow'
 				'BlocHost-SDL'
 				'BlocHost-Mock'
 				'Bloc-Tests'
