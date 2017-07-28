@@ -11,7 +11,7 @@ exampleText
 			c horizontal exact: 200.
 			c vertical fitContent ];
 		border: (BlBorder paint: Color blue width: 2);
-		background: (BlBackground fill: Color green);
+		background: (BlBackground paint: Color green);
 		text: (BrRopedText string: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sodales tempus porttitor. Donec ac lacus luctus, malesuada ligula in, gravida sapien. Sed varius nibh eget convallis accumsan').
 
 	txt2 := BlTextElement new

@@ -28,7 +28,7 @@ exampleHorizontalUsingWeightLTR
 		layout: BlLinearLayout horizontal;
 		size: 300@80;
 		position: 200 @ 100;
-		background: (BlBackground fill: Color blue);
+		background: (BlBackground paint: Color blue);
 		addChildren: {e1. e2. e3}.
 
 	space := BlSpace new.

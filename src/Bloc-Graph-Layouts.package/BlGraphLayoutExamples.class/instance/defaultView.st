@@ -1,4 +1,4 @@
 initialize-release
 defaultView
 	^ BlElement new
-		background: (BlBackground fill: Color blue)
+		background: (BlBackground paint: Color blue)

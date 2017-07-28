@@ -4,7 +4,7 @@ exampleParallel
 	| sp el a1 a2 cAnim |
 	sp := BlSpace new.
 	el := BlElement new
-		background: (BlBackground fill: Color blue);
+		background: (BlBackground paint: Color blue);
 		extent: 100 @ 100;
 		position: 100 @ 100.
 	a1 := BlTranslateAnimation new

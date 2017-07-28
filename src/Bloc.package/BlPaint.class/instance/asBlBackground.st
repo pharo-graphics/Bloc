@@ -1,3 +1,3 @@
 converting
 asBlBackground
-	^ BlBackground fill: self
+	^ BlBackground paint: self

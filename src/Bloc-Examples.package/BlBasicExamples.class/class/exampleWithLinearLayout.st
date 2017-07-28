@@ -18,7 +18,7 @@ exampleWithLinearLayout
 		layout: BlLinearLayout horizontal;
 		size: 200 @ 300;
 		position: 200@100;
-		background: (BlBackground fill: Color blue);
+		background: (BlBackground paint: Color blue);
 		padding: (BlInsets all:10);
 		addChildren: {c1.c2.c3}.
 	

@@ -2,7 +2,7 @@ nested bench
 createSquareAnd9SubSquaresLength: aLength min: aMin
 |theRoot pos|
 theRoot := BlElement new
-	background:(BlBackground fill: Color random);
+	background:(BlBackground paint: Color random);
 	size: (aLength ) asPoint;
 	addEventHandler: (BlOnMouseOverHandler do:[:e| e target background: Color random asBlBackground]).
 

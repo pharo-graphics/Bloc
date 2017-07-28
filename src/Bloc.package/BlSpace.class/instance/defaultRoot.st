@@ -2,5 +2,5 @@ accessing
 defaultRoot
 	^ BlElement new
 		space: self;
-		background:(BlBackground fill: Color white);
+		background:(BlBackground paint: Color white);
 		yourself

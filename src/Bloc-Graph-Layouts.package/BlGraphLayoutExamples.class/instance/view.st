@@ -5,4 +5,4 @@ view
 			constraints horizontal fitContent.
 			constraints vertical fitContent.
 			constraints padding: (BlInsets all: 10) ];
-		background: (BlBackground fill: Color white)
+		background: (BlBackground paint: Color white)

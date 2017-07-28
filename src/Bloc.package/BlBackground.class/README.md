@@ -1,4 +1,5 @@
 I represent the background of a BlElement.
-I define the fill, the image used to draw the background.
+Use me as an immutable object.
 
-Use me as an immutable object
+Background can be instantiated and composed directly or with the help of ===BlBackgroundBuilder===.
+See ===BlBackgroundBuilder=== for the related example

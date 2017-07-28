@@ -4,7 +4,7 @@ exampleSequentialLoop
 	| sp el cAnim |
 	sp := BlSpace new.
 	el := BlElement new
-		background: (BlBackground fill: Color blue);
+		background: (BlBackground paint: Color blue);
 		extent: 100 @ 100;
 		position: 100 @ 100.
 	cAnim := BlSequentialAnimation new

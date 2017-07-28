@@ -1,3 +1,3 @@
 *Bloc
 asBlBackground
-	^ BlBackground fill: self
+	^ BlBackground paint: self

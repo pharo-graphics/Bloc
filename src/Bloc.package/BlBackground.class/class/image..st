@@ -1,5 +1,5 @@
 instance creation
-image: aFormOrPaint
-	^ self new
-		fill: Color transparent image: aFormOrPaint;
-		yourself
+image: aForm
+	<return: #BlBackground>
+	
+	^ BlImageBackground image: aForm
