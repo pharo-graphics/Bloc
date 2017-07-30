@@ -1,0 +1,1 @@
+Is sent when element's extent in local coordinates changes.

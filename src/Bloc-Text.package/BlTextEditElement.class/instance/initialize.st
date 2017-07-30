@@ -4,4 +4,4 @@ initialize
 	
 	self clipChildren: false.
 	
-	cursor := nil "initialized lazyly"
+	cursor := nil. "initialized lazyly"

@@ -5,4 +5,5 @@ drawOnSpartaCanvas: aCanvas
 	paragraph
 		ifNil: [ ^ self ].
 
+	paragraph selection: self selection.
 	paragraph renderOn: aCanvas

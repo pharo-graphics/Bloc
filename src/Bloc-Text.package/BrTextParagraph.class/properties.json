@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 2/11/2017 23:39",
+	"commentStamp" : "AliakseiSyrel 7/28/2017 18:52",
 	"super" : "Object",
 	"category" : "Bloc-Text-Text",
 	"classinstvars" : [
@@ -16,7 +16,8 @@
 		"autoRelease",
 		"text",
 		"offset",
-		"tabWidth"
+		"tabWidth",
+		"selection"
 	],
 	"name" : "BrTextParagraph",
 	"type" : "normal"

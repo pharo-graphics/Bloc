@@ -9,4 +9,5 @@ reset
 	height := 0.
 	width := 0.
 	end := 0.
-	autoRelease := true
+	autoRelease := true.
+	selection := (0 to: 0) "empty selection"

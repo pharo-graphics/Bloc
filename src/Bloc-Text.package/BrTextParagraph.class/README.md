@@ -13,6 +13,7 @@ Public API and Key Messages
 - extent - return measured text extent
 - width - return measured text width
 - height - return measured text height
+- selection - return text selection interval (used to render selction during renderOn:)
  
 Internal Representation and Key Implementation Points.
 
@@ -24,5 +25,4 @@ Internal Representation and Key Implementation Points.
 	width:		<Number>
 	end:		<Number>
 	autoRelease:		<Boolean>
-
-    Implementation Points
+	selection: 	<Interval>

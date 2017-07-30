@@ -8,5 +8,5 @@ strokedBoundsOutside: aBlBounds of: anElement on: aCanvas
 		width: anElement border width * 2.0;
 		strokeOptions.
 
-	strokedBounds := spartaPath strokedBounds: strokeOptions.
+	strokedBounds := spartaPath strokedBoundsOn: aCanvas with: strokeOptions.
 	^ aBlBounds rectangle: strokedBounds

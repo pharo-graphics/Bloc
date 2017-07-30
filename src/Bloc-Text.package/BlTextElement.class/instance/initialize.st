@@ -11,4 +11,6 @@ initialize
 	
 	self constraintsDo: [ :c | 
 		c horizontal fitContent.
-		c vertical fitContent ]
+		c vertical fitContent ].
+	
+	selection := (0 to: 0) "empty selection interval"
