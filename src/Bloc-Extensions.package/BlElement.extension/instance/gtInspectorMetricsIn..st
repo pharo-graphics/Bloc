@@ -4,7 +4,7 @@ gtInspectorMetricsIn: composite
 	| morphPresentation |
 	morphPresentation := composite morph.
 	morphPresentation 
-		title: 'Metrics';
+		title: 'Metrics' translated;
 		display: [ 
 			[ | metrics |
 				self forceLayout.

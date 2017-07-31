@@ -13,4 +13,4 @@ initialize
 		c horizontal fitContent.
 		c vertical fitContent ].
 	
-	selection := (0 to: 0) "empty selection interval"
+	selection := BlTextSelection new

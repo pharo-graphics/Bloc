@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementEventListener",
+	"category" : "Bloc-Text-Text-Selection",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"origin",
+		"corner",
+		"container",
+		"selection"
+	],
+	"name" : "BlSelectionHandler",
+	"type" : "normal"
+}

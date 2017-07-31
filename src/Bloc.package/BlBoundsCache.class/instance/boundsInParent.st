@@ -1,3 +1,4 @@
 accessing
 boundsInParent
-	^ (self owner localBoundsToParent: (BlBounds fromRectangle: self boundsInLocal)) asRectangle
+	^ boundsInParent ifNil: [
+		boundsInParent := (self owner boundsInParent: BlBounds new) asRectangle ]

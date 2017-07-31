@@ -2,4 +2,4 @@ initialization
 initialize
 	super initialize.
 	
-	textIndex := 0
+	cursor := BlTextCursor new

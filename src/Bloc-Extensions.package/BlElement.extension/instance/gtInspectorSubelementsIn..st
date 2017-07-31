@@ -2,7 +2,7 @@
 gtInspectorSubelementsIn: composite
 	<gtInspectorPresentationOrder: 80>  
 	composite tree 
-		title: 'Children';
+		title: 'Children' translated;
 		rootsExpanded;
 		display: [:each | {each} ];
 		icon: [:each | | morphForm |

@@ -4,7 +4,7 @@ gtInspectorPreviewIn: composite
 	| morphPresentation |
 	morphPresentation := composite morph.
 	morphPresentation 
-		title: [ 'Preview' translated ];
+		title: 'Preview' translated;
 		display: [
 			[self asSpartaForm asMorph
 				on: #mouseDown send: #value: to: [ :event | 

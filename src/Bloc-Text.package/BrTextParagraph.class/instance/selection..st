@@ -1,3 +1,3 @@
 paragraph - accessing
-selection: anInterval
-	selection := anInterval
+selection: aBlTextSelection
+	selection := aBlTextSelection

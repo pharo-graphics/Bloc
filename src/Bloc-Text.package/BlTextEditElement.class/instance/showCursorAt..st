@@ -3,4 +3,4 @@ showCursorAt: anIndex
 	"Show a cursor at a given text index"
 
 	self showCursor.
-	self cursor textIndex: anIndex
+	self cursor cursorPosition: anIndex

@@ -1,7 +1,7 @@
 accessing
 text: aTextModel
 	"Change a text I represent.
-	Note, that aTextModel should be an instance of SpText.
+	Note, that aTextModel should be an instance of BrText.
 	aTextModel must not be nil"
 
 	self
@@ -9,5 +9,4 @@ text: aTextModel
 		description: [ 'A text model must not be nil' ].
 
 	text := aTextModel.
-	"text attributes: { BrTextForegroundAttribute paint: Color transparent }."
 	self textChanged

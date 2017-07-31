@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 3/21/2017 09:33",
 	"super" : "Object",
-	"category" : "Bloc-Text-Text",
+	"category" : "Bloc-Text-Text-Paragraph",
 	"classinstvars" : [
 		"matrix"
 	],

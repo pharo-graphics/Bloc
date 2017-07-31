@@ -19,7 +19,7 @@ render: aTextParagraph span: aSpan on: aCanvas
 	aBaseline := aBaseline + aTextParagraph offset.
 
 	"If transformation is just a translation there is no need
-	to changed transformation matrix of a canvas, we can just
+	to change transformation matrix of a canvas, we can just
 	translate a baseline - simply faster"
 	(hasTransformation not or: [ aTransformation isPureTranslation ])
 		ifTrue: [ 

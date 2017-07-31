@@ -10,4 +10,5 @@ reset
 	width := 0.
 	end := 0.
 	autoRelease := true.
-	selection := (0 to: 0) "empty selection"
+	selection := nil.
+	containerExtent := 0@0

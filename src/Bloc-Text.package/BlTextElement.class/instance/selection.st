@@ -1,9 +1,9 @@
 selection - management
 selection
-	<return: #Interval>
+	<return: #BlTextSelection>
 	
 	self
 		assert: [ selection isNotNil ]
-		description: [ 'Selection interval can not be nil' ].
+		description: [ 'Selection can not be nil' ].
 
 	^ selection
