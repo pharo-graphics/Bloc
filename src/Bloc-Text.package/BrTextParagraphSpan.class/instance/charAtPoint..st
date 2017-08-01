@@ -1,39 +1,50 @@
 geometry
 charAtPoint: aPoint
 	<return: #Number>
-	| aWidth aMeasurer aSpanIndex aTextRunIndex aTextRunWidth |
+	| aWidth aMeasurer |
 
 	aWidth := (aPoint x - self origin x) max: 0.
 	aMeasurer := self measurer.
 
-	aMeasurer
-		reset;
-		measure: self textRun
-		from: self textRunStart
-		to: self textRunEnd
-		width: aWidth.
-	
-	"how many complete glyphs fit or 1 if none"
-	aTextRunIndex := aMeasurer textRunEnd.
-	
-	"their width"
-	aTextRunWidth := aMeasurer width.
-	aSpanIndex := aMeasurer spanEnd.
-	
-	aTextRunIndex = self textRunEnd
-		ifTrue: [ ^ self from + aSpanIndex - 1 ].
+	^ (self textRunStart to: self textRunEnd)
+		findBinary: [ :anIndex |
+			aMeasurer
+				reset;
+				measure: self textRun
+				from: self textRunStart
+				to: anIndex
+				width: Float infinity.
+			(aWidth - aMeasurer width) sign ]
+		"exact match"
+		do: [ :anIndex | self from + aMeasurer spanEnd - 1 ]
+		
+		"need to measure a bit more"
+		ifNone: [ :a :b |
+			| leftIndex rightIndex leftWidth leftSpanIndex rightWidth rightSpanIndex spanIndex |
+			leftIndex := a ifNil: [ self textRunStart - 1 ].
+			rightIndex := b ifNil: [ self textRunEnd + 1 ].
 
-	aMeasurer
-		reset;
-		measure: self textRun
-		from: aTextRunIndex + 1
-		to: aTextRunIndex + 1
-		width: Float infinity.
+			aMeasurer
+				reset;
+				measure: self textRun
+				from: self textRunStart
+				to: leftIndex
+				width: Float infinity.
+			leftWidth := aMeasurer width.
+			leftSpanIndex := aMeasurer spanEnd.
 
-	aSpanIndex := aWidth < (aTextRunWidth - (aMeasurer width / 2.0))
-		ifTrue: [ aSpanIndex - 1 ]
-		ifFalse: [ aWidth > (aTextRunWidth + (aMeasurer width / 2.0))
-			ifTrue: [ aSpanIndex + 1 ]
-			ifFalse: [ aSpanIndex ] ].
-	
-	^ self from + aSpanIndex - 1
+			aMeasurer
+				reset;
+				measure: self textRun
+				from: self textRunStart
+				to: rightIndex
+				width: Float infinity.
+			rightWidth := aMeasurer width.
+			rightSpanIndex := aMeasurer spanEnd.
+
+			spanIndex := aWidth < (leftWidth + ((rightWidth - leftWidth) / 2.0))
+				ifTrue: [ leftSpanIndex ]
+				ifFalse: [ rightSpanIndex ].
+
+			self from + spanIndex - 1
+		]

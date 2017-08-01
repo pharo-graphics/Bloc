@@ -1,0 +1,2 @@
+selection handlers
+selectionLostEvent: anEvent

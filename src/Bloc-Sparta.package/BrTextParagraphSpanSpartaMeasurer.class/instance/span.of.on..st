@@ -8,7 +8,7 @@ span: aBrSpan of: aTextParagraph on: aSpartaCanvas
 		on: aSpartaCanvas.
 
 	textRun := aTextPainter textRun.
-	
+
 	self
 		assert: [ textRun isNull not ]
 		description: [ 'Created text run must not be nullptr' ].

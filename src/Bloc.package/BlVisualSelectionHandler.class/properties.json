@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlSelectionHandler",
+	"category" : "Bloc-Selection",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"selection"
+	],
+	"name" : "BlVisualSelectionHandler",
+	"type" : "normal"
+}

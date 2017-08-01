@@ -6,5 +6,7 @@ dragOverEvent: anEvent
 	self hasOrigin
 		ifFalse: [ ^ super dragOverEvent: anEvent ].
 
-	corner := anEvent position.	
+	corner := anEvent position.
+	area origin: (origin min: corner) corner: (corner max: origin).
+	
 	self selectionChanged

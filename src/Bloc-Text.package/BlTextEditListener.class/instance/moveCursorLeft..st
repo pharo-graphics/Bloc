@@ -5,9 +5,9 @@ moveCursorLeft: aTextEditElement
 		assert: [ aTextEditElement hasCursor ]
 		description: [ 'An element must have a cursor in order to move it right' ].
 	
-	aTextEditElement cursor textIndex <= 1
+	aTextEditElement cursor cursorPosition <= 1
 		ifTrue: [ ^ self transferCursorLeft: aTextEditElement ].
 
 	self
-		moveCursorTo: aTextEditElement cursor textIndex - 1
+		moveCursorTo: aTextEditElement cursor cursorPosition - 1
 		in: aTextEditElement
