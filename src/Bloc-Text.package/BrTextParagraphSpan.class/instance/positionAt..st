@@ -1,21 +1,30 @@
 geometry
 positionAt: anIndex
 	<return: #Point>
-	| aSpanIndex aMeasurer aPositionY |
+	| aSpanIndex aSpanIterator currentEnd transformedSpanIndex aMeasurer aPositionY |
 
 	aSpanIndex := anIndex - self from + 1.
-	aMeasurer := self measurer.
+	aSpanIterator := span iterator: 1 to: aSpanIndex.
 	
+	currentEnd := 0.
+	transformedSpanIndex := 0.
+	[ aSpanIterator hasNext and: [ currentEnd < aSpanIndex ] ]
+		whileTrue: [ (aSpanIterator next = Character tab)
+			ifTrue: [ transformedSpanIndex := transformedSpanIndex + 3 ]
+			ifFalse: [ transformedSpanIndex := transformedSpanIndex + 1 ].
+			currentEnd := currentEnd + 1 ].
+
+	aMeasurer := self measurer.
 	aPositionY := self origin y + (self height / 2.0).
 
-	anIndex isZero
+	transformedSpanIndex isZero
 		ifTrue: [ ^ 0 @ aPositionY ].
 	
 	aMeasurer
 		reset;
 		measure: self textRun
 		from: 1
-		to: aSpanIndex
+		to: transformedSpanIndex
 		width: Float infinity.
 		
 	^ (self origin x + aMeasurer width) @ aPositionY

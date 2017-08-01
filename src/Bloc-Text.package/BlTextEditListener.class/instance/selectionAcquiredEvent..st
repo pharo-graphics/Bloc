@@ -5,8 +5,8 @@ selectionAcquiredEvent: anEvent
 	
 	aTextEditElement := anEvent target.
 	
-	aFromIndex := aTextEditElement paragraph charAtPoint: anEvent bounds origin.
-	aToIndex := aTextEditElement paragraph charAtPoint: anEvent bounds corner.
+	aFromIndex := aTextEditElement paragraph indexAtPosition: anEvent bounds origin.
+	aToIndex := aTextEditElement paragraph indexAtPosition: anEvent bounds corner.
 	
 	aTextEditElement select: aFromIndex to: aToIndex.
 	

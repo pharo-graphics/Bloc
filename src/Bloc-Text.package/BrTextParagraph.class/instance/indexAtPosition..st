@@ -1,5 +1,5 @@
 paragraph - geometry
-charAtPoint: aPoint
+indexAtPosition: aPoint
 	<return: #Number>
 	| aParagraphSpan |
 
@@ -8,4 +8,4 @@ charAtPoint: aPoint
 		ifFound: #yourself
 		ifNone: #yourself.
 
-	^ aParagraphSpan charAtPoint: aPoint
+	^ aParagraphSpan indexAtPosition: aPoint

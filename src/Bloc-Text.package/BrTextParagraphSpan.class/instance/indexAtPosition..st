@@ -1,5 +1,5 @@
 geometry
-charAtPoint: aPoint
+indexAtPosition: aPoint
 	<return: #Number>
 	| aWidth aMeasurer |
 
