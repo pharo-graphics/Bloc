@@ -5,10 +5,10 @@ keystrokeEvent: anEvent
 	aTextEditElement := anEvent currentTarget.
 
 	anEvent char = Character arrowLeft
-		ifTrue: [ ^ self moveCursorLeft: aTextEditElement ].
+		ifTrue: [ ^ self "moveCursorLeft: aTextEditElement" ].
 
 	anEvent char = Character arrowRight
-		ifTrue: [ ^ self moveCursorRight: aTextEditElement ].
+		ifTrue: [ ^ self "moveCursorRight: aTextEditElement" ].
 	
 	anEvent char = Character arrowUp
 		ifTrue: [ ^ self moveCursorUp: aTextEditElement ].

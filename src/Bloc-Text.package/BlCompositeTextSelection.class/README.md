@@ -1,0 +1,1 @@
+I am a composite text selection consisting of multiple independent selections
