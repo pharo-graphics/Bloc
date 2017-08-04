@@ -3,4 +3,4 @@ isNotEmpty
 	"Return true if selection is empty, false otherwise"
 	<return: #Boolean>
 
-	^ from ~= to
+	^ self from ~= self to

@@ -1,13 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 8/3/2017 18:49",
-	"super" : "BlTextSelection",
+	"commentStamp" : "",
+	"super" : "Object",
 	"category" : "Bloc-Text-Text-Selection",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"selections"
+		"root"
 	],
-	"name" : "BlCompositeTextSelection",
+	"name" : "BlTextSelectionTree",
 	"type" : "normal"
 }

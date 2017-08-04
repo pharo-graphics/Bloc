@@ -2,5 +2,5 @@ initialization
 initialize
 	super initialize.
 	
-	from := 0.
-	to := 0
+	_from := 0.
+	_to := 0

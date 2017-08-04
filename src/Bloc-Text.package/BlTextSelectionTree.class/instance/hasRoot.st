@@ -1,0 +1,3 @@
+testing
+hasRoot
+	^ root isNotNil
