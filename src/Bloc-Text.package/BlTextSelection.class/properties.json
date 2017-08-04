@@ -5,10 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"_from",
-		"_to"
-	],
+	"instvars" : [ ],
 	"name" : "BlTextSelection",
 	"type" : "normal"
 }

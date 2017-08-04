@@ -2,7 +2,9 @@
 	"commentStamp" : "AliakseiSyrel 8/2/2017 16:25",
 	"super" : "BlTextSelection",
 	"category" : "Bloc-Text-Text-Selection",
-	"classinstvars" : [ ],
+	"classinstvars" : [
+		"empty"
+	],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [

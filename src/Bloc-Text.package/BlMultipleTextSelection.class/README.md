@@ -1,0 +1,1 @@
+I am just a collection of independent text selections that may overlap.

@@ -8,7 +8,7 @@ selectionChanged
 
 	self
 		selectedChildren: container
-		in: self selectionArea
+		in: (container globalBoundsToLocal: self selectionArea copy)
 		do: [ :anElement :aSelectionInLocal |
 			selected add: anElement.
 			oldSelected remove: anElement ifAbsent: [].

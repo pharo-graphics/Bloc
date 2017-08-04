@@ -1,0 +1,3 @@
+tree - testing
+isRoot
+	^ true

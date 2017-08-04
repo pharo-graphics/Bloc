@@ -1,3 +1,3 @@
-testing
+tree - testing
 hasRoot
 	^ root isNotNil

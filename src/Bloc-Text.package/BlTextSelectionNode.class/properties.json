@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 8/4/2017 19:49",
 	"super" : "Object",
 	"category" : "Bloc-Text-Text-Selection",
 	"classinstvars" : [ ],
@@ -9,7 +9,8 @@
 		"left",
 		"right",
 		"selection",
-		"high"
+		"high",
+		"parent"
 	],
 	"name" : "BlTextSelectionNode",
 	"type" : "normal"
