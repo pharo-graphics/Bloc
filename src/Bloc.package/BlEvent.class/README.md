@@ -1,0 +1,1 @@
+The specific announcement superclass for the context of Bloc.
