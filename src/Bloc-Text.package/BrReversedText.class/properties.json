@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 8/6/2017 14:19",
+	"super" : "BrText",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text"
+	],
+	"name" : "BrReversedText",
+	"type" : "normal"
+}

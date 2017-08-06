@@ -5,4 +5,6 @@ textRun: aTextRun start: aTextRunStart end: aTextRunEnd
 	
 	textRun := aTextRun.
 	textRunStart := aTextRunStart.
-	textRunEnd := aTextRunEnd
+	textRunEnd := aTextRunEnd.
+	
+	self assertTextRun

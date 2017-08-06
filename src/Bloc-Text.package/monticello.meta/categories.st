@@ -1,6 +1,5 @@
 SystemOrganization addCategory: #'Bloc-Text'!
 SystemOrganization addCategory: 'Bloc-Text-Element'!
-SystemOrganization addCategory: 'Bloc-Text-Events'!
 SystemOrganization addCategory: 'Bloc-Text-Examples'!
 SystemOrganization addCategory: 'Bloc-Text-Text'!
 SystemOrganization addCategory: 'Bloc-Text-Text-Attributes'!
