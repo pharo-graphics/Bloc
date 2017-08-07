@@ -1,0 +1,3 @@
+accessing
+hasPrevious
+	^ self shouldBeImplemented

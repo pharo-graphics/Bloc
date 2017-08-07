@@ -5,6 +5,11 @@ indexAtPosition: aPoint
 
 	aWidth := (aPoint x - self origin x) max: 0.
 	aMeasurer := self measurer.
+	
+	(aWidth <= 0)
+		ifTrue: [ ^ self from - 1 ].
+	(aWidth >= self width)
+		ifTrue: [ ^ self to ].
 
 	^ (self textRunStart to: self textRunEnd)
 		findBinary: [ :anIndex |
@@ -46,5 +51,4 @@ indexAtPosition: aPoint
 				ifTrue: [ leftSpanIndex ]
 				ifFalse: [ rightSpanIndex ].
 
-			self from + spanIndex - 1
-		]
+			self from + spanIndex - 1 ]

@@ -3,8 +3,15 @@ positionAt: anIndex
 	<return: #Point>
 	| aSpanIndex aSpanIterator currentEnd transformedSpanIndex aMeasurer aPositionY |
 
+	aPositionY := self origin y + (self height / 2.0).
+	
+	(anIndex = (self from - 1))
+		ifTrue: [ ^ (self origin x) @ aPositionY ].
+	(anIndex = self to)
+		ifTrue: [ ^ (self origin x + self width) @ aPositionY ].
+
 	aSpanIndex := anIndex - self from + 1.
-	aSpanIterator := span iterator: 1 to: aSpanIndex.
+	aSpanIterator := span iterator: 1 to: aSpanIndex.	
 	
 	currentEnd := 0.
 	transformedSpanIndex := 0.
@@ -15,7 +22,6 @@ positionAt: anIndex
 			currentEnd := currentEnd + 1 ].
 
 	aMeasurer := self measurer.
-	aPositionY := self origin y + (self height / 2.0).
 
 	transformedSpanIndex isZero
 		ifTrue: [ ^ 0 @ aPositionY ].
