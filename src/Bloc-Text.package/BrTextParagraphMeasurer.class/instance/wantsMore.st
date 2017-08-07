@@ -4,4 +4,10 @@ wantsMore
 	false otherwise"
 	<return: #Boolean>
 	
-	^ self textRunStart <= self textRunSize and: [ self availableWidth > 0 ]
+	self
+		assert: [ self text isNotEmpty or: [ self textRunStart isZero and: [ self textRunSize isZero ] ] ]
+		description: [ 'If text is empty start and size must be zero' ].
+		
+	^ self text isEmpty
+		ifTrue: [ false ]
+		ifFalse: [ self textRunStart <= self textRunSize and: [ self availableWidth > 0 ] ]

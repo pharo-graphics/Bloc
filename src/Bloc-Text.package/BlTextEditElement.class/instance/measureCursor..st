@@ -4,8 +4,11 @@ measureCursor: anExtentMeasurementSpec
 	
 	self hasCursor
 		ifFalse: [ ^ self ].
+		
+	self assertCursor.
 
 	aCursorElement := self cursor.
+	
 	aParagraphSpan := self paragraph spanAtIndex: aCursorElement cursorPosition.
 	aTextPosition := aParagraphSpan positionAt: aCursorElement cursorPosition.
 

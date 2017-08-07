@@ -4,7 +4,7 @@ positionAt: anIndex
 	| aSpanIndex aSpanIterator currentEnd transformedSpanIndex aMeasurer aPositionY |
 
 	aPositionY := self origin y + (self height / 2.0).
-	
+		
 	(anIndex = (self from - 1))
 		ifTrue: [ ^ (self origin x) @ aPositionY ].
 	(anIndex = self to)

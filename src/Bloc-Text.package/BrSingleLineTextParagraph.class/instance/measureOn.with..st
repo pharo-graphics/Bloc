@@ -9,9 +9,18 @@ measureOn: aCanvas with: aSpanMeasurer
 	aMeasurer maxHeight: maxHeight.
 	aMeasurer text: self text.
 
+	self text isEmpty ifTrue: [ 
+		aMeasurer
+			measureSpan: (BrSpan
+				text: (BrRopedText string: '')
+				attributes: #())
+			of: self
+			on: aCanvas
+			with: aSpanMeasurer ].
+
 	anIterator := text iterator.
 	[ anIterator hasNext ] whileTrue: [ 
-		"If we pass while-check we definitely moved to the next line,
+		"If we pass #hasNext check we will definitely move to the next span,
 		so can do the same with position"
 		aMeasurer movePosition: anIterator position.
 		aMeasurer

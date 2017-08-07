@@ -5,6 +5,14 @@ spanAtIndex: anIndex
 	self
 		assert: [ self spans isNotEmpty ]
 		description: [ 'There must be at least one span!' ].
+		
+	self
+		assert: [ self text isNotEmpty or: [ anIndex isZero ] ]
+		description: [ 'If text is empty index must be zero' ].
+		
+	self
+		assert: [ self text isEmpty or: [ anIndex between: 0 and: self text size ] ]
+		description: [ 'anIndex must be within text bounds (0 is allowed)' ].
 	
 	anIndex isZero
 		ifTrue: [ ^ self spans first ].
