@@ -1,0 +1,1 @@
+I am a Nautilus plugin that marks overriden methods in a class that are also defined in a trait with blue icon based on green icon

@@ -1,0 +1,3 @@
+accessing
+iterator
+	^ self shouldBeImplemented

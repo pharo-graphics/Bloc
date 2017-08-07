@@ -1,0 +1,3 @@
+accessing
+isEmpty
+	^ self shouldBeImplemented

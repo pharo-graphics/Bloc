@@ -1,0 +1,3 @@
+accessing
+lock
+	^ self shouldBeImplemented
