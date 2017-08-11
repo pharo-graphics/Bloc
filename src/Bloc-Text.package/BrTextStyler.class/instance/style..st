@@ -6,6 +6,6 @@ style: aBrText
 	stylingEnabled
 		ifFalse: [ ^ self ].
 
-	styledText := self privateStyle: aBrText.
+	styledText := self privateStyle: aBrText unstyle.
 	self fireEvent: (BrTextStyledEvent new text: styledText).
 	^ styledText

@@ -33,5 +33,14 @@ concatenate: aLeftRope and: aRightRope
 			^ newRight isConcatenation
 				ifTrue: [ self concatenationRope left: aLeftRope left right: newRight ]
 				ifFalse: [ self concatenate: aLeftRope left and: newRight ] ].
-		
+	
+	((aLeftRope size + aRightRope size > (self combineLength)) and: [ (aLeftRope size * 2) < aRightRope size ])
+		ifTrue: [ 
+			| aMiddle |
+			aMiddle := ((aLeftRope size + aRightRope size) / 2.0) floor asInteger - aLeftRope size.
+			^ self concatenationRope
+				left: (aLeftRope append: (aRightRope from: 1 to: aMiddle))
+				right: (aRightRope from: aMiddle + 1 to: aRightRope size) ].
+	
+	
 	^ self concatenationRope left: aLeftRope right: aRightRope

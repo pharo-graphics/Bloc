@@ -1,3 +1,3 @@
 accessing
 combineLength
-	^ 16
+	^ 32

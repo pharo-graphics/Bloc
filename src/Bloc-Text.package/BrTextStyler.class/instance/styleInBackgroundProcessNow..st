@@ -1,6 +1,6 @@
 styling
-styleInBackgroundProcess: aBrText
-
+styleInBackgroundProcessNow: aBrText
+	
 	self terminateBackgroundStylingProcess.
 	
 	stylingEnabled
@@ -9,7 +9,6 @@ styleInBackgroundProcess: aBrText
 	self monitor critical: [
 		backgroundProcess := [
 			| styledText |
-			delay asDelay wait.
 			text := aBrText unstyle.
 			styledText := self privateStyle: text.
 			self fireEvent: (BrTextStyledEvent new text: styledText)
