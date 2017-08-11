@@ -4,7 +4,7 @@ hasFlexibleChildInBothOrientations
 	<return: #Boolean>
 	
 	self childrenDo: [ :anElement |
-		(anElement horizontal resizer isExact or: [ 
-			anElement vertical resizer isExact ])
+		(anElement constraints horizontal resizer isExact or: [ 
+			anElement constraints vertical resizer isExact ])
 				ifFalse: [ ^ true ] ].
 	^ false

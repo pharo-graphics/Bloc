@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BrTextReplacementAttribute",
+	"super" : "BrTextAdornmentAttribute",
 	"category" : "Bloc-Text-Text-Attributes",
 	"classinstvars" : [ ],
 	"pools" : [ ],

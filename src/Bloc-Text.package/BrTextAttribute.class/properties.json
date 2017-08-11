@@ -5,7 +5,9 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"isOverwritableByStyler"
+	],
 	"name" : "BrTextAttribute",
 	"type" : "normal"
 }

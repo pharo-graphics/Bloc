@@ -16,4 +16,6 @@ scrollEvent: anEvent
 			ifTrue: [ anAmount negated ]
 			ifFalse: [ 0 ] ].
 	
-	anEvent currentTarget fling: dX @ dY
+	anEvent currentTarget fling: dX @ dY.
+	
+	anEvent consumed: true

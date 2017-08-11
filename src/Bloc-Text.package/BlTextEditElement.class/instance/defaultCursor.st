@@ -4,4 +4,4 @@ defaultCursor
 	<return: #BlTextCursorElement>
 
 	^ BlTextCursorElement new
-		background: Color red
+		background: Color black

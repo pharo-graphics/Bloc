@@ -1,6 +1,6 @@
 text - attributes
 unstyle
-	"Return a copy of a text without any style attributes"
+	"Return a copy of a text without all attributes that are overwritable by stylers"
 	<return: #BrText>
 	| anUnstyledRope |
 
@@ -9,6 +9,6 @@ unstyle
 	anUnstyledRope := anUnstyledRope
 		clearAttributes: 1
 		to: anUnstyledRope size
-		if: [ :anAttribute | anAttribute isStyle ].
+		if: [ :anAttribute | anAttribute isOverwritableByStyler ].
 	
 	self rope: anUnstyledRope

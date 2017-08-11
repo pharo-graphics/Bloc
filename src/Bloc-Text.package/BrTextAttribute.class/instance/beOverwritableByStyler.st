@@ -1,0 +1,3 @@
+style
+beOverwritableByStyler
+	isOverwritableByStyler := true
