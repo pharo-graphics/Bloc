@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEvent",
+	"category" : "Bloc-Text-Text-Styler",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text"
+	],
+	"name" : "BrTextStyledEvent",
+	"type" : "normal"
+}

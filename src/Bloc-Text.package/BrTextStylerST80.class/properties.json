@@ -12,10 +12,8 @@
 	"instvars" : [
 		"classOrMetaClass",
 		"workspace",
-		"font",
 		"parser",
-		"environment",
-		"pixelHeight"
+		"environment"
 	],
 	"name" : "BrTextStylerST80",
 	"type" : "normal"

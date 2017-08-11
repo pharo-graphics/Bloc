@@ -1,17 +1,20 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Bloc-Text-Text-Styler",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlEventTarget classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"backgroundProcess",
 		"text",
 		"monitor",
 		"view",
-		"stylingEnabled"
+		"stylingEnabled",
+		"eventDispatcher"
 	],
 	"name" : "BrTextStyler",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlEventTarget",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Text-Styler"
 }

@@ -1,7 +1,6 @@
 private
 setAttributesIn: aText fromRanges: ranges 
 	"use the . to find and assign TextAttributes to aText"
-	
 	| charAttr oldRuns |
 	
 	oldRuns := aText runs.

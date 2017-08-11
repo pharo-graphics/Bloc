@@ -10,7 +10,7 @@ privateStyle: aText
     ast doSemanticAnalysis.
 
 
-    self style: aText ast: ast.
+   self style: aText ast: ast.
 	self styledParse: aText.
 
     ^ aText

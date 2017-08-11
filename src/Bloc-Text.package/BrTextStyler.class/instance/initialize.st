@@ -1,3 +1,6 @@
 initialization
 initialize
-	stylingEnabled := true
+	super initialize.
+	
+	stylingEnabled := true.
+	eventDispatcher := BlBubblingEventDispatcher on: self

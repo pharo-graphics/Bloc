@@ -1,9 +1,11 @@
 styling
 style: aBrText
-
+	| styledText |
 	self terminateBackgroundStylingProcess.
 	
 	stylingEnabled
 		ifFalse: [ ^ self ].
 
-	self privateStyle: aBrText
+	styledText := self privateStyle: aBrText.
+	self fireEvent: (BrTextStyledEvent new text: styledText).
+	^ styledText

@@ -6,7 +6,10 @@ styleInBackgroundProcess: aBrText
 	stylingEnabled
 		ifFalse: [ ^ self ].
 
-	text := aBrText.
-
 	self monitor critical: [
-		backgroundProcess := [ self privateStyle: text ] forkAt: Processor userBackgroundPriority ]
+		text := aBrText.
+		backgroundProcess := [
+			| styledText |
+			styledText := self privateStyle: text.
+			self fireEvent: (BrTextStyledEvent new text: styledText)
+		 ] forkAt: Processor userBackgroundPriority ]

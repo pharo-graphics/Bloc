@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BrTextStyler",
+	"category" : "Bloc-Text-Text-Styler",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrTextNullStyler",
+	"type" : "normal"
+}
