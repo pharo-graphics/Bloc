@@ -2,7 +2,7 @@ mouse handlers
 scrollEvent: anEvent
 	| dX dY anAmount |
 	
-	anAmount := 500.
+	anAmount := 600.
 
 	dX := anEvent isScrollLeft
 		ifTrue: [ anAmount ]
