@@ -1,13 +1,15 @@
 layout
 shouldMeasure: anExtentMeasurementSpec
 	| aHeightSpec aWidthSpec isWidthValid isHeightValid |
-		
+
 	"If we don't have text layout we must re-measure"
 	paragraph
 		ifNil: [ ^ true ].
 
 	self isLayoutRequested
 		ifTrue: [ ^ true ].
+
+	true ifTrue: [ ^ true ].
 
 	aWidthSpec := anExtentMeasurementSpec widthSpec.
 	aHeightSpec := anExtentMeasurementSpec heightSpec.
