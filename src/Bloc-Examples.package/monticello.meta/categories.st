@@ -3,6 +3,8 @@ SystemOrganization addCategory: 'Bloc-Examples-Animation'!
 SystemOrganization addCategory: 'Bloc-Examples-Basic'!
 SystemOrganization addCategory: 'Bloc-Examples-Chicken'!
 SystemOrganization addCategory: 'Bloc-Examples-Events'!
+SystemOrganization addCategory: 'Bloc-Examples-Focus'!
 SystemOrganization addCategory: 'Bloc-Examples-KeyBinding'!
 SystemOrganization addCategory: 'Bloc-Examples-Layout'!
 SystemOrganization addCategory: 'Bloc-Examples-MobilePhone'!
+SystemOrganization addCategory: 'Bloc-Examples-Selection'!

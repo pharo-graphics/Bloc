@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlElementEventListener",
-	"category" : "Bloc-Examples-Events",
+	"category" : "Bloc-Examples-Focus",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

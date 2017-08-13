@@ -10,6 +10,6 @@ bindHolder: anElementHolder at: aPosition
 		clearDataSourcePositionUnknown;
 		addBound.
 
-	self onBindHolder: anElementHolder at: aPosition.
+	self onBindHolder: anElementHolder at: aPosition payloads: anElementHolder payloads.
 	anElementHolder clearPayload.
 	anElementHolder itemElement constraints infinite insetsDirty: true

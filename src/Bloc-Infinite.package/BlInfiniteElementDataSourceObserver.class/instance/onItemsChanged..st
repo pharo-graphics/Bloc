@@ -6,7 +6,7 @@ onItemsChanged: anEvent
 	needsUpdate := infiniteElement dataSourceManager
 		onItemRangeChanged: anEvent position
 		itemCount: anEvent itemCount
-		payload: nil.
+		payload: anEvent payload.
 
 	needsUpdate
 		ifTrue: [ self triggerUpdateProcessor ]

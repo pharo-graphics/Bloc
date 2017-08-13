@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"position",
-		"itemCount"
+		"itemCount",
+		"payload"
 	],
 	"name" : "BlInfiniteDataSourceItemRangeChanged",
 	"type" : "normal"

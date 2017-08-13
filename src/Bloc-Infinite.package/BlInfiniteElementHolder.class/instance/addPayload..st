@@ -1,5 +1,6 @@
 accessing - payload
 addPayload: anObject
+
 	anObject
 		ifNil: [ ^ self addEmptyPayload ].
 

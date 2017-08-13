@@ -40,4 +40,4 @@ addChild: anElement at: anIndex disappearing: isDisappearing
 			
 	anInfiniteConstraints pendingInvalidate ifTrue: [ 
 		anElementHolder itemElement changed.
-		anElementHolder pendingInvalidate: false ]
+		anInfiniteConstraints pendingInvalidate: false ]

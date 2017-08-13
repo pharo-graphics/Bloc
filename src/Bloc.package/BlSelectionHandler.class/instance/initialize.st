@@ -3,4 +3,4 @@ initialize
 	super initialize.
 	
 	area := BlBounds new.
-	selected := Set new
+	selected := IdentityDictionary new

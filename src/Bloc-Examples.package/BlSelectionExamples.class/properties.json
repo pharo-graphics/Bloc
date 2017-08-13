@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Bloc-Examples-Focus",
+	"category" : "Bloc-Examples-Selection",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlFocusExamples",
+	"name" : "BlSelectionExamples",
 	"type" : "normal"
 }

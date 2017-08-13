@@ -18,5 +18,5 @@ onItemRangeChanged: aPositionStart itemCount: anItemCount payload: anObjectPaylo
 		itemCount: anItemCount
 		payload: anObjectPayload).
 	existingCommandTypes addUpdate.
-	
+
 	^ pendingCommands size = 1

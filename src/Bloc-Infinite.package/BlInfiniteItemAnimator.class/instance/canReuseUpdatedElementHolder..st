@@ -1,3 +1,3 @@
 testing
 canReuseUpdatedElementHolder: anElementHolder
-	self shouldBeImplemented
+	^ true
