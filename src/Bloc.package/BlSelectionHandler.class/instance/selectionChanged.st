@@ -11,7 +11,7 @@ selectionChanged
 		in: (container globalBoundsToLocal: self selectionArea copy)
 		do: [ :anElement :aSelectionInLocal |
 			| anIntersectionInLocal isSelectionChanged |
-			
+
 			anIntersectionInLocal := self
 				intersect: anElement
 				in: aSelectionInLocal
@@ -31,6 +31,6 @@ selectionChanged
 			"return true / false if selection event was consumed (handled)"
 			isSelectionChanged
 				ifTrue: [ self handleSelected: anElement in: anIntersectionInLocal ]
-				ifFalse: [ true ] ].
+				ifFalse: [ false ] ].
 	
 	oldSelected keysDo: [ :anElement | self handleDeselected: anElement ]
