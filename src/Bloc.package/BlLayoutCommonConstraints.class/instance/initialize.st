@@ -10,5 +10,7 @@ initialize
 	minHeight := 0.
 	minWidth := 0.
 	
+	ignoredByLayout := false.
+	
 	"Initialzed lazily in at:"
 	constraints := nil

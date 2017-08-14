@@ -7,6 +7,4 @@ measure: anElement with: anExtentSpec
 	anElement managedChildrenDo: [ :each |
 		self
 			measureChild: each
-			parentSpec: anExtentSpec
-			widthUsed: 0
-			heightUsed: 0 ]
+			parentSpec: anExtentSpec ]

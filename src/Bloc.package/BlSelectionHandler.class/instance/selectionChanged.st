@@ -21,11 +21,11 @@ selectionChanged
 				at: anElement
 				ifPresent: [ :anExistingIntersection | isSelectionChanged := anExistingIntersection ~= anIntersectionInLocal ]
 				ifAbsent: [ isSelectionChanged := true ].
-			
+	
 			selected
 				at: anElement
 				put: anIntersectionInLocal.
-			
+
 			oldSelected removeKey: anElement ifAbsent: [].
 
 			"return true / false if selection event was consumed (handled)"

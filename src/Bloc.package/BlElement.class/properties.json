@@ -28,7 +28,7 @@
 		"outskirts"
 	],
 	"name" : "BlElement",
-	"commentStamp" : "AliakseiSyrel 5/16/2017 19:08",
+	"commentStamp" : "AliakseiSyrel 8/13/2017 18:24",
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal",

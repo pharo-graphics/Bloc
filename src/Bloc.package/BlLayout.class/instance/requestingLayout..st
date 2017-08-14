@@ -3,7 +3,7 @@ requestingLayout: aBoolean
 		
 	aBoolean
 		ifTrue: [ waitingLayout := true ]
-		ifFalse: [ waitingLayout
+		ifFalse: [ self waitingLayout
 			ifTrue: [ ^ self ] ].
 
 	requestingLayout := aBoolean

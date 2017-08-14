@@ -1,10 +1,10 @@
 measure
-measureMatching: children of: anElement with: anExtentSpec
+measureMatching: theChildren of: anElement with: anExtentSpec
 		
-	children size <= 1
-		ifTrue: [ ^ self ].
-		
-	children do: [ :child |
+	theChildren
+		ifEmpty: [ ^ self ].
+
+	theChildren do: [ :child |
 		| childWidthMeasureSpec childHeightMeasureSpec |
 		child constraints horizontal resizer isMatchParent
 			ifTrue: [ 

@@ -1,4 +1,4 @@
-iterator - accessing
+iterator - enumeration
 detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 

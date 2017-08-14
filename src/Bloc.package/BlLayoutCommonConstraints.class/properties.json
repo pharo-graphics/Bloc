@@ -12,7 +12,8 @@
 		"minHeight",
 		"minWidth",
 		"maxHeight",
-		"maxWidth"
+		"maxWidth",
+		"ignoredByLayout"
 	],
 	"name" : "BlLayoutCommonConstraints",
 	"type" : "normal"

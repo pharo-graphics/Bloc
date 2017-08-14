@@ -1,3 +1,3 @@
 accessing
-userData: aDict
-	misc userData: aDict
+userData: aDictionary
+	misc userData: aDictionary

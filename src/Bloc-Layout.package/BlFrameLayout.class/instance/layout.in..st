@@ -1,16 +1,18 @@
 layout
 layout: anElement in: aRectangle
-	| parentBounds |
+	| parentBounds childBounds |
+	
 	"first store parent's local bounds"
 	parentBounds := anElement constraints padding inset: (0@0 extent: aRectangle extent).
-
-	anElement managedChildren
-		select: [ :child | child visibility shouldLayout ]
-		thenDo: [ :child |
-			| childBounds |
+	"reuse the same instance for children bounds"
+	childBounds := BlBounds new.
+	
+	self
+		layeredChildren: anElement
+		do: [ :aChild |
 			"ask child for its measured bounds"
-			childBounds := child measuredBounds.
+			childBounds := aChild measuredBounds: childBounds.
 			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
-			childBounds := self align: child bounds: childBounds in: parentBounds.
+			childBounds := self align: aChild bounds: childBounds in: parentBounds.
 			"and finally set new bounds"
-			child applyLayoutIn: childBounds ]
+			aChild applyLayoutIn: childBounds ]
