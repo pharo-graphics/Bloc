@@ -4,6 +4,7 @@
 	"instvars" : [
 		"position",
 		"extent",
+		"elevation",
 		"geometry",
 		"parent",
 		"transform",

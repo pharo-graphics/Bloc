@@ -15,6 +15,7 @@ initialize
 	border := self defaultBorder.
 	background := self defaultBackground asBlBackground.
 	layout := self defaultLayout.
+	elevation := self defaultElevation.
 
 	pathCache := BlPathCache on: self.
 	misc := BlMiscProperties new.

@@ -5,4 +5,4 @@ selectAttributes: aBlock
 	which aBlock evaluates to true. Answer the new collection."
 	<return: #SequenceableCollection of: #BrTextAttribute>
 
-	^ #()
+	^ Set new

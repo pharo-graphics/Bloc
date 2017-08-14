@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 8/14/2017 20:43",
+	"super" : "BlElevation",
+	"category" : "Bloc-Basic-Properties",
+	"classinstvars" : [
+		"zero"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGlobalElevation",
+	"type" : "normal"
+}
