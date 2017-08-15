@@ -11,6 +11,6 @@ privateStyle: aText
 
 
    self style: aText ast: ast.
-	self styledParse: aText.
+	self extraStyle: aText ast: ast.
 
     ^ aText
