@@ -12,7 +12,7 @@ measureCursor: anExtentMeasurementSpec
 	aParagraphSpan := self paragraph spanAtIndex: aCursorElement cursorPosition.
 	aTextPosition := aParagraphSpan positionAt: aCursorElement cursorPosition.
 
-	aCursorElement measuredExtent: (2 @ aParagraphSpan height).
-	aCursorElement position: (aTextPosition - (2 @ aParagraphSpan height / 2.0)).
+	aCursorElement measuredExtent: (1 @ self measuredHeight).
+	aCursorElement position: (aTextPosition - (0 @ aParagraphSpan height / 2.0)).
 	
 	self measuredExtent: (self measuredExtent max: self cursor measuredExtent)
