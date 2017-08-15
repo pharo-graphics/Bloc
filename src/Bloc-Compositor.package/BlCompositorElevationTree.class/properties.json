@@ -1,0 +1,15 @@
+{
+	"classtraitcomposition" : "TBlRedBlackTree classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"root"
+	],
+	"name" : "BlCompositorElevationTree",
+	"commentStamp" : "AliakseiSyrel 8/16/2017 00:06",
+	"super" : "Object",
+	"traitcomposition" : "TBlRedBlackTree",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Compositor"
+}

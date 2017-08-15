@@ -5,7 +5,12 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlCompositorTree",
+	"instvars" : [
+		"parent",
+		"element",
+		"transformation",
+		"nodes"
+	],
+	"name" : "BlCompositorRenderingNode",
 	"type" : "normal"
 }

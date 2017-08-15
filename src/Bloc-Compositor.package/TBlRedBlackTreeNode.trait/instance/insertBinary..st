@@ -9,8 +9,12 @@ insertBinary: aRedBlackNode
 		ifTrue: [
 			self hasLeft
 				ifTrue: [ self left insertBinary: aRedBlackNode ]
-				ifFalse: [ self left: aRedBlackNode ] ]
+				ifFalse: [
+					self left: aRedBlackNode.
+					aRedBlackNode parent: self ] ]
 		ifFalse: [
 			self hasRight
 				ifTrue: [ self right insertBinary: aRedBlackNode ]
-				ifFalse: [ self right: aRedBlackNode ] ]
+				ifFalse: [
+					self right: aRedBlackNode.
+					aRedBlackNode parent: self ] ]

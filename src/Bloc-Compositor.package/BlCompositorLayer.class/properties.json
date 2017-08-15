@@ -5,12 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"left",
-		"right",
-		"elevation",
-		"nodes"
-	],
+	"instvars" : [ ],
 	"name" : "BlCompositorLayer",
 	"type" : "normal"
 }
