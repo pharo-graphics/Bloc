@@ -17,8 +17,8 @@ renderSelection: aBrTextParagraph on: aSpartaCanvas
 		aSelectionEndPosition := aSelectionEndSpan positionAt: anEnd.
 
 		aSelectionBounds := (aSelection to > aBrTextParagraph text size)
-			ifTrue: [ (aSelectionStartPosition x @ 0) corner: (aBrTextParagraph containerExtent x @ aBrTextParagraph height) ]
-			ifFalse: [ (aSelectionStartPosition x @ 0) corner: (aSelectionEndPosition x @ aBrTextParagraph height) ].
+			ifTrue: [ (aSelectionStartPosition x @ 0) corner: aBrTextParagraph containerExtent ]
+			ifFalse: [ (aSelectionStartPosition x @ 0) corner: (aSelectionEndPosition x @ aBrTextParagraph containerExtent y) ].
 
 		aSpartaCanvas fill
 			paint: ((Color r: 105 g: 171 b: 253 range: 255) alpha: 0.35);

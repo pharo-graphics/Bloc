@@ -2,7 +2,7 @@ iterator - enumeration
 previous
 	| anItem aSize aPosition |
 	
-	aSize := self rope size.
+	aSize := end.
 	
 	position <= (aSize + 1)
 		ifFalse: [ self error: 'Index out of bounds: ', position asString ].

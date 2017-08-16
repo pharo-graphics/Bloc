@@ -1,3 +1,3 @@
 accessing
 previous
-	^ self shouldBeImplemented
+	^ subIterator previous

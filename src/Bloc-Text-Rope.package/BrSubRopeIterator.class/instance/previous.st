@@ -1,3 +1,3 @@
-accessing
+iterator - enumeration
 previous
-	^ self shouldBeImplemented
+	^ subIterator previous
