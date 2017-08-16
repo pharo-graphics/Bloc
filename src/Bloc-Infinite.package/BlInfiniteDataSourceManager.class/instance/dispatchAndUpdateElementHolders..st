@@ -32,7 +32,7 @@ dispatchAndUpdateElementHolders: aCommand
 	
 	tmpCnt > 0 ifTrue: [ 
 		|tmpCommand|
-		tmpCommand := aCommand class
+		tmpCommand := aCommand class new
 			positionStart: tmpStart;
 			itemCount: tmpCnt;
 			payload: payload.
