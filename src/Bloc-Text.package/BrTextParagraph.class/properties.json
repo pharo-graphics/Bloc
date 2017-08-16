@@ -18,7 +18,8 @@
 		"offset",
 		"tabWidth",
 		"selection",
-		"containerExtent"
+		"containerExtent",
+		"session"
 	],
 	"name" : "BrTextParagraph",
 	"type" : "normal"

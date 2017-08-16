@@ -7,7 +7,5 @@ nextLine
 	
 	aStartPosition := iterator position.
 	aNextLine := iterator nextLine.
-	
-	^ BrSubText text: text from: aStartPosition to: aStartPosition + aNextLine size - 1
-	
-	"^ BrRopedText rope: iterator nextLine"
+
+	^ BrSubText text: text from: aStartPosition to: ((aStartPosition + aNextLine size - 1) max: aStartPosition)

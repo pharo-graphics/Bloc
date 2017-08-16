@@ -5,6 +5,9 @@ measureOn: aCanvas
 
 	self text lockDuring: [ aCanvas measureTextParagraph: self ].
 	
+	"we should store a session of the last successfull measurement"
+	session := Smalltalk session.
+
 	self
 		assert: [ self isNotEmpty ]
 		description: [ 'I must not be empty after measurement!' ]

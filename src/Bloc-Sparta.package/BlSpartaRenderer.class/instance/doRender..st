@@ -2,6 +2,14 @@ renderer - rendering
 doRender: aSpace
 	| theDirtyAreas |
 	
+	self
+		assert: [ session == Smalltalk session ]
+		description: [ 'Session has been changed! Fix your #prepareToRender: !' ].
+	
+	self
+		assert: [ spartaCanvas isValid ]
+		description: [ 'Sparta Canvas must be valid at this point!' ].
+	
 	"collect the dirty area to be updated"
 	theDirtyAreas := aSpace dirtyAreas 
 		collect: [ :each | each intersect: (0@0 extent: windowExtent) ifNone: [ nil ] ]
