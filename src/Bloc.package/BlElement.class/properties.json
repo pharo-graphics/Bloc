@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "TBlEventTarget classTrait",
+	"classtraitcomposition" : "TBlEventTarget classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"position",
@@ -31,7 +31,7 @@
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 8/13/2017 18:24",
 	"super" : "Object",
-	"traitcomposition" : "TBlEventTarget",
+	"traitcomposition" : "TBlEventTarget + TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [
 		"invalidateBounds"

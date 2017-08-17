@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "GlennCavarle 11/1/2016 13:41",
-	"super" : "Object",
-	"category" : "Bloc-Universe",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlHost",
-	"type" : "normal"
+	"commentStamp" : "GlennCavarle 11/1/2016 13:41",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Universe"
 }

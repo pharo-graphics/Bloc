@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 7/31/2017 16:18",
-	"super" : "Object",
-	"category" : "Bloc-Text-Text-Selection",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlTextSelection",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 7/31/2017 16:18",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Text-Selection"
 }

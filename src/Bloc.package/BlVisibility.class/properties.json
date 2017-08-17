@@ -1,15 +1,17 @@
 {
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlVisibility",
 	"commentStamp" : "AliakseiSyrel 5/17/2016 11:03",
 	"super" : "Object",
-	"category" : "Bloc-Basic-Properties",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
 	"classinstvars" : [
 		"gone",
 		"hidden",
 		"visible"
 	],
 	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlVisibility",
-	"type" : "normal"
+	"category" : "Bloc-Basic-Properties"
 }

@@ -1,14 +1,16 @@
 {
-	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
-	"super" : "Object",
-	"category" : "Bloc-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"position",
 		"extent"
 	],
 	"name" : "BlGeometry",
-	"type" : "normal"
+	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic"
 }

@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/20/2017 10:20",
-	"super" : "Object",
-	"category" : "Bloc-Focus",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"rootElement",
@@ -11,5 +7,11 @@
 		"secondBounds"
 	],
 	"name" : "BlFocusFinderComparator",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 5/20/2017 10:20",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Focus"
 }

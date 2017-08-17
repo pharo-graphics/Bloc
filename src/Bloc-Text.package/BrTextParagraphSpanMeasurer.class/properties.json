@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/22/2017 15:45",
-	"super" : "Object",
-	"category" : "Bloc-Text-Text-Paragraph",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BrTextParagraphSpanMeasurer",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 3/22/2017 15:45",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Text-Paragraph"
 }

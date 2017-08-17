@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/24/2016 19:44",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-DataSource-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlInfiniteAbstractDataSourceController",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 5/24/2016 19:44",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Infinite-DataSource-Support"
 }

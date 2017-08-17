@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "GlennCavarle 6/22/2016 16:14",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlAbstractStyler",
-	"type" : "normal"
+	"commentStamp" : "GlennCavarle 6/22/2016 16:14",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Support"
 }

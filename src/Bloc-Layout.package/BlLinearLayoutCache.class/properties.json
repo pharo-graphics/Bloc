@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 2/14/2016 11:42",
-	"super" : "Object",
-	"category" : "Bloc-Layout-Linear-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"widthMode",
@@ -19,5 +15,11 @@
 		"maxBreadth"
 	],
 	"name" : "BlLinearLayoutCache",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 2/14/2016 11:42",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Layout-Linear-Utilities"
 }

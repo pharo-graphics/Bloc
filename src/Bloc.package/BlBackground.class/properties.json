@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "AliakseiSyrel 7/28/2017 15:25",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Visual",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"opacity"
 	],
 	"name" : "BlBackground",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 7/28/2017 15:25",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Visual"
 }

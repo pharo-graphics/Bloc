@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "AliakseiSyrel 4/12/2017 08:36",
-	"super" : "Form",
-	"category" : "Bloc-Universe",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"pointer"
 	],
 	"name" : "BlExternalForm",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 4/12/2017 08:36",
+	"super" : "Form",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Universe"
 }

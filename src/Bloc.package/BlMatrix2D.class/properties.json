@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/26/2017 10:43",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Math",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"x",
@@ -14,5 +10,11 @@
 		"sy"
 	],
 	"name" : "BlMatrix2D",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 1/26/2017 10:43",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Math"
 }

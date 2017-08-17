@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 6/16/2017 20:05",
-	"super" : "Object",
-	"category" : "Bloc-Paint",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlPaint",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 6/16/2017 20:05",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Paint"
 }

@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "AliakseiSyrel 7/25/2017 20:10",
-	"super" : "Object",
-	"category" : "Bloc-KeyBinding",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"shortcuts"
 	],
 	"name" : "BlShortcutRegistry",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 7/25/2017 20:10",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-KeyBinding"
 }

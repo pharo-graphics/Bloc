@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/20/2017 19:49",
-	"super" : "Object",
-	"category" : "Bloc-EventHandling",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"handlers"
 	],
 	"name" : "BlHandlerRegistry",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 1/20/2017 19:49",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-EventHandling"
 }

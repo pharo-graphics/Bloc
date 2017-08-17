@@ -1,0 +1,3 @@
+assertions
+disableAssertions
+	self assertionsEnabled: false

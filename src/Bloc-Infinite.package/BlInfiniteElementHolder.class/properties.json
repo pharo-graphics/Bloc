@@ -1,11 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/23/2016 22:30",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-Basic",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlInfiniteConstants"
-	],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"itemElement",
@@ -24,5 +18,13 @@
 		"payloads"
 	],
 	"name" : "BlInfiniteElementHolder",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 5/23/2016 22:30",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"category" : "Bloc-Infinite-Basic"
 }

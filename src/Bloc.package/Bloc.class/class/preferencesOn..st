@@ -5,7 +5,7 @@ preferencesOn: aBuilder
 		label: 'Bloc';
 		description: 'Bloc settings';
 		parent: self preferencesGroup;
-		with: [			
+		with: [
 			(aBuilder pickOne: #preferableHostClass)
 				target: self;
 				order: 1;
@@ -20,4 +20,11 @@ preferencesOn: aBuilder
 				label: 'Preferable Sparta renderering backend' ;
 				domainValues: ((self environment at: #BlSpartaRenderer) availableCanvasBuilderClasses collect: [ :aBuilderClass | aBuilderClass label -> aBuilderClass ]);
 				description: 'Choose which graphical library should be used to render bloc spaces'.
+				
+			(aBuilder setting: #assertionsEnabled)
+				order: 3;
+				target: self;
+				label: 'Assertions';
+				description: 'Set enabled to turn assertions on or disable to turn them off';
+				default: [ false ].
 		]

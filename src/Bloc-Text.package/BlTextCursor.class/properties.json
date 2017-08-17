@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "AliakseiSyrel 7/30/2017 15:48",
-	"super" : "Object",
-	"category" : "Bloc-Text-Element",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"position"
 	],
 	"name" : "BlTextCursor",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 7/30/2017 15:48",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Element"
 }

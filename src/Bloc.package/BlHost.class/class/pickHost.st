@@ -5,4 +5,4 @@ pickHost
 	<return: #BlHost>
 	
 	"If setting is not set dispatches to back to me returning #defaultHostClass"
-	^ BlSettings preferableHostClass new
+	^ Bloc preferableHostClass new

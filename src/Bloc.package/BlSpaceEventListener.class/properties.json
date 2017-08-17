@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "BlEventListener",
-	"category" : "Bloc-Space-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"space"
 	],
 	"name" : "BlSpaceEventListener",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "BlEventListener",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Space-Support"
 }

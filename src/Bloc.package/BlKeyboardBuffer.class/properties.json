@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "AliakseiSyrel 7/23/2017 18:40",
-	"super" : "Object",
-	"category" : "Bloc-Space-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"events"
 	],
 	"name" : "BlKeyboardBuffer",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 7/23/2017 18:40",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Space-Support"
 }

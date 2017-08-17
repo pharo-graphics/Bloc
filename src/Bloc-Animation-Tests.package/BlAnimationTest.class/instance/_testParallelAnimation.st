@@ -1,5 +1,5 @@
 tests
-testParallelAnimation
+_testParallelAnimation
 	| anim animNum resultNum finishNumFlag currenTimeNum animColor resultColor finishColorFlag currenTimeColor |
 	currenTimeNum := Time millisecondClockValue.
 	currenTimeColor := Time millisecondClockValue.

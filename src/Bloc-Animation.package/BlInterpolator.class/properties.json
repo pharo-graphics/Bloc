@@ -1,13 +1,15 @@
 {
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInterpolator",
 	"commentStamp" : "AliakseiSyrel 12/16/2016 15:33",
 	"super" : "Object",
-	"category" : "Bloc-Animation-Easing",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
 	"classinstvars" : [
 		"default"
 	],
 	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlInterpolator",
-	"type" : "normal"
+	"category" : "Bloc-Animation-Easing"
 }

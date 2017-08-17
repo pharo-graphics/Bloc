@@ -1,15 +1,17 @@
 {
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFocusability",
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Bloc-Basic-Properties",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
 	"classinstvars" : [
 		"after",
 		"before",
 		"block"
 	],
 	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlFocusability",
-	"type" : "normal"
+	"category" : "Bloc-Basic-Properties"
 }

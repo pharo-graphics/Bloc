@@ -1,11 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/21/2017 09:33",
-	"super" : "Object",
-	"category" : "Bloc-Text-Text-Paragraph",
-	"classinstvars" : [
-		"matrix"
-	],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"maxHeight",
@@ -25,5 +19,13 @@
 		"textPosition"
 	],
 	"name" : "BrTextParagraphMeasurer",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 3/21/2017 09:33",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [
+		"matrix"
+	],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Text-Paragraph"
 }

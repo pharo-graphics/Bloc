@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/22/2017 17:05",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlGeometryResizer",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 1/22/2017 17:05",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Support"
 }

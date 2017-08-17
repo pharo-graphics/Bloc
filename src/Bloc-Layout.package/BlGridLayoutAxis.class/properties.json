@@ -1,11 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/18/2016 19:47",
-	"super" : "Object",
-	"category" : "Bloc-Layout-Grid-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlGridLayoutConstants"
-	],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [
 		"COMPLETE",
 		"NEW",
@@ -41,5 +35,13 @@
 		"totalMargins"
 	],
 	"name" : "BlGridLayoutAxis",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 5/18/2016 19:47",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlGridLayoutConstants"
+	],
+	"category" : "Bloc-Layout-Grid-Utilities"
 }

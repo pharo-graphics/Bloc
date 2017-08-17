@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "GlennCavarle 5/4/2017 22:07",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Math",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"translateX",
@@ -18,5 +14,11 @@
 		"matrix"
 	],
 	"name" : "BlElementTransform",
-	"type" : "normal"
+	"commentStamp" : "GlennCavarle 5/4/2017 22:07",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Math"
 }

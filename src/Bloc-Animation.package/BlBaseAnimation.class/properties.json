@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "TBlEventTarget classTrait",
+	"classtraitcomposition" : "TBlEventTarget classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"running",
@@ -17,7 +17,7 @@
 	"name" : "BlBaseAnimation",
 	"commentStamp" : "",
 	"super" : "Object",
-	"traitcomposition" : "TBlEventTarget",
+	"traitcomposition" : "TBlEventTarget + TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

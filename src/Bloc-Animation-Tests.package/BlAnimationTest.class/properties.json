@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "TestCase",
 	"category" : "Bloc-Animation-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],

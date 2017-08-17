@@ -1,14 +1,16 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/29/2016 23:45",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"layoutHolderMap",
 		"oldChangedHolders"
 	],
 	"name" : "BlInfiniteElementInfoStore",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 11/29/2016 23:45",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Infinite-Basic"
 }

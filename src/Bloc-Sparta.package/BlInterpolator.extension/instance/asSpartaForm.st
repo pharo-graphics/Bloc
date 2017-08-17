@@ -6,7 +6,7 @@ asSpartaForm
 	aZeroDelta := 20.
 	aStep := 0.001.
 
-	aCanvas := BlSettings preferableSpartaCanvas extent: anExtent.
+	aCanvas := Bloc preferableSpartaCanvas extent: anExtent.
 	aCanvas fill
 		paint: Color white;
 		path: aCanvas bounds;

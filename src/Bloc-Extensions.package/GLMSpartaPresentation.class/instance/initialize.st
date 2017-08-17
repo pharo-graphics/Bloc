@@ -3,5 +3,5 @@ initialize
 	super initialize.
 	
 	extentBlock := [ 600@400 ].
-	canvasBlock := [ BlSettings preferableSpartaCanvas ].
+	canvasBlock := [ Bloc preferableSpartaCanvas ].
 	drawBlock := [ :aCanvas | ]

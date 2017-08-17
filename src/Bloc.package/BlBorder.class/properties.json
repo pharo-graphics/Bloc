@@ -1,11 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 6/17/2017 00:57",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Visual",
-	"classinstvars" : [
-		"empty"
-	],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"paint",
@@ -14,5 +8,13 @@
 		"opacity"
 	],
 	"name" : "BlBorder",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 6/17/2017 00:57",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [
+		"empty"
+	],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Visual"
 }

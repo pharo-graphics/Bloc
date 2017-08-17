@@ -1,14 +1,16 @@
 {
-	"commentStamp" : "AliakseiSyrel 4/11/2017 13:10",
-	"super" : "Object",
-	"category" : "Bloc-Universe",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"hostSpace",
 		"hostRenderer"
 	],
 	"name" : "BlHostRendererSurface",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 4/11/2017 13:10",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Universe"
 }

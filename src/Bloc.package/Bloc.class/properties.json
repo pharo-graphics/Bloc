@@ -5,10 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [
+		"AssertionsEnabled",
 		"PreferableHostClass",
 		"PreferableSpartaCanvasBuilder"
 	],
 	"instvars" : [ ],
-	"name" : "BlSettings",
+	"name" : "Bloc",
 	"type" : "normal"
 }

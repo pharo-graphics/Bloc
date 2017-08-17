@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/18/2016 13:33",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-DataSource-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"pendingCommands",
@@ -15,5 +11,11 @@
 		"existingCommandTypes"
 	],
 	"name" : "BlInfiniteDataSourceManager",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 11/18/2016 13:33",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Infinite-DataSource-Support"
 }

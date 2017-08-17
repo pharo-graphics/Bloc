@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/29/2016 22:47",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-Tasks",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlInfiniteRunnable",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 11/29/2016 22:47",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Infinite-Tasks"
 }

@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "GlennCavarle 6/22/2016 16:44",
-	"super" : "Object",
-	"category" : "Bloc-Space-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"space",
@@ -12,5 +8,11 @@
 		"transferMode"
 	],
 	"name" : "BlDragboard",
-	"type" : "normal"
+	"commentStamp" : "GlennCavarle 6/22/2016 16:44",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Space-Support"
 }

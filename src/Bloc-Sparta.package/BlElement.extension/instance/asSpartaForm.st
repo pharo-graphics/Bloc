@@ -11,7 +11,7 @@ asSpartaForm
 	aBoundsInWindow := self localBoundsToWindow: aBoundsInLocal copy.
 	aBoundsInSpace := self localBoundsToGlobal: aBoundsInLocal copy.
 
-	aCanvas := BlSettings preferableSpartaCanvas checker: (aBoundsInWindow corner max: 1@1).
+	aCanvas := Bloc preferableSpartaCanvas checker: (aBoundsInWindow corner max: 1@1).
 
 	aCanvas transform
 		push;
@@ -27,7 +27,7 @@ asSpartaForm
 
 	aCanvas transform pop.
 
-	aFinalCanvas := BlSettings preferableSpartaCanvas extent: (aBoundsInWindow extent max: 1@1).
+	aFinalCanvas := Bloc preferableSpartaCanvas extent: (aBoundsInWindow extent max: 1@1).
 	aFinalCanvas transform
 		push;
 		translateBy: aBoundsInSpace origin negated;

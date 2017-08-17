@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "",
-	"super" : "BlElementEventListener",
-	"category" : "Bloc-Selection",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"origin",
@@ -13,5 +9,11 @@
 		"selected"
 	],
 	"name" : "BlSelectionHandler",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "BlElementEventListener",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Selection"
 }

@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/21/2017 11:43",
-	"super" : "Object",
-	"category" : "Bloc-Text-Text-Paragraph",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"width",
@@ -17,5 +13,11 @@
 		"to"
 	],
 	"name" : "BrTextParagraphSegment",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 3/21/2017 11:43",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Text-Paragraph"
 }

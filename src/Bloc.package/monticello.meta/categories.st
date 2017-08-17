@@ -22,3 +22,4 @@ SystemOrganization addCategory: 'Bloc-Space-Support'!
 SystemOrganization addCategory: 'Bloc-State'!
 SystemOrganization addCategory: 'Bloc-Theme'!
 SystemOrganization addCategory: 'Bloc-Universe'!
+SystemOrganization addCategory: 'Bloc-Utils'!

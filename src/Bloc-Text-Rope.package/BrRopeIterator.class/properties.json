@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/17/2017 00:27",
-	"super" : "Object",
-	"category" : "Bloc-Text-Rope-Rope",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"rope",
@@ -11,5 +7,11 @@
 		"end"
 	],
 	"name" : "BrRopeIterator",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 3/17/2017 00:27",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Rope-Rope"
 }

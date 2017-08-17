@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 7/1/2017 23:56",
-	"super" : "Object",
-	"category" : "Bloc-Layouts-Basic",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"requestingLayout",
@@ -13,5 +9,11 @@
 		"waitingLayout"
 	],
 	"name" : "BlLayout",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 7/1/2017 23:56",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Layouts-Basic"
 }

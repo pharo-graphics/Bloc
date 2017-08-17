@@ -1,11 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 6/17/2017 14:29",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [
-		"empty"
-	],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"topLeft",
@@ -14,5 +8,13 @@
 		"bottomRight"
 	],
 	"name" : "BlCornerRadii",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 6/17/2017 14:29",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [
+		"empty"
+	],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Support"
 }

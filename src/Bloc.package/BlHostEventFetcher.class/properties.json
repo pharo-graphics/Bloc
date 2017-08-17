@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "GlennCavarle 6/26/2016 00:02",
-	"super" : "Object",
-	"category" : "Bloc-Universe",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"eventQueue"
 	],
 	"name" : "BlHostEventFetcher",
-	"type" : "normal"
+	"commentStamp" : "GlennCavarle 6/26/2016 00:02",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Universe"
 }

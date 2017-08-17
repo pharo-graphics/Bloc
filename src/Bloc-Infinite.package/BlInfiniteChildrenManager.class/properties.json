@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/15/2016 09:07",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-Children",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"bucket",
@@ -11,5 +7,11 @@
 		"controller"
 	],
 	"name" : "BlInfiniteChildrenManager",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 11/15/2016 09:07",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Infinite-Children"
 }

@@ -1,11 +1,5 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-Scroller",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlScrollerConstants"
-	],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"startPosition",
@@ -25,5 +19,13 @@
 		"physicalCoefficient"
 	],
 	"name" : "BlSplineOverScroller",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlScrollerConstants"
+	],
+	"category" : "Bloc-Infinite-Scroller"
 }

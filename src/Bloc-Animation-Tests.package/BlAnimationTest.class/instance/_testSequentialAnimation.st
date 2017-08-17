@@ -1,5 +1,5 @@
 tests
-testSequentialAnimation
+_testSequentialAnimation
 	| anim animNum resultNum finishNumFlag currenTimeNum animColor resultColor finishColorFlag currenTimeColor |
 	"I don't know why sometime this test failed..."
 	currenTimeNum := Time millisecondClockValue.

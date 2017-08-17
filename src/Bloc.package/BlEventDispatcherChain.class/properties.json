@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "OrderedCollection",
-	"category" : "Bloc-EventHandling",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"currentIndex"
 	],
 	"name" : "BlEventDispatcherChain",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "OrderedCollection",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-EventHandling"
 }

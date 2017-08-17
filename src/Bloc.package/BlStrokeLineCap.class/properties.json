@@ -1,15 +1,17 @@
 {
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlStrokeLineCap",
 	"commentStamp" : "AliakseiSyrel 6/17/2017 00:13",
 	"super" : "Object",
-	"category" : "Bloc-Paint-Support",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
 	"classinstvars" : [
 		"butt",
 		"round",
 		"square"
 	],
 	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlStrokeLineCap",
-	"type" : "normal"
+	"category" : "Bloc-Paint-Support"
 }

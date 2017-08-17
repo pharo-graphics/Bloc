@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "TBlHostSpace classTrait",
+	"classtraitcomposition" : "TBlHostSpace classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"eventFetcher"
@@ -7,7 +7,7 @@
 	"name" : "BlNullHostSpace",
 	"commentStamp" : "AliakseiSyrel 6/15/2017 17:35",
 	"super" : "Object",
-	"traitcomposition" : "TBlHostSpace",
+	"traitcomposition" : "TBlHostSpace + TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

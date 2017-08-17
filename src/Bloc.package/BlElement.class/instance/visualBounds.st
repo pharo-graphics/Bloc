@@ -1,3 +1,3 @@
 geometry bounds
 visualBounds
-	^ self visualBoundsOn: (BlSettings preferableSpartaCanvas offscreen)
+	^ self visualBoundsOn: (Bloc preferableSpartaCanvas offscreen)

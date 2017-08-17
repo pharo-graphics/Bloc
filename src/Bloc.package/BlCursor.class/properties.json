@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "GlennCavarle 6/22/2016 16:27",
-	"super" : "Object",
-	"category" : "Bloc-Space",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlCursor",
-	"type" : "normal"
+	"commentStamp" : "GlennCavarle 6/22/2016 16:27",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Space"
 }

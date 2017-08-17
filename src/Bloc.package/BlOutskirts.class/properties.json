@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/27/2017 21:40",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Visual",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [
 		"Centered",
 		"Inside",
@@ -11,5 +7,11 @@
 	],
 	"instvars" : [ ],
 	"name" : "BlOutskirts",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 5/27/2017 21:40",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Visual"
 }

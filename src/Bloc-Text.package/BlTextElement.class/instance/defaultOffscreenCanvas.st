@@ -4,4 +4,4 @@ defaultOffscreenCanvas
 	It must be of the same type and backend as rendering canvas"
 	<return: #SpartaCanvas>
 
-	^ BlSettings preferableSpartaCanvas offscreen
+	^ Bloc preferableSpartaCanvas offscreen

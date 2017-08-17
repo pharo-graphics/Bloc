@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/23/2017 18:12",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Math",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"x",
@@ -11,5 +7,11 @@
 		"z"
 	],
 	"name" : "BlPoint3D",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 1/23/2017 18:12",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Math"
 }

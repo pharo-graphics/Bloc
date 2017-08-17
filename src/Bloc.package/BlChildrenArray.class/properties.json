@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 6/17/2017 13:36",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"array",
@@ -12,5 +8,11 @@
 		"managedArray"
 	],
 	"name" : "BlChildrenArray",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 6/17/2017 13:36",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Support"
 }
