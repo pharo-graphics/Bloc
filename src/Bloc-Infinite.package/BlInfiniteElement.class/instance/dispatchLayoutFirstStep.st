@@ -11,8 +11,8 @@ dispatchLayoutFirstStep
 	self eatRequestLayout.
 	infoStore clear.
 	self onEnterLayoutOrScroll.
-	self saveFocusInfo.
 	self processDataSourceCommandsAndSetAnimationFlags.
+	self saveFocusInfo.
 	self state trackOldChangeHolders: (self state willRunSimpleAnimations and: [ itemsChanged ]).
 	itemsAddedOrRemoved := false.
 	itemsChanged := false.
