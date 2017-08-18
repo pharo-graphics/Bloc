@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGraphAbstractRegularTreeLayout",
+	"category" : "Bloc-Graph-Layouts-Layouts",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphAbstractVerticalTreeLayout",
+	"type" : "normal"
+}

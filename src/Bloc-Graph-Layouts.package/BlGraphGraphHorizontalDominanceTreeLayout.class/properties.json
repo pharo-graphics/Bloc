@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGraphLayoutExamples",
+	"category" : "Bloc-Graph-Layouts-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGraphGraphHorizontalDominanceTreeLayout",
+	"type" : "normal"
+}
