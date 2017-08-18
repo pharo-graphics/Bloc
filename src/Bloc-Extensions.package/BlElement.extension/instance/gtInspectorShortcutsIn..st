@@ -1,7 +1,7 @@
 *Bloc-Extensions
 gtInspectorShortcutsIn: composite
 	<gtInspectorPresentationOrder: 90>  
-	composite table 
+	composite fastTable 
 		title: 'Shortcuts' translated;
 		display: [ self shortcuts ];
 		column: 'Key' evaluated: [ :each | each combination gtDisplayString ];

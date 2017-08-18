@@ -1,3 +1,3 @@
 printing
 printOn: aStream
-	aStream nextPutAll: self mode asString
+	self mode printOn: aStream size: self size

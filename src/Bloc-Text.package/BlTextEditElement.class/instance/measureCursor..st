@@ -9,6 +9,10 @@ measureCursor: anExtentMeasurementSpec
 
 	aCursorElement := self cursor.
 	
+	"cursor is not within paragraph"
+	self paragraph measuredEnd < aCursorElement cursorPosition
+		ifTrue: [ ^ self ].
+	
 	aParagraphSpan := self paragraph spanAtIndex: aCursorElement cursorPosition.
 	aTextPosition := aParagraphSpan positionAt: aCursorElement cursorPosition.
 

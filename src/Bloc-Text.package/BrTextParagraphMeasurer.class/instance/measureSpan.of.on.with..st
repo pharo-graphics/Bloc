@@ -1,6 +1,6 @@
 measurement
 measureSpan: aBrSpan of: aTextParagraph on: aCanvas with: aSpanMeasurer
-	| forceMeasureEmpty |
+
 	self
 		assert: [ self text isEmpty or: [ self text isNotEmpty and: [ aBrSpan isNotEmpty ] ] ]
 		description: [ 'Span must not be empty if original text is not empty' ].
@@ -17,9 +17,7 @@ measureSpan: aBrSpan of: aTextParagraph on: aCanvas with: aSpanMeasurer
 	self span: aBrSpan.
 	self textRun: aSpanMeasurer textRun.
 
-	forceMeasureEmpty := aBrSpan isEmpty.
-
-	[ self wantsMore or: [ forceMeasureEmpty ] ] whileTrue: [
+	[ self wantsMore ] whileTrue: [
 		| aParagraphSpan |
 
 		aParagraphSpan := self defaultParagraphSpan.
@@ -44,6 +42,4 @@ measureSpan: aBrSpan of: aTextParagraph on: aCanvas with: aSpanMeasurer
 		self spanStart: aSpanMeasurer spanStart.
 		self spanEnd: aSpanMeasurer spanEnd.
 
-		self pushSpan: aParagraphSpan.
-		
-		forceMeasureEmpty := false ]
+		self pushSpan: aParagraphSpan ]

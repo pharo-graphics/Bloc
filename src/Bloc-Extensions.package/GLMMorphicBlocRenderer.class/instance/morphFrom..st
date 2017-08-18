@@ -30,7 +30,7 @@ morphFrom: aBlocPresentation
 			space root addEventHandler:
 				(BlEventHandler
 					on: BlDblClickEvent
-					do: [ :evt | BlElementSelection on: evt target ]).
+					do: [ :evt | evt modifiers isShift ifTrue: [ BlElementSelection on: evt target ] ]).
 			host := BlMorphicHost new.
 			space host: host.
 			universe spaceManager addSpace: space.
