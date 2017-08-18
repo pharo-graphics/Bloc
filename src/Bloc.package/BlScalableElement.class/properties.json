@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 8/18/2017 16:01",
+	"super" : "BlElement",
+	"category" : "Bloc-Layouts-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"contentElement"
+	],
+	"name" : "BlScalableElement",
+	"type" : "normal"
+}
