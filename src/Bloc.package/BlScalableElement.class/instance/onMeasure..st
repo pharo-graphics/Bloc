@@ -1,6 +1,6 @@
 layout
 onMeasure: anExtentMeasurementSpec
-	| aTranslation oldExtent scaleFactor scaledBounds |
+	| aTranslation oldExtent scaleFactor scaledBounds aMeasuredWidth aMeasuredHeight  |
 	super onMeasure: anExtentMeasurementSpec.
 	
 	self hasContentElement
@@ -14,4 +14,10 @@ onMeasure: anExtentMeasurementSpec
 	scaledBounds := self contentElement transform transformBounds: (self contentElement measuredBounds: BlBounds new).
 
 	aTranslation := scaledBounds extent - oldExtent.
-	self contentElement translateTo: (aTranslation / 2.0) negated
+	self contentElement translateTo: (aTranslation / 2.0) negated.
+
+	"we should take scaled bounds of content element into account"
+	aMeasuredWidth := anExtentMeasurementSpec widthSpec sizeFor: scaledBounds width.
+	aMeasuredHeight := anExtentMeasurementSpec heightSpec sizeFor: scaledBounds height.
+		
+	self measuredExtent: aMeasuredWidth @ aMeasuredHeight
