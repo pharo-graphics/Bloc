@@ -1,13 +1,16 @@
 layout
 onMeasure: anExtentMeasurementSpec
-	| aTranslation oldExtent scaleFactor scaledBounds aMeasuredWidth aMeasuredHeight  |
+	| aTranslation oldExtent scaleFactor scaledBounds aMeasuredWidth aMeasuredHeight |
 	super onMeasure: anExtentMeasurementSpec.
 	
 	self hasContentElement
 		ifFalse: [ ^ self ].
 	
 	oldExtent := self contentElement measuredExtent.
-	scaleFactor := ((self measuredExtent / self contentElement measuredExtent) min max: 0.01).
+	
+	scaleFactor := (oldExtent x isZero or: oldExtent y isZero)
+		ifTrue: [ 1 ]
+		ifFalse: [ ((self measuredExtent / oldExtent) min max: 0.01) ].
 
 	self contentElement scaleTo: scaleFactor asPoint.
 	
