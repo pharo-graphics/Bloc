@@ -17,7 +17,7 @@ baseline: spec
 
 			project: 'OSWindow' with: [ spec
 				className: #ConfigurationOfOSWindow;
-				versionString: #'development';
+				versionString: #'1.2.18';
 				loads: #(WithOpenGL);
 				repository: 'http://smalltalkhub.com/mc/Pharo/OSWindow/main/' ];
 
