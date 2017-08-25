@@ -1,0 +1,3 @@
+text - converting
+asRopedText
+	^ self
