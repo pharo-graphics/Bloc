@@ -1,6 +1,6 @@
 examples
 exampleDistributedWithSpan2x2Grid
-	<example>
+	<gtExample>
 	| e1 e2 e3 el space|
 
 	e1 := BlElement new
@@ -27,13 +27,7 @@ exampleDistributedWithSpan2x2Grid
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
 		size: 300@300;
-		position: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 };
 		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el

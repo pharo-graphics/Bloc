@@ -1,7 +1,7 @@
 examples
 exampleDistributed2x2Grid
-	<example>
-	| e1 e2 e3 e4 el space|
+	<gtExample>
+	| e1 e2 e3 e4 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -30,13 +30,7 @@ exampleDistributed2x2Grid
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
 		size: 300@300;
-		position: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 };
 		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
