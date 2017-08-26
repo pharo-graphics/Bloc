@@ -4,6 +4,9 @@ hasNext
 	didn't reached the end, false otherwise"
 	<return: #Boolean>
 
+	self assertInvariant.
+
 	^ rope isNotEmpty
 		and: [ (position <= rope size)
-			and: [ position <= end ] ]
+			and: [ position <= end
+				and: [ position > 0 ] ] ]
