@@ -1,13 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/13/2017 19:33",
-	"super" : "BlEvent",
+	"commentStamp" : "AliakseiSyrel 3/13/2017 16:13",
+	"super" : "BlAttachAnchor",
 	"category" : "Bloc-Geometry-Attach",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"anchor"
+		"position"
 	],
-	"name" : "BlGeometryAnchorMoved",
+	"name" : "BlAbsolutePositionAnchor",
 	"type" : "normal"
 }

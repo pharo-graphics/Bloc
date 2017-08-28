@@ -1,3 +1,3 @@
 initialization
 defaultToAnchor
-	^ BlLineBottomRightCornerAnchor new
+	^ BlElementCenterAnchor new

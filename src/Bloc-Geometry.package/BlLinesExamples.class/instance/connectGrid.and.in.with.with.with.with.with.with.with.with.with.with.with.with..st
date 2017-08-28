@@ -32,8 +32,8 @@ connectGrid: aGridElement and: anAttachPoint in: aContainerElement with: aLine1 
 	
 	lines with: aGridElement children do: [ :aLine :aGridCell |
 		aLine
-			fromAnchor: (BlGeometryAttachPointAnchor attachPoint: aGridCell);
-			toAnchor: (BlGeometryAttachPointAnchor attachPoint: anAttachPoint) ].
+			fromAnchor: (BlElementRelativeAnchor attachPoint: aGridCell);
+			toAnchor: (BlElementRelativeAnchor attachPoint: anAttachPoint) ].
 	
 	^ aContainerElement
 		size: 600@600;

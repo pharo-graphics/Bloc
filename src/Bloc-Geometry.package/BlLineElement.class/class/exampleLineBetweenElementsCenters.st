@@ -36,8 +36,8 @@ exampleLineBetweenElementsCenters
 		addChild: attachPoint2;
 		yourself.
 
-	line fromAnchor: (BlGeometryAttachPointAnchor attachPoint: attachPoint1).
-	line toAnchor: (BlGeometryAttachPointAnchor attachPoint: attachPoint2).
+	line fromAnchor: (BlElementCenterAnchor element: attachPoint1).
+	line toAnchor: (BlElementCenterAnchor element: attachPoint2).
 	
 	space := BlSpace new.
 	space root addChild: line.

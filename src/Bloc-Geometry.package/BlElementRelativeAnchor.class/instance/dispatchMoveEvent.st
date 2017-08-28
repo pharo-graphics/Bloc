@@ -6,5 +6,5 @@ dispatchMoveEvent
 		ifTrue: [ ^ self ].
 	moveDispatched := true.
 	
-	[ self dispatchEvent: (BlGeometryAnchorMoved new anchor: self) ]
+	[ self dispatchEvent: (BlAttachAnchorMoved new anchor: self) ]
 		ensure: [ moveDispatched := false ]

@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/13/2017 16:19",
-	"super" : "BlGeometryAnchor",
+	"commentStamp" : "",
+	"super" : "BlElementRelativeAnchor",
 	"category" : "Bloc-Geometry-Attach",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlLineBottomRightCornerAnchor",
+	"name" : "BlElementCenterAnchor",
 	"type" : "normal"
 }

@@ -4,7 +4,7 @@
 	"instvars" : [
 		"eventDispatcher"
 	],
-	"name" : "BlGeometryAnchor",
+	"name" : "BlAttachAnchor",
 	"commentStamp" : "AliakseiSyrel 3/13/2017 16:12",
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",

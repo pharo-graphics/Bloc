@@ -13,8 +13,8 @@ exampleLine
 	attachPointTo := BlAttachPoint new.
 	attachPointTo position: 400 @ 300.
 
-	line fromAnchor: (BlGeometryAttachPointAnchor attachPoint: attachPointFrom).
-	line toAnchor: (BlGeometryAttachPointAnchor attachPoint: attachPointTo).
+	line fromAnchor: (BlElementCenterAnchor element: attachPointFrom).
+	line toAnchor: (BlElementCenterAnchor element: attachPointTo).
 	
 	space := BlSpace new.
 	space root addChild: attachPointFrom.

@@ -3,6 +3,6 @@ toAnchor: aBlGeometryAnchor
 
 	toAnchor := aBlGeometryAnchor.
 	toAnchor
-		addEventHandlerOn: BlGeometryAnchorMoved
+		addEventHandlerOn: BlAttachAnchorMoved
 		do: [ :anEvent | self onToAnchorMoved ].
 	self onToAnchorMoved
