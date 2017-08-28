@@ -38,7 +38,7 @@ exampleLineBetweenElementsCorners
 		yourself.
 
 	line fromAnchor: (BlElementCenterAnchor element: attachPoint1).
-	line toAnchor: (BlElementCenterAnchor element: attachPoint2) halt.
+	line toAnchor: (BlElementCenterAnchor element: attachPoint2).
 	
 	space := BlSpace new.
 	space root addChild: line.

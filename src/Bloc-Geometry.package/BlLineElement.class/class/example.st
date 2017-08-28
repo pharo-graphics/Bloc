@@ -16,9 +16,9 @@ example
 	attachPoint position: 400 @ 200.
 
 	line1 fromAnchor: (BlAbsolutePositionAnchor position: 100 @ 100).
-	line1 toAnchor: (BlElementRelativeAnchor attachPoint: attachPoint).
+	line1 toAnchor: (BlElementCenterAnchor element: attachPoint).
 
-	line2 fromAnchor: (BlElementRelativeAnchor attachPoint: line1 toAttach).
+	line2 fromAnchor: (BlElementCenterAnchor element: line1 toAttach).
 	line2 toAnchor: (BlAbsolutePositionAnchor position: 500 @ 500).
 	
 	space := BlSpace new.

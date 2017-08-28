@@ -1,3 +1,3 @@
 initialization
 defaultToAnchor
-	^ BlElementCenterAnchor new
+	^ BlAbsolutePositionAnchor position: 10@10
