@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementRelativeAnchor",
+	"category" : "Bloc-Geometry-Attach",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlElementCenterTopAnchor",
+	"type" : "normal"
+}
