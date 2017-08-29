@@ -30,8 +30,8 @@ connectGrid: aLeftGridElement andGrid: aRightGridElement in: aContainerElement w
 					detect: [ :aCellGrid | (aCellGrid userData at: #entity) = anIndex ]
 				ifFound: [ :aRightCell |
 					aLine
-						fromAnchor: (BlElementRelativeAnchor attachPoint: aLeftCell);
-						toAnchor: (BlElementRelativeAnchor attachPoint: aRightCell)
+						fromAnchor: (BlElementCenterAnchor element: aLeftCell);
+						toAnchor: (BlElementCenterAnchor element: aRightCell)
 				] ] ].
 	
 	^ aContainerElement

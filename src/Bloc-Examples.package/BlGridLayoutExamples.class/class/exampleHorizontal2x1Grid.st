@@ -1,7 +1,7 @@
 examples
 exampleHorizontal2x1Grid
-	<gtExample>
-	| e1 e2 el|
+	<example>
+	| e1 e2 el space|
 	
 	e1 := BlElement new
 		size: 150 asPoint;
@@ -14,7 +14,14 @@ exampleHorizontal2x1Grid
 	el := BlElement new
 		layout: BlGridLayout horizontal;
 		size: 400@400;
+		position: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.
-	^ el
+	
+	el forceLayout.
+	space := BlSpace new.
+	space root addChild: el.
+	BlElementSelection on: el.
+	space	show
+	

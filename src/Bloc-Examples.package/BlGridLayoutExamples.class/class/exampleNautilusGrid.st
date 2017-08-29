@@ -1,7 +1,7 @@
 examples
 exampleNautilusGrid
-	<gtExample>
-	| e1 e2 e3 e4 e5 el |
+	<example>
+	| e1 e2 e3 e4 e5 el space|
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -37,8 +37,14 @@ exampleNautilusGrid
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 4; cellSpacing: 10);
 		size: 300@300;
+		position: 200 @ 100;
 		background: Color veryLightGray;
 		addChildren: { e1. e2. e3. e4. e5 };
 		yourself.
 	
-	 ^ el 
+	el forceLayout.
+	space := BlSpace new.
+	space root addChild: el.
+	BlElementSelection on: el.
+	space	show
+	
