@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlElementBottomCenterAnchor",
+	"name" : "BlElementCenterBottomAnchor",
 	"type" : "normal"
 }
