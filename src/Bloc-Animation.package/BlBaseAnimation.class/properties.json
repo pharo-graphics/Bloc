@@ -12,7 +12,8 @@
 		"parent",
 		"delay",
 		"actionHandlers",
-		"target"
+		"target",
+		"eventDispatcher"
 	],
 	"name" : "BlBaseAnimation",
 	"commentStamp" : "",

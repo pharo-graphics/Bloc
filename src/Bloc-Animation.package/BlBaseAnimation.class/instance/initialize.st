@@ -8,4 +8,4 @@ initialize
 	delay := 0.
 	duration :=1.
 	actionHandlers := OrderedCollection new.
-	
+	eventDispatcher := BlSimpleEventDispatcher on: self
