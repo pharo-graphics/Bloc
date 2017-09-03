@@ -4,7 +4,13 @@ notifyItemsChanged: anInterval
 	This is an item change event, not a structural change event. It indicates that
 	any reflection of the data in the given position range is out of date and should
 	be updated. The items in the given range retain the same identity"
+	| anEvent |
 	
-	self fireEvent: (BlInfiniteDataSourceItemRangeChanged
+	anEvent := BlInfiniteDataSourceItemRangeChanged
 		position: anInterval first
-		itemCount: anInterval size)
+		itemCount: anInterval size.
+	
+	BlUniverse default isUIProcess
+		ifTrue: [ self fireEvent: anEvent ]
+		ifFalse: [ BlUniverse default animationManager
+		addAnimation: (BrTextEditorPostAction new action: [ self fireEvent: anEvent ]) ]
