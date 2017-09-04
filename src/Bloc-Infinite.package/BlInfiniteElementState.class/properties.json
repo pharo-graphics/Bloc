@@ -1,11 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/15/2016 09:05",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-Basic",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlInfiniteConstants"
-	],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"targetPosition",
@@ -25,5 +19,13 @@
 		"focusedSubChild"
 	],
 	"name" : "BlInfiniteElementState",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 11/15/2016 09:05",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"category" : "Bloc-Infinite-Basic"
 }

@@ -15,8 +15,8 @@ scrollEvent: anEvent
 		ifFalse: [ anEvent isScrollUp
 			ifTrue: [ anAmount negated ]
 			ifFalse: [ 0 ] ].
-	
+
 	anEvent currentTarget fling: dX @ dY.
 
-	self flag: 'Make scrolling costomizable'
+	self flag: 'Make scrolling costomizable'.
 	"anEvent consumed: true"

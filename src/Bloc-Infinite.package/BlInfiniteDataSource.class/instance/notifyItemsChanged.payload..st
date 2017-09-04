@@ -7,12 +7,12 @@ notifyItemsChanged: anInterval payload: anObject
 	
 	By using this update method users have to pass a payload object (any) for partial change.
 	All payloads will be merged and then passed to #onBindHolder:at:payloads:"
-	
+
 	self
 		assert: [ anObject isNotNil ]
 		description: [ 'Payload must not be nil! For full update use #notifyItemsChanged:' ].
-	
-	self fireEvent: (BlInfiniteDataSourceItemRangeChanged
+		
+	self notifyWithEvent: (BlInfiniteDataSourceItemRangeChanged
 		position: anInterval first
 		itemCount: anInterval size
 		payload: anObject)

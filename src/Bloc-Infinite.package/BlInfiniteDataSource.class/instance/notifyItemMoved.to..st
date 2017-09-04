@@ -6,6 +6,6 @@ notifyItemMoved: aFromPosition to: aToPosition
 	data set are still considered up to date and will not be rebound, though their
 	positions may be altered"
 
-	self fireEvent: (BlInfiniteDataSourceItemRangeMoved
+	self notifyWithEvent: (BlInfiniteDataSourceItemRangeMoved
 		from: aFromPosition
 		to: aToPosition)

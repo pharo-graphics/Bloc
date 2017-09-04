@@ -9,6 +9,6 @@ notifyChanged
 	any observers to assume that all existing items and structure may no longer be valid.
 	InfiniteLayout will be forced to fully rebind and relayout all visible elements."
 
-	self fireEvent: (BlInfiniteDataSourceChanged new
+	self notifyWithEvent: (BlInfiniteDataSourceChanged new
 		dataSource: self;
 		yourself)

@@ -7,6 +7,6 @@ notifyItemsRemoved: anInterval
 	set are still considered up to date and will not be rebound, though their positions
  	may be altered."
 
-	self fireEvent: (BlInfiniteDataSourceItemRangeRemoved
+	self notifyWithEvent: (BlInfiniteDataSourceItemRangeRemoved
 		position: anInterval first
 		itemCount: anInterval size)
