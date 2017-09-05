@@ -1,3 +1,5 @@
 focus requesting
 looseFocus
-	self space looseFocusFor: self
+	self isAttachedToSceneGraph
+		ifTrue: [ self looseFocus: self ]
+		ifFalse: [ self focused: false ]
