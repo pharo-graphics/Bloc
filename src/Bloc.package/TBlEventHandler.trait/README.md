@@ -1,0 +1,1 @@
+I define an API of an abstract event handler

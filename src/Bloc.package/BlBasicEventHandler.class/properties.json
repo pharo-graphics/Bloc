@@ -1,11 +1,11 @@
 {
-	"classtraitcomposition" : "TBlDebug classTrait",
+	"classtraitcomposition" : "TBlEventHandler classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlBasicEventHandler",
 	"commentStamp" : "",
 	"super" : "Object",
-	"traitcomposition" : "TBlDebug",
+	"traitcomposition" : "TBlEventHandler + TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
