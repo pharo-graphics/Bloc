@@ -8,8 +8,8 @@ marginOf: anChildElement in: aGridLayout isHorizontal: isHorizontal isLeading: i
 		ifFalse: [ axis trailingMargins ].
 
 	spec := isHorizontal
-		ifTrue: [ anChildElement constraints horizontal spec ]
-		ifFalse: [ anChildElement constraints vertical spec ].
+		ifTrue: [ anChildElement constraints grid horizontal spec ]
+		ifFalse: [ anChildElement constraints grid vertical spec ].
 
 	index := isLeading
 		ifTrue: [ spec span first ]
