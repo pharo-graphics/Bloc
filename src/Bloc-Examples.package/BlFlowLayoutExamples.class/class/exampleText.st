@@ -6,6 +6,7 @@ exampleText
 	theWords := OrderedCollection new.
 
 	aText := BrRopedText string: (String loremIpsum: 2000).
+	aText attributes: { BrFontSizeAttribute size: 15 }.
 	aLineIterator := aText iterator.
 
 	[ aLineIterator hasNext ] whileTrue: [ 
