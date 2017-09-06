@@ -5,7 +5,7 @@ findTarget: anEvent
 	or space's root element otherwise.
 	Note: target can not be nil"
 	<return: #BlElement>
-	
+
 	^ self space focusProcessor hasFocusOwner
 		ifTrue: [ self space focusProcessor focusOwner ]
 		ifFalse: [ self space root ]
