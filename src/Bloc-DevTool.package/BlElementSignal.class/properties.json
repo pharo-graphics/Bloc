@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "BeaconSignal",
+	"category" : "Bloc-DevTool-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"extent",
+		"position",
+		"element",
+		"globalPosition"
+	],
+	"name" : "BlElementSignal",
+	"type" : "normal"
+}

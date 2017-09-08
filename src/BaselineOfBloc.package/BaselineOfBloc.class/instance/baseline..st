@@ -9,6 +9,8 @@ baseline: spec
 				loads: #(stub); "Stub does not load anything here. We load sparta in postLoadSparta:"
 				repository: 'github://syrel/sparta/src' ];
 
+		   baseline: 'Beacon' with: [ spec repository: 'github://pharo-project/pharo-beacon/repository' ];
+
 			"GT-Examples is examples and testing framework"
 			project: 'GTExamples' with: [ spec
 				className: #ConfigurationOfGTExamples;
@@ -57,7 +59,7 @@ baseline: spec
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
 			
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GTExamples UFFIOpenGL). ];
-			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
+			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout' 'Beacon'). ];
 			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow UFFIOpenGL). ];
