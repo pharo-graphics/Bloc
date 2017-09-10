@@ -2,6 +2,8 @@ layout
 layout: anElement in: aRectangle
 	| parentBounds childBounds |
 	
+	self layoutIgnored: anElement.
+	
 	"first store parent's local bounds"
 	parentBounds := anElement constraints padding inset: (0@0 extent: aRectangle extent).
 	"reuse the same instance for children bounds"
@@ -15,4 +17,4 @@ layout: anElement in: aRectangle
 			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
 			childBounds := self align: aChild bounds: childBounds in: parentBounds.
 			"and finally set new bounds"
-			aChild applyLayoutIn: childBounds ]
+			aChild applyLayoutIn: childBounds ].

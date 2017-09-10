@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
-	"super" : "BlGeometryElement",
-	"category" : "Bloc-Geometry-Rectangle",
+	"super" : "BlElement",
+	"category" : "Bloc-Geometry-Line",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

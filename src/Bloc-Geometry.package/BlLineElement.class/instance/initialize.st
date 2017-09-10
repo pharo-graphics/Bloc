@@ -3,5 +3,4 @@ initialize
 	super initialize.
 	
 	fromAnchor := self defaultFromAnchor.
-	toAnchor := self defaultToAnchor.
-	self constraints ignoreByLayout
+	toAnchor := self defaultToAnchor

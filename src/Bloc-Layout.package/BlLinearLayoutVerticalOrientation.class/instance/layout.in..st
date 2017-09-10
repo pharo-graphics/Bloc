@@ -17,7 +17,7 @@ layout: anElement in: aRectangle
 	elementInnerBounds := anElement padding inset: anElement boundsInLocal.
 	majorBounds = elementInnerBounds ifFalse: [
 		| translation |
-		translation := self layout verticalAlignment translate: majorBounds in: elementInnerBounds.
+		translation := self layout verticalAlignment translationOf: majorBounds in: elementInnerBounds.
 		majorBounds := majorBounds translateBy: translation ].
 
 	right := majorBounds right.
@@ -35,13 +35,13 @@ layout: anElement in: aRectangle
 			self layout horizontalAlignment ifNotNull: [ 
 				| translation allowedBounds |
 				allowedBounds := childBounds origin extent: elementInnerBounds width @ child measuredHeight.
-				translation := (self layout horizontalAlignment directed: self layout direction) translate: childBounds in: allowedBounds.
+				translation := (self layout horizontalAlignment directed: self layout direction) translationOf: childBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 
 			self layout horizontalAlignment ifNull: [ 
 				| translation allowedBounds |
 				allowedBounds := childBounds origin extent: elementInnerBounds width @ child measuredHeight.
-				translation := (childConstraints horizontal alignment directed: self layout direction) translate: childBounds in: allowedBounds.
+				translation := (childConstraints horizontal alignment directed: self layout direction) translationOf: childBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 			
 			"telling each subnode what bounds to use for layouting process.

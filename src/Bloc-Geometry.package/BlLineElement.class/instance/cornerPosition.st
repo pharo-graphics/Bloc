@@ -4,4 +4,4 @@ cornerPosition
 	that I should have according to my to anchors"
 	<return: #Point>
 
-	^ self localPointToParent: (self toAnchor positionWithin: self)
+	^ self toAnchor positionWithin: self

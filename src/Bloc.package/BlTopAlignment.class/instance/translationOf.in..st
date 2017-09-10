@@ -1,5 +1,5 @@
 translation
-translate: aBounds in: aContainerBounds
+translationOf: aBounds in: aContainerBounds
 	<return: #Point>
 	
 	^ 0 @ (aContainerBounds top - aBounds top)

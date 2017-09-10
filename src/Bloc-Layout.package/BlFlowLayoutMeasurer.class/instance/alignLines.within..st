@@ -24,7 +24,7 @@ alignLines: theLines within: anExtent
 		alignment := alignment directed: self direction.
 	
 		allowedBounds := 0 @ excessOffset extent: anExtent x @ (lineBreadth + extraBreadth).
-		origin := alignment translate: (0 @ excessOffset extent: lineLength @ lineBreadth) in: allowedBounds.
+		origin := alignment translationOf: (0 @ excessOffset extent: lineLength @ lineBreadth) in: allowedBounds.
 		
 		excessOffset := excessOffset + extraBreadth.
 		aLine startLength: aLine startLength + origin x.

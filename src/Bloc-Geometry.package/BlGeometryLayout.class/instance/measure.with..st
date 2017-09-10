@@ -1,7 +1,7 @@
 measure
 measure: anElement with: anExtentSpec
 	| maxExtent maxWidth maxHeight |
-	
+
 	"By definition geometry layout relies on element's geometry bounds
 	and does not take children into account.
 	We can optimise children measurement and complete everything in just one pass"

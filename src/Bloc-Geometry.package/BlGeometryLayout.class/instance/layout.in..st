@@ -5,9 +5,9 @@ layout: anElement in: aRectangle
 	anElementTopLeft := anElement insets topLeft.
 	anElementBottomRight := anElement boundsInLocal corner - anElement insets bottomRight.
 
-	anElement managedChildren
-		select: [ :aChild | aChild visibility shouldLayout ]
-		thenDo: [ :aChild |
+	self
+		layeredChildren: anElement
+		do: [ :aChild |
 			| aMinTopLeft aChildBounds aChildOrigin aChildCorner aChildPosition |
 			aMinTopLeft := anElementTopLeft + aChild outsets topLeft.
 			
@@ -16,4 +16,6 @@ layout: anElement in: aRectangle
 			aChildCorner := aChildBounds corner min: anElementBottomRight - aChild outsets bottomRight.
 			aChildPosition := (aChildCorner - aChildBounds extent) max: aMinTopLeft.		
 			
-			aChild applyLayoutIn: (aChildPosition extent: aChildBounds extent) ]
+			aChild applyLayoutIn: (aChildPosition extent: aChildBounds extent) ].
+	
+	self layoutIgnored: anElement

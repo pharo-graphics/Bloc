@@ -27,7 +27,7 @@ alignLine: aLine
 			ifFalse: [ alignment inverted ].
 
 		allowedBounds := 0 @ excessOffset extent: (childLength + extraLength) @ aLine breadth.
-		origin := alignment translate: (0 @ excessOffset extent: childLength @ childBreadth) in: allowedBounds.
+		origin := alignment translationOf: (0 @ excessOffset extent: childLength @ childBreadth) in: allowedBounds.
 		excessOffset := excessOffset + extraLength.
 		
 		aChild startLength: origin x + aChild startLength.

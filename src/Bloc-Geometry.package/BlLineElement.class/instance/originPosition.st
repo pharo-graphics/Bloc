@@ -4,4 +4,4 @@ originPosition
 	that I should have according to my from anchors"
 	<return: #Point>
 	
-	^ self localPointToParent: (self fromAnchor positionWithin: self)
+	^ self fromAnchor positionWithin: self
