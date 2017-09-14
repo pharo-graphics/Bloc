@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "TheoMugnier 9/11/2017 15:59",
+	"super" : "Color",
+	"category" : "Bloc-SVG-Element",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"SVGColorRegistry"
+	],
+	"instvars" : [ ],
+	"name" : "SvgColor",
+	"type" : "normal"
+}

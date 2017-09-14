@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "TheoMugnier 9/7/2017 17:29",
+	"super" : "BlGeometry",
+	"category" : "Bloc-SVG-Path",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"pathData"
+	],
+	"name" : "BlSvgPath",
+	"type" : "normal"
+}

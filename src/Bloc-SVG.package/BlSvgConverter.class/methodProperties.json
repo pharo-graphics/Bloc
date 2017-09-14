@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"factory" : "TheoMugnier 8/3/2017 14:02",
+		"factory:" : "TheoMugnier 7/13/2017 15:06",
+		"factoryByDefault" : "TheoMugnier 9/7/2017 17:31",
+		"convertXMLDocument:" : "TheoMugnier 8/22/2017 17:11"
+	},
+	"class" : {
+		"convertFromString:" : "TheoMugnier 8/31/2017 06:08",
+		"convertFromFile:" : "TheoMugnier 8/31/2017 06:07",
+		"convertFromURL:" : "TheoMugnier 8/31/2017 06:08"
+	}
+}

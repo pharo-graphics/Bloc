@@ -1,0 +1,3 @@
+accessing
+scaleXY
+	^scaleX @ scaleY

@@ -29,6 +29,13 @@ baseline: spec
 					versionString: #'stable';
 					repository: 'http://smalltalkhub.com/mc/ronsaldo/UFFIOpenGL/main/' ];
 			
+			"XMLParser is needed to parse svg files"	
+			project: 'XMLParser' with: [ spec
+				className: #ConfigurationOfXMLParser;
+				versionString: #'stable';
+				loads: #('Core');
+				repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ];
+			
 			"main core package, implements element composition, event handling and universe infrastructure.
 			*core* must not depend on anything"
 			package: #Bloc;
@@ -55,8 +62,11 @@ baseline: spec
 			package: #'Bloc-Text-Rope' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
 			package: #'Bloc-Text-Rope-Examples' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope' GTExamples). ];
 
+			"Contains a converter from SVG to Bloc"
+			package: #'Bloc-SVG' with: [ spec requires: #(Bloc XMLParser) ];
+	
 			"Sparta provides us with a canvas and text support"
-			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
+			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-SVG' Sparta) ];
 			
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GTExamples UFFIOpenGL). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout' 'Beacon'). ];
@@ -80,16 +90,16 @@ baseline: spec
 				
 				"core only loads very basic stuff"
 				'BlocHost-Morphic'
-
 				'Bloc-Animation'
 				'Bloc-Examples'
 				'Bloc-Sparta'
-
 				'Bloc-Infinite'
 				'Bloc-Infinite-Layouts'
 				'Bloc-Infinite-Examples'
 				
-				'Bloc-Extensions');
+				'Bloc-Extensions'
+				
+				'Bloc-SVG');
 
 			group: 'development' with: #(
 				'core'
@@ -106,4 +116,4 @@ baseline: spec
 			"below we define groups to load only specific packages in order to test dependencies"
 			group: 'minimal:bloc' with: #(Bloc 'Bloc-Tests');
 			group: 'minimal:bloc+layout' with: #('minimal:bloc' 'Bloc-Layout' 'Bloc-Layout-Tests')
-		]
+]

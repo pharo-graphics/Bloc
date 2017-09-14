@@ -2,5 +2,6 @@
 asSpartaPaintOn: aSpartaCanvas
 	^ aSpartaCanvas paint radialGradient
 		stops: self stops;
-		innerCenter: self center;
-		innerRadius: self radius
+		outerCenter: self center;
+		outerRadius: self radius;
+		innerCenter: self focalPoint

@@ -1,0 +1,20 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"relative",
+		"previousPoint",
+		"previousControlPoint",
+		"maxPoint",
+		"minPoint",
+		"extent"
+	],
+	"name" : "BlSvgPathExtentResolver",
+	"commentStamp" : "TheoMugnier 9/7/2017 17:22",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-SVG-Path"
+}

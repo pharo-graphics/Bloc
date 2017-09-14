@@ -1,0 +1,1 @@
+I am a BlLayout used to allow the BlElement to adopt the correct size to display its children.

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "TheoMugnier 8/31/2017 06:11",
+	"super" : "Object",
+	"category" : "Bloc-SVG-Converter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"factory"
+	],
+	"name" : "BlSvgConverter",
+	"type" : "normal"
+}
