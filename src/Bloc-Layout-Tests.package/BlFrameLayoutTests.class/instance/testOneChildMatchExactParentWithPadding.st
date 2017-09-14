@@ -13,4 +13,4 @@ testOneChildMatchExactParentWithPadding
 	self assert: child extent equals: 340@260.
 	
 	self assert: parent position equals: 0@0.
-	self assert: parent extent equals: 400@300.
+	self assert: parent extent equals: 400@300
