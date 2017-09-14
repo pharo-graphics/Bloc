@@ -1,3 +1,3 @@
 instance creation
 fromStream: aStream
-	self pathData: (BlSvgPathConverter new stream: aStream readStream) convertPathData
+	self pathData: (BlSvgPathBuilder new stream: aStream readStream) convertedPathData

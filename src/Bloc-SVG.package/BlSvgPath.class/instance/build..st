@@ -1,6 +1,6 @@
 instance creation
 build: aBlock
-	| b |
-	b := BlSvgPathConverter new.
-	aBlock value: b.
-	self pathData: b convertPathData
+	| aPathbuilder |
+	aPathbuilder := BlSvgPathBuilder new.
+	aBlock value: aPathbuilder.
+	self pathData: aPathbuilder convertedPathData

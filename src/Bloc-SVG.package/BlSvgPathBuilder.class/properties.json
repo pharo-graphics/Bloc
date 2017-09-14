@@ -1,0 +1,20 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"stream",
+		"segments",
+		"path",
+		"absolute",
+		"min",
+		"max"
+	],
+	"name" : "BlSvgPathBuilder",
+	"commentStamp" : "GlennCavarle 10/12/2016 15:08",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-SVG-Path"
+}
