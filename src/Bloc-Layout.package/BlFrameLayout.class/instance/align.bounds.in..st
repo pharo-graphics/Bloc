@@ -1,6 +1,9 @@
 layout
-align: anElement bounds: elementBounds in: allowedBounds
-	| translation alignment |
+align: anElement bounds: elementBounds in: theParentBounds
+	| translation alignment allowedBounds |
+	
+	"take margin into account"
+	allowedBounds := anElement margin inset: theParentBounds.
 	
 	"a composite alignment"
 	alignment := anElement constraints frame alignment directed: self direction.

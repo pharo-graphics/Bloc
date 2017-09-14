@@ -63,7 +63,7 @@ baseline: spec
 			package: #'Bloc-Text-Rope-Examples' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope' GTExamples). ];
 
 			"Contains a converter from SVG to Bloc"
-			package: #'Bloc-SVG' with: [ spec requires: #(Bloc XMLParser) ];
+			package: #'Bloc-SVG' with: [ spec requires: #('Bloc' 'Bloc-Geometry' 'Bloc-Text' 'Bloc-Text-Rope' XMLParser) ];
 	
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-SVG' Sparta) ];
@@ -96,7 +96,7 @@ baseline: spec
 				'Bloc-Infinite'
 				'Bloc-Infinite-Layouts'
 				'Bloc-Infinite-Examples'
-				
+
 				'Bloc-Extensions'
 				
 				'Bloc-SVG');

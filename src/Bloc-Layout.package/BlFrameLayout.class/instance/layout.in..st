@@ -5,7 +5,7 @@ layout: anElement in: aRectangle
 	self layoutIgnored: anElement.
 	
 	"first store parent's local bounds"
-	parentBounds := anElement constraints padding inset: (0@0 extent: aRectangle extent).
+	parentBounds := anElement padding inset: (0@0 extent: aRectangle extent).
 	"reuse the same instance for children bounds"
 	childBounds := BlBounds new.
 	
