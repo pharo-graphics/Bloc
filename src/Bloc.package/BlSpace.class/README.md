@@ -1,1 +1,1 @@
-I am the logical representationn of a window in Bloc regardless the current Host in use.
+I am the logical representation of a window in Bloc regardless the current Host in use.
