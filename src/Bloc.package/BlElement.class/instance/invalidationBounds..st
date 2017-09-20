@@ -4,9 +4,9 @@ invalidationBounds: aBounds
 	if #invalidate would be sent to me"
 	<return: #BlBounds>
 	| anInvalidationBounds |
-	
+
 	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
-	
+
 	self clipChildren ifFalse: [ 
 		| aChildBounds |
 		aChildBounds := BlBounds new.

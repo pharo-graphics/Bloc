@@ -1,3 +1,3 @@
 accessing
 extent
-	^ self extentProperty value
+	^ self bounds extent

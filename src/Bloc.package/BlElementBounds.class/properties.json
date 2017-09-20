@@ -1,0 +1,15 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"referenceElement"
+	],
+	"name" : "BlElementBounds",
+	"commentStamp" : "AliakseiSyrel 9/20/2017 09:27",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Support"
+}

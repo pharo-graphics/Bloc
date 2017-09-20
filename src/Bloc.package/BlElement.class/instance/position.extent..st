@@ -34,8 +34,9 @@ position: aPosition extent: anExtent
 				ifFalse: [ self invalidateInParent ] ].
 
 	isPositionChanged ifTrue: [
-		"change my position"
-		self positionProperty value: aPosition.
+		"change my position"		
+		self bounds position: aPosition.
+		
 		self onPositionChanged.
 		"position changed without extent => invalidate cached space bounds.
 		Note, that if extent changes we invalidate bounds cache anyway"
@@ -43,7 +44,7 @@ position: aPosition extent: anExtent
 
 	isExtentChanged ifTrue: [ 
 		"change my extent"
-		self extentProperty value: anExtent.
+		self bounds extent: anExtent.
 		self onExtentChanged.
 
 		"extent changed => invalidate cached local bounds"

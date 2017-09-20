@@ -1,12 +1,12 @@
 change reporting
 invalidateInParent
-	| aSpartaRectangle |
+	| aBlBounds |
 
 	self isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
 
-	aSpartaRectangle := self invalidationBounds: self class invalidateBounds.
-	self localBoundsToParent: aSpartaRectangle.
+	aBlBounds := self invalidationBounds: self class invalidationBounds.
+	self localBoundsToParent: aBlBounds.
 	self hasParent
-		ifTrue: [ self parent invalidRect: aSpartaRectangle ]
-		ifFalse: [ self space invalidRect: aSpartaRectangle from: self ]
+		ifTrue: [ self parent invalidRect: aBlBounds ]
+		ifFalse: [ self space invalidRect: aBlBounds from: self ]

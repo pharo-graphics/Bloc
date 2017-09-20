@@ -2,8 +2,6 @@
 	"classtraitcomposition" : "TBlEventTarget classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"position",
-		"extent",
 		"elevation",
 		"geometry",
 		"parent",
@@ -26,7 +24,8 @@
 		"misc",
 		"mouseCursor",
 		"opacity",
-		"outskirts"
+		"outskirts",
+		"bounds"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 8/13/2017 18:24",

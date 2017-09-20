@@ -1,4 +1,6 @@
 initialization
 initialize
 	super initialize.
-	rawValue :=  1 @ 1 
+	
+	position := 0@0.
+	extent := 50@50

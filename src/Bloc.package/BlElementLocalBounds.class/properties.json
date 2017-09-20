@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementBounds",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"extent",
+		"position"
+	],
+	"name" : "BlElementLocalBounds",
+	"type" : "normal"
+}

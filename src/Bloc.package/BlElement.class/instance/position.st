@@ -1,3 +1,3 @@
 geometry position
 position
-	^ self positionProperty value
+	^ self bounds position

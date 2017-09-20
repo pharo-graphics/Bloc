@@ -3,6 +3,8 @@ initialize
 	super initialize.
 
 	boundsCache := BlBoundsCache on: self.
+	bounds := BlElementLocalBounds new referenceElement: self.
+
 	eventDispatcher := BlBubblingEventDispatcher on: self.
 	zIndex := 0.
 	constraints := BlLayoutCommonConstraints new.

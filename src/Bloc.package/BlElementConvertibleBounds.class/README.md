@@ -1,0 +1,1 @@
+I am a special type of element bounds with an ability to be in-place converted between coordinate systems (local <-> parent <-> global <-> window)

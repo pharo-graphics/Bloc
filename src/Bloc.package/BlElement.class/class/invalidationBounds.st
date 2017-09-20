@@ -1,5 +1,5 @@
 accessing
-invalidateBounds
+invalidationBounds
 	"Return a temporary bounds used by various #invalidate methods.
 	It is a shared singleton to minimize object creation.
 	Benchmarks show there might be dozens of thousands invalidation calls per frame where
