@@ -1,4 +1,4 @@
 *Bloc-Sparta
 geomPathOnSpartaCanvas: aCanvas
 	self checkSession.
-	^ geomPath ifNil: [ geomPath := self pathOnSpartaCanvas: aCanvas inBounds: self owner boundsInLocal ]
+	^ geometryPath ifNil: [ geometryPath := self pathOnSpartaCanvas: aCanvas inBounds: self ownerElement boundsInLocal ]

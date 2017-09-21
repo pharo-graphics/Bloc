@@ -2,14 +2,12 @@
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"owner",
-		"geomPath",
-		"innerPath",
-		"borderPath",
-		"session"
+		"session",
+		"geometryPath",
+		"ownerElement"
 	],
 	"name" : "BlPathCache",
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 9/21/2017 12:48",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",

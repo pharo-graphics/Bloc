@@ -1,3 +1,5 @@
 accessing
 releaseCache
-	geomPath := innerPath := borderPath := nil
+	"Release path caches requiring their fresh creation"
+
+	geometryPath := nil

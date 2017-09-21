@@ -1,3 +1,3 @@
-as yet unclassified
+instance creation
 on: anElement
-	^ self new owner: anElement
+	^ self new ownerElement: anElement

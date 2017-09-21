@@ -51,6 +51,7 @@ position: aPosition extent: anExtent
 		boundsCache invalidateBoundsInLocal.
 		"extent changed => path also"
 		self updatePath.
+		"clear path cache after updating geometry path"
 		pathCache releaseCache ].
 
 	"damage area after position change"
