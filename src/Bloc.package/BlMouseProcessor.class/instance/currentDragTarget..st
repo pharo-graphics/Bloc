@@ -1,3 +1,3 @@
 accessing
-currentDragTarget: anObject
-	currentDragTarget := anObject
+currentDragTarget: anElementOrNil
+	currentDragTarget := anElementOrNil
