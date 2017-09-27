@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"title"
+		"title",
+		"elementBlock"
 	],
 	"name" : "BlInfiniteExamplePagerPane",
 	"type" : "normal"

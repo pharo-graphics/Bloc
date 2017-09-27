@@ -3,7 +3,7 @@ initialize
 	super initialize.
 	
 	itemElement := BlElement new.
+	itemElement layout: BlLinearLayout vertical.
 	itemElement constraintsDo: [ :c | 
 		c horizontal matchParent.
-		c vertical matchParent ].
-	itemElement background: Color random.
+		c vertical matchParent ]
