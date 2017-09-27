@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Infinite-Examples-Core - Pager",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"title"
+	],
+	"name" : "BlInfiniteExamplePagerPane",
+	"type" : "normal"
+}
