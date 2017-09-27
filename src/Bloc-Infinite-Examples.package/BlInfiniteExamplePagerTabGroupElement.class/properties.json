@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Infinite-Examples-Core - Pager",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"labelsElement",
+		"contentElement"
+	],
+	"name" : "BlInfiniteExamplePagerTabGroupElement",
+	"type" : "normal"
+}
