@@ -4,4 +4,4 @@ measuredHeight
 	@see BlElement>>#measuredExtent for more info"
 	<return: #Number>
 	
-	^ self measuredExtent y
+	^ self measuredBounds height

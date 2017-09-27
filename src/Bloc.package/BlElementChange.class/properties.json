@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 9/27/2017 08:36",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlElementChange",
+	"type" : "normal"
+}

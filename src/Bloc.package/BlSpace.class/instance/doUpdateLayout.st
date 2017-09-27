@@ -13,4 +13,4 @@ doUpdateLayout
 			usedSize:  0
 			resizer: BlLayoutResizer matchParent)).
 	"...then we layout in measured during previous step bounds"
-	self root applyLayoutIn: self root measuredBounds
+	self root applyLayoutIn: self root measuredBounds asRectangle

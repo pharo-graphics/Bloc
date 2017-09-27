@@ -25,7 +25,8 @@
 		"mouseCursor",
 		"opacity",
 		"outskirts",
-		"bounds"
+		"bounds",
+		"measuredBounds"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 8/13/2017 18:24",

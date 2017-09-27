@@ -6,4 +6,4 @@ measuredExtent
 	measuredExtent can not be nil"
 	<return: #Point>
 	
-	^ self layout measuredExtent
+	^ self measuredBounds extent

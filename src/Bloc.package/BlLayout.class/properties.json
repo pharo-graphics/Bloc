@@ -4,7 +4,6 @@
 	"instvars" : [
 		"requestingLayout",
 		"previousMeasurementSpec",
-		"measuredExtent",
 		"direction",
 		"waitingLayout"
 	],

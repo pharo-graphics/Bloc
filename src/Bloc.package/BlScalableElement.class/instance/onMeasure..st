@@ -14,7 +14,7 @@ onMeasure: anExtentMeasurementSpec
 
 	self contentElement scaleTo: scaleFactor asPoint.
 	
-	scaledBounds := self contentElement transform transformBounds: (self contentElement measuredBounds: BlBounds new).
+	scaledBounds := self contentElement transform transformBounds: (self contentElement measuredBounds bounds).
 
 	aTranslation := scaledBounds extent - oldExtent.
 	self contentElement translateTo: (aTranslation / 2.0) negated.

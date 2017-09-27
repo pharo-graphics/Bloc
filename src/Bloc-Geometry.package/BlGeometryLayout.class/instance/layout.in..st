@@ -11,7 +11,7 @@ layout: anElement in: aRectangle
 			| aMinTopLeft aChildBounds aChildOrigin aChildCorner aChildPosition |
 			aMinTopLeft := anElementTopLeft + aChild outsets topLeft.
 			
-			aChildBounds := aChild measuredBounds.
+			aChildBounds := aChild measuredBounds asRectangle.
 			aChildOrigin := aChildBounds origin max: aMinTopLeft.
 			aChildCorner := aChildBounds corner min: anElementBottomRight - aChild outsets bottomRight.
 			aChildPosition := (aChildCorner - aChildBounds extent) max: aMinTopLeft.		

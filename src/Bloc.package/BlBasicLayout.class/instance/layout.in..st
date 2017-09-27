@@ -2,4 +2,4 @@ layout
 layout: anElement in: aRectangle
 
 	anElement managedChildrenDo: [ :child |
-		child applyLayoutIn: child measuredBounds ]
+		child applyLayoutIn: child measuredBounds asRectangle ]

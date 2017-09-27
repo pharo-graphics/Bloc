@@ -4,4 +4,4 @@ measuredWidth
 	@see BlElement>>#measuredExtent for more info"
 	<return: #Number>
 	
-	^ self measuredExtent x
+	^ self measuredBounds width

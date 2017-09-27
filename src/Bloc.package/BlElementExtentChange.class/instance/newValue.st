@@ -1,0 +1,3 @@
+accessing
+newValue
+	^ self newExtent

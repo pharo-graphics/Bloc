@@ -31,5 +31,5 @@ forceLayout
 					resizer: self constraints vertical resizer)).
 			
 			"...then we layout in measured on previous step bounds"
-			self applyLayoutIn: self measuredBounds.
+			self applyLayoutIn: self measuredBounds asRectangle.
 			relayoutCounter := relayoutCounter + 1 ]

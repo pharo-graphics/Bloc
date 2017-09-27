@@ -1,0 +1,1 @@
+I represent an extent change and notify a corresponding BlElementExtentChangedEvent
