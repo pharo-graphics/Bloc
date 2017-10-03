@@ -1,7 +1,7 @@
 *Bloc-SVG
 visualBoundsInParent
-	|bounds|
-	bounds := BlBounds fromRectangle: (self visualBoundsOn: (Bloc preferableSpartaCanvas offscreen)).
-	transform transformBounds: bounds.
-	bounds translateBy: self position.
-	^bounds asRectangle
+	| theBounds |
+	theBounds := BlBounds fromRectangle: (self visualBoundsOn: (Bloc preferableSpartaCanvas offscreen)).
+	transform transformBounds: theBounds.
+	theBounds translateBy: self position.
+	^ theBounds asRectangle

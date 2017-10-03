@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"contentElement"
+		"contentElement",
+		"scaleFactor"
 	],
 	"name" : "BlScalableElement",
 	"type" : "normal"
