@@ -1,7 +1,7 @@
-as yet unclassified
+*Bloc-Extensions
 gtInspectorChangesIn: composite
 	<gtInspectorPresentationOrder: 90>
 		
 	composite fastList 
 		title: 'Changes' translated;
-		display: [ self loggedValues asArray ]
+		display: [ self records asArray ]

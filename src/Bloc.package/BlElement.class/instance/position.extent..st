@@ -27,7 +27,7 @@ position: aPosition extent: anExtent
 
 	"damage area according to my previous space bounds"
 	(isPositionChanged or: [ isShrinking or: [ isGrowing not ] ])
-		ifTrue: [ 
+		ifTrue: [
 			isExtentChanged
 				"If extent changes we have to invalidate my own damaged area"
 				ifTrue: [ self invalidate ]
@@ -35,7 +35,7 @@ position: aPosition extent: anExtent
 				ifFalse: [ self invalidateInParent ] ].
 
 	isPositionChanged ifTrue: [
-		"change my position"		
+		"change my position"
 		self bounds position: aPosition.
 		self changes positionChange: aPreviousPosition to: aPosition.
 

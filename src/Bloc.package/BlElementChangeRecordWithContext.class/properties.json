@@ -1,14 +1,14 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "BlElementChangeRecord",
 	"category" : "Bloc-Basic-Changes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"changedValue",
-		"wasNotified"
+		"context",
+		"timestamp"
 	],
-	"name" : "BlElementChangeValue",
+	"name" : "BlElementChangeRecordWithContext",
 	"type" : "normal"
 }

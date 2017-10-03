@@ -1,8 +1,8 @@
-as yet unclassified
+*Bloc-Extensions
 gtInspectorActionClean
 	<gtInspectorAction>
 	
 	^ GLMGenericAction new
-		action: [ :aPresentation | loggedValues removeAll. aPresentation requestRefresh ];
+		action: [ :aPresentation | records removeAll. aPresentation requestRefresh ];
 		icon: GLMUIThemeExtraIcons glamorousTrash;
 		title: 'Clean log'

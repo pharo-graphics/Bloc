@@ -2,9 +2,9 @@
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
+		"records",
 		"hasActiveChanges",
-		"loggedValues",
-		"lastNotifiedValue"
+		"previousValue"
 	],
 	"name" : "BlElementChange",
 	"commentStamp" : "AliakseiSyrel 10/1/2017 12:57",

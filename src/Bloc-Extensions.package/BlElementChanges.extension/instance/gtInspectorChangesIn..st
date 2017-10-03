@@ -5,7 +5,7 @@ gtInspectorChangesIn: composite
 	composite tree 
 		title: 'Changes' translated;
 		rootsExpanded;
-		display: [ self changes select: [ :each | each loggedValues isNotEmpty ] ];
+		display: [ self changes select: [ :each | each records isNotEmpty ] ];
 		children: [ :each | (each isKindOf: BlElementChange)
-				ifTrue: [ each loggedValues ]
+				ifTrue: [ each records ]
 				ifFalse: [ {  } ] ]

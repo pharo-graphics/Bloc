@@ -2,5 +2,5 @@ initialization
 initialize
 	super initialize.
 	
-	loggedValues := LinkedList new.
+	records := LinkedList new.
 	hasActiveChanges := false
