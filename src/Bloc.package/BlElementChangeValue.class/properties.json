@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"changedValue"
+		"changedValue",
+		"wasNotified"
 	],
 	"name" : "BlElementChangeValue",
 	"type" : "normal"

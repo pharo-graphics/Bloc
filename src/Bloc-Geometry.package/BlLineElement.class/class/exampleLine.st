@@ -26,5 +26,4 @@ exampleLine
 			(BlEventHandler
 				on: BlDblClickEvent
 				do: [ :evt | BlElementSelection on: evt target ]).
-	space show.
-	line inspect
+	space show

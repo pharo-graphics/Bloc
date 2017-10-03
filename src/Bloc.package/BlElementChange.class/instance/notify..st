@@ -7,11 +7,13 @@ notify: anElement
 	self
 		assert: [ self hasActiveChanges ]
 		description: [ 'I must have active changes in order to notify them' ].
-	
+
 	lastValue := loggedValues last changedValue.
 	
 	(lastNotifiedValue = lastValue)
-		ifFalse: [ self notifyChanges: anElement ].
+		ifFalse: [
+			loggedValues last beNotified.
+			self notifyChanges: anElement ].
 	
 	lastNotifiedValue := lastValue.
 	hasActiveChanges := false

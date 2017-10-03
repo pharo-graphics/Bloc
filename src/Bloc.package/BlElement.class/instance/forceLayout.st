@@ -33,6 +33,6 @@ forceLayout
 			"...then we layout in measured on previous step bounds"
 			self applyLayoutIn: self measuredBounds asRectangle.
 			
-			self notifyChanges.
+			self commitChanges.
 			
 			relayoutCounter := relayoutCounter + 1 ]

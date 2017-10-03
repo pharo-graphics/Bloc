@@ -6,7 +6,7 @@ positionChangeLoop
 	element := self element.
 	positionChanged := 0.
 	positionInSpaceChanged := 0.
-	
+
 	positionChangedListener := BlEventHandler
 		on: BlElementPositionChangedEvent
 		do: [ positionChanged := positionChanged + 1 ].
@@ -18,7 +18,7 @@ positionChangeLoop
 	element addEventHandler: positionInSpaceChangedListener.
 	
 	element position: 30@30 extent: element extent.
-	element notifyChanges.
+	element commitChanges.
 	
 	self assert: positionChanged equals: 1.
 	self assert: positionInSpaceChanged equals: 1.
@@ -28,7 +28,7 @@ positionChangeLoop
 	
 	element position: 40@40 extent: element extent.
 	element position: 30@30 extent: element extent.
-	element notifyChanges.
+	element commitChanges.
 	
 	self assert: positionChanged equals: 0.
 	self assert: positionInSpaceChanged equals: 0.

@@ -55,7 +55,7 @@ parentPositionChanged
 	parent position: 50@50 extent: parent extent.
 	
 	"notify changed"
-	parent notifyChanges.
+	parent commitChanges.
 
 	self assert: parent position equals: 50@50.
 	self assert: parentPositionChanged equals: 1.

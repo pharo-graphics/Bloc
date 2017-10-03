@@ -5,4 +5,4 @@ layoutIgnored: anElement
 	
 	anElement children
 		select: [ :aChild | aChild constraints ignoredByLayout ]
-		thenDo: [ :aChild | aChild applyLayoutIn:  aChild measuredBounds asRectangle ]
+		thenDo: [ :aChild | aChild applyLayoutIn: aChild measuredBounds asRectangle ]
