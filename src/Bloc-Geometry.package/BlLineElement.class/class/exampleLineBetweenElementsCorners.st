@@ -9,7 +9,7 @@ exampleLineBetweenElementsCorners
 
 	attachPoint1 := BlAttachPoint new
 		size: 0@0;
-		position: 100 @ 100;
+		relocate: 100 @ 100;
 		constraintsDo: [ :c |
 			c frame horizontal alignRight.
 			c frame vertical alignCenter ].

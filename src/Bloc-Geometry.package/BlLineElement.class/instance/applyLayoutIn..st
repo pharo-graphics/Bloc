@@ -4,5 +4,7 @@ applyLayoutIn: aBounds
 
 	anOrigin := self originPosition.
 	aCorner := self cornerPosition.
+	
+	WrapperSignal emit: anOrigin -> aCorner.
 
 	super applyLayoutIn: (Rectangle encompassing: { anOrigin. aCorner }).

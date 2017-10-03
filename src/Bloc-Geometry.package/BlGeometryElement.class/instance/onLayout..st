@@ -2,4 +2,4 @@ layout
 onLayout: aBounds	
 	super onLayout: aBounds.
 	
-	self measureAttachPoints
+	"self measureAttachPoints"

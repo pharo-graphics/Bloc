@@ -1,3 +1,3 @@
 geometry
 positionWithin: aGeometryElement
-	^ aGeometryElement parentPointToLocal: self position
+	^ self position

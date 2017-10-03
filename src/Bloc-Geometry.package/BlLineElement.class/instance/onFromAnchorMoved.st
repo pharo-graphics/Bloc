@@ -2,4 +2,6 @@ anchor - hooks
 onFromAnchorMoved
 	"I am sent when from-anchor moved"
 	
-	"self requestLayout"
+	self requestLayout.
+	
+	ContextStackSignal emit

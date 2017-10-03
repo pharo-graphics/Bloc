@@ -3,7 +3,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"hasActiveChanges",
-		"loggedValues"
+		"loggedValues",
+		"lastNotifiedValue"
 	],
 	"name" : "BlElementChange",
 	"commentStamp" : "AliakseiSyrel 10/1/2017 12:57",
