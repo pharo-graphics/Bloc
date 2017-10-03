@@ -17,10 +17,10 @@ connectGrid: aLeftGridElement andGrid: aRightGridElement in: aContainerElement w
 	}.
 	
 	aLeftGridElement
-		position: 50@55.
+		relocate: 50@55.
 	
 	aRightGridElement
-		position: 500@45.
+		relocate: 500@45.
 	
 	lines withIndexDo: [ :aLine :anIndex |
 		aLeftGridElement children

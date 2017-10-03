@@ -26,7 +26,8 @@
 		"opacity",
 		"outskirts",
 		"bounds",
-		"measuredBounds"
+		"measuredBounds",
+		"changes"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 8/13/2017 18:24",

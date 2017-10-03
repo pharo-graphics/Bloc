@@ -26,5 +26,12 @@ preferencesOn: aBuilder
 				target: self;
 				label: 'Assertions';
 				description: 'Set enabled to turn assertions on or disable to turn them off';
+				default: [ true ].
+				
+			(aBuilder setting: #debugModeEnabled)
+				order: 4;
+				target: self;
+				label: 'Debug Mode';
+				description: 'Set enabled to turn extensive debugging mode on or disable to turn it off';
 				default: [ false ].
 		]

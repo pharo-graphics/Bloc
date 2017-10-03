@@ -4,16 +4,14 @@ example
 	
 	line1 := BlLineElement new
 		border: (BlBorder paint: Color red width: 2);
-		showAttachPoints;
 		yourself.
 
 	line2 := BlLineElement new
 		border: (BlBorder paint: Color blue width: 2);
-		showAttachPoints;
 		yourself.
 		
 	attachPoint := BlAttachPoint new.
-	attachPoint position: 400 @ 200.
+	attachPoint relocate: 400 @ 200.
 
 	line1 fromAnchor: (BlAbsolutePositionAnchor position: 100 @ 100).
 	line1 toAnchor: (BlElementCenterAnchor element: attachPoint).
@@ -30,4 +28,6 @@ example
 			(BlEventHandler
 				on: BlDblClickEvent
 				do: [ :evt | BlElementSelection on: evt target ]).
-	space show
+	space show.
+	
+	space root inspect

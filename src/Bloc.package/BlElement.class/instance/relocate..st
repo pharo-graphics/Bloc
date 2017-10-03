@@ -1,8 +1,8 @@
 geometry position
 relocate: aPoint
 	
-	self position = aPoint
+	self measuredBounds position = aPoint
 		ifTrue: [ ^ self ].
 	
-	self position: aPoint.
+	self measuredBounds position: aPoint.
 	self requestParentLayout

@@ -8,7 +8,7 @@ position: aPosition extent: anExtent
 	Note, I do not request layout update and do not send invalidate to myself if only
 	position changes, instead I send invalidate with my effect bounds in parent coordinates
 	to my parent. It allows developers to implement drawing cache"
-	| isPositionChanged isExtentChanged aPreviousExtent isGrowing isShrinking | 
+	| isPositionChanged isExtentChanged aPreviousExtent isGrowing isShrinking aPreviousPosition | 
 		
 	isPositionChanged := self position ~= aPosition.
 	isExtentChanged := self extent ~= anExtent.
@@ -17,6 +17,7 @@ position: aPosition extent: anExtent
 	(isPositionChanged or: [ isExtentChanged ])
 		ifFalse: [ ^ self ].
 
+	aPreviousPosition := self position.
 	aPreviousExtent := self extent.
 
 	"If we are growing, there is no need to invalidate before extent change"
@@ -36,8 +37,8 @@ position: aPosition extent: anExtent
 	isPositionChanged ifTrue: [
 		"change my position"		
 		self bounds position: aPosition.
-		
-		self onPositionChanged.
+		self changes positionChange: aPreviousPosition to: aPosition.
+
 		"position changed without extent => invalidate cached space bounds.
 		Note, that if extent changes we invalidate bounds cache anyway"
 		isExtentChanged ifFalse: [ boundsCache invalidateBoundsInSpace ] ].
@@ -45,14 +46,7 @@ position: aPosition extent: anExtent
 	isExtentChanged ifTrue: [ 
 		"change my extent"
 		self bounds extent: anExtent.
-		self onExtentChanged.
-
-		"extent changed => invalidate cached local bounds"
-		boundsCache invalidateBoundsInLocal.
-		"extent changed => path also"
-		self updatePath.
-		"clear path cache after updating geometry path"
-		pathCache releaseCache ].
+		self changes extentChange: aPreviousExtent to: anExtent ].
 
 	"damage area after position change"
 	(isPositionChanged or: [ isGrowing or: [ isShrinking not ] ])

@@ -1,12 +1,13 @@
 {
 	"commentStamp" : "AliakseiSyrel 9/27/2017 08:34",
 	"super" : "Object",
-	"category" : "Bloc-Basic-Support",
+	"category" : "Bloc-Basic-Changes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"changeMap"
+		"extentChange",
+		"positionChange"
 	],
 	"name" : "BlElementChanges",
 	"type" : "normal"

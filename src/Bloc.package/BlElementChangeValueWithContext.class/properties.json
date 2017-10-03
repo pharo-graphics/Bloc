@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementChangeValue",
+	"category" : "Bloc-Basic-Changes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"context",
+		"timestamp"
+	],
+	"name" : "BlElementChangeValueWithContext",
+	"type" : "normal"
+}

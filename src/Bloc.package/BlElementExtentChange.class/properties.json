@@ -1,14 +1,11 @@
 {
 	"commentStamp" : "AliakseiSyrel 9/27/2017 09:50",
 	"super" : "BlElementChange",
-	"category" : "Bloc-Basic-Support",
+	"category" : "Bloc-Basic-Changes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"oldExtent",
-		"newExtent"
-	],
+	"instvars" : [ ],
 	"name" : "BlElementExtentChange",
 	"type" : "normal"
 }

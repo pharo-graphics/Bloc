@@ -16,7 +16,7 @@ exampleLineBetweenElementsCorners
 
 	element1 := BlElement new
 		size: 100@100;
-		position: 50@50;
+		relocate: 50@50;
 		background: (Color blue alpha: 0.5);
 		border: (BlBorder builder width: 1; paint: Color blue; build);
 		layout: BlFrameLayout new;
@@ -30,7 +30,7 @@ exampleLineBetweenElementsCorners
 			c frame vertical alignBottom ].
 	element2 := BlElement new
 		size: 100@100;
-		position: 250@250;
+		relocate: 250@250;
 		background: (Color green alpha: 0.5);
 		border: (BlBorder builder width: 1; paint: Color green muchDarker; build);
 		layout: BlFrameLayout new;

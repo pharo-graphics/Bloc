@@ -1,3 +1,0 @@
-accessing
-oldValue
-	^ self oldExtent

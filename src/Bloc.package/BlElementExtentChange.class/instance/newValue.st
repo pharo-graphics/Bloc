@@ -1,3 +1,0 @@
-accessing
-newValue
-	^ self newExtent

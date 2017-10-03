@@ -6,6 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [
 		"AssertionsEnabled",
+		"DebugModeEnabled",
 		"PreferableHostClass",
 		"PreferableSpartaCanvasBuilder"
 	],

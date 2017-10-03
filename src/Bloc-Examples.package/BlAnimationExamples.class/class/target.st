@@ -4,6 +4,6 @@ target
 
 	^ BlElement new
 		background: Color blue;
-		extent: 100 @ 100;
-		position: 100@50;
+		size: 100 @ 100;
+		relocate: 100@50;
 		yourself

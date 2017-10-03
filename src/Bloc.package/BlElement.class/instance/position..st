@@ -1,6 +1,7 @@
-accessing
-position: aPoint
-	"Change position property without requesting layout update.
-	This is not preferrable way to relocating and element, instead consider using #relocate:"
-
-	self position: aPoint extent: self extent
+geometry position
+position: aPoint 
+	self 
+		deprecated: 'Use relocate: instead'
+		on: 	'1 October 2017' 
+		in: 'Pharo-7.0-alpha.build.132.sha.4ea2f39a9f43185d31b844be5ad33b677f43bf17'.
+	^ self relocate: aPoint 

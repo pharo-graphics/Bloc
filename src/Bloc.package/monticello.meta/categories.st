@@ -1,5 +1,6 @@
 SystemOrganization addCategory: #Bloc!
 SystemOrganization addCategory: #'Bloc-Basic'!
+SystemOrganization addCategory: #'Bloc-Basic-Changes'!
 SystemOrganization addCategory: #'Bloc-Basic-Math'!
 SystemOrganization addCategory: #'Bloc-Basic-Properties'!
 SystemOrganization addCategory: #'Bloc-Basic-Support'!

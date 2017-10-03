@@ -25,10 +25,10 @@ connectGrid: aGridElement and: anAttachPoint in: aContainerElement with: aLine1 
 	}.
 	
 	aGridElement
-		position: 50@50.
+		relocate: 50@50.
 	
 	anAttachPoint
-		position: 500@400.
+		relocate: 500@400.
 	
 	lines with: aGridElement children do: [ :aLine :aGridCell |
 		aLine

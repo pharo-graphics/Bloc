@@ -2,4 +2,5 @@ initialization
 initialize
 	super initialize.
 	
-	changeMap := Dictionary new
+	extentChange := BlElementExtentChange new.
+	positionChange := BlElementPositionChange new

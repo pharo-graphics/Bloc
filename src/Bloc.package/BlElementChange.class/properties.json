@@ -1,11 +1,16 @@
 {
-	"commentStamp" : "AliakseiSyrel 9/27/2017 08:36",
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"hasActiveChanges",
+		"loggedValues"
+	],
+	"name" : "BlElementChange",
+	"commentStamp" : "AliakseiSyrel 10/1/2017 12:57",
 	"super" : "Object",
-	"category" : "Bloc-Basic-Support",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlElementChange",
-	"type" : "normal"
+	"category" : "Bloc-Basic-Changes"
 }
