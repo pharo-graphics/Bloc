@@ -9,7 +9,7 @@ example_10800El10x10_inWin1200x900_mouseMove50ms
 			currentPosition := (x*10) @ (y*10).
 			s := BlElement new
 					size: 10@10;
-					position: currentPosition;
+					relocate: currentPosition;
 					background: Color random;
 					border: (BlBorder paint: Color random width: 1);
 					addEventHandler: (BlOnMouseOverHandler do:[:e| e target background: Color random]);

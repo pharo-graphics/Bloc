@@ -3,6 +3,10 @@ forceLayout
 	| relayoutCounter maxRelayoutCount |
 	relayoutCounter := 0.
 	maxRelayoutCount := 100.
+	
+	"compute at least once"	
+	self requestLayout.
+
 	[ self isLayoutRequested
 		and: [ relayoutCounter < maxRelayoutCount ] ]
 		whileTrue: [

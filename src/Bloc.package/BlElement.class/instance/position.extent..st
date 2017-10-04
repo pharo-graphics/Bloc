@@ -46,7 +46,8 @@ position: aPosition extent: anExtent
 	isExtentChanged ifTrue: [ 
 		"change my extent"
 		self bounds extent: anExtent.
-		self changes extentChange: aPreviousExtent to: anExtent ].
+		self changes extentChange: aPreviousExtent to: anExtent.
+		boundsCache invalidateBoundsInLocal ].
 
 	"damage area after position change"
 	(isPositionChanged or: [ isGrowing or: [ isShrinking not ] ])

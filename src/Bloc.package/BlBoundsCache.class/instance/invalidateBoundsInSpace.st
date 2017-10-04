@@ -6,5 +6,5 @@ invalidateBoundsInSpace
 	transformedBounds := nil.
 	boundsInParent := nil.
 
-	self owner children do: [ :anElement |
+	self owner childrenDo: [ :anElement |
 		anElement boundsCache invalidateBoundsInSpace ]

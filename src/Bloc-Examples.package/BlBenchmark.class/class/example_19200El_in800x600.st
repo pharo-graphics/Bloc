@@ -9,7 +9,7 @@ example_19200El_in800x600
 			currentPosition := (x*5) @ (y*5).
 			s := BlElement new
 					size: 5@5;
-					position: currentPosition;
+					relocate: currentPosition;
 					background: Color random;
 					border: (BlBorder paint: Color random width: 1);
 					addEventHandler: (BlOnMouseOverHandler do:[:e| e target background:Color white]);

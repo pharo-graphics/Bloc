@@ -17,11 +17,8 @@ anim := BlAnimation new
 	onFinishedDo: [ 
 		|pos|
 		pos := (900 atRandom)@(900 atRandom).
-		space hostSpace ifNil:[^ self].
-		space hostSpace enqueueEvent: (BlMouseMoveEvent new
-		position: pos).
-		
-	 ].
+		space hostSpace ifNil: [ ^ self ].
+		space hostSpace enqueueEvent: (BlMouseMoveEvent new position: pos) ].
 child userData at: #anim put: anim.
 
 space extent: 1000@1000.

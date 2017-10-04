@@ -9,7 +9,7 @@ example_3LevelsOf100El
 				currentPosition := (x*50) @ (y*50).
 				s := BlElement new
 					size: 50@50;
-					position: currentPosition;
+					relocate: currentPosition;
 					background: Color random;
 					border: (BlBorder paint: Color random width:2);
 					yourself.

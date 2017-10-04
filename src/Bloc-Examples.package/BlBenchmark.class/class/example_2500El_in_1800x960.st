@@ -8,12 +8,12 @@ example_2500El_in_1800x960
 			currentPosition := (x*50) @ (y*50).
 			s := BlElement new
 					size: 50@50;
-					position: currentPosition;
+					relocate: currentPosition;
 					background: Color random;
 					border: (BlBorder paint: Color random width: 2);
 					addEventHandler: (BlOnMouseOverHandler do:[:e| e target background: Color random]);
 					yourself.
-			sp root addChild:s
+			sp root addChild: s
   ]].
 sp root addEventHandler: (BlEventHandler 
 on:BlDblClickEvent do:[:evt|  BlElementSelection on: evt target. ]).
