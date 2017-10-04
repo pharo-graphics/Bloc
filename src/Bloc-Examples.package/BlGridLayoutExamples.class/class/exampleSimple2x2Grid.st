@@ -22,7 +22,7 @@ exampleSimple2x2Grid
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
 		size: 400@400;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 };
 		yourself.

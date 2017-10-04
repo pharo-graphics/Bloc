@@ -14,7 +14,7 @@ exampleHorizontal2x1Grid
 	el := BlElement new
 		layout: BlGridLayout horizontal;
 		size: 400@400;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.

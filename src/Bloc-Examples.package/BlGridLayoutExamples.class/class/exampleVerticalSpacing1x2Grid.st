@@ -18,7 +18,7 @@ exampleVerticalSpacing1x2Grid
 	el := BlElement new
 		layout: (BlGridLayout vertical cellSpacing: 20);
 		size: 200@400;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.

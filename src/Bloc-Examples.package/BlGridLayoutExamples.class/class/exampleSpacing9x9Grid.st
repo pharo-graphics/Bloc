@@ -19,7 +19,7 @@ exampleSpacing9x9Grid
 		constraintsDo: [ :c |
 			c horizontal exact: 400.
 			c vertical exact: 400 ];
-		position: 200 @ 100;
+		relocate: 0 @ 0;
 		background: Color blue;
 		addChildren: children;
 		yourself.
