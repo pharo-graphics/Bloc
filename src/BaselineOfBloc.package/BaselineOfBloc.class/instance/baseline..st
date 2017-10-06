@@ -36,11 +36,11 @@ baseline: spec
 			"main core package, implements element composition, event handling and universe infrastructure.
 			*core* must not depend on anything"
 			package: #Bloc;
-			package: #'Bloc-Tests' with: [ spec requires: #(Bloc GTExamplesEngine 'BlocHost-Mock') ];
+			package: #'Bloc-Tests' with: [ spec requires: #(Bloc GToolkitExamplesEngine 'BlocHost-Mock') ];
 	
 			"contains most common layout types. May be optional"
 			package: #'Bloc-Layout' with: [ spec requires: #(Bloc) ];
-			package: #'Bloc-Layout-Tests' with: [ spec requires: #('Bloc-Layout' GTExamplesEngine) ];
+			package: #'Bloc-Layout-Tests' with: [ spec requires: #('Bloc-Layout' GToolkitExamplesEngine) ];
 
 			"contains geometry elements that provide anchor and attachment points"
 			package: #'Bloc-Geometry' with: [ spec requires: #(Bloc) ];
@@ -49,15 +49,15 @@ baseline: spec
 			package: #'Bloc-Infinite' with: [ spec requires: #(Bloc) ];
 			"adds most common layout types for infinite element"
 			package: #'Bloc-Infinite-Layouts' with: [ spec requires: #('Bloc-Infinite') ];
-			package: #'Bloc-Infinite-Examples' with: [ spec requires: #('Bloc-Infinite' 'Bloc-Infinite-Layouts' GTExamplesEngine) ];
+			package: #'Bloc-Infinite-Examples' with: [ spec requires: #('Bloc-Infinite' 'Bloc-Infinite-Layouts' GToolkitExamplesEngine) ];
 			
 			"adds high level support of animations"
 			package: #'Bloc-Animation' with: [ spec requires: #(Bloc) ];
-			package: #'Bloc-Animation-Tests' with: [ spec requires: #('Bloc-Animation' GTExamplesEngine) ];
+			package: #'Bloc-Animation-Tests' with: [ spec requires: #('Bloc-Animation' GToolkitExamplesEngine) ];
 
 			package: #'Bloc-Text' with: [ spec requires: #(Bloc). ];
 			package: #'Bloc-Text-Rope' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
-			package: #'Bloc-Text-Rope-Examples' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope' GTExamplesEngine). ];
+			package: #'Bloc-Text-Rope-Examples' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope' GToolkitExamplesEngine). ];
 
 			"Contains a converter from SVG to Bloc"
 			package: #'Bloc-SVG' with: [ spec requires: #('Bloc' 'Bloc-Geometry' 'Bloc-Text' 'Bloc-Text-Rope' XMLParser) ];
@@ -65,7 +65,7 @@ baseline: spec
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-SVG' Sparta) ];
 			
-			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GTExamplesEngine UFFIOpenGL). ];
+			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GToolkitExamplesEngine UFFIOpenGL). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout' 'Beacon'). ];
 			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
