@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Extensions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"gridElement",
+		"leftParentheses",
+		"rightParentheses"
+	],
+	"name" : "GLMBlocMatrixElement",
+	"type" : "normal"
+}

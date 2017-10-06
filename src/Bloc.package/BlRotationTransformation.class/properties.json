@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlAffineTransformation",
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlRotationTransformation",
+	"type" : "normal"
+}

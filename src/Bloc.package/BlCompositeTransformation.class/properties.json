@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlAffineTransformation",
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"transformations"
+	],
+	"name" : "BlCompositeTransformation",
+	"type" : "normal"
+}

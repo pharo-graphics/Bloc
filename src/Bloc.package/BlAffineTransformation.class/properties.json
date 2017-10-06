@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 10/6/2017 14:39",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Math",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlAffineTransformation",
+	"type" : "normal"
+}
