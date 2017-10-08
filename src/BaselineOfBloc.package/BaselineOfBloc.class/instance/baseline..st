@@ -12,7 +12,7 @@ baseline: spec
 		   baseline: 'Beacon' with: [ spec repository: 'github://pharo-project/pharo-beacon/repository' ];
 
 			"GT-Examples is examples and testing framework"
-			baseline: 'GToolkitExamplesEngine' with: [ spec repository: 'github://feenkcom/gtoolkit-examples/repository' ];
+			baseline: 'GToolkitExamplesEngine' with: [ spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
 
 			project: 'OSWindow' with: [ spec
 				className: #ConfigurationOfOSWindow;
