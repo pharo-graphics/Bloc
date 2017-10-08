@@ -1,14 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "BlAffineTransformation",
+	"super" : "BlAffineTransformationOrigin",
 	"category" : "Bloc-Basic-Math",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"angle",
-		"axis"
+		"position"
 	],
-	"name" : "BlRotationTransformation",
+	"name" : "BlAffineTransformationPositionOrigin",
 	"type" : "normal"
 }

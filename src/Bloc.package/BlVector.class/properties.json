@@ -1,0 +1,21 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"x",
+		"y",
+		"z"
+	],
+	"name" : "BlVector",
+	"commentStamp" : "AliakseiSyrel 10/8/2017 16:51",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [
+		"zAxis",
+		"xAxis",
+		"yAxis"
+	],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Math"
+}

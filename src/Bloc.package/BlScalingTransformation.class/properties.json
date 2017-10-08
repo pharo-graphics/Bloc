@@ -5,7 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"scaleX",
+		"scaleY",
+		"scaleZ"
+	],
 	"name" : "BlScalingTransformation",
 	"type" : "normal"
 }
