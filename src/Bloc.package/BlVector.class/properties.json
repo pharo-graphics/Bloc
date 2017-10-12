@@ -14,7 +14,8 @@
 	"classinstvars" : [
 		"zAxis",
 		"xAxis",
-		"yAxis"
+		"yAxis",
+		"zero"
 	],
 	"pools" : [ ],
 	"category" : "Bloc-Basic-Math"

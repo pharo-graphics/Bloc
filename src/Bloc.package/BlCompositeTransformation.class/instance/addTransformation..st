@@ -1,0 +1,3 @@
+adding
+addTransformation: aBlAffineTransformation
+	self transformations add: aBlAffineTransformation

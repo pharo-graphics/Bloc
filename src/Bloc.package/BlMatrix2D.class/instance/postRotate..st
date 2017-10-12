@@ -1,4 +1,4 @@
-matrix - transformations
+private - matrix
 postRotate: anAngle
 	"Apply the rotation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix

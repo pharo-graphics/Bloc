@@ -1,5 +1,11 @@
 converting
 asMatrix
 	<return: #BlMatrix>
+	| aMatrix |
 	
-	^ self subclassResponsibility
+	aMatrix := self is2D
+		ifTrue: [ BlMatrix2D new ]
+		ifFalse: [ BlMatrix3D new ].
+		
+	self multiplyOn: aMatrix.
+	^ aMatrix

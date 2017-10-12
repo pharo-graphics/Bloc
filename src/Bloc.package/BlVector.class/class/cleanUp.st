@@ -4,4 +4,5 @@ cleanUp
 	
 	xAxis := nil.
 	yAxis := nil.
-	zAxis := nil
+	zAxis := nil.
+	zero := nil
