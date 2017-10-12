@@ -1,9 +1,10 @@
 mathematical functions
 multiplyOn: aBlMatrix in: aBlElement
-	| anOriginPoint |
+	| anOriginPoint aVector |
 
 	anOriginPoint := self origin originIn: aBlElement.
-
-	aBlMatrix translateBy: anOriginPoint.
+	aVector := anOriginPoint asBlocVector.
+	
+	aBlMatrix translateBy: aVector negated.
 	self multiplyOn: aBlMatrix.
-	aBlMatrix translateBy: anOriginPoint negated
+	aBlMatrix translateBy: aVector

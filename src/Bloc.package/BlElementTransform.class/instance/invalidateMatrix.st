@@ -1,3 +1,3 @@
 private
 invalidateMatrix
-	matrix := nil.
+	matrix := nil

@@ -2,16 +2,9 @@
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"translateX",
-		"translateY",
-		"translateZ",
-		"scaleX",
-		"scaleY",
-		"scaleZ",
-		"rotationQuaternion",
-		"rotateAxis",
-		"rotateAngle",
-		"matrix"
+		"owner",
+		"matrix",
+		"transformation"
 	],
 	"name" : "BlElementTransform",
 	"commentStamp" : "GlennCavarle 5/4/2017 22:07",

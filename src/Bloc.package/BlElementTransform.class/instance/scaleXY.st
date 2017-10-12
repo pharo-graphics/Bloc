@@ -1,3 +1,3 @@
 accessing
 scaleXY
-	^ scaleX @ scaleX 
+	^ 1@1

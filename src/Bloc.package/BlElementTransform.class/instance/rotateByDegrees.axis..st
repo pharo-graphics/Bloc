@@ -1,4 +1,5 @@
 rotating
 rotateByDegrees: anAngle axis: aPoint
-	self setRotateAngle: anAngle.
-	self setRotateAxis: aPoint
+	self addTransformation: (BlRotationTransformation new
+		angle: anAngle;
+		axis: aPoint asBlocVector)

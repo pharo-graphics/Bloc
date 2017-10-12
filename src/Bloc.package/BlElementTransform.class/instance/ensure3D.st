@@ -1,3 +1,3 @@
 private
 ensure3D
-	self notYetImplemented 
+	matrix := self defaultMatrix3D
