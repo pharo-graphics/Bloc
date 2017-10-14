@@ -65,7 +65,7 @@ baseline: spec
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-SVG' Sparta) ];
 			
-			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' GToolkitExamplesEngine UFFIOpenGL). ];
+			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' 'Bloc-Geometry' GToolkitExamplesEngine UFFIOpenGL). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout' 'Beacon'). ];
 			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
