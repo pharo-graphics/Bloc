@@ -1,12 +1,12 @@
 shape examples
-example3D
+exampleShapes
 	| space |
 	space := BlSpace new
-		extent: 600 @ 450;
-		title: '3D example'.
+		extent: 600 @ 350;
+		title: 'Shapes'.
 
 	space root
-		addChild: (self newCube3D relocate: 25@25);
+		addChild: (self new shapes);
 		yourself.
 
 	space root addEventHandler:

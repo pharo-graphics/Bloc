@@ -1,5 +1,5 @@
-instance creation
-newSquare
+examples - shape
+square
 	<gtExample>
 	
 	^ (BlRectangle length:80) asElement

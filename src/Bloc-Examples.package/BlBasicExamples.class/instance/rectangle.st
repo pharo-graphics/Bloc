@@ -1,5 +1,5 @@
-instance creation
-newRectangle
+examples - shape
+rectangle
 	<gtExample>
 	
 	^ (BlRectangle extent: 200 @ 100) asElement

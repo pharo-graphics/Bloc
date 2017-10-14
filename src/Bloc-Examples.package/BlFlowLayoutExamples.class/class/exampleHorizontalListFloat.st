@@ -50,7 +50,7 @@ exampleHorizontalListFloat
 		layout: BlFlowLayout new horizontal;
 		border: (BlBorder paint: Color lightGray width: 8);
 		size: 560@400;
-		position: 100 @ 50;
+		relocate: 100 @ 50;
 		background: Color white darker;
 		addChildren: before;
 		addChild: floatA;

@@ -50,7 +50,7 @@ exampleText
 			c horizontal exact: 600.
 			c vertical fitContent.
 			c padding: (BlInsets all: 10) ];
-		position: 100 @ 50;
+		relocate: 100 @ 50;
 		background: Color veryVeryLightGray;
 		border: (BlBorder paint: Color lightGray width: 8);
 		addChildren: theWords;

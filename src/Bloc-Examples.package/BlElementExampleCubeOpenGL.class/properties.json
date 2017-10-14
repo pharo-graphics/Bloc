@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlElement",
-	"category" : "Bloc-Examples-Basic",
+	"category" : "Bloc-Examples-Experimental",
 	"classinstvars" : [ ],
 	"pools" : [
 		"UFFIOpenGLConstants",

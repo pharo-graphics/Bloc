@@ -24,7 +24,7 @@ exampleVerticalLeftCenterRightLRT
 	el := BlElement new
 		layout: BlLinearLayout vertical;
 		size: 200@300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 }.
 	

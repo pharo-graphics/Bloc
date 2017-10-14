@@ -21,7 +21,7 @@ exampleHorizontalTopCenterBottomRTL
 	el := BlElement new
 		layout: BlLinearLayout horizontal rightToLeft;
 		size: 300@80;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
 	

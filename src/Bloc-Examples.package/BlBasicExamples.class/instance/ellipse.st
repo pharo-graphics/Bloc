@@ -1,5 +1,5 @@
-instance creation
-newEllipse
+examples - shape
+ellipse
 	<gtExample>
 	
 	^ (BlEllipse extent: 200 @ 100) asElement

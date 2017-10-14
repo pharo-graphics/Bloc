@@ -26,7 +26,7 @@ exampleHorizontalListFixedWidthRTL
 	el := BlElement new
 		layout: (BlLinearLayout horizontal rightToLeft);
 		size: 450 @ 150;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		padding:(BlInsets all: 10);
 		background: Color blue;
 		addChildren: {e1. e2. e3}.

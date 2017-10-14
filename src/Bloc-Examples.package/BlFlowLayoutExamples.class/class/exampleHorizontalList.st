@@ -31,7 +31,7 @@ exampleHorizontalList
 	el := BlElement new
 		layout: BlFlowLayout new horizontal;
 		size: 166@300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color veryLightGray;
 		border: (BlBorder paint: Color lightGray width: 8);
 		padding: (BlInsets all: 8);

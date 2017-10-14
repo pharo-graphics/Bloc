@@ -1,5 +1,5 @@
-instance creation
-newRoundedRectangle
+examples - shape
+roundedRectangle
 	<gtExample>
 	
 	^ ((BlRectangle extent: 150@80) cornerRadius: 20) asElement
