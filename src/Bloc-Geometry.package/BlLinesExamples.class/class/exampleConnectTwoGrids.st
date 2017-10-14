@@ -2,7 +2,7 @@ examples
 exampleConnectTwoGrids
 	| space |
 	space := BlSpace new.
-	space root: (BlLinesExamples>>#connectGrid:andGrid:in:with:with:with:with:with:with:) gtExample returnValue.
+	space root: self new connectTwoGridsWith6Lines.
 
 	space root
 		addEventHandler:

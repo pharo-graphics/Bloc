@@ -1,3 +1,3 @@
-transformation
+bounds
 inverted
 	^ self copy invert

@@ -5,4 +5,5 @@ cleanUp
 	xAxis := nil.
 	yAxis := nil.
 	zAxis := nil.
-	zero := nil
+	zero := nil.
+	one := nil

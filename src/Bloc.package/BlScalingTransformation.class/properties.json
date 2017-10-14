@@ -6,9 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"scaleX",
-		"scaleY",
-		"scaleZ"
+		"scale"
 	],
 	"name" : "BlScalingTransformation",
 	"type" : "normal"

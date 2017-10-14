@@ -15,7 +15,8 @@
 		"zAxis",
 		"xAxis",
 		"yAxis",
-		"zero"
+		"zero",
+		"one"
 	],
 	"pools" : [ ],
 	"category" : "Bloc-Basic-Math"

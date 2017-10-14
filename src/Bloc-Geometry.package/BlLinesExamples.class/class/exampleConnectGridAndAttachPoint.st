@@ -2,7 +2,7 @@ examples
 exampleConnectGridAndAttachPoint
 	| space |
 	space := BlSpace new.
-	space root: (BlLinesExamples>>#connectGrid:and:in:with:with:with:with:with:with:with:with:with:with:with:with:) gtExample returnValue.
+	space root: self new connectGridWith12Lines.
 	
 	space root
 		addEventHandler:

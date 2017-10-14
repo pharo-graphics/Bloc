@@ -1,3 +1,0 @@
-scaling
-scaleZ: aZ
-	

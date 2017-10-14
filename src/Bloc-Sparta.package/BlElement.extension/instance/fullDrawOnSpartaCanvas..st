@@ -1,6 +1,6 @@
 *Bloc-Sparta
 fullDrawOnSpartaCanvas: aCanvas
-	| aClippingBounds anEffectBounds needsTransformation aTransformationBuilder isTranslucent |
+	| anEffectBounds |
 
 	"We do not draw transparent elements at all"
 	self isTransparent
@@ -10,48 +10,33 @@ fullDrawOnSpartaCanvas: aCanvas
 	self isVisible
 		ifFalse: [ ^ self ].
 	
-	isTranslucent := self isTranslucent.	
-	
-	[ isTranslucent
-			ifTrue: [
-				aCanvas layer
-					alpha: self opacity;
-					push ].
-	
-	anEffectBounds := self effectBounds: BlBounds new.
-	"No need to render elements smaller than half of a pixel"
-	(anEffectBounds width min: anEffectBounds height) < 1
-		ifTrue: [ ^ self ].
+	aCanvas layer
+		alpha: self opacity;
+		when: [ self isTranslucent ]
+		during: [
 
-	(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
-		ifFalse: [ ^ self ].
+			anEffectBounds := self effectBounds: BlBounds new.
+			"No need to render elements smaller than half of a pixel"
+			(anEffectBounds width min: anEffectBounds height) < 1
+				ifTrue: [ ^ self ].
 
-	needsTransformation := (self position isZero and: [ transform isIdentity ]) not.
-	needsTransformation ifTrue: [ 
-		aTransformationBuilder := aCanvas transform
-			push;
-			translateBy: self position;
-			multiplyBy: transform;
-			apply ].
+			(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
+				ifFalse: [ ^ self ].
 
-	self clipChildren ifTrue: [
-		aClippingBounds := (self visualBounds: BlBounds new on: aCanvas) merge: anEffectBounds.
-		aCanvas clip push: aClippingBounds ].
+			aCanvas transform
+				by: self transform
+				translated: self position
+				during: [
 
-	[ self effect
-		applyEffectOnSpartaCanvas: aCanvas
-		for: self
-		around: [ 
-			self drawOnSpartaCanvas: aCanvas.
-			self drawChildrenOnSpartaCanvas: aCanvas ] ] ensure: [
-		"We should pop clip and transform in reversed exact order,
-		otherwise backend transformation matrix may become broken"
-		self clipChildren ifTrue: [ aCanvas clip pop ].
-
-		misc debug ifTrue: [
-			self drawDebugInfoOnSpartaCanvas: aCanvas ].
-
-		needsTransformation
-			ifTrue: [ aTransformationBuilder pop ] ] ]
-	ensure: [ 
-		isTranslucent ifTrue: [ aCanvas layer pop ] ].
+					aCanvas clip
+						when: [ self clipChildren ]
+						by: [ (self visualBounds: BlBounds new on: aCanvas) merge: anEffectBounds ]
+						during: [
+							self effect
+								applyEffectOnSpartaCanvas: aCanvas
+								for: self
+								around: [ 
+									self drawOnSpartaCanvas: aCanvas.
+									self drawChildrenOnSpartaCanvas: aCanvas ] ].
+						misc debug ifTrue: [
+							self drawDebugInfoOnSpartaCanvas: aCanvas ] ] ]

@@ -1,4 +1,4 @@
-matrix - transformations
+private - matrix
 postScaleX: aX Y: aY
 	"Apply the scale AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix

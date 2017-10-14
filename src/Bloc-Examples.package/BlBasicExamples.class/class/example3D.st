@@ -3,10 +3,10 @@ example3D
 	| space |
 	space := BlSpace new
 		extent: 600 @ 450;
-		title: 'Shape example'.
+		title: '3D example'.
 
 	space root
-		addChild: (self newCube3D position: 25@25);
+		addChild: (self newCube3D relocate: 25@25);
 		yourself.
 
 	space root addEventHandler:

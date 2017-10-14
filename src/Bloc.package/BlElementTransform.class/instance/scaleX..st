@@ -1,4 +1,0 @@
-scaling
-scaleX: aX
-	
-	

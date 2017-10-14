@@ -1,4 +1,0 @@
-scaling
-scaleY: aY
-
-	
