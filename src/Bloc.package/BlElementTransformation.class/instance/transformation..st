@@ -5,5 +5,6 @@ transformation: anAffineTransformation
 
 	transformation := anAffineTransformation.
 	self invalidateMatrix.
-	
+	owner boundsCache invalidateBoundsInSpace.
+
 	owner invalidate

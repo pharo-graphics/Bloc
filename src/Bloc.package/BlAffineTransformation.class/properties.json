@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "AliakseiSyrel 10/6/2017 14:39",
-	"super" : "Object",
-	"category" : "Bloc-Basic-Transformations",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"origin"
 	],
 	"name" : "BlAffineTransformation",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 10/6/2017 14:39",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Transformations"
 }
