@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlPoint",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"x",
+		"y"
+	],
+	"name" : "BlPoint2D",
+	"type" : "normal"
+}

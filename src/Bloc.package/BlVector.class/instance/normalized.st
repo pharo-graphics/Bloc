@@ -1,5 +1,5 @@
 vector functions
 normalized
-	<return: #BlUnitVector>
-	
-	^ self computedUnitVector
+	<return: #BlVector>
+
+	^ self subclassResponsibility

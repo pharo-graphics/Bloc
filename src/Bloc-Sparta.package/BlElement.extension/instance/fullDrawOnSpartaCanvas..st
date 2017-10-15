@@ -20,23 +20,25 @@ fullDrawOnSpartaCanvas: aCanvas
 			(anEffectBounds width min: anEffectBounds height) < 1
 				ifTrue: [ ^ self ].
 
-			(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
-				ifFalse: [ ^ self ].
+			"(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
+				ifFalse: [
+					'false' logCr.
+					^ self ]."
 
 			aCanvas transform
-				by: self transform
+				by: self transformation
 				translated: self position
-				during: [
+				during: [ :aTransformedCanvas |
 
-					aCanvas clip
+					aTransformedCanvas clip
 						when: [ self clipChildren ]
-						by: [ (self visualBounds: BlBounds new on: aCanvas) merge: anEffectBounds ]
+						by: [ (self visualBounds: BlBounds new on: aTransformedCanvas) merge: anEffectBounds ]
 						during: [
 							self effect
-								applyEffectOnSpartaCanvas: aCanvas
+								applyEffectOnSpartaCanvas: aTransformedCanvas
 								for: self
-								around: [ 
-									self drawOnSpartaCanvas: aCanvas.
-									self drawChildrenOnSpartaCanvas: aCanvas ] ].
+								around: [
+									self drawOnSpartaCanvas: aTransformedCanvas.
+									self drawChildrenOnSpartaCanvas: aTransformedCanvas ] ].
 						misc debug ifTrue: [
-							self drawDebugInfoOnSpartaCanvas: aCanvas ] ] ]
+							self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ] ]

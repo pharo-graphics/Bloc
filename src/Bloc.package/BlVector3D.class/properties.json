@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BlVector",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"x",
+		"y",
+		"z"
+	],
+	"name" : "BlVector3D",
+	"type" : "normal"
+}

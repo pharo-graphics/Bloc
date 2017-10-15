@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 10/15/2017 23:07",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"element",
+		"transformation",
+		"origin"
+	],
+	"name" : "BlTransformationBuilder",
+	"type" : "normal"
+}

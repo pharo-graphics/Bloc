@@ -1,6 +1,6 @@
 *Bloc-SVG
 postSkewX: aX Y: aY
-	|tanX tanY|
+	| tanX tanY |
 	tanX := aX tan.
 	tanY := aY tan.
 

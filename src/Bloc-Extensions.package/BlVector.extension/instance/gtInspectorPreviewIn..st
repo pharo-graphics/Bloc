@@ -92,7 +92,5 @@ gtInspectorPreviewIn: aComposite
 				draw.
 
 
-			aCanvas transform pop.
-			
-			];
-		when: [ self hasComponentZ not and: [ self length isZero not ] ]
+			aCanvas transform pop ];
+		when: [ (self isKindOf: BlVector2D) and: [ self length isZero not ] ]

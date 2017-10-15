@@ -1,4 +1,4 @@
 pulse
 initStart
 	super initStart.
-	fromAngle := self target transform rotateAngle.
+	fromAngle := self target transformation rotateAngle.

@@ -4,4 +4,4 @@ is2D
 	By definition a rotation is in 2D when rotation axis is z-Axis (it has no x or y components)"
 	<return: #Boolean>
 
-	^ self axis isAxisZ
+	^ self axis = BlVector zAxis

@@ -5,5 +5,5 @@ parentPointToLocal: aPoint
 	| pt |
 
 	pt := aPoint translateBy: self position negated.
-	pt := self transform inverseTransformPoint: pt.
+	pt := self transformation inverseTransformPoint: pt.
 	^ pt

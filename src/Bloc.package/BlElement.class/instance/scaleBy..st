@@ -1,7 +1,12 @@
 geometry transform
-scaleBy: aFactorPoint 
+scaleBy: aVector
 	self 
-		deprecated: 'Use scaleX:Y: instead'
-		on: 	'13 October 2017' 
+		deprecated: 'Use Transformation Builder instead'
+		on: 	'15 October 2017' 
 		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-	^ self scaleX: aFactorPoint x Y: aFactorPoint y
+
+	self transform
+		inherit;
+		origin: (BlAffineTransformationPositionOrigin position: 0@0);
+		scaleBy: (BlVector x: aVector asPoint x y: aVector asPoint y z: 1);
+		apply

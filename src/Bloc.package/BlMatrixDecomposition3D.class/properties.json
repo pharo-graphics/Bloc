@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 10/15/2017 17:49",
+	"super" : "BlMatrixDecomposition",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMatrixDecomposition3D",
+	"type" : "normal"
+}

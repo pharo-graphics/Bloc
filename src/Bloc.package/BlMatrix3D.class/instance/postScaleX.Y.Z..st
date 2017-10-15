@@ -1,4 +1,4 @@
-matrix - transformations
+as yet unclassified
 postScaleX: aX Y: aY Z: aZ
 	"Apply the scale AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix

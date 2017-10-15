@@ -1,10 +1,11 @@
 geometry transform
 translateTo: aPoint
-	"Define the coordinates of the translation using the given point.
-	Note: aPoint may be a Point, a BlPoint3D or a BlockClosure that returns 
-	one of the supported types."
+	self 
+		deprecated: 'Use Transformation Builder instead'
+		on: 	'15 October 2017' 
+		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
 
-	self invalidate.
-	self transform translateTo: aPoint.
-	self boundsCache invalidateBoundsInSpace.
-	self invalidate
+	self transform
+		origin: (BlAffineTransformationPositionOrigin position: 0@0);
+		translateBy: (BlVector x: aPoint asPoint x y: aPoint asPoint y z: 0);
+		apply

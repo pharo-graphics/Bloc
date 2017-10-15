@@ -5,7 +5,6 @@
 		"elevation",
 		"geometry",
 		"parent",
-		"transform",
 		"pathCache",
 		"geomResizer",
 		"boundsCache",
@@ -27,7 +26,8 @@
 		"outskirts",
 		"bounds",
 		"measuredBounds",
-		"changes"
+		"changes",
+		"transformation"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 8/13/2017 18:24",

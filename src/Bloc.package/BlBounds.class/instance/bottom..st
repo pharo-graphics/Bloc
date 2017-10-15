@@ -1,3 +1,3 @@
 accessing
-bottom: anObject
-	bottom := anObject
+bottom: aNumber
+	bottom := aNumber

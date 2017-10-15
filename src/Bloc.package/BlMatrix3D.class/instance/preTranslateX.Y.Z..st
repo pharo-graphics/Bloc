@@ -1,4 +1,4 @@
-matrix - transformations
+as yet unclassified
 preTranslateX: aX Y: aY Z: aZ
 	"Apply the translation BEFORE my existing transformation.
 	Any vector that is multiplied by the resulting matrix will first be translated,

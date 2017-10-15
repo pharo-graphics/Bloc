@@ -1,3 +1,5 @@
-accessing private
+transformations
 transform
-	^ transform
+	<return: #BlTransformationBuilder>
+	
+	^ BlTransformationBuilder on: self

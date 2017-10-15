@@ -9,6 +9,6 @@ onExtentChanged
 	"clear path cache after updating geometry path"
 	pathCache releaseCache.
 	
-	self transform invalidateMatrix.
+	self transformation invalidateMatrix.
 
 	self notifyExtentChanged

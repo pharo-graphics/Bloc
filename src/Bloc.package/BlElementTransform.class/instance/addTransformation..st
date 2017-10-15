@@ -1,5 +1,0 @@
-adding
-addTransformation: anAffineTransformation
-
-	transformation addTransformation: anAffineTransformation.
-	self invalidateMatrix

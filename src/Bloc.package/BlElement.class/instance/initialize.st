@@ -12,7 +12,7 @@ initialize
 	constraints := BlLayoutCommonConstraints new.
 	self resetChildrenArray.
 
-	transform := self defaultTransformation owner: self.
+	transformation := self defaultTransformation owner: self.
 	geometry := self defaultGeometry.
 	geomResizer := self defaultPathResizer.
 	outskirts := self defaultOutskirts.

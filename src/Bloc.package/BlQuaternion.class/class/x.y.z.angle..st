@@ -1,6 +1,6 @@
 instance creation
 x: aX y: aY z: aZ angle: aTheta
-	"Create a quaternion representing a rotation about axis defined by a vector (x,y,z) by angle aTheta"
+	"Create a quaternion representing a rotation about axis defined by a vector (x,y,z) by angle aTheta in radians"
 	<return: #BlQuaternion>
 	"length - length of a vector (aX, aY, aZ)
 	x,y,z - components of a normalized vector Normalized(aX,aY,aZ)"

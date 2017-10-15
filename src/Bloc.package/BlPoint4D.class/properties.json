@@ -1,5 +1,9 @@
 {
-	"classtraitcomposition" : "TBlDebug classTrait",
+	"commentStamp" : "",
+	"super" : "BlPoint",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"x",
@@ -8,11 +12,5 @@
 		"w"
 	],
 	"name" : "BlPoint4D",
-	"commentStamp" : "",
-	"super" : "Object",
-	"traitcomposition" : "TBlDebug",
-	"type" : "normal",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"category" : "Bloc-Basic-Math"
+	"type" : "normal"
 }

@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlAffineTransformationOrigin",
-	"category" : "Bloc-Basic-Math",
+	"category" : "Bloc-Basic-Transformations",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

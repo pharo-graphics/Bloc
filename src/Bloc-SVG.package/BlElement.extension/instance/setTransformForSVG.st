@@ -1,3 +1,3 @@
 *Bloc-SVG
 setTransformForSVG
-	transform := BlSvgElementTransform new.
+	transformation := BlSvgElementTransform new.

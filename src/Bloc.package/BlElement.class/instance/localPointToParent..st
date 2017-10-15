@@ -7,6 +7,6 @@ localPointToParent: aPoint
 	| pt |
 	"first we should apply my transformation, since it is the only factor
 	effecting local nature of a coordinate"
-	pt := self transform transformPoint: aPoint.
+	pt := self transformation transformPoint: aPoint.
 	"next we should translate it to be within my parent's local coordinates"
 	^ pt translateBy: self position

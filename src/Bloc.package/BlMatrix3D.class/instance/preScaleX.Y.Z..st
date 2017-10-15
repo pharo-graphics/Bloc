@@ -1,4 +1,4 @@
-matrix - transformations
+as yet unclassified
 preScaleX: aX Y: aY Z: aZ
 	"Apply the scaling BEFORE my existing transformation.
 	Any vector that is multiplied by the resulting matrix will first be scaled,

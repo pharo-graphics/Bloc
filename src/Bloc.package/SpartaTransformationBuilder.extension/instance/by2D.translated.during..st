@@ -6,7 +6,7 @@ by2D: aBlElementTransform translated: aPoint during: aBlock
 	needsTransformation := aBlElementTransform isIdentity not.
 	
 	(needsTransformation or: [ needsTranslation ])
-		ifFalse: [ ^ aBlock value ].
+		ifFalse: [ ^ aBlock value: self canvas ].
 	
 	self during: [
 		needsTranslation
@@ -17,4 +17,4 @@ by2D: aBlElementTransform translated: aPoint during: aBlock
 			
 		self apply.
 
-		aBlock value ]
+		aBlock value: self canvas ]

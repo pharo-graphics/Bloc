@@ -5,7 +5,9 @@ drawChildrenOnSpartaCanvas: aCanvas
 	self hasChildren
 		ifFalse: [ ^ self ].
 
-	aCanvas clip
+	"aCanvas clip
 		when: [ self clipChildren ]
 		by: [ pathCache geomPathOnSpartaCanvas: aCanvas ]
-		during: [ self children zReversed do: [ :anElement | anElement fullDrawOnSpartaCanvas: aCanvas ] ]
+		during: ["
+			self children zReversed do: [ :anElement | anElement fullDrawOnSpartaCanvas: aCanvas ]
+		"]"

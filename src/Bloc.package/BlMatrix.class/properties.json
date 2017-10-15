@@ -3,11 +3,11 @@
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlMatrix",
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 10/15/2017 17:50",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "Bloc-Basic-Math"
+	"category" : "Bloc-Basic-Transformations"
 }

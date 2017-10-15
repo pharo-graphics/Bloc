@@ -1,4 +1,4 @@
-matrix - transformations
+as yet unclassified
 rotateX: aTheta
 	"Rotate me around X-axis by aTheta degrees in radians"
 	| cosTheta sinTheta temp |
@@ -7,7 +7,7 @@ rotateX: aTheta
 	(cosTheta closeTo: 0.0)
 		ifTrue: [ cosTheta := 0.0 ].
 
-	sinTheta := aTheta cos.
+	sinTheta := aTheta sin.
 	(sinTheta closeTo: 0.0)
 		ifTrue: [ sinTheta := 0.0 ].
 	

@@ -3,4 +3,4 @@ xAxis
 	"Return a vector that corresponds to x-axis"
 	<return: #BlVector>
 	
-	^ xAxis ifNil: [ xAxis := BlUnitVector x: 1 y: 0 z: 0 ]
+	^ xAxis ifNil: [ xAxis := self x: 1 y: 0 z: 0 ]

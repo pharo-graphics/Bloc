@@ -1,3 +1,3 @@
 accessing
-left: anObject
-	left := anObject
+left: aNumber
+	left := aNumber

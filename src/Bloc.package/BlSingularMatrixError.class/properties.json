@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 1/23/2017 19:40",
 	"super" : "ArithmeticError",
-	"category" : "Bloc-Basic-Math",
+	"category" : "Bloc-Basic-Transformations",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

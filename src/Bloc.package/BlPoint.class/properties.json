@@ -1,11 +1,7 @@
 {
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
-	"instvars" : [
-		"x",
-		"y",
-		"z"
-	],
+	"instvars" : [ ],
 	"name" : "BlPoint",
 	"commentStamp" : "",
 	"super" : "Object",
@@ -13,5 +9,5 @@
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "Bloc-Basic-Math"
+	"category" : "Bloc-Basic-Transformations"
 }

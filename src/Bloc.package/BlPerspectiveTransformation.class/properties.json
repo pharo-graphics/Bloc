@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlAffineTransformation",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"depth"
+	],
+	"name" : "BlPerspectiveTransformation",
+	"type" : "normal"
+}

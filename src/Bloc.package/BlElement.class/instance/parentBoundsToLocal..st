@@ -7,7 +7,7 @@ parentBoundsToLocal: aBounds
 	<return: #BlBounds>
 
 	"first apply inverted transformation if we have one"
-	transform inverseTransformBounds: aBounds.
+	transformation inverseTransformBounds: aBounds.
 
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"
