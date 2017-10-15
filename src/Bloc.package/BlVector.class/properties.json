@@ -3,7 +3,7 @@
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlVector",
-	"commentStamp" : "AliakseiSyrel 10/8/2017 16:51",
+	"commentStamp" : "AliakseiSyrel 10/16/2017 00:44",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
