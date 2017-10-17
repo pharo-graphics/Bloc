@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 8/18/2017 16:01",
+	"commentStamp" : "AliakseiSyrel 10/17/2017 21:56",
 	"super" : "BlElement",
 	"category" : "Bloc-Layouts-Basic",
 	"classinstvars" : [ ],
@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"contentElement",
-		"scaleFactor"
+		"scaleFactor",
+		"scaleStrategy"
 	],
 	"name" : "BlScalableElement",
 	"type" : "normal"

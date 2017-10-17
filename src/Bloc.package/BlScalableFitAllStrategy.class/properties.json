@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 10/17/2017 21:53",
+	"super" : "BlScalableStrategy",
+	"category" : "Bloc-Layouts-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlScalableFitAllStrategy",
+	"type" : "normal"
+}

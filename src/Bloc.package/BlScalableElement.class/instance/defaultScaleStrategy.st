@@ -1,0 +1,3 @@
+initialization
+defaultScaleStrategy
+	^ BlScalableFitWidthStrategy new
