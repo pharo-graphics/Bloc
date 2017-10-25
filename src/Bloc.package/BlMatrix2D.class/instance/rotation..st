@@ -1,9 +1,8 @@
 initialization
 rotation: anAngle
 	"Set me to be a 2D matrix representing a rotation by a given angle in radians"
-	| aMatrix aSin aCos |
+	| aSin aCos |
 
-	aMatrix := self new.
 	aSin := anAngle sin reduce asFloat.
 	aCos := anAngle cos reduce asFloat.
 	

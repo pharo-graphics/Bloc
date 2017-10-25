@@ -2,4 +2,4 @@ initialization
 initialize
 	super initialize.
 	position := 0@0.
-	extent := 1@1
+	extent := 0@0

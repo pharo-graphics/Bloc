@@ -1,6 +1,6 @@
 initialization
 initialize
 	super initialize.
-	
+
 	position := 0@0.
-	extent := 50@50
+	extent := 0@0
