@@ -1,6 +1,6 @@
 instance creation
 open
-	<example>
+	<script: 'self open'>
 	BlSpace new
 		title: 'iOS Simulator';
 		extent: (self pxBodyWidth @ self pxBodyHeight) + (10@10);

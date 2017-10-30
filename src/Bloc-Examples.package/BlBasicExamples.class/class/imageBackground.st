@@ -1,6 +1,6 @@
 shape examples
-exampleImageBackground
-
+imageBackground
+	<script: 'self imageBackground'>
 	self
 		openInWindow: self new rectangleWithImage
 		named: 'Image background'

@@ -1,6 +1,6 @@
 examples
 open
-	<example>
+	<script: 'self open'>
 	| space chicken |
 	
 	space := BlSpace new.

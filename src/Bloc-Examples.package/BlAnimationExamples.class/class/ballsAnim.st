@@ -1,5 +1,5 @@
 examples
-exampleBallsAnim
+ballsAnim
 |space els anims|
 anims := OrderedCollection new.
 els := OrderedCollection new.

@@ -1,6 +1,6 @@
 instance creation
 bounceOut
-	<gtExample>
+	"<gtExample>"
 	
 	^ BlTranslateAnimation new
 		easing: BlEasing bounceOut;

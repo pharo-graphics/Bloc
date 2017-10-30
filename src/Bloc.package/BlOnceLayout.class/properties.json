@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLayout",
+	"category" : "Bloc-Layouts-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"layout"
+	],
+	"name" : "BlOnceLayout",
+	"type" : "normal"
+}
