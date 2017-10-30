@@ -6,9 +6,6 @@ localBoundsToParent: aBounds
 	immutable one that can be safely stored as instance variable."
 	<return: #BlBounds>
 
-	self referenceElement hasParent
-		ifFalse: [ ^ self ].
-
 	"first apply transformation if we have one"
 	self referenceElement transformation transformBounds: aBounds.
 
