@@ -16,14 +16,9 @@ forceLayout
 				ifTrue: [ self space extent ]
 				ifFalse: [ 800 @ 600 ].
 			
-			widthSpec := self constraints horizontal resizer isMatchParent
-				ifTrue: [ BlMeasurementSpec new beAtMost: maxExtent x ]
-				ifFalse: [ BlMeasurementSpec new beAtMost: Float infinity ].
-				
-			heightSpec := self constraints vertical resizer isMatchParent
-				ifTrue: [ BlMeasurementSpec new beAtMost: maxExtent y ]
-				ifFalse: [ BlMeasurementSpec new beAtMost: Float infinity ].
-			
+			widthSpec := BlMeasurementSpec new beAtMost: maxExtent x.
+			heightSpec := BlMeasurementSpec new beAtMost: maxExtent y.
+
 			self measure: (BlExtentMeasurementSpec new
 				widthSpec: (self layout
 					measurementSpecFor: widthSpec

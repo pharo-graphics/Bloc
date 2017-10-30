@@ -39,4 +39,6 @@ merge: aRectangle
 	left := minX.
 	top := minY.
 	right := maxX.
-	bottom := maxY
+	bottom := maxY.
+	
+	self assertFinite

@@ -16,4 +16,6 @@ testMatches
 	self assert: (combination matches: buffer).
 	
 	combination key: Key b.
-	self assert: (combination matches: buffer) not
+	self assert: (combination matches: buffer) not.
+
+	self tearDown

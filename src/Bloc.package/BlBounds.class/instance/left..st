@@ -1,3 +1,5 @@
 accessing
 left: aNumber
-	left := aNumber
+	left := aNumber.
+
+	self assertFinite

@@ -9,7 +9,15 @@ position: aPosition extent: anExtent
 	position changes, instead I send invalidate with my effect bounds in parent coordinates
 	to my parent. It allows developers to implement drawing cache"
 	| isPositionChanged isExtentChanged aPreviousExtent isGrowing isShrinking aPreviousPosition | 
-		
+	
+	self
+		assert: [ aPosition x isInfinite not and: [ aPosition y isInfinite not ] ]
+		description: [ 'Position can not be infinite' ].
+	
+	self
+		assert: [ anExtent x isInfinite not and: [ anExtent y isInfinite not ] ]
+		description: [ 'Extent can not be infinite' ].
+	
 	isPositionChanged := self position ~= aPosition.
 	isExtentChanged := self extent ~= anExtent.
 

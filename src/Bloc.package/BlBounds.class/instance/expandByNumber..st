@@ -4,4 +4,6 @@ expandByNumber: aNumber
 	left := left - aNumber.
 	top := top - aNumber.
 	right := right + aNumber.
-	bottom := bottom + aNumber
+	bottom := bottom + aNumber.
+	
+	self assertFinite

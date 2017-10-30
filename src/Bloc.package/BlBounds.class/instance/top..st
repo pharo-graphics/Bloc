@@ -1,3 +1,5 @@
 accessing
 top: aNumber
-	top := aNumber
+	top := aNumber.
+
+	self assertFinite

@@ -12,4 +12,6 @@ testKey
 	self assert: (combination combinations asArray collect: #key) equals: { Key a. Key b }.
 	
 	combination key: Key c.
-	self assert: (combination combinations asArray collect: #key) equals: { Key a. Key b. Key c }
+	self assert: (combination combinations asArray collect: #key) equals: { Key a. Key b. Key c }.
+
+	self tearDown

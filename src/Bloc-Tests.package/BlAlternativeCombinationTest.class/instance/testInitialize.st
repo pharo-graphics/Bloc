@@ -3,4 +3,6 @@ testInitialize
 	<gtExample>
 	self setUp.
 
-	self assert: combination combinations isEmpty
+	self assert: combination combinations isEmpty.
+	
+	self tearDown

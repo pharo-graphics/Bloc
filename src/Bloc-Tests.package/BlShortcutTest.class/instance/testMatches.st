@@ -8,3 +8,5 @@ testMatches
 	
 	shortcut combination: (BlMockedKeyCombination new shouldMatch: true).
 	self assert: (shortcut matches: Object new).
+
+	self tearDown

@@ -5,4 +5,6 @@ encompass: aPoint
 	top := top min: aPoint y.
 	right := right max: aPoint x.
 	left := left min: aPoint x.
-	bottom := bottom max: aPoint y
+	bottom := bottom max: aPoint y.
+	
+	self assertFinite
