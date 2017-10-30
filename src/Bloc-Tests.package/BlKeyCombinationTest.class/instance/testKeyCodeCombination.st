@@ -19,5 +19,3 @@ testKeyCodeCombination
 	handler handleEvent: event.
 	
 	self assert: flag.
-
-	self tearDown

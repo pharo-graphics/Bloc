@@ -16,6 +16,4 @@ testMatch
 	self assert: (combination match: buffer) equals: 1.
 	
 	combination key: Key b.
-	self assert: (combination match: buffer) equals: 2.
-
-	self tearDown
+	self assert: (combination match: buffer) equals: 2

@@ -19,5 +19,3 @@ testNoMatchKeyCodeCombination
 	handler handleEvent: event.
 	
 	self assert: flag not.
-
-	self tearDown
