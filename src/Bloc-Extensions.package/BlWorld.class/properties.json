@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "TudorGirba 10/30/2017 15:20",
+	"super" : "Object",
+	"category" : "Bloc-Extensions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlWorld",
+	"type" : "normal"
+}
