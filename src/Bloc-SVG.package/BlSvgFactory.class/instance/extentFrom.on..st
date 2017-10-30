@@ -5,4 +5,4 @@ extentFrom: node on: aBlElement
 	height:= aBlElement height.
 	node attributeAt:'width' ifPresent:[width := (node attributeAt:'width') asNumber].
 	node attributeAt:'height' ifPresent:[height := (node attributeAt:'height') asNumber].
-	aBlElement extent: width@height
+	aBlElement size: width@height
