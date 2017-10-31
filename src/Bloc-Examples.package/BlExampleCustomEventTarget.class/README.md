@@ -1,0 +1,1 @@
+I am an example of a custom non-element event target that can be nicely integrated in bloc infrastructure

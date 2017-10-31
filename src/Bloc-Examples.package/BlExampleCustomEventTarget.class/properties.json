@@ -5,7 +5,7 @@
 		"eventDispatcher"
 	],
 	"name" : "BlExampleCustomEventTarget",
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 10/31/2017 13:40",
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal",
