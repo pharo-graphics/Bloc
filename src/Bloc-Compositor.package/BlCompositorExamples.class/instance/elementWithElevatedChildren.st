@@ -5,11 +5,12 @@ elementWithElevatedChildren
 	
 	parent := self elementWithZeroRelativeElevation
 		size: 200 @ 200;
-		relocate: 50@50;
+		relocate: 20@0;
 		background: (Color blue alpha: 0.2).
 
 	child1 := self elementWithRelativeElevation20
 		size: 50 @ 50;
+		relocate: 0@10;
 		background: (Color red alpha: 0.9).
 	
 	childInside := self elementWithGlobalElevation10

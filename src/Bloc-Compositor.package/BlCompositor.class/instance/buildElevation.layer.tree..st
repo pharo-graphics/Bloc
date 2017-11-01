@@ -19,6 +19,9 @@ buildElevation: aRenderingNode layer: anElevationLayer tree: aCompositorTree
 				aChildLayer := anElevationLayer ]
 			"elevation is not the same, find a corresponding layer or create a new one"
 			ifFalse: [ 
+				aChildElement hasParent
+					ifTrue: [
+						aChildNode transformation: aChildElement parent transformation inSpace ].
 				aChildLayer := aCompositorTree layerAt: aChildElevation.
 				aChildLayer nodes push: aChildNode ].
 		

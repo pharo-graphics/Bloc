@@ -2,9 +2,13 @@ drawing
 drawOnSpartaCanvas: aCanvas
 	
 	aCanvas transform
-		by: self element transformation
-		translated: self element position
+		by: self transformation
+		translated: 0 @ 0
 		during: [ :aTransformedCanvas |
-			self element drawOnSpartaCanvas: aCanvas.
-			self hasNodes
-				ifTrue: [ self nodes reverseDo: [ :aNode | aNode drawOnSpartaCanvas: aCanvas ] ] ]
+			aTransformedCanvas transform
+				by: self element transformation
+				translated: self element position
+				during: [ :aMoreTransformedCanvas |
+					self element drawOnSpartaCanvas: aMoreTransformedCanvas.
+					self hasNodes
+						ifTrue: [ self nodes reverseDo: [ :aNode | aNode drawOnSpartaCanvas: aMoreTransformedCanvas ] ] ] ]
