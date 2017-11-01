@@ -11,6 +11,6 @@
 		"transformation",
 		"nodes"
 	],
-	"name" : "BlCompositorRenderingNode",
+	"name" : "BlCompositorNode",
 	"type" : "normal"
 }

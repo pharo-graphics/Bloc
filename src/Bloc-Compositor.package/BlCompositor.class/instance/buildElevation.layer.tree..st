@@ -9,7 +9,7 @@ buildElevation: aRenderingNode layer: anElevationLayer tree: aCompositorTree
 		
 		aChildElevation := aChildElement elevation relatedTo: aLayerElevation.
 		
-		aChildNode := BlCompositorRenderingNode new.
+		aChildNode := BlCompositorNode new.
 		aChildNode element: aChildElement.
 		
 		(aChildElevation = aLayerElevation)

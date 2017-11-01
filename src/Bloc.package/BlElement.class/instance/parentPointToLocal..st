@@ -2,8 +2,8 @@ geometry position convertion
 parentPointToLocal: aPoint
 	"Transform a given point from parent to my local coordinates"
 	<return: #Point>
-	| pt |
+	| aLocalPoint |
 
-	pt := aPoint translateBy: self position negated.
-	pt := self transformation inverseTransformPoint: pt.
-	^ pt
+	aLocalPoint := aPoint translateBy: self position negated.
+	aLocalPoint := self transformation inverseTransformPoint: aLocalPoint.
+	^ aLocalPoint

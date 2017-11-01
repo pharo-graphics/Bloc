@@ -5,7 +5,7 @@ buildElevationTree: anElement
 	elevationTree := BlCompositorElevationTree new.
 	elevationLayer := elevationTree layerAt: (anElement elevation relatedTo: 0).
 	
-	renderingNode := BlCompositorRenderingNode new.
+	renderingNode := BlCompositorNode new.
 	renderingNode element: anElement.
 	
 	elevationLayer nodes push: renderingNode.
