@@ -1,0 +1,1 @@
+I am a rendering node of a compositor layer.

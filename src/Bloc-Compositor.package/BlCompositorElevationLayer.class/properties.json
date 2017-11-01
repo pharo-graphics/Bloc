@@ -10,7 +10,7 @@
 		"nodes"
 	],
 	"name" : "BlCompositorElevationLayer",
-	"commentStamp" : "AliakseiSyrel 8/16/2017 00:17",
+	"commentStamp" : "AliakseiSyrel 11/1/2017 08:40",
 	"super" : "BlCompositorLayer",
 	"traitcomposition" : "TBlRedBlackTreeNode",
 	"type" : "normal",

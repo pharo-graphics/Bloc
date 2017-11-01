@@ -1,6 +1,7 @@
 examples
-exampleSequentialLoop
-	<example> 
+compositeApi
+	"<script: 'self compositeApi'>"
+	
 	| sp el cAnim |
 	sp := BlSpace new.
 	el := BlElement new
@@ -9,11 +10,14 @@ exampleSequentialLoop
 		position: 100 @ 100.
 	cAnim := BlSequentialAnimation new
 		target: el;
-		loop:2;
-		translate:[:t| t to: 300@0; duration: 500];
 		translate:[:t| t to: 300@300; duration: 500];
-		translate:[:t| t to: 0@300; duration: 500];
-		translate:[:t| t to: 0@0; duration: 500].
+		scale:[:s|s scaleTo: 2@2; duration: 500];
+		rotate:[:r| r angle: 360; duration:500];
+		inParallelDo: [ :p|p
+			scale:[:s|s scaleTo: (3@3); duration: 500];
+			translate:[:t| t to:100@100;duration: 500]
+			
+			 ].
 		
 		
 	sp root addChild: el.

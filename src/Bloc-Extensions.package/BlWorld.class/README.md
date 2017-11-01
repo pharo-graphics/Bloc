@@ -1,1 +1,0 @@
-I am a utility holding the Bloc entries in the Morphic World menu

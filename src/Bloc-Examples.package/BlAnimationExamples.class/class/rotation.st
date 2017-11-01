@@ -1,6 +1,6 @@
 instance creation
 rotation
-	<gtExample>
+	"<gtExample>"
 
 	^ BlRotateAnimation new
 		easing: BlEasing bounceOut;

@@ -1,8 +1,6 @@
 *Bloc-Sparta
 spartaMultiplyWith: aSpartaMatrix
-	self ensureMatrix.
-	
-	"Multiple a given sparta matrix by my transformation only
-	if I am not identity"
+	"Multiple a given sparta matrix by my transformation only if I am not identity"
+
 	self isIdentity
-		ifFalse: [ aSpartaMatrix multiplyBy: matrix ]
+		ifFalse: [ aSpartaMatrix multiplyBy: self matrix ]

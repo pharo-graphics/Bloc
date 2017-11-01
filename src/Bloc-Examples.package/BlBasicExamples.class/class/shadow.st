@@ -1,5 +1,6 @@
 shape examples
-exampleShadow
+shadow
+	<script: 'self shadow'>
 
 	self
 		openInWindow: self new elementsWithShadow

@@ -1,3 +1,3 @@
 accessing
-transformation: anObject
-	transformation := anObject
+transformation: aBlMatrix
+	transformation := aBlMatrix

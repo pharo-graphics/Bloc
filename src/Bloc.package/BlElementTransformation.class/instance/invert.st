@@ -1,4 +1,3 @@
 bounds
 invert
-	self ensureMatrix.
-	matrix := matrix inverted
+	matrix := self matrix inverted

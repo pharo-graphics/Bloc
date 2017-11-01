@@ -2,4 +2,5 @@ accessing
 matrix
 	<return: #BlMatrix>
 
-	^ self subclassResponsibility
+	self ensureMatrix.
+	^ matrix

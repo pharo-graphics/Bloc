@@ -1,3 +1,3 @@
-private
+invalidation
 invalidateMatrix
-	matrix := nil
+	self subclassResponsibility

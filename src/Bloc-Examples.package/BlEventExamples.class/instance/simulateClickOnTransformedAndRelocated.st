@@ -10,6 +10,7 @@ simulateClickOnTransformedAndRelocated
 		scaleBy: 15@15;
 		translateBy: (300@0) negated;
 		rotateBy: 30;
+		rotateBy: 15;
 		apply.
 	
 	mouseDown := mouseUp := click := 0.

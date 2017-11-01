@@ -1,6 +1,7 @@
 examples
-exampleParallel
-	<example>
+sequential
+	"<script: 'self sequential'>"
+ 
 	| sp el a1 a2 cAnim |
 	sp := BlSpace new.
 	el := BlElement new
@@ -11,16 +12,14 @@ exampleParallel
 		easing: BlEasing bounceOut;
 		to: 300 @ 300;
 		duration: 2000;
-		target: el. 
-	a2 := BlScaleAnimation new
-		easing: BlEasing bounceOut;
-		scaleToX: 2;
-		scaleToY: 2;
-		duration: 2000;
 		target: el.
-	cAnim := BlParallelAnimation new
-		add: a1;
-		add: a2.
+	a2 := BlScaleAnimation new
+		target: el;
+		easing: BlEasing bounceOut;
+		scaleTo: 2@2;
+		duration: 2000.
+	cAnim := BlSequentialAnimation new
+		addAll: {a1. a2}.
 	sp root addChild: el.
 	sp show.
 	cAnim start

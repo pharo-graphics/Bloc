@@ -1,6 +1,6 @@
 instance creation
 target
-	<gtExample>
+	"<gtExample>"
 
 	^ BlElement new
 		background: Color blue;

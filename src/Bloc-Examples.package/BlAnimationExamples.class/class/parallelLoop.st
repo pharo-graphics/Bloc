@@ -1,6 +1,6 @@
 examples
-exampleParallelLoop
-	<example> 
+parallelLoop
+	"<script: 'self parallelLoop'> "
 	| sp el cAnim |
 	sp := BlSpace new.
 	el := BlElement new

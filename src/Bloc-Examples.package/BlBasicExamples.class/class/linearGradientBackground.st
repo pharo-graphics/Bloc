@@ -1,5 +1,6 @@
 shape examples
-exampleLinearGradientBackground
+linearGradientBackground
+	<script: 'self linearGradientBackground'>
 
 	self
 		openInWindow: self new rectangleWithLinearGradient

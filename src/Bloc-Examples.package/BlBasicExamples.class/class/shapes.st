@@ -1,5 +1,6 @@
 shape examples
-exampleShapes
+shapes
+	<script: 'self shapes'>
 
 	self
 		openInWindow: self new shapes

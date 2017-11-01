@@ -1,4 +1,3 @@
 copying
 postCopy
-	matrix := matrix copy.
-	transformation := transformation copy
+	matrix := matrix copy

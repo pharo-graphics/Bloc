@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/1/2017 09:06",
+	"super" : "BlElementTransformation",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"transformation"
+	],
+	"name" : "BlElementLocalTransformation",
+	"type" : "normal"
+}

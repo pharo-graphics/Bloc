@@ -19,9 +19,7 @@ buildElevation: aRenderingNode layer: anElevationLayer tree: aCompositorTree
 				aChildLayer := anElevationLayer ]
 			"elevation is not the same, find a corresponding layer or create a new one"
 			ifFalse: [ 
-				aChildLayer := aCompositorTree
-					at: aChildElevation
-					ifAbsentPut: [ BlCompositorElevationLayer new elevation: aChildElevation ].
+				aChildLayer := aCompositorTree layerAt: aChildElevation.
 				aChildLayer nodes push: aChildNode ].
 		
 		self buildElevation: aChildNode layer: aChildLayer tree: aCompositorTree ]
