@@ -1,0 +1,1 @@
+I contains examples of how to apply different trnsformations on visual elements (e.g. scale, rotation, translation)

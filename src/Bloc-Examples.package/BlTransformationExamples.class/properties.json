@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/2/2017 12:58",
+	"super" : "Object",
+	"category" : "Bloc-Examples-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlTransformationExamples",
+	"type" : "normal"
+}

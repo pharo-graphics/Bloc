@@ -3,30 +3,39 @@ transformBounds: aBlBounds
 	"In-place transform given BlBounds according to my transformation.
 	(local to global transformation)"
 	<return: #BlBounds>
-	| newLeft newTop newRight newBottom aLeft aTop aRight aBottom |
+	| newLeft newTop newRight newBottom quadTopLeft quadTopRight quadBottomLeft quadBottomRight |
 
 	self isIdentity
 		ifTrue: [ ^ aBlBounds ].
 
-	aLeft := aBlBounds left.
-	aTop := aBlBounds top.
-	aRight := aBlBounds right.
-	aBottom := aBlBounds bottom.
+	quadTopLeft := self transformX: aBlBounds left Y: aBlBounds top.
+	quadTopRight := self transformX: aBlBounds right Y: aBlBounds top.
+	quadBottomLeft := self transformX: aBlBounds left Y: aBlBounds bottom.
+	quadBottomRight := self transformX: aBlBounds right Y: aBlBounds bottom.
 
-	newLeft := self transformX: aLeft withY: aTop.
-	newTop := self transformY: aTop withX: aLeft.
-	newRight := self transformX: aRight withY: aBottom.
-	newBottom := self transformY: aBottom withX: aRight.
+	newLeft := ((quadTopLeft x
+		min: quadTopRight x)
+			min: quadBottomLeft x)
+				min: quadBottomRight x.
+	newRight := ((quadTopLeft x
+		max: quadTopRight x)
+			max: quadBottomLeft x)
+				max: quadBottomRight x.
 
-	aLeft := newLeft min: newRight.
-	aRight := newLeft max: newRight.
-	aTop := newTop min: newBottom.
-	aBottom := newTop max: newBottom.
-
+	newTop := ((quadTopLeft y
+		min: quadTopRight y)
+			min: quadBottomLeft y)
+				min: quadBottomRight y.
+				
+	newBottom := ((quadTopLeft y
+		max: quadTopRight y)
+			max: quadBottomLeft y)
+				max: quadBottomRight y.
+	
 	aBlBounds
-		left: aLeft
-		top: aTop
-		right: aRight
-		bottom: aBottom.
-
+		left: newLeft
+		top: newTop
+		right: newRight
+		bottom: newBottom.
+		
 	^ aBlBounds
