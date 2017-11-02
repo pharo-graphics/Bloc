@@ -46,10 +46,9 @@ baseline: spec
 			package: #'Bloc-Geometry' with: [ spec requires: #(Bloc) ];
 			
 			"implements a scrolling element (practically infinite) that displays large data sets"
-			package: #'Bloc-Infinite' with: [ spec requires: #(Bloc) ];
+			package: #'Bloc-Infinite' with: [ spec requires: #(Bloc 'Bloc-Animation') ];
 			"adds most common layout types for infinite element"
 			package: #'Bloc-Infinite-Layouts' with: [ spec requires: #('Bloc-Infinite') ];
-			package: #'Bloc-Infinite-Examples' with: [ spec requires: #('Bloc-Infinite' 'Bloc-Infinite-Layouts' GToolkitExamplesEngine) ];
 			
 			"adds high level support of animations"
 			package: #'Bloc-Animation' with: [ spec requires: #(Bloc) ];
@@ -65,7 +64,14 @@ baseline: spec
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
 			
-			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' 'Bloc-Geometry' GToolkitExamplesEngine). ];
+			package: #'Bloc-Examples' with: [
+				spec requires: #(
+					'Bloc-Geometry'
+					'Bloc-Layout'
+					'Bloc-Infinite'
+					'Bloc-Infinite-Layouts'
+					'Bloc-DevTool'
+					GToolkitExamplesEngine). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
@@ -92,7 +98,6 @@ baseline: spec
 				'Bloc-Sparta'
 				'Bloc-Infinite'
 				'Bloc-Infinite-Layouts'
-				'Bloc-Infinite-Examples'
 				
 				"GToolkit Extensions"
 				'Bloc-Extensions'

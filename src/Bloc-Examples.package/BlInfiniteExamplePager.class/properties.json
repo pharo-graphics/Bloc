@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Examples-Infinite",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"list",
+		"buttonLeft",
+		"buttonRight"
+	],
+	"name" : "BlInfiniteExamplePager",
+	"type" : "normal"
+}

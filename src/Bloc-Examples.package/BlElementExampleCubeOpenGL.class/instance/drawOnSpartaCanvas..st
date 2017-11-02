@@ -1,6 +1,6 @@
 drawing
 drawOnSpartaCanvas: aCanvas
-	| gl context framebuffer extentNorm |
+	"| gl context framebuffer extentNorm |
 	super drawOnSpartaCanvas: aCanvas.
 	
 	context := self context.
@@ -47,4 +47,4 @@ drawOnSpartaCanvas: aCanvas
 	aCanvas fill
 		paint: framebuffer asForm;
 		path: self boundsInLocal;
-		draw
+		draw"

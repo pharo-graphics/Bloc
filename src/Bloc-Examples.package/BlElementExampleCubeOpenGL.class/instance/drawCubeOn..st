@@ -1,6 +1,6 @@
 drawing
 drawCubeOn: gl
-	| cubeSize |
+	"| cubeSize |
 
 	cubeSize := self cubeSize.
 
@@ -15,4 +15,4 @@ drawCubeOn: gl
 				vertex3f_x: aVertex value first
 				y: aVertex value third
 				z: aVertex value fifth ].
-		gl end ].
+		gl end ]."

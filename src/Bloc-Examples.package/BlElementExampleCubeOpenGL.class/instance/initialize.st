@@ -2,7 +2,7 @@ initialization
 initialize
 	super initialize.
 	
-	ctx := UFFIOpenGLContext new.
+	"ctx := UFFIOpenGLContext new.
 	ctx gl
 		clearColor_red: 1.0 green: 1 blue: 1.0 alpha: 1;
 		clearDepth: 1.0;
@@ -26,4 +26,4 @@ initialize
 		onStepDo: [ :value | rotateX := rotateY := rotateZ := value. self invalidate ];
 		start.
 		
-	count := 0
+	count := 0"
