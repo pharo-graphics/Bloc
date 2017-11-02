@@ -16,4 +16,4 @@ drawOnSpartaCanvas: aCanvas
 		path: aLegPath;
 		paint: Color red;
 		width: 2;
-		draw.
+		draw

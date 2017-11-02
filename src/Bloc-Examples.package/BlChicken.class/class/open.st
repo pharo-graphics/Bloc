@@ -4,11 +4,14 @@ open
 	| space chicken |
 	
 	space := BlSpace new.
-	space extent: 500 @ 500.
+	space extent: 300 @ 500.
 	space title: 'Software chicken'.
 	
-	chicken := BlChicken new.
-	chicken size: 300 @ 350.
+	chicken := self chicken.
+	chicken constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+	
 	space root addChild: chicken.
 	space root
 		addEventHandler:

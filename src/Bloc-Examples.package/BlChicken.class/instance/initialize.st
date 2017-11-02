@@ -2,39 +2,65 @@ initialization
 initialize
 	super initialize.
 	
-
+	self layout: BlLinearLayout vertical.
+	
 	self addChildren: { 
-		BlChickenHead new
+		BlElement new
+			layout: (BlLinearLayout horizontal weightSum: 1);
 			constraintsDo: [ :c |
-				c frame horizontal alignCenter.
-				c horizontal exact: 75.
-				c vertical exact: 75 ];
-			yourself.
+				c linear weight: 0.2.
+				c horizontal matchParent.
+				c vertical matchParent ];
+			addChildren: {
+				BlElement new
+					constraintsDo: [ :c |
+						c linear weight: 0.35.
+						c horizontal matchParent.
+						c vertical matchParent ].
+				BlChickenHead new
+					constraintsDo: [ :c |
+						c linear weight: 0.3.
+						c horizontal matchParent.
+						c vertical matchParent ].
+				BlElement new
+					constraintsDo: [ :c |
+						c linear weight: 0.35.
+						c horizontal matchParent.
+						c vertical matchParent ] }.
 		BlChickenBody new
 			constraintsDo: [ :c |
-				c frame horizontal alignCenter.
-				c frame vertical alignCenter.
-				c horizontal exact: 250.
-				c vertical exact: 200 ];
+				c linear weight: 0.6.
+				c horizontal matchParent.
+				c vertical matchParent ];
 			yourself.
 			
 		BlElement new
-			layout: BlLinearLayout horizontal;
+			layout: (BlLinearLayout horizontal weightSum: 1);
 			constraintsDo: [ :c |
-				c frame horizontal alignCenter.
-				c frame vertical alignBottom.
-				c horizontal fitContent.
-				c vertical fitContent ];
+				c linear weight: 0.2.
+				c horizontal matchParent.
+				c vertical matchParent ];
 			addChildren: { 
+				BlElement new
+					constraintsDo: [ :c |
+						c linear weight: 0.2.
+						c horizontal matchParent.
+						c vertical matchParent ].
 				BlChickenLeg new
-					size: 50@100;
+					constraintsDo: [ :c |
+						c linear weight: 0.3.
+						c horizontal matchParent.
+						c vertical matchParent ];
 					margin: (BlInsets right: 5).
 				BlChickenLeg new
-					size: 50@100;
+					constraintsDo: [ :c |
+						c linear weight: 0.3.
+						c horizontal matchParent.
+						c vertical matchParent ];
 					margin: (BlInsets left: 5).
-			};
-			yourself
-			
-		
-			
-	}
+				BlElement new
+					constraintsDo: [ :c |
+						c linear weight: 0.2.
+						c horizontal matchParent.
+						c vertical matchParent ]
+			} }

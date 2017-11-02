@@ -1,3 +1,0 @@
-initialization
-defaultLayout
-	^ BlChickenLayout new

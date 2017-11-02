@@ -1,6 +1,6 @@
 tests
 testCompareOneDispatchForManyHandlers
- |ann reg t1 t2 c1 c2 counter|
+	"|ann reg t1 t2 c1 c2 counter|
 	c1 := c2 := 0.
 	counter := 2000.
 	ann := Announcer new.
@@ -14,4 +14,4 @@ testCompareOneDispatchForManyHandlers
 	
 	self assert: t1 >= t2.
 	self assert: c1 = counter.
-	self assert: c2 = counter
+	self assert: c2 = counter"
