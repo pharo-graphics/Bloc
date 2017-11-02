@@ -2,7 +2,8 @@ tests
 testAllAssertDescriptionUseDebugTrait
 	| senders classes superclasses blocClasses |
 	
-	senders := #assert:description: senders
+	senders := (#assert:description: senders
+		select: [ :aSender | aSender method isGTExampleMethod not ])
 		select: [ :aSender | ((aSender methodClass withAllSuperclasses flatCollect: #traits) includes: TBlDebug) not ].
 
 	classes := senders collect: #methodClass as: Set.
