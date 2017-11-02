@@ -1,12 +1,9 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 11/2/2017 21:17",
 	"super" : "BlElement",
 	"category" : "Bloc-Examples-Experimental",
 	"classinstvars" : [ ],
-	"pools" : [
-		"UFFIOpenGLConstants",
-		"UFFIOpenGLTypes"
-	],
+	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"rotateX",

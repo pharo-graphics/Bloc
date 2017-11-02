@@ -1,0 +1,1 @@
+I am a helper class that makes it easier to import SVG icons
