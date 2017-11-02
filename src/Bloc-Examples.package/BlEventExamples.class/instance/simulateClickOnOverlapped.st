@@ -3,7 +3,8 @@ simulateClickOnOverlapped
 	"I simulate a click on the element which is overlapped by another element.
 	Since element above does not consume click events, one below should succesfully
 	handle mouse down/up and click events"
-	<gtExample>
+	
+	"<gtExample>" "<- fails becaus we need 'elevation based' event handling (Bloc-Compositor)"
 	| container blue red mouseDown mouseUp click |
 	
 	container := self grayElement.
