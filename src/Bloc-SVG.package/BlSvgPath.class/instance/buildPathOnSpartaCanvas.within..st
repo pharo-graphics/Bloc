@@ -1,4 +1,4 @@
-*Bloc-Sparta
+instance creation
 buildPathOnSpartaCanvas: aCanvas within: aBounds
 | newPathData pathBuilder|
 	pathBuilder := aCanvas path.
