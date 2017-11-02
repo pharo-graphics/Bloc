@@ -9,7 +9,7 @@ example
 		c vertical matchParent ].
 
 	pager list dataSource
-		addPane: (BlInfiniteExamplePagerPane new title: 'Editor'; elementBlock: [ self tabsGroup ]);
+		addPane: (BlInfiniteExamplePagerPane new title: 'Tabs'; elementBlock: [ self tabsGroup ]);
 		addPane: (BlInfiniteExamplePagerPane new
 			title: 'Pane 1';
 			elementBlock: [
