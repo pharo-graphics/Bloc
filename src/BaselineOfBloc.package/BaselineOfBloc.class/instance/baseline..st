@@ -66,7 +66,7 @@ baseline: spec
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-SVG' Sparta) ];
 			
 			package: #'Bloc-Examples' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-DevTool' 'Bloc-Geometry' GToolkitExamplesEngine). ];
-			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout' 'Beacon'). ];
+			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
 			package: #'BlocHost-OSWindow' with: [ spec requires: #(#Bloc #OSWindow). ];
 			package: #'BlocHost-SDL' with: [ spec requires: #(#Bloc #OSWindow UFFIOpenGL). ];
@@ -104,7 +104,7 @@ baseline: spec
 
 			group: 'development' with: #(
 				'core'
-				
+				'Beacon'
 				'BlocHost-OSWindow'
 				'BlocHost-SDL'
 				'Bloc-SVG');
