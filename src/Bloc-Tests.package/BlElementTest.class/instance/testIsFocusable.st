@@ -17,8 +17,8 @@ testIsFocusable
 	element visibility: BlVisibility visible.
 	self assert: element isFocusable.
 	
-	element mouseTransparent: true.
+	element wantsMouse: false.
 	self assert: element isFocusable not.
 	
-	element mouseTransparent: false.
+	element wantsMouse: true.
 	self assert: element isFocusable.

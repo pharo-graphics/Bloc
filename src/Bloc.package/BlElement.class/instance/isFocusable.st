@@ -3,5 +3,4 @@ isFocusable
 	"Return true if I am able to take focus, false otherwise"
 	<return: #Boolean>
 
-	^ self isVisible and: [
-		self isMouseTransparent not ]
+	^ self isVisible and: [ self wantsMouse ]

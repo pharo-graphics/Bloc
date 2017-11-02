@@ -5,9 +5,9 @@ findMouseEventTargetAt: aPoint
 	I may return nil if no such child found and if I can not be event target either"
 	<return: #BlElement or: nil>
 
-	^ (self wantsMouseEventAt: aPoint)
-		ifFalse: [ nil ]
-		ifTrue: [ self children zSorted
+	^ self children zSorted
 			detect: [ :anElement | anElement wantsMouseEventAt: aPoint ]
 			ifFound: [ :anElement | anElement findMouseEventTargetAt: aPoint ]
-			ifNone: [ self ] ]
+			ifNone: [ (self wantsMouseEventAt: aPoint)
+				ifTrue: [ self ]
+				ifFalse: [ nil ] ]
