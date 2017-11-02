@@ -6,7 +6,6 @@
 [![Travis](https://img.shields.io/travis/pharo-graphics/Bloc.svg?style=flat-square)][travis]
 [![AppVeyor](https://img.shields.io/appveyor/ci/pharo-graphics/Bloc.svg?style=flat-square)][appveyor]
 [![Coveralls](https://img.shields.io/coveralls/pharo-graphics/Bloc.svg?style=flat-square)][coveralls]
-[![Jenkins](https://img.shields.io/jenkins/s/https/ci.inria.fr/pharo-contribution/job/Bloc.svg?style=flat-square)][jenkins]
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
