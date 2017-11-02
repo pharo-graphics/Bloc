@@ -1,9 +1,20 @@
 initialization
 initializeActions
+
+	removeButton := BlElementSelectionButton icon: BlEllipse new extent: 12@12.
+	removeButton opacity: 0.75.
+	removeButton background: Color red.
+	removeButton border: (BlBorder builder width: 1; paint: Color black; build).
 	
-	removeButton := BlElementSelectionButton icon: BlIcons closeCircleSvg extent: 15@15.
-	inspectButton := BlElementSelectionButton icon: BlIcons settingsSvg  extent: 15@15.
-	resizeButton := BlElementSelectionButton icon: BlIcons arrowExpandAllSvg extent: 15@15.
+	inspectButton := BlElementSelectionButton icon: BlEllipse new  extent: 12@12.
+	inspectButton opacity: 0.75.
+	inspectButton background: Color blue.
+	inspectButton border: (BlBorder builder width: 1; paint: Color black; build).
+	
+	resizeButton := BlElementSelectionButton icon: BlEllipse new extent: 12@12.
+	resizeButton opacity: 0.75.
+	resizeButton background: Color yellow.
+	resizeButton border: (BlBorder builder width: 1; paint: Color black; build).
 
 	removeButton addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt |
 		"we will close automatically"

@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 11/2/2017 20:45",
 	"super" : "Object",
-	"category" : "Bloc-Theme",
+	"category" : "Bloc-SVG-Element",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlIcons",
+	"name" : "BlSvgIcons",
 	"type" : "normal"
 }
