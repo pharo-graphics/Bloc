@@ -1,0 +1,15 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"position"
+	],
+	"name" : "BlTextCursor",
+	"commentStamp" : "AliakseiSyrel 7/30/2017 15:48",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Elements"
+}

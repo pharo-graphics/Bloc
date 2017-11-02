@@ -11,9 +11,7 @@ measureOn: aCanvas with: aSpanMeasurer
 
 	(self text isEmpty) ifTrue: [ 
 		aMeasurer
-			measureSpan: (BrSpan
-				text: (BrRopedText string: '')
-				attributes: #())
+			measureSpan: (BrSpan text: self text empty attributes: #())
 			of: self
 			on: aCanvas
 			with: aSpanMeasurer ].

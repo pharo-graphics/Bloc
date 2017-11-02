@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/22/2017 17:58",
+	"super" : "BlElement",
+	"category" : "Bloc-Text-Elements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"cursor"
+	],
+	"name" : "BlTextCursorElement",
+	"type" : "normal"
+}

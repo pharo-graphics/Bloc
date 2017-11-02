@@ -11,8 +11,6 @@ styledParseImage: aText
 	indices size < 2 ifTrue: [ ^ self ].
 	
 	aText
-		attributes: {
-			BrTextBackgroundAttribute paint: Color yellow.
-			BrTextPngUrlAttribute new url: (aString copyFrom: indices first value + 1 to: indices second key - 1) }
+		attributes: { BrTextBackgroundAttribute paint: Color yellow }
 		from: indices first value + 1
 		to: indices second key - 1

@@ -56,7 +56,7 @@ baseline: spec
 
 			package: #'Bloc-Text' with: [ spec requires: #(Bloc). ];
 			package: #'Bloc-Text-Rope' with: [ spec requires: #(Bloc 'Bloc-Text'). ];
-			package: #'Bloc-Text-Rope-Examples' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope' GToolkitExamplesEngine). ];
+			package: #'Bloc-Text-Elements' with: [ spec requires: #(Bloc 'Bloc-Text' 'Bloc-Text-Rope'). ];
 
 			"Contains a converter from SVG to Bloc"
 			package: #'Bloc-SVG' with: [ spec requires: #('Bloc' 'Bloc-Geometry' 'Bloc-Text' 'Bloc-Text-Rope' XMLParser) ];
@@ -71,6 +71,7 @@ baseline: spec
 					'Bloc-Infinite'
 					'Bloc-Infinite-Layouts'
 					'Bloc-DevTool'
+					'Bloc-Text-Elements'
 					GToolkitExamplesEngine). ];
 			package: #'Bloc-DevTool' with: [ spec requires: #(#Bloc #'Bloc-Layout'). ];
 			package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
@@ -89,7 +90,7 @@ baseline: spec
 				'Bloc-Layout'
 				'Bloc-Text'
 				'Bloc-Text-Rope'
-				'Bloc-Text-Rope-Examples'
+				'Bloc-Text-Elements'
 				
 				"core only loads very basic stuff"
 				'BlocHost-Morphic'
