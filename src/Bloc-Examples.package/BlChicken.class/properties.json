@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 10/14/2017 13:42",
 	"super" : "BlElement",
-	"category" : "Bloc-Examples-Chicken",
+	"category" : "Bloc-Examples-Showcase-Chicken",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

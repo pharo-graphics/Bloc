@@ -1,0 +1,1 @@
+I contain examples of how to create and attribute a text model and then create a corresponding text element

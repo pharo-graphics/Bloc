@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlElement",
-	"category" : "Bloc-Examples-MobilePhone",
+	"category" : "Bloc-Examples-Showcase-Mobile Phone",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

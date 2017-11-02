@@ -5,7 +5,8 @@ composedFlow
 
 	children := (1 to: 5) collect: [ :index |
 		| grid gridChildren |
-		gridChildren := (1 to: 20 atRandom + 6) collect: [ :i | self cell size: ((30 @ 30) + (50 atRandom @ 10 atRandom)); margin: (BlInsets all: 2) ].
+		gridChildren := (1 to: 20 atRandom + 6)
+			collect: [ :i | self cell size: ((30 @ 30) + (50 atRandom @ 10 atRandom)); margin: (BlInsets all: 2) ].
 
 		grid := BlElement new.
 		grid focusability: BlFocusability after.

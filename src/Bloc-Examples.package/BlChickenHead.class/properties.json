@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlElement",
-	"category" : "Bloc-Examples-Chicken",
+	"category" : "Bloc-Examples-Showcase-Chicken",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
