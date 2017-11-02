@@ -1,6 +1,14 @@
 *Bloc-Extensions
-gtInspectorTransformationsIn: composite
+gtInspectorTransformationsIn: aComposite
 	<gtInspectorPresentationOrder: 19>
 	
-	self transformation
-		gtInspectorTransformationsIn: composite
+	aComposite
+		composite: [ :aTabbedComposite |
+			aTabbedComposite title: 'Transformation'.
+			(self transformation
+				gtInspectorTransformationsIn: aTabbedComposite)
+					title: 'Composition'.
+			self transformation
+				gtInspectorMatrixIn: aTabbedComposite.
+			self transformation
+				gtInspectorDecompositionIn: aTabbedComposite ].

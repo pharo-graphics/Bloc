@@ -2,5 +2,5 @@
 gtInspectorTransformationsIn: composite
 	<gtInspectorPresentationOrder: 0>
 	
-	self transformation
+	^ self transformation
 		gtInspectorTransformationsIn: composite

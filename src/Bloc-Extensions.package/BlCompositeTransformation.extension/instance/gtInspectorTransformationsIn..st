@@ -2,7 +2,7 @@
 gtInspectorTransformationsIn: composite
 	<gtInspectorPresentationOrder: 20>
 		
-	composite tree 
+	^ composite tree 
 		title: 'Transformations' translated;
 		rootsExpanded;
 		display: [ self ];
