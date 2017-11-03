@@ -1,8 +1,9 @@
 examples
-exampleGrid
+grid
+	<script: 'self grid'>
 	| space element |
 	
-	element := (self >> #container:visualHandler:) gtExample returnValue.
+	element := self new containerWithOneGridAndVisualHandler.
 	
 	space := BlSpace new.
 	space extent: 800@600.
