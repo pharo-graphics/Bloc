@@ -11,7 +11,7 @@ decomposition
 	row1x := self shx.
 	row1y := self sy.
 	
-	translate := BlVector x: self x y: self y z: 0.
+	translate := BlVector x: self x y: self y.
 	scaleX := ((row0x * row0x) + (row0y * row0y)) sqrt.
 	scaleY := ((row1x * row1x) + (row1y * row1y)) sqrt.
 	
@@ -59,6 +59,6 @@ decomposition
 	
 	^ BlMatrixDecomposition2D new
 		translation: translate;
-		scale: (BlVector x: scaleX y: scaleY z: 1);
+		scale: (BlVector x: scaleX y: scaleY);
 		angle: angle;
 		matrix: matrix

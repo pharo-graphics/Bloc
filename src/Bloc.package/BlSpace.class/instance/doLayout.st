@@ -20,4 +20,4 @@ doLayout
 	"I prevent infinite spawn of debuggers"
 	] on: Error do: [ :anError |
 		layoutError := anError.
-		[ layoutError defaultAction ] ensure: [ layoutError := nil ] ]
+		[ layoutError debug ] ensure: [ layoutError := nil ] ]
