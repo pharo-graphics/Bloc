@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "AliakseiSyrel 11/1/2017 09:06",
-	"super" : "BlElementTransformation",
+	"super" : "BlElementDynamicTransformation",
 	"category" : "Bloc-Basic-Transformations",
 	"classinstvars" : [ ],
 	"pools" : [ ],

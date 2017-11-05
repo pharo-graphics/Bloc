@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 12/18/2016 14:47",
 	"super" : "BlInterpolator",
-	"category" : "Bloc-Animation-Easing",
+	"category" : "Bloc-Animation-Interpolators",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

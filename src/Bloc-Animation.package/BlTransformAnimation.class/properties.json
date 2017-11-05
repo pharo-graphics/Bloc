@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 11/5/2017 18:54",
 	"super" : "BlAnimation",
 	"category" : "Bloc-Animation-Animation",
 	"classinstvars" : [ ],
@@ -8,7 +8,8 @@
 	"instvars" : [
 		"transformation",
 		"fromMatrix",
-		"toMatrix"
+		"toMatrix",
+		"isAbsolute"
 	],
 	"name" : "BlTransformAnimation",
 	"type" : "normal"

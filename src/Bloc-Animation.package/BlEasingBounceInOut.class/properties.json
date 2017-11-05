@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlEasingBaseBounce",
-	"category" : "Bloc-Animation-Easing",
+	"category" : "Bloc-Animation-Interpolators",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

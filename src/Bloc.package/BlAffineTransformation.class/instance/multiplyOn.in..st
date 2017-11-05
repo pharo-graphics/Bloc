@@ -7,4 +7,4 @@ multiplyOn: aBlMatrix in: aBlElement
 	
 	aBlMatrix translateBy: aVector negated.
 	self multiplyOn: aBlMatrix.
-	aBlMatrix translateBy: aVector 
+	aBlMatrix translateBy: aVector

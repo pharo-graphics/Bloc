@@ -1,4 +1,4 @@
 initialization
 initialize
 	super initialize.
-	currentIndex := 1
+	currentIndex := 0

@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlTransition",
-	"category" : "Bloc-Animation-Transition",
+	"category" : "Bloc-Animation-Animation",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

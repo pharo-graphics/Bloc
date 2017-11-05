@@ -2,4 +2,4 @@ initialization
 initialize
 	super initialize.
 	
-	transformation := BlCompositeTransformation new
+	transformation := BlAffineCompositeTransformation new

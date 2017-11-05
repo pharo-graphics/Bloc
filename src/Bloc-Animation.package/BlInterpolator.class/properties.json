@@ -11,5 +11,5 @@
 		"default"
 	],
 	"pools" : [ ],
-	"category" : "Bloc-Animation-Easing"
+	"category" : "Bloc-Animation-Interpolators"
 }

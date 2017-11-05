@@ -2,5 +2,5 @@ initialization
 initialize
 	super initialize.
 	
-	transformation := BlCompositeTransformation new.
+	transformation := BlAffineCompositeTransformation new.
 	origin := BlAffineTransformationCenterOrigin new

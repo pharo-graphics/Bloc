@@ -1,5 +1,5 @@
 accessing
 transformation
-	<return: #BlCompositeTransformation>
+	<return: #BlAffineCompositeTransformation>
 
 	^ transformation

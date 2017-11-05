@@ -1,5 +1,6 @@
 examples
 ballsAnim
+	<script: 'self ballsAnim'>
 |space els anims|
 anims := OrderedCollection new.
 els := OrderedCollection new.
@@ -9,11 +10,12 @@ els := OrderedCollection new.
 		el :=(BlEllipse diameter: 30) asElement 
 		background: (Color white alpha: 0);
 		relocate: (ii*15)@10.
-		
-		tr := BlTranslateAnimation new
+			
+		tr := BlTransformAnimation new
 			target: el;
-			to: (ii*15) @(500 -(30*((i/25)ceiling) ));
-			delay: i*80;duration: 500;
+			transformDo: [ :aBuilder | aBuilder translateBy: (ii*15) @(500 -(30*((i/25)ceiling) )) ];
+			delay: i*80;
+			duration: 500;
 			easing: BlEasing bounceOut.
 			
 		alp := BlColorTransition new

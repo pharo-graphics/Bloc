@@ -1,25 +1,27 @@
 examples
 sequential
-	"<script: 'self sequential'>"
- 
-	| sp el a1 a2 cAnim |
-	sp := BlSpace new.
-	el := BlElement new
+	<script: 'self sequential'>
+	| space element translation scale sequential |
+	
+	element := BlElement new
 		background: (BlBackground paint: Color blue);
-		extent: 100 @ 100;
-		position: 100 @ 100.
-	a1 := BlTranslateAnimation new
+		size: 100 @ 100;
+		relocate: 100 @ 100.	
+			
+	translation := (BlTransformAnimation translate: 300 @ 300)
 		easing: BlEasing bounceOut;
-		to: 300 @ 300;
 		duration: 2000;
-		target: el.
-	a2 := BlScaleAnimation new
-		target: el;
+		target: element.
+
+	scale := (BlTransformAnimation scale: 2 @ 2)
 		easing: BlEasing bounceOut;
-		scaleTo: 2@2;
-		duration: 2000.
-	cAnim := BlSequentialAnimation new
-		addAll: {a1. a2}.
-	sp root addChild: el.
-	sp show.
-	cAnim start
+		duration: 2000;
+		target: element.
+		
+	sequential := BlSequentialAnimation new addAll: { translation. scale }.
+	
+	space := BlSpace new.
+	space root addChild: element.
+	space show.
+	
+	sequential start
