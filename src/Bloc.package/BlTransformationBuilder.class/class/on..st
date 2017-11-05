@@ -1,5 +1,5 @@
 instance creation
-on: anElement
+on: anObject
 	<return: #BlTransformationBuilder>
 
-	^ self new element: anElement
+	^ self new target: anObject

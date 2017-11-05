@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BlAnimation",
+	"category" : "Bloc-Animation-Animation",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"transformation",
+		"fromMatrix",
+		"toMatrix"
+	],
+	"name" : "BlTransformAnimation",
+	"type" : "normal"
+}

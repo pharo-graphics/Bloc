@@ -6,9 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"element",
 		"transformation",
-		"origin"
+		"origin",
+		"target"
 	],
 	"name" : "BlTransformationBuilder",
 	"type" : "normal"
