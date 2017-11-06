@@ -10,12 +10,12 @@ sequential
 			
 	translation := (BlTransformAnimation translate: 300 @ 300)
 		easing: BlEasing bounceOut;
-		duration: 2000;
+		duration: 2 seconds;
 		target: element.
 
 	scale := (BlTransformAnimation scale: 2 @ 2)
 		easing: BlEasing bounceOut;
-		duration: 2000;
+		duration: 2 seconds;
 		target: element.
 		
 	sequential := BlSequentialAnimation new addAll: { translation. scale }.

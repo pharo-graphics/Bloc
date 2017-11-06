@@ -1,3 +1,3 @@
 accessing api
-delay: anObject
-	delay := anObject
+delay: aDuration
+	delay := aDuration asDuration

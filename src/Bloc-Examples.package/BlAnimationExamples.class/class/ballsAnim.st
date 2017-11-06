@@ -14,14 +14,15 @@ els := OrderedCollection new.
 		tr := BlTransformAnimation new
 			target: el;
 			transformDo: [ :aBuilder | aBuilder translateBy: (ii*15) @(500 -(30*((i/25)ceiling) )) ];
-			delay: i*80;
-			duration: 500;
+			delay: 80 milliSeconds * i;
+			duration: 500 milliSeconds;
 			easing: BlEasing bounceOut.
 			
 		alp := BlColorTransition new
 					from: (Color white alpha: 0);
 					to: Color random;
-					delay: i*80;duration: 100;
+					delay: 80 milliSeconds * i;
+					duration: 100 milliSeconds;
 					onStepDo: [ :c | el background: c].
 		anims addAll: {tr.alp}.els add: el.
 		].

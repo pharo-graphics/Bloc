@@ -1,11 +1,15 @@
 initialization
 initialize
 	super initialize.
-	running := false.
-	elapsedTime := 0.
+	
+	duration := 1 second.	"configurable"
+	delay := 0 milliSeconds. "configurable"
+	
+	elapsedTime := 0 milliSeconds.
+	
 	loop := 1.
 	loopCount := 0.
-	delay := 0.
-	duration :=1.
+	running := false.
+	
 	actionHandlers := OrderedCollection new.
 	eventDispatcher := BlSimpleEventDispatcher on: self

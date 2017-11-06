@@ -1,3 +1,3 @@
 as yet unclassified
 computeElapsedTime
-	^ self children sumNumbers: [ :each | each elapsedTime ]
+	^ self children sum: [ :each | each elapsedTime ]

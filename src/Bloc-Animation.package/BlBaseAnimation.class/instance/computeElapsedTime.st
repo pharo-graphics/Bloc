@@ -1,3 +1,3 @@
-adding
+time management
 computeElapsedTime
-	^ (Time millisecondClockValue - (startTime + delay)) min: self duration
+	^ (DateAndTime now - self delayedStartTime) min: self duration

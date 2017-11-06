@@ -1,7 +1,7 @@
 pulse
 initStart
 	
-	startTime := Time millisecondClockValue.
+	startTime := DateAndTime now.
 	progress := 0.
-	elapsedTime := 0.
+	elapsedTime := 0 milliSeconds.
 	running := true

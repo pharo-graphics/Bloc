@@ -1,3 +1,3 @@
 as yet unclassified
 computeDuration
-	duration := self children sumNumbers: [ :each | each duration + each delay ]
+	duration := self children sum: [ :each | each duration + each delay ]

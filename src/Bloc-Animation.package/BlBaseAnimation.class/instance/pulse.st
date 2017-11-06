@@ -1,12 +1,12 @@
 pulse
 pulse
 
-	"Time did not come for me to run because of delta, just request next step and quit"
-	Time millisecondClockValue < (startTime + delay)
+	"Time did not come for me to run because of delay, just request next step and quit"
+	DateAndTime now < self delayedStartTime
 		ifTrue: [ ^ self requestNextStep ].
 
 	elapsedTime := self computeElapsedTime.
-	progress := (elapsedTime / duration) asFloat.
+	progress := (elapsedTime / self duration) asFloat.
 	
 	progress >= 1
 		ifFalse: [

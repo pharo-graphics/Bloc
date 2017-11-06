@@ -2,7 +2,7 @@ private
 childrenMinValue: aBlock default: aValue
 	| min |
 	self children ifEmpty: [ ^ aValue ].
-	min := (aBlock value: self children first) max: 0.
+	min := (aBlock value: self children first) max: 0 seconds.
 	self children
 		allButFirstDo:
 			[ :each | 
