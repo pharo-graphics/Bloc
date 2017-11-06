@@ -14,7 +14,6 @@ Main maintainers : [Glenn Cavarlé](https://github.com/GlennCavarle) & [Aliaksei
 ## Installation
 
 The following script installs Bloc and its dependencies in [Pharo 6.1](https://pharo.org/download):<br>
-*(Use it if you don't know what to do)*
 
 ```smalltalk
 Metacello new
