@@ -12,5 +12,6 @@ initStart
 	
 	transformation owner: self target.
 	
+	self target topMostParent forceLayout.
 	fromMatrix := self target transformation matrix.
 	toMatrix := transformation matrix
