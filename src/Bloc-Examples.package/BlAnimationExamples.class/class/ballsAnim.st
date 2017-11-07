@@ -1,9 +1,9 @@
 examples
 ballsAnim
 	<script: 'self ballsAnim'>
-|space els anims|
-anims := OrderedCollection new.
-els := OrderedCollection new.
+	|space els anims|
+	anims := OrderedCollection new.
+	els := OrderedCollection new.
 
 	(1 to:100) do: [:i| |el tr alp ii| 
 		ii := i % 25.
