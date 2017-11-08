@@ -7,7 +7,7 @@ firePulse: aPulseEvent
 		self spaceManager pulse.
 		self tryToRunDeferredActions.
 	
-	] on: Exception do: [ :err | 
+	] on: Error do: [ :err | 
 		"It is critical, that event handling keeps running despite errors.
 		Normally, any errors in event handling requires immediate attention and fixing"
 		err freeze.

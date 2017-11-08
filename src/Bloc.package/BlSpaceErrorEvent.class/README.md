@@ -1,0 +1,1 @@
+Is sent by space if there was an error during #pulse
