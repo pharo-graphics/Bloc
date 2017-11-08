@@ -2,10 +2,10 @@ tests
 testInSpace: anElement
 	| aSpace aTopMostElement |
 	
-	aTopMostElement := anElement topMostElement.
+	aTopMostElement := anElement topMostParent.
 	aTopMostElement isAttachedToSceneGraph
 		ifTrue: [ ^ self ].
-	
+
 	aSpace := BlSpace new.
 	aSpace root addChild: aTopMostElement.
 	
