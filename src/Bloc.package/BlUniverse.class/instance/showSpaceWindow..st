@@ -1,6 +1,6 @@
 window managing
 showSpaceWindow: aSpace
-
+	| shouldStartTheUniverse |
 	self
 		assert: [ aSpace isNotNil ]
 		description: [ 'Space must not be nil' ].
@@ -9,9 +9,7 @@ showSpaceWindow: aSpace
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host!' ].
 
-	"We are going to register first space, let's start the Universe"
-	self spaceManager hasSpaces
-		ifFalse: [ self start ].
+	shouldStartTheUniverse := self spaceManager hasSpaces not.
 
 	"First of all we need to add space to the space manager"
 	self spaceManager addSpace: aSpace.
@@ -28,3 +26,7 @@ showSpaceWindow: aSpace
 	self
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
+
+	"We registered the first space, let's start the Universe"
+	shouldStartTheUniverse
+		ifTrue: [ self start ].

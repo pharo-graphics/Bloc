@@ -2,6 +2,9 @@ lifecycle
 stop
 	| currentProcess |
 	
+	self isRunning
+		ifFalse: [ ^ self ].
+	
 	self
 		assert: [ loopProcess isNotNil ]
 		description: [ 'Loop process must exist!' ].

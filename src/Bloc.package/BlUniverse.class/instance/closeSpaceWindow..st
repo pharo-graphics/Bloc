@@ -17,15 +17,18 @@ closeSpaceWindow: aSpace
 	
 	"Notify root element that it is no longer in scene graph"
 	aSpace root dispatchRemovedFromSceneGraph.
+	"Send space closed event.
+	Note: a new space may be spawned as a reaction to the event, that is why
+	we send it before stopping host and universe"
 	aSpace dispatchEvent: (BlSpaceClosedEvent new space: self).
 	
 	(self spaceManager spaces anySatisfy: [ :eachSpace | eachSpace host == aSpace host ])
 		ifFalse: [ aSpace host isRunning ifTrue: [ aSpace host stop ] ].
 
-	"Stop universe if there are no spaces left"
-	self spaceManager hasSpaces
-		ifFalse: [ self stop ].
-
 	self
 		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Host space must not have a host!' ]
+		description: [ 'Host space must not have a host!' ].
+		
+	"Stop universe if there are no spaces left"
+	self spaceManager hasSpaces
+		ifFalse: [ self stop ]
