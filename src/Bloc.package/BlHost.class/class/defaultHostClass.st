@@ -6,5 +6,5 @@ defaultHostClass
 
 	^ self availableHostClasses
 		"There are no availbale hosts, return a null one"
-		ifEmpty: [ BlNullHost ]
+		ifEmpty: [ BlHeadlessHost ]
 		ifNotEmpty: [ :theHostClasses | theHostClasses first ]

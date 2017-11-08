@@ -8,6 +8,6 @@
 	"instvars" : [
 		"isRunning"
 	],
-	"name" : "BlNullHost",
+	"name" : "BlHeadlessHost",
 	"type" : "normal"
 }
