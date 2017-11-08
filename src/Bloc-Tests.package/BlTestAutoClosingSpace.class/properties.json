@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/8/2017 09:15",
+	"super" : "BlSpace",
+	"category" : "Bloc-Tests-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"frames",
+		"frameCounter"
+	],
+	"name" : "BlTestAutoClosingSpace",
+	"type" : "normal"
+}

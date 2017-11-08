@@ -1,0 +1,1 @@
+I am a space that closes itself after a given amount of frames

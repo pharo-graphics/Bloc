@@ -14,7 +14,11 @@ closeSpaceWindow: aSpace
 
 	"then remove space itself from space manager"
 	self spaceManager removeSpace: aSpace.
-
+	
+	"Notify root element that it is no longer in scene graph"
+	aSpace root dispatchRemovedFromSceneGraph.
+	aSpace dispatchEvent: (BlSpaceClosedEvent new space: self).
+	
 	(self spaceManager spaces anySatisfy: [ :eachSpace | eachSpace host == aSpace host ])
 		ifFalse: [ aSpace host isRunning ifTrue: [ aSpace host stop ] ].
 
