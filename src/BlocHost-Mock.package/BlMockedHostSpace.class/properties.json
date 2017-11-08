@@ -14,10 +14,13 @@
 		"densityDpi",
 		"renderCount",
 		"space",
-		"host"
+		"host",
+		"isFullscreen",
+		"position",
+		"title"
 	],
 	"name" : "BlMockedHostSpace",
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 11/8/2017 12:50",
 	"super" : "Object",
 	"traitcomposition" : "TBlHostSpace",
 	"type" : "normal",

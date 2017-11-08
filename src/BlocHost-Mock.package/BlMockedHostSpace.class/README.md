@@ -1,0 +1,1 @@
+I am a mocked host space that behaves just like a real one but is invisible and does not render anything

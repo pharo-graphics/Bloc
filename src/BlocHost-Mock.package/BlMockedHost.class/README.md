@@ -1,0 +1,1 @@
+I am a mocked host that looks like real but does not create any windows
