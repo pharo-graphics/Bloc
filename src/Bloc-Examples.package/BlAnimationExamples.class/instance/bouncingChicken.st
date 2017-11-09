@@ -1,5 +1,5 @@
 examples
-chickenBouncing
+bouncingChicken
 	<gtExample>
 	| element animation |
 	element := BlChicken chicken.
