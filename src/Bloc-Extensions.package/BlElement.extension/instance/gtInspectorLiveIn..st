@@ -1,6 +1,6 @@
 *Bloc-Extensions
 gtInspectorLiveIn: composite
-	<gtInspectorPresentationOrder: 15>
+	<gtInspectorPresentationOrder: 5>
 	
 	composite bloc
 		title: 'Live' translated;

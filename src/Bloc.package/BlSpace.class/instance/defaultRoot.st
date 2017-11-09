@@ -1,6 +1,6 @@
-accessing
+initialization
 defaultRoot
 	^ BlElement new
 		space: self;
-		background:(BlBackground paint: Color white);
+		background: self defaultRootBackground;
 		yourself
