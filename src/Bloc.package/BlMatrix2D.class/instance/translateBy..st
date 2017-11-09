@@ -14,4 +14,4 @@ translateBy: aBlVector
 	will first be transformed by the original transform,
 	then be translated by given translation"
 	x := x + aTranslate3D x.
-	y := y + aTranslate3D y
+	y := y + aTranslate3D y.

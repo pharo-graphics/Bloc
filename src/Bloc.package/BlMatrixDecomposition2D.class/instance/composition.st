@@ -9,9 +9,9 @@ composition
 	composedMatrix shx: (matrix at: 2 at: 1).
 	composedMatrix sy: (matrix at: 2 at: 2).
 	
-	"Translate matrix."
-	composedMatrix x: translation x.
-	composedMatrix y: translation y.
+	"Translate matrix"
+	composedMatrix x: (translation x * composedMatrix sx) + (translation y * composedMatrix shx).
+	composedMatrix y: (translation x * composedMatrix shy) + (translation y * composedMatrix sy).
 	
 	"rotate matrix"
 	composedMatrix := (BlMatrix2D rotation: angle degreesToRadians) multiplyBy: (composedMatrix).
