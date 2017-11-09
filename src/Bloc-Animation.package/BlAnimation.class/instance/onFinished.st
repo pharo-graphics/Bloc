@@ -1,3 +1,3 @@
 pulse
 onFinished
-	self applyValue: (self valueForStep: 1)
+	self applyValue: (self valueForStep: (self computeDelta: 1))

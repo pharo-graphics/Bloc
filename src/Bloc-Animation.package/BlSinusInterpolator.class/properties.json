@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/9/2017 22:43",
+	"super" : "BlInterpolator",
+	"category" : "Bloc-Animation-Interpolators",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlSinusInterpolator",
+	"type" : "normal"
+}
