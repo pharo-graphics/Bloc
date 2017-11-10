@@ -1,13 +1,12 @@
 {
-	"commentStamp" : "AliakseiSyrel 10/17/2017 22:09",
+	"commentStamp" : "AliakseiSyrel 11/10/2017 16:02",
 	"super" : "BlElement",
-	"category" : "Bloc-Layouts-Basic",
+	"category" : "Bloc-Scalable",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"contentElement",
-		"scaleFactor",
 		"scaleStrategy"
 	],
 	"name" : "BlScalableElement",

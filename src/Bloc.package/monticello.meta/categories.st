@@ -16,6 +16,7 @@ SystemOrganization addCategory: #'Bloc-Layouts-Support'!
 SystemOrganization addCategory: #'Bloc-Paint'!
 SystemOrganization addCategory: #'Bloc-Paint-Support'!
 SystemOrganization addCategory: #'Bloc-Property'!
+SystemOrganization addCategory: #'Bloc-Scalable'!
 SystemOrganization addCategory: #'Bloc-Selection'!
 SystemOrganization addCategory: #'Bloc-Settings'!
 SystemOrganization addCategory: #'Bloc-Space'!

@@ -1,0 +1,15 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"strategy"
+	],
+	"name" : "BlScalableStrategyDecorator",
+	"commentStamp" : "AliakseiSyrel 11/10/2017 15:53",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Scalable"
+}

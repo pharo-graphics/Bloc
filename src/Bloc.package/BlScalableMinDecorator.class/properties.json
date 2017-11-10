@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/10/2017 16:09",
+	"super" : "BlScalableStrategyDecorator",
+	"category" : "Bloc-Scalable",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"minScale"
+	],
+	"name" : "BlScalableMinDecorator",
+	"type" : "normal"
+}
