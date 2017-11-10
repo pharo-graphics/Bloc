@@ -8,7 +8,6 @@ SystemOrganization addCategory: #'Bloc-Basic-Visual'!
 SystemOrganization addCategory: #'Bloc-Effect'!
 SystemOrganization addCategory: #'Bloc-Event'!
 SystemOrganization addCategory: #'Bloc-EventHandling'!
-SystemOrganization addCategory: #'Bloc-Focus'!
 SystemOrganization addCategory: #'Bloc-Gesture'!
 SystemOrganization addCategory: #'Bloc-KeyBinding'!
 SystemOrganization addCategory: #'Bloc-Layouts-Basic'!
@@ -16,11 +15,12 @@ SystemOrganization addCategory: #'Bloc-Layouts-Support'!
 SystemOrganization addCategory: #'Bloc-Paint'!
 SystemOrganization addCategory: #'Bloc-Paint-Support'!
 SystemOrganization addCategory: #'Bloc-Property'!
-SystemOrganization addCategory: #'Bloc-Scalable'!
-SystemOrganization addCategory: #'Bloc-Selection'!
 SystemOrganization addCategory: #'Bloc-Settings'!
 SystemOrganization addCategory: #'Bloc-Space'!
 SystemOrganization addCategory: #'Bloc-Space-Support'!
 SystemOrganization addCategory: #'Bloc-State'!
 SystemOrganization addCategory: #'Bloc-Universe'!
-SystemOrganization addCategory: #'Bloc-Utils'!
+SystemOrganization addCategory: #'Bloc-Utilities - Debugging'!
+SystemOrganization addCategory: #'Bloc-Utilities - Focus'!
+SystemOrganization addCategory: #'Bloc-Utilities - Scalable'!
+SystemOrganization addCategory: #'Bloc-Utilities - Selection'!

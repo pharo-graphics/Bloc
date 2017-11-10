@@ -9,11 +9,11 @@
 		"selected"
 	],
 	"name" : "BlSelectionHandler",
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 11/10/2017 16:27",
 	"super" : "BlElementEventListener",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "Bloc-Selection"
+	"category" : "Bloc-Utilities - Selection"
 }

@@ -1,7 +1,7 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 11/10/2017 16:26",
 	"super" : "BlSelectionHandler",
-	"category" : "Bloc-Selection",
+	"category" : "Bloc-Utilities - Selection",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
