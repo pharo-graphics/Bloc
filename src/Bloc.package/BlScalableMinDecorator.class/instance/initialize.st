@@ -1,5 +1,5 @@
 initialization
 initialize
 	super initialize.
-
-	scaleStrategy := self defaultScaleStrategy
+	
+	minScale := 1.0

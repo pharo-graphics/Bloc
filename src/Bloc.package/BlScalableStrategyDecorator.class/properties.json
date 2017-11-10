@@ -1,13 +1,15 @@
 {
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlFocusSearchDirection",
-	"commentStamp" : "AliakseiSyrel 3/27/2017 10:56",
+	"instvars" : [
+		"strategy"
+	],
+	"name" : "BlScalableStrategyDecorator",
+	"commentStamp" : "AliakseiSyrel 11/10/2017 15:53",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "Bloc-Utilities - Focus"
+	"category" : "Bloc-Utilities - Scalable"
 }

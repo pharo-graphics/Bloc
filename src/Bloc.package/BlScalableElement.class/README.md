@@ -18,5 +18,6 @@ I'm a helper element that transforms its #contentElement in order to exactly #sc
 		c horizontal matchParent.
 		c vertical matchParent ].
 
-	scalable contentElement: content
+	scalable contentElement: content.
+	scalable
 ]]]

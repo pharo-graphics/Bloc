@@ -8,5 +8,5 @@ scale: aContentElement within: aScalableElement
 	aMeasuredExtent := aContentElement measuredExtent.
 	(aMeasuredExtent x * aMeasuredExtent y) isZero
 		ifTrue: [ ^ 1.0 ].
-	
+
 	^ (aScalableElement measuredExtent / aMeasuredExtent) min
