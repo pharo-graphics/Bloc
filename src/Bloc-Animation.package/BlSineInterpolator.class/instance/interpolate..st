@@ -1,6 +1,6 @@
 interpolation
 interpolate: aNumber
-	"f(x) = cos(x)"
+	"f(x) = sin(x)"
 	<return: #Number>
 
-	^ (aNumber * 2 * Float pi) cos
+	^ (aNumber * self range) sin

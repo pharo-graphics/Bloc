@@ -5,7 +5,9 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlCosinusInterpolator",
+	"instvars" : [
+		"range"
+	],
+	"name" : "BlSineInterpolator",
 	"type" : "normal"
 }
