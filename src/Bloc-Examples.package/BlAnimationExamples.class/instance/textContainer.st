@@ -3,7 +3,7 @@ textContainer
 	<gtExample>
 
 	^ BlElement new
-		layout: (BlGridLayout horizontal cellSpacing: 10);
+		layout: (BlGridLayout horizontal cellSpacing: 0);
 		constraintsDo: [ :c |
 			c horizontal fitContent.
 			c vertical fitContent ];

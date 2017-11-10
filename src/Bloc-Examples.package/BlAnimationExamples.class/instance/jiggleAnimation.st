@@ -11,7 +11,7 @@ jiggleAnimation
 		apply.
 	anAnimation absolute.
 	anAnimation easing: (BlSineInterpolator new range: Float pi).	
-	anAnimation loop: 5.
+	anAnimation loop: 3.
 	anAnimation duration: 1 second.
 	
 	^ anAnimation

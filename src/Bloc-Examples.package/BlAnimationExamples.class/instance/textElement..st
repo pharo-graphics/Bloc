@@ -1,10 +1,13 @@
-instance creation
+accessing
 textElement: aCharacter
 	| aText |
 	
 	aText := BrRopedText string: aCharacter asString.
 	aText attributes: {
 		BrFontSizeAttribute size: 90.
-		BrFontFamilyAttribute named: 'Somatic' }.
+"		BrTextBackgroundAttribute paint: (Color white alpha: 0.5)."
+		BrFontFamilyAttribute named: "'Bauhaus 93'" "'Curlz MT'" 'Phosphate' }.
 	
-	^ BlTextElement new text: aText
+	^ BlTextElement new 
+		text: aText;
+		effect: (BlDropShadowEffect color: (Color gray alpha: 0.5) width: 20 offset: 0@0)

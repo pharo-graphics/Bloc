@@ -4,7 +4,7 @@ bouncingText
 	| letters container animation clickHandler |
 	<gtExample>
 
-	letters := 'bloc alpha v1' collect: [ :aCharacter | self textElement: aCharacter ] as: Array.
+	letters := 'bloc beta01' collect: [ :aCharacter | self textElement: aCharacter ] as: Array.
 	letters withIndexDo: [  :aTextElement :anIndex |
 		"change text color according to index in color spectrum"
 		aTextElement text: (aTextElement text attributes: { BrTextForegroundAttribute paint: (self colorAt: (anIndex / letters size) asFloat) }) ].
@@ -12,7 +12,7 @@ bouncingText
 	animation := BlParallelAnimation with: (letters withIndexCollect: [ :aChild :anIndex |
 		| jiggle |
 		jiggle := self jiggleAnimation.
-		jiggle delay: 100 milliSeconds * (anIndex - 1).
+		jiggle delay: 20 milliSeconds * (anIndex - 1).
 		jiggle target: aChild.
 		jiggle ]).
 
