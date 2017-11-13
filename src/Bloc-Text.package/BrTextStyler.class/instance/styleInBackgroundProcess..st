@@ -12,5 +12,5 @@ styleInBackgroundProcess: aBrText
 			delay asDelay wait.
 			text := aBrText unstyle.
 			styledText := self privateStyle: text.
-			self fireEvent: (BrTextStyledEvent new text: styledText)
+			BlUniverse defer: [ self fireEvent: (BrTextStyledEvent new text: styledText) ].
 		 ] forkAt: Processor userBackgroundPriority ]

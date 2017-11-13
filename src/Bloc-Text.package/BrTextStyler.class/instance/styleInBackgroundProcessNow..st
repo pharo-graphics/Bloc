@@ -11,5 +11,5 @@ styleInBackgroundProcessNow: aBrText
 			| styledText |
 			text := aBrText unstyle.
 			styledText := self privateStyle: text.
-			self fireEvent: (BrTextStyledEvent new text: styledText)
+			BlUniverse defer: [ self fireEvent: (BrTextStyledEvent new text: styledText) ].
 		 ] forkAt: Processor userBackgroundPriority ]
