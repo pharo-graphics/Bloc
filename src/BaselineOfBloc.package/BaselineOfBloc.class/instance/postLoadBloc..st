@@ -5,8 +5,10 @@ postLoadBloc: aSpecLoader
 		load: 'Bloc'
 		from: aSpecLoader spec versionSpec repositories map keys first.
 
-	"To make OSWindow work"
-	FFIExternalStructure withAllSubclassesDo: #rebuildFieldAccessors.
+	"Make sure that external structures have valid accessors"
+	Author
+		useAuthor: 'UFFI'
+		during: [ FFIExternalStructure withAllSubclassesDo: #rebuildFieldAccessors ].
 
 	"register right Meta key for OSX"
 	Key macOSVirtualKeyTable
