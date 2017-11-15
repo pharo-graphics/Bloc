@@ -1,0 +1,3 @@
+rendering
+defaultTextPaint
+	^ Color black

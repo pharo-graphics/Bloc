@@ -8,6 +8,7 @@ render: aTextParagraph span: aSpan on: aCanvas
 	hasTransformation :=	aTransformation isNotNil and: [ aTransformationInverted isNotNil ].
 
 	aTextPainter := aCanvas text.
+	aTextPainter paint: self defaultTextPaint.
 	attributes
 		do: [ :attribute |
 			attribute drawBelowOnSpartaCanvas: aCanvas with: aSpan.

@@ -1,3 +1,3 @@
 initialization
 defaultRootBackground
-	^ Smalltalk ui theme backgroundColor
+	^ Color white
