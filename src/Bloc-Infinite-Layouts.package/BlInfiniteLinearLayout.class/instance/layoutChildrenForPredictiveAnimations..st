@@ -38,7 +38,7 @@ layoutChildrenForPredictiveAnimations: anOffsetSpace
 			anAnchorElement := self childClosestToStart.
 			self updateLayoutStateToFillStart: (self childPositionOf: anAnchorElement) offset: aStartOffset.
 			layoutState extraSpace: aScrapExtraStart.
-			layoutState availableSpace: 0.
+			layoutState availableSpace: 0 in: self.
 			layoutState assignPositionFromScrapList.
 			self fillLayout: false ].
 	
@@ -48,7 +48,7 @@ layoutChildrenForPredictiveAnimations: anOffsetSpace
 			anAnchorElement := self childClosestToEnd.
 			self updateLayoutStateToFillEnd: (self childPositionOf: anAnchorElement) offset: anEndOffset.
 			layoutState extraSpace: aScrapExtraEnd.
-			layoutState availableSpace: 0.
+			layoutState availableSpace: 0 in: self.
 			layoutState assignPositionFromScrapList.
 			self fillLayout: false ].
 

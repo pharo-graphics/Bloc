@@ -9,8 +9,9 @@ infiniteElement: anInfiniteElement
 	
 	infiniteElement := anInfiniteElement.
 	childManager := infiniteElement childrenManager.
-	width := infiniteElement width.
-	height := infiniteElement height.
+
+	width := infiniteElement width min: self maximumWidth.
+	height := infiniteElement height min: self maximumHeight.
 
 	widthSpec := BlMeasurementSpec exact: width.
 	heightSpec := BlMeasurementSpec exact: height

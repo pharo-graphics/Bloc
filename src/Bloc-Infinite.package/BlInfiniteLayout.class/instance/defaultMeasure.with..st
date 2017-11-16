@@ -5,11 +5,15 @@ defaultMeasure: anElement with: anExtentSpec
 	aWidth := self
 		calculateSize: anExtentSpec widthSpec
 		desired: self paddingLeft + self paddingRight
-		min: anElement constraints minWidth.
+		min: self minimumWidth.
+	
+	aWidth := aWidth min: self maximumWidth.
 	
 	aHeight := self
 		calculateSize: anExtentSpec heightSpec
 		desired: self paddingTop + self paddingBottom
-		min: anElement constraints minHeight.
+		min: self minimumHeight.
+		
+	aHeight := aHeight min: self maximumHeight.
 	
 	anElement measuredExtent: aWidth @ aHeight

@@ -9,7 +9,9 @@ fillLayoutConsumeSpace: aResult
 		layoutState hasScrapList or: [ 
 			self state isPreLayout not ] ])
 		ifTrue: [ 
-			layoutState availableSpace: layoutState availableSpace - aResult consumedSpace.
+			layoutState
+				availableSpace: layoutState availableSpace - aResult consumedSpace
+				in: self.
 			"we keep a separate remaining space because availableSpace is important for recycling"
 			aResult consumedSpace negated ]
 		ifFalse: [ 0 ]

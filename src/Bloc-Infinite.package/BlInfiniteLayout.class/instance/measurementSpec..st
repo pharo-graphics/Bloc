@@ -13,6 +13,10 @@ measurementSpec: anExtentMeasurementSpec
 		ifTrue: [ 0 ]
 		ifFalse: [ widthSpec size ].
 		
+	width := width min: self maximumWidth.
+		
 	height := heightSpec isUnspecified
 		ifTrue: [ 0 ]
-		ifFalse: [ heightSpec size ]
+		ifFalse: [ heightSpec size ].
+		
+	height := height min: self maximumHeight

@@ -9,4 +9,7 @@ measuredBoundingBox: aChildrenBounds with: anExtentSpec
 	aMeasuredWidth := self calculateSize: anExtentSpec widthSpec desired: usedWidth min: self minimumWidth.
 	aMeasuredHeight := self calculateSize: anExtentSpec heightSpec desired: usedHeight min: self minimumHeight.
 
+	aMeasuredWidth := aMeasuredWidth min: self maximumWidth.
+	aMeasuredHeight := aMeasuredHeight min: self maximumHeight.
+
 	infiniteElement measuredExtent: aMeasuredWidth @ aMeasuredHeight

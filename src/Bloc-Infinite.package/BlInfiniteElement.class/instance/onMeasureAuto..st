@@ -1,7 +1,7 @@
 measurement
 onMeasureAuto: anExtentMeasurementSpec
 	| skipMeasure |
-	
+
 	skipMeasure := anExtentMeasurementSpec isExact.
 	layout measure: self with: anExtentMeasurementSpec.
 	skipMeasure

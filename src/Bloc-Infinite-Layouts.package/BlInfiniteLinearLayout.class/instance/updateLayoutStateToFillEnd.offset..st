@@ -1,7 +1,7 @@
 layout - state
 updateLayoutStateToFillEnd: aPosition offset: anOffset
 	
-	layoutState availableSpace: self orientation endWithPadding - anOffset.
+	layoutState availableSpace: self orientation endWithPadding - anOffset in: self.
 	layoutState itemDirection: (shouldReverseLayout
 		ifTrue: [ BlInfiniteLinearLayoutItemDirection head ]
 		ifFalse: [ BlInfiniteLinearLayoutItemDirection tail ]).
