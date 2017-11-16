@@ -8,7 +8,8 @@ computeExtraLayoutSpace
 	InfiniteLayout to calculate a much smoother scrolling; which improves user experience.
 	You can also use this if you are trying to pre-layout your upcoming elements"
 	<return: #Number>
-	
-	^ self state hasTargetScrollPosition
-		ifTrue: [ self orientation totalSpace ]
-		ifFalse: [ 0 ]
+
+	self state hasTargetScrollPosition
+		ifTrue: [ ^ self orientation totalSpace ].
+
+	^ 0
