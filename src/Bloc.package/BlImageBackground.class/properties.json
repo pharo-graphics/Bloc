@@ -6,7 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"image"
+		"image",
+		"session",
+		"bitmap"
 	],
 	"name" : "BlImageBackground",
 	"type" : "normal"
