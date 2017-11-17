@@ -10,21 +10,18 @@ fullDrawOnSpartaCanvas: aCanvas
 	self isVisible
 		ifFalse: [ ^ self ].
 	
+	anEffectBounds := self effectBounds: BlBounds new.
+	"No need to render elements smaller than half of a pixel"
+	(anEffectBounds width min: anEffectBounds height) < 1
+		ifTrue: [ ^ self ].
+
+	(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
+		ifFalse: [ ^ self ].
+
 	aCanvas layer
 		alpha: self opacity;
 		when: [ self isTranslucent ]
 		during: [
-
-			anEffectBounds := self effectBounds: BlBounds new.
-			"No need to render elements smaller than half of a pixel"
-			(anEffectBounds width min: anEffectBounds height) < 1
-				ifTrue: [ ^ self ].
-
-			"(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
-				ifFalse: [
-					'false' logCr.
-					^ self ]."
-
 			aCanvas transform
 				by: self transformation
 				translated: self position

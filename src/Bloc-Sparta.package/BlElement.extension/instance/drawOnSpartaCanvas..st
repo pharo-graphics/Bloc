@@ -13,8 +13,7 @@ drawOnSpartaCanvas: aCanvas
 	"We create a new virtual layer in order to blend background and border only if they are both visible"
 
 	aCanvas layer
-		flag: 'Optimise the when condition';
-		when: [ true ]
+		when: [ self outskirts wantsLayerOn: self ]
 		during: [ self outskirts
 			drawBackground: [ self drawBackgroundOnSpartaCanvas: aCanvas ]
 			border: [ self drawBorderOnSpartaCanvas: aCanvas ]
