@@ -30,7 +30,7 @@ onMeasure: anExtentMeasurementSpec
 		aMaxWidth := aWidthSpec size ].
 	aHeightSpec isExact ifTrue: [ 
 		aMaxHeight := aHeightSpec size ].
-	
+
 	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
 	aMaxHeight := (aMaxHeight - aPadding height) max: 0.
 
@@ -46,11 +46,11 @@ onMeasure: anExtentMeasurementSpec
 		maxHeight: aMaxHeight.
 
 	paragraph measureOn: self defaultOffscreenCanvas.
-	paragraph baseline: (paragraph left @paragraph top) negated + (aPadding left @ aPadding top).
+	"paragraph baseline: (paragraph left @paragraph top) negated + (aPadding left @ aPadding top)."
 	"text layout is measured at this point"
 
 	aMeasuredWidth := paragraph width.
-	aMeasuredHeight := paragraph height.
+	aMeasuredHeight := (paragraph ascent + paragraph descent).
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
 	aWidthSpec isExact ifTrue: [ 
