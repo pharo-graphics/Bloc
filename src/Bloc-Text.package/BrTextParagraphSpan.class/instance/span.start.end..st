@@ -5,6 +5,5 @@ span: aBrSpan start: aSpanStart end: aSpanEnd
 	span := aBrSpan.
 	spanStart := aSpanStart.
 	spanEnd := aSpanEnd.
-	length := aSpanEnd  - aSpanStart + 1.
 	
 	self assertSpan

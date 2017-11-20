@@ -1,3 +1,5 @@
 accessing
 length
-	^ length
+	<return: #Number>
+
+	self shouldNotImplement

@@ -10,7 +10,7 @@ fillLayout: shouldStopOnFocusable
 			layoutState availableSpace < 0
 				ifTrue: [ layoutState scrollingOffset: layoutState scrollingOffset + layoutState availableSpace ]. 
 			self recycleChildren ].
-
+	
 	aRemainingSpace := layoutState availableSpace + layoutState extraSpace.
 	aBreak := false.
 	[ aBreak not and: [

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/19/2017 21:26",
+	"super" : "Object",
+	"category" : "Bloc-Text-Text-Paragraph",
+	"classinstvars" : [
+		"uniqueInstance"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrTextParagraphBaseline",
+	"type" : "normal"
+}

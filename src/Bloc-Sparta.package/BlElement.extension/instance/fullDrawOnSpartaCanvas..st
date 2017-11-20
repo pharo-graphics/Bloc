@@ -26,7 +26,6 @@ fullDrawOnSpartaCanvas: aCanvas
 				by: self transformation
 				translated: self position
 				during: [ :aTransformedCanvas |
-
 					aTransformedCanvas clip
 						when: [ self clipChildren ]
 						by: [ (self visualBounds: BlBounds new on: aTransformedCanvas) merge: anEffectBounds ]
@@ -34,8 +33,6 @@ fullDrawOnSpartaCanvas: aCanvas
 							self effect
 								applyEffectOnSpartaCanvas: aTransformedCanvas
 								for: self
-								around: [
-									self drawOnSpartaCanvas: aTransformedCanvas.
-									self drawChildrenOnSpartaCanvas: aTransformedCanvas ] ].
+								around: [ self drawMeAndChildrenOnSpartaCanvas: aTransformedCanvas ] ].
 						misc debug ifTrue: [
 							self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ] ]

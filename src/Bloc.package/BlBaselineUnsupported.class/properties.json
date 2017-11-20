@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/19/2017 22:09",
+	"super" : "Error",
+	"category" : "Bloc-Utilities - Debugging",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlBaselineUnsupported",
+	"type" : "normal"
+}

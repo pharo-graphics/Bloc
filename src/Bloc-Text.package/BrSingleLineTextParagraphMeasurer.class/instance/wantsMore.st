@@ -1,3 +1,3 @@
 measurement - testing
 wantsMore
-	^ self spans isEmpty or: [ super wantsMore ]
+	^ self line isEmpty or: [ super wantsMore ]

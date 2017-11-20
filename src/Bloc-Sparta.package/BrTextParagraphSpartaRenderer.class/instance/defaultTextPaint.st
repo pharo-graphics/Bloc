@@ -1,3 +1,0 @@
-rendering
-defaultTextPaint
-	^ Color black

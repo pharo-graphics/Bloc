@@ -2,13 +2,13 @@
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
+		"left",
+		"top",
 		"width",
 		"height",
 		"ascent",
 		"descent",
 		"baseline",
-		"box",
-		"length",
 		"from",
 		"to"
 	],

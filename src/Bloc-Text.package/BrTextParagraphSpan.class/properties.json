@@ -16,7 +16,9 @@
 		"textRunEnd",
 		"spanStart",
 		"spanEnd",
-		"measurer"
+		"measurer",
+		"advance",
+		"box"
 	],
 	"name" : "BrTextParagraphSpan",
 	"type" : "normal"

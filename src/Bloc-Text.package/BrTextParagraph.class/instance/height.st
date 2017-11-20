@@ -6,4 +6,4 @@ height
 	We want to guarantee that at least something is displayed and measured."
 	<return: #Number>
 
-	^ height
+	^ self subclassResponsibility

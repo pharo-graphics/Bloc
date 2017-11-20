@@ -33,8 +33,6 @@ measureSpan: aBrSpan of: aTextParagraph on: aCanvas with: aSpanMeasurer
 			from: self textRunStart
 			to: Float infinity
 			width: self transformedAvailableWidth.
-
-		aSpanMeasurer applyMetricsOn: aParagraphSpan.
 		
 		self textRunStart: aSpanMeasurer textRunStart.
 		self textRunEnd: aSpanMeasurer textRunEnd.
@@ -42,4 +40,6 @@ measureSpan: aBrSpan of: aTextParagraph on: aCanvas with: aSpanMeasurer
 		self spanStart: aSpanMeasurer spanStart.
 		self spanEnd: aSpanMeasurer spanEnd.
 
+		self initializeSpan: aParagraphSpan.
+		aSpanMeasurer applyMetricsOn: aParagraphSpan.
 		self pushSpan: aParagraphSpan ]

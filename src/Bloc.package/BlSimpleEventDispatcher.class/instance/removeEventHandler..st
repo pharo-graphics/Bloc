@@ -1,6 +1,8 @@
 adding/removing
 removeEventHandler: anHandler
-	
+	(self hasHandler: anHandler)
+		ifFalse: [ ^ self ].
+
 	handlers
 		ifNil: [ ^ self ].
 	handlers remove: anHandler.

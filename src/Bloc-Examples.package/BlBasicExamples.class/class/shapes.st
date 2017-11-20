@@ -1,4 +1,4 @@
-shape examples
+examples
 shapes
 	<script: 'self shapes'>
 

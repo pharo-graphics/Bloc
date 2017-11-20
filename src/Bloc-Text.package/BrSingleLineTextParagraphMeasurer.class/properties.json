@@ -6,7 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"spans"
+		"line"
 	],
 	"name" : "BrSingleLineTextParagraphMeasurer",
 	"type" : "normal"

@@ -1,4 +1,4 @@
-shape examples
+examples
 imageBackground
 	<script: 'self imageBackground'>
 	self

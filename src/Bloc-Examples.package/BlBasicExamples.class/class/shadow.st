@@ -1,4 +1,4 @@
-shape examples
+examples
 shadow
 	<script: 'self shadow'>
 

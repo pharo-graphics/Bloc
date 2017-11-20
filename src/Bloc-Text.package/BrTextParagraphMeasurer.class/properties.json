@@ -4,8 +4,6 @@
 	"instvars" : [
 		"maxHeight",
 		"maxWidth",
-		"accumulatedHeight",
-		"accumulatedWidth",
 		"transformation",
 		"inverseTransformation",
 		"span",

@@ -4,7 +4,7 @@ layoutChildrenAnchor
 	I find an anchor coordinate and an anchor item position"
 	<return: #Point>
 	| anExtraSpace anExtraForStart anExtraForEnd aStartOffset anEndOffset aFirstLayoutItemDirection |
-
+	
 	(anchorInfo isValid not
 		or: [ self hasPendingScrollPosition ])
 			ifTrue: [ 
@@ -31,7 +31,7 @@ layoutChildrenAnchor
 			anExtraForEnd := 0 ].
 		
 	anExtraForStart := anExtraForStart + self orientation startWithPadding.
-	anExtraForEnd := anExtraForEnd + self orientation endWithPadding.
+	anExtraForEnd := anExtraForEnd + self orientation paddingEnd.
 	
 	(self state isPreLayout and: [
 		self hasPendingScrollPosition and: [

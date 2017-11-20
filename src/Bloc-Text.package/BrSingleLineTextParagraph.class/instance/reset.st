@@ -2,4 +2,5 @@ initialization
 reset
 	super reset.
 	
-	spans := #()
+	line := BrTextParagraphLine new.
+	line baseline: self baseline

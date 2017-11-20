@@ -19,6 +19,6 @@ createSpartaTextPainter: aBrSpan on: aSpartaCanvas
 	aTextPainter string: (String streamContents: [ :aStream |
 		aBrSpan do: [ :aChar |
 			aChar = Character tab
-				ifTrue: [ tabWidth timesRepeat: [ aStream nextPut: Character space ] ]
+				ifTrue: [ self tabWidth timesRepeat: [ aStream nextPut: Character space ] ]
 				ifFalse: [ aStream nextPut: aChar ] ] ]).
 	^ aTextPainter

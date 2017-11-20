@@ -1,8 +1,8 @@
 *Bloc-Sparta
-drawBelowOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan
+drawBelowOnSpartaCanvas: aCanvas with: aSpan
 	"I render background under text span"
 
-	aSpartaCanvas fill
+	aCanvas fill
 		paint: paint;
-		path: (aSpartaSpan origin extent: aSpartaSpan extent);
+		path: (aSpan bounds translateBy: aSpan baseline);
 		draw

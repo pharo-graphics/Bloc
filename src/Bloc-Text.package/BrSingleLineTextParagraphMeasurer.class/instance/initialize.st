@@ -2,4 +2,4 @@ initialization
 initialize
 	super initialize.
 		
-	spans := OrderedCollection new
+	line := BrTextParagraphLine new

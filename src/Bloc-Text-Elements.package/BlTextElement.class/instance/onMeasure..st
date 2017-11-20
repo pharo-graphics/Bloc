@@ -33,7 +33,7 @@ onMeasure: anExtentMeasurementSpec
 	
 	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
 	aMaxHeight := (aMaxHeight - aPadding height) max: 0.
-	
+
 	paragraph
 		"Create a new text layout"
 		ifNil: [ paragraph := self defaultTextParagraph ]
@@ -46,6 +46,7 @@ onMeasure: anExtentMeasurementSpec
 		maxHeight: aMaxHeight.
 
 	paragraph measureOn: self defaultOffscreenCanvas.
+	paragraph baseline: (paragraph left @paragraph top) negated + (aPadding left @ aPadding top).
 	"text layout is measured at this point"
 
 	aMeasuredWidth := paragraph width.
@@ -63,7 +64,6 @@ onMeasure: anExtentMeasurementSpec
 	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
 	"Take padding into account"
 	aMeasuredExtent := aMeasuredExtent + (aPadding width @ aPadding height).
-	paragraph offset: (aPadding left @ aPadding top).
 
 	"Finally set measured extent"
 	self measuredExtent: aMeasuredExtent

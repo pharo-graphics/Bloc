@@ -5,7 +5,7 @@ spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionBlock
 	with the closed span to a point"
 	<return: #BrTextparagraphSpan>
 
-	^ self spans
+	^ self line spans
 		findBinary: [ :aParagraphSpan |
 			| originX cornerX |
 			originX := aParagraphSpan origin x.

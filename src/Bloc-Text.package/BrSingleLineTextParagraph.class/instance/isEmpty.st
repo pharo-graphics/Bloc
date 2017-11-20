@@ -1,3 +1,3 @@
 testing
 isEmpty
-	^ self spans isEmpty
+	^ self line isEmpty

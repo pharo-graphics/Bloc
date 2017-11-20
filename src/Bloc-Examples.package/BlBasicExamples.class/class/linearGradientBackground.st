@@ -1,4 +1,4 @@
-shape examples
+examples
 linearGradientBackground
 	<script: 'self linearGradientBackground'>
 

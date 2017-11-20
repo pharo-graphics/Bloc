@@ -1,9 +1,9 @@
 paragraph - geometry
 spanAtIndex: anIndex
 	<return: #BrTextparagraphSpan>
-	
+
 	self
-		assert: [ self spans isNotEmpty ]
+		assert: [ self line isEmpty not ]
 		description: [ 'There must be at least one span!' ].
 		
 	self
@@ -15,12 +15,12 @@ spanAtIndex: anIndex
 		description: [ 'anIndex must be within text bounds (0 is allowed)' ].
 	
 	anIndex isZero
-		ifTrue: [ ^ self spans first ].
+		ifTrue: [ ^ self line spans first ].
 		
 	anIndex = self text size
-		ifTrue: [ ^ self spans last ].
+		ifTrue: [ ^ self line spans last ].
 
-	^ self spans
+	^ self line spans
 		findBinary: [ :aParagraphSpan |
 			(anIndex between: aParagraphSpan from and: aParagraphSpan to )
 				ifTrue: [ 0 ]

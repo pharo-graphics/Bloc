@@ -1,3 +1,3 @@
 geometry - accessing
 availableHeight
-	^ maxHeight - accumulatedHeight
+	^ maxHeight - self accumulatedHeight
