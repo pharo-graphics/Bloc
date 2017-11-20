@@ -1,7 +1,9 @@
 hooks
-firstSpanAdded
-	| aSpan |
-	aSpan := spans first.
+spanAdded: aSpan
+	
+	self
+		assert: [ aSpan == spans first ]
+		description: [ 'I can only be sent with the first span as argument' ].
 
 	left := aSpan left.
 	top := aSpan top.
