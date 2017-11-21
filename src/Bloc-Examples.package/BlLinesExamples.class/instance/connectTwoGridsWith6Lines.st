@@ -3,7 +3,7 @@ connectTwoGridsWith6Lines
 	<gtExample>
 	| lines aLeftGridElement aRightGridElement |
 
-	lines := (1 to: 6) collect: [ :i | self grayLine ].
+	lines := 6 timesCollect: [ self grayLine ].
 	
 	aLeftGridElement := self shuffledGridColumnWith10Cells.
 	aRightGridElement := self shuffledGridColumnWith6Cells.

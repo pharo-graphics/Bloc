@@ -46,7 +46,6 @@ onMeasure: anExtentMeasurementSpec
 		maxHeight: aMaxHeight.
 
 	paragraph measureOn: self defaultOffscreenCanvas.
-	"paragraph baseline: (paragraph left @paragraph top) negated + (aPadding left @ aPadding top)."
 	"text layout is measured at this point"
 
 	aMeasuredWidth := paragraph width.

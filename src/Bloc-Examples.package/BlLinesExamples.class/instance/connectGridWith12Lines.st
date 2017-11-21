@@ -6,7 +6,7 @@ connectGridWith12Lines
 	aGridElement := self gridWith12Cells.
 	anAttachPoint := self attachPoint.
 	
-	lines := (1 to: 12) collect: [ :i | self grayLine ].
+	lines := 12 timesCollect: [ self grayLine ].
 	
 	aGridElement
 		relocate: 50@50.
