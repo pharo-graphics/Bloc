@@ -8,6 +8,10 @@ postLoadSparta: aSpecLoader
 		ifTrue: [ #core ]
 		ifFalse: [ self group ].
 
+	OSPlatform current isUnix64
+		"on Unix64 always load development version of Sparta"
+		ifTrue: [ aGroup := #development ].
+
 	OSPlatform current isMacOS
 		"on OSX always load development version of Sparta"
 		ifTrue: [ aGroup := #development ].
