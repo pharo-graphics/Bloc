@@ -1,3 +1,3 @@
 *Bloc
 asBlocVector
-	^ BlVector x: x y: y z: 0
+	^ BlVector x: x y: y
