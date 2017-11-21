@@ -17,8 +17,8 @@ postLoadSparta: aSpecLoader
 		ifTrue: [ aGroup := #development ].
 
 	OSPlatform current isWindows
-		"on Windows we should always load #core"
-		ifTrue: [ aGroup := #core ].
+		"on Windows we should always load Moz2D"
+		ifTrue: [ aGroup := #development ].
 
 	Metacello new
 		baseline: aSpecLoader spec name;
