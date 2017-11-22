@@ -4,7 +4,7 @@ exampleClassesMultiple
 	
 	dataSource := BlInfiniteExampleClassesDataSource new.
 
-	list1 := BlInfiniteExampleClassesListElement new
+	list1 := BlInfiniteExampleElement new
 		dataSource: dataSource;
 		background: Color paleBlue;
 		constraintsDo: [ :c |
@@ -16,7 +16,7 @@ exampleClassesMultiple
 		title: 'Smalltalk allClasses (1)'.
 	space1 root addChild: list1.
 	
-	list2 := BlInfiniteExampleClassesListElement new
+	list2 := BlInfiniteExampleElement new
 		dataSource: dataSource;
 		background: Color paleRed;
 		constraintsDo: [ :c |

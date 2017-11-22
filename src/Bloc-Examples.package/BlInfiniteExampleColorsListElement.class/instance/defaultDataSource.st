@@ -1,3 +1,0 @@
-initialization
-defaultDataSource
-	^ BlInfiniteExampleColorsDataSource new

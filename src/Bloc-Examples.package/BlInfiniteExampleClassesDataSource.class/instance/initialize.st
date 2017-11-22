@@ -1,5 +1,5 @@
 initialization
 initialize
 	super initialize.
-	
-	classes := Smalltalk allClasses asArray
+
+	classes := Smalltalk globals allClasses asArray

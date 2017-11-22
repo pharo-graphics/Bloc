@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/2/2017 21:26",
-	"super" : "Object",
-	"category" : "Bloc-Examples-Infinite",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlExample classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlInfiniteExample",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 11/2/2017 21:26",
+	"super" : "Object",
+	"traitcomposition" : "TBlExample",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Examples-Infinite"
 }
