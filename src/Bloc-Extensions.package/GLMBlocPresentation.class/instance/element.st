@@ -1,5 +1,5 @@
 requirements
 element
-	^ elementBuilder glamourValue: 
+	^ element ifNil: [ element := elementBuilder glamourValue: 
 			(self asGlamorousMultiValue, 
-			self displayValue asGlamorousMultiValue)
+			self displayValue asGlamorousMultiValue) ]

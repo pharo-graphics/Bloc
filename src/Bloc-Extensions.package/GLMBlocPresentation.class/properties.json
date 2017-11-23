@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"elementBuilder"
+		"elementBuilder",
+		"element"
 	],
 	"name" : "GLMBlocPresentation",
 	"type" : "normal"
