@@ -1,14 +1,15 @@
 geometry
 positionAt: anIndex
 	<return: #Point>
-	| aSpanIndex aSpanIterator currentEnd transformedSpanIndex aMeasurer aPositionY |
+	| aSpanIndex aSpanIterator currentEnd transformedSpanIndex aMeasurer aPositionY aPositionX |
 
 	aPositionY := self baseline y.
+	aPositionX := self baseline x.
 
 	(anIndex = (self from - 1))
-		ifTrue: [ ^ (self origin x) @ aPositionY ].
+		ifTrue: [ ^ aPositionX @ aPositionY ].
 	(anIndex = self to)
-		ifTrue: [ ^ (self origin x + self width) @ aPositionY ].
+		ifTrue: [ ^ (aPositionX + self width) @ aPositionY ].
 
 	aSpanIndex := anIndex - self from + 1.
 	aSpanIterator := span iterator: 1 to: aSpanIndex.	
@@ -24,7 +25,7 @@ positionAt: anIndex
 	aMeasurer := self measurer.
 
 	transformedSpanIndex isZero
-		ifTrue: [ ^ 0 @ aPositionY ].
+		ifTrue: [ ^ aPositionX @ aPositionY ].
 	
 	aMeasurer
 		reset;
@@ -33,4 +34,4 @@ positionAt: anIndex
 		to: transformedSpanIndex
 		width: Float infinity.
 		
-	^ (self origin x + aMeasurer width) @ aPositionY
+	^ (aPositionX + aMeasurer width) @ aPositionY
