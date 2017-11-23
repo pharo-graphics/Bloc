@@ -3,8 +3,8 @@ positionAt: anIndex
 	<return: #Point>
 	| aSpanIndex aSpanIterator currentEnd transformedSpanIndex aMeasurer aPositionY |
 
-	aPositionY := self origin y + (self height / 2.0).
-		
+	aPositionY := self baseline y.
+
 	(anIndex = (self from - 1))
 		ifTrue: [ ^ (self origin x) @ aPositionY ].
 	(anIndex = self to)

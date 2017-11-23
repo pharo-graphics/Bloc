@@ -1,6 +1,6 @@
 *Bloc-Sparta
 applySpartaMetrics: aSpMetrics
-	| aFontMetrics aTextMetrics iterator leadingSpace trailingSpaces |
+	| aFontMetrics aTextMetrics iterator leadingSpaces |
 
 	aFontMetrics := aSpMetrics fontMetrics.
 	aTextMetrics := aSpMetrics textMetrics.
@@ -19,9 +19,13 @@ applySpartaMetrics: aSpMetrics
 	baseline := 0@0.
 
 	iterator := self textRun iterator.
-	leadingSpace := 0.
+	leadingSpaces := 0.
 	[ iterator hasNext and: [ iterator nextCharacter = Character space] ]
-		whileTrue: [ leadingSpace := leadingSpace + aFontMetrics spaceWidth  ].
+		whileTrue: [ leadingSpaces := leadingSpaces + 1  ].
 
-	left := left - leadingSpace.
-	width := width + leadingSpace.
+	width := width + (leadingSpaces * aFontMetrics spaceWidth).
+
+	"If I only consist of spaces we should not move left"
+	leadingSpaces = self textRunLength
+		ifTrue: [ left := 0.0 ]
+		ifFalse: [ left := left - (leadingSpaces * aFontMetrics spaceWidth) ]

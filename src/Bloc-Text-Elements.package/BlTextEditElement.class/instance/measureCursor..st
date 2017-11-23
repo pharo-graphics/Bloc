@@ -1,6 +1,6 @@
 layout
 measureCursor: anExtentMeasurementSpec
-	| aCursorElement aParagraphSpan aTextPosition |
+	| aCursorElement aTextPosition |
 	
 	self hasCursor
 		ifFalse: [ ^ self ].
@@ -12,11 +12,11 @@ measureCursor: anExtentMeasurementSpec
 	"cursor is not within paragraph"
 	self paragraph measuredEnd < aCursorElement cursorPosition
 		ifTrue: [ ^ self ].
-	
-	aParagraphSpan := self paragraph spanAtIndex: aCursorElement cursorPosition.
-	aTextPosition := aParagraphSpan positionAt: aCursorElement cursorPosition.
+
+	aTextPosition := self paragraph positionAt: aCursorElement cursorPosition.
+	aTextPosition := aTextPosition x @ 0.
 
 	aCursorElement measuredExtent: (1 @ self measuredHeight).
-	aCursorElement measuredBounds position: (aTextPosition - (0 @ aParagraphSpan height / 2.0)).
+	aCursorElement measuredBounds position: aTextPosition.
 	
 	self measuredExtent: (self measuredExtent max: self cursor measuredExtent)
