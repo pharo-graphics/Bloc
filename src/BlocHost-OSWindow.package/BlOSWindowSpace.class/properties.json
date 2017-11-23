@@ -15,8 +15,6 @@
 	"traitcomposition" : "TBlHostSpace",
 	"type" : "normal",
 	"classinstvars" : [ ],
-	"pools" : [
-		"UFFIOpenGLConstants"
-	],
+	"pools" : [ ],
 	"category" : "BlocHost-OSWindow-Host"
 }

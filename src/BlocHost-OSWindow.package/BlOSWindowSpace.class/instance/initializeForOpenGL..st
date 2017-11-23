@@ -4,7 +4,7 @@ initializeForOpenGL: anOpenGLSurface
 	Default implementation simply connects renderer, host space and surface together"
 	| glAttributes |
 	
-	glAttributes := UFFIOpenGLContext glAttributes.
+	glAttributes := OSWindowGLAttributes new.
 	glAttributes redSize: 8.
 	glAttributes greenSize: 8.
 	glAttributes blueSize: 8.
@@ -14,7 +14,7 @@ initializeForOpenGL: anOpenGLSurface
 
 	anOpenGLSurface hostSpace: self.
 	anOpenGLSurface hostRenderer: self renderer.
-	anOpenGLSurface context: UFFIOpenGLContext new.
+	"anOpenGLSurface context: UFFIOpenGLContext new."
 
 	self renderer surface: anOpenGLSurface.
 	
