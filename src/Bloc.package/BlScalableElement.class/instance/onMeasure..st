@@ -11,10 +11,14 @@ onMeasure: anExtentMeasurementSpec
 	aScaleFactor := self scaleStrategy scale: self contentElement within: self.
 	"we must not scale by zero! Otherwise matrix becomes singular"
 	aScaleFactor isZero ifTrue: [ aScaleFactor := 1.0 ].
-	
+
 	self contentElement transform
-		scaleBy: (aScaleFactor, aScaleFactor);
+		scaleBy: (aScaleFactor @ aScaleFactor);
 		apply.
-		
+
 	aTransformedExtent := self contentElement measuredBounds transformed extent.
-	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent)
+	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent).
+
+	(self contentElement constraints horizontal resizer isMatchParent
+		or: [ self contentElement constraints vertical resizer isMatchParent ])
+			ifTrue: [ self measureMatching: anExtentMeasurementSpec ].

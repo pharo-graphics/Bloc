@@ -1,0 +1,3 @@
+*Bloc
+minus
+	^ self character: $-
