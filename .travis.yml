@@ -8,13 +8,13 @@ os:
   - osx
 
 smalltalk:
-  - Pharo-6.0
+  - Pharo-6.1
 
 matrix:
   include:
-  - smalltalk: Pharo-6.0
+  - smalltalk: Pharo-6.1
     smalltalk_config: minimal.ston
-  - smalltalk: Pharo-6.0
+  - smalltalk: Pharo-6.1
     smalltalk_config: minimal+layout.ston
 
 before_install:
