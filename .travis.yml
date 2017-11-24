@@ -1,7 +1,7 @@
 language: smalltalk
 sudo: true
 
-dist: xenial
+dist: trusty
 
 os:
   - linux
