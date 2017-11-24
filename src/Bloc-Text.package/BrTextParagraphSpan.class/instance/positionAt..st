@@ -18,7 +18,7 @@ positionAt: anIndex
 	transformedSpanIndex := 0.
 	[ aSpanIterator hasNext and: [ currentEnd < aSpanIndex ] ]
 		whileTrue: [ (aSpanIterator next = Character tab)
-			ifTrue: [ transformedSpanIndex := transformedSpanIndex + 3 ]
+			ifTrue: [ transformedSpanIndex := transformedSpanIndex + 3 ]	"3 is how many spaces one tab is. #FIXME"
 			ifFalse: [ transformedSpanIndex := transformedSpanIndex + 1 ].
 			currentEnd := currentEnd + 1 ].
 

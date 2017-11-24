@@ -1,6 +1,12 @@
 accessing
 opacity: aNumber
-	"Set my opacity and request invalidation.
+	"Set my opacity and request invalidation. Opacity is a visual property independent
+	from visibility, which also influences layout and event handling. Transparent elements
+	with opacity set to 0 still can receive and handle events.
+
+	If you want to make element invisible and prevent it from handle events, change its
+	visibility to ==element visibility: BlVisibility hidden==.
+	
 	Opacity is represented by a number within range [0...1] and should be a float.
 	Note: a given number will be clamped to be within defined range,
 	so if aNumber is -1 opacity will be 0 and the same way if opacity

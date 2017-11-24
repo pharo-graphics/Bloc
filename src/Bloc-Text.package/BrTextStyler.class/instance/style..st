@@ -1,8 +1,9 @@
 styling
 style: aBrText
 	| styledText |
+
 	self terminateBackgroundStylingProcess.
-	
+
 	stylingEnabled
 		ifFalse: [ ^ self ].
 

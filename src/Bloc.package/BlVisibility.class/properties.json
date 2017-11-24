@@ -3,7 +3,7 @@
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlVisibility",
-	"commentStamp" : "AliakseiSyrel 5/17/2016 11:03",
+	"commentStamp" : "AliakseiSyrel 11/24/2017 09:38",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
