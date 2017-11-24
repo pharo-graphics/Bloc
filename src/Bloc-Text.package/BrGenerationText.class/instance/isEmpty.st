@@ -1,5 +1,5 @@
 text - testing
 isEmpty
 	<return: #Boolean>
-
-	^ self subclassResponsibility
+	
+	^ self text isEmpty

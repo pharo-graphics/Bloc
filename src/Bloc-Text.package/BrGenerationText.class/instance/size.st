@@ -2,4 +2,4 @@ text - accessing
 size
 	<return: #Number>
 
-	^ self subclassResponsibility
+	^ self text size
