@@ -4,4 +4,4 @@ gtInspectorLiveIn: composite
 	
 	composite bloc
 		title: 'Live' translated;
-		display: [ self ]
+		element: [ self ]
