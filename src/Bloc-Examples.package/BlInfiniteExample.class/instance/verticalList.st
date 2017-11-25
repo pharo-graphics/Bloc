@@ -1,6 +1,6 @@
 instance creation
 verticalList
-	<gtExample>
+	"<gtExample>"
 	
 	^ BlInfiniteExampleElement new
 		constraintsDo: [ :c |
