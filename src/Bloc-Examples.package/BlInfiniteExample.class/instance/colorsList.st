@@ -1,6 +1,6 @@
 example - colors
 colorsList
-	"<gtExample>"
+	<gtExample>
 	
 	^ self verticalList
 		dataSource: self colorsDataSource

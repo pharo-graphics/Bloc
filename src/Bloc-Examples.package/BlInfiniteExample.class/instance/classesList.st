@@ -1,6 +1,6 @@
 example - classes
 classesList
-	"<gtExample>"
+	<gtExample>
 	
 	^ self verticalList
 		dataSource: self classesDataSource

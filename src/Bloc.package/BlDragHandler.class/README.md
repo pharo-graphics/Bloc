@@ -1,0 +1,2 @@
+I add an ability to drag any arbitrary element within its direct parent by requesting position change.
+Note, that some layout do not allow elements to have custom positions which means I have no effect.

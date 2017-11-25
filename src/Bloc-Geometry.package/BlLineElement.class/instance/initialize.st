@@ -3,4 +3,5 @@ initialize
 	super initialize.
 	
 	fromAnchor := self defaultFromAnchor.
-	toAnchor := self defaultToAnchor
+	toAnchor := self defaultToAnchor.
+	self wantsMouse: false

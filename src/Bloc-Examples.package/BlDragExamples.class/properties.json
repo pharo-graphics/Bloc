@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/25/2017 22:33",
+	"super" : "Object",
+	"category" : "Bloc-Examples-Drag&Drop",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlDragExamples",
+	"type" : "normal"
+}

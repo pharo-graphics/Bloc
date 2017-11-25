@@ -1,5 +1,5 @@
 example - colors
 colorsDataSource
-	"<gtExample>"
+	<gtExample>
 	
 	^ BlInfiniteExampleColorsDataSource new

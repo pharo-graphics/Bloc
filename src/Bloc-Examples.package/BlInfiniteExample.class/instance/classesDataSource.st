@@ -1,5 +1,5 @@
 example - classes
 classesDataSource
-	"<gtExample>"
+	<gtExample>
 	
 	^ BlInfiniteExampleClassesDataSource new

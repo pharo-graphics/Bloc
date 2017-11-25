@@ -17,13 +17,11 @@ curveWithAnchors
 	attachTo := self attachPoint.
 	attachTo relocate: 400 @ 300.
 
-	fromLine := BlLineElement new.
-	fromLine border: (BlBorder builder paint: Color gray; width: 1; build).
+	fromLine := self greyLine.
 	fromLine fromAnchor: (BlElementCenterAnchor element: attachFrom).
 	fromLine toAnchor: (BlElementCenterAnchor element: firstViaAttach).
 	
-	toLine := BlLineElement new.
-	toLine border: (BlBorder builder paint: Color gray; width: 1; build).
+	toLine := self greyLine.
 	toLine fromAnchor: (BlElementCenterAnchor element: secondViaAttach).
 	toLine toAnchor: (BlElementCenterAnchor element: attachTo).
 
