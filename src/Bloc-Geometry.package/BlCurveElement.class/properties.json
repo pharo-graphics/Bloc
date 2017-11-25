@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/13/2017 11:22",
+	"commentStamp" : "AliakseiSyrel 11/25/2017 21:39",
 	"super" : "BlGeometryElement",
 	"category" : "Bloc-Geometry-Curve&Line",
 	"classinstvars" : [ ],
@@ -8,9 +8,8 @@
 	"instvars" : [
 		"fromAnchor",
 		"toAnchor",
-		"fromAttach",
-		"toAttach"
+		"viaAnchors"
 	],
-	"name" : "BlLineElement",
+	"name" : "BlCurveElement",
 	"type" : "normal"
 }

@@ -1,7 +1,8 @@
 layout
 onMeasure: anExtentMeasurementSpec
-
 	self measureGeometry.
-
-	super onMeasure: anExtentMeasurementSpec.
 	
+	self invalidate.
+	pathCache releaseCache.
+
+	super onMeasure: anExtentMeasurementSpec
