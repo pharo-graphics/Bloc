@@ -8,7 +8,7 @@ testScaleBy
 		yourself.
 
 	n transform
-		scaleBy: (2, 2);
+		scaleBy: (2 @ 2);
 		apply.
 
 	n forceLayout.
@@ -18,7 +18,7 @@ testScaleBy
 	
 	n transform
 		inherit;
-		scaleBy: (0.5, 0.5);
+		scaleBy: (0.5 @ 0.5);
 		apply.
 	n forceLayout.
 	self assert: n transformedBounds equals: ((0@0) corner: (100@100)).

@@ -8,7 +8,7 @@ testTranslateTo
 		yourself.
 
 	n transform
-		translateBy: (10, 10);
+		translateBy: (10 @ 10);
 		apply.
 		
 	n forceLayout.
@@ -17,7 +17,7 @@ testTranslateTo
 	self assert: n transformedBounds equals: ((10@10) corner: (110@110)).
 	
 	n transform
-		translateBy: (30, 30);
+		translateBy: (30 @ 30);
 		apply.
 	n forceLayout.
 	self assert: n position equals: (10 @ 10).

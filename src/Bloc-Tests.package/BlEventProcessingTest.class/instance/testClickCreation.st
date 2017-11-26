@@ -7,6 +7,8 @@ testClickCreation
 	self assertFiredEventIs: BlMouseUpEvent target: self child withPropagation: true.
 	self assertFiredEventIs: BlClickEvent target: self child withPropagation: true.
 	
-	self child scaleBy: 2@2.
-	self sendEvent: (BlMouseDownEvent new button: BlMouseEvent primaryButton; position: 150@150).
+	self child transform
+		scaleBy: 2@2;
+		apply.
+	self sendEvent: (BlMouseDownEvent new button: BlMouseEvent primaryButton; position: 100@100).
 	self assertFiredEventIs: BlMouseDownEvent target: self child withPropagation: true
