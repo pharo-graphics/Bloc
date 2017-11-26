@@ -19,6 +19,7 @@ onMeasure: anExtentMeasurementSpec
 	aTransformedExtent := self contentElement measuredBounds transformed extent.
 	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent).
 
-	(self contentElement constraints horizontal resizer isMatchParent
-		or: [ self contentElement constraints vertical resizer isMatchParent ])
-			ifTrue: [ self measureMatching: anExtentMeasurementSpec ].
+	(self scaleStrategy isFixed and: [ 
+		self contentElement constraints horizontal resizer isMatchParent
+			or: [ self contentElement constraints vertical resizer isMatchParent ] ])
+				ifTrue: [ self measureMatching: anExtentMeasurementSpec ].
