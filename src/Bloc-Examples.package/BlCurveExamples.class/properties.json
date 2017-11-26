@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/25/2017 21:38",
-	"super" : "Object",
-	"category" : "Bloc-Examples-Curve&Line",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlExample classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlCurveExamples",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 11/25/2017 21:38",
+	"super" : "Object",
+	"traitcomposition" : "TBlExample",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Examples-Curve&Line"
 }
