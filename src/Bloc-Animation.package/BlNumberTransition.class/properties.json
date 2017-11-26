@@ -5,7 +5,10 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"by",
+		"previousValue"
+	],
 	"name" : "BlNumberTransition",
 	"type" : "normal"
 }

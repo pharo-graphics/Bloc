@@ -1,0 +1,3 @@
+parameters
+hourTickLength
+	^ 30

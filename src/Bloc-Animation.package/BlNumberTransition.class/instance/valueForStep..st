@@ -1,3 +1,8 @@
 pulse
 valueForStep: aDelta
-	^ ((to - from) * aDelta + from)
+	| aValue |
+	
+	aValue := (to - from) * aDelta + from.
+	^ by
+		ifNil: [ aValue ]
+		ifNotNil: [ (aValue / by) floor * by ]

@@ -14,6 +14,8 @@ measureChildren: anElement with: anExtentSpec
 	maxWidth := 0.
 	maxHeight := 0.
 
+	self measureIgnored: anElement with: anExtentSpec.
+	
 	self
 		measuredChildren: anElement
 		do: [ :aChild |

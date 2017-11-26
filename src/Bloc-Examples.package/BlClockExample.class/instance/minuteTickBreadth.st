@@ -1,0 +1,3 @@
+parameters
+minuteTickBreadth
+	^ 4

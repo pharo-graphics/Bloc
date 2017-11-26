@@ -1,0 +1,3 @@
+parameters
+minuteTickLength
+	^ 10
