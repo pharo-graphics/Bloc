@@ -1,3 +1,5 @@
-as yet unclassified
+instance creation
 diameter: aNumber
+	<return: #BlEllipse>
+
 	^ self new diameter: aNumber
