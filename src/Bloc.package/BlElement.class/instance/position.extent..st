@@ -18,8 +18,8 @@ position: aPosition extent: anExtent
 		assert: [ anExtent x isInfinite not and: [ anExtent y isInfinite not ] ]
 		description: [ 'Extent can not be infinite' ].
 	
-	isPositionChanged := self position ~= aPosition.
-	isExtentChanged := self extent ~= anExtent.
+	isPositionChanged := (self position closeTo: aPosition) not.
+	isExtentChanged := (self extent closeTo: anExtent) not.
 
 	"nothing changed, return"
 	(isPositionChanged or: [ isExtentChanged ])

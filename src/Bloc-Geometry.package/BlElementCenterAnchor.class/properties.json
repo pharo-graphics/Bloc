@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 11/27/2017 10:19",
-	"super" : "BlElementRelativeAnchor",
-	"category" : "Bloc-Geometry-Attach",
+	"super" : "BlAnchorRelativeToElement",
+	"category" : "Bloc-Geometry-Anchors",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/27/2017 12:56",
+	"super" : "BlAnchorRelativeToAnchor",
+	"category" : "Bloc-Geometry-Anchors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"curvature"
+	],
+	"name" : "BlPerpendicularAnchor",
+	"type" : "normal"
+}

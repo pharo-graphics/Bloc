@@ -6,9 +6,9 @@ old: anOldValue new: aNewValue
 	self
 		assert: [ anOldValue ~= aNewValue ]
 		description: [ 'Old and new values must be different' ].
-		
+
 	self records
 		ifEmpty: [ self records add: (self newChangeValue: anOldValue) ].
-		
+
 	self records add: (self newChangeValue: aNewValue).
 	hasActiveChanges := true

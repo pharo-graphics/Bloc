@@ -1,5 +1,5 @@
 layout
-measureGeometry	
+measureGeometry
 	| theAnchorPositions aDelta |
 	
 	theAnchorPositions := self anchorPositions.

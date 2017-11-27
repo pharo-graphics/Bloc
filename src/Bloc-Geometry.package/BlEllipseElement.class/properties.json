@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/27/2017 11:35",
+	"super" : "BlGeometryElement",
+	"category" : "Bloc-Geometry-Ellipse",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"centerAnchor",
+		"majorRadius",
+		"minorRadius"
+	],
+	"name" : "BlEllipseElement",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/13/2017 19:14",
+	"super" : "BlElement",
+	"category" : "Bloc-Examples-Geometry",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlAttachPointExample",
+	"type" : "normal"
+}

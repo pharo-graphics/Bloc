@@ -1,9 +1,6 @@
 anchor - accessing
-viaAnchor: anAnchor
+viaAnchor: aBlGeometryAnchor
 	"Add one more anchor between `from` and `to`".
 	
-	viaAnchors add: anAnchor.
-	anAnchor
-		addEventHandlerOn: BlAttachAnchorMoved
-		do: [ :anEvent | self onAnchorMoved ].
-	self onAnchorMoved
+	viaAnchors add: aBlGeometryAnchor.
+	self registerAnchor: aBlGeometryAnchor

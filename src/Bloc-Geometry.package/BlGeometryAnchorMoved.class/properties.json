@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/13/2017 19:33",
+	"super" : "BlEvent",
+	"category" : "Bloc-Geometry-Anchors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"anchor"
+	],
+	"name" : "BlGeometryAnchorMoved",
+	"type" : "normal"
+}

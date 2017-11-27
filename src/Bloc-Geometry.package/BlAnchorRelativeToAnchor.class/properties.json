@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/27/2017 11:05",
+	"super" : "BlGeometryAnchor",
+	"category" : "Bloc-Geometry-Anchors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"referenceAnchors"
+	],
+	"name" : "BlAnchorRelativeToAnchor",
+	"type" : "normal"
+}

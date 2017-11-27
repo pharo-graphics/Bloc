@@ -9,5 +9,5 @@
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "Bloc-Examples-Curve&Line"
+	"category" : "Bloc-Examples-Geometry"
 }

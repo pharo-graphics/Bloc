@@ -1,4 +1,4 @@
-anchor - accessing
+anchor - geometry
 anchorPositions
 	<return: #SequenceableCollection of: #Point>
 	
