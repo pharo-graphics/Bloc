@@ -1,0 +1,13 @@
+{
+	"classtraitcomposition" : "TBlExample classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlArcExamples",
+	"commentStamp" : "AliakseiSyrel 11/27/2017 15:31",
+	"super" : "Object",
+	"traitcomposition" : "TBlExample",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Examples-Geometry"
+}

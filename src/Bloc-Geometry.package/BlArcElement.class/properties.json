@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/27/2017 15:31",
+	"super" : "BlGeometryElement",
+	"category" : "Bloc-Geometry-Curve&Line",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"fromAnchor",
+		"toAnchor",
+		"curvatureAnchor"
+	],
+	"name" : "BlArcElement",
+	"type" : "normal"
+}

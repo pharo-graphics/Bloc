@@ -1,0 +1,3 @@
+anchor - accessing
+curvatureAnchor
+	^ curvatureAnchor

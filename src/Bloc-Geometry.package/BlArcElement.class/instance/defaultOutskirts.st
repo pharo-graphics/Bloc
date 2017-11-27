@@ -1,0 +1,3 @@
+initialization
+defaultOutskirts
+	^ BlOutskirts centered
