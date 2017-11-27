@@ -2,8 +2,8 @@ layout
 measureGeometry
 	| aFromPoint aToPoint aDelta |
 	
-	aFromPoint := self originPosition.
-	aToPoint := self cornerPosition.
+	aFromPoint := self fromPosition.
+	aToPoint := self toPosition.
 	aDelta := aFromPoint min: aToPoint.
 	
 	self geometry from: aFromPoint - aDelta to: aToPoint - aDelta

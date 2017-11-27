@@ -4,5 +4,4 @@ initialize
 	
 	fromAnchor := self defaultFromAnchor.
 	toAnchor := self defaultToAnchor.
-	viaAnchors := OrderedCollection new.
 	self wantsMouse: false

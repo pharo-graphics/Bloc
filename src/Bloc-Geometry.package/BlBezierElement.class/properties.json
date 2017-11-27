@@ -1,14 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/25/2017 21:38",
-	"super" : "BlGeometry",
+	"commentStamp" : "AliakseiSyrel 11/25/2017 21:39",
+	"super" : "BlCurveElement",
 	"category" : "Bloc-Geometry-Curve&Line",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"width",
-		"controlPoints"
+		"viaAnchors"
 	],
-	"name" : "BlCurve",
+	"name" : "BlBezierElement",
 	"type" : "normal"
 }

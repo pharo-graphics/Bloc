@@ -1,14 +1,11 @@
 {
 	"commentStamp" : "AliakseiSyrel 3/13/2017 11:22",
-	"super" : "BlGeometryElement",
+	"super" : "BlCurveElement",
 	"category" : "Bloc-Geometry-Curve&Line",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"fromAnchor",
-		"toAnchor"
-	],
+	"instvars" : [ ],
 	"name" : "BlLineElement",
 	"type" : "normal"
 }

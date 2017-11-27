@@ -1,3 +1,5 @@
 initialization
 defaultGeometry
-	^ BlCurve new
+	<return: #BlGeometry>
+
+	^ self subclassResponsibility

@@ -1,8 +1,5 @@
 anchor - accessing
 fromAnchor: aBlGeometryAnchor
-
-	self unregisterAnchor: fromAnchor.
-	fromAnchor := aBlGeometryAnchor.
-	self registerAnchor: aBlGeometryAnchor.
+	super fromAnchor: aBlGeometryAnchor.
 	
 	curvatureAnchor referenceAnchors: { self fromAnchor . self toAnchor }

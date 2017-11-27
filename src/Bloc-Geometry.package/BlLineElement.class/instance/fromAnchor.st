@@ -1,3 +1,0 @@
-anchor - accessing
-fromAnchor
-	^ fromAnchor

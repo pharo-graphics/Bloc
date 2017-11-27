@@ -2,6 +2,6 @@ instance creation
 curve
 	<gtExample>
 	
-	^ BlCurveElement new
+	^ BlBezierElement new
 		zIndex: 10;
 		yourself

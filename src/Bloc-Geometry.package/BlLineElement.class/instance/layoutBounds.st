@@ -3,7 +3,7 @@ layoutBounds
 	| anOrigin aCorner |
 	<return: #Rectangle>	
 
-	anOrigin := self originPosition.
-	aCorner := self cornerPosition.
+	anOrigin := self fromPosition.
+	aCorner := self toPosition.
 
 	^ Rectangle encompassing: { anOrigin. aCorner }

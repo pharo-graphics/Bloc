@@ -6,7 +6,7 @@ asElement
 		assert: [ self order >= 2 ]
 		description: [ 'Only Bezier curve of order 2 or higher can be converted to an element' ].
 
-	^ BlCurveElement new
+	^ BlBezierElement new
 		border: (BlBorder builder paint: Color gray; width: 2; build);
 		fromAnchor: (BlAbsolutePositionAnchor position: self controlPoints first);
 		toAnchor: (BlAbsolutePositionAnchor position: self controlPoints last);

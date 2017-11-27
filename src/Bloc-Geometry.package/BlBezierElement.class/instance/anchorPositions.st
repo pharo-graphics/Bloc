@@ -3,7 +3,7 @@ anchorPositions
 	<return: #SequenceableCollection of: #Point>
 	
 	^ Array streamContents: [ :aStream |
-		aStream nextPut: (self fromAnchor positionWithin: self).
+		aStream nextPut: self fromPosition.
 		viaAnchors do: [ :anAnchor |
 			aStream nextPut: (anAnchor positionWithin: self) ].
-		aStream nextPut: (self toAnchor positionWithin: self) ]
+		aStream nextPut: self toPosition ]

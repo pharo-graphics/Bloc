@@ -1,1 +1,3 @@
-I represent a curve element that is rendered between two provided anchors via additional control anchors
+I define basic functionality of a curve element.
+
+I should be common for all line- and curve- based elements that should support arrow heads.

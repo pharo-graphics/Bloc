@@ -1,0 +1,1 @@
+I represent a curve element that is rendered between two provided anchors via additional control anchors
