@@ -1,5 +1,3 @@
 layout
 onLayout: aBounds	
-	super onLayout: aBounds.
-	
-	"self measureAttachPoints"
+	super onLayout: aBounds

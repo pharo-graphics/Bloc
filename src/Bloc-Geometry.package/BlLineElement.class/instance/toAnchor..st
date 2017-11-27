@@ -4,5 +4,5 @@ toAnchor: aBlGeometryAnchor
 	toAnchor := aBlGeometryAnchor.
 	toAnchor
 		addEventHandlerOn: BlAttachAnchorMoved
-		do: [ :anEvent | self onToAnchorMoved ].
-	self onToAnchorMoved
+		do: [ :anEvent | self onAnchorMoved ].
+	self onAnchorMoved
