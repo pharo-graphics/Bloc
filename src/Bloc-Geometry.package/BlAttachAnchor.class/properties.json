@@ -5,7 +5,7 @@
 		"eventDispatcher"
 	],
 	"name" : "BlAttachAnchor",
-	"commentStamp" : "AliakseiSyrel 3/13/2017 16:12",
+	"commentStamp" : "AliakseiSyrel 11/27/2017 10:16",
 	"super" : "Object",
 	"traitcomposition" : "TBlEventTarget",
 	"type" : "normal",

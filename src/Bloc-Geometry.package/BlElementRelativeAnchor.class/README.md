@@ -1,1 +1,1 @@
-I use position of me attach point to specifiy position of the other attach point that uses me as its anchor
+Relative anchor takes an arbitrary element as a reference an compute its position based on properties of that element.

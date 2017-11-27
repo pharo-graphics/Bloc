@@ -1,3 +1,3 @@
-I represent a line anchor and compute start and end position of a line.
+I represent an anchor of a geometry element, which is driven by anchor positions.
 
 See my subclasses for a different anchor strategies.
