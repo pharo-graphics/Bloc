@@ -1,0 +1,3 @@
+initialization
+defaultGeometry
+	^ super defaultGeometry

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 11/27/2017 21:46",
+	"super" : "BlAffineTransformationOrigin",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlAffineTransformationLeftCenterOrigin",
+	"type" : "normal"
+}

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGeometryElement",
+	"category" : "Bloc-Geometry-Polygon",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"vertexAnchors"
+	],
+	"name" : "BlPolygonElement",
+	"type" : "normal"
+}

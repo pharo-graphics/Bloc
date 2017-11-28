@@ -4,10 +4,10 @@ measureChildren: anElement with: anExtentSpec
 	
 	availableWidth := anElement measuredWidth - anElement insets width.
 	availableHeight := anElement measuredHeight - anElement insets height.
-	
-	anElement managedChildren
-		select: [ :aChild | aChild visibility shouldMeasure ]
-		thenDo: [ :aChild | 
+
+	self
+		measuredChildren: anElement
+		do: [ :aChild |
 			| childWidthSpec childHeightSpec |
 
 			childWidthSpec := aChild constraints horizontal resizer isMatchParent

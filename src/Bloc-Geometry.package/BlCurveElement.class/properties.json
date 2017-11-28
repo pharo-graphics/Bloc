@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"fromAnchor",
-		"toAnchor"
+		"toAnchor",
+		"fromHead"
 	],
 	"name" : "BlCurveElement",
 	"type" : "normal"

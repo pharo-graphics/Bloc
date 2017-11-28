@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Geometry-Arrowhead",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlArrowheadTriangle",
+	"type" : "normal"
+}
