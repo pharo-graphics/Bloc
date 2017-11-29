@@ -14,10 +14,11 @@ initialize
 
 	transformation := self defaultTransformation owner: self.
 	geometry := self defaultGeometry.
-	geomResizer := self defaultPathResizer.
+	geometryResizer := self defaultGeometryResizer.
 	outskirts := self defaultOutskirts.
 	border := self defaultBorder.
 	background := self defaultBackground asBlBackground.
+	backgroundResizer := self defaultBackgroundResizer.
 	layout := self defaultLayout.
 	elevation := self defaultElevation.
 

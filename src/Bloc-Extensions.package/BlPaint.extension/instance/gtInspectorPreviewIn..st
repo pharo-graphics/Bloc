@@ -10,6 +10,6 @@ gtInspectorPreviewIn: aComposite
 				aTransform translateBy: (aCanvas extent - (aCanvas extent / 1.5)) / 2.0.
 				aTransform apply.
 				aCanvas fill
-					paint: self;
+					paint: (self copy matchExtent: (aCanvas extent / 1.5));
 					path: (0@0 extent: (aCanvas extent / 1.5));
 					draw. ] ]

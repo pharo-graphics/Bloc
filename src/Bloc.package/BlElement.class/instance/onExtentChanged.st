@@ -5,7 +5,9 @@ onExtentChanged
 	"extent changed => invalidate cached local bounds"
 	boundsCache invalidateBoundsInLocal.
 	"extent changed => path also"
-	self updatePath.
+	self updateGeometry.
+	"background might want to resize itself"
+	self updateBackground.
 	"clear path cache after updating geometry path"
 	pathCache releaseCache.
 	

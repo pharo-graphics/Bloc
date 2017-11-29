@@ -1,3 +1,3 @@
 transformations
 transformation: anElementTransformation
-	transformation := anElementTransformation
+	self explicitRequirement

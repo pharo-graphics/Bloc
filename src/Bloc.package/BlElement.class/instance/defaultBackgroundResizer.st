@@ -1,0 +1,3 @@
+initialization
+defaultBackgroundResizer
+	^ BlBackgroundResizer match

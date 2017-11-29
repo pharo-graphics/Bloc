@@ -1,3 +1,3 @@
 accessing
-end: anObject
-	end := anObject
+end: aPoint
+	end := aPoint

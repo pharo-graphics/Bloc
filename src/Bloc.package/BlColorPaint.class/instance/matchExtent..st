@@ -1,3 +1,3 @@
 geometry
 matchExtent: anExtent
-	self extent: anExtent
+	"do nothing for color paint"

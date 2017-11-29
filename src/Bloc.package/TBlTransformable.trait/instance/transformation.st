@@ -5,4 +5,4 @@ transformation
 	and absolute transformation directly defined with matrix"
 	<return: #BlElementTransformation>
 
-	^ transformation
+	^ self explicitRequirement

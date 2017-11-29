@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlBackgroundResizer",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"extent"
+	],
+	"name" : "BlBackgroundExactResizer",
+	"type" : "normal"
+}

@@ -1,3 +1,3 @@
 initialization
-defaultPathResizer
+defaultGeometryResizer
 	^ BlGeometryResizer match

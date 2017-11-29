@@ -1,3 +1,3 @@
-accessing
+geometry
 matchElement: anElement
 	self matchExtent: anElement extent

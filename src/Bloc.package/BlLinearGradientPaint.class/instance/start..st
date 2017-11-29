@@ -1,3 +1,3 @@
 accessing
-start: anObject
-	start := anObject
+start: aPoint
+	start := aPoint

@@ -1,16 +1,17 @@
 {
-	"classtraitcomposition" : "TBlEventTarget classTrait + TBlDebug classTrait",
+	"classtraitcomposition" : "TBlTransformable classTrait + TBlEventTarget classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"elevation",
 		"geometry",
+		"geometryResizer",
 		"parent",
 		"pathCache",
-		"geomResizer",
 		"boundsCache",
 		"eventDispatcher",
 		"border",
 		"background",
+		"backgroundResizer",
 		"constraints",
 		"layout",
 		"children",
@@ -32,7 +33,7 @@
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 8/13/2017 18:24",
 	"super" : "Object",
-	"traitcomposition" : "TBlEventTarget + TBlDebug",
+	"traitcomposition" : "TBlTransformable + TBlEventTarget + TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [
 		"invalidateBounds"

@@ -2,6 +2,6 @@ instance creation
 arc
 	<gtExample>
 	
-	^ BlArcElement new
+	^ BlParabollaArcElement new
 		zIndex: 10;
 		yourself

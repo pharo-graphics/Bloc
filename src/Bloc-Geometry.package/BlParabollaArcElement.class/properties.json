@@ -8,6 +8,6 @@
 	"instvars" : [
 		"curvatureAnchor"
 	],
-	"name" : "BlArcElement",
+	"name" : "BlParabollaArcElement",
 	"type" : "normal"
 }
