@@ -1,12 +1,10 @@
 layout
 measureGeometry
-	| aDecoratedFromPoint aFromPoint aToPoint aDelta |
+	| aDecoratedFromPoint aDecoratedToPoint aDelta |
 
 	aDecoratedFromPoint := self decoratedFromPosition.
-	
-	aFromPoint := self fromPosition.
-	aToPoint := self toPosition.
+	aDecoratedToPoint := self decoratedToPosition.
 
-	aDelta := aFromPoint min: aToPoint.
-	
-	self geometry from: aDecoratedFromPoint - aDelta to: aToPoint - aDelta
+	aDelta := self fromPosition min: self toPosition.
+
+	self geometry from: aDecoratedFromPoint - aDelta to: aDecoratedToPoint - aDelta

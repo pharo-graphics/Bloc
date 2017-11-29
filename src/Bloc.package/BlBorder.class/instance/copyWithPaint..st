@@ -9,4 +9,5 @@ copyWithPaint: aPaint
 		paint: aPaint asBlPaint;
 		style: style;
 		width: width;
+		opacity: opacity;
 		yourself

@@ -9,4 +9,5 @@ copyWithWidth: aWidth
 		paint: paint;
 		style: style;
 		width: aWidth;
+		opacity: opacity;
 		yourself

@@ -2,7 +2,7 @@ layout
 measureGeometry
 	| theAnchorPositions aDelta |
 	
-	theAnchorPositions := self anchorPositions.
-	aDelta := theAnchorPositions min.
-	
-	self geometry controlPoints: (self anchorPositions collect: [ :aPoint | aPoint - aDelta ])
+	theAnchorPositions := self decoratedAnchorPositions.
+	aDelta := self layoutBounds origin.
+
+	self geometry controlPoints: (theAnchorPositions collect: [ :aPoint | aPoint - aDelta ])

@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BlElement",
+	"super" : "BlArrowheadElement",
 	"category" : "Bloc-Geometry-Arrowhead",
 	"classinstvars" : [ ],
 	"pools" : [ ],

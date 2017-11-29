@@ -13,7 +13,7 @@ elementFor: aPosition dryRun: dryRun controller: aRecyclerController
 						holder isScrap
 							ifTrue: [ 
 								aRecyclerController childRemoved: holder itemElement.
-								holder itemElement dispatchRemovedFromParent.
+								holder itemElement dispatchRemovedFromParent: holder infiniteElement.
 								holder unscrap ]
 							ifFalse: [ holder wasReturnedFromScrap
 								ifTrue: [ holder clearReturnedFromScrap ] ].

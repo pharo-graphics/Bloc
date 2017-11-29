@@ -6,6 +6,9 @@ invalidationBounds: aBounds
 	| anInvalidationBounds |
 
 	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
+	
+	"in order to support debug drawing"
+	misc debug ifTrue: [ anInvalidationBounds expandBy: 1 ].
 
 	self clipChildren ifFalse: [ 
 		| aChildBounds |

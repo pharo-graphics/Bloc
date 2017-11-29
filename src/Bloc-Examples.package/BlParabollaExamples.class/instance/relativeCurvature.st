@@ -1,5 +1,5 @@
 example - connections
-arcWithAbsoluteCurvature
+relativeCurvature
 	<gtExample>	
 	| redArc attachFrom attachTo perpendicularAttach fromLine toLine connectLine |
 	
@@ -8,7 +8,7 @@ arcWithAbsoluteCurvature
 	
 	redArc := self redArc.
 	"order does not matter"
-	redArc curvature: 50.
+	redArc curvatureFraction: 0.5.
 	redArc fromAnchor: (BlElementCenterAnchor element: attachFrom).
 	redArc toAnchor: (BlElementCenterAnchor element: attachTo).
 	

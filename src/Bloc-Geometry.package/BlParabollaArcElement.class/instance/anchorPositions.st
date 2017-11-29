@@ -4,5 +4,5 @@ anchorPositions
 	
 	^ Array streamContents: [ :aStream |
 		aStream nextPut: self fromPosition.
-		aStream nextPut: (self curvatureAnchor positionWithin: self).
+		aStream nextPut: self curvaturePosition.
 		aStream nextPut: self toPosition ]

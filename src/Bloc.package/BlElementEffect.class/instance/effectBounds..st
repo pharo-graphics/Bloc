@@ -1,3 +1,3 @@
 geometry
 effectBounds: aBlBounds
-	^ self computeBounds: (self input geometryBounds: aBlBounds)
+	^ self computeBounds: (aBlBounds rectangle: self input visualBounds)

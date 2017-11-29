@@ -1,13 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "BlGeometryElement",
-	"category" : "Bloc-Geometry-Polygon",
+	"super" : "BlElement",
+	"category" : "Bloc-Geometry-Arrowhead",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"vertexAnchors"
+		"borderListener"
 	],
-	"name" : "BlPolygonElement",
+	"name" : "BlArrowheadElement",
 	"type" : "normal"
 }

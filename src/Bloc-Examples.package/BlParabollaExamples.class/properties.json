@@ -2,7 +2,7 @@
 	"classtraitcomposition" : "TBlExample classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlArcExamples",
+	"name" : "BlParabollaExamples",
 	"commentStamp" : "AliakseiSyrel 11/27/2017 15:31",
 	"super" : "Object",
 	"traitcomposition" : "TBlExample",

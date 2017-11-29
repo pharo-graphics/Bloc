@@ -1,0 +1,1 @@
+Is sent when element's border changes
