@@ -14,8 +14,13 @@ drawOnSpartaCanvas: aCanvas
 
 	aCanvas layer
 		when: [ self outskirts wantsLayerOn: self ]
-		during: [ self outskirts
-			drawBackground: [ self drawBackgroundOnSpartaCanvas: aCanvas ]
-			border: [ self drawBorderOnSpartaCanvas: aCanvas ]
-			of: self
-			onSpartaCanvas: aCanvas ]
+		during: [
+			aCanvas
+				compose: #composeSource
+				when: [ self outskirts wantsLayerOn: self ]
+				during: [
+					self outskirts
+						drawBackground: [ self drawBackgroundOnSpartaCanvas: aCanvas ]
+						border: [ self drawBorderOnSpartaCanvas: aCanvas ]
+						of: self
+						onSpartaCanvas: aCanvas ] ]
