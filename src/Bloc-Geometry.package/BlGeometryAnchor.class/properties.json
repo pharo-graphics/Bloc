@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "TBlEventTarget classTrait",
+	"classtraitcomposition" : "TBlEventTarget classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"eventDispatcher"
@@ -7,7 +7,7 @@
 	"name" : "BlGeometryAnchor",
 	"commentStamp" : "AliakseiSyrel 11/27/2017 10:16",
 	"super" : "Object",
-	"traitcomposition" : "TBlEventTarget",
+	"traitcomposition" : "TBlEventTarget + TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
