@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlArrowheadElement",
+	"category" : "Bloc-Geometry-Arrowhead",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"arrowLengthFraction",
+		"arrowNoseAngle"
+	],
+	"name" : "BlArrowheadSimpleArrow",
+	"type" : "normal"
+}

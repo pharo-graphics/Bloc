@@ -1,3 +1,3 @@
 accessing
-lineCap: anObject
-	lineCap := anObject
+lineCap: aBlStrokeLineCap
+	lineCap := aBlStrokeLineCap

@@ -1,6 +1,6 @@
 Example:
 
-BlPolygon vertices: { 
+BlPolyline vertices: { 
 	10@50.
 	50@20.
 	150@40.

@@ -3,7 +3,7 @@ curveWithTriangleArrowheads
 	<gtExample>
 	| container curve |
 	
-	container := BlParabollaExamples new relativeCurvature.
+	container := BlParabollaExamples new relativeCurvatureWithoutDecorations.
 	curve := container children first.
 	
 	curve fromHead: self triangleArrowhead.

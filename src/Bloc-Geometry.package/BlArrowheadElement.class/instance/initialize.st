@@ -4,4 +4,4 @@ initialize
 	
 	borderListener := BlEventHandler
 		on: BlElementBorderChangedEvent
-		do: [ :anEvent | self onWidthChanged: anEvent currentTarget border width ]
+		do: [ :anEvent | self handleWidthChanged: anEvent currentTarget border width ]

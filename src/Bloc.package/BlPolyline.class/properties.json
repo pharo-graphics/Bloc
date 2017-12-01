@@ -8,6 +8,6 @@
 	"instvars" : [
 		"vertices"
 	],
-	"name" : "BlPolygon",
+	"name" : "BlPolyline",
 	"type" : "normal"
 }
