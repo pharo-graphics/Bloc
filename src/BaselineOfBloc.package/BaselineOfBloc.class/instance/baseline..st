@@ -7,7 +7,7 @@ baseline: spec
 		   baseline: 'Sparta' with: [ spec
 				postLoadDoIt: #postLoadSparta:;
 				loads: #(stub); "Stub does not load anything here. We load sparta in postLoadSparta:"
-				repository: 'github://syrel/sparta:pharo6.1/src' ];
+				repository: 'github://syrel/sparta/src' ];
 
 		   baseline: 'Beacon' with: [ spec repository: 'github://pharo-project/pharo-beacon/repository' ];
 
