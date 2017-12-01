@@ -2,4 +2,4 @@ example - visual properties
 redArc
 	<gtExample>
 
-	^ self arc border: (BlBorder paint: Color red width: 40)
+	^ self arc border: (BlBorder paint: Color red width: 4)

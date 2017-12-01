@@ -1,3 +1,0 @@
-children hooks
-onRemovedFromParent: aParentElement
-	super onRemovedFromParent: aParentElement
