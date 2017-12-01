@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 12/1/2017 17:26",
 	"super" : "BlArrowheadElement",
-	"category" : "Bloc-Geometry-Arrowhead",
+	"category" : "Bloc-Geometry-Arrowheads",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

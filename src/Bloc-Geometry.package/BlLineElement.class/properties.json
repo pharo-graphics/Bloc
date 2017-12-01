@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 3/13/2017 11:22",
 	"super" : "BlCurveElement",
-	"category" : "Bloc-Geometry-Curve&Line",
+	"category" : "Bloc-Geometry-Curves",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

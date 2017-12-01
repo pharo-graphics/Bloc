@@ -1,1 +1,0 @@
-I represent an attach point to which lines or other connection elements can attach and resize as the result of attachment point move

@@ -9,9 +9,7 @@ lineWithAnchors
 	attachFrom relocate: 100 @ 100.
 
 	attachTo := self attachPoint.
-	attachTo
-		size: 30 @ 30;
-		relocate: 400 @ 300.
+	attachTo relocate: 400 @ 300.
 
 	redLine fromAnchor: (BlElementCenterAnchor element: attachFrom).
 	redLine toAnchor: (BlElementCenterAnchor element: attachTo).

@@ -1,10 +1,10 @@
 instance creation
-attachPoint
+circleAttachPoint
 	<gtExample>	
 
 	^ BlElement new
 		geometry: BlEllipse new;
-		size: 30@30;
+		size: 75@75;
 		background: (Color blue alpha: 0.3);
 		border: BlBorder empty;
 		addEventHandler: BlDragHandler new
