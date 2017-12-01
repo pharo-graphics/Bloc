@@ -1,4 +1,4 @@
-*Bloc-Core
+*Bloc-Sparta
 by3D: aBlElementTransform translated: aPoint during: aBlock
 	| aTransformedCanvas |
 	

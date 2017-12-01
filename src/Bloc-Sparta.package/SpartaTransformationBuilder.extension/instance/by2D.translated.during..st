@@ -1,4 +1,4 @@
-*Bloc-Core
+*Bloc-Sparta
 by2D: aBlElementTransform translated: aPoint during: aBlock
 	| needsTransformation needsTranslation  |
 

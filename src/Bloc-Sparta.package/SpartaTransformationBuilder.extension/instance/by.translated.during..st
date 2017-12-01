@@ -1,4 +1,4 @@
-*Bloc-Core
+*Bloc-Sparta
 by: aBlElementTransform translated: aPoint during: aBlock
 
 	aBlElementTransform is2D
