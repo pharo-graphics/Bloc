@@ -4,7 +4,7 @@ strokedBoundsCentered: aBlBounds of: anElement on: aCanvas
 
 	spartaPath := anElement pathCache geomPathOnSpartaCanvas: aCanvas.
 	strokeOptions := aCanvas stroke
-		width: anElement border width;
+		width: (anElement border width max: 1);
 		in: [ :aPainter | anElement border style applyOn: aPainter ];
 		strokeOptions.
 
