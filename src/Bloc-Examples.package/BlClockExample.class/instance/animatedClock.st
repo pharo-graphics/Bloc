@@ -5,15 +5,12 @@ animatedClock
 
 	secondHand := self secondHand.
 	
-	BlNumberTransition new
+	animation := BlStepping new
 		onStepDo: [ :aSecond |
 			secondHand transformDo: [ :aTransform |
-				aTransform rotateBy: aSecond * self minuteRotationDelta - 90 ] ];
-		from: 0;
-		to: 60;
-		by: 1;
-		loop: 1;
-		duration: 60 seconds;
+				aTransform rotateBy: (0 to: 60) atRandom * self minuteRotationDelta - 90 ] ];
+		stepTime: 1 seconds;
+		beInfinite;
 		startOn: secondHand.
 
 	^ self clock

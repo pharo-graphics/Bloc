@@ -1,11 +1,11 @@
 SystemOrganization addCategory: #'Bloc-Examples'!
 SystemOrganization addCategory: 'Bloc-Examples-Animation'!
 SystemOrganization addCategory: 'Bloc-Examples-Basic'!
+SystemOrganization addCategory: 'Bloc-Examples-Curve&Line'!
 SystemOrganization addCategory: 'Bloc-Examples-Drag&Drop'!
 SystemOrganization addCategory: 'Bloc-Examples-Events'!
 SystemOrganization addCategory: 'Bloc-Examples-Experimental'!
 SystemOrganization addCategory: 'Bloc-Examples-Focus'!
-SystemOrganization addCategory: 'Bloc-Examples-Geometry'!
 SystemOrganization addCategory: 'Bloc-Examples-Infinite'!
 SystemOrganization addCategory: 'Bloc-Examples-KeyBinding'!
 SystemOrganization addCategory: 'Bloc-Examples-Layout'!

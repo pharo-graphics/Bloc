@@ -1,0 +1,3 @@
+pulse
+stepTime
+	^ self duration

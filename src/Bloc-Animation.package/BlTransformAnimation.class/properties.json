@@ -1,5 +1,9 @@
 {
-	"classtraitcomposition" : "TBlTransformable classTrait",
+	"commentStamp" : "AliakseiSyrel 11/6/2017 20:15",
+	"super" : "BlAnimation",
+	"category" : "Bloc-Animation-Animation",
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"transformation",
@@ -8,11 +12,5 @@
 		"isAbsolute"
 	],
 	"name" : "BlTransformAnimation",
-	"commentStamp" : "AliakseiSyrel 11/6/2017 20:15",
-	"super" : "BlAnimation",
-	"traitcomposition" : "TBlTransformable",
-	"type" : "normal",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"category" : "Bloc-Animation-Animation"
+	"type" : "normal"
 }
