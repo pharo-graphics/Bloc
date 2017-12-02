@@ -1,3 +1,3 @@
 *Bloc-Extensions
 children
-	^ { }
+	^ { rope }
