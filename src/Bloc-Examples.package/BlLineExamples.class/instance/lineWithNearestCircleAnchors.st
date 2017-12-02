@@ -11,8 +11,8 @@ lineWithNearestCircleAnchors
 	attachTo := self circleAttachPoint.
 	attachTo relocate: 400 @ 300.
 
-	redLine fromAnchor: (BlNearestPositionCircleAnchor nearestTo: attachTo from: attachFrom).
-	redLine toAnchor: (BlNearestPositionCircleAnchor nearestTo: attachFrom from: attachTo).
+	redLine fromAnchor: (BlNearestPositionTightCircleAnchor nearestTo: attachTo from: attachFrom).
+	redLine toAnchor: (BlNearestPositionTightCircleAnchor nearestTo: attachFrom from: attachTo).
 
 	^ self container
 		addChildren: { redLine . attachFrom . attachTo }
