@@ -1,6 +1,6 @@
 *Bloc-Sparta
 asSpartaForm
-	| aCanvas aFinalCanvas aBoundsInWindow aBoundsInSpace aBoundsInLocal |
+	| aCanvas aBoundsInParent aBoundsInLocal |
 
 	self forceLayout.
 
@@ -8,44 +8,14 @@ asSpartaForm
 		merge: self boundsInLocal;
 		merge: self visualBounds.
 
-	aBoundsInWindow := self localBoundsToWindow: aBoundsInLocal copy.
-	aBoundsInSpace := self localBoundsToGlobal: aBoundsInLocal copy.
+	aBoundsInParent := self localBoundsToParent: aBoundsInLocal copy.
 
-	aCanvas := Bloc preferableSpartaCanvas checker: (aBoundsInWindow corner max: 1@1).
+	aCanvas := Bloc preferableSpartaCanvas extent: (aBoundsInParent extent max: 1@1).
 
-	aCanvas transform
-		push;
-		translateBy: (aBoundsInSpace origin) negated + (100@100);
-		scaleBy: (self isAttachedToSceneGraph
-			ifTrue: [ self space windowScale ]
-			ifFalse: [ 1 ]);
-		apply.
+	aCanvas transform during: [ :aTransform |
+		aTransform
+			translateBy: (aBoundsInParent origin) negated;
+			apply.
+		self fullDrawOnSpartaCanvas: aCanvas ].
 
-	aCanvas clip
-		by: aBoundsInSpace
-		during: [ self fullDrawOnSpartaCanvas: aCanvas ].
-
-	aCanvas transform pop.
-
-	aFinalCanvas := Bloc preferableSpartaCanvas extent: (aBoundsInWindow extent max: 1@1).
-	aFinalCanvas transform
-		push;
-		translateBy: aBoundsInSpace origin negated;
-		scaleBy: (self isAttachedToSceneGraph
-			ifTrue: [ self space windowScale ]
-			ifFalse: [ 1 ]);
-		apply.
-
-	aFinalCanvas clip
-		by: aBoundsInSpace
-		during: [ self fullDrawOnSpartaCanvas: aFinalCanvas ].
-
-	aFinalCanvas transform pop.
-	"aFinalCanvas fill
-		path: aFinalCanvas bounds;
-		paint: (aCanvas paint surface
-			source: aCanvas;
-			translateBy: aBoundsInWindow origin negated);
-		draw."
-
-	^ aFinalCanvas asForm
+	^ aCanvas asForm
