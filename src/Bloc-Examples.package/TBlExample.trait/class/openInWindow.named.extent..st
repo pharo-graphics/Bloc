@@ -6,9 +6,7 @@ openInWindow: anElement named: aTitleString extent: aPoint
 		extent: aPoint;
 		title: aTitleString.
 
-	aSpace root
-		addChild: anElement;
-		yourself.
+	aSpace root addChild: anElement.
 
 	aSpace root addEventHandler:
 			(BlEventHandler
