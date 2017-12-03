@@ -2,7 +2,8 @@ examples
 textWithAttributes
 	<gtExample>
 	| text |
-	text := 'The moldable editor ' asRopedText.
+	text := 'The moldable editor' asRopedText.
+	text insertString: String cr at: text size.
 	text insertString: 'can be adapted ' at: text size.
 	text insertString: 'to the context.' at: text size.
 	text attributes: { BrFontSizeAttribute size: 20 }.
