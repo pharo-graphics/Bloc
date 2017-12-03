@@ -12,7 +12,7 @@ fullDrawOnSpartaCanvas: aCanvas
 	
 	anEffectBounds := self effectBounds: BlBounds new.
 	"No need to render elements smaller than half of a pixel"
-	(anEffectBounds width min: anEffectBounds height) < 1
+	(anEffectBounds width min: anEffectBounds height) < 0.5
 		ifTrue: [ ^ self ].
 
 	(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
