@@ -6,6 +6,8 @@ gtInspectorTextIn: composite
 		element: [
 			| root |
 			root := BlElement new.
-			root constraintsDo: [ :c | c vertical matchParent. c horizontal matchParent ]. 
+			root constraintsDo: [ :c | 
+					c vertical matchParent. 
+					c horizontal matchParent ]. 
 			self gtTextIn: root.
 			root ]
