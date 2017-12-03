@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 12/3/2017 23:32",
+	"super" : "BlInfiniteDataSourceCommandType",
+	"category" : "Bloc-Infinite-DataSource-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlInfiniteDataSourceCommandTypeNull",
+	"type" : "normal"
+}

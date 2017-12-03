@@ -4,7 +4,7 @@ updatePosition: aPosition withPostponed: aCommand
 	pos := aPosition.
 	
 	postponedCommands do: [ :postponed |
-		pos := postponedCommands updatePosition: pos with: aCommand ].
+		pos := postponed updatePosition: pos with: aCommand ].
 	
 	postponedCommands copy reverseWithIndexDo: [ :postponed :i | 
 		postponed isMove

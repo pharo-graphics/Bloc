@@ -5,9 +5,11 @@ removeAnimation: anAnimation
 		assert: [ anAnimation isNotNil ]
 		description: [ 'Animation must not be nil' ].
 
-	self
-		assert: [ animations includes: anAnimation ]
-		description: [ 'Animation must exist' ].
+	Bloc debugModeEnabled
+		ifTrue: [ 
+			self
+				assert: [ animations includes: anAnimation ]
+				description: [ 'Animation must exist' ] ].
 	
 	animations := animations copyWithout: anAnimation.
 	"When animation is removed there is no need to request a next pulse,
