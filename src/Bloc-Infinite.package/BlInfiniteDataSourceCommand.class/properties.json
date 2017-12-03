@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/19/2016 21:25",
-	"super" : "Object",
-	"category" : "Bloc-Infinite-DataSource-Support",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"positionStart",
@@ -12,5 +8,11 @@
 		"type"
 	],
 	"name" : "BlInfiniteDataSourceCommand",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 11/19/2016 21:25",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Infinite-DataSource-Support"
 }
