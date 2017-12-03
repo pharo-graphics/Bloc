@@ -1,6 +1,11 @@
 *Bloc-Extensions
 gtInspectorTextIn: composite
 	<gtInspectorPresentationOrder: -10>  
-	 composite text
+	 composite bloc
 		title: 'Text';
-		format: self asString
+		element: [
+			| root |
+			root := BlElement new.
+			root constraintsDo: [ :c | c vertical matchParent. c horizontal matchParent ]. 
+			self gtTextIn: root.
+			root ]
