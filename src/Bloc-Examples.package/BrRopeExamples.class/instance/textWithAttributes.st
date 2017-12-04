@@ -18,12 +18,12 @@ textWithAttributes
 		from: 43
 		to: 49.
 	text
-	attributes: { BrTextExpandButtonAttribute new 
-		attributesCreatingBlock: [
-			BrTextAdornmentDynamicAttribute new 	
-				beAppend;
-				elementBlock: [ (BlEllipse radius: 20) asElement
-					constraintsDo: [ :c | c textFlow pushLine ] ] ] } 
-	from: 28
-	to: 34.
+		attributes: { BrTextExpandButtonAttribute new 
+			attributesCreatingBlock: [
+				BrTextAdornmentDynamicAttribute new 	
+					beAppend;
+					elementBlock: [ (BlEllipse radius: 20) asElement
+						constraintsDo: [ :c | c textFlow pushLine ] ] ] } 
+		from: 28
+		to: 34.
 	^ text
