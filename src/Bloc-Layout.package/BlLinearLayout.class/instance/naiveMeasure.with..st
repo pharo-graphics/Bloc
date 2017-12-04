@@ -2,7 +2,7 @@ measure
 naiveMeasure: anElement with: anExtentMeasurementSpec
 	"First naive pass to measure children with exact dimension or those who wrap to content"
 
-	anElement managedChildrenDo: [ :child |
+	self measuredChildren: anElement do: [ :child |
 		| childMatchBreadth measuredBreadth matchingBreadth childConstraints |
 		childConstraints := child constraints linear.
 		"we need a local flag to know if one particular child want to match breadth of a parent.

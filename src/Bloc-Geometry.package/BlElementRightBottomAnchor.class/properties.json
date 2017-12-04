@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlAnchorRelativeToElement",
+	"category" : "Bloc-Geometry-Anchors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlElementRightBottomAnchor",
+	"type" : "normal"
+}

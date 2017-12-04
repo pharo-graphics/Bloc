@@ -5,7 +5,7 @@ matchingMeasure: anElement
 	"create a measurement spec with exact size equal to element's measured breadth"
 	matchingMeasureSpec := BlMeasurementSpec new beExact: (self orientation measuredBreadth: anElement).
 	
-	anElement managedChildrenDo: [ :child |
+	self measuredChildren: anElement do: [ :child |
 		"we measure only those who match parent along breadth axis"
 		(self orientation breadthProperties: child) resizer ifMatchParent: [
 			|oldResizing|

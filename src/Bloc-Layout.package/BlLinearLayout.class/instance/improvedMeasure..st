@@ -9,7 +9,7 @@ improvedMeasure: anElement
 	"because we perform improved measurement we need to recalculate totalLength"
 	self cache totalLength: 0.
 
-	anElement managedChildrenDo: [ :child |
+	self measuredChildren: anElement do: [ :child |
 		| marginBreadth marginLength measuredBreadth childMatchBreadth childConstraints |
 		childConstraints := child constraints linear.
 		marginBreadth := self orientation marginBreadth: child.

@@ -9,7 +9,6 @@ layout: anElement in: aRectangle
 	right := left.
 	bottom := top.
 	
-	
 	self layout direction with: anElement managedChildren do: [ :child |
 		right := right + child measuredWidth + (child outsets width max: 0).
 		bottom := bottom max: child measuredHeight + (child outsets height max: 0) ].
