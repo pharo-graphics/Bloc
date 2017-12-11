@@ -8,4 +8,4 @@ paint: aBlPaint
 		assert: [ paint isNil ]
 		description: [ 'Background is immutable and can not be changed' ].
 
-	paint := aBlPaint
+	paint := aBlPaint asBlPaint
