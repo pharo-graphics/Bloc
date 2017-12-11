@@ -25,6 +25,7 @@ positionChangeBoundsChange
 	self assert: element boundsInParent equals: (50@50 extent: 150@150).
 
 	"layout recomputation resets position and extent to originally requested values"
+	element requestLayout.
 	element forceLayout.
 	self assert: element boundsInLocal equals: (0@0 extent: 100@100).
 	self assert: element boundsInParent equals: (0@0 extent: 100@100).
