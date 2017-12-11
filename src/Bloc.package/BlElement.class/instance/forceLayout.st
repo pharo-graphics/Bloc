@@ -1,37 +1,11 @@
-layout
+layout utilities
 forceLayout
-	| relayoutCounter maxRelayoutCount |
-	relayoutCounter := 0.
-	maxRelayoutCount := 100.
-	
-	"compute at least once"	
-	self requestLayout.
+	"Do not use me, I am a private / debug utility method to force layout computation.
+	The main usage of this method is for testing purposes where we want to update layout
+	without the need to create a separate space and add an element to it in order to test bounds or position.
+	Note: because layout measurement may depend on other element it is mandatory to compute
+	layout going down from the top most parent, otherwise layout will not be valid"
 
-	[ self isLayoutRequested
-		and: [ relayoutCounter < maxRelayoutCount ] ]
-		whileTrue: [
-			| widthSpec heightSpec maxExtent |
-			
-			maxExtent := self isAttachedToSceneGraph
-				ifTrue: [ self space extent ]
-				ifFalse: [ 800 @ 600 ].
-			
-			widthSpec := BlMeasurementSpec new beAtMost: maxExtent x.
-			heightSpec := BlMeasurementSpec new beAtMost: maxExtent y.
-
-			self measure: (BlExtentMeasurementSpec new
-				widthSpec: (self layout
-					measurementSpecFor: widthSpec
-					usedSize:  0
-					resizer: self constraints horizontal resizer);
-				heightSpec: (self layout
-					measurementSpecFor: heightSpec
-					usedSize:  0
-					resizer: self constraints vertical resizer)).
-			
-			"...then we layout in measured on previous step bounds"
-			self applyLayoutIn: self measuredBounds asRectangle.
-			
-			self commitChanges.
-			
-			relayoutCounter := relayoutCounter + 1 ]
+	self topMostParent == self
+		ifTrue: [ self computeLayout ]
+		ifFalse: [ self topMostParent computeLayout ]
