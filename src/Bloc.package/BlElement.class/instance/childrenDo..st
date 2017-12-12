@@ -6,4 +6,4 @@ childrenDo: aBlock
 	self assert: aBlock isNotNil.
 	self assert: aBlock argumentCount = 1.
 	
-	^ self children do: aBlock
+	self children do: aBlock

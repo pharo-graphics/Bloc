@@ -2,7 +2,7 @@
 gtInspectorPreviewIn: aComposite
 	<gtInspectorPresentationOrder: 5>
 
-	aComposite sparta
+	^ aComposite sparta
 		title: [ 'Preview' translated ];
 		extent: [ 350@250 ];
 		draw: [ :aCanvas | | anElement |

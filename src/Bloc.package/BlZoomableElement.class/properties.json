@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 12/12/2017 19:23",
+	"super" : "BlScalableElement",
+	"category" : "Bloc-Utilities - Scalable",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"zoomLevel"
+	],
+	"name" : "BlZoomableElement",
+	"type" : "normal"
+}
