@@ -15,7 +15,7 @@ onMeasure: anExtentMeasurementSpec
 	self contentElement transform
 		scaleBy: (aScaleFactor @ aScaleFactor);
 		apply.
-
+	
 	aTransformedExtent := self contentElement measuredBounds transformed extent.
 	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent).
 

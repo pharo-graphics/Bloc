@@ -1,4 +1,3 @@
 double dispatching
 measurementUnspecifiedWith: aNumber
-	^ BlMeasurementSpec new
-		beUnspecified
+	^ BlMeasurementSpec unspecified
