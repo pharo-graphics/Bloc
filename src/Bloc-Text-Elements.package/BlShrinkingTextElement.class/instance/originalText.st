@@ -1,3 +1,3 @@
 accessing
 originalText
-	^ originalText ifNil: [ originalText := self text asString ]
+	^ originalText ifNil: [ originalText := self text copy ]

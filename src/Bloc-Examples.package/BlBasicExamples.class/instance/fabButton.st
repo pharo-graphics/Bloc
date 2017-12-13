@@ -18,6 +18,7 @@ fabButton
 		} collect: [ :aPoint | aPoint / 6.0])) asElement.
 
 	icon background: Color white.
+	icon border: BlBorder empty.
 	icon constraintsDo: [ :c |
 		c frame horizontal alignCenter.
 		c frame vertical alignCenter ].

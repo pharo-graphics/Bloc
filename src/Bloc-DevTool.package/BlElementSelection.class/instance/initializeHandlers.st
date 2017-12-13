@@ -10,6 +10,17 @@ initializeHandlers
 	self
 		addEventHandler:
 			(BlEventHandler
+				on: BlClickEvent
+				do: [ :anEvent |
+					anEvent modifiers isShift ifTrue: [ 
+						anEvent consumed: true.
+						self client hasParent
+							ifTrue: [
+								BlElementSelection on: self client parent.
+								self close ] ] ]).
+	self
+		addEventHandler:
+			(BlEventHandler
 				on: BlDragStartEvent
 				do: [ :anEvent |
 					| aClientOldGlobalPosition aClientNewGlobalPosition |
