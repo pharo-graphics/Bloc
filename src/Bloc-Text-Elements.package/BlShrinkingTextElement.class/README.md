@@ -1,0 +1,1 @@
+I am a label that when the space is less than my width, I cut the text and add ... as ending
