@@ -1,3 +1,3 @@
 transformations
 flipX
-	transformation addTransformation: (BlReflectionTransformation horizontal origin: origin)
+	transformation addTransformation: (BlReflectionTransformation vertical origin: origin)

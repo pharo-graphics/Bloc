@@ -1,3 +1,3 @@
 transformations
 flipY
-	transformation addTransformation: (BlReflectionTransformation vertical origin: origin)
+	transformation addTransformation: (BlReflectionTransformation horizontal origin: origin)
