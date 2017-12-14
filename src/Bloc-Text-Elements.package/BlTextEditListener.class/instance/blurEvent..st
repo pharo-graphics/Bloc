@@ -2,5 +2,4 @@ focus handlers
 blurEvent: anEvent
 	super blurEvent: anEvent.
 	
-	anEvent currentTarget
-		hideCursor
+	anEvent currentTarget hideCursor

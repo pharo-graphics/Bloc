@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 12/14/2017 21:43",
+	"super" : "BlAffineTransformation",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"reflection"
+	],
+	"name" : "BlReflectionTransformation",
+	"type" : "normal"
+}

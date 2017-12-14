@@ -18,5 +18,5 @@ exampleText
 	space := BlSpace new.
 	space root addChild: textElement.
 	space show.
-		
+
 	^ textElement
