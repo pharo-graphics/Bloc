@@ -2,5 +2,5 @@ keyboard handlers
 handleBackspace: anEvent
 	
 	self
-		deleteAt: anEvent currentTarget cursor cursorPosition
+		deleteAt: anEvent currentTarget cursorPosition
 		in: anEvent currentTarget

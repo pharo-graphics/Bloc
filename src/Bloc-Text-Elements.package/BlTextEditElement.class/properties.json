@@ -6,8 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"cursor",
-		"editListener"
+		"editListener",
+		"cursorElement",
+		"cursorPosition"
 	],
 	"name" : "BlTextEditElement",
 	"type" : "normal"

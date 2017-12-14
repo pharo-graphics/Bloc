@@ -3,7 +3,6 @@ onMeasure: anExtentMeasurementSpec
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
 	| aHeightSpec aWidthSpec aMaxHeight aMaxWidth aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
-	super onMeasure: anExtentMeasurementSpec.
 
 	self
 		assert: [ text isNotNil ]
@@ -65,4 +64,7 @@ onMeasure: anExtentMeasurementSpec
 	aMeasuredExtent := aMeasuredExtent + (aPadding width @ aPadding height).
 
 	"Finally set measured extent"
-	self measuredExtent: aMeasuredExtent
+	self measuredExtent: aMeasuredExtent.
+	
+	"don't forget to measure children if there are any"
+	self measureChildren: anExtentMeasurementSpec

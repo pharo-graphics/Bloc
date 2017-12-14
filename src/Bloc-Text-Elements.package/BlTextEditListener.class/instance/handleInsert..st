@@ -3,5 +3,5 @@ handleInsert: anEvent
 	
 	self
 		insertString: anEvent char asString
-		at: anEvent currentTarget cursor cursorPosition
+		at: anEvent currentTarget cursorPosition
 		in: anEvent currentTarget

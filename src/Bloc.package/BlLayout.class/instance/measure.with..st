@@ -4,7 +4,7 @@ measure: anElement with: anExtentSpec
 	strategy of the anElement that uses a layout with this version of measurement"
 
 	anElement measuredExtent: (anExtentSpec sizeFor: anElement extent).
-	anElement managedChildrenDo: [ :each |
+	self measuredChildren: anElement do: [ :aChild |
 		self
-			measureChild: each
+			measureChild: aChild
 			parentSpec: anExtentSpec ]

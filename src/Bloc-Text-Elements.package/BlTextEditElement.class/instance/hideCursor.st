@@ -5,4 +5,4 @@ hideCursor
 	self hasCursor
 		ifFalse: [ ^ self ].
 
-	self removeChild: self cursor
+	self removeChild: self cursorElement

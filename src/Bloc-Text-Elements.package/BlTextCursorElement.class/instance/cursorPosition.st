@@ -1,3 +1,0 @@
-accessing
-cursorPosition
-	^ cursor position

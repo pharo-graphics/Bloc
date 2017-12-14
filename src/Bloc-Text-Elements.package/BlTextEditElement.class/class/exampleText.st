@@ -8,7 +8,7 @@ exampleText
 	textElement := self new.
 	textElement editListener: BlTextEditListener new.
 	textElement addEventHandler: BlSelectionHandler new.
-	textElement position: 50@50.
+	textElement relocate: 50@50.
 	textElement text: text.
 	textElement constraintsDo: [ :c |
 		c horizontal fitContent.

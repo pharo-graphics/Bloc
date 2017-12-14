@@ -1,26 +1,21 @@
 layout
 measureCursor: anExtentMeasurementSpec
-	| aCursorElement aTextPosition |
+	| aCursorElement aCursorPosition aTextPosition |
 	
 	self hasCursor
 		ifFalse: [ ^ self ].
 		
 	self assertCursor.
 
-	aCursorElement := self cursor.
-	
+	aCursorElement := self cursorElement.
+	aCursorPosition := self cursorPosition.
+
 	"cursor is not within paragraph"
-	self paragraph measuredEnd < aCursorElement cursorPosition
+	self paragraph measuredEnd < aCursorPosition
 		ifTrue: [ ^ self ].
 
-	aTextPosition := self paragraph positionAt: aCursorElement cursorPosition.
-	aTextPosition := aTextPosition x @ 0.
-
-	aCursorElement measuredExtent: (1 @ self measuredHeight).
-	"make measured cursor size persistent"
-	aCursorElement constraints horizontal exact: 1.
-	aCursorElement constraints vertical exact: self measuredHeight.
-
+	aTextPosition := self paragraph positionAt: aCursorPosition.
+	aTextPosition := (aTextPosition x - (aCursorElement measuredWidth // 2)) @ 0.
 	aCursorElement measuredBounds position: aTextPosition.
-	
-	self measuredExtent: (self measuredExtent max: self cursor measuredExtent)
+
+	self measuredExtent: (self measuredExtent max: self cursorElement measuredExtent)

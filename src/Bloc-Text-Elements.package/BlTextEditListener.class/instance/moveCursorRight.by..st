@@ -11,9 +11,9 @@ moveCursorRight: aTextEditElement by: aNumber
 		assert: [ aNumber > 0 ]
 		description: [ 'Cursor movement distance must be greater than zero' ].
 	
-	(aTextEditElement cursor cursorPosition + aNumber) > (aTextEditElement text size)
+	(aTextEditElement cursorPosition + aNumber) > (aTextEditElement text size)
 		ifTrue: [ ^ self transferCursorRight: aTextEditElement ].
 
 	self
-		moveCursorTo: aTextEditElement cursor cursorPosition + aNumber
+		moveCursorTo: aTextEditElement cursorPosition + aNumber
 		in: aTextEditElement

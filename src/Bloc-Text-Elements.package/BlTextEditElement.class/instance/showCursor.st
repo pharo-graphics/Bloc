@@ -6,6 +6,6 @@ showCursor
 		ifTrue: [ ^ self ].
 
 	self cursorExists
-		ifFalse: [ cursor := self defaultCursor ].
+		ifFalse: [ cursorElement := self defaultCursor ].
 
-	self addChild: self cursor
+	self addChild: self cursorElement

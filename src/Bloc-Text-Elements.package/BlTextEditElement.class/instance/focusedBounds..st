@@ -5,4 +5,4 @@ focusedBounds: aBlBounds
 
 	^ (self cursorExists and: [ self hasFocus ])
 		ifFalse: [ super focusedBounds: aBlBounds ]
-		ifTrue: [ self cursor localBoundsToParent: (self cursor focusedBounds: aBlBounds) ]
+		ifTrue: [ self cursorElement localBoundsToParent: (self cursorElement focusedBounds: aBlBounds) ]
