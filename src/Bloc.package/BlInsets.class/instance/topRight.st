@@ -1,5 +1,5 @@
 accessing
-bottomRight
+topRight
 	<return: #Point>
 
-	^ right @ bottom
+	^ right @ top

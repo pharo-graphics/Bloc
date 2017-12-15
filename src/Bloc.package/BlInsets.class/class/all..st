@@ -1,6 +1,6 @@
 instance creation
 all: aNumber
-	^ self new
+	^ self
 		top: aNumber
 		right: aNumber
 		bottom: aNumber
