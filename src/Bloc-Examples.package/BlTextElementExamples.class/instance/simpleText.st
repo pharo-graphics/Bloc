@@ -7,5 +7,5 @@ simpleText
 	textElement := BlTextElement new.
 	textElement text: text.
 	textElement background: Color paleYellow.
-	
+	textElement padding: (BlInsets all: 20).
 	^ textElement

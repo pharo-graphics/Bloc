@@ -18,4 +18,4 @@ showOn: anElement
 	client space root addChild: self.
 	
 	self relocate: self selectionPosition.
-	self size: self selectionExtent
+	self size: self selectionExtent.

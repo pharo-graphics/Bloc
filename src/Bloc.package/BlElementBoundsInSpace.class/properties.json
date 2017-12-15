@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 12/15/2017 16:57",
+	"super" : "BlElementConvertibleBounds",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlElementBoundsInSpace",
+	"type" : "normal"
+}

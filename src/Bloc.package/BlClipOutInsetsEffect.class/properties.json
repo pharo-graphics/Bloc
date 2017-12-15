@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlClipOutEffect",
+	"category" : "Bloc-Effect",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"insets"
+	],
+	"name" : "BlClipOutInsetsEffect",
+	"type" : "normal"
+}

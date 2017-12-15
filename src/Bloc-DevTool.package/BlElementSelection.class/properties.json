@@ -11,7 +11,12 @@
 		"dragOffset",
 		"resizeButton",
 		"removeButton",
-		"inspectButton"
+		"inspectButton",
+		"infoButton",
+		"hasInformation",
+		"marginElement",
+		"paddingElement",
+		"extentElement"
 	],
 	"name" : "BlElementSelection",
 	"type" : "normal"

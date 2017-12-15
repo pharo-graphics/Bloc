@@ -8,8 +8,7 @@
 	"instvars" : [
 		"marginMetric",
 		"paddingMetric",
-		"extentMetric",
-		"borderMetric"
+		"extentMetric"
 	],
 	"name" : "BlMetricsInspector",
 	"type" : "normal"
