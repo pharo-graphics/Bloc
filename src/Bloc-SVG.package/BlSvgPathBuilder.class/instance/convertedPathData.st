@@ -1,14 +1,9 @@
 operations
 convertedPathData
 
-	path := OrderedCollection new.
+	segments := OrderedCollection new.
 	
-	[ self skipBlanks. stream atEnd ] whileFalse: [
-		| cmd |
-		cmd := stream next.
-		self assertValidCommand: cmd.
-		self perform: cmd asString asSymbol.
-	].
+	[ self skipBlanks. stream atEnd ]
+		whileFalse: [ self performCommandNamed: stream next asString asSymbol ].
 
-	^ path
-	
+	^ segments

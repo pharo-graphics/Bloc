@@ -1,3 +1,3 @@
-path commands
+commands
 z
 	self close

@@ -1,4 +1,4 @@
-path commands
+commands
 c
 
 	^ self relative; cubicBezier 

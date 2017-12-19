@@ -1,4 +1,5 @@
 SystemOrganization addCategory: #'Bloc-Layout'!
+SystemOrganization addCategory: 'Bloc-Layout-Fit'!
 SystemOrganization addCategory: 'Bloc-Layout-Flow'!
 SystemOrganization addCategory: 'Bloc-Layout-Flow-Utilities'!
 SystemOrganization addCategory: 'Bloc-Layout-Frame'!

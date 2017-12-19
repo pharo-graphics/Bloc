@@ -1,3 +1,3 @@
-path commands
+commands
 t
 	self relative; reflectedQuadraticBezier

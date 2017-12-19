@@ -1,3 +1,3 @@
-path commands
+commands
 s
 	self relative; reflectedCubicBezier

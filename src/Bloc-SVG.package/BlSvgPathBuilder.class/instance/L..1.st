@@ -1,3 +1,3 @@
-path commands
+commands
 L
 	self absolute; lineTo.

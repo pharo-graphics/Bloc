@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlSvgPathSegment",
+	"category" : "Bloc-SVG-Path",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlSvgPathReflectedCurveSegment",
+	"type" : "normal"
+}

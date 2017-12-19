@@ -1,3 +1,3 @@
-path commands
+commands
 a
 	self relative; ellipticalArc

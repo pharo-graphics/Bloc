@@ -1,7 +1,6 @@
 properties
 transformPropertiesFrom: attributes on: aBlElement
 	|transformations|
-	aBlElement setTransformForSVG.
 	
 	attributes at: 'transform' ifPresent: [ transformations := ((attributes at: 'transform') substrings: ' ')].
 	transformations ifNil:[^self].

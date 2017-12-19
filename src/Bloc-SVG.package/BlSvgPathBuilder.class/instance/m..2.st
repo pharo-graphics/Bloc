@@ -1,4 +1,4 @@
-path commands
+commands
 m
 	"move-to relative"
 	" 

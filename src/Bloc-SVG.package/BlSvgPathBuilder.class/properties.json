@@ -3,11 +3,12 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"stream",
-		"segments",
 		"path",
 		"absolute",
 		"min",
-		"max"
+		"max",
+		"segments",
+		"commands"
 	],
 	"name" : "BlSvgPathBuilder",
 	"commentStamp" : "GlennCavarle 10/12/2016 15:08",

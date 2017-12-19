@@ -1,4 +1,4 @@
-path commands
+commands
 M
 	"move-to absolute"
 	" 

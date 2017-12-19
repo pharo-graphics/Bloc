@@ -1,3 +1,3 @@
-path commands
+commands
 A
 	self absolute; ellipticalArc

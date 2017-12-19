@@ -9,9 +9,6 @@ Draws a vertical line from the current point (cpx, cpy) to (cpx, y). V (uppercas
 	
 	self skipBlanks.
 	y := self nextNumber ifNil: [ ^ self error: 'number expected for horizontal line segment'   ].
-	
-	self vLineTo: y.
-	
-	[ self skipBlanks. y := self nextNumber. y notNil ] whileTrue: [
-		self vLineTo: y
-	].
+	self lineTo: 0 @ y.
+	[ self skipBlanks. y := self nextNumber. y notNil ]
+		whileTrue: [ self lineTo: 0 @ y ]
