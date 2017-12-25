@@ -1,0 +1,3 @@
+initialization
+newThumbElement
+	^ BlElement new

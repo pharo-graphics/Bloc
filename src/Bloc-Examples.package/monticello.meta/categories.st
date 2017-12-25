@@ -13,3 +13,4 @@ SystemOrganization addCategory: 'Bloc-Examples-Selection'!
 SystemOrganization addCategory: 'Bloc-Examples-Showcase-Chicken'!
 SystemOrganization addCategory: 'Bloc-Examples-Showcase-Mobile Phone'!
 SystemOrganization addCategory: 'Bloc-Examples-Text'!
+SystemOrganization addCategory: 'Bloc-Examples-Widgets'!

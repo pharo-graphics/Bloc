@@ -1,0 +1,3 @@
+initialization
+newTrackElement
+	^ BlElement new

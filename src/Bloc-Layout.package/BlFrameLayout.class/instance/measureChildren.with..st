@@ -21,16 +21,15 @@ measureChildren: anElement with: anExtentSpec
 		do: [ :aChild |
 			| shouldMeasureChild |
 			
-			"true if aChild should be measured NOW or during second measurement pass
-			we measure children if parent is exact or if child is not matching parent"
+			"true if aChild should be measured NOW or false if it should happen during second measurement pass.
+			we measure children if parent is exact or if child does not match parent"
 			shouldMeasureChild := measureMatchParentChildren
 				or: [ aChild constraints horizontal resizer isMatchParent not
 					and: [ aChild constraints vertical resizer isMatchParent not ] ].
-		
 			shouldMeasureChild
 				"measure now"
 				ifTrue: [
-					self measureChildWithMargins: aChild parentSpec: anExtentSpec.
+					self measureChild: aChild of: anElement with: anExtentSpec.
 					maxWidth := maxWidth max: (aChild measuredWidth + aChild outsets width).
 					maxHeight := maxHeight max: (aChild measuredHeight + aChild outsets height) ]
 				"or during second pass"

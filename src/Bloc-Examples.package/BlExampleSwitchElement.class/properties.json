@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"category" : "Bloc-Examples-Widgets",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"thumbElement",
+		"trackElement"
+	],
+	"name" : "BlExampleSwitchElement",
+	"type" : "normal"
+}

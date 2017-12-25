@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"alignment"
+		"alignment",
+		"weight"
 	],
 	"name" : "BlFrameLayoutConstraintsVertical",
 	"type" : "normal"
