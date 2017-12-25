@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 11/8/2017 09:28",
+	"commentStamp" : "AliakseiSyrel 12/25/2017 13:52",
 	"super" : "BlSpaceEvent",
 	"category" : "Bloc-Event",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlSpaceCloseEvent",
+	"instvars" : [
+		"space"
+	],
+	"name" : "BlSpaceShownEvent",
 	"type" : "normal"
 }

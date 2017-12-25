@@ -30,3 +30,7 @@ showSpaceWindow: aSpace
 	"We registered the first space, let's start the Universe"
 	shouldStartTheUniverse
 		ifTrue: [ self start ].
+
+	"Note: we should send shown event after everything else is done, because
+	theoretically, that only space could be closed as a reaction to the event"
+	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).

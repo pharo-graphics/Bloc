@@ -1,18 +1,21 @@
 initialization
 initializeAnnouncement
-	
 	self
 		onAnnouncement: WindowOpened
-		do: [ :evt | spaceForm startStepping ].
+		do: [ :anEvent |
+			BlMorphicWindowOpenedEvent new sentTo: eventHandler.
+			spaceForm startStepping ].
 
 	self
 		onAnnouncement: WindowClosed
-		do: [ :evt | spaceForm stopStepping. BlMorphicWindowCloseEvent new sentTo: eventHandler ].
-		
+		do: [ :anEvent |
+			spaceForm stopStepping.
+			BlMorphicWindowClosedEvent new sentTo: eventHandler ].
+
 	self
 		onAnnouncement: MorphGotFocus
 		do: [ :evt | ].
-		
+
 	self
 		onAnnouncement: MorphLostFocus
 		do: [ :evt | ].

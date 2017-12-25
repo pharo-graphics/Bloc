@@ -1,3 +1,3 @@
 window handlers
-spaceCloseEvent: anEvent
+spaceCloseRequest: anEvent
 	self space close

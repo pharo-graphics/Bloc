@@ -1,0 +1,1 @@
+I am fired by morphic host window when it is opened in the World

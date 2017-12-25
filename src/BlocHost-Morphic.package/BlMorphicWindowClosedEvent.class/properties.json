@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlMorphicWindowCloseEvent",
+	"name" : "BlMorphicWindowClosedEvent",
 	"type" : "normal"
 }

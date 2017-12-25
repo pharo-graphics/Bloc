@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 12/25/2017 13:57",
+	"super" : "Object",
+	"category" : "Bloc-Examples-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlSpaceEventExamples",
+	"type" : "normal"
+}

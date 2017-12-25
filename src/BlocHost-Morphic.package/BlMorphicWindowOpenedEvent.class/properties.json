@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 12/25/2017 13:30",
+	"super" : "BlMorphicWindowEvent",
+	"category" : "BlocHost-Morphic-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlMorphicWindowOpenedEvent",
+	"type" : "normal"
+}

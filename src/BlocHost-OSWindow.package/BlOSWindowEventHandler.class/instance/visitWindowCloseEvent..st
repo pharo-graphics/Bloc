@@ -1,6 +1,6 @@
 visiting window
 visitWindowCloseEvent: anEvent
 	anEvent suppressDefaultAction.
-	^ BlSpaceCloseEvent new
+	^ BlSpaceCloseRequest new
 		timestamp: Time millisecondClockValue;
 		yourself
