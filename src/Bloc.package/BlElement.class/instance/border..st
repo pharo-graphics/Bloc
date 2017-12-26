@@ -1,4 +1,4 @@
-accessing
+api - look
 border: aBorder
 	"Change my border and invalidate me"
 

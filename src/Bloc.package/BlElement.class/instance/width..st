@@ -1,5 +1,6 @@
-geometry extent
+api - bounds
 width: aNumber
+	<event: #BlElementExtentChangedEvent>
 	| aLayoutConstraints |
 
 	aLayoutConstraints := self constraints.

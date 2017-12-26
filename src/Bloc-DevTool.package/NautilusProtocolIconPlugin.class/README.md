@@ -1,0 +1,1 @@
+I make nautilus protocol icon to be customizable

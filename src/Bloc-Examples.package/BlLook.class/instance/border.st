@@ -1,0 +1,3 @@
+public
+border
+	^ border value

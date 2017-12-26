@@ -1,3 +1,3 @@
 *Bloc-Sparta
 drawBorderOnSpartaCanvas: aCanvas
-	border drawOnSpartaCanvas: aCanvas of: self
+	self border drawOnSpartaCanvas: aCanvas of: self

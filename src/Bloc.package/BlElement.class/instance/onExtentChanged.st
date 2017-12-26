@@ -1,4 +1,4 @@
-geometry hooks
+hook - geometry
 onExtentChanged
 	"Is sent when my extent changed"
 

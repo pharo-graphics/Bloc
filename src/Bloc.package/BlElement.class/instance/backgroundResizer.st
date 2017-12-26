@@ -1,4 +1,4 @@
-accessing
+api - look
 backgroundResizer
 	<return: #BlBackgroundResizer>
 

@@ -1,3 +1,3 @@
-accessing private
+private - accessing
 pathCache
 	^ pathCache

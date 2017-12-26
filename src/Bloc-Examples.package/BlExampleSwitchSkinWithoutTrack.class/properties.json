@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BlExampleSwitchSkin",
+	"super" : "BlExampleSwitchLook",
 	"category" : "Bloc-Examples-Widgets",
 	"classinstvars" : [ ],
 	"pools" : [ ],

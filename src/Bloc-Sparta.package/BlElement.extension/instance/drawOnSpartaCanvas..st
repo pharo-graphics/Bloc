@@ -2,8 +2,8 @@
 drawOnSpartaCanvas: aCanvas
 	| isBackgroundTransparent isBorderTransparent areBothTransparent areBothVisible |
 
-	isBackgroundTransparent := background isTransparent.
-	isBorderTransparent := border isTransparent.
+	isBackgroundTransparent := self background isTransparent.
+	isBorderTransparent := self border isTransparent.
 	areBothTransparent := isBackgroundTransparent and: [ isBorderTransparent ].
 	areBothVisible := (isBackgroundTransparent or: [ isBorderTransparent ]) not.
 

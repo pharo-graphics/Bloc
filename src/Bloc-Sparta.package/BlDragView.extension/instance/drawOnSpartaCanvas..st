@@ -7,7 +7,7 @@ drawOnSpartaCanvas: aCanvas
 		aTransform apply.
 
 		aCanvas fill
-			paint: background fill;
+			paint: self background fill;
 			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
 			draw.
 			
@@ -17,8 +17,8 @@ drawOnSpartaCanvas: aCanvas
 			draw.
 
 		aCanvas stroke
-			paint: border;
+			paint: self border;
 			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
-			width: border width;
+			width: self border width;
 			draw ]
 	

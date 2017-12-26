@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlObjectProperty",
+	"category" : "Bloc-Property",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"invalidateBlock",
+		"whenBlock"
+	],
+	"name" : "BlLookProperty",
+	"type" : "normal"
+}

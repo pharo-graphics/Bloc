@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 12/26/2017 15:47",
+	"super" : "AbstractMethodIconAction",
+	"category" : "Bloc-DevTool-Plugins",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MethodWithCallbackAction",
+	"type" : "normal"
+}
