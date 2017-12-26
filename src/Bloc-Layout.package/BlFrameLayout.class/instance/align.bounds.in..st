@@ -8,9 +8,10 @@ align: anElement bounds: elementBounds in: theParentBounds
 	"a composite alignment"
 	alignment := anElement constraints frame alignment directed: self direction.
 	translation := alignment translationOf: elementBounds in: allowedBounds.
-	"fast return if there is no translation needed"
-	translation isZero
-		"this will take padding into account"
-		ifTrue: [			
-			^ elementBounds origin: allowedBounds origin extent: elementBounds extent ].
+
+	translation x isZero
+		ifTrue: [ translation := allowedBounds left @ translation y ].
+	translation y isZero
+		ifTrue: [ translation := translation x @ allowedBounds top ].
+
 	^ elementBounds translateBy: translation

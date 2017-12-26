@@ -26,4 +26,6 @@ removeAndRecycleScrap
 	
 	"invalidate infinite element if needed"
 	aScrapCount isZero
-		ifFalse: [ infiniteElement changed ]
+		ifFalse: [
+			self flag: 'Do we need to request layout here?'.
+			infiniteElement invalidate ]

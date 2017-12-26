@@ -1,0 +1,3 @@
+opening
+spaceBackground
+	^ Color white

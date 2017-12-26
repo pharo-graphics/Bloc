@@ -1,14 +1,17 @@
 {
-	"commentStamp" : "",
-	"super" : "BlElement",
-	"category" : "Bloc-Examples-Widgets",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlExample classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"thumbElement",
-		"trackElement"
+		"activated",
+		"skin",
+		"controller"
 	],
 	"name" : "BlExampleSwitchElement",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"traitcomposition" : "TBlExample",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Examples-Widgets"
 }

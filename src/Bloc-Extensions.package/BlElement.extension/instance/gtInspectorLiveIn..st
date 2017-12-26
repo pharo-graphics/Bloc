@@ -5,8 +5,8 @@ gtInspectorLiveIn: composite
 	^ composite bloc
 		title: 'Live' translated;
 		element: [ self ];
-		act: [ :pres | self debug: true. pres updateToolbar ]
-			icon: (Smalltalk ui icons iconNamed: #glamorousBug)
-			entitled: 'Debug me';
-		act: [ :pres | self debug: true. self allChildrenBreadthFirstDo: [ :anElement | anElement debug: true ] ] entitled: 'Debug all';
+		act: [ :pres | self space root background: (Color fromHexString: '162425') ] entitled: 'Dark background';
+		act: [ :pres | self space root background: (Color white) ] entitled: 'White background';
+		act: [ :pres | self debug: true ] entitled: 'Debug me';
+		act: [ :pres | self withAllChildrenBreadthFirst do: [ :anElement | anElement debug: true ] ] entitled: 'Debug all';
 		when: [ self topMostParent == self ]

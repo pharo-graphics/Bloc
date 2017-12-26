@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlExampleSwitchSkin",
+	"category" : "Bloc-Examples-Widgets",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"thumb"
+	],
+	"name" : "BlExampleSwitchSkinRadio",
+	"type" : "normal"
+}

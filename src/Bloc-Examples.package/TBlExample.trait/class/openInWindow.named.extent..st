@@ -5,7 +5,8 @@ openInWindow: anElement named: aTitleString extent: aPoint
 	aSpace := BlSpace new
 		extent: aPoint;
 		title: aTitleString.
-
+	
+	aSpace root background: self spaceBackground.
 	aSpace root addChild: anElement.
 
 	aSpace root addEventHandler:

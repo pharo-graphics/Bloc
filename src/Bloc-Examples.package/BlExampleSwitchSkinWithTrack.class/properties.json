@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "BlExampleSwitchSkin",
+	"category" : "Bloc-Examples-Widgets",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"track",
+		"thumb",
+		"cornerRadius"
+	],
+	"name" : "BlExampleSwitchSkinWithTrack",
+	"type" : "normal"
+}

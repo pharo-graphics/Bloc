@@ -1,4 +1,4 @@
-tests
+tests - alignment
 testOneExactChildAlignCenterInExactParent
 	| child |
 	child := self exact: 100@50.

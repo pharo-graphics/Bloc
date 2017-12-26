@@ -39,5 +39,6 @@ addChild: anElement at: anIndex disappearing: isDisappearing
 							aSmoothScroller onChildAttached: anElement ] ] ] ].
 			
 	anInfiniteConstraints pendingInvalidate ifTrue: [ 
-		anElementHolder itemElement changed.
+		self flag: 'Do we need to request layout here?'.
+		anElementHolder itemElement invalidate.
 		anInfiniteConstraints pendingInvalidate: false ]

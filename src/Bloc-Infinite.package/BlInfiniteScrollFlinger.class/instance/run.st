@@ -28,7 +28,9 @@ run
 			self runSmoothOn: aSmoothScroller with: aState.
 			
 			infiniteElement hasItemDecorations
-				ifTrue: [ infiniteElement changed ].
+				ifTrue: [
+					self flag: 'Do we need to request layout here?'.
+					infiniteElement invalidate ].
 
 			self runOverscrollOn: aScroller with: aState.
 			

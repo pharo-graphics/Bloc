@@ -1,4 +1,4 @@
 accessing
-layout: anObject
-	layout := anObject.
-	self changed
+layout: aBlLayout
+	layout := aBlLayout.
+	self requestLayout
