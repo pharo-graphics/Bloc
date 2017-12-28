@@ -1,3 +1,3 @@
 host space - accessing
-windowExtent: anExtent	
-	morphicWindow spaceExtent: anExtent
+windowExtent: anExtent
+	morph extent: anExtent

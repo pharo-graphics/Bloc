@@ -12,4 +12,4 @@ handleMouseUp: anEvent
 			yourself.
 		self enqueue: aBlEvent ].
 	
-	window takeKeyboardFocus.
+	morph takeKeyboardFocus.

@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/28/2017 23:51",
+	"commentStamp" : "",
 	"super" : "Morph",
 	"category" : "BlocHost-Morphic-Morphs",
 	"classinstvars" : [ ],
@@ -7,8 +7,10 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"form",
-		"hostSpace",
-		"defered"
+		"defered",
+		"eventHandler",
+		"preventResize",
+		"hostSpace"
 	],
 	"name" : "BlMorphicSpaceMorph",
 	"type" : "normal"

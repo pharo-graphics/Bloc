@@ -1,3 +1,3 @@
 converting
 globalMousePositionForEvent: anEvent
-	^ window position + anEvent position
+	^ morph position + anEvent position

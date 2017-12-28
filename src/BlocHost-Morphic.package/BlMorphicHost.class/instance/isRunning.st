@@ -1,3 +1,3 @@
-host - api
+host - testing
 isRunning
 	^ isRunning

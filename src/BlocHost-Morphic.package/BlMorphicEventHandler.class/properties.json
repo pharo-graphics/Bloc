@@ -6,7 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"window"
+		"morph"
 	],
 	"name" : "BlMorphicEventHandler",
 	"type" : "normal"

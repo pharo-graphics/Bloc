@@ -1,3 +1,5 @@
 accessing
-hostSpace: anObject
-	hostSpace := anObject
+hostSpace: aHostSpace
+	
+	hostSpace := aHostSpace.	
+	self initializeAnnouncement

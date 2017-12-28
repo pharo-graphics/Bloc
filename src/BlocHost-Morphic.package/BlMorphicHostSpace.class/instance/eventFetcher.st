@@ -1,4 +1,4 @@
-host space - events
+accessing
 eventFetcher
 	"Return event fetcher used to enqueue events that should be
 	processed in the beginning of every frame"

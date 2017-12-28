@@ -1,3 +1,3 @@
 host space - displaying
 close
-	morphicWindow close
+	self host containerMorph removeMorph: self morph

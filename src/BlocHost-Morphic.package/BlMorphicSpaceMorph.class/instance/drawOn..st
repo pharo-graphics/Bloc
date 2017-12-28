@@ -2,7 +2,7 @@ drawing
 drawOn: aCanvas
 	| spaceForm |
 	super drawOn: aCanvas.
-	
+
 	spaceForm := form.
 	spaceForm isNull
 		ifTrue: [ ^ self ].

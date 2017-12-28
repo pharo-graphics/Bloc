@@ -4,4 +4,4 @@ scaleFactor
 	On high dpi (retina) displays scaling factor is > 1"
 	<return: #Point>
 	
-	^ 1@1
+	^ 1.0 asPoint

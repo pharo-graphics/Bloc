@@ -1,0 +1,21 @@
+{
+	"classtraitcomposition" : "TBlHostSpace classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"morphicWindow",
+		"mirrowWindows",
+		"renderer",
+		"mutex",
+		"eventFetcher",
+		"space",
+		"host"
+	],
+	"name" : "BlMorphicWindowHostSpace",
+	"commentStamp" : "AliakseiSyrel 5/3/2017 18:05",
+	"super" : "Object",
+	"traitcomposition" : "TBlHostSpace",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BlocHost-Morphic-Host"
+}

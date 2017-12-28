@@ -1,3 +1,3 @@
 accessing
 window: aBlMorphicWindow
-	window := aBlMorphicWindow
+	self morph: aBlMorphicWindow

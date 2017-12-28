@@ -1,7 +1,6 @@
-driver selection
+testing
 priority
-	"I am a default host, hence return zero.
-	Morphic host is the most stable and will work on any machine"
+	"I have the lowest possible priority (I am also not supported)"
 	<return: #Number>
 
-	^ 0
+	^ Float infinity

@@ -3,4 +3,4 @@ position
 	"Return window's position in screen coordinates"
 	<return: #Point>
 	
-	^ morphicWindow position
+	^ self morph position

@@ -1,7 +1,4 @@
 host space - displaying
 show
-	| anExtent |
-	
-	anExtent := morphicWindow extent.
-	morphicWindow openInWorld.
-	morphicWindow extent: anExtent
+	self morph position: self host containerMorph position.
+	self host containerMorph addMorphBack: self morph

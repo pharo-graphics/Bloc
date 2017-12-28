@@ -5,4 +5,4 @@ windowExtent
 	on high dpi (retina) screens"
 	<return: #Point>
 
-	^ morphicWindow spaceExtent
+	^ morph extent
