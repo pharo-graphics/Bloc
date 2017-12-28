@@ -1,4 +1,4 @@
-accessing
+private - accessing
 constraints: aLayoutConstraints
 	"Set new layout constraints and request layout update.
 	aLayoutConstraints must not be nil"

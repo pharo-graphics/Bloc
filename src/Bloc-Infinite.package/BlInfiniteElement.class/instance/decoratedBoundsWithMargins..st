@@ -7,4 +7,4 @@ decoratedBoundsWithMargins: anElement
 	anInsets := anElement constraints infinite decorationInsets.
 	aMargin := anElement constraints margin.
 	
-	^ anInsets expand: (aMargin expand: anElement boundsInParent)
+	^ anInsets expand: (aMargin expand: anElement bounds inParent asRectangle)

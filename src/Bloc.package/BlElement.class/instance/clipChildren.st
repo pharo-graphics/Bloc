@@ -1,3 +1,3 @@
-accessing
+api - look
 clipChildren
 	^ misc clipChildren

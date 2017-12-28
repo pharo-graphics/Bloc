@@ -1,4 +1,4 @@
-accessing
+private - accessing
 constraints
 	"Return layout constraints object which is used by the layout strategy.
 	constraints can not be nil.

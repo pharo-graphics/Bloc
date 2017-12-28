@@ -1,3 +1,3 @@
-api - look
+private - accessing
 backgroundResizer: aBackgroundResizer
 	 backgroundResizer := aBackgroundResizer

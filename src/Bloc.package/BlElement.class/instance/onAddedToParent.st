@@ -1,4 +1,4 @@
-children hooks
+hooks - children
 onAddedToParent
 	"I am sent after I am added to other element which is my direct parent now.
 	You can access my parent by sending #parent to myself.

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 9/20/2017 09:45",
+	"super" : "BlElementBounds",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"bounds"
+	],
+	"name" : "BlElementComputedBounds",
+	"type" : "normal"
+}

@@ -34,9 +34,9 @@ testElAnyBounds
 	self assert: c2 boundsInLocal equals: ((0 @ 0) corner:(400@300)).
 	self assert: c1 boundsInLocal equals: ((0 @ 0) corner:(200@100)).
 	
-	self assert: g boundsInParent equals: ((0 @ 0) corner:(700@500)).
-	self assert: c2 boundsInParent equals: ((100 @ 100) corner:(500@400)).
-	self assert: c1 boundsInParent equals: ((100 @ 100) corner:(300@200)).
+	self assert: g bounds inParent asRectangle equals: ((0 @ 0) corner:(700@500)).
+	self assert: c2 bounds inParent asRectangle equals: ((100 @ 100) corner:(500@400)).
+	self assert: c1 bounds inParent asRectangle equals: ((100 @ 100) corner:(300@200)).
 	
 	self assert: g transformedBounds equals: ((0 @ 0) corner:(700@500)).
 	self assert: c2 transformedBounds equals: ((0 @ 0) corner:(400@300)).

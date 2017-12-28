@@ -1,4 +1,4 @@
-api - look
+private - accessing
 backgroundResizer
 	<return: #BlBackgroundResizer>
 

@@ -1,6 +1,6 @@
 api - bounds
 relocate: aPoint
-	"Request my position change in parent coordinates that will happen on the next frame or next layout pass triggered by #forceLayout.
+	"Request position change in parent coordinates that will happen on the next frame or next layout pass triggered by #forceLayout.
 
 	Note: I do not invalidate drawing bounds nor change actual position.
 	I only register an update request and ask my parent (if there is one) to recompute

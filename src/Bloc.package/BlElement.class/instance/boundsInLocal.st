@@ -1,3 +1,5 @@
 geometry bounds
 boundsInLocal
-	^ boundsCache boundsInLocal
+	<return: #Rectangle>
+
+	^ self bounds inLocal asRectangle

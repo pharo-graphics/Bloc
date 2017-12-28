@@ -1,4 +1,4 @@
-children hooks
+hooks - children
 onRemovedFromSceneGraph
 	"Sent after one of my parents or I was removed from scene graph, e.g. root element.
 	At this point #isAttachedToSceneGraph results in false.

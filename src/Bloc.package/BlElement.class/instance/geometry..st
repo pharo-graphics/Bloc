@@ -1,4 +1,4 @@
-accessing
+api - look
 geometry: aBlGeometry
 
 	"invalidate before changing geometry"

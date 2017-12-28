@@ -1,8 +1,9 @@
 geometry bounds
 inParent
 	<return: #BlElementBounds>
-	| anElementBounds |
-	anElementBounds := self inLocal.
-	anElementBounds referenceElement hasParent
-		ifFalse: [ self localBoundsToParent: anElementBounds bounds ].
-	^ anElementBounds inParent
+	
+	^ BlElementBoundsInParent new
+		originalElement: self referenceElement;
+		referenceElement: self referenceElement;
+		bounds: (self localBoundsToParent: (BlBounds new left: 0 top: 0 corner: self extent));
+		yourself
