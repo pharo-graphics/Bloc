@@ -2,4 +2,5 @@ initialization
 initialize
 	super initialize.
 
-	isRunning := false
+	isRunning := false.
+	containerMorph := Morph new
