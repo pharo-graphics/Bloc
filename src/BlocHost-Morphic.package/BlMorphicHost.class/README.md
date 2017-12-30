@@ -11,7 +11,7 @@ Example:
 morph := Morph new.
 "container morph could also have #spaceFill resizing"
 morph extent: 700@700.
-"set layout policy to container morph in order to for bloc space to fill space"
+"set layout policy to container morph in order for bloc space to fill space"
 morph layoutPolicy: TableLayout new.
 
 host := BlMorphicHost new.

@@ -1,3 +1,3 @@
 sending
 sendTo: anObject
-	anObject elementPositionChangedEvent: self
+	anObject elementPositionChanged: self

@@ -1,4 +1,4 @@
 element handlers
-elementPositionChangedEvent: anEvent
+elementPositionChanged: anEvent
 
 	self selection relocate: anEvent target positionInSpace - self selection padding topLeft

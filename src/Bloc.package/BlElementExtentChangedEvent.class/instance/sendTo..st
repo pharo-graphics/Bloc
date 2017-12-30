@@ -1,3 +1,3 @@
 sending
 sendTo: anObject
-	anObject elementExtentChangedEvent: self
+	anObject elementExtentChanged: self

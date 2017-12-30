@@ -1,3 +1,3 @@
 sending
 sendTo: anObject
-	anObject elementAddedEvent: self
+	anObject elementAdded: self

@@ -9,5 +9,9 @@ spaceShown
 
 	aSpace show.
 	self assert: spaceShown equals: 1.
+
+	aSpace close.
+	self assert: spaceShown equals: 1.
+	
 	
 	^ aSpace

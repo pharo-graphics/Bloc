@@ -1,4 +1,4 @@
 element handlers
-elementExtentChangedEvent: anEvent
+elementExtentChanged: anEvent
 
 	self selection size: self selection selectionExtent

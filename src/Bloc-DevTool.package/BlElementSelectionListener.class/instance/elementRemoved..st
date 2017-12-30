@@ -1,4 +1,4 @@
 element handlers
-elementRemovedEvent: anEvent
+elementRemoved: anEvent
 
 	self selection close
