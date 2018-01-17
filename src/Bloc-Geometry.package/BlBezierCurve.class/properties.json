@@ -6,7 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"width",
 		"controlPoints"
 	],
 	"name" : "BlBezierCurve",

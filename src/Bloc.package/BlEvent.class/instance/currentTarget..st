@@ -1,3 +1,3 @@
-accessing
-currentTarget: anObject
-	currentTarget := anObject
+private - accessing
+currentTarget: aTBlEventTarget
+	currentTarget := aTBlEventTarget

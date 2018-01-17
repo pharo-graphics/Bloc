@@ -7,7 +7,7 @@ handleKeystroke: aMorphicEvent
 		scanCode: aMorphicEvent scanCode;
 		
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: Time millisecondClockValue;
+		timestamp: DateAndTime now;
 		position: aMorphicEvent position;
 		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
 	

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlHandlerRegistry",
+	"category" : "Bloc-EventHandling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"announcer"
+	],
+	"name" : "BlHandlerAnnouncerRegistry",
+	"type" : "normal"
+}

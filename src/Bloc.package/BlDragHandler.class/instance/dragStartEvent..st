@@ -1,9 +1,7 @@
 dnd handlers
-dragStartEvent: anEvent	
-	"drag start position in parent"
-	dragStartPosition := anEvent currentTarget globalPointToParent: anEvent position.
+dragStartEvent: anEvent
+	anEvent consumed: true.
 
-	"element position in parent"
-	originalPosition := anEvent currentTarget position.
+	delegate items: { BlDragItem new sourceElement: anEvent currentTarget }.
 
-	anEvent consumed: true
+	anEvent currentTarget space dispatchEvent: (BlSpaceDragLiftEvent new delegate: delegate; position: anEvent position)

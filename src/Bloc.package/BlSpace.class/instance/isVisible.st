@@ -1,4 +1,5 @@
 testing
 isVisible
-	self hostSpace ifNotNil: [ ^ self hostSpace isVisible ].
-	^ false
+	^ self hasHostSpace
+		ifTrue: [ self hostSpace isVisible ]
+		ifFalse: [ false ]

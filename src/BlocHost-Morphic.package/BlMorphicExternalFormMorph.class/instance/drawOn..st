@@ -1,7 +1,6 @@
 drawing
 drawOn: aCanvas
 	| spaceForm |
-	super drawOn: aCanvas.
 	
 	spaceForm := form.
 	spaceForm isNull
@@ -9,4 +8,6 @@ drawOn: aCanvas
 	hostSpace ifNotNil: [ 
 		hostSpace lock critical: [
 			aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
-				aClippedCanvas drawImage: spaceForm at: self position ] ] ]
+				aClippedCanvas drawImage: spaceForm at: self position ]
+	
+	] ]

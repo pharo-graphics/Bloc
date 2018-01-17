@@ -2,4 +2,4 @@ instance creation
 dragHandler
 	<gtExample>
 
-	^ BlDragHandler new
+	^ BlPullHandler new

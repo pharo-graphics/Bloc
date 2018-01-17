@@ -1,6 +1,6 @@
-accessing
+api - accessing
 handlers
 	"Return an immutable collection of all registered event handlers"
-	<return: #Array>
+	<return: #Array of: #TBlEventHandler>
 
-	^ handlers
+	^ self subclassResponsibility

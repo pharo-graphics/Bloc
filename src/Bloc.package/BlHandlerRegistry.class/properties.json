@@ -1,11 +1,9 @@
 {
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
-	"instvars" : [
-		"handlers"
-	],
+	"instvars" : [ ],
 	"name" : "BlHandlerRegistry",
-	"commentStamp" : "AliakseiSyrel 1/20/2017 19:49",
+	"commentStamp" : "AliakseiSyrel 1/17/2018 19:50",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",

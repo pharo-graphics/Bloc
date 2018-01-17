@@ -1,0 +1,1 @@
+I contain examples of event handler registry with Array as its backend

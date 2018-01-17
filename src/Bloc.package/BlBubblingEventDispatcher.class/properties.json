@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BlSimpleEventDispatcher",
+	"super" : "BlDirectEventDispatcher",
 	"category" : "Bloc-EventHandling",
 	"classinstvars" : [ ],
 	"pools" : [ ],

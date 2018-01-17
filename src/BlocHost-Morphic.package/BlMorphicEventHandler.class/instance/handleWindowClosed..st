@@ -3,6 +3,6 @@ handleWindowClosed: aMorphicEvent
 	| aBlEvent |
 	
 	aBlEvent := BlSpaceCloseRequest new
-		timestamp: Time millisecondClockValue.
+		timestamp: DateAndTime now.
 	
 	self enqueue: aBlEvent

@@ -11,7 +11,7 @@ example_2500El_in_1800x960
 					relocate: currentPosition;
 					background: Color random;
 					border: (BlBorder paint: Color random width: 2);
-					addEventHandler: (BlOnMouseOverHandler do:[:e| e target background: Color random]);
+					when: BlMouseOverEvent do:[:e| e target background: Color random];
 					yourself.
 			sp root addChild: s
   ]].

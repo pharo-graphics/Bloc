@@ -1,3 +1,3 @@
 initialization
 defaultEventDispatcher
-	^ BlSimpleEventDispatcher on: self
+	^ BlDirectEventDispatcher on: self

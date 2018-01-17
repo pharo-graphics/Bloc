@@ -1,6 +1,6 @@
 pulse
 ensureSession
-	"Checke current session and perform required operations if it changed since last frame"
+	"Check current session and perform required operations if it changed since last frame"
 
 	session == Smalltalk session
 		ifTrue: [ ^ self ].

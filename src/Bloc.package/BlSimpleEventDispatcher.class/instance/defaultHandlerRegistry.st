@@ -1,3 +1,0 @@
-initialization
-defaultHandlerRegistry
-	^ BlHandlerRegistry new

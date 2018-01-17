@@ -6,7 +6,7 @@ mouseDownOnNodesBelowThePoint
 	theEvents := OrderedCollection new.
 
 	mouseEvent := BlMouseDownEvent new.
-	mouseEvent timestamp: Time millisecondClockValue.
+	mouseEvent timestamp: DateAndTime now.
 	mouseEvent button: BlMouseEvent primaryButton.
 	mouseEvent position: 20@20.
 

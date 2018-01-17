@@ -1,6 +1,6 @@
 *Bloc-Extensions
 gtInspectorShortcutsIn: composite
-	<gtInspectorPresentationOrder: 90>  
+	<gtInspectorPresentationOrder: 90>
 	composite fastTable 
 		title: 'Shortcuts' translated;
 		display: [ self shortcuts ];

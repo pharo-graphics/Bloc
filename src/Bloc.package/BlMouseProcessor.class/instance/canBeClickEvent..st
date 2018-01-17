@@ -1,5 +1,5 @@
 event testing
 canBeClickEvent: aMouseUpEvent
 	^ dndInProgress not
-		and: [ (lastMouseDownEvent isNotNil and: [ lastMouseDownEvent primaryButtonPressed ])
-				and: [ aMouseUpEvent target = lastMouseDownEvent target ] ]
+		and: [ (previousMouseDownEvent isNotNil and: [ previousMouseDownEvent primaryButtonPressed ])
+				and: [ aMouseUpEvent target = previousMouseDownEvent target ] ]

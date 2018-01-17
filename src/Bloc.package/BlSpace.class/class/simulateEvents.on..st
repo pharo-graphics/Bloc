@@ -7,7 +7,7 @@ simulateEvents: aCollectionOfEvents on: anElement
 	coordiantes of the provided element"
 	
 	"we should update timestamps"
-	aCollectionOfEvents do: [ :anEvent | anEvent timestamp: Time millisecondClockValue ].
+	aCollectionOfEvents do: [ :anEvent | anEvent timestamp: DateAndTime now ].
 	
 	anElement isAttachedToSceneGraph
 		ifTrue: [

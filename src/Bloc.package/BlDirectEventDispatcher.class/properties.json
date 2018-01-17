@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/6/2018 17:55",
+	"super" : "BlEventDispatcher",
+	"category" : "Bloc-EventHandling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"owner",
+		"filters",
+		"handlers",
+		"shortcutHandler"
+	],
+	"name" : "BlDirectEventDispatcher",
+	"type" : "normal"
+}

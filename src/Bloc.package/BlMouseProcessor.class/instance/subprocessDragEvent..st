@@ -1,9 +1,10 @@
 event processing
 subprocessDragEvent: anEvent
-	(self canBeDragEvent: anEvent)
+	(self canStartDrag: anEvent)
 		ifFalse: [ ^ self ].
+
 	currentDragTarget
-		ifNil: [ currentDragTarget := lastMouseDownEvent target.
+		ifNil: [ currentDragTarget := previousMouseDownEvent target.
 			lastOverTarget := nil.
 			dragStartMask := isMouseStillDown.
 			self fireAsDragStartEvent: anEvent.

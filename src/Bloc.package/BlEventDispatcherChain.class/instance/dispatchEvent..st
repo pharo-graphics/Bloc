@@ -1,7 +1,10 @@
-event managing
+api - event managing
 dispatchEvent: anEvent
-	"Dispatch a given event though the whole dispatcher chain"
-	self hasNextEventDispatcher
-		ifFalse: [ ^ anEvent ].
+	"Dispatch a given event through the whole dispatcher chain"
+	| aNextChain |
 
-	^ self nextEventDispatcher dispatchEvent: anEvent chain: self
+	aNextChain := self hasNext
+		ifTrue: [ self next ]
+		ifFalse: [ self class empty ].
+
+	^ self dispatcher dispatchEvent: anEvent next: aNextChain

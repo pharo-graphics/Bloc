@@ -1,0 +1,13 @@
+{
+	"classtraitcomposition" : "TBlHandlerRegistryExamples classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlHandlerArrayRegistryExamples",
+	"commentStamp" : "AliakseiSyrel 1/17/2018 21:01",
+	"super" : "Object",
+	"traitcomposition" : "TBlHandlerRegistryExamples",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Examples-EventHandling"
+}

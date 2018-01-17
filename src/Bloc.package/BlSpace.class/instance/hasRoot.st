@@ -1,3 +1,0 @@
-testing
-hasRoot
-	^ root isNotNil

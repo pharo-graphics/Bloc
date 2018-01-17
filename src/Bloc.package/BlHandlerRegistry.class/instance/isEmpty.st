@@ -1,6 +1,6 @@
-testing
+api - testing
 isEmpty
 	"Return true if registry is empty (there are no handlers), false otherwise"
 	<return: #Boolean>
 
-	^ handlers isEmpty
+	^ self numberOfHandlers isZero

@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BlBaseProcessor",
+	"super" : "BlBaseEventProcessor",
 	"category" : "Bloc-Space-Support",
 	"classinstvars" : [ ],
 	"pools" : [ ],

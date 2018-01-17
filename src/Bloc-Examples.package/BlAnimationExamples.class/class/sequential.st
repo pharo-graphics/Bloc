@@ -7,7 +7,7 @@ sequential
 		background: (BlBackground paint: Color blue);
 		size: 100 @ 100;
 		relocate: 100 @ 100.	
-			
+	
 	translation := (BlTransformAnimation translate: 300 @ 300)
 		easing: BlEasing bounceOut;
 		duration: 2 seconds;

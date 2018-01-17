@@ -1,3 +1,3 @@
 accessing
 dblClickDelay
-	^ 300
+	^ 300 milliSeconds

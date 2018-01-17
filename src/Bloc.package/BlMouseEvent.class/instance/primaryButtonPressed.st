@@ -1,3 +1,3 @@
 testing
 primaryButtonPressed
-	^ button = self class primaryButton
+	^ button = BlMouseButton primary

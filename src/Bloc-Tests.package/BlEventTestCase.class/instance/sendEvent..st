@@ -1,4 +1,4 @@
 event firing
 sendEvent: anEvent
-	anEvent timestamp: Time millisecondClockValue.
+	anEvent timestamp: DateAndTime now.
 	space eventListener handleEvent: anEvent

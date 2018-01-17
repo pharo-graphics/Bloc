@@ -1,4 +1,4 @@
-events
+api - event managing
 handleEvent: aShortcutEvent
 	| matchingShortcuts |
 
@@ -14,6 +14,6 @@ handleEvent: aShortcutEvent
 	matchingShortcuts
 		ifNotEmpty: [ :theShortcuts |
 			| aShortcut |
-			aShortcut := matchingShortcuts first key.
+			aShortcut := theShortcuts first key.
 			aShortcut action cull: aShortcut.
 			aShortcutEvent consumed: true ]

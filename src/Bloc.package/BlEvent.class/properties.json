@@ -6,7 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"source",
 		"target",
 		"currentTarget",
 		"timestamp",

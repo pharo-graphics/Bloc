@@ -1,3 +1,3 @@
 testing
 isFocused
-	^ focused
+	^ self focused

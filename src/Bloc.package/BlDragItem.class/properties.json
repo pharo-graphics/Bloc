@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/1/2018 17:07",
+	"super" : "Object",
+	"category" : "Bloc-Utilities - Drag&Drop",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"sourceElement",
+		"previewElement"
+	],
+	"name" : "BlDragItem",
+	"type" : "normal"
+}

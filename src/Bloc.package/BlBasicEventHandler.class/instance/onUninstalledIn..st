@@ -1,2 +1,2 @@
-installation
+api - hooks
 onUninstalledIn: anObject

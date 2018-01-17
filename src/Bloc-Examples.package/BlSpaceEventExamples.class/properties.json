@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 12/25/2017 13:57",
 	"super" : "Object",
-	"category" : "Bloc-Examples-Events",
+	"category" : "Bloc-Examples-Event",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

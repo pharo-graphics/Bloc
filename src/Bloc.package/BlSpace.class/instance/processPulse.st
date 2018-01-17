@@ -9,7 +9,7 @@ processPulse
 	self
 		dispatchTimeEvent: BlSpaceEventProcessEndEvent
 		during: [ self hasHostSpace ifTrue: [ self processEvents ] ].
-	
+
 	self pulseRequested
 		ifFalse: [ ^ self ].
 	

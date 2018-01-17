@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/1/2018 17:03",
+	"super" : "BlElementEventListener",
+	"category" : "Bloc-Utilities - Drag&Drop",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"originalPosition",
+		"dragStartPosition"
+	],
+	"name" : "BlPullHandler",
+	"type" : "normal"
+}

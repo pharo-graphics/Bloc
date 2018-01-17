@@ -1,4 +1,4 @@
 mouse handlers
 mouseDownEvent: anEvent
-	self mouseProcessor processMouseDown: anEvent.
-	self focusProcessor processMouseDown: anEvent
+	self mouseProcessor handleMouseDown: anEvent.
+	self focusProcessor handleMouseDown: anEvent

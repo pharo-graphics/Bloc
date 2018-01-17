@@ -1,7 +1,9 @@
-enumerating
+api - enumerating
 anySatisfy: aBlock
-	"Evaluate aBlock with registered handlers.
-	If aBlock returns true for any element return true, otherwise return false."
+	"Evaluate aBlock with every registered event handler.
+	If aBlock returns true for any element return true.
+	Otherwise return false."
 	<return: #Boolean>
 
-	^ handlers anySatisfy: aBlock
+	self do: [ :aHandler | (aBlock value: aHandler) ifTrue: [ ^ true ] ].
+	^ false

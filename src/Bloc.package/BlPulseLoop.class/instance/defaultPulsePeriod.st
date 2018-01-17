@@ -1,3 +1,3 @@
 period
 defaultPulsePeriod
-	^ 16
+	^ 16 milliseconds

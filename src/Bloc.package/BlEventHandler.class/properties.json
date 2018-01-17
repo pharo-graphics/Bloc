@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 1/5/2018 23:39",
 	"super" : "BlBasicEventHandler",
 	"category" : "Bloc-EventHandling",
 	"classinstvars" : [ ],

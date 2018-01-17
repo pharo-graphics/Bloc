@@ -10,6 +10,6 @@ handleMouseWheel: anEvent
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			direction: aMorphicEvent direction;
-			timestamp: Time millisecondClockValue.
+			timestamp: DateAndTime now.
 		
 		self enqueue: aBlEvent ]

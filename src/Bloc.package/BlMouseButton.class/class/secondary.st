@@ -1,0 +1,3 @@
+accessing
+secondary
+	^ BlMouseSecondaryButton uniqueInstance

@@ -1,11 +1,11 @@
 converting
 convertButtonFromMouseButtonEvent: aMorphicEvent
+	<return: #BlMouseButton>
 
 	aMorphicEvent redButtonChanged
-		ifTrue: [ ^ BlMouseEvent primaryButton ].
+		ifTrue: [ ^ BlMouseButton primary ].
 	aMorphicEvent blueButtonChanged
-		ifTrue: [ ^ BlMouseEvent middleButton ].
+		ifTrue: [ ^ BlMouseButton middle ].
 	aMorphicEvent yellowButtonChanged
-		ifTrue: [ ^ BlMouseEvent secondaryButton ].
-		
-	^ aMorphicEvent whichButton
+		ifTrue: [ ^ BlMouseButton secondary ].
+	^ BlMouseButton code: aMorphicEvent whichButton

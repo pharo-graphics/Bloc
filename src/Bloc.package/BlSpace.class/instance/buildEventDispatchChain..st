@@ -1,3 +1,5 @@
 event management
-buildEventDispatchChain: aTail
-	^ aTail
+buildEventDispatchChain: aBlEventDispatcherChain
+	<return: #BlEventDispatcherChain>
+
+	^ aBlEventDispatcherChain

@@ -1,22 +1,18 @@
 event processing
 subprocessDragEnterExitEvent: aMouseEvent
 	| newEnteredTargets newExitedTargets |
-	currentDragTarget ifNil:[^ self].
+
+	self 
+		assert: [ currentDragTarget isNotNil ]
+		description: [ 'Can not process drag mouse event as enter / exit when there is no dragged element' ].
+	
 	currentEnteredTargets := self fillTargetHierarchy: aMouseEvent target.
+	
 	lastOverTarget = aMouseEvent target ifFalse:[
-		
-			"fire dragleave events"
-			newExitedTargets := lastEnteredTargets
-				reject: [ :let | currentEnteredTargets includes: let ].
-			self fireAsDragLeaveEvent: aMouseEvent targets: newExitedTargets.
-			
-			"fire dragenter events"
-			 newEnteredTargets := currentEnteredTargets
-				reject: [ :cet | lastEnteredTargets includes: cet ].
-			self fireAsDragEnterEvent: aMouseEvent targets: newEnteredTargets.
-			
-			 ].
-			"fire dragover event to current target"
-			self fireAsDragOverEvent: aMouseEvent.
-	
-	
+		newExitedTargets := lastEnteredTargets reject: [ :anElement | currentEnteredTargets includes: anElement ].
+		newEnteredTargets := currentEnteredTargets reject: [ :anElement | lastEnteredTargets includes: anElement ].
+		self fireAsDragLeaveEvent: aMouseEvent targets: newExitedTargets.
+		self fireAsDragEnterEvent: aMouseEvent targets: newEnteredTargets ].
+
+	"fire dragover event to current target"
+	self fireAsDragOverEvent: aMouseEvent

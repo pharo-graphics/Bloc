@@ -8,7 +8,7 @@ handleMouseDown: anEvent
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: (self convertButtonFromMouseButtonEvent: aMorphicEvent);
-			timestamp: Time millisecondClockValue
+			timestamp: DateAndTime now;
 			yourself.
 		self enqueue: aBlEvent ].
 	

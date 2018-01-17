@@ -12,4 +12,4 @@ initialize
 	running := false.
 	
 	actionHandlers := OrderedCollection new.
-	eventDispatcher := BlSimpleEventDispatcher on: self
+	eventDispatcher := BlDirectEventDispatcher on: self

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/17/2018 21:39",
+	"super" : "BlEventHandler",
+	"category" : "Bloc-Examples-EventHandling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"counter"
+	],
+	"name" : "BlExampleLoggingEventHandler",
+	"type" : "normal"
+}

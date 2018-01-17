@@ -1,2 +1,2 @@
-events
+api - event managing
 handleEvent: anEvent

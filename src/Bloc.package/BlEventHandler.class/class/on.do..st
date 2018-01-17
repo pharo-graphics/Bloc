@@ -1,4 +1,4 @@
-as yet unclassified
+instance creation
 on: anEventClass do: aBlock
 	^ self new
 		eventClass: anEventClass;

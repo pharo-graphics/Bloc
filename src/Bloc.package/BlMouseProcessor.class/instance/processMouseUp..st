@@ -1,16 +1,12 @@
-event processing entrypoint
+mouse up
 processMouseUp: aMouseUpEvent
-	"DragEnd, Simple click and Dbl click"
+	
+	self fireEvent: aMouseUpEvent.
+	
+	self updateCursorFrom: aMouseUpEvent target.
 
-	self preProcess: aMouseUpEvent.
-	"stop still down"
-	isMouseStillDown := isMouseStillDown bitClear: aMouseUpEvent button.
-	
-	"dragend"
-	self subprocessDragEndEvent: aMouseUpEvent.
-	
-	"click or dblclick"
-	(self canBeClickEvent: aMouseUpEvent) ifTrue:[
+	(self canBeClickEvent: aMouseUpEvent) ifTrue: [
+		
 		(self canBeDblClickEvent: aMouseUpEvent)
 			ifTrue: [ 
 				lastClickEvent := nil.
@@ -18,8 +14,4 @@ processMouseUp: aMouseUpEvent
 			ifFalse:[
 				lastClickEvent := aMouseUpEvent.
 				self fireEvent: aMouseUpEvent asClickEvent.
-				 ] ].
-	
-	
-	
-	self postProcess: aMouseUpEvent
+			] ]

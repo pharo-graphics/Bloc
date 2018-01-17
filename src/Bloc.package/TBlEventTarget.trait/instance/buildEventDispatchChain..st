@@ -1,7 +1,13 @@
 event management
-buildEventDispatchChain: aTail
-	| aResultTail |
-	aResultTail := aTail.
-	aResultTail addFirst: self eventDispatcher.
-	self nextEventTarget ifNotNil: [ :next | aResultTail := next buildEventDispatchChain: aTail ].
-	^ aResultTail
+buildEventDispatchChain: aBlEventDispatcherChain
+	"Note: Dispatcher chain is persistent - I return a new instance"
+	<return: #BlEventDispatcherChain>
+	| aResultChain |
+
+	aResultChain := aBlEventDispatcherChain.
+	aResultChain := aResultChain withNext: self eventDispatcher.
+
+	self hasNextEventTarget
+		ifTrue: [ aResultChain := self nextEventTarget buildEventDispatchChain: aResultChain ].
+
+	^ aResultChain

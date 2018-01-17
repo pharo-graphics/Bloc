@@ -3,6 +3,6 @@ handleWindowResize: aMorphicEvent
 	| aBlEvent |
 	aBlEvent := BlSpaceResizeEvent new
 		extent: aMorphicEvent width @ aMorphicEvent height;
-		timestamp: Time millisecondClockValue;
+		timestamp: DateAndTime now;
 		yourself.
 	self enqueue: aBlEvent

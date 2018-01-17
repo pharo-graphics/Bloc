@@ -2,11 +2,13 @@
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"currentIndex"
+		"next",
+		"previous",
+		"dispatcher"
 	],
 	"name" : "BlEventDispatcherChain",
-	"commentStamp" : "",
-	"super" : "OrderedCollection",
+	"commentStamp" : "AliakseiSyrel 1/5/2018 16:03",
+	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],

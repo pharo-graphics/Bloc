@@ -1,22 +1,23 @@
 {
 	"commentStamp" : "GlennCavarle 6/22/2016 16:43",
-	"super" : "BlBaseProcessor",
+	"super" : "BlBaseEventProcessor",
 	"category" : "Bloc-Space-Support",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"lastMouseEvent",
 		"lastEnteredTargets",
 		"lastOverTarget",
-		"lastMouseDownEvent",
 		"lastClickEvent",
 		"isMouseStillDown",
 		"currentDragTarget",
 		"lastMouseTarget",
 		"dndInProgress",
 		"currentEnteredTargets",
-		"dragStartMask"
+		"dragStartMask",
+		"pressedButtons",
+		"dragState",
+		"previousMouseDownEvent"
 	],
 	"name" : "BlMouseProcessor",
 	"type" : "normal"

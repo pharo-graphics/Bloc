@@ -8,6 +8,6 @@ handleMouseMove: anEvent
 			delta: aMorphicEvent position - (self window pointToSpace: aMorphicEvent startPoint);
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			timestamp: Time millisecondClockValue
+			timestamp: DateAndTime now;
 			yourself.
 		self enqueue: aBlEvent ]

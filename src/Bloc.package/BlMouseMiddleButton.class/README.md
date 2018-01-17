@@ -1,0 +1,1 @@
+I am a middle mouse button. Often can be triggered by mouse wheel click

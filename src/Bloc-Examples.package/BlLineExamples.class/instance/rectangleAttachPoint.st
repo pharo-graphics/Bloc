@@ -6,4 +6,4 @@ rectangleAttachPoint
 		size: 75@75;
 		background: (Color blue alpha: 0.3);
 		border: BlBorder empty;
-		addEventHandler: BlDragHandler new
+		addEventHandler: BlPullHandler new
