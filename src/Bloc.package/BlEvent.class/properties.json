@@ -10,7 +10,8 @@
 		"currentTarget",
 		"timestamp",
 		"canBePropagated",
-		"consumed"
+		"consumed",
+		"traversedTargets"
 	],
 	"name" : "BlEvent",
 	"type" : "normal"

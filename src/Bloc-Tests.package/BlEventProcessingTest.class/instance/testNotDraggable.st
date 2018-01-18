@@ -1,9 +1,5 @@
 tests
-testDragCreation
-	
-	"make child draggable"
-	self child addEventHandlerOn: BlDragStartEvent do: [ :anEvent | anEvent consumed: true ].
-
+testNotDraggable
 	self sendInsideTargetEvent: BlMouseDownEvent primary.
 	self assertFiredEventIs: BlMouseDownEvent target: self child withPropagation: true.
 	
@@ -16,7 +12,10 @@ testDragCreation
 	self sendOutsideTargetEvent: BlMouseMoveEvent primary.
 	self assertFiredEventIs: BlDragStartEvent target: self child withPropagation: true.
 	
+	self assertFiredEventIs: BlMouseOutEvent target: self child withPropagation: true.
+	self assertFiredEventIs: BlMouseLeaveEvent target: self child withPropagation: false.
+	self assertFiredEventIs: BlMouseOverEvent target: self root withPropagation: true.
+	self assertFiredEventIs: BlMouseMoveEvent target: self root withPropagation: true.
+		
 	self sendOutsideTargetEvent: BlMouseUpEvent primary.
-
-	self assertFiredEventIs: BlDragEndEvent target: self child withPropagation: true.
-	self assertFiredEventIs: BlDropEvent target: self root withPropagation: true
+	self assertFiredEventIs: BlMouseUpEvent target: self root withPropagation: true

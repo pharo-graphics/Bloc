@@ -1,4 +1,4 @@
-as yet unclassified
+event management
 fireEvent: anEvent
 	<return: #BlEvent>
 

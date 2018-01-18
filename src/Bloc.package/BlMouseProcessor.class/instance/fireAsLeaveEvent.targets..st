@@ -1,5 +1,5 @@
 event firing
-fireAsExitEvent: anEvent targets: aCollection
+fireAsLeaveEvent: anEvent targets: aCollection
 	aCollection
 		do:	[ :t | 
 			self dispatchEvent:

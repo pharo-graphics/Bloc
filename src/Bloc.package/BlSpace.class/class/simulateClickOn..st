@@ -11,6 +11,6 @@ simulateClickOn: anElement
 	"we simulate a click with a sequence of low level mouse down/up events"
 	self
 		simulateEvents: {
-			BlMouseDownEvent new button: BlMouseEvent primaryButton; position: aPosition.
-			BlMouseUpEvent new button: BlMouseEvent primaryButton; position: aPosition }
+			BlMouseDownEvent primary position: aPosition.
+			BlMouseUpEvent primary position: aPosition }
 		on: anElement

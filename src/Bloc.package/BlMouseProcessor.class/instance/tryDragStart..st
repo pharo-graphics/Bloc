@@ -15,7 +15,7 @@ tryDragStart: aMouseMoveEvent
 	aDragStartEvent := self fireEvent: aDragStartEvent.
 	
 	currentDragTarget := aDragStartEvent isConsumed
-		ifTrue: [ aDragTarget ]
+		ifTrue: [ aDragStartEvent currentTarget ]
 		ifFalse: [ nil ].
 
 	^ dndInProgress := aDragStartEvent isConsumed
