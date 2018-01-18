@@ -1,4 +1,4 @@
-mouse up
+mouse drag
 processDragEnd: aMouseUpEvent
 
 	self

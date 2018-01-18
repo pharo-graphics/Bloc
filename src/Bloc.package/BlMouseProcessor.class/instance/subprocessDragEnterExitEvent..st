@@ -1,4 +1,4 @@
-event processing
+mouse drag
 subprocessDragEnterExitEvent: aMouseEvent
 	| newEnteredTargets newExitedTargets |
 

@@ -1,17 +1,21 @@
 mouse move
 handleMouseMove: aMouseMoveEvent
-	| aTargetElement isDragStarted |
+	| aTargetElement shouldTryDragStart |
 	"picking and mouse move"
-
-	isDragStarted := self isDragging
-		ifFalse: [ dndInProgress := (self canStartDrag: aMouseMoveEvent) ]
-		ifTrue: [ true ].
-
+	
 	aTargetElement := self processPicking: aMouseMoveEvent.
 	aMouseMoveEvent target: aTargetElement.
 
+	shouldTryDragStart := self isDragging
+		ifFalse: [ (self canStartDrag: aMouseMoveEvent) ]
+		ifTrue: [ false ].
+		
 	self isDragging
-		ifFalse: [ self processMouseMove: aMouseMoveEvent ]
-		ifTrue: [ isDragStarted
-			ifTrue: [ self processDragStart: aMouseMoveEvent ]
-			ifFalse: [ self processDragMove: aMouseMoveEvent ] ]
+		"we are dragging, handle it as drag move"
+		ifTrue: [ self processDragMove: aMouseMoveEvent ]
+		ifFalse: [ shouldTryDragStart
+			ifTrue: [ (self tryDragStart: aMouseMoveEvent)
+				"drag start was not handled, process as basic mouse move"
+				ifFalse: [ self processMouseMove: aMouseMoveEvent ] ]
+			"no need to even try to start a drag"
+			ifFalse: [ self processMouseMove: aMouseMoveEvent ] ]

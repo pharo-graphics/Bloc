@@ -1,3 +1,5 @@
 event firing
 fireEvent: anEvent
-	BlEvent fireEvent: anEvent
+	<return: #BlEvent>
+
+	^ BlEvent fireEvent: anEvent

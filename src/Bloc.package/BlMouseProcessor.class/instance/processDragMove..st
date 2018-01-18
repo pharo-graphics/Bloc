@@ -1,11 +1,8 @@
-mouse move
+mouse drag
 processDragMove: aMouseMoveEvent
 
 	"check drag"
 	self fireAsDragEvent: aMouseMoveEvent.
-
-	"exit/enter/over/out/dragenter/dragleave events management + focus"
-	self processMouseEnterExitEvent: aMouseMoveEvent.
 
 	"dragstart/drag events management"
 	currentDragTarget ifNotNil: [ self subprocessDragEnterExitEvent: aMouseMoveEvent ].

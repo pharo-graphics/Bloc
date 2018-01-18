@@ -1,3 +1,5 @@
 as yet unclassified
-fireEvent: anEvent 
-	self fireEvent: anEvent target: anEvent target
+fireEvent: anEvent
+	<return: #BlEvent>
+
+	^ self fireEvent: anEvent target: anEvent target
