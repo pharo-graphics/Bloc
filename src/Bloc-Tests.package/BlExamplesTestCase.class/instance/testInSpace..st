@@ -10,7 +10,7 @@ testInSpace: anElement
 
 	aSpace := BlTestAutoClosingSpace new.
 	aSpace root addChild: aTopMostElement.
-	
+
 	aSpace
 		addEventHandlerOn: BlSpaceClosedEvent
 		do: [ semaphore signal ].

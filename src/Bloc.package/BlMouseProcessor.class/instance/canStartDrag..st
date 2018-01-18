@@ -3,5 +3,6 @@ canStartDrag: aMouseMoveEvent
 	<return: #Boolean>
 
 	^ aMouseMoveEvent primaryButtonPressed
-		and: [ previousMouseDownEvent primaryButtonPressed
-			and: [ (aMouseMoveEvent position - previousMouseDownEvent position) r > self startDragThreshold ] ]
+		and: [ previousMouseDownEvent isNotNil
+			and: [ previousMouseDownEvent primaryButtonPressed
+				and: [ (aMouseMoveEvent position - previousMouseDownEvent position) r > self startDragThreshold ] ] ]

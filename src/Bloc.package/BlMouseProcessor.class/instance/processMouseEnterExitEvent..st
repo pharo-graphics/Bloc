@@ -1,10 +1,10 @@
-event processing
-subprocessEnterExitEvent: aMouseEvent
+mouse move
+processMouseEnterExitEvent: aMouseEvent
 	| newEnteredTargets newExitedTargets |
-	"currentDragTarget ifNotNil:[^ self]."
+
 	currentEnteredTargets := self fillTargetHierarchy: aMouseEvent target.
+	
 	lastOverTarget = aMouseEvent target ifFalse:[
-		
 			"fire exit events"
 			newExitedTargets := lastEnteredTargets
 				reject: [ :let | currentEnteredTargets includes: let ].
@@ -21,6 +21,7 @@ subprocessEnterExitEvent: aMouseEvent
 				
 			"fire dragover event to current target"
 			self fireAsMouseOverEvent: aMouseEvent.
-			 ].
+	].
 	
-	
+	lastOverTarget := aMouseEvent target.
+	lastEnteredTargets := currentEnteredTargets

@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/3/2018 23:42",
-	"super" : "Object",
-	"category" : "Bloc-Event",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlMouseButton",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 1/3/2018 23:42",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Event"
 }

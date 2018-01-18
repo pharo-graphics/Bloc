@@ -5,3 +5,5 @@ processMouseMove: aMouseMoveEvent
 	
 	"now we can update the cursor from the target"
 	self updateCursorFrom: aMouseMoveEvent target.
+	
+	self processMouseEnterExitEvent: aMouseMoveEvent

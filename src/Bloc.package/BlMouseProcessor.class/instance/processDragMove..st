@@ -5,7 +5,7 @@ processDragMove: aMouseMoveEvent
 	self fireAsDragEvent: aMouseMoveEvent.
 
 	"exit/enter/over/out/dragenter/dragleave events management + focus"
-	self subprocessEnterExitEvent: aMouseMoveEvent.
+	self processMouseEnterExitEvent: aMouseMoveEvent.
 
 	"dragstart/drag events management"
 	currentDragTarget ifNotNil: [ self subprocessDragEnterExitEvent: aMouseMoveEvent ].
