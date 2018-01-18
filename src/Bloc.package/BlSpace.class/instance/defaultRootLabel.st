@@ -1,0 +1,3 @@
+initialization
+defaultRootLabel
+	^ 'Root element'

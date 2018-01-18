@@ -1,7 +1,7 @@
 dispatching
-dispatchBubblingEvent: anEvent
+dispatchArrivedEvent: anEvent
 	
-	anEvent bubblingTarget: self owner.
+	anEvent arrivedTarget: self owner.
 	
 	"handlers initialized lazily, do nothing if there are none of them"
 	handlers ifNotNil: [ :theHandlers |

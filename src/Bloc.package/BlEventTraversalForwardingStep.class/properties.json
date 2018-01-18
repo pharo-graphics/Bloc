@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/18/2018 18:23",
+	"super" : "BlEventTraversalStep",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEventTraversalForwardingStep",
+	"type" : "normal"
+}

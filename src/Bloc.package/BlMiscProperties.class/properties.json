@@ -7,7 +7,8 @@
 		"focused",
 		"mouseTransparent",
 		"userData",
-		"debug"
+		"debug",
+		"label"
 	],
 	"name" : "BlMiscProperties",
 	"commentStamp" : "",

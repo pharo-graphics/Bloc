@@ -1,21 +1,23 @@
 dispatching
 dispatchEvent: anEvent next: aBlEventDispatcherChain
-	| resultEvent |
+	<return: #BlEvent>
+	
+	anEvent isConsumed
+		ifTrue: [ ^ anEvent ].
+		
+	self dispatchCapturingEvent: anEvent.
 
-	anEvent currentTarget: self owner from: self.
-	resultEvent := anEvent.
-	resultEvent := self dispatchCapturingEvent: resultEvent.
+	anEvent isConsumed
+		ifTrue: [ ^ anEvent ].	
 
-	resultEvent isConsumed
-		ifTrue: [ ^ resultEvent ].
+	anEvent canBePropagated
+		ifTrue: [ aBlEventDispatcherChain dispatchEvent: anEvent ].
 
-	(resultEvent canBePropagated)
-		ifTrue: [ resultEvent := aBlEventDispatcherChain dispatchEvent: resultEvent ].
+	anEvent isConsumed
+		ifTrue: [ ^ anEvent ].
 
-	resultEvent isConsumed
-		ifTrue: [ ^ resultEvent ].
+	self owner == anEvent target
+		ifTrue: [ self dispatchArrivedEvent: anEvent ]
+		ifFalse: [ self dispatchBubblingEvent: anEvent ].
 
-	resultEvent currentTarget: self owner from: self.
-	resultEvent := self dispatchBubblingEvent: resultEvent.
-
-	^ resultEvent
+	^ anEvent

@@ -16,4 +16,6 @@ gtInspectorPreviewIn: composite
 					icon: #smallWarningIcon asIcon)
 						on: #mouseDown send: #value: to: [ :event | error defaultAction ];
 						yourself ] ];
-		act: [ :pres | self removeFromParent ] entitled: 'Delete'
+		act: [ :pres | self removeFromParent ] entitled: 'Delete'.
+		
+	^ morphPresentation

@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 1/18/2018 18:22",
+	"super" : "Object",
+	"category" : "Bloc-Event",
+	"classinstvars" : [
+		"uniqueInstance"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"target"
+	],
+	"name" : "BlEventTraversalStep",
+	"type" : "normal"
+}

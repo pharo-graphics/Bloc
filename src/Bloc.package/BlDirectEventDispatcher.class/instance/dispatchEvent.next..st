@@ -1,8 +1,13 @@
 api - event managing
 dispatchEvent: anEvent next: aBlEventDispatcherChain
 	<return: #BlEvent>
-
-	anEvent currentTarget: self owner from: self.
+	
+	anEvent isConsumed
+		ifTrue: [ ^ anEvent ].
+	
+	anEvent target == self owner
+		ifTrue: [ anEvent arrivedTarget: self owner. ]
+		ifFalse: [ anEvent forwardingTarget: self owner ].
 
 	"filters initialized lazily, do nothing if there are none of them"
 	filters ifNotNil: [ :theFilters |

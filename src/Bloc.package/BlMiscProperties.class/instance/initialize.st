@@ -5,4 +5,5 @@ initialize
 	managed := true.
 	clipChildren := true.
 	userData := IdentityDictionary new.
-	debug := false
+	debug := false.
+	label := BlElement name asString
