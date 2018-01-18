@@ -1,5 +1,6 @@
 instance creation
-on: anObject
-	^ self new
-		owner: anObject;
+on: aTBlEventTarget
+	^ self basicNew
+		initialize;
+		owner: aTBlEventTarget;
 		yourself

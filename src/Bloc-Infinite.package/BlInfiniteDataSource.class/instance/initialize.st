@@ -2,5 +2,5 @@ initialization
 initialize
 	super initialize.
 	
-	eventDispatcher := BlDirectEventDispatcher new.
+	eventDispatcher := BlDirectEventDispatcher on: self.
 	hasStableIds := false
