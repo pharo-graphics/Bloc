@@ -2,5 +2,5 @@
 gtInspectorCurrentTargetIn: composite
 	<gtInspectorPresentationOrder: 15>
 	
-	(self target isKindOf: BlElement)
+	(self currentTarget isKindOf: BlElement)
 		ifTrue: [ (self currentTarget gtInspectorPreviewIn: composite) title: 'Current target' ]
