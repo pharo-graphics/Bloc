@@ -14,7 +14,7 @@ cancel: aPoint
 			from: (aPreviewBounds position);
 			to: (aSourceBounds center - (aPreviewBounds extent / 2.0));
 			easing: (BlDecelerateInterpolator factor: 2);
-			duration: 500 milliseconds;
+			duration: 500 milliSeconds;
 			onStepDo: [ :aPosition | aPreviewElement relocate: aPosition ];
 			onFinishedDo: [ aPreviewElement removeFromParent ].
 	]).

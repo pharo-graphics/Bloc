@@ -1,7 +1,7 @@
 dnd handlers
 dragEvent: anEvent
 	| dragPosition dragDelta |
-	
+
 	dragPosition := anEvent currentTarget globalPointToParent: anEvent position.
 	dragDelta := dragPosition - dragStartPosition.
 

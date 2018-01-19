@@ -4,6 +4,6 @@ wait
 (Processor nextReadyProcess == Processor backgroundProcess)
 		ifFalse: [ (Delay forMilliseconds: milliSecs) wait ]."
 	| milliSecs |
-	milliSecs := (self pulsePeriod - (DateAndTime now - pulseStartTime)) min: 16 milliseconds max: 1 milliseconds.
+	milliSecs := (self pulsePeriod - (DateAndTime now - pulseStartTime)) min: 16 milliSeconds max: 1 milliSeconds.
 	milliSecs wait.
 	lastElpasedTime := DateAndTime now
