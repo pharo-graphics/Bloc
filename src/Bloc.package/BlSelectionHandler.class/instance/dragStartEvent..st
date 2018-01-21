@@ -1,5 +1,5 @@
 dnd handlers
 dragStartEvent: anEvent
-	super dragStartEvent: anEvent.
+	anEvent consumed: true.
 
 	origin := anEvent position
