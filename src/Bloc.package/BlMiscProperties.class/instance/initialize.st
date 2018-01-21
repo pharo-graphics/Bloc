@@ -6,4 +6,4 @@ initialize
 	clipChildren := true.
 	userData := IdentityDictionary new.
 	debug := false.
-	label := BlElement name asString
+	label := ''
