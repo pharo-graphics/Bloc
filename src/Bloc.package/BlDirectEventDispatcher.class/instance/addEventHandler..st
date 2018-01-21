@@ -7,5 +7,4 @@ addEventHandler: aHandler
 	handlers add: aHandler.
 
 	"send hook AFTER handler is added"
-	self hasOwner
-		ifTrue: [ aHandler onInstalledIn: self owner ]
+	aHandler onInstalledIn: self owner

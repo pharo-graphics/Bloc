@@ -10,5 +10,4 @@ addEventFilter: aFilter
 	filters add: aFilter.
 
 	"send hook AFTER filter is added"
-	self hasOwner
-		ifTrue: [ aFilter onInstalledIn: self owner ]
+	aFilter onInstalledIn: self owner

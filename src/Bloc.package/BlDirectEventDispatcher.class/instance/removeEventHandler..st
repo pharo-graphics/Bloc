@@ -10,5 +10,4 @@ removeEventHandler: anHandler
 	handlers isEmpty
 		ifTrue: [ handlers := nil ].
 
-	self hasOwner
-		ifTrue: [ anHandler onUninstalledIn: self owner ]
+	anHandler onUninstalledIn: self owner

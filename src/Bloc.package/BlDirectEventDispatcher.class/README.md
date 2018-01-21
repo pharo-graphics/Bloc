@@ -5,7 +5,7 @@ Example:
 
 [[[
 
-dispatcher := BlDirectEventDispatcher new.
+dispatcher := BlDirectEventDispatcher on: BlElement new.
 dispatcher
 
 ]]]

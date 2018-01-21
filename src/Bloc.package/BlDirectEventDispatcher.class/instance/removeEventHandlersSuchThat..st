@@ -9,5 +9,4 @@ removeEventHandlersSuchThat: aBlock
 	handlers isEmpty
 		ifTrue: [ handlers := nil ].
 	
-	self hasOwner
-		ifTrue: [ toBeRemoved do: [ :aHandler | aHandler onUninstalledIn: self owner ] ]
+	toBeRemoved do: [ :aHandler | aHandler onUninstalledIn: self owner ]
