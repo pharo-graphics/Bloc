@@ -1,46 +1,31 @@
 rendering
 morphFrom: aBlocPresentation
-	| element universe host window wrapper |
+	| container element   |
 
-	wrapper := GLMMorphicBlocWrapperMorph new.
-	wrapper changeTableLayout.
-	
+	container := GLMMorphicBlocWrapperMorph new.
+	container color: Color transparent.
+	container changeTableLayout.
+	container vResizing: #spaceFill.
+	container hResizing: #spaceFill.
+
 	element := aBlocPresentation element.
-
-	universe := BlUniverse default.
-	universe spaceManager hasSpaces
-		ifFalse: [ universe start ].
 	
 	element isAttachedToSceneGraph
-		ifTrue: [
-			element space == space
-				ifTrue: [ 
-					window := space hostSpace morphicWindow ]
-				ifFalse: [ | elementSpace |
-					elementSpace := element space.
-					window := BlMorphicWindow new.
-					window borderless: true.
-					elementSpace hostSpace mirrowWindow: window.
-					elementSpace beDirtyArea ] ]
 		ifFalse: [
-			space := BlSpace new.
-			space extent: 500@500.
-			space borderless: true.
-			space root addChild: element.
-			space root addEventHandler:
+			| aHost aSpace |
+			aHost := BlMorphicHost new.
+			aHost containerMorph: container.
+	
+			aSpace := BlSpace new.
+			aSpace host: aHost.
+			
+			aSpace root addChild: element.
+			aSpace root addEventHandler:
 				(BlEventHandler
 					on: BlDblClickEvent
 					do: [ :evt | evt modifiers isShift ifTrue: [ BlElementSelection on: evt target ] ]).
-			host := BlMorphicWindowHost new.
-			space host: host.
-			universe spaceManager addSpace: space.
-			"then create a host space"
-			host createHostSpaceFor: space.
-			window := space hostSpace morphicWindow.
-			
-			wrapper space: space ].
-	
-	wrapper addMorph: window.
-	window vResizing: #spaceFill.
-	window hResizing: #spaceFill.
-	^ wrapper
+
+			container space: aSpace.
+			aSpace show ].
+
+	^ container

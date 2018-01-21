@@ -8,6 +8,6 @@
 	"instvars" : [
 		"extent"
 	],
-	"name" : "BlSpaceResizeEvent",
+	"name" : "BlSpaceResizedEvent",
 	"type" : "normal"
 }

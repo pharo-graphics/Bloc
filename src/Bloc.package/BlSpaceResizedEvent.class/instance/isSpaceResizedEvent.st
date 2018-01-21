@@ -1,0 +1,3 @@
+testing
+isSpaceResizedEvent
+	^ true

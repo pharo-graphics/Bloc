@@ -1,3 +1,3 @@
 accessing
-space: anObject
-	space := anObject
+space: aBlSpace
+	space := aBlSpace
