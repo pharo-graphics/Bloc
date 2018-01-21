@@ -4,15 +4,17 @@ processDragEnd: aMouseUpEvent
 	self
 		assert: [ self isDragging ]
 		description: [ 'Can not process mouse up event as drag end if I am not in dragging state' ].
+		
+	self
+		assert: [ currentDragTarget isNotNil ]
+		description: [ 'When we drag something it can not be nil' ].
 
-	(currentDragTarget isNotNil and: [ aMouseUpEvent ])
+	aMouseUpEvent primaryButtonPressed
 		ifTrue: [ 
-			
 			self fireAsDragEndEvent: aMouseUpEvent.
 			self fireAsDropEvent: aMouseUpEvent.
-			
-			self space deleteDragboard.
-			
+						
 			currentDragTarget := nil.
+			dndInProgress := false.
 			lastOverTarget := nil.
-			dragStartMask := 0. ]
+			dragStartMask := 0 ]

@@ -13,6 +13,9 @@ testDragCreation
 	self assertFiredEventIs: BlMouseEnterEvent target: self root withPropagation: false.
 	self assertFiredEventIs: BlMouseMoveEvent target: self child withPropagation: true.
 	
+	self sendInsideTargetEvent: BlMouseMoveEvent primary.
+	self assertFiredEventIs: BlMouseMoveEvent target: self child withPropagation: true.
+	
 	self sendOutsideTargetEvent: BlMouseMoveEvent primary.
 	self assertFiredEventIs: BlDragStartEvent target: self child withPropagation: true.
 	
