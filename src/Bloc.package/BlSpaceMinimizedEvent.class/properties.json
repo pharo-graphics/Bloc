@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BlSpaceResizeEvent",
+	"super" : "BlSpaceResizedEvent",
 	"category" : "Bloc-Event",
 	"classinstvars" : [ ],
 	"pools" : [ ],

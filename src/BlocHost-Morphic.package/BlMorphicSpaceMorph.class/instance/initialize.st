@@ -2,12 +2,13 @@ initialization
 initialize
 	super initialize.
 	
+	eventHandler := BlMorphicEventHandler window: self.
+	
 	form := BlExternalForm extent: 1@1 depth: 32.
 	form autoRelease.
 	color := Color transparent.
 	defered := false.
 	
-	eventHandler := BlMorphicEventHandler window: self.
 	preventResize := false.
 
 	"we prefer to fill parent"

@@ -6,5 +6,4 @@ removeEventFilter: aFilter
 	filters isEmpty
 		ifTrue: [ filters := nil ].
 	
-	self hasOwner
-		ifTrue: [ aFilter onUninstalledIn: self owner ]
+	aFilter onUninstalledIn: self owner

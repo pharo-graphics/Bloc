@@ -8,6 +8,6 @@
 	"instvars" : [
 		"position"
 	],
-	"name" : "BlSpaceMoveEvent",
+	"name" : "BlSpaceMovedEvent",
 	"type" : "normal"
 }

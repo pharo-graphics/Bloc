@@ -2,4 +2,4 @@ examples
 directDispatcher
 	<gtExample>
 	
-	^ BlDirectEventDispatcher new
+	^ BlDirectEventDispatcher on: BlElement new

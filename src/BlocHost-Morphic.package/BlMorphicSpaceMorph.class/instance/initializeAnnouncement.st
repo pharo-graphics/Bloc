@@ -27,6 +27,7 @@ initializeAnnouncement
 	self
 		onAnnouncement: WindowResizing
 		do: [ :evt | 
+			'resize' logCr.
 			self resizeDuring: [
 				BlMorphicWindowResizeEvent new
 					width: self width;

@@ -1,7 +1,7 @@
 event handling
 handleWindowResize: aMorphicEvent
 	| aBlEvent |
-	aBlEvent := BlSpaceResizeEvent new
+	aBlEvent := BlSpaceResizedEvent new
 		extent: aMorphicEvent width @ aMorphicEvent height;
 		timestamp: DateAndTime now;
 		yourself.
