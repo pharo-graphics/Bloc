@@ -1,14 +1,6 @@
 initialization
 initializeAnnouncement
 	self
-		onAnnouncement: WindowOpened
-		do: [ :anEvent | BlMorphicWindowOpenedEvent new sentTo: eventHandler ].
-
-	self
-		onAnnouncement: WindowClosed
-		do: [ :anEvent | BlMorphicWindowClosedEvent new sentTo: eventHandler ].
-
-	self
 		onAnnouncement: MorphOpened
 		do: [ :anEvent | BlMorphicWindowOpenedEvent new sentTo: eventHandler ].
 
@@ -26,8 +18,7 @@ initializeAnnouncement
 
 	self
 		onAnnouncement: WindowResizing
-		do: [ :evt | 
-			'resize' logCr.
+		do: [ :evt |
 			self resizeDuring: [
 				BlMorphicWindowResizeEvent new
 					width: self width;
