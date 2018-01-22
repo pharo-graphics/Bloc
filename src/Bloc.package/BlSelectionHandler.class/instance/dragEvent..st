@@ -1,5 +1,5 @@
 dnd handlers
-dragOverEvent: anEvent	
+dragEvent: anEvent	
 	"For selection we want to handle only those drag events that began exactly
 	on the elemen I attached to"
 		

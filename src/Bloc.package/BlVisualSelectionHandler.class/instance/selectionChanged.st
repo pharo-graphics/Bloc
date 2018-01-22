@@ -1,7 +1,10 @@
 selection - handling
 selectionChanged
+	| aSelectionBounds |
 	super selectionChanged.
 
+	aSelectionBounds := container globalBoundsToLocal: self selectionArea copy.
+
 	selection
-		relocate: self selectionArea origin;
-		size: self selectionArea extent
+		relocate: aSelectionBounds origin;
+		size: aSelectionBounds extent

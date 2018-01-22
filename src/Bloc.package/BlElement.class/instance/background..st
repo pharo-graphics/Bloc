@@ -12,5 +12,6 @@ background: aBlBackground
 		description: [ 'Background must not be nil' ].
 
 	background := aBlBackground asBlBackground.
+	self updateBackground.
 	self dispatchEvent: (BlElementBackgroundChangedEvent target: self).
 	self invalidate

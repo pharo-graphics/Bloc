@@ -2,6 +2,9 @@ geometry
 matchExtent: anExtent
 	| aDirection aStart anEnd aDelta aScaleX aScaleY |
 	
+	anExtent isZero
+		ifTrue: [ ^ self ].
+	
 	aDirection := (self end - self start) normalized.
 	
 	aStart := 0@0.
