@@ -1,4 +1,4 @@
-children accessing
+children testing
 hasParent
 	"Return true if I have a parent, otherwise false.
 	Being added as direct child to other element does not necessary

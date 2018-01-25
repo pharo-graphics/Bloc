@@ -1,0 +1,1 @@
+I am an event listener that overlay element adds to the reference element in order to relocate and resize itself according to that element

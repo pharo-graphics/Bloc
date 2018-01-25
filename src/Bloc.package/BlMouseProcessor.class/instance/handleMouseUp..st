@@ -12,5 +12,5 @@ handleMouseUp: aMouseUpEvent
 	"depending on whether drag and drop is in process handle mouse up either
 	as mouse up itself or as drag end event"
 	self isDragging
-		ifFalse: [ self processMouseUp: aMouseUpEvent ]
-		ifTrue: [ self processDragEnd: aMouseUpEvent ]
+		ifTrue: [ self processDragEnd: aMouseUpEvent ].
+	self processMouseUp: aMouseUpEvent

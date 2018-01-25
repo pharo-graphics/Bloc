@@ -22,5 +22,8 @@ addChild: anElement at: anIndex
 	self dispatchChildAdded: anElement.
 	"mt managed children changed, request invalidation"
 	self childrenChanged.	
+	"only requesting layout is not enough, because if size or position does not change
+	there will be no invalidated bounds and nothing will be rendered"
+	anElement invalidate.
 	"We should request layout from newly added element to mark it as dirty too"
 	anElement requestLayout.

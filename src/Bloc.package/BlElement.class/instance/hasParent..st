@@ -1,4 +1,4 @@
-children accessing
+children testing
 hasParent: anElement
 	"Return true if I have a given element in my parent chain, false otherwise"
 	<return: #Boolean>
