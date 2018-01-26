@@ -1,5 +1,5 @@
 visiting window
 visitWindowMouseLeaveEvent: anEvent
 	^ BlSpaceMouseLeaveEvent new
-		timestamp: Time millisecondClockValue;
+		timestamp: DateAndTime now;
 		yourself

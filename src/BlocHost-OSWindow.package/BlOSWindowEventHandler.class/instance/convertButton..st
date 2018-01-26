@@ -1,6 +1,6 @@
 converting
 convertButton: osButton
-	osButton = 1 ifTrue: [ ^ BlMouseEvent primaryButton ].
-	osButton = 2 ifTrue: [ ^ BlMouseEvent middleButton ].
-	osButton = 3 ifTrue: [ ^ BlMouseEvent secondaryButton ].
+	osButton = 1 ifTrue: [ ^ BlMouseButton primary ].
+	osButton = 2 ifTrue: [ ^ BlMouseButton middle ].
+	osButton = 3 ifTrue: [ ^ BlMouseButton secondary ].
 	^ osButton

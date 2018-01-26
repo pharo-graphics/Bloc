@@ -5,5 +5,5 @@ visitMouseMoveEvent: anEvent
 		screenPosition: window position + anEvent position;
 		delta: anEvent delta;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: Time millisecondClockValue;
+		timestamp: DateAndTime now;
 		yourself

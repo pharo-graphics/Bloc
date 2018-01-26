@@ -1,6 +1,6 @@
 visiting window
 windowResized: aPoint
-	^ BlSpaceResizeEvent new
+	^ BlSpaceResizedEvent new
 		extent: aPoint;
-		timestamp: Time millisecondClockValue;
+		timestamp: DateAndTime now;
 		yourself

@@ -6,9 +6,9 @@ visitKeyUpEvent: anEvent
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		repeat: anEvent repeat;
-		keyValue: anEvent symbol;
+		key: (Key character: anEvent character);
 		scanCode: anEvent scanCode;
 		charCode: (self mapSymbolToKeyValue: anEvent symbol);
-		timestamp: Time millisecondClockValue.
+		timestamp: DateAndTime now.
 
 	^ keyEvent

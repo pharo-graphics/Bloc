@@ -11,7 +11,7 @@ visitKeyDownEvent: anEvent
 		keyValue: anEvent symbol;
 		charCode: (self mapSymbolToKeyValue: anEvent symbol);
 		scanCode: anEvent scanCode;
-		timestamp: Time millisecondClockValue.
+		timestamp: DateAndTime now.
 	
 	
 	^ keyEvent

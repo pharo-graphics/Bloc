@@ -1,6 +1,6 @@
 visiting window
 visitWindowMoveEvent: anEvent
-	^ BlSpaceMoveEvent new
-		timestamp: Time millisecondClockValue;
+	^ BlSpaceMovedEvent new
+		timestamp: DateAndTime now;
 		position: self window position;
 		yourself

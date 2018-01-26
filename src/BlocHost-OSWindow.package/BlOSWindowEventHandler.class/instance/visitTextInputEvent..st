@@ -5,4 +5,4 @@ visitTextInputEvent: anEvent
 	^ BlTextInputEvent new
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		text: anEvent text;
-		timestamp: Time millisecondClockValue.
+		timestamp: DateAndTime now.
