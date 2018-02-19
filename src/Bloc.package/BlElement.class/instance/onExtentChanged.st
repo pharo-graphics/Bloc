@@ -13,4 +13,5 @@ onExtentChanged
 	
 	self transformation invalidateMatrix.
 
+	self invalidate.
 	self notifyExtentChanged

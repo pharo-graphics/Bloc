@@ -55,13 +55,4 @@ position: aPosition extent: anExtent
 		"change my extent"
 		self bounds extent: anExtent.
 		self changes extentChange: aPreviousExtent to: anExtent.
-		boundsCache invalidateBoundsInLocal ].
-
-	"damage area after position change"
-	(isPositionChanged or: [ isGrowing or: [ isShrinking not ] ])
-		ifTrue: [
-			isExtentChanged
-				"If extent changes we have to invalidate my own damaged area"
-				ifTrue: [ self invalidate ]
-				"Otherwise invalidate in my parent"
-				ifFalse: [ self invalidateInParent ] ]
+		boundsCache invalidateBoundsInLocal ]
