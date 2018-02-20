@@ -7,7 +7,9 @@ removeAllSuchThat: aBlock
 
 	toBeRemoved := #().
 	self announcer subscriptions protected: [
-		toBeRemoved := self announcer subscriptions subscriptions select: [ :aSubscription | aBlock value: aSubscription subscriber ].
+		toBeRemoved := self announcer subscriptions subscriptions
+			select: [ :aSubscription | aBlock value: aSubscription subscriber ]
+			thenCollect: [ :aSubscription | aSubscription subscriber ].
 		self announcer subscriptions subscriptions removeAllSuchThat: [ :aSubscription | aBlock value: aSubscription subscriber ] ].
 
 	^ toBeRemoved asArray
