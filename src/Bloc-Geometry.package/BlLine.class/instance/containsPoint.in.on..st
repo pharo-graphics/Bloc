@@ -4,8 +4,9 @@ containsPoint: aPoint in: anElement on: aSpartaCanvas
 	when geometry is complex and it is mathematically difficult to compute manually"
 	<return: #Boolean>
 	| aPath |
-
+	
 	aPath := pathCache pathOnSpartaCanvas: aSpartaCanvas.
-	^ aSpartaCanvas fill
+	^ aSpartaCanvas stroke
 		path: aPath;
+		width: anElement border width;
 		containsPoint: aPoint
