@@ -8,17 +8,17 @@ drawOnSpartaCanvas: aCanvas
 
 		aCanvas fill
 			paint: self background fill;
-			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
+			path: (self geometry pathOnSpartaCanvas: aCanvas);
 			draw.
 			
 		aCanvas fill
 			paint: target;
-			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
+			path: (self geometry pathOnSpartaCanvas: aCanvas);
 			draw.
 
 		aCanvas stroke
 			paint: self border;
-			path: (pathCache geomPathOnSpartaCanvas: aCanvas);
+			path: (self geometry pathOnSpartaCanvas: aCanvas);
 			width: self border width;
 			draw ]
 	

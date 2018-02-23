@@ -8,5 +8,5 @@ drawBackground: aBackgroundBlock border: aBorderBlock of: anElement onSpartaCanv
 		ifTrue: [ ^ self ].
 
 	aCanvas clip
-		by: (anElement pathCache geomPathOnSpartaCanvas: aCanvas)
+		by: (anElement geometry pathOnSpartaCanvas: aCanvas)
 		during: [ aBorderBlock value ]

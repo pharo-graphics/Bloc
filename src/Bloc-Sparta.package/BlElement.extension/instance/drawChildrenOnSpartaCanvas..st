@@ -7,6 +7,6 @@ drawChildrenOnSpartaCanvas: aCanvas
 
 	aCanvas clip
 		when: [ self clipChildren ]
-		by: [ pathCache geomPathOnSpartaCanvas: aCanvas ]
+		by: [ self geometry pathOnSpartaCanvas: aCanvas ]
 		during: [ self children zReversed
 			do: [ :anElement | anElement fullDrawOnSpartaCanvas: aCanvas ] ]

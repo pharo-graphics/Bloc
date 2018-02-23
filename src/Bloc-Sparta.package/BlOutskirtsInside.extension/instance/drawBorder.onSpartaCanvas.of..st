@@ -5,7 +5,7 @@ drawBorder: aBlBorder onSpartaCanvas: aCanvas of: anElement
 	aCanvas stroke
 		alpha: aBlBorder opacity;
 		paint: aBlBorder paint;
-		path: (anElement pathCache geomPathOnSpartaCanvas: aCanvas);
+		path: (anElement geometry pathOnSpartaCanvas: aCanvas);
 		width: aBlBorder width * 2.0;	 "we draw inside, so should multiply width by 2"
 		in: [ :aPainter | aBlBorder style applyOn: aPainter ];
 		draw

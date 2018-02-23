@@ -6,7 +6,6 @@
 		"geometry",
 		"geometryResizer",
 		"parent",
-		"pathCache",
 		"boundsCache",
 		"eventDispatcher",
 		"border",

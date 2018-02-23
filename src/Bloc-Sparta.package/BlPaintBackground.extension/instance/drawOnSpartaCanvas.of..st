@@ -9,5 +9,5 @@ drawOnSpartaCanvas: aCanvas of: anElement
 	aCanvas fill
 		alpha: self opacity;
 		paint: self paint;
-		path: (anElement pathCache geomPathOnSpartaCanvas: aCanvas);
+		path: (anElement geometry pathOnSpartaCanvas: aCanvas);
 		draw

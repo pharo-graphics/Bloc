@@ -12,7 +12,7 @@ applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement
 
 	aShadowCanvas fill
 		paint: self color;
-		path: (anElement pathCache geomPathOnSpartaCanvas: aShadowCanvas);
+		path: (anElement geometry pathOnSpartaCanvas: aShadowCanvas);
 		draw.
 
 	aSpartaCanvas filter

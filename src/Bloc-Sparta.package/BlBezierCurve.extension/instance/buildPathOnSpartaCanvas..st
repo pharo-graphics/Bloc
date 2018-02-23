@@ -1,5 +1,5 @@
-accessing
-buildPathOnSpartaCanvas: aCanvas within: aBounds
+*Bloc-Sparta
+buildPathOnSpartaCanvas: aCanvas
 	self order = 0
 		ifTrue: [ ^ aCanvas path build ].
 	

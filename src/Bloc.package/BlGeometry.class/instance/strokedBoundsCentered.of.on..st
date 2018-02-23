@@ -2,7 +2,7 @@ visual bounds
 strokedBoundsCentered: aBlBounds of: anElement on: aCanvas
 	| spartaPath strokeOptions strokedBounds |
 
-	spartaPath := anElement pathCache geomPathOnSpartaCanvas: aCanvas.
+	spartaPath := anElement geometry pathOnSpartaCanvas: aCanvas.
 	strokeOptions := aCanvas stroke
 		width: (anElement border width max: 1);
 		in: [ :aPainter | anElement border style applyOn: aPainter ];

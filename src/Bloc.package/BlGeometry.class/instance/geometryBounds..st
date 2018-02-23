@@ -5,5 +5,5 @@ geometryBounds: aBounds
 	<return: #BlBounds>
 
 	^ aBounds
-		origin: self position
+		origin: 0@0
 		extent: self extent

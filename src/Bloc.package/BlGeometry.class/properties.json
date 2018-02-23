@@ -2,8 +2,8 @@
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"position",
-		"extent"
+		"extent",
+		"pathCache"
 	],
 	"name" : "BlGeometry",
 	"commentStamp" : "GlennCavarle 8/8/2016 11:44",

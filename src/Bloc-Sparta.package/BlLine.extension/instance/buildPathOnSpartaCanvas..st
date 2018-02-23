@@ -1,3 +1,3 @@
 *Bloc-Sparta
-buildPathOnSpartaCanvas: aCanvas within: aBounds
+buildPathOnSpartaCanvas: aCanvas
 	^ aCanvas shape line: self from to: self to

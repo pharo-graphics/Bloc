@@ -10,7 +10,7 @@ drawOnSpartaCanvas: aCanvas
 			aCanvas stroke
 				alpha: self border opacity;
 				paint: aBorder paint;
-				path: (self pathCache geomPathOnSpartaCanvas: aCanvas);
+				path: (self geometry pathOnSpartaCanvas: aCanvas);
 				width: aBorder width;
 				in: [ :aPainter | aBorder style applyOn: aPainter ];
 				draw.

@@ -9,10 +9,10 @@ drawBackground: aBackgroundBlock border: aBorderBlock of: anElement onSpartaCanv
 
 			"remove parts of the border where we will draw background"	
 			aCanvas clip
-				by: (anElement pathCache geomPathOnSpartaCanvas: aCanvas)
+				by: (anElement geometry pathOnSpartaCanvas: aCanvas)
 				during: [
 					aCanvas fill
-						path: (anElement pathCache geomPathOnSpartaCanvas: aCanvas);
+						path: (anElement geometry pathOnSpartaCanvas: aCanvas);
 						paint: Color white;
 						drawOptions: (aCanvas drawOptions composeDestOut; antialiasGray);
 						draw ] ].

@@ -3,8 +3,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"session",
-		"geometryPath",
-		"ownerElement"
+		"geometry",
+		"geometryPath"
 	],
 	"name" : "BlPathCache",
 	"commentStamp" : "AliakseiSyrel 9/21/2017 12:48",

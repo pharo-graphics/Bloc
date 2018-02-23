@@ -10,5 +10,4 @@ initialize
 	fromHead := nil.
 	toHead := nil.
 
-	self wantsMouse: false.
 	self clipChildren: false

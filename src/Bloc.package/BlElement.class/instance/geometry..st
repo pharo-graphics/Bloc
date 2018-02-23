@@ -6,7 +6,7 @@ geometry: aBlGeometry
 	geometry := aBlGeometry.
 	
 	"clear path cache after updating geometry path"
-	pathCache releaseCache.
+	self geometry releaseCache.
 	boundsCache invalidateBoundsInLocal.
 	
 	"extent might not change, so we need to update geometry manually"

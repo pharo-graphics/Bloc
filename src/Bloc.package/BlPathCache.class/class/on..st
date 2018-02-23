@@ -1,3 +1,3 @@
 instance creation
-on: anElement
-	^ self new ownerElement: anElement
+on: aGeometry
+	^ self new geometry: aGeometry

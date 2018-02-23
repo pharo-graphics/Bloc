@@ -9,7 +9,7 @@ onExtentChanged
 	"background might want to resize itself"
 	self updateBackground.
 	"clear path cache after updating geometry path"
-	pathCache releaseCache.
+	self geometry releaseCache.
 	
 	self transformation invalidateMatrix.
 

@@ -3,6 +3,6 @@ onMeasure: anExtentMeasurementSpec
 	self measureGeometry.
 	
 	self invalidate.
-	pathCache releaseCache.
+	self geometry releaseCache.
 
 	super onMeasure: anExtentMeasurementSpec

@@ -11,7 +11,7 @@ applyOnSpartaCanvas: aSpartaCanvas for: anElement
 	"check if we may skip transformation"
 	skipTransformation := aWindowScale = 1 or: [ aWindowScale x = 1 and: [ aWindowScale y = 1 ] ].
 	
-	aSpartaCanvas clip by: (anElement pathCache geomPathOnSpartaCanvas: aSpartaCanvas) during: [
+	aSpartaCanvas clip by: (anElement geometry pathOnSpartaCanvas: aSpartaCanvas) during: [
 		skipTransformation ifFalse: [ 
 			aSpartaCanvas transform
 				push;

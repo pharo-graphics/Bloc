@@ -6,5 +6,5 @@ drawOnSpartaCanvas: aCanvas of: anElement
 	aCanvas fill
 		alpha: self opacity;
 		paint: (self bitmapOn: aCanvas);
-		path: (anElement pathCache geomPathOnSpartaCanvas: aCanvas);
+		path: (anElement geometry pathOnSpartaCanvas: aCanvas);
 		draw
