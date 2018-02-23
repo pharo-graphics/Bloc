@@ -7,6 +7,7 @@ border: aBlBorder
 		assert: [ aBlBorder isNotNil ]
 		description: [ 'Background must not be nil' ].
 
+	self invalidate.
 	border := aBlBorder.
 	self dispatchEvent: (BlElementBorderChangedEvent target: self).
 	self invalidate
