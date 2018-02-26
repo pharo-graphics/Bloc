@@ -2,5 +2,5 @@ initialization
 initialize
 	super initialize.
 
-	arrowLengthFraction := 2.0.
+	arrowLengthFraction := 3.0.
 	arrowNoseAngle := 45

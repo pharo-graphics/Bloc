@@ -12,4 +12,7 @@ setDataSourceChangedAfterLayout
 		anElementHolder shouldIgnore
 			ifFalse: [ anElementHolder flags addDataSourcePositionUnknown ] ].
 	
-	recycler setDataSourcePositionsAsUnknown
+	recycler setDataSourcePositionsAsUnknown.
+	"immediately mark all elements as invalid, so prefetched ones can be
+	differentiated from elements bound to previous data set - both in children, and cache"
+	self markKnownElementsInvalid
