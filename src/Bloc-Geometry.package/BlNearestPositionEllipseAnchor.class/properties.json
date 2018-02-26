@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 2/26/2018 17:30",
+	"super" : "BlNearestPositionAnchor",
+	"category" : "Bloc-Geometry-Anchors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlNearestPositionEllipseAnchor",
+	"type" : "normal"
+}
