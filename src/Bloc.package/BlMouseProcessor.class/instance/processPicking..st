@@ -3,6 +3,9 @@ processPicking: aMouseEvent
 	<return: #BlElement>
 	| aTargetElement |
 
+	(lastOverTarget isNotNil and: [ lastOverTarget isAttachedToSceneGraph not ])
+		ifTrue: [ lastOverTarget := nil ].
+
 	"if the last over target contains the point we can start picking from it"
 	(aMouseEvent isMouseMove and: [ lastOverTarget isNotNil and: [ lastOverTarget containsGlobalPoint: aMouseEvent position ] ])
 		ifTrue: [ aTargetElement := lastOverTarget findMouseEventTargetAt: aMouseEvent position ]

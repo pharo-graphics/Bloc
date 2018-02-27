@@ -4,6 +4,10 @@ handleMouseMove: aMouseMoveEvent
 	"picking and mouse move"
 	
 	aTargetElement := self processPicking: aMouseMoveEvent.
+	self
+		assert: [ aTargetElement isAttachedToSceneGraph ]
+		descriptionBlock: [ 'Target element must be attached to the scene graph' ].
+	
 	aMouseMoveEvent target: aTargetElement.
 
 	shouldTryDragStart := self isDragging

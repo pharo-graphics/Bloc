@@ -13,7 +13,9 @@ processMouseEnterLeaveEvent: aMouseEvent
 		ifTrue: [ self fireAsMouseOutEvent: aMouseEvent ].
 	
 	"fire mouse leave events"
-	newLeavedTargets := lastEnteredTargets reject: [ :anElement | currentEnteredTargets includes: anElement ].
+	newLeavedTargets := lastEnteredTargets reject: [ :anElement | (currentEnteredTargets includes: anElement) ].
+	newLeavedTargets := newLeavedTargets select: #isAttachedToSceneGraph.
+
 	self fireAsLeaveEvent: aMouseEvent targets: newLeavedTargets.
 	
 	"fire mouse event to the current target"
