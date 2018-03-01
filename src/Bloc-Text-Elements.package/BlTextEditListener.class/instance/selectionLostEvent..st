@@ -2,4 +2,6 @@ selection handlers
 selectionLostEvent: anEvent
 	super selectionLostEvent: anEvent.
 	
-	self selectNone: anEvent target
+	anEvent currentTarget border: (BlBorder empty).
+	
+	self selectNone: anEvent currentTarget

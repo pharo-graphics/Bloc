@@ -1,4 +1,4 @@
-instance creation
+strings
 cr
 	<gtExample>
 	

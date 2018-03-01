@@ -1,9 +1,10 @@
 selection handlers
 selectionAcquiredEvent: anEvent
 	| aTextEditElement |
-	super selectionAcquiredEvent: anEvent.
+	anEvent consumed: true.
 		
-	aTextEditElement := anEvent target.
+	aTextEditElement := anEvent currentTarget.
+	aTextEditElement border: (BlBorder paint: Color red).
 	
 	(anEvent bounds = aTextEditElement boundsInLocal)
 		ifTrue: [
@@ -15,7 +16,5 @@ selectionAcquiredEvent: anEvent
 			| aFromIndex aToIndex |
 			aFromIndex := aTextEditElement paragraph indexAtPosition: anEvent bounds origin.
 			aToIndex := aTextEditElement paragraph indexAtPosition: anEvent bounds corner.
-	
-			self select: aFromIndex to: aToIndex in: aTextEditElement ].
-	
-	anEvent consumed: true
+
+			self select: aFromIndex to: aToIndex in: aTextEditElement ]

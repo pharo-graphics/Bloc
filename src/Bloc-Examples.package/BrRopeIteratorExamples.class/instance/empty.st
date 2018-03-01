@@ -1,4 +1,4 @@
-instance creation
+strings
 empty
 	<gtExample>
 	
