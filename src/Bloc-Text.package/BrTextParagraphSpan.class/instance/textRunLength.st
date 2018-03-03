@@ -8,4 +8,6 @@ textRunLength
 	<return: #Number>
 	self assertTextRun.
 	
-	^ textRunEnd - textRunStart + 1
+	^ (textRunStart isZero and: [ textRunEnd isZero ])
+		ifTrue: [ 0 ]
+		ifFalse: [ textRunEnd - textRunStart + 1 ]

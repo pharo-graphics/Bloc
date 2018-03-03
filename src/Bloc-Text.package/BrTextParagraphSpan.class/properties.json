@@ -7,10 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"textRun",
-		"transformation",
 		"strikethroughOffset",
 		"strikethroughSize",
-		"transformationInverted",
 		"span",
 		"textRunStart",
 		"textRunEnd",

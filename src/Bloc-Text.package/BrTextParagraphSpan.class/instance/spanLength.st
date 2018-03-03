@@ -1,5 +1,7 @@
-accessing
+accessing - span
 spanLength
 	<return: #Number>
 
-	^ spanEnd - spanStart + 1
+	^ (spanStart isZero and: [ spanEnd isZero ])
+		ifTrue: [ 0 ]
+		ifFalse: [ spanEnd - spanStart + 1 ]

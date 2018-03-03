@@ -1,7 +1,10 @@
 {
 	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"announcer",
+		"locked"
+	],
 	"name" : "BrText",
 	"commentStamp" : "AliakseiSyrel 7/14/2017 21:13",
 	"super" : "Object",

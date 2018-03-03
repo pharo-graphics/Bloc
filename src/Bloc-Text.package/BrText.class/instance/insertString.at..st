@@ -1,3 +1,3 @@
 text - modifications
 insertString: aString at: anIndex
-	^ self subclassResponsibility
+	self subclassResponsibility

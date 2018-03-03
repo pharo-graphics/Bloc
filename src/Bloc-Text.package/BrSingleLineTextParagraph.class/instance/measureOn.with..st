@@ -4,10 +4,7 @@ measureOn: aCanvas with: aSpanMeasurer
 	based on attributes and layout properties (maximum width / height)"
 	| anIterator aMeasurer |
 
-	aMeasurer := BrSingleLineTextParagraphMeasurer new.
-	aMeasurer maxWidth: maxWidth.
-	aMeasurer maxHeight: maxHeight.
-	aMeasurer text: self text.
+	aMeasurer := self createMeasurer.
 
 	(self text isEmpty) ifTrue: [ 
 		aMeasurer

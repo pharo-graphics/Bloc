@@ -1,3 +1,0 @@
-accessing
-unlock
-	^ self shouldBeImplemented

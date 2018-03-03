@@ -8,8 +8,7 @@
 	"instvars" : [
 		"text",
 		"start",
-		"end",
-		"locked"
+		"end"
 	],
 	"name" : "BrSubText",
 	"type" : "normal"

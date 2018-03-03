@@ -1,3 +1,0 @@
-accessing
-isEmpty
-	^ self shouldBeImplemented

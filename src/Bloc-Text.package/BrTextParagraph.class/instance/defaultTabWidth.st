@@ -1,0 +1,3 @@
+initialization
+defaultTabWidth
+	^ 3

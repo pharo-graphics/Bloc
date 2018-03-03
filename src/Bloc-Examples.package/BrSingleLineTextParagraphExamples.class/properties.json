@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/1/2018 14:00",
+	"super" : "Object",
+	"category" : "Bloc-Examples-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BrSingleLineTextParagraphExamples",
+	"type" : "normal"
+}

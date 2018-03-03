@@ -1,1 +1,0 @@
-I represent a reversed text and allow users to work with it just as if it would be a normal text while eliminating the need of actual text copy.

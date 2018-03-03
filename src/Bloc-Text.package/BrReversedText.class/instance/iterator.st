@@ -1,3 +1,0 @@
-accessing
-iterator
-	^ self shouldBeImplemented

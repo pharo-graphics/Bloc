@@ -1,13 +1,12 @@
 {
 	"commentStamp" : "",
-	"super" : "BrText",
+	"super" : "BrWrapperText",
 	"category" : "Bloc-Text-Text",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"previousGeneration",
-		"text"
+		"previousGeneration"
 	],
 	"name" : "BrGenerationText",
 	"type" : "normal"

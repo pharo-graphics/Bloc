@@ -1,5 +1,6 @@
 instance creation
 fromText: aBrText
-	^ self new
+	^ self basicNew
+		initialize;
 		initialize: aBrText copy
 		with: aBrText generation

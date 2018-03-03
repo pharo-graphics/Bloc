@@ -4,8 +4,6 @@
 	"instvars" : [
 		"maxHeight",
 		"maxWidth",
-		"transformation",
-		"inverseTransformation",
 		"span",
 		"text",
 		"textRun",
@@ -21,9 +19,7 @@
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
-	"classinstvars" : [
-		"matrix"
-	],
+	"classinstvars" : [ ],
 	"pools" : [ ],
 	"category" : "Bloc-Text-Text-Paragraph"
 }

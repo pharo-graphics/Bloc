@@ -1,3 +1,0 @@
-accessing
-lock
-	^ self shouldBeImplemented

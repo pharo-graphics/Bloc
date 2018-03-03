@@ -1,4 +1,4 @@
-accessing
+api - instantiation
 baseline: aTextParagraphBaseline
 
 	baseline := aTextParagraphBaseline.

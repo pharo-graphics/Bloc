@@ -1,0 +1,3 @@
+accessing
+textRunLength
+	^ textRun size

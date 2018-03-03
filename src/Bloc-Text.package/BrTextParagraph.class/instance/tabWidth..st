@@ -1,3 +1,3 @@
-paragraph - accessing
+api - instantiation
 tabWidth: anObject
 	tabWidth := anObject

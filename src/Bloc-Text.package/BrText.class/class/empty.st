@@ -1,0 +1,3 @@
+accessing
+empty
+	^ BrEmptyText uniqueInstance

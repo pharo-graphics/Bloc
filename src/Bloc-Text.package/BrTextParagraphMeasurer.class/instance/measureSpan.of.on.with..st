@@ -8,6 +8,7 @@ measureSpan: aBrSpan of: aTextParagraph on: aCanvas with: aSpanMeasurer
 		assert: [ self text isNotEmpty or: [ self text isEmpty and: [ aBrSpan isEmpty ] ] ]
 		description: [ 'Span must be empty if original text is empty' ].
 	
+	"initialize a span measurer with span, text paragraph and canvas"
 	aSpanMeasurer
 		span: aBrSpan
 		of: aTextParagraph
@@ -21,21 +22,20 @@ measureSpan: aBrSpan of: aTextParagraph on: aCanvas with: aSpanMeasurer
 		| aParagraphSpan |
 
 		aParagraphSpan := self defaultParagraphSpan.
-		self hasTransformation
-			ifTrue: [ aParagraphSpan
-				transformation: self transformation
-				inverted: self inverseTransformation ].
-		
 		aParagraphSpan measurer: aSpanMeasurer.
 
 		aSpanMeasurer
 			measure: self textRun
 			from: self textRunStart
-			to: Float infinity
-			width: self transformedAvailableWidth.
+			to: aSpanMeasurer textRunLength
+			width: self availableWidth.
 		
 		self textRunStart: aSpanMeasurer textRunStart.
 		self textRunEnd: aSpanMeasurer textRunEnd.
+		
+		self
+			assert: [ (self textRunStart isZero and: [ self textRunEnd isZero ]) or: [ self textRunStart > 0 ] ]
+			description: [ 'If text run start is zero, then text end must be zero too' ].
 
 		self spanStart: aSpanMeasurer spanStart.
 		self spanEnd: aSpanMeasurer spanEnd.

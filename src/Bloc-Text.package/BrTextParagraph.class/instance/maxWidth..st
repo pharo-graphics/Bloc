@@ -1,3 +1,3 @@
-paragraph - accessing
+api - instantiation
 maxWidth: aNumber
 	maxWidth := aNumber

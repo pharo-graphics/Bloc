@@ -1,4 +1,4 @@
-initialization
+api - instantiation
 text: aBrText
 	"Construct me with a given text.
 	Note, that I can be only initialized once.
@@ -6,7 +6,7 @@ text: aBrText
 	For that send me #measureOn: message with canvas as an argument"
 
 	self
-		assert: [ text isNil ]
-		description: [ 'I am immutable! You should create a new instance' ].
+		assert: [ text = BrText empty ]
+		description: [ 'I am immutable! You should create a new instance or #reset me' ].
 
 	text := aBrText

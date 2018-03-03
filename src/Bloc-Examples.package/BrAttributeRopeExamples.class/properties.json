@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "AliakseiSyrel 3/17/2017 00:36",
-	"super" : "TestCase",
+	"super" : "Object",
 	"category" : "Bloc-Examples-Text",
 	"classinstvars" : [ ],
 	"pools" : [ ],

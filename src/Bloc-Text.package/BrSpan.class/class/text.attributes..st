@@ -1,6 +1,7 @@
 instance creation
 text: aBrText attributes: theAttributes
-	^ self new
+	^ self basicNew
+		initialize;
 		text: aBrText
 		attributes: theAttributes;
 		yourself

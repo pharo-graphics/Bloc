@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Announcement",
+	"category" : "Bloc-Text-Text-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"string",
+		"index"
+	],
+	"name" : "BrTextStringInserted",
+	"type" : "normal"
+}

@@ -6,8 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"rope",
-		"locked"
+		"rope"
 	],
 	"name" : "BrRopedText",
 	"type" : "normal"

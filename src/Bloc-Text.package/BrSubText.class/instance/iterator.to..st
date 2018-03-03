@@ -1,6 +1,6 @@
 text - enumeration
-iterator: anStartIndex to: anEndIndex
+iterator: aStartIndex to: anEndIndex
 	^ BrSubTextIterator
 		text: self
-		from: anStartIndex
+		from: aStartIndex
 		to: anEndIndex
