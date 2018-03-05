@@ -6,7 +6,7 @@ measureBasedOnChildren: anExtentSpec
 	| minX minY maxX maxY |
 	
 	self hasChildren
-		ifFalse: [ self defaultMeasure: infiniteElement with: anExtentSpec ].
+		ifFalse: [ ^ self defaultMeasure: infiniteElement with: anExtentSpec ].
 
 	minX := Float infinity.
 	minY := Float infinity.

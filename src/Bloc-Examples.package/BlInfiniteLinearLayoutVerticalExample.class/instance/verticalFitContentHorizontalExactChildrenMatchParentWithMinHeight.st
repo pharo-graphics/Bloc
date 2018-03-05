@@ -7,7 +7,7 @@ verticalFitContentHorizontalExactChildrenMatchParentWithMinHeight
 	anItemHeight := 50.
 	anItemCount := 5.
 	
-	"min height is more then total height of %anItemCount% children"
+	"min height is greater then the total height of %anItemCount% children"
 	aListMinHeight := 500.
 	aVisibleItemCount := anItemCount.
 

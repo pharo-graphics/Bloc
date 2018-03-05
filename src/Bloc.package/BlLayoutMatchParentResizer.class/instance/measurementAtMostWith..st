@@ -1,4 +1,3 @@
 double dispatching
 measurementAtMostWith: aNumber
-	^ BlMeasurementSpec new
-		beAtMost: aNumber
+	^ BlMeasurementSpec new beAtMost: aNumber

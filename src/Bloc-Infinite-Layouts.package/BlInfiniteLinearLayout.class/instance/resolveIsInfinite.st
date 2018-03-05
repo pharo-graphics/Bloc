@@ -4,5 +4,4 @@ resolveIsInfinite
 	<return: #Boolean>
 
 	^ self orientation measurementSpec isUnspecified
-		and: [ self orientation end isZero
-			and: [ self orientation maximumSpace isInfinite ] ]
+		and: [ self orientation end isZero ]

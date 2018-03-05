@@ -1,3 +1,3 @@
 double dispatching
 measurementExactlyWith: aNumber
-	^ BlMeasurementSpec new beExact: aNumber
+   ^ BlMeasurementSpec new beAtMost: aNumber

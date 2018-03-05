@@ -1,5 +1,5 @@
 examples
-verticalFitContentHorizontalExactChildrenMatchParentWithMaxHeight
+verticalFitContentHorizontalExactChildrenMatchParentUpdateMaxHeight
 	<gtExample>
 	| aList aListWidth aListMaxHeight anItemHeight anItemCount aVisibleItemCount |
 	
@@ -8,19 +8,12 @@ verticalFitContentHorizontalExactChildrenMatchParentWithMaxHeight
 	anItemCount := 5.
 	
 	"max height is less then the total height of %anItemCount% children"
-	aListMaxHeight := 120.
-	aVisibleItemCount := 3.
-
-	aList := self list.
-	aList constraintsDo: [ :c |
-		c vertical fitContent.
-		c horizontal exact: aListWidth.
-		c maxHeight: aListMaxHeight ].
-	aList items: anItemCount.
-	aList itemConstraintsDo: [ :c |
-		c vertical exact: anItemHeight.
-		c horizontal matchParent ].
-
+	aListMaxHeight := 160.
+	aVisibleItemCount := 4.
+	
+	aList := self verticalFitContentHorizontalExactChildrenMatchParentWithMaxHeight.
+	aList constraintsDo: [ :c | c maxHeight: aListMaxHeight ].
+	
 	aList forceLayout.
 	self assert: aList height equals: aListMaxHeight.
 	self assert: aList width equals: aListWidth.
