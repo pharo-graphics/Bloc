@@ -19,6 +19,6 @@ layoutChunkAdd
 			ifTrue: [ self addDisappearingChild: anElement ]
 			"add child as first"
 			ifFalse: [ self addDisappearingChild: anElement at: 1 ] ].
-	
+	self notifyChunkAdded: anElement.
 	
 	^ anElement

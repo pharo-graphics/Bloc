@@ -1,3 +1,3 @@
 accessing
-ignoreConsumed: anObject
-	ignoreConsumed := anObject
+ignoreConsumed: aBoolean
+	ignoreConsumed := aBoolean

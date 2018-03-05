@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/5/2018 15:33",
+	"super" : "Announcement",
+	"category" : "Bloc-Infinite-Layouts-Linear",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"element"
+	],
+	"name" : "BlInfiniteLinearLayoutChunkAdded",
+	"type" : "normal"
+}

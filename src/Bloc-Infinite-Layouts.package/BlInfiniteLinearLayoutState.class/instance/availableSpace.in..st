@@ -6,5 +6,5 @@ availableSpace: aNumber in: aLayout
 	"self
 		assert: [ aNumber <= aLayout orientation maximumSpace ]
 		description: [ 'Available space can not be greater that maximum space' ]."
-	
+
 	availableSpace := aNumber

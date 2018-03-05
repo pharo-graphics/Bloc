@@ -1,3 +1,3 @@
 accessing
-finished: anObject
-	finished := anObject
+finished: aBoolean
+	finished := aBoolean

@@ -1,17 +1,19 @@
 examples
-verticalFitContentHorizontalExactChildrenMatchParent
+verticalExactHorizontalExactChildrenMatchParent
 	<gtExample>
-	| aContainer aList aListWidth anItemHeight anItemCount chunksAdded |
+	| aContainer aList aListWidth aListHeight anItemHeight anItemCount aVisibleItemCount chunksAdded |
 	
 	aListWidth := 200.
 	anItemHeight := 50.
 	anItemCount := 5.
+	aVisibleItemCount := 3.
+	aListHeight := aVisibleItemCount * anItemHeight.
 
 	aContainer := self container.
 
 	aList := self list.
 	aList constraintsDo: [ :c |
-		c vertical fitContent.
+		c vertical exact: aListHeight.
 		c horizontal exact: aListWidth ].
 	aList items: anItemCount.
 	aList itemConstraintsDo: [ :c |
@@ -24,15 +26,14 @@ verticalFitContentHorizontalExactChildrenMatchParent
 	aContainer addChild: aList.
 	aContainer forceLayout.
 
-	self assert: aList height equals: (anItemCount * anItemHeight).
+	self assert: aList height equals: aListHeight.
 	self assert: aList width equals: aListWidth.
-	self assert: aList childrenCount equals: anItemCount.
-	"in case of non exact infinite list, chunks are added twice;
-	once during measurement and one more time during layout steps"
-	self assert: chunksAdded equals: anItemCount * 2.
+	self assert: aList childrenCount equals: aVisibleItemCount.
+	"if infinite list has an exact size in both directions, chunks are added only once"
+	self assert: chunksAdded equals: aVisibleItemCount.
 
 	self
 		assert: (aList children collect: #extent)
-		equals: (anItemCount timesCollect: [ aListWidth @ anItemHeight ]).
+		equals: (aVisibleItemCount timesCollect: [ aListWidth @ anItemHeight ]).
 
 	^ aContainer

@@ -1,3 +1,3 @@
 accessing
-focusable: anObject
-	focusable := anObject
+focusable: aBoolean
+	focusable := aBoolean

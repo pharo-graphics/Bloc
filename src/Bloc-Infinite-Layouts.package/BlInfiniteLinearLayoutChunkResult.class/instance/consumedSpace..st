@@ -1,3 +1,3 @@
 accessing
-consumedSpace: anObject
-	consumedSpace := anObject
+consumedSpace: aNumber
+	consumedSpace := aNumber

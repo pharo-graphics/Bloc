@@ -5,7 +5,7 @@ updateLayoutStateToFillEnd: aPosition offset: anOffset
 	anAvailableSpace := self orientation endWithPadding - anOffset.
 	aLimitedSpace := self orientation maximumSpace - self orientation paddingEnd.
 	(aLimitedSpace isInfinite not and: [ layoutState isInfinite ])
-		ifFalse: [ anAvailableSpace := aLimitedSpace ].
+		ifTrue: [ anAvailableSpace := aLimitedSpace ].
 	
 	layoutState availableSpace: anAvailableSpace in: self.
 

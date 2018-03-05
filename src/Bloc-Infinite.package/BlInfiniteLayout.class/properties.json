@@ -18,7 +18,8 @@
 		"itemPrefetchEnabled",
 		"measurementCacheEnabled",
 		"requestedSimpleAnimations",
-		"smoothScroller"
+		"smoothScroller",
+		"announcer"
 	],
 	"name" : "BlInfiniteLayout",
 	"type" : "normal"
