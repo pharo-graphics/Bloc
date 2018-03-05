@@ -1,9 +1,9 @@
 attribute rope - examples
-spans: anAttributeRope
+spansInAttributeRope
 	<gtExample>
-	<dependsOn: #attributeRope:with:and:>
-	| iterator leftSpan rightSpan |
+	| anAttributeRope iterator leftSpan rightSpan |
 	
+	anAttributeRope := self attributeRopeWithLeftAndRight.
 	iterator := anAttributeRope iterator.
 	leftSpan := iterator nextSpan.
 	rightSpan := iterator nextSpan.

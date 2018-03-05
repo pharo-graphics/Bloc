@@ -1,0 +1,3 @@
+accessing
+fifth
+	^ array fifth

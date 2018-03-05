@@ -1,17 +1,18 @@
 attribute rope - examples
-attributeRope: aRope with: leftAttributes and: rightAttributes
+attributeRopeWithLeftAndRight
 	<gtExample>
-	<dependsOn: #simpleRope>
-	<dependsOn: #attributesLeft>
-	<dependsOn: #attributesRight>
-	| attributeRope |
+	| aRope leftAttributes rightAttributes attributeRope |
+
+	aRope := self simpleRope.
+	leftAttributes := self attributesLeft.
+	rightAttributes := self attributesRight.
 
 	attributeRope := aRope attributes: leftAttributes from: 1 to: (aRope size / 2) rounded - 1.
 	attributeRope := attributeRope attributes: rightAttributes from: (aRope size / 2) rounded to: aRope size.
 	
 	self assert: attributeRope isConcatenation.
-	self deny: attributeRope left isLeaf.
-	self deny: attributeRope right isLeaf.
+	self assert: attributeRope left isLeaf not.
+	self assert: attributeRope right isLeaf not.
 	self assert: attributeRope size equals: aRope size.
 	self assert: attributeRope asString equals: aRope asString.
 	

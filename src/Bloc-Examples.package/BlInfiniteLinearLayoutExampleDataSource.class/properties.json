@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlInfiniteDataSource",
+	"category" : "Bloc-Examples-Infinite",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"constraintsBlock",
+		"colors"
+	],
+	"name" : "BlInfiniteLinearLayoutExampleDataSource",
+	"type" : "normal"
+}
