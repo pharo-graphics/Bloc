@@ -1,0 +1,1 @@
+Is sent when available space changes in linear layout state

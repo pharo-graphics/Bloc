@@ -7,4 +7,5 @@ availableSpace: aNumber in: aLayout
 		assert: [ aNumber <= aLayout orientation maximumSpace ]
 		description: [ 'Available space can not be greater that maximum space' ]."
 
-	availableSpace := aNumber
+	availableSpace := aNumber.
+	aLayout notifyAvailableSpaceChanged: aNumber

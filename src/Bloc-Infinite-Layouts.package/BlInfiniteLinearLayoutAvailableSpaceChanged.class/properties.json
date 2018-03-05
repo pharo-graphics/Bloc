@@ -1,13 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/5/2018 15:33",
+	"commentStamp" : "AliakseiSyrel 3/5/2018 17:05",
 	"super" : "BlInfiniteLinearLayoutAnnouncements",
 	"category" : "Bloc-Infinite-Layouts-Linear",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"element"
+		"availableSpace"
 	],
-	"name" : "BlInfiniteLinearLayoutChunkAdded",
+	"name" : "BlInfiniteLinearLayoutAvailableSpaceChanged",
 	"type" : "normal"
 }
