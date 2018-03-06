@@ -6,7 +6,7 @@
 		"locked"
 	],
 	"name" : "BrText",
-	"commentStamp" : "AliakseiSyrel 7/14/2017 21:13",
+	"commentStamp" : "AliakseiSyrel 3/6/2018 13:55",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
