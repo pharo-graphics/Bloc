@@ -1,5 +1,4 @@
 host space - cursor
-cursor: aCursor
+cursor: aCursorForm
 	"Change current cursor image/view to the given one"
-
-	Cursor currentCursor: aCursor
+	World currentHand showTemporaryCursor: aCursorForm
