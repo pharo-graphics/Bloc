@@ -18,7 +18,9 @@ handleMouseMove: aMouseMoveEvent
 		"we are dragging, handle it as drag move"
 		ifTrue: [ self processDragMove: aMouseMoveEvent ]
 		ifFalse: [ shouldTryDragStart
-			ifTrue: [ (self tryDragStart: aMouseMoveEvent)
+			ifTrue: [ (self tryDragStart: previousMouseDownEvent)
+				"we sent drag start, have to send first drag move"
+				ifTrue: [ self processDragMove: aMouseMoveEvent ]
 				"drag start was not handled, process as basic mouse move"
 				ifFalse: [ self processMouseMove: aMouseMoveEvent ] ]
 			"no need to even try to start a drag"

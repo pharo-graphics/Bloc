@@ -12,7 +12,8 @@ simulateEvents: aCollectionOfEvents on: anElement
 	anElement isAttachedToSceneGraph
 		ifTrue: [
 			anElement space pulse.
-			aCollectionOfEvents do: [ :anEvent | anElement space dispatchEvent: anEvent ] ]
+			aCollectionOfEvents do: [ :anEvent | anElement space dispatchEvent: anEvent ].
+			anElement space pulse ]
 		ifFalse: [ 
 			| temporarySpace topMostElement |
 			topMostElement := anElement topMostParent.
@@ -20,6 +21,7 @@ simulateEvents: aCollectionOfEvents on: anElement
 				temporarySpace := self new.
 				temporarySpace root addChild: topMostElement.
 				temporarySpace pulse.
-				aCollectionOfEvents do: [ :anEvent | temporarySpace dispatchEvent: anEvent ]
+				aCollectionOfEvents do: [ :anEvent | temporarySpace dispatchEvent: anEvent ].
+				temporarySpace pulse
 			] ensure: [ topMostElement removeFromParent ] ]
 	

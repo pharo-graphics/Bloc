@@ -1,12 +1,12 @@
 mouse drag
-tryDragStart: aMouseMoveEvent
+tryDragStart: aMouseEvent
 	"Try to start a drag and return true if drag actually started, otherwise false"
 	<return: #Boolean>
 	| aDragTarget aDragStartEvent |
 	
-	aDragTarget := previousMouseDownEvent target.
+	aDragTarget := aMouseEvent target.
 	
-	aDragStartEvent := (aMouseMoveEvent asDragStartEvent
+	aDragStartEvent := (aMouseEvent asDragStartEvent
 		startButtons: dragStartMask;
 		target: aDragTarget;
 		gestureSource: aDragTarget;
