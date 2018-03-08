@@ -14,7 +14,7 @@ simulateClickOnUnresponsiveOverlapped
 	red size: 200@200.
 	red opacity: 0.2.
 	"make red element unresponsive to mouse events"
-	red wantsMouse: false.
+	red preventMouseEvents.
 
 	"blue is below the red element"
 	blue := self blueElement.

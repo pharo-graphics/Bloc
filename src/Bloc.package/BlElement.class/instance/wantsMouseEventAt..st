@@ -5,5 +5,5 @@ wantsMouseEventAt: aPoint
 	<return: #Boolean>
 
 	^ self isVisible and: [
-		self wantsMouse and: [
+		self shouldHandleMouseEvents and: [
 			self containsGlobalPoint: aPoint ] ]

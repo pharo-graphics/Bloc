@@ -19,7 +19,6 @@
 		"visibility",
 		"focusability",
 		"space",
-		"styler",
 		"misc",
 		"mouseCursor",
 		"opacity",
@@ -27,7 +26,8 @@
 		"bounds",
 		"measuredBounds",
 		"changes",
-		"transformation"
+		"transformation",
+		"shouldHandleMouseEvents"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 1/24/2018 20:26",

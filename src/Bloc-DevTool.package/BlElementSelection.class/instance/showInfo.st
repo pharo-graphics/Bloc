@@ -15,7 +15,7 @@ showInfo
 	marginElement constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].
-	marginElement wantsMouse: false.
+	marginElement preventMouseEvents.
 	marginElement effect: (BlClipOutInsetsEffect new insets: (self client margin)).
 
 	paddingElement := BlElement new.
@@ -24,7 +24,7 @@ showInfo
 	paddingElement constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].
-	paddingElement wantsMouse: false.
+	paddingElement preventMouseEvents.
 	paddingElement effect: (BlClipOutInsetsEffect new insets: (self client padding)).
 
 	extentTextElement := BlTextElement new.

@@ -4,7 +4,6 @@ selectionAcquiredEvent: anEvent
 	anEvent consumed: true.
 		
 	aTextEditElement := anEvent currentTarget.
-	aTextEditElement border: (BlBorder paint: Color red).
 	
 	(anEvent bounds = aTextEditElement boundsInLocal)
 		ifTrue: [

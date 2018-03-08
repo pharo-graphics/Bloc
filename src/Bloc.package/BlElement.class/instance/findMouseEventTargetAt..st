@@ -6,7 +6,9 @@ findMouseEventTargetAt: aPoint
 	<return: #BlElement or: nil>
 
 	^ self children zSorted
-			detect: [ :anElement | anElement wantsMouseEventAt: aPoint ]
+			detect: [ :anElement | (anElement shouldHandleMouseEvents
+				ifTrue: [ anElement wantsMouseEventAt: aPoint ]
+				ifFalse: [ (anElement findMouseEventTargetAt: aPoint) isNotNil ]) ]
 			ifFound: [ :anElement | anElement findMouseEventTargetAt: aPoint ]
 			ifNone: [ (self wantsMouseEventAt: aPoint)
 				ifTrue: [ self ]

@@ -8,4 +8,4 @@ initialize
 	
 	self border: (BlBorder paint: Color red width: 2).
 	
-	self wantsMouse: false
+	self preventMouseEvents

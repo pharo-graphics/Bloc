@@ -22,6 +22,8 @@ initialize
 	layout := self defaultLayout.
 	elevation := self defaultElevation.
 
+	shouldHandleMouseEvents := true.
+
 	misc := BlMiscProperties new.
 	misc label: self className.
 	opacity := 1.0
