@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "TudorGirba 3/9/2018 23:41",
+	"super" : "BlElementEventListener",
+	"category" : "Bloc-Utilities - Overlay",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"dragStartPosition",
+		"originalPosition",
+		"resizeTarget",
+		"originalExtent"
+	],
+	"name" : "BlResizerListener",
+	"type" : "normal"
+}

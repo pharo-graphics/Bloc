@@ -1,0 +1,3 @@
+resizer
+resizerCursor
+	^ BlCursor resizeTop

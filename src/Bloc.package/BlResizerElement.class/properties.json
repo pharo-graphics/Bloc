@@ -1,0 +1,21 @@
+{
+	"commentStamp" : "TudorGirba 3/9/2018 23:42",
+	"super" : "BlOverlayElement",
+	"category" : "Bloc-Utilities - Overlay",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"topLeft",
+		"topCenter",
+		"topRight",
+		"middleLeft",
+		"middleRight",
+		"bottomLeft",
+		"bottomCenter",
+		"bottomRight",
+		"resizerListeners"
+	],
+	"name" : "BlResizerElement",
+	"type" : "normal"
+}

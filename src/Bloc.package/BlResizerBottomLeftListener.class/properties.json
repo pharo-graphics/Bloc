@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlResizerListener",
+	"category" : "Bloc-Utilities - Overlay",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlResizerBottomLeftListener",
+	"type" : "normal"
+}

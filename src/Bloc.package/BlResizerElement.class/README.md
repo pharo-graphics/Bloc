@@ -1,0 +1,1 @@
+I am an overlay that provides the mechanism of resizing a targetElement. I have eight resizing elements for which the dragging logic are defined in the ==GtDiagrammerResizerListener== hierarchy.
