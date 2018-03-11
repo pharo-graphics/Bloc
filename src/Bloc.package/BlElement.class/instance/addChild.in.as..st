@@ -4,6 +4,6 @@ addChild: anElement in: aContainerName as: aChildContainerName
 	and mark the added child as container too"
 
 	self
-		childrenContaner: aContainerName
+		childNamed: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement addChild: anElement as: aChildContainerName ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]

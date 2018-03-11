@@ -1,5 +1,5 @@
 children accessing
-childrenContaner: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock
+childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock
 
 	self allChildrenBreadthFirstDo: [ :aChild |
 		aChild userData

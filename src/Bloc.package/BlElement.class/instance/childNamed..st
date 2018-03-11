@@ -3,6 +3,6 @@ childNamed: aChildName
 	<return: #BlElement>
 
 	self
-		childrenContaner: aChildName
+		childNamed: aChildName
 		ifFound: [ :anElement | ^ anElement ]
 		ifNone: [ self error: 'Children container named ', aChildName asString, ' does not exist' ]

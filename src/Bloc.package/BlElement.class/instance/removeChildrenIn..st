@@ -1,6 +1,6 @@
 children add/remove
 removeChildrenIn: aContainerName
 	self
-		childrenContaner: aContainerName
+		childNamed: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement removeChildren ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
