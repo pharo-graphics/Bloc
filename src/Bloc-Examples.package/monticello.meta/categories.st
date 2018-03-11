@@ -10,6 +10,7 @@ SystemOrganization addCategory: 'Bloc-Examples-Geometry'!
 SystemOrganization addCategory: 'Bloc-Examples-Infinite'!
 SystemOrganization addCategory: 'Bloc-Examples-KeyBinding'!
 SystemOrganization addCategory: 'Bloc-Examples-Layout'!
+SystemOrganization addCategory: 'Bloc-Examples-Overlay'!
 SystemOrganization addCategory: 'Bloc-Examples-Selection'!
 SystemOrganization addCategory: 'Bloc-Examples-Showcase-Chicken'!
 SystemOrganization addCategory: 'Bloc-Examples-Showcase-Mobile Phone'!
