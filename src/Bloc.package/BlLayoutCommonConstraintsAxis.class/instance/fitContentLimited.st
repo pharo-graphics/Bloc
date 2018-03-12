@@ -1,3 +1,3 @@
 resizing
 fitContentLimited
-	resizer := BlLayoutResizer fitContentLimited
+	self resizer: BlLayoutResizer fitContentLimited

@@ -1,8 +1,7 @@
 computing inequalities
 solve: theArcs locations: theLocations modifyOnError: modifyOnError
-	| axisName n originalCulprits |
-	
-	axisName := self horizontal ifTrue: [ 'horizontal' ] ifFalse: [ 'vertical' ].
+	| n originalCulprits |
+
 	n := self count + 1.
 	originalCulprits := nil.
 	

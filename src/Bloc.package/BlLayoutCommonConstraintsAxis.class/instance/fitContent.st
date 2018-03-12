@@ -1,3 +1,3 @@
 resizing
 fitContent
-	resizer := BlLayoutResizer fitContent
+	self resizer: BlLayoutResizer fitContent

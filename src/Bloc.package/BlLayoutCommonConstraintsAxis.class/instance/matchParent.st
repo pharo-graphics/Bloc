@@ -1,3 +1,3 @@
 resizing
 matchParent
-	resizer := BlLayoutResizer matchParent
+	self resizer: BlLayoutResizer matchParent

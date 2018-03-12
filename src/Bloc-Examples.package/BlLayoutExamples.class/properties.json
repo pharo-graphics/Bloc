@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/12/2018 13:27",
+	"super" : "Object",
+	"category" : "Bloc-Examples-Layout",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlLayoutExamples",
+	"type" : "normal"
+}
