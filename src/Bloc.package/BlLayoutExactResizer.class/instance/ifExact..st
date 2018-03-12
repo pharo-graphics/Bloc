@@ -1,3 +1,3 @@
 controlling
 ifExact: aBlock
-	aBlock cull: self
+	^ aBlock cull: self

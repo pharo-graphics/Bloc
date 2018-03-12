@@ -4,7 +4,7 @@ complexVerticalFitContent
 	| grid list flow |
 	
 	grid := BlElement new.
-	grid layout: BlGridLayout vertical.
+	grid layout: BlGridLayout horizontal.
 	grid constraintsDo: [ :c |
 		c horizontal exact: 300.
 		c vertical fitContent ].
@@ -34,3 +34,5 @@ complexVerticalFitContent
 	self assert: grid extent equals: 300@100.
 	self assert: list extent equals: 300@100.
 	self assert: flow extent equals: 300@100.
+	
+	^ grid

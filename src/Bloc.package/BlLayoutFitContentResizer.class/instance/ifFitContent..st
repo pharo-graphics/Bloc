@@ -1,3 +1,3 @@
 controlling
 ifFitContent: aBlock
-	aBlock cull: self
+	^ aBlock cull: self

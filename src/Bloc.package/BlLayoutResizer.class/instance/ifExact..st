@@ -1,2 +1,3 @@
 controlling
 ifExact: aBlock
+	^ self

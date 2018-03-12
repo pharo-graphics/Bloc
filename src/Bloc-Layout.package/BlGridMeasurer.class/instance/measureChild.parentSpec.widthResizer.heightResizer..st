@@ -5,11 +5,11 @@ measureChild: anElement parentSpec: anExtentSpec widthResizer: widthResizer heig
 	childWidthSpec := self layout
 		measurementSpecFor: anExtentSpec widthSpec
 		usedSize: (self totalMarginOf: anElement isHorizontal: true)
-		resizer: widthResizer.
+		resizer: (widthResizer ifMatchParent: [ BlLayoutResizer exact: 0 ]).
 
 	childHeightSpec := self layout
 		measurementSpecFor: anExtentSpec heightSpec
 		usedSize: (self totalMarginOf: anElement isHorizontal: false)
-		resizer: heightResizer.
+		resizer: (heightResizer ifMatchParent: [ BlLayoutResizer exact: 0 ]).
 		
 	anElement measure: (childWidthSpec @ childHeightSpec)

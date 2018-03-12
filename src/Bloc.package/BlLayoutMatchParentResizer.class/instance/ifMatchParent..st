@@ -1,3 +1,3 @@
 controlling
 ifMatchParent: aBlock
-	aBlock cull: self
+	^ aBlock cull: self

@@ -1,2 +1,3 @@
 controlling
 ifMatchParent: aBlock
+	^ self
