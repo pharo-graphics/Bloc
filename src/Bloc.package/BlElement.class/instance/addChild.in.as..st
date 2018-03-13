@@ -6,4 +6,4 @@ addChild: anElement in: aContainerName as: aChildContainerName
 	self
 		childNamed: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement addChild: anElement as: aChildContainerName ]
-		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
+		ifNone: [ self error: 'Container named #', aContainerName asString, ' does not exist' ]
