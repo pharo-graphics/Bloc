@@ -28,20 +28,21 @@ layout: anElement in: aRectangle
 	anElement managedChildren
 		inject: left @ top
 		into: [ :origin :child |
-			| childBounds childConstraints |
+			| childBounds childMarginBounds childConstraints |
 			childConstraints := child constraints linear.
 			childBounds := origin + (child outsets topLeft max: 0@0) extent: child measuredExtent.
+			childMarginBounds := origin extent: child measuredExtent + (child outsets extent max: 0@0).  
 			
 			self layout horizontalAlignment ifNotNull: [ 
 				| translation allowedBounds |
-				allowedBounds := childBounds origin extent: elementInnerBounds width @ child measuredHeight.
-				translation := (self layout horizontalAlignment directed: self layout direction) translationOf: childBounds in: allowedBounds.
+				allowedBounds := childMarginBounds origin extent: elementInnerBounds width @ child measuredHeight.
+				translation := (self layout horizontalAlignment directed: self layout direction) translationOf: childMarginBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 
 			self layout horizontalAlignment ifNull: [ 
 				| translation allowedBounds |
-				allowedBounds := childBounds origin extent: elementInnerBounds width @ child measuredHeight.
-				translation := (childConstraints horizontal alignment directed: self layout direction) translationOf: childBounds in: allowedBounds.
+				allowedBounds := childMarginBounds origin extent: elementInnerBounds width @ child measuredHeight.
+				translation := (childConstraints horizontal alignment directed: self layout direction) translationOf: childMarginBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 			
 			"telling each subnode what bounds to use for layouting process.
