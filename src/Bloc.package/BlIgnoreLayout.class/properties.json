@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlLayout",
+	"category" : "Bloc-Layouts-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlIgnoreLayout",
+	"type" : "normal"
+}

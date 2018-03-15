@@ -1,4 +1,4 @@
-accessing
+api - constraints
 maxWidth: aNumber
 	"Set maximal width to be aNumber,
 	aNumber must not be nil

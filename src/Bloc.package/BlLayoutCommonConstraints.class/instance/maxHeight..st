@@ -1,4 +1,4 @@
-accessing
+api - constraints
 maxHeight: aNumber
 	"Set maximal height to be aNumber,
 	aNumber must not be nil

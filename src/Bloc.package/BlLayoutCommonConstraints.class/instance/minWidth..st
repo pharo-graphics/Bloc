@@ -1,4 +1,4 @@
-accessing
+api - constraints
 minWidth: aNumber
 	"Set minimal width to be aNumber,
 	aNumber must not be nil

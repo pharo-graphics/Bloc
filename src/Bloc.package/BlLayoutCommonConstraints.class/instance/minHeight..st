@@ -1,4 +1,4 @@
-accessing
+api - constraints
 minHeight: aNumber
 	"Set minimal height to be aNumber,
 	aNumber must not be nil

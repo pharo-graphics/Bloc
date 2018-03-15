@@ -1,4 +1,4 @@
-accessing
+api - constraints
 margin: aBlMargin
 	"Change element's margin to a BlMargin
 	aBlMargin must not be nil"

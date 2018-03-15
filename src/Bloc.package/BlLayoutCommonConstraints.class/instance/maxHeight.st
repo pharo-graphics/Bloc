@@ -1,4 +1,4 @@
-accessing
+api - constraints
 maxHeight
 	"Return a maximal height an element can have,
 	maxHeight can not be nil,

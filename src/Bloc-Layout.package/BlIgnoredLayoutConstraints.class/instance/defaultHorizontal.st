@@ -1,0 +1,3 @@
+initialization
+defaultHorizontal
+	^ BlIgnoredLayoutConstraintsHorizontal new

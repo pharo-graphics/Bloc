@@ -1,6 +1,6 @@
 layout
 layout: anElement in: aRectangle
-	|top right bottom left majorBounds elementInnerBounds|
+	|top right bottom left majorBounds elementInnerBounds theLayeredChildren |
 	"Layout subnodes vertically in column one by one
 	based on previousely measured extent"
 
@@ -8,10 +8,14 @@ layout: anElement in: aRectangle
 	left := anElement insets left. 
 	right := left.
 	bottom := top.
-	
-	self layout direction with: anElement managedChildren do: [ :child |
-		right := right + child measuredWidth + (child outsets width max: 0).
-		bottom := bottom max: child measuredHeight + (child outsets height max: 0) ].
+
+	theLayeredChildren := self layout layeredChildren: anElement.
+
+	self layout direction
+		with: theLayeredChildren
+		do: [ :child |
+			right := right + child measuredWidth + (child outsets width max: 0).
+			bottom := bottom max: child measuredHeight + (child outsets height max: 0) ].
 	
 	majorBounds := (left@top corner: right@bottom).
 	elementInnerBounds := anElement padding inset: anElement boundsInLocal.
@@ -26,7 +30,7 @@ layout: anElement in: aRectangle
 	top := majorBounds top.
 	
 	self layout direction
-		with: anElement managedChildren
+		with: theLayeredChildren
 		inject: left @ top
 		into: [ :origin :child |
 			| childBounds childMarginBounds childConstraints |

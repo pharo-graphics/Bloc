@@ -1,4 +1,4 @@
-accessing
+api - constraints
 ignoreByLayout
 	"Makes an element with this constraits be ignored by layout.
 	An element will still be measured but will not be taken into account

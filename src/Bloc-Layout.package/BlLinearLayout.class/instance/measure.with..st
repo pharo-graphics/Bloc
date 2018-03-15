@@ -45,4 +45,6 @@ measure: anElement with: anExtentSpec
 		self matchingMeasure: anElement ].
 	
 	"release caches used during measurement and shared between procedures"
-	self cache releaseCaches
+	self cache releaseCaches.
+	
+	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
