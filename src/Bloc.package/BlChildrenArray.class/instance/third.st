@@ -1,3 +1,0 @@
-accessing
-third
-	^ array third

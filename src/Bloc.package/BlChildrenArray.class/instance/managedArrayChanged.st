@@ -1,3 +1,0 @@
-initialization
-managedArrayChanged
-	managedArray := nil

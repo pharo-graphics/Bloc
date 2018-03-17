@@ -5,8 +5,8 @@ connectTwoGridsWith6Lines
 
 	lines := 6 timesCollect: [ self grayLine ].
 	
-	aLeftGridElement := self shuffledGridColumnWith10Cells.
-	aRightGridElement := self shuffledGridColumnWith6Cells.
+	aLeftGridElement := self gridColumnWith10Cells.
+	aRightGridElement := self gridColumnWith6Cells.
 	
 	aLeftGridElement
 		relocate: 50@55.

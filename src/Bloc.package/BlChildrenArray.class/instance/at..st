@@ -1,6 +1,6 @@
-accessing
+children - accessing
 at: anIndex
-	"Return an element at a given index without taking zIndex into account"
+	"Return an element at a given index"
 	<return: #BlElement>
 
 	^ array at: anIndex

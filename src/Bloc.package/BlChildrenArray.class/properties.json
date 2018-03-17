@@ -1,18 +1,13 @@
 {
-	"classtraitcomposition" : "TBlDebug classTrait",
-	"classvars" : [ ],
-	"instvars" : [
-		"array",
-		"zArray",
-		"zReversedArray",
-		"managedArray"
-	],
-	"name" : "BlChildrenArray",
-	"commentStamp" : "AliakseiSyrel 6/17/2017 13:36",
-	"super" : "Object",
-	"traitcomposition" : "TBlDebug",
-	"type" : "normal",
+	"commentStamp" : "",
+	"super" : "BlChildrenCollection",
+	"category" : "Bloc-Basic-Children",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "Bloc-Basic-Children"
+	"classvars" : [ ],
+	"instvars" : [
+		"array"
+	],
+	"name" : "BlChildrenArray",
+	"type" : "normal"
 }

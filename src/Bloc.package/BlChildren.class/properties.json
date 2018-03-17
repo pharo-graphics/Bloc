@@ -1,0 +1,13 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlChildren",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Children"
+}

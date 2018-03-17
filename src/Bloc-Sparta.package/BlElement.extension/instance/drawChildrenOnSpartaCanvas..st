@@ -8,5 +8,5 @@ drawChildrenOnSpartaCanvas: aCanvas
 	aCanvas clip
 		when: [ self clipChildren ]
 		by: [ self geometry pathOnSpartaCanvas: aCanvas ]
-		during: [ self children zReversed
+		during: [ self children sortedByElevation
 			do: [ :anElement | anElement fullDrawOnSpartaCanvas: aCanvas ] ]

@@ -1,3 +1,2 @@
 children dispatching
 childrenChanged
-	self children arrayChanged

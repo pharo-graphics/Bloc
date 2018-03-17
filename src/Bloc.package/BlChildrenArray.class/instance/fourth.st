@@ -1,3 +1,0 @@
-accessing
-fourth
-	^ array fourth

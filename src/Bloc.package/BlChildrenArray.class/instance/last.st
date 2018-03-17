@@ -1,3 +1,0 @@
-accessing
-last
-	^ array last

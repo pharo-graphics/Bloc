@@ -1,7 +1,12 @@
 accessing
 managed: aBoolean
 	"If false is provided, then the element is not subject to the parent's layout"
-	
-	(misc managed = aBoolean) ifTrue: [ ^ self ].
-	misc managed: aBoolean.
-	self parent ifNotNil: [ :p | p managedChildrenChanged ]
+	self 
+		deprecated: 'Use "constraintsDo: [ :c | c ignoreByLayout ]" instead'
+		on: 	'17 March 2018' 
+		in: 'Pharo-6.0-60539-'.
+
+	self constraintsDo: [ :c |
+		aBoolean
+			ifTrue: [ c accountByLayout ]
+			ifFalse: [ c ignoreByLayout ] ]

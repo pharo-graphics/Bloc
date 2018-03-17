@@ -1,3 +1,0 @@
-accessing
-second
-	^ array second

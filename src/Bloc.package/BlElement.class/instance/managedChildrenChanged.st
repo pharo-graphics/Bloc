@@ -1,3 +1,0 @@
-children dispatching
-managedChildrenChanged
-	self children managedArrayChanged

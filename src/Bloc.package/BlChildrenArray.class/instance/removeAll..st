@@ -1,4 +1,3 @@
-removing
-removeAll: anArray
-	array := array copyWithoutAll: anArray.
-	self arrayChanged
+children - removing
+removeAll: aCollectionOfBlElement
+	array := array copyWithoutAll: aCollectionOfBlElement

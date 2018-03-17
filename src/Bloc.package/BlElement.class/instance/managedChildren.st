@@ -4,4 +4,5 @@ managedChildren
 	Managed children are taken into account during layout process.
 	children can not be nil"
 	<return: #Array>
-	^ self children managed
+
+	^ self children

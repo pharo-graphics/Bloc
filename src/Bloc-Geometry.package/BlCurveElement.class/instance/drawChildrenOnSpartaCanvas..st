@@ -8,7 +8,7 @@ drawChildrenOnSpartaCanvas: aCanvas
 	aCanvas clip
 		when: [ self clipChildren ]
 		by: [ self geometry pathOnSpartaCanvas: aCanvas ]
-		during: [ self children zReversed
+		during: [ self children sortedByElevation
 			do: [ :anElement |
 				"we intentionally compare with direct reference;
 				if fromHead does not exist (is nil) identity comparison will return false anyway"

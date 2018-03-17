@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlChildren",
+	"category" : "Bloc-Basic-Children",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"childrenArray"
+	],
+	"name" : "BlChildrenReversed",
+	"type" : "normal"
+}

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/17/2018 13:56",
+	"super" : "BlChildrenSubset",
+	"category" : "Bloc-Basic-Children",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"accountedChildren"
+	],
+	"name" : "BlChildrenAccountedByLayout",
+	"type" : "normal"
+}
