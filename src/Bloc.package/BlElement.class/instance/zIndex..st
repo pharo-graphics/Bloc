@@ -1,3 +1,3 @@
 accessing
-zIndex: anObject
-	zIndex := anObject
+zIndex: aNumber
+	self elevation: (BlRelativeElevation elevation: aNumber)

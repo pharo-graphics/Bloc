@@ -8,7 +8,6 @@ initialize
 	changes := BlElementChanges new.
 
 	eventDispatcher := BlBubblingEventDispatcher on: self.
-	zIndex := 0.
 	constraints := BlLayoutCommonConstraints new.
 	self resetChildrenArray.
 
