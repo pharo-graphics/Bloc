@@ -1,1 +1,0 @@
-I represent a connection between two elements

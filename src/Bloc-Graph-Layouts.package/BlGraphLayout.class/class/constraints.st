@@ -1,3 +1,0 @@
-constraints
-constraints
-	^ BlGraphConstraints new
