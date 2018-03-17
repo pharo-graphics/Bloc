@@ -6,7 +6,7 @@ computeMargins: isLeading
 		ifTrue: [ leadingMargins ]
 		ifFalse: [ trailingMargins ].
 
-	self element managedChildren withIndexDo: [ :child :anIndex |
+	self element children accountedByLayout withIndexDo: [ :child :anIndex |
 		child visibility shouldLayout ifTrue: [ 
 			| spec span index margin |
 			spec := (childConstraints at: anIndex) spec.

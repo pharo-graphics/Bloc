@@ -4,7 +4,7 @@ createGroupBounds
 	|assocs|
 	
 	assocs := OrderedCollection new.
-	self element managedChildren withIndexDo: [ :child :index |
+	self element children accountedByLayout withIndexDo: [ :child :index |
 		| spec bounds |
 		spec := (childConstraints at: index) spec.
 		bounds := (spec absoluteAlignment: self horizontal) bounds.

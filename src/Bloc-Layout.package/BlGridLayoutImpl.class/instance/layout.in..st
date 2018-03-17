@@ -18,7 +18,7 @@ layout: anElement in: aRectangle
 	hLocations := horizontalAxis locations.
 	vLocations := verticalAxis locations.
 	
-	anElement managedChildren withIndexDo: [ :child :index |
+	anElement children accountedByLayout withIndexDo: [ :child :index |
 		child visibility shouldLayout ifTrue: [ 
 			| columnSpec rowSpec colSpan rowSpan locationBounds cellWidth cellHeight pWidth pHeight hAlign vAlign boundsX boundsY gravityOffsetX gravityOffsetY
 			leftMargin topMargin rightMargin bottomMargin sumMarginsX sumMarginsY alignmentOffsetX alignmentOffsetY width height dx cx cy |

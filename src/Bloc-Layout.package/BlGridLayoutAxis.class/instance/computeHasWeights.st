@@ -1,6 +1,6 @@
 computing weights
 computeHasWeights
 	
-	^ self element managedChildren anySatisfy: [ :child |
+	^ self element children accountedByLayout anySatisfy: [ :child |
 			child visibility shouldLayout
 				and: [ (self specOf: child) weight isZero not ] ]

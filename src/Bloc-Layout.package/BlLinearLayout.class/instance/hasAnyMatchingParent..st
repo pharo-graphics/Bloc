@@ -5,8 +5,4 @@ hasAnyMatchingParent: anElement
 	<return: #Boolean>
 	self assert: anElement isNotNil.
 
-	self
-		measuredChildren: anElement
-		do: [  ].
-
-	^ anElement managedChildren anySatisfy: [ :child | (self orientation breadthProperties: child) resizer isMatchParent ]
+	^ anElement children accountedByLayout anySatisfy: [ :child | (self orientation breadthProperties: child) resizer isMatchParent ]

@@ -4,7 +4,7 @@ solveAndDistributeSpaceLocations: theLocations
 	self deltas atAllPut: 0.
 	self solveLocations: theLocations.
 	
-	deltaMax := (parentMin value * self element managedChildren size) asFloat.
+	deltaMax := (parentMin value * self element children accountedByLayout size) asFloat.
 	deltaMax < 1
 		ifTrue: [ ^ self ].
 

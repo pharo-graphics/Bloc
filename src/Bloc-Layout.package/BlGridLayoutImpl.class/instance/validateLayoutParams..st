@@ -11,7 +11,7 @@ validateLayoutParams: anElement
 	minor := 1.
 	maxSizes := Array new: count withAll: 1.
 
-	anElement managedChildren do: [ :child |
+	anElement children accountedByLayout do: [ :child |
 		| majorSpec majorRange majorWasDefined majorSpan minorSpec minorRange minorWasDefined minorSpan childConstraints |
 		childConstraints := child constraints grid.
 		self validateChildConstraints: child.

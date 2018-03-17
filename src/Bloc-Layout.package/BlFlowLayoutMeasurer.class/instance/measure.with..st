@@ -5,7 +5,7 @@ measure: anElement with: anExtentSpec
 	children removeAll.
 	lines removeAll.
 	
-	anElement managedChildrenDo: [ :aChildElement |
+	anElement children accountedByLayout do: [ :aChildElement |
 		| child childConstraints childType |
 		childConstraints := aChildElement constraints flow.
 		layout measureChildWithMargins: aChildElement parentSpec: anExtentSpec.

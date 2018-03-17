@@ -9,7 +9,7 @@ layout: anElement in: aRectangle
 	right := left.
 	bottom := top.
 
-	anElement managedChildrenDo: [ :child | 
+	anElement children accountedByLayout do: [ :child | 
 		right := right max: child measuredWidth + (child outsets width max: 0).
 		bottom := bottom + child measuredHeight + (child outsets height max: 0) ].
 	
@@ -25,7 +25,7 @@ layout: anElement in: aRectangle
 	left := majorBounds left.
 	top := majorBounds top.
 
-	anElement managedChildren
+	anElement children accountedByLayout
 		inject: left @ top
 		into: [ :origin :child |
 			| childBounds childMarginBounds childConstraints |

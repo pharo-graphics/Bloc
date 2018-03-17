@@ -2,7 +2,7 @@ computing group bounds
 computeGroupBounds
 
 	groupBounds valuesDo: [ :bounds | bounds reset ].
-	self element managedChildren withIndexDo: [ :child :index |
+	self element children accountedByLayout withIndexDo: [ :child :index |
 		| spec size |
 		spec := (childConstraints at: index) spec.
 		size := self layout measurer measurementWithMarginOf: child isHorizontal: self horizontal.

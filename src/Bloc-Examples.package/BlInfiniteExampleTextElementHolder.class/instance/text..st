@@ -3,7 +3,7 @@ text: aSpText
 	| theWords theChildren aWordIterator aSize aManagedSize theManagedChildren |
 	
 	"amount of managed and visible children"
-	aManagedSize := itemElement managedChildren size.
+	aManagedSize := itemElement children accountedByLayout size.
 	"amount of all children"
 	aSize := itemElement childrenCount.
 	
@@ -25,7 +25,7 @@ text: aSpText
 			(theWords size + 1) to: aManagedSize do: [ :anIndex |
 				| anElement |
 				anElement := (allChildren at: anIndex).
-				anElement managed: false.
+				anElement constraintsDo: [ :c | c ignoreByLayout ].
 				anElement visibility: BlVisibility gone ] ].
 
 	"create needed elements"
@@ -57,7 +57,7 @@ text: aSpText
 	theWords withIndexDo: [ :aText :anIndex |
 		anIndex ~= 15 ifTrue: [ 
 			(theManagedChildren at: anIndex)
-				managed: true;
+				constraintsDo: [ :c | c accountByLayout ];
 				visibility: BlVisibility visible;
 				"size: 50@20"
 				text: aText ] ]

@@ -19,7 +19,7 @@ invalidateStructure
 	
 	element ifNil: [ ^ self ].
 	
-	childConstraints := self element managedChildren collect: [ :child |
+	childConstraints := self element children accountedByLayout collect: [ :child |
 		self horizontal
 			ifTrue: [ child constraints grid horizontal ]
 			ifFalse: [ child constraints grid vertical ] ].

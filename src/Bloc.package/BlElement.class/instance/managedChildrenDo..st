@@ -5,5 +5,9 @@ managedChildrenDo: aBlock
 	aBlock must accept exactly one argument"
 	self assert: aBlock isNotNil.
 	self assert: aBlock argumentCount = 1.
-	
-	^ self managedChildren do: aBlock
+	self 
+		deprecated: 'Use "children accountedByLayout do:" instead'
+		on: 	'17 March 2018' 
+		in: 'Pharo-6.0-60539-'.
+		
+	^ self children accountedByLayout do: aBlock

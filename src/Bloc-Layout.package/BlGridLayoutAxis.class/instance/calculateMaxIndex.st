@@ -2,7 +2,7 @@ computing
 calculateMaxIndex
 	|result|
 	result := -1.
-	self element managedChildren withIndexDo: [ :child :index |
+	self element children accountedByLayout withIndexDo: [ :child :index |
 		| spec span |
 		spec := (childConstraints at: index) spec.
 		span := spec span.

@@ -6,4 +6,4 @@ hasSkippedNaiveMeasurements: anElement
 	<return: #Boolean>
 	self assert: anElement isNotNil.
 	
-	^ anElement managedChildren anySatisfy: [ :child | self shouldSkipNaiveMeasure: child ]
+	^ anElement children accountedByLayout anySatisfy: [ :child | self shouldSkipNaiveMeasure: child ]
