@@ -21,7 +21,7 @@ text: aSpText
 	theWords size < aManagedSize
 		ifTrue: [
 			| allChildren |
-			allChildren := itemElement children all.
+			allChildren := itemElement children.
 			(theWords size + 1) to: aManagedSize do: [ :anIndex |
 				| anElement |
 				anElement := (allChildren at: anIndex).
@@ -53,7 +53,7 @@ text: aSpText
 	"we don't have enough children, add new ones"
 	itemElement addChildren: theChildren.
 
-	theManagedChildren := itemElement children all.
+	theManagedChildren := itemElement children.
 	theWords withIndexDo: [ :aText :anIndex |
 		anIndex ~= 15 ifTrue: [ 
 			(theManagedChildren at: anIndex)

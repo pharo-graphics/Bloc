@@ -6,7 +6,7 @@ testRemoveAt
 	childrenArray removeAt: 5.
 	childrenArray removeAt: 3.
 	childrenArray removeAt: 1.
-	indices := childrenArray all collect: [ :each | each userData at: #index ].
+	indices := childrenArray collect: [ :each | each userData at: #index ].
 	
 	self assert: childrenArray size equals: 2.
 	self assert: indices equals: #(2 4)

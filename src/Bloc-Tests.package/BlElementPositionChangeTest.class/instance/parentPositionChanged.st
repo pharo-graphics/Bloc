@@ -14,8 +14,8 @@ parentPositionChanged
 	parent := self elementTree.
 	parent forceLayout.
 	
-	child := parent children all first.
-	subChild := child children all first.
+	child := parent children first.
+	subChild := child children first.
 	
 	parentPositionChangedListener := BlEventHandler
 		on: BlElementPositionChangedEvent
