@@ -1,3 +1,3 @@
 children - enumerating
 do: aBlock
-	childrenArray reverseDo: aBlock
+	subsetArray reverseDo: aBlock

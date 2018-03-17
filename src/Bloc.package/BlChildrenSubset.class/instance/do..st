@@ -1,3 +1,3 @@
 children - enumerating
 do: aBlock
-	subsetChildren do: aBlock
+	subsetArray do: aBlock

@@ -1,3 +1,4 @@
 initialization
 initializeFrom: aBlChildren
-	subsetChildren := self subsetFrom: aBlChildren
+	subsetArray := self subsetFrom: aBlChildren.
+	supersetChildren := aBlChildren

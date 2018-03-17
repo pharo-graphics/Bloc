@@ -2,4 +2,4 @@ children - accessing
 size
 	<return: #Number>
 
-	^ subsetChildren size
+	^ subsetArray size
