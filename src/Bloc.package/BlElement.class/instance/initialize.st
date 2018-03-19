@@ -22,6 +22,7 @@ initialize
 	elevation := self defaultElevation.
 
 	shouldHandleMouseEvents := true.
+	shouldChildrenHandleMouseEvents := true.
 
 	misc := BlMiscProperties new.
 	misc label: self className.

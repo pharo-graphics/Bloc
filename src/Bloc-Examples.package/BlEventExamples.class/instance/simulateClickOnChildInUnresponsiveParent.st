@@ -6,7 +6,7 @@ simulateClickOnChildInUnresponsiveParent
 	parent := self grayElement.
 	parent size: 300@300.
 	"make parent element and children be unresponsive to mouse events"
-	parent preventChildrenMouseEvents.
+	parent preventMeAndChildrenMouseEvents.
 	
 	red := self redElement.
 	red size: 200@200.

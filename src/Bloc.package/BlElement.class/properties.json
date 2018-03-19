@@ -26,7 +26,8 @@
 		"measuredBounds",
 		"changes",
 		"transformation",
-		"shouldHandleMouseEvents"
+		"shouldHandleMouseEvents",
+		"shouldChildrenHandleMouseEvents"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 1/24/2018 20:26",
