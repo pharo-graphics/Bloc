@@ -10,14 +10,16 @@ layout: anElement in: aRectangle
 	self
 		layeredChildren: anElement
 		do: [ :aChild |
-			| childBounds |
+			| childBounds alloowedBounds |
 			"ask child for its measured bounds"
-			childBounds := BlBounds fromRectangle: (anElement margin expand: aChild measuredBounds bounds).
+			childBounds := aChild measuredBounds bounds copy.
+			alloowedBounds := aChild margin inset: parentBounds copy.
+		
 			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
 			childBounds := childBounds := self
 				align: aChild
 				bounds: childBounds
-				in: parentBounds
+				in: alloowedBounds
 				with: aChild constraints frame alignment.
 			"and finally set new bounds"
 			aChild applyLayoutIn: childBounds ].
