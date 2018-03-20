@@ -2,4 +2,5 @@ initialization
 initialize
 	super initialize.
 	
-	overlayListener := BlOverlayListener for: self
+	overlayListener := BlOverlayListener for: self.
+	self preventMouseEvents
