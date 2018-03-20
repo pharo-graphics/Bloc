@@ -1,17 +1,15 @@
 private - alignment
 align: anElement bounds: elementBounds in: theParentBounds with: aBlElementAlignment
-	| aTranslation alignment allowedBounds |
-	
-	"take margin into account"
-	allowedBounds := anElement margin inset: theParentBounds.
+	"I don't additionally take element margin or parent padding"
+	| aTranslation alignment |
 	
 	"a composite alignment"
 	alignment := aBlElementAlignment directed: self direction.
-	aTranslation := alignment translationOf: elementBounds in: allowedBounds.
+	aTranslation := alignment translationOf: elementBounds in: theParentBounds.
 
 	aTranslation x isZero
-		ifTrue: [ aTranslation := allowedBounds left @ aTranslation y ].
+		ifTrue: [ aTranslation := theParentBounds left @ aTranslation y ].
 	aTranslation y isZero
-		ifTrue: [ aTranslation := aTranslation x @ allowedBounds top ].
+		ifTrue: [ aTranslation := aTranslation x @ theParentBounds top ].
 
 	^ elementBounds translateBy: aTranslation

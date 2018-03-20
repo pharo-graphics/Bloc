@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "BlLayout",
-	"category" : "Bloc-Layouts-Basic",
+	"super" : "BlArrowheadElement",
+	"category" : "Bloc-Geometry-Arrowheads",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlIgnoreLayout",
+	"name" : "BlArrowheadRectangle",
 	"type" : "normal"
 }

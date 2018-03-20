@@ -12,7 +12,7 @@ layout: anElement in: aRectangle
 		do: [ :aChild |
 			| childBounds |
 			"ask child for its measured bounds"
-			childBounds := aChild measuredBounds bounds.
+			childBounds := BlBounds fromRectangle: (anElement margin expand: aChild measuredBounds bounds).
 			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
 			childBounds := childBounds := self
 				align: aChild
