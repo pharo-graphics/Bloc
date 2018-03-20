@@ -8,5 +8,5 @@ containsPoint: aPoint in: anElement on: aSpartaCanvas
 	aPath := pathCache pathOnSpartaCanvas: aSpartaCanvas.
 	^ aSpartaCanvas stroke
 		path: aPath;
-		width: anElement border width;
+		width: (anElement border width max: 6);
 		containsPoint: aPoint

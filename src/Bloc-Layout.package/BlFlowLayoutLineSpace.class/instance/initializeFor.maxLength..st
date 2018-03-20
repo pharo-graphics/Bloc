@@ -1,9 +1,14 @@
 initialization
 initializeFor: aCollectionOfFloatingChildren maxLength: aNumber
 	"By definition floating elements can not overlap"
-	| endOfOccupiedSpace |
+	| endOfOccupiedSpace maxLength |
+	
+	maxLength := aNumber isInfinite
+		ifTrue: [ SmallInteger maxVal ]
+		ifFalse: [ aNumber ].
+	
 	aCollectionOfFloatingChildren ifEmpty: [ 
-		intervals := { 0 to: aNumber }.
+		intervals := { 0 to: maxLength }.
 		^ self ].
 	
 	intervals := OrderedCollection new.
@@ -12,4 +17,4 @@ initializeFor: aCollectionOfFloatingChildren maxLength: aNumber
 				ifFalse: [ intervals add: (aStart to: aChild startLength) ].
 			aChild startLength + aChild totalLength ].
 	
-	intervals add: (endOfOccupiedSpace to: aNumber)
+	intervals add: (endOfOccupiedSpace to: maxLength)

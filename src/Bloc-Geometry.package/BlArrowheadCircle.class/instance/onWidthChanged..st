@@ -1,5 +1,5 @@
 changes
 onWidthChanged: aNumber
 
-	self size: aNumber * 3 asPoint.
+	self size: aNumber * self scale asPoint.
 	self border: (self border copyWithWidth: aNumber)
