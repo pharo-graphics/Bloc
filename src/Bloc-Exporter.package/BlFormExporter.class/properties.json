@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/21/2018 14:23",
+	"super" : "BlExporter",
+	"category" : "Bloc-Exporter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlFormExporter",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/21/2018 17:51",
+	"super" : "BlFileExporter",
+	"category" : "Bloc-Exporter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlPdfExporter",
+	"type" : "normal"
+}

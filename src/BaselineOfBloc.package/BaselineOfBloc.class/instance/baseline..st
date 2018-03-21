@@ -64,6 +64,9 @@ baseline: spec
 			"Sparta provides us with a canvas and text support"
 			package: #'Bloc-Sparta' with: [ spec requires: #(Bloc 'Bloc-Text' Sparta) ];
 			
+			"Provides a collection of element exporters to different formats (svg, pdf, png, jpeg, form)"
+			package: #'Bloc-Exporter' with: [ spec requires: #(Bloc 'Bloc-Sparta') ];
+			
 			package: #'Bloc-Examples' with: [
 				spec requires: #(
 					'Bloc-Geometry'
@@ -99,6 +102,9 @@ baseline: spec
 				'Bloc-Sparta'
 				'Bloc-Infinite'
 				'Bloc-Infinite-Layouts'
+				
+				"Exporters"
+				'Bloc-Exporter'
 				
 				"GToolkit Extensions"
 				'Bloc-Extensions'

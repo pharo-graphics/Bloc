@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/21/2018 14:20",
+	"super" : "Object",
+	"category" : "Bloc-Exporter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"element"
+	],
+	"name" : "BlExporter",
+	"type" : "normal"
+}
