@@ -1,4 +1,4 @@
-instance creation
+api - instance creation
 extent: aPoint
 	<return: #SpartaCanvas>
 	
