@@ -3,6 +3,7 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"session",
+		"canvasIdentity",
 		"geometry",
 		"geometryPath"
 	],

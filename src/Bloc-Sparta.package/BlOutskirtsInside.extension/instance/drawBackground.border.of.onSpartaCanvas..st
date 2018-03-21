@@ -2,11 +2,11 @@
 drawBackground: aBackgroundBlock border: aBorderBlock of: anElement onSpartaCanvas: aCanvas
 
 	"draw background"
-	aBackgroundBlock value.
-
-	anElement border isTransparent
-		ifTrue: [ ^ self ].
-
+	
 	aCanvas clip
-		by: (anElement geometry pathOnSpartaCanvas: aCanvas)
-		during: [ aBorderBlock value ]
+		when: [ anElement border isTransparent not ]
+		by:  [ anElement geometry pathOnSpartaCanvas: aCanvas ]
+		during: [
+			aBackgroundBlock value.
+			anElement border isTransparent
+				ifFalse: [ aBorderBlock value ] ]
