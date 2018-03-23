@@ -7,7 +7,7 @@ closeSpaceWindow: aSpace
 
 	self
 		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host!' ].
+		description: [ 'Space must have a host! Are you sure it is opened?' ].
 
 	"First destroy host space and "
 	aSpace host destroyHostSpaceFor: aSpace.

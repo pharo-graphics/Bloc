@@ -1,4 +1,5 @@
 api
 onWindowClosed
 
-	self space ifNotNil: #close
+	self space hasHostSpace
+		ifTrue: [ self space close ]
