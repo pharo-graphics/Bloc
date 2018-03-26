@@ -5,4 +5,5 @@ defer: aValuable
 	The valuable will be evaluated as soon as possible."
 
 	deferredActions nextPut: aValuable.
-	self requestNextPulse
+	self pulseLoop isRunning
+		ifTrue: [ self requestNextPulse ]

@@ -1,17 +1,16 @@
 visiting keyboard
 visitKeyDownEvent: anEvent
-	| keyEvent mods |
-	mods := anEvent modifiers.
+	| keyEvent |
 
 	keyEvent := BlKeyDownEvent new
-		modifiers: (self convertKeyModifiers: mods);
-		position: anEvent position;
-		screenPosition: window position + anEvent position;
-		repeat: anEvent repeat;
-		keyValue: anEvent symbol;
-		charCode: (self mapSymbolToKeyValue: anEvent symbol);
+		key: (Key value: (self mapSymbolToKeyValue: anEvent symbol));
 		scanCode: anEvent scanCode;
-		timestamp: DateAndTime now.
-	
+
+		modifiers: (self convertKeyModifiers: anEvent modifiers);
+		timestamp: DateAndTime now;
+		position: anEvent position;
+		screenPosition: window position + anEvent position.
+		
+	keyEvent logCr.
 	
 	^ keyEvent

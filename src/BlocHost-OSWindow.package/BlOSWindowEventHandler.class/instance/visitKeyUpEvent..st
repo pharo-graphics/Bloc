@@ -1,14 +1,16 @@
 visiting keyboard
 visitKeyUpEvent: anEvent
 	| keyEvent |
+
 	keyEvent := BlKeyUpEvent new
-		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		position: anEvent position;
-		screenPosition: window position + anEvent position;
-		repeat: anEvent repeat;
-		key: (Key character: anEvent character);
+		key: (Key value: (self mapSymbolToKeyValue: anEvent symbol));
 		scanCode: anEvent scanCode;
-		charCode: (self mapSymbolToKeyValue: anEvent symbol);
-		timestamp: DateAndTime now.
+
+		modifiers: (self convertKeyModifiers: anEvent modifiers);
+		timestamp: DateAndTime now;
+		position: anEvent position;
+		screenPosition: window position + anEvent position.
+
+	keyEvent logCr.
 
 	^ keyEvent
