@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlElementEventListener",
+	"category" : "Bloc-Utilities - Equalizer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEqualizer",
+	"type" : "normal"
+}

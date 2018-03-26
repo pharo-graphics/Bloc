@@ -1,9 +1,6 @@
 event management
 dispatchEvent: anEvent
 	"I only call my event dispatcher, so the event can be only handled by my event handlers/filters"
-	(anEvent hasSource
-		and: [ anEvent source == self ])
-			ifTrue: [ ^ self ].
 
 	anEvent hasSource
 		ifFalse: [ anEvent source: anEvent ].

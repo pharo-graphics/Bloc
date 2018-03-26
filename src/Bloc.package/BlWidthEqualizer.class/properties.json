@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEqualizer",
+	"category" : "Bloc-Utilities - Equalizer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"sourceElements",
+		"targetElements"
+	],
+	"name" : "BlWidthEqualizer",
+	"type" : "normal"
+}

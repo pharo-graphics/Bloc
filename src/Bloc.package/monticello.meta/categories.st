@@ -23,6 +23,7 @@ SystemOrganization addCategory: 'Bloc-State'!
 SystemOrganization addCategory: 'Bloc-Universe'!
 SystemOrganization addCategory: 'Bloc-Utilities - Debugging'!
 SystemOrganization addCategory: 'Bloc-Utilities - Drag&Drop'!
+SystemOrganization addCategory: 'Bloc-Utilities - Equalizer'!
 SystemOrganization addCategory: 'Bloc-Utilities - Focus'!
 SystemOrganization addCategory: 'Bloc-Utilities - Overlay'!
 SystemOrganization addCategory: 'Bloc-Utilities - Scalable'!
