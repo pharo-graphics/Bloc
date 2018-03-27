@@ -8,7 +8,7 @@ Example:
 | child parent |
 
 child := BlElement new.
-child when: BlElementAddedEvent do: [ self inform: 'Added to parent' ].
+child when: BlElementAddedToParentEvent do: [ self inform: 'Added to parent' ].
 
 parent := BlElement new.
 parent addChild: child.

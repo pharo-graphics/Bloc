@@ -6,7 +6,7 @@ addedToParent
 	wasAdded := 0.
 	
 	child := self child.
-	child addEventHandlerOn: BlElementAddedEvent do: [ wasAdded := wasAdded + 1 ].
+	child addEventHandlerOn: BlElementAddedToParentEvent do: [ wasAdded := wasAdded + 1 ].
 	
 	parent := self parent.
 	container := self container.
