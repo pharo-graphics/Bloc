@@ -1,4 +1,4 @@
 *Bloc
 arrowDown
-	<return: #Key>
+	<return: #KeyboardKey>
 	^ self value: 16rff99

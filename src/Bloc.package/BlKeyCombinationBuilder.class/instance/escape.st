@@ -1,4 +1,4 @@
 accessing
 escape
 	combination
-		with: (BlSingleKeyCombination new key: Key escape)
+		with: (BlSingleKeyCombination new key: KeyboardKey escape)

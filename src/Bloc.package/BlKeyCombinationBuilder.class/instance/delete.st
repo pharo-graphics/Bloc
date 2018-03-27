@@ -1,4 +1,4 @@
 accessing
 delete
 	combination
-		with: (BlSingleKeyCombination new key: Key delete)
+		with: (BlSingleKeyCombination new key: KeyboardKey delete)

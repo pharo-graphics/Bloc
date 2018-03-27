@@ -3,8 +3,8 @@ meta
 	| meta |
 
 	meta := BlAlternativeCombination new
-		key: Key leftMeta;
-		key: Key rightMeta;
+		key: KeyboardKey leftMeta;
+		key: KeyboardKey rightMeta;
 		yourself.
 
 	combination

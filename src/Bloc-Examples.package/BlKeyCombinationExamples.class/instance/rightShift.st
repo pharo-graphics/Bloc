@@ -2,4 +2,4 @@ instance creation
 rightShift
 	<gtExample>
 	
-	^ Key rightShift
+	^ KeyboardKey rightShift

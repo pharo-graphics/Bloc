@@ -3,17 +3,17 @@ testMatches
 	<gtExample>.
 	self setUp.
 
-	buffer pressed: true key: Key a.
-	buffer pressed: false key: Key b.
-	buffer pressed: true key: Key c.
+	buffer pressed: true key: KeyboardKey a.
+	buffer pressed: false key: KeyboardKey b.
+	buffer pressed: true key: KeyboardKey c.
 	
 	self assert: (combination matches: buffer) not.
 	
-	combination key: Key a.
+	combination key: KeyboardKey a.
 	self assert: (combination matches: buffer).
 	
-	combination key: Key c.
+	combination key: KeyboardKey c.
 	self assert: (combination matches: buffer).
 	
-	combination key: Key b.
+	combination key: KeyboardKey b.
 	self assert: (combination matches: buffer) not

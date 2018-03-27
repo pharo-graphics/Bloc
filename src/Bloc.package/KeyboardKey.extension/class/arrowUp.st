@@ -1,4 +1,4 @@
 *Bloc
 arrowUp
-	<return: #Key>
+	<return: #KeyboardKey>
 	^ self value: 16rff97

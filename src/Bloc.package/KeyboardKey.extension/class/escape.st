@@ -1,5 +1,5 @@
 *Bloc
 escape
-	<return: #Key>
+	<return: #KeyboardKey>
 	
 	^ self value: 16rff1b

@@ -3,8 +3,8 @@ shift
 	| shift |
 
 	shift := BlAlternativeCombination new
-		key: Key leftShift;
-		key: Key rightShift;
+		key: KeyboardKey leftShift;
+		key: KeyboardKey rightShift;
 		yourself.
 		
 	combination

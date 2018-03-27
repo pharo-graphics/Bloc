@@ -1,5 +1,5 @@
 *Bloc
 rightMeta
-	<return: #Key>
+	<return: #KeyboardKey>
 	
 	^ self value: 16rffe8

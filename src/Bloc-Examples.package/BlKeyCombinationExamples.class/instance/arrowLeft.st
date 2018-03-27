@@ -2,4 +2,4 @@ instance creation
 arrowLeft
 	<gtExample>
 	
-	^ Key arrowLeft
+	^ KeyboardKey arrowLeft

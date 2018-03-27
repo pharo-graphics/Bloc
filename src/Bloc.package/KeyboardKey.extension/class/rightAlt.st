@@ -1,5 +1,5 @@
 *Bloc
 rightAlt
-	<return: #Key>
+	<return: #KeyboardKey>
 	
 	^ self value: 16rffea

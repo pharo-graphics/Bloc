@@ -1,6 +1,6 @@
 *Bloc
 character: aCharacter
-	<return: #Key>
+	<return: #KeyboardKey>
 
 	^ KeyTable
 		at: aCharacter asUnicode

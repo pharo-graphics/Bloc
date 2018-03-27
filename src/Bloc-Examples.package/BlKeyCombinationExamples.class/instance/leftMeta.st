@@ -2,4 +2,4 @@ instance creation
 leftMeta
 	<gtExample>
 	
-	^ Key leftMeta
+	^ KeyboardKey leftMeta

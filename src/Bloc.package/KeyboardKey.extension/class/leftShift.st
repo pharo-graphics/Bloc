@@ -1,4 +1,4 @@
 *Bloc
 leftShift
-	<return: #Key>
+	<return: #KeyboardKey>
 	^ self value: 16rffe1

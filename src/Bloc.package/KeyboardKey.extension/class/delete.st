@@ -1,5 +1,5 @@
 *Bloc
 delete
-	<return: #Key>
+	<return: #KeyboardKey>
 
 	^ self value: 16rffff

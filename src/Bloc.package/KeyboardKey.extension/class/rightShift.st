@@ -1,4 +1,4 @@
 *Bloc
 rightShift
-	<return: #Key>
+	<return: #KeyboardKey>
 	^ self value: 16rffe2

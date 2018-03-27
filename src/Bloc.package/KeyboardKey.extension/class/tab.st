@@ -1,4 +1,4 @@
 *Bloc
 tab
-	<return: #Key>
+	<return: #KeyboardKey>
 	^ self value: 16rff09

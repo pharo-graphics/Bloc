@@ -15,13 +15,13 @@ keyDownEvent: anEvent
 	direction := nil.
 	next := nil.
 			
-	anEvent key = Key arrowLeft
+	anEvent key = KeyboardKey arrowLeft
 		ifTrue: [ direction := BlFocusSearchDirectionLeft new ].
-	anEvent key = Key arrowUp
+	anEvent key = KeyboardKey arrowUp
 		ifTrue: [ direction := BlFocusSearchDirectionUp new ].
-	anEvent key = Key arrowRight
+	anEvent key = KeyboardKey arrowRight
 		ifTrue: [ direction := BlFocusSearchDirectionRight new ].
-	anEvent key = Key arrowDown
+	anEvent key = KeyboardKey arrowDown
 		ifTrue: [ direction := BlFocusSearchDirectionDown new ].
 				
 	next := direction ifNotNil: [ :aDirection |

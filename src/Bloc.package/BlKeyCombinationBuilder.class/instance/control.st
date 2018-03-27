@@ -3,8 +3,8 @@ control
 	| control |
 
 	control := BlAlternativeCombination new
-		key: Key leftControl;
-		key: Key rightControl;
+		key: KeyboardKey leftControl;
+		key: KeyboardKey rightControl;
 		yourself.
 
 	combination

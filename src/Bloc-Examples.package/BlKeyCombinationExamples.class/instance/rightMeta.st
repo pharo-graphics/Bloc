@@ -2,4 +2,4 @@ instance creation
 rightMeta
 	<gtExample>
 	
-	^ Key rightMeta
+	^ KeyboardKey rightMeta

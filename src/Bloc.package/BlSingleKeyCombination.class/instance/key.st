@@ -1,5 +1,5 @@
 accessing
 key
-	<return: #Key>
+	<return: #KeyboardKey>
 
 	^ key

@@ -1,5 +1,5 @@
 *Bloc
 leftControl
-	<return: #Key>
+	<return: #KeyboardKey>
 	
 	^ self value: 16rffe3
