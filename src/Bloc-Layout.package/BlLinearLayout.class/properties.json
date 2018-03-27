@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "GlennCavarle 6/27/2016 15:22",
-	"super" : "BlLayout",
-	"category" : "Bloc-Layout-Linear",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlAlignable classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"weightSum",
@@ -13,5 +9,11 @@
 		"orientation"
 	],
 	"name" : "BlLinearLayout",
-	"type" : "normal"
+	"commentStamp" : "GlennCavarle 6/27/2016 15:22",
+	"super" : "BlLayout",
+	"traitcomposition" : "TBlAlignable - {#alignTopLeft}",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Layout-Linear"
 }

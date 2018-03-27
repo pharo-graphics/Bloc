@@ -1,0 +1,3 @@
+accessing
+horizontalAlignment: aBlElementAlignment
+	self explicitRequirement

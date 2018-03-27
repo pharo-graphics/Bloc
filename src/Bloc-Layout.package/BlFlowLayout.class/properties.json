@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "",
-	"super" : "BlLayout",
-	"category" : "Bloc-Layout-Flow",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlAlignable classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"measurer",
@@ -12,5 +8,11 @@
 		"verticalAlignment"
 	],
 	"name" : "BlFlowLayout",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "BlLayout",
+	"traitcomposition" : "TBlAlignable",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Layout-Flow"
 }
