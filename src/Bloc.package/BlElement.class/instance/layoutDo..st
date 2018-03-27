@@ -1,4 +1,4 @@
-layout
+api - layout
 layoutDo: aBlock
 	"Perform aBlock with my layout as argument.
 	Nite: After evaluation I request a layout update.

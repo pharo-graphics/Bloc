@@ -1,4 +1,4 @@
-layout constraints
+api - layout
 constraintsDo: aBlock
 	"Perform aBlock with my constraints as argument.
 	Note: After evaluation I request a layout update!

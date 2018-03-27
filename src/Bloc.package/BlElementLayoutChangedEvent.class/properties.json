@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/27/2018 18:14",
+	"super" : "BlElementEvent",
+	"category" : "Bloc-Event",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlElementLayoutChangedEvent",
+	"type" : "normal"
+}
