@@ -1,6 +1,7 @@
 layout
 onMeasure: anExtentMeasurementSpec
-	self relocate: (overlayListener positionFor: referenceElement).
-	self size: (overlayListener extentFor: referenceElement).
+
+	self isAttached
+		ifTrue: [ self measureMyBounds ].
 
 	super onMeasure: anExtentMeasurementSpec
