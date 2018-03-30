@@ -5,14 +5,14 @@ moveCursorLeft: aTextEditElement by: aNumber
 
 	self
 		assert: [ aTextEditElement hasCursor ]
-		description: [ 'An element must have a cursor in order to move it right' ].
+		description: [ 'An element must have a cursor in order to move it left' ].
 
 	self 
 		assert: [ aNumber > 0 ]
 		description: [ 'Cursor movement distance must be greater than zero' ].
 	
-	(aTextEditElement cursorPosition - aNumber) <= 1
-		ifTrue: [ ^ self transferCursorRight: aTextEditElement ].
+	(aTextEditElement cursorPosition - aNumber) < 0
+		ifTrue: [ ^ self transferCursorLeft: aTextEditElement ].
 
 	self
 		moveCursorTo: aTextEditElement cursorPosition - aNumber
