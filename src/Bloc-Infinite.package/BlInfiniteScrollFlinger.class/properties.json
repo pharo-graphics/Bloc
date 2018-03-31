@@ -1,21 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "BlInfiniteRunnable",
+	"super" : "BlScrollFlinger",
 	"category" : "Bloc-Infinite-Scroller",
 	"classinstvars" : [ ],
 	"pools" : [
 		"BlInfiniteConstants"
 	],
 	"classvars" : [ ],
-	"instvars" : [
-		"infiniteElement",
-		"reSchedulePostAnimationCallback",
-		"eatRunOnAnimationRequest",
-		"lastFlingX",
-		"lastFlingY",
-		"scroller",
-		"interpolator"
-	],
+	"instvars" : [ ],
 	"name" : "BlInfiniteScrollFlinger",
 	"type" : "normal"
 }

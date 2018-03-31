@@ -1,0 +1,21 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/30/2018 14:42",
+	"super" : "Object",
+	"category" : "Bloc-Utilities - Scrolling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Fling",
+		"Scroll"
+	],
+	"instvars" : [
+		"interpolator",
+		"scrollerX",
+		"scrollerY",
+		"mode",
+		"isFlywheel",
+		"time"
+	],
+	"name" : "BlOverScroller",
+	"type" : "normal"
+}

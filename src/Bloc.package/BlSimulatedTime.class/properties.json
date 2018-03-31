@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlTime",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"date"
+	],
+	"name" : "BlSimulatedTime",
+	"type" : "normal"
+}

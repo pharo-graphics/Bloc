@@ -1,3 +1,3 @@
-accessing - properties
+api - scrolling accessing
 overScrollMode
 	^ overScrollMode

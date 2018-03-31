@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlSplineOverScrollerStep",
+	"category" : "Bloc-Utilities - Scrolling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlSplineOverScrollerBallisticStep",
+	"type" : "normal"
+}

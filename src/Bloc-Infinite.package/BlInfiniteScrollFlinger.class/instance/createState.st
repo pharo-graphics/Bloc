@@ -1,3 +1,0 @@
-initialization
-createState
-	^ BlInfiniteScrollFlingerState new

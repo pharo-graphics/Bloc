@@ -1,4 +1,5 @@
 SystemOrganization addCategory: #'Bloc-Infinite'!
+SystemOrganization addCategory: 'Bloc-Infinite-!! Core'!
 SystemOrganization addCategory: 'Bloc-Infinite-Animator'!
 SystemOrganization addCategory: 'Bloc-Infinite-Basic'!
 SystemOrganization addCategory: 'Bloc-Infinite-Children'!

@@ -3,7 +3,7 @@ childHolderOf: aChildElement
 	"Return an element holder assigned to my direct child.
 	aChildElement must be my direct child.
 	Element holder can not be nil"
-	<return: #BlInfiniteElementHolder>
+	<return: #BlInfiniteHolder>
 
 	self
 		assert: [ aChildElement parent == self ]

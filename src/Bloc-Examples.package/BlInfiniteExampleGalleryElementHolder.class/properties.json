@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BlInfiniteElementHolder",
+	"super" : "BlInfiniteHolder",
 	"category" : "Bloc-Examples-Infinite",
 	"classinstvars" : [ ],
 	"pools" : [ ],

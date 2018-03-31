@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/30/2018 18:34",
+	"super" : "Object",
+	"category" : "Bloc-Universe",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"frozenTime",
+		"frozen"
+	],
+	"name" : "BlTime",
+	"type" : "normal"
+}

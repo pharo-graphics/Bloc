@@ -1,4 +1,4 @@
-layout - anchor
+private - layout anchor
 updateAnchorFromPendingDataInvalidOffset: anAnchorInfo
 	| anElement |
 	

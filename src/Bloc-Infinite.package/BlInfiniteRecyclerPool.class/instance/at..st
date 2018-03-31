@@ -1,6 +1,6 @@
 recycling
 at: anIntemType
-	<return: #BlInfiniteElementHolder or: nil>
+	<return: #BlInfiniteHolder or: nil>
 
 	^ scrap at: anIntemType
 		ifPresent: [ :aScrapHeap |

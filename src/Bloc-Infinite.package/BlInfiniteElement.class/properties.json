@@ -1,11 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 12/10/2016 20:33",
-	"super" : "BlElement",
-	"category" : "Bloc-Infinite-Basic",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlInfiniteConstants"
-	],
+	"classtraitcomposition" : "TBlScrollable classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"dataSource",
@@ -38,5 +32,13 @@
 		"overScrollMode"
 	],
 	"name" : "BlInfiniteElement",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 3/29/2018 13:52",
+	"super" : "BlElement",
+	"traitcomposition" : "TBlScrollable",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"category" : "Bloc-Infinite-! Core"
 }

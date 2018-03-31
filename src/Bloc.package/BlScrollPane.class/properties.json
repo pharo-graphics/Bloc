@@ -1,0 +1,16 @@
+{
+	"classtraitcomposition" : "TBlScrollable classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"scrollState",
+		"scrollFlinger"
+	],
+	"name" : "BlScrollPane",
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"traitcomposition" : "TBlScrollable",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Utilities - Scrolling"
+}

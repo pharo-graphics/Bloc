@@ -1,7 +1,7 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/20/2016 23:47",
+	"commentStamp" : "AliakseiSyrel 3/29/2018 14:35",
 	"super" : "BlLayout",
-	"category" : "Bloc-Infinite-Layout",
+	"category" : "Bloc-Infinite-! Core",
 	"classinstvars" : [ ],
 	"pools" : [
 		"BlInfiniteConstants"

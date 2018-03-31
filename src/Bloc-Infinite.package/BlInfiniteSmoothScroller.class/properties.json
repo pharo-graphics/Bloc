@@ -1,23 +1,19 @@
 {
-	"classtraitcomposition" : "TBlDebug classTrait",
+	"commentStamp" : "AliakseiSyrel 12/18/2016 16:43",
+	"super" : "BlSmoothScroller",
+	"category" : "Bloc-Infinite-Scroller",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
 	"classvars" : [ ],
 	"instvars" : [
 		"infiniteElement",
 		"infiniteLayout",
 		"targetPosition",
-		"isRunning",
-		"pendingInitialRun",
 		"targetElement",
 		"action"
 	],
 	"name" : "BlInfiniteSmoothScroller",
-	"commentStamp" : "AliakseiSyrel 12/18/2016 16:43",
-	"super" : "Object",
-	"traitcomposition" : "TBlDebug",
-	"type" : "normal",
-	"classinstvars" : [ ],
-	"pools" : [
-		"BlInfiniteConstants"
-	],
-	"category" : "Bloc-Infinite-Scroller"
+	"type" : "normal"
 }

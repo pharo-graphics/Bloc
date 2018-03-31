@@ -1,4 +1,4 @@
-dispatching
+api - scrolling notifying
 dispatchOnScrolled: aPoint
 
 	dispatchScrollCounter := dispatchScrollCounter + 1.

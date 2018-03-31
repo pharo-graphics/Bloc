@@ -1,4 +1,0 @@
-scrolling
-continueWhenFinishedCubic
-
-	^ false

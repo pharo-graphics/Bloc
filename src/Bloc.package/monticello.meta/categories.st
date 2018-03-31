@@ -27,4 +27,5 @@ SystemOrganization addCategory: 'Bloc-Utilities - Equalizer'!
 SystemOrganization addCategory: 'Bloc-Utilities - Focus'!
 SystemOrganization addCategory: 'Bloc-Utilities - Overlay'!
 SystemOrganization addCategory: 'Bloc-Utilities - Scalable'!
+SystemOrganization addCategory: 'Bloc-Utilities - Scrolling'!
 SystemOrganization addCategory: 'Bloc-Utilities - Selection'!

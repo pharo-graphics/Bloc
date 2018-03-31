@@ -1,3 +1,3 @@
 initialize-release
 defaultHolder
-	^ BlInfiniteElementHolder new
+	^ BlInfiniteHolder new

@@ -12,7 +12,7 @@ dispatchLayoutFirstStepPredictiveAnimations
 	"temporarily disable flag because we are asking for previous layout"
 	didStructureChange := self state didStructureChange.
 	self state structureChanged: false.
-	layout layoutChildren.
+	layout layoutChildrenIn: self recycler state: self state.
 	self state structureChanged: didStructureChange.
 	
 	childrenManager childrenDo: [ :anElement |

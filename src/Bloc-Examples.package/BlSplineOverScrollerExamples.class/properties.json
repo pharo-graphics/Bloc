@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 3/30/2018 19:41",
+	"super" : "Object",
+	"category" : "Bloc-Examples-Scrolling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlSplineOverScrollerExamples",
+	"type" : "normal"
+}

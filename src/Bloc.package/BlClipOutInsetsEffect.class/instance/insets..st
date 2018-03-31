@@ -1,3 +1,3 @@
 accessing
-insets: anObject
-	insets := anObject
+insets: aBlInsets
+	insets := aBlInsets

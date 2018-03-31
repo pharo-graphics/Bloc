@@ -1,3 +1,0 @@
-testing
-isSpline
-	^ state = Spline

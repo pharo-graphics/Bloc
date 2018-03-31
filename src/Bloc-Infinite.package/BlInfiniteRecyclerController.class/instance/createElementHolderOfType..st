@@ -1,5 +1,5 @@
 recycler -> data source
 createElementHolderOfType: anItemType
-	<return: #BlInfiniteElementHolder>
+	<return: #BlInfiniteHolder>
 
 	^ self dataSource createHolder: infiniteElement type: anItemType

@@ -1,3 +1,3 @@
 initialization
 defaultState
-	^ BlInfiniteElementState new
+	^ BlInfiniteState new

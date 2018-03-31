@@ -1,0 +1,22 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Utilities - Scrolling",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlInfiniteConstants"
+	],
+	"classvars" : [ ],
+	"instvars" : [
+		"x",
+		"y",
+		"dX",
+		"dY",
+		"hResult",
+		"vResult",
+		"overscrollX",
+		"overscrollY"
+	],
+	"name" : "BlScrollFlingerState",
+	"type" : "normal"
+}

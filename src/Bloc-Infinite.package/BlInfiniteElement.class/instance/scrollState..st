@@ -1,4 +1,4 @@
-private - scrolling
+private - scrolling accessing
 scrollState: aScrollState
 	"Internal! Never set me directly"
 

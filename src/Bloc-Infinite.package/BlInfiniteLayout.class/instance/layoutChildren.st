@@ -1,3 +1,0 @@
-layout
-layoutChildren
-	self subclassResponsibility

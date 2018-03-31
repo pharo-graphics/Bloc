@@ -1,0 +1,1 @@
+I encapsulate scrolling with the ability to overshoot the bounds of a scrolling operation.

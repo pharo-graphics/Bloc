@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlOverScrollMode",
+	"category" : "Bloc-Utilities - Scrolling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlOverScrollNeverMode",
+	"type" : "normal"
+}

@@ -5,7 +5,7 @@ updateLayoutState: aLayoutDirection requiredSpace: aRequiredSpace canUseExisting
 	| aScrollingOffset |
 
 	layoutState isInfinite: self resolveIsInfinite.
-	layoutState extraSpace: self computeExtraLayoutSpace.
+	layoutState extraSpace: self extraLayoutSpace.
 	layoutState layoutDirection: aLayoutDirection.
 	
 	aScrollingOffset := (aLayoutDirection isStart

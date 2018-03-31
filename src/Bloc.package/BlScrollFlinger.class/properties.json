@@ -1,0 +1,20 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Utilities - Scrolling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"interpolator",
+		"scroller",
+		"lastFlingX",
+		"lastFlingY",
+		"step",
+		"eatRunOnAnimationRequest",
+		"reSchedulePostAnimationCallback",
+		"scrollable"
+	],
+	"name" : "BlScrollFlinger",
+	"type" : "normal"
+}

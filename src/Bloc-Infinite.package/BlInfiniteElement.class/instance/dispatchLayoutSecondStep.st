@@ -16,7 +16,7 @@ dispatchLayoutSecondStep
 	
 	"Run layout"
 	self state isPreLayout: false.
-	layout layoutChildren.
+	layout layoutChildrenIn: self recycler state: self state.
 	self state structureChanged: false.
 	
 	"layoutChildren may have caused user code to disable item animations; re-check"
