@@ -1,4 +1,4 @@
-scrolling
+private - updating
 updateBallistic: aDeltaTime
 	"r = vt + at^2 / 2, r - distance, t - delta time, a - acceleration (constant)
 	https://en.wikipedia.org/wiki/Acceleration#Uniform_acceleration"

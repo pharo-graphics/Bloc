@@ -1,3 +1,3 @@
 initialization
 defaultDuration
-	^ 200
+	^ 200 milliSeconds

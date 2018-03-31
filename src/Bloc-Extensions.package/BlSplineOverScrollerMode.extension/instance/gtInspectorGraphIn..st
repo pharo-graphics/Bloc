@@ -15,8 +15,8 @@ gtInspectorGraphIn: aComposite
 
 			theData := OrderedCollection new.
 			aScroller time
-				every: 16 milliSeconds
-				while: [ aScroller updateFull ]
+				every: 10 milliSeconds
+				while: [ aScroller run ]
 				do: [ theData add: {
 					#time -> aScroller time now.
 					#position -> aScroller currentPosition.

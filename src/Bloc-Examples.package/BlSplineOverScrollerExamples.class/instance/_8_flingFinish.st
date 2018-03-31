@@ -1,23 +1,23 @@
 examples - overshot
-_5_flingContinueWhenReachedTheOvershotMax
+_8_flingFinish
 	<gtExample>
-	| aSplineOverScroller shouldContinue |
+	| aSplineOverScroller |
 
-	aSplineOverScroller := self _4_flingMovingToTheOvershotMax.
+	aSplineOverScroller := self _7_flingContinueAfterSpringBack.
 	
 	self assert: aSplineOverScroller isFinished not.
 	self assert: aSplineOverScroller update not.
+	self assert: aSplineOverScroller continue not.
+	
+	aSplineOverScroller finish.
 
-	shouldContinue := aSplineOverScroller continue.
-	self assert: shouldContinue.
-
-	self assert: (aSplineOverScroller currentVelocity closeTo: 6.5756397).
-	self assert: aSplineOverScroller currentPosition equals: 250.
+	self assert: aSplineOverScroller currentVelocity equals: 0.
+	self assert: aSplineOverScroller currentPosition equals: 200.
 	self assert: aSplineOverScroller currentStep equals: BlSplineOverScrollerStep cubic.
 	self assert: (aSplineOverScroller deceleration closeTo: -2000.0).
 	self assert: aSplineOverScroller duration equals: 223 milliSeconds.
 	self assert: aSplineOverScroller finalPosition equals: 200.
-	self assert: aSplineOverScroller isFinished not.
+	self assert: aSplineOverScroller isFinished.
 	self assert: aSplineOverScroller friction equals: 0.015.
 	self assert: aSplineOverScroller overshotDistance equals: 50.
 	self assert: aSplineOverScroller splineDistance equals: 283.

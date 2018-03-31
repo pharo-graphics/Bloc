@@ -7,10 +7,8 @@ computeOffset
 	self isFinished
 		ifTrue: [ ^ false ].
 
-	mode = Scroll
-		ifTrue: [ self computeOffsetScroll ].
-
-	mode = Fling
-		ifTrue: [ self computeOffsetFling ].
+	self time synchronized: [
+		scrollerX run.
+		scrollerY run ].
 
 	^ true

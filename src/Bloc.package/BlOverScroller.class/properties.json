@@ -4,15 +4,11 @@
 	"category" : "Bloc-Utilities - Scrolling",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [
-		"Fling",
-		"Scroll"
-	],
+	"classvars" : [ ],
 	"instvars" : [
 		"interpolator",
 		"scrollerX",
 		"scrollerY",
-		"mode",
 		"isFlywheel",
 		"time"
 	],

@@ -1,4 +1,4 @@
-physics
+private - scrolling
 startSpringbackFor: aVelocity start: aStartPosition end: anEndPosition
 	| aDelta |
 	
@@ -13,4 +13,4 @@ startSpringbackFor: aVelocity start: aStartPosition end: anEndPosition
 	deceleration := self decelerationFor: aDelta.
 	startVelocity := aDelta negated.
 	overshotDistance := aDelta abs.
-	duration := 1000 milliSeconds * (-2.0 * aDelta / deceleration) sqrt
+	duration := (self truncated: (1000 * (-2.0 * aDelta / deceleration) sqrt)) milliSeconds

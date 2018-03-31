@@ -1,6 +1,5 @@
-scrolling
+private - lifecycle
 finish
+	"Finish animation and perform the necessary cleanup"
 
-	currentPosition := finalPosition.
-	self currentVelocity: 0.0.
-	isFinished := true
+	self mode finishOn: self

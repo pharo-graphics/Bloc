@@ -1,4 +1,4 @@
-api - scrolling
+api - accessing
 currentVelocity
 	<return: #Number>
 

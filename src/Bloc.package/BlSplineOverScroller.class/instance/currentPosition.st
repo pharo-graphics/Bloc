@@ -1,4 +1,4 @@
-api - scrolling
+api - accessing
 currentPosition
 	<return: #Number>
 

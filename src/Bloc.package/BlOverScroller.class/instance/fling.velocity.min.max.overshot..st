@@ -18,8 +18,6 @@ fling: aStartPosition velocity: aVelocityPoint min: aMinPosition max: aMaxPositi
 					aVelocityX := aVelocityX + anOldVelocityX.
 					aVelocityY := aVelocityY + anOldVelocityY ] ].
 	
-	mode := Fling.
-	
 	scrollerX
 		fling: aVelocityX
 		start: aStartPosition x

@@ -1,4 +1,4 @@
-physics
+private - scrolling
 startBounceAfterEdgeFor: aVelocity start: aStart end: anEnd
 
 	deceleration := self decelerationFor: ( aVelocity isZero

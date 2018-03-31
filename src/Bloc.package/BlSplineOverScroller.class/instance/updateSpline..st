@@ -1,4 +1,4 @@
-scrolling
+private - updating
 updateSpline: aDeltaTime
 	| aTime anIndex aDistanceCoef aVelocityCoef |
 	

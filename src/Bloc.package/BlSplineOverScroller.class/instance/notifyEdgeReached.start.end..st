@@ -1,4 +1,4 @@
-scrolling
+private - scrolling
 notifyEdgeReached: anOvershotDistance start: aStart end: anEnd
 	
 	currentStep = Spline

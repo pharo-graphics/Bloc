@@ -6,5 +6,4 @@ initialize
 	interpolator := self defaultInterpolator.
 	scrollerX := self defaultSplineScroller time: time.
 	scrollerY := self defaultSplineScroller time: time.
-	isFlywheel := self defaultFlyweel.
-	mode := Scroll
+	isFlywheel := self defaultFlyweel

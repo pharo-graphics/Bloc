@@ -8,7 +8,7 @@ _3_flingContinueWhenReachedTheEdge
 	self assert: aSplineOverScroller isFinished not.
 	self assert: aSplineOverScroller update not.
 
-	shouldContinue := aSplineOverScroller continueWhenFinished.
+	shouldContinue := aSplineOverScroller continue.
 	"we should spring back, because velocity is very high and we overshot"
 	self assert: shouldContinue.
 

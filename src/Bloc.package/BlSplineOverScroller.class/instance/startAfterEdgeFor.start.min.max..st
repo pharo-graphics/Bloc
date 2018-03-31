@@ -1,4 +1,4 @@
-physics
+private - scrolling
 startAfterEdgeFor: aVelocity start: aStart min: aMin max: aMax
 	| isPositive anEdge anOverDistance shouldKeepInscreasing |
 	

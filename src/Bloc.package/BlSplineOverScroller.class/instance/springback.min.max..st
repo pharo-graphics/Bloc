@@ -1,4 +1,4 @@
-physics
+private - scrolling
 springback: aStart min: aMin max: aMax
 	
 	isFinished := true.

@@ -1,4 +1,4 @@
-api - scrolling
+api - accessing
 currentStep
 	<return: #BlSplineOverScrollerStep>
 
