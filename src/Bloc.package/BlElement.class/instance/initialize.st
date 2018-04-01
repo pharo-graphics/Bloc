@@ -26,4 +26,6 @@ initialize
 
 	misc := BlMiscProperties new.
 	misc label: self className.
-	opacity := 1.0
+	opacity := 1.0.
+	
+	taskQueue := BlTaskQueue new

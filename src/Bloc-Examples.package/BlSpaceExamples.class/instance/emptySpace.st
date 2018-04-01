@@ -6,7 +6,6 @@ emptySpace
 	aSpace := BlSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self assert: aSpace root hasChildren not.
-	self assert: aSpace glass hasChildren not.
 	self assert: aSpace dirtyAreas isEmpty.
 	self assert: aSpace extent equals: aSpace defaultExtent.
 	self assert: aSpace height equals: aSpace defaultExtent y.

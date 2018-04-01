@@ -1,4 +1,4 @@
-physics
+private - physics
 adjustDuration: aDuration start: aStart final: aNewFinal previousFinal: anOldFinal
 	<return: #Duration>
 	| anOldDistance aNewDistance anX anIndex anIndexPlusOne aNewDuration |

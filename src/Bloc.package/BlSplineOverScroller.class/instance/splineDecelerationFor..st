@@ -1,4 +1,4 @@
-physics
+private - physics
 splineDecelerationFor: aVelocity
 	<return: #Number>
 

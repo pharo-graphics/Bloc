@@ -5,4 +5,6 @@ onAddedToSceneGraph
 	Note: Always send onAddedToSceneGraph to super class if you override me!"
 	
 	self isFocused
-		ifTrue: [ self requestFocus ]
+		ifTrue: [ self requestFocus ].
+		
+	self space taskQueue enqueueFrom: self taskQueue

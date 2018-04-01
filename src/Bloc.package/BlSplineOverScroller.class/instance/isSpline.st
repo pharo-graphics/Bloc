@@ -1,4 +1,4 @@
-testing
+api - testing
 isSpline
 	<return: #Boolean>
 

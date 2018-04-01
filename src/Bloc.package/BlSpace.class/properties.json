@@ -7,7 +7,6 @@
 		"extent",
 		"position",
 		"root",
-		"glass",
 		"resizable",
 		"borderless",
 		"rootStyler",
@@ -25,7 +24,8 @@
 		"focused",
 		"title",
 		"fullscreen",
-		"layoutError"
+		"layoutError",
+		"tasks"
 	],
 	"name" : "BlSpace",
 	"commentStamp" : "AliakseiSyrel 6/14/2017 20:54",

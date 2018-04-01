@@ -1,4 +1,4 @@
-physics
+private - physics
 decelerationFor: aVelocity
 	"Return a signed deceleration that will reduce the velocity"
 	<return: #Number>

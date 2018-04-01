@@ -3,9 +3,7 @@
 	"super" : "Object",
 	"category" : "Bloc-Utilities - Scrolling",
 	"classinstvars" : [ ],
-	"pools" : [
-		"BlInfiniteConstants"
-	],
+	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"x",

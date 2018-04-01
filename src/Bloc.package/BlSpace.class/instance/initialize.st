@@ -14,8 +14,9 @@ initialize
 	focusProcessor := BlFocusProcessor space: self.
 	keyboardProcessor := BlKeyboardProcessor space: self.
 
+	tasks := BlTaskQueue new.
+
 	root := self defaultRoot.
-	glass := self defaultGlass.
 
 	rootStyler := self defaultRootStyler.
 
@@ -29,5 +30,4 @@ initialize
 
 	self updateCursorImage: Cursor normal.
 
-	self root space: self.
-	self glass space: self
+	self root space: self

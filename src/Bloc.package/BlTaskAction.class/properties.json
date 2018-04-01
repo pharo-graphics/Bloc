@@ -1,13 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Bloc-Universe",
+	"super" : "BlTask",
+	"category" : "Bloc-Space-Support",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"action"
 	],
-	"name" : "BlDeferredAction",
+	"name" : "BlTaskAction",
 	"type" : "normal"
 }

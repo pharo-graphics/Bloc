@@ -1,4 +1,4 @@
-physics
+private - physics
 splineFlingDistanceFor: aVelocity
 	<return: #Number>
 	| aSplineDeceleration |

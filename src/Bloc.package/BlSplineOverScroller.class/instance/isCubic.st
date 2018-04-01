@@ -1,5 +1,5 @@
 api - testing
-isFinished
+isCubic
 	<return: #Boolean>
 
-	^ isFinished
+	^ currentStep = Cubic

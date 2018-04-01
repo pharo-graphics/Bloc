@@ -1,4 +1,4 @@
-physics
+private - physics
 splineFlingDurationFor: aVelocity
 	"Return the duration, expressed in milliseconds"
 	<return: #Duration>

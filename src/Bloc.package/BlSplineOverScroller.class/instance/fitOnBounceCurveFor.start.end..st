@@ -1,4 +1,4 @@
-physics
+private - physics
 fitOnBounceCurveFor: aVelocity start: aStart end: anEnd
 	| aDurationToApex aDistanceToApex aDistanceToEdge aSquaredVelocity aTotalDuration |
 	

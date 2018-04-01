@@ -27,7 +27,8 @@
 		"changes",
 		"transformation",
 		"shouldHandleMouseEvents",
-		"shouldChildrenHandleMouseEvents"
+		"shouldChildrenHandleMouseEvents",
+		"taskQueue"
 	],
 	"name" : "BlElement",
 	"commentStamp" : "AliakseiSyrel 1/24/2018 20:26",
