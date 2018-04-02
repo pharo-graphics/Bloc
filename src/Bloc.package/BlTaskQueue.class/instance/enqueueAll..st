@@ -9,4 +9,4 @@ enqueueAll: aCollectionOfBlTask
 			assert: [ (tasks includesAny: aCollectionOfBlTask) not ]
 			description: [ 'Tasks must not exist' ].
 		
-		tasks := tasks copyWithAll: aCollectionOfBlTask ]
+		tasks := tasks, aCollectionOfBlTask ]
