@@ -1,3 +1,3 @@
 deferred actions
 postOnAnimation: aRunnableAction
-	BlUniverse default animationManager addAnimation: aRunnableAction
+	self enqueueTask: aRunnableAction

@@ -7,7 +7,4 @@ postOnAnimation
 
 	eatRunOnAnimationRequest
 		ifTrue: [ reSchedulePostAnimationCallback := true ]
-		ifFalse: [ 
-			(BlUniverse default animationManager includesAnimation: self)
-				ifTrue: [ BlUniverse default animationManager removeAnimation: self ].
-			BlUniverse default animationManager addAnimation: self. ]
+		ifFalse: [ self scrollable enqueueTask: self ]
