@@ -11,11 +11,11 @@ processPulse
 		during: [ self hasHostSpace ifTrue: [ self processEvents ] ].
 
 	"process animations and other runnable tasks"
-	tasks run.
+	self runTasks.
 
 	self pulseRequested
 		ifFalse: [ ^ self ].
-	
+
 	self
 		dispatchTimeEvent: BlSpaceLayoutEndEvent
 		during: [ self isLayoutRequested ifTrue: [ self doLayout ] ].

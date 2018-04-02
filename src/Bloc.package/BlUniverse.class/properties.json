@@ -9,7 +9,6 @@
 		"preferableHost",
 		"pulseListeners",
 		"spaceManager",
-		"animationManager",
 		"announcer",
 		"deferredActions",
 		"nextPulseRequested"

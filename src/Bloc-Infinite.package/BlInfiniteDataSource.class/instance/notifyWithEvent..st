@@ -5,4 +5,4 @@ notifyWithEvent: anEvent
 	BlUniverse default isUIProcess
 		ifTrue: [ self fireEvent: anEvent ]
 		ifFalse: [ BlUniverse default animationManager
-			addAnimation: (BlInfinitePostAction new action: [ self fireEvent: anEvent ]) ]
+			addAnimation: (BlTaskAction new action: [ self fireEvent: anEvent ]) ]

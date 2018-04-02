@@ -24,7 +24,7 @@ on:BlDblClickEvent do:[:evt|  BlElementSelection on: evt target. ]).
 anim := BlAnimation new
 	delay:50;
 	duration:1;
-	loop:100;
+	loops:100;
 	onFinishedDo: [ 
 		|pos|
 		pos := (750 atRandom)@(750 atRandom).

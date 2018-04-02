@@ -1,3 +1,3 @@
-accessing api
+api - configuration
 beInfinite
-	^ self loop: -1
+	self loops: 0

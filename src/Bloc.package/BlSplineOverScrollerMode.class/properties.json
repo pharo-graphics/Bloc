@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Bloc-Utilities - Scrolling",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlSplineOverScrollerMode",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Utilities - Scrolling"
 }

@@ -6,5 +6,4 @@ initialize
 	pulseListeners := OrderedCollection new.
 	pulseLoop := self defaultPulseLoop.
 	nextPulseRequested :=true.
-	spaceManager := BlSpaceManager new.
-	animationManager := BlAnimationManager new
+	spaceManager := BlSpaceManager new

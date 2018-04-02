@@ -1,3 +1,3 @@
 testing
 isInfinite
-	^ self loop = -1
+	^ self loops = -1

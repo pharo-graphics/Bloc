@@ -22,7 +22,9 @@ bouncingText
 	clickHandler := nil.
 	clickHandler := BlEventHandler
 		on: BlClickEvent
-		do: [ container removeEventHandler: clickHandler. animation start ].
+		do: [
+			container removeEventHandler: clickHandler.
+			container addAnimation: animation ].
 	container addEventHandler: clickHandler.
 
 	^ self frameContainer addChild: container

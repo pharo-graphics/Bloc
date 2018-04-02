@@ -1,4 +1,4 @@
-time management
+api - accessing
 duration
 	"Return animation duration"
 	<return: #Duration>

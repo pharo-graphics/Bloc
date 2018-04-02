@@ -18,4 +18,4 @@ named: aSymbol on: aBlock
 		put: duration.
 	
 	BlUniverse default animationManager
-		addAnimation: (BlInfinitePostAction on: [ self allInstancesDo: #invalidate ])
+		addAnimation: (BlTaskAction on: [ self allInstancesDo: #invalidate ])

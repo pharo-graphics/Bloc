@@ -1,4 +1,4 @@
-pulse
+api - running
 start
 	self
 		assert: [ self parent isNil ]
@@ -7,7 +7,5 @@ start
 	self
 		assert: [ self isRunning not ]
 		description: [ 'Animation can not be start multiple times without stop' ].
-	
-	"Animation manager request next pulse, so we are ok to start"
-	self animationManager addAnimation: self.
+
 	self initStart

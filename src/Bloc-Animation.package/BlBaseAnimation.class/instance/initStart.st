@@ -1,7 +1,12 @@
-pulse
+private - running
 initStart
-	
-	startTime := DateAndTime now.
+
+	"new loop should start exactly when previous ends"
+	startTime := self atLeastOneLoopDone
+		ifTrue: [ self loopDoneTime ]
+		ifFalse: [ self time now ].
+
 	progress := 0.
 	elapsedTime := 0 milliSeconds.
-	running := true
+	isRunning := true.
+	isStarted := true

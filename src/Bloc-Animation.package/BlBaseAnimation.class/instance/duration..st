@@ -1,7 +1,7 @@
-accessing api
+api - configuration
 duration: aDuration
 	self
 		assert: [ aDuration > 0 seconds ]
-		description: [ 'Duration has to be positive' ].
+		description: [ 'Duration must be positive' ].
 
 	duration := aDuration asDuration

@@ -23,4 +23,4 @@ loadImage
 			image = anImage
 				ifTrue: [
 					BlUniverse default animationManager
-						addAnimation: (BlInfinitePostAction on: [ self form: aNewForm ]) ] ] ] fork
+						addAnimation: (BlTaskAction on: [ self form: aNewForm ]) ] ] ] fork

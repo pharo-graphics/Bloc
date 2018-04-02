@@ -3,7 +3,6 @@ firePulse: aPulseEvent
 	[  
 		nextPulseRequested := false.
 		announcer announce: aPulseEvent.
-		self animationManager pulse.
 		self spaceManager pulse.
 		self tryToRunDeferredActions.
 	] on: Error do: [ :err | 

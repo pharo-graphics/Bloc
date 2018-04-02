@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "AliakseiSyrel 12/11/2016 16:02",
-	"super" : "BlInfiniteRunnable",
+	"super" : "BlTask",
 	"category" : "Bloc-Infinite-Tasks",
 	"classinstvars" : [ ],
 	"pools" : [ ],

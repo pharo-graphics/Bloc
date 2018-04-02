@@ -5,4 +5,5 @@ enqueueFrom: aBlTaskQueue
 		description: [ 'Queue to transfer must not be nil' ].
 
 	aBlTaskQueue critical: [
-		self enqueueAll: aBlTaskQueue tasks ]
+		self enqueueAll: aBlTaskQueue tasks.
+		aBlTaskQueue flush ]

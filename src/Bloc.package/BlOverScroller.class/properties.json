@@ -1,9 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 3/30/2018 14:42",
-	"super" : "Object",
-	"category" : "Bloc-Utilities - Scrolling",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"interpolator",
@@ -13,5 +9,11 @@
 		"time"
 	],
 	"name" : "BlOverScroller",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 3/30/2018 14:42",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Utilities - Scrolling"
 }

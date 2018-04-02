@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BlInfiniteRunnable",
+	"super" : "BlTask",
 	"category" : "Bloc-Infinite-Animator",
 	"classinstvars" : [ ],
 	"pools" : [ ],

@@ -1,3 +1,3 @@
 accessing
 running: anObject
-	running := anObject
+	isRunning := anObject

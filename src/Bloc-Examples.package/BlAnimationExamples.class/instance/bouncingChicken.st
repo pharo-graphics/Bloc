@@ -18,5 +18,7 @@ bouncingChicken
 	animation absolute.
 	animation duration: 4 seconds.
 	animation easing: BlEasing bounceIn.
-	animation startOn: element.
+	
+	element addAnimation: animation.
+	
 	^ element

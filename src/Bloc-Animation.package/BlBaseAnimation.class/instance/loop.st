@@ -1,3 +1,0 @@
-accessing api
-loop
-	^ loop

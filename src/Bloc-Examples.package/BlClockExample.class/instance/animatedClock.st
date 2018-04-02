@@ -1,20 +1,21 @@
 examples - clock
 animatedClock
 	<gtExample>
-	| secondHand |
+	| secondHand animation |
 
 	secondHand := self secondHand.
 	
-	BlNumberTransition new
+	animation := BlNumberTransition new
 		onStepDo: [ :aSecond |
 			secondHand transformDo: [ :aTransform |
 				aTransform rotateBy: aSecond * self minuteRotationDelta - 90 ] ];
 		from: 0;
 		to: 60;
 		by: 1;
-		loop: 1;
-		duration: 60 seconds;
-		startOn: secondHand.
+		loops: 1;
+		duration: 60 seconds.
+		
+	secondHand addAnimation: animation.
 
 	^ self clock
 		relocate: 50@50;
