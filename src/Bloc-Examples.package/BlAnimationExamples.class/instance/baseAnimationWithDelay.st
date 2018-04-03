@@ -3,7 +3,7 @@ baseAnimationWithDelay
 	<gtExample>
 	| aBaseAnimation |
 	
-	aBaseAnimation := BlBaseAnimation new.
+	aBaseAnimation := BlAnimation new.
 	aBaseAnimation time: (BlTime simulated date: self exampleDate).
 
 	aBaseAnimation delay: self exampleDelay.

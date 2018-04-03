@@ -12,16 +12,16 @@ measure: aTextRun from: aTextRunStart to: aTextRunEnd width: aWidth
 		description: [ 'Text run start must be finite' ].
 
 	self
-		assert: [ (aTextRunStart between: 1 and: aTextRun length) or: [ aTextRun isEmpty ] ]
-		description: [ 'Text run start must be less or equal to text run length' ].
+		assert: [ (aTextRunStart between: 1 and: aTextRun size) or: [ aTextRun isEmpty ] ]
+		description: [ 'Text run start must be less or equal to text run size (amount of glyphs)' ].
 
 	self
 		assert: [ aTextRunEnd isInfinite not ]
 		description: [ 'Text run end must be finite' ].
 		
 	self
-		assert: [ (aTextRunEnd between: 1 and: aTextRun length) or: [ aTextRun isEmpty ] ]
-		description: [ 'Text run end must be less or equal to text run length' ].
+		assert: [ (aTextRunEnd between: 1 and: aTextRun size) or: [ aTextRun isEmpty ] ]
+		description: [ 'Text run end must be less or equal to text run size (amount of glyphs)' ].
 
 	metricsLength := aTextRun isEmpty
 		ifTrue: [ 0 ]

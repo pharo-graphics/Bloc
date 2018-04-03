@@ -2,7 +2,6 @@
 	"classtraitcomposition" : "TBlEventTarget classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"duration",
 		"loop",
 		"delay",
 		"time",

@@ -4,4 +4,6 @@ duration
 	of composite animations it is computed on-fly based on durations of their sub-animations"
 	<return: #Duration>
 
-	^ self subclassResponsibility
+	^ self children
+		ifEmpty: [ 0 seconds ]
+		ifNotEmpty: [ :theAnimations | theAnimations sum: [ :anAnimation | anAnimation duration + anAnimation delay ] ]

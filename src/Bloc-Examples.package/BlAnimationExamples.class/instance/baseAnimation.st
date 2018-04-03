@@ -3,7 +3,7 @@ baseAnimation
 	<gtExample>
 	| aBaseAnimation |
 	
-	aBaseAnimation := BlBaseAnimation new.
+	aBaseAnimation := BlAnimation new.
 	aBaseAnimation time: (BlTime simulated date: self exampleDate).
 
 	self assert: aBaseAnimation loops equals: 1.

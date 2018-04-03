@@ -2,7 +2,6 @@ initialization
 initialize
 	super initialize.
 	
-	duration := 1 second.	"configurable"
 	delay := 0 milliSeconds. "configurable"
 	loop := 1. "configurable"
 	

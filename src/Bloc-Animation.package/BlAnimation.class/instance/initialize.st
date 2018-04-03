@@ -1,4 +1,6 @@
 initialization
 initialize
 	super initialize.
-	easing := BlEasing linear.
+	
+	duration := 1 second.	"configurable"
+	easing := BlEasing linear

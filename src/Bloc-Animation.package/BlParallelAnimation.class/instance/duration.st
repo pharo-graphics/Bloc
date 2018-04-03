@@ -4,4 +4,4 @@ duration
 	of composite animations it is computed on-fly based on durations of their sub-animations"
 	<return: #Duration>
 
-	^ self subclassResponsibility
+	^ self childrenMaxValue: [ :anAnimation | anAnimation duration + anAnimation delay ] default: 0 seconds
