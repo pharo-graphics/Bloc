@@ -6,7 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"children"
+		"animations"
 	],
 	"name" : "BlCompositeAnimation",
 	"type" : "normal"

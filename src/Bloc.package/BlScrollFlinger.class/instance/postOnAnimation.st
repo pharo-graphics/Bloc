@@ -7,4 +7,6 @@ postOnAnimation
 
 	eatRunOnAnimationRequest
 		ifTrue: [ reSchedulePostAnimationCallback := true ]
-		ifFalse: [ self scrollable enqueueTask: self ]
+		ifFalse: [
+			self scrollable dequeueTask: self.	
+			self scrollable enqueueTask: self ]

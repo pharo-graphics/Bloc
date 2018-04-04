@@ -1,5 +1,6 @@
 adding
 add: anAnimation
 	anAnimation parent: self.
-	
-	children add: anAnimation
+	anAnimation time: self time.
+
+	animations add: anAnimation

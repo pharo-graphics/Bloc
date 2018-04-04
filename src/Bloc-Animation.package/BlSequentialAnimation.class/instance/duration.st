@@ -4,6 +4,6 @@ duration
 	of composite animations it is computed on-fly based on durations of their sub-animations"
 	<return: #Duration>
 
-	^ self children
+	^ self animations
 		ifEmpty: [ 0 seconds ]
-		ifNotEmpty: [ :theAnimations | theAnimations sum: [ :anAnimation | anAnimation duration + anAnimation delay ] ]
+		ifNotEmpty: [ :theAnimations | theAnimations sum: [ :anAnimation | (anAnimation duration + anAnimation delay) * anAnimation loops ] ]

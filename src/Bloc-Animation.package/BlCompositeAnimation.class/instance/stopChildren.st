@@ -1,5 +1,5 @@
 pulse
 stopChildren
-	children
+	animations
 		select: [ :anAnimation | anAnimation isRunning ]
 		thenDo: [ :anAnimation | anAnimation stop ]

@@ -1,3 +1,0 @@
-adding
-computedElapsedTime
-	self subclassResponsibility 

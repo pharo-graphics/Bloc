@@ -1,8 +1,8 @@
 api - running
 start
-	self
+	"self
 		assert: [ self parent isNil ]
-		description: [ 'A sub-animation has to be started from its parent' ].
+		description: [ 'A sub-animation has to be started from its parent' ]."
 	
 	self
 		assert: [ self isRunning not ]

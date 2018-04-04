@@ -4,6 +4,7 @@ _2_1_baseAnimation_step
 	| aBaseAnimation |
 	
 	aBaseAnimation := self _1_baseAnimation_start.	
+	"do a cycle without advancing the clock"
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 0.

@@ -1,5 +1,5 @@
 pulse
 initStart
-	children ifEmpty: [ ^ self ].
-	children do: [ :each | each initStart ].
+	animations ifEmpty: [ ^ self ].
+	animations do: [ :each | each initStart ].
 	super initStart.

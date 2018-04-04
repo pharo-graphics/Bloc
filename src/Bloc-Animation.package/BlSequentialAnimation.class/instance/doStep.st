@@ -2,21 +2,21 @@ pulse
 doStep
 	| shouldStartNext |
 	
-	(currentIndex > children size)
+	(currentIndex > animations size)
 		ifTrue: [ ^ self ].
 
-	(currentIndex isZero and: [ children isEmpty ])
+	(currentIndex isZero and: [ animations isEmpty ])
 		ifTrue: [ ^ self ].
 
-	shouldStartNext := currentIndex isZero or: [ (children at: currentIndex) isRunning not ].
+	shouldStartNext := currentIndex isZero or: [ (animations at: currentIndex) isRunning not ].
 			
 	shouldStartNext ifTrue: [ 
 		currentIndex := currentIndex + 1.
 		
 		"make sure we are not going out of bounds"
-		(currentIndex > children size)
+		(currentIndex > animations size)
 			ifTrue: [ ^ self ].
 
-		(children at: currentIndex) initStart ].
+		"(children at: currentIndex) initStart "].
 
-	(children at: currentIndex) pulse
+	(animations at: currentIndex) run

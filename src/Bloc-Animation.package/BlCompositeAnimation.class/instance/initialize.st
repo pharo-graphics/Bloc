@@ -1,5 +1,5 @@
 initialization
 initialize
 	super initialize.
-	children := OrderedCollection new.
+	animations := OrderedCollection new.
 	
