@@ -13,4 +13,4 @@ initialize
 		c horizontal fitContent.
 		c vertical fitContent ].
 	
-	selection := BlCompositeTextSelection new
+	selection := BlCompositeSelection new

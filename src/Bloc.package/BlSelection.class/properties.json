@@ -1,0 +1,13 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlSelection",
+	"commentStamp" : "AliakseiSyrel 4/12/2018 09:54",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Utilities - Selection"
+}

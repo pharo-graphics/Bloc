@@ -6,7 +6,7 @@ scrollToPosition: aPosition
 
 	layoutFrozen
 		ifTrue: [ ^ self ].
-		
+
 	self stopScroll.
 	self layout scrollToPosition: aPosition.
 	self awakenScrollBars

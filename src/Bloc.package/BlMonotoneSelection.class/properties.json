@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "AliakseiSyrel 4/11/2018 17:14",
+	"super" : "BlSelection",
+	"category" : "Bloc-Utilities - Selection",
+	"classinstvars" : [
+		"empty"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"from",
+		"to"
+	],
+	"name" : "BlMonotoneSelection",
+	"type" : "normal"
+}

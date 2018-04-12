@@ -1,3 +1,0 @@
-testing
-isNotEmpty
-	^ self subclassResponsibility

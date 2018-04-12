@@ -1,3 +1,0 @@
-testing
-isNotEmpty
-	^ selections isNotEmpty

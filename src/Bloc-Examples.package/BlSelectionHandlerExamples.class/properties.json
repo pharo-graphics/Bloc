@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "AliakseiSyrel 4/11/2018 16:20",
+	"commentStamp" : "AliakseiSyrel 11/3/2017 17:29",
 	"super" : "Object",
 	"category" : "Bloc-Examples-Selection",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlSelectionExamples",
+	"name" : "BlSelectionHandlerExamples",
 	"type" : "normal"
 }

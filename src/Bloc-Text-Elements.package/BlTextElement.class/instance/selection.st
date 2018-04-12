@@ -1,6 +1,6 @@
 selection - management
 selection
-	<return: #BlTextSelection>
+	<return: #BlSelection>
 	
 	self
 		assert: [ selection isNotNil ]

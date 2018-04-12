@@ -1,0 +1,9 @@
+accessing
+root
+	<return: #BlSelectionNode>
+	
+	self
+		assert: [ root isNotNil ]
+		description: [ 'Root can not be nil' ].
+	
+	^ root
