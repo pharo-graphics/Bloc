@@ -7,6 +7,7 @@ initialize
 	currentPosition := 0.0.
 	currentVelocity := 0.0.
 	currentStep := Spline.
+	mode := BlSplineOverScrollerNoneMode new.
 	
 	splineDistance := 0.0.
 	splineDuration := 0 milliSeconds.

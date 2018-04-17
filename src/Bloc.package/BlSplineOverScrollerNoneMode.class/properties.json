@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlSplineOverScrollerMode",
+	"category" : "Bloc-Utilities - Scrolling",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlSplineOverScrollerNoneMode",
+	"type" : "normal"
+}
