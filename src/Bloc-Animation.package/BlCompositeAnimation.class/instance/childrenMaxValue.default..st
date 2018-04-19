@@ -1,9 +1,9 @@
 private
 childrenMaxValue: aBlock default: aValue
 	| max |
-	self children ifEmpty: [ ^ aValue ].
-	max := aBlock value: self children first.
-	self children
+	self animations ifEmpty: [ ^ aValue ].
+	max := aBlock value: self animations first.
+	self animations
 		allButFirstDo:
 			[ :each | 
 			| value |

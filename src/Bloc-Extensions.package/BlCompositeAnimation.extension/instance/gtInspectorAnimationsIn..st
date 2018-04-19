@@ -4,4 +4,4 @@ gtInspectorAnimationsIn: aComposite
 
 	^ aComposite fastList
 		title: 'Animations';
-		display: [ self children ]
+		display: [ self animations ]
