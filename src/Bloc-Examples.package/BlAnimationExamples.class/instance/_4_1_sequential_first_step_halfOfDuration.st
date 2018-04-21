@@ -1,5 +1,5 @@
 examples - sequential animation
-_4_1_sequential_step_first_halfOfDuration
+_4_1_sequential_first_step_halfOfDuration
 	<gtExample>
 	| aSequentialAnimation aFirstAnimation aSecondAnimation |
 	

@@ -8,7 +8,7 @@ fling: aStartPosition velocity: aVelocityPoint min: aMinPosition max: aMaxPositi
 	"Continue a scroll or fling in progress"
 	(isFlywheel and: [ self isFinished not ])
 		ifTrue: [
-			| anOldVelocityX anOldVelocityY|
+			| anOldVelocityX anOldVelocityY |
 			anOldVelocityX := scrollerX currentVelocity.
 			anOldVelocityY := scrollerY currentVelocity.
 			

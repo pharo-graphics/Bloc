@@ -1,3 +1,3 @@
 initialization
 createScrollerFor: anInterpolator
-	^ BlOverScroller interpolator: interpolator
+	^ BlOvershootingScroller interpolator: interpolator

@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlSplineOverScrollerMode",
-	"category" : "Bloc-Utilities - Scrolling",
+	"category" : "Bloc-Utilities - Scrolling Helpers",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

@@ -1,3 +1,3 @@
 api - configuration
 beInfinite
-	self loops: 0
+	self loops: Float infinity

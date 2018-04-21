@@ -9,5 +9,5 @@
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "Bloc-Utilities - Scrolling"
+	"category" : "Bloc-Utilities - Scrolling Helpers"
 }

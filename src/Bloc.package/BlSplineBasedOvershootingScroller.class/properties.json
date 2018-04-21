@@ -22,7 +22,7 @@
 		"shouldRound",
 		"mode"
 	],
-	"name" : "BlSplineOverScroller",
+	"name" : "BlSplineBasedOvershootingScroller",
 	"commentStamp" : "",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",

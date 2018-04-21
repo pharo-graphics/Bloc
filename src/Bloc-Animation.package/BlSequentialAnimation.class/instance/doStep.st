@@ -1,6 +1,6 @@
 pulse
 doStep
-	| shouldStartNext |
+	| shouldStartNext aCurrentAnimation |
 	
 	(currentIndex > animations size)
 		ifTrue: [ ^ self ].
@@ -12,11 +12,12 @@ doStep
 			
 	shouldStartNext ifTrue: [ 
 		currentIndex := currentIndex + 1.
-		
 		"make sure we are not going out of bounds"
 		(currentIndex > animations size)
-			ifTrue: [ ^ self ].
+			ifTrue: [ ^ self ] ].
 
-		"(children at: currentIndex) initStart "].
-
-	(animations at: currentIndex) run
+	aCurrentAnimation := animations at: currentIndex.
+	aCurrentAnimation run.
+	
+	(aCurrentAnimation progress >= 1.0)
+		ifTrue: [ self doStep ]

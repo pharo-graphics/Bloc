@@ -1,3 +1,6 @@
 testing
 isInfinite
-	^ self loops = -1
+	"Return true if animation is infinite (has unlimited anount of loops)"
+	<return: #Boolean>
+
+	^ self loops isInfinite

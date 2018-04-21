@@ -1,4 +1,4 @@
-*Bloc-Extensions
+as yet unclassified
 gtInspectorGraphIn: aComposite
 	<gtInspectorPresentationOrder: 10>
 
@@ -8,7 +8,7 @@ gtInspectorGraphIn: aComposite
 		display: [
 			| aScroller theData theColors aPlotter |
 			
-			aScroller := BlSplineOverScroller new.
+			aScroller := BlSplineBasedOvershootingScroller new.
 			aScroller bePrecise.
 			aScroller time: (BlTime simulated).
 			aScroller mode: self.
