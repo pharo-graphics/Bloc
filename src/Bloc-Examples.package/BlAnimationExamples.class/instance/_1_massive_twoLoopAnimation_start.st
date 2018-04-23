@@ -1,9 +1,10 @@
-examples - massive time delta - one
-_1_massive_oneLoopAnimation_start
+examples - massive time delta - two
+_1_massive_twoLoopAnimation_start
 	<gtExample>
 	| aBaseAnimation |
 	
 	aBaseAnimation := self baseAnimation.	
+	aBaseAnimation loops: 2.
 	aBaseAnimation duration: self exampleDuration.
 	aBaseAnimation start.
 
@@ -16,7 +17,7 @@ _1_massive_oneLoopAnimation_start
 	self assert: aBaseAnimation startTime equals: self exampleDate.
 	self assert: aBaseAnimation delayedStartTime equals: self exampleDate.
 	
-	self assert: aBaseAnimation loops equals: 1.
+	self assert: aBaseAnimation loops equals: 2.
 	self assert: aBaseAnimation repeats equals: 0.
 	self assert: aBaseAnimation delay equals: 0 seconds.
 	self assert: aBaseAnimation duration equals: self exampleDuration.

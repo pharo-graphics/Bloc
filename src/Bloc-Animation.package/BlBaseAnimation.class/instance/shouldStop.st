@@ -3,4 +3,4 @@ shouldStop
 	<return: #Boolean>
 
 	^ self progress >= 1.0
-		and: [ self shouldStartNextLoop not ]
+		and: [ self canHaveNextLoop not ]

@@ -19,5 +19,5 @@ doStep
 	aCurrentAnimation := animations at: currentIndex.
 	aCurrentAnimation run.
 	
-	(aCurrentAnimation progress >= 1.0)
+	(aCurrentAnimation isRunning not)
 		ifTrue: [ self doStep ]
