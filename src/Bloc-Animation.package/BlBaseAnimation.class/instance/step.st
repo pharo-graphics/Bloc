@@ -8,7 +8,6 @@ step
 	self time now < self delayedStartTime
 		ifTrue: [ ^ self ].
 
-	previousStepTime := self time now.
 	elapsedTime := self computedElapsedTime.
 
 	self
@@ -21,7 +20,9 @@ step
 
 	progress <= 1.0
 		"Animation is not over yet, execute an actual animation step"
-		ifTrue: [ self doStep ].
+		ifTrue: [
+			self doStep.
+			self onStep ].
 
 	progress >= 1
 		ifTrue: [ self onLoopDone ].
