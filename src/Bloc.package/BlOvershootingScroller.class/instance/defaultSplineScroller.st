@@ -1,3 +1,3 @@
 initialization
 defaultSplineScroller
-	^ BlSplineBasedOvershootingScroller new
+	^ BlOvershootingSplineBasedScroller new

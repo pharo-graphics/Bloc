@@ -8,7 +8,7 @@ gtInspectorGraphIn: aComposite
 		display: [
 			| aScroller theData theColors aPlotter |
 			
-			aScroller := BlSplineBasedOvershootingScroller new.
+			aScroller := BlOvershootingSplineBasedScroller new.
 			aScroller bePrecise.
 			aScroller time: (BlTime simulated).
 			aScroller mode: self.

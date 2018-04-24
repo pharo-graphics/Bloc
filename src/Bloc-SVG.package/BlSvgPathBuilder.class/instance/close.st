@@ -1,3 +1,3 @@
 builder commands
 close
-	self addSegment 
+	self addSegment: (BlSvgPathCloseSegment absolute: absolute)

@@ -12,7 +12,7 @@ m
 	pt := self readPoint.
 	pt ifNil: [ self error: 'a point expected following after M/m command'].
 
-	path isEmpty ifTrue: [ 
+	segments isEmpty ifTrue: [ 
 			self absolute; moveTo: pt; relative ] 
 		ifFalse: [ self relative; moveTo: pt ].
 

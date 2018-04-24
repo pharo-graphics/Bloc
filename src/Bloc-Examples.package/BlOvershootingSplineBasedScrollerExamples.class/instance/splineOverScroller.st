@@ -3,7 +3,7 @@ splineOverScroller
 	<gtExample>
 	| aSplineOverScroller |
 	
-	aSplineOverScroller := BlSplineBasedOvershootingScroller new.
+	aSplineOverScroller := BlOvershootingSplineBasedScroller new.
 	
 	self assert: aSplineOverScroller currentPosition equals: 0.0.
 	self assert: aSplineOverScroller currentVelocity equals: 0.0.

@@ -2,7 +2,8 @@
 attributeAt: aName ifPresent: aBlock
 	"returns the value of the attribute whose full name matches aName or the
 	value of aBlock if there isn't any"
-
-	^ self attributeNodes
+	| aValue |
+	aValue := self attributeNodes
 		attributeValueAt: aName
-		ifPresent: aBlock
+		ifAbsent: [ ^ self ].
+	aBlock cull: aValue

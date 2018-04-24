@@ -5,10 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"viaPoint",
-		"curveTo"
-	],
-	"name" : "BlSvgPathQuadraticBezierSegment",
+	"instvars" : [ ],
+	"name" : "BlSvgPathCloseSegment",
 	"type" : "normal"
 }
