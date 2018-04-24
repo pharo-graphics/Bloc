@@ -5,7 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"firstViaPoint",
+		"secondViaPoint",
+		"curveTo"
+	],
 	"name" : "BlSvgPathCubicBezierSegment",
 	"type" : "normal"
 }
