@@ -1,5 +1,5 @@
 as yet unclassified
-withPopulatingTheSelectionPort
+populatingTheSelectionPortDirectly
 	<gtExample>
 	| composite |
 	composite := GLMCompositePresentation new.
