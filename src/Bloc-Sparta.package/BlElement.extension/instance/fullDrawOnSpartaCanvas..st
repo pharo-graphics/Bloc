@@ -33,6 +33,7 @@ fullDrawOnSpartaCanvas: aCanvas
 							self effect
 								applyEffectOnSpartaCanvas: aTransformedCanvas
 								for: self
-								around: [ self drawMeAndChildrenOnSpartaCanvas: aTransformedCanvas ] ].
+								around: [ self drawMeAndChildrenOnSpartaCanvas: aTransformedCanvas ] ].	
+						
 						misc debug ifTrue: [
 							self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ] ]

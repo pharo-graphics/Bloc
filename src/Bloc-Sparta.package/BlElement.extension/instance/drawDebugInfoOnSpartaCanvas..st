@@ -15,4 +15,11 @@ drawDebugInfoOnSpartaCanvas: aCanvas
 		path: self visualBounds;
 		paint: (Color blue alpha: 0.5);
 		width: aWidth;
+		draw.
+		
+	aCanvas stroke
+		path: self bounds inLocal asRectangle;
+		paint: (Color gray alpha: 0.5);
+		dashPattern: { aWidth * 6 . aWidth * 6 };
+		width: aWidth;
 		draw
