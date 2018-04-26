@@ -1,0 +1,3 @@
+accessing
+isFinished
+	^ isFinished

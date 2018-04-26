@@ -1,17 +1,18 @@
 {
-	"classtraitcomposition" : "TBlDebug classTrait",
+	"classtraitcomposition" : "TBlDebug classTrait + TBlEventTarget classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"interpolator",
 		"scrollerX",
 		"scrollerY",
 		"isFlywheel",
-		"time"
+		"time",
+		"eventDispatcher"
 	],
 	"name" : "BlOvershootingScroller",
 	"commentStamp" : "AliakseiSyrel 4/24/2018 11:48",
 	"super" : "Object",
-	"traitcomposition" : "TBlDebug",
+	"traitcomposition" : "TBlDebug + TBlEventTarget",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

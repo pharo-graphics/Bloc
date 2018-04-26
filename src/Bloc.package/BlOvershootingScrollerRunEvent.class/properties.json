@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 4/25/2018 10:01",
+	"super" : "BlEvent",
+	"category" : "Bloc-Utilities - Scrolling Helpers",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"isFinished"
+	],
+	"name" : "BlOvershootingScrollerRunEvent",
+	"type" : "normal"
+}

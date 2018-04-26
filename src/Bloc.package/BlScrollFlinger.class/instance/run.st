@@ -9,7 +9,7 @@ run
 	aScroller := scroller.
 	aSmoothScroller := self scrollable smoothScroller.
 
-	aScroller computeOffset
+	aScroller run
 		ifTrue: [ 
 			| aState |
 			aState := self runInitOn: aScroller.

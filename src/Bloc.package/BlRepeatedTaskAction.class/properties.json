@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlRepeatedTask",
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"action"
+	],
+	"name" : "BlRepeatedTaskAction",
+	"type" : "normal"
+}

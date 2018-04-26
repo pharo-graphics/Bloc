@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "BlTask",
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"delay",
+		"element",
+		"time",
+		"previousRunTime",
+		"isRunning"
+	],
+	"name" : "BlRepeatedTask",
+	"type" : "normal"
+}
