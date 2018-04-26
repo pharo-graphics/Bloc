@@ -29,7 +29,7 @@ Being able to display those three bounds helps when elements are not visually al
 
 [[[example=BlGeometryVisualAndLayoutBoundsExamples>>#misalignedIcon|noCode=true|expanded=true|show=gtLiveIn:]]]
 
-The triangle (icon) and text are not horizontally centered despide the fact that we have ==BlLinearLayout horizontal alignCenter== in the code. To understand why it happens, ==aTriangleElement debug: true== can be added to the code with the following result:
+The triangle (icon) and text are not vertically centered despide the fact that we have ==BlLinearLayout horizontal alignCenter== in the code. To understand why it happens, ==aTriangleElement debug: true== can be added to the code with the following result:
 
 [[[example=BlGeometryVisualAndLayoutBoundsExamples>>#debuggingMisalignedIcon|noCode=true|expanded=true|show=gtLiveIn:]]]
 
@@ -41,7 +41,7 @@ If we fix it to:
 
 [[[example=BlGeometryVisualAndLayoutBoundsExamples>>#trianglePolygon|expanded=true]]]
 
-The icon and text is aligned as expected:
+The icon and text are aligned as expected:
 
 [[[example=BlGeometryVisualAndLayoutBoundsExamples>>#debuggingAlignedIcon|noCode=true|expanded=true|show=gtLiveIn:]]]
 
