@@ -2,4 +2,4 @@ initialization
 maxScrollDuration
 	<return: #Duration>
 
-	^ 2 milliSeconds
+	^ 2 seconds

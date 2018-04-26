@@ -6,6 +6,6 @@ initialize
 	
 	self when: BlScrollEvent do: [ :anEvent |
 		anEvent isScrollUp
-			ifTrue: [ self scrollFlinger smoothScrollBy: (0@20) ].
+			ifTrue: [ self smoothScrollBy: (0@50) ].
 		anEvent isScrollDown
-			ifTrue: [ self scrollFlinger smoothScrollBy: (0@20) negated ] ].
+			ifTrue: [ self smoothScrollBy: (0@50) negated ] ].
