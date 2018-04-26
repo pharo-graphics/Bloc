@@ -10,6 +10,7 @@ clippedTriangle
 	aContainer transformDo: [ :t |
 	    t origin: BlAffineTransformationTopLeftOrigin new.
 	    t scaleBy: 10 ].
+	aContainer outskirts: BlOutskirts centered.
 	aContainer border: (BlBorder paint: (Color green alpha: 0.4) width: 0.2).
 
 	aPolygonElement := BlElement new.
