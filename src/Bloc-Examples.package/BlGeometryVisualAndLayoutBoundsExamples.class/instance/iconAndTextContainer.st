@@ -13,5 +13,5 @@ iconAndTextContainer
 	aContainerElement
 		transformDo: [ :t | 
 			t origin: BlAffineTransformationTopLeftOrigin new.
-			t scaleBy: 10 ].
+			t scaleBy: 5 ].
 	^ aContainerElement
