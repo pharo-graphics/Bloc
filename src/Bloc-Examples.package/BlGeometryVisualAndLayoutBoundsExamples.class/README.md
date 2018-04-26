@@ -27,11 +27,11 @@ In case of the rectangle, you can notice that its stroke is inside of the visual
 
 Being able to display those three bounds helps when elements are not visually aligned as expected. Consider the following example:
 
-[[[example=BlGeometryVisualAndLayoutBoundsExamples>>#misalignedIcon|expanded=true|noCode=false|show=gtLiveIn:]]]
+[[[example=BlGeometryVisualAndLayoutBoundsExamples>>#misalignedIcon|noCode=true|expanded=true|show=gtLiveIn:]]]
 
 The triangle (icon) and text are not horizontally centered despide the fact that we have ==BlLinearLayout horizontal alignCenter== in the code. To understand why it happens, ==aTriangleElement debug: true== can be added to the code with the following result:
 
-[[[example=BlGeometryVisualAndLayoutBoundsExamples>>#debuggingMisalignedIcon|expanded=true|noCode=false|show=gtLiveIn:]]]
+[[[example=BlGeometryVisualAndLayoutBoundsExamples>>#debuggingMisalignedIcon|noCode=true|expanded=true|show=gtLiveIn:]]]
 
 As we can see the layout bounds (gray dashed rectangle) consider larger area then expected. Looking at the definition of the triangle polygon, we can spot that the polygon starts at ==0@3== instead of ==0@0==: 
 
@@ -43,10 +43,10 @@ If we fix it to:
 
 The icon and text is aligned as expected:
 
-[[[example=BlGeometryVisualAndLayoutBoundsExamples>>#debuggingAlignedIcon|expanded=true|noCode=false|show=gtLiveIn:]]]
+[[[example=BlGeometryVisualAndLayoutBoundsExamples>>#debuggingAlignedIcon|noCode=true|expanded=true|show=gtLiveIn:]]]
 
 And we can disactivate the debug mode:
 
-[[[example=BlGeometryVisualAndLayoutBoundsExamples>>#alignedIcon|expanded=true|noCode=false|show=gtLiveIn:]]]
+[[[example=BlGeometryVisualAndLayoutBoundsExamples>>#alignedIcon|noCode=true|expanded=true|show=gtLiveIn:]]]
 
 The debugging mode is also possible to activate in the GT-Inspector's menu, next to the tabs.
