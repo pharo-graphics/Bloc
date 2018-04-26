@@ -1,0 +1,13 @@
+{
+	"classtraitcomposition" : "TBlExample classTrait",
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlGeometryVisualAndLayoutBoundsExamples",
+	"commentStamp" : "JurajKubelka 4/26/2018 10:35",
+	"super" : "Object",
+	"traitcomposition" : "TBlExample",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Examples-Basic"
+}
