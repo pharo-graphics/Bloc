@@ -1,28 +1,18 @@
 *Bloc-Sparta
 drawDebugInfoOnSpartaCanvas: aCanvas
+	| aWidth |
+
+	aWidth := (self globalBoundsToLocal: (BlBounds origin: 0@0 extent: 1@1)) width.
 
 	aCanvas stroke
-		path: (self geometryBounds insetBy: 1);
-		paint: Color red;
-		strokeOptions: (aCanvas strokeOptions dashPattern: #(6 6));
+		path: self geometryBounds;
+		paint: (Color red alpha: 0.5);
+		dashPattern: { aWidth * 6 . aWidth * 6 };
+		width: aWidth;
 		draw.
 
 	aCanvas stroke
-		path: (self visualBounds);
-		paint: Color blue;
-		draw.
-
-	"aCanvas stroke
-		path: (self boundsInLocal insetBy: 1);
-		paint: Color red;
-		draw.
-
-	aCanvas stroke
-		path: (self effectBounds insetBy: 1);
-		paint: Color blue;
-		draw.
-
-	aCanvas stroke
-		path: (self transformedBounds insetBy: 1);
-		paint: Color yellow;
-		draw."
+		path: self visualBounds;
+		paint: (Color blue alpha: 0.5);
+		width: aWidth;
+		draw
