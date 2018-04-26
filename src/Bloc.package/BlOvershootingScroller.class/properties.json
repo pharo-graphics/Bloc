@@ -9,7 +9,7 @@
 		"time"
 	],
 	"name" : "BlOvershootingScroller",
-	"commentStamp" : "AliakseiSyrel 4/20/2018 16:13",
+	"commentStamp" : "AliakseiSyrel 4/24/2018 11:48",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",

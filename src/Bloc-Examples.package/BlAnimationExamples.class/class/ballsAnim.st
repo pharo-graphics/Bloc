@@ -24,13 +24,10 @@ ballsAnim
 					delay: 80 milliSeconds * i;
 					duration: 100 milliSeconds;
 					onStepDo: [ :c | el background: c].
-		anims addAll: {tr.alp}.els add: el.
-		].
+		anims addAll: {tr.alp}.els add: el ].
 
 	space := BlSpace new.
 	space root addChildren: els.
 	space show.
-		
-	BlParallelAnimation new
-		addAll: anims;
-	 	start
+
+	space root addAnimation: (BlParallelAnimation new addAll: anims)

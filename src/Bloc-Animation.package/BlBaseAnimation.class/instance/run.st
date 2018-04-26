@@ -7,9 +7,6 @@ run
 	self isRunning
 		ifFalse: [ ^ self ].
 
-	self shouldStartNextLoop
-		ifTrue: [ self startNextLoop ].
-
 	self step.
 
 	self shouldStop

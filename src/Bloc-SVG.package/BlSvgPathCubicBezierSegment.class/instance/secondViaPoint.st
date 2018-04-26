@@ -1,0 +1,3 @@
+accessing
+secondViaPoint
+	^ secondViaPoint

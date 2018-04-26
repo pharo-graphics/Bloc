@@ -1,0 +1,35 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"startPosition",
+		"currentPosition",
+		"finalPosition",
+		"startVelocity",
+		"currentVelocity",
+		"deceleration",
+		"startTime",
+		"duration",
+		"splineDuration",
+		"splineDistance",
+		"isFinished",
+		"overshotDistance",
+		"physicalCoefficient",
+		"time",
+		"currentStep",
+		"friction",
+		"ppi",
+		"shouldRound",
+		"mode"
+	],
+	"name" : "BlOvershootingSplineBasedScroller",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [
+		"BlScrollerConstants"
+	],
+	"category" : "Bloc-Utilities - Scrolling"
+}

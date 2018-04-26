@@ -3,6 +3,8 @@ initialize
 	super initialize.
 
 	segments := OrderedCollection new.
+	path := OrderedCollection new.
+	
 	commands := IdentityDictionary new.
 	"absolute commands"
 	commands at: #A put: [ self A ].

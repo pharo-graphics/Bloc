@@ -1,4 +1,3 @@
 pulse
 doStep
-	self applyValue: (self valueForStep: (self computeDelta: progress)).
-	self onStep
+	self applyValue: (self valueForStep: (self computeDelta: progress))

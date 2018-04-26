@@ -1,4 +1,4 @@
 computing
 computeExtentFor: aCollectionOfCmd
-	aCollectionOfCmd do: [ :cmd | self perform: cmd first withArguments: cmd second ].
+	aCollectionOfCmd do: [ :cmd | cmd executeOn: self ].
 	extent := maxPoint - minPoint.

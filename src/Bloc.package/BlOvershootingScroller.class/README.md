@@ -1,5 +1,5 @@
 I encapsulate animated smooth scrolling in both X and Y directions with the ability to overshoot the bounds of a scrolling operation.
-For each axis I contain a separate spline based overshooting scroller (BlSplineBasedOvershootingScroller).
+For each axis I contain a separate spline based overshooting scroller (BlOvershootingSplineBasedScroller).
 
 ! Scrolling modes
 

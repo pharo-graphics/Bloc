@@ -5,4 +5,4 @@ translateElement: aBlElement with: anOrderedCollection
 	x:= anOrderedCollection first.
 	anOrderedCollection size=2 ifTrue:[ y:= anOrderedCollection last ].
 	
-	aBlElement translateBy: x@y.
+	aBlElement transformDo: [ :t | t inherit translateBy: x@y ]
