@@ -1,10 +1,10 @@
 debugging triangle and text
-misalignedIcon
+alignedIcon
 	<gtExample>
 	| anIconElement aLabelElement aContainerElement |
 	anIconElement := BlElement new
 		size: 8 @ 12;
-		geometry: self misalignedTrianglePolygon;
+		geometry: self trianglePolygon;
 		background: Color green muchDarker.
 	aLabelElement := BlTextElement new text: 'Run' asRopedText.
 	aContainerElement := BlElement new

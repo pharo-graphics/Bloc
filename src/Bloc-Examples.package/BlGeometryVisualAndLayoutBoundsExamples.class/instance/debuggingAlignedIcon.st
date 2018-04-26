@@ -1,7 +1,7 @@
 debugging triangle and text
-debuggingMisalignedIcon
+debuggingAlignedIcon
 	<gtExample>
 	| aContainerElement |
-	aContainerElement := self misalignedIcon.
+	aContainerElement := self alignedIcon.
 	aContainerElement children first debug: true.
 	^ aContainerElement
