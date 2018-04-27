@@ -1,3 +1,5 @@
 accessing
 millisecondsPerInch
-	^ 25.0
+	<return: #Duration>
+
+	^ 25.0 milliSeconds

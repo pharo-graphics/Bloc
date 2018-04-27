@@ -1,6 +1,6 @@
 physics
 calculateTimeForScrolling: aDistance
 	"Calculates the time it should take to scroll the given distance (in pixels)"
-	<return: #Number>
+	<return: #Duration>
 
-	^ aDistance abs * self millisecondsPerPixel
+	^ self millisecondsPerPixel * aDistance abs

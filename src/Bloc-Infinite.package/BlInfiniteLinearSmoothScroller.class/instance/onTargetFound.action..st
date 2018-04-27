@@ -6,7 +6,7 @@ onTargetFound: anElement action: aScrollingAction
 	dY := self calculateDeltaYToMakeVisible: anElement snap: self verticalSnapPreference.
 	aDistance := ((dX * dX) + (dY * dY)) sqrt.
 	aTime := self calculateTimeForDeceleration: aDistance.
-	aTime <= 0
+	aTime <= 0 seconds
 		ifTrue: [ ^ self ].
 		
 	aScrollingAction

@@ -1,7 +1,7 @@
 scrolling
 onScrollBy: aPoint
 	| anInfiniteElement hadJumpTarget |
-		
+	
 	anInfiniteElement := infiniteElement.
 	(isRunning not or: [ targetPosition = NoPosition or: [ anInfiniteElement isNil ] ])
 		ifTrue: [ self stop ].
