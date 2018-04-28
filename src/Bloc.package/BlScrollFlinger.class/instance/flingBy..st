@@ -2,7 +2,7 @@ api - scrolling
 flingBy: aVelocityPoint
 	
 	self beSettling.
-	
+
 	lastFlingX := 0.
 	lastFlingY := 0.
 	scroller

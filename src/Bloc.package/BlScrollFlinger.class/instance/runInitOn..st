@@ -1,6 +1,6 @@
 private
 runInitOn: anOverScroller
-	<return: #BlScrollFlinger>
+	<return: #BlScrollFlingerState>
 	| aState |
 
 	aState := self createState.

@@ -1,5 +1,6 @@
 private
 runLayoutScrollWith: aState
+	"A state is an instance of BlScrollFlingerState"
 
 	aState dX isZero
 		ifFalse: [ 

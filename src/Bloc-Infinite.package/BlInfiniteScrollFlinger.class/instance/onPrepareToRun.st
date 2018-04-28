@@ -1,3 +1,3 @@
 hooks
-onRun
+onPrepareToRun
 	self scrollable consumePendingDataSourceCommands

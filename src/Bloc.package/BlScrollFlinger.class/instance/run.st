@@ -3,6 +3,8 @@ run
 	| aScroller aSmoothScroller |
 
 	self disableRunOnAnimationRequests.
+	
+	self onPrepareToRun.
 
 	"keep a local reference so that if it is changed during onScrollBy: method,
 	it won't cause unexpected behaviors"
