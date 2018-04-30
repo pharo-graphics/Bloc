@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 4/30/2018 11:37",
+	"super" : "BlElementDynamicTransformation",
+	"category" : "Bloc-Basic-Transformations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlElementPolarToCartesianTransformation",
+	"type" : "normal"
+}
