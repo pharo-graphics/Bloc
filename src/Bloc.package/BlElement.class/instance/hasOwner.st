@@ -2,4 +2,4 @@ children testing
 hasOwner
 	<return: #Boolean>
 
-	^ false
+	^ self hasParent
