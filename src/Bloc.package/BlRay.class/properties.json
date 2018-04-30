@@ -1,0 +1,16 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"point",
+		"vector"
+	],
+	"name" : "BlRay",
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Basic-Transformations"
+}

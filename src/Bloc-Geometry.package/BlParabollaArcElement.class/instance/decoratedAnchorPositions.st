@@ -4,5 +4,5 @@ decoratedAnchorPositions
 	
 	^ Array streamContents: [ :aStream |
 		aStream nextPut: self decoratedFromPosition.
-		aStream nextPut: self curvaturePosition.
+		aStream nextPutAll: self curvaturePositions.
 		aStream nextPut: self decoratedToPosition ]
