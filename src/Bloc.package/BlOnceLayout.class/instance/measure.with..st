@@ -1,4 +1,4 @@
-layout
+measure
 measure: anElement with: anExtentSpec
 	self isStopped
 		ifTrue: [ ^ super measure: anElement with: anExtentSpec ].
