@@ -13,7 +13,7 @@
 	],
 	"name" : "BlScrollFlinger",
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "BlTask",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],

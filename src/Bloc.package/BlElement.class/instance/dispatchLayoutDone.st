@@ -6,5 +6,5 @@ dispatchLayoutDone
 	Layout done hook is essential for the implementation of so called `layout-once` layouts such as graph or visualisation layouts"
 
 	self onLayoutDone.
-	self layout onLayoutDone.
+	self layout onLayoutDone: self.
 	self children do: [ :aChildElement | aChildElement dispatchLayoutDone ]
