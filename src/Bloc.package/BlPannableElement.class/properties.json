@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlScrollPane",
+	"category" : "Bloc-Utilities - Pannable",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"zoomableElement"
+	],
+	"name" : "BlPannableElement",
+	"type" : "normal"
+}

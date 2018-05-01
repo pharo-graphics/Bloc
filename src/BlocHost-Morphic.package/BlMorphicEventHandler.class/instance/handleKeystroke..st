@@ -1,7 +1,14 @@
 event handling
 handleKeystroke: aMorphicEvent
 	| aBlEvent |
-		
+	
+	(aMorphicEvent shiftPressed and: [ aMorphicEvent controlKeyPressed ])
+		ifTrue: [
+			aMorphicEvent keyCharacter = Character arrowLeft
+				ifTrue: [ ^ self handleScrollLeft: aMorphicEvent ].
+			aMorphicEvent keyCharacter = Character arrowRight
+				ifTrue: [ ^ self handleScrollRight: aMorphicEvent ] ].
+	
 	aBlEvent := BlKeystrokeEvent new
 		char: aMorphicEvent keyCharacter;
 		scanCode: aMorphicEvent scanCode;
