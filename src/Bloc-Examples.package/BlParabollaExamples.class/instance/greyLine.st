@@ -1,4 +1,4 @@
-example - visual properties
+examples - visual properties
 greyLine
 	<gtExample>
 

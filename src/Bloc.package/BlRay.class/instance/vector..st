@@ -1,3 +1,3 @@
-accessing
-vector: anObject
-	vector := anObject
+api - accessing
+vector: aBlVector
+	vector := aBlVector

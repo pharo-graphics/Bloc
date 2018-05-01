@@ -6,11 +6,11 @@
 		"vector"
 	],
 	"name" : "BlRay",
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 5/1/2018 10:38",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"category" : "Bloc-Basic-Transformations"
+	"category" : "Bloc-Basic-Math"
 }

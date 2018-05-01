@@ -1,4 +1,4 @@
-example - connections
+examples - connections
 absoluteCurvature
 	<gtExample>	
 	| redArc attachFrom attachTo perpendicularAttach fromLine toLine connectLine |

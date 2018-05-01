@@ -1,3 +1,3 @@
-accessing
-point: anObject
-	point := anObject
+api - accessing
+point: aPoint
+	point := aPoint

@@ -1,4 +1,4 @@
-vector functions
+api - vector functions
 projection: aPoint
 	"Return a projection of a given point on this ray"
 	<return: #Point>

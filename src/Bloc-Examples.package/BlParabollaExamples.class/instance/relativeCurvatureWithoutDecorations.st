@@ -1,4 +1,4 @@
-example - connections
+examples - connections
 relativeCurvatureWithoutDecorations
 	<gtExample>	
 	| redArc attachFrom attachTo |
@@ -11,8 +11,6 @@ relativeCurvatureWithoutDecorations
 	redArc curvatureFraction: 0.5.
 	redArc fromAnchor: (BlElementCenterAnchor element: attachFrom).
 	redArc toAnchor: (BlElementCenterAnchor element: attachTo).
-	
-	"------ fancy look ------"
 
 	^ self container
 		addChildren: { redArc . attachFrom . attachTo }

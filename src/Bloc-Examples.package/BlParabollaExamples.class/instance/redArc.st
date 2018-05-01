@@ -1,4 +1,4 @@
-example - visual properties
+examples - visual properties
 redArc
 	<gtExample>
 

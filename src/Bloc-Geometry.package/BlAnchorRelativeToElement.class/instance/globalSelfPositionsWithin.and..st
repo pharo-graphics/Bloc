@@ -15,10 +15,10 @@ globalSelfPositionsWithin: aGeometryElement and: anAnotherAnchor
 		ifTrue: [
 			aFromRay vector rotateBy: 45 degreesToRadians.
 			aToRay vector rotateBy: 45 negated degreesToRadians. ].
-	
+
 	aDirectionVector := (aToPoint - aFromPoint) asBlocVector * 2.
 	aLength := aDirectionVector length max: 150.
-	
+
 	^ {
 		aFromRay point + (aFromRay vector * aLength).
 		aToRay point + (aToRay vector * aLength)
