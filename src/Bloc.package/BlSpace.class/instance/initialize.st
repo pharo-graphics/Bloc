@@ -15,6 +15,7 @@ initialize
 	keyboardProcessor := BlKeyboardProcessor space: self.
 
 	tasks := BlTaskQueue new.
+	time := BlTime real.
 
 	root := self defaultRoot.
 

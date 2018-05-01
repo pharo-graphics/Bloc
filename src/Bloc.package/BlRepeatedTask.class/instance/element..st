@@ -1,3 +1,3 @@
 accessing
-element: anObject
-	element := anObject
+element: aBlElement
+	element := aBlElement

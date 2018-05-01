@@ -2,15 +2,13 @@ initialization
 initialize
 	super initialize.
 	
+	actionHandlers := OrderedCollection new.
+	eventDispatcher := BlDirectEventDispatcher on: self.
+	
 	delay := 0 milliSeconds. "configurable"
 	loop := 1. "configurable"
 	
 	time := BlTime real.
-	elapsedTime := 0 milliSeconds.
-	progress := 0.0.
-	loopCount := 0.
-	isRunning := false.
-	isStarted := false.
+
+	self reset.
 	
-	actionHandlers := OrderedCollection new.
-	eventDispatcher := BlDirectEventDispatcher on: self

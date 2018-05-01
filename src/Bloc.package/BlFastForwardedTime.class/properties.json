@@ -5,7 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlRealTime",
+	"instvars" : [
+		"speed",
+		"previousRealTime",
+		"previousSpeededUpTime"
+	],
+	"name" : "BlFastForwardedTime",
 	"type" : "normal"
 }

@@ -1,7 +1,7 @@
 pulse
 doStep
 	| shouldStartNext aCurrentAnimation |
-	
+
 	(currentIndex > animations size)
 		ifTrue: [ ^ self ].
 
@@ -9,9 +9,10 @@ doStep
 		ifTrue: [ ^ self ].
 
 	shouldStartNext := currentIndex isZero or: [ (animations at: currentIndex) isRunning not ].
-			
+	
 	shouldStartNext ifTrue: [ 
 		currentIndex := currentIndex + 1.
+		
 		"make sure we are not going out of bounds"
 		(currentIndex > animations size)
 			ifTrue: [ ^ self ] ].

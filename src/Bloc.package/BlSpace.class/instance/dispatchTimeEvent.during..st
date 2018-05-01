@@ -1,10 +1,11 @@
 pulse
-dispatchTimeEvent: anEventClass during: aBlock
+dispatchTimeEvent: aSpaceStepEventClass during: aBlock
 	| aStartTime |
-	aStartTime := Time millisecondClockValue.
+	
+	aStartTime := self time now.
 	aBlock value.
 	self eventDispatcher dispatchEvent:
-			(anEventClass new
+			(aSpaceStepEventClass new
 				start: aStartTime;
-				end: Time millisecondClockValue;
+				end: self time now;
 				yourself)

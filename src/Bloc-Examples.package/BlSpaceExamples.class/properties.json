@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/1/2018 18:07",
-	"super" : "Object",
-	"category" : "Bloc-Examples-Space",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TBlExample classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlSpaceExamples",
-	"type" : "normal"
+	"commentStamp" : "AliakseiSyrel 1/1/2018 18:07",
+	"super" : "Object",
+	"traitcomposition" : "TBlExample",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Examples-Space"
 }

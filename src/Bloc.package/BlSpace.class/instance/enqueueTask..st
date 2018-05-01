@@ -1,3 +1,4 @@
 api - tasks
 enqueueTask: aBlTask
-	self taskQueue enqueue: aBlTask
+	aBlTask onEnqueued: self.
+	self taskQueue enqueue: aBlTask.

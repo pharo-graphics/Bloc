@@ -1,3 +1,3 @@
 accessing
-delay: anObject
-	delay := anObject
+delay: aDuration
+	delay := aDuration
