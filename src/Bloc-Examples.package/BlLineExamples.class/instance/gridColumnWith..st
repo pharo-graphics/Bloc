@@ -10,6 +10,6 @@ gridColumnWith: aNumberOfCells
 		aCell text: (BrRopedText string: anIndex asString) ].
 	
 	^ self grid
-		layoutDo: [ :aGridLayout | aGridLayout layout columnCount: 1 ];
+		layoutDo: [ :aGridLayout | aGridLayout columnCount: 1 ];
 		addChildren: cells;
 		yourself
