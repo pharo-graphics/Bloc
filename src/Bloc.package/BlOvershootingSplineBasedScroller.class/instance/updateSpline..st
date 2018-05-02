@@ -2,7 +2,7 @@ private - updating
 updateSpline: aDeltaTime
 	| aTime anIndex aDistanceCoef aVelocityCoef |
 	
-	aTime := aDeltaTime / splineDuration.
+	aTime := aDeltaTime / self splineDuration.
 	anIndex := (NbSamples * aTime) asInteger.
 	aVelocityCoef := 0.0.
 	aDistanceCoef := 1.0.
@@ -17,6 +17,6 @@ updateSpline: aDeltaTime
 			aVelocityCoef := (dSup - dInf) / (tSup - tInf).
 			aDistanceCoef := dInf + ((aTime - tInf) * aVelocityCoef) ].
 
-	self currentVelocity: (aVelocityCoef * splineDistance / splineDuration asMilliSeconds) * 1000.0.
+	self currentVelocity: (aVelocityCoef * splineDistance / self splineDuration asMilliSeconds) * 1000.0.
 
 	^ aDistanceCoef * splineDistance

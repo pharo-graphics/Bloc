@@ -2,8 +2,6 @@ running
 run
 	| aScroller aSmoothScroller |
 
-	"self halt."
-
 	self disableRunOnAnimationRequests.
 	
 	self onPrepareToRun.

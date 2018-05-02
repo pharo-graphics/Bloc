@@ -1,5 +1,5 @@
 examples - fling down
-_2_flingDownWithOvershoot500_flingDown500
+_2_flingDownWithOvershoot500_first205ms_flingDown500
 	<gtExample>
 	| aScrollPane theScrollPositions aScrollerY |
 	

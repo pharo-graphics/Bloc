@@ -16,7 +16,7 @@ fling: aStartPosition velocity: aVelocityPoint min: aMinPosition max: aMaxPositi
 				aVelocityY sign = anOldVelocityY sign ])
 				ifTrue: [ 
 					aVelocityX := scrollerX truncated: (aVelocityX + anOldVelocityX).
-					aVelocityY := scrollerX truncated: (aVelocityY + anOldVelocityY) ] ].
+					aVelocityY := scrollerY truncated: (aVelocityY + anOldVelocityY) ] ].
 	
 	scrollerX
 		fling: aVelocityX

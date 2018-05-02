@@ -2,7 +2,7 @@ private - updating
 updateCubic: aDeltaTime
 	| aTime aSquaredTime aSign |
 	
-	aTime := (aDeltaTime / duration) asFloat.
+	aTime := (aDeltaTime / self duration) asFloat.
 	aSquaredTime := aTime * aTime.
 	aSign := startVelocity sign.
 	

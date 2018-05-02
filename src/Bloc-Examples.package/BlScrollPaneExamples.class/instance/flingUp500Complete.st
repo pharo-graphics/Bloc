@@ -1,4 +1,4 @@
-examples - fling down
+examples - fling up
 flingUp500Complete
 	<gtExample>
 	| aScrollPane theScrollPositions |
