@@ -7,5 +7,6 @@ scrollVerticallyBy: aNumber
 	
 	aContent := self children first.
 	aContent relocate: aContent measuredBounds position + (0 @ aNumber).
+	scrollPosition := scrollPosition + (0 @ aNumber).
 
 	^ aNumber

@@ -1,7 +1,7 @@
 api - scrolling
 fling: aStartPosition velocity: aVelocityPoint min: aMinPosition max: aMaxPosition overshot: anOvershotDistance
 	| aVelocityX aVelocityY |
-
+	
 	aVelocityX := aVelocityPoint x.
 	aVelocityY := aVelocityPoint y.
 	
@@ -15,8 +15,8 @@ fling: aStartPosition velocity: aVelocityPoint min: aMinPosition max: aMaxPositi
 			(aVelocityX sign = anOldVelocityX sign and: [ 
 				aVelocityY sign = anOldVelocityY sign ])
 				ifTrue: [ 
-					aVelocityX := aVelocityX + anOldVelocityX.
-					aVelocityY := aVelocityY + anOldVelocityY ] ].
+					aVelocityX := scrollerX truncated: (aVelocityX + anOldVelocityX).
+					aVelocityY := scrollerX truncated: (aVelocityY + anOldVelocityY) ] ].
 	
 	scrollerX
 		fling: aVelocityX

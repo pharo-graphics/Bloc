@@ -1,14 +1,17 @@
 api - scrolling
 flingBy: aVelocityPoint
-	
+	"Positive velocity means that the finger/cursor is moving down the screen, which means we want to scroll towards the top.
+	Initial velocity is given in points/second"
+
 	self beSettling.
 
-	lastFlingX := 0.
-	lastFlingY := 0.
+	lastFlingX := self scrollable scrollPosition x.
+	lastFlingY := self scrollable scrollPosition y.
 	scroller
-		fling: 0@0
+		fling: self scrollable scrollPosition
 		velocity: aVelocityPoint
-		min: Float negativeInfinity @ Float negativeInfinity
-		max: Float infinity @ Float infinity.
+		min: self scrollable scrollMinimum
+		max: self scrollable scrollMaximum
+		overshot: self scrollable scrollOvershot.
 
 	self postOnAnimation

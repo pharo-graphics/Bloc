@@ -11,7 +11,9 @@ processPulse
 		during: [ self hasHostSpace ifTrue: [ self processEvents ] ].
 
 	"process animations and other runnable tasks"
-	self runTasks.
+	self
+		dispatchTimeEvent: BlSpaceTasksEndEvent
+		during: [ self hasHostSpace ifTrue: [ self runTasks ] ].
 
 	self pulseRequested
 		ifFalse: [ ^ self ].

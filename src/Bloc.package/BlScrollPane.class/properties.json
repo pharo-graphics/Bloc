@@ -3,7 +3,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"scrollState",
-		"scrollFlinger"
+		"scrollFlinger",
+		"scrollPosition"
 	],
 	"name" : "BlScrollPane",
 	"commentStamp" : "",

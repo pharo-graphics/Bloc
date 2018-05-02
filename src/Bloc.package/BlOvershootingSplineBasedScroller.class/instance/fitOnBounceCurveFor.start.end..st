@@ -11,7 +11,7 @@ fitOnBounceCurveFor: aVelocity start: aStart end: anEnd
 	aTotalDuration := (2.0 * (aDistanceToApex + aDistanceToEdge) / deceleration abs ) sqrt.
 	
 	"Update values"
-	startTime := startTime - (1000 * (aTotalDuration - aDurationToApex)).
+	startTime := startTime - (self truncated: (1000 * (aTotalDuration - aDurationToApex))) milliSeconds.
 	startPosition := anEnd.
-	startVelocity := deceleration negated * aTotalDuration.
 	currentPosition := anEnd.
+	startVelocity := self truncated: (deceleration negated * aTotalDuration).
