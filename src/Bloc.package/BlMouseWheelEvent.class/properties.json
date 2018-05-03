@@ -1,11 +1,14 @@
 {
 	"commentStamp" : "",
-	"super" : "BlTouchEvent",
+	"super" : "BlMouseEvent",
 	"category" : "Bloc-Event",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BlTouchPressEvent",
+	"instvars" : [
+		"direction",
+		"vector"
+	],
+	"name" : "BlMouseWheelEvent",
 	"type" : "normal"
 }

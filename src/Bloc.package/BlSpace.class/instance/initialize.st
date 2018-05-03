@@ -8,6 +8,7 @@ initialize
 	
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
+	eventRecorder := self defaultEventRecorder.
 	self initDispatcher.
 	
 	mouseProcessor := BlMouseProcessor space: self.

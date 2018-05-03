@@ -1,7 +1,7 @@
 running
 run
 	| aScroller aSmoothScroller |
-
+		
 	self disableRunOnAnimationRequests.
 	
 	self onPrepareToRun.
@@ -15,7 +15,7 @@ run
 		ifTrue: [ 
 			| aState |
 			aState := self runInitOn: aScroller.
-			self onInitialized.			
+			self onInitialized.
 
 			self runLayoutScrollWith: aState.
 			self onLayoutScrolled.

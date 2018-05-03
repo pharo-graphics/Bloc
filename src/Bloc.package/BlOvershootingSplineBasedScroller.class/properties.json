@@ -9,6 +9,7 @@
 		"currentVelocity",
 		"deceleration",
 		"startTime",
+		"updateTime",
 		"duration",
 		"splineDuration",
 		"splineDistance",

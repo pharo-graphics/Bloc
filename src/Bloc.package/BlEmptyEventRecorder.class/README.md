@@ -1,0 +1,1 @@
+I simply ignore all events (play a role event recorder in a space)

@@ -10,24 +10,24 @@ runOverscrollOn: anOverScroller with: aState
 		aState overscrollY isZero ])
 			ifTrue: [ ^ self ].
 			
-	aVelocity := anOverScroller currentVelocity.
+	aVelocity := anOverScroller velocity.
 	
 	aVelocityX := 0.
 	(aState overscrollX ~= aState x)
 		ifTrue: [
 			aVelocityX := (aState overscrollX < 0)
-				ifTrue: [ aVelocity negated ]
+				ifTrue: [ aVelocity x negated ]
 				ifFalse: [ (aState overscrollX > 0)
-					ifTrue: [ aVelocity ]
+					ifTrue: [ aVelocity x ]
 					ifFalse: [ 0 ] ] ].
 		
 	aVelocityY := 0.
 	(aState overscrollY ~= aState y)
 		ifTrue: [
 			aVelocityY := (aState overscrollY < 0)
-				ifTrue: [ aVelocity negated ]
+				ifTrue: [ aVelocity y negated ]
 				ifFalse: [ (aState overscrollY > 0)
-					ifTrue: [ aVelocity ]
+					ifTrue: [ aVelocity y ]
 					ifFalse: [ 0 ] ] ].
 	
 	"Overscroll happened, make sure glows are notified"

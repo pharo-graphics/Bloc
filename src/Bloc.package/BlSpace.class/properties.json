@@ -13,6 +13,7 @@
 		"dirtyAreas",
 		"eventDispatcher",
 		"eventListener",
+		"eventRecorder",
 		"mouseProcessor",
 		"focusProcessor",
 		"keyboardProcessor",

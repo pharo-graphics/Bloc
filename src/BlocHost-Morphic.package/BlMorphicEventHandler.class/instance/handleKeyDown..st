@@ -1,7 +1,10 @@
 event handling
 handleKeyDown: aMorphicEvent
 	| aBlEvent |
-
+	
+	(self isScrollEvent: aMorphicEvent)
+		ifTrue: [ ^ self ].
+	
 	aBlEvent := BlKeyDownEvent new
 		key: aMorphicEvent key;
 		scanCode: aMorphicEvent scanCode;

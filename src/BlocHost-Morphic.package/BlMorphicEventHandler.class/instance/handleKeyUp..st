@@ -1,6 +1,9 @@
 event handling
 handleKeyUp: aMorphicEvent
 	| aBlEvent |
+	
+	(self isScrollEvent: aMorphicEvent)
+		ifTrue: [ ^ self ].
 		
 	aBlEvent := BlKeyUpEvent new
 		key: aMorphicEvent key;

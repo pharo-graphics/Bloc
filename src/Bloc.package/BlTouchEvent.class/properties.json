@@ -5,7 +5,12 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"pointerId",
+		"pointerIndex",
+		"delta",
+		"pressure"
+	],
 	"name" : "BlTouchEvent",
 	"type" : "normal"
 }

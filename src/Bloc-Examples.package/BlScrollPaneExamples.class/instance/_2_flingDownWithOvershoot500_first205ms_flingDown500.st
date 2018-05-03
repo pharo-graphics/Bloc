@@ -20,7 +20,7 @@ _2_flingDownWithOvershoot500_first205ms_flingDown500
 	self assert: aScrollerY splineDistance equals: 84.
 	self assert: aScrollerY splineDuration equals: 0 milliSeconds.
 	self assert: aScrollerY startPosition equals: 0.
-	self assert: aScrollerY startTime equals: self simulatedDate + 120 milliSeconds.
+	self assert: aScrollerY startTime equals: self simulatedDate + 115 milliSeconds.
 	self assert: aScrollerY startVelocity equals: 670.
 
 	self assert: aScrollPane scrollState equals: #settling.
@@ -30,11 +30,11 @@ _2_flingDownWithOvershoot500_first205ms_flingDown500
 	
 	aScrollPane space time
 		every: 5 milliSeconds
-		during: 295 milliSeconds
+		during: 290 milliSeconds
 		do: [
 			aScrollPane space pulse.
 			theScrollPositions add: aScrollPane scrollPosition y ].
 
-	self assert: theScrollPositions asArray equals: {41. 42. 43. 45. 46. 47. 47. 48. 49. 49. 50. 50. 50. 50. 50. 50. 49. 49. 48. 47. 47. 46. 44. 43. 42. 41. 39. 38. 37. 35. 33. 32. 30. 29. 27. 25. 23. 22. 20. 19. 17. 15. 14. 12. 11. 9. 8. 7. 6. 5. 4. 3. 2. 1. 1. 0. 0. 0. 0}.
+	self assert: theScrollPositions asArray equals: { 42. 43. 45. 46. 47. 47. 48. 49. 49. 50. 50. 50. 50. 50. 50. 49. 49. 48. 47. 47. 46. 44. 43. 42. 41. 39. 38. 37. 35. 33. 32. 30. 29. 27. 25. 23. 22. 20. 19. 17. 15. 14. 12. 11. 9. 8. 7. 6. 5. 4. 3. 2. 1. 1. 0. 0. 0. 0}.
 
 	^ aScrollPane

@@ -3,9 +3,10 @@ handleMouseWheel: anEvent
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
 
-		aBlEvent := BlScrollEvent new
+		aBlEvent := BlMouseWheelEvent new
+			vector: (BlVector x: 0 y: (aMorphicEvent direction = Character arrowDown
+				ifTrue: [ -1 ] ifFalse: [ 1 ]));
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			button: (self convertButtonFromMouseEvent: aMorphicEvent);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			direction: aMorphicEvent direction;

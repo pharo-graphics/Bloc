@@ -4,4 +4,5 @@ finishOn: aSplineOverScroller
 
 	aSplineOverScroller currentPosition: aSplineOverScroller finalPosition.
 	aSplineOverScroller currentVelocity: 0.0.
-	aSplineOverScroller isFinished: true
+	aSplineOverScroller isFinished: true.
+	aSplineOverScroller updateTime: nil.

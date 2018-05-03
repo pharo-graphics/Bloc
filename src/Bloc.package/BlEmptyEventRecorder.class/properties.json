@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/3/2018 13:41",
+	"super" : "BlSpaceEventRecorder",
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlEmptyEventRecorder",
+	"type" : "normal"
+}

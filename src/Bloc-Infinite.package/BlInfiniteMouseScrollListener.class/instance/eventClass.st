@@ -1,3 +1,3 @@
 accessing
 eventClass
-	^ BlScrollEvent
+	^ BlMouseWheelEvent

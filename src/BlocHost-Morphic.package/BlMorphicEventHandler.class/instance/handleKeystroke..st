@@ -1,7 +1,7 @@
 event handling
 handleKeystroke: aMorphicEvent
 	| aBlEvent |
-	
+		
 	(aMorphicEvent shiftPressed and: [ aMorphicEvent controlKeyPressed ])
 		ifTrue: [
 			aMorphicEvent keyCharacter = Character arrowLeft

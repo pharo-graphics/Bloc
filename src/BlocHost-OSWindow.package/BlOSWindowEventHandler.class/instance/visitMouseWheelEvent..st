@@ -1,10 +1,15 @@
 visiting mouse
 visitMouseWheelEvent: anEvent
-	| vertical |
-	vertical := anEvent scrollVertical.
-	vertical = 0 ifTrue: [ ^ nil ].
+	| vertical horizontal |
 	
-	^ BlScrollEvent new
+	horizontal := anEvent scrollHorizontal.
+	vertical := anEvent scrollVertical.
+	
+	(horizontal isZero and: [ vertical isZero ])
+		ifTrue: [ ^ self ].
+	
+	^ BlMouseWheelEvent new
+		vector: (BlVector x: horizontal negated y: vertical);
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		direction: (vertical > 0 ifTrue: [Character arrowUp] ifFalse: [Character arrowDown]);

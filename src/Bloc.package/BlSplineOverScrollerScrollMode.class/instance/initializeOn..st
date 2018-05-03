@@ -6,7 +6,10 @@ initializeOn: aSplineOverScroller
 	aSplineOverScroller currentPosition: self startPosition.
 	aSplineOverScroller finalPosition: self startPosition + self distance.
 	
-	aSplineOverScroller startTime: aSplineOverScroller time now.
+	aSplineOverScroller updateTime
+		ifNil: [ aSplineOverScroller startTime: aSplineOverScroller time now ]
+		ifNotNil: [ aSplineOverScroller startTime: aSplineOverScroller updateTime ].
+
 	aSplineOverScroller duration: self duration.
 	
 	aSplineOverScroller deceleration: 0.0.

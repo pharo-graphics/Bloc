@@ -12,24 +12,24 @@ scrollBy: aPoint
 		ifTrue: [
 			| aNewPosition aMinPosition aMaxPosition aNewClampedPosition |
 			
-			aNewPosition := aContent measuredBounds position x + dX.
+			aNewPosition := self scrollPosition x + dX.
 			aMinPosition := (self width - aContent width) min: 0.
 			aMaxPosition := 0.
 			aNewClampedPosition := (aNewPosition max: aMinPosition) min: aMaxPosition.
 			
-			dX := aNewClampedPosition - aContent measuredBounds position x ]
+			dX := aNewClampedPosition - self scrollPosition x ]
 		ifFalse: [ dX := 0 ].
 	
 	self canScrollVertically
 		ifTrue: [
 			| aNewPosition aMinPosition aMaxPosition aNewClampedPosition |
 			
-			aNewPosition := aContent measuredBounds position y + dY.
+			aNewPosition := self scrollPosition y + dY.
 			aMinPosition := (self height - aContent height) min: 0.
 			aMaxPosition := 0.
 			aNewClampedPosition := (aNewPosition max: aMinPosition) min: aMaxPosition.
 			
-			dY := aNewClampedPosition - aContent measuredBounds position y ]
+			dY := aNewClampedPosition - self scrollPosition y ]
 		ifFalse: [ dY := 0 ].
 	
 	dX isZero

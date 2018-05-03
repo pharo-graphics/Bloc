@@ -7,8 +7,22 @@ initializeOn: aSplineOverScroller
 
 	aSplineOverScroller startPosition: self startPosition.
 	aSplineOverScroller startVelocity: self velocity.
-	aSplineOverScroller startTime: aSplineOverScroller time now.
 	
+	
+	
+	aSplineOverScroller updateTime
+		ifNil: [ aSplineOverScroller startTime: aSplineOverScroller time now ]
+		ifNotNil: [ aSplineOverScroller startTime: aSplineOverScroller updateTime ].
+	
+	"aSplineOverScroller startTime = aSplineOverScroller updateTime
+		ifFalse: [ aSplineOverScroller startTime: aSplineOverScroller time now ]."
+		
+	"self velocity isZero ifFalse: [
+		{
+		#start -> aSplineOverScroller startTime.
+		#update -> aSplineOverScroller updateTime.
+		#now -> aSplineOverScroller time now } asDictionary logCr ]."
+
 	aSplineOverScroller currentPosition: self startPosition.
 	aSplineOverScroller currentVelocity: self velocity.
 	

@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 isScrollRight
 	^ direction = Character arrowRight

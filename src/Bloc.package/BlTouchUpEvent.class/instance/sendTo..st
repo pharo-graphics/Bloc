@@ -1,3 +1,3 @@
-as yet unclassified
+sending
 sendTo: anObject
 	anObject touchUpEvent: self

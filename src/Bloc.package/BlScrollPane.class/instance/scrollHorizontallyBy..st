@@ -6,7 +6,7 @@ scrollHorizontallyBy: aNumber
 	| aContent |
 	
 	aContent := self children first.
-	aContent relocate: aContent measuredBounds position + (aNumber @ 0).
 	scrollPosition := scrollPosition + (aNumber @ 0).
+	aContent relocate: scrollPosition.
 
 	^ aNumber

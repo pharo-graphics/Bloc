@@ -2,7 +2,7 @@ examples - fling up
 _1_flingUp500_first205ms
 	<gtExample>
 	| aScrollPane theScrollPositions aScrollerY |
-	
+
 	aScrollPane := self scrollPaneWithContentInSpace.
 	aScrollPane flingBy: (0@500) negated.
 	
