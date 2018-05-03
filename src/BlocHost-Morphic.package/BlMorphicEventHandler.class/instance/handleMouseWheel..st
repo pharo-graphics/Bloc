@@ -5,7 +5,7 @@ handleMouseWheel: anEvent
 
 		aBlEvent := BlMouseWheelEvent new
 			vector: (BlVector x: 0 y: (aMorphicEvent direction = Character arrowDown
-				ifTrue: [ -1 ] ifFalse: [ 1 ]));
+				ifTrue: [ -2 ] ifFalse: [ 2 ]));
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
