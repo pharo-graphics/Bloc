@@ -1,6 +1,10 @@
 visiting window
 visitWindowCloseEvent: anEvent
+	| aBlocEvent |
 	anEvent suppressDefaultAction.
-	^ BlSpaceCloseRequest new
-		timestamp: DateAndTime now;
-		yourself
+
+	aBlocEvent := BlSpaceCloseRequest new
+		timestamp: self time now;
+		yourself.
+		
+	self enqueue: aBlocEvent

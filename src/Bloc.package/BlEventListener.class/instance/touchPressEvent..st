@@ -1,2 +1,0 @@
-touch handlers
-touchPressEvent: anEvent

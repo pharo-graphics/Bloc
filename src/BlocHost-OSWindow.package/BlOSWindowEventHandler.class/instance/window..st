@@ -1,3 +1,3 @@
-accessing
-window: anObject
-	window := anObject
+api - accessing
+window: aBlOSWindowSpace
+	window := aBlOSWindowSpace

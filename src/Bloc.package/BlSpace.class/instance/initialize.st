@@ -14,6 +14,7 @@ initialize
 	mouseProcessor := BlMouseProcessor space: self.
 	focusProcessor := BlFocusProcessor space: self.
 	keyboardProcessor := BlKeyboardProcessor space: self.
+	touchProcessor := BlTouchProcessor space: self.
 
 	tasks := BlTaskQueue new.
 	time := BlTime real.

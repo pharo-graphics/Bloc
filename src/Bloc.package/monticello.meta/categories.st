@@ -10,7 +10,6 @@ SystemOrganization addCategory: 'Bloc-Basic-Visual'!
 SystemOrganization addCategory: 'Bloc-Effect'!
 SystemOrganization addCategory: 'Bloc-Event'!
 SystemOrganization addCategory: 'Bloc-EventHandling'!
-SystemOrganization addCategory: 'Bloc-Gesture'!
 SystemOrganization addCategory: 'Bloc-KeyBinding'!
 SystemOrganization addCategory: 'Bloc-Layouts-Basic'!
 SystemOrganization addCategory: 'Bloc-Layouts-Support'!

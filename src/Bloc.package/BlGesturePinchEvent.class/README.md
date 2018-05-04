@@ -1,0 +1,1 @@
+Is sent periodically during the pinch gesture.

@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "AlaikseiSyrel 5/4/2018 16:37",
-	"super" : "BlUIEvent",
+	"commentStamp" : "AlaikseiSyrel 5/4/2018 17:02",
+	"super" : "BlGestureEvent",
 	"category" : "Bloc-Event",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlGestureEvent",
+	"name" : "BlGestureBasePinchEvent",
 	"type" : "normal"
 }

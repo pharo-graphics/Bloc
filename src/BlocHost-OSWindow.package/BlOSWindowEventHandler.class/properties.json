@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "OSWindowEventVisitor",
+	"super" : "OSWindowGestureHandler",
 	"category" : "BlocHost-OSWindow-Support",
 	"classinstvars" : [ ],
 	"pools" : [
@@ -10,7 +10,8 @@
 		"SymbolCharacterMapping"
 	],
 	"instvars" : [
-		"window"
+		"window",
+		"time"
 	],
 	"name" : "BlOSWindowEventHandler",
 	"type" : "normal"

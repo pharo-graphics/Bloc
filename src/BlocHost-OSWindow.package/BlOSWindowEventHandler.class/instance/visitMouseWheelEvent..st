@@ -1,4 +1,4 @@
-visiting mouse
+visiting - mouse
 visitMouseWheelEvent: anEvent
 	| vertical horizontal |
 	

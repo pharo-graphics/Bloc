@@ -1,0 +1,2 @@
+gesture handlers
+gesturePinchEndEvent: anEvent
