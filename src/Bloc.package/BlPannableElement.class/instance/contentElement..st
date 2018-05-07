@@ -1,4 +1,4 @@
 accessing
 contentElement: anElement
-	zoomableElement contentElement: anElement.
-	zoomableElement zoomLevel: 1
+	self zoomableElement contentElement: anElement.
+	self zoomToFit

@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"space"
+		"space",
+		"currentWindow"
 	],
 	"name" : "GLMMorphicBlocWrapperMorph",
 	"type" : "normal"

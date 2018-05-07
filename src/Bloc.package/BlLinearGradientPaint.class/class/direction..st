@@ -8,7 +8,7 @@ direction: aPoint
 	aDirection := aDirection isZero
 		ifTrue: [ 1@0 ]
 		ifFalse: [ aDirection normalized].
-	
+
 	aStart := 0 asPoint.
 	anEnd := aStart + aDirection.	
 	aDelta := aStart min: anEnd.

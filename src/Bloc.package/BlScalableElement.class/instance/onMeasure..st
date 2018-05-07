@@ -8,9 +8,7 @@ onMeasure: anExtentMeasurementSpec
 		ifFalse: [ ^ self ].
 	
 	"and then we scale a content element according to scaling strategy"
-	aScaleFactor := self scaleStrategy scale: self contentElement within: self.
-	"we must not scale by zero! Otherwise matrix becomes singular"
-	aScaleFactor isZero ifTrue: [ aScaleFactor := 1.0 ].
+	aScaleFactor := self measureScale.
 
 	self contentElement transform
 		scaleBy: (aScaleFactor @ aScaleFactor);

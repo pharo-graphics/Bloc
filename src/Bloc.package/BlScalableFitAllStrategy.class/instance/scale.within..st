@@ -9,4 +9,4 @@ scale: aContentElement within: aScalableElement
 	(aMeasuredExtent x * aMeasuredExtent y) isZero
 		ifTrue: [ ^ 1.0 ].
 
-	^ (aScalableElement measuredExtent / aMeasuredExtent) min
+	^ (aScalableElement measuredExtent / aMeasuredExtent) min asFloat
