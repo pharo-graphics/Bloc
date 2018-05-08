@@ -2,4 +2,4 @@ api - scrolling geometry
 scrollMinimum
 	<return: #Point>
 	
-	^ (self extent - self contentElement extent) min: 0@0
+	^ (self extent - self scrolledElement extent) min: 0@0

@@ -1,3 +1,3 @@
 private - state
-beIddle
+beIdle
 	self scrollable scrollState: #idle

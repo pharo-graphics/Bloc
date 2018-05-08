@@ -4,6 +4,9 @@ initialize
 
 	scrollFlinger := BlScrollFlinger on: self.
 	scrollPosition := 0@0.
+	scrollState := #idle.
+	horizontalAlignment := self defaultHorizontalAlignment.
+	verticalAlignment := self defaultVerticalAlignment.
 
 	self
 		when: BlMouseWheelEvent

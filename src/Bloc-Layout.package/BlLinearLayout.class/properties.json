@@ -11,7 +11,7 @@
 	"name" : "BlLinearLayout",
 	"commentStamp" : "GlennCavarle 6/27/2016 15:22",
 	"super" : "BlLayout",
-	"traitcomposition" : "TBlAlignable - {#alignTopLeft}",
+	"traitcomposition" : "TBlAlignable",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

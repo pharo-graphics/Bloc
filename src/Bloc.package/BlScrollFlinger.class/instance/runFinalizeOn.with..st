@@ -16,7 +16,7 @@ runFinalizeOn: anOverScroller with: aState
 	
 	(anOverScroller isFinished or: [ fullyConsumedHorizontal and: [ fullyConsumedVertical ] ])
 		ifTrue: [
-			self beIddle.
+			self beIdle.
 			self onFinished ]
 		ifFalse: [
 			self postOnAnimation.

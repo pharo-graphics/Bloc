@@ -1,0 +1,20 @@
+{
+	"classtraitcomposition" : "TBlScrollable classTrait + TBlAlignable classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"scrollState",
+		"scrollFlinger",
+		"scrollPosition",
+		"scrollAlignment",
+		"horizontalAlignment",
+		"verticalAlignment"
+	],
+	"name" : "BlScrollableElement",
+	"commentStamp" : "",
+	"super" : "BlElement",
+	"traitcomposition" : "TBlScrollable + TBlAlignable",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Utilities - Scrolling"
+}

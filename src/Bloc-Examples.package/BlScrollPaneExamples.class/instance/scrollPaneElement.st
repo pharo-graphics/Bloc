@@ -2,7 +2,7 @@ examples - instance creation
 scrollPaneElement
 	<gtExample>
 	
-	^ BlScrollPane new
+	^ BlScrollableElement new
 		size: self scrollPaneExtent;
 		background: (Color white);
 		border: (BlBorder paint: Color darkGray width: 2)

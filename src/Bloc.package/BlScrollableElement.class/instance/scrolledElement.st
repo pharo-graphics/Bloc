@@ -1,5 +1,5 @@
 accessing
-contentElement
+scrolledElement
 	<return: #BlElement>
 
 	^ self children first

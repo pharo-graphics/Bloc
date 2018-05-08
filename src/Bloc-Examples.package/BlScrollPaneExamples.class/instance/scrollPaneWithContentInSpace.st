@@ -13,8 +13,8 @@ scrollPaneWithContentInSpace
 	self assert: aScrollPane extent equals: self scrollPaneExtent.
 	self assert: aScrollPane position equals: 0@0.
 	
-	self assert: aScrollPane contentElement extent equals: self contentExtent.
-	self assert: aScrollPane contentElement position equals: 0@0.
+	self assert: aScrollPane scrolledElement extent equals: self contentExtent.
+	self assert: aScrollPane scrolledElement position equals: 0@0.
 	
 	self assert: aScrollPane scrollPosition equals: 0@0.
 	self assert: aScrollPane scrollOvershot equals: (self scrollPaneExtent / 2.0).

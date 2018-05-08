@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BlScrollPane",
+	"super" : "BlScrollableElement",
 	"category" : "Bloc-Utilities - Pannable",
 	"classinstvars" : [ ],
 	"pools" : [ ],

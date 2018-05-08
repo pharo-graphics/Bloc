@@ -14,7 +14,7 @@ gridInScrollPane
 			size: 120@120;
 			background: (Color gray alpha: (20 to: 50) atRandom / 100.0)]).
 
-	aScrollPane := BlScrollPane new.
+	aScrollPane := BlScrollableElement new.
 	aScrollPane constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].

@@ -5,7 +5,7 @@ flingUpDownConsecutive
 	
 	aScrollPane := self scrollPaneWithContentInSpace.
 	aScrollPane size: self largeScrollPaneExtent.
-	aScrollPane contentElement size: self largeContentExtent.
+	aScrollPane scrolledElement size: self largeContentExtent.
 	
 	theScrollPositions := OrderedCollection new.
 	theVelocities := OrderedCollection new.
