@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"layout",
-		"isStopped"
+		"isStopped",
+		"measuredExtent"
 	],
 	"name" : "BlOnceLayout",
 	"type" : "normal"
