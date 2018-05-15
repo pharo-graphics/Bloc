@@ -19,4 +19,4 @@ scrollEvent: anEvent
 	anEvent currentTarget fling: dX @ dY.
 
 	self flag: 'Make scrolling costomizable'.
-	"anEvent consumed: true"
+	anEvent consumed: true
