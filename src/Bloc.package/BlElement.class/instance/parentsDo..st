@@ -4,8 +4,5 @@ parentsDo: aBlock
 	up to the top most parent (excluding myself).
 	If I don't have a parent - does nothing"
 	
-	self hasParent
-		ifFalse: [ ^ self ].
-		
-	aBlock value: self parent.
-	self parent parentsDo: aBlock
+	self hasParent ifFalse: [ ^ self ].
+	self parent withParentsDo: aBlock
