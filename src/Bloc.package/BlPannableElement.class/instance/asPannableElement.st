@@ -1,0 +1,3 @@
+conversion
+asPannableElement
+	^ self
