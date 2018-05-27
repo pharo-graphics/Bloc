@@ -26,4 +26,4 @@ keyDownEvent: anEvent
 				
 	next := direction ifNotNil: [ :aDirection |
 		focusFinder nextFocus: focused within: root along: aDirection ].
-	next ifNotNil: #requestFocus
+	next ifNotNil: #transferFocus

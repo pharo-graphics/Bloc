@@ -1,8 +1,10 @@
 mouse handlers
 scrollEvent: anEvent
-	| dX dY anAmount |
+	| dX dY anAmount anInfiniteElement didFling |
 	
 	anAmount := 300.
+	
+	anInfiniteElement := anEvent currentTarget.
 
 	dX := anEvent isScrollLeft
 		ifTrue: [ anAmount ]
@@ -10,13 +12,11 @@ scrollEvent: anEvent
 			ifTrue: [ anAmount negated ]
 			ifFalse: [ 0 ] ].
 
-	dY := anEvent isScrollDown
+	dY := (anEvent isScrollDown and: [ self canScrollDown: anInfiniteElement ])
 		ifTrue: [ anAmount ]
-		ifFalse: [ anEvent isScrollUp
+		ifFalse: [ (anEvent isScrollUp and: [ self canScrollUp: anInfiniteElement ])
 			ifTrue: [ anAmount negated ]
 			ifFalse: [ 0 ] ].
 
-	anEvent currentTarget fling: dX @ dY.
-
-	self flag: 'Make scrolling costomizable'.
-	anEvent consumed: true
+	didFling := anEvent currentTarget fling: dX @ dY.
+	anEvent consumed: didFling
