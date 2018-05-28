@@ -17,8 +17,8 @@ layoutIgnored: anElement
 			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
 			childBounds := self
 				align: aChild
-				bounds: childBounds
+				bounds: (aChild margin expand: childBounds)
 				in: parentBounds
 				with: aChild constraints ignored alignment.
 			"and finally set new bounds"
-			aChild applyLayoutIn: childBounds ]
+			aChild applyLayoutIn: (aChild margin inset: childBounds) ]

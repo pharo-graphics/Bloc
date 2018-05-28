@@ -1,19 +1,32 @@
 dnd handlers
 dragEvent: anEvent
-	| dragPosition dragDelta theBounds |
+	| dragPosition dragDelta theBounds theOriginalBounds widthChanged heightChanged |
 	anEvent consumed: true.
 
 	dragPosition := anEvent position.
 	dragDelta := dragPosition - dragStartPosition.
 
 	theBounds := BlBounds origin: originalPosition extent: originalExtent.
+	theOriginalBounds := theBounds copy.
+
 	self
 		resizeBounds: theBounds
 		by: dragDelta.
 	
+	widthChanged := theBounds width ~= theOriginalBounds width.
+	heightChanged := theBounds height ~= theOriginalBounds height.
+	
 	self resizeTarget globalBoundsToLocal: theBounds.
 	self resizeTarget localBoundsToParent: theBounds.
 
-	self resizeTarget
-		relocate: theBounds position;
-		size: theBounds extent
+	self resizeTarget relocate: theBounds position.
+	
+	(widthChanged and: [ heightChanged ])
+		ifTrue: [ ^ self resizeTarget size: theBounds extent ].
+		
+	widthChanged
+		ifTrue: [ ^ self resizeTarget width: theBounds width ].
+		
+	heightChanged
+		ifTrue: [ ^ self resizeTarget height: theBounds height ].
+	

@@ -1,4 +1,4 @@
-accessing
+api - attaching / detaching
 attachTo: anElement
 	super attachTo: anElement.
 
