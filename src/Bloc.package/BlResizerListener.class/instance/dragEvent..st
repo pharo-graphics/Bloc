@@ -1,5 +1,6 @@
 dnd handlers
 dragEvent: anEvent
+	<event: #BlResizerResizedEvent>
 	| dragPosition dragDelta theBounds theOriginalBounds widthChanged heightChanged |
 	anEvent consumed: true.
 
