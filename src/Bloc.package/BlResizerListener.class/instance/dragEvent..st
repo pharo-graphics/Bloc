@@ -21,12 +21,13 @@ dragEvent: anEvent
 
 	self resizeTarget relocate: theBounds position.
 	
-	(widthChanged and: [ heightChanged ])
-		ifTrue: [ ^ self resizeTarget size: theBounds extent ].
-		
+	(widthChanged or: [ heightChanged ])
+		ifFalse: [ ^ self ].
+
 	widthChanged
-		ifTrue: [ ^ self resizeTarget width: theBounds width ].
-		
+		ifTrue: [ self resizeTarget width: theBounds width ].
+
 	heightChanged
-		ifTrue: [ ^ self resizeTarget height: theBounds height ].
+		ifTrue: [ self resizeTarget height: theBounds height ].
 	
+	anEvent currentTarget dispatchEvent: BlResizerResizedEvent new

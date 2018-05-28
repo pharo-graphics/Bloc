@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEvent",
+	"category" : "Bloc-Utilities - Resizable",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlResizerResizedEvent",
+	"type" : "normal"
+}

@@ -9,7 +9,8 @@
 		"dragStartPosition",
 		"originalPosition",
 		"resizeTarget",
-		"originalExtent"
+		"originalExtent",
+		"minimumExtent"
 	],
 	"name" : "BlResizerListener",
 	"type" : "normal"

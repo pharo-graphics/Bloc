@@ -1,3 +1,5 @@
 resizer
 minimumExtent
-	^ 5 asPoint
+	<return: #Point>
+
+	^ minimumExtent
