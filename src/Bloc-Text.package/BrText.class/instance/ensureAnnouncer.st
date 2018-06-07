@@ -1,3 +1,3 @@
 text - notifying
 ensureAnnouncer
-	announcer ifNil: [ announcer := Announcer new ]
+	announcer ifNil: [ announcer := BrTextAnnouncer new ]
