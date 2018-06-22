@@ -4,7 +4,7 @@ nextLine
 	
 	self hasNext
 		ifFalse: [ self error: 'reached end of rope' ].
-	
+
 	aSegment := (self isNewLine: self peek) 
 		ifTrue: [ self next. BrCollectionRope collection: '' ]
 		ifFalse: [ self nextSegment: [ :anItem | self isNewLine: anItem ] ].
@@ -14,5 +14,7 @@ nextLine
 			self next.
 			(self hasNext and: [ (self isNewLine: self peek) ])
 				ifTrue: [ self previous ] ].
+
+	
 
 	^ aSegment
