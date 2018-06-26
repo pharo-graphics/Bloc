@@ -9,6 +9,7 @@ os:
 
 smalltalk:
   - Pharo-6.1
+  - Pharo64-6.1
 
 matrix:
   include:
