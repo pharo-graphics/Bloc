@@ -5,4 +5,8 @@ nextLineIndicesDo: anIndicesBlock
 		- end index of line without line delimiter
 		- end index of line including line delimiter(s) CR, LF or CRLF"
 		
-	iterator nextLineIndicesDo: anIndicesBlock
+	iterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aLineDelimiterEnd |
+		anIndicesBlock
+			value: aLineStart - self text textOffset
+			value: aLineEnd - self text textOffset
+			value: aLineDelimiterEnd - self text textOffset ]
