@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 7/5/2018 13:30",
 	"super" : "BlRope",
-	"category" : "Bloc-Text-Rope-Rope",
+	"category" : "Bloc-DataStructure - Rope",
 	"classinstvars" : [
 		"empty"
 	],

@@ -1,13 +1,13 @@
 {
 	"commentStamp" : "AliakseiSyrel 3/17/2017 00:28",
 	"super" : "BlRopeIterator",
-	"category" : "Bloc-Text-Rope-Rope",
+	"category" : "Bloc-DataStructure - Rope",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"position"
+		"subIterator"
 	],
-	"name" : "BlCollectionRopeIterator",
+	"name" : "BlSubRopeIterator",
 	"type" : "normal"
 }
