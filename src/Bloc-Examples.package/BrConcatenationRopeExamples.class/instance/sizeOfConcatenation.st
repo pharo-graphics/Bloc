@@ -1,4 +1,4 @@
-concatenation - examples
+instance creation
 sizeOfConcatenation
 	<gtExample>
 	| aConcatenationRope |

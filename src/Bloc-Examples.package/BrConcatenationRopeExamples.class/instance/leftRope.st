@@ -1,5 +1,5 @@
-concatenation - examples
+instance creation
 leftRope
 	<gtExample>
 	
-	^ BrCollectionRope collection: '[I am a left part]'
+	^ BlCollectionRope collection: '[I am a left part]'

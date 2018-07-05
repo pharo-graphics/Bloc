@@ -2,4 +2,4 @@ instance creation
 habaCrHabaCrHabaRope
 	<gtExample>
 
-	^ BrCollectionRope collection: self haba, self cr, self haba, self cr, self haba
+	^ BlCollectionRope collection: self haba, self cr, self haba, self cr, self haba

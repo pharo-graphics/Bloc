@@ -2,7 +2,7 @@ example
 exampleText
 	| space text textElement |
 
-	text := BrRopedText rope: (BrCollectionRope collection: (String loremIpsum: 30)).
+	text := BrRopedText rope: (BlCollectionRope collection: (String loremIpsum: 30)).
 	text attributes: { BrFontWeightAttribute bold }.
 
 	textElement := self new.

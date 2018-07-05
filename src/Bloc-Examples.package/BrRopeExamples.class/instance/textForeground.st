@@ -11,9 +11,9 @@ textForeground
 	self assert: text rope isConcatenation.
 	self assert: text rope left isConcatenation.
 	self assert: text rope left left size equals: 5.
-	self assert: (text rope left left isKindOf: BrAttributeRope).
+	self assert: (text rope left left isKindOf: BlAttributeRope).
 	self assert: text rope left left attributes asArray equals: { BrTextForegroundAttribute paint: Color blue }.
-	self assert: (text rope right isKindOf: BrAttributeRope).
+	self assert: (text rope right isKindOf: BlAttributeRope).
 	self assert: text rope right attributes asArray equals: { BrTextForegroundAttribute paint: Color red }.
 
 	^ text

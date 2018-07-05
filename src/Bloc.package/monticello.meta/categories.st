@@ -7,6 +7,7 @@ SystemOrganization addCategory: 'Bloc-Basic-Properties'!
 SystemOrganization addCategory: 'Bloc-Basic-Support'!
 SystemOrganization addCategory: 'Bloc-Basic-Transformations'!
 SystemOrganization addCategory: 'Bloc-Basic-Visual'!
+SystemOrganization addCategory: 'Bloc-DataStructure - Rope'!
 SystemOrganization addCategory: 'Bloc-Effect'!
 SystemOrganization addCategory: 'Bloc-Event'!
 SystemOrganization addCategory: 'Bloc-EventHandling'!

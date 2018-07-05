@@ -5,5 +5,5 @@ assert: aBlock
 	
 	Note: Should be enabled with ===Bloc enableAssertions==="
 	
-	Bloc assertionsEnabled
+	self assertionsEnabled
 		ifTrue: [ aBlock value == true ifFalse: [ AssertionFailure signal: 'Assertion failed' ] ]

@@ -1,0 +1,17 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"rope",
+		"start",
+		"end"
+	],
+	"name" : "BlRopeIterator",
+	"commentStamp" : "AliakseiSyrel 3/17/2017 00:27",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Rope-Rope"
+}

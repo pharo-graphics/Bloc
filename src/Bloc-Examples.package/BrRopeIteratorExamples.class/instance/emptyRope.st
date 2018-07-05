@@ -2,4 +2,4 @@ instance creation
 emptyRope
 	<gtExample>
 
-	^ BrCollectionRope collection: self empty
+	^ BlCollectionRope collection: self empty

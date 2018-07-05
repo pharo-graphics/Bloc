@@ -1,3 +1,0 @@
-accessing
-depth
-	^ 1

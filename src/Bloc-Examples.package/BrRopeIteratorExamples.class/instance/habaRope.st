@@ -2,4 +2,4 @@ instance creation
 habaRope
 	<gtExample>
 
-	^ BrCollectionRope collection: self haba
+	^ BlCollectionRope collection: self haba
