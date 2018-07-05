@@ -27,16 +27,23 @@ preferencesOn: aBuilder
 				label: 'Preferable event handler registry backend' ;
 				domainValues: ((BlHandlerRegistry availableRegistryClasses collect: [ :aClass | aClass label -> aClass ]) sort: [ :a :b | a key < b key ]);
 				description: 'Choose which data structure should be used for event handler registry'.
+				
+			(aBuilder pickOne: #preferableChildrenDataStructure)
+				target: self;
+				order: 4;
+				label: 'Preferable children data structure' ;
+				domainValues: { BlChildrenArray . BlChildrenRope };
+				description: 'Choose which data structure should be used to store element''s children'.
 
 			(aBuilder setting: #assertionsEnabled)
-				order: 4;
+				order: 5;
 				target: self;
 				label: 'Assertions';
 				description: 'Set enabled to turn assertions on or disable to turn them off';
 				default: [ true ].
 				
 			(aBuilder setting: #debugModeEnabled)
-				order: 5;
+				order: 6;
 				target: self;
 				label: 'Debug Mode';
 				description: 'Set enabled to turn extensive debugging mode on or disable to turn it off';

@@ -1,0 +1,3 @@
+children
+defaultChildrenDataStructure
+	^ BlChildrenArray

@@ -1,0 +1,3 @@
+children
+preferableChildrenDataStructure: anChildrenCollectionClass
+	PreferableChildrenDataStructure := anChildrenCollectionClass

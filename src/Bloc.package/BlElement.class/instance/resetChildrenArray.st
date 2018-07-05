@@ -1,3 +1,3 @@
 initialization
 resetChildrenArray
-	children := BlChildrenArray new
+	children := Bloc preferableChildrenDataStructure new
