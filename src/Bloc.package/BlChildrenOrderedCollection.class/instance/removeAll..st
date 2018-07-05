@@ -1,0 +1,3 @@
+removing
+removeAll: aCollectionOfBlElement
+	collection removeAll: aCollectionOfBlElement

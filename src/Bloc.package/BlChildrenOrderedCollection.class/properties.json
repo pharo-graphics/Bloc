@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlChildrenCollection",
+	"category" : "Bloc-Basic-Children",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"collection"
+	],
+	"name" : "BlChildrenOrderedCollection",
+	"type" : "normal"
+}

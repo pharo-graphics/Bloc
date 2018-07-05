@@ -32,7 +32,7 @@ preferencesOn: aBuilder
 				target: self;
 				order: 4;
 				label: 'Preferable children data structure' ;
-				domainValues: { BlChildrenArray . BlChildrenRope };
+				domainValues: { BlChildrenArray . BlChildrenRope . BlChildrenLinkedList };
 				description: 'Choose which data structure should be used to store element''s children'.
 
 			(aBuilder setting: #assertionsEnabled)
