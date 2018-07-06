@@ -2,7 +2,7 @@ iterator - enumeration
 nextSpan
 	| run theAttributes |
 
-	theAttributes := self rope attributes asSet.
+	theAttributes := self rope attributes.
 	run := subIterator nextSpan. "span without my rope's attributes"
 	run == rope rope
 		ifTrue: [ ^ rope ].

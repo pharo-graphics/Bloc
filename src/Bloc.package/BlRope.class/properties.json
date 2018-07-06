@@ -3,7 +3,7 @@
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlRope",
-	"commentStamp" : "AliakseiSyrel 3/17/2017 00:35",
+	"commentStamp" : "AliakseiSyrel 7/6/2018 19:05",
 	"super" : "Object",
 	"traitcomposition" : "TBlDebug",
 	"type" : "normal",

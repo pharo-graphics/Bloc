@@ -1,3 +1,3 @@
-accessing
+rope - accessing
 depth
 	^ rope depth

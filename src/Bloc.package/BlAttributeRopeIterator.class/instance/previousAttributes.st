@@ -1,3 +1,0 @@
-accessing
-previousAttributes
-	^ self shouldBeImplemented

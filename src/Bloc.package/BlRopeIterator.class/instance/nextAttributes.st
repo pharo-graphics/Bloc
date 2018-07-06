@@ -1,3 +1,0 @@
-accessing
-nextAttributes
-	^ self subclassResponsibility

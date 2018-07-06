@@ -12,7 +12,7 @@ clearAttributes: aStart to: anEnd if: aBlock
 		if: aBlock.
 
 	selectedAttributes ifNotEmpty: [ 
-		anClearedRope := anClearedRope attributes: selectedAttributes asSet from: 1 to: anClearedRope size ].
+		anClearedRope := anClearedRope attributes: selectedAttributes from: 1 to: anClearedRope size ].
 
 	(aStart = 1 and: [ anEnd = self size ])
 		ifTrue: [ ^ anClearedRope ].

@@ -1,5 +1,5 @@
 accessing
 attributes
-	<return: #Set of: #BrTextAttribute>
+	<return: #Collection of: #Object>
 
 	^ attributes
