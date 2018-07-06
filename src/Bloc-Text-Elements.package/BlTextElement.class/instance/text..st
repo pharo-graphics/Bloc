@@ -7,6 +7,10 @@ text: aTextModel
 	self
 		assert: [ aTextModel isNotNil ]
 		description: [ 'A text model must not be nil' ].
+		
+	self
+		assert: [ aTextModel isKindOf: BlText ]
+		description: [ 'A text model must be an instance if Text' ].
 
 	text := aTextModel.
 	self textChanged

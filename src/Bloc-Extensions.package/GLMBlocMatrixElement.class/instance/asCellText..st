@@ -1,6 +1,6 @@
 instance creation
 asCellText: aString
 
-	^ (BlRopedText string: aString)
+	^ aString asRopedText
 		attributes: {
 			BrFontFamilyAttribute named: 'STIXGeneral' }
