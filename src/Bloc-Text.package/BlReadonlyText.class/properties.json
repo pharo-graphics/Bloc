@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BlWrappedText",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BlReadonlyText",
+	"type" : "normal"
+}

@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "AliakseiSyrel 2/12/2017 00:23",
+	"super" : "BlText",
+	"category" : "Bloc-Text-Rope-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"rope"
+	],
+	"name" : "BlRopedText",
+	"type" : "normal"
+}

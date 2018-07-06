@@ -1,3 +1,3 @@
 *Bloc-Text-Rope
 asRopedText
-	^ BrRopedText string: self
+	^ BlRopedText string: self

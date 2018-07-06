@@ -1,7 +1,7 @@
 accessing - span
 span
 	"Return an underlying text span that I represent"
-	<return: #BrSpan>
+	<return: #BlSpan>
 	
 	self assertSpan.
 

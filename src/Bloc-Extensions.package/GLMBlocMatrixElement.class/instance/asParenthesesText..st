@@ -1,5 +1,5 @@
 instance creation
 asParenthesesText: aString
 
-	^ (BrRopedText string: aString)
+	^ (BlRopedText string: aString)
 		attributes: { BrFontWeightAttribute thin }

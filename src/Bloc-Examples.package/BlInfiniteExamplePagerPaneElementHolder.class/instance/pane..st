@@ -2,7 +2,7 @@ accessing
 pane: aPagerPane
 	| titleElement titleText |
 
-	titleText := BrRopedText string: aPagerPane title.
+	titleText := BlRopedText string: aPagerPane title.
 	titleText attributes: {
 		BrFontSizeAttribute size: 30
 	}.

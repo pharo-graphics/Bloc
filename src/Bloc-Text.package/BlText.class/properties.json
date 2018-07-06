@@ -1,0 +1,16 @@
+{
+	"classtraitcomposition" : "TBlDebug classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"announcer",
+		"locked"
+	],
+	"name" : "BlText",
+	"commentStamp" : "AliakseiSyrel 3/6/2018 13:55",
+	"super" : "Object",
+	"traitcomposition" : "TBlDebug",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Bloc-Text-Text"
+}

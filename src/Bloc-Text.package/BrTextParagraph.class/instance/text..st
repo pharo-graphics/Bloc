@@ -6,7 +6,7 @@ text: aBrText
 	For that send me #measureOn: message with canvas as an argument"
 
 	self
-		assert: [ text = BrText empty ]
+		assert: [ text = BlText empty ]
 		description: [ 'I am immutable! You should create a new instance or #reset me' ].
 
 	text := aBrText

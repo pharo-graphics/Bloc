@@ -1,7 +1,7 @@
 as yet unclassified
 createDateEl
 	^ BlTextElement new
-		text: (BrRopedText string: '11:27 AM');
+		text: (BlRopedText string: '11:27 AM');
 		margin: (BlInsets all: 4);
 		constraintsDo: [ :c |
 			c horizontal fitContent.

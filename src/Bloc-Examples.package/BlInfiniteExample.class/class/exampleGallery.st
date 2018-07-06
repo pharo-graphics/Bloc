@@ -27,7 +27,7 @@ exampleGallery
 		yourself.
 
 	headerText := BlTextElement new
-		text: ((BrRopedText string: 'bloc gallery')
+		text: ((BlRopedText string: 'bloc gallery')
 			attributes: { 
 				BrTextForegroundAttribute paint: (Color white alpha: 0.8).
 				BrFontSizeAttribute size: 20.

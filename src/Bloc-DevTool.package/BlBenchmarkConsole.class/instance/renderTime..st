@@ -1,3 +1,3 @@
 benchmark
 renderTime: aNumber
-	renderTimeShape text: (BrRopedText string: 'render time: ', aNumber asString)
+	renderTimeShape text: (BlRopedText string: 'render time: ', aNumber asString)

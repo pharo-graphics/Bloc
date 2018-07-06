@@ -13,13 +13,13 @@ initialize
 	buttonLeft := BlTextElement new
 		padding: (BlInsets all: 10);
 		background: Color veryLightGray;
-		text: (BrRopedText string: '< Left');
+		text: (BlRopedText string: '< Left');
 		addEventHandlerOn: BlClickEvent do: [ :anEvent |
 			list smoothScrollBy: list width negated @ 0 ].
 	buttonRight := BlTextElement new
 		padding: (BlInsets all: 10);
 		background: Color veryLightGray;
-		text: (BrRopedText string: 'Right >');
+		text: (BlRopedText string: 'Right >');
 		addEventHandlerOn: BlClickEvent do: [ :anEvent |
 			list smoothScrollBy: list width @ 0 ].
 

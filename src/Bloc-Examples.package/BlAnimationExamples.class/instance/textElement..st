@@ -2,7 +2,7 @@ accessing
 textElement: aCharacter
 	| aText |
 	
-	aText := BrRopedText string: aCharacter asString.
+	aText := BlRopedText string: aCharacter asString.
 	aText attributes: {
 		BrFontSizeAttribute size: 90.
 "		BrTextBackgroundAttribute paint: (Color white alpha: 0.5)."

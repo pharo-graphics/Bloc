@@ -1,7 +1,7 @@
 paragraph - accessing
 text
 	"Return the text I am assigned to"
-	<return: #BrText>
+	<return: #BlText>
 
 	self
 		assert: [ text isNotNil ]

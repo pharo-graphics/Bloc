@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 7/14/2017 21:12",
+	"super" : "BlText",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text",
+		"start",
+		"end"
+	],
+	"name" : "BlSubText",
+	"type" : "normal"
+}

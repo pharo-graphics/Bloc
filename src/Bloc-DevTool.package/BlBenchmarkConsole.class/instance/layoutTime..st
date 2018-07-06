@@ -1,3 +1,3 @@
 benchmark
 layoutTime: aNumber
-	layoutingShape text: (BrRopedText string: 'layout time: ', aNumber asString)
+	layoutingShape text: (BlRopedText string: 'layout time: ', aNumber asString)

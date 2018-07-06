@@ -1,6 +1,6 @@
 initialization
 defaultText
 	"Return a default text I should be created with"
-	<return: #BrText>
+	<return: #BlText>
 
-	^ BrRopedText string: 'Text'
+	^ BlRopedText string: 'Text'

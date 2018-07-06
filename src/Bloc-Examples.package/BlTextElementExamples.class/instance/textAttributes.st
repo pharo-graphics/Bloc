@@ -3,7 +3,7 @@ textAttributes
 	<gtExample>
 	| text textElement |
 
-	text := BrRopedText string: 'Hello world!', String cr, 'How are you?'.
+	text := BlRopedText string: 'Hello world!', String cr, 'How are you?'.
 	text attributes: {
 		BrFontSizeAttribute size: 16.
 		BrFontEmphasisAttribute italic } from: 1 to: text size. "the whole text"

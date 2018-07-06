@@ -4,6 +4,6 @@ emptyParagraph
 	| aParagraph |
 
 	aParagraph := self newParagraph.
-	aParagraph text: BrText empty.
+	aParagraph text: BlText empty.
 	
 	^ aParagraph

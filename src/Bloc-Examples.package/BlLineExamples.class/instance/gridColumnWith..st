@@ -7,7 +7,7 @@ gridColumnWith: aNumberOfCells
 
 	cells withIndexDo: [ :aCell :anIndex |
 		aCell userData at: #entity put: anIndex.
-		aCell text: (BrRopedText string: anIndex asString) ].
+		aCell text: (BlRopedText string: anIndex asString) ].
 	
 	^ self grid
 		layoutDo: [ :aGridLayout | aGridLayout columnCount: 1 ];

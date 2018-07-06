@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Announcer",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"suspendAll",
+		"suspendedAnnouncemets"
+	],
+	"name" : "BlTextAnnouncer",
+	"type" : "normal"
+}

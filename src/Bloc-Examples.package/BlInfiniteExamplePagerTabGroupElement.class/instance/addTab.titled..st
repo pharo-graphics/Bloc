@@ -3,7 +3,7 @@ addTab: anElement titled: aString
 	| tabLabel |
 	
 	tabLabel := self newTabLabel.
-	tabLabel text: (BrRopedText string: aString).
+	tabLabel text: (BlRopedText string: aString).
 	tabLabel
 		addEventHandlerOn: BlClickEvent
 		do: [ :anEvent |

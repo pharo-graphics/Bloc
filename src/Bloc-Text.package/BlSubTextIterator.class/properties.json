@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlTextIterator",
+	"category" : "Bloc-Text-Text",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text",
+		"iterator"
+	],
+	"name" : "BlSubTextIterator",
+	"type" : "normal"
+}

@@ -3,7 +3,7 @@ reset
 	self wantsAutoRelease
 		ifFalse: [ self finalize ].
 
-	text := BrText empty.
+	text := BlText empty.
 	autoRelease := true.
 	tabWidth := self defaultTabWidth.
 	maxHeight := Float infinity.

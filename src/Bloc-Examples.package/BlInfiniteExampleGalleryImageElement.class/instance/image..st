@@ -6,7 +6,7 @@ image: aGalleryImage
 	
 	form := nil.
 	image := aGalleryImage.
-	itemElement text: ((BrRopedText string: aGalleryImage id asString)
+	itemElement text: ((BlRopedText string: aGalleryImage id asString)
 		attributes: {
 			BrTextForegroundAttribute paint: Color white.
 			BrFontSizeAttribute size: 14.
