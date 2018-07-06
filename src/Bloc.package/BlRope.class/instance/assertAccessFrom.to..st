@@ -6,7 +6,7 @@ assertAccessFrom: aStartIndex to: anEndIndex
 	(aStartIndex <= anEndIndex)
 		ifFalse: [ self error: 'Start index must be less or equal to an end index' ].
 
-	(aStartIndex isZero and: [ anEndIndex isZero ])
+	(aStartIndex isZero and: [ anEndIndex isZero and: [ self isEmpty ] ])
 		ifTrue: [ ^ self ].
 
 	self assertAccess: aStartIndex.
