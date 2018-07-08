@@ -1,6 +1,6 @@
 geometry
 globalSelfPositionsWithin: aGeometryElement and: anAnotherAnchor
-	<return: #Collection of: #BPoint>
+	<return: #Collection of: #Point>
 	| aFromPoint aToPoint theBoundsInSpace aFromRay aToRay aDirectionVector aLength |
 
 	aFromPoint := self globalPositionWithin: aGeometryElement.

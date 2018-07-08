@@ -3,4 +3,5 @@ initialize
 	super initialize.
 	
 	extent := 0@0.
-	pathCache := BlPathCache on: self
+	pathCache := BlPathCache on: self.
+	boundsCache := BlStrokedBoundsCache new

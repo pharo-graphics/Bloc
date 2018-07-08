@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Basic-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"bounds",
+		"strokeOptions",
+		"outskirts",
+		"path",
+		"session"
+	],
+	"name" : "BlStrokedBoundsCache",
+	"type" : "normal"
+}

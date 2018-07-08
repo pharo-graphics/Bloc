@@ -8,4 +8,4 @@ bounds: aBlBounds of: anElement
 	<return: #BlBounds>
 	
 	anElement boundsInLocal: aBlBounds.
-	^ rootElement childBounds: aBlBounds toLocal: anElement
+	^ rootElement localBoundsToMine: aBlBounds fromChild: anElement

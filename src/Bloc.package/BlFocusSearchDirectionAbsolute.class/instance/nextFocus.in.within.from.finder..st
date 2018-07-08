@@ -16,7 +16,7 @@ nextFocus: aFocusedElement in: aCollectionOfElements within: aFocusRootElement f
 		(anElement == aFocusedElement or: [ anElement == aFocusRootElement ])
 			ifFalse: [
 				anElement focusedBounds: tempBounds.
-				aFocusRootElement childBounds: tempBounds toLocal: anElement.
+				aFocusRootElement localBoundsToMine: tempBounds fromChild: anElement.
 				
 				(self isBetterCandidate: tempBounds then: bestCandidateBounds in: aFocusedBounds)
 					ifTrue: [ 

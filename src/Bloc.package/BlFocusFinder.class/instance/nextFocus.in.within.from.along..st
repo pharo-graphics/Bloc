@@ -9,7 +9,7 @@ nextFocus: aFocusedElement in: aCollectionOfElements within: aFocusRootElement f
 			requestedFocusedBounds
 				ifNil: [ requestedFocusedBounds := focusedBounds ].
 			aFocusedElement focusedBounds: requestedFocusedBounds.
-			aFocusRootElement childBounds: requestedFocusedBounds toLocal: aFocusedElement ]
+			aFocusRootElement localBoundsToMine: requestedFocusedBounds fromChild: aFocusedElement ]
 		ifNil: [
 			requestedFocusedBounds := aFocusedBounds.
 			requestedFocusedBounds

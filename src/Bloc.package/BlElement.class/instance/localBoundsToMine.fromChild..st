@@ -1,5 +1,5 @@
 geometry bounds convertion
-childBounds: aBlBounds toLocal: anElement
+localBoundsToMine: aBlBounds fromChild: anElement
 	"In-place transform provided bounds from coordinate system of a given descendant element
 	to my local coordinates and return a result"
 	<return: #BlBounds>
