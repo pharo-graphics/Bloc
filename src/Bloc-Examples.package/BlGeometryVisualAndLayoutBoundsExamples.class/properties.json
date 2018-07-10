@@ -3,7 +3,7 @@
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "BlGeometryVisualAndLayoutBoundsExamples",
-	"commentStamp" : "JurajKubelka 4/26/2018 17:20",
+	"commentStamp" : "AliakseiSyrel 7/8/2018 14:19",
 	"super" : "Object",
 	"traitcomposition" : "TBlExample",
 	"type" : "normal",
