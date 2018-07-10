@@ -10,11 +10,11 @@ globalBoundsToLocal: aBounds
 	aBounds isRectangle
 		ifTrue: [ self error: 'Was given a Rectangle ', aBounds asString, ' while it should be Bounds' ].
 
-	"First we need to transform provided bounds from parent coordinates to my local ones"
-	self parentBoundsToLocal: aBounds.
-
-	"and then delegate transformation to my parent if I have one"
+	"First delegate transformation to my parent if I have one"
 	self hasParent
 		ifTrue: [ self parent globalBoundsToLocal: aBounds ].
+
+	"and then transform provided bounds from parent coordinates to my local ones"
+	self parentBoundsToLocal: aBounds.
 
 	^ aBounds
