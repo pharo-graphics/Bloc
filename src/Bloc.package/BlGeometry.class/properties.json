@@ -3,8 +3,7 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"extent",
-		"pathCache",
-		"boundsCache"
+		"pathCache"
 	],
 	"name" : "BlGeometry",
 	"commentStamp" : "GlennCavarle 8/8/2016 11:44",
