@@ -7,7 +7,7 @@ globalSelfPositionsWithin: aGeometryElement and: anAnotherAnchor
 	aToPoint := anAnotherAnchor globalPositionWithin: aGeometryElement.
 
 	theBoundsInSpace := self referenceElement bounds inSpace bounds.
-	
+
 	aFromRay := theBoundsInSpace outsideNormalCloseTo: aFromPoint.
 	aToRay := theBoundsInSpace outsideNormalCloseTo: aToPoint.
 

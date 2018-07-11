@@ -11,8 +11,8 @@ lineBetweenElementBottomCenters
 	
 	redLine := self redLine.
 	
-	redLine fromAnchor: (BlElementCenterBottomAnchor element: fromBox).
-	redLine toAnchor: (BlElementCenterBottomAnchor element: toBox).
+	redLine fromAnchor: (BlElementBottomCenterAnchor element: fromBox).
+	redLine toAnchor: (BlElementBottomCenterAnchor element: toBox).
 	
 	^ self container
 		addChildren: { fromBox . toBox . redLine }

@@ -7,7 +7,7 @@ bottomCenterToTopCenter
 	
 	aCurve := self redArcWithToHead.
 
-	aCurve fromAnchor: (BlElementCenterBottomAnchor element: anElement).
-	aCurve toAnchor: (BlElementCenterTopAnchor element: anElement).
+	aCurve fromAnchor: (BlElementBottomCenterAnchor element: anElement).
+	aCurve toAnchor: (BlElementTopCenterAnchor element: anElement).
 
 	^ self container addChildren: { anElement . aCurve }

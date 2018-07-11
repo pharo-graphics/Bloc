@@ -6,11 +6,11 @@ leftToRightBidirectional
 	anElement := self referenceElement.
 	
 	aCurveLeft := self redArcWithToHead.
-	aCurveLeft fromAnchor: (BlElementRightCenterAnchor element: anElement).
-	aCurveLeft toAnchor: (BlElementLeftCenterAnchor element: anElement).
+	aCurveLeft fromAnchor: (BlElementCenterRightAnchor element: anElement).
+	aCurveLeft toAnchor: (BlElementCenterLeftAnchor element: anElement).
 	
 	aCurveRight := self blueArcWithToHead.
-	aCurveRight fromAnchor: (BlElementLeftCenterAnchor element: anElement).
-	aCurveRight toAnchor: (BlElementRightCenterAnchor element: anElement).
+	aCurveRight fromAnchor: (BlElementCenterLeftAnchor element: anElement).
+	aCurveRight toAnchor: (BlElementCenterRightAnchor element: anElement).
 
 	^ self container addChildren: { anElement . aCurveLeft . aCurveRight }

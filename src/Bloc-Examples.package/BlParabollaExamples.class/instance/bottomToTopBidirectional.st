@@ -6,11 +6,11 @@ bottomToTopBidirectional
 	anElement := self referenceElement.
 	
 	aCurveDown := self blueArcWithToHead.
-	aCurveDown fromAnchor: (BlElementCenterTopAnchor element: anElement).
-	aCurveDown toAnchor: (BlElementCenterBottomAnchor element: anElement).
+	aCurveDown fromAnchor: (BlElementTopCenterAnchor element: anElement).
+	aCurveDown toAnchor: (BlElementBottomCenterAnchor element: anElement).
 	
 	aCurveUp := self redArcWithToHead.
-	aCurveUp fromAnchor: (BlElementCenterBottomAnchor element: anElement).
-	aCurveUp toAnchor: (BlElementCenterTopAnchor element: anElement).
+	aCurveUp fromAnchor: (BlElementBottomCenterAnchor element: anElement).
+	aCurveUp toAnchor: (BlElementTopCenterAnchor element: anElement).
 
 	^ self container addChildren: { anElement . aCurveDown . aCurveUp }
