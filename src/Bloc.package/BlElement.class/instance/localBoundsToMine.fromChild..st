@@ -6,20 +6,17 @@ localBoundsToMine: aBlBounds fromChild: anElement
 	| aParentElement |
 	
 	anElement == self
-		ifTrue: [ ^ self ].
+		ifTrue: [ ^ aBlBounds ].
 		
 	self
-		assert: [ anElement hasParent ]
-		description: [ 'An element must be my descendant (at least have a parent)' ].
+		assert: [ anElement hasParent: self ]
+		description: [ 'A child element must be my descentant (be in my children composition tree)' ].
 	
 	aParentElement := anElement.
 	
-	[ aParentElement localBoundsToParent: aBlBounds.
-		self
-			assert: [ aParentElement hasParent ]
-			description: [ 'A child element must be my descentant (be in my children composition tree)' ].
-		
-		aParentElement := aParentElement parent ]
-			doWhileFalse: [ aParentElement == self ].
+	[
+		aParentElement localBoundsToParent: aBlBounds.
+		aParentElement := aParentElement parent
+	] doWhileFalse: [ aParentElement == self ].
 			
 	^ aBlBounds
