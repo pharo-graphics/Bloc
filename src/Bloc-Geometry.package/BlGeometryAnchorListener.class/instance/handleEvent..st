@@ -1,3 +1,3 @@
 events
 handleEvent: anEvent
-	self onAnchorMoved
+	self onAnchorMoved: anEvent anchor

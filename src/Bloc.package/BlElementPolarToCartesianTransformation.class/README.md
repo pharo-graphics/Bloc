@@ -2,6 +2,7 @@
 I allow elements to define their position in polar coordinates
 
 [[[
+| container |
 container := BlElement new.
 container size: 200@200.
 container relocate: 300@170.

@@ -1,3 +1,0 @@
-geometry bounds
-inLocal
-	^ self

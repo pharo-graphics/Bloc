@@ -1,3 +1,3 @@
 accessing
-anchor: anObject
-	anchor := anObject
+anchor: aBlGeometryAnchor
+	anchor := aBlGeometryAnchor

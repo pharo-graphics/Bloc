@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 12/15/2017 16:57",
 	"super" : "BlElementComputedBounds",
-	"category" : "Bloc-Basic-Support",
+	"category" : "Bloc-Basic-Bounds",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

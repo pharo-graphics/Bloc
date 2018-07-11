@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BlElementComputedBounds",
-	"category" : "Bloc-Basic-Support",
+	"category" : "Bloc-Basic-Bounds",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

@@ -2,7 +2,8 @@
 	"classtraitcomposition" : "TBlEventTarget classTrait + TBlDebug classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"eventDispatcher"
+		"eventDispatcher",
+		"previousPosition"
 	],
 	"name" : "BlGeometryAnchor",
 	"commentStamp" : "AliakseiSyrel 11/27/2017 10:16",

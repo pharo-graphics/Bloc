@@ -1,5 +1,6 @@
 SystemOrganization addCategory: #Bloc!
 SystemOrganization addCategory: 'Bloc-Basic'!
+SystemOrganization addCategory: 'Bloc-Basic-Bounds'!
 SystemOrganization addCategory: 'Bloc-Basic-Changes'!
 SystemOrganization addCategory: 'Bloc-Basic-Children'!
 SystemOrganization addCategory: 'Bloc-Basic-Math'!
