@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 7/13/2018 12:19",
+	"super" : "Announcement",
+	"category" : "Bloc-Text-Text-Events",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"fromIndex",
+		"toIndex"
+	],
+	"name" : "BlTextDeleted",
+	"type" : "normal"
+}

@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 7/13/2018 12:18",
 	"super" : "Announcement",
 	"category" : "Bloc-Text-Text-Events",
 	"classinstvars" : [ ],
@@ -9,6 +9,6 @@
 		"string",
 		"index"
 	],
-	"name" : "BrTextStringInserted",
+	"name" : "BlTextStringInserted",
 	"type" : "normal"
 }
