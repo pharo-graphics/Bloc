@@ -1,6 +1,8 @@
 geometry
 positionWithin: aGeometryElement
-	"Return anchor position within a given geometry element in its parent bounds"
+	"Compute and return a position of this anchor in parent coordinates of the *anchor* element
+	taking into account a given geometry element"
 	<return: #Point>
 
-	^ aGeometryElement globalPointToParent: (self globalPositionWithin: aGeometryElement)
+	^ self computedPosition
+		ifNil: [ computedPosition := self computePositionWithin: aGeometryElement ]

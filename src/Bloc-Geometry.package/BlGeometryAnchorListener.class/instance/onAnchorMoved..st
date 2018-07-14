@@ -2,9 +2,9 @@ anchors
 onAnchorMoved: aBlGeometryAnchor
 	| aPosition |
 	
-	aPosition := (aBlGeometryAnchor positionWithin: self geometryElement).
-	(aPosition = aBlGeometryAnchor previousPosition)
+	aPosition := (aBlGeometryAnchor computePositionWithin: self geometryElement).
+	(aPosition = aBlGeometryAnchor computedPosition)
 		ifTrue: [ ^ self ]
-		ifFalse: [ aBlGeometryAnchor previousPosition: aPosition ].
+		ifFalse: [ aBlGeometryAnchor computedPosition: aPosition ].
 
 	self onAnchorMoved

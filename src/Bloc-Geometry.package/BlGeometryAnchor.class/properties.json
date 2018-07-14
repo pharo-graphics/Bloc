@@ -3,7 +3,7 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"eventDispatcher",
-		"previousPosition"
+		"computedPosition"
 	],
 	"name" : "BlGeometryAnchor",
 	"commentStamp" : "AliakseiSyrel 11/27/2017 10:16",
