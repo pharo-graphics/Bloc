@@ -1,30 +1,39 @@
 rope - accessing
 clearAttributes: aStart to: anEnd if: aBlock
-	| anClearedRope selectedAttributes |
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+	| aClearedRope selectedAttributes aSubRope aSubRopeStart aSubRopeEnd aMyStart aMyEnd |
+	self assertAccessFrom: aStart to: anEnd.
 
 	selectedAttributes := self attributes reject: [ :anAssociation | aBlock value: anAssociation value ].
 
-	anClearedRope := (self rope from: aStart to: anEnd)
-		clearAttributes: 1
-		to: anEnd - aStart + 1
+	aSubRope := self rope from: aStart to: anEnd.
+	aSubRopeStart := (1 min: aSubRope size).
+	aSubRopeEnd := anEnd - aStart + (1 min: aSubRope size).
+	
+	aMyStart := 1 min: self size.
+	aMyEnd := self size.
+	
+	aClearedRope := aSubRope
+		clearAttributes: aSubRopeStart
+		to: anEnd - aStart +aSubRopeEnd
 		if: aBlock.
 
 	selectedAttributes ifNotEmpty: [ 
-		anClearedRope := anClearedRope attributes: selectedAttributes from: 1 to: anClearedRope size ].
+		aClearedRope := aClearedRope
+			attributes: selectedAttributes
+			from: aSubRopeStart
+			to: aSubRopeEnd ].
 
-	(aStart = 1 and: [ anEnd = self size ])
-		ifTrue: [ ^ anClearedRope ].
+	(aStart = aMyStart and: [ anEnd = aMyEnd ])
+		ifTrue: [ ^ aClearedRope ].
 
-	aStart = 1 ifTrue: [ 
+	aStart = aMyStart ifTrue: [ 
 		^ self class
-			concatenate: anClearedRope
-			and: (self from: anEnd + 1 to: self size) ].
+			concatenate: aClearedRope
+			and: (self from: anEnd + 1 to: aMyEnd) ].
 	
 	anEnd = self size ifTrue: [ 
 		^ self class
 			concatenate: (self from: 1 to: aStart - 1)
-			and: anClearedRope ].
+			and: aClearedRope ].
 
-	^ (self from: 1 to: aStart - 1) append: (anClearedRope append: (self from: anEnd + 1 to: self size))
+	^ (self from: 1 to: aStart - 1) append: (aClearedRope append: (self from: anEnd + 1 to: self size))

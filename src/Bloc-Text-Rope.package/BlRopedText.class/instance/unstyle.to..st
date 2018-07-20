@@ -9,5 +9,5 @@ unstyle: aFromIndex to: aToIndex
 		clearAttributes: aFromIndex
 		to: aToIndex
 		if: [ :anAttribute | anAttribute isOverwritableByStyler ].
-	
+
 	self rope: anUnstyledRope
