@@ -14,7 +14,7 @@ clearAttributes: aStart to: anEnd if: aBlock
 	
 	aClearedRope := aSubRope
 		clearAttributes: aSubRopeStart
-		to: anEnd - aStart +aSubRopeEnd
+		to: aSubRopeEnd
 		if: aBlock.
 
 	selectedAttributes ifNotEmpty: [ 
