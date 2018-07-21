@@ -1,5 +1,5 @@
 accessing
 space
-	<return: #BlSpace>
+	<return: #BlSpace or: nil>
 
-	^ space
+	^ space at: 1
