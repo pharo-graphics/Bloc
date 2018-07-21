@@ -12,5 +12,5 @@ paintTreeWith: view
 		shape: [ :each | BlLineElement new border: (BlBorder paint: (Color gray alpha: 0.5) width: 1 ) ];
 		connectToAll: #children.
 	view layout tree 
-		horizontalGap: 20;
-		verticalGap: 40
+		nodeDistance: 20;
+		levelDistance: 40
