@@ -1,3 +1,3 @@
 *Bloc-Extensions
 blocText
-	^ self custom: GLMBrickTextPresentation new
+	^ self custom: GLMBlocTextPresentation new

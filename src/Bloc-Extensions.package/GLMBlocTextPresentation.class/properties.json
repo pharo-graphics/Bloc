@@ -2,7 +2,7 @@
 	"classtraitcomposition" : "TGLMBlocPresentation classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GLMBrickTextPresentation",
+	"name" : "GLMBlocTextPresentation",
 	"commentStamp" : "",
 	"super" : "GLMTextualPresentation",
 	"traitcomposition" : "TGLMBlocPresentation",

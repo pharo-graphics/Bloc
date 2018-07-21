@@ -1,7 +1,7 @@
 rendering
 element
 	| element |
-	element := BrEditorElement new editor: (BrTextEditor new text: self formatedDisplayValue asString asRopedText).
+	element := self newEditorElement editor: (self newEditorModel text: self formatedDisplayValue asString asRopedText).
 	element constraintsDo: [ :c | 
 		c vertical matchParent. 
 		c horizontal matchParent.		
