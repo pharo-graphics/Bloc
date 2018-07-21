@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GLMBlocPresentationExamples",
+	"name" : "GLMBlocMondrianPresentationExamples",
 	"type" : "normal"
 }

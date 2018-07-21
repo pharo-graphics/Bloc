@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 6/16/2017 20:51",
-	"super" : "GLMMorphicWidgetRenderer",
-	"category" : "Bloc-Extensions",
+	"super" : "GLMMorphicInstallablePresentationRenderer",
+	"category" : "Bloc-Extensions-Renderers",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

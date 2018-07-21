@@ -1,0 +1,3 @@
+scripting
+withoutNodeClicks
+	shouldInstallClicksOnNodes := false

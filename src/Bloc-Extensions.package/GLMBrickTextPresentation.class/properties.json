@@ -1,14 +1,10 @@
 {
 	"classtraitcomposition" : "TGLMBlocPresentation classTrait",
 	"classvars" : [ ],
-	"instvars" : [
-		"extentBlock",
-		"canvasBlock",
-		"drawBlock"
-	],
-	"name" : "GLMSpartaPresentation",
-	"commentStamp" : "AliakseiSyrel 6/16/2017 20:50",
-	"super" : "GLMPresentation",
+	"instvars" : [ ],
+	"name" : "GLMBrickTextPresentation",
+	"commentStamp" : "",
+	"super" : "GLMTextualPresentation",
 	"traitcomposition" : "TGLMBlocPresentation",
 	"type" : "normal",
 	"classinstvars" : [ ],

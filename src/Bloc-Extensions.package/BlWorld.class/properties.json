@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "TudorGirba 10/31/2017 09:08",
 	"super" : "Object",
-	"category" : "Bloc-Extensions",
+	"category" : "Bloc-Extensions-Menu",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

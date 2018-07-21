@@ -1,0 +1,2 @@
+I am a special type of presentation that allowes users to create presentations using installable frameworks.
+When used framework is not installed I show a dialog asking users if they would like to install that framework

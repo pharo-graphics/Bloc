@@ -1,0 +1,3 @@
+scripting
+withoutEdgeClicks
+	shouldInstallClicksOnEdges := false

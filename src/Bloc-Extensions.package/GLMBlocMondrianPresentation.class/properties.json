@@ -2,12 +2,14 @@
 	"classtraitcomposition" : "TGLMBlocPresentation classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"extentBlock",
-		"canvasBlock",
-		"drawBlock"
+		"paintingBlock",
+		"shouldInstallClicksOnNodes",
+		"viewInitializer",
+		"shouldInstallClicksOnEdges",
+		"createdElement"
 	],
-	"name" : "GLMSpartaPresentation",
-	"commentStamp" : "AliakseiSyrel 6/16/2017 20:50",
+	"name" : "GLMBlocMondrianPresentation",
+	"commentStamp" : "",
 	"super" : "GLMPresentation",
 	"traitcomposition" : "TGLMBlocPresentation",
 	"type" : "normal",

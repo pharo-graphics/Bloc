@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "AliakseiSyrel 5/28/2017 01:30",
-	"super" : "GLMMorphicInstallablePresentationRenderer",
+	"commentStamp" : "",
+	"super" : "GLMMorphicWidgetRenderer",
 	"category" : "Bloc-Extensions-Renderers",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "GLMMorphicBlocRenderer",
+	"name" : "GLMMorphicInstallablePresentationRenderer",
 	"type" : "normal"
 }
