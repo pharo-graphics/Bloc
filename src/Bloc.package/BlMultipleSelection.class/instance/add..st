@@ -1,3 +1,3 @@
 adding
-add: aTextSelection
-	selections add: aTextSelection
+add: aSelection
+	selections add: aSelection

@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BlGeometry",
+	"category" : "Bloc-Basic",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"radius",
+		"origin"
+	],
+	"name" : "BlCircle",
+	"type" : "normal"
+}

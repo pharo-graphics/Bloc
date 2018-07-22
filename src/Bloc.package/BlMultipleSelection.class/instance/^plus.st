@@ -1,3 +1,3 @@
 arithmetic
-+ aTextSelection
-	^ self add: aTextSelection
++ aSelection
+	^ self add: aSelection
