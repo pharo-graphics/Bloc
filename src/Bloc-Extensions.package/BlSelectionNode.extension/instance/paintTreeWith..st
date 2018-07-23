@@ -10,6 +10,7 @@ paintTreeWith: view
 				padding: (BlInsets all: 13);
 				geometry: (BlCircle new);
 				border: (BlBorder paint: Color black width: 1);
+				background: Color white;
 				zIndex: 10;
 				addChildren: {
 					BlTextElement new
@@ -17,9 +18,7 @@ paintTreeWith: view
 						text: each selection printString asRopedText.
 					BlTextElement new
 						constraintsDo: [ :c | c padding: (BlInsets all: 2) ];
-						text: (each high printString asRopedText thin) }
-			
-			 ];
+						text: each high asString asRopedText thin } ];
 		with: (self withDeepCollect: #children).
 	view edges
 		fromNearestTightCircle;

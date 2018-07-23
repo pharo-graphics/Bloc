@@ -1,6 +1,6 @@
 api - testing
-includes: anIndex
+contains: anIndex
 	"Return true if this selection interval includes a given index, false otherwise"
 	<return: #Boolean>
 	
-	^ selections includes: anIndex
+	^ self subclassResponsibility
