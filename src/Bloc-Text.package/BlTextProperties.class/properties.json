@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Bloc-Text-Text-Attributes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"fontSize",
+		"foreground",
+		"background",
+		"weight",
+		"emphasis",
+		"fontFamily"
+	],
+	"name" : "BlTextProperties",
+	"type" : "normal"
+}

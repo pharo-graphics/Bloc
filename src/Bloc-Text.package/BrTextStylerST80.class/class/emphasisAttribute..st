@@ -17,6 +17,6 @@ emphasisAttribute: anEmphasisAsSymbol
 		ifTrue: [ ^ BrFontEmphasisAttribute normal ].
 	
 	anEmphasisAsSymbol = #light
-		ifTrue: [ ^ BrFontEmphasisAttribute light ].
+		ifTrue: [ ^ BrFontWeightAttribute light ].
 
 	self error: 'Unknown emphasis: ', anEmphasisAsSymbol asString

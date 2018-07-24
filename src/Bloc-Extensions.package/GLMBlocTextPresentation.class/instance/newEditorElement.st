@@ -1,3 +1,3 @@
 instance creation
 newEditorElement
-	^ (self class environment classNamed: #BrEditorElement new)
+	^ (self class environment classNamed: #BrEditorElement) new
