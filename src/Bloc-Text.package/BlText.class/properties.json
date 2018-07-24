@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "TBlDebug classTrait",
+	"classtraitcomposition" : "TBlDebug classTrait + TBlTextStylable classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"announcer",
@@ -8,7 +8,7 @@
 	"name" : "BlText",
 	"commentStamp" : "AliakseiSyrel 3/6/2018 13:55",
 	"super" : "Object",
-	"traitcomposition" : "TBlDebug",
+	"traitcomposition" : "TBlDebug + TBlTextStylable",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

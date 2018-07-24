@@ -2,10 +2,11 @@
 	"classtraitcomposition" : "TBlTextStylable classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"attributes"
+		"text",
+		"properties"
 	],
-	"name" : "BlTextProperties",
-	"commentStamp" : "AliakseiSyrel 7/24/2018 08:53",
+	"name" : "BlTextAttributesStyler",
+	"commentStamp" : "AliakseiSyrel 7/24/2018 08:49",
 	"super" : "Object",
 	"traitcomposition" : "TBlTextStylable",
 	"type" : "normal",

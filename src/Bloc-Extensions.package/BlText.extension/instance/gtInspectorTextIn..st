@@ -4,5 +4,4 @@ gtInspectorTextIn: composite
 	
 	composite blocText 
 		title: '_Text';
-		display: [ self ];
-		format: #yourself
+		display: [ self ]
