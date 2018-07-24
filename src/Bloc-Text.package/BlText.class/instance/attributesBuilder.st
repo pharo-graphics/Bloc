@@ -1,5 +1,5 @@
 accessing
-textProperties
+attributesBuilder
 	<return: #BlTextAttributesBuilder>
 	
 	^ self
