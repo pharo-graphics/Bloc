@@ -14,7 +14,7 @@ drawOnSpartaCanvas: aCanvas
 		text: self textRun;
 		start: self textRunStart;
 		end: self textRunEnd;
-		baseline: self baseline;
+		baseline: self baseline + 0.5;
 		draw.
 
 	"And finally let attributes to render above the text"
