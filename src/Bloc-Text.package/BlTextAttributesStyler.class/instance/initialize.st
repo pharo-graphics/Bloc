@@ -2,4 +2,4 @@ initialization
 initialize
 	super initialize.
 	
-	properties := BlTextProperties new
+	properties := BlTextAttributes new

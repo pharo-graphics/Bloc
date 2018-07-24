@@ -1,5 +1,5 @@
 accessing
 textProperties
-	<return: #BlTextProperties>
+	<return: #BlTextAttributes>
 	
 	^ self
