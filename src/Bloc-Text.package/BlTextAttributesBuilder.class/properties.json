@@ -4,8 +4,8 @@
 	"instvars" : [
 		"attributes"
 	],
-	"name" : "BlTextAttributes",
-	"commentStamp" : "AliakseiSyrel 7/24/2018 09:11",
+	"name" : "BlTextAttributesBuilder",
+	"commentStamp" : "AliakseiSyrel 7/24/2018 09:13",
 	"super" : "Object",
 	"traitcomposition" : "TBlTextStyleable",
 	"type" : "normal",
