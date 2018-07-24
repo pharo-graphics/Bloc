@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "TBlTextStylable classTrait",
+	"classtraitcomposition" : "TBlTextStyleable classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"attributes"
@@ -7,7 +7,7 @@
 	"name" : "BlTextProperties",
 	"commentStamp" : "AliakseiSyrel 7/24/2018 08:53",
 	"super" : "Object",
-	"traitcomposition" : "TBlTextStylable",
+	"traitcomposition" : "TBlTextStyleable",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],
