@@ -3,6 +3,10 @@ handleMouseUp: aMouseUpEvent
 	"DragEnd, Simple click and Dbl click"
 	| aTargetElement |
 
+	"if mouse button was not registered as pressed we can ignore this particular event"
+	(self pressedButtons includes: aMouseUpEvent button)
+		ifFalse: [ ^ self ].
+
 	"we need to unregister a button"
 	self pressedButtons remove: aMouseUpEvent button.
 
