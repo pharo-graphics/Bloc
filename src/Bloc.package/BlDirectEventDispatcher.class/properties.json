@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "AliakseiSyrel 1/21/2018 14:16",
+	"commentStamp" : "JurajKubelka 8/3/2018 17:35",
 	"super" : "BlEventDispatcher",
 	"category" : "Bloc-EventHandling",
 	"classinstvars" : [ ],
