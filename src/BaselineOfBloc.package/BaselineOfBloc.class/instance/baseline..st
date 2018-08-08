@@ -129,6 +129,6 @@ baseline: spec
 			group: 'minimal:bloc+layout' with: #('minimal:bloc' 'Bloc-Layout' 'Bloc-Layout-Tests')
 	].
 
-	spec for: #'pharo6.0' do: [ 
+	spec for: #'pharo6.x' do: [ 
 		spec package: 'Bloc-DevTool-Nautilus'
 	].
