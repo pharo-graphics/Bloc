@@ -6,7 +6,7 @@ privateStyle: aText
     ast methodNode compilationContext: (CompilationContext new
             class: (classOrMetaClass ifNil: [UndefinedObject]);
 				forSyntaxHighlighting: true;
-				bindings: workspace;
+				bindings: (workspace ifNil: [ Dictionary new ]);
             requestor: workspace).
     ast doSemanticAnalysis.
 
