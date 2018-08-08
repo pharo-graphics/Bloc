@@ -1,11 +1,11 @@
 {
-	"commentStamp" : "AliakseiSyrel 8/6/2017 18:33",
+	"commentStamp" : "AliakseiSyrel 8/6/2017 17:57",
 	"super" : "AbstractMethodIconAction",
-	"category" : "Bloc-DevTool-Plugins",
+	"category" : "Bloc-DevTool-Nautilus",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "MethodAbstractImplementedAction",
+	"name" : "MethodFromTraitOverrideAction",
 	"type" : "normal"
 }

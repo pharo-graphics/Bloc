@@ -127,4 +127,8 @@ baseline: spec
 			"below we define groups to load only specific packages in order to test dependencies"
 			group: 'minimal:bloc' with: #(Bloc 'Bloc-Tests');
 			group: 'minimal:bloc+layout' with: #('minimal:bloc' 'Bloc-Layout' 'Bloc-Layout-Tests')
-]
+	].
+
+	spec for: #'pharo6.0' do: [ 
+		spec package: 'Bloc-DevTool-Nautilus'
+	].

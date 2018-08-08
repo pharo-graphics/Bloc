@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 8/6/2017 18:26",
 	"super" : "AbstractMethodIconAction",
-	"category" : "Bloc-DevTool-Plugins",
+	"category" : "Bloc-DevTool-Nautilus",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

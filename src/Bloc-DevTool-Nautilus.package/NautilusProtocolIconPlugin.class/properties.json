@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "AliakseiSyrel 12/26/2017 17:26",
 	"super" : "Object",
-	"category" : "Bloc-DevTool-Plugins",
+	"category" : "Bloc-DevTool-Nautilus",
 	"classinstvars" : [
 		"link"
 	],
