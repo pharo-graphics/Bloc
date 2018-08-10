@@ -3,7 +3,7 @@ defaultCursor
 	"Create and return a new instance of a cursor element"
 	<return: #BlElement>
 
-	^ BlElement new
+	^ BlCursorElement new
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c |
 			c horizontal exact: 1.

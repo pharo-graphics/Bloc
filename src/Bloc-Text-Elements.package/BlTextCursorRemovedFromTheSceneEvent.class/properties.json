@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlEvent",
+	"category" : "Bloc-Text-Elements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"cursorElement"
+	],
+	"name" : "BlTextCursorRemovedFromTheSceneEvent",
+	"type" : "normal"
+}
