@@ -4,7 +4,7 @@ handleScrollLeft: anEvent
 		| aBlEvent |
 
 		aBlEvent := BlMouseWheelEvent new
-			vector: (BlVector x: 2 y: 0);
+			vector: (BlVector x: -2 y: 0);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
