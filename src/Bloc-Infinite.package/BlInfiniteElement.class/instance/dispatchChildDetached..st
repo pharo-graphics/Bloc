@@ -7,5 +7,5 @@ dispatchChildDetached: anElement
 
 	anElementHolder := self elementHolderOf: anElement.
 	self onChildDetached: anElementHolder.
-	self dataSource onElementDetached: anElement.
+	self dataSource onElementDetached: anElementHolder.
 	self notifyChildDetached: anElement
