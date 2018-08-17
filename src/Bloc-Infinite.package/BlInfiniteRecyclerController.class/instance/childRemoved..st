@@ -1,3 +1,3 @@
 recycler -> element
 childRemoved: anElement
-	^ self shouldBeImplemented
+	self flag: 'todo'.

@@ -1,3 +1,3 @@
 scrap fetcher -> recycler
 recycleElementHolder: anElementHolder
-	^ self shouldBeImplemented
+	self flag: #todo
