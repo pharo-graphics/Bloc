@@ -5,6 +5,7 @@ measureOn: aCanvas with: aSpanMeasurer
 	| anIterator aMeasurer |
 
 	aMeasurer := self createMeasurer.
+	aMeasurer line paragraph: self.
 
 	(self text isEmpty) ifTrue: [ 
 		aMeasurer
