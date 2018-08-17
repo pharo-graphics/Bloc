@@ -6,11 +6,9 @@ scrollEvent: anEvent
 	
 	anInfiniteElement := anEvent currentTarget.
 
-	dX := anEvent isScrollLeft
-		ifTrue: [ anAmount ]
-		ifFalse: [ anEvent isScrollRight
-			ifTrue: [ anAmount negated ]
-			ifFalse: [ 0 ] ].
+	dX := anEvent isHorizontal
+		ifTrue: [ anAmount * anEvent vector x sign ]
+		ifFalse: [ 0 ].
 
 	dY := (anEvent isScrollDown and: [ self canScrollDown: anInfiniteElement ])
 		ifTrue: [ anAmount ]

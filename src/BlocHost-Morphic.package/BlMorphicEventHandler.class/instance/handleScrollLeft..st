@@ -2,7 +2,6 @@ event handling
 handleScrollLeft: anEvent
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
-
 		aBlEvent := BlMouseWheelEvent new
 			vector: (BlVector x: -2 y: 0);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
