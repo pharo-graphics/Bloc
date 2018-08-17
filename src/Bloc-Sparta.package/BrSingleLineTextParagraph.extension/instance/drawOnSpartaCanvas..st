@@ -1,4 +1,4 @@
 *Bloc-Sparta
-drawOnSpartaCanvas: aCanvas
+drawOnSpartaCanvas: aCanvas	
 	self line drawOnSpartaCanvas: aCanvas.
 	self drawSelectionOnSpartaCanvas: aCanvas

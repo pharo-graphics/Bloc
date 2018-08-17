@@ -12,4 +12,5 @@ reset
 	autoRelease := true.
 	selection := nil.
 	containerExtent := 0@0.
+	padding := BlInsets empty.
 	baseline := BrTextParagraphAscentBaseline uniqueInstance

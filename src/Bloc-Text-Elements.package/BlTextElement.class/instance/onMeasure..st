@@ -42,7 +42,8 @@ onMeasure: anExtentMeasurementSpec
 	paragraph
 		text: self text;
 		maxWidth: aMaxWidth;
-		maxHeight: aMaxHeight.
+		maxHeight: aMaxHeight;
+		padding: self padding.
 
 	paragraph measureOn: self defaultOffscreenCanvas.
 	"text layout is measured at this point"

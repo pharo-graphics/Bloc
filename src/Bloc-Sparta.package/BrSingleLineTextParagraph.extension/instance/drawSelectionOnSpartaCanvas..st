@@ -6,7 +6,7 @@ drawSelectionOnSpartaCanvas: aCanvas
 
 	self selection do: [ :aSelection |
 		| aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition aSelectionBounds |
-		
+
 		aStart := aSelection	from.
 		anEnd := aSelection to min: self text size.
 
@@ -24,5 +24,3 @@ drawSelectionOnSpartaCanvas: aCanvas
 			paint: ((Color r: 105 g: 171 b: 253 range: 255) alpha: 0.35);
 			path: aSelectionBounds;
 			draw ]
-
-	
