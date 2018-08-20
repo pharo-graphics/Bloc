@@ -40,6 +40,7 @@ onMeasure: anExtentMeasurementSpec
 		ifNotNil: [ paragraph reset ].
 
 	paragraph
+		baseline: self baseline;
 		text: self text;
 		maxWidth: aMaxWidth;
 		maxHeight: aMaxHeight;

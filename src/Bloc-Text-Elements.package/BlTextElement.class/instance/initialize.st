@@ -3,6 +3,7 @@ initialize
 	super initialize.
 	
 	text := self defaultText.
+	baseline := self defaultBaseline.
 	"Text layout is created during measurement in onMeasure:"
 	paragraph := nil.
 	
