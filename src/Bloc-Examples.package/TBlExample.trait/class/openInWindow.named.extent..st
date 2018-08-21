@@ -11,7 +11,7 @@ openInWindow: anElement named: aTitleString extent: aPoint
 
 	aSpace root addEventHandler:
 			(BlEventHandler
-				on: BlDblClickEvent
+				on: BlDoubleClickEvent
 				do: [ :evt | BlElementSelection on: evt target ]).
 	
 	aSpace show
