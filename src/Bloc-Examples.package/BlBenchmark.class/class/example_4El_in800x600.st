@@ -17,7 +17,7 @@ example_4El_in800x600
 	space root
 		addEventHandler:
 			(BlEventHandler
-				on: BlDblClickEvent
+				on: BlDoubleClickEvent
 				do: [ :evt | BlElementSelection on: evt target ]).
 	space extent: 800 @ 600.
 	space show

@@ -10,7 +10,7 @@ processMouseUp: aMouseUpEvent
 		(self canBeDblClickEvent: aMouseUpEvent)
 			ifTrue: [ 
 				lastClickEvent := nil.
-				self fireEvent: aMouseUpEvent asDblClickEvent ]
+				self fireEvent: aMouseUpEvent asDoubleClickEvent ]
 			ifFalse:[
 				lastClickEvent := aMouseUpEvent.
 				self fireEvent: aMouseUpEvent asClickEvent.

@@ -11,7 +11,7 @@ example3D
 
 	space root addEventHandler:
 			(BlEventHandler
-				on: BlDblClickEvent
+				on: BlDoubleClickEvent
 				do: [ :evt | BlElementSelection on: evt target ]).
 	
 	space show

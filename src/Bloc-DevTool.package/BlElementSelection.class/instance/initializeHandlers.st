@@ -3,7 +3,7 @@ initializeHandlers
 	self
 		addEventHandler:
 			(BlEventHandler
-				on: BlDblClickEvent
+				on: BlDoubleClickEvent
 				do: [ :anEvent | 
 					anEvent consumed: true.
 					self close ]).

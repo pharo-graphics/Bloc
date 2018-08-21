@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BlDblClickEvent",
+	"name" : "BlDoubleClickEvent",
 	"type" : "normal"
 }

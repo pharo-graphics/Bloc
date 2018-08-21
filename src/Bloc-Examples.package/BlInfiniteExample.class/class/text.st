@@ -23,7 +23,7 @@ text
 	space root addChild: container.
 	space root addEventHandler:
 			(BlEventHandler
-				on: BlDblClickEvent
+				on: BlDoubleClickEvent
 				do: [ :evt | BlElementSelection on: evt target ]).
 	space root
 		addChild: (BlBenchmarkConsole on:space).

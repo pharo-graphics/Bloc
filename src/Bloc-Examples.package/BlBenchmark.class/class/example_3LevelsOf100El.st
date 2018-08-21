@@ -17,6 +17,6 @@ example_3LevelsOf100El
   ]]].
 "space root addChild: (BlFPSCounter on:space)."
 space root addEventHandler: (BlEventHandler 
-on:BlDblClickEvent do:[:evt|  BlElementSelection on: evt target. ]).
+on:BlDoubleClickEvent do:[:evt|  BlElementSelection on: evt target. ]).
 space show.
 BlBenchmarkConsoleSpecModel onSpace: space

@@ -22,7 +22,7 @@ morphFrom: aBlocPresentation
 			aSpace root addChild: element.
 			aSpace root addEventHandler:
 				(BlEventHandler
-					on: BlDblClickEvent
+					on: BlDoubleClickEvent
 					do: [ :evt | evt modifiers isShift ifTrue: [ BlElementSelection on: evt target ] ]).
 
 			container space: aSpace.

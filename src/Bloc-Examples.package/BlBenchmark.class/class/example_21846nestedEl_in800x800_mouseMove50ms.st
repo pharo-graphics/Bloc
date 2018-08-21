@@ -7,7 +7,7 @@ example_21846nestedEl_in800x800_mouseMove50ms
 space root addChild: child.	
 "space root addChild: (BlFPSCounter on: space)."
 space root addEventHandler: (BlEventHandler 
-on:BlDblClickEvent do:[:evt|  BlElementSelection on: evt target. ]).
+on:BlDoubleClickEvent do:[:evt|  BlElementSelection on: evt target. ]).
 
 
 "anim := BlAnimation new

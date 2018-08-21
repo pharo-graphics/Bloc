@@ -16,7 +16,7 @@ example_2500El_in_1800x960
 			sp root addChild: s
   ]].
 sp root addEventHandler: (BlEventHandler 
-on:BlDblClickEvent do:[:evt|  BlElementSelection on: evt target. ]).
+on:BlDoubleClickEvent do:[:evt|  BlElementSelection on: evt target. ]).
 sp extent: 1800@960.
 sp show.
 

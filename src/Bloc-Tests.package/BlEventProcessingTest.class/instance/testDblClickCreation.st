@@ -13,4 +13,4 @@ testDblClickCreation
 	
 	self sendInsideTargetEvent: (BlMouseUpEvent primary).
 	self assertFiredEventIs:  BlMouseUpEvent target: self child withPropagation: true.
-	self assertFiredEventIs:  BlDblClickEvent target: self child withPropagation: true.
+	self assertFiredEventIs:  BlDoubleClickEvent target: self child withPropagation: true.
