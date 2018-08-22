@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "BlDelayedTask",
+	"category" : "Bloc-Space-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"action"
+	],
+	"name" : "BlDelayedTaskAction",
+	"type" : "normal"
+}
