@@ -1,8 +1,10 @@
 rope - deleting
 delete: aStart to: anEnd
 	| newCollection |
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+	self assertAccessFrom: aStart to: anEnd.
+	
+	(aStart isZero and: [ anEnd isZero ])
+		ifTrue: [ ^ self ].
 	
 	(aStart = 1 and: [ anEnd = self size ])
 		ifTrue: [ ^ self empty ].
