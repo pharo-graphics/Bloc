@@ -5,6 +5,6 @@ neighbours: aMonotoneTextSelection
 	<return: #Boolean>
 	
 	"I am to the left"
-	^ ((self to + 1) = aMonotoneTextSelection from)
+	^ (self to = aMonotoneTextSelection from)
 			"I am to the right"
-			or: [ (self from - 1) = aMonotoneTextSelection to ]
+			or: [ self from = aMonotoneTextSelection to ]
