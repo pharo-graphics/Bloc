@@ -100,6 +100,7 @@ BaselineOfBloc >> baseline: spec [
 			
 			"groups with only sources"
 			group: 'core' with: #(
+				'Beacon'
 				'Bloc' "main core package"
 				'Bloc-Geometry'
 				'Bloc-Layout'
@@ -128,7 +129,6 @@ BaselineOfBloc >> baseline: spec [
 
 			group: 'development' with: #(
 				'core'
-				'Beacon'
 				'BlocHost-OSWindow'
 				'BlocHost-SDL'
 				'Bloc-SVG');
