@@ -1,3 +1,0 @@
-initialization
-defaultAction
-	^ BlInfiniteSmoothScrollerAction new

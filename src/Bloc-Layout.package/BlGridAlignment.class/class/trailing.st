@@ -1,3 +1,0 @@
-factory
-trailing
-	^ BlGridTrailingAlignment uniqueInstance

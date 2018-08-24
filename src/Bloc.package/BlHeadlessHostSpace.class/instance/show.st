@@ -1,2 +1,0 @@
-host space - displaying
-show

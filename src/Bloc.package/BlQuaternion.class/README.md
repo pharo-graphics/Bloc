@@ -1,4 +1,0 @@
-Unit quaternions, also known as versors, provide a convenient mathematical notation for representing orientations and rotations of objects in three dimensions. Compared to Euler angles they are simpler to compose and avoid the problem of gimbal lock. Compared to rotation matrices they are more compact, more numerically stable, and may be more efficient. Quaternions have applications in computer graphics, computer vision, robotics, navigation, molecular dynamics, flight dynamics,[1] orbital mechanics of satellites[2] and crystallographic texture analysis.[3]
-When used to represent rotation, unit quaternions are also called rotation quaternions. When used to represent an orientation (rotation relative to a reference coordinate system), they are called orientation quaternions or attitude quaternions.
-
-https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation#Using_quaternion_rotations

@@ -1,3 +1,0 @@
-testing
-isFocus
-	^ true

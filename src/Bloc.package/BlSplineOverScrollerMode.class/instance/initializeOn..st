@@ -1,3 +1,0 @@
-initialization
-initializeOn: aSplineOverScroller
-	self subclassResponsibility

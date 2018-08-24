@@ -1,3 +1,0 @@
-initialization
-defaultDataSource
-	^ BlInfiniteExampleTextDataSource new

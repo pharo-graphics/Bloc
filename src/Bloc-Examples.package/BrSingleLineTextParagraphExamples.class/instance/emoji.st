@@ -1,5 +1,0 @@
-instance creation
-emoji
-	<gtExample>
-
-	^ '😃'

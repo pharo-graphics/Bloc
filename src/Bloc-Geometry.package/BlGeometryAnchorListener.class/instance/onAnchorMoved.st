@@ -1,3 +1,0 @@
-anchors
-onAnchorMoved
-	self geometryElement onAnchorMoved

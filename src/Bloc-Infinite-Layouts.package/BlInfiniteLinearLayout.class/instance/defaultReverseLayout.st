@@ -1,3 +1,0 @@
-initialization
-defaultReverseLayout
-	^ false

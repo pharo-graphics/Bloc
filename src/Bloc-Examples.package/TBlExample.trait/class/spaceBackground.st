@@ -1,3 +1,0 @@
-opening
-spaceBackground
-	^ Color white

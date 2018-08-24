@@ -1,3 +1,0 @@
-initialization
-withAll: aCollectionOfSelections
-	selections addAll: aCollectionOfSelections

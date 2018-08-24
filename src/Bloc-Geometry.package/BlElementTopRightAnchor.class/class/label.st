@@ -1,3 +1,0 @@
-accessing
-label
-	^ 'Top right'

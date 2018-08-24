@@ -1,4 +1,0 @@
-private invalidate
-invalidateValues
-	horizontalAxis invalidateValues.
-	verticalAxis invalidateValues

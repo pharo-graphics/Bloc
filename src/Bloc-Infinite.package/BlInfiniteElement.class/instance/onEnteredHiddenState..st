@@ -1,2 +1,0 @@
-hooks - state
-onEnteredHiddenState: aChildElement

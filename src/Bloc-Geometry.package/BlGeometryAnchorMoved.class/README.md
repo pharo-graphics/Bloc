@@ -1,1 +1,0 @@
-I am sent when anchor's position changed

@@ -1,3 +1,0 @@
-deferred actions
-postSmoothScroller
-	scrollFlinger postOnAnimation

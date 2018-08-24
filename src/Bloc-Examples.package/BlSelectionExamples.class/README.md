@@ -1,1 +1,0 @@
-I exemplify selection interval

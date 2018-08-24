@@ -1,3 +1,0 @@
-resizing
-fitContentLimited
-	self resizer: BlLayoutResizer fitContentLimited

@@ -1,3 +1,0 @@
-parameters
-padding
-	^ 10

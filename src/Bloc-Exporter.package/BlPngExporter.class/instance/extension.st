@@ -1,3 +1,0 @@
-api - exporting
-extension
-	^ 'png'

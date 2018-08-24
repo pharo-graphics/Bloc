@@ -1,4 +1,0 @@
-hooks
-onHolderDetached: anElementHolder
-
-	self removeFromDisappearedInLayout: anElementHolder

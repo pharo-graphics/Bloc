@@ -1,3 +1,0 @@
-conversion
-asPannableElement
-	^ self

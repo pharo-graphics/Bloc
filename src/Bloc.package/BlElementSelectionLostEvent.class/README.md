@@ -1,1 +1,0 @@
-Is sent when element is no longer within mouse selection rectangle

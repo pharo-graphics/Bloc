@@ -1,1 +1,0 @@
-I choose a point on a geometry path of the reference element which is the nearest to the other element

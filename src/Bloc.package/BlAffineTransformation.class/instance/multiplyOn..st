@@ -1,3 +1,0 @@
-mathematical functions
-multiplyOn: aBlMatrix
-	self subclassResponsibility

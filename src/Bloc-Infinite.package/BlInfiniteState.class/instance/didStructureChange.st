@@ -1,3 +1,0 @@
-testing
-didStructureChange
-	^ structureChanged

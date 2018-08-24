@@ -1,1 +1,0 @@
-I represent a concrete "update" command type

@@ -1,1 +1,0 @@
-I am an announcement that elements that are rendered by the Bloc presentation can trigger. 

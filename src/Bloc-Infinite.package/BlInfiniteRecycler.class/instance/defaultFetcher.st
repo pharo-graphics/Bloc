@@ -1,3 +1,0 @@
-initialization
-defaultFetcher
-	^ BlInfiniteRecyclerChangedScrapFetcher instance

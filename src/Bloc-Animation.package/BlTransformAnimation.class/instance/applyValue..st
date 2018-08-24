@@ -1,3 +1,0 @@
-pulse
-applyValue: anElementTransformation
-	self target transformation: anElementTransformation

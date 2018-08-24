@@ -1,1 +1,0 @@
-I am sent by an element with applied Resizer Listener after the resizing target was resized

@@ -1,3 +1,0 @@
-initialization
-defaultNext
-	^ BlInfiniteRecyclerPositionScrapFetcher instance

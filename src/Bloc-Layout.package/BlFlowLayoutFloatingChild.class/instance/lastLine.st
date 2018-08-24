@@ -1,3 +1,0 @@
-accessing
-lastLine
-	^ lines last

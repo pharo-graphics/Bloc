@@ -1,4 +1,0 @@
-api
-onWindowClosed
-
-	self closeSpace

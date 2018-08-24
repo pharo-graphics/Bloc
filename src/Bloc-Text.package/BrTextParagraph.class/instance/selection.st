@@ -1,3 +1,0 @@
-paragraph - accessing
-selection
-	^ selection

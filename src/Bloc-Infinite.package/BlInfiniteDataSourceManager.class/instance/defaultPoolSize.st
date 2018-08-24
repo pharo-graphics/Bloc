@@ -1,3 +1,0 @@
-initialization
-defaultPoolSize
-	^ 30

@@ -1,3 +1,0 @@
-*Bloc
-equal
-	^ self character: $=

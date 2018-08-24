@@ -1,3 +1,0 @@
-accessing
-deltaX
-	^ deltaX

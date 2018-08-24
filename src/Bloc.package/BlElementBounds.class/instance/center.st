@@ -1,6 +1,0 @@
-geometry - accessing
-center
-	"Return a point representing a geometrical center of this bounds"
-	<return: #Point>
-	
-	^ self bounds center

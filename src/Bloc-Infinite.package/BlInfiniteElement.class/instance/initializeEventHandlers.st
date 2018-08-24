@@ -1,4 +1,0 @@
-initialization
-initializeEventHandlers
-
-	self addEventHandler: self defaultMouseScrollEventHandler

@@ -1,3 +1,0 @@
-factory
-beRemove
-	self type: BlInfiniteDataSourceCommandTypeRemove instance

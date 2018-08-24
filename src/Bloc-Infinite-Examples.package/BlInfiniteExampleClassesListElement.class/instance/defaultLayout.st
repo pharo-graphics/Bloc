@@ -1,3 +1,0 @@
-initialization
-defaultLayout
-	^ BlInfiniteLinearLayout new

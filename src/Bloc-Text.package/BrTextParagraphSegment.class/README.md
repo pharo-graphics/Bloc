@@ -1,1 +1,0 @@
-I an already measured abstract paragraph segment.

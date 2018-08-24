@@ -1,3 +1,0 @@
-host - testing
-isRunning
-	^ isRunning

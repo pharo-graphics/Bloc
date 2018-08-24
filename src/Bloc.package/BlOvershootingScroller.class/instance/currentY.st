@@ -1,3 +1,0 @@
-accessing
-currentY
-	^ scrollerY currentPosition

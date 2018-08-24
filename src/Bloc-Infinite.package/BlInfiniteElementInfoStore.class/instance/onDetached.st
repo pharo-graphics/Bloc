@@ -1,4 +1,0 @@
-hooks
-onDetached
-
-	BlInfiniteElementInfoStoreRecord drainCache

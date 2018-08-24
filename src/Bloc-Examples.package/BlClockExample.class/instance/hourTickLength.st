@@ -1,3 +1,0 @@
-parameters
-hourTickLength
-	^ 30

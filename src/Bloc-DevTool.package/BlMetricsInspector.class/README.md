@@ -1,1 +1,0 @@
-I am an element metrics inspector and give a summary of target's bounds, margin border and padding

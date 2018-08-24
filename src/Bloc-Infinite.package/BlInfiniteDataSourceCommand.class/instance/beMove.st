@@ -1,3 +1,0 @@
-factory
-beMove
-	self type: BlInfiniteDataSourceCommandTypeMove instance

@@ -1,3 +1,0 @@
-testing
-isUpdate
-	^ true

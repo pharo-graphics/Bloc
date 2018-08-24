@@ -1,3 +1,0 @@
-constraints
-constraints
-	^ BlInfiniteLayoutConstraints new

@@ -1,3 +1,0 @@
-accessing
-bestCandidateBounds
-	^ bestCandidateBounds

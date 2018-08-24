@@ -1,1 +1,0 @@
-I am sent after every animation step with current progress as a parameter

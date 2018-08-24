@@ -1,3 +1,0 @@
-alignment
-alignCenter
-	self subclassResponsibility

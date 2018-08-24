@@ -1,3 +1,0 @@
-initialization
-defaultTabWidth
-	^ 3

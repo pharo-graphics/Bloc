@@ -1,1 +1,0 @@
-I bind class to its visual representation - a text element

@@ -1,1 +1,0 @@
-I am a primary mouse button. In most cases is bound to the left button.

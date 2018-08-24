@@ -1,3 +1,0 @@
-parameters
-minuteTickBreadth
-	^ 4

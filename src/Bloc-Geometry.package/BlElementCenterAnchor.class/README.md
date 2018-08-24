@@ -1,1 +1,0 @@
-My position is equal to the center of a reference element

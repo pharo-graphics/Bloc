@@ -1,3 +1,0 @@
-initialization
-defaultGeometry
-	^ BlEllipse new

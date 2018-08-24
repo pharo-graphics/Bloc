@@ -1,2 +1,0 @@
-focus handlers
-focusInEvent: anEvent

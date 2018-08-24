@@ -1,1 +1,0 @@
-I represent the cursor used in my world.

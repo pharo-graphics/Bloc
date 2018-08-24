@@ -1,3 +1,0 @@
-factory
-beUpdate
-	self type: BlInfiniteDataSourceCommandTypeUpdate instance

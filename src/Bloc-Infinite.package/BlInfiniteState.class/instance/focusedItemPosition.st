@@ -1,3 +1,0 @@
-accessing - focus
-focusedItemPosition
-	^ focusedItemPosition

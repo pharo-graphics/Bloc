@@ -1,3 +1,0 @@
-orientation
-lengthMode
-	^ self subclassResponsibility

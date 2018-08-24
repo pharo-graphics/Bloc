@@ -1,3 +1,0 @@
-initialization
-defaultEventRecorder
-	^ BlEmptyEventRecorder new

@@ -1,3 +1,0 @@
-converting
-asSymbol
-	^ #indeterminate

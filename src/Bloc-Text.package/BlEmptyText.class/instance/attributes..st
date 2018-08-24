@@ -1,2 +1,0 @@
-text - attributes
-attributes: anAttributesCollection

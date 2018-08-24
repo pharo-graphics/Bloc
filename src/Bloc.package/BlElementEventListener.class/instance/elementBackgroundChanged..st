@@ -1,2 +1,0 @@
-element handlers
-elementBackgroundChanged: anEvent

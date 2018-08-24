@@ -1,1 +1,0 @@
-I transform composite key combination formula into a DNF (https://en.wikipedia.org/wiki/Disjunctive_normal_form)

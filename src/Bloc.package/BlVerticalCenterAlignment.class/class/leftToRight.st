@@ -1,3 +1,0 @@
-factory
-leftToRight
-	^ self center

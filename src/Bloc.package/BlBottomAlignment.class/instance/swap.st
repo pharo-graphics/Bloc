@@ -1,3 +1,0 @@
-factory
-swap
-	^ BlElementAlignment top

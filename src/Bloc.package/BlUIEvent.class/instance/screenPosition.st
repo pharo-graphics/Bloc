@@ -1,3 +1,0 @@
-api - geometry
-screenPosition
-	^ screenPosition

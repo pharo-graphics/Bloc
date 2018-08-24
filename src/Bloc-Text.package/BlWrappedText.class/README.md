@@ -1,1 +1,0 @@
-I am a special type of text that delegates most operations to the underlying text that is wrapped by me

@@ -1,3 +1,0 @@
-initialization
-defaultItemAnimator
-	^ BlInfiniteItemAnimator new

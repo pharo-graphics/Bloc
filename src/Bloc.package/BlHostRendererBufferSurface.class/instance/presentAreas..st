@@ -1,3 +1,0 @@
-presenting
-presentAreas: aCollectionOfRectangles
-	hostSpace presentBufferSurface: self areas: aCollectionOfRectangles

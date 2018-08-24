@@ -1,3 +1,0 @@
-layout
-markLayoutRequestEaten
-	layoutRequestEaten := true

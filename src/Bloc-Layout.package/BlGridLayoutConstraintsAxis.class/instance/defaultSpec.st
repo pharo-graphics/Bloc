@@ -1,3 +1,0 @@
-initialization
-defaultSpec
-	^ BlGridLayoutSpec new

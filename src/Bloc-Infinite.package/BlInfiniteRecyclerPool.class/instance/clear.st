@@ -1,3 +1,0 @@
-invalidate
-clear
-	scrap removeAll

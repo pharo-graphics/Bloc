@@ -1,3 +1,0 @@
-pulse
-doStep
-	self subclassResponsibility

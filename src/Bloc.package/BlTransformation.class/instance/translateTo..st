@@ -1,2 +1,0 @@
-translation
-translateTo: aPoint

@@ -1,2 +1,0 @@
-space handlers
-spaceCloseRequest: anEvent

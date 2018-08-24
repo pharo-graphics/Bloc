@@ -1,3 +1,0 @@
-composition
-+ anElementAlignment
-	^ self subclassResponsibility

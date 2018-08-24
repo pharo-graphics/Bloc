@@ -1,3 +1,0 @@
-enum
-typeInvisible
-	^ 0

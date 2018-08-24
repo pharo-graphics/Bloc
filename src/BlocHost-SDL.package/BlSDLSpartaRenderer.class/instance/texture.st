@@ -1,3 +1,0 @@
-accessing
-texture
-	^ texture

@@ -1,3 +1,0 @@
-accessing
-middle
-	^ BlMouseMiddleButton uniqueInstance

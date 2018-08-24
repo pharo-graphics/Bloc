@@ -1,3 +1,0 @@
-*Bloc-Style
-transition: aTransition
-	

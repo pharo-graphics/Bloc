@@ -1,1 +1,0 @@
-I am a Nautilus plugin that marks abstract method (self subclassResponsibility) with an #abstract icon

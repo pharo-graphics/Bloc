@@ -1,3 +1,0 @@
-drawing
-cubeSize
-	^ 1

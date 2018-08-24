@@ -1,3 +1,0 @@
-initialization
-createCairoContext
-	^ hostSpace hostWindow primGetWindow primCairoCreate

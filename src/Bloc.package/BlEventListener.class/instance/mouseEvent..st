@@ -1,3 +1,0 @@
-mouse handlers
-mouseEvent: anEvent
-	

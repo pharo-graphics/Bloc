@@ -1,3 +1,0 @@
-initialization
-defaultPaint
-	^ BlPaint transparent 

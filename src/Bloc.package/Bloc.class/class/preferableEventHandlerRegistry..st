@@ -1,3 +1,0 @@
-event handling
-preferableEventHandlerRegistry: anEventHandlerRegistryClass
-	PreferableEventHandlerRegistry := anEventHandlerRegistryClass

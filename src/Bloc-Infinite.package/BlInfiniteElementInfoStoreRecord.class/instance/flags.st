@@ -1,3 +1,0 @@
-flags
-flags
-	^ flags

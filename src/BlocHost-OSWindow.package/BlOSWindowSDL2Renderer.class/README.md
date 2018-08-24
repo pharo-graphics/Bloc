@@ -1,1 +1,0 @@
-I am an Bloc OSWindow renderer which uses SDL2.

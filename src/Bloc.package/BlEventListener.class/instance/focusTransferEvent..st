@@ -1,2 +1,0 @@
-focus handlers
-focusTransferEvent: anEvent

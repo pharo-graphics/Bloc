@@ -1,1 +1,0 @@
-I am a decorator of a scalable strategy and allow users to have a deeper customization of scalable element's behaviour

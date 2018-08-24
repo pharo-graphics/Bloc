@@ -1,3 +1,0 @@
-initialization
-defaultCacheSize
-	^ 2

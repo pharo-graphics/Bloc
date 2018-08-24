@@ -1,3 +1,0 @@
-testing
-hasTransfer
-	^ transfer isNotNil

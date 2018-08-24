@@ -1,3 +1,0 @@
-testing
-isFocused
-	^ self focused

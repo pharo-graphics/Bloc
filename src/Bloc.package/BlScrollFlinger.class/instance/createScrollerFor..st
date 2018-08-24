@@ -1,3 +1,0 @@
-initialization
-createScrollerFor: anInterpolator
-	^ BlOvershootingScroller interpolator: interpolator

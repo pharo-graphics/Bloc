@@ -1,3 +1,0 @@
-accessing
-orientation
-	^ layout orientation

@@ -1,3 +1,0 @@
-text - accessing
-text
-	^ text

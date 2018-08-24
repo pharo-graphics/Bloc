@@ -1,3 +1,0 @@
-comparing
-andInflexible: aFlexibility
-	^ aFlexibility

@@ -1,3 +1,0 @@
-initialization
-defaultSkin
-	^ BlExampleSwitchSkinWithTrack new

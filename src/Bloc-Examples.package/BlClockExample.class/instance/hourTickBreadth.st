@@ -1,3 +1,0 @@
-parameters
-hourTickBreadth
-	^ 5

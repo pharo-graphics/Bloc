@@ -1,3 +1,0 @@
-initialization
-exactMeasurementSpecFrom: anInfiniteElement
-	self measurementSpec: (BlExtentMeasurementSpec exact: anInfiniteElement extent)

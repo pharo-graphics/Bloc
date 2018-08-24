@@ -1,3 +1,0 @@
-accessing
-easing
-	^ easing

@@ -1,2 +1,0 @@
-keyboard handlers
-textInputEvent: anEvent

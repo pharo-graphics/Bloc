@@ -1,3 +1,0 @@
-initialization
-initDispatcher
-	self eventDispatcher addEventFilter: self eventListener

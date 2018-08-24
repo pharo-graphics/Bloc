@@ -1,3 +1,0 @@
-accessing
-marginTop
-	^ margin top

@@ -1,3 +1,0 @@
-initialization
-defaultBucket
-	^ BlInfiniteBucket new

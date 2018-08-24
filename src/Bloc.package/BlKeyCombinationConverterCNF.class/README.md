@@ -1,1 +1,0 @@
-I transform composite key combination formula into a CNF (https://en.wikipedia.org/wiki/Conjunctive_normal_form)

@@ -1,3 +1,0 @@
-initialization
-defaultChildrenController
-	^ BlInfiniteDefaultChildrenController new

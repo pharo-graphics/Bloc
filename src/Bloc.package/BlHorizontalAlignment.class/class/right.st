@@ -1,3 +1,0 @@
-factory
-right
-	^ right

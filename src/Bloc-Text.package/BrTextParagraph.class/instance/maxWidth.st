@@ -1,3 +1,0 @@
-paragraph - geometry
-maxWidth
-	^ maxWidth

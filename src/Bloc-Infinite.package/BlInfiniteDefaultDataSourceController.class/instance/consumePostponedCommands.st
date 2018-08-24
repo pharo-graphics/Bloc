@@ -1,3 +1,0 @@
-element -> manager
-consumePostponedCommands
-	self dataSourceManager consumePostponedCommands

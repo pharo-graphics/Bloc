@@ -1,3 +1,0 @@
-initialization
-defaultController
-	^ BlExampleSwitchController new

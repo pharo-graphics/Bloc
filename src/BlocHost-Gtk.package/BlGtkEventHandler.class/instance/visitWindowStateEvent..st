@@ -1,3 +1,0 @@
-accessing
-visitWindowStateEvent: aGdkEvent
-	 ^ nil

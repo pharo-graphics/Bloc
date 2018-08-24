@@ -1,3 +1,0 @@
-accessing
-previous
-	^ subIterator previous

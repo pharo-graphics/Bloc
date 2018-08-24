@@ -1,3 +1,0 @@
-resizer
-resizerCursor
-	^ BlCursor resizeBottom

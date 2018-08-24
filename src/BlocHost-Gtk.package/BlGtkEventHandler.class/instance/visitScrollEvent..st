@@ -1,3 +1,0 @@
-accessing
-visitScrollEvent: aGdkEvent
-	 ^ nil

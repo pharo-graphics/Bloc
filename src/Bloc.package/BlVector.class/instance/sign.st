@@ -1,3 +1,0 @@
-arithmetic
-sign
-	^ self subclassResponsibility

@@ -1,3 +1,0 @@
-instances
-invalid
-	^ invalid

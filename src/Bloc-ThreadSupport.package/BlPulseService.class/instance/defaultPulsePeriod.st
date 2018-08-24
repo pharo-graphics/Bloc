@@ -1,3 +1,0 @@
-period
-defaultPulsePeriod
-	^ 16

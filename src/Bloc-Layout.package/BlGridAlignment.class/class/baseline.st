@@ -1,3 +1,0 @@
-factory
-baseline
-	^ BlGridBaselineAlignment uniqueInstance

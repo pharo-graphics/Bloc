@@ -1,3 +1,0 @@
-accessing
-visitCrossingEvent: aGdkEvent
-	^ nil

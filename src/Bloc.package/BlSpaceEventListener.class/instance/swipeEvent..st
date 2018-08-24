@@ -1,2 +1,0 @@
-other handlers
-swipeEvent: anEvent

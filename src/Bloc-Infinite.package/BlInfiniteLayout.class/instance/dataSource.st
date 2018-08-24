@@ -1,3 +1,0 @@
-accessing
-dataSource
-	^ infiniteElement dataSource

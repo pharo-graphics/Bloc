@@ -1,3 +1,0 @@
-span - accessing
-spanEnd
-	^ spanEnd

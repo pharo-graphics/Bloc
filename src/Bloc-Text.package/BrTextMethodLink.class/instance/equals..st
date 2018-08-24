@@ -1,3 +1,0 @@
-comparing
-equals: aTextAttribute
-	^ true

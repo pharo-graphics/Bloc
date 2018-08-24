@@ -1,1 +1,0 @@
-I am signaled when BrText is modified while being locked.

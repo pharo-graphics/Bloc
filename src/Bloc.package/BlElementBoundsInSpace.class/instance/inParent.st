@@ -1,3 +1,0 @@
-geometry bounds
-inParent
-	^ self

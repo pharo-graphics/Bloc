@@ -1,3 +1,0 @@
-initialization
-defaultMaxScrap
-	^ 5

@@ -1,3 +1,0 @@
-initialization
-defaultNext
-	^ BlInfiniteRecyclerPoolFetcher instance

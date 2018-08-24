@@ -1,3 +1,0 @@
-order
-isActionHandled	
-	^ method isSubclassResponsibility

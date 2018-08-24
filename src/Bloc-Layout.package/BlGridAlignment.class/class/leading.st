@@ -1,3 +1,0 @@
-factory
-leading
-	^ BlGridLeadingAlignment uniqueInstance

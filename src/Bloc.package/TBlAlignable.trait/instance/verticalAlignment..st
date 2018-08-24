@@ -1,3 +1,0 @@
-accessing
-verticalAlignment: aBlElementAlignment
-	self explicitRequirement

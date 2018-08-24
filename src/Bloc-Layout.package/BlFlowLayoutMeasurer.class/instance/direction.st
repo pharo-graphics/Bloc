@@ -1,3 +1,0 @@
-accessing
-direction
-	^ layout direction

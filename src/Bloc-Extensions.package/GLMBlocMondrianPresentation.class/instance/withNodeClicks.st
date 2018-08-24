@@ -1,3 +1,0 @@
-scripting
-withNodeClicks
-	shouldInstallClicksOnNodes := true

@@ -1,3 +1,0 @@
-adding
-addToDisappearedInLayout: anElementHolder
-	infiniteElement infoStore addToDisappearedInLayout: anElementHolder

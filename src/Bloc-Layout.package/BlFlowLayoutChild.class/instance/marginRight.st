@@ -1,3 +1,0 @@
-accessing
-marginRight
-	^ margin right

@@ -1,3 +1,0 @@
-animations
-endAnimation: anElementHolder
-	self subclassResponsibility

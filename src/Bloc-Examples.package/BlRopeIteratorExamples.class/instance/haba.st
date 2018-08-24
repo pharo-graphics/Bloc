@@ -1,5 +1,0 @@
-strings
-haba
-	<gtExample>
-	
-	^ 'Haba'

@@ -1,3 +1,0 @@
-accessing
-initialize
-	super initialize.

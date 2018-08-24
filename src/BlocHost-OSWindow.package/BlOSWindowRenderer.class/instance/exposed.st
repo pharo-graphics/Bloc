@@ -1,2 +1,0 @@
-updating screen
-exposed

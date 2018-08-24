@@ -1,3 +1,0 @@
-api
-start
-	isRunning := true

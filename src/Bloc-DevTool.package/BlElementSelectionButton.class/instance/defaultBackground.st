@@ -1,3 +1,0 @@
-initialization
-defaultBackground
-	^ Color black

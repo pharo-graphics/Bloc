@@ -1,3 +1,0 @@
-accessing
-joinName
-	^ 'Bevel'

@@ -1,1 +1,0 @@
-I am responsible for communication between recycler and other parts of the system, for instance layout, state or infinite element

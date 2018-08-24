@@ -1,3 +1,0 @@
-updating
-updateMatching
-	self subclassResponsibility 

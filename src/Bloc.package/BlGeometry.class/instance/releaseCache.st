@@ -1,3 +1,0 @@
-cache
-releaseCache
-	pathCache releaseCache

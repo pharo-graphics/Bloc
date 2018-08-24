@@ -1,3 +1,0 @@
-accessing
-topMostParent
-	^ self root

@@ -1,3 +1,0 @@
-accessing
-deletedInvisibleItemCountSincePreviousLayout: anObject
-	deletedInvisibleItemCountSincePreviousLayout := anObject

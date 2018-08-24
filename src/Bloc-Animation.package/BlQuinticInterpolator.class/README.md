@@ -1,8 +1,0 @@
-I represent a special case of a quintic function.
-https://en.wikipedia.org/wiki/Quintic_function
-
-My interpolation function is
-   f(x) = x^5 - 5x^4 + 10x^3 - 10x^2 + 5x
-
-It can be simplified to
-   f(x) = (x - 1)^5 + 1

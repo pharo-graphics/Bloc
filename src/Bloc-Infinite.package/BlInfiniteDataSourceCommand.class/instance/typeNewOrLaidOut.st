@@ -1,3 +1,0 @@
-enum
-typeNewOrLaidOut
-	^ 1

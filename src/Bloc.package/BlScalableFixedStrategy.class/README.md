@@ -1,1 +1,0 @@
-I allow users to set a custom zoom level of content element within scalable element

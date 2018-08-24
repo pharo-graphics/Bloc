@@ -1,3 +1,0 @@
-parameters
-radius
-	^ 150

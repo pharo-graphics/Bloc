@@ -1,3 +1,0 @@
-*Bloc
-isSystemCursor
-	^ true

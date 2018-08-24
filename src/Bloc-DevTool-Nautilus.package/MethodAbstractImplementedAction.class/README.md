@@ -1,1 +1,0 @@
-I am a Nautilus plugin that marks abstract methods that are implemented in a subclass with green abstract icon

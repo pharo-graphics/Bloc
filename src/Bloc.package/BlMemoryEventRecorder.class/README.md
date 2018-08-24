@@ -1,1 +1,0 @@
-I record events in a collection

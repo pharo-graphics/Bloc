@@ -1,3 +1,0 @@
-initialization
-defaultHandlerRegistry
-	^ Bloc preferableEventHandlerRegistry new

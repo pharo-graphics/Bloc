@@ -1,3 +1,0 @@
-initialization
-clear
-	self removeScrap

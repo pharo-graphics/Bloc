@@ -1,1 +1,0 @@
-I am fired when host window changed its size

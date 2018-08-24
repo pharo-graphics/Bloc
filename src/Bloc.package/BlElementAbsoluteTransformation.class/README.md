@@ -1,1 +1,0 @@
-I represent an absolute transformation defined only by transformation matrix

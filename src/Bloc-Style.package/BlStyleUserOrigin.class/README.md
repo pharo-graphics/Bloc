@@ -1,1 +1,0 @@
-Styles set on a styleable using setter API

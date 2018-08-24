@@ -1,3 +1,0 @@
-transformations
-transformation: anElementTransformation
-	transformation := anElementTransformation

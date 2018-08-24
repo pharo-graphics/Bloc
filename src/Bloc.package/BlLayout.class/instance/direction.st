@@ -1,3 +1,0 @@
-direction
-direction
-	^ direction

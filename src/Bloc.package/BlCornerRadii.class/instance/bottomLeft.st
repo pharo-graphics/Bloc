@@ -1,3 +1,0 @@
-accessing
-bottomLeft
-	^ bottomLeft

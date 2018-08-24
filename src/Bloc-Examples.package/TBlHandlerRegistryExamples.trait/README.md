@@ -1,1 +1,0 @@
-I define examples of the public api of event handler registry. All concrete implementations should behave in the same way

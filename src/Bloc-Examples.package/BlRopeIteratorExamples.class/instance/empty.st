@@ -1,5 +1,0 @@
-strings
-empty
-	<gtExample>
-	
-	^ ''

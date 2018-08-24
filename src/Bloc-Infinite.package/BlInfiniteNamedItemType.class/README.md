@@ -1,1 +1,0 @@
-I am an item type represented by its name

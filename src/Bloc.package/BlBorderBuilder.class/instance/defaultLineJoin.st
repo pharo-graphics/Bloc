@@ -1,3 +1,0 @@
-initialization
-defaultLineJoin
-	^ BlStrokeLineJoin miter

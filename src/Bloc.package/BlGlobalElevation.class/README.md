@@ -1,1 +1,0 @@
-I represent a global element elevation given in Space coordinate system.

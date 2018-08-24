@@ -1,1 +1,0 @@
-I define an API of a Node in Red-Black Tree as described here https://en.wikipedia.org/wiki/Red–black_tree

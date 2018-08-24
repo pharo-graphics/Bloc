@@ -1,3 +1,0 @@
-api - accessing
-traversedTargets
-	^ traversedTargets

@@ -1,3 +1,0 @@
-accessing
-startDragThreshold
-	^ 4

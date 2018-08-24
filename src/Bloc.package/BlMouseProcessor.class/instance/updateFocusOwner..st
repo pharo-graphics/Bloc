@@ -1,3 +1,0 @@
-event processing
-updateFocusOwner: aNode
-	

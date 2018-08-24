@@ -1,3 +1,0 @@
-accessing
-visitKeyEvent: aGdkEvent
-	 ^ nil

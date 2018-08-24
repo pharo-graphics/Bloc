@@ -1,1 +1,0 @@
-I am an implementation of a Bitset that provides methods to offset indices

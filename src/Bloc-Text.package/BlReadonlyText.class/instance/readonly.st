@@ -1,3 +1,0 @@
-text - copying
-readonly
-	^ self

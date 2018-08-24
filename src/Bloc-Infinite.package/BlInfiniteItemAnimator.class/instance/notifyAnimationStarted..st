@@ -1,3 +1,0 @@
-notifying
-notifyAnimationStarted: anElementHolder
-	self shouldBeImplemented

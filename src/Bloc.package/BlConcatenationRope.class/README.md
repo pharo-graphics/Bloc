@@ -1,1 +1,0 @@
-I am a special type of rope that plays a role of a node in a binary tree and contains left and right branch

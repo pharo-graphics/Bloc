@@ -1,1 +1,0 @@
-I provide a binding from an app-specific data set to elements that are displayed within an InfiniteElement

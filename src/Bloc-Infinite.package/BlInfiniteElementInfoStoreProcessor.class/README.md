@@ -1,1 +1,0 @@
-I define an api of info store records processor

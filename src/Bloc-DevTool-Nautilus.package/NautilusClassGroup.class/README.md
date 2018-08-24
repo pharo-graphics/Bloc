@@ -1,1 +1,0 @@
-I am a class group to be browsed using Nautilus

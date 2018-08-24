@@ -1,3 +1,0 @@
-presenting
-presentAreas: aCollectionOfRectangles
-	hostSpace presentFormSurface: self areas: aCollectionOfRectangles

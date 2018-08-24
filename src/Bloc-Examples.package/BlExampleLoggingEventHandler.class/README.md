@@ -1,1 +1,0 @@
-I am a special event handler that increases ==counter== every time I handle an event

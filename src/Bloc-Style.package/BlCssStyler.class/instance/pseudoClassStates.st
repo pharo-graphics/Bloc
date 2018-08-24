@@ -1,3 +1,0 @@
-accessing
-pseudoClassStates
-	^ pseudoClassStates

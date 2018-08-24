@@ -1,1 +1,0 @@
-I contain examples related to ===BlCompositor===

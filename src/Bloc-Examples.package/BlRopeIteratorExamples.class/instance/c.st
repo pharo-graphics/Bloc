@@ -1,5 +1,0 @@
-strings
-c
-	<gtExample>
-	
-	^ 'c'

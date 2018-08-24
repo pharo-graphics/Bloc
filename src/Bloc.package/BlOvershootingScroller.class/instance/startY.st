@@ -1,3 +1,0 @@
-accessing
-startY
-	^ scrollerY startPosition

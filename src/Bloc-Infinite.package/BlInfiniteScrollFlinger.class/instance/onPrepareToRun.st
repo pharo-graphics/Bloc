@@ -1,3 +1,0 @@
-hooks
-onPrepareToRun
-	self scrollable consumePendingDataSourceCommands

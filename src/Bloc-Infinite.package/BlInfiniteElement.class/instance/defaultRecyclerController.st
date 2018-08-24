@@ -1,3 +1,0 @@
-initialization
-defaultRecyclerController
-	^ BlInfiniteRecyclerController new

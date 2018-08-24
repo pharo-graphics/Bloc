@@ -1,3 +1,0 @@
-scripting
-withEdgeClicks
-	shouldInstallClicksOnEdges := true

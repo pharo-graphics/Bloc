@@ -1,3 +1,0 @@
-accessing
-clipChildren
-	^ clipChildren

@@ -1,3 +1,0 @@
-invalidation
-invalidateMatrix
-	self subclassResponsibility

@@ -1,3 +1,0 @@
-private
-assertNotInLayoutOrScroll
-	infiniteElement assertNotInLayoutOrScroll

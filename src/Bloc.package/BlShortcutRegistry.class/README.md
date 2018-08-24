@@ -1,1 +1,0 @@
-I am a shortcut registry and contain a collection of ===BlShortcut===

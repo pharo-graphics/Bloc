@@ -1,1 +1,0 @@
-I contain examples various aspects of event dispatching and handling mechanism such as custom events, event simulation etc

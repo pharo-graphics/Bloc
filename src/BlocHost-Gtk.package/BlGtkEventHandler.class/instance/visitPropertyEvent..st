@@ -1,3 +1,0 @@
-accessing
-visitPropertyEvent: aGdkEvent
-	 ^ nil

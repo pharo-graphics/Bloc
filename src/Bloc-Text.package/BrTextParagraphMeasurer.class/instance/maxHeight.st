@@ -1,3 +1,0 @@
-paragraph - properties
-maxHeight
-	^ maxHeight

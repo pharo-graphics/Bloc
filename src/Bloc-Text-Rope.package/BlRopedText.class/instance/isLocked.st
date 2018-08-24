@@ -1,3 +1,0 @@
-text - lock
-isLocked
-	^ locked

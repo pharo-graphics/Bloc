@@ -1,3 +1,0 @@
-changes
-onBackgroundChanged
-	self owner invalidate

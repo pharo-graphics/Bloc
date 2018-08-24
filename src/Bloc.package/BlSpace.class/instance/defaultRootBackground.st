@@ -1,3 +1,0 @@
-initialization
-defaultRootBackground
-	^ Color white

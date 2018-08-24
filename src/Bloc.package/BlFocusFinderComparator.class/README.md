@@ -1,1 +1,0 @@
-I sort element according to their visual layout and geometry

@@ -1,2 +1,0 @@
-api - hooks
-onUninstalledIn: anObject

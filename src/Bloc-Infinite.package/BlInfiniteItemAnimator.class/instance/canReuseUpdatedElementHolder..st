@@ -1,3 +1,0 @@
-testing
-canReuseUpdatedElementHolder: anElementHolder
-	^ true

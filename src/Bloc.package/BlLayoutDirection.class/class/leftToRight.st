@@ -1,3 +1,0 @@
-factory
-leftToRight
-	^ leftToRight

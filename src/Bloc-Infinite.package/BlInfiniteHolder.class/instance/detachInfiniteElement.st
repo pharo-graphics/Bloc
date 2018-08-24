@@ -1,4 +1,0 @@
-private
-detachInfiniteElement
-
-	infiniteElement := nil

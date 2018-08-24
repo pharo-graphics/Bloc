@@ -1,3 +1,0 @@
-initialization
-defaultHorizontal
-	^ BlLinearLayoutConstraintsHorizontal new

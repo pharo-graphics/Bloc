@@ -1,3 +1,0 @@
-factory
-end
-	^ self trailing

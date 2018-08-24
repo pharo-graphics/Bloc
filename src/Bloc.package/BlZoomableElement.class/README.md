@@ -1,1 +1,0 @@
-I am an extended version of a scalable element with zoom support

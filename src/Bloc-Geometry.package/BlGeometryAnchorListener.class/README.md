@@ -1,1 +1,0 @@
-I am an event listener that listens Anchor Moved event send by Anchor

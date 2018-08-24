@@ -1,3 +1,0 @@
-accessing
-visitDndEvent: aGdkEvent
-	^ nil

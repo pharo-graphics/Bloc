@@ -1,1 +1,0 @@
-Used to allow creation of items of different types in infinite element

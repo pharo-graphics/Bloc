@@ -1,3 +1,0 @@
-initialization
-defaultInterpolator
-	^ BlQuinticInterpolator default

@@ -1,3 +1,0 @@
-layout
-markDataSourceChangeDuringMeasure
-	dataSourceChangeDuringMeasure := true

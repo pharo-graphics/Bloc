@@ -1,3 +1,0 @@
-factory
-vertical
-	^ BlVerticalAlignment top

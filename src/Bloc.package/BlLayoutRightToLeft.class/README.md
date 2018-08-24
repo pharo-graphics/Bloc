@@ -1,1 +1,0 @@
-I am a concrete right-to-left direction

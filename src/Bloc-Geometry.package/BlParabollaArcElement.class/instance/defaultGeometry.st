@@ -1,3 +1,0 @@
-initialization
-defaultGeometry
-	^ BlBezierCurve new

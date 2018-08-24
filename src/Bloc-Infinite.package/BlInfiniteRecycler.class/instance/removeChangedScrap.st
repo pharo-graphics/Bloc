@@ -1,4 +1,0 @@
-recycling
-removeChangedScrap
-
-	changedScrap removeAll

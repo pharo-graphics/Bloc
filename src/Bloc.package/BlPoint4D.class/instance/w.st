@@ -1,3 +1,0 @@
-accessing
-w
-	^ w

@@ -1,0 +1,55 @@
+Extension { #name : #Number }
+
+{ #category : #'*Bloc' }
+Number >> , aNumber [
+	<return: #BlVector>
+
+	^ BlVector2D x: self y: aNumber
+]
+
+{ #category : #'*Bloc' }
+Number >> asBlocVector [
+	^ BlVector x: self y: self
+]
+
+{ #category : #'*Bloc' }
+Number >> asScale3D [
+	"Return a 3D vector representing a scale factor"
+	<return: #BlVector3D>
+
+	^ BlVector x: self y: self z: 1
+]
+
+{ #category : #'*Bloc' }
+Number >> asTranslate3D [
+	"Return a 3D vector representing a translation vector"
+	<return: #BlVector3D>
+
+	^ BlVector x: self y: self z: 0
+]
+
+{ #category : #'*Bloc' }
+Number >> scalarMultiplicate2D: aVector2D [
+	"Perform a scalar multiplication of a given 2D vector by me"
+	<return: #BlVector>
+
+	^ BlVector
+		x: aVector2D x * self
+		y: aVector2D y * self
+]
+
+{ #category : #'*Bloc' }
+Number >> scalarMultiplicate3D: aVector3D [
+	"Perform a scalar multiplication of a given 3D vector by me"
+	<return: #BlVector>
+
+	^ BlVector
+		x: aVector3D x * self
+		y: aVector3D y * self
+		z: aVector3D z * self
+]
+
+{ #category : #'*Bloc' }
+Number >> timesCollect: aBlock [
+	^ (1 to: self) collect: [ :anIndex | aBlock cull: anIndex ]
+]

@@ -1,3 +1,0 @@
-key - accessing
-char
-	^ char

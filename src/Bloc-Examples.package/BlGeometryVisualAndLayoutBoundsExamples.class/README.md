@@ -1,1 +1,0 @@
-(IceRepository repositoriesLocation / 'pharo-graphics'/ 'bloc' / 'doc' / 'bounds' / 'bounds-types.pillar') inspect

@@ -1,3 +1,0 @@
-initialization
-defaultOutskirts
-	^ BlOutskirts inside

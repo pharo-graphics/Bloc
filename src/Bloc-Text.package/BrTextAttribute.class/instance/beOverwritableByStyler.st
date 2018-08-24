@@ -1,3 +1,0 @@
-style
-beOverwritableByStyler
-	isOverwritableByStyler := true

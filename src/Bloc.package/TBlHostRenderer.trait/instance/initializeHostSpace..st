@@ -1,3 +1,0 @@
-initialization
-initializeHostSpace: aBlHostSpace
-	self explicitRequirement

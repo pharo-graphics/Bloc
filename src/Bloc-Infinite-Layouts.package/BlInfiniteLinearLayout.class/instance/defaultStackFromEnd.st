@@ -1,3 +1,0 @@
-initialization
-defaultStackFromEnd
-	^ false

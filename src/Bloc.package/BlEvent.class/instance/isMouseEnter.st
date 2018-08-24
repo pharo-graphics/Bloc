@@ -1,3 +1,0 @@
-testing
-isMouseEnter
-	^ false

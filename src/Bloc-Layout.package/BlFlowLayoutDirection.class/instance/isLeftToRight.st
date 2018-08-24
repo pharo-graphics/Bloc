@@ -1,3 +1,0 @@
-testing
-isLeftToRight
-	^ self subclassResponsibility

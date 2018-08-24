@@ -1,3 +1,0 @@
-accessing
-finalY
-	^ scrollerY finalPosition

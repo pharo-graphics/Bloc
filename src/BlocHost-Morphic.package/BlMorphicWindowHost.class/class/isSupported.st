@@ -1,3 +1,0 @@
-driver selection
-isSupported
-	^ true

@@ -1,1 +1,0 @@
-I am a Nautilus plugin that marks method tht should be implemented

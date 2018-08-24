@@ -1,2 +1,0 @@
-selection handlers
-selectionAcquiredEvent: anEvent

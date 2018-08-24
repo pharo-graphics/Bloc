@@ -1,1 +1,0 @@
-I handle user events and update text model of a text edit element

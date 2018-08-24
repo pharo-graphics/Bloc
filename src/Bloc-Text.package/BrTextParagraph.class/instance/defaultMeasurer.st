@@ -1,3 +1,0 @@
-initialization
-defaultMeasurer
-	^ self subclassResponsibility

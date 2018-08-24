@@ -1,3 +1,0 @@
-metrics
-measuredHeight
-	^ measuredHeight

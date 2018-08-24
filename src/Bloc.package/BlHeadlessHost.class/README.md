@@ -1,1 +1,0 @@
-I am a fallback host that is chosen if there are no other available and supported hosts.

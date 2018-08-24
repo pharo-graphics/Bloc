@@ -1,2 +1,0 @@
-element handlers
-elementRemoved: anEvent

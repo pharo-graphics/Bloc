@@ -1,3 +1,0 @@
-accessing
-reset
-	value := UNDEFINED

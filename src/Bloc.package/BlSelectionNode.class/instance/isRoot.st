@@ -1,3 +1,0 @@
-tree - testing
-isRoot
-	^ false

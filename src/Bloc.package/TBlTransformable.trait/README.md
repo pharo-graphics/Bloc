@@ -1,1 +1,0 @@
-I define an interface that transformable objects should implement in order to support affine transformations

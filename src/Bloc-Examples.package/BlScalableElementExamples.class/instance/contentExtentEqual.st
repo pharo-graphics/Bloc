@@ -1,3 +1,0 @@
-accessing
-contentExtentEqual
-	^ self scalableExtent

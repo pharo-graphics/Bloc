@@ -1,3 +1,0 @@
-*Bloc
-asForm
-	^ self

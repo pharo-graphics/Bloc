@@ -1,3 +1,0 @@
-pulse
-valueForStep: aDelta
-	

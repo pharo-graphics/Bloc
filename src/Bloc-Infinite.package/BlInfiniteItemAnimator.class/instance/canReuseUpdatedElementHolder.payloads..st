@@ -1,3 +1,0 @@
-testing
-canReuseUpdatedElementHolder: anElementHolder payloads: aCollectionOfPayloads
-	^ self canReuseUpdatedElementHolder: anElementHolder

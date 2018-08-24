@@ -1,3 +1,0 @@
-testing
-isBaseDrag
-	^ false

@@ -1,3 +1,0 @@
-initialization
-factoryByDefault
-	^BlSvgFactory new

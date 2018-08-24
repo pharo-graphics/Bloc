@@ -1,3 +1,0 @@
-children - accessing
-findElementHolderForDataSourcePosition: aPosition
-	self shouldBeImplemented

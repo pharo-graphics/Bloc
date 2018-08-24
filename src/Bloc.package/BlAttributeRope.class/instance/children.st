@@ -1,3 +1,0 @@
-rope - accessing
-children
-	^ { rope }

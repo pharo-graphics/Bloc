@@ -1,1 +1,0 @@
-I run all gt-examples as automatic tests

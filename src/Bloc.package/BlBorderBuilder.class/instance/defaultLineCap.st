@@ -1,3 +1,0 @@
-initialization
-defaultLineCap
-	^ BlStrokeLineCap butt

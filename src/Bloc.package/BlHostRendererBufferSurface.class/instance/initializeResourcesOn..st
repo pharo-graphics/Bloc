@@ -1,3 +1,0 @@
-initialization
-initializeResourcesOn: aHostRenderer
-	self initializeOn: aHostRenderer

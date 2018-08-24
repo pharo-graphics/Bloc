@@ -1,3 +1,0 @@
-accessing
-inflexible
-	^ BlGridFlexibility inflexible

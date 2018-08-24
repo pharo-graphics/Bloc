@@ -1,3 +1,0 @@
-computing
-definedCount
-	^ definedCount

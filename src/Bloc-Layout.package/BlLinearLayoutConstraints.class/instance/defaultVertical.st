@@ -1,3 +1,0 @@
-initialization
-defaultVertical
-	^ BlLinearLayoutConstraintsVertical new

@@ -1,1 +1,0 @@
-I represent a position change and notify a corresponding BlElementPositionChangedEvent

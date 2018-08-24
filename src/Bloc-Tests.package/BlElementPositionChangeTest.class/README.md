@@ -1,1 +1,0 @@
-I contain examples of position change logging functionality

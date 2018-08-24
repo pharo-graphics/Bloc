@@ -1,3 +1,0 @@
-metrics
-measuredWidth
-	^ measuredWidth

@@ -1,1 +1,0 @@
-I am sent between key down and key up events. I can be repeated while user holds a key pressed.

@@ -1,1 +1,0 @@
-I define a geometry of a bezier curve with N control points (of order N)

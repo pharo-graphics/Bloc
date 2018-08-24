@@ -1,3 +1,0 @@
-private - accessing
-shortcutHandler
-	^ shortcutHandler

@@ -1,2 +1,0 @@
-gesture handlers
-gestureSwipeEvent: anEvent

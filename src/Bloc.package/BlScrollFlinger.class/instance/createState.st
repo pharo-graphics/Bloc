@@ -1,3 +1,0 @@
-initialization
-createState
-	^ BlScrollFlingerState new

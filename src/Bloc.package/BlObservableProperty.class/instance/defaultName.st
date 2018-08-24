@@ -1,3 +1,0 @@
-accessing
-defaultName
-	self subclassResponsibility  

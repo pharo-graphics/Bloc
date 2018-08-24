@@ -1,3 +1,0 @@
-event management
-removeEventHandlersSuchThat: aBlock
-	self eventDispatcher removeEventHandlersSuchThat: aBlock

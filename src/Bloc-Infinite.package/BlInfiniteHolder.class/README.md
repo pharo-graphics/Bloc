@@ -1,1 +1,0 @@
-I represent a child holder  within infinite element and store data related to child - current position within data source, old position and maybe additional data needed by infinite layout

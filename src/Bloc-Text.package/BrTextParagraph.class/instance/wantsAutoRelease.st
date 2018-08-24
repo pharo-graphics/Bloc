@@ -1,3 +1,0 @@
-testing
-wantsAutoRelease
-	^ autoRelease

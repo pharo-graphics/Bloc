@@ -1,2 +1,0 @@
-mouse handlers
-mouseEnterEvent: anEvent

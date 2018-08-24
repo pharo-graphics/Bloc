@@ -1,1 +1,0 @@
-I measure a text span in a context of sparta canvas

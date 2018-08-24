@@ -1,3 +1,0 @@
-testing
-shouldDraw
-	^ self isVisible

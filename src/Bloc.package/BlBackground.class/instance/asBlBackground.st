@@ -1,3 +1,0 @@
-converting
-asBlBackground
-	^ self

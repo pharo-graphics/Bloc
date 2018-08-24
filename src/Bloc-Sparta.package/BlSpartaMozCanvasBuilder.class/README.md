@@ -1,1 +1,0 @@
-I build sparta canvas using Moz2D backend

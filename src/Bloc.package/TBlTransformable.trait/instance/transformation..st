@@ -1,3 +1,0 @@
-transformations
-transformation: anElementTransformation
-	self explicitRequirement

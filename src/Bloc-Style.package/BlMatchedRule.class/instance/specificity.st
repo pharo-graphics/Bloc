@@ -1,3 +1,0 @@
-accessing
-specificity
-	^ selector specificity

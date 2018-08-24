@@ -1,3 +1,0 @@
-initialization
-defaultDataSourceManager
-	^ BlInfiniteDataSourceManager new

@@ -1,3 +1,0 @@
-initialization
-defaultFilterRegistry
-	^ Bloc preferableEventHandlerRegistry new

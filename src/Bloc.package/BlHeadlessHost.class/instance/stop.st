@@ -1,3 +1,0 @@
-api
-stop
-	isRunning := false

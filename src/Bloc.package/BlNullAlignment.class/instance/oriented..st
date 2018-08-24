@@ -1,3 +1,0 @@
-factory
-oriented: aBlLayoutOrientation
-	^ self

@@ -1,3 +1,0 @@
-event processing
-handleSpaceEventProcessedEvent: anEvent
-	

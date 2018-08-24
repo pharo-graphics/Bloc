@@ -1,3 +1,0 @@
-builder
-relative
-	isAbsolute := false

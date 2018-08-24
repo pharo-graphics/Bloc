@@ -1,3 +1,0 @@
-instance creation
-transparent
-	self shouldNotImplement

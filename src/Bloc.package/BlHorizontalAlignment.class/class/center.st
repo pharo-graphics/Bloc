@@ -1,3 +1,0 @@
-factory
-center
-	^ center

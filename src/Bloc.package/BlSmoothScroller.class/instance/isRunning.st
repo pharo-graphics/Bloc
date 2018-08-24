@@ -1,3 +1,0 @@
-api - testing
-isRunning
-	^ isRunning

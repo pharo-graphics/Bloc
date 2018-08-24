@@ -1,1 +1,0 @@
-I am fired by morphic host window when it is closed or deleted from the World

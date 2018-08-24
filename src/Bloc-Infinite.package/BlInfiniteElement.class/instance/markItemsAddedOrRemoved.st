@@ -1,3 +1,0 @@
-layout
-markItemsAddedOrRemoved
-	itemsAddedOrRemoved := true

@@ -1,3 +1,0 @@
-testing
-ifNotNull: aBlock
-	"nothing"

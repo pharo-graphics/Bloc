@@ -1,3 +1,0 @@
-initialization
-defaultWidth
-	^ 500

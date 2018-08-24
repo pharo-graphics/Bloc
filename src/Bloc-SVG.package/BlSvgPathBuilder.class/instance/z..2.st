@@ -1,3 +1,0 @@
-commands
-z
-	self close

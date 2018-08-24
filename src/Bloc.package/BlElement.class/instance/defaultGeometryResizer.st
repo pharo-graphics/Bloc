@@ -1,3 +1,0 @@
-initialization
-defaultGeometryResizer
-	^ BlGeometryResizer match

@@ -1,3 +1,0 @@
-comparing
-priority
-	^ 30

@@ -1,3 +1,0 @@
-updating
-updateSpecificity
-	self subclassResponsibility

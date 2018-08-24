@@ -1,3 +1,0 @@
-accessing
-defaultAnimation
-	^ BlNumberTransition new

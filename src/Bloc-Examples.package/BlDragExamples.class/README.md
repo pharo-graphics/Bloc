@@ -1,1 +1,0 @@
-I contains examples of how to add dragging ability to elements

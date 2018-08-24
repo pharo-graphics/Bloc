@@ -1,3 +1,0 @@
-initialization
-defaultHorizontal
-	^ BlLayoutCommonConstraintsAxis new

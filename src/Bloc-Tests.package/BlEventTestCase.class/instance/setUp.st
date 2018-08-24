@@ -1,3 +1,0 @@
-initialization
-setUp
-	self initSpace

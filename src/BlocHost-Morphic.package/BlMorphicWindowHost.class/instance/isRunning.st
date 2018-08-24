@@ -1,3 +1,0 @@
-host - api
-isRunning
-	^ isRunning

@@ -1,3 +1,0 @@
-testing
-isHorizontal
-	^ self subclassResponsibility

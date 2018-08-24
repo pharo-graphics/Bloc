@@ -1,3 +1,0 @@
-initialization
-defaultRecyclerPool
-	^ BlInfiniteRecyclerPool new
