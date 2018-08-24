@@ -1,3 +1,3 @@
 accessing
-paint: anObject
-	paint := anObject
+paint: aPaint
+	paint := aPaint

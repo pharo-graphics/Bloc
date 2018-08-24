@@ -1,3 +1,3 @@
 accessing
-width: anObject
-	width := anObject
+width: aNumber
+	width := aNumber

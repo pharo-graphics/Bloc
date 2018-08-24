@@ -2,4 +2,6 @@ initialization
 initialize
 	super initialize.
 	
-	below := true
+	paint := Color black.
+	below := true.
+	width := 2.
