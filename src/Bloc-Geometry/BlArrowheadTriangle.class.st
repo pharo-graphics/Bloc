@@ -50,7 +50,7 @@ BlArrowheadTriangle >> defaultGeometry [
 ]
 
 { #category : #initialization }
-BlArrowheadTriangle >> initialize. [
+BlArrowheadTriangle >> initialize [
 	super initialize.
 	
 	scale := 1.
