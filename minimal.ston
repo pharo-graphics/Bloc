@@ -1,10 +1,9 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'Bloc',
+      #baseline : 'BlocCore',
       #directory : 'src',
-      #platforms : [ #pharo ],
-      #load : [ 'minimal:bloc' ]
+      #platforms : [ #pharo ]
     }
   ],
   #testing : {
