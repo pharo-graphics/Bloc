@@ -643,7 +643,7 @@ BrTextStylerST80 class >> styleTable [
 	"Return a style table used by default by all stylers"
 	<return: #Array>
 
-	^ styleTable ifNil: [ styleTable := self defaultStyleTable halt ]
+	^ styleTable ifNil: [ styleTable := self defaultStyleTable ]
 ]
 
 { #category : #accessing }
