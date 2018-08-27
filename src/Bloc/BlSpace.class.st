@@ -182,6 +182,13 @@ BlSpace class >> simulateMouseMoveOutside: anElement [
 		on: anElement
 ]
 
+{ #category : #'api - adding' }
+BlSpace >> addChild: anElement [
+	"Add a given element as a direct child to the space root"
+	
+	self root addChild: anElement
+]
+
 { #category : #'change reporting' }
 BlSpace >> beDirtyArea [
 	self makeDirty: (BlBounds origin: 0 @ 0 extent: self extent)
