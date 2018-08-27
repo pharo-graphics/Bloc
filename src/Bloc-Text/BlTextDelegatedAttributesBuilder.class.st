@@ -5,15 +5,18 @@ Class {
 	#name : #BlTextDelegatedAttributesBuilder,
 	#superclass : #BlTextAttributesBuilder,
 	#instVars : [
-		'attributesTarget'
+		'attributesTarget',
+		'attributeAddedBlock'
 	],
-	#category : 'Bloc-Text-Text-Support'
+	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #accessing }
 BlTextDelegatedAttributesBuilder >> attribute: aTextAttribute [
 	super attribute: aTextAttribute.
-	self attributesTarget attribute: aTextAttribute
+	self attributesTarget attribute: aTextAttribute.
+	
+	attributeAddedBlock cull: aTextAttribute
 ]
 
 { #category : #accessing }
@@ -27,4 +30,16 @@ BlTextDelegatedAttributesBuilder >> attributesTarget [
 BlTextDelegatedAttributesBuilder >> attributesTarget: aTBlTextStyleable [
 	attributesTarget := aTBlTextStyleable.
 	self applyOn: attributesTarget
+]
+
+{ #category : #initialization }
+BlTextDelegatedAttributesBuilder >> initialize [
+	super initialize.
+	
+	attributeAddedBlock := [  ]
+]
+
+{ #category : #scripting }
+BlTextDelegatedAttributesBuilder >> whenAdded: aBlock [
+	attributeAddedBlock := aBlock
 ]
