@@ -157,6 +157,20 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 ]
 
 { #category : #'debug - simulation' }
+BlSpace class >> simulateMouseDownOn: anElement [
+	"Simulate a mouse down event in the middle of a given element"
+	| aPosition |
+	
+	"we never know if an element was already layered out"
+	anElement topMostParent forceLayout.
+	aPosition := anElement bounds inSpace center.
+
+	self
+		simulateEvents: { BlMouseDownEvent primary position: aPosition }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
 BlSpace class >> simulateMouseMoveInside: anElement [
 	"Simulate a mouse move event at a random location within element's bounds"
 	| aPosition |
@@ -179,6 +193,20 @@ BlSpace class >> simulateMouseMoveOutside: anElement [
 	aPosition := self locationOutside: anElement.
 	self
 		simulateEvents: { BlMouseMoveEvent primary position: aPosition }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateMouseUpOn: anElement [
+	"Simulate a mouse up event in the middle of a given element"
+	| aPosition |
+	
+	"we never know if an element was already layered out"
+	anElement topMostParent forceLayout.
+	aPosition := anElement bounds inSpace center.
+
+	self
+		simulateEvents: { BlMouseUpEvent primary position: aPosition }
 		on: anElement
 ]
 
