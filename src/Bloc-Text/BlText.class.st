@@ -363,6 +363,11 @@ BlText >> textOffset [
 	^ 0
 ]
 
+{ #category : #'text - modifications' }
+BlText >> trimmer [
+	^ BlTextTrimmer new text: self.
+]
+
 { #category : #'text - lock' }
 BlText >> unlock [
 	"Unlock text. Now I can be modified"
