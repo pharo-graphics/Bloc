@@ -76,7 +76,9 @@ BlScrollableElement >> initialize [
 
 	self
 		when: BlMouseWheelEvent
-		do: [ :anEvent | self scrollBy: anEvent vector * 20 ]
+		do: [ :anEvent |
+			anEvent consumed: true.
+			self scrollBy: anEvent vector * 20 ]
 ]
 
 { #category : #layout }
