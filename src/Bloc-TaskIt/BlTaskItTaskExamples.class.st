@@ -48,6 +48,47 @@ BlTaskItTaskExamples >> addEnqueuedTaskToTheElementWithoutSpace [
 	^ anElement
 ]
 
+{ #category : #element }
+BlTaskItTaskExamples >> elementWithFailure [
+	<gtExample>
+	| anElement aTask |
+	anElement := BlElement new.
+	anElement 
+		size: 300@300;
+		relocate: 10@10;
+		background: Color blue.
+	aTask := BlEnqueuedTaskItAction new.
+	aTask action: [ 
+		10 timesRepeat: [ 
+			150 milliSeconds wait.
+			anElement background: Color random ].
+		Error signal ].
+	aTask onSuccessEnqueueTaskAction: [ anElement background: Color green ] in: anElement. 
+	aTask onFailureEnqueueTaskAction: [ anElement background: Color red ] in: anElement.
+	anElement enqueueTask: aTask.
+	^ anElement.
+]
+
+{ #category : #element }
+BlTaskItTaskExamples >> elementWithSuccessfulResult [
+	<gtExample>
+	| anElement aTask |
+	anElement := BlElement new.
+	anElement 
+		size: 300@300;
+		relocate: 10@10;
+		background: Color blue.
+	aTask := BlEnqueuedTaskItAction new.
+	aTask action: [ 
+		10 timesRepeat: [ 
+			150 milliSeconds wait.
+			anElement background: Color random ] ].
+	aTask onSuccessEnqueueTaskAction: [ anElement background: Color green ] in: anElement. 
+	aTask onFailureEnqueueTaskAction: [ anElement background: Color red ] in: anElement.
+	anElement enqueueTask: aTask.
+	^ anElement.
+]
+
 { #category : #'enqueued task' }
 BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTask [
 	<gtExample>

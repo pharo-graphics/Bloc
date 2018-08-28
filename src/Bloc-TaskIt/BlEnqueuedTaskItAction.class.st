@@ -34,8 +34,18 @@ BlEnqueuedTaskItAction >> onFailureDo: aCallback [
 ]
 
 { #category : #callbacks }
+BlEnqueuedTaskItAction >> onFailureEnqueueTaskAction: aCallback in: anElement [
+	self onFailureDo: [ :aResult | anElement enqueueTask: (BlTaskAction new action: aCallback) ]
+]
+
+{ #category : #callbacks }
 BlEnqueuedTaskItAction >> onSuccessDo: aCallback [
 	resultCallbacks add: aCallback
+]
+
+{ #category : #callbacks }
+BlEnqueuedTaskItAction >> onSuccessEnqueueTaskAction: aCallback in: anElement [
+	self onSuccessDo: [ :aResult | anElement enqueueTask: (BlTaskAction new action: aCallback) ]
 ]
 
 { #category : #'api - running' }
