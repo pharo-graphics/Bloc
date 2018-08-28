@@ -70,6 +70,41 @@ BlTaskItTaskExamples >> elementWithFailure [
 ]
 
 { #category : #element }
+BlTaskItTaskExamples >> elementWithRandomTermination [
+	<gtExample>
+	| anElement aTask aTerminateRequest |
+	aTerminateRequest := false.
+	anElement := BlElement new.
+	anElement 
+		size: 300@300;
+		relocate: 10@10;
+		background: Color blue.
+	aTask := BlEnqueuedTaskItAction new.
+	"long-lasting action"
+	aTask action: [ | anIndex |
+		anIndex := 1.
+		[ 	anIndex := anIndex + 1. 
+			anIndex < 100 and: [ aTerminateRequest not ] 
+		] whileTrue: [ 
+			150 milliSeconds wait.
+			anElement background: Color random ] ].
+	"Executed when a long-lasting action starts, 
+	it might be before or after as both happen in different processes"
+	aTask onStart: [ anElement border: (BlBorder builder width: 3; paint: Color black) ].
+	"To indicate a task progress, e.g. HTTPProgress"
+	aTask onProgressEnqueueTaskAction: [ :aProgress | 
+		anElement border: (BlBorder builder width: 3; paint: Color atRandom) ] in: anElement.
+	"if the task is finish successfully"
+	aTask onSuccessEnqueueTaskAction: [ anElement background: Color green ] in: anElement. 
+	"if the task fails"
+	aTask onFailureEnqueueTaskAction: [ anElement background: Color red ] in: anElement.
+	aTask onTerminationEnqueueTaskAction: [ anElement background: Color yellow ] in: anElement.
+	anElement enqueueTask: aTask.
+	10 atRandom < 5 ifTrue: [ aTask requestTermination ].
+	^ anElement.
+]
+
+{ #category : #element }
 BlTaskItTaskExamples >> elementWithSuccessfulResult [
 	<gtExample>
 	| anElement aTask |
