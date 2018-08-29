@@ -109,10 +109,15 @@ BlTaskItTaskExamples >> elementWithFailure [
 	aTask action: [ 
 		10 timesRepeat: [ 
 			150 milliSeconds wait.
-			anElement background: Color random ].
+			anElement enqueueTask: (BlTaskAction new action: [
+				anElement background: Color random ]) ].
 		Error signal ].
-	aTask onSuccessEnqueueAction: [ anElement background: Color green ] in: anElement. 
-	aTask onFailureEnqueueAction: [ anElement background: Color red ] in: anElement.
+	aTask 
+		onSuccessEnqueueAction: [ :aResult | anElement background: Color green ] 
+		in: anElement. 
+	aTask 
+		onFailureEnqueueAction: [ :anException | anElement background: Color red ] 
+		in: anElement.
 	anElement enqueueTask: aTask.
 	^ anElement.
 ]
@@ -165,9 +170,14 @@ BlTaskItTaskExamples >> elementWithSuccessfulResult [
 	aTask action: [ 
 		10 timesRepeat: [ 
 			150 milliSeconds wait.
-			anElement background: Color random ] ].
-	aTask onSuccessEnqueueAction: [ anElement background: Color green ] in: anElement. 
-	aTask onFailureEnqueueAction: [ anElement background: Color red ] in: anElement.
+			anElement enqueueTask: (BlTaskAction new action: [
+				anElement background: Color random ]) ] ].
+	aTask 
+		onSuccessEnqueueAction: [ :aResult | anElement background: Color green ] 
+		in: anElement. 
+	aTask 
+		onFailureEnqueueAction: [ :anException | anElement background: Color red ] 
+		in: anElement.
 	anElement enqueueTask: aTask.
 	^ anElement.
 ]
