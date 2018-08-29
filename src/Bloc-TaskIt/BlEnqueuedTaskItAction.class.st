@@ -28,30 +28,38 @@ BlEnqueuedTaskItAction >> initialize [
 
 ]
 
-{ #category : #callbacks }
+{ #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onFailureDo: aCallback [
 	exceptionCallbacks add: aCallback
 ]
 
-{ #category : #callbacks }
-BlEnqueuedTaskItAction >> onFailureEnqueueTaskAction: aCallback in: anElement [
-	self onFailureDo: [ :aResult | anElement enqueueTask: (BlTaskAction new action: aCallback) ]
+{ #category : #'api - callbacks' }
+BlEnqueuedTaskItAction >> onFailureEnqueueAction: aCallback in: anElement [
+	self onFailureDo: [ :aResult | 
+		anElement enqueueTask: (BlTaskAction new action: [ aCallback value: aResult ]) ]
 ]
 
-{ #category : #callbacks }
+{ #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onSuccessDo: aCallback [
 	resultCallbacks add: aCallback
 ]
 
-{ #category : #callbacks }
-BlEnqueuedTaskItAction >> onSuccessEnqueueTaskAction: aCallback in: anElement [
-	self onSuccessDo: [ :aResult | anElement enqueueTask: (BlTaskAction new action: aCallback) ]
+{ #category : #'api - callbacks' }
+BlEnqueuedTaskItAction >> onSuccessEnqueueAction: aCallback in: anElement [
+	self onSuccessDo: [ :aResult | 
+		anElement enqueueTask: (BlTaskAction new action: [ aCallback value: aResult ]) ]
 ]
 
 { #category : #'api - running' }
 BlEnqueuedTaskItAction >> run [
-	future := self action asTask future.
-	resultCallbacks do: [ :eachCallback | future onSuccessDo: eachCallback ].
-	exceptionCallbacks do: [ :eachCallback | future onFailureDo: eachCallback ].
-	
+	future := self runFuture.
+	resultCallbacks
+		do: [ :eachCallback | future onSuccessDo: eachCallback ].
+	exceptionCallbacks
+		do: [ :eachCallback | future onFailureDo: eachCallback ]
+]
+
+{ #category : #'api - running' }
+BlEnqueuedTaskItAction >> runFuture [
+	^ self action asTask future
 ]
