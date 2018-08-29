@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #accessing }
-BlNotificableTaskItAction >> action [
+BlNotificableTaskItAction >> futureAction [
 	^ [ [ super action value ] 
 			on: notification
 			do: handler ]
@@ -25,10 +25,11 @@ BlNotificableTaskItAction >> initialize [
 ]
 
 { #category : #'api - callbacks' }
-BlNotificableTaskItAction >> onNotification: aNotificationClass enqueueAction: aCallback in: anElement [
+BlNotificableTaskItAction >> onNotification: aNotificationClass enqueueAction: aCallback [
 	notification := aNotificationClass.
 	handler := [ :aNotification | 
-		anElement enqueueTask: (BlTaskAction new action: [ aCallback value: aNotification ]).
+		self element enqueueTask: (BlTaskAction new 
+			action: [ aCallback cull: aNotification cull: self ]).
 		aNotification resume ].
 ]
 
@@ -36,7 +37,7 @@ BlNotificableTaskItAction >> onNotification: aNotificationClass enqueueAction: a
 BlNotificableTaskItAction >> onRunEnqueueAction: aCallback [
 	| aTask |
 	aTask := BlTaskAction new.
-	aTask action: aCallback.
+	aTask action: [ aCallback cull: self ].
 	self onRunEnqueueTask: aTask.
 ]
 

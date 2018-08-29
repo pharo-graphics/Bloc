@@ -32,6 +32,11 @@ BlEnqueuedTaskItAction >> element: aBlElement [
 	element := aBlElement
 ]
 
+{ #category : #accessing }
+BlEnqueuedTaskItAction >> futureAction [
+	^ self action
+]
+
 { #category : #initialization }
 BlEnqueuedTaskItAction >> initialize [
 	super initialize.
@@ -49,13 +54,15 @@ BlEnqueuedTaskItAction >> onFailureDo: aCallback [
 { #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onFailureEnqueueAction: aCallback [
 	self onFailureDo: [ :aResult | 
-		self element enqueueTask: (BlTaskAction new action: [ aCallback cull: aResult ]) ]
+		self element enqueueTask: (BlTaskAction new 
+			action: [ aCallback cull: aResult cull: self ]) ]
 ]
 
 { #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onFinishEnqueueAction: aCallback [
 	self onFinishedDo: [ :aResultOrException | 
-		self element enqueueTask: (BlTaskAction new action: [ aCallback cull: aResultOrException ]) ]
+		self element enqueueTask: (BlTaskAction new 
+			action: [ aCallback cull: aResultOrException cull: self ]) ]
 ]
 
 { #category : #'api - callbacks' }
@@ -72,7 +79,8 @@ BlEnqueuedTaskItAction >> onSuccessDo: aCallback [
 { #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onSuccessEnqueueAction: aCallback [
 	self onSuccessDo: [ :aResult | 
-		self element enqueueTask: (BlTaskAction new action: [ aCallback cull: aResult ]) ]
+		self element enqueueTask: (BlTaskAction new 
+			action: [ aCallback cull: aResult cull: self ]) ]
 ]
 
 { #category : #'api - running' }
@@ -86,5 +94,5 @@ BlEnqueuedTaskItAction >> run [
 
 { #category : #'api - running' }
 BlEnqueuedTaskItAction >> runFuture [
-	^ self action asTask future
+	^ self futureAction asTask future
 ]

@@ -4,6 +4,74 @@ Class {
 	#category : #'Bloc-TaskIt'
 }
 
+{ #category : #'cancellable task' }
+BlTaskItTaskExamples >> addCancellableTaskToTheElementWithoutSpace [
+	<gtExample>
+	| anElement aWaitingElement aCancelButton anExecuteButton aCleaningBlock aTask anAction aStop aStep |
+	anElement := self progress.
+	anAction := BlTaskItDemoCommand new.
+	aWaitingElement := self waitingElement.
+	aCleaningBlock := [ :anElementName | 
+		anElement childNamed: anElementName ifFound: [ :aChild | aChild removeFromParent ] ifNone: [  ].
+	].
+	aTask := BlCancellableTaskItAction new.
+	aTask element: anElement.
+	aTask action: anAction.
+	aCancelButton := self cancelElement.
+	aCancelButton
+		addEventHandlerOn: BlClickEvent
+		do: [ aTask cancelRequest ].
+	anExecuteButton := self executeElement.
+	anExecuteButton addEventHandlerOn: BlClickEvent
+		do: [ anElement enqueueTask: (aTask action: BlTaskItDemoCommand new) ].
+	aStop := 0.1.
+	aStep := 0.01.
+	aTask
+		onRunEnqueueAction: [ 
+			aCleaningBlock value: #text.
+			aCleaningBlock value: #action.
+			anElement addChild: aWaitingElement as: #text.
+			anElement addChild: aCancelButton as: #action ].
+	aTask
+		onRunEnqueueRepeatedAction: [ aStop > 0.9
+				ifTrue: [ aStep := aStep negated ].
+			aStop < 0.1
+				ifTrue: [ aStep := aStep negated ].
+			aStop := aStop + aStep.
+			anElement background: (self gradientBackgroundAt: aStop) ].
+	aTask
+		onNotification: HTTPProgress
+		enqueueAction: [ :aProgress | 
+			aWaitingElement removeFromParent.
+			anElement children first
+				constraintsDo: [ :c | c frame horizontal weight: aProgress fraction asFloat ] ].
+	aTask
+		onSuccessEnqueueAction: [ :aResult | 
+			aCleaningBlock value: #text.
+			aCleaningBlock value: #action.
+			aTask wasCanceled
+				ifTrue: [ 
+					anElement addChild: self cancelledElement as: #text.
+					anElement addChild: anExecuteButton as: #action.
+					anElement children first
+						constraintsDo: [ :c | c frame horizontal weight: 0 ] ]
+				ifFalse: [ anElement addChild: self transferredElement as: #text ] ].
+	aTask
+		onFailureEnqueueAction: [ :anException | 
+			aCleaningBlock value: #action.
+			anElement addChild: self failureElement as: #text ].
+	aTask
+		onFinishEnqueueAction: [ 
+			anElement background: self containerColor ].
+	anElement enqueueTask: aTask.
+
+	"task was added to the local task queue"
+	self assert: anElement taskQueue tasks asArray equals: {aTask}.
+	"it was not executed"
+	self assert: aTask action equals: anAction.
+	^ anElement
+]
+
 { #category : #'enqueued task' }
 BlTaskItTaskExamples >> addElementWithEnqueuedTaskToSpace [
 	<gtExample>
@@ -61,8 +129,7 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace [
 		onNotification: HTTPProgress
 		enqueueAction: [ :aProgress | 
 			anElement children first
-				constraintsDo: [ :c | c frame horizontal weight: aProgress fraction asFloat ] ]
-		in: anElement.
+				constraintsDo: [ :c | c frame horizontal weight: aProgress fraction asFloat ] ].
 	aTask
 		onSuccessEnqueueAction: [ :aResult | anElement addChild: self transferredElement ].
 	aTask
@@ -88,13 +155,12 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
 	aTask action: anAction.
 	aStop := 0.1.
 	aStep := 0.01.
+	aTask onRunEnqueueAction: [ anElement addChild: aWaitingElement ].
 	aTask
-		onRunEnqueueAction: [ 
-			anElement addChild: aWaitingElement ].
-	aTask
-		onRunEnqueueRepeatedAction: [ 
-			aStop > 0.9 ifTrue: [ aStep := aStep negated ].
-			aStop < 0.1 ifTrue: [ aStep := aStep negated ].
+		onRunEnqueueRepeatedAction: [ aStop > 0.9
+				ifTrue: [ aStep := aStep negated ].
+			aStop < 0.1
+				ifTrue: [ aStep := aStep negated ].
 			aStop := aStop + aStep.
 			anElement background: (self gradientBackgroundAt: aStop) ].
 	aTask
@@ -102,17 +168,13 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
 		enqueueAction: [ :aProgress | 
 			aWaitingElement removeFromParent.
 			anElement children first
-				constraintsDo: [ :c | c frame horizontal weight: aProgress fraction asFloat ] ]
-		in: anElement.
+				constraintsDo: [ :c | c frame horizontal weight: aProgress fraction asFloat ] ].
 	aTask
-		onSuccessEnqueueAction: [ :aResult | 
-			anElement addChild: self transferredElement ].
+		onSuccessEnqueueAction: [ :aResult | anElement addChild: self transferredElement ].
 	aTask
-		onFailureEnqueueAction: [ :anException | 
-			anElement addChild: self failureElement ].
-	aTask 
-		onFinishEnqueueAction: [ 
-			aWaitingElement removeFromParent.
+		onFailureEnqueueAction: [ :anException | anElement addChild: self failureElement ].
+	aTask
+		onFinishEnqueueAction: [ aWaitingElement removeFromParent.
 			anElement background: self containerColor ].
 	anElement enqueueTask: aTask.
 
@@ -121,6 +183,28 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
 	"it was not executed"
 	self assert: aTask action ~= anAction.
 	^ anElement
+]
+
+{ #category : #'element instance creation' }
+BlTaskItTaskExamples >> cancelElement [
+	<gtExample>
+	^ BlElement new 
+			geometry: BlCircle new;
+			size: 12@12;
+			background: Color red;
+			constraintsDo: [ :c | 
+				c frame horizontal alignRight.
+				c frame vertical alignCenter ]
+]
+
+{ #category : #'element instance creation' }
+BlTaskItTaskExamples >> cancelledElement [
+	<gtExample>
+	^ BlTextElement new 
+			text: 'cancelled' asRopedText;
+			constraintsDo: [ :c | 
+				c frame horizontal alignCenter.
+				c frame vertical alignCenter ]
 ]
 
 { #category : #'element instance creation' }
@@ -144,7 +228,7 @@ BlTaskItTaskExamples >> element [
 	^ BlElement new
 ]
 
-{ #category : #element }
+{ #category : #'enqueued task' }
 BlTaskItTaskExamples >> elementWithFailure [
 	<gtExample>
 	| anElement aTask |
@@ -169,57 +253,7 @@ BlTaskItTaskExamples >> elementWithFailure [
 	^ anElement
 ]
 
-{ #category : #element }
-BlTaskItTaskExamples >> elementWithRandomTermination [
-	<gtExample>
-	| anElement aTask aTerminateRequest |
-	aTerminateRequest := false.
-	anElement := BlElement new.
-	anElement
-		size: 300 @ 300;
-		relocate: 10 @ 10;
-		background: Color blue.
-	aTask := BlEnqueuedTaskItAction new.
-	aTask element: anElement.
-	"long-lasting action"
-	aTask
-		action: [ | anIndex |
-			anIndex := 1.
-			[ anIndex := anIndex + 1.
-			anIndex < 100 and: [ aTerminateRequest not ] ]
-				whileTrue: [ 150 milliSeconds wait.
-					anElement background: Color random ] ].
-	"Executed when a long-lasting action starts, 
-	it might be before or after as both happen in different processes"
-	aTask
-		onStart: [ anElement
-				border:
-					(BlBorder builder
-						width: 3;
-						paint: Color black) ].
-	"To indicate a task progress, e.g. HTTPProgress"
-	aTask
-		onProgressEnqueueTaskAction: [ :aProgress | 
-			anElement
-				border:
-					(BlBorder builder
-						width: 3;
-						paint: Color atRandom) ]
-		in: anElement.
-	"if the task is finish successfully"
-	aTask onSuccessEnqueueAction: [ anElement background: Color green ].
-	"if the task fails"
-	aTask onFailureEnqueueAction: [ anElement background: Color red ].
-	aTask
-		onTerminationEnqueueTaskAction: [ anElement background: Color indicator ]
-		in: anElement.
-	anElement enqueueTask: aTask.
-	10 atRandom < 5
-		ifTrue: [ aTask requestTermination ].
-	^ anElement
-]
-
-{ #category : #element }
+{ #category : #'enqueued task' }
 BlTaskItTaskExamples >> elementWithSuccessfulResult [
 	<gtExample>
 	| anElement aTask |
@@ -241,6 +275,18 @@ BlTaskItTaskExamples >> elementWithSuccessfulResult [
 		onFailureEnqueueAction: [ :anException | anElement background: Color red ].
 	anElement enqueueTask: aTask.
 	^ anElement
+]
+
+{ #category : #'element instance creation' }
+BlTaskItTaskExamples >> executeElement [
+	<gtExample>
+	^ BlElement new 
+			geometry: BlCircle new;
+			size: 12@12;
+			background: Color green;
+			constraintsDo: [ :c | 
+				c frame horizontal alignLeft.
+				c frame vertical alignCenter ]
 ]
 
 { #category : #'element instance creation' }
@@ -270,6 +316,18 @@ BlTaskItTaskExamples >> indicator [
 	
 	^ self element
 		background: (Color white alpha: 0.5)
+]
+
+{ #category : #'element instance creation' }
+BlTaskItTaskExamples >> pauseElement [
+	<gtExample>
+	^ BlElement new 
+			geometry: BlCircle new;
+			size: 12@12;
+			background: Color yellow;
+			constraintsDo: [ :c | 
+				c frame horizontal alignRight.
+				c frame vertical alignCenter ]
 ]
 
 { #category : #'element instance creation' }

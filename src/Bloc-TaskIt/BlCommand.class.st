@@ -22,8 +22,14 @@ BlCommand >> asTask [
 ]
 
 { #category : #'api - execution' }
+BlCommand >> cancelRequest [
+	"Every command is responsible to terminate nicely"
+	self subclassResponsibility
+]
+
+{ #category : #'api - execution' }
 BlCommand >> execute [
-	^ self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #'api - taskit' }
@@ -43,13 +49,14 @@ BlCommand >> schedule [
 	^ self asTask schedule
 ]
 
-{ #category : #'api - execution' }
-BlCommand >> terminationRequest [
-	"Every command is responsible to terminate nicely"
-	self subclassResponsibility
-]
-
 { #category : #'api - taskit' }
 BlCommand >> value [
 	^ self execute; result
+]
+
+{ #category : #'api - testing' }
+BlCommand >> wasCanceled [
+	"Answer whether an execution was canceled"
+	<return: #Boolean>
+	^ self subclassResponsibility
 ]
