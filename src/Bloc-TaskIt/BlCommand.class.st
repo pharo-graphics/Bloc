@@ -27,6 +27,37 @@ BlCommand >> cancelRequest [
 	self subclassResponsibility
 ]
 
+{ #category : #evaluating }
+BlCommand >> cull: anArg [
+	^ self numberOfArguments = 0
+		ifTrue: [ self value ]
+		ifFalse: [ self value: anArg ]
+]
+
+{ #category : #evaluating }
+BlCommand >> cull: firstArg cull: secondArg [
+	^ self numberOfArguments < 2
+		ifTrue: [self cull: firstArg]
+		ifFalse: [self value: firstArg value: secondArg]
+	
+]
+
+{ #category : #evaluating }
+BlCommand >> cull: firstArg cull: secondArg cull: thirdArg [
+	^ self numberOfArguments < 3
+		ifTrue: [self cull: firstArg cull: secondArg]
+		ifFalse: [self value: firstArg value: secondArg value: thirdArg]
+	
+]
+
+{ #category : #evaluating }
+BlCommand >> cull: firstArg cull: secondArg cull: thirdArg cull: fourthArg [
+	^ self numberOfArguments < 4
+		ifTrue: [self cull: firstArg cull: secondArg cull: thirdArg]
+		ifFalse: [self value: firstArg value: secondArg value: thirdArg value: fourthArg]
+	
+]
+
 { #category : #'api - execution' }
 BlCommand >> execute [
 	self subclassResponsibility
@@ -35,6 +66,11 @@ BlCommand >> execute [
 { #category : #'api - taskit' }
 BlCommand >> future [
 	^ self asTask future
+]
+
+{ #category : #evaluating }
+BlCommand >> numberOfArguments [
+	^ 0
 ]
 
 { #category : #'api - execution' }
@@ -49,7 +85,7 @@ BlCommand >> schedule [
 	^ self asTask schedule
 ]
 
-{ #category : #'api - taskit' }
+{ #category : #evaluating }
 BlCommand >> value [
 	^ self execute; result
 ]

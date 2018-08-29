@@ -10,7 +10,7 @@ Class {
 
 { #category : #signalling }
 BlProgress class >> signal: signalerText amount: amount total: total [
-	"Create and signal progress with amount bytes transferred out of total.
+	"Create and signal progress with amount units transferred out of total.
 	Use an additional signalerText."
 
 	^ self new
@@ -20,7 +20,7 @@ BlProgress class >> signal: signalerText amount: amount total: total [
 
 { #category : #signalling }
 BlProgress class >> signalAmount: amount total: total [
-	"Create and signal progress with amount bytes transferred out of total."
+	"Create and signal progress with amount units transferred out of total."
 	
 	^ self new
 		amount: amount total: total;
@@ -29,6 +29,7 @@ BlProgress class >> signalAmount: amount total: total [
 
 { #category : #accessing }
 BlProgress >> amount [
+	<return: #Number>
 	^ amount
 ]
 
@@ -39,7 +40,7 @@ BlProgress >> amount: anAmountNumber total: aTotalNumber [
 		description: [ 'Progress amount and total numbers must be non-nil' ].
 	self
 		assert: [ anAmountNumber >= 0 and: [ anAmountNumber <= aTotalNumber ] ]
-		description: [ 'Progress amount must be pozitive number less or equal to total number' ].
+		description: [ 'Progress amount must be positive number less or equal to total number' ].
 
 	amount := anAmountNumber.
 	total := aTotalNumber.

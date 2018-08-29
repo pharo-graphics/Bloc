@@ -17,7 +17,7 @@ BlValuableCommand >> cancelRequest [
 
 { #category : #'api - execution' }
 BlValuableCommand >> execute [
-	self valuable value
+	result := self valuable value
 ]
 
 { #category : #accessing }

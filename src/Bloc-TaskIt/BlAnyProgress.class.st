@@ -1,5 +1,5 @@
 Class {
-	#name : #BlUnknownProgress,
+	#name : #BlAnyProgress,
 	#superclass : #BlTaskNotification,
 	#category : #'Bloc-TaskIt'
 }

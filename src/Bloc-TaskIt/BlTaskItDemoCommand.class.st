@@ -25,6 +25,64 @@ BlTaskItDemoCommand >> execute [
 		(Delay forMilliseconds: 100) wait ]
 ]
 
+{ #category : #'gt-extension' }
+BlTaskItDemoCommand >> gtLong2LastingComputacionFor: aView [
+	<gtView>
+	^ aView taskItExplicitView 
+		title: 'Looong 2';
+		priority: 4;
+		stencil: [ 
+			6 seconds wait.
+			BlTextElement new
+				text: 'Finished' asRopedText;
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ] ]
+]
+
+{ #category : #'gt-extension' }
+BlTaskItDemoCommand >> gtLongLastingComputacionFor: aView [
+	<gtView>
+	^ aView taskItExplicitView 
+		title: 'Looong';
+		priority: 3;
+		stencil: [ 
+			3 seconds wait.
+			BlTextElement new
+				text: 'Finished' asRopedText;
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ] ]
+]
+
+{ #category : #'gt-extension' }
+BlTaskItDemoCommand >> gtShort2LastingComputacionFor: aView [
+	<gtView>
+	^ aView taskItExplicitView 
+		title: 'Short 2';
+		priority: 2;
+		stencil: [ 
+			BlTextElement new
+				text: 'I am fast too' asRopedText;
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ] ]
+]
+
+{ #category : #'gt-extension' }
+BlTaskItDemoCommand >> gtShortLastingComputacionFor: aView [
+	<gtView>
+	^ aView taskItExplicitView 
+		title: 'Short';
+		priority: 1;
+		stencil: [ 
+			BlTextElement new
+				text: 'I am fast' asRopedText;
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical matchParent ] ]
+]
+
 { #category : #initialization }
 BlTaskItDemoCommand >> initialize [
 	super initialize.
