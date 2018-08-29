@@ -96,15 +96,7 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
 			aStop > 0.9 ifTrue: [ aStep := aStep negated ].
 			aStop < 0.1 ifTrue: [ aStep := aStep negated ].
 			aStop := aStop + aStep.
-			anElement
-				background:
-					(BlLinearGradientPaint new
-						stops:
-							{(0.0 -> Color gray).
-							(aStop -> Color gray muchLighter).
-							(1.0 -> Color gray)};
-						start: 0@0;
-						end: 1@1) ].
+			anElement background: (self gradientBackgroundAt: aStop) ].
 	aTask
 		onNotification: HTTPProgress
 		enqueueAction: [ :aProgress | 
@@ -121,7 +113,7 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
 	aTask 
 		onFinishEnqueueAction: [ 
 			aWaitingElement removeFromParent.
-			anElement background: Color gray ].
+			anElement background: self containerColor ].
 	anElement enqueueTask: aTask.
 
 	"task was added to the local task queue"
@@ -134,10 +126,15 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
 { #category : #'element instance creation' }
 BlTaskItTaskExamples >> container [
 	<gtExample>
-	
 	^ self element
 		padding: (BlInsets all: 10);
-		background: Color gray
+		background: self containerColor
+]
+
+{ #category : #colors }
+BlTaskItTaskExamples >> containerColor [
+	<gtExample>
+	^ Color gray
 ]
 
 { #category : #'element instance creation' }
@@ -254,6 +251,17 @@ BlTaskItTaskExamples >> failureElement [
 			constraintsDo: [ :c | 
 				c frame horizontal alignCenter.
 				c frame vertical alignCenter ]
+]
+
+{ #category : #colors }
+BlTaskItTaskExamples >> gradientBackgroundAt: aStop [
+	^ BlLinearGradientPaint new
+						stops:
+							{(0.0 -> Color gray).
+							(aStop -> Color gray muchLighter).
+							(1.0 -> Color gray)};
+						start: 0@0;
+						end: 1@1
 ]
 
 { #category : #'element instance creation' }
