@@ -40,7 +40,7 @@ BlTaskItTaskExamples >> addCancellableTaskToTheElementWithoutSpace [
 			aStop := aStop + aStep.
 			anElement background: (self gradientBackgroundAt: aStop) ].
 	aTask
-		onNotification: HTTPProgress
+		onNotification: BlProgress
 		enqueueAction: [ :aProgress | 
 			aWaitingElement removeFromParent.
 			anElement children first
@@ -119,33 +119,6 @@ BlTaskItTaskExamples >> addEnqueuedTaskToTheElementWithoutSpace [
 { #category : #'notificable task' }
 BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace [
 	<gtExample>
-	| anElement aTask anAction |
-	anElement := self progress.
-	aTask := BlNotificableTaskItAction new.
-	anAction := self transferringActionWithProgressNotification.
-	aTask action: anAction.
-	aTask element: anElement.
-	aTask
-		onNotification: HTTPProgress
-		enqueueAction: [ :aProgress | 
-			anElement children first
-				constraintsDo: [ :c | c frame horizontal weight: aProgress fraction asFloat ] ].
-	aTask
-		onSuccessEnqueueAction: [ :aResult | anElement addChild: self transferredElement ].
-	aTask
-		onFailureEnqueueAction: [ :anException | anElement addChild: self failureElement ].
-	anElement enqueueTask: aTask.
-
-	"task was added to the local task queue"
-	self assert: anElement taskQueue tasks asArray equals: {aTask}.
-	"it was not executed"
-	self assert: aTask action ~= anAction.
-	^ anElement
-]
-
-{ #category : #'notificable task' }
-BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
-	<gtExample>
 	| anElement aWaitingElement aTask anAction aStop aStep |
 	anElement := self progress.
 	aWaitingElement := self waitingElement.
@@ -164,7 +137,7 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
 			aStop := aStop + aStep.
 			anElement background: (self gradientBackgroundAt: aStop) ].
 	aTask
-		onNotification: HTTPProgress
+		onNotification: BlProgress
 		enqueueAction: [ :aProgress | 
 			aWaitingElement removeFromParent.
 			anElement children first
@@ -180,8 +153,33 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace2 [
 
 	"task was added to the local task queue"
 	self assert: anElement taskQueue tasks asArray equals: {aTask}.
-	"it was not executed"
-	self assert: aTask action ~= anAction.
+
+	^ anElement
+]
+
+{ #category : #'notificable task' }
+BlTaskItTaskExamples >> addSimpleNotificableTaskToTheElementWithoutSpace [
+	<gtExample>
+	| anElement aTask anAction |
+	anElement := self progress.
+	aTask := BlNotificableTaskItAction new.
+	anAction := self transferringActionWithProgressNotification.
+	aTask action: anAction.
+	aTask element: anElement.
+	aTask
+		onNotification: BlProgress
+		enqueueAction: [ :aProgress | 
+			anElement children first
+				constraintsDo: [ :c | c frame horizontal weight: aProgress fraction asFloat ] ].
+	aTask
+		onSuccessEnqueueAction: [ :aResult | anElement addChild: self transferredElement ].
+	aTask
+		onFailureEnqueueAction: [ :anException | anElement addChild: self failureElement ].
+	anElement enqueueTask: aTask.
+
+	"task was added to the local task queue"
+	self assert: anElement taskQueue tasks asArray equals: {aTask}.
+
 	^ anElement
 ]
 
@@ -316,18 +314,6 @@ BlTaskItTaskExamples >> indicator [
 	
 	^ self element
 		background: (Color white alpha: 0.5)
-]
-
-{ #category : #'element instance creation' }
-BlTaskItTaskExamples >> pauseElement [
-	<gtExample>
-	^ BlElement new 
-			geometry: BlCircle new;
-			size: 12@12;
-			background: Color yellow;
-			constraintsDo: [ :c | 
-				c frame horizontal alignRight.
-				c frame vertical alignCenter ]
 ]
 
 { #category : #'element instance creation' }
@@ -470,7 +456,7 @@ BlTaskItTaskExamples >> transferringActionWithProgressNotification [
 	^ [ 
 		3 seconds wait. 
 		1 to: 20 do: [ :each |
-			HTTPProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
+			BlProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
 			(Delay forMilliseconds: 100) wait ] ]
 ]
 

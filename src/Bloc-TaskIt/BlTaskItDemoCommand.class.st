@@ -21,7 +21,7 @@ BlTaskItDemoCommand >> execute [
 		(Delay forMilliseconds: 100) wait ]. 
 	1 to: 20 do: [ :each |
 		cancelRequested ifTrue: [ wasCanceled := true. ^ self ].
-		HTTPProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
+		BlProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
 		(Delay forMilliseconds: 100) wait ]
 ]
 
