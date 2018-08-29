@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'action',
 		'resultCallbacks',
-		'exceptionCallbacks'
+		'exceptionCallbacks',
+		'element'
 	],
 	#category : #'Bloc-TaskIt'
 }
@@ -17,6 +18,18 @@ BlEnqueuedTaskItAction >> action [
 { #category : #accessing }
 BlEnqueuedTaskItAction >> action: anObject [
 	action := anObject.
+]
+
+{ #category : #accessing }
+BlEnqueuedTaskItAction >> element [
+	<return: #BlElement>
+
+	^ element
+]
+
+{ #category : #accessing }
+BlEnqueuedTaskItAction >> element: aBlElement [
+	element := aBlElement
 ]
 
 { #category : #initialization }
@@ -34,9 +47,21 @@ BlEnqueuedTaskItAction >> onFailureDo: aCallback [
 ]
 
 { #category : #'api - callbacks' }
-BlEnqueuedTaskItAction >> onFailureEnqueueAction: aCallback in: anElement [
+BlEnqueuedTaskItAction >> onFailureEnqueueAction: aCallback [
 	self onFailureDo: [ :aResult | 
-		anElement enqueueTask: (BlTaskAction new action: [ aCallback value: aResult ]) ]
+		self element enqueueTask: (BlTaskAction new action: [ aCallback cull: aResult ]) ]
+]
+
+{ #category : #'api - callbacks' }
+BlEnqueuedTaskItAction >> onFinishEnqueueAction: aCallback [
+	self onFinishedDo: [ :aResultOrException | 
+		self element enqueueTask: (BlTaskAction new action: [ aCallback cull: aResultOrException ]) ]
+]
+
+{ #category : #'api - callbacks' }
+BlEnqueuedTaskItAction >> onFinishedDo: aCallback [
+	self onSuccessDo: aCallback.
+	self onFailureDo: aCallback.
 ]
 
 { #category : #'api - callbacks' }
@@ -45,9 +70,9 @@ BlEnqueuedTaskItAction >> onSuccessDo: aCallback [
 ]
 
 { #category : #'api - callbacks' }
-BlEnqueuedTaskItAction >> onSuccessEnqueueAction: aCallback in: anElement [
+BlEnqueuedTaskItAction >> onSuccessEnqueueAction: aCallback [
 	self onSuccessDo: [ :aResult | 
-		anElement enqueueTask: (BlTaskAction new action: [ aCallback value: aResult ]) ]
+		self element enqueueTask: (BlTaskAction new action: [ aCallback cull: aResult ]) ]
 ]
 
 { #category : #'api - running' }
