@@ -49,7 +49,7 @@ BlTaskItTaskExamples >> addEnqueuedTaskToTheElementWithoutSpace [
 ]
 
 { #category : #'notificable task' }
-BlTaskItTaskExamples >> addTerminableTaskToTheElementWithoutSpace [
+BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace [
 	<gtExample>
 	| anElement aTask anAction |
 	
@@ -61,7 +61,7 @@ BlTaskItTaskExamples >> addTerminableTaskToTheElementWithoutSpace [
 		onNotification: HTTPProgress 
 		enqueueAction: [ :aProgress | 
 			anElement children first constraintsDo: [ :c | 
-				c frame horizontal weight: aProgress fraction ] ]
+				c frame horizontal weight: aProgress fraction asFloat ] ]
 		in: anElement.
 	aTask 
 		onSuccessEnqueueAction: [ :aResult | anElement addChild: self transferredElement ] 
