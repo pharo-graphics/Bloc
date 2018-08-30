@@ -10,32 +10,24 @@ Class {
 
 { #category : #accessing }
 BlNotificableTaskItAction >> futureAction [
-	^ [ BlSignalProgress 
-		value: notifications isEmpty not
-		during: [ [ self action value ] 
-			on: (notifications collect: #notification)
-			do: [ :aNotification | 
-				notifications do: [ :eachHandler |
-					eachHandler handle: aNotification ] ] ] ]
+	^ [ notifications maybeNotifyDuring: [ self action value ] ]
 ]
 
 { #category : #initialization }
 BlNotificableTaskItAction >> initialize [
 	super initialize.
-	notifications := OrderedCollection new.
+	notifications := BlTaskNotifications new.
 	runTasks := OrderedCollection new.
 ]
 
 { #category : #'api - callbacks' }
 BlNotificableTaskItAction >> onNotification: aNotificationClass enqueueAction: aCallback [
-	| aHandler |
-	aHandler := BlTaskNotificationHandler new.
-	aHandler notification: aNotificationClass.
-	aHandler handler: [ :aNotification | 
-		self element enqueueTask: (BlTaskAction new 
-			action: [ aCallback cull: aNotification cull: self ]).
-		aNotification resume ].
-	notifications add: aHandler.
+	notifications 
+		addNotification: aNotificationClass 
+		handler: [ :aNotification | 
+			self element enqueueTask: (BlTaskAction new 
+				action: [ aCallback cull: aNotification cull: self ]).
+			aNotification resume ].
 ]
 
 { #category : #'api - callbacks' }

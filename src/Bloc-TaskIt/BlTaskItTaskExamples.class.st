@@ -39,7 +39,7 @@ BlTaskItTaskExamples >> addCancellableTaskToTheElementWithoutSpace [
 			aStop := aStop + aStep.
 			anElement background: (self gradientBackgroundAt: aStop) ].
 	aTask
-		onNotification: BlProgress
+		onNotification: BlExactProgress
 		enqueueAction: [ :aProgress | 
 			aWaitingElement removeFromParent.
 			anElement children first
@@ -135,7 +135,7 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace [
 			aStop := aStop + aStep.
 			anElement background: (self gradientBackgroundAt: aStop) ].
 	aTask
-		onNotification: BlProgress
+		onNotification: BlExactProgress
 		enqueueAction: [ :aProgress | 
 			aWaitingElement removeFromParent.
 			anElement children first
@@ -164,7 +164,7 @@ BlTaskItTaskExamples >> addSimpleNotificableTaskToTheElementWithoutSpace [
 	anAction := self transferringActionWithProgressNotification.
 	aTask action: anAction.
 	aTask
-		onNotification: BlProgress
+		onNotification: BlExactProgress
 		enqueueAction: [ :aProgress | 
 			anElement children first
 				constraintsDo: [ :c | c frame horizontal weight: aProgress fraction asFloat ] ].
@@ -451,7 +451,7 @@ BlTaskItTaskExamples >> transferringActionWithProgressNotification [
 	^ [ 
 		3 seconds wait. 
 		1 to: 20 do: [ :each |
-			BlProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
+			BlExactProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
 			(Delay forMilliseconds: 100) wait ] ]
 ]
 

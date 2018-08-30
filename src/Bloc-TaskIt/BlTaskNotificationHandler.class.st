@@ -25,6 +25,12 @@ BlTaskNotificationHandler >> handler: anObject [
 ]
 
 { #category : #accessing }
+BlTaskNotificationHandler >> handles: aNotification [
+	aNotification class = self notification ifFalse: [ ^ self ].
+	^ self handler cull: aNotification
+]
+
+{ #category : #accessing }
 BlTaskNotificationHandler >> notification [
 	^ notification
 ]
