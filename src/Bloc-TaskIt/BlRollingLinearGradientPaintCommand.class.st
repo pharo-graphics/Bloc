@@ -6,7 +6,7 @@ Class {
 		'stop',
 		'paint'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Commands'
 }
 
 { #category : #'api - execution' }

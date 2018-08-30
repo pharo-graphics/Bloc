@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Commands'
 }
 
 { #category : #accessing }

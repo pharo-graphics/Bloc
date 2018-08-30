@@ -1,11 +1,11 @@
 Class {
 	#name : #BlProgress,
-	#superclass : #BlTaskNotification,
+	#superclass : #BlTaskProgress,
 	#instVars : [
 		'amount',
 		'total'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Signals'
 }
 
 { #category : #signalling }

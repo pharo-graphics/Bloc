@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTaskItTaskExamples,
 	#superclass : #Object,
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Examples'
 }
 
 { #category : #'cancellable task' }
@@ -15,7 +15,6 @@ BlTaskItTaskExamples >> addCancellableTaskToTheElementWithoutSpace [
 		anElement childNamed: anElementName ifFound: [ :aChild | aChild removeFromParent ] ifNone: [  ].
 	].
 	aTask := BlCancellableTaskItAction new.
-	aTask element: anElement.
 	aTask action: anAction.
 	aCancelButton := self cancelElement.
 	aCancelButton
@@ -124,7 +123,6 @@ BlTaskItTaskExamples >> addNotificableTaskToTheElementWithoutSpace [
 	aWaitingElement := self waitingElement.
 	aTask := BlNotificableTaskItAction new.
 	anAction := self transferringActionWithProgressNotification.
-	aTask element: anElement.
 	aTask action: anAction.
 	aStop := 0.1.
 	aStep := 0.01.
@@ -165,7 +163,6 @@ BlTaskItTaskExamples >> addSimpleNotificableTaskToTheElementWithoutSpace [
 	aTask := BlNotificableTaskItAction new.
 	anAction := self transferringActionWithProgressNotification.
 	aTask action: anAction.
-	aTask element: anElement.
 	aTask
 		onNotification: BlProgress
 		enqueueAction: [ :aProgress | 
@@ -236,7 +233,6 @@ BlTaskItTaskExamples >> elementWithFailure [
 		relocate: 10 @ 10;
 		background: Color blue.
 	aTask := BlEnqueuedTaskItAction new.
-	aTask element: anElement.
 	aTask
 		action: [ 10
 				timesRepeat: [ 150 milliSeconds wait.
@@ -261,7 +257,6 @@ BlTaskItTaskExamples >> elementWithSuccessfulResult [
 		relocate: 10 @ 10;
 		background: Color blue.
 	aTask := BlEnqueuedTaskItAction new.
-	aTask element: anElement.
 	aTask
 		action: [ 10
 				timesRepeat: [ 150 milliSeconds wait.

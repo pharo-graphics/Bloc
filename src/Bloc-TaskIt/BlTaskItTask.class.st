@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'future'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Tasks'
 }
 
 { #category : #accessing }

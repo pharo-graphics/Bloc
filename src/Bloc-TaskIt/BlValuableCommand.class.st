@@ -5,7 +5,7 @@ Class {
 		'result',
 		'valuable'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Commands'
 }
 
 { #category : #'api - execution' }

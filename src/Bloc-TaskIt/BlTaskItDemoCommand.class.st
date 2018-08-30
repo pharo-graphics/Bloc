@@ -8,7 +8,7 @@ Class {
 		'cancelRequested',
 		'wasCanceled'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Commands'
 }
 
 { #category : #'api - execution' }
@@ -24,7 +24,7 @@ BlTaskItDemoCommand >> execute [
 		(Delay forMilliseconds: 100) wait ]. 
 	1 to: 20 do: [ :each |
 		cancelRequested ifTrue: [ wasCanceled := true. ^ self ].
-		BlProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
+		BlTaskProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
 		(Delay forMilliseconds: 100) wait ]
 ]
 

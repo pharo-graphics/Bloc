@@ -7,7 +7,7 @@ Class {
 		'exceptionCallbacks',
 		'element'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Tasks'
 }
 
 { #category : #accessing }

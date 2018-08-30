@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Commands'
 }
 
 { #category : #testing }

@@ -2,35 +2,40 @@ Class {
 	#name : #BlNotificableTaskItAction,
 	#superclass : #BlEnqueuedTaskItAction,
 	#instVars : [
-		'notification',
-		'handler',
-		'runTasks'
+		'runTasks',
+		'notifications'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Tasks'
 }
 
 { #category : #accessing }
 BlNotificableTaskItAction >> futureAction [
-	^ [ [ super action value ] 
-			on: notification
-			do: handler ]
+	^ [ BlSignalProgress 
+		value: notifications isEmpty not
+		during: [ [ self action value ] 
+			on: (notifications collect: #notification)
+			do: [ :aNotification | 
+				notifications do: [ :eachHandler |
+					eachHandler handle: aNotification ] ] ] ]
 ]
 
 { #category : #initialization }
 BlNotificableTaskItAction >> initialize [
 	super initialize.
-	handler := [ :aNotification | "do nothing" ].
-	notification := BlTaskNotification.
+	notifications := OrderedCollection new.
 	runTasks := OrderedCollection new.
 ]
 
 { #category : #'api - callbacks' }
 BlNotificableTaskItAction >> onNotification: aNotificationClass enqueueAction: aCallback [
-	notification := aNotificationClass.
-	handler := [ :aNotification | 
+	| aHandler |
+	aHandler := BlTaskNotificationHandler new.
+	aHandler notification: aNotificationClass.
+	aHandler handler: [ :aNotification | 
 		self element enqueueTask: (BlTaskAction new 
 			action: [ aCallback cull: aNotification cull: self ]).
 		aNotification resume ].
+	notifications add: aHandler.
 ]
 
 { #category : #'api - callbacks' }

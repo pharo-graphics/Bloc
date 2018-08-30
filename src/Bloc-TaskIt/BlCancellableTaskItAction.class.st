@@ -1,7 +1,7 @@
 Class {
 	#name : #BlCancellableTaskItAction,
 	#superclass : #BlNotificableTaskItAction,
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Tasks'
 }
 
 { #category : #accessing }
