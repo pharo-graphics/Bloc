@@ -18,6 +18,9 @@ BaselineOfBloc >> baseline: spec [
 		baseline: 'SpartaDevelopment' with: [ spec
 			repository: 'github://syrel/sparta/src' ];
 
+		baseline: 'TaskIt' with: [ spec 
+			repository: 'github://sbragagnolo/taskit:dev-0.5' ];
+
 		"GT-Examples is examples and testing framework"
 		baseline: 'GToolkitExamplesEngine' with: [ spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
 
@@ -59,8 +62,10 @@ BaselineOfBloc >> baseline: spec [
 		"Contains moldable extensions to various GT tools
 			- requires sparta to perform custom rendering"
 		package: #'Bloc-Extensions' with: [ spec 
-			requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool') ]
-		
+			requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool') ];
+
+		package: 'Bloc-TaskIt' with: [ spec
+			requires: #( 'TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' ) ]
 	].
 
 	spec for: #'pharo6.x' do: [ 
