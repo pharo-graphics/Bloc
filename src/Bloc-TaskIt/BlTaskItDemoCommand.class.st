@@ -1,3 +1,6 @@
+"
+GtInspector openOn: BlTaskItDemoCommand new
+"
 Class {
 	#name : #BlTaskItDemoCommand,
 	#superclass : #BlCommand,
@@ -28,7 +31,7 @@ BlTaskItDemoCommand >> execute [
 { #category : #'gt-extension' }
 BlTaskItDemoCommand >> gtLong2LastingComputacionFor: aView [
 	<gtView>
-	^ aView taskItExplicitView 
+	^ aView taskItExplicit 
 		title: 'Looong 2';
 		priority: 4;
 		stencil: [ 
@@ -43,7 +46,7 @@ BlTaskItDemoCommand >> gtLong2LastingComputacionFor: aView [
 { #category : #'gt-extension' }
 BlTaskItDemoCommand >> gtLongLastingComputacionFor: aView [
 	<gtView>
-	^ aView taskItExplicitView 
+	^ aView taskItExplicit 
 		title: 'Looong';
 		priority: 3;
 		stencil: [ 
@@ -58,7 +61,7 @@ BlTaskItDemoCommand >> gtLongLastingComputacionFor: aView [
 { #category : #'gt-extension' }
 BlTaskItDemoCommand >> gtShort2LastingComputacionFor: aView [
 	<gtView>
-	^ aView taskItExplicitView 
+	^ aView taskItExplicit 
 		title: 'Short 2';
 		priority: 2;
 		stencil: [ 
@@ -72,7 +75,7 @@ BlTaskItDemoCommand >> gtShort2LastingComputacionFor: aView [
 { #category : #'gt-extension' }
 BlTaskItDemoCommand >> gtShortLastingComputacionFor: aView [
 	<gtView>
-	^ aView taskItExplicitView 
+	^ aView taskItExplicit 
 		title: 'Short';
 		priority: 1;
 		stencil: [ 
