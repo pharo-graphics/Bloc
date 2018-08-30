@@ -46,6 +46,11 @@ BlEnqueuedTaskItAction >> initialize [
 
 ]
 
+{ #category : #hooks }
+BlEnqueuedTaskItAction >> onEnqueuedInElement: aBlElement [
+	self element: aBlElement
+]
+
 { #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onFailureDo: aCallback [
 	exceptionCallbacks add: aCallback
