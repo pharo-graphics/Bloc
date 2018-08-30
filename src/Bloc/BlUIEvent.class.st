@@ -36,12 +36,14 @@ BlUIEvent >> localPosition [
 
 { #category : #accessing }
 BlUIEvent >> modifiers [
+	<return: #BlKeyModifiers>
+
 	^ modifiers
 ]
 
 { #category : #accessing }
-BlUIEvent >> modifiers: aneventModifiers [
-	 modifiers := aneventModifiers
+BlUIEvent >> modifiers: aBlKeyModifiers [
+	 modifiers := aBlKeyModifiers
 ]
 
 { #category : #'api - geometry' }

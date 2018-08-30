@@ -1,19 +1,25 @@
 Class {
 	#name : #BlCursorElement,
 	#superclass : #BlElement,
-	#category : 'Bloc-Text-Elements'
+	#instVars : [
+		'textPosition'
+	],
+	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : #'hooks - children' }
-BlCursorElement >> onAddedToSceneGraph [
-	super onAddedToSceneGraph.
-
-	self fireEvent: (BlTextCursorAddedToTheSceneEvent new cursorElement: self)
+{ #category : #initialization }
+BlCursorElement >> initialize [
+	super initialize.
+	
+	textPosition := 0
 ]
 
-{ #category : #'hooks - children' }
-BlCursorElement >> onRemovedFromSceneGraph [
-	super onRemovedFromSceneGraph.
+{ #category : #accessing }
+BlCursorElement >> textPosition [
+	^ textPosition
+]
 
-	self fireEvent: (BlTextCursorRemovedFromTheSceneEvent new cursorElement: self)
+{ #category : #accessing }
+BlCursorElement >> textPosition: anObject [
+	textPosition := anObject
 ]
