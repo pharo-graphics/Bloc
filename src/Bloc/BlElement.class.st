@@ -260,9 +260,26 @@ BlElement >> addChildren: aListOfElements in: aContainerName [
 ]
 
 { #category : #'children accessing' }
+BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	self allChildrenBreadthFirstDo: [ :aChild |
+		(aBlock value: aChild)
+			ifTrue: [ ^ ifFoundBlock value: aChild ] ].
+	^ ifNoneBlock value
+]
+
+{ #category : #'children accessing' }
 BlElement >> allChildrenBreadthFirstDo: aBlock [ 
 	self childrenDo: aBlock.
 	self childrenDo: [ :each | each allChildrenBreadthFirstDo: aBlock ]
+]
+
+{ #category : #'children accessing' }
+BlElement >> allChildrenBreadthFirstSelect: aBlock [ 
+	| selectedChildren |
+	selectedChildren := OrderedCollection new.
+	self allChildrenBreadthFirstDo: [:each | 
+		(aBlock value: each) ifTrue: [ selectedChildren add: each ] ].
+	^ selectedChildren
 ]
 
 { #category : #'event handling' }
