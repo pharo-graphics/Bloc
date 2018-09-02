@@ -260,6 +260,14 @@ BlElement >> addChildren: aListOfElements in: aContainerName [
 ]
 
 { #category : #'children accessing' }
+BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock [
+	^ self 
+		allChildrenBreadthFirstDetect: aBlock 
+		ifFound: ifFoundBlock 
+		ifNone: [ nil ]
+]
+
+{ #category : #'children accessing' }
 BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	self allChildrenBreadthFirstDo: [ :aChild |
 		(aBlock value: aChild)
