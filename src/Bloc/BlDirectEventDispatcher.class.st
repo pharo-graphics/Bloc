@@ -5,11 +5,9 @@ I do not support event bubbling. If you need events to be dispatched through a c
 Example:
 
 [[[
-
-dispatcher := BlDirectEventDispatcher on: BlElement new.
-dispatcher
-
+BlDirectEventDispatcher on: BlElement new
 ]]]
+
 "
 Class {
 	#name : #BlDirectEventDispatcher,
@@ -20,7 +18,7 @@ Class {
 		'handlers',
 		'shortcutHandler'
 	],
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-EventHandling'
 }
 
 { #category : #'instance creation' }
