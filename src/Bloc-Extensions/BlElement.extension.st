@@ -148,7 +148,7 @@ BlElement >> gtInspectorResizersIn: aComposite [
 	
 	withAllParents := Array streamContents: [ :aStream |
 		aStream nextPut: self.
-		self parentsDo: [ :anElement | aStream nextPut: anElement ] ].
+		self allParentsDo: [ :anElement | aStream nextPut: anElement ] ].
 
 	aComposite fastTable 
 		title: 'Resizers' translated;

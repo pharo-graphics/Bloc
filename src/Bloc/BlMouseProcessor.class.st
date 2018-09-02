@@ -57,7 +57,7 @@ BlMouseProcessor >> dblClickDelay [
 BlMouseProcessor >> fillTargetHierarchy: aTarget [
 	^ Array streamContents: [ :aStream |
 		aStream nextPut: aTarget.
-		aTarget parentsDo: [ :aParentElement | aStream nextPut: aParentElement  ] ]
+		aTarget allParentsDo: [ :aParentElement | aStream nextPut: aParentElement  ] ]
 ]
 
 { #category : #'event firing' }

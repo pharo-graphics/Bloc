@@ -90,7 +90,7 @@ BlElementComputedBounds >> inParent: anElement [
 	| subParent |
 	
 	subParent := self referenceElement.
-	self referenceElement withParentsDo: [ :aParentElement |
+	self referenceElement withAllParentsDo: [ :aParentElement |
 		(aParentElement hasParent and: [ aParentElement parent == anElement ])
 			ifTrue: [ subParent := aParentElement ] ].
 
