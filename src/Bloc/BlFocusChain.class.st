@@ -16,7 +16,7 @@ BlFocusChain class >> of: anElement [
 	| aChain |
 	
 	aChain := self new.
-	anElement withParentsDo: [ :aParent |
+	anElement withAllParentsDo: [ :aParent |
 		aChain addFirst: aParent ].
 
 	^ aChain

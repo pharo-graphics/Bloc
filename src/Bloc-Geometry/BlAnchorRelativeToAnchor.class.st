@@ -18,6 +18,11 @@ BlAnchorRelativeToAnchor >> globalPositionWithin: aGeometryElement [
 	^ self subclassResponsibility
 ]
 
+{ #category : #geometry }
+BlAnchorRelativeToAnchor >> positionWithin: aGeometryElement [
+	^ self computePositionWithin: aGeometryElement
+]
+
 { #category : #accessing }
 BlAnchorRelativeToAnchor >> referenceAnchors [
 	<return: #SequenceableCollection of: #BlGeometryAnchor>

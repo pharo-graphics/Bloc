@@ -17,6 +17,29 @@ BlPerpendicularAnchor class >> curvature: aNumber [
 	^ self new curvature: aNumber
 ]
 
+{ #category : #geometry }
+BlPerpendicularAnchor >> computePositionWithin: aGeometryElement [
+	"Return anchor position within a given geometry element in its parent bounds"
+	<return: #Point>
+	| aFromPosition aToPosition aDirection aPerpendicular aMiddle aCurvatureOrigin aCurvatureCorner |
+
+	self
+		assert: [ self referenceAnchors size = 2 ]
+		description: [ 'Perpendicular anchor requires two anchors to work properly' ].
+
+	aFromPosition := (self referenceAnchors first computePositionWithin: aGeometryElement) asBlocVector.
+	aToPosition := (self referenceAnchors second computePositionWithin: aGeometryElement) asBlocVector.
+
+	aCurvatureOrigin := (aGeometryElement localPointToParent: 0@0) asBlocVector.
+	aCurvatureCorner := (aGeometryElement localPointToParent: 0 @ self curvature) asBlocVector.
+	
+	aDirection := aToPosition - aFromPosition.
+	aPerpendicular := aDirection normal negated * (aCurvatureCorner - aCurvatureOrigin) length.
+	aMiddle := aFromPosition + (aDirection / 2.0).
+
+	^ (aMiddle + aPerpendicular) asPoint
+]
+
 { #category : #accessing }
 BlPerpendicularAnchor >> curvature [
 	^ curvature

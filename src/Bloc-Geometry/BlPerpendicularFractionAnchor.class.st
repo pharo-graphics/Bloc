@@ -17,6 +17,26 @@ BlPerpendicularFractionAnchor class >> fraction: aNumber [
 	^ self new curvatureFraction: aNumber
 ]
 
+{ #category : #geometry }
+BlPerpendicularFractionAnchor >> computePositionWithin: aGeometryElement [
+	"Return anchor position within a given geometry element in its parent bounds"
+	<return: #Point>
+	| aFromPosition aToPosition aDirection aPerpendicular aMiddle |
+
+	self
+		assert: [ self referenceAnchors size = 2 ]
+		description: [ 'Perpendicular anchor requires two anchors to work properly' ].
+
+	aFromPosition := (self referenceAnchors first computePositionWithin: aGeometryElement) asBlocVector.
+	aToPosition := (self referenceAnchors second computePositionWithin: aGeometryElement) asBlocVector.
+	
+	aDirection := aToPosition - aFromPosition.
+	aPerpendicular := aDirection normal negated * aDirection length * self curvatureFraction.
+	aMiddle := aFromPosition + (aDirection / 2.0).
+
+	^ (aMiddle + aPerpendicular) asPoint
+]
+
 { #category : #accessing }
 BlPerpendicularFractionAnchor >> curvatureFraction [
 	"How long should perpendicular vector be compared to the distance between reference anchors.
