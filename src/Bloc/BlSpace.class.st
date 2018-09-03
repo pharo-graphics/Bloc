@@ -405,11 +405,6 @@ BlSpace >> doLayout [
 BlSpace >> doUpdateFocus [
 	self focusOwner
 		ifNil: [ self initializeFocus ]
-		ifNotNil: [ :anElement |
-			anElement space == self
-				ifFalse: [
-					self focusOwner: nil.
-					self initializeFocus ] ]
 ]
 
 { #category : #pulse }

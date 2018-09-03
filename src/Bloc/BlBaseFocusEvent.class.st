@@ -12,13 +12,6 @@ BlBaseFocusEvent >> asBlurEvent [
 ]
 
 { #category : #converting }
-BlBaseFocusEvent >> asFocusEvent [
-	^ BlFocusEvent new
-		copyFrom: self;
-		yourself
-]
-
-{ #category : #converting }
 BlBaseFocusEvent >> asFocusInEvent [
 	^ BlFocusInEvent new
 		copyFrom: self;

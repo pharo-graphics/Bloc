@@ -21,7 +21,7 @@ BlKeyboardProcessor >> findTarget: anEvent [
 	Note: target can not be nil"
 	<return: #BlElement>
 
-	^ self space focusProcessor hasFocusOwner
+	^ (self space focusProcessor hasFocusOwner and: [ self space focusProcessor focusOwner isAttachedToSceneGraph ])
 		ifTrue: [ self space focusProcessor focusOwner ]
 		ifFalse: [ self space root ]
 ]

@@ -2,9 +2,10 @@ Class {
 	#name : #BlFocusProcessor,
 	#superclass : #BlBaseEventProcessor,
 	#instVars : [
-		'focusOwner'
+		'focusOwner',
+		'focusChain'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space-Support'
 }
 
 { #category : #'event firing' }
@@ -18,6 +19,7 @@ BlFocusProcessor >> fireBlurEvent: anElement [
 { #category : #'event firing' }
 BlFocusProcessor >> fireFocusEvent: anElement [
 	"Send focus event that doesn't bubble, perform simple direct dispatch to the target"
+	
 	self
 		dispatchEvent: (self newFocusEvent target: anElement)
 		target: anElement
@@ -64,7 +66,7 @@ BlFocusProcessor >> hasFocusOwner [
 	Note: focus owner may not exist during space initialization or inbetween blur and focus events"
 	<return: #Boolean>
 
-	^ focusOwner isNotNil and: [ focusOwner isAttachedToSceneGraph ]
+	^ focusOwner isNotNil
 ]
 
 { #category : #'focus - requesting' }
@@ -89,6 +91,7 @@ BlFocusProcessor >> newBlurEvent [
 	<return: #BlBlurEvent>
 
 	^ BlBlurEvent new
+		canBePropagated: false
 ]
 
 { #category : #'instance creation' }
@@ -98,6 +101,7 @@ BlFocusProcessor >> newFocusEvent [
 	<return: #BlFocusEvent>
 
 	^ BlFocusEvent new
+		canBePropagated: false
 ]
 
 { #category : #'instance creation' }
@@ -107,8 +111,6 @@ BlFocusProcessor >> newFocusInEvent [
 	<return: #BlFocusInEvent>
 	
 	^ BlFocusInEvent new
-		canBePropagated: false;
-		yourself
 ]
 
 { #category : #'instance creation' }
@@ -118,8 +120,6 @@ BlFocusProcessor >> newFocusOutEvent [
 	<return: #BlFocusOutEvent>
 	
 	^ BlFocusOutEvent new
-		canBePropagated: false;
-		yourself
 ]
 
 { #category : #'instance creation' }
@@ -139,13 +139,12 @@ BlFocusProcessor >> processBlur: anElement [
 
 	"First make a given element to loose focus, then send events"
 	anElement focused: false.
-
-	self fireFocusOutEvent: anElement.
+	focusChain leafsDo: [ :aLeafElement | self fireFocusOutEvent: aLeafElement ].
 	self fireBlurEvent: anElement
 ]
 
 { #category : #'focus - processing' }
-BlFocusProcessor >> processFocus: anElement [	
+BlFocusProcessor >> processFocus: anElement [
 	self
 		assert: [ anElement isNotNil ]
 		description: [ 'Can not give focus to nil' ].
@@ -155,6 +154,8 @@ BlFocusProcessor >> processFocus: anElement [
 
 	"first make element to be focused"
 	focusOwner := anElement.
+	focusChain := BlFocusChain of: focusOwner.
+
 	self space focusOwner: anElement.
 	anElement focused: true.
 
