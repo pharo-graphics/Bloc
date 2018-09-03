@@ -25,7 +25,7 @@ BlElementTransformation >> inSpace [
 	aMatrix := self matrix copy.
 	aMatrix translateBy: self owner position.
 	
-	self owner parentsDo: [ :anElement |
+	self owner allParentsDo: [ :anElement |
 		aMatrix multiplyBy: anElement transformation matrix.
 		aMatrix translateBy: anElement position ].
 	

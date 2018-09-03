@@ -53,14 +53,14 @@ GLMBlocMondrianPresentation >> element [
 			self asGlamorousMultiValue).
 	shouldInstallClicksOnNodes ifTrue: [ 
 		view topStep root when: BlClickEvent do: [ :anEvent |
-			anEvent target withParentsDo: [ :element |
+			anEvent target withAllParentsDo: [ :element |
 				element graph isNode
 					ifTrue: [
 						anEvent consumed: true.
 						self selection: element graph model ] ] ] ].
 	shouldInstallClicksOnEdges ifTrue: [
 		view topStep root when: BlClickEvent do: [ :anEvent |
-			anEvent target withParentsDo: [ :element |
+			anEvent target withAllParentsDo: [ :element |
 				element graph isEdge
 					ifTrue: [
 						anEvent consumed: true.

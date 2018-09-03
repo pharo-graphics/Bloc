@@ -260,9 +260,52 @@ BlElement >> addChildren: aListOfElements in: aContainerName [
 ]
 
 { #category : #'children accessing' }
+BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock [
+	^ self 
+		allChildrenBreadthFirstDetect: aBlock 
+		ifFound: ifFoundBlock 
+		ifNone: [ nil ]
+]
+
+{ #category : #'children accessing' }
+BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	self allChildrenBreadthFirstDo: [ :aChild |
+		(aBlock value: aChild)
+			ifTrue: [ ^ ifFoundBlock value: aChild ] ].
+	^ ifNoneBlock value
+]
+
+{ #category : #'children accessing' }
 BlElement >> allChildrenBreadthFirstDo: aBlock [ 
 	self childrenDo: aBlock.
 	self childrenDo: [ :each | each allChildrenBreadthFirstDo: aBlock ]
+]
+
+{ #category : #'children accessing' }
+BlElement >> allChildrenBreadthFirstSelect: aBlock [ 
+	| selectedChildren |
+	selectedChildren := OrderedCollection new.
+	self allChildrenBreadthFirstDo: [:each | 
+		(aBlock value: each) ifTrue: [ selectedChildren add: each ] ].
+	^ selectedChildren
+]
+
+{ #category : #'children accessing' }
+BlElement >> allParentsDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	self allParentsDo: [ :aParent | 
+		(aBlock value: aParent)
+			ifTrue: [ ^ ifFoundBlock value: aParent ] ].
+	^ ifNoneBlock value
+]
+
+{ #category : #'children accessing' }
+BlElement >> allParentsDo: aBlock [
+	"Evaluate a block with my every parent as an argument starting from my direct parent
+	up to the top most parent (excluding myself).
+	If I don't have a parent - does nothing"
+	
+	self hasParent ifFalse: [ ^ self ].
+	self parent withAllParentsDo: aBlock
 ]
 
 { #category : #'event handling' }
@@ -1039,8 +1082,8 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 			and: [ self parent == anElement parent ] ])
 		ifTrue: [ ^ aFoundBlock value: self parent ].
 	
-	self withParentsDo: [ :myParent |
-		anElement withParentsDo: [ :otherParent |
+	self withAllParentsDo: [ :myParent |
+		anElement withAllParentsDo: [ :otherParent |
 			myParent == otherParent
 				ifTrue: [ ^ aFoundBlock value: myParent ] ] ].
 	
@@ -1352,7 +1395,7 @@ BlElement >> hasParent: anElement [
 	"Return true if I have a given element in my parent chain, false otherwise"
 	<return: #Boolean>
 
-	self parentsDo: [ :aParentElement |
+	self allParentsDo: [ :aParentElement |
 		aParentElement == anElement
 			ifTrue: [ ^ true ] ].
 
@@ -2328,16 +2371,6 @@ BlElement >> parentProperty [
 	^ parent ifNil: [ parent := BlObjectProperty on: self named: #parent ]
 ]
 
-{ #category : #'children accessing' }
-BlElement >> parentsDo: aBlock [
-	"Evaluate a block with my every parent as an argument starting from my direct parent
-	up to the top most parent (excluding myself).
-	If I don't have a parent - does nothing"
-	
-	self hasParent ifFalse: [ ^ self ].
-	self parent withParentsDo: aBlock
-]
-
 { #category : #'geometry position' }
 BlElement >> position [
 	<return: #Point>
@@ -3085,12 +3118,12 @@ BlElement >> withAllChildrenBreadthFirst [
 ]
 
 { #category : #'children accessing' }
-BlElement >> withParentsDo: aBlock [
+BlElement >> withAllParentsDo: aBlock [
 	"Evaluate a block with me and all my parents as an argument starting from me
 	up to the top most parent"
 	
 	aBlock value: self.
-	self parentsDo: aBlock
+	self allParentsDo: aBlock
 ]
 
 { #category : #accessing }
