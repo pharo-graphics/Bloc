@@ -19,7 +19,7 @@ The following script installs a **stable** version of Bloc intended for [Pharo 6
 Metacello new
    baseline: 'Bloc';
    repository: 'github://pharo-graphics/Bloc:pharo6.1/src';
-   load: #core
+   load
 ```
 
 In order to install a **bleeding edge** version of Bloc you could use the following script:
