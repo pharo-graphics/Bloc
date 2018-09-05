@@ -51,7 +51,7 @@ BlClockExample >> clock [
 
 	^ BlElement new
 		geometry: BlEllipse new;
-		border: (BlBorder builder width: 1; paint: Color black; build);
+		border: (BlBorder paint: Color black width: 1);
 		layout: BlFrameLayout new;
 		size: self radius asPoint * 2
 ]
@@ -89,7 +89,7 @@ BlClockExample >> handLine [
 	<gtExample>
 
 	^ BlLineElement new
-		border: (BlBorder builder width: 1; paint: Color red; build)
+		border: (BlBorder paint: Color red width: 1)
 ]
 
 { #category : #parameters }
