@@ -94,7 +94,7 @@ BlArrowheadExamples >> curveWithDifferentArrowheads [
 	curve fromHead: (BlArrowheadSimpleArrow new
 			arrowLengthFraction: 5;
 			arrowNoseAngle: 60;
-			border: (BlBorder builder paint: (Color red alpha: 0.5); width: 10; build)).
+			border: (BlBorder paint: (Color red alpha: 0.5) width: 10)).
 	curve toHead: (BlArrowheadCircle new
 		background: (Color red alpha: 0.2);
 		border: (BlBorder paint: (Color red alpha: 0.5) width: 5)).
@@ -159,7 +159,7 @@ BlArrowheadExamples >> simpleArrowArrowhead [
 	^ BlArrowheadSimpleArrow new
 		arrowLengthFraction: 3;
 		arrowNoseAngle: 45;
-		border: (BlBorder builder paint: self curveColor; width: 15; build);
+		border: (BlBorder paint: self curveColor width: 15);
 		background: self curveColor
 ]
 
