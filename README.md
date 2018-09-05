@@ -28,7 +28,7 @@ In order to install a **bleeding edge** version of Bloc you could use the follow
 Metacello new
    baseline: 'Bloc';
    repository: 'github://pharo-graphics/Bloc/src';
-   load: #core
+   load
 ```
 
 **More detailed installation guide is described [here](INSTALL.md)**
