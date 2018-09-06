@@ -401,7 +401,7 @@ BrTextStylerST80 class >> glamorousStyleTable [
 			(#false 									(red muchDarker))
 			(#nil 									(red muchDarker))
 			(#thisContext 							(cyan muchDarker ))
-			(#return 								(cyan muchDarker ) bold)
+			(#return 								(cyan muchDarker ))
 			(patternArg 							(blue muchDarker)) 
 			(methodArg 							(blue muchDarker))
 			(blockPatternArg 						(blue muchDarker))
