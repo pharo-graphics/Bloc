@@ -59,7 +59,16 @@ BlElement >> gtInspectorLiveIn: composite [
 	
 	^ composite bloc
 		title: 'Live' translated;
-		element: [ self ];
+		element: [ 
+			self addEventHandlerOn: GtPhlowObjectToSelect do: [ :anEvent | 
+				self fireEvent: (GLMBlocObjectToSelect new 
+					toSelect: anEvent object; 
+					fromElement: anEvent sourceElement) ].
+			self addEventHandlerOn: GtPhlowObjectToSpawn do: [ :anEvent | 
+				self fireEvent: (GLMBlocObjectToSelect new 
+					toSelect: anEvent object; 
+					fromElement: anEvent sourceElement) ]
+			];
 		act: [ :pres | self space root background: (Color fromHexString: '162425') ] entitled: 'Dark background';
 		act: [ :pres | self space root background: (Color white) ] entitled: 'White background';
 		act: [ :pres | self debug: true ] entitled: 'Debug me';
