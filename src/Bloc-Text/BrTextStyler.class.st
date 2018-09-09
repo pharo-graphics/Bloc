@@ -60,6 +60,11 @@ BrTextStyler >> style: aBrText [
 
 { #category : #styling }
 BrTextStyler >> styleInBackgroundProcess: aBrText [
+	self styleInBackgroundProcess: aBrText andAfterDo: [ "nothing" ]
+]
+
+{ #category : #styling }
+BrTextStyler >> styleInBackgroundProcess: aBrText andAfterDo: aBlock [
 
 	self terminateBackgroundStylingProcess.
 	
@@ -72,7 +77,9 @@ BrTextStyler >> styleInBackgroundProcess: aBrText [
 			delay asDelay wait.
 			text := aBrText unstyle.
 			styledText := self privateStyle: text.
-			BlUniverse defer: [ self fireEvent: (BrTextStyledEvent new text: styledText) ].
+			BlUniverse defer: [ 
+				self fireEvent: (BrTextStyledEvent new text: styledText).
+				aBlock value ].
 		 ] forkAt: Processor userBackgroundPriority ]
 ]
 

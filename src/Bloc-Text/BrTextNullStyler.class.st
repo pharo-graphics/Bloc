@@ -15,3 +15,7 @@ BrTextNullStyler >> style: aBrText [
 { #category : #private }
 BrTextNullStyler >> styleInBackgroundProcess: aBrText [
 ]
+
+{ #category : #styling }
+BrTextNullStyler >> styleInBackgroundProcess: aBrText andAfterDo: aBlock [
+]
