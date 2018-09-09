@@ -38,6 +38,11 @@ BlScrollableElement >> defaultHorizontalAlignment [
 ]
 
 { #category : #initialization }
+BlScrollableElement >> defaultLayout [
+	^ BlFrameLayout new
+]
+
+{ #category : #initialization }
 BlScrollableElement >> defaultVerticalAlignment [
 	"By default alignment should not influence on layout process,
 	so to not deal with nils use null object"
@@ -169,7 +174,7 @@ BlScrollableElement >> scrollBy: aPoint [
 	
 	aContent := self children first.
 	
-	dX := aPoint x.
+	dX := aPoint x negated.
 	dY := aPoint y.
 	
 	self canScrollHorizontally

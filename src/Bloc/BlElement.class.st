@@ -831,7 +831,6 @@ BlElement >> defaultGeometryResizer [
 
 { #category : #initialization }
 BlElement >> defaultLayout [
-	"^ BlDummyLayout new"
 	^ BlBasicLayout new
 ]
 
