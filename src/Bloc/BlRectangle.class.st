@@ -20,22 +20,16 @@ Class {
 
 { #category : #factory }
 BlRectangle class >> cornerRadius: aNumber [
-	^ self new cornerRadius: aNumber
-]
-
-{ #category : #factory }
-BlRectangle class >> extent: anExtent [
-	^ self new extent: anExtent
-]
-
-{ #category : #factory }
-BlRectangle class >> length: aNumber [
-	"Create and return a square with a given size length"
+	"Change the radii of all corners to a given number.
+	aNumber must not be nil.
+	aNumber must be non-negative"
 	<return: #BlRectangle>
-	
-	^ self new
-		length: aNumber;
-		yourself
+
+	self
+		assert: [ aNumber >= 0 ]
+		description: [ 'Corner radius must be non-negative!' ].
+
+	^ self basicNew initializeWith: (BlCornerRadii radius: aNumber)
 ]
 
 { #category : #'geometry testing' }
@@ -117,41 +111,25 @@ BlRectangle >> cornerRadii [
 	^ cornerRadii
 ]
 
-{ #category : #accessing }
-BlRectangle >> cornerRadii: aBlCornerRadii [
-	cornerRadii := aBlCornerRadii
-]
-
-{ #category : #accessing }
-BlRectangle >> cornerRadius: aNumber [
-	"Change the radii of all corners to a given number.
-	aNumber must not be nil.
-	aNumber must be non-negative"
-
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Corner radius must be non-negative!' ].
-	
-	self cornerRadii: (BlCornerRadii radius: aNumber)
-]
-
-{ #category : #accessing }
+{ #category : #initialization }
 BlRectangle >> initialize [
 	super initialize.
-	cornerRadii := BlCornerRadii empty
+
+	self initializeWith: BlCornerRadii empty
 ]
 
-{ #category : #accessing }
-BlRectangle >> length: aNumber [
-	"Transform me to a square with a given side length.
-	aNumber must not be nil.
-	aNumber must be non-negative"
+{ #category : #initialization }
+BlRectangle >> initializeWith: theCornerRadii [
 
 	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Side length must be non-negative' ].
+		assert: [ cornerRadii isNil ]
+		description: [ 'I am immutable, please create a new rectangle instead' ].
+		
+	self
+		assert: [ theCornerRadii isNotNil ]
+		description: [ 'Corner radius must not be nil' ].
 
-	self extent: aNumber asPoint
+	cornerRadii := theCornerRadii
 ]
 
 { #category : #geometry }

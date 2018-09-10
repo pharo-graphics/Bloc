@@ -47,6 +47,14 @@ BlUIEvent >> modifiers: aBlKeyModifiers [
 ]
 
 { #category : #'api - geometry' }
+BlUIEvent >> parentPosition [
+	"Return an event position in parent coordinates of a #currentTarget"
+	<return: #Point>
+	
+	^ self currentTarget globalPointToParent: self position
+]
+
+{ #category : #'api - geometry' }
 BlUIEvent >> position [
 	^ position
 ]
