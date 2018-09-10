@@ -23,7 +23,7 @@ BlEventTraversalStep >> dispatcher [
 	^ self target eventDispatcher
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #printing }
 BlEventTraversalStep >> printOn: stream [
 	super printOn: stream.
 	self target ifNotNil: [ 
