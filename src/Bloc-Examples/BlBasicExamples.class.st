@@ -121,7 +121,8 @@ BlBasicExamples >> buttons [
 BlBasicExamples >> circle [
 	<gtExample>
 
-	^ (BlEllipse diameter: 100) asElement
+	^ BlElement new
+		geometry: BlCircle new;
 		background: (Color red alpha: 0.8);
 		border: (BlBorder paint: (Color blue alpha: 0.5) width: 6);
 		yourself
@@ -325,7 +326,9 @@ BlBasicExamples >> polygon [
 BlBasicExamples >> rectangle [
 	<gtExample>
 	
-	^ (BlRectangle extent: 200 @ 100) asElement
+	^ BlElement new
+		geometry: BlRectangle new;
+		size: 200 @ 100;
 		background: Color transparent;
 		effect: (BlBlurBelowEffect radius: 4);
 		border: (BlBorder paint: Color blue width: 4);
@@ -414,8 +417,8 @@ BlBasicExamples >> shapes [
 { #category : #'examples - shape' }
 BlBasicExamples >> square [
 	<gtExample>
-	
-	^ (BlRectangle length:80) asElement
+
+	^ (BlRectangle extent: 80 asPoint) asElement
 		background: Color green;
 		border: (BlBorder paint: Color black width: 2);
 		yourself
