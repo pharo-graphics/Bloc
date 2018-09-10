@@ -418,7 +418,9 @@ BlBasicExamples >> shapes [
 BlBasicExamples >> square [
 	<gtExample>
 
-	^ (BlRectangle extent: 80 asPoint) asElement
+	^ BlElement new
+		geometry: BlRectangle new;
+		size: 80@80;
 		background: Color green;
 		border: (BlBorder paint: Color black width: 2);
 		yourself
