@@ -82,8 +82,9 @@ BlScrollableElement >> initialize [
 	self
 		when: BlMouseWheelEvent
 		do: [ :anEvent |
-			"anEvent consumed: true."
-			self scrollBy: anEvent vector * 20 event: anEvent ]
+			| aScrollHappened |
+			aScrollHappened := self scrollBy: anEvent vector * 20.
+			anEvent consumed: aScrollHappened ]
 ]
 
 { #category : #layout }
@@ -168,8 +169,10 @@ BlScrollableElement >> onLayout: aBounds [
 ]
 
 { #category : #scrolling }
-BlScrollableElement >> scrollBy: aPoint event: anEvent [
-	"Instant scroll by the given amount of pixels along either axis"
+BlScrollableElement >> scrollBy: aPoint [
+	"Instant scroll by the given amount of pixels along either axis.
+	Return true if a scroll happens."
+	<return: #Boolean>
 	| aContent dX dY |
 
 	aContent := self children first.
@@ -207,8 +210,7 @@ BlScrollableElement >> scrollBy: aPoint event: anEvent [
 	dY isZero
 		ifFalse: [ self scrollVerticallyBy: dY ].
 		
-	((dX isZero not) or: [ dY isZero not ]) 
-		ifTrue: [  anEvent consumed: true ]
+	^ ((dX isZero not) or: [ dY isZero not ])
 ]
 
 { #category : #'api - scrolling accessing' }
