@@ -29,7 +29,16 @@ BlRectangle class >> cornerRadius: aNumber [
 		assert: [ aNumber >= 0 ]
 		description: [ 'Corner radius must be non-negative!' ].
 
-	^ self basicNew initializeWith: (BlCornerRadii radius: aNumber)
+	^ self basicNew
+		initialize;
+		initializeWith: (BlCornerRadii radius: aNumber)
+]
+
+{ #category : #factory }
+BlRectangle class >> new [
+	^ self basicNew
+		initialize;
+		initializeWith: BlCornerRadii empty
 ]
 
 { #category : #'geometry testing' }
@@ -109,13 +118,6 @@ BlRectangle >> cornerRadii [
 	<return: #BlCornerRadii>
 
 	^ cornerRadii
-]
-
-{ #category : #initialization }
-BlRectangle >> initialize [
-	super initialize.
-
-	self initializeWith: BlCornerRadii empty
 ]
 
 { #category : #initialization }
