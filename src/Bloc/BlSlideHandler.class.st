@@ -15,7 +15,7 @@ BlSlideHandler >> dragEvent: anEvent [
 	
 	aSlideDelta := anEvent localPosition - dragStartPosition.
 
-	anEvent currentTarget childrenDo: [ :aChild | aChild relocate: aChild position + aSlideDelta ].
+	anEvent currentTarget children accountedByLayout do: [ :aChild | aChild relocate: aChild position + aSlideDelta ].
 	dragStartPosition := anEvent localPosition.
 ]
 
