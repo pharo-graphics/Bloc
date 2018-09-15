@@ -4,6 +4,108 @@ Class {
 	#category : #'Bloc-Examples-Rope'
 }
 
+{ #category : #finder }
+BlTextOperatorExamples >> findGCharacterInAMiddle [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for G character' asRopedText.
+	anIndex := aText finder
+		character: $G;
+		search.
+	self assert: anIndex equals: 13.
+	self assert: (aText at: 13) equals: $G.
+	(aText from: anIndex to: anIndex) foreground: Color red.
+	^ aText
+]
+
+{ #category : #finder }
+BlTextOperatorExamples >> findGCharacterInAMiddleReversed [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for G character' asRopedText.
+	anIndex := aText finder
+		startAtEnd;
+		reversed;
+		character: $G;
+		search.
+	self assert: anIndex equals: 13.
+	self assert: (aText at: 13) equals: $G.
+	(aText from: anIndex to: anIndex) foreground: Color red.
+	^ aText
+]
+
+{ #category : #finder }
+BlTextOperatorExamples >> findLCharacterAtTheBeginning [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for L character' asRopedText.
+	anIndex := aText finder
+		character: $L;
+		search.
+	self assert: anIndex equals: 1.
+	self assert: (aText at: 1) equals: $L.
+	(aText from: anIndex to: anIndex) foreground: Color red.
+	^ aText
+]
+
+{ #category : #finder }
+BlTextOperatorExamples >> findLCharacterAtTheBeginningReversed [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for l character' asRopedText.
+	anIndex := aText finder
+		startAtEnd;
+		reversed;
+		character: $L;
+		search.
+	self assert: anIndex equals: 1.
+	self assert: (aText at: 1) equals: $L.
+	(aText from: anIndex to: anIndex) foreground: Color red.
+	^ aText
+]
+
+{ #category : #finder }
+BlTextOperatorExamples >> findNothing [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for not included character' asRopedText.
+	anIndex := aText finder
+		character: $Z;
+		search.
+	self assert: anIndex equals: 0.
+	^ aText
+]
+
+{ #category : #finder }
+BlTextOperatorExamples >> findRCharacterAtTheEnd [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for r characteR' asRopedText.
+	anIndex := aText finder
+		character: $R;
+		search.
+	self assert: anIndex equals: 23.
+	self assert: (aText at: 23) equals: $R.
+	(aText from: anIndex to: anIndex) foreground: Color red.
+	^ aText
+]
+
+{ #category : #finder }
+BlTextOperatorExamples >> findRCharacterAtTheEndReversed [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for r characteR' asRopedText.
+	anIndex := aText finder
+		startAtEnd;
+		reversed;
+		character: $R;
+		search.
+	self assert: anIndex equals: 23.
+	self assert: (aText at: 23) equals: $R.
+	(aText from: anIndex to: anIndex) foreground: Color red.
+	^ aText
+]
+
 { #category : #'trimmer - line breaks' }
 BlTextOperatorExamples >> lineBreaks [
 	<gtExample>

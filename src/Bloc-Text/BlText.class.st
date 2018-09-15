@@ -166,6 +166,11 @@ BlText >> ensureAnnouncer [
 	announcer ifNil: [ announcer := BlTextAnnouncer new ]
 ]
 
+{ #category : #'text - enumeration' }
+BlText >> finder [
+	^ BlPositionFinder new text: self.
+]
+
 { #category : #'text - accessing' }
 BlText >> first [
 	<return: #Character>
