@@ -14,7 +14,8 @@ BlPositionFinder >> character: aCharacter [
 	self
 		assert: [ aCharacter notNil ] 
 		description: [ 'Searched character must be non-nil' ].
-	self pattern: [ :eachCharacter | aCharacter = eachCharacter ]
+	self pattern: [ :aText :aPosition | 
+		aCharacter = (aText at: aPosition) ]
 ]
 
 { #category : #initialization }
@@ -51,13 +52,13 @@ BlPositionFinder >> search [
 	aCurrentIndex := startIndex.
 
 	[ (self isCurrentIndexInsideOfText: aCurrentIndex) ] whileTrue: [ 
-		(patterns anySatisfy: [ :eachPattern | 
-			eachPattern value: (self text at: aCurrentIndex) ])
+		patterns do: [ :eachPattern | 
+			(eachPattern value: self text value: aCurrentIndex)
 				ifTrue: [ 
-					"A desired character was found"
-					^ aCurrentIndex ].
+					"A desired position was found"
+					^ aCurrentIndex ] ].
 		aCurrentIndex := aCurrentIndex + stepLength ].
-	"No searched character was found"
+	"No pattern was satisfied"
 	^ 0
 ]
 
@@ -93,4 +94,15 @@ BlPositionFinder >> stepBy: anInteger [
 		assert: [ anInteger isZero not ] 
 		description: [ 'Step lenght must be non-zero value' ].
 	stepLength := anInteger.
+]
+
+{ #category : #'api - configuration' }
+BlPositionFinder >> substring: aString [
+	self
+		assert: [ aString notNil ] 
+		description: [ 'Searched sub-string must be non-nil' ].
+	self pattern: [ :aText :aPosition | 
+		aString = (aText 
+			from: aPosition 
+			to: ((aPosition + aString size - 1) min: aText size)) asString ]
 ]

@@ -4,7 +4,7 @@ Class {
 	#category : #'Bloc-Examples-Rope'
 }
 
-{ #category : #finder }
+{ #category : #'finder - character' }
 BlTextOperatorExamples >> findGCharacterInAMiddle [
 	<gtExample>
 	| aText anIndex |
@@ -18,7 +18,7 @@ BlTextOperatorExamples >> findGCharacterInAMiddle [
 	^ aText
 ]
 
-{ #category : #finder }
+{ #category : #'finder - character' }
 BlTextOperatorExamples >> findGCharacterInAMiddleReversed [
 	<gtExample>
 	| aText anIndex |
@@ -31,6 +31,36 @@ BlTextOperatorExamples >> findGCharacterInAMiddleReversed [
 	self assert: anIndex equals: 13.
 	self assert: (aText at: 13) equals: $G.
 	(aText from: anIndex to: anIndex) foreground: Color red.
+	^ aText
+]
+
+{ #category : #'finder - substring' }
+BlTextOperatorExamples >> findIngSubStringInTheMiddle [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for "ing" substring' asRopedText.
+	anIndex := aText finder
+		substring: 'ing';
+		search.
+	self assert: anIndex equals: 5.
+	self assert: (aText at: 5) equals: $i.
+	(aText from: anIndex to: anIndex + 3) foreground: Color red.
+	^ aText
+]
+
+{ #category : #'finder - substring' }
+BlTextOperatorExamples >> findIngSubStringInTheMiddleReversed [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for "ing" substring' asRopedText.
+	anIndex := aText finder
+		reversed;
+		startAtEnd;
+		substring: '"ing"';
+		search.
+	self assert: anIndex equals: 13.
+	self assert: (aText at: 13) equals: $".
+	(aText from: anIndex to: anIndex + 4) foreground: Color red.
 	^ aText
 ]
 
@@ -48,7 +78,7 @@ BlTextOperatorExamples >> findLCharacterAtTheBeginning [
 	^ aText
 ]
 
-{ #category : #finder }
+{ #category : #'finder - character' }
 BlTextOperatorExamples >> findLCharacterAtTheBeginningReversed [
 	<gtExample>
 	| aText anIndex |
@@ -64,7 +94,63 @@ BlTextOperatorExamples >> findLCharacterAtTheBeginningReversed [
 	^ aText
 ]
 
-{ #category : #finder }
+{ #category : #'finder - substring' }
+BlTextOperatorExamples >> findLookSubStringInTheBeginning [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for "ling" substring' asRopedText.
+	anIndex := aText finder
+		substring: 'Look';
+		search.
+	self assert: anIndex equals: 1.
+	self assert: (aText at: 1) equals: $L.
+	(aText from: anIndex to: anIndex + 3) foreground: Color red.
+	^ aText
+]
+
+{ #category : #'finder - substring' }
+BlTextOperatorExamples >> findLookSubStringInTheBeginningReversed [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for "ling" substring' asRopedText.
+	anIndex := aText finder
+		startAtEnd;
+		reversed;
+		substring: 'Look';
+		search.
+	self assert: anIndex equals: 1.
+	self assert: (aText at: 1) equals: $L.
+	(aText from: anIndex to: anIndex + 3) foreground: Color red.
+	^ aText
+]
+
+{ #category : #'finder - substring' }
+BlTextOperatorExamples >> findNoSubString [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for not existing substring' asRopedText.
+	anIndex := aText finder
+		substring: 'something';
+		search.
+	self assert: anIndex equals: 0.
+	^ aText
+]
+
+{ #category : #'finder - substring' }
+BlTextOperatorExamples >> findNoSubStringReversed [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for not existing substring' asRopedText.
+	anIndex := aText finder
+		reversed;
+		startAtEnd;
+		substring: 'something';
+		search.
+	self assert: anIndex equals: 0.
+	^ aText
+]
+
+{ #category : #'finder - character' }
 BlTextOperatorExamples >> findNothing [
 	<gtExample>
 	| aText anIndex |
@@ -76,7 +162,7 @@ BlTextOperatorExamples >> findNothing [
 	^ aText
 ]
 
-{ #category : #finder }
+{ #category : #'finder - character' }
 BlTextOperatorExamples >> findRCharacterAtTheEnd [
 	<gtExample>
 	| aText anIndex |
@@ -90,7 +176,7 @@ BlTextOperatorExamples >> findRCharacterAtTheEnd [
 	^ aText
 ]
 
-{ #category : #finder }
+{ #category : #'finder - character' }
 BlTextOperatorExamples >> findRCharacterAtTheEndReversed [
 	<gtExample>
 	| aText anIndex |
@@ -103,6 +189,36 @@ BlTextOperatorExamples >> findRCharacterAtTheEndReversed [
 	self assert: anIndex equals: 23.
 	self assert: (aText at: 23) equals: $R.
 	(aText from: anIndex to: anIndex) foreground: Color red.
+	^ aText
+]
+
+{ #category : #'finder - substring' }
+BlTextOperatorExamples >> findRingSubStringInTheEnd [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for "Ring" substring' asRopedText.
+	anIndex := aText finder
+		substring: 'ring';
+		search.
+	self assert: anIndex equals: 25.
+	self assert: (aText at: 25) equals: $r.
+	(aText from: anIndex to: anIndex + 3) foreground: Color red.
+	^ aText
+]
+
+{ #category : #'finder - substring' }
+BlTextOperatorExamples >> findRingSubStringInTheEndReversed [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for "Ring" substring' asRopedText.
+	anIndex := aText finder
+		startAtEnd;
+		reversed;
+		substring: 'ring';
+		search.
+	self assert: anIndex equals: 25.
+	self assert: (aText at: 25) equals: $r.
+	(aText from: anIndex to: anIndex + 3) foreground: Color red.
 	^ aText
 ]
 
