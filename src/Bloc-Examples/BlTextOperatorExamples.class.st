@@ -4,6 +4,20 @@ Class {
 	#category : #'Bloc-Examples-Rope'
 }
 
+{ #category : #'finder - case insensitive substring' }
+BlTextOperatorExamples >> findCaseInsensitiveSubStringInTheMiddle [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for "STRING" substring' asRopedText.
+	anIndex := aText finder
+		caseInsensitiveSubstring: '"string"';
+		search.
+	self assert: anIndex equals: 13.
+	self assert: (aText at: 13) equals: $".
+	(aText from: anIndex to: anIndex + 7) foreground: Color red.
+	^ aText
+]
+
 { #category : #'finder - character' }
 BlTextOperatorExamples >> findGCharacterInAMiddle [
 	<gtExample>
@@ -64,7 +78,7 @@ BlTextOperatorExamples >> findIngSubStringInTheMiddleReversed [
 	^ aText
 ]
 
-{ #category : #finder }
+{ #category : #'finder - character' }
 BlTextOperatorExamples >> findLCharacterAtTheBeginning [
 	<gtExample>
 	| aText anIndex |
@@ -219,6 +233,20 @@ BlTextOperatorExamples >> findRingSubStringInTheEndReversed [
 	self assert: anIndex equals: 25.
 	self assert: (aText at: 25) equals: $r.
 	(aText from: anIndex to: anIndex + 3) foreground: Color red.
+	^ aText
+]
+
+{ #category : #'finder - characters' }
+BlTextOperatorExamples >> findxXCharactersAtTheBeginning [
+	<gtExample>
+	| aText anIndex |
+	aText := 'Looking for X character' asRopedText.
+	anIndex := aText finder
+		characters: 'xX';
+		search.
+	self assert: anIndex equals: 13.
+	self assert: (aText at: 13) equals: $X.
+	(aText from: anIndex to: anIndex) foreground: Color red.
 	^ aText
 ]
 

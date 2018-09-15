@@ -10,12 +10,35 @@ Class {
 }
 
 { #category : #'api - configuration' }
+BlPositionFinder >> caseInsensitiveSubstring: aString [
+	| aLowerCaseString |
+	self
+		assert: [ aString notNil ] 
+		description: [ 'Searched sub-string must be non-nil' ].
+	aLowerCaseString := aString asLowercase.
+	self pattern: [ :aText :aPosition | 
+		aLowerCaseString = (aText 
+			from: aPosition 
+			to: ((aPosition + aString size - 1) min: aText size)) asString asLowercase ]
+]
+
+{ #category : #'api - configuration' }
 BlPositionFinder >> character: aCharacter [
 	self
 		assert: [ aCharacter notNil ] 
 		description: [ 'Searched character must be non-nil' ].
 	self pattern: [ :aText :aPosition | 
 		aCharacter = (aText at: aPosition) ]
+]
+
+{ #category : #'api - configuration' }
+BlPositionFinder >> characters: aString [
+	self
+		assert: [ aString notNil ] 
+		description: [ 'Searched characters must be non-nil' ].
+	aString do: [ :eachCharacter |
+		self pattern: [ :aText :aPosition | 
+			eachCharacter = (aText at: aPosition) ] ]
 ]
 
 { #category : #initialization }
