@@ -16,6 +16,12 @@ BlCommand >> asCommand [
 	^ self
 ]
 
+{ #category : #converting }
+BlCommand >> asErrorCatchingCommand [
+	<return: #BlErrorCatchingCommand>
+	^ BlErrorCatchingCommand new command: self
+]
+
 { #category : #'api - taskit' }
 BlCommand >> asTask [
 	^ TKTTask valuable: self
@@ -25,6 +31,12 @@ BlCommand >> asTask [
 BlCommand >> cancelRequest [
 	"Every command is responsible to terminate nicely"
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+BlCommand >> catchingErrors [
+	"Return an error or collections of errors to catch during a command execution"
+	^ Error
 ]
 
 { #category : #evaluating }
