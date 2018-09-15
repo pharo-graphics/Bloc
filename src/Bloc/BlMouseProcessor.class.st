@@ -226,7 +226,7 @@ BlMouseProcessor >> handleMouseMove: aMouseMoveEvent [
 	shouldTryDragStart := self isDragging
 		ifFalse: [ (self canStartDrag: aMouseMoveEvent) ]
 		ifTrue: [ false ].
-		
+
 	self isDragging
 		"we are dragging, handle it as drag move"
 		ifTrue: [ self processDragMove: aMouseMoveEvent ]
@@ -258,8 +258,8 @@ BlMouseProcessor >> handleMouseUp: aMouseUpEvent [
 	"depending on whether drag and drop is in process handle mouse up either
 	as mouse up itself or as drag end event"
 	self isDragging
-		ifTrue: [ self processDragEnd: aMouseUpEvent ].
-	self processMouseUp: aMouseUpEvent
+		ifTrue: [ self processDragEnd: aMouseUpEvent ]
+		ifFalse: [ self processMouseUp: aMouseUpEvent ]
 ]
 
 { #category : #'initialize-release' }
