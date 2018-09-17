@@ -13,3 +13,10 @@ BlExampleInfiniteForGeometryElement >> defaultDataSource [
 BlExampleInfiniteForGeometryElement >> defaultLayout [
 	^ BlInfiniteLinearLayout vertical
 ]
+
+{ #category : #initialization }
+BlExampleInfiniteForGeometryElement >> initialize [
+	super initialize.
+	
+	self background: (Color gray alpha: 0.05)
+]

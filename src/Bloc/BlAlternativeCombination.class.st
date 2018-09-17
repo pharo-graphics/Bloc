@@ -74,6 +74,13 @@ BlAlternativeCombination >> matches: aKeyboardBuffer [
 		anySatisfy: [ :aCombination | aCombination matches: aKeyboardBuffer ]
 ]
 
+{ #category : #controlling }
+BlAlternativeCombination >> or: anotherKeyCombination [
+	<return: #BlKeyCombination>
+
+	^ self with: anotherKeyCombination
+]
+
 { #category : #printing }
 BlAlternativeCombination >> printOn: aStream [
 	

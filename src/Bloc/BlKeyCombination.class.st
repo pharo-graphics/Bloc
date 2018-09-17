@@ -47,3 +47,12 @@ BlKeyCombination >> matches: aKeyboardBuffer [
 
 	^ self subclassResponsibility
 ]
+
+{ #category : #controlling }
+BlKeyCombination >> or: anotherKeyCombination [
+	<return: #BlKeyCombination>
+
+	^ BlAlternativeCombination new
+		with: self;
+		with: anotherKeyCombination
+]

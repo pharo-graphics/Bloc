@@ -13,7 +13,7 @@ BlExampleInfiniteForGeometryLinearNode >> create [
 	
 	aFrame := BlElement new.
 	aFrame layout: BlLinearLayout horizontal.
-	aFrame background: (Color gray alpha: 0.1).
+	aFrame background: (Color gray alpha: 0.05).
 	aFrame padding: (BlInsets all: 10).
 	aFrame constraintsDo: [ :c |
 		c horizontal matchParent.

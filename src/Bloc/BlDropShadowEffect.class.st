@@ -11,20 +11,17 @@ Class {
 
 { #category : #'instance creation' }
 BlDropShadowEffect class >> color: aColor width: aNumber offset: anOffset [
-	^ self new
-		color: aColor;
-		width: aNumber;
+	^ self basicNew
+		initializeColor: aColor
+		width: aNumber
 		offset: anOffset
 ]
 
 { #category : #accessing }
 BlDropShadowEffect >> color [
-	^ color
-]
+	<return: #Color>
 
-{ #category : #accessing }
-BlDropShadowEffect >> color: aColor [
-	color := aColor
+	^ color
 ]
 
 { #category : #geometry }
@@ -43,31 +40,75 @@ BlDropShadowEffect >> computeBounds: aSpartaRectangle [
 		bottom: aBottom
 ]
 
+{ #category : #copying }
+BlDropShadowEffect >> copyWithColor: aColor [
+	<return: #BlDropShadowEffect>
+
+	^ self class
+		color: aColor
+		width: self width
+		offset: self offset
+]
+
+{ #category : #copying }
+BlDropShadowEffect >> copyWithOffset: aPoint [
+	<return: #BlDropShadowEffect>
+
+	^ self class
+		color: self color
+		width: self width
+		offset: aPoint
+]
+
+{ #category : #copying }
+BlDropShadowEffect >> copyWithWidth: aNumber [
+	<return: #BlDropShadowEffect>
+
+	^ self class
+		color: self color
+		width: aNumber
+		offset: self offset
+]
+
 { #category : #initialization }
 BlDropShadowEffect >> initialize [
 	super initialize.
-	
-	color := Color black.
-	width := 10.
-	offset := 0@0
+
+	self
+		initializeColor: Color black
+		width: 10
+		offset: 0@0
+]
+
+{ #category : #initialization }
+BlDropShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
+	self
+		assert: [ color isNil ]
+		description: [ 'Can not change a color! Shadow is immutable' ].
+		
+	self
+		assert: [ width isNil ]
+		description: [ 'Can not change a width! Shadow is immutable' ].
+		
+	self
+		assert: [ offset isNil ]
+		description: [ 'Can not change an offset! Shadow is immutable' ].
+
+	color := aColor.
+	width := aWidth.
+	offset := aPoint asPoint
 ]
 
 { #category : #accessing }
 BlDropShadowEffect >> offset [
+	<return: #Point>
+
 	^ offset
 ]
 
 { #category : #accessing }
-BlDropShadowEffect >> offset: aPointOrNumber [
-	offset := aPointOrNumber asPoint
-]
-
-{ #category : #accessing }
 BlDropShadowEffect >> width [
-	^ width
-]
+	<return: #Number>
 
-{ #category : #accessing }
-BlDropShadowEffect >> width: aNumber [
-	width := aNumber
+	^ width
 ]

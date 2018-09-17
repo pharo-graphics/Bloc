@@ -119,6 +119,26 @@ BlKeyCombinationBuilder >> meta [
 ]
 
 { #category : #accessing }
+BlKeyCombinationBuilder >> primary [
+	"I add a primary modifier to the key combination
+	On Mac: Command (Meta).
+	On Windows: Control
+	On Linux: Control"
+	
+	combination with: OSPlatform current primaryModifier
+]
+
+{ #category : #accessing }
+BlKeyCombinationBuilder >> secondary [
+	"I add a secondary modifier to the key combination
+	On Mac: Control (Meta).
+	On Windows: Alt
+	On Linux: Alt"
+
+	combination with: OSPlatform current secondaryModifier
+]
+
+{ #category : #accessing }
 BlKeyCombinationBuilder >> shift [
 	| shift |
 
