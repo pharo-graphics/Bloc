@@ -1,5 +1,4 @@
 "
-[DEPRECATED @see BlPulseService ]
 I am the Bloc main loop.
 I indicate to the Universe that is time to synchronize the state of the elements. 
 
@@ -20,7 +19,7 @@ Class {
 		'pulsePeriod',
 		'session'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'loop process' }
@@ -33,7 +32,7 @@ BlPulseLoop >> createLoopProcess [
 
 { #category : #'loop process' }
 BlPulseLoop >> createLoopTask [
-	^ [ [ self firePulse ] repeat ]
+	^ [ [ [ self firePulse ] on: Error do: [ :anError | ] ] repeat ]
 ]
 
 { #category : #period }
@@ -100,7 +99,6 @@ BlPulseLoop >> pulsePeriod: aTime [
 
 { #category : #lifecycle }
 BlPulseLoop >> start [
-
 	self isRunning
 		ifTrue: [ ^ self ].
 

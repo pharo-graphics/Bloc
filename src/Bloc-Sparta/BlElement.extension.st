@@ -83,7 +83,7 @@ BlElement >> drawMeAndChildrenOnSpartaCanvas: aCanvas [
 { #category : #'*Bloc-Sparta' }
 BlElement >> drawOnSpartaCanvas: aCanvas [
 	| isBackgroundTransparent isBorderTransparent areBothTransparent areBothVisible |
-
+	
 	isBackgroundTransparent := self background isTransparent.
 	isBorderTransparent := self border isTransparent.
 	areBothTransparent := isBackgroundTransparent and: [ isBorderTransparent ].

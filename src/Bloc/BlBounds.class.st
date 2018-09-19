@@ -13,7 +13,7 @@ Class {
 		'right',
 		'bottom'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #'instance creation' }

@@ -194,6 +194,12 @@ BlBorderBuilder >> paint: anObject [
 	paint := anObject
 ]
 
+{ #category : #styles }
+BlBorderBuilder >> solid [
+	dashOffset := 0.0.
+	dashArray := #()
+]
+
 { #category : #accessing }
 BlBorderBuilder >> width [
 	^ width
