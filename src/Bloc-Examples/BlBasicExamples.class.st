@@ -385,7 +385,9 @@ BlBasicExamples >> rightBorder [
 BlBasicExamples >> roundedRectangle [
 	<gtExample>
 	
-	^ ((BlRectangle extent: 150@80) cornerRadius: 20) asElement
+	^ BlElement new
+		geometry: (BlRectangle cornerRadius: 20);
+		size: 150@80;
 		background: Color yellow;
 		border: (BlBorder paint: Color red width: 7);
 		yourself
