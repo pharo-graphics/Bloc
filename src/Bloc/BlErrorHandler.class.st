@@ -6,6 +6,8 @@ I am responsible for error handling that occur in the ${class:BlElement}$
 Class {
 	#name : #BlErrorHandler,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'error'
 	],
