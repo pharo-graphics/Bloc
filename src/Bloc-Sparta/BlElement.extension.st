@@ -75,6 +75,15 @@ BlElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
 ]
 
 { #category : #'*Bloc-Sparta' }
+BlElement >> drawError: anError onSpartaCanvas: aCanvas [
+
+	aCanvas fill
+		paint: Color black;
+		path: self boundsInLocal;
+		draw
+]
+
+{ #category : #'*Bloc-Sparta' }
 BlElement >> drawMeAndChildrenOnSpartaCanvas: aCanvas [
 	self drawOnSpartaCanvas: aCanvas.
 	self drawChildrenOnSpartaCanvas: aCanvas
@@ -110,6 +119,15 @@ BlElement >> drawOnSpartaCanvas: aCanvas [
 
 { #category : #'*Bloc-Sparta' }
 BlElement >> fullDrawOnSpartaCanvas: aCanvas [
+
+	self errorHandler
+		with: self
+		do: [ self fullDrawSafelyOnSpartaCanvas: aCanvas ]
+		failed: [ :anError | self drawError: anError onSpartaCanvas: aCanvas ]
+]
+
+{ #category : #'*Bloc-Sparta' }
+BlElement >> fullDrawSafelyOnSpartaCanvas: aCanvas [
 	| anEffectBounds |
 
 	"We do not draw transparent elements at all"

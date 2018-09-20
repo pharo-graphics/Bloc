@@ -92,7 +92,7 @@ BlBenchmarkConsoleSpecModel >> initializePresenter [
 					lastTime := evt end.
 					  ]).
 	space eventDispatcher addEventHandler: 
-		(BlEventHandler on: BlSpaceEventProcessEndEvent do: [ :evt | 
+		(BlEventHandler on: BlSpaceEventEndEvent do: [ :evt | 
 					self eventTime label: (evt end - evt start) asString. 
 					  ]).
   	space eventDispatcher addEventHandler: 

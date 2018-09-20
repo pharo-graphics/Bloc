@@ -65,12 +65,13 @@ Class {
 		'transformation',
 		'shouldHandleMouseEvents',
 		'shouldChildrenHandleMouseEvents',
-		'taskQueue'
+		'taskQueue',
+		'errorHandler'
 	],
 	#classInstVars : [
 		'invalidateBounds'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #cleanup }
@@ -813,6 +814,13 @@ BlElement >> defaultElevation [
 ]
 
 { #category : #initialization }
+BlElement >> defaultErrorHandler [
+	^ BlCompositeErrorHandler withAll: { 
+		BlDrawingErrorHandler new
+	}
+]
+
+{ #category : #initialization }
 BlElement >> defaultFocusability [
 	<return: #BlFocusability>
 
@@ -1019,6 +1027,13 @@ BlElement >> enqueueTask: aBlTask [
 	self isAttachedToSceneGraph
 		ifTrue: [ self space enqueueTask: aBlTask ]
 		ifFalse: [ self taskQueue enqueue: aBlTask ]
+]
+
+{ #category : #accessing }
+BlElement >> errorHandler [
+	<return: #BlErrorHandler>
+
+	^ errorHandler
 ]
 
 { #category : #'event management accessing' }
@@ -1451,7 +1466,8 @@ BlElement >> initialize [
 	misc label: self className.
 	opacity := 1.0.
 	
-	taskQueue := BlTaskQueue new
+	taskQueue := BlTaskQueue new.
+	errorHandler := self defaultErrorHandler.
 ]
 
 { #category : #'geometry bounds' }

@@ -34,9 +34,10 @@ Class {
 		'layoutError',
 		'tasks',
 		'time',
-		'touchProcessor'
+		'touchProcessor',
+		'frame'
 	],
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space'
 }
 
 { #category : #'debug - simulation' }
@@ -538,6 +539,13 @@ BlSpace >> focusedProperty [
 	^ focused ifNil: [ focused := BlObjectProperty on: self named: #focused default: false ]
 ]
 
+{ #category : #accessing }
+BlSpace >> frame [
+	<return: #BlSpaceFrame>
+
+	^ frame
+]
+
 { #category : #drawing }
 BlSpace >> fullDrawOn: anCanvas [
 	anCanvas fullDraw: self root
@@ -672,6 +680,7 @@ BlSpace >> initialize [
 
 	tasks := BlTaskQueue new.
 	time := BlTime real.
+	frame := BlSpaceFrame new.
 
 	root := self defaultRoot.
 
@@ -833,30 +842,8 @@ BlSpace >> processEvents [
 BlSpace >> processPulse [
 	self ensureSession.
 
-	"We must update focused element before processing events, otherwise keyboard events,
-	for example, will be handled by the wrong element"
-	self doUpdateFocus.
+	self frame runOn: self.
 
-	self
-		dispatchTimeEvent: BlSpaceEventProcessEndEvent
-		during: [ self hasHostSpace ifTrue: [ self processEvents ] ].
-
-	"process animations and other runnable tasks"
-	self
-		dispatchTimeEvent: BlSpaceTasksEndEvent
-		during: [ self runTasks ].
-
-	self pulseRequested
-		ifFalse: [ ^ self ].
-
-	self
-		dispatchTimeEvent: BlSpaceLayoutEndEvent
-		during: [ self isLayoutRequested ifTrue: [ self doLayout ] ].
-
-	self
-		dispatchTimeEvent: BlSpaceRenderEndEvent
-		during: [ self hasDirtyAreas ifTrue: [ self render ] ].
-		
 	nextPulseRequested := false
 ]
 

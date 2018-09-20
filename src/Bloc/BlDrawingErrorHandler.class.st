@@ -8,3 +8,12 @@ Class {
 	#superclass : #BlErrorHandler,
 	#category : #'Bloc-Basic-Errors'
 }
+
+{ #category : #testing }
+BlDrawingErrorHandler >> matches: aFramePhase [
+	^ aFramePhase isDrawingPhase
+]
+
+{ #category : #private }
+BlDrawingErrorHandler >> processError: anError in: anElement [
+]

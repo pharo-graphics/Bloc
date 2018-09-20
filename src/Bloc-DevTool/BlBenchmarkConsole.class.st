@@ -87,7 +87,7 @@ BlBenchmarkConsole >> listenSpace: aSpace [
 						frames := 0 ].
 				self renderTime: (evt end - evt start) ]).
 	aSpace eventDispatcher addEventHandler: 
-		(BlEventHandler on: BlSpaceEventProcessEndEvent do: [ :evt | 
+		(BlEventHandler on: BlSpaceEventEndEvent do: [ :evt | 
 					self eventProcessingTime: (evt end - evt start). 
 					  ]).
   	aSpace eventDispatcher addEventHandler: 

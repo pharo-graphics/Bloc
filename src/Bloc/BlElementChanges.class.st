@@ -1,4 +1,6 @@
 "
+! Element change logger and processor
+
 I log changes of various element properties during one frame.
 
  
@@ -10,7 +12,7 @@ Class {
 		'extentChange',
 		'positionChange'
 	],
-	#category : 'Bloc-Basic-Changes'
+	#category : #'Bloc-Basic-Changes'
 }
 
 { #category : #enumeration }
@@ -37,8 +39,10 @@ BlElementChanges >> commitOn: anElement [
 	self changesDo: [ :aChange | aChange commitOn: anElement ]
 ]
 
-{ #category : #changes }
+{ #category : #'api - changes' }
 BlElementChanges >> extentChange: anOldExtent to: aNewExtent [
+	"Log the extent change of the element"
+
 	extentChange old: anOldExtent new: aNewExtent
 ]
 
@@ -64,7 +68,9 @@ BlElementChanges >> isPositionChanged [
 	^ positionChange hasActiveChanges
 ]
 
-{ #category : #changes }
+{ #category : #'api - changes' }
 BlElementChanges >> positionChange: anOldPosition to: aNewPosition [
+	"Log the position change of the element"
+
 	positionChange old: anOldPosition new: aNewPosition
 ]
