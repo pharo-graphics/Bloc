@@ -17,6 +17,8 @@ The list of default phases is initialized in ${method:BlFrame>>#initializePhases
 Class {
 	#name : #BlSpaceFrame,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'phases',
 		'currentPhaseLink'
