@@ -2,6 +2,7 @@ Class {
 	#name : #BlCompositeErrorHandler,
 	#superclass : #BlErrorHandler,
 	#instVars : [
+		'errors',
 		'errorHandlers'
 	],
 	#category : #'Bloc-Basic-Errors'
@@ -29,11 +30,24 @@ BlCompositeErrorHandler >> errorHandlers [
 	^ errorHandlers
 ]
 
+{ #category : #accessing }
+BlCompositeErrorHandler >> errors [
+	^ errors
+]
+
+{ #category : #testing }
+BlCompositeErrorHandler >> hasError [
+	<return: #Boolean>
+
+	^ self errors isNotEmpty
+]
+
 { #category : #initialization }
 BlCompositeErrorHandler >> initialize [
 	super initialize.
-	
-	errorHandlers := OrderedCollection new
+
+	errorHandlers := Set new.
+	errors := OrderedCollection new
 ]
 
 { #category : #testing }
@@ -41,10 +55,15 @@ BlCompositeErrorHandler >> matches: aFramePhase [
 	^ self errorHandlers anySatisfy: [ :anErrorHandler | anErrorHandler matches: aFramePhase ]
 ]
 
-{ #category : #running }
-BlCompositeErrorHandler >> processError: anError in: anElement [
+{ #category : #'error handling' }
+BlCompositeErrorHandler >> processError: aHandledError [
 	self errorHandlers
-		detect: [ :anErrorHandler | anElement isAttachedToSceneGraph and: [ anErrorHandler matches: anElement space frame currentPhase ] ]
-		ifFound: [ :anErrorHandler | anErrorHandler handleError: anError in: anElement ]
-		ifNone: [ self handleCriticalError: anError in: anElement ]
+		detect: [ :anErrorHandler | anErrorHandler matches: aHandledError framePhase ]
+		ifFound: [ :anErrorHandler | anErrorHandler handleError: aHandledError error in: aHandledError element ]
+		ifNone: [ self handleCriticalError: aHandledError ]
+]
+
+{ #category : #'error handling' }
+BlCompositeErrorHandler >> registerError: aHandledError [
+	self errors add: aHandledError
 ]

@@ -5,7 +5,7 @@ To not completely break the UI thread we should catch the error and prevent the 
 "
 Class {
 	#name : #BlDrawingErrorHandler,
-	#superclass : #BlErrorHandler,
+	#superclass : #BlSingleErrorHandler,
 	#category : #'Bloc-Basic-Errors'
 }
 
@@ -14,6 +14,6 @@ BlDrawingErrorHandler >> matches: aFramePhase [
 	^ aFramePhase isDrawingPhase
 ]
 
-{ #category : #private }
-BlDrawingErrorHandler >> processError: anError in: anElement [
+{ #category : #'error handling' }
+BlDrawingErrorHandler >> processError: anError [
 ]

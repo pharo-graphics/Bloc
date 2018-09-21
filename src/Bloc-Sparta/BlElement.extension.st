@@ -102,7 +102,6 @@ BlElement >> drawOnSpartaCanvas: aCanvas [
 		ifTrue: [ ^ self ].
 
 	"We create a new virtual layer in order to blend background and border only if they are both visible"
-
 	aCanvas layer
 		when: [ self outskirts wantsLayerOn: self ]
 		during: [
@@ -119,15 +118,6 @@ BlElement >> drawOnSpartaCanvas: aCanvas [
 
 { #category : #'*Bloc-Sparta' }
 BlElement >> fullDrawOnSpartaCanvas: aCanvas [
-
-	self errorHandler
-		with: self
-		do: [ self fullDrawSafelyOnSpartaCanvas: aCanvas ]
-		failed: [ :anError | self drawError: anError onSpartaCanvas: aCanvas ]
-]
-
-{ #category : #'*Bloc-Sparta' }
-BlElement >> fullDrawSafelyOnSpartaCanvas: aCanvas [
 	| anEffectBounds |
 
 	"We do not draw transparent elements at all"
@@ -137,7 +127,7 @@ BlElement >> fullDrawSafelyOnSpartaCanvas: aCanvas [
 	"invisible elements are not rendered too"
 	self isVisible
 		ifFalse: [ ^ self ].
-	
+
 	anEffectBounds := self effectBounds: BlBounds new.
 	"No need to render elements smaller than half of a pixel"
 	(anEffectBounds width min: anEffectBounds height) < 0.5
@@ -154,15 +144,18 @@ BlElement >> fullDrawSafelyOnSpartaCanvas: aCanvas [
 				by: self transformation
 				translated: self position
 				during: [ :aTransformedCanvas |
-					aTransformedCanvas clip
-						when: [ self clipChildren ]
-						by: [ (self visualBounds: BlBounds new on: aTransformedCanvas) merge: anEffectBounds ]
-						during: [
-							self effect
-								applyEffectOnSpartaCanvas: aTransformedCanvas
-								for: self
-								around: [ self drawMeAndChildrenOnSpartaCanvas: aTransformedCanvas ] ].	
-						
-						misc debug ifTrue: [
-							self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ] ]
+					self errorHandler
+						with: self
+						do: [
+							aTransformedCanvas clip
+								when: [ self clipChildren ]
+								by: [ (self visualBounds: BlBounds new on: aTransformedCanvas) merge: anEffectBounds ]
+								during: [
+									self effect
+										applyEffectOnSpartaCanvas: aTransformedCanvas
+										for: self
+										around: [ self drawMeAndChildrenOnSpartaCanvas: aTransformedCanvas ] ].
+								misc debug ifTrue: [
+									self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ]
+						failed: [ :anError | self drawError: anError onSpartaCanvas: aCanvas ] ] ]
 ]

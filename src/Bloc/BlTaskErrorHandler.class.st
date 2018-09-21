@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTaskErrorHandler,
-	#superclass : #BlErrorHandler,
+	#superclass : #BlSingleErrorHandler,
 	#category : #'Bloc-Basic-Errors'
 }
 

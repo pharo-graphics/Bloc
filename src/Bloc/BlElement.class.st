@@ -325,7 +325,15 @@ BlElement >> allowMouseEvents [
 ]
 
 { #category : #layout }
-BlElement >> applyLayoutIn: aRectangle [
+BlElement >> applyLayoutIn: aBlBounds [
+	self errorHandler
+		with: self
+		do: [ self applyLayoutSafelyIn: aBlBounds ]
+		failed: [ self applyLayoutThatFailedIn: aBlBounds ]
+]
+
+{ #category : #'private - layout' }
+BlElement >> applyLayoutSafelyIn: aRectangle [
 	"Layout me and my children within aRectangle in my local coordinates.
 	Note: aRectangle may be a temporary or mutable rectangle, so you must not
 	store or refer it without making a copy!
@@ -350,6 +358,15 @@ BlElement >> applyLayoutIn: aRectangle [
 	(extentChanged or: [ self isLayoutRequested ])
 		ifTrue: [ self onLayout: aRectangle ].
 		
+	"we are done, mark that there are no layout requests pending"
+	self layout requestingLayout: false
+]
+
+{ #category : #'private - layout' }
+BlElement >> applyLayoutThatFailedIn: aRectangle [
+	"Perform fallback safe action when layout computation failed"
+
+	self position: aRectangle origin extent: aRectangle extent.
 	"we are done, mark that there are no layout requests pending"
 	self layout requestingLayout: false
 ]
@@ -816,7 +833,8 @@ BlElement >> defaultElevation [
 { #category : #initialization }
 BlElement >> defaultErrorHandler [
 	^ BlCompositeErrorHandler withAll: { 
-		BlDrawingErrorHandler new
+		BlDrawingErrorHandler new.
+		BlLayoutErrorHandler new
 	}
 ]
 
@@ -1956,6 +1974,14 @@ BlElement >> maxWidth: aNumber [
 
 { #category : #layout }
 BlElement >> measure: anExtentMeasurementSpec [
+	self errorHandler
+		with: self
+		do: [ self measureSafely: anExtentMeasurementSpec ]
+		failed: [ self measureThatFailed: anExtentMeasurementSpec ]
+]
+
+{ #category : #'private - layout' }
+BlElement >> measureSafely: anExtentMeasurementSpec [
 	"Measure my extent based on extent specifications represented by anExtentMeasurementSpec.
 	Subclasses should not override me, instead override onMeasure:
 	for concrete implementation.
@@ -1983,6 +2009,14 @@ BlElement >> measure: anExtentMeasurementSpec [
 	"Perform measuring algorithm"
 	self onMeasure: anExtentMeasurementSpec.
 	
+]
+
+{ #category : #'private - layout' }
+BlElement >> measureThatFailed: anExtentMeasurementSpec [
+	
+	self layout
+		waitingLayout: false;
+		previousMeasurementSpec: anExtentMeasurementSpec
 ]
 
 { #category : #layout }
@@ -2198,6 +2232,7 @@ BlElement >> onLayout: aBounds [
 	If needed override this method to do some additional actions.
 	@see BlLayoutStrategy>>#layout: self in: aBounds - override if
 	custom layout strategy is needed"
+	
 	self layout layout: self in: aBounds
 ]
 

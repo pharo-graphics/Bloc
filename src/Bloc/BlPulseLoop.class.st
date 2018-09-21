@@ -32,7 +32,7 @@ BlPulseLoop >> createLoopProcess [
 
 { #category : #'loop process' }
 BlPulseLoop >> createLoopTask [
-	^ [ [ [ self firePulse ] on: Exception do: [ :anException |
+	^ [ [ [ self firePulse ] on: Error, Halt do: [ :anException |
 			anException freeze.
 			[ anException debug ] fork
 	] ] repeat ]

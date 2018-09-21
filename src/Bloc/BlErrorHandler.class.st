@@ -8,49 +8,70 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#instVars : [
-		'error'
-	],
 	#category : #'Bloc-Basic-Errors'
 }
 
-{ #category : #accessing }
-BlErrorHandler >> error [
-	<return: #Error>
+{ #category : #private }
+BlErrorHandler >> convertToHandledError: anError in: anElement [
+	| aHandledError |
 
-	^ error
+	aHandledError := BlHandledError new.
+	aHandledError error: anError.
+	aHandledError errorHandler: self.
+	aHandledError element: anElement.
+	aHandledError framePhase: (self framePhaseOf: anElement).
+
+	^ aHandledError
 ]
 
 { #category : #accessing }
-BlErrorHandler >> error: anError [
-	
-	self
-		assert: [ anError isNotNil ]
-		description: [ 'Error must not be nil' ].
+BlErrorHandler >> errors [
+	<return: #Collection of: #BlHandledError>
 
-	error := anError
+	^ #()
+]
+
+{ #category : #accessing }
+BlErrorHandler >> errorsForPhase: aFramePhase [
+	<return: #Collection of: #BlSpaceFramePhase>
+
+	^ self errors select: [ :aHandledError | aHandledError framePhase = aFramePhase ]
 ]
 
 { #category : #private }
-BlErrorHandler >> handleCriticalError: anError in: anElement [
+BlErrorHandler >> framePhaseOf: anElement [
+	<return: #BlSpaceFramePhase>
+
+	^ anElement isAttachedToSceneGraph
+		ifTrue: [ anElement space frame currentPhase ]
+		ifFalse: [ BlSpaceFrameUnknownPhase new ]
+]
+
+{ #category : #private }
+BlErrorHandler >> handleCriticalError: aHandledError [
 	"Handle an error that no one know how to handle.
 	I stop the space and crash the system"
 	
-	anError freeze.
-	[ anError debug ] fork
+	aHandledError error freeze.
+	[ aHandledError error debug ] fork
 ]
 
-{ #category : #private }
+{ #category : #'error handling' }
 BlErrorHandler >> handleError: anError in: anElement [
-	self error: anError.
-	self processError: anError in: anElement
+	"Handle a given error that comes from a provided visual element"
+	| aHandledError |
+
+	aHandledError := self convertToHandledError: anError in: anElement.
+
+	self registerError: aHandledError.
+	self processError: aHandledError
 ]
 
 { #category : #testing }
 BlErrorHandler >> hasError [
 	<return: #Boolean>
-
-	^ error isNotNil
+	
+	^ self subclassResponsibility
 ]
 
 { #category : #testing }
@@ -60,8 +81,15 @@ BlErrorHandler >> matches: aFramePhase [
 	^ self subclassResponsibility
 ]
 
-{ #category : #private }
-BlErrorHandler >> processError: anError in: anElement [
+{ #category : #'error handling' }
+BlErrorHandler >> processError: aHandledError [
+	self subclassResponsibility
+]
+
+{ #category : #'error handling' }
+BlErrorHandler >> registerError: aHandledError [
+	"Register a given handled error for further debugging"
+
 	self subclassResponsibility
 ]
 
@@ -77,8 +105,19 @@ BlErrorHandler >> with: anElement do: aBlock failed: aFailBlock [
 	"Evaluate a given block while handling errors"
 
 	self hasError
-		ifFalse: [ aBlock on: Error do: [ :anError |
-				self handleError: anError in: anElement.
-				aFailBlock cull: anError ] ]
-		ifTrue: [ aFailBlock cull: self error ]
+		ifFalse: [
+			aBlock
+				on: Error
+				do: [ :anError |
+					self handleError: anError in: anElement.
+					aFailBlock cull: self errors ] ]
+		ifTrue: [
+			(self errorsForPhase: (self framePhaseOf: anElement))
+				ifEmpty: [
+					aBlock
+						on: Error
+						do: [ :anError |
+							self handleError: anError in: anElement.
+							aFailBlock cull: self errors ] ]
+				ifNotEmpty: [ aFailBlock cull: self errors ] ]
 ]
