@@ -16,7 +16,7 @@ BaselineOfBloc >> baseline: spec [
 			repository: 'github://pharo-graphics/Bloc/src' ];
 
 		baseline: 'SpartaDevelopment' with: [ spec
-			repository: 'github://syrel/sparta/src' ];
+			repository: 'github://syrel/Sparta/src' ];
 
 		baseline: 'TaskIt' with: [ spec 
 			repository: 'github://sbragagnolo/taskit:dev-0.5' ];
