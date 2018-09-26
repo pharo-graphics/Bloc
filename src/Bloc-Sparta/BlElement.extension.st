@@ -78,9 +78,11 @@ BlElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
 BlElement >> drawError: anError onSpartaCanvas: aCanvas [
 
 	aCanvas fill
-		paint: Color black;
+		paint: Color lightGray;
 		path: self boundsInLocal;
-		draw
+		draw.
+
+	self drawChildrenOnSpartaCanvas: aCanvas
 ]
 
 { #category : #'*Bloc-Sparta' }

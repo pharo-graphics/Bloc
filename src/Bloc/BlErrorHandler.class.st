@@ -16,7 +16,7 @@ BlErrorHandler >> convertToHandledError: anError in: anElement [
 	| aHandledError |
 
 	aHandledError := BlHandledError new.
-	aHandledError error: anError.
+	aHandledError error: anError freeze.
 	aHandledError errorHandler: self.
 	aHandledError element: anElement.
 	aHandledError framePhase: (self framePhaseOf: anElement).

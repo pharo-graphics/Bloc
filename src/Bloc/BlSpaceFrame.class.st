@@ -12,7 +12,7 @@ The frame consists of three important phases
 
 I know my currentPhase which is one of the registered phases.
 
-The list of default phases is initialized in ${method:BlFrame>>#initializePhases}$
+The list of default phases is initialized in ${method:BlSpaceFrame>>#initializePhases}$
 "
 Class {
 	#name : #BlSpaceFrame,
