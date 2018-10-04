@@ -28,7 +28,7 @@ Class {
 		'session',
 		'bitmap'
 	],
-	#category : 'Bloc-Basic-Visual'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #'instance creation' }
@@ -49,9 +49,8 @@ BlImageBackground >> image: aForm [
 		assert: [ aForm isNotNil ]
 		description: [ 'Image must not be nil' ].
 
-	self
-		assert: [ image isNil ]
-		description: [ 'Background is immutable and can not be changed' ].
+	image isNotNil
+		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
 		
 	image := aForm.
 	bitmap := nil

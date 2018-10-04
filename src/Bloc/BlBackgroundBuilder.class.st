@@ -1,65 +1,48 @@
-"
-I am a BlBackground builder.
-
-Example:
-
-BlBackground builder
-	paint: (BlRadialGradientPaint new
-		stops: { 0 -> Color blue . 1 -> Color red};
-		center: 100@100;
-		radius: 200);
-	opacity: 0.2; ""change opacity of paint background""
-	image: PolymorphSystemSettings pharoLogoForm;
-	opacity: 0.6; ""change opacity of image background""
-	build
-"
 Class {
 	#name : #BlBackgroundBuilder,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'backgrounds'
+		'opacity'
 	],
-	#category : 'Bloc-Basic-Visual'
+	#category : #'Bloc-Basic-Background'
 }
 
-{ #category : #builder }
+{ #category : #building }
 BlBackgroundBuilder >> build [
 	<return: #BlBackground>
-	self
-		assert: [ backgrounds isNotEmpty ]
-		description: [ 'There should be specified at least one background' ].
-	
-	^ backgrounds size > 1
-		ifTrue: [ BlCompositeBackground withAll: backgrounds ]
-		ifFalse: [ backgrounds first ]
-]
 
-{ #category : #accessing }
-BlBackgroundBuilder >> image: aForm [
-	backgrounds add: (BlImageBackground image: aForm)
+	^ self subclassResponsibility
 ]
 
 { #category : #initialization }
 BlBackgroundBuilder >> initialize [
 	super initialize.
 	
-	backgrounds := OrderedCollection new
+	opacity := 1.0
+]
+
+{ #category : #building }
+BlBackgroundBuilder >> isOpaque [
+	<return: #Boolean>
+
+	^ self opacity closeTo: 1
+]
+
+{ #category : #accessing }
+BlBackgroundBuilder >> opacity [
+	<return: #Number>
+
+	^ opacity
 ]
 
 { #category : #accessing }
 BlBackgroundBuilder >> opacity: aNumber [
-	"Change opacity of previously added background"
-	
 	self
-		assert: [ backgrounds isNotEmpty ]
-		description: [ 'There is no background to modify!' ].
-		
-	backgrounds last opacity: aNumber
-]
+		assert: [ aNumber isNotNil ]
+		description: [ 'Opacity must not be nil' ].
+	self
+		assert: [ aNumber between: 0.0 and: 1.0 ]
+		description: [ 'Opacity value must be within interval [0..1]' ].
 
-{ #category : #accessing }
-BlBackgroundBuilder >> paint: aColorOrBlPaint [
-	backgrounds add: (BlPaintBackground paint: aColorOrBlPaint)
+	opacity := aNumber
 ]

@@ -1,5 +1,6 @@
 "
 I represent the background of a BlElement.
+
 Use me as an immutable object.
 
 Background can be instantiated and composed directly or with the help of ===BlBackgroundBuilder===.
@@ -13,12 +14,12 @@ Class {
 	#instVars : [
 		'opacity'
 	],
-	#category : 'Bloc-Basic-Visual'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #builder }
 BlBackground class >> builder [
-	^ BlBackgroundBuilder new
+	^ BlCompositeBackgroundBuilder new
 ]
 
 { #category : #'instance creation' }
@@ -87,9 +88,12 @@ BlBackground >> opacity: aNumber [
 	self
 		assert: [ aNumber between: 0.0 and: 1.0 ]
 		description: [ 'Opacity value must be within interval [0..1]' ].
-	self
-		assert: [ opacity isNil ]
-		description: [ 'Opacity can not be changed once set. Background is immutable!' ].
-	
+
+	opacity isNotNil
+		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
+
+	self opacity = aNumber
+		ifTrue: [ ^ self ].
+
 	opacity := aNumber
 ]

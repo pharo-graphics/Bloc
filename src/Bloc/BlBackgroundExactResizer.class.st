@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'extent'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #resizing }

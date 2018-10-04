@@ -258,7 +258,7 @@ BlLinearLayoutExamples class >> exampleHorizontalUsingWeightLTR [
 		layout: BlLinearLayout horizontal;
 		size: 300@80;
 		relocate: 200 @ 100;
-		background: (BlBackground paint: Color blue);
+		background: Color blue;
 		addChildren: {e1. e2. e3}.
 
 	space := BlSpace new.
@@ -298,7 +298,7 @@ BlLinearLayoutExamples class >> exampleHorizontalUsingWeightRTL [
 		layout: BlLinearLayout horizontal rightToLeft;
 		size: 300@80;
 		relocate: 200 @ 100;
-		background: (BlBackground paint: Color blue);
+		background: Color blue;
 		addChildren: {e1. e2. e3}.
 
 	space := BlSpace new.

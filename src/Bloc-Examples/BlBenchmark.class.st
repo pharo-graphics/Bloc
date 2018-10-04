@@ -13,7 +13,7 @@ Class {
 BlBenchmark class >> createSquareAnd4SubSquaresLength: aLength min: aMin [
 |theRoot pos|
 theRoot := BlElement new
-	background:(BlBackground paint: Color random);
+	background:Color random;
 	size: (aLength ) asPoint;
 	when: BlMouseOverEvent do:[:e| e target background: Color random asBlBackground].
 
@@ -33,8 +33,8 @@ theRoot addChildren:{
 BlBenchmark class >> createSquareAnd9SubSquaresLength: aLength min: aMin [
 |theRoot pos|
 theRoot := BlElement new
-	background:(BlBackground paint: Color random);
-	size: (aLength ) asPoint;
+	background:Color random;
+	size: aLength asPoint;
 	when: BlMouseOverEvent do:[:e| e target background: Color random asBlBackground].
 
 (aLength <= aMin) ifTrue:[^ theRoot] .

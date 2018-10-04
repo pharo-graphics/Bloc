@@ -9,7 +9,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #'instance creation' }

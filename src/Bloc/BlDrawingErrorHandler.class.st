@@ -18,8 +18,6 @@ BlDrawingErrorHandler >> matches: aFramePhase [
 BlDrawingErrorHandler >> processError: aHandledError [
 	| anErrorContainer |
 	
-	ContextStackSignal emit.
-	
 	aHandledError element
 		childNamed: #errorContainer
 		ifFound: [ :anElement | anErrorContainer := anElement ]

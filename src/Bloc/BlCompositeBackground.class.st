@@ -28,7 +28,7 @@ Class {
 	#instVars : [
 		'backgrounds'
 	],
-	#category : 'Bloc-Basic-Visual'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #'instance creation' }

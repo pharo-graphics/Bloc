@@ -30,7 +30,7 @@ Class {
 	#instVars : [
 		'paint'
 	],
-	#category : 'Bloc-Basic-Visual'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #'instance creation' }
@@ -79,9 +79,8 @@ BlPaintBackground >> paint: aBlPaint [
 		assert: [ aBlPaint isNotNil ]
 		description: [ 'Paint must not be nil' ].
 
-	self
-		assert: [ paint isNil ]
-		description: [ 'Background is immutable and can not be changed' ].
+	paint isNotNil
+		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
 
 	paint := aBlPaint asBlPaint
 ]

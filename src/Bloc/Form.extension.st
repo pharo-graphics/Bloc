@@ -9,7 +9,7 @@ Form >> asBlBackground [
 Form >> asElement [
 	^ BlElement new
 		size: self extent;
-		background: (BlBackground image: self);
+		background: self;
 		yourself
 ]
 

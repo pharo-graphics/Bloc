@@ -83,7 +83,7 @@ BlAnimationExamples class >> sequential [
 	sequential := BlSequentialAnimation new addAll: { translation. scale }.
 	
 	element := BlElement new
-		background: (BlBackground paint: Color blue);
+		background: Color blue;
 		size: 100 @ 100;
 		relocate: 100 @ 100.	
 	element addAnimation: sequential.
