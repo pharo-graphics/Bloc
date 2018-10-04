@@ -1,37 +1,68 @@
 "
-I manage children using a layout strategy and can be resizeable.
-By default  I am drawn as a rectangle but I can be made to use any geometry by specifying the geometry property. The geometry is only used to define the geometry to be drawn and the interaction area.
+! Welcome to Bloc
 
-I am the superclass to create widgets.
+I am the root class of all visual elements in Bloc and can be composed out of other elements that we will refer to as ==children==. 
 
-Elements can be composed:
+!! Visual properties
+
+Being a root class and a core element I let users to configure a few esential visual properties such as background, border, transparency, size and a few more. In this part we will go through each of them.
+
+!!! Background
+
+The very first visual property to get familiar with is a background. It is represented by ${class:BlBackground}$ and corresponding subclasses that define different types of backgrounds. To change a background of the element users should send ${method:BlElement>>#background:}$ message with an instance of a background as an argument. In fact, any object that understands ${method:BlBackground>>#asBlBackground}$ can be used as a background. For example ${class:Color}$ is one of them. The following example shows how to set a gray background color:
 [[[
-parent := BlElement new.
-child := BlElement new.
-parent addChild: child			
+BlElement new background: Color gray
 ]]]
 
-Change background:
+${class:Form}$ is also can be used as a background directly. Assume the following example that set
 [[[
-element := BlElement new.
-element background: Color blue.			
+BlElement new background: (Smalltalk ui icons iconNamed: #pharoIcon)
 ]]]
+
+
+!!! Border
 
 Change border:
 [[[
-element := BlElement new.
-element border: (BlBorder paint: Color red width: 2).
+BlElement new border: (BlBorder paint: Color red width: 2).
 ]]]
 
-Add on click handler:
+
+!!! Opacity
+
+It is possible to change the transparency of the element and all its children by setting the ==opacity== property. Opacity is represented by a float number within the closed interval [0...1]. When the opacity is set to 0 an element is considered to be fully transparent, thus ${method:BlElement>>#isTransparent}$ returns true. If opacity is set to 1, the element is considered to be opaque, ${method:BlElement>>#isOpaque}$ returns true. The last but not least state of transparency is when opacity has a value between 0 and 1, but not equal to them. In this case we call the element translucent and ${method:BlElement>>#isTranslucent}$ returns true.
+
+In the following example we show how to change and query ==opacity== of the element
+
 [[[
+
 element := BlElement new.
-element when: BlClickEvent do: [ self inform: 'Clicked!' ].
+
+
 ]]]
 
-I have the following propeties:
+!! Composition
 
- - opacity - defines transparency degree of an element and takes a value in range [ 0...1 ]. Opacity influences children too, meaning that the whole element including its children will become transparent
+To be in-line with Bloc design we prefer composition over iheritance. Thus it is better to have tiny bloc elements with small and simple api and clear responsibilities that can later be composed into a more sophisticated graphical scene. In this paragraph we will learn the basic composition aspects and corresponding API.
+
+The composition relation between parent and children is 1:N meaning that an element can have at most one parent. Therefore by design it is only possible to add an element to just one element. Trying to add an element that is already a child to some other element results in ${class:BlAlreadyAddedAsChildError}$ 
+
+Bloc elements provide a set of methods to add and remove children.
+
+!!! Adding children
+
+There are four ways to add some given element as a direct child to another element.
+
+The most commonly used way to add a child is to use ${method:BlElement>>#addChild:}$ which adds a given element as the last child in the collection of children.
+[[[
+| parent child |
+parent := BlElement new size: 100@100; background: Color veryVeryLightGray.
+child := BlElement new size: 50@50; background: Color red lighter.
+parent addChild: child
+]]]
+
+ Users may also choose to add an element as the first child, for that purpose Bloc provides ${method:BlElement>>#addChildFirst:}$.
+
 "
 Class {
 	#name : #BlElement,
@@ -140,6 +171,10 @@ BlElement >> addChild: anElement at: anIndex [
 	self
 		assert: [ anElement isNotNil ]
 		description: [ 'Can not add nil element' ].
+
+	anElement hasParent
+		ifTrue: [ (BlAlreadyAddedAsChildError element: anElement) signal ].	
+	
 	self
 		assert: [ anElement hasParent not ]
 		description: [ 'Can not add child that is already added to another element!' ].
@@ -1219,17 +1254,17 @@ BlElement >> geometry: aBlGeometry [
 	"invalidate before changing geometry"
 	self invalidate.
 	geometry := aBlGeometry.
-	
+
 	"clear path cache after updating geometry path"
 	self geometry releaseCache.
 	boundsCache invalidateBoundsInLocal.
-	
+
 	"extent might not change, so we need to update geometry manually"
 	self updateGeometry.
 
 	"invalidate with new geometry"
 	self invalidate.
-	
+
 	self requestLayout
 ]
 

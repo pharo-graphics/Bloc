@@ -1,9 +1,6 @@
 Class {
 	#name : #BlExampleInfiniteForGeometryLinearNode,
 	#superclass : #BlExampleInfiniteForGeometryNode,
-	#instVars : [
-		'shouldHaveLine'
-	],
 	#category : #'Bloc-Examples-Infinite+Geometry'
 }
 

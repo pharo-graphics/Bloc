@@ -159,18 +159,19 @@ BlLinearLayoutVerticalTests >> testThreeExactChildrenAlignInExactParentLTR [
 { #category : #tests }
 BlLinearLayoutVerticalTests >> testThreeExactChildrenAlignInExactParentRTL [
 	| childA childB childC |
+
 	childA := self exact: 100@100.
 	childB := self exact: 200@100.
 	childC := self exact: 50@100.
-	
+
 	childA constraints linear horizontal alignLeft.
 	childB constraints linear horizontal alignCenter.
 	childC constraints linear horizontal alignRight.
-	
+
 	parent layout rightToLeft.
 	parent constraints horizontal exact: 500.
 	parent constraints vertical exact: 600.
-	
+
 	parent addChildren: { childA . childB . childC }.
 
 	parent forceLayout.

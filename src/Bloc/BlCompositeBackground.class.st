@@ -36,6 +36,13 @@ BlCompositeBackground class >> withAll: aCollectionOfBackground [
 	^ self new withAll: aCollectionOfBackground
 ]
 
+{ #category : #accessing }
+BlCompositeBackground >> backgrounds [
+	<return: #Collection of: #BlBackground>
+
+	^ backgrounds
+]
+
 { #category : #initialization }
 BlCompositeBackground >> initialize [
 	super initialize.

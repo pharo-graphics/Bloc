@@ -70,26 +70,56 @@ BlBasicExamples class >> shapes [
 { #category : #'examples - background' }
 BlBasicExamples >> backgroundWithImageAndColor [
 	<gtExample>
-	
-	^ BlBackground builder
+	| aBackground |
+
+	aBackground := BlBackground builder
 		image: PolymorphSystemSettings pharoLogoForm;
-		opacity: 0.6; "changes opacity of pharo logo"
+			opacity: 0.6; "changes opacity of pharo logo"
 		image: (Smalltalk ui icons iconNamed: #info);
 		paint: Color gray;
-		opacity: 0.2; "changes opacity of gray paint"
-		build
+			opacity: 0.2; "changes opacity of gray paint"
+		build.
+
+	self assert: aBackground backgrounds size equals: 3.
+
+	self assert: aBackground backgrounds first opacity equals: 0.6.
+	self assert: aBackground backgrounds first image bits equals: PolymorphSystemSettings pharoLogoForm bits.
+
+	self assert: aBackground backgrounds second opacity equals: 1.0.
+	self assert: aBackground backgrounds second image bits equals: (Smalltalk ui icons iconNamed: #info) bits.
+
+	self assert: aBackground backgrounds third opacity equals: 0.2.
+	self assert: aBackground backgrounds third paint color equals: Color gray.
+
+	^ aBackground
 ]
 
 { #category : #'examples - border' }
-BlBasicExamples >> borderText [
+BlBasicExamples >> borderRopedText [
 	<gtExample>
 	| aText |
 	
 	aText := 'Text with border' asRopedText.
-	aText attributes: {
-		BrFontSizeAttribute size: 30.
-		BrTextForegroundAttribute paint: Color gray.
-		BrFontWeightAttribute thin }.
+	aText fontSize: 30.
+	aText foreground: Color gray.
+	aText thin.
+	
+	self
+		assert: aText rope attributes
+		equals: {
+			BrFontSizeAttribute size: 30.
+			BrTextForegroundAttribute paint: Color gray.
+			BrFontWeightAttribute thin }.
+
+	^ aText
+]
+
+{ #category : #'examples - border' }
+BlBasicExamples >> borderTextElement [
+	<gtExample>
+	| aText |
+
+	aText := self borderRopedText.
 
 	^ BlTextElement new
 		text: aText;
@@ -188,7 +218,7 @@ BlBasicExamples >> elementWithAllBorders [
 { #category : #'examples - border' }
 BlBasicExamples >> elementWithEllipticBorders [
 	<gtExample>
-	
+
 	^ self container
 		layout: BlFrameLayout new;
 		size: 300@150;
@@ -197,7 +227,7 @@ BlBasicExamples >> elementWithEllipticBorders [
 		addChild: (self rightBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
 		addChild: (self topBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
 		addChild: (self bottomBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
-		addChild: self borderText
+		addChild: self borderTextElement
 ]
 
 { #category : #'examples - shadow' }
@@ -266,7 +296,7 @@ BlBasicExamples >> fabButton [
 { #category : #'examples - border' }
 BlBasicExamples >> horizontalBorder [
 	<gtExample>
-	
+
 	^ BlElement new
 		constraintsDo: [ :c |
 			c vertical exact: 20.

@@ -81,7 +81,6 @@ BlExporter >> doExport: aFinalizingBlock [
 				apply.
 
 			anElement fullDrawOnSpartaCanvas: aCanvas ] ].
-	
 	^ aFinalizingBlock cull: aCanvas
 ]
 

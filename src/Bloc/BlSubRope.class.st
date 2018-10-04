@@ -73,6 +73,14 @@ BlSubRope >> depth [
 	^ rope depth
 ]
 
+{ #category : #'rope - enumeration' }
+BlSubRope >> empty [
+	"I delegate creation to the rope which I constrain"
+	<return: #BlRope>
+
+	^ self rope empty
+]
+
 { #category : #'rope - accessing' }
 BlSubRope >> from: aStart to: anEnd [
 	self assertAccess: aStart.
