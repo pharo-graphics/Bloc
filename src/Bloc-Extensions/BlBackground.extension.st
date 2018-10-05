@@ -40,7 +40,8 @@ BlBackground >> gtViewBackgroundFor: aView [
 				padding: (BlInsets all: 50);
 				addChild:(BlElement new
 					size: 200@100;
-					outskirts: (BlOutskirts outside);
-					border: (BlBorder builder dashed; paint: Color gray; width: 1; build);
-					background: self copy) ]
+					outskirts: (BlOutskirts inside);
+					flag: 'There is a bug in drawing related to `compose` operator when border is present';
+					"border: (BlBorder builder dashed; paint: Color gray; width: 1; build);"
+					background: self) ]
 ]

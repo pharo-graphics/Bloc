@@ -67,33 +67,6 @@ BlBasicExamples class >> shapes [
 		extent: 600 @ 350
 ]
 
-{ #category : #'examples - background' }
-BlBasicExamples >> backgroundWithImageAndColor [
-	<gtExample>
-	| aBackground |
-
-	aBackground := BlBackground builder
-		image: PolymorphSystemSettings pharoLogoForm;
-			opacity: 0.6; "changes opacity of pharo logo"
-		image: (Smalltalk ui icons iconNamed: #info);
-		paint: Color gray;
-			opacity: 0.2; "changes opacity of gray paint"
-		build.
-
-	self assert: aBackground backgrounds size equals: 3.
-
-	self assert: aBackground backgrounds first opacity equals: 0.6.
-	self assert: aBackground backgrounds first image bits equals: PolymorphSystemSettings pharoLogoForm bits.
-
-	self assert: aBackground backgrounds second opacity equals: 1.0.
-	self assert: aBackground backgrounds second image bits equals: (Smalltalk ui icons iconNamed: #info) bits.
-
-	self assert: aBackground backgrounds third opacity equals: 0.2.
-	self assert: aBackground backgrounds third paint color equals: Color gray.
-
-	^ aBackground
-]
-
 { #category : #'examples - border' }
 BlBasicExamples >> borderRopedText [
 	<gtExample>
@@ -373,7 +346,7 @@ BlBasicExamples >> rectangleWithImage [
 		size: 400@200;
 		relocate: 100 @ 100;
 		geometry: (BlRectangle cornerRadius: 10);
-		background: self backgroundWithImageAndColor;
+		background: BlBackgroundExamples new buildBackgroundWithImagesAndColor;
 		yourself
 ]
 
