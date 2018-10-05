@@ -47,14 +47,14 @@ BlCompositeBackground >> backgrounds [
 BlCompositeBackground >> initialize [
 	super initialize.
 	
-	backgrounds := OrderedCollection new
+	backgrounds := Array new
 ]
 
 { #category : #testing }
 BlCompositeBackground >> isTransparent [
 	<return: #Boolean>
 
-	^ backgrounds allSatisfy: #isTransparent
+	^ (self opacity closeTo: 0.0) or: [ backgrounds allSatisfy: #isTransparent ]
 ]
 
 { #category : #geometry }
@@ -62,7 +62,7 @@ BlCompositeBackground >> matchExtent: anExtent [
 	backgrounds do: [ :aBackground | aBackground matchExtent: anExtent ]
 ]
 
-{ #category : #adding }
+{ #category : #initialization }
 BlCompositeBackground >> withAll: aCollectionOfBackgrounds [
 	self
 		assert: [ aCollectionOfBackgrounds isNotNil ]

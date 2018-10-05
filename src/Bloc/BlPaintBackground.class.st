@@ -55,10 +55,10 @@ BlPaintBackground >> hash [
 
 { #category : #testing }
 BlPaintBackground >> isTransparent [
-	"Paint packground is transperent then and only then when paint is transparent"
+	"Paint background is transparent then and only then when paint is transparent or opacity is close to 0"
 	<return: #Boolean>
 
-	^ self paint isTransparent
+	^ (self opacity closeTo: 0) or: [ self paint isTransparent ]
 ]
 
 { #category : #geometry }
