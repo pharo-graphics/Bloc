@@ -1,10 +1,12 @@
 "
-I represent the background of a BlElement.
+! Background
 
-Use me as an immutable object.
+I represent a background of the ${class:BlElement}$. 
 
-Background can be instantiated and composed directly or with the help of ===BlBackgroundBuilder===.
-See ===BlBackgroundBuilder=== for the related example
+""""I am immutable and can not be changed once created."""" To modify the background, create a new instance and set it by sending ${method:BlElement>>#background:}$
+
+Background can be instantiated and composed directly or with the help of ==BlBackgroundBuilder==
+See ==BlBackgroundBuilder== for the related example
 "
 Class {
 	#name : #BlBackground,

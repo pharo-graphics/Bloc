@@ -24,21 +24,32 @@ BlTextElementExamples >> simpleText [
 { #category : #example }
 BlTextElementExamples >> textAttributes [
 	<gtExample>
-	| text textElement |
+	| text lineElements textElement |
+	text := ('Hello world!', String cr, 'How are you?') asRopedText.
+	text
+		fontSize: 16;
+		italic. "emphasis"
+	(text from: 1 to: 12)
+		foreground: Color red "text color";
+		bold "weight";
+		normal "emphasis".
+	(text from: 13 to: text size)
+		fontSize: 20;
+		monospace. "font-family"
 
-	text := BlRopedText string: 'Hello world!', String cr, 'How are you?'.
-	text attributes: {
-		BrFontSizeAttribute size: 16.
-		BrFontEmphasisAttribute italic } from: 1 to: text size. "the whole text"
-	text attributes: {
-		BrTextForegroundAttribute paint: Color red.
-		BrFontWeightAttribute bold.
-		BrFontEmphasisAttribute normal } from: 1 to: 12. "Hello world!"
-	text attributes: {
-		BrFontSizeAttribute size: 20.
-		BrFontGenericFamilyAttribute monospace  } from: 13 to: text size. "How are you?"
-	textElement := BlTextElement new.
-	textElement text: text.
-	textElement background: Color paleYellow.
+	lineElements := Array streamContents: [ :aStream | 
+		| anIterator |
+		anIterator := text iterator.
+		[ anIterator hasNext ]
+			whileTrue: [ aStream nextPut: (BlTextElement text: anIterator nextLine) ] ].
+
+	textElement := BlElement new
+	  layout: BlLinearLayout vertical;
+	  constraintsDo: [ :c | 
+	     c horizontal fitContent.
+	     c vertical fitContent ];
+		addChildren: lineElements;
+		yourself.
+
 	^ textElement
 ]

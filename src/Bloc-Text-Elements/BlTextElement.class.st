@@ -1,5 +1,5 @@
 "
-I represent a simple multiline text element without support of scrolling.
+I represent a simple singleline text element without support of scrolling.
 
 I can measure and render provided immutable styled text; an instance of SpText.
 I am the best choice if you want to display small pieces of text.
@@ -34,7 +34,7 @@ Class {
 		'selection',
 		'baseline'
 	],
-	#category : 'Bloc-Text-Elements'
+	#category : #'Bloc-Text-Elements'
 }
 
 { #category : #'instance creation' }
