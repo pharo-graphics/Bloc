@@ -21,6 +21,7 @@ BlBackgroundExamples >> buildBackgroundWithImagesAndColor [
 
 	aBackground := aBuilder build.
 
+	self assert: aBackground opacity equals: 1.0.
 	self assert: aBackground backgrounds size equals: 3.
 
 	self assert: aBackground backgrounds first opacity equals: 0.6.

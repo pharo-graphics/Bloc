@@ -1,6 +1,8 @@
 Class {
 	#name : #BlBackgroundBuilder,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'opacity'
 	],
