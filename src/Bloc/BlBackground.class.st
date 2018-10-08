@@ -1,10 +1,12 @@
 "
 I represent the background of a BlElement.
 
-Use me as an immutable object.
+I should be used as an immutable object. I am abstract class. My subclasses define concrete types of backgrounds, like color or image background.
 
 Background can be instantiated and composed directly or with the help of ===BlBackgroundBuilder===.
-See ===BlBackgroundBuilder=== for the related example
+See ===BlBackgroundBuilder=== for the related example.
+
+
 "
 Class {
 	#name : #BlBackground,

@@ -14,6 +14,11 @@ The very first visual property to get familiar with is a background. It is repre
 BlElement new background: Color gray
 ]]]
 
+The alternative is to create an instance of a BlPaintBackground and set it the desired color.
+[[[
+BlElement new background: (BlPaintBackground paint: Color gray)
+]]]
+
 ${class:Form}$ is also can be used as a background directly. Assume the following example that set
 [[[
 BlElement new background: (Smalltalk ui icons iconNamed: #pharoIcon)
