@@ -43,6 +43,11 @@ BlBorder class >> empty [
 ]
 
 { #category : #'instance creation' }
+BlBorder class >> new [
+	self error: 'Use one of the builder methods'
+]
+
+{ #category : #'instance creation' }
 BlBorder class >> paint: aPaint [
 
 	^ self builder
@@ -125,40 +130,82 @@ BlBorder >> isVisible [
 
 { #category : #accessing }
 BlBorder >> opacity [
+	<return: #Number>
+
 	^ opacity
 ]
 
 { #category : #accessing }
-BlBorder >> opacity: anObject [
-	opacity := anObject
+BlBorder >> opacity: aNumber [
+	self
+		assert: [ aNumber isNotNil ]
+		description: [ 'Opacity must not be nil' ].
+	self
+		assert: [ aNumber between: 0.0 and: 1.0 ]
+		description: [ 'Opacity value must be within interval [0..1]' ].
+
+	opacity isNotNil
+		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
+
+	opacity := aNumber
 ]
 
 { #category : #accessing }
 BlBorder >> paint [
+	<return: #BlPaint>
+
 	^ paint
 ]
 
 { #category : #accessing }
-BlBorder >> paint: anObject [
-	paint := anObject
+BlBorder >> paint: aBlPaint [
+	self
+		assert: [ aBlPaint isNotNil ]
+		description: [ 'Paint must not be nil' ].
+
+	paint isNotNil
+		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
+
+	paint := aBlPaint asBlPaint
 ]
 
 { #category : #accessing }
 BlBorder >> style [
+	<return: #BlStrokeStyle>
+
 	^ style
 ]
 
 { #category : #accessing }
-BlBorder >> style: anObject [
-	style := anObject
+BlBorder >> style: aBlStrokeStyle [
+	self
+		assert: [ aBlStrokeStyle isNotNil ]
+		description: [ 'Style must not be nil' ].
+
+	style isNotNil
+		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
+
+	style := aBlStrokeStyle
 ]
 
 { #category : #accessing }
 BlBorder >> width [
+	<return: #Number>
+
 	^ width
 ]
 
 { #category : #accessing }
-BlBorder >> width: anObject [
-	width := anObject
+BlBorder >> width: aNumber [
+	self
+		assert: [ aNumber isNotNil ]
+		description: [ 'Width must not be nil' ].
+	self
+		assert: [ aNumber >= 0 ]
+		description: [ 'Width vmust not be negative' ].
+
+	width isNotNil
+		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
+	
+	width := aNumber
 ]

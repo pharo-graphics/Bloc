@@ -26,7 +26,8 @@ Class {
 
 { #category : #builder }
 BlBorderBuilder >> build [
-	^ BlBorder new
+	^ BlBorder basicNew
+		initialize;
 		paint: self paint;
 		width: self width;
 		style: self buildStyle;

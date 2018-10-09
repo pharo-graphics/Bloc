@@ -231,6 +231,13 @@ BlChildren >> isEmpty [
 	^ self size isZero
 ]
 
+{ #category : #'children - testing' }
+BlChildren >> isNotEmpty [
+	<return: #Boolean>
+
+	^ self size isZero not
+]
+
 { #category : #'children - accessing' }
 BlChildren >> last [
 	<return: #BlElement>

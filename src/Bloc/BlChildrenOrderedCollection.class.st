@@ -49,6 +49,11 @@ BlChildrenOrderedCollection >> removeAll: aCollectionOfBlElement [
 	collection removeAll: aCollectionOfBlElement
 ]
 
+{ #category : #'children - removing' }
+BlChildrenOrderedCollection >> removeAt: anIndex [
+	collection removeAt: anIndex
+]
+
 { #category : #'children - accessing' }
 BlChildrenOrderedCollection >> size [
 	<return: #Number>

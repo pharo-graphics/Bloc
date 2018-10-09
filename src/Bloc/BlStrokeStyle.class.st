@@ -13,6 +13,17 @@ Class {
 	#category : 'Bloc-Paint-Support'
 }
 
+{ #category : #accessing }
+BlStrokeStyle class >> default [
+	<gtExample>
+	^ self new
+		lineCap: BlStrokeLineCap butt;
+		lineJoin: BlStrokeLineJoin miter;
+		miterLimit: 4.0;
+		dashArray: #();
+		dashOffset: 0
+]
+
 { #category : #copying }
 BlStrokeStyle >> copyWithLineCap: aLineCap [
 	^ self copy lineCap: aLineCap
