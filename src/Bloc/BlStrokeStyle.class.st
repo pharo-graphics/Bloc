@@ -13,7 +13,18 @@ Class {
 	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #accessing }
+{ #category : #'instance creation' }
+BlStrokeStyle class >> dashed [
+	<gtExample>
+	^ self new
+		lineCap: BlStrokeLineCap butt;
+		lineJoin: BlStrokeLineJoin miter;
+		miterLimit: 4.0;
+		dashArray: #(6 4.2);
+		dashOffset: 0
+]
+
+{ #category : #'instance creation' }
 BlStrokeStyle class >> default [
 	<gtExample>
 	^ self new

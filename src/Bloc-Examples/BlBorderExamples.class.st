@@ -113,3 +113,99 @@ BlBorderExamples >> colorGrayBorderWithExplicitWidth [
 
 	^ aBorder
 ]
+
+{ #category : #'examples - copying' }
+BlBorderExamples >> copyWithOpacity [
+	<gtExample>
+	| anOldBorder aBorder |
+	
+	anOldBorder := self colorGrayBorder.
+	aBorder := anOldBorder copyWithOpacity: 0.5.
+	
+	self assert: (aBorder paint isKindOf: BlColorPaint).
+	self assert: aBorder paint color equals: Color gray.
+
+	self assert: (aBorder style isKindOf: BlStrokeStyle).
+	self assert: aBorder style lineCap equals: BlStrokeLineCap butt.
+	self assert: aBorder style lineJoin equals: BlStrokeLineJoin miter.
+	self assert: aBorder style miterLimit equals: 4.0.
+	self assert: aBorder style dashArray equals: #().
+	self assert: aBorder style dashOffset equals: 0.0.
+
+	self assert: aBorder width equals: 1.0.
+	self assert: aBorder opacity equals: 0.5.
+	
+	^ aBorder
+]
+
+{ #category : #'examples - copying' }
+BlBorderExamples >> copyWithPaint [
+	<gtExample>
+	| anOldBorder aBorder |
+	
+	anOldBorder := self colorGrayBorder.
+	aBorder := anOldBorder copyWithPaint: Color blue.
+	
+	self assert: (aBorder paint isKindOf: BlColorPaint).
+	self assert: aBorder paint color equals: Color blue.
+
+	self assert: (aBorder style isKindOf: BlStrokeStyle).
+	self assert: aBorder style lineCap equals: BlStrokeLineCap butt.
+	self assert: aBorder style lineJoin equals: BlStrokeLineJoin miter.
+	self assert: aBorder style miterLimit equals: 4.0.
+	self assert: aBorder style dashArray equals: #().
+	self assert: aBorder style dashOffset equals: 0.0.
+
+	self assert: aBorder width equals: 1.0.
+	self assert: aBorder opacity equals: 1.0.
+	
+	^ aBorder
+]
+
+{ #category : #'examples - copying' }
+BlBorderExamples >> copyWithStyle [
+	<gtExample>
+	| anOldBorder aBorder |
+
+	anOldBorder := self colorGrayBorder.
+	aBorder := anOldBorder copyWithStyle: BlStrokeStyle dashed.
+
+	self assert: (aBorder paint isKindOf: BlColorPaint).
+	self assert: aBorder paint color equals: Color gray.
+
+	self assert: (aBorder style isKindOf: BlStrokeStyle).
+	self assert: aBorder style lineCap equals: BlStrokeLineCap butt.
+	self assert: aBorder style lineJoin equals: BlStrokeLineJoin miter.
+	self assert: aBorder style miterLimit equals: 4.0.
+	self assert: aBorder style dashArray equals: #(6 4.2).
+	self assert: aBorder style dashOffset equals: 0.0.
+
+	self assert: aBorder width equals: 1.0.
+	self assert: aBorder opacity equals: 1.0.
+
+	^ aBorder
+]
+
+{ #category : #'examples - copying' }
+BlBorderExamples >> copyWithWidth [
+	<gtExample>
+	| anOldBorder aBorder |
+	
+	anOldBorder := self colorGrayBorder.
+	aBorder := anOldBorder copyWithWidth: 10.
+	
+	self assert: (aBorder paint isKindOf: BlColorPaint).
+	self assert: aBorder paint color equals: Color gray.
+
+	self assert: (aBorder style isKindOf: BlStrokeStyle).
+	self assert: aBorder style lineCap equals: BlStrokeLineCap butt.
+	self assert: aBorder style lineJoin equals: BlStrokeLineJoin miter.
+	self assert: aBorder style miterLimit equals: 4.0.
+	self assert: aBorder style dashArray equals: #().
+	self assert: aBorder style dashOffset equals: 0.0.
+
+	self assert: aBorder width equals: 10.
+	self assert: aBorder opacity equals: 1.0.
+	
+	^ aBorder
+]

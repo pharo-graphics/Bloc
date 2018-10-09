@@ -65,14 +65,30 @@ BlBorder class >> paint: aPaint width: aNumber [
 ]
 
 { #category : #copy }
+BlBorder >> copyWithOpacity: aNumber [
+	self
+		assert: [ aNumber isNotNil ]
+		description: [ 'Opacity must not be nil' ].
+
+	^ self class basicNew
+		initialize;
+		paint: paint;
+		style: style;
+		width: width;
+		opacity: aNumber;
+		yourself
+]
+
+{ #category : #copy }
 BlBorder >> copyWithPaint: aPaint [
 
 	self
 		assert: [ aPaint isNotNil ]
 		description: [ 'Paint must not be nil' ].
 
-	^ self class new
-		paint: aPaint asBlPaint;
+	^ self class basicNew
+		initialize;
+		paint: aPaint;
 		style: style;
 		width: width;
 		opacity: opacity;
@@ -86,7 +102,8 @@ BlBorder >> copyWithStyle: aStrokeStyle [
 		assert: [ aStrokeStyle isNotNil ]
 		description: [ 'Style must not be nil' ].
 
-	^ self class new
+	^ self class basicNew
+		initialize;
 		paint: paint;
 		style: aStrokeStyle;
 		width: width;
@@ -101,7 +118,8 @@ BlBorder >> copyWithWidth: aWidth [
 		assert: [ aWidth isNotNil ]
 		description: [ 'Width must not be nil' ].
 
-	^ self class new
+	^ self class basicNew
+		initialize;
 		paint: paint;
 		style: style;
 		width: aWidth;
