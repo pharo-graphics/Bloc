@@ -6,5 +6,6 @@ BlCompositeBackground >> drawOnSpartaCanvas: aCanvas of: anElement [
 	aCanvas layer
 		alpha: self opacity;
 		when: [ (self opacity closeTo: 1.0) not ]
-		during: [ backgrounds do: [ :aBackground | aBackground drawOnSpartaCanvas: aCanvas of: anElement ] ]
+		during: [ backgrounds do: [ :aBackground | 
+			aBackground drawOnSpartaCanvas: aCanvas of: anElement ] ]
 ]

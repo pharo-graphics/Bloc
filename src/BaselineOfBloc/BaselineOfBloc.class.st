@@ -1,3 +1,10 @@
+"
+!Bloc
+
+Bloc is a graphical infrastructure for Pharo.
+
+The central concept is ${class:BlElement}$.
+"
 Class {
 	#name : #BaselineOfBloc,
 	#superclass : #BaselineOf,

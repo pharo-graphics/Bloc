@@ -3,22 +3,30 @@ I am a special image type background given as Form.
 
 Note: I am never #isTransparent even if all Form pixels are transparent. The reason for this is the fact that ther is no fast way to detect if a Form is completly transparent without checking all pixels.
 
-Example:
-
-	BlImageBackground image: ((Form extent: 50@50 depth: 32) fillColor: Color blue)
+!! Examples 
+To create instances of me users can use the class side factory method ==image:== with a form as parameter. 
+[[[  
+BlImageBackground 
+	image: ((Form extent: 50@50 depth: 32) fillColor: Color blue)
+]]]
 	
-	or
-	
-	BlImageBackground new
-		image: PolymorphSystemSettings pharoLogoForm;
-		yourself
+[[[ 
+BlImageBackground new
+	image: PolymorphSystemSettings pharoLogoForm
+]]]
+		
+Alternatively, the message ==#asBlBackground== can directly be send to the ==Form== object to obtain a background:
+[[[
+PolymorphSystemSettings pharoLogoForm asBlBackground.
+]]]
 		
 Opacity example:
 
-	BlImageBackground new
-		opacity: 0.5;
-		image: PolymorphSystemSettings pharoLogoForm;
-		yourself
+[[[ 
+BlImageBackground new
+	opacity: 0.5;
+	image: PolymorphSystemSettings pharoLogoForm
+]]]
 "
 Class {
 	#name : #BlImageBackground,
