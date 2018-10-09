@@ -11,7 +11,7 @@ Class {
 		'Inside',
 		'Outside'
 	],
-	#category : 'Bloc-Basic-Visual'
+	#category : #'Bloc-Basic-Border'
 }
 
 { #category : #'predefined instances' }
