@@ -72,20 +72,20 @@ BlTextElement >> defaultBaseline [
 ]
 
 { #category : #initialization }
-BlTextElement >> defaultOffscreenCanvas [
-	"Return an offscreen canvas used to measure text.
-	It must be of the same type and backend as rendering canvas"
-	<return: #SpartaCanvas>
-
-	^ Bloc preferableSpartaCanvas offscreen
-]
-
-{ #category : #initialization }
 BlTextElement >> defaultText [
 	"Return a default text I should be created with"
 	<return: #BlText>
 
 	^ BlRopedText string: 'Text'
+]
+
+{ #category : #initialization }
+BlTextElement >> defaultTextMeasurer [
+	"Return an offscreen canvas used to measure text.
+	It must be of the same type and backend as rendering canvas"
+	<return: #SpartaCanvas>
+
+	^ Bloc preferableSpartaCanvas offscreen
 ]
 
 { #category : #initialization }
@@ -198,7 +198,7 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 		maxHeight: aMaxHeight;
 		padding: self padding.
 
-	paragraph measureOn: self defaultOffscreenCanvas.
+	paragraph measureOn: self defaultTextMeasurer.
 	"text layout is measured at this point"
 
 	aMeasuredWidth := paragraph width.
