@@ -9,49 +9,18 @@ Being a root class and a core element I let users to configure a few esential vi
 
 !!! Background
 
-The very first visual property to get familiar with is a background. It is represented by ${class:BlBackground}$ and corresponding subclasses that define different types of backgrounds. To change a background of the element users should send ${method:BlElement>>#background:}$ message with an instance of a background as an argument. In fact, any object that understands ${method:BlBackground>>#asBlBackground}$ can be used as a background. For example ${class:Color}$ is one of them. The following example shows how to set a gray background color:
-[[[
-BlElement new background: Color gray
-]]]
-
-The alternative is to create an instance of a BlPaintBackground and set it the desired color.
-[[[
-BlElement new background: (BlPaintBackground paint: Color gray)
-]]]
-
-${class:Form}$ is also can be used as a background directly. Assume the following example that set
-[[[
-BlElement new background: (Smalltalk ui icons iconNamed: #pharoIcon)
-]]]
-
+${class:BlBackground}$describes how an element should be filled, e.g. its background.
+${class:BlBackgroundExamples}$ gives a detailed insight in the world of bloc backgrounds.
 
 !!! Border
 
-Change border:
-[[[
-BlElement new border: (BlBorder paint: Color red width: 2).
-]]]
-
+${class:BlBorder}$ is a visual property that defines how the outline of the element should be rendered. It also influences ==stroked bounds== of the element.
+${class:BlBorderExamples}$ provides more detailed information about a border.
 
 !!! Opacity
 
-It is possible to change transparency of the element and all its children by setting the ==opacity== property. Opacity is represented by a float number within the closed interval [0...1].
-""""NB: Opacity is a purely visual property, it is not taken into account during event dispatch phase, thus even transparent elements still receive mouse events""""
-
-When opacity is set to 0 an element is considered to be fully transparent, thus ${method:BlElement>>#isTransparent}$ returns true:
-${example:BlElementExamples>>#makeTransparent}$
-If opacity is set to 1, the element is considered to be opaque, ${method:BlElement>>#isOpaque}$ returns true:
-${example:BlElementExamples>>#makeOpaque}$
-The last but not least state of transparency is when opacity property has a value between 0 and 1, but not equal to them. In this case we call the element translucent and ${method:BlElement>>#isTranslucent}$ returns true:
-${example:BlElementExamples>>#makeTranslucent}$
-In the following example we show how to change and query ==opacity== of the element:
-[[[
-|element|
-element := BlElement new background: Color black.
-element opacity: 0.5.
-self assert: element opacity equals: 0.5.
-element
-]]]
+Opacity defines how transparent an element is. It does not influence event propagation.
+${class:BlOpacityExamples}$ shows in details how opacity affects the element.
 
 !! Composition
 

@@ -13,8 +13,6 @@ There are four main types of backgrounds:
 The simplest of the available backgrounds is the paint background. A paint can be either a simple color or a type of gradient.
 
 
-
-
 "
 Class {
 	#name : #BlBackgroundExamples,

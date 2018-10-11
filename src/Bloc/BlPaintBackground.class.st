@@ -2,7 +2,7 @@
 I am a background that uses a ===BlPaint===. A paint can be either a simple color or a type of gradient.
 
 !! Examples
-Examples are provided by the class ${class:BlPaintBackgroundExamples}.
+Examples are provided by the class ${class:BlPaintBackgroundExamples}$.
 
 "
 Class {
