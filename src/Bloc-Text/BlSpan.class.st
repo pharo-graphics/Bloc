@@ -15,8 +15,7 @@ Class {
 BlSpan class >> text: aBrText attributes: theAttributes [
 	^ self basicNew
 		initialize;
-		text: aBrText
-		attributes: theAttributes;
+		text: aBrText attributes: theAttributes;
 		yourself
 ]
 
@@ -28,38 +27,8 @@ BlSpan >> attributes [
 	^ attributes
 ]
 
-{ #category : #accessing }
-BlSpan >> attributes: arg1 [ 
-	^ self shouldBeImplemented
-]
-
-{ #category : #accessing }
-BlSpan >> attributes: arg1 from: arg2 to: arg3 [ 
-	^ self shouldBeImplemented
-]
-
-{ #category : #accessing }
-BlSpan >> delete: arg1 to: arg2 [ 
-	^ self shouldBeImplemented
-]
-
-{ #category : #accessing }
-BlSpan >> insertString: arg1 at: arg2 [ 
-	^ self shouldBeImplemented
-]
-
-{ #category : #accessing }
-BlSpan >> insertText: arg1 at: arg2 [ 
-	^ self shouldBeImplemented
-]
-
 { #category : #initialization }
 BlSpan >> text: aBrText attributes: theAttributes [
 	text := aBrText.
 	attributes := theAttributes
-]
-
-{ #category : #accessing }
-BlSpan >> unstyle [
-	^ self shouldBeImplemented
 ]

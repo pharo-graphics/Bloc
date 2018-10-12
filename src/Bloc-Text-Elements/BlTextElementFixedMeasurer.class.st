@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTextElementWithFixedMeasurer,
-	#superclass : #BlTextElement,
+	#name : #BlTextElementFixedMeasurer,
+	#superclass : #BlTextElementMeasurer,
 	#instVars : [
 		'measurer'
 	],
@@ -8,52 +8,47 @@ Class {
 }
 
 { #category : #'font - metrics' }
-BlTextElementWithFixedMeasurer >> ascent [
+BlTextElementFixedMeasurer >> ascent [
 	^ measurer ascent
 ]
 
 { #category : #'font - metrics' }
-BlTextElementWithFixedMeasurer >> ascent: aNumber [
+BlTextElementFixedMeasurer >> ascent: aNumber [
 	measurer ascent: aNumber
 ]
 
-{ #category : #initialization }
-BlTextElementWithFixedMeasurer >> defaultTextMeasurer [
-	^ measurer
-]
-
 { #category : #'font - metrics' }
-BlTextElementWithFixedMeasurer >> descent [
+BlTextElementFixedMeasurer >> descent [
 	^ measurer descent
 ]
 
 { #category : #'font - metrics' }
-BlTextElementWithFixedMeasurer >> descent: aNumber [
+BlTextElementFixedMeasurer >> descent: aNumber [
 	measurer descent: aNumber
 ]
 
 { #category : #'font - metrics' }
-BlTextElementWithFixedMeasurer >> glyphHeight [
+BlTextElementFixedMeasurer >> glyphHeight [
 	^ measurer height
 ]
 
 { #category : #'font - metrics' }
-BlTextElementWithFixedMeasurer >> glyphHeight: aNumber [
+BlTextElementFixedMeasurer >> glyphHeight: aNumber [
 	measurer height: aNumber
 ]
 
 { #category : #'font - metrics' }
-BlTextElementWithFixedMeasurer >> glyphWidth [
+BlTextElementFixedMeasurer >> glyphWidth [
 	^ measurer glyphWidth
 ]
 
 { #category : #'font - metrics' }
-BlTextElementWithFixedMeasurer >> glyphWidth: aNumber [
+BlTextElementFixedMeasurer >> glyphWidth: aNumber [
 	measurer glyphWidth: aNumber
 ]
 
 { #category : #initialization }
-BlTextElementWithFixedMeasurer >> initialize [
+BlTextElementFixedMeasurer >> initialize [
 	super initialize.
 	
 	measurer := BrTextParagraphFixedSpanMeasurer new.
@@ -61,4 +56,9 @@ BlTextElementWithFixedMeasurer >> initialize [
 	measurer descent: 5.
 	measurer glyphWidth: 10.
 	measurer height: 15
+]
+
+{ #category : #initialization }
+BlTextElementFixedMeasurer >> measurer [
+	^ measurer
 ]

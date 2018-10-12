@@ -1,11 +1,22 @@
-"
-I contain examples of how to create and attribute a text model and then create a corresponding text element
-"
 Class {
 	#name : #BlTextElementExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Text'
+	#category : #'Bloc-Examples-Text'
 }
+
+{ #category : #example }
+BlTextElementExamples >> helloText [
+	<gtExample>
+
+	^ 'mama' asRopedText fontSize: 80
+]
+
+{ #category : #example }
+BlTextElementExamples >> loremIpsumText [
+	<gtExample>
+
+	^ (String loremIpsum: 50) asRopedText
+]
 
 { #category : #example }
 BlTextElementExamples >> simpleText [
@@ -51,5 +62,17 @@ BlTextElementExamples >> textAttributes [
 		addChildren: lineElements;
 		yourself.
 
+	^ textElement
+]
+
+{ #category : #example }
+BlTextElementExamples >> textElement [
+	<gtExample>
+	| text textElement |
+	text := self helloText.
+	textElement := BlTextElement new.
+	textElement text: text.
+	textElement clipChildren: false.
+	self assert: textElement text equals: text.
 	^ textElement
 ]

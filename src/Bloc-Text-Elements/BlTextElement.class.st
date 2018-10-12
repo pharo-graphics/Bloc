@@ -1,29 +1,9 @@
 "
-I represent a simple singleline text element without support of scrolling.
+! Text element
 
-I can measure and render provided immutable styled text; an instance of SpText.
-I am the best choice if you want to display small pieces of text.
+""""I am independent from Sparta """"
 
-Public API and Key Messages
-
-- text: to change text I should represent
-
-Example:
-
-   textElement := BlTextElement new.
-   textElement text: (SpText fromString: 'Hello world!').
- 
-Internal Representation and Key Implementation Points.
-
-    Instance Variables
-	textLayout:		<SpTextLayout> a measured and splitted text layout. Recreated on each measurement step. Used to render text.
-	text:			<SpText> a text I represent
-
-
-    Implementation Points
-
-Since text measurement is backend specific I use an offscreen canvas to measure text.
-See #defaultOffscreenCanvas
+${class:BlTextElementBaselineExamples}$
 "
 Class {
 	#name : #BlTextElement,
@@ -32,7 +12,8 @@ Class {
 		'text',
 		'paragraph',
 		'selection',
-		'baseline'
+		'baseline',
+		'measurer'
 	],
 	#category : #'Bloc-Text-Elements'
 }
@@ -64,6 +45,41 @@ BlTextElement >> boundsBaseline [
 	self baseline: BrTextParagraphBoundsBaseline uniqueInstance
 ]
 
+{ #category : #layout }
+BlTextElement >> computeMaxHeight: anExtentMeasurementSpec [
+	<return: #Number>
+	| aMaxHeight aHeightSpec aPadding |
+
+	aMaxHeight := self constraints maxHeight.
+	aHeightSpec := anExtentMeasurementSpec heightSpec.
+	aPadding := self constraints padding.
+	
+	aHeightSpec isUnspecified
+		ifFalse: [ aMaxHeight := aMaxHeight min: aHeightSpec size ].
+
+	aMaxHeight := (aMaxHeight - aPadding height) max: 0.
+	
+	^ aMaxHeight
+]
+
+{ #category : #layout }
+BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
+	<return: #Number>
+	| aMaxWidth aWidthSpec aPadding |
+
+	aMaxWidth := self constraints maxWidth.
+	aWidthSpec := anExtentMeasurementSpec widthSpec.
+	aPadding := self constraints padding.
+	
+	"Unspecified means that layout may take as much space horizontally as it wishes"
+	aWidthSpec isUnspecified
+		ifFalse: [ aMaxWidth := aMaxWidth min: aWidthSpec size ].
+
+	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
+	
+	^ aMaxWidth
+]
+
 { #category : #initialization }
 BlTextElement >> defaultBaseline [
 	<return: #BrTextParagraphBaseline>
@@ -81,11 +97,7 @@ BlTextElement >> defaultText [
 
 { #category : #initialization }
 BlTextElement >> defaultTextMeasurer [
-	"Return an offscreen canvas used to measure text.
-	It must be of the same type and backend as rendering canvas"
-	<return: #SpartaCanvas>
-
-	^ Bloc preferableSpartaCanvas offscreen
+	^ BlTextElementCanvasMeasurer new
 ]
 
 { #category : #initialization }
@@ -115,14 +127,12 @@ BlTextElement >> initialize [
 	"Text layout is created during measurement in onMeasure:"
 	paragraph := nil.
 	
-	"self border: (BlBorder paint: Color random width: 1) .
-	self background: Color yellow muchLighter muchLighter."
-	
 	self constraintsDo: [ :c | 
 		c horizontal fitContent.
 		c vertical fitContent ].
-	
-	selection := BlCompositeSelection new
+
+	selection := BlCompositeSelection new.
+	measurer := self defaultTextMeasurer
 ]
 
 { #category : #layout }
@@ -139,7 +149,7 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 				measurementSpecFor: anExtentMeasurementSpec widthSpec
 				usedSize: 0
 				resizer: aWidthResizer ].
-			
+
 		aHeightResizer isMatchParent
 			ifTrue: [ aHeightSpec := BlMeasurementSpec exact: self measuredHeight ]
 			ifFalse: [ aHeightSpec := self layout
@@ -151,39 +161,17 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 ]
 
 { #category : #layout }
-BlTextElement >> onMeasure: anExtentMeasurementSpec [
+BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
-	| aHeightSpec aWidthSpec aMaxHeight aMaxWidth aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
+	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
 
-	self
-		assert: [ text isNotNil ]
-		description: [ 'Text model must be nil!' ].
-
-	(self shouldMeasure: anExtentMeasurementSpec)
-		ifFalse: [ ^ self ].
-
-	aMaxWidth := self constraints maxWidth.
-	aMaxHeight := self constraints maxHeight.
 	aWidthSpec := anExtentMeasurementSpec widthSpec.
 	aHeightSpec := anExtentMeasurementSpec heightSpec.
 	aPadding := self constraints padding.
 	
-	"Unspecified means that layout may take as much space horizontally as it wishes"
-	aWidthSpec isUnspecified
-		ifFalse: [ aMaxWidth := aMaxWidth min: aWidthSpec size ].
-		"Unspecified means that layout may take as much space horizontally as it wishes"
-	aHeightSpec isUnspecified
-		ifFalse: [ aMaxHeight := aMaxHeight min: aHeightSpec size ].
-	
-	"Exact spec limits max height and width to specific values"
-	aWidthSpec isExact ifTrue: [ 
-		aMaxWidth := aWidthSpec size ].
-	aHeightSpec isExact ifTrue: [ 
-		aMaxHeight := aHeightSpec size ].
-
-	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
-	aMaxHeight := (aMaxHeight - aPadding height) max: 0.
+	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
+	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
 
 	paragraph
 		"Create a new text layout"
@@ -198,11 +186,11 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 		maxHeight: aMaxHeight;
 		padding: self padding.
 
-	paragraph measureOn: self defaultTextMeasurer.
+	paragraph measureOn: self measurer.
 	"text layout is measured at this point"
 
-	aMeasuredWidth := paragraph width.
-	aMeasuredHeight := (paragraph ascent + paragraph descent).
+	aMeasuredWidth := paragraph width min: aMaxWidth.
+	aMeasuredHeight := (paragraph ascent + paragraph descent) min: aMaxHeight.
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
 	aWidthSpec isExact ifTrue: [ 
@@ -219,8 +207,28 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 
 	"Finally set measured extent"
 	self measuredExtent: aMeasuredExtent.
+]
+
+{ #category : #accessing }
+BlTextElement >> measurer [
+	^ measurer
+]
+
+{ #category : #accessing }
+BlTextElement >> measurer: aTextElementMeasurer [
+	measurer := aTextElementMeasurer.
+	self textChanged
+]
+
+{ #category : #layout }
+BlTextElement >> onMeasure: anExtentMeasurementSpec [
+	self
+		assert: [ text isNotNil ]
+		description: [ 'Text model must be nil!' ].
+
+	(self shouldMeasure: anExtentMeasurementSpec)
+		ifTrue: [ self measureParagraph: anExtentMeasurementSpec ].
 	
-	"don't forget to measure children if there are any"
 	self measureChildren: anExtentMeasurementSpec
 ]
 
@@ -280,33 +288,24 @@ BlTextElement >> selection [
 
 { #category : #layout }
 BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
-	| aHeightSpec aWidthSpec isWidthValid isHeightValid |
+	<return: #Boolean>
 
-	"If we don't have text layout we must re-measure"
 	paragraph
 		ifNil: [ ^ true ].
 
-	self isLayoutRequested
-		ifTrue: [ ^ true ].
+	(self layout previousMeasurementSpec = anExtentMeasurementSpec)
+		ifFalse: [ ^ true ].
 
-	true ifTrue: [ ^ true ].
-
-	aWidthSpec := anExtentMeasurementSpec widthSpec.
-	aHeightSpec := anExtentMeasurementSpec heightSpec.
-
-	"If any spec is exact we must re-measure. Exact limit available height and width"
-	(aWidthSpec isExact or: [ aHeightSpec isExact ])
-		ifTrue: [ ^ true ].
-
-	isWidthValid := aWidthSpec isUnspecified or: [ 
-		"at most size"
-		aWidthSpec size >= paragraph width ].
-	
-	isHeightValid := aHeightSpec isUnspecified or: [ 
-		"at most size"
-		aHeightSpec size >= paragraph height ].
-	
-	^ (isWidthValid and: [ isHeightValid ]) not
+	paragraph maxWidth = (self computeMaxWidth: anExtentMeasurementSpec)
+		ifFalse: [ ^ true ].
+		
+	paragraph maxHeight = (self computeMaxHeight: anExtentMeasurementSpec)
+		ifFalse: [ ^ true ].
+		
+	paragraph padding = self padding
+		ifFalse: [ ^ true ].
+		
+	^ false
 ]
 
 { #category : #accessing }

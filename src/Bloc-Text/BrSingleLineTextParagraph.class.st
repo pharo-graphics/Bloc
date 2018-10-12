@@ -68,8 +68,7 @@ BrSingleLineTextParagraph >> line [
 
 { #category : #'paragraph - measuring' }
 BrSingleLineTextParagraph >> measureOn: aCanvas with: aSpanMeasurer [
-	"Measure and create lines with text spans from provided rope
-	based on attributes and layout properties (maximum width / height)"
+	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 	| anIterator aMeasurer |
 
 	aMeasurer := self createMeasurer.
