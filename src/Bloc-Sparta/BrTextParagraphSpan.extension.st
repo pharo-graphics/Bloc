@@ -49,7 +49,7 @@ BrTextParagraphSpan >> drawOnSpartaCanvas: aCanvas [
 		text: self textRun;
 		start: self textRunStart;
 		end: self textRunEnd;
-		baseline: self baseline;
+		baseline: self baseline + (0@0.5);
 		ensureFont;
 		draw.
 

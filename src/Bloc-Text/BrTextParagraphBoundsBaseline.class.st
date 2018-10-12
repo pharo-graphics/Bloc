@@ -8,5 +8,5 @@ Class {
 BrTextParagraphBoundsBaseline >> computedBaseline: aTextParagraph [
 	<return: #Point>
 
-	^ 0 @ (((aTextParagraph ascent - (aTextParagraph bottom / 2.0) + aTextParagraph height) / 2.0) + 0.5)
+	^ 0 @ ((aTextParagraph ascent - (aTextParagraph bottom / 2.0) + aTextParagraph height) / 2.0)
 ]

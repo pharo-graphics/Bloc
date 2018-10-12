@@ -13,5 +13,5 @@ Class {
 BrTextParagraphAscentBaseline >> computedBaseline: aTextParagraph [
 	<return: #Point>
 
-	^ 0 @ (aTextParagraph ascent + 0.5)
+	^ 0 @ aTextParagraph ascent
 ]
