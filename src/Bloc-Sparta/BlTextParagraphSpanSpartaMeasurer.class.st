@@ -2,7 +2,7 @@
 I measure a text span in a context of sparta canvas
 "
 Class {
-	#name : #BrTextParagraphSpanSpartaMeasurer,
+	#name : #BlTextParagraphSpanSpartaMeasurer,
 	#superclass : #BlTextParagraphSpanMeasurer,
 	#instVars : [
 		'textRun',
@@ -19,14 +19,14 @@ Class {
 }
 
 { #category : #measurement }
-BrTextParagraphSpanSpartaMeasurer >> applyMetricsOn: aParagraphSpan [
+BlTextParagraphSpanSpartaMeasurer >> applyMetricsOn: aParagraphSpan [
 	"Apply metrics on a given paragrah span taking into account its transformation if one exists"
 	
 	aParagraphSpan applySpartaMetrics: metrics
 ]
 
 { #category : #measurement }
-BrTextParagraphSpanSpartaMeasurer >> measure: aTextRun from: aTextRunStart to: aTextRunEnd width: aWidth [
+BlTextParagraphSpanSpartaMeasurer >> measure: aTextRun from: aTextRunStart to: aTextRunEnd width: aWidth [
 	| aSpanIterator metricsLength skipLength currentEnd actualEnd actualEndChanged |
 	"Measure a given text run from provided start to the end indices limiting available with to aWidth"
 	
@@ -85,12 +85,12 @@ BrTextParagraphSpanSpartaMeasurer >> measure: aTextRun from: aTextRunStart to: a
 ]
 
 { #category : #initialization }
-BrTextParagraphSpanSpartaMeasurer >> reset [
+BlTextParagraphSpanSpartaMeasurer >> reset [
 	textRunIterator := textRun iterator
 ]
 
 { #category : #initialization }
-BrTextParagraphSpanSpartaMeasurer >> span: aBrSpan of: aTextParagraph on: aSpartaCanvas [
+BlTextParagraphSpanSpartaMeasurer >> span: aBrSpan of: aTextParagraph on: aSpartaCanvas [
 	"Prepare and configure me for a given text span within a paragraph"
 	| aTextPainter |
 
@@ -114,7 +114,7 @@ BrTextParagraphSpanSpartaMeasurer >> span: aBrSpan of: aTextParagraph on: aSpart
 ]
 
 { #category : #accessing }
-BrTextParagraphSpanSpartaMeasurer >> spanEnd [
+BlTextParagraphSpanSpartaMeasurer >> spanEnd [
 	"Return an index of a last letter in a original text span that fit in a requested width
 	during last measurement process"
 	<return: #Number>
@@ -123,7 +123,7 @@ BrTextParagraphSpanSpartaMeasurer >> spanEnd [
 ]
 
 { #category : #accessing }
-BrTextParagraphSpanSpartaMeasurer >> spanStart [
+BlTextParagraphSpanSpartaMeasurer >> spanStart [
 	"Return an index of a first letter in a original text span that was measured during last measurement process"
 	<return: #Number>
 
@@ -131,7 +131,7 @@ BrTextParagraphSpanSpartaMeasurer >> spanStart [
 ]
 
 { #category : #accessing }
-BrTextParagraphSpanSpartaMeasurer >> textRun [
+BlTextParagraphSpanSpartaMeasurer >> textRun [
 	"Return a text run for a current text span"
 	<return: #Object>
 	
@@ -139,7 +139,7 @@ BrTextParagraphSpanSpartaMeasurer >> textRun [
 ]
 
 { #category : #accessing }
-BrTextParagraphSpanSpartaMeasurer >> textRunEnd [
+BlTextParagraphSpanSpartaMeasurer >> textRunEnd [
 	"Return an index of a last glyph that fits within a limited width set during last measurement process"
 	<return: #Number>
 
@@ -147,7 +147,7 @@ BrTextParagraphSpanSpartaMeasurer >> textRunEnd [
 ]
 
 { #category : #accessing }
-BrTextParagraphSpanSpartaMeasurer >> textRunLength [
+BlTextParagraphSpanSpartaMeasurer >> textRunLength [
 	"Return a total amount of glyphs (not characters!) in a text run"
 	<return: #Number>
 
@@ -155,7 +155,7 @@ BrTextParagraphSpanSpartaMeasurer >> textRunLength [
 ]
 
 { #category : #accessing }
-BrTextParagraphSpanSpartaMeasurer >> textRunStart [
+BlTextParagraphSpanSpartaMeasurer >> textRunStart [
 	"Return an index of a first glyph that was measure during previous measurement process"
 	<return: #Number>
 
@@ -163,7 +163,7 @@ BrTextParagraphSpanSpartaMeasurer >> textRunStart [
 ]
 
 { #category : #metrics }
-BrTextParagraphSpanSpartaMeasurer >> width [
+BlTextParagraphSpanSpartaMeasurer >> width [
 	"Return a measured width of a text run"
 	<return: #Number>
 

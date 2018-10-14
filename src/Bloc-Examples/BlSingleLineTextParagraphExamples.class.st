@@ -2,34 +2,34 @@
 I contain examples of a text paragraph
 "
 Class {
-	#name : #BrSingleLineTextParagraphExamples,
+	#name : #BlSingleLineTextParagraphExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Text'
+	#category : #'Bloc-Examples-Text'
 }
 
 { #category : #'font - metrics' }
-BrSingleLineTextParagraphExamples >> ascent [
+BlSingleLineTextParagraphExamples >> ascent [
 	<gtExample>
 
 	^ 10
 ]
 
 { #category : #'font - metrics' }
-BrSingleLineTextParagraphExamples >> descent [
+BlSingleLineTextParagraphExamples >> descent [
 	<gtExample>
 
 	^ 5
 ]
 
 { #category : #'instance creation' }
-BrSingleLineTextParagraphExamples >> emoji [
+BlSingleLineTextParagraphExamples >> emoji [
 	<gtExample>
 
 	^ '😃'
 ]
 
 { #category : #'instance creation' }
-BrSingleLineTextParagraphExamples >> emojiParagraph [
+BlSingleLineTextParagraphExamples >> emojiParagraph [
 	<gtExample>
 	| aParagraph |
 
@@ -40,7 +40,7 @@ BrSingleLineTextParagraphExamples >> emojiParagraph [
 ]
 
 { #category : #'instance creation' }
-BrSingleLineTextParagraphExamples >> emptyParagraph [
+BlSingleLineTextParagraphExamples >> emptyParagraph [
 	<gtExample>
 	| aParagraph |
 
@@ -51,21 +51,21 @@ BrSingleLineTextParagraphExamples >> emptyParagraph [
 ]
 
 { #category : #'font - metrics' }
-BrSingleLineTextParagraphExamples >> glyphWidth [
+BlSingleLineTextParagraphExamples >> glyphWidth [
 	<gtExample>
 
 	^ 10
 ]
 
 { #category : #'instance creation' }
-BrSingleLineTextParagraphExamples >> haba [
+BlSingleLineTextParagraphExamples >> haba [
 	<gtExample>
 
 	^ 'Haba'
 ]
 
 { #category : #'instance creation' }
-BrSingleLineTextParagraphExamples >> habaParagraph [
+BlSingleLineTextParagraphExamples >> habaParagraph [
 	<gtExample>
 	| aParagraph |
 
@@ -76,14 +76,14 @@ BrSingleLineTextParagraphExamples >> habaParagraph [
 ]
 
 { #category : #'font - metrics' }
-BrSingleLineTextParagraphExamples >> height [
+BlSingleLineTextParagraphExamples >> height [
 	<gtExample>
 
 	^ 12
 ]
 
 { #category : #'geometry - haba' }
-BrSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHaba [
+BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHaba [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -96,7 +96,7 @@ BrSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHaba
 ]
 
 { #category : #'geometry - haba' }
-BrSingleLineTextParagraphExamples >> indexAtBetweenHalfsOfFirstCharacterInHaba [
+BlSingleLineTextParagraphExamples >> indexAtBetweenHalfsOfFirstCharacterInHaba [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -109,7 +109,7 @@ BrSingleLineTextParagraphExamples >> indexAtBetweenHalfsOfFirstCharacterInHaba [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> indexAtFarBottomLeftPointInEmpty [
+BlSingleLineTextParagraphExamples >> indexAtFarBottomLeftPointInEmpty [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -122,7 +122,7 @@ BrSingleLineTextParagraphExamples >> indexAtFarBottomLeftPointInEmpty [
 ]
 
 { #category : #'geometry - haba' }
-BrSingleLineTextParagraphExamples >> indexAtFarBottomLeftPointInHaba [
+BlSingleLineTextParagraphExamples >> indexAtFarBottomLeftPointInHaba [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -135,7 +135,7 @@ BrSingleLineTextParagraphExamples >> indexAtFarBottomLeftPointInHaba [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> indexAtFarBottomPointInEmpty [
+BlSingleLineTextParagraphExamples >> indexAtFarBottomPointInEmpty [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -148,7 +148,7 @@ BrSingleLineTextParagraphExamples >> indexAtFarBottomPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> indexAtFarBottomRightPointInEmpty [
+BlSingleLineTextParagraphExamples >> indexAtFarBottomRightPointInEmpty [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -161,7 +161,7 @@ BrSingleLineTextParagraphExamples >> indexAtFarBottomRightPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> indexAtFarTopLeftPointInEmpty [
+BlSingleLineTextParagraphExamples >> indexAtFarTopLeftPointInEmpty [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -174,7 +174,7 @@ BrSingleLineTextParagraphExamples >> indexAtFarTopLeftPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> indexAtFarTopPointInEmpty [
+BlSingleLineTextParagraphExamples >> indexAtFarTopPointInEmpty [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -187,7 +187,7 @@ BrSingleLineTextParagraphExamples >> indexAtFarTopPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> indexAtFarTopRightPointInEmpty [
+BlSingleLineTextParagraphExamples >> indexAtFarTopRightPointInEmpty [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -200,7 +200,7 @@ BrSingleLineTextParagraphExamples >> indexAtFarTopRightPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> indexAtFarZeroInEmpty [
+BlSingleLineTextParagraphExamples >> indexAtFarZeroInEmpty [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -213,7 +213,7 @@ BrSingleLineTextParagraphExamples >> indexAtFarZeroInEmpty [
 ]
 
 { #category : #'geometry - haba' }
-BrSingleLineTextParagraphExamples >> indexAtLeftHalfOfFirstCharacterInHaba [
+BlSingleLineTextParagraphExamples >> indexAtLeftHalfOfFirstCharacterInHaba [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -226,7 +226,7 @@ BrSingleLineTextParagraphExamples >> indexAtLeftHalfOfFirstCharacterInHaba [
 ]
 
 { #category : #'geometry - haba' }
-BrSingleLineTextParagraphExamples >> indexAtLeftHalfOfForthCharacterInHaba [
+BlSingleLineTextParagraphExamples >> indexAtLeftHalfOfForthCharacterInHaba [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -239,7 +239,7 @@ BrSingleLineTextParagraphExamples >> indexAtLeftHalfOfForthCharacterInHaba [
 ]
 
 { #category : #'geometry - haba' }
-BrSingleLineTextParagraphExamples >> indexAtLeftHalfOfSecondCharacterInHaba [
+BlSingleLineTextParagraphExamples >> indexAtLeftHalfOfSecondCharacterInHaba [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -252,7 +252,7 @@ BrSingleLineTextParagraphExamples >> indexAtLeftHalfOfSecondCharacterInHaba [
 ]
 
 { #category : #'geometry - haba' }
-BrSingleLineTextParagraphExamples >> indexAtLeftHalfOfThirdCharacterInHaba [
+BlSingleLineTextParagraphExamples >> indexAtLeftHalfOfThirdCharacterInHaba [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -265,7 +265,7 @@ BrSingleLineTextParagraphExamples >> indexAtLeftHalfOfThirdCharacterInHaba [
 ]
 
 { #category : #'geometry - haba' }
-BrSingleLineTextParagraphExamples >> indexAtRightHalfOfFirstCharacterInHaba [
+BlSingleLineTextParagraphExamples >> indexAtRightHalfOfFirstCharacterInHaba [
 	<gtExample>
 	| aParagraph anIndex |
 
@@ -278,7 +278,7 @@ BrSingleLineTextParagraphExamples >> indexAtRightHalfOfFirstCharacterInHaba [
 ]
 
 { #category : #'paragraph - measuring' }
-BrSingleLineTextParagraphExamples >> measuredEmoji [
+BlSingleLineTextParagraphExamples >> measuredEmoji [
 	<gtExample>
 	| aParagraph aLine aSpan |
 	
@@ -324,7 +324,7 @@ BrSingleLineTextParagraphExamples >> measuredEmoji [
 ]
 
 { #category : #'paragraph - measuring' }
-BrSingleLineTextParagraphExamples >> measuredEmpty [
+BlSingleLineTextParagraphExamples >> measuredEmpty [
 	<gtExample>
 	| aParagraph aLine aSpan |
 	
@@ -370,7 +370,7 @@ BrSingleLineTextParagraphExamples >> measuredEmpty [
 ]
 
 { #category : #'paragraph - measuring' }
-BrSingleLineTextParagraphExamples >> measuredHaba [
+BlSingleLineTextParagraphExamples >> measuredHaba [
 	<gtExample>
 	| aParagraph aLine aSpan |
 	
@@ -416,7 +416,7 @@ BrSingleLineTextParagraphExamples >> measuredHaba [
 ]
 
 { #category : #'paragraph - measuring' }
-BrSingleLineTextParagraphExamples >> measuredHabaWithPadding [
+BlSingleLineTextParagraphExamples >> measuredHabaWithPadding [
 	<gtExample>
 	| aParagraph aLine aSpan |
 	
@@ -463,7 +463,7 @@ BrSingleLineTextParagraphExamples >> measuredHabaWithPadding [
 ]
 
 { #category : #'instance creation' }
-BrSingleLineTextParagraphExamples >> measurer [
+BlSingleLineTextParagraphExamples >> measurer [
 	<gtExample>
 	| aMeasurer |
 	
@@ -482,7 +482,7 @@ BrSingleLineTextParagraphExamples >> measurer [
 ]
 
 { #category : #'instance creation' }
-BrSingleLineTextParagraphExamples >> newParagraph [
+BlSingleLineTextParagraphExamples >> newParagraph [
 	<gtExample>
 	| aParagraph |
 
@@ -497,14 +497,14 @@ BrSingleLineTextParagraphExamples >> newParagraph [
 ]
 
 { #category : #'font - metrics' }
-BrSingleLineTextParagraphExamples >> padding [
+BlSingleLineTextParagraphExamples >> padding [
 	<gtExample>
 
 	^ BlInsets top: 20 right: 10 bottom: 30 left: 5
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> positionAtIndexInEmpty [
+BlSingleLineTextParagraphExamples >> positionAtIndexInEmpty [
 	<gtExample>
 	| aParagraph aPoint |
 	
@@ -517,7 +517,7 @@ BrSingleLineTextParagraphExamples >> positionAtIndexInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> spanAtFarBottomLeftPointInEmpty [
+BlSingleLineTextParagraphExamples >> spanAtFarBottomLeftPointInEmpty [
 	<gtExample>
 	| aParagraph aSpan |
 
@@ -530,7 +530,7 @@ BrSingleLineTextParagraphExamples >> spanAtFarBottomLeftPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> spanAtFarBottomPointInEmpty [
+BlSingleLineTextParagraphExamples >> spanAtFarBottomPointInEmpty [
 	<gtExample>
 	| aParagraph aSpan |
 
@@ -543,7 +543,7 @@ BrSingleLineTextParagraphExamples >> spanAtFarBottomPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> spanAtFarBottomRightPointInEmpty [
+BlSingleLineTextParagraphExamples >> spanAtFarBottomRightPointInEmpty [
 	<gtExample>
 	| aParagraph aSpan |
 
@@ -556,7 +556,7 @@ BrSingleLineTextParagraphExamples >> spanAtFarBottomRightPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> spanAtFarTopLeftPointInEmpty [
+BlSingleLineTextParagraphExamples >> spanAtFarTopLeftPointInEmpty [
 	<gtExample>
 	| aParagraph aSpan |
 
@@ -569,7 +569,7 @@ BrSingleLineTextParagraphExamples >> spanAtFarTopLeftPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> spanAtFarTopPointInEmpty [
+BlSingleLineTextParagraphExamples >> spanAtFarTopPointInEmpty [
 	<gtExample>
 	| aParagraph aSpan |
 
@@ -582,7 +582,7 @@ BrSingleLineTextParagraphExamples >> spanAtFarTopPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> spanAtFarTopRightPointInEmpty [
+BlSingleLineTextParagraphExamples >> spanAtFarTopRightPointInEmpty [
 	<gtExample>
 	| aParagraph aSpan |
 
@@ -595,7 +595,7 @@ BrSingleLineTextParagraphExamples >> spanAtFarTopRightPointInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> spanAtFarZeroInEmpty [
+BlSingleLineTextParagraphExamples >> spanAtFarZeroInEmpty [
 	<gtExample>
 	| aParagraph aSpan |
 
@@ -608,7 +608,7 @@ BrSingleLineTextParagraphExamples >> spanAtFarZeroInEmpty [
 ]
 
 { #category : #'geometry - empty' }
-BrSingleLineTextParagraphExamples >> spanAtIndexInEmpty [
+BlSingleLineTextParagraphExamples >> spanAtIndexInEmpty [
 	<gtExample>
 	| aParagraph aSpan |
 	

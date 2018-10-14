@@ -45,5 +45,5 @@ BlSingleLineTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas [
 BlSingleLineTextParagraph >> measureOnSpartaCanvas: aSpartaCanvas [
 	self
 		measureOn: aSpartaCanvas
-		with: BrTextParagraphSpanSpartaMeasurer new
+		with: BlTextParagraphSpanSpartaMeasurer new
 ]

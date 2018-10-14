@@ -2,13 +2,13 @@
 I contain examples of more complicated pieces of text to exemplify the rope structure.
 "
 Class {
-	#name : #BrRopedTextExamples,
+	#name : #BlRopedTextExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Text'
+	#category : #'Bloc-Examples-Text'
 }
 
 { #category : #examples }
-BrRopedTextExamples >> textForeground [
+BlRopedTextExamples >> textForeground [
 	<gtExample>
 	| text |
 
@@ -29,7 +29,7 @@ BrRopedTextExamples >> textForeground [
 ]
 
 { #category : #examples }
-BrRopedTextExamples >> textWithAttributes [
+BlRopedTextExamples >> textWithAttributes [
 	<gtExample>
 	| text |
 	
