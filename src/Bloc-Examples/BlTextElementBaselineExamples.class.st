@@ -1,8 +1,6 @@
 "
 ! Text baselines
 
-${example:BlTextElementBaselineExamples>>#textMeasurement|noCode|show=#gtLiveFor:|previewHeight=400}$
-
 ${example:BlTextElementBaselineExamples>>#textElementWithAscentBaseline|expandedPreview|show=#gtLiveFor:|previewHeight=100}$
 ${example:BlTextElementBaselineExamples>>#textElementWithBoundsBaseline|expandedPreview|show=#gtLiveFor:|previewHeight=100}$
 ${example:BlTextElementBaselineExamples>>#baselineDifference|expandedPreview|show=#gtLiveFor:|previewHeight=110}$
@@ -67,11 +65,4 @@ BlTextElementBaselineExamples >> textElementWithBoundsBaseline [
 	self assert: textElement baseline equals: BlTextParagraphBoundsBaseline uniqueInstance.
 
 	^ textElement
-]
-
-{ #category : #'as yet unclassified' }
-BlTextElementBaselineExamples >> textMeasurement [
-	<gtExample>
-	
-	^ MozTextExamples exampleTextMeasure asElement asPannableElement
 ]
