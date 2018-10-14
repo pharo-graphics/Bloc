@@ -78,13 +78,11 @@ BlInfiniteExampleGalleryImageElement >> image: aGalleryImage [
 	
 	form := nil.
 	image := aGalleryImage.
-	itemElement text: ((BlRopedText string: aGalleryImage id asString)
-		attributes: {
-			BrTextForegroundAttribute paint: Color white.
-			BrFontSizeAttribute size: 14.
-			BrFontWeightAttribute weight: 50.
-			BrFontFamilyAttribute named: 'Helvetica Neue'
-		}).
+	itemElement text: (aGalleryImage id asRopedText
+		foreground: Color white;
+		fontSize: 14;
+		weight: 50;
+		fontName: 'Helvetica Neue').
 	
 	self loadImage
 ]

@@ -62,8 +62,7 @@ BlFlowLayoutExamples class >> exampleText [
 
 	theWords := OrderedCollection new.
 
-	aText := BlRopedText string: (String loremIpsum: 2000).
-	aText attributes: { BrFontSizeAttribute size: 15 }.
+	aText := (String loremIpsum: 2000) asRopedText fontSize: 15.
 	aLineIterator := aText iterator.
 
 	[ aLineIterator hasNext ] whileTrue: [ 
@@ -98,7 +97,7 @@ BlFlowLayoutExamples class >> exampleText [
 	aFloatIndex + 2 to: theWords size do: [ :anIndex |
 		| anElement |
 		anElement := (theWords at: anIndex).
-		anElement text attributes: { BrTextForegroundAttribute paint: (Color red) }.
+		anElement text attributes: { BlTextForegroundAttribute paint: (Color red) }.
 		anElement text: anElement text ].
 	
 	aParent := BlElement new

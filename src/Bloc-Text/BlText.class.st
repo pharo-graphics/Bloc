@@ -97,7 +97,7 @@ BlText >> attributes: anAttributesCollection from: aStart to: anEnd [
 { #category : #'text - attributes' }
 BlText >> attributesAt: anIndex [
 	"Return a collection of text attributes without duplicates at a given text index"
-	<return: #Collection of: #BrTextAttribute>
+	<return: #Collection of: #BlTextAttribute>
 
 	^ (self iterator: anIndex to: anIndex) attributes
 ]

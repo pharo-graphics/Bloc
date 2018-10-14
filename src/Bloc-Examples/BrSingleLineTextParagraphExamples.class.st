@@ -467,7 +467,7 @@ BrSingleLineTextParagraphExamples >> measurer [
 	<gtExample>
 	| aMeasurer |
 	
-	aMeasurer := BrTextParagraphFixedSpanMeasurer new.
+	aMeasurer := BlTextParagraphFixedSpanMeasurer new.
 	aMeasurer ascent: self ascent.
 	aMeasurer descent: self descent.
 	aMeasurer glyphWidth: self glyphWidth.
@@ -486,7 +486,7 @@ BrSingleLineTextParagraphExamples >> newParagraph [
 	<gtExample>
 	| aParagraph |
 
-	aParagraph := BrSingleLineTextParagraph new.
+	aParagraph := BlSingleLineTextParagraph new.
 
 	self assert: aParagraph containerExtent equals: 0@0.
 	self assert: aParagraph hasWidthLimit not.

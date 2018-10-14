@@ -43,11 +43,11 @@ BlTextElementBaselineExamples >> textElementWithAscentBaseline [
 	textElement border: (BlBorder paint: (Color red alpha: 0.6) width: 2).
 	textElement text
 		background: (Color red alpha: 0.4);
-		attribute: (BrTextUnderlineAttribute new paint: (Color red)).
+		attribute: (BlTextUnderlineAttribute new paint: (Color red)).
 
 	textElement ascentBaseline.
 
-	self assert: textElement baseline equals: BrTextParagraphAscentBaseline uniqueInstance.
+	self assert: textElement baseline equals: BlTextParagraphAscentBaseline uniqueInstance.
 
 	^ textElement
 ]
@@ -61,10 +61,10 @@ BlTextElementBaselineExamples >> textElementWithBoundsBaseline [
 	textElement border: (BlBorder paint: (Color blue alpha: 0.6) width: 2).
 	textElement text
 		background: (Color blue alpha: 0.4);
-		attribute: (BrTextUnderlineAttribute new paint: (Color blue)).
+		attribute: (BlTextUnderlineAttribute new paint: (Color blue)).
 	textElement boundsBaseline.
 
-	self assert: textElement baseline equals: BrTextParagraphBoundsBaseline uniqueInstance.
+	self assert: textElement baseline equals: BlTextParagraphBoundsBaseline uniqueInstance.
 
 	^ textElement
 ]

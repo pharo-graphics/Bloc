@@ -35,7 +35,7 @@ BlTextAttributesBuilder >> attribute: aTextAttribute [
 
 { #category : #accessing }
 BlTextAttributesBuilder >> attributes [
-	<return: #Collection of: #BrTextAttribute>
+	<return: #Collection of: #BlTextAttribute>
 	
 	^ attributes
 ]

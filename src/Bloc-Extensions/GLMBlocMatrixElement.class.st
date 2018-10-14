@@ -12,9 +12,7 @@ Class {
 { #category : #'instance creation' }
 GLMBlocMatrixElement >> asCellText: aString [
 
-	^ aString asRopedText
-		attributes: {
-			BrFontFamilyAttribute named: 'STIXGeneral' }
+	^ aString asRopedText fontName: 'STIXGeneral'
 ]
 
 { #category : #'instance creation' }

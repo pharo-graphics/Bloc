@@ -21,9 +21,9 @@ BrRopedTextExamples >> textForeground [
 	self assert: text rope left isConcatenation.
 	self assert: text rope left left size equals: 5.
 	self assert: (text rope left left isKindOf: BlAttributeRope).
-	self assert: text rope left left attributes asArray equals: { BrTextForegroundAttribute paint: Color blue }.
+	self assert: text rope left left attributes asArray equals: { BlTextForegroundAttribute paint: Color blue }.
 	self assert: (text rope right isKindOf: BlAttributeRope).
-	self assert: text rope right attributes asArray equals: { BrTextForegroundAttribute paint: Color red }.
+	self assert: text rope right attributes asArray equals: { BlTextForegroundAttribute paint: Color red }.
 
 	^ text
 ]
@@ -32,21 +32,19 @@ BrRopedTextExamples >> textForeground [
 BrRopedTextExamples >> textWithAttributes [
 	<gtExample>
 	| text |
+	
 	text := 'The moldable editor' asRopedText.
 	text insertString: String cr at: text size.
 	text insertString: 'can be adapted ' at: text size.
 	text insertString: 'to the context.' at: text size.
-	text attributes: { BrFontSizeAttribute size: 20 }.
-	text 
-		attributes: { 
-			BrFontGenericFamilyAttribute monospace . 
-			BrTextForegroundAttribute paint: Color blue } 
-		from: 5
-		to: 12.
-	text 
-		attributes: { BrFontGenericFamilyAttribute monospace } 
-		from: 43
-		to: 49.
+	(text from: 5 to: 12)
+		fontSize: 20;
+		monospace;
+		foreground: Color blue.
+
+	(text from: 43 to: 49)
+		monospace.
+
 	^ text
 
 ]

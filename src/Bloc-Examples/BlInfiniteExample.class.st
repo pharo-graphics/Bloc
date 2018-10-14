@@ -93,14 +93,11 @@ BlInfiniteExample class >> exampleGallery [
 		yourself.
 
 	headerText := BlTextElement new
-		text: ((BlRopedText string: 'bloc gallery')
-			attributes: { 
-				BrTextForegroundAttribute paint: (Color white alpha: 0.8).
-				BrFontSizeAttribute size: 20.
-				BrFontWeightAttribute weight: 50.
-				BrFontFamilyAttribute named: 'Helvetica Neue'
-			};
-			yourself);
+		text: ('bloc gallery' asRopedText
+			foreground: (Color white alpha: 0.8);
+			fontSize: 20;
+			weight: 50;
+			fontName: 'Helvetica Neue');
 		constraintsDo: [ :c |
 			c horizontal fitContent.
 			c vertical fitContent.
@@ -121,10 +118,6 @@ BlInfiniteExample class >> exampleGallery [
 	space root background: Color veryVeryDarkGray.
 	space root layout: BlLinearLayout horizontal.
 	space root layout weightSum: 1.
-"	space root addEventHandler:
-			(BlEventHandler
-				on: BlDblClickEvent
-				do: [ :evt | BlElementSelection on: evt target ])."
 	space show
 ]
 

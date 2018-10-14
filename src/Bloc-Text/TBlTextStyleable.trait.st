@@ -17,83 +17,83 @@ TBlTextStyleable >> attributesBuilder [
 
 { #category : #'api - text style' }
 TBlTextStyleable >> background: aPaint [
-	self attributesBuilder attribute: (BrTextBackgroundAttribute paint: aPaint)
+	self attributesBuilder attribute: (BlTextBackgroundAttribute paint: aPaint)
 ]
 
 { #category : #'api - text weight' }
 TBlTextStyleable >> bold [
-	self attributesBuilder attribute: BrFontWeightAttribute bold
+	self attributesBuilder attribute: BlFontWeightAttribute bold
 ]
 
 { #category : #'api - text font' }
 TBlTextStyleable >> fontName: aString [
-	self attributesBuilder attribute: (BrFontFamilyAttribute named: aString)
+	self attributesBuilder attribute: (BlFontFamilyAttribute named: aString)
 ]
 
 { #category : #'api - text font' }
 TBlTextStyleable >> fontSize: aNumber [
-	self attributesBuilder attribute: (BrFontSizeAttribute size: aNumber)
+	self attributesBuilder attribute: (BlFontSizeAttribute size: aNumber)
 ]
 
 { #category : #'api - text style' }
 TBlTextStyleable >> foreground: aBlPaint [
-	self attributesBuilder attribute: (BrTextForegroundAttribute paint: aBlPaint)
+	self attributesBuilder attribute: (BlTextForegroundAttribute paint: aBlPaint)
 ]
 
 { #category : #'api - text emphasis' }
 TBlTextStyleable >> italic [
-	self attributesBuilder attribute: BrFontEmphasisAttribute italic
+	self attributesBuilder attribute: BlFontEmphasisAttribute italic
 ]
 
 { #category : #'api - text weight' }
 TBlTextStyleable >> light [
-	self attributesBuilder attribute: BrFontWeightAttribute light
+	self attributesBuilder attribute: BlFontWeightAttribute light
 ]
 
 { #category : #'api - text font' }
 TBlTextStyleable >> monospace [
-	self attributesBuilder attribute: (BrFontGenericFamilyAttribute monospace)
+	self attributesBuilder attribute: (BlFontGenericFamilyAttribute monospace)
 ]
 
 { #category : #'api - text emphasis' }
 TBlTextStyleable >> normal [
-	self attributesBuilder attribute: BrFontEmphasisAttribute normal
+	self attributesBuilder attribute: BlFontEmphasisAttribute normal
 ]
 
 { #category : #'api - text emphasis' }
 TBlTextStyleable >> oblique [
-	self attributesBuilder attribute: BrFontEmphasisAttribute oblique
+	self attributesBuilder attribute: BlFontEmphasisAttribute oblique
 ]
 
 { #category : #'api - text weight' }
 TBlTextStyleable >> regular [
-	self attributesBuilder attribute: BrFontWeightAttribute normal
+	self attributesBuilder attribute: BlFontWeightAttribute normal
 ]
 
 { #category : #'api - text weight' }
 TBlTextStyleable >> thin [
-	self attributesBuilder attribute: BrFontWeightAttribute thin
+	self attributesBuilder attribute: BlFontWeightAttribute thin
 ]
 
 { #category : #'api - text emphasis' }
 TBlTextStyleable >> underline [
-	self attributesBuilder attribute: BrTextUnderlineAttribute new
+	self attributesBuilder attribute: BlTextUnderlineAttribute new
 ]
 
 { #category : #'api - text emphasis' }
 TBlTextStyleable >> underlinePaint: aPaint [
-	self attributesBuilder attribute: (BrTextUnderlineAttribute new paint: aPaint)
+	self attributesBuilder attribute: (BlTextUnderlineAttribute new paint: aPaint)
 ]
 
 { #category : #'api - text emphasis' }
 TBlTextStyleable >> underlinePaint: aPaint width: aNumber [
 	self attributesBuilder attribute: (
-		BrTextUnderlineAttribute new 
+		BlTextUnderlineAttribute new 
 			paint: aPaint;
 			width: aNumber)
 ]
 
 { #category : #'api - text weight' }
 TBlTextStyleable >> weight: aNumber [
-	self attributesBuilder attribute: (BrFontWeightAttribute weight: aNumber)
+	self attributesBuilder attribute: (BlFontWeightAttribute weight: aNumber)
 ]

@@ -68,7 +68,7 @@ BlEvent >> traversedTargetsTreeWith: mondrian [
 		shape: [ :aTarget |
 			| text |
 			text := aTarget gtDisplayString asRopedText.
-			text attributes: {BrTextForegroundAttribute paint: Color lightGray}.
+			text foreground: Color lightGray.
 			BlTextElement new
 				text: text;
 				padding: (BlInsets all: 5) ];

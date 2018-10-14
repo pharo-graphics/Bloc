@@ -51,7 +51,7 @@ BlTextElementFixedMeasurer >> glyphWidth: aNumber [
 BlTextElementFixedMeasurer >> initialize [
 	super initialize.
 	
-	measurer := BrTextParagraphFixedSpanMeasurer new.
+	measurer := BlTextParagraphFixedSpanMeasurer new.
 	measurer ascent: 10.
 	measurer descent: 5.
 	measurer glyphWidth: 10.

@@ -37,11 +37,10 @@ BlMetricsInspector >> initialize [
 	
 	extentMetric := self newExtentMetric.
 	extentMetric padding: (BlInsets top: 15 right: 55 bottom: 15 left: 55).
-	extentMetric text: ('content' asRopedText attributes: {
-		BrFontFamilyAttribute named: 'Helvetica Neue'.
-		BrFontEmphasisAttribute italic.
-		BrFontSizeAttribute size: 15
-	}).
+	extentMetric text: ('content' asRopedText
+		fontName: 'Helvetica Neue';
+		fontSize: 15;
+		italic).
 	extentMetric background: Color white.
 
 	paddingMetric := self newMetric.

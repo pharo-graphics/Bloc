@@ -25,7 +25,7 @@ BlTextElement class >> text: aBrText [
 
 { #category : #'api - text' }
 BlTextElement >> ascentBaseline [
-	self baseline: BrTextParagraphAscentBaseline uniqueInstance
+	self baseline: BlTextParagraphAscentBaseline uniqueInstance
 ]
 
 { #category : #accessing }
@@ -42,7 +42,7 @@ BlTextElement >> baseline: aTextParagraphBaseline [
 
 { #category : #'api - text' }
 BlTextElement >> boundsBaseline [
-	self baseline: BrTextParagraphBoundsBaseline uniqueInstance
+	self baseline: BlTextParagraphBoundsBaseline uniqueInstance
 ]
 
 { #category : #layout }
@@ -82,9 +82,9 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 
 { #category : #initialization }
 BlTextElement >> defaultBaseline [
-	<return: #BrTextParagraphBaseline>
+	<return: #BlTextParagraphBaseline>
 
-	^ BrTextParagraphAscentBaseline uniqueInstance
+	^ BlTextParagraphAscentBaseline uniqueInstance
 ]
 
 { #category : #initialization }
@@ -103,9 +103,9 @@ BlTextElement >> defaultTextMeasurer [
 { #category : #initialization }
 BlTextElement >> defaultTextParagraph [
 	"Create a text paragraph used to measure and render text"
-	<return: #BrTextParagraph>
+	<return: #BlTextParagraph>
 
-	^ BrSingleLineTextParagraph new
+	^ BlSingleLineTextParagraph new
 ]
 
 { #category : #'selection - management' }

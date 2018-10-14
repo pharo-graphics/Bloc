@@ -3,7 +3,7 @@ I measure a text span in a context of sparta canvas
 "
 Class {
 	#name : #BrTextParagraphSpanSpartaMeasurer,
-	#superclass : #BrTextParagraphSpanMeasurer,
+	#superclass : #BlTextParagraphSpanMeasurer,
 	#instVars : [
 		'textRun',
 		'textRunIterator',
@@ -15,7 +15,7 @@ Class {
 		'textParagraph',
 		'textSpan'
 	],
-	#category : 'Bloc-Sparta-Text'
+	#category : #'Bloc-Sparta-Text'
 }
 
 { #category : #measurement }

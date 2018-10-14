@@ -80,9 +80,9 @@ BlBasicExamples >> borderRopedText [
 	self
 		assert: aText rope attributes
 		equals: {
-			BrFontSizeAttribute size: 30.
-			BrTextForegroundAttribute paint: Color gray.
-			BrFontWeightAttribute thin }.
+			BlFontSizeAttribute size: 30.
+			BlTextForegroundAttribute paint: Color gray.
+			BlFontWeightAttribute thin }.
 
 	^ aText
 ]
@@ -147,13 +147,11 @@ BlBasicExamples >> coloredButton [
 			c horizontal fitContent.
 			c vertical fitContent ].
 
-	labelText := 'Button' asRopedText.
-	labelText attributes: {
-		BrTextForegroundAttribute paint: Color white.
-		BrFontSizeAttribute size: 16.
-		BrFontFamilyAttribute named: 'Helvetica'.
-		BrFontWeightAttribute thin
-	}.
+	labelText := 'Button' asRopedText
+		foreground: Color white;
+		fontSize: 16;
+		fontName: 'Helvetica';
+		thin.
 
 	label := BlTextElement new.
 	label text: labelText.

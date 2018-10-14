@@ -1226,7 +1226,7 @@ BlAnimationExamples >> bouncingText [
 	letters := 'bloc beta01' collect: [ :aCharacter | self textElement: aCharacter ] as: Array.
 	letters withIndexDo: [  :aTextElement :anIndex |
 		"change text color according to index in color spectrum"
-		aTextElement text: (aTextElement text attributes: { BrTextForegroundAttribute paint: (self colorAt: (anIndex / letters size) asFloat) }) ].
+		aTextElement text: (aTextElement text foreground: (self colorAt: (anIndex / letters size) asFloat)) ].
 
 	animation := BlParallelAnimation with: (letters withIndexCollect: [ :aChild :anIndex |
 		| jiggle |
@@ -1426,11 +1426,9 @@ BlAnimationExamples >> textContainer [
 BlAnimationExamples >> textElement: aCharacter [
 	| aText |
 	
-	aText := BlRopedText string: aCharacter asString.
-	aText attributes: {
-		BrFontSizeAttribute size: 90.
-"		BrTextBackgroundAttribute paint: (Color white alpha: 0.5)."
-		BrFontFamilyAttribute named: "'Bauhaus 93'" "'Curlz MT'" 'Phosphate' }.
+	aText := aCharacter asRopedText
+		fontSize: 90;
+		fontName: "'Bauhaus 93'" "'Curlz MT'" 'Phosphate'.
 	
 	^ BlTextElement new 
 		text: aText;
