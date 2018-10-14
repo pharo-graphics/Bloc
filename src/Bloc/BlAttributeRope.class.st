@@ -67,16 +67,23 @@ BlAttributeRope >> attributes [
 { #category : #'rope - accessing' }
 BlAttributeRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	| anAttributeRope |
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+	self assertAccessFrom: aStart to: anEnd.
 
 	anAttributesCollection
 		ifEmpty: [ ^ self ].
 	
+	(aStart isZero and: [ anEnd isZero ])
+		ifTrue: [ ^ self isEmpty
+			ifTrue: [
+				self class
+					attributes: (self class mergeAttributes: self attributes and: anAttributesCollection)
+					rope: rope ]
+			ifFalse: [ self ] ].
+	
 	anAttributeRope := (self rope from: aStart to: anEnd)
 		attributes: (self class mergeAttributes: self attributes and: anAttributesCollection)
 		from: 1
-		to: anEnd - aStart + 1.
+		to: (anEnd - aStart + 1).
 
 	(aStart = 1 and: [ anEnd = self size ])
 		ifTrue: [ ^ anAttributeRope ].
@@ -179,10 +186,12 @@ BlAttributeRope >> empty [
 ]
 
 { #category : #'rope - accessing' }
-BlAttributeRope >> from: aStart to: anEnd [
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
-	
+BlAttributeRope >> from: aStart to: anEnd [	
+	self assertAccessFrom: aStart to: anEnd.
+
+	(aStart isZero and: [ anEnd isZero ])
+		ifTrue: [ ^ self empty ].
+
 	(aStart = 1 and: [ anEnd = self size ])
 		ifTrue: [ ^ self ].
 
