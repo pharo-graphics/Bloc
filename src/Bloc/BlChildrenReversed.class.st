@@ -38,7 +38,7 @@ BlChildrenReversed >> name [
 
 { #category : #'children - subsets' }
 BlChildrenReversed >> reversed [
-	^ BlChildrenArray from: childrenArray
+	^ BlChildrenArray from: subsetArray
 ]
 
 { #category : #initialization }
