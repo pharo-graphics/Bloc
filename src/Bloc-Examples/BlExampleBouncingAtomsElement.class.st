@@ -1,11 +1,21 @@
 Class {
 	#name : #BlExampleBouncingAtomsElement,
 	#superclass : #BlElement,
+	#traits : 'TBlExample',
+	#classTraits : 'TBlExample classTrait',
 	#instVars : [
 		'damageReported'
 	],
 	#category : #'Bloc-Examples-Showcase - Bouncing Atoms'
 }
+
+{ #category : #'instance creation' }
+BlExampleBouncingAtomsElement class >> open [
+	self
+		openInWindow: (self new initializeWith: 3000 ofSize: 5@5 within: 1200@800)
+		named: 'Bouncing Atoms'
+		extent: 1200@800
+]
 
 { #category : #initialization }
 BlExampleBouncingAtomsElement >> addAtoms: aCollectionOfAtomElements ofSize: anAtomSize within: anSceneExtent [
