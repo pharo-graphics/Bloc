@@ -1,9 +1,14 @@
+"
+I define examples common to all types of ${class:BlChildrenCollection}$.
+
+Classes that are using me should define the concrete type of ${class:BlChildrenCollection}$ that is being tested using the method ${method:TBlChildrenExample>>#newChildrenCollection}$.
+"
 Trait {
 	#name : #TBlChildrenExample,
 	#category : #'Bloc-Examples-Children'
 }
 
-{ #category : #'examples - children' }
+{ #category : #'examples - add' }
 TBlChildrenExample >> add [
 	<gtExample>
 	| theChildren indices |
@@ -25,7 +30,7 @@ TBlChildrenExample >> add [
 	^ theChildren 
 ]
 
-{ #category : #'examples - children' }
+{ #category : #'examples - add' }
 TBlChildrenExample >> addAt [
 	<gtExample>
 	| theChildren indices |
@@ -111,20 +116,21 @@ TBlChildrenExample >> atIfAbsent [
 	self assert: ((theChildren at: 3) userData at: #index) equals: 3.
 	self assert: ((theChildren at: 5) userData at: #index) equals: 5.
 	
+	self 
+		assert: ((theChildren at: 0 ifAbsent: [
+			| anElement |
+			anElement := BlElement new.
+			anElement userData at: #index put: 0.
+			anElement ]) userData at: #index)
+		equals: 0.
 	
-	self assert: ((theChildren at: 0 ifAbsent: [
-		| anElement |
-		anElement := BlElement new.
-		anElement userData at: #index put: 0.
-		anElement ]) userData at: #index)
-	equals: 0.
-	
-	self assert: ((theChildren at: 10 ifAbsent: [
-		| anElement |
-		anElement := BlElement new.
-		anElement userData at: #index put: 10.
-		anElement ]) userData at: #index)
-	equals: 10.
+	self 
+		assert: ((theChildren at: 10 ifAbsent: [
+			| anElement |
+			anElement := BlElement new.
+			anElement userData at: #index put: 10.
+			anElement ]) userData at: #index)
+		equals: 10.
 	
 	^ theChildren
 ]
@@ -258,10 +264,11 @@ TBlChildrenExample >> newChildAt: anIndex [
 
 { #category : #'instance creation' }
 TBlChildrenExample >> newChildrenCollection [
+	"Instantiate the type of children collection under test"
 	^ self explicitRequirement
 ]
 
-{ #category : #'examples - children' }
+{ #category : #'examples - remove' }
 TBlChildrenExample >> remove [
 	<gtExample>
 	| theChildren indices |
@@ -276,7 +283,7 @@ TBlChildrenExample >> remove [
 	^ theChildren
 ]
 
-{ #category : #'examples - children' }
+{ #category : #'examples - remove' }
 TBlChildrenExample >> removeAll [
 	<gtExample>
 	| theChildren indices |
@@ -295,7 +302,7 @@ TBlChildrenExample >> removeAll [
 	^ theChildren
 ]
 
-{ #category : #'examples - children' }
+{ #category : #'examples - remove' }
 TBlChildrenExample >> removeAt [
 	<gtExample>
 	| theChildren indices |

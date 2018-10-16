@@ -7,6 +7,12 @@ Class {
 	#category : 'Bloc-Tests-Examples'
 }
 
+{ #category : #accessing }
+BlExamplesTestCase class >> defaultTimeLimit [
+	^ 2 minutes
+
+]
+
 { #category : #configuration }
 BlExamplesTestCase >> packageNames [
 	"((#gtExample senders select: [ :each | each package name beginsWith: 'Bloc' ]) groupedBy: [ :each | each package name ]) keys"

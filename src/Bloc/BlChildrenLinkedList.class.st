@@ -1,10 +1,18 @@
+"
+I am a holder that uses a ${class:LinkedList}$ to store children of bloc elements.
+
+Internally I maintain one single ${class:LinkedList}$ instance. When children are added or removed I add or remove them from the wrapped list. 
+
+!!Examples
+Examples are provided by the class ${class:BlChildrenLinkedListExamples}$
+"
 Class {
 	#name : #BlChildrenLinkedList,
 	#superclass : #BlChildrenCollection,
 	#instVars : [
 		'list'
 	],
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #'children - adding' }

@@ -1,10 +1,18 @@
+"
+I am a holder that uses an ${class:OrderedCollection}$ to store children of bloc elements.
+
+Internally I maintain one single ${class:OrderedCollection}$ instance. When children are added or removed I add or remove them from the wrapped collection. 
+
+!!Examples
+Examples are provided by the class ${class:BlChildrenOrderedCollectionExamples}$
+"
 Class {
 	#name : #BlChildrenOrderedCollection,
 	#superclass : #BlChildrenCollection,
 	#instVars : [
 		'collection'
 	],
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #'children - adding' }
