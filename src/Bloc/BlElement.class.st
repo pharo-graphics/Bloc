@@ -42,8 +42,13 @@ child := BlElement new size: 50@50; background: Color red lighter.
 parent addChild: child
 ]]]
 
- Users may also choose to add an element as the first child, for that purpose Bloc provides ${method:BlElement>>#addChildFirst:}$.
+Users may also choose to add an element as the first child, for that purpose Bloc provides ${method:BlElement>>#addChildFirst:}$.
 
+!!Geometry and bounds
+
+Every element is responsible for drawing itself. At the same time, every element has a ${class:BlGeometry}$ that defines the bounds and the clipping.
+
+See ${class:BlGeometryVisualAndLayoutBoundsExamples}$ for concrete details.
 "
 Class {
 	#name : #BlElement,
