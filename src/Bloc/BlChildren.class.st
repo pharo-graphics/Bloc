@@ -1,21 +1,23 @@
 "
-I am a root class for storing and iterating over children in a ${class:BlElement}$. 
+I am an abstract root class designed for accessing and iterating over the children of a ${class:BlElement}$. 
 
-I define a data structure independent enumeration api. Bloc elements work with children only in terms of the API that I provide. My subclasses wrap concrete data structures for storing the actual children. Subclasses can provide access only to a subset of children or provide different orders to iterate over children.
+I define a data structure independent API for iterating and accessing bloc elements. I assume an index-based way of accessing bloc elements. Subclasses can filter elements or have different orders to iterate over them.
 
-I exist to allow elements to optimize working with children for different scenarious. For example, an array for storing children optimises for accessing fast children at any position. A linked list can optimize for fast adding and removing.
+!!API
 
-Subclasses need to overide the following methods to provide access to the actual children: 
+Subclasses need to overide the following abstract methods to provide access to the actual bloc elements:
 - ${method:BlChildren>>#at:}$
 - ${method:BlChildren>>#do:}$
 - ${method:BlChildren>>#size}$
 
-Additionally, I provide an API for creating iterators over subsets of children. Main iterators are:
-- ${class:BlChildrenAccountedByLayout}$
-- ${class:BlChildrenIgnoredByLayout}$
-- ${class:BlChildrenReversed}$
-- ${class:BlChildrenSortedByElevation}$
+Additionally, I provide an API for creating specialised iterators over bloc elements, like:
+- ${method:BlChildren>>#accountedByLayout}$
+- ${method:BlChildren>>#ignoredByLayout}$
+- ${method:BlChildren>>#reversed}$
+- ${method:BlChildren>>#sortedByElevation}$
 
+Important API methods: 
+- ${method:BlChildren>>#asArray}$: returns an array with all the elements.
 "
 Class {
 	#name : #BlChildren,
@@ -54,8 +56,13 @@ BlChildren >> anySatisfy: aBlock [
 { #category : #'children - converting' }
 BlChildren >> asArray [
 	<return: #Array of: #BlElement>
-	
-	^ Array new: self size streamContents: [ :aStream | self do: [ :anElement | aStream nextPut: anElement ] ]
+	"Create an array containing all the children.
+	Users should not assume a new array is created all the time, 
+	and should use the array only for iteration and not modifications."
+	^ Array 
+		new: self size 
+		streamContents: [ :aStream | 
+			self do: [ :anElement | aStream nextPut: anElement ] ]
 ]
 
 { #category : #'children - accessing' }
@@ -176,7 +183,7 @@ BlChildren >> fourth [
 { #category : #testing }
 BlChildren >> hasSuperset [
 	<return: #Boolean>
-
+	"I indicate whether or not the intent is to iterate over the complete set of children of an element."
 	 ^ false
 ]
 
@@ -330,6 +337,8 @@ BlChildren >> size [
 
 { #category : #'children - subsets' }
 BlChildren >> sortedByElevation [
+	<return: #BlChildren>
+
 	^ BlChildrenSortedByElevation on: self
 ]
 
