@@ -1,14 +1,28 @@
 "
-I represent a sequenceable collection of children. I am a root class and define data structure independent enumeration api.
+I am a root class for storing and iterating over children in a ${class:BlElement}$. 
 
-Additionally, I provide subset api - a collection of helper methods that create a subset of me based on some element property
+I define a data structure independent enumeration api. Bloc elements work with children only in terms of the API that I provide. My subclasses wrap concrete data structures for storing the actual children. Subclasses can provide access only to a subset of children or provide different orders to iterate over children.
+
+I exist to allow elements to optimize working with children for different scenarious. For example, an array for storing children optimises for accessing fast children at any position. A linked list can optimize for fast adding and removing.
+
+Subclasses need to overide the following methods to provide access to the actual children: 
+- ${method:BlChildren>>#at:}$
+- ${method:BlChildren>>#do:}$
+- ${method:BlChildren>>#size}$
+
+Additionally, I provide an API for creating iterators over subsets of children. Main iterators are:
+- ${class:BlChildrenAccountedByLayout}$
+- ${class:BlChildrenIgnoredByLayout}$
+- ${class:BlChildrenReversed}$
+- ${class:BlChildrenSortedByElevation}$
+
 "
 Class {
 	#name : #BlChildren,
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #'children - subsets' }
