@@ -1,15 +1,31 @@
 "
 !Bloc
 
-Bloc is a graphical infrastructure for Pharo.
+Bloc is a graphical framework that is drawing agnostic. The concrete drawing is achieved through the binding to the Sparta canvas. See ${class:BaselineOfSpartaDevelopment}$ for more details.
 
 The central concept is ${class:BlElement}$.
+
+!!Organization
+
+The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray.
+
+${example:BaselineOfBloc class>>#itself|show=#gtPackagesMapFor:|expandedPreview=true|noCode=|previewHeight=300}$
+
+
+
+
 "
 Class {
 	#name : #BaselineOfBloc,
 	#superclass : #BaselineOf,
 	#category : #BaselineOfBloc
 }
+
+{ #category : #accessing }
+BaselineOfBloc class >> itself [
+	<gtExample>
+	^ self
+]
 
 { #category : #baselines }
 BaselineOfBloc >> baseline: spec [
