@@ -11,5 +11,5 @@ BlLayoutErrorHandler >> matches: aFramePhase [
 
 { #category : #'error handling' }
 BlLayoutErrorHandler >> processError: anError [
-	
+	anError inspect
 ]

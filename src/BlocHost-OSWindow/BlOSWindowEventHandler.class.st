@@ -148,38 +148,42 @@ BlOSWindowEventHandler >> time: aTime [
 
 { #category : #'visiting keyboard' }
 BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
-	| keyEvent |
+	| aBlocEvent |
 
-	keyEvent := BlKeyDownEvent new
+	aBlocEvent := BlKeyDownEvent new
 		key: (Key value: (self mapSymbolToKeyValue: anEvent symbol));
 		scanCode: anEvent scanCode;
-
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: DateAndTime now;
 		position: anEvent position;
 		screenPosition: window position + anEvent position.
-		
-	keyEvent logCr.
-	
-	^ keyEvent
+
+	NonInteractiveTranscript stdout show: aBlocEvent; cr.
+
+	self enqueue: aBlocEvent
 ]
 
 { #category : #'visiting keyboard' }
 BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
-	| keyEvent |
+	| aBlocEvent |
 
-	keyEvent := BlKeyUpEvent new
+	NonInteractiveTranscript stdout
+		show: 'scanCode = ', anEvent scanCode asString;
+		show: 'symbol = ', anEvent symbol asString;
+		show: 'character = ', anEvent character asString;
+		cr.
+
+	aBlocEvent := BlKeyUpEvent new
 		key: (Key value: (self mapSymbolToKeyValue: anEvent symbol));
 		scanCode: anEvent scanCode;
-
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: DateAndTime now;
 		position: anEvent position;
 		screenPosition: window position + anEvent position.
+	
+	NonInteractiveTranscript stdout show: aBlocEvent; cr.
 
-	keyEvent logCr.
-
-	^ keyEvent
+	self enqueue: aBlocEvent
 ]
 
 { #category : #'visiting - mouse' }
@@ -187,8 +191,8 @@ BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
 	| aBlocEvent |
 	
 	"we handle touch events separately, therefore ignore `touch` based mouse events"
-	anEvent isTouch
-		ifTrue: [ ^ self ].
+	"anEvent isTouch
+		ifTrue: [ ^ self ]."
 
 	aBlocEvent := BlMouseDownEvent new
 		position: anEvent position;
@@ -206,8 +210,8 @@ BlOSWindowEventHandler >> visitMouseButtonReleaseEvent: anEvent [
 	| aBlocEvent |
 	
 	"we handle touch events separately, therefore ignore `touch` based mouse events"
-	anEvent isTouch
-		ifTrue: [ ^ self ].
+	"anEvent isTouch
+		ifTrue: [ ^ self ]."
 
 	aBlocEvent := BlMouseUpEvent new
 		position: anEvent position;
@@ -237,36 +241,51 @@ BlOSWindowEventHandler >> visitMouseMoveEvent: anEvent [
 
 { #category : #'visiting - mouse' }
 BlOSWindowEventHandler >> visitMouseWheelEvent: anEvent [
-	| vertical horizontal |
+	| vertical horizontal aBlocEvent |
+	
+	NonInteractiveTranscript stdout show: (anEvent); cr.
 	
 	horizontal := anEvent scrollHorizontal.
 	vertical := anEvent scrollVertical.
 	
 	(horizontal isZero and: [ vertical isZero ])
 		ifTrue: [ ^ self ].
+		
+	NonInteractiveTranscript stdout show: (anEvent); cr.
 	
-	^ BlMouseWheelEvent new
+	aBlocEvent := BlMouseWheelEvent new
 		vector: (BlVector x: horizontal negated y: vertical);
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		direction: (vertical > 0 ifTrue: [Character arrowUp] ifFalse: [Character arrowDown]);
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: DateAndTime now
+		timestamp: DateAndTime now.
+		
+	self enqueue: aBlocEvent
 ]
 
 { #category : #'visiting keyboard' }
 BlOSWindowEventHandler >> visitTextInputEvent: anEvent [
-	| textEvent |
-	anEvent text ifNil: [ ^ nil ].
-	^ BlTextInputEvent new
+	| aBlocEvent |
+	
+	anEvent logCr.
+	
+	anEvent text
+		ifNil: [ ^ self ].
+	
+	aBlocEvent := BlTextInputEvent new
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		text: anEvent text;
 		timestamp: DateAndTime now.
+		
+	self enqueue: aBlocEvent
 ]
 
 { #category : #'visiting - touch' }
 BlOSWindowEventHandler >> visitTouchActionPointerDownEvent: anEvent [
 	| aBlocEvent |
+	
+	true ifTrue: [ ^ self ].
 	
 	aBlocEvent := BlTouchDownEvent new
 		position: window windowExtent * anEvent position;
@@ -300,6 +319,8 @@ BlOSWindowEventHandler >> visitTouchActionPointerMoveEvent: anEvent [
 BlOSWindowEventHandler >> visitTouchActionPointerUpEvent: anEvent [
 	| aBlocEvent |
 
+	true ifTrue: [ ^ self ].
+
 	aBlocEvent := BlTouchUpEvent new
 		position: window windowExtent * anEvent position;
 		screenPosition: window position + (window windowExtent * anEvent position);
@@ -320,6 +341,8 @@ BlOSWindowEventHandler >> visitTouchTwoFingersPinchBeginEvent: anEvent [
 { #category : #'visiting - gestures' }
 BlOSWindowEventHandler >> visitTouchTwoFingersPinchMoveEvent: anEvent [
 	| aBlocEvent |
+
+	true ifTrue: [ ^ self ].
 
 	aBlocEvent := BlGesturePinchEvent new
 		distance: anEvent dDist;

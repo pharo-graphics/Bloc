@@ -757,6 +757,10 @@ BlElement >> constraints: aLayoutConstraints [
 	self
 		assert: [ aLayoutConstraints isNotNil]
 		description: [ 'Constraints must not be nil' ].
+		
+	self
+		assert: [ (aLayoutConstraints isKindOf: BlockClosure) not ]
+		description: [ 'Did you mean constraintsDo: ? Constraints should be an object' ].
 
 	constraints := aLayoutConstraints.
 	self requestLayout
