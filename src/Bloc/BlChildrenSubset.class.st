@@ -1,18 +1,20 @@
 "
-I am an abstract iterator over a given set of children from a ${class:BlElement}$ instance.
+I capture a subset of children from a ${class:BlElement}$ instance.
 
-My subclasses define the actual order and criteria for iterating over the given set of children.
-I exist to explicitly capture various ways of iterating over children. For example, ${class:BlChildrenReversed}$ indicates that the user wants to explicitly iterate over elements in reverse order; ${class:BlChildrenAccountedByLayout}$ indicates that iteration should only happen over children taken into account by layout.
+I am an abstract class. My subclasses define the actual order and criteria for filtering children and iterating over the set of children.
+I exist to explicitly capture and combine various ways of filtering and iterating over children. For example, ${class:BlChildrenReversed}$ indicates that the user wants to explicitly iterate over elements in reverse order; ${class:BlChildrenAccountedByLayout}$ indicates that only should children taken into account by layout should be included. 
+The example below shows a scenario of combining multiple ways to iterate over children. By having an explicit object for each operation, the composition of operations can be inspected.
+${example:BlChildrenSubsetExamples>>#childrenWithMultipleCombinedSubsets}$
 
-I do not enforce a lazy API. Subclasses can perform the filtering immediately or when the iteration is required. I aim to maintain the composition of iterators while optimizing for speed whenever possible.
+I do not enforce a lazy API. Subclasses can perform the filtering immediately or when iteration over children is required. I aim to maintain the composition of subsets while optimizing for speed whenever possible.
 
 !!API
-Instances of me are created by calling the factory method ${class:BlChildrenSubset class>>#on:}$ on a subclass with an instance of ${class:BlChildren}$ as parameter.
+Instances of me are created by calling the factory method ${method:BlChildrenSubset class>>#on:}$ on a subclass with an instance of ${class:BlChildren}$ as parameter.
 
-Subclasses need to override the method ${class:BlChildrenSubset>>#subsetFrom:}$ to filter the elements from the given ${class:BlChildren}$ instance. This can perform no filtering, filter elements, or also change the order of elements.
+Subclasses need to override the method ${method:BlChildrenSubset>>#subsetFrom:}$ to filter the elements from the given ${class:BlChildren}$ instance. This can perform no filtering, filter elements, or also change the order of elements.
 
 !! Implementation details
-Internally the result of ${class:BlChildrenSubset>>#subsetFrom:}$ is stored into an instance variable. This result is then used when accessing or iterating over elements. This decision was taken to allow iterators to perform work when the iterator is created and ensure a faster iteration.
+Internally the result of ${method:BlChildrenSubset>>#subsetFrom:}$ is stored into an instance variable. This result is then used when accessing or iterating over elements. This decision was taken to allow iterators to perform work when the iterator is created and ensure a faster iteration.
 
 To preserve the composition of iterators I hold a reference to the initial ${class:BlChildren}$ instance.
 "

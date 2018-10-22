@@ -1,12 +1,9 @@
 "
 I sort a collection of children by elevation in ascending order.
 
-Example:
-[[[
-| element |
-element := BlElement new.
-element children sortedByElevation
-]]]
+${example:BlChildrenSubsetExamples>>#sortedByElevationFromElement}$
+
+
 "
 Class {
 	#name : #BlChildrenSortedByElevation,

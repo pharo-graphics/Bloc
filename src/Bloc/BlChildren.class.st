@@ -10,7 +10,7 @@ Subclasses need to overide the following abstract methods to provide access to t
 - ${method:BlChildren>>#do:}$
 - ${method:BlChildren>>#size}$
 
-Additionally, I provide an API for creating specialised iterators over bloc elements, like:
+Additionally, I provide an API for selecting only subsets of children, or iterating over them in a differen order, like:
 - ${method:BlChildren>>#accountedByLayout}$
 - ${method:BlChildren>>#ignoredByLayout}$
 - ${method:BlChildren>>#reversed}$

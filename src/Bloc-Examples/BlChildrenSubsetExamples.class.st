@@ -103,6 +103,24 @@ BlChildrenSubsetExamples >> childrenArrayWith5Elements [
 	^ childrenArray
 ]
 
+{ #category : #'examples - combined' }
+BlChildrenSubsetExamples >> childrenWithMultipleCombinedSubsets [
+<gtExample>
+	| element children |
+	element := self elementWithChildren.
+	children := element children accountedByLayout reversed sortedByElevation reversed.
+	
+	self assert: children size equals: 3.
+	self assert: (children first userData at: #index) equals: 5.
+	self assert: (children second userData at: #index) equals: 3.
+	self assert: (children third userData at: #index) equals: 1.
+	self 
+		assert: children superset superset superset superset  
+		equals: element children.
+	
+	^ children
+]
+
 { #category : #'examples - element' }
 BlChildrenSubsetExamples >> elementWithChildren [
 	<gtExample>
@@ -178,6 +196,17 @@ BlChildrenSubsetExamples >> ignoredByLayoutExplicitCreation [
 ]
 
 { #category : #'examples - ignored-by-layout' }
+BlChildrenSubsetExamples >> ignoredByLayoutFromElement [
+	<gtExample>
+	| element ignoredByLayoutChildren |
+	element := self elementWithChildren.
+	ignoredByLayoutChildren := element children ignoredByLayout.
+	
+	self assert: ignoredByLayoutChildren size equals: 2.
+	^ ignoredByLayoutChildren
+]
+
+{ #category : #'examples - ignored-by-layout' }
 BlChildrenSubsetExamples >> ignoredByLayoutTwice [
 	<gtExample>
 	| childrenIterator childrenIteratorIgnoredByLayout |
@@ -189,7 +218,7 @@ BlChildrenSubsetExamples >> ignoredByLayoutTwice [
 	^ childrenIteratorIgnoredByLayout
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 BlChildrenSubsetExamples >> newChildAt: anIndex [
 	| anElement |
 	anElement := BlElement new.
@@ -343,6 +372,17 @@ BlChildrenSubsetExamples >> sortedByElevationAndReversed [
 			equals: (expectedOrder at: index) ].
 	
 	^ childrenIteratorReversed
+]
+
+{ #category : #'examples - elevation' }
+BlChildrenSubsetExamples >> sortedByElevationFromElement [
+	<gtExample>
+	| element sortedByElevationChildren |
+	element := self elementWithChildren.
+	sortedByElevationChildren := element children sortedByElevation.
+	
+	self assert: sortedByElevationChildren size equals: 5.
+	^ sortedByElevationChildren
 ]
 
 { #category : #'examples - elevation' }
