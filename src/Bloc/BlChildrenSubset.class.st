@@ -12,7 +12,7 @@ Instances of me are created by calling the factory method ${class:BlChildrenSubs
 Subclasses need to override the method ${class:BlChildrenSubset>>#subsetFrom:}$ to filter the elements from the given ${class:BlChildren}$ instance. This can perform no filtering, filter elements, or also change the order of elements.
 
 !! Implementation details
-Internally the result of ${class:BlChildrenSubset>>#subsetFrom:}$ is stored into an instance variable. This result is then used when accessing or iterating over elements. This decision was takes to allow iterators to perform work when the iterator is created and ensure a faster iteration.
+Internally the result of ${class:BlChildrenSubset>>#subsetFrom:}$ is stored into an instance variable. This result is then used when accessing or iterating over elements. This decision was taken to allow iterators to perform work when the iterator is created and ensure a faster iteration.
 
 To preserve the composition of iterators I hold a reference to the initial ${class:BlChildren}$ instance.
 "

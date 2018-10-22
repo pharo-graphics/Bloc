@@ -1,5 +1,5 @@
 "
-A collection of children sorted by elevation in ascending order
+I sort a collection of children by elevation in ascending order.
 
 Example:
 [[[
@@ -11,7 +11,7 @@ element children sortedByElevation
 Class {
 	#name : #BlChildrenSortedByElevation,
 	#superclass : #BlChildrenSubset,
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #accessing }
@@ -26,5 +26,7 @@ BlChildrenSortedByElevation >> sortedByElevation [
 
 { #category : #initialization }
 BlChildrenSortedByElevation >> subsetFrom: aBlChildren [
-	^ aBlChildren asArray sorted: [ :a :b | (a elevation relatedTo: 0) <= (b elevation relatedTo: 0) ]
+	"Perform the sort when the instance is created."
+	^ aBlChildren asArray sorted: [ :a :b | 
+		(a elevation relatedTo: 0) <= (b elevation relatedTo: 0) ]
 ]

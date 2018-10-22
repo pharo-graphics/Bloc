@@ -1,17 +1,13 @@
 "
-I reverse an underlying collection children.
+I reverse an underlying collection of children.
 
-Example:
-[[[
-| element |
-element := BlElement new.
-element children reversed
-]]]
+${example:BlChildrenSubsetExamples>>#reversedChildrenFromElement}$
+
 "
 Class {
 	#name : #BlChildrenReversed,
 	#superclass : #BlChildrenSubset,
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #'instance creation' }
@@ -43,5 +39,6 @@ BlChildrenReversed >> reversed [
 
 { #category : #initialization }
 BlChildrenReversed >> subsetFrom: aBlChildren [
+	"Only convert the given collection to an array. Iteration is performed on reverse order on that array."
 	^ aBlChildren asArray
 ]
