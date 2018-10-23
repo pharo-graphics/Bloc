@@ -39,6 +39,11 @@ BlAlternativeCombination >> combinations [
 	^ combinations
 ]
 
+{ #category : #testing }
+BlAlternativeCombination >> includes: aKey [
+	^ self combinations anySatisfy: [ :aCombination | aCombination includes: aKey ]
+]
+
 { #category : #initialization }
 BlAlternativeCombination >> initialize [
 	super initialize.

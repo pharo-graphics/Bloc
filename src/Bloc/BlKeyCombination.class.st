@@ -24,6 +24,11 @@ BlKeyCombination >> accept: aKeyCombinationVisitor [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'key matching' }
+BlKeyCombination >> includes: aKey [
+	^ self subclassResponsibility
+]
+
 { #category : #testing }
 BlKeyCombination >> isAlternative [
 	^ false

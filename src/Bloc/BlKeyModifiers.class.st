@@ -125,6 +125,22 @@ BlKeyModifiers >> isNumLock [
 ]
 
 { #category : #testing }
+BlKeyModifiers >> isPrimaryModifier [
+	"Return true if primary modifier is pressed, false otherwise"
+	| aPrimaryModifier |
+	
+	aPrimaryModifier := OSPlatform current primaryModifier.
+
+	(self isCmd and: [ (aPrimaryModifier includes: Key leftMeta) or: [ (aPrimaryModifier includes: Key rightMeta) ] ])
+		ifTrue: [ ^ true ].
+		
+	(self isCtrl and: [ (aPrimaryModifier includes: Key leftControl) or: [ (aPrimaryModifier includes: Key rightControl) ] ])
+		ifTrue: [ ^ true ].
+
+	^ false
+]
+
+{ #category : #testing }
 BlKeyModifiers >> isShift [
 	^ hashKey anyMask: self class shiftMask
 ]

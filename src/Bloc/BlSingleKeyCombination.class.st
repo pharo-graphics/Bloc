@@ -46,6 +46,11 @@ BlSingleKeyCombination >> accept: aKeyCombinationVisitor [
 	^ aKeyCombinationVisitor visitKey: self
 ]
 
+{ #category : #'key matching' }
+BlSingleKeyCombination >> includes: aKey [
+	^ self key = aKey
+]
+
 { #category : #accessing }
 BlSingleKeyCombination >> key [
 	<return: #Key>
