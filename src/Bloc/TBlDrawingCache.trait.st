@@ -18,9 +18,26 @@ TBlDrawingCache >> cachedSurface: aSurface [
 	self explicitRequirement
 ]
 
+{ #category : #'private - accessing' }
+TBlDrawingCache >> damageReported [
+	^ self explicitRequirement
+]
+
+{ #category : #'private - accessing' }
+TBlDrawingCache >> damageReported: aBoolean [
+	self explicitRequirement
+]
+
 { #category : #'change reporting' }
 TBlDrawingCache >> invalidRect: aBlBounds from: anElement [
-	super invalidRect: aBlBounds from: anElement.
+	
+	"we compare with true because it is nil be default (I am coming from a Trait)"
+	self damageReported == true
+		ifTrue: [ ^ self ].
+
+	super invalidRect: (self invalidationBounds: self class invalidationBounds) from: anElement.
+
+	self damageReported: true.
 	
 	self releaseCaches
 ]
