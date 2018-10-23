@@ -9,7 +9,8 @@ Class {
 	#superclass : #BlTextElement,
 	#instVars : [
 		'editListener',
-		'cursorElements'
+		'cursorElements',
+		'cursorStencil'
 	],
 	#category : #'Bloc-Text-Elements'
 }
@@ -23,7 +24,7 @@ BlTextEditElement >> addCursorAt: aTextPosition [
 		ifFound: #yourself
 		ifNone: [
 			| aCursorElement |
-			aCursorElement := self defaultCursor.
+			aCursorElement := self newCursor.
 			aCursorElement textPosition: aTextPosition.
 			cursorElements add: aCursorElement.
 			self addChild: aCursorElement.
@@ -49,17 +50,21 @@ BlTextEditElement >> cursorAt: aTextPosition ifFound: aFoundBlock ifNone: aNoneB
 		ifNone: aNoneBlock
 ]
 
-{ #category : #initialization }
-BlTextEditElement >> defaultCursor [
-	"Create and return a new instance of a cursor element"
-	<return: #BlElement>
+{ #category : #accessing }
+BlTextEditElement >> cursorElements [
+	<return: #Collection of: #BlCursorElement>
 
-	^ BlCursorElement new
-		layout: BlLinearLayout vertical;
-		constraintsDo: [ :c |
-			c horizontal exact: 1.
-			c vertical matchParent ];
-		background: Color black
+	^ cursorElements
+]
+
+{ #category : #accessing }
+BlTextEditElement >> cursorStencil [
+	^ cursorStencil
+]
+
+{ #category : #accessing }
+BlTextEditElement >> cursorStencil: aStencil [
+	cursorStencil := aStencil
 ]
 
 { #category : #controller }
@@ -125,11 +130,17 @@ BlTextEditElement >> hasEditListener [
 	^ editListener isNotNil
 ]
 
+{ #category : #'cursor - management' }
+BlTextEditElement >> hideCursors [
+	self cursorElements do: [ :aCursorElement | aCursorElement visibility: BlVisibility gone ]
+]
+
 { #category : #initialization }
 BlTextEditElement >> initialize [
 	super initialize.
-	
-	cursorElements := OrderedCollection new
+
+	cursorElements := OrderedCollection new.
+	cursorStencil := BlCursorStencil uniqueInstance
 ]
 
 { #category : #layout }
@@ -155,6 +166,14 @@ BlTextEditElement >> measureCursors: anExtentMeasurementSpec [
 	self measuredExtent: (self measuredExtent max: aMaxCursorExtent)
 ]
 
+{ #category : #initialization }
+BlTextEditElement >> newCursor [
+	"Create and return a new instance of a cursor element"
+	<return: #BlElement>
+
+	^ self cursorStencil asElement
+]
+
 { #category : #layout }
 BlTextEditElement >> onMeasure: anExtentMeasurementSpec [	
 	super onMeasure: anExtentMeasurementSpec.
@@ -173,4 +192,9 @@ BlTextEditElement >> removeCursorAt: aTextIndex [
 			aCursorElement removeFromParent.
 			aCursorElement ]
 		ifNone: [ self error: 'Cursor at ', aTextIndex asString, ' does not exist' ]
+]
+
+{ #category : #'cursor - management' }
+BlTextEditElement >> showCursors [
+	self cursorElements do: [ :aCursorElement | aCursorElement visibility: BlVisibility visible ]
 ]
