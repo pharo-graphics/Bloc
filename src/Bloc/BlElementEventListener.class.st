@@ -9,6 +9,10 @@ BlElementEventListener >> elementAddedToParent: anEvent [
 ]
 
 { #category : #'element handlers' }
+BlElementEventListener >> elementAddedToSuperParent: anEvent [
+]
+
+{ #category : #'element handlers' }
 BlElementEventListener >> elementBackgroundChanged: anEvent [
 ]
 

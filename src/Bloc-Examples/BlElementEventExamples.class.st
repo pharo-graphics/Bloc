@@ -30,6 +30,31 @@ BlElementEventExamples >> addedToParent [
 ]
 
 { #category : #examples }
+BlElementEventExamples >> addedToSuperParent [
+	<gtExample>
+	| parent child container events |
+	
+	events := OrderedCollection new.
+	
+	child := self child.
+	child addEventHandlerOn: BlElementAddedToSuperParentEvent do: [ :anEvent | events add: anEvent ].
+	
+	parent := self parent.
+	container := self container.
+	
+	"is sent when child is added to the parent"
+	parent addChild: child.
+	"will also be sent when adding parent to a container"
+	container addChild: parent.
+	
+	self assert: events size equals: 2.
+	self assert: events first addedElement equals: child.
+	self assert: events second addedElement equals: parent.
+
+	^ container
+]
+
+{ #category : #examples }
 BlElementEventExamples >> backgroundChanged [
 	<gtExample>
 	| backgroundChanged element |

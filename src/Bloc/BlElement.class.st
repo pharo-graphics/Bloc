@@ -935,8 +935,9 @@ BlElement >> dispatchAddedToParent [
 	"Sent after I was added to another element as direct child.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
-	self dispatchEvent: (BlElementAddedToParentEvent target: self).
-	self onAddedToParent
+	self dispatchEvent: BlElementAddedToParentEvent new.
+	self onAddedToParent.
+	self dispatchAddedToSuperParent: self
 ]
 
 { #category : #'children dispatching' }
@@ -946,6 +947,17 @@ BlElement >> dispatchAddedToSceneGraph [
 
 	self onAddedToSceneGraph.
 	self childrenDo: [ :anElement | anElement dispatchAddedToSceneGraph ]
+]
+
+{ #category : #'children dispatching' }
+BlElement >> dispatchAddedToSuperParent: anElement [
+	"Sent after I or one of my parents was added to another element as a child.
+	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
+
+	self dispatchEvent: (BlElementAddedToSuperParentEvent new addedElement: anElement).
+	self onAddedToSuperParent: anElement.
+
+	self childrenDo: [ :aChildElement | aChildElement dispatchAddedToSuperParent: anElement ]
 ]
 
 { #category : #'children dispatching' }
@@ -2217,6 +2229,13 @@ BlElement >> onAddedToSceneGraph [
 		ifTrue: [ self requestFocus ].
 		
 	self space taskQueue enqueueFrom: self taskQueue
+]
+
+{ #category : #'hooks - children' }
+BlElement >> onAddedToSuperParent: aParentElement [
+	"I am sent after I or any of my parents is added to other element as a child.
+	You can access my parent by sending #parent to myself.
+	Note: Always send onAddedToSuperParent: to super class if you override me!"
 ]
 
 { #category : #'hooks - children' }
