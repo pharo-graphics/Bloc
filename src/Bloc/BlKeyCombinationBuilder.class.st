@@ -129,6 +129,12 @@ BlKeyCombinationBuilder >> primary [
 ]
 
 { #category : #accessing }
+BlKeyCombinationBuilder >> return [
+	combination
+		with: (BlSingleKeyCombination new key: Key return)
+]
+
+{ #category : #accessing }
 BlKeyCombinationBuilder >> secondary [
 	"I add a secondary modifier to the key combination
 	On Mac: Control (Meta).
