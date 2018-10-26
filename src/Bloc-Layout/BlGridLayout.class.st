@@ -136,12 +136,15 @@ BlGridLayout >> initialize [
 
 { #category : #layout }
 BlGridLayout >> layout: anElement in: aRectangle [
-	impl layout: anElement in: aRectangle
+	impl layout: anElement in: aRectangle.
+	self layoutIgnored: anElement
 ]
 
 { #category : #measure }
 BlGridLayout >> measure: anElement with: anExtentSpec [
-	impl measure: anElement with: anExtentSpec
+	impl measure: anElement with: anExtentSpec.
+
+	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
 ]
 
 { #category : #accessing }
