@@ -105,7 +105,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> grid [
 	
 	^ self container
 		layout: BlGridLayout horizontal;
-		margin: (BlInsets all: 20);
 		addChild: (self layoutLabel: 'Grid')
 ]
 
@@ -144,35 +143,74 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> list [
 		addChild: (self layoutLabel: 'List')
 ]
 
+{ #category : #'private - measurement' }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnExtentDepth: aNumber [
+
+	^ (self oneColumnWidthDepth: aNumber) @ (self oneColumnHeightDepth: aNumber)
+]
+
 { #category : #examples }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFitContent [
+BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlow [
+	<gtExample>
+	| flow |
+
+	flow := self flow.
+	flow width: (self oneColumnWidthDepth: 1).
+	flow addChild: (self leftResizer: flow).
+	flow addChildren: { self red. self blue. self green }.
+	flow forceLayout.
+	
+	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
+	
+	^ flow
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowList [
+	<gtExample>
+	| list flow |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+	
+	list := self list.
+	list width: (self oneColumnWidthDepth: 2).
+	list addChild: (self leftResizer: list).
+	list addChild: flow.
+	list forceLayout.
+	
+	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
+	self assert: list extent equals: (self oneColumnExtentDepth: 2).
+	
+	^ list
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowListGrid [
 	<gtExample>
 	| grid list flow |
 
-	grid := self grid.
-	grid width: self oneColumnWidthWithGrid.
-	grid addChild: (self leftResizer: grid).
-	
-	list := self list.
 	flow := self flow.
-
 	flow addChildren: { self red. self blue. self green }.
 
+	list := self list.
 	list addChild: flow.
+	
+	grid := self grid.
+	grid width: (self oneColumnWidthDepth: 3).
+	grid addChild: (self leftResizer: grid).
 	grid addChild: list.
-
 	grid forceLayout.
-	
-	self assert: flow extent equals: self oneColumnWidthWithFlow @ self oneColumnHeightWithFlow.
-	self assert: list extent equals: self oneColumnWidthWithList @ self oneColumnHeightWithList.
-	self assert: grid extent equals: self oneColumnWidthWithGrid @ self oneColumnHeightWithGrid.
-	
+
+	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
+	self assert: list extent equals: (self oneColumnExtentDepth: 2).
+	self assert: grid extent equals: (self oneColumnExtentDepth: 3).
+
 	^ grid
 ]
 
 { #category : #'private - measurement' }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnHeight [
-	<gtExample>
 
 	^ {
 		self redHeight + self redMargin height.
@@ -182,29 +220,13 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnHeight [
 ]
 
 { #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnHeightWithFlow [
-	<gtExample>
+BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnHeightDepth: aNumber [
 
-	^ self oneColumnHeight + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnHeightWithGrid [
-	<gtExample>
-
-	^ self oneColumnHeightWithList + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnHeightWithList [
-	<gtExample>
-
-	^ self oneColumnHeightWithFlow + (self containerPadding * 2)
+	^ self oneColumnHeight + ((self containerPadding * 2) * aNumber)
 ]
 
 { #category : #'private - measurement' }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnWidth [
-	<gtExample>
 
 	^ {
 		self redWidth + self redMargin width.
@@ -214,24 +236,9 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnWidth [
 ]
 
 { #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnWidthWithFlow [
-	<gtExample>
+BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnWidthDepth: aNumber [
 
-	^ self oneColumnWidth + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnWidthWithGrid [
-	<gtExample>
-
-	^ self oneColumnWidthWithList + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnWidthWithList [
-	<gtExample>
-
-	^ self oneColumnWidthWithFlow + (self containerPadding * 2)
+	^ self oneColumnWidth + ((self containerPadding * 2) * aNumber)
 ]
 
 { #category : #'instance creation' }
@@ -260,37 +267,62 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> redWidth [
 	^ 100
 ]
 
+{ #category : #'private - measurement' }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnExtentDepth: aNumber [
+
+	^ (self threeColumnWidthDepth: aNumber) @ (self threeColumnHeightDepth: aNumber)
+]
+
 { #category : #examples }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnFitContent [
+BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnFlowListGrid [
 	<gtExample>
-	| grid list flow |
+	| flow list grid |
 
-	grid := self grid.
-	"pixel perfect layout precision required for this to work.
-	if the width would be 1pt smaller, then the flow layout will wrap and fallback to 2 columns"
-	grid width: self threeColumnWidthWithGrid.
-	grid addChild: (self leftResizer: grid).
-	
-	list := self list.
 	flow := self flow.
-
 	flow addChildren: { self red. self blue. self green }.
 
+	list := self list.
 	list addChild: flow.
-	grid addChild: list.
 
+	grid := self grid.
+	grid width: (self threeColumnWidthDepth: 3).
+	grid addChild: (self leftResizer: grid).
+	grid addChild: list.
 	grid forceLayout.
-	
-	self assert: flow extent equals: self threeColumnWidthWithFlow @ self threeColumnHeightWithFlow.
-	self assert: list extent equals: self threeColumnWidthWithList @ self threeColumnHeightWithList.
-	self assert: grid extent equals: self threeColumnWidthWithGrid @ self threeColumnHeightWithGrid.
+
+	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
+	self assert: list extent equals: (self threeColumnExtentDepth: 2).
+	self assert: grid extent equals: (self threeColumnExtentDepth: 3).
 
 	^ grid
 ]
 
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnFlowListList [
+	<gtExample>
+	| flow firstList secondList |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+
+	firstList := self list.
+	firstList addChild: flow.
+
+	secondList := self list.
+	secondList width: (self threeColumnWidthDepth: 3).
+	secondList addChild: (self leftResizer: secondList).
+	secondList addChild: firstList.
+	secondList forceLayout.
+
+	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
+	self assert: firstList extent equals: (self threeColumnExtentDepth: 2).
+	self assert: secondList extent equals: (self threeColumnExtentDepth: 3).
+	
+	^ secondList
+]
+
 { #category : #'private - measurement' }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnHeight [
-	<gtExample>
 
 	^ {
 		self redHeight + self redMargin height.
@@ -300,29 +332,13 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnHeight [
 ]
 
 { #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnHeightWithFlow [
-	<gtExample>
+BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnHeightDepth: aNumber [
 
-	^ self threeColumnHeight + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnHeightWithGrid [
-	<gtExample>
-
-	^ self threeColumnHeightWithList + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnHeightWithList [
-	<gtExample>
-
-	^ self threeColumnHeightWithFlow + (self containerPadding * 2)
+	^ self threeColumnHeight + ((self containerPadding * 2) * aNumber)
 ]
 
 { #category : #'private - measurement' }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnWidth [
-	<gtExample>
 
 	^ {
 		self redWidth + self redMargin width.
@@ -332,58 +348,175 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnWidth [
 ]
 
 { #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnWidthWithFlow [
-	<gtExample>
+BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnWidthDepth: aNumber [
 
-	^ self threeColumnWidth + (self containerPadding * 2)
+	^ self threeColumnWidth + ((self containerPadding * 2) * aNumber)
 ]
 
 { #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnWidthWithGrid [
-	<gtExample>
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnExtentDepth: aNumber [
 
-	^ self threeColumnWidthWithList + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnWidthWithList [
-	<gtExample>
-
-	^ self threeColumnWidthWithFlow + (self containerPadding * 2)
+	^ (self twoColumnWidthDepth: aNumber) @ (self twoColumnHeightDepth: aNumber)
 ]
 
 { #category : #examples }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFitContent [
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlow [
 	<gtExample>
-	| grid list flow  |
+	| flow |
 
-	grid := self grid.
-
-	"pixel perfect layout precision required for this to work.
-	if the width would be 1pt smaller, then the flow layout will wrap and fallback to 1 column"
-	grid width: self twoColumnWidthWithGrid.
-	grid addChild: (self leftResizer: grid).
-	
-	list := self list.
 	flow := self flow.
+	flow width: (self twoColumnWidthDepth: 1).
+	flow addChild: (self leftResizer: flow).
+	flow addChildren: { self red. self blue. self green }.
+	flow forceLayout.
 
+	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
+
+	^ flow
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowFlowFlow [
+	<gtExample>
+	| firstFlow secondFlow thirdFlow |
+
+	firstFlow := self flow.
+	firstFlow addChildren: { self red. self blue. self green }.
+
+	secondFlow := self flow.
+	secondFlow addChild: firstFlow.
+
+	thirdFlow := self flow.
+	thirdFlow width: (self twoColumnWidthDepth: 3).
+	thirdFlow addChild: (self leftResizer: thirdFlow).
+	thirdFlow addChild: secondFlow.
+	thirdFlow forceLayout.
+
+	self assert: firstFlow extent equals: (self twoColumnExtentDepth: 1).
+	self assert: secondFlow extent equals: (self twoColumnExtentDepth: 2).
+	self assert: thirdFlow extent equals: (self twoColumnExtentDepth: 3).
+	
+	^ thirdFlow
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowFlowList [
+	<gtExample>
+	| firstFlow secondFlow list |
+
+	firstFlow := self flow.
+	firstFlow addChildren: { self red. self blue. self green }.
+
+	secondFlow := self flow.
+	secondFlow addChild: firstFlow.
+
+	list := self list.
+	list width: (self twoColumnWidthDepth: 3).
+	list addChild: (self leftResizer: list).
+	list addChild: secondFlow.
+	list forceLayout.
+
+	self assert: firstFlow extent equals: (self twoColumnExtentDepth: 1).
+	self assert: secondFlow extent equals: (self twoColumnExtentDepth: 2).
+	self assert: list extent equals: (self twoColumnExtentDepth: 3).
+	
+	^ list
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowGridGrid [
+	<gtExample>
+	| flow firstGrid secondGrid |
+
+	flow := self flow.
 	flow addChildren: { self red. self blue. self green }.
 
-	list addChild: flow.
-	grid addChild: list.
+	firstGrid := self grid.
+	firstGrid addChild: flow.
 
-	grid forceLayout.
+	secondGrid := self grid.
+	secondGrid width: (self twoColumnWidthDepth: 3).
+	secondGrid addChild: (self leftResizer: secondGrid).
+	secondGrid addChild: firstGrid.
+	secondGrid forceLayout.
+
+	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
+	self assert: firstGrid extent equals: (self twoColumnExtentDepth: 2).
+	self assert: secondGrid extent equals: (self twoColumnExtentDepth: 3).
 	
-	self assert: flow extent equals: self twoColumnWidthWithFlow @ self twoColumnHeightWithFlow.
-	self assert: list extent equals: self twoColumnWidthWithList @ self twoColumnHeightWithList.
-	self assert: grid extent equals: self twoColumnWidthWithGrid @ self twoColumnHeightWithGrid.
+	^ secondGrid
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowList [
+	<gtExample>
+	| flow list |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+
+	list := self list.
+	list width: (self twoColumnWidthDepth: 2).
+	list addChild: (self leftResizer: list).
+	list addChild: flow.
+	list forceLayout.
+
+	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
+	self assert: list extent equals: (self twoColumnExtentDepth: 2).
+
+	^ list
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowListGrid [
+	<gtExample>
+	| flow list grid |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+
+	list := self list.
+	list addChild: flow.
+
+	grid := self grid.
+	grid width: (self twoColumnWidthDepth: 3).
+	grid addChild: (self leftResizer: grid).
+	grid addChild: list.
+	grid forceLayout.
+
+	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
+	self assert: list extent equals: (self twoColumnExtentDepth: 2).
+	self assert: grid extent equals: (self twoColumnExtentDepth: 3).
 	
 	^ grid
 ]
 
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowListList [
+	<gtExample>
+	| flow firstList secondList |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+
+	firstList := self list.
+	firstList addChild: flow.
+
+	secondList := self list.
+	secondList width: (self twoColumnWidthDepth: 3).
+	secondList addChild: (self leftResizer: secondList).
+	secondList addChild: firstList.
+	secondList forceLayout.
+
+	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
+	self assert: firstList extent equals: (self twoColumnExtentDepth: 2).
+	self assert: secondList extent equals: (self twoColumnExtentDepth: 3).
+	
+	^ secondList
+]
+
 { #category : #'private - measurement' }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnHeight [
-	<gtExample>
 
 	^ {
 		self redHeight + self redMargin height.
@@ -392,29 +525,13 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnHeight [
 ]
 
 { #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnHeightWithFlow [
-	<gtExample>
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnHeightDepth: aNumber [
 
-	^ self twoColumnHeight + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnHeightWithGrid [
-	<gtExample>
-
-	^ self twoColumnHeightWithList + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnHeightWithList [
-	<gtExample>
-
-	^ self twoColumnHeightWithFlow + (self containerPadding * 2)
+	^ self twoColumnHeight + ((self containerPadding * 2) * aNumber)
 ]
 
 { #category : #'private - measurement' }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnWidth [
-	<gtExample>
 
 	^ {
 		self redWidth + self redMargin width + self blueWidth + self blueMargin width.
@@ -423,22 +540,7 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnWidth [
 ]
 
 { #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnWidthWithFlow [
-	<gtExample>
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnWidthDepth: aNumber [
 
-	^ self twoColumnWidth + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnWidthWithGrid [
-	<gtExample>
-
-	^ self twoColumnWidthWithList + (self containerPadding * 2)
-]
-
-{ #category : #'private - measurement' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnWidthWithList [
-	<gtExample>
-
-	^ self twoColumnWidthWithFlow + (self containerPadding * 2)
+	^ self twoColumnWidth + ((self containerPadding * 2) * aNumber)
 ]
