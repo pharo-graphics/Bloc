@@ -20,8 +20,7 @@ BlWorld class >> blocExamplesOn: aBuilder [
 
 { #category : #'world menu' }
 BlWorld class >> gtExamplesContained [
-	^ GtExampleGroup new
-		examples:
+	^ GtExampleGroup withAll:
 			((RPackageOrganizer default packages
 				select:
 					[ :each | (each name beginsWith: 'Bloc') or: [ each name beginsWith: 'Brick' ] ])
