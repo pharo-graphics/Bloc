@@ -87,12 +87,14 @@ BlFlowLayout >> initialize [
 
 { #category : #layout }
 BlFlowLayout >> layout: anElement in: newBounds [
-	measurer layout: anElement in: newBounds
+	measurer layout: anElement in: newBounds.
+	self layoutIgnored: anElement
 ]
 
 { #category : #measure }
 BlFlowLayout >> measure: anElement with: anExtentSpec [
-	measurer measure: anElement with: anExtentSpec
+	measurer measure: anElement with: anExtentSpec.
+	self measureIgnored: anElement with: anExtentSpec
 ]
 
 { #category : #accessing }

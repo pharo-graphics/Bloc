@@ -214,9 +214,20 @@ BlLayout >> measureIgnored: anElement with: anExtentSpec [
 	anElement children
 		select: [ :aChild | aChild constraints ignoredByLayout ]
 		thenDo: [ :aChild |
+			| aWidthSpec aHeightSpec |
+			
+			aWidthSpec := anExtentSpec widthSpec.
+			aHeightSpec := anExtentSpec heightSpec.
+			
+			aChild constraints horizontal resizer isMatchParent
+				ifTrue: [ aWidthSpec := BlMeasurementSpec exact: (anElement measuredBounds width * aChild constraints ignored horizontal weight) ].
+			
+			aChild constraints vertical resizer isMatchParent
+				ifTrue: [ aHeightSpec := BlMeasurementSpec exact: (anElement measuredBounds height * aChild constraints ignored vertical weight) ].
+			
 			self
 				measureChild: aChild
-				parentSpec: anExtentSpec ]
+				parentSpec: aWidthSpec @ aHeightSpec ]
 ]
 
 { #category : #enumeration }
@@ -266,7 +277,7 @@ BlLayout >> measurementSpecFor: parentSpec usedSize: usedSize resizer: childResi
 	^ parentSpec mode measurement: childResizer with: size
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'hooks - layout' }
 BlLayout >> onLayoutDone: anElement [
 	"Is sent after layout is completely computed.
 	All layout changes done within this hook will be performed during the next frame.
