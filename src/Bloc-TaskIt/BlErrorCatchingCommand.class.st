@@ -26,6 +26,7 @@ BlErrorCatchingCommand >> execute [
 		command execute.
 		exception := nil.
 	] on: self catchingErrors do: [ :anException |
+		anException freeze.
 		exception := anException.
 	].
 ]
