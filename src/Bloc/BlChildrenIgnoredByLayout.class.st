@@ -21,5 +21,7 @@ BlChildrenIgnoredByLayout >> name [
 
 { #category : #initialization }
 BlChildrenIgnoredByLayout >> subsetFrom: aBlChildren [
-	^ aBlChildren select: [ :anElement | anElement constraints ignoredByLayout ]
+	^ aBlChildren select: [ :anElement |
+		anElement constraints ignoredByLayout
+			and: [ anElement visibility isGone not ] ]
 ]

@@ -488,6 +488,15 @@ BlElement >> backgroundResizer: aBackgroundResizer [
 	 backgroundResizer := aBackgroundResizer
 ]
 
+{ #category : #layout }
+BlElement >> baselineOffset [
+	"Return the offset of the element's text baseline from the element's top boundary.
+	If I don't not support baseline alignment, BlElement>>#supportsBaseline return false"
+	<return: #Number>
+
+	^ 0
+]
+
 { #category : #'api - look' }
 BlElement >> border [
 	<return: #BlBorder>
@@ -701,7 +710,7 @@ BlElement >> commitChanges [
 	self childrenDo: [ :anElement | anElement commitChanges ]
 ]
 
-{ #category : #'layout utilities' }
+{ #category : #'private - layout' }
 BlElement >> computeLayout [
 	"Private! Never use me outside of #forceLayout"
 	| relayoutCounter maxRelayoutCount |
@@ -1479,7 +1488,6 @@ BlElement >> height [
 { #category : #'api - bounds' }
 BlElement >> height: aNumber [
 	<event: #BlElementExtentChangedEvent>
-
 	| aLayoutConstraints |
 
 	aLayoutConstraints := self constraints.
@@ -3011,6 +3019,14 @@ BlElement >> space: aSpace [
 	self assert: aSpace isNotNil.
 	space := aSpace.
 	self childrenDo: [ :each | each space: aSpace ]
+]
+
+{ #category : #layout }
+BlElement >> supportsBaseline [
+	"Return true if I support baseline alignment"
+	<return: #Boolean>
+
+	^ false
 ]
 
 { #category : #'api - tasks' }

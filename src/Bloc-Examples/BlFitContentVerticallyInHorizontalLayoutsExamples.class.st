@@ -317,7 +317,7 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnFlowListList [
 	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
 	self assert: firstList extent equals: (self threeColumnExtentDepth: 2).
 	self assert: secondList extent equals: (self threeColumnExtentDepth: 3).
-	
+
 	^ secondList
 ]
 
@@ -511,7 +511,7 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowListList [
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: firstList extent equals: (self twoColumnExtentDepth: 2).
 	self assert: secondList extent equals: (self twoColumnExtentDepth: 3).
-	
+
 	^ secondList
 ]
 

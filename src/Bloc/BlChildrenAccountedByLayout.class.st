@@ -22,5 +22,7 @@ BlChildrenAccountedByLayout >> name [
 
 { #category : #initialization }
 BlChildrenAccountedByLayout >> subsetFrom: aBlChildren [
-	^ aBlChildren select: [ :anElement | anElement constraints ignoredByLayout not ]
+	^ aBlChildren select: [ :anElement |
+		anElement constraints ignoredByLayout not
+			and: [ anElement visibility isGone not ] ]
 ]
