@@ -32,6 +32,14 @@ BlLinearLayoutNode >> element [
 ]
 
 { #category : #testing }
+BlLinearLayoutNode >> hasSpaceAfter [
+	"Return true if there should be a divider after this node"
+	<return: #Boolean>
+
+	^ true
+]
+
+{ #category : #testing }
 BlLinearLayoutNode >> hasSpaceBefore [
 	"Return true if there should be a divider before this node"
 	<return: #Boolean>
@@ -108,6 +116,11 @@ BlLinearLayoutNode >> shouldUseExcessSpace [
 	<return: #Boolean>
 
 	^ self weight > 0
+]
+
+{ #category : #'accessing - properties' }
+BlLinearLayoutNode >> verticalAlignment [
+	^ self linearConstraints vertical alignment
 ]
 
 { #category : #'accessing - properties' }

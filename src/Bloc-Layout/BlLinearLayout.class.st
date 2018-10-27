@@ -443,10 +443,12 @@ BlLinearLayout >> verticalAlignment: anAlignment [
 
 { #category : #accessing }
 BlLinearLayout >> weightSum [
+	<return: #Number>
+
 	^ weightSum
 ]
 
 { #category : #accessing }
-BlLinearLayout >> weightSum: anObject [
-	weightSum := anObject
+BlLinearLayout >> weightSum: aNumber [
+	weightSum := aNumber
 ]

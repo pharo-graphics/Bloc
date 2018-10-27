@@ -36,5 +36,5 @@ BlLinearLayoutConstraintsVertical >> alignment: aBlElementAlignment [
 BlLinearLayoutConstraintsVertical >> initialize [
 	super initialize.
 	
-	alignment := BlElementAlignment top
+	alignment := BlElementAlignment null vertical
 ]
