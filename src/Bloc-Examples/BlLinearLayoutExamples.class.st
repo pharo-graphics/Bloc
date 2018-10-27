@@ -464,7 +464,7 @@ BlLinearLayoutExamples >> equalizingHeighAndWidth [
 	| parent child child2 |
 
 	parent := BlElement new.
-	parent layout: (BlLinearLayout vertical useLargestChild).
+	parent layout: (BlLinearLayout vertical withSpaceEqualization).
 	parent background: (Color gray alpha: 0.3).
 	parent padding: (BlInsets all: 25).
 	parent constraintsDo: [ :c |
@@ -493,6 +493,17 @@ BlLinearLayoutExamples >> equalizingHeighAndWidth [
 	parent addChild: child2.
 	
 	parent forceLayout.
+
+	^ parent
+]
+
+{ #category : #'layout - examples' }
+BlLinearLayoutExamples >> equalizingWidth [
+	<gtExample>		
+	| parent |
+
+	parent := self twoChildrenMatchParentInFitContent.
+	parent layoutDo: [ :aLinearLayout | aLinearLayout withSpaceEqualization ].
 
 	^ parent
 ]
@@ -558,6 +569,45 @@ BlLinearLayoutExamples >> matchParentInFitContentChangeToExact [
 
 	self assert: parent extent equals: (300@250).
 	self assert: child extent equals: (100@200).
+
+	^ parent
+]
+
+{ #category : #'layout - examples' }
+BlLinearLayoutExamples >> twoChildrenMatchParentInFitContent [
+	<gtExample>	
+	| parent child child2 |
+
+	parent := BlElement new.
+	parent layout: (BlLinearLayout vertical).
+	parent background: (Color gray alpha: 0.3).
+	parent padding: (BlInsets all: 25).
+	parent constraintsDo: [ :c |
+		c horizontal fitContent.
+		c vertical fitContent ].
+
+	child := BlTextElement new.
+	child text: ('Hello world haba' asRopedText fontSize: 40).
+	child background: (Color red alpha: 0.3).
+	child margin: (BlInsets all: 5).
+	child border: (BlBorder paint: Color red width: 1).
+	child constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+
+	child2 := BlTextElement new.
+	child2 text: ('Hello' asRopedText fontSize: 15).
+	child2 background: (Color blue alpha: 0.3).
+	child2 margin: (BlInsets all: 5).
+	child2 border: (BlBorder paint: Color blue width: 1).
+	child2 constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+
+	parent addChild: child.
+	parent addChild: child2.
+	
+	parent forceLayout.
 
 	^ parent
 ]

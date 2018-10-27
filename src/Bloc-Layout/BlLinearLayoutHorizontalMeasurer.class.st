@@ -1,6 +1,10 @@
 Class {
 	#name : #BlLinearLayoutHorizontalMeasurer,
 	#superclass : #BlLinearLayoutMeasurer,
+	#instVars : [
+		'maxAscent',
+		'maxDescent'
+	],
 	#category : #'Bloc-Layout-Linear-Utilities'
 }
 
@@ -14,6 +18,14 @@ BlLinearLayoutHorizontalMeasurer >> baselineMeasure [
 		anAscent := maxAscent values max.
 		aDescent := maxDescent values max.
 		maxBreadth := maxBreadth max: (anAscent + aDescent) ]
+]
+
+{ #category : #initialization }
+BlLinearLayoutHorizontalMeasurer >> initialize [
+	super initialize.
+
+	maxAscent := Dictionary new.
+	maxDescent := Dictionary new
 ]
 
 { #category : #'private - measurement' }

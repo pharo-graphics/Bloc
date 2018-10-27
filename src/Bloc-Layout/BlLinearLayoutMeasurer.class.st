@@ -17,13 +17,12 @@ Class {
 		'usedExcessSpace',
 		'largestChildLength',
 		'matchBreadth',
-		'maxAscent',
-		'maxDescent',
 		'maxBreadth',
 		'allFillParent',
 		'weightedMaxBreadth',
 		'alternativeMaxBreadth',
-		'measuredLength'
+		'measuredLength',
+		'useSpaceDistribution'
 	],
 	#category : #'Bloc-Layout-Linear-Utilities'
 }
@@ -61,10 +60,7 @@ BlLinearLayoutMeasurer >> initialize [
 	alternativeMaxBreadth := 0.
 	maxBreadth := 0.
 	allFillParent := true.
-	weightedMaxBreadth := 0.
-	
-	maxAscent := Dictionary new.
-	maxDescent := Dictionary new.
+	weightedMaxBreadth := 0
 ]
 
 { #category : #initialization }
@@ -181,8 +177,8 @@ BlLinearLayoutMeasurer >> preMeasure [
 		totalWeight := totalWeight + aNode weight.
 		
 		"we must store the result because it may temporary change during measurement"
-		shouldUseExcessSpace := aNode shouldUseExcessSpace.
-		
+		shouldUseExcessSpace := (lengthSpec isUnspecified not or: [ useLargestChild ]) and: [ aNode shouldUseExcessSpace ].
+
 		(self isLengthExact and: [ shouldUseExcessSpace ])
 			ifTrue: [ self measureExactUsingExcessSpace: aNode ]
 			ifFalse: [
@@ -362,7 +358,7 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 						shareSpace := (childWeight * remainingExcess / remainingWeightSum) asInteger.
 						remainingExcess := remainingExcess - shareSpace.
 						remainingWeightSum := remainingWeightSum - childWeight.
-						
+
 						childLength := (self useLargestChild and: [ self isLengthExact not ])
 							ifTrue: [ largestChildLength ]
 							ifFalse: [ aNode lengthResizer isMatchParent

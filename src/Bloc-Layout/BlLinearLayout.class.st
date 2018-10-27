@@ -186,15 +186,6 @@ BlLinearLayout >> shouldUseLargestChild [
 ]
 
 { #category : #accessing }
-BlLinearLayout >> useLargestChild [
-	"When set to true, all children with a weight will be considered having the minimum size of the largest child.
-	If false, all children are measured normally.
-	Disabled by default."
-
-	shouldUseLargestChild := true
-]
-
-{ #category : #accessing }
 BlLinearLayout >> verticalAlignment [
 	^ verticalAlignment
 ]
@@ -214,4 +205,22 @@ BlLinearLayout >> weightSum [
 { #category : #accessing }
 BlLinearLayout >> weightSum: aNumber [
 	weightSum := aNumber
+]
+
+{ #category : #'api - configuration' }
+BlLinearLayout >> withSpaceEqualization [
+	"When set to true, all children with a weight will be considered having the minimum size of the largest child.
+	If false, all children are measured normally.
+	Disabled by default."
+
+	shouldUseLargestChild := true
+]
+
+{ #category : #'api - configuration' }
+BlLinearLayout >> withoutSpaceEqualization [
+	"When set to true, all children with a weight will be considered having the minimum size of the largest child.
+	If false, all children are measured normally.
+	Disabled by default."
+
+	shouldUseLargestChild := false
 ]

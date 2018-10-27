@@ -218,7 +218,7 @@ BlLayout >> measureIgnored: anElement with: anExtentSpec [
 			
 			aWidthSpec := anExtentSpec widthSpec.
 			aHeightSpec := anExtentSpec heightSpec.
-			
+
 			aChild constraints horizontal resizer isMatchParent
 				ifTrue: [ aWidthSpec := BlMeasurementSpec exact: (anElement measuredBounds width * aChild constraints ignored horizontal weight) ].
 			
