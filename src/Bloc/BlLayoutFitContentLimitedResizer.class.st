@@ -31,11 +31,17 @@ BlLayoutFitContentLimitedResizer >> isFitContent [
 
 { #category : #'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementAtMostWith: aNumber [
+	"Child wants to determine its own size. It can't be bigger than us."
+	<return: #BlMeasurementSpec>
+
 	^ BlMeasurementSpec new beAtMost: aNumber
 ]
 
 { #category : #'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementExactlyWith: aNumber [
+	"Child wants to determine its own size. It can't be bigger than us."
+	<return: #BlMeasurementSpec>
+
    ^ BlMeasurementSpec new beAtMost: aNumber
 ]
 

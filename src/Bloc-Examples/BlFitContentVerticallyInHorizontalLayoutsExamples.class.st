@@ -166,19 +166,46 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlow [
 ]
 
 { #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowGridGrid [
+	<gtExample>
+	| flow firstGrid secondGrid |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+
+	firstGrid := self grid.
+	firstGrid addChild: flow.
+	
+	secondGrid := self grid.
+	secondGrid width: (self oneColumnWidthDepth: 3).
+	secondGrid addChild: (self leftResizer: secondGrid).
+	secondGrid addChild: firstGrid.
+	secondGrid forceLayout.
+
+	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
+	self assert: firstGrid extent equals: (self oneColumnExtentDepth: 2).
+	self assert: secondGrid extent equals: (self oneColumnExtentDepth: 3).
+
+	^ secondGrid
+]
+
+{ #category : #examples }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowList [
 	<gtExample>
-	| list flow |
+	| flow list |
 
 	flow := self flow.
 	flow addChildren: { self red. self blue. self green }.
 	
 	list := self list.
-	list width: (self oneColumnWidthDepth: 2).
+	list width: (self oneColumnWidthDepth: 2) + 1.
 	list addChild: (self leftResizer: list).
 	list addChild: flow.
-	list forceLayout.
 	
+	list forceLayout.
+	list width: (self oneColumnWidthDepth: 2).
+	list forceLayout.
+
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: list extent equals: (self oneColumnExtentDepth: 2).
 	
@@ -188,7 +215,7 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowList [
 { #category : #examples }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowListGrid [
 	<gtExample>
-	| grid list flow |
+	| flow list grid |
 
 	flow := self flow.
 	flow addChildren: { self red. self blue. self green }.
@@ -207,6 +234,30 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowListGrid [
 	self assert: grid extent equals: (self oneColumnExtentDepth: 3).
 
 	^ grid
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowListList [
+	<gtExample>
+	| flow firstList secondList |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+
+	firstList := self list.
+	firstList addChild: flow.
+	
+	secondList := self list.
+	secondList width: (self oneColumnWidthDepth: 3).
+	secondList addChild: (self leftResizer: secondList).
+	secondList addChild: firstList.
+	secondList forceLayout.
+
+	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
+	self assert: firstList extent equals: (self oneColumnExtentDepth: 2).
+	self assert: secondList extent equals: (self oneColumnExtentDepth: 3).
+
+	^ secondList
 ]
 
 { #category : #'private - measurement' }
@@ -271,6 +322,30 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> redWidth [
 BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnExtentDepth: aNumber [
 
 	^ (self threeColumnWidthDepth: aNumber) @ (self threeColumnHeightDepth: aNumber)
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnFlowGridGrid [
+	<gtExample>
+	| flow firstGrid secondGrid |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+
+	firstGrid := self grid.
+	firstGrid addChild: flow.
+
+	secondGrid := self grid.
+	secondGrid width: (self threeColumnWidthDepth: 3).
+	secondGrid addChild: (self leftResizer: secondGrid).
+	secondGrid addChild: firstGrid.
+	secondGrid forceLayout.
+
+	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
+	self assert: firstGrid extent equals: (self threeColumnExtentDepth: 2).
+	self assert: secondGrid extent equals: (self threeColumnExtentDepth: 3).
+
+	^ secondGrid
 ]
 
 { #category : #examples }
@@ -445,6 +520,30 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowGridGrid [
 	self assert: secondGrid extent equals: (self twoColumnExtentDepth: 3).
 	
 	^ secondGrid
+]
+
+{ #category : #examples }
+BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowGridList [
+	<gtExample>
+	| flow grid list |
+
+	flow := self flow.
+	flow addChildren: { self red. self blue. self green }.
+
+	grid := self grid.
+	grid addChild: flow.
+
+	list := self list.
+	list width: (self twoColumnWidthDepth: 3).
+	list addChild: (self leftResizer: list).
+	list addChild: grid.
+	list forceLayout.
+
+	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
+	self assert: grid extent equals: (self twoColumnExtentDepth: 2).
+	self assert: list extent equals: (self twoColumnExtentDepth: 3).
+	
+	^ list
 ]
 
 { #category : #examples }

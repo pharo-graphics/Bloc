@@ -28,6 +28,11 @@ BlLinearLayoutOrientation >> breadthSpec [
 ]
 
 { #category : #orientation }
+BlLinearLayoutOrientation >> breadthSpec: anExtentSpec [
+	^ self subclassResponsibility
+]
+
+{ #category : #orientation }
 BlLinearLayoutOrientation >> extentBreadth: breadth lengthSpec: length [
 	^ self subclassResponsibility
 ]
@@ -74,6 +79,11 @@ BlLinearLayoutOrientation >> lengthProperties: anElement [
 
 { #category : #layout }
 BlLinearLayoutOrientation >> lengthSpec [
+	^ self subclassResponsibility
+]
+
+{ #category : #orientation }
+BlLinearLayoutOrientation >> lengthSpec: anExtentSpec [
 	^ self subclassResponsibility
 ]
 

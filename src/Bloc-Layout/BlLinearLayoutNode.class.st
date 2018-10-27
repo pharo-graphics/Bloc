@@ -50,7 +50,8 @@ BlLinearLayoutNode >> hasSpaceBefore [
 { #category : #initialization }
 BlLinearLayoutNode >> initializeWith: anElement orientation: aBlLinearLayoutOrientation [
 	element := anElement.
-	orientation := aBlLinearLayoutOrientation
+	orientation := aBlLinearLayoutOrientation.
+	linearConstraints := anElement constraints linear.
 ]
 
 { #category : #'accessing - constraints' }

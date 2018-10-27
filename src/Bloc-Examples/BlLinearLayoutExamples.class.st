@@ -459,7 +459,72 @@ BlLinearLayoutExamples class >> exampleVerticalListFixedHeight [
 ]
 
 { #category : #'layout - examples' }
-BlLinearLayoutExamples >> twoChildrenOnOppositeSidesWithSpanHorizontal [
+BlLinearLayoutExamples >> matchParentInFitContent [
+	<gtExample>
+	<description: 'If all children in the parent that fits content match parent then they should be measured with 0 size'>
+	| child parent |
+
+	child := BlElement new.
+	child background: (Color red alpha: 0.3).
+	child border: (BlBorder paint: Color red width: 1).
+	child constraintsDo: [ :c |
+		c horizontal exact: 100.
+		c vertical matchParent ].
+
+	parent := BlElement new.
+	parent layout: BlLinearLayout horizontal.
+	parent background: (Color gray alpha: 0.3).
+	parent padding: (BlInsets all: 25).
+	parent constraintsDo: [ :c |
+		c horizontal exact: 300.
+		c vertical fitContent ].
+	parent addChild: child.
+	parent forceLayout.
+
+	self assert: parent extent equals: (300@50).
+	self assert: child extent equals: (100@0).
+
+	^ parent
+]
+
+{ #category : #'layout - examples' }
+BlLinearLayoutExamples >> matchParentInFitContentChangeBackToMatchParent [
+	<gtExample>
+	<description: 'Changing back to match parent should reset size to 0'>
+	| parent child |
+
+	parent := self matchParentInFitContentChangeToExact.
+	child := parent children first.
+	child constraintsDo: [ :c | c vertical matchParent ].
+
+	parent forceLayout.
+
+	self assert: parent extent equals: (300@50).
+	self assert: child extent equals: (100@0).
+
+	^ parent
+]
+
+{ #category : #'layout - examples' }
+BlLinearLayoutExamples >> matchParentInFitContentChangeToExact [
+	<gtExample>
+	<description: 'Now we change size to exact and expect parent to resize'>
+	| parent child |
+
+	parent := self matchParentInFitContent.
+	child := parent children first.
+	child height: 200.
+
+	parent forceLayout.
+
+	self assert: parent extent equals: (300@250).
+	self assert: child extent equals: (100@200).
+
+	^ parent
+]
+
+{ #category : #'layout - examples' }
+BlLinearLayoutExamples >> twoChildrenOnOppositeSidesWithSpan [
 	<gtExample>
 	| parent left span right |
 	

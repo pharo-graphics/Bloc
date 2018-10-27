@@ -28,7 +28,12 @@ BlMeasurementSpec class >> size: aSize mode: aMode [
 
 { #category : #'instance creation' }
 BlMeasurementSpec class >> unspecified [
-	^ self new beUnspecified
+	^ self unspecified: 0
+]
+
+{ #category : #'instance creation' }
+BlMeasurementSpec class >> unspecified: aNumber [
+	^ self new beUnspecified: aNumber
 ]
 
 { #category : #comparing }
@@ -65,8 +70,13 @@ BlMeasurementSpec >> beExact: aNumber [
 
 { #category : #converting }
 BlMeasurementSpec >> beUnspecified [
+	self beUnspecified: 0
+]
+
+{ #category : #converting }
+BlMeasurementSpec >> beUnspecified: aNumber [
 	self
-		size: nil; "Explicitely telling that size is undefined - for understanding purposes"
+		size: aNumber;
 		mode: BlMeasurementMode unspecified
 ]
 
