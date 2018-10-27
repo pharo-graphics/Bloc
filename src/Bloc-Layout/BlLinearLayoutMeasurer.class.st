@@ -173,14 +173,17 @@ BlLinearLayoutMeasurer >> preMeasure [
 
 	"See how wide/tall everyone is. Also remember max breadth."
 	self nodes do: [ :aNode |
-		| matchBreadthLocally childBreadth |
+		| matchBreadthLocally childBreadth shouldUseExcessSpace |
 	
 		aNode hasSpaceBefore
 			ifTrue: [ totalLength := totalLength + self cellSpacing ].
 		
 		totalWeight := totalWeight + aNode weight.
 		
-		(self isLengthExact and: [ aNode shouldUseExcessSpace ])
+		"we must store the result because it may temporary change during measurement"
+		shouldUseExcessSpace := aNode shouldUseExcessSpace.
+		
+		(self isLengthExact and: [ shouldUseExcessSpace ])
 			ifTrue: [ self measureExactUsingExcessSpace: aNode ]
 			ifFalse: [
 				| usedLength childLength |
@@ -188,7 +191,7 @@ BlLinearLayoutMeasurer >> preMeasure [
 				this child is only laid out using excess space.
 				Measure using WRAP_CONTENT so that we can find out the view's optimal width.
 				We'll restore the original width of 0 after measurement."
-				aNode shouldUseExcessSpace
+				shouldUseExcessSpace
 					ifTrue: [ aNode lengthResizer: BlLayoutResizer fitContent ].
 
 				"Determine how big this child would like to be.
@@ -204,7 +207,7 @@ BlLinearLayoutMeasurer >> preMeasure [
 					lengthUsed: usedLength.
 
 				childLength := aNode measuredLength.
-				aNode shouldUseExcessSpace
+				shouldUseExcessSpace
 					ifTrue: [
 						"Restore the original width and record how much space
 						we've allocated to excess-only children so that we can
