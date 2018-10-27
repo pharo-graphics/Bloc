@@ -15,7 +15,7 @@ Class {
 		'osWindowRenderer',
 		'host'
 	],
-	#category : 'BlocHost-OSWindow-Host'
+	#category : #'BlocHost-OSWindow-Host'
 }
 
 { #category : #'host space - accessing' }
@@ -143,7 +143,8 @@ BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 { #category : #initialization }
 BlOSWindowSpace >> initializeWithAttributes: initialAttributes [
 	window := OSWindowAnimated createWithAttributes: initialAttributes.
-	window eventHandler: (BlOSWindowEventHandler window: self)
+	window eventHandler: (BlOSWindowEventHandler window: self).
+	window startTextInput
 ]
 
 { #category : #testing }

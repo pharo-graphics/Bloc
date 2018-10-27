@@ -13,7 +13,7 @@ Class {
 	#pools : [
 		'SDL2Constants'
 	],
-	#category : 'BlocHost-OSWindow-Support'
+	#category : #'BlocHost-OSWindow-Support'
 }
 
 { #category : #'instance creation' }

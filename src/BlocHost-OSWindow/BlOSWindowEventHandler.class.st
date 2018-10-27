@@ -11,7 +11,7 @@ Class {
 	#pools : [
 		'OSKeySymbols'
 	],
-	#category : 'BlocHost-OSWindow-Support'
+	#category : #'BlocHost-OSWindow-Support'
 }
 
 { #category : #'as yet unclassified' }

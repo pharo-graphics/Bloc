@@ -8,7 +8,7 @@ Class {
 		'wasRunning',
 		'isRunning'
 	],
-	#category : 'BlocHost-OSWindow-Host'
+	#category : #'BlocHost-OSWindow-Host'
 }
 
 { #category : #'driver selection' }

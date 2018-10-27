@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'surface'
 	],
-	#category : 'BlocHost-OSWindow-Support'
+	#category : #'BlocHost-OSWindow-Support'
 }
 
 { #category : #'updating screen' }
