@@ -5,10 +5,10 @@ I am used by grid layout instead of Dictionary of span <-> value key-value pair 
 
 Internal Representation and Key Implementation Points.
 
-    Instance Variables
-	span:		<Interval>
+Instance Variables
+	span:		<BlGridLayoutInterval>
 	valid:		<Boolean>
-	value:		<BlMutableInteger>
+	value:		<BlGridMutableInteger>
 "
 Class {
 	#name : #BlGridLayoutArc,
@@ -18,7 +18,7 @@ Class {
 		'value',
 		'valid'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #'instance creation' }
@@ -35,7 +35,7 @@ BlGridLayoutArc >> initialize [
 	valid := true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #printing }
 BlGridLayoutArc >> printOn: aStream [
 	aStream
 		nextPutAll: self span asString;
@@ -47,33 +47,41 @@ BlGridLayoutArc >> printOn: aStream [
 
 { #category : #accessing }
 BlGridLayoutArc >> span [
-	<return: #Interval>
+	<return: #BlGridLayoutInterval>
+
 	^ span
 ]
 
 { #category : #accessing }
-BlGridLayoutArc >> span: anObject [
-	span := anObject
+BlGridLayoutArc >> span: aBlGridLayoutInterval [
+	"Debugging internal implementation"
+	self
+		assert: [ aBlGridLayoutInterval isKindOf: BlGridLayoutInterval ]
+		description: [ 'Span must be a special type of Interval' ].
+
+	span := aBlGridLayoutInterval
 ]
 
 { #category : #accessing }
 BlGridLayoutArc >> valid [
 	<return: #Boolean>
+
 	^ valid
 ]
 
 { #category : #accessing }
-BlGridLayoutArc >> valid: anObject [
-	valid := anObject
+BlGridLayoutArc >> valid: aBoolean [
+	valid := aBoolean
 ]
 
 { #category : #accessing }
 BlGridLayoutArc >> value [
 	<return: #BlGridMutableInteger>
+
 	^ value
 ]
 
 { #category : #accessing }
-BlGridLayoutArc >> value: anObject [
-	value := anObject
+BlGridLayoutArc >> value: aBlGridMutableInteger [
+	value := aBlGridMutableInteger
 ]

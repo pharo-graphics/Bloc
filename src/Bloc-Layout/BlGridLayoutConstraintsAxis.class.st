@@ -14,7 +14,9 @@ BlGridLayoutConstraintsAxis >> alignCenter [
 
 { #category : #initialization }
 BlGridLayoutConstraintsAxis >> defaultSpec [
-	^ BlGridLayoutSpec new
+	<return: #BlGridLayoutSpec>
+
+	^ BlGridLayoutSpec undefined
 ]
 
 { #category : #initialization }
@@ -34,7 +36,7 @@ BlGridLayoutConstraintsAxis >> span: aNumber [
 	self assert: aNumber isNotNil.
 	self assert: aNumber >= 0.
 
-	self specSpan: (self spec span first to: self spec span first + aNumber)
+	self specSpan: (BlGridLayoutInterval min: self spec span min max: self spec span min + aNumber)
 ]
 
 { #category : #private }
@@ -42,7 +44,9 @@ BlGridLayoutConstraintsAxis >> spec [
 	"Return child's axis specification.
 	spec can not be nil"
 	<return: #BlGridLayoutSpec>
-	self assert: spec isNotNil.
+	self
+		assert: spec isNotNil
+		description: [ 'Spec can not be nil' ].
 
 	^ spec
 ]
@@ -54,8 +58,10 @@ BlGridLayoutConstraintsAxis >> specAlignment: anAlignment [
 
 { #category : #private }
 BlGridLayoutConstraintsAxis >> specSpan: aSpan [
-	"aSpan is an instance of Interval and must not be nil"
-	self assert: aSpan isNotNil.
+	"aSpan is an instance of BlGridlLayoutInterval and must not be nil"
+	self
+		assert: aSpan isNotNil
+		description: [ 'Span must not be nil' ].
 
 	spec := spec copyWithSpan: aSpan
 ]

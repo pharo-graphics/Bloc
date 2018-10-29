@@ -23,8 +23,8 @@ BlGridAlignBoundsMode >> marginOf: anChildElement in: aGridLayout isHorizontal: 
 		ifFalse: [ anChildElement constraints grid vertical spec ].
 
 	index := isLeading
-		ifTrue: [ spec span first ]
-		ifFalse: [ spec span last ].
+		ifTrue: [ spec span min ]
+		ifFalse: [ spec span max ].
 
-	^ margins at: index
+	^ margins at: index + 1
 ]

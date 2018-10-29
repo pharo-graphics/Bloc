@@ -1,3 +1,8 @@
+"
+For each group (with a given alignment) we need to store the amount of space required before the alignment point and the amount of space required after it. One side of this calculation is always 0 for START and END alignments but we don't make use of this. For CENTER and BASELINE alignments both sides are needed and in the BASELINE case no simple optimisations are possible.
+
+The general algorithm therefore is to create a Map (actually a PackedMap) from group to Bounds and to loop through all Views in the group taking the maximum of the values for each View.
+"
 Class {
 	#name : #BlGridLayoutBounds,
 	#superclass : #Object,
@@ -9,7 +14,7 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #accessing }

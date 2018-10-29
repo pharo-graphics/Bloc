@@ -23,16 +23,17 @@ BlGridMeasurer >> cellSpacingOf: aChildElement isHorizontal: isHorizontal isLead
 	<return: #Number>
 
 	| spec axis span isAtEdge |
+
 	spec := isHorizontal
-		ifTrue: [ aChildElement constraints grid horizontal spec ]
-		ifFalse: [ aChildElement constraints grid vertical spec ].
+		ifTrue: [ aChildElement constraints grid columnSpec ]
+		ifFalse: [ aChildElement constraints grid rowSpec ].
 
 	axis := self layout axis: isHorizontal.
 	span := spec span.
 	
 	isAtEdge := isLeading
-		ifTrue: [ span first = 1 ]
-		ifFalse: [ span last = axis count ].
+		ifTrue: [ span min = 0 ]
+		ifFalse: [ span max = axis count ].
 
 	^ self layout cellSpacingOf: aChildElement isAtEdge: isAtEdge isHorizontal: isHorizontal isLeading: isLeading
 ]
@@ -40,10 +41,11 @@ BlGridMeasurer >> cellSpacingOf: aChildElement isHorizontal: isHorizontal isLead
 { #category : #measure }
 BlGridMeasurer >> improvedMeasureChild: aChildElement parentSpec: anExtentSpec [
 	| horizontal spec span axis locations cellSize childSize|
+	
 	horizontal := self layout orientation isHorizontal.
 	spec := horizontal
-		ifTrue: [ aChildElement constraints grid horizontal spec ]
-		ifFalse: [ aChildElement constraints grid vertical spec ].
+		ifTrue: [ aChildElement constraints grid columnSpec ]
+		ifFalse: [ aChildElement constraints grid rowSpec ].
 
 	(spec absoluteAlignment: horizontal) isFill
 		ifFalse: [ ^ self ].
@@ -51,7 +53,7 @@ BlGridMeasurer >> improvedMeasureChild: aChildElement parentSpec: anExtentSpec [
 	span := spec span.
 	axis := self layout axis: horizontal.
 	locations := axis locations.
-	cellSize := (locations at: span last) - (locations at: span first).
+	cellSize := (locations at: span max + 1) - (locations at: span min + 1).
 	childSize := cellSize - (self totalMarginOf: aChildElement isHorizontal: horizontal).
 	horizontal
 		ifTrue: [ self
@@ -109,9 +111,8 @@ BlGridMeasurer >> measureChild: anElement parentSpec: anExtentSpec widthResizer:
 { #category : #measure }
 BlGridMeasurer >> measureChildren: anElement parentSpec: anExtentSpec isFirstPass: isFirstPass [
 
-	anElement children accountedByLayout
-		select: [ :child | child visibility shouldMeasure ]
-		thenDo: [ :child | isFirstPass
+	anElement children accountedByLayout do: [ :child |
+		isFirstPass
 			ifTrue: [ self naiveMeasureChild: child parentSpec: anExtentSpec ]
 			ifFalse: [ self improvedMeasureChild: child parentSpec: anExtentSpec ] ]
 ]
@@ -128,9 +129,6 @@ BlGridMeasurer >> measurementOf: anElement isHorizontal: isHorizontal [
 { #category : #measure }
 BlGridMeasurer >> measurementWithMarginOf: aChildElement isHorizontal: isHorizontal [
 	<return: #Number>
-
-	aChildElement visibility shouldLayout
-		ifFalse: [ ^ 0 ].
 
 	^ (self measurementOf: aChildElement isHorizontal: isHorizontal) + (self totalMarginOf: aChildElement isHorizontal: isHorizontal)
 ]

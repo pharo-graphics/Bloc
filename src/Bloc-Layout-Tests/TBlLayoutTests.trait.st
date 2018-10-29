@@ -36,6 +36,7 @@ TBlLayoutTests >> exactWidth: aNumber [
 { #category : #'instance creation' }
 TBlLayoutTests >> matchParent [
 	^ BlElement new
+		background: Color random paler;
 		constraintsDo: [ :c | 
 			c vertical matchParent.
 			c horizontal matchParent ];

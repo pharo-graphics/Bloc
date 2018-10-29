@@ -1,3 +1,6 @@
+"
+A mutable Integer - used to avoid heap allocation during the layout operation
+"
 Class {
 	#name : #BlGridMutableInteger,
 	#superclass : #Object,
@@ -7,7 +10,7 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #'instance creation' }
@@ -39,5 +42,9 @@ BlGridMutableInteger >> value [
 
 { #category : #accessing }
 BlGridMutableInteger >> value: aNumber [
-	value := aNumber
+
+	(aNumber fractionPart closeTo: 0)
+		ifFalse: [ self error: 'Trying to store a float in Integer!' ].
+
+	value := aNumber asInteger
 ]

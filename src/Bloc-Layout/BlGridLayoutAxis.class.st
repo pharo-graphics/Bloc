@@ -5,14 +5,16 @@ I compute and cache locations of cells within grid along corresponding axis.
 I use Bellman-Ford algorithm to solve a set of inequalities in order to distribute indices such that cells of different sizes could fit on the grid within its bounds. 
 I'm also responsible for calculation of grid's size based on children and grid resizing mode.
 
+This internal class houses the algorithm for computing the locations of grid lines; along either the horizontal or vertical axis.
+A GridLayout uses two instances of this class - distinguished by the ""horizontal"" flag which is true for the horizontal axis and false for the vertical one.
+
 Public API and Key Messages
 
 - applyLayoutIn: entrance point used to launch layout computation process within provided size along axis
 - locations returns (creates,  computes and caches) cell locations and sizes along axis and used by GridLayout during measure: and layout:  
 - measure: determines grid's size based on cells and grid's resizing mode along axis
 
-   BlGridLayoutAxis new
-	horizontal: true
+   BlGridLayoutAxis new horizontal: true
  
 Internal Representation and Key Implementation Points.
 
@@ -75,8 +77,7 @@ Class {
 		'hasWeights',
 		'locations',
 		'locationsValid',
-		'childConstraints',
-		'totalMargins'
+		'childConstraints'
 	],
 	#classVars : [
 		'COMPLETE',
@@ -86,7 +87,7 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #'class initialization' }
@@ -129,9 +130,10 @@ BlGridLayoutAxis >> arcs [
 
 { #category : #'computing links' }
 BlGridLayoutAxis >> backwardLinks [
-	<return: #'OrderPreservingDictionary<Interval, BlMutableInt>'>
+	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
 	
-	backwardLinks ifNil: [ backwardLinks := self createLinks: false ].
+	backwardLinks
+		ifNil: [ backwardLinks := self createLinks: false ].
 	
 	backwardLinksValid ifFalse: [ 
 		self computeLinks: backwardLinks min: false.
@@ -142,32 +144,35 @@ BlGridLayoutAxis >> backwardLinks [
 
 { #category : #computing }
 BlGridLayoutAxis >> calculateMaxIndex [
-	|result|
-	result := -1.
+	"return UNDEFINED when there are no children"
+	<return: #Number>
+	| aResult |
+
+	aResult := -1.
 	self element children accountedByLayout withIndexDo: [ :child :index |
 		| spec span |
 		spec := (childConstraints at: index) spec.
 		span := spec span.
-		result := result max: span first.
-		result := result max: span last.
-		result := result max: span size - 1.
-		result := result ].
-	^ result < 0
+		aResult := aResult max: span min.
+		aResult := aResult max: span max.
+		aResult := aResult max: span size ].
+	^ aResult = -1
 		ifTrue: [ UNDEFINED ]
-		ifFalse: [ result ]
+		ifFalse: [ aResult ]
 ]
 
 { #category : #'computing weights' }
 BlGridLayoutAxis >> calculateTotalWeight [
 
-	^ (self element children accountedByLayout inject: 0.0 into: [ :totalWeight :child |
-		child visibility shouldLayout
-			ifTrue: [ totalWeight + (self specOf: child) weight ]
-			ifFalse: [ totalWeight  ] ]) asFloat
+	^ self element children accountedByLayout
+		inject: 0.0
+		into: [ :totalWeight :child | totalWeight + (self specOf: child) weight asFloat ]
 ]
 
 { #category : #'computing arcs' }
 BlGridLayoutAxis >> computeArcs [
+	"getting the links validates the values that are shared by the arc list"
+
 	self forwardLinks.
 	self backwardLinks.
 ]
@@ -180,7 +185,7 @@ BlGridLayoutAxis >> computeGroupBounds [
 		| spec size |
 		spec := (childConstraints at: index) spec.
 		size := self layout measurer measurementWithMarginOf: child isHorizontal: self horizontal.
-		size := size + (spec weight = 0
+		size := size + (spec weight isZero
 			ifTrue: [ 0 ]
 			ifFalse: [ self deltas at: index ]).
 		(groupBounds at: index) includeElement: self element spec: spec axis: self size: size ]
@@ -189,19 +194,18 @@ BlGridLayoutAxis >> computeGroupBounds [
 { #category : #'computing weights' }
 BlGridLayoutAxis >> computeHasWeights [
 	
-	^ self element children accountedByLayout anySatisfy: [ :child |
-			child visibility shouldLayout
-				and: [ (self specOf: child) weight isZero not ] ]
+	^ self element children accountedByLayout anySatisfy: [ :child | (self specOf: child) weight isZero not ]
 ]
 
 { #category : #'computing links' }
-BlGridLayoutAxis >> computeLinks: links min: isMin [
-	
-	links valuesDo: [ :span | span reset ].
+BlGridLayoutAxis >> computeLinks: theLinks min: isMin [
+
+	theLinks valuesDo: [ :span | span reset ].
+	"Use groupBounds getter to trigger a re-evaluation"
 	self groupBounds values withIndexDo: [ :bounds :index |
-		|size span|
+		| size span |
 		size := bounds size: isMin.
-		span := links at: index.
+		span := theLinks at: index.
 		span value: (span value max: ( isMin ifTrue: [ size ] ifFalse: [ size negated ] ) ) ].
 ]
 
@@ -215,6 +219,10 @@ BlGridLayoutAxis >> computeLocations: theLocations [
 	self isOrderPreserved
 		ifTrue: [ ^ self ].
 	
+	"Solve returns the smallest solution to the constraint system for which all values are positive.
+	One value is therefore zero - though if the row/col order is not preserved this may not be the first vertex.
+	For consistency, translate all the values so that they measure the distance from theLocations[0]; the leading edge of the parent.
+	After this transformation some values may be negative."
 	theLocations withIndexDo: [ :location :index |
 		theLocations at: index put: (location - theLocations first) ]
 ]
@@ -228,19 +236,20 @@ BlGridLayoutAxis >> computeMargins: isLeading [
 		ifFalse: [ trailingMargins ].
 
 	self element children accountedByLayout withIndexDo: [ :child :anIndex |
-		child visibility shouldLayout ifTrue: [ 
-			| spec span index margin |
-			spec := (childConstraints at: anIndex) spec.
-			span := spec span.
-			index := isLeading
-				ifTrue: [ span first ]
-				ifFalse: [ span last ].
-			margin := (margins at: index) max: (self layout measurer marginOf: child isHorizontal: self horizontal isLeading: isLeading).
-			margins at: index put: margin ] ]
+		| spec span index margin |
+		spec := (childConstraints at: anIndex) spec.
+		span := spec span.
+		index := (isLeading
+			ifTrue: [ span min ]
+			ifFalse: [ span max ]) + 1.
+		margin := (margins at: index) max: (self layout measurer marginOf: child isHorizontal: self horizontal isLeading: isLeading).
+		margins at: index put: margin ]
 ]
 
 { #category : #computing }
 BlGridLayoutAxis >> count [
+	<return: #Number>
+
 	^ definedCount max: self maxIndex
 ]
 
@@ -256,22 +265,32 @@ BlGridLayoutAxis >> count: aNumber [
 
 { #category : #'computing arcs' }
 BlGridLayoutAxis >> createArcs [
-	|mins maxs n sMins sMaxs|
+	| mins maxs n sMins sMaxs |
+	
 	mins := OrderedCollection new.
 	maxs := OrderedCollection new.
 	
+	"Add the minimum values from the components."
 	self addComponentSizesIn: mins links: self forwardLinks.
+	"Add the maximum values from the components."
 	self addComponentSizesIn: maxs links: self backwardLinks.
 	
+	"Add ordering constraints to prevent row/col sizes from going negative"
 	self isOrderPreserved
-		ifTrue: [ 
-			1 to: self count do: [ :i |
-				self includeIn: mins span: (i to: i + 1) size: (BlGridMutableInteger value: 0) ] ].
-		
-	n := self count.
-	self includeIn: mins span: (1 to: n + 1) size: parentMin ignoreIfPresent: false.
-	self includeIn: maxs span: (n + 1 to: 1) size: parentMax ignoreIfPresent: false.
+		ifTrue: [
+			"Add a constraint for every row/col"
+			0 to: (self count - 1) do: [ :i |
+				self
+					includeIn: mins
+					span: (BlGridLayoutInterval min: i max: i + 1)
+					size: (BlGridMutableInteger value: 0) ] ].
 	
+	"Add the container constraints. Use the version of include that allows duplicate entries in case a child spans the entire grid."
+	n := self count.
+	self includeIn: mins span: (BlGridLayoutInterval min: 0 max: n) size: parentMin ignoreIfPresent: false.
+	self includeIn: maxs span: (BlGridLayoutInterval min: n max: 0) size: parentMax ignoreIfPresent: false.
+	
+	"sort"
 	sMins := self topologicalSort: mins.
 	sMaxs := self topologicalSort: maxs.
 	
@@ -280,7 +299,7 @@ BlGridLayoutAxis >> createArcs [
 
 { #category : #'computing group bounds' }
 BlGridLayoutAxis >> createGroupBounds [     
-	<return: #'BlGridPackedMap<Interval, BlMutableInt>'>      
+	<return: #BlGridPackedMap key: #BlGridLayoutSpec value: #BlGridLayoutBounds>      
 	|assocs|
 	
 	assocs := OrderedCollection new.
@@ -294,17 +313,18 @@ BlGridLayoutAxis >> createGroupBounds [
 
 { #category : #'computing links' }
 BlGridLayoutAxis >> createLinks: isMin [
-	<return: #'BlGridPackedMap<Interval, BlMutableInt>'>
-		
-	| links |
-	links := OrderedCollection new.
+	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
+	| theLinks |
+
+	theLinks := OrderedCollection new.
 	self groupBounds keysDo: [ :spec |
 		| span |
 		span := isMin
 			ifTrue: [ spec span ]
 			ifFalse: [ spec span inversed ].
-		links add: (span -> BlGridMutableInteger new) ].
-	^ BlGridPackedMap fromAssociations: links
+		theLinks add: (span -> BlGridMutableInteger new) ].
+
+	^ BlGridPackedMap fromAssociations: theLinks
 ]
 
 { #category : #initialization }
@@ -339,9 +359,10 @@ BlGridLayoutAxis >> element: anElement [
 
 { #category : #'computing links' }
 BlGridLayoutAxis >> forwardLinks [
-	<return: #'OrderPreservingDictionary<Interval, BlMutableInt>'>
+	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
 	
-	forwardLinks ifNil: [ forwardLinks := self createLinks: true ].
+	forwardLinks
+		ifNil: [ forwardLinks := self createLinks: true ].
 	
 	forwardLinksValid ifFalse: [ 
 		self computeLinks: forwardLinks min: true.
@@ -352,37 +373,43 @@ BlGridLayoutAxis >> forwardLinks [
 
 { #category : #'computing arcs' }
 BlGridLayoutAxis >> groupArcsByFirstVertex: theArcs [
-	"theArcs is collection of BlGridLayoutArc."
-	
+	"Group arcs by their first vertex, returning an array of arrays of Arcs.
+	This is linear in the number of arcs.
+	theArcs is collection of BlGridLayoutArc."
+	<return: #Array of: #Array of: #BlGridLayoutArc>	
 	| n groups sizes |
+
 	n := self count + 1.
+
 	groups := Array new: n.
 	sizes := Array new: n withAll: 0.
 
 	theArcs do: [ :arc |
-		sizes at: arc span first incrementBy: 1 ].
+		sizes at: (arc span min + 1) incrementBy: 1 ].
 	
 	sizes withIndexDo: [ :size :index |
 		groups at: index put: (Array new: size) ].
 	
-	sizes := Array new: n withAll: 1.
+	"reuse the sizes array to hold the current last elements as we insert each arc"
+	sizes atAllPut: 0.
 	theArcs do: [ :arc |
-		|index|
-		index := arc span first.
-		(groups at: index) at: (sizes at: index) put: arc.
-		sizes at: index incrementBy: 1 ].
+		| anIndex |
+		anIndex := arc span min + 1.
+		(groups at: anIndex) at: ((sizes at: anIndex) + 1) put: arc.
+		sizes at: anIndex incrementBy: 1 ].
 	^ groups
 ]
 
 { #category : #'computing group bounds' }
 BlGridLayoutAxis >> groupBounds [
+	<return: #BlGridPackedMap key: #BlGridLayoutSpec value: #BlGridLayoutBounds>  
 	
 	groupBounds
 		ifNil: [ groupBounds := self createGroupBounds ].
 	
 	groupBoundsValid ifFalse: [ 
 		self computeGroupBounds.
-		groupBoundsValid = true ].
+		groupBoundsValid := true ].
 	
 	^ groupBounds
 ]
@@ -413,20 +440,26 @@ BlGridLayoutAxis >> includeIn: theArcs span: span size: size [
 ]
 
 { #category : #'computing arcs' }
-BlGridLayoutAxis >> includeIn: theArcs span: span size: size ignoreIfPresent: ignoreIfPresent [
-	"arcs is collection of BlGridLayoutArc.
-	span is Interval
-	size is BlMutableInteger
+BlGridLayoutAxis >> includeIn: theArcs span: aSpan size: aSize ignoreIfPresent: ignoreIfPresent [
+	"Remove self referential links.
+	These appear:
+		- as parental constraints when GridLayout has no children
+		- when components have been marked as GONE
+
+	theArcs is collection of BlGridLayoutArc.
+	aSpan is Interval
+	aSize is BlGridMutableInteger
 	ignoreIfPresent is Boolean"
 
-	span size = 1
+	aSpan size isZero
 		ifTrue: [ ^ self ].
 	
+	"this bit below should really be computed outside here - its just to stop default (row/col > 0) constraints obliterating valid entries"
 	(ignoreIfPresent
-		and: [ theArcs anySatisfy: [ :arc | arc span = span ] ])
+		and: [ theArcs anySatisfy: [ :arc | arc span = aSpan ] ])
 			ifTrue: [ ^ self ].
-	
-	theArcs add: ( BlGridLayoutArc span: span value: size )
+
+	theArcs add: (BlGridLayoutArc span: aSpan value: aSize )
 ]
 
 { #category : #'computing locations' }
@@ -439,22 +472,39 @@ BlGridLayoutAxis >> initialize [
 	super initialize.
 	
 	isHorizontal := false.
-	hasWeights := false.
-	
-	groupBoundsValid := false.
-	forwardLinksValid := false.
-	backwardLinksValid := false.
-	leadingMarginsValid := false.
-	trailingMarginsValid := false.
-	arcsValid := false.
-	hasWeightsValid := false.
-	locationsValid := false.
-	
-	orderPreserved := self defaultOrderPreserved.
+
 	maxIndex := UNDEFINED.
 	definedCount := UNDEFINED.
+	
+	groupBounds := nil.
+	groupBoundsValid := false.
+	
+	forwardLinks := nil.
+	forwardLinksValid := false.
+	
+	backwardLinks := nil.
+	backwardLinksValid := false.
+	
+	leadingMargins := nil.
+	leadingMarginsValid := false.
+	
+	trailingMargins := nil.
+	trailingMarginsValid := false.
+	
+	arcs := nil.
+	arcsValid := false.
+	
+	locations := nil.
+	locationsValid := false.
+
+	hasWeights := false.
+	hasWeightsValid := false.
+	deltas := nil.
+	
+	orderPreserved := self defaultOrderPreserved.
+
 	parentMin := BlGridMutableInteger value: 0.
-	parentMax := BlGridMutableInteger new.
+	parentMax := BlGridMutableInteger value: SmallInteger minVal
 ]
 
 { #category : #invalidate }
@@ -481,10 +531,7 @@ BlGridLayoutAxis >> invalidateStructure [
 	childConstraints := self element children accountedByLayout collect: [ :child |
 		self horizontal
 			ifTrue: [ child constraints grid horizontal ]
-			ifFalse: [ child constraints grid vertical ] ].
-		
-	"totalMargins := self element managedChildren collect: [ :child |
-			self layout measurer totalMarginOf: child isHorizontal: self horizontal ]."
+			ifFalse: [ child constraints grid vertical ] ]
 ]
 
 { #category : #invalidate }
@@ -544,8 +591,10 @@ BlGridLayoutAxis >> locations [
 
 { #category : #computing }
 BlGridLayoutAxis >> maxIndex [
+	<return: #Number>
+
 	^ maxIndex == UNDEFINED
-		ifTrue: [ maxIndex := 0 max: self calculateMaxIndex ]
+		ifTrue: [ maxIndex := (0 max: self calculateMaxIndex) ] "use zero when there are no children"
 		ifFalse: [ maxIndex ]
 ]
 
@@ -556,7 +605,7 @@ BlGridLayoutAxis >> measure: aMeasurementSpec [
 	size := aMeasurementSpec size.
 	
 	mode isUnspecified
-		ifTrue: [ ^ self measureMin: 0 max: Float infinity ].
+		ifTrue: [ ^ self measureMin: 0 max: SmallInteger maxVal ].
 
 	mode isExact
 		ifTrue: [ ^ self measureMin: size max: size ].
@@ -603,14 +652,14 @@ BlGridLayoutAxis >> relaxLocations: theLocations arc: arc [
 		ifFalse: [ ^ false ].
 	
 	span := arc span.
-	u := span first.
-	v := span last.
+	u := span min.
+	v := span max.
 	value := arc value value.
-	candidate := (theLocations at: u) + value.
+	candidate := (theLocations at: u + 1) + value.
 	
-	^ (candidate > (theLocations at: v))
+	^ (candidate > (theLocations at: v + 1))
 		ifTrue: [ 
-			theLocations at: v put: candidate.
+			theLocations at: v  + 1 put: candidate.
 			true ]
 		ifFalse: [ false ]
 ]
@@ -624,16 +673,16 @@ BlGridLayoutAxis >> shareOutDelta: totalDelta totalWeight: totalWeight [
 	deltas atAllPut: 0.
 	
 	self element children accountedByLayout withIndexDo: [ :child :index |
-		child visibility shouldLayout ifTrue: [ 
-			| spec weight |
-			spec := (childConstraints at: index) spec.
-			weight := spec weight asFloat.
-			weight ~= 0 ifTrue: [ 
-				| delta |
-				delta := (weight / mTotalWeight * mTotalDelta) rounded.
-				deltas at: index put: delta.
-				mTotalDelta := mTotalDelta - delta.
-				mTotalWeight := mTotalWeight - weight ] ] ]
+		| spec weight |
+		spec := (childConstraints at: index) spec.
+		weight := spec weight asFloat.
+		weight ~= 0 ifTrue: [ 
+			| delta |
+			delta := (weight * mTotalDelta / mTotalWeight) rounded.
+			deltas at: index put: delta.
+			"the two adjustments below are to counter the above rounding and avoid off-by-ones at the end"
+			mTotalDelta := mTotalDelta - delta.
+			mTotalWeight := mTotalWeight - weight ] ]
 ]
 
 { #category : #'computing locations' }
@@ -644,39 +693,62 @@ BlGridLayoutAxis >> sizeLocations: theLocations [
 
 { #category : #'computing inequalities' }
 BlGridLayoutAxis >> solve: theArcs locations: theLocations [
+	"Bellman-Ford variant - modified to reduce typical running time from O(N^2) to O(N)
+	
+	GridLayout converts its requirements into a system of linear constraints of the
+	form:
+
+	x[i] - x[j] < a[k]
+
+	Where the x[i] are variables and the a[k] are constants.
+
+	For example, if the variables were instead labeled x, y, z we might have:
+
+	    x - y < 17
+	    y - z < 23
+	    z - x < 42
+
+	This is a special case of the Linear Programming problem that is, in turn,
+	equivalent to the single-source shortest paths problem on a digraph, for
+	which the O(n^2) Bellman-Ford algorithm the most commonly used general solution."
+
 	^ self solve: theArcs locations: theLocations modifyOnError: true
 ]
 
 { #category : #'computing inequalities' }
 BlGridLayoutAxis >> solve: theArcs locations: theLocations modifyOnError: modifyOnError [
-	| n originalCulprits |
+	"See ${method:BlGridLayoutAxis>>#solve:locations:}$ for more information"
+	| verticesCount originalCulprits |
 
-	n := self count + 1.
+	verticesCount := self count + 1. "The number of vertices is the number of columns/rows + 1."
 	originalCulprits := nil.
 	
 	0 to: theArcs size - 1 do: [ :p |
 		| culprits i break |
 		
 		self initLocations: theLocations.
-			
-		n timesRepeat: [ 
+		
+		"We take one extra pass over traditional Bellman-Ford (and omit their final step)"
+		verticesCount timesRepeat: [ 
 			| changed |
 			changed := false.
 			
+			"we intentionally use | (OR) instead of or: [] because relaxation function must always be called"
 			theArcs do: [ :arc | changed := changed | (self relaxLocations: theLocations arc: arc ) ].
 	
 			changed ifFalse: [ 
 				originalCulprits ifNotNil: [ "Warning signal: 'something is bad'" ].
 				^ true ] ].
 				
-		modifyOnError ifFalse: [ ^ false ]. "can not solve"
+		modifyOnError ifFalse: [ ^ false ]. "cannot solve with these constraints"
 
 		culprits := Array new: theArcs size withAll: false.
 				
-		n timesRepeat: [ 
+		verticesCount timesRepeat: [ 
 			arcs withIndexDo: [ :arc :index |
 				| culprit |
 				culprit := culprits at: index.
+				"we intentionally use | (OR) instead of or: [] because relaxation function must always be called"
 				culprits at: index put: (culprit | ( self relaxLocations: theLocations arc: arc ) ) ] ].
 
 		p = 0 ifTrue: [ originalCulprits := culprits ].
@@ -688,8 +760,9 @@ BlGridLayoutAxis >> solve: theArcs locations: theLocations modifyOnError: modify
 			(culprits at: i) ifTrue: [ 
 				| arc |
 				arc := theArcs at: i.
-			
-				(arc span first < arc span last) ifFalse: [
+				
+				"Only remove max values, min values alone cannot be inconsistent"
+				(arc span min < arc span max) ifFalse: [
 					arc valid: false.
 					break := true ]	 ].
 				i := i + 1 ] ].
@@ -699,27 +772,30 @@ BlGridLayoutAxis >> solve: theArcs locations: theLocations modifyOnError: modify
 { #category : #'computing inequalities' }
 BlGridLayoutAxis >> solveAndDistributeSpaceLocations: theLocations [
 	| deltaMax deltaMin totalWeight validDelta validSolution |
+
 	self deltas atAllPut: 0.
 	self solveLocations: theLocations.
 	
-	deltaMax := (parentMin value * self element children accountedByLayout size) asFloat.
-	deltaMax < 1
-		ifTrue: [ ^ self ].
+	deltaMax := (parentMin value asInteger * self element children accountedByLayout size) + 1 "exclusive".
+	deltaMax < 2
+		ifTrue: [ ^ self ]. "don't have any delta to distribute"
 
-	deltaMin := 0.
+	deltaMin := 0. "inclusive"
 	totalWeight := self calculateTotalWeight.
-	validDelta := -1.
+	validDelta := -1. "delta for which a solution exists"
 	validSolution := true.
-	[ ((deltaMax - deltaMin)) > 0.0001 ] whileTrue: [ 
+	
+	" do a binary search to find the max delta that won't conflict with constraints"
+	[ deltaMin < deltaMax ] whileTrue: [ 
 		| delta |
-		delta := (deltaMin / 2.0) + (deltaMax / 2.0).
+		delta := ((deltaMin / 2.0) + (deltaMax / 2.0)) asInteger.
 		self invalidateValues.
 		self shareOutDelta: delta totalWeight: totalWeight.
 		validSolution := self solve: self arcs locations: theLocations modifyOnError: false.
 		validSolution
 			ifTrue: [ 
 				validDelta := delta.
-				deltaMin := delta + 1.0 ]
+				deltaMin := delta + 1 ]
 			ifFalse: [ deltaMax := delta ] ].
 	
 	(validDelta > 0 and: [ validSolution not ]) ifTrue: [ 
@@ -736,37 +812,41 @@ BlGridLayoutAxis >> solveLocations: theLocations [
 { #category : #'accessing spec' }
 BlGridLayoutAxis >> specOf: anElement [
 	^ self horizontal
-		ifTrue: [ anElement constraints grid horizontal spec ]
-		ifFalse: [ anElement constraints grid vertical spec ]
+		ifTrue: [ anElement constraints grid columnSpec ]
+		ifFalse: [ anElement constraints grid rowSpec ]
 ]
 
 { #category : #'computing arcs' }
 BlGridLayoutAxis >> topologicalSort: theArcs [
 	| result cursor arcsByVertex visited walk |
+
 	result := Array new: theArcs size.
-	cursor := result size.
+	cursor := result size - 1.
+
 	arcsByVertex := self groupArcsByFirstVertex: theArcs.
 	visited := Array new: self count + 1 withAll: 0.
 	
 	walk := nil.
-	walk := [ :loc | 
+	walk := [ :loc |
+		"loc is an array index starting from 1"
 		| status |
+		
 		status := visited at: loc.
 		status = NEW
 			ifTrue: [
 				visited at: loc put: PENDING.
 				(arcsByVertex at: loc) do: [ :arc |
-					walk value: arc span last.
-					result at: cursor put: arc.
+					walk value: arc span max + 1.
+					result at: (cursor + 1) put: arc.
 					cursor := cursor - 1 ].
 				visited at: loc put: COMPLETE ].
 		status = PENDING
 			ifTrue: [ Warning signal: 'Status of visited at ', loc asString, ' should not be PENDING' ] ].
 	
-	1 to: arcsByVertex size do: [ :loc |
-		walk value: loc ].
+	1 to: arcsByVertex size
+		do: [ :loc | walk value: loc ].
 	
-	cursor = 0
+	cursor = -1
 		ifFalse: [ Warning signal: 'cursor value should be 0 but was ', cursor asString ].
 	
 	^ result

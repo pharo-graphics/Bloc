@@ -41,7 +41,7 @@ BlGridLayoutTests >> testArrayFillFirstInFourElements [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 4 withAll: 0.
 
-	grid fill: array from: 1 to: 2 with: 1.
+	grid fill: array from: 0 to: 1 with: 1.
 
 	self assert: array equals: #(1 0 0 0)
 ]
@@ -52,7 +52,7 @@ BlGridLayoutTests >> testArrayFillForthInFourElements [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 4 withAll: 0.
 
-	grid fill: array from: 4 to: 5 with: 1.
+	grid fill: array from: 3 to: 4 with: 1.
 
 	self assert: array equals: #(0 0 0 1)
 ]
@@ -63,7 +63,7 @@ BlGridLayoutTests >> testArrayFillOneElement [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 1 withAll: 0.
 	
-	grid fill: array from: 1 to: 2 with: 1.
+	grid fill: array from: 0 to: 1 with: 1.
 
 	self assert: array equals: #(1)
 ]
@@ -95,13 +95,12 @@ BlGridLayoutTests >> testArrayFillOutOfBoundsEmpty2 [
 { #category : #'tests - unit - fill' }
 BlGridLayoutTests >> testArrayFillOutOfBoundsEmpty3 [
 	| grid array |
+	
 	grid := BlGridLayoutImpl new.
 	array := Array new: 0 withAll: 0.
 	
-	self
-		should: [ grid fill: array from: 1 to: 1 with: 1 ]
-		raise: SubscriptOutOfBounds 
-		description: 'Should raise SubscriptOutOfBounds' 
+	grid fill: array from: 0 to: 0 with: 1.
+	self assert: array equals: #()
 ]
 
 { #category : #'tests - unit - fill' }
@@ -109,11 +108,8 @@ BlGridLayoutTests >> testArrayFillOutOfBoundsEmpty4 [
 	| grid array |
 	grid := BlGridLayoutImpl new.
 	array := Array new: 0 withAll: 0.
-	
-	self
-		should: [ grid fill: array from: 0 to: 2 with: 1 ]
-		raise: SubscriptOutOfBounds 
-		description: 'Should raise SubscriptOutOfBounds' 
+	grid fill: array from: 0 to: 2 with: 1.
+	self assert: array equals: #()
 ]
 
 { #category : #'tests - unit - fill' }
@@ -123,7 +119,7 @@ BlGridLayoutTests >> testArrayFillOutOfBoundsInFourElements1 [
 	array := Array new: 4 withAll: 0.
 
 	self
-		should: [ grid fill: array from: 0 to: 3 with: 1 ]
+		should: [ grid fill: array from: -1 to: 3 with: 1 ]
 		raise: SubscriptOutOfBounds 
 		description: 'Should raise SubscriptOutOfBounds' 
 ]
@@ -135,7 +131,7 @@ BlGridLayoutTests >> testArrayFillOutOfBoundsInFourElements2 [
 	array := Array new: 4 withAll: 0.
 
 	self
-		should: [ grid fill: array from: 1 to: 6 with: 1 ]
+		should: [ grid fill: array from: -1 to: 6 with: 1 ]
 		raise: SubscriptOutOfBounds 
 		description: 'Should raise SubscriptOutOfBounds' 
 ]
@@ -145,11 +141,9 @@ BlGridLayoutTests >> testArrayFillOutOfBoundsInFourElements3 [
 	| grid array |
 	grid := BlGridLayoutImpl new.
 	array := Array new: 4 withAll: 0.
+	grid fill: array from: 4 to: 6 with: 1.
+	self assert: array equals: #(0 0 0 0).
 
-	self
-		should: [ grid fill: array from: 4 to: 6 with: 1 ]
-		raise: SubscriptOutOfBounds 
-		description: 'Should raise SubscriptOutOfBounds' 
 ]
 
 { #category : #'tests - unit - fill' }
@@ -158,7 +152,7 @@ BlGridLayoutTests >> testArrayFillSecondInFourElements [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 4 withAll: 0.
 
-	grid fill: array from: 2 to: 3 with: 1.
+	grid fill: array from: 1 to: 2 with: 1.
 
 	self assert: array equals: #(0 1 0 0)
 ]
@@ -169,7 +163,7 @@ BlGridLayoutTests >> testArrayFillThreeElements [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 3 withAll: 0.
 	
-	grid fill: array from: 1 to: 4 with: 1.
+	grid fill: array from: 0 to: 3 with: 1.
 
 	self assert: array equals: #(1 1 1)
 ]
@@ -180,7 +174,7 @@ BlGridLayoutTests >> testArrayFillTwoElements [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 2 withAll: 0.
 	
-	grid fill: array from: 1 to: 3 with: 1.
+	grid fill: array from: 0 to: 2 with: 1.
 
 	self assert: array equals: #(1 1)
 ]
@@ -191,7 +185,7 @@ BlGridLayoutTests >> testArrayFillTwoInFourElements1 [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 4 withAll: 0.
 
-	grid fill: array from: 1 to: 3 with: 1.
+	grid fill: array from: 0 to: 2 with: 1.
 
 	self assert: array equals: #(1 1 0 0)
 ]
@@ -202,7 +196,7 @@ BlGridLayoutTests >> testArrayFillTwoInFourElements2 [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 4 withAll: 0.
 
-	grid fill: array from: 2 to: 4 with: 1.
+	grid fill: array from: 1 to: 3 with: 1.
 
 	self assert: array equals: #(0 1 1 0)
 ]
@@ -213,7 +207,7 @@ BlGridLayoutTests >> testArrayFillTwoInFourElements3 [
 	grid := BlGridLayoutImpl new.
 	array := Array new: 4 withAll: 0.
 
-	grid fill: array from: 3 to: 5 with: 1.
+	grid fill: array from: 2 to: 4 with: 1.
 
 	self assert: array equals: #(0 0 1 1)
 ]
@@ -368,14 +362,14 @@ BlGridLayoutTests >> testSpanDistributeOneColumn [
 	parent addChildren: { childA. childB. childC }.
 	parent forceLayout.
 
-	self assert: (childA constraints grid horizontal spec span) equals: (1 to: 2).
-	self assert: (childA constraints grid vertical spec span) equals: (1 to: 2).
+	self assert: (childA constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	self assert: (childA constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
 	
-	self assert: (childB constraints grid horizontal spec span) equals: (1 to: 2).
-	self assert: (childB constraints grid vertical spec span) equals: (2 to: 3).
+	self assert: (childB constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	self assert: (childB constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 1 max: 2).
 	
-	self assert: (childC constraints grid horizontal spec span) equals: (1 to: 2).
-	self assert: (childC constraints grid vertical spec span) equals: (3 to: 4).
+	self assert: (childC constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	self assert: (childC constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 2 max: 3)
 ]
 
 { #category : #'tests - unit - spans' }
@@ -393,12 +387,12 @@ BlGridLayoutTests >> testSpanDistributeOneRow [
 	parent addChildren: { childA. childB. childC }.
 	parent forceLayout.
 
-	self assert: (childA constraints grid horizontal spec span) equals: (1 to: 2).
-	self assert: (childA constraints grid vertical spec span) equals: (1 to: 2).
+	self assert: (childA constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	self assert: (childA constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
 	
-	self assert: (childB constraints grid horizontal spec span) equals: (2 to: 3).
-	self assert: (childB constraints grid vertical spec span) equals: (1 to: 2).
+	self assert: (childB constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 1 max: 2).
+	self assert: (childB constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
 	
-	self assert: (childC constraints grid horizontal spec span) equals: (3 to: 4).
-	self assert: (childC constraints grid vertical spec span) equals: (1 to: 2).
+	self assert: (childC constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 2 max: 3).
+	self assert: (childC constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
 ]
