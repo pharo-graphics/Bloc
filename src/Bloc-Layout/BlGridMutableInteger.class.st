@@ -42,9 +42,5 @@ BlGridMutableInteger >> value [
 
 { #category : #accessing }
 BlGridMutableInteger >> value: aNumber [
-
-	(aNumber fractionPart closeTo: 0)
-		ifFalse: [ self error: 'Trying to store a float in Integer!' ].
-
-	value := aNumber asInteger
+	value := aNumber
 ]
