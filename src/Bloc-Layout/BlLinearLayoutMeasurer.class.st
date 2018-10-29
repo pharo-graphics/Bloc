@@ -22,7 +22,8 @@ Class {
 		'weightedMaxBreadth',
 		'alternativeMaxBreadth',
 		'measuredLength',
-		'useSpaceDistribution'
+		'useSpaceDistribution',
+		'layout'
 	],
 	#category : #'Bloc-Layout-Linear-Utilities'
 }
@@ -64,12 +65,13 @@ BlLinearLayoutMeasurer >> initialize [
 ]
 
 { #category : #initialization }
-BlLinearLayoutMeasurer >> initializeWith: aParentElement extentSpec: anExtentSpec orientation: aBlLinearLayoutOrientation [
+BlLinearLayoutMeasurer >> initializeWith: aParentElement layout: aLinearLayout extentSpec: anExtentSpec orientation: aBlLinearLayoutOrientation [
 
 	parent := aParentElement.
 	orientation := aBlLinearLayoutOrientation.
-	useLargestChild := parent layout shouldUseLargestChild.
-	cellSpacing := parent layout cellSpacing.
+	layout := aLinearLayout.
+	useLargestChild := layout shouldUseLargestChild.
+	cellSpacing := layout cellSpacing.
 
 	extentSpec := anExtentSpec.
 	breadthSpec := orientation breadthSpec: anExtentSpec.
@@ -321,7 +323,7 @@ BlLinearLayoutMeasurer >> useLargestChild [
 
 { #category : #'accessing - properties' }
 BlLinearLayoutMeasurer >> weightSum [
-	^ parent layout weightSum
+	^ layout weightSum
 ]
 
 { #category : #measurement }

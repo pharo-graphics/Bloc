@@ -65,7 +65,7 @@ BlLinearLayoutHorizontalMeasurer >> processBaseline: aNode breadth: aChildBreadt
 		ifFalse: [ ^ self ].
 
 	childBaseline := aNode element baselineOffset.
-	childAlignment := aNode verticalAlignment ifNull: [ parent layout verticalAlignment ].
+	childAlignment := aNode verticalAlignment ifNull: [ layout verticalAlignment ].
 
 	maxAscent
 		at: childAlignment

@@ -157,6 +157,7 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 		
 	aMeasurer
 		initializeWith: anElement
+		layout: self
 		extentSpec: anExtentSpec
 		orientation: self orientation.
 	
