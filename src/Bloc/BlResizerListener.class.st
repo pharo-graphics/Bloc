@@ -25,7 +25,11 @@ BlResizerListener >> dragEndEvent: anEvent [
 BlResizerListener >> dragEvent: anEvent [
 	<event: #BlResizerResizedEvent>
 	| dragPosition dragDelta theBounds theOriginalBounds widthChanged heightChanged |
+
 	anEvent consumed: true.
+	
+	self hasTarget
+		ifFalse: [ ^ self ].
 
 	dragPosition := anEvent position.
 	dragDelta := dragPosition - dragStartPosition.
@@ -64,9 +68,17 @@ BlResizerListener >> dragStartEvent: anEvent [
 	"drag start position in parent"
 	dragStartPosition := anEvent position.
 
+	self hasTarget
+		ifFalse: [ ^ self ].
+
 	"element's original extent"
 	originalExtent := self resizeTarget bounds inSpace extent.
 	originalPosition := self resizeTarget bounds inSpace position
+]
+
+{ #category : #testing }
+BlResizerListener >> hasTarget [
+	^ resizeTarget isNotNil
 ]
 
 { #category : #initialization }
