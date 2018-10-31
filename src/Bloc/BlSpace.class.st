@@ -601,6 +601,15 @@ BlSpace >> hasLayoutError [
 	^ layoutError isNotNil
 ]
 
+{ #category : #testing }
+BlSpace >> hasOwner [
+	"To be polymorhic with BlElement's traversal API.
+	Space does not have an owner"
+	<return: #Boolean>
+	
+	^ false
+]
+
 { #category : #accessing }
 BlSpace >> height [
 	<return: #Number>
