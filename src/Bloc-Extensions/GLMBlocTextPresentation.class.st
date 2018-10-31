@@ -15,6 +15,7 @@ GLMBlocTextPresentation >> element [
 		c vertical matchParent.
 		c horizontal matchParent.
 		c padding: (BlInsets all: 10) ].
+	element when: GLMBlocObjectToSelect do: [:signal | self selection: signal toSelect ].
 	^ element
 ]
 
