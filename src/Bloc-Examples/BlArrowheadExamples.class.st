@@ -89,7 +89,7 @@ BlArrowheadExamples >> curveWithDifferentArrowheads [
 
 	| container curve |
 	container := BlParabollaExamples new relativeCurvature.
-	container := BlBezierExamples new curveWithAnchors.
+	container := BlBezierElementExamples new curveWithAnchors.
 	curve := container children first.
 	curve fromHead: (BlArrowheadSimpleArrow new
 			arrowLengthFraction: 5;

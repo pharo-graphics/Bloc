@@ -1,16 +1,30 @@
 "
-I contain examples and a few usecases of ===BlBezierElement===
+!Bezier curves
+
+There are two kinds of Bezier curves supported:
+- quadratic
+- cubic
+
+!!Quadratic Bezier curves
+
+${example:BlBezierElementExamples>>#quadraticCurveWithAnchors|expandedPreview|noCode=|show=gtLiveFor:}$
+
+
+!!Cubic Bezier curves
+
+${example:BlBezierElementExamples>>#curveWithAnchors|expandedPreview|noCode=|show=#gtLiveFor:}$
+
 "
 Class {
-	#name : #BlBezierExamples,
+	#name : #BlBezierElementExamples,
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Geometry'
+	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #examples }
-BlBezierExamples class >> bezierControlPoints [
+BlBezierElementExamples class >> bezierControlPoints [
 	<script: 'self bezierControlPoints'>
 	
 	self openInWindow:
@@ -20,7 +34,7 @@ BlBezierExamples class >> bezierControlPoints [
 ]
 
 { #category : #examples }
-BlBezierExamples class >> quadraticCurve [
+BlBezierElementExamples class >> quadraticCurve [
 	<script: 'self quadraticCurve'>
 	
 	self openInWindow:
@@ -30,7 +44,7 @@ BlBezierExamples class >> quadraticCurve [
 ]
 
 { #category : #examples }
-BlBezierExamples class >> quadraticCurveWithPerpendicularAnchor [
+BlBezierElementExamples class >> quadraticCurveWithPerpendicularAnchor [
 	<script: 'self quadraticCurveWithPerpendicularAnchor'>
 
 	self openInWindow:
@@ -40,7 +54,7 @@ BlBezierExamples class >> quadraticCurveWithPerpendicularAnchor [
 ]
 
 { #category : #examples }
-BlBezierExamples class >> quadraticCurveWithPerpendicularFractionAnchor [
+BlBezierElementExamples class >> quadraticCurveWithPerpendicularFractionAnchor [
 	<script: 'self quadraticCurveWithPerpendicularFractionAnchor'>
 
 	self openInWindow:
@@ -50,7 +64,7 @@ BlBezierExamples class >> quadraticCurveWithPerpendicularFractionAnchor [
 ]
 
 { #category : #'instance creation' }
-BlBezierExamples >> attachPoint [
+BlBezierElementExamples >> attachPoint [
 	<gtExample>	
 
 	^ BlElement new
@@ -62,7 +76,7 @@ BlBezierExamples >> attachPoint [
 ]
 
 { #category : #'instance creation' }
-BlBezierExamples >> container [
+BlBezierElementExamples >> container [
 	<gtExample>
 	
 	^ BlElement new
@@ -74,7 +88,7 @@ BlBezierExamples >> container [
 ]
 
 { #category : #'instance creation' }
-BlBezierExamples >> curve [
+BlBezierElementExamples >> curve [
 	<gtExample>
 	
 	^ BlBezierElement new
@@ -83,23 +97,23 @@ BlBezierExamples >> curve [
 ]
 
 { #category : #'example - connections' }
-BlBezierExamples >> curveWithAnchors [
+BlBezierElementExamples >> curveWithAnchors [
 	<gtExample>	
 	| redCurve attachFrom attachTo firstViaAttach secondViaAttach fromLine toLine |
 	
 	redCurve := self redCurve.
 	
 	attachFrom := self attachPoint.
-	attachFrom relocate: 100 @ 300.
+	attachFrom relocate: 10 @ 150.
 
 	firstViaAttach := self attachPoint.
-	firstViaAttach relocate: 150 @ 100.
+	firstViaAttach relocate: 60 @ 10.
 	
 	secondViaAttach := self attachPoint.
-	secondViaAttach relocate: 350 @ 100.
+	secondViaAttach relocate: 260 @ 10.
 
 	attachTo := self attachPoint.
-	attachTo relocate: 400 @ 300.
+	attachTo relocate: 310 @ 150.
 
 	fromLine := self greyLine.
 	fromLine fromAnchor: (BlElementCenterAnchor element: attachFrom).
@@ -119,7 +133,7 @@ BlBezierExamples >> curveWithAnchors [
 ]
 
 { #category : #'example - visual properties' }
-BlBezierExamples >> greyLine [
+BlBezierElementExamples >> greyLine [
 	<gtExample>
 
 	^ self line
@@ -127,7 +141,7 @@ BlBezierExamples >> greyLine [
 ]
 
 { #category : #'instance creation' }
-BlBezierExamples >> line [
+BlBezierElementExamples >> line [
 	<gtExample>
 	
 	^ BlLineElement new
@@ -136,20 +150,20 @@ BlBezierExamples >> line [
 ]
 
 { #category : #'example - connections' }
-BlBezierExamples >> quadraticCurveWithAnchors [
+BlBezierElementExamples >> quadraticCurveWithAnchors [
 	<gtExample>	
 	| redCurve attachFrom attachTo viaAttach fromLine toLine |
 	
 	redCurve := self redCurve.
 	
 	attachFrom := self attachPoint.
-	attachFrom relocate: 100 @ 300.
+	attachFrom relocate: 10 @ 160.
 
 	viaAttach := self attachPoint.
-	viaAttach relocate: 250 @ 100.
+	viaAttach relocate: 160 @ 10.
 
 	attachTo := self attachPoint.
-	attachTo relocate: 400 @ 300.
+	attachTo relocate: 310 @ 160.
 
 	fromLine := self greyLine.
 	fromLine fromAnchor: (BlElementCenterAnchor element: attachFrom).
@@ -168,7 +182,7 @@ BlBezierExamples >> quadraticCurveWithAnchors [
 ]
 
 { #category : #'example - connections' }
-BlBezierExamples >> quadraticCurveWithPerpendicularAnchor [
+BlBezierElementExamples >> quadraticCurveWithPerpendicularAnchor [
 	<gtExample>	
 	| redCurve attachFrom attachTo anchorFrom anchorTo perpendicularAnchor perpendicularAttach fromLine toLine connectLine |
 	
@@ -217,7 +231,7 @@ BlBezierExamples >> quadraticCurveWithPerpendicularAnchor [
 ]
 
 { #category : #'example - connections' }
-BlBezierExamples >> quadraticCurveWithPerpendicularFractionAnchor [
+BlBezierElementExamples >> quadraticCurveWithPerpendicularFractionAnchor [
 	<gtExample>	
 	| redCurve attachFrom attachTo anchorFrom anchorTo perpendicularAnchor perpendicularAttach fromLine toLine connectLine |
 	
@@ -266,7 +280,7 @@ BlBezierExamples >> quadraticCurveWithPerpendicularFractionAnchor [
 ]
 
 { #category : #'example - visual properties' }
-BlBezierExamples >> redCurve [
+BlBezierElementExamples >> redCurve [
 	<gtExample>
 
 	^ self curve border: (BlBorder paint: Color red width: 4)
