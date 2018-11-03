@@ -112,7 +112,7 @@ BlCompositorExamples >> mouseDownOnNodesBelowThePoint [
 
 	mouseEvent := BlMouseDownEvent new.
 	mouseEvent timestamp: DateAndTime now.
-	mouseEvent button: BlMouseEvent primaryButton.
+	mouseEvent button: BlMouseButton primary.
 	mouseEvent position: 20@20.
 
 	theNodes := self nodesBelowThePoint.

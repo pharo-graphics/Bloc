@@ -142,7 +142,7 @@ BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 
 { #category : #initialization }
 BlOSWindowSpace >> initializeWithAttributes: initialAttributes [
-	window := OSWindowAnimated createWithAttributes: initialAttributes.
+	window := OSWindow createWithAttributes: initialAttributes.
 	window eventHandler: (BlOSWindowEventHandler window: self).
 	window startTextInput
 ]
