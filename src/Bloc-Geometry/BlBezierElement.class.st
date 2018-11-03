@@ -1,5 +1,7 @@
 "
-I represent a curve element that is rendered between two provided anchors via additional control anchors
+I represent a curve element that is rendered between two provided anchors via additional control anchors.
+
+See ${class:BlBezierElementExamples}$.
 "
 Class {
 	#name : #BlBezierElement,
@@ -7,7 +9,7 @@ Class {
 	#instVars : [
 		'viaAnchors'
 	],
-	#category : 'Bloc-Geometry-Curves'
+	#category : #'Bloc-Geometry-Curves'
 }
 
 { #category : #'anchor - geometry' }
