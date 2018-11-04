@@ -38,7 +38,7 @@ BaselineOfBloc >> baseline: spec [
 		baseline: 'BlocLayout' with: [ spec
 			repository: 'github://pharo-graphics/Bloc/src' ];
 
-		baseline: 'SpartaDevelopment' with: [ spec
+		baseline: 'Sparta' with: [ spec
 			repository: 'github://syrel/Sparta/src' ];
 
 		baseline: 'TaskIt' with: [ spec 
@@ -64,7 +64,7 @@ BaselineOfBloc >> baseline: spec [
 		package: #'Bloc-Text-Elements' with: [ spec requires: #(BlocCore 'Bloc-Text' 'Bloc-Text-Rope'). ];
 
 		"Sparta provides us with a canvas and text support"
-		package: #'Bloc-Sparta' with: [ spec requires: #(BlocCore 'Bloc-Text' SpartaDevelopment) ];
+		package: #'Bloc-Sparta' with: [ spec requires: #(BlocCore 'Bloc-Text' Sparta) ];
 			
 		"Provides a collection of element exporters to different formats (svg, pdf, png, jpeg, form)"
 		package: #'Bloc-Exporter' with: [ spec requires: #(BlocCore 'Bloc-Sparta') ];
