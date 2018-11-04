@@ -48,11 +48,9 @@ BlAffineTransformation >> gtInspectorPreviewIn: aComposite [
 				path: aCanvas bounds;
 				draw.
 			
-			aCanvas transform push.
-			
 			aCanvas transform
-				translateBy: 50@50;
-				apply.
+				translateBy: 50@50
+				push.
 					
 			aCanvas stroke
 				paint: Color black;
@@ -63,7 +61,7 @@ BlAffineTransformation >> gtInspectorPreviewIn: aComposite [
 					
 			aCanvas transform
 				multiplyBy: self asMatrix;
-				apply.
+				push.
 					
 			aCanvas stroke
 				paint: Color black;
@@ -71,6 +69,6 @@ BlAffineTransformation >> gtInspectorPreviewIn: aComposite [
 				width: 2;
 				draw.
 			
-			aCanvas transform pop ];
+			aCanvas transform pop pop ];
 		when: [ self is2D ]
 ]

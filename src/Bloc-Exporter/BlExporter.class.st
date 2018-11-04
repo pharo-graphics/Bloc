@@ -75,12 +75,10 @@ BlExporter >> doExport: aFinalizingBlock [
 	self
 		drawOn: aCanvas
 		during: [
-			aCanvas transform during: [ :aTransform |
-				aTransform
-				translateBy: (aBoundsInParent origin) negated;
-				apply.
+			aCanvas transform
+				by: [ :aTransform | aTransform translateBy: (aBoundsInParent origin) negated ]
+				during: [ anElement fullDrawOnSpartaCanvas: aCanvas ] ].
 
-			anElement fullDrawOnSpartaCanvas: aCanvas ] ].
 	^ aFinalizingBlock cull: aCanvas
 ]
 

@@ -8,11 +8,11 @@ BlPaint >> gtInspectorPreviewIn: aComposite [
 		title: [ 'Preview' translated ];
 		extent: [ 350@250 ];
 		draw: [ :aCanvas |
-			aCanvas transform during: [ :aTransform |
-				aTransform translateBy: (aCanvas extent - (aCanvas extent / 1.5)) / 2.0.
-				aTransform apply.
-				aCanvas fill
-					paint: (self copy matchExtent: (aCanvas extent / 1.5));
-					path: (0@0 extent: (aCanvas extent / 1.5));
-					draw. ] ]
+			aCanvas transform
+				by: [ :aTransform | aTransform translateBy: (aCanvas extent - (aCanvas extent / 1.5)) / 2.0 ]
+				during: [
+					aCanvas fill
+						paint: (self copy matchExtent: (aCanvas extent / 1.5));
+						path: (0@0 extent: (aCanvas extent / 1.5));
+						draw. ] ]
 ]

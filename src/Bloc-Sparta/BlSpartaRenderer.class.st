@@ -121,7 +121,7 @@ BlSpartaRenderer >> initializeForBuffer: aBufferSurface [
 
 	spartaCanvas transform
 		scaleBy: scaleFactor;
-		apply
+		push
 ]
 
 { #category : #initialization }
@@ -140,7 +140,7 @@ BlSpartaRenderer >> initializeForForm: aFormSurface [
 
 	spartaCanvas transform
 		scaleBy: scaleFactor;
-		apply
+		push
 ]
 
 { #category : #initialization }
@@ -159,7 +159,7 @@ BlSpartaRenderer >> initializeForOpenGL: anOpenGLSurface [
 
 	spartaCanvas transform
 		scaleBy: scaleFactor;
-		apply
+		push
 ]
 
 { #category : #initialization }

@@ -37,9 +37,8 @@ BlChickenHead >> drawOnSpartaCanvas: aCanvas [
 	anEye := aCanvas shape circleAt: 0@0 radius: self extent min / 8.0.
 	
 	aCanvas transform
-		push;
 		translateBy: (self width / 4.0) @ (self height / 3.0);
-		apply.
+		push.
 	
 	aCanvas fill
 		paint: Color white;
@@ -57,8 +56,8 @@ BlChickenHead >> drawOnSpartaCanvas: aCanvas [
 		
 	aCanvas transform
 		translateBy: (self width / 2.0) @ 0;
-		apply.
-		
+		push.
+	
 	aCanvas fill
 		paint: Color white;
 		path: anEye;
@@ -75,7 +74,7 @@ BlChickenHead >> drawOnSpartaCanvas: aCanvas [
 	
 	aCanvas transform
 		translateBy: (self width / 4.0) negated @ (self height / 4.0);
-		apply.
+		push.
 
 	aCanvas fill
 		path: (aCanvas path
@@ -89,6 +88,6 @@ BlChickenHead >> drawOnSpartaCanvas: aCanvas [
 		paint: Color red;
 		draw.
 	
-	aCanvas transform pop.
+	aCanvas transform pop pop pop.
 		
 ]

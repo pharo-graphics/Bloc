@@ -14,10 +14,9 @@ BlBorder >> gtInspectorPreviewIn: aComposite [
 				border: self;
 				forceLayout.
 			
-			aCanvas transform during: [ :aTransform |
-				aTransform translateBy: (aCanvas extent - (aCanvas extent / 1.5)) / 2.0.
-				aTransform apply.
-				self drawOnSpartaCanvas: aCanvas of: anElement ] ]
+			aCanvas transform
+				by: [ :aTransform | aTransform translateBy: (aCanvas extent - (aCanvas extent / 1.5)) / 2.0 ]
+				during: [ :aTransform | self drawOnSpartaCanvas: aCanvas of: anElement ] ]
 ]
 
 { #category : #'*Bloc-Extensions' }

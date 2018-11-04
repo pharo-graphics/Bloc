@@ -14,11 +14,9 @@ BlElement >> asSpartaForm [
 
 	aCanvas := Bloc preferableSpartaCanvas extent: (aBoundsInParent extent max: 1@1).
 
-	aCanvas transform during: [ :aTransform |
-		aTransform
-			translateBy: (aBoundsInParent origin) negated;
-			apply.
-		self fullDrawOnSpartaCanvas: aCanvas ].
+	aCanvas transform
+		by: [ :aTransform | aTransform translateBy: aBoundsInParent origin negated]
+		during: [ :aTransform | self fullDrawOnSpartaCanvas: aCanvas ].
 
 	^ aCanvas asForm
 ]

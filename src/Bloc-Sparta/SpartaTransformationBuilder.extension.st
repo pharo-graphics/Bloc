@@ -10,16 +10,12 @@ SpartaTransformationBuilder >> by2D: aBlElementTransform translated: aPoint duri
 	(needsTransformation or: [ needsTranslation ])
 		ifFalse: [ ^ aBlock value: self canvas ].
 	
-	self during: [
-		needsTranslation
-			ifTrue: [ self translateBy: aPoint ].
-			
-		needsTransformation
-			ifTrue: [ self multiplyBy: aBlElementTransform ].
-			
-		self apply.
-
-		aBlock value: self canvas ]
+	self
+		by: [ :aTransformationBuilder |
+			aTransformationBuilder
+				translateBy: aPoint;
+				multiplyBy: aBlElementTransform ]
+		during: [ aBlock value: self canvas ]
 ]
 
 { #category : #'*Bloc-Sparta' }
@@ -34,13 +30,12 @@ SpartaTransformationBuilder >> by3D: aBlElementTransform translated: aPoint duri
 			paint: Color black;
 			draw.
 
-	self during: [
-		self translateBy: aPoint + (0@0).
-		self apply.
-		
-		self
-			drawSurface: aTransformedCanvas surface
-			transformed: aBlElementTransform matrix ]
+	self
+		by: [ :aTransformationBuilder | aTransformationBuilder translateBy: aPoint ]
+		during: [
+			self
+				drawSurface: aTransformedCanvas surface
+				transformed: aBlElementTransform matrix ]
 ]
 
 { #category : #'*Bloc-Sparta' }

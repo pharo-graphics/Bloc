@@ -20,17 +20,16 @@ TBlDrawingCache >> drawMeAndChildrenOnSpartaCanvas: aCanvas [
 		aGlobalToLocalScaleMatrix transformBounds: theBounds.
 
 		aCachedCanvas := aCanvas similar: theBounds extent ceiling asIntegerPoint.
-		aCachedCanvas transform during: [ :aTransform |
-			aTransform scaleBy: aGlobalToLocalScale asPoint.
-			aTransform apply.
-			super drawMeAndChildrenOnSpartaCanvas: aCachedCanvas ].
+		aCachedCanvas transform
+			by: [ :aTransform | aTransform scaleBy: aGlobalToLocalScale asPoint ]
+			during: [ super drawMeAndChildrenOnSpartaCanvas: aCachedCanvas ].
 
 		self cachedSurface: aCachedCanvas surface.
 		aCachedCanvas release ].
 
-	aCanvas transform during: [ :aTransform |
-			aTransform multiplyBy: aLocalToGlobalScaleMatrix.
-			aTransform apply.
+	aCanvas transform
+		by: [ :aTransform | aTransform multiplyBy: aLocalToGlobalScaleMatrix ]
+		during: [
 			aCanvas fill
 				paint: self cachedSurface;
 				path: self cachedSurface bounds;
