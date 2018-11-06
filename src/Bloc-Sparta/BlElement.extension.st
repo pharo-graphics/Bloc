@@ -16,7 +16,7 @@ BlElement >> asSpartaForm [
 
 	aCanvas transform
 		by: [ :aTransform | aTransform translateBy: aBoundsInParent origin negated]
-		during: [ :aTransform | self fullDrawOnSpartaCanvas: aCanvas ].
+		during: [ self fullDrawOnSpartaCanvas: aCanvas ].
 
 	^ aCanvas asForm
 ]
