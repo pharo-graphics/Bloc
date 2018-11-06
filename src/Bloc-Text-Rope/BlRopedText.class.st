@@ -128,8 +128,9 @@ BlRopedText >> insertString: aString at: anIndex [
 ]
 
 { #category : #accessing }
-BlRopedText >> insertText: arg1 at: arg2 [ 
-	^ self shouldBeImplemented
+BlRopedText >> insertText: aString at: anIndex [
+	rope := rope insertItems: aString at: anIndex.
+	self notifyStringInserted: aString at: anIndex
 ]
 
 { #category : #'text - testing' }
