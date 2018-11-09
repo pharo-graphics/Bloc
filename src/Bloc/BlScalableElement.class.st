@@ -59,13 +59,7 @@ BlScalableElement >> contentElement: anElement [
 		assert: [ anElement isNotNil ]
 		description: [ 'Content element must not be nil' ].
 
-	"If we already have a content element, we should remove an old one
-	in order to replace it with one just provided"
-	self hasContentElement
-		ifTrue: [ self removeChild: self contentElement ].
-
-	contentElement := anElement.
-	self addChild: contentElement
+	self addChild: anElement
 ]
 
 { #category : #initialization }
@@ -161,6 +155,19 @@ BlScalableElement >> measureScale [
 { #category : #'api - scaling' }
 BlScalableElement >> minScale: aNumber [
 	self scaleStrategy: ((BlScalableMinDecorator on: self scaleStrategy) minScale: aNumber)
+]
+
+{ #category : #'hooks - children' }
+BlScalableElement >> onChildAdded: anElement [
+	"I make sure that there is only one child"
+	super onChildAdded: anElement.
+
+	"If we already have a content element, we should remove an old one
+	in order to replace it with one just provided"
+	self hasContentElement
+		ifTrue: [ self removeChild: self contentElement ].
+
+	contentElement := anElement
 ]
 
 { #category : #layout }

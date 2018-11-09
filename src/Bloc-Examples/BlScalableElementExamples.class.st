@@ -24,6 +24,16 @@ BlScalableElementExamples >> contentElementLarger [
 ]
 
 { #category : #'examples - instance creation' }
+BlScalableElementExamples >> contentElementMatchingParent [
+	<gtExample>
+
+	^ self contentElement
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent ]
+]
+
+{ #category : #'examples - instance creation' }
 BlScalableElementExamples >> contentElementSmaller [
 	<gtExample>
 
@@ -59,7 +69,7 @@ BlScalableElementExamples >> exactContentLargerInExactScalableFitAll [
 	aScalable := self scalableElement.
 	aContent := self contentElementLarger.
 
-	aScalable contentElement: aContent.
+	aScalable addChild: aContent.
 	aScalable forceLayout.
 
 	self assert: aScalable measureScale equals: (3 / 4) asFloat.
@@ -81,7 +91,7 @@ BlScalableElementExamples >> exactContentSmallerInExactScalableFitAll [
 	aScalable := self scalableElement.
 	aContent := self contentElementSmaller.
 	
-	aScalable contentElement: aContent.
+	aScalable addChild: aContent.
 	aScalable forceLayout.
 
 	self assert: aScalable measureScale equals: (4 / 3) asFloat.
@@ -94,6 +104,58 @@ BlScalableElementExamples >> exactContentSmallerInExactScalableFitAll [
 	self assert: (aContent bounds transformed extent closeTo: (533.333333@400.0)).
 	
 	^ aScalable
+]
+
+{ #category : #'examples - scalable' }
+BlScalableElementExamples >> matchParentContentInExactScalableFitAll [
+	<gtExample>
+	| aScalable aContent |
+	
+	aScalable := self scalableElement.
+	aContent := self contentElementMatchingParent.
+
+	aScalable addChild: aContent.
+	aScalable forceLayout.
+
+	self assert: aScalable measureScale equals: 1.
+	self assert: aScalable extent equals: self scalableExtent.
+	self assert: aScalable position equals: 0@0.
+
+	self assert: aContent position equals: 0@0.
+	self assert: aContent extent equals: self scalableExtent.
+	self assert: aContent bounds transformed asRectangle equals: (0@0 extent: self scalableExtent).
+
+	^ aScalable
+]
+
+{ #category : #'examples - scalable' }
+BlScalableElementExamples >> matchParentContentInMatchParentScalableFitAll [
+	<gtExample>
+	| aScalable aContent aContainer |
+	
+	aContainer := BlElement new.
+	aContainer size: self scalableExtent.
+	
+	aScalable := self scalableElement.
+	aScalable constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+	aContent := self contentElementMatchingParent.
+
+	aScalable addChild: aContent.
+	aContainer addChild: aScalable.
+	
+	aContainer forceLayout.
+
+	self assert: aScalable measureScale equals: 1.
+	self assert: aScalable extent equals: self scalableExtent.
+	self assert: aScalable position equals: 0@0.
+
+	self assert: aContent position equals: 0@0.
+	self assert: aContent extent equals: self scalableExtent.
+	self assert: aContent bounds transformed asRectangle equals: (0@0 extent: self scalableExtent).
+
+	^ aContainer
 ]
 
 { #category : #'examples - instance creation' }
