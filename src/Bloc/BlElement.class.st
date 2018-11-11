@@ -1140,7 +1140,7 @@ BlElement >> findMouseEventTargetAt: aPoint [
 	"fast exit if my children are not allowed to handle mouse events
 	or if there are no children"
 	(self shouldChildrenHandleMouseEvents not or: [ self hasChildren not ])
-		ifTrue: [ ^ doWantEvent
+		ifTrue: [ ^ (doWantEvent and: [ self shouldHandleMouseEvents ])
 			ifTrue: [ self ]
 			ifFalse: [ nil ] ].
 	
@@ -1153,7 +1153,7 @@ BlElement >> findMouseEventTargetAt: aPoint [
 			(eachChild findMouseEventTargetAt: aPoint)
 				ifNotNil: [ :aTargetElement | ^ aTargetElement ] ].
 	
-	^ doWantEvent
+	^ (doWantEvent and: [ self shouldHandleMouseEvents ])
 		ifTrue: [ self ]
 		ifFalse: [ nil ]
 ]
@@ -3218,9 +3218,7 @@ BlElement >> wantsMouseEventAt: aPoint [
 	By default elements can handle mouse events if they are visible and not transparent for mouse events"
 	<return: #Boolean>
 
-	^ self isVisible and: [
-		self shouldHandleMouseEvents and: [
-			self containsGlobalPoint: aPoint ] ]
+	^ self isVisible and: [ self containsGlobalPoint: aPoint ]
 ]
 
 { #category : #'api - bounds' }
