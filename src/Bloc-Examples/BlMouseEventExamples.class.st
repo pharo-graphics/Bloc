@@ -8,7 +8,7 @@ Class {
 BlMouseEventExamples >> bottomLeftText: anEvent [
 
 	self
-		pointToText: anEvent currentTarget parent boundsInSpace bottomLeft
+		pointToText: (self boundsOf: anEvent currentTarget parent) bottomLeft
 		for: anEvent currentTarget
 ]
 
@@ -16,8 +16,19 @@ BlMouseEventExamples >> bottomLeftText: anEvent [
 BlMouseEventExamples >> bottomRightText: anEvent [
 
 	self
-		pointToText: anEvent currentTarget parent boundsInSpace bottomRight
+		pointToText: (self boundsOf: anEvent currentTarget parent) bottomRight
 		for: anEvent currentTarget
+]
+
+{ #category : #private }
+BlMouseEventExamples >> boundsOf: anElement [
+	| aRoot |
+
+	aRoot := anElement.
+	anElement
+		withAllParentsDo: [ :aParent | aParent userData at: #blocEvents ifPresent: [ :aName | aRoot := aParent ] ].	
+	
+	^ anElement bounds inParent: aRoot
 ]
 
 { #category : #'instance creation' }
@@ -85,7 +96,9 @@ BlMouseEventExamples >> parent [
 	^ self box
 		border: (BlBorder paint: Color gray width: 1);
 		background: (Color gray alpha: 0.3);
-		size: 300@250
+		size: 300@250;
+		in: [ :anElement | anElement userData at: #blocEvents put: #parent ];
+		yourself
 ]
 
 { #category : #'examples - find event target' }
@@ -180,12 +193,12 @@ BlMouseEventExamples >> parentWithoutClipChildWithoutClip [
 
 	blue := self grandChild.
 	blue relocate: 100@50.
-	
+
 	red := self child.
 	red clipChildren: false.
 	red relocate: 100@100.
 	red addChild: blue.
-	
+
 	gray := self parent.
 	gray clipChildren: false.
 	gray addChild: red.
@@ -226,7 +239,7 @@ BlMouseEventExamples >> pointToText: aPoint for: aTextElement [
 BlMouseEventExamples >> topLeftText: anEvent [
 
 	self
-		pointToText: anEvent currentTarget parent boundsInSpace topLeft
+		pointToText: (self boundsOf: anEvent currentTarget parent) topLeft
 		for: anEvent currentTarget
 ]
 
@@ -234,6 +247,6 @@ BlMouseEventExamples >> topLeftText: anEvent [
 BlMouseEventExamples >> topRightText: anEvent [
 
 	self
-		pointToText: anEvent currentTarget parent boundsInSpace topRight
+		pointToText: (self boundsOf: anEvent currentTarget parent) topRight
 		for: anEvent currentTarget
 ]
