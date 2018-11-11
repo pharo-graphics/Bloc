@@ -44,7 +44,7 @@ Class {
 		'selection',
 		'containerExtent',
 		'session',
-		'padding'
+		'scale'
 	],
 	#classInstVars : [
 		'matrix'
@@ -81,7 +81,7 @@ BlTextParagraph >> ascent [
 BlTextParagraph >> baseline [
 	<return: #Point>
 
-	^ (baseline computedBaseline: self) + self padding topLeft
+	^ baseline computedBaseline: self
 ]
 
 { #category : #'api - instantiation' }
@@ -287,7 +287,7 @@ BlTextParagraph >> measureOn: aCanvas [
 	"we should store a session of the last successfull measurement"
 	session := Smalltalk session.
 
-	self normalize: 1.
+	"self normalize: self scale."
 	self baselineChanged.
 
 	self
@@ -312,17 +312,6 @@ BlTextParagraph >> measuredEnd [
 { #category : #'paragraph - measuring' }
 BlTextParagraph >> normalize: aScale [
 	self subclassResponsibility
-]
-
-{ #category : #accessing }
-BlTextParagraph >> padding [
-	^ padding
-]
-
-{ #category : #accessing }
-BlTextParagraph >> padding: aBlInsets [
-	padding := aBlInsets.
-	self baselineChanged
 ]
 
 { #category : #'paragraph - geometry' }
@@ -357,8 +346,8 @@ BlTextParagraph >> reset [
 	autoRelease := true.
 	selection := nil.
 	containerExtent := 0@0.
-	padding := BlInsets empty.
-	baseline := BlTextParagraphAscentBaseline uniqueInstance
+	baseline := BlTextParagraphAscentBaseline uniqueInstance.
+	scale := 1
 ]
 
 { #category : #'paragraph - geometry' }
@@ -367,6 +356,18 @@ BlTextParagraph >> right [
 	<return: #Number>
 
 	^ self left + self width
+]
+
+{ #category : #accessing }
+BlTextParagraph >> scale [
+	<return: #Number>
+
+	^ scale
+]
+
+{ #category : #accessing }
+BlTextParagraph >> scale: aNumber [
+	scale := aNumber
 ]
 
 { #category : #'paragraph - accessing' }

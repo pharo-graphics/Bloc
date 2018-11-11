@@ -104,6 +104,13 @@ BlElementBounds >> extent [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'geometry - accessing' }
+BlElementBounds >> height [
+	<return: #Number>
+
+	^ self extent y
+]
+
 { #category : #'geometry bounds' }
 BlElementBounds >> inChild: anElement [
 	<return: #BlElementBounds>
@@ -286,4 +293,11 @@ BlElementBounds >> transformed [
 	<return: #BlElementBounds>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'geometry - accessing' }
+BlElementBounds >> width [
+	<return: #Number>
+
+	^ self extent x
 ]

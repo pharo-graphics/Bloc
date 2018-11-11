@@ -112,7 +112,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> grid [
 BlFitContentVerticallyInHorizontalLayoutsExamples >> layoutLabel: aString [
 	^ BlTextElement new
 		text: (aString asRopedText thin fontSize: 10);
-		boundsBaseline;
 		padding: (BlInsets top: 5);
 		constraintsDo: [ :c |
 			c ignoreByLayout.

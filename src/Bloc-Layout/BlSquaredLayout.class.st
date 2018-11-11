@@ -76,7 +76,7 @@ BlSquaredLayout >> measure: anElement with: anExtentSpec [
 		ifTrue: [ aMeasuredExtent min asPoint ]
 		ifFalse: [ aMeasuredExtent max asPoint ].
 
-	 aMeasuredExtent = aMeasuredExtent
+	 aMeasuredExtent = anExtent
 		ifTrue: [ ^ self ].
 
 	"and finally re-measure everything with squared extent"

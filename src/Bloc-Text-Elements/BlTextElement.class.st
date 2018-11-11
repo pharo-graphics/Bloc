@@ -13,7 +13,8 @@ Class {
 		'paragraph',
 		'selection',
 		'baseline',
-		'measurer'
+		'measurer',
+		'measurement'
 	],
 	#category : #'Bloc-Text-Elements'
 }
@@ -38,6 +39,13 @@ BlTextElement >> baseline [
 BlTextElement >> baseline: aTextParagraphBaseline [
 	baseline := aTextParagraphBaseline.
 	self textChanged
+]
+
+{ #category : #layout }
+BlTextElement >> baselineOffset [
+	^ paragraph
+		ifNotNil: [ paragraph baseline y ]
+		ifNil: [ 0 ].
 ]
 
 { #category : #'api - text' }
@@ -81,13 +89,6 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 ]
 
 { #category : #initialization }
-BlTextElement >> defaultBaseline [
-	<return: #BlTextParagraphBaseline>
-
-	^ BlTextParagraphAscentBaseline uniqueInstance
-]
-
-{ #category : #initialization }
 BlTextElement >> defaultText [
 	"Return a default text I should be created with"
 	<return: #BlText>
@@ -118,12 +119,75 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 	self invalidate
 ]
 
+{ #category : #drawing }
+BlTextElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
+	| aBaselineOffset anAscentOffset aDescentOffset aLineWidth |
+	
+	paragraph
+		ifNil: [ ^ self ].
+
+	aLineWidth := 1.0 / self globalScale.
+
+	aCanvas stroke
+		path: self boundsInLocal;
+		paint: Color red;
+		width: aLineWidth;
+		draw.
+
+	aBaselineOffset := self baselineOffset.
+
+	anAscentOffset := aBaselineOffset - paragraph ascent.
+	aDescentOffset := aBaselineOffset + paragraph descent.
+
+	aCanvas stroke
+		path: (aCanvas shape line: 0@aBaselineOffset to: self bounds width @aBaselineOffset);
+		paint: Color black;
+		width: aLineWidth;
+		draw.
+	
+	aCanvas stroke
+		path: (aCanvas shape line: (self width / 2.0) @ 0 to: (self width / 2.0) @ self height);
+		paint: Color green muchDarker;
+		width: aLineWidth;
+		draw.
+		
+	aCanvas stroke
+		path: (aCanvas shape
+			line: (BlBounds fromRectangle: (paragraph bounds translateBy: paragraph baseline)) topCenter
+			to: (BlBounds fromRectangle: (paragraph bounds translateBy: paragraph baseline)) bottomCenter);
+		paint: Color magenta;
+		width: aLineWidth;
+		draw.
+		
+	aCanvas stroke
+		path: (aCanvas shape line: 0@anAscentOffset to: self bounds width @anAscentOffset);
+		paint: Color red;
+		width: aLineWidth;
+		draw.
+
+	aCanvas stroke
+		path: (aCanvas shape line: 0@aDescentOffset to: self bounds width @aDescentOffset);
+		paint: Color blue;
+		width: aLineWidth;
+		draw.
+
+	aCanvas stroke
+		path: (paragraph bounds translateBy: paragraph baseline);
+		paint: Color gray;
+		width: aLineWidth;
+		draw.
+
+	aCanvas fill
+		path:  (aCanvas shape circleAt: paragraph baseline radius: (10 / self globalScale));
+		paint: Color blue;
+		draw
+]
+
 { #category : #initialization }
 BlTextElement >> initialize [
 	super initialize.
 	
 	text := self defaultText.
-	baseline := self defaultBaseline.
 	"Text layout is created during measurement in onMeasure:"
 	paragraph := nil.
 	
@@ -132,7 +196,17 @@ BlTextElement >> initialize [
 		c vertical fitContent ].
 
 	selection := BlCompositeSelection new.
-	measurer := self defaultTextMeasurer
+	measurer := self defaultTextMeasurer.
+
+	self tightMesurement.
+	self boundsBaseline.
+	
+	"self debug: true"
+]
+
+{ #category : #'api - text' }
+BlTextElement >> looseMesurement [
+	self measurement: BlTextElementLooseMeasurementStrategy uniqueInstance
 ]
 
 { #category : #layout }
@@ -164,7 +238,7 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
-	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent |
+	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
 
 	aWidthSpec := anExtentMeasurementSpec widthSpec.
 	aHeightSpec := anExtentMeasurementSpec heightSpec.
@@ -184,13 +258,14 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 		text: self text;
 		maxWidth: aMaxWidth;
 		maxHeight: aMaxHeight;
-		padding: self padding.
+		scale: self globalScale.
 
 	paragraph measureOn: self measurer.
 	"text layout is measured at this point"
 
-	aMeasuredWidth := paragraph width min: aMaxWidth.
-	aMeasuredHeight := (paragraph ascent + paragraph descent) min: aMaxHeight.
+	aMeasuredBounds := measurement boundsOf: paragraph.
+	aMeasuredWidth := aMeasuredBounds width min: aMaxWidth.
+	aMeasuredHeight := aMeasuredBounds height min: aMaxHeight.
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
 	aWidthSpec isExact ifTrue: [ 
@@ -207,6 +282,19 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 
 	"Finally set measured extent"
 	self measuredExtent: aMeasuredExtent.
+]
+
+{ #category : #accessing }
+BlTextElement >> measurement [
+	<return: #BlTextElementMeasurementStrategy>
+
+	^ measurement
+]
+
+{ #category : #accessing }
+BlTextElement >> measurement: aTextElementMeasurementStrategy [
+	measurement := aTextElementMeasurementStrategy.
+	self textChanged
 ]
 
 { #category : #accessing }
@@ -301,10 +389,7 @@ BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 		
 	paragraph maxHeight = (self computeMaxHeight: anExtentMeasurementSpec)
 		ifFalse: [ ^ true ].
-		
-	paragraph padding = self padding
-		ifFalse: [ ^ true ].
-		
+
 	^ false
 ]
 
@@ -351,4 +436,9 @@ BlTextElement >> textDo: aBlock [
 	"Perform a given block with my current text model as an argument and invalidate text"
 	aBlock value: self text.
 	self textChanged
+]
+
+{ #category : #'api - text' }
+BlTextElement >> tightMesurement [
+	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance
 ]

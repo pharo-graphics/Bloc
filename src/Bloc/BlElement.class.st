@@ -1400,6 +1400,21 @@ BlElement >> globalPointToParent: aPoint [
 		ifFalse: [ aPoint ]
 ]
 
+{ #category : #'geometry transform' }
+BlElement >> globalScale [
+	"Return a scale factor from "
+	<return: #Number>
+	| anOrigin aCorner aGlobalOrigin aGlobalCorner |
+	
+	anOrigin := 0@0.
+	aCorner := 1@0.
+
+	aGlobalOrigin := self localPointToGlobal: anOrigin.
+	aGlobalCorner := self localPointToGlobal: aCorner.
+	
+	^ (aGlobalOrigin distanceTo: aGlobalCorner) / (anOrigin distanceTo: aCorner)
+]
+
 { #category : #printing }
 BlElement >> gtDisplayOn: aStream [
 	^ aStream nextPutAll: misc label
@@ -2827,11 +2842,11 @@ BlElement >> resetChildrenArray [
 
 { #category : #'geometry transform' }
 BlElement >> rotateByDegrees: anAngle [
-	"self 
+	self 
 		deprecated: 'Use Transformation Builder instead'
 		on: 	'15 October 2017' 
 		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-"
+
 	"self transform
 		inherit;
 		origin: (BlAffineTransformationPositionOrigin position: 0@0);

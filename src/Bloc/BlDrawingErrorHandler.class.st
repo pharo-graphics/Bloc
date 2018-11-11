@@ -30,7 +30,6 @@ BlDrawingErrorHandler >> processError: aHandledError [
 	
 	anErrorContainer
 		addChild: (BlTextElement new
-			boundsBaseline;
 			padding: (BlInsets all: 5);
 			text: 'Debug draw error' asRopedText;
 			geometry: (BlRectangle cornerRadius: 3);
