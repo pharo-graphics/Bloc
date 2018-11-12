@@ -2779,6 +2779,23 @@ BlElement >> removeFromParent [
 	self parent removeChild: self
 ]
 
+{ #category : #'children add/remove' }
+BlElement >> replaceChild: aChildElement with: anotherElement [
+	"Relace a given child relement with another element preserving the children order.
+	Request layout and redraw an area occupied by anElement.
+	As result anElement sends BlElementRemovedEvent
+	anElement must not be nil.
+	anElement must be my direct child"
+	| aChildIndex |
+
+	self assert: aChildElement isNotNil.
+	self assert: aChildElement parent == self.
+	
+	aChildIndex := self childIndexOf: aChildElement.
+	self removeChildAt: aChildIndex.
+	self addChild: anotherElement at: aChildIndex
+]
+
 { #category : #'focus requesting' }
 BlElement >> requestFocus [
 	"Request a focus for this element.
