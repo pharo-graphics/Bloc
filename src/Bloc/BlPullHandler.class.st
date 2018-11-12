@@ -33,9 +33,9 @@ BlPullHandler >> dragEvent: anEvent [
 	| dragPosition dragDelta |
 
 	dragPosition := anEvent currentTarget globalPointToParent: anEvent position.
-	dragDelta := dragPosition - dragStartPosition.
+	dragDelta := dragPosition - (dragStartPosition ifNil: [ dragStartPosition := dragPosition ]).
 
-	anEvent currentTarget relocate: (originalPosition + dragDelta).
+	anEvent currentTarget relocate: ((originalPosition ifNil: [ originalPosition := anEvent currentTarget position ]) + dragDelta).
 
 	anEvent consumed: true
 ]
