@@ -35,7 +35,8 @@ Class {
 		'tasks',
 		'time',
 		'touchProcessor',
-		'frame'
+		'frame',
+		'gestureProcessor'
 	],
 	#category : #'Bloc-Space'
 }
@@ -571,6 +572,13 @@ BlSpace >> fullscreen: aBoolean [
 	 self hostSpace ifNotNil: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
 ]
 
+{ #category : #accessing }
+BlSpace >> gestureProcessor [
+	<return: #BlGestureProcessor>
+
+	^ gestureProcessor
+]
+
 { #category : #'focus managing' }
 BlSpace >> grabFocus [
 	self focused: true
@@ -686,6 +694,7 @@ BlSpace >> initialize [
 	focusProcessor := BlFocusProcessor space: self.
 	keyboardProcessor := BlKeyboardProcessor space: self.
 	touchProcessor := BlTouchProcessor space: self.
+	gestureProcessor := BlGestureProcessor space: self.
 
 	tasks := BlTaskQueue new.
 	time := BlTime real.

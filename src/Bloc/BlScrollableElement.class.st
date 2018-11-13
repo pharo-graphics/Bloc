@@ -79,12 +79,7 @@ BlScrollableElement >> initialize [
 	horizontalAlignment := self defaultHorizontalAlignment.
 	verticalAlignment := self defaultVerticalAlignment.
 
-	self
-		when: BlMouseWheelEvent
-		do: [ :anEvent |
-			| aScrollHappened |
-			aScrollHappened := self scrollBy: anEvent vector * 20.
-			anEvent consumed: aScrollHappened ]
+	self addEventHandler: BlScrollableElementEventHandler new
 ]
 
 { #category : #layout }

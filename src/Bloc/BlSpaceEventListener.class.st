@@ -23,6 +23,16 @@ BlSpaceEventListener >> focusProcessor [
 	^ self space focusProcessor
 ]
 
+{ #category : #accessing }
+BlSpaceEventListener >> gestureProcessor [
+	^ self space gestureProcessor
+]
+
+{ #category : #'gesture handlers' }
+BlSpaceEventListener >> gestureScrollEvent: anEvent [
+	self gestureProcessor handleGesture: anEvent
+]
+
 { #category : #'other handlers' }
 BlSpaceEventListener >> inputMethodEvent: anEvent [
 ]
