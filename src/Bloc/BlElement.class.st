@@ -409,6 +409,20 @@ BlElement >> asPannableElement [
 	^ pannable
 ]
 
+{ #category : #'*Bloc-Utilities - Pannable' }
+BlElement >> asScalableElement [
+	| aScalableElement |
+	
+	self removeFromParent.
+	aScalableElement := BlScalableElement new.
+	aScalableElement constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+	aScalableElement addChild: self.
+
+	^ aScalableElement
+]
+
 { #category : #'*Bloc-Utilities - Scrolling' }
 BlElement >> asScrollableElement [
 	| scrollable |
