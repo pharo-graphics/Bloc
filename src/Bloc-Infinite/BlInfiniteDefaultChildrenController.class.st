@@ -67,7 +67,7 @@ BlInfiniteDefaultChildrenController >> detachChildAt: anIndex [
 	
 	(anElementHolder isTmpDetached and: [
 		anElement shouldIgnore not ])
-			ifTrue: [ self error: 'Can not detach aleady detached child!' ].
+			ifTrue: [ self error: 'Can not detach already detached child!' ].
 	
 	anElementHolder flags addTmpDetached.
 	infiniteElement detachChild: anElement
