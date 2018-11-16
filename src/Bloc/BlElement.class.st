@@ -2273,7 +2273,7 @@ BlElement >> onAddedToSceneGraph [
 	self isFocused
 		ifTrue: [ self requestFocus ].
 		
-	self space taskQueue enqueueFrom: self taskQueue
+	self space enqueueTasksFrom: self taskQueue
 ]
 
 { #category : #'hooks - children' }

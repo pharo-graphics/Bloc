@@ -452,6 +452,12 @@ BlSpace >> enqueueTask: aBlTask [
 	self taskQueue enqueue: aBlTask.
 ]
 
+{ #category : #'api - tasks' }
+BlSpace >> enqueueTasksFrom: aTaskQueue [
+	aTaskQueue tasks do: [ :eachTask | eachTask onEnqueued: self ].	
+	self taskQueue enqueueFrom: aTaskQueue
+]
+
 { #category : #pulse }
 BlSpace >> ensureSession [
 	"Check current session and perform required operations if it changed since last frame"

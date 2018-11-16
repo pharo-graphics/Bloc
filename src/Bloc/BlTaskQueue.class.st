@@ -53,7 +53,7 @@ BlTaskQueue >> enqueueAll: aCollectionOfBlTask [
 ]
 
 { #category : #'api - enqueue' }
-BlTaskQueue >> enqueueFrom: aBlTaskQueue [	
+BlTaskQueue >> enqueueFrom: aBlTaskQueue [
 	self
 		assert: [ aBlTaskQueue isNotNil ]
 		description: [ 'Queue to transfer must not be nil' ].
