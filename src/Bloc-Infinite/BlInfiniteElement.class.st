@@ -1596,10 +1596,12 @@ BlInfiniteElement >> requestLayout: anElement [
 	self flag: 'Find a way to avoid unnecessary requests'.
 	"anElement == self
 		ifFalse: [ ^ super requestLayout: anElement ]."
+	
+	super requestLayout: anElement.
 
-	(eatRequestLayoutCounter isZero and: [ layoutFrozen not ])
+	"(eatRequestLayoutCounter isZero and: [ layoutFrozen not ])
 		ifTrue: [ super requestLayout: anElement ]
-		ifFalse: [ self markLayoutRequestEaten ]
+		ifFalse: [ self markLayoutRequestEaten ]"
 ]
 
 { #category : #'private - focus' }

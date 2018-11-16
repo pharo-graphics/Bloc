@@ -3280,6 +3280,14 @@ BlElement >> withAllChildrenBreadthFirst [
 ]
 
 { #category : #'children accessing' }
+BlElement >> withAllParents [
+	"Return a collection of all parents including myself starting with me and ending with the top most parent"
+	<return: #Array of: #BlElement>
+
+	^ Array streamContents: [ :aStream | self withAllParentsDo: [ :eachParent | aStream nextPut: eachParent ] ]
+]
+
+{ #category : #'children accessing' }
 BlElement >> withAllParentsDo: aBlock [
 	"Evaluate a block with me and all my parents as an argument starting from me
 	up to the top most parent"
