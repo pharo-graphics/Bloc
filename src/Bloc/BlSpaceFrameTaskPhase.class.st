@@ -19,5 +19,5 @@ BlSpaceFrameTaskPhase >> runOn: aSpace [
 	"process animations and other runnable tasks"
 	aSpace
 		dispatchTimeEvent: BlSpaceTasksEndEvent
-		during: [ aSpace runTasks ]
+		during: [ :theSpace | theSpace runTasks ]
 ]

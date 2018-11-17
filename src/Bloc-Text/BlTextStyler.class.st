@@ -1,3 +1,9 @@
+"
+I am responsible for applying text attributes on ${class:BlText}$ based on some logic, for example it can be code syntax highlighting.
+
+I am independent from the text editor.
+The main entrance point is 
+"
 Class {
 	#name : #BlTextStyler,
 	#superclass : #Object,

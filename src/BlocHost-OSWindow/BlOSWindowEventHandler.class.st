@@ -3,7 +3,8 @@ Class {
 	#superclass : #OSWindowGestureHandler,
 	#instVars : [
 		'window',
-		'time'
+		'time',
+		'mousePosition'
 	],
 	#classVars : [
 		'SymbolCharacterMapping'
@@ -11,7 +12,7 @@ Class {
 	#pools : [
 		'OSKeySymbols'
 	],
-	#category : 'BlocHost-OSWindow-Support'
+	#category : #'BlocHost-OSWindow-Support'
 }
 
 { #category : #'as yet unclassified' }
@@ -122,6 +123,7 @@ BlOSWindowEventHandler >> initialize [
 	super initialize.
 	
 	time := BlTime real.
+	mousePosition := 0@0.
 	
 	self registerGesture: OSTouchTwoFingersScrollDetector new.
 	self registerGesture: OSTouchTwoFingersPinchDetector new.
@@ -228,6 +230,8 @@ BlOSWindowEventHandler >> visitMouseButtonReleaseEvent: anEvent [
 BlOSWindowEventHandler >> visitMouseMoveEvent: anEvent [
 	| aBlocEvent |
 
+	mousePosition := anEvent position.
+
 	aBlocEvent := BlMouseMoveEvent new
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
@@ -242,16 +246,15 @@ BlOSWindowEventHandler >> visitMouseMoveEvent: anEvent [
 { #category : #'visiting - mouse' }
 BlOSWindowEventHandler >> visitMouseWheelEvent: anEvent [
 	| vertical horizontal aBlocEvent |
-	
+
 	horizontal := anEvent scrollHorizontal.
 	vertical := anEvent scrollVertical.
 	
 	(horizontal isZero and: [ vertical isZero ])
 		ifTrue: [ ^ self ].
-		
-	NonInteractiveTranscript stdout show: (anEvent); cr.
 	
 	aBlocEvent := BlMouseWheelEvent new
+		isTouch: anEvent isTouch;
 		vector: (BlVector x: horizontal negated y: vertical);
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
@@ -354,7 +357,27 @@ BlOSWindowEventHandler >> visitTouchTwoFingersPinchMoveEvent: anEvent [
 
 { #category : #'visiting - gestures' }
 BlOSWindowEventHandler >> visitTouchTwoFingersScrollBeginEvent: anEvent [
-	anEvent logCr.
+]
+
+{ #category : #'visiting - gestures' }
+BlOSWindowEventHandler >> visitTouchTwoFingersScrollMoveEvent: anEvent [
+	| aBlocEvent horizontal vertical |
+	
+	"NonInteractiveTranscript stdout show: anEvent direction; cr.
+	NonInteractiveTranscript stdout show: anEvent vector; cr.
+	NonInteractiveTranscript stdout show: '---------------------'; cr."
+	
+	horizontal := (anEvent dDist abs * anEvent vector) x negated.
+	vertical := (anEvent dDist abs * anEvent vector) y.
+
+	aBlocEvent := BlGestureScrollEvent new
+		position: mousePosition;
+		screenPosition: window position + mousePosition;
+		vector: (BlVector x: horizontal y: vertical);
+		timestamp: self time now;
+		yourself.
+
+	self enqueue: aBlocEvent
 ]
 
 { #category : #visiting }

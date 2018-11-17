@@ -18,5 +18,5 @@ BlSpaceFrameLayoutPhase >> name [
 BlSpaceFrameLayoutPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpaceLayoutEndEvent
-		during: [ aSpace isLayoutRequested ifTrue: [ aSpace doLayout ] ].
+		during: [ :theSpace | theSpace isLayoutRequested ifTrue: [ theSpace doLayout ] ].
 ]

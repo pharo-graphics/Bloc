@@ -368,7 +368,7 @@ BlSpace >> dispatchTimeEvent: aSpaceStepEventClass during: aBlock [
 	| aStartTime |
 	
 	aStartTime := self time now.
-	aBlock value.
+	aBlock cull: self.
 	self eventDispatcher dispatchEvent:
 			(aSpaceStepEventClass new
 				start: aStartTime;

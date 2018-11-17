@@ -22,5 +22,5 @@ BlSpaceFrameEventPhase >> runOn: aSpace [
 
 	aSpace
 		dispatchTimeEvent: BlSpaceEventEndEvent
-		during: [ aSpace hasHostSpace ifTrue: [ aSpace processEvents ] ]
+		during: [ :theSpace | theSpace hasHostSpace ifTrue: [ theSpace processEvents ] ]
 ]
