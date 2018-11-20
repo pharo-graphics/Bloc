@@ -8,7 +8,7 @@ Class {
 		'toSelect',
 		'fromElement'
 	],
-	#category : 'Bloc-Extensions'
+	#category : #'Bloc-Extensions'
 }
 
 { #category : #accessing }

@@ -10,7 +10,7 @@ Class {
 		'elementBuilder',
 		'element'
 	],
-	#category : 'Bloc-Extensions-Presentations'
+	#category : #'Bloc-Extensions-Presentations'
 }
 
 { #category : #requirements }

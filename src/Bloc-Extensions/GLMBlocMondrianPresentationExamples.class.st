@@ -1,7 +1,7 @@
 Class {
 	#name : #GLMBlocMondrianPresentationExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Extensions-Examples'
+	#category : #'Bloc-Extensions-Examples'
 }
 
 { #category : #public }

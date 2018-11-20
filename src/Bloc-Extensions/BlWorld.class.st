@@ -4,7 +4,7 @@ I am a utility holding the Bloc entries in the Morphic World menu
 Class {
 	#name : #BlWorld,
 	#superclass : #Object,
-	#category : 'Bloc-Extensions-Menu'
+	#category : #'Bloc-Extensions-Menu'
 }
 
 { #category : #'world menu' }

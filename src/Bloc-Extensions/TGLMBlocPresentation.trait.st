@@ -4,7 +4,7 @@ When used framework is not installed I show a dialog asking users if they would 
 "
 Trait {
 	#name : #TGLMBlocPresentation,
-	#category : 'Bloc-Extensions-Presentations'
+	#category : #'Bloc-Extensions-Presentations'
 }
 
 { #category : #'api - instance creation' }

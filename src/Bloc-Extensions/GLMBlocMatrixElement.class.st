@@ -6,7 +6,7 @@ Class {
 		'leftParentheses',
 		'rightParentheses'
 	],
-	#category : 'Bloc-Extensions-UI'
+	#category : #'Bloc-Extensions-UI'
 }
 
 { #category : #'instance creation' }

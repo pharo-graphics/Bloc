@@ -8,7 +8,7 @@ Class {
 		'space',
 		'currentWindow'
 	],
-	#category : 'Bloc-Extensions-UI'
+	#category : #'Bloc-Extensions-UI'
 }
 
 { #category : #api }

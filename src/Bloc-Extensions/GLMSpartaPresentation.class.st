@@ -11,7 +11,7 @@ Class {
 		'canvasBlock',
 		'drawBlock'
 	],
-	#category : 'Bloc-Extensions-Presentations'
+	#category : #'Bloc-Extensions-Presentations'
 }
 
 { #category : #accessing }

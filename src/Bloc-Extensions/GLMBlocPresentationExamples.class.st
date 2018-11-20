@@ -1,7 +1,7 @@
 Class {
 	#name : #GLMBlocPresentationExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Extensions-Examples'
+	#category : #'Bloc-Extensions-Examples'
 }
 
 { #category : #'as yet unclassified' }

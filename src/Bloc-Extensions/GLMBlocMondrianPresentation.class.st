@@ -10,7 +10,7 @@ Class {
 		'shouldInstallClicksOnEdges',
 		'createdElement'
 	],
-	#category : 'Bloc-Extensions-Presentations'
+	#category : #'Bloc-Extensions-Presentations'
 }
 
 { #category : #initialization }

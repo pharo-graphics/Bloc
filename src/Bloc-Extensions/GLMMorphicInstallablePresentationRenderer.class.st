@@ -1,7 +1,7 @@
 Class {
 	#name : #GLMMorphicInstallablePresentationRenderer,
 	#superclass : #GLMMorphicWidgetRenderer,
-	#category : 'Bloc-Extensions-Renderers'
+	#category : #'Bloc-Extensions-Renderers'
 }
 
 { #category : #rendering }

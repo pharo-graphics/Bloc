@@ -1,5 +1,5 @@
 Class {
 	#name : #GLMMorphicBlocTextRenderer,
 	#superclass : #GLMMorphicBlocRenderer,
-	#category : 'Bloc-Extensions-Renderers'
+	#category : #'Bloc-Extensions-Renderers'
 }

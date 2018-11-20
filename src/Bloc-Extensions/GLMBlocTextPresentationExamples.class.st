@@ -1,7 +1,7 @@
 Class {
 	#name : #GLMBlocTextPresentationExamples,
 	#superclass : #GLMMorphicBlocRenderer,
-	#category : 'Bloc-Extensions-Examples'
+	#category : #'Bloc-Extensions-Examples'
 }
 
 { #category : #public }

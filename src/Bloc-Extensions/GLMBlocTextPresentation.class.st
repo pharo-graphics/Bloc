@@ -3,7 +3,7 @@ Class {
 	#superclass : #GLMTextualPresentation,
 	#traits : 'TGLMBlocPresentation',
 	#classTraits : 'TGLMBlocPresentation classTrait',
-	#category : 'Bloc-Extensions-Presentations'
+	#category : #'Bloc-Extensions-Presentations'
 }
 
 { #category : #rendering }
