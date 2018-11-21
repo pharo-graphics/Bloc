@@ -42,7 +42,7 @@ BaselineOfBloc >> baseline: spec [
 			repository: 'github://syrel/Sparta/src' ];
 
 		baseline: 'TaskIt' with: [ spec 
-			repository: 'github://sbragagnolo/taskit:dev-0.5' ];
+			repository: 'github://feenkcom/taskit:feenk' ];
 
 		"GT-Examples is examples and testing framework"
 		baseline: 'GToolkitExamplesEngine' with: [ spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
