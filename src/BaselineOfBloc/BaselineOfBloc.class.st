@@ -1,7 +1,7 @@
 "
 !Bloc
 
-Bloc is a graphical framework that is drawing agnostic. The concrete drawing is achieved through the binding to the Sparta canvas. See ${class:BaselineOfSpartaDevelopment}$ for more details.
+Bloc is a graphical framework that is drawing agnostic. The concrete drawing is achieved through the binding to the Sparta canvas. See ${class:BaselineOfSparta}$ for more details.
 
 The central concept is ${class:BlElement}$.
 
@@ -9,7 +9,7 @@ The central concept is ${class:BlElement}$.
 
 The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray.
 
-${example:BaselineOfBloc class>>#itself|show=#gtPackagesMapFor:|expandedPreview=true|noCode=|previewHeight=300}$
+${example:BaselineOfBloc class>>#itself|previewShow=#gtPackagesMapFor:|noCode=|previewHeight=300}$
 
 
 
@@ -42,7 +42,7 @@ BaselineOfBloc >> baseline: spec [
 			repository: 'github://syrel/Sparta/src' ];
 
 		baseline: 'TaskIt' with: [ spec 
-			repository: 'github://sbragagnolo/taskit:dev-0.5' ];
+			repository: 'github://feenkcom/taskit:feenk' ];
 
 		"GT-Examples is examples and testing framework"
 		baseline: 'GToolkitExamplesEngine' with: [ spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
