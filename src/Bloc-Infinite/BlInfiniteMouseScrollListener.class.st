@@ -14,10 +14,10 @@ BlInfiniteMouseScrollListener >> canScrollDown: anInfiniteElement [
 	aLastChild
 		ifNil: [ ^ true ].
 
-	aLastChild position y > (anInfiniteElement layout height - anInfiniteElement layout paddingBottom) 
+	aLastChild bounds inParent bottom > (anInfiniteElement layout height - anInfiniteElement layout paddingBottom) 
 		ifTrue: [ ^ true ].
 
-	^ false.
+	^ false
 ]
 
 { #category : #'mouse handlers' }
