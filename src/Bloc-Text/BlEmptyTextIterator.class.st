@@ -4,6 +4,14 @@ Class {
 	#category : 'Bloc-Text-Text'
 }
 
+{ #category : #'iterator - accessing' }
+BlEmptyTextIterator >> attributes [
+	"Return a collection of rope attributes at a current position without duplicates"
+	<return: #Collection of: #BlTextAttribute>
+
+	^ #()
+]
+
 { #category : #'iterator - enumeration' }
 BlEmptyTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  

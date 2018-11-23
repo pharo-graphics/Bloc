@@ -16,6 +16,14 @@ BlSubTextIterator class >> text: aBrSubText from: aStartIndex to: anEndIndex [
 		yourself
 ]
 
+{ #category : #'iterator - accessing' }
+BlSubTextIterator >> attributes [
+	"Return a collection of rope attributes at a current position without duplicates"
+	<return: #Collection of: #BlTextAttribute>
+
+	^ iterator attributes
+]
+
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
@@ -25,6 +33,26 @@ BlSubTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExce
 	<return: #BlTextAttribute or: #Object>
 
 	^ iterator detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock
+]
+
+{ #category : #'iterator - testing' }
+BlSubTextIterator >> doesAttributeEnd: anAttribute [
+	"Return true if a given attribute ends at the current position.
+	By `ends` we mean that this attribute is not present at the next position.
+	
+	Implementation detail:
+	 - we should not rely on the iterator scope, otherwise it will give us false positives on the edge of the scope for attributes that don't really end there."
+	<return: #Boolean>
+	
+	"we are at the last character, so the attribute definitely ends here"
+	self text text size = (self position + self text textOffset)
+		ifTrue: [ ^ true ].
+	
+	(self attributes includes: anAttribute)
+		ifFalse: [ ^ true ].
+	
+	"check if this attribute exists at the next position, if not - it ends here"
+	^ ((self text text attributesAt: self position + self text textOffset) includes: anAttribute) not
 ]
 
 { #category : #'iterator - testing' }

@@ -684,3 +684,63 @@ BlRopeIteratorExamples >> habaRopeEmptyIteratorHasNext [
 
 	^ anIterator
 ]
+
+{ #category : #'examples - next span' }
+BlRopeIteratorExamples >> nextSpanFontColorOnA [
+	<gtExample>
+	| aRope anIterator aSpan |
+	
+	aRope := BlCollectionRope collection: 'A'.
+	anIterator := aRope iterator.
+	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+	
+	self assert: aSpan == aRope.
+	self assert: anIterator hasNext not.
+	
+	^ aSpan
+]
+
+{ #category : #'examples - next span' }
+BlRopeIteratorExamples >> nextSpanFontColorOnAWithColor [
+	<gtExample>
+	| aRope anIterator aSpan |
+
+	aRope := (BlCollectionRope collection: 'A') attributes: { BlTextForegroundAttribute paint: Color red }.
+
+	anIterator := aRope iterator.
+	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+	
+	self assert: aSpan == aRope.
+	self assert: anIterator hasNext not.
+	
+	^ aSpan
+]
+
+{ #category : #'examples - next span' }
+BlRopeIteratorExamples >> nextSpanFontColorOnHelloWorldWithColor [
+	<gtExample>
+	| aRope anIterator aSpan |
+
+	aRope := (BlCollectionRope collection: 'Hello World').
+	aRope := aRope attributes: { BlTextForegroundAttribute paint: Color red } from: 1 to: 5.
+	aRope := aRope attributes: { BlTextForegroundAttribute paint: Color blue } from: 7 to: 11.
+
+	anIterator := aRope iterator.
+	
+	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+	self assert: aSpan == aRope left left.
+	self assert: anIterator hasNext.
+	self assert: aSpan asString equals: 'Hello'.
+	
+	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+	self assert: aSpan == aRope left right.
+	self assert: anIterator hasNext.
+	self assert: aSpan asString equals: ' '.
+	
+	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+	self assert: aSpan == aRope right.
+	self assert: anIterator hasNext not.
+	self assert: aSpan asString equals: 'World'.
+
+	^ aSpan
+]

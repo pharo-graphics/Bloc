@@ -7,6 +7,38 @@ Class {
 	#category : #'Bloc-Examples-Text'
 }
 
+{ #category : #'examples - next span' }
+BlRopedTextExamples >> nextSpanFontColorOnHelloWorldWithColor [
+	<gtExample>
+	| aText anIterator aSpan |
+
+	aText := 'Hello World' asRopedText.
+	(aText from: 1 to: 5) foreground: Color red.
+	(aText from: 7 to: 11) foreground: Color blue.
+
+	anIterator := aText iterator.
+	
+	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+	self assert: aSpan start equals: 1.
+	self assert: aSpan end equals: 5.
+	self assert: anIterator hasNext.
+	self assert: aSpan asString equals: 'Hello'.
+	
+	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+	self assert: aSpan start equals: 6.
+	self assert: aSpan end equals: 6.
+	self assert: anIterator hasNext.
+	self assert: aSpan asString equals: ' '.
+	
+	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+	self assert: aSpan start equals: 7.
+	self assert: aSpan end equals: 11.
+	self assert: anIterator hasNext not.
+	self assert: aSpan asString equals: 'World'.
+
+	^ aSpan
+]
+
 { #category : #examples }
 BlRopedTextExamples >> textForeground [
 	<gtExample>

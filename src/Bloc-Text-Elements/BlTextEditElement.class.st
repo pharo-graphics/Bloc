@@ -18,7 +18,9 @@ Class {
 { #category : #'cursor - management' }
 BlTextEditElement >> addCursorAt: aTextPosition [
 	<return: #BlCursorElement>
-		
+	
+	self assertCursorPosition: aTextPosition.
+	
 	^ self
 		cursorAt: aTextPosition
 		ifFound: #yourself
@@ -33,11 +35,16 @@ BlTextEditElement >> addCursorAt: aTextPosition [
 
 { #category : #asserting }
 BlTextEditElement >> assertCursor: aCursorElement [
+	self assertCursorPosition: aCursorElement textPosition
+]
+
+{ #category : #asserting }
+BlTextEditElement >> assertCursorPosition: anIndex [
 	self
-		assert: [ self text isNotEmpty or: [ aCursorElement textPosition isZero ] ]
+		assert: [ self text isNotEmpty or: [ anIndex isZero ] ]
 		description: [ 'Cursor position can only be zero if text is empty' ].
 	self
-		assert: [ aCursorElement textPosition between: 0 and: self text size ]
+		assert: [ anIndex between: 0 and: self text size ]
 		description: [ 'Cursor must be within text bounds (0 is allowed)' ].
 ]
 

@@ -104,22 +104,15 @@ BlRopeIterator >> next [
 
 { #category : #accessing }
 BlRopeIterator >> nextLine [
+	"Return a next line without delimiters"
 	| aSegment |
 	
-	self hasNext
-		ifFalse: [ self error: 'reached end of rope' ].
+	self nextLineIndicesDo: [ :aStart :anEnd :aLineEndWithDelimiters |
+		aSegment := self rope from: aStart to: anEnd ].
 
-	aSegment := (self isNewLine: self peek) 
-		ifTrue: [ self next. BlCollectionRope collection: '' ]
-		ifFalse: [ self nextSegment: [ :anItem | self isNewLine: anItem ] ].
-
-	(self hasNext and: [ (self isNewLine: self peek) and: [ self position + 1 <= end ]  ])
-		ifTrue: [
-			self next.
-			(self hasNext and: [ (self isNewLine: self peek) ])
-				ifTrue: [ self previous ] ].
-
-	
+	self
+		assert: [ aSegment isNotNil ]
+		description: [ 'Segment must not be nil' ].
 
 	^ aSegment
 ]
@@ -196,6 +189,31 @@ BlRopeIterator >> nextSegment: aBlock [
 BlRopeIterator >> nextSpan [
 	"Return a next homogeneous subrope based on attributes"
 	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopeIterator >> nextSpan: aBlock [
+	"Evaluate aBlock with each attribute from each span and return a span for which aBlock returns either true or false.
+	The key here is that we can redefine what homogeneity of the span mean"
+	| initialValue startPosition endPosition |
+
+	self hasNext
+		ifFalse: [ self error: 'reached end of rope' ].
+
+	initialValue := nil.
+	startPosition := self position.
+	endPosition := startPosition.
+
+	[ self hasNext and: [
+		| theNextValue |
+		theNextValue := self attributes anySatisfy: aBlock.
+		initialValue ifNil: [ initialValue := theNextValue ].
+		initialValue = theNextValue.
+	] ] whileTrue: [ self nextSpan ].
+
+	endPosition := self position.
+
+	^ self rope from: startPosition to: endPosition - 1
 ]
 
 { #category : #accessing }

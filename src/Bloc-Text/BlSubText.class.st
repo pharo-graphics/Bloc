@@ -157,6 +157,8 @@ BlSubText >> empty [
 
 { #category : #accessing }
 BlSubText >> end [
+	<return: #Number>
+
 	^ end
 ]
 
@@ -251,6 +253,8 @@ BlSubText >> size [
 
 { #category : #accessing }
 BlSubText >> start [
+	<return: #Number>
+
 	^ start
 ]
 
