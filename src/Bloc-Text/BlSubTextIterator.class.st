@@ -45,7 +45,7 @@ BlSubTextIterator >> doesAttributeEnd: anAttribute [
 	<return: #Boolean>
 	
 	"we are at the last character, so the attribute definitely ends here"
-	self text text size = (self position + self text textOffset)
+	(self position + self text textOffset) >= self text text size
 		ifTrue: [ ^ true ].
 	
 	(self attributes includes: anAttribute)
