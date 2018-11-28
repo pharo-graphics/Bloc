@@ -11,7 +11,7 @@ Class {
 
 { #category : #pulse }
 BlTransition >> applyValue: aValue [
-	self stepAction value: aValue
+	self stepAction valueWithEnoughArguments: { aValue . self target }
 ]
 
 { #category : #accessing }
