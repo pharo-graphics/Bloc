@@ -26,6 +26,8 @@ BlSelectionHandler >> computeSelectionArea [
 { #category : #'dnd handlers' }
 BlSelectionHandler >> dragEndEvent: anEvent [
 	super dragEndEvent: anEvent.
+	
+	anEvent consumed: true.
 		
 	origin := nil.
 	corner := nil.
@@ -39,6 +41,8 @@ BlSelectionHandler >> dragEvent: anEvent [
 		
 	self hasOrigin
 		ifFalse: [ ^ super dragOverEvent: anEvent ].
+	
+	anEvent consumed: true.
 	
 	corner := anEvent position.	
 	self computeSelectionArea.

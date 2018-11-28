@@ -82,6 +82,28 @@ BlSingleLineTextParagraphExamples >> height [
 	^ 12
 ]
 
+{ #category : #'instance creation' }
+BlSingleLineTextParagraphExamples >> helloWorldParagraph [
+	<gtExample>
+	| aParagraph |
+
+	aParagraph := self newParagraph.
+	aParagraph text: self helloWorldText.
+	
+	^ aParagraph
+]
+
+{ #category : #'instance creation' }
+BlSingleLineTextParagraphExamples >> helloWorldText [
+	<gtExample>
+	| aText |
+
+	aText := 'HelloWorld' asRopedText.
+	(aText from: 1 to: 5) foreground: Color red.
+
+	^ aText
+]
+
 { #category : #'geometry - haba' }
 BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHaba [
 	<gtExample>
@@ -90,6 +112,34 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHaba
 	aParagraph := self measuredHaba.
 	anIndex := aParagraph indexAtPosition: self glyphWidth @ self ascent.
 	
+	self assert: anIndex equals: 1.
+
+	^ anIndex
+]
+
+{ #category : #'geometry - HelloWorld' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHelloWorld [
+	<gtExample>
+	| aParagraph anIndex |
+
+	aParagraph := self measuredHelloWorld.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent.
+
+	self assert: anIndex equals: 1.
+
+	^ anIndex
+]
+
+{ #category : #'geometry - HelloWorld' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInRealHelloWorld [
+	<gtExample>
+	| aParagraph anIndex aPosition |
+
+	aParagraph := self realMeasuredHelloWorld.
+	
+	aPosition := aParagraph positionAt: 1.
+	anIndex := aParagraph indexAtPosition: aPosition.
+
 	self assert: anIndex equals: 1.
 
 	^ anIndex
@@ -104,6 +154,34 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenHalfsOfFirstCharacterInHaba [
 	anIndex := aParagraph indexAtPosition: (self glyphWidth / 2.0) @ self ascent.
 	
 	self assert: anIndex equals: 0.
+
+	^ anIndex
+]
+
+{ #category : #'geometry - HelloWorld' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInHelloWorld [
+	<gtExample>
+	| aParagraph anIndex |
+
+	aParagraph := self measuredHelloWorld.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent.
+
+	self assert: anIndex equals: 7.
+
+	^ anIndex
+]
+
+{ #category : #'geometry - HelloWorld' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInRealHelloWorld [
+	<gtExample>
+	| aParagraph anIndex aPosition |
+
+	aParagraph := self realMeasuredHelloWorld.
+	
+	aPosition := aParagraph positionAt: 7.
+	anIndex := aParagraph indexAtPosition: aPosition.
+
+	self assert: anIndex equals: 7.
 
 	^ anIndex
 ]
@@ -462,6 +540,77 @@ BlSingleLineTextParagraphExamples >> measuredHabaWithPadding [
 	^ aParagraph
 ]
 
+{ #category : #'paragraph - measuring' }
+BlSingleLineTextParagraphExamples >> measuredHelloWorld [
+	<gtExample>
+	| aParagraph aLine aFirstSpan aSecondSpan aText aHello aWorld |
+	
+	aParagraph := self helloWorldParagraph.
+	aParagraph measureOn: self measurer.
+	
+	aText := aParagraph text.
+	aHello := aText from: 1 to: 5.
+	aWorld := aText from: 6 to: 10.
+	
+	self assert: aParagraph measuredEnd equals: aText size.
+	
+	aLine := aParagraph line.
+	self assert: aLine ascent equals: self ascent.
+	self assert: aLine baseline equals: 0 @ self ascent.
+	self assert: aLine descent equals: self descent.
+	self assert: aLine from equals: 1.
+	self assert: aLine height equals: self height.
+	self assert: aLine left equals: 0.
+	self assert: aLine spans size equals: 2.
+	self assert: aLine to equals: aText size.
+	self assert: aLine top equals: 0.
+	self assert: aLine width equals: aText size * self glyphWidth.
+	
+	"first span"
+	aFirstSpan := aLine spans first.
+	self assert: aFirstSpan advance equals: aHello size * self glyphWidth.
+	self assert: aFirstSpan ascent equals: self ascent.
+	self assert: aFirstSpan baseline equals: 0 @ self ascent.
+	self assert: aFirstSpan descent equals: self descent.
+	self assert: aFirstSpan from equals: 1. 
+	self assert: aFirstSpan to equals: aHello size.
+	self assert: aFirstSpan height equals: self height.
+	self assert: aFirstSpan left equals: 0.
+	self assert: aFirstSpan spanEnd equals: aHello size. 
+	self assert: aFirstSpan spanStart equals: 1.
+	self assert: aFirstSpan textRun equals: aHello asString.
+	self assert: aFirstSpan textRunEnd equals: aHello size.
+	self assert: aFirstSpan textRunStart equals: 1.
+	self assert: aFirstSpan top equals: 0.
+	self assert: aFirstSpan width equals: (aHello size * self glyphWidth).
+	self assert: aFirstSpan spanLength equals: aHello size.
+	self assert: aFirstSpan textRunLength equals: aHello size.
+	self assert: aFirstSpan isSplitted not.
+	
+	"second span"
+	aSecondSpan := aLine spans second.
+	self assert: aSecondSpan advance equals: aWorld size * self glyphWidth.
+	self assert: aSecondSpan ascent equals: self ascent.
+	self assert: aSecondSpan baseline equals: (aFirstSpan width @ self ascent).
+	self assert: aSecondSpan descent equals: self descent.
+	self assert: aSecondSpan from equals: aHello size + 1. 
+	self assert: aSecondSpan to equals: aHello size + aWorld size.
+	self assert: aSecondSpan height equals: self height.
+	self assert: aSecondSpan left equals: 0.
+	self assert: aSecondSpan spanEnd equals: aWorld size. 
+	self assert: aSecondSpan spanStart equals: 1.
+	self assert: aSecondSpan textRun equals: aWorld asString.
+	self assert: aSecondSpan textRunEnd equals: aWorld size.
+	self assert: aSecondSpan textRunStart equals: 1.
+	self assert: aSecondSpan top equals: 0.
+	self assert: aSecondSpan width equals: (aWorld size * self glyphWidth).
+	self assert: aSecondSpan spanLength equals: aWorld size.
+	self assert: aSecondSpan textRunLength equals: aWorld size.
+	self assert: aSecondSpan isSplitted not.
+	
+	^ aParagraph
+]
+
 { #category : #'instance creation' }
 BlSingleLineTextParagraphExamples >> measurer [
 	<gtExample>
@@ -514,6 +663,62 @@ BlSingleLineTextParagraphExamples >> positionAtIndexInEmpty [
 	self assert: aPoint equals: 0 @ aParagraph baseline y.
 	
 	^ aPoint
+]
+
+{ #category : #'paragraph - measuring' }
+BlSingleLineTextParagraphExamples >> realMeasuredHelloWorld [
+	<gtExample>
+	| aParagraph aLine aFirstSpan aSecondSpan aText aHello aWorld |
+	
+	aParagraph := self helloWorldParagraph.
+	aParagraph measureOn: Bloc preferableSpartaCanvas offscreen.
+	
+	aText := aParagraph text.
+	aHello := aText from: 1 to: 5.
+	aWorld := aText from: 6 to: 10.
+	
+	self assert: aParagraph measuredEnd equals: aText size.
+	
+	aLine := aParagraph line.
+	self assert: aLine from equals: 1.
+	self assert: aLine spans size equals: 2.
+	self assert: aLine to equals: aText size.
+	
+	"first span"
+	aFirstSpan := aLine spans first.
+	self assert: aFirstSpan from equals: 1. 
+	self assert: aFirstSpan to equals: aHello size.
+	self assert: aFirstSpan spanEnd equals: aHello size. 
+	self assert: aFirstSpan spanStart equals: 1.
+	self assert: aFirstSpan textRunEnd equals: aHello size.
+	self assert: aFirstSpan textRunStart equals: 1.
+	self assert: aFirstSpan spanLength equals: aHello size.
+	self assert: aFirstSpan textRunLength equals: aHello size.
+	self assert: aFirstSpan isSplitted not.
+	
+	"second span"
+	aSecondSpan := aLine spans second.
+	self assert: aSecondSpan from equals: aHello size + 1. 
+	self assert: aSecondSpan to equals: aHello size + aWorld size.
+	self assert: aSecondSpan spanEnd equals: aWorld size. 
+	self assert: aSecondSpan spanStart equals: 1.
+	self assert: aSecondSpan textRunEnd equals: aWorld size.
+	self assert: aSecondSpan textRunStart equals: 1.
+	self assert: aSecondSpan spanLength equals: aWorld size.
+	self assert: aSecondSpan textRunLength equals: aWorld size.
+	self assert: aSecondSpan isSplitted not.
+	
+	^ aParagraph
+]
+
+{ #category : #'instance creation' }
+BlSingleLineTextParagraphExamples >> realMeasurer [
+	<gtExample>
+	| aMeasurer |
+
+	aMeasurer := BlTextParagraphSpanSpartaMeasurer new.
+
+	^ aMeasurer
 ]
 
 { #category : #'geometry - empty' }
