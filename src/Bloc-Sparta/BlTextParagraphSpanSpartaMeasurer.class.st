@@ -11,9 +11,7 @@ Class {
 		'textRunStart',
 		'textRunEnd',
 		'spanStart',
-		'spanEnd',
-		'textParagraph',
-		'textSpan'
+		'spanEnd'
 	],
 	#category : #'Bloc-Sparta-Text'
 }

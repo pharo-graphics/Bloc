@@ -104,6 +104,70 @@ BlSingleLineTextParagraphExamples >> helloWorldText [
 	^ aText
 ]
 
+{ #category : #'geometry - HelloWorld' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharacterInHelloWorld [
+	<gtExample>
+	| aParagraph theIndices |
+
+	aParagraph := self measuredHelloWorld.
+
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent ].
+	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
+
+	^ theIndices
+]
+
+{ #category : #'geometry - Object>>#printOn:' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInObjectPrintOn [
+	<gtExample>
+	| aParagraph theIndices |
+
+	aParagraph := self newParagraph.
+	aParagraph text: self objectPrintOnText.
+	aParagraph measureOn: self measurer.
+	
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent ].
+	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
+
+	^ theIndices
+]
+
+{ #category : #'geometry - 100@100.' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInPointWithDot [
+	<gtExample>
+	| aParagraph theIndices |
+
+	aParagraph := self newParagraph.
+	aParagraph text: self pointWithDotText.
+	aParagraph measureOn: self measurer.
+	
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
+		| aPoint |
+		aPoint := aParagraph positionAt: anIndex.
+		aParagraph indexAtPosition: aPoint ].
+	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
+
+	^ theIndices
+]
+
+{ #category : #'geometry - 100@100.' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInRealPointWithDot [
+	<gtExample>
+	| aParagraph theIndices |
+
+	aParagraph := self newParagraph.
+	aParagraph text: self pointWithDotText.
+	aParagraph measureOn: self realMeasurer.
+	
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
+		| aPoint |
+		aPoint := aParagraph positionAt: anIndex.
+		aParagraph indexAtPosition: aPoint ].
+	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
+
+	^ theIndices
+]
+
 { #category : #'geometry - haba' }
 BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHaba [
 	<gtExample>
@@ -123,6 +187,22 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHell
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHelloWorld.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent.
+
+	self assert: anIndex equals: 1.
+
+	^ anIndex
+]
+
+{ #category : #'geometry - Object>>#printOn:' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInObjectPrintOn [
+	<gtExample>
+	| aParagraph anIndex |
+
+	aParagraph := self newParagraph.
+	aParagraph text: self objectPrintOnText.
+	aParagraph measureOn: self measurer.
+	
 	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent.
 
 	self assert: anIndex equals: 1.
@@ -164,6 +244,23 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInHe
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHelloWorld.
+	
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent.
+
+	self assert: anIndex equals: 7.
+
+	^ anIndex
+]
+
+{ #category : #'geometry - Object>>#printOn:' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInObjectPrintOn [
+	<gtExample>
+	| aParagraph anIndex |
+
+	aParagraph := self newParagraph.
+	aParagraph text: self objectPrintOnText.
+	aParagraph measureOn: self measurer.
+	
 	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent.
 
 	self assert: anIndex equals: 7.
@@ -494,53 +591,6 @@ BlSingleLineTextParagraphExamples >> measuredHaba [
 ]
 
 { #category : #'paragraph - measuring' }
-BlSingleLineTextParagraphExamples >> measuredHabaWithPadding [
-	<gtExample>
-	| aParagraph aLine aSpan |
-	
-	aParagraph := self habaParagraph.
-	aParagraph padding: self padding.
-	aParagraph measureOn: self measurer.
-	
-	self assert: aParagraph measuredEnd equals: 4.
-	
-	aLine := aParagraph line.
-	self assert: aLine ascent equals: self ascent.
-	self assert: aLine baseline equals: (0 @ self ascent) + self padding topLeft.
-	self assert: aLine descent equals: self descent.
-	self assert: aLine from equals: 1.
-	self assert: aLine height equals: self height.
-	self assert: aLine left equals: 0.
-	self assert: aLine spans size equals: 1.
-	self assert: aLine to equals: 4.
-	self assert: aLine top equals: 0.
-	self assert: aLine width equals: self haba size * self glyphWidth.
-	
-	aSpan := aLine spans first.
-	self assert: aSpan advance equals: self haba size * self glyphWidth.
-	self assert: aSpan ascent equals: self ascent.
-	self assert: aSpan baseline equals: (0 @ self ascent) + self padding topLeft.
-	self assert: aSpan descent equals: self descent.
-	self assert: aSpan from equals: 1. 
-	self assert: aSpan height equals: self height.
-	self assert: aSpan left equals: 0.
-	self assert: aSpan spanEnd equals: 4. 
-	self assert: aSpan spanStart equals: 1.
-	self assert: aSpan textRun equals: self haba.
-	self assert: aSpan textRunEnd equals: 4.
-	self assert: aSpan textRunStart equals: 1.
-	self assert: aSpan to equals: 4.
-	self assert: aSpan top equals: 0.
-	self assert: aSpan width equals: (self haba size * self glyphWidth).
-	
-	self assert: aSpan spanLength equals: 4.
-	self assert: aSpan textRunLength equals: 4.
-	self assert: aSpan isSplitted not.
-	
-	^ aParagraph
-]
-
-{ #category : #'paragraph - measuring' }
 BlSingleLineTextParagraphExamples >> measuredHelloWorld [
 	<gtExample>
 	| aParagraph aLine aFirstSpan aSecondSpan aText aHello aWorld |
@@ -645,11 +695,29 @@ BlSingleLineTextParagraphExamples >> newParagraph [
 	^ aParagraph
 ]
 
-{ #category : #'font - metrics' }
-BlSingleLineTextParagraphExamples >> padding [
+{ #category : #'instance creation' }
+BlSingleLineTextParagraphExamples >> objectPrintOnText [
 	<gtExample>
+	| aText |
 
-	^ BlInsets top: 20 right: 10 bottom: 30 left: 5
+	aText := 'Object>>#printOn:' asRopedText.
+	(aText from: 1 to: 6) foreground: Color blue.
+	(aText from: 9 to: aText size) foreground: Color magenta.
+
+	^ aText
+]
+
+{ #category : #'instance creation' }
+BlSingleLineTextParagraphExamples >> pointWithDotText [
+	<gtExample>
+	| aText |
+
+	aText := '100@100.' asRopedText.
+	(aText from: 1 to: 3) foreground: Color red.
+	(aText from: 5 to: 7) foreground: Color red.
+	(aText from: 8 to: 8) bold.
+
+	^ aText
 ]
 
 { #category : #'geometry - empty' }
@@ -714,11 +782,8 @@ BlSingleLineTextParagraphExamples >> realMeasuredHelloWorld [
 { #category : #'instance creation' }
 BlSingleLineTextParagraphExamples >> realMeasurer [
 	<gtExample>
-	| aMeasurer |
 
-	aMeasurer := BlTextParagraphSpanSpartaMeasurer new.
-
-	^ aMeasurer
+	^ Bloc preferableSpartaCanvas offscreen
 ]
 
 { #category : #'geometry - empty' }

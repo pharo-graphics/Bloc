@@ -8,6 +8,10 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
+	#instVars : [
+		'textParagraph',
+		'textSpan'
+	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
@@ -23,6 +27,18 @@ BlTextParagraphSpanMeasurer >> measure: aTextRun from: aTextRunStart to: aTextRu
 	"Measure a given text run from provided start to the end indices limiting available with to aWidth"
 
 	self subclassResponsibility
+]
+
+{ #category : #measurement }
+BlTextParagraphSpanMeasurer >> measureSpan: aParagraphSpan from: aTextRunStart to: aTextRunEnd width: aWidth [
+	"Measure a text run of a given paragraph span from provided text run start to the text run end indices limiting available with to aWidth"
+
+	textSpan := aParagraphSpan span.
+	self
+		measure: aParagraphSpan textRun
+		from: aTextRunStart
+		to: aTextRunEnd
+		width: aWidth
 ]
 
 { #category : #initialization }

@@ -155,7 +155,7 @@ BlSingleLineTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: an
 	^ self line spans
 		findBinary: [ :aParagraphSpan |
 			| originX cornerX |
-			originX := aParagraphSpan origin x.
+			originX := aParagraphSpan baseline x.
 			cornerX := originX + aParagraphSpan width.
 			(aPoint x between: originX and: cornerX )
 				ifTrue: [ 0 ]

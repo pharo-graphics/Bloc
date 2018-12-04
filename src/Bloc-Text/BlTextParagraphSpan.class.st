@@ -118,10 +118,10 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 		findBinary: [ :anIndex |
 			aMeasurer
 				reset;
-				measure: self textRun
-				from: self textRunStart
-				to: anIndex
-				width: self width.
+				measureSpan: self
+					from: self textRunStart
+					to: anIndex
+					width: self width.
 			(aWidth - aMeasurer width) sign ]
 		"exact match"
 		do: [ :anIndex | self from + aMeasurer spanEnd - 1 ]
@@ -139,10 +139,10 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 				ifFalse: [
 					aMeasurer
 						reset;
-						measure: self textRun
+						measureSpan: self
 							from: self textRunStart
 							to: leftIndex
-						width: self width.
+							width: self width.
 					leftWidth := aMeasurer width.
 					leftSpanIndex := aMeasurer spanEnd ].
 
@@ -153,10 +153,10 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 				ifFalse: [
 					aMeasurer
 						reset;
-						measure: self textRun
+						measureSpan: self
 							from: self textRunStart
 							to: rightIndex
-						width: self width.
+							width: self width.
 					rightWidth := aMeasurer width.
 					rightSpanIndex := aMeasurer spanEnd ].
 
@@ -240,10 +240,10 @@ BlTextParagraphSpan >> positionAt: anIndex [
 	
 	aMeasurer
 		reset;
-		measure: self textRun
-		from: 1
-		to: transformedSpanIndex
-		width: Float infinity.
+		measureSpan: self
+			from: 1
+			to: transformedSpanIndex
+			width: Float infinity.
 		
 	^ (aPositionX + aMeasurer width) @ aPositionY
 ]

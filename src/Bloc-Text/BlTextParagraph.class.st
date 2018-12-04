@@ -203,14 +203,16 @@ BlTextParagraph >> height [
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> indexAtPosition: aPoint [
 	<return: #Number>
-	| aParagraphSpan |
+	| aParagraphSpan aPointInSpan |
 
 	aParagraphSpan := self
 		spanAtPoint: aPoint
 		ifFound: #yourself
 		ifNone: #yourself.
-
-	^ aParagraphSpan indexAtPosition: aPoint
+	
+	aPointInSpan := aPoint - aParagraphSpan baseline.
+	
+	^ aParagraphSpan indexAtPosition: aPointInSpan
 ]
 
 { #category : #initialization }
@@ -318,7 +320,7 @@ BlTextParagraph >> normalize: aScale [
 BlTextParagraph >> positionAt: anIndex [
 	<return: #Point>
 	| aParagraphSpan |
-	
+
 	aParagraphSpan := self spanAtIndex: anIndex.
 	^ aParagraphSpan positionAt: anIndex
 ]

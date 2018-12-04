@@ -15,8 +15,6 @@ Class {
 		'height',
 		'measuredWidth',
 		'measuredHeight',
-		'textParagraph',
-		'textSpan',
 		'textRun',
 		'textRunStart',
 		'textRunEnd'
