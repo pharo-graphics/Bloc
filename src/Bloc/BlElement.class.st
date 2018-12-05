@@ -2804,10 +2804,30 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 
 	self assert: aChildElement isNotNil.
 	self assert: aChildElement parent == self.
+	self assert: anotherElement isNotNil.
 	
 	aChildIndex := self childIndexOf: aChildElement.
 	self removeChildAt: aChildIndex.
 	self addChild: anotherElement at: aChildIndex
+]
+
+{ #category : #'children add/remove' }
+BlElement >> replaceChild: aChildElement with: anotherElement as: aSymbol [
+	"Relace a given child relement with another element preserving the children order.
+	Request layout and redraw an area occupied by anElement.
+	As result anElement sends BlElementRemovedEvent
+	anElement must not be nil.
+	anElement must be my direct child"
+	| aChildIndex |
+
+	self assert: aChildElement isNotNil.
+	self assert: aChildElement parent == self.
+	self assert: anotherElement isNotNil.
+	self assert: aSymbol isNotNil.
+	
+	aChildIndex := self childIndexOf: aChildElement.
+	self removeChildAt: aChildIndex.
+	self addChild: anotherElement at: aChildIndex as: aSymbol
 ]
 
 { #category : #'focus requesting' }
