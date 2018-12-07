@@ -100,7 +100,7 @@ BlCollectionRopeIterator >> previous [
 	aPosition := position min: aSize.
 	
 	anItem := rope collection at: aPosition.
-	position := aPosition - 1.
+	position := position - 1.
 	
 	^ anItem
 ]
