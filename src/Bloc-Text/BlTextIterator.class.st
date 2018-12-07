@@ -68,7 +68,7 @@ BlTextIterator >> isNewLine: anItem [
 
 { #category : #'iterator - enumeration' }
 BlTextIterator >> next [
-	"Return a next item (character) at current position and move one to the right"
+	"Return an item (character) at current position and move one to the right"
 	<return: #Character or: #Object>
 
 	^ self subclassResponsibility
@@ -99,9 +99,12 @@ BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 			| nextSpan |
 			
 			nextSpan := self nextSpan.
+			"we have to go one item back so that #doesAttributeEnd: checks at the last character of the next span"
+			self previous.
 			theAttributes := nextSpan attributes select: aBlock.
 			theEndedAttributes := theAttributes
-				select: [ :eachAttribute | self doesAttributeEnd: eachAttribute ] ].
+				select: [ :eachAttribute | self doesAttributeEnd: eachAttribute ].
+			self next ].
 		endPosition := self position - 1.
 		"there are no ended attributes, continue"
 		theEndedAttributes isEmpty
@@ -290,6 +293,14 @@ BlTextIterator >> position [
 	"Return current iterator position within a text"
 	<return: #Number>
 	
+	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> previous [
+	"Return an item (character) at current position and move one to the left"
+	<return: #Character or: #Object>
+
 	^ self subclassResponsibility
 ]
 

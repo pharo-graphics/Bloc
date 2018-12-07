@@ -57,7 +57,7 @@ BlRopedTextIterator >> hasNext [
 
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> next [
-	"Return a next item (character) at current position and move one to the right"
+	"Return an item (character) at current position and move one to the right"
 	<return: #Character or: #Object>
 
 	^ iterator next
@@ -148,6 +148,14 @@ BlRopedTextIterator >> position [
 	<return: #Number>
 	
 	^ iterator position
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopedTextIterator >> previous [
+	"Return an item (character) at current position and move one to the left"
+	<return: #Character or: #Object>
+
+	^ iterator previous
 ]
 
 { #category : #accessing }

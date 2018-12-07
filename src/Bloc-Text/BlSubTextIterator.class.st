@@ -65,7 +65,7 @@ BlSubTextIterator >> hasNext [
 
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> next [
-	"Return a next item (character) at current position and move one to the right"
+	"Return an item (character) at current position and move one to the right"
 	<return: #Character or: #Object>
 
 	^ iterator next
@@ -141,6 +141,14 @@ BlSubTextIterator >> position [
 	<return: #Number>
 	
 	^ iterator position - text start + 1
+]
+
+{ #category : #'iterator - enumeration' }
+BlSubTextIterator >> previous [
+	"Return an item (character) at current position and move one to the left"
+	<return: #Character or: #Object>
+
+	^ iterator previous
 ]
 
 { #category : #'iterator - enumeration' }
