@@ -100,11 +100,11 @@ BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 			
 			nextSpan := self nextSpan.
 			"we have to go one item back so that #doesAttributeEnd: checks at the last character of the next span"
-			"self previous."
+			self previous.
 			theAttributes := nextSpan attributes select: aBlock.
 			theEndedAttributes := theAttributes
 				select: [ :eachAttribute | self doesAttributeEnd: eachAttribute ].
-			"self next" ].
+			self next ].
 		endPosition := self position - 1.
 		"there are no ended attributes, continue"
 		theEndedAttributes isEmpty

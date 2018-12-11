@@ -52,7 +52,7 @@ BlSubTextIterator >> doesAttributeEnd: anAttribute [
 		ifFalse: [ ^ true ].
 	
 	"check if this attribute exists at the next position, if not - it ends here"
-	^ ((self text text attributesAt: self position + self text textOffset) includes: anAttribute) not
+	^ ((self text text attributesAt: self position + self text textOffset + 1) includes: anAttribute) not
 ]
 
 { #category : #'iterator - testing' }
