@@ -32,6 +32,13 @@ BlInfiniteDataSourceObserver >> onItemsChanged: anEvent [
 ]
 
 { #category : #'event handling' }
+BlInfiniteDataSourceObserver >> onItemsEvent: anEvent [
+	"@see BlInfiniteDataSourceItemRangeEvent"
+
+	self subclassResponsibility
+]
+
+{ #category : #'event handling' }
 BlInfiniteDataSourceObserver >> onItemsInserted: anEvent [
 	"@see BlInfiniteDataSourceItemRangeInserted"
 

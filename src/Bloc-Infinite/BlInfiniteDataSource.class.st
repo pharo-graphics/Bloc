@@ -133,6 +133,16 @@ BlInfiniteDataSource >> notifyItemMoved: aFromPosition to: aToPosition [
 ]
 
 { #category : #'event firing' }
+BlInfiniteDataSource >> notifyItems: anInterval event: anEvent [
+	"Notify any registered event handlers that the itemCount items starting at aPosition should receive a given event"
+	
+	self notifyWithEvent: (BlInfiniteDataSourceItemRangeEvent new
+		position: anInterval first;
+		itemCount: anInterval size;
+		event: anEvent)
+]
+
+{ #category : #'event firing' }
 BlInfiniteDataSource >> notifyItemsChanged: anInterval [
 	"Notify any registered event handlers that the itemCount items starting at aPosition have changed.
 	This is an item change event, not a structural change event. It indicates that
@@ -201,8 +211,8 @@ BlInfiniteDataSource >> notifyWithEvent: anEvent [
 	self flag: 'Find a solution'.
 
 	BlUniverse default isUIProcess
-		ifTrue: [ self fireEvent: anEvent ]
-		ifFalse: [ self fireEvent: anEvent ]
+		ifTrue: [ self dispatchEvent: anEvent ]
+		ifFalse: [ self dispatchEvent: anEvent ]
 ]
 
 { #category : #hooks }

@@ -781,7 +781,25 @@ BlInfiniteElement >> elementRangeUpdate: aPositionStart itemCount: anItemCount p
 
 { #category : #'children - accessing' }
 BlInfiniteElement >> findElementHolderForDataSourcePosition: aPosition [
-	self shouldBeImplemented
+	"Return the ViewHolder for the item in the given position of the data set"
+	<return: #BlInfiniteHolder or: nil>
+
+	| aHiddenHolder |
+	dataSourceChangedAfterLayout
+		ifTrue: [ ^ nil ].
+
+	aHiddenHolder := nil.
+
+	childrenManager unfilteredChildrenDo: [ :anElement |
+		| anElementHolder |
+		anElementHolder := self elementHolderOf: anElement.
+		(anElementHolder isRemoved not and: [ (self dataSourcePositionOf: anElementHolder) = aPosition ])
+			ifTrue: [
+				(childrenManager isHidden: anElementHolder itemElement)
+					ifTrue: [ aHiddenHolder := anElementHolder ]
+					ifFalse: [ ^ anElementHolder ] ] ].
+
+	^ aHiddenHolder
 ]
 
 { #category : #'children - accessing' }
@@ -791,7 +809,7 @@ BlInfiniteElement >> findElementHolderForItemId: anId [
 
 { #category : #'children - accessing' }
 BlInfiniteElement >> findElementHolderForPosition: aPosition checkNew: shouldCheckNewPosition [
-	<return: #BlElement or: nil>
+	<return: #BlInfiniteHolder or: nil>
 	| aHiddenElement |
 	
 	aHiddenElement := nil.
