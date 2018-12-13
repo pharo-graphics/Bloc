@@ -4,23 +4,20 @@ Class {
 	#category : #BaselineOfBlocCore
 }
 
-{ #category : #baselines }
+{ #category : #baseline }
 BaselineOfBlocCore >> baseline: spec [
 	<baseline>
-	spec for: #common do: [ spec
-		postLoadDoIt: #postLoadBloc:;
+	spec for: #'common' do: [
+		spec postLoadDoIt: #'postLoadBloc:'.
+		spec baseline: 'GToolkitExamplesEngine' with: [
+				spec repository: 'github://feenkcom/gtoolkit-examples/src' ].
+		spec 
+			package: #Bloc;
+			package: #'BlocHost-Mock' with: [
+				spec requires: #(#Bloc ). ];
+			package: #'Bloc-Tests' with: [
+				spec requires: #(#Bloc #GToolkitExamplesEngine 'BlocHost-Mock' ). ]. ].
 
-		"GT-Examples is examples and testing framework"
-		baseline: 'GToolkitExamplesEngine' with: [ spec 
-			repository: 'github://feenkcom/gtoolkit-examples/src' ];
-						
-		"main core package, implements element composition, event handling and universe infrastructure.
-		*core* must not depend on anything"
-		package: #Bloc;
-		package: #'BlocHost-Mock' with: [ spec requires: #(Bloc) ];
-		package: #'Bloc-Tests' with: [ spec 
-			requires: #(Bloc GToolkitExamplesEngine 'BlocHost-Mock') ]
-	]
 ]
 
 { #category : #actions }
