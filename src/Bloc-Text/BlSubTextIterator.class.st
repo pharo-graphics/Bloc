@@ -63,6 +63,14 @@ BlSubTextIterator >> hasNext [
 	^ iterator hasNext
 ]
 
+{ #category : #'iterator - testing' }
+BlSubTextIterator >> hasPrevious [
+	"Return true if there is a previous text item (character) before the current position"
+	<return: #Boolean>
+
+	^ iterator hasNext
+]
+
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
@@ -159,6 +167,13 @@ BlSubTextIterator >> selectAttributes: aBlock [
 	<return: #SequenceableCollection of: #BlTextAttribute>
 
 	^ iterator selectAttributes: aBlock
+]
+
+{ #category : #'iterator - enumeration' }
+BlSubTextIterator >> skip: aNumber [
+	"Move forward by aNumber characters"
+
+	iterator skip: aNumber
 ]
 
 { #category : #accessing }

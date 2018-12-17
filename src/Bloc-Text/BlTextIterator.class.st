@@ -59,6 +59,14 @@ BlTextIterator >> hasNext [
 ]
 
 { #category : #'iterator - testing' }
+BlTextIterator >> hasPrevious [
+	"Return true if there is a previous text item (character) before the current position"
+	<return: #Boolean>
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - testing' }
 BlTextIterator >> isNewLine: anItem [
 	"Return true of given item represents a carriage return, false otherwise"
 	<return: #Boolean>
@@ -312,6 +320,13 @@ BlTextIterator >> selectAttributes: aBlock [
 	<return: #SequenceableCollection of: #BlTextAttribute>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> skip: aNumber [
+	"Move forward by aNumber characters"
+
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

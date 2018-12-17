@@ -55,6 +55,14 @@ BlRopedTextIterator >> hasNext [
 	^ iterator hasNext
 ]
 
+{ #category : #'iterator - testing' }
+BlRopedTextIterator >> hasPrevious [
+	"Return true if there is a previous text item (character) before the current position"
+	<return: #Boolean>
+
+	^ iterator hasPrevious
+]
+
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
@@ -171,6 +179,13 @@ BlRopedTextIterator >> selectAttributes: aBlock [
 	<return: #SequenceableCollection of: #BlTextAttribute>
 
 	^ iterator selectAttributes: aBlock
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopedTextIterator >> skip: aNumber [
+	"Move forward by aNumber characters"
+
+ 	aNumber timesRepeat: [ self next ]
 ]
 
 { #category : #accessing }
