@@ -7,7 +7,7 @@ Class {
 	#category : 'Bloc-Animation-Basic'
 }
 
-{ #category : #pulse }
+{ #category : #'api - running' }
 BlSequentialAnimation >> doStep [
 	| shouldStartNext aCurrentAnimation |
 
@@ -28,9 +28,9 @@ BlSequentialAnimation >> doStep [
 
 	aCurrentAnimation := animations at: currentIndex.
 	aCurrentAnimation run.
-	
-	(aCurrentAnimation isRunning not)
-		ifTrue: [ self doStep ]
+
+	aCurrentAnimation isRunning
+		ifFalse: [ self doStep ]
 ]
 
 { #category : #'api - accessing' }
@@ -44,7 +44,7 @@ BlSequentialAnimation >> duration [
 		ifNotEmpty: [ :theAnimations | theAnimations sum: [ :anAnimation | (anAnimation duration + anAnimation delay) * anAnimation loops ] ]
 ]
 
-{ #category : #pulse }
+{ #category : #'private - running' }
 BlSequentialAnimation >> initStart [
 	super initStart.
 
@@ -55,5 +55,6 @@ BlSequentialAnimation >> initStart [
 { #category : #initialization }
 BlSequentialAnimation >> initialize [
 	super initialize.
+
 	currentIndex := 0
 ]
