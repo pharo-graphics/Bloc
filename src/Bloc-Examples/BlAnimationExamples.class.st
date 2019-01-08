@@ -1223,7 +1223,7 @@ BlAnimationExamples >> bouncingText [
 	| letters container animation clickHandler |
 	<gtExample>
 
-	letters := 'bloc beta01' collect: [ :aCharacter | self textElement: aCharacter ] as: Array.
+	letters := 'bloc beta0.1' collect: [ :aCharacter | self textElement: aCharacter ] as: Array.
 	letters withIndexDo: [  :aTextElement :anIndex |
 		"change text color according to index in color spectrum"
 		aTextElement text: (aTextElement text foreground: (self colorAt: (anIndex / letters size) asFloat)) ].
@@ -1415,7 +1415,7 @@ BlAnimationExamples >> textContainer [
 	<gtExample>
 
 	^ BlElement new
-		layout: (BlGridLayout horizontal cellSpacing: 0);
+		layout: (BlLinearLayout horizontal alignBottomCenter);
 		constraintsDo: [ :c |
 			c horizontal fitContent.
 			c vertical fitContent ];

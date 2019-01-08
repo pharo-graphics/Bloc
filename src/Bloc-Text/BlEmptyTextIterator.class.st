@@ -31,6 +31,14 @@ BlEmptyTextIterator >> hasNext [
 	^ false
 ]
 
+{ #category : #'iterator - testing' }
+BlEmptyTextIterator >> hasPrevious [
+	"Return true if there is a previous text item (character) before the current position"
+	<return: #Boolean>
+
+	^ false
+]
+
 { #category : #'iterator - accessing' }
 BlEmptyTextIterator >> position [
 	"Return current iterator position within a text"

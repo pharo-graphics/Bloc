@@ -4,9 +4,9 @@ Class {
 	#category : 'Bloc-Animation-Basic'
 }
 
-{ #category : #pulse }
+{ #category : #'api - running' }
 BlParallelAnimation >> doStep [
-	self animations do: [ :each | each run ]
+	self animations do: [ :anAnimation | anAnimation run ]
 ]
 
 { #category : #'api - accessing' }
@@ -15,5 +15,7 @@ BlParallelAnimation >> duration [
 	of composite animations it is computed on-fly based on durations of their sub-animations"
 	<return: #Duration>
 
-	^ self childrenMaxValue: [ :anAnimation | (anAnimation duration + anAnimation delay) * anAnimation loops ] default: 0 seconds
+	^ self animations
+		ifEmpty: [ 0 seconds ]
+		ifNotEmpty: [ :theAnimations | theAnimations max: [ :anAnimation | (anAnimation duration + anAnimation delay) * anAnimation loops ] ]
 ]
