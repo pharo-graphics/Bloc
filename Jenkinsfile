@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Load') {
             steps {
+                sh 'git clean -f -d'
                 sh 'scripts/build/load.sh'
             }
         }
