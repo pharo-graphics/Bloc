@@ -155,7 +155,7 @@ BlTextParagraph >> drawOn: aCanvas [
 	session == Smalltalk session
 		ifFalse: [ self measureOn: aCanvas ].
 
-	self text lockDuring: [ aCanvas drawTextParagraph: self ]
+	aCanvas drawTextParagraph: self
 ]
 
 { #category : #'paragraph - geometry' }
@@ -284,7 +284,7 @@ BlTextParagraph >> measureOn: aCanvas [
 	"Measure myself with a given canvas as a backend-specific context.
 	Note: I double dispatch through aCanvas to support multiple completely different canvasses"
 
-	self text lockDuring: [ aCanvas measureTextParagraph: self ].
+	aCanvas measureTextParagraph: self.
 
 	"we should store a session of the last successfull measurement"
 	session := Smalltalk session.

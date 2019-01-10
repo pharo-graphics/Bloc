@@ -50,15 +50,30 @@ BlRopedText >> attributes: anAttributesCollection [
 ]
 
 { #category : #'text - attributes' }
-BlRopedText >> attributes: anAttributesCollection from: aStart to: anEnd [
-		
-	self rope: (rope attributes: anAttributesCollection from: aStart to: anEnd)
+BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [
+	self
+		assert: [ aFromIndex <= aToIndex ]
+		description: [ 'Start must not exceed end' ].
+
+	self
+		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+
+	self rope: (rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: aToIndex)
 ]
 
 { #category : #'text - attributes' }
 BlRopedText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
+	
+	self
+		assert: [ aFromIndex <= aToIndex ]
+		description: [ 'Start must not exceed end' ].
 		
-	self rope: (rope clearAttributes: aFromIndex to: aToIndex if: aBlock)
+	self
+		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+	
+	self rope: (rope clearAttributes: ((aFromIndex - 1) max: 0) to: aToIndex if: aBlock)
 ]
 
 { #category : #'text - copying' }
@@ -73,13 +88,22 @@ BlRopedText >> copyFrom: aStartIndex to: anEndIndex [
 	aStartIndex > anEndIndex
 		ifTrue: [ ^ self empty ].
 
-	^ self class rope: (self rope from: aStartIndex to: anEndIndex)
+	^ self class rope: (self rope from: ((aStartIndex - 1) max: 0) to: anEndIndex)
 ]
 
 { #category : #'text - modifications' }
-BlRopedText >> delete: aStart to: anEnd [
-	rope := rope delete: aStart to: anEnd.
-	self notifyDeleted: aStart to: anEnd
+BlRopedText >> delete: aFromIndex to: aToIndex [
+	
+	self
+		assert: [ aFromIndex <= aToIndex ]
+		description: [ 'Start must not exceed end' ].
+
+	self
+		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+
+	rope := rope delete: ((aFromIndex - 1) max: 0) to: aToIndex.
+	self notifyDeleted: aFromIndex to: aToIndex
 ]
 
 { #category : #'text - enumeration' }
@@ -97,7 +121,19 @@ BlRopedText >> empty [
 
 { #category : #'text - enumeration' }
 BlRopedText >> from: aFromIndex to: aToIndex do: aBlock [
-	self rope from: aFromIndex to: aToIndex do: aBlock
+
+	self
+		assert: [ aFromIndex <= aToIndex ]
+		description: [ 'Start must not exceed end' ].
+
+	self
+		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+
+	self rope
+		from: ((aFromIndex - 1) max: 0)
+		to: aToIndex
+		do: aBlock
 ]
 
 { #category : #'text - copying' }
@@ -110,9 +146,7 @@ BlRopedText >> generation [
 
 { #category : #initialization }
 BlRopedText >> initialize [
-	super initialize.
-	
-	locked := false
+	super initialize
 ]
 
 { #category : #initialization }
@@ -135,12 +169,9 @@ BlRopedText >> insertText: aString at: anIndex [
 
 { #category : #'text - testing' }
 BlRopedText >> isEmpty [
-	^ self rope isEmpty
-]
+	<return: #Boolean>
 
-{ #category : #'text - lock' }
-BlRopedText >> isLocked [
-	^ locked
+	^ self rope size = 0
 ]
 
 { #category : #'text - enumeration' }
@@ -152,16 +183,19 @@ BlRopedText >> iterator [
 ]
 
 { #category : #'text - enumeration' }
-BlRopedText >> iterator: aStartIndex to: anEndIndex [
+BlRopedText >> iterator: aFromIndex to: aToIndex [
 	"Return an iterator pointing to the anStartIndex text item (character) limited by anEndIndex"
 	<return: #BlTextIterator>
+	
+	self
+		assert: [ aFromIndex <= aToIndex ]
+		description: [ 'Start must not exceed end' ].
 
-	^ BlRopedTextIterator text: self from: aStartIndex to: anEndIndex
-]
+	self
+		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
 
-{ #category : #'text - lock' }
-BlRopedText >> lock [
-	locked := true
+	^ BlRopedTextIterator text: self from: aFromIndex to: aToIndex
 ]
 
 { #category : #accessing }
@@ -171,9 +205,6 @@ BlRopedText >> rope [
 
 { #category : #accessing }
 BlRopedText >> rope: aBrRope [
-
-	locked ifTrue: [ BlTextLockedError signal: 'Can not modify locked text!' ].
-
 	rope := aBrRope
 ]
 
@@ -182,20 +213,23 @@ BlRopedText >> size [
 	^ self rope size
 ]
 
-{ #category : #'text - lock' }
-BlRopedText >> unlock [
-	locked := false
-]
-
 { #category : #'text - attributes' }
 BlRopedText >> unstyle: aFromIndex to: aToIndex [
 	<return: #BlText>
 	| anUnstyledRope |
 
+	self
+		assert: [ aFromIndex <= aToIndex ]
+		description: [ 'Start must not exceed end' ].
+
+	self
+		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+
 	"First refer original rope to support multithreading"
 	anUnstyledRope := rope.
 	anUnstyledRope := anUnstyledRope
-		clearAttributes: aFromIndex
+		clearAttributes: ((aFromIndex - 1) max: 0)
 		to: aToIndex
 		if: [ :anAttribute | anAttribute isOverwritableByStyler ].
 

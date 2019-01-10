@@ -10,7 +10,7 @@ Class {
 	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : #'iterator - accessing' }
+{ #category : #'iterator - attributes' }
 BlAttributeRopeIterator >> attributes [
 	"Return a collection of rope attributes at a current position without duplicates"
 	<return: #Collection of: #Objects>
@@ -25,7 +25,7 @@ BlAttributeRopeIterator >> hasNext [
 	^ subIterator hasNext
 ]
 
-{ #category : #accessing }
+{ #category : #'iterator - testing' }
 BlAttributeRopeIterator >> hasPrevious [
 	^ subIterator hasPrevious
 ]
@@ -37,14 +37,14 @@ BlAttributeRopeIterator >> next [
 
 { #category : #'iterator - enumeration' }
 BlAttributeRopeIterator >> nextSpan [
-	| run theAttributes |
+	| aSpan theAttributes |
 
-	theAttributes := self rope attributes.
-	run := subIterator nextSpan. "span without my rope's attributes"
-	run == rope rope
+	theAttributes := rope attributes.
+	aSpan := subIterator nextSpan. "span without my rope's attributes"
+	aSpan == rope rope
 		ifTrue: [ ^ rope ].
 
-	^ run attributes: theAttributes from: 1 to: run size
+	^ aSpan attributes: theAttributes
 ]
 
 { #category : #'iterator - enumeration' }
@@ -57,7 +57,7 @@ BlAttributeRopeIterator >> position [
 	^ subIterator position
 ]
 
-{ #category : #accessing }
+{ #category : #'iterator - enumeration' }
 BlAttributeRopeIterator >> previous [
 	^ subIterator previous
 ]
@@ -65,6 +65,7 @@ BlAttributeRopeIterator >> previous [
 { #category : #'instance creation' }
 BlAttributeRopeIterator >> rope: aRope from: aStart to: anEnd [
 	super rope: aRope from: aStart to: anEnd.
+
 	subIterator := aRope rope iterator: aStart to: anEnd
 ]
 

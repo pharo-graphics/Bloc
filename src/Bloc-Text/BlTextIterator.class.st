@@ -90,7 +90,7 @@ BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 	self hasNext
 		ifFalse: [ self error: 'reached end of rope' ].
 	
-	startPosition := self position.
+	startPosition := self position + 1.
 	endPosition := startPosition.
 	theEndedAttributes := OrderedCollection new.
 
@@ -107,22 +107,25 @@ BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 			| nextSpan |
 			
 			nextSpan := self nextSpan.
-			"we have to go one item back so that #doesAttributeEnd: checks at the last character of the next span"
-			self previous.
 			theAttributes := nextSpan attributes select: aBlock.
 			theEndedAttributes := theAttributes
-				select: [ :eachAttribute | self doesAttributeEnd: eachAttribute ].
-			self next ].
-		endPosition := self position - 1.
+				select: [ :eachAttribute | self doesAttributeEnd: eachAttribute ] ].
+		endPosition := self position.
 		"there are no ended attributes, continue"
 		theEndedAttributes isEmpty
 	] ] whileTrue.
+
+	self
+		assert: [ startPosition <= endPosition ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ startPosition > 0 or: [ startPosition = 0 and: [ endPosition = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
 	
 	^ anIndicesBlock
 		value: startPosition
-		value: (theEndedAttributes isNotEmpty
-			ifTrue: [ endPosition ]
-			ifFalse: [ self position - 1 ])
+		value: endPosition
 		value: theEndedAttributes
 ]
 
@@ -178,7 +181,15 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 			
 			actualEnd := anEnd.
 			actualDelimiterIndex := aDelimiterEnd ] ].
-
+	
+	self
+		assert: [ actualStart <= actualEnd ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ actualStart > 0 or: [ actualStart = 0 and: [ actualEnd = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+	
 	anIndicesBlock
 		value: actualStart
 		value: actualEnd
@@ -221,7 +232,7 @@ BlTextIterator >> nextSpan: aBlock indicesDo: anIndicesBlock [
 	theMatchedAttributes := nil.
 	theMatchedAttributesSet := nil.
 
-	startPosition := self position.
+	startPosition := self position + 1.
 	endPosition := startPosition.
 
 	[ self hasNext and: [
@@ -238,9 +249,17 @@ BlTextIterator >> nextSpan: aBlock indicesDo: anIndicesBlock [
 
 	endPosition := self position.
 	
+	self
+		assert: [ startPosition <= endPosition ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ startPosition > 0 or: [ startPosition = 0 and: [ endPosition = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+	
 	^ anIndicesBlock
 		value: startPosition
-		value:  endPosition - 1
+		value: endPosition
 		value: theMatchedAttributes
 ]
 
@@ -252,7 +271,7 @@ BlTextIterator >> nextSpanAny: aBlock indicesDo: anIndicesBlock [
 		ifFalse: [ self error: 'reached end of rope' ].
 
 	initialValue := nil.
-	startPosition := self position.
+	startPosition := self position + 1.
 	endPosition := startPosition.
 
 	[ self hasNext and: [
@@ -264,9 +283,17 @@ BlTextIterator >> nextSpanAny: aBlock indicesDo: anIndicesBlock [
 
 	endPosition := self position.
 	
+	self
+		assert: [ startPosition <= endPosition ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ startPosition > 0 or: [ startPosition = 0 and: [ endPosition = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+	
 	^ anIndicesBlock
 		value: startPosition
-		value:  endPosition - 1
+		value: endPosition
 		value: initialValue
 ]
 

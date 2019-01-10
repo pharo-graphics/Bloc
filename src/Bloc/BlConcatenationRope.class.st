@@ -30,16 +30,16 @@ BlConcatenationRope >> at: anIndex [
 		ifFalse: [ right at: anIndex - leftSize ]
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : #'rope - attributes' }
 BlConcatenationRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	| leftSize newLeft newRight |
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+
+	self assertAccessFrom: aStart to: anEnd.
 	
 	anAttributesCollection
 		ifEmpty: [ ^ self ].
 
-	(aStart = 1 and: [ anEnd = self size ])
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ self class attributeRope
 			attributes: anAttributesCollection
 			rope: self ].
@@ -50,14 +50,14 @@ BlConcatenationRope >> attributes: anAttributesCollection from: aStart to: anEnd
 
 	newLeft := anEnd <= leftSize
 		ifTrue: [ left attributes: anAttributesCollection from: aStart to: anEnd ]
-		ifFalse: [ aStart <= leftSize
+		ifFalse: [ aStart < leftSize
 			ifTrue: [ left attributes: anAttributesCollection from: aStart to: leftSize ]
 			ifFalse: [ left ] ].
 
-	newRight := aStart > leftSize
+	newRight := aStart >= leftSize
 		ifTrue: [ right attributes: anAttributesCollection from: aStart - leftSize to: anEnd - leftSize ]
 		ifFalse: [ anEnd > leftSize
-			ifTrue: [ right attributes: anAttributesCollection from: 1 to: anEnd - leftSize ]
+			ifTrue: [ right attributes: anAttributesCollection from: 0 to: anEnd - leftSize ]
 			ifFalse: [ right ] ].
 		
 	^ self class
@@ -70,17 +70,16 @@ BlConcatenationRope >> children [
 	^ { left . right }
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : #'rope - attributes' }
 BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	| leftSize newLeft newRight |
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
 	
-
-	(aStart = 1 and: [ anEnd = self size ])
+	self assertAccessFrom: aStart to: anEnd.
+	
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ self class
-			concatenate: (left clearAttributes: 1 to: left size if: aBlock)
-			and: (right clearAttributes: 1 to: right size if: aBlock) ].
+			concatenate: (left clearAttributes: 0 to: left size if: aBlock)
+			and: (right clearAttributes: 0 to: right size if: aBlock) ].
 
 	leftSize := left size.
 	newLeft := nil.
@@ -88,14 +87,14 @@ BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 
 	newLeft := anEnd <= leftSize
 		ifTrue: [ left clearAttributes: aStart to: anEnd if: aBlock ]
-		ifFalse: [ aStart <= leftSize
+		ifFalse: [ aStart < leftSize
 			ifTrue: [ left clearAttributes: aStart to: leftSize if: aBlock ]
 			ifFalse: [ left ] ].
 
-	newRight := aStart > leftSize
+	newRight := aStart >= leftSize
 		ifTrue: [ right clearAttributes: aStart - leftSize to: anEnd - leftSize if: aBlock ]
 		ifFalse: [ anEnd > leftSize
-			ifTrue: [ right clearAttributes: 1 to: anEnd - leftSize if: aBlock ]
+			ifTrue: [ right clearAttributes: 0 to: anEnd - leftSize if: aBlock ]
 			ifFalse: [ right ] ].
 
 	^ self class
@@ -105,32 +104,33 @@ BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 
 { #category : #'rope - deleting' }
 BlConcatenationRope >> delete: aStart to: anEnd [
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+	self assertAccessFrom: aStart to: anEnd.
 
 	"We remove the whole left side, just return the right one"
-	(aStart = 1 and: [ anEnd = left size ])
+	(aStart = 0 and: [ anEnd = left size ])
 		ifTrue: [ ^ right ].
 		
 	"We remove the whole right side, just return the left one"
-	(aStart = (left size + 1) and: [ anEnd = self size ])
+	(aStart = left size and: [ anEnd = self size ])
 		ifTrue: [ ^ left ].
-	
-	^ (aStart > 1 and: [ anEnd < self size ])
+
+	^ (aStart > 0 and: [ anEnd < self size ])
 		ifTrue: [
 			self class
-				concatenate: (self from: 1 to: aStart - 1)
-				and: (self from: anEnd + 1 to: self size) ]
+				concatenate: (self from: 0 to: aStart)
+				and: (self from: anEnd to: self size) ]
 		ifFalse: [
-			(aStart <= 1 and: [ anEnd >= self size ])
+			(aStart = 0 and: [ anEnd = self size ])
 				ifTrue: [ self empty ]
-				ifFalse: [ aStart <= 1
-					ifTrue: [ self from: anEnd + 1 to: self size ]
-					ifFalse: [ self from: 1 to: aStart - 1 ] ] ]
+				ifFalse: [ aStart = 0
+					ifTrue: [ self from: anEnd to: self size ]
+					ifFalse: [ self from: 0 to: aStart ] ] ]
 ]
 
 { #category : #'rope - accessing' }
 BlConcatenationRope >> depth [
+	<return: #Number>
+
 	^ (left depth max: right depth) + 1
 ]
 
@@ -152,30 +152,28 @@ BlConcatenationRope >> empty [
 BlConcatenationRope >> from: aStart to: anEnd [
 	| leftSize |
 
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+	self assertAccessFrom: aStart to: anEnd.
 
-	(aStart = 1 and: [ anEnd = self size ])
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ self ].
 
 	leftSize := left size.
 	anEnd <= leftSize
 		ifTrue: [ ^ left from: aStart to: anEnd ].
 
-	aStart > leftSize
+	aStart >= leftSize
 		ifTrue: [ ^ right from: aStart - leftSize to: anEnd - leftSize ].
 
-	^ self class 
+	^ self class
 		concatenate: (left from: aStart to: leftSize)
-		and: (right from: 1 to: anEnd - leftSize)
+		and: (right from: 0 to: anEnd - leftSize)
 ]
 
 { #category : #'rope - enumeration' }
 BlConcatenationRope >> from: aStart to: anEnd do: aBlock [
 	| leftSize isReversed |
 	
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+	self assertAccessFrom: aStart to: anEnd.
 	
 	leftSize := left size.
 	isReversed := anEnd < aStart.
@@ -187,10 +185,10 @@ BlConcatenationRope >> from: aStart to: anEnd do: aBlock [
 			anEnd <= leftSize
 				ifTrue: [ left from: (aStart min: leftSize) to: anEnd do: aBlock ] ]
 		ifFalse: [ 
-			aStart <= leftSize
+			aStart < leftSize
 				ifTrue: [ left from: aStart to: (anEnd min: leftSize) do: aBlock ].
 			anEnd > leftSize
-				ifTrue: [ right from: (aStart max: leftSize + 1) - leftSize to: anEnd - leftSize do: aBlock ] ]
+				ifTrue: [ right from: ((aStart - leftSize) max: 0) to: anEnd - leftSize do: aBlock ] ]
 ]
 
 { #category : #'rope - inserting' }
@@ -228,6 +226,8 @@ BlConcatenationRope >> iterator: aStart to: anEnd [
 
 { #category : #accessing }
 BlConcatenationRope >> left [
+	<return: #BlRope>
+
 	^ left
 ]
 
@@ -240,6 +240,8 @@ BlConcatenationRope >> left: aLeftRope right: aRightRope [
 
 { #category : #accessing }
 BlConcatenationRope >> right [
+	<return: #BlRope>
+
 	^ right
 ]
 

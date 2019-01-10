@@ -29,7 +29,7 @@ BlRope >> paintTreeWith: view [
 						zIndex: 10;
 						background: Color white;
 						constraintsDo: [ :c | c padding: (BlInsets all: 5) ];
-						text: (BlRopedText rope: each) ]
+						text: (BlRopedText rope: (each from: 0 to: (100 min: each size))) ]
 				ifFalse: [ 
 					BlElement new 
 						when: BlClickEvent do: [:event | event target fireEvent: (GtPhlowObjectToSpawn new object: each; sourceElement: event target)];

@@ -8,41 +8,27 @@ Class {
 	#instVars : [
 		'collection'
 	],
-	#classInstVars : [
-		'empty'
-	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
-
-{ #category : #cleanup }
-BlCollectionRope class >> cleanUp [
-	super cleanUp.
-	
-	empty := nil
-]
 
 { #category : #'instance creation' }
 BlCollectionRope class >> collection: aCollection [
 	^ self new collection: aCollection
 ]
 
-{ #category : #accessing }
-BlCollectionRope class >> empty [
-	"Return a unique empty collection rope which can be shared among all users"
-	<return: #BlCollectionRope>
-	
-	^ empty ifNil: [ empty := self collection: #() ]
-]
-
 { #category : #'instance creation' }
 BlCollectionRope class >> from: aLeftRope and: aRightRope [
-	| length array index |
-	length := aLeftRope size + aRightRope size.
-	array := Array new: length.
-	index := 1.
-	aLeftRope do: [ :item | array at: index put: item. index := index + 1 ].
-	aRightRope do: [ :item | array at: index put: item. index := index + 1 ].
-	^ self collection: array
+	self
+		assert: aLeftRope species = self collectionRope
+		description: [ 'Can only merge two collection ropes' ].
+	
+	self
+		assert: aRightRope species = self collectionRope
+		description: [ 'Can only merge two collection ropes' ].
+	
+	^ self collection: (aLeftRope collection species streamContents: [ :aStream |
+		aLeftRope do: [ :eachItem | aStream nextPut: eachItem ].
+		aRightRope do: [ :eachItem | aStream nextPut: eachItem ] ])
 ]
 
 { #category : #'rope - accessing' }
@@ -55,38 +41,36 @@ BlCollectionRope >> at: anIndex [
 
 { #category : #'rope - attributes' }
 BlCollectionRope >> attributes: anAttributesCollection from: aStart to: anEnd [
+	"See BlRope>>#attributes:from:to: for the detailed explanation on start and end indices"
+	<return: #BlRope>
 	| anAttributeRope |
 
 	self assertAccessFrom: aStart to: anEnd.
 
 	anAttributesCollection
 		ifEmpty: [ ^ self ].
-	
-	"return an attributed rope of myself since we are empty"
-	(aStart isZero and: [ anEnd isZero ])
-		ifTrue: [ ^ self class attributeRope
-		attributes: anAttributesCollection
-		rope: self ].
-	
+
 	anAttributeRope := self class attributeRope
 		attributes: anAttributesCollection
 		rope: (self from: aStart to: anEnd).
-	
+
 	"attributes are applied on the whole rope, return it"
-	(aStart = 1 and: [ anEnd = self size ])
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ anAttributeRope ].
-		
-	aStart = 1
-		ifTrue: [ ^ anAttributeRope append: (self from: anEnd + 1 to: self size) ].
-	
+
+	aStart = 0
+		ifTrue: [ ^ anAttributeRope append: (self from: anEnd to: self size) ].
+
 	anEnd = self size
-		ifTrue: [ ^ (self from: 1 to: aStart - 1) append: anAttributeRope ].
-	
-	^  (self from: 1 to: aStart - 1) append: (anAttributeRope append: (self from: anEnd + 1 to: self size))
+		ifTrue: [ ^ (self from: 0 to: aStart) append: anAttributeRope ].
+
+	^  (self from: 0 to: aStart) append: (anAttributeRope append: (self from: anEnd to: self size))
 ]
 
 { #category : #'rope - accessing' }
 BlCollectionRope >> children [
+	<return: #Collection of: #BlRope>
+
 	^ { }
 ]
 
@@ -110,29 +94,26 @@ BlCollectionRope >> collection: aCollection [
 
 { #category : #'rope - deleting' }
 BlCollectionRope >> delete: aStart to: anEnd [
+	<return: #BlRope>
 	| newCollection |
+
 	self assertAccessFrom: aStart to: anEnd.
 	
-	(aStart isZero and: [ anEnd isZero ])
+	aStart = anEnd
 		ifTrue: [ ^ self ].
 	
-	(aStart = 1 and: [ anEnd = self size ])
-		ifTrue: [ ^ self empty ].
+	newCollection := collection species new: collection size - (anEnd - aStart).
 	
-	newCollection := Array new: collection size - (anEnd - aStart + 1).
-	
-	aStart > 1 ifTrue: [ 
-			newCollection
-				replaceFrom: 1 to: aStart - 1
-				with: collection
-				startingAt: 1 ].
-			
-	anEnd < self size ifTrue: [ 
-			newCollection
-				replaceFrom: aStart to: newCollection size
-				with: collection
-				startingAt: anEnd + 1 ].
-			
+	newCollection
+		replaceFrom: 1 to: aStart
+		with: collection
+		startingAt: 1.
+
+	newCollection
+		replaceFrom: aStart + 1 to: newCollection size
+		with: collection
+		startingAt: anEnd + 1.
+
 	^ self class collection: newCollection
 ]
 
@@ -154,8 +135,8 @@ BlCollectionRope >> do: aBlock [
 BlCollectionRope >> empty [
 	"Return an empty collection rope"
 	<return: #BlRope>
-	
-	^ self class empty
+
+	^ self class collection: (collection species new: 0)
 ]
 
 { #category : #'rope - accessing' }
@@ -163,27 +144,24 @@ BlCollectionRope >> from: aStart to: anEnd [
 	| aNewLegnth |
 	self assertAccessFrom: aStart to: anEnd.
 
-	(aStart isZero and: [ anEnd isZero ])
-		ifTrue: [ ^ self empty ].
-
 	"return this very rope if the requested sub-rope interval exactly matches myself"
-	(aStart = 1 and: [ anEnd = self size ])
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ self ].
 
-	aNewLegnth := anEnd - aStart + 1.
+	aNewLegnth := anEnd - aStart.
 
-	^ (aNewLegnth <= self class combineLength)
-		ifTrue: [ self class collection: (collection copyFrom: aStart to: anEnd) ]
-		ifFalse: [ self class subRope rope: self offset: aStart - 1 length: aNewLegnth ]
+	^ (aNewLegnth <= self class combineLength and: [ self size <= self class combineLength ])
+		ifTrue: [ self class collection: (collection copyFrom: aStart + 1 to: anEnd) ]
+		ifFalse: [ self class subRope rope: self offset: aStart length: aNewLegnth ]
 ]
 
 { #category : #'rope - enumeration' }
 BlCollectionRope >> from: aStart to: anEnd do: aBlock [
 
-	aStart
+	aStart + 1
 		to: anEnd
 		by: (anEnd >= aStart ifTrue: [ 1 ] ifFalse: [ -1 ])
-		do: [:index | aBlock value: (collection at: index) ]
+		do: [ :anIndex | aBlock value: (collection at: anIndex) ]
 ]
 
 { #category : #'rope - inserting' }
@@ -194,7 +172,7 @@ BlCollectionRope >> insertItems: aCollection at: anIndex [
 	"new collection is smaller than combine length, let's merge them"
 	self size + aCollection size <= self class combineLength
 		ifTrue: [ ^ self merge: aCollection at: anIndex ].
-		
+
 	self size + aCollection size <= (self class combineLength * 2)
 		ifTrue: [ ^ self mergeSplit: aCollection at: anIndex ].
 	
@@ -206,7 +184,7 @@ BlCollectionRope >> insertItems: aCollection at: anIndex [
 	anIndex = self size
 		ifTrue: [ ^ self append: anInsertionRope ].
 		
-	^ (self from: 1 to: anIndex) append: (anInsertionRope append: (self from: anIndex + 1 to: self size))
+	^ (self from: 0 to: anIndex) append: (anInsertionRope append: (self from: anIndex to: self size))
 ]
 
 { #category : #'rope - testing' }

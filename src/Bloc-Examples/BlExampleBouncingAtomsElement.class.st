@@ -11,6 +11,8 @@ Class {
 
 { #category : #'instance creation' }
 BlExampleBouncingAtomsElement class >> open [
+	<script: 'self open'>
+
 	self
 		openInWindow: (self new initializeWith: 3000 ofSize: 5@5 within: 1200@800)
 		named: 'Bouncing Atoms'

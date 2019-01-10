@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTextOperatorExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Text'
 }
 
 { #category : #'finder - case insensitive substring' }

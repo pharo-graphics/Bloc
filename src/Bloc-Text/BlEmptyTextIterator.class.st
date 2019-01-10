@@ -12,6 +12,13 @@ BlEmptyTextIterator >> attributes [
 	^ #()
 ]
 
+{ #category : #'iterator - accessing' }
+BlEmptyTextIterator >> cursorPosition [
+	<return: #Number>
+	
+	^ 0
+]
+
 { #category : #'iterator - enumeration' }
 BlEmptyTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  

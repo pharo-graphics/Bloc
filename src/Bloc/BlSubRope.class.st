@@ -27,18 +27,32 @@ BlSubRope >> at: anIndex [
 	^ rope at: offset + anIndex
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : #'rope - attributes' }
 BlSubRope >> attributes: anAttributesCollection from: aStart to: anEnd [
+	"See BlRope>>#attributes:from:to: for the detailed explanation on start and end indices"
+	<return: #BlRope>
 	| anAttributeRope |
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+
+	self assertAccessFrom: aStart to: anEnd.
 
 	anAttributesCollection
 		ifEmpty: [ ^ self ].
 
-	anAttributeRope := self rope attributes: anAttributesCollection from: aStart + offset to: anEnd + offset.
-	
-	^ anAttributeRope from: offset + 1 to: offset + length
+	anAttributeRope := self class attributeRope
+		attributes: anAttributesCollection
+		rope: (self from: aStart to: anEnd).
+
+	"attributes are applied on the whole rope, return it"
+	(aStart = 0 and: [ anEnd = self size ])
+		ifTrue: [ ^ anAttributeRope ].
+
+	aStart = 0
+		ifTrue: [ ^ anAttributeRope append: (self from: anEnd to: self size) ].
+
+	anEnd = self size
+		ifTrue: [ ^ (self from: 0 to: aStart) append: anAttributeRope ].
+
+	^  (self from: 0 to: aStart) append: (anAttributeRope append: (self from: anEnd to: self size))
 ]
 
 { #category : #'rope - accessing' }
@@ -46,30 +60,39 @@ BlSubRope >> children [
 	^ { rope }
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : #'rope - attributes' }
 BlSubRope >> clearAttributes: aStart to: anEnd if: aBlock [
+	<return: #BlRope>
 	| anClearedRope |
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+	self assertAccessFrom: aStart to: anEnd.
 
 	anClearedRope := self rope clearAttributes: aStart + offset to: anEnd + offset if: aBlock.
-	^ anClearedRope from: offset + 1 to: offset + length
+	^ anClearedRope from: offset to: offset + length
 ]
 
 { #category : #'rope - deleting' }
 BlSubRope >> delete: aStart to: anEnd [
+	<return: #BlRope>
 	| afterDeletion |
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+
+	self assertAccessFrom: aStart to: anEnd.
+	
+	aStart == anEnd
+		ifTrue: [ ^ self ].
+		
+	(aStart = 0 and: [ anEnd = self size ])
+		ifTrue: [ ^ self empty ].
 
 	afterDeletion := self rope delete: aStart + offset to: anEnd + offset.
 	^ afterDeletion
-		from: offset + 1
-		to: offset + length - (anEnd - aStart + 1)
+		from: offset
+		to: offset + length - (anEnd - aStart)
 ]
 
 { #category : #'rope - accessing' }
 BlSubRope >> depth [
+	<return: #Number>
+
 	^ rope depth
 ]
 
@@ -83,13 +106,19 @@ BlSubRope >> empty [
 
 { #category : #'rope - accessing' }
 BlSubRope >> from: aStart to: anEnd [
-	self assertAccess: aStart.
-	self assertAccess: anEnd.
+	<return: #BlRope>
+	self assertAccessFrom: aStart to: anEnd.
 	
-	(aStart = 1 and: [ anEnd = self size ])
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ self ].
+		
+	(aStart = anEnd)
+		ifTrue: [ ^ self rope from: offset + aStart to: offset + anEnd ].
 
-	^ self rope from: offset + aStart to: offset + anEnd
+	^ self class subRope
+		rope: self rope
+		offset: offset + aStart
+		length: anEnd - aStart
 ]
 
 { #category : #'rope - enumeration' }
@@ -99,15 +128,18 @@ BlSubRope >> from: aStart to: anEnd do: aBlock [
 
 { #category : #'rope - inserting' }
 BlSubRope >> insertItems: aCollection at: anIndex [
+	<return: #BlRope>
 	| afterInsertion |
 	self assertIndexForInsert: anIndex.
 
 	afterInsertion := self rope insertItems: aCollection at: anIndex + offset.
-	^ afterInsertion from: offset + 1 to: offset + length + aCollection size
+	^ afterInsertion from: offset to: offset + length + aCollection size
 ]
 
 { #category : #'rope - testing' }
 BlSubRope >> isLeaf [
+	<return: #Boolean>
+
 	^ false
 ]
 
@@ -147,5 +179,7 @@ BlSubRope >> rope: aRope offset: anOffset length: aLength [
 
 { #category : #'rope - accessing' }
 BlSubRope >> size [
+	<return: #Number>
+
 	^ length
 ]
