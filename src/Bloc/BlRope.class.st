@@ -37,6 +37,11 @@ BlRope class >> combineLength [
 { #category : #rope }
 BlRope class >> concatenate: aLeftRope and: aRightRope [
 	| totalSize |
+	
+	self
+		assert: [ (aLeftRope isEmpty and: [ aRightRope isEmpty  ]) not ]
+		description: [ 'Can not concatenate two empty ropes' ].
+	
 	aLeftRope isEmpty
 		ifTrue: [ ^ aRightRope ].
 
@@ -48,6 +53,10 @@ BlRope class >> concatenate: aLeftRope and: aRightRope [
 	"if both ropes are leafs we can simplify concatenation by merging them if combined length is small"
 	(aLeftRope isLeaf and: [ aRightRope isLeaf and: [ totalSize <= self combineLength ] ])
 		ifTrue: [ ^ self collectionRope from: aLeftRope and: aRightRope ].
+		
+	"if both are attribute ropes we can extract common attributes and merge smartly"
+	(aLeftRope isAttributed and: [ aRightRope isAttributed and: [ aLeftRope attributes = aRightRope attributes ] ])
+		ifTrue: [ ^ self attributeRope combineAttributed: aLeftRope and: aRightRope ].
 
 	"balancing magic :) if the length of the left or right is twice as large as the other one"
 	((aLeftRope size + aRightRope size > (self combineLength))
@@ -232,6 +241,14 @@ BlRope >> insertItems: aCollection at: anIndex [
 	To prepend "
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'rope - testing' }
+BlRope >> isAttributed [
+	"Return true if I am an attributed rope"
+	<return: #Boolean>
+	
+	^ false
 ]
 
 { #category : #'rope - testing' }

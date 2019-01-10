@@ -20,6 +20,15 @@ BlAttributeRope class >> attributes: anAttributeCollection rope: aRope [
 ]
 
 { #category : #utilities }
+BlAttributeRope class >> combineAttributed: aLeftAttributeRope and: aRightAttributeRope [
+	<return: #BlRope>
+
+	^ self
+		attributes: aLeftAttributeRope attributes
+		rope: (self concatenate: aLeftAttributeRope rope and: aRightAttributeRope rope)
+]
+
+{ #category : #utilities }
 BlAttributeRope class >> mergeAttributes: aCollectionOfAttributes and: anotherCollectionOfAttributes [
 	"Merge two collection of attributes letting anotherCollectionOfAttributes to override
 	attributes from aCollectionOfAttributes based on its type"
@@ -201,6 +210,13 @@ BlAttributeRope >> insertItems: aCollection at: anIndex [
 	^ self class attributeRope
 		attributes: attributes
 		rope: (rope insertItems: aCollection at: anIndex)
+]
+
+{ #category : #'rope - testing' }
+BlAttributeRope >> isAttributed [
+	<return: #Boolean>
+	
+	^ true
 ]
 
 { #category : #'rope - testing' }
