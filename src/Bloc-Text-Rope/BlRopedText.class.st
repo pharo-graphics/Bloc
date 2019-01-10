@@ -188,8 +188,8 @@ BlRopedText >> iterator: aFromIndex to: aToIndex [
 	<return: #BlTextIterator>
 	
 	self
-		assert: [ aFromIndex <= aToIndex ]
-		description: [ 'Start must not exceed end' ].
+		assert: [ aFromIndex <= (aToIndex + 1) ]
+		description: [ 'Start must not exceed end more than by one' ].
 
 	self
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
