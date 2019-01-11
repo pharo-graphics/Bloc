@@ -1228,7 +1228,9 @@ BlConcatenationRopeIteratorExamples >> small_skip_10_at_0 [
 	
 	self assert: anIterator currentIterator rope == anIterator rope right.
 	self assert: anIterator currentIterator position equals: 5.
-	self assert: anIterator currentIterator start equals: 0.
+	
+	"we skip by more than 5 therefore the algorithm creates a new sub-iterator"
+	self assert: anIterator currentIterator start equals: 5.
 	self assert: anIterator currentIterator end equals: 5.
 
 	^ anIterator
@@ -1352,7 +1354,9 @@ BlConcatenationRopeIteratorExamples >> small_skip_6_at_0 [
 	
 	self assert: anIterator currentIterator rope == anIterator rope right.
 	self assert: anIterator currentIterator position equals: 1.
-	self assert: anIterator currentIterator start equals: 0.
+	
+	"we skip by more than 5 therefore the algorithm creates a new sub-iterator"
+	self assert: anIterator currentIterator start equals: 1.
 	self assert: anIterator currentIterator end equals: 5.
 
 	^ anIterator
@@ -1370,7 +1374,9 @@ BlConcatenationRopeIteratorExamples >> small_skip_7_at_0 [
 	
 	self assert: anIterator currentIterator rope == anIterator rope right.
 	self assert: anIterator currentIterator position equals: 2.
-	self assert: anIterator currentIterator start equals: 0.
+	
+	"we skip by more than 5 therefore the algorithm creates a new sub-iterator"
+	self assert: anIterator currentIterator start equals: 2.
 	self assert: anIterator currentIterator end equals: 5.
 
 	^ anIterator
@@ -1388,7 +1394,9 @@ BlConcatenationRopeIteratorExamples >> small_skip_8_at_0 [
 	
 	self assert: anIterator currentIterator rope == anIterator rope right.
 	self assert: anIterator currentIterator position equals: 3.
-	self assert: anIterator currentIterator start equals: 0.
+	
+	"we skip by more than 5 therefore the algorithm creates a new sub-iterator"
+	self assert: anIterator currentIterator start equals: 3.
 	self assert: anIterator currentIterator end equals: 5.
 
 	^ anIterator
@@ -1406,7 +1414,9 @@ BlConcatenationRopeIteratorExamples >> small_skip_9_at_0 [
 	
 	self assert: anIterator currentIterator rope == anIterator rope right.
 	self assert: anIterator currentIterator position equals: 4.
-	self assert: anIterator currentIterator start equals: 0.
+	
+	"we skip by more than 5 therefore the algorithm creates a new sub-iterator"
+	self assert: anIterator currentIterator start equals: 4.
 	self assert: anIterator currentIterator end equals: 5.
 
 	^ anIterator

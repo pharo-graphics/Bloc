@@ -212,7 +212,16 @@ BlConcatenationRopeIterator >> skip: aNumber [
 	newPosition >= start
 		ifFalse: [ self errorOvershootsTheStart ].
 
-	aNumber timesRepeat: [ self next ]
+	aNumber abs <= 5
+		ifTrue: [
+			(aNumber >= 0)
+				ifTrue: [ aNumber timesRepeat: [ self next ] ]
+				ifFalse: [ aNumber negated timesRepeat: [ self previous ] ] ]
+		ifFalse: [
+			position := newPosition.
+			currentIterator := (aNumber >= 0)
+				ifTrue: [ self forwardIteratorAt: position ]
+				ifFalse: [ self backwardIteratorAt: position ] ]
 ]
 
 { #category : #'private - enumeration' }
