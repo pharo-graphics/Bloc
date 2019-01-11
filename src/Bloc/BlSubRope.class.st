@@ -143,6 +143,13 @@ BlSubRope >> isLeaf [
 	^ false
 ]
 
+{ #category : #'rope - testing' }
+BlSubRope >> isScoped [
+	<return: #Boolean>
+
+	^ true
+]
+
 { #category : #'rope - enumeration' }
 BlSubRope >> iterator: aStart to: anEnd [
 	^ BlSubRopeIterator rope: self from: aStart to: anEnd

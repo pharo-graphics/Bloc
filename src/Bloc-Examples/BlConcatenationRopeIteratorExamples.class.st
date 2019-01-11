@@ -37,7 +37,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_0 [
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 0.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 0.
 
 	^ aSubIterator
 ]
@@ -53,7 +53,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_1 [
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 1.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 1.
 
 	^ aSubIterator
 ]
@@ -85,7 +85,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_2 [
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 2.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 2.
 
 	^ aSubIterator
 ]
@@ -101,7 +101,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_3 [
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 3.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 3.
 
 	^ aSubIterator
 ]
@@ -117,7 +117,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_4 [
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 4.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 4.
 
 	^ aSubIterator
 ]
@@ -149,7 +149,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_6 [
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 1.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 1.
 
 	^ aSubIterator
 ]
@@ -165,7 +165,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_7 [
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 2.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 2.
 
 	^ aSubIterator
 ]
@@ -181,7 +181,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_8 [
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 3.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 3.
 
 	^ aSubIterator
 ]
@@ -197,7 +197,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_9 [
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 4.
 	self assert: aSubIterator start equals: 0.
-	self assert: aSubIterator end equals: 5.
+	self assert: aSubIterator end equals: 4.
 
 	^ aSubIterator
 ]
@@ -206,7 +206,7 @@ BlConcatenationRopeIteratorExamples >> small_backward_iterator_at_9 [
 BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_0 [
 	<gtExample>
 	| anIterator aSubIterator |
-	
+
 	anIterator := self small.	
 	aSubIterator := anIterator forwardIteratorAt: 0.
 
@@ -228,7 +228,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_1 [
 
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 1.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 1.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -244,7 +244,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_10 [
 
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 5.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 5.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -260,7 +260,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_2 [
 
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 2.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 2.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -276,7 +276,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_3 [
 
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 3.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 3.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -292,7 +292,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_4 [
 
 	self assert: aSubIterator rope == anIterator rope left.
 	self assert: aSubIterator position equals: 4.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 4.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -324,7 +324,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_6 [
 
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 1.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 1.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -340,7 +340,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_7 [
 
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 2.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 2.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -356,7 +356,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_8 [
 
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 3.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 3.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -372,7 +372,7 @@ BlConcatenationRopeIteratorExamples >> small_forward_iterator_at_9 [
 
 	self assert: aSubIterator rope == anIterator rope right.
 	self assert: aSubIterator position equals: 4.
-	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator start equals: 4.
 	self assert: aSubIterator end equals: 5.
 
 	^ aSubIterator
@@ -386,9 +386,8 @@ BlConcatenationRopeIteratorExamples >> small_nextSpan_at_0 [
 	anIterator := self small.
 	aSpan := anIterator nextSpan.
 	
-	self assert: aSpan collection equals: 'Hello'.
-	self assert: anIterator position equals: 5.
 	self assert: aSpan == anIterator rope left.
+	self assert: anIterator position equals: 5.
 
 	^ anIterator
 ]
@@ -996,7 +995,7 @@ BlConcatenationRopeIteratorExamples >> small_previous_at_1 [
 	self assert: anIterator currentIterator rope == anIterator rope left.
 	self assert: anIterator currentIterator position equals: 0.
 	self assert: anIterator currentIterator start equals: 0.
-	self assert: anIterator currentIterator end equals: 5.
+	self assert: anIterator currentIterator end equals: 0.
 
 	^ anIterator
 ]
@@ -1409,6 +1408,338 @@ BlConcatenationRopeIteratorExamples >> small_skip_9_at_0 [
 	self assert: anIterator currentIterator position equals: 4.
 	self assert: anIterator currentIterator start equals: 0.
 	self assert: anIterator currentIterator end equals: 5.
+
+	^ anIterator
+]
+
+{ #category : #'instance creation' }
+BlConcatenationRopeIteratorExamples >> small_tree [
+	<gtExample>
+	| aRope anIterator aCollectionRope |
+	
+	aCollectionRope := BlCollectionRope collection: 'EarthHelloWorld'.
+	
+	aRope := BlConcatenationRope
+		left: (BlSubRope rope: aCollectionRope offset: 0 length: 5)
+		right: (BlConcatenationRope
+			left: (BlAttributeRope attributes: { 0 } rope: (BlSubRope rope: aCollectionRope offset: 5 length: 5))
+			right: (BlSubRope rope: aCollectionRope offset: 10 length: 5)).
+	
+	
+	anIterator := aRope iterator: 0 to: 15.
+	
+	self assert: anIterator position equals: 0.
+	self assert: anIterator start equals: 0.
+	self assert: anIterator end equals: 15.
+	self assert: anIterator rope == aRope.
+	
+	self assert: anIterator hasNext.
+	self assert: anIterator hasPrevious not.
+	
+	self assert: anIterator currentIterator rope == aCollectionRope.
+	self assert: anIterator currentIterator position equals: 0.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_0 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 0.
+
+	self assert: aSubIterator rope == anIterator rope left rope.
+	self assert: aSubIterator position equals: 0.
+	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_1 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 1.
+
+	self assert: aSubIterator rope == anIterator rope left rope.
+	self assert: aSubIterator position equals: 1.
+	self assert: aSubIterator start equals: 1.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_10 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 10.
+
+	self assert: aSubIterator rope == anIterator rope right right rope.
+	self assert: aSubIterator position equals: 10.
+	self assert: aSubIterator start equals: 10.
+	self assert: aSubIterator end equals: 15.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_11 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 11.
+
+	self assert: aSubIterator rope == anIterator rope right right rope.
+	self assert: aSubIterator position equals: 11.
+	self assert: aSubIterator start equals: 11.
+	self assert: aSubIterator end equals: 15.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_12 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 12.
+
+	self assert: aSubIterator rope == anIterator rope right right rope.
+	self assert: aSubIterator position equals: 12.
+	self assert: aSubIterator start equals: 12.
+	self assert: aSubIterator end equals: 15.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_13 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 13.
+
+	self assert: aSubIterator rope == anIterator rope right right rope.
+	self assert: aSubIterator position equals: 13.
+	self assert: aSubIterator start equals: 13.
+	self assert: aSubIterator end equals: 15.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_14 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 14.
+
+	self assert: aSubIterator rope == anIterator rope right right rope.
+	self assert: aSubIterator position equals: 14.
+	self assert: aSubIterator start equals: 14.
+	self assert: aSubIterator end equals: 15.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_15 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 15.
+
+	self assert: aSubIterator rope == anIterator rope right right rope.
+	self assert: aSubIterator position equals: 15.
+	self assert: aSubIterator start equals: 15.
+	self assert: aSubIterator end equals: 15.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_2 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 2.
+
+	self assert: aSubIterator rope == anIterator rope left rope.
+	self assert: aSubIterator position equals: 2.
+	self assert: aSubIterator start equals: 2.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_3 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 3.
+
+	self assert: aSubIterator rope == anIterator rope left rope.
+	self assert: aSubIterator position equals: 3.
+	self assert: aSubIterator start equals: 3.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_4 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 4.
+
+	self assert: aSubIterator rope == anIterator rope left rope.
+	self assert: aSubIterator position equals: 4.
+	self assert: aSubIterator start equals: 4.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_5 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 5.
+
+	self assert: aSubIterator rope == anIterator rope right left.
+	self assert: aSubIterator position equals: 0.
+	self assert: aSubIterator start equals: 0.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_6 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 6.
+
+	self assert: aSubIterator rope == anIterator rope right left.
+	self assert: aSubIterator position equals: 1.
+	self assert: aSubIterator start equals: 1.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_7 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 7.
+
+	self assert: aSubIterator rope == anIterator rope right left.
+	self assert: aSubIterator position equals: 2.
+	self assert: aSubIterator start equals: 2.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_8 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 8.
+
+	self assert: aSubIterator rope == anIterator rope right left.
+	self assert: aSubIterator position equals: 3.
+	self assert: aSubIterator start equals: 3.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - utility' }
+BlConcatenationRopeIteratorExamples >> small_tree_forward_iterator_at_9 [
+	<gtExample>
+	| anIterator aSubIterator |
+
+	anIterator := self small_tree.	
+	aSubIterator := anIterator forwardIteratorAt: 9.
+
+	self assert: aSubIterator rope == anIterator rope right left.
+	self assert: aSubIterator position equals: 4.
+	self assert: aSubIterator start equals: 4.
+	self assert: aSubIterator end equals: 5.
+
+	^ aSubIterator
+]
+
+{ #category : #'examples - enumeration' }
+BlConcatenationRopeIteratorExamples >> small_tree_nextSpan_at_0 [
+	<gtExample>
+	| anIterator aSpan |
+	
+	anIterator := self small_tree.
+	
+	aSpan := anIterator nextSpan.
+	
+	self assert: aSpan isScoped.
+	self assert: aSpan == anIterator rope left.
+	self assert: anIterator position equals: 5.
+
+	^ anIterator
+]
+
+{ #category : #'examples - enumeration' }
+BlConcatenationRopeIteratorExamples >> small_tree_nextSpan_at_10 [
+	<gtExample>
+	| anIterator aSpan |
+	
+	anIterator := self small_tree_nextSpan_at_5.
+	
+	aSpan := anIterator nextSpan.
+	
+	self assert: aSpan == anIterator rope right right.
+	self assert: anIterator position equals: 15.
+
+	^ anIterator
+]
+
+{ #category : #'examples - enumeration' }
+BlConcatenationRopeIteratorExamples >> small_tree_nextSpan_at_5 [
+	<gtExample>
+	| anIterator aSpan |
+	
+	anIterator := self small_tree_nextSpan_at_0.
+	
+	aSpan := anIterator nextSpan.
+	
+	self assert: aSpan == anIterator rope right left.
+	self assert: anIterator position equals: 10.
 
 	^ anIterator
 ]

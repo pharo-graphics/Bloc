@@ -113,8 +113,8 @@ BlConcatenationRopeIterator >> moveForward: aNumber [
 		assert: [ position <= end ]
 		description: [ 'Position must not exceed bounds' ].
 
-	currentIterator hasNext
-		ifFalse: [ currentIterator := self forwardIteratorAt: position ]
+	(self hasNext and: [ currentIterator hasNext not ])
+		ifTrue: [ currentIterator := self forwardIteratorAt: position ]
 ]
 
 { #category : #'iterator - enumeration' }
@@ -212,30 +212,47 @@ BlConcatenationRopeIterator >> skip: aNumber [
 	newPosition >= start
 		ifFalse: [ self errorOvershootsTheStart ].
 
-	position := newPosition.
-
-	currentIterator := (aNumber >= 0)
-		ifTrue: [ self forwardIteratorAt: position ]
-		ifFalse: [ self backwardIteratorAt: position ]
+	aNumber timesRepeat: [ self next ]
 ]
 
 { #category : #'private - enumeration' }
 BlConcatenationRopeIterator >> subIteratorAt: aPosition isForward: isForward [
 	<return: #BlRopeIterator>
-	| aLeftSize isLeft |
+	| aCurrentRope aCurrentPosition aCurrentEnd |
 
-	aLeftSize := rope left size.
+	aCurrentRope := rope.
+	aCurrentPosition := aPosition.
+	aCurrentEnd := end.
 	
-	isLeft := isForward
-		ifTrue: [ aPosition < aLeftSize ]
-		ifFalse: [ aPosition <= aLeftSize ].
+	[ aCurrentRope isConcatenation ] whileTrue: [ 
+		| isLeft |
+		isLeft := isForward
+			ifTrue: [ aCurrentPosition < aCurrentRope left size ]
+			ifFalse: [ aCurrentPosition <= aCurrentRope left size ].
+		
+		aCurrentRope := isLeft
+			ifTrue: [
+				aCurrentEnd := aCurrentEnd min: aCurrentRope left size.
+				aCurrentRope left ]
+			ifFalse: [
+				aCurrentPosition := aCurrentPosition - aCurrentRope left size.
+				aCurrentEnd := aCurrentEnd - aCurrentRope left size.
+				aCurrentEnd := aCurrentEnd min: aCurrentRope right size.
+				aCurrentRope right ].
+		
+		aCurrentRope isScoped
+			ifTrue: [
+				aCurrentPosition := aCurrentPosition + aCurrentRope offset.
+				aCurrentEnd := (aCurrentEnd + aCurrentRope offset).
+				aCurrentRope := aCurrentRope rope ] ].
 
-	^ isLeft
-		ifTrue: [ (rope left iterator: start to: (end min: aLeftSize)) skip: aPosition - start ]
+	^ isForward
+		ifTrue: [
+			aCurrentRope
+				iterator: aCurrentPosition
+				to: aCurrentEnd"((aCurrentPosition + end - aPosition + 1) min: aCurrentRope size)" ]
 		ifFalse: [
-			| aStart anEnd |
-			aStart := (start - aLeftSize) max: 0.
-			anEnd := end - aLeftSize.
-			
-			(rope right iterator: aStart to: anEnd) skip: aPosition - aLeftSize - aStart ]
+			aCurrentRope
+				iterator: aCurrentPosition
+				to: ((aCurrentPosition - (aPosition - start + 1)) max: 0) ]
 ]

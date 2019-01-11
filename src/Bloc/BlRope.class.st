@@ -92,6 +92,12 @@ BlRope class >> subRope [
 ]
 
 { #category : #'rope - accessing' }
+BlRope >> allChildrenBreadthFirstDo: aBlock [ 
+	self children do: aBlock.
+	self children do: [ :eachRope | eachRope allChildrenBreadthFirstDo: aBlock ]
+]
+
+{ #category : #'rope - accessing' }
 BlRope >> append: aRope [
 	"Create and return a new rope by append a given rope to the of end of me"
 	<return: #BlRope>
@@ -277,6 +283,13 @@ BlRope >> isNotEmpty [
 	^ self isEmpty not
 ]
 
+{ #category : #'rope - testing' }
+BlRope >> isScoped [
+	<return: #Boolean>
+	
+	^ false
+]
+
 { #category : #'rope - enumeration' }
 BlRope >> iterator [
 	^ self iterator: 0 to: self size
@@ -318,4 +331,12 @@ BlRope >> size [
 	<return: #Number>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'rope - accessing' }
+BlRope >> withAllChildrenBreadthFirst [
+	| all |
+	all := OrderedCollection with: self.
+	self allChildrenBreadthFirstDo: [ :x | all add: x ].
+	^ all
 ]
