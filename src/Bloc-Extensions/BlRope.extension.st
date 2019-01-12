@@ -42,7 +42,8 @@ BlRope >> paintTreeWith: view [
 	view edges
 		shape: [ :each | BlLineElement new border: (BlBorder paint: (Color gray alpha: 0.5) width: 1 ) ];
 		connectToAll: #children.
-	view layout tree 
+	view layout custom: (GtGradNorthHierarchicalLayout new)
+"view layout tree 
 		nodeDistance: 20;
-		levelDistance: 40
+		levelDistance: 40"
 ]
