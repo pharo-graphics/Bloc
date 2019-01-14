@@ -74,6 +74,12 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [
+				spec postLoadDoIt: #'postLoadDisableTaskItDebugger:'.
 				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' ). ]. ].
 
+]
+
+{ #category : #'post load' }
+BaselineOfBloc >> postLoadDisableTaskItDebugger: spec [
+	TKTDebugger disable
 ]
