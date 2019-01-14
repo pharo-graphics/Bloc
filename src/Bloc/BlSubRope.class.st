@@ -13,6 +13,14 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlSubRope class >> combineScoped: aLeftRope and: aRightRope [
+	^ self
+		rope: aLeftRope rope
+		offset: aLeftRope offset
+		length: aLeftRope size + aRightRope size
+]
+
+{ #category : #'instance creation' }
 BlSubRope class >> rope: aRope offset: anOffset length: aLength [
 	^ self new
 		rope: aRope offset: anOffset length: aLength;
@@ -104,6 +112,13 @@ BlSubRope >> empty [
 	^ self rope empty
 ]
 
+{ #category : #accessing }
+BlSubRope >> end [
+	<return: #Number>
+
+	^ self start + self size
+]
+
 { #category : #'rope - accessing' }
 BlSubRope >> from: aStart to: anEnd [
 	<return: #BlRope>
@@ -189,4 +204,11 @@ BlSubRope >> size [
 	<return: #Number>
 
 	^ length
+]
+
+{ #category : #accessing }
+BlSubRope >> start [
+	<return: #Number>
+	
+	^ self offset
 ]

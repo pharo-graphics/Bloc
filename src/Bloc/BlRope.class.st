@@ -57,6 +57,10 @@ BlRope class >> concatenate: aLeftRope and: aRightRope [
 	"if both are attribute ropes we can extract common attributes and merge smartly"
 	(aLeftRope isAttributed and: [ aRightRope isAttributed and: [ aLeftRope attributes = aRightRope attributes ] ])
 		ifTrue: [ ^ self attributeRope combineAttributed: aLeftRope and: aRightRope ].
+		
+	"if both are scoped ropes and represent a sequence they can be merged in one scoped rope"
+	(aLeftRope isScoped and: [ aRightRope isScoped and: [ aLeftRope rope == aRightRope rope and: [ aLeftRope end = aRightRope start ] ] ])
+		ifTrue: [ ^ self subRope combineScoped: aLeftRope and: aRightRope ].
 
 	"balancing magic :) if the length of the left or right is twice as large as the other one"
 	((aLeftRope size + aRightRope size > (self combineLength))

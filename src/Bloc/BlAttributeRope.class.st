@@ -14,8 +14,18 @@ Class {
 
 { #category : #initialization }
 BlAttributeRope class >> attributes: anAttributeCollection rope: aRope [
+	| aMergedCollection aMergedRope |
+	
+	aMergedCollection := aRope isAttributed
+		ifTrue: [ self mergeAttributes: aRope attributes and: anAttributeCollection ]
+		ifFalse: [ anAttributeCollection ].
+		
+	aMergedRope := aRope isAttributed
+		ifTrue: [ aRope rope ]
+		ifFalse: [ aRope ].
+
 	^ self new
-		attributes: anAttributeCollection rope: aRope;
+		attributes: aMergedCollection rope: aMergedRope;
 		yourself
 ]
 
