@@ -7,11 +7,7 @@ The central concept is ${class:BlElement}$.
 
 !!Organization
 
-The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray.
-
-${example:BaselineOfBloc class>>#itself|previewShow=#gtPackagesMapFor:|noCode=|previewHeight=300}$
-
-
+The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray: ${class:BaselineOfBloc|show=#gtPackagesMapFor:|expanded=true}$
 
 
 "
@@ -20,12 +16,6 @@ Class {
 	#superclass : #BaselineOf,
 	#category : #BaselineOfBloc
 }
-
-{ #category : #accessing }
-BaselineOfBloc class >> itself [
-	<gtExample>
-	^ self
-]
 
 { #category : #baseline }
 BaselineOfBloc >> baseline: spec [
