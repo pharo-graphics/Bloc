@@ -26,6 +26,13 @@ BlMultipleSelection >> add: aSelection [
 	selections add: aSelection
 ]
 
+{ #category : #accessing }
+BlMultipleSelection >> children [
+	<return: #Collection of: #BlSelection>
+	
+	^ selections
+]
+
 { #category : #'api - testing' }
 BlMultipleSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
@@ -83,6 +90,8 @@ BlMultipleSelection >> reverseDo: aBlock [
 
 { #category : #accessing }
 BlMultipleSelection >> selections [
+	<return: #Collection of: #BlSelection>
+
 	^ selections
 ]
 

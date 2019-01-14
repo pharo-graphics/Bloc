@@ -66,6 +66,13 @@ BlMonotoneSelection >> assertInvariant [
 		description: [ 'Class invariant must always hold' ].
 ]
 
+{ #category : #accessing }
+BlMonotoneSelection >> children [
+	<return: #Collection of: #BlSelection>
+	
+	^ #()
+]
+
 { #category : #arithmetic }
 BlMonotoneSelection >> complement: aMonotoneTextSelection [
 	"Answer the complement of me and a given selection.

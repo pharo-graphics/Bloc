@@ -76,6 +76,16 @@ BlCollectionRopeIterator >> peek [
 	^ rope at: position + 1
 ]
 
+{ #category : #'as yet unclassified' }
+BlCollectionRopeIterator >> peer [
+	<return: #Object>
+
+	self hasPrevious
+		ifFalse: [ self errorReachedTheStart ].
+
+	^ rope at: position
+]
+
 { #category : #'iterator - accessing' }
 BlCollectionRopeIterator >> position [
 	<return: #Number>

@@ -25,6 +25,13 @@ BlCompositeSelection >> add: aMonotoneTextSelection [
 	selections insert: aMonotoneTextSelection
 ]
 
+{ #category : #accessing }
+BlCompositeSelection >> children [
+	<return: #Collection of: #BlSelection>
+	
+	^ #()
+]
+
 { #category : #'api - testing' }
 BlCompositeSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"

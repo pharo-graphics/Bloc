@@ -168,6 +168,19 @@ BlConcatenationRopeIterator >> peek [
 	^ currentIterator peek
 ]
 
+{ #category : #'iterator - enumeration' }
+BlConcatenationRopeIterator >> peer [
+	<return: #Object>
+	
+	self hasPrevious
+		ifFalse: [ self errorReachedTheStart ].
+	
+	currentIterator hasPrevious
+		ifFalse: [ currentIterator := self backwardIteratorAt: position ].
+
+	^ currentIterator peer
+]
+
 { #category : #'iterator - accessing' }
 BlConcatenationRopeIterator >> position [
 	<return: #Number>

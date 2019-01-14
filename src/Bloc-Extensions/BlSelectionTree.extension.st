@@ -16,3 +16,13 @@ BlSelectionTree >> gtInspectorSelectionListIn: aComposite [
 		title: 'Selections (List)';
 		display: [ Array streamContents: [ :aStream | self do: [ :aSelection | aStream nextPut: aSelection ] ] ]
 ]
+
+{ #category : #'*Bloc-Extensions' }
+BlSelectionTree >> gtTreeFor: aView [
+	<gtView>
+	
+	self hasRoot
+		ifFalse: [ ^ aView empty ].
+	
+	^ self root gtTreeFor: aView
+]

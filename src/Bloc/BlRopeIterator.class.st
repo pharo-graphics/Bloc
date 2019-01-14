@@ -258,7 +258,21 @@ BlRopeIterator >> nextWord [
 { #category : #'iterator - enumeration' }
 BlRopeIterator >> peek [
 	"Return an element at current #position without changing it.
-	(#peek item is the same that would be returned by #next)"
+	(#peek item is the same that would be returned by #next).
+	I am similar to #peer but return an item to the right from the cursor"
+	<return: #Object>
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopeIterator >> peer [
+	"Return an element before the current #position without moving the cursor.
+	(#peer item is the same that would be returned by #previous).
+	I am similar to #peek but return an item to the left from the cursor.
+	
+	Q: Why peer?
+	A: Due to this example: `a child peering from behind a tree`. By this logic when using #peer we look from behind (kind of before) the cursor"
 	<return: #Object>
 
 	^ self subclassResponsibility
@@ -288,6 +302,39 @@ BlRopeIterator >> previous [
 	<return: #Object>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopeIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
+	"Evaluate aBlock with every item in the backward direction until aBlock returns a different value compared to the value
+	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
+
+	Once completed evaluate anIndicesBlock with the start and end position of the iterator thus defining a homogenous segment
+	for every item of which aBlock returns the same value. The third argument of the anIndicesBlock is (optional) initial value which was used for comparison.
+	Please note, that the result of evaluation of aBlock should not necessarily be a boolean, it can be any object.
+
+	I return the result of evaluation of anIndicesBlock"
+	| fromIndex toIndex initialValue |
+	<return: #Object>
+
+	self hasPrevious
+		ifFalse: [ self errorReachedTheStart ].
+	
+	"store position right before iteration"
+	toIndex := self position.
+	
+	"we want to have homogenous segments, so check what is the initial value"
+	initialValue := aBlock value: self previous.
+
+	"we skip all items that do not belong to segment"
+	[ self hasPrevious and: [ (aBlock value: self peer) = initialValue ] ] whileTrue: [ self previous ].
+	
+	fromIndex := self position.
+
+	^ anIndicesBlock
+		cull: fromIndex
+		cull: toIndex
+		cull: initialValue
 ]
 
 { #category : #'private - accessing' }

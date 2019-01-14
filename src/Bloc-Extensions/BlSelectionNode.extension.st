@@ -10,6 +10,15 @@ BlSelectionNode >> gtInspectorSelectionGraphIn: aComposite [
 ]
 
 { #category : #'*Bloc-Extensions' }
+BlSelectionNode >> gtTreeFor: aView [
+	<gtView>
+	
+	^ aView mondrian
+		title: 'Tree';
+		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
+]
+
+{ #category : #'*Bloc-Extensions' }
 BlSelectionNode >> paintTreeWith: view [
 	view nodes
 		shape: [ :each |

@@ -40,6 +40,11 @@ BlSubRopeIterator >> peek [
 	^ subIterator peek
 ]
 
+{ #category : #'iterator - enumeration' }
+BlSubRopeIterator >> peer [
+	^ subIterator peer
+]
+
 { #category : #'iterator - accessing' }
 BlSubRopeIterator >> position [
 	^ subIterator position - rope offset
