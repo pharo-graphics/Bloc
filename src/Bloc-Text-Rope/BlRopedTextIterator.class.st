@@ -101,6 +101,14 @@ BlRopedTextIterator >> nextSegment: aBlock [
 ]
 
 { #category : #'iterator - enumeration' }
+BlRopedTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
+	"@see BlTextIterator>>#nextSegment:indicesDo:"
+	<return: #Object>
+	
+	^ iterator nextSegment: aBlock indicesDo: anIndicesBlock
+]
+
+{ #category : #'iterator - enumeration' }
 BlRopedTextIterator >> nextSpan [
 	"Return a next homogeneous text span"
 	<return: #BlSpan>
@@ -143,6 +151,14 @@ BlRopedTextIterator >> peek [
 	^ iterator peek
 ]
 
+{ #category : #'iterator - enumeration' }
+BlRopedTextIterator >> peer [
+	"Return an item (character) before current position"
+	<return: #Character or: #Object>
+
+	^ iterator peer
+]
+
 { #category : #'iterator - accessing' }
 BlRopedTextIterator >> position [
 	"Return current iterator position within a text"
@@ -157,6 +173,14 @@ BlRopedTextIterator >> previous [
 	<return: #Character or: #Object>
 
 	^ iterator previous
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopedTextIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
+	"@see BlTextIterator>>#previousSegment:indicesDo:"
+	<return: #Object>
+	
+	^ iterator previousSegment: aBlock indicesDo: anIndicesBlock
 ]
 
 { #category : #accessing }

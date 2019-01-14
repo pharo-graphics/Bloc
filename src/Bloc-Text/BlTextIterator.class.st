@@ -204,6 +204,26 @@ BlTextIterator >> nextSegment: aBlock [
 ]
 
 { #category : #'iterator - enumeration' }
+BlTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
+	"Evaluate aBlock with every item in the forward direction until aBlock returns a different value compared to the value
+	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
+
+	Once completed evaluate anIndicesBlock with the start and end position of the iterator thus defining a homogenous segment
+	for every item of which aBlock returns the same value. The third argument of the anIndicesBlock is (optional) initial value which was used for comparison.
+	
+	 H E L L O
+	^ ^ ^ ^ ^ ^
+	0 1 2 3 4 5
+	
+	Please note, that the result of evaluation of aBlock should not necessarily be a boolean, it can be any object.
+
+	I return the result of evaluation of anIndicesBlock"
+	<return: #Object>
+	
+	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextSpan [
 	"Return a next homogeneous text span"
 	<return: #BlSpan>
@@ -323,6 +343,14 @@ BlTextIterator >> peek [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> peer [
+	"Return an item (character) before current position"
+	<return: #Character or: #Object>
+
+	^ self subclassResponsibility
+]
+
 { #category : #'iterator - accessing' }
 BlTextIterator >> position [
 	"Return current iterator position within a text"
@@ -336,6 +364,26 @@ BlTextIterator >> previous [
 	"Return an item (character) at current position and move one to the left"
 	<return: #Character or: #Object>
 
+	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
+	"Evaluate aBlock with every item in the backward direction until aBlock returns a different value compared to the value
+	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
+
+	Once completed evaluate anIndicesBlock with the start and end position of the iterator thus defining a homogenous segment
+	for every item of which aBlock returns the same value. The third argument of the anIndicesBlock is (optional) initial value which was used for comparison.
+	
+	 H E L L O
+	^ ^ ^ ^ ^ ^
+	0 1 2 3 4 5
+	
+	Please note, that the result of evaluation of aBlock should not necessarily be a boolean, it can be any object.
+
+	I return the result of evaluation of anIndicesBlock"
+	<return: #Object>
+	
 	^ self subclassResponsibility
 ]
 

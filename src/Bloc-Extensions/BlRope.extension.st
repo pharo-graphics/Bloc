@@ -20,6 +20,15 @@ BlRope >> gtInspectorTreeIn: composite [
 ]
 
 { #category : #'*Bloc-Extensions' }
+BlRope >> gtTreeFor: aView [
+	<gtView>
+	
+	^ aView mondrian
+		title: 'Tree';
+		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
+]
+
+{ #category : #'*Bloc-Extensions' }
 BlRope >> paintTreeWith: view [
 	view nodes
 		shape: [ :each | 

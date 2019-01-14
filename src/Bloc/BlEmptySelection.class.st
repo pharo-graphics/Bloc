@@ -7,6 +7,13 @@ Class {
 	#category : 'Bloc-Utilities - Selection'
 }
 
+{ #category : #accessing }
+BlEmptySelection >> children [
+	<return: #Collection of: #BlSelection>
+	
+	^ #()
+]
+
 { #category : #'api - testing' }
 BlEmptySelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"

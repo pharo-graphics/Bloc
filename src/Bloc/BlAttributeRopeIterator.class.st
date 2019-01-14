@@ -52,6 +52,11 @@ BlAttributeRopeIterator >> peek [
 	^ subIterator peek
 ]
 
+{ #category : #'iterator - enumeration' }
+BlAttributeRopeIterator >> peer [
+	^ subIterator peer
+]
+
 { #category : #'iterator - accessing' }
 BlAttributeRopeIterator >> position [
 	^ subIterator position
