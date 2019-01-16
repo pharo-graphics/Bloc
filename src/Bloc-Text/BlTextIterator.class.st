@@ -90,7 +90,7 @@ BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 	self hasNext
 		ifFalse: [ self error: 'reached end of rope' ].
 	
-	startPosition := self position.
+	startPosition := self position + 1.
 	endPosition := startPosition.
 	theEndedAttributes := OrderedCollection new.
 
@@ -107,22 +107,25 @@ BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 			| nextSpan |
 			
 			nextSpan := self nextSpan.
-			"we have to go one item back so that #doesAttributeEnd: checks at the last character of the next span"
-			self previous.
 			theAttributes := nextSpan attributes select: aBlock.
 			theEndedAttributes := theAttributes
-				select: [ :eachAttribute | self doesAttributeEnd: eachAttribute ].
-			self next ].
-		endPosition := self position - 1.
+				select: [ :eachAttribute | self doesAttributeEnd: eachAttribute ] ].
+		endPosition := self position.
 		"there are no ended attributes, continue"
 		theEndedAttributes isEmpty
 	] ] whileTrue.
+
+	self
+		assert: [ startPosition <= endPosition ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ startPosition > 0 or: [ startPosition = 0 and: [ endPosition = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
 	
 	^ anIndicesBlock
 		value: startPosition
-		value: (theEndedAttributes isNotEmpty
-			ifTrue: [ endPosition ]
-			ifFalse: [ self position - 1 ])
+		value: endPosition
 		value: theEndedAttributes
 ]
 
@@ -178,7 +181,15 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 			
 			actualEnd := anEnd.
 			actualDelimiterIndex := aDelimiterEnd ] ].
-
+	
+	self
+		assert: [ actualStart <= actualEnd ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ actualStart > 0 or: [ actualStart = 0 and: [ actualEnd = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+	
 	anIndicesBlock
 		value: actualStart
 		value: actualEnd
@@ -189,6 +200,26 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 BlTextIterator >> nextSegment: aBlock [
 	<return: #BlText>
 
+	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
+	"Evaluate aBlock with every item in the forward direction until aBlock returns a different value compared to the value
+	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
+
+	Once completed evaluate anIndicesBlock with the start and end position of the iterator thus defining a homogenous segment
+	for every item of which aBlock returns the same value. The third argument of the anIndicesBlock is (optional) initial value which was used for comparison.
+	
+	 H E L L O
+	^ ^ ^ ^ ^ ^
+	0 1 2 3 4 5
+	
+	Please note, that the result of evaluation of aBlock should not necessarily be a boolean, it can be any object.
+
+	I return the result of evaluation of anIndicesBlock"
+	<return: #Object>
+	
 	^ self subclassResponsibility
 ]
 
@@ -221,7 +252,7 @@ BlTextIterator >> nextSpan: aBlock indicesDo: anIndicesBlock [
 	theMatchedAttributes := nil.
 	theMatchedAttributesSet := nil.
 
-	startPosition := self position.
+	startPosition := self position + 1.
 	endPosition := startPosition.
 
 	[ self hasNext and: [
@@ -238,9 +269,17 @@ BlTextIterator >> nextSpan: aBlock indicesDo: anIndicesBlock [
 
 	endPosition := self position.
 	
+	self
+		assert: [ startPosition <= endPosition ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ startPosition > 0 or: [ startPosition = 0 and: [ endPosition = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+	
 	^ anIndicesBlock
 		value: startPosition
-		value:  endPosition - 1
+		value: endPosition
 		value: theMatchedAttributes
 ]
 
@@ -252,7 +291,7 @@ BlTextIterator >> nextSpanAny: aBlock indicesDo: anIndicesBlock [
 		ifFalse: [ self error: 'reached end of rope' ].
 
 	initialValue := nil.
-	startPosition := self position.
+	startPosition := self position + 1.
 	endPosition := startPosition.
 
 	[ self hasNext and: [
@@ -264,9 +303,17 @@ BlTextIterator >> nextSpanAny: aBlock indicesDo: anIndicesBlock [
 
 	endPosition := self position.
 	
+	self
+		assert: [ startPosition <= endPosition ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ startPosition > 0 or: [ startPosition = 0 and: [ endPosition = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+	
 	^ anIndicesBlock
 		value: startPosition
-		value:  endPosition - 1
+		value: endPosition
 		value: initialValue
 ]
 
@@ -296,6 +343,14 @@ BlTextIterator >> peek [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> peer [
+	"Return an item (character) before current position"
+	<return: #Character or: #Object>
+
+	^ self subclassResponsibility
+]
+
 { #category : #'iterator - accessing' }
 BlTextIterator >> position [
 	"Return current iterator position within a text"
@@ -309,6 +364,26 @@ BlTextIterator >> previous [
 	"Return an item (character) at current position and move one to the left"
 	<return: #Character or: #Object>
 
+	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
+	"Evaluate aBlock with every item in the backward direction until aBlock returns a different value compared to the value
+	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
+
+	Once completed evaluate anIndicesBlock with the start and end position of the iterator thus defining a homogenous segment
+	for every item of which aBlock returns the same value. The third argument of the anIndicesBlock is (optional) initial value which was used for comparison.
+	
+	 H E L L O
+	^ ^ ^ ^ ^ ^
+	0 1 2 3 4 5
+	
+	Please note, that the result of evaluation of aBlock should not necessarily be a boolean, it can be any object.
+
+	I return the result of evaluation of anIndicesBlock"
+	<return: #Object>
+	
 	^ self subclassResponsibility
 ]
 

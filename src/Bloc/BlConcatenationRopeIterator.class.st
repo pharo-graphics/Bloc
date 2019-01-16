@@ -11,175 +11,198 @@ Class {
 	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : #asserting }
+{ #category : #'private - asserting' }
 BlConcatenationRopeIterator >> assertInvariant [
 
-	self
-		assert: [ (start isZero and: [ end isZero and: [ position isZero ] ])
-			or: [ start > 0 and: [ end > 0 and: [ start <= end and: [ position > 0 ] ] ] ] ]
-		description: [ 'Start, end and position may only be zero at the same time,
-			otherwise they all must be positive' ]
+	"I am a position invariant; I make sure that iterator operations do not go out of bounds"
+
+	(position >= start)
+		ifFalse: [ self error: 'Position must always be greater or equal than start' ].
+
+	(position <= end)
+		ifFalse: [ self error: 'Position must always be less or equal than end' ]
 ]
 
-{ #category : #'iterator - accessing' }
+{ #category : #'iterator - attributes' }
 BlConcatenationRopeIterator >> attributes [
+	<return: #Collection of: #Objects>
+	
 	^ currentIterator attributes
 ]
 
-{ #category : #private }
+{ #category : #'private - enumeration' }
 BlConcatenationRopeIterator >> backwardIteratorAt: aPosition [
-	| aCurrentRope aCurrentPosition |
+	<return: #BlRopeIterator>
 
-	aCurrentRope := rope.
-	aCurrentPosition := aPosition.
+	^ self
+		subIteratorAt: aPosition
+		isForward: false
+]
+
+{ #category : #'private - enumeration' }
+BlConcatenationRopeIterator >> currentIterator [
+	<return: #BlRopeIterator>
 	
-	[ aCurrentRope isConcatenation ] whileTrue: [ 
-		aCurrentRope := (aCurrentPosition <= aCurrentRope left size)
-			ifTrue: [ aCurrentRope left ]
-			ifFalse: [
-				aCurrentPosition := aCurrentPosition - aCurrentRope left size.
-				aCurrentRope right ] ].
-
-	^ aCurrentRope
-		iterator: aCurrentPosition
-		to: ((aCurrentPosition - (aPosition - start + 1)) max: 1)
-]
-
-{ #category : #'iterator - enumeration' }
-BlConcatenationRopeIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	If some element evaluates aBlock to true, then cull this element into 
-	foundBlock and answer the result of this evaluation. 
-	If none evaluate to true, then evaluate exceptionBlock."
-	<return: #BlTextAttribute or: #Object>
-
 	^ currentIterator
-		detectAttribute: aBlock
-		ifFound: aFoundBlock
-		ifNone: anExceptionBlock
 ]
 
-{ #category : #private }
+{ #category : #'private - enumeration' }
 BlConcatenationRopeIterator >> forwardIteratorAt: aPosition [
-	| aCurrentRope aCurrentPosition |
+	<return: #BlRopeIterator>
 
-	aCurrentRope := rope.
-	aCurrentPosition := aPosition.
-
-	[ aCurrentRope isConcatenation ] whileTrue: [ 
-		aCurrentRope := (aCurrentPosition <= aCurrentRope left size)
-			ifTrue: [ aCurrentRope left ]
-			ifFalse: [
-				aCurrentPosition := aCurrentPosition - aCurrentRope left size.
-				aCurrentRope right ] ].
-
-	^ aCurrentRope
-		iterator: aCurrentPosition
-		to: ((aCurrentPosition + end - aPosition + 1) min: aCurrentRope size)
+	^ self
+		subIteratorAt: aPosition
+		isForward: true
 ]
 
 { #category : #'iterator - testing' }
 BlConcatenationRopeIterator >> hasNext [
-	"Return true if iterator is be able to return #next item in the rope, meaning that is
-	didn't reached the end, false otherwise"
 	<return: #Boolean>
-
 	self assertInvariant.
 
-	^ rope isNotEmpty
-		and: [ (position <= rope size)
-			and: [ position <= end
-				and: [ position > 0 ] ] ]
+	^ position < end
 ]
 
 { #category : #'iterator - testing' }
 BlConcatenationRopeIterator >> hasPrevious [
-	^ (position >= 1) and: [ position >= start ]
+	<return: #Boolean>
+	self assertInvariant.
+
+	^ position > start
 ]
 
-{ #category : #private }
+{ #category : #'private - enumeration' }
 BlConcatenationRopeIterator >> moveBackward [
-
-	position := (position - 1) min: end.
-	
-	currentIterator hasPrevious
-		ifTrue: [ ^ self ].
-
-	self hasPrevious ifFalse: [
-		currentIterator := self forwardIteratorAt: position + 1.
-		^ self ].
-	
-	currentIterator := self backwardIteratorAt: position
+	self moveBackward: 1
 ]
 
-{ #category : #private }
-BlConcatenationRopeIterator >> moveForward [
+{ #category : #'private - enumeration' }
+BlConcatenationRopeIterator >> moveBackward: aNumber [
+	"!!! I do not alter the position of the sub-iterator, it must be done right before calling me"
 
+	self
+		assert: [ aNumber >= 0 ]
+		description: [ 'The amount of steps must not be negative' ].
+
+	position := position - aNumber.
+
+	self
+		assert: [ position >= start ]
+		description: [ 'Position must not exceed bounds' ].
+
+	currentIterator hasPrevious
+		ifFalse: [ currentIterator := self backwardIteratorAt: position ]
+]
+
+{ #category : #'private - enumeration' }
+BlConcatenationRopeIterator >> moveForward [
 	self moveForward: 1
 ]
 
-{ #category : #private }
+{ #category : #'private - enumeration' }
 BlConcatenationRopeIterator >> moveForward: aNumber [
-
-	position := ((position max: 1) + aNumber) min: end + 1.
+	"!!! I do not alter the position of the sub-iterator, it must be done right before calling me"
 
 	self
-		assert: [ position <= (end + 1) ]
+		assert: [ aNumber >= 0 ]
+		description: [ 'The amount of steps must not be negative' ].
+
+	position := position + aNumber.
+
+	self
+		assert: [ position <= end ]
 		description: [ 'Position must not exceed bounds' ].
 
-	currentIterator hasNext
-		ifTrue: [ ^ self ].
-	
-	self hasNext ifFalse: [
-		currentIterator := self backwardIteratorAt: position - 1.
-		^ self ].
-	
-	currentIterator := self forwardIteratorAt: position
+	(self hasNext and: [ currentIterator hasNext not ])
+		ifTrue: [ currentIterator := self forwardIteratorAt: position ]
 ]
 
 { #category : #'iterator - enumeration' }
 BlConcatenationRopeIterator >> next [
-	| next |
-	next := currentIterator next.
+	<return: #Object>
+	| anItem |
+	
+	self hasNext
+		ifFalse: [ self errorReachedTheEnd ].
+
+	currentIterator hasNext
+		ifFalse: [ currentIterator := self forwardIteratorAt: position ].
+
+	anItem := currentIterator next.
 	self moveForward.
-	^ next
+
+	^ anItem
 ]
 
 { #category : #'iterator - enumeration' }
 BlConcatenationRopeIterator >> nextSpan [
+	<return: #BlRope>
 	| theAttributes aStart anEnd |
+	
 	self hasNext
-		ifFalse: [ self error: 'reached end of rope' ].
+		ifFalse: [ self errorReachedTheEnd ].
 
-	aStart := position max: 1.
+	aStart := self position.
 	theAttributes := self attributes.
 
 	[ self hasNext and: [ self attributes = theAttributes ] ] whileTrue: [ 
 		| nextRun |
 		nextRun := currentIterator nextSpan.
 		self moveForward: nextRun size ].
-	
-	anEnd := ((position - 1) max: 1) min: end.
+
+	anEnd := self position.
 	
 	^ rope from: aStart to: anEnd
 ]
 
 { #category : #'iterator - enumeration' }
 BlConcatenationRopeIterator >> peek [
+	<return: #Object>
+	
+	self hasNext
+		ifFalse: [ self errorReachedTheEnd ].
+	
+	currentIterator hasNext
+		ifFalse: [ currentIterator := self forwardIteratorAt: position ].
+
 	^ currentIterator peek
+]
+
+{ #category : #'iterator - enumeration' }
+BlConcatenationRopeIterator >> peer [
+	<return: #Object>
+	
+	self hasPrevious
+		ifFalse: [ self errorReachedTheStart ].
+	
+	currentIterator hasPrevious
+		ifFalse: [ currentIterator := self backwardIteratorAt: position ].
+
+	^ currentIterator peer
 ]
 
 { #category : #'iterator - accessing' }
 BlConcatenationRopeIterator >> position [
+	<return: #Number>
+
 	^ position
 ]
 
 { #category : #'iterator - enumeration' }
 BlConcatenationRopeIterator >> previous [
-	| previous |
-	previous := currentIterator previous.
+	<return: #Object>
+	| anItem |
+	
+	self hasPrevious
+		ifFalse: [ self errorReachedTheStart ].
+
+	currentIterator hasPrevious
+		ifFalse: [ currentIterator := self backwardIteratorAt: position ].
+
+	anItem := currentIterator previous.
 	self moveBackward.
-	^ previous
+
+	^ anItem
 ]
 
 { #category : #'instance creation' }
@@ -191,16 +214,67 @@ BlConcatenationRopeIterator >> rope: aRope from: aStart to: anEnd [
 ]
 
 { #category : #'iterator - enumeration' }
-BlConcatenationRopeIterator >> selectAttributes: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument. 
-	Collect into a new collection like the receiver, only those elements for 
-	which aBlock evaluates to true. Answer the new collection."
-	<return: #SequenceableCollection of: #BlTextAttribute>
+BlConcatenationRopeIterator >> skip: aNumber [
+	| newPosition |
+	
+	newPosition := position + aNumber.
+	
+	newPosition <= end
+		ifFalse: [ self errorOvershootsTheEnd ].
+		
+	newPosition >= start
+		ifFalse: [ self errorOvershootsTheStart ].
 
-	^ currentIterator selectAttributes: aBlock
+	aNumber abs <= 5
+		ifTrue: [
+			(aNumber >= 0)
+				ifTrue: [ aNumber timesRepeat: [ self next ] ]
+				ifFalse: [ aNumber negated timesRepeat: [ self previous ] ] ]
+		ifFalse: [
+			position := newPosition.
+			currentIterator := (aNumber >= 0)
+				ifTrue: [ self forwardIteratorAt: position ]
+				ifFalse: [ self backwardIteratorAt: position ] ]
 ]
 
-{ #category : #accessing }
-BlConcatenationRopeIterator >> skip: arg1 [ 
-	^ self shouldBeImplemented
+{ #category : #'private - enumeration' }
+BlConcatenationRopeIterator >> subIteratorAt: aPosition isForward: isForward [
+	<return: #BlRopeIterator>
+	| aCurrentRope aCurrentPosition aCurrentEnd |
+
+	aCurrentRope := rope.
+	aCurrentPosition := aPosition.
+	aCurrentEnd := end.
+	
+	[ aCurrentRope isConcatenation ] whileTrue: [ 
+		| isLeft |
+		isLeft := isForward
+			ifTrue: [ aCurrentPosition < aCurrentRope left size ]
+			ifFalse: [ aCurrentPosition <= aCurrentRope left size ].
+		
+		aCurrentRope := isLeft
+			ifTrue: [
+				aCurrentEnd := aCurrentEnd min: aCurrentRope left size.
+				aCurrentRope left ]
+			ifFalse: [
+				aCurrentPosition := aCurrentPosition - aCurrentRope left size.
+				aCurrentEnd := aCurrentEnd - aCurrentRope left size.
+				aCurrentEnd := aCurrentEnd min: aCurrentRope right size.
+				aCurrentRope right ].
+		
+		aCurrentRope isScoped
+			ifTrue: [
+				aCurrentPosition := aCurrentPosition + aCurrentRope offset.
+				aCurrentEnd := (aCurrentEnd + aCurrentRope offset).
+				aCurrentRope := aCurrentRope rope ] ].
+
+	^ isForward
+		ifTrue: [
+			aCurrentRope
+				iterator: aCurrentPosition
+				to: aCurrentEnd"((aCurrentPosition + end - aPosition + 1) min: aCurrentRope size)" ]
+		ifFalse: [
+			aCurrentRope
+				iterator: aCurrentPosition
+				to: ((aCurrentPosition - (aPosition - start + 1)) max: 0) ]
 ]

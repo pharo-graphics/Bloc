@@ -21,10 +21,9 @@ Class {
 	#traits : 'TBlDebug + TBlTextStyleable',
 	#classTraits : 'TBlDebug classTrait + TBlTextStyleable classTrait',
 	#instVars : [
-		'announcer',
-		'locked'
+		'announcer'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #accessing }
@@ -184,6 +183,14 @@ BlText >> from: aStart to: anEnd [
 	Note: All modifications that are happening to the subtext automatically
 	applied on this original text"
 	<return: #BlSubText>
+	
+	self
+		assert: [ aStart <= anEnd ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ aStart > 0 or: [ aStart = 0 and: [ anEnd = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
 
 	^ BlSubText text: self from: aStart to: anEnd
 ]
@@ -206,8 +213,6 @@ BlText >> generation [
 { #category : #initialization }
 BlText >> initialize [
 	super initialize.
-	
-	locked := false
 ]
 
 { #category : #'text - modifications' }
@@ -227,14 +232,6 @@ BlText >> isEmpty [
 	<return: #Boolean>
 
 	^ self subclassResponsibility
-]
-
-{ #category : #'text - lock' }
-BlText >> isLocked [
-	"Return true if text is locked, false otherwise"
-	<return: #Boolean>
-
-	^ locked
 ]
 
 { #category : #'text - testing' }
@@ -263,23 +260,6 @@ BlText >> last [
 	<return: #Character>
 	
 	^ self at: self size
-]
-
-{ #category : #'text - lock' }
-BlText >> lock [
-	"Lock text. Any modification results in undefined behaviour"
-
-	locked := true
-]
-
-{ #category : #'text - lock' }
-BlText >> lockDuring: aBlock [
-	"Prevent any text modifications while evaluating a given block"
-	| wasLocked |
-
-	wasLocked := self isLocked.
-	self lock.
-	aBlock ensure: [ wasLocked ifFalse: [ self unlock ] ]
 ]
 
 { #category : #'text - copying' }
@@ -371,13 +351,6 @@ BlText >> textOffset [
 { #category : #'text - modifications' }
 BlText >> trimmer [
 	^ BlTextTrimmer new text: self.
-]
-
-{ #category : #'text - lock' }
-BlText >> unlock [
-	"Unlock text. Now I can be modified"
-
-	locked := false
 ]
 
 { #category : #'text - attributes' }

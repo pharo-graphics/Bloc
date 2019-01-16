@@ -1,14 +1,11 @@
-"
-I contain examples of an attribute rope
-"
 Class {
-	#name : #BlAttributeRopeExamples,
+	#name : #BlSubRopeExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - attributes' }
-BlAttributeRopeExamples >> attributes_empty_0_to_0 [
+BlSubRopeExamples >> attributes_empty_0_to_0 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
@@ -16,21 +13,21 @@ BlAttributeRopeExamples >> attributes_empty_0_to_0 [
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 0.
 
 	self assert: anAttributedRope isNotEmpty.
-	self assert: anAttributedRope attributes equals: { 0 . 1 }.
-	self assert: anAttributedRope rope == aRope rope.
+	self assert: anAttributedRope attributes equals: { 1 }.
+	self assert: anAttributedRope rope == aRope.
 
 	^ anAttributedRope
 ]
 
 { #category : #'examples - attributes' }
-BlAttributeRopeExamples >> attributes_small_0_to_0 [
+BlSubRopeExamples >> attributes_small_0_to_0 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 0.
 
-	self assert: anAttributedRope left attributes equals: { 0 . 1 }.
+	self assert: anAttributedRope left attributes equals: { 1 }.
 	self assert: anAttributedRope left rope collection equals: ''.
 
 	self assert: anAttributedRope right == aRope.
@@ -39,192 +36,132 @@ BlAttributeRopeExamples >> attributes_small_0_to_0 [
 ]
 
 { #category : #'examples - attributes' }
-BlAttributeRopeExamples >> attributes_small_0_to_1 [
+BlSubRopeExamples >> attributes_small_0_to_1 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 1.
 
-	self assert: anAttributedRope left attributes equals: { 0 . 1 }.
-	self assert: anAttributedRope left rope collection equals: 'H'.
+	self assert: anAttributedRope left attributes equals: { 1 }.
+	
+	self assert: anAttributedRope left attributes equals: { 1 }.
+	self assert: anAttributedRope left rope size equals: 1.
+	self assert: anAttributedRope left rope offset equals: 5.
+	self assert: anAttributedRope left rope rope == aRope rope.
 
-	self assert: anAttributedRope right attributes equals: { 0 }.
-	self assert: anAttributedRope right rope collection equals: 'ello'.
+	self assert: anAttributedRope right size equals: 4.
+	self assert: anAttributedRope right offset equals: 6.
+	self assert: anAttributedRope right rope == aRope rope.
 
 	^ anAttributedRope
 ]
 
 { #category : #'examples - attributes' }
-BlAttributeRopeExamples >> attributes_small_0_to_5 [
+BlSubRopeExamples >> attributes_small_0_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 5.
 
-	self assert: anAttributedRope rope == aRope rope.
-	self assert: anAttributedRope attributes equals: { 0 . 1 }.
+	self assert: anAttributedRope rope == aRope.
+	self assert: anAttributedRope attributes equals: { 1 }.
 
 	^ anAttributedRope
 ]
 
 { #category : #'examples - attributes' }
-BlAttributeRopeExamples >> attributes_small_2_to_2 [
+BlSubRopeExamples >> attributes_small_2_to_2 [
 	<gtExample>
 	| aRope anAttributedRope |
 
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 2 to: 2.
 
-	self assert: anAttributedRope left rope collection equals: 'He'.
-	self assert: anAttributedRope left attributes equals: { 0 }.
 
+	self assert: anAttributedRope left size equals: 2.
+	self assert: anAttributedRope left offset equals: 5.
+	self assert: anAttributedRope left rope == aRope rope.
+
+	self assert: anAttributedRope right left size equals: 0.
+	self assert: anAttributedRope right left attributes equals: { 1 }.
 	self assert: anAttributedRope right left rope collection equals: ''.
-	self assert: anAttributedRope right left attributes equals: { 0 . 1 }.
-
-	self assert: anAttributedRope right right rope collection equals: 'llo'.
-	self assert: anAttributedRope right right attributes equals: { 0 }.
+	
+	self assert: anAttributedRope right right offset equals: 7.
+	self assert: anAttributedRope right right rope == aRope rope.
 
 	^ anAttributedRope
 ]
 
 { #category : #'examples - attributes' }
-BlAttributeRopeExamples >> attributes_small_4_to_5 [
+BlSubRopeExamples >> attributes_small_4_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 4 to: 5.
 
-	self assert: anAttributedRope left attributes equals: { 0 }.
-	self assert: anAttributedRope left rope collection equals: 'Hell'.
+	self assert: anAttributedRope left size equals: 4.
+	self assert: anAttributedRope left offset equals: 5.
+	self assert: anAttributedRope left rope == aRope rope.
 
-	self assert: anAttributedRope right attributes equals: { 0 . 1 }.
-	self assert: anAttributedRope right rope collection equals: 'o'.
+	self assert: anAttributedRope right attributes equals: { 1 }.
+	self assert: anAttributedRope right rope size equals: 1.
+	self assert: anAttributedRope right rope offset equals: 9.
+	self assert: anAttributedRope right rope rope == aRope rope.
 
 	^ anAttributedRope
 ]
 
 { #category : #'examples - attributes' }
-BlAttributeRopeExamples >> attributes_small_5_to_5 [
+BlSubRopeExamples >> attributes_small_5_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
 
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 5 to: 5.
-
+	
 	self assert: anAttributedRope left == aRope.
 
-	self assert: anAttributedRope right attributes equals: { 0 . 1 }.
+	self assert: anAttributedRope right attributes equals: { 1 }.
 	self assert: anAttributedRope right rope collection equals: ''.
 
 	^ anAttributedRope
 ]
 
 { #category : #'examples - attributes' }
-BlAttributeRopeExamples >> clear_attributes_empty_0_to_0 [
+BlSubRopeExamples >> clear_attributes_empty_0_to_0 [
 	<gtExample>
 	| anEmptyRope aRopeWithoutAttributes |
 	
 	anEmptyRope := self small_empty.
-	
-	"clearing attributes on the empty attributed rope actually completely removes attributes"
 	aRopeWithoutAttributes := anEmptyRope clearAttributes: 0 to: 0.
-	
+
 	self assert: aRopeWithoutAttributes isEmpty.
-	self assert: aRopeWithoutAttributes collection equals: ''.
-	self assert: aRopeWithoutAttributes == anEmptyRope rope.
+	self assert: aRopeWithoutAttributes == anEmptyRope.
 
 	^ aRopeWithoutAttributes
-]
-
-{ #category : #'examples - attributes' }
-BlAttributeRopeExamples >> clear_attributes_small_0_to_0 [
-	<gtExample>
-	| aRope aRopeWithoutAttributes |
-	
-	aRope := self small.
-	aRopeWithoutAttributes := aRope clearAttributes: 0 to: 0.
-	
-	self assert: aRopeWithoutAttributes == aRope.
-
-	^ aRopeWithoutAttributes
-]
-
-{ #category : #'examples - attributes' }
-BlAttributeRopeExamples >> clear_attributes_small_0_to_1 [
-	<gtExample>
-	| aRope aRopeWithoutAttributes |
-	
-	aRope := self small.
-	aRopeWithoutAttributes := aRope clearAttributes: 0 to: 1.
-	
-	self assert: aRopeWithoutAttributes left collection equals: 'H'.
-
-	self assert: aRopeWithoutAttributes right attributes equals: { 0 }.
-	self assert: aRopeWithoutAttributes right rope collection equals: 'ello'.
-
-	^ aRopeWithoutAttributes
-]
-
-{ #category : #'examples - utility' }
-BlAttributeRopeExamples >> mergeAttributes [
-	<gtExample>
-	| firstDuplicate secondDuplicate theOriginalAttributes theAddedAttributes theAttributesWithoutDuplicates |
-
-	"they are equal but not identical"
-	firstDuplicate := String fromString: 'Haba'.
-	secondDuplicate := String fromString: 'Haba'.
-	
-	self assert: firstDuplicate equals: secondDuplicate.
-	self assert: (firstDuplicate == secondDuplicate) not.
-	
-	theOriginalAttributes := { firstDuplicate . 1 . 2  }.
-	theAddedAttributes := { 3 . secondDuplicate }.
-	
-	theAttributesWithoutDuplicates := BlAttributeRope mergeAttributes: theOriginalAttributes and: theAddedAttributes.
-	
-	self assert: theAttributesWithoutDuplicates equals: { 1 . 2 . 3 . secondDuplicate }.
-	
-	^ theAttributesWithoutDuplicates
-]
-
-{ #category : #'examples - utility' }
-BlAttributeRopeExamples >> removeDuplicates [
-	<gtExample>
-	| firstDuplicate secondDuplicate theOriginalAttributes theAttributesWithoutDuplicates |
-
-	"they are equal but not identical"
-	firstDuplicate := String fromString: 'Haba'.
-	secondDuplicate := String fromString: 'Haba'.
-	
-	self assert: firstDuplicate equals: secondDuplicate.
-	self assert: (firstDuplicate == secondDuplicate) not.
-	
-	theOriginalAttributes := { firstDuplicate . 1 . 2 . 3 . secondDuplicate }.
-	theAttributesWithoutDuplicates := BlAttributeRope removeDuplicates: theOriginalAttributes.
-	
-	self assert: theAttributesWithoutDuplicates equals: { 1 . 2 . 3 . secondDuplicate }.
-	
-	^ theAttributesWithoutDuplicates
 ]
 
 { #category : #'instance creation' }
-BlAttributeRopeExamples >> small [
+BlSubRopeExamples >> small [
 	<gtExample>
 	<label: 'Creates an instance of the rope of size smaller than combineLength with one attribute applied on the whole rope'>
-	| aRope |
+	| aCollectionRope aRope |
 
-	aRope := BlAttributeRope
-		attributes: { 0 }
-		rope: (BlCollectionRope collection: 'Hello').
+	aCollectionRope := BlCollectionRope collection: 'EarthHelloWorld'.
+
+	aRope := BlSubRope
+		rope: aCollectionRope
+		offset: 5
+		length: 5.
 
 	"attribute rope does not increase depth because it is just a plain wrapper"
 	self assert: aRope depth equals: 1.
 	self assert: aRope size equals: 5.
-	self assert: aRope attributes equals:  { 0 }.
-	self assert: aRope rope collection equals: 'Hello'.
+	self assert: aRope offset equals: 5.
+	self assert: aRope rope == aCollectionRope.
 	self assert: aRope isLeaf not.
 	self assert: aRope size <= BlRope combineLength.
 	
@@ -232,7 +169,7 @@ BlAttributeRopeExamples >> small [
 ]
 
 { #category : #'examples - accessing' }
-BlAttributeRopeExamples >> small_at_each [
+BlSubRopeExamples >> small_at_each [
 	<gtExample>
 	| aRope |
 	
@@ -248,7 +185,7 @@ BlAttributeRopeExamples >> small_at_each [
 ]
 
 { #category : #'examples - accessing' }
-BlAttributeRopeExamples >> small_children [
+BlSubRopeExamples >> small_children [
 	<gtExample>
 	| aRope |
 	
@@ -260,7 +197,7 @@ BlAttributeRopeExamples >> small_children [
 ]
 
 { #category : #'examples - deletion' }
-BlAttributeRopeExamples >> small_delete_0_to_0 [
+BlSubRopeExamples >> small_delete_0_to_0 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -268,12 +205,12 @@ BlAttributeRopeExamples >> small_delete_0_to_0 [
 	aNewRope := aRope delete: 0 to: 0.
 
 	self assert: aNewRope == aRope.
-	
+
 	^ aNewRope
 ]
 
 { #category : #'examples - deletion' }
-BlAttributeRopeExamples >> small_delete_0_to_1 [
+BlSubRopeExamples >> small_delete_0_to_1 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -281,29 +218,27 @@ BlAttributeRopeExamples >> small_delete_0_to_1 [
 	aNewRope := aRope delete: 0 to: 1.
 	
 	self assert: aNewRope size equals: 4.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: 'ello'.
+	self assert: aNewRope collection equals: 'ello'.
 	
 	^ aNewRope
 ]
 
 { #category : #'examples - deletion' }
-BlAttributeRopeExamples >> small_delete_0_to_5 [
+BlSubRopeExamples >> small_delete_0_to_5 [
 	<gtExample>
 	| aRope aNewRope |
-
+	
 	aRope := self small.
 	aNewRope := aRope delete: 0 to: 5.
-
+	
 	self assert: aNewRope size equals: 0.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: ''.
-
+	self assert: aNewRope collection equals: ''.
+	
 	^ aNewRope
 ]
 
 { #category : #'examples - deletion' }
-BlAttributeRopeExamples >> small_delete_1_to_1 [
+BlSubRopeExamples >> small_delete_1_to_1 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -316,7 +251,7 @@ BlAttributeRopeExamples >> small_delete_1_to_1 [
 ]
 
 { #category : #'examples - deletion' }
-BlAttributeRopeExamples >> small_delete_1_to_3 [
+BlSubRopeExamples >> small_delete_1_to_3 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -324,14 +259,13 @@ BlAttributeRopeExamples >> small_delete_1_to_3 [
 	aNewRope := aRope delete: 1 to: 3.
 	
 	self assert: aNewRope size equals: 3.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: 'Hlo'.
+	self assert: aNewRope collection equals: 'Hlo'.
 
 	^ aNewRope
 ]
 
 { #category : #'examples - deletion' }
-BlAttributeRopeExamples >> small_delete_1_to_5 [
+BlSubRopeExamples >> small_delete_1_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -339,14 +273,13 @@ BlAttributeRopeExamples >> small_delete_1_to_5 [
 	aNewRope := aRope delete: 1 to: 5.
 	
 	self assert: aNewRope size equals: 1.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: 'H'.
+	self assert: aNewRope collection equals: 'H'.
 	
 	^ aNewRope
 ]
 
 { #category : #'examples - deletion' }
-BlAttributeRopeExamples >> small_delete_4_to_5 [
+BlSubRopeExamples >> small_delete_4_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -354,14 +287,13 @@ BlAttributeRopeExamples >> small_delete_4_to_5 [
 	aNewRope := aRope delete: 4 to: 5.
 	
 	self assert: aNewRope size equals: 4.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: 'Hell'.
+	self assert: aNewRope collection equals: 'Hell'.
 
 	^ aNewRope
 ]
 
 { #category : #'examples - deletion' }
-BlAttributeRopeExamples >> small_delete_5_to_5 [
+BlSubRopeExamples >> small_delete_5_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -374,7 +306,7 @@ BlAttributeRopeExamples >> small_delete_5_to_5 [
 ]
 
 { #category : #'examples - accessing' }
-BlAttributeRopeExamples >> small_depth [
+BlSubRopeExamples >> small_depth [
 	<gtExample>
 	| aRope |
 	
@@ -386,7 +318,7 @@ BlAttributeRopeExamples >> small_depth [
 ]
 
 { #category : #'examples - enumeration' }
-BlAttributeRopeExamples >> small_do [
+BlSubRopeExamples >> small_do [
 	<gtExample>
 	| aRope theIterated |
 	
@@ -399,7 +331,7 @@ BlAttributeRopeExamples >> small_do [
 ]
 
 { #category : #'instance creation' }
-BlAttributeRopeExamples >> small_empty [
+BlSubRopeExamples >> small_empty [
 	<gtExample>
 	| aRope anEmpty |
 
@@ -407,16 +339,13 @@ BlAttributeRopeExamples >> small_empty [
 	anEmpty := aRope empty.
 
 	self assert: anEmpty size equals: 0.
-	"is not actually empty, because it preserves the attributes of the original rope"
-	self assert: anEmpty isNotEmpty.
-	self assert: anEmpty attributes equals: { 0 }.
-	self assert: anEmpty rope collection equals: ''.
+	self assert: anEmpty collection equals: ''.
 
 	^ anEmpty
 ]
 
 { #category : #'examples - from to' }
-BlAttributeRopeExamples >> small_from_0_to_0 [
+BlSubRopeExamples >> small_from_0_to_0 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -424,14 +353,13 @@ BlAttributeRopeExamples >> small_from_0_to_0 [
 	aNewRope := aRope from: 0 to: 0.
 	
 	self assert: aNewRope size equals: 0.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: ''.
+	self assert: aNewRope collection equals: ''.
 	
 	^ aNewRope
 ]
 
 { #category : #'examples - enumeration' }
-BlAttributeRopeExamples >> small_from_0_to_0_do [
+BlSubRopeExamples >> small_from_0_to_0_do [
 	<gtExample>
 	| aRope theIterated |
 	
@@ -444,7 +372,7 @@ BlAttributeRopeExamples >> small_from_0_to_0_do [
 ]
 
 { #category : #'examples - from to' }
-BlAttributeRopeExamples >> small_from_0_to_1 [
+BlSubRopeExamples >> small_from_0_to_1 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -452,14 +380,14 @@ BlAttributeRopeExamples >> small_from_0_to_1 [
 	aNewRope := aRope from: 0 to: 1.
 	
 	self assert: aNewRope size equals: 1.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: 'H'.
+	self assert: aNewRope offset equals: 5.
+	self assert: aNewRope rope == aRope rope.
 	
 	^ aNewRope
 ]
 
 { #category : #'examples - enumeration' }
-BlAttributeRopeExamples >> small_from_0_to_1_do [
+BlSubRopeExamples >> small_from_0_to_1_do [
 	<gtExample>
 	| aRope theIterated |
 	
@@ -472,7 +400,7 @@ BlAttributeRopeExamples >> small_from_0_to_1_do [
 ]
 
 { #category : #'examples - from to' }
-BlAttributeRopeExamples >> small_from_0_to_5 [
+BlSubRopeExamples >> small_from_0_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -485,7 +413,7 @@ BlAttributeRopeExamples >> small_from_0_to_5 [
 ]
 
 { #category : #'examples - enumeration' }
-BlAttributeRopeExamples >> small_from_0_to_5_do [
+BlSubRopeExamples >> small_from_0_to_5_do [
 	<gtExample>
 	| aRope theIterated |
 	
@@ -498,7 +426,7 @@ BlAttributeRopeExamples >> small_from_0_to_5_do [
 ]
 
 { #category : #'examples - from to' }
-BlAttributeRopeExamples >> small_from_1_to_1 [
+BlSubRopeExamples >> small_from_1_to_1 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -506,14 +434,13 @@ BlAttributeRopeExamples >> small_from_1_to_1 [
 	aNewRope := aRope from: 1 to: 1.
 	
 	self assert: aNewRope size equals: 0.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: ''.
+	self assert: aNewRope collection equals: ''.
 	
 	^ aNewRope
 ]
 
 { #category : #'examples - enumeration' }
-BlAttributeRopeExamples >> small_from_1_to_1_do [
+BlSubRopeExamples >> small_from_1_to_1_do [
 	<gtExample>
 	| aRope theIterated |
 	
@@ -526,7 +453,7 @@ BlAttributeRopeExamples >> small_from_1_to_1_do [
 ]
 
 { #category : #'examples - from to' }
-BlAttributeRopeExamples >> small_from_1_to_2 [
+BlSubRopeExamples >> small_from_1_to_2 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -534,14 +461,14 @@ BlAttributeRopeExamples >> small_from_1_to_2 [
 	aNewRope := aRope from: 1 to: 2.
 	
 	self assert: aNewRope size equals: 1.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: 'e'.
+	self assert: aNewRope offset equals: 6.
+	self assert: aNewRope rope == aRope rope.
 	
 	^ aNewRope
 ]
 
 { #category : #'examples - enumeration' }
-BlAttributeRopeExamples >> small_from_1_to_2_do [
+BlSubRopeExamples >> small_from_1_to_2_do [
 	<gtExample>
 	| aRope theIterated |
 	
@@ -554,7 +481,7 @@ BlAttributeRopeExamples >> small_from_1_to_2_do [
 ]
 
 { #category : #'examples - from to' }
-BlAttributeRopeExamples >> small_from_1_to_5 [
+BlSubRopeExamples >> small_from_1_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -562,14 +489,14 @@ BlAttributeRopeExamples >> small_from_1_to_5 [
 	aNewRope := aRope from: 1 to: 5.
 	
 	self assert: aNewRope size equals: 4.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: 'ello'.
+	self assert: aNewRope offset equals: 6.
+	self assert: aNewRope rope == aRope rope.
 	
 	^ aNewRope
 ]
 
 { #category : #'examples - enumeration' }
-BlAttributeRopeExamples >> small_from_1_to_5_do [
+BlSubRopeExamples >> small_from_1_to_5_do [
 	<gtExample>
 	| aRope theIterated |
 	
@@ -582,7 +509,7 @@ BlAttributeRopeExamples >> small_from_1_to_5_do [
 ]
 
 { #category : #'examples - from to' }
-BlAttributeRopeExamples >> small_from_3_to_5 [
+BlSubRopeExamples >> small_from_3_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
@@ -590,14 +517,14 @@ BlAttributeRopeExamples >> small_from_3_to_5 [
 	aNewRope := aRope from: 3 to: 5.
 	
 	self assert: aNewRope size equals: 2.
-	self assert: aNewRope attributes equals: { 0 }.
-	self assert: aNewRope rope collection equals: 'lo'.
+	self assert: aNewRope offset equals: 8.
+	self assert: aNewRope rope == aRope rope.
 	
 	^ aNewRope
 ]
 
 { #category : #'examples - enumeration' }
-BlAttributeRopeExamples >> small_from_3_to_5_do [
+BlSubRopeExamples >> small_from_3_to_5_do [
 	<gtExample>
 	| aRope theIterated |
 	
@@ -610,7 +537,7 @@ BlAttributeRopeExamples >> small_from_3_to_5_do [
 ]
 
 { #category : #'examples - testing' }
-BlAttributeRopeExamples >> small_isEmpty [
+BlSubRopeExamples >> small_isEmpty [
 	<gtExample>
 	| aRope |
 	
@@ -622,7 +549,7 @@ BlAttributeRopeExamples >> small_isEmpty [
 ]
 
 { #category : #'examples - testing' }
-BlAttributeRopeExamples >> small_isLeaf [
+BlSubRopeExamples >> small_isLeaf [
 	<gtExample>
 	| aRope |
 	
@@ -634,7 +561,7 @@ BlAttributeRopeExamples >> small_isLeaf [
 ]
 
 { #category : #'examples - testing' }
-BlAttributeRopeExamples >> small_isNotEmpty [
+BlSubRopeExamples >> small_isNotEmpty [
 	<gtExample>
 	| aRope |
 	
@@ -646,7 +573,7 @@ BlAttributeRopeExamples >> small_isNotEmpty [
 ]
 
 { #category : #'examples - accessing' }
-BlAttributeRopeExamples >> small_size [
+BlSubRopeExamples >> small_size [
 	<gtExample>
 	| aRope |
 	

@@ -85,7 +85,7 @@ BlSingleLineTextParagraph >> measureOn: aCanvas with: aSpanMeasurer [
 	[ anIterator hasNext and: [ line isEmpty or: [ aMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
 		"If we pass #hasNext check we will definitely move to the next span,
 		so can do the same with position"
-		aMeasurer movePosition: anIterator position.
+		aMeasurer movePosition: anIterator position + 1.
 		aMeasurer
 			measureSpan: anIterator nextSpan
 			of: self

@@ -20,6 +20,15 @@ BlRope >> gtInspectorTreeIn: composite [
 ]
 
 { #category : #'*Bloc-Extensions' }
+BlRope >> gtTreeFor: aView [
+	<gtView>
+	
+	^ aView mondrian
+		title: 'Tree';
+		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
+]
+
+{ #category : #'*Bloc-Extensions' }
 BlRope >> paintTreeWith: view [
 	view nodes
 		shape: [ :each | 
@@ -29,7 +38,7 @@ BlRope >> paintTreeWith: view [
 						zIndex: 10;
 						background: Color white;
 						constraintsDo: [ :c | c padding: (BlInsets all: 5) ];
-						text: (BlRopedText rope: each) ]
+						text: (BlRopedText rope: (each from: 0 to: (100 min: each size))) ]
 				ifFalse: [ 
 					BlElement new 
 						when: BlClickEvent do: [:event | event target fireEvent: (GtPhlowObjectToSpawn new object: each; sourceElement: event target)];
@@ -42,7 +51,8 @@ BlRope >> paintTreeWith: view [
 	view edges
 		shape: [ :each | BlLineElement new border: (BlBorder paint: (Color gray alpha: 0.5) width: 1 ) ];
 		connectToAll: #children.
-	view layout tree 
+	view layout custom: (GtGradNorthHierarchicalLayout new)
+"view layout tree 
 		nodeDistance: 20;
-		levelDistance: 40
+		levelDistance: 40"
 ]

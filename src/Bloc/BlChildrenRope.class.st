@@ -44,7 +44,7 @@ BlChildrenRope >> do: aBlock [
 BlChildrenRope >> initialize [
 	super initialize.
 	
-	rope := BlCollectionRope empty 
+	rope := BlCollectionRope collection: #() 
 ]
 
 { #category : #accessing }

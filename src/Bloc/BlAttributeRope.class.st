@@ -14,9 +14,28 @@ Class {
 
 { #category : #initialization }
 BlAttributeRope class >> attributes: anAttributeCollection rope: aRope [
+	| aMergedCollection aMergedRope |
+	
+	aMergedCollection := aRope isAttributed
+		ifTrue: [ self mergeAttributes: aRope attributes and: anAttributeCollection ]
+		ifFalse: [ anAttributeCollection ].
+		
+	aMergedRope := aRope isAttributed
+		ifTrue: [ aRope rope ]
+		ifFalse: [ aRope ].
+
 	^ self new
-		attributes: anAttributeCollection rope: aRope;
+		attributes: aMergedCollection rope: aMergedRope;
 		yourself
+]
+
+{ #category : #utilities }
+BlAttributeRope class >> combineAttributed: aLeftAttributeRope and: aRightAttributeRope [
+	<return: #BlRope>
+
+	^ self
+		attributes: aLeftAttributeRope attributes
+		rope: (self concatenate: aLeftAttributeRope rope and: aRightAttributeRope rope)
 ]
 
 { #category : #utilities }
@@ -64,7 +83,7 @@ BlAttributeRope >> attributes [
 	^ attributes
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : #'rope - attributes' }
 BlAttributeRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	| anAttributeRope |
 	self assertAccessFrom: aStart to: anEnd.
@@ -72,33 +91,25 @@ BlAttributeRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	anAttributesCollection
 		ifEmpty: [ ^ self ].
 	
-	(aStart isZero and: [ anEnd isZero ])
-		ifTrue: [ ^ self isEmpty
-			ifTrue: [
-				self class
-					attributes: (self class mergeAttributes: self attributes and: anAttributesCollection)
-					rope: rope ]
-			ifFalse: [ self ] ].
-	
 	anAttributeRope := (self rope from: aStart to: anEnd)
 		attributes: (self class mergeAttributes: self attributes and: anAttributesCollection)
-		from: 1
-		to: (anEnd - aStart + 1).
+		from: 0
+		to: (anEnd - aStart).
 
-	(aStart = 1 and: [ anEnd = self size ])
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ anAttributeRope ].
 
-	aStart = 1 ifTrue: [ 
+	aStart = 0 ifTrue: [ 
 		^ self class
 			concatenate: anAttributeRope
-			and: (self from: anEnd + 1 to: self size) ].
+			and: (self from: anEnd to: self size) ].
 	
 	anEnd = self size ifTrue: [ 
 		^ self class
-			concatenate: (self from: 1 to: aStart - 1)
+			concatenate: (self from: 0 to: aStart)
 			and: anAttributeRope ].
 
-	^ (self from: 1 to: aStart - 1) append: (anAttributeRope append: (self from: anEnd + 1 to: self size))
+	^ (self from: 0 to: aStart) append: (anAttributeRope append: (self from: anEnd to: self size))
 ]
 
 { #category : #initialization }
@@ -116,49 +127,45 @@ BlAttributeRope >> children [
 	^ { rope }
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : #'rope - attributes' }
 BlAttributeRope >> clearAttributes: aStart to: anEnd if: aBlock [
-	| aClearedRope selectedAttributes aSubRope aSubRopeStart aSubRopeEnd aMyStart aMyEnd |
+	| aSubRope aClearedRope preservedAttributes  |
 	self assertAccessFrom: aStart to: anEnd.
 
-	selectedAttributes := self attributes reject: [ :anAssociation | aBlock value: anAssociation value ].
+	preservedAttributes := self attributes reject: [ :anAssociation | aBlock value: anAssociation value ].
 
 	aSubRope := self rope from: aStart to: anEnd.
-	aSubRopeStart := (1 min: aSubRope size).
-	aSubRopeEnd := anEnd - aStart + (1 min: aSubRope size).
-	
-	aMyStart := 1 min: self size.
-	aMyEnd := self size.
 	
 	aClearedRope := aSubRope
-		clearAttributes: aSubRopeStart
-		to: aSubRopeEnd
+		clearAttributes: 0
+		to: aSubRope size
 		if: aBlock.
 
-	selectedAttributes ifNotEmpty: [ 
-		aClearedRope := aClearedRope
-			attributes: selectedAttributes
-			from: aSubRopeStart
-			to: aSubRopeEnd ].
+	preservedAttributes ifNotEmpty: [ :theAttributes | aClearedRope := aClearedRope attributes: theAttributes ].
 
-	(aStart = aMyStart and: [ anEnd = aMyEnd ])
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ aClearedRope ].
 
-	aStart = aMyStart ifTrue: [ 
+	aStart = 0 ifTrue: [ 
 		^ self class
 			concatenate: aClearedRope
-			and: (self from: anEnd + 1 to: aMyEnd) ].
+			and: (self from: anEnd to: self size) ].
 	
 	anEnd = self size ifTrue: [ 
 		^ self class
-			concatenate: (self from: 1 to: aStart - 1)
+			concatenate: (self from: 0 to: aStart)
 			and: aClearedRope ].
 
-	^ (self from: 1 to: aStart - 1) append: (aClearedRope append: (self from: anEnd + 1 to: self size))
+	^ (self from: 0 to: aStart) append: (aClearedRope append: (self from: anEnd to: self size))
 ]
 
 { #category : #'rope - deleting' }
 BlAttributeRope >> delete: aStart to: anEnd [
+	<return: #BlRope>
+	self assertAccessFrom: aStart to: anEnd.
+
+	aStart = anEnd
+		ifTrue: [ ^ self ].
 
 	^ self class attributeRope
 		attributes: attributes
@@ -186,13 +193,15 @@ BlAttributeRope >> empty [
 ]
 
 { #category : #'rope - accessing' }
-BlAttributeRope >> from: aStart to: anEnd [	
+BlAttributeRope >> from: aStart to: anEnd [
+	<return: #BlRope>
+
 	self assertAccessFrom: aStart to: anEnd.
 
-	(aStart isZero and: [ anEnd isZero ])
+	(aStart = anEnd)
 		ifTrue: [ ^ self empty ].
 
-	(aStart = 1 and: [ anEnd = self size ])
+	(aStart = 0 and: [ anEnd = self size ])
 		ifTrue: [ ^ self ].
 
 	^ self class attributeRope
@@ -211,6 +220,21 @@ BlAttributeRope >> insertItems: aCollection at: anIndex [
 	^ self class attributeRope
 		attributes: attributes
 		rope: (rope insertItems: aCollection at: anIndex)
+]
+
+{ #category : #'rope - testing' }
+BlAttributeRope >> isAttributed [
+	<return: #Boolean>
+	
+	^ true
+]
+
+{ #category : #'rope - testing' }
+BlAttributeRope >> isEmpty [
+	"Attribute rope is empty then and only then when attributes and underlying rope are empty"
+	<return: #Boolean>
+
+	^ self attributes isEmpty and: [ self rope isEmpty ]
 ]
 
 { #category : #'rope - testing' }

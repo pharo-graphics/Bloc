@@ -75,13 +75,9 @@ BlRopedTextIterator >> next [
 BlRopedTextIterator >> nextLine [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first carriage return character"
-	<return: #BlText>
-	| aStartPosition aNextLine |
+	<return: #BlText>	
 	
-	aStartPosition := iterator position.
-	aNextLine := iterator nextLine.
-
-	^ BlSubText text: text from: aStartPosition to: ((aStartPosition + aNextLine size - 1) max: aStartPosition)
+	^ self nextLineIndicesDo: [ :aStart :anEnd | BlSubText text: text from: aStart to: anEnd ]
 ]
 
 { #category : #'iterator - enumeration' }
@@ -90,19 +86,26 @@ BlRopedTextIterator >> nextLineIndicesDo: anIndicesBlock [
 		- start index of line
 		- end index of line without line delimiter
 		- end index of line including line delimiter(s) CR, LF or CRLF"
-		
-	iterator nextLineIndicesDo: anIndicesBlock
+
+	^ iterator nextLineIndicesDo: [ :aStart :anEnd :aLineEndWithDelimiters |
+		anIndicesBlock cull: ((aStart + 1) min: anEnd) cull: anEnd cull: aLineEndWithDelimiters ]
 ]
 
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> nextSegment: aBlock [
 	<return: #BlText>
-	| aStartPosition aSegment |
 
-	aStartPosition := iterator position.
-	aSegment := iterator nextSegment: aBlock.
+	^ iterator
+		nextSegment: aBlock
+		indicesDo: [ :aStart :anEnd | BlSubText text: text from: ((aStart + 1) min: anEnd) to: anEnd ]
+]
 
-	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
+{ #category : #'iterator - enumeration' }
+BlRopedTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
+	"@see BlTextIterator>>#nextSegment:indicesDo:"
+	<return: #Object>
+	
+	^ iterator nextSegment: aBlock indicesDo: anIndicesBlock
 ]
 
 { #category : #'iterator - enumeration' }
@@ -129,17 +132,15 @@ BlRopedTextIterator >> nextWhitespace [
 
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> nextWord [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of BlText which represents a piece of text from current position
 	until the first space character not including spaces"
 	<return: #BlText>
 	| aStartPosition aSegment |
 	
-	aStartPosition := iterator position.
+	aStartPosition := iterator position + 1.
 	aSegment :=  iterator nextWord.
 
-	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1	
-
-	"^ BrRopedText rope: iterator nextWord"
+	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
 ]
 
 { #category : #'iterator - enumeration' }
@@ -148,6 +149,14 @@ BlRopedTextIterator >> peek [
 	<return: #Character or: #Object>
 
 	^ iterator peek
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopedTextIterator >> peer [
+	"Return an item (character) before current position"
+	<return: #Character or: #Object>
+
+	^ iterator peer
 ]
 
 { #category : #'iterator - accessing' }
@@ -166,8 +175,18 @@ BlRopedTextIterator >> previous [
 	^ iterator previous
 ]
 
+{ #category : #'iterator - enumeration' }
+BlRopedTextIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
+	"@see BlTextIterator>>#previousSegment:indicesDo:"
+	<return: #Object>
+	
+	^ iterator previousSegment: aBlock indicesDo: anIndicesBlock
+]
+
 { #category : #accessing }
 BlRopedTextIterator >> rope [
+	<return: #BlRope>
+
 	^ rope
 ]
 
@@ -185,11 +204,13 @@ BlRopedTextIterator >> selectAttributes: aBlock [
 BlRopedTextIterator >> skip: aNumber [
 	"Move forward by aNumber characters"
 
- 	aNumber timesRepeat: [ self next ]
+ 	iterator skip: aNumber
 ]
 
 { #category : #accessing }
 BlRopedTextIterator >> text [
+	<return: #BlRopedText>
+
 	^ text
 ]
 
@@ -197,5 +218,6 @@ BlRopedTextIterator >> text [
 BlRopedTextIterator >> text: aBrRopedText from: aStartIndex to: anEndIndex [
 	rope := aBrRopedText rope.
 	text := aBrRopedText.
-	iterator := rope iterator: aStartIndex to: anEndIndex
+
+	iterator := rope iterator: ((aStartIndex - 1) max: 0) to: anEndIndex
 ]
