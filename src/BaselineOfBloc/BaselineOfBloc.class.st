@@ -29,7 +29,7 @@ BaselineOfBloc >> baseline: spec [
 			baseline: 'Sparta' with: [
 				spec repository: 'github://syrel/Sparta:v0.4.2/src' ];
 			baseline: 'TaskIt' with: [
-				spec repository: 'github://sbragagnolo/taskit:v0.1' ];
+				spec repository: 'github://sbragagnolo/taskit:v1.0.1' ];
 			baseline: 'GToolkitExamplesEngine' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples:v0.4.2/src' ].
 		spec 
