@@ -22,6 +22,11 @@ BlTextParagraphSpanMeasurer >> applyMetricsOn: aParagraphSpan [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'instance creation' }
+BlTextParagraphSpanMeasurer >> createParagraphSpan [
+	^ BlTextParagraphSpan new
+]
+
 { #category : #measurement }
 BlTextParagraphSpanMeasurer >> measure: aTextRun from: aTextRunStart to: aTextRunEnd width: aWidth [
 	"Measure a given text run from provided start to the end indices limiting available with to aWidth"
