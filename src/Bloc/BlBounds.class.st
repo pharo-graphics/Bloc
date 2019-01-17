@@ -166,6 +166,13 @@ BlBounds >> centerRight [
 ]
 
 { #category : #'vector functions' }
+BlBounds >> clamp: aPoint [
+	<return: #Point>
+
+	^ (aPoint min: self corner) max: self origin
+]
+
+{ #category : #'vector functions' }
 BlBounds >> clockwiseEdges [
 	<return: #Collection of: #BlRay>
 

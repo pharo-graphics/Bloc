@@ -78,6 +78,14 @@ BlLayout >> direction: aBlLayoutDirection [
 	direction := aBlLayoutDirection
 ]
 
+{ #category : #geometry }
+BlLayout >> findClosestChildOf: anElement to: aPoint [
+	"Find and return the closest direct child of a given element to a provided point in the coordinate system of anElement"
+	<return: #BlElement>
+	
+	^ anElement children first
+]
+
 { #category : #initialization }
 BlLayout >> initialize [
 	super initialize.
