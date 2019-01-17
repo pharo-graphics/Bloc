@@ -1351,7 +1351,9 @@ BlInfiniteElement >> onExitLayoutOrScroll [
 { #category : #layout }
 BlInfiniteElement >> onLayout: aBounds [
 	self dispatchLayout.
-	firstLayoutComplete := true
+	firstLayoutComplete := true.
+	
+	self layout layoutIgnored: self
 ]
 
 { #category : #'hooks - state' }
@@ -1362,7 +1364,9 @@ BlInfiniteElement >> onLeftHiddenState: aChildElement [
 BlInfiniteElement >> onMeasure: anExtentMeasurementSpec [
 	layout shouldAutoMeasure
 		ifTrue: [ self onMeasureAuto: anExtentMeasurementSpec ]
-		ifFalse: [ self onMeasureCustom: anExtentMeasurementSpec ]
+		ifFalse: [ self onMeasureCustom: anExtentMeasurementSpec ].
+		
+	self layout measureIgnored: self with: anExtentMeasurementSpec
 ]
 
 { #category : #measurement }
