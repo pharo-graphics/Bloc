@@ -4,16 +4,16 @@ I a temporary solution for handling the opening of the debugger when errors happ
 I do that by explicitly spawning either a Bloc or a Morphic UI thread depending on where the error occured.
 "
 Class {
-	#name : #BlocMorphicUIManager,
+	#name : #BlBlocMorphicUIManager,
 	#superclass : #MorphicUIManager,
 	#category : #'Bloc-Extensions'
 }
 
 { #category : #actions }
-BlocMorphicUIManager class >> useAsDefault [
+BlBlocMorphicUIManager class >> useAsDefault [
 	[
 		|uiManager|
-		uiManager := BlocMorphicUIManager new.
+		uiManager := BlBlocMorphicUIManager new.
 		uiManager uiProcess ifNotNil: [ 
 			uiManager terminateUIProcess.
 			uiManager spawnNewProcess ].
@@ -22,14 +22,14 @@ BlocMorphicUIManager class >> useAsDefault [
 ]
 
 { #category : #'ui process' }
-BlocMorphicUIManager >> blocUIProcess [
+BlBlocMorphicUIManager >> blocUIProcess [
 	" Answer the currently active UI process for bloc universe"
 
 	^ BlUniverse default pulseLoop loopProcess
 ]
 
 { #category : #debug }
-BlocMorphicUIManager >> debugProcess: process context: context label: title fullView: bool notification: notificationString [
+BlBlocMorphicUIManager >> debugProcess: process context: context label: title fullView: bool notification: notificationString [
 	"Open a notifier in response to an error, halt, or notify. A notifier view
 	just shows a short view of the sender stack and provides a menu that
 	lets the user open a full debugger."
@@ -62,16 +62,16 @@ BlocMorphicUIManager >> debugProcess: process context: context label: title full
 ]
 
 { #category : #debug }
-BlocMorphicUIManager >> isForBlockUIProcess: debugSession [
+BlBlocMorphicUIManager >> isForBlockUIProcess: debugSession [
 	^ self blocUIProcess == debugSession interruptedProcess
 ]
 
 { #category : #'ui process' }
-BlocMorphicUIManager >> spawnNewBlocProcess [
+BlBlocMorphicUIManager >> spawnNewBlocProcess [
 	BlUniverse default pulseLoop forceStartNewUIProcess
 ]
 
 { #category : #'ui process' }
-BlocMorphicUIManager >> spawnNewMorphicProcess [
+BlBlocMorphicUIManager >> spawnNewMorphicProcess [
 	self spawnNewProcess
 ]
