@@ -1,5 +1,5 @@
 "
-I a temporary solution for handling the opening of the debugger when errors happen in the Nloc UI thread.
+I a temporary solution for handling the opening of the debugger when errors happen in the Bloc UI thread.
 
 I do that by explicitly spawning either a Bloc or a Morphic UI thread depending on where the error occured.
 "
