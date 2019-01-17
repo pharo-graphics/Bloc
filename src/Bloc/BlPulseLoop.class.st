@@ -52,6 +52,20 @@ BlPulseLoop >> firePulse [
 	Processor yield
 ]
 
+{ #category : #'as yet unclassified' }
+BlPulseLoop >> forceStartNewUIProcess [
+	"I should only be used by the logic for opening the debugger.
+	
+	I create and start a new UI thread without stopping the previous one.
+	Normally this leads to incorrect behaviou in Bloc UI process. However 
+	if I am called from the current Bloc UI process when an error happened in 
+	the actual process, and after calling me my sender terminates or suspends 
+	the process my usage should be safe."
+	
+	loopProcess := self createLoopProcess.
+	loopProcess resume.
+]
+
 { #category : #initialization }
 BlPulseLoop >> initialize [
 	super initialize.
