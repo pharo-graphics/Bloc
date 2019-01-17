@@ -405,6 +405,13 @@ BlInfiniteHolder >> shouldIgnore [
 ]
 
 { #category : #'private - flags changing' }
+BlInfiniteHolder >> startIgnoring [
+	"Start ignoring an element I represent"
+
+	self flags addIgnore
+]
+
+{ #category : #'private - flags changing' }
 BlInfiniteHolder >> stopIgnoring [
 	"Stop ignoring an element I represent"
 
