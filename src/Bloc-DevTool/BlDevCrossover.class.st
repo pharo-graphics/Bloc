@@ -57,6 +57,8 @@ BlDevCrossover >> initialize [
 
 	mousePositionText := BlTextElement new.
 	mousePositionText padding: (BlInsets all: 4).
+	mousePositionText geometry: (BlRectangle cornerRadius: 4).
+	mousePositionText background: (Color white alpha: 0.85).
 	mousePositionText text: '' asRopedText.
 	mousePositionText constraintsDo: [ :c |
 		c frame horizontal alignLeft.
