@@ -6,7 +6,7 @@ I do that by explicitly spawning either a Bloc or a Morphic UI thread depending 
 Class {
 	#name : #BlBlocMorphicUIManager,
 	#superclass : #MorphicUIManager,
-	#category : #'Bloc-Extensions'
+	#category : #'BlocHost-Morphic-Host'
 }
 
 { #category : #actions }

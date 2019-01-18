@@ -21,6 +21,7 @@ Class {
 BaselineOfBloc >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
+		spec postLoadDoIt: #'postLoadBloc:'.
 		spec 
 			baseline: 'BlocCore' with: [
 				spec repository: 'github://pharo-graphics/Bloc/src' ];
@@ -64,13 +65,24 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [
-				spec postLoadDoIt: #'postLoadDisableTaskItDebugger:'.
 				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' ). ]. ].
 
+]
+
+{ #category : #'post load' }
+BaselineOfBloc >> postLoadBloc:spec [
+	self postLoadDisableTaskItDebugger: spec.
+	self postLoadMorphicHost: spec
+	
 ]
 
 { #category : #'post load' }
 BaselineOfBloc >> postLoadDisableTaskItDebugger: spec [
 	TKTConfiguration profile: TKTProfile test.
 	TKTDebugger disable.
+]
+
+{ #category : #'post load' }
+BaselineOfBloc >> postLoadMorphicHost: spec [
+	BlBlocMorphicUIManager useAsDefault
 ]
