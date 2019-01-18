@@ -63,6 +63,14 @@ BlPulseLoop >> forceStartNewUIProcess [
 	loopProcess resume.
 ]
 
+{ #category : #'as yet unclassified' }
+BlPulseLoop >> forceStartOfUIProcess: aProces [
+	"I should only be used by the logic for closing the debugger."
+	
+	loopProcess := aProces.
+	loopProcess resume.
+]
+
 { #category : #initialization }
 BlPulseLoop >> initialize [
 	super initialize.
