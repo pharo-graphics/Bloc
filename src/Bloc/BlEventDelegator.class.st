@@ -4,7 +4,7 @@ I delegate all events of type ==eventClass== or ones that inherit from it to the
 I hold a strong reference to the event target
 "
 Class {
-	#name : #BlDelegateEventHandler,
+	#name : #BlEventDelegator,
 	#superclass : #BlBasicEventHandler,
 	#instVars : [
 		'eventClass',
@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlDelegateEventHandler class >> delegate: anEventClass to: anEventTarget [
+BlEventDelegator class >> delegate: anEventClass to: anEventTarget [
 	^ self new
 		eventClass: anEventClass;
 		eventTarget: anEventTarget;
@@ -22,31 +22,31 @@ BlDelegateEventHandler class >> delegate: anEventClass to: anEventTarget [
 ]
 
 { #category : #accessing }
-BlDelegateEventHandler >> eventClass [
+BlEventDelegator >> eventClass [
 	^ eventClass
 ]
 
 { #category : #accessing }
-BlDelegateEventHandler >> eventClass: anObject [
+BlEventDelegator >> eventClass: anObject [
 	eventClass := anObject
 ]
 
 { #category : #accessing }
-BlDelegateEventHandler >> eventTarget [
+BlEventDelegator >> eventTarget [
 	^ eventTarget
 ]
 
 { #category : #accessing }
-BlDelegateEventHandler >> eventTarget: anObject [
+BlEventDelegator >> eventTarget: anObject [
 	eventTarget := anObject
 ]
 
 { #category : #'api - event managing' }
-BlDelegateEventHandler >> handleEvent: anEvent [
+BlEventDelegator >> handleEvent: anEvent [
 	self eventTarget dispatchEvent: anEvent
 ]
 
 { #category : #'api - event managing' }
-BlDelegateEventHandler >> wantsEvent: anEvent [
+BlEventDelegator >> wantsEvent: anEvent [
 	^ anEvent class == self eventClass or: [ anEvent class inheritsFrom: self eventClass ]
 ]
