@@ -1,10 +1,10 @@
 "
-I provide a solution for handling the opening of the debugger when errors happen in both the Bloc UI process and the Morphic UI Process.
+I provide a solution for handling the opening of the Morphic debugger when errors happen in both the Bloc UI process and the Morphic UI Process.
 
 I explicitly spawn a Morphic-based debugger on either a Bloc or a Morphic UI process depending on where the error occured and close the created process on resume. 
 Because of this I am meant to be used only with a debugger based on Morphic that runs inside the Morphic UI Process. A debugger written in Bloc will not work correctly with this UI Manager.
 
-I handle exceptions in the Morphic UI process the same as ==MorphicUIManager==. However, I also have support for handling errors in the Bloc UI Process in spite of the fact that the actual debugger is only aware of a single UI process. I also do not require to override any methods from Pharo. My design could be improved by changing the way a ==DebugSession== handles the UI process.
+I handle exceptions in the Morphic UI process the same as ==MorphicUIManager==. However, I also have support for handling errors in the Bloc UI Process in spite of the fact that the actual debugger is only aware of a single UI process. I also do not require to override any methods from Pharo. My design could be improved by changing the way a ==DebugSession== handles the UI process to not hardcode actions on the UI process but dispatch actions relevant for the UI process through the UIManager.
 
 
 "
@@ -87,7 +87,7 @@ BlBlocMorphicUIManager >> resumeUIProcess: aProcess [
 	aProcess name = BlUniverse default pulseLoop processId
 		ifTrue:  [ 
 			"The Bloc UI process needs to be handled in a special way. The current debugger only knows about the existance of a single UI process.
-			Hence, on process the debugger tries to terminate the active UI process using ==Processor terminateActive== (DebugSession>>#terminate).
+			Hence, on resume the debugger tries to terminate the active UI process using ==Processor terminateActive== (DebugSession>>#terminate).
 			While that works for the Morpic UI process, it will not work for the Bloc UI process, as the debugger for the Bloc UI process runs inside the Morphic UI process.
 			
 			Instead I do all the work of closing and resuming the correct Bloc UI process"
@@ -95,7 +95,7 @@ BlBlocMorphicUIManager >> resumeUIProcess: aProcess [
 			self resumeBlocUIProcess: aProcess.
 		
 			"This is the only hack I found to make the debugger not terminate the current active process on close.
-			In DebugSession>>#terminate the debugger terminates the activa process if the errorWasInUIProcess attribute is set to true.
+			In DebugSession>>#terminate the debugger terminates the active process if the errorWasInUIProcess attribute is set to true.
 			Here we set it to false to tell the debugger that the Bloc UI process is not the current UI process from the system."
 			currentDebugSession := thisContext sender receiver. 
 			currentDebugSession errorWasInUIProcess: false. ]
