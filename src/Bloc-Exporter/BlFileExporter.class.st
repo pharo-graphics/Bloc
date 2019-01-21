@@ -14,10 +14,9 @@ Class {
 { #category : #private }
 BlFileExporter >> askFileName [
 	^ UIManager default 
-		fileSave: 'Save Element as ', self extension asUppercase 
-		initialAnswer: (self element class name, '-', self element hash asString,'.' , self extension)
+		chooseForSaveFileReference: 'Save Element as ', self extension asUppercase 
 		extensions: { self extension } 
-		path: Smalltalk imageDirectory
+		path: Smalltalk imageDirectory / (self element class name, '-', self element hash asString,'.' , self extension)
 ]
 
 { #category : #'api - exporting' }
