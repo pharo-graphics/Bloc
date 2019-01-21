@@ -16,14 +16,9 @@ Class {
 
 { #category : #actions }
 BlBlocMorphicUIManager class >> useAsDefault [
-	[
-		|uiManager|
-		uiManager := self new.
-		uiManager uiProcess ifNotNil: [ 
-			uiManager terminateUIProcess.
-			uiManager spawnNewProcess ].
-		uiManager beDefault.
-	] fork.
+	|uiManager|
+	uiManager := self new.
+	uiManager beDefault. 
 ]
 
 { #category : #'ui process' }
