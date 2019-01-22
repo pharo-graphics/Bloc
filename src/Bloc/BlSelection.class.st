@@ -42,6 +42,16 @@ BlSelection >> allSelections [
 	^ Array streamContents: [ :aStream | self do: [ :aSelection | aStream nextPut: aSelection ] ]
 ]
 
+{ #category : #'api - enumerating' }
+BlSelection >> anySatisfy: aBlock [
+	"Evaluate aBlock with the elements of the receiver.
+	If aBlock returns true for any element return true.
+	Otherwise return false."
+
+	self do: [:each | (aBlock value: each) ifTrue: [ ^ true ] ].
+	^ false
+]
+
 { #category : #accessing }
 BlSelection >> children [
 	<return: #Collection of: #BlSelection>
