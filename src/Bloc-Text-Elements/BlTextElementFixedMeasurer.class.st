@@ -62,3 +62,13 @@ BlTextElementFixedMeasurer >> initialize [
 BlTextElementFixedMeasurer >> measurer [
 	^ measurer
 ]
+
+{ #category : #'font - metrics' }
+BlTextElementFixedMeasurer >> textOffset [
+	^ measurer textOffset
+]
+
+{ #category : #'font - metrics' }
+BlTextElementFixedMeasurer >> textOffset: aNumber [
+	measurer textOffset: aNumber
+]
