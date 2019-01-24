@@ -8,7 +8,8 @@ Class {
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'element',
-		'scale'
+		'scale',
+		'background'
 	],
 	#category : #'Bloc-Exporter'
 }
@@ -36,6 +37,16 @@ BlExporter class >> png [
 { #category : #'instance creation' }
 BlExporter class >> svg [
 	^ BlSvgExporter new
+]
+
+{ #category : #accessing }
+BlExporter >> background [
+	^ background
+]
+
+{ #category : #'api - configuration' }
+BlExporter >> background: aColorOrPaint [
+	background := aColorOrPaint
 ]
 
 { #category : #private }
@@ -72,6 +83,10 @@ BlExporter >> doExport: aFinalizingBlock [
 	aBoundsInParent := self computeBounds.
 	
 	aCanvas := self createCanvas: (aBoundsInParent extent * self scale max: 1@1).
+	aCanvas fill
+		path: aCanvas bounds;
+		paint: self background;
+		draw.
 	
 	self
 		drawOn: aCanvas
@@ -121,7 +136,8 @@ BlExporter >> export [
 BlExporter >> initialize [
 	super initialize.
 	
-	scale := 1
+	scale := 1.
+	background := Color transparent
 ]
 
 { #category : #accessing }
