@@ -1,7 +1,7 @@
 Class {
 	#name : #BlElementEventListener,
 	#superclass : #BlEventListener,
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-Events-Handling'
 }
 
 { #category : #'element handlers' }

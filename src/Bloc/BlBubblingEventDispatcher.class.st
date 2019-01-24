@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBubblingEventDispatcher,
 	#superclass : #BlDirectEventDispatcher,
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-Events-Handling'
 }
 
 { #category : #dispatching }

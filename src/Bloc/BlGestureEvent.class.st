@@ -9,7 +9,7 @@ https://developer.mozilla.org/en-US/Apps/Fundamentals/User_input_methods/Touch_G
 Class {
 	#name : #BlGestureEvent,
 	#superclass : #BlUIEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #testing }

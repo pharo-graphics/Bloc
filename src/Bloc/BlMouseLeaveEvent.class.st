@@ -9,7 +9,7 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mouseleave
 Class {
 	#name : #BlMouseLeaveEvent,
 	#superclass : #BlMouseEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #testing }

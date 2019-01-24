@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'shortcutRegistry'
 	],
-	#category : 'Bloc-KeyBinding'
+	#category : #'Bloc-Events-KeyBinding'
 }
 
 { #category : #'private - accessing' }

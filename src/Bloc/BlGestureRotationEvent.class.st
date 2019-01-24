@@ -1,7 +1,7 @@
 Class {
 	#name : #BlGestureRotationEvent,
 	#superclass : #BlGestureBaseRotationEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

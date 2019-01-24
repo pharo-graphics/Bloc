@@ -24,15 +24,15 @@ BaselineOfBloc >> baseline: spec [
 		spec postLoadDoIt: #'postLoadBloc:'.
 		spec 
 			baseline: 'BlocCore' with: [
-				spec repository: 'github://pharo-graphics/Bloc:v0.4.3/src' ];
+				spec repository: 'github://pharo-graphics/Bloc/src' ];
 			baseline: 'BlocLayout' with: [
-				spec repository: 'github://pharo-graphics/Bloc:v0.4.3/src' ];
+				spec repository: 'github://pharo-graphics/Bloc/src' ];
 			baseline: 'Sparta' with: [
-				spec repository: 'github://syrel/Sparta:v0.4.3/src' ];
+				spec repository: 'github://syrel/Sparta/src' ];
 			baseline: 'TaskIt' with: [
 				spec repository: 'github://sbragagnolo/taskit:v1.0.1' ];
 			baseline: 'GToolkitExamplesEngine' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples:v0.4.3/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-examples/src' ].
 		spec 
 			package: #'Bloc-Geometry' with: [
 				spec requires: #(#BlocCore ). ];
@@ -62,6 +62,8 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#BlocCore ). ];
 			package: #'BlocHost-Morphic' with: [
 				spec requires: #(#BlocCore ). ];
+			package: #'BlocHost-OSWindow' with: [
+				spec requires: #(#BlocCore 'Bloc-Sparta'). ];
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [

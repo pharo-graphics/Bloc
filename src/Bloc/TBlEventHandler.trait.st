@@ -3,7 +3,7 @@ I define an API of an abstract event handler
 "
 Trait {
 	#name : #TBlEventHandler,
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-Events-Handling'
 }
 
 { #category : #events }

@@ -7,7 +7,7 @@ Class {
 		'delta',
 		'pressure'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

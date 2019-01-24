@@ -6,7 +6,7 @@ See ==BlElementEventExamples== for related examples.
 Class {
 	#name : #BlElementEvent,
 	#superclass : #BlEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #'as yet unclassified' }

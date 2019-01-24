@@ -7,7 +7,7 @@ Class {
 		'dragboard',
 		'startButtons'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #converting }

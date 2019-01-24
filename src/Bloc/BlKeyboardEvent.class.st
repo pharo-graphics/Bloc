@@ -5,7 +5,7 @@ Class {
 		'scanCode',
 		'repeat'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

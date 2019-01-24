@@ -4,7 +4,7 @@ I transform composite key combination formula into a DNF (https://en.wikipedia.o
 Class {
 	#name : #BlKeyCombinationConverterDNF,
 	#superclass : #BlKeyCombinationVisitor,
-	#category : 'Bloc-KeyBinding'
+	#category : #'Bloc-Events-KeyBinding'
 }
 
 { #category : #visiting }

@@ -4,7 +4,7 @@ Any object that needs to be able to handle events should use me.
 "
 Trait {
 	#name : #TBlEventTarget,
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-Events-Handling'
 }
 
 { #category : #'event management' }

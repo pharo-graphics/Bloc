@@ -10,6 +10,6 @@ BlOSWindowExamples class >> example [
 	
 	space := BlSpace new.
 	space host: BlOSWindowHost new.
-	space addChild: (BlBasicExamples new elementsWithShadow).
+	space addChild: (BlElement new background: (Color gray alpha: 0.2); size: 200@200).
 	space show
 ]

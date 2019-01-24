@@ -7,9 +7,11 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'element'
+		'element',
+		'scale',
+		'background'
 	],
-	#category : 'Bloc-Exporter'
+	#category : #'Bloc-Exporter'
 }
 
 { #category : #'instance creation' }
@@ -35,6 +37,16 @@ BlExporter class >> png [
 { #category : #'instance creation' }
 BlExporter class >> svg [
 	^ BlSvgExporter new
+]
+
+{ #category : #accessing }
+BlExporter >> background [
+	^ background
+]
+
+{ #category : #'api - configuration' }
+BlExporter >> background: aColorOrPaint [
+	background := aColorOrPaint
 ]
 
 { #category : #private }
@@ -70,13 +82,19 @@ BlExporter >> doExport: aFinalizingBlock [
 
 	aBoundsInParent := self computeBounds.
 	
-	aCanvas := self createCanvas: (aBoundsInParent extent max: 1@1).
+	aCanvas := self createCanvas: (aBoundsInParent extent * self scale max: 1@1).
+	aCanvas fill
+		path: aCanvas bounds;
+		paint: self background;
+		draw.
 	
 	self
 		drawOn: aCanvas
 		during: [
 			aCanvas transform
-				by: [ :aTransform | aTransform translateBy: (aBoundsInParent origin) negated ]
+				by: [ :aTransform | aTransform
+					scaleBy: self scale asPoint;
+					translateBy: (aBoundsInParent origin) negated ]
 				during: [ anElement fullDrawOnSpartaCanvas: aCanvas ] ].
 
 	^ aFinalizingBlock cull: aCanvas
@@ -112,4 +130,29 @@ BlExporter >> export [
 	"Start exporting process. Subclasses must implement me"
 	
 	self subclassResponsibility
+]
+
+{ #category : #initialization }
+BlExporter >> initialize [
+	super initialize.
+	
+	scale := 1.
+	background := Color transparent
+]
+
+{ #category : #accessing }
+BlExporter >> scale [
+	<return: #Number>
+
+	^ scale
+]
+
+{ #category : #'api - configuration' }
+BlExporter >> scaled: aNumber [
+
+	self
+		assert: [ aNumber > 0 ]
+		description: [ 'Scale must be positive' ].
+
+	scale := aNumber
 ]

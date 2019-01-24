@@ -4,7 +4,7 @@ The event has arrived at the event's target. Event listeners registered for this
 Class {
 	#name : #BlEventTraversalTargetStep,
 	#superclass : #BlEventTraversalStep,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'addedElement'
 	],
-	#category : #'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

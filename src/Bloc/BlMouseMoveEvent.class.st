@@ -6,7 +6,7 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mousemove
 Class {
 	#name : #BlMouseMoveEvent,
 	#superclass : #BlMouseEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #'instance creation' }

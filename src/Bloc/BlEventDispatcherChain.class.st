@@ -11,7 +11,7 @@ Class {
 		'previous',
 		'dispatcher'
 	],
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-Events-Handling'
 }
 
 { #category : #'instance creation' }

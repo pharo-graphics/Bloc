@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMouseDownEvent,
 	#superclass : #BlMouseEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #'instance creation' }

@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlEventHandler + TBlDebug',
 	#classTraits : 'TBlEventHandler classTrait + TBlDebug classTrait',
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-Events-Handling'
 }
 
 { #category : #'api - event managing' }

@@ -16,37 +16,14 @@ Class {
 	#superclass : #BlFileExporter,
 	#instVars : [
 		'isProgressive',
-		'quality',
-		'backgroundColor'
+		'quality'
 	],
-	#category : 'Bloc-Exporter'
+	#category : #'Bloc-Exporter'
 }
-
-{ #category : #accessing }
-BlJpgExporter >> backgroundColor [
-	<return: #Color>
-
-	^ backgroundColor
-]
-
-{ #category : #accessing }
-BlJpgExporter >> backgroundColor: aColor [
-	backgroundColor := aColor
-]
 
 { #category : #'instance creation' }
 BlJpgExporter >> createCanvas: anExtent [
-	| aCanvas |
-
-	aCanvas := Bloc preferableSpartaCanvas extent: anExtent.
-	
-	"make sure that canvas has a background color, because JPG does not support transparency"
-	aCanvas fill
-		paint: self backgroundColor;
-		path: aCanvas bounds;
-		draw.
-
-	^ aCanvas
+	^ Bloc preferableSpartaCanvas extent: anExtent
 ]
 
 { #category : #'api - exporting' }
@@ -79,7 +56,7 @@ BlJpgExporter >> initialize [
 
 	isProgressive := true.
 	quality := 100. "best quality"
-	backgroundColor := Color white
+	background := Color white
 ]
 
 { #category : #accessing }

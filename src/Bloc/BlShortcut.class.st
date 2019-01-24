@@ -40,7 +40,7 @@ Class {
 		'combination',
 		'action'
 	],
-	#category : 'Bloc-KeyBinding'
+	#category : #'Bloc-Events-KeyBinding'
 }
 
 { #category : #accessing }
@@ -95,4 +95,16 @@ BlShortcut >> name [
 { #category : #accessing }
 BlShortcut >> name: anObject [
 	name := anObject
+]
+
+{ #category : #printing }
+BlShortcut >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self name ifNotNil: [ 
+		aStream 
+			nextPutAll: self name;
+			nextPutAll: ', ' ].
+	self combination printOn: aStream.
+	aStream nextPut: $).
 ]

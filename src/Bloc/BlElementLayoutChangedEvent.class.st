@@ -14,7 +14,7 @@ element layout: BlBasicLayout new
 Class {
 	#name : #BlElementLayoutChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

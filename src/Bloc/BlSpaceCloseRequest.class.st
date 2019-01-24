@@ -11,7 +11,7 @@ After that space sents an actual BlSpaceClosedEvent that indicates that windows 
 Class {
 	#name : #BlSpaceCloseRequest,
 	#superclass : #BlSpaceEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #testing }

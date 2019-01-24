@@ -5,7 +5,7 @@ Class {
 		'start',
 		'end'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

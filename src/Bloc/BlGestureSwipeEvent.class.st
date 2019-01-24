@@ -1,7 +1,7 @@
 Class {
 	#name : #BlGestureSwipeEvent,
 	#superclass : #BlGestureBaseSwipeEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

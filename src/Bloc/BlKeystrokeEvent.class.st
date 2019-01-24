@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'char'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #'key - accessing' }

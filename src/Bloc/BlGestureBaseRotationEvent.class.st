@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'angle'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

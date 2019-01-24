@@ -18,7 +18,7 @@ parent addChild: child.
 Class {
 	#name : #BlElementAddedToParentEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

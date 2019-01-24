@@ -1,5 +1,5 @@
 Class {
 	#name : #BlPulseEvent,
 	#superclass : #BlEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
