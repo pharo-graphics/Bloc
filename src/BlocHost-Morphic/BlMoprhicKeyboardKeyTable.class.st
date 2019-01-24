@@ -12,11 +12,11 @@ Class {
 
 { #category : #'class initialization' }
 BlMoprhicKeyboardKeyTable class >> initialize [
-	self
+	"self
 		initializeKeyTable;
 		initializeMacOSVirtualKeyTable;
 		initializeUnixVirtualKeyTable;
-		initializeWindowsVirtualKeyTable
+		initializeWindowsVirtualKeyTable"
 ]
 
 { #category : #'key table' }
