@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMouseStillDownEvent,
 	#superclass : #BlMouseEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #testing }

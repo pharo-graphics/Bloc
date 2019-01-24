@@ -6,7 +6,7 @@ Note: position may change even if an element has no parent
 Class {
 	#name : #BlElementPositionChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

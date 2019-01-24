@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'handlers'
 	],
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-Events-Handling'
 }
 
 { #category : #testing }

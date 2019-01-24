@@ -19,7 +19,7 @@ parent removeChild: child
 Class {
 	#name : #BlElementRemovedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

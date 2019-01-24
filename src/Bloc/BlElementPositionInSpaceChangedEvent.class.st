@@ -6,7 +6,7 @@ Position in space may change even if element's #position is still the same. It c
 Class {
 	#name : #BlElementPositionInSpaceChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

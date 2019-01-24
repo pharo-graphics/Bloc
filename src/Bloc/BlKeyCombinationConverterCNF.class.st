@@ -4,7 +4,7 @@ I transform composite key combination formula into a CNF (https://en.wikipedia.o
 Class {
 	#name : #BlKeyCombinationConverterCNF,
 	#superclass : #BlKeyCombinationVisitor,
-	#category : 'Bloc-KeyBinding'
+	#category : #'Bloc-Events-KeyBinding'
 }
 
 { #category : #visiting }

@@ -8,5 +8,5 @@ Purposes/real world use cases:
 Class {
 	#name : #BlGestureBasePinchEvent,
 	#superclass : #BlGestureEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }

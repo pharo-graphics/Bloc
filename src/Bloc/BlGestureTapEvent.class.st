@@ -10,5 +10,5 @@ Purposes/real world use cases:
 Class {
 	#name : #BlGestureTapEvent,
 	#superclass : #BlGestureEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }

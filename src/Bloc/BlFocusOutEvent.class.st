@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFocusOutEvent,
 	#superclass : #BlBaseFocusEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #testing }

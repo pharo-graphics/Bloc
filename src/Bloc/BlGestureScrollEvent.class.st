@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'vector'
 	],
-	#category : #'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

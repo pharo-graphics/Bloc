@@ -20,7 +20,7 @@ Class {
 	#instVars : [
 		'buffer'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

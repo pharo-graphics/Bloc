@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBaseFocusEvent,
 	#superclass : #BlEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #converting }

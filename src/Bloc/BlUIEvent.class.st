@@ -7,7 +7,7 @@ Class {
 		'modifiers',
 		'button'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

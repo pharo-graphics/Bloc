@@ -13,7 +13,7 @@ Class {
 		'consumed',
 		'traversedTargets'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #'event management' }

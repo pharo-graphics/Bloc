@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'bounds'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceFocusInEvent,
 	#superclass : #BlSpaceEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

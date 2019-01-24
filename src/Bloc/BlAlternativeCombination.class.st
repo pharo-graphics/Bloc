@@ -24,7 +24,7 @@ Class {
 	#instVars : [
 		'combinations'
 	],
-	#category : 'Bloc-KeyBinding'
+	#category : #'Bloc-Events-KeyBinding'
 }
 
 { #category : #visiting }

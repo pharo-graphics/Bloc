@@ -4,7 +4,7 @@ The ===BlFocusInEvent=== event is sent to an element when it, or any element ins
 Class {
 	#name : #BlFocusInEvent,
 	#superclass : #BlBaseFocusEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #testing }

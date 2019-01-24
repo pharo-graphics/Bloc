@@ -14,7 +14,7 @@ element background: Color blue
 Class {
 	#name : #BlElementBackgroundChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

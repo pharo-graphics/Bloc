@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'hashKey'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #'as yet unclassified' }

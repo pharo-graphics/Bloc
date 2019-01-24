@@ -28,7 +28,7 @@ Class {
 		'combination',
 		'converter'
 	],
-	#category : 'Bloc-KeyBinding'
+	#category : #'Bloc-Events-KeyBinding'
 }
 
 { #category : #accessing }

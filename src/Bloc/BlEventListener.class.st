@@ -1,7 +1,7 @@
 Class {
 	#name : #BlEventListener,
 	#superclass : #BlBasicEventHandler,
-	#category : 'Bloc-EventHandling'
+	#category : #'Bloc-Events-Handling'
 }
 
 { #category : #'focus handlers' }

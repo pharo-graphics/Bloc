@@ -14,7 +14,7 @@ element border: (BlBorder paint: Color blue width: 20)
 Class {
 	#name : #BlElementBorderChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

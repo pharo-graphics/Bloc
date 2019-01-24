@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #testing }

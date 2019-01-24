@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceEventEndEvent,
 	#superclass : #BlSpaceStepEvent,
-	#category : #'Bloc-Event'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

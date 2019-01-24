@@ -1,5 +1,5 @@
 Class {
 	#name : #BlGestureBaseSwipeEvent,
 	#superclass : #BlGestureEvent,
-	#category : 'Bloc-Event'
+	#category : #'Bloc-Events'
 }
