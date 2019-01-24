@@ -17,9 +17,10 @@ Class {
 		'measuredHeight',
 		'textRun',
 		'textRunStart',
-		'textRunEnd'
+		'textRunEnd',
+		'textOffset'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : #'Bloc-Text-Text-Mocked'
 }
 
 { #category : #measurement }
@@ -39,6 +40,11 @@ BlTextParagraphFixedSpanMeasurer >> ascent [
 { #category : #accessing }
 BlTextParagraphFixedSpanMeasurer >> ascent: aNumber [
 	ascent := aNumber
+]
+
+{ #category : #'instance creation' }
+BlTextParagraphFixedSpanMeasurer >> createParagraphSpan [
+	^ BlTextParagraphFixedSpan new
 ]
 
 { #category : #accessing }
@@ -82,7 +88,8 @@ BlTextParagraphFixedSpanMeasurer >> initialize [
 	ascent := 11.
 	descent := 4.
 	height := 13.
-	glyphWidth := 5
+	glyphWidth := 5.
+	textOffset := 0
 ]
 
 { #category : #measurement }
@@ -177,6 +184,16 @@ BlTextParagraphFixedSpanMeasurer >> spanStart [
 	<return: #Number>
 
 	^ textRunStart
+]
+
+{ #category : #accessing }
+BlTextParagraphFixedSpanMeasurer >> textOffset [
+	^ textOffset
+]
+
+{ #category : #accessing }
+BlTextParagraphFixedSpanMeasurer >> textOffset: aNumber [
+	textOffset := aNumber
 ]
 
 { #category : #accessing }

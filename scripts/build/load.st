@@ -1,5 +1,6 @@
 "load latest version"
 EpMonitor current disable.
+
 Metacello new
   baseline: 'Bloc';
   repository: 'github://pharo-graphics/Bloc/src';

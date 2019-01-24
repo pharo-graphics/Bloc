@@ -48,11 +48,6 @@ BlTextParagraphMeasurer >> availableWidth [
 	^ maxWidth - self accumulatedWidth
 ]
 
-{ #category : #initialization }
-BlTextParagraphMeasurer >> defaultParagraphSpan [
-	^ BlTextParagraphSpan new
-]
-
 { #category : #'measurement - testing' }
 BlTextParagraphMeasurer >> hasAvailableSpace [
 	"Return true if I have space available for more spans, false otherwise"
@@ -134,7 +129,7 @@ BlTextParagraphMeasurer >> measureSpan: aBrSpan of: aTextParagraph on: aCanvas w
 	[ self wantsMore ] whileTrue: [
 		| aParagraphSpan |
 
-		aParagraphSpan := self defaultParagraphSpan.
+		aParagraphSpan := aSpanMeasurer createParagraphSpan.
 		aParagraphSpan measurer: aSpanMeasurer.
 
 		aSpanMeasurer
