@@ -14,6 +14,9 @@ The packages of Bloc are organized as follows. The visualization also shows the 
 Class {
 	#name : #BaselineOfBloc,
 	#superclass : #BaselineOf,
+	#classVars : [
+		'PostLoaded'
+	],
 	#category : #BaselineOfBloc
 }
 
@@ -72,7 +75,11 @@ BaselineOfBloc >> baseline: spec [
 ]
 
 { #category : #'post load' }
-BaselineOfBloc >> postLoadBloc:spec [
+BaselineOfBloc >> postLoadBloc: spec [
+	(PostLoaded isNotNil and: [ PostLoaded ])
+		ifTrue: [ ^ self ].
+		
+	PostLoaded := true.
 	self postLoadDisableTaskItDebugger: spec.
 	self postLoadMorphicHost: spec
 	
