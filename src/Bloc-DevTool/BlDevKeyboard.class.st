@@ -136,6 +136,18 @@ BlDevKeyboard >> keyboardWidth [
 	^ self rowWidth
 ]
 
+{ #category : #'instance creation' }
+BlDevKeyboard >> newButton: anExtent [
+	^ BlElement new
+		size: anExtent;
+		geometry: (BlRectangle cornerRadius: 4);
+		border: (BlBorder paint: (Color gray alpha: 0.2) width: 1);
+		layout: (BlFrameLayout new);
+		effect: (BlDropShadowEffect color: (Color black alpha: 0.1) width: 4 offset: 0@1);
+		margin: (BlInsets all: self spacing);
+		background: (Color white)
+]
+
 { #category : #geometry }
 BlDevKeyboard >> rowHeight [
 	^ 35
@@ -150,14 +162,7 @@ BlDevKeyboard >> rowWidth [
 BlDevKeyboard >> simpleKey: aString [
 	| button label |
 
-	button := BlElement new.
-	button size: self simpleKeyExtent.
-	button geometry: (BlRectangle cornerRadius: 4).
-	button border: (BlBorder paint: (Color gray alpha: 0.2) width: 1).
-	button layout: (BlFrameLayout new).
-	button look: (BrShadowLook new color: (Color black alpha: 0.1)).
-	button margin: (BlInsets all: self spacing).
-	button background: (Color white).
+	button := self newButton: self simpleKeyExtent.
 
 	label := BlTextElement new.
 	label boundsBaseline.
@@ -184,15 +189,8 @@ BlDevKeyboard >> simpleKeyWidth [
 { #category : #'instance creation' }
 BlDevKeyboard >> simpleSmallKey: aString [
 	| button label |
-
-	button := BlElement new.
-	button size: self simpleKeyExtent.
-	button geometry: (BlRectangle cornerRadius: 4).
-	button border: (BlBorder paint: (Color gray alpha: 0.2) width: 1).
-	button layout: (BlFrameLayout new).
-	button look: (BrShadowLook new color: (Color black alpha: 0.1)).
-	button margin: (BlInsets all: self spacing).
-	button background: (Color white).
+	
+	button := self newButton: self simpleKeyExtent.
 
 	label := BlTextElement new.
 	label boundsBaseline.
@@ -214,15 +212,8 @@ BlDevKeyboard >> spacing [
 { #category : #'instance creation' }
 BlDevKeyboard >> wideKey: aString span: aNumber [
 	| button label |
-
-	button := BlElement new.
-	button size: (self wideWidth: aNumber) @ self rowHeight.
-	button geometry: (BlRectangle cornerRadius: 4).
-	button border: (BlBorder paint: (Color gray alpha: 0.2) width: 1).
-	button layout: (BlFrameLayout new).
-	button look: (BrShadowLook new color: (Color black alpha: 0.1)).
-	button margin: (BlInsets all: self spacing).
-	button background: (Color white).
+	
+	button := self newButton: (self wideWidth: aNumber) @ self rowHeight.
 
 	label := BlTextElement new.
 	label boundsBaseline.
@@ -240,14 +231,7 @@ BlDevKeyboard >> wideKey: aString span: aNumber [
 BlDevKeyboard >> wideSmallKey: aString span: aNumber [
 	| button label |
 
-	button := BlElement new.
-	button size: (self wideWidth: aNumber) @ self rowHeight.
-	button geometry: (BlRectangle cornerRadius: 4).
-	button border: (BlBorder paint: (Color gray alpha: 0.2) width: 1).
-	button layout: (BlFrameLayout new).
-	button look: (BrShadowLook new color: (Color black alpha: 0.1)).
-	button margin: (BlInsets all: self spacing).
-	button background: (Color white).
+	button := self newButton: (self wideWidth: aNumber) @ self rowHeight.
 
 	label := BlTextElement new.
 	label boundsBaseline.
