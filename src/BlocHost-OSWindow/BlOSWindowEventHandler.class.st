@@ -153,7 +153,7 @@ BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 	| aBlocEvent |
 
 	aBlocEvent := BlKeyDownEvent new
-		key: (Key value: (self mapSymbolToKeyValue: anEvent symbol));
+		key: (BlKeyboardKey value: (self mapSymbolToKeyValue: anEvent symbol));
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: DateAndTime now;
@@ -176,7 +176,7 @@ BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 		cr.
 
 	aBlocEvent := BlKeyUpEvent new
-		key: (Key value: (self mapSymbolToKeyValue: anEvent symbol));
+		key: (BlKeyboardKey value: (self mapSymbolToKeyValue: anEvent symbol));
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: DateAndTime now;

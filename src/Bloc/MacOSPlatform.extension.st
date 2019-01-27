@@ -3,15 +3,15 @@ Extension { #name : #MacOSPlatform }
 { #category : #'*Bloc' }
 MacOSPlatform >> primaryModifier [
 	^ BlAlternativeCombination new
-		key: Key leftMeta;
-		key: Key rightMeta;
+		key: BlKeyboardKey metaLeft;
+		key: BlKeyboardKey metaRight;
 		yourself
 ]
 
 { #category : #'*Bloc' }
 MacOSPlatform >> secondaryModifier [
 	^ BlAlternativeCombination new
-		key: Key leftControl;
-		key: Key rightControl;
+		key: BlKeyboardKey controlLeft;
+		key: BlKeyboardKey controlRight;
 		yourself
 ]

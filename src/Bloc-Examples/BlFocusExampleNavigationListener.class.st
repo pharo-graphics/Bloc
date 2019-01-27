@@ -24,13 +24,13 @@ BlFocusExampleNavigationListener >> keyDownEvent: anEvent [
 	direction := nil.
 	next := nil.
 			
-	anEvent key = Key arrowLeft
+	anEvent key = BlKeyboardKey arrowLeft
 		ifTrue: [ direction := BlFocusSearchDirectionLeft new ].
-	anEvent key = Key arrowUp
+	anEvent key = BlKeyboardKey arrowUp
 		ifTrue: [ direction := BlFocusSearchDirectionUp new ].
-	anEvent key = Key arrowRight
+	anEvent key = BlKeyboardKey arrowRight
 		ifTrue: [ direction := BlFocusSearchDirectionRight new ].
-	anEvent key = Key arrowDown
+	anEvent key = BlKeyboardKey arrowDown
 		ifTrue: [ direction := BlFocusSearchDirectionDown new ].
 				
 	next := direction ifNotNil: [ :aDirection |

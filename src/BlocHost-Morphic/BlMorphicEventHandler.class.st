@@ -47,6 +47,13 @@ BlMorphicEventHandler >> convertButtonFromMouseEvent: aMorphicEvent [
 ]
 
 { #category : #converting }
+BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
+	<return: #BlKeyboardKey>
+
+	^ OSPlatform current blocKeyFor: aMorphicEvent scanCode in: BlMorphicKeyboardKeyTable
+]
+
+{ #category : #converting }
 BlMorphicEventHandler >> convertKeyModifiersFromEvent: aMorphicEvent [ 
 	| shift ctrl alt cmd |
 
@@ -92,9 +99,8 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		ifTrue: [ ^ self ].
 	
 	aBlEvent := BlKeyDownEvent new
-		key: aMorphicEvent key;
+		key: (self convertKeyFromEvent: aMorphicEvent);
 		scanCode: aMorphicEvent scanCode;
-		
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 		timestamp: DateAndTime now;
 		position: aMorphicEvent position;
@@ -111,9 +117,8 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 		ifTrue: [ ^ self ].
 		
 	aBlEvent := BlKeyUpEvent new
-		key: aMorphicEvent key;
+		key: (self convertKeyFromEvent: aMorphicEvent);
 		scanCode: aMorphicEvent scanCode;
-		
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 		timestamp: DateAndTime now;
 		position: aMorphicEvent position;

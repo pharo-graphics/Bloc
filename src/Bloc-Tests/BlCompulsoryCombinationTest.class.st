@@ -31,14 +31,14 @@ BlCompulsoryCombinationTest >> testKey [
 
 	self assert: combination combinations isEmpty.
 	
-	combination key: Key a.
-	self assert: (combination combinations asArray collect: #key) equals: { Key a }.
+	combination key: BlKeyboardKey a.
+	self assert: (combination combinations asArray collect: #key) equals: { BlKeyboardKey a }.
 	
-	combination key: Key b.
-	self assert: (combination combinations asArray collect: #key) equals: { Key a. Key b }.
+	combination key: BlKeyboardKey b.
+	self assert: (combination combinations asArray collect: #key) equals: { BlKeyboardKey a. BlKeyboardKey b }.
 	
-	combination key: Key c.
-	self assert: (combination combinations asArray collect: #key) equals: { Key a. Key b. Key c }
+	combination key: BlKeyboardKey c.
+	self assert: (combination combinations asArray collect: #key) equals: { BlKeyboardKey a. BlKeyboardKey b. BlKeyboardKey c }
 ]
 
 { #category : #tests }
@@ -46,19 +46,19 @@ BlCompulsoryCombinationTest >> testMatch [
 	<gtExample>
 	self setUp.
 	
-	buffer pressed: false key: Key a.
-	buffer pressed: true key: Key b.
-	buffer pressed: true key: Key c.
+	buffer pressed: false key: BlKeyboardKey a.
+	buffer pressed: true key: BlKeyboardKey b.
+	buffer pressed: true key: BlKeyboardKey c.
 	
 	self assert: (combination match: buffer) equals: 0.
 
-	combination key: Key a.
+	combination key: BlKeyboardKey a.
 	self assert: (combination match: buffer) equals: 0.
 	
-	combination key: Key c.
+	combination key: BlKeyboardKey c.
 	self assert: (combination match: buffer) equals: 1.
 	
-	combination key: Key b.
+	combination key: BlKeyboardKey b.
 	self assert: (combination match: buffer) equals: 2
 ]
 
@@ -67,18 +67,18 @@ BlCompulsoryCombinationTest >> testMatches [
 	<gtExample>.
 	self setUp.
 
-	buffer pressed: true key: Key a.
-	buffer pressed: false key: Key b.
-	buffer pressed: true key: Key c.
+	buffer pressed: true key: BlKeyboardKey a.
+	buffer pressed: false key: BlKeyboardKey b.
+	buffer pressed: true key: BlKeyboardKey c.
 	
 	self assert: (combination matches: buffer) not.
 	
-	combination key: Key a.
+	combination key: BlKeyboardKey a.
 	self assert: (combination matches: buffer).
 	
-	combination key: Key c.
+	combination key: BlKeyboardKey c.
 	self assert: (combination matches: buffer).
 	
-	combination key: Key b.
+	combination key: BlKeyboardKey b.
 	self assert: (combination matches: buffer) not
 ]

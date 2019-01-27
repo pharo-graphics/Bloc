@@ -30,8 +30,8 @@ BlKeyboardProcessorTest >> testProcessKeyDown [
 	| eventA |
 
 	eventA := BlKeyDownEvent new.
-	eventA key: Key a.
+	eventA key: BlKeyboardKey a.
 
 	processor processKeyDown: eventA.
-	self assert: (processor buffer hasEvent: Key a)
+	self assert: (processor buffer hasEvent: BlKeyboardKey a)
 ]

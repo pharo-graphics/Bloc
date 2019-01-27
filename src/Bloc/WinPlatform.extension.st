@@ -1,17 +1,24 @@
 Extension { #name : #WinPlatform }
 
 { #category : #'*Bloc' }
+WinPlatform >> blocKeyFor: aKeyValue in: aKeyTable [
+	<return: #BlKeyboardKey>
+
+	^ aKeyTable valueForWindowsPlatform: aKeyValue
+]
+
+{ #category : #'*Bloc' }
 WinPlatform >> primaryModifier [
 	^ BlAlternativeCombination new
-		key: Key leftControl;
-		key: Key rightControl;
+		key: BlKeyboardKey controlLeft;
+		key: BlKeyboardKey controlRight;
 		yourself
 ]
 
 { #category : #'*Bloc' }
 WinPlatform >> secondaryModifier [
 	^ BlAlternativeCombination new
-		key: Key leftAlt;
-		key: Key rightAlt;
+		key: BlKeyboardKey altLeft;
+		key: BlKeyboardKey altRight;
 		yourself
 ]
