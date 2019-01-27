@@ -19,6 +19,94 @@ BlKeyCombination class >> builder [
 	^ BlKeyCombinationBuilder new
 ]
 
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryB [
+	"primary (Command/Control) + B"
+	<return: #BlKeyCombination>
+
+	^ self builder primary b build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryD [
+	"primary (Command/Control) + D"
+	<return: #BlKeyCombination>
+
+	^ self builder primary d build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryE [
+	"primary (Command/Control) + E"
+	<return: #BlKeyCombination>
+
+	^ self builder primary e build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryF [
+	"primary (Command/Control) + F"
+	<return: #BlKeyCombination>
+
+	^ self builder primary f build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryG [
+	"primary (Command/Control) + G"
+	<return: #BlKeyCombination>
+
+	^ self builder primary g build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryM [
+	"primary (Command/Control) + M"
+	<return: #BlKeyCombination>
+
+	^ self builder primary m build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryN [
+	"primary (Command/Control) + N"
+	<return: #BlKeyCombination>
+
+	^ self builder primary n build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryP [
+	"primary (Command/Control) + P"
+	<return: #BlKeyCombination>
+
+	^ self builder primary p build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryR [
+	"primary (Command/Control) + R"
+	<return: #BlKeyCombination>
+
+	^ self builder primary r build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryS [
+	"primary (Command/Control) + S"
+	<return: #BlKeyCombination>
+
+	^ self builder primary s build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryShiftF [
+	"primary (Command/Control) + Shift + F"
+	<return: #BlKeyCombination>
+
+	^ self builder primary shift f build
+]
+
 { #category : #visiting }
 BlKeyCombination >> accept: aKeyCombinationVisitor [
 	^ self subclassResponsibility
