@@ -48,6 +48,8 @@ BlDevKeyboard >> initializeBottomRow [
 { #category : #initialization }
 BlDevKeyboard >> initializeEventListeners [
 	self when: BlKeyDownEvent do: [ :anEvent |
+		anEvent key logCr.
+
 		keymap
 			at: anEvent key
 			ifPresent: [ :aButton | aButton background: (Color veryVeryLightGray) ]
@@ -123,7 +125,7 @@ BlDevKeyboard >> initializeTopRow [
 	
 	self addButton: (self simpleKey: '-') key: BlKeyboardKey minus.
 	self addButton: (self simpleKey: '=') key: BlKeyboardKey equal.
-	self addButton: (self wideKey: 'delete' span: 1.45) key: BlKeyboardKey tab.
+	self addButton: (self wideKey: 'delete' span: 1.45) key: BlKeyboardKey backspace.
 ]
 
 { #category : #geometry }

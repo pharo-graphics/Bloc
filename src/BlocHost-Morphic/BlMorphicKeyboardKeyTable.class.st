@@ -114,7 +114,7 @@ BlMorphicKeyboardKeyTable class >> initializeMacOSVirtualKeyTable [
 			16r17 Five
 			16r16 Six
 			16r1A Seven
-			16r1C Eigth
+			16r1C Eight
 			16r19 Nine
 
 			"symbols"
@@ -153,6 +153,8 @@ BlMorphicKeyboardKeyTable class >> initializeMacOSVirtualKeyTable [
 
 { #category : #'map - unix' }
 BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
+	<script: 'self initializeUnixVirtualKeyTable'>
+
 	self
 		initialize: (UnixVirtualKeyTable := Dictionary new)
 		with: #(
@@ -161,8 +163,9 @@ BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
 			16r09 Tab
 			16r20 Space
 			16r7F Delete
+			16r08 Backspace
 			16r1B Escape
-			-1 CapsLock
+			16rFD CapsLock
 			16r3F Function
 			
 			"modifiers"
@@ -243,12 +246,12 @@ BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
 			16r35 Five
 			16r36 Six
 			16r37 Seven
-			16r38 Eigth
+			16r38 Eight
 			16r39 Nine
 
 			"symbols"
-			16r1B Minus
-			16r18 Equal
+			16r2D Minus
+			16r3D Equal
 			16r21 LeftBracket
 			16r1E RightBracket
 			16r27 Quote
@@ -257,7 +260,7 @@ BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
 			16r2B Comma
 			16r2C Slash
 			16r2F Period
-			16r32 Grave
+			16r60 Grave
 			
 			16r41 KeypadDecimal
 			16r43 KeypadMultiply
