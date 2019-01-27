@@ -21,6 +21,7 @@ BlMorphicKeyboardKeyTable class >> initialize [
 BlMorphicKeyboardKeyTable class >> initialize: aMapDictionary with: aMapArray [
 	aMapArray pairsDo: [ :eachCode :eachName |
 		| aName |
+		
 		aName := (BlKeyboardKey respondsTo: eachName)
 			ifTrue: [ eachName ]
 			ifFalse: [ (BlKeyboardKey respondsTo: eachName uncapitalized)
@@ -166,17 +167,14 @@ BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
 			16r08 Backspace
 			16r1B Escape
 			16rFD CapsLock
-			16r3F Function
 			
 			"modifiers"
 			16rFF ShiftLeft
 			16rFE ShiftRight
-			16r3A AltLeft
-			16r3D AltRight
-			16r3B ControlLeft
-			16r3E ControlRight
-			16r37 MetaLeft
-			16r36 MetaRight
+			16rF7 AltLeft
+			16rF6 AltRight
+			16rFB ControlLeft
+			16rFA ControlRight
 	
 			"sound"
 			16r48 VolumeUp
@@ -210,32 +208,59 @@ BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
 			16r7E ArrowUp
 			
 			"letters"
-			16r61 A
-			16r62 B
-			16r63 C
-			16r64 D
-			16r65 E
-			16r66 F
-			16r67 G
-			16r68 H
-			16r69 I
-			16r6A J
-			16r6B K
-			16r6C L
-			16r6D M
-			16r6E N
-			16r6F O
-			16r70 P
-			16r71 Q
-			16r72 R
-			16r73 S
-			16r74 T
-			16r75 U
-			16r76 V
-			16r77 W
-			16r78 X
-			16r79 Y
-			16r7A Z
+			16r61 a
+			16r62 b
+			16r63 c
+			16r64 d
+			16r65 e
+			16r66 f
+			16r67 g
+			16r68 h
+			16r69 i
+			16r6A j
+			16r6B k
+			16r6C l
+			16r6D m
+			16r6E n
+			16r6F o
+			16r70 p
+			16r71 q
+			16r72 r
+			16r73 s
+			16r74 t
+			16r75 u
+			16r76 v
+			16r77 w
+			16r78 x
+			16r79 y
+			16r7A z
+
+			16r41 A
+			16r42 B
+			16r43 C
+			16r44 D
+			16r45 E
+			16r46 F
+			16r47 G
+			16r48 H
+			16r49 I
+			16r4A J
+			16r4B K
+			16r4C L
+			16r4D M
+			16r4E N
+			16r4F O
+			16r50 P
+			16r51 Q
+			16r52 R
+			16r53 S
+			16r54 T
+			16r55 U
+			16r56 V
+			16r57 W
+			16r58 X
+			16r59 Y
+			16r5A Z
 			
 			"digits"
 			16r30 Zero
@@ -252,17 +277,17 @@ BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
 			"symbols"
 			16r2D Minus
 			16r3D Equal
-			16r21 LeftBracket
-			16r1E RightBracket
+			16r5B LeftBracket
+			16r5D RightBracket
 			16r27 Quote
-			16r29 Semicolon
-			16r2A Backslash
-			16r2B Comma
-			16r2C Slash
-			16r2F Period
+			16r3B Semicolon
+			16r5C Backslash
+			16r2C Comma
+			16r2F Slash
+			16r2E Period
 			16r60 Grave
 			
-			16r41 KeypadDecimal
+			"16r41 KeypadDecimal
 			16r43 KeypadMultiply
 			16r45 KeypadPlus
 			16r47 KeypadClear
@@ -279,7 +304,7 @@ BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
 			16r58 Keypad6
 			16r59 Keypad7
 			16r5B Keypad8
-			16r5C Keypad9
+			16r5C Keypad9"
 		).
 ]
 
