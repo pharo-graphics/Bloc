@@ -24,7 +24,7 @@ BlMorphicKeyboardKeyTable class >> default [
 	^ default ifNil: [ default := self new ]
 ]
 
-{ #category : #'class initialization' }
+{ #category : #initialization }
 BlMorphicKeyboardKeyTable >> initialize [
 	super initialize.
 

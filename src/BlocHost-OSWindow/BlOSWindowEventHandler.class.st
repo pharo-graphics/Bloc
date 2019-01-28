@@ -75,6 +75,13 @@ BlOSWindowEventHandler >> convertButton: osButton [
 ]
 
 { #category : #converting }
+BlOSWindowEventHandler >> convertKeyFromEvent: anEvent [
+	<return: #BlKeyboardKey>
+
+	^ BlOSWindowKeyboardKeyTable default keyFromScanCode: anEvent scanCode
+]
+
+{ #category : #converting }
 BlOSWindowEventHandler >> convertKeyModifiers: modifiers [
 	<return: #BlKeyModifiers>
 
@@ -150,42 +157,32 @@ BlOSWindowEventHandler >> time: aTime [
 
 { #category : #'visiting keyboard' }
 BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
-	| aBlocEvent |
+	| aBlEvent |
 
-	aBlocEvent := BlKeyDownEvent new
-		key: (BlKeyboardKey value: (self mapSymbolToKeyValue: anEvent symbol));
+	aBlEvent := BlKeyDownEvent new
+		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: DateAndTime now;
 		position: anEvent position;
 		screenPosition: window position + anEvent position.
 
-	NonInteractiveTranscript stdout show: aBlocEvent; cr.
-
-	self enqueue: aBlocEvent
+	self enqueue: aBlEvent
 ]
 
 { #category : #'visiting keyboard' }
 BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
-	| aBlocEvent |
+	| aBlEvent |
 
-	NonInteractiveTranscript stdout
-		show: 'scanCode = ', anEvent scanCode asString;
-		show: 'symbol = ', anEvent symbol asString;
-		show: 'character = ', anEvent character asString;
-		cr.
-
-	aBlocEvent := BlKeyUpEvent new
-		key: (BlKeyboardKey value: (self mapSymbolToKeyValue: anEvent symbol));
+	aBlEvent := BlKeyUpEvent new
+		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: DateAndTime now;
 		position: anEvent position;
 		screenPosition: window position + anEvent position.
-	
-	NonInteractiveTranscript stdout show: aBlocEvent; cr.
 
-	self enqueue: aBlocEvent
+	self enqueue: aBlEvent
 ]
 
 { #category : #'visiting - mouse' }
