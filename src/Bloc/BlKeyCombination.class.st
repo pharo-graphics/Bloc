@@ -14,9 +14,32 @@ Class {
 	#category : #'Bloc-Events-KeyBinding'
 }
 
+{ #category : #'instance creation' }
+BlKeyCombination class >> backspace [
+	^ self builder backspace build
+]
+
 { #category : #accessing }
 BlKeyCombination class >> builder [
 	^ BlKeyCombinationBuilder new
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> delete [
+	^ self builder delete build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> escape [
+	^ self builder escape build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryA [
+	"primary (Command/Control) + A"
+	<return: #BlKeyCombination>
+
+	^ self builder primary a build
 ]
 
 { #category : #'instance creation' }
@@ -25,6 +48,14 @@ BlKeyCombination class >> primaryB [
 	<return: #BlKeyCombination>
 
 	^ self builder primary b build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryC [
+	"primary (Command/Control) + C"
+	<return: #BlKeyCombination>
+
+	^ self builder primary c build
 ]
 
 { #category : #'instance creation' }
@@ -105,6 +136,27 @@ BlKeyCombination class >> primaryShiftF [
 	<return: #BlKeyCombination>
 
 	^ self builder primary shift f build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryV [
+	"primary (Command/Control) + V"
+	<return: #BlKeyCombination>
+
+	^ self builder primary v build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryX [
+	"primary (Command/Control) + X"
+	<return: #BlKeyCombination>
+
+	^ self builder primary x build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> return [
+	^ self builder return build
 ]
 
 { #category : #visiting }

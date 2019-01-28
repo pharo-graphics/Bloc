@@ -251,7 +251,7 @@ BlOSWindowEventHandler >> visitMouseWheelEvent: anEvent [
 		ifTrue: [ ^ self ].
 	
 	aBlocEvent := BlMouseWheelEvent new
-		isTouch: anEvent isTouch;
+		isTouch: false;
 		vector: (BlVector x: horizontal negated y: vertical);
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
