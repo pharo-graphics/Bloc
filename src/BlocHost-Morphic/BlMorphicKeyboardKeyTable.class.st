@@ -1,42 +1,44 @@
 Class {
 	#name : #BlMorphicKeyboardKeyTable,
-	#superclass : #Object,
-	#classVars : [
-		'MacosVirtualKeyTable',
-		'UnixVirtualKeyTable',
-		'WindowsVirtualKeyTable'
+	#superclass : #BlKeyboardKeyTable,
+	#instVars : [
+		'macosVirtualKeyTable',
+		'unixVirtualKeyTable',
+		'windowsVirtualKeyTable'
+	],
+	#classInstVars : [
+		'default'
 	],
 	#category : #'BlocHost-Morphic-Host'
 }
 
+{ #category : #cleanup }
+BlMorphicKeyboardKeyTable class >> cleanUp [
+	super cleanUp.
+	
+	default := nil
+]
+
+{ #category : #accessing }
+BlMorphicKeyboardKeyTable class >> default [
+	^ default ifNil: [ default := self new ]
+]
+
 { #category : #'class initialization' }
-BlMorphicKeyboardKeyTable class >> initialize [
+BlMorphicKeyboardKeyTable >> initialize [
+	super initialize.
+
 	self
 		initializeMacOSVirtualKeyTable;
 		initializeUnixVirtualKeyTable;
 		initializeWindowsVirtualKeyTable
 ]
 
-{ #category : #private }
-BlMorphicKeyboardKeyTable class >> initialize: aMapDictionary with: aMapArray [
-	aMapArray pairsDo: [ :eachCode :eachName |
-		| aName |
-		
-		aName := (BlKeyboardKey respondsTo: eachName)
-			ifTrue: [ eachName ]
-			ifFalse: [ (BlKeyboardKey respondsTo: eachName uncapitalized)
-				ifTrue: [ eachName uncapitalized ]
-				ifFalse: [ #unknown ] ].
-
-		aMapDictionary at: eachCode put: ((BlKeyboardKey perform: aName) setValue: eachCode) ]
-]
-
 { #category : #'map - macos' }
-BlMorphicKeyboardKeyTable class >> initializeMacOSVirtualKeyTable [
-	<script: 'self initializeMacOSVirtualKeyTable'>
+BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 
 	self
-		initialize: (MacosVirtualKeyTable := Dictionary new)
+		initialize: (macosVirtualKeyTable := Dictionary new)
 		with: #(
 			16r24 Return
 			16r30 Tab
@@ -153,11 +155,10 @@ BlMorphicKeyboardKeyTable class >> initializeMacOSVirtualKeyTable [
 ]
 
 { #category : #'map - unix' }
-BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
-	<script: 'self initializeUnixVirtualKeyTable'>
+BlMorphicKeyboardKeyTable >> initializeUnixVirtualKeyTable [
 
 	self
-		initialize: (UnixVirtualKeyTable := Dictionary new)
+		initialize: (unixVirtualKeyTable := Dictionary new)
 		with: #(
 			"special"
 			16r0D Return
@@ -309,11 +310,10 @@ BlMorphicKeyboardKeyTable class >> initializeUnixVirtualKeyTable [
 ]
 
 { #category : #'map - windows' }
-BlMorphicKeyboardKeyTable class >> initializeWindowsVirtualKeyTable [
-	<script: 'self initializeWindowsVirtualKeyTable'>
+BlMorphicKeyboardKeyTable >> initializeWindowsVirtualKeyTable [
 
 	self
-		initialize: (WindowsVirtualKeyTable := Dictionary new)
+		initialize: (windowsVirtualKeyTable := Dictionary new)
 		with: #(
 			16r0d Return
 			16r09 Tab
@@ -425,39 +425,34 @@ BlMorphicKeyboardKeyTable class >> initializeWindowsVirtualKeyTable [
 		)
 ]
 
-{ #category : #'map - macos' }
-BlMorphicKeyboardKeyTable class >> macOSVirtualKeyTable [
-	MacosVirtualKeyTable ifNil: [ self initializeMacOSVirtualKeyTable. ].
-	^ MacosVirtualKeyTable
-]
+{ #category : #'api - converting' }
+BlMorphicKeyboardKeyTable >> keyFromScanCode: aScanCode [
+	"Morphic's key scan codes depend on the current platform, therefore we have to dispatch it through OSPlatform"
+	<return: #BlKeyboardKey>
 
-{ #category : #'map - unix' }
-BlMorphicKeyboardKeyTable class >> unixVirtualKeyTable [
-	UnixVirtualKeyTable ifNil: [ self initializeUnixVirtualKeyTable. ].
-	^UnixVirtualKeyTable
+	^ OSPlatform current blocKeyFor: aScanCode in: self
 ]
 
 { #category : #'map - macos' }
-BlMorphicKeyboardKeyTable class >> valueForMacOSXPlatform: aKeyValue [
+BlMorphicKeyboardKeyTable >> valueForMacOSXPlatform: aScanCode [
 
-	^self macOSVirtualKeyTable at: aKeyValue ifAbsent: [ BlKeyboardKey unknown: aKeyValue ]
+	^ macosVirtualKeyTable
+		at: aScanCode
+		ifAbsent: [ BlKeyboardKey unknown: aScanCode ]
 ]
 
 { #category : #'map - unix' }
-BlMorphicKeyboardKeyTable class >> valueForUnixPlatform: aKeyValue [
+BlMorphicKeyboardKeyTable >> valueForUnixPlatform: aScanCode [
 
-	^ self unixVirtualKeyTable at: aKeyValue ifAbsent: [ BlKeyboardKey unknown: aKeyValue ] 
+	^ unixVirtualKeyTable
+		at: aScanCode
+		ifAbsent: [ BlKeyboardKey unknown: aScanCode ] 
 ]
 
 { #category : #'map - windows' }
-BlMorphicKeyboardKeyTable class >> valueForWindowsPlatform: aKeyCode [
+BlMorphicKeyboardKeyTable >> valueForWindowsPlatform: aScanCode [
 
-	^ self windowsVirtualKeyTable at: aKeyCode ifAbsent: [ (self basicNew withValue: aKeyCode andName: #Unknown) ] 
-]
-
-{ #category : #'map - windows' }
-BlMorphicKeyboardKeyTable class >> windowsVirtualKeyTable [
-
-	WindowsVirtualKeyTable ifNil: [ self initializeWindowsVirtualKeyTable. ].
-	^ WindowsVirtualKeyTable
+	^ windowsVirtualKeyTable
+		at: aScanCode
+		ifAbsent: [ BlKeyboardKey unknown: aScanCode ]
 ]

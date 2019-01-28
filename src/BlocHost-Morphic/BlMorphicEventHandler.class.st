@@ -13,7 +13,7 @@ Class {
 	#category : 'BlocHost-Morphic-Host'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlMorphicEventHandler class >> window: aMorphicWindow [
 	^ self new
 		window: aMorphicWindow;
@@ -50,7 +50,7 @@ BlMorphicEventHandler >> convertButtonFromMouseEvent: aMorphicEvent [
 BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 	<return: #BlKeyboardKey>
 
-	^ OSPlatform current blocKeyFor: aMorphicEvent scanCode in: BlMorphicKeyboardKeyTable
+	^ BlMorphicKeyboardKeyTable default keyFromScanCode: aMorphicEvent scanCode
 ]
 
 { #category : #converting }
