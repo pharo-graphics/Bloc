@@ -53,7 +53,9 @@ BlDevKeyboard >> initializeEventListeners [
 		keymap
 			at: anEvent key
 			ifPresent: [ :aButton | aButton background: (Color veryVeryLightGray) ]
-			ifAbsent: [ self inform: 'Unknown: ', anEvent key asString ] ].
+			ifAbsent: [
+				self inform: 'Unknown: ', anEvent key asString.
+				NonInteractiveTranscript stdout show: ('Unknown: ', anEvent key asString); cr ] ].
 		
 	self when: BlKeyUpEvent do: [ :anEvent |
 		keymap
