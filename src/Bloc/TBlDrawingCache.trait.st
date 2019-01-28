@@ -54,6 +54,13 @@ TBlDrawingCache >> onRemovedFromSceneGraph [
 	self releaseCaches
 ]
 
+{ #category : #'hooks - geometry' }
+TBlDrawingCache >> onTransformationInSpaceChanged [
+	super onTransformationInSpaceChanged.
+	
+	self releaseCaches
+]
+
 { #category : #initialization }
 TBlDrawingCache >> releaseCaches [
 	self cachedSurface ifNotNil: #release.

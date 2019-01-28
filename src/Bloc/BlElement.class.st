@@ -2410,6 +2410,20 @@ BlElement >> onRemovedFromSceneGraph [
 	space := nil
 ]
 
+{ #category : #'hooks - geometry' }
+BlElement >> onTransformationChanged [
+	"Is sent when my transformation changed"
+	
+	self onTransformationInSpaceChanged
+]
+
+{ #category : #'hooks - geometry' }
+BlElement >> onTransformationInSpaceChanged [
+	"Is sent when my transformation in space changed, it may be that my own transformation changed or of my parent"
+	
+	self children do: [ :eachChild | eachChild onTransformationInSpaceChanged ]
+]
+
 { #category : #accessing }
 BlElement >> opacity [
 	"Return my transparency degree.
@@ -3178,7 +3192,9 @@ BlElement >> transformation: anElementTransformation [
 	self invalidate.
 	transformation := anElementTransformation owner: self.
 	self boundsCache invalidateBoundsInSpace.
-	self invalidate
+	self invalidate.
+
+	self onTransformationChanged
 ]
 
 { #category : #'geometry bounds' }
