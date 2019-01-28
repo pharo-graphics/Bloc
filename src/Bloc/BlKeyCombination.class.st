@@ -159,6 +159,11 @@ BlKeyCombination class >> return [
 	^ self builder return build
 ]
 
+{ #category : #'instance creation' }
+BlKeyCombination class >> tab [
+	^ self builder tab build
+]
+
 { #category : #visiting }
 BlKeyCombination >> accept: aKeyCombinationVisitor [
 	^ self subclassResponsibility

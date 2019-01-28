@@ -237,6 +237,12 @@ BlKeyCombinationBuilder >> shift [
 		with: shift
 ]
 
+{ #category : #'keys - special' }
+BlKeyCombinationBuilder >> tab [
+	combination
+		with: (BlSingleKeyCombination new key: BlKeyboardKey tab)
+]
+
 { #category : #private }
 BlKeyCombinationBuilder >> toNormalForm: aKeyCombination [
 	"Converts a given key combination to a normal form (CNF or DNF)
