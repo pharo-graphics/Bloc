@@ -12,6 +12,7 @@ Class {
 
 { #category : #cleanup }
 BlOSWindowKeyboardKeyTable class >> cleanUp [
+	<script: 'self cleanUp'>
 	super cleanUp.
 	
 	default := nil
@@ -53,8 +54,8 @@ BlOSWindowKeyboardKeyTable >> initializeVirtualKeyTable [
 			16r0E6 AltRight
 			16r0E0 ControlLeft
 			16r0E4 ControlRight
-			16r37 MetaLeft
-			16r36 MetaRight
+			16r0E3 MetaLeft
+			16r0E7 MetaRight
 			
 			"sound"
 			16r080 VolumeUp
@@ -135,17 +136,16 @@ BlOSWindowKeyboardKeyTable >> initializeVirtualKeyTable [
 			16r02E Equal
 			16r02F LeftBracket
 			16r030 RightBracket
-			16r27 Quote "??"
+			16r034 Quote "=Apostrophe"
 			16r033 Semicolon
 			16r031 Backslash
 			16r032 NonUsHash "!!"
-			16r034 Apostrophe "!!"
 			16r036 Comma
 			16r038 Slash
 			16r037 Period
 			16r035 Grave
 			
-			16r41 KeypadDecimal
+			"16r41 KeypadDecimal
 			16r43 KeypadMultiply
 			16r45 KeypadPlus
 			16r47 KeypadClear
@@ -162,7 +162,7 @@ BlOSWindowKeyboardKeyTable >> initializeVirtualKeyTable [
 			16r58 Keypad6
 			16r59 Keypad7
 			16r5B Keypad8
-			16r5C Keypad9
+			16r5C Keypad9"
 		)
 ]
 
