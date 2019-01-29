@@ -51,7 +51,7 @@ BlMorphicEventHandler >> convertButtonFromMouseEvent: aMorphicEvent [
 BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 	<return: #BlKeyboardKey>
 
-	^ BlMorphicKeyboardKeyTable default keyFromScanCode: aMorphicEvent scanCode
+	^ BlMorphicKeyboardKeyTable default keyFromScanCode: aMorphicEvent keyValue
 ]
 
 { #category : #converting }
@@ -219,11 +219,11 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 
 { #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
-	| aBlEvent aKey |
+	| aBlEvent aKey theModifiers |
 	
 	(self isScrollEvent: aMorphicEvent)
 		ifTrue: [ ^ self ].
-		
+
 	aKey := self convertKeyFromEvent: aMorphicEvent.
 	
 	"we can not differentiate between delete and backspace. However, we previously
@@ -231,13 +231,15 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 	(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
 		ifTrue: [ ^ self handleDeleteOrBackspaceUp: aMorphicEvent ].
 	
+	theModifiers := self convertKeyModifiersFromEvent: aMorphicEvent.
+
 	(self hasPressedKey: aKey)
 		ifFalse: [ ^ self ].
 	
 	aBlEvent := BlKeyUpEvent new
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
-		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
+		modifiers: theModifiers;
 		timestamp: DateAndTime now;
 		position: aMorphicEvent position;
 		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
