@@ -73,6 +73,21 @@ BlMorphicEventHandler >> convertMousePosition: anEvent andDo: aBlock [
 	aBlock value: anEvent
 ]
 
+{ #category : #'private - actions' }
+BlMorphicEventHandler >> dropFiles: anEvent [
+	"Handle a number of dropped files from the OS.
+	TODO:
+		- use a more general mechanism for figuring out what to do with the file (perhaps even offering a choice from a menu)
+		- remember the resource location or (when in browser) even the actual file handle"
+	| numFiles |	
+	numFiles := anEvent contents.
+	
+	1 to: numFiles do: [:i | | aFileReference handler |
+		aFileReference := FileReference requestDropReference: i.
+		handler := ExternalDropHandler lookupExternalDropHandler: aFileReference.
+		handler ifNotNil: [ aFileReference binaryWriteStreamDo: [ :stream | handler handle: stream in: self dropEvent: anEvent ] ]].
+]
+
 { #category : #accessing }
 BlMorphicEventHandler >> enqueue: aBlEvent [
 	self window hostSpace enqueueEvent: aBlEvent
@@ -81,6 +96,15 @@ BlMorphicEventHandler >> enqueue: aBlEvent [
 { #category : #converting }
 BlMorphicEventHandler >> globalMousePositionForEvent: anEvent [
 	^ morph position + anEvent position
+]
+
+{ #category : #'event handling' }
+BlMorphicEventHandler >> handleDropFiles: anEvent [
+	"Handle a drop from the OS."
+	anEvent wasHandled ifTrue: [ ^ self ]. "not interested"
+	WorldMorph allowDropFiles ifFalse: [ ^ self ].
+	anEvent wasHandled: true.
+	self dropFiles: anEvent.
 ]
 
 { #category : #'event handling' }
