@@ -14,6 +14,7 @@ Class {
 
 { #category : #cleanup }
 BlMorphicKeyboardKeyTable class >> cleanUp [
+	<script: 'self cleanUp'>
 	super cleanUp.
 	
 	default := nil
@@ -44,6 +45,7 @@ BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 			16r30 Tab
 			16r31 Space
 			16r33 Delete
+			16r75 Backspace
 			16r35 Escape
 			16r39 CapsLock
 			

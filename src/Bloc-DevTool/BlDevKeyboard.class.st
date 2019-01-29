@@ -48,7 +48,7 @@ BlDevKeyboard >> initializeBottomRow [
 { #category : #initialization }
 BlDevKeyboard >> initializeEventListeners [
 	self when: BlKeyDownEvent do: [ :anEvent |
-		anEvent key logCr.
+		('down: ', anEvent key asString) logCr.
 
 		keymap
 			at: anEvent key
@@ -58,6 +58,7 @@ BlDevKeyboard >> initializeEventListeners [
 				NonInteractiveTranscript stdout show: ('Unknown: ', anEvent key asString); cr ] ].
 		
 	self when: BlKeyUpEvent do: [ :anEvent |
+		('up ', anEvent key asString) logCr.
 		keymap
 			at: anEvent key
 			ifPresent: [ :aButton | aButton background: (Color white) ] ].
