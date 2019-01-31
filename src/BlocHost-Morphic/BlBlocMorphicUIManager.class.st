@@ -15,6 +15,11 @@ Class {
 }
 
 { #category : #actions }
+BlBlocMorphicUIManager class >> isActiveManager [
+	^ false
+]
+
+{ #category : #actions }
 BlBlocMorphicUIManager class >> useAsDefault [
 	|uiManager|
 	uiManager := self new.
