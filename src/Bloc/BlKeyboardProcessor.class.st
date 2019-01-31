@@ -3,13 +3,19 @@ Class {
 	#superclass : #BlBaseEventProcessor,
 	#instVars : [
 		'buffer',
-		'preventKeystrokes'
+		'preventKeystrokes',
+		'shortcutRepeatDelay',
+		'shortcutRepeatInterval',
+		'previousShortcutTime',
+		'previousShortcutRepeatTime'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space-Support'
 }
 
 { #category : #accessing }
 BlKeyboardProcessor >> buffer [
+	<return: #BlKeyboardBuffer>
+
 	^ buffer
 ]
 
@@ -28,7 +34,26 @@ BlKeyboardProcessor >> findTarget: anEvent [
 
 { #category : #'event processing' }
 BlKeyboardProcessor >> handleSpaceEventProcessedEvent: anEvent [
+	| aShortcutEvent aTimeNow |
 	
+	self buffer isEmpty
+		ifTrue: [ ^ self ].
+	
+	aTimeNow := self space time now.
+	
+	(aTimeNow - previousShortcutTime) < shortcutRepeatDelay
+		ifTrue: [ ^ self ].
+
+	(aTimeNow - previousShortcutRepeatTime) < shortcutRepeatInterval
+		ifTrue: [ ^ self ].
+	
+	aShortcutEvent := BlShortcutEvent new.
+	aShortcutEvent beRepeated.
+	aShortcutEvent buffer: self buffer.
+	aShortcutEvent target: (self findTarget: anEvent).
+	self fireEvent: aShortcutEvent.
+
+	previousShortcutRepeatTime := self space time now
 ]
 
 { #category : #initialization }
@@ -36,7 +61,13 @@ BlKeyboardProcessor >> initialize [
 	super initialize.
 	
 	buffer := BlKeyboardBuffer new.
-	preventKeystrokes := false
+	preventKeystrokes := false.
+
+	shortcutRepeatInterval := 100 milliSeconds. "how often a shortcut even should be sent while user still presses keys"
+	shortcutRepeatDelay := 500 milliSeconds. "how much we should wait until starting to repeat a shortcut"
+
+	previousShortcutTime := DateAndTime now. "when the previous main shortcut event was sent"
+	previousShortcutRepeatTime := DateAndTime now. "when the last repeated shortcut was sent"
 ]
 
 { #category : #testing }
@@ -59,11 +90,12 @@ BlKeyboardProcessor >> processKeyDown: anEvent [
 	aTarget := self findTarget: anEvent.
 	anEvent target: aTarget.
 	self fireEvent: anEvent.
-	
+
 	aShortcutEvent := BlShortcutEvent new.
 	aShortcutEvent buffer: self buffer.
 	aShortcutEvent target: aTarget.
 	self fireEvent: aShortcutEvent.
+	previousShortcutTime := self space time now.
 
 	preventKeystrokes := aShortcutEvent isConsumed
 ]
