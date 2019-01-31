@@ -15,6 +15,11 @@ Class {
 	#category : #'Bloc-Events-KeyBinding'
 }
 
+{ #category : #accessing }
+BlShortcutHandler >> addShortcut: aBlShortcut [
+	self shortcuts add: aBlShortcut
+]
+
 { #category : #'private - accessing' }
 BlShortcutHandler >> eventClass [ 
  	^ BlShortcutEvent
