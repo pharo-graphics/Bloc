@@ -11,6 +11,11 @@ BlCommand class >> isAbstract [
 	^ self name = #BlCommand 
 ]
 
+{ #category : #'instance creation' }
+BlCommand class >> null [
+	^ BlNullCommand uniqueInstance
+]
+
 { #category : #converting }
 BlCommand >> asCommand [
 	^ self

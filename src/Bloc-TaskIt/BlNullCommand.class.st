@@ -22,6 +22,11 @@ BlNullCommand class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #'api - execution' }
+BlNullCommand >> cancelRequest [
+	"I silently ignore the cancel request as I do not execute anything."
+]
+
 { #category : #execution }
 BlNullCommand >> execute [
 	self error: 'You should define what to execute in advance'
@@ -37,4 +42,10 @@ BlNullCommand >> result [
 	"Return a command execution result"
 	<return: #Object>
 	^ nil
+]
+
+{ #category : #'api - testing' }
+BlNullCommand >> wasCanceled [
+	"I cannot be canceled"
+	^ false
 ]

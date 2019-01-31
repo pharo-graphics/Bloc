@@ -34,5 +34,5 @@ BlDecoratedCommand >> command: aGtCommand [
 { #category : #initialization }
 BlDecoratedCommand >> initialize [
 	super initialize.
-	command := BlNullCommand uniqueInstance.
+	command := BlCommand null.
 ]
