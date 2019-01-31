@@ -358,11 +358,7 @@ BlOSWindowEventHandler >> visitTouchTwoFingersScrollBeginEvent: anEvent [
 
 { #category : #'visiting - gestures' }
 BlOSWindowEventHandler >> visitTouchTwoFingersScrollMoveEvent: anEvent [
-	| aBlocEvent horizontal vertical |
-	
-	"NonInteractiveTranscript stdout show: anEvent direction; cr.
-	NonInteractiveTranscript stdout show: anEvent vector; cr.
-	NonInteractiveTranscript stdout show: '---------------------'; cr."
+	"| aBlocEvent horizontal vertical |
 	
 	horizontal := (anEvent dDist abs * anEvent vector) x negated.
 	vertical := (anEvent dDist abs * anEvent vector) y.
@@ -374,7 +370,7 @@ BlOSWindowEventHandler >> visitTouchTwoFingersScrollMoveEvent: anEvent [
 		timestamp: self time now;
 		yourself.
 
-	self enqueue: aBlocEvent
+	self enqueue: aBlocEvent"
 ]
 
 { #category : #visiting }
