@@ -15,6 +15,26 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlKeyCombination class >> arrowDown [
+	^ self builder arrowDown build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> arrowLeft [
+	^ self builder arrowLeft build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> arrowRight [
+	^ self builder arrowRight build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> arrowUp [
+	^ self builder arrowUp build
+]
+
+{ #category : #'instance creation' }
 BlKeyCombination class >> backspace [
 	^ self builder backspace build
 ]
