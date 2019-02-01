@@ -16,7 +16,7 @@ BaselineOfBlocOld >> baseline: spec [
 		   baseline: 'Sparta' with: [ spec
 				postLoadDoIt: #postLoadSparta:;
 				loads: #(stub); "Stub does not load anything here. We load sparta in postLoadSparta:"
-				repository: 'github://syrel/sparta/src' ];
+				repository: 'github://feenkcom/Sparta/src' ];
 
 		   baseline: 'Beacon' with: [ spec repository: 'github://pharo-project/pharo-beacon/repository' ];
 
