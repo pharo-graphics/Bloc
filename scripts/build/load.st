@@ -3,7 +3,7 @@ EpMonitor current disable.
 
 Metacello new
   baseline: 'Bloc';
-  repository: 'github://pharo-graphics/Bloc/src';
+  repository: 'github://feenkcom/Bloc/src';
   load.
 EpMonitor current enable.
 Smalltalk snapshot: true andQuit: false.
