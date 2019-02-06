@@ -11,5 +11,6 @@ BlDevScripterClickTask >> label [
 
 { #category : #actions }
 BlDevScripterClickTask >> playOn: aScripter [
-	BlSpace simulateClickOn: aScripter element
+	BlSpace simulateClickOn: (self target findTargetIn: aScripter element).
+	aScripter pulse
 ]

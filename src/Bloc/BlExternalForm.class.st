@@ -113,7 +113,7 @@ BlExternalForm >> setExtent: extent depth: bitsPerPixel [
 	bits := self 
 		primCreateManualSurfaceWidth: width 
 		height: height 
-		rowPitch: width * 4
+		rowPitch: self stride
 		depth: bitsPerPixel
 		isMSB: true.
 ]

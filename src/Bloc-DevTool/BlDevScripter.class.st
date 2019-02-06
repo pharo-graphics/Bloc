@@ -1,5 +1,7 @@
 "
-I help developers to script UI scenes and simplify exemplification process
+I help developers to script UI scenes and simplify exemplification process.
+
+I am designed for Model-based User Interface Testing
 "
 Class {
 	#name : #BlDevScripter,
@@ -36,6 +38,13 @@ BlDevScripter >> element: anElement [
 	element addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent copy ].
 
 	space addChild: element.
+]
+
+{ #category : #accessing }
+BlDevScripter >> events [
+	<return: #Collection of: #BlEvent>
+
+	^ events
 ]
 
 { #category : #'as yet unclassified' }
