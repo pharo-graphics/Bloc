@@ -77,7 +77,6 @@ BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 			16r72 Help
 			16r73 Home
 			16r74 PageUp
-			16r75 ForwardDelete
 			16r77 End
 			16r79 PageDown
 			16r7B ArrowLeft
