@@ -2,6 +2,10 @@ pipeline {
     agent any
     stages {
         stage('Clean Workspace') {
+            when { expression {
+                    env.BRANCH_NAME.toString().equals('master') && (env.TAG_NAME == null)
+                }
+            }
             steps {
                 sh 'git clean -fdx'
                 sh 'chmod +x scripts/build/*.sh'
