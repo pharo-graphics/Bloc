@@ -9,8 +9,7 @@ BlSingleLineTextParagraph >> createSpartaTextPainter: aBrSpan on: aSpartaCanvas 
 
 { #category : #'*Bloc-Sparta' }
 BlSingleLineTextParagraph >> drawOnSpartaCanvas: aCanvas [	
-	self line drawOnSpartaCanvas: aCanvas.
-	self drawSelectionOnSpartaCanvas: aCanvas
+	self line drawOnSpartaCanvas: aCanvas
 ]
 
 { #category : #'*Bloc-Sparta' }
