@@ -255,7 +255,6 @@ BlOSWindowEventHandler >> visitMouseWheelEvent: anEvent [
 		vector: (BlVector x: horizontal y: vertical);
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
-		direction: (vertical > 0 ifTrue: [Character arrowUp] ifFalse: [Character arrowDown]);
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: DateAndTime now.
 		

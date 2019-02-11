@@ -371,7 +371,6 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			direction: aMorphicEvent direction;
 			timestamp: DateAndTime now.
 		
 		self enqueue: aBlEvent ]
@@ -387,9 +386,7 @@ BlMorphicEventHandler >> handleScrollLeft: anEvent [
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			direction: aMorphicEvent keyCharacter;
 			timestamp: DateAndTime now.
-		
 		self enqueue: aBlEvent ]
 ]
 
@@ -404,7 +401,6 @@ BlMorphicEventHandler >> handleScrollRight: anEvent [
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			direction: aMorphicEvent keyCharacter;
 			timestamp: DateAndTime now.
 		
 		self enqueue: aBlEvent ]
