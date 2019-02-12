@@ -204,10 +204,10 @@ BlMorphicKeyboardKeyTable >> initializeUnixVirtualKeyTable [
 			16r75 ForwardDelete
 			16r77 End
 			16r79 PageDown
-			16r7B ArrowLeft
-			16r7C ArrowRight
-			16r7D ArrowDown
-			16r7E ArrowUp
+			16r1C ArrowLeft
+			16r1D ArrowRight
+			16r1F ArrowDown
+			16r1E ArrowUp
 			
 			"letters"
 			16r61 a
@@ -280,10 +280,13 @@ BlMorphicKeyboardKeyTable >> initializeUnixVirtualKeyTable [
 			16r2D Minus
 			16r3D Equal
 			16r5B LeftBracket
+			16r7B LeftBracket
 			16r5D RightBracket
+			16r7D RightBracket
 			16r27 Quote
 			16r3B Semicolon
 			16r5C Backslash
+			16r7C Backslash
 			16r2C Comma
 			16r2F Slash
 			16r2E Period

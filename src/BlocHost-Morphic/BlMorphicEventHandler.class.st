@@ -50,8 +50,21 @@ BlMorphicEventHandler >> convertButtonFromMouseEvent: aMorphicEvent [
 { #category : #converting }
 BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 	<return: #BlKeyboardKey>
+	| aKeyValue aKey |
+	
+	aKeyValue := aMorphicEvent keyValue.
+	aKey := BlMorphicKeyboardKeyTable default keyFromScanCode: aKeyValue.
+	
+	"on unix platorms, pressed shift changes the keycode"
+	OSPlatform current isUnix
+		ifTrue: [	
+			(aKey isShift not and: [ aMorphicEvent shiftPressed ])
+				ifTrue: [
+					{
+						BlKeyboardKey tab -> BlKeyboardKey return.
+					} asDictionary at: aKey ifAbsent: [ aKey ] ] ].
 
-	^ BlMorphicKeyboardKeyTable default keyFromScanCode: aMorphicEvent keyValue
+	^ aKey
 ]
 
 { #category : #converting }
