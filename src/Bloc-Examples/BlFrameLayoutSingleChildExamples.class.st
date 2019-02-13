@@ -1,3 +1,6 @@
+"
+I contain examples of positioning a single element within a parent element that uses a ${class:BlFrameLayout}$.
+"
 Class {
 	#name : #BlFrameLayoutSingleChildExamples,
 	#superclass : #Object,
