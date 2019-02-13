@@ -68,7 +68,7 @@ However, this will not work in case the parent uses fit content and the child us
 ${example:BlFrameLayoutSingleChildExamples>>#elementWithOneMatchParentChildAndFitContentParent|previewExpanded|previewHeight=400}$
 
 !!More examples
-For more example on how to use the flow layout you can view the classes providig examples for this layout:
+For more example on how to use the frame layout you can view the classes providig examples for this layout:
 - ${class:BlFrameLayoutSingleChildExamples}$
 - ${class:BlFrameLayoutMulipleChildrenExamples}$
 - ${class:BlFrameLayoutCompositionExamples}$
