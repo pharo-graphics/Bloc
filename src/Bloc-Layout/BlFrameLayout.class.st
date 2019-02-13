@@ -1,7 +1,16 @@
 "
 ! Frame layout
 
-Frame Layout is designed to block out an area on the screen to display a single item. You can have multiple elements within a FrameLayout but each element will be positioned based on the top left of the screen. 
+I am a layout designed to block out an area on the screen to display a single child. 
+
+I should only be used to display a single child, as it can be difficult to display multiple children at different positions on the screen without overlapping each other. 
+However, elements with a frame layout can have multiple child elements. The =='weight'== and =='alignment'== atributes can be used to control the position of children. However, weight only works when the child matches the parent; if it fits content or has an exact size, the weight attribute is ignored. I rely on custom layout constraints for setting  attributes (see ${class:BlFrameLayoutConstraints}$, ${class:BlFrameLayoutConstraintsHorizontal}$ and ${class:BlFrameLayoutConstraintsVertical}$).
+
+I position each child element based on the top left of the screen. Child elements are stacked on top of each other, with the most recently added child on top. An important property is that the location of a child is independent from the location of other children. 
+
+I am similar to the frame layout from Android. The main differences are that I:
+- provide support for controlling the size of a child element using the =='weight'== attribute;
+- the =='gravity'== attribute is not present; instead the =='alignment'== attribute should be used.
 
 !! Alignment
 You can add multiple children to a FrameLayout and control their position within the FrameLayout by assigning alignment to each child.
@@ -52,7 +61,7 @@ parent
 Class {
 	#name : #BlFrameLayout,
 	#superclass : #BlLayout,
-	#category : 'Bloc-Layout-Frame'
+	#category : #'Bloc-Layout-Frame'
 }
 
 { #category : #constraints }
