@@ -5,6 +5,23 @@ Class {
 }
 
 { #category : #'examples - setup' }
+BlFrameLayoutChildrenExamples >> childElementMatchingParent [
+	<gtExample>
+	| element |
+	element := self childElementWithVisualProperties.
+	element constraintsDo: [ :c | 
+		c vertical matchParent.
+		c horizontal matchParent ].
+	
+	self assert: element position equals: 0@0.
+	self assert: element extent equals: 0@0.
+	self assert: element constraints horizontal resizer isMatchParent.
+	self assert: element constraints vertical resizer isMatchParent.
+	
+	^ element
+]
+
+{ #category : #'examples - setup' }
 BlFrameLayoutChildrenExamples >> childElementWithExactSize100per50 [
 	<gtExample>
 	| element |
