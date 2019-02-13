@@ -3,7 +3,7 @@ I contain examples of positioning a single element within a parent element that 
 "
 Class {
 	#name : #BlFrameLayoutSingleChildExamples,
-	#superclass : #Object,
+	#superclass : #BlFrameLayoutChildrenExamples,
 	#category : #'Bloc-Examples-Layout'
 }
 
@@ -66,37 +66,28 @@ BlFrameLayoutSingleChildExamples >> childElementMatchingParentWith50per40Percent
 	^ element
 ]
 
-{ #category : #'examples - setup' }
-BlFrameLayoutSingleChildExamples >> childElementWithExactSize100per50 [
+{ #category : #'examples - alignment' }
+BlFrameLayoutSingleChildExamples >> elementDocumentationWithOneExactChildAlignBottomRightInExactParent [
 	<gtExample>
-	| element |
-	element :=  self childElementWithVisualProperties.
-	element constraintsDo: [ :c |
-		c horizontal exact: 100.
-		c vertical exact: 50 ].
-		
-	self assert: element position equals: 0@0.
-	self assert: element extent equals: 0@0.
-	self assert: element constraints horizontal resizer size equals: 100.
-	self assert: element constraints vertical resizer size equals: 50.
-	
-	^ element
-]
+	| child parent |
+	child := self childElementWithVisualProperties.
+	child constraintsDo: [ :c |
+		c horizontal exact: 140.
+		c vertical exact: 140.
+		c frame horizontal alignRight.
+		c frame vertical alignBottom ].
 
-{ #category : #'examples - setup' }
-BlFrameLayoutSingleChildExamples >> childElementWithVisualProperties [
-	<gtExample>
-	| element |
-	element :=  BlElement new
-		background: Color cyan;
-		border: (BlBorder builder paint: Color blue; width: 1; build);
-		yourself.
+	parent := self parentWithFrameLayoutAndFixedSize.	
+	parent size: 300@300.
+	parent addChild: child.
 	
-	self assert: element border width equals: 1.
-	self assert: element border paint equals: Color blue asBlPaint.
-	self assert: element background equals: Color cyan asBlBackground.
-		
-	^ element
+	parent forceLayout.
+	self assert: child position equals: 160@160.
+	self assert: child extent equals: 140@140.
+	self assert: parent position equals: 0@0.
+	self assert: parent extent equals: 300@300.
+	
+	^ parent
 ]
 
 { #category : #'examples - matching parent' }
@@ -672,25 +663,4 @@ BlFrameLayoutSingleChildExamples >> elementWithOneExactChildAlignTopRightInExact
 	self assert: parent extent equals: 400@300.
 	
 	^ parent
-]
-
-{ #category : #'examples - setup' }
-BlFrameLayoutSingleChildExamples >> parentWithFrameLayoutAndFixedSize [
-	<gtExample>
-	| element |
-	element :=  BlElement new
-		layout: BlFrameLayout new;
-		border: (BlBorder builder dashed; paint: Color red; width: 3; build);
-		size: 400@300;
-		yourself.
-		
-	self assert: element position equals: 0@0.
-	self assert: element extent equals: 0@0.
-	self assert: element constraints horizontal resizer size equals: 400.
-	self assert: element constraints vertical resizer size equals: 300.
-	self assert: element layout class equals: BlFrameLayout.
-	self assert: element border width equals: 3.
-	self assert: element border paint equals: Color red asBlPaint.
-	
-	^ element
 ]

@@ -1,5 +1,5 @@
 "
-! Frame layout
+!Frame layout
 
 I am a layout designed to block out an area on the screen to display a single child. 
 
@@ -12,31 +12,31 @@ I am similar to the frame layout from Android. The main differences are that I:
 - provide support for controlling the size of a child element using the =='weight'== attribute;
 - the =='gravity'== attribute is not present; instead the =='alignment'== attribute should be used.
 
-!! Alignment
-You can add multiple children to a FrameLayout and control their position within the FrameLayout by assigning alignment to each child.
+!!Alignment
+The alignment attribute controls the position of children with a FrameLayout. Children can be aligned both vertically and horizontally as follows:
+- horizontally children can be aligned to left, center and right;
+- vertically children can be aligned to top, center and bottom.
 
-Example of a child in the bottom right corner:
+For example, below we aligh a child with a fixed size horizontally to the right and vertically to the bottom.
+${example:BlFrameLayoutSingleChildExamples>>#elementDocumentationWithOneExactChildAlignBottomRightInExactParent|previewExpanded|previewHeight=400}$
 
-[[[
-| child parent |
-child := BlElement new
-	size: 200@200;
-	constraintsDo: [ :c |
-		c frame horizontal alignRight.
-		c frame vertical alignBottom ];
-	border: (BlBorder paint: Color black width: 4);
-	background: Color green.
-		
-parent := BlElement new
-	layout: BlFrameLayout new;
-	size: 350@350;
-	padding: (BlInsets all: 10);
-	background: Color blue;
-	addChild: child.
-]]]
+When using multiple children if we do not specify any alignment they will be placed in the top-left corner in the order in which they were added to the parent.
+${example:BlFrameLayoutMulipleChildrenExamples>>#elementWithTwoExactChildrenAndNoAlignment|previewExpanded|previewHeight=400}$
+
+With an alignment we can better arrange these children. For example we can place one to the right and center it. This will result in no overlapping.
+${example:BlFrameLayoutMulipleChildrenExamples>>#elementWithExactChildAlignTopLeftAndExactChildRightCenter|previewExpanded|previewHeight=400}$
+
+We can also use a different alignment that goes not completely remove overapping. 
+${example:BlFrameLayoutMulipleChildrenExamples>>#elementWithExactChildAlignLeftCenterAndExactChildCenter|previewExpanded|previewHeight=400}$
+
+We can use alignment to place children in more advanced ways. An example is given by ${class:BlFrameLayoutCompositionExamples}$.
+${example:BlFrameLayoutCompositionExamples>>#example|previewExpanded|previewHeight=400}$
+
+To end this section below are all the nine ways in wich we can place a child using alignment.
+${example:BlFrameLayoutMulipleChildrenExamples>>#elementWithNineExactChildrenWithAllAlignments|previewExpanded|previewHeight=400}$
 
 
-!! Weight
+!!Weight
 Children that match parent can also be configured to occupy only a fraction of parent's size by providing a weight [0...N]
 Example:
 
