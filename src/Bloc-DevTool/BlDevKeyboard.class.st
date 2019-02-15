@@ -1,3 +1,10 @@
+"
+I am a virtual keyboard to debug key press events
+
+[[[
+	BlDevKeyboard new asScalableElement
+]]]
+"
 Class {
 	#name : #BlDevKeyboard,
 	#superclass : #BlElement,
