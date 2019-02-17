@@ -1,9 +1,51 @@
 "
-I represent an abstract Bloc layout.
+!Bloc layout
+I am the superclass for layouts in Bloc and I define the API that a concrete layout needs to implement.
 
+I should be attached to a bloc element and I define the visual structure of that bloc element. Tipically this includes the position of child elements within the parent, or the size of the parent element. 
+
+!!Layout constraints
+I support a set of attributes (refered to as constraints in Bloc) which define the visual properties of the layout. A small set of constraints, like padding, margin or minimal and maximum dimensions, are common among all the layouts. Each layout has a dedicated constraint objects, instance of ${class:BlLayoutCommonConstraints}$, that contain these common constraints. Each type of layout further can define its own specific constraints by creating a subclass of ${class:BlLayoutConstraints}$. 
+
+TODO: constraints API
+
+!!Layout API
+
+TODO
 I define an api of a layout. Concrete implementations should focus on measure:with: and layout:in:
 
-I am used by bloc elements.
+!!Layout phase
+
+TODO
+
+!!Layout steps
+
+TODO
+On every frame there are several phases.
+When properties change for an element that element can request layouting. 
+
+Steps:
+	- Space starts the measurement process from the root element; after measurement it tell children to measure themselves, etc
+	- measurement; top to bottom though all the composition of elements.
+		- this step find the size of an element and sets measuredExtent (or position sometimes)
+	- space starts the layout step
+		- as we know the size of each child we compute the actual position for each child
+		- changes the real extent to measured extent and the real position to the computed layout position
+	- Elements announce events for position and extent changed
+	
+	Without event handlers the layout process is going to happen only once.
+	For example when nodes change the position edges should be updated.
+	
+!!Layout events
+
+TODO
+
+
+
+
+
+	
+
 "
 Class {
 	#name : #BlLayout,
@@ -16,7 +58,7 @@ Class {
 		'direction',
 		'waitingLayout'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #constraints }

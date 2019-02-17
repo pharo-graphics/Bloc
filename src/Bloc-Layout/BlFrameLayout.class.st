@@ -35,7 +35,6 @@ ${example:BlFrameLayoutCompositionExamples>>#example|previewExpanded|previewHeig
 To end this section below are all the nine ways in wich we can place a child using alignment.
 ${example:BlFrameLayoutMulipleChildrenExamples>>#elementWithNineExactChildrenWithAllAlignments|previewExpanded|previewHeight=400}$
 
-
 !!Weight
 Above we saw that one way to set the size of a child element is by using an exact size. A second option is for a children to match the size of the parent. In this case, children that match parent can also be configured to occupy only a fraction of parent's size using the =='weigh'== attribute.
 
