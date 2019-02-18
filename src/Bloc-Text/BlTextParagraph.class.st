@@ -173,6 +173,13 @@ BlTextParagraph >> finalize [
 	self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlTextParagraph >> gtTextFor: aView [
+	<gtView>
+	self text isNil ifTrue: [ ^ aView empty ].
+	^ self text gtTextFor: aView
+]
+
 { #category : #testing }
 BlTextParagraph >> hasHeightLimit [
 	"Return true if the height of the paragraph is limited, false otherwise"
