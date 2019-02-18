@@ -35,8 +35,10 @@ BlBlocMorphicUIManager >> blocUIProcess [
 
 { #category : #debug }
 BlBlocMorphicUIManager >> debugProcess: process context: context label: title fullView: bool notification: notificationString [
-	"I open a debugger and add support for detecting also if the debugged process is the Bloc UI process.
-	In that case I spawn another Bloc UI process instead of a Morphic one."
+	"I open the default debugger and add support for detecting if the 
+	debugged process is the Morphic or Bloc UI process.
+	I spawn a new Bloc UI if the debugged process is the Bloc UI process 
+	or a Morphic UI process if the debugged process is the Morphic UI process."
 
 	| debugSession isForBlocUIProcess |
 
@@ -53,7 +55,7 @@ BlBlocMorphicUIManager >> debugProcess: process context: context label: title fu
 				ifFalse: [ self spawnNewMorphicProcess ]
 			] ].
 	
-	"Perform the opening still through the Moprhic world, as this UI Manager should only be used with the Morphic debugger."
+	"Perform the opening of the debugger using the registered debugger. This can be either a Morphic or Bloc based debugger."
 	self defer: [ 
 		[ Smalltalk tools debugger 
 			openOn: debugSession withFullView: bool andNotification: notificationString.
