@@ -40,6 +40,11 @@ BlTextAttributesBuilder >> attributes [
 	^ attributes
 ]
 
+{ #category : #hook }
+BlTextAttributesBuilder >> attributes: aCollectionOfAttributes [
+	aCollectionOfAttributes do: [ :eachAttribute | self attribute: eachAttribute ]
+]
+
 { #category : #accessing }
 BlTextAttributesBuilder >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
