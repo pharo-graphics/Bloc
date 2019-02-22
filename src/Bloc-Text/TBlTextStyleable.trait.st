@@ -70,6 +70,11 @@ TBlTextStyleable >> regular [
 	self attributesBuilder attribute: BlFontWeightAttribute normal
 ]
 
+{ #category : #'api - text style' }
+TBlTextStyleable >> spacing: aNumber [
+	self attributesBuilder attribute: (BlTextSpacingAttribute spacing: aNumber)
+]
+
 { #category : #'api - text weight' }
 TBlTextStyleable >> thin [
 	self attributesBuilder attribute: BlFontWeightAttribute thin
