@@ -63,13 +63,15 @@ BlFontWeightAttribute class >> weight: aNumber [
 ]
 
 { #category : #comparing }
-BlFontWeightAttribute >> equals: aTextAttribute [
-	^ self weight = aTextAttribute weight
+BlFontWeightAttribute >> equals: anAnotherAttribute [
+	^ self weight = anAnotherAttribute weight
 ]
 
 { #category : #comparing }
 BlFontWeightAttribute >> hash [
-	^ self weight hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self weight hash
 ]
 
 { #category : #printing }

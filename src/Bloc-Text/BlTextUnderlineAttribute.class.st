@@ -38,29 +38,23 @@ BlTextUnderlineAttribute >> dashOffset: aNumber [
 ]
 
 { #category : #comparing }
-BlTextUnderlineAttribute >> equals: aTextAttribute [
-	"Return true if I am equal to a given text attribute assuming that
-	it has the same type as me"
-	<return: #Boolean>
+BlTextUnderlineAttribute >> equals: anObject [
+	"Answer whether the receiver and anObject represent the same object."
 
-	^ self paint = aTextAttribute paint and: [ 
-		self style = aTextAttribute style and: [ 
-			self width = aTextAttribute width and: [ 
-				self opacity = aTextAttribute opacity and: [ 
-					self isBelow = aTextAttribute isBelow ] ] ] ]
+	^ style = anObject style
+		and: [ width = anObject width
+				and: [ paint = anObject paint
+						and: [ opacity = anObject opacity and: [ below = anObject isBelow ] ] ] ]
 ]
 
 { #category : #comparing }
 BlTextUnderlineAttribute >> hash [
-	"Compute and return a hash code.
-	Two objects for which equals: returns true must have the same hash"
-	<return: #Number>
+	"Answer an integer value that is related to the identity of the receiver."
 
-	^ (((self paint hash 
-			bitXor: self style hash) 
-			bitXor: self width hash)
-			bitXor: self opacity hash)
-			bitXor: self isBelow hash
+	^ style hash
+		bitXor:
+			(width hash
+				bitXor: (paint hash bitXor: (opacity hash bitXor: below hash)))
 ]
 
 { #category : #initialization }

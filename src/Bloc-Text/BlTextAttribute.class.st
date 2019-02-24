@@ -18,7 +18,7 @@ BlTextAttribute >> = anObject [
 		ifTrue: [ ^ true ].
 	(anObject class = self class)
 		ifFalse: [ ^ false ].
-	
+
 	^ self equals: anObject
 ]
 
@@ -33,12 +33,10 @@ BlTextAttribute >> beOverwritableByStyler [
 ]
 
 { #category : #comparing }
-BlTextAttribute >> equals: aTextAttribute [
-	"Return true if I am equal to a given text attribute assuming that
-	it has the same type as me"
+BlTextAttribute >> equals: anAnotherAttribute [
 	<return: #Boolean>
 
-	self subclassResponsibility
+	^ self type == anAnotherAttribute type
 ]
 
 { #category : #comparing }
@@ -47,7 +45,7 @@ BlTextAttribute >> hash [
 	Two objects for which equals: returns true must have the same hash"
 	<return: #Number>
 
-	^ self subclassResponsibility
+	^ self type identityHash
 ]
 
 { #category : #initialization }
@@ -100,4 +98,13 @@ BlTextAttribute >> isStyle [
 	<return: #Boolean>
 
 	^ true
+]
+
+{ #category : #comparing }
+BlTextAttribute >> type [
+	"Return an object that is used to compare attribute by type
+	The rule is the following: attributes of the same type must overwrite each other."
+	<return: #Object>
+	
+	^ self class
 ]

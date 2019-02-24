@@ -10,13 +10,3 @@ BlFontNormalAttribute >> emphasisName [
 	
 	^ 'normal'
 ]
-
-{ #category : #comparing }
-BlFontNormalAttribute >> equals: aTextAttribute [
-	^ true
-]
-
-{ #category : #comparing }
-BlFontNormalAttribute >> hash [
-	^ self class hash
-]

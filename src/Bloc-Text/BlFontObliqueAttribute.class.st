@@ -10,13 +10,3 @@ BlFontObliqueAttribute >> emphasisName [
 	
 	^ 'oblique'
 ]
-
-{ #category : #comparing }
-BlFontObliqueAttribute >> equals: aTextAttribute [
-	^ true
-]
-
-{ #category : #comparing }
-BlFontObliqueAttribute >> hash [
-	^ self class hash
-]

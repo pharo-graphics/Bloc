@@ -13,13 +13,15 @@ BlTextSpacingAttribute class >> spacing: aNumber [
 ]
 
 { #category : #comparing }
-BlTextSpacingAttribute >> equals: aTextAttribute [
-	^ self spacing = aTextAttribute spacing
+BlTextSpacingAttribute >> equals: anAnotherAttribute [
+	^ self spacing = anAnotherAttribute spacing
 ]
 
 { #category : #comparing }
 BlTextSpacingAttribute >> hash [
-	^ self class hash bitXor: self spacing hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self spacing hash
 ]
 
 { #category : #accessing }

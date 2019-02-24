@@ -10,13 +10,3 @@ BlFontItalicAttribute >> emphasisName [
 	
 	^ 'italic'
 ]
-
-{ #category : #comparing }
-BlFontItalicAttribute >> equals: aTextAttribute [
-	^ true
-]
-
-{ #category : #comparing }
-BlFontItalicAttribute >> hash [
-	^ self class hash
-]

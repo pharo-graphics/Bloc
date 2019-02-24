@@ -32,13 +32,15 @@ BlFontSizeAttribute class >> size: aNumber [
 ]
 
 { #category : #comparing }
-BlFontSizeAttribute >> equals: aTextAttribute [
-	^ self size = aTextAttribute size
+BlFontSizeAttribute >> equals: anAnotherAttribute [
+	^ self size = anAnotherAttribute size
 ]
 
 { #category : #comparing }
 BlFontSizeAttribute >> hash [
-	^ self class hash bitXor: self size hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self size hash
 ]
 
 { #category : #printing }

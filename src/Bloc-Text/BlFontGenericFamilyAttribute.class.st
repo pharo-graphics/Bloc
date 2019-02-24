@@ -40,7 +40,9 @@ BlFontGenericFamilyAttribute >> family [
 
 { #category : #comparing }
 BlFontGenericFamilyAttribute >> hash [
-	^ self class hash bitXor: self family hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self family hash
 ]
 
 { #category : #'instance creation' }

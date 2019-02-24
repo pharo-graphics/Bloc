@@ -50,10 +50,10 @@ BlAttributeRope class >> mergeAttributes: aCollectionOfAttributes and: anotherCo
 	
 	anOrderedDictionary := OrderedDictionary new.
 
-	anotherCollectionOfAttributes reverseDo: [ :each | anOrderedDictionary at: each put: each ].
-	aCollectionOfAttributes reverseDo: [ :each | anOrderedDictionary at: each put: each ].
+	aCollectionOfAttributes do: [ :each | anOrderedDictionary at: (self typeOf: each) put: each ].
+	anotherCollectionOfAttributes do: [ :each | anOrderedDictionary at: (self typeOf: each) put: each ].
 
-	^ Array streamContents: [ :aStream | anOrderedDictionary keys reverseDo: [ :anObject | aStream nextPut: anObject ] ]
+	^ anOrderedDictionary values
 ]
 
 { #category : #utilities }
@@ -66,9 +66,21 @@ BlAttributeRope class >> removeDuplicates: aCollection [
 		ifTrue: [ self notify: 'Hashed collection is unordered, so the order of attributes will be ignored!' ].
 	
 	anOrderedDictionary := OrderedDictionary new.
-	aCollection reverseDo: [ :each | anOrderedDictionary at: each put: each ].
+	aCollection do: [ :each | anOrderedDictionary at: (self typeOf: each) put: each ].
+	^ anOrderedDictionary values
+]
 
-	^ Array streamContents: [ :aStream | anOrderedDictionary keys reverseDo: [ :anObject | aStream nextPut: anObject ] ]
+{ #category : #utilities }
+BlAttributeRope class >> typeOf: anObject [
+	| anAttributeClass |
+	
+	anAttributeClass := self environment
+		at: #BlTextAttribute
+		ifAbsent: [ ^ anObject ].
+		
+	^ (anObject class == anAttributeClass or: [ anObject class inheritsFrom: anAttributeClass ])
+		ifTrue: [ anObject type ]
+		ifFalse: [ anObject ]
 ]
 
 { #category : #'rope - accessing' }

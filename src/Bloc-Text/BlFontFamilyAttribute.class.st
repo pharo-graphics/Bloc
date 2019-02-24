@@ -15,13 +15,15 @@ BlFontFamilyAttribute class >> named: aString [
 ]
 
 { #category : #comparing }
-BlFontFamilyAttribute >> equals: aTextAttribute [
-	^ self name = aTextAttribute name
+BlFontFamilyAttribute >> equals: anAnotherAttribute [
+	^ self name = anAnotherAttribute name
 ]
 
 { #category : #comparing }
 BlFontFamilyAttribute >> hash [
-	^ self class hash bitXor: self name hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self name hash
 ]
 
 { #category : #accessing }
