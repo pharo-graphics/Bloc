@@ -21,7 +21,7 @@ BlSingleLineTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas [
 	self selection do: [ :aSelection |
 		| aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition aSelectionBounds |
 
-		aStart := aSelection	from.
+		aStart := aSelection from min: self text size.
 		anEnd := aSelection to min: self text size.
 
 		aSelectionStartSpan := self spanAtIndex: aStart.
