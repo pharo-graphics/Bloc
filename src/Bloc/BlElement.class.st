@@ -670,7 +670,7 @@ BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBloc
 		aChild userData
 			at: #blocContainer
 			ifPresent: [ :aName | (aName = aContainerName)
-				ifTrue: [ ^ ifFoundBlock value: aChild ] ] ].
+				ifTrue: [ ^ ifFoundBlock cull: aChild ] ] ].
 	^ ifNoneBlock value
 ]
 
