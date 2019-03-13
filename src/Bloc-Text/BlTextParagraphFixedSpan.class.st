@@ -8,6 +8,9 @@ Class {
 BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 	| theAttributes aTextPainter aFontBuilder aCharacterWidth aCharacterHeight |
 	
+	self spanLength isZero
+		ifTrue: [ ^ self ].
+	
 	theAttributes := self attributes.
 
 	aTextPainter := aSpartaCanvas text.
