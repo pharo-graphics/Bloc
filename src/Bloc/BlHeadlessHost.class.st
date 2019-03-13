@@ -26,7 +26,7 @@ BlHeadlessHost class >> priority [
 { #category : #api }
 BlHeadlessHost >> createHostSpaceFor: aSpace [
 
-	aSpace hostSpace: (BlHeadlessHostSpace new host: self)
+	aSpace hostSpace: (BlHeadlessHostSpace new host: self; space: aSpace)
 ]
 
 { #category : #api }

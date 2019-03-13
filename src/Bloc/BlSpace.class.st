@@ -487,6 +487,8 @@ BlSpace >> eventListener: anObject [
 
 { #category : #accessing }
 BlSpace >> eventRecorder [
+	<return: #BlSpaceEventRecorder>
+
 	^ eventRecorder
 ]
 
@@ -856,10 +858,15 @@ BlSpace >> processEvents [
 
 	self eventRecorder onPulse.
 	self hostSpace fetchedEventsDo: [ :anEvent |
-		self eventRecorder record: anEvent.
-		self eventDispatcher dispatchEvent: anEvent ].
+		"we have to test for existance of the host space before handling each event because
+		it is possible that a space is closed due to an event"
+		self hasHostSpace
+			ifTrue: [
+				self eventRecorder record: anEvent.
+				self eventDispatcher dispatchEvent: anEvent ] ].
 
-	self mouseProcessor generateEvents
+	self hasHostSpace
+		ifTrue: [ self mouseProcessor generateEvents ]
 ]
 
 { #category : #pulse }
