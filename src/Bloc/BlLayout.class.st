@@ -14,13 +14,32 @@ Layouting of elements is a phase executed by a space during every frame.
 
 Every frame, the space goes through several phases (${method:BlSpaceFrame>>#initializePhases}$). Phases are modeled as subclasses of ${class:BlSpaceFramePhase}$ and are executed once per frame. One of them, ${class:BlSpaceFrameLayoutPhase}$, consists in layouting the elements contained in the space. This is done after events and tasks have been executed, but before the drawing phase.
 
-Layouting needs to be executed during a frame when various properties like, width, height or position change in any element contained by the space. However, an important aspect in Bloc, is that when one of these property changes, layouting is not performed immediately. Instead, a layout request is issues by the element using the message ${method:BlElement>>#requestLayout:}$. This has the advantage that if no element request layout, this phase is skipped. Also it does not matter if layout is requeste one or 1000 time; only one layout phase is performed improving performance. 
+Layouting should to be executed during a frame when various properties like, width, height or position change in any element contained by the space. However, an important aspect in Bloc, is that when one of these properties changes, layouting is not performed immediately. Instead, a layout request is issued by the element whose property changed using the message ${method:BlElement>>#requestLayout:}$. This has the advantage that if no element request layout, this phase can be skipped. Also it does not matter if layout is requeste one or 1000 time; only one layout phase is performed improving performance. 
 
-Hence, in Bloc layout is not executed immediately after a property like the width of an element changes. Instead layout is requested and perfomed, if needed, during every frame. When needing to test layouts, however, it is necessary to apply a layout immediately, instead of waiting for a frame to end. That can be done using ${method:BlElement>>#forceLayout}$; this should not be used outside of tests, as it bypasses the normal layouting system from Bloc.
+Hence, in Bloc layout is not executed immediately after a property like the width of an element changes. Instead layout is requested and perfomed, if needed, during every frame. When needing to test layouts, however, it is necessary to apply a layout immediately, instead of waiting for a frame to end. That can be done using the messafe ${method:BlElement>>#forceLayout}$; this should not be used outside of tests, as it bypasses the normal layouting system from Bloc.
 
-In a space where all elements have no event handlers for layout events, the layout process is going to happen only once during the layouting phase. However, often elements need to reach and perform actions, when for example their position or extent changes. They can react by requesting another layout. A tipical example is deadling with edges. An edge can be layouted only after the position of the elements that it connects is known. Hence, often the layout needs to be applied twice, or more, during the layouting phase. The space only allows layout requests during the layouting phase a limited number of times (${method:BlSpace>>#computeLayout}$) to avoid blocking rendering due to infinite recursions caused by layout requests, or void spending too much time on layouts in a frame.
+In a space where all elements have no event handlers for layout events, elements are going to be layouted exactly once during the layouting phase. However, often elements need to reach and perform actions, when for example their position or extent changes. They can react by requesting another layout. A tipical example is deadling with edges. An edge can be layouted only after the position of the elements that it connects is known. Hence, often the layout needs to be applied twice, or more, during the layouting phase. The space only allows layout requests during the layouting phase a limited number of times (${method:BlSpace>>#computeLayout}$) to avoid blocking rendering due to infinite recursions caused by layout requests, or void spending too much time on layouts in a frame. More technical details can be found in the method ${method:BlSpace>>#doLayout}$, the main entry point for executing the layout phase in a space.
 
-!!Layout steps
+!!Performing a layout
+The space starts the layouting process on the root element of that space. Performing the layout on an element consists in executing three main steps:
+	- measuring bounds: determine the bounds of the element according to its layout;
+	- applying the layout: determine the position of children within the element;
+	- commiting changes: raise layout events like position or extent changed.
+
+TODO: why three separate steps?
+
+!!!Measuring bounds
+This is the first step when performing a layout on an element and consists in determening the measured bounds of that element. 
+
+Each element can decide how it wants to be measured (${method:BlElement>>#onMeasure:}$). By default ${class:BlElement}$ delegates the measuring to its layout. Layouts should override ${method:BlLayout>>#measure:with:}$ to implement the actual measuring. Normally layouts follow a top to bottom approach: they measure the current element and then asks its children to do the measuring.
+
+Each element has real bounds (${BlElement>>#bounds}$) and measured bounds (${BlElement>>#measuredBounds}$). The real bounds contain the actual position and extent of an element that users of that element should rely on. The measured bounds are used during layouting to hold the new extent of an element. The measuring phase changes only the extent in the measured bounds. After the entire layout phase is completed the real bounds and measured bounds will have the same value. The measured bounds act like a temporary cache for the new bounds of an element. They were introduced to avoid changing the real extent of element while layouting of children is still being performed. 
+
+(TODO: explain why position is sometime changed in the measured bounds)
+
+!!!Applying the layout
+
+!!!Commiting changes
 
 TODO
 	- Space starts the measurement process from the root element; after measurement it tell children to measure themselves, etc
