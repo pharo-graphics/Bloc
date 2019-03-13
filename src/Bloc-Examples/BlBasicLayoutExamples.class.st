@@ -5,6 +5,25 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlBasicLayoutExamples >> forceLayoutOfMatchParent [
+	<gtExample>
+	| anElement |
+
+	anElement := BlElement new.
+	anElement border: (BlBorder paint: Color gray width: 2).
+	anElement background: Color lightGray.
+	anElement constraintsDo: [ :c |
+		c horizontal matchParent .
+		c vertical matchParent ].
+
+	anElement forceLayout.
+
+	self assert: anElement extent equals: (800@600).
+
+	^ anElement
+]
+
+{ #category : #'instance creation' }
 BlBasicLayoutExamples >> parentWithChildExactSize [
 	<gtExample>
 	| child parent |

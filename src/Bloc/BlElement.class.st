@@ -740,8 +740,8 @@ BlElement >> computeLayout [
 				ifTrue: [ self space extent ]
 				ifFalse: [ 800 @ 600 ].
 			
-			widthSpec := BlMeasurementSpec new beAtMost: maxExtent x.
-			heightSpec := BlMeasurementSpec new beAtMost: maxExtent y.
+			widthSpec := BlMeasurementSpec exact: maxExtent x.
+			heightSpec := BlMeasurementSpec exact: maxExtent y.
 
 			self measure: (BlExtentMeasurementSpec new
 				widthSpec: (self layout
