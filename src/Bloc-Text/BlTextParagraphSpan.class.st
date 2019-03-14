@@ -20,8 +20,7 @@ Class {
 		'textRunEnd',
 		'spanStart',
 		'spanEnd',
-		'measurer',
-		'advance'
+		'measurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
