@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #'paragraph - geometry' }
+BlSingleLineTextParagraph >> advance [
+	^ self line advance
+]
+
+{ #category : #'paragraph - geometry' }
 BlSingleLineTextParagraph >> ascent [
 	<return: #Number>
 
@@ -64,6 +69,11 @@ BlSingleLineTextParagraph >> line [
 	<return: #BlTextParagraphLine>
 
 	^ line
+]
+
+{ #category : #'paragraph - geometry' }
+BlSingleLineTextParagraph >> looseBounds [
+	^ 0 @ 0 extent: self line advance @ (self ascent + self descent)
 ]
 
 { #category : #'paragraph - measuring' }
@@ -166,6 +176,11 @@ BlSingleLineTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: an
 						ifFalse: [ 1 ] ] ]
 		do: [ :aParagraphSpan | aFoundBlock cull: aParagraphSpan ]
 		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
+]
+
+{ #category : #'paragraph - geometry' }
+BlSingleLineTextParagraph >> tightBounds [
+	^ self line bounds translateBy: self baseline
 ]
 
 { #category : #'paragraph - geometry' }

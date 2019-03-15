@@ -183,6 +183,11 @@ BlTextElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
 		draw
 ]
 
+{ #category : #'api - text' }
+BlTextElement >> editorMesurement [
+	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance
+]
+
 { #category : #initialization }
 BlTextElement >> initialize [
 	super initialize.

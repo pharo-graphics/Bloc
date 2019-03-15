@@ -8,5 +8,5 @@ Class {
 BlTextParagraphBoundsBaseline >> computedBaseline: aTextParagraph [
 	<return: #Point>
 
-	^ (aTextParagraph left negated / 2.0) @ aTextParagraph top negated
+	^ aTextParagraph left negated @ aTextParagraph top negated
 ]
