@@ -105,12 +105,12 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 	<return: #Number>
 	| aWidth aMeasurer |
 
-	aWidth := (aPoint x - self origin x) max: 0.
+	aWidth := (aPoint x) max: 0.
 	aMeasurer := self measurer.
 
 	(aWidth <= 0)
 		ifTrue: [ ^ (self from - 1) max: 0 ].
-	(aWidth >= self width)
+	(aWidth >= self advance)
 		ifTrue: [ ^ self to ].
 
 	^ (self textRunStart to: self textRunEnd)
@@ -120,7 +120,7 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 				measureSpan: self
 					from: self textRunStart
 					to: anIndex
-					width: self width.
+					width: self advance.
 			(aWidth - aMeasurer width) sign ]
 		"exact match"
 		do: [ :anIndex | self from + aMeasurer spanEnd - 1 ]
@@ -141,13 +141,13 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 						measureSpan: self
 							from: self textRunStart
 							to: leftIndex
-							width: self width.
+							width: self advance.
 					leftWidth := aMeasurer width.
 					leftSpanIndex := aMeasurer spanEnd ].
 
 			rightIndex > self textRunEnd
 				ifTrue: [
-					rightWidth := self width.
+					rightWidth := self advance.
 					rightSpanIndex := self spanEnd ]
 				ifFalse: [
 					aMeasurer
@@ -155,7 +155,7 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 						measureSpan: self
 							from: self textRunStart
 							to: rightIndex
-							width: self width.
+							width: self advance.
 					rightWidth := aMeasurer width.
 					rightSpanIndex := aMeasurer spanEnd ].
 
@@ -219,7 +219,7 @@ BlTextParagraphSpan >> positionAt: anIndex [
 	(anIndex = (self from - 1))
 		ifTrue: [ ^ aPositionX @ aPositionY ].
 	(anIndex = self to)
-		ifTrue: [ ^ (aPositionX + self width) @ aPositionY ].
+		ifTrue: [ ^ (aPositionX + self advance) @ aPositionY ].
 
 	aSpanIndex := anIndex - self from + 1.
 	aSpanIterator := span iterator: 1 to: aSpanIndex.	
