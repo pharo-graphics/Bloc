@@ -153,7 +153,6 @@ TBlHostSpace >> maximize [
 
 { #category : #'host space - displaying' }
 TBlHostSpace >> maximized [
-
 	^ self explicitRequirement
 ]
 
@@ -165,7 +164,6 @@ TBlHostSpace >> minimize [
 
 { #category : #'host space - displaying' }
 TBlHostSpace >> minimized [
-
 	^ self explicitRequirement
 ]
 

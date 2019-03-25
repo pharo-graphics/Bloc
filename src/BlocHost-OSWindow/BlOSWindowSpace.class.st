@@ -62,6 +62,23 @@ BlOSWindowSpace >> eventFetcher [
 	^ eventFetcher
 ]
 
+{ #category : #'window - properties' }
+BlOSWindowSpace >> fullscreen [
+	"Return true if an underlying window is in fullscreen mode,
+	false otherwise"
+	<return: #Boolean>
+
+	^ window fullscreen
+]
+
+{ #category : #'window - properties' }
+BlOSWindowSpace >> fullscreen: aBoolean [
+	"Switch underlying window to fullscreen if true is given
+	and exit fullscreen mode if false is given"
+
+	window fullscreen: aBoolean
+]
+
 { #category : #'host space - events' }
 BlOSWindowSpace >> generateEvents [
 	"Generate more complex state change events such as window scale event when resolution of the screen changes"
@@ -168,6 +185,26 @@ BlOSWindowSpace >> isVisible [
 	<return: #Boolean>
 
 	^ window isVisible
+]
+
+{ #category : #'host space - displaying' }
+BlOSWindowSpace >> maximize [
+	window maximize
+]
+
+{ #category : #'host space - displaying' }
+BlOSWindowSpace >> maximized [
+	^ window maximized
+]
+
+{ #category : #'host space - displaying' }
+BlOSWindowSpace >> minimize [
+	window minimize
+]
+
+{ #category : #'host space - displaying' }
+BlOSWindowSpace >> minimized [
+	^ window minimized
 ]
 
 { #category : #'host space - displaying' }
