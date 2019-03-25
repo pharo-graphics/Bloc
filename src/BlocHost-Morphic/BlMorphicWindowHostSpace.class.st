@@ -54,7 +54,7 @@ BlMorphicWindowHostSpace >> eventFetcher [
 	^ eventFetcher
 ]
 
-{ #category : #'host space - testing' }
+{ #category : #'as yet unclassified' }
 BlMorphicWindowHostSpace >> hasResized [
 	"Return true if renderer extent changed.
 	It may happen if window moved between displays with different dpi,

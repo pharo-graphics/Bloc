@@ -62,6 +62,14 @@ BlOSWindowSpace >> eventFetcher [
 	^ eventFetcher
 ]
 
+{ #category : #'host space - events' }
+BlOSWindowSpace >> generateEvents [
+	"Generate more complex state change events such as window scale event when resolution of the screen changes"
+	
+	self hasScaled
+		ifTrue: [ self enqueueEvent: (BlSpaceScaledEvent new timestamp: self space time now) ]
+]
+
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> hide [
 	window hide
@@ -182,7 +190,7 @@ BlOSWindowSpace >> prepareToRender: aBlSpace onBufferSurface: aBlHostRendererBuf
 	"Prepare host space to a given space on a buffer surface.
 	By default dispatch directly to the renderer"
 	
-	self hasResized
+	self hasScaled
 		ifTrue: [ window validHandle renderer resetResources ].
 	
 	self renderer prepareToRender: aBlSpace
@@ -193,7 +201,7 @@ BlOSWindowSpace >> prepareToRender: aBlSpace onFormSurface: aBlHostRendererFormS
 	"Prepare host space to a given space on a Form surface.
 	By default dispatch directly to the renderer"
 	
-	self hasResized
+	self hasScaled
 		ifTrue: [ window validHandle renderer resetResources ].
 
 	self renderer prepareToRender: aBlSpace
@@ -204,7 +212,7 @@ BlOSWindowSpace >> prepareToRender: aBlSpace onOpenGLSurface: aBlHostRendererOpe
 	"Prepare host space to a given space on an OpenGL surface.
 	By default dispatch directly to the renderer"
 	
-	self hasResized
+	self hasScaled
 		ifTrue: [ aBlHostRendererOpenGLSurface extent: self canvasExtent ].
 	
 	self renderer prepareToRender: aBlSpace

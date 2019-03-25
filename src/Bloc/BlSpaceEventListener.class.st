@@ -160,6 +160,13 @@ BlSpaceEventListener >> spaceResizedEvent: anEvent [
 	self space setExtent: anEvent extent
 ]
 
+{ #category : #'window handlers' }
+BlSpaceEventListener >> spaceScaled: anEvent [
+	self space
+		beDirtyArea;
+		requestNextPulse
+]
+
 { #category : #'other handlers' }
 BlSpaceEventListener >> swipeEvent: anEvent [
 ]

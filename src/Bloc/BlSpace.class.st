@@ -857,6 +857,10 @@ BlSpace >> processEvents [
 		description: [ 'Events can only be processed if I have a host space' ].
 
 	self eventRecorder onPulse.
+	
+	self hasHostSpace
+		ifTrue: [ self hostSpace generateEvents ].
+	
 	self hostSpace fetchedEventsDo: [ :anEvent |
 		"we have to test for existance of the host space before handling each event because
 		it is possible that a space is closed due to an event"
