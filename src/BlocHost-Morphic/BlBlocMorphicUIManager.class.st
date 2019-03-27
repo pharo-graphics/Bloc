@@ -88,7 +88,7 @@ BlBlocMorphicUIManager >> resumeBlocUIProcess: aProcess [
 	"This is the only hack I found to make the debugger not terminate the current active process on close.
 	In DebugSession>>#terminate the debugger terminates the active process if the errorWasInUIProcess attribute is set to true.
 	Here we set it to false to tell the debugger that the Bloc UI process is not the current UI process from the system."
-	currentDebugSession := thisContext sender receiver. 
+	currentDebugSession := thisContext sender sender receiver. 
 	currentDebugSession errorWasInUIProcess: false.
 			
 	
