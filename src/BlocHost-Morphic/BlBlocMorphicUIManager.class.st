@@ -8,6 +8,7 @@ I handle exceptions in the Morphic UI process the same as ${class:MorphicUIManag
 
 I need to override the method ${method:MorphicUIManager>>#resumeUIProcess:}$ to handle the Bloc UI process in a special way. This is because the ${method:DebugSession>>#terminate}$ terminates the current process if the error was in the Morphic UI process. This is because if the error happened in the Morphic UI process, that process is suspended and a new Morphic UI process is started that runs the debugger. When the debugger is resumed the current Morphic UI process that was created for running the debugger should be suspended, and the process where the error happened that was initialy interruped should be resumed. If the error was in the Bloc UI process, terminating the current process will terminate the only Morphic UI process that is currently running the debugger. This happens as now the ${method:DebugSession>>#errorWasInUIProcess}$ is set to true if the error was in either the Bloc or Morhic UI process. Then ${method:DebugSession>>#terminate}$ terminates the current process if ${method:DebugSession>>#isAboutUIProcess}$ returns true. 
 
+I use ==Smalltalk tools debugger== to open the actual debugger. For my preconditions to hold this needs to be a Morphic based debugger. 
 "
 Class {
 	#name : #BlBlocMorphicUIManager,
