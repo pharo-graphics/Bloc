@@ -6,6 +6,22 @@ Class {
 	#category : #'Bloc-Examples-Layout'
 }
 
+{ #category : #'as yet unclassified' }
+BlFrameLayoutChildrenExamples >> childElementWithExactSize100per50 [
+	<gtExample>
+	| element |
+	element :=  self childElementWithVisualProperties.
+	element constraintsDo: [ :c |
+		c horizontal exact: 100.
+		c vertical exact: 50 ].
+	
+	self assert: element position equals: 0@0.
+	self assert: element extent equals: 0@0.
+	self assertExactConstraint: 100@50 forElement: element.
+	
+	^ element
+]
+
 { #category : #'examples - setup' }
 BlFrameLayoutChildrenExamples >> parentWithFrameLayoutAndFixedSize [
 	<gtExample>

@@ -27,38 +27,6 @@ TBlLayoutExamplesSetup >> childElementMatchingParent [
 ]
 
 { #category : #'examples - setup' }
-TBlLayoutExamplesSetup >> childElementWithExactSize100per50 [
-	<gtExample>
-	| element |
-	element :=  self childElementWithVisualProperties.
-	element constraintsDo: [ :c |
-		c horizontal exact: 100.
-		c vertical exact: 50 ].
-	
-	self assert: element position equals: 0@0.
-	self assert: element extent equals: 0@0.
-	self assertExactConstraint: 100@50 forElement: element.
-	
-	^ element
-]
-
-{ #category : #'examples - setup' }
-TBlLayoutExamplesSetup >> childElementWithExactSize140per140 [
-	<gtExample>
-	| element |
-	element :=  self childElementWithVisualProperties.
-	element constraintsDo: [ :c |
-		c horizontal exact: 140.
-		c vertical exact: 140 ].
-		
-	self assert: element position equals: 0@0.
-	self assert: element extent equals: 0@0.
-	self assertExactConstraint: 140@140 forElement: element.
-	
-	^ element
-]
-
-{ #category : #'examples - setup' }
 TBlLayoutExamplesSetup >> childElementWithVisualProperties [
 	<gtExample>
 	| element |

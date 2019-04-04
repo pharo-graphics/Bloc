@@ -4,6 +4,22 @@ Class {
 	#category : #'Bloc-Examples-Layout'
 }
 
+{ #category : #'examples - setup' }
+BlFrameLayoutMulipleChildrenExamples >> childElementWithExactSize140per140 [
+	<gtExample>
+	| element |
+	element :=  self childElementWithVisualProperties.
+	element constraintsDo: [ :c |
+		c horizontal exact: 140.
+		c vertical exact: 140 ].
+		
+	self assert: element position equals: 0@0.
+	self assert: element extent equals: 0@0.
+	self assertExactConstraint: 140@140 forElement: element.
+	
+	^ element
+]
+
 { #category : #'examples - alignment' }
 BlFrameLayoutMulipleChildrenExamples >> elementWithExactChildAlignLeftCenterAndExactChildCenter [
 	<gtExample>
