@@ -2,13 +2,13 @@
 I contain examples of a flow layout
 "
 Class {
-	#name : #BlFlowLayoutExamples,
+	#name : #BlFlowLayoutCompositionExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Layout'
+	#category : #'Bloc-Examples-Layout'
 }
 
 { #category : #examples }
-BlFlowLayoutExamples class >> exampleHorizontalList [
+BlFlowLayoutCompositionExamples class >> exampleHorizontalList [
 	<example>
 	| e1 e2 e3 e4 el space e5 |
 
@@ -56,7 +56,7 @@ BlFlowLayoutExamples class >> exampleHorizontalList [
 ]
 
 { #category : #examples }
-BlFlowLayoutExamples class >> exampleText [
+BlFlowLayoutCompositionExamples class >> exampleText [
 	<example>
 	| aText aLineIterator  theWords aParent aSpace floatA aFloatIndex |
 
@@ -123,7 +123,7 @@ BlFlowLayoutExamples class >> exampleText [
 ]
 
 { #category : #examples }
-BlFlowLayoutExamples class >> floatingCells [
+BlFlowLayoutCompositionExamples class >> floatingCells [
 	| aSpace |
 	<script: 'self floatingCells'>
 
@@ -136,8 +136,8 @@ BlFlowLayoutExamples class >> floatingCells [
 	aSpace show
 ]
 
-{ #category : #'instance creation' }
-BlFlowLayoutExamples >> blueCell [
+{ #category : #'examples - setup' }
+BlFlowLayoutCompositionExamples >> blueCell [
 	<gtExample>
 
 	^ self cell
@@ -145,8 +145,8 @@ BlFlowLayoutExamples >> blueCell [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-BlFlowLayoutExamples >> cell [
+{ #category : #'examples - setup' }
+BlFlowLayoutCompositionExamples >> cell [
 	<gtExample>
 	
 	^ BlElement new
@@ -157,8 +157,8 @@ BlFlowLayoutExamples >> cell [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-BlFlowLayoutExamples >> container [
+{ #category : #'examples - setup' }
+BlFlowLayoutCompositionExamples >> container [
 	<gtExample>
 	
 	^ BlElement new
@@ -167,8 +167,8 @@ BlFlowLayoutExamples >> container [
 		background: Color white darker
 ]
 
-{ #category : #'instance creation' }
-BlFlowLayoutExamples >> floatBlueCell [
+{ #category : #'examples - setup' }
+BlFlowLayoutCompositionExamples >> floatBlueCell [
 	<gtExample>
 
 	^ self floatCell
@@ -176,8 +176,8 @@ BlFlowLayoutExamples >> floatBlueCell [
 		background: Color blue
 ]
 
-{ #category : #'instance creation' }
-BlFlowLayoutExamples >> floatCell [
+{ #category : #'examples - setup' }
+BlFlowLayoutCompositionExamples >> floatCell [
 	<gtExample>
 
 	^ BlElement new
@@ -186,8 +186,8 @@ BlFlowLayoutExamples >> floatCell [
 			c margin: (BlInsets top: 10 right: 0 bottom: 0 left: 10) ]
 ]
 
-{ #category : #'instance creation' }
-BlFlowLayoutExamples >> floatRedCell [
+{ #category : #'examples - setup' }
+BlFlowLayoutCompositionExamples >> floatRedCell [
 	<gtExample>
 
 	^ self floatCell
@@ -196,7 +196,7 @@ BlFlowLayoutExamples >> floatRedCell [
 ]
 
 { #category : #'examples - list with floats' }
-BlFlowLayoutExamples >> floatingCells [
+BlFlowLayoutCompositionExamples >> floatingCells [
 	<gtExample>
 	
 	^ self container
@@ -210,8 +210,8 @@ BlFlowLayoutExamples >> floatingCells [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-BlFlowLayoutExamples >> grayCell [
+{ #category : #'examples - setup' }
+BlFlowLayoutCompositionExamples >> grayCell [
 	<gtExample>
 
 	^ self cell
@@ -219,8 +219,8 @@ BlFlowLayoutExamples >> grayCell [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-BlFlowLayoutExamples >> redCell [
+{ #category : #'examples - setup' }
+BlFlowLayoutCompositionExamples >> redCell [
 	<gtExample>
 
 	^ self cell

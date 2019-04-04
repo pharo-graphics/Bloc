@@ -1,92 +1,45 @@
 Class {
-	#name : #BlLinearLayoutHorizontalTests,
-	#superclass : #TestCase,
-	#traits : 'TBlLayoutTests',
-	#classTraits : 'TBlLayoutTests classTrait',
-	#instVars : [
-		'parent'
-	],
-	#category : 'Bloc-Layout-Tests-Linear'
+	#name : #BlLinearLayoutHorizontalExamples,
+	#superclass : #Object,
+	#traits : 'TBlLayoutExamplesSetup',
+	#classTraits : 'TBlLayoutExamplesSetup classTrait',
+	#category : #'Bloc-Examples-Layout'
 }
 
-{ #category : #'instance creation' }
-BlLinearLayoutHorizontalTests >> exact: aPoint [
-	^ BlElement new
-		constraintsDo: [ :c |
-			c horizontal exact: aPoint x.
-			c vertical exact: aPoint y ];
-		yourself
-]
+{ #category : #examples }
+BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchInExactParentPadding [
+	<gtExample>
+	<description: 'A single child is distributed equally within the parent''s bounds'>
+	| parent child |
+	child := self childElementMatchingParent.
 
-{ #category : #'instance creation' }
-BlLinearLayoutHorizontalTests >> exactHeight: aNumber [
-	^ BlElement new
-		constraintsDo: [ :c |
-			c vertical exact: aNumber ];
-		yourself
-]
-
-{ #category : #'instance creation' }
-BlLinearLayoutHorizontalTests >> exactWidth: aNumber [
-	^ BlElement new
-		constraintsDo: [ :c |
-			c horizontal exact: aNumber ];
-		yourself
-]
-
-{ #category : #'instance creation' }
-BlLinearLayoutHorizontalTests >> matchParent [
-	^ BlElement new
-		constraintsDo: [ :c | 
-			c vertical matchParent.
-			c horizontal matchParent ];
-		yourself
-]
-
-{ #category : #running }
-BlLinearLayoutHorizontalTests >> setUp [
-	super setUp.
-	
-	parent := BlElement new.
-	parent layout: BlLinearLayout horizontal.
-]
-
-{ #category : #running }
-BlLinearLayoutHorizontalTests >> tearDown [
-	super tearDown.
-	
-	parent := nil
-]
-
-{ #category : #tests }
-BlLinearLayoutHorizontalTests >> testOneChildMatchInExactParentPadding [
-	"All children are distributed equally within parent's bounds"
-	| childA |
-	childA := self matchParent.
-
+	parent := self parentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 400.
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
 
-	parent addChildren: { childA }.
+	parent addChildren: { child }.
 
 	parent forceLayout.
 
-	self assert: childA extent equals: 360@560.
-	self assert: childA position equals: 20@20.
+	self assert: child extent equals: 360@560.
+	self assert: child position equals: 20@20.
 
 	self assert: parent extent equals: 400@600.
-	self assert: parent position equals: 0@0
+	self assert: parent position equals: 0@0.
+	^ parent
 ]
 
-{ #category : #tests }
-BlLinearLayoutHorizontalTests >> testOneChildMatchOneExactInFitParent [
+{ #category : #examples }
+BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchOneExactInFitParent [
+	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| childA childB |
-	childA := self exact: 300@200.
-	childB := self exactWidth: 200.
+	| parent childA childB |
+	childA := self childExact: 300@200.
+	childB := self childExactWidth: 200.
 	childB constraints vertical matchParent.
 
+	parent := self parentWithLinearHorizontalLayout.
 	parent constraints horizontal fitContent.
 	parent constraints vertical fitContent.
 
@@ -101,16 +54,20 @@ BlLinearLayoutHorizontalTests >> testOneChildMatchOneExactInFitParent [
 	self assert: childB position equals: 300@0.
 
 	self assert: parent extent equals: 500@200.
-	self assert: parent position equals: 0@0
+	self assert: parent position equals: 0@0.
+	^ parent
+	
 ]
 
-{ #category : #tests }
-BlLinearLayoutHorizontalTests >> testOneExactChildInExactParentMargin [
+{ #category : #examples }
+BlLinearLayoutHorizontalExamples >> elementWithOneExactChildInExactParentMargin [
+	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| childA |
-	childA := self exact: 20@20.
+	| parent childA |
+	childA := self childExact: 20@20.
 	childA margin: (BlInsets top: 15 right: 0 bottom: 0 left: 10).
 	
+	parent := self parentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 50.
 	parent constraints vertical exact: 50.
 
@@ -122,16 +79,20 @@ BlLinearLayoutHorizontalTests >> testOneExactChildInExactParentMargin [
 	self assert: childA position equals: 10@15.
 
 	self assert: parent extent equals: 50@50.
-	self assert: parent position equals: 0@0
+	self assert: parent position equals: 0@0.
+	^ parent
 ]
 
-{ #category : #tests }
-BlLinearLayoutHorizontalTests >> testThreeMatchChildrenInExactParent [
+{ #category : #examples }
+BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParent [
+	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| childA childB childC |
-	childA := self matchParent.
-	childB := self matchParent.
-	childC := self matchParent.
+	| parent childA childB childC |
+	childA := self childElementMatchingParent.
+	childB := self childElementMatchingParent.
+	childC := self childElementMatchingParent.
+	
+	parent := self parentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 600.
 	parent constraints vertical exact: 200.
 
@@ -149,17 +110,21 @@ BlLinearLayoutHorizontalTests >> testThreeMatchChildrenInExactParent [
 	self assert: childC position equals: 400@0.
 
 	self assert: parent extent equals: 600@200.
-	self assert: parent position equals: 0@0
+	self assert: parent position equals: 0@0.
+	
+	^ parent
 ]
 
-{ #category : #tests }
-BlLinearLayoutHorizontalTests >> testThreeMatchChildrenInExactParentRTL [
+{ #category : #examples }
+BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParentRTL [
+	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| childA childB childC |
-	childA := self matchParent.
-	childB := self matchParent.
-	childC := self matchParent.
+	| parent childA childB childC |
+	childA := self childElementMatchingParent.
+	childB := self childElementMatchingParent.
+	childC := self childElementMatchingParent.
 	
+	parent := self parentWithLinearHorizontalLayout.
 	parent layout rightToLeft.
 	parent constraints horizontal exact: 600.
 	parent constraints vertical exact: 200.
@@ -178,16 +143,20 @@ BlLinearLayoutHorizontalTests >> testThreeMatchChildrenInExactParentRTL [
 	self assert: childA position equals: 400@0.
 
 	self assert: parent extent equals: 600@200.
-	self assert: parent position equals: 0@0
+	self assert: parent position equals: 0@0.
+	
+	^ parent
 ]
 
-{ #category : #tests }
-BlLinearLayoutHorizontalTests >> testTwoChildrenMatchInExactParentPadding [
+{ #category : #examples }
+BlLinearLayoutHorizontalExamples >> elementWithTwoChildrenMatchInExactParentPadding [
+	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| childA childB |
-	childA := self matchParent.
-	childB := self matchParent.
+	| parent childA childB |
+	childA := self childElementMatchingParent.
+	childB := self childElementMatchingParent.
 
+	parent := self parentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 400.
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
@@ -203,15 +172,20 @@ BlLinearLayoutHorizontalTests >> testTwoChildrenMatchInExactParentPadding [
 	self assert: childB position equals: 200@20.
 
 	self assert: parent extent equals: 400@600.
-	self assert: parent position equals: 0@0
+	self assert: parent position equals: 0@0.
+	
+	^ parent
 ]
 
-{ #category : #tests }
-BlLinearLayoutHorizontalTests >> testTwoExactChildrenInFitContent [
+{ #category : #examples }
+BlLinearLayoutHorizontalExamples >> elementWithTwoExactChildrenInFitContent [
+	<gtExample>
 	"Parent resizes to fit children"
-	| childA childB |
-	childA := self exact: 200@100.
-	childB := self exact: 100@200.
+	| parent childA childB |
+	childA := self childExact: 200@100.
+	childB := self childExact: 100@200.
+	
+	parent := self parentWithLinearHorizontalLayout.
 	parent constraints horizontal fitContent.
 	parent constraints vertical fitContent.
 	
@@ -226,15 +200,20 @@ BlLinearLayoutHorizontalTests >> testTwoExactChildrenInFitContent [
 	self assert: childB position equals: 200@0.
 	
 	self assert: parent extent equals: 300@200.
-	self assert: parent position equals: 0@0
+	self assert: parent position equals: 0@0.
+	
+	^ parent
 ]
 
-{ #category : #tests }
-BlLinearLayoutHorizontalTests >> testTwoMatchChildrenInExactParent [
+{ #category : #examples }
+BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
+	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| childA childB |
-	childA := self matchParent.
-	childB := self matchParent.
+	| parent childA childB |
+	childA := self childElementMatchingParent.
+	childB := self childElementMatchingParent.
+	
+	parent := self parentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 500.
 	parent constraints vertical exact: 200.
 
@@ -249,5 +228,21 @@ BlLinearLayoutHorizontalTests >> testTwoMatchChildrenInExactParent [
 	self assert: childB position equals: 250@0.
 
 	self assert: parent extent equals: 500@200.
-	self assert: parent position equals: 0@0
+	self assert: parent position equals: 0@0.
+	
+	^ parent
+]
+
+{ #category : #'examples - setup' }
+BlLinearLayoutHorizontalExamples >> parentWithLinearHorizontalLayout [
+	<gtExample>
+	| element |
+	element :=  BlElement new
+		border: (BlBorder builder dashed; paint: Color red; width: 3; build);
+		layout: BlLinearLayout horizontal.
+	
+	self assert: element layout class equals: BlLinearLayout.
+	self assert: element layout isHorizontal.
+	
+	^ element
 ]
