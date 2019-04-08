@@ -41,7 +41,7 @@ BlTouchExamples class >> multiTouchDemo [
 	space := BlSpace new.
 	space position: 100@100.
 	space title: 'Touch Demo'.
-	space host: #BlOSWindowHost asClass new.
+	space host: #BlOSWindowHost asClass default.
 	space root addChild: container.
 	space show
 ]
