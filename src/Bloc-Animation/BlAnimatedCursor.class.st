@@ -6,7 +6,7 @@ Class {
 		'animation',
 		'imgIndex'
 	],
-	#category : 'Bloc-Animation-Cursor'
+	#category : #'Bloc-Animation-Cursor'
 }
 
 { #category : #'as yet unclassified' }
