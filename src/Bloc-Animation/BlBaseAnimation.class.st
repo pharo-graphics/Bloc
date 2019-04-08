@@ -1,3 +1,7 @@
+"
+I am an abstract class for all Bloc animations. 
+See my subclasses for futher documentation and examples: ${class:BlBaseAnimation|show=gtSubclassesFor:|expanded=true}$
+"
 Class {
 	#name : #BlBaseAnimation,
 	#superclass : #BlTask,
@@ -19,7 +23,7 @@ Class {
 		'eventDispatcher',
 		'loopDoneTime'
 	],
-	#category : 'Bloc-Animation-Basic'
+	#category : #'Bloc-Animation-Basic'
 }
 
 { #category : #'action  handling' }
