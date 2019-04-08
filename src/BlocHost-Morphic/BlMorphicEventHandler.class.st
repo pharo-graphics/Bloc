@@ -380,7 +380,7 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 
 		aBlEvent := BlMouseWheelEvent new
 			vector: (BlVector x: 0 y: (aMorphicEvent direction = Character arrowDown
-				ifTrue: [ -2 ] ifFalse: [ 2 ]));
+				ifTrue: [ -3 ] ifFalse: [ 3 ]));
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);

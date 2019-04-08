@@ -1,6 +1,6 @@
 Extension { #name : #OSSDL2GLRenderer }
 
-{ #category : #'*BlocHost-OSWindow' }
+{ #category : #'*BlocHost-OSWindow-SDL2' }
 OSSDL2GLRenderer >> canvasExtent [
 	| width height extent |
 
