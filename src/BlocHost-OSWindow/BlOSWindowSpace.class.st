@@ -13,9 +13,10 @@ Class {
 		'eventFetcher',
 		'space',
 		'osWindowRenderer',
-		'host'
+		'host',
+		'keyboardKeyTable'
 	],
-	#category : 'BlocHost-OSWindow-Host'
+	#category : #'BlocHost-OSWindow-Host'
 }
 
 { #category : #'host space - accessing' }
@@ -168,7 +169,7 @@ BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 { #category : #initialization }
 BlOSWindowSpace >> initializeWithAttributes: initialAttributes [
 	window := OSWindow createWithAttributes: initialAttributes.
-	window eventHandler: (BlOSWindowEventHandler window: self).
+	window eventHandler: ((BlOSWindowEventHandler window: self) keyboardKeyTable: keyboardKeyTable).
 	window startTextInput
 ]
 
@@ -185,6 +186,11 @@ BlOSWindowSpace >> isVisible [
 	<return: #Boolean>
 
 	^ window isVisible
+]
+
+{ #category : #private }
+BlOSWindowSpace >> keyboardKeyTable: aKeyboardKeyTable [
+	keyboardKeyTable := aKeyboardKeyTable
 ]
 
 { #category : #'host space - displaying' }

@@ -3,11 +3,11 @@ I am an abstract Bloc OSWindow renderer.
 "
 Class {
 	#name : #BlOSWindowRenderer,
-	#superclass : #OSWindowRenderer,
+	#superclass : #OSWindowGLRenderer,
 	#instVars : [
 		'surface'
 	],
-	#category : 'BlocHost-OSWindow-Support'
+	#category : #'BlocHost-OSWindow-Support'
 }
 
 { #category : #'updating screen' }

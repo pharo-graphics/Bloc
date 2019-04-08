@@ -48,24 +48,22 @@ BlInfiniteMouseScrollListener >> handleEvent: anEvent [
 
 { #category : #'mouse handlers' }
 BlInfiniteMouseScrollListener >> scrollEvent: anEvent [
-	| dX dY anAmount anInfiniteElement didFling |
-	
-	anAmount := 300.
-	
+	| dX dY anInfiniteElement |
+
 	anInfiniteElement := anEvent currentTarget.
 
 	dX := anEvent isHorizontal
-		ifTrue: [ anAmount * anEvent vector x sign ]
+		ifTrue: [ anEvent vector x ]
 		ifFalse: [ 0 ].
 
 	dY := (anEvent isScrollDown and: [ self canScrollDown: anInfiniteElement ])
-		ifTrue: [ anAmount ]
+		ifTrue: [ anEvent vector y ]
 		ifFalse: [ (anEvent isScrollUp and: [ self canScrollUp: anInfiniteElement ])
-			ifTrue: [ anAmount negated ]
+			ifTrue: [ anEvent vector y ]
 			ifFalse: [ 0 ] ].
 
-	didFling := anEvent currentTarget fling: dX @ dY.
-	anEvent consumed: didFling
+	anInfiniteElement smoothScrollBy: (anEvent vector x @ anEvent vector y negated) * 7.
+	anEvent consumed: (dY isZero not)
 ]
 
 { #category : #events }

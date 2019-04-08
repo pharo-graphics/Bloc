@@ -1,5 +1,5 @@
 Class {
-	#name : #BlOSWindowKeyboardKeyTable,
+	#name : #BlOSWindowGlutinKeyboardKeyTable,
 	#superclass : #BlKeyboardKeyTable,
 	#instVars : [
 		'virtualKeyTable'
@@ -7,11 +7,11 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'BlocHost-OSWindow-Host'
+	#category : #'BlocHost-OSWindow-Glutin'
 }
 
 { #category : #cleanup }
-BlOSWindowKeyboardKeyTable class >> cleanUp [
+BlOSWindowGlutinKeyboardKeyTable class >> cleanUp [
 	<script: 'self cleanUp'>
 	super cleanUp.
 	
@@ -19,21 +19,19 @@ BlOSWindowKeyboardKeyTable class >> cleanUp [
 ]
 
 { #category : #cleanup }
-BlOSWindowKeyboardKeyTable class >> default [
+BlOSWindowGlutinKeyboardKeyTable class >> default [
 	^ default ifNil: [ default := self new ]
 ]
 
 { #category : #initialization }
-BlOSWindowKeyboardKeyTable >> initialize [
+BlOSWindowGlutinKeyboardKeyTable >> initialize [
 	super initialize.
 
 	self initializeVirtualKeyTable
 ]
 
 { #category : #initialization }
-BlOSWindowKeyboardKeyTable >> initializeVirtualKeyTable [
-	"See https://wiki.libsdl.org/SDLScancodeLookup"
-
+BlOSWindowGlutinKeyboardKeyTable >> initializeVirtualKeyTable [
 	self
 		initialize: (virtualKeyTable := Dictionary new)
 		with: #(
@@ -166,8 +164,8 @@ BlOSWindowKeyboardKeyTable >> initializeVirtualKeyTable [
 		)
 ]
 
-{ #category : #'api - converting' }
-BlOSWindowKeyboardKeyTable >> keyFromScanCode: aScanCode [
+{ #category : #initialization }
+BlOSWindowGlutinKeyboardKeyTable >> keyFromScanCode: aScanCode [
 	<return: #BlKeyboardKey>
 
 	^ virtualKeyTable
