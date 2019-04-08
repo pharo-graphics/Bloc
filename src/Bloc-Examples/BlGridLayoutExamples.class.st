@@ -1,474 +1,464 @@
-"
-I contain examples of a grid layout
-
-I show how different resizing strategies work and how to build advanced layouts with the help of a grid
-"
 Class {
 	#name : #BlGridLayoutExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Layout'
+	#traits : 'TBlLayoutExamplesSetup + TGtExampleAssertable',
+	#classTraits : 'TBlLayoutExamplesSetup classTrait + TGtExampleAssertable classTrait',
+	#category : #'Bloc-Examples-Layout'
 }
 
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleDistributed2x2Grid [
-	<example>
-	| e1 e2 e3 e4 el space|
-	
-	e1 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color pink.
-	
-	e2 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color green.
-	
-	e3 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color red.
-	
-	e4 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color yellow.
-	
-	el := BlElement new
-		layout: (BlGridLayout new columnCount: 2);
-		size: 300@300;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2. e3. e4 };
-		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleDistributedWithSpan2x2Grid [
-	<example>
-	| e1 e2 e3 el space|
-
-	e1 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent.
-			c grid vertical span: 2 ];
-		background: Color yellow.
-
-	e2 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent.
-			c grid horizontal weight: 2 ];
-		background: Color green.
-	
-	e3 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent.
-			c grid vertical weight: 0.5 ];
-		background: Color red.
-	
-	el := BlElement new
-		layout: (BlGridLayout new columnCount: 2);
-		size: 300@300;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2. e3 };
-		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleDistributedWithWeight2x2Grid [
-	<example>
-	| e1 e2 e3 e4 el space|
-	
-	e1 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent.
-			c grid horizontal weight: 2 ];
-		background: Color pink.
-	
-	e2 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color green.
-	
-	e3 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color red.
-	
-	e4 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent.
-			c grid vertical weight: 2 ];
-		background: Color yellow.
-	
-	el := BlElement new
-		layout: (BlGridLayout new columnCount: 2);
-		size: 300@300;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2. e3. e4 };
-		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleHorizontal2x1Grid [
-	<example>
-	| e1 e2 el space|
-	
-	e1 := BlElement new
-		size: 150 asPoint;
-		background: Color red.
-	
-	e2 := BlElement new
-		size: 150 asPoint;
-		background: Color yellow.
-
-	el := BlElement new
-		layout: BlGridLayout horizontal;
-		size: 400@400;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2 };
-		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleHorizontalSpacing2x1Grid [
-	<example>
-	| e1 e2 el space|
-	
-	e1 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color red.
-	
-	e2 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color yellow.
-
-	el := BlElement new
-		layout: (BlGridLayout horizontal cellSpacing: 20);
-		size: 400@200;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2 };
-		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleInCellAlignment2x2Grid [
-	<example>
-	| e1 e2 e3 el space|
-
-	e1 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal exact: 100.
-			c vertical matchParent.
-			c grid vertical span: 2 ];
-		background: Color yellow.
-
-	e2 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal exact: 100.
-			c vertical exact: 50.
-			c grid horizontal alignCenter ];
-		background: Color green.
-
-	e3 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical exact: 100.
-			c grid vertical alignBottom.
-			c grid horizontal weight: 2 ];
-		background: Color red.
-	
-	el := BlElement new
-		layout: (BlGridLayout new columnCount: 2);
-		size: 300@300;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2. e3 };
-		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleNautilusGrid [
-	<example>
-	| e1 e2 e3 e4 e5 el space|
-	
-	e1 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color white.
-	
-	e2 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color white.
-	
-	e3 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color white.
-	
-	e4 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color white.
-
-	e5 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent.
-			c grid horizontal span: 4 ];
-		background: Color white.
-	
-	el := BlElement new
-		layout: (BlGridLayout new columnCount: 4; cellSpacing: 10);
-		size: 300@300;
-		relocate: 200 @ 100;
-		background: Color veryLightGray;
-		addChildren: { e1. e2. e3. e4. e5 };
-		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleSimple2x2Grid [
-	<example>
-	| e1 e2 e3 e4 el space|
-	
-	e1 := BlElement new
-		size: 150 asPoint;
-		background: Color pink.
-	
-	e2 := BlElement new
-		size: 150 asPoint;
-		background: Color green.
-	
-	e3 := BlElement new
-		size: 150 asPoint;
-		background: Color red.
-	
-	e4 := BlElement new
-		size: 150 asPoint;
-		background: Color yellow.
-	
-	el := BlElement new
-		layout: (BlGridLayout new columnCount: 2);
-		size: 400@400;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2. e3. e4 };
-		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleSpacing9x9Grid [
-	<example>
-	| children el space dim |
-	
-	dim := 9.
-	
-	children := (1 to: (dim raisedTo: 2)) collect: [ :i |
-		BlElement new
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical matchParent.
-				c grid ];
-			background: Color random muchLighter;
-			yourself ].
-
-	el := BlElement new
-		layout: (BlGridLayout new columnCount: dim; rowCount: dim; yourself);
-		constraintsDo: [ :c |
-			c horizontal exact: 400.
-			c vertical exact: 400 ];
-		relocate: 0 @ 0;
-		background: Color blue;
-		addChildren: children;
-		yourself.
-
-	el forceLayout.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleVertical1x2Grid [
-	<example>
-	| e1 e2 el space|
-	
-	e1 := BlElement new
-		size: 150 asPoint;
-		background: Color red.
-	
-	e2 := BlElement new
-		size: 150 asPoint;
-		background: Color yellow.
-
-	el := BlElement new
-		layout: BlGridLayout vertical;
-		size: 400@400;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2 };
-		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples class >> exampleVerticalSpacing1x2Grid [
-	<example>
-	| e1 e2 el space|
-	
-	e1 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color red.
-	
-	e2 := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		background: Color yellow.
-
-	el := BlElement new
-		layout: (BlGridLayout vertical cellSpacing: 20);
-		size: 200@400;
-		relocate: 200 @ 100;
-		background: Color blue;
-		addChildren: { e1. e2 };
-		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
-]
-
-{ #category : #examples }
-BlGridLayoutExamples >> verticalSpan [
+{ #category : #'examples - layout' }
+BlGridLayoutExamples >> exampleCellFitContent [
 	<gtExample>
-	| grid child1 child2 child3 |
+	| parent child subchild |
 
-	grid := BlElement new.
-	grid size: 500@400.
-	grid layout: (BlGridLayout horizontal cellSpacing: 10; columnCount: 2).
+	parent := self parentWithGridHorizontalLayout.
+	parent constraintsDo: [ :c |
+		c horizontal exact: 300.
+		c vertical fitContent ].
+	parent background: Color white.
 
-	child1 := BlElement new.
-	child1 background: (Color red alpha: 0.5).
-	child1 constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
+	child := self matchWidthFitHeight.
+	child layout: BlGridLayout vertical.
+	child background: Color paleBlue.
 
-	child2 := BlElement new.
-	child2 background: (Color blue alpha: 0.5).
-	child2 constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent.
-		c grid vertical span: 2 ].
+	subchild := self childExact: 200@100.
+	subchild background: Color paleRed.
 
-	child3 := BlElement new.
-	child3 background: (Color green alpha: 0.5).
-	child3 constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
+	child addChild: subchild.
+	parent addChild: child.
 
-	grid addChildren: { child1. child2. child3 }.
+	parent forceLayout.
 
-	grid forceLayout.
-	self assert: grid extent equals: 500@400.
-	self assert: child1 position equals: 10@10.
-	self assert: child1 extent equals: 235@185.
+	self assert: subchild extent equals: 200@100.
+	self assert: subchild position equals: 0@0.
+
+	self assert: child extent equals: 300@100.
+	self assert: child position equals: 0@0.
+
+	self assert: parent extent equals: 300@100.
+	self assert: parent position equals: 0@0.
+
+	^ parent
+]
+
+{ #category : #'examples - layout' }
+BlGridLayoutExamples >> exampleCellSpacingHorizontal1 [
+	<gtExample>
+	| parent childA childB |
+
+	childA := self childElementMatchingParent.
+	childB := self childElementMatchingParent.
+
+	parent := self parentWithGridHorizontalLayout.
+	parent constraints horizontal exact: 400.
+	parent constraints vertical exact: 200.
+	parent layout cellSpacing: 20.
+	parent layout horizontal.
+
+	parent addChildren: { childA. childB }.
+	parent forceLayout.
+
+	self assert: childA extent equals: 170@160.
+	self assert: childA position equals: 20@20.
 	
-	self assert: child2 position equals: 255@10.
-	self assert: child2 extent equals: 235@380.
+	self assert: childB extent equals: 170@160.
+	self assert: childB position equals: 210@20.
 	
-	self assert: child3 position equals: 10@205.
-	self assert: child3 extent equals: 235@185.
+	self assert: parent extent equals: 400@200.
+	self assert: parent position equals: 0@0.
+	^ parent
+]
 
+{ #category : #'examples - layout' }
+BlGridLayoutExamples >> exampleCellSpacingVerical1 [
+	<gtExample>
+	| parent childA childB |
+	
+	childA := self childElementMatchingParent.
+	childB := self childElementMatchingParent.
+	
+	parent := self parentWithGridHorizontalLayout.
+	parent constraints horizontal exact: 200.
+	parent constraints vertical exact: 400.
+	parent layout cellSpacing: 20.
+	parent layout vertical.
+
+	parent addChildren: { childA. childB }.
+	parent forceLayout.
+
+	self assert: childA extent equals: 160@170.
+	self assert: childA position equals: 20@20.
+	
+	self assert: childB extent equals: 160@170.
+	self assert: childB position equals: 20@210.
+	
+	self assert: parent extent equals: 200@400.
+	self assert: parent position equals: 0@0.
+	^ parent
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillEmpty [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 0 withAll: 0.
+	
+	grid fill: array from: 0 to: 1 with: 1.
+
+	self assert: array equals: #().
 	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillFirstInFourElements [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+
+	grid fill: array from: 0 to: 1 with: 1.
+
+	self assert: array equals: #(1 0 0 0).
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillForthInFourElements [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+
+	grid fill: array from: 3 to: 4 with: 1.
+
+	self assert: array equals: #(0 0 0 1).
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillOneElement [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 1 withAll: 0.
+	
+	grid fill: array from: 0 to: 1 with: 1.
+
+	self assert: array equals: #(1).
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillOutOfBoundsEmpty1 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 0 withAll: 0.
+	
+	self
+		should: [ grid fill: array from: -1 to: 0 with: 1 ]
+		raise: SubscriptOutOfBounds 
+		description: 'Should raise SubscriptOutOfBounds'.
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillOutOfBoundsEmpty2 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 0 withAll: 0.
+	
+	self
+		should: [ grid fill: array from: -1 to: 1 with: 1 ]
+		raise: SubscriptOutOfBounds 
+		description: 'Should raise SubscriptOutOfBounds'.
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillOutOfBoundsEmpty3 [
+	<gtExample>
+	| grid array |
+	
+	grid := BlGridLayoutImpl new.
+	array := Array new: 0 withAll: 0.
+	
+	grid fill: array from: 0 to: 0 with: 1.
+	self assert: array equals: #().
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillOutOfBoundsEmpty4 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 0 withAll: 0.
+	grid fill: array from: 0 to: 2 with: 1.
+	self assert: array equals: #().
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillOutOfBoundsInFourElements1 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+
+	self
+		should: [ grid fill: array from: -1 to: 3 with: 1 ]
+		raise: SubscriptOutOfBounds 
+		description: 'Should raise SubscriptOutOfBounds'.
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillOutOfBoundsInFourElements2 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+
+	self
+		should: [ grid fill: array from: -1 to: 6 with: 1 ]
+		raise: SubscriptOutOfBounds 
+		description: 'Should raise SubscriptOutOfBounds'.
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillOutOfBoundsInFourElements3 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+	grid fill: array from: 4 to: 6 with: 1.
+	self assert: array equals: #(0 0 0 0).
+	^ grid
+
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillSecondInFourElements [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+
+	grid fill: array from: 1 to: 2 with: 1.
+
+	self assert: array equals: #(0 1 0 0).
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillThreeElements [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 3 withAll: 0.
+	
+	grid fill: array from: 0 to: 3 with: 1.
+
+	self assert: array equals: #(1 1 1).
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillTwoElements [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 2 withAll: 0.
+	
+	grid fill: array from: 0 to: 2 with: 1.
+
+	self assert: array equals: #(1 1).
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillTwoInFourElements1 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+
+	grid fill: array from: 0 to: 2 with: 1.
+
+	self assert: array equals: #(1 1 0 0).
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillTwoInFourElements2 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+
+	grid fill: array from: 1 to: 3 with: 1.
+
+	self assert: array equals: #(0 1 1 0).
+	^ grid
+]
+
+{ #category : #'examples - unit - fill' }
+BlGridLayoutExamples >> exampleGridLayoutArrayFillTwoInFourElements3 [
+	<gtExample>
+	| grid array |
+	grid := BlGridLayoutImpl new.
+	array := Array new: 4 withAll: 0.
+
+	grid fill: array from: 2 to: 4 with: 1.
+
+	self assert: array equals: #(0 0 1 1).
+	^ grid
+]
+
+{ #category : #'examples - layout' }
+BlGridLayoutExamples >> exampleOneCellExactChildInExactParent [
+	<gtExample>
+	| parent child |
+	
+	child := self childExact: 200@300.
+	
+	parent := self parentWithGridHorizontalLayout.
+	parent constraints horizontal exact: 300.
+	parent constraints vertical exact: 400.
+
+	parent addChild: child.
+	parent forceLayout.
+
+	self assert: child extent equals: 200@300.
+	self assert: child position equals: 0@0.
+	
+	self assert: parent extent equals: 300@400.
+	self assert: parent position equals: 0@0.
+	^ parent
+]
+
+{ #category : #'examples - layout' }
+BlGridLayoutExamples >> exampleOneCellExactChildInFitParent [
+	<gtExample>
+	| parent child |
+	
+	child := self childExact: 200@300.
+	
+	parent := self parentWithGridHorizontalLayout.
+	parent constraints horizontal fitContent.
+	parent constraints vertical fitContent.
+
+	parent addChild: child.
+	parent forceLayout.
+
+	self assert: child extent equals: 200@300.
+	self assert: child position equals: 0@0.
+	
+	self assert: parent extent equals: 200@300.
+	self assert: parent position equals: 0@0.
+	^ parent
+]
+
+{ #category : #'examples - layout' }
+BlGridLayoutExamples >> exampleOneCellMatchChildInExactParent [
+	<gtExample>
+	| parent child |
+
+	child := self childElementMatchingParent.
+	
+	parent := self parentWithGridHorizontalLayout.
+	parent constraints horizontal exact: 400.
+	parent constraints vertical exact: 300.
+
+	parent addChild: child.
+	parent forceLayout.
+
+	self assert: child extent equals: 400@300.
+	self assert: child position equals: 0@0.
+	
+	self assert: parent extent equals: 400@300.
+	self assert: parent position equals: 0@0.
+	^ parent
+]
+
+{ #category : #'examples - unit - spans' }
+BlGridLayoutExamples >> exampleSpanDistributeOneColumn [
+	<gtExample>
+	| parent childA childB childC |
+
+	childA := self childElementMatchingParent.
+	childB := self childElementMatchingParent.
+	childC := self childElementMatchingParent.
+	
+	parent := self parentWithGridHorizontalLayout.
+	parent constraints horizontal exact: 400.
+	parent constraints vertical exact: 400.
+	parent layout columnCount: 1.
+	
+	parent addChildren: { childA. childB. childC }.
+	parent forceLayout.
+	
+	self assert: (childA constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	self assert: (childA constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	
+	self assert: (childB constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	self assert: (childB constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 1 max: 2).
+	
+	self assert: (childC constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	self assert: (childC constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 2 max: 3).
+	
+	^ parent
+]
+
+{ #category : #'examples - unit - spans' }
+BlGridLayoutExamples >> exampleSpanDistributeOneRow [
+	<gtExample>
+	| parent childA childB childC |
+
+	childA := self childElementMatchingParent.
+	childB := self childElementMatchingParent.
+	childC := self childElementMatchingParent.
+	
+	parent := self parentWithGridHorizontalLayout.
+	parent constraints horizontal exact: 400.
+	parent constraints vertical exact: 400.
+	parent layout rowCount: 1.
+	
+	parent addChildren: { childA. childB. childC }.
+	parent forceLayout.
+	
+	self assert: (childA constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	self assert: (childA constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	
+	self assert: (childB constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 1 max: 2).
+	self assert: (childB constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	
+	self assert: (childC constraints grid horizontal spec span) equals: (BlGridLayoutInterval min: 2 max: 3).
+	self assert: (childC constraints grid vertical spec span) equals: (BlGridLayoutInterval min: 0 max: 1).
+	^ parent
+]
+
+{ #category : #'examples - setup' }
+BlGridLayoutExamples >> matchWidthFitHeight [
+	^ BlElement new
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical fitContent ]
+]
+
+{ #category : #'examples - setup' }
+BlGridLayoutExamples >> parentWithGridHorizontalLayout [
+	<gtExample>
+	| element |
+	element :=  BlElement new
+		border: (BlBorder builder dashed; paint: Color red; width: 3; build);
+		layout: BlGridLayout horizontal.
+	
+	self assert: element layout class equals: BlGridLayout.
+	
+	^ element
 ]

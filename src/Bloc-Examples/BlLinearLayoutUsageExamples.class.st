@@ -4,13 +4,13 @@ I contain examples of a linear layout (both horizontal and vertical).
 I show how different resizing strategies work and how to use weight in order to distribute elements proportionally within parent.
 "
 Class {
-	#name : #BlLinearLayoutExamples,
-	#superclass : #TestCase,
-	#category : 'Bloc-Examples-Layout'
+	#name : #BlLinearLayoutUsageExamples,
+	#superclass : #Object,
+	#category : #'Bloc-Examples-Layout'
 }
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleHorizontalListFixedWidthLTR [
+BlLinearLayoutUsageExamples class >> exampleHorizontalListFixedWidthLTR [
 	<example>
 	| e1 e2 e3 el space |
 	e1 := BlElement new
@@ -49,7 +49,7 @@ BlLinearLayoutExamples class >> exampleHorizontalListFixedWidthLTR [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleHorizontalListFixedWidthRTL [
+BlLinearLayoutUsageExamples class >> exampleHorizontalListFixedWidthRTL [
 	<example>
 	| e1 e2 e3 el space |
 	e1 := BlElement new
@@ -88,7 +88,7 @@ BlLinearLayoutExamples class >> exampleHorizontalListFixedWidthRTL [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleHorizontalListLTR [
+BlLinearLayoutUsageExamples class >> exampleHorizontalListLTR [
 <example>
 	| e1 e2 e3 el space|
 	
@@ -125,7 +125,7 @@ BlLinearLayoutExamples class >> exampleHorizontalListLTR [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleHorizontalListRTL [
+BlLinearLayoutUsageExamples class >> exampleHorizontalListRTL [
 <example>
 	| e1 e2 e3 el space|
 	
@@ -161,7 +161,7 @@ BlLinearLayoutExamples class >> exampleHorizontalListRTL [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleHorizontalTopCenterBottomLTR [
+BlLinearLayoutUsageExamples class >> exampleHorizontalTopCenterBottomLTR [
 <example>
 	| e1 e2 e3 el space|
 	
@@ -195,7 +195,7 @@ BlLinearLayoutExamples class >> exampleHorizontalTopCenterBottomLTR [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleHorizontalTopCenterBottomRTL [
+BlLinearLayoutUsageExamples class >> exampleHorizontalTopCenterBottomRTL [
 <example>
 	| e1 e2 e3 el space|
 	
@@ -229,7 +229,7 @@ BlLinearLayoutExamples class >> exampleHorizontalTopCenterBottomRTL [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleHorizontalUsingWeightLTR [
+BlLinearLayoutUsageExamples class >> exampleHorizontalUsingWeightLTR [
 <example>
 	| e1 e2 e3 el space|
 	
@@ -269,7 +269,7 @@ BlLinearLayoutExamples class >> exampleHorizontalUsingWeightLTR [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleHorizontalUsingWeightRTL [
+BlLinearLayoutUsageExamples class >> exampleHorizontalUsingWeightRTL [
 <example>
 	| e1 e2 e3 el space|
 	
@@ -309,7 +309,7 @@ BlLinearLayoutExamples class >> exampleHorizontalUsingWeightRTL [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleVerticalLeftCenterRightLRT [
+BlLinearLayoutUsageExamples class >> exampleVerticalLeftCenterRightLRT [
 	<example>
 	| e1 e2 e3 el space|
 	
@@ -346,7 +346,7 @@ BlLinearLayoutExamples class >> exampleVerticalLeftCenterRightLRT [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleVerticalLeftCenterRightRTL [
+BlLinearLayoutUsageExamples class >> exampleVerticalLeftCenterRightRTL [
 	<example>
 	| e1 e2 e3 el space|
 	
@@ -383,7 +383,7 @@ BlLinearLayoutExamples class >> exampleVerticalLeftCenterRightRTL [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleVerticalList [
+BlLinearLayoutUsageExamples class >> exampleVerticalList [
 <example>
 	| e1 e2 e3 el space|
 	
@@ -424,7 +424,7 @@ BlLinearLayoutExamples class >> exampleVerticalList [
 ]
 
 { #category : #examples }
-BlLinearLayoutExamples class >> exampleVerticalListFixedHeight [
+BlLinearLayoutUsageExamples class >> exampleVerticalListFixedHeight [
 	<example>
 	| e1 e2 e3 el space|
 	
@@ -459,7 +459,7 @@ BlLinearLayoutExamples class >> exampleVerticalListFixedHeight [
 ]
 
 { #category : #'layout - space equalization' }
-BlLinearLayoutExamples >> equalizingHeighAndWidth [
+BlLinearLayoutUsageExamples >> equalizingHeighAndWidth [
 	<gtExample>		
 	| parent |
 
@@ -470,7 +470,7 @@ BlLinearLayoutExamples >> equalizingHeighAndWidth [
 ]
 
 { #category : #'layout - space equalization' }
-BlLinearLayoutExamples >> equalizingWidth [
+BlLinearLayoutUsageExamples >> equalizingWidth [
 	<gtExample>		
 	| parent |
 
@@ -481,7 +481,7 @@ BlLinearLayoutExamples >> equalizingWidth [
 ]
 
 { #category : #'layout - fit content bug' }
-BlLinearLayoutExamples >> matchParentInFitContent [
+BlLinearLayoutUsageExamples >> matchParentInFitContent [
 	<gtExample>
 	<description: 'If all children in the parent that fits content match parent then they should be measured with 0 size'>
 	| child parent |
@@ -511,7 +511,7 @@ BlLinearLayoutExamples >> matchParentInFitContent [
 ]
 
 { #category : #'layout - fit content bug' }
-BlLinearLayoutExamples >> matchParentInFitContentChangeBackToMatchParent [
+BlLinearLayoutUsageExamples >> matchParentInFitContentChangeBackToMatchParent [
 	<gtExample>
 	<description: 'Changing back to match parent should reset size to 0'>
 	| parent child |
@@ -529,7 +529,7 @@ BlLinearLayoutExamples >> matchParentInFitContentChangeBackToMatchParent [
 ]
 
 { #category : #'layout - fit content bug' }
-BlLinearLayoutExamples >> matchParentInFitContentChangeToExact [
+BlLinearLayoutUsageExamples >> matchParentInFitContentChangeToExact [
 	<gtExample>
 	<description: 'Now we change size to exact and expect parent to resize'>
 	| parent child |
@@ -547,7 +547,7 @@ BlLinearLayoutExamples >> matchParentInFitContentChangeToExact [
 ]
 
 { #category : #'layout - space equalization' }
-BlLinearLayoutExamples >> twoChildrenMatchParentInFitContent [
+BlLinearLayoutUsageExamples >> twoChildrenMatchParentInFitContent [
 	<gtExample>	
 	| parent child child2 |
 
@@ -586,7 +586,7 @@ BlLinearLayoutExamples >> twoChildrenMatchParentInFitContent [
 ]
 
 { #category : #'layout - examples' }
-BlLinearLayoutExamples >> twoChildrenOnOppositeSidesWithSpan [
+BlLinearLayoutUsageExamples >> twoChildrenOnOppositeSidesWithSpan [
 	<gtExample>
 	| parent left span right |
 	
