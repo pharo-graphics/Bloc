@@ -41,7 +41,7 @@ BlOSWindowEventHandler >> convertButton: osButton [
 BlOSWindowEventHandler >> convertKeyFromEvent: anEvent [
 	<return: #BlKeyboardKey>
 
-	^ self keyboardKeyTable keyFromScanCode: anEvent scanCode
+	^ self keyboardKeyTable keyFromVirtualCode: anEvent symbol
 ]
 
 { #category : #converting }

@@ -36,112 +36,112 @@ BlOSWindowGlutinKeyboardKeyTable >> initializeVirtualKeyTable [
 		initialize: (virtualKeyTable := Dictionary new)
 		with: #(
 			"special"
-			16r028 Return
-			16r02B Tab
-			16r02C Space
-			16r04C Delete
-			16r02A Backspace
-			16r029 Escape
+			Return Return
+			Tab Tab
+			Space Space
+			Delete Delete
+			Back Backspace
+			Escape Escape
 			16r039 CapsLock
 			16r3F Function
 			
 			"modifiers"
-			16r0E1 ShiftLeft
-			16r0E5 ShiftRight
-			16r0E2 AltLeft
-			16r0E6 AltRight
-			16r0E0 ControlLeft
-			16r0E4 ControlRight
-			16r0E3 MetaLeft
-			16r0E7 MetaRight
+			LShift ShiftLeft
+			RShift ShiftRight
+			LAlt AltLeft
+			RAlt AltRight
+			LControl ControlLeft
+			RControl ControlRight
+			LWin MetaLeft
+			RWin MetaRight
 			
 			"sound"
-			16r080 VolumeUp
-			16r081 VolumeDown
-			16r07F Mute
-			16r048 Pause "!!"
+			VolumeUp VolumeUp
+			VolumeDown VolumeDown
+			Mute Mute
+			PlayPause Pause "!!"
 			
 			"functions"
-			16r03A F1
-			16r03B F2
-			16r03C F3
-			16r03D F4
-			16r03E F5
-			16r03F F6
-			16r040 F7
-			16r041 F8
-			16r042 F9
-			16r043 F10
-			16r044 F11
-			16r045 F12
+			F1 F1
+			F2 F2
+			F3 F3
+			F4 F4
+			F5 F5
+			F6 F6
+			F7 F7
+			F8 F8
+			F9 F9
+			F10 F10
+			F11 F11
+			F12 F12
 			
 			"navigation"
 			16r075 Help
-			16r046 PrintScreen "!!"
-			16r047 ScrollLock "!!"
-			16r049 Insert "!!"
-			16r04A Home
-			16r04B PageUp
-			16r04D End
-			16r04E PageDown
-			16r050 ArrowLeft
-			16r04F ArrowRight
-			16r051 ArrowDown
-			16r052 ArrowUp
+			Snapshot PrintScreen "!!"
+			Scroll ScrollLock "!!"
+			Insert Insert "!!"
+			Home Home
+			PageUp PageUp
+			End End
+			PageDown PageDown
+			Left ArrowLeft
+			Right ArrowRight
+			Down ArrowDown
+			Up ArrowUp
 			
 			"letters"
-			16r004 A
-			16r005 B
-			16r006 C
-			16r007 D
-			16r008 E
-			16r009 F
-			16r00A G
-			16r00B H
-			16r00C I
-			16r00D J
-			16r00E K
-			16r00F L
-			16r010 M
-			16r011 N
-			16r012 O
-			16r013 P
-			16r014 Q
-			16r015 R
-			16r016 S
-			16r017 T
-			16r018 U
-			16r019 V
-			16r01A W
-			16r01B X
-			16r01C Y
-			16r01D Z
+			A A
+			B B
+			C C
+			D D
+			E E
+			F F
+			G G
+			H H
+			I I
+			J J
+			K K
+			L L
+			M M
+			N N
+			O O
+			P P
+			Q Q
+			R R
+			S S
+			T T
+			U U
+			V V
+			W W
+			X X
+			Y Y
+			Z Z
 
 			"digits"
-			16r027 Zero
-			16r01E One
-			16r01F Two
-			16r020 Three
-			16r021 Four
-			16r022 Five
-			16r023 Six
-			16r024 Seven
-			16r025 Eight
-			16r026 Nine
+			Key0 Zero
+			Key1 One
+			Key2 Two
+			Key3 Three
+			Key4 Four
+			Key5 Five
+			Key6 Six
+			Key7 Seven
+			Key8 Eight
+			Key9 Nine
 
 			"symbols"
-			16r02D Minus
-			16r02E Equal
-			16r02F LeftBracket
-			16r030 RightBracket
-			16r034 Quote "=Apostrophe"
-			16r033 Semicolon
-			16r031 Backslash
-			16r032 NonUsHash "!!"
-			16r036 Comma
-			16r038 Slash
-			16r037 Period
-			16r035 Grave
+			Minus Minus
+			Equals Equal
+			LBracket LeftBracket
+			RBracket RightBracket
+			Apostrophe Quote
+			Semicolon Semicolon
+			Backslash Backslash
+			16r032 NonUsHash
+			Comma Comma
+			Slash Slash
+			Period Period
+			Grave Grave
 			
 			"16r41 KeypadDecimal
 			16r43 KeypadMultiply
@@ -165,10 +165,10 @@ BlOSWindowGlutinKeyboardKeyTable >> initializeVirtualKeyTable [
 ]
 
 { #category : #initialization }
-BlOSWindowGlutinKeyboardKeyTable >> keyFromScanCode: aScanCode [
+BlOSWindowGlutinKeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
 	<return: #BlKeyboardKey>
 
 	^ virtualKeyTable
-		at: aScanCode
-		ifAbsent: [ BlKeyboardKey unknown: aScanCode ]
+		at: aVirtualCode item
+		ifAbsent: [ BlKeyboardKey unknown: aVirtualCode ]
 ]

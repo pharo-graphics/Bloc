@@ -115,7 +115,7 @@ BlKeyboardProcessor >> processKeyUp: anEvent [
 ]
 
 { #category : #'event processing' }
-BlKeyboardProcessor >> processKeystroke: anEvent [
+BlKeyboardProcessor >> processTextInput: anEvent [
 	| aTarget |
 	
 	self keystrokesAllowed
@@ -123,14 +123,5 @@ BlKeyboardProcessor >> processKeystroke: anEvent [
 
 	aTarget := self findTarget: anEvent.
 	anEvent target: aTarget.
-	self fireEvent: anEvent.
-]
-
-{ #category : #'event processing' }
-BlKeyboardProcessor >> processTextInput: anEvent [
-	| aTarget |
-	
-	aTarget := self findTarget: anEvent.
-	anEvent target: aTarget.
-	self fireEvent: anEvent.
+	self fireEvent: anEvent
 ]

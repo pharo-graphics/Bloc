@@ -287,7 +287,7 @@ BlSpace >> defaultEventRecorder [
 	^ BlEmptyEventRecorder new
 ]
 
-{ #category : #'change reporting' }
+{ #category : #initialization }
 BlSpace >> defaultExtent [
 	^ 800@600
 ]

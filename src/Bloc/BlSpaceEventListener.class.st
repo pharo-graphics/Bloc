@@ -52,11 +52,6 @@ BlSpaceEventListener >> keyboardProcessor [
 	^ self space keyboardProcessor
 ]
 
-{ #category : #'keyboard handlers' }
-BlSpaceEventListener >> keystrokeEvent: anEvent [
-	self keyboardProcessor processKeystroke: anEvent
-]
-
 { #category : #'other handlers' }
 BlSpaceEventListener >> menuEvent: anEvent [
 ]
