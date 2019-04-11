@@ -127,8 +127,7 @@ BlInfiniteExampleGalleryImageElement >> loadImage [
 			anImage form: aNewForm.
 			image = anImage
 				ifTrue: [
-					BlUniverse default animationManager
-						addAnimation: (BlTaskAction on: [ self form: aNewForm ]) ] ] ] fork
+					self enqueueTask: (BlTaskAction new action: [ self form: aNewForm ]) ] ] ] fork
 ]
 
 { #category : #layout }
