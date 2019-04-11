@@ -134,10 +134,6 @@ BlEventListener >> keyUpEvent: anEvent [
 BlEventListener >> keysPressedEvent: anEvent [
 ]
 
-{ #category : #'keyboard handlers' }
-BlEventListener >> keystrokeEvent: anEvent [
-]
-
 { #category : #'other handlers' }
 BlEventListener >> menuEvent: anEvent [
 ]

@@ -19,7 +19,7 @@ BlKeyboardKeyTable >> initialize: aMapDictionary with: aMapArray [
 ]
 
 { #category : #'api - converting' }
-BlKeyboardKeyTable >> keyFromScanCode: aScanCode [
+BlKeyboardKeyTable >> keyFromVirtualCode: aScanCode [
 	<return: #BlKeyboardKey>
 
 	^ self subclassResponsibility

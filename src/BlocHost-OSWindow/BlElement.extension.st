@@ -7,7 +7,7 @@ BlElement >> openInNativeWindow [
 	self removeFromParent.
 	
 	aSpace := BlSpace new.
-	aSpace host: BlOSWindowHost new.
+	aSpace host: BlOSWindowHost default.
 	aSpace addChild: self.
 	aSpace show
 ]

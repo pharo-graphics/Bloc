@@ -53,7 +53,7 @@ BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 	| aKeyValue aKey |
 	
 	aKeyValue := aMorphicEvent keyValue.
-	aKey := BlMorphicKeyboardKeyTable default keyFromScanCode: aKeyValue.
+	aKey := BlMorphicKeyboardKeyTable default keyFromVirtualCode: aKeyValue.
 	
 	"on unix platorms, pressed shift changes the keycode"
 	OSPlatform current isUnix
@@ -300,15 +300,11 @@ BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
 		or: [ aMorphicEvent keyCharacter = Character backspace ])
 			ifTrue: [ ^ self handleDeleteOrBackspaceDown: aMorphicEvent ].
 	
-	aBlEvent := BlKeystrokeEvent new
-		char: aMorphicEvent keyCharacter;
-		scanCode: aMorphicEvent scanCode;
-		
+	aBlEvent := BlTextInputEvent new
+		text: aMorphicEvent keyCharacter asString;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: DateAndTime now;
-		position: aMorphicEvent position;
-		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
-	
+		timestamp: DateAndTime now.
+
 	self enqueue: aBlEvent
 ]
 

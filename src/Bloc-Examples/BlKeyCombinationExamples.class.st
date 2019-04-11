@@ -14,8 +14,8 @@ BlKeyCombinationExamples class >> keyLogger [
 	^ BlElement new
 		size: 200@200;
 		background: Color red;
-		addEventHandler: (BlEventHandler on: BlKeystrokeEvent
-			do: [ :anEvent | self inform: 'Keystroke: ', anEvent char asString ]);
+		addEventHandler: (BlEventHandler on: BlTextInputEvent
+			do: [ :anEvent | self inform: 'Text input: ', anEvent text ]);
 		addEventHandler: (BlEventHandler on: BlKeyDownEvent
 			do: [ :anEvent | self inform: 'Key down: ', anEvent key asString ]);
 		addShortcut: (BlShortcut new

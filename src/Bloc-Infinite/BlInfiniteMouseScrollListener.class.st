@@ -62,7 +62,7 @@ BlInfiniteMouseScrollListener >> scrollEvent: anEvent [
 			ifTrue: [ anEvent vector y ]
 			ifFalse: [ 0 ] ].
 
-	anInfiniteElement smoothScrollBy: (anEvent vector x @ anEvent vector y negated) * 7.
+	anInfiniteElement smoothScrollBy: (anEvent vector x @ anEvent vector y negated) * 10.
 	anEvent consumed: (dY isZero not)
 ]
 

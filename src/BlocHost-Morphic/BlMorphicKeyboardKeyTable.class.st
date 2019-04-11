@@ -430,11 +430,11 @@ BlMorphicKeyboardKeyTable >> initializeWindowsVirtualKeyTable [
 ]
 
 { #category : #'api - converting' }
-BlMorphicKeyboardKeyTable >> keyFromScanCode: aScanCode [
+BlMorphicKeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
 	"Morphic's key scan codes depend on the current platform, therefore we have to dispatch it through OSPlatform"
 	<return: #BlKeyboardKey>
 
-	^ OSPlatform current blocKeyFor: aScanCode in: self
+	^ OSPlatform current blocKeyFor: aVirtualCode in: self
 ]
 
 { #category : #'map - macos' }

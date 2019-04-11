@@ -167,10 +167,10 @@ BlOSWindowSDL2KeyboardKeyTable >> initializeVirtualKeyTable [
 ]
 
 { #category : #'api - converting' }
-BlOSWindowSDL2KeyboardKeyTable >> keyFromScanCode: aScanCode [
+BlOSWindowSDL2KeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
 	<return: #BlKeyboardKey>
 
 	^ virtualKeyTable
-		at: aScanCode
-		ifAbsent: [ BlKeyboardKey unknown: aScanCode ]
+		at: aVirtualCode
+		ifAbsent: [ BlKeyboardKey unknown: aVirtualCode ]
 ]

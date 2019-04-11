@@ -13,6 +13,22 @@ Class {
 	#category : #'BlocHost-OSWindow-Host'
 }
 
+{ #category : #'instance creation' }
+BlOSWindowHost class >> default [
+	"Pick a specific OSWindow backend from available ones"
+	<return: #BlOSWindowHost>
+
+	^ BlOSWindowHost defaultHostClass new
+]
+
+{ #category : #'instance creation' }
+BlOSWindowHost class >> new [
+	self = BlOSWindowHost
+		ifTrue: [ self error: 'Please use #default instead to pick up a suitable backend' ].
+
+	^ self basicNew initialize
+]
+
 { #category : #private }
 BlOSWindowHost >> createAttributesFor: aSpace [
 	| theAttributes |
