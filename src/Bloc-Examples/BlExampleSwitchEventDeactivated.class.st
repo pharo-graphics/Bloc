@@ -1,5 +1,5 @@
 Class {
 	#name : #BlExampleSwitchEventDeactivated,
 	#superclass : #BlEvent,
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }

@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Space'
+	#category : #'Bloc-Examples-Space'
 }
 
 { #category : #'as yet unclassified' }

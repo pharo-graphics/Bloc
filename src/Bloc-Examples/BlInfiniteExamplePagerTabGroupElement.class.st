@@ -5,7 +5,7 @@ Class {
 		'labelsElement',
 		'contentElement'
 	],
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #adding }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMobileHomeButton,
 	#superclass : #BlMobileSubElement,
-	#category : 'Bloc-Examples-Showcase-Mobile Phone'
+	#category : #'Bloc-Examples-Showcase-Mobile Phone'
 }
 
 { #category : #'as yet unclassified' }

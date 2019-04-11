@@ -6,7 +6,7 @@ Class {
 		'border',
 		'background'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #public }

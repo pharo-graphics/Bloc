@@ -4,7 +4,7 @@ I contains examples of how to add dragging ability to elements
 Class {
 	#name : #BlDragExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Drag&Drop'
+	#category : #'Bloc-Examples-Drag&Drop'
 }
 
 { #category : #'instance creation' }

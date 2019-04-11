@@ -4,7 +4,7 @@ I am a single red chicken leg with two toes
 Class {
 	#name : #BlChickenLeg,
 	#superclass : #BlElement,
-	#category : 'Bloc-Examples-Showcase-Chicken'
+	#category : #'Bloc-Examples-Showcase-Chicken'
 }
 
 { #category : #examples }

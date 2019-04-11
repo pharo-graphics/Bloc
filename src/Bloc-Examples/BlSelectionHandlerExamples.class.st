@@ -7,7 +7,7 @@ I contain examples of how one can add support of selection.
 Class {
 	#name : #BlSelectionHandlerExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Selection'
+	#category : #'Bloc-Examples-Selection'
 }
 
 { #category : #examples }

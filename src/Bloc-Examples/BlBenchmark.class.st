@@ -6,7 +6,7 @@ If you have so many UI elements in your application as we have in benchmarks (ex
 Class {
 	#name : #BlBenchmark,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Experimental'
+	#category : #'Bloc-Examples-Experimental'
 }
 
 { #category : #'nested bench' }

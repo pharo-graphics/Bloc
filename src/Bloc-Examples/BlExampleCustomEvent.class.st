@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'payload'
 	],
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #accessing }

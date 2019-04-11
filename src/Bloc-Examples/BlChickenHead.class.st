@@ -4,7 +4,7 @@ I am a chicken hed with eyes and pecker
 Class {
 	#name : #BlChickenHead,
 	#superclass : #BlElement,
-	#category : 'Bloc-Examples-Showcase-Chicken'
+	#category : #'Bloc-Examples-Showcase-Chicken'
 }
 
 { #category : #examples }

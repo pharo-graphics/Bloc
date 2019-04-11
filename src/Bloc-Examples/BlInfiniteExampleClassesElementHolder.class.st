@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'class'
 	],
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #accessing }

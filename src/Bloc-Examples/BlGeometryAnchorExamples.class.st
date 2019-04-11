@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Geometry'
+	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #'anchor - accessing' }

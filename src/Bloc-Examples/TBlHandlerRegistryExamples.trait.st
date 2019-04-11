@@ -3,7 +3,7 @@ I define examples of the public api of event handler registry. All concrete impl
 "
 Trait {
 	#name : #TBlHandlerRegistryExamples,
-	#category : 'Bloc-Examples-EventHandling'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #'examples - add' }

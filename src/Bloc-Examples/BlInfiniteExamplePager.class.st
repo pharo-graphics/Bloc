@@ -6,7 +6,7 @@ Class {
 		'buttonLeft',
 		'buttonRight'
 	],
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #example }

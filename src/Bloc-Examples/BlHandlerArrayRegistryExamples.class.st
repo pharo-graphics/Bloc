@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlHandlerRegistryExamples',
 	#classTraits : 'TBlHandlerRegistryExamples classTrait',
-	#category : 'Bloc-Examples-EventHandling'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #'instance creation' }

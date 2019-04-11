@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteExampleTextListElement,
 	#superclass : #BlInfiniteElement,
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #initialization }

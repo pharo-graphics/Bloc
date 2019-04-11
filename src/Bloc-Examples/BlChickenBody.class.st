@@ -4,7 +4,7 @@ I am a body of a very fat chicken
 Class {
 	#name : #BlChickenBody,
 	#superclass : #BlElement,
-	#category : 'Bloc-Examples-Showcase-Chicken'
+	#category : #'Bloc-Examples-Showcase-Chicken'
 }
 
 { #category : #examples }

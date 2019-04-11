@@ -5,7 +5,7 @@ Class {
 		'widget',
 		'color'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #accessing }

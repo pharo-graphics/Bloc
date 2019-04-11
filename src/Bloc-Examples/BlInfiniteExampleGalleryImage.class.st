@@ -12,7 +12,7 @@ Class {
 		'id',
 		'form'
 	],
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #'instance creation' }

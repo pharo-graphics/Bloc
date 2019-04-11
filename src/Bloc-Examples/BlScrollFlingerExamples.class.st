@@ -4,7 +4,7 @@ I contain examples of the scroll flinger
 Class {
 	#name : #BlScrollFlingerExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Scrolling'
+	#category : #'Bloc-Examples-Scrolling'
 }
 
 { #category : #'examples - instance creation' }

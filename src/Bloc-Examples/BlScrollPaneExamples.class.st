@@ -1,7 +1,7 @@
 Class {
 	#name : #BlScrollPaneExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Scrolling'
+	#category : #'Bloc-Examples-Scrolling'
 }
 
 { #category : #'examples - fling down' }

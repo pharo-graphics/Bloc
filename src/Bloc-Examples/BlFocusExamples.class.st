@@ -8,7 +8,7 @@ How to:
 Class {
 	#name : #BlFocusExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Focus'
+	#category : #'Bloc-Examples-Focus'
 }
 
 { #category : #examples }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTaskExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Tasks'
+	#category : #'Bloc-Examples-Tasks'
 }
 
 { #category : #adding }

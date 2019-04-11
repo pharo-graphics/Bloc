@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'counter'
 	],
-	#category : 'Bloc-Examples-EventHandling'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #'instance creation' }

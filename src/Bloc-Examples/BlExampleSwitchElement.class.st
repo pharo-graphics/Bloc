@@ -8,7 +8,7 @@ Class {
 		'skin',
 		'controller'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #examples }

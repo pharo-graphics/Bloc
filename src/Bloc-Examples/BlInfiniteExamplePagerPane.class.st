@@ -5,7 +5,7 @@ Class {
 		'title',
 		'elementBlock'
 	],
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #accessing }

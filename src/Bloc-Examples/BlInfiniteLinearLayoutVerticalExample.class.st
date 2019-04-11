@@ -4,7 +4,7 @@ I contain examples of a vertical linear layout
 Class {
 	#name : #BlInfiniteLinearLayoutVerticalExample,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #'instance creation' }

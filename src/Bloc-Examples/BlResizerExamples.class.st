@@ -1,7 +1,7 @@
 Class {
 	#name : #BlResizerExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Overlay'
+	#category : #'Bloc-Examples-Overlay'
 }
 
 { #category : #examples }

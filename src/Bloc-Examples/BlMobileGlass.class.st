@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMobileGlass,
 	#superclass : #BlMobileSubElement,
-	#category : 'Bloc-Examples-Showcase-Mobile Phone'
+	#category : #'Bloc-Examples-Showcase-Mobile Phone'
 }
 
 { #category : #'as yet unclassified' }

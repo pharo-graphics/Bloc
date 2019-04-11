@@ -7,7 +7,7 @@ How to run:
 Class {
 	#name : #BlChicken,
 	#superclass : #BlElement,
-	#category : 'Bloc-Examples-Showcase-Chicken'
+	#category : #'Bloc-Examples-Showcase-Chicken'
 }
 
 { #category : #examples }

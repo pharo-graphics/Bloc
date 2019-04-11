@@ -4,7 +4,7 @@ BlMobilePhone open
 Class {
 	#name : #BlMobilePhone,
 	#superclass : #BlElement,
-	#category : 'Bloc-Examples-Showcase-Mobile Phone'
+	#category : #'Bloc-Examples-Showcase-Mobile Phone'
 }
 
 { #category : #dimensions }

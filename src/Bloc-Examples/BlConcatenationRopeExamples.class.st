@@ -4,7 +4,7 @@ I contain examples of a concatenation rope
 Class {
 	#name : #BlConcatenationRopeExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - attributes' }

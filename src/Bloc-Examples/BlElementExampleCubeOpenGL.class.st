@@ -18,7 +18,7 @@ Class {
 		'ctx',
 		'fb'
 	],
-	#category : 'Bloc-Examples-Experimental'
+	#category : #'Bloc-Examples-Experimental'
 }
 
 { #category : #accessing }

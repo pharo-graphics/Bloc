@@ -1,7 +1,7 @@
 Class {
 	#name : #BlOvershootingScrollerExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Scrolling'
+	#category : #'Bloc-Examples-Scrolling'
 }
 
 { #category : #'examples - base animation' }

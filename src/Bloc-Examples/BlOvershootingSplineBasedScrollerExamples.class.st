@@ -4,7 +4,7 @@ I contain examples of the spline overscroller
 Class {
 	#name : #BlOvershootingSplineBasedScrollerExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Scrolling'
+	#category : #'Bloc-Examples-Scrolling'
 }
 
 { #category : #'examples - overshot' }

@@ -4,7 +4,7 @@ I contain examples of rope iterators
 Class {
 	#name : #BlRopeIteratorExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - next span' }

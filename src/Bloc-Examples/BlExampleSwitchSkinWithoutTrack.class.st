@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'thumb'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #accessing }

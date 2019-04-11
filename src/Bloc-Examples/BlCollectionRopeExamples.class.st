@@ -4,7 +4,7 @@ I contain examples of a collection rope
 Class {
 	#name : #BlCollectionRopeExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - attributes' }

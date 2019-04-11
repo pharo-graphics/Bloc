@@ -5,7 +5,7 @@ Class {
 		'constraintsBlock',
 		'colors'
 	],
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #accessing }

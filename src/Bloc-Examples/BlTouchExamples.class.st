@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTouchExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #examples }

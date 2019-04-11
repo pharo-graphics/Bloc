@@ -4,7 +4,7 @@ I exemplify selection interval
 Class {
 	#name : #BlSelectionExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Selection'
+	#category : #'Bloc-Examples-Selection'
 }
 
 { #category : #'examples - composite selection' }

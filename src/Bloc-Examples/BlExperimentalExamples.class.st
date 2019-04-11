@@ -8,7 +8,7 @@ Take care. Be conscious at all times.
 Class {
 	#name : #BlExperimentalExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Experimental'
+	#category : #'Bloc-Examples-Experimental'
 }
 
 { #category : #examples }

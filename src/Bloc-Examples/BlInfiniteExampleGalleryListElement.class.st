@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteExampleGalleryListElement,
 	#superclass : #BlInfiniteElement,
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #initialization }

@@ -6,7 +6,7 @@ Class {
 		'thumb',
 		'cornerRadius'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #accessing }

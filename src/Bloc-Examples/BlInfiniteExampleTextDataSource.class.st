@@ -5,7 +5,7 @@ Class {
 		'text',
 		'lines'
 	],
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #initialization }

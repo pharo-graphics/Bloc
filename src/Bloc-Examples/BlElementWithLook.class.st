@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'look'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #accessing }
