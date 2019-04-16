@@ -117,11 +117,6 @@ Key class >> k [
 ]
 
 { #category : #'*Bloc' }
-Key >> keyValue [
-	^ value
-]
-
-{ #category : #'*Bloc' }
 Key class >> l [
 	^ self character: $L
 ]
