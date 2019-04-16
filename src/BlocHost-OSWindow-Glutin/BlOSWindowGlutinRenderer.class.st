@@ -41,6 +41,27 @@ BlOSWindowGlutinRenderer >> canvasExtent [
 
 { #category : #'private - gl' }
 BlOSWindowGlutinRenderer >> fragmentShader [
+	^ gl shaderVersion >= 410
+		ifTrue: [ self fragmentShader410 ]
+		ifFalse: [ self fragmentShader330 ]
+]
+
+{ #category : #'private - gl' }
+BlOSWindowGlutinRenderer >> fragmentShader330 [
+	^ '#version 330
+	
+	precision highp float;
+	
+	varying vec2 vTex;
+	uniform sampler2D sampler0;
+
+	void main(void) {
+		gl_FragColor = texture2D(sampler0, vTex);
+	}'
+]
+
+{ #category : #'private - gl' }
+BlOSWindowGlutinRenderer >> fragmentShader410 [
 	^ '#version 410
 	
 	precision highp float;
@@ -86,7 +107,7 @@ BlOSWindowGlutinRenderer >> initializeGL [
 		ifNotNil: [ ^ self ].
 
 	gl := self window handle gl.
-			
+
 	vertShaderObj := gl create_vertex_shader.
 	fragShaderObj := gl create_fragment_shader.
 	gl shader_source: vertShaderObj string: self vertexShader.
@@ -196,6 +217,27 @@ BlOSWindowGlutinRenderer >> swapBuffers: aWindow [
 
 { #category : #'private - gl' }
 BlOSWindowGlutinRenderer >> vertexShader [
+	^ gl shaderVersion >= 410
+		ifTrue: [ self vertexShader410 ]
+		ifFalse: [ self vertexShader330 ]
+]
+
+{ #category : #'private - gl' }
+BlOSWindowGlutinRenderer >> vertexShader330 [
+	^ '#version 330
+	
+	attribute vec2 aVertex;
+	attribute vec2 aUV;
+	varying vec2 vTex;
+	
+	void main(void) {
+		gl_Position = vec4(aVertex.x, -aVertex.y, 0.0, 1.0);
+		vTex = aUV;
+	}'
+]
+
+{ #category : #'private - gl' }
+BlOSWindowGlutinRenderer >> vertexShader410 [
 	^ '#version 410
 	
 	in vec2 aVertex;
