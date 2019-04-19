@@ -15,7 +15,6 @@ Class {
 		'root',
 		'resizable',
 		'borderless',
-		'rootStyler',
 		'dirtyAreas',
 		'eventDispatcher',
 		'eventListener',
@@ -311,14 +310,6 @@ BlSpace >> defaultRootLabel [
 ]
 
 { #category : #initialization }
-BlSpace >> defaultRootStyler [
-	^ self class environment
-		at: #BrRootStyler
-		ifPresent: [ :aStylerClass | aStylerClass on: self root ]
-		ifAbsent: [ BlNullStyler new ]
-]
-
-{ #category : #initialization }
 BlSpace >> defaultTitle [
 	^ ''
 ]
@@ -519,14 +510,14 @@ BlSpace >> focusOwner: anElement [
 	focusOwner := anElement
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> focusProcessor [
 	<return: #BlFocusProcessor>
 
 	^ focusProcessor
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> focusProcessor: aFocusProcessor [
 	focusProcessor := aFocusProcessor
 ]
@@ -575,7 +566,7 @@ BlSpace >> fullscreen: aBoolean [
 	 self hostSpace ifNotNil: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> gestureProcessor [
 	<return: #BlGestureProcessor>
 
@@ -700,8 +691,6 @@ BlSpace >> initialize [
 
 	root := self defaultRoot.
 
-	rootStyler := self defaultRootStyler.
-
 	self extent: self defaultExtent.
 	self position: 0@0.
 
@@ -749,14 +738,14 @@ BlSpace >> isVisible [
 		ifFalse: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> keyboardProcessor [
 	<return: #BlKeyboardProcessor>
 
 	^ keyboardProcessor
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> keyboardProcessor: aKeyboardProcessor [
 	keyboardProcessor := aKeyboardProcessor
 ]
@@ -802,14 +791,14 @@ BlSpace >> minimized [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> mouseProcessor [
 	<return: #BlMouseProcessor>
 
 	^ mouseProcessor
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> mouseProcessor: aMouseProcessor [
 	mouseProcessor := aMouseProcessor
 ]
@@ -966,10 +955,7 @@ BlSpace >> root: anElement [
 		space: self;
 		size: self extent.
 
-	root := anElement.
-	"Root styler is created for the root element. Since we change root element
-	we must also recreate a styler"
-	rootStyler := self defaultRootStyler
+	root := anElement
 ]
 
 { #category : #accessing }
@@ -978,11 +964,6 @@ BlSpace >> rootDo: aBlock [
 	May be useful for scripting"
 
 	aBlock value: self root
-]
-
-{ #category : #accessing }
-BlSpace >> rootStyler [
-	^ rootStyler
 ]
 
 { #category : #pulse }
@@ -1077,7 +1058,7 @@ BlSpace >> topMostParent [
 	^ self root
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> touchProcessor [
 	<return: #BlTouchProcessor>
 
