@@ -332,7 +332,7 @@ BlSpace >> deleteDragboard [
 	^ d
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -353,7 +353,7 @@ BlSpace >> dequeueTask: aBlTask [
 BlSpace >> detachHostSpace [
 	"Detach my current host space if I have one"
 
-	self hostSpaceProperty value: nil
+	hostSpace := nil
 ]
 
 { #category : #accessing }
@@ -497,14 +497,14 @@ BlSpace >> eventRecorder: anEventRecorder [
 	eventRecorder := anEventRecorder
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> extent [
 	<return: #Point>
 
 	^ self windowExtent
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> extent: aNewExtent [
 	self windowExtent: aNewExtent
 ]
@@ -531,21 +531,16 @@ BlSpace >> focusProcessor: aFocusProcessor [
 	focusProcessor := aFocusProcessor
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> focused [
 	<return: #Boolean>
 
-	^ self focusedProperty value
+	^ focused
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> focused: aBoolean [
-	self focusedProperty value: aBoolean
-]
-
-{ #category : #'accessing properties' }
-BlSpace >> focusedProperty [
-	^ focused ifNil: [ focused := BlObjectProperty on: self named: #focused default: false ]
+	focused := aBoolean
 ]
 
 { #category : #accessing }
@@ -626,7 +621,7 @@ BlSpace >> hasOwner [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> height [
 	<return: #Number>
 
@@ -650,7 +645,7 @@ BlSpace >> host: aHost [
 
 { #category : #'host - accessing' }
 BlSpace >> hostSpace [
-	^ self hostSpaceProperty value
+	^ hostSpace
 ]
 
 { #category : #'host - accessing' }
@@ -663,7 +658,7 @@ BlSpace >> hostSpace: aHostSpace [
 		assert: [ aHostSpace isNotNil ]
 		description: [ 'Host space must not be nil!' ].
 
-	self hostSpaceProperty value: aHostSpace.
+	hostSpace := aHostSpace.
 	self hostSpaceChanged.
 ]
 
@@ -673,11 +668,6 @@ BlSpace >> hostSpaceChanged [
 	self windowExtent: self windowExtent.
 	"host space changed => renderer changed, we want to redraw the whole space"
 	self beDirtyArea
-]
-
-{ #category : #'accessing properties' }
-BlSpace >> hostSpaceProperty [
-	^ hostSpace ifNil: [ hostSpace := BlObjectProperty on: self named: #hostSpace ]
 ]
 
 { #category : #initialization }
@@ -719,6 +709,7 @@ BlSpace >> initialize [
 	self borderless: false.
 	self fullscreen: false.
 	self title: self defaultTitle.
+	self focused: false.
 
 	self updateCursorImage: Cursor normal.
 
@@ -839,7 +830,7 @@ BlSpace >> position [
 		ifNil: [ position ]
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> position: aPoint [
 	"Request to change window's position to a given point in screen corrdinates"
 
@@ -858,9 +849,6 @@ BlSpace >> processEvents [
 
 	self eventRecorder onPulse.
 	
-	self hasHostSpace
-		ifTrue: [ self hostSpace generateEvents ].
-	
 	self hostSpace fetchedEventsDo: [ :anEvent |
 		"we have to test for existance of the host space before handling each event because
 		it is possible that a space is closed due to an event"
@@ -868,9 +856,12 @@ BlSpace >> processEvents [
 			ifTrue: [
 				self eventRecorder record: anEvent.
 				self eventDispatcher dispatchEvent: anEvent ] ].
-
+	
 	self hasHostSpace
-		ifTrue: [ self mouseProcessor generateEvents ]
+		ifFalse: [ ^ self ].
+	
+	self hostSpace generateEvents.
+	self mouseProcessor generateEvents
 ]
 
 { #category : #pulse }
@@ -1058,23 +1049,17 @@ BlSpace >> title [
 	"Return window's title as a string"
 	<return: #String>
 
-	^ self titleProperty value
+	^ self hostSpace
+		ifNotNil: [ :aHostSpace | aHostSpace title ]
+		ifNil: [ title ]
 ]
 
 { #category : #'window - properties' }
 BlSpace >> title: aString [
 	"Change window's title"
 
-	self titleProperty value: aString
-]
-
-{ #category : #'accessing properties' }
-BlSpace >> titleProperty [
-	^ title ifNil: [
-		title := BlDelegateProperty
-			on: self
-			named: #title
-			delegateTo: self hostSpaceProperty ]
+	title := aString.
+	self hostSpace ifNotNil: [ :aHostSpace | aHostSpace title: aString ]
 ]
 
 { #category : #displaying }
@@ -1120,14 +1105,14 @@ BlSpace >> updateCursorImage: anImage [
 		aHostSpace cursor: anImage ]
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> width [
 	<return: #Number>
 
 	^ self extent x
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> windowExtent [
 	"Return the window size in screen coordinates.
 	This size may differ from the size in pixels on high dpi (retina) screens.
@@ -1139,7 +1124,7 @@ BlSpace >> windowExtent [
 		ifNil: [ extent ]
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> windowExtent: anExtent [
 	"Request to change a window size to aNewExtent.
 	Note, that window size may be different from renderer size on high dpi (retina) displays"
@@ -1149,7 +1134,7 @@ BlSpace >> windowExtent: anExtent [
 		ifFalse: [ self setExtent: anExtent ]
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> windowScale [
 	"Return a scaling factor from space to window coordinates.
 	On high dpi (retina) displays scaling factor is > 1"

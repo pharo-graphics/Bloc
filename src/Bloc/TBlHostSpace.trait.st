@@ -167,6 +167,14 @@ TBlHostSpace >> minimized [
 	^ self explicitRequirement
 ]
 
+{ #category : #'host space - testing' }
+TBlHostSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+	
+	^ self explicitRequirement
+]
+
 { #category : #'host space - displaying' }
 TBlHostSpace >> open [
 	self explicitRequirement

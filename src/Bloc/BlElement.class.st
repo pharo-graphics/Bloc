@@ -1084,7 +1084,7 @@ BlElement >> effect [
 	effect can not be nil"
 	<return: #BlElementEffect>
 
-	^ self effectProperty value
+	^ effect
 ]
 
 { #category : #accessing }
@@ -1100,7 +1100,7 @@ BlElement >> effect: anEffect [
 	
 	self invalidate.
 	anEffect on: self.
-	self effectProperty value: anEffect.
+	effect := anEffect.
 	self invalidate
 ]
 
@@ -1112,15 +1112,6 @@ BlElement >> effectBounds [
 { #category : #'geometry bounds' }
 BlElement >> effectBounds: aSpartaRectangle [
 	^ self effect effectBounds: aSpartaRectangle
-]
-
-{ #category : #'accessing properties' }
-BlElement >> effectProperty [
-	^ effect
-		ifNil: [ effect := BlObjectProperty
-				on: self
-				named: #effect
-				default: (BlNullEffect on: self) ]
 ]
 
 { #category : #'api - look' }
@@ -1230,21 +1221,12 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 BlElement >> focusability [
 	<return: #BlFocusability>
 
-	^ self focusabilityProperty value
+	^ focusability
 ]
 
 { #category : #accessing }
 BlElement >> focusability: aFocusability [
-	self focusabilityProperty value: aFocusability
-]
-
-{ #category : #'accessing properties' }
-BlElement >> focusabilityProperty [
-	^ focusability ifNil:
-			[ focusability := BlFocusabilityProperty 
-				on: self 
-				named: #focusability 
-				default: self defaultFocusability ]
+	focusability := aFocusability
 ]
 
 { #category : #'focus accessing' }
@@ -1594,6 +1576,9 @@ BlElement >> initialize [
 	backgroundResizer := self defaultBackgroundResizer.
 	layout := self defaultLayout.
 	elevation := self defaultElevation.
+	focusability := self defaultFocusability.
+	visibility := self defaultVisibility.
+	effect := BlNullEffect on: self.
 
 	shouldHandleMouseEvents := true.
 	shouldChildrenHandleMouseEvents := true.
@@ -2518,12 +2503,13 @@ BlElement >> padding: aBlInsets [
 
 { #category : #accessing }
 BlElement >> parent [
-	^ self parentProperty value
+	<return: #BlElement or: nil>
+	^ parent
 ]
 
 { #category : #accessing }
-BlElement >> parent: aNode [
-	self parentProperty value: aNode
+BlElement >> parent: anElement [
+	parent := anElement
 ]
 
 { #category : #'geometry bounds convertion' }
@@ -2553,11 +2539,6 @@ BlElement >> parentPointToLocal: aPoint [
 	aLocalPoint := aPoint translateBy: self position negated.
 	aLocalPoint := self transformation inverseTransformPoint: aLocalPoint.
 	^ aLocalPoint
-]
-
-{ #category : #'accessing properties' }
-BlElement >> parentProperty [
-	^ parent ifNil: [ parent := BlObjectProperty on: self named: #parent ]
 ]
 
 { #category : #'geometry position' }
@@ -3270,21 +3251,20 @@ BlElement >> userData: aDictionary [
 
 { #category : #accessing }
 BlElement >> visibility [
-	^ self visibilityProperty value
+	<return: #BlVisibility>
+
+	^ visibility
 ]
 
 { #category : #accessing }
-BlElement >> visibility: aVisibility [	
-	self visibilityProperty value: aVisibility
-]
+BlElement >> visibility: aVisibility [
+	aVisibility = self visibility
+		ifTrue: [ ^ self ].
 
-{ #category : #'accessing properties' }
-BlElement >> visibilityProperty [
-	^ visibility ifNil:
-			[ visibility := BlVisibilityProperty 
-				on: self 
-				named: #visibility 
-				default: self defaultVisibility ]
+	visibility := aVisibility.
+	self
+		requestLayout;
+		invalidate
 ]
 
 { #category : #'geometry bounds' }

@@ -36,21 +36,12 @@ BlMiscProperties >> debug: aBoolean [
 
 { #category : #accessing }
 BlMiscProperties >> focused [
-	^ self focusedProperty value
-]
-
-{ #category : #accessing }
-BlMiscProperties >> focused: anObject [
-	self focusedProperty value: anObject
-]
-
-{ #category : #accessing }
-BlMiscProperties >> focusedProperty [
 	^ focused
-		ifNil: [ focused := BlObjectProperty
-				on: self
-				named: #focused
-				default: false ]
+]
+
+{ #category : #accessing }
+BlMiscProperties >> focused: aBoolean [
+	focused := aBoolean
 ]
 
 { #category : #initialization }
@@ -60,7 +51,8 @@ BlMiscProperties >> initialize [
 	clipChildren := true.
 	userData := IdentityDictionary new.
 	debug := false.
-	label := ''
+	label := ''.
+	focused := false
 ]
 
 { #category : #accessing }
