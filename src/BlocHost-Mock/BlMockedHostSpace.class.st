@@ -129,7 +129,7 @@ BlMockedHostSpace >> fullscreen: aBoolean [
 	isFullscreen := aBoolean
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'host space - testing' }
 BlMockedHostSpace >> hasResized [
 	"Return true if renderer extent changed.
 	It may happen if window moved between displays with different dpi,
@@ -216,6 +216,14 @@ BlMockedHostSpace >> minimize [
 BlMockedHostSpace >> minimized [
 
 	^ minimized
+]
+
+{ #category : #'host space - testing' }
+BlMockedHostSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+	
+	^ false
 ]
 
 { #category : #'host space - displaying' }

@@ -21,12 +21,12 @@ Class {
 
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> borderless [
-	^ window borderless
+	^ self windowDo: [ :aWindow | aWindow borderless ]
 ]
 
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> borderless: aBoolean [
-	window borderless: aBoolean
+	self windowDo: [ :aWindow | aWindow borderless: aBoolean ]
 ]
 
 { #category : #'host space - accessing' }
@@ -36,18 +36,20 @@ BlOSWindowSpace >> canvasExtent [
 	In most cases canvas is x2 larger than window in pixel on retina screens."
 	<return: #Point>
 	
-	^ window canvasExtent
+	^ self windowDo: [ :aWindow | aWindow canvasExtent ]
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> close [
-	self isValid ifTrue: [ window destroy ].
+	
+	self isValid
+		ifTrue: [ self windowDo: [ :aWindow | aWindow destroy ] ].
 	window := nil
 ]
 
 { #category : #'host space - cursor' }
 BlOSWindowSpace >> cursor: aCursor [
-	window setMouseCursor: aCursor
+	self windowDo: [ :aWindow | aWindow setMouseCursor: aCursor ]
 ]
 
 { #category : #'host space - accessing' }
@@ -58,26 +60,38 @@ BlOSWindowSpace >> densityDpi [
 	^ 96.0
 ]
 
+{ #category : #private }
+BlOSWindowSpace >> ensureWindowIsValid [
+	"Native windows are external objects and they are destroyed when pharo is closed.
+	This may happen when a user saves and quits an image while there are open Bloc spaces.
+	We want those window to re-open when user open a saved Pharo image"
+	
+	self isValid
+		ifTrue: [ ^ self ].
+		
+	renderer initializeHostSpace: self
+]
+
 { #category : #'host space - events' }
 BlOSWindowSpace >> eventFetcher [
 	^ eventFetcher
 ]
 
-{ #category : #'window - properties' }
+{ #category : #'host space - accessing' }
 BlOSWindowSpace >> fullscreen [
 	"Return true if an underlying window is in fullscreen mode,
 	false otherwise"
 	<return: #Boolean>
 
-	^ window fullscreen
+	^ self windowDo: [ :aWindow | aWindow fullscreen ]
 ]
 
-{ #category : #'window - properties' }
+{ #category : #'host space - accessing' }
 BlOSWindowSpace >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
 	and exit fullscreen mode if false is given"
 
-	window fullscreen: aBoolean
+	self windowDo: [ :aWindow | aWindow fullscreen: aBoolean ]
 ]
 
 { #category : #'host space - events' }
@@ -90,7 +104,7 @@ BlOSWindowSpace >> generateEvents [
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> hide [
-	window hide
+	self windowDo: [ :aWindow | aWindow hide ]
 ]
 
 { #category : #'host space - accessing' }
@@ -185,7 +199,7 @@ BlOSWindowSpace >> isVisible [
 	Window can become invisible by asking it to hide"
 	<return: #Boolean>
 
-	^ window isVisible
+	^ self windowDo: [ :aWindow | aWindow isVisible ]
 ]
 
 { #category : #private }
@@ -195,37 +209,45 @@ BlOSWindowSpace >> keyboardKeyTable: aKeyboardKeyTable [
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> maximize [
-	window maximize
+	self windowDo: [ :aWindow | aWindow maximize ]
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> maximized [
-	^ window maximized
+	^ self windowDo: [ :aWindow | aWindow maximized ]
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> minimize [
-	window minimize
+	self windowDo: [ :aWindow | aWindow minimize ]
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> minimized [
-	^ window minimized
+	^ self windowDo: [ :aWindow | aWindow minimized ]
+]
+
+{ #category : #'host space - testing' }
+BlOSWindowSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+	
+	^ self isValid not
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> open [
-	window show
+	self windowDo: [ :aWindow | aWindow show ]
 ]
 
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> position [
-	^ window position
+	^ self windowDo: [ :aWindow | aWindow position ]
 ]
 
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> position: aPoint [
-	window position: aPoint
+	self windowDo: [ :aWindow | aWindow position: aPoint ]
 ]
 
 { #category : #'host space - rendering' }
@@ -234,7 +256,7 @@ BlOSWindowSpace >> prepareToRender: aBlSpace onBufferSurface: aBlHostRendererBuf
 	By default dispatch directly to the renderer"
 	
 	self hasScaled
-		ifTrue: [ window validHandle renderer resetResources ].
+		ifTrue: [ self windowDo: [ :aWindow | aWindow validHandle renderer resetResources ] ].
 	
 	self renderer prepareToRender: aBlSpace
 ]
@@ -288,12 +310,12 @@ BlOSWindowSpace >> renderer [
 
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> resizable [
-	^ window resizable
+	^ self windowDo: [ :aWindow | aWindow resizable ]
 ]
 
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> resizable: aBoolean [
-	window resizable: aBoolean
+	self windowDo: [ :aWindow | aWindow resizable: aBoolean ]
 ]
 
 { #category : #'host space - accessing' }
@@ -307,7 +329,7 @@ BlOSWindowSpace >> scaleFactor [
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> show [
-	window show
+	self windowDo: [ :aWindow | aWindow show ]
 ]
 
 { #category : #'host space - accessing' }
@@ -327,17 +349,26 @@ BlOSWindowSpace >> space: aSpace [
 
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> title [
-	^ window title
+	^ self windowDo: [ :aWindow | aWindow title ]
 ]
 
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> title: aString [
-	window title: aString
+	self windowDo: [ :aWindow | aWindow title: aString ]
 ]
 
 { #category : #private }
 BlOSWindowSpace >> window: anOSWindow [
 	window := anOSWindow
+]
+
+{ #category : #private }
+BlOSWindowSpace >> windowDo: aBlock [
+	"All direct references to a window must be replaced with windowDo:
+	I make sure that window is valid and re-create it if needed"
+	self ensureWindowIsValid.
+	
+	^ aBlock value: window
 ]
 
 { #category : #'host space - accessing' }
@@ -347,7 +378,7 @@ BlOSWindowSpace >> windowExtent [
 	on high dpi (retina) screens"
 	<return: #Point>
 
-	^ window extent
+	^ self windowDo: [ :aWindow | aWindow extent ]
 ]
 
 { #category : #'host space - accessing' }
@@ -355,7 +386,7 @@ BlOSWindowSpace >> windowExtent: newExtent [
 	"Change window size to a newExtent"
 
 	self windowExtent ~= newExtent
-		ifTrue: [ window extent: newExtent ]
+		ifTrue: [ self windowDo: [ :aWindow | aWindow extent: newExtent ] ]
 ]
 
 { #category : #initialization }

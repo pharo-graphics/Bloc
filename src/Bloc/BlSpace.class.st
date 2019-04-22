@@ -225,15 +225,15 @@ BlSpace >> beDirtyArea [
 
 { #category : #'window - properties' }
 BlSpace >> borderless [
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace borderless ]
-		ifNil: [ borderless ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace borderless ]
+		ifAbsent: [ borderless ]
 ]
 
 { #category : #'window - properties' }
 BlSpace >> borderless: aBoolean [
 	borderless := aBoolean.
-	 self hostSpace ifNotNil: [ :hw | hw borderless: aBoolean ].
+	 self hostSpaceDo: [ :aHostSpace | aHostSpace borderless: aBoolean ].
 ]
 
 { #category : #'event management' }
@@ -328,11 +328,10 @@ BlSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
 
-	self hostSpace
-		ifNotNil: [ :hw | ^ hw densityDpi ].
-
-	"Without actual window we can only guess"
-	^ 96.0
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace densityDpi ]
+		"Without an actual window we can only guess"
+		ifAbsent: [ 96.0 ]
 ]
 
 { #category : #'api - tasks' }
@@ -552,9 +551,9 @@ BlSpace >> fullscreen [
 	false otherwise"
 	<return: #Boolean>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace fullscreen ]
-		ifNil: [ fullscreen ]
+	^ self 
+		hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen ]
+		ifAbsent: [ fullscreen ]
 ]
 
 { #category : #'window - properties' }
@@ -563,7 +562,7 @@ BlSpace >> fullscreen: aBoolean [
 	and exit fullscreen mode if false is given"
 
 	fullscreen := aBoolean.
-	 self hostSpace ifNotNil: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
+	 self hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
 ]
 
 { #category : #'accessing - processors' }
@@ -587,7 +586,7 @@ BlSpace >> hasDirtyAreas [
 	^ self dirtyAreas isNotEmpty
 ]
 
-{ #category : #testing }
+{ #category : #'host space - accessing' }
 BlSpace >> hasHostSpace [
 	"Return true if I have a host space, false otherwise"
 	<return: #Boolean>
@@ -659,6 +658,22 @@ BlSpace >> hostSpaceChanged [
 	self windowExtent: self windowExtent.
 	"host space changed => renderer changed, we want to redraw the whole space"
 	self beDirtyArea
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> hostSpaceDo: aBlock [
+	^ self hostSpaceDo: aBlock ifAbsent: [ self ]
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
+	self hasHostSpace
+		ifFalse: [ ^ anAbsentBlock value ].
+		
+	self hostSpace needsRebuild
+		ifTrue: [ ^ anAbsentBlock value ].
+		
+	^ aBlock value: self hostSpace
 ]
 
 { #category : #initialization }
@@ -814,18 +829,18 @@ BlSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
 	
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace position ]
-		ifNil: [ position ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace position ]
+		ifAbsent: [ position ]
 ]
 
 { #category : #'window - properties' }
 BlSpace >> position: aPoint [
 	"Request to change window's position to a given point in screen corrdinates"
 
-	self hasHostSpace
-		ifTrue: [ self hostSpace position: aPoint ]
-		ifFalse: [ self setPosition: aPoint ]
+	self
+		hostSpaceDo: [ :aHostSpace | aHostSpace position: aPoint ]
+		ifAbsent: [ self setPosition: aPoint ]
 ]
 
 { #category : #pulse }
@@ -911,9 +926,9 @@ BlSpace >> resizable [
 	"Return true if underlying window is resizable, false otherwise"
 	<return: #Boolean>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace resizable ]
-		ifNil: [ resizable ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace resizable ]
+		ifAbsent: [ resizable ]
 ]
 
 { #category : #'window - properties' }
@@ -921,7 +936,7 @@ BlSpace >> resizable: aBoolean [
 	"Make underlying window resizable if true is given"
 	
 	resizable := aBoolean.
-	self hostSpace ifNotNil: [ :aHostSpace | aHostSpace resizable: aBoolean ]
+	self hostSpaceDo: [ :aHostSpace | aHostSpace resizable: aBoolean ]
 ]
 
 { #category : #accessing }
@@ -1030,9 +1045,9 @@ BlSpace >> title [
 	"Return window's title as a string"
 	<return: #String>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace title ]
-		ifNil: [ title ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace title ]
+		ifAbsent: [ title ]
 ]
 
 { #category : #'window - properties' }
@@ -1040,7 +1055,7 @@ BlSpace >> title: aString [
 	"Change window's title"
 
 	title := aString.
-	self hostSpace ifNotNil: [ :aHostSpace | aHostSpace title: aString ]
+	self hostSpaceDo: [ :aHostSpace | aHostSpace title: aString ]
 ]
 
 { #category : #displaying }
@@ -1100,9 +1115,9 @@ BlSpace >> windowExtent [
 	Use #extent to get actual pixel size"
 	<return: #Point>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace windowExtent ]
-		ifNil: [ extent ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace windowExtent ]
+		ifAbsent: [ extent ]
 ]
 
 { #category : #'window - properties' }
@@ -1110,9 +1125,9 @@ BlSpace >> windowExtent: anExtent [
 	"Request to change a window size to aNewExtent.
 	Note, that window size may be different from renderer size on high dpi (retina) displays"
 
-	self hasHostSpace
-		ifTrue: [ self hostSpace windowExtent: anExtent ]
-		ifFalse: [ self setExtent: anExtent ]
+	self
+		hostSpaceDo: [ :aHostSpace | aHostSpace windowExtent: anExtent ]
+		ifAbsent: [ self setExtent: anExtent ]
 ]
 
 { #category : #'window - properties' }
@@ -1121,7 +1136,7 @@ BlSpace >> windowScale [
 	On high dpi (retina) displays scaling factor is > 1"
 	<return: #Point>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace scaleFactor ]
-		ifNil: [ 1.0 asPoint ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace scaleFactor ]
+		ifAbsent: [ 1.0 asPoint ]
 ]

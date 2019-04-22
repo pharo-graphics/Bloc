@@ -109,6 +109,14 @@ BlMorphicHostSpace >> morph: aMorph [
 	aMorph hostSpace: self
 ]
 
+{ #category : #'host space - testing' }
+BlMorphicHostSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+
+	^ false
+]
+
 { #category : #'host space - displaying' }
 BlMorphicHostSpace >> open [
 	self show
