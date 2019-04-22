@@ -34,6 +34,7 @@ BlOSWindowHost >> createAttributesFor: aSpace [
 	| theAttributes |
 	theAttributes := OSWindowAttributes new.
 	theAttributes
+		title: aSpace title;
 		extent: aSpace extent;
 		resizable: aSpace resizable;
 		borderless: aSpace borderless;

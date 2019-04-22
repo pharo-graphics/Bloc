@@ -340,7 +340,7 @@ BlSpace >> dequeueTask: aBlTask [
 	self taskQueue dequeue: aBlTask
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> detachHostSpace [
 	"Detach my current host space if I have one"
 
@@ -624,22 +624,22 @@ BlSpace >> hide [
 	self hostSpace ifNotNil: [ :hw | hw hide ]
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> host [
 	^ host
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> host: aHost [
 	host := aHost
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> hostSpace [
 	^ hostSpace
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> hostSpace: aHostSpace [
 	"Assign a host space window that will be a source of UI events
 	and will provide a rendering surface on which I will be rendered.
@@ -653,7 +653,7 @@ BlSpace >> hostSpace: aHostSpace [
 	self hostSpaceChanged.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'host space - accessing' }
 BlSpace >> hostSpaceChanged [
 	"When host space changed we might want to adapt sizes"
 	self windowExtent: self windowExtent.
