@@ -145,6 +145,14 @@ BlHeadlessHostSpace >> minimized [
 	^ false
 ]
 
+{ #category : #'host space - testing' }
+BlHeadlessHostSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+	
+	^ false
+]
+
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> open [
 	"do nothing"
