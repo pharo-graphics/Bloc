@@ -38,7 +38,8 @@ Class {
 		'name',
 		'description',
 		'combination',
-		'action'
+		'action',
+		'repeatable'
 	],
 	#category : #'Bloc-Events-KeyBinding'
 }
@@ -77,6 +78,13 @@ BlShortcut >> description: anObject [
 	description := anObject
 ]
 
+{ #category : #initialization }
+BlShortcut >> initialize [
+	super initialize.
+	
+	repeatable := true
+]
+
 { #category : #'key matching' }
 BlShortcut >> match: anEventBuffer [
 	^ self combination match: anEventBuffer
@@ -107,4 +115,14 @@ BlShortcut >> printOn: aStream [
 			nextPutAll: ', ' ].
 	self combination printOn: aStream.
 	aStream nextPut: $).
+]
+
+{ #category : #accessing }
+BlShortcut >> repeatable [
+	^ repeatable
+]
+
+{ #category : #accessing }
+BlShortcut >> repeatable: aBoolean [
+	repeatable := aBoolean
 ]

@@ -29,14 +29,14 @@ BlShortcutHandler >> eventClass [
 BlShortcutHandler >> handleEvent: aShortcutEvent [
 	| matchingShortcuts |
 
-	"no process for repeated key events"
-	aShortcutEvent repeat isZero
-		ifFalse: [ ^ self ].
-
 	matchingShortcuts := self shortcuts
 		select: [ :aShortcut | aShortcut matches: aShortcutEvent buffer ]
 		thenCollect: [ :aShortcut | aShortcut -> (aShortcut match: aShortcutEvent buffer) ].
 	matchingShortcuts sort: [ :a :b | a value > b value ].
+	
+	"when shortcut event is repeated we only want to process repeatable shortcuts"
+	aShortcutEvent isRepeated
+		ifTrue: [ matchingShortcuts := matchingShortcuts select: [ :anAssociation | anAssociation key repeatable ] ].
 
 	matchingShortcuts
 		ifNotEmpty: [ :theShortcuts |
