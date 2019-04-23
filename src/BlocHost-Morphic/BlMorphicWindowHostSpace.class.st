@@ -111,6 +111,14 @@ BlMorphicWindowHostSpace >> morphicWindow: aWindow [
 	morphicWindow hostSpace: self
 ]
 
+{ #category : #'host space - testing' }
+BlMorphicWindowHostSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+	
+	^ false
+]
+
 { #category : #'host space - displaying' }
 BlMorphicWindowHostSpace >> open [
 	self show
