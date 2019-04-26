@@ -57,3 +57,9 @@ BlElementEffect >> on: anElement [
 		ifNil: [ self input: anElement ] 
 		ifNotNil: [ :anInput | anInput on: anElement ]
 ]
+
+{ #category : #copying }
+BlElementEffect >> postCopy [
+	super postCopy.
+	input := nil
+]
