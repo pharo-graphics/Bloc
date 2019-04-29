@@ -29,6 +29,11 @@ BlOSWindowSDL2Host >> keyboardKeyTable [
 	^ BlOSWindowSDL2KeyboardKeyTable default
 ]
 
+{ #category : #'host - events' }
+BlOSWindowSDL2Host >> pollEvents [
+	
+]
+
 { #category : #initialization }
 BlOSWindowSDL2Host >> preferableDriver [
 	<return: #OSWindowDriver>

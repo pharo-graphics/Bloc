@@ -1,7 +1,9 @@
 "
 I am a concrete implementation of a BlHost that allows users to open host bloc spaces within OSWindow windows.
 
-OSWindow is an abstraction of different windowing backends, for example SDL2 or Glutin. See my subclasses for available backends
+OSWindow is an abstraction of different windowing backends, for example SDL2 or Glutin. See my subclasses for available backends.
+
+OSWindow host relies on native windows that already have their own event loop, therefore I do event fetching and rendering in the same UI thread
 "
 Class {
 	#name : #BlOSWindowHost,
@@ -96,6 +98,11 @@ BlOSWindowHost >> isRunning [
 { #category : #initialization }
 BlOSWindowHost >> keyboardKeyTable [
 	^ self subclassResponsibility
+]
+
+{ #category : #'host - events' }
+BlOSWindowHost >> pollEvents [
+	self subclassResponsibility
 ]
 
 { #category : #initialization }
