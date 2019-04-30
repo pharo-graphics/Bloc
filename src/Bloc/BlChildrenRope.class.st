@@ -59,7 +59,7 @@ BlChildrenRope >> removeAll: aCollectionOfBlElement [
 
 { #category : #'children - removing' }
 BlChildrenRope >> removeAt: anIndex [
-	rope := rope delete: anIndex to: anIndex
+	rope := rope delete: anIndex - 1 to: anIndex
 ]
 
 { #category : #'children - accessing' }

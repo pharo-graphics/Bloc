@@ -77,6 +77,14 @@ BlOSWindowSpace >> eventFetcher [
 	^ eventFetcher
 ]
 
+{ #category : #'host space - events' }
+BlOSWindowSpace >> fetchedEventsDo: aBlock [
+	"Flush event queue and evaluate a given block with every queued event as argument"
+
+	self host pollEvents.
+	self eventFetcher fetchedEventsDo: aBlock
+]
+
 { #category : #'host space - accessing' }
 BlOSWindowSpace >> fullscreen [
 	"Return true if an underlying window is in fullscreen mode,

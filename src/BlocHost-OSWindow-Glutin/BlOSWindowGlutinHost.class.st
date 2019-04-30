@@ -32,6 +32,11 @@ BlOSWindowGlutinHost >> keyboardKeyTable [
 	^ BlOSWindowGlutinKeyboardKeyTable default
 ]
 
+{ #category : #'host - events' }
+BlOSWindowGlutinHost >> pollEvents [
+	OSGlutinDriver pollEvents
+]
+
 { #category : #initialization }
 BlOSWindowGlutinHost >> preferableDriver [
 	<return: #OSWindowDriver>
