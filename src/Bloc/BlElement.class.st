@@ -1154,8 +1154,11 @@ BlElement >> extent [
 	"Return my extent as it was computed during previous layout pass.
 	Extent is a point with `x` component representing my width
 	and y component representing my height accordingly"
-	<return: #Point>
 
+	<return: #Point>
+	self
+		flag:
+			'TODO as extent: is deprecated, should this be as well in favor of size?'.
 	^ self bounds extent
 ]
 
@@ -3086,6 +3089,11 @@ BlElement >> shouldHandleMouseEvents [
 	<return: #Boolean>
 
 	^ shouldHandleMouseEvents
+]
+
+{ #category : #'api - bounds' }
+BlElement >> size [
+	^ self extent
 ]
 
 { #category : #'api - bounds' }
