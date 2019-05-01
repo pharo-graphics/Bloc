@@ -336,7 +336,6 @@ BlTaskItTaskExamples >> progress [
 { #category : #'enqueued task' }
 BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTask [
 	<gtExample>
-	<noTest>
 	| aSpace aTask |
 
 	aSpace := self addElementWithEnqueuedTaskToSpace.
@@ -359,7 +358,6 @@ BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTask [
 { #category : #'enqueued task' }
 BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTaskThatFails [
 	<gtExample>
-	<noTest>
 	| aSpace aTask |
 
 	aSpace := self addElementWithEnqueuedTaskToSpace.
@@ -383,7 +381,6 @@ BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTaskThatFails [
 { #category : #workflow }
 BlTaskItTaskExamples >> rawTaskItWorkflow [
 	<gtExample>
-	<noTest>
 	
 	| anElement aCollection anAction aTaskItTask aSuccessAction aFailureAction aFuture aSpace aSuccessTask aFailureTask |
 	anElement := BlElement new.
@@ -394,16 +391,18 @@ BlTaskItTaskExamples >> rawTaskItWorkflow [
 	aFailureAction := [ aCollection add: #failure ].
 	aFailureTask := BlTaskAction new action: aFailureAction.
 	aTaskItTask := anAction asTask.
-	aFuture := aTaskItTask future.
-	aFuture onSuccessDo: [ :aResult | 
-		anElement enqueueTask: aSuccessTask ].
-	aFuture onFailureDo: [ :aResult | 
-		anElement enqueueTask: aFailureTask ].
 
 	"task was not added to the local task queue"
 	self assert: anElement taskQueue tasks asArray isEmpty.
 	"future value may or may not be executed"
 	self assert: (aCollection includes: #actionDone) not.
+	
+	"execute the TaskIt task"
+	aFuture := aTaskItTask future.
+	aFuture onSuccessDo: [ :aResult | 
+		anElement enqueueTask: aSuccessTask ].
+	aFuture onFailureDo: [ :aResult | 
+		anElement enqueueTask: aFailureTask ].
 	
 	aFuture waitForCompletion: 1 second.
 	"future value is already known"
