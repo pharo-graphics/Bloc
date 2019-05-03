@@ -41,9 +41,31 @@ BlOSWindowGlutinRenderer >> canvasExtent [
 
 { #category : #'private - gl' }
 BlOSWindowGlutinRenderer >> fragmentShader [
-	^ gl shaderVersion >= 410
-		ifTrue: [ self fragmentShader410 ]
-		ifFalse: [ self fragmentShader330 ]
+	| aShaderVersion |
+	
+	aShaderVersion := gl shaderVersion.
+	aShaderVersion >= 410
+		ifTrue: [ ^ self fragmentShader410 ].
+
+	aShaderVersion >= 330
+		ifTrue: [ ^ self fragmentShader330 ].
+		
+	aShaderVersion >= 120
+		ifTrue: [ ^ self fragmentShader120 ].
+		
+	^ self error: 'No fragment shader for version ', aShaderVersion asString
+]
+
+{ #category : #'private - gl' }
+BlOSWindowGlutinRenderer >> fragmentShader120 [
+	^ '#version 120
+	
+	varying vec2 vTex;
+	uniform sampler2D sampler0;
+
+	void main(void) {
+		gl_FragColor = texture2D(sampler0, vTex);
+	}'
 ]
 
 { #category : #'private - gl' }
@@ -217,9 +239,33 @@ BlOSWindowGlutinRenderer >> swapBuffers: aWindow [
 
 { #category : #'private - gl' }
 BlOSWindowGlutinRenderer >> vertexShader [
-	^ gl shaderVersion >= 410
-		ifTrue: [ self vertexShader410 ]
-		ifFalse: [ self vertexShader330 ]
+	| aShaderVersion |
+	
+	aShaderVersion := gl shaderVersion.
+	aShaderVersion >= 410
+		ifTrue: [ ^ self vertexShader410 ].
+
+	aShaderVersion >= 330
+		ifTrue: [ ^ self vertexShader330 ].
+		
+	aShaderVersion >= 120
+		ifTrue: [ ^ self vertexShader120 ].
+		
+	^ self error: 'No vertex shader for version ', aShaderVersion asString
+]
+
+{ #category : #'private - gl' }
+BlOSWindowGlutinRenderer >> vertexShader120 [
+	^ '#version 120
+	
+	attribute vec2 aVertex;
+	attribute vec2 aUV;
+	varying vec2 vTex;
+	
+	void main(void) {
+		gl_Position = vec4(aVertex.x, -aVertex.y, 0.0, 1.0);
+		vTex = aUV;
+	}'
 ]
 
 { #category : #'private - gl' }
