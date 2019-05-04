@@ -27,6 +27,7 @@ BlInfiniteLinearLayoutVerticalExample >> list [
 { #category : #examples }
 BlInfiniteLinearLayoutVerticalExample >> verticalExactHorizontalExactChildrenMatchParent [
 	<gtExample>
+	<noTest>
 	| aContainer aList aListWidth aListHeight anItemHeight anItemCount aVisibleItemCount chunksAdded availableSpaceLog |
 	
 	aListWidth := 200.
@@ -82,6 +83,7 @@ BlInfiniteLinearLayoutVerticalExample >> verticalExactHorizontalExactChildrenMat
 { #category : #examples }
 BlInfiniteLinearLayoutVerticalExample >> verticalFitContentHorizontalExactChildrenMatchParent [
 	<gtExample>
+	<noTest>
 	| aContainer aList aListWidth anItemHeight anItemCount chunksAdded |
 	
 	aListWidth := 200.
@@ -122,6 +124,7 @@ BlInfiniteLinearLayoutVerticalExample >> verticalFitContentHorizontalExactChildr
 { #category : #examples }
 BlInfiniteLinearLayoutVerticalExample >> verticalFitContentHorizontalExactChildrenMatchParentWithMaxHeight [
 	<gtExample>
+	<noTest>
 	| aContainer aList aListWidth aListMaxHeight anItemHeight anItemCount aVisibleItemCount chunksAdded availableSpaceLog |
 	
 	aListWidth := 200.

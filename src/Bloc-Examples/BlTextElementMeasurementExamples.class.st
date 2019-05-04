@@ -63,6 +63,7 @@ BlTextElementMeasurementExamples >> textElementWithCustomMeasurer [
 { #category : #'text - fit content' }
 BlTextElementMeasurementExamples >> unspecifiedExtent [
 	<gtExample>
+	<noTest>
 	| aTextElement |
 
 	aTextElement := self textElementWithCustomMeasurer.
@@ -77,6 +78,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtent [
 { #category : #'text - fit content' }
 BlTextElementMeasurementExamples >> unspecifiedExtentShouldRemeasure [
 	<gtExample>
+	<noTest>
 	| aTextElement |
 
 	aTextElement := self unspecifiedExtent.
@@ -116,6 +118,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxHeightShouldRemeasur
 { #category : #'text - fit content' }
 BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidth [
 	<gtExample>
+	<noTest>
 	| aTextElement |
 
 	aTextElement := self textElementWithCustomMeasurer.
@@ -131,6 +134,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidth [
 { #category : #'text - fit content' }
 BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidthShouldRemeasure [
 	<gtExample>
+	<noTest>
 	| aTextElement |
 
 	aTextElement := self unspecifiedExtentWithMaxWidth.
