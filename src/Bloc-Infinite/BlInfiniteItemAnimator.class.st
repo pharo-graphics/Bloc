@@ -193,14 +193,12 @@ BlInfiniteItemAnimator >> onAnimationStarted: anElementHolder [
 
 { #category : #layout }
 BlInfiniteItemAnimator >> recordPostLayoutInformation: anInfiniteState holder: anElementHolder [
-	<return: #BlInfiniteAnimatorHolder>
 	
 	^ self createItemHolder initializeWith: anElementHolder
 ]
 
 { #category : #layout }
 BlInfiniteItemAnimator >> recordPreLayoutInformation: anInfiniteState holder: anElementHolder flags: aCollectionOfFlags payloads: aCollectionOfPayloads [
-	<return: #BlInfiniteAnimatorHolder>
 
 	^ self createItemHolder initializeWith: anElementHolder
 ]
