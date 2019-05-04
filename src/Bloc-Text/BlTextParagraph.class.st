@@ -407,14 +407,14 @@ BlTextParagraph >> skipWhitespaceIn: aString after: aStart [
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtIndex: anIndex [
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtPoint: aPoint [
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 	
 	^ self
 		spanAtPoint: aPoint
@@ -427,7 +427,7 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 	"Find a paragraph span that contains a given point given in a paragraph coordinates
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closed span to a point"
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 	
 	^ self subclassResponsibility
 ]

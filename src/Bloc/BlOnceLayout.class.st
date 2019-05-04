@@ -25,7 +25,7 @@ Class {
 
 { #category : #'instance creation' }
 BlOnceLayout class >> on: aBlLayout [
-	<return: #BlLayoutOnce>
+	<return: #BlOnceLayout>
 
 	^ self new layout: aBlLayout
 ]

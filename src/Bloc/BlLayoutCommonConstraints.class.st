@@ -137,7 +137,7 @@ BlLayoutCommonConstraints >> initialize [
 BlLayoutCommonConstraints >> margin [
 	"Return an immutable margin property,
 	margin can not be nil"
-	<return: #BlInset>
+	<return: #BlInsets>
 	^ margin
 ]
 
@@ -268,7 +268,7 @@ BlLayoutCommonConstraints >> minWidth: aNumber [
 BlLayoutCommonConstraints >> padding [
 	"Return an immutable padding property,
 	margin can not be nil"
-	<return: #BlInset>
+	<return: #BlInsets>
 
 	^ padding
 ]

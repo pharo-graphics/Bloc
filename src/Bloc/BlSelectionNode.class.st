@@ -143,7 +143,7 @@ BlSelectionNode >> do: aBlock [
 { #category : #'tree - searching' }
 BlSelectionNode >> findMax [
 	"Return a minimum node in a subtree"
-	<return: #BltextSelectionNode>
+	<return: #BlSelectionNode>
 	| aCurrentNode |
 	
 	aCurrentNode := self.
@@ -155,7 +155,7 @@ BlSelectionNode >> findMax [
 { #category : #'tree - searching' }
 BlSelectionNode >> findMin [
 	"Return a minimum node in a subtree"
-	<return: #BltextSelectionNode>
+	<return: #BlSelectionNode>
 	| aCurrentNode |
 	
 	aCurrentNode := self.

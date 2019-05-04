@@ -123,7 +123,7 @@ BlSingleLineTextParagraph >> reset [
 
 { #category : #'paragraph - geometry' }
 BlSingleLineTextParagraph >> spanAtIndex: anIndex [
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 
 	self
 		assert: [ self line isEmpty not ]
@@ -160,7 +160,7 @@ BlSingleLineTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: an
 	"Find a paragraph span that contains a given point given in a paragraph coordinates
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closest span to a point"
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 
 	^ self line spans
 		findBinary: [ :aParagraphSpan |

@@ -47,7 +47,7 @@ BlHandledError >> errorHandler: anObject [
 
 { #category : #accessing }
 BlHandledError >> framePhase [
-	<return: #SpaceFramePhase>
+	<return: #BlSpaceFramePhase>
 
 	^ framePhase
 ]

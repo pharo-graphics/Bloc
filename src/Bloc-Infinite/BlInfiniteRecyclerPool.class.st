@@ -45,7 +45,7 @@ BlInfiniteRecyclerPool >> defaultMaxScrap [
 
 { #category : #accessing }
 BlInfiniteRecyclerPool >> heapAt: anItemType [
-	<return: #'OrderedCollection<BlInfiniteElementHolder>'>
+	<return: #OrderedCollection of: #BlInfiniteElementHolder>
 
 	^ scrap
 		at: anItemType
