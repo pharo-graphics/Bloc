@@ -151,6 +151,14 @@ BlKeyCombination class >> primaryR [
 ]
 
 { #category : #'instance creation' }
+BlKeyCombination class >> primaryReturn [
+	"primary (Command/Control) + Return"
+	<return: #BlKeyCombination>
+
+	^ self builder primary return build
+]
+
+{ #category : #'instance creation' }
 BlKeyCombination class >> primaryS [
 	"primary (Command/Control) + S"
 	<return: #BlKeyCombination>

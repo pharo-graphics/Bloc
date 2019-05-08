@@ -5,27 +5,32 @@ Simple use me in a class definition and implement explicitly required methods fr
 "
 Trait {
 	#name : #TBlDrawingCache,
+	#instVars : [
+		'blCachedSurface',
+		'blSession',
+		'blDamageReported'
+	],
 	#category : #'Bloc-Utilities - Drawing Cache'
 }
 
 { #category : #'private - accessing' }
 TBlDrawingCache >> cachedSurface [
-	^ self explicitRequirement
+	^ blCachedSurface
 ]
 
 { #category : #'private - accessing' }
 TBlDrawingCache >> cachedSurface: aSurface [
-	self explicitRequirement
+	blCachedSurface := aSurface
 ]
 
 { #category : #'private - accessing' }
 TBlDrawingCache >> damageReported [
-	^ self explicitRequirement
+	^ blDamageReported
 ]
 
 { #category : #'private - accessing' }
 TBlDrawingCache >> damageReported: aBoolean [
-	self explicitRequirement
+	blDamageReported := aBoolean
 ]
 
 { #category : #'change reporting' }
@@ -70,10 +75,10 @@ TBlDrawingCache >> releaseCaches [
 
 { #category : #'private - accessing' }
 TBlDrawingCache >> session [
-	^ self explicitRequirement
+	^ blSession
 ]
 
 { #category : #'private - accessing' }
 TBlDrawingCache >> session: aSession [
-	self explicitRequirement
+	blSession := aSession
 ]
