@@ -50,8 +50,18 @@ BlKeyCombination class >> delete [
 ]
 
 { #category : #'instance creation' }
+BlKeyCombination class >> end [
+	^ self builder end build
+]
+
+{ #category : #'instance creation' }
 BlKeyCombination class >> escape [
 	^ self builder escape build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> home [
+	^ self builder home build
 ]
 
 { #category : #'instance creation' }
