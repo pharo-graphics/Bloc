@@ -130,6 +130,12 @@ BlKeyCombinationBuilder >> e [
 ]
 
 { #category : #'keys - special' }
+BlKeyCombinationBuilder >> end [
+	combination
+		with: (BlSingleKeyCombination new key: BlKeyboardKey end)
+]
+
+{ #category : #'keys - special' }
 BlKeyCombinationBuilder >> escape [
 	combination
 		with: (BlSingleKeyCombination new key: BlKeyboardKey escape)
@@ -143,6 +149,12 @@ BlKeyCombinationBuilder >> f [
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> g [
 	combination with: (BlSingleKeyCombination new key: BlKeyboardKey g)
+]
+
+{ #category : #'keys - special' }
+BlKeyCombinationBuilder >> home [
+	combination
+		with: (BlSingleKeyCombination new key: BlKeyboardKey home)
 ]
 
 { #category : #initialization }
