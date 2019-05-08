@@ -69,3 +69,30 @@ BlChildrenCollection >> removeAll: aCollectionOfBlElement [
 BlChildrenCollection >> removeAt: anIndex [
 	self subclassResponsibility
 ]
+
+{ #category : #'children - swapping' }
+BlChildrenCollection >> swapAt: aChildIndex with: anotherChildIndex [
+	| lesserIndex greaterIndex fristChild secondChild  | 
+	aChildIndex = anotherChildIndex
+		ifTrue: [ ^ self ].
+		
+	self
+		assert: [ aChildIndex between: 1 and: self size ]
+		description: [ 'Child index must be within bounds' ].
+		
+	self
+		assert: [ anotherChildIndex between: 1 and: self size ]
+		description: [ 'Child index must be within bounds' ].
+		
+	lesserIndex := aChildIndex min: anotherChildIndex.
+	greaterIndex := aChildIndex max: anotherChildIndex.
+	
+	fristChild := self at: lesserIndex.
+	secondChild := self at: greaterIndex.
+
+	self removeAt: greaterIndex.
+	self removeAt: lesserIndex.
+
+	self add: secondChild at: lesserIndex.
+	self add: fristChild at: greaterIndex
+]

@@ -644,6 +644,13 @@ BlElement >> changes [
 ]
 
 { #category : #'children accessing' }
+BlElement >> childAt: anIndex [
+	<return: #BlElement>
+	
+	^ self children at: anIndex
+]
+
+{ #category : #'children accessing' }
 BlElement >> childIndexOf: anElement [
 	"Answer the index of the first occurrence of anElement within the  
 	receiver. If the receiver does not contain anElement, answer 0."
@@ -3140,6 +3147,19 @@ BlElement >> supportsBaseline [
 	<return: #Boolean>
 
 	^ false
+]
+
+{ #category : #'children add/remove' }
+BlElement >> swapChild: aChildElement with: anotherChildElement [
+	self
+		swapChildAt: (self childIndexOf: aChildElement)
+		with: (self childIndexOf: anotherChildElement)
+]
+
+{ #category : #'children add/remove' }
+BlElement >> swapChildAt: aChildIndex with: anotherChildIndex [
+	self children swapAt: aChildIndex with: anotherChildIndex.	
+	self requestLayout
 ]
 
 { #category : #'api - tasks' }
