@@ -4,7 +4,10 @@ Class {
 	#instVars : [
 		'color',
 		'width',
-		'offset'
+		'offset',
+		'session',
+		'cachedSurface',
+		'cachedPath'
 	],
 	#category : #'Bloc-Effect'
 }
@@ -17,6 +20,14 @@ BlDropShadowEffect class >> color: aColor width: aNumber offset: anOffset [
 		offset: anOffset
 ]
 
+{ #category : #'instance creation' }
+BlDropShadowEffect class >> default [
+	^ self
+		color: (Color black alpha: 0.3)
+		width: 15
+		offset: 10@20
+]
+
 { #category : #accessing }
 BlDropShadowEffect >> color [
 	<return: #Color>
@@ -25,19 +36,8 @@ BlDropShadowEffect >> color [
 ]
 
 { #category : #geometry }
-BlDropShadowEffect >> computeBounds: aSpartaRectangle [
-	| aLeft aTop aRight aBottom |
-
-	aLeft := (self width - self offset x) max: 0.
-	aTop := (self width - self offset y) max: 0.
-	aRight := (self width + self offset x) max: 0.
-	aBottom := (self width + self offset y) max: 0.
-
-	^ aSpartaRectangle
-		expandByLeft: aLeft
-		top: aTop
-		right: aRight
-		bottom: aBottom
+BlDropShadowEffect >> computeBounds: aBlBounds [
+	^ aBlBounds expandByMargin: self shadowMargin
 ]
 
 { #category : #copying }
@@ -68,6 +68,14 @@ BlDropShadowEffect >> copyWithWidth: aNumber [
 		color: self color
 		width: aNumber
 		offset: self offset
+]
+
+{ #category : #geometry }
+BlDropShadowEffect >> extraShadowSpace [
+	"Compute extra space that should be freed for shadow around element.
+	I depend on the width, and it is recommended to be 3 times of sigma (width) used for gaussian blur"
+	
+	^ self width * 3.0
 ]
 
 { #category : #initialization }
@@ -104,6 +112,25 @@ BlDropShadowEffect >> offset [
 	<return: #Point>
 
 	^ offset
+]
+
+{ #category : #initialization }
+BlDropShadowEffect >> releaseCaches [
+	cachedSurface ifNotNil: #release.
+	cachedSurface := nil
+]
+
+{ #category : #geometry }
+BlDropShadowEffect >> shadowMargin [
+	| anExtraSpace |
+	
+	anExtraSpace := self extraShadowSpace.
+	
+	^ BlInsets
+		top: ((anExtraSpace - self offset y) max: 0)
+		right: ((anExtraSpace + self offset x) max: 0)
+		bottom: ((anExtraSpace + self offset y) max: 0)
+		left: ((anExtraSpace - self offset x) max: 0)
 ]
 
 { #category : #accessing }

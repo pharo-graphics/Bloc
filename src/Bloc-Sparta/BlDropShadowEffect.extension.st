@@ -2,23 +2,41 @@ Extension { #name : #BlDropShadowEffect }
 
 { #category : #'*Bloc-Sparta' }
 BlDropShadowEffect >> applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement [
-	| aShadowCanvas anEffectBounds |
+	| anEffectExtent anExtraShadowSpace aShadowPath |
 
-	anEffectBounds := anElement effectBounds.
-	
-	aShadowCanvas := aSpartaCanvas similar: anEffectBounds extent.
-	aShadowCanvas transform
-		by: [ :t | t translateBy: (self offset max: 0@0) ]
-		during: [
-			aShadowCanvas fill
-				paint: self color;
-				path: (anElement geometry pathOnSpartaCanvas: aShadowCanvas);
-				draw.
+	anEffectExtent := anElement effectBounds extent.
+	anExtraShadowSpace := self extraShadowSpace.
+	aShadowPath := anElement geometry pathOnSpartaCanvas: aSpartaCanvas.
 
-			aSpartaCanvas filter
-				area: anEffectBounds;
-				type: (aShadowCanvas gaussianBlurFilter
-					stdDeviation: (self width / 2.0 max: 0);
-					source: aShadowCanvas);
-				draw ].
+	"state is not valid, recreate caches and redraw"
+	(session ~~ Smalltalk session or: [ cachedSurface isNil or: [ cachedPath ~= aShadowPath ] ]) ifTrue: [
+		| aShadowCanvas aCacheCanvas |
+		
+		aShadowCanvas := aSpartaCanvas similar: anEffectExtent.	
+		aShadowCanvas transform
+			by: [ :t | t translateBy: anExtraShadowSpace ]
+			during: [
+				aShadowCanvas fill
+					paint: self color;
+					path: aShadowPath;
+					draw ].
+		aCacheCanvas := aSpartaCanvas similar: anEffectExtent.
+		aCacheCanvas filter
+			area: aShadowCanvas bounds;
+			type: (aShadowCanvas gaussianBlurFilter
+				stdDeviation: (self width max: 0);
+				source: aShadowCanvas);
+			draw.
+
+		cachedSurface := aCacheCanvas surface.
+		cachedPath := aShadowPath.
+		session := Smalltalk session.
+		
+		aShadowCanvas release.
+		aCacheCanvas release ].
+
+	aSpartaCanvas fill
+		paint: cachedSurface;
+		path: (cachedSurface bounds translateBy: anExtraShadowSpace asPoint negated + self offset);
+		draw
 ]
