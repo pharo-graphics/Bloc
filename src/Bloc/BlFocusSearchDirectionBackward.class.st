@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFocusSearchDirectionBackward,
 	#superclass : #BlFocusSearchDirectionRelative,
-	#category : 'Bloc-Utilities - Focus'
+	#category : #'Bloc-Utilities - Focus'
 }
 
 { #category : #focus }

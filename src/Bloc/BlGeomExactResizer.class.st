@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'extent'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #resizing }

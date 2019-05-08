@@ -13,7 +13,7 @@ Class {
 		'hasActiveChanges',
 		'previousValue'
 	],
-	#category : 'Bloc-Basic-Changes'
+	#category : #'Bloc-Basic-Changes'
 }
 
 { #category : #notifying }

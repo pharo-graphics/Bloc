@@ -10,7 +10,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Paint'
+	#category : #'Bloc-Paint'
 }
 
 { #category : #cleanup }

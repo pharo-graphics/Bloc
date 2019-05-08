@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'zoomableElement'
 	],
-	#category : 'Bloc-Utilities - Pannable'
+	#category : #'Bloc-Utilities - Pannable'
 }
 
 { #category : #conversion }

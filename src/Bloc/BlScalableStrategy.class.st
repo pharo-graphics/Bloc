@@ -6,7 +6,7 @@ Concrete implementations should override #scale:within: and return a number that
 Class {
 	#name : #BlScalableStrategy,
 	#superclass : #Object,
-	#category : 'Bloc-Utilities - Scalable'
+	#category : #'Bloc-Utilities - Scalable'
 }
 
 { #category : #testing }

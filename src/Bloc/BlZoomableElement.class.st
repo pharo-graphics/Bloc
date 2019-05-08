@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'zoomLevel'
 	],
-	#category : 'Bloc-Utilities - Scalable'
+	#category : #'Bloc-Utilities - Scalable'
 }
 
 { #category : #initialization }

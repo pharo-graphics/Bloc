@@ -15,7 +15,7 @@ Class {
 	#instVars : [
 		'cornerRadii'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #factory }

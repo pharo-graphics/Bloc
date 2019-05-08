@@ -8,7 +8,7 @@ Class {
 		'maxPosition',
 		'overshotDistance'
 	],
-	#category : 'Bloc-Utilities - Scrolling Helpers'
+	#category : #'Bloc-Utilities - Scrolling Helpers'
 }
 
 { #category : #updating }

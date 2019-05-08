@@ -7,7 +7,7 @@ Class {
 		'isRunning',
 		'pendingInitialRun'
 	],
-	#category : 'Bloc-Utilities - Scrolling'
+	#category : #'Bloc-Utilities - Scrolling'
 }
 
 { #category : #'api - testing' }

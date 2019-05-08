@@ -7,7 +7,7 @@ Class {
 		'distance',
 		'duration'
 	],
-	#category : 'Bloc-Utilities - Scrolling Helpers'
+	#category : #'Bloc-Utilities - Scrolling Helpers'
 }
 
 { #category : #updating }

@@ -5,7 +5,7 @@ For more information see class comment of BlMeasurementMode
 Class {
 	#name : #BlMeasurementAtMostMode,
 	#superclass : #BlMeasurementMode,
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #testing }

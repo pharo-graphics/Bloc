@@ -11,7 +11,7 @@ Class {
 		'buffer',
 		'extent'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #accessing }

@@ -15,7 +15,7 @@ Class {
 	#instVars : [
 		'vertices'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'instance creation' }

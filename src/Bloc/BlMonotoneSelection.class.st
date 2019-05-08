@@ -10,7 +10,7 @@ Class {
 		'from',
 		'to'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #'instance creation' }

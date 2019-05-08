@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'input'
 	],
-	#category : 'Bloc-Effect'
+	#category : #'Bloc-Effect'
 }
 
 { #category : #'as yet unclassified' }

@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'strategy'
 	],
-	#category : 'Bloc-Utilities - Scalable'
+	#category : #'Bloc-Utilities - Scalable'
 }
 
 { #category : #'instance creation' }

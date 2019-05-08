@@ -161,6 +161,11 @@ BlKeyCombinationBuilder >> key: aKey [
 ]
 
 { #category : #'keys - letters' }
+BlKeyCombinationBuilder >> l [
+	combination with: (BlSingleKeyCombination new key: BlKeyboardKey l)
+]
+
+{ #category : #'keys - letters' }
 BlKeyCombinationBuilder >> m [
 	combination with: (BlSingleKeyCombination new key: BlKeyboardKey m)
 ]

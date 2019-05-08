@@ -3,7 +3,7 @@ I define the public API that host renderers must provide.
 "
 Trait {
 	#name : #TBlHostRenderer,
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'renderer - rendering' }

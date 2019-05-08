@@ -27,7 +27,7 @@ Class {
 		'time',
 		'eventDispatcher'
 	],
-	#category : 'Bloc-Utilities - Scrolling'
+	#category : #'Bloc-Utilities - Scrolling'
 }
 
 { #category : #'instance creation' }

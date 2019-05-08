@@ -6,7 +6,7 @@ It makes sense to use me if scalable element has fixed or match parent size, bot
 Class {
 	#name : #BlScalableFitAllStrategy,
 	#superclass : #BlScalableStrategy,
-	#category : 'Bloc-Utilities - Scalable'
+	#category : #'Bloc-Utilities - Scalable'
 }
 
 { #category : #comparing }

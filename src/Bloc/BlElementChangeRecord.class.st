@@ -5,7 +5,7 @@ Class {
 		'changedValue',
 		'wasNotified'
 	],
-	#category : 'Bloc-Basic-Changes'
+	#category : #'Bloc-Basic-Changes'
 }
 
 { #category : #accessing }

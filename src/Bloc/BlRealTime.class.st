@@ -10,7 +10,7 @@ I am a just a traditional real time.
 Class {
 	#name : #BlRealTime,
 	#superclass : #BlTime,
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'private - time' }

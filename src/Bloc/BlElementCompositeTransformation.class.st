@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'transformations'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #adding }

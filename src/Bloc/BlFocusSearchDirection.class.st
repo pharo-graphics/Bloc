@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Utilities - Focus'
+	#category : #'Bloc-Utilities - Focus'
 }
 
 { #category : #focus }

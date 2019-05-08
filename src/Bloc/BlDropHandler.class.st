@@ -1,5 +1,5 @@
 Class {
 	#name : #BlDropHandler,
 	#superclass : #Object,
-	#category : 'Bloc-Utilities - Drag&Drop'
+	#category : #'Bloc-Utilities - Drag&Drop'
 }

@@ -26,7 +26,7 @@ container
 Class {
 	#name : #BlElementPolarToCartesianTransformation,
 	#superclass : #BlElementDynamicTransformation,
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #computation }

@@ -27,7 +27,7 @@ Class {
 	#instVars : [
 		'pointer'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #initialize }

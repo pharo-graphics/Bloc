@@ -17,7 +17,7 @@ Class {
 		'previousRealTime',
 		'previousSpeededUpTime'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'private - time' }

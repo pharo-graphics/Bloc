@@ -111,6 +111,14 @@ BlKeyCombination class >> primaryG [
 ]
 
 { #category : #'instance creation' }
+BlKeyCombination class >> primaryL [
+	"primary (Command/Control) + L"
+	<return: #BlKeyCombination>
+
+	^ self builder primary l build
+]
+
+{ #category : #'instance creation' }
 BlKeyCombination class >> primaryM [
 	"primary (Command/Control) + M"
 	<return: #BlKeyCombination>

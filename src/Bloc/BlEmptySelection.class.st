@@ -4,7 +4,7 @@ I am an empty selection
 Class {
 	#name : #BlEmptySelection,
 	#superclass : #BlSelection,
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #accessing }

@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'maxScale'
 	],
-	#category : 'Bloc-Utilities - Scalable'
+	#category : #'Bloc-Utilities - Scalable'
 }
 
 { #category : #initialization }

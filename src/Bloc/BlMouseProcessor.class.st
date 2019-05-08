@@ -22,7 +22,7 @@ Class {
 		'dragState',
 		'previousMouseDownEvent'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space-Support'
 }
 
 { #category : #'event testing' }

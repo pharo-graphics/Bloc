@@ -13,7 +13,7 @@ In order to explicitely create an ellipse use extent:
 Class {
 	#name : #BlEllipse,
 	#superclass : #BlGeometry,
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'instance creation' }

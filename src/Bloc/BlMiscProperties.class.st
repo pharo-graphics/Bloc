@@ -11,7 +11,7 @@ Class {
 		'debug',
 		'label'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #accessing }

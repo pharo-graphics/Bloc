@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'items'
 	],
-	#category : 'Bloc-Utilities - Drag&Drop'
+	#category : #'Bloc-Utilities - Drag&Drop'
 }
 
 { #category : #'drag and drop' }

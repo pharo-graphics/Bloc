@@ -11,7 +11,7 @@ Class {
 		'firstBounds',
 		'secondBounds'
 	],
-	#category : 'Bloc-Utilities - Focus'
+	#category : #'Bloc-Utilities - Focus'
 }
 
 { #category : #private }

@@ -5,7 +5,7 @@ Class {
 		'radius',
 		'origin'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'geometry bounds' }

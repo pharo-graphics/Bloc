@@ -12,7 +12,7 @@ Class {
 		'matrix2D',
 		'matrix3D'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #initialization }

@@ -6,7 +6,7 @@ See BlStrokeLineCap for other types
 Class {
 	#name : #BlStrokeLineRoundCap,
 	#superclass : #BlStrokeLineCap,
-	#category : 'Bloc-Paint-Support'
+	#category : #'Bloc-Paint-Support'
 }
 
 { #category : #accessing }

@@ -6,7 +6,7 @@ Class {
 		'width',
 		'offset'
 	],
-	#category : 'Bloc-Effect'
+	#category : #'Bloc-Effect'
 }
 
 { #category : #'instance creation' }

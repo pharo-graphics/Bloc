@@ -12,7 +12,7 @@ Class {
 		'geometryBoundsInSpace',
 		'boundsInParent'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #'as yet unclassified' }

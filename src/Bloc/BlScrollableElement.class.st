@@ -11,7 +11,7 @@ Class {
 		'horizontalAlignment',
 		'verticalAlignment'
 	],
-	#category : 'Bloc-Utilities - Scrolling'
+	#category : #'Bloc-Utilities - Scrolling'
 }
 
 { #category : #conversion }

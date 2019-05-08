@@ -13,7 +13,7 @@ Class {
 		'originalExtent',
 		'minimumExtent'
 	],
-	#category : 'Bloc-Utilities - Resizable'
+	#category : #'Bloc-Utilities - Resizable'
 }
 
 { #category : #'dnd handlers' }

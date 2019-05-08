@@ -4,7 +4,7 @@ I represent an extent change and notify a corresponding BlElementExtentChangedEv
 Class {
 	#name : #BlElementExtentChange,
 	#superclass : #BlElementChange,
-	#category : 'Bloc-Basic-Changes'
+	#category : #'Bloc-Basic-Changes'
 }
 
 { #category : #notifying }

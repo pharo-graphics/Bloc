@@ -46,7 +46,7 @@ Class {
 		'previouslyAccessedConstraints',
 		'previouslyAccessedConstraintsType'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #'api - constraints' }

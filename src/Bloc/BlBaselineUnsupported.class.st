@@ -4,5 +4,5 @@ I am signalled whem #baseline is requested from an element that does not support
 Class {
 	#name : #BlBaselineUnsupported,
 	#superclass : #Error,
-	#category : 'Bloc-Utilities - Debugging'
+	#category : #'Bloc-Utilities - Debugging'
 }

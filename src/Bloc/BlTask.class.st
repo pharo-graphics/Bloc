@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space-Support'
 }
 
 { #category : #hooks }

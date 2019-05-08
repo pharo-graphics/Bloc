@@ -8,7 +8,7 @@ Class {
 		'position',
 		'currentIterator'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'private - asserting' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'image'
 	],
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space'
 }
 
 { #category : #'as yet unclassified' }

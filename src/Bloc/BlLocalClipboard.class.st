@@ -9,7 +9,7 @@ Class {
 	#classVars : [
 		'Default'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'as yet unclassified' }

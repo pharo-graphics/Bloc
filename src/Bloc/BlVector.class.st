@@ -33,7 +33,7 @@ Class {
 		'zero',
 		'one'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #cleanup }

@@ -13,7 +13,7 @@ Class {
 		'geometry',
 		'geometryPath'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #'instance creation' }

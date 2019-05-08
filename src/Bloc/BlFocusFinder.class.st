@@ -13,7 +13,7 @@ Class {
 		'temporaryBounds',
 		'focusedBounds'
 	],
-	#category : 'Bloc-Utilities - Focus'
+	#category : #'Bloc-Utilities - Focus'
 }
 
 { #category : #accessing }

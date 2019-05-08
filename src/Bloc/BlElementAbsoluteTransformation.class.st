@@ -4,7 +4,7 @@ I represent an absolute transformation defined only by transformation matrix
 Class {
 	#name : #BlElementAbsoluteTransformation,
 	#superclass : #BlElementTransformation,
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #accessing }

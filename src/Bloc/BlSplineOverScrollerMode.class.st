@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Utilities - Scrolling Helpers'
+	#category : #'Bloc-Utilities - Scrolling Helpers'
 }
 
 { #category : #updating }

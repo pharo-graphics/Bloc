@@ -10,7 +10,7 @@ Class {
 		'extent',
 		'pathCache'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #converting }

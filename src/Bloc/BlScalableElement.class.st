@@ -30,7 +30,7 @@ Class {
 		'contentElement',
 		'scaleStrategy'
 	],
-	#category : 'Bloc-Utilities - Scalable'
+	#category : #'Bloc-Utilities - Scalable'
 }
 
 { #category : #'instance creation' }

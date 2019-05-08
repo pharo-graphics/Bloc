@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSplineOverScrollerNoneMode,
 	#superclass : #BlSplineOverScrollerMode,
-	#category : 'Bloc-Utilities - Scrolling Helpers'
+	#category : #'Bloc-Utilities - Scrolling Helpers'
 }
 
 { #category : #updating }

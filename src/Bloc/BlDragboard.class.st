@@ -14,7 +14,7 @@ Class {
 		'dragView',
 		'transferMode'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space-Support'
 }
 
 { #category : #'as yet unclassified' }

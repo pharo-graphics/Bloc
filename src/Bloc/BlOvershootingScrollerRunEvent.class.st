@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'isFinished'
 	],
-	#category : 'Bloc-Utilities - Scrolling Helpers'
+	#category : #'Bloc-Utilities - Scrolling Helpers'
 }
 
 { #category : #accessing }

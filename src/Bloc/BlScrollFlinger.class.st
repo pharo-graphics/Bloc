@@ -13,7 +13,7 @@ Class {
 		'reSchedulePostAnimationCallback',
 		'scrollable'
 	],
-	#category : 'Bloc-Utilities - Scrolling'
+	#category : #'Bloc-Utilities - Scrolling'
 }
 
 { #category : #'instance creation' }

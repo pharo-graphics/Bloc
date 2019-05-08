@@ -6,7 +6,7 @@ Class {
 		'ifContentScrolls',
 		'never'
 	],
-	#category : 'Bloc-Utilities - Scrolling Helpers'
+	#category : #'Bloc-Utilities - Scrolling Helpers'
 }
 
 { #category : #accessing }

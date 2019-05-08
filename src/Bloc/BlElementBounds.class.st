@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'referenceElement'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #converting }

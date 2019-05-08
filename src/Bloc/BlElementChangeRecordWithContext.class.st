@@ -5,7 +5,7 @@ Class {
 		'context',
 		'timestamp'
 	],
-	#category : 'Bloc-Basic-Changes'
+	#category : #'Bloc-Basic-Changes'
 }
 
 { #category : #accessing }

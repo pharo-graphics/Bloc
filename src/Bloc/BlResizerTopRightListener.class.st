@@ -1,7 +1,7 @@
 Class {
 	#name : #BlResizerTopRightListener,
 	#superclass : #BlResizerListener,
-	#category : 'Bloc-Utilities - Resizable'
+	#category : #'Bloc-Utilities - Resizable'
 }
 
 { #category : #resizer }

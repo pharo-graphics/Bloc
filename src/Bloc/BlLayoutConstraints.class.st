@@ -16,7 +16,7 @@ Class {
 		'vertical',
 		'horizontal'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #initialization }

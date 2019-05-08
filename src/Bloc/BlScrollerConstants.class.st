@@ -18,7 +18,7 @@ Class {
 		'SplineTime',
 		'StartTension'
 	],
-	#category : 'Bloc-Utilities - Scrolling Helpers'
+	#category : #'Bloc-Utilities - Scrolling Helpers'
 }
 
 { #category : #initialization }

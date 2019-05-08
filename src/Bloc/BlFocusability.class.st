@@ -8,7 +8,7 @@ Class {
 		'before',
 		'block'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
 { #category : #accessing }

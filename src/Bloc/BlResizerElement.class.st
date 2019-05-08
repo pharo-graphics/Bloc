@@ -17,7 +17,7 @@ Class {
 		'bottomRight',
 		'resizerListeners'
 	],
-	#category : 'Bloc-Utilities - Resizable'
+	#category : #'Bloc-Utilities - Resizable'
 }
 
 { #category : #'api - attaching / detaching' }

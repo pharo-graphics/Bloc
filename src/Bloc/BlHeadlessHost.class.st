@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'isRunning'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'driver selection' }

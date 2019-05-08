@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'eventQueue'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'event processing' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'delegate'
 	],
-	#category : 'Bloc-Utilities - Drag&Drop'
+	#category : #'Bloc-Utilities - Drag&Drop'
 }
 
 { #category : #accessing }

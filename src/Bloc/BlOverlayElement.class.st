@@ -16,7 +16,7 @@ Class {
 		'overlayListener',
 		'referenceElement'
 	],
-	#category : 'Bloc-Utilities - Overlay'
+	#category : #'Bloc-Utilities - Overlay'
 }
 
 { #category : #'instance creation' }

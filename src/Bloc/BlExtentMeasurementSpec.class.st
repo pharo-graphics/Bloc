@@ -10,7 +10,7 @@ Class {
 		'widthSpec',
 		'heightSpec'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #'instance creation' }

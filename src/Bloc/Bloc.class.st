@@ -15,7 +15,7 @@ Class {
 		'PreferableHostClass',
 		'PreferableSpartaCanvasBuilder'
 	],
-	#category : 'Bloc-Settings'
+	#category : #'Bloc-Settings'
 }
 
 { #category : #assertions }

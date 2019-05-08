@@ -5,7 +5,7 @@ Class {
 		'sourceElements',
 		'targetElements'
 	],
-	#category : 'Bloc-Utilities - Equalizer'
+	#category : #'Bloc-Utilities - Equalizer'
 }
 
 { #category : #'as yet unclassified' }

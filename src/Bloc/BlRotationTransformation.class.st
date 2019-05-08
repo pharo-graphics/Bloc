@@ -11,7 +11,7 @@ Class {
 		'angle',
 		'axis'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #accessing }

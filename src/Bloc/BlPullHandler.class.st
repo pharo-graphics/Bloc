@@ -20,7 +20,7 @@ Class {
 		'originalPosition',
 		'dragStartPosition'
 	],
-	#category : 'Bloc-Utilities - Drag&Drop'
+	#category : #'Bloc-Utilities - Drag&Drop'
 }
 
 { #category : #'dnd handlers' }

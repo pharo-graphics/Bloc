@@ -5,7 +5,7 @@ Class {
 		'rightToLeft',
 		'leftToRight'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #factory }

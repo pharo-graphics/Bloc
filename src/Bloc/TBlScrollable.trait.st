@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlScrollable,
-	#category : 'Bloc-Utilities - Scrolling'
+	#category : #'Bloc-Utilities - Scrolling'
 }
 
 { #category : #'api - scrolling overscroll' }

@@ -13,7 +13,7 @@ Class {
 		'position',
 		'title'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'window - properties' }

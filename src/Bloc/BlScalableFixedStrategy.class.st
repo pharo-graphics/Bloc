@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'zoom'
 	],
-	#category : 'Bloc-Utilities - Scalable'
+	#category : #'Bloc-Utilities - Scalable'
 }
 
 { #category : #'instance creation' }

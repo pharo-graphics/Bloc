@@ -20,7 +20,7 @@ Class {
 		'isStopped',
 		'measuredExtent'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #'instance creation' }

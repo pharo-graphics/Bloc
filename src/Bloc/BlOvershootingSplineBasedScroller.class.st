@@ -28,7 +28,7 @@ Class {
 	#pools : [
 		'BlScrollerConstants'
 	],
-	#category : 'Bloc-Utilities - Scrolling'
+	#category : #'Bloc-Utilities - Scrolling'
 }
 
 { #category : #'private - physics' }

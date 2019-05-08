@@ -4,7 +4,7 @@ I represent a position change and notify a corresponding BlElementPositionChange
 Class {
 	#name : #BlElementPositionChange,
 	#superclass : #BlElementChange,
-	#category : 'Bloc-Basic-Changes'
+	#category : #'Bloc-Basic-Changes'
 }
 
 { #category : #notifying }

@@ -15,7 +15,7 @@ Class {
 		'container',
 		'selected'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #geometry }

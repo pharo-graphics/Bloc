@@ -9,7 +9,7 @@ Class {
 		'time',
 		'pulseTimestamp'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space-Support'
 }
 
 { #category : #accessing }

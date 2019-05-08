@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'extent'
 	],
-	#category : 'Bloc-Utilities - Resizable'
+	#category : #'Bloc-Utilities - Resizable'
 }
 
 { #category : #accessing }

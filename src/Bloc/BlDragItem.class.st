@@ -8,7 +8,7 @@ Class {
 		'sourceElement',
 		'previewElement'
 	],
-	#category : 'Bloc-Utilities - Drag&Drop'
+	#category : #'Bloc-Utilities - Drag&Drop'
 }
 
 { #category : #'instace creation' }

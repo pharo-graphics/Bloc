@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'translation'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #'instance creation' }

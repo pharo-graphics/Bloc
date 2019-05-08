@@ -1,5 +1,5 @@
 Class {
 	#name : #BlShearTransformation,
 	#superclass : #BlAffineTransformation,
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }

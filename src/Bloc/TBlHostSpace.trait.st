@@ -9,7 +9,7 @@ Trait {
 	#name : #TBlHostSpace,
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'host space - accessing' }

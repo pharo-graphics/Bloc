@@ -8,7 +8,7 @@ Class {
 		'isRunning',
 		'startTime'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space-Support'
 }
 
 { #category : #accessing }

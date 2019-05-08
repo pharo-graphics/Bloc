@@ -19,7 +19,7 @@ Class {
 		'sx',
 		'sy'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #'instance creation' }
