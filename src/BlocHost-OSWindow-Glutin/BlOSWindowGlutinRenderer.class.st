@@ -132,8 +132,8 @@ BlOSWindowGlutinRenderer >> initializeGL [
 
 	vertShaderObj := gl create_vertex_shader.
 	fragShaderObj := gl create_fragment_shader.
-	gl shader_source: vertShaderObj string: self vertexShader.
-	gl shader_source: fragShaderObj string: self fragmentShader.
+	gl shader_source: vertShaderObj string: (self vertexShader withLineEndings: OSPlatform current lineEnding).
+	gl shader_source: fragShaderObj string: (self fragmentShader withLineEndings: OSPlatform current lineEnding).
 	gl compile_shader: vertShaderObj.
 	gl compile_shader: fragShaderObj.
 	
