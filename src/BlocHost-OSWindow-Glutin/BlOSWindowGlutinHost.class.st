@@ -24,7 +24,7 @@ BlOSWindowGlutinHost class >> priority [
 	Lower value - more likely host becomes a default"
 	<return: #Number>
 	
-	^ 30
+	^ 10
 ]
 
 { #category : #initialization }

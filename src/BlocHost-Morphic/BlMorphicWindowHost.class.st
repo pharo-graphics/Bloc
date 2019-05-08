@@ -26,7 +26,7 @@ BlMorphicWindowHost class >> priority [
 	Morphic host is the most stable and will work on any machine"
 	<return: #Number>
 
-	^ 0
+	^ 20
 ]
 
 { #category : #'host - api' }
