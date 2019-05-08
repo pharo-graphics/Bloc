@@ -154,7 +154,7 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 									self effect
 										applyEffectOnSpartaCanvas: aTransformedCanvas
 										for: self
-										around: [ self drawMeAndChildrenOnSpartaCanvas: aTransformedCanvas ] ].
+										around: [ :aShadowCanvas | self drawMeAndChildrenOnSpartaCanvas: aShadowCanvas ] ].
 								misc debug ifTrue: [
 									self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ]
 						failed: [ :anError | self drawError: anError onSpartaCanvas: aCanvas ] ] ]
