@@ -1432,5 +1432,5 @@ BlAnimationExamples >> textElement: aCharacter [
 	
 	^ BlTextElement new 
 		text: aText;
-		effect: (BlDropShadowEffect color: (Color gray alpha: 0.5) width: 20 offset: 0@0)
+		effect: (BlDropShadowEffect color: (Color gray alpha: 0.5) width: 10 offset: 0@0)
 ]

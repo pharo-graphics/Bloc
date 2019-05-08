@@ -398,7 +398,7 @@ BlBasicExamples >> roundedRectangle [
 BlBasicExamples >> shadowEffect [
 	<gtExample>
 	
-	^ BlDropShadowEffect color: Color black width: 20 offset: 10@10
+	^ BlDropShadowEffect color: Color black width: 10 offset: 10@10
 ]
 
 { #category : #'examples - composition' }

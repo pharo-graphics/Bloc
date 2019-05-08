@@ -155,7 +155,7 @@ BlDevKeyboard >> newButton: anExtent [
 		geometry: (BlRectangle cornerRadius: 4);
 		border: (BlBorder paint: (Color gray alpha: 0.2) width: 1);
 		layout: (BlFrameLayout new);
-		effect: (BlDropShadowEffect color: (Color black alpha: 0.1) width: 4 offset: 0@1);
+		effect: (BlDropShadowEffect color: (Color black alpha: 0.1) width: 2 offset: 0@1);
 		margin: (BlInsets all: self spacing);
 		background: (Color white)
 ]
