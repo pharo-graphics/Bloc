@@ -235,6 +235,12 @@ BlKeyboardKey class >> eight [
 	^ self named: #'8'
 ]
 
+{ #category : #'keys - navigation' }
+BlKeyboardKey class >> end [
+	<return: #BlKeyboardKey>
+	^ self named: #End
+]
+
 { #category : #'keys - symbols' }
 BlKeyboardKey class >> equal [
 	<return: #BlKeyboardKey>
