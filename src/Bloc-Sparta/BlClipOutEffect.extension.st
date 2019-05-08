@@ -7,7 +7,7 @@ BlClipOutEffect >> applyEffectOnSpartaCanvas: anSpartaCanvas for: anElement arou
 	
 	anSpartaCanvas layer
 		during: [
-			aBlock value.
+			aBlock value: anSpartaCanvas.
 			anSpartaCanvas fill
 				path: (self clipOutPathFor: anElement);
 				paint: Color white;

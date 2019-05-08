@@ -33,7 +33,8 @@ TBlDrawingCache >> invalidRect: aBlBounds from: anElement [
 	"we should only optimize it for children. I myself should invalidate as usually.
 	The problem is that if we optimize for myself, then the second invalidation after
 	position / extent change will be ignored which leads to redraw problems"
-	anElement ~~ self
+	
+	anElement == self
 		ifTrue: [ ^ super invalidRect: aBlBounds from: anElement ].
 	
 	"we compare with true because it is nil by default (I am coming from a Trait)"
