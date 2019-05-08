@@ -129,6 +129,9 @@ BlOSWindowGlutinRenderer >> initializeGL [
 		ifNotNil: [ ^ self ].
 
 	gl := self window handle gl.
+	
+	gl clear_colorR: 1 g: 1 b: 1 a: 1.
+	gl clear: GL_COLOR_BUFFER_BIT.
 
 	vertShaderObj := gl create_vertex_shader.
 	fragShaderObj := gl create_fragment_shader.
@@ -143,7 +146,6 @@ BlOSWindowGlutinRenderer >> initializeGL [
 	
 	gl link_program: progObj.
 	gl use_program: progObj.
-	
 	
 	vertexBuff := gl create_buffer.
 	gl bind_array_buffer: vertexBuff.
