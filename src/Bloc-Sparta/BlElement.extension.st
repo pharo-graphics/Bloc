@@ -90,6 +90,14 @@ BlElement >> drawMeAndChildrenOnSpartaCanvas: aCanvas [
 ]
 
 { #category : #'*Bloc-Sparta' }
+BlElement >> drawMeWithEffectsOnCanvas: aCanvas [
+	self effect
+		applyEffectOnSpartaCanvas: aCanvas
+		for: self
+		around: [ :aShadowCanvas | self drawMeAndChildrenOnSpartaCanvas: aShadowCanvas ]
+]
+
+{ #category : #'*Bloc-Sparta' }
 BlElement >> drawOnSpartaCanvas: aCanvas [
 	| isBackgroundTransparent isBorderTransparent areBothTransparent areBothVisible |
 	
@@ -150,11 +158,7 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 							aTransformedCanvas clip
 								when: [ self clipChildren ]
 								by: [ (self visualBounds: BlBounds new on: aTransformedCanvas) merge: anEffectBounds ]
-								during: [
-									self effect
-										applyEffectOnSpartaCanvas: aTransformedCanvas
-										for: self
-										around: [ :aShadowCanvas | self drawMeAndChildrenOnSpartaCanvas: aShadowCanvas ] ].
+								during: [ self drawMeWithEffectsOnCanvas: aCanvas ].
 								misc debug ifTrue: [
 									self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ]
 						failed: [ :anError | self drawError: anError onSpartaCanvas: aCanvas ] ] ]

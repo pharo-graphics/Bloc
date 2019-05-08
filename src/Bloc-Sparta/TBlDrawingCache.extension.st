@@ -1,7 +1,7 @@
 Extension { #name : #TBlDrawingCache }
 
 { #category : #'*Bloc-Sparta' }
-TBlDrawingCache >> drawMeAndChildrenOnSpartaCanvas: aCanvas [
+TBlDrawingCache >> drawMeWithEffectsOnCanvas: aCanvas [
 	| aGlobalToLocalMatrix aGlobalToLocalScale aGlobalToLocalScaleMatrix aLocalToGlobalScaleMatrix |
 
 	self damageReported: false.
@@ -22,7 +22,7 @@ TBlDrawingCache >> drawMeAndChildrenOnSpartaCanvas: aCanvas [
 		aCachedCanvas := aCanvas similar: theBounds extent ceiling asIntegerPoint.
 		aCachedCanvas transform
 			by: [ :aTransform | aTransform scaleBy: aGlobalToLocalScale asPoint ]
-			during: [ super drawMeAndChildrenOnSpartaCanvas: aCachedCanvas ].
+			during: [ super drawMeWithEffectsOnCanvas: aCachedCanvas ].
 
 		self cachedSurface: aCachedCanvas surface.
 		aCachedCanvas release ].
