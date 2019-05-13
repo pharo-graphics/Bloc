@@ -134,7 +134,23 @@ BlOSWindowGlutinRenderer >> initializeForBuffer: aBlHostRendererBufferSurface [
 			
 		self initializeGL.
 
-		gl viewport_x: 0 y: 0 width: textureExtent x height: textureExtent y ]
+		gl viewport_x: 0 y: 0 width: textureExtent x height: textureExtent y.
+	
+		texture := gl gen_texture.
+		gl bind_texture_2d: texture.
+		gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MIN_FILTER param: GL_NEAREST.
+		gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MAG_FILTER param: GL_NEAREST.
+		
+		gl
+			tex_image_2d_level: 0
+			internalformat: GL_RGBA
+			width: textureExtent x
+			height: textureExtent y
+			border: 0
+			format: GL_BGRA
+			type: GL_UNSIGNED_INT_8_8_8_8_REV
+			pixels: surface buffer
+			length: surface stride * textureExtent y * 4 ]
 ]
 
 { #category : #'host space - drawing' }
@@ -181,8 +197,6 @@ BlOSWindowGlutinRenderer >> initializeGL [
 	vloc := gl get_attribute_location_program: progObj name: 'aVertex'.
 	tloc := gl get_attribute_location_program: progObj name: 'aUV'.
 	uLoc := gl get_attribute_location_program: progObj name: 'pos'.
-	
-	texture := gl gen_texture.
 ]
 
 { #category : #initialization }
@@ -210,14 +224,13 @@ BlOSWindowGlutinRenderer >> presentBufferSurface: aBlHostRendererBufferSurface a
 		gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MAG_FILTER param: GL_NEAREST.
 		
 		gl
-			tex_image_2d_target: GL_TEXTURE_2D
-			level: 0
-			internalformat: GL_RGBA
+			tex_sub_image_2d_level: 0
+			xoffset: 0
+			yoffset: 0
 			width: textureExtent x
 			height: textureExtent y
-			border: 0
 			format: GL_BGRA
-			type: GL_UNSIGNED_BYTE
+			type: GL_UNSIGNED_INT_8_8_8_8_REV
 			pixels: aBlHostRendererBufferSurface buffer
 			length: aBlHostRendererBufferSurface stride * textureExtent y * 4.
 		
