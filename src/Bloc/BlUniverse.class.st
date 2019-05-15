@@ -206,6 +206,7 @@ BlUniverse >> preferableHost: aBlHost [
 
 { #category : #accessing }
 BlUniverse >> pulseLoop [
+	<return: #BlPulseLoop>
 	^ pulseLoop
 ]
 

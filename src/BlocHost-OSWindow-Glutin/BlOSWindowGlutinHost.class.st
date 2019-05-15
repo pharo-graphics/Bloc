@@ -6,7 +6,7 @@ Class {
 
 { #category : #'driver selection' }
 BlOSWindowGlutinHost class >> isSupported [
-	^ true
+	^ GlutinLibrary uniqueInstance hasModule
 ]
 
 { #category : #'driver selection' }
