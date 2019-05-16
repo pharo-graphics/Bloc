@@ -180,7 +180,9 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 				ifNil: [ actualStart := aStart ].
 			
 			actualEnd := anEnd.
-			actualDelimiterIndex := aDelimiterEnd ] ].
+			actualDelimiterIndex := aDelimiterEnd.
+			
+			self hasNext ifFalse: [ shouldMerge := false ] ] ].
 	
 	self
 		assert: [ actualStart <= actualEnd ]
