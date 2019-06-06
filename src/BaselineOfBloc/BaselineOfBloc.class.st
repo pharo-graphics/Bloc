@@ -37,10 +37,7 @@ BaselineOfBloc >> baseline: spec [
 			baseline: 'GToolkitExamplesEngine' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
 			baseline: 'OSWindowGlutin' with: [
-				spec repository: 'github://feenkcom/oswindow-glutin/src' ];
-			baseline: 'GToolkitMedia' with: [
-				spec repository: 'github://feenkcom/gtoolkit-media/src' ].
-
+				spec repository: 'github://feenkcom/oswindow-glutin/src' ].
 		spec 
 			package: #'Bloc-Geometry' with: [
 				spec requires: #(#BlocCore ). ];
@@ -77,7 +74,7 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [
-				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' #'GToolkitMedia'). ]. ].
+				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' ). ]. ].
 
 ]
 
