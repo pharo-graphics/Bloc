@@ -82,7 +82,7 @@ BlCommand >> execute [
 
 { #category : #'api - taskit' }
 BlCommand >> future [
-	^ self asTask future
+	^ BlAsyncUIWorkerPool future: self maxPoolSize: 4
 ]
 
 { #category : #evaluating }
@@ -99,7 +99,7 @@ BlCommand >> result [
 
 { #category : #'api - taskit' }
 BlCommand >> schedule [
-	^ self asTask schedule
+	^ BlAsyncUIWorkerPool future: self maxPoolSize: 4
 ]
 
 { #category : #evaluating }

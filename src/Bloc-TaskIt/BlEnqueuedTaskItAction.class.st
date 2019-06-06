@@ -99,5 +99,5 @@ BlEnqueuedTaskItAction >> run [
 
 { #category : #'api - running' }
 BlEnqueuedTaskItAction >> runFuture [
-	^ self futureAction asTask future
+	^ BlAsyncUIWorkerPool future: self futureAction maxPoolSize: 4
 ]
