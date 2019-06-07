@@ -2541,12 +2541,12 @@ BlElement >> parentBoundsToLocal: aBounds [
 	immutable one that can be safely stored as instance variable."
 	<return: #BlBounds>
 
-	"first apply inverted transformation if we have one"
-	transformation inverseTransformBounds: aBounds.
-
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"
 	aBounds translateBy: self position negated.
+	
+	"first apply inverted transformation if we have one"
+	transformation inverseTransformBounds: aBounds.
 	
 	^ aBounds
 ]
