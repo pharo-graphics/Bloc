@@ -336,6 +336,8 @@ BlTaskItTaskExamples >> progress [
 { #category : #'enqueued task' }
 BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTask [
 	<gtExample>
+	<noTest>
+
 	| aSpace aTask |
 
 	aSpace := self addElementWithEnqueuedTaskToSpace.
@@ -358,6 +360,8 @@ BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTask [
 { #category : #'enqueued task' }
 BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTaskThatFails [
 	<gtExample>
+	<noTest>
+
 	| aSpace aTask |
 
 	aSpace := self addElementWithEnqueuedTaskToSpace.
