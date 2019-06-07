@@ -2159,7 +2159,7 @@ BlElement >> measuredExtent: anExtent [
 	@see BlElement>>#measuredExtent for more info
 	anExtent must not be nil"
 	self
-		assert: anExtent isNotNil
+		assert: [ anExtent isNotNil ]
 		description: [ 'Measured extent must not be nil' ].
 	
 	self measuredBounds extent: anExtent
@@ -2172,6 +2172,17 @@ BlElement >> measuredHeight [
 	<return: #Number>
 	
 	^ self measuredBounds height
+]
+
+{ #category : #layout }
+BlElement >> measuredPosition [
+	"Return my measured position used during layout by layout strategies.
+	It is being computed during measuring step.
+	@see BlElement>>onMeasure:
+	measuredPosition can not be nil"
+	<return: #Point>
+	
+	^ self measuredBounds position
 ]
 
 { #category : #layout }

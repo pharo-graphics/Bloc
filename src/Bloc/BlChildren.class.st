@@ -21,7 +21,7 @@ Important API methods:
 "
 Class {
 	#name : #BlChildren,
-	#superclass : #Object,
+	#superclass : #Collection,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-Basic-Children'
@@ -340,6 +340,13 @@ BlChildren >> sortedByElevation [
 	<return: #BlChildren>
 
 	^ BlChildrenSortedByElevation on: self
+]
+
+{ #category : #'children - subsets' }
+BlChildren >> sortedByPerimeter [
+	<return: #BlChildren>
+
+	^ BlChildrenSortedByPerimeter on: self
 ]
 
 { #category : #private }

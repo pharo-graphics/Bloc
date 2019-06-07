@@ -50,13 +50,20 @@ BlChildrenCollection >> addFirst: anElement [
 ]
 
 { #category : #'children - removing' }
-BlChildrenCollection >> remove: anElement [
+BlChildrenCollection >> remove: anElement [	
+	self
+		remove: anElement
+		ifAbsent: [ self errorNotFound: anElement ]
+]
+
+{ #category : #'children - removing' }
+BlChildrenCollection >> remove: anElement ifAbsent: anExceptionBlock [
 	| anIndex |
 
 	anIndex := self indexOf: anElement.
 	anIndex isZero
-		ifTrue: [ self errorNotFound: anElement ].
-		
+		ifTrue: [ anExceptionBlock value ].
+
 	self removeAt: anIndex
 ]
 

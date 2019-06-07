@@ -279,6 +279,14 @@ BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec widthUsed:
 ]
 
 { #category : #'private - measurement' }
+BlLayout >> measureChildren: aCollectionOfChildren [
+	aCollectionOfChildren do: [ :aChild |
+		self
+			measureChild: aChild
+			parentSpec: BlExtentMeasurementSpec unspecified ]
+]
+
+{ #category : #'private - measurement' }
 BlLayout >> measureIgnored: anElement with: anExtentSpec [
 	"Measure ignore children of a given parent allowing them to take as much space as they want"
 
