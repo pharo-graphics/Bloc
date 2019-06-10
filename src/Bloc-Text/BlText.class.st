@@ -59,6 +59,11 @@ BlText >> anySatisfy: aBlock [
 	^ false
 ]
 
+{ #category : #'text - modifications' }
+BlText >> append: aText [
+	self insertText: aText at: self size
+]
+
 { #category : #'text - converting' }
 BlText >> asString [
     ^ self printStringLimitedTo: Float infinity

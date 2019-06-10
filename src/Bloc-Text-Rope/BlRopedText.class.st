@@ -162,9 +162,9 @@ BlRopedText >> insertString: aString at: anIndex [
 ]
 
 { #category : #accessing }
-BlRopedText >> insertText: aString at: anIndex [
-	rope := rope insertItems: aString at: anIndex.
-	self notifyStringInserted: aString at: anIndex
+BlRopedText >> insertText: aText at: anIndex [
+	rope := rope insert: aText asRopedText rope at: anIndex.
+	self notifyStringInserted: aText asString at: anIndex
 ]
 
 { #category : #'text - testing' }
