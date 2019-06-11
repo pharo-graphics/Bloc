@@ -102,6 +102,13 @@ BlCommand >> schedule [
 	^ self asTask schedule.
 ]
 
+{ #category : #'api - taskit' }
+BlCommand >> taskPriority [
+	"Answer the priority of the receiver when submitted as a task to TaskIt. 0 is highest priority"
+
+	^0
+]
+
 { #category : #evaluating }
 BlCommand >> value [
 	^ self execute; result

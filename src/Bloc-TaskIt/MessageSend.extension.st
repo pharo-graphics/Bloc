@@ -1,8 +1,8 @@
-Extension { #name : #TKTTaskExecution }
+Extension { #name : #MessageSend }
 
 { #category : #'*Bloc-TaskIt' }
-TKTTaskExecution >> taskPriority [
+MessageSend >> taskPriority [
 	"Answer the priority of the receiver when submitted as a task to TaskIt. 0 is highest priority"
 
-	^ task taskPriority
+	^0
 ]
