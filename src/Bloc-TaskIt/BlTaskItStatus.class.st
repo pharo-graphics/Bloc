@@ -106,6 +106,8 @@ BlTaskItStatus >> workerPool: pool on: aStream [
 		print: pool workers size - freeWorkers size; cr;
 		<< 'Free Workers: ';
 		print: freeWorkers size; cr;
+		<< 'Failed Tasks: ';
+		print: pool failedTasks size; cr;
 		<< 'Pool Max Size: ';
 		<< pool poolMaxSize; cr.
 
