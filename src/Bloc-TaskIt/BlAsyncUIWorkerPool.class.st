@@ -57,13 +57,15 @@ BlAsyncUIWorkerPool >> printOn: aStream [
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: '(';
-		nextPutAll: 'name:';
+		nextPutAll: 'name: ';
 		nextPutAll: name;
-		nextPutAll: 'poolMaxSize: ';
-		print: poolMaxSize;
-		nextPutAll: '; busyWorkers: ';
+		nextPutAll: ', queueSize: ';
+		print: taskQueue size;
+		nextPutAll: ', busyWorkers: ';
 		print: workers size - freeWorkers size;
-		nextPutAll: '; freeWorkers: ';
+		nextPutAll: ', freeWorkers: ';
 		print: freeWorkers size;
+		nextPutAll: ', poolMaxSize: ';
+		print: poolMaxSize;
 		nextPutAll: ')'
 ]
