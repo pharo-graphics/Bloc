@@ -17,6 +17,17 @@ Class {
 }
 
 { #category : #printing }
+BlTaskItStatus >> commonPoolsOn: aStream [
+	"Print any common pools that exist.
+	Since there isn't a common root for the instances, search allInstances"
+
+	(TKTCommonQueueWorkerPool allInstances select: [ :each |
+		each name beginsWith: 'CommonPool-' ]) do: [ :pool |
+			self workerPool: pool on: aStream.
+			aStream cr; cr ]
+]
+
+{ #category : #printing }
 BlTaskItStatus >> gtStatusFor: aView [
 	<gtView>
 
@@ -55,8 +66,7 @@ BlTaskItStatus >> statusOn: aStream [
 	aStream cr; cr.
 	self variableSizedPool: BlHousekeepingWorkerPool on: aStream.
 	aStream cr; cr.
-	self workerPool: TKTConfiguration runner on: aStream.
-	aStream cr; cr.
+	self commonPoolsOn: aStream.
 	self instanceCountsOn: aStream
 ]
 

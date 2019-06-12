@@ -4,7 +4,10 @@ Extension { #name : #MessageSend }
 MessageSend >> asLoggingTask [ 
 	"Answer the receiver as a task that will log its execution"
 
-	^BlLoggingTask new valuable: self
+	^BlLoggingTask new 
+		valuable: self;
+		callingMethod: thisContext sender method asRingDefinition;
+		yourself
 ]
 
 { #category : #'*Bloc-TaskIt' }

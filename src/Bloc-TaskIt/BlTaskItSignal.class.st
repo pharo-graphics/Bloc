@@ -45,6 +45,16 @@ BlTaskItSignal class >> emitValuable: aValuable message: aString [
 		emit
 ]
 
+{ #category : #'instance creation' }
+BlTaskItSignal class >> emitValuable: aValuable message: aString callingMethod: aMethod [
+
+	^self new
+		valuable: aValuable;
+		message: aString;
+		callingMethod: aMethod;
+		emit
+]
+
 { #category : #accessing }
 BlTaskItSignal >> callingMethod [
 	^ callingMethod
