@@ -12,6 +12,9 @@ The public API and key messages are the same as for TKTCommonWorkerPool.
 Class {
 	#name : #BlAsyncUIWorkerPool,
 	#superclass : #BlVariableSizeWorkerPool,
+	#classVars : [
+		'UseDefaultRunner'
+	],
 	#category : #'Bloc-TaskIt-Worker'
 }
 
@@ -19,8 +22,11 @@ Class {
 BlAsyncUIWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
-	^TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) future: aValuable asLoggingTask ].
+	^self useDefaultRunner ifTrue: 
+		[ aValuable future ]
+	ifFalse: [ 
+		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
+			(self withPoolSize: maxPoolSize) future: aValuable asLoggingTask ] ].
 
 ]
 
@@ -37,9 +43,26 @@ BlAsyncUIWorkerPool class >> initialize [
 BlAsyncUIWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
-	^TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ].
+	^self useDefaultRunner ifTrue: 
+		[ aValuable schedule ]
+	ifFalse: [ 
+		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
+		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ] ].
 
+]
+
+{ #category : #debugging }
+BlAsyncUIWorkerPool class >> useDefaultRunner [
+	"Answer a boolean indicating whether the default (calling priority) runner should be used"
+
+	^UseDefaultRunner ifNil: [ false ]
+]
+
+{ #category : #debugging }
+BlAsyncUIWorkerPool class >> useDefaultRunner: aBoolean [
+	"Set the flag indicating whether to use the default (calling priority) runner"
+
+	UseDefaultRunner := aBoolean 
 ]
 
 { #category : #initialization }
