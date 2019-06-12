@@ -23,7 +23,7 @@ BlAsyncUIWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
 	^self useDefaultRunner ifTrue: 
-		[ aValuable future ]
+		[ aValuable asLoggingTask future ]
 	ifFalse: [ 
 		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
 			(self withPoolSize: maxPoolSize) future: aValuable asLoggingTask ] ].
@@ -44,7 +44,7 @@ BlAsyncUIWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
 	^self useDefaultRunner ifTrue: 
-		[ aValuable schedule ]
+		[ aValuable asLoggingTask schedule ]
 	ifFalse: [ 
 		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
 		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ] ].
