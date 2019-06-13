@@ -235,6 +235,11 @@ BlInsets >> left [
 	^ left
 ]
 
+{ #category : #accessing }
+BlInsets >> max [
+	^ self top max: (self right max: (self bottom max: self left))
+]
+
 { #category : #converting }
 BlInsets >> negated [
 	^ self class
