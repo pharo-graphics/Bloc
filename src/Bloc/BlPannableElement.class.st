@@ -12,6 +12,16 @@ BlPannableElement >> asPannableElement [
 	^ self
 ]
 
+{ #category : #conversion }
+BlPannableElement >> asScalableElement [
+	^ self
+]
+
+{ #category : #conversion }
+BlPannableElement >> asScrollableElement [
+	^ self
+]
+
 { #category : #accessing }
 BlPannableElement >> contentElement [
 	^ self zoomableElement contentElement

@@ -33,5 +33,5 @@ BlSlideHandler >> scrollEvent: anEvent [
 	
 	aDelta := anEvent vector x negated @ anEvent vector y.
 	
-	anEvent currentTarget children accountedByLayout do: [ :aChild | aChild relocate: aChild measuredPosition + aDelta ].
+	anEvent currentTarget children accountedByLayout do: [ :aChild | aChild relocate: aChild measuredPosition + aDelta ]
 ]
