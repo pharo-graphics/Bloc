@@ -64,6 +64,23 @@ BlTaskExecutionSignal class >> for: aTask block: aBlock [
 	self endTask: aTask.
 ]
 
+{ #category : #'instance creation' }
+BlTaskExecutionSignal class >> fromSton: stonReader [
+
+	| signal |
+
+	signal := self new.
+	stonReader parseListDo: [ :each :idx |
+		idx = 1 ifFalse: [ self error: 'Invalid STON' ].
+		signal
+			basicTimestamp: (each at: #timestamp);
+			basicProcessId: (each at: #processId);
+			basicProperties: (each at: #properties);
+			task: (each at: #task);
+			action: (each at: #action) ].
+	^signal
+]
+
 { #category : #filtering }
 BlTaskExecutionSignal class >> ignoreClass: aBlTask [
 
@@ -104,6 +121,25 @@ BlTaskExecutionSignal >> action: anObject [
 	action := anObject
 ]
 
+{ #category : #'ston persistence' }
+BlTaskExecutionSignal >> asStonDictionary [
+
+	| taskSton |
+
+	taskSton := String streamContents: [ :stream |
+		stream 
+			print: task identityHash;
+			<< '-';
+			print: task ].
+	^Dictionary new
+		at: #timestamp put: timestamp;
+		at: #processId put: processId;
+		at: #properties put: properties;
+		at: #task put: taskSton;
+		at: #action put: action;
+		yourself.
+]
+
 { #category : #printing }
 BlTaskExecutionSignal >> printOneLineContentsOn: stream [
 
@@ -112,6 +148,13 @@ BlTaskExecutionSignal >> printOneLineContentsOn: stream [
 		<< ': ';
 		print: task.
 
+]
+
+{ #category : #'ston persistence' }
+BlTaskExecutionSignal >> stonOn: stonWriter [
+
+	stonWriter writeObject: self streamShortList: [ :array |
+		array add: self asStonDictionary ]
 ]
 
 { #category : #accessing }

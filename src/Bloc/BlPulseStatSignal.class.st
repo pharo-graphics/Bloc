@@ -27,11 +27,39 @@ BlPulseStatSignal class >> duration: aDuration [
 	Index := 1.
 ]
 
+{ #category : #'instance creation' }
+BlPulseStatSignal class >> fromSton: stonReader [
+
+	| signal |
+
+	signal := self new.
+	stonReader parseListDo: [ :each :idx |
+		idx = 1 ifFalse: [ self error: 'Invalid STON' ].
+		signal
+			basicTimestamp: (each at: #timestamp);
+			basicProcessId: (each at: #processId);
+			basicProperties: (each at: #properties);
+			l2: (each at: #l2);
+			min: (each at: #min);
+			max: (each at: #max) ].
+	^signal
+]
+
 { #category : #'class initialization' }
 BlPulseStatSignal class >> initialize [ 
 
 	Times := Array new: 60.
 	Index := 1.
+]
+
+{ #category : #'ston persistence' }
+BlPulseStatSignal >> asStonDictionary [
+
+	^super asStonDictionary 
+		at: #l2 put: l2;
+		at: #min put: min;
+		at: #max put: max;
+		yourself.
 ]
 
 { #category : #accessing }

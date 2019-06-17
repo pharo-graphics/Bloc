@@ -55,6 +55,34 @@ BlTaskItSignal class >> emitValuable: aValuable message: aString callingMethod: 
 		emit
 ]
 
+{ #category : #'instance creation' }
+BlTaskItSignal class >> fromSton: stonReader [
+
+	| signal |
+
+	signal := self new.
+	stonReader parseListDo: [ :each :idx |
+		idx = 1 ifFalse: [ self error: 'Invalid STON' ].
+		signal
+			basicTimestamp: (each at: #timestamp);
+			basicProcessId: (each at: #processId);
+			basicProperties: (each at: #properties);
+			callingMethod: (each at: #callingMethod);
+			valuable: (each at: #valuable);
+			message: (each at: #message) ].
+	^signal
+]
+
+{ #category : #'ston persistence' }
+BlTaskItSignal >> asStonDictionary [
+
+	^super asStonDictionary 
+		at: #callingMethod put: callingMethod;
+		at: #valuable put: valuable printString;
+		at: #message put: message;
+		yourself.
+]
+
 { #category : #accessing }
 BlTaskItSignal >> callingMethod [
 	^ callingMethod
