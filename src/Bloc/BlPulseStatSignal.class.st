@@ -18,7 +18,7 @@ BlPulseStatSignal class >> duration: aDuration [
 
 	Times at: Index put: aDuration asMilliSeconds.
 	Index := Index + 1.
-	Index <= 60 ifTrue: [ ^self ].
+	Index <= self sampleCount ifTrue: [ ^self ].
 	self new 
 		l2: (Times inject: 0 into: [ :s :v | s + (v <= 2 ifTrue: [1] ifFalse: [0]) ]);
 		min: Times min;
@@ -48,8 +48,15 @@ BlPulseStatSignal class >> fromSton: stonReader [
 { #category : #'class initialization' }
 BlPulseStatSignal class >> initialize [ 
 
-	Times := Array new: 60.
+	Times := Array new: self sampleCount.
 	Index := 1.
+]
+
+{ #category : #accessing }
+BlPulseStatSignal class >> sampleCount [
+	"Answer the number of pulse loops that are summarised in each entry"
+
+	^60
 ]
 
 { #category : #'ston persistence' }
