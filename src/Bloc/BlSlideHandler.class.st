@@ -31,6 +31,7 @@ BlSlideHandler >> dragStartEvent: anEvent [
 BlSlideHandler >> scrollEvent: anEvent [
 	| aDelta |
 	
+	anEvent consumed: true.
 	aDelta := anEvent vector x negated @ anEvent vector y.
 	
 	anEvent currentTarget children accountedByLayout do: [ :aChild | aChild relocate: aChild measuredPosition + aDelta ]
