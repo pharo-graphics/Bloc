@@ -12,7 +12,15 @@ Class {
 	#category : #'Bloc-Space-Support'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
+BlSignalAnalysis class >> gtInspectFile: aFileReference [
+
+	^GtInspector openOn: 
+		(self logger: 
+			(MemoryLogger fromStonFile: aFileReference))
+]
+
+{ #category : #'instance creation' }
 BlSignalAnalysis class >> gtInspectLogger: aSignalLogger [
 
 	^GtInspector openOn: (self logger: aSignalLogger)
@@ -24,7 +32,7 @@ BlSignalAnalysis class >> logger: aSignalLogger [
 	^self new logger: aSignalLogger
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BlSignalAnalysis >> cpuConsumption [
 	"Answer the elapsed time of the paired signals, the consumed time and percentage by time"
 
@@ -45,13 +53,13 @@ BlSignalAnalysis >> getPairs [
 
 	| cache |
 
-	cache := IdentityDictionary new.
+	cache := Dictionary new.
 
 	pairs := Array streamContents: [ :stream |
 		"Check the consistency of the record.
 		-  Can't have two starts in a row
 		-  end time should be after start time"
-		records do: [ :each |
+		self taskRecordings do: [ :each |
 			each action = #start ifTrue: [ 
 				self assert: (cache includesKey: each target) not.
 				cache at: each target put: each -> nil ]
@@ -72,7 +80,7 @@ BlSignalAnalysis >> getPairs [
 { #category : #private }
 BlSignalAnalysis >> getSlow [
 
-	"Collect actions that took longer than triggerDuration"
+	"Collect tasks that took longer than triggerDuration"
 	^(self pairs 
 		select: [ :each | (each value timestamp - each key timestamp) > triggerDuration ]
 		thenCollect: [ :each | { 
@@ -88,7 +96,7 @@ BlSignalAnalysis >> gtRecordingsFor: aView [
 	^ aView columnedList
 		title: 'Recordings' translated;
 		priority: 50;
-		items: [ records reverse ];
+		items: [ self recordings reverse ];
 		column: 'Timestamp' translated do: [ :aColumn | 
 			aColumn 
 				item: [ :each | each timestamp asString ]; 
@@ -109,6 +117,7 @@ BlSignalAnalysis >> gtRecordingsFor: aView [
 
 { #category : #inspecting }
 BlSignalAnalysis >> gtSlowFor: aView [
+	"Display Tasks that take longer than triggerDuration"
 	<gtView>
 	^ aView columnedList
 		title: 'Slow' translated;
@@ -122,6 +131,16 @@ BlSignalAnalysis >> gtSlowFor: aView [
 			aColumn 
 				item: [ :each | each second target asString ]; 
 				matchParent ]
+]
+
+{ #category : #inspecting }
+BlSignalAnalysis >> gtSummaryFor: aView [
+	"Display the summary text"
+	<gtView>
+	^ aView textEditor
+		title: 'Summary' translated;
+		priority: 1;
+		text: [ self summaryText ]
 ]
 
 { #category : #inspecting }
@@ -157,12 +176,43 @@ BlSignalAnalysis >> initialize [
 ]
 
 { #category : #accessing }
+BlSignalAnalysis >> l2EntryCount [
+	"Sum the number of times that the Bloc pulse loop wait 2ms or less"
+
+	| recordings |
+
+	recordings := self pulseStatRecordings.
+	^recordings inject: 0
+					into: [ :n :v | n + v l2 ]
+]
+
+{ #category : #accessing }
 BlSignalAnalysis >> logger: aLogger [
 
 	logger := aLogger.
-	records := logger recordings select: [ :each | self signals includes: each class ].
-	"Inspection convenience: populate all the instance variables"
-	self slow.
+
+]
+
+{ #category : #accessing }
+BlSignalAnalysis >> maxPulseWaitTime [
+	"Answer the maximum time waited."
+
+	| recordings |
+
+	recordings := self pulseStatRecordings.
+	^recordings inject: recordings first max
+					into: [ :n :v | n max: v max ]
+]
+
+{ #category : #accessing }
+BlSignalAnalysis >> minPulseWaitTime [
+	"Answer the minimum time waited."
+
+	| recordings |
+
+	recordings := self pulseStatRecordings.
+	^recordings inject: recordings first min
+					into: [ :n :v | n min: v min ]
 ]
 
 { #category : #accessing }
@@ -172,10 +222,16 @@ BlSignalAnalysis >> pairs [
 ]
 
 { #category : #accessing }
-BlSignalAnalysis >> signals [
-	"Answer the signals included in the analysis"
+BlSignalAnalysis >> pulseStatRecordings [
+	"Answer the BlPulseStatSignal entries"
 
-	^BlSpaceRenderSignal, BlTaskExecutionSignal 
+	^self recordings select: [ :each | each class = BlPulseStatSignal ]
+]
+
+{ #category : #accessing }
+BlSignalAnalysis >> recordings [
+
+	^logger recordings
 ]
 
 { #category : #accessing }
@@ -184,21 +240,66 @@ BlSignalAnalysis >> slow [
 	^slow ifNil: [ slow := self getSlow ]
 ]
 
-{ #category : #printing }
-BlSignalAnalysis >> statusOn: stream [
+{ #category : #private }
+BlSignalAnalysis >> summaryOn: aStream [
 
-	self tasksOn: stream.
-	self rendersOn: stream.
+	"Basic info."
+	aStream 
+		<< 'Log start time: ';
+		print: self recordings first timestamp; cr;
+		<< 'Log end time: ';
+		print: self recordings last timestamp; cr;
+		<< 'Number of entries: ';
+		print: self recordings size; cr;
+		cr; cr.
+
+	"Pulse summary"
+	aStream 
+		<< 'Number of pulse entries: ';
+		print: self pulseStatRecordings size;
+		<< ' (';
+		print: self pulseStatRecordings size * BlPulseStatSignal sampleCount;
+		<< ' pulse loops)'; cr;
+		<< 'Min wait time: ';
+		print: self minPulseWaitTime; cr;
+		<< 'Max wait time: ';
+		print: self maxPulseWaitTime; cr;
+		<< 'L2 entry count: ';
+		print: self l2EntryCount; cr;
+		cr; cr.
+
+
+	aStream 
+		<< 'Number of slow tasks: ';
+		print: self slow size; cr;
+		<< 'Number of unfinished tasks: ';
+		print: self unfinished size; cr;
+		cr; cr.
 ]
 
 { #category : #accessing }
-BlSignalAnalysis >> statusString [
+BlSignalAnalysis >> summaryText [
 
-	^String streamContents: [ :stream | self statusOn: stream ]
+	^(String streamContents: [ :stream | self summaryOn: stream ]) asRopedText
+]
+
+{ #category : #accessing }
+BlSignalAnalysis >> taskRecordings [
+	"Answer the recordings that represent Tasks with start and stop entries"
+
+	^self recordings select: [ :each | self taskSignals includes: each class ]
+]
+
+{ #category : #accessing }
+BlSignalAnalysis >> taskSignals [
+	"Answer the signals that log tasks start and stop"
+
+	^BlSpaceRenderSignal, BlTaskExecutionSignal 
 ]
 
 { #category : #accessing }
 BlSignalAnalysis >> unfinished [
+	"Answer the Task signals that are unfinished, i.e. have a start log entry, but no corresponding end entry"
 
 	^unfinished ifNil: [ self pairs. unfinished ]
 ]
