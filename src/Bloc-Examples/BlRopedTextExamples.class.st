@@ -36,13 +36,12 @@ BlRopedTextExamples >> nextSpanFontColorOnHelloWorldWithColor [
 	self assert: anIterator hasNext not.
 	self assert: aSpan asString equals: 'World'.
 
-	^ aSpan
+	^ aText
 ]
 
 { #category : #examples }
 BlRopedTextExamples >> textForeground [
 	<gtExample>
-	<noTest>
 	| text |
 
 	"space between `Hello` and `world` is not attributed"
@@ -51,12 +50,16 @@ BlRopedTextExamples >> textForeground [
 	(text from: 7 to: 11) foreground: Color red.
 
 	self assert: text rope isConcatenation.
-	self assert: text rope left isConcatenation.
-	self assert: text rope left left size equals: 5.
-	self assert: (text rope left left isKindOf: BlAttributeRope).
-	self assert: text rope left left attributes asArray equals: { BlTextForegroundAttribute paint: Color blue }.
-	self assert: (text rope right isKindOf: BlAttributeRope).
-	self assert: text rope right attributes asArray equals: { BlTextForegroundAttribute paint: Color red }.
+	
+	self assert: text rope left size equals: 5.
+	self assert: (text rope left isKindOf: BlAttributeRope).
+	self assert: text rope left attributes asArray equals: { BlTextForegroundAttribute paint: Color blue }.
+
+	self assert: text rope right isConcatenation.
+
+	self assert: text rope right right size equals: 5.
+	self assert: (text rope right right isKindOf: BlAttributeRope).
+	self assert: text rope right right attributes asArray equals: { BlTextForegroundAttribute paint: Color red }.
 
 	^ text
 ]

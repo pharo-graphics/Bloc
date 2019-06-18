@@ -355,7 +355,7 @@ BlTextParagraph >> reset [
 	autoRelease := true.
 	selection := nil.
 	containerExtent := 0@0.
-	baseline := BlTextParagraphAscentBaseline uniqueInstance.
+	baseline := BlTextParagraphAscentLooseBaseline uniqueInstance.
 	scale := 1
 ]
 

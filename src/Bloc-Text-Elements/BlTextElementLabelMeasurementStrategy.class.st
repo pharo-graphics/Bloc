@@ -1,11 +1,11 @@
 Class {
-	#name : #BlTextElementLooseMeasurementStrategy,
+	#name : #BlTextElementLabelMeasurementStrategy,
 	#superclass : #BlTextElementMeasurementStrategy,
 	#category : #'Bloc-Text-Elements'
 }
 
 { #category : #'as yet unclassified' }
-BlTextElementLooseMeasurementStrategy >> boundsOf: aParagraph [
+BlTextElementLabelMeasurementStrategy >> boundsOf: aParagraph [
 	<return: #BlBounds>
 	| aMeasuredWidth aMeasuredHeight |
 

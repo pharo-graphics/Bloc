@@ -26,12 +26,3 @@ BlSlideHandler >> dragStartEvent: anEvent [
 	"drag start position in local"
 	dragStartPosition := anEvent localPosition.
 ]
-
-{ #category : #'dnd handlers' }
-BlSlideHandler >> scrollEvent: anEvent [
-	| aDelta |
-	
-	aDelta := anEvent vector x negated @ anEvent vector y.
-	
-	anEvent currentTarget children accountedByLayout do: [ :aChild | aChild relocate: aChild measuredPosition + aDelta ].
-]

@@ -59,10 +59,11 @@ BlFitLayout >> measure: anElement with: anExtentSpec [
 			measureChild: aChild
 			parentSpec: anExtentSpec ].
 
-	self measureIgnored: anElement with: anExtentSpec.
 	self measurePositions: anElement with: anExtentSpec.
 	
-	self fit: anElement with: anExtentSpec
+	self fit: anElement with: anExtentSpec.
+	
+	self measureIgnored: anElement with: anExtentSpec
 ]
 
 { #category : #measure }

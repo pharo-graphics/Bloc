@@ -3,7 +3,10 @@
 
 """"I am independent from Sparta """"
 
-${class:BlTextElementBaselineExamples}$
+I support multiple measurement strategies, see examples for more detailed explanation:
+${class:BlTextElementMeasurementStrategyExamples}$
+
+
 "
 Class {
 	#name : #BlTextElement,
@@ -26,7 +29,9 @@ BlTextElement class >> text: aBrText [
 
 { #category : #'api - text' }
 BlTextElement >> ascentBaseline [
-	self baseline: BlTextParagraphAscentBaseline uniqueInstance
+	self deprecated: 'Use `#labelMeasurement` instead'.
+	
+	self labelMeasurement
 ]
 
 { #category : #accessing }
@@ -50,7 +55,9 @@ BlTextElement >> baselineOffset [
 
 { #category : #'api - text' }
 BlTextElement >> boundsBaseline [
-	self baseline: BlTextParagraphBoundsBaseline uniqueInstance
+	self deprecated: 'Use `#tightMesurement` instead'.
+
+	self tightMeasurement
 ]
 
 { #category : #layout }
@@ -184,8 +191,16 @@ BlTextElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
 ]
 
 { #category : #'api - text' }
+BlTextElement >> editorMeasurement [
+	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
+	self baseline: BlTextParagraphAscentLooseBaseline uniqueInstance
+]
+
+{ #category : #'api - text' }
 BlTextElement >> editorMesurement [
-	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance
+	self deprecated: 'Use `#editorMeasurement` instead'.
+
+	self editorMeasurement
 ]
 
 { #category : #initialization }
@@ -203,15 +218,22 @@ BlTextElement >> initialize [
 	selection := BlCompositeSelection new.
 	measurer := self defaultTextMeasurer.
 
-	self tightMesurement.
-	self boundsBaseline.
+	self tightMeasurement.
 	
 	"self debug: true"
 ]
 
 { #category : #'api - text' }
+BlTextElement >> labelMeasurement [
+	self measurement: BlTextElementLabelMeasurementStrategy uniqueInstance.
+	self baseline: BlTextParagraphAscentTightBaseline uniqueInstance
+]
+
+{ #category : #'api - text' }
 BlTextElement >> looseMesurement [
-	self measurement: BlTextElementLooseMeasurementStrategy uniqueInstance
+	self deprecated: 'Use `#labelMeasurement` instead'.
+
+	self labelMeasurement
 ]
 
 { #category : #layout }
@@ -444,6 +466,14 @@ BlTextElement >> textDo: aBlock [
 ]
 
 { #category : #'api - text' }
+BlTextElement >> tightMeasurement [
+	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
+	self baseline: BlTextParagraphBoundsBaseline uniqueInstance
+]
+
+{ #category : #'api - text' }
 BlTextElement >> tightMesurement [
-	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance
+	self deprecated: 'Use `#tightMeasurement` instead'.
+
+	self tightMeasurement
 ]

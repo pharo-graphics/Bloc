@@ -163,7 +163,12 @@ BlRopedText >> insertString: aString at: anIndex [
 
 { #category : #accessing }
 BlRopedText >> insertText: aText at: anIndex [
-	rope := rope insert: aText asRopedText rope at: anIndex.
+	self
+		assert: [ aText isKindOf: BlText ]
+		description: [ 'Trying to insert a {1} instead of {2}'
+			format: { aText class name . BlText name } ].
+
+	rope := rope insert: aText rope at: anIndex.
 	self notifyStringInserted: aText asString at: anIndex
 ]
 
