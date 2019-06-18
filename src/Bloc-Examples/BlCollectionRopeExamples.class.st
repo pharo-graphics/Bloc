@@ -513,6 +513,174 @@ BlCollectionRopeExamples >> small_from_3_to_5_do [
 	^ theIterated
 ]
 
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_rope_123_at_0 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 0.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: '123Hello'.
+
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_rope_123_at_1 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 1.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'H123ello'.
+
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_rope_123_at_2 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 2.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'He123llo'.
+
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_rope_123_at_3 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 3.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'Hel123lo'.
+
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_rope_123_at_4 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 4.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'Hell123o'.
+
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_rope_123_at_5 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 5.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'Hello123'.
+
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_string_123_at_0 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insertItems: '123' at: 0.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: '123Hello'.
+	
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_string_123_at_1 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insertItems: '123' at: 1.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'H123ello'.
+	
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_string_123_at_2 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insertItems: '123' at: 2.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'He123llo'.
+	
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_string_123_at_3 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insertItems: '123' at: 3.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'Hel123lo'.
+	
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_string_123_at_4 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insertItems: '123' at: 4.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'Hell123o'.
+	
+	^ aNewRope
+]
+
+{ #category : #'examples - insertion' }
+BlCollectionRopeExamples >> small_insert_string_123_at_5 [
+	<gtExample>
+	| aRope aNewRope |
+
+	aRope := self small.
+	aNewRope := aRope insertItems: '123' at: 5.
+
+	self assert: aNewRope size equals: 8.
+	self assert: aNewRope collection equals: 'Hello123'.
+
+	^ aNewRope
+]
+
 { #category : #'examples - testing' }
 BlCollectionRopeExamples >> small_isEmpty [
 	<gtExample>

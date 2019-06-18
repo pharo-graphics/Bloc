@@ -205,11 +205,13 @@ BlCollectionRope >> iterator: aStart to: anEnd [
 BlCollectionRope >> merge: aCollection at: anIndex [
 	| newCollection |
 	newCollection := anIndex = 0
-		ifTrue: [ aCollection asArray , collection ]
+		ifTrue: [ aCollection species = collection species
+			ifTrue: [ aCollection, collection ]
+			ifFalse: [ (aCollection as: collection species), collection ] ]
 		ifFalse: [ anIndex = self size
 				ifTrue: [ collection , aCollection ]
 				ifFalse: [ | tmpCollection |
-					tmpCollection := Array new: collection size + aCollection size.
+					tmpCollection := collection species new: collection size + aCollection size.
 					tmpCollection
 						replaceFrom: 1
 						to: anIndex
@@ -235,8 +237,8 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 	
 	totalSize := collection size + aCollection size.
 	middle := (totalSize / 2) asInteger.
-	leftArray := Array new: middle.
-	rightArray := Array new: totalSize - middle.
+	leftArray := collection species new: middle.
+	rightArray := collection species new: totalSize - middle.
 	
 	leftAmountBeforeIndex := (middle min: anIndex) max: 0.
 	alreadyFilledAmount := leftAmountBeforeIndex.
