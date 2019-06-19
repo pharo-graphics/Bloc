@@ -2159,7 +2159,7 @@ BlElement >> measuredExtent: anExtent [
 	@see BlElement>>#measuredExtent for more info
 	anExtent must not be nil"
 	self
-		assert: anExtent isNotNil
+		assert: [ anExtent isNotNil ]
 		description: [ 'Measured extent must not be nil' ].
 	
 	self measuredBounds extent: anExtent
@@ -2172,6 +2172,17 @@ BlElement >> measuredHeight [
 	<return: #Number>
 	
 	^ self measuredBounds height
+]
+
+{ #category : #layout }
+BlElement >> measuredPosition [
+	"Return my measured position used during layout by layout strategies.
+	It is being computed during measuring step.
+	@see BlElement>>onMeasure:
+	measuredPosition can not be nil"
+	<return: #Point>
+	
+	^ self measuredBounds position
 ]
 
 { #category : #layout }
@@ -2530,12 +2541,12 @@ BlElement >> parentBoundsToLocal: aBounds [
 	immutable one that can be safely stored as instance variable."
 	<return: #BlBounds>
 
-	"first apply inverted transformation if we have one"
-	transformation inverseTransformBounds: aBounds.
-
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"
 	aBounds translateBy: self position negated.
+	
+	"first apply inverted transformation if we have one"
+	transformation inverseTransformBounds: aBounds.
 	
 	^ aBounds
 ]

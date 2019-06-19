@@ -177,7 +177,7 @@ BlDevKeyboard >> simpleKey: aString [
 	button := self newButton: self simpleKeyExtent.
 
 	label := BlTextElement new.
-	label boundsBaseline.
+	label tightMeasurement.
 	label clipChildren: false.
 	label text: (aString asRopedText fontSize: 16).
 	label constraintsDo: [ :c |
@@ -205,7 +205,7 @@ BlDevKeyboard >> simpleSmallKey: aString [
 	button := self newButton: self simpleKeyExtent.
 
 	label := BlTextElement new.
-	label boundsBaseline.
+	label tightMeasurement.
 	label clipChildren: false.
 	label text: (aString asRopedText fontSize: 11).
 	label constraintsDo: [ :c |
@@ -228,7 +228,7 @@ BlDevKeyboard >> wideKey: aString span: aNumber [
 	button := self newButton: (self wideWidth: aNumber) @ self rowHeight.
 
 	label := BlTextElement new.
-	label boundsBaseline.
+	label tightMeasurement.
 	label clipChildren: false.
 	label text: (aString asRopedText fontSize: 13).
 	label constraintsDo: [ :c |
@@ -246,7 +246,7 @@ BlDevKeyboard >> wideSmallKey: aString span: aNumber [
 	button := self newButton: (self wideWidth: aNumber) @ self rowHeight.
 
 	label := BlTextElement new.
-	label boundsBaseline.
+	label tightMeasurement.
 	label clipChildren: false.
 	label text: (aString asRopedText fontSize: 11).
 	label constraintsDo: [ :c |

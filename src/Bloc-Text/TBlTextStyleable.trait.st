@@ -81,21 +81,21 @@ TBlTextStyleable >> thin [
 ]
 
 { #category : #'api - text emphasis' }
-TBlTextStyleable >> underline [
-	self attributesBuilder attribute: BlTextUnderlineAttribute new
-]
-
-{ #category : #'api - text emphasis' }
-TBlTextStyleable >> underlinePaint: aPaint [
-	self attributesBuilder attribute: (BlTextUnderlineAttribute new paint: aPaint)
+TBlTextStyleable >> underlineDo: aBlock [
+	| anAttribute |
+	
+	anAttribute := BlTextUnderlineAttribute new.
+	aBlock value: anAttribute.
+	self attributesBuilder attribute: anAttribute
 ]
 
 { #category : #'api - text emphasis' }
 TBlTextStyleable >> underlinePaint: aPaint width: aNumber [
-	self attributesBuilder attribute: (
-		BlTextUnderlineAttribute new 
+
+	self underlineDo: [ :anAttribute |
+		anAttribute
 			paint: aPaint;
-			width: aNumber)
+			width: aNumber ]
 ]
 
 { #category : #'api - text weight' }

@@ -221,6 +221,11 @@ BlElementBounds >> localBoundsToTransformed: aBounds [
 	^ aBounds
 ]
 
+{ #category : #'geometry - accessing' }
+BlElementBounds >> perimeter [
+	^ (self width + self height) * 2
+]
+
 { #category : #accessing }
 BlElementBounds >> position [
 	"Return bounds position (an origin) as a Point"

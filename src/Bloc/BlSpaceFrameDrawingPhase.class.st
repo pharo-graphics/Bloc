@@ -18,5 +18,6 @@ BlSpaceFrameDrawingPhase >> name [
 BlSpaceFrameDrawingPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpaceRenderEndEvent
-		during: [ :theSpace | theSpace hasDirtyAreas ifTrue: [ theSpace render ] ]
+		during: [ :theSpace | theSpace hasDirtyAreas ifTrue: [ 
+				BlSpaceRenderSignal for: theSpace block: [ theSpace render ] ] ]
 ]

@@ -28,6 +28,16 @@ BlCommand >> asErrorCatchingCommand [
 ]
 
 { #category : #'api - taskit' }
+BlCommand >> asLoggingTask [ 
+	"Answer the receiver as a task that will log its execution"
+
+	^BlLoggingTask new 
+		valuable: self;
+		callingMethod: thisContext sender method asRingDefinition;
+		yourself
+]
+
+{ #category : #'api - taskit' }
 BlCommand >> asTask [
 	^ TKTTask valuable: self
 ]
@@ -82,7 +92,7 @@ BlCommand >> execute [
 
 { #category : #'api - taskit' }
 BlCommand >> future [
-	^ self asTask future
+	^ BlAsyncUIWorkerPool future: self maxPoolSize: 4
 ]
 
 { #category : #evaluating }
@@ -99,7 +109,14 @@ BlCommand >> result [
 
 { #category : #'api - taskit' }
 BlCommand >> schedule [
-	^ self asTask schedule
+	^ BlAsyncUIWorkerPool schedule: self maxPoolSize: 4
+]
+
+{ #category : #'api - taskit' }
+BlCommand >> taskPriority [
+	"Answer the priority of the receiver when submitted as a task to TaskIt. 0 is highest priority"
+
+	^0
 ]
 
 { #category : #evaluating }

@@ -92,12 +92,12 @@ BlEnqueuedTaskItAction >> onSuccessEnqueueAction: aCallback [
 BlEnqueuedTaskItAction >> run [
 	future := self runFuture.
 	resultCallbacks
-		do: [ :eachCallback | future onSuccessDo: eachCallback ].
+		do: [ :eachCallback | future onSuccessDo: eachCallback asLoggingTask ].
 	exceptionCallbacks
-		do: [ :eachCallback | future onFailureDo: eachCallback ]
+		do: [ :eachCallback | future onFailureDo: eachCallback asLoggingTask ]
 ]
 
 { #category : #'api - running' }
 BlEnqueuedTaskItAction >> runFuture [
-	^ self futureAction asTask future
+	^ BlAsyncUIWorkerPool future: self futureAction maxPoolSize: 4
 ]

@@ -843,6 +843,16 @@ BlSpace >> position: aPoint [
 		ifAbsent: [ self setPosition: aPoint ]
 ]
 
+{ #category : #printing }
+BlSpace >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		<< '(';
+		print: title;
+		<< ')'
+]
+
 { #category : #pulse }
 BlSpace >> processEvents [
 	"Process events enqueued by host space and dispatch them to the scene graph"

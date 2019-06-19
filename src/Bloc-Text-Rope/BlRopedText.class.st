@@ -162,9 +162,14 @@ BlRopedText >> insertString: aString at: anIndex [
 ]
 
 { #category : #accessing }
-BlRopedText >> insertText: aString at: anIndex [
-	rope := rope insertItems: aString at: anIndex.
-	self notifyStringInserted: aString at: anIndex
+BlRopedText >> insertText: aText at: anIndex [
+	self
+		assert: [ aText isKindOf: BlText ]
+		description: [ 'Trying to insert a {1} instead of {2}'
+			format: { aText class name . BlText name } ].
+
+	rope := rope insert: aText rope at: anIndex.
+	self notifyStringInserted: aText asString at: anIndex
 ]
 
 { #category : #'text - testing' }

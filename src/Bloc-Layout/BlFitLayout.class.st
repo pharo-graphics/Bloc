@@ -31,9 +31,9 @@ BlFitLayout >> boundingBox: anElement [
 { #category : #layout }
 BlFitLayout >> fit: anElement with: anExtentSpec [
 	| boundingBox width height |
-		
+
 	boundingBox := self boundingBox: anElement.
-	
+
 	width := boundingBox width + anElement padding width.
 	height := boundingBox height + anElement padding height.
 
@@ -59,10 +59,11 @@ BlFitLayout >> measure: anElement with: anExtentSpec [
 			measureChild: aChild
 			parentSpec: anExtentSpec ].
 
-	self measureIgnored: anElement with: anExtentSpec.
 	self measurePositions: anElement with: anExtentSpec.
 	
-	self fit: anElement with: anExtentSpec
+	self fit: anElement with: anExtentSpec.
+	
+	self measureIgnored: anElement with: anExtentSpec
 ]
 
 { #category : #measure }

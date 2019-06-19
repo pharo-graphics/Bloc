@@ -4,6 +4,11 @@ Class {
 	#category : #'Bloc-Text-Text-Mocked'
 }
 
+{ #category : #accessing }
+BlTextParagraphFixedSpan >> advance: aNumber [
+	advance := aNumber
+]
+
 { #category : #drawing }
 BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 	| theAttributes aTextPainter aFontBuilder aCharacterWidth aCharacterHeight |
@@ -83,4 +88,9 @@ BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 	"And finally let attributes to render above the text"
 	theAttributes do: [ :anAttribute |
 		anAttribute drawAboveOnSpartaCanvas: aSpartaCanvas with: self ]
+]
+
+{ #category : #accessing }
+BlTextParagraphFixedSpan >> left: aNumber [
+	left := aNumber
 ]

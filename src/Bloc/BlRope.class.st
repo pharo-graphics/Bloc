@@ -236,7 +236,7 @@ BlRope >> insert: aRope at: anIndex [
 	(anIndex < 0 or: [ anIndex > self size ])
 		ifTrue: [ self error: 'Insert index ', anIndex asString, ' is out of bounds' ].
 
-	^ ((self from: 1 to: anIndex) append: aRope) append: (self from: anIndex + 1 to: self size)
+	^ ((self from: 0 to: anIndex) append: aRope) append: (self from: anIndex to: self size)
 ]
 
 { #category : #'rope - inserting' }

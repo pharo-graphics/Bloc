@@ -156,9 +156,10 @@ BlPulseLoop >> timeIsUp [
 { #category : #period }
 BlPulseLoop >> wait [
 	| milliSecs |
-	milliSecs := (self pulsePeriod - (DateAndTime now - pulseStartTime)) min: self pulsePeriod max: 0 milliSeconds.
-	milliSecs isZero
-		ifFalse: [ milliSecs wait ].
+	milliSecs := (self pulsePeriod - (DateAndTime now - pulseStartTime)).
+	BlPulseStatSignal duration: milliSecs.
+	milliSecs := milliSecs min: self pulsePeriod max: 0 milliSeconds.
+	milliSecs isZero ifFalse: [ milliSecs wait ].
 
 	lastElpasedTime := DateAndTime now
 ]
