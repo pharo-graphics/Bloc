@@ -81,6 +81,13 @@ TBlTextStyleable >> thin [
 ]
 
 { #category : #'api - text emphasis' }
+TBlTextStyleable >> underline [
+	"Set the default underline"
+
+	self underlineDo: [ :anAttribute | ]
+]
+
+{ #category : #'api - text emphasis' }
 TBlTextStyleable >> underlineDo: aBlock [
 	| anAttribute |
 	
