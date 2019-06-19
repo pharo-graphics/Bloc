@@ -1,8 +1,11 @@
 "
+! Underline
 I represent a text underline attribute.
-I am used together with BrText and BtTextStyler to style text.
+I am used together with ${class:BlText}$ and ${class:TBlTextStyleable}$ to style text.
 
 https://en.wikipedia.org/wiki/Underline
+
+See ${class:BlTextUnderlineAttributeExamples}$ for examples
 "
 Class {
 	#name : #BlTextUnderlineAttribute,
@@ -61,7 +64,7 @@ BlTextUnderlineAttribute >> hash [
 BlTextUnderlineAttribute >> initialize [
 	super initialize.
 	
-	paint := Color black.
+	paint := Color black asBlPaint.
 	below := true.
 	opacity := 1.
 	width := 2.
@@ -139,6 +142,7 @@ BlTextUnderlineAttribute >> paint: aPaint [
 { #category : #accessing }
 BlTextUnderlineAttribute >> style [
 	<return: #BlStrokeStyle>
+
 	^ style
 ]
 

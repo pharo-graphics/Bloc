@@ -37,8 +37,8 @@ BlTextUnderlineAttribute >> drawOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan 
 BlTextUnderlineAttribute >> lineOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan [
 	| aFromPoint aToPoint |
 	
-	aFromPoint := (("aSpartaSpan left negated + "aSpartaSpan baseline x) @ (aSpartaSpan baseline y + 2)) rounded.
-	aToPoint := (("aSpartaSpan left negated + "aSpartaSpan baseline x + aSpartaSpan advance) @ (aSpartaSpan baseline y + 2)) rounded.
+	aFromPoint := ((aSpartaSpan baseline x + (width / 2.0)) @ (aSpartaSpan baseline y + 2)) rounded.
+	aToPoint := ((aSpartaSpan baseline x + aSpartaSpan advance - (width / 2.0)) @ (aSpartaSpan baseline y + 2)) rounded.
 	
 	^ aSpartaCanvas shape 
 		line: aFromPoint

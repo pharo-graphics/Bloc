@@ -1,4 +1,6 @@
 "
+! Text model
+
 I am a data structure independent text abstraction.
 
 I define a public API of the text model. User must only talk with me using provided methods. My subclasses provide implementation based on concrete data structures, for example rope or string.
@@ -14,6 +16,10 @@ text := 'Hello world' asRopedText.
 (text from: 7 to: 11) foreground: Color red.
 text	
 ]]]
+
+!! Attributes
+
+- ${class:BlTextUnderlineAttribute}$
 "
 Class {
 	#name : #BlText,
