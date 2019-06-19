@@ -27,10 +27,20 @@ BlTextUnderlineAttribute >> drawOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan 
 	aSpartaCanvas stroke
 		alpha: self opacity;
 		paint: self paint;
-		path: (aSpartaCanvas shape 
-			line: (0 @ (aSpartaSpan baseline y + 2)) rounded 
-			to: (aSpartaSpan width @ (aSpartaSpan baseline y + 2)) rounded);
+		path: (self lineOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan);
 		width: self width;
 		in: [ :aPainter | self style applyOn: aPainter ];
 		draw
+]
+
+{ #category : #'*Bloc-Sparta' }
+BlTextUnderlineAttribute >> lineOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan [
+	| aFromPoint aToPoint |
+	
+	aFromPoint := (("aSpartaSpan left negated + "aSpartaSpan baseline x) @ (aSpartaSpan baseline y + 2)) rounded.
+	aToPoint := (("aSpartaSpan left negated + "aSpartaSpan baseline x + aSpartaSpan advance) @ (aSpartaSpan baseline y + 2)) rounded.
+	
+	^ aSpartaCanvas shape 
+		line: aFromPoint
+		to: aToPoint
 ]
