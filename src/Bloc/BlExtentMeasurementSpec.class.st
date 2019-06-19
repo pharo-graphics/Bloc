@@ -67,6 +67,11 @@ BlExtentMeasurementSpec >> printOn: aStream [
 	aStream nextPutAll: ')'.
 ]
 
+{ #category : #accessing }
+BlExtentMeasurementSpec >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #geometry }
 BlExtentMeasurementSpec >> sizeFor: anExtent [
 	|width height|

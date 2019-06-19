@@ -36,6 +36,11 @@ BlHandlerAnnouncementSubscription >> hash [
 ]
 
 { #category : #accessing }
+BlHandlerAnnouncementSubscription >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
+{ #category : #accessing }
 BlHandlerAnnouncementSubscription >> subscriber [
 	<return: #TBlEventHandler>
 

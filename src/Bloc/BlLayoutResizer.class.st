@@ -81,3 +81,8 @@ BlLayoutResizer >> measurementExactlyWith: aNumber [
 BlLayoutResizer >> measurementUnspecifiedWith: aNumber [
 	^ self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlLayoutResizer >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

@@ -330,6 +330,11 @@ BlRope >> putOn: aStream from: aStart to: anEnd [
 	self from: aStart to: anEnd do: [ :anItem | aStream nextPut: anItem ]
 ]
 
+{ #category : #accessing }
+BlRope >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'rope - accessing' }
 BlRope >> size [
 	<return: #Number>

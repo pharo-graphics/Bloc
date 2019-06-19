@@ -116,6 +116,11 @@ BlMeasurementSpec >> printOn: aStream [
 ]
 
 { #category : #accessing }
+BlMeasurementSpec >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
+{ #category : #accessing }
 BlMeasurementSpec >> size [
 	^ size
 ]

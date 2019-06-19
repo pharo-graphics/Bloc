@@ -171,6 +171,11 @@ BlKeyModifiers >> printOn: aStream [
 ]
 
 { #category : #accessing }
+BlKeyModifiers >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
+{ #category : #accessing }
 BlKeyModifiers >> shift: shiftBool [
 	hashKey := hashKey bitAt: 1 put: shiftBool asBit
 ]

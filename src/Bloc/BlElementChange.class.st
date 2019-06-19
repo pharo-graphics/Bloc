@@ -126,3 +126,8 @@ BlElementChange >> records [
 
 	^ records
 ]
+
+{ #category : #accessing }
+BlElementChange >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

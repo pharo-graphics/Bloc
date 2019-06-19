@@ -615,6 +615,11 @@ BlBounds >> scaleX: aX Y: aY [
 	self assertFinite
 ]
 
+{ #category : #accessing }
+BlBounds >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #printing }
 BlBounds >> storeOn: aStream [ 
 	"printed form is good for storing too"

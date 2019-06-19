@@ -18,3 +18,8 @@ BlAffineTransformationOrigin >> originIn: anElement [
 
 	^ self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlAffineTransformationOrigin >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

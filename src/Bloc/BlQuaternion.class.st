@@ -179,6 +179,11 @@ BlQuaternion >> printOn: aStream [
 ]
 
 { #category : #accessing }
+BlQuaternion >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
+{ #category : #accessing }
 BlQuaternion >> w [
 	^ w
 ]

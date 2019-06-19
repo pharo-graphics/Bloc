@@ -86,3 +86,8 @@ BrStencil >> gtPreviewFor: aView [
 		priority: 0;
 		stencil: [ self asElement ]
 ]
+
+{ #category : #accessing }
+BrStencil >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

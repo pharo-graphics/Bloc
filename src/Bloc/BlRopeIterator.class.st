@@ -354,6 +354,11 @@ BlRopeIterator >> rope: aRope from: aStart to: anEnd [
 	end := anEnd max: aStart.
 ]
 
+{ #category : #accessing }
+BlRopeIterator >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'iterator - attributes' }
 BlRopeIterator >> selectAttributes: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. 

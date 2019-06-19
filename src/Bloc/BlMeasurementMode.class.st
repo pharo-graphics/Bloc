@@ -91,6 +91,11 @@ BlMeasurementMode >> printOn: aStream size: aNumber [
 	self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlMeasurementMode >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #geometry }
 BlMeasurementMode >> size: aNumber with: aSpecSize [
 	<return: #Number>

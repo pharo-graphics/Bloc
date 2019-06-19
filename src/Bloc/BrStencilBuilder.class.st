@@ -68,3 +68,8 @@ BrStencilBuilder >> initialize [
 { #category : #'api - instantiation' }
 BrStencilBuilder >> paramsOn: aStencilExecutor [
 ]
+
+{ #category : #accessing }
+BrStencilBuilder >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

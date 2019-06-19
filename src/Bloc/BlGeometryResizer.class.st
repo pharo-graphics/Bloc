@@ -34,3 +34,8 @@ BlGeometryResizer class >> match [
 BlGeometryResizer >> adapt: aGeometry to: anElement [
 	self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlGeometryResizer >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

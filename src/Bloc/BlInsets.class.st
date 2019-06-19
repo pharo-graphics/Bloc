@@ -266,6 +266,11 @@ BlInsets >> right [
 ]
 
 { #category : #accessing }
+BlInsets >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
+{ #category : #accessing }
 BlInsets >> top [
 	<return: #Number>
 

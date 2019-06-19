@@ -45,3 +45,8 @@ BlElevation >> relatedTo: aNumber [
 	
 	^ self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlElevation >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

@@ -127,3 +127,8 @@ BlHandlerRegistry >> removeAllSuchThat: aBlock [
 	
 	^ self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlHandlerRegistry >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

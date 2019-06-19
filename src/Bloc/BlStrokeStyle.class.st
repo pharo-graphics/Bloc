@@ -94,3 +94,8 @@ BlStrokeStyle >> miterLimit [
 BlStrokeStyle >> miterLimit: aNumber [
 	miterLimit := aNumber
 ]
+
+{ #category : #accessing }
+BlStrokeStyle >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

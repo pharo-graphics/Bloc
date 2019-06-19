@@ -36,6 +36,11 @@ BlOutskirts class >> outside [
 	^ Outside ifNil: [ Outside := BlOutskirtsOutside new ]
 ]
 
+{ #category : #accessing }
+BlOutskirts >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'visual bounds' }
 BlOutskirts >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	^ self subclassResponsibility

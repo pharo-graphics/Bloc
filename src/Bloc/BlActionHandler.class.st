@@ -9,3 +9,8 @@ Class {
 { #category : #'as yet unclassified' }
 BlActionHandler >> actionPerformed [
 ]
+
+{ #category : #accessing }
+BlActionHandler >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
