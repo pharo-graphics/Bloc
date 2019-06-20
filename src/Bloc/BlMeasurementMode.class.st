@@ -92,6 +92,13 @@ BlMeasurementMode >> printOn: aStream size: aNumber [
 ]
 
 { #category : #geometry }
+BlMeasurementMode >> size: aNumber min: aMinSize max: aMaxSize [
+	<return: #BlMeasurementSpec>
+	
+	^ self subclassResponsibility
+]
+
+{ #category : #geometry }
 BlMeasurementMode >> size: aNumber with: aSpecSize [
 	<return: #Number>
 	

@@ -34,6 +34,13 @@ BlMeasurementExactMode >> printOn: aStream size: aNumber [
 ]
 
 { #category : #geometry }
+BlMeasurementExactMode >> size: aNumber min: aMinSize max: aMaxSize [
+	<return: #Number>
+	
+	^ BlMeasurementSpec exact: (aNumber min: aMaxSize max: aMinSize)
+]
+
+{ #category : #geometry }
 BlMeasurementExactMode >> size: aNumber with: aSpecSize [
 	<return: #Number>
 	
