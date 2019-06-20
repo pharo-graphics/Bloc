@@ -122,6 +122,11 @@ BlGeometry >> releaseCache [
 	pathCache releaseCache
 ]
 
+{ #category : #accessing }
+BlGeometry >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'visual bounds' }
 BlGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	"Return stroked bounds of a geometry if it would be stroked

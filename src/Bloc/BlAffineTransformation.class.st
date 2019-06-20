@@ -92,3 +92,8 @@ BlAffineTransformation >> origin [
 BlAffineTransformation >> origin: aBlAffineTransformationOrigin [
 	origin := aBlAffineTransformationOrigin
 ]
+
+{ #category : #accessing }
+BlAffineTransformation >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

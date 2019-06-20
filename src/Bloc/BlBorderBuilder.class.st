@@ -195,6 +195,11 @@ BlBorderBuilder >> paint: anObject [
 	paint := anObject
 ]
 
+{ #category : #accessing }
+BlBorderBuilder >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #styles }
 BlBorderBuilder >> solid [
 	dashOffset := 0.0.

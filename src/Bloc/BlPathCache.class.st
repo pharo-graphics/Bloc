@@ -60,3 +60,8 @@ BlPathCache >> releaseCache [
 
 	geometryPath := nil
 ]
+
+{ #category : #accessing }
+BlPathCache >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

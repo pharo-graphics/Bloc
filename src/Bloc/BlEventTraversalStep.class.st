@@ -33,6 +33,11 @@ BlEventTraversalStep >> printOn: stream [
 ]
 
 { #category : #accessing }
+BlEventTraversalStep >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
+{ #category : #accessing }
 BlEventTraversalStep >> target [
 	^ target
 ]

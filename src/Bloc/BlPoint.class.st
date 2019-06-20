@@ -41,6 +41,11 @@ BlPoint >> min: aBlPoint [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlPoint >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'matrix - transforming points' }
 BlPoint >> transformedOn: aBlMatrix [
 	<return: #BlPoint>

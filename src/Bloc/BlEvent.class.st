@@ -264,6 +264,11 @@ BlEvent >> postCopy [
 	traversedTargets := traversedTargets copy
 ]
 
+{ #category : #accessing }
+BlEvent >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #sending }
 BlEvent >> sendTo: anObject [
 	

@@ -111,6 +111,11 @@ BlMatrix >> scaleBy: aBlVector [
 	self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlMatrix >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'matrix - transforming points' }
 BlMatrix >> transformBounds: aBlBounds [
 	"In-place transform given BlBounds according to my transformation.

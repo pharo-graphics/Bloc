@@ -265,6 +265,11 @@ BlElementBounds >> right [
 	^ self bounds right
 ]
 
+{ #category : #accessing }
+BlElementBounds >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'geometry - accessing' }
 BlElementBounds >> top [
 	<return: #Number>

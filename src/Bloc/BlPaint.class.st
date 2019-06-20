@@ -44,3 +44,8 @@ BlPaint >> isTransparent [
 BlPaint >> matchExtent: anExtent [
 	self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlPaint >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

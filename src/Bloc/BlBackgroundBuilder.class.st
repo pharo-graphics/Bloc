@@ -48,3 +48,8 @@ BlBackgroundBuilder >> opacity: aNumber [
 
 	opacity := aNumber
 ]
+
+{ #category : #accessing }
+BlBackgroundBuilder >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

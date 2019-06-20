@@ -41,3 +41,8 @@ BlMatrixDecomposition >> interpolate: aFactor to: anotherDecomposition [
 
 	^ self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlMatrixDecomposition >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

@@ -16,3 +16,8 @@ BlSpaceEventRecorder >> onPulse [
 BlSpaceEventRecorder >> record: anEvent [
 	self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlSpaceEventRecorder >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

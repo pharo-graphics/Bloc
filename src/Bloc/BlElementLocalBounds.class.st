@@ -125,6 +125,11 @@ BlElementLocalBounds >> position: anObject [
 	position := anObject
 ]
 
+{ #category : #accessing }
+BlElementLocalBounds >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByDeepCopy
+]
+
 { #category : #'geometry bounds' }
 BlElementLocalBounds >> transformed [
 	<return: #BlElementBounds>

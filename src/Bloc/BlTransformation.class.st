@@ -243,6 +243,11 @@ BlTransformation >> scaleZ: aZ [
 	self scaleX: 1.0 Y: 1.0 Z: aZ
 ]
 
+{ #category : #accessing }
+BlTransformation >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #transformation }
 BlTransformation >> transformBounds: aBounds [
 	"In-place transform given BlBounds according to my transformation.

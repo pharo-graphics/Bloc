@@ -30,3 +30,8 @@ BlMouseButton class >> primary [
 BlMouseButton class >> secondary [
 	^ BlMouseSecondaryButton uniqueInstance
 ]
+
+{ #category : #accessing }
+BlMouseButton >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

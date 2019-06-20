@@ -3091,6 +3091,11 @@ BlElement >> scaleY: factor [
 		apply
 ]
 
+{ #category : #accessing }
+BlElement >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'event handling' }
 BlElement >> shouldChildrenHandleMouseEvents [
 	"Return true if my children are allowed to handle mouse events.

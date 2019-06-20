@@ -59,3 +59,8 @@ BlStrokeLineJoin >> printOn: aStream [
 		ifTrue: [ aStream nextPutAll: self class joinName ]
 		ifFalse: [ aStream nextPutAll: 'Line Join' ]
 ]
+
+{ #category : #accessing }
+BlStrokeLineJoin >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

@@ -115,6 +115,11 @@ BlCornerRadii >> radius: aNumber [
 ]
 
 { #category : #accessing }
+BlCornerRadii >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
+{ #category : #accessing }
 BlCornerRadii >> topLeft [
 	^ topLeft
 ]

@@ -59,3 +59,8 @@ BlStrokeLineCap >> printOn: aStream [
 		ifTrue: [ aStream nextPutAll: self class capName ]
 		ifFalse: [ aStream nextPutAll: 'Line Cap' ]
 ]
+
+{ #category : #accessing }
+BlStrokeLineCap >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]

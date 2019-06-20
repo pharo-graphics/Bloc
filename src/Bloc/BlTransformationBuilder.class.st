@@ -131,6 +131,11 @@ BlTransformationBuilder >> scaleTo: aVector [
 ]
 
 { #category : #accessing }
+BlTransformationBuilder >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
+{ #category : #accessing }
 BlTransformationBuilder >> target [
 	"Return a target object whose transformation we build"
 	<return: #Object>

@@ -44,6 +44,11 @@ BlElementChangeRecord >> printOn: aStream [
 		ifTrue: [ aStream nextPutAll: ' => Notified' ].
 ]
 
+{ #category : #accessing }
+BlElementChangeRecord >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #testing }
 BlElementChangeRecord >> wasNotified [
 	<return: #Boolean>

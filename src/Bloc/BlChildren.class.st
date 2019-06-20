@@ -298,6 +298,11 @@ BlChildren >> reversed [
 	^ BlChildrenReversed on: self
 ]
 
+{ #category : #accessing }
+BlChildren >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'children - accessing' }
 BlChildren >> second [
 	<return: #BlElement>

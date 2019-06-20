@@ -131,6 +131,11 @@ BlEventDispatcherChain >> previous: aBlEventDispatcherChain [
 	previous := aBlEventDispatcherChain
 ]
 
+{ #category : #accessing }
+BlEventDispatcherChain >> seamlessDefaultTransferStrategy [ 
+	^SeamlessTransferStrategy defaultByValue
+]
+
 { #category : #'private - accessing' }
 BlEventDispatcherChain >> withAllNext [
 	<return: #SequenceableCollection of: #BlEventDispatcherChain>
