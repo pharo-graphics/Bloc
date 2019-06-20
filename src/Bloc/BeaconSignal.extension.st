@@ -39,14 +39,20 @@ BeaconSignal class >> fromSton: stonReader [
 
 	| signal |
 
-	signal := self new.
 	stonReader parseListDo: [ :each :idx |
 		idx = 1 ifFalse: [ self error: 'Invalid STON' ].
-		signal
-			basicTimestamp: (each at: #timestamp);
-			basicProcessId: (each at: #processId);
-			basicProperties: (each at: #properties) ].
+		signal := self fromStonDictionary: each ].
 	^signal
+]
+
+{ #category : #'*Bloc' }
+BeaconSignal class >> fromStonDictionary: aDictionary [
+
+	^self new
+			basicTimestamp: (aDictionary at: #timestamp);
+			basicProcessId: (aDictionary at: #processId);
+			basicProperties: (aDictionary at: #properties);
+			yourself
 ]
 
 { #category : #'*Bloc' }

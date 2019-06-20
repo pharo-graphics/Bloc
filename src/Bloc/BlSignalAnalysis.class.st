@@ -48,6 +48,14 @@ BlSignalAnalysis >> cpuConsumption [
 ]
 
 { #category : #private }
+BlSignalAnalysis >> getCurrentProcessSignals [
+	"Answer the current process signals"
+
+	^self recordings select: [ :each | each class = CurrentProcessSignal ]
+
+]
+
+{ #category : #private }
 BlSignalAnalysis >> getPairs [
 	"Iterate over the records and pair the entries"
 
@@ -90,6 +98,31 @@ BlSignalAnalysis >> getSlow [
 				sorted: [ :a :b | a first < b first ]
 ]
 
+{ #category : #private }
+BlSignalAnalysis >> getSlowPulses [
+	"Select and order the pulse entries by min time (longest first)"
+
+	| signals |
+
+	signals := (self recordings select: [ :each | each class = BlPulseStatSignal ])
+		sorted: [ :a :b | a min < b min ].
+	^signals first: (30 min: signals size)
+]
+
+{ #category : #inspecting }
+BlSignalAnalysis >> gtCurrentProcessFor: aView [
+	"Display Tasks that take longer than triggerDuration"
+	<gtView>
+	^ aView columnedList
+		title: 'Current Process' translated;
+		priority: 40;
+		items: [ self getCurrentProcessSignals ];
+		column: 'Signal' translated do: [ :aColumn | 
+			aColumn 
+				item: [ :each | each asString ]; 
+				matchParent ]
+]
+
 { #category : #inspecting }
 BlSignalAnalysis >> gtRecordingsFor: aView [
 	<gtView>
@@ -120,7 +153,7 @@ BlSignalAnalysis >> gtSlowFor: aView [
 	"Display Tasks that take longer than triggerDuration"
 	<gtView>
 	^ aView columnedList
-		title: 'Slow' translated;
+		title: 'Slow Tasks' translated;
 		priority: 40;
 		items: [ self slow ];
 		column: 'Duration' translated do: [ :aColumn | 
@@ -130,6 +163,20 @@ BlSignalAnalysis >> gtSlowFor: aView [
 		column: 'Target' translated do: [ :aColumn | 
 			aColumn 
 				item: [ :each | each second target asString ]; 
+				matchParent ]
+]
+
+{ #category : #inspecting }
+BlSignalAnalysis >> gtSlowPulsesFor: aView [
+	"Display Tasks that take longer than triggerDuration"
+	<gtView>
+	^ aView columnedList
+		title: 'Pulses' translated;
+		priority: 40;
+		items: [ self getSlowPulses ];
+		column: 'Signal' translated do: [ :aColumn | 
+			aColumn 
+				item: [ :each | each asString ]; 
 				matchParent ]
 ]
 
