@@ -56,6 +56,11 @@ BlScrollableElement >> flingBy: aVelocityPoint [
 	self scrollFlinger flingBy: aVelocityPoint
 ]
 
+{ #category : #testing }
+BlScrollableElement >> hasScrolledElement [
+	^ self children isNotEmpty
+]
+
 { #category : #accessing }
 BlScrollableElement >> horizontalAlignment [
 	<return: #BlElementAlignment>
@@ -129,14 +134,14 @@ BlScrollableElement >> layoutFixGap [
 	
 	aContent := self scrolledElement.
 	
-	aGapX := (self width - aContent measuredBounds bounds right) max: 0.
+	aGapX := (self width - aContent measuredBounds right) max: 0.
 	scrollPosition x < 0
 		ifTrue: [
 			| aNewX |
 			aNewX := (scrollPosition x + aGapX) min: 0.
 			scrollPosition := aNewX @ scrollPosition y ].
 	
-	aGapY := (self height - aContent measuredBounds bounds bottom) max: 0.	
+	aGapY := (self height - aContent measuredBounds bottom) max: 0.	
 	scrollPosition y < 0
 		ifTrue: [
 			| aNewY |
@@ -150,13 +155,16 @@ BlScrollableElement >> layoutFixGap [
 BlScrollableElement >> onLayout: aBounds [
 	self scrollFlinger isIdle
 		ifFalse: [ ^ super onLayout: aBounds ].
+		
+	self hasScrolledElement
+		ifFalse: [ ^ self ].
 	
 	"first we fix a gap"	
 	self layoutFixGap.
 
 	"now clamp position"
 	self layoutClampPosition.
-	
+
 	"then we allign content if it is smaller than the scrollpane"
 	self layoutApplyAlignment.
 
@@ -170,7 +178,10 @@ BlScrollableElement >> scrollBy: aPoint [
 	<return: #Boolean>
 	| aContent dX dY |
 
-	aContent := self children first.
+	self hasScrolledElement
+		ifFalse: [ ^ false ].
+
+	aContent := self scrolledElement.
 
 	dX := aPoint x negated.
 	dY := aPoint y.

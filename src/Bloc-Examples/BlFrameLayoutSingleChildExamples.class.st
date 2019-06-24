@@ -49,6 +49,44 @@ BlFrameLayoutSingleChildExamples >> childElementMatchingParentWith50per40Percent
 	^ element
 ]
 
+{ #category : #'examples - setup' }
+BlFrameLayoutSingleChildExamples >> childElementMatchingWidthFitHeight [
+	<gtExample>
+	| element |
+	element := self childElementWithVisualProperties.
+	element constraintsDo: [ :c | 
+		c horizontal matchParent.
+		c vertical fitContent ].
+		
+	self assert: element position equals: 0@0.
+	self assert: element extent equals: 0@0.
+	self assert: element constraints horizontal resizer isMatchParent.
+	self assert: element constraints vertical resizer isFitContent.
+	self assert: element constraints frame horizontal weight equals: 1.0.
+	self assert: element constraints frame vertical weight equals: 1.0.
+	
+	^ element
+]
+
+{ #category : #'examples - setup' }
+BlFrameLayoutSingleChildExamples >> childElementMatchingWidthFitLimitedHeight [
+	<gtExample>
+	| element |
+	element := self childElementWithVisualProperties.
+	element constraintsDo: [ :c | 
+		c horizontal matchParent.
+		c vertical fitContentLimited ].
+		
+	self assert: element position equals: 0@0.
+	self assert: element extent equals: 0@0.
+	self assert: element constraints horizontal resizer isMatchParent.
+	self assert: element constraints vertical resizer isFitContent.
+	self assert: element constraints frame horizontal weight equals: 1.0.
+	self assert: element constraints frame vertical weight equals: 1.0.
+	
+	^ element
+]
+
 { #category : #'examples - alignment' }
 BlFrameLayoutSingleChildExamples >> elementDocumentationWithOneExactChildAlignBottomRightInExactParent [
 	<gtExample>
@@ -95,6 +133,130 @@ BlFrameLayoutSingleChildExamples >> elementForDocumentationWithOneChildMatchExac
 	self assert: parent extent equals: 400@300.
 	
 	^ parent
+]
+
+{ #category : #'examples - max extent' }
+BlFrameLayoutSingleChildExamples >> elementWithMaxHeightOneChildMatchExactParent [
+	<gtExample>
+	| child aParent |
+	child := self childElementMatchingParent.
+	aParent := self parentWithFrameLayoutAndFixedSize.
+	aParent constraintsDo: [ :c | c maxHeight: 200 ].
+	
+	aParent addChild: child.
+	aParent forceLayout.
+
+	self assert: child position equals: 0@0.
+	self assert: child extent equals: 400@200.
+
+	self assert: aParent position equals: 0@0.
+	self assert: aParent extent equals: 400@200.
+
+	^ aParent
+]
+
+{ #category : #'examples - max extent' }
+BlFrameLayoutSingleChildExamples >> elementWithMaxWidthOneChildMatchExactParent [
+	<gtExample>
+	| child aParent |
+	child := self childElementMatchingParent.
+	aParent := self parentWithFrameLayoutAndFixedSize.
+	aParent constraintsDo: [ :c | c maxWidth: 200 ].
+	
+	aParent addChild: child.
+	aParent forceLayout.
+
+	self assert: child position equals: 0@0.
+	self assert: child extent equals: 200@300.
+
+	self assert: aParent position equals: 0@0.
+	self assert: aParent extent equals: 200@300.
+
+	^ aParent
+]
+
+{ #category : #'examples - max extent' }
+BlFrameLayoutSingleChildExamples >> elementWithMinAndMaxHeightOneChildMatchExactParent [
+	<gtExample>
+	| child aParent |
+	child := self childElementMatchingParent.
+	aParent := self parentWithFrameLayoutAndFixedSize.
+	aParent constraintsDo: [ :c |
+		c maxHeight: 200.
+		c minHeight: 500 ]. "minHeight has a precedence over maxHeight"
+
+	aParent addChild: child.
+	aParent forceLayout.
+
+	self assert: child position equals: 0@0.
+	self assert: child extent equals: 400@500.
+
+	self assert: aParent position equals: 0@0.
+	self assert: aParent extent equals: 400@500.
+
+	^ aParent
+]
+
+{ #category : #'examples - max extent' }
+BlFrameLayoutSingleChildExamples >> elementWithMinAndMaxWidthOneChildMatchExactParent [
+	<gtExample>
+	| child aParent |
+	child := self childElementMatchingParent.
+	aParent := self parentWithFrameLayoutAndFixedSize.
+	aParent constraintsDo: [ :c |
+		c maxWidth: 200.
+		c minWidth: 500 ]. "minWidth has a precedence over maxWidth"
+	
+	aParent addChild: child.
+	aParent forceLayout.
+
+	self assert: child position equals: 0@0.
+	self assert: child extent equals: 500@300.
+
+	self assert: aParent position equals: 0@0.
+	self assert: aParent extent equals: 500@300.
+
+	^ aParent
+]
+
+{ #category : #'examples - max extent' }
+BlFrameLayoutSingleChildExamples >> elementWithMinHeightOneChildMatchExactParent [
+	<gtExample>
+	| child aParent |
+	child := self childElementMatchingParent.
+	aParent := self parentWithFrameLayoutAndFixedSize.
+	aParent constraintsDo: [ :c | c minHeight: 500 ].
+	
+	aParent addChild: child.
+	aParent forceLayout.
+
+	self assert: child position equals: 0@0.
+	self assert: child extent equals: 400@500.
+
+	self assert: aParent position equals: 0@0.
+	self assert: aParent extent equals: 400@500.
+
+	^ aParent
+]
+
+{ #category : #'examples - max extent' }
+BlFrameLayoutSingleChildExamples >> elementWithMinWidthOneChildMatchExactParent [
+	<gtExample>
+	| child aParent |
+	child := self childElementMatchingParent.
+	aParent := self parentWithFrameLayoutAndFixedSize.
+	aParent constraintsDo: [ :c | c minWidth: 500 ].
+	
+	aParent addChild: child.
+	aParent forceLayout.
+
+	self assert: child position equals: 0@0.
+	self assert: child extent equals: 500@300.
+
+	self assert: aParent position equals: 0@0.
+	self assert: aParent extent equals: 500@300.
+
+	^ aParent
 ]
 
 { #category : #'examples - matching parent' }
@@ -227,6 +389,68 @@ BlFrameLayoutSingleChildExamples >> elementWithOneChildMatchExactParentWithWeigh
 	self assert: parent position equals: 0@0.
 	self assert: parent extent equals: 400@300.
 	
+	^ parent
+]
+
+{ #category : #'examples - fit content' }
+BlFrameLayoutSingleChildExamples >> elementWithOneChildMatchWidthFitHeightParentExactWidthFitHeight [
+	<gtExample>
+	| parent child subChild |
+
+	subChild := self childElementWithVisualProperties.
+	subChild constraintsDo: [ :c |
+		c horizontal exact: 300.
+		c vertical exact: 300 ].
+
+	child := self childElementMatchingWidthFitHeight.
+	child layout: BlLinearLayout horizontal.
+	child addChild: subChild.
+
+	parent := self parentWithFrameLayoutAndFixedSize.
+	parent constraintsDo: [ :c | c vertical fitContent ].
+	parent addChild: child.
+	parent forceLayout.
+
+	self assert: subChild position equals: 0@0.
+	self assert: subChild extent equals: 300@300.
+
+	self assert: child position equals: 0@0.
+	self assert: child extent equals: 400@300.
+
+	self assert: parent position equals: 0@0.
+	self assert: parent extent equals: 400@300.
+
+	^ parent
+]
+
+{ #category : #'examples - fit content' }
+BlFrameLayoutSingleChildExamples >> elementWithOneChildMatchWidthFitLimitedHeightParentExactWidthFitHeight [
+	<gtExample>
+	| parent child subChild |
+
+	subChild := self childElementWithVisualProperties.
+	subChild constraintsDo: [ :c |
+		c horizontal exact: 500.
+		c vertical exact: 500 ].
+
+	"the child's width should be 400, while height is limited to parent's height (300)"
+	child := self childElementMatchingWidthFitLimitedHeight.
+	child layout: BlLinearLayout horizontal.
+	child addChild: subChild.
+
+	parent := self parentWithFrameLayoutAndFixedSize.
+	parent addChild: child.
+	parent forceLayout.
+
+	self assert: subChild position equals: 0@0.
+	self assert: subChild extent equals: 500@500.
+
+	self assert: child position equals: 0@0.
+	self assert: child extent equals: 400@300.
+
+	self assert: parent position equals: 0@0.
+	self assert: parent extent equals: 400@300.
+
 	^ parent
 ]
 

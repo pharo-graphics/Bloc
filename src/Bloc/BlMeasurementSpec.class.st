@@ -100,6 +100,11 @@ BlMeasurementSpec >> isUnspecified [
 	^ self mode isUnspecified
 ]
 
+{ #category : #geometry }
+BlMeasurementSpec >> min: aMinSize max: aMaxSize [
+	^ self mode size: self size min: aMinSize max: aMaxSize
+]
+
 { #category : #accessing }
 BlMeasurementSpec >> mode [
 	^ mode

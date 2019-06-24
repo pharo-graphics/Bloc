@@ -172,6 +172,20 @@ BlDirectEventDispatcher >> removeEventFilter: aFilter [
 ]
 
 { #category : #'api - adding/removing' }
+BlDirectEventDispatcher >> removeEventFiltersSuchThat: aBlock [
+	"remove all event handlers for those aBlock returns true"
+	| toBeRemoved |
+	filters
+		ifNil: [ ^ self ].
+	
+	toBeRemoved := filters removeAllSuchThat: aBlock.
+	filters isEmpty
+		ifTrue: [ filters := nil ].
+	
+	toBeRemoved do: [ :aHandler | aHandler onUninstalledIn: self owner ]
+]
+
+{ #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventHandler: anHandler [
 	(self hasHandler: anHandler)
 		ifFalse: [ ^ self ].

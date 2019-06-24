@@ -95,6 +95,22 @@ BlFrameLayout >> align: aChildElement vertical: aBlAlignment [
 	aChildElement constraintsDo: [ :c | (c at: self class) vertical alignment: aBlAlignment ]
 ]
 
+{ #category : #measure }
+BlFrameLayout >> canMeasureChildFirstPass: aChild parentSpec: anExtentSpec [
+	"Return true if we can measure a given child during the first measurement pass given that we received the provided parent extent spec, false otherwise"
+	<return: #Boolean>
+	| canMeasureWidth canMeasureHeight |
+	
+	"if parent spec is exact, we can definitely measure"
+	anExtentSpec isExact
+		ifTrue: [ ^ true ].
+
+	canMeasureWidth := anExtentSpec widthSpec isExact or: [ aChild constraints horizontal resizer isMatchParent not ].
+	canMeasureHeight := anExtentSpec heightSpec isExact or: [ aChild constraints vertical resizer isMatchParent not ].
+
+	^ canMeasureWidth and: [ canMeasureHeight ]
+]
+
 { #category : #layout }
 BlFrameLayout >> layout: anElement in: aRectangle [
 	| parentBounds |
@@ -189,15 +205,16 @@ BlFrameLayout >> measureChildren: anElement with: anExtentSpec [
 	determine an extent, otherwise add children to a collection that should be
 	measured during second pass and return it"
 	<return: #LinkedList of: #BlElement>
-	| measureMatchParentChildren matchParentChildren maxHeight maxWidth |
+	| matchParentChildren aConstrainedExtentSpec maxHeight maxWidth aMeasuredExtent aMeasuredWidth aMeasuredHeight |
 	
 	matchParentChildren := LinkedList new.
-	
-	"true if children matching parent should be measured in first pass"	
-	measureMatchParentChildren := anExtentSpec isExact.
 
 	maxWidth := 0.
 	maxHeight := 0.
+	
+	aConstrainedExtentSpec := anExtentSpec
+		min: (anElement constraints minWidth @ anElement constraints minHeight)
+		max: (anElement constraints maxWidth @ anElement constraints maxHeight).
 
 	self measureIgnored: anElement with: anExtentSpec.
 	
@@ -208,13 +225,11 @@ BlFrameLayout >> measureChildren: anElement with: anExtentSpec [
 			
 			"true if aChild should be measured NOW or false if it should happen during second measurement pass.
 			we measure children if parent is exact or if child does not match parent"
-			shouldMeasureChild := measureMatchParentChildren
-				or: [ aChild constraints horizontal resizer isMatchParent not
-					and: [ aChild constraints vertical resizer isMatchParent not ] ].
+			shouldMeasureChild := self canMeasureChildFirstPass: aChild parentSpec: aConstrainedExtentSpec.
 			shouldMeasureChild
 				"measure now"
 				ifTrue: [
-					self measureChild: aChild of: anElement with: anExtentSpec.
+					self measureChild: aChild of: anElement with: aConstrainedExtentSpec.
 					maxWidth := maxWidth max: (aChild measuredWidth + aChild outsets width).
 					maxHeight := maxHeight max: (aChild measuredHeight + aChild outsets height) ]
 				"or during second pass"
@@ -223,10 +238,14 @@ BlFrameLayout >> measureChildren: anElement with: anExtentSpec [
 	maxWidth := maxWidth + anElement insets width.
 	maxHeight := maxHeight + anElement insets height.
 
-	maxWidth := maxWidth max: anElement constraints minWidth.
-	maxHeight := maxHeight max: anElement constraints minHeight.
+	maxWidth := maxWidth min: anElement constraints maxWidth max: anElement constraints minWidth.
+	maxHeight := maxHeight min: anElement constraints maxHeight max: anElement constraints minHeight.
 	
-	anElement measuredExtent: (anExtentSpec sizeFor: maxWidth @ maxHeight).
+	aMeasuredExtent := anExtentSpec sizeFor: maxWidth @ maxHeight.
+
+	aMeasuredWidth := aMeasuredExtent x min: anElement constraints maxWidth max: anElement constraints minWidth.
+	aMeasuredHeight := aMeasuredExtent y min: anElement constraints maxHeight max: anElement constraints minHeight.
+	anElement measuredExtent: aMeasuredWidth @ aMeasuredHeight.
 	
 	^ matchParentChildren
 ]

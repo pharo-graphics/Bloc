@@ -7,16 +7,25 @@ BlTextParagraphSpan >> applySpartaMetrics: aSpMetrics [
 	aFontMetrics := aSpMetrics fontMetrics.
 	aTextMetrics := aSpMetrics textMetrics.
 
+	isVertical := aSpMetrics isVertical.
+
 	ascent := aFontMetrics maxAscent.
 	descent := aFontMetrics maxDescent.
 
 	strikethroughOffset := aFontMetrics strikeoutOffset.
 	strikethroughSize := aFontMetrics strikeoutSize.
 
-	left := aTextMetrics left.
-	top := aTextMetrics top.
-	width := aTextMetrics width.
-	height := aTextMetrics height.
+	left :=  aTextMetrics left.
+	top := isVertical
+		ifTrue: [ aTextMetrics left ]
+		ifFalse: [ aTextMetrics top ].
+	width := isVertical
+		ifTrue: [ aTextMetrics height ]
+		ifFalse: [ aTextMetrics width ].
+	height := isVertical
+		ifTrue: [ aTextMetrics width ]
+		ifFalse: [ aTextMetrics height ].
+	
 	advance := aTextMetrics advance.
 	baseline := 0@0
 ]

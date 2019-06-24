@@ -40,6 +40,11 @@ TBlTextStyleable >> foreground: aBlPaint [
 	self attributesBuilder attribute: (BlTextForegroundAttribute paint: aBlPaint)
 ]
 
+{ #category : #'api - text orientation' }
+TBlTextStyleable >> horizontal [
+	self attributesBuilder attribute: (BlTextOrientationAttribute horizontal)
+]
+
 { #category : #'api - text emphasis' }
 TBlTextStyleable >> italic [
 	self attributesBuilder attribute: BlFontEmphasisAttribute italic
@@ -81,6 +86,13 @@ TBlTextStyleable >> thin [
 ]
 
 { #category : #'api - text emphasis' }
+TBlTextStyleable >> underline [
+	"Set the default underline"
+
+	self underlineDo: [ :anAttribute | ]
+]
+
+{ #category : #'api - text emphasis' }
 TBlTextStyleable >> underlineDo: aBlock [
 	| anAttribute |
 	
@@ -96,6 +108,11 @@ TBlTextStyleable >> underlinePaint: aPaint width: aNumber [
 		anAttribute
 			paint: aPaint;
 			width: aNumber ]
+]
+
+{ #category : #'api - text orientation' }
+TBlTextStyleable >> vertical [
+	self attributesBuilder attribute: (BlTextOrientationAttribute vertical)
 ]
 
 { #category : #'api - text weight' }

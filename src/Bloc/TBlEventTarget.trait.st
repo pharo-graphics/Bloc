@@ -104,6 +104,11 @@ TBlEventTarget >> removeEventFilter: anEventHandler [
 ]
 
 { #category : #'event management' }
+TBlEventTarget >> removeEventFiltersSuchThat: aBlock [
+	self eventDispatcher removeEventFiltersSuchThat: aBlock
+]
+
+{ #category : #'event management' }
 TBlEventTarget >> removeEventHandler: anEventHandler [
 	self eventDispatcher removeEventHandler: anEventHandler
 ]
