@@ -2,5 +2,5 @@ Extension { #name : #BlClipOutGeometryEffect }
 
 { #category : #'*Bloc-Sparta' }
 BlClipOutGeometryEffect >> clipOutPathFor: anElement [
-	^ geometry
+	^ geometry pathOnSpartaCanvas: Bloc preferableSpartaCanvas offscreen
 ]
