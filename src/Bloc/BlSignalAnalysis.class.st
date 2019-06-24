@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'logger',
-		'records',
 		'pairs',
 		'unfinished',
 		'slow',
@@ -11,6 +10,13 @@ Class {
 	],
 	#category : #'Bloc-Space-Support'
 }
+
+{ #category : #'instance creation' }
+BlSignalAnalysis class >> gtInspectCircularMemory [
+	"Open an inspector on an instance of the receiver analysing the default CircularMemoryLogger"
+
+	^GtInspector openOn: (self logger: CircularMemoryLogger instance)
+]
 
 { #category : #'instance creation' }
 BlSignalAnalysis class >> gtInspectFile: aFileReference [
@@ -68,10 +74,11 @@ BlSignalAnalysis >> getPairs [
 		-  Can't have two starts in a row
 		-  end time should be after start time"
 		self taskRecordings do: [ :each |
-			each action = #start ifTrue: [ 
+			(#(start startValue startWithArg) includes: each action) ifTrue: [ 
 				self assert: (cache includesKey: each target) not.
 				cache at: each target put: each -> nil ]
 			ifFalse: [ "#end" | association |
+				self assert: (#(end doneValue doneWithArg) includes: each action).
 				"Ignore stray #ends, if this was a circular memory logger the #start may be missing"
 				association := cache removeKey: each target ifAbsent: [].
 				association ifNotNil: [ 
@@ -269,6 +276,21 @@ BlSignalAnalysis >> pairs [
 ]
 
 { #category : #accessing }
+BlSignalAnalysis >> processBag [
+	"Answer a bag representing each time a process was sampled by CurrentProcessSignal.
+	Signals where the preempted and nextReady processes are the same are only counted once."
+
+	| processBag |
+
+	processBag := Bag new.
+	self getCurrentProcessSignals do: [ :each |
+		processBag add: each preemptedName.
+		each preemptedName ~= each nextReadyName ifTrue: 
+			[ processBag add: each nextReadyName ] ].
+	^processBag
+]
+
+{ #category : #accessing }
 BlSignalAnalysis >> pulseStatRecordings [
 	"Answer the BlPulseStatSignal entries"
 
@@ -311,17 +333,21 @@ BlSignalAnalysis >> summaryOn: aStream [
 		print: self minPulseWaitTime; cr;
 		<< 'Max wait time: ';
 		print: self maxPulseWaitTime; cr;
-		<< 'L2 entry count: ';
+		<< 'L2 sum: ';
 		print: self l2EntryCount; cr;
 		cr; cr.
 
-
+	"Task Summary"
 	aStream 
 		<< 'Number of slow tasks: ';
 		print: self slow size; cr;
 		<< 'Number of unfinished tasks: ';
 		print: self unfinished size; cr;
 		cr; cr.
+
+	"Process Summary"
+	self top5ProcessesOn: aStream.
+	aStream cr; cr.
 ]
 
 { #category : #accessing }
@@ -341,7 +367,25 @@ BlSignalAnalysis >> taskRecordings [
 BlSignalAnalysis >> taskSignals [
 	"Answer the signals that log tasks start and stop"
 
-	^BlSpaceRenderSignal, BlTaskExecutionSignal 
+	^BlSpaceRenderSignal, BlTaskExecutionSignal, BlTaskItSignal 
+]
+
+{ #category : #private }
+BlSignalAnalysis >> top5ProcessesOn: aStream [
+	"Print the top 5 sample processes on aStream"
+
+	| processCount top5 |
+
+	processCount := self processBag sortedCounts.
+	top5 := processCount first: (processCount size min: 5).
+	aStream << 'Top 5 processes:'; cr.
+	top5 do: [ :each |
+		aStream
+			<< '- ';
+			print: each value;
+			<< ': ';
+			print: each key;
+			cr ].
 ]
 
 { #category : #accessing }
