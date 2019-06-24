@@ -73,6 +73,12 @@ BlTaskItSignal class >> fromSton: stonReader [
 	^signal
 ]
 
+{ #category : #accessing }
+BlTaskItSignal >> action [
+
+	^message
+]
+
 { #category : #'ston persistence' }
 BlTaskItSignal >> asStonDictionary [
 
@@ -117,6 +123,12 @@ BlTaskItSignal >> printOneLineContentsOn: stream [
 		stream
 			print: valuable ]
 	
+]
+
+{ #category : #accessing }
+BlTaskItSignal >> target [
+
+	^valuable
 ]
 
 { #category : #accessing }

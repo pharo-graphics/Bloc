@@ -50,7 +50,7 @@ MemoryLogger >> saveStonFile: aFileReference [
 	| stream |
 
 	stream := (ZnCharacterWriteStream 
-		on: (GZipWriteStream on: aFileReference asFileReference binaryWriteStream)
+		on: (GZipWriteStream on: aFileReference asFileReference nextVersion binaryWriteStream)
 		encoding: 'utf8').
 	[ STON put: self onStreamPretty: stream ]
 		ensure: [ stream close ].

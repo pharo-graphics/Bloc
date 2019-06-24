@@ -15,7 +15,8 @@ ${example:BlScrollableElementExamples>>#scrollableElementWithContent|previewShow
 We quickly notice that the ==scrollable== element does not have nice dimensions. We can fix it by asking the ==scrollable== element to match it's parent.
 ${example:BlScrollableElementExamples>>#scrollableMatchParent|previewShow=#gtLiveFor:|previewHeight=300|previewExpanded}$
 
-While being the most common use case, match parent is not the only resizing strategy supported by a ==scrollable element==
+While being the most common use case, match parent is not the only resizing strategy supported by a ==scrollable element==. Together with ==maxHeight:== constraint a scrollable element can be used with ==fit content==, which means that a scrollable element will grow in size to accommodate the scrolled element until reaching the limit set using `maxHeight:` or `maxWidth:`
+${example:BlScrollableElementExamples>>#scrollableFitContentWithMaxHeight|previewShow=#gtLiveFor:|previewHeight=400|previewExpanded}$
 "
 Class {
 	#name : #BlScrollableElementExamples,
