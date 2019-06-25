@@ -20,8 +20,3 @@ BrStencilExecutor >> push: anArgumentObject [
 BrStencilExecutor >> resetArguments [
 	self subclassResponsibility
 ]
-
-{ #category : #accessing }
-BrStencilExecutor >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]

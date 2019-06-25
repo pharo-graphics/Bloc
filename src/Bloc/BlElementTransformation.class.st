@@ -123,11 +123,6 @@ BlElementTransformation >> postCopy [
 	matrix := matrix copy
 ]
 
-{ #category : #accessing }
-BlElementTransformation >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #bounds }
 BlElementTransformation >> transformBounds: aBounds [
 	"In-place transform given BlBounds according to my transformation.

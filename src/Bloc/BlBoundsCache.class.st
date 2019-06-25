@@ -85,11 +85,6 @@ BlBoundsCache >> owner: anElement [
 ]
 
 { #category : #accessing }
-BlBoundsCache >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
-{ #category : #accessing }
 BlBoundsCache >> transformedBounds [
 	^ transformedBounds ifNil: [
 		transformedBounds := (self owner transformedBounds: BlBounds new) asRectangle ]

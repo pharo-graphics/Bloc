@@ -188,11 +188,6 @@ BlBorder >> paint: aBlPaint [
 ]
 
 { #category : #accessing }
-BlBorder >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
-{ #category : #accessing }
 BlBorder >> style [
 	<return: #BlStrokeStyle>
 

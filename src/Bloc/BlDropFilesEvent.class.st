@@ -3,8 +3,3 @@ Class {
 	#superclass : #Object,
 	#category : #'Bloc-Events'
 }
-
-{ #category : #accessing }
-BlDropFilesEvent >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]

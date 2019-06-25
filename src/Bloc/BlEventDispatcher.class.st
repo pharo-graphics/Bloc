@@ -28,11 +28,6 @@ BlEventDispatcher >> handlersDo: aBlock [
 	"Evaulate a given block with every event handler as an argument"
 ]
 
-{ #category : #accessing }
-BlEventDispatcher >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #'api - accessing' }
 BlEventDispatcher >> type [
 	"Return the type name of the dispatcher. Might be used by IDE extensions"

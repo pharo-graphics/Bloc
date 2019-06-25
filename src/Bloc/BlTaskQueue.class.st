@@ -95,11 +95,6 @@ BlTaskQueue >> run [
 		BlTaskExecutionSignal for: aTask block: [ aTask run ] ]
 ]
 
-{ #category : #accessing }
-BlTaskQueue >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #'api - accessing' }
 BlTaskQueue >> tasks [
 	"Return a new collection instance holding all my tasks"

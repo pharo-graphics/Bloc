@@ -93,11 +93,6 @@ BlErrorHandler >> registerError: aHandledError [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
-BlErrorHandler >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #enumerating }
 BlErrorHandler >> with: anElement do: aBlock [
 	"Evaluate a given block while handling errors"

@@ -103,11 +103,6 @@ BlRay >> projection: aPoint [
 	^ self point + (((aPoint - self point) asBlocVector dotProduct: aNormalizedDirection) * aNormalizedDirection)
 ]
 
-{ #category : #accessing }
-BlRay >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #'api - accessing' }
 BlRay >> vector [
 	<return: #BlVector>

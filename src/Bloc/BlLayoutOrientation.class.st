@@ -46,8 +46,3 @@ BlLayoutOrientation >> isVertical [
 BlLayoutOrientation >> of: anObject [
 	^ self subclassResponsibility
 ]
-
-{ #category : #accessing }
-BlLayoutOrientation >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]

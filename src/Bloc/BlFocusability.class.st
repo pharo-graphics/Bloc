@@ -53,8 +53,3 @@ BlFocusability >> focusables: anOrderedCollection along: aBlFocusSearchDirection
 BlFocusability >> hash [
 	^ self class hash
 ]
-
-{ #category : #accessing }
-BlFocusability >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]

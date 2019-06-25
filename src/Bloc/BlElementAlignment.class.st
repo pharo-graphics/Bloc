@@ -123,11 +123,6 @@ BlElementAlignment >> initialize [
 	
 ]
 
-{ #category : #accessing }
-BlElementAlignment >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #translation }
 BlElementAlignment >> translationOf: aBounds in: aContainerBounds [
 	^ self subclassResponsibility

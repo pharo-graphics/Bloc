@@ -21,8 +21,3 @@ BlEventHandlerAnnouncementDeliveryCondition >> eventHandler: anObject [
 BlEventHandlerAnnouncementDeliveryCondition >> handlesAnnouncement: anEvent [
 	^ self eventHandler wantsEvent: anEvent
 ]
-
-{ #category : #accessing }
-BlEventHandlerAnnouncementDeliveryCondition >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]

@@ -68,11 +68,6 @@ BlMiscProperties >> label: aString [
 ]
 
 { #category : #accessing }
-BlMiscProperties >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
-{ #category : #accessing }
 BlMiscProperties >> userData [
 	^userData
 ]

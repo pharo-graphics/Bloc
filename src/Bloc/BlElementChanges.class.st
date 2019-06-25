@@ -74,8 +74,3 @@ BlElementChanges >> positionChange: anOldPosition to: aNewPosition [
 
 	positionChange old: anOldPosition new: aNewPosition
 ]
-
-{ #category : #accessing }
-BlElementChanges >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
