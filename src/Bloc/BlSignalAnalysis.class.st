@@ -32,6 +32,17 @@ BlSignalAnalysis class >> gtInspectLogger: aSignalLogger [
 	^GtInspector openOn: (self logger: aSignalLogger)
 ]
 
+{ #category : #convenience }
+BlSignalAnalysis class >> inspectFileContents: aFileReference [
+	"Convenience method for debugging the logger itself - 
+	inspect the contents of the supplied file, which is assumed to be a GZip encoded text file"
+
+	GtInspector openOn: (aFileReference asFileReference binaryReadStreamDo: [ :bstream |
+		(ZnCharacterReadStream 
+			on: (GZipReadStream on: bstream)
+			encoding: 'utf8') upToEnd ])
+]
+
 { #category : #accessing }
 BlSignalAnalysis class >> logger: aSignalLogger [
 
@@ -51,6 +62,15 @@ BlSignalAnalysis >> cpuConsumption [
 		consumedTime := consumedTime + (each value timestamp - each key timestamp) ].
 	percentage := (consumedTime / totalTime) asFloat.
 	^{ totalTime. consumedTime. percentage. }
+]
+
+{ #category : #acccessing }
+BlSignalAnalysis >> getBlocMainLoopSignals [
+	"Answer the Bloc Main Loop signals"
+
+	^self getCurrentProcessSignals select: [ :each | each preemptedName = 'Bloc Main Loop'
+		or: [ each nextReadyName = 'Bloc Main Loop' ] ]
+
 ]
 
 { #category : #private }
