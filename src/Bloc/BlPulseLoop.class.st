@@ -155,10 +155,16 @@ BlPulseLoop >> timeIsUp [
 
 { #category : #period }
 BlPulseLoop >> wait [
-	| milliSecs |
+	| milliSecs forceDelay maxWait |
+
 	milliSecs := (self pulsePeriod - (DateAndTime now - pulseStartTime)).
-	BlPulseStatSignal duration: milliSecs.
-	milliSecs := milliSecs min: self pulsePeriod max: 0 milliSeconds.
+	"Ensure that background processes get some execution time"
+	forceDelay := Processor nextReadyProcess priority > 10.
+	maxWait := forceDelay
+			ifTrue: [ self pulsePeriod // 2 ]
+			ifFalse: [ 0 milliSeconds ].
+	BlPulseStatSignal duration: milliSecs delayForced: forceDelay.
+	milliSecs := milliSecs min: self pulsePeriod max: maxWait.
 	milliSecs isZero ifFalse: [ milliSecs wait ].
 
 	lastElpasedTime := DateAndTime now

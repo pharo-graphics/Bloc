@@ -65,6 +65,27 @@ BlSignalAnalysis >> cpuConsumption [
 ]
 
 { #category : #acccessing }
+BlSignalAnalysis >> forcedDelayCount [
+
+	^self pulseStatRecordings inject: 0 into: 
+		[ :s :v | s + v lowPriorityDelayCount ]
+]
+
+{ #category : #acccessing }
+BlSignalAnalysis >> forcedDelayPercent [
+	"Answer the maximum percentage time lost due to forced delays.
+	The actual time lost will be something less since there was some work done during this time.
+	Currently assumes an 8ms delay."
+
+	| forcedDelayTime signalTimes elapsedTime |
+
+	forcedDelayTime := self forcedDelayCount * 8.
+	signalTimes := self pulseStatRecordings collect: [ :each | each timestamp ].
+	elapsedTime := (signalTimes last - signalTimes first) asMilliSeconds.
+	^(100.0 * forcedDelayTime / elapsedTime) rounded
+]
+
+{ #category : #acccessing }
 BlSignalAnalysis >> getBlocMainLoopSignals [
 	"Answer the Bloc Main Loop signals"
 
@@ -355,6 +376,11 @@ BlSignalAnalysis >> summaryOn: aStream [
 		print: self maxPulseWaitTime; cr;
 		<< 'L2 sum: ';
 		print: self l2EntryCount; cr;
+		<< 'Forced delays: ';
+		print: self forcedDelayCount;
+		<< ' (';
+		print: self forcedDelayPercent;
+		<< '%)'; cr;
 		cr; cr.
 
 	"Task Summary"
