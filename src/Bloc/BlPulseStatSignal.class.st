@@ -1,3 +1,25 @@
+"
+BlPulseStatSignal records some basic statistics about the Bloc main loop and is emitted each time a pulse is fired.  See ${class:name=BlPulseLoop} for more details and ${method:name=BlPulseLoop>>#wait} for a description of milliSecs.
+
+sampleCount is the number of pulses fired.
+
+l2 is the number of times milliSecs <= 2.
+
+min is the minimum value of millliSecs in the sample set.
+
+max is the maximum value of milliSecs in the sample set.
+
+
+!!Internal Representation and Key Implementation Points.
+
+!!!Instance Variables
+	l2:						<Integer>
+	lowPriorityDelayCount:		<Integer>
+	max:					<Integer>
+	min:		<Integer>
+	sampleCount:		<Integer>
+
+"
 Class {
 	#name : #BlPulseStatSignal,
 	#superclass : #BeaconSignal,
