@@ -15,11 +15,6 @@ BlLinearLayoutVerticalOrientation >> breadthProperties: anElement [
 ]
 
 { #category : #orientation }
-BlLinearLayoutVerticalOrientation >> breadthSpec [
-	^ self layout cache widthMeasureSpec
-]
-
-{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> breadthSpec: anExtentSpec [
 	^ anExtentSpec widthSpec
 ]
@@ -111,11 +106,6 @@ BlLinearLayoutVerticalOrientation >> lengthMode [
 { #category : #orientation }
 BlLinearLayoutVerticalOrientation >> lengthProperties: aChildElement [
 	^ aChildElement constraints vertical
-]
-
-{ #category : #orientation }
-BlLinearLayoutVerticalOrientation >> lengthSpec [
-	^ self layout cache heightMeasureSpec
 ]
 
 { #category : #orientation }
