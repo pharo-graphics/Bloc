@@ -23,11 +23,6 @@ BlTask >> run [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
-BlTask >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #'api - running' }
 BlTask >> value [
 	"To support defer:"

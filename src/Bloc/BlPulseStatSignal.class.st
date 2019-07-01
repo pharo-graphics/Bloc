@@ -1,30 +1,52 @@
+"
+BlPulseStatSignal records some basic statistics about the Bloc main loop and is emitted each time a pulse is fired.  See ${class:name=BlPulseLoop} for more details and ${method:name=BlPulseLoop>>#wait} for a description of milliSecs.
+
+sampleCount is the number of pulses fired.
+
+l2 is the number of times milliSecs <= 2.
+
+min is the minimum value of millliSecs in the sample set.
+
+max is the maximum value of milliSecs in the sample set.
+
+
+!!Internal Representation and Key Implementation Points.
+
+!!!Instance Variables
+	l2:						<Integer>
+	lowPriorityDelayCount:		<Integer>
+	max:					<Integer>
+	min:		<Integer>
+	sampleCount:		<Integer>
+
+"
 Class {
 	#name : #BlPulseStatSignal,
 	#superclass : #BeaconSignal,
 	#instVars : [
 		'l2',
 		'min',
-		'max'
+		'max',
+		'lowPriorityDelayCount',
+		'sampleCount'
 	],
 	#classVars : [
-		'Index',
-		'Times'
+		'CurrentSignal'
 	],
 	#category : #'Bloc-Universe'
 }
 
 { #category : #accessing }
-BlPulseStatSignal class >> duration: aDuration [
+BlPulseStatSignal class >> duration: aDuration delayForced: aBoolean [
 
-	Times at: Index put: aDuration asMilliSeconds.
-	Index := Index + 1.
-	Index <= self sampleCount ifTrue: [ ^self ].
-	self new 
-		l2: (Times inject: 0 into: [ :s :v | s + (v <= 2 ifTrue: [1] ifFalse: [0]) ]);
-		min: Times min;
-		max: Times max;
-		emit.
-	Index := 1.
+	| currentSignal |
+	
+	currentSignal := CurrentSignal ifNil: [ CurrentSignal := self new ].
+	currentSignal addSampleDuration: aDuration delayForced: aBoolean.
+	currentSignal sampleCount < self sampleCount ifTrue: [ ^self ].
+	currentSignal emit.
+	CurrentSignal := nil.
+
 ]
 
 { #category : #'instance creation' }
@@ -45,18 +67,24 @@ BlPulseStatSignal class >> fromSton: stonReader [
 	^signal
 ]
 
-{ #category : #'class initialization' }
-BlPulseStatSignal class >> initialize [ 
-
-	Times := Array new: self sampleCount.
-	Index := 1.
-]
-
 { #category : #accessing }
 BlPulseStatSignal class >> sampleCount [
 	"Answer the number of pulse loops that are summarised in each entry"
 
 	^60
+]
+
+{ #category : #accessing }
+BlPulseStatSignal >> addSampleDuration: aDuraction delayForced: aBoolean [
+
+	| milliSeconds |
+
+	milliSeconds := aDuraction asMilliSeconds.
+	sampleCount := sampleCount + 1.
+	milliSeconds <= 2 ifTrue: [ l2 := l2 + 1 ].
+	min := min min: milliSeconds.
+	max := max max: milliSeconds.
+	aBoolean ifTrue: [ lowPriorityDelayCount := lowPriorityDelayCount + 1 ].
 ]
 
 { #category : #'ston persistence' }
@@ -69,6 +97,17 @@ BlPulseStatSignal >> asStonDictionary [
 		yourself.
 ]
 
+{ #category : #initialization }
+BlPulseStatSignal >> initialize [ 
+
+	super initialize.
+	l2 := 0.
+	min := SmallInteger maxVal.
+	max := SmallInteger minVal.
+	lowPriorityDelayCount := 0.
+	sampleCount := 0.
+]
+
 { #category : #accessing }
 BlPulseStatSignal >> l2 [
 	^ l2
@@ -77,6 +116,16 @@ BlPulseStatSignal >> l2 [
 { #category : #accessing }
 BlPulseStatSignal >> l2: anObject [
 	l2 := anObject
+]
+
+{ #category : #accessing }
+BlPulseStatSignal >> lowPriorityDelayCount [
+	^ lowPriorityDelayCount
+]
+
+{ #category : #accessing }
+BlPulseStatSignal >> lowPriorityDelayCount: anObject [
+	lowPriorityDelayCount := anObject
 ]
 
 { #category : #accessing }
@@ -108,5 +157,19 @@ BlPulseStatSignal >> printOneLineContentsOn: stream [
 		<< ', min: ';
 		print: min;
 		<< ', max: ';
-		print: max.
+		print: max;
+		<< ', forced: ';
+		print: lowPriorityDelayCount;
+		<< ', count: ';
+		print: sampleCount.
+]
+
+{ #category : #accessing }
+BlPulseStatSignal >> sampleCount [
+	^ sampleCount
+]
+
+{ #category : #accessing }
+BlPulseStatSignal >> sampleCount: anObject [
+	sampleCount := anObject
 ]

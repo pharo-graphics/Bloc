@@ -2,7 +2,8 @@
 I am the Bloc main loop.
 I indicate to the Universe that is time to synchronize the state of the elements. 
 
-A pulse is fired all the 16ms to obtain 60 frames per second (fps) maximum.
+A pulse is fired every 16ms (if possible) to obtain 60 frames per second (fps) maximum.  This may be delayed if there are background processes wanting to run (to ensure that background calculation of UI elements can complete).  See ${method:name=BlPulseLoop>>#wait} for details of how the loop time is regulated.
+
 The opened spaces listen the pulse to be synchronized and to update their state when it is needed.
 "
 Class {
@@ -155,10 +156,22 @@ BlPulseLoop >> timeIsUp [
 
 { #category : #period }
 BlPulseLoop >> wait [
-	| milliSecs |
+	"Wait the appropriate amount of time for the next pulse"
+
+	| milliSecs forceDelay maxWait |
+
+	"milliSecs is the amount of time to wait for the next pulse.
+	Since a pulse can take longer than #pulsePeriod (16ms) milliSecs may be negative here
+	(meaning that we shouldn't wait for the next pulse)"
 	milliSecs := (self pulsePeriod - (DateAndTime now - pulseStartTime)).
-	BlPulseStatSignal duration: milliSecs.
-	milliSecs := milliSecs min: self pulsePeriod max: 0 milliSeconds.
+	"But also ensure that background processes get some execution time.
+	If the nextReadyProcess has a priority of 10 it is the idle process and we don't need to wait"
+	forceDelay := Processor nextReadyProcess priority > 10.
+	maxWait := forceDelay
+			ifTrue: [ self pulsePeriod // 2 ]
+			ifFalse: [ 0 milliSeconds ].
+	BlPulseStatSignal duration: milliSecs delayForced: forceDelay.
+	milliSecs := milliSecs min: self pulsePeriod max: maxWait.
 	milliSecs isZero ifFalse: [ milliSecs wait ].
 
 	lastElpasedTime := DateAndTime now

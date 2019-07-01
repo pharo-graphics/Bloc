@@ -40,6 +40,13 @@ BlVariableSizeWorkerPool class >> initialize [
 
 ]
 
+{ #category : #testing }
+BlVariableSizeWorkerPool class >> isFree [
+	"Answer a boolean indicating whether all of the receiver's worker pools are free (not busy)"
+
+	^workerPools allSatisfy: [ :each | each isFree ]
+]
+
 { #category : #scheduling }
 BlVariableSizeWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
@@ -78,4 +85,10 @@ BlVariableSizeWorkerPool class >> withPoolSize: maxPoolSize [
 BlVariableSizeWorkerPool class >> workerPools [
 
 	^workerPools
+]
+
+{ #category : #testing }
+BlVariableSizeWorkerPool >> isFree [
+
+	^ taskQueue isEmpty and: [ workers allSatisfy: [ :each | each isFree ] ]
 ]

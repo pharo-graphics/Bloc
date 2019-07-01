@@ -74,11 +74,6 @@ BlVisibility >> isVisible [
 	^ false
 ]
 
-{ #category : #accessing }
-BlVisibility >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #testing }
 BlVisibility >> shouldDraw [
 	^ self isVisible

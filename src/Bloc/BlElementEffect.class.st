@@ -63,8 +63,3 @@ BlElementEffect >> postCopy [
 	super postCopy.
 	input := nil
 ]
-
-{ #category : #accessing }
-BlElementEffect >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]

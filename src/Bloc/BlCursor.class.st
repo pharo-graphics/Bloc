@@ -73,8 +73,3 @@ BlCursor >> activateOn: aSpace [
 BlCursor >> deactivateOn: aSpace [
 	
 ]
-
-{ #category : #accessing }
-BlCursor >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]

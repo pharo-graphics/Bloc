@@ -18,11 +18,6 @@ BlBasicEventHandler >> onInstalledIn: anObject [
 BlBasicEventHandler >> onUninstalledIn: anObject [
 ]
 
-{ #category : #accessing }
-BlBasicEventHandler >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #'api - event managing' }
 BlBasicEventHandler >> wantsEvent: anEvent [
 	^ true

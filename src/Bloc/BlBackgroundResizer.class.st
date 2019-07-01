@@ -28,8 +28,3 @@ BlBackgroundResizer class >> match [
 
 	^ BlBackgroundMatchResizer uniqueInstance
 ]
-
-{ #category : #accessing }
-BlBackgroundResizer >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]

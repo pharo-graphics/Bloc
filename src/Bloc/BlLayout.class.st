@@ -397,11 +397,6 @@ BlLayout >> rightToLeft [
 	direction := BlLayoutDirection rightToLeft
 ]
 
-{ #category : #accessing }
-BlLayout >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #protected }
 BlLayout >> waitingLayout [
 	"Return true if my owner element is still waiting for the start of layout pass, false otherwise"

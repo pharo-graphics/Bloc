@@ -47,11 +47,6 @@ BlLayoutConstraints >> initialize [
 ]
 
 { #category : #accessing }
-BlLayoutConstraints >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
-{ #category : #accessing }
 BlLayoutConstraints >> vertical [
 	"Return vertical-axis specific constraints.
 	vertical constraints can not be nil"

@@ -47,11 +47,6 @@ BlLayoutDirection >> of: anObject [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-BlLayoutDirection >> seamlessDefaultTransferStrategy [ 
-	^SeamlessTransferStrategy defaultByValue
-]
-
 { #category : #enumerating }
 BlLayoutDirection >> with: aCollection do: aBlock [
 	^ self subclassResponsibility
