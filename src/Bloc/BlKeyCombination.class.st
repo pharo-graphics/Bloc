@@ -73,6 +73,16 @@ BlKeyCombination class >> primaryA [
 ]
 
 { #category : #'instance creation' }
+BlKeyCombination class >> primaryArrowLeft [
+	^ self builder primary arrowLeft build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryArrowRight [
+	^ self builder primary arrowRight build
+]
+
+{ #category : #'instance creation' }
 BlKeyCombination class >> primaryB [
 	"primary (Command/Control) + B"
 	<return: #BlKeyCombination>
@@ -118,6 +128,14 @@ BlKeyCombination class >> primaryG [
 	<return: #BlKeyCombination>
 
 	^ self builder primary g build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryI [
+	"primary (Command/Control) + I"
+	<return: #BlKeyCombination>
+
+	^ self builder primary i build
 ]
 
 { #category : #'instance creation' }
@@ -190,6 +208,14 @@ BlKeyCombination class >> primaryV [
 	<return: #BlKeyCombination>
 
 	^ self builder primary v build
+]
+
+{ #category : #'instance creation' }
+BlKeyCombination class >> primaryW [
+	"primary (Command/Control) + W"
+	<return: #BlKeyCombination>
+
+	^ self builder primary w build
 ]
 
 { #category : #'instance creation' }
