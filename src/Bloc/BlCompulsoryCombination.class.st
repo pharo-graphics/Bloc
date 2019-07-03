@@ -87,12 +87,12 @@ BlCompulsoryCombination >> match: aKeyboardBuffer [
 
 { #category : #'key matching' }
 BlCompulsoryCombination >> matches: aKeyboardBuffer [
+	"Please note, I must be in DNF form!"
 	<return: #Boolean>
 	
 	^ self combinations
 		ifEmpty: [ false ]
-		ifNotEmpty: [ :theCombinations |
-			theCombinations allSatisfy: [ :aCombination | aCombination matches: aKeyboardBuffer ] ]
+		ifNotEmpty: [ :theCombinations | aKeyboardBuffer hasExactlyAll: (theCombinations collect: #key) ]
 ]
 
 { #category : #printing }

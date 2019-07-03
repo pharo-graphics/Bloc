@@ -96,7 +96,7 @@ BlSingleKeyCombination >> match: aKeyboardBuffer [
 BlSingleKeyCombination >> matches: aKeyboardBuffer [
 	<return: #Boolean>
 
-	^ aKeyboardBuffer isPressed: self key
+	^ aKeyboardBuffer hasExactlyAll: { self key }
 ]
 
 { #category : #printing }
