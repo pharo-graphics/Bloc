@@ -124,8 +124,15 @@ TBlEventTarget >> removeShortcut: aShortcut [
 ]
 
 { #category : #'shortcut management' }
+TBlEventTarget >> removeShortcutsWithCombination: aBlKeyCombination [
+	self shortcuts removeAllWithCombination: aBlKeyCombination
+]
+
+{ #category : #'shortcut management' }
 TBlEventTarget >> shortcuts [
-	^ self eventDispatcher shortcutHandler shortcuts
+	<return: #BlShortcutRegistry>
+
+	^ self eventDispatcher shortcutHandler shortcutRegistry
 ]
 
 { #category : #'event management' }

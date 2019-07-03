@@ -717,7 +717,8 @@ BlSpace >> initialize [
 
 	self updateCursorImage: Cursor normal.
 
-	self root space: self
+	self root space: self.
+	self withHalos
 ]
 
 { #category : #'focus managing' }

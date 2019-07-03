@@ -53,6 +53,16 @@ BlShortcutHandler >> initialize [
 ]
 
 { #category : #accessing }
+BlShortcutHandler >> removeAllWithCombination: aBlKeyCombination [
+	self shortcutRegistry removeAllWithCombination: aBlKeyCombination
+]
+
+{ #category : #accessing }
+BlShortcutHandler >> removeShortcut: aBlShortcut [
+	self shortcutRegistry add: aBlShortcut
+]
+
+{ #category : #accessing }
 BlShortcutHandler >> shortcutRegistry [
 	^ shortcutRegistry 
 ]
