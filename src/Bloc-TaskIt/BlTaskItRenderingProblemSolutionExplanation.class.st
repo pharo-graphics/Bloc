@@ -27,7 +27,7 @@ There are a number of tools that have been developed along the way to help ident
 
 "
 Class {
-	#name : #BlTaskItRenderingProblemSolutionExplained,
+	#name : #BlTaskItRenderingProblemSolutionExplanation,
 	#superclass : #Object,
 	#category : #'Bloc-TaskIt-Examples'
 }
