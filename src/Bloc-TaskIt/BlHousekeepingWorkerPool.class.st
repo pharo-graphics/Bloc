@@ -1,10 +1,9 @@
 "
-BlHousekeepingWorkerPool is a TKTCommonQueueWorkerPool that runs the workers at userBackgroundPriority and limits the number of concurrent tasks so that the UI thread is still responsive.
-
+${class:BlHousekeepingWorkerPool}$ is a ${class:TKTCommonQueueWorkerPool}$ that runs the workers at ${method:ProcessorScheduler>>#userBackgroundPriority}$ and limits the number of concurrent tasks so that the UI thread is still responsive.
 
 Public API and Key Messages
 
-The public API and key messages are the same as for TKTCommonWorkerPool.
+The public API and key messages are the same as for ${class:TKTCommonQueueWorkerPool}$.
 
 "
 Class {

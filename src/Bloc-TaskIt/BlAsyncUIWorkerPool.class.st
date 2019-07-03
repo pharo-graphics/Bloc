@@ -1,12 +1,12 @@
 "
-BlAsyncUIWorkerPool is a TKTCommonQueueWorkerPool that:
+${class:BlAsyncUIWorkerPool}$ is a ${class:TKTCommonQueueWorkerPool}$ that:
 
-- uses a WaitfreePriorityQueue so that tasks are executed by task priority (rather than FIFO).
-- runs the workers at low priority so that the UI thread is still responsive (see BlTKTBackgroundProcessProvider>>createProcessDoing:named:)
+- uses a ${class:AtomicSharedPriorityQueue}$ so that tasks are executed by task priority (rather than FIFO).
+- runs the workers at low priority so that the UI thread is still responsive (see ${method:BlTKTBackgroundProcessProvider>>#createProcessDoing:named:}$)
 
 Public API and Key Messages
 
-The public API and key messages are the same as for TKTCommonWorkerPool.
+The public API and key messages are the same as for ${class:TKTCommonQueueWorkerPool}$.
 
 "
 Class {
