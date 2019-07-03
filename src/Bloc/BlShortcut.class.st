@@ -92,7 +92,10 @@ BlShortcut >> match: anEventBuffer [
 
 { #category : #'key matching' }
 BlShortcut >> matches: anKeyboardBuffer [
-	^ self combination matches: anKeyboardBuffer
+	| aCombinationInDNF |
+
+	aCombinationInDNF := self combination accept: BlKeyCombinationConverterDNF new.
+	^ aCombinationInDNF matches: anKeyboardBuffer
 ]
 
 { #category : #accessing }

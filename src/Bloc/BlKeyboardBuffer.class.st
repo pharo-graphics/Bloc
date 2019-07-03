@@ -39,6 +39,14 @@ BlKeyboardBuffer >> hasEvent: aKey [
 	^ events includesKey: aKey
 ]
 
+{ #category : #testing }
+BlKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
+	"Return true if the buffer has exactly a collection of given keys"
+	<return: #Boolean>
+	
+	^ events keys asSet = aCollectionOfKeys asSet
+]
+
 { #category : #initialization }
 BlKeyboardBuffer >> initialize [
 	super initialize.

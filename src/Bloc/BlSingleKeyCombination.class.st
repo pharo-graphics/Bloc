@@ -41,9 +41,27 @@ BlSingleKeyCombination class >> key: aKey [
 	^ self new key: aKey
 ]
 
+{ #category : #comparing }
+BlSingleKeyCombination >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ key = anObject key
+]
+
 { #category : #visiting }
 BlSingleKeyCombination >> accept: aKeyCombinationVisitor [
 	^ aKeyCombinationVisitor visitKey: self
+]
+
+{ #category : #comparing }
+BlSingleKeyCombination >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ key hash
 ]
 
 { #category : #'key matching' }
@@ -78,7 +96,7 @@ BlSingleKeyCombination >> match: aKeyboardBuffer [
 BlSingleKeyCombination >> matches: aKeyboardBuffer [
 	<return: #Boolean>
 
-	^ aKeyboardBuffer isPressed: self key
+	^ aKeyboardBuffer hasExactlyAll: { self key }
 ]
 
 { #category : #printing }

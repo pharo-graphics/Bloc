@@ -25,6 +25,17 @@ Class {
 	#category : #'Bloc-Events-KeyBinding'
 }
 
+{ #category : #comparing }
+BlCompulsoryCombination >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ combinations = anObject combinations
+]
+
 { #category : #visiting }
 BlCompulsoryCombination >> accept: aKeyCombinationVisitor [
 	^ aKeyCombinationVisitor visitCompulsory: self
@@ -35,6 +46,13 @@ BlCompulsoryCombination >> combinations [
 	<return: #SequenceableCollection of: #BlKeyCombination>
 	
 	^ combinations
+]
+
+{ #category : #comparing }
+BlCompulsoryCombination >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ combinations hash
 ]
 
 { #category : #testing }
@@ -69,12 +87,12 @@ BlCompulsoryCombination >> match: aKeyboardBuffer [
 
 { #category : #'key matching' }
 BlCompulsoryCombination >> matches: aKeyboardBuffer [
+	"Please note, I must be in DNF form!"
 	<return: #Boolean>
 	
 	^ self combinations
 		ifEmpty: [ false ]
-		ifNotEmpty: [ :theCombinations |
-			theCombinations allSatisfy: [ :aCombination | aCombination matches: aKeyboardBuffer ] ]
+		ifNotEmpty: [ :theCombinations | aKeyboardBuffer hasExactlyAll: (theCombinations collect: #key) ]
 ]
 
 { #category : #printing }
