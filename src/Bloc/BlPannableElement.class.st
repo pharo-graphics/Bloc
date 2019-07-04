@@ -38,22 +38,22 @@ BlPannableElement >> gtLiveFor: aView [
 	^ (super gtLiveFor: aView)
 		actionStencil: [ 
 			BrButton new 
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
-				icon: BrGlamorousIcons zoomin asElement ;
+				look: BrGlamorousButtonWithIconLook;
+				icon: BrGlamorousIcons zoomin asElement;
 				action: [ self zoomIn ] ];
 		actionStencil: [ 
 			BrButton new 
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
-				icon: BrGlamorousIcons zoomout asElement ;
+				look: BrGlamorousButtonWithIconLook;
+				icon: BrGlamorousIcons zoomout asElement;
 				action: [ self zoomOut ] ];
 		actionStencil: [ 
 			BrButton new 
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
-				icon: BrGlamorousIcons zoomtofit asElement ;
+				look: BrGlamorousButtonWithIconLook;
+				icon: BrGlamorousIcons zoomtofit asElement;
 				action: [ self zoomToFit ] ];
 		actionStencil: [ 
 			BrButton new
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				look: BrGlamorousButtonWithIconLook;
 				icon: BrGlamorousIcons actualsize asElement;
 				action: [ self zoomToActualSize ] ]
 ]
