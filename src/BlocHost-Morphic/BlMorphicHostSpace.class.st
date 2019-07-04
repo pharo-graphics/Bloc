@@ -44,7 +44,8 @@ BlMorphicHostSpace >> canvasExtent [
 
 { #category : #'host space - displaying' }
 BlMorphicHostSpace >> close [
-	self host containerMorph removeMorph: self morph
+	self host containerMorph removeMorph: self morph.
+	space := nil
 ]
 
 { #category : #'host space - cursor' }
