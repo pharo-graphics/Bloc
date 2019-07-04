@@ -340,7 +340,7 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 	"Either expand children with weight to take up available space or shrink them if they extend beyond our current bounds.
 	If we skipped measurement on any children, we need to measure them now."
 	remainingExcess := measuredLength - totalLength + usedExcessSpace.
-	
+
 	(skippedMeasure or: [ remainingExcess > 0 and: [ totalWeight > 0 ] ])
 		ifTrue: [
 			| remainingWeightSum |
@@ -357,7 +357,8 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 					ifTrue: [
 						| shareSpace childLengthSpec childBreadthSpec |
 						
-						shareSpace := (childWeight * remainingExcess / remainingWeightSum) asInteger.
+						self flag: 'deal with precision'.
+						shareSpace := childWeight * remainingExcess / remainingWeightSum.
 						remainingExcess := remainingExcess - shareSpace.
 						remainingWeightSum := remainingWeightSum - childWeight.
 
