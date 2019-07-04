@@ -139,6 +139,9 @@ BlInfiniteElement >> assertNotInLayoutOrScroll [
 	"Checks if InfiniteElement is in the middle of a layout or scroll
 	and throws an assertion error if it is"
 	
+	Bloc debugModeEnabled
+		ifFalse: [ ^ self ].
+	
 	self
 		assert: [ self isComputingLayout not ]
 		description: [ 'InfiniteElement is computing a layout or scrolling while it should not' ].

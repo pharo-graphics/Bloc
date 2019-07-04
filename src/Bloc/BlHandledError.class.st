@@ -14,6 +14,11 @@ Class {
 }
 
 { #category : #accessing }
+BlHandledError >> debug [
+	self error debug
+]
+
+{ #category : #accessing }
 BlHandledError >> element [
 	<return: #BlElement>
 

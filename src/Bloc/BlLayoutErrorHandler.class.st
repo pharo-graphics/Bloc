@@ -10,6 +10,10 @@ BlLayoutErrorHandler >> matches: aFramePhase [
 ]
 
 { #category : #'error handling' }
-BlLayoutErrorHandler >> processError: anError [
-	anError inspect
+BlLayoutErrorHandler >> processError: aBlHandledError [
+	NonInteractiveTranscript stderr
+		show: aBlHandledError;
+		cr.
+
+	aBlHandledError debug
 ]
