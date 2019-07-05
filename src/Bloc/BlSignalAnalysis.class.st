@@ -1,8 +1,8 @@
 "
 BlSignalAnalysis provides summary information and various views into a log of the main Bloc signals, i.e.:
 
-- ${class:name=BlPulseStatSignal}
-- ${class:name=CurrentProcessSignal}
+- ${class:name=BlPulseStatSignal}$
+- ${class:name=CurrentProcessSignal}$
 
 !!Live Signal Analysis
 
