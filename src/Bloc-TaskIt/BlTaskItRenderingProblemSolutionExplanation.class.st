@@ -22,8 +22,8 @@ It is possible that the symptoms could be triggered by other causes:
 
 There are a number of tools that have been developed along the way to help identify issues:
 
-- ${class:BlTaskItStatus}$ gives an overview the Bloc related TaskIt queues. While there is a ${class:GtInspector}$ view that displays the status, the system is normally not responding when this is required, so it is better to write the string to a file (convenience method should be added).
-- TBC: ${class:BlPulseStatSignal}$. ${class:CurrentProcessSignal}$ & ${class:BlSignalAnalysis}$
+- ${class:BlTaskItStatus}$ gives an overview the Bloc related TaskIt queues. While there is a ${class:GtInspector}$ view that displays the status, the system is normally not responding when this is required, so it is better to write the string to a file.
+- See also the class comments for: ${class:BlPulseStatSignal}$, ${class:CurrentProcessSignal}$ & ${class:BlSignalAnalysis}$
 
 "
 Class {
