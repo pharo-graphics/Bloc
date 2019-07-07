@@ -18,6 +18,13 @@ Class {
 	#category : #'Bloc-TaskIt-Worker'
 }
 
+{ #category : #accessing }
+BlAsyncUIWorkerPool class >> defaultName [
+	"Return a default worker pool name"
+	<return: #String>
+	^ 'Async UI'
+]
+
 { #category : #scheduling }
 BlAsyncUIWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
@@ -42,6 +49,18 @@ BlAsyncUIWorkerPool class >> initialize [
 { #category : #scheduling }
 BlAsyncUIWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
+
+	^self useDefaultRunner ifTrue: 
+		[ aValuable asLoggingTask schedule ]
+	ifFalse: [ 
+		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
+		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ] ].
+
+]
+
+{ #category : #scheduling }
+BlAsyncUIWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
+	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
 
 	^self useDefaultRunner ifTrue: 
 		[ aValuable asLoggingTask schedule ]

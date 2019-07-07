@@ -15,6 +15,13 @@ Class {
 	#category : #'Bloc-TaskIt-Worker'
 }
 
+{ #category : #accessing }
+BlHousekeepingWorkerPool class >> defaultName [
+	"Return a default worker pool name"
+	<return: #String>
+	^ 'Housekeeping'
+]
+
 { #category : #scheduling }
 BlHousekeepingWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
