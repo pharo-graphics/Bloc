@@ -222,6 +222,7 @@ BlMouseProcessor >> handleMouseMove: aMouseMoveEvent [
 		description: [ 'Target element must be attached to the scene graph' ].
 	
 	aMouseMoveEvent target: aTargetElement.
+	aMouseMoveEvent button: (pressedButtons ifEmpty: [ nil ] ifNotEmpty: [ pressedButtons anyOne ]).
 
 	shouldTryDragStart := self isDragging
 		ifFalse: [ (self canStartDrag: aMouseMoveEvent) ]

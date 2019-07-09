@@ -1,3 +1,6 @@
+"
+I am used to embed Bloc elements in Morphic world
+"
 Class {
 	#name : #BlMorphicSpaceMorph,
 	#superclass : #Morph,
@@ -8,7 +11,7 @@ Class {
 		'preventResize',
 		'hostSpace'
 	],
-	#category : 'BlocHost-Morphic-Morphs'
+	#category : #'BlocHost-Morphic-Morphs'
 }
 
 { #category : #drawing }

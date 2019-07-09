@@ -52,10 +52,6 @@ BlSpaceEventListener >> keyboardProcessor [
 	^ self space keyboardProcessor
 ]
 
-{ #category : #'other handlers' }
-BlSpaceEventListener >> menuEvent: anEvent [
-]
-
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseDownEvent: anEvent [
 	self mouseProcessor handleMouseDown: anEvent.

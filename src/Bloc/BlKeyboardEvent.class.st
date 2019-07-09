@@ -8,34 +8,6 @@ Class {
 	#category : #'Bloc-Events'
 }
 
-{ #category : #accessing }
-BlKeyboardEvent >> button [
-	self shouldNotImplement
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> button: anObject [
-	self shouldNotImplement
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> charCode [
-	self 
-		deprecated: 'Use charCode instead'
-		on: 	'1 July 2017' 
-		in: 'Pharo-6.0-60501-'.
-	self halt
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> charCode: anObject [ 
-	self 
-		deprecated: 'Use charCode: instead'
-		on: 	'1 July 2017' 
-		in: 'Pharo-6.0-60501-'.
-	self halt
-]
-
 { #category : #initialization }
 BlKeyboardEvent >> initialize [
 	super initialize.
@@ -45,24 +17,6 @@ BlKeyboardEvent >> initialize [
 { #category : #testing }
 BlKeyboardEvent >> isKeyboard [
 	^ true
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> keyValue [
-	self 
-		deprecated: 'Use keyValue instead'
-		on: 	'1 July 2017' 
-		in: 'Pharo-6.0-60501-'.
-	self halt
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> keyValue: anObject [ 
-	self 
-		deprecated: 'Use key: instead'
-		on: 	'1 July 2017' 
-		in: 'Pharo-6.0-60501-'.
-	self halt
 ]
 
 { #category : #accessing }

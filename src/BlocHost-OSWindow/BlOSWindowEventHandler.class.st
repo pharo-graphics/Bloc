@@ -154,7 +154,7 @@ BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 { #category : #'visiting - mouse' }
 BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
 	| aBlocEvent |
-	
+
 	"we handle touch events separately, therefore ignore `touch` based mouse events"
 	"anEvent isTouch
 		ifTrue: [ ^ self ]."
