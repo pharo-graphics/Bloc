@@ -118,24 +118,12 @@ BlEventListener >> handleEvent: anEvent [
 	anEvent sendTo: self
 ]
 
-{ #category : #'other handlers' }
-BlEventListener >> inputMethodEvent: anEvent [
-]
-
 { #category : #'keyboard handlers' }
 BlEventListener >> keyDownEvent: anEvent [
 ]
 
 { #category : #'keyboard handlers' }
 BlEventListener >> keyUpEvent: anEvent [
-]
-
-{ #category : #'keyboard handlers' }
-BlEventListener >> keysPressedEvent: anEvent [
-]
-
-{ #category : #'other handlers' }
-BlEventListener >> menuEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
