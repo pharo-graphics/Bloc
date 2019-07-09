@@ -15,6 +15,13 @@ Class {
 	#category : #'Bloc-TaskIt-Worker'
 }
 
+{ #category : #accessing }
+BlHousekeepingWorkerPool class >> defaultName [
+	"Return a default worker pool name"
+	<return: #String>
+	^ 'Housekeeping'
+]
+
 { #category : #scheduling }
 BlHousekeepingWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
@@ -35,6 +42,15 @@ BlHousekeepingWorkerPool class >> initialize [
 
 { #category : #scheduling }
 BlHousekeepingWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
+	"Schedule the supplied valuable with maxPoolSize worker pools"
+
+	TKTConfiguration processProvider: BlTKTHousekeepingProcessProvider new during: [ 
+		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ].
+
+]
+
+{ #category : #scheduling }
+BlHousekeepingWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
 	TKTConfiguration processProvider: BlTKTHousekeepingProcessProvider new during: [ 

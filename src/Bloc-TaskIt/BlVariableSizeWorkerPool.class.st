@@ -26,6 +26,13 @@ Class {
 	#category : #'Bloc-TaskIt-Worker'
 }
 
+{ #category : #accessing }
+BlVariableSizeWorkerPool class >> defaultName [
+	"Return a default worker pool name"
+	<return: #String>
+	^ self subclassResponsibility
+]
+
 { #category : #scheduling }
 BlVariableSizeWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
@@ -58,6 +65,12 @@ BlVariableSizeWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 
 ]
 
+{ #category : #scheduling }
+BlVariableSizeWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
+	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
+	^ self subclassResponsibility
+]
+
 { #category : #managing }
 BlVariableSizeWorkerPool class >> stopAll [
 	<script>
@@ -80,6 +93,7 @@ BlVariableSizeWorkerPool class >> withPoolSize: maxPoolSize [
 	^workerPools at: maxPoolSize ifAbsentPut: [ 
 		self new
 			poolMaxSize: maxPoolSize;
+			name: self defaultName;
 			start;
 			yourself ]
 ]

@@ -1,3 +1,57 @@
+"
+BlSignalAnalysis provides summary information and various views into a log of the main Bloc signals, i.e.:
+
+- ${class:name=BlPulseStatSignal}$
+- ${class:name=CurrentProcessSignal}$
+
+!!Live Signal Analysis
+
+To start an in-memory logger (before the event to be analysed occurs :-)):
+
+[[[
+BlSignalAnalysis startDefaultSampling.
+]]]
+
+If the expected number of events is large the circular buffer size can be increased, e.g.:
+
+[[[
+CircularMemoryLogger entryCount: 15000.
+]]]
+
+Once the event that is of interest has occurred:
+
+[[[
+BlSignalAnalysis stopAndInspect.
+]]]
+
+
+!!Saving Logging to Disk
+
+If the system is remote, or the UI is locking up as part of the issue, it is also possible to save information to disk for later analysis:
+
+[[[
+BlSignalAnalysis startDefaultSampling.
+CircularMemoryLogger startAutoSaving.
+]]]
+
+Will save a snapshot of the logger each minute.  The log file can then be inspected with (substituting the appropriate file name):
+
+[[[
+BlSignalAnalysis gtInspectFile: 'CircularMemoryLogger.stgz'
+]]]
+
+ 
+!!Internal Representation and Key Implementation Points.
+
+!!!Instance Variables
+
+	logger:		<SignalLogger>
+	pairs:		<Array>
+	slow:		<Array>
+	unfinished:		<Array>
+	triggerDuration:	<Duration>
+
+"
 Class {
 	#name : #BlSignalAnalysis,
 	#superclass : #Object,
@@ -47,6 +101,23 @@ BlSignalAnalysis class >> inspectFileContents: aFileReference [
 BlSignalAnalysis class >> logger: aSignalLogger [
 
 	^self new logger: aSignalLogger
+]
+
+{ #category : #sampling }
+BlSignalAnalysis class >> startDefaultSampling [
+	"Convenience method to start recording a useful set of metrics"
+
+	CircularMemoryLogger startBlocGlobalLogger.
+	CurrentProcessSignal startSampling.
+]
+
+{ #category : #sampling }
+BlSignalAnalysis class >> stopAndInspect [
+	"Convenience method to stop the collection and inspect the results"
+
+	CurrentProcessSignal stopSampling.
+	CircularMemoryLogger instance stop.
+	self gtInspectLogger: CircularMemoryLogger instance.
 ]
 
 { #category : #accessing }

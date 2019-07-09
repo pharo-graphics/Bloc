@@ -8,15 +8,12 @@ The Public API and Key Messages are the same as for my superclass.
 "
 Class {
 	#name : #BlTKTBackgroundProcessProvider,
-	#superclass : #TKTTaskItProcessProvider,
+	#superclass : #BlTKTTaskItProcessProvider,
 	#category : #'Bloc-TaskIt-Processes'
 }
 
-{ #category : #'instance-creation' }
-BlTKTBackgroundProcessProvider >> createProcessDoing: aValuable named: aName [
-	^ (TKTProcess send: #value to: aValuable)
-		annotate: #task with: aValuable;
-		name: aName;
-		priority: Processor userSchedulingPriority - 5;
-		run
+{ #category : #accessing }
+BlTKTBackgroundProcessProvider >> processPriority [
+	<return: #Integer>
+	^ Processor userSchedulingPriority - 5
 ]
