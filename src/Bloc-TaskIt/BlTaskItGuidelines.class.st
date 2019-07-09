@@ -42,6 +42,9 @@ BlTaskItGuidelines >> asyncUIWorkerPool [
 	self assert: aWorkerPool isNotNil.
 	self assert: (aWorkerPool name beginsWith: 'AsyncElementWorker').
 	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
+	self assert: aWorkerPool size equals: 0. "It has NOT a worker"
+	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
+	self assert: aWorkerPool isFree. "There is NOT a waiting task"
 	^ aWorkerPool
 ]
 
@@ -103,6 +106,9 @@ BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
 	self assert: aTask ~= aNamedTask.
 	self assert: aNamedTask task equals: aTask.
 	self assert: aNamedTask name equals: self incrementalCounterTaskName.
-	"What can we assert? Worker?"
+	"WorkerPool configuration"
+	self assert: aWorkerPool size equals: 1. "It has one worker"
+	self assert: aWorkerPool taskQueue size equals: 1. "It has one task"
+	self assert: aWorkerPool isFree not. "There is a waiting task"
 	^ aNamedTask
 ]

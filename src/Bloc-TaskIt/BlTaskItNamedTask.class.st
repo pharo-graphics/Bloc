@@ -10,6 +10,18 @@ Class {
 	#category : #'Bloc-TaskIt-Tasks'
 }
 
+{ #category : #converting }
+BlTaskItNamedTask >> asNamedTask [
+	^ self
+]
+
+{ #category : #initialization }
+BlTaskItNamedTask >> initialize [
+	super initialize.
+	name := '<nameless>'.
+	task := nil.
+]
+
 { #category : #accessing }
 BlTaskItNamedTask >> name [
 	<return: #String>
@@ -22,6 +34,16 @@ BlTaskItNamedTask >> name: aString [
 		assert: [ aString isString and: [ aString isEmpty not ] ]
 		description: [ 'Task name must be non-nil and non-empty string' ].
 	name := aString
+]
+
+{ #category : #printing }
+BlTaskItNamedTask >> printOn: aStream [
+	self name isNil ifTrue: [ super printOn: aStream. ^ self ].
+	aStream
+		nextPutAll: 'Task named ';
+		print: self name;
+		nextPutAll: ', executing: ';
+		print: self task.
 ]
 
 { #category : #accessing }
