@@ -34,7 +34,21 @@ Class {
 }
 
 { #category : #'examples - basic (non public api)' }
-BlTaskItGuidelines >> asyncUIWorkerPool [
+BlTaskItGuidelines >> asyncUIWorkerPoolWithOneWorker [
+	<gtExample>
+	"Notice that sending #new is not a public API. Check the class comment for more information."
+	| aWorkerPool |
+	aWorkerPool := self basicAsyncUIWorkerPool.
+	aWorkerPool poolMaxSize: 1.
+	self assert: aWorkerPool poolMaxSize equals: 1.
+	self assert: aWorkerPool size equals: 0. "It has NOT a worker"
+	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
+	self assert: aWorkerPool isFree. "There is NOT a waiting task"
+	^ aWorkerPool
+]
+
+{ #category : #'examples - basic (non public api)' }
+BlTaskItGuidelines >> basicAsyncUIWorkerPool [
 	<gtExample>
 	"Notice that sending #new is not a public API. Check the class comment for more information."
 	| aWorkerPool |
@@ -99,7 +113,7 @@ BlTaskItGuidelines >> initialize [
 BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
 	<gtExample>
 	| aWorkerPool aTask aNamedTask |
-	aWorkerPool := self asyncUIWorkerPool.
+	aWorkerPool := self asyncUIWorkerPoolWithOneWorker.
 	aTask := self waitingIncrementalCounterTask.
 	aNamedTask := aWorkerPool schedule: aTask named: self incrementalCounterTaskName.
 	"Task configuration"
