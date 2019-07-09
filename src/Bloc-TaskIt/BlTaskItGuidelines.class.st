@@ -100,7 +100,7 @@ BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
 	<gtExample>
 	| aWorkerPool aTask aNamedTask |
 	aWorkerPool := self asyncUIWorkerPool.
-	aTask := self incrementalCounterTask.
+	aTask := self waitingIncrementalCounterTask.
 	aNamedTask := aWorkerPool schedule: aTask named: self incrementalCounterTaskName.
 	"Task configuration"
 	self assert: aTask ~= aNamedTask.
@@ -110,5 +110,23 @@ BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
 	self assert: aWorkerPool size equals: 1. "It has one worker"
 	self assert: aWorkerPool taskQueue size equals: 1. "It has one task"
 	self assert: aWorkerPool isFree not. "There is a waiting task"
-	^ aNamedTask
+	^ aWorkerPool
+]
+
+{ #category : #'examples - counter' }
+BlTaskItGuidelines >> waitingIncrementCounter [
+	<gtExample>
+	5 seconds wait.
+	^ self incrementCounter.
+	
+]
+
+{ #category : #'examples - basic (non public api)' }
+BlTaskItGuidelines >> waitingIncrementalCounterTask [
+	<gtExample>
+	| aTask |
+	aTask := [ self waitingIncrementCounter ] asTask.
+	self assert: aTask isNotNil.
+	self assert: (aTask isKindOf: TKTTask).
+	^ aTask 
 ]
