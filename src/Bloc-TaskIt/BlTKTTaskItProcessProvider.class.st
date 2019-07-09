@@ -6,10 +6,11 @@ Class {
 
 { #category : #'instance-creation' }
 BlTKTTaskItProcessProvider >> createProcessDoing: aValuable named: aName [
+	self haltOnce.
 	^ (self processClass send: #value to: aValuable)
 		annotate: #task with: aValuable;
 		name: aName;
-		priority: Processor userSchedulingPriority - 5;
+		priority: self processPriority;
 		run
 ]
 

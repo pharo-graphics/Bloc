@@ -22,6 +22,13 @@ BlHousekeepingWorkerPool class >> defaultName [
 	^ 'Housekeeping'
 ]
 
+{ #category : #accessing }
+BlHousekeepingWorkerPool class >> defaultPoolSize [
+	"Return a default worker pool size"
+	<return: #Integer>
+	^ 1
+]
+
 { #category : #scheduling }
 BlHousekeepingWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"

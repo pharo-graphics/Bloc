@@ -26,5 +26,83 @@ To manage and deal with such information, we need to keep a control of it. For e
 Class {
 	#name : #BlTaskItGuidelines,
 	#superclass : #Object,
+	#instVars : [
+		'mutex',
+		'collection'
+	],
 	#category : #'Bloc-TaskIt-Examples'
 }
+
+{ #category : #'examples - basic (non public api)' }
+BlTaskItGuidelines >> asyncUIWorkerPool [
+	<gtExample>
+	"Notice that sending #new is not a public API. Check the class comment for more information."
+	| aWorkerPool |
+	aWorkerPool := BlAsyncUIWorkerPool new.
+	self assert: aWorkerPool isNotNil.
+	self assert: (aWorkerPool name beginsWith: 'AsyncElementWorker').
+	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
+	^ aWorkerPool
+]
+
+{ #category : #'examples - counter' }
+BlTaskItGuidelines >> incrementCounter [
+	<gtExample>
+	| aNewValue |
+	mutex critical: [ 
+		aNewValue := collection size + 1.
+		collection add: aNewValue.
+		self assert: collection size equals: aNewValue.
+		self assert: collection last equals: aNewValue ].
+	^ aNewValue
+	
+]
+
+{ #category : #'examples - counter' }
+BlTaskItGuidelines >> incrementCounterTwice [
+	<gtExample>
+	| aValue |
+	self incrementCounter.
+	aValue := self incrementCounter.
+	self assert: aValue equals: 2.
+	^ aValue
+	
+]
+
+{ #category : #'examples - basic (non public api)' }
+BlTaskItGuidelines >> incrementalCounterTask [
+	<gtExample>
+	| aTask |
+	aTask := [ self incrementCounter ] asTask.
+	self assert: aTask isNotNil.
+	self assert: (aTask isKindOf: TKTTask).
+	^ aTask 
+]
+
+{ #category : #'examples - basic (non public api)' }
+BlTaskItGuidelines >> incrementalCounterTaskName [
+	<gtExample>
+	^ 'Counter++'
+]
+
+{ #category : #initialization }
+BlTaskItGuidelines >> initialize [
+	super initialize.
+	collection := OrderedCollection new.
+	mutex := Mutex new.
+]
+
+{ #category : #'examples - schedule' }
+BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
+	<gtExample>
+	| aWorkerPool aTask aNamedTask |
+	aWorkerPool := self asyncUIWorkerPool.
+	aTask := self incrementalCounterTask.
+	aNamedTask := aWorkerPool schedule: aTask named: self incrementalCounterTaskName.
+	"Task configuration"
+	self assert: aTask ~= aNamedTask.
+	self assert: aNamedTask task equals: aTask.
+	self assert: aNamedTask name equals: self incrementalCounterTaskName.
+	"What can we assert? Worker?"
+	^ aNamedTask
+]

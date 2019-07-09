@@ -25,6 +25,13 @@ BlAsyncUIWorkerPool class >> defaultName [
 	^ 'Async UI'
 ]
 
+{ #category : #accessing }
+BlAsyncUIWorkerPool class >> defaultPoolSize [
+	"Return a default worker pool size"
+	<return: #Integer>
+	^ 4
+]
+
 { #category : #scheduling }
 BlAsyncUIWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"

@@ -33,6 +33,13 @@ BlVariableSizeWorkerPool class >> defaultName [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlVariableSizeWorkerPool class >> defaultPoolSize [
+	"Return a default worker pool size"
+	<return: #Integer>
+	^ self subclassResponsibility
+]
+
 { #category : #scheduling }
 BlVariableSizeWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
@@ -104,8 +111,33 @@ BlVariableSizeWorkerPool class >> workerPools [
 	^workerPools
 ]
 
+{ #category : #initialization }
+BlVariableSizeWorkerPool >> initialize [
+	super initialize.
+	self poolMaxSize: self class defaultPoolSize.
+]
+
 { #category : #testing }
 BlVariableSizeWorkerPool >> isFree [
 
 	^ taskQueue isEmpty and: [ workers allSatisfy: [ :each | each isFree ] ]
+]
+
+{ #category : #schedulling }
+BlVariableSizeWorkerPool >> schedule: aValuable [
+	<return: #BlTaskItNamedTask>
+	| aTask |
+	aTask := aValuable asTask asNamedTask.
+	super schedule: aTask.
+	^ aTask
+]
+
+{ #category : #schedulling }
+BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
+	<return: #BlTaskItNamedTask>
+	| aTask |
+	aTask := aValuable asTask asNamedTask.
+	aTask name: aTaskName.
+	self schedule: aTask.
+	^ aTask
 ]
