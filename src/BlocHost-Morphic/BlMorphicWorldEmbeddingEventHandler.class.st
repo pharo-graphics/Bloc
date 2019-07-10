@@ -19,34 +19,36 @@ BlMorphicWorldEmbeddingEventHandler class >> initialize [
 	self initialize
 	"
 	KeyCharacterMapping := Dictionary new.
-	{
-	 #backspace . Character backspace.
-	 #tab . Character tab.
-	 #home . Character home.
-	 #arrowLeft . Character arrowLeft.
-	 #arrowUp . Character arrowUp.
-	 #arrowRight . Character arrowRight.
-	 #arrowDown . Character arrowDown.
-	 #end . Character end.
-	 #pageUp . Character pageUp.
-	 #pageDown . Character pageDown.
-	 #delete. Character delete.
 	
-	 #zero . $0.
-	 #one . $1.
-	 #two . $2.
-	 #three . $3.
-	 #four . $4.
-	 #five . $5.
-	 #six . $6.
-	 #seven . $7.
-	 #eight . $8.
-	 #nine . $9.
-	 #slash . $/.
-	 #backslash . $\.
-	 #minus . $-.
-	 #return . Character cr.
-	 #period . $..
+	(($a to: $z) flatCollect: [ :c | { c asSymbol . c } ]),
+	{
+	#backspace . Character backspace.
+	#tab . Character tab.
+	#home . Character home.
+	#arrowLeft . Character arrowLeft.
+	#arrowUp . Character arrowUp.
+	#arrowRight . Character arrowRight.
+	#arrowDown . Character arrowDown.
+	#end . Character end.
+	#pageUp . Character pageUp.
+	#pageDown . Character pageDown.
+	#delete. Character delete.
+	
+	#zero . $0.
+	#one . $1.
+	#two . $2.
+	#three . $3.
+	#four . $4.
+	#five . $5.
+	#six . $6.
+	#seven . $7.
+	#eight . $8.
+	#nine . $9.
+	#slash . $/.
+	#backslash . $\.
+	#minus . $-.
+	#return . Character cr.
+	#period . $..
 	} pairsDo: [ :key :val | KeyCharacterMapping at: (BlKeyboardKey perform: key) put: val ]
 ]
 
@@ -91,21 +93,44 @@ BlMorphicWorldEmbeddingEventHandler >> dispatchMorphicEvent: anEvent hand: aHand
 
 { #category : #visiting }
 BlMorphicWorldEmbeddingEventHandler >> keyDownEvent: anEvent [
-	| aHand aMorphicEvent |
+	| aHand aMorphicEvent aCharacter aKeyValue aCharCode |
 	
 	anEvent consumed: true.
 	aHand := anEvent currentTarget activeHand.
+	
+	aCharacter := self mapKeyToCharacter: anEvent key.
+	
+	aKeyValue := aCharacter asciiValue.
+	aCharCode := aCharacter charCode.
+	(aCharCode > 255) ifTrue: [ aKeyValue := 0 ].
 
 	aMorphicEvent := KeyboardEvent new
 		setType: #keyDown
 		buttons: (self convertModifiers: anEvent modifiers)
 		position: anEvent position
-		keyValue: (self mapKeyToCharacter: anEvent key) charCode
-		charCode: (self mapKeyToCharacter: anEvent key) charCode
+		keyValue: aKeyValue
+		charCode: aCharCode
 		hand:  aHand
 		stamp: Time millisecondClockValue.
 	aMorphicEvent scanCode: anEvent scanCode.
 
+	self dispatchMorphicEvent: aMorphicEvent hand: aHand.
+	
+	aCharacter logCr.
+	(Unicode isPrintable: aCharacter)
+		ifTrue: [ ^ self ].
+	
+	aMorphicEvent := KeyboardEvent new
+		setType: #keystroke
+		buttons: (self convertModifiers: anEvent modifiers)
+		position: anEvent position
+		keyValue: aKeyValue
+		charCode: aCharCode
+		hand:  aHand
+		stamp: Time millisecondClockValue.
+	
+	aMorphicEvent logCr.
+	
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
@@ -120,7 +145,7 @@ BlMorphicWorldEmbeddingEventHandler >> keyUpEvent: anEvent [
 		setType: #keyUp
 		buttons: (self convertModifiers: anEvent modifiers)
 		position: anEvent position
-		keyValue: (self mapKeyToCharacter: anEvent key) charCode
+		keyValue: (self mapKeyToCharacter: anEvent key) asciiValue
 		charCode: (self mapKeyToCharacter: anEvent key) charCode
 		hand:  aHand
 		stamp: Time millisecondClockValue.
@@ -234,6 +259,9 @@ BlMorphicWorldEmbeddingEventHandler >> textInputEvent: anEvent [
 
 	anEvent consumed: true.
 	
+	(anEvent text allSatisfy: [ :aCharacter | Unicode isPrintable: aCharacter ])
+		ifFalse: [ ^ self ].
+	
 	aHand := anEvent currentTarget activeHand.
 	anInputString := anEvent text.
 
@@ -241,8 +269,8 @@ BlMorphicWorldEmbeddingEventHandler >> textInputEvent: anEvent [
 		setType: #keystroke
 		buttons: (self convertModifiers: anEvent modifiers)
 		position: aHand position
-		keyValue: anInputString first charCode
-		charCode: anInputString first charCode
+		keyValue: anInputString first asciiValue
+		charCode: anInputString first asciiValue
 		hand: aHand
 		stamp: Time millisecondClockValue.
 
