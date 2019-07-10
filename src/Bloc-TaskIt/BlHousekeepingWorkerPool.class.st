@@ -9,9 +9,6 @@ The public API and key messages are the same as for ${class:TKTCommonQueueWorker
 Class {
 	#name : #BlHousekeepingWorkerPool,
 	#superclass : #BlVariableSizeWorkerPool,
-	#classVars : [
-		'Current'
-	],
 	#category : #'Bloc-TaskIt-Worker'
 }
 
@@ -44,24 +41,6 @@ BlHousekeepingWorkerPool class >> initialize [
 
 	self stopAll.
 	workerPools := Dictionary new.
-
-]
-
-{ #category : #scheduling }
-BlHousekeepingWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
-	"Schedule the supplied valuable with maxPoolSize worker pools"
-
-	TKTConfiguration processProvider: BlTKTHousekeepingProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ].
-
-]
-
-{ #category : #scheduling }
-BlHousekeepingWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
-	"Schedule the supplied valuable with maxPoolSize worker pools"
-
-	TKTConfiguration processProvider: BlTKTHousekeepingProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ].
 
 ]
 

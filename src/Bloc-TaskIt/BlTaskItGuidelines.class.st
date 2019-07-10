@@ -60,7 +60,26 @@ BlTaskItGuidelines >> basicAsyncUIWorkerPool [
 	| aWorkerPool |
 	aWorkerPool := BlAsyncUIWorkerPool new.
 	self assert: aWorkerPool isNotNil.
-	self assert: (aWorkerPool name beginsWith: BlAsyncUIWorkerPool defaultName).
+	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
+	self assert: (aWorkerPool name beginsWith: aWorkerPool class defaultName).
+	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
+	self assert: aWorkerPool size equals: 0. "It has NOT a worker"
+	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
+	self assert: aWorkerPool isFree. "There is NOT a waiting task"
+	"Set worker pool name to indicate that it is an example instance"
+	aWorkerPool name: 'Example ', aWorkerPool name.
+	^ aWorkerPool
+]
+
+{ #category : #'examples - basic (non public api)' }
+BlTaskItGuidelines >> basicHousekeepingWorkerPool [
+	<gtExample>
+	"Notice that sending #new is not a public API. Check the class comment for more information."
+	| aWorkerPool |
+	aWorkerPool := BlHousekeepingWorkerPool new.
+	self assert: aWorkerPool isNotNil.
+	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
+	self assert: (aWorkerPool name beginsWith: aWorkerPool class defaultName).
 	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
 	self assert: aWorkerPool size equals: 0. "It has NOT a worker"
 	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
@@ -84,6 +103,37 @@ BlTaskItGuidelines >> executeScheduledCounterTaskAsAsyncUI [
 	self assert: collection size equals: 2.
 	self assert: collection first equals: 1.
 	self assert: (collection second beginsWith: ('Task: ''', self incrementalCounterTaskName, '''')).
+	^ aWorkerPool
+]
+
+{ #category : #'examples - schedule' }
+BlTaskItGuidelines >> executeScheduledCounterTaskAsHousekeeping [
+	<gtExample>
+	| aWorkerPool |
+	aWorkerPool := self scheduleCounterTaskAsHousekeeping.
+	aWorkerPool schedule: self signalSemaphoreAction.
+	self waitForSemaphoreSignal.
+	"WorkerPool configuration"
+	self assert: aWorkerPool size equals: 1. "It has one worker"
+	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
+	"self assert: aWorkerPool isFree." "There is NOT a waiting task"
+	self assert: collection size equals: 2.
+	self assert: collection first equals: 1.
+	self assert: (collection second beginsWith: ('Task: ''', self incrementalCounterTaskName, '''')).
+	^ aWorkerPool
+]
+
+{ #category : #'examples - basic (non public api)' }
+BlTaskItGuidelines >> housekeepingWorkerPoolWithOneWorker [
+	<gtExample>
+	"Notice that sending #new is not a public API. Check the class comment for more information."
+	| aWorkerPool |
+	aWorkerPool := self basicHousekeepingWorkerPool.
+	aWorkerPool poolMaxSize: 1.
+	self assert: aWorkerPool poolMaxSize equals: 1.
+	self assert: aWorkerPool size equals: 0. "It has NOT a worker"
+	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
+	self assert: aWorkerPool isFree. "There is NOT a waiting task"
 	^ aWorkerPool
 ]
 
@@ -140,6 +190,25 @@ BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
 	<gtExample>
 	| aWorkerPool aTask aNamedTask |
 	aWorkerPool := self asyncUIWorkerPoolWithOneWorker.
+	aTask := self incrementalCounterTask.
+	aNamedTask := aWorkerPool schedule: aTask named: self incrementalCounterTaskName.
+	"Task configuration"
+	self assert: aTask ~= aNamedTask.
+	self assert: aNamedTask task equals: aTask.
+	self assert: aNamedTask name equals: self incrementalCounterTaskName.
+	"WorkerPool configuration"
+	self assert: aWorkerPool size equals: 1. "It has one worker"
+	self assert: aWorkerPool taskQueue size equals: 1. "It has one task"
+	self assert: aWorkerPool isFree not. "There is a waiting task"
+	self assert: collection size equals: 0.
+	^ aWorkerPool
+]
+
+{ #category : #'examples - schedule' }
+BlTaskItGuidelines >> scheduleCounterTaskAsHousekeeping [
+	<gtExample>
+	| aWorkerPool aTask aNamedTask |
+	aWorkerPool := self housekeepingWorkerPoolWithOneWorker.
 	aTask := self incrementalCounterTask.
 	aNamedTask := aWorkerPool schedule: aTask named: self incrementalCounterTaskName.
 	"Task configuration"

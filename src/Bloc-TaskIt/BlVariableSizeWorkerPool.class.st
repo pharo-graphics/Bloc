@@ -68,14 +68,16 @@ BlVariableSizeWorkerPool class >> isFree [
 BlVariableSizeWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
-	^self subclassResponsibility 
+	^ (self withPoolSize: maxPoolSize) schedule: aValuable.
 
 ]
 
 { #category : #scheduling }
 BlVariableSizeWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
-	^ self subclassResponsibility
+
+	^ (self withPoolSize: maxPoolSize) schedule: aValuable named: aString.
+
 ]
 
 { #category : #managing }

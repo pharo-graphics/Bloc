@@ -57,22 +57,18 @@ BlAsyncUIWorkerPool class >> initialize [
 BlAsyncUIWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
-	^self useDefaultRunner ifTrue: 
-		[ aValuable asLoggingTask schedule ]
-	ifFalse: [ 
-		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ] ].
-
+	^ self useDefaultRunner 
+		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifFalse: [ super schedule: aValuable maxPoolSize: maxPoolSize ].
 ]
 
 { #category : #scheduling }
 BlAsyncUIWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
 
-	^self useDefaultRunner ifTrue: 
-		[ aValuable asLoggingTask schedule ]
-	ifFalse: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable named: aString ].
+	^ self useDefaultRunner 
+		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifFalse: [ super schedule: aValuable named: aString maxPoolSize: maxPoolSize ].
 
 ]
 
