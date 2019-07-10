@@ -3,6 +3,7 @@ Class {
 	#superclass : #BlTaskItTask,
 	#instVars : [
 		'action',
+		'name',
 		'resultCallbacks',
 		'exceptionCallbacks',
 		'element'
@@ -44,6 +45,16 @@ BlEnqueuedTaskItAction >> initialize [
 	resultCallbacks := OrderedCollection new.
 	exceptionCallbacks := OrderedCollection new.
 
+]
+
+{ #category : #accessing }
+BlEnqueuedTaskItAction >> name [
+	^ name
+]
+
+{ #category : #accessing }
+BlEnqueuedTaskItAction >> name: anObject [
+	name := anObject
 ]
 
 { #category : #hooks }
@@ -99,5 +110,5 @@ BlEnqueuedTaskItAction >> run [
 
 { #category : #'api - running' }
 BlEnqueuedTaskItAction >> runFuture [
-	^ BlAsyncUIWorkerPool future: self futureAction maxPoolSize: 4
+	^ BlAsyncUIWorkerPool future: self futureAction named: self name
 ]

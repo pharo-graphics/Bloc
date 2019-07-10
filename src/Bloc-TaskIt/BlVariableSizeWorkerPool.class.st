@@ -41,10 +41,22 @@ BlVariableSizeWorkerPool class >> defaultPoolSize [
 ]
 
 { #category : #scheduling }
+BlVariableSizeWorkerPool class >> future: aValuable [
+	"Schedule the supplied valuable with maxPoolSize worker pools"
+	^ self future: aValuable maxPoolSize: self defaultPoolSize
+]
+
+{ #category : #scheduling }
 BlVariableSizeWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
 	^ (self withPoolSize: maxPoolSize) future: aValuable.
+]
+
+{ #category : #scheduling }
+BlVariableSizeWorkerPool class >> future: aValuable named: aValuableName [
+	"Schedule the supplied valuable with maxPoolSize worker pools"
+	^ self future: aValuable named: aValuableName maxPoolSize: self defaultPoolSize
 ]
 
 { #category : #scheduling }
