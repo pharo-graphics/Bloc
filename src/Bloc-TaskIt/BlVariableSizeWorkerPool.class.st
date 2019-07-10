@@ -123,12 +123,20 @@ BlVariableSizeWorkerPool >> isFree [
 	^ taskQueue isEmpty and: [ workers allSatisfy: [ :each | each isFree ] ]
 ]
 
+{ #category : #accessing }
+BlVariableSizeWorkerPool >> processProvider [
+	<return: #TKTTaskItProcessProvider>
+	^ self subclassResponsibility
+]
+
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable [
 	<return: #BlTaskItNamedTask>
 	| aTask |
-	aTask := aValuable asTask asNamedTask.
-	super schedule: aTask.
+	aTask := aValuable asLoggingTask asNamedTask.
+	TKTConfiguration 
+		processProvider: self processProvider 
+		during: [ super schedule: aTask ].
 	^ aTask
 ]
 
@@ -136,7 +144,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable [
 BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
 	<return: #BlTaskItNamedTask>
 	| aTask |
-	aTask := aValuable asTask asNamedTask.
+	aTask := aValuable asLoggingTask asNamedTask.
 	aTask name: aTaskName.
 	self schedule: aTask.
 	^ aTask

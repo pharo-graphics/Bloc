@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #converting }
+BlTaskItNamedTask >> asLoggingTask [
+	^ self
+]
+
+{ #category : #converting }
 BlTaskItNamedTask >> asNamedTask [
 	^ self
 ]
@@ -62,8 +67,18 @@ BlTaskItNamedTask >> task: aTKTTask [
 
 { #category : #executing }
 BlTaskItNamedTask >> value [
-	self 
+	| aResult anOldNameOrNil anActiveProcess aTempName aTaskName |
+	self
 		assert: [ self task isNil not ]
 		description: [ 'Named task must be initialized before using it' ].
-	^ self task value
+	anActiveProcess := Processor activeProcess.
+	anOldNameOrNil := anActiveProcess gtName.
+	aTempName := anOldNameOrNil
+		ifNil: [ '' ]
+		ifNotNil: [ anOldNameOrNil asString ].
+	aTaskName := 'Task: ''', self name, ''' in ' , aTempName.
+	anActiveProcess name: aTaskName.
+	aResult := self task value.
+	anActiveProcess name: anOldNameOrNil.
+	^ aResult
 ]

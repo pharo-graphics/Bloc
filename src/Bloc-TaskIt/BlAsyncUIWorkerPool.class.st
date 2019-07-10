@@ -72,8 +72,7 @@ BlAsyncUIWorkerPool class >> schedule: aValuable named: aString maxPoolSize: max
 	^self useDefaultRunner ifTrue: 
 		[ aValuable asLoggingTask schedule ]
 	ifFalse: [ 
-		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ] ].
+		(self withPoolSize: maxPoolSize) schedule: aValuable named: aString ].
 
 ]
 
@@ -117,4 +116,10 @@ BlAsyncUIWorkerPool >> printOn: aStream [
 		nextPutAll: ', poolMaxSize: ';
 		print: poolMaxSize;
 		nextPutAll: ')'
+]
+
+{ #category : #accessing }
+BlAsyncUIWorkerPool >> processProvider [
+	<return: #TKTTaskItProcessProvider>
+	^ BlTKTBackgroundProcessProvider new
 ]

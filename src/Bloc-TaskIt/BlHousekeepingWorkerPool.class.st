@@ -89,3 +89,9 @@ BlHousekeepingWorkerPool >> printOn: aStream [
 		print: freeWorkers size;
 		nextPutAll: ')'
 ]
+
+{ #category : #accessing }
+BlHousekeepingWorkerPool >> processProvider [
+	<return: #TKTTaskItProcessProvider>
+	^ BlTKTHousekeepingProcessProvider new
+]
