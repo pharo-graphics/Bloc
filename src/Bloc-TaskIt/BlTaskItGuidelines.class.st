@@ -34,6 +34,11 @@ Class {
 	#category : #'Bloc-TaskIt-Examples'
 }
 
+{ #category : #'examples - actions' }
+BlTaskItGuidelines >> addToCollection: anObject [
+	mutex critical: [ collection add: anObject ]
+]
+
 { #category : #'examples - basic (non public api)' }
 BlTaskItGuidelines >> asyncUIWorkerPoolWithOneWorker [
 	<gtExample>
@@ -130,9 +135,43 @@ BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
 	^ aWorkerPool
 ]
 
+{ #category : #'examples - schedule' }
+BlTaskItGuidelines >> scheduleTaskThatSchedulesAnotherTask [
+	<gtExample>
+	| aWorkerPool aRootTask aSubTask |
+	aWorkerPool := self asyncUIWorkerPoolWithOneWorker.
+	aSubTask := aRootTask := nil.
+	aSubTask := [ self addToCollection: aSubTask. self signalSemaphore. ] asTask asNamedTask.
+	aSubTask name: 'I am an example subtask'.
+	aRootTask := [ 
+			self addToCollection: aRootTask. 
+			aWorkerPool schedule: aSubTask. 
+			self addToCollection: aRootTask.
+			self signalSemaphore ] asTask asNamedTask.
+	aRootTask name: 'I am an example root task'.
+	aWorkerPool schedule: aRootTask.
+	self waitForSemaphoreSignal.
+	self waitForSemaphoreSignal.
+	"WorkerPool configuration"
+	self assert: aWorkerPool size equals: 1. "It has one worker"
+	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
+	self assert: aWorkerPool isFree. "There is NOT a waiting task"
+	"Check that tasks were executed"
+	self assert: collection size equals: 3.
+	self assert: collection first equals: aRootTask.
+	self assert: collection second equals: aRootTask.
+	self assert: collection third equals: aSubTask.
+	^ aWorkerPool
+]
+
+{ #category : #'examples - actions' }
+BlTaskItGuidelines >> signalSemaphore [
+	^ semaphore signal
+]
+
 { #category : #'examples - actions' }
 BlTaskItGuidelines >> signalSemaphoreAction [
-	^ [ semaphore signal ]
+	^ [ self signalSemaphore ]
 ]
 
 { #category : #'examples - schedule' }
@@ -160,7 +199,6 @@ BlTaskItGuidelines >> waitForSemaphoreSignal [
 
 { #category : #'examples - actions' }
 BlTaskItGuidelines >> waitingIncrementCounter [
-	<gtExample>
 	5 seconds wait.
 	^ self incrementCounter.
 	
