@@ -25,16 +25,29 @@ BlAsyncUIWorkerPool class >> defaultName [
 	^ 'Async UI'
 ]
 
+{ #category : #accessing }
+BlAsyncUIWorkerPool class >> defaultPoolSize [
+	"Return a default worker pool size"
+	<return: #Integer>
+	^ 4
+]
+
 { #category : #scheduling }
 BlAsyncUIWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
-	^self useDefaultRunner ifTrue: 
-		[ aValuable asLoggingTask future ]
-	ifFalse: [ 
-		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
-			(self withPoolSize: maxPoolSize) future: aValuable asLoggingTask ] ].
+	^ self useDefaultRunner 
+		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifFalse: [ super future: aValuable maxPoolSize: maxPoolSize ].
+]
 
+{ #category : #scheduling }
+BlAsyncUIWorkerPool class >> future: aValuable named: aString maxPoolSize: maxPoolSize [
+	"Schedule the supplied valuable with maxPoolSize worker pools"
+
+	^ self useDefaultRunner 
+		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifFalse: [ super future: aValuable named: aString maxPoolSize: maxPoolSize ].
 ]
 
 { #category : #'class initialization' }
@@ -50,23 +63,18 @@ BlAsyncUIWorkerPool class >> initialize [
 BlAsyncUIWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
-	^self useDefaultRunner ifTrue: 
-		[ aValuable asLoggingTask schedule ]
-	ifFalse: [ 
-		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ] ].
-
+	^ self useDefaultRunner 
+		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifFalse: [ super schedule: aValuable maxPoolSize: maxPoolSize ].
 ]
 
 { #category : #scheduling }
 BlAsyncUIWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
 
-	^self useDefaultRunner ifTrue: 
-		[ aValuable asLoggingTask schedule ]
-	ifFalse: [ 
-		TKTConfiguration processProvider: BlTKTBackgroundProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ] ].
+	^ self useDefaultRunner 
+		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifFalse: [ super schedule: aValuable named: aString maxPoolSize: maxPoolSize ].
 
 ]
 
@@ -89,25 +97,10 @@ BlAsyncUIWorkerPool >> initialize [
 
 	super initialize.
 	taskQueue := AtomicSharedPriorityQueue new.
-	self name: 'AsyncElementWorker-', self identityHash asString.
 ]
 
-{ #category : #printing }
-BlAsyncUIWorkerPool >> printOn: aStream [
-	| freeWorkers | 
-	freeWorkers := workers select: #isFree.
-	aStream
-		nextPutAll: self class name;
-		nextPutAll: '(';
-		nextPutAll: 'name: ';
-		nextPutAll: name;
-		nextPutAll: ', queueSize: ';
-		print: taskQueue size;
-		nextPutAll: ', busyWorkers: ';
-		print: workers size - freeWorkers size;
-		nextPutAll: ', freeWorkers: ';
-		print: freeWorkers size;
-		nextPutAll: ', poolMaxSize: ';
-		print: poolMaxSize;
-		nextPutAll: ')'
+{ #category : #accessing }
+BlAsyncUIWorkerPool >> processProvider [
+	<return: #TKTTaskItProcessProvider>
+	^ BlTKTBackgroundProcessProvider new
 ]

@@ -9,9 +9,6 @@ The public API and key messages are the same as for ${class:TKTCommonQueueWorker
 Class {
 	#name : #BlHousekeepingWorkerPool,
 	#superclass : #BlVariableSizeWorkerPool,
-	#classVars : [
-		'Current'
-	],
 	#category : #'Bloc-TaskIt-Worker'
 }
 
@@ -22,13 +19,11 @@ BlHousekeepingWorkerPool class >> defaultName [
 	^ 'Housekeeping'
 ]
 
-{ #category : #scheduling }
-BlHousekeepingWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
-	"Schedule the supplied valuable with maxPoolSize worker pools"
-
-	TKTConfiguration processProvider: BlTKTHousekeepingProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) future: aValuable asLoggingTask ].
-
+{ #category : #accessing }
+BlHousekeepingWorkerPool class >> defaultPoolSize [
+	"Return a default worker pool size"
+	<return: #Integer>
+	^ 1
 ]
 
 { #category : #'class initialization' }
@@ -40,45 +35,8 @@ BlHousekeepingWorkerPool class >> initialize [
 
 ]
 
-{ #category : #scheduling }
-BlHousekeepingWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
-	"Schedule the supplied valuable with maxPoolSize worker pools"
-
-	TKTConfiguration processProvider: BlTKTHousekeepingProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ].
-
-]
-
-{ #category : #scheduling }
-BlHousekeepingWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
-	"Schedule the supplied valuable with maxPoolSize worker pools"
-
-	TKTConfiguration processProvider: BlTKTHousekeepingProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) schedule: aValuable asLoggingTask ].
-
-]
-
-{ #category : #initialization }
-BlHousekeepingWorkerPool >> initialize [ 
-
-	super initialize.
-	self name: 'BlHousekeepingWorker-', self identityHash asString.
-]
-
-{ #category : #printing }
-BlHousekeepingWorkerPool >> printOn: aStream [
-	| freeWorkers | 
-	freeWorkers := workers select: #isFree.
-	aStream
-		nextPutAll: self class name;
-		nextPutAll: '(';
-		nextPutAll: 'name:';
-		nextPutAll: name;
-		nextPutAll: 'poolMaxSize: ';
-		print: poolMaxSize;
-		nextPutAll: '; busyWorkers: ';
-		print: workers size - freeWorkers size;
-		nextPutAll: '; freeWorkers: ';
-		print: freeWorkers size;
-		nextPutAll: ')'
+{ #category : #accessing }
+BlHousekeepingWorkerPool >> processProvider [
+	<return: #TKTTaskItProcessProvider>
+	^ BlTKTHousekeepingProcessProvider new
 ]
