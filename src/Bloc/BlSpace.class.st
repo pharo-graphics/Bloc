@@ -748,6 +748,15 @@ BlSpace >> isLayoutRequested [
 ]
 
 { #category : #testing }
+BlSpace >> isOpened [
+	"Return true if the space was shown (by sending #show message), false otherwise.
+	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
+	<return: #Boolean>
+
+	^ BlUniverse default spaceManager hasSpace: self
+]
+
+{ #category : #testing }
 BlSpace >> isVisible [
 	^ self hasHostSpace
 		ifTrue: [ self hostSpace isVisible ]
@@ -1024,12 +1033,7 @@ BlSpace >> show [
 	"Open me in a window and show it to the user"
 
 	"delegate showing work to the Universe"
-	BlUniverse default showSpaceWindow: self.
-	
-	"Notify root element that it is now visible to the user"
-	root dispatchAddedToSceneGraph.
-	
-	self requestNextPulse.
+	BlUniverse default showSpaceWindow: self
 ]
 
 { #category : #'api - tasks' }
