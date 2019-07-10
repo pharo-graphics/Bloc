@@ -26,15 +26,6 @@ BlHousekeepingWorkerPool class >> defaultPoolSize [
 	^ 1
 ]
 
-{ #category : #scheduling }
-BlHousekeepingWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
-	"Schedule the supplied valuable with maxPoolSize worker pools"
-
-	TKTConfiguration processProvider: BlTKTHousekeepingProcessProvider new during: [ 
-		(self withPoolSize: maxPoolSize) future: aValuable asLoggingTask ].
-
-]
-
 { #category : #'class initialization' }
 BlHousekeepingWorkerPool class >> initialize [ 
 	<script>

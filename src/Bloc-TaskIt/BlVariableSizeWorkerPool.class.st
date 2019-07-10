@@ -44,8 +44,14 @@ BlVariableSizeWorkerPool class >> defaultPoolSize [
 BlVariableSizeWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
-	^self subclassResponsibility 
+	^ (self withPoolSize: maxPoolSize) future: aValuable.
+]
 
+{ #category : #scheduling }
+BlVariableSizeWorkerPool class >> future: aValuable named: aString maxPoolSize: maxPoolSize [
+	"Schedule the supplied valuable with maxPoolSize worker pools"
+
+	^ (self withPoolSize: maxPoolSize) future: aValuable named: aString.
 ]
 
 { #category : #'class initialization' }
@@ -111,6 +117,25 @@ BlVariableSizeWorkerPool class >> withPoolSize: maxPoolSize [
 BlVariableSizeWorkerPool class >> workerPools [
 
 	^workerPools
+]
+
+{ #category : #schedulling }
+BlVariableSizeWorkerPool >> future: aValuable [
+	<return: #TKTFuture>
+	| aTask |
+	aTask := aValuable asLoggingTask asNamedTask.
+	^ TKTConfiguration 
+		processProvider: self processProvider 
+		during: [ super future: aTask ].
+]
+
+{ #category : #schedulling }
+BlVariableSizeWorkerPool >> future: aValuable named: aTaskName [
+	<return: #TKTFuture>
+	| aTask |
+	aTask := aValuable asLoggingTask asNamedTask.
+	aTask name: aTaskName.
+	^ self future: aTask
 ]
 
 { #category : #initialization }
