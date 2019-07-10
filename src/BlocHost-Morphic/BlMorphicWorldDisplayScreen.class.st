@@ -4,6 +4,11 @@ Class {
 	#category : #'BlocHost-Morphic-World'
 }
 
+{ #category : #testing }
+BlMorphicWorldDisplayScreen >> isFullscreen [
+	^ false
+]
+
 { #category : #other }
 BlMorphicWorldDisplayScreen >> usableArea [
 	"Answer the usable area of the receiver."

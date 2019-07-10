@@ -38,10 +38,12 @@ BlMorphicWorldState >> displayWorld: aWorld submorphs: submorphs [
 
 { #category : #'update cycle' }
 BlMorphicWorldState >> doOneCycleFor: aWorld [
+	BlUniverse default pulseLoop firePulse
 ]
 
 { #category : #'update cycle' }
 BlMorphicWorldState >> doOneCycleNowFor: aWorld [
+	BlUniverse default pulseLoop firePulse
 ]
 
 { #category : #accessing }
