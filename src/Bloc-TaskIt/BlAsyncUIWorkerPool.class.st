@@ -95,7 +95,6 @@ BlAsyncUIWorkerPool >> initialize [
 
 	super initialize.
 	taskQueue := AtomicSharedPriorityQueue new.
-	self name: 'AsyncElementWorker-', self identityHash asString.
 ]
 
 { #category : #printing }

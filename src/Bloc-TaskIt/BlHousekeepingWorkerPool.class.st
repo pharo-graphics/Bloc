@@ -65,13 +65,6 @@ BlHousekeepingWorkerPool class >> schedule: aValuable named: aString maxPoolSize
 
 ]
 
-{ #category : #initialization }
-BlHousekeepingWorkerPool >> initialize [ 
-
-	super initialize.
-	self name: 'BlHousekeepingWorker-', self identityHash asString.
-]
-
 { #category : #printing }
 BlHousekeepingWorkerPool >> printOn: aStream [
 	| freeWorkers | 

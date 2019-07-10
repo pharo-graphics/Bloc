@@ -60,11 +60,30 @@ BlTaskItGuidelines >> basicAsyncUIWorkerPool [
 	| aWorkerPool |
 	aWorkerPool := BlAsyncUIWorkerPool new.
 	self assert: aWorkerPool isNotNil.
-	self assert: (aWorkerPool name beginsWith: 'AsyncElementWorker').
+	self assert: (aWorkerPool name beginsWith: BlAsyncUIWorkerPool defaultName).
 	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
 	self assert: aWorkerPool size equals: 0. "It has NOT a worker"
 	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
 	self assert: aWorkerPool isFree. "There is NOT a waiting task"
+	"Set worker pool name to indicate that it is an example instance"
+	aWorkerPool name: 'Example ', aWorkerPool name.
+	^ aWorkerPool
+]
+
+{ #category : #'examples - schedule' }
+BlTaskItGuidelines >> executeScheduledCounterTaskAsAsyncUI [
+	<gtExample>
+	| aWorkerPool |
+	aWorkerPool := self scheduleCounterTaskAsAsyncUI.
+	aWorkerPool schedule: self signalSemaphoreAction.
+	self waitForSemaphoreSignal.
+	"WorkerPool configuration"
+	self assert: aWorkerPool size equals: 1. "It has one worker"
+	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
+	"self assert: aWorkerPool isFree." "There is NOT a waiting task"
+	self assert: collection size equals: 2.
+	self assert: collection first equals: 1.
+	self assert: (collection second beginsWith: ('Task: ''', self incrementalCounterTaskName, '''')).
 	^ aWorkerPool
 ]
 
@@ -96,7 +115,7 @@ BlTaskItGuidelines >> incrementCounterTwice [
 BlTaskItGuidelines >> incrementalCounterTask [
 	<gtExample>
 	| aTask |
-	aTask := [ self incrementCounter ] asTask.
+	aTask := [ self incrementCounter. self storeProcessName ] asLoggingTask.
 	self assert: aTask isNotNil.
 	self assert: (aTask isKindOf: TKTTask).
 	^ aTask 
@@ -155,7 +174,7 @@ BlTaskItGuidelines >> scheduleTaskThatSchedulesAnotherTask [
 	"WorkerPool configuration"
 	self assert: aWorkerPool size equals: 1. "It has one worker"
 	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
-	self assert: aWorkerPool isFree. "There is NOT a waiting task"
+	"self assert: aWorkerPool isBusy." "There is NOT a waiting task"
 	"Check that tasks were executed"
 	self assert: collection size equals: 3.
 	self assert: collection first equals: aRootTask.
@@ -174,19 +193,10 @@ BlTaskItGuidelines >> signalSemaphoreAction [
 	^ [ self signalSemaphore ]
 ]
 
-{ #category : #'examples - schedule' }
-BlTaskItGuidelines >> waitForScheduleCounterTaskAsAsyncUI [
-	<gtExample>
-	| aWorkerPool |
-	aWorkerPool := self scheduleCounterTaskAsAsyncUI.
-	aWorkerPool schedule: self signalSemaphoreAction.
-	self waitForSemaphoreSignal.
-	"WorkerPool configuration"
-	self assert: aWorkerPool size equals: 1. "It has one worker"
-	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
-	self assert: aWorkerPool isFree. "There is NOT a waiting task"
-	self assert: collection size equals: 1.
-	^ aWorkerPool
+{ #category : #'examples - actions' }
+BlTaskItGuidelines >> storeProcessName [
+	<return: #String or: nil>
+	^ mutex critical: [ collection add: Processor activeProcess gtName ]
 ]
 
 { #category : #'examples - actions' }

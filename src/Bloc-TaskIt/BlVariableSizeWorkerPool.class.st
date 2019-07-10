@@ -115,6 +115,7 @@ BlVariableSizeWorkerPool class >> workerPools [
 BlVariableSizeWorkerPool >> initialize [
 	super initialize.
 	self poolMaxSize: self class defaultPoolSize.
+	self name: self class defaultName, '-', self identityHash asString.
 ]
 
 { #category : #testing }
