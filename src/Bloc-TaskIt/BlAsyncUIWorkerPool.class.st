@@ -97,26 +97,6 @@ BlAsyncUIWorkerPool >> initialize [
 	taskQueue := AtomicSharedPriorityQueue new.
 ]
 
-{ #category : #printing }
-BlAsyncUIWorkerPool >> printOn: aStream [
-	| freeWorkers | 
-	freeWorkers := workers select: #isFree.
-	aStream
-		nextPutAll: self class name;
-		nextPutAll: '(';
-		nextPutAll: 'name: ';
-		nextPutAll: name;
-		nextPutAll: ', queueSize: ';
-		print: taskQueue size;
-		nextPutAll: ', busyWorkers: ';
-		print: workers size - freeWorkers size;
-		nextPutAll: ', freeWorkers: ';
-		print: freeWorkers size;
-		nextPutAll: ', poolMaxSize: ';
-		print: poolMaxSize;
-		nextPutAll: ')'
-]
-
 { #category : #accessing }
 BlAsyncUIWorkerPool >> processProvider [
 	<return: #TKTTaskItProcessProvider>

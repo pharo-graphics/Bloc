@@ -65,24 +65,6 @@ BlHousekeepingWorkerPool class >> schedule: aValuable named: aString maxPoolSize
 
 ]
 
-{ #category : #printing }
-BlHousekeepingWorkerPool >> printOn: aStream [
-	| freeWorkers | 
-	freeWorkers := workers select: #isFree.
-	aStream
-		nextPutAll: self class name;
-		nextPutAll: '(';
-		nextPutAll: 'name:';
-		nextPutAll: name;
-		nextPutAll: 'poolMaxSize: ';
-		print: poolMaxSize;
-		nextPutAll: '; busyWorkers: ';
-		print: workers size - freeWorkers size;
-		nextPutAll: '; freeWorkers: ';
-		print: freeWorkers size;
-		nextPutAll: ')'
-]
-
 { #category : #accessing }
 BlHousekeepingWorkerPool >> processProvider [
 	<return: #TKTTaskItProcessProvider>

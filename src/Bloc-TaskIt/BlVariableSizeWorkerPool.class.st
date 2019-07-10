@@ -124,6 +124,26 @@ BlVariableSizeWorkerPool >> isFree [
 	^ taskQueue isEmpty and: [ workers allSatisfy: [ :each | each isFree ] ]
 ]
 
+{ #category : #printing }
+BlVariableSizeWorkerPool >> printOn: aStream [
+	| freeWorkers | 
+	freeWorkers := self privateFreeWorkers.
+	aStream
+		nextPutAll: self class name;
+		nextPutAll: '(';
+		nextPutAll: 'name:';
+		nextPutAll: name;
+		nextPutAll: ', queueSize: ';
+		print: taskQueue size;
+		nextPutAll: ', busyWorkers: ';
+		print: workers size - freeWorkers size;
+		nextPutAll: ', freeWorkers: ';
+		print: freeWorkers size;
+		nextPutAll: ', poolMaxSize: ';
+		print: poolMaxSize;
+		nextPutAll: ')'
+]
+
 { #category : #accessing }
 BlVariableSizeWorkerPool >> processProvider [
 	<return: #TKTTaskItProcessProvider>
