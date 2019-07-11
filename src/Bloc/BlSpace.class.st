@@ -910,6 +910,13 @@ BlSpace >> pulseRequested [
 	^ nextPulseRequested
 ]
 
+{ #category : #'api - adding' }
+BlSpace >> removeChild: anElement [
+	"Remove a given element from the space root"
+	
+	self root removeChild: anElement
+]
+
 { #category : #pulse }
 BlSpace >> render [
 	"Render this space in my host window if it is assigned, otherwise do nothing"
