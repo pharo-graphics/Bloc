@@ -91,6 +91,7 @@ BlTaskItGuidelines >> basicHousekeepingWorkerPool [
 
 { #category : #'examples - schedule' }
 BlTaskItGuidelines >> executeScheduledCounterTaskAsAsyncUI [
+	<noTest>
 	<gtExample>
 	| aWorkerPool |
 	aWorkerPool := self scheduleCounterTaskAsAsyncUI.
@@ -187,6 +188,7 @@ BlTaskItGuidelines >> initialize [
 
 { #category : #'examples - schedule' }
 BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
+	<noTest>
 	<gtExample>
 	| aWorkerPool aTask aNamedTask |
 	aWorkerPool := self asyncUIWorkerPoolWithOneWorker.
@@ -206,6 +208,7 @@ BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
 
 { #category : #'examples - schedule' }
 BlTaskItGuidelines >> scheduleCounterTaskAsHousekeeping [
+	<noTest>
 	<gtExample>
 	| aWorkerPool aTask aNamedTask |
 	aWorkerPool := self housekeepingWorkerPoolWithOneWorker.
