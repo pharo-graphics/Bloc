@@ -179,6 +179,9 @@ BlGridLayoutImpl >> layout: aGridLayout [
 BlGridLayoutImpl >> layout: anElement in: aRectangle [
 	| targetWidth targetHeight paddingLeft paddingTop paddingRight paddingBottom hLocations vLocations|
 	
+	measurer layout
+		ifNil: [ ^ self ].
+	
 	self checkConsistency: anElement.
 	
 	targetWidth := aRectangle width.
