@@ -88,7 +88,7 @@ BlHost >> isRunning [
 
 { #category : #'host - api' }
 BlHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority
+	^ Processor userSchedulingPriority - 1
 ]
 
 { #category : #'host - api' }

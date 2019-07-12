@@ -669,11 +669,11 @@ BlSpace >> hostSpaceDo: aBlock [
 BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
 	self hasHostSpace
 		ifFalse: [ ^ anAbsentBlock value ].
-		
+
 	self hostSpace needsRebuild
 		ifTrue: [ ^ anAbsentBlock value ].
 		
-	^ aBlock value: self hostSpace
+	^ aBlock cull: self hostSpace
 ]
 
 { #category : #initialization }
@@ -864,31 +864,6 @@ BlSpace >> printOn: aStream [
 ]
 
 { #category : #pulse }
-BlSpace >> processEvents [
-	"Process events enqueued by host space and dispatch them to the scene graph"
-
-	self
-		assert: [ self hasHostSpace ]
-		description: [ 'Events can only be processed if I have a host space' ].
-
-	self eventRecorder onPulse.
-	
-	self hostSpace fetchedEventsDo: [ :anEvent |
-		"we have to test for existance of the host space before handling each event because
-		it is possible that a space is closed due to an event"
-		self hasHostSpace
-			ifTrue: [
-				self eventRecorder record: anEvent.
-				self eventDispatcher dispatchEvent: anEvent ] ].
-	
-	self hasHostSpace
-		ifFalse: [ ^ self ].
-	
-	self hostSpace generateEvents.
-	self mouseProcessor generateEvents
-]
-
-{ #category : #pulse }
 BlSpace >> processPulse [
 	self ensureSession.
 
@@ -925,8 +900,8 @@ BlSpace >> render [
 		assert: [ self hasDirtyAreas ]
 		description: [ 'I must have dirty areas in order to be rendered' ].
 
-	self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace render: self ]
+	self
+		hostSpaceDo: [ :aHostSpace | aHostSpace render: self ]
 ]
 
 { #category : #'focus managing' }

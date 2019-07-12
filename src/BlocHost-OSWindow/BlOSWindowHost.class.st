@@ -50,11 +50,11 @@ BlOSWindowHost >> createAttributesFor: aSpace [
 BlOSWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new oswindow host space for given bloc space"
 	| aHostSpace|
-	
+
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host!' ].
-		
+	
 	aHostSpace := self createWindowSpaceFor: aSpace.
 	aHostSpace keyboardKeyTable: self keyboardKeyTable.
 	aHostSpace host: self.
