@@ -21,7 +21,10 @@ BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 
 	aSpace hostSpace needsRebuild
 		ifFalse: [ ^ self ].
+		
+	aSpace beDirtyArea.
 
-	"aSpace host createHostSpaceFor: aSpace.
-	aSpace hostSpace show"
+	aSpace host destroyHostSpaceFor: aSpace.
+	aSpace host createHostSpaceFor: aSpace.
+	aSpace hostSpace show
 ]

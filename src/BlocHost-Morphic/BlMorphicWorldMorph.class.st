@@ -15,13 +15,13 @@ BlMorphicWorldMorph class >> worldState: aWorldState [
 
 { #category : #actions }
 BlMorphicWorldMorph >> beMain [
+	InputEventFetcher deinstall.
+	UIManager default uiProcess terminate.
+	Cursor currentCursor: Cursor normal.
 	World := self.
 	ActiveWorld := self.
 	ActiveHand := self hands first.
 	Display := display.
-	Cursor currentCursor: Cursor normal.
-	UIManager default uiProcess terminate.
-	InputEventFetcher deinstall
 ]
 
 { #category : #accessing }
