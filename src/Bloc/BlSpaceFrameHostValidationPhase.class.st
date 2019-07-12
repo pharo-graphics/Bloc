@@ -22,6 +22,6 @@ BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 	aSpace hostSpace needsRebuild
 		ifFalse: [ ^ self ].
 
-	aSpace host createHostSpaceFor: aSpace.
-	aSpace hostSpace show
+	"aSpace host createHostSpaceFor: aSpace.
+	aSpace hostSpace show"
 ]

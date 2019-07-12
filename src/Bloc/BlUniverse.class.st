@@ -108,7 +108,7 @@ BlUniverse >> closeSpaceWindow: aSpace [
 	"Send space closed event.
 	Note: a new space may be spawned as a reaction to the event, that is why
 	we send it before stopping host and universe"
-	aSpace dispatchEvent: (BlSpaceClosedEvent new space: self).
+	aSpace dispatchEvent: (BlSpaceClosedEvent new space: aSpace).
 	
 	(self spaceManager spaces anySatisfy: [ :eachSpace | eachSpace host == aSpace host ])
 		ifFalse: [ aSpace host isRunning ifTrue: [ aSpace host stop ] ].
