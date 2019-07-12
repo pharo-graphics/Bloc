@@ -72,6 +72,11 @@ BlBlocMorphicUIManager >> isForBlockUIProcess: debugSession [
 	^ self blocUIProcess == debugSession interruptedProcess
 ]
 
+{ #category : #'ui requests' }
+BlBlocMorphicUIManager >> request: aStringOrText initialAnswer: defaultAnswer title: aTitle [ 
+	^ 'GlamorousAuthor'
+]
+
 { #category : #'ui process' }
 BlBlocMorphicUIManager >> resumeBlocUIProcess: aProcess [
 	"Adopt aProcess as the UI process for Bloc -- probably because of proceeding from a debugger"
