@@ -149,8 +149,6 @@ BlSpartaRenderer >> initializeForOpenGL: anOpenGLSurface [
 	"Asks renderer to initialize itself to be used together with an OpenGL surface"
 	| scaleFactor |
 
-	ContextStackSignal emit.
-
 	windowExtent := anOpenGLSurface windowExtent.
 	canvasExtent := anOpenGLSurface canvasExtent.
 

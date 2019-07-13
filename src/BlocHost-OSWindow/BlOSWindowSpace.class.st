@@ -171,8 +171,6 @@ BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 	Default implementation simply connects renderer, host space and surface together"
 	| glAttributes |
 	
-	ContextStackSignal emit.
-	
 	glAttributes := OSWindowGLAttributes new.
 	glAttributes redSize: 8.
 	glAttributes greenSize: 8.
