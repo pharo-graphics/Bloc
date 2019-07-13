@@ -24,6 +24,11 @@ BlOSWindowRenderer >> initializeForForm: aBlHostRendererFormSurface [
 	self subclassResponsibility
 ]
 
+{ #category : #initialization }
+BlOSWindowRenderer >> initializeForOpenGL: aBlHostRendererOpenGLSurface [
+	self subclassResponsibility
+]
+
 { #category : #'host space - drawing' }
 BlOSWindowRenderer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
 	self subclassResponsibility
@@ -31,6 +36,11 @@ BlOSWindowRenderer >> presentBufferSurface: aBlHostRendererBufferSurface areas: 
 
 { #category : #'host space - drawing' }
 BlOSWindowRenderer >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
+	self subclassResponsibility
+]
+
+{ #category : #'host space - drawing' }
+BlOSWindowRenderer >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
 	self subclassResponsibility
 ]
 

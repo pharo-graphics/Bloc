@@ -7,7 +7,7 @@ Trait {
 }
 
 { #category : #'renderer - rendering' }
-TBlHostRenderer >> doRender: aSpace [
+TBlHostRenderer >> doRender: aSpace dirtyAreas: aCollectionOfRectangles [
 	self explicitRequirement
 ]
 

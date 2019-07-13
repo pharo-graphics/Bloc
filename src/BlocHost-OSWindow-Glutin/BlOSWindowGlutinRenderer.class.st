@@ -153,6 +153,17 @@ BlOSWindowGlutinRenderer >> initializeForBuffer: aBlHostRendererBufferSurface [
 			length: surface stride * textureExtent y * 4 ]
 ]
 
+{ #category : #initialization }
+BlOSWindowGlutinRenderer >> initializeForOpenGL: aBlHostRendererOpenGLSurface [
+	self
+		assert: [ self window isNotNil ]
+		description: [ 'Window must be set!' ].
+
+	self asCurrentDo: [	
+		aBlHostRendererOpenGLSurface
+			extent: aBlHostRendererOpenGLSurface canvasExtent ]
+]
+
 { #category : #'host space - drawing' }
 BlOSWindowGlutinRenderer >> initializeGL [
 	
@@ -260,6 +271,12 @@ BlOSWindowGlutinRenderer >> presentBufferSurface: aBlHostRendererBufferSurface a
 		gl draw_arrays_mode: GL_TRIANGLE_FAN first: 0 count: 4.	
 		
 		self swapBuffers ]
+]
+
+{ #category : #'host space - drawing' }
+BlOSWindowGlutinRenderer >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
+	
+	self asCurrentDo: [ self swapBuffers ]
 ]
 
 { #category : #misc }

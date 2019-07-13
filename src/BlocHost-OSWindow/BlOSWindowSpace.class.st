@@ -171,6 +171,8 @@ BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 	Default implementation simply connects renderer, host space and surface together"
 	| glAttributes |
 	
+	ContextStackSignal emit.
+	
 	glAttributes := OSWindowGLAttributes new.
 	glAttributes redSize: 8.
 	glAttributes greenSize: 8.
@@ -181,11 +183,9 @@ BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 
 	anOpenGLSurface hostSpace: self.
 	anOpenGLSurface hostRenderer: self renderer.
-	"anOpenGLSurface context: UFFIOpenGLContext new."
 
 	self renderer surface: anOpenGLSurface.
-	
-	window newOpenGLRenderer
+	window newBlocRenderer surface: anOpenGLSurface
 ]
 
 { #category : #initialization }
@@ -288,7 +288,7 @@ BlOSWindowSpace >> prepareToRender: aBlSpace onOpenGLSurface: aBlHostRendererOpe
 	self hasScaled
 		ifTrue: [ aBlHostRendererOpenGLSurface extent: self canvasExtent ].
 	
-	self renderer prepareToRender: aBlSpace
+	window validHandle renderer asCurrentDo: [ self renderer prepareToRender: aBlSpace ]
 ]
 
 { #category : #'host space - rendering' }
@@ -305,7 +305,16 @@ BlOSWindowSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollec
 
 { #category : #'host space - rendering' }
 BlOSWindowSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
-	
+	window validHandle renderer
+		presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas
+]
+
+{ #category : #'host space - rendering' }
+BlOSWindowSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
+	"Render a given space on an OpenGL surface.
+	By default dispatch directly to the renderer"
+
+	self renderer doRender: aBlSpace dirtyAreas: { 0 @ 0 extent: aBlSpace extent }
 ]
 
 { #category : #'host space - accessing' }

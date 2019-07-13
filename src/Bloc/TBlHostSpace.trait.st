@@ -231,7 +231,7 @@ TBlHostSpace >> render: aBlSpace onBufferSurface: aBlHostRendererBufferSurface [
 	"Render a given space on an a buffer surface.
 	By default dispatch directly to the renderer"
 
-	self renderer doRender: aBlSpace
+	self renderer doRender: aBlSpace dirtyAreas: aBlSpace dirtyAreas
 ]
 
 { #category : #'host space - rendering' }
@@ -239,7 +239,7 @@ TBlHostSpace >> render: aBlSpace onFormSurface: aBlHostRendererFormSurface [
 	"Render a given space on an a Form surface.
 	By default dispatch directly to the renderer"
 
-	self renderer doRender: aBlSpace
+	self renderer doRender: aBlSpace dirtyAreas: aBlSpace dirtyAreas
 ]
 
 { #category : #'host space - rendering' }
@@ -247,7 +247,7 @@ TBlHostSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
 	"Render a given space on an OpenGL surface.
 	By default dispatch directly to the renderer"
 
-	self renderer doRender: aBlSpace
+	self renderer doRender: aBlSpace dirtyAreas: aBlSpace dirtyAreas
 ]
 
 { #category : #'host space - accessing' }
