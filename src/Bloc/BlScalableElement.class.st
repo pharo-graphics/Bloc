@@ -195,9 +195,8 @@ BlScalableElement >> onMeasure: anExtentMeasurementSpec [
 	"and then we scale a content element according to scaling strategy"
 	aScaleFactor := self measureScale.
 
-	self contentElement transform
-		scaleBy: (aScaleFactor @ aScaleFactor);
-		apply.
+	self contentElement
+		transformDo: [ :t | t scaleBy: (aScaleFactor @ aScaleFactor) ].
 	
 	aTransformedExtent := self contentElement measuredBounds transformed extent.
 	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent).

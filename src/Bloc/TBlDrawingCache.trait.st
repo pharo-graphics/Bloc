@@ -53,6 +53,13 @@ TBlDrawingCache >> invalidRect: aBlBounds from: anElement [
 	self releaseCaches
 ]
 
+{ #category : #'hooks - geometry' }
+TBlDrawingCache >> onAddedToSuperParent: aParentElement [
+	super onAddedToSuperParent: aParentElement.
+
+	self releaseCaches
+]
+
 { #category : #'children hooks' }
 TBlDrawingCache >> onRemovedFromSceneGraph [
 	super onRemovedFromSceneGraph.
@@ -70,7 +77,13 @@ TBlDrawingCache >> onTransformationInSpaceChanged [
 { #category : #initialization }
 TBlDrawingCache >> releaseCaches [
 	self cachedSurface ifNotNil: #release.
-	self cachedSurface: nil
+	self cachedSurface: nil.
+
+	self damageReported: false.
+
+	"we may be embedded in the other elements with drawing cache.
+	When my cache changes we should invalidate our parents too"
+	self invalidate
 ]
 
 { #category : #'private - accessing' }
