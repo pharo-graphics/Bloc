@@ -33,5 +33,6 @@ TBlDrawingCache >> drawMeWithEffectsOnCanvas: aCanvas [
 			aCanvas fill
 				paint: self cachedSurface;
 				path: self cachedSurface bounds;
+				antialiasNone;
 				draw ]
 ]

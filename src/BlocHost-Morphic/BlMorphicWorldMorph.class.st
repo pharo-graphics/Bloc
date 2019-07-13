@@ -62,9 +62,9 @@ BlMorphicWorldMorph >> drawOnSpartaCanvas: aCanvas [
 			ifAbsentPut: [ aCanvas bitmap fromForm: eachMorph imageForm ].
 		
 		aCanvas fill
-			paint: (aCanvas paint surface source: aBitmap; samplingPoint);
+			paint: aBitmap;
 			path: eachMorph bounds;
-			drawOptions: (aCanvas drawOptions antialiasNone);
+			antialiasNone;
 			draw ]
 ]
 
