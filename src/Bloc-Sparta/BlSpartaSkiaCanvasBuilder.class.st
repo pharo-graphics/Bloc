@@ -7,6 +7,14 @@ Class {
 	#category : 'Bloc-Sparta'
 }
 
+{ #category : #'api - instance creation' }
+BlSpartaSkiaCanvasBuilder class >> extent: aPoint [
+	"Create a default canvas of a given size that should be used for output on screen"
+	<return: #SpartaCanvas>
+	
+	^ (self environment at: #MozCanvas) extent: aPoint
+]
+
 { #category : #accessing }
 BlSpartaSkiaCanvasBuilder class >> isSupported [
 	<return: #Boolean>
