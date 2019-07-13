@@ -31,13 +31,13 @@ TBlLayoutExamplesSetup >> childElementWithVisualProperties [
 	<gtExample>
 	| element |
 	element :=  BlElement new
-		background: Color cyan;
-		border: (BlBorder builder paint: Color blue; width: 1; build);
+		background: (Color cyan alpha: 0.2);
+		border: (BlBorder builder paint: (Color blue alpha: 0.5); width: 1; build);
 		yourself.
 	
 	self assert: element border width equals: 1.
-	self assert: element border paint equals: Color blue asBlPaint.
-	self assert: element background equals: Color cyan asBlBackground.
+	self assert: element border paint equals: (Color blue alpha: 0.5) asBlPaint.
+	self assert: element background equals: (Color cyan alpha: 0.2) asBlBackground.
 		
 	^ element
 ]
