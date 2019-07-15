@@ -83,6 +83,13 @@ BlVariableSizeWorkerPool class >> isFree [
 ]
 
 { #category : #scheduling }
+BlVariableSizeWorkerPool class >> schedule: aValuable [
+	"Schedule the supplied valuable with maxPoolSize worker pools"
+
+	^ self schedule: aValuable maxPoolSize: self defaultPoolSize
+]
+
+{ #category : #scheduling }
 BlVariableSizeWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
@@ -91,10 +98,33 @@ BlVariableSizeWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 ]
 
 { #category : #scheduling }
+BlVariableSizeWorkerPool class >> schedule: aValuable named: aString [
+	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
+
+	^ self schedule: aValuable named: aString maxPoolSize: self defaultPoolSize
+]
+
+{ #category : #scheduling }
 BlVariableSizeWorkerPool class >> schedule: aValuable named: aString maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
 
 	^ (self withPoolSize: maxPoolSize) schedule: aValuable named: aString.
+
+]
+
+{ #category : #scheduling }
+BlVariableSizeWorkerPool class >> schedule: aValuable named: aString timeout: aTimeout maxPoolSize: maxPoolSize [
+	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
+
+	^ (self withPoolSize: maxPoolSize) schedule: aValuable named: aString timeout: aTimeout.
+
+]
+
+{ #category : #scheduling }
+BlVariableSizeWorkerPool class >> schedule: aValuable timeout: aTimeout maxPoolSize: maxPoolSize [
+	"Schedule the supplied valuable with maxPoolSize worker pools"
+
+	^ (self withPoolSize: maxPoolSize) schedule: aValuable timeout: aTimeout.
 
 ]
 
@@ -207,5 +237,26 @@ BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
 	aTask := aValuable asLoggingTask asNamedTask.
 	aTask name: aTaskName.
 	self schedule: aTask.
+	^ aTask
+]
+
+{ #category : #schedulling }
+BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName timeout: aTimeout [
+	<return: #BlTaskItNamedTask>
+	| aTask |
+	aTask := aValuable asLoggingTask asNamedTask.
+	aTask name: aTaskName.
+	self schedule: aTask timeout: aTimeout.
+	^ aTask
+]
+
+{ #category : #schedulling }
+BlVariableSizeWorkerPool >> schedule: aValuable timeout: aTimeout [
+	<return: #BlTaskItNamedTask>
+	| aTask |
+	aTask := aValuable asLoggingTask asNamedTask.
+	TKTConfiguration 
+		processProvider: self processProvider 
+		during: [ super schedule: aTask timeout: aTimeout ].
 	^ aTask
 ]
