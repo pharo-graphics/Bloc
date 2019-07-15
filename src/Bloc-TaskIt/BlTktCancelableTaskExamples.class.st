@@ -4,7 +4,24 @@ Class {
 	#category : #'Bloc-TaskIt-Examples'
 }
 
-{ #category : #'example - ui elements' }
+{ #category : #'examples - ui' }
+BlTktCancelableTaskExamples >> controllingTaskExecution [
+	<gtExample>
+	| aContainer aPlay aPause aProgress aProgressLine aTask |
+	aContainer := self playPauseAndProgressElement.
+	aPlay := aContainer childNamed: #play.
+	aPause := aContainer childNamed: #pause.
+	aProgress := aContainer childNamed: #progress.
+	aProgressLine := aProgress childAt: 1.
+	aTask := self taskWithPauseAndResumeFeatures.
+	aPlay addEventHandlerOn: BlClickEvent do: [ :anEvent | aTask startOrResumeRequest ].
+	aPause addEventHandlerOn: BlClickEvent do: [ :anEvent | aTask pauseRequest ].
+	aTask onNotification: BlExactProgress do: [ :aNotification | 
+		aProgressLine constraintsDo: [ :c | c frame horizontal weight: aNotification fraction ] ].
+	^ aContainer
+]
+
+{ #category : #'examples - ui elements' }
 BlTktCancelableTaskExamples >> pauseElement [
 	<gtExample>
 	| anElement |
@@ -18,14 +35,15 @@ BlTktCancelableTaskExamples >> pauseElement [
 		constraintsDo: [ :c | 
 			c padding: (BlInsets all: 3).
 			c vertical fitContent.
-			c horizontal fitContent ];
+			c horizontal fitContent.
+			c linear vertical alignCenter ];
 		addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent | anEvent currentTarget background: Color veryLightGray ];
 		addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent | anEvent currentTarget background: Color white ];
 		addEventHandlerOn: BlClickEvent do: [ :anEvent | self inform: 'click' ].
 	^ anElement 
 ]
 
-{ #category : #'example - ui elements' }
+{ #category : #'examples - ui elements' }
 BlTktCancelableTaskExamples >> pauseRectangleElement [
 	<gtExample>
 	| anElement |
@@ -37,7 +55,7 @@ BlTktCancelableTaskExamples >> pauseRectangleElement [
 	^ anElement 
 ]
 
-{ #category : #'example - ui elements' }
+{ #category : #'examples - ui elements' }
 BlTktCancelableTaskExamples >> playElement [
 	<gtExample>
 	| anElement |
@@ -48,16 +66,33 @@ BlTktCancelableTaskExamples >> playElement [
 		addChild: self playTriangleElement;
 		border: (BlBorder paint: Color veryLightGray width: 1);
 		constraintsDo: [ :c | 
-			c padding: (BlInsets all: 5).
+			c padding: (BlInsets top: 8 left: 10 bottom: 8 right: 6).
 			c vertical fitContent.
-			c horizontal fitContent ];
+			c horizontal fitContent.
+			c linear vertical alignCenter ];
 		addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent | anEvent currentTarget background: Color veryLightGray ];
 		addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent | anEvent currentTarget background: Color white ];
 		addEventHandlerOn: BlClickEvent do: [ :anEvent | self inform: 'click' ].
 	^ anElement 
 ]
 
-{ #category : #'example - ui elements' }
+{ #category : #'examples - ui' }
+BlTktCancelableTaskExamples >> playPauseAndProgressElement [
+	<gtExample>
+	| aContainer |
+	aContainer := BlElement new.
+	aContainer addChild: self playElement as: #play.
+	aContainer addChild: self pauseElement as: #pause.
+	aContainer addChild: self progressBar as: #progress.
+	aContainer layout: (BlLinearLayout new cellSpacing: 10).
+	aContainer constraintsDo: [ :c | 
+		c horizontal fitContent.
+		c vertical fitContent.
+		c padding: (BlInsets all: 5) ].
+	^ aContainer
+]
+
+{ #category : #'examples - ui elements' }
 BlTktCancelableTaskExamples >> playPolygon [
 	<gtExample>
 	^ BlPolygon vertices: {
@@ -68,7 +103,7 @@ BlTktCancelableTaskExamples >> playPolygon [
 	}
 ]
 
-{ #category : #'example - ui elements' }
+{ #category : #'examples - ui elements' }
 BlTktCancelableTaskExamples >> playTriangleElement [
 	<gtExample>
 	| anElement |
@@ -80,7 +115,7 @@ BlTktCancelableTaskExamples >> playTriangleElement [
 	^ anElement 
 ]
 
-{ #category : #'example - ui elements' }
+{ #category : #'examples - ui elements' }
 BlTktCancelableTaskExamples >> progressBar [
 	<gtExample>
 	| anElement |
@@ -91,11 +126,13 @@ BlTktCancelableTaskExamples >> progressBar [
 		border: (BlBorder paint: Color lightGray muchLighter width: 1);
 		padding: (BlInsets all: 1);
 		size: 200@7;
-		addChild: self progressLine.
+		addChild: self progressLine;
+		constraintsDo: [ :c | 
+			c linear vertical alignCenter ].
 	^ anElement 
 ]
 
-{ #category : #'example - ui elements' }
+{ #category : #'examples - ui elements' }
 BlTktCancelableTaskExamples >> progressLine [
 	<gtExample>
 	| anElement |
@@ -103,6 +140,10 @@ BlTktCancelableTaskExamples >> progressLine [
 	anElement 
 		layout: (BlLinearLayout new);
 		background: Color veryLightGray;
-		size: 50@5.
+		constraintsDo: [ :c |
+			c frame vertical alignCenter.
+			c frame horizontal alignLeft.
+			c frame horizontal weight: 0.6.
+			c vertical exact: 5 ].
 	^ anElement 
 ]
