@@ -4,9 +4,30 @@ Class {
 	#category : #'Bloc-TaskIt-Examples'
 }
 
-{ #category : #'examples - ui' }
+{ #category : #'examples - task execution and ui controls' }
+BlTktCancelableTaskExamples >> cancelingTaskExecution [
+	<gtExample>
+	<noTest>
+	| aContainer aStop aProgress aProgressLine aTask aCallback |
+	aContainer := self stopAndProgressElements.
+	aStop := aContainer childNamed: #stop.
+	aProgress := aContainer childNamed: #progress.
+	aProgressLine := aProgress childAt: 1.
+	aTask := self taskWithNoExplicitExecutionHandling asNotifyingTask.
+	aStop addEventHandlerOn: BlClickEvent do: [ :anEvent | 
+		aTask cancelRequest.
+		anEvent currentTarget background: Color lightRed ].
+	aCallback := [ :aNotification :anElement | 
+		anElement constraintsDo: [ :c | c frame horizontal weight: aNotification fraction asFloat ] ].
+	aTask onNotification: BlExactProgress enqueue: aCallback in: aProgressLine.
+	aProgressLine enqueueTask: (BlTaskAction new action: [ BlAsyncUIWorkerPool default schedule: aTask ]).
+	^ aContainer
+]
+
+{ #category : #'examples - task execution and ui controls' }
 BlTktCancelableTaskExamples >> controllingTaskExecution [
 	<gtExample>
+	<noTest>
 	| aContainer aPlay aPause aProgress aProgressLine aTask |
 	aContainer := self playPauseAndProgressElement.
 	aPlay := aContainer childNamed: #play.
@@ -136,14 +157,71 @@ BlTktCancelableTaskExamples >> progressBar [
 BlTktCancelableTaskExamples >> progressLine [
 	<gtExample>
 	| anElement |
-	anElement := BlElement new.
-	anElement 
-		layout: (BlLinearLayout new);
+	anElement := BlElement new
 		background: Color veryLightGray;
 		constraintsDo: [ :c |
 			c frame vertical alignCenter.
 			c frame horizontal alignLeft.
-			c frame horizontal weight: 0.6.
-			c vertical exact: 5 ].
+			c frame horizontal weight: 0.3.
+			c horizontal matchParent.
+			c vertical matchParent ].
 	^ anElement 
+]
+
+{ #category : #'examples - ui' }
+BlTktCancelableTaskExamples >> stopAndProgressElements [
+	<gtExample>
+	| aContainer |
+	aContainer := BlElement new.
+	aContainer addChild: self stopElement as: #stop.
+	aContainer addChild: self progressBar as: #progress.
+	aContainer layout: (BlLinearLayout new cellSpacing: 10).
+	aContainer constraintsDo: [ :c | 
+		c horizontal fitContent.
+		c vertical fitContent.
+		c padding: (BlInsets all: 5) ].
+	^ aContainer
+]
+
+{ #category : #'examples - ui elements' }
+BlTktCancelableTaskExamples >> stopElement [
+	<gtExample>
+	| anElement |
+	anElement := BlElement new.
+	anElement 
+		layout: (BlLinearLayout new);
+		geometry: (BlCircle new);
+		addChild: self stopSquareElement;
+		border: (BlBorder paint: Color veryLightGray width: 1);
+		constraintsDo: [ :c | 
+			c padding: (BlInsets top: 8 left: 8 bottom: 8 right: 8).
+			c vertical fitContent.
+			c horizontal fitContent.
+			c linear vertical alignCenter ];
+		addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent | anEvent currentTarget background: Color veryLightGray ];
+		addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent | anEvent currentTarget background: Color white ].
+	^ anElement 
+]
+
+{ #category : #'examples - ui elements' }
+BlTktCancelableTaskExamples >> stopSquareElement [
+	<gtExample>
+	| anElement |
+	anElement := BlElement new.
+	anElement 
+		geometry: BlRectangle new;
+		background: Color darkGray;
+		size: 15@15.
+	^ anElement 
+]
+
+{ #category : #'examples - task execution and ui controls' }
+BlTktCancelableTaskExamples >> taskWithNoExplicitExecutionHandling [
+	<gtExample>
+	<noTest>
+	^ [ 
+		3 seconds wait. 
+		1 to: 20 do: [ :each |
+			BlExactProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
+			(Delay forMilliseconds: 300) wait ] ] asTask asNamedTask name: 'Example task with no explicit execution handling'
 ]

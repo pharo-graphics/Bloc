@@ -1,19 +1,11 @@
 Class {
 	#name : #BlTaskItNamedTask,
-	#superclass : #TKTTask,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#superclass : #BlTktDecoratedTask,
 	#instVars : [
-		'task',
 		'name'
 	],
 	#category : #'Bloc-TaskIt-Tasks'
 }
-
-{ #category : #converting }
-BlTaskItNamedTask >> asLoggingTask [
-	^ self
-]
 
 { #category : #converting }
 BlTaskItNamedTask >> asNamedTask [
@@ -24,7 +16,6 @@ BlTaskItNamedTask >> asNamedTask [
 BlTaskItNamedTask >> initialize [
 	super initialize.
 	name := '<nameless>'.
-	task := nil.
 ]
 
 { #category : #accessing }
@@ -49,20 +40,6 @@ BlTaskItNamedTask >> printOn: aStream [
 		print: self name;
 		nextPutAll: ', executing: ';
 		print: self task.
-]
-
-{ #category : #accessing }
-BlTaskItNamedTask >> task [
-	<return: #TKTTask>
-	^ task
-]
-
-{ #category : #accessing }
-BlTaskItNamedTask >> task: aTKTTask [
-	self 
-		assert: [ aTKTTask isNotNil ]
-		description: [ 'Task must be non-nil' ].
-	task := aTKTTask asTask.
 ]
 
 { #category : #executing }

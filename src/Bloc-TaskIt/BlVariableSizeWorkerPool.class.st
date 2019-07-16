@@ -27,6 +27,11 @@ Class {
 }
 
 { #category : #accessing }
+BlVariableSizeWorkerPool class >> default [
+	^ self withPoolSize: self defaultPoolSize
+]
+
+{ #category : #accessing }
 BlVariableSizeWorkerPool class >> defaultName [
 	"Return a default worker pool name"
 	<return: #String>
@@ -223,7 +228,7 @@ BlVariableSizeWorkerPool >> processProvider [
 BlVariableSizeWorkerPool >> schedule: aValuable [
 	<return: #BlTaskItNamedTask>
 	| aTask |
-	aTask := aValuable asLoggingTask asNamedTask.
+	aTask := aValuable asTask.
 	TKTConfiguration 
 		processProvider: self processProvider 
 		during: [ super schedule: aTask ].

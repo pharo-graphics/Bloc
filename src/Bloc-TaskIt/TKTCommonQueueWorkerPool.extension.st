@@ -19,6 +19,27 @@ TKTCommonQueueWorkerPool >> poolMaxSize [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+TKTCommonQueueWorkerPool >> privateCheckNotifycationEvery: aTimeout on: aTaskExecution [
+	aTimeout wait.
+	aTaskExecution isCancelRequested ifTrue: [
+		aTaskExecution userCancelWithReason: 'User request at ', DateAndTime now asString ].
+	aTaskExecution isFinished ifFalse: [ 
+		self scheduleNotifycationEvery: aTimeout on: aTaskExecution ]
+]
+
+{ #category : #'*Bloc-TaskIt' }
+TKTCommonQueueWorkerPool >> scheduleNotifycationEvery: aTimeout on: aTaskExecution [
+	TKTConfiguration processProvider
+		createProcessDoing:
+			(MessageSend
+				receiver: self
+				selector: #privateCheckNotifycationEvery:on:
+				arguments:
+					{aTimeout.
+					aTaskExecution})
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTCommonQueueWorkerPool >> taskQueue [ 
 
 	^taskQueue
