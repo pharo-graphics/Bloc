@@ -12,6 +12,12 @@ BlTktProtoCommand >> asAnnouncingCommand [
 	^ BlTktAnnouncingCommand new command: self.
 ]
 
+{ #category : #taskit }
+BlTktProtoCommand >> asTask [
+	<return: #BlTktCommandTask>
+	^ BlTktCommandTask new command: self.
+]
+
 { #category : #evaluating }
 BlTktProtoCommand >> execute [
 	"execute command and return a result"
@@ -29,6 +35,21 @@ BlTktProtoCommand >> name [
 BlTktProtoCommand >> requestContext [
 	<return: #TBlTktRequests>
 	^ self subclassResponsibility
+]
+
+{ #category : #taskit }
+BlTktProtoCommand >> scheduleInPool: aWorkerPool [
+	<return: #TKTTask>
+	| aTask |
+	aTask := self asTask.
+	aWorkerPool schedule: aTask.
+	^ aTask
+]
+
+{ #category : #taskit }
+BlTktProtoCommand >> scheduleInUIPool [
+	<return: #TKTTask>
+	^ self scheduleInPool: BlAsyncUIWorkerPool default.
 ]
 
 { #category : #evaluating }

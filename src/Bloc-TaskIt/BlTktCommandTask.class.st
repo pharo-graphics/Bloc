@@ -1,6 +1,8 @@
 Class {
-	#name : #BlTktDecoratedCommand,
-	#superclass : #BlTktProtoCommand,
+	#name : #BlTktCommandTask,
+	#superclass : #TKTTask,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'command'
 	],
@@ -8,21 +10,20 @@ Class {
 }
 
 { #category : #accessing }
-BlTktDecoratedCommand >> command [
+BlTktCommandTask >> command [
 	<return: #BlTktProtoCommand>
 	^ command
 ]
 
 { #category : #accessing }
-BlTktDecoratedCommand >> command: aCommand [
+BlTktCommandTask >> command: aCommand [
 	self
 		assert: [ aCommand isNotNil ]
 		description: [ 'Command must be non-nil' ].
 	command := aCommand
 ]
 
-{ #category : #accessing }
-BlTktDecoratedCommand >> requestContext [
-	<return: #TBlTktRequests>
-	^ self command requestContext
+{ #category : #executing }
+BlTktCommandTask >> value [
+	^ self command value
 ]

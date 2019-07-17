@@ -110,6 +110,16 @@ BlTktExamples >> responsiveCommand [
 	^ aCommand
 ]
 
+{ #category : #'examples - tasks' }
+BlTktExamples >> responsiveCommandTask [
+	<gtExample>
+	| aCommand aTask |
+	aCommand := self responsiveCommand.
+	aTask := aCommand asTask.
+	self assert: aTask command equals: aCommand.
+	^ aTask
+]
+
 { #category : #'examples - basic commands' }
 BlTktExamples >> unresponsiveCommand [
 	<gtExample>
