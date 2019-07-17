@@ -17,6 +17,12 @@ BlTktNotifyingTaskExecution >> isSuspendRequested [
 ]
 
 { #category : #accessing }
+BlTktNotifyingTaskExecution >> name [
+	<return: #String>
+	^ task name
+]
+
+{ #category : #accessing }
 BlTktNotifyingTaskExecution >> timeout [
 	^ 200 milliSeconds
 ]

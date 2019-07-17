@@ -19,6 +19,12 @@ BlTktDecoratedTask >> initialize [
 ]
 
 { #category : #accessing }
+BlTktDecoratedTask >> name [
+	<return: #String>
+	^ self task name
+]
+
+{ #category : #accessing }
 BlTktDecoratedTask >> task [
 	<return: #TKTTask>
 	^ task

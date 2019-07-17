@@ -148,6 +148,14 @@ BlVariableSizeWorkerPool class >> stopAll [
 
 ]
 
+{ #category : #managing }
+BlVariableSizeWorkerPool class >> stopAllSubclasses [
+	<script>
+	"Stop the all worker pools and remove the reference to it"
+
+	self subclassesDo: #stopAll
+]
+
 { #category : #accessing }
 BlVariableSizeWorkerPool class >> withPoolSize: maxPoolSize [
 	"Answer an instance of the receiver with the supplied maximum pool size"

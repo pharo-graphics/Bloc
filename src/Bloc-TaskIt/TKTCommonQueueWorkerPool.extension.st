@@ -37,6 +37,7 @@ TKTCommonQueueWorkerPool >> scheduleNotifycationEvery: aTimeout on: aTaskExecuti
 				arguments:
 					{aTimeout.
 					aTaskExecution})
+		named: 'Notifycation handler on ', aTaskExecution name asString
 ]
 
 { #category : #'*Bloc-TaskIt' }
