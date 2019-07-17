@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'reason'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Tasks'
 }
 
 { #category : #'instance-creation' }
@@ -18,7 +18,7 @@ BlTktUserCancelledTaskState class >> reason: aString [
 { #category : #cancelling }
 BlTktUserCancelledTaskState >> cancelTaskExecution: aTaskExecution reason: aReason [
 
-	self error: 'Task already cancelled'
+	self error: 'Task already cancelled by user'
 ]
 
 { #category : #executing }
