@@ -121,7 +121,7 @@ BlOSWindowEventHandler >> time: aTime [
 	time := aTime
 ]
 
-{ #category : #'visiting keyboard' }
+{ #category : #'visiting - keyboard' }
 BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 	| aBlEvent |
 
@@ -129,14 +129,14 @@ BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: DateAndTime now;
+		timestamp: self time now;
 		position: anEvent position;
 		screenPosition: window position + anEvent position.
 
 	self enqueue: aBlEvent
 ]
 
-{ #category : #'visiting keyboard' }
+{ #category : #'visiting - keyboard' }
 BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 	| aBlEvent |
 
@@ -144,7 +144,7 @@ BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: DateAndTime now;
+		timestamp: self time now;
 		position: anEvent position;
 		screenPosition: window position + anEvent position.
 
@@ -222,12 +222,12 @@ BlOSWindowEventHandler >> visitMouseWheelEvent: anEvent [
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: DateAndTime now.
+		timestamp: self time now.
 		
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting keyboard' }
+{ #category : #'visiting - keyboard' }
 BlOSWindowEventHandler >> visitTextInputEvent: anEvent [
 	| aBlocEvent |
 	
@@ -237,7 +237,7 @@ BlOSWindowEventHandler >> visitTextInputEvent: anEvent [
 	aBlocEvent := BlTextInputEvent new
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		text: anEvent text;
-		timestamp: DateAndTime now.
+		timestamp: self time now.
 		
 	self enqueue: aBlocEvent
 ]
@@ -346,7 +346,7 @@ BlOSWindowEventHandler >> visitUnknownEvent: anEvent [
 		cr
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowCloseEvent: anEvent [
 	| aBlocEvent |
 	anEvent suppressDefaultAction.
@@ -358,45 +358,45 @@ BlOSWindowEventHandler >> visitWindowCloseEvent: anEvent [
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowExposeEvent: anEvent [
 	self flag: 'ToDo: Make dirty the exposed area.'.
 	^ nil
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowFocusInEvent: anEvent [
 	| aBlocEvent |
 
 	aBlocEvent := BlSpaceFocusInEvent new
-		timestamp: DateAndTime now;
+		timestamp: self time now;
 		yourself.
-		
+
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowFocusOutEvent: anEvent [
 	| aBlocEvent |
 	
 	aBlocEvent := BlSpaceFocusOutEvent new
-		timestamp: DateAndTime now;
+		timestamp: self time now;
 		yourself.
 		
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowMaximizedEvent: anEvent [
 	self windowResized: anEvent window extent
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowMinimizedEvent: anEvent [
 	self windowResized: anEvent window extent
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowMouseEnterEvent: anEvent [
 	| aBlocEvent |
 
@@ -407,7 +407,7 @@ BlOSWindowEventHandler >> visitWindowMouseEnterEvent: anEvent [
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowMouseLeaveEvent: anEvent [
 	| aBlocEvent |
 
@@ -418,7 +418,7 @@ BlOSWindowEventHandler >> visitWindowMouseLeaveEvent: anEvent [
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowMoveEvent: anEvent [
 	| aBlocEvent |
 
@@ -430,7 +430,7 @@ BlOSWindowEventHandler >> visitWindowMoveEvent: anEvent [
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowResizeEvent: anEvent [
 	self windowResized: anEvent width @ anEvent height
 ]
@@ -447,7 +447,7 @@ BlOSWindowEventHandler >> window: aBlOSWindowSpace [
 	window := aBlOSWindowSpace
 ]
 
-{ #category : #'visiting window' }
+{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> windowResized: aPoint [
 	| aBlocEvent |
 

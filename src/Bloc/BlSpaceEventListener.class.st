@@ -136,7 +136,8 @@ BlSpaceEventListener >> spaceFocusInEvent: anEvent [
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceFocusOutEvent: anEvent [
-	self focusProcessor processWindowFocusOut: anEvent
+	self focusProcessor processWindowFocusOut: anEvent.
+	self keyboardProcessor processWindowFocusOut: anEvent
 ]
 
 { #category : #'window handlers' }

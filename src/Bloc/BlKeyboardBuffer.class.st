@@ -28,7 +28,9 @@ BlKeyboardBuffer >> eventAt: aKey [
 
 { #category : #accessing }
 BlKeyboardBuffer >> events [
-	^ events
+	<return: #Collection of: #BlKeyDownEvent>
+
+	^ events values
 ]
 
 { #category : #testing }
@@ -76,7 +78,7 @@ BlKeyboardBuffer >> isPressed: aKey [
 BlKeyboardBuffer >> printOn: aStream [
 
 	aStream nextPut: $(.
-	self events values
+	events values
 		do: [ :anEvent | aStream nextPutAll: anEvent key name asString ]
 		separatedBy: [ aStream nextPutAll: ' ' ].
 	aStream nextPut: $)
