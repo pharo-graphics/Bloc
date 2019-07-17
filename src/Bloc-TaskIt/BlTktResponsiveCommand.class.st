@@ -8,3 +8,10 @@ Class {
 BlTktResponsiveCommand >> defaultValuable [
 	^ [ :aTBlTktRequests | "do nothing" ]
 ]
+
+{ #category : #evaluating }
+BlTktResponsiveCommand >> execute [
+	"execute command and return a result"
+	<return: #Object>
+	^ self valuable value: self requestContext.
+]

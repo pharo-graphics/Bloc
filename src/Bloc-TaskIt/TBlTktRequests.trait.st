@@ -3,6 +3,19 @@ Trait {
 	#category : #'Bloc-TaskIt-New Implementation'
 }
 
+{ #category : #enumerating }
+TBlTktRequests >> ifExecutionExpectedDo: aBlock [
+	<return: #Object>
+	<return: nil>
+	^ self isExecutionExpected ifTrue: aBlock
+]
+
+{ #category : #testing }
+TBlTktRequests >> isExecutionExpected [
+	<return: #Boolean>
+	^ self isSuspendRequested not and: [ self isTerminationRequested not ]
+]
+
 { #category : #testing }
 TBlTktRequests >> isResumeRequested [
 	<return: #Boolean>
