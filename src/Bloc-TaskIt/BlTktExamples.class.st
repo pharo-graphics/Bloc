@@ -2,7 +2,8 @@ Class {
 	#name : #BlTktExamples,
 	#superclass : #Object,
 	#instVars : [
-		'collector'
+		'collector',
+		'worker'
 	],
 	#category : #'Bloc-TaskIt-New Implementation'
 }
@@ -58,6 +59,18 @@ BlTktExamples >> executeResponsiveCommand [
 	^ aCommand
 ]
 
+{ #category : #'examples - tasks' }
+BlTktExamples >> executeResponsiveCommandTask [
+	<gtExample>
+	| aTask aWorker aFuture aResult |
+	aTask := self responsiveCommandTask.
+	aWorker := self worker.
+	aFuture := aWorker future: aTask.
+	aResult := aFuture synchronizeTimeout: self futureTimeout.
+	self assert: aResult equals: 1.
+	^ aTask
+]
+
 { #category : #'examples - basic commands' }
 BlTktExamples >> executeResponsiveCommandWithSuspendRequest [
 	<gtExample>
@@ -92,6 +105,11 @@ BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 	^ aCommand
 ]
 
+{ #category : #'examples - worker' }
+BlTktExamples >> futureTimeout [
+	^ 1000 milliSeconds
+]
+
 { #category : #initialization }
 BlTktExamples >> initialize [
 	super initialize.
@@ -120,6 +138,13 @@ BlTktExamples >> responsiveCommandTask [
 	^ aTask
 ]
 
+{ #category : #'examples - worker' }
+BlTktExamples >> stopWorker [
+	<gtExample>
+	<after: #stopWorker>
+	worker ifNotNil: [ :aWorker | aWorker stop ].
+]
+
 { #category : #'examples - basic commands' }
 BlTktExamples >> unresponsiveCommand [
 	<gtExample>
@@ -130,4 +155,13 @@ BlTktExamples >> unresponsiveCommand [
 	self assert: aCommand valuable equals: aBlock.
 	self assert: aCommand name equals: aBlock printString.
 	^ aCommand
+]
+
+{ #category : #'examples - worker' }
+BlTktExamples >> worker [
+	<gtExample>
+	<after: #stopWorker>
+	worker ifNil: [ worker := TKTWorker new name: self className, ' Worker'; start ].
+	self assert: worker isNotNil.
+	^ worker
 ]
