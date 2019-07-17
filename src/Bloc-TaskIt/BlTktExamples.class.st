@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'collector',
-		'worker'
+		'worker',
+		'signaler'
 	],
 	#category : #'Bloc-TaskIt-New Implementation'
 }
@@ -105,6 +106,19 @@ BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 	^ aCommand
 ]
 
+{ #category : #'examples - tasks' }
+BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
+	<gtExample>
+	<noTest>
+	| aTask aWorker aFuture aResult |
+	aTask := self unresponsiveTaskTerminatingInTheMiddle.
+	aWorker := self worker.
+	aFuture := aWorker future: aTask.
+	aResult := aFuture synchronizeTimeout: self futureTimeout.
+	self assert: aResult equals: 1.
+	^ aTask
+]
+
 { #category : #'examples - worker' }
 BlTktExamples >> futureTimeout [
 	^ 1000 milliSeconds
@@ -114,6 +128,7 @@ BlTktExamples >> futureTimeout [
 BlTktExamples >> initialize [
 	super initialize.
 	collector := BlTktExamplesCollector new.
+	signaler := BlTktExamplesSignaler new.
 ]
 
 { #category : #'examples - basic commands' }
@@ -138,6 +153,12 @@ BlTktExamples >> responsiveCommandTask [
 	^ aTask
 ]
 
+{ #category : #accessing }
+BlTktExamples >> signaler [
+	<return: #BlTktExamplesSignaler>
+	^ signaler
+]
+
 { #category : #'examples - worker' }
 BlTktExamples >> stopWorker [
 	<gtExample>
@@ -155,6 +176,20 @@ BlTktExamples >> unresponsiveCommand [
 	self assert: aCommand valuable equals: aBlock.
 	self assert: aCommand name equals: aBlock printString.
 	^ aCommand
+]
+
+{ #category : #'examples - tasks' }
+BlTktExamples >> unresponsiveTaskTerminatingInTheMiddle [
+	<gtExample>
+	| aTask aBlock |
+	aTask := BlTktUnresponsiveCommand new.
+	aBlock := [ self collector increment.
+		aTask terminationRequested.
+		self signaler waitForCaller.
+		self collector increment ].
+	aTask valuable: aBlock.
+	self assert: aTask valuable equals: aBlock.
+	^ aTask
 ]
 
 { #category : #'examples - worker' }
