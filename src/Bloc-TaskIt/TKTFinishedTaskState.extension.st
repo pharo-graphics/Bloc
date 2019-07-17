@@ -1,7 +1,7 @@
 Extension { #name : #TKTFinishedTaskState }
 
 { #category : #'*Bloc-TaskIt' }
-TKTFinishedTaskState >> userCancelTaskExecution: aTaskExecution reason: aReason [
+TKTFinishedTaskState >> suspendTaskExecution: aTaskExecution reason: aReason [
 
 	"Silently ignore"
 ]

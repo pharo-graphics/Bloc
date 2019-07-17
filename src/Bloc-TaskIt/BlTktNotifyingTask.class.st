@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlTktDecoratedTask,
 	#instVars : [
 		'notifications',
-		'isCancelRequested'
+		'isSuspendRequested'
 	],
 	#category : #'Bloc-TaskIt-Tasks'
 }
@@ -15,19 +15,19 @@ BlTktNotifyingTask >> asNotifyingTask [
 
 { #category : #actions }
 BlTktNotifyingTask >> cancelRequest [
-	isCancelRequested := true
+	self suspendRequest
 ]
 
 { #category : #initialization }
 BlTktNotifyingTask >> initialize [
 	super initialize.
 	notifications := BlTaskNotifications new.
-	isCancelRequested := false.
+	isSuspendRequested := false.
 ]
 
 { #category : #testing }
-BlTktNotifyingTask >> isCancelRequested [
-	^ isCancelRequested
+BlTktNotifyingTask >> isSuspendRequested [
+	^ isSuspendRequested
 ]
 
 { #category : #registration }
@@ -42,6 +42,11 @@ BlTktNotifyingTask >> onNotification: aNotificationClass enqueue: aCallback in: 
 { #category : #executing }
 BlTktNotifyingTask >> scheduleTaskExecutionFor: aRunner [
 	^ self configureTaskExecution: BlTktNotifyingTaskExecution new with: aRunner
+]
+
+{ #category : #actions }
+BlTktNotifyingTask >> suspendRequest [
+	isSuspendRequested := true
 ]
 
 { #category : #executing }

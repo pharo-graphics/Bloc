@@ -1,7 +1,7 @@
 Extension { #name : #TKTReadyTaskState }
 
 { #category : #'*Bloc-TaskIt' }
-TKTReadyTaskState >> userCancelTaskExecution: aTaskExecution reason: aReason [
+TKTReadyTaskState >> suspendTaskExecution: aTaskExecution reason: aReason [
 
-	aTaskExecution setUserCancelStateWithReason: aReason
+	aTaskExecution setSuspendedTaskStateWithReason: aReason
 ]

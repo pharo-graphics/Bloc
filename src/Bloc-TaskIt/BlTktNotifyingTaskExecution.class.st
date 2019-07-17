@@ -11,9 +11,9 @@ BlTktNotifyingTaskExecution >> doExecuteTask [
 ]
 
 { #category : #testing }
-BlTktNotifyingTaskExecution >> isCancelRequested [
+BlTktNotifyingTaskExecution >> isSuspendRequested [
 	<return: #Boolean>
-	^ task isCancelRequested
+	^ task isSuspendRequested
 ]
 
 { #category : #accessing }

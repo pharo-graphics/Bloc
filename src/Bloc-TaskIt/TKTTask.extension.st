@@ -12,7 +12,7 @@ TKTTask >> asLoggingTask [
 
 { #category : #'*Bloc-TaskIt' }
 TKTTask >> asNamedTask [
-	^ BlTaskItNamedTask new task: self asLoggingTask
+	^ BlTktNamedTask new task: self asLoggingTask
 ]
 
 { #category : #'*Bloc-TaskIt' }

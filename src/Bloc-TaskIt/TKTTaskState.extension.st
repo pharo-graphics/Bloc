@@ -1,7 +1,7 @@
 Extension { #name : #TKTTaskState }
 
 { #category : #'*Bloc-TaskIt' }
-TKTTaskState >> userCancelTaskExecution: aTaskExecution reason: aReason [
+TKTTaskState >> suspendTaskExecution: aTaskExecution reason: aReason [
 
 	self subclassResponsibility
 ]

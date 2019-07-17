@@ -21,8 +21,8 @@ TKTCommonQueueWorkerPool >> poolMaxSize [
 { #category : #'*Bloc-TaskIt' }
 TKTCommonQueueWorkerPool >> privateCheckNotifycationEvery: aTimeout on: aTaskExecution [
 	aTimeout wait.
-	aTaskExecution isCancelRequested ifTrue: [
-		aTaskExecution userCancelWithReason: 'User request at ', DateAndTime now asString ].
+	aTaskExecution isSuspendRequested ifTrue: [
+		aTaskExecution suspendWithReason: 'User request at ', DateAndTime now asString ].
 	aTaskExecution isFinished ifFalse: [ 
 		self scheduleNotifycationEvery: aTimeout on: aTaskExecution ]
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #BlTaskItNamedTask,
+	#name : #BlTktNamedTask,
 	#superclass : #BlTktDecoratedTask,
 	#instVars : [
 		'name'
@@ -8,24 +8,24 @@ Class {
 }
 
 { #category : #converting }
-BlTaskItNamedTask >> asNamedTask [
+BlTktNamedTask >> asNamedTask [
 	^ self
 ]
 
 { #category : #initialization }
-BlTaskItNamedTask >> initialize [
+BlTktNamedTask >> initialize [
 	super initialize.
 	name := '<nameless>'.
 ]
 
 { #category : #accessing }
-BlTaskItNamedTask >> name [
+BlTktNamedTask >> name [
 	<return: #String>
 	^ name
 ]
 
 { #category : #accessing }
-BlTaskItNamedTask >> name: aString [
+BlTktNamedTask >> name: aString [
 	self 
 		assert: [ aString isString and: [ aString isEmpty not ] ]
 		description: [ 'Task name must be non-nil and non-empty string' ].
@@ -33,7 +33,7 @@ BlTaskItNamedTask >> name: aString [
 ]
 
 { #category : #printing }
-BlTaskItNamedTask >> printOn: aStream [
+BlTktNamedTask >> printOn: aStream [
 	self name isNil ifTrue: [ super printOn: aStream. ^ self ].
 	aStream
 		nextPutAll: 'Task named ';
@@ -43,7 +43,7 @@ BlTaskItNamedTask >> printOn: aStream [
 ]
 
 { #category : #executing }
-BlTaskItNamedTask >> value [
+BlTktNamedTask >> value [
 	| aResult anOldNameOrNil anActiveProcess aTempName aTaskName |
 	self
 		assert: [ self task isNil not ]

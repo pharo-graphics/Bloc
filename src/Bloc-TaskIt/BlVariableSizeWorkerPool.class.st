@@ -226,7 +226,7 @@ BlVariableSizeWorkerPool >> processProvider [
 
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable [
-	<return: #BlTaskItNamedTask>
+	<return: #BlTktNamedTask>
 	| aTask |
 	aTask := aValuable asTask.
 	TKTConfiguration 
@@ -237,7 +237,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable [
 
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
-	<return: #BlTaskItNamedTask>
+	<return: #BlTktNamedTask>
 	| aTask |
 	aTask := aValuable asLoggingTask asNamedTask.
 	aTask name: aTaskName.
@@ -247,7 +247,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
 
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName timeout: aTimeout [
-	<return: #BlTaskItNamedTask>
+	<return: #BlTktNamedTask>
 	| aTask |
 	aTask := aValuable asLoggingTask asNamedTask.
 	aTask name: aTaskName.
@@ -257,7 +257,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName timeout: aTimeo
 
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable timeout: aTimeout [
-	<return: #BlTaskItNamedTask>
+	<return: #BlTktNamedTask>
 	| aTask |
 	aTask := aValuable asLoggingTask asNamedTask.
 	TKTConfiguration 
