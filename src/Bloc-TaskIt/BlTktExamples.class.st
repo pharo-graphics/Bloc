@@ -7,13 +7,46 @@ Class {
 	#category : #'Bloc-TaskIt-New Implementation'
 }
 
+{ #category : #'examples - announcing commands' }
+BlTktExamples >> announcingAndResponsiveCommand [
+	<gtExample>
+	| aResponsiveCommand anAnnouncingCommand |
+	aResponsiveCommand := self responsiveCommand.
+	anAnnouncingCommand := aResponsiveCommand asAnnouncingCommand. 
+	self assert: anAnnouncingCommand class equals: BlTktAnnouncingCommand.
+	self assert: anAnnouncingCommand command equals: aResponsiveCommand.
+	self assert: (anAnnouncingCommand name includesSubstring: aResponsiveCommand name).
+	self assert: anAnnouncingCommand announcer isNotNil.
+	^ anAnnouncingCommand
+]
+
 { #category : #accessing }
 BlTktExamples >> collector [
 	<return: #BlTktExampleCollector>
 	^ collector
 ]
 
-{ #category : #'examples - commands' }
+{ #category : #'examples - announcing commands' }
+BlTktExamples >> executeAnnouncingAndResponsiveCommand [
+	<gtExample>
+	| anAnnouncingCommand aResult |
+	anAnnouncingCommand := self announcingAndResponsiveCommand. 
+	anAnnouncingCommand announcer
+		when: BlTktCommandAnnouncement do: [ :anAnnouncement | self collector add: anAnnouncement ].
+	self assert: self collector collection size equals: 0.
+	aResult := anAnnouncingCommand value.
+	self assert: aResult equals: 2.
+	self assert: self collector collection size equals: 3.
+	self assert: self collector collection first class equals: BlTktCommandAboutToExecuteAnnouncement.
+	self assert: self collector collection first command equals: anAnnouncingCommand.
+	self assert: self collector collection second equals: 2.
+	self assert: self collector collection third class equals: BlTktCommandAboutToFinishAnnouncement.
+	self assert: self collector collection third command equals: anAnnouncingCommand.
+	self assert: self collector collection third result equals: aResult.
+	^ anAnnouncingCommand
+]
+
+{ #category : #'examples - basic commands' }
 BlTktExamples >> executeResponsiveCommand [
 	<gtExample>
 	| aCommand aResult |
@@ -25,7 +58,7 @@ BlTktExamples >> executeResponsiveCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - commands' }
+{ #category : #'examples - basic commands' }
 BlTktExamples >> executeResponsiveCommandWithSuspendRequest [
 	<gtExample>
 	| aCommand aResult |
@@ -37,7 +70,7 @@ BlTktExamples >> executeResponsiveCommandWithSuspendRequest [
 	^ aCommand
 ]
 
-{ #category : #'examples - commands' }
+{ #category : #'examples - basic commands' }
 BlTktExamples >> executeUnresponsiveCommand [
 	<gtExample>
 	| aCommand aResult |
@@ -47,7 +80,7 @@ BlTktExamples >> executeUnresponsiveCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - commands' }
+{ #category : #'examples - basic commands' }
 BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 	<gtExample>
 	| aCommand aResult |
@@ -65,7 +98,7 @@ BlTktExamples >> initialize [
 	collector := BlTktExamplesCollector new.
 ]
 
-{ #category : #'examples - commands' }
+{ #category : #'examples - basic commands' }
 BlTktExamples >> responsiveCommand [
 	<gtExample>
 	| aBlock aCommand |
@@ -77,7 +110,7 @@ BlTktExamples >> responsiveCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - commands' }
+{ #category : #'examples - basic commands' }
 BlTktExamples >> unresponsiveCommand [
 	<gtExample>
 	| aBlock aCommand |

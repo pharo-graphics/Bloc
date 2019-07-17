@@ -10,9 +10,14 @@ Class {
 	#category : #'Bloc-TaskIt-New Implementation'
 }
 
+{ #category : #adding }
+BlTktExamplesCollector >> add: anObject [
+	mutex critical: [ collection add: anObject ]
+]
+
 { #category : #accessing }
 BlTktExamplesCollector >> collection [
-	^ mutex critical: [ collection copy ]
+	^ collection
 ]
 
 { #category : #accessing }
