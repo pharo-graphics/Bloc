@@ -125,3 +125,18 @@ BlKeyboardProcessor >> processTextInput: anEvent [
 	anEvent target: aTarget.
 	self fireEvent: anEvent
 ]
+
+{ #category : #'event processing' }
+BlKeyboardProcessor >> processWindowFocusOut: anEvent [
+
+	"Take all registered key down events from the buffer and send them as key up events to release keys"
+	self buffer events
+		collect: [ :aKeyDownEvent |
+			BlKeyUpEvent new
+				key: aKeyDownEvent key;
+				scanCode: aKeyDownEvent scanCode;
+				timestamp: self space time now;
+				position: aKeyDownEvent position;
+				screenPosition: aKeyDownEvent screenPosition ]
+		thenDo: [ :aKeyUpEvent | self processKeyUp: aKeyUpEvent ]
+]
