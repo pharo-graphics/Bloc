@@ -74,7 +74,7 @@ BlBlocMorphicUIManager >> isForBlockUIProcess: debugSession [
 
 { #category : #'ui requests' }
 BlBlocMorphicUIManager >> request: aStringOrText initialAnswer: defaultAnswer title: aTitle [ 
-	^ 'GlamorousAuthor'
+	^ super request: aStringOrText initialAnswer: defaultAnswer title: aTitle
 ]
 
 { #category : #'ui process' }

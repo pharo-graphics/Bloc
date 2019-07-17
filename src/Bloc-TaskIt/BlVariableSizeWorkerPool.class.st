@@ -27,6 +27,11 @@ Class {
 }
 
 { #category : #accessing }
+BlVariableSizeWorkerPool class >> default [
+	^ self withPoolSize: self defaultPoolSize
+]
+
+{ #category : #accessing }
 BlVariableSizeWorkerPool class >> defaultName [
 	"Return a default worker pool name"
 	<return: #String>
@@ -143,6 +148,14 @@ BlVariableSizeWorkerPool class >> stopAll [
 
 ]
 
+{ #category : #managing }
+BlVariableSizeWorkerPool class >> stopAllSubclasses [
+	<script>
+	"Stop the all worker pools and remove the reference to it"
+
+	self subclassesDo: #stopAll
+]
+
 { #category : #accessing }
 BlVariableSizeWorkerPool class >> withPoolSize: maxPoolSize [
 	"Answer an instance of the receiver with the supplied maximum pool size"
@@ -221,9 +234,9 @@ BlVariableSizeWorkerPool >> processProvider [
 
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable [
-	<return: #BlTaskItNamedTask>
+	<return: #BlTktNamedTask>
 	| aTask |
-	aTask := aValuable asLoggingTask asNamedTask.
+	aTask := aValuable asTask.
 	TKTConfiguration 
 		processProvider: self processProvider 
 		during: [ super schedule: aTask ].
@@ -232,7 +245,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable [
 
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
-	<return: #BlTaskItNamedTask>
+	<return: #BlTktNamedTask>
 	| aTask |
 	aTask := aValuable asLoggingTask asNamedTask.
 	aTask name: aTaskName.
@@ -242,7 +255,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
 
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName timeout: aTimeout [
-	<return: #BlTaskItNamedTask>
+	<return: #BlTktNamedTask>
 	| aTask |
 	aTask := aValuable asLoggingTask asNamedTask.
 	aTask name: aTaskName.
@@ -252,7 +265,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName timeout: aTimeo
 
 { #category : #schedulling }
 BlVariableSizeWorkerPool >> schedule: aValuable timeout: aTimeout [
-	<return: #BlTaskItNamedTask>
+	<return: #BlTktNamedTask>
 	| aTask |
 	aTask := aValuable asLoggingTask asNamedTask.
 	TKTConfiguration 

@@ -1,40 +1,31 @@
 Class {
-	#name : #BlTaskItNamedTask,
-	#superclass : #TKTTask,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#name : #BlTktNamedTask,
+	#superclass : #BlTktDecoratedTask,
 	#instVars : [
-		'task',
 		'name'
 	],
 	#category : #'Bloc-TaskIt-Tasks'
 }
 
 { #category : #converting }
-BlTaskItNamedTask >> asLoggingTask [
-	^ self
-]
-
-{ #category : #converting }
-BlTaskItNamedTask >> asNamedTask [
+BlTktNamedTask >> asNamedTask [
 	^ self
 ]
 
 { #category : #initialization }
-BlTaskItNamedTask >> initialize [
+BlTktNamedTask >> initialize [
 	super initialize.
 	name := '<nameless>'.
-	task := nil.
 ]
 
 { #category : #accessing }
-BlTaskItNamedTask >> name [
+BlTktNamedTask >> name [
 	<return: #String>
 	^ name
 ]
 
 { #category : #accessing }
-BlTaskItNamedTask >> name: aString [
+BlTktNamedTask >> name: aString [
 	self 
 		assert: [ aString isString and: [ aString isEmpty not ] ]
 		description: [ 'Task name must be non-nil and non-empty string' ].
@@ -42,7 +33,7 @@ BlTaskItNamedTask >> name: aString [
 ]
 
 { #category : #printing }
-BlTaskItNamedTask >> printOn: aStream [
+BlTktNamedTask >> printOn: aStream [
 	self name isNil ifTrue: [ super printOn: aStream. ^ self ].
 	aStream
 		nextPutAll: 'Task named ';
@@ -51,22 +42,8 @@ BlTaskItNamedTask >> printOn: aStream [
 		print: self task.
 ]
 
-{ #category : #accessing }
-BlTaskItNamedTask >> task [
-	<return: #TKTTask>
-	^ task
-]
-
-{ #category : #accessing }
-BlTaskItNamedTask >> task: aTKTTask [
-	self 
-		assert: [ aTKTTask isNotNil ]
-		description: [ 'Task must be non-nil' ].
-	task := aTKTTask asTask.
-]
-
 { #category : #executing }
-BlTaskItNamedTask >> value [
+BlTktNamedTask >> value [
 	| aResult anOldNameOrNil anActiveProcess aTempName aTaskName |
 	self
 		assert: [ self task isNil not ]
