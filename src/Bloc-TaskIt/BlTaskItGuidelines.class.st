@@ -91,6 +91,7 @@ BlTaskItGuidelines >> basicHousekeepingWorkerPool [
 
 { #category : #'examples - schedule' }
 BlTaskItGuidelines >> executeScheduledCounterTaskAsAsyncUI [
+	<noTest>
 	<gtExample>
 	| aWorkerPool |
 	aWorkerPool := self scheduleCounterTaskAsAsyncUI.
