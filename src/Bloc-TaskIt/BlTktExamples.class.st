@@ -110,12 +110,13 @@ BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	<gtExample>
 	<noTest>
-	| aTask aWorker aFuture aResult |
+	| aTask aWorker aFuture |
 	aTask := self unresponsiveTaskTerminatingInTheMiddle.
 	aWorker := self worker.
 	aFuture := aWorker future: aTask.
-	aResult := aFuture synchronizeTimeout: self futureTimeout.
-	self assert: aResult equals: 1.
+	self signaler waitForTask.
+	self signaler signalCallerSemaphore.
+	self assert: self collector collection size equals: 1.
 	^ aTask
 ]
 
@@ -183,8 +184,10 @@ BlTktExamples >> unresponsiveTaskTerminatingInTheMiddle [
 	<gtExample>
 	| aTask aBlock |
 	aTask := BlTktUnresponsiveCommand new.
-	aBlock := [ self collector increment.
+	aBlock := [ 
+		self collector increment.
 		aTask terminationRequested.
+		self signaler signalTaskSemaphore.
 		self signaler waitForCaller.
 		self collector increment ].
 	aTask valuable: aBlock.
@@ -196,7 +199,7 @@ BlTktExamples >> unresponsiveTaskTerminatingInTheMiddle [
 BlTktExamples >> worker [
 	<gtExample>
 	<after: #stopWorker>
-	worker ifNil: [ worker := TKTWorker new name: self className, ' Worker'; start ].
+	worker ifNil: [ worker := BlTktCommandTaskWorker new name: self className, ' Worker'; start ].
 	self assert: worker isNotNil.
 	^ worker
 ]
