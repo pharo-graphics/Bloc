@@ -199,7 +199,9 @@ BlTktExamples >> signaler [
 
 { #category : #'examples - worker' }
 BlTktExamples >> stopUIWorkerPool [
-	uiWorkerPool ifNotNil: [ :aWorker | aWorker stop ].
+	uiWorkerPool ifNotNil: [ :aWorkerPool | 
+		aWorkerPool stop.
+		aWorkerPool stopWatchDog ].
 ]
 
 { #category : #'examples - worker' }

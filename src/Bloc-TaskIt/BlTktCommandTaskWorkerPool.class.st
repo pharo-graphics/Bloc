@@ -80,3 +80,8 @@ BlTktCommandTaskWorkerPool >> privateNewWorker [
 				taskQueue: taskQueue;
 				start)
 ]
+
+{ #category : #removing }
+BlTktCommandTaskWorkerPool >> stopWatchDog [
+	dog ifNotNil: [ :aWatchDog | aWatchDog stop ]
+]
