@@ -19,7 +19,7 @@ BlTktAnnouncingCommand >> announceAboutToFinishWithResult: anObject [
 
 { #category : #accessing }
 BlTktAnnouncingCommand >> announcer [
-	<return: #Announce>
+	<return: #Announcer>
 	^ announcer
 ]
 

@@ -11,6 +11,12 @@ Class {
 	#category : #'Bloc-TaskIt-New Implementation'
 }
 
+{ #category : #enumerating }
+BlTktCommandRequests >> ifExecutionExpectedDo: aBlock [
+	<return: #Object>
+	^ self isExecutionExpected ifTrue: aBlock
+]
+
 { #category : #initialization }
 BlTktCommandRequests >> initialize [
 	super initialize.
