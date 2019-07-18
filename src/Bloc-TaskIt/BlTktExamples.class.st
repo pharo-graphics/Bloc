@@ -2,7 +2,9 @@ Class {
 	#name : #BlTktExamples,
 	#superclass : #Object,
 	#instVars : [
-		'collector'
+		'collector',
+		'worker',
+		'signaler'
 	],
 	#category : #'Bloc-TaskIt-New Implementation'
 }
@@ -22,7 +24,7 @@ BlTktExamples >> announcingAndResponsiveCommand [
 
 { #category : #accessing }
 BlTktExamples >> collector [
-	<return: #BlTktExampleCollector>
+	<return: #BlTktExamplesCollector>
 	^ collector
 ]
 
@@ -56,6 +58,18 @@ BlTktExamples >> executeResponsiveCommand [
 	self assert: self collector collection size equals: 1.
 	self assert: self collector collection first equals: 1.
 	^ aCommand
+]
+
+{ #category : #'examples - tasks' }
+BlTktExamples >> executeResponsiveCommandTask [
+	<gtExample>
+	| aTask aWorker aFuture aResult |
+	aTask := self responsiveCommandTask.
+	aWorker := self worker.
+	aFuture := aWorker future: aTask.
+	aResult := aFuture synchronizeTimeout: self futureTimeout.
+	self assert: aResult equals: 1.
+	^ aTask
 ]
 
 { #category : #'examples - basic commands' }
@@ -92,10 +106,35 @@ BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 	^ aCommand
 ]
 
+{ #category : #'examples - tasks' }
+BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
+	<gtExample>
+	<noTest>
+	"TODO: It cannot work because TKTWorker executes one task, then another. We need WorkerPool"
+	| aTask aWorker aFuture aResult |
+	aTask := self unresponsiveCommandTerminatingInTheMiddle asTask.
+	aWorker := self worker.
+	aFuture := aWorker future: aTask.
+	self assert: aFuture isNotNil.
+	self signaler waitForTask.
+	self assert: self collector collection size equals: 1.
+	self signaler signalCallerSemaphore.
+	aResult := aFuture synchronizeTimeout: self futureTimeout.
+	self assert: aResult isNil.
+	self assert: self collector collection size equals: 1.
+	^ aTask
+]
+
+{ #category : #'examples - worker' }
+BlTktExamples >> futureTimeout [
+	^ 1000 milliSeconds
+]
+
 { #category : #initialization }
 BlTktExamples >> initialize [
 	super initialize.
 	collector := BlTktExamplesCollector new.
+	signaler := BlTktExamplesSignaler new.
 ]
 
 { #category : #'examples - basic commands' }
@@ -120,6 +159,19 @@ BlTktExamples >> responsiveCommandTask [
 	^ aTask
 ]
 
+{ #category : #accessing }
+BlTktExamples >> signaler [
+	<return: #BlTktExamplesSignaler>
+	^ signaler
+]
+
+{ #category : #'examples - worker' }
+BlTktExamples >> stopWorker [
+	<gtExample>
+	<after: #stopWorker>
+	worker ifNotNil: [ :aWorker | aWorker stop ].
+]
+
 { #category : #'examples - basic commands' }
 BlTktExamples >> unresponsiveCommand [
 	<gtExample>
@@ -130,4 +182,30 @@ BlTktExamples >> unresponsiveCommand [
 	self assert: aCommand valuable equals: aBlock.
 	self assert: aCommand name equals: aBlock printString.
 	^ aCommand
+]
+
+{ #category : #'examples - tasks' }
+BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
+	<gtExample>
+	| aCommand aBlock |
+	aCommand := BlTktUnresponsiveCommand new.
+	aBlock := [ 
+		self collector increment.
+		aCommand terminationRequested.
+		self signaler signalTaskSemaphore.
+		100 milliSeconds wait.
+		self signaler waitForCaller.
+		self collector increment ].
+	aCommand valuable: aBlock.
+	self assert: aCommand valuable equals: aBlock.
+	^ aCommand
+]
+
+{ #category : #'examples - worker' }
+BlTktExamples >> worker [
+	<gtExample>
+	<after: #stopWorker>
+	worker ifNil: [ worker := BlTktCommandTaskWorker new name: self className, ' Worker'; start ].
+	self assert: worker isNotNil.
+	^ worker
 ]

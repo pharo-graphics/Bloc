@@ -24,6 +24,11 @@ BlTktCommandTask >> command: aCommand [
 ]
 
 { #category : #executing }
+BlTktCommandTask >> scheduleTaskExecutionFor: aRunner [
+	^ self configureTaskExecution: BlTktCommandTaskExecution new with: aRunner
+]
+
+{ #category : #executing }
 BlTktCommandTask >> value [
 	^ self command value
 ]
