@@ -70,3 +70,13 @@ BlTktCommandTaskWorkerPool class >> stopDefault [
 BlTktCommandTaskWorkerPool class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self createDefault ]
 ]
+
+{ #category : #private }
+BlTktCommandTaskWorkerPool >> privateNewWorker [
+	workers
+		add:
+			(BlTktCommandTaskWorker new
+				name: self name , ' Worker #' , (self size + 1) asString;
+				taskQueue: taskQueue;
+				start)
+]

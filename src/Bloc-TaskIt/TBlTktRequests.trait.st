@@ -6,7 +6,6 @@ Trait {
 { #category : #enumerating }
 TBlTktRequests >> ifExecutionExpectedDo: aBlock [
 	<return: #Object>
-	<return: nil>
 	^ self isExecutionExpected ifTrue: aBlock
 ]
 
