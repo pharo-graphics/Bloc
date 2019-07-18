@@ -15,7 +15,7 @@ BlShrinkingTextElement >> onMeasure: anExtentMeasurementSpec [
 	super onMeasure: anExtentMeasurementSpec.
 	(self measuredWidth isZero not and: [self paragraph width > self measuredWidth]) ifTrue: [				 
 		| dotsParagraph cutSubText toPosition |
-		dotsParagraph := self defaultTextParagraph.
+		dotsParagraph := self createTextParagraph.
 		dotsParagraph text: '...' asRopedText.
 		dotsParagraph measureOn: self measurer.
 		toPosition := self paragraph indexAtPosition: (self measuredWidth - (dotsParagraph width)) - 1 @ 1.

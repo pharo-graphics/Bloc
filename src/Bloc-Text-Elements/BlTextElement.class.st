@@ -19,12 +19,31 @@ Class {
 		'measurer',
 		'measurement'
 	],
+	#classVars : [
+		'ParagraphPool'
+	],
 	#category : #'Bloc-Text-Elements'
 }
+
+{ #category : #'class initialization' }
+BlTextElement class >> initialize [
+	ParagraphPool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000)
+]
 
 { #category : #'instance creation' }
 BlTextElement class >> text: aBrText [
 	^ self new text: aBrText
+]
+
+{ #category : #'private - paragraph' }
+BlTextElement >> acquireParagraph [
+	| aParagraph |
+	
+	aParagraph := ParagraphPool acquire
+		ifNil: [ self createTextParagraph ].
+	aParagraph reset.
+
+	^ aParagraph
 ]
 
 { #category : #'api - text' }
@@ -95,6 +114,14 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 	^ aMaxWidth
 ]
 
+{ #category : #'private - paragraph' }
+BlTextElement >> createTextParagraph [
+	"Create a text paragraph used to measure and render text"
+	<return: #BlTextParagraph>
+
+	^ BlSingleLineTextParagraph new
+]
+
 { #category : #initialization }
 BlTextElement >> defaultText [
 	"Return a default text I should be created with"
@@ -106,14 +133,6 @@ BlTextElement >> defaultText [
 { #category : #initialization }
 BlTextElement >> defaultTextMeasurer [
 	^ BlTextElementCanvasMeasurer new
-]
-
-{ #category : #initialization }
-BlTextElement >> defaultTextParagraph [
-	"Create a text paragraph used to measure and render text"
-	<return: #BlTextParagraph>
-
-	^ BlSingleLineTextParagraph new
 ]
 
 { #category : #'selection - management' }
@@ -276,7 +295,7 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 
 	paragraph
 		"Create a new text layout"
-		ifNil: [ paragraph := self defaultTextParagraph ]
+		ifNil: [ paragraph := self acquireParagraph ]
 		"or reuse existing"
 		ifNotNil: [ paragraph reset ].
 
@@ -354,13 +373,31 @@ BlTextElement >> onRemovedFromSceneGraph [
 	paragraph
 		ifNil: [ ^ self ].
 
-	paragraph wantsAutoRelease
-		ifFalse: [ paragraph finalize ]
+	self releaseParagraph.
+	self requestLayout
 ]
 
-{ #category : #accessing }
+{ #category : #'private - paragraph' }
 BlTextElement >> paragraph [
+	<return: #BlTextParagraph>
+
+	self
+		assert: [ paragraph isNotNil ]
+		description: [ 'Can not access paragraph if it is nil' ].
+
 	^ paragraph
+]
+
+{ #category : #'private - paragraph' }
+BlTextElement >> releaseParagraph [
+	| aParagraph |
+
+	aParagraph := paragraph.
+
+	aParagraph reset.
+	ParagraphPool release: aParagraph.
+	
+	paragraph := nil
 ]
 
 { #category : #'selection - management' }

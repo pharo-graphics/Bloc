@@ -38,7 +38,6 @@ Class {
 		'maxHeight',
 		'maxWidth',
 		'end',
-		'autoRelease',
 		'text',
 		'tabWidth',
 		'selection',
@@ -225,8 +224,7 @@ BlTextParagraph >> indexAtPosition: aPoint [
 { #category : #initialization }
 BlTextParagraph >> initialize [
 	super initialize.
-	
-	autoRelease := true.
+
 	self reset
 ]
 
@@ -343,16 +341,14 @@ BlTextParagraph >> renderOn: aCanvas [
 
 { #category : #initialization }
 BlTextParagraph >> reset [
-	self wantsAutoRelease
-		ifFalse: [ self finalize ].
+	self finalize.
 
 	text := BlText empty.
-	autoRelease := true.
 	tabWidth := self defaultTabWidth.
 	maxHeight := Float infinity.
 	maxWidth := Float infinity.
+	session := nil.
 	end := 0.
-	autoRelease := true.
 	selection := nil.
 	containerExtent := 0@0.
 	baseline := BlTextParagraphAscentLooseBaseline uniqueInstance.
@@ -491,7 +487,7 @@ BlTextParagraph >> top [
 
 { #category : #testing }
 BlTextParagraph >> wantsAutoRelease [
-	^ autoRelease
+	^ true
 ]
 
 { #category : #'paragraph - geometry' }
