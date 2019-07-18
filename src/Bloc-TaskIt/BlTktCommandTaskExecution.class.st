@@ -8,6 +8,7 @@ Class {
 
 { #category : #evaluating }
 BlTktCommandTaskExecution >> doExecuteTask [
+	'doExecuteTask' traceCr.
 	TKTConfiguration runner scheduleCommandTaskCheckEvery: self timeout on: self.
 	^ super doExecuteTask
 ]

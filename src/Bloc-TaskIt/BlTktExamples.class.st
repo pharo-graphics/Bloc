@@ -29,6 +29,11 @@ BlTktExamples >> collector [
 	^ collector
 ]
 
+{ #category : #'examples - worker' }
+BlTktExamples >> ensureIsStarted: aWorker [
+	aWorker isRunning ifFalse: [ aWorker start ]
+]
+
 { #category : #'examples - announcing commands' }
 BlTktExamples >> executeAnnouncingAndResponsiveCommand [
 	<gtExample>
@@ -67,6 +72,7 @@ BlTktExamples >> executeResponsiveCommandTask [
 	| aTask aWorker aFuture aResult |
 	aTask := self responsiveCommandTask.
 	aWorker := self worker.
+	self ensureIsStarted: aWorker.
 	aFuture := aWorker future: aTask.
 	aResult := aFuture synchronizeTimeout: self futureTimeout.
 	self assert: aResult equals: 1.
@@ -115,10 +121,12 @@ BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	| aTask aWorkerPool aFuture aResult |
 	aTask := self unresponsiveCommandTerminatingInTheMiddle asTask.
 	aWorkerPool := self uiWorkerPool poolMaxSize: 2.
+	aWorkerPool start.
 	aFuture := aWorkerPool future: aTask.
 	self assert: aFuture isNotNil.
 	self signaler waitForTask.
 	self assert: self collector collection size equals: 1.
+	aTask terminationRequested.
 	self signaler signalCallerSemaphore.
 	aResult := aFuture synchronizeTimeout: self futureTimeout.
 	self assert: aResult isNil.
@@ -142,7 +150,7 @@ BlTktExamples >> initialize [
 BlTktExamples >> newUIWorkerPool [
 	<gtExample>
 	| aName aWorkerPool |
-	aName := self className, ' Worker'.
+	aName := self className, ' Pool-', self identityHash asString.
 	aWorkerPool := BlTktUIWorkerPool new name: aName; poolMaxSize: 1.
 	self assert: aWorkerPool name equals: aName.
 	self assert: aWorkerPool poolMaxSize equals: 1.
@@ -203,7 +211,7 @@ BlTktExamples >> stopWorker [
 BlTktExamples >> uiWorkerPool [
 	<gtExample>
 	<after: #stopUIWorkerPool>
-	uiWorkerPool ifNil: [ uiWorkerPool := self newUIWorkerPool start ].
+	uiWorkerPool ifNil: [ uiWorkerPool := self newUIWorkerPool ].
 	self assert: uiWorkerPool isNotNil.
 	^ uiWorkerPool
 ]
@@ -227,9 +235,7 @@ BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
 	aCommand := BlTktUnresponsiveCommand new.
 	aBlock := [ 
 		self collector increment.
-		aCommand terminationRequested.
 		self signaler signalTaskSemaphore.
-		100 milliSeconds wait.
 		self signaler waitForCaller.
 		self collector increment ].
 	aCommand valuable: aBlock.
@@ -241,7 +247,7 @@ BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
 BlTktExamples >> worker [
 	<gtExample>
 	<after: #stopWorker>
-	worker ifNil: [ worker := self newWorker start ].
+	worker ifNil: [ worker := self newWorker ].
 	self assert: worker isNotNil.
 	^ worker
 ]

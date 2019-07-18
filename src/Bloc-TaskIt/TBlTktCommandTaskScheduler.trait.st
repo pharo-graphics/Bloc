@@ -5,21 +5,30 @@ Trait {
 
 { #category : #private }
 TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskExecution [
+	"At this moment we support only cancel request. 
+	We cannot suspend and resume a process."
+	| shouldFinish |
 	self traceCr: 'privateCheckCommandTaskEvery:on:'.
-	[ aTaskExecution isFinished ] whileFalse: [
+	shouldFinish := false.
+	[ shouldFinish or: [ aTaskExecution isFinished ] ] whileFalse: [
 		aTimeout wait.
-		self traceCr: 'iteration'.
+		self traceCr: 'privateCheckCommandTaskEvery:on: iteration'.
 		aTaskExecution isFinished ifFalse: [  
 			aTaskExecution isTerminationRequested ifTrue: [ 
-				aTaskExecution terminateWithReason: 'User request at', DateAndTime now asString ].
+				aTaskExecution cancelWithReason: 'User termination request at', DateAndTime now asString.
+				shouldFinish := true.
+				"aTaskExecution terminateWithReason: 'User request at', DateAndTime now asString" ].
 			aTaskExecution isSuspendRequested ifTrue: [
-				aTaskExecution suspendWithReason: 'User request at ', DateAndTime now asString ].
+				aTaskExecution cancelWithReason: 'User suspend request at', DateAndTime now asString.
+				shouldFinish := true.
+				"aTaskExecution suspendWithReason: 'User request at ', DateAndTime now asString" ].
 			aTaskExecution isResumeRequested ifTrue: [
 				aTaskExecution resume ] ] ].
 ]
 
 { #category : #scheduling }
 TBlTktCommandTaskScheduler >> scheduleCommandTaskCheckEvery: aTimeout on: aTaskExecution [
+	self logCr: #scheduleCommandTaskCheckEvery:on:.
 	TKTConfiguration processProvider
 		createProcessDoing:
 			(MessageSend
