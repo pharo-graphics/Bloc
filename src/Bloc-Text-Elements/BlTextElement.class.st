@@ -26,6 +26,11 @@ Class {
 }
 
 { #category : #'class initialization' }
+BlTextElement class >> cleanUp [
+	self initialize
+]
+
+{ #category : #'class initialization' }
 BlTextElement class >> initialize [
 	ParagraphPool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000)
 ]

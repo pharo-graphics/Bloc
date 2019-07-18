@@ -58,5 +58,6 @@ BlPathCache >> geometry: aBlGeometry [
 BlPathCache >> releaseCache [
 	"Release path caches requiring their fresh creation"
 
+	geometryPath ifNotNil: #release.
 	geometryPath := nil
 ]
