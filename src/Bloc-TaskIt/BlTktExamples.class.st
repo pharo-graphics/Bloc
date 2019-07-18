@@ -110,12 +110,16 @@ BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	<gtExample>
 	<noTest>
-	| aTask aWorker aFuture |
-	aTask := self unresponsiveTaskTerminatingInTheMiddle.
+	| aTask aWorker aFuture aResult |
+	aTask := self unresponsiveCommandTerminatingInTheMiddle asTask.
 	aWorker := self worker.
 	aFuture := aWorker future: aTask.
+	self assert: aFuture isNotNil.
 	self signaler waitForTask.
+	self assert: self collector collection size equals: 1.
 	self signaler signalCallerSemaphore.
+	aResult := aFuture synchronizeTimeout: self futureTimeout.
+	self assert: aResult isNil.
 	self assert: self collector collection size equals: 1.
 	^ aTask
 ]
@@ -180,19 +184,20 @@ BlTktExamples >> unresponsiveCommand [
 ]
 
 { #category : #'examples - tasks' }
-BlTktExamples >> unresponsiveTaskTerminatingInTheMiddle [
+BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
 	<gtExample>
-	| aTask aBlock |
-	aTask := BlTktUnresponsiveCommand new.
+	| aCommand aBlock |
+	aCommand := BlTktUnresponsiveCommand new.
 	aBlock := [ 
 		self collector increment.
-		aTask terminationRequested.
+		aCommand terminationRequested.
 		self signaler signalTaskSemaphore.
+		100 milliSeconds wait.
 		self signaler waitForCaller.
 		self collector increment ].
-	aTask valuable: aBlock.
-	self assert: aTask valuable equals: aBlock.
-	^ aTask
+	aCommand valuable: aBlock.
+	self assert: aCommand valuable equals: aBlock.
+	^ aCommand
 ]
 
 { #category : #'examples - worker' }
