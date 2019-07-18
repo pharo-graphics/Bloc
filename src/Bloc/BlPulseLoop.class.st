@@ -38,7 +38,7 @@ BlPulseLoop >> createLoopTask [
 
 { #category : #period }
 BlPulseLoop >> defaultPulsePeriod [
-	^ 16 milliSeconds
+	^ 15 milliSeconds
 ]
 
 { #category : #'loop process' }

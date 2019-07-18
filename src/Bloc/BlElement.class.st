@@ -1314,6 +1314,9 @@ BlElement >> geometry: aBlGeometry [
 
 	"invalidate before changing geometry"
 	self invalidate.
+	
+	"clean the cache of the old geometry"
+	self geometry releaseCache.
 	geometry := aBlGeometry.
 
 	"clear path cache after updating geometry path"
