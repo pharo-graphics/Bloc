@@ -25,7 +25,7 @@ BlTktExamples >> announcingAndResponsiveCommand [
 
 { #category : #accessing }
 BlTktExamples >> collector [
-	<return: #BlTktExampleCollector>
+	<return: #BlTktExamplesCollector>
 	^ collector
 ]
 

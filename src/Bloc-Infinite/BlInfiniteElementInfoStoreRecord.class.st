@@ -38,7 +38,7 @@ BlInfiniteElementInfoStoreRecord class >> pool [
 
 { #category : #accessing }
 BlInfiniteElementInfoStoreRecord class >> poolSize [
-	^ 20
+	^ 30
 ]
 
 { #category : #recycling }
