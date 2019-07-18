@@ -110,6 +110,7 @@ BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	<gtExample>
 	<noTest>
+	"TODO: It cannot work because TKTWorker executes one task, then another. We need WorkerPool"
 	| aTask aWorker aFuture aResult |
 	aTask := self unresponsiveCommandTerminatingInTheMiddle asTask.
 	aWorker := self worker.

@@ -32,10 +32,14 @@ BlTktExamplesSignaler >> signalTaskSemaphore [
 
 { #category : #signalling }
 BlTktExamplesSignaler >> waitForCaller [
-	callerSemaphore waitTimeoutMSecs: self defaultTimeout
+	| isTimeouted |
+	isTimeouted := callerSemaphore waitTimeoutMSecs: self defaultTimeout.
+	self assert: isTimeouted not
 ]
 
 { #category : #signalling }
 BlTktExamplesSignaler >> waitForTask [
-	taskSemaphore waitTimeoutMSecs: self defaultTimeout
+	| isTimeouted |
+	isTimeouted := taskSemaphore waitTimeoutMSecs: self defaultTimeout.
+	self assert: isTimeouted not
 ]
