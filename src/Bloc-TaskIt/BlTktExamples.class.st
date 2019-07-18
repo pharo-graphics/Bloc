@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'collector',
 		'worker',
-		'signaler'
+		'signaler',
+		'uiWorkerPool'
 	],
 	#category : #'Bloc-TaskIt-New Implementation'
 }
@@ -111,10 +112,10 @@ BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	<gtExample>
 	<noTest>
 	"TODO: It cannot work because TKTWorker executes one task, then another. We need WorkerPool"
-	| aTask aWorker aFuture aResult |
+	| aTask aWorkerPool aFuture aResult |
 	aTask := self unresponsiveCommandTerminatingInTheMiddle asTask.
-	aWorker := self worker.
-	aFuture := aWorker future: aTask.
+	aWorkerPool := self uiWorkerPool poolMaxSize: 2.
+	aFuture := aWorkerPool future: aTask.
 	self assert: aFuture isNotNil.
 	self signaler waitForTask.
 	self assert: self collector collection size equals: 1.
@@ -135,6 +136,29 @@ BlTktExamples >> initialize [
 	super initialize.
 	collector := BlTktExamplesCollector new.
 	signaler := BlTktExamplesSignaler new.
+]
+
+{ #category : #'examples - worker' }
+BlTktExamples >> newUIWorkerPool [
+	<gtExample>
+	| aName aWorkerPool |
+	aName := self className, ' Worker'.
+	aWorkerPool := BlTktUIWorkerPool new name: aName; poolMaxSize: 1.
+	self assert: aWorkerPool name equals: aName.
+	self assert: aWorkerPool poolMaxSize equals: 1.
+	^ aWorkerPool
+	
+]
+
+{ #category : #'examples - worker' }
+BlTktExamples >> newWorker [
+	<gtExample>
+	| aName aWorker |
+	aName := self className, ' Worker'.
+	aWorker := BlTktCommandTaskWorker new name: aName.
+	self assert: aWorker name equals: aName.
+	^ aWorker
+	
 ]
 
 { #category : #'examples - basic commands' }
@@ -166,10 +190,22 @@ BlTktExamples >> signaler [
 ]
 
 { #category : #'examples - worker' }
+BlTktExamples >> stopUIWorkerPool [
+	uiWorkerPool ifNotNil: [ :aWorker | aWorker stop ].
+]
+
+{ #category : #'examples - worker' }
 BlTktExamples >> stopWorker [
-	<gtExample>
-	<after: #stopWorker>
 	worker ifNotNil: [ :aWorker | aWorker stop ].
+]
+
+{ #category : #'examples - worker' }
+BlTktExamples >> uiWorkerPool [
+	<gtExample>
+	<after: #stopUIWorkerPool>
+	uiWorkerPool ifNil: [ uiWorkerPool := self newUIWorkerPool start ].
+	self assert: uiWorkerPool isNotNil.
+	^ uiWorkerPool
 ]
 
 { #category : #'examples - basic commands' }
@@ -205,7 +241,7 @@ BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
 BlTktExamples >> worker [
 	<gtExample>
 	<after: #stopWorker>
-	worker ifNil: [ worker := BlTktCommandTaskWorker new name: self className, ' Worker'; start ].
+	worker ifNil: [ worker := self newWorker start ].
 	self assert: worker isNotNil.
 	^ worker
 ]

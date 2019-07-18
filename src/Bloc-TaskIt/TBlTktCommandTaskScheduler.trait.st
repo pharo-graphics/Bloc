@@ -5,8 +5,10 @@ Trait {
 
 { #category : #private }
 TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskExecution [
+	self traceCr: 'privateCheckCommandTaskEvery:on:'.
 	[ aTaskExecution isFinished ] whileFalse: [
 		aTimeout wait.
+		self traceCr: 'iteration'.
 		aTaskExecution isFinished ifFalse: [  
 			aTaskExecution isTerminationRequested ifTrue: [ 
 				aTaskExecution terminateWithReason: 'User request at', DateAndTime now asString ].
