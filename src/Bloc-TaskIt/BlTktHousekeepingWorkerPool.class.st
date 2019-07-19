@@ -15,3 +15,9 @@ BlTktHousekeepingWorkerPool class >> defaultPoolSize [
 	<return: #Integer>
 	^ 1
 ]
+
+{ #category : #accessing }
+BlTktHousekeepingWorkerPool >> processProvider [
+	<return: #TKTTaskItProcessProvider>
+	^ BlTKTHousekeepingProcessProvider new
+]

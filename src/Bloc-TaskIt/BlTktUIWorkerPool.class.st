@@ -15,3 +15,9 @@ BlTktUIWorkerPool class >> defaultPoolSize [
 	<return: #Integer>
 	^ 4
 ]
+
+{ #category : #accessing }
+BlTktUIWorkerPool >> processProvider [
+	<return: #TKTTaskItProcessProvider>
+	^ BlTKTBackgroundProcessProvider new
+]

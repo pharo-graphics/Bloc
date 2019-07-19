@@ -58,6 +58,12 @@ BlTktCommandTaskWorkerPool class >> resetUniqueInstance [
 ]
 
 { #category : #management }
+BlTktCommandTaskWorkerPool class >> startDefault [
+	<return: #BlTktCommandTaskWorkerPool>
+	^ self createDefault start
+]
+
+{ #category : #management }
 BlTktCommandTaskWorkerPool class >> stopAllSubDefaults [
 	<script>
 	"Stop the all worker pools"
@@ -73,7 +79,19 @@ BlTktCommandTaskWorkerPool class >> stopDefault [
 
 { #category : #current }
 BlTktCommandTaskWorkerPool class >> uniqueInstance [
-	^ uniqueInstance ifNil: [ uniqueInstance := self createDefault ]
+	^ uniqueInstance ifNil: [ uniqueInstance := self startDefault ]
+]
+
+{ #category : #schedulling }
+BlTktCommandTaskWorkerPool >> future: aTask [
+	<return: #TKTFuture>
+	^ self withConfigurationDo: [ super future: aTask ].
+]
+
+{ #category : #'public - mutexed' }
+BlTktCommandTaskWorkerPool >> printOn: aStream [
+	name ifNil: [ aStream nextPutAll: 'a '; nextPutAll: self className. ^ self ].
+	aStream nextPutAll: name
 ]
 
 { #category : #private }
@@ -86,7 +104,36 @@ BlTktCommandTaskWorkerPool >> privateNewWorker [
 				start)
 ]
 
+{ #category : #accessing }
+BlTktCommandTaskWorkerPool >> processProvider [
+	<return: #TKTTaskItProcessProvider>
+	^ self subclassResponsibility
+]
+
+{ #category : #schedulling }
+BlTktCommandTaskWorkerPool >> schedule: aTask [
+	self withConfigurationDo: [ super schedule: aTask ].
+]
+
+{ #category : #schedulling }
+BlTktCommandTaskWorkerPool >> schedule: aTask timeout: aTimeout [
+	self withConfigurationDo: [ super schedule: aTask timeout: aTimeout ].
+]
+
+{ #category : #'public - mutexed' }
+BlTktCommandTaskWorkerPool >> start [
+	"TODO: maybe WatchDog should be at higher priority?"
+	self withConfigurationDo: [ super start ].
+]
+
 { #category : #removing }
 BlTktCommandTaskWorkerPool >> stopWatchDog [
 	dog ifNotNil: [ :aWatchDog | aWatchDog stop ]
+]
+
+{ #category : #private }
+BlTktCommandTaskWorkerPool >> withConfigurationDo: aBlock [
+	^ TKTConfiguration 
+		processProvider: self processProvider 
+		during: aBlock
 ]
