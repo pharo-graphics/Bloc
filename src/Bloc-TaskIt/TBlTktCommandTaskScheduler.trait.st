@@ -6,13 +6,14 @@ Trait {
 { #category : #private }
 TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskExecution [
 	"At this moment we support only cancel request. 
-	We cannot suspend and resume a process."
+	We cannot suspend and resume a process.
+	TODO: we should rather schedule again aTaskExecution to ensure that other checks get time to check"
 	| shouldFinish |
-	self traceCr: 'privateCheckCommandTaskEvery:on:'.
+	self traceCr: 'Executor: privateCheckCommandTaskEvery:on:'.
 	shouldFinish := false.
 	[ shouldFinish or: [ aTaskExecution isFinished ] ] whileFalse: [
 		aTimeout wait.
-		self traceCr: 'privateCheckCommandTaskEvery:on: iteration'.
+		self traceCr: 'Executor: privateCheckCommandTaskEvery:on: iteration'.
 		aTaskExecution isFinished ifFalse: [  
 			aTaskExecution aboutToCheckCallback value.
 			aTaskExecution isTerminationRequested ifTrue: [ 

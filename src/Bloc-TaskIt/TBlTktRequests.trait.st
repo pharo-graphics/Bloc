@@ -11,10 +11,22 @@ TBlTktRequests >> aboutToCheckCallback [
 ]
 
 { #category : #callbacks }
+TBlTktRequests >> aboutToCheckCallback: aValuable [
+	"aValuable callback is an object that understands the #value message"
+	^ self requestContext aboutToCheckCallback: aValuable
+]
+
+{ #category : #callbacks }
 TBlTktRequests >> checkFinishedCallback [
 	"Return an object that understands the #value message"
 	<return: #BlockClosure>
 	^ self requestContext checkFinishedCallback
+]
+
+{ #category : #callbacks }
+TBlTktRequests >> checkFinishedCallback: aValuable [
+	"aValuable callback is an object that understands the #value message"
+	^ self requestContext checkFinishedCallback: aValuable
 ]
 
 { #category : #enumerating }
