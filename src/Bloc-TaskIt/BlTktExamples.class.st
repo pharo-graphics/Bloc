@@ -120,6 +120,8 @@ BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	"TODO: It cannot work because TKTWorker executes one task, then another. We need WorkerPool"
 	| aTask aWorkerPool aFuture aResult |
 	aTask := self unresponsiveCommandTerminatingInTheMiddle asTask.
+	aTask requestContext aboutToCheckCallback: [ self signaler waitForThirdPartySemaphore ].
+	aTask requestContext checkFinishedCallback: [ self signaler signalThirdPartySemaphore ].
 	aWorkerPool := self uiWorkerPool poolMaxSize: 2.
 	aWorkerPool start.
 	aFuture := aWorkerPool future: aTask.
@@ -127,6 +129,7 @@ BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	self signaler waitForTask.
 	self assert: self collector collection size equals: 1.
 	aTask terminationRequested.
+	self signaler signalThirdPartySemaphore.
 	self signaler signalCallerSemaphore.
 	aResult := aFuture synchronizeTimeout: self futureTimeout.
 	self assert: aResult isNil.
@@ -239,6 +242,7 @@ BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
 		self collector increment.
 		self signaler signalTaskSemaphore.
 		self signaler waitForCaller.
+		 self signaler waitForThirdPartySemaphore.
 		self collector increment ].
 	aCommand valuable: aBlock.
 	self assert: aCommand valuable equals: aBlock.

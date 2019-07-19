@@ -6,10 +6,36 @@ Class {
 	#instVars : [
 		'isSuspendRequested',
 		'isResumeRequested',
-		'isTerminationRequested'
+		'isTerminationRequested',
+		'aboutToCheckCallback',
+		'checkFinishedCallback'
 	],
 	#category : #'Bloc-TaskIt-New Implementation'
 }
+
+{ #category : #callbacks }
+BlTktCommandRequests >> aboutToCheckCallback [
+	"Return an object that understands the #value message"
+	<return: #BlockClosure>
+	^ aboutToCheckCallback
+]
+
+{ #category : #accessing }
+BlTktCommandRequests >> aboutToCheckCallback: anObject [
+	aboutToCheckCallback := anObject
+]
+
+{ #category : #callbacks }
+BlTktCommandRequests >> checkFinishedCallback [
+	"Return an object that understands the #value message"
+	<return: #BlockClosure>
+	^ checkFinishedCallback
+]
+
+{ #category : #accessing }
+BlTktCommandRequests >> checkFinishedCallback: anObject [
+	checkFinishedCallback := anObject
+]
 
 { #category : #enumerating }
 BlTktCommandRequests >> ifExecutionExpectedDo: aBlock [

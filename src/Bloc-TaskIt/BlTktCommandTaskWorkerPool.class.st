@@ -22,6 +22,11 @@ BlTktCommandTaskWorkerPool class >> createDefault [
 		poolMaxSize: self defaultPoolSize
 ]
 
+{ #category : #current }
+BlTktCommandTaskWorkerPool class >> default [
+	^ self uniqueInstance
+]
+
 { #category : #accessing }
 BlTktCommandTaskWorkerPool class >> defaultName [
 	<return: #BlTktCommandTaskWorkerPool>

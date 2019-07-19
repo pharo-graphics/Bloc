@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'taskSemaphore',
-		'callerSemaphore'
+		'callerSemaphore',
+		'thirdPartySemaphore'
 	],
 	#category : #'Bloc-TaskIt-New Implementation'
 }
@@ -18,6 +19,7 @@ BlTktExamplesSignaler >> initialize [
 	super initialize.
 	callerSemaphore := Semaphore new.
 	taskSemaphore := Semaphore new.
+	thirdPartySemaphore := Semaphore new.
 ]
 
 { #category : #signalling }
@@ -31,6 +33,11 @@ BlTktExamplesSignaler >> signalTaskSemaphore [
 ]
 
 { #category : #signalling }
+BlTktExamplesSignaler >> signalThirdPartySemaphore [
+	thirdPartySemaphore signal
+]
+
+{ #category : #signalling }
 BlTktExamplesSignaler >> waitForCaller [
 	| isTimeouted |
 	isTimeouted := callerSemaphore waitTimeoutMSecs: self defaultTimeout.
@@ -41,5 +48,12 @@ BlTktExamplesSignaler >> waitForCaller [
 BlTktExamplesSignaler >> waitForTask [
 	| isTimeouted |
 	isTimeouted := taskSemaphore waitTimeoutMSecs: self defaultTimeout.
+	self assert: isTimeouted not
+]
+
+{ #category : #signalling }
+BlTktExamplesSignaler >> waitForThirdPartySemaphore [
+	| isTimeouted |
+	isTimeouted := thirdPartySemaphore waitTimeoutMSecs: self defaultTimeout.
 	self assert: isTimeouted not
 ]

@@ -14,6 +14,7 @@ TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskEx
 		aTimeout wait.
 		self traceCr: 'privateCheckCommandTaskEvery:on: iteration'.
 		aTaskExecution isFinished ifFalse: [  
+			aTaskExecution aboutToCheckCallback value.
 			aTaskExecution isTerminationRequested ifTrue: [ 
 				aTaskExecution cancelWithReason: 'User termination request at', DateAndTime now asString.
 				shouldFinish := true.
@@ -23,7 +24,8 @@ TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskEx
 				shouldFinish := true.
 				"aTaskExecution suspendWithReason: 'User request at ', DateAndTime now asString" ].
 			aTaskExecution isResumeRequested ifTrue: [
-				aTaskExecution resume ] ] ].
+				aTaskExecution resume ].
+			aTaskExecution checkFinishedCallback value ] ].
 ]
 
 { #category : #scheduling }
