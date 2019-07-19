@@ -120,31 +120,23 @@ BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	| aTask aWorkerPool aFuture aResult |
 	aTask := self unresponsiveCommandTerminatingInTheMiddle asTask.
 	aTask requestContext aboutToCheckCallback: [ 
-		'Executor: aboutToCheckCallback callback starting' traceCr.
-		self signaler waitForThirdPartySemaphore.
-		'Executor: aboutToCheckCallback callback finished' traceCr. ].
+		self signaler waitForThirdPartySemaphore. ].
 	aTask requestContext checkFinishedCallback: [ 
-		'Executor: checkFinishedCallback callback starting' traceCr.
-		self signaler signalFourthPartySemaphore.
-		'Executor: checkFinishedCallback callback finished' traceCr. ].
+		self signaler signalFourthPartySemaphore. ].
 	aWorkerPool := self uiWorkerPool poolMaxSize: 2.
 	aWorkerPool start.
-	'Example: Task about to schedule' traceCr.
 	aFuture := aWorkerPool future: aTask.
-	'Example: Tasked scheduled' traceCr.
 	self assert: aFuture isNotNil.
 	self signaler waitForTask.
-	'Example: Task increment check' traceCr.
 	self assert: self collector collection size equals: 1.
-	'Example: Task about to terminate request' traceCr.
 	aTask terminationRequested.
-	'Example: Task termination requested' traceCr.
 	self signaler signalThirdPartySemaphore.
 	self signaler signalCallerSemaphore.
-	'Example: Waiting for future' traceCr.
 	[ aResult := aFuture synchronizeTimeout: self futureTimeout ] 
 		on: TKTCancelledTaskException
-		do: [ :anException | self collector add: anException ].
+		do: [ :anException | 
+			"We should receive an exception"
+			self collector add: anException ].
 	self assert: aResult isNil.
 	self assert: self collector collection size equals: 2.
 	self assert: self collector collection first equals: 1.
@@ -254,15 +246,11 @@ BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
 	| aCommand aBlock |
 	aCommand := BlTktUnresponsiveCommand new.
 	aBlock := [ 
-		'Task: increment' traceCr.
 		self collector increment.
-		'Task: incremented' traceCr.
 		self signaler signalTaskSemaphore.
 		self signaler waitForCaller.
 		self signaler waitForFourthPartySemaphore.
-		'Task: incrementTwo' traceCr.
-		self collector increment.
-		'Task: incrementedTwo' traceCr. ].
+		self collector increment. ].
 	aCommand valuable: aBlock.
 	self assert: aCommand valuable equals: aBlock.
 	^ aCommand

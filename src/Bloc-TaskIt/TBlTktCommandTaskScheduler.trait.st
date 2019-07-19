@@ -9,11 +9,9 @@ TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskEx
 	We cannot suspend and resume a process.
 	TODO: we should rather schedule again aTaskExecution to ensure that other checks get time to check"
 	| shouldFinish |
-	self traceCr: 'Executor: privateCheckCommandTaskEvery:on:'.
 	shouldFinish := false.
 	[ shouldFinish or: [ aTaskExecution isFinished ] ] whileFalse: [
 		aTimeout wait.
-		self traceCr: 'Executor: privateCheckCommandTaskEvery:on: iteration'.
 		aTaskExecution isFinished ifFalse: [  
 			aTaskExecution aboutToCheckCallback value.
 			aTaskExecution isTerminationRequested ifTrue: [ 
@@ -31,7 +29,6 @@ TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskEx
 
 { #category : #scheduling }
 TBlTktCommandTaskScheduler >> scheduleCommandTaskCheckEvery: aTimeout on: aTaskExecution [
-	self logCr: #scheduleCommandTaskCheckEvery:on:.
 	TKTConfiguration processProvider
 		createProcessDoing:
 			(MessageSend
