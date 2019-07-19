@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTktCommandTaskWorkerPool,
 	#superclass : #TKTCommonQueueWorkerPool,
-	#traits : 'TBlDebug + TBlTktCommandTaskScheduler',
+	#traits : '(TBlDebug + TBlTktCommandTaskScheduler) - {#processProvider}',
 	#classTraits : 'TBlDebug classTrait + TBlTktCommandTaskScheduler classTrait',
 	#classInstVars : [
 		'uniqueInstance'

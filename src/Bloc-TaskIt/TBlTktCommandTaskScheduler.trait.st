@@ -27,9 +27,14 @@ TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskEx
 			aTaskExecution checkFinishedCallback value ] ].
 ]
 
+{ #category : #accessing }
+TBlTktCommandTaskScheduler >> processProvider [
+	^ TKTConfiguration processProvider
+]
+
 { #category : #scheduling }
 TBlTktCommandTaskScheduler >> scheduleCommandTaskCheckEvery: aTimeout on: aTaskExecution [
-	TKTConfiguration processProvider
+	self processProvider
 		createProcessDoing:
 			(MessageSend
 				receiver: self
@@ -37,5 +42,5 @@ TBlTktCommandTaskScheduler >> scheduleCommandTaskCheckEvery: aTimeout on: aTaskE
 				arguments:
 					{aTimeout.
 					aTaskExecution})
-		named: 'Command Task Checker for ', aTaskExecution name asString
+		named: 'Task Checker for ', aTaskExecution name asString
 ]
