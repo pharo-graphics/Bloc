@@ -67,10 +67,8 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#BlocCore ). ];
 			package: #'BlocHost-Morphic' with: [
 				spec requires: #(#BlocCore ). ];
-			package: #'BlocHost-OSWindow' with: [
-				spec requires: #(#BlocCore 'Bloc-Sparta'). ];
-			package: #'BlocHost-OSWindow-Glutin' with: [
-				spec requires: #('BlocHost-OSWindow' OSWindowGlutin). ];
+			package: #'BlocHost-Glutin' with: [
+				spec requires: #(#BlocCore 'Bloc-Sparta' OSWindowGlutin). ];
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [
