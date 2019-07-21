@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'lastTime'
 	],
-	#category : #'Bloc-Universe 2'
+	#category : #'Bloc-Universe - Parallel'
 }
 
 { #category : #'as yet unclassified' }
@@ -21,14 +21,14 @@ BlUniverseEventListener >> eventsCleared: anEvent [
 	nowTime := DateAndTime now.
 	lastTime := lastTime ifNil: [ nowTime ].
 	
-	anEvent currentTarget spaces do: #pulse.
+	anEvent currentTarget pulse.
 
 	(nowTime - lastTime) < 16 milliSeconds
 		ifTrue: [
 			| aTimeToWait |
 
 			aTimeToWait := (16 milliSeconds - (nowTime - lastTime)) / 2.0.
-			"aTimeToWait wait."
+			10 atRandom = 5 ifTrue: [ aTimeToWait wait ].
 
 			Processor yield.
 			Processor class relinquishProcessorForMicroseconds: aTimeToWait asMilliSeconds * 1000 ].

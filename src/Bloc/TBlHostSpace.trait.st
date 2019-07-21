@@ -337,7 +337,7 @@ TBlHostSpace >> toFront [
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> universe [
-	<return: #BlUniverse2>
+	<return: #BlParallelUniverse>
 
 	^ universe
 ]

@@ -41,6 +41,11 @@ BlSpaceManager >> addSpace: aSpace [
 	spaces := spaces copyWith: aSpace
 ]
 
+{ #category : #enumerating }
+BlSpaceManager >> do: aBlock [
+	self spaces do: aBlock
+]
+
 { #category : #testing }
 BlSpaceManager >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"

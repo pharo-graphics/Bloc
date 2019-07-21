@@ -1,22 +1,25 @@
+"
+I am a parallel Universe. There can exist multiple parallel universes
+"
 Class {
-	#name : #BlUniverse2,
+	#name : #BlParallelUniverse,
 	#superclass : #Object,
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
-		'spaces',
 		'deferredActions',
 		'eventDispatcher',
-		'hostClass'
+		'hostClass',
+		'spaceManager'
 	],
 	#classVars : [
 		'Universes'
 	],
-	#category : #'Bloc-Universe 2'
+	#category : #'Bloc-Universe - Parallel'
 }
 
 { #category : #'instance creation' }
-BlUniverse2 class >> forHost: aHostClass [
+BlParallelUniverse class >> forHost: aHostClass [
 	^ Universes
 		detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
 		ifFound: #yourself
@@ -28,41 +31,71 @@ BlUniverse2 class >> forHost: aHostClass [
 ]
 
 { #category : #'instance creation' }
-BlUniverse2 class >> glutin [
+BlParallelUniverse class >> glutin [
 	<blocHost>
 
 	^ self forHost: BlGlutinHost
 ]
 
 { #category : #'class initialization' }
-BlUniverse2 class >> initialize [
+BlParallelUniverse class >> initialize [
 	Universes := #()
 ]
 
 { #category : #'instance creation' }
-BlUniverse2 class >> morphic [
+BlParallelUniverse class >> morphic [
 	<blocHost>
 
 	^ self forHost: BlMorphicHost
 ]
 
 { #category : #'api - spaces' }
-BlUniverse2 >> closeSpace: aSpace [
+BlParallelUniverse >> closeSpace: aSpace [
 	"It should be possible to close a space from the other thread"
+
+	self
+		assert: [ aSpace isNotNil ]
+		description: [ 'Space must not be nil' ].
+
+	self
+		assert: [ aSpace hasHostSpace ]
+		description: [ 'Space must have a host! Are you sure it is opened?' ].
+
+	"First destroy host space and "
+	aSpace host destroyHostSpaceFor: aSpace.
+
+	"then remove space itself from space manager"
+	spaceManager removeSpace: aSpace.
+	
+	"Notify root element that it is no longer in scene graph"
+	aSpace root dispatchRemovedFromSceneGraph.
+	"Send space closed event.
+	Note: a new space may be spawned as a reaction to the event, that is why
+	we send it before stopping host and universe"
+	aSpace dispatchEvent: (BlSpaceClosedEvent new space: aSpace).
+
+	self
+		assert: [ aSpace hasHostSpace not ]
+		description: [ 'Host space must not have a host!' ].
+
+	"as the last step we may want to stop the host. It may terminate
+	the current process, so we should do it at last"
+	(spaceManager hasSpaces not and: [ aSpace host isRunning ])
+		ifTrue: [ aSpace host stop ].
 ]
 
 { #category : #initialization }
-BlUniverse2 >> defaultEventDispatcher [
+BlParallelUniverse >> defaultEventDispatcher [
 	^ BlDirectEventDispatcher on: self
 ]
 
 { #category : #initialization }
-BlUniverse2 >> defaultEventListener [
+BlParallelUniverse >> defaultEventListener [
 	^ BlUniverseEventListener new
 ]
 
 { #category : #'deferred message' }
-BlUniverse2 >> defer: aValuable [
+BlParallelUniverse >> defer: aValuable [
 	"#defer: can be used from any thread to execute a valuable in the GUI thread
 	You can use it to update the GUI states from any other thread.
 	The valuable will be evaluated as soon as possible."
@@ -71,7 +104,7 @@ BlUniverse2 >> defer: aValuable [
 ]
 
 { #category : #'event management accessing' }
-BlUniverse2 >> eventDispatcher [
+BlParallelUniverse >> eventDispatcher [
 	"Return an object responsible for event dispatching"
 	<return: #BlDirectEventDispatcher>
 
@@ -79,28 +112,28 @@ BlUniverse2 >> eventDispatcher [
 ]
 
 { #category : #'api - spaces' }
-BlUniverse2 >> hasSpaces [
+BlParallelUniverse >> hasSpaces [
 	"Return true if there are registered spaces, false otherwise"
 	<return: #Boolean>
 
-	^ self spaces isNotEmpty
+	^ spaceManager hasSpaces
 ]
 
 { #category : #accessing }
-BlUniverse2 >> hostClass [
+BlParallelUniverse >> hostClass [
 	^ hostClass
 ]
 
 { #category : #accessing }
-BlUniverse2 >> hostClass: aHostClass [
+BlParallelUniverse >> hostClass: aHostClass [
 	hostClass := aHostClass
 ]
 
 { #category : #initialization }
-BlUniverse2 >> initialize [
+BlParallelUniverse >> initialize [
 	super initialize.
 
-	spaces := #().
+	spaceManager := BlSpaceManager new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
 
@@ -109,7 +142,7 @@ BlUniverse2 >> initialize [
 ]
 
 { #category : #'api - spaces' }
-BlUniverse2 >> openSpace: aSpace [
+BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
 
 	self
@@ -125,7 +158,7 @@ BlUniverse2 >> openSpace: aSpace [
 		description: [ 'Space must have a host' ].
 
 	"First of all we need to add space to the space manager"
-	spaces := spaces copyWith: aSpace.
+	spaceManager addSpace: aSpace.
 
 	"then create and show it in a host space"
 	aSpace host createHostSpaceFor: aSpace.
@@ -147,9 +180,14 @@ BlUniverse2 >> openSpace: aSpace [
 		ifFalse: [ aSpace host start ]
 ]
 
+{ #category : #pulse }
+BlParallelUniverse >> pulse [
+	spaceManager do: [ :eachSpace | eachSpace pulse ]
+]
+
 { #category : #'api - spaces' }
-BlUniverse2 >> spaces [
+BlParallelUniverse >> spaces [
 	<return: #Collection of: #BlSpace>
 
-	^ spaces
+	^ spaceManager spaces
 ]

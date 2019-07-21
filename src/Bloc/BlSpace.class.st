@@ -211,7 +211,7 @@ BlSpace class >> simulateMouseUpOn: anElement [
 		on: anElement
 ]
 
-{ #category : #'api - adding' }
+{ #category : #'api - adding children' }
 BlSpace >> addChild: anElement [
 	"Add a given element as a direct child to the space root"
 	
@@ -236,13 +236,6 @@ BlSpace >> borderless: aBoolean [
 	 self hostSpaceDo: [ :aHostSpace | aHostSpace borderless: aBoolean ].
 ]
 
-{ #category : #'event management' }
-BlSpace >> buildEventDispatchChain: aBlEventDispatcherChain [
-	<return: #BlEventDispatcherChain>
-
-	^ aBlEventDispatcherChain
-]
-
 { #category : #'change reporting' }
 BlSpace >> clearDirtyAreas [
 	"Clear all dirty areas.
@@ -251,10 +244,11 @@ BlSpace >> clearDirtyAreas [
 	self dirtyAreas removeAll
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> close [
 	"Delegate closing work to the Universe"
-	BlUniverse default closeSpaceWindow: self
+	
+	(BlParallelUniverse forHost: self host class) closeSpace: self
 ]
 
 { #category : #'cursor managing' }
@@ -312,15 +306,6 @@ BlSpace >> defaultRootLabel [
 { #category : #initialization }
 BlSpace >> defaultTitle [
 	^ ''
-]
-
-{ #category : #'dragboard managing' }
-BlSpace >> deleteDragboard [
-	| d |
-	d := self dragboard.
-	self dragboard clear.
-	self dragboard: nil.
-	^ d
 ]
 
 { #category : #'window - properties' }
@@ -618,7 +603,7 @@ BlSpace >> height [
 	^ self extent y
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> hide [
 	self hostSpace ifNotNil: [ :hw | hw hide ]
 ]
@@ -794,23 +779,23 @@ BlSpace >> makeDirty: aBlBounds [
 		ifNotEmpty: [ :aCollection | aCollection first merge: aBlBounds ].
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> maximize [
 	self hostSpace ifNotNil: [ :hw | hw maximize ]
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> maximized [
 	self hostSpace ifNotNil: [ :hw | ^ hw maximized ].
 	^ false
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> minimize [
 	self hostSpace ifNotNil: [ :hw | hw minimize ]
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> minimized [
 	self hostSpace ifNotNil: [ :hw | ^ hw minimized ].
 	^ false
@@ -826,12 +811,6 @@ BlSpace >> mouseProcessor [
 { #category : #'accessing - processors' }
 BlSpace >> mouseProcessor: aMouseProcessor [
 	mouseProcessor := aMouseProcessor
-]
-
-{ #category : #'dragboard managing' }
-BlSpace >> newDragboard [
-	self dragboard: (BlDragboard space: self).
-	^ self dragboard
 ]
 
 { #category : #'window - properties' }
@@ -885,7 +864,7 @@ BlSpace >> pulseRequested [
 	^ nextPulseRequested
 ]
 
-{ #category : #'api - adding' }
+{ #category : #'api - adding children' }
 BlSpace >> removeChild: anElement [
 	"Remove a given element from the space root"
 	
@@ -1010,12 +989,12 @@ BlSpace >> setPosition: aPoint [
 	position := aPoint
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> show [
 	"Open me in a window and show it to the user"
 
 	"delegate showing work to the Universe"	
-	(BlUniverse2 forHost: self host class) openSpace: self
+	(BlParallelUniverse forHost: self host class) openSpace: self
 ]
 
 { #category : #'api - tasks' }
@@ -1055,12 +1034,12 @@ BlSpace >> title: aString [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace title: aString ]
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> toBack [
 	self hostSpace ifNotNil: [ :hw | hw toBack ]
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> toFront [
 	self hostSpace ifNotNil: [ :hw | hw toFront ]
 ]

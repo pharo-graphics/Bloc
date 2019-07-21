@@ -222,6 +222,13 @@ BlHeadlessHostSpace >> toFront [
 ]
 
 { #category : #'host space - accessing' }
+BlHeadlessHostSpace >> universe [
+	<return: #BlParallelUniverse>
+
+	^ universe
+]
+
+{ #category : #'host space - accessing' }
 BlHeadlessHostSpace >> windowExtent [
 	"Return the window size in screen coordinates.
 	This size may differ from the size in pixels of underlying surface 
