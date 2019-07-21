@@ -8,10 +8,7 @@ Class {
 BlTouchExamples class >> multiTouchDemo [
 	<script: 'self multiTouchDemo'>
 	| container space |
-	
-	(Smalltalk hasClassNamed: #BlOSWindowHost)
-		ifFalse: [ ^ self ].
-	
+
 	container := BlElement new.
 	container background: Color veryVeryLightGray.
 	container constraintsDo: [ :c |
@@ -41,7 +38,6 @@ BlTouchExamples class >> multiTouchDemo [
 	space := BlSpace new.
 	space position: 100@100.
 	space title: 'Touch Demo'.
-	space host: #BlOSWindowHost asClass default.
 	space root addChild: container.
 	space show
 ]
