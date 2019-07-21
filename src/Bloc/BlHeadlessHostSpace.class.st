@@ -8,8 +8,6 @@ Class {
 	#classTraits : 'TBlHostSpace classTrait + TBlDebug classTrait',
 	#instVars : [
 		'eventFetcher',
-		'host',
-		'space',
 		'position',
 		'title'
 	],
@@ -84,21 +82,6 @@ BlHeadlessHostSpace >> fullscreen: aBoolean [
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> hide [
 	"do nothing"
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> host [
-	"Return a host that was used to create this host space"
-	<return: #BlHost>
-
-	^ host
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> host: aBlHost [
-	"Assign a host that was used to create this host space"
-	
-	host := aBlHost
 ]
 
 { #category : #'window - properties' }
@@ -211,21 +194,6 @@ BlHeadlessHostSpace >> scaleFactor [
 
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> show [
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> space [
-	"Return a space I am assigned to"
-	<return: #BlSpace>
-
-	^ space
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> space: aSpace [
-	"Assign me to a given space"
-
-	space := aSpace
 ]
 
 { #category : #'window - properties' }

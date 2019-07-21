@@ -64,21 +64,6 @@ BlMorphicWindowHostSpace >> hasResized [
 	^ false
 ]
 
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> host [
-	"Return a host that was used to create this host space"
-	<return: #BlHost>
-
-	^ host
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> host: aBlHost [
-	"Assign a host that was used to create this host space"
-	
-	host := aBlHost
-]
-
 { #category : #initialization }
 BlMorphicWindowHostSpace >> initialize [
 	super initialize.

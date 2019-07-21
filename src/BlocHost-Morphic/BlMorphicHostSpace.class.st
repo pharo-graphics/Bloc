@@ -11,12 +11,10 @@ Class {
 	#instVars : [
 		'morph',
 		'renderer',
-		'host',
-		'space',
 		'eventFetcher',
 		'mutex'
 	],
-	#category : 'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host'
 }
 
 { #category : #'window - properties' }
@@ -69,21 +67,6 @@ BlMorphicHostSpace >> eventFetcher [
 	<return: #BlHostEventFetcher>
 
 	^ eventFetcher
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicHostSpace >> host [
-	"Return a host that was used to create this host space"
-	<return: #BlHost>
-
-	^ host
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicHostSpace >> host: aBlHost [
-	"Assign a host that was used to create this host space"
-	
-	host := aBlHost
 ]
 
 { #category : #initialization }
@@ -172,21 +155,6 @@ BlMorphicHostSpace >> scaleFactor [
 BlMorphicHostSpace >> show [
 	self morph position: self host containerMorph position.
 	self host containerMorph addMorphBack: self morph
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicHostSpace >> space [
-	"Return a space I am assigned to"
-	<return: #BlSpace>
-
-	^ space
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicHostSpace >> space: aSpace [
-	"Assign me to a given space"
-
-	space := aSpace
 ]
 
 { #category : #'window - properties' }

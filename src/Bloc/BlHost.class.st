@@ -124,3 +124,10 @@ BlHost >> supportsOpenGLSurface [
 	
 	^ false
 ]
+
+{ #category : #'host space - accessing' }
+BlHost >> universe [
+	<return: #BlUniverse2>
+	
+	^ BlUniverse2 forHost: self class
+]

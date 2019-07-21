@@ -249,6 +249,11 @@ BlEvent >> isTouch [
 	^ false
 ]
 
+{ #category : #testing }
+BlEvent >> isUniverseEvent [
+	^ false
+]
+
 { #category : #firing }
 BlEvent >> newCopyFor: aTarget [
 	^ self class new

@@ -21,12 +21,12 @@ Class {
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'pulseLoop',
-		'preferableHost',
 		'pulseListeners',
 		'spaceManager',
 		'announcer',
 		'deferredActions',
-		'nextPulseRequested'
+		'nextPulseRequested',
+		'host'
 	],
 	#classVars : [
 		'Default',
@@ -148,7 +148,21 @@ BlUniverse >> firePulse: aPulseEvent [
 
 { #category : #accessing }
 BlUniverse >> host [
-	^ preferableHost ifNil: [ BlHost pickHost ]
+	^ host ifNil: [ BlHost pickHost ]
+]
+
+{ #category : #accessing }
+BlUniverse >> host: aBlHost [
+
+	self
+		assert: [ self isRunning not ]
+		description: [ 'Universe must not be running!' ].
+
+	self
+		assert: [ host isNil or: [ host isRunning not ] ]
+		description: [ 'Existing preferable host must not be running!' ].
+
+	host := aBlHost
 ]
 
 { #category : #'initialize-release' }
@@ -187,7 +201,7 @@ BlUniverse >> mainLoopPriority [
 
 { #category : #accessing }
 BlUniverse >> preferableHost [
-	^ preferableHost
+	^ host
 ]
 
 { #category : #accessing }
@@ -198,10 +212,10 @@ BlUniverse >> preferableHost: aBlHost [
 		description: [ 'Universe must not be running!' ].
 
 	self
-		assert: [ preferableHost isNil or: [ preferableHost isRunning not ] ]
+		assert: [ host isNil or: [ host isRunning not ] ]
 		description: [ 'Existing preferable host must not be running!' ].
 
-	preferableHost := aBlHost
+	host := aBlHost
 ]
 
 { #category : #accessing }

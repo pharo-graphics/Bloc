@@ -121,6 +121,15 @@ BlOSWindowEventHandler >> time: aTime [
 	time := aTime
 ]
 
+{ #category : #'visiting - universe' }
+BlOSWindowEventHandler >> visitEventsCleared: anEvent [
+	self window space pulse.
+	3 milliSeconds wait.
+	
+
+	
+]
+
 { #category : #'visiting - keyboard' }
 BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 	| aBlEvent |
@@ -432,7 +441,8 @@ BlOSWindowEventHandler >> visitWindowMoveEvent: anEvent [
 
 { #category : #'visiting - window' }
 BlOSWindowEventHandler >> visitWindowResizeEvent: anEvent [
-	self windowResized: anEvent width @ anEvent height
+	self windowResized: anEvent width @ anEvent height.
+	self window space pulse
 ]
 
 { #category : #'api - accessing' }

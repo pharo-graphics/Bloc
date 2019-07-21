@@ -1014,8 +1014,8 @@ BlSpace >> setPosition: aPoint [
 BlSpace >> show [
 	"Open me in a window and show it to the user"
 
-	"delegate showing work to the Universe"
-	BlUniverse default showSpaceWindow: self
+	"delegate showing work to the Universe"	
+	(BlUniverse2 forHost: self host class) openSpace: self
 ]
 
 { #category : #'api - tasks' }

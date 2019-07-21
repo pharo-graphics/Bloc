@@ -7,6 +7,13 @@ This area is typically an host-specific window.
 "
 Trait {
 	#name : #TBlHostSpace,
+	#instVars : [
+		'renderer',
+		'host',
+		'space',
+		'universe',
+		'eventFetcher'
+	],
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
 	#category : #'Bloc-Universe'
@@ -47,8 +54,11 @@ TBlHostSpace >> enqueueEvent: aBlEvent [
 	"Enqueue a given Bloc Event in the event queue.
 	I am useful for testing and benchmark purposes"
 
-	self eventFetcher enqueueEvent: aBlEvent.
-	self space requestNextPulse
+	aBlEvent isUniverseEvent
+		ifTrue: [ self universe dispatchEvent: aBlEvent ].
+
+	aBlEvent isSpaceEvent
+		ifTrue: [ self space dispatchEvent: aBlEvent ]
 ]
 
 { #category : #'host space - events' }
@@ -57,7 +67,11 @@ TBlHostSpace >> eventFetcher [
 	processed in the beginning of every frame"
 	<return: #BlHostEventFetcher>
 
-	^ self explicitRequirement
+	self
+		assert: [ eventFetcher isNotNil ]
+		description: [ 'Event fetcher must not be nil' ].
+
+	^ eventFetcher
 ]
 
 { #category : #'host space - events' }
@@ -92,14 +106,14 @@ TBlHostSpace >> host [
 	"Return a host that was used to create this host space"
 	<return: #BlHost>
 
-	^ self explicitRequirement
+	^ host
 ]
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> host: aBlHost [
 	"Assign a host that was used to create this host space"
 	
-	self explicitRequirement
+	host := aBlHost
 ]
 
 { #category : #initialization }
@@ -255,7 +269,7 @@ TBlHostSpace >> renderer [
 	"Return host renderer used to render spaces"
 	<return: #TBlHostRenderer>
 
-	^ self explicitRequirement
+	^ renderer
 ]
 
 { #category : #'host space - accessing' }
@@ -264,7 +278,7 @@ TBlHostSpace >> scaleFactor [
 	On high dpi (retina) displays scaling factor is > 1"
 	<return: #Point>
 	
-	^ self explicitRequirement
+	^ (self canvasExtent / self windowExtent) asFloatPoint
 ]
 
 { #category : #'host space - displaying' }
@@ -277,14 +291,14 @@ TBlHostSpace >> space [
 	"Return a space I am assigned to"
 	<return: #BlSpace>
 
-	^ self explicitRequirement
+	^ space
 ]
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> space: aSpace [
 	"Assign me to a given space"
 
-	self explicitRequirement
+	space := aSpace
 ]
 
 { #category : #'host space - testing' }
@@ -319,6 +333,18 @@ TBlHostSpace >> toBack [
 { #category : #'host space - displaying' }
 TBlHostSpace >> toFront [
 	self explicitRequirement
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> universe [
+	<return: #BlUniverse2>
+
+	^ universe
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> universe: aUniverse [
+	universe := aUniverse
 ]
 
 { #category : #'host space - accessing' }

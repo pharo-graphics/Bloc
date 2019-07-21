@@ -34,7 +34,7 @@ BlOSWindowGlutinHost >> keyboardKeyTable [
 
 { #category : #'host - events' }
 BlOSWindowGlutinHost >> pollEvents [
-	OSGlutinDriver pollEvents
+	"OSGlutinDriver pollEvents"
 ]
 
 { #category : #initialization }
@@ -42,6 +42,13 @@ BlOSWindowGlutinHost >> preferableDriver [
 	<return: #OSWindowDriver>
 
 	^ OSGlutinDriver new
+]
+
+{ #category : #'host - api' }
+BlOSWindowGlutinHost >> start [
+	isRunning := true.
+	
+	
 ]
 
 { #category : #'host - testing' }
