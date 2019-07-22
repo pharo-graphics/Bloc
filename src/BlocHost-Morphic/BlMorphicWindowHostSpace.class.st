@@ -11,14 +11,11 @@ Class {
 	#classTraits : 'TBlHostSpace classTrait',
 	#instVars : [
 		'morphicWindow',
-		'mirrowWindows',
 		'renderer',
 		'mutex',
-		'eventFetcher',
-		'space',
-		'host'
+		'eventFetcher'
 	],
-	#category : 'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host - Window'
 }
 
 { #category : #'host space - accessing' }
@@ -45,15 +42,6 @@ BlMorphicWindowHostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #'host space - events' }
-BlMorphicWindowHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
-
-	^ eventFetcher
-]
-
 { #category : #'as yet unclassified' }
 BlMorphicWindowHostSpace >> hasResized [
 	"Return true if renderer extent changed.
@@ -69,20 +57,12 @@ BlMorphicWindowHostSpace >> initialize [
 	super initialize.
 
 	eventFetcher := BlHostEventFetcher new.
-	mutex := Mutex new.
-	mirrowWindows := OrderedCollection new
+	mutex := Mutex new
 ]
 
 { #category : #'private - accessing' }
 BlMorphicWindowHostSpace >> lock [
 	^ mutex
-]
-
-{ #category : #'private - accessing' }
-BlMorphicWindowHostSpace >> mirrowWindow: aWindow [
-	
-	mirrowWindows add: aWindow.
-	aWindow hostSpace: self
 ]
 
 { #category : #'private - accessing' }
@@ -100,11 +80,11 @@ BlMorphicWindowHostSpace >> morphicWindow: aWindow [
 BlMorphicWindowHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 	<return: #Boolean>
-	 
+
 	^ false
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlMorphicWindowHostSpace >> open [
 	self show 
 ]
@@ -126,16 +106,7 @@ BlMorphicWindowHostSpace >> position: aPoint [
 
 { #category : #'host space - rendering' }
 BlMorphicWindowHostSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
-
-	morphicWindow form: aBlHostRendererFormSurface form.
-	mirrowWindows do: [ :each | each form: aBlHostRendererFormSurface form ]
-]
-
-{ #category : #'host space - rendering' }
-BlMorphicWindowHostSpace >> render: aSpace [
-	"Render a given abstract space on an underlying window or visual area"
-
-	self lock critical: [ renderer render: aSpace ]
+	morphicWindow form: aBlHostRendererFormSurface form
 ]
 
 { #category : #'host space - accessing' }
@@ -162,21 +133,6 @@ BlMorphicWindowHostSpace >> show [
 	anExtent := morphicWindow extent.
 	morphicWindow openInWorld.
 	morphicWindow extent: anExtent
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> space [
-	"Return a space I am assigned to"
-	<return: #BlSpace>
-
-	^ space
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> space: aSpace [
-	"Assign me to a given space"
-
-	space := aSpace
 ]
 
 { #category : #'window - properties' }
@@ -207,11 +163,4 @@ BlMorphicWindowHostSpace >> windowExtent [
 { #category : #'host space - accessing' }
 BlMorphicWindowHostSpace >> windowExtent: anExtent [
 	morphicWindow spaceExtent: anExtent
-]
-
-{ #category : #'instance creation' }
-BlMorphicWindowHostSpace >> withSpartaRenderer [
-
-	renderer := BlSpartaRenderer new.
-	renderer initializeHostSpace: self
 ]

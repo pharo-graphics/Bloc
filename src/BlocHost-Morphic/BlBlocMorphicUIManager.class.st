@@ -13,7 +13,7 @@ I use ==Smalltalk tools debugger== to open the actual debugger. For my precondit
 Class {
 	#name : #BlBlocMorphicUIManager,
 	#superclass : #MorphicUIManager,
-	#category : #'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Support'
 }
 
 { #category : #actions }

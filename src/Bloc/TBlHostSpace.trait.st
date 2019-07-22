@@ -11,8 +11,7 @@ Trait {
 		'renderer',
 		'host',
 		'space',
-		'universe',
-		'eventFetcher'
+		'universe'
 	],
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
@@ -49,36 +48,37 @@ TBlHostSpace >> densityDpi [
 	^ self explicitRequirement
 ]
 
-{ #category : #'host space - events' }
-TBlHostSpace >> enqueueEvent: aBlEvent [
-	"Enqueue a given Bloc Event in the event queue.
-	I am useful for testing and benchmark purposes"
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachHost [
+	host := nil
+]
 
-	aBlEvent isUniverseEvent
-		ifTrue: [ self universe dispatchEvent: aBlEvent ].
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachSpace [
+	space := nil
+]
 
-	aBlEvent isSpaceEvent
-		ifTrue: [ self space dispatchEvent: aBlEvent ]
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachUniverse [
+	universe := nil
 ]
 
 { #category : #'host space - events' }
-TBlHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
+TBlHostSpace >> enqueueEvent: aBlEvent [
+	"I dispatch events directly to the universe or space as soon as they come"
 
-	self
-		assert: [ eventFetcher isNotNil ]
-		description: [ 'Event fetcher must not be nil' ].
+	aBlEvent isUniverseEvent
+		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
 
-	^ eventFetcher
+	aBlEvent isSpaceEvent
+		ifTrue: [ ^ self space dispatchEvent: aBlEvent ].
+		
+	self space dispatchEvent: aBlEvent
 ]
 
 { #category : #'host space - events' }
 TBlHostSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
-
-	self eventFetcher fetchedEventsDo: aBlock
 ]
 
 { #category : #'host space - events' }
@@ -94,11 +94,6 @@ TBlHostSpace >> hasScaled [
 	<return: #Boolean>
 
 	^ self renderer hasResized
-]
-
-{ #category : #'host space - displaying' }
-TBlHostSpace >> hide [
-	self explicitRequirement
 ]
 
 { #category : #'host space - accessing' }
@@ -189,11 +184,6 @@ TBlHostSpace >> needsRebuild [
 	^ self explicitRequirement
 ]
 
-{ #category : #'host space - displaying' }
-TBlHostSpace >> open [
-	self explicitRequirement
-]
-
 { #category : #'host space - rendering' }
 TBlHostSpace >> prepareToRender: aBlSpace onBufferSurface: aBlHostRendererBufferSurface [
 	"Prepare host space to a given space on a buffer surface.
@@ -270,6 +260,11 @@ TBlHostSpace >> renderer [
 	<return: #TBlHostRenderer>
 
 	^ renderer
+]
+
+{ #category : #'host space - rendering' }
+TBlHostSpace >> requestRedraw [
+	"Space needs to redraw the window"
 ]
 
 { #category : #'host space - accessing' }

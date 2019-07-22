@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'isRunning'
 	],
-	#category : 'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host - Window'
 }
 
 { #category : #'driver selection' }

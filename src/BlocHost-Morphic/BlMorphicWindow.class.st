@@ -14,7 +14,7 @@ Class {
 		'mutex',
 		'preventResize'
 	],
-	#category : 'BlocHost-Morphic-Morphs'
+	#category : #'BlocHost-Morphic-Host - Window'
 }
 
 { #category : #accessing }
@@ -65,6 +65,7 @@ BlMorphicWindow >> initialize [
 
 	spaceForm := BlMorphicExternalFormMorph new.
 	self addMorph: spaceForm fullFrame: (0@0 extent: 1@1).
+
 	eventHandler := BlMorphicEventHandler window: self.
 	mutex := Mutex new.
 	preventResize := false
@@ -176,6 +177,15 @@ BlMorphicWindow >> spacePosition [
 	<return: #Point>
 
 	^ spaceForm position
+]
+
+{ #category : #stepping }
+BlMorphicWindow >> step [
+]
+
+{ #category : #stepping }
+BlMorphicWindow >> stepTime [
+	^ 0  "every cycle"
 ]
 
 { #category : #testing }

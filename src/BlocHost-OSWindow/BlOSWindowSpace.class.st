@@ -71,16 +71,8 @@ BlOSWindowSpace >> ensureWindowIsValid [
 ]
 
 { #category : #'host space - events' }
-BlOSWindowSpace >> eventFetcher [
-	^ eventFetcher
-]
-
-{ #category : #'host space - events' }
 BlOSWindowSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
-
-	self host pollEvents.
-	self eventFetcher fetchedEventsDo: aBlock
 ]
 
 { #category : #'host space - accessing' }
@@ -108,7 +100,7 @@ BlOSWindowSpace >> generateEvents [
 		ifTrue: [ self enqueueEvent: (BlSpaceScaledEvent new timestamp: self space time now) ]
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> hide [
 	self windowDo: [ :aWindow | aWindow hide ]
 ]
@@ -224,7 +216,7 @@ BlOSWindowSpace >> needsRebuild [
 	^ self isValid not
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> open [
 	self windowDo: [ :aWindow | aWindow show ]
 ]

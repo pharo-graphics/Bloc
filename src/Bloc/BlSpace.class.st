@@ -220,7 +220,9 @@ BlSpace >> addChild: anElement [
 
 { #category : #'change reporting' }
 BlSpace >> beDirtyArea [
-	self makeDirty: (BlBounds origin: 0 @ 0 extent: self extent)
+	self
+		invalidRect: (BlBounds origin: 0 @ 0 extent: self extent)
+		from: self root
 ]
 
 { #category : #'window - properties' }
@@ -715,9 +717,10 @@ BlSpace >> initializeFocus [
 
 { #category : #'change reporting' }
 BlSpace >> invalidRect: aBlBounds from: anElement [
-
 	self makeDirty: aBlBounds.
-	self requestNextPulse
+	self requestNextPulse.
+	
+	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ]
 ]
 
 { #category : #testing }
@@ -895,12 +898,7 @@ BlSpace >> requestFocusFor: anElement [
 
 { #category : #'change reporting' }
 BlSpace >> requestNextPulse [
-	nextPulseRequested := true.
-	
-	"By the contract next pulse can be only requested if universe is running.
-	It is done to not create pulse loop when it is actually not needed (for example during testing)"
-	BlUniverse default isRunning
-		ifTrue: [ BlUniverse default requestNextPulse ]
+	nextPulseRequested := true
 ]
 
 { #category : #'window - properties' }

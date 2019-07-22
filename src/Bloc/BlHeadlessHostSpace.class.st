@@ -55,15 +55,6 @@ BlHeadlessHostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #'host space - events' }
-BlHeadlessHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
-
-	^ eventFetcher
-]
-
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> fullscreen [
 	"Return true if an underlying window is in fullscreen mode,
@@ -79,7 +70,7 @@ BlHeadlessHostSpace >> fullscreen: aBoolean [
 	and exit fullscreen mode if false is given"
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlHeadlessHostSpace >> hide [
 	"do nothing"
 ]
@@ -136,7 +127,7 @@ BlHeadlessHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlHeadlessHostSpace >> open [
 	"do nothing"
 ]

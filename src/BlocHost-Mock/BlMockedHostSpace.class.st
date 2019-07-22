@@ -101,15 +101,6 @@ BlMockedHostSpace >> densityDpi: aNumber [
 	densityDpi := aNumber
 ]
 
-{ #category : #'host space - events' }
-BlMockedHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
-
-	^ eventFetcher
-]
-
 { #category : #'window - properties' }
 BlMockedHostSpace >> fullscreen [
 	"Return true if an underlying window is in fullscreen mode,
@@ -137,7 +128,7 @@ BlMockedHostSpace >> hasResized [
 	^ false
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlMockedHostSpace >> hide [
 	visible := false
 ]
@@ -209,7 +200,7 @@ BlMockedHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlMockedHostSpace >> open [
 	opened := true.
 	self show

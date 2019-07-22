@@ -57,12 +57,9 @@ BlParallelUniverse >> closeSpace: aSpace [
 		assert: [ aSpace isNotNil ]
 		description: [ 'Space must not be nil' ].
 
-	self
-		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host! Are you sure it is opened?' ].
-
 	"First destroy host space and "
-	aSpace host destroyHostSpaceFor: aSpace.
+	aSpace hasHostSpace
+		ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
 
 	"then remove space itself from space manager"
 	spaceManager removeSpace: aSpace.

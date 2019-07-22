@@ -9,12 +9,9 @@ Class {
 	#traits : 'TBlHostSpace',
 	#classTraits : 'TBlHostSpace classTrait',
 	#instVars : [
-		'morph',
-		'renderer',
-		'eventFetcher',
-		'mutex'
+		'spaceHostMorph'
 	],
-	#category : #'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host - Morph'
 }
 
 { #category : #'window - properties' }
@@ -42,8 +39,7 @@ BlMorphicHostSpace >> canvasExtent [
 
 { #category : #'host space - displaying' }
 BlMorphicHostSpace >> close [
-	self host containerMorph removeMorph: self morph.
-	space := nil
+	self host containerMorph removeMorph: self spaceHostMorph
 ]
 
 { #category : #'host space - cursor' }
@@ -60,37 +56,9 @@ BlMorphicHostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #accessing }
-BlMorphicHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
-
-	^ eventFetcher
-]
-
 { #category : #initialization }
 BlMorphicHostSpace >> initialize [
-	super initialize.
-
-	mutex := Mutex new.
-	eventFetcher := BlHostEventFetcher new
-]
-
-{ #category : #accessing }
-BlMorphicHostSpace >> lock [
-	^ mutex
-]
-
-{ #category : #accessing }
-BlMorphicHostSpace >> morph [
-	^ morph
-]
-
-{ #category : #accessing }
-BlMorphicHostSpace >> morph: aMorph [
-	morph := aMorph.
-	aMorph hostSpace: self
+	super initialize
 ]
 
 { #category : #'host space - testing' }
@@ -101,60 +69,51 @@ BlMorphicHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #'host space - displaying' }
-BlMorphicHostSpace >> open [
-	self show
-]
-
 { #category : #'window - properties' }
 BlMorphicHostSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
 	
-	^ self morph position
+	^ self spaceHostMorph position
 ]
 
 { #category : #'window - properties' }
 BlMorphicHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen coordinates"
 	
-	self morph position: aPoint
+	self spaceHostMorph position: aPoint
 
 ]
 
 { #category : #'host space - rendering' }
 BlMorphicHostSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
-	morph form: aBlHostRendererFormSurface form
+	spaceHostMorph form: aBlHostRendererFormSurface form
 ]
 
 { #category : #'host space - rendering' }
-BlMorphicHostSpace >> render: aSpace [
-	"Render a given abstract space on an underlying window or visual area"
-
-	self lock critical: [ renderer render: aSpace ]
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicHostSpace >> renderer [
-	"Return host renderer used to render spaces"
-	<return: #TBlHostRenderer>
-
-	^ renderer
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicHostSpace >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
+BlMorphicHostSpace >> requestRedraw [
+	"Space needs to redraw the window"
 	
-	^ 1.0 asPoint
+	spaceHostMorph changed
 ]
 
 { #category : #'host space - displaying' }
 BlMorphicHostSpace >> show [
-	self morph position: self host containerMorph position.
-	self host containerMorph addMorphBack: self morph
+	self spaceHostMorph position: self host containerMorph position.
+	self host containerMorph addMorphBack: self spaceHostMorph
+]
+
+{ #category : #accessing }
+BlMorphicHostSpace >> spaceHostMorph [
+	<return: #BlMorphicSpaceHostMorph>
+
+	^ spaceHostMorph
+]
+
+{ #category : #accessing }
+BlMorphicHostSpace >> spaceHostMorph: aMorphicSpaceHostMorph [
+	spaceHostMorph := aMorphicSpaceHostMorph.
+	aMorphicSpaceHostMorph hostSpace: self
 ]
 
 { #category : #'window - properties' }
@@ -177,17 +136,10 @@ BlMorphicHostSpace >> windowExtent [
 	on high dpi (retina) screens"
 	<return: #Point>
 
-	^ morph extent
+	^ spaceHostMorph extent
 ]
 
 { #category : #'host space - accessing' }
 BlMorphicHostSpace >> windowExtent: anExtent [
-	morph extent: anExtent
-]
-
-{ #category : #'instance creation' }
-BlMorphicHostSpace >> withSpartaRenderer [
-
-	renderer := BlSpartaRenderer new.
-	renderer initializeHostSpace: self
+	spaceHostMorph extent: anExtent
 ]

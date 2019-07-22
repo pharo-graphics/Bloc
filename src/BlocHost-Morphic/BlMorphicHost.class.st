@@ -30,7 +30,7 @@ Class {
 		'isRunning',
 		'containerMorph'
 	],
-	#category : 'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host - Morph'
 }
 
 { #category : #testing }
@@ -74,7 +74,9 @@ BlMorphicHost >> createHostSpaceFor: aSpace [
 		description: [ 'Space must not have a host!' ].
 
 	aMorph := self createMorphFor: aSpace.
-	aHostSpace := BlMorphicHostSpace new morph: aMorph.
+
+	aHostSpace := BlMorphicHostSpace new spaceHostMorph: aMorph.
+	aHostSpace universe: self universe.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.
 	aHostSpace withSpartaRenderer.
@@ -86,7 +88,7 @@ BlMorphicHost >> createHostSpaceFor: aSpace [
 BlMorphicHost >> createMorphFor: aSpace [
 	| aMorph |
 
-	aMorph := BlMorphicSpaceMorph new.
+	aMorph := BlMorphicSpaceHostMorph new.
 	aMorph color: Color transparent.
 	aMorph extent: aSpace extent.
 
@@ -100,7 +102,12 @@ BlMorphicHost >> destroyHostSpaceFor: aSpace [
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
 	
-	aSpace hostSpace close.
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 

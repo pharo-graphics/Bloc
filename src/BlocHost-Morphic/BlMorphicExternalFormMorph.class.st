@@ -10,7 +10,7 @@ Class {
 		'hostSpace',
 		'defered'
 	],
-	#category : 'BlocHost-Morphic-Morphs'
+	#category : #'BlocHost-Morphic-Support'
 }
 
 { #category : #drawing }

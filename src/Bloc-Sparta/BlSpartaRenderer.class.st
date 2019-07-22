@@ -173,7 +173,7 @@ BlSpartaRenderer >> initializeHostSpace: aBlHostSpace [
 				sort: [ :a :b | a priority < b priority ].
 		
 	availableSurfaces ifEmpty: [ 
-		^ self error: aBlHostSpace asString, ' does not support any available surfaces' ].
+		^ self error: (aBlHostSpace asString, ' does not support {1} canvas' format: { self class defaultCanvasBuilder class label }) ].
 	
 	surface := availableSurfaces first new.
 	surface initializeOn: aBlHostSpace
