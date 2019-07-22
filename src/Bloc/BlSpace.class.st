@@ -669,7 +669,8 @@ BlSpace >> initDispatcher [
 { #category : #initialization }
 BlSpace >> initialize [
 	super initialize.
-	
+
+	host := BlHost pickHost.
 	nextPulseRequested := true.
 	session := Smalltalk session.
 	dirtyAreas := OrderedCollection new.

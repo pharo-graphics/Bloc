@@ -21,18 +21,6 @@ BlHost class >> availableHostClasses [
 ]
 
 { #category : #'driver selection' }
-BlHost class >> defaultHostClass [
-	"Find a default bloc host among all available.
-	Return a special null one if there are no available hosts"
-	<return: #'BlHost class'>
-
-	^ self availableHostClasses
-		"There are no availbale hosts, return a null one"
-		ifEmpty: [ BlHeadlessHost ]
-		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
-]
-
-{ #category : #'driver selection' }
 BlHost class >> isSupported [
 	^ false
 ]
@@ -63,6 +51,18 @@ BlHost class >> priority [
 	<return: #Number>
 	
 	^ self subclassResponsibility
+]
+
+{ #category : #'driver selection' }
+BlHost class >> suitableHostClass [
+	"Find a default bloc host among all available.
+	Return a special null one if there are no available hosts"
+	<return: #'BlHost class'>
+
+	^ self availableHostClasses
+		"There are no availbale hosts, return a null one"
+		ifEmpty: [ BlHeadlessHost ]
+		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
 ]
 
 { #category : #'host - api' }
