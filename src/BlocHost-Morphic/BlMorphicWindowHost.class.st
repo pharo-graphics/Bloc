@@ -42,6 +42,7 @@ BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	aHostSpace := BlMorphicWindowHostSpace new morphicWindow: aWindow.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.
+	aHostSpace universe: aSpace.
 	aHostSpace withSpartaRenderer.
 
 	aSpace hostSpace: aHostSpace
@@ -67,7 +68,12 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
 	
-	aSpace hostSpace close.
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 
@@ -81,11 +87,6 @@ BlMorphicWindowHost >> initialize [
 { #category : #'host - api' }
 BlMorphicWindowHost >> isRunning [
 	^ isRunning
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
 ]
 
 { #category : #'host - api' }

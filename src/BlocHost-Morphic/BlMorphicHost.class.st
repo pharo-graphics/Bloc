@@ -125,11 +125,6 @@ BlMorphicHost >> isRunning [
 ]
 
 { #category : #'host - api' }
-BlMorphicHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
-]
-
-{ #category : #'host - api' }
 BlMorphicHost >> start [
 	isRunning := true
 ]

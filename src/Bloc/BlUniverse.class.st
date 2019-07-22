@@ -196,7 +196,7 @@ BlUniverse >> isUIProcess: aProcess [
 
 { #category : #'pulse managing' }
 BlUniverse >> mainLoopPriority [
-	^ self host mainLoopPriority
+	^ 40
 ]
 
 { #category : #accessing }

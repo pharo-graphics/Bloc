@@ -250,6 +250,8 @@ BlSpace >> clearDirtyAreas [
 BlSpace >> close [
 	"Delegate closing work to the Universe"
 	
+	ContextStackSignal emit.
+	
 	(BlParallelUniverse forHost: self host class) closeSpace: self
 ]
 

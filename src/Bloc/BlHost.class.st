@@ -87,11 +87,6 @@ BlHost >> isRunning [
 ]
 
 { #category : #'host - api' }
-BlHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
-]
-
-{ #category : #'host - api' }
 BlHost >> start [
 	self subclassResponsibility
 ]

@@ -368,7 +368,7 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 
 		aBlEvent := BlMouseWheelEvent new
 			vector: (BlVector x: 0 y: (aMorphicEvent direction = Character arrowDown
-				ifTrue: [ -3 ] ifFalse: [ 3 ]));
+				ifTrue: [ -5 ] ifFalse: [ 5 ]));
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
@@ -382,7 +382,7 @@ BlMorphicEventHandler >> handleScrollLeft: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
 		aBlEvent := BlMouseWheelEvent new
-			vector: (BlVector x: -2 y: 0);
+			vector: (BlVector x: -5 y: 0);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
@@ -397,7 +397,7 @@ BlMorphicEventHandler >> handleScrollRight: anEvent [
 		| aBlEvent |
 
 		aBlEvent := BlMouseWheelEvent new
-			vector: (BlVector x: 2 y: 0);
+			vector: (BlVector x: 5 y: 0);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
