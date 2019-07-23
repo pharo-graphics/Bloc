@@ -115,7 +115,7 @@ BlSpartaRenderer >> initializeForBuffer: aBufferSurface [
 	canvasExtent := aBufferSurface canvasExtent.
 
 	scaleFactor := aBufferSurface scaleFactor.
-	spartaCanvas := self class defaultCanvasBuilder forBufferOn: aBufferSurface.
+	spartaCanvas := (self pickCanvasForSurface: aBufferSurface) forBufferOn: aBufferSurface.
 	self
 		assert: [ spartaCanvas isValid ]
 		description: [ 'Failed to create sparta canvas' ].
@@ -134,7 +134,7 @@ BlSpartaRenderer >> initializeForForm: aFormSurface [
 	canvasExtent := aFormSurface canvasExtent.
 
 	scaleFactor := aFormSurface scaleFactor.
-	spartaCanvas := self class defaultCanvasBuilder forFormOn: aFormSurface.
+	spartaCanvas := (self pickCanvasForSurface: aFormSurface) forFormOn: aFormSurface.
 	self
 		assert: [ spartaCanvas isValid ]
 		description: [ 'Failed to create sparta canvas' ].
@@ -153,7 +153,7 @@ BlSpartaRenderer >> initializeForOpenGL: anOpenGLSurface [
 	canvasExtent := anOpenGLSurface canvasExtent.
 
 	scaleFactor := anOpenGLSurface scaleFactor.
-	spartaCanvas := self class defaultCanvasBuilder forOpenGLOn: anOpenGLSurface.
+	spartaCanvas := (self pickCanvasForSurface: anOpenGLSurface) forOpenGLOn: anOpenGLSurface.
 	self
 		assert: [ spartaCanvas isValid ]
 		description: [ 'Failed to create sparta canvas' ].
@@ -165,18 +165,40 @@ BlSpartaRenderer >> initializeForOpenGL: anOpenGLSurface [
 
 { #category : #initialization }
 BlSpartaRenderer >> initializeHostSpace: aBlHostSpace [
-	| availableSurfaces |
+	| supportedSurfaces theCanvases theSupportedCanvases theBestCanvas |
+
+	supportedSurfaces := BlHostRendererSurface allSurfaces select: [ :aSurfaceClass | aSurfaceClass supportedBy: aBlHostSpace ].
 	
-	availableSurfaces := (BlHostRendererSurface allSurfaces select: [ :aSurfaceClass | 
-		(aSurfaceClass supportedBy: self class defaultCanvasBuilder class)
-			and: [ aSurfaceClass supportedBy: aBlHostSpace ] ])
-				sort: [ :a :b | a priority < b priority ].
-		
-	availableSurfaces ifEmpty: [ 
-		^ self error: (aBlHostSpace asString, ' does not support {1} canvas' format: { self class defaultCanvasBuilder class label }) ].
+	theCanvases := self class availableCanvasBuilderClasses sorted: [ :a :b | a priority < b priority ].
+
+	theSupportedCanvases := theCanvases
+		select: [ :eachCanvas | supportedSurfaces anySatisfy: [ :eachSurfaceClass | eachSurfaceClass supportedBy: eachCanvas ] ].
+
+	theSupportedCanvases ifEmpty: [ 
+		^ self error: (aBlHostSpace asString, ' does not support any canvas') ].
 	
-	surface := availableSurfaces first new.
+	theBestCanvas := theSupportedCanvases first.
+	supportedSurfaces := (supportedSurfaces select: [ :aSurfaceClass | aSurfaceClass supportedBy: theBestCanvas ])
+		sort: [ :a :b | a priority < b priority ].
+
+	surface := supportedSurfaces first new.
 	surface initializeOn: aBlHostSpace
+]
+
+{ #category : #initialization }
+BlSpartaRenderer >> pickCanvasForSurface: aSurface [
+	<return: #BlSpartaCanvasBuilder>
+	| theCanvases theSupportedCanvases |
+	
+	theCanvases := self class availableCanvasBuilderClasses sorted: [ :a :b | a priority < b priority ].
+	
+	theSupportedCanvases := theCanvases
+		select: [ :eachCanvas | aSurface class supportedBy: eachCanvas ].
+	
+	theSupportedCanvases
+		ifEmpty: [ self error: '{1} is not supported by any canvas' ].
+
+	^ theSupportedCanvases first new
 ]
 
 { #category : #'renderer - rendering' }

@@ -40,7 +40,7 @@ BlSpartaCairoCanvasBuilder class >> pdf: aFileName extent: aPoint [
 
 { #category : #accessing }
 BlSpartaCairoCanvasBuilder class >> priority [
-	^ 20
+	^ 30
 ]
 
 { #category : #testing }

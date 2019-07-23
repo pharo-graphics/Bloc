@@ -37,7 +37,7 @@ BlSpartaSkiaCanvasBuilder class >> offscreen [
 
 { #category : #accessing }
 BlSpartaSkiaCanvasBuilder class >> priority [
-	^ 30
+	^ 10
 ]
 
 { #category : #testing }
