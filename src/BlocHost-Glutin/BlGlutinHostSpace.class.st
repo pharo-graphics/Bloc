@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'window',
 		'mousePosition',
-		'lastModifiers'
+		'lastModifiers',
+		'glutinRenderer'
 	],
 	#category : #'BlocHost-Glutin'
 }
@@ -85,6 +86,34 @@ BlGlutinHostSpace >> initialize [
 	mousePosition := 0@0
 ]
 
+{ #category : #initialization }
+BlGlutinHostSpace >> initializeForBuffer: aBufferSurface [
+	"Asks host space to initialize itself to be used together with a pixel buffer surface.
+	Default implementation simply connects renderer, host space and surface together"
+
+	aBufferSurface hostSpace: self.
+	aBufferSurface hostRenderer: self renderer.
+
+	self renderer surface: aBufferSurface.
+	
+	glutinRenderer := BlGlutinRendererBuffer new hostSpace: self.
+	glutinRenderer initializeForBuffer: aBufferSurface
+]
+
+{ #category : #initialization }
+BlGlutinHostSpace >> initializeForOpenGL: anOpenGLSurface [
+	"Asks host space to initialize itself to be used together with an OpenGL surface.
+	Default implementation simply connects renderer, host space and surface together"
+
+	anOpenGLSurface hostSpace: self.
+	anOpenGLSurface hostRenderer: self renderer.
+
+	self renderer surface: anOpenGLSurface.
+	
+	glutinRenderer := BlGlutinRendererOpenGL new hostSpace: self.
+	glutinRenderer initializeForOpenGL: anOpenGLSurface
+]
+
 { #category : #'event - handling' }
 BlGlutinHostSpace >> keyboardKeyTable [
 	^ BlGlutinKeyboardKeyTable default
@@ -124,8 +153,13 @@ BlGlutinHostSpace >> prepareToRender: aBlSpace onOpenGLSurface: aBlHostRendererO
 ]
 
 { #category : #'host space - rendering' }
+BlGlutinHostSpace >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
+	glutinRenderer presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas
+]
+
+{ #category : #'host space - rendering' }
 BlGlutinHostSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
-	window swapBuffers
+	glutinRenderer presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas
 ]
 
 { #category : #'host space - rendering' }
