@@ -185,7 +185,7 @@ BlGlutinHost >> start [
 		aControlFlow := self processGlutinEvent: aGlutinEvent.
 		self isRunning
 			ifFalse:  [ GlutinControlFlow exit ]
-			ifTrue: [ aControlFlow ] ] ] forkAt: Processor userSchedulingPriority - 1 named: 'Bloc Process'
+			ifTrue: [ aControlFlow ] ] ] forkAt: Processor userSchedulingPriority named: 'Bloc Process'
 ]
 
 { #category : #'host - api' }
