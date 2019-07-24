@@ -33,6 +33,11 @@ Class {
 	#category : #'BlocHost-Morphic-Host - Morph'
 }
 
+{ #category : #'api - ui process' }
+BlMorphicHost class >> forceStartNewUIProcess [
+	UIManager default spawnNewProcess
+]
+
 { #category : #testing }
 BlMorphicHost class >> isSupported [
 	"I can not be used as one of the default Bloc host because I require users to provide containerMorph"
@@ -50,6 +55,13 @@ BlMorphicHost class >> priority [
 	<return: #Number>
 
 	^ Float infinity
+]
+
+{ #category : #'api - ui process' }
+BlMorphicHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+	
+	UIManager default uiProcess ifNotNil: aBlock
 ]
 
 { #category : #accessing }

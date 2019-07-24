@@ -18,11 +18,18 @@ Class {
 	#category : #'Bloc-Universe - Parallel'
 }
 
+{ #category : #accessing }
+BlParallelUniverse class >> all [
+	"Return a collection of all parallel universes"
+	
+	^ Universes
+]
+
 { #category : #'instance creation' }
 BlParallelUniverse class >> existsForHost: aHostClass [
 	^ Universes
 		detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
-		ifFound: true
+		ifFound: [ true ]
 		ifNone: [ false ]
 ]
 
@@ -114,6 +121,14 @@ BlParallelUniverse >> eventDispatcher [
 	<return: #BlDirectEventDispatcher>
 
 	^ eventDispatcher
+]
+
+{ #category : #'api - spaces' }
+BlParallelUniverse >> hasSpace: aSpace [
+	"Return true if a given space is registered, false otherwise"
+	<return: #Boolean>
+	
+	^ spaceManager hasSpace: aSpace
 ]
 
 { #category : #'api - spaces' }

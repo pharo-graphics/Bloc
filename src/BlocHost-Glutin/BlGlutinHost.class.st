@@ -1,12 +1,17 @@
 Class {
 	#name : #BlGlutinHost,
 	#superclass : #BlHost,
+	#instVars : [
+		'eventsSensor'
+	],
 	#classVars : [
 		'CurrentSession',
 		'EventsLoop',
+		'EventsSensor',
 		'HostSpaceRegistry',
 		'HostSpaceRegistryMutex',
-		'IsRunning'
+		'IsRunning',
+		'UIProcess'
 	],
 	#category : #'BlocHost-Glutin'
 }
@@ -23,6 +28,23 @@ BlGlutinHost class >> example [
 	space title: 'Glutin Window'.
 	space addChild: GtWorld new.
 	space show
+]
+
+{ #category : #'api - ui process' }
+BlGlutinHost class >> forceStartNewUIProcess [	
+	UIProcess := [
+		[
+			EventsSensor allEventsDo: [ :aGlutinWindowEvent |
+				self spaceRegistry
+					at: aGlutinWindowEvent windowId
+					ifPresent: [ :aHostSpace | aGlutinWindowEvent accept: aHostSpace ] ].
+			
+			 BlParallelUniverse glutin pulse.
+			
+			2 milliSeconds wait.
+		] repeat.
+
+	] forkAt: Processor userSchedulingPriority named: 'Bloc UI Process'.
 ]
 
 { #category : #'driver selection' }
@@ -46,6 +68,16 @@ BlGlutinHost class >> priority [
 	<return: #Number>
 	
 	^ 1
+]
+
+{ #category : #private }
+BlGlutinHost class >> spaceRegistry [
+	^ HostSpaceRegistry ifNil: [ HostSpaceRegistry := WeakIdentityValueDictionary new ]
+]
+
+{ #category : #'api - ui process' }
+BlGlutinHost class >> uiProcessDo: aBlock [
+	UIProcess ifNotNil: aBlock
 ]
 
 { #category : #'host - api' }
@@ -92,7 +124,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 		aHostSpace := BlGlutinHostSpace new.
 		aHostSpace window: windowedContext.
 
-		self spaceRegistry at: windowedContext id put: aHostSpace ].
+		self registerHostSpace: aHostSpace ].
 
 	^ aHostSpace
 ]
@@ -121,10 +153,7 @@ BlGlutinHost >> destroyHostSpaceFor: aSpace [
 
 { #category : #private }
 BlGlutinHost >> destroyWindowSpaceFor: aSpace [
-	self critical: [
-		self spaceRegistry
-			removeKey: aSpace hostSpace id
-			ifAbsent: [  ] ].
+	self critical: [ self unregisterHostSpace: aSpace hostSpace ]
 ]
 
 { #category : #'event - handling' }
@@ -168,29 +197,38 @@ BlGlutinHost >> processGlutinEvent: aGlutinEvent [
 	^ GlutinControlFlow poll
 ]
 
+{ #category : #initialize }
+BlGlutinHost >> registerHostSpace: aHostSpace [
+	self spaceRegistry at: aHostSpace window id put: aHostSpace.
+	GlutinWindowsRegistry default registerWindow: aHostSpace window
+]
+
 { #category : #private }
 BlGlutinHost >> spaceRegistry [
-	^ HostSpaceRegistry ifNil: [ HostSpaceRegistry := WeakIdentityValueDictionary new ]
+	^ self class spaceRegistry
 ]
 
 { #category : #'host - api' }
 BlGlutinHost >> start [
-
+	| eventFetcher |
 	self isRunning
 		ifTrue: [ ^ self ].
 
-	IsRunning := true.	
-	[ EventsLoop run: [ :aGlutinEvent |
-		| aControlFlow |
-		aControlFlow := self processGlutinEvent: aGlutinEvent.
-		self isRunning
-			ifFalse:  [ GlutinControlFlow exit ]
-			ifTrue: [ aControlFlow ] ] ] forkAt: Processor userSchedulingPriority named: 'Bloc Process'
+	IsRunning := true.
+	
+	EventsSensor := BlGlutinWindowEventsSensor new.
+	
+	self class forceStartNewUIProcess.
+
+	eventFetcher := GlutinEventsFetcher new .
+	eventFetcher eventHandlers add: EventsSensor.
+	eventFetcher installEventLoop
 ]
 
 { #category : #'host - api' }
 BlGlutinHost >> stop [
-	IsRunning := false
+	IsRunning := false.
+	UIProcess := nil
 ]
 
 { #category : #'host - testing' }
@@ -206,7 +244,15 @@ BlGlutinHost >> supportsOpenGLSurface [
 	"Return true if this host can work with OpenGL surface, false otherwise"
 	<return: #Boolean>
 	
-	^ false
+	^ true
+]
+
+{ #category : #initialize }
+BlGlutinHost >> unregisterHostSpace: aHostSpace [
+	self spaceRegistry
+		removeKey: aHostSpace window id
+		ifAbsent: [  ].
+	GlutinWindowsRegistry default unregisterWindow: aHostSpace window
 ]
 
 { #category : #'event - handling' }

@@ -65,6 +65,11 @@ BlHost class >> suitableHostClass [
 		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
 ]
 
+{ #category : #'api - ui process' }
+BlHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+]
+
 { #category : #'host - api' }
 BlHost >> createHostSpaceFor: aSpace [
 	self subclassResponsibility 

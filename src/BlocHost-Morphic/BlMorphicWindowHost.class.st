@@ -10,6 +10,11 @@ Class {
 	#category : #'BlocHost-Morphic-Host - Window'
 }
 
+{ #category : #'api - ui process' }
+BlMorphicWindowHost class >> forceStartNewUIProcess [
+	UIManager default spawnNewProcess
+]
+
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
 	^ true
@@ -27,6 +32,13 @@ BlMorphicWindowHost class >> priority [
 	<return: #Number>
 
 	^ 20
+]
+
+{ #category : #'api - ui process' }
+BlMorphicWindowHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+	
+	UIManager default uiProcess ifNotNil: aBlock
 ]
 
 { #category : #'host - api' }

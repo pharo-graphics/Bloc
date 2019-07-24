@@ -79,13 +79,21 @@ BlTextStyler >> styleInBackgroundProcess: aBrText andAfterDo: aBlock [
 
 	self monitor critical: [
 		backgroundProcess := [
-			| styledText |
+			| styledText aTaskAction |
 			delay asDelay wait.
 			text := aBrText unstyle.
 			styledText := self privateStyle: text.
-			BlUniverse defer: [ 
+			
+			aTaskAction := [ 
 				self fireEvent: (BlTextStyledEvent new text: styledText).
 				aBlock value ].
+			
+			view isNotNil
+				ifTrue: [
+					(view at: 1)
+						ifNotNil: [ :anElement | anElement enqueueTask: (BlTaskAction new action: aTaskAction) ]
+						ifNil: aTaskAction ]
+				ifFalse: aTaskAction.
 		 ] forkAt: Processor userBackgroundPriority ]
 ]
 
@@ -99,10 +107,18 @@ BlTextStyler >> styleInBackgroundProcessNow: aBrText [
 
 	self monitor critical: [
 		backgroundProcess := [
-			| styledText |
+			| styledText aTaskAction |
 			text := aBrText unstyle.
 			styledText := self privateStyle: text.
-			BlUniverse defer: [ self fireEvent: (BlTextStyledEvent new text: styledText) ].
+		
+			aTaskAction := [ self fireEvent: (BlTextStyledEvent new text: styledText) ].
+			
+			view isNotNil
+				ifTrue: [
+					(view at: 1)
+						ifNotNil: [ :anElement | anElement enqueueTask: (BlTaskAction new action: aTaskAction) ]
+						ifNil: aTaskAction ]
+				ifFalse: aTaskAction.
 		 ] forkAt: Processor userBackgroundPriority ]
 ]
 
