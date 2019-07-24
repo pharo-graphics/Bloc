@@ -4,8 +4,13 @@ Class {
 	#instVars : [
 		'command'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Commands'
 }
+
+{ #category : #accessing }
+BlTktDecoratedCommand >> catchingErrors [
+	^ command catchingErrors
+]
 
 { #category : #accessing }
 BlTktDecoratedCommand >> command [

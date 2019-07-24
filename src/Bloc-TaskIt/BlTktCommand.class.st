@@ -5,8 +5,19 @@ Class {
 		'requests',
 		'name'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Commands'
 }
+
+{ #category : #factory }
+BlTktCommand class >> null [
+	^ BlNullCommand uniqueInstance
+]
+
+{ #category : #accessing }
+BlTktCommand >> catchingErrors [
+	"Return an error or collections of errors to catch during a command execution"
+	^ Error
+]
 
 { #category : #initialization }
 BlTktCommand >> initialize [

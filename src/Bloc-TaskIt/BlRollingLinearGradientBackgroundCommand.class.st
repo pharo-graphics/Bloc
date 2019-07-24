@@ -30,3 +30,10 @@ BlRollingLinearGradientBackgroundCommand >> result [
 	<return: #Object>
 	^ element
 ]
+
+{ #category : #'api - execution' }
+BlRollingLinearGradientBackgroundCommand >> resultObsolete [
+	"Return a command execution result"
+	<return: #Object>
+	^ element
+]

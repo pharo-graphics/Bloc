@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlTktRequests',
 	#classTraits : 'TBlTktRequests classTrait',
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Commands'
 }
 
 { #category : #converting }
@@ -15,6 +15,12 @@ BlTktProtoCommand >> asAnnouncingCommand [
 { #category : #converting }
 BlTktProtoCommand >> asBlTktCommand [
 	^ self
+]
+
+{ #category : #converting }
+BlTktProtoCommand >> asErrorCatchingCommand [
+	<return: #BlErrorCatchingCommand>
+	^ BlErrorCatchingCommand new command: self
 ]
 
 { #category : #taskit }
@@ -30,6 +36,22 @@ BlTktProtoCommand >> execute [
 	^ self subclassResponsibility
 ]
 
+{ #category : #taskit }
+BlTktProtoCommand >> future [
+	^ self futureInUIPool
+]
+
+{ #category : #taskit }
+BlTktProtoCommand >> futureInPool: aWorkerPool [
+	<return: #TKTFuture>
+	^ aWorkerPool future: self
+]
+
+{ #category : #taskit }
+BlTktProtoCommand >> futureInUIPool [
+	^ self futureInPool: BlTktUIWorkerPool default
+]
+
 { #category : #accessing }
 BlTktProtoCommand >> name [
 	<return: #String>
@@ -40,6 +62,11 @@ BlTktProtoCommand >> name [
 BlTktProtoCommand >> requestContext [
 	<return: #TBlTktRequests>
 	^ self subclassResponsibility
+]
+
+{ #category : #taskit }
+BlTktProtoCommand >> schedule [
+	^ self scheduleInUIPool
 ]
 
 { #category : #taskit }

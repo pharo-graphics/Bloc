@@ -1,6 +1,6 @@
 Class {
 	#name : #BlRollingLinearGradientPaintCommand,
-	#superclass : #BlCommand,
+	#superclass : #BlTktCommand,
 	#instVars : [
 		'step',
 		'stop',
@@ -36,20 +36,8 @@ BlRollingLinearGradientPaintCommand >> newGradientBackgroundAt: aStop [
 ]
 
 { #category : #'api - execution' }
-BlRollingLinearGradientPaintCommand >> result [
+BlRollingLinearGradientPaintCommand >> resultObsolete [
 	"Return a command execution result"
 	<return: #Object>
 	^ paint
-]
-
-{ #category : #'api - execution' }
-BlRollingLinearGradientPaintCommand >> terminationRequested [
-	"I am a fast command"
-]
-
-{ #category : #'api - testing' }
-BlRollingLinearGradientPaintCommand >> wasCanceled [
-	"Answer whether an execution was canceled"
-	<return: #Boolean>
-	^ false
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #BlErrorCatchingCommand,
-	#superclass : #BlDecoratedCommand,
+	#superclass : #BlTktDecoratedCommand,
 	#instVars : [
 		'isException',
 		'exception'
@@ -45,7 +45,13 @@ BlErrorCatchingCommand >> isException [
 ]
 
 { #category : #accessing }
-BlErrorCatchingCommand >> result [
+BlErrorCatchingCommand >> name [
+	<return: #String>
+	^ 'Error catching ', self command name
+]
+
+{ #category : #accessing }
+BlErrorCatchingCommand >> resultObsolete [
 	"Return a command execution result"
 	<return: #Object>
 	^ self isException 

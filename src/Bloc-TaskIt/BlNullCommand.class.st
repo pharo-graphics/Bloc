@@ -1,6 +1,6 @@
 Class {
 	#name : #BlNullCommand,
-	#superclass : #BlCommand,
+	#superclass : #BlTktProtoCommand,
 	#classInstVars : [
 		'uniqueInstance'
 	],
@@ -25,18 +25,6 @@ BlNullCommand class >> uniqueInstance [
 { #category : #execution }
 BlNullCommand >> execute [
 	self error: 'You should define what to execute in advance'
-]
-
-{ #category : #execution }
-BlNullCommand >> requestTermination [
-	self error: 'You should define what to execute in advance'
-]
-
-{ #category : #accessing }
-BlNullCommand >> result [
-	"Return a command execution result"
-	<return: #Object>
-	^ nil
 ]
 
 { #category : #'api - execution' }
