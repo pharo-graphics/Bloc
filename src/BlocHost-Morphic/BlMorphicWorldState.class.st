@@ -56,6 +56,13 @@ BlMorphicWorldState >> element: anObject [
 	element := anObject
 ]
 
+{ #category : #initialization }
+BlMorphicWorldState >> initialize [
+	super initialize.
+	
+	self currentCursor: Cursor normal
+]
+
 { #category : #canvas }
 BlMorphicWorldState >> recordDamagedRect: damageRect [
 	element invalidRect: (BlBounds fromRectangle: damageRect)
