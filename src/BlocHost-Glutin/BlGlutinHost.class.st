@@ -31,6 +31,12 @@ BlGlutinHost class >> example [
 ]
 
 { #category : #'api - ui process' }
+BlGlutinHost class >> forceResumeOfUIProcess: aProcess [
+	UIProcess := aProcess.
+	UIProcess resume
+]
+
+{ #category : #'api - ui process' }
 BlGlutinHost class >> forceStartNewUIProcess [	
 	UIProcess := [
 		[

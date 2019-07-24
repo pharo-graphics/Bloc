@@ -28,6 +28,16 @@ BlBlocMorphicUIManager class >> useAsDefault [
 	uiManager beDefault. 
 ]
 
+{ #category : #'ui process' }
+BlBlocMorphicUIManager >> blocDefer: aBlock [
+	| aGlutinUniverse |
+
+	aBlock value
+
+	"aGlutinUniverse := BlParallelUniverse forHost: Bloc preferableHostClass.
+	aGlutinUniverse defer: aBlock"
+]
+
 { #category : #debug }
 BlBlocMorphicUIManager >> debugProcess: process context: context label: title fullView: bool notification: notificationString [
 	"I open the default debugger and add support for detecting if the 
@@ -65,6 +75,17 @@ BlBlocMorphicUIManager >> debugProcess: process context: context label: title fu
 	
 	process suspend.
 
+]
+
+{ #category : #debug }
+BlBlocMorphicUIManager >> isBlocUIProcess: aProcess [
+	^ BlParallelUniverse all anySatisfy: [ :eachUniverse |
+		| isInterruptedProcess |
+		isInterruptedProcess := false.
+	
+		eachUniverse hostClass uiProcessDo: [ :eachUIProcess |
+			isInterruptedProcess := eachUIProcess name = aProcess name ].
+		isInterruptedProcess ]
 ]
 
 { #category : #debug }
@@ -121,7 +142,7 @@ BlBlocMorphicUIManager >> resumeUIProcess: aProcess [
 	
 	"I explicitly check if the process corresponds to the Bloc UI process or not so I can determine which UI process to resume."
 	"For now the only way to determine if the process given as a parameter was a Bloc UI process is by checking the process name."
-	aProcess name = BlUniverse default pulseLoop processId
+	(self isBlocUIProcess: aProcess)
 		ifTrue:  [ 
 			"Resume the Bloc UI process."
 			self resumeBlocUIProcess: aProcess ]
@@ -145,6 +166,19 @@ BlBlocMorphicUIManager >> spawnNewBlocProcess: aUniverse [
 { #category : #'ui process' }
 BlBlocMorphicUIManager >> spawnNewMorphicProcess [
 	self spawnNewProcess
+]
+
+{ #category : #debug }
+BlBlocMorphicUIManager >> universeForProcess: aProcess ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
+	^ BlParallelUniverse all
+		detect: [ :eachUniverse |
+			| isInterruptedProcess |
+			isInterruptedProcess := false.
+			eachUniverse hostClass
+				uiProcessDo: [ :eachUIProcess | isInterruptedProcess := eachUIProcess name = aProcess name ].
+			isInterruptedProcess ]
+		ifFound: aPresentBlock
+		ifNone: anExceptionBlock
 ]
 
 { #category : #debug }
