@@ -81,7 +81,7 @@ BlTktProtoCommand >> scheduleInPool: aWorkerPool [
 { #category : #taskit }
 BlTktProtoCommand >> scheduleInUIPool [
 	<return: #TKTTask>
-	^ self scheduleInPool: BlAsyncUIWorkerPool default.
+	^ self scheduleInPool: BlTktUIWorkerPool default.
 ]
 
 { #category : #evaluating }
