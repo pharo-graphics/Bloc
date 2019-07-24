@@ -19,6 +19,14 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlParallelUniverse class >> existsForHost: aHostClass [
+	^ Universes
+		detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
+		ifFound: true
+		ifNone: [ false ]
+]
+
+{ #category : #'instance creation' }
 BlParallelUniverse class >> forHost: aHostClass [
 	^ Universes
 		detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]

@@ -744,7 +744,8 @@ BlSpace >> isOpened [
 	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
 	<return: #Boolean>
 
-	^ BlUniverse default spaceManager hasSpace: self
+	^ (BlParallelUniverse existsForHost: self host class)
+		and: [ (BlParallelUniverse forHost: self host class) hasSpace: self ]
 ]
 
 { #category : #testing }
