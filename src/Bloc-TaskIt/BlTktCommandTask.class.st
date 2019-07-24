@@ -20,7 +20,7 @@ BlTktCommandTask >> command: aCommand [
 	self
 		assert: [ aCommand isNotNil ]
 		description: [ 'Command must be non-nil' ].
-	command := aCommand
+	command := aCommand asBlTktCommand
 ]
 
 { #category : #executing }
