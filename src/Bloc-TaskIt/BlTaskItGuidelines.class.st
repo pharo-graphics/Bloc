@@ -58,7 +58,7 @@ BlTaskItGuidelines >> basicAsyncUIWorkerPool [
 	<gtExample>
 	"Notice that sending #new is not a public API. Check the class comment for more information."
 	| aWorkerPool |
-	aWorkerPool := BlAsyncUIWorkerPool new.
+	aWorkerPool := BlTktUIWorkerPool createDefault.
 	self assert: aWorkerPool isNotNil.
 	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
 	self assert: (aWorkerPool name beginsWith: aWorkerPool class defaultName).
@@ -76,7 +76,7 @@ BlTaskItGuidelines >> basicHousekeepingWorkerPool [
 	<gtExample>
 	"Notice that sending #new is not a public API. Check the class comment for more information."
 	| aWorkerPool |
-	aWorkerPool := BlHousekeepingWorkerPool new.
+	aWorkerPool := BlTktHousekeepingWorkerPool createDefault.
 	self assert: aWorkerPool isNotNil.
 	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
 	self assert: (aWorkerPool name beginsWith: aWorkerPool class defaultName).
@@ -165,10 +165,13 @@ BlTaskItGuidelines >> incrementCounterTwice [
 { #category : #'examples - basic (non public api)' }
 BlTaskItGuidelines >> incrementalCounterTask [
 	<gtExample>
-	| aTask |
-	aTask := [ self incrementCounter. self storeProcessName ] asLoggingTask.
+	| aCommand aTask |
+	aCommand := [ self incrementCounter. self storeProcessName ] asBlTktCommand.
+	aCommand name: self incrementalCounterTaskName.
+	aTask := aCommand asTask.
 	self assert: aTask isNotNil.
 	self assert: (aTask isKindOf: TKTTask).
+	self assert: aTask name equals: self incrementalCounterTaskName.
 	^ aTask 
 ]
 
@@ -215,45 +218,12 @@ BlTaskItGuidelines >> scheduleCounterTaskAsHousekeeping [
 	| aWorkerPool aTask aNamedTask |
 	aWorkerPool := self housekeepingWorkerPoolWithOneWorker.
 	aTask := self incrementalCounterTask.
-	aNamedTask := aWorkerPool schedule: aTask named: self incrementalCounterTaskName.
-	"Task configuration"
-	self assert: aTask ~= aNamedTask.
-	self assert: aNamedTask task equals: aTask.
-	self assert: aNamedTask name equals: self incrementalCounterTaskName.
+	aWorkerPool schedule: aTask.
 	"WorkerPool configuration"
 	self assert: aWorkerPool size equals: 1. "It has one worker"
 	self assert: aWorkerPool taskQueue size equals: 1. "It has one task"
 	self assert: aWorkerPool isFree not. "There is a waiting task"
 	self assert: collection size equals: 0.
-	^ aWorkerPool
-]
-
-{ #category : #'examples - schedule' }
-BlTaskItGuidelines >> scheduleTaskThatSchedulesAnotherTask [
-	<gtExample>
-	| aWorkerPool aRootTask aSubTask |
-	aWorkerPool := self asyncUIWorkerPoolWithOneWorker.
-	aSubTask := aRootTask := nil.
-	aSubTask := [ self addToCollection: aSubTask. self signalSemaphore. ] asTask asNamedTask.
-	aSubTask name: 'I am an example subtask'.
-	aRootTask := [ 
-			self addToCollection: aRootTask. 
-			aWorkerPool schedule: aSubTask. 
-			self addToCollection: aRootTask.
-			self signalSemaphore ] asTask asNamedTask.
-	aRootTask name: 'I am an example root task'.
-	aWorkerPool schedule: aRootTask.
-	self waitForSemaphoreSignal.
-	self waitForSemaphoreSignal.
-	"WorkerPool configuration"
-	self assert: aWorkerPool size equals: 1. "It has one worker"
-	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
-	"self assert: aWorkerPool isBusy." "There is NOT a waiting task"
-	"Check that tasks were executed"
-	self assert: collection size equals: 3.
-	self assert: collection first equals: aRootTask.
-	self assert: collection second equals: aRootTask.
-	self assert: collection third equals: aSubTask.
 	^ aWorkerPool
 ]
 

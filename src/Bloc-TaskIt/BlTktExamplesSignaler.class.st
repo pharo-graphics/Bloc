@@ -7,7 +7,7 @@ Class {
 		'thirdPartySemaphore',
 		'fourthPartySemaphore'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Examples'
 }
 
 { #category : #defaults }

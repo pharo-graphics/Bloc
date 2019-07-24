@@ -1,6 +1,6 @@
 Class {
 	#name : #BlEnqueuedTaskItAction,
-	#superclass : #BlTaskItTask,
+	#superclass : #BlElementTask,
 	#instVars : [
 		'action',
 		'resultCallbacks',
@@ -8,7 +8,7 @@ Class {
 		'element',
 		'name'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-Element Tasks'
 }
 
 { #category : #accessing }

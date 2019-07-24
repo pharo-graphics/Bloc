@@ -2,7 +2,7 @@ Trait {
 	#name : #TBlTktRequests,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Command Context'
 }
 
 { #category : #callbacks }

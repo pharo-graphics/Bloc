@@ -7,7 +7,7 @@ Class {
 		'signaler',
 		'uiWorkerPool'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Examples'
 }
 
 { #category : #'examples - announcing commands' }

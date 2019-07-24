@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'reason'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #testing }
@@ -31,7 +31,7 @@ BlTktExplicitlyTerminatedTaskState >> signalExplicitlyTerminatedException [
 	self error: 'Terminated by user'
 ]
 
-{ #category : #'*Bloc-TaskIt' }
+{ #category : #'as yet unclassified' }
 BlTktExplicitlyTerminatedTaskState >> terminateTaskExecution: aTaskExecution reason: aReason [
 
 	| cancelState activeContext timeoutContext |

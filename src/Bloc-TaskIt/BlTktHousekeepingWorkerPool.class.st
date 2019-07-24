@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTktHousekeepingWorkerPool,
 	#superclass : #BlTktCommandTaskWorkerPool,
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Workers'
 }
 
 { #category : #accessing }

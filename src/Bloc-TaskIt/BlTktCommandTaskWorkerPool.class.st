@@ -6,7 +6,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Workers'
 }
 
 { #category : #cleanup }
@@ -82,10 +82,10 @@ BlTktCommandTaskWorkerPool class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self startDefault ]
 ]
 
-{ #category : #schedulling }
-BlTktCommandTaskWorkerPool >> future: aTask [
-	<return: #TKTFuture>
-	^ self withConfigurationDo: [ super future: aTask ].
+{ #category : #testing }
+BlTktCommandTaskWorkerPool >> isFree [
+
+	^ taskQueue isEmpty and: [ workers allSatisfy: [ :each | each isFree ] ]
 ]
 
 { #category : #'public - mutexed' }
@@ -108,16 +108,6 @@ BlTktCommandTaskWorkerPool >> privateNewWorker [
 BlTktCommandTaskWorkerPool >> processProvider [
 	<return: #TKTTaskItProcessProvider>
 	^ self subclassResponsibility
-]
-
-{ #category : #schedulling }
-BlTktCommandTaskWorkerPool >> schedule: aTask [
-	self withConfigurationDo: [ super schedule: aTask ].
-]
-
-{ #category : #schedulling }
-BlTktCommandTaskWorkerPool >> schedule: aTask timeout: aTimeout [
-	self withConfigurationDo: [ super schedule: aTask timeout: aTimeout ].
 ]
 
 { #category : #'public - mutexed' }

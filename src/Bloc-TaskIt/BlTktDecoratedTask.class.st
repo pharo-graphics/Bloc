@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'task'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #converting }

@@ -5,26 +5,6 @@ Class {
 }
 
 { #category : #'examples - task execution and ui controls' }
-BlTktCancelableTaskExamples >> cancelingTaskExecution [
-	<gtExample>
-	<noTest>
-	| aContainer aStop aProgress aProgressLine aTask aCallback |
-	aContainer := self stopAndProgressElements.
-	aStop := aContainer childNamed: #stop.
-	aProgress := aContainer childNamed: #progress.
-	aProgressLine := aProgress childAt: 1.
-	aTask := self taskWithNoExplicitExecutionHandling asNotifyingTask.
-	aStop addEventHandlerOn: BlClickEvent do: [ :anEvent | 
-		aTask terminationRequested.
-		anEvent currentTarget background: Color lightRed ].
-	aCallback := [ :aNotification :anElement | 
-		anElement constraintsDo: [ :c | c frame horizontal weight: aNotification fraction asFloat ] ].
-	aTask onNotification: BlExactProgress enqueue: aCallback in: aProgressLine.
-	aProgressLine enqueueTask: (BlTaskAction new action: [ BlAsyncUIWorkerPool default schedule: aTask ]).
-	^ aContainer
-]
-
-{ #category : #'examples - task execution and ui controls' }
 BlTktCancelableTaskExamples >> controllingTaskExecution [
 	<gtExample>
 	<noTest>
@@ -223,5 +203,5 @@ BlTktCancelableTaskExamples >> taskWithNoExplicitExecutionHandling [
 		3 seconds wait. 
 		1 to: 20 do: [ :each |
 			BlExactProgress signal: 'Transferring...' amount: each * 1024 total: 20*1024.
-			(Delay forMilliseconds: 300) wait ] ] asTask asNamedTask name: 'Example task with no explicit execution handling'
+			(Delay forMilliseconds: 300) wait ] ] asBlTktCommand name: 'Example task with no explicit execution handling'
 ]

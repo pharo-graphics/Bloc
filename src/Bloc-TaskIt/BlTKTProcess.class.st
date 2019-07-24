@@ -8,7 +8,7 @@ Class {
 BlTktProcess >> privateCreatePharoProcess [
 	"Return an instance of TKTConfiguration process which is usually Process."
 	<return: #Process>
-	process := BlProcess
+	process := BlTaskProcess
 		forContext: self createContext
 		priority: self spawnPriority.
 	process name: self name.

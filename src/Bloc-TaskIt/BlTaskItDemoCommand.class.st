@@ -25,12 +25,7 @@ BlTaskItDemoCommand >> execute [
 BlTaskItDemoCommand >> initialize [
 	super initialize.
 	wasCanceled := false.
-]
-
-{ #category : #accessing }
-BlTaskItDemoCommand >> name [
-	<return: #String>
-	^ 'Bloc TaskIt Demo Command'
+	name := 'Bloc TaskIt Demo Command'.
 ]
 
 { #category : #accessing }

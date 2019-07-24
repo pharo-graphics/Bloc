@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlNotificableTaskItAction,
 	#traits : 'TBlTktRequests',
 	#classTraits : 'TBlTktRequests classTrait',
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-Element Tasks'
 }
 
 { #category : #accessing }

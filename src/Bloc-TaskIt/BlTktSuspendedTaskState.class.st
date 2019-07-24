@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'reason'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #'instance-creation' }
@@ -46,9 +46,4 @@ BlTktSuspendedTaskState >> signalSuspendedException [
 	See TKTRunningTaskState>>#userCancelTaskExecution:reason:"
 	"TKTCancelledTaskException signal: reason"
 	self error: 'Should not receive this message'
-]
-
-{ #category : #cancelling }
-BlTktSuspendedTaskState >> suspendTaskExecution: aTaskExecution reason: aReason [
-	"Ignore as it is already canceled"
 ]

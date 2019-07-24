@@ -9,7 +9,7 @@ The public API and key messages are the same as for ${class:TKTCommonQueueWorker
 Class {
 	#name : #BlHousekeepingWorkerPool,
 	#superclass : #BlVariableSizeWorkerPool,
-	#category : #'Bloc-TaskIt-Worker'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #accessing }

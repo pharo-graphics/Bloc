@@ -1,18 +1,18 @@
 Class {
-	#name : #BlTaskItTask,
+	#name : #BlElementTask,
 	#superclass : #BlTask,
 	#instVars : [
 		'future'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-Element Tasks'
 }
 
 { #category : #accessing }
-BlTaskItTask >> future [
+BlElementTask >> future [
 	^ future
 ]
 
 { #category : #accessing }
-BlTaskItTask >> future: anObject [
+BlElementTask >> future: anObject [
 	future := anObject
 ]

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'result'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Announcements'
 }
 
 { #category : #accessing }

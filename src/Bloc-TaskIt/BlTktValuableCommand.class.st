@@ -13,6 +13,11 @@ BlTktValuableCommand >> defaultValuable [
 ]
 
 { #category : #initialization }
+BlTktValuableCommand >> ensureName [
+	name ifNil: [ self name: self valuable printString ]
+]
+
+{ #category : #initialization }
 BlTktValuableCommand >> initialize [
 	super initialize.
 	self valuable: self defaultValuable.
@@ -29,5 +34,6 @@ BlTktValuableCommand >> valuable: aValuable [
 	self
 		assert: [ aValuable isNotNil ] 
 		description: [ 'Valuable must be non-nil' ].
-	valuable := aValuable
+	valuable := aValuable.
+	self ensureName.
 ]

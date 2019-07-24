@@ -4,13 +4,8 @@ Class {
 	#instVars : [
 		'name'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
-
-{ #category : #converting }
-BlTktNamedTask >> asNamedTask [
-	^ self
-]
 
 { #category : #initialization }
 BlTktNamedTask >> initialize [

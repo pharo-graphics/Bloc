@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'command'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Announcements'
 }
 
 { #category : #accessing }

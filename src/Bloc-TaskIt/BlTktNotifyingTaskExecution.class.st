@@ -1,14 +1,8 @@
 Class {
 	#name : #BlTktNotifyingTaskExecution,
 	#superclass : #TKTTaskExecution,
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
-
-{ #category : #evaluating }
-BlTktNotifyingTaskExecution >> doExecuteTask [
-	TKTConfiguration runner scheduleNotifycationEvery: self timeout on: self.
-	^ super doExecuteTask
-]
 
 { #category : #testing }
 BlTktNotifyingTaskExecution >> isSuspendRequested [

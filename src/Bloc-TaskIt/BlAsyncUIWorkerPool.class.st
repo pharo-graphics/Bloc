@@ -15,7 +15,7 @@ Class {
 	#classVars : [
 		'UseDefaultRunner'
 	],
-	#category : #'Bloc-TaskIt-Worker'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #accessing }
@@ -37,7 +37,7 @@ BlAsyncUIWorkerPool class >> future: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
 	^ self useDefaultRunner 
-		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifTrue: [ aValuable asLoggingTask schedule ]
 		ifFalse: [ super future: aValuable maxPoolSize: maxPoolSize ].
 ]
 
@@ -46,7 +46,7 @@ BlAsyncUIWorkerPool class >> future: aValuable named: aString maxPoolSize: maxPo
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
 	^ self useDefaultRunner 
-		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifTrue: [ aValuable asLoggingTask schedule ]
 		ifFalse: [ super future: aValuable named: aString maxPoolSize: maxPoolSize ].
 ]
 
@@ -64,7 +64,7 @@ BlAsyncUIWorkerPool class >> schedule: aValuable maxPoolSize: maxPoolSize [
 	"Schedule the supplied valuable with maxPoolSize worker pools"
 
 	^ self useDefaultRunner 
-		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifTrue: [ aValuable asLoggingTask schedule ]
 		ifFalse: [ super schedule: aValuable maxPoolSize: maxPoolSize ].
 ]
 
@@ -73,7 +73,7 @@ BlAsyncUIWorkerPool class >> schedule: aValuable named: aString maxPoolSize: max
 	"Schedule the supplied valuable named aValuableName with maxPoolSize worker pools"
 
 	^ self useDefaultRunner 
-		ifTrue: [ aValuable asLoggingTask asNamedTask schedule ]
+		ifTrue: [ aValuable asLoggingTask schedule ]
 		ifFalse: [ super schedule: aValuable named: aString maxPoolSize: maxPoolSize ].
 
 ]

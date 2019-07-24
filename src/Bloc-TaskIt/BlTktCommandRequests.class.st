@@ -11,7 +11,7 @@ Class {
 		'checkFinishedCallback',
 		'userData'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Command Context'
 }
 
 { #category : #callbacks }

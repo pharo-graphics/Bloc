@@ -5,7 +5,7 @@ Class {
 		'runTasks',
 		'notifications'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-Element Tasks'
 }
 
 { #category : #accessing }

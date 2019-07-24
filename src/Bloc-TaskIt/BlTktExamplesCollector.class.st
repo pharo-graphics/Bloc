@@ -7,7 +7,7 @@ Class {
 		'collection',
 		'mutex'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Examples'
 }
 
 { #category : #adding }

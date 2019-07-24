@@ -5,7 +5,7 @@ Class {
 		'notifications',
 		'isSuspendRequested'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #converting }
@@ -32,11 +32,6 @@ BlTktNotifyingTask >> onNotification: aNotificationClass enqueue: aCallback in: 
 		handler: [ :aNotification | 
 			anElement enqueueTask: (BlTaskAction new action: [ aCallback cull: aNotification cull: anElement ]).
 			aNotification resume ].
-]
-
-{ #category : #executing }
-BlTktNotifyingTask >> scheduleTaskExecutionFor: aRunner [
-	^ self configureTaskExecution: BlTktNotifyingTaskExecution new with: aRunner
 ]
 
 { #category : #actions }

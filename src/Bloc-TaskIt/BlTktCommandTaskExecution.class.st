@@ -3,7 +3,7 @@ Class {
 	#superclass : #TKTTaskExecution,
 	#traits : 'TBlDebug + TBlTktRequests',
 	#classTraits : 'TBlDebug classTrait + TBlTktRequests classTrait',
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-TaskIt Tasks'
 }
 
 { #category : #evaluating }

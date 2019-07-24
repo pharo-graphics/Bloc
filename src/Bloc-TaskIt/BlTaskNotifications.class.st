@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'collection'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-Element Tasks'
 }
 
 { #category : #adding }

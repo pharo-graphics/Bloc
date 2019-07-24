@@ -23,7 +23,7 @@ Class {
 	#classInstVars : [
 		'workerPools'
 	],
-	#category : #'Bloc-TaskIt-Worker'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #accessing }
@@ -178,7 +178,7 @@ BlVariableSizeWorkerPool class >> workerPools [
 BlVariableSizeWorkerPool >> future: aValuable [
 	<return: #TKTFuture>
 	| aTask |
-	aTask := aValuable asLoggingTask asNamedTask.
+	aTask := aValuable asLoggingTask.
 	^ TKTConfiguration 
 		processProvider: self processProvider 
 		during: [ super future: aTask ].
@@ -188,8 +188,7 @@ BlVariableSizeWorkerPool >> future: aValuable [
 BlVariableSizeWorkerPool >> future: aValuable named: aTaskName [
 	<return: #TKTFuture>
 	| aTask |
-	aTask := aValuable asLoggingTask asNamedTask.
-	aTask name: aTaskName.
+	aTask := aValuable asLoggingTask.
 	^ self future: aTask
 ]
 
@@ -247,8 +246,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable [
 BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
 	<return: #BlTktNamedTask>
 	| aTask |
-	aTask := aValuable asLoggingTask asNamedTask.
-	aTask name: aTaskName.
+	aTask := aValuable asLoggingTask.
 	self schedule: aTask.
 	^ aTask
 ]
@@ -257,8 +255,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName [
 BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName timeout: aTimeout [
 	<return: #BlTktNamedTask>
 	| aTask |
-	aTask := aValuable asLoggingTask asNamedTask.
-	aTask name: aTaskName.
+	aTask := aValuable asLoggingTask.
 	self schedule: aTask timeout: aTimeout.
 	^ aTask
 ]
@@ -267,7 +264,7 @@ BlVariableSizeWorkerPool >> schedule: aValuable named: aTaskName timeout: aTimeo
 BlVariableSizeWorkerPool >> schedule: aValuable timeout: aTimeout [
 	<return: #BlTktNamedTask>
 	| aTask |
-	aTask := aValuable asLoggingTask asNamedTask.
+	aTask := aValuable asLoggingTask.
 	TKTConfiguration 
 		processProvider: self processProvider 
 		during: [ super schedule: aTask timeout: aTimeout ].

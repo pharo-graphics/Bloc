@@ -1,43 +1,43 @@
 Class {
-	#name : #BlProcess,
+	#name : #BlTaskProcess,
 	#superclass : #Process,
 	#instVars : [
 		'processAnnotation'
 	],
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Processes'
 }
 
 { #category : #accessing }
-BlProcess >> annotate: aTag with: aValue [
+BlTaskProcess >> annotate: aTag with: aValue [
 	self processAnnotation at: aTag put: aValue.
 ]
 
 { #category : #accessing }
-BlProcess >> annotation: aTag [
+BlTaskProcess >> annotation: aTag [
 	^ self processAnnotation at: aTag ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
-BlProcess >> hasProcessAnnotations [
+BlTaskProcess >> hasProcessAnnotations [
 	^ processAnnotation notNil and: [ processAnnotation isNotEmpty ]
 ]
 
 { #category : #accessing }
-BlProcess >> invocatedByElement [
+BlTaskProcess >> invocatedByElement [
 	^ self task ifNotNil: #invocatedByElement
 ]
 
 { #category : #accessing }
-BlProcess >> processAnnotation [
+BlTaskProcess >> processAnnotation [
 	^ processAnnotation ifNil: [ processAnnotation := WeakValueDictionary new ]
 ]
 
 { #category : #accessing }
-BlProcess >> task [
+BlTaskProcess >> task [
 	^ self annotation: #task
 ]
 
 { #category : #accessing }
-BlProcess >> task: aValuable [
+BlTaskProcess >> task: aValuable [
 	^ self annotate: #task with: aValuable
 ]

@@ -3,5 +3,5 @@ Class {
 	#superclass : #TKTTaskState,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }

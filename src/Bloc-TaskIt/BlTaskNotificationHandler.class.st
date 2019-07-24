@@ -5,7 +5,7 @@ Class {
 		'notification',
 		'handler'
 	],
-	#category : #'Bloc-TaskIt-Tasks'
+	#category : #'Bloc-TaskIt-Element Tasks'
 }
 
 { #category : #accessing }

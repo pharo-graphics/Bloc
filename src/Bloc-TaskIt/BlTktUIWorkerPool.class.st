@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTktUIWorkerPool,
 	#superclass : #BlTktCommandTaskWorkerPool,
-	#category : #'Bloc-TaskIt-New Implementation'
+	#category : #'Bloc-TaskIt-Workers'
 }
 
 { #category : #accessing }
@@ -14,6 +14,13 @@ BlTktUIWorkerPool class >> defaultName [
 BlTktUIWorkerPool class >> defaultPoolSize [
 	<return: #Integer>
 	^ 4
+]
+
+{ #category : #initialization }
+BlTktUIWorkerPool >> initialize [ 
+
+	super initialize.
+	taskQueue := AtomicSharedPriorityQueue new.
 ]
 
 { #category : #accessing }
