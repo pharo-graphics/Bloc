@@ -1,17 +1,25 @@
 Class {
 	#name : #BlCancellableTaskItAction,
 	#superclass : #BlNotificableTaskItAction,
+	#traits : 'TBlTktRequests',
+	#classTraits : 'TBlTktRequests classTrait',
 	#category : #'Bloc-TaskIt-Tasks'
 }
 
 { #category : #accessing }
 BlCancellableTaskItAction >> action: aCallback [
-	super action: aCallback asCommand
+	super action: aCallback asBlTktCommand
+]
+
+{ #category : #accessing }
+BlCancellableTaskItAction >> requestContext [
+	<return: #TBlTktRequests>
+	^ self action
 ]
 
 { #category : #'api - execution' }
-BlCancellableTaskItAction >> cancelRequest [
-	^ self action cancelRequest
+BlCancellableTaskItAction >> terminationRequested [
+	^ self action terminationRequested
 ]
 
 { #category : #testing }

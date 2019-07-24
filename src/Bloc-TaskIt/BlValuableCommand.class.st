@@ -9,13 +9,6 @@ Class {
 }
 
 { #category : #'api - execution' }
-BlValuableCommand >> cancelRequest [
-	"I silently ignore the cancel request as 
-	I do not know how to cancel (terminate) a valuable object.
-	You should implement a specialized command if you need to do so."
-]
-
-{ #category : #'api - execution' }
 BlValuableCommand >> execute [
 	result := self valuable value
 ]
@@ -23,6 +16,13 @@ BlValuableCommand >> execute [
 { #category : #accessing }
 BlValuableCommand >> result [
 	^ result
+]
+
+{ #category : #'api - execution' }
+BlValuableCommand >> terminationRequested [
+	"I silently ignore the cancel request as 
+	I do not know how to cancel (terminate) a valuable object.
+	You should implement a specialized command if you need to do so."
 ]
 
 { #category : #accessing }

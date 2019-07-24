@@ -10,11 +10,6 @@ Class {
 }
 
 { #category : #'api - execution' }
-BlRollingLinearGradientPaintCommand >> cancelRequest [
-	"I am a fast command"
-]
-
-{ #category : #'api - execution' }
 BlRollingLinearGradientPaintCommand >> execute [
 	stop > 0.9 ifTrue: [ step := step negated ].
 	stop < 0.1 ifTrue: [ step := step negated ].
@@ -45,6 +40,11 @@ BlRollingLinearGradientPaintCommand >> result [
 	"Return a command execution result"
 	<return: #Object>
 	^ paint
+]
+
+{ #category : #'api - execution' }
+BlRollingLinearGradientPaintCommand >> terminationRequested [
+	"I am a fast command"
 ]
 
 { #category : #'api - testing' }

@@ -15,7 +15,7 @@ BlTktCancelableTaskExamples >> cancelingTaskExecution [
 	aProgressLine := aProgress childAt: 1.
 	aTask := self taskWithNoExplicitExecutionHandling asNotifyingTask.
 	aStop addEventHandlerOn: BlClickEvent do: [ :anEvent | 
-		aTask cancelRequest.
+		aTask terminationRequested.
 		anEvent currentTarget background: Color lightRed ].
 	aCallback := [ :aNotification :anElement | 
 		anElement constraintsDo: [ :c | c frame horizontal weight: aNotification fraction asFloat ] ].

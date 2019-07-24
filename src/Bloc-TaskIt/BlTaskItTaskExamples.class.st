@@ -19,7 +19,7 @@ BlTaskItTaskExamples >> addCancellableTaskToTheElementWithoutSpace [
 	aCancelButton := self cancelElement.
 	aCancelButton
 		addEventHandlerOn: BlClickEvent
-		do: [ aTask cancelRequest ].
+		do: [ aTask terminationRequested ].
 	anExecuteButton := self executeElement.
 	anExecuteButton addEventHandlerOn: BlClickEvent
 		do: [ anElement enqueueTask: (aTask action: BlTaskItDemoCommand new) ].

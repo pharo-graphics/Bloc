@@ -1,14 +1,22 @@
 Class {
-	#name : #BlTKTProcess,
+	#name : #BlTktProcess,
 	#superclass : #TKTProcess,
 	#category : #'Bloc-TaskIt-Processes'
 }
 
 { #category : #private }
-BlTKTProcess >> privateCreatePharoProcess [
+BlTktProcess >> privateCreatePharoProcess [
 	"Return an instance of TKTConfiguration process which is usually Process."
 	<return: #Process>
-	super privateCreatePharoProcess.
+	process := BlProcess
+		forContext: self createContext
+		priority: self spawnPriority.
 	process name: self name.
+	process task: self task.
 	^ process
+]
+
+{ #category : #private }
+BlTktProcess >> task [
+	^ self annotation: #task
 ]

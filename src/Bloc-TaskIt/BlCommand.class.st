@@ -42,12 +42,6 @@ BlCommand >> asTask [
 	^ TKTTask valuable: self
 ]
 
-{ #category : #'api - execution' }
-BlCommand >> cancelRequest [
-	"Every command is responsible to terminate nicely"
-	self subclassResponsibility
-]
-
 { #category : #accessing }
 BlCommand >> catchingErrors [
 	"Return an error or collections of errors to catch during a command execution"
@@ -117,6 +111,12 @@ BlCommand >> taskPriority [
 	"Answer the priority of the receiver when submitted as a task to TaskIt. 0 is highest priority"
 
 	^0
+]
+
+{ #category : #'api - execution' }
+BlCommand >> terminationRequested [
+	"Every command is responsible to terminate nicely"
+	self subclassResponsibility
 ]
 
 { #category : #evaluating }

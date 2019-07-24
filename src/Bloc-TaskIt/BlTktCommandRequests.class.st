@@ -8,7 +8,8 @@ Class {
 		'isResumeRequested',
 		'isTerminationRequested',
 		'aboutToCheckCallback',
-		'checkFinishedCallback'
+		'checkFinishedCallback',
+		'userData'
 	],
 	#category : #'Bloc-TaskIt-New Implementation'
 }
@@ -49,6 +50,7 @@ BlTktCommandRequests >> initialize [
 	isResumeRequested := false.
 	isSuspendRequested := false.
 	isTerminationRequested := false.
+	userData := IdentityDictionary new.
 ]
 
 { #category : #testing }
@@ -91,4 +93,10 @@ BlTktCommandRequests >> terminationRequested [
 	isResumeRequested := false.
 	isSuspendRequested := false.
 	isTerminationRequested := true.
+]
+
+{ #category : #accessing }
+BlTktCommandRequests >> userData [
+	<return: #IdentityDictionary>
+	^ userData
 ]

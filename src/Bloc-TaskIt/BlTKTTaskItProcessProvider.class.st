@@ -15,7 +15,7 @@ BlTKTTaskItProcessProvider >> createProcessDoing: aValuable named: aName [
 
 { #category : #accessing }
 BlTKTTaskItProcessProvider >> processClass [
-	^ BlTKTProcess
+	^ BlTktProcess
 ]
 
 { #category : #accessing }

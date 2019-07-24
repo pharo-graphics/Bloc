@@ -20,12 +20,6 @@ BlTktValuableCommand >> initialize [
 ]
 
 { #category : #accessing }
-BlTktValuableCommand >> name [
-	<return: #String>
-	^ self valuable printString
-]
-
-{ #category : #accessing }
 BlTktValuableCommand >> valuable [
 	^ valuable
 ]

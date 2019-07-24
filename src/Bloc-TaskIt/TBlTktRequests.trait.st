@@ -1,5 +1,7 @@
 Trait {
 	#name : #TBlTktRequests,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-TaskIt-New Implementation'
 }
 
@@ -33,6 +35,20 @@ TBlTktRequests >> checkFinishedCallback: aValuable [
 TBlTktRequests >> ifExecutionExpectedDo: aBlock [
 	<return: #Object>
 	^ self isExecutionExpected ifTrue: aBlock
+]
+
+{ #category : #accessing }
+TBlTktRequests >> invocatedByElement [
+	<return: #BlElement>
+	^ self userData at: #element ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+TBlTktRequests >> invocatedByElement: anElement [
+	self 
+		assert: [ anElement isNotNil ]
+		description: [ 'Element must be non-nil' ].
+	self userData at: #element put: anElement
 ]
 
 { #category : #testing }
@@ -78,4 +94,9 @@ TBlTktRequests >> suspendRequested [
 { #category : #requests }
 TBlTktRequests >> terminationRequested [
 	self requestContext terminationRequested
+]
+
+{ #category : #accessing }
+TBlTktRequests >> userData [
+	^ self requestContext userData
 ]

@@ -12,6 +12,11 @@ BlTktProtoCommand >> asAnnouncingCommand [
 	^ BlTktAnnouncingCommand new command: self.
 ]
 
+{ #category : #converting }
+BlTktProtoCommand >> asBlTktCommand [
+	^ self
+]
+
 { #category : #taskit }
 BlTktProtoCommand >> asTask [
 	<return: #BlTktCommandTask>

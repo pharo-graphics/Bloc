@@ -13,11 +13,6 @@ BlTktNotifyingTask >> asNotifyingTask [
 	^ self
 ]
 
-{ #category : #actions }
-BlTktNotifyingTask >> cancelRequest [
-	self suspendRequest
-]
-
 { #category : #initialization }
 BlTktNotifyingTask >> initialize [
 	super initialize.
@@ -47,6 +42,11 @@ BlTktNotifyingTask >> scheduleTaskExecutionFor: aRunner [
 { #category : #actions }
 BlTktNotifyingTask >> suspendRequest [
 	isSuspendRequested := true
+]
+
+{ #category : #actions }
+BlTktNotifyingTask >> terminationRequested [
+	self suspendRequest
 ]
 
 { #category : #executing }
