@@ -26,7 +26,7 @@ BlGlutinHost class >> example [
 	space := BlSpace new.
 	space host: self new.
 	space title: 'Glutin Window'.
-	space addChild: GtWorld new.
+	space addChild: (BlElement new background: Color blue).
 	space show
 ]
 
@@ -84,6 +84,20 @@ BlGlutinHost class >> spaceRegistry [
 { #category : #'api - ui process' }
 BlGlutinHost class >> uiProcessDo: aBlock [
 	UIProcess ifNotNil: aBlock
+]
+
+{ #category : #example }
+BlGlutinHost class >> world [
+	| universe space |
+	BlUniverse reset.
+
+	Bloc preferableSpartaCanvas: BlSpartaSkiaCanvasBuilder.
+
+	space := BlSpace new.
+	space host: self new.
+	space title: 'Morph World'.
+	space addChild: (BlMorphicWorldEmbeddingElement new).
+	space show
 ]
 
 { #category : #'host - api' }
