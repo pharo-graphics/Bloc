@@ -6,7 +6,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-TaskIt-Workers'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #cleanup }
@@ -114,11 +114,6 @@ BlTktCommandTaskWorkerPool >> processProvider [
 BlTktCommandTaskWorkerPool >> start [
 	"TODO: maybe WatchDog should be at higher priority?"
 	self withConfigurationDo: [ super start ].
-]
-
-{ #category : #removing }
-BlTktCommandTaskWorkerPool >> stopWatchDog [
-	dog ifNotNil: [ :aWatchDog | aWatchDog stop ]
 ]
 
 { #category : #private }

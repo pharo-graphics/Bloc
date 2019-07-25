@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTKTTaskItProcessProvider,
 	#superclass : #TKTTaskItProcessProvider,
-	#category : #'Bloc-TaskIt-Processes'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #'instance-creation' }

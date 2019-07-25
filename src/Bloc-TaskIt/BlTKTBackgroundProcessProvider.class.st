@@ -9,7 +9,7 @@ The Public API and Key Messages are the same as for my superclass.
 Class {
 	#name : #BlTKTBackgroundProcessProvider,
 	#superclass : #BlTKTTaskItProcessProvider,
-	#category : #'Bloc-TaskIt-Processes'
+	#category : #'Bloc-TaskIt-! Obsolete'
 }
 
 { #category : #accessing }

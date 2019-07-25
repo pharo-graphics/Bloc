@@ -19,6 +19,11 @@ TKTCommonQueueWorkerPool >> poolMaxSize [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+TKTCommonQueueWorkerPool >> stopWatchDog [
+	dog ifNotNil: [ :aWatchDog | aWatchDog stop ]
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTCommonQueueWorkerPool >> taskQueue [ 
 
 	^taskQueue

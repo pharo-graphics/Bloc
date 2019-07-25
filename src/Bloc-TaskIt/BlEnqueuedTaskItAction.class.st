@@ -115,5 +115,5 @@ BlEnqueuedTaskItAction >> runFuture [
 	aCommand := self futureAction asBlTktCommand.
 	self name ifNotNil: [ aCommand name: self name].
 	self element ifNotNil: [ aCommand invocatedByElement: self element ].
-	^ BlTktUIWorkerPool default future: aCommand.
+	^ BlTktWorkerProvider highUICPUBoundPool future: aCommand.
 ]
