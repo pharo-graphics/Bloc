@@ -26,7 +26,11 @@ BlGlutinHost class >> example [
 	space := BlSpace new.
 	space host: self new.
 	space title: 'Glutin Window'.
-	space addChild: (BlElement new background: Color blue).
+	space addChild: (BlElement new
+		background: Color blue;
+		when: BlClickEvent do: [
+			GlutinEventsFetcher shutDown: false.
+			GlutinEventsFetcher startUp: false ]).
 	space show
 ]
 
@@ -230,7 +234,6 @@ BlGlutinHost >> spaceRegistry [
 
 { #category : #'host - api' }
 BlGlutinHost >> start [
-	| eventFetcher |
 	self isRunning
 		ifTrue: [ ^ self ].
 
@@ -240,9 +243,8 @@ BlGlutinHost >> start [
 	
 	self class forceStartNewUIProcess.
 
-	eventFetcher := GlutinEventsFetcher new .
-	eventFetcher eventHandlers add: EventsSensor.
-	eventFetcher installEventLoop
+	GlutinEventsFetcher default eventHandlers add: EventsSensor.
+	GlutinEventsFetcher install
 ]
 
 { #category : #'host - api' }
