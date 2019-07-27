@@ -30,8 +30,13 @@ Class {
 		'isRunning',
 		'containerMorph'
 	],
-	#category : 'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host - Morph'
 }
+
+{ #category : #'api - ui process' }
+BlMorphicHost class >> forceStartNewUIProcess [
+	UIManager default spawnNewProcess
+]
 
 { #category : #testing }
 BlMorphicHost class >> isSupported [
@@ -50,6 +55,13 @@ BlMorphicHost class >> priority [
 	<return: #Number>
 
 	^ Float infinity
+]
+
+{ #category : #'api - ui process' }
+BlMorphicHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+	
+	UIManager default uiProcess ifNotNil: aBlock
 ]
 
 { #category : #accessing }
@@ -74,7 +86,9 @@ BlMorphicHost >> createHostSpaceFor: aSpace [
 		description: [ 'Space must not have a host!' ].
 
 	aMorph := self createMorphFor: aSpace.
-	aHostSpace := BlMorphicHostSpace new morph: aMorph.
+
+	aHostSpace := BlMorphicHostSpace new spaceHostMorph: aMorph.
+	aHostSpace universe: self universe.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.
 	aHostSpace withSpartaRenderer.
@@ -86,7 +100,7 @@ BlMorphicHost >> createHostSpaceFor: aSpace [
 BlMorphicHost >> createMorphFor: aSpace [
 	| aMorph |
 
-	aMorph := BlMorphicSpaceMorph new.
+	aMorph := BlMorphicSpaceHostMorph new.
 	aMorph color: Color transparent.
 	aMorph extent: aSpace extent.
 
@@ -100,7 +114,12 @@ BlMorphicHost >> destroyHostSpaceFor: aSpace [
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
 	
-	aSpace hostSpace close.
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 
@@ -115,11 +134,6 @@ BlMorphicHost >> initialize [
 { #category : #'host - testing' }
 BlMorphicHost >> isRunning [
 	^ isRunning
-]
-
-{ #category : #'host - api' }
-BlMorphicHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
 ]
 
 { #category : #'host - api' }

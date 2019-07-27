@@ -42,7 +42,7 @@ BlSpartaMozCanvasBuilder class >> pdf: aFileName extent: aPoint [
 
 { #category : #accessing }
 BlSpartaMozCanvasBuilder class >> priority [
-	^ 10
+	^ 20
 ]
 
 { #category : #testing }

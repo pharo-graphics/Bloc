@@ -128,7 +128,6 @@ BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 				startButtons: dragStartMask;
 				target: anEvent target;
 				gestureSource: anEvent target;
-				dragboard: self space newDragboard;
 				yourself)
 ]
 

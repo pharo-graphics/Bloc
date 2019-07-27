@@ -47,7 +47,7 @@ BlHostRendererOpenGLSurface >> extent: anObject [
 ]
 
 { #category : #initialization }
-BlHostRendererOpenGLSurface >> initializeOn: anObject [	
+BlHostRendererOpenGLSurface >> initializeOn: anObject [
 	anObject initializeForOpenGL: self
 ]
 

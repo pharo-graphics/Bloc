@@ -7,6 +7,12 @@ This area is typically an host-specific window.
 "
 Trait {
 	#name : #TBlHostSpace,
+	#instVars : [
+		'renderer',
+		'host',
+		'space',
+		'universe'
+	],
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
 	#category : #'Bloc-Universe'
@@ -42,29 +48,37 @@ TBlHostSpace >> densityDpi [
 	^ self explicitRequirement
 ]
 
-{ #category : #'host space - events' }
-TBlHostSpace >> enqueueEvent: aBlEvent [
-	"Enqueue a given Bloc Event in the event queue.
-	I am useful for testing and benchmark purposes"
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachHost [
+	host := nil
+]
 
-	self eventFetcher enqueueEvent: aBlEvent.
-	self space requestNextPulse
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachSpace [
+	space := nil
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachUniverse [
+	universe := nil
 ]
 
 { #category : #'host space - events' }
-TBlHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
+TBlHostSpace >> enqueueEvent: aBlEvent [
+	"I dispatch events directly to the universe or space as soon as they come"
 
-	^ self explicitRequirement
+	aBlEvent isUniverseEvent
+		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
+
+	aBlEvent isSpaceEvent
+		ifTrue: [ ^ self space dispatchEvent: aBlEvent ].
+		
+	self space dispatchEvent: aBlEvent
 ]
 
 { #category : #'host space - events' }
 TBlHostSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
-
-	self eventFetcher fetchedEventsDo: aBlock
 ]
 
 { #category : #'host space - events' }
@@ -82,24 +96,19 @@ TBlHostSpace >> hasScaled [
 	^ self renderer hasResized
 ]
 
-{ #category : #'host space - displaying' }
-TBlHostSpace >> hide [
-	self explicitRequirement
-]
-
 { #category : #'host space - accessing' }
 TBlHostSpace >> host [
 	"Return a host that was used to create this host space"
 	<return: #BlHost>
 
-	^ self explicitRequirement
+	^ host
 ]
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> host: aBlHost [
 	"Assign a host that was used to create this host space"
 	
-	self explicitRequirement
+	host := aBlHost
 ]
 
 { #category : #initialization }
@@ -173,11 +182,6 @@ TBlHostSpace >> needsRebuild [
 	<return: #Boolean>
 	
 	^ self explicitRequirement
-]
-
-{ #category : #'host space - displaying' }
-TBlHostSpace >> open [
-	self explicitRequirement
 ]
 
 { #category : #'host space - rendering' }
@@ -255,7 +259,12 @@ TBlHostSpace >> renderer [
 	"Return host renderer used to render spaces"
 	<return: #TBlHostRenderer>
 
-	^ self explicitRequirement
+	^ renderer
+]
+
+{ #category : #'host space - rendering' }
+TBlHostSpace >> requestRedraw [
+	"Space needs to redraw the window"
 ]
 
 { #category : #'host space - accessing' }
@@ -264,7 +273,7 @@ TBlHostSpace >> scaleFactor [
 	On high dpi (retina) displays scaling factor is > 1"
 	<return: #Point>
 	
-	^ self explicitRequirement
+	^ (self canvasExtent / self windowExtent) asFloatPoint
 ]
 
 { #category : #'host space - displaying' }
@@ -277,14 +286,14 @@ TBlHostSpace >> space [
 	"Return a space I am assigned to"
 	<return: #BlSpace>
 
-	^ self explicitRequirement
+	^ space
 ]
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> space: aSpace [
 	"Assign me to a given space"
 
-	self explicitRequirement
+	space := aSpace
 ]
 
 { #category : #'host space - testing' }
@@ -319,6 +328,18 @@ TBlHostSpace >> toBack [
 { #category : #'host space - displaying' }
 TBlHostSpace >> toFront [
 	self explicitRequirement
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> universe [
+	<return: #BlParallelUniverse>
+
+	^ universe
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> universe: aUniverse [
+	universe := aUniverse
 ]
 
 { #category : #'host space - accessing' }

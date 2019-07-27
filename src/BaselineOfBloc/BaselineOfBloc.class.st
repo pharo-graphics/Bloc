@@ -36,7 +36,7 @@ BaselineOfBloc >> baseline: spec [
 				spec repository: 'github://sbragagnolo/taskit:v1.0.2' ];
 			baseline: 'GToolkitExamplesEngine' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
-			baseline: 'OSWindowGlutin' with: [
+			baseline: 'Glutin' with: [
 				spec repository: 'github://feenkcom/oswindow-glutin/src' ].
 		spec 
 			package: #'Bloc-Geometry' with: [
@@ -67,10 +67,8 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#BlocCore ). ];
 			package: #'BlocHost-Morphic' with: [
 				spec requires: #(#BlocCore ). ];
-			package: #'BlocHost-OSWindow' with: [
-				spec requires: #(#BlocCore 'Bloc-Sparta'). ];
-			package: #'BlocHost-OSWindow-Glutin' with: [
-				spec requires: #('BlocHost-OSWindow' OSWindowGlutin). ];
+			package: #'BlocHost-Glutin' with: [
+				spec requires: #(#BlocCore 'Bloc-Sparta' Glutin). ];
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [

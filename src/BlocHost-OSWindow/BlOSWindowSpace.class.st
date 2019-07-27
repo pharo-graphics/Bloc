@@ -11,9 +11,7 @@ Class {
 		'window',
 		'renderer',
 		'eventFetcher',
-		'space',
 		'osWindowRenderer',
-		'host',
 		'keyboardKeyTable'
 	],
 	#category : #'BlocHost-OSWindow-Host'
@@ -73,16 +71,8 @@ BlOSWindowSpace >> ensureWindowIsValid [
 ]
 
 { #category : #'host space - events' }
-BlOSWindowSpace >> eventFetcher [
-	^ eventFetcher
-]
-
-{ #category : #'host space - events' }
 BlOSWindowSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
-
-	self host pollEvents.
-	self eventFetcher fetchedEventsDo: aBlock
 ]
 
 { #category : #'host space - accessing' }
@@ -110,24 +100,9 @@ BlOSWindowSpace >> generateEvents [
 		ifTrue: [ self enqueueEvent: (BlSpaceScaledEvent new timestamp: self space time now) ]
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> hide [
 	self windowDo: [ :aWindow | aWindow hide ]
-]
-
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> host [
-	"Return a host that was used to create this host space"
-	<return: #BlHost>
-
-	^ host
-]
-
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> host: aBlHost [
-	"Assign a host that was used to create this host space"
-	
-	host := aBlHost
 ]
 
 { #category : #initialization }
@@ -241,7 +216,7 @@ BlOSWindowSpace >> needsRebuild [
 	^ self isValid not
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> open [
 	self windowDo: [ :aWindow | aWindow show ]
 ]
@@ -345,21 +320,6 @@ BlOSWindowSpace >> scaleFactor [
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> show [
 	self windowDo: [ :aWindow | aWindow show ]
-]
-
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> space [
-	"Return a space I am assigned to"
-	<return: #BlSpace>
-
-	^ space
-]
-
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> space: aSpace [
-	"Assign me to a given space"
-
-	space := aSpace
 ]
 
 { #category : #'host space - accessing' }

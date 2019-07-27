@@ -11,7 +11,7 @@ Class {
 		'morph',
 		'pressedKeys'
 	],
-	#category : #'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Support'
 }
 
 { #category : #'instance creation' }
@@ -91,6 +91,10 @@ BlMorphicEventHandler >> dropFiles: anEvent [
 
 { #category : #accessing }
 BlMorphicEventHandler >> enqueue: aBlEvent [
+
+	self isClosed
+		ifTrue: [ ^ self ].
+
 	self window hostSpace enqueueEvent: aBlEvent
 ]
 
@@ -330,8 +334,9 @@ BlMorphicEventHandler >> handleMouseMove: anEvent [
 			delta: aMorphicEvent position - (self window pointToSpace: aMorphicEvent startPoint);
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			timestamp: DateAndTime now;
+			timestamp: self time now;
 			yourself.
+
 		self enqueue: aBlEvent ]
 ]
 
@@ -363,7 +368,7 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 
 		aBlEvent := BlMouseWheelEvent new
 			vector: (BlVector x: 0 y: (aMorphicEvent direction = Character arrowDown
-				ifTrue: [ -3 ] ifFalse: [ 3 ]));
+				ifTrue: [ -5 ] ifFalse: [ 5 ]));
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
@@ -377,7 +382,7 @@ BlMorphicEventHandler >> handleScrollLeft: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
 		aBlEvent := BlMouseWheelEvent new
-			vector: (BlVector x: -2 y: 0);
+			vector: (BlVector x: -5 y: 0);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
@@ -392,7 +397,7 @@ BlMorphicEventHandler >> handleScrollRight: anEvent [
 		| aBlEvent |
 
 		aBlEvent := BlMouseWheelEvent new
-			vector: (BlVector x: 2 y: 0);
+			vector: (BlVector x: 5 y: 0);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
@@ -407,8 +412,9 @@ BlMorphicEventHandler >> handleWindowClosed: aMorphicEvent [
 	| aBlEvent |
 
 	aBlEvent := BlSpaceCloseRequest new timestamp: DateAndTime now.
-	
-	self enqueue: aBlEvent
+	self enqueue: aBlEvent.
+
+	morph := nil
 ]
 
 { #category : #'event handling' }
@@ -427,7 +433,9 @@ BlMorphicEventHandler >> handleWindowResize: aMorphicEvent [
 		extent: aMorphicEvent width @ aMorphicEvent height;
 		timestamp: DateAndTime now;
 		yourself.
-	self enqueue: aBlEvent
+	self enqueue: aBlEvent.
+	
+	self window hostSpace space pulse
 ]
 
 { #category : #'private - keyboard' }
@@ -440,6 +448,11 @@ BlMorphicEventHandler >> initialize [
 	super initialize.
 
 	pressedKeys := Set new
+]
+
+{ #category : #'private - testing' }
+BlMorphicEventHandler >> isClosed [
+	^ morph isNil
 ]
 
 { #category : #'private - testing' }
@@ -471,6 +484,11 @@ BlMorphicEventHandler >> morph: aMorph [
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> registerPressedKey: aKey [
 	pressedKeys add: aKey
+]
+
+{ #category : #accessing }
+BlMorphicEventHandler >> time [
+	^ self window hostSpace space time
 ]
 
 { #category : #'private - keyboard' }

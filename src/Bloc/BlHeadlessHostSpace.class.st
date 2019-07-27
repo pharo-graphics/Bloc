@@ -8,8 +8,6 @@ Class {
 	#classTraits : 'TBlHostSpace classTrait + TBlDebug classTrait',
 	#instVars : [
 		'eventFetcher',
-		'host',
-		'space',
 		'position',
 		'title'
 	],
@@ -57,15 +55,6 @@ BlHeadlessHostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #'host space - events' }
-BlHeadlessHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
-
-	^ eventFetcher
-]
-
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> fullscreen [
 	"Return true if an underlying window is in fullscreen mode,
@@ -81,24 +70,9 @@ BlHeadlessHostSpace >> fullscreen: aBoolean [
 	and exit fullscreen mode if false is given"
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlHeadlessHostSpace >> hide [
 	"do nothing"
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> host [
-	"Return a host that was used to create this host space"
-	<return: #BlHost>
-
-	^ host
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> host: aBlHost [
-	"Assign a host that was used to create this host space"
-	
-	host := aBlHost
 ]
 
 { #category : #'window - properties' }
@@ -153,7 +127,7 @@ BlHeadlessHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlHeadlessHostSpace >> open [
 	"do nothing"
 ]
@@ -213,21 +187,6 @@ BlHeadlessHostSpace >> scaleFactor [
 BlHeadlessHostSpace >> show [
 ]
 
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> space [
-	"Return a space I am assigned to"
-	<return: #BlSpace>
-
-	^ space
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> space: aSpace [
-	"Assign me to a given space"
-
-	space := aSpace
-]
-
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> title [
 	"Return window's title as a string"
@@ -251,6 +210,13 @@ BlHeadlessHostSpace >> toBack [
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> toFront [
 	"do nothing"
+]
+
+{ #category : #'host space - accessing' }
+BlHeadlessHostSpace >> universe [
+	<return: #BlParallelUniverse>
+
+	^ universe
 ]
 
 { #category : #'host space - accessing' }

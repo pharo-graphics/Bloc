@@ -7,8 +7,13 @@ Class {
 	#instVars : [
 		'isRunning'
 	],
-	#category : 'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host - Window'
 }
+
+{ #category : #'api - ui process' }
+BlMorphicWindowHost class >> forceStartNewUIProcess [
+	UIManager default spawnNewProcess
+]
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
@@ -29,6 +34,13 @@ BlMorphicWindowHost class >> priority [
 	^ 20
 ]
 
+{ #category : #'api - ui process' }
+BlMorphicWindowHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+	
+	UIManager default uiProcess ifNotNil: aBlock
+]
+
 { #category : #'host - api' }
 BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
@@ -42,6 +54,7 @@ BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	aHostSpace := BlMorphicWindowHostSpace new morphicWindow: aWindow.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.
+	aHostSpace universe: aSpace.
 	aHostSpace withSpartaRenderer.
 
 	aSpace hostSpace: aHostSpace
@@ -67,7 +80,12 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
 	
-	aSpace hostSpace close.
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 
@@ -81,11 +99,6 @@ BlMorphicWindowHost >> initialize [
 { #category : #'host - api' }
 BlMorphicWindowHost >> isRunning [
 	^ isRunning
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
 ]
 
 { #category : #'host - api' }

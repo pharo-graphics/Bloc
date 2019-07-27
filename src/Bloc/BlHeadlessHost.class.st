@@ -12,7 +12,7 @@ Class {
 
 { #category : #'driver selection' }
 BlHeadlessHost class >> label [
-	^ 'Null'
+	^ 'Headless'
 ]
 
 { #category : #'driver selection' }

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlOSWindowGlutinRenderer,
-	#superclass : #BlOSWindowRenderer,
+	#name : #BlGlutinRendererBuffer,
+	#superclass : #BlGlutinRenderer,
 	#instVars : [
 		'gl',
 		'textureExtent',
@@ -18,29 +18,11 @@ Class {
 	#pools : [
 		'GlutinOpenGLConstants'
 	],
-	#category : #'BlocHost-OSWindow-Glutin'
+	#category : #'BlocHost-Glutin'
 }
 
-{ #category : #'instance creation' }
-BlOSWindowGlutinRenderer class >> for: aWindowHandle [
-	^ self basicNew
-		initialize;
-		initializeWindowHandle: aWindowHandle;
-		yourself
-]
-
-{ #category : #'instance creation' }
-BlOSWindowGlutinRenderer class >> new [ 
-	self error: 'Use #for:'
-]
-
-{ #category : #'host space - accessing' }
-BlOSWindowGlutinRenderer >> canvasExtent [
-	^ window handle framebufferExtent
-]
-
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> fragmentShader [
+BlGlutinRendererBuffer >> fragmentShader [
 	| aShaderVersion |
 	
 	aShaderVersion := gl shaderVersion.
@@ -60,7 +42,7 @@ BlOSWindowGlutinRenderer >> fragmentShader [
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> fragmentShader120 [
+BlGlutinRendererBuffer >> fragmentShader120 [
 	^ '#version 120
 	
 	varying vec2 vTex;
@@ -72,7 +54,7 @@ BlOSWindowGlutinRenderer >> fragmentShader120 [
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> fragmentShader150 [
+BlGlutinRendererBuffer >> fragmentShader150 [
 	^ '#version 150
 	
 	varying vec2 vTex;
@@ -84,7 +66,7 @@ BlOSWindowGlutinRenderer >> fragmentShader150 [
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> fragmentShader330 [
+BlGlutinRendererBuffer >> fragmentShader330 [
 	^ '#version 330
 	
 	precision highp float;
@@ -98,7 +80,7 @@ BlOSWindowGlutinRenderer >> fragmentShader330 [
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> fragmentShader410 [
+BlGlutinRendererBuffer >> fragmentShader410 [
 	^ '#version 410
 	
 	precision highp float;
@@ -113,64 +95,55 @@ BlOSWindowGlutinRenderer >> fragmentShader410 [
 ]
 
 { #category : #'host space - drawing' }
-BlOSWindowGlutinRenderer >> initializeForBuffer: aBlHostRendererBufferSurface [
-	self
-		assert: [ self window isNotNil ]
-		description: [ 'Window must be set!' ].
-
-	self asCurrentDo: [
-		| form pixels |
-		textureExtent := aBlHostRendererBufferSurface canvasExtent.
-		
-		form := Form extent: textureExtent depth: 32.
-
-		pixels := FFIExternalArray externalNewType: FFIUInt32 size: form stride * form height.
-		pixels autoRelease.
-
-		aBlHostRendererBufferSurface
-			buffer: pixels getHandle;
-			stride: form stride;
-			extent: textureExtent.
-			
-		self initializeGL.
-
-		gl viewport_x: 0 y: 0 width: textureExtent x height: textureExtent y.
+BlGlutinRendererBuffer >> initializeForBuffer: aBlHostRendererBufferSurface [
+	| form pixels |
 	
-		texture := gl gen_texture.
-		gl bind_texture_2d: texture.
-		gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MIN_FILTER param: GL_NEAREST.
-		gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MAG_FILTER param: GL_NEAREST.
-		
-		gl
-			tex_image_2d_level: 0
-			internalformat: GL_RGBA
-			width: textureExtent x
-			height: textureExtent y
-			border: 0
-			format: GL_BGRA
-			type: GL_UNSIGNED_INT_8_8_8_8_REV
-			pixels: surface buffer
-			length: surface stride * textureExtent y * 4 ]
-]
-
-{ #category : #initialization }
-BlOSWindowGlutinRenderer >> initializeForOpenGL: aBlHostRendererOpenGLSurface [
 	self
 		assert: [ self window isNotNil ]
 		description: [ 'Window must be set!' ].
 
-	self asCurrentDo: [	
-		aBlHostRendererOpenGLSurface
-			extent: aBlHostRendererOpenGLSurface canvasExtent ]
+	self makeCurrent.
+
+	textureExtent := aBlHostRendererBufferSurface canvasExtent.
+	
+	form := Form extent: textureExtent depth: 32.
+
+	pixels := FFIExternalArray externalNewType: FFIUInt32 size: form stride * form height.
+	pixels autoRelease.
+
+	aBlHostRendererBufferSurface
+		buffer: pixels getHandle;
+		stride: form stride;
+		extent: textureExtent.
+
+	self initializeGL.
+
+	gl viewport_x: 0 y: 0 width: textureExtent x height: textureExtent y.
+
+	texture := gl gen_texture.
+	gl bind_texture_2d: texture.
+	gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MIN_FILTER param: GL_NEAREST.
+	gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MAG_FILTER param: GL_NEAREST.
+	
+	gl
+		tex_image_2d_level: 0
+		internalformat: GL_RGBA
+		width: textureExtent x
+		height: textureExtent y
+		border: 0
+		format: GL_BGRA
+		type: GL_UNSIGNED_INT_8_8_8_8_REV
+		pixels: aBlHostRendererBufferSurface buffer
+		length: aBlHostRendererBufferSurface stride * textureExtent y * 4
 ]
 
 { #category : #'host space - drawing' }
-BlOSWindowGlutinRenderer >> initializeGL [
+BlGlutinRendererBuffer >> initializeGL [
 	
 	gl
 		ifNotNil: [ ^ self ].
 
-	gl := self window handle gl.
+	gl := self window gl.
 	
 	gl clear_colorR: 1 g: 1 b: 1 a: 1.
 	gl clear: GL_COLOR_BUFFER_BIT.
@@ -210,82 +183,57 @@ BlOSWindowGlutinRenderer >> initializeGL [
 	uLoc := gl get_attribute_location_program: progObj name: 'pos'.
 ]
 
-{ #category : #initialization }
-BlOSWindowGlutinRenderer >> initializeWindowHandle: aGlutinWindowHandle [
-	self window: aGlutinWindowHandle
-]
-
-{ #category : #misc }
-BlOSWindowGlutinRenderer >> makeCurrent: aWindow [
-	aWindow isValid
-		ifFalse: [ ^ false ].
-	
-	aWindow handle makeCurrent.
-	^ true
-]
-
 { #category : #'host space - drawing' }
-BlOSWindowGlutinRenderer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
+BlGlutinRendererBuffer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
+	| vao |
 	
-	self asCurrentDo: [
-		| vao |
-		
-		gl bind_texture_2d: texture.
-		gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MIN_FILTER param: GL_NEAREST.
-		gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MAG_FILTER param: GL_NEAREST.
-		
-		gl
-			tex_sub_image_2d_level: 0
-			xoffset: 0
-			yoffset: 0
-			width: textureExtent x
-			height: textureExtent y
-			format: GL_BGRA
-			type: GL_UNSIGNED_INT_8_8_8_8_REV
-			pixels: aBlHostRendererBufferSurface buffer
-			length: aBlHostRendererBufferSurface stride * textureExtent y * 4.
-		
-		vao := gl gen_vertex_array.
-		gl bind_vertex_array: vao.
-		
-		gl enable_vertex_attrib_array: vloc.
-		gl bind_array_buffer: vertexBuff.
-		gl
-			vertex_attrib_pointer_index: vloc
-			size: 2
-			type: GL_FLOAT
-			normalized: false
-			stride: 0
-			offset: 0.
-			
-		gl enable_vertex_attrib_array: tloc.
-		gl bind_array_buffer: texBuff.
-		gl
-			vertex_attrib_pointer_index: tloc
-			size: 2
-			type: GL_FLOAT
-			normalized: false
-			stride: 0
-			offset: 0.
-			
-		gl draw_arrays_mode: GL_TRIANGLE_FAN first: 0 count: 4.	
-		
-		self swapBuffers ]
-]
-
-{ #category : #'host space - drawing' }
-BlOSWindowGlutinRenderer >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
+	self makeCurrent.
 	
-	self asCurrentDo: [ self swapBuffers ]
-]
-
-{ #category : #misc }
-BlOSWindowGlutinRenderer >> swapBuffers: aWindow [
-	aWindow handle swapBuffers
+	gl bind_texture_2d: texture.
+	gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MIN_FILTER param: GL_NEAREST.
+	gl tex_parameter_i_target: GL_TEXTURE_2D name: GL_TEXTURE_MAG_FILTER param: GL_NEAREST.
+	
+	gl
+		tex_sub_image_2d_level: 0
+		xoffset: 0
+		yoffset: 0
+		width: textureExtent x
+		height: textureExtent y
+		format: GL_BGRA
+		type: GL_UNSIGNED_INT_8_8_8_8_REV
+		pixels: aBlHostRendererBufferSurface buffer
+		length: aBlHostRendererBufferSurface stride * textureExtent y * 4.
+	
+	vao := gl gen_vertex_array.
+	gl bind_vertex_array: vao.
+	
+	gl enable_vertex_attrib_array: vloc.
+	gl bind_array_buffer: vertexBuff.
+	gl
+		vertex_attrib_pointer_index: vloc
+		size: 2
+		type: GL_FLOAT
+		normalized: false
+		stride: 0
+		offset: 0.
+		
+	gl enable_vertex_attrib_array: tloc.
+	gl bind_array_buffer: texBuff.
+	gl
+		vertex_attrib_pointer_index: tloc
+		size: 2
+		type: GL_FLOAT
+		normalized: false
+		stride: 0
+		offset: 0.
+		
+	gl draw_arrays_mode: GL_TRIANGLE_FAN first: 0 count: 4.	
+	
+	self swapBuffers
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> vertexShader [
+BlGlutinRendererBuffer >> vertexShader [
 	| aShaderVersion |
 	
 	aShaderVersion := gl shaderVersion.
@@ -305,7 +253,7 @@ BlOSWindowGlutinRenderer >> vertexShader [
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> vertexShader120 [
+BlGlutinRendererBuffer >> vertexShader120 [
 	^ '#version 120
 	
 	attribute vec2 aVertex;
@@ -319,7 +267,7 @@ BlOSWindowGlutinRenderer >> vertexShader120 [
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> vertexShader150 [
+BlGlutinRendererBuffer >> vertexShader150 [
 	^ '#version 150
 	
 	attribute vec2 aVertex;
@@ -333,7 +281,7 @@ BlOSWindowGlutinRenderer >> vertexShader150 [
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> vertexShader330 [
+BlGlutinRendererBuffer >> vertexShader330 [
 	^ '#version 330
 	
 	attribute vec2 aVertex;
@@ -347,7 +295,7 @@ BlOSWindowGlutinRenderer >> vertexShader330 [
 ]
 
 { #category : #'private - gl' }
-BlOSWindowGlutinRenderer >> vertexShader410 [
+BlGlutinRendererBuffer >> vertexShader410 [
 	^ '#version 410
 	
 	in vec2 aVertex;

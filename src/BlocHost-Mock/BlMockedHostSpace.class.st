@@ -18,13 +18,11 @@ Class {
 		'canvasExtent',
 		'densityDpi',
 		'renderCount',
-		'space',
-		'host',
 		'isFullscreen',
 		'position',
 		'title'
 	],
-	#category : 'BlocHost-Mock-Host'
+	#category : #'BlocHost-Mock-Host'
 }
 
 { #category : #'window - properties' }
@@ -103,15 +101,6 @@ BlMockedHostSpace >> densityDpi: aNumber [
 	densityDpi := aNumber
 ]
 
-{ #category : #'host space - events' }
-BlMockedHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
-
-	^ eventFetcher
-]
-
 { #category : #'window - properties' }
 BlMockedHostSpace >> fullscreen [
 	"Return true if an underlying window is in fullscreen mode,
@@ -139,24 +128,9 @@ BlMockedHostSpace >> hasResized [
 	^ false
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlMockedHostSpace >> hide [
 	visible := false
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> host [
-	"Return a host that was used to create this host space"
-	<return: #BlHost>
-
-	^ host
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> host: aBlHost [
-	"Assign a host that was used to create this host space"
-	
-	host := aBlHost
 ]
 
 { #category : #'window - properties' }
@@ -226,7 +200,7 @@ BlMockedHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : #'as yet unclassified' }
 BlMockedHostSpace >> open [
 	opened := true.
 	self show
@@ -276,21 +250,6 @@ BlMockedHostSpace >> scaleFactor [
 { #category : #'host space - displaying' }
 BlMockedHostSpace >> show [
 	visible := true
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> space [
-	"Return a space I am assigned to"
-	<return: #BlSpace>
-
-	^ space
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> space: aSpace [
-	"Assign me to a given space"
-
-	space := aSpace
 ]
 
 { #category : #'window - properties' }

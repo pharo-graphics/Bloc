@@ -99,7 +99,7 @@ Bloc class >> preferableEventHandlerRegistry: anEventHandlerRegistryClass [
 
 { #category : #accessing }
 Bloc class >> preferableHostClass [
-	^ PreferableHostClass ifNil: [ BlHost defaultHostClass ]
+	^ PreferableHostClass ifNil: [ BlHost suitableHostClass ]
 ]
 
 { #category : #accessing }

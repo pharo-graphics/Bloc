@@ -21,18 +21,6 @@ BlHost class >> availableHostClasses [
 ]
 
 { #category : #'driver selection' }
-BlHost class >> defaultHostClass [
-	"Find a default bloc host among all available.
-	Return a special null one if there are no available hosts"
-	<return: #'BlHost class'>
-
-	^ self availableHostClasses
-		"There are no availbale hosts, return a null one"
-		ifEmpty: [ BlHeadlessHost ]
-		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
-]
-
-{ #category : #'driver selection' }
 BlHost class >> isSupported [
 	^ false
 ]
@@ -65,6 +53,23 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'driver selection' }
+BlHost class >> suitableHostClass [
+	"Find a default bloc host among all available.
+	Return a special null one if there are no available hosts"
+	<return: #'BlHost class'>
+
+	^ self availableHostClasses
+		"There are no availbale hosts, return a null one"
+		ifEmpty: [ BlHeadlessHost ]
+		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
+]
+
+{ #category : #'api - ui process' }
+BlHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+]
+
 { #category : #'host - api' }
 BlHost >> createHostSpaceFor: aSpace [
 	self subclassResponsibility 
@@ -84,11 +89,6 @@ BlHost >> isRunning [
 	<return: #Boolean>
 
 	^ self subclassResponsibility
-]
-
-{ #category : #'host - api' }
-BlHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
 ]
 
 { #category : #'host - api' }
@@ -123,4 +123,11 @@ BlHost >> supportsOpenGLSurface [
 	<return: #Boolean>
 	
 	^ false
+]
+
+{ #category : #'host space - accessing' }
+BlHost >> universe [
+	<return: #BlParallelUniverse>
+	
+	^ BlParallelUniverse forHost: self class
 ]

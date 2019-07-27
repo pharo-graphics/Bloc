@@ -42,7 +42,7 @@ BlNotificableTaskItAction >> onRunEnqueueAction: aCallback [
 BlNotificableTaskItAction >> onRunEnqueueRepeatedAction: aCallback [
 	| aTask |
 	aTask := BlRepeatedTaskAction new.
-	aTask delay: 30 milliSeconds.
+	aTask delay: 200 milliSeconds.
 	aTask action: aCallback.
 	self onRunEnqueueRepeatedTask: aTask.
 ]

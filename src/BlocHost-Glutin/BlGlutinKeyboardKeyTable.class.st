@@ -1,5 +1,5 @@
 Class {
-	#name : #BlOSWindowGlutinKeyboardKeyTable,
+	#name : #BlGlutinKeyboardKeyTable,
 	#superclass : #BlKeyboardKeyTable,
 	#instVars : [
 		'virtualKeyTable'
@@ -7,11 +7,11 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'BlocHost-OSWindow-Glutin'
+	#category : #'BlocHost-Glutin'
 }
 
 { #category : #cleanup }
-BlOSWindowGlutinKeyboardKeyTable class >> cleanUp [
+BlGlutinKeyboardKeyTable class >> cleanUp [
 	<script: 'self cleanUp'>
 	super cleanUp.
 	
@@ -19,19 +19,19 @@ BlOSWindowGlutinKeyboardKeyTable class >> cleanUp [
 ]
 
 { #category : #cleanup }
-BlOSWindowGlutinKeyboardKeyTable class >> default [
+BlGlutinKeyboardKeyTable class >> default [
 	^ default ifNil: [ default := self new ]
 ]
 
 { #category : #initialization }
-BlOSWindowGlutinKeyboardKeyTable >> initialize [
+BlGlutinKeyboardKeyTable >> initialize [
 	super initialize.
 
 	self initializeVirtualKeyTable
 ]
 
 { #category : #initialization }
-BlOSWindowGlutinKeyboardKeyTable >> initializeVirtualKeyTable [
+BlGlutinKeyboardKeyTable >> initializeVirtualKeyTable [
 	self
 		initialize: (virtualKeyTable := Dictionary new)
 		with: #(
@@ -165,7 +165,7 @@ BlOSWindowGlutinKeyboardKeyTable >> initializeVirtualKeyTable [
 ]
 
 { #category : #initialization }
-BlOSWindowGlutinKeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
+BlGlutinKeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
 	<return: #BlKeyboardKey>
 
 	^ virtualKeyTable

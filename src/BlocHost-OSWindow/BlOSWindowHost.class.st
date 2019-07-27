@@ -20,7 +20,7 @@ BlOSWindowHost class >> default [
 	"Pick a specific OSWindow backend from available ones"
 	<return: #BlOSWindowHost>
 
-	^ BlOSWindowHost defaultHostClass new
+	^ BlOSWindowHost suitableHostClass new
 ]
 
 { #category : #'instance creation' }

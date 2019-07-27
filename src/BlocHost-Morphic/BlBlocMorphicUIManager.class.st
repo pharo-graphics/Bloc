@@ -13,7 +13,7 @@ I use ==Smalltalk tools debugger== to open the actual debugger. For my precondit
 Class {
 	#name : #BlBlocMorphicUIManager,
 	#superclass : #MorphicUIManager,
-	#category : #'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Support'
 }
 
 { #category : #actions }
@@ -29,10 +29,13 @@ BlBlocMorphicUIManager class >> useAsDefault [
 ]
 
 { #category : #'ui process' }
-BlBlocMorphicUIManager >> blocUIProcess [
-	" Answer the currently active UI process for bloc universe"
+BlBlocMorphicUIManager >> blocDefer: aBlock [
+	| aGlutinUniverse |
 
-	^ BlUniverse default pulseLoop loopProcess
+	aBlock value
+
+	"aGlutinUniverse := BlParallelUniverse forHost: Bloc preferableHostClass.
+	aGlutinUniverse defer: aBlock"
 ]
 
 { #category : #debug }
@@ -42,21 +45,28 @@ BlBlocMorphicUIManager >> debugProcess: process context: context label: title fu
 	I spawn a new Bloc UI if the debugged process is the Bloc UI process 
 	or a Morphic UI process if the debugged process is the Morphic UI process."
 
-	| debugSession isForBlocUIProcess |
+	| debugSession isForBlocUIProcess aBlocUniverseIfAny |
 
 	debugSession := process newDebugSessionNamed: title startedAt: context.
 	debugSession logStackToFileIfNeeded.
 	
-	isForBlocUIProcess := self isForBlockUIProcess: debugSession.
-	isForBlocUIProcess "Handle the case of the Bloc UI process"
-		ifTrue: [ debugSession errorWasInUIProcess: true ]. 
+	isForBlocUIProcess := false.
+	aBlocUniverseIfAny := nil.
+	
+	self
+		universeForSession: debugSession
+		ifPresent: [ :aUniverse |
+			isForBlocUIProcess := true.
+			aBlocUniverseIfAny := aUniverse.
+			debugSession errorWasInUIProcess: true ]
+		ifAbsent: [].
+	
 	debugSession isAboutUIProcess ifTrue: [ 
 		DefaultExecutionEnvironment beActiveDuring: [
-			isForBlocUIProcess "Handle the case of the Bloc UI process"
-				ifTrue:[ self spawnNewBlocProcess ]
-				ifFalse: [ self spawnNewMorphicProcess ]
-			] ].
-	
+		isForBlocUIProcess "Handle the case of the Bloc UI process"
+			ifTrue:[ self spawnNewBlocProcess: aBlocUniverseIfAny ]
+			ifFalse: [ self spawnNewMorphicProcess ] ] ].
+
 	"Perform the opening of the debugger using the registered debugger. This can be either a Morphic or Bloc based debugger."
 	self defer: [ 
 		[ Smalltalk tools debugger 
@@ -68,8 +78,25 @@ BlBlocMorphicUIManager >> debugProcess: process context: context label: title fu
 ]
 
 { #category : #debug }
-BlBlocMorphicUIManager >> isForBlockUIProcess: debugSession [
-	^ self blocUIProcess == debugSession interruptedProcess
+BlBlocMorphicUIManager >> isBlocUIProcess: aProcess [
+	^ BlParallelUniverse all anySatisfy: [ :eachUniverse |
+		| isInterruptedProcess |
+		isInterruptedProcess := false.
+	
+		eachUniverse hostClass uiProcessDo: [ :eachUIProcess |
+			isInterruptedProcess := eachUIProcess name = aProcess name ].
+		isInterruptedProcess ]
+]
+
+{ #category : #debug }
+BlBlocMorphicUIManager >> isForBlocUIProcess: debugSession [
+	^ BlParallelUniverse all anySatisfy: [ :eachUniverse |
+		| isInterruptedProcess |
+		isInterruptedProcess := false.
+	
+		eachUniverse hostClass uiProcessDo: [ :eachUIProcess |
+			isInterruptedProcess := eachUIProcess == debugSession interruptedProcess ].
+		isInterruptedProcess ]
 ]
 
 { #category : #'ui requests' }
@@ -115,7 +142,7 @@ BlBlocMorphicUIManager >> resumeUIProcess: aProcess [
 	
 	"I explicitly check if the process corresponds to the Bloc UI process or not so I can determine which UI process to resume."
 	"For now the only way to determine if the process given as a parameter was a Bloc UI process is by checking the process name."
-	aProcess name = BlUniverse default pulseLoop processId
+	(self isBlocUIProcess: aProcess)
 		ifTrue:  [ 
 			"Resume the Bloc UI process."
 			self resumeBlocUIProcess: aProcess ]
@@ -132,6 +159,37 @@ BlBlocMorphicUIManager >> spawnNewBlocProcess [
 ]
 
 { #category : #'ui process' }
+BlBlocMorphicUIManager >> spawnNewBlocProcess: aUniverse [
+	aUniverse hostClass forceStartNewUIProcess
+]
+
+{ #category : #'ui process' }
 BlBlocMorphicUIManager >> spawnNewMorphicProcess [
 	self spawnNewProcess
+]
+
+{ #category : #debug }
+BlBlocMorphicUIManager >> universeForProcess: aProcess ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
+	^ BlParallelUniverse all
+		detect: [ :eachUniverse |
+			| isInterruptedProcess |
+			isInterruptedProcess := false.
+			eachUniverse hostClass
+				uiProcessDo: [ :eachUIProcess | isInterruptedProcess := eachUIProcess name = aProcess name ].
+			isInterruptedProcess ]
+		ifFound: aPresentBlock
+		ifNone: anExceptionBlock
+]
+
+{ #category : #debug }
+BlBlocMorphicUIManager >> universeForSession: debugSession ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
+	^ BlParallelUniverse all
+		detect: [ :eachUniverse |
+			| isInterruptedProcess |
+			isInterruptedProcess := false.
+			eachUniverse hostClass
+				uiProcessDo: [ :eachUIProcess | isInterruptedProcess := eachUIProcess == debugSession interruptedProcess ].
+			isInterruptedProcess ]
+		ifFound: aPresentBlock
+		ifNone: anExceptionBlock
 ]

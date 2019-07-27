@@ -1,21 +1,20 @@
 "
-I am used to embed Bloc elements in Morphic world
+I act as a space host for a Bloc space
 "
 Class {
-	#name : #BlMorphicSpaceMorph,
+	#name : #BlMorphicSpaceHostMorph,
 	#superclass : #Morph,
 	#instVars : [
 		'form',
-		'defered',
 		'eventHandler',
 		'preventResize',
 		'hostSpace'
 	],
-	#category : #'BlocHost-Morphic-Morphs'
+	#category : #'BlocHost-Morphic-Host - Common'
 }
 
 { #category : #drawing }
-BlMorphicSpaceMorph >> drawOn: aCanvas [
+BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 	| spaceForm |
 	super drawOn: aCanvas.
 
@@ -23,13 +22,12 @@ BlMorphicSpaceMorph >> drawOn: aCanvas [
 	spaceForm isNull
 		ifTrue: [ ^ self ].
 	hostSpace ifNotNil: [ 
-		hostSpace lock critical: [
-			aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
-				aClippedCanvas drawImage: spaceForm at: self position ] ] ]
+		aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
+			aClippedCanvas drawImage: spaceForm at: self position ] ]
 ]
 
 { #category : #geometry }
-BlMorphicSpaceMorph >> extent: aPoint [
+BlMorphicSpaceHostMorph >> extent: aPoint [
 	super extent: aPoint.
 	
 	"morph may resize before host space is created"
@@ -44,51 +42,42 @@ BlMorphicSpaceMorph >> extent: aPoint [
 ]
 
 { #category : #accessing }
-BlMorphicSpaceMorph >> form: aForm [
-	
+BlMorphicSpaceHostMorph >> form: aForm [
 	form := aForm.
-	
-	defered
-		ifTrue: [ ^ self ].
-	 
-	defered := true.
-	self defer: [
-		defered := false.
-		self changed ]
+	self changed
 ]
 
 { #category : #'event handling' }
-BlMorphicSpaceMorph >> handleKeystroke: anEvent [
+BlMorphicSpaceHostMorph >> handleKeystroke: anEvent [
 	anEvent sentTo: eventHandler
 ]
 
 { #category : #'event handling' }
-BlMorphicSpaceMorph >> handlesKeyboard: evt [
+BlMorphicSpaceHostMorph >> handlesKeyboard: evt [
 	^ true
 ]
 
 { #category : #accessing }
-BlMorphicSpaceMorph >> hostSpace [
+BlMorphicSpaceHostMorph >> hostSpace [
 	^ hostSpace
 ]
 
 { #category : #accessing }
-BlMorphicSpaceMorph >> hostSpace: aHostSpace [
+BlMorphicSpaceHostMorph >> hostSpace: aHostSpace [
 	
 	hostSpace := aHostSpace.	
 	self initializeAnnouncement
 ]
 
 { #category : #initialization }
-BlMorphicSpaceMorph >> initialize [
+BlMorphicSpaceHostMorph >> initialize [
 	super initialize.
-	
+
 	eventHandler := BlMorphicEventHandler window: self.
-	
+
 	form := BlExternalForm extent: 1@1 depth: 32.
 	form autoRelease.
 	color := Color transparent.
-	defered := false.
 	
 	preventResize := false.
 
@@ -98,7 +87,7 @@ BlMorphicSpaceMorph >> initialize [
 ]
 
 { #category : #initialization }
-BlMorphicSpaceMorph >> initializeAnnouncement [
+BlMorphicSpaceHostMorph >> initializeAnnouncement [
 	self
 		onAnnouncement: MorphOpened
 		do: [ :anEvent | BlMorphicWindowOpenedEvent new sentTo: eventHandler ].
@@ -126,7 +115,7 @@ BlMorphicSpaceMorph >> initializeAnnouncement [
 ]
 
 { #category : #testing }
-BlMorphicSpaceMorph >> isInSpaceArea: anEvent [
+BlMorphicSpaceHostMorph >> isInSpaceArea: anEvent [
 	"Return true if given morphic event is within space area, false otherwise"
 	<return: #Boolean>
 	
@@ -134,23 +123,23 @@ BlMorphicSpaceMorph >> isInSpaceArea: anEvent [
 ]
 
 { #category : #'event handling' }
-BlMorphicSpaceMorph >> keyDown: anEvent [
+BlMorphicSpaceHostMorph >> keyDown: anEvent [
 	anEvent sentTo: eventHandler
 ]
 
 { #category : #'event handling' }
-BlMorphicSpaceMorph >> keyUp: anEvent [
+BlMorphicSpaceHostMorph >> keyUp: anEvent [
 	anEvent sentTo: eventHandler
 ]
 
 { #category : #geometry }
-BlMorphicSpaceMorph >> pointToSpace: aPoint [
+BlMorphicSpaceHostMorph >> pointToSpace: aPoint [
 
 	^ aPoint - self spacePosition
 ]
 
 { #category : #'events-processing' }
-BlMorphicSpaceMorph >> processEvent: anEvent using: defaultDispatcher [
+BlMorphicSpaceHostMorph >> processEvent: anEvent using: defaultDispatcher [
 	
 	(self isInSpaceArea: anEvent)
 		ifFalse: [ ^ super processEvent: anEvent using: defaultDispatcher ].
@@ -164,7 +153,7 @@ BlMorphicSpaceMorph >> processEvent: anEvent using: defaultDispatcher [
 ]
 
 { #category : #geometry }
-BlMorphicSpaceMorph >> resizeDuring: aBlock [
+BlMorphicSpaceHostMorph >> resizeDuring: aBlock [
 	
 	preventResize
 		ifTrue: [ ^ self ].
@@ -174,22 +163,32 @@ BlMorphicSpaceMorph >> resizeDuring: aBlock [
 ]
 
 { #category : #geometry }
-BlMorphicSpaceMorph >> spacePosition [
+BlMorphicSpaceHostMorph >> spacePosition [
 	"Return position of space area"
 	<return: #Point>
 
 	^ self position
 ]
 
+{ #category : #'model - stepping' }
+BlMorphicSpaceHostMorph >> step [
+	self hostSpace space pulse
+]
+
+{ #category : #'model - stepping' }
+BlMorphicSpaceHostMorph >> stepTime [
+	^ 0  "every cycle"
+]
+
 { #category : #testing }
-BlMorphicSpaceMorph >> takesKeyboardFocus [
+BlMorphicSpaceHostMorph >> takesKeyboardFocus [
 	"Answer whether the receiver can normally take keyboard focus."
 
 	^ true
 ]
 
 { #category : #testing }
-BlMorphicSpaceMorph >> wantsKeyboardFocus [
+BlMorphicSpaceHostMorph >> wantsKeyboardFocus [
 	"Answer whether the receiver would like keyboard focus
 	in the general case (mouse action normally)."
 

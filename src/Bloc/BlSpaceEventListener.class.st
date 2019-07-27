@@ -33,6 +33,11 @@ BlSpaceEventListener >> gestureScrollEvent: anEvent [
 	self gestureProcessor handleGesture: anEvent
 ]
 
+{ #category : #'event handling' }
+BlSpaceEventListener >> handleEvent: anEvent [
+	super handleEvent: anEvent
+]
+
 { #category : #'other handlers' }
 BlSpaceEventListener >> inputMethodEvent: anEvent [
 ]
