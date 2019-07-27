@@ -36,6 +36,9 @@ BlGlutinWindowEventsSensor >> nextEventDo: aBlock [
 { #category : #'event - handling' }
 BlGlutinWindowEventsSensor >> processGlutinEvent: aGlutinWindowEvent forWindow: aWindow [
 	| anEventCopy anEventData |
+	
+	(aGlutinWindowEvent isKindOf: GlutinWindowResizedEvent)
+		ifTrue: [ ^ self ].
 
 	anEventData := (1 to: aGlutinWindowEvent class structureSize)
 		collect: [ :i | aGlutinWindowEvent getHandle unsignedByteAt: i ] as: ByteArray.

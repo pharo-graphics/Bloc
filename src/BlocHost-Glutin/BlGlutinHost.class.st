@@ -16,6 +16,12 @@ Class {
 	#category : #'BlocHost-Glutin'
 }
 
+{ #category : #'mutual exclusion' }
+BlGlutinHost class >> critical: aBlock [
+	HostSpaceRegistryMutex ifNil: [ HostSpaceRegistryMutex := Semaphore forMutualExclusion ].
+	HostSpaceRegistryMutex critical: aBlock
+]
+
 { #category : #example }
 BlGlutinHost class >> example [
 	| universe space |
@@ -57,9 +63,18 @@ BlGlutinHost class >> forceStartNewUIProcess [
 	] forkAt: Processor userSchedulingPriority named: 'Bloc UI Process'.
 ]
 
+{ #category : #'private - windows' }
+BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
+	self critical: [
+		self spaceRegistry
+			at: aWindow id
+			ifPresent: aBlock ]
+]
+
 { #category : #'driver selection' }
 BlGlutinHost class >> isSupported [
-	^ true
+	"Only works in headless vm"
+	^ Smalltalk os windowSystemName = 'null'
 ]
 
 { #category : #'driver selection' }
@@ -155,8 +170,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 
 { #category : #'mutual exclusion' }
 BlGlutinHost >> critical: aBlock [
-	HostSpaceRegistryMutex ifNil: [ HostSpaceRegistryMutex := Semaphore forMutualExclusion ].
-	HostSpaceRegistryMutex critical: aBlock
+	self class critical: aBlock
 ]
 
 { #category : #'host - api' }
@@ -244,6 +258,7 @@ BlGlutinHost >> start [
 	self class forceStartNewUIProcess.
 
 	GlutinEventsFetcher default eventHandlers add: EventsSensor.
+	GlutinEventsFetcher default eventHandlers add: BlGlutinWindowResizeSensor new.
 	GlutinEventsFetcher install
 ]
 
