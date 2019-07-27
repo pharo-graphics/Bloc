@@ -96,6 +96,11 @@ BlParallelUniverse >> closeSpace: aSpace [
 		ifTrue: [ aSpace host stop ].
 ]
 
+{ #category : #'api - spaces' }
+BlParallelUniverse >> closeSpaces [
+	self spaces copy do: [ :aSpace | self closeSpace: aSpace ]
+]
+
 { #category : #initialization }
 BlParallelUniverse >> defaultEventDispatcher [
 	^ BlDirectEventDispatcher on: self
