@@ -12,26 +12,13 @@ BlSpaceEventExamples >> ignoreSpaceEventsAfterCloseRequest [
 	<gtExample>
 	| aSpace |
 
-	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost new.
+	aSpace := self space.
 	aSpace eventRecorder: BlMemoryEventRecorder new.
 	aSpace show.
 
 	aSpace hostSpace enqueueEvent: (BlSpaceCloseRequest new timestamp: DateAndTime now).
-	aSpace hostSpace enqueueEvent: (BlTouchMoveEvent new
-		position: 50@50;
-		screenPosition: 50@50;
-		delta: 10@10;
-		timestamp: DateAndTime now;
-		pointerId: 1;
-		pressure: 1;
-		yourself).
 
-	aSpace pulse.
-	
-	self assert: aSpace eventRecorder events size equals: 1.
-	"event recorder stores copies of events"
-	self assert: (aSpace eventRecorder events first isKindOf: BlSpaceCloseRequest).
+	self assert: aSpace hasHostSpace not.
 
 	^ aSpace
 ]
@@ -40,7 +27,7 @@ BlSpaceEventExamples >> ignoreSpaceEventsAfterCloseRequest [
 BlSpaceEventExamples >> space [
 	<gtExample>
 	
-	^ BlSpace new
+	^ BlSpace new host: BlHeadlessHost new
 ]
 
 { #category : #'show / close' }

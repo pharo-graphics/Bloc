@@ -3,7 +3,8 @@ Class {
 	#superclass : #BlElement,
 	#instVars : [
 		'world',
-		'worldState'
+		'worldState',
+		'shouldBeMain'
 	],
 	#category : #'BlocHost-Morphic-World'
 }
@@ -57,7 +58,9 @@ BlMorphicWorldEmbeddingElement >> activeHand [
 
 { #category : #actions }
 BlMorphicWorldEmbeddingElement >> beMain [
-	world beMain
+	shouldBeMain := true.
+	self isAttachedToSceneGraph
+		ifTrue: [ world beMain ]
 ]
 
 { #category : #drawing }
@@ -75,6 +78,7 @@ BlMorphicWorldEmbeddingElement >> initialize [
 		c horizontal matchParent.
 		c vertical matchParent ].
 
+	shouldBeMain := false.
 	worldState := BlMorphicWorldState new element: self.
 	world := BlMorphicWorldMorph worldState: worldState.
 
@@ -82,6 +86,13 @@ BlMorphicWorldEmbeddingElement >> initialize [
 	self when: BlMouseDownEvent do: [ self requestFocus ].
 
 	self enqueueTask: (BlRepeatedTaskAction new delay: 20 milliSeconds; action: [ world runStepMethods ])
+]
+
+{ #category : #'hooks - children' }
+BlMorphicWorldEmbeddingElement >> onAddedToSceneGraph [ 
+	super onAddedToSceneGraph.
+	
+	shouldBeMain ifTrue: [ world beMain ]
 ]
 
 { #category : #layout }

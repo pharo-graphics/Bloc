@@ -35,8 +35,7 @@ Class {
 		'time',
 		'touchProcessor',
 		'frame',
-		'gestureProcessor',
-		'pulseMutex'
+		'gestureProcessor'
 	],
 	#category : #'Bloc-Space'
 }
@@ -250,8 +249,6 @@ BlSpace >> clearDirtyAreas [
 { #category : #'api - displaying' }
 BlSpace >> close [
 	"Delegate closing work to the Universe"
-	
-	ContextStackSignal emit.
 	
 	(BlParallelUniverse forHost: self host class) closeSpace: self
 ]
@@ -677,7 +674,6 @@ BlSpace >> initialize [
 
 	host := BlHost pickHost.
 	nextPulseRequested := true.
-	pulseMutex := Mutex new.
 	session := Smalltalk session.
 	dirtyAreas := OrderedCollection new.
 	
@@ -862,7 +858,7 @@ BlSpace >> processPulse [
 
 { #category : #pulse }
 BlSpace >> pulse [
-	(pulseMutex ifNil: [ pulseMutex := Mutex new ]) critical: [ self processPulse ]
+	self processPulse
 ]
 
 { #category : #'change reporting' }

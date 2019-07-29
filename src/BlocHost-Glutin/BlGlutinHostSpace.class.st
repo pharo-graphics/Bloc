@@ -389,7 +389,6 @@ BlGlutinHostSpace >> visitWindowRedrawRequested: anEvent [
 { #category : #'event - handling' }
 BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 	| aBlocEvent |
-
 	window resize: anEvent width @ anEvent height.
 
 	aBlocEvent := BlSpaceResizedEvent new
@@ -397,8 +396,7 @@ BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 		timestamp: DateAndTime now;
 		yourself.
 
-	self enqueueEvent: aBlocEvent.
-	self space pulse
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #accessing }
