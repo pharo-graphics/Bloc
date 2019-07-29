@@ -1,15 +1,24 @@
 "
-Bloc Main Loop: priority: 39/40
-High Priority Async UI CPU bound: maxPoolSize: 2, priority: 35
-- e.g. BlFileImageElement
-High Priority Async UI External Resource bound: maxPool: 5 or 8, priority: 35
-- e.g. BlURLImageElement
-Low Priority Async UI (Playground execution): maxPoolSize: 2, , priority: 33
-- e.g. Playground expression processing
-Non-UI background processing (single) : maxPoolSize: 1, priority: 30
-- e.g. BlLocalImageCache housekeeping
-Non-UI background processing (multiple): maxPoolSize: 2, priority: 30
-- no example yet.
+BlTktWorkerProvider provides a number of convenience methods for submitting tasks at different priorities.  The intention is that the supplied set of queues will be sufficient when submitting tasks in all cases but a few exceptions.
+
+The main UI processing process runs at priority 40 (${method:name=ProcessorScheduler>>#userSchedulingPriority} (39 during development).  The design goal is to be keep the UI responsive by reducing the work done by the UI process to responding to user input and any other processing that is restricted to the UI process for thread safety reasons.
+
+The supported worker pools and their expected uses are:
+
+;#highUICPUBoundPool
+:This is used for background rendering of views where the processing time is reasonably short and the process is CPU constrained.
+;#highUIExternalResourceBoundPool
+:This is used for background rendering of views where the process is expected to spend significant time waiting on external resources, e.g. retrieving a file over the network.
+;#lowUIUserExecutionPool
+:This is used for background processing where the execution time may be arbitrary, e.g. evaluation of user code in a playground.
+;#nonUISinglePool
+:This is used for background processing that won't be directly used by the user, e.g. cache management, and only a single instance should be run at a time.
+;#nonUIMultiPool
+:This is used for background processing that won't be directly used by the user and multiple instances may be run concurrently.
+
+For detailed pool configuration information, e.g. process priority, maximum pool size and queue priority, see the associated instance methods.
+
+
 
 "
 Class {
@@ -72,7 +81,7 @@ BlTktWorkerProvider >> highUIExternalResourceBoundPool [
 		highUIPriority
 ]
 
-{ #category : #'configurations - basic' }
+{ #category : #'accessing - named priorities' }
 BlTktWorkerProvider >> highUIPriority [
 	self processPriority: Processor userSchedulingPriority - 5
 ]
@@ -87,9 +96,9 @@ BlTktWorkerProvider >> initialize [
 	workerPoolClass := BlTktCommonQueueWorkerPool.
 ]
 
-{ #category : #'configurations - basic' }
+{ #category : #'accessing - named priorities' }
 BlTktWorkerProvider >> lowUIPriority [
-	self processPriority: Processor userSchedulingPriority - 3
+	self processPriority: Processor userSchedulingPriority - 7
 ]
 
 { #category : #'configurations - pools' }
@@ -139,7 +148,7 @@ BlTktWorkerProvider >> nonUIMultiPool [
 		nonUIPriority
 ]
 
-{ #category : #'configurations - basic' }
+{ #category : #'accessing - named priorities' }
 BlTktWorkerProvider >> nonUIPriority [
 	self processPriority: Processor userBackgroundPriority
 ]
@@ -165,7 +174,7 @@ BlTktWorkerProvider >> pool [
 	^ aPool
 ]
 
-{ #category : #'configurations - basic' }
+{ #category : #accessing }
 BlTktWorkerProvider >> priorityQueue [
 	self workerPoolClass: BlTktCommonPriorityQueueWorkerPool
 ]
