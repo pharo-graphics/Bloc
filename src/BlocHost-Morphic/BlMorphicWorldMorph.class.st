@@ -22,6 +22,13 @@ BlMorphicWorldMorph >> beMain [
 	ActiveWorld := self.
 	ActiveHand := self hands first.
 	Display := display.
+ 
+	worldState element isAttachedToSceneGraph
+		ifFalse: [ ^ self ].
+
+	worldState element space host class uiProcessDo: [ :aProcess |
+		MorphicUIManager classVarNamed: #UIProcess put: aProcess.
+		self assert: UIManager default uiProcess == aProcess ]
 ]
 
 { #category : #accessing }

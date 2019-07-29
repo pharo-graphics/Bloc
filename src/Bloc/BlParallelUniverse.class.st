@@ -197,7 +197,10 @@ BlParallelUniverse >> openSpace: aSpace [
 	self
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
-
+	
+	aSpace host isRunning
+		ifFalse: [ aSpace host start ].
+		
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
 	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).
@@ -205,9 +208,6 @@ BlParallelUniverse >> openSpace: aSpace [
 	"Notify root element that it is now visible to the user"
 	aSpace root space: aSpace.
 	aSpace root dispatchAddedToSceneGraph.
-	
-	aSpace host isRunning
-		ifFalse: [ aSpace host start ]
 ]
 
 { #category : #pulse }

@@ -109,7 +109,7 @@ BlGlutinHost class >> world [
 	space := BlSpace new.
 	space host: self new.
 	space title: 'Morph World'.
-	space addChild: (BlMorphicWorldEmbeddingElement new).
+	space addChild: (BlMorphicWorldEmbeddingElement new beMain).
 	space show
 ]
 
