@@ -53,8 +53,8 @@ BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	aWindow := self createMorphicWindowFor: aSpace.
 	aHostSpace := BlMorphicWindowHostSpace new morphicWindow: aWindow.
 	aHostSpace host: self.
+	aHostSpace universe: self universe.
 	aHostSpace space: aSpace.
-	aHostSpace universe: aSpace.
 	aHostSpace withSpartaRenderer.
 
 	aSpace hostSpace: aHostSpace

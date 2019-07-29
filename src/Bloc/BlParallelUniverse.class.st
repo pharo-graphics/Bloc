@@ -72,12 +72,17 @@ BlParallelUniverse >> closeSpace: aSpace [
 		assert: [ aSpace isNotNil ]
 		description: [ 'Space must not be nil' ].
 
-	"First destroy host space and "
+	"If space is not event opened we should do nothing"
+	aSpace isOpened
+		ifFalse: [ ^ self ].
+	
+	"first remove space itself from space manager, to break any recursions"
+	spaceManager removeSpace: aSpace.
+
+	"then destroy host space"
 	aSpace hasHostSpace
 		ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
-
-	"then remove space itself from space manager"
-	spaceManager removeSpace: aSpace.
+	
 	
 	"Notify root element that it is no longer in scene graph"
 	aSpace root dispatchRemovedFromSceneGraph.

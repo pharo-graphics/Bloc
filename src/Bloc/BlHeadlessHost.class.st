@@ -24,13 +24,25 @@ BlHeadlessHost class >> priority [
 ]
 
 { #category : #api }
-BlHeadlessHost >> createHostSpaceFor: aSpace [
+BlHeadlessHost >> createHostSpaceFor: aSpace [	
+	| aHostSpace |
+	
+	aHostSpace := BlHeadlessHostSpace new.
+	aHostSpace universe: self universe.
+	aHostSpace host: self.
+	aHostSpace space: aSpace.
 
-	aSpace hostSpace: (BlHeadlessHostSpace new host: self; space: aSpace)
+	aSpace hostSpace: aHostSpace
 ]
 
 { #category : #api }
 BlHeadlessHost >> destroyHostSpaceFor: aSpace [
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 
