@@ -35,8 +35,7 @@ Class {
 		'time',
 		'touchProcessor',
 		'frame',
-		'gestureProcessor',
-		'pulseMutex'
+		'gestureProcessor'
 	],
 	#category : #'Bloc-Space'
 }
@@ -677,7 +676,6 @@ BlSpace >> initialize [
 
 	host := BlHost pickHost.
 	nextPulseRequested := true.
-	pulseMutex := Mutex new.
 	session := Smalltalk session.
 	dirtyAreas := OrderedCollection new.
 	
@@ -862,7 +860,7 @@ BlSpace >> processPulse [
 
 { #category : #pulse }
 BlSpace >> pulse [
-	(pulseMutex ifNil: [ pulseMutex := Mutex new ]) critical: [ self processPulse ]
+	self processPulse
 ]
 
 { #category : #'change reporting' }

@@ -390,15 +390,12 @@ BlGlutinHostSpace >> visitWindowRedrawRequested: anEvent [
 BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 	| aBlocEvent |
 
-	window resize: anEvent width @ anEvent height.
-
 	aBlocEvent := BlSpaceResizedEvent new
 		extent: anEvent width @ anEvent height;
 		timestamp: DateAndTime now;
 		yourself.
 
-	self enqueueEvent: aBlocEvent.
-	self space pulse
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #accessing }
@@ -425,5 +422,6 @@ BlGlutinHostSpace >> windowExtent [
 
 { #category : #'host space - accessing' }
 BlGlutinHostSpace >> windowExtent: anExtent [
-	window innerExtent: anExtent
+	window innerExtent: anExtent.
+	window resize: anExtent
 ]
