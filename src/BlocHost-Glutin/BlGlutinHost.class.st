@@ -49,18 +49,12 @@ BlGlutinHost class >> forceResumeOfUIProcess: aProcess [
 { #category : #'api - ui process' }
 BlGlutinHost class >> forceStartNewUIProcess [	
 	UIProcess := [
-		[
-			EventsSensor allEventsDo: [ :aGlutinWindowEvent |
-				self spaceRegistry
-					at: aGlutinWindowEvent windowId
-					ifPresent: [ :aHostSpace | aGlutinWindowEvent accept: aHostSpace ] ].
-			
-			 BlParallelUniverse glutin pulse.
-			
+		[			
+			BlParallelUniverse glutin pulse.
 			2 milliSeconds wait.
 		] repeat.
 
-	] forkAt: Processor userSchedulingPriority named: 'Bloc UI Process'.
+	] forkAt: Processor userSchedulingPriority named: 'Bloc UI Process'
 ]
 
 { #category : #'private - windows' }
@@ -258,7 +252,6 @@ BlGlutinHost >> start [
 	self class forceStartNewUIProcess.
 
 	GlutinEventsFetcher default eventHandlers add: EventsSensor.
-	GlutinEventsFetcher default eventHandlers add: BlGlutinWindowResizeSensor new.
 	GlutinEventsFetcher install
 ]
 

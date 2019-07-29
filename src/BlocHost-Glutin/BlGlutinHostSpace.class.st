@@ -7,7 +7,8 @@ Class {
 		'window',
 		'mousePosition',
 		'lastModifiers',
-		'glutinRenderer'
+		'glutinRenderer',
+		'eventFetcher'
 	],
 	#category : #'BlocHost-Glutin'
 }
@@ -74,6 +75,29 @@ BlGlutinHostSpace >> densityDpi [
 	^ 96.0
 ]
 
+{ #category : #'host space - events' }
+BlGlutinHostSpace >> enqueueEvent: aBlEvent [
+	"I dispatch events directly to the universe or space as soon as they come"
+
+	self eventFetcher enqueueEvent: aBlEvent
+]
+
+{ #category : #'host space - accessing' }
+BlGlutinHostSpace >> eventFetcher [
+	"Return event fetcher used to enqueue events that should be
+	processed in the beginning of every frame"
+	<return: #BlHostEventFetcher>
+
+	^ eventFetcher
+]
+
+{ #category : #'host space - events' }
+BlGlutinHostSpace >> fetchedEventsDo: aBlock [
+	"Flush event queue and evaluate a given block with every queued event as argument"
+	
+	self eventFetcher fetchedEventsDo: aBlock
+]
+
 { #category : #'host space - accessing' }
 BlGlutinHostSpace >> id [
 	^ window id
@@ -83,7 +107,8 @@ BlGlutinHostSpace >> id [
 BlGlutinHostSpace >> initialize [
 	super initialize.
 
-	mousePosition := 0@0
+	mousePosition := 0@0.
+	eventFetcher := BlHostEventFetcher new
 ]
 
 { #category : #initialization }
@@ -208,7 +233,7 @@ BlGlutinHostSpace >> visitCharacterReceivedEvent: anEvent [
 	lastModifiers
 		ifNotNil: [ aBlocEvent modifiers: lastModifiers ].
 
-	self space dispatchEvent: aBlocEvent
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - handling' }
@@ -230,12 +255,12 @@ BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 		timestamp: self space time now;
 		yourself.
 		
-	self space dispatchEvent: aBlocEvent
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - handling' }
 BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
-	| aBlEvent aState |
+	| aBlocEvent aState |
 
 	anEvent has_virtual_keycode
 		ifFalse: [ ^ self ].
@@ -248,11 +273,11 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 	aState = GlutinEventInputElementState Unknown
 		ifTrue: [ ^ self ].
 	
-	aBlEvent := aState = GlutinEventInputElementState Pressed
+	aBlocEvent := aState = GlutinEventInputElementState Pressed
 		ifTrue: [ BlKeyDownEvent new ]
 		ifFalse: [ BlKeyUpEvent new ].
 		
-	aBlEvent
+	aBlocEvent
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scan_code;
 		modifiers: (lastModifiers := self convertKeyModifiers: anEvent modifiers);
@@ -260,7 +285,7 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 		position: mousePosition;
 		screenPosition: window position + mousePosition.
 	
-	self space dispatchEvent: aBlEvent
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - handling' }
@@ -287,7 +312,7 @@ BlGlutinHostSpace >> visitMouseInputEvent: anEvent [
 		modifiers: (lastModifiers := self convertKeyModifiers: anEvent modifiers);
 		timestamp: self space time now.
 
-	self space dispatchEvent: aBlocEvent
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - handling' }
@@ -316,7 +341,7 @@ BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
 		modifiers: (lastModifiers := self convertKeyModifiers: anEvent modifiers);
 		timestamp: self space time now.
 		
-	self space dispatchEvent: aBlocEvent
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - handling' }
@@ -331,7 +356,7 @@ BlGlutinHostSpace >> visitWindowCloseRequest: anEvent [
 		timestamp: self space time now;
 		yourself.
 		
-	self space dispatchEvent: aBlocEvent
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - handling' }
@@ -350,7 +375,7 @@ BlGlutinHostSpace >> visitWindowFocusedEvent: anEvent [
 		timestamp: self space time now;
 		yourself.
 
-	self space dispatchEvent: aBlocEvent
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - handling' }
@@ -372,7 +397,7 @@ BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 		timestamp: DateAndTime now;
 		yourself.
 
-	self space dispatchEvent: aBlocEvent.
+	self enqueueEvent: aBlocEvent.
 	self space pulse
 ]
 
