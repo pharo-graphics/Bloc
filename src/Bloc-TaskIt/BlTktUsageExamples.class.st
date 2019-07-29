@@ -5,10 +5,10 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BlTktUsageExamples >> uiWorkerPool [
+BlTktUsageExamples >> highUICPUBoundPool [
 	<gtExample>
 	| aPool |
-	aPool := self workerProvider ui; pool.
+	aPool := self workerProvider highUICPUBoundPool; pool.
 	self assert: aPool name isString.
 	self assert: aPool name isNotEmpty.
 	self assert: aPool poolMaxSize isNumber.
