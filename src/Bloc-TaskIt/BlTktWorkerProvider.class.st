@@ -30,42 +30,100 @@ Class {
 		'name',
 		'maxPoolSize',
 		'processPriority',
-		'workerPoolClass',
-		'mutex'
+		'workerPoolClass'
+	],
+	#classVars : [
+		'ServiceMutex'
 	],
 	#category : #'Bloc-TaskIt-Workers'
 }
 
 { #category : #factory }
 BlTktWorkerProvider class >> highUICPUBoundPool [
-	^ self new highUICPUBoundPool; service
+	^ self 
+		serviceNamed: self highUICPUBoundPoolName 
+		ifMissing: [ self new highUICPUBoundPool; service ]
+]
+
+{ #category : #defaults }
+BlTktWorkerProvider class >> highUICPUBoundPoolName [
+	^ 'Bloc UI CPU Bound'
 ]
 
 { #category : #factory }
 BlTktWorkerProvider class >> highUIExternalResourceBoundPool [
-	^ self new highUIExternalResourceBoundPool; service
+	^ self 
+		serviceNamed: self highUIExternalResourceBoundPoolName 
+		ifMissing: [ self new highUIExternalResourceBoundPool; service ]
+]
+
+{ #category : #defaults }
+BlTktWorkerProvider class >> highUIExternalResourceBoundPoolName [
+	^ 'Bloc UI External Resource Bound'
+]
+
+{ #category : #'class initialization' }
+BlTktWorkerProvider class >> initialize [
+	<script>
+	ServiceMutex := Mutex new.
 ]
 
 { #category : #factory }
 BlTktWorkerProvider class >> lowUIUserExecutionPool [
-	^ self new lowUIUserExecutionPool; service
+	^ self 
+		serviceNamed: self lowUIUserExecutionPoolName
+		ifMissing: [ self new lowUIUserExecutionPool; service ]
+]
+
+{ #category : #defaults }
+BlTktWorkerProvider class >> lowUIUserExecutionPoolName [
+	^ 'Bloc UI Code Snippets'
 ]
 
 { #category : #factory }
 BlTktWorkerProvider class >> nonUIMultiPool [
-	^ self new nonUIMultiPool; service
+	^ self 
+		serviceNamed: self nonUIMultiPoolName
+		ifMissing: [ self new nonUIMultiPool; service ]
+]
+
+{ #category : #defaults }
+BlTktWorkerProvider class >> nonUIMultiPoolName [
+	^ 'Non-UI Multi Processing'
 ]
 
 { #category : #factory }
 BlTktWorkerProvider class >> nonUISinglePool [
-	^ self new nonUISinglePool; service
+	^ self 
+		serviceNamed: self nonUISinglePoolName
+		ifMissing: [ self new nonUISinglePool; service ]
+]
+
+{ #category : #defaults }
+BlTktWorkerProvider class >> nonUISinglePoolName [
+	^ 'Non-UI Single Processing'
+]
+
+{ #category : #defaults }
+BlTktWorkerProvider class >> serviceManager [
+	<return: #TKTServiceManager>
+	^ TKTConfiguration serviceManager
+]
+
+{ #category : #factory }
+BlTktWorkerProvider class >> serviceNamed: aServiceName ifMissing: aValuable [
+	<return: #TKTCommonQueueWorkerPool or: nil>
+	^ ServiceMutex critical: [
+		| aPoolOrNil |
+		aPoolOrNil := self serviceManager poolWorkerNamed: aServiceName.
+		aPoolOrNil ifNil: aValuable ]
 ]
 
 { #category : #'configurations - pools' }
 BlTktWorkerProvider >> highUICPUBoundPool [
 	"High Priority Async UI CPU bound: maxPoolSize: 2, priority: 35"
 	self
-		name: 'Bloc UI CPU Bound';
+		name: self class highUICPUBoundPoolName;
 		priorityQueue;
 		maxPoolSize: 2;
 		highUIPriority
@@ -74,8 +132,9 @@ BlTktWorkerProvider >> highUICPUBoundPool [
 { #category : #'configurations - pools' }
 BlTktWorkerProvider >> highUIExternalResourceBoundPool [
 	"High Priority Async UI External Resource bound: maxPool: 5 or 8, priority: 35"
+
 	self
-		name: 'Bloc UI External Resource Bound';
+		name: self class highUIExternalResourceBoundPoolName;
 		priorityQueue;
 		maxPoolSize: 8;
 		highUIPriority
@@ -89,7 +148,6 @@ BlTktWorkerProvider >> highUIPriority [
 { #category : #initialization }
 BlTktWorkerProvider >> initialize [
 	super initialize.
-	mutex := Mutex new.
 	name := 'User'.
 	maxPoolSize := 4.
 	processPriority := Processor userSchedulingPriority - 5.
@@ -104,8 +162,9 @@ BlTktWorkerProvider >> lowUIPriority [
 { #category : #'configurations - pools' }
 BlTktWorkerProvider >> lowUIUserExecutionPool [
 	"Low Priority Async UI (Playground execution): maxPoolSize: 2, , priority: 33"
+
 	self
-		name: 'Bloc UI Code Snippets';
+		name: self class lowUIUserExecutionPoolName;
 		priorityQueue;
 		maxPoolSize: 2;
 		lowUIPriority
@@ -142,8 +201,9 @@ BlTktWorkerProvider >> name: aString [
 { #category : #'configurations - pools' }
 BlTktWorkerProvider >> nonUIMultiPool [
 	"Non-UI background processing (multiple): maxPoolSize: 2, priority: 30"
+
 	self
-		name: 'Non-UI Single Processing';
+		name: self class nonUIMultiPoolName;
 		maxPoolSize: 2;
 		nonUIPriority
 ]
@@ -156,8 +216,9 @@ BlTktWorkerProvider >> nonUIPriority [
 { #category : #'configurations - pools' }
 BlTktWorkerProvider >> nonUISinglePool [
 	"Non-UI background processing (single) : maxPoolSize: 1, priority: 30"
+
 	self
-		name: 'Non-UI Single Processing';
+		name: self class nonUISinglePoolName;
 		maxPoolSize: 1;
 		nonUIPriority
 ]
@@ -196,16 +257,15 @@ BlTktWorkerProvider >> processPriority: anInteger [
 { #category : #builder }
 BlTktWorkerProvider >> service [
 	<return: #TKTCommonQueueWorkerPool>
-	^ mutex critical: [
-		| aPoolOrNil |
-		aPoolOrNil := self serviceManager poolWorkerNamed: self name.
-		aPoolOrNil ifNil: [ self pool start ] ]
+	^ self class 
+			serviceNamed: self name 
+			ifMissing: [ self pool start ]
 ]
 
 { #category : #accessing }
 BlTktWorkerProvider >> serviceManager [
 	<return: #TKTServiceManager>
-	^ TKTConfiguration serviceManager
+	^ self class serviceManager
 ]
 
 { #category : #accessing }
