@@ -4,3 +4,8 @@ Extension { #name : #TKTService }
 TKTService >> hasPoolWorkerNamed: aString [
 	^ false
 ]
+
+{ #category : #'*Bloc-TaskIt' }
+TKTService >> taskQueueSize [
+	^ 0
+]
