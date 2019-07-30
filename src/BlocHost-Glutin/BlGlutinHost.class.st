@@ -55,8 +55,7 @@ BlGlutinHost class >> forceStartNewUIProcess [
 			
 			(GlutinEventsFetcher default process suspendingList isKindOf: Semaphore)
 				ifTrue: [
-					NonInteractiveTranscript stdout show: 'ON SEMAPHORE'; cr.
-					GlutinEventsFetcher default process suspendingList signal.
+					GlutinEventsFetcher default process suspendingList signal; consumeAllSignals; resumeProcess: GlutinEventsFetcher default process.
 				].
 			
 		] repeat.
