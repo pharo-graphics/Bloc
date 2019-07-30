@@ -52,6 +52,12 @@ BlGlutinHost class >> forceStartNewUIProcess [
 		[			
 			BlParallelUniverse glutin pulse.
 			2 milliSeconds wait.
+			
+			(GlutinEventsFetcher default process suspendingList isKindOf: Semaphore)
+				ifTrue: [
+					GlutinEventsFetcher default process suspendingList signal; consumeAllSignals; resumeProcess: GlutinEventsFetcher default process.
+				].
+			
 		] repeat.
 
 	] forkAt: Processor userSchedulingPriority named: 'Bloc UI Process'
