@@ -119,13 +119,29 @@ BlTktWorkerProvider class >> serviceNamed: aServiceName ifMissing: aValuable [
 		aPoolOrNil ifNil: aValuable ]
 ]
 
+{ #category : #'configurations - basic' }
+BlTktWorkerProvider >> exemplify [
+	self exemplifyName.
+	self exemplifyPriority.
+]
+
+{ #category : #'configurations - basic' }
+BlTktWorkerProvider >> exemplifyName [
+	self name: 'Example of ', self name asString
+]
+
+{ #category : #'configurations - basic' }
+BlTktWorkerProvider >> exemplifyPriority [
+	self processPriority: Processor userBackgroundPriority + 1
+]
+
 { #category : #'configurations - pools' }
 BlTktWorkerProvider >> highUICPUBoundPool [
 	"High Priority Async UI CPU bound: maxPoolSize: 2, priority: 35"
 	self
 		name: self class highUICPUBoundPoolName;
 		priorityQueue;
-		maxPoolSize: 2;
+		poolMaxSize: 2;
 		highUIPriority
 ]
 
@@ -136,11 +152,11 @@ BlTktWorkerProvider >> highUIExternalResourceBoundPool [
 	self
 		name: self class highUIExternalResourceBoundPoolName;
 		priorityQueue;
-		maxPoolSize: 8;
+		poolMaxSize: 8;
 		highUIPriority
 ]
 
-{ #category : #'accessing - named priorities' }
+{ #category : #'configurations - priorities' }
 BlTktWorkerProvider >> highUIPriority [
 	self processPriority: Processor userSchedulingPriority - 5
 ]
@@ -154,7 +170,7 @@ BlTktWorkerProvider >> initialize [
 	workerPoolClass := BlTktCommonQueueWorkerPool.
 ]
 
-{ #category : #'accessing - named priorities' }
+{ #category : #'configurations - priorities' }
 BlTktWorkerProvider >> lowUIPriority [
 	self processPriority: Processor userSchedulingPriority - 7
 ]
@@ -166,22 +182,8 @@ BlTktWorkerProvider >> lowUIUserExecutionPool [
 	self
 		name: self class lowUIUserExecutionPoolName;
 		priorityQueue;
-		maxPoolSize: 2;
+		poolMaxSize: 2;
 		lowUIPriority
-]
-
-{ #category : #accessing }
-BlTktWorkerProvider >> maxPoolSize [
-	<return: #Integer>
-	^ maxPoolSize
-]
-
-{ #category : #accessing }
-BlTktWorkerProvider >> maxPoolSize: anInteger [
-	self 
-		assert: [ anInteger isInteger and: [ anInteger > 0 ] ]
-		description: [ 'Worker max. pool size must be a positive integer' ].
-	maxPoolSize := anInteger
 ]
 
 { #category : #accessing }
@@ -204,11 +206,11 @@ BlTktWorkerProvider >> nonUIMultiPool [
 
 	self
 		name: self class nonUIMultiPoolName;
-		maxPoolSize: 2;
+		poolMaxSize: 2;
 		nonUIPriority
 ]
 
-{ #category : #'accessing - named priorities' }
+{ #category : #'configurations - priorities' }
 BlTktWorkerProvider >> nonUIPriority [
 	self processPriority: Processor userBackgroundPriority
 ]
@@ -219,7 +221,7 @@ BlTktWorkerProvider >> nonUISinglePool [
 
 	self
 		name: self class nonUISinglePoolName;
-		maxPoolSize: 1;
+		poolMaxSize: 1;
 		nonUIPriority
 ]
 
@@ -231,8 +233,22 @@ BlTktWorkerProvider >> pool [
 	aPool
 		name: self name;
 		processPriority: self processPriority;
-		poolMaxSize: self maxPoolSize.
+		poolMaxSize: self poolMaxSize.
 	^ aPool
+]
+
+{ #category : #accessing }
+BlTktWorkerProvider >> poolMaxSize [
+	<return: #Integer>
+	^ maxPoolSize
+]
+
+{ #category : #accessing }
+BlTktWorkerProvider >> poolMaxSize: anInteger [
+	self 
+		assert: [ anInteger isInteger and: [ anInteger > 0 ] ]
+		description: [ 'Worker pool max. size must be a positive integer' ].
+	maxPoolSize := anInteger
 ]
 
 { #category : #accessing }

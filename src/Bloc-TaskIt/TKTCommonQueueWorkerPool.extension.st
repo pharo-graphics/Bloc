@@ -13,6 +13,12 @@ TKTCommonQueueWorkerPool >> gtWorkersFor: aView [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+TKTCommonQueueWorkerPool >> isFree [
+	<return: #Boolean>
+	^ taskQueue isEmpty and: [ workers allSatisfy: [ :each | each isFree ] ]
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTCommonQueueWorkerPool >> poolMaxSize [
 
 	^poolMaxSize

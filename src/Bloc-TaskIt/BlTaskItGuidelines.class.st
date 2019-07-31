@@ -57,17 +57,15 @@ BlTaskItGuidelines >> asyncUIWorkerPoolWithOneWorker [
 BlTaskItGuidelines >> basicAsyncUIWorkerPool [
 	<gtExample>
 	"Notice that sending #new is not a public API. Check the class comment for more information."
-	| aWorkerPool |
-	aWorkerPool := BlTktUIWorkerPool createDefault.
+	| aProvider aWorkerPool |
+	aProvider := BlTktWorkerProvider new highUICPUBoundPool; exemplify.
+	aWorkerPool := aProvider pool.
 	self assert: aWorkerPool isNotNil.
-	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
-	self assert: (aWorkerPool name beginsWith: aWorkerPool class defaultName).
-	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
+	self assert: aWorkerPool poolMaxSize equals: aProvider poolMaxSize.
+	self assert: aWorkerPool name equals: aProvider name.
 	self assert: aWorkerPool size equals: 0. "It has NOT a worker"
 	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
 	self assert: aWorkerPool isFree. "There is NOT a waiting task"
-	"Set worker pool name to indicate that it is an example instance"
-	aWorkerPool name: 'Example ', aWorkerPool name.
 	^ aWorkerPool
 ]
 
@@ -75,17 +73,15 @@ BlTaskItGuidelines >> basicAsyncUIWorkerPool [
 BlTaskItGuidelines >> basicHousekeepingWorkerPool [
 	<gtExample>
 	"Notice that sending #new is not a public API. Check the class comment for more information."
-	| aWorkerPool |
-	aWorkerPool := BlTktHousekeepingWorkerPool createDefault.
+	| aProvider aWorkerPool |
+	aProvider := BlTktWorkerProvider new nonUIMultiPool; exemplify.
+	aWorkerPool := aProvider pool.
 	self assert: aWorkerPool isNotNil.
-	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
-	self assert: (aWorkerPool name beginsWith: aWorkerPool class defaultName).
-	self assert: aWorkerPool poolMaxSize equals: aWorkerPool class defaultPoolSize.
+	self assert: aWorkerPool poolMaxSize equals: aProvider poolMaxSize.
+	self assert: aWorkerPool name equals: aProvider name.
 	self assert: aWorkerPool size equals: 0. "It has NOT a worker"
 	self assert: aWorkerPool taskQueue size equals: 0. "It has NOT a task"
 	self assert: aWorkerPool isFree. "There is NOT a waiting task"
-	"Set worker pool name to indicate that it is an example instance"
-	aWorkerPool name: 'Example ', aWorkerPool name.
 	^ aWorkerPool
 ]
 

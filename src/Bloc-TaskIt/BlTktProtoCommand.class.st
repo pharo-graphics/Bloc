@@ -55,7 +55,7 @@ BlTktProtoCommand >> futureInPool: aWorkerPool [
 
 { #category : #taskit }
 BlTktProtoCommand >> futureInUIPool [
-	^ self futureInPool: BlTktUIWorkerPool default
+	^ self futureInPool: BlTktWorkerProvider highUICPUBoundPool
 ]
 
 { #category : #accessing }
@@ -87,7 +87,7 @@ BlTktProtoCommand >> scheduleInPool: aWorkerPool [
 { #category : #taskit }
 BlTktProtoCommand >> scheduleInUIPool [
 	<return: #TKTTask>
-	^ self scheduleInPool: BlTktUIWorkerPool default.
+	^ self scheduleInPool: BlTktWorkerProvider highUICPUBoundPool.
 ]
 
 { #category : #evaluating }

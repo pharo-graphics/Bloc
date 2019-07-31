@@ -23,7 +23,7 @@ BlTktUsageExamples >> workerProvider [
 	aProvider := BlTktWorkerProvider new.
 	self assert: aProvider name isString.
 	self assert: aProvider name isNotEmpty.
-	self assert: aProvider maxPoolSize isNumber.
+	self assert: aProvider poolMaxSize isNumber.
 	self assert: aProvider processPriority isNumber.
 	^ aProvider
 ]
