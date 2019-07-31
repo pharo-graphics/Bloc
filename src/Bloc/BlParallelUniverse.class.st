@@ -175,9 +175,25 @@ BlParallelUniverse >> initialize [
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
 
+	aSpace host isRunning
+		ifFalse: [ aSpace host start ].
+		
+	self defer: [ self openSpaceSynchronously: aSpace ]
+]
+
+{ #category : #'private - spaces' }
+BlParallelUniverse >> openSpaceSynchronously: aSpace [
+
+	self hostClass uiProcessDo: [ :aUIProcess |
+		Processor activeProcess == aUIProcess
+			ifFalse: [ self error: 'I must only be sent from the UI process of this universe' ] ].
+
 	self
 		assert: [ aSpace isNotNil ]
 		description: [ 'Space must not be nil' ].
+
+	aSpace isOpened
+		ifTrue: [ ^ self ].
 
 	self
 		assert: [ aSpace hasHostSpace not ]
@@ -186,7 +202,7 @@ BlParallelUniverse >> openSpace: aSpace [
 	self
 		assert: [ aSpace host isNotNil ]
 		description: [ 'Space must have a host' ].
-
+		
 	"First of all we need to add space to the space manager"
 	spaceManager addSpace: aSpace.
 
@@ -197,9 +213,6 @@ BlParallelUniverse >> openSpace: aSpace [
 	self
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
-	
-	aSpace host isRunning
-		ifFalse: [ aSpace host start ].
 		
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
@@ -207,12 +220,13 @@ BlParallelUniverse >> openSpace: aSpace [
 	
 	"Notify root element that it is now visible to the user"
 	aSpace root space: aSpace.
-	aSpace root dispatchAddedToSceneGraph.
+	aSpace root dispatchAddedToSceneGraph
 ]
 
 { #category : #pulse }
 BlParallelUniverse >> pulse [
-	spaceManager do: [ :eachSpace | eachSpace pulse ]
+	spaceManager do: [ :eachSpace | eachSpace pulse ].
+	self tryToRunDeferredActions
 ]
 
 { #category : #'api - spaces' }
@@ -220,4 +234,12 @@ BlParallelUniverse >> spaces [
 	<return: #Collection of: #BlSpace>
 
 	^ spaceManager spaces
+]
+
+{ #category : #'deferred message' }
+BlParallelUniverse >> tryToRunDeferredActions [
+	| nextInQueue |
+	
+	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
+		whileTrue: [ nextInQueue value ]
 ]
