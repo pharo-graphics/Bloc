@@ -133,14 +133,14 @@ BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	self signaler signalThirdPartySemaphore.
 	self signaler signalCallerSemaphore.
 	[ aResult := aFuture synchronizeTimeout: self futureTimeout ] 
-		on: TKTCancelledTaskException
+		on: BlTktExplicitlyTerminatedTaskException
 		do: [ :anException | 
 			"We should receive an exception"
 			self collector add: anException ].
 	self assert: aResult isNil.
 	self assert: self collector collection size equals: 2.
 	self assert: self collector collection first equals: 1.
-	self assert: self collector collection second class equals: TKTCancelledTaskException.
+	self assert: self collector collection second class equals: BlTktExplicitlyTerminatedTaskException.
 	^ aTask
 ]
 
