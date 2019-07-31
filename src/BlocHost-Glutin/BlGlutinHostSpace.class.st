@@ -396,7 +396,8 @@ BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 		timestamp: DateAndTime now;
 		yourself.
 
-	self enqueueEvent: aBlocEvent
+	self enqueueEvent: aBlocEvent.
+	self universe pulse
 ]
 
 { #category : #accessing }

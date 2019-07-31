@@ -45,9 +45,9 @@ BlGlutinHost class >> forceResumeOfUIProcess: aProcess [
 ]
 
 { #category : #'api - ui process' }
-BlGlutinHost class >> forceStartNewUIProcess [	
+BlGlutinHost class >> forceStartNewUIProcess [
 	UIProcess := [
-		[			
+		[
 			BlParallelUniverse glutin pulse.
 			2 milliSeconds wait
 		] repeat.
@@ -260,7 +260,7 @@ BlGlutinHost >> supportsOpenGLSurface [
 	"Return true if this host can work with OpenGL surface, false otherwise"
 	<return: #Boolean>
 	
-	^ false
+	^ OSPlatform current isWindows not
 ]
 
 { #category : #initialize }

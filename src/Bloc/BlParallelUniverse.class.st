@@ -10,7 +10,9 @@ Class {
 		'deferredActions',
 		'eventDispatcher',
 		'hostClass',
-		'spaceManager'
+		'spaceManager',
+		'pulsingStateMutex',
+		'isPulsing'
 	],
 	#classVars : [
 		'Universes'
@@ -166,9 +168,21 @@ BlParallelUniverse >> initialize [
 	spaceManager := BlSpaceManager new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
+	pulsingStateMutex := Mutex new.
+	isPulsing := false.
 
 	eventDispatcher := self defaultEventDispatcher.
 	self addEventHandler: self defaultEventListener
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> isPulsing [
+	<return: #Boolean>
+	| areWePulsing |
+	
+	areWePulsing := false.
+	pulsingStateMutex critical: [ areWePulsing := isPulsing ].
+	^ areWePulsing
 ]
 
 { #category : #'api - spaces' }
@@ -225,8 +239,15 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
 { #category : #pulse }
 BlParallelUniverse >> pulse [
-	spaceManager do: [ :eachSpace | eachSpace pulse ].
-	self tryToRunDeferredActions
+	self isPulsing
+		ifTrue: [ ^ self ].
+
+	pulsingStateMutex critical: [ isPulsing := true ].
+
+	[
+		spaceManager do: [ :eachSpace | eachSpace pulse ].
+		self tryToRunDeferredActions
+	] ensure: [ pulsingStateMutex critical: [ isPulsing := false ] ]
 ]
 
 { #category : #'api - spaces' }
@@ -234,6 +255,11 @@ BlParallelUniverse >> spaces [
 	<return: #Collection of: #BlSpace>
 
 	^ spaceManager spaces
+]
+
+{ #category : #'private - spaces' }
+BlParallelUniverse >> stopPulsation [
+	pulsingStateMutex critical: [ isPulsing := false ]
 ]
 
 { #category : #'deferred message' }

@@ -160,6 +160,7 @@ BlBlocMorphicUIManager >> spawnNewBlocProcess [
 
 { #category : #'ui process' }
 BlBlocMorphicUIManager >> spawnNewBlocProcess: aUniverse [
+	aUniverse stopPulsation.
 	aUniverse hostClass forceStartNewUIProcess
 ]
 
