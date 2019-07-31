@@ -5,8 +5,6 @@ Class {
 		'eventsSensor'
 	],
 	#classVars : [
-		'CurrentSession',
-		'EventsLoop',
 		'EventsSensor',
 		'HostSpaceRegistry',
 		'HostSpaceRegistryMutex',
@@ -141,7 +139,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 	self critical: [
 		| windowBuilder windowedContext |
 
-		self ensureEventsLoop.
+		GlutinEventsFetcher default ensureEventsLoop.
 
 		windowBuilder := GlutinWindowBuilder new
 			title: aSpace title;
@@ -152,7 +150,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 			withMaximized: aSpace maximized.
 		
 		windowedContext := GlutinWindowedContext
-			create: EventsLoop
+			create: GlutinEventsFetcher default eventsLoop
 			windowBuilder: windowBuilder.
 		
 		aHostSpace := BlGlutinHostSpace new.
@@ -187,19 +185,6 @@ BlGlutinHost >> destroyHostSpaceFor: aSpace [
 { #category : #private }
 BlGlutinHost >> destroyWindowSpaceFor: aSpace [
 	self critical: [ self unregisterHostSpace: aSpace hostSpace ]
-]
-
-{ #category : #'event - handling' }
-BlGlutinHost >> ensureEventsLoop [
-	"I make sure that Glutin events loop (external) is valid"
-
-	(CurrentSession == Smalltalk session
-		and: [ EventsLoop isNotNil
-			and: [ EventsLoop isNull not ] ])
-		ifTrue: [ ^ self ].
-
-	CurrentSession := Smalltalk session.
-	EventsLoop := GlutinEventsLoop new
 ]
 
 { #category : #'host - api' }
