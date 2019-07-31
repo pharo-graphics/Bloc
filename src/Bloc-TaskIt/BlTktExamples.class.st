@@ -124,7 +124,6 @@ BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	aTask requestContext checkFinishedCallback: [ 
 		self signaler signalFourthPartySemaphore. ].
 	aWorkerPool := self uiWorkerPool poolMaxSize: 2.
-	aWorkerPool start.
 	aFuture := aWorkerPool future: aTask.
 	self assert: aFuture isNotNil.
 	self signaler waitForTask.
@@ -159,10 +158,9 @@ BlTktExamples >> initialize [
 { #category : #'examples - worker' }
 BlTktExamples >> newUIWorkerPool [
 	<gtExample>
-	| aName aWorkerPool |
-	aName := self className, ' Pool-', self identityHash asString.
-	aWorkerPool := BlTktUIWorkerPool new name: aName; poolMaxSize: 1.
-	self assert: aWorkerPool name equals: aName.
+	| aWorkerPool |
+	aWorkerPool := BlTktWorkerProvider new highUICPUBoundPool; exemplify; poolMaxSize: 1; pool.
+	self assert: aWorkerPool name isNotNil.
 	self assert: aWorkerPool poolMaxSize equals: 1.
 	^ aWorkerPool
 	

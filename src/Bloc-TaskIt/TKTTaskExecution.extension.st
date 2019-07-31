@@ -12,12 +12,6 @@ TKTTaskExecution >> setExplicitlyTerminatedStateWithReason: aReason [
 ]
 
 { #category : #'*Bloc-TaskIt' }
-TKTTaskExecution >> setSuspendedTaskStateWithReason: aReason [
-
-	state := BlTktSuspendedTaskState new
-]
-
-{ #category : #'*Bloc-TaskIt' }
 TKTTaskExecution >> task [ 
 	<return: #TKTTask>
 	^ task

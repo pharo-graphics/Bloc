@@ -8,6 +8,12 @@ Class {
 	#category : #'Bloc-TaskIt-Commands'
 }
 
+{ #category : #converting }
+BlTktPreservingResultCommand >> asResultPreservingCommand [
+	<return: #BlTktPreservingResultCommand>
+	^ self
+]
+
 { #category : #evaluating }
 BlTktPreservingResultCommand >> execute [
 	"execute command and return a result"
@@ -34,4 +40,9 @@ BlTktPreservingResultCommand >> initialize [
 BlTktPreservingResultCommand >> name [
 	<return: #String>
 	^ 'Preserving result ', self name
+]
+
+{ #category : #accessing }
+BlTktPreservingResultCommand >> result [
+	^ result
 ]
