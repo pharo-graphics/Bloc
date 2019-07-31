@@ -21,9 +21,8 @@ TBlTktCommandTaskScheduler >> privateCheckCommandTaskEvery: aTimeout on: aTaskEx
 		aTaskExecution isFinished ifFalse: [  
 			aTaskExecution aboutToCheckCallback value.
 			aTaskExecution isTerminationRequested ifTrue: [ 
-				aTaskExecution cancelWithReason: 'User termination request at', DateAndTime now asString.
 				shouldFinish := true.
-				"aTaskExecution terminateWithReason: 'User request at', DateAndTime now asString" ].
+				aTaskExecution terminateWithReason: 'User request at', DateAndTime now asString ].
 			aTaskExecution isSuspendRequested ifTrue: [
 				aTaskExecution cancelWithReason: 'User suspend request at', DateAndTime now asString.
 				shouldFinish := true.

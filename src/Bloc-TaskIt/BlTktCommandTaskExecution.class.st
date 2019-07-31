@@ -9,7 +9,9 @@ Class {
 { #category : #evaluating }
 BlTktCommandTaskExecution >> doExecuteTask [
 	TKTConfiguration runner scheduleCommandTaskCheckEvery: self timeout on: self.
-	^ super doExecuteTask
+	^ [ super doExecuteTask ] 
+		on: BlTktExplicitlyTerminatedTaskException
+		do: [ :anException | nil ]
 ]
 
 { #category : #accessing }
@@ -22,16 +24,6 @@ BlTktCommandTaskExecution >> name [
 BlTktCommandTaskExecution >> requestContext [
 	<return: #TBlTktRequests>
 	^ task requestContext
-]
-
-{ #category : #initialization }
-BlTktCommandTaskExecution >> setExplicitlyTerminatedStateWithReason: aReason [
-	state := BlTktExplicitlyTerminatedTaskState new reason: aReason
-]
-
-{ #category : #evaluating }
-BlTktCommandTaskExecution >> terminateWithReason: aReason [
-	state terminateTaskExecution: self reason: aReason
 ]
 
 { #category : #accessing }

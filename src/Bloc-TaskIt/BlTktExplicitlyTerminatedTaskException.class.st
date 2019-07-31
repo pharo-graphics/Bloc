@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTktCommandTaskState,
-	#superclass : #TKTTaskState,
+	#name : #BlTktExplicitlyTerminatedTaskException,
+	#superclass : #Error,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-TaskIt-TaskIt Tasks'

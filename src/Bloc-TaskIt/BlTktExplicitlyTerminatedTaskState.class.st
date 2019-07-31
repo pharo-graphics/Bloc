@@ -4,12 +4,22 @@ Class {
 	#instVars : [
 		'reason'
 	],
-	#category : #'Bloc-TaskIt-! Obsolete'
+	#category : #'Bloc-TaskIt-TaskIt Tasks'
 }
+
+{ #category : #cancelling }
+BlTktExplicitlyTerminatedTaskState >> cancelTaskExecution: aTaskExecution reason: aReason [
+	"do nothing"
+]
 
 { #category : #testing }
 BlTktExplicitlyTerminatedTaskState >> isFinished [
 	^ true
+]
+
+{ #category : #executing }
+BlTktExplicitlyTerminatedTaskState >> performTaskExecution: aTaskExecution [
+	"do nothing"
 ]
 
 { #category : #accessing }
@@ -28,19 +38,11 @@ BlTktExplicitlyTerminatedTaskState >> reason: aString [
 
 { #category : #signalling }
 BlTktExplicitlyTerminatedTaskState >> signalExplicitlyTerminatedException [
-	self error: 'Terminated by user'
+
+	BlTktExplicitlyTerminatedTaskException signal: reason
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #cancelling }
 BlTktExplicitlyTerminatedTaskState >> terminateTaskExecution: aTaskExecution reason: aReason [
-
-	| cancelState activeContext timeoutContext |
-
-	cancelState := BlTktExplicitlyTerminatedTaskState new reason: aReason.
-	
-	activeContext := aTaskExecution executionProcess suspendedContext.
-	timeoutContext := [ cancelState signalExplicitlyTerminatedException ] asContext.
-	timeoutContext privSender: activeContext.
-	aTaskExecution executionProcess suspendedContext: timeoutContext.
-	aTaskExecution setExplicitlyTerminatedStateWithReason: aReason
+	"do nothing"
 ]

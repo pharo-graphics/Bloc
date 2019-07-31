@@ -7,6 +7,11 @@ TKTTaskExecution >> name [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+TKTTaskExecution >> setExplicitlyTerminatedStateWithReason: aReason [
+	state := BlTktExplicitlyTerminatedTaskState new reason: aReason
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTTaskExecution >> setSuspendedTaskStateWithReason: aReason [
 
 	state := BlTktSuspendedTaskState new
@@ -23,4 +28,9 @@ TKTTaskExecution >> taskPriority [
 	"Answer the priority of the receiver when submitted as a task to TaskIt. 0 is highest priority"
 
 	^ task taskPriority
+]
+
+{ #category : #'*Bloc-TaskIt' }
+TKTTaskExecution >> terminateWithReason: aReason [
+	state terminateTaskExecution: self reason: aReason
 ]
