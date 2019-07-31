@@ -49,8 +49,8 @@ BlTaskItStatus >> instanceCountsOn: aStream [
 	TKTLocalProcessTaskRunner
 	TKTWorkerPool
 	TKTCommonQueueWorkerPool
-	BlAsyncUIWorkerPool
-	BlHousekeepingWorkerPool) do: [ :class |
+	BlTktCommonQueueWorkerPool
+	BlTktCommonPriorityQueueWorkerPool) do: [ :class |
 		aStream
 			print: class;
 			<< ': ';
@@ -62,9 +62,11 @@ BlTaskItStatus >> instanceCountsOn: aStream [
 BlTaskItStatus >> statusOn: aStream [
 	"Print a summary of the system status on aStream"
 
-	self variableSizedPool: BlAsyncUIWorkerPool on: aStream.
+	TKTConfiguration serviceManager services do: [ :eachService | 
+		eachService class = TKTWatchDog ifTrue: [ 
+			eachService pool ifNotNil: [ :aPool |
+				self workerPool: eachService pool on: aStream ] ] ].
 	aStream cr; cr.
-	self variableSizedPool: BlHousekeepingWorkerPool on: aStream.
 	aStream cr; cr.
 	self commonPoolsOn: aStream.
 	self instanceCountsOn: aStream
@@ -74,31 +76,6 @@ BlTaskItStatus >> statusOn: aStream [
 BlTaskItStatus >> statusString [
 
 	^String streamContents: [ :stream | self statusOn: stream ]
-]
-
-{ #category : #printing }
-BlTaskItStatus >> variableSizedPool: aPoolClass on: aStream [
-
-	| poolSizes workerPools |
-
-	workerPools := aPoolClass workerPools.
-	poolSizes := workerPools keys sorted.
-	aStream
-		print: aPoolClass;
-		cr; cr.
-
-	aStream << 'Active Pool Sizes: '.
-	poolSizes ifEmpty: 
-		[ aStream << '(none)' ]
-	ifNotEmpty: [ 
-		poolSizes 
-			do: [ :key | aStream print: key ]
-			separatedBy: [ aStream << ', ' ] ].
-	aStream cr; cr.
-
-	poolSizes do: [ :size |
-		self workerPool: (workerPools at: size) on: aStream.
-		aStream cr. ]
 ]
 
 { #category : #printing }

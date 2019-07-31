@@ -23,6 +23,12 @@ BlTktProtoCommand >> asErrorCatchingCommand [
 	^ BlErrorCatchingCommand new command: self
 ]
 
+{ #category : #converting }
+BlTktProtoCommand >> asResultPreservingCommand [
+	<return: #BlTktPreservingResultCommand>
+	^ BlTktPreservingResultCommand new command: self
+]
+
 { #category : #taskit }
 BlTktProtoCommand >> asTask [
 	<return: #BlTktCommandTask>

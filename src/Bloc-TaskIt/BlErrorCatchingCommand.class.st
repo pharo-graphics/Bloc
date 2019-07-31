@@ -15,6 +15,14 @@ BlErrorCatchingCommand >> asErrorCatchingCommand [
 ]
 
 { #category : #accessing }
+BlErrorCatchingCommand >> command: aCommand [
+	self
+		assert: [ aCommand isNotNil ]
+		description: [ 'Command must be non-nil' ].
+	super command: aCommand asResultPreservingCommand
+]
+
+{ #category : #accessing }
 BlErrorCatchingCommand >> exception [
 	<return: #Exception or: nil>
 	^ exception
@@ -51,7 +59,7 @@ BlErrorCatchingCommand >> name [
 ]
 
 { #category : #accessing }
-BlErrorCatchingCommand >> resultObsolete [
+BlErrorCatchingCommand >> result [
 	"Return a command execution result"
 	<return: #Object>
 	^ self isException 
