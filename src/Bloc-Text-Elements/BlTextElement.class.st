@@ -231,6 +231,8 @@ BlTextElement >> editorMesurement [
 BlTextElement >> initialize [
 	super initialize.
 	
+	self tightMeasurement.
+	
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
 	paragraph := nil.
@@ -241,8 +243,6 @@ BlTextElement >> initialize [
 
 	selection := BlCompositeSelection new.
 	measurer := self defaultTextMeasurer.
-
-	self tightMeasurement.
 	
 	"self debug: true"
 ]

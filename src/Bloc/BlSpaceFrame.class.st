@@ -75,6 +75,7 @@ BlSpaceFrame >> initializePhases [
 		BlSpaceFrameEventPhase new.
 		BlSpaceFrameTaskPhase new.
 		BlSpaceFrameLayoutPhase new.
+		BlSpaceFrameDrawingValidationPhase new.
 		BlSpaceFrameDrawingPhase new }
 ]
 
