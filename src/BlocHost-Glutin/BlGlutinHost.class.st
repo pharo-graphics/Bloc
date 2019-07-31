@@ -51,11 +51,7 @@ BlGlutinHost class >> forceStartNewUIProcess [
 	UIProcess := [
 		[			
 			BlParallelUniverse glutin pulse.
-			2 milliSeconds wait.
-			
-			(GlutinEventsFetcher default process suspendingList isKindOf: Semaphore)
-				ifTrue: [ GlutinEventsFetcher default process suspendingList signal; consumeAllSignals; resumeProcess: GlutinEventsFetcher default process ].
-			
+			2 milliSeconds wait
 		] repeat.
 
 	] forkAt: Processor userSchedulingPriority named: 'Bloc UI Process'
@@ -111,6 +107,7 @@ BlGlutinHost class >> world [
 	Bloc preferableSpartaCanvas: BlSpartaSkiaCanvasBuilder.
 
 	space := BlSpace new.
+	space extent: 1200@800.
 	space host: self new.
 	space title: 'Morph World'.
 	space addChild: (BlMorphicWorldEmbeddingElement new beMain).
