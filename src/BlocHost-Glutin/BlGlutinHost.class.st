@@ -5,8 +5,6 @@ Class {
 		'eventsSensor'
 	],
 	#classVars : [
-		'CurrentSession',
-		'EventsLoop',
 		'EventsSensor',
 		'HostSpaceRegistry',
 		'HostSpaceRegistryMutex',
@@ -51,11 +49,7 @@ BlGlutinHost class >> forceStartNewUIProcess [
 	UIProcess := [
 		[			
 			BlParallelUniverse glutin pulse.
-			2 milliSeconds wait.
-			
-			(GlutinEventsFetcher default process suspendingList isKindOf: Semaphore)
-				ifTrue: [ GlutinEventsFetcher default process suspendingList signal; consumeAllSignals; resumeProcess: GlutinEventsFetcher default process ].
-			
+			2 milliSeconds wait
 		] repeat.
 
 	] forkAt: Processor userSchedulingPriority named: 'Bloc UI Process'
@@ -111,6 +105,7 @@ BlGlutinHost class >> world [
 	Bloc preferableSpartaCanvas: BlSpartaSkiaCanvasBuilder.
 
 	space := BlSpace new.
+	space extent: 1200@800.
 	space host: self new.
 	space title: 'Morph World'.
 	space addChild: (BlMorphicWorldEmbeddingElement new beMain).
@@ -144,7 +139,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 	self critical: [
 		| windowBuilder windowedContext |
 
-		self ensureEventsLoop.
+		GlutinEventsFetcher default ensureEventsLoop.
 
 		windowBuilder := GlutinWindowBuilder new
 			title: aSpace title;
@@ -155,7 +150,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 			withMaximized: aSpace maximized.
 		
 		windowedContext := GlutinWindowedContext
-			create: EventsLoop
+			create: GlutinEventsFetcher default eventsLoop
 			windowBuilder: windowBuilder.
 		
 		aHostSpace := BlGlutinHostSpace new.
@@ -190,19 +185,6 @@ BlGlutinHost >> destroyHostSpaceFor: aSpace [
 { #category : #private }
 BlGlutinHost >> destroyWindowSpaceFor: aSpace [
 	self critical: [ self unregisterHostSpace: aSpace hostSpace ]
-]
-
-{ #category : #'event - handling' }
-BlGlutinHost >> ensureEventsLoop [
-	"I make sure that Glutin events loop (external) is valid"
-
-	(CurrentSession == Smalltalk session
-		and: [ EventsLoop isNotNil
-			and: [ EventsLoop isNull not ] ])
-		ifTrue: [ ^ self ].
-
-	CurrentSession := Smalltalk session.
-	EventsLoop := GlutinEventsLoop new
 ]
 
 { #category : #'host - api' }
@@ -278,7 +260,7 @@ BlGlutinHost >> supportsOpenGLSurface [
 	"Return true if this host can work with OpenGL surface, false otherwise"
 	<return: #Boolean>
 	
-	^ true
+	^ false
 ]
 
 { #category : #initialize }
