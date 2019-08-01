@@ -198,10 +198,6 @@ BlParallelUniverse >> openSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
-	self hostClass uiProcessDo: [ :aUIProcess |
-		Processor activeProcess == aUIProcess
-			ifFalse: [ self error: 'I must only be sent from the UI process of this universe' ] ].
-
 	self
 		assert: [ aSpace isNotNil ]
 		description: [ 'Space must not be nil' ].
@@ -251,10 +247,6 @@ BlParallelUniverse >> pulse [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
-	self hostClass uiProcessDo: [ :aUIProcess |
-		Processor activeProcess == aUIProcess
-			ifFalse: [ self error: 'I must only be sent from the UI process of this universe' ] ].
-
 	spaceManager do: [ :eachSpace | eachSpace pulse ].
 	self tryToRunDeferredActions
 ]
