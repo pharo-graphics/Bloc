@@ -113,7 +113,5 @@ BlEnqueuedTaskItAction >> runFuture [
 	<return: #TKTFuture>
 	| aCommand |
 	aCommand := self futureAction asBlTktCommand.
-	self name ifNotNil: [ aCommand name: self name].
-	self element ifNotNil: [ aCommand invocatedByElement: self element ].
 	^ BlTktWorkerProvider highUICPUBoundPool future: aCommand.
 ]
