@@ -1,8 +1,8 @@
 Class {
 	#name : #BlTktCommandTask,
 	#superclass : #TKTTask,
-	#traits : 'TBlDebug + TBlTktRequests',
-	#classTraits : 'TBlDebug classTrait + TBlTktRequests classTrait',
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'command'
 	],
@@ -24,8 +24,10 @@ BlTktCommandTask >> command: aCommand [
 ]
 
 { #category : #executing }
-BlTktCommandTask >> futureTaskExecutionFor: aRunner [
-	^ self configureTaskExecution: BlTktCommandTaskFutureExecution new with: aRunner
+BlTktCommandTask >> configureTaskExecution: anExecution with: aRunner [
+	super configureTaskExecution: anExecution with: aRunner.
+	self command taskExecution: anExecution.
+	^ anExecution
 ]
 
 { #category : #accessing }
@@ -41,12 +43,6 @@ BlTktCommandTask >> printOn: aStream [
 	aStream
 		nextPutAll: 'Task named ';
 		print: self name.
-]
-
-{ #category : #accessing }
-BlTktCommandTask >> requestContext [
-	<return: #TBlTktRequests>
-	^ self command
 ]
 
 { #category : #executing }

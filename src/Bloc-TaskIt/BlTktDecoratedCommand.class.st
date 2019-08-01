@@ -25,9 +25,3 @@ BlTktDecoratedCommand >> command: aCommand [
 		description: [ 'Command must be non-nil' ].
 	command := aCommand
 ]
-
-{ #category : #accessing }
-BlTktDecoratedCommand >> requestContext [
-	<return: #TBlTktRequests>
-	^ self command requestContext
-]

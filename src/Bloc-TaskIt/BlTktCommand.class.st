@@ -19,12 +19,6 @@ BlTktCommand >> catchingErrors [
 	^ Error
 ]
 
-{ #category : #initialization }
-BlTktCommand >> initialize [
-	super initialize.
-	requests := BlTktCommandRequests new.
-]
-
 { #category : #accessing }
 BlTktCommand >> name [
 	self
@@ -39,10 +33,4 @@ BlTktCommand >> name: aString [
 		assert: [ aString isNotNil and: [ aString isNotEmpty ] ] 
 		description: [ 'Task name must be a non-empty string' ].
 	name := aString
-]
-
-{ #category : #accessing }
-BlTktCommand >> requestContext [
-	<return: #TBlTktRequests>
-	^ requests
 ]

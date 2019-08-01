@@ -1,8 +1,6 @@
 Class {
 	#name : #BlTktProtoCommand,
 	#superclass : #Object,
-	#traits : 'TBlTktRequests',
-	#classTraits : 'TBlTktRequests classTrait',
 	#category : #'Bloc-TaskIt-Commands'
 }
 
@@ -15,6 +13,11 @@ BlTktProtoCommand >> asAnnouncingCommand [
 { #category : #converting }
 BlTktProtoCommand >> asBlTktCommand [
 	^ self
+]
+
+{ #category : #converting }
+BlTktProtoCommand >> asBlTktTerminableCommand [
+	^ BlTktTerminableCommand new command: self
 ]
 
 { #category : #converting }
@@ -33,6 +36,12 @@ BlTktProtoCommand >> asResultPreservingCommand [
 BlTktProtoCommand >> asTask [
 	<return: #BlTktCommandTask>
 	^ BlTktCommandTask new command: self.
+]
+
+{ #category : #taskit }
+BlTktProtoCommand >> canHandleTerminationRequest [
+	<return: #Boolean>
+	^ false
 ]
 
 { #category : #evaluating }
@@ -64,12 +73,6 @@ BlTktProtoCommand >> name [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-BlTktProtoCommand >> requestContext [
-	<return: #TBlTktRequests>
-	^ self subclassResponsibility
-]
-
 { #category : #taskit }
 BlTktProtoCommand >> schedule [
 	^ self scheduleInUIPool
@@ -90,9 +93,14 @@ BlTktProtoCommand >> scheduleInUIPool [
 	^ self scheduleInPool: BlTktWorkerProvider highUICPUBoundPool.
 ]
 
+{ #category : #taskit }
+BlTktProtoCommand >> taskExecution: anExecution [
+	"do nothing"
+]
+
 { #category : #evaluating }
 BlTktProtoCommand >> value [
 	"execute command and return a result"
 	<return: #Object>
-	^ self ifExecutionExpectedDo: [ self execute ]
+	^ self execute
 ]

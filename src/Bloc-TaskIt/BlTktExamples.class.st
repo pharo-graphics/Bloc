@@ -80,18 +80,6 @@ BlTktExamples >> executeResponsiveCommandTask [
 ]
 
 { #category : #'examples - basic commands' }
-BlTktExamples >> executeResponsiveCommandWithSuspendRequest [
-	<gtExample>
-	| aCommand aResult |
-	aCommand := self responsiveCommand.
-	aCommand suspendRequested.
-	aResult := aCommand value.
-	self assert: aResult isNil.
-	self assert: self collector collection isEmpty.
-	^ aCommand
-]
-
-{ #category : #'examples - basic commands' }
 BlTktExamples >> executeUnresponsiveCommand [
 	<gtExample>
 	| aCommand aResult |
@@ -104,10 +92,12 @@ BlTktExamples >> executeUnresponsiveCommand [
 { #category : #'examples - basic commands' }
 BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 	<gtExample>
-	| aCommand aResult |
-	aCommand := self unresponsiveCommand.
-	aCommand terminationRequested.
-	aResult := aCommand value.
+	| aCommand anExecution aResult |
+	aCommand := self unresponsiveCommand asBlTktTerminableCommand.
+	anExecution := BlTktCommandTaskExecution new.
+	aCommand taskExecution: anExecution.
+	aCommand terminate.
+	aResult := anExecution executeTask.
 	self assert: aResult isNil.
 	self assert: self collector collection isEmpty.
 	^ aCommand
@@ -117,19 +107,15 @@ BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
 BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
 	<gtExample>
 	"TODO: We should have two worker pools, one for tasks, another for checkers."
-	| aTask aWorkerPool aFuture aResult |
-	aTask := self unresponsiveCommandTerminatingInTheMiddle asTask.
-	aTask requestContext aboutToCheckCallback: [ 
-		self signaler waitForThirdPartySemaphore. ].
-	aTask requestContext checkFinishedCallback: [ 
-		self signaler signalFourthPartySemaphore. ].
-	aWorkerPool := self uiWorkerPool poolMaxSize: 2.
+	| aCommand aTask aWorkerPool aFuture aResult |
+	aCommand := self unresponsiveCommandTerminatingInTheMiddle asBlTktTerminableCommand.
+	aTask := aCommand asTask.
+	aWorkerPool := self uiWorkerPool.
 	aFuture := aWorkerPool future: aTask.
 	self assert: aFuture isNotNil.
 	self signaler waitForTask.
 	self assert: self collector collection size equals: 1.
-	aTask terminationRequested.
-	self signaler signalThirdPartySemaphore.
+	aCommand terminate.
 	self signaler signalCallerSemaphore.
 	[ aResult := aFuture synchronizeTimeout: self futureTimeout ] 
 		on: BlTktExplicitlyTerminatedTaskException
@@ -247,7 +233,6 @@ BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
 		self collector increment.
 		self signaler signalTaskSemaphore.
 		self signaler waitForCaller.
-		self signaler waitForFourthPartySemaphore.
 		self collector increment. ].
 	aCommand valuable: aBlock.
 	self assert: aCommand valuable equals: aBlock.

@@ -9,6 +9,11 @@ BlockClosure >> asBlTktCommand [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+BlockClosure >> asBlTktTerminableCommand [
+	^ BlTktTerminableCommand new command: self asBlTktCommand
+]
+
+{ #category : #'*Bloc-TaskIt' }
 BlockClosure >> asLoggingTask [ 
 	"Answer the receiver as a task that will log its execution"
 

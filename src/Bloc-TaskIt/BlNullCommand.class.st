@@ -27,6 +27,12 @@ BlNullCommand >> execute [
 	self error: 'You should define what to execute in advance'
 ]
 
+{ #category : #accessing }
+BlNullCommand >> name [
+	<return: #String>
+	^ 'NULL command'
+]
+
 { #category : #'api - execution' }
 BlNullCommand >> terminationRequested [
 	"I silently ignore the cancel request as I do not execute anything."

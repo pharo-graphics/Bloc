@@ -20,6 +20,7 @@ BlTktExplicitlyTerminatedTaskState >> isFinished [
 { #category : #executing }
 BlTktExplicitlyTerminatedTaskState >> performTaskExecution: aTaskExecution [
 	"do nothing"
+	^ nil
 ]
 
 { #category : #accessing }
