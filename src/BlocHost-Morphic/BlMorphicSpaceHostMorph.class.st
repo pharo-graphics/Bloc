@@ -172,7 +172,7 @@ BlMorphicSpaceHostMorph >> spacePosition [
 
 { #category : #'model - stepping' }
 BlMorphicSpaceHostMorph >> step [
-	self hostSpace space pulse
+	self hostSpace universe pulse
 ]
 
 { #category : #'model - stepping' }

@@ -103,7 +103,9 @@ BlMorphicWindowHost >> isRunning [
 
 { #category : #'host - api' }
 BlMorphicWindowHost >> start [
-	isRunning := true
+	isRunning := true.
+	
+	World defer: [ self universe pulse ]
 ]
 
 { #category : #'host - api' }

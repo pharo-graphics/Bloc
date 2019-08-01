@@ -188,11 +188,11 @@ BlParallelUniverse >> isPulsing [
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
-
-	aSpace host isRunning
-		ifFalse: [ aSpace host start ].
 		
-	self defer: [ self openSpaceSynchronously: aSpace ]
+	self defer: [ self openSpaceSynchronously: aSpace ].
+	
+	aSpace host isRunning
+		ifFalse: [ aSpace host start ]
 ]
 
 { #category : #'private - spaces' }

@@ -138,7 +138,9 @@ BlMorphicHost >> isRunning [
 
 { #category : #'host - api' }
 BlMorphicHost >> start [
-	isRunning := true
+	isRunning := true.
+	
+	self containerMorph defer: [ self universe pulse ]
 ]
 
 { #category : #'host - api' }
