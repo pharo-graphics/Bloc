@@ -73,6 +73,11 @@ BlTktProtoCommand >> name [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlTktProtoCommand >> name: aString [
+	^ self subclassResponsibility
+]
+
 { #category : #taskit }
 BlTktProtoCommand >> schedule [
 	^ self scheduleInUIPool

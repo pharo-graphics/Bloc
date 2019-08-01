@@ -33,6 +33,11 @@ BlNullCommand >> name [
 	^ 'NULL command'
 ]
 
+{ #category : #accessing }
+BlNullCommand >> name: aString [
+	"ignore"
+]
+
 { #category : #'api - execution' }
 BlNullCommand >> terminationRequested [
 	"I silently ignore the cancel request as I do not execute anything."

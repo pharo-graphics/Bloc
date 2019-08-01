@@ -25,3 +25,8 @@ BlTktDecoratedCommand >> command: aCommand [
 		description: [ 'Command must be non-nil' ].
 	command := aCommand
 ]
+
+{ #category : #accessing }
+BlTktDecoratedCommand >> name: aString [
+	self command name: aString
+]
