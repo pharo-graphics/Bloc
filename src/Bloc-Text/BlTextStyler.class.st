@@ -10,6 +10,7 @@ Class {
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
+		'task',
 		'backgroundProcess',
 		'text',
 		'monitor',
@@ -20,6 +21,36 @@ Class {
 	],
 	#category : #'Bloc-Text-Text-Styler'
 }
+
+{ #category : #styling }
+BlTextStyler >> doStyle: aBrText afterDo: aBlock [
+	"A styling activity called from styler tasks"
+	| styledText |
+
+	styledText := self privateStyle: aBrText unstyle.
+	self fireEvent: (BlTextStyledEvent new text: styledText).
+	aBlock value.
+]
+
+{ #category : #styling }
+BlTextStyler >> doStyleInBackground: aBrText andAfterDo: aBlock [
+	"A styling activity called from styler tasks"
+	| styledText aTaskAction |
+
+	delay asDelay wait.
+	styledText := self privateStyle: aBrText unstyle.
+	
+	aTaskAction := [ 
+		self fireEvent: (BlTextStyledEvent new text: styledText).
+		aBlock value ].
+	
+	view isNotNil
+		ifTrue: [
+			(view at: 1)
+				ifNotNil: [ :anElement | anElement enqueueTask: (BlTaskAction new action: aTaskAction) ]
+				ifNil: aTaskAction ]
+		ifFalse: aTaskAction.
+]
 
 { #category : #'event management accessing' }
 BlTextStyler >> eventDispatcher [
@@ -34,7 +65,8 @@ BlTextStyler >> initialize [
 	super initialize.
 	
 	stylingEnabled := true.
-	eventDispatcher := BlBubblingEventDispatcher on: self.
+	eventDispatcher := BlBubblingEventDispatcher on: self..
+	task := BlTextStylerAsyncTask new styler: self.
 	delay := 200 milliSeconds
 ]
 
@@ -52,7 +84,8 @@ BlTextStyler >> privateStyle: aText [
 
 { #category : #styling }
 BlTextStyler >> style: aBrText [
-	| styledText |
+	self style: aBrText afterDo: [ "do nothing" ].
+	"| styledText |
 
 	self terminateBackgroundStylingProcess.
 
@@ -61,7 +94,23 @@ BlTextStyler >> style: aBrText [
 
 	styledText := self privateStyle: aBrText unstyle.
 	self fireEvent: (BlTextStyledEvent new text: styledText).
-	^ styledText
+	^ styledText"
+]
+
+{ #category : #styling }
+BlTextStyler >> style: aBrText afterDo: aBlock [
+	stylingEnabled ifFalse: [ ^ self ].
+	task style: aBrText afterDo: aBlock
+	"| styledText |
+
+	self terminateBackgroundStylingProcess.
+
+	stylingEnabled
+		ifFalse: [ ^ self ].
+
+	styledText := self privateStyle: aBrText unstyle.
+	self fireEvent: (BlTextStyledEvent new text: styledText).
+	^ styledText"
 ]
 
 { #category : #styling }
@@ -98,31 +147,6 @@ BlTextStyler >> styleInBackgroundProcess: aBrText andAfterDo: aBlock [
 ]
 
 { #category : #styling }
-BlTextStyler >> styleInBackgroundProcessNow: aBrText [
-	
-	self terminateBackgroundStylingProcess.
-	
-	stylingEnabled
-		ifFalse: [ ^ self ].
-
-	self monitor critical: [
-		backgroundProcess := [
-			| styledText aTaskAction |
-			text := aBrText unstyle.
-			styledText := self privateStyle: text.
-		
-			aTaskAction := [ self fireEvent: (BlTextStyledEvent new text: styledText) ].
-			
-			view isNotNil
-				ifTrue: [
-					(view at: 1)
-						ifNotNil: [ :anElement | anElement enqueueTask: (BlTaskAction new action: aTaskAction) ]
-						ifNil: aTaskAction ]
-				ifFalse: aTaskAction.
-		 ] forkAt: Processor userBackgroundPriority ]
-]
-
-{ #category : #styling }
 BlTextStyler >> styledTextFor: aText [ 
 	^self privateStyle: aText
 ]
@@ -135,6 +159,14 @@ BlTextStyler >> stylingEnabled [
 { #category : #private }
 BlTextStyler >> stylingEnabled: aBoolean [
 	stylingEnabled := aBoolean
+]
+
+{ #category : #accessing }
+BlTextStyler >> task: aBlTextStylerTask [
+	self 
+		assert: [ aBlTextStylerTask isNotNil ]
+		description: [ 'Text styler task must be non-nil' ].
+	task := aBlTextStylerTask
 ]
 
 { #category : #private }

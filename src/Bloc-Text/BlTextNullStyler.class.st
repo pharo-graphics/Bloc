@@ -13,6 +13,10 @@ BlTextNullStyler >> style: aBrText [
 ]
 
 { #category : #private }
+BlTextNullStyler >> style: aBrText afterDo: aBlock [
+]
+
+{ #category : #private }
 BlTextNullStyler >> styleInBackgroundProcess: aBrText [
 ]
 
