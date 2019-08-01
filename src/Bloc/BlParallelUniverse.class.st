@@ -245,9 +245,18 @@ BlParallelUniverse >> pulse [
 	pulsingStateMutex critical: [ isPulsing := true ].
 
 	[
-		spaceManager do: [ :eachSpace | eachSpace pulse ].
-		self tryToRunDeferredActions
+		self pulseSynchronously
 	] ensure: [ pulsingStateMutex critical: [ isPulsing := false ] ]
+]
+
+{ #category : #'private - spaces' }
+BlParallelUniverse >> pulseSynchronously [
+	self hostClass uiProcessDo: [ :aUIProcess |
+		Processor activeProcess == aUIProcess
+			ifFalse: [ self error: 'I must only be sent from the UI process of this universe' ] ].
+
+	spaceManager do: [ :eachSpace | eachSpace pulse ].
+	self tryToRunDeferredActions
 ]
 
 { #category : #'api - spaces' }

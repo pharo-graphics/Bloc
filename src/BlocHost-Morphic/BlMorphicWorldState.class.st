@@ -37,7 +37,7 @@ BlMorphicWorldState >> displayWorld: aWorld submorphs: submorphs [
 ]
 
 { #category : #'update cycle' }
-BlMorphicWorldState >> doOneCycleFor: aWorld [	
+BlMorphicWorldState >> doOneCycleFor: aWorld [		
 	self doOneCycleNowFor: aWorld
 ]
 
@@ -45,7 +45,7 @@ BlMorphicWorldState >> doOneCycleFor: aWorld [
 BlMorphicWorldState >> doOneCycleNowFor: aWorld [
 	self element isAttachedToSceneGraph
 		ifTrue: [
-			self element space host universe pulse.
+			self element space host universe pulseSynchronously.
 			10 milliSeconds wait ]
 ]
 
