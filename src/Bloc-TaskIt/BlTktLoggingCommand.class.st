@@ -35,8 +35,14 @@ BlTktLoggingCommand >> callingMethod: anObject [
 BlTktLoggingCommand >> execute [
 	| aResult |
 	BlTaskItSignal emitValuable: self command message: #startExecution callingMethod: callingMethod.
-	aResult := self command execute.
-	BlTaskItSignal emitValuable: self command message: #doneExecution callingMethod: callingMethod.
+	[ 
+		aResult := self command execute.
+		BlTaskItSignal emitValuable: self command message: #doneExecution callingMethod: callingMethod.
+	] on: Error do: [ :anException |
+		BlTaskItSignal emitValuable: self command message: #exceptionExecution callingMethod: callingMethod.
+		anException emit.
+		anException pass
+	].
 	^ aResult
 ]
 
