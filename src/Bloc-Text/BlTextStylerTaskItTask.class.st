@@ -1,3 +1,9 @@
+"
+I do style short text in the same active process and longer text in a background process.
+I use TaskIt (see ${class:BlTktWorkerProvider}$) to style in background.
+
+I am used by ${class:BlTextStyler}$.
+"
 Class {
 	#name : #BlTextStylerTaskItTask,
 	#superclass : #BlTextStylerTask,

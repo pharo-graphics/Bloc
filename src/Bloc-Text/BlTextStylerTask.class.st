@@ -1,3 +1,8 @@
+"
+I am an abstract class that defined a common interface for styling strategies.
+
+My subclasses are used by ${class:BlTextStyler}$.
+"
 Class {
 	#name : #BlTextStylerTask,
 	#superclass : #Object,

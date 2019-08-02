@@ -1,3 +1,8 @@
+"
+I do style short text in the same active process and longer text in a background process.
+
+I am used by ${class:BlTextStyler}$.
+"
 Class {
 	#name : #BlTextStylerAsyncTask,
 	#superclass : #BlTextStylerTask,

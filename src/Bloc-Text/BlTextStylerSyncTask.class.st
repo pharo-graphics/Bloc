@@ -1,3 +1,9 @@
+"
+I do style all text in the same active process.
+In other words, I do not spawn any background processes.
+
+I am used by ${class:BlTextStyler}$.
+"
 Class {
 	#name : #BlTextStylerSyncTask,
 	#superclass : #BlTextStylerTask,

@@ -66,7 +66,7 @@ BlTextStyler >> initialize [
 	
 	stylingEnabled := true.
 	eventDispatcher := BlBubblingEventDispatcher on: self..
-	task := BlTextStylerAsyncTask new styler: self.
+	task := BlTextStylerTaskItTask new styler: self.
 	delay := 200 milliSeconds
 ]
 
