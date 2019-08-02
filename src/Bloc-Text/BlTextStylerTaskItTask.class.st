@@ -41,12 +41,17 @@ BlTextStylerTaskItTask >> styleInActiveProcess: aBlText andAferDo: aBlock [
 
 { #category : #enumerating }
 BlTextStylerTaskItTask >> styleInBackgroundProcess: aBrText andAfterDo: aBlock [
-
+	| aName |
+	aName := aBrText isEmpty 
+		ifTrue: [ '<empty query>' ]
+		ifFalse: [ (aBrText from: 1 to: (aBrText size min: 20)) asString 
+			replace: [ :eachCharacter | 
+				eachCharacter isLineBreak ifTrue: [ Character space ] ifFalse: [ eachCharacter ] ] ].
 	monitor critical: [
 		command := [ 
 			self doInBackground: aBrText andAfterDo: aBlock 
 		] asBlTktTerminableCommand.
-		command name: 'Text Styler'.
+		command name: 'Text Styler for ''', aName, ''''.
 		BlTktWorkerProvider highUICPUBoundPool schedule: command.
 	]
 ]
