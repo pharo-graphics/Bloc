@@ -10,7 +10,8 @@ Class {
 
 { #category : #accessing }
 BlNotificableTaskItAction >> futureAction [
-	^ [ notifications maybeNotifyDuring: [ self action value ] ]
+	^ [ notifications maybeNotifyDuring: [ self action value ] ] asBlTktCommand
+			name: 'Maybe notifying action for ', self action name
 ]
 
 { #category : #initialization }

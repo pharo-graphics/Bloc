@@ -4,11 +4,6 @@ Class {
 	#category : #'Bloc-TaskIt-Element Tasks'
 }
 
-{ #category : #accessing }
-BlCancellableTaskItAction >> action: aCallback [
-	super action: aCallback asBlTktCommand
-]
-
 { #category : #'api - execution' }
 BlCancellableTaskItAction >> terminationRequested [
 	^ self action terminationRequested

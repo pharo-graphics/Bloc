@@ -17,8 +17,8 @@ BlEnqueuedTaskItAction >> action [
 ]
 
 { #category : #accessing }
-BlEnqueuedTaskItAction >> action: anObject [
-	action := anObject.
+BlEnqueuedTaskItAction >> action: anAction [
+	action := anAction asBlTktCommand asBlTktLoggingCommand.
 ]
 
 { #category : #accessing }
@@ -41,9 +41,10 @@ BlEnqueuedTaskItAction >> futureAction [
 { #category : #initialization }
 BlEnqueuedTaskItAction >> initialize [
 	super initialize.
-	action := [ ].
+	self action: [ ].
 	resultCallbacks := OrderedCollection new.
 	exceptionCallbacks := OrderedCollection new.
+	name := nil.
 
 ]
 
@@ -113,5 +114,6 @@ BlEnqueuedTaskItAction >> runFuture [
 	<return: #TKTFuture>
 	| aCommand |
 	aCommand := self futureAction asBlTktCommand.
+	self name ifNotNil: [ aCommand name: self name].
 	^ BlTktWorkerProvider highUICPUBoundPool future: aCommand.
 ]
