@@ -63,8 +63,10 @@ BlTktCommandTask >> value [
 		ifNotNil: [ anOldNameOrNil asString ].
 	aTaskName := 'Task: ''', self name, ''' in ' , aTempName.
 	anActiveProcess task: self.
-	anActiveProcess name: aTaskName.
-	aResult := self command value.
-	anActiveProcess name: anOldNameOrNil.
+	aResult := [ 
+		anActiveProcess name: aTaskName.
+		self command value. 
+	] ensure: [ 
+		anActiveProcess name: anOldNameOrNil ].
 	^ aResult
 ]
