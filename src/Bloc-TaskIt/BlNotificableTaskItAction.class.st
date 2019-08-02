@@ -36,7 +36,7 @@ BlNotificableTaskItAction >> onRunEnqueueAction: aCallback [
 	| aTask |
 	aTask := BlTaskAction new.
 	aTask action: [ aCallback cull: self ].
-	self onRunEnqueueTask: aTask.
+	self onRunEnqueueTask: (aTask asBeaconLoggingTask maySetName: 'Run Action ', aCallback asString).
 ]
 
 { #category : #'api - callbacks' }
@@ -51,13 +51,13 @@ BlNotificableTaskItAction >> onRunEnqueueRepeatedAction: aCallback [
 { #category : #'api - callbacks' }
 BlNotificableTaskItAction >> onRunEnqueueRepeatedTask: aTask [
 	aTask element ifNil: [ aTask element: self element ].
-	self onRunEnqueueTask: aTask.
+	self onRunEnqueueTask: (aTask asBeaconLoggingTask maySetName: 'Repeated Task ', aTask asString).
 	self onFinishedDo: [ :aResult | aTask stop ].
 ]
 
 { #category : #'api - callbacks' }
 BlNotificableTaskItAction >> onRunEnqueueTask: aBlTask [
-	runTasks add: aBlTask
+	runTasks add: (aBlTask asBeaconLoggingTask maySetName: 'Run Action')
 ]
 
 { #category : #'api - running' }

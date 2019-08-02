@@ -71,15 +71,17 @@ BlEnqueuedTaskItAction >> onFailureDo: aCallback [
 { #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onFailureEnqueueAction: aCallback [
 	self onFailureDo: [ :aResult | 
-		self element enqueueTask: (BlTaskAction new 
-			action: [ aCallback cull: aResult cull: self ]) ]
+		self element enqueueTask: ((BlTaskAction new 
+			action: [ aCallback cull: aResult cull: self ]) 
+				asBeaconLoggingTask maySetName: 'Failute Action') ]
 ]
 
 { #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onFinishEnqueueAction: aCallback [
 	self onFinishedDo: [ :aResultOrException | 
-		self element enqueueTask: (BlTaskAction new 
-			action: [ aCallback cull: aResultOrException cull: self ]) ]
+		self element enqueueTask: ((BlTaskAction new 
+			action: [ aCallback cull: aResultOrException cull: self ]) 
+				asBeaconLoggingTask maySetName: 'Finish Action') ]
 ]
 
 { #category : #'api - callbacks' }
@@ -96,17 +98,18 @@ BlEnqueuedTaskItAction >> onSuccessDo: aCallback [
 { #category : #'api - callbacks' }
 BlEnqueuedTaskItAction >> onSuccessEnqueueAction: aCallback [
 	self onSuccessDo: [ :aResult | 
-		self element enqueueTask: (BlTaskAction new 
-			action: [ aCallback cull: aResult cull: self ]) ]
+		self element enqueueTask: ((BlTaskAction new 
+			action: [ aCallback cull: aResult cull: self ]) 
+				asBeaconLoggingTask maySetName: 'Success Action') ]
 ]
 
 { #category : #'api - running' }
 BlEnqueuedTaskItAction >> run [
 	future := self runFuture.
 	resultCallbacks
-		do: [ :eachCallback | future onSuccessDo: eachCallback asLoggingTask ].
+		do: [ :eachCallback | future onSuccessDo: eachCallback ].
 	exceptionCallbacks
-		do: [ :eachCallback | future onFailureDo: eachCallback asLoggingTask ]
+		do: [ :eachCallback | future onFailureDo: eachCallback ]
 ]
 
 { #category : #'api - running' }
