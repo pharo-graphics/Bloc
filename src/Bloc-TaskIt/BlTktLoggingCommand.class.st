@@ -34,12 +34,12 @@ BlTktLoggingCommand >> callingMethod: anObject [
 { #category : #executing }
 BlTktLoggingCommand >> execute [
 	| aResult |
-	BlTaskItSignal emitValuable: self command message: #startExecution callingMethod: callingMethod.
+	BlTaskItSignal emitValuable: self command message: 'start ', self command name callingMethod: callingMethod.
 	[ 
 		aResult := self command execute.
-		BlTaskItSignal emitValuable: self command message: #doneExecution callingMethod: callingMethod.
+		BlTaskItSignal emitValuable: self command message: 'done ', self command name callingMethod: callingMethod.
 	] on: Error do: [ :anException |
-		BlTaskItSignal emitValuable: self command message: #exceptionExecution callingMethod: callingMethod.
+		BlTaskItSignal emitValuable: self command message: 'exception ', self command name callingMethod: callingMethod.
 		anException emit.
 		anException pass
 	].
@@ -60,6 +60,6 @@ BlTktLoggingCommand >> name [
 
 { #category : #taskit }
 BlTktLoggingCommand >> taskExecution: anExecution [
-	BlTaskItSignal emitValuable: self command message: #scheduling callingMethod: callingMethod.
+	BlTaskItSignal emitValuable: self command message: 'scheduling ', self command name callingMethod: callingMethod.
 	super taskExecution: anExecution.
 ]
