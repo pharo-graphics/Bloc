@@ -43,6 +43,11 @@ BlTaskItDemoCommand >> shouldTerminate [
 ]
 
 { #category : #actions }
+BlTaskItDemoCommand >> terminate [
+	shouldTerminate := true
+]
+
+{ #category : #actions }
 BlTaskItDemoCommand >> terminateWithReason: aReason [
 	shouldTerminate := true
 ]

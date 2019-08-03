@@ -6,7 +6,7 @@ Class {
 
 { #category : #'api - execution' }
 BlCancellableTaskItAction >> terminationRequested [
-	^ self action terminationRequested
+	^ self action terminate
 ]
 
 { #category : #testing }

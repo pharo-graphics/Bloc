@@ -116,7 +116,8 @@ BlTaskItGuidelines >> executeScheduledCounterTaskAsHousekeeping [
 	"self assert: aWorkerPool isFree." "There is NOT a waiting task"
 	self assert: collection size equals: 2.
 	self assert: collection first equals: 1.
-	self assert: (collection second beginsWith: ('Task: ''', self incrementalCounterTaskName, '''')).
+	self assert: (collection second beginsWith: 'Task: ''').
+	self assert: (collection second includesSubstring: self incrementalCounterTaskName, '''').
 	^ aWorkerPool
 ]
 
@@ -167,7 +168,7 @@ BlTaskItGuidelines >> incrementalCounterTask [
 	aTask := aCommand asTask.
 	self assert: aTask isNotNil.
 	self assert: (aTask isKindOf: TKTTask).
-	self assert: aTask name equals: self incrementalCounterTaskName.
+	self assert: (aTask name includesSubstring: self incrementalCounterTaskName).
 	^ aTask 
 ]
 
