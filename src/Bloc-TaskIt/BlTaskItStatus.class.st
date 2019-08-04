@@ -13,8 +13,54 @@ BlTaskItStatus new
 Class {
 	#name : #BlTaskItStatus,
 	#superclass : #Object,
+	#instVars : [
+		'statusString'
+	],
+	#classVars : [
+		'SamplePeriod',
+		'SampleProcess'
+	],
 	#category : #'Bloc-TaskIt-Status'
 }
+
+{ #category : #private }
+BlTaskItStatus class >> sampleLoop [
+
+	[ self new asBeaconSignal emit.
+	self samplePeriod wait ] repeat.
+]
+
+{ #category : #accessing }
+BlTaskItStatus class >> samplePeriod [
+
+	^SamplePeriod ifNil: [ SamplePeriod := 10 second ]
+]
+
+{ #category : #accessing }
+BlTaskItStatus class >> samplePeriod: aDuration [
+
+	SamplePeriod := aDuration
+]
+
+{ #category : #sampling }
+BlTaskItStatus class >> startSampling [
+
+	SampleProcess ifNotNil: [ self error: 'Sample process already running' ].
+
+	SampleProcess := [ self sampleLoop ] 
+			forkAt: Processor userInterruptPriority 
+			named: 'CurrentProcessSignal sampler'.
+]
+
+{ #category : #sampling }
+BlTaskItStatus class >> stopSampling [
+
+	SampleProcess ifNil: [ ^self ].
+	SampleProcess terminate.
+	100 milliSeconds wait.
+	SampleProcess isTerminated ifFalse: [ self error: 'Unable to terminate sample process' ].
+	SampleProcess := nil.
+]
 
 { #category : #writing }
 BlTaskItStatus class >> write [
@@ -40,6 +86,13 @@ BlTaskItStatus >> gtStatusFor: aView [
 		priority: 1;
 		look: BrGlamorousCodeEditorLook new;
 		text: [ self statusString asRopedText ]
+]
+
+{ #category : #initialization }
+BlTaskItStatus >> initialize [
+
+	super initialize.
+	self statusString
 ]
 
 { #category : #printing }
@@ -102,7 +155,7 @@ BlTaskItStatus >> statusOn: aStream [
 { #category : #accessing }
 BlTaskItStatus >> statusString [
 
-	^String streamContents: [ :stream | self statusOn: stream ]
+	^statusString ifNil: [ statusString := String streamContents: [ :stream | self statusOn: stream ] ]
 ]
 
 { #category : #printing }

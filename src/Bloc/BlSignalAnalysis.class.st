@@ -152,6 +152,7 @@ BlSignalAnalysis >> forcedDelayPercent [
 
 	forcedDelayTime := self forcedDelayCount * 8.
 	signalTimes := self pulseStatRecordings collect: [ :each | each timestamp ].
+	signalTimes ifEmpty: [ ^'N/A' ].
 	elapsedTime := (signalTimes last - signalTimes first) asMilliSeconds.
 	^(100.0 * forcedDelayTime / elapsedTime) rounded
 ]
@@ -366,6 +367,7 @@ BlSignalAnalysis >> maxPulseWaitTime [
 	| recordings |
 
 	recordings := self pulseStatRecordings.
+	recordings isEmpty ifTrue: [ ^'N/A' ].
 	^recordings inject: recordings first max
 					into: [ :n :v | n max: v max ]
 ]
@@ -377,6 +379,7 @@ BlSignalAnalysis >> minPulseWaitTime [
 	| recordings |
 
 	recordings := self pulseStatRecordings.
+	recordings isEmpty ifTrue: [ ^'N/A' ].
 	^recordings inject: recordings first min
 					into: [ :n :v | n min: v min ]
 ]
