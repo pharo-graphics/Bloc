@@ -181,7 +181,7 @@ BlTktExamples >> responsiveCommandTask [
 	| aCommand aTask |
 	aCommand := self responsiveCommand.
 	aTask := aCommand asTask.
-	self assert: aTask command equals: aCommand.
+	self assert: aTask command command equals: aCommand.
 	^ aTask
 ]
 

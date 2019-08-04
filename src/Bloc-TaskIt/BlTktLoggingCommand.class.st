@@ -16,6 +16,11 @@ BlTktLoggingCommand class >> valuable: aValuable [
 		yourself
 ]
 
+{ #category : #converting }
+BlTktLoggingCommand >> asBlTktLoggingCommand [
+	^ self
+]
+
 { #category : #accessing }
 BlTktLoggingCommand >> callingMethod [
 	^ callingMethod
@@ -29,14 +34,32 @@ BlTktLoggingCommand >> callingMethod: anObject [
 { #category : #executing }
 BlTktLoggingCommand >> execute [
 	| aResult |
-	BlTaskItSignal emitValuable: self command message: #startValue callingMethod: callingMethod.
-	aResult := self command execute.
-	BlTaskItSignal emitValuable: self command message: #doneValue callingMethod: callingMethod.
+	BlTaskItSignal emitValuable: self command message: 'start ', self command name callingMethod: callingMethod.
+	[ 
+		aResult := self command execute.
+		BlTaskItSignal emitValuable: self command message: 'done ', self command name callingMethod: callingMethod.
+	] on: Error do: [ :anException |
+		BlTaskItSignal emitValuable: self command message: 'exception ', self command name callingMethod: callingMethod.
+		anException emit.
+		anException pass
+	].
 	^ aResult
+]
+
+{ #category : #testing }
+BlTktLoggingCommand >> includesLoggingCommand [
+	<return: #Boolean>
+	^ true
 ]
 
 { #category : #accessing }
 BlTktLoggingCommand >> name [
 	<return: #String>
 	^ 'Logging ', self command name
+]
+
+{ #category : #taskit }
+BlTktLoggingCommand >> taskExecution: anExecution [
+	BlTaskItSignal emitValuable: self command message: 'scheduling ', self command name callingMethod: callingMethod.
+	super taskExecution: anExecution.
 ]

@@ -55,7 +55,8 @@ BlTktTerminableCommand >> taskExecution: anExecution [
 	self 
 		assert: [ anExecution isNotNil ]
 		description: [ 'Task execution must be non-nil' ].		
-	taskExecution := anExecution
+	taskExecution := anExecution.
+	super taskExecution: anExecution.
 ]
 
 { #category : #actions }

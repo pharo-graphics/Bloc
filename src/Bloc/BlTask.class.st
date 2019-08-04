@@ -6,6 +6,11 @@ Class {
 	#category : #'Bloc-Space-Support'
 }
 
+{ #category : #converting }
+BlTask >> asBeaconLoggingTask [
+	^ BlBeaconLoggingTask subtask: self
+]
+
 { #category : #hooks }
 BlTask >> onEnqueued: aBlSpace [
 	"Is self when a task is enqueued in a space.

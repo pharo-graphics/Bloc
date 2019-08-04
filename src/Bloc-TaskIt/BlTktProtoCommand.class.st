@@ -16,6 +16,11 @@ BlTktProtoCommand >> asBlTktCommand [
 ]
 
 { #category : #converting }
+BlTktProtoCommand >> asBlTktLoggingCommand [
+	^ BlTktLoggingCommand new command: self
+]
+
+{ #category : #converting }
 BlTktProtoCommand >> asBlTktTerminableCommand [
 	^ BlTktTerminableCommand new command: self
 ]
@@ -65,6 +70,12 @@ BlTktProtoCommand >> futureInPool: aWorkerPool [
 { #category : #taskit }
 BlTktProtoCommand >> futureInUIPool [
 	^ self futureInPool: BlTktWorkerProvider highUICPUBoundPool
+]
+
+{ #category : #testing }
+BlTktProtoCommand >> includesLoggingCommand [
+	<return: #Boolean>
+	^ false
 ]
 
 { #category : #accessing }

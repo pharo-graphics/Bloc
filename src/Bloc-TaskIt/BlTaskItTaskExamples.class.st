@@ -67,7 +67,7 @@ BlTaskItTaskExamples >> addCancellableTaskToTheElementWithoutSpace [
 	"task was added to the local task queue"
 	self assert: anElement taskQueue tasks asArray equals: {aTask}.
 	"it was not executed"
-	self assert: aTask action equals: anAction.
+	self assert: aTask action command equals: anAction.
 	^ anElement
 ]
 
@@ -102,15 +102,15 @@ BlTaskItTaskExamples >> addEnqueuedTaskToTheElementWithoutSpace [
 	
 	anAction := [ aTask action: 'done' ].
 	aTask action: anAction.
-	aTask onSuccessDo: [ :aResult | aTask action: (aTask action asString, '-success') ].
-	aTask onFailureDo: [ :anException | aTask action: (aTask action asString, '-failure') ].
+	aTask onSuccessDo: [ :aResult | aTask action: [ (aTask action asString, '-success') ] ].
+	aTask onFailureDo: [ :anException | aTask action: [ (aTask action asString, '-failure') ] ].
 	
 	anElement enqueueTask: aTask.
 	
 	"task was added to the local task queue"
 	self assert: anElement taskQueue tasks asArray equals: { aTask }.
 	"it was not executed"
-	self assert: aTask action equals: anAction. 
+	self assert: aTask action command valuable equals: anAction. 
 	
 	^ anElement
 ]
