@@ -118,7 +118,7 @@ BlParallelUniverse >> defaultEventListener [
 	^ BlUniverseEventListener new
 ]
 
-{ #category : #'deferred message' }
+{ #category : #'api - ui process' }
 BlParallelUniverse >> defer: aValuable [
 	"#defer: can be used from any thread to execute a valuable in the GUI thread
 	You can use it to update the GUI states from any other thread.
@@ -149,6 +149,12 @@ BlParallelUniverse >> hasSpaces [
 	<return: #Boolean>
 
 	^ spaceManager hasSpaces
+]
+
+{ #category : #'api - ui process' }
+BlParallelUniverse >> hasUIProcess [
+	self uiProcessDo: [ :aUIProcess | ^ true ].
+	^ false
 ]
 
 { #category : #accessing }
@@ -269,4 +275,9 @@ BlParallelUniverse >> tryToRunDeferredActions [
 	
 	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
 		whileTrue: [ nextInQueue value ]
+]
+
+{ #category : #'api - ui process' }
+BlParallelUniverse >> uiProcessDo: aBlock [
+	self hostClass uiProcessDo: aBlock
 ]

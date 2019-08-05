@@ -4,11 +4,17 @@ I am a concrete implementation of a BlHost that allows users to open host bloc s
 Class {
 	#name : #BlMorphicWindowHost,
 	#superclass : #BlHost,
-	#instVars : [
-		'isRunning'
+	#classVars : [
+		'IsRunning'
 	],
 	#category : #'BlocHost-Morphic-Host - Window'
 }
+
+{ #category : #'api - ui process' }
+BlMorphicWindowHost class >> forceResumeOfUIProcess: aProcess [	
+	MorphicUIManager classVarNamed: #UIProcess put: aProcess.
+	aProcess resume
+]
 
 { #category : #'api - ui process' }
 BlMorphicWindowHost class >> forceStartNewUIProcess [
@@ -92,25 +98,23 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 { #category : #initialization }
 BlMorphicWindowHost >> initialize [
 	super initialize.
-
-	isRunning := false
 ]
 
 { #category : #'host - api' }
 BlMorphicWindowHost >> isRunning [
-	^ isRunning
+	^ IsRunning ifNil: [ false ]
 ]
 
 { #category : #'host - api' }
 BlMorphicWindowHost >> start [
-	isRunning := true.
+	IsRunning := true.
 	
 	World defer: [ self universe pulse ]
 ]
 
 { #category : #'host - api' }
 BlMorphicWindowHost >> stop [
-	isRunning := false
+	IsRunning := false
 ]
 
 { #category : #'host - testing' }

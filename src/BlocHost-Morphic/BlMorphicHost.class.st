@@ -27,11 +27,19 @@ Class {
 	#name : #BlMorphicHost,
 	#superclass : #BlHost,
 	#instVars : [
-		'isRunning',
 		'containerMorph'
+	],
+	#classVars : [
+		'IsRunning'
 	],
 	#category : #'BlocHost-Morphic-Host - Morph'
 }
+
+{ #category : #'api - ui process' }
+BlMorphicHost class >> forceResumeOfUIProcess: aProcess [	
+	MorphicUIManager classVarNamed: #UIProcess put: aProcess.
+	aProcess resume
+]
 
 { #category : #'api - ui process' }
 BlMorphicHost class >> forceStartNewUIProcess [
@@ -127,25 +135,24 @@ BlMorphicHost >> destroyHostSpaceFor: aSpace [
 BlMorphicHost >> initialize [
 	super initialize.
 
-	isRunning := false.
 	containerMorph := Morph new
 ]
 
 { #category : #'host - testing' }
 BlMorphicHost >> isRunning [
-	^ isRunning
+	^ IsRunning ifNil: [ false ]
 ]
 
 { #category : #'host - api' }
 BlMorphicHost >> start [
-	isRunning := true.
+	IsRunning := true.
 	
 	self containerMorph defer: [ self universe pulse ]
 ]
 
 { #category : #'host - api' }
 BlMorphicHost >> stop [
-	isRunning := false
+	IsRunning := false
 ]
 
 { #category : #'host - testing' }
