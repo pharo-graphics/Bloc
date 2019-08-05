@@ -13,18 +13,68 @@ BlTaskItStatus new
 Class {
 	#name : #BlTaskItStatus,
 	#superclass : #Object,
+	#instVars : [
+		'statusString'
+	],
+	#classVars : [
+		'SamplePeriod',
+		'SampleProcess'
+	],
 	#category : #'Bloc-TaskIt-Status'
 }
 
-{ #category : #printing }
-BlTaskItStatus >> commonPoolsOn: aStream [
-	"Print any common pools that exist.
-	Since there isn't a common root for the instances, search allInstances"
+{ #category : #private }
+BlTaskItStatus class >> sampleLoop [
 
-	(TKTCommonQueueWorkerPool allInstances select: [ :each |
-		each name beginsWith: 'CommonPool-' ]) do: [ :pool |
-			self workerPool: pool on: aStream.
-			aStream cr; cr ]
+	[ self new asBeaconSignal emit.
+	self samplePeriod wait ] repeat.
+]
+
+{ #category : #accessing }
+BlTaskItStatus class >> samplePeriod [
+
+	^SamplePeriod ifNil: [ SamplePeriod := 10 second ]
+]
+
+{ #category : #accessing }
+BlTaskItStatus class >> samplePeriod: aDuration [
+
+	SamplePeriod := aDuration
+]
+
+{ #category : #sampling }
+BlTaskItStatus class >> startSampling [
+
+	SampleProcess ifNotNil: [ self error: 'Sample process already running' ].
+
+	SampleProcess := [ self sampleLoop ] 
+			forkAt: Processor userInterruptPriority 
+			named: 'CurrentProcessSignal sampler'.
+]
+
+{ #category : #sampling }
+BlTaskItStatus class >> stopSampling [
+
+	SampleProcess ifNil: [ ^self ].
+	SampleProcess terminate.
+	100 milliSeconds wait.
+	SampleProcess isTerminated ifFalse: [ self error: 'Unable to terminate sample process' ].
+	SampleProcess := nil.
+]
+
+{ #category : #writing }
+BlTaskItStatus class >> write [
+	"Write the current status to a timestamped file"
+
+	self writeTo: 'TaskIt Status ', DateAndTime now printString, '.txt'.
+]
+
+{ #category : #writing }
+BlTaskItStatus class >> writeTo: aFileReference [
+	"Write the current status to the supplied file name"
+
+	aFileReference asFileReference writeStreamDo:
+		[ :stream | self new statusOn: stream ]
 ]
 
 { #category : #printing }
@@ -36,6 +86,13 @@ BlTaskItStatus >> gtStatusFor: aView [
 		priority: 1;
 		look: BrGlamorousCodeEditorLook new;
 		text: [ self statusString asRopedText ]
+]
+
+{ #category : #initialization }
+BlTaskItStatus >> initialize [
+
+	super initialize.
+	self statusString
 ]
 
 { #category : #printing }
@@ -59,6 +116,32 @@ BlTaskItStatus >> instanceCountsOn: aStream [
 ]
 
 { #category : #printing }
+BlTaskItStatus >> printQueueFor: pool on: aStream [
+
+	pool taskQueue itemArray
+		select: [ :each | each isZombie not ] 
+		thenDo: [ :each |
+			aStream
+				<< '  ';
+				<< each object name;
+				cr ]
+]
+
+{ #category : #printing }
+BlTaskItStatus >> printWorkersFor: pool on: aStream [
+
+	pool workers 
+		select: [ :worker | worker isFree not ]
+		thenDo: [ :worker |
+			aStream
+				<< '  name: ';
+				print: worker name;
+				<< ', task: ';
+				<< worker taskName;
+				cr ]
+]
+
+{ #category : #printing }
 BlTaskItStatus >> statusOn: aStream [
 	"Print a summary of the system status on aStream"
 
@@ -66,16 +149,13 @@ BlTaskItStatus >> statusOn: aStream [
 		eachService class = TKTWatchDog ifTrue: [ 
 			eachService pool ifNotNil: [ :aPool |
 				self workerPool: eachService pool on: aStream ] ] ].
-	aStream cr; cr.
-	aStream cr; cr.
-	self commonPoolsOn: aStream.
 	self instanceCountsOn: aStream
 ]
 
 { #category : #accessing }
 BlTaskItStatus >> statusString [
 
-	^String streamContents: [ :stream | self statusOn: stream ]
+	^statusString ifNil: [ statusString := String streamContents: [ :stream | self statusOn: stream ] ]
 ]
 
 { #category : #printing }
@@ -88,14 +168,19 @@ BlTaskItStatus >> workerPool: pool on: aStream [
 		<< 'Name: '
 		<< pool name; cr;
 		<< 'Queue Size: ';
-		print: pool taskQueue size; cr;
+		print: pool taskQueue size; cr.
+	self printQueueFor: pool on: aStream.
+	aStream
 		<< 'Busy Workers: ';
-		print: pool workers size - freeWorkers size; cr;
+		print: pool workers size - freeWorkers size; cr.
+	self printWorkersFor: pool on: aStream.
+	aStream
 		<< 'Free Workers: ';
 		print: freeWorkers size; cr;
 		<< 'Failed Tasks: ';
 		print: pool failedTasks size; cr;
 		<< 'Pool Max Size: ';
-		<< pool poolMaxSize; cr.
+		print: pool poolMaxSize; cr;
+		cr; cr.
 
 ]

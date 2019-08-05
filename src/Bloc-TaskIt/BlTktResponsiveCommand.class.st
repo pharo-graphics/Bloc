@@ -36,6 +36,11 @@ BlTktResponsiveCommand >> initialize [
 ]
 
 { #category : #taskit }
+BlTktResponsiveCommand >> terminate [
+	request terminate
+]
+
+{ #category : #taskit }
 BlTktResponsiveCommand >> terminateWithReason: aReason [
 	request terminate
 ]

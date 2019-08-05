@@ -64,3 +64,9 @@ BlTktDecoratedCommand >> terminate [
 BlTktDecoratedCommand >> terminateWithReason: aReason [
 	self command terminateWithReason: aReason
 ]
+
+{ #category : #taskit }
+BlTktDecoratedCommand >> wasCanceled [
+	<return: #Boolean>
+	^ self command wasCanceled
+]
