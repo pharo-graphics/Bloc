@@ -149,9 +149,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 			withResizable: aSpace resizable;
 			withMaximized: aSpace maximized.
 		
-		windowedContext := GlutinWindowedContext
-			create: GlutinEventsFetcher default eventsLoop
-			windowBuilder: windowBuilder.
+		windowedContext := GlutinEventsFetcher default eventsLoop createWindow: windowBuilder.
 		
 		aHostSpace := BlGlutinHostSpace new.
 		aHostSpace window: windowedContext.
@@ -217,8 +215,7 @@ BlGlutinHost >> processGlutinEvent: aGlutinEvent [
 
 { #category : #initialize }
 BlGlutinHost >> registerHostSpace: aHostSpace [
-	self spaceRegistry at: aHostSpace window id put: aHostSpace.
-	GlutinWindowsRegistry default registerWindow: aHostSpace window
+	self spaceRegistry at: aHostSpace window id put: aHostSpace
 ]
 
 { #category : #private }
@@ -267,8 +264,7 @@ BlGlutinHost >> supportsOpenGLSurface [
 BlGlutinHost >> unregisterHostSpace: aHostSpace [
 	self spaceRegistry
 		removeKey: aHostSpace window id
-		ifAbsent: [  ].
-	GlutinWindowsRegistry default unregisterWindow: aHostSpace window
+		ifAbsent: [  ]
 ]
 
 { #category : #'event - handling' }
