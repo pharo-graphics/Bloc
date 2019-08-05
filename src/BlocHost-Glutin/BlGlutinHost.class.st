@@ -122,10 +122,6 @@ BlGlutinHost >> createHostSpaceFor: aSpace [
 		description: [ 'Space must not have a host!' ].
 	
 	aHostSpace := self createWindowSpaceFor: aSpace.
-	aHostSpace universe: self universe.
-	aHostSpace host: self.
-	aHostSpace space: aSpace.
-	aHostSpace withSpartaRenderer.
 
 	aSpace hostSpace: aHostSpace
 ]
@@ -153,7 +149,12 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 		
 		aHostSpace := BlGlutinHostSpace new.
 		aHostSpace window: windowedContext.
-
+		
+		aHostSpace universe: self universe.
+		aHostSpace host: self.
+		aHostSpace space: aSpace.
+		aHostSpace withSpartaRenderer.
+		
 		self registerHostSpace: aHostSpace ].
 
 	^ aHostSpace
