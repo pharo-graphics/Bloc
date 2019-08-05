@@ -78,8 +78,8 @@ BlGlutinUserInterruptHandler >> visitKeyboardInputEvent: anEvent [
 		ifFalse: [ ^ self ].
 	
 	anEvent state = GlutinEventInputElementState Released
-		ifTrue: [ buffer remove: anEvent virtual_keycode ].
-		
+		ifTrue: [ buffer remove: anEvent virtual_keycode ifAbsent: [  ] ].
+	
 	anEvent state = GlutinEventInputElementState Pressed
 		ifTrue: [ buffer add: anEvent virtual_keycode ].
 	
