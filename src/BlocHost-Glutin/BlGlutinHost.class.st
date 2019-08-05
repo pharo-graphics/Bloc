@@ -235,7 +235,10 @@ BlGlutinHost >> start [
 	
 	self class forceStartNewUIProcess.
 
-	GlutinEventsFetcher default eventHandlers add: EventsSensor.
+	GlutinEventsFetcher default eventHandlers addAll: {
+		BlGlutinUserInterruptHandler new.
+		EventsSensor }.
+
 	GlutinEventsFetcher install
 ]
 
