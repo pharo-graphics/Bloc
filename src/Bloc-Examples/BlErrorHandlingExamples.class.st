@@ -10,6 +10,7 @@ Class {
 { #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawing [
 	<gtExample>
+	<noTest>
 	| aFaultyElement theErrors aSceneElement |
 	
 	aFaultyElement := BlExampleElementWithBrokenDrawing new.
@@ -30,6 +31,7 @@ BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawing [
 { #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawingAndOnLayout [
 	<gtExample>
+	<noTest>
 	| aFaultyElement theErrors aSceneElement |
 	
 	aFaultyElement := BlExampleElementWithBrokenDrawingAndOnLayout new.

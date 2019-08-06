@@ -10,6 +10,7 @@ Class {
 { #category : #'event handling' }
 BlSpaceEventExamples >> ignoreSpaceEventsAfterCloseRequest [
 	<gtExample>
+	<noTest>
 	| aSpace |
 
 	aSpace := self space.
@@ -33,6 +34,7 @@ BlSpaceEventExamples >> space [
 { #category : #'show / close' }
 BlSpaceEventExamples >> spaceClosed [
 	<gtExample>
+	<noTest>
 	| aSpace spaceClosed |
 	spaceClosed := 0.
 	
@@ -50,6 +52,7 @@ BlSpaceEventExamples >> spaceClosed [
 { #category : #'show / close' }
 BlSpaceEventExamples >> spaceShown [
 	<gtExample>
+	<noTest>
 	| aSpace spaceShown |
 	spaceShown := 0.
 	
