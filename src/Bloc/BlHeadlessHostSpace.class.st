@@ -153,14 +153,6 @@ BlHeadlessHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 ]
 
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> renderer [
-	"Return host renderer used to render spaces"
-	<return: #TBlHostRenderer>
-
-	^ self shouldNotImplement
-]
-
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> resizable [
 	"Return true if underlying window is resizable, false otherwise"

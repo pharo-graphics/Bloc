@@ -60,7 +60,9 @@ BlHeadlessHost >> isRunning [
 
 { #category : #api }
 BlHeadlessHost >> start [
-	isRunning := true
+	isRunning := true.
+	
+	(BlParallelUniverse forHost: self class) pulse
 ]
 
 { #category : #api }

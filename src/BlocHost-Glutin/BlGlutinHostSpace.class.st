@@ -25,7 +25,7 @@ BlGlutinHostSpace >> canvasExtent [
 
 { #category : #'host space - displaying' }
 BlGlutinHostSpace >> close [
-	window eventsLoop closeWindow: window
+	window close
 ]
 
 { #category : #'event - handling' }
