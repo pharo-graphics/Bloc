@@ -50,6 +50,14 @@ BlTktCommandTask >> scheduleTaskExecutionFor: aRunner [
 	^ self configureTaskExecution: BlTktCommandTaskExecution new with: aRunner
 ]
 
+{ #category : #accessing }
+BlTktCommandTask >> taskPriority [
+	"Answer the priority of the receiver for task scheduling.
+	Defer to my command."
+
+	^command taskPriority
+]
+
 { #category : #executing }
 BlTktCommandTask >> value [
 	| aResult anOldNameOrNil anActiveProcess aTempName aTaskName |

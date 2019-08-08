@@ -114,6 +114,13 @@ BlTktProtoCommand >> taskExecution: anExecution [
 	"do nothing"
 ]
 
+{ #category : #accessing }
+BlTktProtoCommand >> taskPriority [
+	"Answer the priority of the receiver for task scheduling."
+
+	^1
+]
+
 { #category : #evaluating }
 BlTktProtoCommand >> value [
 	"execute command and return a result"

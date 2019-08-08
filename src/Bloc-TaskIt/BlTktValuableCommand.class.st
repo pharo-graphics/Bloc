@@ -25,6 +25,12 @@ BlTktValuableCommand >> initialize [
 ]
 
 { #category : #accessing }
+BlTktValuableCommand >> taskPriority [
+
+	^valuable taskPriority
+]
+
+{ #category : #accessing }
 BlTktValuableCommand >> valuable [
 	^ valuable
 ]

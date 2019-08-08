@@ -55,6 +55,14 @@ BlTktDecoratedCommand >> taskExecution: anExecution [
 	self command taskExecution: anExecution
 ]
 
+{ #category : #accessing }
+BlTktDecoratedCommand >> taskPriority [
+	"Answer the priority of the receiver for task scheduling.
+	Defer to my command."
+	
+	^command taskPriority
+]
+
 { #category : #actions }
 BlTktDecoratedCommand >> terminate [
 	self command terminate
