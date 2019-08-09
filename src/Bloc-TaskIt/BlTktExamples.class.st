@@ -289,6 +289,30 @@ BlTktExamples >> terminableUnresponsiveValuableCommandTask [
 	^ aTask
 ]
 
+{ #category : #'examples - command tasks' }
+BlTktExamples >> terminableUnresponsiveValuableCommandTaskTerminatingInTheMiddle [
+	<gtExample>
+	| aCommand aTask |
+	aCommand := self terminableUnresponsiveValuableCommandTerminatingInTheMiddle.
+	aTask := aCommand asTask.
+	self assert: aTask command command equals: aCommand.
+	^ aTask
+]
+
+{ #category : #'examples - commands' }
+BlTktExamples >> terminableUnresponsiveValuableCommandTerminatingInTheMiddle [
+	<gtExample>
+	| aCommand aTerminableCommand |
+	aCommand := self unresponsiveValuableCommandTerminatingInTheMiddle.
+	aTerminableCommand := aCommand asBlTktTerminableCommand.
+	self assert: aTerminableCommand command equals: aCommand.
+	self assert: aTerminableCommand command equals: aCommand.
+	self assert: aTerminableCommand taskExecution isNil.
+	self assert: aTerminableCommand name isNotNil.
+	self assert: aTerminableCommand name isNotEmpty.
+	^ aTerminableCommand
+]
+
 { #category : #'examples - task terminations' }
 BlTktExamples >> terminateTerminableUnresponsiveValuableCommandInCancelledState [
 	<gtExample>
@@ -380,5 +404,20 @@ BlTktExamples >> unresponsiveValuableCommand [
 	self assert: aCommand class equals: BlTktUnresponsiveCommand.
 	self assert: aCommand valuable equals: aBlock.
 	self assert: aCommand name equals: aBlock printString.
+	^ aCommand
+]
+
+{ #category : #'examples - commands' }
+BlTktExamples >> unresponsiveValuableCommandTerminatingInTheMiddle [
+	<gtExample>
+	| aCommand aBlock |
+	aCommand := BlTktUnresponsiveCommand new.
+	aBlock := [ 
+		self collector increment.
+		self signaler signalTaskSemaphore.
+		self signaler waitForCaller.
+		self collector increment. ].
+	aCommand valuable: aBlock.
+	self assert: aCommand valuable equals: aBlock.
 	^ aCommand
 ]
