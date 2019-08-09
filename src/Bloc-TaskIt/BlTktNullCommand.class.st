@@ -1,5 +1,5 @@
 Class {
-	#name : #BlNullCommand,
+	#name : #BlTktNullCommand,
 	#superclass : #BlTktProtoCommand,
 	#classInstVars : [
 		'uniqueInstance'
@@ -8,43 +8,43 @@ Class {
 }
 
 { #category : #cleanup }
-BlNullCommand class >> cleanUp [
+BlTktNullCommand class >> cleanUp [
 	self resetUniqueInstance
 ]
 
 { #category : #cleanup }
-BlNullCommand class >> resetUniqueInstance [
+BlTktNullCommand class >> resetUniqueInstance [
 	uniqueInstance := nil
 ]
 
 { #category : #accessing }
-BlNullCommand class >> uniqueInstance [
+BlTktNullCommand class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
 { #category : #execution }
-BlNullCommand >> execute [
+BlTktNullCommand >> execute [
 	self error: 'You should define what to execute in advance'
 ]
 
 { #category : #accessing }
-BlNullCommand >> name [
+BlTktNullCommand >> name [
 	<return: #String>
 	^ 'NULL command'
 ]
 
 { #category : #accessing }
-BlNullCommand >> name: aString [
+BlTktNullCommand >> name: aString [
 	"ignore"
 ]
 
 { #category : #'api - execution' }
-BlNullCommand >> terminationRequested [
+BlTktNullCommand >> terminationRequested [
 	"I silently ignore the cancel request as I do not execute anything."
 ]
 
 { #category : #'api - testing' }
-BlNullCommand >> wasCanceled [
+BlTktNullCommand >> wasCanceled [
 	"I cannot be canceled"
 	^ false
 ]

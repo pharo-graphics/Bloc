@@ -3,24 +3,20 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'collector',
-		'worker',
-		'signaler',
-		'uiWorkerPool'
+		'signaler'
 	],
 	#category : #'Bloc-TaskIt-Examples'
 }
 
-{ #category : #'examples - announcing commands' }
-BlTktExamples >> announcingAndResponsiveCommand [
+{ #category : #'examples - task executions' }
+BlTktExamples >> basicCommandTaskExecution [
 	<gtExample>
-	| aResponsiveCommand anAnnouncingCommand |
-	aResponsiveCommand := self responsiveCommand.
-	anAnnouncingCommand := aResponsiveCommand asAnnouncingCommand. 
-	self assert: anAnnouncingCommand class equals: BlTktAnnouncingCommand.
-	self assert: anAnnouncingCommand command equals: aResponsiveCommand.
-	self assert: (anAnnouncingCommand name includesSubstring: aResponsiveCommand name).
-	self assert: anAnnouncingCommand announcer isNotNil.
-	^ anAnnouncingCommand
+	| anExecution |
+	anExecution := BlTktCommandTaskExecution new.
+	self assert: anExecution state class equals: TKTReadyTaskState.
+	self assert: anExecution executionProcess isNil.
+	self assert: anExecution task isNil.
+	^ anExecution
 ]
 
 { #category : #accessing }
@@ -29,36 +25,11 @@ BlTktExamples >> collector [
 	^ collector
 ]
 
-{ #category : #'examples - worker' }
-BlTktExamples >> ensureIsStarted: aWorker [
-	aWorker isRunning ifFalse: [ aWorker start ]
-]
-
-{ #category : #'examples - announcing commands' }
-BlTktExamples >> executeAnnouncingAndResponsiveCommand [
-	<gtExample>
-	| anAnnouncingCommand aResult |
-	anAnnouncingCommand := self announcingAndResponsiveCommand. 
-	anAnnouncingCommand announcer
-		when: BlTktCommandAnnouncement do: [ :anAnnouncement | self collector add: anAnnouncement ].
-	self assert: self collector collection size equals: 0.
-	aResult := anAnnouncingCommand value.
-	self assert: aResult equals: 2.
-	self assert: self collector collection size equals: 3.
-	self assert: self collector collection first class equals: BlTktCommandAboutToExecuteAnnouncement.
-	self assert: self collector collection first command equals: anAnnouncingCommand.
-	self assert: self collector collection second equals: 2.
-	self assert: self collector collection third class equals: BlTktCommandAboutToFinishAnnouncement.
-	self assert: self collector collection third command equals: anAnnouncingCommand.
-	self assert: self collector collection third result equals: aResult.
-	^ anAnnouncingCommand
-]
-
-{ #category : #'examples - basic commands' }
-BlTktExamples >> executeResponsiveCommand [
+{ #category : #'examples - commands' }
+BlTktExamples >> executeResponsiveValuableCommand [
 	<gtExample>
 	| aCommand aResult |
-	aCommand := self responsiveCommand.
+	aCommand := self responsiveValuableCommand.
 	aResult := aCommand value.
 	self assert: aResult equals: 1.
 	self assert: self collector collection size equals: 1.
@@ -66,72 +37,14 @@ BlTktExamples >> executeResponsiveCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - tasks' }
-BlTktExamples >> executeResponsiveCommandTask [
-	<gtExample>
-	| aTask aWorker aFuture aResult |
-	aTask := self responsiveCommandTask.
-	aWorker := self worker.
-	self ensureIsStarted: aWorker.
-	aFuture := aWorker future: aTask.
-	aResult := aFuture synchronizeTimeout: self futureTimeout.
-	self assert: aResult equals: 1.
-	^ aTask
-]
-
-{ #category : #'examples - basic commands' }
-BlTktExamples >> executeUnresponsiveCommand [
+{ #category : #'examples - commands' }
+BlTktExamples >> executeUnresponsiveValuableCommand [
 	<gtExample>
 	| aCommand aResult |
-	aCommand := self unresponsiveCommand.
+	aCommand := self unresponsiveValuableCommand.
 	aResult := aCommand value.
 	self assert: aResult equals: 1.
 	^ aCommand
-]
-
-{ #category : #'examples - basic commands' }
-BlTktExamples >> executeUnresponsiveCommandWithTerminationRequest [
-	<gtExample>
-	| aCommand anExecution aResult |
-	aCommand := self unresponsiveCommand asBlTktTerminableCommand.
-	anExecution := BlTktCommandTaskExecution new.
-	aCommand taskExecution: anExecution.
-	aCommand terminate.
-	aResult := anExecution executeTask.
-	self assert: aResult isNil.
-	self assert: self collector collection isEmpty.
-	^ aCommand
-]
-
-{ #category : #'examples - tasks' }
-BlTktExamples >> executeUnresponsiveTaskTerminatingInTheMiddle [
-	<gtExample>
-	"TODO: We should have two worker pools, one for tasks, another for checkers."
-	| aCommand aTask aWorkerPool aFuture aResult |
-	aCommand := self unresponsiveCommandTerminatingInTheMiddle asBlTktTerminableCommand.
-	aTask := aCommand asTask.
-	aWorkerPool := self uiWorkerPool.
-	aFuture := aWorkerPool future: aTask.
-	self assert: aFuture isNotNil.
-	self signaler waitForTask.
-	self assert: self collector collection size equals: 1.
-	aCommand terminate.
-	self signaler signalCallerSemaphore.
-	[ aResult := aFuture synchronizeTimeout: self futureTimeout ] 
-		on: BlTktExplicitlyTerminatedTaskException
-		do: [ :anException | 
-			"We should receive an exception"
-			self collector add: anException ].
-	self assert: aResult isNil.
-	self assert: self collector collection size equals: 2.
-	self assert: self collector collection first equals: 1.
-	self assert: self collector collection second class equals: BlTktExplicitlyTerminatedTaskException.
-	^ aTask
-]
-
-{ #category : #'examples - worker' }
-BlTktExamples >> futureTimeout [
-	^ 1000 milliSeconds
 ]
 
 { #category : #initialization }
@@ -141,30 +54,20 @@ BlTktExamples >> initialize [
 	signaler := BlTktExamplesSignaler new.
 ]
 
-{ #category : #'examples - worker' }
-BlTktExamples >> newUIWorkerPool [
+{ #category : #'examples - commands' }
+BlTktExamples >> responsiveDemoCommand [
 	<gtExample>
-	| aWorkerPool |
-	aWorkerPool := BlTktWorkerProvider new highUICPUBoundPool; exemplify; poolMaxSize: 1; pool.
-	self assert: aWorkerPool name isNotNil.
-	self assert: aWorkerPool poolMaxSize equals: 1.
-	^ aWorkerPool
-	
+	| aCommand |
+	aCommand := BlTktDemoResponsiveCommand new.
+	self assert: aCommand shouldTerminate not.
+	self assert: aCommand wasCanceled not.
+	self assert: aCommand name isNotNil.
+	self assert: aCommand name isNotEmpty.
+	^ aCommand
 ]
 
-{ #category : #'examples - worker' }
-BlTktExamples >> newWorker [
-	<gtExample>
-	| aName aWorker |
-	aName := self className, ' Worker'.
-	aWorker := BlTktCommandTaskWorker new name: aName.
-	self assert: aWorker name equals: aName.
-	^ aWorker
-	
-]
-
-{ #category : #'examples - basic commands' }
-BlTktExamples >> responsiveCommand [
+{ #category : #'examples - commands' }
+BlTktExamples >> responsiveValuableCommand [
 	<gtExample>
 	| aBlock aCommand |
 	aBlock := [ :aRequests | self collector increment ].
@@ -175,11 +78,11 @@ BlTktExamples >> responsiveCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - tasks' }
-BlTktExamples >> responsiveCommandTask [
+{ #category : #'examples - command tasks' }
+BlTktExamples >> responsiveValuableCommandTask [
 	<gtExample>
 	| aCommand aTask |
-	aCommand := self responsiveCommand.
+	aCommand := self responsiveValuableCommand.
 	aTask := aCommand asTask.
 	self assert: aTask command command equals: aCommand.
 	^ aTask
@@ -191,29 +94,109 @@ BlTktExamples >> signaler [
 	^ signaler
 ]
 
-{ #category : #'examples - worker' }
-BlTktExamples >> stopUIWorkerPool [
-	uiWorkerPool ifNotNil: [ :aWorkerPool | 
-		aWorkerPool stop.
-		aWorkerPool stopWatchDog ].
-]
-
-{ #category : #'examples - worker' }
-BlTktExamples >> stopWorker [
-	worker ifNotNil: [ :aWorker | aWorker stop ].
-]
-
-{ #category : #'examples - worker' }
-BlTktExamples >> uiWorkerPool [
+{ #category : #'examples - commands' }
+BlTktExamples >> terminableUnresponsiveValuableCommand [
 	<gtExample>
-	<after: #stopUIWorkerPool>
-	uiWorkerPool ifNil: [ uiWorkerPool := self newUIWorkerPool ].
-	self assert: uiWorkerPool isNotNil.
-	^ uiWorkerPool
+	| aCommand aTerminableCommand |
+	aCommand := self unresponsiveValuableCommand.
+	aTerminableCommand := aCommand asBlTktTerminableCommand.
+	self assert: aTerminableCommand command equals: aCommand.
+	self assert: aTerminableCommand command equals: aCommand.
+	self assert: aTerminableCommand taskExecution isNil.
+	self assert: aTerminableCommand name isNotNil.
+	self assert: aTerminableCommand name isNotEmpty.
+	^ aTerminableCommand
 ]
 
-{ #category : #'examples - basic commands' }
-BlTktExamples >> unresponsiveCommand [
+{ #category : #'examples - task executions' }
+BlTktExamples >> terminateTerminableUnresponsiveValuableCommandInCancelledState [
+	<gtExample>
+	| aCommand anExecution |
+	aCommand := self terminableUnresponsiveValuableCommand.
+	anExecution := self basicCommandTaskExecution.
+	anExecution setCancelStateWithReason: ''.
+	aCommand taskExecution: anExecution.
+	self assert: aCommand taskExecution equals: anExecution.
+	aCommand terminate.
+	self assert: anExecution state class equals: TKTCancelledTaskState.
+	^ aCommand
+]
+
+{ #category : #'examples - task executions' }
+BlTktExamples >> terminateTerminableUnresponsiveValuableCommandInFinishedState [
+	<gtExample>
+	| aCommand anExecution |
+	aCommand := self terminableUnresponsiveValuableCommand.
+	anExecution := self basicCommandTaskExecution.
+	anExecution setFinishedState.
+	aCommand taskExecution: anExecution.
+	self assert: aCommand taskExecution equals: anExecution.
+	aCommand terminate.
+	self assert: anExecution state class equals: TKTFinishedTaskState.
+	^ aCommand
+]
+
+{ #category : #'examples - task executions' }
+BlTktExamples >> terminateTerminableUnresponsiveValuableCommandInReadyState [
+	<gtExample>
+	| aCommand anExecution |
+	aCommand := self terminableUnresponsiveValuableCommand.
+	anExecution := self basicCommandTaskExecution.
+	aCommand taskExecution: anExecution.
+	self assert: aCommand taskExecution equals: anExecution.
+	aCommand terminate.
+	self assert: anExecution state class equals: BlTktExplicitlyTerminatedTaskState.
+	^ aCommand
+]
+
+{ #category : #'examples - task executions' }
+BlTktExamples >> terminateTerminableUnresponsiveValuableCommandInRunningState [
+	<gtExample>
+	| aCommand anExecution aProcess |
+	aCommand := self terminableUnresponsiveValuableCommand.
+	anExecution := self basicCommandTaskExecution.
+	anExecution setRunningState.
+	aProcess := [ self collector increment ] newProcess.
+	aProcess name: 'Example of Terminable Task'.
+	anExecution executionProcess: aProcess.
+	self assert: anExecution executionProcess equals: aProcess.
+	aCommand taskExecution: anExecution.
+	self assert: aCommand taskExecution equals: anExecution.
+	aCommand terminate.
+	self assert: anExecution state class equals: BlTktExplicitlyTerminatedTaskState.
+	^ aCommand
+]
+
+{ #category : #'examples - task executions' }
+BlTktExamples >> terminateTerminableUnresponsiveValuableCommandInTerminatedState [
+	<gtExample>
+	| aCommand anExecution |
+	aCommand := self terminableUnresponsiveValuableCommand.
+	anExecution := self basicCommandTaskExecution.
+	anExecution setExplicitlyTerminatedStateWithReason: ''.
+	aCommand taskExecution: anExecution.
+	self assert: aCommand taskExecution equals: anExecution.
+	aCommand terminate.
+	self assert: anExecution state class equals: BlTktExplicitlyTerminatedTaskState.
+	^ aCommand
+]
+
+{ #category : #'examples - commands' }
+BlTktExamples >> terminateUnresponsiveCommandInReadyState [
+	<gtExample>
+	| aCommand anExecution aResult |
+	aCommand := self unresponsiveValuableCommand asBlTktTerminableCommand.
+	anExecution := self basicCommandTaskExecution.
+	aCommand taskExecution: anExecution.
+	aCommand terminate.
+	aResult := anExecution executeTask.
+	self assert: aResult isNil.
+	self assert: self collector collection isEmpty.
+	^ aCommand
+]
+
+{ #category : #'examples - commands' }
+BlTktExamples >> unresponsiveValuableCommand [
 	<gtExample>
 	| aBlock aCommand |
 	aBlock := [ self collector increment ].
@@ -222,28 +205,4 @@ BlTktExamples >> unresponsiveCommand [
 	self assert: aCommand valuable equals: aBlock.
 	self assert: aCommand name equals: aBlock printString.
 	^ aCommand
-]
-
-{ #category : #'examples - tasks' }
-BlTktExamples >> unresponsiveCommandTerminatingInTheMiddle [
-	<gtExample>
-	| aCommand aBlock |
-	aCommand := BlTktUnresponsiveCommand new.
-	aBlock := [ 
-		self collector increment.
-		self signaler signalTaskSemaphore.
-		self signaler waitForCaller.
-		self collector increment. ].
-	aCommand valuable: aBlock.
-	self assert: aCommand valuable equals: aBlock.
-	^ aCommand
-]
-
-{ #category : #'examples - worker' }
-BlTktExamples >> worker [
-	<gtExample>
-	<after: #stopWorker>
-	worker ifNil: [ worker := self newWorker ].
-	self assert: worker isNotNil.
-	^ worker
 ]

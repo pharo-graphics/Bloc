@@ -2,7 +2,6 @@ Class {
 	#name : #BlTktCommand,
 	#superclass : #BlTktProtoCommand,
 	#instVars : [
-		'requests',
 		'name'
 	],
 	#category : #'Bloc-TaskIt-Commands'
@@ -10,7 +9,7 @@ Class {
 
 { #category : #factory }
 BlTktCommand class >> null [
-	^ BlNullCommand uniqueInstance
+	^ BlTktNullCommand uniqueInstance
 ]
 
 { #category : #accessing }

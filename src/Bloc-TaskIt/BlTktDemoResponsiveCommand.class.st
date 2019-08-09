@@ -2,23 +2,23 @@
 GtInspector openOn: BlTaskItDemoCommand new
 "
 Class {
-	#name : #BlTaskItDemoCommand,
+	#name : #BlTktDemoResponsiveCommand,
 	#superclass : #BlTktCommand,
 	#instVars : [
 		'wasCanceled',
 		'shouldTerminate'
 	],
-	#category : #'Bloc-TaskIt-Commands'
+	#category : #'Bloc-TaskIt-Examples'
 }
 
 { #category : #taskit }
-BlTaskItDemoCommand >> canHandleTerminationRequest [
+BlTktDemoResponsiveCommand >> canHandleTerminationRequest [
 	<return: #Boolean>
 	^ true
 ]
 
 { #category : #'api - execution' }
-BlTaskItDemoCommand >> execute [
+BlTktDemoResponsiveCommand >> execute [
 	1 to: 20 do: [ :each |
 		self shouldTerminate ifTrue: [ wasCanceled := true. ^ self ].
 		(Delay forMilliseconds: 100) wait ]. 
@@ -29,7 +29,7 @@ BlTaskItDemoCommand >> execute [
 ]
 
 { #category : #initialization }
-BlTaskItDemoCommand >> initialize [
+BlTktDemoResponsiveCommand >> initialize [
 	super initialize.
 	wasCanceled := false.
 	shouldTerminate := false.
@@ -37,22 +37,22 @@ BlTaskItDemoCommand >> initialize [
 ]
 
 { #category : #accessing }
-BlTaskItDemoCommand >> shouldTerminate [
+BlTktDemoResponsiveCommand >> shouldTerminate [
 	<return: #Boolean>
 	^ shouldTerminate
 ]
 
 { #category : #actions }
-BlTaskItDemoCommand >> terminate [
+BlTktDemoResponsiveCommand >> terminate [
 	shouldTerminate := true
 ]
 
 { #category : #actions }
-BlTaskItDemoCommand >> terminateWithReason: aReason [
+BlTktDemoResponsiveCommand >> terminateWithReason: aReason [
 	shouldTerminate := true
 ]
 
 { #category : #accessing }
-BlTaskItDemoCommand >> wasCanceled [
+BlTktDemoResponsiveCommand >> wasCanceled [
 	^ wasCanceled
 ]

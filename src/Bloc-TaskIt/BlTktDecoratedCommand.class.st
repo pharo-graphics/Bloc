@@ -45,6 +45,12 @@ BlTktDecoratedCommand >> includesLoggingCommand [
 	^ self command includesLoggingCommand
 ]
 
+{ #category : #initialization }
+BlTktDecoratedCommand >> initialize [
+	super initialize.
+	command := BlTktCommand null.
+]
+
 { #category : #accessing }
 BlTktDecoratedCommand >> name: aString [
 	self command name: aString

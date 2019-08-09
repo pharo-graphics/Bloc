@@ -9,7 +9,7 @@ BlTaskItTaskExamples >> addCancellableTaskToTheElementWithoutSpace [
 	<gtExample>
 	| anElement aWaitingElement aCancelButton anExecuteButton aCleaningBlock aTask anAction aStop aStep |
 	anElement := self progress.
-	anAction := BlTaskItDemoCommand new.
+	anAction := BlTktDemoResponsiveCommand new.
 	aWaitingElement := self waitingElement.
 	aCleaningBlock := [ :anElementName | 
 		anElement childNamed: anElementName ifFound: [ :aChild | aChild removeFromParent ] ifNone: [  ].
@@ -22,7 +22,7 @@ BlTaskItTaskExamples >> addCancellableTaskToTheElementWithoutSpace [
 		do: [ aTask terminationRequested ].
 	anExecuteButton := self executeElement.
 	anExecuteButton addEventHandlerOn: BlClickEvent
-		do: [ anElement enqueueTask: (aTask action: BlTaskItDemoCommand new) ].
+		do: [ anElement enqueueTask: (aTask action: BlTktDemoResponsiveCommand new) ].
 	aStop := 0.1.
 	aStep := 0.01.
 	aTask

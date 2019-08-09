@@ -1,6 +1,12 @@
 Extension { #name : #TKTTaskExecution }
 
 { #category : #'*Bloc-TaskIt' }
+TKTTaskExecution >> executionProcess: aProcess [
+	"For testing purpose only"
+	executionProcess := aProcess
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTTaskExecution >> name [ 
 	<return: #String>
 	^ task name
@@ -9,6 +15,13 @@ TKTTaskExecution >> name [
 { #category : #'*Bloc-TaskIt' }
 TKTTaskExecution >> setExplicitlyTerminatedStateWithReason: aReason [
 	state := BlTktExplicitlyTerminatedTaskState new reason: aReason
+]
+
+{ #category : #'*Bloc-TaskIt' }
+TKTTaskExecution >> state [
+	"For testing purpose only."
+	<return: #TKTTaskState>
+	^ state
 ]
 
 { #category : #'*Bloc-TaskIt' }
