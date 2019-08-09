@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #'instance-creation' }
+BlTktLoggingCommand class >> command: aCommand [
+
+	^self new 
+		command: aCommand asBlTktCommand;
+		callingMethod: thisContext sender sender method asRingDefinition;
+		yourself
+]
+
+{ #category : #'instance-creation' }
 BlTktLoggingCommand class >> valuable: aValuable [
 
 	^self new 

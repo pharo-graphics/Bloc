@@ -17,7 +17,7 @@ BlTktProtoCommand >> asBlTktCommand [
 
 { #category : #converting }
 BlTktProtoCommand >> asBlTktLoggingCommand [
-	^ BlTktLoggingCommand new command: self
+	^ BlTktLoggingCommand command: self
 ]
 
 { #category : #converting }

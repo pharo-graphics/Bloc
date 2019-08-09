@@ -16,7 +16,7 @@ Class {
 
 { #category : #defaults }
 BlTktExamplesSignaler >> defaultTimeout [
-	^ 5000 "milliSeconds"
+	^ 1000 "milliSeconds"
 ]
 
 { #category : #initialization }
@@ -74,4 +74,11 @@ BlTktExamplesSignaler >> waitForThirdPartySemaphore [
 	| isTimeouted |
 	isTimeouted := thirdPartySemaphore waitTimeoutMSecs: self defaultTimeout.
 	self assert: isTimeouted not
+]
+
+{ #category : #signalling }
+BlTktExamplesSignaler >> waitForTimeoutedTask [
+	| isTimeouted |
+	isTimeouted := taskSemaphore waitTimeoutMSecs: self defaultTimeout.
+	self assert: isTimeouted
 ]

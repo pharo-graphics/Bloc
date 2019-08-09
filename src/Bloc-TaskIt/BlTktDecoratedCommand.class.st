@@ -10,7 +10,7 @@ Class {
 { #category : #converting }
 BlTktDecoratedCommand >> asBlTktLoggingCommand [
 	^ self includesLoggingCommand 
-		ifFalse: [ BlTktLoggingCommand new command: self ]
+		ifFalse: [ BlTktLoggingCommand command: self ]
 		ifTrue: [ self ]
 ]
 
