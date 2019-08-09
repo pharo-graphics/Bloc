@@ -19,14 +19,14 @@ TKTCommonQueueWorkerPool >> isFree [
 ]
 
 { #category : #'*Bloc-TaskIt' }
-TKTCommonQueueWorkerPool >> poolMaxSize [
-
-	^poolMaxSize
+TKTCommonQueueWorkerPool >> killWatchDog [
+	dog ifNotNil: [ :aWatchDog | aWatchDog kill ]
 ]
 
 { #category : #'*Bloc-TaskIt' }
-TKTCommonQueueWorkerPool >> stopWatchDog [
-	dog ifNotNil: [ :aWatchDog | aWatchDog stop ]
+TKTCommonQueueWorkerPool >> poolMaxSize [
+
+	^poolMaxSize
 ]
 
 { #category : #'*Bloc-TaskIt' }
