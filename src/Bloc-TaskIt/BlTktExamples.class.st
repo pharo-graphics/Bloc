@@ -38,18 +38,6 @@ BlTktExamples >> executeResponsiveValuableCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - command tasks' }
-BlTktExamples >> executeResponsiveValuableCommandTask [
-	<gtExample>
-	| aTask aPool aFuture aResult |
-	aTask := self responsiveValuableCommandTask.
-	aPool := self uiWorkerPool.
-	aFuture := aPool future: aTask.
-	aResult := aFuture synchronizeTimeout: self futureTimeout.
-	self assert: aResult equals: 1.
-	^ aTask
-]
-
 { #category : #'examples - task terminations' }
 BlTktExamples >> executeTerminatedTerminableUnresponsiveValuableCommandInCancelledState [
 	<gtExample>
@@ -121,7 +109,43 @@ BlTktExamples >> executeUnresponsiveValuableCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - command tasks' }
+{ #category : #'examples - task futures' }
+BlTktExamples >> futureResponsiveValuableCommandTask [
+	<gtExample>
+	| aTask aPool aFuture aResult |
+	aTask := self responsiveValuableCommandTask.
+	aPool := self uiWorkerPool.
+	aFuture := aPool future: aTask.
+	aResult := aFuture synchronizeTimeout: self futureTimeout.
+	self assert: aResult equals: 1.
+	^ aTask
+]
+
+{ #category : #'examples - task futures' }
+BlTktExamples >> futureTerminableResponsiveValuableCommandTask [
+	<gtExample>
+	| aTask aPool aFuture aResult |
+	aTask := self terminableResponsiveValuableCommandTask.
+	aPool := self uiWorkerPool.
+	aFuture := aPool future: aTask.
+	aResult := aFuture synchronizeTimeout: self futureTimeout.
+	self assert: aResult equals: 1.
+	^ aTask
+]
+
+{ #category : #'examples - task futures' }
+BlTktExamples >> futureTerminableUnresponsiveValuableCommandTask [
+	<gtExample>
+	| aTask aPool aFuture aResult |
+	aTask := self terminableUnresponsiveValuableCommandTask.
+	aPool := self uiWorkerPool.
+	aFuture := aPool future: aTask.
+	aResult := aFuture synchronizeTimeout: self futureTimeout.
+	self assert: aResult equals: 1.
+	^ aTask
+]
+
+{ #category : #'examples - task futures' }
 BlTktExamples >> futureTimeout [
 	^ 1000 milliSeconds
 ]
@@ -178,9 +202,10 @@ BlTktExamples >> responsiveValuableCommandTask [
 	^ aTask
 ]
 
-{ #category : #'examples - command tasks' }
+{ #category : #'examples - task schedules' }
 BlTktExamples >> scheduleTerminableUnresponsiveValuableTaskTerminatingInTheMiddle [
 	<gtExample>
+	<noTest>
 	| aCommand aTask aWorkerPool aFuture aResult |
 	aCommand := self unresponsiveCommandTerminatingInTheMiddle asBlTktTerminableCommand.
 	aTask := aCommand asTask.
@@ -217,6 +242,30 @@ BlTktExamples >> stopUIWorkerPool [
 ]
 
 { #category : #'examples - commands' }
+BlTktExamples >> terminableResponsiveValuableCommand [
+	<gtExample>
+	| aCommand aTerminableCommand |
+	aCommand := self responsiveValuableCommand.
+	aTerminableCommand := aCommand asBlTktTerminableCommand.
+	self assert: aTerminableCommand command equals: aCommand.
+	self assert: aTerminableCommand command equals: aCommand.
+	self assert: aTerminableCommand taskExecution isNil.
+	self assert: aTerminableCommand name isNotNil.
+	self assert: aTerminableCommand name isNotEmpty.
+	^ aTerminableCommand
+]
+
+{ #category : #'examples - command tasks' }
+BlTktExamples >> terminableResponsiveValuableCommandTask [
+	<gtExample>
+	| aCommand aTask |
+	aCommand := self terminableResponsiveValuableCommand.
+	aTask := aCommand asTask.
+	self assert: aTask command command equals: aCommand.
+	^ aTask
+]
+
+{ #category : #'examples - commands' }
 BlTktExamples >> terminableUnresponsiveValuableCommand [
 	<gtExample>
 	| aCommand aTerminableCommand |
@@ -228,6 +277,16 @@ BlTktExamples >> terminableUnresponsiveValuableCommand [
 	self assert: aTerminableCommand name isNotNil.
 	self assert: aTerminableCommand name isNotEmpty.
 	^ aTerminableCommand
+]
+
+{ #category : #'examples - command tasks' }
+BlTktExamples >> terminableUnresponsiveValuableCommandTask [
+	<gtExample>
+	| aCommand aTask |
+	aCommand := self terminableUnresponsiveValuableCommand.
+	aTask := aCommand asTask.
+	self assert: aTask command command equals: aCommand.
+	^ aTask
 ]
 
 { #category : #'examples - task terminations' }
