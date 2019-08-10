@@ -36,8 +36,7 @@ AtomicSharedPriorityQueue >> next [
 	
 	[ | keepWaiting | 
 		keepWaiting := false. 
-		[ result := [ self nextIfNone: [ keepWaiting := true ] ] valueUnpreemptively ]
-			ensure: [ StringSignal emit: 'done' ].
+		result := [ self nextIfNone: [ keepWaiting := true ] ] valueWithoutUserInterruption.
 		keepWaiting ] whileTrue: [ self waitForNewItems ].
 
 	^ result
