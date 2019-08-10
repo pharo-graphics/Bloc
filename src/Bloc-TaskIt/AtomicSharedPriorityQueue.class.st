@@ -30,6 +30,21 @@ Class {
 }
 
 { #category : #accessing }
+AtomicSharedPriorityQueue >> next [ 
+
+	| result |
+	
+	[ | keepWaiting | 
+		keepWaiting := false. 
+		[ result := [ self nextIfNone: [ keepWaiting := true ] ] valueUnpreemptively ]
+			ensure: [ StringSignal emit: 'done' ].
+		keepWaiting ] whileTrue: [ self waitForNewItems ].
+
+	^ result
+
+]
+
+{ #category : #accessing }
 AtomicSharedPriorityQueue >> nextIfNone: aBlock [
 	"Attempt to fetch the next highest priority item from queue (0 = highest priority). 
 	Evaluate a block if attempt is failed i.e. there is no items available or queue is locked by another process"
