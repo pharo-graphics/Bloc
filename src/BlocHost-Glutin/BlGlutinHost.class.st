@@ -66,7 +66,7 @@ BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
 { #category : #'driver selection' }
 BlGlutinHost class >> isSupported [
 	"Only works in headless vm"
-	^ Smalltalk os windowSystemName = 'null'
+	^ Smalltalk os windowSystemName isNil or: [ Smalltalk os windowSystemName = 'null' ]
 ]
 
 { #category : #'driver selection' }
