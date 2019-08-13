@@ -35,6 +35,13 @@ Class {
 	#category : #'BlocHost-Morphic-Host - Morph'
 }
 
+{ #category : #'as yet unclassified' }
+BlMorphicHost class >> fixIsRunning [
+	"A hack when the host does not work.
+	Do not use it if you do not know what you do."
+	IsRunning := false.
+]
+
 { #category : #'api - ui process' }
 BlMorphicHost class >> forceResumeOfUIProcess: aProcess [	
 	MorphicUIManager classVarNamed: #UIProcess put: aProcess.
