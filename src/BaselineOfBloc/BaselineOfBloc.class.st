@@ -89,12 +89,13 @@ BaselineOfBloc >> postLoadBloc: spec [
 
 { #category : #'post load' }
 BaselineOfBloc >> postLoadDisableTaskItDebugger: spec [
-	TKTConfiguration profile: TKTProfile test.
-	TKTDebugger disable.
+	(self class environment at: #TKTConfiguration) profile: (self class environment at: #TKTProfile) test.
+	(self class environment at: #TKTDebugger) disable
 ]
 
 { #category : #'post load' }
 BaselineOfBloc >> postLoadMorphicHost: spec [
+
 	"This will select an appropriate UI manager"
 	UIManager default: UIManager forCurrentSystemConfiguration
 ]
