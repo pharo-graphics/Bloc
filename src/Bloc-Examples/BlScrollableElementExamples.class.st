@@ -36,12 +36,11 @@ BlScrollableElementExamples >> scrollableContent [
 		c vertical fitContent ].
 	anElement addChildren: ((SequenceableCollection allSubclasses asArray sorted: [ :a :b | a name < b name ]) flatCollect: [ :eachClass |
 		{ BlTextElement new
-			text: eachClass name asRopedText glamorousRegularFontAndSize;
+			text: eachClass name asRopedText;
 			padding: (BlInsets all: 15);
 			constraintsDo: [ :c |
 				c horizontal matchParent.
 				c vertical fitContent ].
-		
 		BlElement new
 			background: (Color gray alpha: 0.2);
 			constraintsDo: [ :c |
