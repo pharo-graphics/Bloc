@@ -30,7 +30,11 @@ BlBlocUIManager class >> initialize [
 
 { #category : #testing }
 BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
-	^ Smalltalk isHeadless
+	^ Smalltalk isHeadless and: [ 
+		"For now in case the parameter '--junit-xml-output' is detected assume 
+		the image is run in really headless mode without an UI and do not use
+		this UI manager."
+		(Smalltalk commandLine arguments includes: '--junit-xml-output') not ]
 ]
 
 { #category : #'class initialization' }
