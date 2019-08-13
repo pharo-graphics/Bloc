@@ -1,8 +1,8 @@
 Extension { #name : #TKTGenericTask }
 
 { #category : #'*Bloc-TaskIt' }
-TKTGenericTask >> taskPriority [ 
+TKTGenericTask >> entryPriority [ 
 	"Answer the priority of the receiver when submitted as a task to TaskIt. 0 is highest priority"
 
-	^valuable taskPriority
+	^valuable entryPriority
 ]

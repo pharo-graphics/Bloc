@@ -31,6 +31,14 @@ BlTktCommandTask >> configureTaskExecution: anExecution with: aRunner [
 ]
 
 { #category : #accessing }
+BlTktCommandTask >> entryPriority [
+	"Answer the priority of the receiver for task scheduling.
+	Defer to my command."
+
+	^command entryPriority
+]
+
+{ #category : #accessing }
 BlTktCommandTask >> name [
 	<return: #String>
 	^ self command name
@@ -48,14 +56,6 @@ BlTktCommandTask >> printOn: aStream [
 { #category : #executing }
 BlTktCommandTask >> scheduleTaskExecutionFor: aRunner [
 	^ self configureTaskExecution: BlTktCommandTaskExecution new with: aRunner
-]
-
-{ #category : #accessing }
-BlTktCommandTask >> taskPriority [
-	"Answer the priority of the receiver for task scheduling.
-	Defer to my command."
-
-	^command taskPriority
 ]
 
 { #category : #executing }
