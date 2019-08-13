@@ -10,13 +10,49 @@ See the comment of my superclass for more details.
 "
 Class {
 	#name : #BlBlocUIManager,
-	#superclass : #NonInteractiveUIManager,
+	#superclass : #MorphicUIManager,
 	#category : #'BlocHost-Morphic-Support'
 }
+
+{ #category : #'class initialization' }
+BlBlocUIManager class >> handledId [
+	^ self name
+]
+
+{ #category : #'class initialization' }
+BlBlocUIManager class >> initialize [
+	"has to be executed at the end of the user category"
+	SessionManager default 
+		register: self
+		inCategory: SessionManager default userCategory  
+		atPriority: SmallInteger maxVal + 1
+]
 
 { #category : #testing }
 BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
 	^ Smalltalk isHeadless
+]
+
+{ #category : #'class initialization' }
+BlBlocUIManager class >> shutdown: isImageQuitting [
+	"Prepare the shutdown and the next startup"
+
+	UIManager default: StartupUIManager new
+	
+]
+
+{ #category : #'class initialization' }
+BlBlocUIManager class >> startup: isImageStarting [
+	"Install the right UIManager"
+
+	UIManager default: self new
+]
+
+{ #category : #actions }
+BlBlocUIManager class >> useAsDefault [
+	|uiManager|
+	uiManager := self new.
+	uiManager beDefault. 
 ]
 
 { #category : #debug }
