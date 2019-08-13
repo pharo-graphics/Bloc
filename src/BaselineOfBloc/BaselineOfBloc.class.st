@@ -95,5 +95,6 @@ BaselineOfBloc >> postLoadDisableTaskItDebugger: spec [
 
 { #category : #'post load' }
 BaselineOfBloc >> postLoadMorphicHost: spec [
-	BlBlocMorphicUIManager useAsDefault
+	"This will select an appropriate UI manager"
+	UIManager default: UIManager forCurrentSystemConfiguration
 ]

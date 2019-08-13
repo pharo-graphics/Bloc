@@ -3,7 +3,8 @@ Class {
 	#superclass : #WorldMorph,
 	#instVars : [
 		'display',
-		'drawingCache'
+		'drawingCache',
+		'mySession'
 	],
 	#category : #'BlocHost-Morphic-World'
 }
@@ -30,8 +31,7 @@ BlMorphicWorldMorph >> beMain [
 		(UIManager default uiProcess ~~ aProcess)
 			ifTrue: [ UIManager default uiProcess ifNotNil: #terminate ].
 
-		MorphicUIManager classVarNamed: #UIProcess put: aProcess.
-		self assert: UIManager default uiProcess == aProcess ]
+		MorphicUIManager classVarNamed: #UIProcess put: aProcess ]
 ]
 
 { #category : #accessing }
@@ -157,9 +157,9 @@ BlMorphicWorldMorph >> processEvent: anEvent [
 
 { #category : #drawing }
 BlMorphicWorldMorph >> validateDrawingCache [
-	session == Smalltalk session 
+	mySession == Smalltalk session 
 		ifFalse: [
-			session := Smalltalk session.
+			mySession := Smalltalk session.
 			self drawingCache removeAll ].
 
 	self drawingCache keys

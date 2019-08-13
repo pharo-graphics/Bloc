@@ -11,10 +11,10 @@ Class {
 { #category : #canvas }
 BlMorphicWorldState >> assuredCanvas [
 
-	(canvas isNil or: [(canvas extent ~= viewBox extent) or: [canvas form depth ~= Display depth]])
+	(self canvas isNil or: [(self canvas extent ~= self viewBox extent) or: [self canvas form depth ~= Display depth]])
 		ifTrue:
 			["allocate a new offscreen canvas the size of the window"
-			self canvas: (display defaultCanvasClass extent: viewBox extent)].
+			self canvas: (display defaultCanvasClass extent: self viewBox extent)].
 
 	^ self canvas
 ]
