@@ -44,8 +44,10 @@ BlBlocUIManager class >> shutdown: isImageQuitting [
 { #category : #'class initialization' }
 BlBlocUIManager class >> startup: isImageStarting [
 	"Install the right UIManager"
-
-	UIManager default: UIManager forCurrentSystemConfiguration
+	
+	UIManager default: (self isValidForCurrentSystemConfiguration
+		ifTrue: [ self new ]
+		ifFalse: [ UIManager forCurrentSystemConfiguration ])
 ]
 
 { #category : #actions }
