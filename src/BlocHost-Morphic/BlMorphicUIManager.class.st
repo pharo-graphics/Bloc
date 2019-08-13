@@ -11,35 +11,40 @@ I need to override the method ${method:MorphicUIManager>>#resumeUIProcess:}$ to 
 I use ==Smalltalk tools debugger== to open the actual debugger. For my preconditions to hold this needs to be a Morphic based debugger. 
 "
 Class {
-	#name : #BlBlocMorphicUIManager,
+	#name : #BlMorphicUIManager,
 	#superclass : #MorphicUIManager,
 	#category : #'BlocHost-Morphic-Support'
 }
 
 { #category : #actions }
-BlBlocMorphicUIManager class >> isActiveManager [
+BlMorphicUIManager class >> isActiveManager [
 	^ false
 ]
 
 { #category : #actions }
-BlBlocMorphicUIManager class >> useAsDefault [
+BlMorphicUIManager class >> useAsDefault [
 	|uiManager|
 	uiManager := self new.
 	uiManager beDefault. 
 ]
 
 { #category : #'ui process' }
-BlBlocMorphicUIManager >> blocDefer: aBlock [
-	| aGlutinUniverse |
+BlMorphicUIManager >> blocDefer: aBlock [
+	| theUniversesWithUIProcess |
 
-	aBlock value
+	theUniversesWithUIProcess := (BlParallelUniverse all select: [ :eachUniverse |
+			eachUniverse hasSpaces
+				and: [ eachUniverse hasUIProcess
+					and: [ eachUniverse hostClass new isRunning ] ] ])
+		sorted: [ :a :b | a hostClass priority < b hostClass priority ].
 
-	"aGlutinUniverse := BlParallelUniverse forHost: Bloc preferableHostClass.
-	aGlutinUniverse defer: aBlock"
+	theUniversesWithUIProcess
+		ifEmpty: [ aBlock value ]
+		ifNotEmpty: [ :theUniverses | theUniverses first defer: aBlock ]
 ]
 
 { #category : #debug }
-BlBlocMorphicUIManager >> debugProcess: process context: context label: title fullView: bool notification: notificationString [
+BlMorphicUIManager >> debugProcess: process context: context label: title fullView: bool notification: notificationString [
 	"I open the default debugger and add support for detecting if the 
 	debugged process is the Morphic or Bloc UI process.
 	I spawn a new Bloc UI if the debugged process is the Bloc UI process 
@@ -77,8 +82,8 @@ BlBlocMorphicUIManager >> debugProcess: process context: context label: title fu
 
 ]
 
-{ #category : #debug }
-BlBlocMorphicUIManager >> isBlocUIProcess: aProcess [
+{ #category : #'ui process' }
+BlMorphicUIManager >> isBlocUIProcess: aProcess [
 	^ BlParallelUniverse all anySatisfy: [ :eachUniverse |
 		| isInterruptedProcess |
 		isInterruptedProcess := false.
@@ -88,24 +93,8 @@ BlBlocMorphicUIManager >> isBlocUIProcess: aProcess [
 		isInterruptedProcess ]
 ]
 
-{ #category : #debug }
-BlBlocMorphicUIManager >> isForBlocUIProcess: debugSession [
-	^ BlParallelUniverse all anySatisfy: [ :eachUniverse |
-		| isInterruptedProcess |
-		isInterruptedProcess := false.
-	
-		eachUniverse hostClass uiProcessDo: [ :eachUIProcess |
-			isInterruptedProcess := eachUIProcess == debugSession interruptedProcess ].
-		isInterruptedProcess ]
-]
-
-{ #category : #'ui requests' }
-BlBlocMorphicUIManager >> request: aStringOrText initialAnswer: defaultAnswer title: aTitle [ 
-	^ super request: aStringOrText initialAnswer: defaultAnswer title: aTitle
-]
-
 { #category : #'ui process' }
-BlBlocMorphicUIManager >> resumeBlocUIProcess: aProcess [
+BlMorphicUIManager >> resumeBlocUIProcess: aProcess [
 	"Adopt aProcess as the UI process for Bloc -- probably because of proceeding from a debugger"
 			
 	"The Bloc UI process needs to be handled in a special way. The current debugger only knows about the existance of a single UI process.
@@ -113,9 +102,13 @@ BlBlocMorphicUIManager >> resumeBlocUIProcess: aProcess [
 	While that works for the Morpic UI process, it will not work for the Bloc UI process, as the debugger for the Bloc UI process runs inside the Morphic UI process.
 	Instead I do all the work of closing and resuming the correct Bloc UI process"
 	|currentDebugSession|
-		
-	BlUniverse default pulseLoop loopProcess terminate. "Terminate the current Bloc UI process"
-	BlUniverse default pulseLoop forceStartOfUIProcess: aProcess. "Start the given process as the current Bloc UI process"
+
+	self
+		universeForProcess: aProcess
+		ifPresent: [ :aUniverse |
+			aUniverse hostClass uiProcessDo: [ :aUIProcess | aUIProcess terminate ].
+			aUniverse hostClass forceResumeOfUIProcess: aProcess ]
+		ifAbsent: [  ].
 		
 	"This is the only hack I found to make the debugger not terminate the current active process on close.
 	In DebugSession>>#terminate the debugger terminates the active process if the errorWasInUIProcess attribute is set to true.
@@ -127,7 +120,7 @@ BlBlocMorphicUIManager >> resumeBlocUIProcess: aProcess [
 ]
 
 { #category : #'ui process' }
-BlBlocMorphicUIManager >> resumeMorphicUIProcess: aProcess [
+BlMorphicUIManager >> resumeMorphicUIProcess: aProcess [
 	"Adopt aProcess as the UI process for morphic -- probably because of proceeding from a debugger"
 			
 	"Resume the Morphic UI process normally without any special logic. 
@@ -137,7 +130,7 @@ BlBlocMorphicUIManager >> resumeMorphicUIProcess: aProcess [
 ]
 
 { #category : #'ui process' }
-BlBlocMorphicUIManager >> resumeUIProcess: aProcess [
+BlMorphicUIManager >> resumeUIProcess: aProcess [
 	"Adopt aProcess as the project process -- probably because of proceeding from a debugger"
 	
 	"I explicitly check if the process corresponds to the Bloc UI process or not so I can determine which UI process to resume."
@@ -154,23 +147,18 @@ BlBlocMorphicUIManager >> resumeUIProcess: aProcess [
 ]
 
 { #category : #'ui process' }
-BlBlocMorphicUIManager >> spawnNewBlocProcess [
-	BlUniverse default pulseLoop forceStartNewUIProcess
-]
-
-{ #category : #'ui process' }
-BlBlocMorphicUIManager >> spawnNewBlocProcess: aUniverse [
+BlMorphicUIManager >> spawnNewBlocProcess: aUniverse [
 	aUniverse stopPulsation.
 	aUniverse hostClass forceStartNewUIProcess
 ]
 
 { #category : #'ui process' }
-BlBlocMorphicUIManager >> spawnNewMorphicProcess [
+BlMorphicUIManager >> spawnNewMorphicProcess [
 	self spawnNewProcess
 ]
 
 { #category : #debug }
-BlBlocMorphicUIManager >> universeForProcess: aProcess ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
+BlMorphicUIManager >> universeForProcess: aProcess ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
 	^ BlParallelUniverse all
 		detect: [ :eachUniverse |
 			| isInterruptedProcess |
@@ -183,7 +171,7 @@ BlBlocMorphicUIManager >> universeForProcess: aProcess ifPresent: aPresentBlock 
 ]
 
 { #category : #debug }
-BlBlocMorphicUIManager >> universeForSession: debugSession ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
+BlMorphicUIManager >> universeForSession: debugSession ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
 	^ BlParallelUniverse all
 		detect: [ :eachUniverse |
 			| isInterruptedProcess |
