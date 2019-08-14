@@ -28,12 +28,16 @@ BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 
 { #category : #geometry }
 BlMorphicSpaceHostMorph >> extent: aPoint [
+	
+	self extent = aPoint
+		ifTrue: [ ^ self ].
+	
 	super extent: aPoint.
 	
 	"morph may resize before host space is created"
 	self hostSpace
 		ifNil: [ ^ self ].
-	
+
 	self resizeDuring: [
 		BlMorphicWindowResizeEvent new
 			width: self width;
@@ -168,16 +172,6 @@ BlMorphicSpaceHostMorph >> spacePosition [
 	<return: #Point>
 
 	^ self position
-]
-
-{ #category : #'model - stepping' }
-BlMorphicSpaceHostMorph >> step [
-	self hostSpace universe pulse
-]
-
-{ #category : #'model - stepping' }
-BlMorphicSpaceHostMorph >> stepTime [
-	^ 0  "every cycle"
 ]
 
 { #category : #testing }

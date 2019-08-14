@@ -56,6 +56,13 @@ BlMorphicHostSpace >> densityDpi [
 	^ 96.0
 ]
 
+{ #category : #'host space - events' }
+BlMorphicHostSpace >> generateEvents [
+	"Generate more complex state change events such as window scale event when resolution of the screen changes"
+	
+	spaceHostMorph world ifNil: [ spaceHostMorph announceDeleted ]
+]
+
 { #category : #initialization }
 BlMorphicHostSpace >> initialize [
 	super initialize
