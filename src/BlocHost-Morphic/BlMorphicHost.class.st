@@ -152,7 +152,7 @@ BlMorphicHost >> isRunning [
 
 { #category : #'host - api' }
 BlMorphicHost >> start [	
-	World startStepping: self class at: Time millisecondClockValue selector: #pulse arguments: nil stepTime: nil
+	World startStepping: self class at: Time millisecondClockValue selector: #pulse arguments: nil stepTime: 0
 ]
 
 { #category : #'host - api' }
