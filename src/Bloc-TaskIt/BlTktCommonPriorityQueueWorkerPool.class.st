@@ -7,5 +7,5 @@ Class {
 { #category : #initialization }
 BlTktCommonPriorityQueueWorkerPool >> initialize [ 
 	super initialize.
-	taskQueue := AtomicSharedPriorityQueue new.
+	taskQueue := SharedPriorityUniqueQueue new.
 ]
