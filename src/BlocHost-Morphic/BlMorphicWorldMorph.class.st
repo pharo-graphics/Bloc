@@ -3,7 +3,8 @@ Class {
 	#superclass : #WorldMorph,
 	#instVars : [
 		'display',
-		'drawingCache'
+		'drawingCache',
+		'mySession'
 	],
 	#category : #'BlocHost-Morphic-World'
 }
@@ -16,19 +17,21 @@ BlMorphicWorldMorph class >> worldState: aWorldState [
 { #category : #actions }
 BlMorphicWorldMorph >> beMain [
 	InputEventFetcher deinstall.
-	UIManager default uiProcess terminate.
+	
 	Cursor currentCursor: Cursor normal.
 	World := self.
 	ActiveWorld := self.
 	ActiveHand := self hands first.
 	Display := display.
- 
+
 	worldState element isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
 
-	worldState element space host class uiProcessDo: [ :aProcess |
-		MorphicUIManager classVarNamed: #UIProcess put: aProcess.
-		self assert: UIManager default uiProcess == aProcess ]
+	worldState element space host class uiProcessDo: [ :aProcess |		
+		(UIManager default uiProcess ~~ aProcess)
+			ifTrue: [ UIManager default uiProcess ifNotNil: #terminate ].
+
+		MorphicUIManager classVarNamed: #UIProcess put: aProcess ]
 ]
 
 { #category : #accessing }
@@ -154,9 +157,9 @@ BlMorphicWorldMorph >> processEvent: anEvent [
 
 { #category : #drawing }
 BlMorphicWorldMorph >> validateDrawingCache [
-	session == Smalltalk session 
+	mySession == Smalltalk session 
 		ifFalse: [
-			session := Smalltalk session.
+			mySession := Smalltalk session.
 			self drawingCache removeAll ].
 
 	self drawingCache keys

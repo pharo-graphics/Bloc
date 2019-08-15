@@ -832,9 +832,8 @@ BlSpace >> position [
 BlSpace >> position: aPoint [
 	"Request to change window's position to a given point in screen corrdinates"
 
-	self
-		hostSpaceDo: [ :aHostSpace | aHostSpace position: aPoint ]
-		ifAbsent: [ self setPosition: aPoint ]
+	self setPosition: aPoint.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace position: aPoint ]
 ]
 
 { #category : #printing }
@@ -1101,9 +1100,8 @@ BlSpace >> windowExtent: anExtent [
 	"Request to change a window size to aNewExtent.
 	Note, that window size may be different from renderer size on high dpi (retina) displays"
 
-	self
-		hostSpaceDo: [ :aHostSpace | aHostSpace windowExtent: anExtent ]
-		ifAbsent: [ self setExtent: anExtent ]
+	self setExtent: anExtent.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace windowExtent: anExtent ]
 ]
 
 { #category : #'window - properties' }

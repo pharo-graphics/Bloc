@@ -29,9 +29,6 @@ Class {
 	#instVars : [
 		'containerMorph'
 	],
-	#classVars : [
-		'IsRunning'
-	],
 	#category : #'BlocHost-Morphic-Host - Morph'
 }
 
@@ -54,7 +51,7 @@ BlMorphicHost class >> isSupported [
 
 { #category : #testing }
 BlMorphicHost class >> label [
-	^ 'Morphic - Embed'
+	^ 'Morphic - Embedded'
 ]
 
 { #category : #testing }
@@ -63,6 +60,16 @@ BlMorphicHost class >> priority [
 	<return: #Number>
 
 	^ Float infinity
+]
+
+{ #category : #pulse }
+BlMorphicHost class >> pulse [
+	(BlParallelUniverse forHost: self) pulse
+]
+
+{ #category : #asserting }
+BlMorphicHost class >> shouldGetStepsFrom: aWorld [
+	^ true
 ]
 
 { #category : #'api - ui process' }
@@ -140,19 +147,17 @@ BlMorphicHost >> initialize [
 
 { #category : #'host - testing' }
 BlMorphicHost >> isRunning [
-	^ IsRunning ifNil: [ false ]
+	^ World isStepping: self class
 ]
 
 { #category : #'host - api' }
-BlMorphicHost >> start [
-	IsRunning := true.
-	
-	self containerMorph defer: [ self universe pulse ]
+BlMorphicHost >> start [	
+	World startStepping: self class at: Time millisecondClockValue selector: #pulse arguments: nil stepTime: 0
 ]
 
 { #category : #'host - api' }
 BlMorphicHost >> stop [
-	IsRunning := false
+	World stopStepping: self class
 ]
 
 { #category : #'host - testing' }

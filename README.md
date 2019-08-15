@@ -18,7 +18,7 @@ The following script installs Bloc intended for [Pharo 7](https://pharo.org/down
 ```smalltalk
 Metacello new
    baseline: 'Bloc';
-   repository: 'github://pharo-graphics/Bloc/src';
+   repository: 'github://feenkcom/Bloc/src';
    load
 ```
 
