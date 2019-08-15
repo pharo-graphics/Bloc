@@ -3,23 +3,9 @@ I am a concrete implementation of a BlHost that allows users to open host bloc s
 "
 Class {
 	#name : #BlMorphicWindowHost,
-	#superclass : #BlHost,
-	#classVars : [
-		'IsRunning'
-	],
+	#superclass : #BlMorphicSteppingHost,
 	#category : #'BlocHost-Morphic-Host - Window'
 }
-
-{ #category : #'api - ui process' }
-BlMorphicWindowHost class >> forceResumeOfUIProcess: aProcess [	
-	MorphicUIManager classVarNamed: #UIProcess put: aProcess.
-	aProcess resume
-]
-
-{ #category : #'api - ui process' }
-BlMorphicWindowHost class >> forceStartNewUIProcess [
-	UIManager default spawnNewProcess
-]
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
@@ -38,13 +24,6 @@ BlMorphicWindowHost class >> priority [
 	<return: #Number>
 
 	^ 20
-]
-
-{ #category : #'api - ui process' }
-BlMorphicWindowHost class >> uiProcessDo: aBlock [
-	"Evaluate aBlock with the running UI Process of this host if any"
-	
-	UIManager default uiProcess ifNotNil: aBlock
 ]
 
 { #category : #'host - api' }
@@ -93,28 +72,6 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 		detachUniverse.
 
 	aSpace detachHostSpace
-]
-
-{ #category : #initialization }
-BlMorphicWindowHost >> initialize [
-	super initialize.
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> isRunning [
-	^ IsRunning ifNil: [ false ]
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> start [
-	IsRunning := true.
-	
-	World defer: [ self universe pulse ]
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> stop [
-	IsRunning := false
 ]
 
 { #category : #'host - testing' }

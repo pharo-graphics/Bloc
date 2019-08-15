@@ -25,23 +25,12 @@ space show
 "
 Class {
 	#name : #BlMorphicHost,
-	#superclass : #BlHost,
+	#superclass : #BlMorphicSteppingHost,
 	#instVars : [
 		'containerMorph'
 	],
 	#category : #'BlocHost-Morphic-Host - Morph'
 }
-
-{ #category : #'api - ui process' }
-BlMorphicHost class >> forceResumeOfUIProcess: aProcess [	
-	MorphicUIManager classVarNamed: #UIProcess put: aProcess.
-	aProcess resume
-]
-
-{ #category : #'api - ui process' }
-BlMorphicHost class >> forceStartNewUIProcess [
-	UIManager default spawnNewProcess
-]
 
 { #category : #testing }
 BlMorphicHost class >> isSupported [
@@ -60,23 +49,6 @@ BlMorphicHost class >> priority [
 	<return: #Number>
 
 	^ Float infinity
-]
-
-{ #category : #pulse }
-BlMorphicHost class >> pulse [
-	(BlParallelUniverse forHost: self) pulse
-]
-
-{ #category : #asserting }
-BlMorphicHost class >> shouldGetStepsFrom: aWorld [
-	^ true
-]
-
-{ #category : #'api - ui process' }
-BlMorphicHost class >> uiProcessDo: aBlock [
-	"Evaluate aBlock with the running UI Process of this host if any"
-	
-	UIManager default uiProcess ifNotNil: aBlock
 ]
 
 { #category : #accessing }
@@ -143,21 +115,6 @@ BlMorphicHost >> initialize [
 	super initialize.
 
 	containerMorph := Morph new
-]
-
-{ #category : #'host - testing' }
-BlMorphicHost >> isRunning [
-	^ World isStepping: self class
-]
-
-{ #category : #'host - api' }
-BlMorphicHost >> start [	
-	World startStepping: self class at: Time millisecondClockValue selector: #pulse arguments: nil stepTime: 0
-]
-
-{ #category : #'host - api' }
-BlMorphicHost >> stop [
-	World stopStepping: self class
 ]
 
 { #category : #'host - testing' }
