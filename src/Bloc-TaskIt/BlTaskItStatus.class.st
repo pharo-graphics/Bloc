@@ -118,12 +118,10 @@ BlTaskItStatus >> instanceCountsOn: aStream [
 { #category : #printing }
 BlTaskItStatus >> printQueueFor: pool on: aStream [
 
-	pool taskQueue itemArray
-		select: [ :each | each isZombie not ] 
-		thenDo: [ :each |
+	pool taskQueue contents do: [ :each |
 			aStream
 				<< '  ';
-				<< each object name;
+				<< each name;
 				cr ]
 ]
 
