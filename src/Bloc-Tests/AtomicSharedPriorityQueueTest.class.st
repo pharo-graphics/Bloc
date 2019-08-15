@@ -12,12 +12,12 @@ AtomicSharedPriorityQueueTest >> testNextIfNone [
 	"Test removing first element"
 	queue := AtomicSharedPriorityQueue new.
 	queue
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 0);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 5);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 6);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 8);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 7);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 1).
+		nextPut: (SharedPriorityQueueTestEntry priority: 0);
+		nextPut: (SharedPriorityQueueTestEntry priority: 5);
+		nextPut: (SharedPriorityQueueTestEntry priority: 6);
+		nextPut: (SharedPriorityQueueTestEntry priority: 8);
+		nextPut: (SharedPriorityQueueTestEntry priority: 7);
+		nextPut: (SharedPriorityQueueTestEntry priority: 1).
 
 	self assert: queue nextOrNil priority equals: 0.
 	self assert: queue size equals: 5.
@@ -57,12 +57,12 @@ AtomicSharedPriorityQueueTest >> testNextIfNoneOrdered [
 	"Test removing first element"
 	queue := AtomicSharedPriorityQueue new.
 	queue
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 0);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 1);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 2);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 3);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 4);
-		nextPut: (AtomicSharedPriorityQueueTestEntry priority: 5).
+		nextPut: (SharedPriorityQueueTestEntry priority: 0);
+		nextPut: (SharedPriorityQueueTestEntry priority: 1);
+		nextPut: (SharedPriorityQueueTestEntry priority: 2);
+		nextPut: (SharedPriorityQueueTestEntry priority: 3);
+		nextPut: (SharedPriorityQueueTestEntry priority: 4);
+		nextPut: (SharedPriorityQueueTestEntry priority: 5).
 
 	self assert: queue nextOrNil priority equals: 0.
 	self assert: queue size equals: 5.

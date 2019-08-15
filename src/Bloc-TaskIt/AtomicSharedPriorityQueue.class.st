@@ -77,7 +77,7 @@ AtomicSharedPriorityQueue >> nextIfNone: aBlock [
 				previous next: item next ] ]
 		ifFalse: [
 			"If the priority is 0, we can return immediately"
-			object taskPriority = 0 ifTrue: 
+			object entryPriority = 0 ifTrue: 
 				[ item object: dummy.
 				previous ifNotNil: [ 
 					previous next: item next.
@@ -85,7 +85,7 @@ AtomicSharedPriorityQueue >> nextIfNone: aBlock [
 				ifNil: 
 					[ dummy next: item next ].
 				^ object ].
-			object taskPriority < highest object taskPriority ifTrue: [ 
+			object entryPriority < highest object entryPriority ifTrue: [ 
 				highest := item.
 				highestPrevious := previous ] ].
 

@@ -15,6 +15,11 @@ BlTktProtoCommand >> asBlTktLoggingCommand [
 ]
 
 { #category : #converting }
+BlTktProtoCommand >> asBlTktSingleCommand [
+	^ BlTktSingleCommand new command: self
+]
+
+{ #category : #converting }
 BlTktProtoCommand >> asBlTktTerminableCommand [
 	^ BlTktTerminableCommand new command: self
 ]
@@ -43,6 +48,13 @@ BlTktProtoCommand >> canHandleTerminationRequest [
 	^ false
 ]
 
+{ #category : #accessing }
+BlTktProtoCommand >> entryPriority [
+	"Answer the priority of the receiver for task scheduling."
+
+	^1
+]
+
 { #category : #evaluating }
 BlTktProtoCommand >> execute [
 	"execute command and return a result"
@@ -68,6 +80,12 @@ BlTktProtoCommand >> futureInUIPool [
 
 { #category : #testing }
 BlTktProtoCommand >> includesLoggingCommand [
+	<return: #Boolean>
+	^ false
+]
+
+{ #category : #testing }
+BlTktProtoCommand >> includesSingleCommand [
 	<return: #Boolean>
 	^ false
 ]
@@ -106,13 +124,6 @@ BlTktProtoCommand >> scheduleInUIPool [
 { #category : #taskit }
 BlTktProtoCommand >> taskExecution: anExecution [
 	"do nothing"
-]
-
-{ #category : #accessing }
-BlTktProtoCommand >> taskPriority [
-	"Answer the priority of the receiver for task scheduling."
-
-	^1
 ]
 
 { #category : #evaluating }

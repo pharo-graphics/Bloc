@@ -17,17 +17,17 @@ BlTktValuableCommand >> ensureName [
 	name ifNil: [ self name: self valuable printString ]
 ]
 
+{ #category : #accessing }
+BlTktValuableCommand >> entryPriority [
+
+	^valuable entryPriority
+]
+
 { #category : #initialization }
 BlTktValuableCommand >> initialize [
 	super initialize.
 	self valuable: self defaultValuable.
 	
-]
-
-{ #category : #accessing }
-BlTktValuableCommand >> taskPriority [
-
-	^valuable taskPriority
 ]
 
 { #category : #accessing }

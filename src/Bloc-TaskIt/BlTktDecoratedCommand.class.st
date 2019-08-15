@@ -14,6 +14,13 @@ BlTktDecoratedCommand >> asBlTktLoggingCommand [
 		ifTrue: [ self ]
 ]
 
+{ #category : #converting }
+BlTktDecoratedCommand >> asBlTktSingleCommand [
+	^ self includesSingleCommand 
+		ifFalse: [ BlTktSingleCommand new command: self ]
+		ifTrue: [ self ]
+]
+
 { #category : #taskit }
 BlTktDecoratedCommand >> canHandleTerminationRequest [
 	<return: #Boolean>
@@ -39,10 +46,32 @@ BlTktDecoratedCommand >> command: aCommand [
 	command := aCommand
 ]
 
+{ #category : #accessing }
+BlTktDecoratedCommand >> entryIdentifier [
+	"Answer the identity of the receiver for task scheduling.
+	Defer to my command."
+	
+	^command entryIdentifier
+]
+
+{ #category : #accessing }
+BlTktDecoratedCommand >> entryPriority [
+	"Answer the priority of the receiver for task scheduling.
+	Defer to my command."
+	
+	^command entryPriority
+]
+
 { #category : #testing }
 BlTktDecoratedCommand >> includesLoggingCommand [
 	<return: #Boolean>
 	^ self command includesLoggingCommand
+]
+
+{ #category : #testing }
+BlTktDecoratedCommand >> includesSingleCommand [
+	<return: #Boolean>
+	^ self command includesSingleCommand
 ]
 
 { #category : #initialization }
@@ -59,14 +88,6 @@ BlTktDecoratedCommand >> name: aString [
 { #category : #taskit }
 BlTktDecoratedCommand >> taskExecution: anExecution [
 	self command taskExecution: anExecution
-]
-
-{ #category : #accessing }
-BlTktDecoratedCommand >> taskPriority [
-	"Answer the priority of the receiver for task scheduling.
-	Defer to my command."
-	
-	^command taskPriority
 ]
 
 { #category : #actions }
