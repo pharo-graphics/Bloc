@@ -110,6 +110,18 @@ BlSubTextIterator >> nextSegment: aBlock [
 ]
 
 { #category : #'iterator - enumeration' }
+BlSubTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
+	"@see BlTextIterator>>#nextSegment:indicesDo:"
+	<return: #Object>
+		
+	^ iterator nextSegment: aBlock indicesDo: [ :aSegmentStart :aSegmentEnd :anInitialValue |
+		anIndicesBlock
+			cull: aSegmentStart - self text textOffset
+			cull: aSegmentEnd - self text textOffset
+			cull: anInitialValue ]
+]
+
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextSpan [
 	"Return a next homogeneous text span"
 	<return: #BlSpan>

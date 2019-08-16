@@ -43,9 +43,9 @@ BlMorphicHostSpace >> close [
 ]
 
 { #category : #'host space - cursor' }
-BlMorphicHostSpace >> cursor: aCursorForm [
+BlMorphicHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
-	World currentHand showTemporaryCursor: aCursorForm
+	World currentHand showTemporaryCursor: aCursor asForm
 ]
 
 { #category : #'host space - accessing' }

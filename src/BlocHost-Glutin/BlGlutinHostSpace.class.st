@@ -65,6 +65,8 @@ BlGlutinHostSpace >> convertKeyModifiers: theGlutinModifiers [
 { #category : #'host space - cursor' }
 BlGlutinHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
+
+	window cursor: aCursor asGlutinCursor
 ]
 
 { #category : #'host space - accessing' }
