@@ -1,12 +1,10 @@
 "
-I provide a solution for handling the opening of a Bloc debugger in the Bloc UI process when errors happen in either the Bloc UI process and any other Process.
+I provide a solution for handling the opening of the debugger that supports both the Bloc UI and the Morphic UI processes.
 
-I should only be used with debuggers that run inside the Bloc UI process. I allways spawn a Bloc debugger on errors that happen either in the Bloc UI process or the Morphic UI process. 
-I know how to correctly resume the Morphic UI process even if the actual debugger runs in the Bloc UI process.
+I assume there is only one UI Process either in Bloc or Morphic. If the error happened in either one of these processes, I restart the correct one. If both Bloc and Morphic have two distinct UI processes I will not work correctly.
 
-I use ==Smalltalk tools debugger== to open the actual debugger. For my preconditions to hold this needs to be a Bloc based debugger. 
-
-See the comment of my superclass for more details.
+Normally I should only be used when running Bloc natively. When running Bloc using inside the Morphic UI process the a ${class:MorphicUIManager}$ can be used instead.
+However for now I can also be used to handle just the case of the Morhic UI process. Later I should be simplified to take into account only the Bloc UI process.
 "
 Class {
 	#name : #BlBlocUIManager,
@@ -69,12 +67,24 @@ BlBlocUIManager class >> useAsDefault [
 
 { #category : #debug }
 BlBlocUIManager >> debugProcess: process context: context label: title fullView: bool notification: notificationString [
+	"Open the default debugger registered in the system as a result of the error."
+	self 
+		debugProcess: process 
+		context: context 
+		label: title 
+		spawningDebuggingUsing: [ :debugSession | 
+			Smalltalk tools debugger 
+				openOn: debugSession withFullView: bool andNotification: notificationString ]
+]
+
+{ #category : #debug }
+BlBlocUIManager >> debugProcess: process context: context label: title spawningDebuggingUsing: debuggerSpawnBlock [
 	"I open the default debugger and add support for detecting if the 
 	debugged process is the Morphic or Bloc UI process.
-	I spawn a new Bloc UI if the debugged process is the Bloc UI process 
+	I spawn a new Bloc UI process if the debugged process is the Bloc UI process 
 	or a Morphic UI process if the debugged process is the Morphic UI process."
 	| debugSession isForBlocUIProcess aBlocUniverseIfAny |
-
+	
 	debugSession := process newDebugSessionNamed: title startedAt: context.
 	debugSession logStackToFileIfNeeded.
 	
@@ -94,12 +104,13 @@ BlBlocUIManager >> debugProcess: process context: context label: title fullView:
 		isForBlocUIProcess "Handle the case of the Bloc UI process"
 			ifTrue: [ self spawnNewBlocProcess: aBlocUniverseIfAny ]
 			ifFalse: [ self spawnNewProcess ] ] ].
-
-	"Perform the opening of the debugger using the registered debugger. This must be a Bloc based debugger."
+	
+	"Perform the opening of the debugger in defer action to suspend the UI."
 	self defer: [ 
-		[ Smalltalk tools debugger 
-			openOn: debugSession withFullView: bool andNotification: notificationString.
-		] on: Error do: [ :ex | 	debugSession signalDebuggerError: ex ] ].
+		[ 
+			debuggerSpawnBlock value: debugSession.
+		] on: Error do: [ :ex | 	
+			debugSession signalDebuggerError: ex ] ].
 	
 	process suspend.
 
@@ -118,6 +129,17 @@ BlBlocUIManager >> defer: aBlock [
 	theUniversesWithUIProcess
 		ifEmpty: [ super defer: aBlock ]
 		ifNotEmpty: [ :theUniverses | theUniverses first defer: aBlock ]
+]
+
+{ #category : #'ui process' }
+BlBlocUIManager >> isBlocUIProcess: aProcess [ 
+	"Check if the given process is a Bloc UI process.
+	We consider it a Bloc UI process if is the UI process of a Universe."
+	self 
+		universeForProcess: aProcess 
+		ifPresent: [ :processUniverse | ^ true ] 
+		ifAbsent: [ ^ false ].
+	^ false
 ]
 
 { #category : #events }
@@ -140,14 +162,43 @@ BlBlocUIManager >> onPrimitiveError: aString [
 { #category : #'ui process' }
 BlBlocUIManager >> resumeBlocUIProcess: aProcess [
 	"Adopt aProcess as the UI process for Bloc -- probably because of proceeding from a debugger"
-			
-	"This UI manager resumes the Bloc UI proces normally. 
-	It assumes the debugger was opened and runs in the Bloc UI process."
-	
+
+	"Resume the Bloc UI process normally by delegating the resume operation through the host. 
+	This assumes that the debugger was opened and runs in the Bloc UI process.
+	In case Bloc is embedded inside the Morphic World, the Bloc UI process is going to
+	be the Morphic UI process. Delegating the process operations through the host
+	ensures that the Morphic UI process will be resumed correctly."
+
 	self
 		universeForProcess: aProcess
-		ifPresent: [ :aUniverse | aUniverse hostClass forceResumeOfUIProcess: aProcess ]
-		ifAbsent: [  ]
+		ifPresent: [ :aUniverse |
+			aUniverse hostClass uiProcessDo: [ :aUIProcess | aUIProcess terminate ].
+			aUniverse hostClass forceResumeOfUIProcess: aProcess ]
+		ifAbsent: [  ].
+]
+
+{ #category : #'ui process' }
+BlBlocUIManager >> resumeMorphicUIProcess: aProcess [ 
+	"Adopt aProcess as the UI process for morphic -- probably because of proceeding from a debugger"
+
+	"Resume the Morphic UI process normally without any special logic. 
+	This assumes that the debugger was opened and runs in the Morphic UI process."
+	UIProcess := aProcess.
+	UIProcess resume
+]
+
+{ #category : #'ui process' }
+BlBlocUIManager >> resumeUIProcess: aProcess [
+	"Adopt aProcess as the project process -- probably because of proceeding from a debugger"
+
+	"I explicitly check if the process corresponds to the Bloc UI process or not so I can determine which UI process to resume."
+	(self isBlocUIProcess: aProcess)
+		ifTrue:  [ 
+			"Resume the Bloc UI process."
+			self resumeBlocUIProcess: aProcess ]
+		ifFalse: [ 
+			"Resume the Moprhic UI process."
+			self resumeMorphicUIProcess: aProcess ]
 ]
 
 { #category : #debug }

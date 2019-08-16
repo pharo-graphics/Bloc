@@ -72,13 +72,14 @@ SharedPriorityUniqueQueue >> nextOrNil [
 { #category : #accessing }
 SharedPriorityUniqueQueue >> nextPut: anObject [
 
-	^monitor critical: [ | result |
+	^monitor critical: [ | result itemAdded |
+		itemAdded := false.
 		result := anObject entryIdentifier ifNotNil: [ :identifier |
 			items detect: [ :each | each entryIdentifier = identifier ]
 					ifFound: [ :existing | existing ]
-					ifNone: [ [ items addLast: anObject ] valueWithoutUserInterruption ] ]
-			ifNil: [ items addLast: anObject ].
-		monitor signal.
+					ifNone: [ [ itemAdded := true. items addLast: anObject ] valueWithoutUserInterruption ] ]
+			ifNil: [ itemAdded := true. items addLast: anObject ].
+		itemAdded ifTrue: [ monitor signal ].
 		result ].
 
 ]
