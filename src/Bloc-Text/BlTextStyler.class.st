@@ -20,6 +20,12 @@ Class {
 	#category : #'Bloc-Text-Text-Styler'
 }
 
+{ #category : #accessing }
+BlTextStyler >> delay [
+	<return: #Duration>
+	^ delay
+]
+
 { #category : #styling }
 BlTextStyler >> doStyle: aBrText afterDo: aBlock [
 	"A styling activity called from styler tasks"
@@ -35,7 +41,6 @@ BlTextStyler >> doStyleInBackground: aBrText andAfterDo: aBlock [
 	"A styling activity called from styler tasks"
 	| styledText aTaskAction |
 
-	delay asDelay wait.
 	styledText := self privateStyle: aBrText unstyle.
 	
 	aTaskAction := [ 

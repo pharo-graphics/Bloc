@@ -15,6 +15,7 @@ Class {
 
 { #category : #styling }
 BlTextStylerAsyncTask >> doInBackground: aBrText andAfterDo: aBlock [
+	self styler delay asDelay wait.
 	self styler doStyleInBackground: aBrText andAfterDo: aBlock
 ]
 
