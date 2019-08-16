@@ -31,6 +31,7 @@ BlHeadlessHost >> createHostSpaceFor: aSpace [
 	aHostSpace universe: self universe.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.
+	aHostSpace withSpartaRenderer.
 
 	aSpace hostSpace: aHostSpace
 ]
@@ -68,4 +69,11 @@ BlHeadlessHost >> start [
 { #category : #api }
 BlHeadlessHost >> stop [
 	isRunning := false
+]
+
+{ #category : #'as yet unclassified' }
+BlHeadlessHost >> supportsBufferSurface [
+	<return: #Boolean>
+	
+	^ true
 ]
