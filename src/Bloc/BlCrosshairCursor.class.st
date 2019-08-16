@@ -3,3 +3,8 @@ Class {
 	#superclass : #BlNamedCursor,
 	#category : #'Bloc-Space-Cursor'
 }
+
+{ #category : #converting }
+BlCrosshairCursor >> asForm [
+	^ Cursor crossHair
+]

@@ -3112,6 +3112,13 @@ BlElement >> shouldHandleMouseEvents [
 	^ shouldHandleMouseEvents
 ]
 
+{ #category : #'api - opening' }
+BlElement >> showSpace: aSpace [
+	self isAttachedToSceneGraph
+		ifTrue: [ self space showSpace: aSpace ]
+		ifFalse: [ aSpace show ]
+]
+
 { #category : #'api - bounds' }
 BlElement >> size [
 	^ self extent

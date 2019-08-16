@@ -996,6 +996,12 @@ BlSpace >> show [
 	(BlParallelUniverse forHost: self host class) openSpace: self
 ]
 
+{ #category : #'api - displaying' }
+BlSpace >> showSpace: aSpace [
+	"I show a given space either inside of me or let it open by default"
+	aSpace show
+]
+
 { #category : #'api - tasks' }
 BlSpace >> taskQueue [
 	<return: #BlTaskQueue>
