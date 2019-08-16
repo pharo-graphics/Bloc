@@ -263,7 +263,7 @@ BlSpace >> currentCursor: aCursor [
 
 	currentCursor ifNotNil: [ :cc | cc deactivateOn: self ].
 	currentCursor := aCursor.
-	currentCursor ifNil: [ ^ self updateCursorImage: Cursor normal ].
+	currentCursor ifNil: [ ^ self updateCursor: BlCursor default ].
 	currentCursor activateOn: self
 ]
 
@@ -703,7 +703,7 @@ BlSpace >> initialize [
 	self title: self defaultTitle.
 	self focused: false.
 
-	self updateCursorImage: Cursor normal.
+	self updateCursor: BlCursor default.
 
 	self root space: self.
 	self withHalos
@@ -1070,10 +1070,8 @@ BlSpace >> ungrabFocus [
 ]
 
 { #category : #'cursor managing' }
-BlSpace >> updateCursorImage: anImage [
-
-	self hostSpace ifNotNil: [ :aHostSpace |
-		aHostSpace cursor: anImage ]
+BlSpace >> updateCursor: aBlCursor [
+	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
 ]
 
 { #category : #'window - properties' }
