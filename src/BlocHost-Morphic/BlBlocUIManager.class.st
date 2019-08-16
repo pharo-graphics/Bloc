@@ -28,17 +28,15 @@ BlBlocUIManager class >> initialize [
 
 { #category : #testing }
 BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
-	| isHeadlessVM isHeadlessMode |
+	| isHeadlessVM isInteractiveMode |
 	
 	isHeadlessVM := Smalltalk os windowSystemName isNil or: [ Smalltalk os windowSystemName = 'null' ].
 	
-	"For now in case the parameter '--headless' is detected twice we assume
-	the image is run in really headless mode without an UI and do not use this UI manager."
-	isHeadlessMode := ((-1000 to: 1000)
-		collect: [ :n | Smalltalk vm getSystemAttribute: n ]
-		thenSelect: [ :each | each = '--headless' ]) size >= 2.
+	"The --interactive parameter should be passed in order to select a graphical UI manager.
+	This parameter is passe automatically when double clicking on the Headless VM."
+	isInteractiveMode := CommandLineArguments new hasOption: 'interactive'.
 		
-	^ isHeadlessVM and: [ isHeadlessMode not ]
+	^ isHeadlessVM and: [ isInteractiveMode ]
 ]
 
 { #category : #'class initialization' }
