@@ -1,11 +1,11 @@
 Class {
-	#name : #BlFrameLayoutMulipleChildrenExamples,
+	#name : #BlFrameLayoutMultipleChildrenExamples,
 	#superclass : #BlFrameLayoutChildrenExamples,
 	#category : #'Bloc-Examples-Layout'
 }
 
 { #category : #'examples - setup' }
-BlFrameLayoutMulipleChildrenExamples >> childElementWithExactSize140per140 [
+BlFrameLayoutMultipleChildrenExamples >> childElementWithExactSize140per140 [
 	<gtExample>
 	| element |
 	element :=  self childElementWithVisualProperties.
@@ -21,7 +21,7 @@ BlFrameLayoutMulipleChildrenExamples >> childElementWithExactSize140per140 [
 ]
 
 { #category : #'examples - alignment' }
-BlFrameLayoutMulipleChildrenExamples >> elementWithExactChildAlignLeftCenterAndExactChildCenter [
+BlFrameLayoutMultipleChildrenExamples >> elementWithExactChildAlignLeftCenterAndExactChildCenter [
 	<gtExample>
 	| parent childOne childTwo |
 	
@@ -49,7 +49,7 @@ BlFrameLayoutMulipleChildrenExamples >> elementWithExactChildAlignLeftCenterAndE
 ]
 
 { #category : #'examples - alignment' }
-BlFrameLayoutMulipleChildrenExamples >> elementWithExactChildAlignTopLeftAndExactChildRightCenter [
+BlFrameLayoutMultipleChildrenExamples >> elementWithExactChildAlignTopLeftAndExactChildRightCenter [
 	<gtExample>
 	| parent childOne childTwo |
 	
@@ -74,7 +74,7 @@ BlFrameLayoutMulipleChildrenExamples >> elementWithExactChildAlignTopLeftAndExac
 ]
 
 { #category : #'examples - alignment' }
-BlFrameLayoutMulipleChildrenExamples >> elementWithNineExactChildrenWithAllAlignments [
+BlFrameLayoutMultipleChildrenExamples >> elementWithNineExactChildrenWithAllAlignments [
 	<gtExample>
 	| parent childTopLeft childTopCenter childTopRight childCenterLeft childCenterCenter childCenterRight childBottomLeft childBottomCenter childBottomRight|
 	
@@ -149,7 +149,7 @@ BlFrameLayoutMulipleChildrenExamples >> elementWithNineExactChildrenWithAllAlign
 ]
 
 { #category : #'examples - weight' }
-BlFrameLayoutMulipleChildrenExamples >> elementWithTwoChildrenMatchingParentWithWeight [
+BlFrameLayoutMultipleChildrenExamples >> elementWithTwoChildrenMatchingParentWithWeight [
 	<gtExample>
 	| parent childOne childTwo |
 	
@@ -178,7 +178,7 @@ BlFrameLayoutMulipleChildrenExamples >> elementWithTwoChildrenMatchingParentWith
 ]
 
 { #category : #'examples - fit content' }
-BlFrameLayoutMulipleChildrenExamples >> elementWithTwoExactChildrenAndFitContentParent [
+BlFrameLayoutMultipleChildrenExamples >> elementWithTwoExactChildrenAndFitContentParent [
 	<gtExample>
 	| parent childOne childTwo |
 	
@@ -213,7 +213,7 @@ BlFrameLayoutMulipleChildrenExamples >> elementWithTwoExactChildrenAndFitContent
 ]
 
 { #category : #'examples - alignment' }
-BlFrameLayoutMulipleChildrenExamples >> elementWithTwoExactChildrenAndNoAlignment [
+BlFrameLayoutMultipleChildrenExamples >> elementWithTwoExactChildrenAndNoAlignment [
 	<gtExample>
 	| parent childOne childTwo |
 	
