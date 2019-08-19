@@ -21,6 +21,23 @@ BlTktCommonQueueWorkerPool >> printOn: aStream [
 	aStream nextPutAll: name
 ]
 
+{ #category : #private }
+BlTktCommonQueueWorkerPool >> privateManageWorkersAfter [
+	"Trying to terminate idle workers produces more delays than resource saving.
+	Only create a worker if required (workers are light-weight anyway)"
+	| free |
+
+	free := self privateFreeWorkers.
+	taskQueue size > free size
+		ifTrue: [ self privateSpawnWorkerIfNeeded ]
+]
+
+{ #category : #private }
+BlTktCommonQueueWorkerPool >> privateRemoveIdleWorkerIfNeeded [
+	"Trying to terminate idle workers produces more delays than resource saving.
+	Leave workers waiting on the queue (they're light-weight anyway)"
+]
+
 { #category : #accessing }
 BlTktCommonQueueWorkerPool >> processPriority [
 	<return: #Integer>
