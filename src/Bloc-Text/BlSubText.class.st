@@ -80,10 +80,10 @@ BlSubText >> assertStart: aStartIndex end: anEndIndex [
 		description: [ 'Text must not be nil' ].
 	self
 		assert: [ aStartIndex between: 0 and: text size ]
-		description: [ 'Sub-text start index is out of bounds!' ].
+		description: [ 'Sub-text start ({1}) index is out of bounds ({2})!' format: { aStartIndex . (0 to: text size) } ].
 	self
 		assert: [ anEndIndex between: 0 and: text size ]
-		description: [ 'Sub-text end index is out of bounds!' ].
+		description: [ 'Sub-text end ({1}) index is out of bounds ({2})!' format: { anEndIndex . (0 to: text size) } ].
 	self
 		assert: [ text isNotEmpty or: [ aStartIndex isZero and: [ anEndIndex isZero ] ] ]
 		description: [ 'If text is empty, start and end indices must be Zero!' ].
