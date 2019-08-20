@@ -1,0 +1,158 @@
+"
+BlTaskAtQueue provides a reasonably efficient mechanism to scheduled tasks to be executed at a specified time.
+
+The queue executes tasks within a single pharo process at #userSchedulingPriority, so tasks should be kept as short as possible, typically queueing the task up at a more appropriate place, e.g. one of the TaskIt background queues or within the UI process.
+
+
+!!Public API and Key Messages
+
+- start : 	Start the reader process 
+- stop : 		Stop the reader process
+- schedule:at: 	Schedule the supplied valuable to be executed at the specified time
+
+ 
+!!Internal Representation and Key Implementation Points.
+
+!!!Instance Variables
+
+	executorProcess:		<Process>
+	queue:						<SharedPriorityUniqueQueue>
+	scheduleSemaphore:		<Semaphore>
+
+
+!!!Implementation Points
+
+- Assumes that there is only one reader of the queue.
+"
+Class {
+	#name : #BlTaskAtQueue,
+	#superclass : #Object,
+	#instVars : [
+		'queue',
+		'scheduleSemaphore',
+		'executorProcess',
+		'nextTime'
+	],
+	#classVars : [
+		'Default'
+	],
+	#category : #'Bloc-TaskAt'
+}
+
+{ #category : #accessing }
+BlTaskAtQueue class >> default [ 
+
+	^Default ifNil: [ Default := self new start ]
+]
+
+{ #category : #private }
+BlTaskAtQueue >> forkExecutorProcess [
+
+	self
+		assert: executorProcess isNil 
+		description: 'Only one executor process is allowed'.
+	executorProcess := [ self queueReaderLoop ]
+		forkAt: Processor userSchedulingPriority 
+		named: 'BlTaskAtQueue Executor'.
+]
+
+{ #category : #initialization }
+BlTaskAtQueue >> initialize [
+
+	super initialize.
+	queue := SharedPriorityUniqueQueue new.
+	scheduleSemaphore := Semaphore new.
+
+]
+
+{ #category : #private }
+BlTaskAtQueue >> next [
+	"Answer the next item from the receiver's queue.
+	For testing purposes only."
+
+	^queue next
+]
+
+{ #category : #private }
+BlTaskAtQueue >> processNextEntry [
+
+	| entry timeRemaining |
+
+	scheduleSemaphore wait.
+	[ entry := queue peek.
+	entry isNotNil and: [ 
+		timeRemaining := (entry scheduledTime - BlTime real now) asMilliSeconds.
+		timeRemaining < 10 ] ] whileTrue: [ 
+		entry := queue next.
+		[ entry valuable value ]
+			on: Error 
+			do: [ :ex | BlTaskAtErrorSignal new 
+								exception: ex;
+								task: entry;
+								message: 'Entry execution exception - continuing';
+								emit ] ].
+	entry := queue peek.
+	entry 
+		ifNil: [ nextTime := nil ]
+		ifNotNil: [ self triggerAt: entry scheduledTime ].
+
+]
+
+{ #category : #private }
+BlTaskAtQueue >> queueReaderLoop [
+
+	[ [ self processNextEntry ]
+		on: Error 
+		do: [ :ex | BlTaskAtErrorSignal new 
+								exception: ex;
+								message: 'Reader loop exception - restarting';
+								emit.
+					(Delay forSeconds: 5) wait. ] ] repeat.
+]
+
+{ #category : #operations }
+BlTaskAtQueue >> schedule: aValuable at: aTime [
+	"Add the supplied task to the queue and trigger the semaphore at the appropriate time"
+
+	queue nextPut: (BlTaskAtTask valuable: aValuable at: aTime).
+	(nextTime isNil or: [ aTime < nextTime ])
+		ifTrue: [ self triggerAt: aTime ].
+]
+
+{ #category : #control }
+BlTaskAtQueue >> start [ 
+
+	self forkExecutorProcess.
+]
+
+{ #category : #control }
+BlTaskAtQueue >> stop [ 
+
+	executorProcess ifNil: [ ^self ].
+	executorProcess terminate.
+	executorProcess := nil.
+]
+
+{ #category : #private }
+BlTaskAtQueue >> triggerAfter: delayMilliseconds [
+
+	[ (Delay forMilliseconds: delayMilliseconds) wait.
+	scheduleSemaphore signal ]
+		forkAt: Processor userSchedulingPriority
+		named: 'BlTaskAt: ', delayMilliseconds asString.
+]
+
+{ #category : #private }
+BlTaskAtQueue >> triggerAt: aTime [
+	"Signal the scheduleSemaphore at the requested time"
+
+	| delayMilliseconds |
+
+	delayMilliseconds := (aTime - BlTime real now) asMilliSeconds.
+	delayMilliseconds < 10
+		ifTrue: [ scheduleSemaphore signal ]
+		ifFalse: [ 
+			nextTime := aTime.
+			self triggerAfter: delayMilliseconds ].
+
+]

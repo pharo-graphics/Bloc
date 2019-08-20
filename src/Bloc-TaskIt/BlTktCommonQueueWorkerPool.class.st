@@ -9,6 +9,21 @@ Class {
 	#category : #'Bloc-TaskIt-Workers'
 }
 
+{ #category : #'public - mutexed' }
+BlTktCommonQueueWorkerPool >> ensureIsWorking [
+	"Over-write to not terminate worker processes.
+	Trying to terminate idle workers produces more delays than resource saving."
+
+	mutex
+		critical: [ failedTasks
+				addAll: (self workers reject: #isRunning thenCollect: #currentTaskExecution).
+			failedTasks
+				ifNotEmpty:
+					[ self logCr: failedTasks size asString , ' Failed tasks encountered' ].
+			self privateManageWorkersBefore.
+			self privateManageWorkersAfter ]
+]
+
 { #category : #initialization }
 BlTktCommonQueueWorkerPool >> initialize [
 	super initialize.
