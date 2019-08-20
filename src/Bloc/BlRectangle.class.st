@@ -19,6 +19,16 @@ Class {
 }
 
 { #category : #factory }
+BlRectangle class >> cornerRadii: theBlCornerRadii [
+	"Create a rounded rectangle with given corner radii"
+	<return: #BlRectangle>
+
+	^ self basicNew
+		initialize;
+		initializeWith: theBlCornerRadii
+]
+
+{ #category : #factory }
 BlRectangle class >> cornerRadius: aNumber [
 	"Change the radii of all corners to a given number.
 	aNumber must not be nil.
