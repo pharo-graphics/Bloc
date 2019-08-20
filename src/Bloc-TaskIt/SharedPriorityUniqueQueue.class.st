@@ -55,6 +55,30 @@ SharedPriorityUniqueQueue >> basicNext [
 	^item
 ]
 
+{ #category : #private }
+SharedPriorityUniqueQueue >> basicPeek [
+	"Answer the next highest priority item.
+	This should only be called within the monitor."
+
+	| item highestIndex highestPriority |
+
+	items isEmpty ifTrue: [ ^nil ].
+	item := items first.
+	highestIndex := 1.
+	highestPriority := item entryPriority.
+	highestPriority <= 0 ifTrue: [ 
+		^items at: highestIndex ].
+	2 to: items size do: [ :i | | each |
+		each := items at: i.
+		each entryPriority < highestPriority ifTrue: [ 
+			item := each.
+			highestIndex := i.
+			highestPriority := item entryPriority ].
+		highestPriority <= 0 ifTrue: [ 
+			^item ] ].
+	^item
+]
+
 { #category : #flushing }
 SharedPriorityUniqueQueue >> flush [ 
 	"Remove from the queue all objects
@@ -128,7 +152,7 @@ SharedPriorityUniqueQueue >> peek [
 	no object has been sent, return nil
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super peek ] valueWithoutUserInterruption
+	^[ monitor critical: [ self basicPeek ] ] valueWithoutUserInterruption
 ]
 
 { #category : #copying }
