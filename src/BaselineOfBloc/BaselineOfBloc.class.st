@@ -9,6 +9,9 @@ The central concept is ${class:BlElement}$.
 
 The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray: ${class:BaselineOfBloc|show=#gtPackagesMapFor:|expanded=true}$
 
+!!Tutorial
+
+You can learn Bloc following a memory game tutorial: ${icebergFile:path=feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar}$.
 
 "
 Class {

@@ -49,6 +49,12 @@ Users may also choose to add an element as the first child, for that purpose Blo
 Every element is responsible for drawing itself. At the same time, every element has a ${class:BlGeometry}$ that defines the bounds and the clipping.
 
 See ${class:BlGeometryVisualAndLayoutBoundsExamples}$ for concrete details.
+
+!!Tutorial
+
+You can learn Bloc following a memory game tutorial: ${icebergFile:path=feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar}$.
+
+
 "
 Class {
 	#name : #BlElement,
