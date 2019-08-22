@@ -64,6 +64,19 @@ BlBorder class >> paint: aPaint width: aNumber [
 		build
 ]
 
+{ #category : #comparing }
+BlBorder >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ opacity = anObject opacity
+		and: [ paint = anObject paint
+				and: [ style = anObject style and: [ width = anObject width ] ] ]
+]
+
 { #category : #copy }
 BlBorder >> copyWithOpacity: aNumber [
 	self
@@ -125,6 +138,14 @@ BlBorder >> copyWithWidth: aWidth [
 		width: aWidth;
 		opacity: opacity;
 		yourself
+]
+
+{ #category : #comparing }
+BlBorder >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ opacity hash
+		bitXor: (paint hash bitXor: (style hash bitXor: width hash))
 ]
 
 { #category : #testing }

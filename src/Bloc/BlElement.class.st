@@ -480,17 +480,22 @@ BlElement >> background [
 { #category : #'api - look' }
 BlElement >> background: aBlBackground [
 	"Change my background to a given one.
-	Color and Form can be used as background - they will be converted to appropriate background object.
+	Color and Form can be used as background - they will be converted to an appropriate background object.
 	It is also possible to create a more complicated composite background with the help of ==BlBackgroundBuilder==.
 
 	aBlBackground must not be nil"
 	<event: #BlElementBackgroundChangedEvent>
+	| aNewBackground |
 
 	self
 		assert: [ aBlBackground isNotNil ]
 		description: [ 'Background must not be nil' ].
+		
+	aNewBackground := aBlBackground asBlBackground.
+	self background = aNewBackground
+		ifTrue: [ ^ self ].
 
-	background := aBlBackground asBlBackground.
+	background := aNewBackground.
 	self updateBackground.
 	self dispatchEvent: (BlElementBackgroundChangedEvent target: self).
 	self invalidate
@@ -532,6 +537,9 @@ BlElement >> border: aBlBorder [
 	self
 		assert: [ aBlBorder isNotNil ]
 		description: [ 'Background must not be nil' ].
+
+	self border = aBlBorder
+		ifTrue: [ ^ self ].
 
 	self invalidate.
 	border := aBlBorder.
