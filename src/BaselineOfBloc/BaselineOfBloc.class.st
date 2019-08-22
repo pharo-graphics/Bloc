@@ -40,7 +40,7 @@ BaselineOfBloc >> baseline: spec [
 			baseline: 'GToolkitExamplesEngine' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
 			baseline: 'Glutin' with: [
-				spec repository: 'github://feenkcom/oswindow-glutin/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-glutin/src' ].
 		spec 
 			package: #'Bloc-Geometry' with: [
 				spec requires: #(#BlocCore ). ];
