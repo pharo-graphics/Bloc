@@ -254,6 +254,11 @@ BlKeyCombinationBuilder >> shift [
 		with: shift
 ]
 
+{ #category : #'keys - letters' }
+BlKeyCombinationBuilder >> t [
+	combination with: (BlSingleKeyCombination new key: BlKeyboardKey t)
+]
+
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> tab [
 	combination
