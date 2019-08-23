@@ -23,11 +23,28 @@ BlMorphicWindow >> borderless: aBoolean [
 			makeBorderless;
 			beWithoutGrips;
 			removeLabelArea ]
+		ifFalse: [
+			self makeBordered.
+			self beWithGrips
+		]
 ]
 
 { #category : #accessing }
 BlMorphicWindow >> form: aForm [
 	spaceHostMorph form: aForm
+]
+
+{ #category : #accessing }
+BlMorphicWindow >> fullsize: aBoolean [
+	"Make window borderless if true is given"
+	
+	aBoolean
+		ifTrue: [
+			label delete.
+			spaceHostMorph layoutFrame topOffset: spaceHostMorph layoutFrame topOffset - labelArea height ]
+		ifFalse: [ 
+			
+		]
 ]
 
 { #category : #accessing }
@@ -48,7 +65,6 @@ BlMorphicWindow >> initialize [
 
 	spaceHostMorph := BlMorphicSpaceHostMorph new.
 	self addMorph: spaceHostMorph fullFrame: (0@0 extent: 1@1).
-
 	preventResize := false
 ]
 

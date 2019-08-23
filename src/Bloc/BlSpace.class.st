@@ -30,6 +30,7 @@ Class {
 		'focused',
 		'title',
 		'fullscreen',
+		'fullsize',
 		'layoutError',
 		'tasks',
 		'time',
@@ -550,6 +551,29 @@ BlSpace >> fullscreen: aBoolean [
 
 	fullscreen := aBoolean.
 	 self hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
+]
+
+{ #category : #'window - properties' }
+BlSpace >> fullsize [
+	"Return true if an underlying window is in fullsize mode,
+	false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
+	and has no window title"
+	<return: #Boolean>
+
+	^ self 
+		hostSpaceDo: [ :aHostSpace | aHostSpace fullsize ]
+		ifAbsent: [ fullsize ]
+]
+
+{ #category : #'window - properties' }
+BlSpace >> fullsize: aBoolean [
+	"Switch underlying window to fullsize if true is given
+	and exit fullsize mode if false is given.
+	See ${method:TBlSpaceProperties>>#fullsize}"
+
+	fullsize := aBoolean.
+	 self hostSpaceDo: [ :aHostSpace | aHostSpace fullsize: aBoolean ]
 ]
 
 { #category : #'accessing - processors' }

@@ -143,7 +143,8 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 			withDecorations: aSpace borderless not;
 			withTransparency: aSpace borderless;
 			withResizable: aSpace resizable;
-			withMaximized: aSpace maximized.
+			withMaximized: aSpace maximized;
+			withFullSize: aSpace fullsize.
 		
 		windowedContext := GlutinEventsFetcher default eventsLoop createWindow: windowBuilder.
 		

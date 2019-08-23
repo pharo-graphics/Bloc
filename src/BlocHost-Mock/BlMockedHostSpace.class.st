@@ -20,7 +20,8 @@ Class {
 		'renderCount',
 		'isFullscreen',
 		'position',
-		'title'
+		'title',
+		'isFullsize'
 	],
 	#category : #'BlocHost-Mock-Host'
 }
@@ -116,6 +117,24 @@ BlMockedHostSpace >> fullscreen: aBoolean [
 	and exit fullscreen mode if false is given"
 
 	isFullscreen := aBoolean
+]
+
+{ #category : #'window - properties' }
+BlMockedHostSpace >> fullsize [
+	"Return true if an underlying window is in fullsize mode,
+	false otherwise"
+	<return: #Boolean>
+
+	^ isFullsize
+]
+
+{ #category : #'window - properties' }
+BlMockedHostSpace >> fullsize: aBoolean [
+	"Switch underlying window to fullsize if true is given
+	and exit fullsize mode if false is given.
+	See ${method:TBlSpaceProperties>>#fullsize}"
+
+	isFullsize := aBoolean
 ]
 
 { #category : #'host space - testing' }

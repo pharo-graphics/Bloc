@@ -10,10 +10,28 @@ Class {
 	#traits : 'TBlHostSpace',
 	#classTraits : 'TBlHostSpace classTrait',
 	#instVars : [
-		'morphicWindow'
+		'morphicWindow',
+		'isFullSize',
+		'isBorderless'
 	],
 	#category : #'BlocHost-Morphic-Host - Window'
 }
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> borderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	<return: #Boolean>
+	
+	^ isBorderless
+]
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> borderless: aBoolean [
+	"Make host window borderless if true is given"
+
+	isBorderless := aBoolean.
+	morphicWindow borderless: aBoolean
+]
 
 { #category : #'host space - accessing' }
 BlMorphicWindowHostSpace >> canvasExtent [
@@ -39,9 +57,33 @@ BlMorphicWindowHostSpace >> densityDpi [
 	^ 96.0
 ]
 
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> fullsize [
+	"Return true if an underlying window is in fullsize mode,
+	false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
+	and has no window title"
+	<return: #Boolean>
+
+	^ isFullSize
+]
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> fullsize: aBoolean [
+	"Switch underlying window to fullsize if true is given
+	and exit fullsize mode if false is given.
+	See ${method:TBlSpaceProperties>>#fullsize}"
+
+	isFullSize := aBoolean.
+	morphicWindow fullsize: aBoolean.
+]
+
 { #category : #initialization }
 BlMorphicWindowHostSpace >> initialize [
-	super initialize
+	super initialize.
+	
+	isBorderless := false.
+	isFullSize := false
 ]
 
 { #category : #'private - accessing' }
