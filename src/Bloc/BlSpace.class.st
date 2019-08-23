@@ -724,6 +724,7 @@ BlSpace >> initialize [
 	self resizable: true.
 	self borderless: false.
 	self fullscreen: false.
+	self fullsize: false.
 	self title: self defaultTitle.
 	self focused: false.
 
