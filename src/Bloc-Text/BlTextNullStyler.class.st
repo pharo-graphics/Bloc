@@ -14,4 +14,5 @@ BlTextNullStyler >> style: aBrText [
 
 { #category : #private }
 BlTextNullStyler >> style: aBrText afterDo: aBlock [
+	aBlock value
 ]
