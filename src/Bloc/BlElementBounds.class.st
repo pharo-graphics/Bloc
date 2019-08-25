@@ -185,9 +185,10 @@ BlElementBounds >> localBoundsToSpace: aBounds [
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
 	<return: #BlBounds>
-	| aCurrentElement |
+	| aCurrentElement aTopMostParent |
 
 	aCurrentElement := self referenceElement.
+	aTopMostParent := aCurrentElement topMostParent.
 
 	[
 		"first apply transformation if we have one"
@@ -200,7 +201,7 @@ BlElementBounds >> localBoundsToSpace: aBounds [
 	"we must evaluate a transformation block at least once even if there is no parent"
 	doWhileTrue: [
 		| hasParent |
-		hasParent := aCurrentElement hasParent.
+		hasParent := aCurrentElement hasParent and: [ aTopMostParent ~~ aCurrentElement parent ].
 		hasParent ifTrue: [ aCurrentElement := aCurrentElement parent ].
 		hasParent ].
 
