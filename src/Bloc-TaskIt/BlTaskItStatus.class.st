@@ -23,6 +23,28 @@ Class {
 	#category : #'Bloc-TaskIt-Status'
 }
 
+{ #category : #opening }
+BlTaskItStatus class >> openStatusWindow [
+	<script>
+
+	"Open a simple window displaying the current status.
+	This opens a simple BlSpace to avoid the use of TaskIt (which is probably not working, triggering the desire to see the status :-))"
+
+	| editor space |
+	editor := BrEditorElement new 
+		padding: (BlInsets all: 10);
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ];
+		editor: (BrTextEditor new 
+			text: self new statusString asRopedText glamorousRegularFont).
+	space := BlSpace new.
+	space root addChild: editor.
+	space title: 'TaskIt Status Summary'.
+	space show.
+
+]
+
 { #category : #private }
 BlTaskItStatus class >> sampleLoop [
 
