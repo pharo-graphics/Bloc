@@ -20,6 +20,9 @@ BlTktCommonQueueWorkerPool >> ensureIsWorking [
 			failedTasks
 				ifNotEmpty:
 					[ self logCr: failedTasks size asString , ' Failed tasks encountered' ].
+			(workers reject: #isRunning)
+				do: [ :w | 
+					workers remove: w ].
 			self privateManageWorkersBefore.
 			self privateManageWorkersAfter ]
 ]
