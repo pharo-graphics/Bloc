@@ -11,12 +11,15 @@ BlElement >> asSpartaForm [
 		merge: self visualBounds.
 
 	aBoundsInParent := self localBoundsToParent: aBoundsInLocal copy.
+	aBoundsInParent := aBoundsInParent scaleBy: self globalScale.
 
 	aCanvas := Bloc preferableSpartaCanvas extent: (aBoundsInParent extent max: 1@1).
-
 	aCanvas transform
-		by: [ :aTransform | aTransform translateBy: aBoundsInParent origin negated]
-		during: [ self fullDrawOnSpartaCanvas: aCanvas ].
+		by: [ :aTransform | aTransform
+				translateBy: aBoundsInParent origin;
+				scaleBy: self globalScale;
+				translateBy: aBoundsInParent origin negated ]
+		during: [ self fullDrawOnSpartaCanvas: aCanvas	 ].
 
 	^ aCanvas asForm
 ]

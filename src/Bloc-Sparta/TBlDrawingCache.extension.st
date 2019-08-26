@@ -5,7 +5,7 @@ TBlDrawingCache >> drawMeWithEffectsOnCanvas: aCanvas [
 	| aGlobalToLocalMatrix aGlobalToLocalScale aGlobalToLocalScaleMatrix aLocalToGlobalScaleMatrix |
 
 	self damageReported: false.
-	
+
 	aGlobalToLocalMatrix := BlMatrix2D new matrix: aCanvas transform current.
 	aGlobalToLocalScale := aGlobalToLocalMatrix decomposition scale.
 
