@@ -9,7 +9,9 @@ Class {
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
-	^ true
+	"Only works in headful vm"
+
+	^ (Smalltalk os windowSystemName isNil or: [ Smalltalk os windowSystemName = 'null' ]) not
 ]
 
 { #category : #'driver selection' }
@@ -73,6 +75,11 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 		detachUniverse.
 
 	aSpace detachHostSpace
+]
+
+{ #category : #'host - testing' }
+BlMorphicWindowHost >> isStillAvailable [
+	^ self class isSupported
 ]
 
 { #category : #'host - testing' }
