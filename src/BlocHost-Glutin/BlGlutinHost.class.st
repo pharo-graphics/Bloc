@@ -9,7 +9,8 @@ Class {
 		'HostSpaceRegistry',
 		'HostSpaceRegistryMutex',
 		'IsRunning',
-		'UIProcess'
+		'UIProcess',
+		'UserInterruptEventHandler'
 	],
 	#category : #'BlocHost-Glutin'
 }
@@ -63,6 +64,14 @@ BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
 			ifPresent: aBlock ]
 ]
 
+{ #category : #'class initialization' }
+BlGlutinHost class >> initialize [
+	EventsSensor := BlGlutinWindowEventsSensor new.
+	UserInterruptEventHandler := BlGlutinUserInterruptHandler new.
+	
+	SessionManager default registerUserClassNamed: self name
+]
+
 { #category : #'driver selection' }
 BlGlutinHost class >> isSupported [
 	"Only works in headless vm"
@@ -87,9 +96,38 @@ BlGlutinHost class >> priority [
 	^ 1
 ]
 
+{ #category : #'class initialization' }
+BlGlutinHost class >> shutDown: isQuitting [
+	isQuitting
+		ifFalse: [ ^ self ].
+
+	IsRunning
+		ifTrue: [ self terminateUIProcess ]
+]
+
 { #category : #private }
 BlGlutinHost class >> spaceRegistry [
 	^ HostSpaceRegistry ifNil: [ HostSpaceRegistry := WeakIdentityValueDictionary new ]
+]
+
+{ #category : #'class initialization' }
+BlGlutinHost class >> startUp: isImageStarting [
+	isImageStarting
+		ifFalse: [ ^ self ].
+
+	IsRunning
+		ifTrue: [ self forceStartNewUIProcess ]
+]
+
+{ #category : #'api - ui process' }
+BlGlutinHost class >> terminateUIProcess [
+	| aProcessToTerminate |
+	
+	self uiProcessDo: [ :aProcess | aProcessToTerminate := aProcess ].
+	UIProcess := nil.
+	aProcessToTerminate terminate
+	
+	"if called from UI thread nothing past this line will be executed"
 ]
 
 { #category : #'api - ui process' }
@@ -244,23 +282,24 @@ BlGlutinHost >> start [
 
 	IsRunning := true.
 	
-	EventsSensor := BlGlutinWindowEventsSensor new.
-	
 	self class forceStartNewUIProcess.
 
-	GlutinEventsFetcher default eventHandlers addAll: {
-		BlGlutinUserInterruptHandler new.
-		EventsSensor }.
-
+	GlutinEventsFetcher default
+		addEventHandler: UserInterruptEventHandler;
+		addEventHandler: EventsSensor.
 	GlutinEventsFetcher install
 ]
 
 { #category : #'host - api' }
 BlGlutinHost >> stop [
+	| aUIProcess |
 	IsRunning := false.
-	
-	UIProcess ifNotNil: #terminate.
-	UIProcess := nil
+
+	NonInteractiveTranscript stdout show: 'terminate process ', UIProcess name; cr. 
+
+	aUIProcess := UIProcess.
+	UIProcess := nil.
+	aUIProcess ifNotNil: #terminate.
 ]
 
 { #category : #'host - testing' }

@@ -68,6 +68,7 @@ BlParallelUniverse class >> morphic [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
+	| aHost |
 	"It should be possible to close a space from the other thread"
 
 	self
@@ -98,12 +99,20 @@ BlParallelUniverse >> closeSpace: aSpace [
 	
 	"we have to defer the check to the next frame, otherwise the UI loop may be terminated
 	before frame finishes"
+	NonInteractiveTranscript stdout show: 'about to defer host close action'; cr.
 	
-	self defer: [
-		"as the last step we may want to stop the host. It may terminate
-		the current process, so we should do it at last"
-		(spaceManager hasSpaces not and: [ aSpace host isRunning ])
-			ifTrue: [ aSpace host stop ] ].
+	"we have to store a reference to an original host, because it may potentially change"
+	aHost := aSpace host.
+	(spaceManager hasSpaces not and: [ aHost isRunning ])
+		ifFalse: [
+			self defer: [
+				"as the last step we may want to stop the host. It may terminate
+				the current process, so we should do it at last"
+				NonInteractiveTranscript stdout show: spaceManager hasSpaces not; cr.
+				NonInteractiveTranscript stdout show: aHost isRunning; cr.
+				(spaceManager hasSpaces not and: [ aHost isRunning ])
+					ifTrue: [ aHost stop ] ].
+		].
 ]
 
 { #category : #'api - spaces' }
