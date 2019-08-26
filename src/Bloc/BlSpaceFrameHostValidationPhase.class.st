@@ -16,9 +16,18 @@ BlSpaceFrameHostValidationPhase >> name [
 
 { #category : #actions }
 BlSpaceFrameHostValidationPhase >> reopenSpace: aSpace [
-	aSpace close.
-	aSpace host: BlHost pickHost.
-	aSpace show
+	| aCloseEventHandler |
+	
+	aCloseEventHandler := nil.
+	aCloseEventHandler := BlEventHandler
+		on: BlSpaceClosedEvent
+		do: [ :anEvent |
+			aSpace removeEventHandler: aCloseEventHandler.
+			aSpace host: BlHost pickHost.
+			aSpace show ].
+	
+	aSpace addEventHandler: aCloseEventHandler.
+	aSpace close
 ]
 
 { #category : #actions }

@@ -1100,6 +1100,13 @@ BlSpace >> ungrabFocus [
 	self focused: false
 ]
 
+{ #category : #accessing }
+BlSpace >> universe [
+	<return: #BlParallelUniverse>
+
+	^ BlParallelUniverse forHost: self host class
+]
+
 { #category : #'cursor managing' }
 BlSpace >> updateCursor: aBlCursor [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]

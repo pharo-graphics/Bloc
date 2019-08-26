@@ -8,7 +8,7 @@ space := BlSpace new.
 space
 	addEventHandlerOn: BlSpaceClosedEvent
 	do: [ self inform: 'Space closed' ].
-space show
+space close
 ]]]
 "
 Class {

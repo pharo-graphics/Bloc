@@ -8,7 +8,6 @@ Class {
 		'EventsSensor',
 		'HostSpaceRegistry',
 		'HostSpaceRegistryMutex',
-		'IsRunning',
 		'UIProcess',
 		'UserInterruptEventHandler'
 	],
@@ -67,9 +66,15 @@ BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
 { #category : #'class initialization' }
 BlGlutinHost class >> initialize [
 	EventsSensor := BlGlutinWindowEventsSensor new.
-	UserInterruptEventHandler := BlGlutinUserInterruptHandler new.
-	
-	SessionManager default registerUserClassNamed: self name
+	UserInterruptEventHandler := BlGlutinUserInterruptHandler new
+]
+
+{ #category : #'host - api' }
+BlGlutinHost class >> isRunning [
+	<return: #Boolean>
+
+	self uiProcessDo: [ :aUIProcess | ^ aUIProcess isTerminated not ].
+	^ false
 ]
 
 { #category : #'driver selection' }
@@ -96,27 +101,29 @@ BlGlutinHost class >> priority [
 	^ 1
 ]
 
-{ #category : #'class initialization' }
-BlGlutinHost class >> shutDown: isQuitting [
-	isQuitting
-		ifFalse: [ ^ self ].
-
-	IsRunning
-		ifTrue: [ self terminateUIProcess ]
-]
-
 { #category : #private }
 BlGlutinHost class >> spaceRegistry [
 	^ HostSpaceRegistry ifNil: [ HostSpaceRegistry := WeakIdentityValueDictionary new ]
 ]
 
-{ #category : #'class initialization' }
-BlGlutinHost class >> startUp: isImageStarting [
-	isImageStarting
-		ifFalse: [ ^ self ].
+{ #category : #'host - api' }
+BlGlutinHost class >> start [
+	self forceStartNewUIProcess.
 
-	IsRunning
-		ifTrue: [ self forceStartNewUIProcess ]
+	GlutinEventsFetcher default
+		addEventHandler: UserInterruptEventHandler;
+		addEventHandler: EventsSensor.
+	GlutinEventsFetcher install
+]
+
+{ #category : #'host - api' }
+BlGlutinHost class >> stop [
+	| aUIProcess |
+	NonInteractiveTranscript stdout show: 'terminate process ', UIProcess name; cr. 
+
+	aUIProcess := UIProcess.
+	UIProcess := nil.
+	aUIProcess ifNotNil: #terminate
 ]
 
 { #category : #'api - ui process' }
@@ -230,7 +237,7 @@ BlGlutinHost >> isRunning [
 	"Return true if host is initialized and running"
 	<return: #Boolean>
 
-	^ IsRunning ifNil: [ false ]
+	^ self class isRunning
 ]
 
 { #category : #'host - testing' }
@@ -277,29 +284,12 @@ BlGlutinHost >> spaceRegistry [
 
 { #category : #'host - api' }
 BlGlutinHost >> start [
-	self isRunning
-		ifTrue: [ ^ self ].
-
-	IsRunning := true.
-	
-	self class forceStartNewUIProcess.
-
-	GlutinEventsFetcher default
-		addEventHandler: UserInterruptEventHandler;
-		addEventHandler: EventsSensor.
-	GlutinEventsFetcher install
+	self class start
 ]
 
 { #category : #'host - api' }
 BlGlutinHost >> stop [
-	| aUIProcess |
-	IsRunning := false.
-
-	NonInteractiveTranscript stdout show: 'terminate process ', UIProcess name; cr. 
-
-	aUIProcess := UIProcess.
-	UIProcess := nil.
-	aUIProcess ifNotNil: #terminate.
+	self class stop
 ]
 
 { #category : #'host - testing' }
