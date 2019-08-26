@@ -69,12 +69,13 @@ BlParallelUniverse class >> morphic [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
-	self defer: [ self closeSpaceSynchronously: aSpace ].
+	self defer: [ self closeSpaceSynchronously: aSpace ]
 ]
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 	| aHost |
+	
 	self
 		assert: [ aSpace isNotNil ]
 		description: [ 'Space must not be nil' ].
@@ -82,6 +83,20 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 	"If space is not event opened we should do nothing"
 	aSpace isOpened
 		ifFalse: [ ^ self ].
+		
+	"we have to defer the check to the next frame, otherwise the UI loop may be terminated
+	before frame finishes"
+
+	"we have to store a reference to the original host because it may potentially change.
+	for example assume the following:
+	[[[
+	aSpace close.
+	aSpace host: BlHost pickHost.
+	aSpace show
+	]]]
+
+	the actual termination of the host may happen after a host of the space is changed"
+	aHost := aSpace host.
 	
 	"first remove space itself from space manager, to break any recursions"
 	spaceManager removeSpace: aSpace.
@@ -101,25 +116,11 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Host space must not have a host!' ].
 	
-	"we have to defer the check to the next frame, otherwise the UI loop may be terminated
-	before frame finishes"
-
-	"we have to store a reference to the original host because it may potentially change.
-	for example assume the following:
-	[[[
-	aSpace close.
-	aSpace host: BlHost pickHost.
-	aSpace show
-	]]]
-
-	the actual termination of the host may happen after a host of the space is changed"
-	aHost := aSpace host.
 	(spaceManager hasSpaces not and: [ aHost isRunning ])
-		ifFalse: [
+		ifTrue: [
 			self defer: [
 				"as the last step we may want to stop the host. It may terminate
 				the current process, so we should do it at last"
-				NonInteractiveTranscript stdout show: ('{1} iss running: {2}' format: { aHost . aHost isRunning }); cr.
 				(spaceManager hasSpaces not and: [ aHost isRunning ])
 					ifTrue: [ aHost stop ] ] ]
 ]

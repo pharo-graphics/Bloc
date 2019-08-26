@@ -119,7 +119,6 @@ BlGlutinHost class >> start [
 { #category : #'host - api' }
 BlGlutinHost class >> stop [
 	| aUIProcess |
-	NonInteractiveTranscript stdout show: 'terminate process ', UIProcess name; cr. 
 
 	aUIProcess := UIProcess.
 	UIProcess := nil.
