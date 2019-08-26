@@ -84,8 +84,7 @@ BlParallelUniverse >> closeSpace: aSpace [
 	"then destroy host space"
 	aSpace hasHostSpace
 		ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
-	
-	
+
 	"Notify root element that it is no longer in scene graph"
 	aSpace root dispatchRemovedFromSceneGraph.
 	"Send space closed event.
@@ -96,11 +95,15 @@ BlParallelUniverse >> closeSpace: aSpace [
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Host space must not have a host!' ].
-
-	"as the last step we may want to stop the host. It may terminate
-	the current process, so we should do it at last"
-	(spaceManager hasSpaces not and: [ aSpace host isRunning ])
-		ifTrue: [ aSpace host stop ].
+	
+	"we have to defer the check to the next frame, otherwise the UI loop may be terminated
+	before frame finishes"
+	
+	self defer: [
+		"as the last step we may want to stop the host. It may terminate
+		the current process, so we should do it at last"
+		(spaceManager hasSpaces not and: [ aSpace host isRunning ])
+			ifTrue: [ aSpace host stop ] ].
 ]
 
 { #category : #'api - spaces' }
