@@ -79,7 +79,7 @@ BlArrowheadExamples >> curveWithCircleArrowheads [
 	curve fromHead: self circleArrowhead.
 	curve toHead: self circleArrowhead.
 	curve border: (BlBorder paint: self curveColor width: self curveWidth).
-	
+
 	^ container
 ]
 

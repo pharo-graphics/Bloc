@@ -4,6 +4,10 @@ Extension { #name : #TBlDrawingCache }
 TBlDrawingCache >> drawMeWithEffectsOnCanvas: aCanvas [
 	| aGlobalToLocalMatrix aGlobalToLocalScale aGlobalToLocalScaleMatrix aLocalToGlobalScaleMatrix |
 
+	self withAllParentsDo: [ :eachElement |
+		(self class isDrawingCacheEnabledFor: eachElement)
+			ifFalse: [ ^ super drawMeWithEffectsOnCanvas: aCanvas ] ].
+
 	self damageReported: false.
 
 	aGlobalToLocalMatrix := BlMatrix2D new matrix: aCanvas transform current.

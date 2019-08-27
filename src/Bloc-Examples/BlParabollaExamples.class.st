@@ -261,9 +261,9 @@ BlParabollaExamples >> relativeCurvatureWithoutDecorations [
 	<gtExample>	
 	| redArc attachFrom attachTo |
 	
-	attachFrom := (self attachPoint opacity: 0.5) relocate: 100 @ 100.
-	attachTo := (self attachPoint opacity: 0.5) relocate: 300 @ 400.
-	
+	attachFrom := (self attachPoint opacity: 0.5) relocate: 420 @ 320.
+	attachTo := (self attachPoint opacity: 0.5) relocate: 120 @ 20.
+
 	redArc := self redArc.
 	"order does not matter"
 	redArc curvatureFraction: 0.5.

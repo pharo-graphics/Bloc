@@ -141,8 +141,8 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 	(anEffectBounds width min: anEffectBounds height) < 0.5
 		ifTrue: [ ^ self ].
 
-	(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
-		ifFalse: [ ^ self ].
+	"(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
+		ifFalse: [ ^ self ]."
 
 	aCanvas layer
 		alpha: self opacity;

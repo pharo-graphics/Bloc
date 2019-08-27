@@ -13,6 +13,27 @@ Trait {
 	#category : #'Bloc-Utilities - Drawing Cache'
 }
 
+{ #category : #'api - drawing cache' }
+TBlDrawingCache classSide >> disableDrawingCacheFor: anElement [
+	anElement userData
+		at: #blDrawingCacheEnabled
+		put: false
+]
+
+{ #category : #'api - drawing cache' }
+TBlDrawingCache classSide >> enableDrawingCacheFor: anElement [
+	anElement userData
+		at: #blDrawingCacheEnabled
+		put: true
+]
+
+{ #category : #'api - drawing cache' }
+TBlDrawingCache classSide >> isDrawingCacheEnabledFor: anElement [
+	^ anElement userData
+		at: #blDrawingCacheEnabled
+		ifAbsent: [ true ]
+]
+
 { #category : #'private - accessing' }
 TBlDrawingCache >> cachedSurface [
 	^ blCachedSurface
