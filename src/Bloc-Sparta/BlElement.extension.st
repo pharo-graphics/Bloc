@@ -2,7 +2,7 @@ Extension { #name : #BlElement }
 
 { #category : #'*Bloc-Sparta' }
 BlElement >> asSpartaForm [
-	| aCanvas aBoundsInParent aBoundsInLocal |
+	| aCanvas aBoundsInLocal aBoundsInParent aScaledBoundsInParent |
 
 	self forceLayout.
 
@@ -11,15 +11,12 @@ BlElement >> asSpartaForm [
 		merge: self visualBounds.
 
 	aBoundsInParent := self localBoundsToParent: aBoundsInLocal copy.
-	aBoundsInParent := aBoundsInParent scaleBy: self globalScale.
+	aScaledBoundsInParent := aBoundsInParent scaleBy: self globalScale.
 
-	aCanvas := Bloc preferableSpartaCanvas extent: (aBoundsInParent extent max: 1@1).
+	aCanvas := Bloc preferableSpartaCanvas extent: (aScaledBoundsInParent extent max: 1@1) ceiling.
 	aCanvas transform
-		by: [ :aTransform | aTransform
-				translateBy: aBoundsInParent origin;
-				scaleBy: self globalScale;
-				translateBy: aBoundsInParent origin negated ]
-		during: [ self fullDrawOnSpartaCanvas: aCanvas	 ].
+		by: [ :aTransform | aTransform scaleBy: self globalScale ]
+		during: [ self drawMeAndChildrenOnSpartaCanvas: aCanvas	 ].
 
 	^ aCanvas asForm
 ]
