@@ -119,6 +119,20 @@ BlTktWorkerProvider class >> serviceNamed: aServiceName ifMissing: aValuable [
 		aPoolOrNil ifNil: aValuable ]
 ]
 
+{ #category : #factory }
+BlTktWorkerProvider class >> spotterPool [
+
+	^ self 
+		serviceNamed: self spotterPoolName 
+		ifMissing: [ self new spotterPool; service ]
+]
+
+{ #category : #defaults }
+BlTktWorkerProvider class >> spotterPoolName [
+
+	^ 'Spotter Search'
+]
+
 { #category : #'configurations - basic' }
 BlTktWorkerProvider >> exemplify [
 	self exemplifyName.
@@ -282,6 +296,23 @@ BlTktWorkerProvider >> service [
 BlTktWorkerProvider >> serviceManager [
 	<return: #TKTServiceManager>
 	^ self class serviceManager
+]
+
+{ #category : #'configurations - pools' }
+BlTktWorkerProvider >> spotterPool [
+	"Spotter search processing: maxPoolSize: 1, priority: 37"
+	self
+		name: self class spotterPoolName;
+		priorityQueue;
+		poolMaxSize: 1;
+		spotterPriority
+]
+
+{ #category : #'configurations - priorities' }
+BlTktWorkerProvider >> spotterPriority [
+	"Process priority for spotter search calculation.  Higher than UI background processing."
+
+	self processPriority: Processor userSchedulingPriority - 4
 ]
 
 { #category : #accessing }
