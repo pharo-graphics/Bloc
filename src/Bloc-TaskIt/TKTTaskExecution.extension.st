@@ -1,6 +1,13 @@
 Extension { #name : #TKTTaskExecution }
 
 { #category : #'*Bloc-TaskIt' }
+TKTTaskExecution >> entryIdentifier [
+	"Answer the queue entry identifier of the receiver when submitted as a task to TaskIt."
+
+	^ task entryIdentifier
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTTaskExecution >> entryPriority [
 	"Answer the priority of the receiver when submitted as a task to TaskIt. 0 is highest priority"
 

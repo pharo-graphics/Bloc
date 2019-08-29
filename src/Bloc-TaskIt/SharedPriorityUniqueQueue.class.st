@@ -84,7 +84,7 @@ SharedPriorityUniqueQueue >> flush [
 	"Remove from the queue all objects
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super flush ] valueWithoutUserInterruption
+	^[ super flush ] valueWithoutTermination
 ]
 
 { #category : #flushing }
@@ -92,7 +92,7 @@ SharedPriorityUniqueQueue >> flushAllSuchThat: aBlock [
 	"Remove from the queue all objects that satisfy aBlock.
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super flushAllSuchThat: aBlock ] valueWithoutUserInterruption 
+	^[ super flushAllSuchThat: aBlock ] valueWithoutTermination 
 ]
 
 { #category : #size }
@@ -100,7 +100,7 @@ SharedPriorityUniqueQueue >> isEmpty [
 	"Answer a boolean indicating whether the receiver has no entries.
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super isEmpty ] valueWithoutUserInterruption 
+	^[ super isEmpty ] valueWithoutTermination 
 ]
 
 { #category : #accessing }
@@ -108,7 +108,7 @@ SharedPriorityUniqueQueue >> next [
 	^[ monitor critical: [
 		monitor waitWhile: [ items isEmpty ].
 		self basicNext ] 
-			] valueWithoutUserInterruption
+			] valueWithoutTermination
 
 ]
 
@@ -116,7 +116,7 @@ SharedPriorityUniqueQueue >> next [
 SharedPriorityUniqueQueue >> nextOrNil [
 	^[ monitor critical: [
 		items isEmpty ifTrue: [ nil ] ifFalse: [ self basicNext ] ]
-			] valueWithoutUserInterruption
+			] valueWithoutTermination
 ]
 
 { #category : #accessing }
@@ -126,7 +126,7 @@ SharedPriorityUniqueQueue >> nextOrNilSuchThat: aBlock [
 	NOTA BENE:  aBlock MUST NOT contain a non-local return (^).
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super nextOrNilSuchThat: aBlock ] valueWithoutUserInterruption
+	^[ super nextOrNilSuchThat: aBlock ] valueWithoutTermination
 ]
 
 { #category : #accessing }
@@ -137,11 +137,11 @@ SharedPriorityUniqueQueue >> nextPut: anObject [
 		result := anObject entryIdentifier ifNotNil: [ :identifier |
 			items detect: [ :each | each entryIdentifier = identifier ]
 					ifFound: [ :existing | existing ]
-					ifNone: [ [ itemAdded := true. items addLast: anObject ] valueWithoutUserInterruption ] ]
+					ifNone: [ [ itemAdded := true. items addLast: anObject ] valueWithoutTermination ] ]
 			ifNil: [ itemAdded := true. items addLast: anObject ].
 		itemAdded ifTrue: [ monitor signal ].
 		result ]
-			] valueWithoutUserInterruption.
+			] valueWithoutTermination.
 
 ]
 
@@ -152,7 +152,7 @@ SharedPriorityUniqueQueue >> peek [
 	no object has been sent, return nil
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ monitor critical: [ self basicPeek ] ] valueWithoutUserInterruption
+	^[ monitor critical: [ self basicPeek ] ] valueWithoutTermination
 ]
 
 { #category : #copying }
@@ -160,7 +160,7 @@ SharedPriorityUniqueQueue >> postCopy [
 	"Finish off the copy operation.
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super postCopy ] valueWithoutUserInterruption
+	^[ super postCopy ] valueWithoutTermination
 ]
 
 { #category : #accessing }
@@ -168,7 +168,7 @@ SharedPriorityUniqueQueue >> removeAll [
 	"Empty the queue.
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super removeAll ] valueWithoutUserInterruption
+	^[ super removeAll ] valueWithoutTermination
 ]
 
 { #category : #accessing }
@@ -176,5 +176,5 @@ SharedPriorityUniqueQueue >> size [
 	"Answer the number of entries in the receiver.
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super size ] valueWithoutUserInterruption
+	^[ super size ] valueWithoutTermination
 ]

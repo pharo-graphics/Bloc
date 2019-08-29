@@ -75,3 +75,23 @@ BlTktCommonQueueWorkerPool >> processProvider [
 	<return: #TKTTaskItProcessProvider>
 	^ BlTktProcessProvider new processPriority: self processPriority
 ]
+
+{ #category : #'public - mutexed' }
+BlTktCommonQueueWorkerPool >> scheduleTaskExecution: aTaskExecution [
+
+	| add |
+	mutex critical: [ 
+		self ensureIsBeingWatched.
+		self privateManageWorkersBefore.
+		"Don't schedule the task if it is already being executed"
+		add := true.
+		aTaskExecution entryIdentifier ifNotNil: [ :identifier |
+			workers
+				detect: [ :each | each entryIdentifier = identifier ] 
+				ifFound: [ :entry |
+					self flag: #remove.
+					StringSignal emit: 'worker duplicate found'.
+					add := false ] ].
+		add ifTrue: [ taskQueue nextPut: aTaskExecution ].
+		self privateManageWorkersAfter ]
+]

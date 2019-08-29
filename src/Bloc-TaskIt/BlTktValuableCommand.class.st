@@ -18,6 +18,14 @@ BlTktValuableCommand >> ensureName [
 ]
 
 { #category : #accessing }
+BlTktValuableCommand >> entryIdentifier [
+	"Answer the identity of the receiver for task scheduling.
+	Defer to my valuable."
+	
+	^valuable entryIdentifier
+]
+
+{ #category : #accessing }
 BlTktValuableCommand >> entryPriority [
 
 	^valuable entryPriority
