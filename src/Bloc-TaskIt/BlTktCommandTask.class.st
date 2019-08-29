@@ -31,6 +31,14 @@ BlTktCommandTask >> configureTaskExecution: anExecution with: aRunner [
 ]
 
 { #category : #accessing }
+BlTktCommandTask >> entryIdentifier [
+	"Answer the queue entry identifier of the receiver for task scheduling.
+	Defer to my command."
+
+	^command entryIdentifier
+]
+
+{ #category : #accessing }
 BlTktCommandTask >> entryPriority [
 	"Answer the priority of the receiver for task scheduling.
 	Defer to my command."

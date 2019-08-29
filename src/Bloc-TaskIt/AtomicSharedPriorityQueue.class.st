@@ -36,7 +36,7 @@ AtomicSharedPriorityQueue >> next [
 	
 	[ | keepWaiting | 
 		keepWaiting := false. 
-		result := [ self nextIfNone: [ keepWaiting := true ] ] valueWithoutUserInterruption.
+		result := [ self nextIfNone: [ keepWaiting := true ] ] valueWithoutTermination.
 		keepWaiting ] whileTrue: [ self waitForNewItems ].
 
 	^ result

@@ -21,6 +21,17 @@ BlockClosure >> entryPriority [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+BlockClosure >> valueWithoutTermination [
+	"Evaluate the receiver ensuring that it can't be terminated by another process.
+	This relies on the VM allowing #ensure: blocks to complete before continuing terminating the process."
+
+	| result |
+
+	[ ] ensure: [ result := self value ].
+	^result
+]
+
+{ #category : #'*Bloc-TaskIt' }
 BlockClosure >> valueWithoutUserInterruption [
 	"Evaluate the receiver (block), without the possibility of preemption by other normal user priority processes.
 	This raises the priority to #userInterruptPriority+1 to prevent preemption by other user processes.  Processes such as those running at I/O or timing priority will still get priority"
