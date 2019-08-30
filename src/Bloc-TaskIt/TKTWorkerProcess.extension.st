@@ -7,6 +7,12 @@ TKTWorkerProcess >> entryIdentifier [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+TKTWorkerProcess >> isSuspended [
+
+	^process isSuspended
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTWorkerProcess >> taskName [
 
 	^currentTaskExecution

@@ -14,17 +14,18 @@ BlTktCommonQueueWorkerPool >> ensureIsWorking [
 	"Over-write to not terminate worker processes.
 	Trying to terminate idle workers produces more delays than resource saving."
 
-	mutex
-		critical: [ failedTasks
-				addAll: (self workers reject: #isRunning thenCollect: #currentTaskExecution).
-			failedTasks
-				ifNotEmpty:
-					[ self logCr: failedTasks size asString , ' Failed tasks encountered' ].
-			(workers reject: #isRunning)
-				do: [ :w | 
-					workers remove: w ].
-			self privateManageWorkersBefore.
-			self privateManageWorkersAfter ]
+	mutex critical: [ 
+		(workers reject: #isRunning) do: [ :worker | 
+			failedTasks add: worker currentTaskExecution.
+			workers remove: worker. ].
+		(workers select: #isSuspended) do: [ :worker | 
+			failedTasks add: worker currentTaskExecution.
+			worker stopAfterTaskCompleted.
+			workers remove: worker. ].
+		failedTasks ifNotEmpty:
+			[ self logCr: failedTasks size asString , ' Failed tasks encountered' ].
+		self privateManageWorkersBefore.
+		self privateManageWorkersAfter ]
 ]
 
 { #category : #initialization }

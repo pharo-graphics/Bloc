@@ -92,7 +92,7 @@ BaselineOfBloc >> postLoadBloc: spec [
 
 { #category : #'post load' }
 BaselineOfBloc >> postLoadDisableTaskItDebugger: spec [
-	(self class environment at: #TKTConfiguration) profile: (self class environment at: #TKTProfile) test.
+	(self class environment at: #TKTConfiguration) profile: (self class environment at: #TKTProfile) gtTest.
 	(self class environment at: #TKTDebugger) disable
 ]
 
