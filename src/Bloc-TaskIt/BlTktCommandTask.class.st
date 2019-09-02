@@ -46,6 +46,11 @@ BlTktCommandTask >> entryPriority [
 	^command entryPriority
 ]
 
+{ #category : #executing }
+BlTktCommandTask >> futureTaskExecutionFor: aRunner [
+	^ self configureTaskExecution: BlTktFutureExecution new with: aRunner
+]
+
 { #category : #accessing }
 BlTktCommandTask >> name [
 	<return: #String>

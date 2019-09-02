@@ -12,4 +12,5 @@ TKTRunningTaskState >> terminateTaskExecution: aTaskExecution reason: aReason [
 	timeoutContext privSender: activeContext.
 	aTaskExecution executionProcess suspendedContext: timeoutContext.
 	aTaskExecution setExplicitlyTerminatedStateWithReason: aReason.
+	BlTaskItSignal emitValuable: aTaskExecution task message: #terminationInjected.
 ]
