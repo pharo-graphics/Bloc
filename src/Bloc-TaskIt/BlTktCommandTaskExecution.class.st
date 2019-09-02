@@ -10,5 +10,7 @@ Class {
 BlTktCommandTaskExecution >> doExecuteTask [
 	^ [ super doExecuteTask ] 
 		on: BlTktExplicitlyTerminatedTaskException
-		do: [ :anException | nil ]
+		do: [ :anException | 
+			BlTaskItSignal emitValuable: task message: #commandTerminated.
+			nil ]
 ]
