@@ -10,7 +10,7 @@ Class {
 BlTktFutureExecution >> doExecuteTask [
 
 	[ future deploySuccess: task value ]
-		on: Error
+		on: BlTktExplicitlyTerminatedTaskException, Error
 		do: [ :error | error class = BlTktExplicitlyTerminatedTaskException 
 			ifTrue: [ 
 				BlTaskItSignal emitValuable: task message: #futureTerminated.
