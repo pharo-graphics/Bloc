@@ -42,13 +42,14 @@ BlFitLayout >> fit: anElement with: anExtentSpec [
 
 { #category : #layout }
 BlFitLayout >> layout: anElement in: aRectangle [
-
-	self normalize: anElement in: aRectangle.
+	| aDelta |
+	
+	aDelta := self normalizedDelta: anElement in: aRectangle.
 
 	self layoutIgnored: anElement.
 	self
 		layeredChildren: anElement
-		do: [ :aChild | aChild applyLayoutIn: aChild measuredBounds asRectangle ]
+		do: [ :aChild | aChild applyLayoutIn: (aChild measuredPosition + aDelta extent: aChild measuredExtent) ]
 ]
 
 { #category : #measure }
@@ -73,18 +74,11 @@ BlFitLayout >> measurePositions: anElement with: anExtentSpec [
 ]
 
 { #category : #measure }
-BlFitLayout >> normalize: anElement in: aRectangle [
+BlFitLayout >> normalizedDelta: anElement in: aRectangle [
 	| boundingBox delta |
 
 	boundingBox := self boundingBox: anElement.
 	delta := ((aRectangle extent / 2.0) - boundingBox center).
-	"bounding box depends on element positions, while position themselves depend on bounding box.
-	That is why we have to implement a cycle breaking mechanism. In our case it makes sense to
-	to not relocate children if delta is less then 1 point"
-	delta abs < (1@1)
-		ifTrue: [ ^ self ].
 
-	self
-		layeredChildren: anElement
-		do: [ :aChild | aChild measuredBounds position: aChild measuredBounds position + delta ]
+	^ delta
 ]
