@@ -233,19 +233,15 @@ BlImageCacheExamples >> smallCache [
 BlImageCacheExamples >> testCacheSizeFor [
 	<gtExample>
 
-	| cache requestedSize |
+	| cache |
 
 	cache := self smallCache.
 	self assert: (cache cacheSizeFor: 100) equals: 200.
 	self assert: (cache cacheSizeFor: 200) equals: 200.
-	requestedSize := cache defaultImageSizes second - 1.
-	self assert: (cache cacheSizeFor: requestedSize) equals: cache defaultImageSizes second.
-	requestedSize := cache defaultImageSizes second.
-	self assert: (cache cacheSizeFor: requestedSize) equals: cache defaultImageSizes second.
-	requestedSize := cache defaultImageSizes second + 1.
-	self assert: (cache cacheSizeFor: requestedSize) equals: cache defaultImageSizes last.
-	requestedSize := cache defaultImageSizes last + 1.
-	self assert: (cache cacheSizeFor: requestedSize) isNil.
+	self assert: (cache cacheSizeFor: 400-1) equals: 400.
+	self assert: (cache cacheSizeFor: 400) equals: 400.
+	self assert: (cache cacheSizeFor: 400+1) equals: 800.
+	self assert: (cache cacheSizeFor: 800+1) isNil.
 
 ]
 
