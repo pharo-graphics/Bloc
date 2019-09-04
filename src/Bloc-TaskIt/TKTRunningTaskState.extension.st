@@ -3,14 +3,17 @@ Extension { #name : #TKTRunningTaskState }
 { #category : #'*Bloc-TaskIt' }
 TKTRunningTaskState >> terminateTaskExecution: aTaskExecution reason: aReason [
 
-	| cancelState activeContext timeoutContext |
+	| cancelState taskProcess activeContext timeoutContext |
 
 	cancelState := BlTktExplicitlyTerminatedTaskState new reason: aReason.
-	
-	activeContext := aTaskExecution executionProcess suspendedContext.
+
+	taskProcess := aTaskExecution executionProcess.
+	taskProcess suspend.	
+	activeContext := taskProcess suspendedContext.
 	timeoutContext := [ cancelState signalExplicitlyTerminatedException ] asContext.
 	timeoutContext privSender: activeContext.
-	aTaskExecution executionProcess suspendedContext: timeoutContext.
+	taskProcess suspendedContext: timeoutContext.
 	aTaskExecution setExplicitlyTerminatedStateWithReason: aReason.
+	taskProcess resume.
 	BlTaskItSignal emitValuable: aTaskExecution task message: #terminationInjected.
 ]
