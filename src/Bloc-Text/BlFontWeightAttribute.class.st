@@ -28,6 +28,13 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlFontWeightAttribute class >> black [
+	^ self new
+		weight: LogicalFont weightBlack;
+		yourself
+]
+
+{ #category : #'instance creation' }
 BlFontWeightAttribute class >> bold [
 	^ self new
 		weight: LogicalFont weightBold;

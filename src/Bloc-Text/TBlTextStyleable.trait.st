@@ -21,6 +21,11 @@ TBlTextStyleable >> background: aPaint [
 ]
 
 { #category : #'api - text weight' }
+TBlTextStyleable >> black [
+	self attributesBuilder attribute: BlFontWeightAttribute black
+]
+
+{ #category : #'api - text weight' }
 TBlTextStyleable >> bold [
 	self attributesBuilder attribute: BlFontWeightAttribute bold
 ]
