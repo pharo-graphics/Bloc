@@ -75,7 +75,11 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [
-				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' ). ]. ].
+				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' ). ];
+			package: #'Bloc-Async' with: [
+				spec requires: #(#Bloc-TaskIt ). ];
+			package: #'Bloc-Images' with: [
+				spec requires: #(#Bloc-Async ). ]. ].
 
 ]
 
