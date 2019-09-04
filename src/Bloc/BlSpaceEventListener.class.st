@@ -8,7 +8,7 @@ Class {
 		'mouseDragListener',
 		'dragCollectionElement'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'as yet unclassified' }

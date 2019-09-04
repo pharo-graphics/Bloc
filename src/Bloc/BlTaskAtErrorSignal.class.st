@@ -21,7 +21,7 @@ Class {
 		'message',
 		'task'
 	],
-	#category : #'Bloc-TaskAt'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #accessing }

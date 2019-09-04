@@ -4,12 +4,31 @@ Class {
 	#instVars : [
 		'target'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Support'
 }
 
 { #category : #'as yet unclassified' }
 BlDragView class >> on: aForm [
 	^ self new target: aForm
+]
+
+{ #category : #'as yet unclassified' }
+BlDragView >> drawOnSpartaCanvas: aCanvas [
+	aCanvas fill
+		paint: self background fill;
+		path: (self geometry pathOnSpartaCanvas: aCanvas);
+		draw.
+			
+	aCanvas fill
+		paint: target;
+		path: (self geometry pathOnSpartaCanvas: aCanvas);
+		draw.
+
+	aCanvas stroke
+		paint: self border;
+		path: (self geometry pathOnSpartaCanvas: aCanvas);
+		width: self border width;
+		draw
 ]
 
 { #category : #initialization }

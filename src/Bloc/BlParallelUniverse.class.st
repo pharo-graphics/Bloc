@@ -118,6 +118,8 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 	
 	(spaceManager hasSpaces not and: [ aHost isRunning ])
 		ifTrue: [
+			"we must defer host shutdown to let spaces perform actions as a result
+			of a space closed event"
 			self defer: [
 				"as the last step we may want to stop the host. It may terminate
 				the current process, so we should do it at last"
@@ -142,9 +144,8 @@ BlParallelUniverse >> defaultEventListener [
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> defer: aValuable [
-	"#defer: can be used from any thread to execute a valuable in the GUI thread
-	You can use it to update the GUI states from any other thread.
-	The valuable will be evaluated as soon as possible."
+	"#defer: can be used from any thread to execute a valuable in the GUI thread at the beginning of the next pulse.
+	You can use it to update the GUI states from any other thread"
 
 	deferredActions nextPut: aValuable
 ]

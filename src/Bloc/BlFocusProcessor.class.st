@@ -5,7 +5,7 @@ Class {
 		'focusOwner',
 		'focusChain'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'event firing' }

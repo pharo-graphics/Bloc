@@ -8,7 +8,7 @@ Class {
 		'previousRunTime',
 		'isRunning'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #accessing }

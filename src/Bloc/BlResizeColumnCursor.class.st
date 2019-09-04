@@ -1,7 +1,7 @@
 Class {
 	#name : #BlResizeColumnCursor,
 	#superclass : #BlNamedCursor,
-	#category : #'Bloc-Space-Cursor'
+	#category : #'Bloc-Space - Cursor'
 }
 
 { #category : #converting }

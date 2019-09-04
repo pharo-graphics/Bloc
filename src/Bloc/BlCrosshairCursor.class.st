@@ -1,7 +1,7 @@
 Class {
 	#name : #BlCrosshairCursor,
 	#superclass : #BlNamedCursor,
-	#category : #'Bloc-Space-Cursor'
+	#category : #'Bloc-Space - Cursor'
 }
 
 { #category : #converting }

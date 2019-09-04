@@ -36,7 +36,7 @@ Class {
 	#classVars : [
 		'Default'
 	],
-	#category : #'Bloc-TaskAt'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #accessing }
