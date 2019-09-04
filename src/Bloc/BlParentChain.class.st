@@ -1,7 +1,7 @@
 Class {
 	#name : #BlParentChain,
 	#superclass : #DoubleLinkedList,
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Support'
 }
 
 { #category : #'instance creation' }
@@ -13,4 +13,13 @@ BlParentChain class >> of: anElement [
 		aChain addFirst: aParent ].
 
 	^ aChain
+]
+
+{ #category : #'as yet unclassified' }
+BlParentChain >> gtInspectorElementsIn: aComposite [
+	<gtInspectorPresentationOrder: 10>
+	
+	^ aComposite fastList
+		title: 'Elements';
+		display: [ self asArray ]
 ]

@@ -4,7 +4,7 @@ I make sure that a host space is valid and re-create it if needed
 Class {
 	#name : #BlSpaceFrameHostValidationPhase,
 	#superclass : #BlSpaceFramePhase,
-	#category : #'Bloc-Space-Frame'
+	#category : #'Bloc-Space - Frame'
 }
 
 { #category : #accessing }

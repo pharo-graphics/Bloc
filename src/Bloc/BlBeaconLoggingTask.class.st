@@ -12,7 +12,7 @@ Class {
 		'subtask',
 		'callingMethod'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #'instance creation' }

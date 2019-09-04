@@ -9,7 +9,7 @@ Class {
 		'previousShortcutTime',
 		'previousShortcutRepeatTime'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #accessing }

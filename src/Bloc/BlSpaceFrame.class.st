@@ -23,7 +23,7 @@ Class {
 		'phases',
 		'currentPhaseLink'
 	],
-	#category : #'Bloc-Space-Frame'
+	#category : #'Bloc-Space - Frame'
 }
 
 { #category : #adding }
@@ -49,6 +49,18 @@ BlSpaceFrame >> currentPhase [
 		description: [ 'Current phase must not be nil' ].
 
 	^ currentPhaseLink value
+]
+
+{ #category : #'as yet unclassified' }
+BlSpaceFrame >> gtInspectorPhasesIn: aComposite [
+	<gtInspectorPresentationOrder: 0>
+	
+	^ aComposite fastList
+		title: 'Phases';
+		display: [ self phases ];
+		format: [ :each | each = self currentPhase
+			ifTrue: [ each name asText allBold ]
+			ifFalse: [ each name ] ]
 ]
 
 { #category : #testing }

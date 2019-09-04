@@ -11,7 +11,7 @@ Class {
 		'callingMethod',
 		'message'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #'instance creation' }

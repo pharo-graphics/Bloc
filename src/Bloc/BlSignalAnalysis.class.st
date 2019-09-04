@@ -62,7 +62,7 @@ Class {
 		'slow',
 		'triggerDuration'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Support'
 }
 
 { #category : #'instance creation' }

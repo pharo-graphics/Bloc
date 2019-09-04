@@ -16,7 +16,7 @@ Class {
 		'valuable',
 		'scheduledTime'
 	],
-	#category : #'Bloc-TaskAt'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #'instance creation' }
