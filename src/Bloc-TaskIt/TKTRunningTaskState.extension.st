@@ -19,13 +19,13 @@ TKTRunningTaskState >> primitiveTerminateTaskExecution: aTaskExecution reason: a
 
 { #category : #'*Bloc-TaskIt' }
 TKTRunningTaskState >> terminateTaskExecution: aTaskExecution atHigherPriorityWithReason: aReason [
-"	| anActiveProcess anOldPriority |
+	| anActiveProcess anOldPriority |
 	anActiveProcess := Processor activeProcess.
 	anOldPriority := anActiveProcess priority.
 	anActiveProcess priority: aTaskExecution executionProcess priority + 1.
 	[ self primitiveTerminateTaskExecution: aTaskExecution reason: aReason ] 
-		ensure: [ anActiveProcess priority: anOldPriority ]."
-	[ self primitiveTerminateTaskExecution: aTaskExecution reason: aReason ] valueWithoutUserInterruption
+		ensure: [ anActiveProcess priority: anOldPriority ].
+	"[ self primitiveTerminateTaskExecution: aTaskExecution reason: aReason ] valueWithoutUserInterruption"
 ]
 
 { #category : #'*Bloc-TaskIt' }
