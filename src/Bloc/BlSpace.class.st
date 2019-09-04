@@ -1,6 +1,9 @@
 "
 I am the logical representation of a window in Bloc regardless the current Host in use.
 
+!! Gracefully closing the image when a space is closed
+
+A common use-case is to shutdown Pharo when some particular space is closed. To do so we provide ${class:BlSpaceShutdownOnCloseListener} which can be added to any space as an event handler. It listens to ${class:BlSpaceClosedEvent} which is sent after a space is closed. See the listener class for configuration options.
 "
 Class {
 	#name : #BlSpace,
