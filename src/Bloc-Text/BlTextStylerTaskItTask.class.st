@@ -14,6 +14,17 @@ Class {
 	#category : #'Bloc-Text-Text-Styler'
 }
 
+{ #category : #private }
+BlTextStylerTaskItTask >> commandNameFromText: aBrText [
+	^ aBrText isEmpty
+		ifTrue: [ '<empty query>' ]
+		ifFalse: [ (aBrText from: 1 to: (aBrText size min: 20)) asString
+				replace: [ :eachCharacter | 
+					eachCharacter isLineBreak
+						ifTrue: [ Character space ]
+						ifFalse: [ eachCharacter ] ] ]
+]
+
 { #category : #enumerating }
 BlTextStylerTaskItTask >> doInBackground: aBrText andAfterDo: aBlock [
 	self styler doStyleInBackground: aBrText andAfterDo: aBlock
@@ -30,30 +41,28 @@ BlTextStylerTaskItTask >> initialize [
 BlTextStylerTaskItTask >> style: aBlText afterDo: aBlock [
 	self terminateBackgroundStylingProcess.
 	aBlText size > 200
-		ifTrue: [ self styleInBackgroundProcess: aBlText andAfterDo: aBlock ]
-		ifFalse: [ self styleInActiveProcess: aBlText andAferDo: aBlock ]
+		ifTrue: [ self styleInBackgroundProcess: aBlText afterDo: aBlock ]
+		ifFalse: [ self styleInActiveProcess: aBlText afterDo: aBlock ]
 ]
 
 { #category : #enumerating }
-BlTextStylerTaskItTask >> styleInActiveProcess: aBlText andAferDo: aBlock [
+BlTextStylerTaskItTask >> styleInActiveProcess: aBlText afterDo: aBlock [
 	self styler doStyle: aBlText afterDo: aBlock
 ]
 
 { #category : #enumerating }
-BlTextStylerTaskItTask >> styleInBackgroundProcess: aBrText andAfterDo: aBlock [
+BlTextStylerTaskItTask >> styleInBackgroundProcess: aBrText afterDo: aBlock [
 	| aName |
-	aName := aBrText isEmpty 
-		ifTrue: [ '<empty query>' ]
-		ifFalse: [ (aBrText from: 1 to: (aBrText size min: 20)) asString 
-			replace: [ :eachCharacter | 
-				eachCharacter isLineBreak ifTrue: [ Character space ] ifFalse: [ eachCharacter ] ] ].
-	monitor critical: [
-		command := [ 
-			self doInBackground: aBrText andAfterDo: aBlock 
-		] asBlTktTerminableCommand.
-		command name: 'Text Styler for ''', aName, ''''.
-		BlTktWorkerProvider highUICPUBoundPool schedule: command.
-	]
+	self styler view ifNil: [ 
+		"The text cannot be styled in background if an element is not available"
+		self styleInActiveProcess: aBrText afterDo: aBlock.
+		^ self ].
+	aName := self commandNameFromText: aBrText.
+	monitor
+		critical: [ command := [ self doInBackground: aBrText andAfterDo: aBlock ]
+				asBlTktTerminableCommand.
+			command name: 'Text Styler for ''' , aName , ''''.
+			BlTktWorkerProvider highUICPUBoundPool schedule: command ]
 ]
 
 { #category : #private }

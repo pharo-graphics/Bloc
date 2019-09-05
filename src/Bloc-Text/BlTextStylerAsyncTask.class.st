@@ -30,18 +30,21 @@ BlTextStylerAsyncTask >> initialize [
 BlTextStylerAsyncTask >> style: aBlText afterDo: aBlock [
 	self terminateBackgroundStylingProcess.
 	aBlText size > 200
-		ifTrue: [ self styleInBackgroundProcess: aBlText andAfterDo: aBlock ]
-		ifFalse: [ self styleInActiveProcess: aBlText andAferDo: aBlock ]
+		ifTrue: [ self styleInBackgroundProcess: aBlText afterDo: aBlock ]
+		ifFalse: [ self styleInActiveProcess: aBlText afterDo: aBlock ]
 ]
 
 { #category : #styling }
-BlTextStylerAsyncTask >> styleInActiveProcess: aBlText andAferDo: aBlock [
+BlTextStylerAsyncTask >> styleInActiveProcess: aBlText afterDo: aBlock [
 	self styler doStyle: aBlText afterDo: aBlock
 ]
 
 { #category : #styling }
-BlTextStylerAsyncTask >> styleInBackgroundProcess: aBrText andAfterDo: aBlock [
-
+BlTextStylerAsyncTask >> styleInBackgroundProcess: aBrText afterDo: aBlock [
+	self styler view ifNil: [ 
+		"The text cannot be styled in background if an element is not available"
+		self styleInActiveProcess: aBrText afterDo: aBlock.
+		^ self ].
 	monitor critical: [
 		backgroundProcess := [ 
 			self doInBackground: aBrText andAfterDo: aBlock 
