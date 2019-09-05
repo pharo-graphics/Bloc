@@ -26,7 +26,7 @@ BlTextStylerTaskItTask >> commandNameFromText: aBrText [
 ]
 
 { #category : #enumerating }
-BlTextStylerTaskItTask >> doInBackground: aBrText andAfterDo: aBlock [
+BlTextStylerTaskItTask >> doInBackground: aBrText afterDo: aBlock [
 	self styler doStyleInBackground: aBrText andAfterDo: aBlock
 ]
 
@@ -59,7 +59,7 @@ BlTextStylerTaskItTask >> styleInBackgroundProcess: aBrText afterDo: aBlock [
 		^ self ].
 	aName := self commandNameFromText: aBrText.
 	monitor
-		critical: [ command := [ self doInBackground: aBrText andAfterDo: aBlock ]
+		critical: [ command := [ self doInBackground: aBrText afterDo: aBlock ]
 				asBlTktTerminableCommand.
 			command name: 'Text Styler for ''' , aName , ''''.
 			BlTktWorkerProvider highUICPUBoundPool schedule: command ]

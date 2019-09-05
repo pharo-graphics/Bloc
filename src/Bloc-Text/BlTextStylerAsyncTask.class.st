@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : #styling }
-BlTextStylerAsyncTask >> doInBackground: aBrText andAfterDo: aBlock [
+BlTextStylerAsyncTask >> doInBackground: aBrText afterDo: aBlock [
 	self styler delay asDelay wait.
 	self styler doStyleInBackground: aBrText andAfterDo: aBlock
 ]
@@ -47,7 +47,7 @@ BlTextStylerAsyncTask >> styleInBackgroundProcess: aBrText afterDo: aBlock [
 		^ self ].
 	monitor critical: [
 		backgroundProcess := [ 
-			self doInBackground: aBrText andAfterDo: aBlock 
+			self doInBackground: aBrText afterDo: aBlock 
 		] forkAt: Processor userBackgroundPriority named: 'Text Styler Async Task' 
 	]
 ]
