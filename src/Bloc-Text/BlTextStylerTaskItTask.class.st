@@ -53,10 +53,6 @@ BlTextStylerTaskItTask >> styleInActiveProcess: aBlText afterDo: aBlock [
 { #category : #enumerating }
 BlTextStylerTaskItTask >> styleInBackgroundProcess: aBrText afterDo: aBlock [
 	| aName |
-	self styler view ifNil: [ 
-		"The text cannot be styled in background if an element is not available"
-		self styleInActiveProcess: aBrText afterDo: aBlock.
-		^ self ].
 	aName := self commandNameFromText: aBrText.
 	monitor
 		critical: [ command := [ self doInBackground: aBrText afterDo: aBlock ]
