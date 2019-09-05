@@ -142,7 +142,7 @@ BlBasicExamples >> coloredButton [
 		relocate: 100@100;
 		padding: (BlInsets top: 8 right: 16 bottom: 8 left: 16);
 		layout: BlLinearLayout horizontal;
-		effect: (BlDropShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2);
+		effect: (BlGaussianShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2);
 		constraintsDo: [ :c |
 			c horizontal fitContent.
 			c vertical fitContent ].
@@ -246,7 +246,7 @@ BlBasicExamples >> fabButton [
 		relocate: 100@100;
 		size: 56@56;
 		layout: BlFrameLayout new;
-		effect: (BlDropShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2).
+		effect: (BlGaussianShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2).
 
 	icon := (BlPolygon vertices: ({
 			36@0. 48@0 . 48@36 . 84@36.
@@ -398,7 +398,7 @@ BlBasicExamples >> roundedRectangle [
 BlBasicExamples >> shadowEffect [
 	<gtExample>
 	
-	^ BlDropShadowEffect color: Color black width: 10 offset: 10@10
+	^ BlGaussianShadowEffect color: Color black width: 10 offset: 10@10
 ]
 
 { #category : #'examples - composition' }

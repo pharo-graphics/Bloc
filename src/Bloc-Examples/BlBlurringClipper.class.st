@@ -20,7 +20,7 @@ BlBlurringClipper class >> on: anElement [
 { #category : #initialization }
 BlBlurringClipper >> contentElement: anElement [
 	anElement clipChildren: false.
-	anElement effect: (BlDropShadowEffect
+	anElement effect: (BlGaussianShadowEffect
 		color: (Color black alpha: 0.3)
 		width: 2
 		offset: 0 @ 1).

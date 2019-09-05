@@ -1,7 +1,7 @@
-Extension { #name : #BlDropShadowEffect }
+Extension { #name : #BlGaussianShadowEffect }
 
 { #category : #'*Bloc-Sparta' }
-BlDropShadowEffect >> applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement [
+BlGaussianShadowEffect >> applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement [
 	| anEffectExtent anExtraShadowSpace aShadowPath |
 
 	anEffectExtent := anElement effectBounds extent.

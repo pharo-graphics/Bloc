@@ -348,7 +348,7 @@ BlElementBoundsExamples >> shadowEffectBoundsWithoutOffset [
 
 	parent := self parentWithChild.
 	child := parent children first.
-	child effect: (BlDropShadowEffect color: Color black width: shadowWidth offset: 0@0).
+	child effect: (BlGaussianShadowEffect color: Color black width: shadowWidth offset: 0@0).
 
 	self assert: child effectBounds equals: (shadowWidth * 3 asPoint negated corner: self childExtent + (shadowWidth * 3 asPoint)).
 
