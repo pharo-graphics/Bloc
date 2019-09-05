@@ -29,30 +29,26 @@ BlTextStyler >> delay [
 { #category : #styling }
 BlTextStyler >> doStyle: aBrText afterDo: aBlock [
 	"A styling activity called from styler tasks"
-	| styledText |
 
+	| styledText |
 	styledText := self privateStyle: aBrText unstyle.
-	self fireEvent: (BlTextStyledEvent new text: styledText).
-	aBlock value.
+	self fireStyledEventForText: styledText afterDo: aBlock
 ]
 
 { #category : #styling }
 BlTextStyler >> doStyleInBackground: aBrText andAfterDo: aBlock [
 	"A styling activity called from styler tasks"
-	| styledText aTaskAction |
+	| styledText aTaskAction anElement |
+
+	anElement := self view.
+	anElement ifNil: [ 
+		"The graphical widget is no more available, we therefore do not need to style text".
+		^ self ].
 
 	styledText := self privateStyle: aBrText unstyle.
 	
-	aTaskAction := [ 
-		self fireEvent: (BlTextStyledEvent new text: styledText).
-		aBlock value ].
-	
-	view isNotNil
-		ifTrue: [
-			(view at: 1)
-				ifNotNil: [ :anElement | anElement enqueueTask: (BlTaskAction new action: aTaskAction) ]
-				ifNil: aTaskAction ]
-		ifFalse: aTaskAction.
+	aTaskAction := BlTaskAction new action: [ self fireStyledEventForText: styledText afterDo: aBlock ].
+	anElement enqueueTask: aTaskAction.
 ]
 
 { #category : #'event management accessing' }
@@ -61,6 +57,12 @@ BlTextStyler >> eventDispatcher [
 	<return: #BlDirectEventDispatcher>
 
 	^ eventDispatcher
+]
+
+{ #category : #styling }
+BlTextStyler >> fireStyledEventForText: aStyledText afterDo: aBlock [
+	self fireEvent: (BlTextStyledEvent new text: aStyledText).
+	aBlock value
 ]
 
 { #category : #initialization }
@@ -118,6 +120,12 @@ BlTextStyler >> unstyledTextFrom: aBrText [
 ]
 
 { #category : #accessing }
-BlTextStyler >> view: aViewOrMorph [ 
-	view := aViewOrMorph
+BlTextStyler >> view [
+	<return: #BlElement or: nil>
+	^ view ifNotNil: [ :aWeakReference | aWeakReference at: 1 ]
+]
+
+{ #category : #accessing }
+BlTextStyler >> view: anElement [ 
+	view := anElement asWeakReference
 ]

@@ -138,12 +138,36 @@ BlTaskItStatus >> instanceCountsOn: aStream [
 ]
 
 { #category : #printing }
+BlTaskItStatus >> printFailedTasks: failedTasks on: aStream [
+
+	failedTasks do: [ :task |
+		aStream
+			<< '  ';
+			<< task name;
+			<< ', ';
+			print: task state;
+			cr. ]
+]
+
+{ #category : #printing }
 BlTaskItStatus >> printQueueFor: pool on: aStream [
 
 	pool taskQueue contents do: [ :each |
 			aStream
 				<< '  ';
 				<< each name;
+				cr ]
+]
+
+{ #category : #printing }
+BlTaskItStatus >> printWorkers: workers on: aStream [
+
+	workers do: [ :worker |
+			aStream
+				<< '  name: ';
+				print: worker name;
+				<< ', task: ';
+				<< worker taskName;
 				cr ]
 ]
 
@@ -187,6 +211,8 @@ BlTaskItStatus >> workerPool: pool on: aStream [
 	aStream 
 		<< 'Name: '
 		<< pool name; cr;
+		<< 'Pool Max Size: ';
+		print: pool poolMaxSize; cr;
 		<< 'Queue Size: ';
 		print: pool taskQueue size; cr.
 	self printQueueFor: pool on: aStream.
@@ -196,11 +222,13 @@ BlTaskItStatus >> workerPool: pool on: aStream [
 	self printWorkersFor: pool on: aStream.
 	aStream
 		<< 'Free Workers: ';
-		print: freeWorkers size; cr;
+		print: freeWorkers size; cr.
+	self printWorkers: freeWorkers on: aStream.
+	aStream
 		<< 'Failed Tasks: ';
-		print: pool failedTasks size; cr;
-		<< 'Pool Max Size: ';
-		print: pool poolMaxSize; cr;
+		print: pool failedTasks size; cr.
+	self printFailedTasks: pool failedTasks on: aStream.
+	aStream
 		cr; cr.
 
 ]
