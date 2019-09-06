@@ -16,10 +16,13 @@ Main maintainers : [Glenn Cavarlé](https://github.com/GlennCavarle) & [Aliaksei
 The following script installs Bloc intended for [Pharo 7](https://pharo.org/download):<br>
 
 ```smalltalk
-Metacello new
-   baseline: 'Bloc';
-   repository: 'github://feenkcom/Bloc/src';
-   load
+[
+    EpMonitor current disable.
+    Metacello new
+        baseline: 'Bloc';
+        repository: 'github://feenkcom/Bloc/src';
+        load
+] ensure: [ EpMonitor current enable ]
 ```
 
 **More detailed installation guide is described [here](INSTALL.md)**
