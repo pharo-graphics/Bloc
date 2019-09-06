@@ -104,5 +104,6 @@ BaselineOfBloc >> postLoadDisableTaskItDebugger: spec [
 BaselineOfBloc >> postLoadMorphicHost: spec [
 
 	"This will select an appropriate UI manager"
-	UIManager default: UIManager forCurrentSystemConfiguration
+	SystemVersion current major < 8
+		ifTrue: [ UIManager default: UIManager forCurrentSystemConfiguration ]
 ]
