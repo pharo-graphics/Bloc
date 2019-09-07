@@ -124,7 +124,12 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 				"as the last step we may want to stop the host. It may terminate
 				the current process, so we should do it at last"
 				(spaceManager hasSpaces not and: [ aHost isRunning ])
-					ifTrue: [ aHost stop ] ] ]
+					ifTrue: [ aHost stop ] ] ].
+			
+	"Raise an event indicating that all normal event for closing a space have been completed.
+	This event is used by the debugger to stop the UI process. Users should not normally rely
+	on this event, as there is no guarantee that the process will not be terminated."
+	aSpace dispatchEvent: (BlSpaceDestroyedEvent new space: aSpace).
 ]
 
 { #category : #'api - spaces' }
@@ -267,7 +272,7 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 BlParallelUniverse >> postpone: aValuable [
 	"#postpone: can be used from any thread to execute a valuable in the GUI thread
 	after the pulse is completed.
-	I am different from #defer: in that #defer: actios are evaluated befoer the pulse of the universe"
+	I am different from #defer: in that #defer: actios are evaluated before the pulse of the universe"
 
 	postponedActions nextPut: aValuable
 ]

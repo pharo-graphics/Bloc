@@ -50,6 +50,28 @@ BlSpaceEventExamples >> spaceClosed [
 ]
 
 { #category : #'show / close' }
+BlSpaceEventExamples >> spaceDestroyed [
+	<gtExample>
+	<noTest>
+	| aSpace events |
+	events := OrderedCollection new.
+	
+	aSpace := self space.
+	aSpace addEventHandlerOn: BlSpaceClosedEvent do: [ 
+		events add: #closed ].
+	aSpace addEventHandlerOn: BlSpaceDestroyedEvent do: [ 
+		events add: #destroyed ].
+	
+	aSpace show.
+	self assert: events size equals: 0.
+	aSpace close.
+	self assert: events size equals: 2.
+	self assert: events asArray equals: #(closed destroyed).
+	
+	^ aSpace
+]
+
+{ #category : #'show / close' }
 BlSpaceEventExamples >> spaceShown [
 	<gtExample>
 	<noTest>
