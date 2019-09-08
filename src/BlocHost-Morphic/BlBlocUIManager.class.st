@@ -166,11 +166,11 @@ BlBlocUIManager >> resumeBlocUIProcess: aProcess [
 	In case Bloc is embedded inside the Morphic World, the Bloc UI process is going to
 	be the Morphic UI process. Delegating the process operations through the host
 	ensures that the Morphic UI process will be resumed correctly."
-
+	
 	self
 		universeForProcess: aProcess
 		ifPresent: [ :aUniverse |
-			aUniverse hostClass uiProcessDo: [ :aUIProcess | aUIProcess terminate ].
+			"aUniverse stopPulsation." 
 			aUniverse hostClass forceResumeOfUIProcess: aProcess ]
 		ifAbsent: [  ].
 ]
