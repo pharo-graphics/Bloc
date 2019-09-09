@@ -112,7 +112,6 @@ BlTktExamples >> executeUnresponsiveValuableCommand [
 { #category : #'examples - task futures' }
 BlTktExamples >> failedFutureTerminableUnresponsiveValuableCommandTaskTerminatingInTheMiddle [
 	<gtExample>
-	<noTest>
 	| aFuture aResult |
 	aFuture := self futureTerminableUnresponsiveValuableCommandTaskTerminatingInTheMiddle.
 	aFuture onSuccessDo: [ :aFutureResult | aResult := #success. self signaler signalTaskSemaphore ].
@@ -127,7 +126,6 @@ BlTktExamples >> failedFutureTerminableUnresponsiveValuableCommandTaskTerminatin
 { #category : #'examples - task futures' }
 BlTktExamples >> futureResponsiveValuableCommandTask [
 	<gtExample>
-	<noTest>
 	| aTask aPool aFuture aResult |
 	aTask := self responsiveValuableCommandTask.
 	aPool := self uiWorkerPool.
@@ -140,7 +138,6 @@ BlTktExamples >> futureResponsiveValuableCommandTask [
 { #category : #'examples - task futures' }
 BlTktExamples >> futureTerminableResponsiveValuableCommandTask [
 	<gtExample>
-	<noTest>
 	| aTask aPool aFuture aResult |
 	aTask := self terminableResponsiveValuableCommandTask.
 	aPool := self uiWorkerPool.
@@ -153,7 +150,6 @@ BlTktExamples >> futureTerminableResponsiveValuableCommandTask [
 { #category : #'examples - task futures' }
 BlTktExamples >> futureTerminableUnresponsiveValuableCommandTask [
 	<gtExample>
-	<noTest>
 	| aTask aPool aFuture aResult |
 	aTask := self terminableUnresponsiveValuableCommandTask.
 	aPool := self uiWorkerPool.
