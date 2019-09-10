@@ -80,6 +80,7 @@ BlTktExamples >> executeTerminatedTerminableUnresponsiveValuableCommandInReadySt
 { #category : #'examples - task terminations' }
 BlTktExamples >> executeTerminatedTerminableUnresponsiveValuableCommandInRunningState [
 	<gtExample>
+	<noTest>
 	| aCommand aResult |
 	aCommand := self terminateTerminableUnresponsiveValuableCommandInRunningState.
 	aResult := aCommand taskExecution executeTask.
