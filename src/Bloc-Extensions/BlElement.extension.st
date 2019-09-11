@@ -60,15 +60,18 @@ BlElement >> gtInspectorLiveIn: composite [
 	^ composite bloc
 		title: 'Live' translated;
 		element: [ 
-			self addEventHandlerOn: GtPhlowObjectToSelect do: [ :anEvent | 
-				self fireEvent: (GLMBlocObjectToSelect new 
-					toSelect: anEvent object; 
-					fromElement: anEvent sourceElement) ].
-			self addEventHandlerOn: GtPhlowObjectToSpawn do: [ :anEvent | 
-				self fireEvent: (GLMBlocObjectToSelect new 
-					toSelect: anEvent object; 
-					fromElement: anEvent sourceElement) ]
-			];
+			self class environment at: #GtPhlowObjectToSelect ifPresent: [ :anEventClass |
+				self addEventHandlerOn: anEventClass do: [ :anEvent | 
+					self fireEvent: (GLMBlocObjectToSelect new 
+						toSelect: anEvent object; 
+						fromElement: anEvent sourceElement) ] ].
+				
+			self class environment at: #GtPhlowObjectToSpawn ifPresent: [ :anEventClass |
+				self addEventHandlerOn: anEventClass do: [ :anEvent | 
+					self fireEvent: (GLMBlocObjectToSelect new 
+						toSelect: anEvent object; 
+						fromElement: anEvent sourceElement) ] ].
+			self ];
 		act: [ :pres | self space root background: (Color fromHexString: '162425') ] entitled: 'Dark background';
 		act: [ :pres | self space root background: (Color white) ] entitled: 'White background';
 		act: [ :pres | self debug: true ] entitled: 'Debug me';
@@ -132,21 +135,28 @@ BlElement >> gtInspectorPreviewIn: composite [
 	<gtInspectorPresentationOrder: 15>
 	| morphPresentation |
 	morphPresentation := composite morph.
-	morphPresentation 
+	morphPresentation
 		title: 'Preview' translated;
-		display: [
-			[self asSpartaForm asMorph
-				on: #mouseDown send: #value: to: [ :event | 
-					morphPresentation selection: (self findMouseEventTargetAt: (self localPointToGlobal: event position)) ]] on:Error
-			do: [ :error |
-				error freeze.
-				(IconicListItem
-					text: error messageText
-					icon: #smallWarningIcon asIcon)
-						on: #mouseDown send: #value: to: [ :event | error defaultAction ];
+		display: [ [ self asSpartaForm asMorph
+				on: #mouseDown
+				send: #value:
+				to: [ :event | 
+					morphPresentation
+						selection:
+							(self
+								findMouseEventTargetAt: (self localPointToGlobal: event position)) ] ]
+				on: Error
+				do: [ :error | 
+					error freeze.
+					(IconicListItem
+						text: error messageText
+						icon:
+						(self iconNamed: #smallWarningIcon))
+						on: #mouseDown
+							send: #value:
+							to: [ :event | error defaultAction ];
 						yourself ] ];
 		act: [ :pres | self removeFromParent ] entitled: 'Delete'.
-		
 	^ morphPresentation
 ]
 
