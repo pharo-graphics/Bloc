@@ -243,9 +243,9 @@ BlTktExamples >> responsiveValuableCommandTask [
 { #category : #'examples - task schedules' }
 BlTktExamples >> scheduleTerminableUnresponsiveValuableTaskTerminatingInTheMiddle [
 	<gtExample>
-	<noTest>
+
 	| aCommand aTask aWorkerPool aFuture aResult |
-	aCommand := self unresponsiveCommandTerminatingInTheMiddle asBlTktTerminableCommand.
+	aCommand := self terminableUnresponsiveValuableCommandTerminatingInTheMiddle.
 	aTask := aCommand asTask.
 	aWorkerPool := self uiWorkerPool.
 	aFuture := aWorkerPool future: aTask.
