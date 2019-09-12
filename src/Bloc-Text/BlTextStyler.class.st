@@ -25,6 +25,12 @@ BlTextStyler >> eventDispatcher [
 	^ eventDispatcher
 ]
 
+{ #category : #styling }
+BlTextStyler >> fireStyledEventForText: aStyledText andAfterAction: aBlock [
+	"This method must be called from a Bloc UI process only."
+	self fireEvent: (BlTextStyledEvent new text: aStyledText; afterAction: aBlock)
+]
+
 { #category : #initialization }
 BlTextStyler >> initialize [
 	super initialize.
@@ -33,23 +39,17 @@ BlTextStyler >> initialize [
 	eventDispatcher := BlBubblingEventDispatcher on: self.
 ]
 
-{ #category : #styling }
-BlTextStyler >> onlyFireStyledEventForText: aStyledText andAfterAction: aBlock [
-	self fireEvent: (BlTextStyledEvent new text: aStyledText; afterAction: aBlock)
-]
-
-{ #category : #styling }
-BlTextStyler >> onlyStyle: aBlText [
-	"Should be called later #style:"
-	<return: #BlText>
-	stylingEnabled ifFalse: [ ^ aBlText ].
-	^ self privateStyle: aBlText unstyle.
-]
-
 { #category : #private }
 BlTextStyler >> privateStyle: aText [ 
 	<return: #BlText>
 	^ self shouldBeImplemented
+]
+
+{ #category : #styling }
+BlTextStyler >> style: aBlText [
+	<return: #BlText>
+	stylingEnabled ifFalse: [ ^ aBlText ].
+	^ self privateStyle: aBlText unstyle.
 ]
 
 { #category : #private }
