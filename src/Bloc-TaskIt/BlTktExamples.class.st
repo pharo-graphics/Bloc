@@ -80,6 +80,7 @@ BlTktExamples >> executeTerminatedTerminableUnresponsiveValuableCommandInReadySt
 { #category : #'examples - task terminations' }
 BlTktExamples >> executeTerminatedTerminableUnresponsiveValuableCommandInRunningState [
 	<gtExample>
+
 	| aCommand aResult |
 	aCommand := self terminateTerminableUnresponsiveValuableCommandInRunningState.
 	aResult := aCommand taskExecution executeTask.
@@ -242,9 +243,9 @@ BlTktExamples >> responsiveValuableCommandTask [
 { #category : #'examples - task schedules' }
 BlTktExamples >> scheduleTerminableUnresponsiveValuableTaskTerminatingInTheMiddle [
 	<gtExample>
-	<noTest>
+
 	| aCommand aTask aWorkerPool aFuture aResult |
-	aCommand := self unresponsiveCommandTerminatingInTheMiddle asBlTktTerminableCommand.
+	aCommand := self terminableUnresponsiveValuableCommandTerminatingInTheMiddle.
 	aTask := aCommand asTask.
 	aWorkerPool := self uiWorkerPool.
 	aFuture := aWorkerPool future: aTask.
@@ -394,16 +395,13 @@ BlTktExamples >> terminateTerminableUnresponsiveValuableCommandInReadyState [
 { #category : #'examples - task terminations' }
 BlTktExamples >> terminateTerminableUnresponsiveValuableCommandInRunningState [
 	<gtExample>
-	| aCommand anExecution aProcess |
-	aCommand := self terminableUnresponsiveValuableCommand.
+
+	| aCommand anExecution |
+	aCommand := [ 1000 timesRepeat: [ 100 milliSeconds wait ] ] asBlTktTerminableCommand.
 	anExecution := self basicCommandTaskExecution.
-	anExecution setRunningState.
-	aProcess := [ self collector increment ] newProcess.
-	aProcess name: 'Example of Terminable Task'.
-	anExecution executionProcess: aProcess.
-	self assert: anExecution executionProcess equals: aProcess.
 	aCommand taskExecution: anExecution.
 	self assert: aCommand taskExecution equals: anExecution.
+	[ anExecution doExecuteTask. ] forkAt: Processor activeProcess priority + 1.
 	aCommand terminate.
 	self assert: anExecution state class equals: BlTktExplicitlyTerminatedTaskState.
 	^ aCommand

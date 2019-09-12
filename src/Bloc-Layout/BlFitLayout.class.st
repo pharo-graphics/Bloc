@@ -37,7 +37,7 @@ BlFitLayout >> fit: anElement with: anExtentSpec [
 	width := boundingBox width + anElement padding width.
 	height := boundingBox height + anElement padding height.
 
-	anElement measuredExtent: (width @ height)
+	anElement measuredExtent: (anExtentSpec sizeFor: width @ height)
 ]
 
 { #category : #layout }
