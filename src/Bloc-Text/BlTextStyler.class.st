@@ -75,9 +75,22 @@ BlTextStyler >> initialize [
 	delay := 200 milliSeconds
 ]
 
+{ #category : #styling }
+BlTextStyler >> onlyFireStyledEventForText: aStyledText andAfterAction: aBlock [
+	self fireEvent: (BlTextStyledEvent new text: aStyledText; afterAction: aBlock)
+]
+
+{ #category : #styling }
+BlTextStyler >> onlyStyle: aBlText [
+	<return: #BlText>
+	stylingEnabled ifFalse: [ ^ aBlText ].
+	^ self privateStyle: aBlText unstyle.
+]
+
 { #category : #private }
 BlTextStyler >> privateStyle: aText [ 
-	self shouldBeImplemented
+	<return: #BlText>
+	^ self shouldBeImplemented
 ]
 
 { #category : #styling }

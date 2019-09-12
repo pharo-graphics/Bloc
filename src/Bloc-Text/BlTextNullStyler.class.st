@@ -6,6 +6,7 @@ Class {
 
 { #category : #private }
 BlTextNullStyler >> privateStyle: aText [
+	^ aText
 ]
 
 { #category : #private }
