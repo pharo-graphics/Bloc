@@ -543,6 +543,7 @@ BlElement >> border: aBlBorder [
 
 	self invalidate.
 	border := aBlBorder.
+	self geometry releaseStrokedBoundsCache.
 	self dispatchEvent: (BlElementBorderChangedEvent target: self).
 	self invalidate
 ]
@@ -2511,6 +2512,7 @@ BlElement >> outskirts: aBlOutskirts [
 
 	self invalidate.
 	outskirts := aBlOutskirts.
+	self geometry releaseStrokedBoundsCache.
 	self invalidate
 ]
 

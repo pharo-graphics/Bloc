@@ -122,14 +122,18 @@ BlGeometry >> releaseCache [
 	pathCache releaseCache
 ]
 
+{ #category : #cache }
+BlGeometry >> releaseStrokedBoundsCache [
+	pathCache releaseStrokedBoundsCache
+]
+
 { #category : #'visual bounds' }
 BlGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
-	"Return stroked bounds of a geometry if it would be stroked
-	according to element's border configuration.
-	Dispatch through border's BlStrokeType first"
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
 	<return: #BlBounds>
 
-	^ anElement outskirts strokedBounds: aBlBounds of: anElement on: aCanvas
+	^ aBlBounds rectangle: (pathCache strokedBounds: aBlBounds of: anElement on: aCanvas)
 ]
 
 { #category : #'visual bounds' }

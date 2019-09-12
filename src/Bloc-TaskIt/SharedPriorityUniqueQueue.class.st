@@ -49,9 +49,9 @@ SharedPriorityUniqueQueue >> basicNext [
 			highestIndex := i.
 			highestPriority := item entryPriority ].
 		highestPriority <= 0 ifTrue: [ 
-			items removeAtIndex: highestIndex.
+			items removeAt: highestIndex.
 			^item ] ].
-	items removeAtIndex: highestIndex.
+	items removeAt: highestIndex.
 	^item
 ]
 
@@ -126,7 +126,11 @@ SharedPriorityUniqueQueue >> nextOrNilSuchThat: aBlock [
 	NOTA BENE:  aBlock MUST NOT contain a non-local return (^).
 	Ensure that the operation isn't terminated while within the monitor"
 
-	^[ super nextOrNilSuchThat: aBlock ] valueWithoutTermination
+	self
+		assert: [ aBlock hasMethodReturn not ]
+		description: [ 'Must not have a local return' ].
+
+	^ [ super nextOrNilSuchThat: aBlock ] valueWithoutTermination
 ]
 
 { #category : #accessing }
