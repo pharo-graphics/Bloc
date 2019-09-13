@@ -117,6 +117,13 @@ BlDirectEventDispatcher >> handlersDo: aBlock [
 ]
 
 { #category : #'api - testing' }
+BlDirectEventDispatcher >> hasFilter: anEventHandler [
+	^ filters
+		ifNil: [ false ]
+		ifNotNil: [ filters hasHandler: anEventHandler ]
+]
+
+{ #category : #'api - testing' }
 BlDirectEventDispatcher >> hasHandler: anEventHandler [
 	^ handlers
 		ifNil: [ false ]
@@ -162,7 +169,11 @@ BlDirectEventDispatcher >> printOn: aStream [
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventFilter: aFilter [
+	(self hasFilter: aFilter)
+		ifFalse: [ ^ self ].
 
+	filters
+		ifNil: [ ^ self ].
 	filters remove: aFilter.
 	"free memory as soon as we got rid of all event filters"
 	filters isEmpty
