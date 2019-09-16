@@ -1,7 +1,7 @@
 "
-BlTktWorkerProvider provides a number of convenience methods for submitting tasks at different priorities.  The intention is that the supplied set of queues will be sufficient when submitting tasks in all cases but a few exceptions.
+${class:BlTktWorkerProvider}$ provides a number of convenience methods for submitting tasks at different priorities.  The intention is that the supplied set of queues will be sufficient when submitting tasks in all cases but a few exceptions.
 
-The main UI processing process runs at priority 40 (${method:name=ProcessorScheduler>>#userSchedulingPriority} (39 during development).  The design goal is to be keep the UI responsive by reducing the work done by the UI process to responding to user input and any other processing that is restricted to the UI process for thread safety reasons.
+The main UI processing process runs at priority 40 (${method:name=ProcessorScheduler>>#userSchedulingPriority}$ (39 during development).  The design goal is to be keep the UI responsive by reducing the work done by the UI process to responding to user input and any other processing that is restricted to the UI process for thread safety reasons.
 
 The supported worker pools and their expected uses are:
 
