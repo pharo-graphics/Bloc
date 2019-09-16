@@ -19,6 +19,11 @@ BlIgnoredLayoutConstraintsVertical >> alignCenter [
 ]
 
 { #category : #alignment }
+BlIgnoredLayoutConstraintsVertical >> alignNone [
+	alignment := BlElementAlignment vertical null
+]
+
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsVertical >> alignTop [
 	alignment := BlElementAlignment vertical start
 ]
