@@ -286,12 +286,7 @@ BlEvent >> source [
 ]
 
 { #category : #accessing }
-BlEvent >> source: aBlEventTarget [
-	
-	self
-		assert: [ self hasSource not ]
-		description: [ 'Source can not be changed' ].
-	
+BlEvent >> source: aBlEventTarget [	
 	source := aBlEventTarget
 ]
 
