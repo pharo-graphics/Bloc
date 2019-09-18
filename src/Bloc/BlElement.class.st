@@ -344,6 +344,14 @@ BlElement >> allowChildrenMouseEvents [
 ]
 
 { #category : #'event handling' }
+BlElement >> allowMeAndChildrenMouseEvents [
+	"Allow me and my children to receive mouse events"
+
+	shouldHandleMouseEvents := true.
+	shouldChildrenHandleMouseEvents := true
+]
+
+{ #category : #'event handling' }
 BlElement >> allowMouseEvents [
 	"Allow *me* to handle mouse events.
 	It does not influence the ability of the children to handle events, hence I am a local property"
