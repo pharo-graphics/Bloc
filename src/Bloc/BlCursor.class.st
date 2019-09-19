@@ -12,6 +12,11 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlCursor class >> crosshair [
+	^ BlCrosshairCursor new
+]
+
+{ #category : #'instance creation' }
 BlCursor class >> default [
 	^ BlDefaultCursor new
 ]
