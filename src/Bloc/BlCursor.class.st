@@ -66,6 +66,16 @@ BlCursor class >> wait [
 	^ BlWaitCursor new
 ]
 
+{ #category : #'instance creation' }
+BlCursor class >> zoomIn [
+	^ BlZoomInCursor new
+]
+
+{ #category : #'instance creation' }
+BlCursor class >> zoomOut [
+	^ BlZoomOutCursor new
+]
+
 { #category : #'api - cursor' }
 BlCursor >> activateOn: aSpace [
 	aSpace updateCursor: self
