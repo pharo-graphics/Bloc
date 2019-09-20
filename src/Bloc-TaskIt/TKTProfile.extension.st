@@ -6,10 +6,10 @@ TKTProfile class >> gtTest [
 	^ TKTProfile
 		on:
 			{(#debugging -> false).
-			(#runner -> TKTCommonQueueWorkerPool createDefault).
+			(#runner -> BlTktWorkerProvider lowUIUserExecutionPool).
 			(#poolWorkerProcess -> BlTKTWorkerProcess).
-			(#process -> Process).
+			(#process -> TKTRawProcess).
 			(#errorHandler -> TKTExceptionHandler).
-			(#processProvider -> TKTTaskItProcessProvider new).
+			(#processProvider -> BlTktProcessProvider new).
 			(#serviceManager -> TKTServiceManager new)} asDictionary
 ]
