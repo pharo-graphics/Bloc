@@ -386,7 +386,8 @@ BlTaskItTaskExamples >> pulseSpaceWithEnqueuedTaskThatFails [
 BlTaskItTaskExamples >> rawTaskItWorkflow [
 	<gtExample>
 	
-	| anElement aCollection anAction aTaskItTask aSuccessAction aFailureAction aFuture aSpace aSuccessTask aFailureTask |
+	| anElement aCollection anAction aTaskItTask aSuccessAction aFailureAction aFuture aSpace aSuccessTask aFailureTask successSemaphore |
+
 	anElement := BlElement new.
 	aCollection := OrderedCollection new.	
 	anAction := [ aCollection add: #actionDone ].
@@ -395,6 +396,7 @@ BlTaskItTaskExamples >> rawTaskItWorkflow [
 	aFailureAction := [ aCollection add: #failure ].
 	aFailureTask := BlTaskAction new action: aFailureAction.
 	aTaskItTask := anAction asTask.
+	successSemaphore := Semaphore new.
 
 	"task was not added to the local task queue"
 	self assert: anElement taskQueue tasks asArray isEmpty.
@@ -404,12 +406,14 @@ BlTaskItTaskExamples >> rawTaskItWorkflow [
 	"execute the TaskIt task"
 	aFuture := aTaskItTask future.
 	aFuture onSuccessDo: [ :aResult | 
-		anElement enqueueTask: aSuccessTask ].
+		anElement enqueueTask: aSuccessTask.
+		successSemaphore signal. ].
 	aFuture onFailureDo: [ :aResult | 
 		anElement enqueueTask: aFailureTask ].
 	
 	aFuture waitForCompletion: 1 second.
 	"future value is already known"
+	successSemaphore wait.
 	"task was added to the local task queue"
 	self assert: anElement taskQueue tasks asArray equals: { aSuccessTask }.
 	"it was not executed"
