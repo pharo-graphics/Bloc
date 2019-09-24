@@ -82,8 +82,8 @@ BlMemoryImageCache >> entryAt: cacheKey put: aBlImageCacheEntry [
 ]
 
 { #category : #accessing }
-BlMemoryImageCache >> fileAt: aFileReference size: minImageSize for: anObject [
-	"Answer the Form for the specified file and requested size.
+BlMemoryImageCache >> fileAt: aFileReference size: minImageSize [
+	"Answer the BlImageCacheEntry for the specified file and requested size.
 	If minImageSize isNil, answer the form from the original file.
 	Otherwise answer the cached image which is larger than minImageSize."
 
@@ -93,21 +93,21 @@ BlMemoryImageCache >> fileAt: aFileReference size: minImageSize for: anObject [
 	cacheSize := self cacheSizeFor: minImageSize.
 	(minImageSize isNil or: [ cacheSize isNil ]) ifTrue: [ 
 		form := self formFor: fileReference.
-		^self set: anObject form: form size: form extent max isOriginal: true ].
+		^self answerForm: form size: form extent max isOriginal: true ].
 
 	cacheKey := self cacheFileFor: fileReference size: cacheSize.
 	(self entryAt: cacheKey) ifNotNil: [ :entry | 
 		hits := hits + 1.
-		^anObject entry: entry ].
+		^entry ].
 
 	form := self formFor: fileReference.
 	misses := misses + 1.
 	cacheSize >= form extent max ifTrue: 
-		[ ^self set: anObject form: form size: form extent max isOriginal: true ].
+		[ ^self answerForm: form size: form extent max isOriginal: true ].
 	form := form scaledToSize: cacheSize@cacheSize.
 	cacheEntry := self answerForm: form size: cacheSize isOriginal: false.
 	self entryAt: cacheKey put: cacheEntry.
-	^anObject entry: cacheEntry.
+	^cacheEntry.
 
 ]
 

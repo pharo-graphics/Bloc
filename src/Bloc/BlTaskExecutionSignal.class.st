@@ -26,6 +26,7 @@ Class {
 		'action'
 	],
 	#classVars : [
+		'Enabled',
 		'IgnoredTasks'
 	],
 	#category : #'Bloc-Space - Tasks'
@@ -45,6 +46,18 @@ BlTaskExecutionSignal class >> dontIgnoreClass: aBlTask [
 		[ IgnoredTasks := IgnoredTasks copyWithout: aBlTask ].
 ]
 
+{ #category : #accessing }
+BlTaskExecutionSignal class >> enabled [ 
+
+	^Enabled ifNil: [ ^false ]
+]
+
+{ #category : #accessing }
+BlTaskExecutionSignal class >> enabled: aBoolean [
+
+	Enabled := aBoolean
+]
+
 { #category : #'instance creation' }
 BlTaskExecutionSignal class >> endTask: aTask [
 
@@ -57,6 +70,7 @@ BlTaskExecutionSignal class >> endTask: aTask [
 { #category : #'instance creation' }
 BlTaskExecutionSignal class >> for: aTask block: aBlock [
 
+	self enabled ifFalse: [ ^aBlock value ].
 	(IgnoredTasks isNotNil and: [ IgnoredTasks includes: aTask class ]) 
 		ifTrue: [ ^aBlock value ].
 	self startTask: aTask.

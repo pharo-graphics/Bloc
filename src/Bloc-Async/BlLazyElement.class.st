@@ -40,8 +40,9 @@ Class {
 BlLazyElement >> buildElement [
 	"Build the element and display it"
 
-	self assert: elementBuilder isNotNil
-			description: 'No element builder has been set'.
+	self 
+		assert: [ elementBuilder isNotNil ]
+		description: [ 'No element builder has been set' ].
 	self element: elementBuilder value.
 
 ]

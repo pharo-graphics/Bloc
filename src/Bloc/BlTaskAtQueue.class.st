@@ -81,8 +81,8 @@ BlTaskAtQueue >> processNextEntry [
 	scheduleSemaphore wait.
 	[ entry := queue peek.
 	entry isNotNil and: [ 
-		timeRemaining := (entry scheduledTime - BlTime real now) asMilliSeconds.
-		timeRemaining < 10 ] ] whileTrue: [ 
+		timeRemaining := entry scheduledTime - BlTime real now.
+		timeRemaining < 10 milliSeconds ] ] whileTrue: [ 
 		entry := queue next.
 		[ entry valuable value ]
 			on: Error 
@@ -134,25 +134,27 @@ BlTaskAtQueue >> stop [
 ]
 
 { #category : #private }
-BlTaskAtQueue >> triggerAfter: delayMilliseconds [
+BlTaskAtQueue >> triggerAfter: aDelay [
 
-	[ (Delay forMilliseconds: delayMilliseconds) wait.
-	scheduleSemaphore signal ]
-		forkAt: Processor userSchedulingPriority
-		named: 'BlTaskAt: ', delayMilliseconds asString.
+	self
+		assert: [ aDelay isKindOf: Duration ]
+		description: [ 'Delay must be a duration' ].
+
+	[	aDelay wait.
+		scheduleSemaphore signal ]
+			forkAt: Processor userSchedulingPriority
+			named: 'BlTaskAt: ', aDelay asMilliSeconds asString
 ]
 
 { #category : #private }
 BlTaskAtQueue >> triggerAt: aTime [
 	"Signal the scheduleSemaphore at the requested time"
+	| durationUntilRequestedTime |
 
-	| delayMilliseconds |
-
-	delayMilliseconds := (aTime - BlTime real now) asMilliSeconds.
-	delayMilliseconds < 10
+	durationUntilRequestedTime := aTime - BlTime real now.
+	durationUntilRequestedTime < 10 milliSeconds
 		ifTrue: [ scheduleSemaphore signal ]
 		ifFalse: [ 
 			nextTime := aTime.
-			self triggerAfter: delayMilliseconds ].
-
+			self triggerAfter: durationUntilRequestedTime ]
 ]

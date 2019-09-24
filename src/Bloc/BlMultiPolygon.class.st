@@ -23,7 +23,10 @@ BlMultiPolygon >> polygons [
 ]
 
 { #category : #accessing }
-BlMultiPolygon >> polygons: anObject [
-	polygons := anObject.
-	extent := (self polygons detectMax: [ :eachPolygon | eachPolygon max ]) max
+BlMultiPolygon >> polygons: aCollectionOfPolygons [
+	polygons := aCollectionOfPolygons.
+	
+	extent := self polygons
+		ifEmpty: [ 0@0 ]
+		ifNotEmpty: [ :thePolygons | (thePolygons detectMax: [ :eachPolygon | eachPolygon max ]) max ]
 ]

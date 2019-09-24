@@ -1,6 +1,14 @@
 Extension { #name : #TKTCommonQueueWorkerPool }
 
 { #category : #'*Bloc-TaskIt' }
+TKTCommonQueueWorkerPool >> finalize [ 
+
+	self stop.
+	super finalize.
+
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTCommonQueueWorkerPool >> gtWorkersFor: aView [
 	<gtView>
 	self workers ifNil: [ ^ aView empty ].

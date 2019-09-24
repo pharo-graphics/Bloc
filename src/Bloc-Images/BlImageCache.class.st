@@ -70,6 +70,24 @@ BlImageCache >> defaultImageSizes [
 ]
 
 { #category : #accessing }
+BlImageCache >> fileAt: aFileReference size: minImageSize [
+	"Answer the BlImageCacheEntry for the specified file and requested size.
+	If minImageSize isNil, answer the form from the original file.
+	Otherwise answer the cached image which is larger than minImageSize."
+
+	^self subclassResponsibility 
+]
+
+{ #category : #accessing }
+BlImageCache >> fileAt: aFileReference size: minImageSize for: anObject [
+	"Set the #entry: in anObject for the specified file and requested size.
+	If minImageSize isNil, set the form from the original file.
+	Otherwise set the cached image which is larger than minImageSize."
+
+	^anObject entry: (self fileAt: aFileReference size: minImageSize)
+]
+
+{ #category : #accessing }
 BlImageCache >> flush [ 
 	"Empty the receiver cache"
 

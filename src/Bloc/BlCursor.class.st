@@ -12,6 +12,11 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlCursor class >> crosshair [
+	^ BlCrosshairCursor new
+]
+
+{ #category : #'instance creation' }
 BlCursor class >> default [
 	^ BlDefaultCursor new
 ]
@@ -64,6 +69,16 @@ BlCursor class >> resizeTopRight [
 { #category : #'instance creation' }
 BlCursor class >> wait [
 	^ BlWaitCursor new
+]
+
+{ #category : #'instance creation' }
+BlCursor class >> zoomIn [
+	^ BlZoomInCursor new
+]
+
+{ #category : #'instance creation' }
+BlCursor class >> zoomOut [
+	^ BlZoomOutCursor new
 ]
 
 { #category : #'api - cursor' }

@@ -102,3 +102,11 @@ BlTktCommonQueueWorkerPool >> scheduleTaskExecution: aTaskExecution [
 		add ifTrue: [ taskQueue nextPut: aTaskExecution ].
 		self privateManageWorkersAfter ]
 ]
+
+{ #category : #'public - mutexed' }
+BlTktCommonQueueWorkerPool >> start [ 
+	"Bloc uses a pool of existing runners, rather than creating a new one on demand.
+	Only start if not already started."
+
+	^dog ifNil: [ super start ]
+]

@@ -19,6 +19,11 @@ BlIgnoredLayoutConstraintsHorizontal >> alignLeft [
 ]
 
 { #category : #alignment }
+BlIgnoredLayoutConstraintsHorizontal >> alignNone [
+	alignment := BlElementAlignment horizontal null
+]
+
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsHorizontal >> alignRight [
 	alignment := BlElementAlignment horizontal end
 ]
