@@ -2,14 +2,16 @@ Class {
 	#name : #BlLineShape,
 	#superclass : #BlCompositeShape,
 	#classVars : [
-		'LinePointAttribute'
+		'LineFromPointAttribute',
+		'LineToPointAttribute'
 	],
 	#category : #'Bloc-Basic-Vector Shapes'
 }
 
 { #category : #'class initialization' }
 BlLineShape class >> initialize [
-	LinePointAttribute := #linePoint
+	LineFromPointAttribute := #lineFromPoint.
+	LineToPointAttribute := #lineToPoint
 ]
 
 { #category : #converting }
@@ -41,13 +43,13 @@ BlLineShape >> asElementIn: aContainer [
 
 { #category : #accessing }
 BlLineShape >> fromPoint [
-	^ fromPoint
+	^ self shapeWithAttribute: LineFromPointAttribute includesValue: self
 ]
 
 { #category : #accessing }
 BlLineShape >> fromPoint: aPointShape [
-	aPointShape attributeAt: LinePointAttribute put: #from.
-	
+	(aPointShape attributeAt: LineFromPointAttribute ifAbsentPut: [ OrderedCollection new ]) add: self.
+	self addShape: aPointShape
 ]
 
 { #category : #accessing }
@@ -75,10 +77,11 @@ BlLineShape >> splitAt: aFloat [
 
 { #category : #accessing }
 BlLineShape >> toPoint [
-	^ toPoint
+	^ self shapeWithAttribute: LineToPointAttribute includesValue: self
 ]
 
 { #category : #accessing }
-BlLineShape >> toPoint: anObject [
-	toPoint := anObject
+BlLineShape >> toPoint: aPointShape [
+	(aPointShape attributeAt: LineToPointAttribute ifAbsentPut: [ OrderedCollection new ]) add: self.
+	self addShape: aPointShape
 ]

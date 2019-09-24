@@ -9,6 +9,7 @@ Class {
 
 { #category : #'api - shapes' }
 BlCompositeShape >> addShape: aShape [
+	aShape parent: self.
 	shapes add: aShape
 ]
 
@@ -33,6 +34,21 @@ BlCompositeShape >> replaceShape: anOldShape with: aNewShape [
 	aNewShape parent: self.
 
 	shapes replaceAll: anOldShape with: aNewShape
+]
+
+{ #category : #'api - shapes' }
+BlCompositeShape >> shapeWithAttribute: aName detectValue: aValue [
+	^ self shapes detect: [ :each | (each attributes at: aName) detect: [ :eachValue | eachValue = aValue ] ifFound: [ true ] ]
+]
+
+{ #category : #'api - shapes' }
+BlCompositeShape >> shapeWithAttribute: aName includesValue: aValue [
+	^ self shapes detect: [ :each | (each attributes at: aName) includes: aValue ]
+]
+
+{ #category : #'api - shapes' }
+BlCompositeShape >> shapeWithAttribute: aName value: aValue [
+	^ self shapes detect: [ :each | (each attributes at: aName) = aValue ]
 ]
 
 { #category : #accessing }

@@ -14,6 +14,16 @@ BlVectorShape >> asElementIn: aContainer [
 ]
 
 { #category : #accessing }
+BlVectorShape >> attributeAt: aName ifAbsentPut: aValue [
+	^ self attributes at: aName ifAbsentPut: aValue
+]
+
+{ #category : #accessing }
+BlVectorShape >> attributeAt: aName put: aValue [
+	self attributes at: aName put: aValue
+]
+
+{ #category : #accessing }
 BlVectorShape >> attributes [
 	^ attributes
 ]
