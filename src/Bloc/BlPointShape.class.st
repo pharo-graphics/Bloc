@@ -18,6 +18,11 @@ BlPointShape >> asElement [
 		addEventHandler: BlPullHandler new
 ]
 
+{ #category : #private }
+BlPointShape >> moveBy: aDelta [
+	self point: self point + aDelta
+]
+
 { #category : #accessing }
 BlPointShape >> point [
 	^ point

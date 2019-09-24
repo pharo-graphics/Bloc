@@ -63,7 +63,7 @@ BlLineShape >> injectLineAt: aFloat length: aLength [
 	aLeftSplitPoint := (BlConnectionPointShape new point: aSplitPoint - (aLength * aLineVector normalized)).
 	aRightSplitPoint := (BlConnectionPointShape new point: aSplitPoint + (aLength * aLineVector normalized)).
 
-	aNewShape := BlPolylineShape new.
+	aNewShape := BlThreeSegmentPolylineShape new.
 	
 	aLeftLine := BlLineShape new
 		fromPoint: self fromPoint;
@@ -91,7 +91,7 @@ BlLineShape >> splitAt: aFloat [
 	
 	aSplitPoint := (BlConnectionPointShape new point: self fromPoint point + ((self toPoint point - self fromPoint point) * aFloat)).
 	
-	aNewShape := BlPolylineShape new.
+	aNewShape := BlTwoSegmentPolylineShape new.
 	aLeftLine := BlLineShape new
 		fromPoint: self fromPoint;
 		toPoint: aSplitPoint.
