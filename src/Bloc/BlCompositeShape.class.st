@@ -37,18 +37,19 @@ BlCompositeShape >> replaceShape: anOldShape with: aNewShape [
 ]
 
 { #category : #'api - shapes' }
-BlCompositeShape >> shapeWithAttribute: aName detectValue: aValue [
-	^ self shapes detect: [ :each | (each attributes at: aName) detect: [ :eachValue | eachValue = aValue ] ifFound: [ true ] ]
-]
-
-{ #category : #'api - shapes' }
 BlCompositeShape >> shapeWithAttribute: aName includesValue: aValue [
-	^ self shapes detect: [ :each | (each attributes at: aName) includes: aValue ]
+	^ self allShapes detect: [ :each | each attributes
+		at: aName
+		ifPresent: [ :eachValue | eachValue includes: aValue ]
+		ifAbsent: [ false ] ]
 ]
 
 { #category : #'api - shapes' }
 BlCompositeShape >> shapeWithAttribute: aName value: aValue [
-	^ self shapes detect: [ :each | (each attributes at: aName) = aValue ]
+	^ self allShapes detect: [ :each | each attributes
+		at: aName
+		ifPresent: [ :eachValue | eachValue = aValue ]
+		ifAbsent: [ false ] ]
 ]
 
 { #category : #accessing }
@@ -60,4 +61,10 @@ BlCompositeShape >> shapes [
 BlCompositeShape >> shapes: aCollectionOfShapes [
 	shapes := aCollectionOfShapes asOrderedCollection.
 	shapes do: [ :each | each parent: self ]
+]
+
+{ #category : #'api - shapes' }
+BlCompositeShape >> shapesDo: aBlock [
+	aBlock value: self.
+	self shapes do: [ :each | each shapesDo: aBlock ]
 ]

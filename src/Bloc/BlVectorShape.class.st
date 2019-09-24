@@ -8,9 +8,19 @@ Class {
 	#category : #'Bloc-Basic-Vector Shapes'
 }
 
+{ #category : #enumerating }
+BlVectorShape >> allShapes [
+	^ Array streamContents: [ :aStream | self shapesDo: [ :each | aStream nextPut: each ] ]
+]
+
 { #category : #converting }
 BlVectorShape >> asElementIn: aContainer [
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+BlVectorShape >> attributeAt: aName [
+	^ self attributes at: aName
 ]
 
 { #category : #accessing }

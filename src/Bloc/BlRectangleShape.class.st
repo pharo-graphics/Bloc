@@ -57,30 +57,30 @@ BlRectangleShape class >> rectangle: aRectangle [
 
 { #category : #'api - geometry' }
 BlRectangleShape >> bottomEdge [
-	^ self shapes detect: [ :each | (each attributes at: RectangleEdgeAttribute) = #bottom ]
+	^ self shapeWithAttribute: RectangleEdgeAttribute value: #bottom
 ]
 
 { #category : #'api - geometry' }
 BlRectangleShape >> leftEdge [
-	^ self shapes detect: [ :each | (each attributes at: RectangleEdgeAttribute) = #left ]
+	^ self shapeWithAttribute: RectangleEdgeAttribute value: #left
 ]
 
 { #category : #'api - geometry' }
 BlRectangleShape >> rightEdge [
-	^ self shapes detect: [ :each | (each attributes at: RectangleEdgeAttribute) = #right ]
+	^ self shapeWithAttribute: RectangleEdgeAttribute value: #right
 ]
 
 { #category : #'api - geometry' }
 BlRectangleShape >> topEdge [
-	^ self shapes detect: [ :each | (each attributes at: RectangleEdgeAttribute) = #top ]
+	^ self shapeWithAttribute: RectangleEdgeAttribute value: #top
 ]
 
 { #category : #'api - geometry' }
 BlRectangleShape >> topLeftCorner [
-	^ self shapes detect: [ :each | (each attributes at: RectangleCornerAttribute) = #topLeft ]
+	^ self shapeWithAttribute: RectangleCornerAttribute value: #topLeft
 ]
 
 { #category : #'api - geometry' }
 BlRectangleShape >> topRightCorner [
-	^ self shapes detect: [ :each | (each attributes at: RectangleCornerAttribute) = #topRight ]
+	^ self shapeWithAttribute: RectangleCornerAttribute value: #topRight
 ]

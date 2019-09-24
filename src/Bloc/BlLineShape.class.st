@@ -77,6 +77,9 @@ BlLineShape >> injectLineAt: aFloat length: aLength [
 		fromPoint: aRightSplitPoint;
 		toPoint: self toPoint.
 		
+	(self fromPoint attributeAt: LineFromPointAttribute) remove: self.
+	(self toPoint attributeAt: LineToPointAttribute) remove: self.
+		
 	aNewShape shapes: { aLeftLine . aCenterLine . aRightLine }.
 	
 	self parentDo: [ :aParentShape | aParentShape replaceShape: self with: aNewShape ].
@@ -99,7 +102,10 @@ BlLineShape >> splitAt: aFloat [
 	aRightLine := BlLineShape new
 		fromPoint: aSplitPoint;
 		toPoint: self toPoint.
-		
+	
+	(self fromPoint attributeAt: LineFromPointAttribute) remove: self.
+	(self toPoint attributeAt: LineToPointAttribute) remove: self.
+	
 	aNewShape shapes: { aLeftLine . aRightLine }.
 	
 	self parentDo: [ :aParentShape | aParentShape replaceShape: self with: aNewShape ].
