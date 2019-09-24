@@ -53,6 +53,38 @@ BlLineShape >> fromPoint: aPointShape [
 ]
 
 { #category : #accessing }
+BlLineShape >> injectLineAt: aFloat length: aLength [
+	<return: #BlVectorShape>
+	| aNewShape aLeftSplitPoint aRightSplitPoint aRightLine aLineVector aSplitPoint aLeftLine aCenterLine |
+	
+	aLineVector := self toPoint point - self fromPoint point.
+	aSplitPoint := self fromPoint point + (aLineVector * aFloat).
+
+	aLeftSplitPoint := (BlConnectionPointShape new point: aSplitPoint - (aLength * aLineVector normalized)).
+	aRightSplitPoint := (BlConnectionPointShape new point: aSplitPoint + (aLength * aLineVector normalized)).
+
+	aNewShape := BlPolylineShape new.
+	
+	aLeftLine := BlLineShape new
+		fromPoint: self fromPoint;
+		toPoint: aLeftSplitPoint.
+		
+	aCenterLine := BlLineShape new
+		fromPoint: aLeftSplitPoint;
+		toPoint: aRightSplitPoint.
+		
+	aRightLine := BlLineShape new
+		fromPoint: aRightSplitPoint;
+		toPoint: self toPoint.
+		
+	aNewShape shapes: { aLeftLine . aCenterLine . aRightLine }.
+	
+	self parentDo: [ :aParentShape | aParentShape replaceShape: self with: aNewShape ].
+	
+	^ aNewShape
+]
+
+{ #category : #accessing }
 BlLineShape >> splitAt: aFloat [
 	<return: #BlVectorShape>
 	| aNewShape aSplitPoint aLeftLine aRightLine |
