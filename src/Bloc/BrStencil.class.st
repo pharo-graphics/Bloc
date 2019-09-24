@@ -68,16 +68,6 @@ BrStencil >> create [
 ]
 
 { #category : #'gt-inspector-extension' }
-BrStencil >> gtInspectorStencilElementPreviewIn: aComposite [
-	<gtInspectorPresentationOrder: 1>
-
-	^ aComposite bloc
-		title: 'Preview';
-		display: [ self create ];
-		when: [ self create isKindOf: BlElement ]
-]
-
-{ #category : #'gt-inspector-extension' }
 BrStencil >> gtPreviewFor: aView [
 	<gtView>
 
