@@ -67,9 +67,18 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Examples' with: [
 				spec requires: #('GToolkitExamplesEngine' 'BlocLayout' 'Bloc-Geometry' 'Bloc-Infinite' 'Bloc-Infinite-Layouts' 'Bloc-DevTool' 'Bloc-Text-Elements' ). ];
 			package: #'BlocHost-Mock' with: [
-				spec requires: #(#BlocCore ). ];
-			package: #'BlocHost-Morphic' with: [
-				spec requires: #(#BlocCore ). ];
+				spec requires: #(#BlocCore ). ].
+
+		SystemVersion current major >= 8 ifTrue: [ 
+			spec
+				package: #'BlocHost-Morphic' with: [
+					spec requires: #(#BlocCore ). ] ]
+		ifFalse: [ 
+			spec
+				package: #'BlocHost-Morphic7' with: [
+					spec requires: #(#BlocCore ). ] ].
+
+		spec
 			package: #'BlocHost-Glutin' with: [
 				spec requires: #(#BlocCore 'Bloc-Sparta' Glutin). ];
 			package: #'Bloc-Extensions' with: [

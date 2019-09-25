@@ -4,7 +4,7 @@ I am fired by morphic host window when it is closed or deleted from the World
 Class {
 	#name : #BlMorphicWindowClosedEvent,
 	#superclass : #BlMorphicWindowEvent,
-	#category : #'BlocHost-Morphic-Events'
+	#category : #'BlocHost-Morphic7-Events'
 }
 
 { #category : #dispatching }
