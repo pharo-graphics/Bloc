@@ -81,6 +81,7 @@ BlMorphicWorldEmbeddingElement >> initialize [
 	shouldBeMain := false.
 	worldState := BlMorphicWorldState new element: self.
 	world := BlMorphicWorldMorph worldState: worldState.
+	world worldState worldRenderer: (BlMorphicWorldRenderer new element: self; world: world).
 
 	self addEventHandler: BlMorphicWorldEmbeddingEventHandler new.
 	self when: BlMouseDownEvent do: [ self requestFocus ].
