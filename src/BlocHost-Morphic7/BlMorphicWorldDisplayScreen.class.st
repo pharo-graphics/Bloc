@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMorphicWorldDisplayScreen,
 	#superclass : #Form,
-	#category : #'BlocHost-Morphic-World'
+	#category : #'BlocHost-Morphic7-World'
 }
 
 { #category : #converting }

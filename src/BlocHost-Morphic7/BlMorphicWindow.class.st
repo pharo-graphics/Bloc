@@ -11,7 +11,7 @@ Class {
 		'preventResize',
 		'spaceHostMorph'
 	],
-	#category : #'BlocHost-Morphic-Host - Window'
+	#category : #'BlocHost-Morphic7-Host - Window'
 }
 
 { #category : #accessing }

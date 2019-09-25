@@ -6,7 +6,7 @@ Class {
 		'worldState',
 		'shouldBeMain'
 	],
-	#category : #'BlocHost-Morphic-World'
+	#category : #'BlocHost-Morphic7-World'
 }
 
 { #category : #'instance creation' }

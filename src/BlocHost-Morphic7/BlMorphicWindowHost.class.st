@@ -4,7 +4,7 @@ I am a concrete implementation of a BlHost that allows users to open host bloc s
 Class {
 	#name : #BlMorphicWindowHost,
 	#superclass : #BlMorphicSteppingHost,
-	#category : #'BlocHost-Morphic-Host - Window'
+	#category : #'BlocHost-Morphic7-Host - Window'
 }
 
 { #category : #'driver selection' }

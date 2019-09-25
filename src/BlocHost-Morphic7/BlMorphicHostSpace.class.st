@@ -11,7 +11,7 @@ Class {
 	#instVars : [
 		'spaceHostMorph'
 	],
-	#category : #'BlocHost-Morphic-Host - Morph'
+	#category : #'BlocHost-Morphic7-Host - Morph'
 }
 
 { #category : #'window - properties' }

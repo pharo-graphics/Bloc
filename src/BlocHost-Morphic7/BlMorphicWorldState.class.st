@@ -5,7 +5,7 @@ Class {
 		'element',
 		'display'
 	],
-	#category : #'BlocHost-Morphic-World'
+	#category : #'BlocHost-Morphic7-World'
 }
 
 { #category : #canvas }

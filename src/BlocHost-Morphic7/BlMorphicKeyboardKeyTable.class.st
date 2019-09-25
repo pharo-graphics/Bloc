@@ -9,7 +9,7 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'BlocHost-Morphic-Support'
+	#category : #'BlocHost-Morphic7-Support'
 }
 
 { #category : #cleanup }

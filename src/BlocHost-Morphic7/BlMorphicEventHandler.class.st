@@ -11,7 +11,7 @@ Class {
 		'morph',
 		'pressedKeys'
 	],
-	#category : #'BlocHost-Morphic-Support'
+	#category : #'BlocHost-Morphic7-Support'
 }
 
 { #category : #'instance creation' }

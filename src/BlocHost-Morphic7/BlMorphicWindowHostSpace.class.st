@@ -14,7 +14,7 @@ Class {
 		'isFullSize',
 		'isBorderless'
 	],
-	#category : #'BlocHost-Morphic-Host - Window'
+	#category : #'BlocHost-Morphic7-Host - Window'
 }
 
 { #category : #'window - properties' }

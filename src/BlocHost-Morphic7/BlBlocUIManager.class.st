@@ -9,7 +9,7 @@ However for now I can also be used to handle just the case of the Morhic UI proc
 Class {
 	#name : #BlBlocUIManager,
 	#superclass : #MorphicUIManager,
-	#category : #'BlocHost-Morphic-Support'
+	#category : #'BlocHost-Morphic7-Support'
 }
 
 { #category : #'class initialization' }
