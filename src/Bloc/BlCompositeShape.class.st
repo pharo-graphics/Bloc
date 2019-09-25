@@ -27,6 +27,9 @@ BlCompositeShape >> initialize [
 
 { #category : #'api - shapes' }
 BlCompositeShape >> replaceShape: anOldShape with: aNewShape [
+	
+	(shapes includes: anOldShape)
+		ifFalse: [ ^ self error: 'No such shape to replace' ].
 
 	aNewShape attributes addAll: anOldShape attributes.
 

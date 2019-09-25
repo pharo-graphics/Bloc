@@ -42,7 +42,6 @@ BlVectorShape >> allShapes [
 
 { #category : #converting }
 BlVectorShape >> asElementIn: aContainer [
-	self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -68,6 +67,20 @@ BlVectorShape >> attributeAt: aName put: aValue [
 { #category : #accessing }
 BlVectorShape >> attributes [
 	^ attributes
+]
+
+{ #category : #ui }
+BlVectorShape >> gtAttributesFor: aView [
+	<gtView>
+	self attributes ifNil: [ ^ aView empty ].
+	
+	^ aView columnedList
+		title: 'Attributes' translated;
+		items: [ self attributes associations ];
+		column: 'Name' 
+			item: [ :anAssociation | anAssociation key ];
+		column: 'Value' 
+			item: [ :anAssociation | anAssociation value ]
 ]
 
 { #category : #ui }
@@ -121,6 +134,11 @@ BlVectorShape >> parent: anObject [
 BlVectorShape >> parentDo: aBlock [
 	self hasParent
 		ifTrue: [ aBlock value: self parent ]
+]
+
+{ #category : #accessing }
+BlVectorShape >> removeAttributeAt: aName [
+	self attributes removeKey: aName ifAbsent: [  ]
 ]
 
 { #category : #enumerating }

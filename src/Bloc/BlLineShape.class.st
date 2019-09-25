@@ -56,10 +56,7 @@ BlLineShape >> injectLineAt: aFloat length: aLength [
 		fromPoint: aRightSplitPoint;
 		toPoint: self toPoint.
 
-	self fromPoint removeConnectedShape: self.
 	(self fromPoint attributeAt: CurveFromPointAttribute) remove: self.
-
-	self toPoint removeConnectedShape: self.
 	(self toPoint attributeAt: CurveToPointAttribute) remove: self.
 
 	aNewShape shapes: { aLeftLine . aCenterLine . aRightLine }.
@@ -84,9 +81,7 @@ BlLineShape >> splitAt: aFloat [
 	aRightLine := BlLineShape new
 		fromPoint: aSplitPoint;
 		toPoint: self toPoint.
-	
-	self fromPoint removeConnectedShape: self.
-	self toPoint removeConnectedShape: self.
+
 	(self fromPoint attributeAt: CurveFromPointAttribute) remove: self.
 	(self toPoint attributeAt: CurveToPointAttribute) remove: self.
 	

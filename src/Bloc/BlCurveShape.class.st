@@ -12,7 +12,6 @@ BlCurveShape >> fromPoint [
 { #category : #accessing }
 BlCurveShape >> fromPoint: aPointShape [
 	(aPointShape attributeAt: CurveFromPointAttribute ifAbsentPut: [ OrderedCollection new ]) add: self.
-	aPointShape addConnectedShape: self.
 
 	self addShape: aPointShape
 ]
@@ -30,7 +29,6 @@ BlCurveShape >> toPoint [
 { #category : #accessing }
 BlCurveShape >> toPoint: aPointShape [
 	(aPointShape attributeAt: CurveToPointAttribute ifAbsentPut: [ OrderedCollection new ]) add: self.
-	aPointShape addConnectedShape: self.
 
 	self addShape: aPointShape
 ]

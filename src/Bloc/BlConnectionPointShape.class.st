@@ -1,65 +1,69 @@
 Class {
 	#name : #BlConnectionPointShape,
 	#superclass : #BlPointShape,
-	#instVars : [
-		'connectedShapes'
-	],
 	#category : #'Bloc-Basic-Vector Shapes'
 }
 
-{ #category : #'api - connections' }
-BlConnectionPointShape >> addConnectedShape: aShape [
-	connectedShapes add: aShape
-]
-
-{ #category : #'api - connections' }
-BlConnectionPointShape >> connectedShapes [
-	^ connectedShapes
-]
-
 { #category : #'api - transformation' }
 BlConnectionPointShape >> divide [
-	| newFromPoint newToPoint aLine |
+	| newFromPoint newToPoint aLine aParent |
+	
+	aParent := self
+		allParentsDetect: [ :eachParent | eachParent isCurve not ]
+		ifFound: [ :aParentShape | aParentShape ]
+		ifNone: [ nil ].
 	
 	newFromPoint := BlConnectionPointShape new point: self point.
 	newToPoint := BlConnectionPointShape new point: self point.
 	
-	self connectedShapes do: [ :eachShape |
-		eachShape replaceShape: self with: newFromPoint.
-		eachShape replaceShape: self with: newToPoint ].
+	self incomingCurves do: [ :eachCurve | eachCurve replaceShape: self with: newFromPoint ].
+	self outgoingCurves do: [ :eachCurve | eachCurve replaceShape: self with: newToPoint ].
 	
-	self halt.
+	newFromPoint attributes removeAll.
+	newFromPoint incomingCurves: self incomingCurves.
+	self incomingCurves: #().
+	
+
+	newToPoint attributes removeAll.
+	newToPoint outgoingCurves: self outgoingCurves.
+	self outgoingCurves: #().
 	
 	aLine := BlLineShape new
 		fromPoint: newFromPoint;
 		toPoint:  newToPoint.
 		
-	self
-		allParentsDetect: [ :eachParent | eachParent isCurve not ]
-		ifFound: [ :aParentShape | aParentShape addShape: aLine ]
-		ifNone: [ ].
+	aLine attributes addAll: self attributes.
+		
+	aParent ifNotNil: [ aParent addShape: aLine ].
 
 	^ aLine
 ]
 
 { #category : #'api - connections' }
-BlConnectionPointShape >> incomingLines [
+BlConnectionPointShape >> incomingCurves [
 	^ self attributeAt: CurveToPointAttribute ifAbsent: [ #() ]
+]
+
+{ #category : #'api - connections' }
+BlConnectionPointShape >> incomingCurves: aCollectionOfCurves [
+	aCollectionOfCurves
+		ifEmpty: [ self removeAttributeAt: CurveToPointAttribute ]
+		ifNotEmpty: [ self attributeAt: CurveToPointAttribute put: aCollectionOfCurves asOrderedCollection copy ]
 ]
 
 { #category : #initialization }
 BlConnectionPointShape >> initialize [
-	super initialize.
-	
-	connectedShapes := Set new
+	super initialize
 ]
 
 { #category : #'api - connections' }
-BlConnectionPointShape >> outgoingLines [
+BlConnectionPointShape >> outgoingCurves [
 	^ self attributeAt: CurveFromPointAttribute ifAbsent: [ #() ]
 ]
 
 { #category : #'api - connections' }
-BlConnectionPointShape >> removeConnectedShape: aShape [
-	connectedShapes remove: aShape
+BlConnectionPointShape >> outgoingCurves: aCollectionOfCurves [
+	aCollectionOfCurves
+		ifEmpty: [ self removeAttributeAt: CurveFromPointAttribute ]
+		ifNotEmpty: [ self attributeAt: CurveFromPointAttribute put: aCollectionOfCurves asOrderedCollection copy ]
 ]
