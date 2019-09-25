@@ -1,6 +1,6 @@
 Class {
 	#name : #BlPolylineShape,
-	#superclass : #BlCompositeShape,
+	#superclass : #BlCurveShape,
 	#category : #'Bloc-Basic-Vector Shapes'
 }
 

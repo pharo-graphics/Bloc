@@ -5,8 +5,35 @@ Class {
 		'parent',
 		'attributes'
 	],
+	#classVars : [
+		'CurveFromPointAttribute',
+		'CurveToPointAttribute'
+	],
 	#category : #'Bloc-Basic-Vector Shapes'
 }
+
+{ #category : #'class initialization' }
+BlVectorShape class >> initialize [
+	CurveFromPointAttribute := #lineFromPoint.
+	CurveToPointAttribute := #lineToPoint
+]
+
+{ #category : #enumerating }
+BlVectorShape >> allParentsDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	self allParentsDo: [ :aParent | 
+		(aBlock value: aParent)
+			ifTrue: [ ^ ifFoundBlock value: aParent ] ].
+	^ ifNoneBlock value
+]
+
+{ #category : #enumerating }
+BlVectorShape >> allParentsDo: aBlock [
+	self hasParent
+		ifFalse: [ ^ self ].
+
+	aBlock value: self parent.
+	self parent allParentsDo: aBlock
+]
 
 { #category : #enumerating }
 BlVectorShape >> allShapes [
@@ -21,6 +48,11 @@ BlVectorShape >> asElementIn: aContainer [
 { #category : #accessing }
 BlVectorShape >> attributeAt: aName [
 	^ self attributes at: aName
+]
+
+{ #category : #accessing }
+BlVectorShape >> attributeAt: aName ifAbsent: aValue [
+	^ self attributes at: aName ifAbsent: aValue
 ]
 
 { #category : #accessing }
@@ -66,6 +98,11 @@ BlVectorShape >> initialize [
 	super initialize.
 	
 	attributes := Dictionary new
+]
+
+{ #category : #testing }
+BlVectorShape >> isCurve [
+	^ false
 ]
 
 { #category : #accessing }

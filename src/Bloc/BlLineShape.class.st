@@ -1,18 +1,8 @@
 Class {
 	#name : #BlLineShape,
-	#superclass : #BlCompositeShape,
-	#classVars : [
-		'LineFromPointAttribute',
-		'LineToPointAttribute'
-	],
+	#superclass : #BlCurveShape,
 	#category : #'Bloc-Basic-Vector Shapes'
 }
-
-{ #category : #'class initialization' }
-BlLineShape class >> initialize [
-	LineFromPointAttribute := #lineFromPoint.
-	LineToPointAttribute := #lineToPoint
-]
 
 { #category : #converting }
 BlLineShape >> asElement [
@@ -41,18 +31,7 @@ BlLineShape >> asElementIn: aContainer [
 		toAnchor: (BlElementCenterAnchor element: aToElement)
 ]
 
-{ #category : #accessing }
-BlLineShape >> fromPoint [
-	^ self shapeWithAttribute: LineFromPointAttribute includesValue: self
-]
-
-{ #category : #accessing }
-BlLineShape >> fromPoint: aPointShape [
-	(aPointShape attributeAt: LineFromPointAttribute ifAbsentPut: [ OrderedCollection new ]) add: self.
-	self addShape: aPointShape
-]
-
-{ #category : #accessing }
+{ #category : #'api - transformations' }
 BlLineShape >> injectLineAt: aFloat length: aLength [
 	<return: #BlVectorShape>
 	| aNewShape aLeftSplitPoint aRightSplitPoint aRightLine aLineVector aSplitPoint aLeftLine aCenterLine |
@@ -76,18 +55,21 @@ BlLineShape >> injectLineAt: aFloat length: aLength [
 	aRightLine := BlLineShape new
 		fromPoint: aRightSplitPoint;
 		toPoint: self toPoint.
-		
-	(self fromPoint attributeAt: LineFromPointAttribute) remove: self.
-	(self toPoint attributeAt: LineToPointAttribute) remove: self.
-		
+
+	self fromPoint removeConnectedShape: self.
+	(self fromPoint attributeAt: CurveFromPointAttribute) remove: self.
+
+	self toPoint removeConnectedShape: self.
+	(self toPoint attributeAt: CurveToPointAttribute) remove: self.
+
 	aNewShape shapes: { aLeftLine . aCenterLine . aRightLine }.
-	
+
 	self parentDo: [ :aParentShape | aParentShape replaceShape: self with: aNewShape ].
 	
 	^ aNewShape
 ]
 
-{ #category : #accessing }
+{ #category : #'api - transformations' }
 BlLineShape >> splitAt: aFloat [
 	<return: #BlVectorShape>
 	| aNewShape aSplitPoint aLeftLine aRightLine |
@@ -103,23 +85,14 @@ BlLineShape >> splitAt: aFloat [
 		fromPoint: aSplitPoint;
 		toPoint: self toPoint.
 	
-	(self fromPoint attributeAt: LineFromPointAttribute) remove: self.
-	(self toPoint attributeAt: LineToPointAttribute) remove: self.
+	self fromPoint removeConnectedShape: self.
+	self toPoint removeConnectedShape: self.
+	(self fromPoint attributeAt: CurveFromPointAttribute) remove: self.
+	(self toPoint attributeAt: CurveToPointAttribute) remove: self.
 	
 	aNewShape shapes: { aLeftLine . aRightLine }.
 	
 	self parentDo: [ :aParentShape | aParentShape replaceShape: self with: aNewShape ].
 	
 	^ aNewShape
-]
-
-{ #category : #accessing }
-BlLineShape >> toPoint [
-	^ self shapeWithAttribute: LineToPointAttribute includesValue: self
-]
-
-{ #category : #accessing }
-BlLineShape >> toPoint: aPointShape [
-	(aPointShape attributeAt: LineToPointAttribute ifAbsentPut: [ OrderedCollection new ]) add: self.
-	self addShape: aPointShape
 ]
