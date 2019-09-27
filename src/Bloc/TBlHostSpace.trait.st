@@ -272,8 +272,18 @@ TBlHostSpace >> scaleFactor [
 	"Return a scaling factor from space to window coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
 	<return: #Point>
+	| aCanvasExtent aWindowExtent |
 	
-	^ (self canvasExtent / self windowExtent) asFloatPoint
+	aCanvasExtent := self canvasExtent.
+	aWindowExtent := self windowExtent.
+	
+	(aCanvasExtent x isZero
+		or: [ aCanvasExtent y isZero
+			or: [ aWindowExtent x isZero
+				or: [ aWindowExtent y isZero ] ] ])
+		ifTrue: [ ^ 1@1 ].
+	
+	^ (aCanvasExtent / aWindowExtent) asFloatPoint
 ]
 
 { #category : #'host space - displaying' }

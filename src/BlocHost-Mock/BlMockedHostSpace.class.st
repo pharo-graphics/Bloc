@@ -257,15 +257,6 @@ BlMockedHostSpace >> renderCount [
 	^ renderCount
 ]
 
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
-	
-	^ self canvasExtent / self windowExtent
-]
-
 { #category : #'host space - displaying' }
 BlMockedHostSpace >> show [
 	visible := true
