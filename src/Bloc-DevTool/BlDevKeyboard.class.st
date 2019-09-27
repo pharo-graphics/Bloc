@@ -54,23 +54,26 @@ BlDevKeyboard >> initializeBottomRow [
 
 { #category : #initialization }
 BlDevKeyboard >> initializeEventListeners [
-	self when: BlKeyDownEvent do: [ :anEvent |
-		('down: ', anEvent key asString) logCr.
-		StringSignal emit: ('down: ', anEvent key asString).
-
-		keymap
-			at: anEvent key
-			ifPresent: [ :aButton | aButton background: (Color veryVeryLightGray) ]
-			ifAbsent: [
-				self inform: 'Unknown: ', anEvent key asString.
-				NonInteractiveTranscript stdout show: ('Unknown: ', anEvent key asString); cr ] ].
-		
-	self when: BlKeyUpEvent do: [ :anEvent |
-		('up ', anEvent key asString) logCr.
-		StringSignal emit: ('up: ', anEvent key asString).
-		keymap
-			at: anEvent key
-			ifPresent: [ :aButton | aButton background: (Color white) ] ].
+	self
+		when: BlKeyDownEvent
+		do: [ :anEvent | 
+			('down: ' , anEvent key asString) traceCr.
+			StringSignal emit: 'down: ' , anEvent key asString.
+			keymap
+				at: anEvent key
+				ifPresent: [ :aButton | aButton background: Color veryVeryLightGray ]
+				ifAbsent: [ self inform: 'Unknown: ' , anEvent key asString.
+					NonInteractiveTranscript stdout
+						show: 'Unknown: ' , anEvent key asString;
+						cr ] ].
+	self
+		when: BlKeyUpEvent
+		do: [ :anEvent | 
+			('up ' , anEvent key asString) traceCr.
+			StringSignal emit: 'up: ' , anEvent key asString.
+			keymap
+				at: anEvent key
+				ifPresent: [ :aButton | aButton background: Color white ] ]
 ]
 
 { #category : #initialization }
