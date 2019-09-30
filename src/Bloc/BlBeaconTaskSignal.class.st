@@ -31,8 +31,8 @@ BlBeaconTaskSignal class >> fromSton: stonReader [
 ]
 
 { #category : #converting }
-BlBeaconTaskSignal >> asStonDictionary [
-	^ super asStonDictionary 
+BlBeaconTaskSignal >> asDictionary [
+	^ super asDictionary 
 		at: #callingMethod put: callingMethod;
 		at: #task put: task printString;
 		at: #message put: message;

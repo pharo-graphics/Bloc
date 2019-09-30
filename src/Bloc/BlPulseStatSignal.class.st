@@ -98,9 +98,9 @@ BlPulseStatSignal >> addSampleDuration: aDuraction delayForced: aBoolean [
 ]
 
 { #category : #'ston persistence' }
-BlPulseStatSignal >> asStonDictionary [
+BlPulseStatSignal >> asDictionary [
 
-	^super asStonDictionary 
+	^super asDictionary 
 		at: #l2 put: l2;
 		at: #min put: min;
 		at: #max put: max;
