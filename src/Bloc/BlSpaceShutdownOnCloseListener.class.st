@@ -26,9 +26,10 @@ Class {
 { #category : #'api - event managing' }
 BlSpaceShutdownOnCloseListener >> handleEvent: anEvent [
 	| aSpace |
-	
 	aSpace := anEvent currentTarget.
-	aSpace universe snapshot: shouldSave andQuit: true
+	aSpace universe snapshot: shouldSave andQuit: true.
+	"the next line should not be here, it's only as a workaround"
+	Smalltalk snapshot: shouldSave andQuit: true.
 ]
 
 { #category : #initialization }
