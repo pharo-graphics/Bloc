@@ -37,6 +37,11 @@ BlText class >> empty [
 	^ BlEmptyText uniqueInstance
 ]
 
+{ #category : #'text - modifications' }
+BlText >> , aText [
+	self append: aText
+]
+
 { #category : #'text - enumeration' }
 BlText >> allSatisfy: aBlock [
 	"Evaluate aBlock with all text character's.
