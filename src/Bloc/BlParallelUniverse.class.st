@@ -220,6 +220,11 @@ BlParallelUniverse >> isPulsing [
 	^ areWePulsing
 ]
 
+{ #category : #'private - spaces' }
+BlParallelUniverse >> markAsNotPulsing [
+	isPulsing := false
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
@@ -286,7 +291,7 @@ BlParallelUniverse >> pulse [
 
 	[
 		self pulseSynchronously
-	] ensure: [ pulsingStateMutex critical: [ isPulsing := false ] ]
+	] ensure: [ self requestStopPulsation ]
 ]
 
 { #category : #'private - spaces' }
@@ -299,6 +304,18 @@ BlParallelUniverse >> pulseSynchronously [
 	self tryToRunPostponedActions
 ]
 
+{ #category : #'private - spaces' }
+BlParallelUniverse >> requestStopPulsation [
+	pulsingStateMutex critical: [ 
+		self uiProcessDo: [ :currentUIProcess | 
+			"Only mark the universe as not pulsing in case the request comes from the current
+			UI process or from a process that was not the Bloc UI process previously. This avoids 
+			reseting the pulsing status when the debugger terminates a previously suspended UI process."
+			(currentUIProcess == Processor activeProcess or: [ 
+				Processor activeProcess name ~= 'Bloc UI Process' ]) ifTrue: [ 
+					self markAsNotPulsing ] ] ]
+]
+
 { #category : #'api - lifecycle' }
 BlParallelUniverse >> snapshot: save andQuit: quit [
 	self postpone: [ Smalltalk snapshot: save andQuit: quit ]
@@ -309,11 +326,6 @@ BlParallelUniverse >> spaces [
 	<return: #Collection of: #BlSpace>
 
 	^ spaceManager spaces
-]
-
-{ #category : #'private - spaces' }
-BlParallelUniverse >> stopPulsation [
-	pulsingStateMutex critical: [ isPulsing := false ]
 ]
 
 { #category : #'deferred message' }
