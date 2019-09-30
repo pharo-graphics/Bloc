@@ -80,9 +80,9 @@ BlTaskItSignal >> action [
 ]
 
 { #category : #'ston persistence' }
-BlTaskItSignal >> asStonDictionary [
+BlTaskItSignal >> asDictionary [
 
-	^super asStonDictionary 
+	^super asDictionary 
 		at: #callingMethod put: callingMethod;
 		at: #valuable put: valuable printString;
 		at: #message put: message;
