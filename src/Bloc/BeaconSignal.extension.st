@@ -1,7 +1,7 @@
 Extension { #name : #BeaconSignal }
 
 { #category : #'*Bloc' }
-BeaconSignal >> asStonDictionary [
+BeaconSignal >> asDictionary [
 
 	^Dictionary new
 		at: #timestamp put: timestamp;
@@ -59,5 +59,5 @@ BeaconSignal class >> fromStonDictionary: aDictionary [
 BeaconSignal >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |
-		array add: self asStonDictionary ]
+		array add: self asDictionary ]
 ]

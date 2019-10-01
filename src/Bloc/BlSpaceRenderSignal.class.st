@@ -100,7 +100,7 @@ BlSpaceRenderSignal >> action: anObject [
 ]
 
 { #category : #'ston persistence' }
-BlSpaceRenderSignal >> asStonDictionary [
+BlSpaceRenderSignal >> asDictionary [
 
 	| spaceSton |
 
@@ -109,7 +109,7 @@ BlSpaceRenderSignal >> asStonDictionary [
 			print: space identityHash;
 			<< '-';
 			print: space ].
-	^super asStonDictionary 
+	^super asDictionary 
 		at: #space put: spaceSton;
 		at: #action put: action;
 		yourself.

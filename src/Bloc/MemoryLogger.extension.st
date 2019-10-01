@@ -1,7 +1,7 @@
 Extension { #name : #MemoryLogger }
 
 { #category : #'*Bloc' }
-MemoryLogger >> asStonDictionary [
+MemoryLogger >> asDictionary [
 
 	^Dictionary new
 		at: #name put: name;
@@ -61,5 +61,5 @@ MemoryLogger >> saveStonFile: aFileReference [
 MemoryLogger >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |
-		array add: self asStonDictionary ]
+		array add: self asDictionary ]
 ]

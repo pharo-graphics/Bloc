@@ -136,7 +136,7 @@ BlTaskExecutionSignal >> action: anObject [
 ]
 
 { #category : #'ston persistence' }
-BlTaskExecutionSignal >> asStonDictionary [
+BlTaskExecutionSignal >> asDictionary [
 
 	| taskSton |
 
@@ -168,7 +168,7 @@ BlTaskExecutionSignal >> printOneLineContentsOn: stream [
 BlTaskExecutionSignal >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |
-		array add: self asStonDictionary ]
+		array add: self asDictionary ]
 ]
 
 { #category : #accessing }
