@@ -46,11 +46,12 @@ BlHostRendererFormSurface >> initializeOn: anObject [
 
 { #category : #initialization }
 BlHostRendererFormSurface >> initializeResourcesOn: aHostRenderer [
-	externalForm := BlExternalForm extent: self canvasExtent depth: 32.
+	externalForm := BlExternalForm
+		extent: self physicalSize width @ self physicalSize height
+		depth: 32.
 	externalForm autoRelease.
 	externalForm allocateSpace.
 	externalForm fillColor: Color transparent.
-
 	self initializeOn: aHostRenderer
 ]
 

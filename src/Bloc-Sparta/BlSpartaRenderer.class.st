@@ -18,7 +18,7 @@ Class {
 	#classInstVars : [
 		'defaultCanvasBuilder'
 	],
-	#category : 'Bloc-Sparta'
+	#category : #'Bloc-Sparta'
 }
 
 { #category : #accessing }
@@ -91,11 +91,13 @@ BlSpartaRenderer >> doRender: aSpace dirtyAreas: aCollectionOfRectangles [
 { #category : #'renderer - testing' }
 BlSpartaRenderer >> hasResized [
 	"Return true if host space resized since previous frame, otherwise false"
+
 	<return: #Boolean>
-	
 	^ session ~= Smalltalk session
-		or: [ self surface windowExtent ~= windowExtent
-			or: [ self surface canvasExtent ~= canvasExtent ] ]
+		or: [ self surface logicalSize width @ self surface logicalSize height
+				~= windowExtent
+				or: [ self surface physicalSize width @ self surface physicalSize height
+						~= canvasExtent ] ]
 ]
 
 { #category : #initialization }
@@ -128,17 +130,18 @@ BlSpartaRenderer >> initializeForBuffer: aBufferSurface [
 { #category : #initialization }
 BlSpartaRenderer >> initializeForForm: aFormSurface [
 	"Initalize sparta canvas to be used with a form surface"
+
 	| scaleFactor |
-
-	windowExtent := aFormSurface windowExtent.
-	canvasExtent := aFormSurface canvasExtent.
-
-	scaleFactor := aFormSurface scaleFactor.
-	spartaCanvas := (self pickCanvasForSurface: aFormSurface) forFormOn: aFormSurface.
+	windowExtent := aFormSurface logicalSize width
+		@ aFormSurface logicalSize height.
+	canvasExtent := aFormSurface physicalSize width
+		@ aFormSurface physicalSize height.
+	scaleFactor := aFormSurface dpiFactor asPoint.
+	spartaCanvas := (self pickCanvasForSurface: aFormSurface)
+		forFormOn: aFormSurface.
 	self
 		assert: [ spartaCanvas isValid ]
 		description: [ 'Failed to create sparta canvas' ].
-
 	spartaCanvas transform
 		scaleBy: scaleFactor;
 		push

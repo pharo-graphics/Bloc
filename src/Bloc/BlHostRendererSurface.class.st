@@ -31,12 +31,26 @@ BlHostRendererSurface class >> supportedBy: anObject [
 
 { #category : #geometry }
 BlHostRendererSurface >> canvasExtent [
-	"Return current canvas extent in pixels as a Point.
-	Note, that canvas extent is different from windowExtent
-	and is normally x2 bigger on retina screens"
+	"Return a window canvas size in user coordinates.
+	This size may differ from the window size on high dpi (retina) screens.
+	In most cases canvas is x2 larger than window in pixel on retina screens."
 	<return: #Point>
+	
+	self
+		deprecated: 'Please use #physicalSize instead'
+		transformWith: '`@receiver canvasExtent' 
+						-> '(`@receiver physicalSize width @ `@receiver physicalSize height)'.
 
-	^ self hostSpace canvasExtent
+	^ self physicalSize width @ self physicalSize height
+]
+
+{ #category : #geometry }
+BlHostRendererSurface >> dpiFactor [
+	"Return a scaling dpi factor from logical to physical coordinates.
+	On high dpi (retina) displays scaling factor is > 1"
+	<return: #Number>
+	
+	^ self hostSpace dpiFactor
 ]
 
 { #category : #geometry }
@@ -85,6 +99,26 @@ BlHostRendererSurface >> initializeResourcesOn: aHostRenderer [
 	self subclassResponsibility
 ]
 
+{ #category : #geometry }
+BlHostRendererSurface >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #BlHostLogicalSize>
+
+	^ self hostSpace logicalSize
+]
+
+{ #category : #geometry }
+BlHostRendererSurface >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #BlHostPhysicalSize>
+
+	^ self hostSpace physicalSize
+]
+
 { #category : #rendering }
 BlHostRendererSurface >> prepareToRender: aSpace [
 	"Dispatch preparation to render through host space based on surface type"
@@ -110,15 +144,25 @@ BlHostRendererSurface >> scaleFactor [
 	On high dpi (retina) displays scaling factor is > 1"
 	<return: #Point>
 	
-	^ self hostSpace scaleFactor
+	self
+		deprecated: 'Please use #dpiFactor instead'
+		transformWith: '`@receiver scaleFactor' 
+						-> '`@receiver dpiFactor asPoint'.
+
+	^ self dpiFactor asPoint
 ]
 
 { #category : #geometry }
 BlHostRendererSurface >> windowExtent [
-	"Return current window extent in pixels as a Point.
-	Note, that window extent is different from canvasExtent
-	and is normally x2 smaller on retina screens"
+	"Return the window size in screen coordinates.
+	This size may differ from the size in pixels of underlying surface 
+	on high dpi (retina) screens"
 	<return: #Point>
 
-	^ self hostSpace windowExtent
+	self
+		deprecated: 'Please use #logicalSize instead'
+		transformWith: '`@receiver windowExtent' 
+						-> '(`@receiver logicalSize width @ `@receiver logicalSize height)'.
+
+	^ self logicalSize width @ self logicalSize height
 ]

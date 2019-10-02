@@ -1127,10 +1127,10 @@ BlSpace >> windowExtent [
 	"Return the window size in screen coordinates.
 	This size may differ from the size in pixels on high dpi (retina) screens.
 	Use #extent to get actual pixel size"
-	<return: #Point>
 
+	<return: #Point>
 	^ self
-		hostSpaceDo: [ :aHostSpace | aHostSpace windowExtent ]
+		hostSpaceDo: [ :aHostSpace | aHostSpace logicalSize width @ aHostSpace logicalSize height ]
 		ifAbsent: [ extent ]
 ]
 
