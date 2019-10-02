@@ -201,7 +201,7 @@ BlBlocUIManager >> resumeUIProcess: aProcess [
 
 { #category : #debug }
 BlBlocUIManager >> spawnNewBlocProcess: aUniverse [
-	aUniverse stopPulsation.
+	aUniverse requestStopPulsation.
 	aUniverse hostClass forceStartNewUIProcess
 ]
 
