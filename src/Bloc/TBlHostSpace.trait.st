@@ -28,7 +28,7 @@ TBlHostSpace >> canvasExtent [
 	self
 		deprecated: 'Please use #physicalSize instead'
 		transformWith: '`@receiver canvasExtent' 
-						-> '`(@receiver physicalSize width @ receiver physicalSize height)'.
+						-> '(`@receiver physicalSize width @ `@receiver physicalSize height)'.
 
 	^ self physicalSize width @ self physicalSize height
 ]
@@ -406,7 +406,7 @@ TBlHostSpace >> windowExtent [
 	self
 		deprecated: 'Please use #logicalSize instead'
 		transformWith: '`@receiver windowExtent' 
-						-> '`(@receiver logicalSize width @ receiver logicalSize height)'.
+						-> '(`@receiver logicalSize width @ `@receiver logicalSize height)'.
 
 	^ self logicalSize width @ self logicalSize height
 ]
