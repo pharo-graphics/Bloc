@@ -27,16 +27,6 @@ BlMorphicHostSpace >> borderless: aBoolean [
 	"Make host window borderless if true is given"
 ]
 
-{ #category : #'host space - accessing' }
-BlMorphicHostSpace >> canvasExtent [
-	"Return a window canvas size in user coordinates.
-	This size may differ from the window size on high dpi (retina) screens.
-	In most cases canvas is x2 larger than window in pixel on retina screens."
-	<return: #Point>
-
-	^ self windowExtent
-]
-
 { #category : #'host space - displaying' }
 BlMorphicHostSpace >> close [
 	self host containerMorph removeMorph: self spaceHostMorph
@@ -86,12 +76,36 @@ BlMorphicHostSpace >> initialize [
 	super initialize
 ]
 
+{ #category : #'host space - accessing' }
+BlMorphicHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #BlHostLogicalSize>
+
+	^ BlHostLogicalSize
+		width: spaceHostMorph width
+		height: spaceHostMorph height
+]
+
 { #category : #'host space - testing' }
 BlMorphicHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 	<return: #Boolean>
 
 	^ false
+]
+
+{ #category : #'host space - accessing' }
+BlMorphicHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #BlHostPhysicalSize>
+
+	^ BlHostPhysicalSize
+		width: spaceHostMorph width
+		height: spaceHostMorph height
 ]
 
 { #category : #'window - properties' }
@@ -152,16 +166,6 @@ BlMorphicHostSpace >> title [
 { #category : #'window - properties' }
 BlMorphicHostSpace >> title: aString [
 	"Change window's title"
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	^ spaceHostMorph extent
 ]
 
 { #category : #'host space - accessing' }

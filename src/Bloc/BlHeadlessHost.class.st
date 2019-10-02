@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'isRunning'
 	],
-	#category : #'Bloc-Universe'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'driver selection' }
@@ -23,7 +23,7 @@ BlHeadlessHost class >> priority [
 	^ Float infinity
 ]
 
-{ #category : #api }
+{ #category : #'host - api' }
 BlHeadlessHost >> createHostSpaceFor: aSpace [	
 	| aHostSpace |
 	
@@ -36,7 +36,7 @@ BlHeadlessHost >> createHostSpaceFor: aSpace [
 	aSpace hostSpace: aHostSpace
 ]
 
-{ #category : #api }
+{ #category : #'host - api' }
 BlHeadlessHost >> destroyHostSpaceFor: aSpace [
 	aSpace hostSpace
 		close;
@@ -54,24 +54,24 @@ BlHeadlessHost >> initialize [
 	isRunning := false
 ]
 
-{ #category : #api }
+{ #category : #'host - api' }
 BlHeadlessHost >> isRunning [
 	^ isRunning
 ]
 
-{ #category : #api }
+{ #category : #'host - api' }
 BlHeadlessHost >> start [
 	isRunning := true.
 	
 	(BlParallelUniverse forHost: self class) pulse
 ]
 
-{ #category : #api }
+{ #category : #'host - api' }
 BlHeadlessHost >> stop [
 	isRunning := false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'host - testing' }
 BlHeadlessHost >> supportsBufferSurface [
 	<return: #Boolean>
 	

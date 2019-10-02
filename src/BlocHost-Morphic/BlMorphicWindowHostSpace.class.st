@@ -33,11 +33,6 @@ BlMorphicWindowHostSpace >> borderless: aBoolean [
 	morphicWindow borderless: aBoolean
 ]
 
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> canvasExtent [
-	^ self windowExtent
-]
-
 { #category : #'host space - displaying' }
 BlMorphicWindowHostSpace >> close [
 	morphicWindow close
@@ -86,6 +81,18 @@ BlMorphicWindowHostSpace >> initialize [
 	isFullSize := false
 ]
 
+{ #category : #'host space - accessing' }
+BlMorphicWindowHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #BlHostLogicalSize>
+
+	^ BlHostLogicalSize
+		width: morphicWindow spaceExtent x
+		height: morphicWindow spaceExtent y
+]
+
 { #category : #'private - accessing' }
 BlMorphicWindowHostSpace >> morphicWindow [
 	^ morphicWindow
@@ -103,6 +110,18 @@ BlMorphicWindowHostSpace >> needsRebuild [
 	<return: #Boolean>
 
 	^ false
+]
+
+{ #category : #'host space - accessing' }
+BlMorphicWindowHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #BlHostPhysicalSize>
+
+	^ BlHostPhysicalSize
+		width: morphicWindow spaceExtent x
+		height: morphicWindow spaceExtent y
 ]
 
 { #category : #'window - properties' }
@@ -147,16 +166,6 @@ BlMorphicWindowHostSpace >> title: aString [
 	"Change window's title"
 
 	morphicWindow title: aString
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	^ morphicWindow spaceExtent
 ]
 
 { #category : #'host space - accessing' }

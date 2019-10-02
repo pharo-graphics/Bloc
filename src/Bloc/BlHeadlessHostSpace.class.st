@@ -11,7 +11,7 @@ Class {
 		'position',
 		'title'
 	],
-	#category : #'Bloc-Universe'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'window - properties' }
@@ -25,16 +25,6 @@ BlHeadlessHostSpace >> borderless [
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> borderless: aBoolean [
 	"Make host window borderless if true is given"
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> canvasExtent [
-	"Return a window canvas size in user coordinates.
-	This size may differ from the window size on high dpi (retina) screens.
-	In most cases canvas is x2 larger than window in pixel on retina screens."
-	<return: #Point>
-
-	^ 0@0
 ]
 
 { #category : #'host space - displaying' }
@@ -113,6 +103,16 @@ BlHeadlessHostSpace >> isVisible [
 	^ false
 ]
 
+{ #category : #'host space - accessing' }
+BlHeadlessHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #BlHostLogicalSize>
+
+	^ BlHostLogicalSize width: 0 height: 0
+]
+
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> maximize [
 	"do nothing"
@@ -146,6 +146,16 @@ BlHeadlessHostSpace >> needsRebuild [
 { #category : #'as yet unclassified' }
 BlHeadlessHostSpace >> open [
 	"do nothing"
+]
+
+{ #category : #'host space - accessing' }
+BlHeadlessHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #BlHostPhysicalSize>
+
+	^ BlHostPhysicalSize width: 0 height: 0
 ]
 
 { #category : #'window - properties' }
@@ -182,15 +192,6 @@ BlHeadlessHostSpace >> resizable: aBoolean [
 	"Make underlying window resizable if true is given"
 ]
 
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
-	
-	^ 1.0 asPoint
-]
-
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> show [
 ]
@@ -225,16 +226,6 @@ BlHeadlessHostSpace >> universe [
 	<return: #BlParallelUniverse>
 
 	^ universe
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	^ 0@0
 ]
 
 { #category : #'host space - accessing' }

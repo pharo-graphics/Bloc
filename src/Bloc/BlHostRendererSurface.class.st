@@ -10,7 +10,7 @@ Class {
 		'hostSpace',
 		'hostRenderer'
 	],
-	#category : #'Bloc-Universe'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #accessing }

@@ -13,16 +13,6 @@ Class {
 	#category : #'BlocHost-Glutin'
 }
 
-{ #category : #'host space - accessing' }
-BlGlutinHostSpace >> canvasExtent [
-	"Return a window canvas size in user coordinates.
-	This size may differ from the window size on high dpi (retina) screens.
-	In most cases canvas is x2 larger than window in pixel on retina screens."
-	<return: #Point>
-
-	^ window framebufferExtent
-]
-
 { #category : #'host space - displaying' }
 BlGlutinHostSpace >> close [
 	window close
@@ -146,12 +136,36 @@ BlGlutinHostSpace >> keyboardKeyTable [
 	^ BlGlutinKeyboardKeyTable default
 ]
 
+{ #category : #'host space - accessing' }
+BlGlutinHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #BlHostLogicalSize>
+	| anExtent |
+	
+	anExtent := window innerExtent.
+	^ BlHostLogicalSize width: anExtent x height: anExtent y
+]
+
 { #category : #'host space - testing' }
 BlGlutinHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 	<return: #Boolean>
 	
 	^ window isValid not
+]
+
+{ #category : #'host space - accessing' }
+BlGlutinHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #BlHostPhysicalSize>
+	| anExtent |
+	
+	anExtent := window framebufferExtent.
+	^ BlHostPhysicalSize width: anExtent x height: anExtent y
 ]
 
 { #category : #'window - properties' }
@@ -412,16 +426,6 @@ BlGlutinHostSpace >> window [
 { #category : #accessing }
 BlGlutinHostSpace >> window: aGlutinWindowedContext [
 	window := aGlutinWindowedContext
-]
-
-{ #category : #'host space - accessing' }
-BlGlutinHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	^ window innerExtent
 ]
 
 { #category : #'host space - accessing' }

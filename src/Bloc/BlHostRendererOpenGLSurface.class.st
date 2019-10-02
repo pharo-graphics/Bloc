@@ -10,7 +10,7 @@ Class {
 		'context',
 		'extent'
 	],
-	#category : #'Bloc-Universe'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #accessing }

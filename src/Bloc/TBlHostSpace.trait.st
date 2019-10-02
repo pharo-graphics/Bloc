@@ -15,7 +15,7 @@ Trait {
 	],
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
-	#category : #'Bloc-Universe'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'host space - accessing' }
@@ -24,8 +24,13 @@ TBlHostSpace >> canvasExtent [
 	This size may differ from the window size on high dpi (retina) screens.
 	In most cases canvas is x2 larger than window in pixel on retina screens."
 	<return: #Point>
+	
+	self
+		deprecated: 'Please use #physicalSize instead'
+		transformWith: '`@receiver canvasExtent' 
+						-> '`(@receiver physicalSize width @ receiver physicalSize height)'.
 
-	^ self explicitRequirement
+	^ self physicalSize width @ self physicalSize height
 ]
 
 { #category : #'host space - displaying' }
@@ -61,6 +66,30 @@ TBlHostSpace >> detachSpace [
 { #category : #'host space - accessing' }
 TBlHostSpace >> detachUniverse [
 	universe := nil
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> dpiFactor [
+	"Return a scaling dpi factor from logical to physical coordinates.
+	On high dpi (retina) displays scaling factor is > 1"
+	<return: #Number>
+	| aPhysicalSize aLogicalSize aWidthScale aHeightScale |
+	
+	aPhysicalSize := self physicalSize.
+	aLogicalSize := self logicalSize.
+	
+	(aPhysicalSize isZero
+		or: [ aLogicalSize isZero ])
+		ifTrue: [ ^ 1 ].
+		
+	aWidthScale := aPhysicalSize width / aLogicalSize width.
+	aHeightScale := aPhysicalSize height / aLogicalSize height.
+	
+	self
+		assert: [ aWidthScale closeTo: aHeightScale ]
+		description: [ 'DPI factor is different for width and height' ].
+
+	^ aWidthScale
 ]
 
 { #category : #'host space - events' }
@@ -154,6 +183,16 @@ TBlHostSpace >> isVisible [
 	^ self explicitRequirement
 ]
 
+{ #category : #'host space - accessing' }
+TBlHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #BlHostLogicalSize>
+
+	^ self explicitRequirement
+]
+
 { #category : #'host space - displaying' }
 TBlHostSpace >> maximize [
 
@@ -181,6 +220,16 @@ TBlHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 	<return: #Boolean>
 	
+	^ self explicitRequirement
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #BlHostPhysicalSize>
+
 	^ self explicitRequirement
 ]
 
@@ -272,18 +321,13 @@ TBlHostSpace >> scaleFactor [
 	"Return a scaling factor from space to window coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
 	<return: #Point>
-	| aCanvasExtent aWindowExtent |
 	
-	aCanvasExtent := self canvasExtent.
-	aWindowExtent := self windowExtent.
-	
-	(aCanvasExtent x isZero
-		or: [ aCanvasExtent y isZero
-			or: [ aWindowExtent x isZero
-				or: [ aWindowExtent y isZero ] ] ])
-		ifTrue: [ ^ 1@1 ].
-	
-	^ (aCanvasExtent / aWindowExtent) asFloatPoint
+	self
+		deprecated: 'Please use #dpiFactor instead'
+		transformWith: '`@receiver scaleFactor' 
+						-> '`@receiver dpiFactor asPoint'.
+
+	^ self dpiFactor asPoint
 ]
 
 { #category : #'host space - displaying' }
@@ -359,7 +403,12 @@ TBlHostSpace >> windowExtent [
 	on high dpi (retina) screens"
 	<return: #Point>
 
-	^ self explicitRequirement
+	self
+		deprecated: 'Please use #logicalSize instead'
+		transformWith: '`@receiver windowExtent' 
+						-> '`(@receiver logicalSize width @ receiver logicalSize height)'.
+
+	^ self logicalSize width @ self logicalSize height
 ]
 
 { #category : #'host space - accessing' }

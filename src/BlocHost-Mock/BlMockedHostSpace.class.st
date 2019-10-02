@@ -14,14 +14,14 @@ Class {
 		'eventFetcher',
 		'visible',
 		'opened',
-		'windowExtent',
-		'canvasExtent',
 		'densityDpi',
 		'renderCount',
 		'isFullscreen',
 		'position',
 		'title',
-		'isFullsize'
+		'isFullsize',
+		'physicalSize',
+		'logicalSize'
 	],
 	#category : #'BlocHost-Mock-Host'
 }
@@ -42,18 +42,8 @@ BlMockedHostSpace >> borderless: aBoolean [
 ]
 
 { #category : #'host space - accessing' }
-BlMockedHostSpace >> canvasExtent [
-	"Return a window canvas size in user coordinates.
-	This size may differ from the window size on high dpi (retina) screens.
-	In most cases canvas is x2 larger than window in pixel on retina screens."
-	<return: #Point>
-
-	^ canvasExtent
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> canvasExtent: aPoint [
-	canvasExtent := aPoint
+BlMockedHostSpace >> canvasExtent: anExtent [
+	physicalSize := BlHostPhysicalSize width: anExtent x height: anExtent y
 ]
 
 { #category : #'host space - displaying' }
@@ -75,18 +65,18 @@ BlMockedHostSpace >> cursor: aCursor [
 ]
 
 { #category : #initialization }
-BlMockedHostSpace >> defaultCanvasExtent [
-	^ 800 @ 600
-]
-
-{ #category : #initialization }
 BlMockedHostSpace >> defaultDensityDpi [
 	^ 96.0
 ]
 
 { #category : #initialization }
-BlMockedHostSpace >> defaultWindowExtent [
+BlMockedHostSpace >> defaultLogicalSize [
 	^ 400 @ 300
+]
+
+{ #category : #initialization }
+BlMockedHostSpace >> defaultPhysicalSize [
+	^ 800 @ 600
 ]
 
 { #category : #'host space - accessing' }
@@ -169,8 +159,8 @@ BlMockedHostSpace >> initialize [
 	borderless := false.
 	opened := false.
 
-	canvasExtent := self defaultCanvasExtent.
-	windowExtent := self defaultWindowExtent.
+	physicalSize := self defaultPhysicalSize.
+	logicalSize := self defaultLogicalSize.
 	densityDpi := self defaultDensityDpi.
 	renderCount := 0
 ]
@@ -183,6 +173,16 @@ BlMockedHostSpace >> isVisible [
 	<return: #Boolean>
 
 	^ visible
+]
+
+{ #category : #'host space - accessing' }
+BlMockedHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #BlHostLogicalSize>
+
+	^ logicalSize
 ]
 
 { #category : #'host space - displaying' }
@@ -223,6 +223,16 @@ BlMockedHostSpace >> needsRebuild [
 BlMockedHostSpace >> open [
 	opened := true.
 	self show
+]
+
+{ #category : #'host space - accessing' }
+BlMockedHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #BlHostPhysicalSize>
+
+	^ physicalSize
 ]
 
 { #category : #'window - properties' }
@@ -278,16 +288,6 @@ BlMockedHostSpace >> title: aString [
 ]
 
 { #category : #'host space - accessing' }
-BlMockedHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	^ windowExtent
-]
-
-{ #category : #'host space - accessing' }
 BlMockedHostSpace >> windowExtent: anExtent [
-	windowExtent := anExtent
+	logicalSize := BlHostLogicalSize width: anExtent x height: anExtent y
 ]
