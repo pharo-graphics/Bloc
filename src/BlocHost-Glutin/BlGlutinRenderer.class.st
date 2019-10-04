@@ -2,20 +2,10 @@ Class {
 	#name : #BlGlutinRenderer,
 	#superclass : #Object,
 	#instVars : [
-		'hostSpace'
+		'window'
 	],
 	#category : #'BlocHost-Glutin'
 }
-
-{ #category : #accessing }
-BlGlutinRenderer >> hostSpace [
-	^ hostSpace
-]
-
-{ #category : #accessing }
-BlGlutinRenderer >> hostSpace: anObject [
-	hostSpace := anObject
-]
 
 { #category : #'private - gl' }
 BlGlutinRenderer >> makeCurrent [
@@ -32,5 +22,12 @@ BlGlutinRenderer >> swapBuffers [
 
 { #category : #accessing }
 BlGlutinRenderer >> window [
-	^ self hostSpace window
+	<return: #GlutinWindowedContext>
+
+	^ window
+]
+
+{ #category : #accessing }
+BlGlutinRenderer >> window: aGlutinWindowedContext [
+	window := aGlutinWindowedContext
 ]

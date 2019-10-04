@@ -37,7 +37,7 @@ BlHeadlessHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlHeadlessHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -103,7 +103,7 @@ BlHeadlessHostSpace >> isVisible [
 	^ false
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlHeadlessHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -148,7 +148,7 @@ BlHeadlessHostSpace >> open [
 	"do nothing"
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlHeadlessHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -228,7 +228,7 @@ BlHeadlessHostSpace >> universe [
 	^ universe
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlHeadlessHostSpace >> windowExtent: anExtent [
 	
 ]

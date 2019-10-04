@@ -59,7 +59,7 @@ BlGlutinHostSpace >> cursor: aCursor [
 	window cursor: aCursor asGlutinCursor
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlGlutinHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -113,7 +113,7 @@ BlGlutinHostSpace >> initializeForBuffer: aBufferSurface [
 
 	self renderer surface: aBufferSurface.
 	
-	glutinRenderer := BlGlutinRendererBuffer new hostSpace: self.
+	glutinRenderer := BlGlutinRendererBuffer new window: self window.
 	glutinRenderer initializeForBuffer: aBufferSurface
 ]
 
@@ -127,7 +127,7 @@ BlGlutinHostSpace >> initializeForOpenGL: anOpenGLSurface [
 
 	self renderer surface: anOpenGLSurface.
 	
-	glutinRenderer := BlGlutinRendererOpenGL new hostSpace: self.
+	glutinRenderer := BlGlutinRendererOpenGL new window: self window.
 	glutinRenderer initializeForOpenGL: anOpenGLSurface
 ]
 
@@ -136,7 +136,7 @@ BlGlutinHostSpace >> keyboardKeyTable [
 	^ BlGlutinKeyboardKeyTable default
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlGlutinHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -156,7 +156,7 @@ BlGlutinHostSpace >> needsRebuild [
 	^ window isValid not
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlGlutinHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -428,7 +428,7 @@ BlGlutinHostSpace >> window: aGlutinWindowedContext [
 	window := aGlutinWindowedContext
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlGlutinHostSpace >> windowExtent: anExtent [
 	window innerExtent: anExtent
 ]
