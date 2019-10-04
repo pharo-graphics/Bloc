@@ -66,7 +66,11 @@ BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
 { #category : #'class initialization' }
 BlGlutinHost class >> initialize [
 	EventsSensor := BlGlutinWindowEventsSensor new.
-	UserInterruptEventHandler := BlGlutinUserInterruptHandler new
+	UserInterruptEventHandler := GlutinUserInterruptHandler new uiProcessBlock: [
+		| process |
+		process := nil.
+		BlGlutinHost uiProcessDo: [ :aUIProcess | process := aUIProcess ].
+		process ]
 ]
 
 { #category : #'host - api' }
