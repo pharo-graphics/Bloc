@@ -4,7 +4,7 @@ I build sparta canvas using Skia backend
 Class {
 	#name : #BlSpartaSkiaCanvasBuilder,
 	#superclass : #BlSpartaCanvasBuilder,
-	#category : 'Bloc-Sparta'
+	#category : #'Bloc-Sparta'
 }
 
 { #category : #'api - instance creation' }
@@ -81,8 +81,11 @@ BlSpartaSkiaCanvasBuilder >> forFormOn: aRendererSurface [
 { #category : #'instance creation' }
 BlSpartaSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
 	<return: #SpartaCanvas>
-	
 	^ (self class environment at: #SkiaCanvas)
-		extent: aRendererSurface windowExtent
-		renderExtent: aRendererSurface canvasExtent
+		extent:
+			aRendererSurface logicalSize width
+				@ aRendererSurface logicalSize height
+		renderExtent:
+			aRendererSurface physicalSize width
+				@ aRendererSurface physicalSize height
 ]

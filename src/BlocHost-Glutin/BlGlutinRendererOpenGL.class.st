@@ -9,10 +9,11 @@ BlGlutinRendererOpenGL >> initializeForOpenGL: aBlHostRendererOpenGLSurface [
 	self
 		assert: [ self window isNotNil ]
 		description: [ 'Window must be set!' ].
-
 	self makeCurrent.
-	
-	aBlHostRendererOpenGLSurface extent: aBlHostRendererOpenGLSurface canvasExtent
+	aBlHostRendererOpenGLSurface
+		extent:
+			aBlHostRendererOpenGLSurface physicalSize width
+				@ aBlHostRendererOpenGLSurface physicalSize height
 ]
 
 { #category : #'host space - drawing' }

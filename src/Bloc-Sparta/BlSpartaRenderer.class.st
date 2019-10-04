@@ -150,17 +150,18 @@ BlSpartaRenderer >> initializeForForm: aFormSurface [
 { #category : #initialization }
 BlSpartaRenderer >> initializeForOpenGL: anOpenGLSurface [
 	"Asks renderer to initialize itself to be used together with an OpenGL surface"
+
 	| scaleFactor |
-
-	windowExtent := anOpenGLSurface windowExtent.
-	canvasExtent := anOpenGLSurface canvasExtent.
-
-	scaleFactor := anOpenGLSurface scaleFactor.
-	spartaCanvas := (self pickCanvasForSurface: anOpenGLSurface) forOpenGLOn: anOpenGLSurface.
+	windowExtent := anOpenGLSurface logicalSize width
+		@ anOpenGLSurface logicalSize height.
+	canvasExtent := anOpenGLSurface physicalSize width
+		@ anOpenGLSurface physicalSize height.
+	scaleFactor := anOpenGLSurface dpiFactor asPoint.
+	spartaCanvas := (self pickCanvasForSurface: anOpenGLSurface)
+		forOpenGLOn: anOpenGLSurface.
 	self
 		assert: [ spartaCanvas isValid ]
 		description: [ 'Failed to create sparta canvas' ].
-
 	spartaCanvas transform
 		scaleBy: scaleFactor;
 		push
