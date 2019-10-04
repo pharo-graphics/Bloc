@@ -1,7 +1,7 @@
 Class {
 	#name : #BlGlutinWindowEventsSensor,
 	#superclass : #GlutinWindowEventsSensor,
-	#category : #'BlocHost-Glutin'
+	#category : #'BlocHost-Glutin-Host'
 }
 
 { #category : #'event - handling' }

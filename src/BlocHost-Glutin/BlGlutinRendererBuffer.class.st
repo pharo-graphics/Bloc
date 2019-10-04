@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'renderer'
 	],
-	#category : #'BlocHost-Glutin'
+	#category : #'BlocHost-Glutin-Renderer'
 }
 
 { #category : #'host space - drawing' }
@@ -16,7 +16,7 @@ BlGlutinRendererBuffer >> initializeForBuffer: aBlHostRendererBufferSurface [
 		description: [ 'Window must be set!' ].
 		
 	renderer
-		ifNil: [ renderer := GlutinOpenGLBufferRenderer new window: self window ].
+		ifNil: [ renderer := GlutinGLBufferRenderer new window: self window ].
 
 	anExtent := aBlHostRendererBufferSurface canvasExtent.
 	
@@ -35,7 +35,7 @@ BlGlutinRendererBuffer >> initializeForBuffer: aBlHostRendererBufferSurface [
 BlGlutinRendererBuffer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
 	| aBuffer |
 	
-	aBuffer := GlutinOpenGLBuffer new
+	aBuffer := GlutinGLBuffer new
 		extent: aBlHostRendererBufferSurface extent;
 		stride: aBlHostRendererBufferSurface stride;
 		pixels: aBlHostRendererBufferSurface buffer.

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'window'
 	],
-	#category : #'BlocHost-Glutin'
+	#category : #'BlocHost-Glutin-Renderer'
 }
 
 { #category : #'private - gl' }

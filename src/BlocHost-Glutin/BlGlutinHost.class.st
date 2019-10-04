@@ -11,7 +11,7 @@ Class {
 		'UIProcess',
 		'UserInterruptEventHandler'
 	],
-	#category : #'BlocHost-Glutin'
+	#category : #'BlocHost-Glutin-Host'
 }
 
 { #category : #'mutual exclusion' }

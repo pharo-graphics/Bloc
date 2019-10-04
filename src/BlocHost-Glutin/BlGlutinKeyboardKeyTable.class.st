@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'BlocHost-Glutin'
+	#category : #'BlocHost-Glutin-Host'
 }
 
 { #category : #cleanup }

@@ -10,7 +10,7 @@ Class {
 		'glutinRenderer',
 		'eventFetcher'
 	],
-	#category : #'BlocHost-Glutin'
+	#category : #'BlocHost-Glutin-Host'
 }
 
 { #category : #'host space - displaying' }
