@@ -204,6 +204,13 @@ BlGlutinHostSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: a
 ]
 
 { #category : #'host space - rendering' }
+BlGlutinHostSpace >> render: aSpace [
+	"Render a given abstract space on an underlying window or visual area"
+	
+	Glutin critical: [ self renderer render: aSpace ]
+]
+
+{ #category : #'host space - rendering' }
 BlGlutinHostSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
 	"Render a given space on an OpenGL surface.
 	By default dispatch directly to the renderer"
