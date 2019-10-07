@@ -27,16 +27,6 @@ BlOSWindowSpace >> borderless: aBoolean [
 	self windowDo: [ :aWindow | aWindow borderless: aBoolean ]
 ]
 
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> canvasExtent [
-	"Return a window canvas size in user coordinates.
-	This size may differ from the window size on high dpi (retina) screens.
-	In most cases canvas is x2 larger than window in pixel on retina screens."
-	<return: #Point>
-	
-	^ self windowDo: [ :aWindow | aWindow canvasExtent ]
-]
-
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> close [
 	
@@ -188,6 +178,18 @@ BlOSWindowSpace >> keyboardKeyTable: aKeyboardKeyTable [
 	keyboardKeyTable := aKeyboardKeyTable
 ]
 
+{ #category : #'host space - geometry' }
+BlOSWindowSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #BlHostLogicalSize>
+	| anExtent |
+
+	anExtent := self windowDo: [ :aWindow | aWindow extent ].
+	^ BlHostLogicalSize width: anExtent x height: anExtent y
+]
+
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> maximize [
 	self windowDo: [ :aWindow | aWindow maximize ]
@@ -219,6 +221,18 @@ BlOSWindowSpace >> needsRebuild [
 { #category : #'as yet unclassified' }
 BlOSWindowSpace >> open [
 	self windowDo: [ :aWindow | aWindow show ]
+]
+
+{ #category : #'host space - geometry' }
+BlOSWindowSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #BlHostPhysicalSize>
+	| anExtent |
+
+	anExtent := self windowDo: [ :aWindow | aWindow canvasExtent ].
+	^ BlHostPhysicalSize width: anExtent x height: anExtent y
 ]
 
 { #category : #'host space - accessing' }
@@ -308,15 +322,6 @@ BlOSWindowSpace >> resizable: aBoolean [
 	self windowDo: [ :aWindow | aWindow resizable: aBoolean ]
 ]
 
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
-	
-	^ (self canvasExtent / self windowExtent) asFloatPoint
-]
-
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> show [
 	self windowDo: [ :aWindow | aWindow show ]
@@ -346,17 +351,7 @@ BlOSWindowSpace >> windowDo: aBlock [
 	^ aBlock value: window
 ]
 
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	^ self windowDo: [ :aWindow | aWindow extent ]
-]
-
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlOSWindowSpace >> windowExtent: newExtent [
 	"Change window size to a newExtent"
 
