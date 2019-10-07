@@ -1,8 +1,21 @@
 Class {
 	#name : #BlOSWindowSDL2Host,
 	#superclass : #BlOSWindowHost,
+	#classVars : [
+		'PulseLoop'
+	],
 	#category : #'BlocHost-OSWindow-SDL2'
 }
+
+{ #category : #'class initialization' }
+BlOSWindowSDL2Host class >> initialize [
+	PulseLoop := BlHostPulseLoop forUniverse: (BlParallelUniverse forHost: self)
+]
+
+{ #category : #testing }
+BlOSWindowSDL2Host class >> isRunning [
+	^ PulseLoop isRunning
+]
 
 { #category : #'driver selection' }
 BlOSWindowSDL2Host class >> isSupported [
@@ -21,7 +34,25 @@ BlOSWindowSDL2Host class >> priority [
 	Lower value - more likely host becomes a default"
 	<return: #Number>
 	
-	^ 40
+	^ 0
+]
+
+{ #category : #testing }
+BlOSWindowSDL2Host class >> start [
+	^ PulseLoop start
+]
+
+{ #category : #testing }
+BlOSWindowSDL2Host class >> stop [
+	^ PulseLoop stop
+]
+
+{ #category : #'host - api' }
+BlOSWindowSDL2Host >> isRunning [
+	"Return true if host is initialized and running"
+	<return: #Boolean>
+
+	^ self class isRunning
 ]
 
 { #category : #initialization }
@@ -43,4 +74,14 @@ BlOSWindowSDL2Host >> preferableDriver [
 	OSSDL2Driver current: aDriver.
 
 	^ aDriver
+]
+
+{ #category : #'host - api' }
+BlOSWindowSDL2Host >> start [
+	self class start
+]
+
+{ #category : #'host - api' }
+BlOSWindowSDL2Host >> stop [
+	self class stop
 ]

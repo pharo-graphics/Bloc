@@ -8,10 +8,6 @@ OSWindow host relies on native windows that already have their own event loop, t
 Class {
 	#name : #BlOSWindowHost,
 	#superclass : #BlHost,
-	#instVars : [
-		'wasRunning',
-		'isRunning'
-	],
 	#category : #'BlocHost-OSWindow-Host'
 }
 
@@ -81,21 +77,6 @@ BlOSWindowHost >> destroyHostSpaceFor: aSpace [
 ]
 
 { #category : #initialization }
-BlOSWindowHost >> initialize [
-	super initialize.
-	
-	isRunning := false
-]
-
-{ #category : #'host - api' }
-BlOSWindowHost >> isRunning [
-	"Return true if host is initialized and running"
-	<return: #Boolean>
-
-	^ isRunning
-]
-
-{ #category : #initialization }
 BlOSWindowHost >> keyboardKeyTable [
 	^ self subclassResponsibility
 ]
@@ -110,17 +91,6 @@ BlOSWindowHost >> preferableDriver [
 	<return: #OSWindowDriver>
 
 	^ self subclassResponsibility
-]
-
-{ #category : #'host - api' }
-BlOSWindowHost >> start [
-	isRunning := true
-]
-
-{ #category : #'host - api' }
-BlOSWindowHost >> stop [
-
-	isRunning := false
 ]
 
 { #category : #'host - testing' }

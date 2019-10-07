@@ -124,7 +124,7 @@ BlUniverse >> closeSpaceWindow: aSpace [
 
 { #category : #'initialize-release' }
 BlUniverse >> defaultPulseLoop [
-	^ BlPulseLoop new
+	^ BlHostPulseLoop new
 ]
 
 { #category : #'deferred actions' }
@@ -220,7 +220,7 @@ BlUniverse >> preferableHost: aBlHost [
 
 { #category : #accessing }
 BlUniverse >> pulseLoop [
-	<return: #BlPulseLoop>
+	<return: #BlHostPulseLoop>
 	^ pulseLoop
 ]
 
