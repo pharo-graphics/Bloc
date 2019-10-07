@@ -296,11 +296,12 @@ BlParallelUniverse >> pulse [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
+	'pulseSynchronously' traceCr.
+
 	"deferred actions must be run before spaces"
-	[self tryToRunDeferredActions.
-	
-	spaceManager do: [ :eachSpace | eachSpace pulse ]] ensure: 
-		[ self tryToRunPostponedActions ]
+	[ self tryToRunDeferredActions.
+	spaceManager do: [ :eachSpace | eachSpace pulse ] ]
+		ensure: [ self tryToRunPostponedActions ]
 ]
 
 { #category : #'private - spaces' }

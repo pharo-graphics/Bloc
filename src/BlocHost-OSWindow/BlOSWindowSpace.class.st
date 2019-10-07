@@ -85,9 +85,6 @@ BlOSWindowSpace >> fullscreen: aBoolean [
 { #category : #'host space - events' }
 BlOSWindowSpace >> generateEvents [
 	"Generate more complex state change events such as window scale event when resolution of the screen changes"
-	
-	self hasScaled
-		ifTrue: [ self enqueueEvent: (BlSpaceScaledEvent new timestamp: self space time now) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -355,7 +352,7 @@ BlOSWindowSpace >> windowDo: aBlock [
 BlOSWindowSpace >> windowExtent: newExtent [
 	"Change window size to a newExtent"
 
-	self windowExtent ~= newExtent
+	self logicalSize width @ self logicalSize height ~= newExtent
 		ifTrue: [ self windowDo: [ :aWindow | aWindow extent: newExtent ] ]
 ]
 

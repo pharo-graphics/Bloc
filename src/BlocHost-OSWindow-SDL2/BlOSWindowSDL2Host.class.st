@@ -34,17 +34,24 @@ BlOSWindowSDL2Host class >> priority [
 	Lower value - more likely host becomes a default"
 	<return: #Number>
 	
-	^ 0
+	^ 40
 ]
 
 { #category : #testing }
 BlOSWindowSDL2Host class >> start [
-	^ PulseLoop start
+	PulseLoop start
 ]
 
 { #category : #testing }
 BlOSWindowSDL2Host class >> stop [
-	^ PulseLoop stop
+	PulseLoop stop
+]
+
+{ #category : #'api - ui process' }
+BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+	
+	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
 { #category : #'host - api' }
