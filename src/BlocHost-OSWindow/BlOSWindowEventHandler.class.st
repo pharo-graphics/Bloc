@@ -272,16 +272,20 @@ BlOSWindowEventHandler >> visitTouchActionPointerDownEvent: anEvent [
 { #category : #'visiting - touch' }
 BlOSWindowEventHandler >> visitTouchActionPointerMoveEvent: anEvent [
 	| aBlocEvent |
-
 	aBlocEvent := BlTouchMoveEvent new
-		position: window windowExtent * anEvent position;
-		screenPosition: window position + (window windowExtent * anEvent position);
-		delta: window windowExtent * anEvent delta;
+		position:
+			window logicalSize width @ window logicalSize height
+				* anEvent position;
+		screenPosition:
+			window position
+				+
+					(window logicalSize width @ window logicalSize height
+						* anEvent position);
+		delta: window logicalSize width @ window logicalSize height * anEvent delta;
 		timestamp: DateAndTime now;
 		pointerId: anEvent fingerId;
 		pressure: anEvent pressure;
 		yourself.
-
 	self enqueue: aBlocEvent
 ]
 

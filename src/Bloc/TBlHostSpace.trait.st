@@ -18,7 +18,7 @@ Trait {
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> canvasExtent [
 	"Return a window canvas size in user coordinates.
 	This size may differ from the window size on high dpi (retina) screens.
@@ -45,7 +45,7 @@ TBlHostSpace >> cursor: aCursor [
 	self explicitRequirement
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -68,7 +68,7 @@ TBlHostSpace >> detachUniverse [
 	universe := nil
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> dpiFactor [
 	"Return a scaling dpi factor from logical to physical coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
@@ -81,7 +81,7 @@ TBlHostSpace >> dpiFactor [
 	(aPhysicalSize isZero
 		or: [ aLogicalSize isZero ])
 		ifTrue: [ ^ 1 ].
-		
+
 	aWidthScale := aPhysicalSize width / aLogicalSize width.
 	aHeightScale := aPhysicalSize height / aLogicalSize height.
 	
@@ -101,7 +101,7 @@ TBlHostSpace >> enqueueEvent: aBlEvent [
 
 	aBlEvent isSpaceEvent
 		ifTrue: [ ^ self space dispatchEvent: aBlEvent ].
-		
+
 	self space dispatchEvent: aBlEvent
 ]
 
@@ -183,7 +183,7 @@ TBlHostSpace >> isVisible [
 	^ self explicitRequirement
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -223,7 +223,7 @@ TBlHostSpace >> needsRebuild [
 	^ self explicitRequirement
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -316,7 +316,7 @@ TBlHostSpace >> requestRedraw [
 	"Space needs to redraw the window"
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> scaleFactor [
 	"Return a scaling factor from space to window coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
@@ -396,7 +396,7 @@ TBlHostSpace >> universe: aUniverse [
 	universe := aUniverse
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> windowExtent [
 	"Return the window size in screen coordinates.
 	This size may differ from the size in pixels of underlying surface 
@@ -411,7 +411,7 @@ TBlHostSpace >> windowExtent [
 	^ self logicalSize width @ self logicalSize height
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> windowExtent: anExtent [
 	self explicitRequirement
 ]

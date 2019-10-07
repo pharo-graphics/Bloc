@@ -79,7 +79,7 @@ BlMockedHostSpace >> defaultPhysicalSize [
 	^ 800 @ 600
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMockedHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -175,7 +175,7 @@ BlMockedHostSpace >> isVisible [
 	^ visible
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMockedHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -225,7 +225,7 @@ BlMockedHostSpace >> open [
 	self show
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMockedHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -287,7 +287,7 @@ BlMockedHostSpace >> title: aString [
 	title := aString
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMockedHostSpace >> windowExtent: anExtent [
 	logicalSize := BlHostLogicalSize width: anExtent x height: anExtent y
 ]

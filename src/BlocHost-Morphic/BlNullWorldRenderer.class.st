@@ -14,5 +14,5 @@ BlNullWorldRenderer class >> isApplicableFor: aWorld [
 
 { #category : #accessing }
 BlNullWorldRenderer class >> priority [ 
-	^ Float infinity
+	^ 20
 ]

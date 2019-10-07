@@ -1,7 +1,7 @@
 Class {
 	#name : #BlGlutinRendererOpenGL,
 	#superclass : #BlGlutinRenderer,
-	#category : #'BlocHost-Glutin'
+	#category : #'BlocHost-Glutin-Renderer'
 }
 
 { #category : #initialization }

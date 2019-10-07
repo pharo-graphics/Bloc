@@ -44,7 +44,7 @@ BlMorphicWindowHostSpace >> cursor: aCursor [
 	World currentHand showTemporaryCursor: aCursor asForm
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -81,7 +81,7 @@ BlMorphicWindowHostSpace >> initialize [
 	isFullSize := false
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -112,7 +112,7 @@ BlMorphicWindowHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -168,7 +168,7 @@ BlMorphicWindowHostSpace >> title: aString [
 	morphicWindow title: aString
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> windowExtent: anExtent [
 	morphicWindow spaceExtent: anExtent
 ]
