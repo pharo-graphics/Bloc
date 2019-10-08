@@ -163,6 +163,20 @@ BlParallelUniverse >> eventDispatcher [
 	^ eventDispatcher
 ]
 
+{ #category : #'gt-extension' }
+BlParallelUniverse >> gtSpacesFor: aView [
+	<gtView>
+	
+	^ aView columnedList
+		title: 'Spaces';
+		priority: 10;
+		items: [ self spaces ];
+		column: 'Index' item: [ :eachSpace :anIndex | anIndex ] width: 50;
+		column: 'Name' item: [ :eachSpace | eachSpace ifNotNil: #title ifNil: 'nil' ];
+		actionButtonIcon: BrGlamorousIcons trash 
+			action: [ self spaces do: #close ]
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
@@ -296,8 +310,6 @@ BlParallelUniverse >> pulse [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
-	'pulseSynchronously' traceCr.
-
 	"deferred actions must be run before spaces"
 	[ self tryToRunDeferredActions.
 	spaceManager do: [ :eachSpace | eachSpace pulse ] ]
