@@ -3,20 +3,10 @@ Class {
 	#superclass : #BeaconSignal,
 	#instVars : [
 		'universe',
-		'space'
+		'universeID'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
-
-{ #category : #accessing }
-BlParallelUniverseSignal >> space [
-	^ space
-]
-
-{ #category : #accessing }
-BlParallelUniverseSignal >> space: anObject [
-	space := anObject
-]
 
 { #category : #accessing }
 BlParallelUniverseSignal >> universe [
@@ -24,6 +14,7 @@ BlParallelUniverseSignal >> universe [
 ]
 
 { #category : #accessing }
-BlParallelUniverseSignal >> universe: anObject [
-	universe := anObject
+BlParallelUniverseSignal >> universe: aParallelUniverse [
+	universe := aParallelUniverse.
+	universeID := aParallelUniverse identityHash
 ]

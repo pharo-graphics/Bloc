@@ -68,20 +68,19 @@ BlOSWindowSDL2Renderer >> initialize [
 
 { #category : #initialization }
 BlOSWindowSDL2Renderer >> initializeForBuffer: aBlHostRendererBufferSurface [
-	
 	self
 		assert: [ self window isNotNil ]
 		description: [ 'Window must be set!' ].
-	
-	textureExtent := aBlHostRendererBufferSurface canvasExtent.
-	sdlSurface := SDL2 createRGBSurfaceForCairoWidth: textureExtent x height: textureExtent y.
-
+	textureExtent := aBlHostRendererBufferSurface physicalSize width
+		@ aBlHostRendererBufferSurface physicalSize height.
+	sdlSurface := SDL2
+		createRGBSurfaceForCairoWidth: textureExtent x
+		height: textureExtent y.
 	texture := renderer
-		createTextureFormat: SDL_PIXELFORMAT_XRGB8888 
+		createTextureFormat: SDL_PIXELFORMAT_XRGB8888
 		access: SDL_TEXTUREACCESS_STREAMING
 		width: textureExtent x
 		height: textureExtent y.
-
 	aBlHostRendererBufferSurface
 		buffer: sdlSurface pixels;
 		stride: sdlSurface pitch;

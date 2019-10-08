@@ -111,17 +111,19 @@ BlSpartaRenderer >> initialize [
 { #category : #initialization }
 BlSpartaRenderer >> initializeForBuffer: aBufferSurface [
 	"Initalize sparta canvas to be used with a pixel buffer surface"
+
 	| scaleFactor |
-
-	windowExtent := aBufferSurface windowExtent.
-	canvasExtent := aBufferSurface canvasExtent.
-
-	scaleFactor := aBufferSurface scaleFactor.
-	spartaCanvas := (self pickCanvasForSurface: aBufferSurface) forBufferOn: aBufferSurface.
+	
+	windowExtent := aBufferSurface logicalSize width
+		@ aBufferSurface logicalSize height.
+	canvasExtent := aBufferSurface physicalSize width
+		@ aBufferSurface physicalSize height.
+	scaleFactor := aBufferSurface dpiFactor asPoint.
+	spartaCanvas := (self pickCanvasForSurface: aBufferSurface)
+		forBufferOn: aBufferSurface.
 	self
 		assert: [ spartaCanvas isValid ]
 		description: [ 'Failed to create sparta canvas' ].
-
 	spartaCanvas transform
 		scaleBy: scaleFactor;
 		push

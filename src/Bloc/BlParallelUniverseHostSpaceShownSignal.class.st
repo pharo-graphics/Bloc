@@ -3,7 +3,7 @@ Is sent after a host space is shown
 "
 Class {
 	#name : #BlParallelUniverseHostSpaceShownSignal,
-	#superclass : #BlParallelUniverseSignal,
+	#superclass : #BlParallelUniverseSpaceSignal,
 	#instVars : [
 		'hostSpace'
 	],

@@ -9,7 +9,7 @@ Class {
 
 { #category : #'class initialization' }
 BlOSWindowSDL2Host class >> initialize [
-	PulseLoop := BlHostPulseLoop forUniverse: (BlParallelUniverse forHost: self)
+	PulseLoop := BlHostPulseLoop forHost: self
 ]
 
 { #category : #testing }

@@ -1,6 +1,9 @@
+"
+I am sent when a universe requests a host to start
+"
 Class {
 	#name : #BlParallelUniverseHostStartRequestSignal,
-	#superclass : #BlParallelUniverseSignal,
+	#superclass : #BlParallelUniverseSpaceSignal,
 	#instVars : [
 		'host'
 	],

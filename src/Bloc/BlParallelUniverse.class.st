@@ -16,7 +16,8 @@ Class {
 		'isPulsing'
 	],
 	#classVars : [
-		'Universes'
+		'Universes',
+		'UniversesMutex'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
@@ -30,41 +31,30 @@ BlParallelUniverse class >> all [
 
 { #category : #'instance creation' }
 BlParallelUniverse class >> existsForHost: aHostClass [
-	^ Universes
-		detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
-		ifFound: [ true ]
-		ifNone: [ false ]
+	^ UniversesMutex critical: [
+		Universes
+			detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
+			ifFound: [ true ]
+			ifNone: [ false ] ]
 ]
 
 { #category : #'instance creation' }
 BlParallelUniverse class >> forHost: aHostClass [
-	^ Universes
-		detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
-		ifFound: #yourself
-		ifNone: [
-			| aUniverse |
-			aUniverse := self new hostClass: aHostClass.
-			Universes := Universes copyWith: aUniverse.
-			aUniverse ]
-]
-
-{ #category : #'instance creation' }
-BlParallelUniverse class >> glutin [
-	<blocHost>
-
-	^ self forHost: BlGlutinHost
+	^ UniversesMutex critical: [
+		Universes
+			detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
+			ifFound: #yourself
+			ifNone: [
+				| aUniverse |
+				aUniverse := self new hostClass: aHostClass.
+				Universes := Universes copyWith: aUniverse.
+				aUniverse ] ]
 ]
 
 { #category : #'class initialization' }
 BlParallelUniverse class >> initialize [
-	Universes := #()
-]
-
-{ #category : #'instance creation' }
-BlParallelUniverse class >> morphic [
-	<blocHost>
-
-	^ self forHost: BlMorphicHost
+	Universes := #().
+	UniversesMutex := Mutex new
 ]
 
 { #category : #'api - spaces' }
@@ -151,6 +141,10 @@ BlParallelUniverse >> defaultEventListener [
 BlParallelUniverse >> defer: aValuable [
 	"#defer: can be used from any thread to execute a valuable in the GUI thread at the beginning of the next pulse.
 	You can use it to update the GUI states from any other thread"
+
+	(BlParallelUniverseDeferredActionAddedSignal new
+		universe: self;
+		action: aValuable) emit.
 
 	deferredActions nextPut: aValuable
 ]
@@ -252,7 +246,6 @@ BlParallelUniverse >> openSpace: aSpace [
 
 	aSpace host isRunning
 		ifFalse: [
-	
 			(BlParallelUniverseHostStartRequestSignal new
 				universe: self;
 				space: aSpace;
@@ -353,9 +346,10 @@ BlParallelUniverse >> pulse [
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
 	"deferred actions must be run before spaces"
-	[ self tryToRunDeferredActions.
-	spaceManager do: [ :eachSpace | eachSpace pulse ] ]
-		ensure: [ self tryToRunPostponedActions ]
+	[
+		self tryToRunDeferredActions.
+		spaceManager do: [ :eachSpace | eachSpace pulse ]
+	] ensure: [ self tryToRunPostponedActions ]
 ]
 
 { #category : #'private - spaces' }
@@ -385,9 +379,15 @@ BlParallelUniverse >> spaces [
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunDeferredActions [
 	| nextInQueue |
-	
+
+	(BlParallelUniverseTryToRunDeferredActionsSignal new universe: self) emit.
+
 	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
-		whileTrue: [ nextInQueue value ]
+		whileTrue: [
+			(BlParallelUniverseRunDeferredActionSignal new
+				universe: self;
+				action: nextInQueue) emit.
+			nextInQueue value ]
 ]
 
 { #category : #'deferred message' }

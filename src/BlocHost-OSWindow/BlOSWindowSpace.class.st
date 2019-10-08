@@ -243,39 +243,6 @@ BlOSWindowSpace >> position: aPoint [
 ]
 
 { #category : #'host space - rendering' }
-BlOSWindowSpace >> prepareToRender: aBlSpace onBufferSurface: aBlHostRendererBufferSurface [
-	"Prepare host space to a given space on a buffer surface.
-	By default dispatch directly to the renderer"
-	
-	self hasScaled
-		ifTrue: [ self windowDo: [ :aWindow | aWindow validHandle renderer resetResources ] ].
-	
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-BlOSWindowSpace >> prepareToRender: aBlSpace onFormSurface: aBlHostRendererFormSurface [
-	"Prepare host space to a given space on a Form surface.
-	By default dispatch directly to the renderer"
-	
-	self hasScaled
-		ifTrue: [ window validHandle renderer resetResources ].
-
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-BlOSWindowSpace >> prepareToRender: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
-	"Prepare host space to a given space on an OpenGL surface.
-	By default dispatch directly to the renderer"
-	
-	self hasScaled
-		ifTrue: [ aBlHostRendererOpenGLSurface extent: self canvasExtent ].
-	
-	window validHandle renderer asCurrentDo: [ self renderer prepareToRender: aBlSpace ]
-]
-
-{ #category : #'host space - rendering' }
 BlOSWindowSpace >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
 	window validHandle renderer
 		presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas
@@ -354,11 +321,4 @@ BlOSWindowSpace >> windowExtent: newExtent [
 
 	self logicalSize width @ self logicalSize height ~= newExtent
 		ifTrue: [ self windowDo: [ :aWindow | aWindow extent: newExtent ] ]
-]
-
-{ #category : #initialization }
-BlOSWindowSpace >> withSpartaRenderer [
-
-	renderer := BlSpartaRenderer new.
-	renderer initializeHostSpace: self
 ]

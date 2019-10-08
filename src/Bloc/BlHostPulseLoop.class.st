@@ -12,7 +12,7 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'universe',
+		'hostClass',
 		'pulseStartTime',
 		'lastElpasedTime',
 		'waitingDelay',
@@ -24,8 +24,8 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlHostPulseLoop class >> forUniverse: aParallelUniverse [
-	^ self basicNew initialize universe: aParallelUniverse
+BlHostPulseLoop class >> forHost: aHostClass [
+	^ self basicNew initialize hostClass: aHostClass
 ]
 
 { #category : #'instance creation' }
@@ -55,7 +55,7 @@ BlHostPulseLoop >> defaultPulsePeriod [
 BlHostPulseLoop >> firePulse [
 	pulseStartTime := DateAndTime now.
 
-	universe pulse.
+	(BlParallelUniverse forHost: hostClass) pulse.
 
 	self wait.
 	Processor yield
@@ -81,6 +81,16 @@ BlHostPulseLoop >> forceStartOfUIProcess: aProces [
 	
 	loopProcess := aProces.
 	loopProcess resume.
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> hostClass [
+	^ hostClass
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> hostClass: aHostClass [
+	hostClass := aHostClass
 ]
 
 { #category : #initialization }
@@ -154,18 +164,6 @@ BlHostPulseLoop >> stop [
 { #category : #period }
 BlHostPulseLoop >> timeIsUp [
 	^ DateAndTime now - pulseStartTime > self pulsePeriod
-]
-
-{ #category : #accessing }
-BlHostPulseLoop >> universe [
-	<return: #BlParallelUniverse>
-
-	^ universe
-]
-
-{ #category : #accessing }
-BlHostPulseLoop >> universe: aUniverse [
-	universe := aUniverse
 ]
 
 { #category : #period }
