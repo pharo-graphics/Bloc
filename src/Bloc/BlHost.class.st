@@ -72,7 +72,7 @@ BlHost class >> uiProcessDo: aBlock [
 
 { #category : #'host - api' }
 BlHost >> createHostSpaceFor: aSpace [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #'host - api' }

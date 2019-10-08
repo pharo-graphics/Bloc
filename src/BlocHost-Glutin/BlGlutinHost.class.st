@@ -163,7 +163,7 @@ BlGlutinHost class >> world [
 { #category : #'host - api' }
 BlGlutinHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new oswindow host space for given bloc space"
-	| aHostSpace|
+	| aHostSpace |
 
 	self
 		assert: [ aSpace hasHostSpace not ]

@@ -243,10 +243,28 @@ BlParallelUniverse >> markAsNotPulsing [
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
 
+	(BlParallelUniverseOpenSpaceRequestSignal new
+		universe: self;
+		space: aSpace;
+		isRunning: aSpace host isRunning) emit.
+
 	self defer: [ self openSpaceSynchronously: aSpace ].
-	
+
 	aSpace host isRunning
-		ifFalse: [ aSpace host start ]
+		ifFalse: [
+	
+			(BlParallelUniverseHostStartRequestSignal new
+				universe: self;
+				space: aSpace;
+				host: aSpace host) emit.
+			
+			aSpace host start.
+			
+			(BlParallelUniverseHostStartedSignal new
+				universe: self;
+				space: aSpace;
+				host: aSpace host;
+				isRunning: aSpace host isRunning) emit ]
 ]
 
 { #category : #'private - spaces' }
@@ -266,13 +284,28 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 	self
 		assert: [ aSpace host isNotNil ]
 		description: [ 'Space must have a host' ].
-		
+
 	"First of all we need to add space to the space manager"
 	spaceManager addSpace: aSpace.
+	
+	(BlParallelUniverseSpaceAddedSignal new
+		universe: self;
+		space: aSpace) emit.
 
 	"then create and show it in a host space"
 	aSpace host createHostSpaceFor: aSpace.
+	
+	(BlParallelUniverseHostSpaceCreatedSignal new
+		universe: self;
+		space: aSpace;
+		hostSpace: aSpace hostSpace) emit.
+
 	aSpace hostSpace show.
+	
+	(BlParallelUniverseHostSpaceShownSignal new
+		universe: self;
+		space: aSpace;
+		hostSpace: aSpace hostSpace) emit.
 
 	self
 		assert: [ aSpace hasHostSpace ]
@@ -281,10 +314,19 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
 	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).
-	
+
 	"Notify root element that it is now visible to the user"
 	aSpace root space: aSpace.
-	aSpace root dispatchAddedToSceneGraph
+	
+	(BlParallelUniverseSpaceRootAssignedSignal new
+		universe: self;
+		space: aSpace) emit.
+	
+	aSpace root dispatchAddedToSceneGraph.
+	
+	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
+		universe: self;
+		space: aSpace) emit
 ]
 
 { #category : #'api - ui process' }
