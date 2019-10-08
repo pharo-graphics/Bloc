@@ -387,8 +387,15 @@ BlTextElement >> paragraph [
 	<return: #BlTextParagraph>
 
 	self
-		assert: [ paragraph isNotNil ]
+		assert: [ self rawParagraph isNotNil ]
 		description: [ 'Can not access paragraph if it is nil' ].
+
+	^ self rawParagraph
+]
+
+{ #category : #'private - paragraph' }
+BlTextElement >> rawParagraph [
+	<return: #BlTextParagraph>
 
 	^ paragraph
 ]
