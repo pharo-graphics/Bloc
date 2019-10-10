@@ -11,6 +11,16 @@ Class {
 }
 
 { #category : #accessing }
+BlParallelUniverseHostSpaceCreatedSignal class >> label [
+	^ 'Create space host'
+]
+
+{ #category : #accessing }
+BlParallelUniverseHostSpaceCreatedSignal class >> nextSignals [
+	^ { BlParallelUniverseHostSpaceShownSignal }
+]
+
+{ #category : #accessing }
 BlParallelUniverseHostSpaceCreatedSignal >> hostSpace [
 	^ hostSpace
 ]

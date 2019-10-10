@@ -7,6 +7,11 @@ Class {
 	#category : #'Bloc-Universe - Parallel'
 }
 
+{ #category : #testing }
+BlParallelUniverseSpaceSignal class >> isAbstract [
+	^ self = BlParallelUniverseSpaceSignal
+]
+
 { #category : #accessing }
 BlParallelUniverseSpaceSignal >> space [
 	^ space

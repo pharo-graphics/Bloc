@@ -6,3 +6,13 @@ Class {
 	#superclass : #BlParallelUniverseSpaceSignal,
 	#category : #'Bloc-Universe - Parallel'
 }
+
+{ #category : #accessing }
+BlParallelUniverseSpaceRootAssignedSignal class >> label [
+	^ 'Assign space to root element'
+]
+
+{ #category : #accessing }
+BlParallelUniverseSpaceRootAssignedSignal class >> nextSignals [
+	^ { BlParallelUniverseSpaceDispatchAddedToSceneSignal }
+]

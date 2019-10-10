@@ -6,3 +6,8 @@ Class {
 	#superclass : #BlParallelUniverseSpaceSignal,
 	#category : #'Bloc-Universe - Parallel'
 }
+
+{ #category : #accessing }
+BlParallelUniverseSpaceDispatchAddedToSceneSignal class >> label [
+	^ 'Dispatch added to scene graph'
+]

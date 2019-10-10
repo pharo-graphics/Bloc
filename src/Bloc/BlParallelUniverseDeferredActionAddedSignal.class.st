@@ -11,6 +11,21 @@ Class {
 }
 
 { #category : #accessing }
+BlParallelUniverseDeferredActionAddedSignal class >> isRepeatable [
+	^ true
+]
+
+{ #category : #accessing }
+BlParallelUniverseDeferredActionAddedSignal class >> label [
+	^ 'Add deferred action'
+]
+
+{ #category : #accessing }
+BlParallelUniverseDeferredActionAddedSignal class >> nextSignals [
+	^ { BlParallelUniverseHostStartRequestSignal . BlParallelUniverseTryToRunDeferredActionsSignal }
+]
+
+{ #category : #accessing }
 BlParallelUniverseDeferredActionAddedSignal >> action [
 	^ action
 ]

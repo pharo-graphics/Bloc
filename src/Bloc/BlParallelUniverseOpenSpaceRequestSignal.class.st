@@ -11,6 +11,16 @@ Class {
 }
 
 { #category : #accessing }
+BlParallelUniverseOpenSpaceRequestSignal class >> label [
+	^ 'Request open space'
+]
+
+{ #category : #accessing }
+BlParallelUniverseOpenSpaceRequestSignal class >> nextSignals [
+	^ { BlParallelUniverseDeferredActionAddedSignal }
+]
+
+{ #category : #accessing }
 BlParallelUniverseOpenSpaceRequestSignal >> isRunning [
 	^ isRunning
 ]

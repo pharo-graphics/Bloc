@@ -11,6 +11,16 @@ Class {
 }
 
 { #category : #accessing }
+BlParallelUniverseHostStartRequestSignal class >> label [
+	^ 'Request host start'
+]
+
+{ #category : #accessing }
+BlParallelUniverseHostStartRequestSignal class >> nextSignals [
+	^ { BlParallelUniverseHostStartedSignal }
+]
+
+{ #category : #accessing }
 BlParallelUniverseHostStartRequestSignal >> host [
 	^ host
 ]
