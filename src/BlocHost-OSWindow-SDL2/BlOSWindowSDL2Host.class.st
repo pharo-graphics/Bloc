@@ -34,7 +34,7 @@ BlOSWindowSDL2Host class >> priority [
 	Lower value - more likely host becomes a default"
 	<return: #Number>
 	
-	^ 40
+	^ 400
 ]
 
 { #category : #testing }
