@@ -114,7 +114,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 				"as the last step we may want to stop the host. It may terminate
 				the current process, so we should do it at last"
 				(spaceManager hasSpaces not and: [ aHost isRunning ])
-					ifTrue: [ aHost stop ] ] ].
+					ifTrue: [ self stopUniverse ] ] ].
 			
 	"Raise an event indicating that all normal event for closing a space have been completed.
 	This event is used by the debugger to stop the UI process. Users should not normally rely
@@ -168,7 +168,10 @@ BlParallelUniverse >> gtSpacesFor: aView [
 		column: 'Index' item: [ :eachSpace :anIndex | anIndex ] width: 50;
 		column: 'Name' item: [ :eachSpace | eachSpace ifNotNil: #title ifNil: 'nil' ];
 		actionButtonIcon: BrGlamorousIcons trash 
-			action: [ self spaces do: #close ]
+			action: [
+				self spaces do: #close.
+				self tryToRunDeferredActions.
+				self markAsNotPulsing ]
 ]
 
 { #category : #'api - spaces' }
@@ -251,7 +254,7 @@ BlParallelUniverse >> openSpace: aSpace [
 				space: aSpace;
 				host: aSpace host) emit.
 			
-			aSpace host start.
+			self startUniverse.
 			
 			(BlParallelUniverseHostStartedSignal new
 				universe: self;
@@ -374,6 +377,25 @@ BlParallelUniverse >> spaces [
 	<return: #Collection of: #BlSpace>
 
 	^ spaceManager spaces
+]
+
+{ #category : #'private - lifecycle' }
+BlParallelUniverse >> startUniverse [
+	"A universe must not be running here.
+	I am called outside of the UI loop (there is no UI loop yet)"
+
+	self markAsNotPulsing.
+	self hostClass start
+]
+
+{ #category : #'private - lifecycle' }
+BlParallelUniverse >> stopUniverse [
+	"A universe must be running here.
+	I am called from the UI loop"
+	
+	"to make sure that isPulsing is set back to false even if this Process is terminated"
+	[ self hostClass stop ]
+		ensure: [ self markAsNotPulsing ]
 ]
 
 { #category : #'deferred message' }

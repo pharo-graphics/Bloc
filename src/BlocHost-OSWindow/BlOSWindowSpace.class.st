@@ -32,6 +32,9 @@ BlOSWindowSpace >> close [
 	
 	self isValid
 		ifTrue: [ window destroy ].
+		
+	(BlOSWindowDestroyedSignal new window: window) emit.
+
 	window := nil
 ]
 
@@ -105,8 +108,6 @@ BlOSWindowSpace >> initializeForBuffer: aBufferSurface [
 	"Asks host space to initialize itself to be used together with a pixel buffer surface.
 	Default implementation simply connects renderer, host space and surface together"
 
-	self initializeWithAttributes: (self host createAttributesFor: self space).
-
 	aBufferSurface hostSpace: self.
 	aBufferSurface hostRenderer: self renderer.
 
@@ -154,9 +155,16 @@ BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 
 { #category : #initialization }
 BlOSWindowSpace >> initializeWithAttributes: initialAttributes [
+	
+	self
+		assert: [ window isNil or: [ window isValid not ] ]
+		description: [ 'Window must be nil or invalid' ].
+
 	window := OSWindow createWithAttributes: initialAttributes.
 	window eventHandler: ((BlOSWindowEventHandler window: self) keyboardKeyTable: keyboardKeyTable).
-	window startTextInput
+	window startTextInput.
+	
+	(BlOSWindowCreatedSignal new window: window) emit
 ]
 
 { #category : #testing }
@@ -306,11 +314,6 @@ BlOSWindowSpace >> title: aString [
 	"Change window's title"
 
 	window title: aString
-]
-
-{ #category : #private }
-BlOSWindowSpace >> window: anOSWindow [
-	window := anOSWindow
 ]
 
 { #category : #'host space - geometry' }
