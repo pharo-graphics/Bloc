@@ -17,30 +17,30 @@ Class {
 	#category : #'BlocHost-OSWindow-Host'
 }
 
-{ #category : #'host space - accessing' }
+{ #category : #'window - properties' }
 BlOSWindowSpace >> borderless [
-	^ self windowDo: [ :aWindow | aWindow borderless ]
+	^ window borderless
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'window - properties' }
 BlOSWindowSpace >> borderless: aBoolean [
-	self windowDo: [ :aWindow | aWindow borderless: aBoolean ]
+	window borderless: aBoolean
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> close [
 	
 	self isValid
-		ifTrue: [ self windowDo: [ :aWindow | aWindow destroy ] ].
+		ifTrue: [ window destroy ].
 	window := nil
 ]
 
 { #category : #'host space - cursor' }
 BlOSWindowSpace >> cursor: aCursor [
-	self windowDo: [ :aWindow | aWindow setMouseCursor: aCursor ]
+	"self windowDo: [ :aWindow | aWindow setMouseCursor: aCursor ]"
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlOSWindowSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -48,48 +48,49 @@ BlOSWindowSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #private }
-BlOSWindowSpace >> ensureWindowIsValid [
-	"Native windows are external objects and they are destroyed when pharo is closed.
-	This may happen when a user saves and quits an image while there are open Bloc spaces.
-	We want those window to re-open when user open a saved Pharo image"
-	
-	self isValid
-		ifTrue: [ ^ self ].
-		
-	renderer initializeHostSpace: self
+{ #category : #'host space - events' }
+BlOSWindowSpace >> enqueueEvent: aBlEvent [
+	"I put events in a queue to be processed later"
+
+	self eventFetcher enqueueEvent: aBlEvent
+]
+
+{ #category : #'host space - accessing' }
+BlOSWindowSpace >> eventFetcher [
+	"Return event fetcher used to enqueue events that should be
+	processed in the beginning of every frame"
+	<return: #BlHostEventFetcher>
+
+	^ eventFetcher
 ]
 
 { #category : #'host space - events' }
 BlOSWindowSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
+	
+	self eventFetcher fetchedEventsDo: aBlock
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'window - properties' }
 BlOSWindowSpace >> fullscreen [
 	"Return true if an underlying window is in fullscreen mode,
 	false otherwise"
 	<return: #Boolean>
 
-	^ self windowDo: [ :aWindow | aWindow fullscreen ]
+	^ window fullscreen
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'window - properties' }
 BlOSWindowSpace >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
 	and exit fullscreen mode if false is given"
 
-	self windowDo: [ :aWindow | aWindow fullscreen: aBoolean ]
+	window fullscreen: aBoolean
 ]
 
-{ #category : #'host space - events' }
-BlOSWindowSpace >> generateEvents [
-	"Generate more complex state change events such as window scale event when resolution of the screen changes"
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #'host space - displaying' }
 BlOSWindowSpace >> hide [
-	self windowDo: [ :aWindow | aWindow hide ]
+	window hide
 ]
 
 { #category : #initialization }
@@ -110,7 +111,9 @@ BlOSWindowSpace >> initializeForBuffer: aBufferSurface [
 	aBufferSurface hostRenderer: self renderer.
 
 	self renderer surface: aBufferSurface.
-	window newBlocRenderer surface: aBufferSurface
+
+	window newBlocRenderer surface: aBufferSurface.
+	window validHandle renderer initializeForBuffer: aBufferSurface
 ]
 
 { #category : #initialization }
@@ -124,6 +127,7 @@ BlOSWindowSpace >> initializeForForm: anFormSurface [
 	anFormSurface hostRenderer: self renderer.
 
 	self renderer surface: anFormSurface.
+
 	window newBlocRenderer surface: anFormSurface
 ]
 
@@ -167,7 +171,7 @@ BlOSWindowSpace >> isVisible [
 	Window can become invisible by asking it to hide"
 	<return: #Boolean>
 
-	^ self windowDo: [ :aWindow | aWindow isVisible ]
+	^ window isVisible
 ]
 
 { #category : #private }
@@ -183,28 +187,28 @@ BlOSWindowSpace >> logicalSize [
 	<return: #BlHostLogicalSize>
 	| anExtent |
 
-	anExtent := self windowDo: [ :aWindow | aWindow extent ].
+	anExtent := window extent.
 	^ BlHostLogicalSize width: anExtent x height: anExtent y
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> maximize [
-	self windowDo: [ :aWindow | aWindow maximize ]
+	window maximize
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> maximized [
-	^ self windowDo: [ :aWindow | aWindow maximized ]
+	^ window maximized
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> minimize [
-	self windowDo: [ :aWindow | aWindow minimize ]
+	window minimize
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> minimized [
-	^ self windowDo: [ :aWindow | aWindow minimized ]
+	^ window minimized
 ]
 
 { #category : #'host space - testing' }
@@ -215,9 +219,9 @@ BlOSWindowSpace >> needsRebuild [
 	^ self isValid not
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'host space - displaying' }
 BlOSWindowSpace >> open [
-	self windowDo: [ :aWindow | aWindow show ]
+	window show
 ]
 
 { #category : #'host space - geometry' }
@@ -228,18 +232,21 @@ BlOSWindowSpace >> physicalSize [
 	<return: #BlHostPhysicalSize>
 	| anExtent |
 
-	anExtent := self windowDo: [ :aWindow | aWindow canvasExtent ].
+	anExtent := window canvasExtent.
 	^ BlHostPhysicalSize width: anExtent x height: anExtent y
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlOSWindowSpace >> position [
-	^ self windowDo: [ :aWindow | aWindow position ]
+	"Return window's position in screen coordinates"
+	<return: #Point>
+
+	^ window position
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlOSWindowSpace >> position: aPoint [
-	self windowDo: [ :aWindow | aWindow position: aPoint ]
+	window position: aPoint
 ]
 
 { #category : #'host space - rendering' }
@@ -268,37 +275,37 @@ BlOSWindowSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurfac
 	self renderer doRender: aBlSpace dirtyAreas: { 0 @ 0 extent: aBlSpace extent }
 ]
 
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> renderer [
-	"Return host renderer used to render spaces"
-	<return: #TBlHostRenderer>
+{ #category : #'window - properties' }
+BlOSWindowSpace >> resizable [	
+	"Return true if underlying window is resizable, false otherwise"
+	<return: #Boolean>
 
-	^ renderer
+	^ window resizable
 ]
 
-{ #category : #'host space - accessing' }
-BlOSWindowSpace >> resizable [
-	^ self windowDo: [ :aWindow | aWindow resizable ]
-]
-
-{ #category : #'host space - accessing' }
+{ #category : #'window - properties' }
 BlOSWindowSpace >> resizable: aBoolean [
-	self windowDo: [ :aWindow | aWindow resizable: aBoolean ]
+	window resizable: aBoolean
 ]
 
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> show [
-	self windowDo: [ :aWindow | aWindow show ]
+	window show
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'window - properties' }
 BlOSWindowSpace >> title [
-	^ self windowDo: [ :aWindow | aWindow title ]
+	"Return window's title as a string"
+	<return: #String>
+
+	^ window title
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'window - properties' }
 BlOSWindowSpace >> title: aString [
-	self windowDo: [ :aWindow | aWindow title: aString ]
+	"Change window's title"
+
+	window title: aString
 ]
 
 { #category : #private }
@@ -306,19 +313,10 @@ BlOSWindowSpace >> window: anOSWindow [
 	window := anOSWindow
 ]
 
-{ #category : #private }
-BlOSWindowSpace >> windowDo: aBlock [
-	"All direct references to a window must be replaced with windowDo:
-	I make sure that window is valid and re-create it if needed"
-	self ensureWindowIsValid.
-	
-	^ aBlock value: window
-]
-
 { #category : #'host space - geometry' }
 BlOSWindowSpace >> windowExtent: newExtent [
 	"Change window size to a newExtent"
 
 	self logicalSize width @ self logicalSize height ~= newExtent
-		ifTrue: [ self windowDo: [ :aWindow | aWindow extent: newExtent ] ]
+		ifTrue: [ window extent: newExtent ]
 ]

@@ -69,7 +69,7 @@ BlGlutinHostSpace >> densityDpi [
 
 { #category : #'host space - events' }
 BlGlutinHostSpace >> enqueueEvent: aBlEvent [
-	"I dispatch events directly to the universe or space as soon as they come"
+	"I put events in a queue to be processed later"
 
 	self eventFetcher enqueueEvent: aBlEvent
 ]
@@ -168,7 +168,7 @@ BlGlutinHostSpace >> physicalSize [
 	^ BlHostPhysicalSize width: anExtent x height: anExtent y
 ]
 
-{ #category : #'window - properties' }
+{ #category : #'host space - geometry' }
 BlGlutinHostSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
@@ -176,7 +176,7 @@ BlGlutinHostSpace >> position [
 	^ window position
 ]
 
-{ #category : #'window - properties' }
+{ #category : #'host space - geometry' }
 BlGlutinHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen coordinates"
 	
@@ -236,13 +236,6 @@ BlGlutinHostSpace >> title: aString [
 	"Change window's title"
 
 	window title: aString
-]
-
-{ #category : #'host space - accessing' }
-BlGlutinHostSpace >> universe [
-	<return: #BlParallelUniverse>
-
-	^ universe
 ]
 
 { #category : #'event - handling' }

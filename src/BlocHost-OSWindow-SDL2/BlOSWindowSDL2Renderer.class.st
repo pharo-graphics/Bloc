@@ -71,6 +71,7 @@ BlOSWindowSDL2Renderer >> initializeForBuffer: aBlHostRendererBufferSurface [
 	self
 		assert: [ self window isNotNil ]
 		description: [ 'Window must be set!' ].
+		
 	textureExtent := aBlHostRendererBufferSurface physicalSize width
 		@ aBlHostRendererBufferSurface physicalSize height.
 	sdlSurface := SDL2

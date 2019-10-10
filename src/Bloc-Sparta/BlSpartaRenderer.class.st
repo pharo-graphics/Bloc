@@ -79,9 +79,7 @@ BlSpartaRenderer >> doRender: aSpace dirtyAreas: aCollectionOfRectangles [
 
 	theDirtyAreas do: [ :aBlBounds | 
 		spartaCanvas clip by: aBlBounds during: [ 
-			aSpace fullDrawOn: spartaCanvas
-		].
-	].
+			aSpace fullDrawOn: spartaCanvas ] ].
 
 	spartaCanvas flush.
 
@@ -111,7 +109,6 @@ BlSpartaRenderer >> initialize [
 { #category : #initialization }
 BlSpartaRenderer >> initializeForBuffer: aBufferSurface [
 	"Initalize sparta canvas to be used with a pixel buffer surface"
-
 	| scaleFactor |
 	
 	windowExtent := aBufferSurface logicalSize width
@@ -132,8 +129,8 @@ BlSpartaRenderer >> initializeForBuffer: aBufferSurface [
 { #category : #initialization }
 BlSpartaRenderer >> initializeForForm: aFormSurface [
 	"Initalize sparta canvas to be used with a form surface"
-
 	| scaleFactor |
+	
 	windowExtent := aFormSurface logicalSize width
 		@ aFormSurface logicalSize height.
 	canvasExtent := aFormSurface physicalSize width
@@ -152,8 +149,8 @@ BlSpartaRenderer >> initializeForForm: aFormSurface [
 { #category : #initialization }
 BlSpartaRenderer >> initializeForOpenGL: anOpenGLSurface [
 	"Asks renderer to initialize itself to be used together with an OpenGL surface"
-
 	| scaleFactor |
+
 	windowExtent := anOpenGLSurface logicalSize width
 		@ anOpenGLSurface logicalSize height.
 	canvasExtent := anOpenGLSurface physicalSize width

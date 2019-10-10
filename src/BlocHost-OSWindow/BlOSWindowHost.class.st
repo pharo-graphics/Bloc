@@ -53,6 +53,8 @@ BlOSWindowHost >> createHostSpaceFor: aSpace [
 	
 	aHostSpace := self createWindowSpaceFor: aSpace.
 	aHostSpace keyboardKeyTable: self keyboardKeyTable.
+
+	aHostSpace universe: self universe.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.
 	aHostSpace withSpartaRenderer.
