@@ -20,6 +20,11 @@ BlHost class >> availableHostClasses [
 		sort: [ :a :b | a priority < b priority ]
 ]
 
+{ #category : #'api - lifecycle' }
+BlHost class >> isRunning [
+	^ self subclassResponsibility
+]
+
 { #category : #'driver selection' }
 BlHost class >> isSupported [
 	^ false
@@ -53,6 +58,16 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - lifecycle' }
+BlHost class >> start [
+	self subclassResponsibility
+]
+
+{ #category : #'api - lifecycle' }
+BlHost class >> stop [
+	self subclassResponsibility
+]
+
 { #category : #'driver selection' }
 BlHost class >> suitableHostClass [
 	"Find a default bloc host among all available.
@@ -83,12 +98,12 @@ BlHost >> destroyHostSpaceFor: aSpace [
 	self subclassResponsibility
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
 	<return: #Boolean>
 
-	^ self subclassResponsibility
+	^ self class isRunning
 ]
 
 { #category : #'host - testing' }
@@ -103,14 +118,14 @@ BlHost >> isStillAvailable [
 	^ true
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlHost >> start [
-	self subclassResponsibility
+	self class start
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlHost >> stop [
-	self subclassResponsibility
+	self class stop
 ]
 
 { #category : #'host - testing' }

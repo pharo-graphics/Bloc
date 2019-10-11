@@ -73,7 +73,7 @@ BlGlutinHost class >> initialize [
 		process ]
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlGlutinHost class >> isRunning [
 	<return: #Boolean>
 
@@ -110,7 +110,7 @@ BlGlutinHost class >> spaceRegistry [
 	^ HostSpaceRegistry ifNil: [ HostSpaceRegistry := WeakIdentityValueDictionary new ]
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlGlutinHost class >> start [
 	self forceStartNewUIProcess.
 
@@ -120,7 +120,7 @@ BlGlutinHost class >> start [
 	GlutinEventsFetcher install
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlGlutinHost class >> stop [
 	| aUIProcess |
 
@@ -235,14 +235,6 @@ BlGlutinHost >> destroyWindowSpaceFor: aSpace [
 	self critical: [ self unregisterHostSpace: aSpace hostSpace ]
 ]
 
-{ #category : #'host - api' }
-BlGlutinHost >> isRunning [
-	"Return true if host is initialized and running"
-	<return: #Boolean>
-
-	^ self class isRunning
-]
-
 { #category : #'host - testing' }
 BlGlutinHost >> isStillAvailable [
 	"Let's assume that a space is opened with me as a host.
@@ -283,16 +275,6 @@ BlGlutinHost >> registerHostSpace: aHostSpace [
 { #category : #private }
 BlGlutinHost >> spaceRegistry [
 	^ self class spaceRegistry
-]
-
-{ #category : #'host - api' }
-BlGlutinHost >> start [
-	self class start
-]
-
-{ #category : #'host - api' }
-BlGlutinHost >> stop [
-	self class stop
 ]
 
 { #category : #'host - testing' }

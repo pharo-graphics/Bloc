@@ -7,8 +7,21 @@ Class {
 	#instVars : [
 		'isRunning'
 	],
+	#classVars : [
+		'PulseLoop'
+	],
 	#category : #'Bloc-Universe - Host'
 }
+
+{ #category : #'class initialization' }
+BlHeadlessHost class >> initialize [
+	PulseLoop := BlHostPulseLoop forHost: self
+]
+
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> isRunning [
+	^ PulseLoop isRunning
+]
 
 { #category : #'driver selection' }
 BlHeadlessHost class >> label [
@@ -21,6 +34,23 @@ BlHeadlessHost class >> priority [
 	<return: #Number>
 	
 	^ Float infinity
+]
+
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> start [
+	PulseLoop start
+]
+
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> stop [
+	PulseLoop stop
+]
+
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+	
+	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
 { #category : #'host - api' }
@@ -45,30 +75,6 @@ BlHeadlessHost >> destroyHostSpaceFor: aSpace [
 		detachUniverse.
 
 	aSpace detachHostSpace
-]
-
-{ #category : #initialization }
-BlHeadlessHost >> initialize [
-	super initialize.
-	
-	isRunning := false
-]
-
-{ #category : #'host - api' }
-BlHeadlessHost >> isRunning [
-	^ isRunning
-]
-
-{ #category : #'host - api' }
-BlHeadlessHost >> start [
-	isRunning := true.
-	
-	(BlParallelUniverse forHost: self class) pulse
-]
-
-{ #category : #'host - api' }
-BlHeadlessHost >> stop [
-	isRunning := false
 ]
 
 { #category : #'host - testing' }

@@ -4,11 +4,34 @@ I am a mocked host that looks like real but does not create any windows
 Class {
 	#name : #BlMockedHost,
 	#superclass : #BlHost,
-	#instVars : [
+	#classVars : [
 		'isRunning'
 	],
-	#category : 'BlocHost-Mock-Host'
+	#category : #'BlocHost-Mock-Host'
 }
+
+{ #category : #initialization }
+BlMockedHost class >> initialize [
+	isRunning := false
+]
+
+{ #category : #'api - lifecycle' }
+BlMockedHost class >> isRunning [
+	"Return true if host is initialized and running"
+	<return: #Boolean>
+
+	^ isRunning
+]
+
+{ #category : #'api - lifecycle' }
+BlMockedHost class >> start [
+	isRunning := true
+]
+
+{ #category : #'api - lifecycle' }
+BlMockedHost class >> stop [
+	isRunning := false
+]
 
 { #category : #'host - api' }
 BlMockedHost >> createHostSpaceFor: aSpace [
@@ -27,29 +50,4 @@ BlMockedHost >> destroyHostSpaceFor: aSpace [
 	Note: in most cases under 'destroy host space' we mean 'close host window' and unregister it"
 	
 	aSpace detachHostSpace
-]
-
-{ #category : #initialization }
-BlMockedHost >> initialize [
-	super initialize.
-	
-	isRunning := false
-]
-
-{ #category : #'host - api' }
-BlMockedHost >> isRunning [
-	"Return true if host is initialized and running"
-	<return: #Boolean>
-
-	^ isRunning
-]
-
-{ #category : #'host - api' }
-BlMockedHost >> start [
-	isRunning := true
-]
-
-{ #category : #'host - api' }
-BlMockedHost >> stop [
-	isRunning := false
 ]

@@ -12,7 +12,7 @@ BlOSWindowSDL2Host class >> initialize [
 	PulseLoop := BlHostPulseLoop forHost: self
 ]
 
-{ #category : #testing }
+{ #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> isRunning [
 	^ PulseLoop isRunning
 ]
@@ -37,12 +37,12 @@ BlOSWindowSDL2Host class >> priority [
 	^ 400
 ]
 
-{ #category : #testing }
+{ #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> start [
 	PulseLoop start
 ]
 
-{ #category : #testing }
+{ #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> stop [
 	PulseLoop stop
 ]
@@ -52,14 +52,6 @@ BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 	
 	PulseLoop loopProcess ifNotNil: aBlock
-]
-
-{ #category : #'host - api' }
-BlOSWindowSDL2Host >> isRunning [
-	"Return true if host is initialized and running"
-	<return: #Boolean>
-
-	^ self class isRunning
 ]
 
 { #category : #initialization }
@@ -81,14 +73,4 @@ BlOSWindowSDL2Host >> preferableDriver [
 	OSSDL2Driver current: aDriver.
 
 	^ aDriver
-]
-
-{ #category : #'host - api' }
-BlOSWindowSDL2Host >> start [
-	self class start
-]
-
-{ #category : #'host - api' }
-BlOSWindowSDL2Host >> stop [
-	self class stop
 ]
