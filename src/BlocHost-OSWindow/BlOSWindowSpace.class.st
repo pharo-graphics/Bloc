@@ -109,7 +109,6 @@ BlOSWindowSpace >> initializeForBuffer: aBufferSurface [
 	Default implementation simply connects renderer, host space and surface together"
 
 	aBufferSurface hostSpace: self.
-	aBufferSurface hostRenderer: self renderer.
 
 	self renderer surface: aBufferSurface.
 
@@ -125,7 +124,6 @@ BlOSWindowSpace >> initializeForForm: anFormSurface [
 	self initializeWithAttributes: (self host createAttributesFor: self space).
 	
 	anFormSurface hostSpace: self.
-	anFormSurface hostRenderer: self renderer.
 
 	self renderer surface: anFormSurface.
 
@@ -147,7 +145,6 @@ BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 	self initializeWithAttributes: ((self host createAttributesFor: self space) glAttributes: glAttributes).
 
 	anOpenGLSurface hostSpace: self.
-	anOpenGLSurface hostRenderer: self renderer.
 
 	self renderer surface: anOpenGLSurface.
 	window newBlocRenderer surface: anOpenGLSurface

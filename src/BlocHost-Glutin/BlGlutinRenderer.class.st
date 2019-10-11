@@ -1,6 +1,6 @@
 Class {
 	#name : #BlGlutinRenderer,
-	#superclass : #Object,
+	#superclass : #BlHostSurfaceRenderer,
 	#instVars : [
 		'window'
 	],

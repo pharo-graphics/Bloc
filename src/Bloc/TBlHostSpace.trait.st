@@ -11,7 +11,8 @@ Trait {
 		'renderer',
 		'host',
 		'space',
-		'universe'
+		'universe',
+		'surfaceRenderer'
 	],
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
@@ -36,6 +37,27 @@ TBlHostSpace >> canvasExtent [
 { #category : #'host space - displaying' }
 TBlHostSpace >> close [
 	self explicitRequirement
+]
+
+{ #category : #initialization }
+TBlHostSpace >> createBufferRenderer [
+	<return: #TBlSurfaceRenderer>
+	
+	^ self explicitRequirement
+]
+
+{ #category : #initialization }
+TBlHostSpace >> createFormRenderer [
+	<return: #TBlSurfaceRenderer>
+	
+	^ self explicitRequirement
+]
+
+{ #category : #initialization }
+TBlHostSpace >> createOpenGLRenderer [
+	<return: #TBlSurfaceRenderer>
+
+	^ self explicitRequirement
 ]
 
 { #category : #'host space - cursor' }
@@ -145,10 +167,8 @@ TBlHostSpace >> initializeForBuffer: aBufferSurface [
 	"Asks host space to initialize itself to be used together with a pixel buffer surface.
 	Default implementation simply connects renderer, host space and surface together"
 
-	aBufferSurface hostSpace: self.
-	aBufferSurface hostRenderer: self renderer.
-
-	self renderer surface: aBufferSurface
+	surfaceRenderer := self createBufferRenderer.
+	surfaceRenderer initializeForSurface: aBufferSurface
 ]
 
 { #category : #initialization }
@@ -156,21 +176,17 @@ TBlHostSpace >> initializeForForm: anFormSurface [
 	"Asks host space to initialize itself to be used together with a Form surface.
 	Default implementation simply connects renderer, host space and surface together"
 
-	anFormSurface hostSpace: self.
-	anFormSurface hostRenderer: self renderer.
-
-	self renderer surface: anFormSurface
+	surfaceRenderer := self createFormRenderer.
+	surfaceRenderer initializeForSurface: anFormSurface
 ]
 
 { #category : #initialization }
 TBlHostSpace >> initializeForOpenGL: anOpenGLSurface [
 	"Asks host space to initialize itself to be used together with an OpenGL surface.
-	Default implementation simply connects renderer, host space and surface together"
+	Default implementation simply connects host space and surface together"
 
-	anOpenGLSurface hostSpace: self.
-	anOpenGLSurface hostRenderer: self renderer.
-
-	self renderer surface: anOpenGLSurface
+	surfaceRenderer := self createOpenGLRenderer.
+	surfaceRenderer initializeForSurface: surfaceRenderer
 ]
 
 { #category : #'host space - testing' }
@@ -372,6 +388,13 @@ TBlHostSpace >> supportsOpenGLSurface [
 	<return: #Boolean>
 	
 	^ self host supportsOpenGLSurface
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> surfaceRenderer [
+	<return: #BlHostSurfaceRenderer>
+	
+	^ surfaceRenderer
 ]
 
 { #category : #'host space - displaying' }

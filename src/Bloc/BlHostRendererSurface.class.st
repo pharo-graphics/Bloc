@@ -8,9 +8,9 @@ Class {
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'hostSpace',
-		'hostRenderer'
+		'session'
 	],
-	#category : #'Bloc-Universe - Host'
+	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #accessing }
@@ -63,14 +63,12 @@ BlHostRendererSurface >> extent [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-BlHostRendererSurface >> hostRenderer [
-	^ hostRenderer
-]
-
-{ #category : #accessing }
-BlHostRendererSurface >> hostRenderer: anObject [
-	hostRenderer := anObject
+{ #category : #testing }
+BlHostRendererSurface >> hasResized [
+	<return: #Boolean>
+	
+	^ session ~~ Smalltalk session
+		or: [ self physicalSize ~= self extent ]
 ]
 
 { #category : #accessing }

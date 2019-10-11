@@ -21,5 +21,5 @@ BlSpaceFrameDrawingValidationPhase >> runOn: aSpace [
 		ifFalse: [ ^ self ].
 
 	aSpace beDirtyArea.
-	aSpace hostSpace renderer surface initializeOn: aSpace hostSpace 
+	aSpace hostSpace renderer surface initializeOn: aSpace hostSpace renderer
 ]

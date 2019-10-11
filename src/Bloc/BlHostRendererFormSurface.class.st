@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'externalForm'
 	],
-	#category : #'Bloc-Universe - Host'
+	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #accessing }

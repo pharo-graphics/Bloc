@@ -9,16 +9,13 @@ Class {
 	#traits : 'TBlHostRenderer + TBlDebug',
 	#classTraits : 'TBlHostRenderer classTrait + TBlDebug classTrait',
 	#instVars : [
-		'spartaCanvas',
-		'session',
 		'surface',
-		'windowExtent',
-		'canvasExtent'
+		'spartaPainer'
 	],
 	#classInstVars : [
 		'defaultCanvasBuilder'
 	],
-	#category : #'Bloc-Sparta'
+	#category : #'Bloc-Sparta-Renderer'
 }
 
 { #category : #accessing }
@@ -61,27 +58,12 @@ BlSpartaRenderer class >> pickCanvasBuilderClass [
 BlSpartaRenderer >> doRender: aSpace dirtyAreas: aCollectionOfRectangles [
 	| theDirtyAreas |
 	
-	self
-		assert: [ session == Smalltalk session ]
-		description: [ 'Session has been changed! Fix your #prepareToRender: !' ].
+	self hasResized
+		ifTrue: [ self surface initializeOn: self ].
 	
-	self
-		assert: [ spartaCanvas isValid ]
-		description: [ 'Sparta Canvas must be valid at this point!' ].
-	
-	"collect the dirty area to be updated"
-	theDirtyAreas := aCollectionOfRectangles 
-		collect: [ :each | each intersect: (0@0 extent: windowExtent) ifNone: [ nil ] ]
-		thenSelect: [ :each | each isNotNil and: [ each hasPositiveExtent ] ].
-
-	theDirtyAreas
-		ifEmpty: [ ^ self ].
-
-	theDirtyAreas do: [ :aBlBounds | 
-		spartaCanvas clip by: aBlBounds during: [ 
-			aSpace fullDrawOn: spartaCanvas ] ].
-
-	spartaCanvas flush.
+	theDirtyAreas := spartaPainer
+		render: aSpace
+		dirtyAreas: aCollectionOfRectangles.
 
 	self presentAreas: theDirtyAreas
 ]
@@ -89,81 +71,46 @@ BlSpartaRenderer >> doRender: aSpace dirtyAreas: aCollectionOfRectangles [
 { #category : #'renderer - testing' }
 BlSpartaRenderer >> hasResized [
 	"Return true if host space resized since previous frame, otherwise false"
-
 	<return: #Boolean>
-	^ session ~= Smalltalk session
-		or: [ self surface logicalSize width @ self surface logicalSize height
-				~= windowExtent
-				or: [ self surface physicalSize width @ self surface physicalSize height
-						~= canvasExtent ] ]
+
+	^ spartaPainer isNil
+		or: [ spartaPainer isValid not
+			or: [ self surface physicalSize ~= spartaPainer physicalSize
+				or: [ self surface dpiFactor ~= spartaPainer dpiFactor ] ] ]
 ]
 
 { #category : #initialization }
 BlSpartaRenderer >> initialize [
 	super initialize.
 
-	spartaCanvas := nil.
 	surface := nil
 ]
 
 { #category : #initialization }
 BlSpartaRenderer >> initializeForBuffer: aBufferSurface [
 	"Initalize sparta canvas to be used with a pixel buffer surface"
-	| scaleFactor |
-	
-	windowExtent := aBufferSurface logicalSize width
-		@ aBufferSurface logicalSize height.
-	canvasExtent := aBufferSurface physicalSize width
-		@ aBufferSurface physicalSize height.
-	scaleFactor := aBufferSurface dpiFactor asPoint.
-	spartaCanvas := (self pickCanvasForSurface: aBufferSurface)
-		forBufferOn: aBufferSurface.
-	self
-		assert: [ spartaCanvas isValid ]
-		description: [ 'Failed to create sparta canvas' ].
-	spartaCanvas transform
-		scaleBy: scaleFactor;
-		push
+	| aSpartaCanvas |
+
+	aSpartaCanvas := (self pickCanvasForSurface: aBufferSurface) forBufferOn: aBufferSurface.
+	spartaPainer := BlSpartaCanvasPainter new initializeWithCanvas: aSpartaCanvas surface: aBufferSurface.
 ]
 
 { #category : #initialization }
 BlSpartaRenderer >> initializeForForm: aFormSurface [
 	"Initalize sparta canvas to be used with a form surface"
-	| scaleFactor |
-	
-	windowExtent := aFormSurface logicalSize width
-		@ aFormSurface logicalSize height.
-	canvasExtent := aFormSurface physicalSize width
-		@ aFormSurface physicalSize height.
-	scaleFactor := aFormSurface dpiFactor asPoint.
-	spartaCanvas := (self pickCanvasForSurface: aFormSurface)
-		forFormOn: aFormSurface.
-	self
-		assert: [ spartaCanvas isValid ]
-		description: [ 'Failed to create sparta canvas' ].
-	spartaCanvas transform
-		scaleBy: scaleFactor;
-		push
+	| aSpartaCanvas |
+
+	aSpartaCanvas := (self pickCanvasForSurface: aFormSurface) forFormOn: aFormSurface.
+	spartaPainer := BlSpartaCanvasPainter new initializeWithCanvas: aSpartaCanvas surface: aFormSurface
 ]
 
 { #category : #initialization }
 BlSpartaRenderer >> initializeForOpenGL: anOpenGLSurface [
 	"Asks renderer to initialize itself to be used together with an OpenGL surface"
-	| scaleFactor |
+	| aSpartaCanvas |
 
-	windowExtent := anOpenGLSurface logicalSize width
-		@ anOpenGLSurface logicalSize height.
-	canvasExtent := anOpenGLSurface physicalSize width
-		@ anOpenGLSurface physicalSize height.
-	scaleFactor := anOpenGLSurface dpiFactor asPoint.
-	spartaCanvas := (self pickCanvasForSurface: anOpenGLSurface)
-		forOpenGLOn: anOpenGLSurface.
-	self
-		assert: [ spartaCanvas isValid ]
-		description: [ 'Failed to create sparta canvas' ].
-	spartaCanvas transform
-		scaleBy: scaleFactor;
-		push
+	aSpartaCanvas := (self pickCanvasForSurface: anOpenGLSurface) forFormOn: anOpenGLSurface.
+	spartaPainer := BlSpartaCanvasPainter new initializeWithCanvas: aSpartaCanvas surface: anOpenGLSurface
 ]
 
 { #category : #initialization }
@@ -185,7 +132,8 @@ BlSpartaRenderer >> initializeHostSpace: aBlHostSpace [
 		sort: [ :a :b | a priority < b priority ].
 
 	surface := supportedSurfaces first new.
-	surface initializeOn: aBlHostSpace
+	surface hostSpace: aBlHostSpace.
+	surface initializeOn: aBlHostSpace.
 ]
 
 { #category : #initialization }
@@ -207,12 +155,6 @@ BlSpartaRenderer >> pickCanvasForSurface: aSurface [
 { #category : #'renderer - rendering' }
 BlSpartaRenderer >> prepareToRender: aSpace [
 	"I check if window extent changed since last rendering step and if yes, recreate resources"
-
-	(session == Smalltalk session and: [ self hasResized not ])
-		ifTrue: [ ^ self ].
-
-	session := Smalltalk session.
-	self surface initializeResourcesOn: self
 ]
 
 { #category : #'renderer - testing' }

@@ -1,9 +1,6 @@
 Class {
 	#name : #BlGlutinHost,
 	#superclass : #BlHost,
-	#instVars : [
-		'eventsSensor'
-	],
 	#classVars : [
 		'EventsSensor',
 		'HostSpaceRegistry',

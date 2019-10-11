@@ -109,10 +109,9 @@ BlGlutinHostSpace >> initializeForBuffer: aBufferSurface [
 	Default implementation simply connects renderer, host space and surface together"
 
 	aBufferSurface hostSpace: self.
-	aBufferSurface hostRenderer: self renderer.
 
 	self renderer surface: aBufferSurface.
-	
+
 	glutinRenderer := BlGlutinRendererBuffer new window: self window.
 	glutinRenderer initializeForBuffer: aBufferSurface
 ]
@@ -123,7 +122,6 @@ BlGlutinHostSpace >> initializeForOpenGL: anOpenGLSurface [
 	Default implementation simply connects renderer, host space and surface together"
 
 	anOpenGLSurface hostSpace: self.
-	anOpenGLSurface hostRenderer: self renderer.
 
 	self renderer surface: anOpenGLSurface.
 	
