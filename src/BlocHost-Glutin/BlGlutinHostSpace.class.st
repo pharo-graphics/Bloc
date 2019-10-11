@@ -52,6 +52,20 @@ BlGlutinHostSpace >> convertKeyModifiers: theGlutinModifiers [
 		cmd: theGlutinModifiers logo
 ]
 
+{ #category : #initialization }
+BlGlutinHostSpace >> createBufferSurfaceRenderer [
+	<return: #TBlSurfaceRenderer>
+	
+	^ BlGlutinRendererBuffer new window: self window
+]
+
+{ #category : #initialization }
+BlGlutinHostSpace >> createOpenGLSurfaceRenderer [
+	<return: #TBlSurfaceRenderer>
+
+	^ BlGlutinRendererOpenGL new window: self window
+]
+
 { #category : #'host space - cursor' }
 BlGlutinHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
@@ -101,32 +115,6 @@ BlGlutinHostSpace >> initialize [
 
 	mousePosition := 0@0.
 	eventFetcher := BlHostEventFetcher new
-]
-
-{ #category : #initialization }
-BlGlutinHostSpace >> initializeForBuffer: aBufferSurface [
-	"Asks host space to initialize itself to be used together with a pixel buffer surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	aBufferSurface hostSpace: self.
-
-	self renderer surface: aBufferSurface.
-
-	glutinRenderer := BlGlutinRendererBuffer new window: self window.
-	glutinRenderer initializeForBuffer: aBufferSurface
-]
-
-{ #category : #initialization }
-BlGlutinHostSpace >> initializeForOpenGL: anOpenGLSurface [
-	"Asks host space to initialize itself to be used together with an OpenGL surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	anOpenGLSurface hostSpace: self.
-
-	self renderer surface: anOpenGLSurface.
-	
-	glutinRenderer := BlGlutinRendererOpenGL new window: self window.
-	glutinRenderer initializeForOpenGL: anOpenGLSurface
 ]
 
 { #category : #'event - handling' }
@@ -182,7 +170,7 @@ BlGlutinHostSpace >> position: aPoint [
 
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : #'as yet unclassified' }
 BlGlutinHostSpace >> prepareToRender: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
 	"Prepare host space to a given space on an OpenGL surface.
 	By default dispatch directly to the renderer"
@@ -208,7 +196,7 @@ BlGlutinHostSpace >> render: aSpace [
 	Glutin critical: [ self renderer render: aSpace ]
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : #'as yet unclassified' }
 BlGlutinHostSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
 	"Render a given space on an OpenGL surface.
 	By default dispatch directly to the renderer"

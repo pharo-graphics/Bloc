@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpartaCanvasPainter,
-	#superclass : #BlHostCanvasPainter,
+	#name : #BlSpartaSpaceRenderer,
+	#superclass : #BlHostSpaceRenderer,
 	#instVars : [
 		'spartaCanvas',
 		'session',
@@ -11,14 +11,14 @@ Class {
 }
 
 { #category : #accessing }
-BlSpartaCanvasPainter >> dpiFactor [
+BlSpartaSpaceRenderer >> dpiFactor [
 	<return: #Number>
 
 	^ dpiFactor
 ]
 
 { #category : #initialization }
-BlSpartaCanvasPainter >> initializeWithCanvas: aSpartaCanvas surface: aSurface [
+BlSpartaSpaceRenderer >> initializeWithCanvas: aSpartaCanvas surface: aSurface [
 	spartaCanvas := aSpartaCanvas.
 	physicalSize := aSurface physicalSize.
 	dpiFactor := aSurface dpiFactor.
@@ -26,7 +26,7 @@ BlSpartaCanvasPainter >> initializeWithCanvas: aSpartaCanvas surface: aSurface [
 ]
 
 { #category : #testing }
-BlSpartaCanvasPainter >> isValid [
+BlSpartaSpaceRenderer >> isValid [
 	<return: #Boolean>
 	
 	^ session == Smalltalk session
@@ -35,14 +35,14 @@ BlSpartaCanvasPainter >> isValid [
 ]
 
 { #category : #accessing }
-BlSpartaCanvasPainter >> physicalSize [
+BlSpartaSpaceRenderer >> physicalSize [
 	<return: #BlHostPhysicalSize>
 
 	^ physicalSize
 ]
 
 { #category : #rendering }
-BlSpartaCanvasPainter >> render: aSpace dirtyAreas: aCollectionOfRectangles [
+BlSpartaSpaceRenderer >> render: aSpace dirtyAreas: aCollectionOfRectangles [
 	<return: #Collection of: #Rectangle>
 	| theDirtyAreas aLogicalExtent |
 	

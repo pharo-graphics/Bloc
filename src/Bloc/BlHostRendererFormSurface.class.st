@@ -25,6 +25,20 @@ BlHostRendererFormSurface class >> supportedBy: anObject [
 	^ anObject supportsFormSurface
 ]
 
+{ #category : #initialization }
+BlHostRendererFormSurface >> createSpaceRendererOn: anObject [
+	<return: #BlHostSpaceRenderer>
+
+	^ anObject createFormSpaceRenderer
+]
+
+{ #category : #initialization }
+BlHostRendererFormSurface >> createSurfaceRendererOn: anObject [
+	<return: #BlHostSurfaceRenderer>
+	
+	^ anObject createFormSurfaceRenderer
+]
+
 { #category : #geometry }
 BlHostRendererFormSurface >> extent [
 	"Return actual extent of the underlying surface.
@@ -53,6 +67,11 @@ BlHostRendererFormSurface >> initializeResourcesOn: aHostRenderer [
 	externalForm allocateSpace.
 	externalForm fillColor: Color transparent.
 	self initializeOn: aHostRenderer
+]
+
+{ #category : #testing }
+BlHostRendererFormSurface >> isForm [
+	^ true
 ]
 
 { #category : #accessing }

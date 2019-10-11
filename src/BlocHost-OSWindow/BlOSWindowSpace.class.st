@@ -103,7 +103,7 @@ BlOSWindowSpace >> initialize [
 	eventFetcher := BlHostEventFetcher new
 ]
 
-{ #category : #initialization }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> initializeForBuffer: aBufferSurface [
 	"Asks host space to initialize itself to be used together with a pixel buffer surface.
 	Default implementation simply connects renderer, host space and surface together"
@@ -116,7 +116,7 @@ BlOSWindowSpace >> initializeForBuffer: aBufferSurface [
 	window validHandle renderer initializeForBuffer: aBufferSurface
 ]
 
-{ #category : #initialization }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> initializeForForm: anFormSurface [
 	"Asks host space to initialize itself to be used together with a Form surface.
 	Default implementation simply connects renderer, host space and surface together"
@@ -130,7 +130,7 @@ BlOSWindowSpace >> initializeForForm: anFormSurface [
 	window newBlocRenderer surface: anFormSurface
 ]
 
-{ #category : #initialization }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> initializeForOpenGL: anOpenGLSurface [
 	"Asks host space to initialize itself to be used together with an OpenGL surface.
 	Default implementation simply connects renderer, host space and surface together"
@@ -272,7 +272,7 @@ BlOSWindowSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCo
 		presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
 	"Render a given space on an OpenGL surface.
 	By default dispatch directly to the renderer"

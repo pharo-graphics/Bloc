@@ -37,6 +37,20 @@ BlHostRendererBufferSurface >> buffer: aPixelBuffer [
 	buffer := aPixelBuffer
 ]
 
+{ #category : #initialization }
+BlHostRendererBufferSurface >> createSpaceRendererOn: anObject [
+	<return: #BlHostSpaceRenderer>
+
+	^ anObject createBufferSpaceRenderer
+]
+
+{ #category : #initialization }
+BlHostRendererBufferSurface >> createSurfaceRendererOn: anObject [
+	<return: #BlHostSurfaceRenderer>
+	
+	^ anObject createBufferSurfaceRenderer
+]
+
 { #category : #geometry }
 BlHostRendererBufferSurface >> extent [
 	"Return actual extent of the underlying surface.
@@ -61,6 +75,11 @@ BlHostRendererBufferSurface >> initializeResourcesOn: aHostRenderer [
 	self initializeOn: aHostRenderer
 ]
 
+{ #category : #testing }
+BlHostRendererBufferSurface >> isBuffer [
+	^ true
+]
+
 { #category : #rendering }
 BlHostRendererBufferSurface >> prepareToRender: aSpace [
 	"Dispatch preparation to render through host space based on surface type"
@@ -77,7 +96,7 @@ BlHostRendererBufferSurface >> presentAreas: aCollectionOfRectangles [
 BlHostRendererBufferSurface >> renderFor: aSpace [
 	"Dispatch render process through host space based on surface type"
 	
-	self hostSpace render: aSpace onBufferSurface: self
+	self hostSpace render: aSpace onSurface: self
 ]
 
 { #category : #accessing }

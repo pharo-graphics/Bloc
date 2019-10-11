@@ -36,6 +36,20 @@ BlHostRendererOpenGLSurface >> context: anObject [
 	context := anObject
 ]
 
+{ #category : #initialization }
+BlHostRendererOpenGLSurface >> createSpaceRendererOn: anObject [
+	<return: #BlHostSpaceRenderer>
+
+	^ anObject createOpenGLSpaceRenderer
+]
+
+{ #category : #initialization }
+BlHostRendererOpenGLSurface >> createSurfaceRendererOn: anObject [
+	<return: #BlHostSurfaceRenderer>
+
+	^ anObject createOpenGLSurfaceRenderer
+]
+
 { #category : #accessing }
 BlHostRendererOpenGLSurface >> extent [
 	^ extent
@@ -57,6 +71,11 @@ BlHostRendererOpenGLSurface >> initializeResourcesOn: aHostRenderer [
 	must be implemented by subclasses"
 	
 	self initializeOn: aHostRenderer
+]
+
+{ #category : #testing }
+BlHostRendererOpenGLSurface >> isOpenGL [
+	^ true
 ]
 
 { #category : #rendering }

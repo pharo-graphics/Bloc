@@ -1,0 +1,19 @@
+Class {
+	#name : #BlHostSpaceRenderer,
+	#superclass : #Object,
+	#category : #'Bloc-Universe - Renderer'
+}
+
+{ #category : #initialization }
+BlHostSpaceRenderer >> initializeForSurface: aSurface [
+	"Initalize space renderer to be used with a given surface"
+
+	self subclassResponsibility
+]
+
+{ #category : #rendering }
+BlHostSpaceRenderer >> render: aSpace dirtyAreas: aCollectionOfRectangles [
+	<return: #Collection of: #Rectangle>
+	
+	^ self subclassResponsibility
+]

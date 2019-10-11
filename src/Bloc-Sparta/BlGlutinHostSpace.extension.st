@@ -1,7 +1,7 @@
-Extension { #name : #TBlHostSpace }
+Extension { #name : #BlGlutinHostSpace }
 
 { #category : #'*Bloc-Sparta' }
-TBlHostSpace >> withSpartaRenderer [
+BlGlutinHostSpace >> withSpartaRenderer [
 	renderer := BlSpartaRenderer new.
 	renderer initializeForHostSpace: self
 ]

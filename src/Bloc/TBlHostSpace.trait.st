@@ -8,11 +8,10 @@ This area is typically an host-specific window.
 Trait {
 	#name : #TBlHostSpace,
 	#instVars : [
-		'renderer',
 		'host',
 		'space',
 		'universe',
-		'surfaceRenderer'
+		'renderer'
 	],
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
@@ -40,21 +39,21 @@ TBlHostSpace >> close [
 ]
 
 { #category : #initialization }
-TBlHostSpace >> createBufferRenderer [
+TBlHostSpace >> createBufferSurfaceRenderer [
 	<return: #TBlSurfaceRenderer>
 	
 	^ self explicitRequirement
 ]
 
 { #category : #initialization }
-TBlHostSpace >> createFormRenderer [
+TBlHostSpace >> createFormSurfaceRenderer [
 	<return: #TBlSurfaceRenderer>
 	
 	^ self explicitRequirement
 ]
 
 { #category : #initialization }
-TBlHostSpace >> createOpenGLRenderer [
+TBlHostSpace >> createOpenGLSurfaceRenderer [
 	<return: #TBlSurfaceRenderer>
 
 	^ self explicitRequirement
@@ -162,33 +161,6 @@ TBlHostSpace >> host: aBlHost [
 	host := aBlHost
 ]
 
-{ #category : #initialization }
-TBlHostSpace >> initializeForBuffer: aBufferSurface [
-	"Asks host space to initialize itself to be used together with a pixel buffer surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	surfaceRenderer := self createBufferRenderer.
-	surfaceRenderer initializeForSurface: aBufferSurface
-]
-
-{ #category : #initialization }
-TBlHostSpace >> initializeForForm: anFormSurface [
-	"Asks host space to initialize itself to be used together with a Form surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	surfaceRenderer := self createFormRenderer.
-	surfaceRenderer initializeForSurface: anFormSurface
-]
-
-{ #category : #initialization }
-TBlHostSpace >> initializeForOpenGL: anOpenGLSurface [
-	"Asks host space to initialize itself to be used together with an OpenGL surface.
-	Default implementation simply connects host space and surface together"
-
-	surfaceRenderer := self createOpenGLRenderer.
-	surfaceRenderer initializeForSurface: surfaceRenderer
-]
-
 { #category : #'host space - testing' }
 TBlHostSpace >> isVisible [
 	"Return true if underlying window is shown, false otherwise.
@@ -250,30 +222,6 @@ TBlHostSpace >> physicalSize [
 ]
 
 { #category : #'host space - rendering' }
-TBlHostSpace >> prepareToRender: aBlSpace onBufferSurface: aBlHostRendererBufferSurface [
-	"Prepare host space to a given space on a buffer surface.
-	By default dispatch directly to the renderer"
-
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> prepareToRender: aBlSpace onFormSurface: aBlHostRendererFormSurface [
-	"Prepare host space to a given space on a Form surface.
-	By default dispatch directly to the renderer"
-
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> prepareToRender: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
-	"Prepare host space to a given space on an OpenGL surface.
-	By default dispatch directly to the renderer"
-
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
 TBlHostSpace >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
 	self explicitRequirement
 ]
@@ -296,27 +244,11 @@ TBlHostSpace >> render: aSpace [
 ]
 
 { #category : #'host space - rendering' }
-TBlHostSpace >> render: aBlSpace onBufferSurface: aBlHostRendererBufferSurface [
-	"Render a given space on an a buffer surface.
-	By default dispatch directly to the renderer"
+TBlHostSpace >> render: aBlSpace onSurface: aSurface [
+	"Render a given abstract space on an underlying window or visual area"
 
-	self renderer doRender: aBlSpace dirtyAreas: aBlSpace dirtyAreas
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> render: aBlSpace onFormSurface: aBlHostRendererFormSurface [
-	"Render a given space on an a Form surface.
-	By default dispatch directly to the renderer"
-
-	self renderer doRender: aBlSpace dirtyAreas: aBlSpace dirtyAreas
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
-	"Render a given space on an OpenGL surface.
-	By default dispatch directly to the renderer"
-
-	self renderer doRender: aBlSpace dirtyAreas: aBlSpace dirtyAreas
+	self renderer doRender: aBlSpace dirtyAreas: aBlSpace dirtyAreas.
+	surfaceRenderer initializeForSurface: aSurface
 ]
 
 { #category : #'host space - accessing' }

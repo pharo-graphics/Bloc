@@ -1,6 +1,6 @@
 Class {
 	#name : #BlGlutinRendererBuffer,
-	#superclass : #BlGlutinRenderer,
+	#superclass : #BlGlutinSurfaceRenderer,
 	#instVars : [
 		'renderer'
 	],
@@ -8,24 +8,24 @@ Class {
 }
 
 { #category : #'host space - drawing' }
-BlGlutinRendererBuffer >> initializeForBuffer: aBlHostRendererBufferSurface [
+BlGlutinRendererBuffer >> initializeForSurface: aSurface [
 	| aForm thePixels anExtent |
 	
 	self
 		assert: [ self window isNotNil ]
 		description: [ 'Window must be set!' ].
-		
+
 	renderer
 		ifNil: [ renderer := GlutinGLBufferRenderer new window: self window ].
 
-	anExtent := aBlHostRendererBufferSurface canvasExtent.
+	anExtent := aSurface physicalSize asPoint.
 	
 	aForm := Form extent: anExtent depth: 32.
 
 	thePixels := FFIExternalArray externalNewType: FFIUInt32 size: aForm stride * aForm height.
 	thePixels autoRelease.
 
-	aBlHostRendererBufferSurface
+	aSurface
 		buffer: thePixels getHandle;
 		stride: aForm stride;
 		extent: anExtent

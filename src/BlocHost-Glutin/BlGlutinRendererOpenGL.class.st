@@ -1,6 +1,6 @@
 Class {
 	#name : #BlGlutinRendererOpenGL,
-	#superclass : #BlGlutinRenderer,
+	#superclass : #BlGlutinSurfaceRenderer,
 	#category : #'BlocHost-Glutin-Renderer'
 }
 
@@ -14,6 +14,15 @@ BlGlutinRendererOpenGL >> initializeForOpenGL: aBlHostRendererOpenGLSurface [
 		extent:
 			aBlHostRendererOpenGLSurface physicalSize width
 				@ aBlHostRendererOpenGLSurface physicalSize height
+]
+
+{ #category : #initialization }
+BlGlutinRendererOpenGL >> initializeForSurface: aSurface [
+	self
+		assert: [ self window isNotNil ]
+		description: [ 'Window must be set!' ].
+
+	aSurface extent: aSurface physicalSize asPoint
 ]
 
 { #category : #'host space - drawing' }

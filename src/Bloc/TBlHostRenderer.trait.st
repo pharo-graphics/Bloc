@@ -28,28 +28,7 @@ TBlHostRenderer >> hasResized [
 ]
 
 { #category : #initialization }
-TBlHostRenderer >> initializeForBuffer: aBufferSurface [
-	"Asks renderer to initialize itself to be used together with a pixel buffer surface"
-
-	self explicitRequirement
-]
-
-{ #category : #initialization }
-TBlHostRenderer >> initializeForForm: aFormSurface [
-	"Asks renderer to initialize itself to be used together with a form surface"
-
-	self explicitRequirement
-]
-
-{ #category : #initialization }
-TBlHostRenderer >> initializeForOpenGL: anOpenGLSurface [
-	"Asks renderer to initialize itself to be used together with an OpenGL surface"
-
-	self explicitRequirement
-]
-
-{ #category : #initialization }
-TBlHostRenderer >> initializeHostSpace: aBlHostSpace [
+TBlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 	self explicitRequirement
 ]
 
@@ -83,30 +62,6 @@ TBlHostRenderer >> renderNeeded: aSpace [
 	<return: #Boolean>
 
 	^ aSpace dirtyAreas notEmpty
-]
-
-{ #category : #'renderer - testing' }
-TBlHostRenderer >> supportsBufferSurface [
-	"Return true if this renderer can work with buffer surface, false otherwise"
-	<return: #Boolean>
-	
-	^ self explicitRequirement
-]
-
-{ #category : #'renderer - testing' }
-TBlHostRenderer >> supportsFormSurface [
-	"Return true if this renderer can work with form surface, false otherwise"
-	<return: #Boolean>
-	
-	^ self explicitRequirement
-]
-
-{ #category : #'renderer - testing' }
-TBlHostRenderer >> supportsOpenGLSurface [
-	"Return true if this renderer can work with OpenGL surface, false otherwise"
-	<return: #Boolean>
-	
-	^ self explicitRequirement
 ]
 
 { #category : #'renderer - accessing' }

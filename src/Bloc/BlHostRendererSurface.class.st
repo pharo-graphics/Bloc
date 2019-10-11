@@ -44,6 +44,20 @@ BlHostRendererSurface >> canvasExtent [
 	^ self physicalSize width @ self physicalSize height
 ]
 
+{ #category : #initialization }
+BlHostRendererSurface >> createSpaceRendererOn: anObject [
+	<return: #BlHostSpaceRenderer>
+
+	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+BlHostRendererSurface >> createSurfaceRendererOn: anObject [
+	<return: #BlHostSurfaceRenderer>
+
+	^ self subclassResponsibility
+]
+
 { #category : #geometry }
 BlHostRendererSurface >> dpiFactor [
 	"Return a scaling dpi factor from logical to physical coordinates.
@@ -85,7 +99,7 @@ BlHostRendererSurface >> hostSpace: anObject [
 BlHostRendererSurface >> initializeOn: anObject [
 	"Initialize a given object to work with this surface.
 	must be implemented by subclasses"
-	
+
 	self subclassResponsibility
 ]
 
@@ -95,6 +109,21 @@ BlHostRendererSurface >> initializeResourcesOn: aHostRenderer [
 	must be implemented by subclasses"
 	
 	self subclassResponsibility
+]
+
+{ #category : #testing }
+BlHostRendererSurface >> isBuffer [
+	^ false
+]
+
+{ #category : #testing }
+BlHostRendererSurface >> isForm [
+	^ false
+]
+
+{ #category : #testing }
+BlHostRendererSurface >> isOpenGL [
+	^ false
 ]
 
 { #category : #geometry }

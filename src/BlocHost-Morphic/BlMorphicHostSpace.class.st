@@ -76,6 +76,33 @@ BlMorphicHostSpace >> initialize [
 	super initialize
 ]
 
+{ #category : #'as yet unclassified' }
+BlMorphicHostSpace >> initializeForBuffer: aBufferSurface [
+	"Asks host space to initialize itself to be used together with a pixel buffer surface.
+	Default implementation simply connects renderer, host space and surface together"
+
+	surfaceRenderer := self createBufferSurfaceRenderer.
+	surfaceRenderer initializeForSurface: aBufferSurface
+]
+
+{ #category : #'as yet unclassified' }
+BlMorphicHostSpace >> initializeForForm: anFormSurface [
+	"Asks host space to initialize itself to be used together with a Form surface.
+	Default implementation simply connects renderer, host space and surface together"
+
+	surfaceRenderer := self createFormSurfaceRenderer.
+	surfaceRenderer initializeForSurface: anFormSurface
+]
+
+{ #category : #'as yet unclassified' }
+BlMorphicHostSpace >> initializeForOpenGL: anOpenGLSurface [
+	"Asks host space to initialize itself to be used together with an OpenGL surface.
+	Default implementation simply connects host space and surface together"
+
+	surfaceRenderer := self createOpenGLSurfaceRenderer.
+	surfaceRenderer initializeForSurface: surfaceRenderer
+]
+
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.

@@ -165,6 +165,33 @@ BlMockedHostSpace >> initialize [
 	renderCount := 0
 ]
 
+{ #category : #'as yet unclassified' }
+BlMockedHostSpace >> initializeForBuffer: aBufferSurface [
+	"Asks host space to initialize itself to be used together with a pixel buffer surface.
+	Default implementation simply connects renderer, host space and surface together"
+
+	surfaceRenderer := self createBufferSurfaceRenderer.
+	surfaceRenderer initializeForSurface: aBufferSurface
+]
+
+{ #category : #'as yet unclassified' }
+BlMockedHostSpace >> initializeForForm: anFormSurface [
+	"Asks host space to initialize itself to be used together with a Form surface.
+	Default implementation simply connects renderer, host space and surface together"
+
+	surfaceRenderer := self createFormSurfaceRenderer.
+	surfaceRenderer initializeForSurface: anFormSurface
+]
+
+{ #category : #'as yet unclassified' }
+BlMockedHostSpace >> initializeForOpenGL: anOpenGLSurface [
+	"Asks host space to initialize itself to be used together with an OpenGL surface.
+	Default implementation simply connects host space and surface together"
+
+	surfaceRenderer := self createOpenGLSurfaceRenderer.
+	surfaceRenderer initializeForSurface: surfaceRenderer
+]
+
 { #category : #'host space - testing' }
 BlMockedHostSpace >> isVisible [
 	"Return true if underlying window is shown, false otherwise.
