@@ -225,7 +225,7 @@ TBlHostSpace >> physicalSize [
 TBlHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
-	self renderer render: aSpace
+	self renderer render: self
 ]
 
 { #category : #'host space - accessing' }

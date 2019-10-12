@@ -116,18 +116,3 @@ BlMorphicHost >> initialize [
 
 	containerMorph := Morph new
 ]
-
-{ #category : #'host - testing' }
-BlMorphicHost >> supportsBufferSurface [
-	^ false
-]
-
-{ #category : #'host - testing' }
-BlMorphicHost >> supportsFormSurface [
-	^ true
-]
-
-{ #category : #'host - testing' }
-BlMorphicHost >> supportsOpenGLSurface [
-	^ false
-]

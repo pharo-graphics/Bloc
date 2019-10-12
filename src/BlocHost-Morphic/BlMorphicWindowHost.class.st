@@ -81,18 +81,3 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 BlMorphicWindowHost >> isStillAvailable [
 	^ self class isSupported
 ]
-
-{ #category : #'host - testing' }
-BlMorphicWindowHost >> supportsBufferSurface [
-	^ false
-]
-
-{ #category : #'host - testing' }
-BlMorphicWindowHost >> supportsFormSurface [
-	^ true
-]
-
-{ #category : #'host - testing' }
-BlMorphicWindowHost >> supportsOpenGLSurface [
-	^ false
-]

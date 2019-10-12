@@ -9,7 +9,7 @@ BlSpartaFormSpaceRenderer >> initializeForSurface: aSurface [
 	"Initalize sparta canvas to be used with a given surface"
 	| aSpartaCanvas |
 
-	aSpartaCanvas := (self class pickCanvasForSurface: aSurface) forFormOn: aSurface.
+	aSpartaCanvas := (BlSpartaRenderer pickCanvasForSurface: aSurface) forFormOn: aSurface.
 	self
 		initializeCanvas: aSpartaCanvas
 		surface: aSurface

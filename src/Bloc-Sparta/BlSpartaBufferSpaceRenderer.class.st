@@ -9,7 +9,7 @@ BlSpartaBufferSpaceRenderer >> initializeForSurface: aSurface [
 	"Initalize sparta canvas to be used with a given surface"
 	| aSpartaCanvas |
 
-	aSpartaCanvas := (self class pickCanvasForSurface: aSurface) forBufferOn: aSurface.
+	aSpartaCanvas := (BlSpartaRenderer pickCanvasForSurface: aSurface) forBufferOn: aSurface.
 	self
 		initializeCanvas: aSpartaCanvas
 		surface: aSurface

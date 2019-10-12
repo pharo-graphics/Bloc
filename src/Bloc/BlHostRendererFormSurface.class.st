@@ -53,6 +53,11 @@ BlHostRendererFormSurface >> form [
 	^ externalForm
 ]
 
+{ #category : #accessing }
+BlHostRendererFormSurface >> form: aForm [
+	externalForm := aForm
+]
+
 { #category : #initialization }
 BlHostRendererFormSurface >> initializeResourcesOn: aHostRenderer [
 	externalForm := BlExternalForm

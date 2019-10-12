@@ -9,7 +9,7 @@ BlSpartaOpenGLSpaceRenderer >> initializeForSurface: aSurface [
 	"Initalize sparta canvas to be used with a given surface"
 	| aSpartaCanvas |
 
-	aSpartaCanvas := (self class pickCanvasForSurface: aSurface) forOpenGLOn: aSurface.
+	aSpartaCanvas := (BlSpartaRenderer pickCanvasForSurface: aSurface) forOpenGLOn: aSurface.
 	self
 		initializeCanvas: aSpartaCanvas
 		surface: aSurface

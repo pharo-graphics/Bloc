@@ -38,6 +38,13 @@ BlMorphicWindowHostSpace >> close [
 	morphicWindow close
 ]
 
+{ #category : #initialization }
+BlMorphicWindowHostSpace >> createFormSurfaceRenderer [
+	<return: #TBlSurfaceRenderer>
+	
+	^ BlMorphicFormSurfaceRenderer new spaceHostMorph: morphicWindow spaceHostMorph
+]
+
 { #category : #'host space - cursor' }
 BlMorphicWindowHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
@@ -79,33 +86,6 @@ BlMorphicWindowHostSpace >> initialize [
 	
 	isBorderless := false.
 	isFullSize := false
-]
-
-{ #category : #'as yet unclassified' }
-BlMorphicWindowHostSpace >> initializeForBuffer: aBufferSurface [
-	"Asks host space to initialize itself to be used together with a pixel buffer surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	surfaceRenderer := self createBufferSurfaceRenderer.
-	surfaceRenderer initializeForSurface: aBufferSurface
-]
-
-{ #category : #'as yet unclassified' }
-BlMorphicWindowHostSpace >> initializeForForm: anFormSurface [
-	"Asks host space to initialize itself to be used together with a Form surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	surfaceRenderer := self createFormSurfaceRenderer.
-	surfaceRenderer initializeForSurface: anFormSurface
-]
-
-{ #category : #'as yet unclassified' }
-BlMorphicWindowHostSpace >> initializeForOpenGL: anOpenGLSurface [
-	"Asks host space to initialize itself to be used together with an OpenGL surface.
-	Default implementation simply connects host space and surface together"
-
-	surfaceRenderer := self createOpenGLSurfaceRenderer.
-	surfaceRenderer initializeForSurface: surfaceRenderer
 ]
 
 { #category : #'host space - geometry' }

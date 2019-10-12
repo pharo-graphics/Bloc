@@ -98,3 +98,8 @@ BlMorphicWindow >> spaceExtent: anExtent [
 				aDelta := self fullBounds extent - spaceHostMorph extent.
 				super extent: anExtent + aDelta ] ]
 ]
+
+{ #category : #accessing }
+BlMorphicWindow >> spaceHostMorph [
+	^ spaceHostMorph
+]
