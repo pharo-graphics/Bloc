@@ -54,6 +54,11 @@ BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
 	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
+{ #category : #private }
+BlOSWindowSDL2Host >> createHostSpace [
+	^ BlOSWindowSDL2Space new
+]
+
 { #category : #initialization }
 BlOSWindowSDL2Host >> keyboardKeyTable [
 	^ BlOSWindowSDL2KeyboardKeyTable default

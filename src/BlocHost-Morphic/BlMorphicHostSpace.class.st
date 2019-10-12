@@ -34,7 +34,7 @@ BlMorphicHostSpace >> close [
 
 { #category : #initialization }
 BlMorphicHostSpace >> createFormSurfaceRenderer [
-	<return: #TBlSurfaceRenderer>
+	<return: #BlHostSurfaceRenderer>
 	
 	^ BlMorphicFormSurfaceRenderer new spaceHostMorph: spaceHostMorph
 ]

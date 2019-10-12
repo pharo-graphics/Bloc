@@ -42,6 +42,11 @@ BlOSWindowHost >> createAttributesFor: aSpace [
 	^ theAttributes
 ]
 
+{ #category : #private }
+BlOSWindowHost >> createHostSpace [
+	^ BlOSWindowSpace new
+]
+
 { #category : #'host - api' }
 BlOSWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new oswindow host space for given bloc space"
@@ -52,8 +57,6 @@ BlOSWindowHost >> createHostSpaceFor: aSpace [
 		description: [ 'Space must not have a host!' ].
 	
 	aHostSpace := self createWindowSpaceFor: aSpace.
-	aHostSpace keyboardKeyTable: self keyboardKeyTable.
-	aHostSpace initializeWithAttributes: (self createAttributesFor: aSpace).
 
 	aHostSpace universe: self universe.
 	aHostSpace host: self.
@@ -67,8 +70,23 @@ BlOSWindowHost >> createHostSpaceFor: aSpace [
 BlOSWindowHost >> createWindowSpaceFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
 	I do not create any strong or weak references to provided space"
+	| aHostSpace theGLAttributes theWindowAttributes |
 	
-	^ BlOSWindowSpace new
+	theGLAttributes := OSWindowGLAttributes new.
+	theGLAttributes redSize: 8.
+	theGLAttributes greenSize: 8.
+	theGLAttributes blueSize: 8.
+	theGLAttributes stencilSize: 8.
+	
+	theWindowAttributes := self createAttributesFor: aSpace.
+	theWindowAttributes glAttributes: theGLAttributes.
+	
+	aHostSpace := self createHostSpace.
+
+	aHostSpace keyboardKeyTable: self keyboardKeyTable.
+	aHostSpace initializeWithAttributes: theWindowAttributes.
+	
+	^ aHostSpace
 ]
 
 { #category : #'host - api' }
@@ -102,20 +120,4 @@ BlOSWindowHost >> supportsBufferSurface [
 	<return: #Boolean>
 	
 	^ true
-]
-
-{ #category : #'host - testing' }
-BlOSWindowHost >> supportsFormSurface [
-	"Return true if this host can work with form surface, false otherwise"
-	<return: #Boolean>
-	
-	^ true
-]
-
-{ #category : #'host - testing' }
-BlOSWindowHost >> supportsOpenGLSurface [
-	"Return true if this host can work with OpenGL surface, false otherwise"
-	<return: #Boolean>
-	
-	^ false
 ]

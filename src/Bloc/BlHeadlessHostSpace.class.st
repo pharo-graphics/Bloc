@@ -34,7 +34,7 @@ BlHeadlessHostSpace >> close [
 
 { #category : #initialization }
 BlHeadlessHostSpace >> createBufferSurfaceRenderer [
-	<return: #TBlSurfaceRenderer>
+	<return: #BlHostSurfaceRenderer>
 	
 	^ BlHeadlessBufferSurfaceRenderer new
 ]

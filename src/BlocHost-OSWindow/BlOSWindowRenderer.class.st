@@ -14,49 +14,9 @@ Class {
 BlOSWindowRenderer >> exposed [
 ]
 
-{ #category : #initialization }
-BlOSWindowRenderer >> initializeForBuffer: aBlHostRendererBufferSurface [
-	self subclassResponsibility
-]
-
-{ #category : #initialization }
-BlOSWindowRenderer >> initializeForForm: aBlHostRendererFormSurface [
-	self subclassResponsibility
-]
-
-{ #category : #initialization }
-BlOSWindowRenderer >> initializeForOpenGL: aBlHostRendererOpenGLSurface [
-	self subclassResponsibility
-]
-
-{ #category : #'host space - drawing' }
-BlOSWindowRenderer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
-	self subclassResponsibility
-]
-
-{ #category : #'host space - drawing' }
-BlOSWindowRenderer >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
-	self subclassResponsibility
-]
-
-{ #category : #'host space - drawing' }
-BlOSWindowRenderer >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
-	self subclassResponsibility
-]
-
-{ #category : #'updating resources' }
-BlOSWindowRenderer >> resetResources [
-	surface initializeOn: self
-]
-
 { #category : #'updating screen' }
 BlOSWindowRenderer >> resized [
-	self resetResources
-]
-
-{ #category : #accessing }
-BlOSWindowRenderer >> surface: aBlSurface [
-	surface := aBlSurface
+	
 ]
 
 { #category : #'updating screen' }

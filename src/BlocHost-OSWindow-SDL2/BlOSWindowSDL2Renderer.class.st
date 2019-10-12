@@ -5,15 +5,12 @@ Class {
 	#name : #BlOSWindowSDL2Renderer,
 	#superclass : #BlOSWindowRenderer,
 	#instVars : [
-		'texture',
-		'renderer',
-		'textureExtent',
-		'sdlSurface'
+		'renderer'
 	],
 	#pools : [
 		'SDL2Constants'
 	],
-	#category : #'BlocHost-OSWindow-SDL2'
+	#category : #'BlocHost-OSWindow-SDL2-Renderer'
 }
 
 { #category : #'instance creation' }
@@ -50,58 +47,12 @@ BlOSWindowSDL2Renderer >> canvasExtent [
 
 { #category : #deleting }
 BlOSWindowSDL2Renderer >> destroy [
-	super destroy.
-	
-	texture := nil.
-	renderer := nil.
-	sdlSurface := nil
+	super destroy
 ]
 
 { #category : #initialization }
 BlOSWindowSDL2Renderer >> initialize [
-	super initialize.
-
-	texture := nil.
-	renderer := nil.
-	sdlSurface := nil
-]
-
-{ #category : #initialization }
-BlOSWindowSDL2Renderer >> initializeForBuffer: aBlHostRendererBufferSurface [
-	self
-		assert: [ self window isNotNil ]
-		description: [ 'Window must be set!' ].
-		
-	textureExtent := aBlHostRendererBufferSurface physicalSize width
-		@ aBlHostRendererBufferSurface physicalSize height.
-	sdlSurface := SDL2
-		createRGBSurfaceForCairoWidth: textureExtent x
-		height: textureExtent y.
-	texture := renderer
-		createTextureFormat: SDL_PIXELFORMAT_XRGB8888
-		access: SDL_TEXTUREACCESS_STREAMING
-		width: textureExtent x
-		height: textureExtent y.
-	aBlHostRendererBufferSurface
-		buffer: sdlSurface pixels;
-		stride: sdlSurface pitch;
-		extent: textureExtent
-]
-
-{ #category : #initialization }
-BlOSWindowSDL2Renderer >> initializeForForm: aBlHostRendererBufferSurface [
-
-	self
-		assert: [ self window isNotNil ]
-		description: [ 'Window must be set!' ].
-	
-	textureExtent := aBlHostRendererBufferSurface canvasExtent.
-	
-	texture := renderer
-		createTextureFormat: SDL_PIXELFORMAT_XRGB8888 
-		access: SDL_TEXTUREACCESS_STREAMING
-		width: textureExtent x
-		height: textureExtent y
+	super initialize
 ]
 
 { #category : #initialization }
@@ -120,51 +71,10 @@ BlOSWindowSDL2Renderer >> present [
 	You are strongly encouraged to call SDL_RenderClear() to initialize the backbuffer before starting each new frame's drawing, even if you plan to overwrite every pixel
 	https://wiki.libsdl.org/SDL_RenderPresent?highlight=%28%5CbCategoryRender%5Cb%29%7C%28CategoryEnum%29%7C%28CategoryStruct%29"
 	
-	self
-		assert: [ renderer isNotNil ]
-		description: [ 'Renderer mut not be nil' ].
 	
-	self
-		assert: [ texture isNotNil ]
-		description: [ 'Texture mut not be nil' ].
-
-	renderer
-		clear;
-		copy: texture;
-		present
 ]
 
-{ #category : #'updating screen' }
-BlOSWindowSDL2Renderer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
-
-	texture
-		updateTextureRect: nil
-		pixels: aBlHostRendererBufferSurface buffer
-		pitch: aBlHostRendererBufferSurface stride.
-
-	self present
-]
-
-{ #category : #'updating screen' }
-BlOSWindowSDL2Renderer >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
-	[ 
-		| pitchHolder pixels pitch destinationForm aWindowScale dirtyAreas |
-		pixels := ExternalAddress new.
-		pitchHolder := FFIExternalArray externalNewType: 'int' size: 1.
-		[
-			texture lockPixels: pixels pitch: pitchHolder getHandle.
-			pitch := pitchHolder at: 1.
-		] ensure: [ pitchHolder free ].
-
-		destinationForm := BlExternalForm extent: textureExtent depth: 32 bits: pixels.
-		
-		"Damaged rectangles are defined in user coordinates (bloc space).
-		We have to convert damage to window space, since we want to support high dpi displays"
-		aWindowScale := aBlHostRendererFormSurface scaleFactor.
-		dirtyAreas := aCollectionOfAreas collect: [ :aRectangle | aRectangle scaleBy: aWindowScale ].
-		dirtyAreas do: [ :rectangle |
-			destinationForm copy: rectangle from: aBlHostRendererFormSurface form to: rectangle origin rule: Form over ].
-	] ensure: [ texture unlock ].
-
-	self present
+{ #category : #accessing }
+BlOSWindowSDL2Renderer >> renderer [
+	^ renderer
 ]

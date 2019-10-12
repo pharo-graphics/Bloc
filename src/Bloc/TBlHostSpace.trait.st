@@ -40,21 +40,21 @@ TBlHostSpace >> close [
 
 { #category : #initialization }
 TBlHostSpace >> createBufferSurfaceRenderer [
-	<return: #TBlSurfaceRenderer>
+	<return: #BlHostSurfaceRenderer>
 	
 	^ self explicitRequirement
 ]
 
 { #category : #initialization }
 TBlHostSpace >> createFormSurfaceRenderer [
-	<return: #TBlSurfaceRenderer>
+	<return: #BlHostSurfaceRenderer>
 	
 	^ self explicitRequirement
 ]
 
 { #category : #initialization }
 TBlHostSpace >> createOpenGLSurfaceRenderer [
-	<return: #TBlSurfaceRenderer>
+	<return: #BlHostSurfaceRenderer>
 
 	^ self explicitRequirement
 ]
@@ -103,8 +103,8 @@ TBlHostSpace >> dpiFactor [
 		or: [ aLogicalSize isZero ])
 		ifTrue: [ ^ 1 ].
 
-	aWidthScale := aPhysicalSize width / aLogicalSize width.
-	aHeightScale := aPhysicalSize height / aLogicalSize height.
+	aWidthScale := (aPhysicalSize width / aLogicalSize width) asFloat.
+	aHeightScale := (aPhysicalSize height / aLogicalSize height) asFloat.
 	
 	self
 		assert: [ aWidthScale closeTo: aHeightScale ]

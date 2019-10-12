@@ -40,7 +40,7 @@ BlMorphicWindowHostSpace >> close [
 
 { #category : #initialization }
 BlMorphicWindowHostSpace >> createFormSurfaceRenderer [
-	<return: #TBlSurfaceRenderer>
+	<return: #BlHostSurfaceRenderer>
 	
 	^ BlMorphicFormSurfaceRenderer new spaceHostMorph: morphicWindow spaceHostMorph
 ]
