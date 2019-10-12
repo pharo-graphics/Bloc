@@ -134,6 +134,13 @@ BlGlutinHostSpace >> logicalSize [
 	^ BlHostLogicalSize width: anExtent x height: anExtent y
 ]
 
+{ #category : #'host space - rendering' }
+BlGlutinHostSpace >> makeCurrent [
+	"When displaying visual content on the screen very often a window framebuffer must be marked as a current"
+	
+	window makeCurrent
+]
+
 { #category : #'host space - testing' }
 BlGlutinHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
@@ -174,9 +181,7 @@ BlGlutinHostSpace >> position: aPoint [
 BlGlutinHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
-	Glutin critical: [
-		window makeCurrent.
-		self renderer render: aSpace ]
+	Glutin critical: [ self renderer render: self ]
 ]
 
 { #category : #'host space - displaying' }

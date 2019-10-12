@@ -10,6 +10,11 @@ Class {
 	#category : #'Bloc-Sparta-Renderer'
 }
 
+{ #category : #rendering }
+BlSpartaSpaceRenderer >> damagedAreasOf: aSpace [
+	^ aSpace dirtyAreas
+]
+
 { #category : #accessing }
 BlSpartaSpaceRenderer >> dpiFactor [
 	<return: #Number>
@@ -53,7 +58,7 @@ BlSpartaSpaceRenderer >> renderSpace: aSpace [
 	aLogicalExtent := (physicalSize asLogical: self dpiFactor) asPoint.
 	
 	"collect the dirty area to be updated"
-	theDirtyAreas := aSpace dirtyAreas 
+	theDirtyAreas := (self damagedAreasOf: aSpace)
 		collect: [ :each | each intersect: (0@0 extent: aLogicalExtent) ifNone: [ nil ] ]
 		thenSelect: [ :each | each isNotNil and: [ each hasPositiveExtent ] ].
 

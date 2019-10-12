@@ -161,6 +161,11 @@ TBlHostSpace >> host: aBlHost [
 	host := aBlHost
 ]
 
+{ #category : #initialization }
+TBlHostSpace >> initializeRenderer [
+	self renderer initializeForHostSpace: self
+]
+
 { #category : #'host space - testing' }
 TBlHostSpace >> isVisible [
 	"Return true if underlying window is shown, false otherwise.
@@ -179,6 +184,11 @@ TBlHostSpace >> logicalSize [
 	<return: #BlHostLogicalSize>
 
 	^ self explicitRequirement
+]
+
+{ #category : #'host space - rendering' }
+TBlHostSpace >> makeCurrent [
+	"When displaying visual content on the screen very often a window framebuffer must be marked as a current"
 ]
 
 { #category : #'host space - displaying' }

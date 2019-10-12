@@ -89,6 +89,7 @@ BlHostRenderer >> render: aHostSpace [
 		ifFalse: [ ^ self ].
 
 	[ | theDamagedRectangles |
+		aHostSpace makeCurrent.
 		theDamagedRectangles := spaceRenderer renderSpace: aSpace.
 		surfaceRenderer renderSurface: surface damaged: theDamagedRectangles ]
 			ensure: [ self finishedRender: aSpace ]

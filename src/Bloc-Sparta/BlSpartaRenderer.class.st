@@ -110,6 +110,9 @@ BlSpartaRenderer >> initializeForHostSpace: aBlHostSpace [
 	
 	session := Smalltalk session.
 	
+	"we should mark it as a current one before initializing a canvas as it may rely on opengl context"
+	aBlHostSpace makeCurrent.
+	
 	"create a new surface of a specific type for a given host space"
 	surface := (self class pickSurfaceClassFor: aBlHostSpace) new.
 	surface initializeForHostSpace: aBlHostSpace.
