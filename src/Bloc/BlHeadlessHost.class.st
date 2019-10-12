@@ -10,7 +10,7 @@ Class {
 	#classVars : [
 		'PulseLoop'
 	],
-	#category : #'Bloc-Universe - Host'
+	#category : #'Bloc-Universe - Host Headless'
 }
 
 { #category : #'class initialization' }

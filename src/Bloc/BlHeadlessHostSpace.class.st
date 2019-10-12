@@ -11,7 +11,7 @@ Class {
 		'position',
 		'title'
 	],
-	#category : #'Bloc-Universe - Host'
+	#category : #'Bloc-Universe - Host Headless'
 }
 
 { #category : #'window - properties' }
@@ -30,6 +30,13 @@ BlHeadlessHostSpace >> borderless: aBoolean [
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> close [
 	"do nothing"
+]
+
+{ #category : #initialization }
+BlHeadlessHostSpace >> createBufferSurfaceRenderer [
+	<return: #TBlSurfaceRenderer>
+	
+	^ BlHeadlessBufferSurfaceRenderer new
 ]
 
 { #category : #'host space - cursor' }
@@ -76,7 +83,7 @@ BlHeadlessHostSpace >> fullsize: aBoolean [
 	See ${method:TBlSpaceProperties>>#fullsize}"
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'host space - displaying' }
 BlHeadlessHostSpace >> hide [
 	"do nothing"
 ]
@@ -91,33 +98,6 @@ BlHeadlessHostSpace >> initialize [
 	super initialize.
 	
 	eventFetcher := BlHostEventFetcher new
-]
-
-{ #category : #'as yet unclassified' }
-BlHeadlessHostSpace >> initializeForBuffer: aBufferSurface [
-	"Asks host space to initialize itself to be used together with a pixel buffer surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	surfaceRenderer := self createBufferSurfaceRenderer.
-	surfaceRenderer initializeForSurface: aBufferSurface
-]
-
-{ #category : #'as yet unclassified' }
-BlHeadlessHostSpace >> initializeForForm: anFormSurface [
-	"Asks host space to initialize itself to be used together with a Form surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	surfaceRenderer := self createFormSurfaceRenderer.
-	surfaceRenderer initializeForSurface: anFormSurface
-]
-
-{ #category : #'as yet unclassified' }
-BlHeadlessHostSpace >> initializeForOpenGL: anOpenGLSurface [
-	"Asks host space to initialize itself to be used together with an OpenGL surface.
-	Default implementation simply connects host space and surface together"
-
-	surfaceRenderer := self createOpenGLSurfaceRenderer.
-	surfaceRenderer initializeForSurface: surfaceRenderer
 ]
 
 { #category : #'host space - testing' }
@@ -170,7 +150,7 @@ BlHeadlessHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'host space - displaying' }
 BlHeadlessHostSpace >> open [
 	"do nothing"
 ]
