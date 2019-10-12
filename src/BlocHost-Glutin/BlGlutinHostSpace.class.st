@@ -56,14 +56,14 @@ BlGlutinHostSpace >> convertKeyModifiers: theGlutinModifiers [
 BlGlutinHostSpace >> createBufferSurfaceRenderer [
 	<return: #TBlSurfaceRenderer>
 	
-	^ BlGlutinRendererBuffer new window: self window
+	^ BlGlutinBufferSurfaceRenderer new window: self window
 ]
 
 { #category : #initialization }
 BlGlutinHostSpace >> createOpenGLSurfaceRenderer [
 	<return: #TBlSurfaceRenderer>
 
-	^ BlGlutinRendererOpenGL new window: self window
+	^ BlGlutinOpenGLSurfaceRenderer new window: self window
 ]
 
 { #category : #'host space - cursor' }
@@ -171,20 +171,11 @@ BlGlutinHostSpace >> position: aPoint [
 ]
 
 { #category : #'as yet unclassified' }
-BlGlutinHostSpace >> prepareToRender: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
-	"Prepare host space to a given space on an OpenGL surface.
-	By default dispatch directly to the renderer"
-
-	window makeCurrent.
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
 BlGlutinHostSpace >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
 	glutinRenderer presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : #'as yet unclassified' }
 BlGlutinHostSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
 	glutinRenderer presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas
 ]
@@ -192,7 +183,7 @@ BlGlutinHostSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: a
 { #category : #'host space - rendering' }
 BlGlutinHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
-	
+
 	Glutin critical: [ self renderer render: aSpace ]
 ]
 

@@ -19,8 +19,8 @@ BlSpartaRenderer class >> availableCanvasBuilderClasses [
 	
 	^ ((BlSpartaCanvasBuilder allSubclasses select: [ :aBuilderClass | aBuilderClass isSupported ])
 		select: [ :aBuilderClass | 
-			BlHostRendererSurface allSurfaces anySatisfy: [ :aSurface |
-				(aSurface supportedBy: aBuilderClass) and: [ aSurface supportedBy: BlUniverse default host ] ] ])
+			BlHostRendererSurface allSurfaces anySatisfy: [ :aSurfaceClass |
+				(aSurfaceClass supportedBy: aBuilderClass) and: [ aSurfaceClass supportedBy: BlUniverse default host ] ] ])
 		sort: [ :a :b | a priority < b priority ]
 ]
 
@@ -103,38 +103,16 @@ BlSpartaRenderer >> createOpenGLSpaceRenderer [
 	^ BlSpartaOpenGLSpaceRenderer new
 ]
 
-{ #category : #'renderer - rendering' }
-BlSpartaRenderer >> doRender: aSpace dirtyAreas: aCollectionOfRectangles [
-	| theDirtyAreas |
-	
-	self hasResized
-		ifTrue: [ self surface initializeOn: self ].
-	
-	theDirtyAreas := spartaPainer
-		render: aSpace
-		dirtyAreas: aCollectionOfRectangles.
-
-	self presentAreas: theDirtyAreas
-]
-
-{ #category : #'renderer - testing' }
-BlSpartaRenderer >> hasResized [
-	"Return true if host space resized since previous frame, otherwise false"
-	<return: #Boolean>
-
-	^ spartaPainer isNil
-		or: [ spartaPainer isValid not
-			or: [ self surface physicalSize ~= spartaPainer physicalSize
-				or: [ self surface dpiFactor ~= spartaPainer dpiFactor ] ] ]
-]
-
 { #category : #initialization }
 BlSpartaRenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
 	Please note, that it I be called multiple times"
 	
+	session := Smalltalk session.
+	
 	"create a new surface of a specific type for a given host space"
 	surface := (self class pickSurfaceClassFor: aBlHostSpace) new.
+	surface initializeForHostSpace: aBlHostSpace.
 
 	"creates surfaceRenderer and allocate / initialize a surface"
 	surfaceRenderer := surface createSurfaceRendererOn: aBlHostSpace.
@@ -143,19 +121,4 @@ BlSpartaRenderer >> initializeForHostSpace: aBlHostSpace [
 	"creates spaceRenderer from the allocated surface"
 	spaceRenderer := surface createSpaceRendererOn: self.
 	spaceRenderer initializeForSurface: surface
-]
-
-{ #category : #'renderer - rendering' }
-BlSpartaRenderer >> prepareToRender: aSpace [
-	"I check if window extent changed since last rendering step and if yes, recreate resources"
-]
-
-{ #category : #'renderer - accessing' }
-BlSpartaRenderer >> surface [
-	^ surface
-]
-
-{ #category : #'renderer - accessing' }
-BlSpartaRenderer >> surface: aRendererSurface [
-	surface := aRendererSurface
 ]

@@ -151,7 +151,7 @@ BlMorphicHostSpace >> position: aPoint [
 
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : #'as yet unclassified' }
 BlMorphicHostSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
 	spaceHostMorph form: aBlHostRendererFormSurface form
 ]

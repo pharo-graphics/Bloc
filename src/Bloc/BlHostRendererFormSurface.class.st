@@ -54,11 +54,6 @@ BlHostRendererFormSurface >> form [
 ]
 
 { #category : #initialization }
-BlHostRendererFormSurface >> initializeOn: anObject [
-	anObject initializeForForm: self
-]
-
-{ #category : #initialization }
 BlHostRendererFormSurface >> initializeResourcesOn: aHostRenderer [
 	externalForm := BlExternalForm
 		extent: self physicalSize width @ self physicalSize height
@@ -69,33 +64,9 @@ BlHostRendererFormSurface >> initializeResourcesOn: aHostRenderer [
 	self initializeOn: aHostRenderer
 ]
 
-{ #category : #testing }
-BlHostRendererFormSurface >> isForm [
-	^ true
-]
-
 { #category : #accessing }
 BlHostRendererFormSurface >> pointer [
 	^ externalForm pointer
-]
-
-{ #category : #rendering }
-BlHostRendererFormSurface >> prepareToRender: aSpace [
-	"Dispatch preparation to render through host space based on surface type"
-	
-	self hostSpace prepareToRender: aSpace onFormSurface: self
-]
-
-{ #category : #presenting }
-BlHostRendererFormSurface >> presentAreas: aCollectionOfRectangles [
-	hostSpace presentFormSurface: self areas: aCollectionOfRectangles
-]
-
-{ #category : #rendering }
-BlHostRendererFormSurface >> renderFor: aSpace [
-	"Dispatch render process through host space based on surface type"
-	
-	self hostSpace render: aSpace onFormSurface: self
 ]
 
 { #category : #accessing }

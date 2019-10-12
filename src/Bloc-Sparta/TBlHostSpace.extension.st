@@ -2,6 +2,5 @@ Extension { #name : #TBlHostSpace }
 
 { #category : #'*Bloc-Sparta' }
 TBlHostSpace >> withSpartaRenderer [
-	renderer := BlSpartaRenderer new.
-	renderer initializeForHostSpace: self
+	renderer := BlSpartaRenderer new
 ]

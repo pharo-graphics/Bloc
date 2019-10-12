@@ -143,7 +143,7 @@ TBlHostSpace >> hasResized [
 	e.g. from normal display to retina"
 	<return: #Boolean>
 
-	^ self renderer hasResized
+	^ self renderer hasResized: self
 ]
 
 { #category : #'host space - accessing' }
@@ -222,39 +222,16 @@ TBlHostSpace >> physicalSize [
 ]
 
 { #category : #'host space - rendering' }
-TBlHostSpace >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
-	self explicitRequirement
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
-	self explicitRequirement
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
-	self explicitRequirement
-]
-
-{ #category : #'host space - rendering' }
 TBlHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
 	self renderer render: aSpace
 ]
 
-{ #category : #'host space - rendering' }
-TBlHostSpace >> render: aBlSpace onSurface: aSurface [
-	"Render a given abstract space on an underlying window or visual area"
-
-	self renderer doRender: aBlSpace dirtyAreas: aBlSpace dirtyAreas.
-	surfaceRenderer initializeForSurface: aSurface
-]
-
 { #category : #'host space - accessing' }
 TBlHostSpace >> renderer [
 	"Return host renderer used to render spaces"
-	<return: #TBlHostRenderer>
+	<return: #BlHostRenderer>
 
 	^ renderer
 ]
@@ -320,13 +297,6 @@ TBlHostSpace >> supportsOpenGLSurface [
 	<return: #Boolean>
 	
 	^ self host supportsOpenGLSurface
-]
-
-{ #category : #'host space - accessing' }
-TBlHostSpace >> surfaceRenderer [
-	<return: #BlHostSurfaceRenderer>
-	
-	^ surfaceRenderer
 ]
 
 { #category : #'host space - displaying' }

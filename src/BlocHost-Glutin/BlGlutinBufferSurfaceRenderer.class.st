@@ -1,5 +1,5 @@
 Class {
-	#name : #BlGlutinRendererBuffer,
+	#name : #BlGlutinBufferSurfaceRenderer,
 	#superclass : #BlGlutinSurfaceRenderer,
 	#instVars : [
 		'renderer'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'host space - drawing' }
-BlGlutinRendererBuffer >> initializeForSurface: aSurface [
+BlGlutinBufferSurfaceRenderer >> initializeForSurface: aSurface [
 	| aForm thePixels anExtent |
 	
 	self
@@ -32,7 +32,7 @@ BlGlutinRendererBuffer >> initializeForSurface: aSurface [
 ]
 
 { #category : #'host space - drawing' }
-BlGlutinRendererBuffer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
+BlGlutinBufferSurfaceRenderer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
 	| aBuffer |
 	
 	aBuffer := GlutinGLBuffer new

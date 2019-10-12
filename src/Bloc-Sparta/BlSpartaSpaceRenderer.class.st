@@ -18,7 +18,7 @@ BlSpartaSpaceRenderer >> dpiFactor [
 ]
 
 { #category : #initialization }
-BlSpartaSpaceRenderer >> initializeWithCanvas: aSpartaCanvas surface: aSurface [
+BlSpartaSpaceRenderer >> initializeCanvas: aSpartaCanvas surface: aSurface [
 	spartaCanvas := aSpartaCanvas.
 	physicalSize := aSurface physicalSize.
 	dpiFactor := aSurface dpiFactor.
@@ -42,7 +42,8 @@ BlSpartaSpaceRenderer >> physicalSize [
 ]
 
 { #category : #rendering }
-BlSpartaSpaceRenderer >> render: aSpace dirtyAreas: aCollectionOfRectangles [
+BlSpartaSpaceRenderer >> renderSpace: aSpace [
+	"Render a space and return a collection of damaged rectangles"
 	<return: #Collection of: #Rectangle>
 	| theDirtyAreas aLogicalExtent |
 	
@@ -52,7 +53,7 @@ BlSpartaSpaceRenderer >> render: aSpace dirtyAreas: aCollectionOfRectangles [
 	aLogicalExtent := (physicalSize asLogical: self dpiFactor) asPoint.
 	
 	"collect the dirty area to be updated"
-	theDirtyAreas := aCollectionOfRectangles 
+	theDirtyAreas := aSpace dirtyAreas 
 		collect: [ :each | each intersect: (0@0 extent: aLogicalExtent) ifNone: [ nil ] ]
 		thenSelect: [ :each | each isNotNil and: [ each hasPositiveExtent ] ].
 

@@ -12,7 +12,8 @@ BlHostSpaceRenderer >> initializeForSurface: aSurface [
 ]
 
 { #category : #rendering }
-BlHostSpaceRenderer >> render: aSpace dirtyAreas: aCollectionOfRectangles [
+BlHostSpaceRenderer >> renderSpace: aSpace [
+	"Render a space and return a collection of damaged rectangles"
 	<return: #Collection of: #Rectangle>
 	
 	^ self subclassResponsibility

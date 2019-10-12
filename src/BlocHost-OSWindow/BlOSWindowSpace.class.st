@@ -254,19 +254,19 @@ BlOSWindowSpace >> position: aPoint [
 	window position: aPoint
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
 	window validHandle renderer
 		presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
 	window validHandle renderer
 		presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : #'as yet unclassified' }
 BlOSWindowSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
 	window validHandle renderer
 		presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas

@@ -9,6 +9,9 @@ BlHostSurfaceRenderer >> initializeForSurface: aSurface [
 	self subclassResponsibility
 ]
 
-{ #category : #initialization }
-BlHostSurfaceRenderer >> render: aSpace onSurface: aSurface withPainter: aCanvasPainter [
+{ #category : #rendering }
+BlHostSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
+	"Render a given surface on a host space"
+
+	self subclassResponsibility
 ]

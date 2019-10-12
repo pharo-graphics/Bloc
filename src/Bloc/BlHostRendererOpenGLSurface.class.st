@@ -61,38 +61,9 @@ BlHostRendererOpenGLSurface >> extent: anObject [
 ]
 
 { #category : #initialization }
-BlHostRendererOpenGLSurface >> initializeOn: anObject [
-	anObject initializeForOpenGL: self
-]
-
-{ #category : #initialization }
 BlHostRendererOpenGLSurface >> initializeResourcesOn: aHostRenderer [
 	"Initialize me and host renderer depending on surface type.
 	must be implemented by subclasses"
 	
 	self initializeOn: aHostRenderer
-]
-
-{ #category : #testing }
-BlHostRendererOpenGLSurface >> isOpenGL [
-	^ true
-]
-
-{ #category : #rendering }
-BlHostRendererOpenGLSurface >> prepareToRender: aSpace [
-	"Dispatch preparation to render through host space based on surface type"
-	
-	self hostSpace prepareToRender: aSpace onOpenGLSurface: self
-]
-
-{ #category : #presenting }
-BlHostRendererOpenGLSurface >> presentAreas: aCollectionOfRectangles [
-	hostSpace presentOpenGLSurface: self areas: aCollectionOfRectangles
-]
-
-{ #category : #rendering }
-BlHostRendererOpenGLSurface >> renderFor: aSpace [
-	"Dispatch render process through host space based on surface type"
-	
-	self hostSpace render: aSpace onOpenGLSurface: self
 ]

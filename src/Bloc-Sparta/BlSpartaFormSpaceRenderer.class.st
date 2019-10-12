@@ -11,6 +11,6 @@ BlSpartaFormSpaceRenderer >> initializeForSurface: aSurface [
 
 	aSpartaCanvas := (self class pickCanvasForSurface: aSurface) forFormOn: aSurface.
 	self
-		initializeWithCanvas: aSpartaCanvas
+		initializeCanvas: aSpartaCanvas
 		surface: aSurface
 ]

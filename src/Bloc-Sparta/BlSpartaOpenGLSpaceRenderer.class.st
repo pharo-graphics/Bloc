@@ -11,6 +11,6 @@ BlSpartaOpenGLSpaceRenderer >> initializeForSurface: aSurface [
 
 	aSpartaCanvas := (self class pickCanvasForSurface: aSurface) forOpenGLOn: aSurface.
 	self
-		initializeWithCanvas: aSpartaCanvas
+		initializeCanvas: aSpartaCanvas
 		surface: aSurface
 ]

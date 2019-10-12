@@ -11,6 +11,6 @@ BlSpartaBufferSpaceRenderer >> initializeForSurface: aSurface [
 
 	aSpartaCanvas := (self class pickCanvasForSurface: aSurface) forBufferOn: aSurface.
 	self
-		initializeWithCanvas: aSpartaCanvas
+		initializeCanvas: aSpartaCanvas
 		surface: aSurface
 ]
