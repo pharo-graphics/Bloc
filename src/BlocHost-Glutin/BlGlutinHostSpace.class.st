@@ -170,29 +170,13 @@ BlGlutinHostSpace >> position: aPoint [
 
 ]
 
-{ #category : #'as yet unclassified' }
-BlGlutinHostSpace >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
-	glutinRenderer presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas
-]
-
-{ #category : #'as yet unclassified' }
-BlGlutinHostSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
-	glutinRenderer presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas
-]
-
 { #category : #'host space - rendering' }
 BlGlutinHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
-	Glutin critical: [ self renderer render: aSpace ]
-]
-
-{ #category : #'as yet unclassified' }
-BlGlutinHostSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
-	"Render a given space on an OpenGL surface.
-	By default dispatch directly to the renderer"
-
-	self renderer doRender: aBlSpace dirtyAreas: { 0 @ 0 extent: aBlSpace extent }
+	Glutin critical: [
+		window makeCurrent.
+		self renderer render: aSpace ]
 ]
 
 { #category : #'host space - displaying' }

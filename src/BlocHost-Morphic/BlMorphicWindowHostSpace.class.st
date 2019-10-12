@@ -146,11 +146,6 @@ BlMorphicWindowHostSpace >> position: aPoint [
 	morphicWindow position: aPoint
 ]
 
-{ #category : #'as yet unclassified' }
-BlMorphicWindowHostSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
-	morphicWindow form: aBlHostRendererFormSurface form
-]
-
 { #category : #'host space - displaying' }
 BlMorphicWindowHostSpace >> show [
 	| anExtent |

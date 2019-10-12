@@ -32,13 +32,13 @@ BlGlutinBufferSurfaceRenderer >> initializeForSurface: aSurface [
 ]
 
 { #category : #'host space - drawing' }
-BlGlutinBufferSurfaceRenderer >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
+BlGlutinBufferSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 	| aBuffer |
 	
 	aBuffer := GlutinGLBuffer new
-		extent: aBlHostRendererBufferSurface extent;
-		stride: aBlHostRendererBufferSurface stride;
-		pixels: aBlHostRendererBufferSurface buffer.
+		extent: aSurface extent;
+		stride: aSurface stride;
+		pixels: aSurface buffer.
 	
-	renderer presentBuffer: aBuffer areas: aCollectionOfAreas
+	renderer presentBuffer: aBuffer areas: aCollectionOfRectangles
 ]

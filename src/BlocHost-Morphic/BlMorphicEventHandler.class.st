@@ -353,7 +353,10 @@ BlMorphicEventHandler >> handleMouseOver: anEvent [
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseUp: anEvent [
-
+	
+	morph
+		ifNil: [ ^ self ].
+	
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
 		aBlEvent := BlMouseUpEvent new
@@ -365,7 +368,7 @@ BlMorphicEventHandler >> handleMouseUp: anEvent [
 			yourself.
 		self enqueue: aBlEvent ].
 	
-	morph takeKeyboardFocus.
+	morph ifNotNil: #takeKeyboardFocus
 ]
 
 { #category : #'event handling' }

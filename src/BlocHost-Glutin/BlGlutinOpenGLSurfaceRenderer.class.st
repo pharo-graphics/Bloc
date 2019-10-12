@@ -14,7 +14,7 @@ BlGlutinOpenGLSurfaceRenderer >> initializeForSurface: aSurface [
 ]
 
 { #category : #'host space - drawing' }
-BlGlutinOpenGLSurfaceRenderer >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
+BlGlutinOpenGLSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 	self makeCurrent.
 	self swapBuffers
 ]
