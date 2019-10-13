@@ -18,21 +18,6 @@ Trait {
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #'host space - geometry' }
-TBlHostSpace >> canvasExtent [
-	"Return a window canvas size in user coordinates.
-	This size may differ from the window size on high dpi (retina) screens.
-	In most cases canvas is x2 larger than window in pixel on retina screens."
-	<return: #Point>
-	
-	self
-		deprecated: 'Please use #physicalSize instead'
-		transformWith: '`@receiver canvasExtent' 
-						-> '(`@receiver physicalSize width @ `@receiver physicalSize height)'.
-
-	^ self physicalSize width @ self physicalSize height
-]
-
 { #category : #'host space - displaying' }
 TBlHostSpace >> close [
 	self explicitRequirement
@@ -251,20 +236,6 @@ TBlHostSpace >> requestRedraw [
 	"Space needs to redraw the window"
 ]
 
-{ #category : #'host space - geometry' }
-TBlHostSpace >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
-	
-	self
-		deprecated: 'Please use #dpiFactor instead'
-		transformWith: '`@receiver scaleFactor' 
-						-> '`@receiver dpiFactor asPoint'.
-
-	^ self dpiFactor asPoint
-]
-
 { #category : #'host space - displaying' }
 TBlHostSpace >> show [
 	self explicitRequirement
@@ -329,21 +300,6 @@ TBlHostSpace >> universe [
 { #category : #'host space - accessing' }
 TBlHostSpace >> universe: aUniverse [
 	universe := aUniverse
-]
-
-{ #category : #'host space - geometry' }
-TBlHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	self
-		deprecated: 'Please use #logicalSize instead'
-		transformWith: '`@receiver windowExtent' 
-						-> '(`@receiver logicalSize width @ `@receiver logicalSize height)'.
-
-	^ self logicalSize width @ self logicalSize height
 ]
 
 { #category : #'host space - geometry' }
