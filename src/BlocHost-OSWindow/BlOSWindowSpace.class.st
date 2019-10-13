@@ -206,6 +206,13 @@ BlOSWindowSpace >> position: aPoint [
 	window position: aPoint
 ]
 
+{ #category : #'host space - rendering' }
+BlOSWindowSpace >> render: aSpace [
+	"Render a given abstract space on an underlying window or visual area"
+
+	OSWindowRenderThread uniqueInstance critical: [ self renderer render: self ]
+]
+
 { #category : #'window - properties' }
 BlOSWindowSpace >> resizable [	
 	"Return true if underlying window is resizable, false otherwise"
