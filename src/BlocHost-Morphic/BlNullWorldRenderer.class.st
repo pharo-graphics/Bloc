@@ -21,9 +21,14 @@ BlNullWorldRenderer class >> enable [
 ]
 
 { #category : #accessing }
+BlNullWorldRenderer class >> initialize [
+	isEnabled := true
+]
+
+{ #category : #accessing }
 BlNullWorldRenderer class >> isApplicableFor: aWorld [
 	<return: #Boolean>
-	(isEnabled isNil or: [ isEnabled not ])
+	(isEnabled isNotNil and: [ isEnabled not ])
 		ifTrue: [ ^ false ].
 
 	^ Smalltalk isHeadless and: [ CommandLineArguments new hasOption: 'interactive'  ]
