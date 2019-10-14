@@ -102,6 +102,11 @@ BlOSWindowHost >> keyboardKeyTable [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'host - api' }
+BlOSWindowHost >> openMorphicWorld [
+	OSWorldRenderer openMorphicWorld
+]
+
 { #category : #'host - events' }
 BlOSWindowHost >> pollEvents [
 	self subclassResponsibility

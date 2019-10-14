@@ -244,6 +244,11 @@ BlGlutinHost >> isStillAvailable [
 	^ self class isSupported
 ]
 
+{ #category : #'host - api' }
+BlGlutinHost >> openMorphicWorld [
+	GlutinWorldRenderer openMorphicWorld
+]
+
 { #category : #'event - handling' }
 BlGlutinHost >> processGlutinEvent: aGlutinEvent [
 	<return: #GlutinControlFlow>
