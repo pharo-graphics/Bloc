@@ -106,9 +106,6 @@ Bloc class >> preferableHostClass [
 Bloc class >> preferableHostClass: aHostClass [
 	
 	PreferableHostClass := aHostClass.
-
-	"change preferable universe host according to new setting"
-	BlUniverse default preferableHost: aHostClass new.
 	SettingBrowser allSubInstances do: [ :aSettingsBrowser | aSettingsBrowser treeChanged: Announcement new ]
 ]
 
@@ -142,8 +139,8 @@ Bloc class >> preferencesOn: aBuilder [
 			(aBuilder pickOne: #preferableHostClass)
 				target: self;
 				order: 1;
-				label: 'Preferable host' ;
-				domainValues: (BlHost availableHostClasses collect: [ :aHostClass | aHostClass label -> aHostClass ]);
+				label: 'Preferable host';
+				domainValues: { 'Automatic' -> nil } , (BlHost availableHostClasses collect: [ :aHostClass | aHostClass label -> aHostClass ]);
 				description: 'Choose which host to be used for opening spaces'.
 
 			(aBuilder pickOne: #preferableSpartaCanvas)
