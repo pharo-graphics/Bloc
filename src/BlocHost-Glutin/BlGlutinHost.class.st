@@ -17,24 +17,6 @@ BlGlutinHost class >> critical: aBlock [
 	HostSpaceRegistryMutex critical: aBlock
 ]
 
-{ #category : #example }
-BlGlutinHost class >> example [
-	| universe space |
-	BlUniverse reset.
-
-	Bloc preferableSpartaCanvas: BlSpartaSkiaCanvasBuilder.
-
-	space := BlSpace new.
-	space host: self new.
-	space title: 'Glutin Window'.
-	space addChild: (BlElement new
-		background: Color blue;
-		when: BlClickEvent do: [
-			GlutinEventsFetcher shutDown: false.
-			GlutinEventsFetcher startUp: false ]).
-	space show
-]
-
 { #category : #'api - ui process' }
 BlGlutinHost class >> forceResumeOfUIProcess: aProcess [
 	UIProcess := aProcess.
@@ -140,21 +122,6 @@ BlGlutinHost class >> terminateUIProcess [
 { #category : #'api - ui process' }
 BlGlutinHost class >> uiProcessDo: aBlock [
 	UIProcess ifNotNil: aBlock
-]
-
-{ #category : #example }
-BlGlutinHost class >> world [
-	| universe space |
-	BlUniverse reset.
-
-	Bloc preferableSpartaCanvas: BlSpartaSkiaCanvasBuilder.
-
-	space := BlSpace new.
-	space extent: 1200@800.
-	space host: self new.
-	space title: 'Morph World'.
-	space addChild: (BlMorphicWorldEmbeddingElement new beMain).
-	space show
 ]
 
 { #category : #'host - api' }
