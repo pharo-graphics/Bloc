@@ -152,6 +152,13 @@ BlText >> attributesBuilder [
 	^ self
 ]
 
+{ #category : #'text - copying' }
+BlText >> characters [
+	<return: #BlCharacterText>
+
+	^ BlCharacterText text: self
+]
+
 { #category : #'text - attributes' }
 BlText >> clearAttributes: aBlock [
 	self clearAttributes: (1 min: self size) to: self size if: aBlock

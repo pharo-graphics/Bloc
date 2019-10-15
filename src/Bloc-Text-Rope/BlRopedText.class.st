@@ -32,11 +32,6 @@ BlRopedText >> asRopedText [
 	^ self
 ]
 
-{ #category : #'text - converting' }
-BlRopedText >> asString [
-	^ rope asString
-]
-
 { #category : #'text - accessing' }
 BlRopedText >> at: anIndex [
 	"Return a character at a given index"
@@ -168,10 +163,11 @@ BlRopedText >> insertText: aText at: anIndex [
 	self
 		assert: [ aText isKindOf: BlText ]
 		description: [ 'Trying to insert a {1} instead of {2}'
-			format: { aText class name . BlText name } ].
-
+				format:
+					{aText class name.
+					BlText name} ].
 	rope := rope insert: aText rope at: anIndex.
-	self notifyStringInserted: aText asString at: anIndex
+	self notifyStringInserted: aText asStringForParser at: anIndex
 ]
 
 { #category : #'text - testing' }
