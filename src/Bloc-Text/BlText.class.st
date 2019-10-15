@@ -83,7 +83,7 @@ BlText >> asString [
 		self do: [ :anItem |
 			anItem isCharacter
 				ifTrue: [ aStream nextPut: anItem ]
-				ifFalse: [ anItem asString ] ] ]
+				ifFalse: [ aStream nextPutAll: anItem asString ] ] ]
 ]
 
 { #category : #'text - accessing' }

@@ -4,11 +4,37 @@ Class {
 	#category : #'Bloc-Text-Text'
 }
 
+{ #category : #comparing }
+BlTextTab >> = anObject [
+	self == anObject
+		ifTrue: [ ^ true ].
+
+	anObject = Character tab
+		ifTrue: [ ^ true ].
+
+	^ self class = anObject class
+]
+
 { #category : #converting }
 BlTextTab >> asString [
 	<return: #String>
 
 	^ String tab
+]
+
+{ #category : #comparing }
+BlTextTab >> hash [
+	^ self class hash
+]
+
+{ #category : #testing }
+BlTextTab >> isSeparator [
+	^ true
+]
+
+{ #category : #testing }
+BlTextTab >> isTab [
+	^ true
 ]
 
 { #category : #accessing }
@@ -40,8 +66,8 @@ BlTextTab >> textRunOn: aStream [
 	rendered and therefore should be converted to a sequence of spaces"
 
 	"For now hardcode the amount of spaces that one tab represents"
-	aStream nextPut: Character cr.
-	aStream nextPut: Character cr.
-	aStream nextPut: Character cr.
-	aStream nextPut: Character cr
+	aStream nextPut: Character space.
+	aStream nextPut: Character space.
+	aStream nextPut: Character space.
+	aStream nextPut: Character space
 ]

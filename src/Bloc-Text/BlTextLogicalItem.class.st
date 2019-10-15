@@ -28,6 +28,31 @@ BlTextLogicalItem >> asString [
 	^ self subclassResponsibility
 ]
 
+{ #category : #testing }
+BlTextLogicalItem >> isDigit [
+	^ false
+]
+
+{ #category : #testing }
+BlTextLogicalItem >> isLetter [
+	^ false
+]
+
+{ #category : #testing }
+BlTextLogicalItem >> isLineBreak [
+	^ false
+]
+
+{ #category : #testing }
+BlTextLogicalItem >> isSeparator [
+	^ false
+]
+
+{ #category : #testing }
+BlTextLogicalItem >> isTab [
+	^ false
+]
+
 { #category : #accessing }
 BlTextLogicalItem >> lookaheadSize [
 	"Return how many characters in the original string we should match when replacing with the logical item"

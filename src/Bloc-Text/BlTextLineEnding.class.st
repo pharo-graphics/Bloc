@@ -7,8 +7,29 @@ Class {
 	#category : #'Bloc-Text-Text'
 }
 
+{ #category : #comparing }
+BlTextLineEnding >> = anObject [
+	self == anObject
+		ifTrue: [ ^ true ].
+
+	anObject == self asString first
+		ifTrue: [ ^ true ].
+
+	^ self class = anObject class
+]
+
+{ #category : #comparing }
+BlTextLineEnding >> hash [
+	^ self class hash
+]
+
 { #category : #testing }
 BlTextLineEnding >> isLineBreak [
+	^ true
+]
+
+{ #category : #testing }
+BlTextLineEnding >> isSeparator [
 	^ true
 ]
 

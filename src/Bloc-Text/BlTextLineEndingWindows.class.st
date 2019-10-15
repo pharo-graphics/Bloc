@@ -17,7 +17,7 @@ BlTextLineEndingWindows >> lookaheadSize [
 	"Return how many characters in the original string we should match when replacing with the logical item"
 	<return: #Number>
 	
-	^ 1
+	^ 2
 ]
 
 { #category : #testing }

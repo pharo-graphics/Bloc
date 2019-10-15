@@ -90,7 +90,7 @@ BlRopedTextExamples >> textWithCr [
 	<gtExample>
 	| text |
 
-	text := ('Hello', String cr, 'World') asRopedText.
+	text := ('Hello', String crlf, String tab, 'World') asRopedText.
 
 	^ text
 ]

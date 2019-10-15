@@ -11,37 +11,40 @@ Class {
 { #category : #accessing }
 BlTextStringNormalizer >> process: aString [
 	<return: #Array of: #Object>
-
-	^ self processLineEndings: aString
-]
-
-{ #category : #accessing }
-BlTextStringNormalizer >> processLineEndings: aString [
-	| theLineEndings |
+	| theLogicalItems theLookaheadBuffer |
 	
-	theLineEndings := (BlTextLineEnding allSubclasses collect: #uniqueInstance) sorted: [ :a :b | a size > b size ].
+	theLogicalItems := ( {
+			BlTextLineEndingMacClassic .
+			BlTextLineEndingUnix .
+			BlTextLineEndingWindows .
+			BlTextTab
+		} collect: #uniqueInstance) sorted: [ :a :b | a lookaheadSize > b lookaheadSize ].
+		
+	"allocate a buffer for the lookahead"
+	theLookaheadBuffer := Array new: theLogicalItems first lookaheadSize withAll: Character null.
 	
 	^ Array streamContents: [ :aStream |
-		| aCurrentCharacter aNextCharacter aCurrentIndex aStringLength |
-		
-		aCurrentCharacter := Character null.
-		aNextCharacter := Character null.
+		| aCurrentIndex aStringLength |
+	
 		aCurrentIndex := 1.
 		aStringLength := aString size.
 		
 		[ aCurrentIndex <= aStringLength ]
-			whileTrue: [
-				aCurrentCharacter := aString at: aCurrentIndex.
-				aNextCharacter := aCurrentIndex < aStringLength
-					ifTrue: [ aString at: aCurrentIndex + 1 ]
-					ifFalse: [ Character null ].
+			whileTrue: [				
+				"now we fill the lookahead buffer"
+				1 to: theLookaheadBuffer size do: [ :aBufferIndex |
+					| eachStringIndex |
+					eachStringIndex := aCurrentIndex + (aBufferIndex - 1).
+					theLookaheadBuffer at: aBufferIndex put: (eachStringIndex <= aStringLength
+						ifTrue: [ aString at: eachStringIndex ]
+						ifFalse: [ Character null ]) ].
 				
-				theLineEndings
-					detect: [ :eachLineEnding | eachLineEnding matches: aCurrentCharacter and: aNextCharacter ]
+				theLogicalItems
+					detect: [ :eachLineEnding | eachLineEnding matches: theLookaheadBuffer ]
 					ifFound: [ :aLineEnding |
 						aStream nextPut: aLineEnding.
-						aCurrentIndex := aCurrentIndex + aLineEnding size ]
+						aCurrentIndex := aCurrentIndex + aLineEnding lookaheadSize ]
 					ifNone: [
-						aStream nextPut: aCurrentCharacter.
+						aStream nextPut: theLookaheadBuffer first.
 						aCurrentIndex := aCurrentIndex + 1 ] ] ]
 ]
