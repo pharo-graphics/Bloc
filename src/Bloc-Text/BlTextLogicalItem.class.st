@@ -38,6 +38,11 @@ BlTextLogicalItem >> asString [
 ]
 
 { #category : #testing }
+BlTextLogicalItem >> isAlphaNumeric [
+	^ false
+]
+
+{ #category : #testing }
 BlTextLogicalItem >> isDigit [
 	^ false
 ]
