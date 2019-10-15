@@ -21,6 +21,15 @@ BlTextLogicalItem class >> uniqueInstance [
 ]
 
 { #category : #converting }
+BlTextLogicalItem >> asCharacter [
+	"Return the closest character representation of this item.
+	It is needed of a user wants to get an item to character mapping between BlText and String (of the same size)"
+	<return: #Character>
+
+	^ self subclassResponsibility
+]
+
+{ #category : #converting }
 BlTextLogicalItem >> asString [
 	"I should return a string that represents the original piece of text that was replaced with this logical item"
 	<return: #String>

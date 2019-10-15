@@ -85,11 +85,27 @@ BlText >> asArray [
 
 { #category : #'text - converting' }
 BlText >> asString [
+	"I return an original String representaion of this text.
+	There is no guarantee that the size of the resulting string is the same
+	as of this text"
+	<return: #String>
+
     ^ String streamContents: [ :aStream |
 		self do: [ :anItem |
 			anItem isCharacter
 				ifTrue: [ aStream nextPut: anItem ]
 				ifFalse: [ aStream nextPutAll: anItem asString ] ] ]
+]
+
+{ #category : #'text - converting' }
+BlText >> asStringForParser [
+	"Return a string version of this text suitable to be used for String based parsers.
+	I guarantee that the string size and location of characters in the resulting string
+	corresponds to the one in this text"
+	<return: #String>
+
+    ^ String streamContents: [ :aStream |
+		self do: [ :anItem | aStream nextPut: anItem asCharacter ] ]
 ]
 
 { #category : #'text - accessing' }

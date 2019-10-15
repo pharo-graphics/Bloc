@@ -42,14 +42,15 @@ BlTextStyler >> initialize [
 { #category : #private }
 BlTextStyler >> privateStyle: aText [ 
 	<return: #BlText>
-	^ self shouldBeImplemented
+
+	^ self subclassResponsibility
 ]
 
 { #category : #styling }
 BlTextStyler >> style: aBlText [
 	<return: #BlText>
 	stylingEnabled ifFalse: [ ^ aBlText ].
-	^ self privateStyle: aBlText unstyle.
+	^ self privateStyle: aBlText unstyle
 ]
 
 { #category : #private }

@@ -16,6 +16,15 @@ BlTextTab >> = anObject [
 ]
 
 { #category : #converting }
+BlTextTab >> asCharacter [
+	"Return the closest character representation of this item.
+	It is needed of a user wants to get an item to character mapping between BlText and String (of the same size)"
+	<return: #Character>
+
+	^ Character tab
+]
+
+{ #category : #converting }
 BlTextTab >> asString [
 	<return: #String>
 
