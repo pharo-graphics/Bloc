@@ -66,14 +66,6 @@ BlTextIterator >> hasPrevious [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - testing' }
-BlTextIterator >> isNewLine: anItem [
-	"Return true of given item represents a carriage return, false otherwise"
-	<return: #Boolean>
-
-	^ anItem = Character cr or: [ anItem = Character lf ]
-]
-
 { #category : #'iterator - enumeration' }
 BlTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"

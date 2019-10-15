@@ -19,10 +19,7 @@ BlTextParagraph >> createSpartaTextPainter: aBrSpan on: aSpartaCanvas [
 
 	aTextPainter font: aFontBuilder build.
 	aTextPainter string: (String streamContents: [ :aStream |
-		aBrSpan do: [ :aChar |
-			aChar = Character tab
-				ifTrue: [ self tabWidth timesRepeat: [ aStream nextPut: Character space ] ]
-				ifFalse: [ aStream nextPut: aChar asCharacter ] ] ]).
+		aBrSpan do: [ :anItem | anItem textRunOn: aStream ] ]).
 	^ aTextPainter
 ]
 

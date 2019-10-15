@@ -6,13 +6,31 @@ Class {
 
 { #category : #converting }
 BlTextLineEndingWindows >> asString [
+	"I return a string that represents the original piece of text that was replaced with this logical item"
+	<return: #String>
+
 	^ String crlf
 ]
 
+{ #category : #accessing }
+BlTextLineEndingWindows >> lookaheadSize [
+	"Return how many characters in the original string we should match when replacing with the logical item"
+	<return: #Number>
+	
+	^ 1
+]
+
 { #category : #testing }
-BlTextLineEndingWindows >> matches: aCurrentCharacter and: aNextCharacter [
+BlTextLineEndingWindows >> matches: aCollectionOfCharacters [
 	<return: #Boolean>
 
-	^ aCurrentCharacter = Character cr
-		and: [ aNextCharacter = Character lf ]
+	^ aCollectionOfCharacters first = Character cr
+		and: [ aCollectionOfCharacters second = Character lf ]
+]
+
+{ #category : #printing }
+BlTextLineEndingWindows >> printOn: aStream [
+	"Put a textual description of me on the receiver"
+
+	aStream nextPutAll: '<CRLF>'
 ]

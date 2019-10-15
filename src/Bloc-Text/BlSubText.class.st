@@ -13,7 +13,7 @@ Class {
 		'start',
 		'end'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'instance creation' }
@@ -216,8 +216,13 @@ BlSubText >> hash [
 
 { #category : #'text - modifications' }
 BlSubText >> insertString: aString at: anIndex [
+	| aPreviousSize aNewSize |
+
+	aPreviousSize := text size.	
 	text insertString: aString at: start + anIndex - 1.
-	end := end + aString size
+	aNewSize := text size.
+
+	end := end + (aNewSize - aPreviousSize)
 ]
 
 { #category : #accessing }

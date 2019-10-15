@@ -10,12 +10,30 @@ Class {
 
 { #category : #converting }
 BlTextLineEndingMacClassic >> asString [
+	"I return a string that represents the original piece of text that was replaced with this logical item"
+	<return: #String>
+
 	^ String cr
 ]
 
-{ #category : #testing }
-BlTextLineEndingMacClassic >> matches: aCurrentCharacter and: aNextCharacter [
-	<return: #Boolean>
+{ #category : #accessing }
+BlTextLineEndingMacClassic >> lookaheadSize [
+	"Return how many characters in the original string we should match when replacing with the logical item"
+	<return: #Number>
+	
+	^ 1
+]
 
-	^ aCurrentCharacter = Character cr
+{ #category : #testing }
+BlTextLineEndingMacClassic >> matches: aCollectionOfCharacters [
+	<return: #Boolean>
+	
+	^ aCollectionOfCharacters first = Character cr
+]
+
+{ #category : #printing }
+BlTextLineEndingMacClassic >> printOn: aStream [
+	"Put a textual description of me on the receiver"
+
+	aStream nextPutAll: '<CR>'
 ]

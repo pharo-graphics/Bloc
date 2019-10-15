@@ -264,8 +264,7 @@ BlTextParagraphSpan >> positionAt: anIndex [
 BlTextParagraphSpan >> printOn: aStream [
 	span
 		ifNil: [ aStream nextPutAll: '(not yet initialized)' ]
-		ifNotNil: [ span putOn: aStream from: spanStart to: spanEnd ]
-	
+		ifNotNil: [ span printOn: aStream from: spanStart to: spanEnd ]
 ]
 
 { #category : #'accessing - span' }

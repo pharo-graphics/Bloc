@@ -89,7 +89,7 @@ BlRopedTextExamples >> textWithAttributes [
 BlRopedTextExamples >> textWithCr [
 	<gtExample>
 	| text |
-	
+
 	text := ('Hello', String cr, 'World') asRopedText.
 
 	^ text

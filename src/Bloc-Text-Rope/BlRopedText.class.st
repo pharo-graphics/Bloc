@@ -159,7 +159,7 @@ BlRopedText >> initializeWith: aRope [
 
 { #category : #'text - modifications' }
 BlRopedText >> insertString: aString at: anIndex [
-	rope := rope insertItems: aString at: anIndex.
+	rope := rope insertItems: (BlTextStringNormalizer new process: aString) at: anIndex.
 	self notifyStringInserted: aString at: anIndex
 ]
 

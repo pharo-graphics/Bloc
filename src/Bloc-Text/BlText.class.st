@@ -46,11 +46,11 @@ BlText >> , aText [
 
 { #category : #'text - enumeration' }
 BlText >> allSatisfy: aBlock [
-	"Evaluate aBlock with all text character's.
+	"Evaluate aBlock with all text items.
 	If aBlock returns false for any element return false, otherwise return true"
 	<return: #Boolean>
 
-	self do: [ :aCharacter | (aBlock value: aCharacter)
+	self do: [ :anItem | (aBlock value: anItem)
 		ifFalse: [ ^ false] ].
 	^ true
 ]
@@ -63,11 +63,11 @@ BlText >> announcerDo: aBlockClosure [
 
 { #category : #'text - enumeration' }
 BlText >> anySatisfy: aBlock [
-	"Evaluate aBlock with all text character's.
+	"Evaluate aBlock with all text items.
 	If aBlock returns true for any element return true, otherwise return false"
 	<return: #Boolean>
 	
-	self do: [ :aCharacter | (aBlock value: aCharacter)
+	self do: [ :anItem | (aBlock value: anItem)
 			ifTrue: [ ^ true ] ].
 	^ false
 ]
@@ -79,13 +79,17 @@ BlText >> append: aText [
 
 { #category : #'text - converting' }
 BlText >> asString [
-    ^ self printStringLimitedTo: Float infinity
+    ^ String streamContents: [ :aStream |
+		self do: [ :anItem |
+			anItem isCharacter
+				ifTrue: [ aStream nextPut: anItem ]
+				ifFalse: [ anItem asString ] ] ]
 ]
 
 { #category : #'text - accessing' }
 BlText >> at: anIndex [
-	"Return a character at a given index"
-	<return: #Character>
+	"Return an item at a given index"
+	<return: #Object>
 	
 	^ self subclassResponsibility
 ]
@@ -138,12 +142,11 @@ BlText >> clearAttributes: aStart to: anEnd if: aBlock [
 
 { #category : #'text - enumeration' }
 BlText >> collect: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	Collect the resulting values into a collection like the receiver. Answer  
-	the new collection."
+	"Evaluate aBlock with each of the text's items as the argument.  
+	Collect the resulting values into a collection like the receiver. Answer the new collection."
 
 	^ Array streamContents: [ :aStream |
-		self do: [ :aCharacter | aStream nextPut: (aBlock value: aCharacter) ] ]
+		self do: [ :anItem | aStream nextPut: (aBlock value: anItem) ] ]
 ]
 
 { #category : #'text - copying' }
@@ -165,8 +168,10 @@ BlText >> delete: aStart to: anEnd [
 
 { #category : #'text - enumeration' }
 BlText >> do: aBlock [
-	"Evaluate aBlock with every character as argument"
-	
+	"Evaluate aBlock with every item as argument.
+	We do not guarantee that all items of this text are Characters. Some items may be special objects such as line breaks.
+	Basically, you should never assume a type of the argument with which aBlock will be evaluated"
+
 	self subclassResponsibility
 ]
 
@@ -185,12 +190,12 @@ BlText >> ensureAnnouncer [
 
 { #category : #'text - enumeration' }
 BlText >> finder [
-	^ BlPositionFinder new text: self.
+	^ BlPositionFinder new text: self
 ]
 
 { #category : #'text - accessing' }
 BlText >> first [
-	<return: #Character>
+	<return: #Object>
 	
 	^ self at: 1
 ]
@@ -215,7 +220,7 @@ BlText >> from: aStart to: anEnd [
 
 { #category : #'text - enumeration' }
 BlText >> from: aFromIndex to: aToIndex do: aBlock [
-	"Evaluate aBlock with every character as argument within interval [aFromIndex, aToIndex]"
+	"Evaluate aBlock with every item as argument within interval [aFromIndex, aToIndex]"
 	
 	self subclassResponsibility
 ]
@@ -226,11 +231,6 @@ BlText >> generation [
 	<return: #Object>
 
 	^ self subclassResponsibility
-]
-
-{ #category : #initialization }
-BlText >> initialize [
-	super initialize.
 ]
 
 { #category : #'text - modifications' }
@@ -259,7 +259,7 @@ BlText >> isNotEmpty [
 
 { #category : #'text - enumeration' }
 BlText >> iterator [
-	"Return an iterator pointing to the first text item (character) limited only by the text size"
+	"Return an iterator pointing to the first text item limited only by the text size"
 	<return: #BlTextIterator>
 
 	^ self subclassResponsibility
@@ -267,7 +267,7 @@ BlText >> iterator [
 
 { #category : #'text - enumeration' }
 BlText >> iterator: aStartIndex to: anEndIndex [
-	"Return an iterator pointing to the character at anStartIndex and limited by anEndIndex"
+	"Return an iterator pointing to the item at anStartIndex and limited by anEndIndex"
 	<return: #BlTextIterator>
 
 	^ self subclassResponsibility
@@ -275,7 +275,7 @@ BlText >> iterator: aStartIndex to: anEndIndex [
 
 { #category : #'text - accessing' }
 BlText >> last [
-	<return: #Character>
+	<return: #Object>
 	
 	^ self at: self size
 ]
@@ -300,16 +300,21 @@ BlText >> notifyStringInserted: aString at: anIndex [
 
 { #category : #'text - printing' }
 BlText >> printOn: aStream [
-	 [ self do: [ :aChar | aStream nextPut: aChar ] ]
-		on: Error do: [ :e | aStream nextPutAll: e description ]
+	self do: [ :anItem |
+		anItem isCharacter
+			ifTrue: [ aStream nextPut: anItem ]
+			ifFalse: [ aStream print: anItem ] ]
 ]
 
 { #category : #'text - printing' }
-BlText >> putOn: aWriteStream from: aStart to: anEnd [
+BlText >> printOn: aWriteStream from: aStart to: anEnd [
 	self
 		from: aStart
 		to: anEnd
-		do: [ :aChar | aWriteStream nextPut: aChar ]
+		do: [ :anItem |
+			anItem isCharacter
+				ifTrue: [ aWriteStream nextPut: anItem ]
+				ifFalse: [ aWriteStream print: anItem ] ]
 ]
 
 { #category : #'text - copying' }
@@ -418,8 +423,8 @@ BlText >> withIndexCollect: elementAndIndexBlock [
 	^ Array streamContents: [ :aStream |
 		| anIndex |
 		anIndex := 1.
-		self do: [ :aCharacter |
-			aStream nextPut: (elementAndIndexBlock value: aCharacter value: anIndex).
+		self do: [ :anItem |
+			aStream nextPut: (elementAndIndexBlock value: anItem value: anIndex).
 			anIndex := anIndex + 1 ] ]
 ]
 
