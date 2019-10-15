@@ -78,6 +78,12 @@ BlText >> append: aText [
 ]
 
 { #category : #'text - converting' }
+BlText >> asArray [
+    ^ Array streamContents: [ :aStream |
+		self do: [ :anItem | aStream nextPut: anItem ] ]
+]
+
+{ #category : #'text - converting' }
 BlText >> asString [
     ^ String streamContents: [ :aStream |
 		self do: [ :anItem |

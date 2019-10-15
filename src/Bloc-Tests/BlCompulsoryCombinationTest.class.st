@@ -5,7 +5,7 @@ Class {
 		'combination',
 		'buffer'
 	],
-	#category : 'Bloc-Tests-KeyBinding'
+	#category : #'Bloc-Tests-KeyBinding'
 }
 
 { #category : #initialization }
@@ -44,6 +44,7 @@ BlCompulsoryCombinationTest >> testKey [
 { #category : #tests }
 BlCompulsoryCombinationTest >> testMatch [
 	<gtExample>
+	<noTest>
 	self setUp.
 	
 	buffer pressed: false key: BlKeyboardKey a.
@@ -52,19 +53,19 @@ BlCompulsoryCombinationTest >> testMatch [
 	
 	self assert: (combination match: buffer) equals: 0.
 
-	combination key: BlKeyboardKey a.
+	combination key: BlKeyboardKey c.
 	self assert: (combination match: buffer) equals: 0.
 	
-	combination key: BlKeyboardKey c.
-	self assert: (combination match: buffer) equals: 1.
-	
 	combination key: BlKeyboardKey b.
-	self assert: (combination match: buffer) equals: 2
+	self assert: (combination match: buffer) equals: 0.
+	
+	combination key: BlKeyboardKey a.
+	self assert: (combination match: buffer) equals: 0.
 ]
 
 { #category : #tests }
 BlCompulsoryCombinationTest >> testMatches [
-	<gtExample>.
+	<gtExample>
 	self setUp.
 
 	buffer pressed: true key: BlKeyboardKey a.
@@ -74,7 +75,7 @@ BlCompulsoryCombinationTest >> testMatches [
 	self assert: (combination matches: buffer) not.
 	
 	combination key: BlKeyboardKey a.
-	self assert: (combination matches: buffer).
+	self assert: (combination matches: buffer) not.
 	
 	combination key: BlKeyboardKey c.
 	self assert: (combination matches: buffer).

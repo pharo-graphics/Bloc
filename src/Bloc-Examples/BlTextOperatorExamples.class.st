@@ -254,9 +254,9 @@ BlTextOperatorExamples >> findxXCharactersAtTheBeginning [
 BlTextOperatorExamples >> lineBreaks [
 	<gtExample>
 	| aString |
-	aString := String cr, String lf.
+	aString := String cr.
 	self assert: (aString allSatisfy: #isLineBreak).
-	self assert: aString size equals: 2.
+	self assert: aString size equals: 1.
 	^ aString
 ]
 
@@ -264,9 +264,9 @@ BlTextOperatorExamples >> lineBreaks [
 BlTextOperatorExamples >> separators [
 	<gtExample>
 	| aString |
-	aString := String space, String tab, String cr, String lf.
+	aString := String space, String tab, String cr.
 	self assert: (aString allSatisfy: #isSeparator).
-	self assert: aString size equals: 4.
+	self assert: aString size equals: 3.
 	^ aString
 ]
 

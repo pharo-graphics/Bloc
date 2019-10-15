@@ -4,7 +4,7 @@ I contain examples of rope iterators
 Class {
 	#name : #BlRopeIteratorExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - next span' }
@@ -208,14 +208,14 @@ BlRopeIteratorExamples >> next_line_CrLf_at_0 [
 	<gtExample>
 	| anIterator |
 	
-	anIterator := (BlCollectionRope collection: String crlf) iterator.
+	anIterator := (BlCollectionRope collection: { BlTextLineEndingWindows new }) iterator.
 	
 	anIterator nextLineIndicesDo: [ :aStart :anEnd :anEndDelimiter |
 		self assert: aStart equals: 0.
 		self assert: anEnd equals: 0.
-		self assert: anEndDelimiter equals: 2 ].
+		self assert: anEndDelimiter equals: 1 ].
 
-	self assert: anIterator position equals: 2.
+	self assert: anIterator position equals: 1.
 	
 	^ anIterator
 ]
