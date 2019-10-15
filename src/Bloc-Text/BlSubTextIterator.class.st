@@ -5,7 +5,7 @@ Class {
 		'text',
 		'iterator'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #initialization }
@@ -93,7 +93,7 @@ BlSubTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
 		- start index of line
 		- end index of line without line delimiter
-		- end index of line including line delimiter(s) CR, LF or CRLF"
+		- end index of line including line delimiter(s)"
 		
 	iterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aLineDelimiterEnd |
 		anIndicesBlock

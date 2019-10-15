@@ -7,6 +7,8 @@ I define a public API of the text model. User must only talk with me using provi
 
 I only store string and corresponding attributes. I don't know anything about text layout or paragraphs. I should be used together with BrTextParagraph in order to be measured, layered out and rendered. 
 
+Once a piece of string is converted ${BlText}$ users must not make any assumption on the internat structure of that string inside of the text. For example I replace all occurrences of ==CrLf== with a special marker that is exactly one item instead of two characters (==Cr== and ==Lf==)
+
 I provide a fluent text styling api:
 
 [[[

@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'rope'
 	],
-	#category : 'Bloc-Text-Rope-Text'
+	#category : #'Bloc-Text-Rope-Text'
 }
 
 { #category : #'instance creation' }
@@ -22,7 +22,9 @@ BlRopedText class >> rope: aRope [
 
 { #category : #'instance creation' }
 BlRopedText class >> string: aString [
-	^ self rope: (BlCollectionRope collection: aString)
+	<return: #BlRopedText>
+
+	^ self rope: (BlCollectionRope collection: (BlTextStringNormalizer new process: aString))
 ]
 
 { #category : #'text - converting' }

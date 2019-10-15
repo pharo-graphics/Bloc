@@ -27,7 +27,7 @@ ${example:BlTextElementMeasurementStrategyExamples>>#measurementDifference|noCod
 Class {
 	#name : #BlTextElementMeasurementStrategyExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Text'
+	#category : #'Bloc-Examples-Text-Element'
 }
 
 { #category : #baselines }

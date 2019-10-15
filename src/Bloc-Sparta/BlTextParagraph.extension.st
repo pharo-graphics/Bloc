@@ -22,7 +22,7 @@ BlTextParagraph >> createSpartaTextPainter: aBrSpan on: aSpartaCanvas [
 		aBrSpan do: [ :aChar |
 			aChar = Character tab
 				ifTrue: [ self tabWidth timesRepeat: [ aStream nextPut: Character space ] ]
-				ifFalse: [ aStream nextPut: aChar ] ] ]).
+				ifFalse: [ aStream nextPut: aChar asCharacter ] ] ]).
 	^ aTextPainter
 ]
 

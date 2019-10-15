@@ -9,7 +9,7 @@ Class {
 		'iterator',
 		'text'
 	],
-	#category : 'Bloc-Text-Rope-Text'
+	#category : #'Bloc-Text-Rope-Text'
 }
 
 { #category : #'instance creation' }
@@ -85,7 +85,7 @@ BlRopedTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
 		- start index of line
 		- end index of line without line delimiter
-		- end index of line including line delimiter(s) CR, LF or CRLF"
+		- end index of line including line delimiter(s)"
 
 	^ iterator nextLineIndicesDo: [ :aStart :anEnd :aLineEndWithDelimiters |
 		anIndicesBlock cull: ((aStart + 1) min: anEnd) cull: anEnd cull: aLineEndWithDelimiters ]

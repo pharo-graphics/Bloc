@@ -8,7 +8,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'iterator - accessing' }
@@ -143,7 +143,7 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
 		- start index of line
 		- end index of line without line delimiter
-		- end index of line including line delimiter(s) CR, LF or CRLF"
+		- end index of line including line delimiter(s)"
 		
 	self subclassResponsibility
 ]
@@ -154,13 +154,13 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 		execute aSplitBlock with the 3 arguments for each potential line:
 			- start index of line
 			- end index of line without line delimiter
-			- end index of line including line delimiter(s) CR, LF or CRLF.
+			- end index of line including line delimiter(s).
 	
 	If aMergeBlock returns false, then procide with
 		execute anIndicesBlock with 3 arguments for each line:
 			- start index of line
 			- end index of line without line delimiter
-			- end index of line including line delimiter(s) CR, LF or CRLF.
+			- end index of line including line delimiter(s).
 	
 	else if aMergeBlock returns true ignore a line delimiter and `merge` lines"
 	| shouldMerge actualStart actualEnd actualDelimiterIndex |
