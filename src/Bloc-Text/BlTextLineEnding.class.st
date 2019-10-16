@@ -18,6 +18,15 @@ BlTextLineEnding >> = anObject [
 	^ self class = anObject class
 ]
 
+{ #category : #converting }
+BlTextLineEnding >> asCharacter [
+	"Return the closest character representation of this item.
+	It is needed of a user wants to get an item to character mapping between BlText and String (of the same size)"
+	<return: #Character>
+
+	^ Character lf
+]
+
 { #category : #comparing }
 BlTextLineEnding >> hash [
 	^ self class hash

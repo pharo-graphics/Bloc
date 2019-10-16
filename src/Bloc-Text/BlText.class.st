@@ -90,7 +90,7 @@ BlText >> asString [
 	<return: #String>
 
     ^ String streamContents: [ :aStream |
-		self do: [ :anItem | aStream nextPut: anItem asCharacter ] ]
+			self do: [ :anItem | aStream nextPut: anItem asCharacter ] ]
 ]
 
 { #category : #'text - accessing' }
