@@ -97,17 +97,6 @@ BlText >> asString [
 				ifFalse: [ aStream nextPutAll: anItem asString ] ] ]
 ]
 
-{ #category : #'text - converting' }
-BlText >> asStringForParser [
-	"Return a string version of this text suitable to be used for String based parsers.
-	I guarantee that the string size and location of characters in the resulting string
-	corresponds to the one in this text"
-	<return: #String>
-
-    ^ String streamContents: [ :aStream |
-		self do: [ :anItem | aStream nextPut: anItem asCharacter ] ]
-]
-
 { #category : #'text - accessing' }
 BlText >> at: anIndex [
 	"Return an item at a given index"
@@ -402,7 +391,9 @@ BlText >> textOffset [
 
 { #category : #'text - modifications' }
 BlText >> trimmer [
-	^ BlTextTrimmer new text: self.
+	<return: #BlTextTrimmer>
+
+	^ BlTextTrimmer new text: self
 ]
 
 { #category : #'text - attributes' }

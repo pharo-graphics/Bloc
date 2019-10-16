@@ -167,7 +167,7 @@ BlRopedText >> insertText: aText at: anIndex [
 					{aText class name.
 					BlText name} ].
 	rope := rope insert: aText rope at: anIndex.
-	self notifyStringInserted: aText asStringForParser at: anIndex
+	self notifyStringInserted: aText characters asString at: anIndex
 ]
 
 { #category : #'text - testing' }

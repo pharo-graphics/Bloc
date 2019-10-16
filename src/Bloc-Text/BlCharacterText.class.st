@@ -1,11 +1,42 @@
 "
-I am a special type of ${BlText}$ with a guarantee that every item is a character
+I am a special type of ${BlText}$ with a guarantee that every item is a character.
+${BlCharacterText} is designed to be polymorphic with ${WideString}$, e.g. I can be compared with it (""text = string"" and ""string = text"").
+
+Similar to the String I can not modified (insertion or deletions). Therefore 
 "
 Class {
 	#name : #BlCharacterText,
 	#superclass : #BlWrappedText,
 	#category : #'Bloc-Text-Text'
 }
+
+{ #category : #comparing }
+BlCharacterText >> = anObject [
+	| myIterator |
+	self == anObject
+		ifTrue: [ ^ true ].
+
+	"I can be compared with BlText or other collections"
+	((anObject isKindOf: Collection)
+		or: [ anObject isKindOf: BlText ])
+			ifFalse: [ ^ false ].
+			
+	self size ~= anObject size
+		ifTrue: [ ^ false ].
+
+	myIterator := self iterator.
+	
+	anObject do: [ :eachObjectItem |
+		| myCurrentCharacter |
+		myIterator hasNext
+			ifFalse: [ ^ false ].
+		
+		myCurrentCharacter := myIterator next asCharacter.
+		myCurrentCharacter ~= eachObjectItem
+			ifTrue: [ ^ false ] ].
+
+	^ true
+]
 
 { #category : #accessing }
 BlCharacterText >> at: anIndex [
@@ -15,19 +46,30 @@ BlCharacterText >> at: anIndex [
 	^ (super at: anIndex) asCharacter
 ]
 
+{ #category : #accessing }
+BlCharacterText >> basicAt: anIndex [
+	"Return an integer representation of the character at a given index"
+	<return: #Integer>
+
+	^ (self at: anIndex) asInteger
+]
+
 { #category : #'text - copying' }
 BlCharacterText >> copyFrom: aStartIndex to: anEndIndex [
-	"Create a copy of this text within a given indices interval.
-	Note: I am different from ==#from:to:== in a sense that I don't create a sub-text that points
-	to the original text, I create an independent copy which can be safely used in text editors and other tools.
+	"For performance reasons I do not return a copy of the text because I am immutable. This speeds up parser by an order of magnitude.
 	
-	README: For compatibility reasons with the rest of the system we allow aStartIndex to be bigger than anEndIndex and also bigger than self size."
+	README: For compatibility reasons with the rest of the system we allow aStartIndex to be bigger than anEndIndex and also bigger than self size"
 	<return: #BlText>
 
 	aStartIndex > anEndIndex
 		ifTrue: [ ^ self empty ].
 
 	^ (self from: aStartIndex to: anEndIndex) characters
+]
+
+{ #category : #'text - modifications' }
+BlCharacterText >> delete: aStart to: anEnd [
+	self shouldNotImplement
 ]
 
 { #category : #'text - enumeration' }
@@ -42,4 +84,44 @@ BlCharacterText >> from: aFromIndex to: aToIndex do: aBlock [
 	"Evaluate aBlock with every character as argument within interval [aFromIndex, aToIndex]"
 	
 	self text from: aFromIndex to: aToIndex do: [ :eachItem | aBlock value: eachItem asCharacter ]
+]
+
+{ #category : #comparing }
+BlCharacterText >> hash [
+	| hash low |
+	hash := self class hash bitAnd: 16rFFFFFFF.
+	self do: [ :each |
+		hash := hash + each asInteger.
+		"Begin hashMultiply"
+		low := hash bitAnd: 16383.
+		hash := (16r260D * low + ((16r260D * (hash // 16384) + (16r0065 * low) bitAnd: 16383) * 16384)) bitAnd: 16r0FFFFFFF ].
+	^ hash
+]
+
+{ #category : #'text - modifications' }
+BlCharacterText >> insertString: aString at: anIndex [
+	self shouldNotImplement
+]
+
+{ #category : #'text - modifications' }
+BlCharacterText >> insertText: aString at: anIndex [
+	self shouldNotImplement
+]
+
+{ #category : #testing }
+BlCharacterText >> isByteString [
+	^ false
+]
+
+{ #category : #testing }
+BlCharacterText >> isString [
+	^ true
+]
+
+{ #category : #converting }
+BlCharacterText >> withoutTrailingNewlines [
+	"Return a copy of the receiver with any combination of cr/lf characters at the end removed"
+	<return: #BlCharacterText>
+
+	^ self trimmer rightLineBreaks trimmed
 ]

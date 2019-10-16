@@ -70,6 +70,7 @@ BlTextTrimmer >> rightSeparators [
 { #category : #'api - processing' }
 BlTextTrimmer >> trim [
 	| left right |
+
 	left := 1.
 	right := self text size.
 
@@ -84,4 +85,23 @@ BlTextTrimmer >> trim [
 		self text delete: right + 1 to: self text size ].
 	1 < left ifTrue: [ 
 		self text delete: 1 to: left - 1 ].
+]
+
+{ #category : #'api - processing' }
+BlTextTrimmer >> trimmed [
+	"I return a new copy of the text trimmed according to the configuration"
+	<return: #BlText>
+	| left right |
+
+	left := 1.
+	right := self text size.
+
+	[ left <= right and: [ leftTrimPatterns anySatisfy: [ :eachPattern | eachPattern value: (self text at: left) ] ] ]
+		whileTrue: [ left := left + 1 ].
+
+	[ left <= right and: [ rightTrimPatterns anySatisfy: [ :eachPattern | 
+			eachPattern value: (self text at: right) ] ] ]
+		whileTrue: [ right := right - 1 ].
+
+	^ self text copyFrom: left to: right
 ]
