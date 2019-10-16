@@ -46,7 +46,7 @@ BlCharacterText >> at: anIndex [
 	^ (super at: anIndex) asCharacter
 ]
 
-{ #category : #accessing }
+{ #category : #'string - compatibility' }
 BlCharacterText >> basicAt: anIndex [
 	"Return an integer representation of the character at a given index"
 	<return: #Integer>
@@ -108,17 +108,24 @@ BlCharacterText >> insertText: aString at: anIndex [
 	self shouldNotImplement
 ]
 
-{ #category : #testing }
+{ #category : #'string - compatibility' }
 BlCharacterText >> isByteString [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : #'string - compatibility' }
 BlCharacterText >> isString [
 	^ true
 ]
 
-{ #category : #converting }
+{ #category : #'string - compatibility' }
+BlCharacterText >> trimBoth [
+	"Trim separators from both sides of the receiving string."
+	
+	^ self trimmer bothSeparators trimmed
+]
+
+{ #category : #'string - compatibility' }
 BlCharacterText >> withoutTrailingNewlines [
 	"Return a copy of the receiver with any combination of cr/lf characters at the end removed"
 	<return: #BlCharacterText>

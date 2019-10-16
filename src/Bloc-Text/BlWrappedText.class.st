@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'instance creation' }
@@ -49,6 +49,18 @@ BlWrappedText >> attributes: anAttributesCollection from: aStart to: anEnd [
 { #category : #'text - attributes' }
 BlWrappedText >> clearAttributes: aStart to: anEnd if: aBlock [
 	self text clearAttributes: aStart to: anEnd if: aBlock
+]
+
+{ #category : #'text - copying' }
+BlWrappedText >> copyFrom: aStartIndex to: anEndIndex [
+	"Create a copy of this text within a given indices interval.
+	Note: I am different from ==#from:to:== in a sense that I don't create a sub-text that points
+	to the original text, I create an independent copy which can be safely used in text editors and other tools.
+	
+	README: For compatibility reasons with the rest of the system we allow aStartIndex to be bigger than anEndIndex and also bigger than self size."
+	<return: #BlText>
+
+	^ self text copyFrom: aStartIndex to: anEndIndex
 ]
 
 { #category : #'text - enumeration' }

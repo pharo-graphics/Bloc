@@ -85,16 +85,12 @@ BlText >> asArray [
 
 { #category : #'text - converting' }
 BlText >> asString [
-	"I return an original String representaion of this text.
-	There is no guarantee that the size of the resulting string is the same
-	as of this text"
+	"I return a String representaion of this text.
+	I guarantee that the size of the resulting string is the same as of this text"
 	<return: #String>
 
     ^ String streamContents: [ :aStream |
-		self do: [ :anItem |
-			anItem isCharacter
-				ifTrue: [ aStream nextPut: anItem ]
-				ifFalse: [ aStream nextPutAll: anItem asString ] ] ]
+		self do: [ :anItem | aStream nextPut: anItem asCharacter ] ]
 ]
 
 { #category : #'text - accessing' }
@@ -204,6 +200,20 @@ BlText >> empty [
 { #category : #'text - notifying' }
 BlText >> ensureAnnouncer [
 	announcer ifNil: [ announcer := BlTextAnnouncer new ]
+]
+
+{ #category : #'text - converting' }
+BlText >> exportString [
+	"I return an original String representaion of this text.
+	There is no guarantee that the size of the resulting string is the same
+	as of this text"
+	<return: #String>
+
+    ^ String streamContents: [ :aStream |
+		self do: [ :anItem |
+			anItem isCharacter
+				ifTrue: [ aStream nextPut: anItem ]
+				ifFalse: [ aStream nextPutAll: anItem asString ] ] ]
 ]
 
 { #category : #'text - enumeration' }
