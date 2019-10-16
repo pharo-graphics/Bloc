@@ -48,9 +48,14 @@ BlTextStyler >> privateStyle: aText [
 
 { #category : #styling }
 BlTextStyler >> style: aBlText [
+	| anUnstyledText aStyledText |
 	<return: #BlText>
-	stylingEnabled ifFalse: [ ^ aBlText ].
-	^ self privateStyle: aBlText unstyle
+	stylingEnabled
+		ifFalse: [ ^ aBlText ].
+		
+	anUnstyledText := aBlText unstyle.
+	aStyledText := self privateStyle: anUnstyledText characters.
+	^ aStyledText text
 ]
 
 { #category : #private }
