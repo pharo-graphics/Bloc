@@ -6,7 +6,9 @@ Class {
 
 { #category : #converting }
 BlLineShape >> appendPathTo: aPathBuilder [
-	aPathBuilder moveTo: self fromPoint point.
+	(aPathBuilder currentPoint closeTo: self fromPoint point)
+		ifFalse: [ aPathBuilder moveTo: self fromPoint point ].
+	
 	aPathBuilder lineTo: self toPoint point
 ]
 
@@ -40,13 +42,20 @@ BlLineShape >> asElementIn: aContainer [
 { #category : #'api - transformations' }
 BlLineShape >> injectLineAt: aFloat length: aLength [
 	<return: #BlVectorShape>
-	| aNewShape aLeftSplitPoint aRightSplitPoint aRightLine aLineVector aSplitPoint aLeftLine aCenterLine |
+	| aNewShape aLeftSplitPoint aRightSplitPoint aRightLine aLeftLine aCenterLine |
 	
-	aLineVector := self toPoint point - self fromPoint point.
-	aSplitPoint := self fromPoint point + (aLineVector * aFloat).
+	"handle a potential zero divide"
+	(self toPoint point closeTo: self fromPoint point)
+		ifTrue: [
+			aLeftSplitPoint := (BlConnectionPointShape new point: self toPoint point).
+			aRightSplitPoint := (BlConnectionPointShape new point: self toPoint point) ]
+		ifFalse: [
+			| aLineVector aSplitPoint |
+			aLineVector := self toPoint point - self fromPoint point.
+			aSplitPoint := self fromPoint point + (aLineVector * aFloat).
 
-	aLeftSplitPoint := (BlConnectionPointShape new point: aSplitPoint - (aLength * aLineVector normalized)).
-	aRightSplitPoint := (BlConnectionPointShape new point: aSplitPoint + (aLength * aLineVector normalized)).
+			aLeftSplitPoint := (BlConnectionPointShape new point: aSplitPoint - (aLength * aLineVector normalized)).
+			aRightSplitPoint := (BlConnectionPointShape new point: aSplitPoint + (aLength * aLineVector normalized)) ].
 
 	aNewShape := BlThreeSegmentPolylineShape new.
 	
@@ -70,6 +79,12 @@ BlLineShape >> injectLineAt: aFloat length: aLength [
 	self parentDo: [ :aParentShape | aParentShape replaceShape: self with: aNewShape ].
 	
 	^ aNewShape
+]
+
+{ #category : #private }
+BlLineShape >> moveBy: aDelta [
+	self fromPoint moveBy: aDelta.
+	self toPoint moveBy: aDelta
 ]
 
 { #category : #'api - transformations' }
