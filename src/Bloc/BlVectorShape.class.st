@@ -78,6 +78,7 @@ BlVectorShape >> buildPathOnSpartaCanvas: aCanvas [
 	| aPathBuilder |
 	
 	aPathBuilder := aCanvas path.
+	aPathBuilder moveTo: 0@0.
 	self appendPathTo: aPathBuilder.
 	^ aPathBuilder finish
 ]

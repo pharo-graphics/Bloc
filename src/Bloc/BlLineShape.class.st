@@ -8,7 +8,7 @@ Class {
 BlLineShape >> appendPathTo: aPathBuilder [
 	(aPathBuilder currentPoint closeTo: self fromPoint point)
 		ifFalse: [ aPathBuilder moveTo: self fromPoint point ].
-	
+
 	aPathBuilder lineTo: self toPoint point
 ]
 
