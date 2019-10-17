@@ -55,9 +55,31 @@ BlRectangleShape class >> rectangle: aRectangle [
 	^ aShape shapes: { topEdge . rightEdge . bottomEdge . leftEdge }
 ]
 
+{ #category : #accessing }
+BlRectangleShape >> appendPathTo: aPathBuilder [
+	self topEdge appendPathTo: aPathBuilder.
+	self topRightCorner appendPathTo: aPathBuilder.
+	self rightEdge appendPathTo: aPathBuilder.
+	self bottomRightCorner appendPathTo: aPathBuilder.
+	self bottomEdge appendPathTo: aPathBuilder.
+	self bottomLeftCorner appendPathTo: aPathBuilder.
+	self leftEdge appendPathTo: aPathBuilder.
+	self topLeftCorner appendPathTo: aPathBuilder
+]
+
 { #category : #'api - geometry' }
 BlRectangleShape >> bottomEdge [
 	^ self shapeWithAttribute: RectangleEdgeAttribute value: #bottom
+]
+
+{ #category : #'api - geometry' }
+BlRectangleShape >> bottomLeftCorner [
+	^ self shapeWithAttribute: RectangleCornerAttribute value: #bottomLeft
+]
+
+{ #category : #'api - geometry' }
+BlRectangleShape >> bottomRightCorner [
+	^ self shapeWithAttribute: RectangleCornerAttribute value: #bottomRight
 ]
 
 { #category : #'api - geometry' }

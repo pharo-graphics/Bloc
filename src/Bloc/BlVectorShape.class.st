@@ -41,6 +41,10 @@ BlVectorShape >> allShapes [
 ]
 
 { #category : #converting }
+BlVectorShape >> appendPathTo: aPathBuilder [
+]
+
+{ #category : #converting }
 BlVectorShape >> asElementIn: aContainer [
 ]
 
@@ -67,6 +71,15 @@ BlVectorShape >> attributeAt: aName put: aValue [
 { #category : #accessing }
 BlVectorShape >> attributes [
 	^ attributes
+]
+
+{ #category : #converting }
+BlVectorShape >> buildPathOnSpartaCanvas: aCanvas [
+	| aPathBuilder |
+	
+	aPathBuilder := aCanvas path.
+	self appendPathTo: aPathBuilder.
+	^ aPathBuilder finish
 ]
 
 { #category : #ui }

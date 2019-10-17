@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #converting }
+BlLineShape >> appendPathTo: aPathBuilder [
+	aPathBuilder moveTo: self fromPoint point.
+	aPathBuilder lineTo: self toPoint point
+]
+
+{ #category : #converting }
 BlLineShape >> asElement [
 	^ BlLineElement new
 		border: (BlBorder paint: Color gray width: 1)
