@@ -91,9 +91,10 @@ TBlHostSpace >> dpiFactor [
 	aWidthScale := (aPhysicalSize width / aLogicalSize width) asFloat.
 	aHeightScale := (aPhysicalSize height / aLogicalSize height) asFloat.
 	
-	self
-		assert: [ aWidthScale closeTo: aHeightScale ]
-		description: [ 'DPI factor is different for width and height' ].
+	(aWidthScale closeTo: aHeightScale)
+		ifFalse: [ NonInteractiveTranscript stdout
+			show: ('DPI factor is different for width {1} and height {2}' format: { aWidthScale . aHeightScale });
+			cr ].
 
 	^ aWidthScale
 ]
