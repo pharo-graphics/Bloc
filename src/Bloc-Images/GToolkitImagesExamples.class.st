@@ -97,6 +97,7 @@ GToolkitImagesExamples >> imageInSpace: aFileReference [
 { #category : #examples }
 GToolkitImagesExamples >> urlGrid [
 	<gtExample>
+	<noTest>
 
 	| images gridElement scrollPane space previewSize children |
 
