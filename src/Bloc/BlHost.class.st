@@ -152,6 +152,11 @@ BlHost >> supportsOpenGLSurface [
 	^ false
 ]
 
+{ #category : #enumerating }
+BlHost >> uiProcessDo: aBlock [
+	self class uiProcessDo: aBlock
+]
+
 { #category : #'host space - accessing' }
 BlHost >> universe [
 	<return: #BlParallelUniverse>

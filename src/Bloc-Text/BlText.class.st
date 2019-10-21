@@ -316,6 +316,11 @@ BlText >> notifyStringInserted: aString at: anIndex [
 	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextStringInserted string: aString at: anIndex) ]
 ]
 
+{ #category : #copying }
+BlText >> postCopy [
+	announcer := nil
+]
+
 { #category : #'text - printing' }
 BlText >> printOn: aStream [
 	self do: [ :anItem |
