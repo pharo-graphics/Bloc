@@ -238,6 +238,39 @@ BlConcatenationRope >> left: aLeftRope right: aRightRope [
 	length := left size + right size
 ]
 
+{ #category : #'rope - replacing' }
+BlConcatenationRope >> replaceFrom: aStart to: anEnd with: aCollection [
+	"Replace a piece of the rope with a given collection of items"
+	<return: #BlRope>
+	| leftSize |
+	self assertAccessFrom: aStart to: anEnd.
+	
+	aStart = anEnd
+		ifTrue: [ ^ self ].
+
+	aCollection
+		ifEmpty: [ ^ self ].
+
+	leftSize := left size.
+	
+	"we only replace something in the left part"
+	anEnd <= leftSize
+		ifTrue: [
+			^ self class
+				concatenate: (left replaceFrom: aStart to: anEnd with: aCollection )
+				and: right ].
+
+	"we only replace something in the right part"
+	aStart >= leftSize
+		ifTrue: [
+			^ self class
+				concatenate: left
+				and: (right replaceFrom: aStart - leftSize to: anEnd - leftSize with: aCollection) ].
+	
+	"there is nothing else we can do except falling back to the primitive algorithm"
+	^ (self delete: aStart to: anEnd) insertItems: aCollection at: aStart
+]
+
 { #category : #accessing }
 BlConcatenationRope >> right [
 	<return: #BlRope>

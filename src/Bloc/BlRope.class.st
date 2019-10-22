@@ -224,6 +224,38 @@ BlRope >> from: aStart to: anEnd do: aBlock [
 	self subclassResponsibility
 ]
 
+{ #category : #'rope - enumeration' }
+BlRope >> indexOfSubCollection: aCollection startingAt: aStart ifAbsent: exceptionBlock [
+	"Answer the index of the receiver's first element, such that that element 
+	equals the first element of aCollection, and the next elements equal 
+	the rest of the elements of aCollection. Begin the search at element 
+	aStart of the receiver. If no such match is found, answer the result of 
+	evaluating argument, exceptionBlock."
+	| first iterator |
+
+	aCollection isEmpty
+		ifTrue: [^ exceptionBlock value].
+	
+	first := aCollection first.
+	iterator := self iterator: aStart to: self size - aCollection size + 1.
+	[ iterator hasNext ]
+		whileTrue: [
+			iterator next = first
+				ifTrue: [
+					| aSubIterator anIndex |
+					aCollection size = 1
+						ifTrue: [ ^ iterator position - 1 ].
+					anIndex := 2.
+					aSubIterator := self iterator: iterator position to: self size.
+					[ (aSubIterator next) = (aCollection at: anIndex) ]
+						whileTrue: [
+							anIndex = aCollection size
+								ifTrue: [ ^ iterator position - 1 ].
+							anIndex := anIndex + 1 ] ] ].
+
+	^ exceptionBlock value
+]
+
 { #category : #'rope - inserting' }
 BlRope >> insert: aRope at: anIndex [
 	"Insert aRope after anIndex"
@@ -328,6 +360,52 @@ BlRope >> putOn: aStream [
 { #category : #'rope - streaming' }
 BlRope >> putOn: aStream from: aStart to: anEnd [
 	self from: aStart to: anEnd do: [ :anItem | aStream nextPut: anItem ]
+]
+
+{ #category : #'rope - replacing' }
+BlRope >> replaceAll: aCollectionOfAssociations [
+	"Answer a copy of the receiver in which all occurrences of the collections as keys have been replaced by corresponding values.
+	I preserve text attributes"
+	<return: #BlRope>
+	| theSortedReplacements aNewRope |
+
+	aCollectionOfAssociations
+		ifEmpty: [ ^ self ].
+
+	theSortedReplacements := (aCollectionOfAssociations collect: [ :eachAssociation | eachAssociation key asArray -> eachAssociation value ])
+		sorted: [ :a :b | a key size > b key size ].
+		
+	aNewRope := self.
+	theSortedReplacements do: [ :eachReplacement | aNewRope := aNewRope replaceAll: eachReplacement key with: eachReplacement value ].
+	
+	^ aNewRope
+]
+
+{ #category : #'rope - replacing' }
+BlRope >> replaceAll: oldSubCollection with: newCollection [
+	"Answer a copy of the receiver in which all occurrences of
+	oldSubCollection have been replaced by newCollection "
+	| aNewRope startSearch currentIndex endIndex |
+
+	aNewRope := self.
+	startSearch := 0.
+	[ (currentIndex := aNewRope indexOfSubCollection: oldSubCollection startingAt: startSearch ifAbsent: [ -1 ]) >= 0 ]
+		whileTrue: [
+			endIndex := currentIndex + oldSubCollection size.
+			aNewRope := aNewRope
+					replaceFrom: currentIndex
+					to: endIndex
+					with: newCollection.
+				startSearch := currentIndex + newCollection size ].
+
+	^ aNewRope
+]
+
+{ #category : #'rope - replacing' }
+BlRope >> replaceFrom: aStart to: anEnd with: aCollection [ 
+	"Replace a piece of the rope with a given collection of items"
+
+	^ (self delete: aStart to: anEnd) insertItems: aCollection at: aStart
 ]
 
 { #category : #'rope - accessing' }
