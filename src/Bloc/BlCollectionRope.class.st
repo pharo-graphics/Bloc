@@ -207,11 +207,11 @@ BlCollectionRope >> merge: aCollection at: anIndex [
 	newCollection := anIndex = 0
 		ifTrue: [ aCollection species = collection species
 			ifTrue: [ aCollection, collection ]
-			ifFalse: [ (aCollection as: collection species), collection ] ]
+			ifFalse: [ aCollection, (collection as: aCollection species) ] ]
 		ifFalse: [ anIndex = self size
-				ifTrue: [ collection , aCollection ]
+				ifTrue: [ (collection as: aCollection species) , aCollection ]
 				ifFalse: [ | tmpCollection |
-					tmpCollection := collection species new: collection size + aCollection size.
+					tmpCollection := aCollection species new: collection size + aCollection size.
 					tmpCollection
 						replaceFrom: 1
 						to: anIndex
