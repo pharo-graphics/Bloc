@@ -3416,6 +3416,14 @@ BlElement >> withAllParents [
 ]
 
 { #category : #'children accessing' }
+BlElement >> withAllParentsDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	self withAllParentsDo: [ :aParent | 
+		(aBlock value: aParent)
+			ifTrue: [ ^ ifFoundBlock value: aParent ] ].
+	^ ifNoneBlock value
+]
+
+{ #category : #'children accessing' }
 BlElement >> withAllParentsDo: aBlock [
 	"Evaluate a block with me and all my parents as an argument starting from me
 	up to the top most parent"
