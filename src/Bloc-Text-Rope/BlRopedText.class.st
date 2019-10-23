@@ -42,12 +42,18 @@ BlRopedText >> at: anIndex [
 
 { #category : #'text - attributes' }
 BlRopedText >> attributes: anAttributesCollection [
+	| aNewRope |
+	
+	aNewRope := rope attributes: anAttributesCollection.
+	self rope: aNewRope.
 
-	self rope: (rope attributes: anAttributesCollection)
+	anAttributesCollection do: [ :eachAttribute |
+		self notifyAttributeAdded: eachAttribute from: (1 min: aNewRope size) to: aNewRope size ]
 ]
 
 { #category : #'text - attributes' }
 BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [
+	| aNewRope |
 	self
 		assert: [ aFromIndex <= aToIndex ]
 		description: [ 'Start must not exceed end' ].
@@ -55,8 +61,12 @@ BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex 
 	self
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
 		description: [ 'Start and end must be positive or both zero' ].
-
-	self rope: (rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: aToIndex)
+	
+	aNewRope := rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: aToIndex.
+	self rope: aNewRope.
+	
+	anAttributesCollection do: [ :eachAttribute |
+		self notifyAttributeAdded: eachAttribute from: aFromIndex to: aToIndex ]
 ]
 
 { #category : #'text - attributes' }
