@@ -49,6 +49,13 @@ BlFontWeightAttribute class >> light [
 ]
 
 { #category : #'instance creation' }
+BlFontWeightAttribute class >> medium [
+	^ self new
+		weight: LogicalFont weightMedium;
+		yourself
+]
+
+{ #category : #'instance creation' }
 BlFontWeightAttribute class >> normal [
 	^ self new
 		weight: LogicalFont weightMedium;
