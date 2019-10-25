@@ -45,6 +45,12 @@ TBlAlignable >> alignCenterRight [
 ]
 
 { #category : #'api - alignment' }
+TBlAlignable >> alignNone [
+	self verticalAlignment: BlElementAlignment vertical null.
+	self horizontalAlignment: BlElementAlignment horizontal null
+]
+
+{ #category : #'api - alignment' }
 TBlAlignable >> alignTopCenter [
 	self verticalAlignment: BlElementAlignment vertical start.
 	self horizontalAlignment: BlElementAlignment horizontal center
