@@ -85,5 +85,7 @@ BlCachePruningVisitor >> visitFile: anEntry [
 		oldestSize := oldestSize + anEntry size ].
 	[ oldestSize > reductionSize ] whileTrue: 
 		[ oldestSize := oldestSize - (oldest removeLast size) ].
-	newestOldestTime := oldest last modificationTime
+	oldest ifNotEmpty: 
+		[ newestOldestTime := oldest last modificationTime ]
+	
 ]
