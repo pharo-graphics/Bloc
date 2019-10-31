@@ -19,7 +19,7 @@ BlSpartaSkiaCanvasBuilder class >> extent: aPoint [
 BlSpartaSkiaCanvasBuilder class >> isSupported [
 	<return: #Boolean>
 	
-	^ (self environment includesKey: #SkiaCanvas) and: [ (self environment at: #SkiaCanvas) isSupported ]
+	^ (self environment includesKey: #MozSkiaCanvas) and: [ (self environment at: #MozSkiaCanvas) isSupported ]
 ]
 
 { #category : #accessing }
@@ -32,7 +32,7 @@ BlSpartaSkiaCanvasBuilder class >> label [
 BlSpartaSkiaCanvasBuilder class >> offscreen [
 	<return: #SpartaCanvas>
 
-	^ (self environment at: #SkiaOffscreenCanvas) uniqueInstance
+	^ (self environment at: #MozSkiaOffscreenCanvas) uniqueInstance
 ]
 
 { #category : #accessing }
@@ -81,7 +81,7 @@ BlSpartaSkiaCanvasBuilder >> forFormOn: aRendererSurface [
 { #category : #'instance creation' }
 BlSpartaSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
 	<return: #SpartaCanvas>
-	^ (self class environment at: #SkiaCanvas)
+	^ (self class environment at: #MozSkiaCanvas)
 		extent:
 			aRendererSurface logicalSize width
 				@ aRendererSurface logicalSize height
