@@ -86,7 +86,7 @@ BlGlutinHost class >> priority [
 
 { #category : #private }
 BlGlutinHost class >> spaceRegistry [
-	^ HostSpaceRegistry ifNil: [ HostSpaceRegistry := WeakIdentityValueDictionary new ]
+	^ HostSpaceRegistry ifNil: [ HostSpaceRegistry := WeakValueDictionary new ]
 ]
 
 { #category : #'api - lifecycle' }
