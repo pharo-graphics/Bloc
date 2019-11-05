@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #examples }
@@ -118,38 +118,6 @@ BlInfiniteExample class >> exampleGallery [
 	space root background: Color veryVeryDarkGray.
 	space root layout: BlLinearLayout horizontal.
 	space root layout weightSum: 1.
-	space show
-]
-
-{ #category : #examples }
-BlInfiniteExample class >> text [
-	"Does not work"
-	| space list container |
-	space := BlSpace new
-		extent: 550 @ 750;
-		title: 'Infinite list example'.
-
-	container := BlElement new
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself.	
-	
-	list := BlInfiniteExampleTextListElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself.
-
-	container addChildren: { list }.
-	space root addChild: container.
-	space root addEventHandler:
-			(BlEventHandler
-				on: BlDoubleClickEvent
-				do: [ :evt | BlElementSelection on: evt target ]).
-	space root
-		addChild: (BlBenchmarkConsole on:space).
 	space show
 ]
 
