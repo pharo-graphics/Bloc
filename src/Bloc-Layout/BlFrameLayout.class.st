@@ -229,9 +229,21 @@ BlFrameLayout >> measureChildren: anElement with: anExtentSpec [
 			shouldMeasureChild
 				"measure now"
 				ifTrue: [
+					| aWeightX aWeightY aProportionX aProportionY |
 					self measureChild: aChild of: anElement with: aConstrainedExtentSpec.
-					maxWidth := maxWidth max: (aChild measuredWidth * aChild constraints frame horizontal weight + aChild outsets width).
-					maxHeight := maxHeight max: (aChild measuredHeight * aChild constraints frame vertical weight + aChild outsets height) ]
+					
+					aWeightX := aChild constraints frame horizontal weight.
+					aWeightY := aChild constraints frame vertical weight.
+					aProportionX := aWeightX isZero
+						ifTrue: [ 0.0 ]
+						ifFalse: [ 1.0 / aWeightX ].
+						
+					aProportionY := aWeightY isZero
+						ifTrue: [ 0.0 ]
+						ifFalse: [ 1.0 / aWeightY ].
+					
+					maxWidth := maxWidth max: (aChild measuredWidth * aProportionX + aChild outsets width).
+					maxHeight := maxHeight max: (aChild measuredHeight * aProportionY + aChild outsets height) ]
 				"or during second pass"
 				ifFalse: [ matchParentChildren add: aChild ] ].
 	
