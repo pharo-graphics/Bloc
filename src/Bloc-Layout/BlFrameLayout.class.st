@@ -230,8 +230,8 @@ BlFrameLayout >> measureChildren: anElement with: anExtentSpec [
 				"measure now"
 				ifTrue: [
 					self measureChild: aChild of: anElement with: aConstrainedExtentSpec.
-					maxWidth := maxWidth max: (aChild measuredWidth + aChild outsets width).
-					maxHeight := maxHeight max: (aChild measuredHeight + aChild outsets height) ]
+					maxWidth := maxWidth max: (aChild measuredWidth * aChild constraints frame horizontal weight + aChild outsets width).
+					maxHeight := maxHeight max: (aChild measuredHeight * aChild constraints frame vertical weight + aChild outsets height) ]
 				"or during second pass"
 				ifFalse: [ matchParentChildren add: aChild ] ].
 	
