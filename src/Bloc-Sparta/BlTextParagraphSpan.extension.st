@@ -9,8 +9,8 @@ BlTextParagraphSpan >> applySpartaMetrics: aSpMetrics [
 
 	isVertical := aSpMetrics isVertical.
 
-	ascent := aFontMetrics maxAscent.
-	descent := aFontMetrics maxDescent.
+	ascent := aFontMetrics ascent.
+	descent := aFontMetrics descent.
 
 	strikethroughOffset := aFontMetrics strikeoutOffset.
 	strikethroughSize := aFontMetrics strikeoutSize.

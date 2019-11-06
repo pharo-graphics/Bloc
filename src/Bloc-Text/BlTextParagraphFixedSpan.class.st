@@ -48,7 +48,7 @@ BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 		aMeasuredWidth := theBounds width.
 		aMeasuredWidth isZero
 			ifTrue: [ aMeasuredWidth := aCharacterWidth ].
-		aMeasuredHeight := theMetrics fontMetrics maxAscent + theMetrics fontMetrics maxDescent.
+		aMeasuredHeight := theMetrics fontMetrics ascent + theMetrics fontMetrics descent.
 		aMeasuredHeight isZero
 			ifTrue: [ aMeasuredHeight := aCharacterHeight ].
 		
@@ -66,7 +66,7 @@ BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 			by: [ :aTransform |
 				aTransform translateBy: eachBaseline.
 				aTransform scaleBy: aHeightScale.
-				aTransform translateBy: (theBounds origin x negated @ theMetrics fontMetrics maxAscent) + ((aCharacterWidth / aHeightScale) - (theBounds width) / 2.0 @ 0) ]
+				aTransform translateBy: (theBounds origin x negated @ theMetrics fontMetrics ascent) + ((aCharacterWidth / aHeightScale) - (theBounds width) / 2.0 @ 0) ]
 			during: [ aTextPainter draw ].
 		
 		
