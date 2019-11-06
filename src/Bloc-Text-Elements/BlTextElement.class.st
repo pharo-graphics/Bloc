@@ -167,7 +167,7 @@ BlTextElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
 
 	aBaselineOffset := self baselineOffset.
 
-	anAscentOffset := aBaselineOffset - paragraph ascent.
+	anAscentOffset := aBaselineOffset + paragraph ascent.
 	aDescentOffset := aBaselineOffset + paragraph descent.
 
 	aCanvas stroke

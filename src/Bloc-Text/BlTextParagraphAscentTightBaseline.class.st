@@ -8,5 +8,5 @@ Class {
 BlTextParagraphAscentTightBaseline >> computedBaseline: aTextParagraph [
 	<return: #Point>
 
-	^ aTextParagraph left negated @ aTextParagraph ascent
+	^ aTextParagraph left negated @ aTextParagraph ascent abs
 ]

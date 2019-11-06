@@ -73,7 +73,7 @@ BlSingleLineTextParagraph >> line [
 
 { #category : #'paragraph - geometry' }
 BlSingleLineTextParagraph >> looseBounds [
-	^ 0 @ 0 extent: self line advance @ (self ascent + self descent)
+	^ 0 @ 0 extent: self line advance @ (self ascent abs + self descent)
 ]
 
 { #category : #'paragraph - measuring' }

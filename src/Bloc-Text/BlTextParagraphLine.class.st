@@ -143,7 +143,7 @@ BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterHorizontal: aPrevious
 	width := aLastSpan baseline x + aLastSpan left + aLastSpan width.
 	advance := advance + aLastSpan advance.
 
-	ascent := ascent max: aLastSpan ascent.
+	ascent := ascent min: aLastSpan ascent.
 	descent := descent max: aLastSpan descent.
 
 	to := aLastSpan to
