@@ -7,7 +7,7 @@ BlTextParagraphSpan >> applySpartaMetrics: aSpMetrics [
 	aFontMetrics := aSpMetrics fontMetrics.
 	aTextMetrics := aSpMetrics textMetrics.
 
-	isVertical := aSpMetrics isVertical.
+	isVertical := false.
 
 	ascent := aFontMetrics ascent.
 	descent := aFontMetrics descent.
@@ -44,8 +44,6 @@ BlTextParagraphSpan >> drawOnSpartaCanvas: aCanvas [
 
 	aTextPainter
 		text: self textRun;
-		start: self textRunStart;
-		end: self textRunEnd;
 		baseline: self baseline;
 		ensureFont;
 		draw.
