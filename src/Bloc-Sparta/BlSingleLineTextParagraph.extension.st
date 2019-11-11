@@ -1,13 +1,6 @@
 Extension { #name : #BlSingleLineTextParagraph }
 
 { #category : #'*Bloc-Sparta' }
-BlSingleLineTextParagraph >> createSpartaTextPainter: aBrSpan on: aSpartaCanvas [
-	^ (super createSpartaTextPainter: aBrSpan on: aSpartaCanvas)
-		breakNone;
-		yourself
-]
-
-{ #category : #'*Bloc-Sparta' }
 BlSingleLineTextParagraph >> drawOnSpartaCanvas: aCanvas [	
 	self line drawOnSpartaCanvas: aCanvas
 ]
@@ -27,8 +20,8 @@ BlSingleLineTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas [
 		aSelectionStartSpan := self spanAtIndex: aStart.
 		aSelectionEndSpan := self spanAtIndex: anEnd.
 
-		aSelectionStartPosition := aSelectionStartSpan positionAt: aStart.
-		aSelectionEndPosition := aSelectionEndSpan positionAt: anEnd.
+		aSelectionStartPosition := aSelectionStartSpan positionAt: aStart on: aCanvas.
+		aSelectionEndPosition := aSelectionEndSpan positionAt: anEnd on: aCanvas.
 
 		aSelectionBounds := (aSelection to > self text size)
 			ifTrue: [ (aSelectionStartPosition x @ 0) corner: self containerExtent ]

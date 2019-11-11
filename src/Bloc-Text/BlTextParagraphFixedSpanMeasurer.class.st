@@ -23,13 +23,6 @@ Class {
 	#category : #'Bloc-Text-Text-Mocked'
 }
 
-{ #category : #measurement }
-BlTextParagraphFixedSpanMeasurer >> applyMetricsOn: aParagraphSpan [
-	"Apply metrics on a given paragrah span taking into account its transformation if one exists"
-	
-	aParagraphSpan applyFixedMetrics: self
-]
-
 { #category : #accessing }
 BlTextParagraphFixedSpanMeasurer >> ascent [
 	<return: #Number>
@@ -44,7 +37,7 @@ BlTextParagraphFixedSpanMeasurer >> ascent: aNumber [
 
 { #category : #'instance creation' }
 BlTextParagraphFixedSpanMeasurer >> createParagraphSpan [
-	^ BlTextParagraphFixedSpan new
+	^ BlTextParagraphFixedSpan new measurer: self
 ]
 
 { #category : #accessing }
@@ -88,49 +81,27 @@ BlTextParagraphFixedSpanMeasurer >> initialize [
 	ascent := 11.
 	descent := 4.
 	height := 13.
-	glyphWidth := 5.
-	textOffset := 0
+	glyphWidth := 5
 ]
 
 { #category : #measurement }
-BlTextParagraphFixedSpanMeasurer >> measure: aTextRun from: aTextRunStart to: aTextRunEnd width: aWidth [
-	| metricsLength howManyGlyphsFit measuredLength |
-	"Measure a given text run from provided start to the end indices limiting available with to aWidth"
+BlTextParagraphFixedSpanMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
+	<return: #BlTextParagraphSpan>
+	| aTextRun aParagraphSpan |
 
-	self
-		assert: [ aTextRun isNotEmpty or: [ aTextRunStart isZero and: [ aTextRunEnd isZero ] ] ]
-		description: [ 'If text run is empty start and end indices must be zero (end may be infinite)' ].
+	aParagraphSpan := self createParagraphSpan.
+	aTextRun := (String streamContents: [ :aStream | aBlSpan do: [ :anItem | anItem textRunOn: aStream ] ]).
 
-	self
-		assert: [ aTextRunStart isInfinite not ]
-		description: [ 'Text run start must be finite' ].
+	measuredWidth := aTextRun size * self glyphWidth.
+	measuredHeight := self height * aTextRun size isZero not asBit.
 
-	self
-		assert: [ (aTextRunStart between: 1 and: aTextRun size) or: [ aTextRun isEmpty ] ]
-		description: [ 'Text run start must be less or equal to text run length' ].
-
-	self
-		assert: [ aTextRunEnd isInfinite not ]
-		description: [ 'Text run end must be finite' ].
-
-	self
-		assert: [ (aTextRunEnd between: 1 and: aTextRun size) or: [ aTextRun isEmpty ] ]
-		description: [ 'Text run end must be less or equal to text run length' ].
+	aParagraphSpan applyFixedMetrics: self.
 	
-	metricsLength := aTextRun isEmpty
-		ifTrue: [ 0 ]
-		ifFalse: [ aTextRunEnd - aTextRunStart + 1 ].
+	aParagraphSpan textRun: aTextRun
+		start: (1 min: aTextRun size)
+		end: aTextRun size.
 	
-	howManyGlyphsFit := aWidth isInfinite
-		ifTrue: [ metricsLength ]
-		ifFalse: [ (aWidth / self glyphWidth) ceiling ].
-
-	measuredLength := metricsLength min: howManyGlyphsFit.
-	measuredWidth := measuredLength * self glyphWidth.
-	measuredHeight := self height * measuredLength isZero not asBit.
-	
-	textRunStart := aTextRunStart.
-	textRunEnd := aTextRunStart + measuredLength - aTextRun isNotEmpty asBit.
+	^ aParagraphSpan
 ]
 
 { #category : #dispatch }
@@ -147,91 +118,5 @@ BlTextParagraphFixedSpanMeasurer >> measuredHeight [
 
 { #category : #metrics }
 BlTextParagraphFixedSpanMeasurer >> measuredWidth [
-	^ measuredWidth
-]
-
-{ #category : #initialization }
-BlTextParagraphFixedSpanMeasurer >> reset [
-	super reset.
-	
-	measuredWidth := nil.
-	measuredHeight := nil.
-	textRunStart := nil.
-	textRunEnd := nil
-]
-
-{ #category : #initialization }
-BlTextParagraphFixedSpanMeasurer >> span: aBrSpan of: aTextParagraph on: aCanvas [
-	"Prepare and configure me for a given text span within a paragraph"
-
-	textParagraph := aTextParagraph.
-	textSpan := aBrSpan.
-	textRun := aBrSpan asString.
-]
-
-{ #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> spanEnd [
-	"Return an index of a last letter in a original text span that fit in a requested width
-	during last measurement process"
-	<return: #Number>
-	
-	^ textRunEnd
-]
-
-{ #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> spanStart [
-	"Return an index of a first letter in a original text span that was measured during last measurement process"
-	<return: #Number>
-
-	^ textRunStart
-]
-
-{ #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> textOffset [
-	^ textOffset
-]
-
-{ #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> textOffset: aNumber [
-	textOffset := aNumber
-]
-
-{ #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> textRun [
-	"Return a text run for a current text span"
-	<return: #String>
-
-	^ textRun
-]
-
-{ #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> textRunEnd [
-	"Return an index of a last glyph that fits within a limited width set during last measurement process"
-	<return: #Number>
-
-	^ textRunEnd
-]
-
-{ #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> textRunLength [
-	"Return a total amount of glyphs (not characters!) in a text run"
-	<return: #Number>
-
-	^ textRun size
-]
-
-{ #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> textRunStart [
-	"Return an index of a first glyph that was measure during previous measurement process"
-	<return: #Number>
-
-	^ textRunStart
-]
-
-{ #category : #metrics }
-BlTextParagraphFixedSpanMeasurer >> width [
-	"Return a measured width of a text run"
-	<return: #Number>
-
 	^ measuredWidth
 ]

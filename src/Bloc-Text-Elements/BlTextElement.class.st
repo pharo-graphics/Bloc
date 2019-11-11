@@ -137,7 +137,7 @@ BlTextElement >> defaultText [
 
 { #category : #initialization }
 BlTextElement >> defaultTextMeasurer [
-	^ BlTextElementCanvasMeasurer new
+	^ BlTextElementOffscreenCanvasMeasurer new
 ]
 
 { #category : #'selection - management' }
@@ -225,6 +225,13 @@ BlTextElement >> editorMesurement [
 	self deprecated: 'Use `#editorMeasurement` instead'.
 
 	self editorMeasurement
+]
+
+{ #category : #geometry }
+BlTextElement >> indexAtScreenPosition: aPoint [
+	<return: #Number>
+
+	^ self paragraph indexAtPosition: aPoint on: self measurer measurer
 ]
 
 { #category : #initialization }
@@ -410,6 +417,15 @@ BlTextElement >> releaseParagraph [
 	ParagraphPool release: aParagraph.
 	
 	paragraph := nil
+]
+
+{ #category : #geometry }
+BlTextElement >> screenPositionAt: aTextIndex [
+	<return: #Point>
+	| aScreenPosition |
+	
+	aScreenPosition := self paragraph positionAt: aTextIndex on: self measurer measurer.
+	^ aScreenPosition x @ (self height / 2.0)
 ]
 
 { #category : #'selection - management' }

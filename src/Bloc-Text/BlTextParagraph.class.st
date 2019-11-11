@@ -124,7 +124,6 @@ BlTextParagraph >> createMeasurer [
 	^ self defaultMeasurer
 		maxWidth: maxWidth;
 		maxHeight: maxHeight;
-		text: self text;
 		yourself
 ]
 
@@ -209,6 +208,13 @@ BlTextParagraph >> height [
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> indexAtPosition: aPoint [
 	<return: #Number>
+	
+	self deprecated: 'Use indexAtPosition:on:'
+]
+
+{ #category : #'paragraph - geometry' }
+BlTextParagraph >> indexAtPosition: aPoint on: aCanvas [
+	<return: #Number>
 	| aParagraphSpan aPointInSpan |
 
 	aParagraphSpan := self
@@ -218,7 +224,7 @@ BlTextParagraph >> indexAtPosition: aPoint [
 	
 	aPointInSpan := aPoint - aParagraphSpan baseline.
 	
-	^ aParagraphSpan indexAtPosition: aPointInSpan
+	^ aParagraphSpan indexAtPosition: aPointInSpan on: aCanvas
 ]
 
 { #category : #initialization }
@@ -323,11 +329,16 @@ BlTextParagraph >> normalize: aScale [
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> positionAt: anIndex [
+	self deprecated: 'Use positionAt:on:'
+]
+
+{ #category : #'paragraph - geometry' }
+BlTextParagraph >> positionAt: anIndex on: aCanvas [
 	<return: #Point>
 	| aParagraphSpan |
 
 	aParagraphSpan := self spanAtIndex: anIndex.
-	^ aParagraphSpan positionAt: anIndex
+	^ aParagraphSpan positionAt: anIndex on: aCanvas
 ]
 
 { #category : #'paragraph - rendering' }

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'originalText'
 	],
-	#category : 'Bloc-Text-Elements'
+	#category : #'Bloc-Text-Elements'
 }
 
 { #category : #layout }
@@ -18,7 +18,7 @@ BlShrinkingTextElement >> onMeasure: anExtentMeasurementSpec [
 		dotsParagraph := self createTextParagraph.
 		dotsParagraph text: '...' asRopedText.
 		dotsParagraph measureOn: self measurer.
-		toPosition := self paragraph indexAtPosition: (self measuredWidth - (dotsParagraph width)) - 1 @ 1.
+		toPosition := self indexAtScreenPosition: (self measuredWidth - (dotsParagraph width)) - 1 @ 1.
 		toPosition >=1 ifTrue: [
 			cutSubText := self originalText copy from: 1 to: toPosition.
 			text := cutSubText insertString: '...' at: cutSubText size.

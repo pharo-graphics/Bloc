@@ -103,10 +103,16 @@ BlTextParagraphSpan >> finalize [
 
 { #category : #geometry }
 BlTextParagraphSpan >> indexAtPosition: aPoint [
+	self deprecated: 'Use indexAtPosition:on:'
+]
+
+{ #category : #geometry }
+BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
+	"I return a cursor index at a given position as a Point provided in local coordinates of this span"
 	<return: #Number>
 	| aWidth aMeasurer |
 
-	aWidth := (aPoint x) max: 0.
+	aWidth := aPoint x max: 0.
 	aMeasurer := self measurer.
 
 	(aWidth <= 0)
@@ -114,51 +120,56 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 	(aWidth >= self advance)
 		ifTrue: [ ^ self to ].
 
-	^ (self textRunStart to: self textRunEnd)
+	^ (self spanStart to: self spanEnd)
 		findBinary: [ :anIndex |
-			aMeasurer
-				reset;
-				measureSpan: self
-					from: self textRunStart
-					to: anIndex
-					width: self advance.
-			(aWidth - aMeasurer width) sign ]
+			| aSubSpan aParagraph |
+			
+			aSubSpan := BlSpan
+				text: (span text from: (1 min: anIndex) to: anIndex)
+				attributes: self span attributes.
+			
+			aParagraph := aMeasurer
+				measureSpan: aSubSpan
+				on: aCanvas.
+			(aWidth - aParagraph width) sign ]
 		"exact match"
-		do: [ :anIndex | self from + aMeasurer spanEnd - 1 ]
+		do: [ :anIndex | self from + anIndex - 1 ]
 
 		"need to measure a bit more"
 		ifNone: [ :a :b |
 			| leftIndex rightIndex leftWidth leftSpanIndex rightWidth rightSpanIndex spanIndex |
-			leftIndex := a ifNil: [ self textRunStart - 1 ].
-			rightIndex := b ifNil: [ self textRunEnd + 1 ].
+			leftIndex := a ifNil: [ self spanStart - 1 ].
+			rightIndex := b ifNil: [ self spanEnd + 1 ].
 			
-			leftIndex < self textRunStart
+			leftIndex < self spanStart
 				ifTrue: [
 					leftWidth := 0.
 					leftSpanIndex := (self spanStart - 1) max: 0 ]
 				ifFalse: [
-					aMeasurer
-						reset;
-						measureSpan: self
-							from: self textRunStart
-							to: leftIndex
-							width: self advance.
-					leftWidth := aMeasurer width.
-					leftSpanIndex := aMeasurer spanEnd ].
+					| aSubSpan aParagraph |
+					aSubSpan := BlSpan
+						text: (span text from: (1 min: leftIndex) to: leftIndex)
+						attributes: self span attributes.
+					aParagraph := aMeasurer
+						measureSpan: aSubSpan
+						on: aCanvas.
+					leftWidth := aParagraph width.
+					leftSpanIndex := leftIndex ].
 
-			rightIndex > self textRunEnd
+			rightIndex > self spanEnd
 				ifTrue: [
 					rightWidth := self advance.
 					rightSpanIndex := self spanEnd ]
 				ifFalse: [
-					aMeasurer
-						reset;
-						measureSpan: self
-							from: self textRunStart
-							to: rightIndex
-							width: self advance.
-					rightWidth := aMeasurer width.
-					rightSpanIndex := aMeasurer spanEnd ].
+					| aSubSpan aParagraph |
+					aSubSpan := BlSpan
+						text: (span text from: (1 min: rightIndex) to: rightIndex)
+						attributes: self span attributes.
+					aParagraph := aMeasurer
+						measureSpan: aSubSpan
+						on: aCanvas.
+					rightWidth := aParagraph width.
+					rightSpanIndex := rightIndex ].
 
 			spanIndex := aWidth <= (leftWidth + ((rightWidth - leftWidth) / 2.0))
 				ifTrue: [ leftSpanIndex ]
@@ -223,8 +234,13 @@ BlTextParagraphSpan >> normalize: aScale [
 
 { #category : #geometry }
 BlTextParagraphSpan >> positionAt: anIndex [
+	self deprecated: 'Use positionAt:on:'
+]
+
+{ #category : #geometry }
+BlTextParagraphSpan >> positionAt: anIndex on: aCanvas [
 	<return: #Point>
-	| aSpanIndex aSpanIterator currentEnd transformedSpanIndex aMeasurer aPositionY aPositionX |
+	| aSpanIndex aSubSpan aMeasuredSpan aMeasurer aPositionY aPositionX |
 
 	aPositionY := self baseline y.
 	aPositionX := self baseline x.
@@ -235,29 +251,20 @@ BlTextParagraphSpan >> positionAt: anIndex [
 		ifTrue: [ ^ (aPositionX + self advance) @ aPositionY ].
 
 	aSpanIndex := anIndex - self from + 1.
-	aSpanIterator := span iterator: 1 to: aSpanIndex.	
-	
-	currentEnd := 0.
-	transformedSpanIndex := 0.
-	[ aSpanIterator hasNext and: [ currentEnd < aSpanIndex ] ]
-		whileTrue: [ (aSpanIterator next = Character tab)
-			ifTrue: [ transformedSpanIndex := transformedSpanIndex + 3 ]	"3 is how many spaces one tab is. #FIXME"
-			ifFalse: [ transformedSpanIndex := transformedSpanIndex + 1 ].
-			currentEnd := currentEnd + 1 ].
+	aSpanIndex isZero
+		ifTrue: [ ^ aPositionX @ aPositionY ].
 
 	aMeasurer := self measurer.
 
-	transformedSpanIndex isZero
-		ifTrue: [ ^ aPositionX @ aPositionY ].
-	
-	aMeasurer
-		reset;
-		measureSpan: self
-			from: 1
-			to: transformedSpanIndex
-			width: Float infinity.
+	aSubSpan := BlSpan
+		text: (span text from: (1 min: aSpanIndex) to: aSpanIndex)
+		attributes: self span attributes.
+
+	aMeasuredSpan := aMeasurer
+		measureSpan: aSubSpan
+		on: aCanvas.
 		
-	^ (aPositionX + aMeasurer width) @ aPositionY
+	^ (aPositionX + aMeasuredSpan width) @ aPositionY
 ]
 
 { #category : #printing }

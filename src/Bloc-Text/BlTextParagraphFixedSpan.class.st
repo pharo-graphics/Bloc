@@ -70,16 +70,15 @@ BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 			during: [ aTextPainter draw ].
 		
 		
-		measurer textOffset isZero ifTrue: [
 			aSpartaCanvas text
-				string: (anIndex + measurer textOffset - 1) asString;
+				string: (anIndex - 1) asString;
 				font: (aSpartaCanvas font size: aCharacterHeight * 0.22; build);
 				baseline: ((eachBaseline x - 2) @ (self height - 1));
 				paint: Color gray;
-				draw ].
+				draw.
 
 		aSpartaCanvas text
-			string: (anIndex + measurer textOffset) asString;
+			string: (anIndex) asString;
 			font: (aSpartaCanvas font size: aCharacterHeight * 0.22; build);
 			baseline: ((eachBaseline x + aCharacterWidth - 2) @ (self height - 1));
 			paint: Color gray;
