@@ -32,16 +32,25 @@ BlElementLocalBounds >> center [
 
 { #category : #accessing }
 BlElementLocalBounds >> extent [
+	<return: #Point>
+
 	^ extent
 ]
 
 { #category : #accessing }
-BlElementLocalBounds >> extent: anObject [
-	extent := anObject
+BlElementLocalBounds >> extent: aPoint [
+
+	self
+		assert: [ aPoint isNotNil ]
+		description: [ 'Extent must not be nil' ].
+
+	extent := aPoint
 ]
 
 { #category : #accessing }
 BlElementLocalBounds >> height [
+	<return: #Number>
+
 	^ self extent y
 ]
 
@@ -121,8 +130,12 @@ BlElementLocalBounds >> position [
 ]
 
 { #category : #accessing }
-BlElementLocalBounds >> position: anObject [
-	position := anObject
+BlElementLocalBounds >> position: aPoint [
+	self
+		assert: [ aPoint isNotNil ]
+		description: [ 'Position must not be nil' ].
+	
+	position := aPoint
 ]
 
 { #category : #'geometry bounds' }
@@ -134,5 +147,7 @@ BlElementLocalBounds >> transformed [
 
 { #category : #accessing }
 BlElementLocalBounds >> width [
+	<return: #Number>
+
 	^ self extent x
 ]
