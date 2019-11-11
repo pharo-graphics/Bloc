@@ -28,7 +28,7 @@ BlSpartaRenderer class >> availableCanvasBuilderClasses [
 BlSpartaRenderer class >> defaultCanvasBuilder [
 	<return: #BlSpartaCanvasBuilder>
 
-	^ defaultCanvasBuilder ifNil: [ defaultCanvasBuilder := self pickCanvasBuilderClass new ]
+	^ defaultCanvasBuilder ifNil: [ self pickCanvasBuilderClass new ]
 ]
 
 { #category : #accessing }

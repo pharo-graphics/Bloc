@@ -1,14 +1,16 @@
 "
-I build sparta canvas using Skia backend
+I am a copy of class BlSpartaMozCanvasBuilder. This comment is copied from there, and might not be entirely accurate
+
+I build sparta canvas using Moz2D backend
 "
 Class {
-	#name : #BlSpartaSkiaCanvasBuilder,
+	#name : #BlSpartaMozSkiaCanvasBuilder,
 	#superclass : #BlSpartaCanvasBuilder,
 	#category : #'Bloc-Sparta'
 }
 
 { #category : #'api - instance creation' }
-BlSpartaSkiaCanvasBuilder class >> extent: aPoint [
+BlSpartaMozSkiaCanvasBuilder class >> extent: aPoint [
 	"Create a default canvas of a given size that should be used for output on screen"
 	<return: #SpartaCanvas>
 	
@@ -16,32 +18,32 @@ BlSpartaSkiaCanvasBuilder class >> extent: aPoint [
 ]
 
 { #category : #accessing }
-BlSpartaSkiaCanvasBuilder class >> isSupported [
+BlSpartaMozSkiaCanvasBuilder class >> isSupported [
 	<return: #Boolean>
 	
 	^ (self environment includesKey: #MozSkiaCanvas) and: [ (self environment at: #MozSkiaCanvas) isSupported ]
 ]
 
 { #category : #accessing }
-BlSpartaSkiaCanvasBuilder class >> label [
+BlSpartaMozSkiaCanvasBuilder class >> label [
 	<return: #String>
-	^ 'Skia'
+	^ 'Moz2D - Skia'
 ]
 
 { #category : #'instance creation' }
-BlSpartaSkiaCanvasBuilder class >> offscreen [
+BlSpartaMozSkiaCanvasBuilder class >> offscreen [
 	<return: #SpartaCanvas>
 
 	^ (self environment at: #MozSkiaOffscreenCanvas) uniqueInstance
 ]
 
 { #category : #accessing }
-BlSpartaSkiaCanvasBuilder class >> priority [
+BlSpartaMozSkiaCanvasBuilder class >> priority [
 	^ 10
 ]
 
 { #category : #testing }
-BlSpartaSkiaCanvasBuilder class >> supportsBufferSurface [
+BlSpartaMozSkiaCanvasBuilder class >> supportsBufferSurface [
 	"Return true if this canvas builder can work with a buffer surface, false otherwise"
 	<return: #Boolean>
 	
@@ -49,7 +51,7 @@ BlSpartaSkiaCanvasBuilder class >> supportsBufferSurface [
 ]
 
 { #category : #testing }
-BlSpartaSkiaCanvasBuilder class >> supportsFormSurface [
+BlSpartaMozSkiaCanvasBuilder class >> supportsFormSurface [
 	"Return true if this canvas builder can work with form surface, false otherwise"
 	<return: #Boolean>
 	
@@ -57,7 +59,7 @@ BlSpartaSkiaCanvasBuilder class >> supportsFormSurface [
 ]
 
 { #category : #testing }
-BlSpartaSkiaCanvasBuilder class >> supportsOpenGLSurface [
+BlSpartaMozSkiaCanvasBuilder class >> supportsOpenGLSurface [
 	"Return true if this renderer can work with OpenGL surface, false otherwise"
 	<return: #Boolean>
 	
@@ -65,21 +67,29 @@ BlSpartaSkiaCanvasBuilder class >> supportsOpenGLSurface [
 ]
 
 { #category : #'instance creation' }
-BlSpartaSkiaCanvasBuilder >> forBufferOn: aRendererSurface [
+BlSpartaMozSkiaCanvasBuilder >> forBufferOn: aRendererSurface [
 	<return: #SpartaCanvas>
-	
-	^ self shouldNotImplement
+
+	^ (self class environment at: #SkiaCanvas)
+		createForData: aRendererSurface buffer
+		extent: aRendererSurface extent
+		stride: aRendererSurface stride
+		format: (self class environment at: #SkiaColorType) BGRA8888
 ]
 
 { #category : #'instance creation' }
-BlSpartaSkiaCanvasBuilder >> forFormOn: aRendererSurface [
+BlSpartaMozSkiaCanvasBuilder >> forFormOn: aRendererSurface [
 	<return: #SpartaCanvas>
-	
-	^ self shouldNotImplement
+
+	^ (self class environment at: #SkiaCanvas)
+		createForData: aRendererSurface pointer
+		extent: aRendererSurface extent
+		stride: aRendererSurface stride
+		format: (self class environment at: #SkiaColorType) BGRA8888
 ]
 
 { #category : #'instance creation' }
-BlSpartaSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
+BlSpartaMozSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
 	<return: #SpartaCanvas>
 	^ (self class environment at: #MozSkiaCanvas)
 		extent:
