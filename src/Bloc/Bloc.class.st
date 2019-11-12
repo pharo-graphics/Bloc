@@ -111,8 +111,7 @@ Bloc class >> preferableHostClass: aHostClass [
 
 { #category : #accessing }
 Bloc class >> preferableSpartaCanvas [
-	^ PreferableSpartaCanvasBuilder ifNil: [
-		PreferableSpartaCanvasBuilder := (self environment at: #BlSpartaRenderer) defaultCanvasBuilder class ]
+	^ PreferableSpartaCanvasBuilder ifNil: [ (self environment at: #BlSpartaRenderer) defaultCanvasBuilder class ]
 ]
 
 { #category : #accessing }
