@@ -28,7 +28,7 @@ TBlDrawingCache >> drawMeWithEffectsOnCanvas: aCanvas [
 			by: [ :aTransform | aTransform scaleBy: aGlobalToLocalScale asPoint ]
 			during: [ super drawMeWithEffectsOnCanvas: aCachedCanvas ].
 
-		self cachedSurface: aCachedCanvas surface.
+		self cachedSurface: aCachedCanvas snapshot.
 		aCachedCanvas release ].
 
 	aCanvas transform
