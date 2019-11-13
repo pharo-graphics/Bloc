@@ -84,7 +84,7 @@ BlSpartaSkiaCanvasBuilder >> forBufferOn: aRendererSurface [
 		createForData: aRendererSurface buffer
 		extent: aRendererSurface extent
 		stride: aRendererSurface stride
-		format: (self class environment at: #SkiaColorType) RGBA8888
+		format: (self class environment at: #SkiaColorType) BGRA8888
 ]
 
 { #category : #'instance creation' }
@@ -95,7 +95,7 @@ BlSpartaSkiaCanvasBuilder >> forFormOn: aRendererSurface [
 		createForData: aRendererSurface pointer
 		extent: aRendererSurface extent
 		stride: aRendererSurface stride
-		format: (self class environment at: #SkiaColorType) RGBA8888
+		format: (self class environment at: #SkiaColorType) BGRA8888
 ]
 
 { #category : #'instance creation' }
