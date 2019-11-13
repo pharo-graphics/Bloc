@@ -56,7 +56,7 @@ BlAsyncElementValuable >> entryPriority [
 
 	element isAttachedToSceneGraph ifFalse: 
 		"The element is probably being inspected, assume that's what the user wants to see"
-		[ ^0 ].
+		[ ^1 ].
 
 	"If a priority has been specified, use that"
 	element priority ifNotNil: [ ^element priority ].

@@ -26,7 +26,8 @@ Class {
 	#superclass : #BlAsyncElement,
 	#instVars : [
 		'entry',
-		'bitmap'
+		'bitmap',
+		'preLoad'
 	],
 	#category : #'Bloc-Images-Elements'
 }
@@ -105,12 +106,15 @@ BlAsyncImageElement >> form [
 BlAsyncImageElement >> needsUpdate [
 	"Answer a boolean indicating whether the current form is too small or too large"
 
-	| currentExtent formSize currentSize ratio |
+	| currentExtent formSize currentSize ratio noExtent |
 
-	super needsUpdate ifFalse: [ ^false ].
+	asyncException ifNotNil: [ ^false ].
 	currentExtent := self extent.
-	(currentExtent isNil or: [ currentExtent = (0@0) ]) ifTrue: [ ^false ].
+	noExtent := currentExtent isNil or: [ currentExtent = (0@0) ].
+	"If not pre-loading, and the image is zero size, no need to update"
+	(preLoad isNil and: [ noExtent ]) ifTrue: [ ^false ].
 	entry ifNil: [ ^true ].
+	noExtent ifTrue: [ ^false ].
 	formSize := (entry form width * entry form height) asFloat.
 	currentSize := (currentExtent x * currentExtent y) asFloat.
 	ratio := currentSize / formSize.
@@ -118,7 +122,7 @@ BlAsyncImageElement >> needsUpdate [
 	- The current size is significantly smaller than the form and the form isn't the smallest available, OR
 	- The current size is significantly larger than the form and the form isn't the original"
 	^(ratio < 0.25 and: [ entry isSmallest not ]) or:
-		[ ratio > 4 and: [ entry isOriginal not ] ]
+		[ ratio > 1.1 and: [ entry isOriginal not ] ]
 
 ]
 
@@ -127,6 +131,16 @@ BlAsyncImageElement >> onAddedToSceneGraph [
 
 	super onAddedToSceneGraph.
 	self queueAsyncUpdate.
+]
+
+{ #category : #accessing }
+BlAsyncImageElement >> preLoad [
+	^ preLoad
+]
+
+{ #category : #accessing }
+BlAsyncImageElement >> preLoad: anObject [
+	preLoad := anObject
 ]
 
 { #category : #'async processing' }
