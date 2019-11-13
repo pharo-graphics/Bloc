@@ -138,6 +138,11 @@ BlImageCache >> hits [
 	^ hits
 ]
 
+{ #category : #accessing }
+BlImageCache >> imageSizes [
+	^ imageSizes
+]
+
 { #category : #configuration }
 BlImageCache >> imageSizes: anArray [
 	"Set the image sizes to cache.
