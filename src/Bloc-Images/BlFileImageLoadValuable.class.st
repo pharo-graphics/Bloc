@@ -4,7 +4,7 @@ BlFileImageLoadValuable is responsible for loading a single image from disk by p
 "
 Class {
 	#name : #BlFileImageLoadValuable,
-	#superclass : #BlAsyncElementValuable,
+	#superclass : #BlAsyncImageLoadValuable,
 	#instVars : [
 		'file'
 	],
@@ -29,6 +29,6 @@ BlFileImageLoadValuable >> initializeFile: aFileReference element: aBlElement [
 BlFileImageLoadValuable >> updateElement [
 	"Ask the cache to update the receiver's element"
 
-	^BlLocalImageCache current fileAt: file size: self extent max for: element
+	^BlLocalImageCache current fileAt: file size: self cacheSize for: element
 
 ]
