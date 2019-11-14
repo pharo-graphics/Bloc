@@ -5,8 +5,33 @@ Class {
 		'universe',
 		'universeID'
 	],
+	#classInstVars : [
+		'enabled'
+	],
 	#category : #'Bloc-Universe - Parallel'
 }
+
+{ #category : #accessing }
+BlParallelUniverseSignal class >> enableAll: aBoolean [
+	"Enable/disable the receiver and all subclasses"
+
+	self withAllSubclassesDo: [ :each | each enabled: aBoolean ]
+]
+
+{ #category : #accessing }
+BlParallelUniverseSignal class >> enabled [ 
+	"Answer a boolean indicating whether the receiver is enabled.
+	Allow for nil = false"
+
+	^enabled == true
+]
+
+{ #category : #accessing }
+BlParallelUniverseSignal class >> enabled: aBoolean [
+	"Indicate whether the receiver is enabled or not"
+
+	enabled := aBoolean
+]
 
 { #category : #testing }
 BlParallelUniverseSignal class >> isAbstract [
@@ -30,6 +55,12 @@ BlParallelUniverseSignal class >> label [
 BlParallelUniverseSignal class >> nextSignals [
 	"Return a collection of possible signals after this one"
 	^ #()
+]
+
+{ #category : #'instance creation' }
+BlParallelUniverseSignal >> emit [ 
+
+	self class enabled ifTrue: [ super emit ]
 ]
 
 { #category : #accessing }
