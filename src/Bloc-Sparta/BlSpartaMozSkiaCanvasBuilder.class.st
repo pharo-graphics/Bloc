@@ -70,32 +70,30 @@ BlSpartaMozSkiaCanvasBuilder class >> supportsOpenGLSurface [
 BlSpartaMozSkiaCanvasBuilder >> forBufferOn: aRendererSurface [
 	<return: #SpartaCanvas>
 
-	^ (self class environment at: #SkiaCanvas)
+	^ (self class environment at: #MozSkiaCanvas)
 		createForData: aRendererSurface buffer
+		type: (self class environment at: #MozBackendType) SKIA
 		extent: aRendererSurface extent
 		stride: aRendererSurface stride
-		format: (self class environment at: #SkiaColorType) BGRA8888
+		format: (self class environment at: #MozSurfaceFormat) B8G8R8A8
 ]
 
 { #category : #'instance creation' }
 BlSpartaMozSkiaCanvasBuilder >> forFormOn: aRendererSurface [
 	<return: #SpartaCanvas>
 
-	^ (self class environment at: #SkiaCanvas)
+	^ (self class environment at: #MozSkiaCanvas)
 		createForData: aRendererSurface pointer
+		type: (self class environment at: #MozBackendType) SKIA
 		extent: aRendererSurface extent
 		stride: aRendererSurface stride
-		format: (self class environment at: #SkiaColorType) BGRA8888
+		format: (self class environment at: #MozSurfaceFormat) B8G8R8A8
 ]
 
 { #category : #'instance creation' }
 BlSpartaMozSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
 	<return: #SpartaCanvas>
 	^ (self class environment at: #MozSkiaCanvas)
-		extent:
-			aRendererSurface logicalSize width
-				@ aRendererSurface logicalSize height
-		renderExtent:
-			aRendererSurface physicalSize width
-				@ aRendererSurface physicalSize height
+		extent: aRendererSurface logicalSize asPoint
+		renderExtent: aRendererSurface physicalSize asPoint
 ]

@@ -68,7 +68,7 @@ BlSpartaSkiaCanvasBuilder class >> supportsOpenGLSurface [
 	"Return true if this renderer can work with OpenGL surface, false otherwise"
 	<return: #Boolean>
 	
-	^ false
+	^ true
 ]
 
 { #category : #'api - instance creation' }
@@ -101,6 +101,8 @@ BlSpartaSkiaCanvasBuilder >> forFormOn: aRendererSurface [
 { #category : #'instance creation' }
 BlSpartaSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
 	<return: #SpartaCanvas>
-	
-	^ self shouldNotImplement
+
+	^ (self class environment at: #SkiaCanvas)
+		createForRenderTargetExtent: aRendererSurface physicalSize asPoint
+		format: (self class environment at: #SkiaColorType) RGBA8888
 ]
