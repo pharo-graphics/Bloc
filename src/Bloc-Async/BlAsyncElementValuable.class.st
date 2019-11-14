@@ -55,8 +55,8 @@ BlAsyncElementValuable >> entryPriority [
 	| rootBounds elementBounds |
 
 	element isAttachedToSceneGraph ifFalse: 
-		"The element is probably being inspected, assume that's what the user wants to see"
-		[ ^1 ].
+		"The element is being pre-loaded, so is lower priority than on-screen elements"
+		[ ^5000 ].
 
 	"If a priority has been specified, use that"
 	element priority ifNotNil: [ ^element priority ].
