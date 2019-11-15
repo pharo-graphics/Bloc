@@ -3,10 +3,8 @@ I contain examples and a few usecases of ===BlLineElement===
 "
 Class {
 	#name : #BlLineExamples,
-	#superclass : #Object,
-	#traits : 'TBlExample',
-	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Geometry'
+	#superclass : #BlGeometryElementExamples,
+	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #examples }
@@ -97,18 +95,6 @@ BlLineExamples class >> twoLines [
 		openInWindow: self new twoLines
 		named: 'Two lines'
 		extent: 620@600
-]
-
-{ #category : #'instance creation' }
-BlLineExamples >> attachPoint [
-	<gtExample>	
-
-	^ BlElement new
-		geometry: BlEllipse new;
-		size: 30@30;
-		background: (Color blue alpha: 0.3);
-		border: BlBorder empty;
-		addEventHandler: BlPullHandler new
 ]
 
 { #category : #'example - visual properties' }
@@ -205,18 +191,6 @@ BlLineExamples >> connectTwoGridsWith6Lines [
 		addChild: aLeftGridElement;
 		addChild: aRightGridElement;
 		addChildren: lines;
-		yourself
-]
-
-{ #category : #'instance creation' }
-BlLineExamples >> container [
-	<gtExample>
-	
-	^ BlElement new
-		background: Color white;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
 		yourself
 ]
 

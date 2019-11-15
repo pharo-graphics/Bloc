@@ -3,10 +3,8 @@ I contain examples and a few usecases of ===BlArcElement===
 "
 Class {
 	#name : #BlParabollaExamples,
-	#superclass : #Object,
-	#traits : 'TBlExample',
-	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Geometry'
+	#superclass : #BlGeometryElementExamples,
+	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #examples }
@@ -78,18 +76,6 @@ BlParabollaExamples >> arc [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-BlParabollaExamples >> attachPoint [
-	<gtExample>	
-
-	^ BlElement new
-		geometry: BlEllipse new;
-		size: 30@30;
-		background: (Color blue alpha: 0.3);
-		border: BlBorder empty;
-		addEventHandler: BlPullHandler new
-]
-
 { #category : #'examples - visual properties' }
 BlParabollaExamples >> blueArc [
 	<gtExample>
@@ -139,18 +125,6 @@ BlParabollaExamples >> bottomToTopBidirectional [
 	aCurveUp toAnchor: (BlElementTopCenterAnchor element: anElement).
 
 	^ self container addChildren: { anElement . aCurveDown . aCurveUp }
-]
-
-{ #category : #'instance creation' }
-BlParabollaExamples >> container [
-	<gtExample>
-	
-	^ BlElement new
-		background: Color white;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself
 ]
 
 { #category : #'examples - visual properties' }

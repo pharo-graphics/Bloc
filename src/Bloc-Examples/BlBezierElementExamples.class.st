@@ -17,9 +17,7 @@ ${example:BlBezierElementExamples>>#curveWithAnchors|expandedPreview|noCode=|sho
 "
 Class {
 	#name : #BlBezierElementExamples,
-	#superclass : #Object,
-	#traits : 'TBlExample',
-	#classTraits : 'TBlExample classTrait',
+	#superclass : #BlGeometryElementExamples,
 	#category : #'Bloc-Examples-Geometry'
 }
 
@@ -61,30 +59,6 @@ BlBezierElementExamples class >> quadraticCurveWithPerpendicularFractionAnchor [
 		self new quadraticCurveWithPerpendicularFractionAnchor
 		named: 'Drag control points'
 		extent: 550@500
-]
-
-{ #category : #'instance creation' }
-BlBezierElementExamples >> attachPoint [
-	<gtExample>	
-
-	^ BlElement new
-		geometry: BlEllipse new;
-		size: 30@30;
-		background: (Color blue alpha: 0.3);
-		border: BlBorder empty;
-		addEventHandler: BlPullHandler new
-]
-
-{ #category : #'instance creation' }
-BlBezierElementExamples >> container [
-	<gtExample>
-	
-	^ BlElement new
-		background: Color white;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself
 ]
 
 { #category : #'instance creation' }

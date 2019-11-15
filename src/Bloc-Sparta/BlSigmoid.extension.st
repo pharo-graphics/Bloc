@@ -2,7 +2,7 @@ Extension { #name : #BlSigmoid }
 
 { #category : #'*Bloc-Sparta' }
 BlSigmoid >> buildPathOnSpartaCanvas: aCanvas [
-	aCanvas path
+	^ aCanvas path
 		moveTo: from;
 		curveVia: fromControl
 			and: toControl

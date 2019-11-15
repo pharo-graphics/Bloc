@@ -4,6 +4,19 @@ Class {
 	#category : #'Bloc-Geometry-Curves'
 }
 
+{ #category : #accessing }
+BlSigmoidElement >> bendingPoint: aFloatNumber [
+	self geometry bendingPoint: aFloatNumber.
+	self invalidate
+]
+
+{ #category : #initialization }
+BlSigmoidElement >> defaultGeometry [
+	<return: #BlGeometry>
+
+	^ BlSigmoid new
+]
+
 { #category : #'anchor - geometry' }
 BlSigmoidElement >> fromDirection [
 	"Return a vector representing a direction in which start of the curve is pointing"
@@ -33,6 +46,12 @@ BlSigmoidElement >> measureGeometry [
 	aDelta := self fromPosition min: self toPosition.
 	
 	self geometry from: aDecoratedFromPoint - aDelta to: aDecoratedToPoint - aDelta
+]
+
+{ #category : #accessing }
+BlSigmoidElement >> sharpness: aFloatNumber [
+	self geometry sharpness: aFloatNumber.
+	self invalidate
 ]
 
 { #category : #'anchor - geometry' }
