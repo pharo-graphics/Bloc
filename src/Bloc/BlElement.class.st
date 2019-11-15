@@ -983,6 +983,23 @@ BlElement >> detachChild: anElement [
 	self children remove: anElement
 ]
 
+{ #category : #'children add/remove' }
+BlElement >> detachFromParentWhile: aBlock [
+	"Detach myself from a parent while evaluating a given block.
+	I attach myself at the same position as before.
+	Directly evaluate a block if I don't have a parent"
+	
+	self hasParent
+		ifFalse: [ aBlock value ]
+		ifTrue: [
+			| aParentElement aChildIndex |
+			
+			aParentElement := self parent.
+			aChildIndex := aParentElement childIndexOf: self.
+			aParentElement detachChild: self.
+			[ aBlock value ] ensure: [ aParentElement attachChild: self at: aChildIndex ] ]
+]
+
 { #category : #'children dispatching' }
 BlElement >> dispatchAddedToParent [
 	"Sent after I was added to another element as direct child.
