@@ -1689,6 +1689,11 @@ BlElement >> invalidate [
 	self isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
 
+	"If I don't have a parent and I am not the root of the space it means
+	that I am detached from space. no need to invalidate (users probably know what they are doing)"
+	(self hasParent not and: [ self space root ~~ self ])
+		ifTrue: [ ^ self ].
+
 	self invalidRect: (self invalidationBounds: self class invalidationBounds)
 
 ]
