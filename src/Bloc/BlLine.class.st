@@ -5,11 +5,10 @@ Class {
 	#name : #BlLine,
 	#superclass : #BlGeometry,
 	#instVars : [
-		'width',
 		'from',
 		'to'
 	],
-	#category : 'Bloc-Geometry-Curves'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'instance creation' }
