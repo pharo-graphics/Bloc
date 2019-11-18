@@ -53,6 +53,10 @@ BlSpartaRenderer class >> pickCanvasForSurface: aSurface [
 	<return: #BlSpartaCanvasBuilder>
 	| theCanvases theSupportedCanvases |
 	
+	defaultCanvasBuilder ifNotNil: [ :aCanvasBuilder |
+		(aSurface class supportedBy: aCanvasBuilder class)
+			ifTrue: [ ^ defaultCanvasBuilder ] ].
+	
 	theCanvases := self availableCanvasBuilderClasses sorted: [ :a :b | a priority < b priority ].
 	
 	theSupportedCanvases := theCanvases
