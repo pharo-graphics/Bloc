@@ -6,13 +6,16 @@ Class {
 
 { #category : #initialization }
 BlGlutinOpenGLSurfaceRenderer >> initializeForSurface: aSurface [
+	| aPixelFormat |
 	self
 		assert: [ self window isNotNil ]
 		description: [ 'Window must be set!' ].
 
+	aPixelFormat := window pixelFormat.
+
 	aSurface
-		sampleCount: 8;
-		stencilBits: 8;
+		sampleCount: aPixelFormat multisapling;
+		stencilBits: aPixelFormat stencilBits;
 		framebufferId: window gl framebufferId;
 		framebufferFormat: (GlutinGLConstants bindingOf: #GL_RGBA8) value;
 		extent: aSurface physicalSize asPoint
