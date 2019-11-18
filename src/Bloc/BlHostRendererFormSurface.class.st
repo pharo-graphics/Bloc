@@ -58,17 +58,6 @@ BlHostRendererFormSurface >> form: aForm [
 	externalForm := aForm
 ]
 
-{ #category : #initialization }
-BlHostRendererFormSurface >> initializeResourcesOn: aHostRenderer [
-	externalForm := BlExternalForm
-		extent: self physicalSize width @ self physicalSize height
-		depth: 32.
-	externalForm autoRelease.
-	externalForm allocateSpace.
-	externalForm fillColor: Color transparent.
-	self initializeOn: aHostRenderer
-]
-
 { #category : #accessing }
 BlHostRendererFormSurface >> pointer [
 	^ externalForm pointer

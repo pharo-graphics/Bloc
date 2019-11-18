@@ -8,7 +8,11 @@ Class {
 	#superclass : #BlHostRendererSurface,
 	#instVars : [
 		'context',
-		'extent'
+		'extent',
+		'stencilBits',
+		'sampleCount',
+		'framebufferId',
+		'framebufferFormat'
 	],
 	#category : #'Bloc-Universe - Renderer'
 }
@@ -60,10 +64,42 @@ BlHostRendererOpenGLSurface >> extent: anObject [
 	extent := anObject
 ]
 
-{ #category : #initialization }
-BlHostRendererOpenGLSurface >> initializeResourcesOn: aHostRenderer [
-	"Initialize me and host renderer depending on surface type.
-	must be implemented by subclasses"
-	
-	self initializeOn: aHostRenderer
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> framebufferFormat [
+	^ framebufferFormat
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> framebufferFormat: anObject [
+	framebufferFormat := anObject
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> framebufferId [
+	^ framebufferId
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> framebufferId: anObject [
+	framebufferId := anObject
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> sampleCount [
+	^ sampleCount
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> sampleCount: anObject [
+	sampleCount := anObject
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> stencilBits [
+	^ stencilBits
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> stencilBits: anObject [
+	stencilBits := anObject
 ]
