@@ -10,11 +10,15 @@ BlGlutinOpenGLSurfaceRenderer >> initializeForSurface: aSurface [
 		assert: [ self window isNotNil ]
 		description: [ 'Window must be set!' ].
 
-	aSurface extent: aSurface physicalSize asPoint
+	aSurface
+		sampleCount: 8;
+		stencilBits: 8;
+		framebufferId: window gl framebufferId;
+		framebufferFormat: (GlutinGLConstants bindingOf: #GL_RGBA8) value;
+		extent: aSurface physicalSize asPoint
 ]
 
 { #category : #'host space - drawing' }
 BlGlutinOpenGLSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
-	self makeCurrent.
 	self swapBuffers
 ]

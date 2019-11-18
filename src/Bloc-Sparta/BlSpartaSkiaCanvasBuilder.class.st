@@ -100,9 +100,17 @@ BlSpartaSkiaCanvasBuilder >> forFormOn: aRendererSurface [
 
 { #category : #'instance creation' }
 BlSpartaSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
+	| aSkiaBackendRenderTarget |
 	<return: #SpartaCanvas>
 
+	aSkiaBackendRenderTarget := (self class environment at: #SkiaBackendRenderTarget)
+		newGlExtent: aRendererSurface physicalSize asPoint
+		sampleCount: aRendererSurface sampleCount
+		stencilBits: aRendererSurface stencilBits
+		framebufferId: aRendererSurface framebufferId
+		framebufferFormat: aRendererSurface framebufferFormat.
+
 	^ (self class environment at: #SkiaCanvas)
-		createForRenderTargetExtent: aRendererSurface physicalSize asPoint
+		createFromRenderTarget: aSkiaBackendRenderTarget
 		format: (self class environment at: #SkiaColorType) RGBA8888
 ]
