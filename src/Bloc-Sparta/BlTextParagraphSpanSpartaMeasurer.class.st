@@ -26,14 +26,12 @@ BlTextParagraphSpanSpartaMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
 	aTextPainter string: (String streamContents: [ :aStream |
 		aBlSpan do: [ :anItem | anItem textRunOn: aStream ] ]).
 	
-	aSpartaMetrics := aTextPainter metrics.
-	aTextRun := aTextPainter textRun.
+	aSpartaMetrics := SpartaMetrics new.
+	aTextRun := aTextPainter textRunWithMetrics: aSpartaMetrics.
 
 	self
 		assert: [ aTextRun isNull not ]
 		description: [ 'Created text run must not be nullptr' ].
-
-	aTextRun measureOn: aSpartaMetrics.
 
 	aParagraphSpan := self createParagraphSpan.
 	aParagraphSpan applySpartaMetrics: aSpartaMetrics.
