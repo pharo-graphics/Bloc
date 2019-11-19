@@ -149,7 +149,7 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 		when: [ self isTranslucent ]
 		during: [
 			aCanvas transform
-				by: self transformation
+				by: self transformation matrix
 				translated: self position
 				during: [ :aTransformedCanvas |
 					self errorHandler
