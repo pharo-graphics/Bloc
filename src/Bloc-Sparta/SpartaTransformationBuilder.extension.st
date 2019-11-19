@@ -1,19 +1,18 @@
 Extension { #name : #SpartaTransformationBuilder }
 
 { #category : #'*Bloc-Sparta' }
-SpartaTransformationBuilder >> by: aBlElementTransform translated: aPoint during: aBlock [
+SpartaTransformationBuilder >> by: aMatrix translated: aPoint during: aBlock [
 	| needsTransformation needsTranslation  |
 
 	needsTranslation := aPoint isZero not.
-	needsTransformation := aBlElementTransform isIdentity not.
+	needsTransformation := aMatrix isIdentity not.
 	
 	(needsTransformation or: [ needsTranslation ])
 		ifFalse: [ ^ aBlock value: self canvas ].
 	
 	self
 		by: [ :aTransformationBuilder |
-			aTransformationBuilder
-				translateBy: aPoint;
-				multiplyBy: aBlElementTransform ]
+			needsTranslation ifTrue: [ aTransformationBuilder translateBy: aPoint ].
+			needsTransformation ifTrue: [ aTransformationBuilder multiplyBy: aMatrix ] ]
 		during: [ aBlock value: self canvas ]
 ]
