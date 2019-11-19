@@ -27,15 +27,16 @@ BlGaussianShadowEffect >> applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElemen
 						stdDeviation: (self width max: 0);
 						source: aShadowCanvas);
 				draw.
+			
+			cachedSurface ifNotNil: #release.
 			cachedSurface := aCacheCanvas snapshot.
 			cachedPath := aShadowPath.
 			session := Smalltalk session.
 			aShadowCanvas release.
 			aCacheCanvas release ].
+
 	aSpartaCanvas fill
 		paint: cachedSurface;
-		path:
-			(cachedSurface bounds
-				translateBy: anExtraShadowSpace asPoint negated + self offset);
+		path: (cachedSurface bounds translateBy: anExtraShadowSpace asPoint negated + self offset);
 		draw
 ]
