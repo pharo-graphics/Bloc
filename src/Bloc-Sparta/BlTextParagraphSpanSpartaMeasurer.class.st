@@ -26,7 +26,7 @@ BlTextParagraphSpanSpartaMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
 	aTextPainter string: (String streamContents: [ :aStream |
 		aBlSpan do: [ :anItem | anItem textRunOn: aStream ] ]).
 	
-	aSpartaMetrics := SpartaMetrics new.
+	aSpartaMetrics := aTextPainter metrics.
 	aTextRun := aTextPainter textRunWithMetrics: aSpartaMetrics.
 
 	self
