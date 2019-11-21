@@ -28,9 +28,11 @@ BlGaussianShadowEffect class >> cache [
 
 { #category : #cache }
 BlGaussianShadowEffect class >> cachedSurfaceFor: aShadowProperties ifAbsentPut: anAbsentBlock [	
-	^ self cache
+	^ [ self cache
 		at: aShadowProperties
-		ifAbsentPut: anAbsentBlock
+		ifAbsentPut: anAbsentBlock ]
+			on: Error
+			do: [ anAbsentBlock value ]
 ]
 
 { #category : #'instance creation' }
