@@ -126,8 +126,6 @@ BlElement >> drawOnSpartaCanvas: aCanvas [
 
 { #category : #'*Bloc-Sparta' }
 BlElement >> fullDrawOnSpartaCanvas: aCanvas [
-	| anEffectBounds |
-
 	"We do not draw transparent elements at all"
 	self isTransparent
 		ifTrue: [ ^ self ].
@@ -136,13 +134,9 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 	self isVisible
 		ifFalse: [ ^ self ].
 
-	anEffectBounds := self effectBounds: BlBounds new.
 	"No need to render elements smaller than half of a pixel"
-	(anEffectBounds width min: anEffectBounds height) < 0.5
+	self extent min < 0.5
 		ifTrue: [ ^ self ].
-
-	"(aCanvas clip containsLocal: (self localBoundsToParent: anEffectBounds copy))
-		ifFalse: [ ^ self ]."
 
 	aCanvas layer
 		alpha: self opacity;
@@ -155,11 +149,7 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 					self errorHandler
 						with: self
 						do: [
-							aTransformedCanvas clip
-								when: [ self clipChildren ]
-								by: [ (self visualBounds: BlBounds new on: aTransformedCanvas) merge: anEffectBounds ]
-								during: [ self drawMeWithEffectsOnCanvas: aCanvas ].
-								misc debug ifTrue: [
-									self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ]
+							self drawMeWithEffectsOnCanvas: aCanvas.
+							misc debug ifTrue: [ self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ]
 						failed: [ :anError | self drawError: anError onSpartaCanvas: aCanvas ] ] ]
 ]
