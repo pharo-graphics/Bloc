@@ -6,13 +6,32 @@ Class {
 	#name : #BlGaussianShadowEffect,
 	#superclass : #BlShadowEffect,
 	#instVars : [
-		'width',
-		'session',
-		'cachedSurface',
-		'cachedPath'
+		'width'
+	],
+	#classInstVars : [
+		'cache',
+		'cacheSession'
 	],
 	#category : #'Bloc-Effect'
 }
+
+{ #category : #cache }
+BlGaussianShadowEffect class >> cache [
+	<return: #LRUCache>
+
+	cacheSession == Smalltalk session
+		ifFalse: [ cache := nil ].
+	^ cache ifNil: [
+		cacheSession := Smalltalk session.
+		cache := LRUCache new beThreadSafe maximumWeight: 100 ]
+]
+
+{ #category : #cache }
+BlGaussianShadowEffect class >> cachedSurfaceFor: aShadowProperties ifAbsentPut: anAbsentBlock [	
+	^ self cache
+		at: aShadowProperties
+		ifAbsentPut: anAbsentBlock
+]
 
 { #category : #'instance creation' }
 BlGaussianShadowEffect class >> color: aColor width: aNumber offset: anOffset [
@@ -85,12 +104,6 @@ BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 	color := aColor.
 	width := aWidth.
 	offset := aPoint asPoint
-]
-
-{ #category : #initialization }
-BlGaussianShadowEffect >> releaseCaches [
-	cachedSurface ifNotNil: #release.
-	cachedSurface := nil
 ]
 
 { #category : #accessing }

@@ -2,41 +2,40 @@ Extension { #name : #BlGaussianShadowEffect }
 
 { #category : #'*Bloc-Sparta' }
 BlGaussianShadowEffect >> applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement [
-	| anEffectExtent anExtraShadowSpace aShadowPath |
+	| anEffectExtent anExtraShadowSpace aShadowPath aShadowSurface |
 
-	anEffectExtent := anElement effectBounds extent.
-	anExtraShadowSpace := self extraShadowSpace.
 	aShadowPath := anElement geometry pathOnSpartaCanvas: aSpartaCanvas.
+	anExtraShadowSpace := self extraShadowSpace.
+	
+	aShadowSurface := self class cachedSurfaceFor: {
+		aShadowPath.
+		color.
+		offset.
+		width
+	} ifAbsentPut: [		
+		anEffectExtent := anElement effectBounds extent.
+		
+		aSpartaCanvas similar: anEffectExtent during: [ :aShadowPathCanvas |
 
-	"state is not valid, recreate caches and redraw"
-	(session ~~ Smalltalk session
-		or: [ cachedSurface isNil or: [ cachedPath ~= aShadowPath ] ])
-		ifTrue: [ | aShadowCanvas aCacheCanvas |
-			aShadowCanvas := aSpartaCanvas similar: anEffectExtent.
-			aShadowCanvas transform
+			aShadowPathCanvas transform
 				by: [ :t | t translateBy: anExtraShadowSpace ]
-				during: [ aShadowCanvas fill
+				during: [ aShadowPathCanvas fill
 						paint: self color;
 						path: aShadowPath;
 						draw ].
-			aCacheCanvas := aSpartaCanvas similar: anEffectExtent.
-			aCacheCanvas filter
-				area: aShadowCanvas bounds;
-				type:
-					(aShadowCanvas filters blur
-						stdDeviation: (self width max: 0);
-						source: aShadowCanvas);
-				draw.
-			
-			cachedSurface ifNotNil: #release.
-			cachedSurface := aCacheCanvas snapshot.
-			cachedPath := aShadowPath.
-			session := Smalltalk session.
-			aShadowCanvas release.
-			aCacheCanvas release ].
+	
+			aSpartaCanvas similar: anEffectExtent during: [ :aShadowBlurCanvas |
+				aShadowBlurCanvas filter
+					area: aShadowPathCanvas bounds;
+					type:
+						(aShadowPathCanvas filters blur
+							stdDeviation: (self width max: 0);
+							source: aShadowPathCanvas);
+					draw.
+				aShadowBlurCanvas snapshot ] ] ].	
 
 	aSpartaCanvas fill
-		paint: cachedSurface;
-		path: (cachedSurface bounds translateBy: anExtraShadowSpace asPoint negated + self offset);
+		paint: aShadowSurface;
+		path: (aShadowSurface bounds translateBy: anExtraShadowSpace asPoint negated + self offset);
 		draw
 ]
