@@ -2,7 +2,7 @@ Extension { #name : #TBlDrawingCache }
 
 { #category : #'*Bloc-Sparta' }
 TBlDrawingCache >> drawMeWithEffectsOnCanvas: aCanvas [
-	| aGlobalToLocalMatrix aGlobalToLocalScale aGlobalToLocalScaleMatrix aLocalToGlobalScaleMatrix |
+	| aGlobalToLocalScale |
 
 	self withAllParentsDo: [ :eachElement |
 		(self class isDrawingCacheEnabledFor: eachElement)
@@ -10,29 +10,25 @@ TBlDrawingCache >> drawMeWithEffectsOnCanvas: aCanvas [
 
 	self damageReported: false.
 
-	aGlobalToLocalMatrix := BlMatrix2D new matrix: aCanvas transform current.
-	aGlobalToLocalScale := aGlobalToLocalMatrix decomposition scale.
-
-	aGlobalToLocalScaleMatrix := (BlMatrix2D new scaleBy: aGlobalToLocalScale).
-	aLocalToGlobalScaleMatrix := aGlobalToLocalScaleMatrix inverted.
+	aGlobalToLocalScale := aCanvas transform current scale.
 
 	(self session ~~ Smalltalk session or: [ self cachedSurface isNil ]) ifTrue: [
-		| aCachedCanvas theBounds |
-		self session: Smalltalk session.
-
+		| theBounds aCachedSurface |
+		
 		theBounds := self invalidationBounds: BlBounds new.
-		aGlobalToLocalScaleMatrix transformBounds: theBounds.
+		theBounds scaleBy: aGlobalToLocalScale.
 
-		aCachedCanvas := aCanvas similar: theBounds extent ceiling asIntegerPoint.
-		aCachedCanvas transform
-			by: [ :aTransform | aTransform scaleBy: aGlobalToLocalScale asPoint ]
-			during: [ super drawMeWithEffectsOnCanvas: aCachedCanvas ].
+		aCachedSurface := aCanvas similar: theBounds extent ceiling asIntegerPoint during: [ :aCachedCanvas |
+				aCachedCanvas transform
+					by: [ :aTransform | aTransform scaleBy: aGlobalToLocalScale asPoint ]
+					during: [ super drawMeWithEffectsOnCanvas: aCachedCanvas ].
+			aCachedCanvas snapshot ].
 
-		self cachedSurface: aCachedCanvas snapshot.
-		aCachedCanvas release ].
+		self session: Smalltalk session.
+		self cachedSurface: aCachedSurface ].
 
 	aCanvas transform
-		by: [ :aTransform | aTransform multiplyBy: aLocalToGlobalScaleMatrix ]
+		by: [ :aTransform | aTransform scaleBy: 1.0 / aGlobalToLocalScale ]
 		during: [
 			aCanvas fill
 				paint: self cachedSurface;
