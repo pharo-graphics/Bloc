@@ -24,6 +24,8 @@ BlPannableElement >> asScrollableElement [
 
 { #category : #accessing }
 BlPannableElement >> contentElement [
+	<return: #BlElement>
+
 	^ self zoomableElement contentElement
 ]
 
@@ -83,6 +85,13 @@ BlPannableElement >> initialize [
 { #category : #'api - zooming' }
 BlPannableElement >> zoomIn [
 	self zoomableElement zoomIn
+]
+
+{ #category : #'api - zooming' }
+BlPannableElement >> zoomLevel [
+	<return: #Number>
+
+	^ self zoomableElement zoomLevel
 ]
 
 { #category : #'api - zooming' }
