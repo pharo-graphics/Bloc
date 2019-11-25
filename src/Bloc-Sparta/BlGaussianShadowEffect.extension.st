@@ -14,6 +14,7 @@ BlGaussianShadowEffect >> applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElemen
 	aSpartaCanvas fill
 		paint: aShadowSurface;
 		path: (aShadowSurface bounds translateBy: anExtraShadowSpace asPoint negated + self offset);
+		antialiasNone;
 		draw
 ]
 
