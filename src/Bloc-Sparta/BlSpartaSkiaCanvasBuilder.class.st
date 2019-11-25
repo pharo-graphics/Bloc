@@ -44,7 +44,7 @@ BlSpartaSkiaCanvasBuilder class >> pdf: aFileName extent: aPoint [
 
 { #category : #accessing }
 BlSpartaSkiaCanvasBuilder class >> priority [
-	^ 50
+	^ 5
 ]
 
 { #category : #testing }
