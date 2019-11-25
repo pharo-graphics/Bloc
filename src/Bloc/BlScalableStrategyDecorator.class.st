@@ -21,13 +21,6 @@ BlScalableStrategyDecorator class >> on: aScalableStrategy [
 	^ self new strategy: aScalableStrategy
 ]
 
-{ #category : #testing }
-BlScalableStrategyDecorator >> isFixed [
-	<return: #Boolean>
-
-	^ self strategy isFixed
-]
-
 { #category : #scale }
 BlScalableStrategyDecorator >> scale: aContentElement within: aScalableElement [
 	"Modify a scale factor of a content element within scalable element.

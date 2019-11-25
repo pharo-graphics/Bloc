@@ -99,12 +99,11 @@ BlElement >> drawMeWithEffectsOnCanvas: aCanvas [
 
 { #category : #'*Bloc-Sparta' }
 BlElement >> drawOnSpartaCanvas: aCanvas [
-	| isBackgroundTransparent isBorderTransparent areBothTransparent areBothVisible |
+	| isBackgroundTransparent isBorderTransparent areBothTransparent |
 	
 	isBackgroundTransparent := self background isTransparent.
 	isBorderTransparent := self border isTransparent.
 	areBothTransparent := isBackgroundTransparent and: [ isBorderTransparent ].
-	areBothVisible := (isBackgroundTransparent or: [ isBorderTransparent ]) not.
 
 	areBothTransparent
 		ifTrue: [ ^ self ].

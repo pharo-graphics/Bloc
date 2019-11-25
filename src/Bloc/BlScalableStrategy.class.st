@@ -9,13 +9,6 @@ Class {
 	#category : #'Bloc-Utilities - Scalable'
 }
 
-{ #category : #testing }
-BlScalableStrategy >> isFixed [
-	<return: #Boolean>
-
-	^ false
-]
-
 { #category : #scale }
 BlScalableStrategy >> scale: aContentElement within: aScalableElement [
 	"Compute and return a scale factor of a content element within scalable element.

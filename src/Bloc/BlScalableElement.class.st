@@ -84,11 +84,6 @@ BlScalableElement >> fitWidth [
 	self scaleStrategy: BlScalableFitWidthStrategy new
 ]
 
-{ #category : #'api - scaling' }
-BlScalableElement >> fixed: aNumber [
-	self scaleStrategy: (BlScalableFixedStrategy zoom: aNumber)
-]
-
 { #category : #testing }
 BlScalableElement >> hasContentElement [
 	"Return true if I have a content element, false otherwise"
@@ -199,12 +194,7 @@ BlScalableElement >> onMeasure: anExtentMeasurementSpec [
 		transformDo: [ :t | t scaleBy: (aScaleFactor @ aScaleFactor) ].
 	
 	aTransformedExtent := self contentElement measuredBounds transformed extent.
-	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent).
-
-	(self scaleStrategy isFixed and: [ 
-		self contentElement constraints horizontal resizer isMatchParent
-			or: [ self contentElement constraints vertical resizer isMatchParent ] ])
-				ifTrue: [ self measureMatching: anExtentMeasurementSpec ].
+	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent)
 ]
 
 { #category : #accessing }

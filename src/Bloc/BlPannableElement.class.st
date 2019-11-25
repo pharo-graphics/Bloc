@@ -73,7 +73,11 @@ BlPannableElement >> initialize [
 	zoomableElement := BlZoomableElement new.
 	self addEventHandler: BlSlideHandler new.
 	
-	self addChild: zoomableElement
+	self addChild: zoomableElement.
+	
+	self constraintsDo: [ :c | 
+		c horizontal matchParent.
+		c vertical matchParent ]
 ]
 
 { #category : #'api - zooming' }

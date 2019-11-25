@@ -8,3 +8,8 @@ Class {
 	#superclass : #BlElement,
 	#category : #'Bloc-Utilities - Plane'
 }
+
+{ #category : #initialization }
+BlPlaneElement >> initialize [
+	super initialize.
+]

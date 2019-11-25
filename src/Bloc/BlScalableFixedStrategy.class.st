@@ -37,13 +37,6 @@ BlScalableFixedStrategy >> initialize [
 	zoom := 1.0
 ]
 
-{ #category : #testing }
-BlScalableFixedStrategy >> isFixed [
-	<return: #Boolean>
-	
-	^ true
-]
-
 { #category : #scale }
 BlScalableFixedStrategy >> scale: aContentElement within: aScalableElement [
 	"Compute and return a scale factor of a content element within scalable element.
