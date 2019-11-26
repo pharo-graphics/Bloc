@@ -275,6 +275,35 @@ BlLineExamples >> gridWith12Cells [
 		yourself
 ]
 
+{ #category : #'example - geometry' }
+BlLineExamples >> horizontalLine [
+	<gtExample>	
+	| redLine |
+	
+	redLine := self redLine.
+
+	redLine fromAnchor: (BlAbsolutePositionAnchor position: 50@200).
+	redLine toAnchor: (BlAbsolutePositionAnchor position: 300@200).
+
+	redLine forceLayout.
+
+	self assert: redLine position equals: 50@200.
+	self assert: redLine extent equals: 250@0.
+	self assert: redLine fromDirection equals: (BlVector2D x: -250 y: 0).
+	self assert: redLine toDirection equals: (BlVector2D x: 250 y: 0).
+	self assert: redLine geometry from equals: -1@0.
+	self assert: redLine geometry to equals: 251@0.
+	
+	self assert: redLine layoutBounds equals: (50@200 extent: 250@0).
+	self assert: redLine geometryBounds equals: (-1@0 corner: 251@0).
+	self assert: redLine visualBounds equals: ((-3.8284271247461903@ -2.8284271247461903) corner: (253.82842712474618@2.8284271247461903)).
+	self assert: redLine effectBounds equals: ((-3.8284271247461903@ -2.8284271247461903) corner: (253.82842712474618@2.8284271247461903)).
+	self assert: redLine invalidationBounds equals: ((-3.8284271247461903@ -2.8284271247461903) corner: (253.82842712474618@2.8284271247461903)).
+
+	^ self container
+		addChildren: { redLine }
+]
+
 { #category : #'instance creation' }
 BlLineExamples >> line [
 	<gtExample>
@@ -433,8 +462,15 @@ BlLineExamples >> rectangleAttachPoint [
 { #category : #'example - visual properties' }
 BlLineExamples >> redLine [
 	<gtExample>
-
-	^ self line border: (BlBorder paint: Color red width: 2)
+	| aLine |
+	
+	aLine := self line.
+	aLine border: (BlBorder paint: Color red width: 2).
+	
+	self assert: aLine border width equals: 2.
+	self assert: aLine clipChildren.
+	
+	^ aLine
 ]
 
 { #category : #'example - connections' }
@@ -457,4 +493,33 @@ BlLineExamples >> twoLines [
 
 	^ self container
 		addChildren: { redLine . blueLine . attachPoint }
+]
+
+{ #category : #'example - geometry' }
+BlLineExamples >> verticalLine [
+	<gtExample>	
+	| redLine |
+	
+	redLine := self redLine.
+
+	redLine fromAnchor: (BlAbsolutePositionAnchor position: 50@50).
+	redLine toAnchor: (BlAbsolutePositionAnchor position: 50@300).
+
+	redLine forceLayout.
+
+	self assert: redLine position equals: 50@50.
+	self assert: redLine extent equals: 0@250.
+	self assert: redLine fromDirection equals: (BlVector2D x: 0 y: -250).
+	self assert: redLine toDirection equals: (BlVector2D x: 0 y: 250).
+	self assert: redLine geometry from equals: 0@(-1).
+	self assert: redLine geometry to equals: 0@251.
+
+	self assert: redLine layoutBounds equals: (50@50 extent: 0@250).
+	self assert: redLine geometryBounds equals: ((0.0@ -1.0) corner: (0.0@251.0)).
+	self assert: redLine visualBounds equals: ((-2.8284271247461903@ -3.8284271247461903) corner: (2.8284271247461903@253.82842712474618)).
+	self assert: redLine effectBounds equals: ((-2.8284271247461903@ -3.8284271247461903) corner: (2.8284271247461903@253.82842712474618)).
+	self assert: redLine invalidationBounds equals: ((-2.8284271247461903@ -3.8284271247461903) corner: (2.8284271247461903@253.82842712474618)).
+	
+	^ self container
+		addChildren: { redLine }
 ]

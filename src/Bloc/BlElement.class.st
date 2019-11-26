@@ -1709,6 +1709,13 @@ BlElement >> invalidateInParent [
 		ifFalse: [ self space invalidRect: aBlBounds from: self ]
 ]
 
+{ #category : #'change reporting' }
+BlElement >> invalidationBounds [
+	<return: #BlBounds>
+
+	^ self invalidationBounds: BlBounds new
+]
+
 { #category : #'geometry bounds' }
 BlElement >> invalidationBounds: aBounds [
 	"I compute and load damaged area in my local coordinates that would be invalidated

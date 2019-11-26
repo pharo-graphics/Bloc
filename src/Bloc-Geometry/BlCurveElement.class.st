@@ -12,7 +12,7 @@ Class {
 		'fromHead',
 		'toHead'
 	],
-	#category : 'Bloc-Geometry-Curves'
+	#category : #'Bloc-Geometry-Curves'
 }
 
 { #category : #'anchor - geometry' }
@@ -76,15 +76,12 @@ BlCurveElement >> drawChildrenOnSpartaCanvas: aCanvas [
 	self hasChildren
 		ifFalse: [ ^ self ].
 
-	aCanvas clip
-		when: [ self clipChildren ]
-		by: [ self geometry pathOnSpartaCanvas: aCanvas ]
-		during: [ self children sortedByElevation
-			do: [ :anElement |
-				"we intentionally compare with direct reference;
-				if fromHead does not exist (is nil) identity comparison will return false anyway"
-				(anElement == fromHead or: [ anElement == toHead ])
-					ifFalse: [ anElement fullDrawOnSpartaCanvas: aCanvas ] ] ]
+	self children sortedByElevation
+		do: [ :anElement |
+			"we intentionally compare with direct reference;
+			if fromHead does not exist (is nil) identity comparison will return false anyway"
+			(anElement == fromHead or: [ anElement == toHead ])
+				ifFalse: [ anElement fullDrawOnSpartaCanvas: aCanvas ] ]
 ]
 
 { #category : #drawing }
@@ -121,7 +118,6 @@ BlCurveElement >> drawOnSpartaCanvas: aCanvas [
 		when: [ self hasHeads ]
 		during: [
 			| aBorder |
-
 			aBorder := self border.
 			aCanvas stroke
 				alpha: self border opacity;
@@ -241,9 +237,7 @@ BlCurveElement >> initialize [
 	"by default there are no arrow heads.
 	For memory and performance reasons we do not initialize 'null object' heads"
 	fromHead := nil.
-	toHead := nil.
-
-	self clipChildren: false
+	toHead := nil
 ]
 
 { #category : #layout }

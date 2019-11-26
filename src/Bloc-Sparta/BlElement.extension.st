@@ -133,10 +133,6 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 	self isVisible
 		ifFalse: [ ^ self ].
 
-	"No need to render elements smaller than half of a pixel"
-	self extent min < 0.5
-		ifTrue: [ ^ self ].
-
 	aCanvas layer
 		alpha: self opacity;
 		when: [ self isTranslucent ]

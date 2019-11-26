@@ -4,7 +4,7 @@ I am a root class of geometry elements - elements driven by geometry anchors.
 Class {
 	#name : #BlGeometryElement,
 	#superclass : #BlElement,
-	#category : 'Bloc-Geometry'
+	#category : #'Bloc-Geometry'
 }
 
 { #category : #layout }
@@ -15,13 +15,6 @@ BlGeometryElement >> applyLayoutIn: aBounds [
 { #category : #initialization }
 BlGeometryElement >> defaultLayout [
 	^ BlGeometryLayout new
-]
-
-{ #category : #initialization }
-BlGeometryElement >> initialize [
-	super initialize.
-	
-	self clipChildren: false
 ]
 
 { #category : #layout }

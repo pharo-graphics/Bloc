@@ -4,7 +4,7 @@ I represent a line element that is rendered between two provided position or att
 Class {
 	#name : #BlLineElement,
 	#superclass : #BlCurveElement,
-	#category : 'Bloc-Geometry-Curves'
+	#category : #'Bloc-Geometry-Curves'
 }
 
 { #category : #initialization }
@@ -40,7 +40,9 @@ BlLineElement >> measureGeometry [
 
 	aDelta := self fromPosition min: self toPosition.
 	
-	self geometry from: aDecoratedFromPoint - aDelta to: aDecoratedToPoint - aDelta
+	self geometry
+		from: aDecoratedFromPoint - aDelta
+		to: aDecoratedToPoint - aDelta
 ]
 
 { #category : #'anchor - geometry' }
