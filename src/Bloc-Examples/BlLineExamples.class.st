@@ -97,6 +97,21 @@ BlLineExamples class >> twoLines [
 		extent: 620@600
 ]
 
+{ #category : #benchmark }
+BlLineExamples >> benchmark_lines_10000 [
+	<gtExample>
+	| theLines |
+	
+	theLines := 10000 timesCollect: [ :i |
+		self grayLine
+			fromAnchor: (BlAbsolutePositionAnchor position: (i atRandom cos * 100) sin abs * 800 abs @ ((i atRandom negated sin * 300) cos abs * 600));
+			toAnchor: (BlAbsolutePositionAnchor position: (i atRandom negated sin * 300) cos abs * 800 abs @ (i atRandom cos * 600) abs) ].
+
+	^ self container
+		size: 850@650;
+		addChildren: theLines
+]
+
 { #category : #'example - visual properties' }
 BlLineExamples >> blueLine [
 	<gtExample>
