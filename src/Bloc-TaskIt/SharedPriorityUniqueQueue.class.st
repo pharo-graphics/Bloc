@@ -104,6 +104,14 @@ SharedPriorityUniqueQueue >> isEmpty [
 ]
 
 { #category : #accessing }
+SharedPriorityUniqueQueue >> itemArray [ 
+	"Answer the number of entries in the receiver.
+	Ensure that the operation isn't terminated while within the monitor"
+
+	^[ super itemArray ] valueWithoutTermination
+]
+
+{ #category : #accessing }
 SharedPriorityUniqueQueue >> next [
 	^[ monitor critical: [
 		monitor waitWhile: [ items isEmpty ].

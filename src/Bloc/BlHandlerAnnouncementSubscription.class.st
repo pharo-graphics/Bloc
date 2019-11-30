@@ -16,6 +16,12 @@ BlHandlerAnnouncementSubscription >> = anotherObject [
 	^ anotherObject subscriber = self subscriber
 ]
 
+{ #category : #accessing }
+BlHandlerAnnouncementSubscription >> announcementClass [
+	"Polymorphic to ${method:AnnouncementSubscription>>#announcementClass}$"
+	^ self class
+]
+
 { #category : #announcing }
 BlHandlerAnnouncementSubscription >> deliver: anAnnouncement [
 
