@@ -1,3 +1,13 @@
+"
+I share ${class:BlEvent}$ instances (element events) among a given elements.
+
+!! Example
+
+In the following example, ${class:BlMouseOverEvent}$, ${class:BlMouseOutEvent}$, and ${class:BlClickEvent}$ are shared between the two graphical elements. If you hover a mouse over any element, both elements get darker. If you click on any of two elements, both elements randomly change their background color.
+${example:BlSharedEventDistributorExamples>>#example|codeExpanded=false|previewExpanded=true}$
+
+
+"
 Class {
 	#name : #BlSharedEventDistributor,
 	#superclass : #BlBasicEventHandler,

@@ -1,3 +1,6 @@
+"
+I exemplify ${class:BlSharedEventDistributor}$.
+"
 Class {
 	#name : #BlSharedEventDistributorExamples,
 	#superclass : #Object,
@@ -35,9 +38,21 @@ BlSharedEventDistributorExamples >> element100x100 [
 		size: 100@100;
 		background: aBackgroundColor;
 		margin: (BlInsets all: 3);
-		addEventHandlerOn: BlMouseDownEvent do: [ :anEvent | anElement background: Color random ];
-		addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent | anElement background: aHighlightColor ];
-		addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent | anElement background: aBackgroundColor ].
+		addEventHandlerOn: BlClickEvent do: [ :anEvent | anElement background: Color random ];
+		addEventHandlerOn: BlMouseOverEvent do: [ :anEvent | anElement background: aHighlightColor ];
+		addEventHandlerOn: BlMouseOutEvent do: [ :anEvent | anElement background: aBackgroundColor ].
+]
+
+{ #category : #'examples - sharing events' }
+BlSharedEventDistributorExamples >> example [
+	<gtExample>
+	| aHandler anElements aContainer |
+	aHandler := self installTwoElements.
+	anElements := aHandler elements.
+	aContainer := self container.
+	aContainer addChildren: anElements.
+	aHandler shareEvents: { BlMouseOverEvent. BlMouseOutEvent. BlClickEvent }.
+	^ aContainer
 ]
 
 { #category : #'examples - basic' }
@@ -63,9 +78,9 @@ BlSharedEventDistributorExamples >> installTwoElements [
 ]
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> mouseDownEventOneOutOfTwoElements [
+BlSharedEventDistributorExamples >> mouseOutEventOneOutOfTwoElements [
 	<gtExample>
-	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo aPosition anEvent |
+	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo anEvent |
 	aMouseEnterOne := aMouseEnterTwo := 0.
 	aHandler := self installTwoElements.
 	anElements := aHandler elements.
@@ -74,25 +89,23 @@ BlSharedEventDistributorExamples >> mouseDownEventOneOutOfTwoElements [
 	anElementOne := anElements first.
 	anElementTwo := anElements second.
 
-	aHandler shareEvents: { BlMouseDownEvent }.
-	anElementOne addEventHandlerOn: BlMouseDownEvent do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
-	anElementTwo addEventHandlerOn: BlMouseDownEvent do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
+	aHandler shareEvents: { BlMouseOverEvent. BlMouseOutEvent. BlClickEvent }.
+	anElementOne addEventHandlerOn: BlMouseOutEvent do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
+	anElementTwo addEventHandlerOn: BlMouseOutEvent do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
 	
-	aContainer topMostParent forceLayout.
-	aPosition := anElementOne bounds inSpace center.
-	anEvent := BlMouseEnterEvent new position: aPosition.
+	anEvent := BlMouseOutEvent new.
 	BlSpace simulateEvent: anEvent on: anElementOne.
 
 	"self assert: aMouseEnterOne equals: 1.
-	self assert: aMouseEnterTwo equals: 2."
+	self assert: aMouseEnterTwo equals: 1."
 	
 	^ aContainer
 ]
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> mouseEnterEventOneOutOfTwoElements [
+BlSharedEventDistributorExamples >> mouseOverEventOneOutOfTwoElements [
 	<gtExample>
-	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo aPosition anEvent |
+	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo anEvent |
 	aMouseEnterOne := aMouseEnterTwo := 0.
 	aHandler := self installTwoElements.
 	anElements := aHandler elements.
@@ -101,17 +114,15 @@ BlSharedEventDistributorExamples >> mouseEnterEventOneOutOfTwoElements [
 	anElementOne := anElements first.
 	anElementTwo := anElements second.
 
-	aHandler shareEvents: { BlMouseEnterEvent. BlMouseEnterEvent }.
-	anElementOne addEventHandlerOn: BlMouseEnterEvent do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
-	anElementTwo addEventHandlerOn: BlMouseEnterEvent do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
+	aHandler shareEvents: { BlMouseOverEvent. BlMouseOutEvent. BlClickEvent }.
+	anElementOne addEventHandlerOn: BlMouseOverEvent do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
+	anElementTwo addEventHandlerOn: BlMouseOverEvent do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
 	
-	aContainer topMostParent forceLayout.
-	aPosition := anElementOne bounds inSpace center.
-	anEvent := BlMouseEnterEvent new position: aPosition.
+	anEvent := BlMouseOverEvent new.
 	BlSpace simulateEvent: anEvent on: anElementOne.
 
 	"self assert: aMouseEnterOne equals: 1.
-	self assert: aMouseEnterTwo equals: 2."
+	self assert: aMouseEnterTwo equals: 1."
 	
 	^ aContainer
 ]
