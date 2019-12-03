@@ -61,6 +61,13 @@ Class {
 	#category : #'Bloc-Async'
 }
 
+{ #category : #controlling }
+BlAsyncElement class >> ifEnabledInstanceDo: anAsyncBlock otherwise: aSyncBlock [
+	^ BlUseAsyncFeatures
+		ifEnabledDo: [ anAsyncBlock value: self new ]
+		otherwise: aSyncBlock
+]
+
 { #category : #accessing }
 BlAsyncElement >> asyncException [
 	^ asyncException

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'processTasks'
 	],
-	#category : #'Bloc-TaskIt'
+	#category : #'Bloc-TaskIt-Processes'
 }
 
 { #category : #initialization }
