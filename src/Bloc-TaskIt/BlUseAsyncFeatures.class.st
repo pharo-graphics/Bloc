@@ -1,8 +1,25 @@
+"
+I define whether asynchronous features should be used and a code execution therefore should be triggered in different processes.
+
+All code that trigger async executions should use one of my class side methods:
+
+- ${method:BlUseAsyncFeatures class>>#ifEnabledDo:otherwise:}$
+- ${method:BlUseAsyncFeatures class>>#ifEnabledDo:}$
+- ${method:BlUseAsyncFeatures class>>#ifDisabledDo:}$
+
+In the cases where the async should be disabled, ${method:BlUseAsyncFeatures class>>#disableDuring:}$ should be used.
+
+"
 Class {
 	#name : #BlUseAsyncFeatures,
 	#superclass : #DynamicVariable,
 	#category : #'Bloc-TaskIt-Variables'
 }
+
+{ #category : #controlling }
+BlUseAsyncFeatures class >> disableDuring: aBlock [
+	^ self value: false during: aBlock
+]
 
 { #category : #accessing }
 BlUseAsyncFeatures class >> enabled [
@@ -12,6 +29,16 @@ BlUseAsyncFeatures class >> enabled [
 	^ self value
 		ifNil: [ true ]
 		ifNotNil: [ :value | value ]
+]
+
+{ #category : #controlling }
+BlUseAsyncFeatures class >> ifDisabledDo: aSyncBlock [
+	^ self ifEnabledDo: [ "do nothing" ] otherwise: aSyncBlock
+]
+
+{ #category : #controlling }
+BlUseAsyncFeatures class >> ifEnabledDo: anAsyncBlock [
+	^ self ifEnabledDo: anAsyncBlock otherwise: [ "do nothing" ]
 ]
 
 { #category : #controlling }

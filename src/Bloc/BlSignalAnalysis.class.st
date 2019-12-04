@@ -487,7 +487,7 @@ BlSignalAnalysis >> taskRecordings [
 BlSignalAnalysis >> taskSignals [
 	"Answer the signals that log tasks start and stop"
 
-	^BlSpaceRenderSignal, BlTaskExecutionSignal, BlTaskItSignal 
+	^ BlTaskItSignal allSubclasses, { BlSpaceRenderSignal }, { BlTaskExecutionSignal }
 ]
 
 { #category : #private }
