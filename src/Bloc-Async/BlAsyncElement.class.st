@@ -144,7 +144,7 @@ BlAsyncElement >> queueAsyncUpdate [
 	"Queue a task to update the receiver's state."
 
 	self needsUpdate ifFalse: [ ^self ].
-	'scheduling async update' traceCr.
+
 	BlUseAsyncFeatures 
 		ifEnabledDo: [ self taskPool schedule: self queueEntry ] 
 		otherwise: [ self queueEntry execute ].
