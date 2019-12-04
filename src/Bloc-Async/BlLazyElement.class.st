@@ -39,21 +39,6 @@ Class {
 	#category : #'Bloc-Async'
 }
 
-{ #category : #controlling }
-BlLazyElement class >> ifEnabledInstanceDo: anInstanceBlock elementBuilder: anElementBuilder [
-	^ self 
-		ifEnabledInstanceDo: [ :theLazyElement | 
-			anInstanceBlock value: theLazyElement.
-			theLazyElement elementBuilder: anElementBuilder ]
-		otherwise: [ 
-			| anElement |
-			anElement := BlElement new.
-			anInstanceBlock value: anElement.
-			anElement
-				removeChildren;
-				addChild: anElementBuilder value ]
-]
-
 { #category : #ui }
 BlLazyElement >> buildElement [
 	"Build the element and display it"
