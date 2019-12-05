@@ -21,6 +21,20 @@ TBlDrawingCache classSide >> disableDrawingCacheFor: anElement [
 ]
 
 { #category : #'api - drawing cache' }
+TBlDrawingCache classSide >> disableDrawingCacheFor: anElement during: aBlock [
+	| wasEnabled |
+	
+	wasEnabled := self isDrawingCacheEnabledFor: anElement.
+	
+	[ self disableDrawingCacheFor: anElement.
+		aBlock value ]
+		ensure: [
+			anElement userData
+				at: #blDrawingCacheEnabled
+				put: wasEnabled ]
+]
+
+{ #category : #'api - drawing cache' }
 TBlDrawingCache classSide >> enableDrawingCacheFor: anElement [
 	anElement userData
 		at: #blDrawingCacheEnabled

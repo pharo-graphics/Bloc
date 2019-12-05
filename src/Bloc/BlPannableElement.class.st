@@ -22,6 +22,13 @@ BlPannableElement >> asScrollableElement [
 	^ self
 ]
 
+{ #category : #converting }
+BlPannableElement >> asSpartaForm [
+	<return: #Form>
+
+	^ self contentElement asSpartaForm
+]
+
 { #category : #accessing }
 BlPannableElement >> contentElement [
 	<return: #BlElement>
