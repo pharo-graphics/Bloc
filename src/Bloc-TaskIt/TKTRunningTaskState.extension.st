@@ -10,7 +10,7 @@ TKTRunningTaskState >> terminateTaskExecution: aTaskExecution reason: aReason [
 	taskProcess := aTaskExecution executionProcess.
 	taskProcess == Processor activeProcess ifTrue: [ 
 		aTaskExecution setExplicitlyTerminatedStateWithReason: aReason.
-		BlTaskItSignal emitValuable: aTaskExecution task message: #selfTerminated.
+		BlTaskItSelfTerminatedCommandSignal emitValuable: aTaskExecution task message: #selfTerminated.
 		^cancelState signalExplicitlyTerminatedException. ].
 
 	taskProcess suspend.	
@@ -20,5 +20,5 @@ TKTRunningTaskState >> terminateTaskExecution: aTaskExecution reason: aReason [
 	taskProcess suspendedContext: timeoutContext.
 	aTaskExecution setExplicitlyTerminatedStateWithReason: aReason.
 	taskProcess resume.
-	BlTaskItSignal emitValuable: aTaskExecution task message: #terminationInjected.
+	BlTaskItInjectedTerminationCommandSignal emitValuable: aTaskExecution task message: #terminationInjected.
 ]

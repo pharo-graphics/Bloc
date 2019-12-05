@@ -1829,6 +1829,18 @@ BlElement >> isVisible [
 	^ self visibility isVisible
 ]
 
+{ #category : #testing }
+BlElement >> isVisibleInSpace [
+	"Return true if I am in a visible area of a space (window), false otherwise.
+	Note, that this visibility is computed only based on bounds. 
+	It may happend that I am not visible because of another element."
+	<return: #Boolean>
+
+	^ self isAttachedToSceneGraph and: [ 
+		self isVisible and: [
+			self bounds inSpace bounds intersects: (0@0 extent: self space extent) ] ].
+]
+
 { #category : #accessing }
 BlElement >> labeled: aString [
 	misc label: aString

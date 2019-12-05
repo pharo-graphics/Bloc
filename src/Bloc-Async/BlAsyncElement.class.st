@@ -61,13 +61,6 @@ Class {
 	#category : #'Bloc-Async'
 }
 
-{ #category : #controlling }
-BlAsyncElement class >> ifEnabledInstanceDo: anAsyncBlock otherwise: aSyncBlock [
-	^ BlUseAsyncFeatures
-		ifEnabledDo: [ anAsyncBlock value: self new ]
-		otherwise: aSyncBlock
-]
-
 { #category : #accessing }
 BlAsyncElement >> asyncException [
 	^ asyncException
@@ -80,7 +73,14 @@ BlAsyncElement >> asyncException: anException [
 
 	anException freeze.
 	asyncException := anException.
-	self enqueueTask: (BlTaskAction new action: [ 
+	BlUseAsyncFeatures 
+		ifEnabledDo: [ self enqueueTask: (BlTaskAction new action: self asyncExceptionAction) ]
+		otherwise: [ self asyncExceptionAction value ]
+]
+
+{ #category : #accessing }
+BlAsyncElement >> asyncExceptionAction [
+	^ [ 
 		asyncException 
 			ifNil: [ self removeChildren ]
 			ifNotNil: [ | exceptionElement |
@@ -90,7 +90,7 @@ BlAsyncElement >> asyncException: anException [
 					c vertical fitContent.
 					c frame vertical alignCenter.
 					c frame horizontal alignCenter ].
-				self addChild: exceptionElement ] ] )
+				self addChild: exceptionElement ] ]
 ]
 
 { #category : #presentation }
@@ -124,7 +124,7 @@ BlAsyncElement >> needsUpdate [
 	"Answer a boolean indicating whether the receiver needs to be updated (via an asynchronous task).
 	Typically this will be overridden by concrete subclasses to avoid unnecessary updates."
 
-	^asyncException isNil and: [ self isAttachedToSceneGraph ]
+	^asyncException isNil and: [ self isVisibleInSpace ]
 
 ]
 
@@ -144,7 +144,10 @@ BlAsyncElement >> queueAsyncUpdate [
 	"Queue a task to update the receiver's state."
 
 	self needsUpdate ifFalse: [ ^self ].
-	self taskPool schedule: self queueEntry.
+
+	BlUseAsyncFeatures 
+		ifEnabledDo: [ self taskPool schedule: self queueEntry ] 
+		otherwise: [ self queueEntry execute ].
 ]
 
 { #category : #'async processing' }

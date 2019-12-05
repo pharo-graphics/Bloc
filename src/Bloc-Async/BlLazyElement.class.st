@@ -1,26 +1,29 @@
 "
 BlLazyElement lazily renders its child element deferring the rendering until the element actually becomes visible in the window.  E.g. if the window can be scrolled and the element is not visible, no action is taken.
 
+!! Async Example 
 
-Public API and Key Messages
+The lazy element starts with the following temporary content:
+${example:BlAsyncElementExamples>>#temporaryElement|noCode|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=80}$
+
+And ends-up with the following final content:
+${example:BlAsyncElementExamples>>#finalElement|noCode|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=80}$
+
+Executing the following example shows the lazy element that at quickly change the content computed in the bacground:
+${example:BlAsyncElementExamples>>#lazyElement|previewExpanded=false|previewShow=#gtLiveFor:|previewHeight=80}$
+
+!! Sync Example
+
+In particular cases, in which the lazy rendering needs to be disabled, ${class:BlUseAsyncFeatures}$ can be used as shown in the following example
+${example:BlAsyncElementExamples>>#syncLazyElement|previewExpanded=false|previewShow=#gtLiveFor:|previewHeight=80}$
+
+!! Public API and Key Messages
 
 - elementBuilder:   a valuable, typically a BlockClosure, that returns the child element
-
-[[[
-BlLazyElement new elementBuilder:
-	[ BlTextElement new 
-		text: 'hello world' asRopedText;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent. ] ];
-	constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent. ]
-]]]
  
-!!Internal Representation and Key Implementation Points.
+!! Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+!!! Instance Variables
 	element:				<BlElement>
 	elementBuilder:		<BlockClosure>
 
@@ -36,21 +39,6 @@ Class {
 	#category : #'Bloc-Async'
 }
 
-{ #category : #controlling }
-BlLazyElement class >> ifEnabledInstanceDo: anInstanceBlock elementBuilder: anElementBuilder [
-	^ self 
-		ifEnabledInstanceDo: [ :theLazyElement | 
-			anInstanceBlock value: theLazyElement.
-			theLazyElement elementBuilder: anElementBuilder ]
-		otherwise: [ 
-			| anElement |
-			anElement := BlElement new.
-			anInstanceBlock value: anElement.
-			anElement
-				removeChildren;
-				addChild: anElementBuilder value ]
-]
-
 { #category : #ui }
 BlLazyElement >> buildElement [
 	"Build the element and display it"
@@ -60,13 +48,6 @@ BlLazyElement >> buildElement [
 		description: [ 'No element builder has been set' ].
 	self element: elementBuilder value.
 
-]
-
-{ #category : #drawing }
-BlLazyElement >> drawOnSpartaCanvas: aCanvas [
-
-	super drawOnSpartaCanvas: aCanvas.
-	element ifNil: [ self queueAsyncUpdate ].
 ]
 
 { #category : #accessing }
@@ -80,12 +61,16 @@ BlLazyElement >> element: aBlElement [
 	If not nil, add it as a child"
 
 	element := aBlElement.
-	element ifNotNil:[ 
-		self enqueueTask: (BlTaskAction new action: [ 
-			self 
-				removeChildren;
-				addChild: element;
-				invalidate ]) ]
+	element ifNotNil: [
+		| anAction |
+		anAction := [ self 
+			removeChildren;
+			addChild: element;
+			invalidate ].
+		BlUseAsyncFeatures 
+			ifEnabledDo: [ 
+				self enqueueTask: (BlTaskAction new action: anAction) ]
+			otherwise: anAction ]
 
 ]
 
@@ -96,14 +81,48 @@ BlLazyElement >> elementBuilder [
 
 { #category : #accessing }
 BlLazyElement >> elementBuilder: anObject [
-	elementBuilder := anObject
+	elementBuilder := anObject.
+	BlUseAsyncFeatures ifDisabledDo: [ self buildElement ].
+]
+
+{ #category : #'async processing' }
+BlLazyElement >> mayQueueAsyncUpdate [
+	(self element isNil and: [ self isVisibleInSpace ]) ifFalse: [ ^ self ].
+	self queueAsyncUpdate
 ]
 
 { #category : #testing }
 BlLazyElement >> needsUpdate [
-	"Answer a boolean indicating whether the receiver needs to be udpated"
+	"Answer a boolean indicating whether the receiver needs to be updated"
 
 	^super needsUpdate and: [ element isNil ].
+
+]
+
+{ #category : #'hooks - children' }
+BlLazyElement >> onAddedToSceneGraph [
+	super onAddedToSceneGraph.
+	self mayQueueAsyncUpdate.
+
+]
+
+{ #category : #'hooks - geometry' }
+BlLazyElement >> onExtentChanged [
+	super onExtentChanged.
+	self mayQueueAsyncUpdate.
+
+]
+
+{ #category : #'hooks - geometry' }
+BlLazyElement >> onPositionInSpaceChanged [
+	super onPositionInSpaceChanged.
+	self mayQueueAsyncUpdate.
+]
+
+{ #category : #'hooks - geometry' }
+BlLazyElement >> onTransformationInSpaceChanged [
+	super onTransformationInSpaceChanged.
+	self mayQueueAsyncUpdate.
 
 ]
 
@@ -111,11 +130,11 @@ BlLazyElement >> needsUpdate [
 BlLazyElement >> queueEntry [
 	"Answer a TaskIt valuable that will update the receiver."
 
-	^(BlTktUnresponsiveCommand new 
-		valuable: (BlLazyElementValuable element: self);
-		name: 'BlLazyElement(', elementBuilder printString, ')';
-		yourself) asBlTktLoggingCommand asBlTktSingleCommand
-			identifier: self.
+	^ ((BlTktUnresponsiveCommand new 
+			valuable: (BlLazyElementValuable element: self);
+			name: 'BlLazyElement(', elementBuilder printString, ')';
+			yourself) asBlTktSingleCommand
+				identifier: self) asBlTktLoggingCommand
 
 
 ]

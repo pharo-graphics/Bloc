@@ -17,14 +17,14 @@ BlTktCommonQueueWorkerPool >> ensureIsWorking [
 	mutex
 		critical: [ (workers reject: #isRunning)
 				do: [ :worker | 
-					BlTaskItSignal
+					BlTaskItTaskExecutionSignal
 						emitValuable: worker currentTaskExecution
 						message: 'Moved not running task to failed queue'.
 					failedTasks add: worker currentTaskExecution.
 					workers remove: worker ].
 			(workers select: #isSuspended)
 				do: [ :worker | 
-					BlTaskItSignal
+					BlTaskItTaskExecutionSignal
 						emitValuable: worker currentTaskExecution
 						message: 'Moved suspended task to failed queue'.
 					failedTasks add: worker currentTaskExecution.
