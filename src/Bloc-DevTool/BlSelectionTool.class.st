@@ -8,16 +8,16 @@ Class {
 		'endPosition',
 		'currentSelections'
 	],
-	#category : 'Bloc-DevTool-Core'
+	#category : #'Bloc-DevTool-Core'
 }
 
 { #category : #'as yet unclassified' }
 BlSelectionTool >> buildSelection [
-|area selectedNodes|
-area := Rectangle origin: startPosition corner: endPosition.
+	|area selectedNodes|
+	area := Rectangle origin: startPosition corner: endPosition.
 
-selectedNodes := client children select:[:each| area containsRect: each bounds inParent asRectangle].
-selectedNodes do:[:each| currentSelections add: (BlElementSelection on: each)].
+	selectedNodes := client children select: [ :each | area containsRect: each bounds inParent asRectangle].
+	selectedNodes do: [ :each | currentSelections add: (BlElementSelection on: each)].
 ]
 
 { #category : #'as yet unclassified' }

@@ -1,11 +1,14 @@
+"
+I exemplify ${class:BlMetricsInspector}$.
+"
 Class {
-	#name : #BlMetricsInspectorExample,
+	#name : #BlMetricsInspectorExamples,
 	#superclass : #BlElement,
-	#category : #'Bloc-DevTool-Metrics'
+	#category : #'Bloc-DevTool-Examples'
 }
 
 { #category : #'examples - inspector' }
-BlMetricsInspectorExample >> basicMetricsInspector [
+BlMetricsInspectorExamples >> basicMetricsInspector [
 	<gtExample>
 	| anInspector |
 	anInspector := BlMetricsInspector new.
@@ -14,7 +17,7 @@ BlMetricsInspectorExample >> basicMetricsInspector [
 ]
 
 { #category : #'examples - inspector' }
-BlMetricsInspectorExample >> elementWithMetrics [
+BlMetricsInspectorExamples >> elementWithMetrics [
 	<gtExample>
 	^ BlElement new
 		margin: (BlInsets top: 1 right: 2 bottom: 3 left: 4);
@@ -25,7 +28,7 @@ BlMetricsInspectorExample >> elementWithMetrics [
 ]
 
 { #category : #'examples - inspector' }
-BlMetricsInspectorExample >> metricsInspectorOnElementWithMetrics [
+BlMetricsInspectorExamples >> metricsInspectorOnElementWithMetrics [
 	<gtExample>
 	| anInspector anElement |
 	anInspector := self basicMetricsInspector.
@@ -40,7 +43,7 @@ BlMetricsInspectorExample >> metricsInspectorOnElementWithMetrics [
 ]
 
 { #category : #'examples - inspector' }
-BlMetricsInspectorExample >> metricsInspectorOnUninitializedElement [
+BlMetricsInspectorExamples >> metricsInspectorOnUninitializedElement [
 	<gtExample>
 	| anInspector anElement |
 	anInspector := self basicMetricsInspector.
@@ -53,7 +56,7 @@ BlMetricsInspectorExample >> metricsInspectorOnUninitializedElement [
 ]
 
 { #category : #'examples - helpers' }
-BlMetricsInspectorExample >> metricsPhlowView [
+BlMetricsInspectorExamples >> metricsPhlowView [
 	<gtExample>
 	| anElement aPhlowClass aPhlow |
 	anElement := self elementWithMetrics.
@@ -63,6 +66,6 @@ BlMetricsInspectorExample >> metricsPhlowView [
 ]
 
 { #category : #'examples - helpers' }
-BlMetricsInspectorExample >> title [
+BlMetricsInspectorExamples >> title [
 	^ '<Phlow is not installed>'
 ]
