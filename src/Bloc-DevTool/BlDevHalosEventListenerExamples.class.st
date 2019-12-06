@@ -4,7 +4,7 @@ I exemplify ${class:BlDevHalosEventListener}$.
 Class {
 	#name : #BlDevHalosEventListenerExamples,
 	#superclass : #Object,
-	#category : #'Bloc-DevTool-Core'
+	#category : #'Bloc-DevTool-Examples'
 }
 
 { #category : #'examples - handler' }

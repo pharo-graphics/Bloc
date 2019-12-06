@@ -9,6 +9,19 @@ BlDevScripterMultipleCheckTask >> childrenCount: aNumber [
 	^ self addTask: (BlDevScripterCheckChildrenCountTask new childrenCount: aNumber)
 ]
 
+{ #category : #accessing }
+BlDevScripterMultipleCheckTask >> click [
+	^ self addTask: (BlDevScripterCheckFiredEventsTask new 
+		event: BlClickEvent)
+]
+
+{ #category : #accessing }
+BlDevScripterMultipleCheckTask >> clickOnChildAt: aNumber [
+	^ self addTask: (BlDevScripterCheckFiredEventsTask new 
+		event: BlClickEvent; 
+		onChildAt: aNumber)
+]
+
 { #category : #initialization }
 BlDevScripterMultipleCheckTask >> initialize [
 	super initialize.
