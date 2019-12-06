@@ -47,7 +47,7 @@ BlDevScripter >> events [
 	^ events
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'gt-extension' }
 BlDevScripter >> gtTreeFor: aView [
 	<gtView>
 	

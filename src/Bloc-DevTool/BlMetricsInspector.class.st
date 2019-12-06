@@ -1,5 +1,16 @@
 "
-I am an element metrics inspector and give a summary of target's bounds, margin border and padding
+I am an element metrics inspector and give a summary of target's bounds, margin border and padding.
+
+!! Example
+
+On an element that is defined with the following margin and padding methics: 
+${example:BlMetricsInspectorExample>>#elementWithMetrics}$
+
+I provide the following overview:
+${example:BlMetricsInspectorExample>>#metricsInspectorOnElementWithMetrics|codeExpanded=false|previewExpanded=true}$
+
+The view is available for any ${example:BlMetricsInspectorExample>>#elementWithMetrics|label=#className}$ instance throught ${method:BlElement>>#gtMetricsFor:}$ inspector extension. You can find it when you inspect a view and switch to ${example:BlMetricsInspectorExample>>#metricsPhlowViewTitle|label}$ tab.
+
 "
 Class {
 	#name : #BlMetricsInspector,
@@ -9,7 +20,7 @@ Class {
 		'paddingMetric',
 		'extentMetric'
 	],
-	#category : 'Bloc-DevTool-Metrics'
+	#category : #'Bloc-DevTool-Metrics'
 }
 
 { #category : #initialization }
