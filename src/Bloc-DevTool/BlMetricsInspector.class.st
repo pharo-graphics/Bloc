@@ -9,7 +9,7 @@ ${example:BlMetricsInspectorExample>>#elementWithMetrics}$
 I provide the following overview:
 ${example:BlMetricsInspectorExample>>#metricsInspectorOnElementWithMetrics|codeExpanded=false|previewExpanded=true}$
 
-The view is available for any ${example:BlMetricsInspectorExample>>#elementWithMetrics|label=#className}$ instance throught ${method:BlElement>>#gtMetricsFor:}$ inspector extension. You can find it when you inspect a view and switch to ${example:BlMetricsInspectorExample>>#metricsPhlowViewTitle|label}$ tab.
+The view is available for any ${example:BlMetricsInspectorExample>>#elementWithMetrics|label=#className}$ instance throught ${method:BlElement>>#gtMetricsFor:}$ inspector extension. You can find it when you inspect a view and switch to ${example:BlMetricsInspectorExample>>#metricsPhlowView|label=#title}$ tab.
 
 "
 Class {

@@ -57,16 +57,12 @@ BlMetricsInspectorExample >> metricsPhlowView [
 	<gtExample>
 	| anElement aPhlowClass aPhlow |
 	anElement := self elementWithMetrics.
-	aPhlowClass := self class environment at: #GtPhlowView ifAbsent: [ ^ nil ].
+	aPhlowClass := self class environment at: #GtPhlowView ifAbsent: [ ^ self ].
 	aPhlow := anElement gtMetricsFor: aPhlowClass empty.
 	^ aPhlow
 ]
 
 { #category : #'examples - helpers' }
-BlMetricsInspectorExample >> metricsPhlowViewTitle [
-	<gtExample>
-	| aPhlow |
-	aPhlow := self metricsPhlowView.
-	aPhlow ifNil: [ ^ '<Phlow is not installed>' ].
-	^ aPhlow title value asString
+BlMetricsInspectorExample >> title [
+	^ '<Phlow is not installed>'
 ]
