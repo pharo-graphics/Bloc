@@ -47,7 +47,22 @@ BlDevScripter >> events [
 	^ events
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'gt-extension' }
+BlDevScripter >> gtEventsFor: aView [
+	<gtView>
+	self events ifNil: [ ^ aView empty ].
+	^ (self events gtItemsFor: aView)
+		title: 'Events'
+]
+
+{ #category : #'gt-extension' }
+BlDevScripter >> gtSpaceFor: aView [
+	<gtView>
+	space ifNil: [ ^ aView empty ].
+	^ space gtPreviewFor: aView
+]
+
+{ #category : #'gt-extension' }
 BlDevScripter >> gtTreeFor: aView [
 	<gtView>
 	

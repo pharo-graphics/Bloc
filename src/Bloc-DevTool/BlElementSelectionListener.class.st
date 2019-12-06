@@ -1,10 +1,13 @@
+"
+I am an event handler that is used for Halos element. For more information about me, see ${class:BlDevHalosEventListener}$.
+"
 Class {
 	#name : #BlElementSelectionListener,
 	#superclass : #BlElementEventListener,
 	#instVars : [
 		'selection'
 	],
-	#category : 'Bloc-DevTool-Core'
+	#category : #'Bloc-DevTool-Core'
 }
 
 { #category : #'instance creation' }

@@ -44,6 +44,9 @@ BlEvent >> gtInspectorTraversedTargetsOnTreeIn: composite [
 { #category : #'*Bloc-Extensions' }
 BlEvent >> traversedTargetsTreeWith: mondrian [
 	| thePairs connectedTargets topMostTarget aCurrentTarget |
+	
+	self traversedTargets ifEmpty: [ ^ self ].
+	
 	thePairs := Array streamContents: [ :aStream | 
 		self traversedTargets overlappingPairsDo: [ :from :to | aStream nextPut: from -> to ] ].
 

@@ -34,8 +34,9 @@ BlAsyncElementExamples >> asyncLazyElementInSpace [
 		when: BlTaskItDoneCommandSignal 
 		do: [ :aSignal | (aSignal valuable entryIdentifier = anElement) ifTrue: [ aSemaphore signal ] ] 
 		for: self.
-	aSpace pulse.
-	aTimeout := aSemaphore waitTimeoutSeconds: 3.
+	[ aSpace pulse.
+	aTimeout := aSemaphore waitTimeoutSeconds: 3. ]
+		ensure: [ Beacon instance announcer unsubscribe: self ].
 	self assert: aTimeout not.
 	"As a result, the lazy element ends-up with a task that adds the child element into"
 	self assert: aSpace taskQueue tasks size equals: 1.

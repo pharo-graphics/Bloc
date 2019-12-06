@@ -1,6 +1,8 @@
 Class {
 	#name : #BlDevScripterInteractionTask,
 	#superclass : #BlDevScripterTask,
+	#traits : 'TBlDevScripterTarget',
+	#classTraits : 'TBlDevScripterTarget classTrait',
 	#instVars : [
 		'target'
 	],
@@ -12,21 +14,6 @@ BlDevScripterInteractionTask >> initialize [
 	super initialize.
 	
 	self onSelf
-]
-
-{ #category : #target }
-BlDevScripterInteractionTask >> onChildAt: aNumber [
-	self target: (BlDevScripterIndexedChildEventTarget new index: aNumber)
-]
-
-{ #category : #target }
-BlDevScripterInteractionTask >> onChildNamed: aSymbol [
-	self target: (BlDevScripterNamedChildEventTarget new name: aSymbol)
-]
-
-{ #category : #target }
-BlDevScripterInteractionTask >> onSelf [
-	self target: (BlDevScripterSelfEventTarget new)
 ]
 
 { #category : #accessing }

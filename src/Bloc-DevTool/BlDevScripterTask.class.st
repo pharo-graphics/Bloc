@@ -9,7 +9,7 @@ BlDevScripterTask >> gtDisplayOn: aStream [
 	aStream nextPutAll: self label
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'gt-extension' }
 BlDevScripterTask >> gtTreeFor: aView [
 	<gtView>
 	
@@ -23,7 +23,7 @@ BlDevScripterTask >> label [
 	^ 'Task'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'gt-extension' }
 BlDevScripterTask >> paintTreeWith: view [
 	view nodes
 		shape: [ :each | 
