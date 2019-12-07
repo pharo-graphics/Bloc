@@ -26,3 +26,8 @@ BlDevScripterEventTarget >> findTargetIn: anElement [
 
 	^ self subclassResponsibility
 ]
+
+{ #category : #accessing }
+BlDevScripterEventTarget >> identifier [
+	^ self className
+]

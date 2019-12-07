@@ -26,6 +26,11 @@ BlDevScripterIndexedChildEventTarget >> findTargetIn: anElement [
 ]
 
 { #category : #accessing }
+BlDevScripterIndexedChildEventTarget >> identifier [
+	^ self index
+]
+
+{ #category : #accessing }
 BlDevScripterIndexedChildEventTarget >> index [
 	^ index
 ]
@@ -33,4 +38,12 @@ BlDevScripterIndexedChildEventTarget >> index [
 { #category : #accessing }
 BlDevScripterIndexedChildEventTarget >> index: anObject [
 	index := anObject
+]
+
+{ #category : #printing }
+BlDevScripterIndexedChildEventTarget >> printOn: aStream [
+	self index ifNil: [ ^ super printOn: aStream ].
+	aStream 
+		nextPutAll: 'Child At: ';
+		print: self index.
 ]

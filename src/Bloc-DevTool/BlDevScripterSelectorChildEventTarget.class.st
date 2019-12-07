@@ -26,6 +26,19 @@ BlDevScripterSelectorChildEventTarget >> findTargetIn: anElement [
 ]
 
 { #category : #accessing }
+BlDevScripterSelectorChildEventTarget >> identifier [
+	^ self selector
+]
+
+{ #category : #printing }
+BlDevScripterSelectorChildEventTarget >> printOn: aStream [
+	self selector ifNil: [ ^ super printOn: aStream ].
+	aStream 
+		nextPutAll: 'Child Selector: ';
+		print: self selector.
+]
+
+{ #category : #accessing }
 BlDevScripterSelectorChildEventTarget >> selector [
 	<return: #Symbol>
 	^ selector

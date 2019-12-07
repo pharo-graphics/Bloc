@@ -26,6 +26,11 @@ BlDevScripterNamedChildEventTarget >> findTargetIn: anElement [
 ]
 
 { #category : #accessing }
+BlDevScripterNamedChildEventTarget >> identifier [
+	^ self name
+]
+
+{ #category : #accessing }
 BlDevScripterNamedChildEventTarget >> name [
 	^ name
 ]
@@ -33,4 +38,12 @@ BlDevScripterNamedChildEventTarget >> name [
 { #category : #accessing }
 BlDevScripterNamedChildEventTarget >> name: anObject [
 	name := anObject
+]
+
+{ #category : #printing }
+BlDevScripterNamedChildEventTarget >> printOn: aStream [
+	self name ifNil: [ ^ super printOn: aStream ].
+	aStream 
+		nextPutAll: 'Child Named: ';
+		print: self name.
 ]
