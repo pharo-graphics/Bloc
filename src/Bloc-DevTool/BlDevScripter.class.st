@@ -68,7 +68,12 @@ BlDevScripter >> gtEventsFor: aView [
 BlDevScripter >> gtSpaceFor: aView [
 	<gtView>
 	space ifNil: [ ^ aView empty ].
-	^ space gtPreviewFor: aView
+	^ (space gtPreviewFor: aView)
+		actionButtonLabel: 'Open' 
+			action: [ space show ];
+		actionButtonLabel: 'Inspect' 
+			action: [ :anElement | 
+				anElement phlow spawnObject: self elementWithoutParent ]
 ]
 
 { #category : #'gt-extension' }
