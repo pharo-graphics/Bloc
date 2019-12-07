@@ -70,7 +70,7 @@ BlDevScripter >> gtSpaceFor: aView [
 	space ifNil: [ ^ aView empty ].
 	^ (space gtPreviewFor: aView)
 		actionButtonLabel: 'Open' 
-			action: [ space show ];
+			action: [ self spaceWithElement show ];
 		actionButtonLabel: 'Inspect' 
 			action: [ :anElement | 
 				anElement phlow spawnObject: self elementWithoutParent ]
@@ -101,4 +101,15 @@ BlDevScripter >> play [
 { #category : #actions }
 BlDevScripter >> pulse [
 	space pulse
+]
+
+{ #category : #accessing }
+BlDevScripter >> spaceWithElement [
+	"Return ${class:BlSpace}$ and ensure that the ==element== is its child
+	Useful when someone wants to display the resulting space (window) with the element.
+	It cannot be used during the script execution."
+	<return: #BlSpace>
+	self element space = space ifFalse: [ 
+		space addChild: self elementWithoutParent ].
+	^ space
 ]
