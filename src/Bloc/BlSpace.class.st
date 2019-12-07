@@ -145,9 +145,12 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 	
 	anElement isAttachedToSceneGraph
 		ifTrue: [
-			anElement space pulse.
+			| aSpace |
+			"element may be removed from the space."
+			aSpace := anElement space.
+			aSpace pulse.
 			aCollectionOfEvents do: [ :anEvent | anElement space dispatchEvent: anEvent ].
-			anElement space pulse ]
+			aSpace pulse ]
 		ifFalse: [ 
 			| temporarySpace topMostElement |
 			topMostElement := anElement topMostParent.

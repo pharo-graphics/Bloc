@@ -22,6 +22,12 @@ BlDevScripterMultipleCheckTask >> clickOnChildAt: aNumber [
 		onChildAt: aNumber)
 ]
 
+{ #category : #accessing }
+BlDevScripterMultipleCheckTask >> elementOfClass: aClass [
+	^ self addTask: (BlDevScripterCheckElementClassTask new 
+		elementClass: aClass)
+]
+
 { #category : #initialization }
 BlDevScripterMultipleCheckTask >> initialize [
 	super initialize.

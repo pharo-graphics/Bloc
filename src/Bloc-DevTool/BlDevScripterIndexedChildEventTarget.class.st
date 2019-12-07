@@ -7,6 +7,17 @@ Class {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
+{ #category : #testing }
+BlDevScripterIndexedChildEventTarget class >> matchesWithInput: anObject [
+	<return: #Boolean>
+	^ anObject isInteger
+]
+
+{ #category : #'instance creation' }
+BlDevScripterIndexedChildEventTarget class >> newFromInput: anObject [
+	^ self new index: anObject
+]
+
 { #category : #searching }
 BlDevScripterIndexedChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>

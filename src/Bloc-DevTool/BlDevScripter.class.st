@@ -41,6 +41,15 @@ BlDevScripter >> element: anElement [
 ]
 
 { #category : #accessing }
+BlDevScripter >> elementWithoutParent [
+	"Return element removed from a testing ${class:BlSpace}$.
+	Useful when someone wants to display the resulting element.
+	It cannot be used during the script execution."
+	<return: #Element>
+	^ self element removeFromParent
+]
+
+{ #category : #accessing }
 BlDevScripter >> events [
 	<return: #Collection of: #BlEvent>
 

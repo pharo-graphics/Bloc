@@ -9,8 +9,18 @@ TBlDevScripterTarget >> onChildAt: aNumber [
 ]
 
 { #category : #accessing }
+TBlDevScripterTarget >> onChildFromMessage: aSymbol [
+	self target: (BlDevScripterSelectorChildEventTarget new selector: aSymbol)
+]
+
+{ #category : #accessing }
 TBlDevScripterTarget >> onChildNamed: aSymbol [
 	self target: (BlDevScripterNamedChildEventTarget new name: aSymbol)
+]
+
+{ #category : #accessing }
+TBlDevScripterTarget >> onNestedChild: anArray [
+	self target: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
 ]
 
 { #category : #accessing }

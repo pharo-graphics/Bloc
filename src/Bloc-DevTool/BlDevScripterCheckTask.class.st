@@ -21,6 +21,21 @@ BlDevScripterCheckTask >> label [
 	^ 'Check'
 ]
 
+{ #category : #'as yet unclassified' }
+BlDevScripterCheckTask >> onChildSequence: anArray [
+	self target: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
+]
+
+{ #category : #accessing }
+BlDevScripterCheckTask >> onNestedChild: anArray [
+	self target: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
+]
+
+{ #category : #'as yet unclassified' }
+BlDevScripterCheckTask >> onNestedTarget: anArray [
+	self target: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
+]
+
 { #category : #actions }
 BlDevScripterCheckTask >> playOn: aScripter [
 	| anElement |

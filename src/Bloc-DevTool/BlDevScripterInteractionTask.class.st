@@ -16,6 +16,21 @@ BlDevScripterInteractionTask >> initialize [
 	self onSelf
 ]
 
+{ #category : #'as yet unclassified' }
+BlDevScripterInteractionTask >> onChildSequence: anArray [
+	self target: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
+]
+
+{ #category : #accessing }
+BlDevScripterInteractionTask >> onNestedChild: anArray [
+	self target: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
+]
+
+{ #category : #'as yet unclassified' }
+BlDevScripterInteractionTask >> onNestedTarget: anArray [
+	self target: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
+]
+
 { #category : #accessing }
 BlDevScripterInteractionTask >> target [
 	<return: #BlDevScripterEventTarget>
