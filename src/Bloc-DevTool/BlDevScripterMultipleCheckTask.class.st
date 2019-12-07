@@ -23,6 +23,11 @@ BlDevScripterMultipleCheckTask >> clickOnChildAt: aNumber [
 ]
 
 { #category : #accessing }
+BlDevScripterMultipleCheckTask >> defaultLabel [
+	^ 'Checks'
+]
+
+{ #category : #accessing }
 BlDevScripterMultipleCheckTask >> elementOfClass: aClass [
 	^ self addTask: (BlDevScripterCheckElementClassTask new 
 		elementClass: aClass)

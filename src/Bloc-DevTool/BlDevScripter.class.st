@@ -95,7 +95,7 @@ BlDevScripter >> initialize [
 { #category : #actions }
 BlDevScripter >> play [
 	self pulse.
-	rootTask playOn: self
+	rootTask playIndicatingStateOn: self
 ]
 
 { #category : #actions }

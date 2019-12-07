@@ -2,6 +2,7 @@ Class {
 	#name : #BlDevScripterCompositeTask,
 	#superclass : #BlDevScripterTask,
 	#instVars : [
+		'label',
 		'tasks'
 	],
 	#category : #'Bloc-DevTool-Scripter'
@@ -13,6 +14,11 @@ BlDevScripterCompositeTask >> addTask: aTask [
 	^ aTask
 ]
 
+{ #category : #accessing }
+BlDevScripterCompositeTask >> defaultLabel [
+	^ 'Tasks'
+]
+
 { #category : #initialization }
 BlDevScripterCompositeTask >> initialize [
 	super initialize.
@@ -20,9 +26,19 @@ BlDevScripterCompositeTask >> initialize [
 	tasks := OrderedCollection new
 ]
 
+{ #category : #accessing }
+BlDevScripterCompositeTask >> label [
+	^ label ifNil: [ self defaultLabel ]
+]
+
+{ #category : #accessing }
+BlDevScripterCompositeTask >> label: anObject [
+	label := anObject
+]
+
 { #category : #actions }
 BlDevScripterCompositeTask >> playOn: aScripter [
-	self tasks do: [ :eachTask | eachTask playOn: aScripter ]
+	self tasks do: [ :eachTask | eachTask playIndicatingStateOn: aScripter ]
 ]
 
 { #category : #accessing }
