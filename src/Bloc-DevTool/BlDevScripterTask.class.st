@@ -36,7 +36,7 @@ BlDevScripterTask >> paintTreeWith: view [
 						text: (each gtDisplayString asRopedText) ]
 				ifFalse: [ 
 					BlElement new 
-						when: BlClickEvent do: [:event | event target fireEvent: (GtPhlowObjectToSpawn new object: each; sourceElement: event target)];
+						when: BlClickEvent do: [ :event | event target phlow spawnObject: each ];
 						zIndex: 10;
 						geometry: BlEllipse new;
 						border: (BlBorder paint: Color black width: 1);
