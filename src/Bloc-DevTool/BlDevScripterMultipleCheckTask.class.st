@@ -28,6 +28,11 @@ BlDevScripterMultipleCheckTask >> defaultLabel [
 ]
 
 { #category : #accessing }
+BlDevScripterMultipleCheckTask >> element: anOneArgBlock [
+	^ self addTask: (BlDevScripterCheckElementTask new block: anOneArgBlock)
+]
+
+{ #category : #accessing }
 BlDevScripterMultipleCheckTask >> elementOfClass: aClass [
 	^ self addTask: (BlDevScripterCheckElementClassTask new 
 		elementClass: aClass)

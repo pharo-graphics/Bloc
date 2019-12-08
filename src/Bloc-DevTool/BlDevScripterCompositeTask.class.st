@@ -1,6 +1,8 @@
 Class {
 	#name : #BlDevScripterCompositeTask,
 	#superclass : #BlDevScripterTask,
+	#traits : 'TBlDevScripterTarget',
+	#classTraits : 'TBlDevScripterTarget classTrait',
 	#instVars : [
 		'label',
 		'tasks'
@@ -46,6 +48,23 @@ BlDevScripterCompositeTask >> label: anObject [
 { #category : #actions }
 BlDevScripterCompositeTask >> playOn: aScripter [
 	self tasks do: [ :eachTask | eachTask playIndicatingStateOn: aScripter ]
+]
+
+{ #category : #accessing }
+BlDevScripterCompositeTask >> target [
+	<return: #BlDevScripterEventTarget>
+	self 
+		assert: [ self tasks isNotEmpty ]
+		description: [ 'A subtask must be defined before accessing target' ].
+	^ self tasks last target
+]
+
+{ #category : #accessing }
+BlDevScripterCompositeTask >> target: aScripterEventTarget [
+	self 
+		assert: [ self tasks isNotEmpty ]
+		description: [ 'A subtask must be defined before defining target' ].
+	self tasks last target: aScripterEventTarget
 ]
 
 { #category : #accessing }

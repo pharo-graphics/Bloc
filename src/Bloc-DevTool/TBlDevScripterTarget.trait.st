@@ -39,6 +39,12 @@ TBlDevScripterTarget >> onSelf [
 ]
 
 { #category : #accessing }
+TBlDevScripterTarget >> target [
+	<return: #BlDevScripterEventTarget>
+	self explicitRequirement
+]
+
+{ #category : #accessing }
 TBlDevScripterTarget >> target: aScripterEventTarget [
 	self explicitRequirement
 ]
