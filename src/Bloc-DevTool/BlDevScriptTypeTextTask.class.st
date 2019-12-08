@@ -7,6 +7,13 @@ Class {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
+{ #category : #accessing }
+BlDevScriptTypeTextTask >> label [
+	^ self text 
+		ifNotNil: [ :aString | 'Type: ', aString asString ]
+		ifNil: [ self className ]
+]
+
 { #category : #actions }
 BlDevScriptTypeTextTask >> playOn: aScripter [
 	| aTarget anInputEvent |

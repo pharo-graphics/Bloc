@@ -18,6 +18,13 @@ BlDevScripterCheckElementTask >> block: anObject [
 	block := anObject
 ]
 
+{ #category : #accessing }
+BlDevScripterCheckElementTask >> label [
+	^ self block 
+		ifNotNil: [ :aBlock | aBlock printStringLimitedTo: 42 ] 
+		ifNil: [ self className ]
+]
+
 { #category : #actions }
 BlDevScripterCheckElementTask >> validateOn: anElement [
 	self 
