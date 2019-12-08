@@ -24,6 +24,11 @@ BlDevScripter >> addTask: aScripterTask [
 ]
 
 { #category : #actions }
+BlDevScripter >> asyncContinue [
+	BlUseAsyncFeatures disableDuring: [ self continue ].
+]
+
+{ #category : #actions }
 BlDevScripter >> continue [
 	self pulse.
 	rootTask continueOn: self
