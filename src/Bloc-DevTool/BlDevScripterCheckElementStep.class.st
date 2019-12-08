@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDevScripterCheckElementTask,
-	#superclass : #BlDevScripterCheckTask,
+	#name : #BlDevScripterCheckElementStep,
+	#superclass : #BlDevScripterCheckStep,
 	#instVars : [
 		'block'
 	],
@@ -8,25 +8,25 @@ Class {
 }
 
 { #category : #accessing }
-BlDevScripterCheckElementTask >> block [
+BlDevScripterCheckElementStep >> block [
 	<return: #BlockClosure>
 	^ block
 ]
 
 { #category : #accessing }
-BlDevScripterCheckElementTask >> block: anObject [
+BlDevScripterCheckElementStep >> block: anObject [
 	block := anObject
 ]
 
 { #category : #accessing }
-BlDevScripterCheckElementTask >> label [
+BlDevScripterCheckElementStep >> label [
 	^ self block 
 		ifNotNil: [ :aBlock | aBlock printStringLimitedTo: 42 ] 
 		ifNil: [ self className ]
 ]
 
 { #category : #actions }
-BlDevScripterCheckElementTask >> validateOn: anElement [
+BlDevScripterCheckElementStep >> validateOn: anElement [
 	self 
 		assert: self block isNotNil
 		description: 'Check block must be defined'.

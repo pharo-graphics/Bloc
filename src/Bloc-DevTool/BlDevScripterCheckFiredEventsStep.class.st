@@ -9,8 +9,8 @@ ${example:BlDevScripterExamples>>#clickCheck|previewExpanded=true|previewHeight=
 
 "
 Class {
-	#name : #BlDevScripterCheckFiredEventsTask,
-	#superclass : #BlDevScripterCheckTask,
+	#name : #BlDevScripterCheckFiredEventsStep,
+	#superclass : #BlDevScripterCheckStep,
 	#instVars : [
 		'events'
 	],
@@ -18,7 +18,7 @@ Class {
 }
 
 { #category : #asserting }
-BlDevScripterCheckFiredEventsTask >> assertEventClass: anEventClass withTarget: aBlElement on: aScripter [ 
+BlDevScripterCheckFiredEventsStep >> assertEventClass: anEventClass withTarget: aBlElement on: aScripter [ 
 	| theInterestingEvents |
 	theInterestingEvents := aScripter events select: [ :eachEvent | 
 		eachEvent class = anEventClass and: [ eachEvent target = aBlElement ] ].
@@ -26,19 +26,19 @@ BlDevScripterCheckFiredEventsTask >> assertEventClass: anEventClass withTarget: 
 ]
 
 { #category : #accessing }
-BlDevScripterCheckFiredEventsTask >> event: aClass [ 
+BlDevScripterCheckFiredEventsStep >> event: aClass [ 
 	self events: { aClass }
 ]
 
 { #category : #accessing }
-BlDevScripterCheckFiredEventsTask >> events [
+BlDevScripterCheckFiredEventsStep >> events [
 	<return: #Collection of: #BlEvent>
 
 	^ events
 ]
 
 { #category : #accessing }
-BlDevScripterCheckFiredEventsTask >> events: aCollection [
+BlDevScripterCheckFiredEventsStep >> events: aCollection [
 	<return: #Collection of: #BlEvent>
 	self 
 		assert: [ aCollection isCollection and: [ aCollection isNotEmpty ] ]
@@ -47,12 +47,12 @@ BlDevScripterCheckFiredEventsTask >> events: aCollection [
 ]
 
 { #category : #accessing }
-BlDevScripterCheckFiredEventsTask >> label [
+BlDevScripterCheckFiredEventsStep >> label [
 	^ 'Click Check'
 ]
 
 { #category : #actions }
-BlDevScripterCheckFiredEventsTask >> playOn: aScripter [
+BlDevScripterCheckFiredEventsStep >> playOn: aScripter [
 	| anElement |
 	self
 		assert: [ self events isCollection and: [ self events isNotEmpty ] ]

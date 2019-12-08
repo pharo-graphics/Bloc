@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDevScripterCheckElementClassTask,
-	#superclass : #BlDevScripterCheckTask,
+	#name : #BlDevScripterCheckElementClassStep,
+	#superclass : #BlDevScripterCheckStep,
 	#instVars : [
 		'elementClass'
 	],
@@ -8,22 +8,22 @@ Class {
 }
 
 { #category : #accessing }
-BlDevScripterCheckElementClassTask >> elementClass [
+BlDevScripterCheckElementClassStep >> elementClass [
 	^ elementClass
 ]
 
 { #category : #accessing }
-BlDevScripterCheckElementClassTask >> elementClass: anObject [
+BlDevScripterCheckElementClassStep >> elementClass: anObject [
 	elementClass := anObject
 ]
 
 { #category : #accessing }
-BlDevScripterCheckElementClassTask >> label [
+BlDevScripterCheckElementClassStep >> label [
 	^ 'Class: ', self elementClass asString
 ]
 
 { #category : #actions }
-BlDevScripterCheckElementClassTask >> validateOn: anElement [
+BlDevScripterCheckElementClassStep >> validateOn: anElement [
 	self assert: self elementClass isNotNil.
 	self assert: anElement class equals: self elementClass.
 ]

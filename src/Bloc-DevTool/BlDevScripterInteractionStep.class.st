@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDevScripterInteractionTask,
-	#superclass : #BlDevScripterTask,
+	#name : #BlDevScripterInteractionStep,
+	#superclass : #BlDevScripterStep,
 	#traits : 'TBlDevScripterTarget',
 	#classTraits : 'TBlDevScripterTarget classTrait',
 	#instVars : [
@@ -10,20 +10,20 @@ Class {
 }
 
 { #category : #initialization }
-BlDevScripterInteractionTask >> initialize [
+BlDevScripterInteractionStep >> initialize [
 	super initialize.
 	
 	self onSelf
 ]
 
 { #category : #accessing }
-BlDevScripterInteractionTask >> target [
+BlDevScripterInteractionStep >> target [
 	<return: #BlDevScripterEventTarget>
 
 	^ target
 ]
 
 { #category : #accessing }
-BlDevScripterInteractionTask >> target: aScripterEventTarget [
+BlDevScripterInteractionStep >> target: aScripterEventTarget [
 	target := aScripterEventTarget
 ]

@@ -9,18 +9,18 @@ ${example:BlDevScripterExamples>>#clickCheck|previewExpanded=true|previewHeight=
 
 "
 Class {
-	#name : #BlDevScripterClickTask,
-	#superclass : #BlDevScripterInteractionTask,
+	#name : #BlDevScripterClickStep,
+	#superclass : #BlDevScripterInteractionStep,
 	#category : #'Bloc-DevTool-Scripter'
 }
 
 { #category : #accessing }
-BlDevScripterClickTask >> label [
+BlDevScripterClickStep >> label [
 	^ 'Click'
 ]
 
 { #category : #actions }
-BlDevScripterClickTask >> playOn: aScripter [
+BlDevScripterClickStep >> playOn: aScripter [
 	BlSpace simulateClickOn: (self target findTargetIn: aScripter element).
 	aScripter pulse
 ]

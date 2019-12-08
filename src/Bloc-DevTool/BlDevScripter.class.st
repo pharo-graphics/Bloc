@@ -6,21 +6,21 @@ I am designed for Model-based User Interface Testing
 Class {
 	#name : #BlDevScripter,
 	#superclass : #Object,
-	#traits : 'TBlDevScripterTask',
-	#classTraits : 'TBlDevScripterTask classTrait',
+	#traits : 'TBlDevScripterStep',
+	#classTraits : 'TBlDevScripterStep classTrait',
 	#instVars : [
 		'element',
 		'space',
-		'rootTask',
-		'events'
+		'events',
+		'rootStep'
 	],
 	#category : #'Bloc-DevTool-Scripter'
 }
 
 { #category : #tasks }
-BlDevScripter >> addTask: aScripterTask [
-	<return: #BlDevScripterTask>
-	^ rootTask addTask: aScripterTask
+BlDevScripter >> addStep: aScripterStep [
+	<return: #BlDevScripterStep>
+	^ rootStep addStep: aScripterStep
 ]
 
 { #category : #actions }
@@ -28,10 +28,20 @@ BlDevScripter >> asyncContinue [
 	BlUseAsyncFeatures disableDuring: [ self continue ].
 ]
 
+{ #category : #tasks }
+BlDevScripter >> check [
+	^ self addStep: (BlDevScripterMultipleCheckStep new)
+]
+
+{ #category : #tasks }
+BlDevScripter >> click [
+	^ self addStep: (BlDevScripterClickStep new)
+]
+
 { #category : #actions }
 BlDevScripter >> continue [
 	self pulse.
-	rootTask continueOn: self
+	rootStep continueOn: self
 ]
 
 { #category : #accessing }
@@ -89,14 +99,14 @@ BlDevScripter >> gtSpaceFor: aView [
 BlDevScripter >> gtTreeFor: aView [
 	<gtView>
 	
-	^ rootTask gtTreeFor: aView
+	^ rootStep gtTreeFor: aView
 ]
 
 { #category : #initialization }
 BlDevScripter >> initialize [
 	super initialize.
 	
-	rootTask := BlDevScripterMultipleTask new.
+	rootStep := BlDevScripterMultipleStep new.
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
@@ -106,7 +116,7 @@ BlDevScripter >> initialize [
 { #category : #actions }
 BlDevScripter >> play [
 	self pulse.
-	rootTask playIndicatingStateOn: self
+	rootStep playIndicatingStateOn: self
 ]
 
 { #category : #actions }
@@ -125,7 +135,17 @@ BlDevScripter >> spaceWithElement [
 	^ space
 ]
 
+{ #category : #tasks }
+BlDevScripter >> substep [
+	^ self addStep: (BlDevScripterMultipleStep new)
+]
+
 { #category : #actions }
 BlDevScripter >> syncPlay [
 	BlUseAsyncFeatures disableDuring: [ self play ].
+]
+
+{ #category : #tasks }
+BlDevScripter >> type [
+	^ self addStep: BlDevScriptTypeTextStep new
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #BlDevScripterTask,
+	#name : #BlDevScripterStep,
 	#superclass : #Object,
 	#instVars : [
 		'state'
@@ -8,43 +8,43 @@ Class {
 }
 
 { #category : #actions }
-BlDevScripterTask >> continueOn: aScripter [
+BlDevScripterStep >> continueOn: aScripter [
 	self wasExecuted ifTrue: [ ^ self ].
 	self playIndicatingStateOn: aScripter.
 ]
 
 { #category : #printing }
-BlDevScripterTask >> gtDisplayOn: aStream [
+BlDevScripterStep >> gtDisplayOn: aStream [
 	aStream nextPutAll: self label
 ]
 
 { #category : #'gt-extension' }
-BlDevScripterTask >> gtTreeFor: aView [
+BlDevScripterStep >> gtTreeFor: aView [
 	<gtView>
 	
 	^ aView mondrian
-		title: 'Tasks';
+		title: 'Steps';
 		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
 ]
 
 { #category : #initialization }
-BlDevScripterTask >> initialize [
+BlDevScripterStep >> initialize [
 	super initialize.
 	state := BlDevScripterTaskState ready.
 ]
 
 { #category : #accessing }
-BlDevScripterTask >> label [
+BlDevScripterStep >> label [
 	^ 'Task'
 ]
 
 { #category : #accessing }
-BlDevScripterTask >> labelColor [
+BlDevScripterStep >> labelColor [
 	^ state color
 ]
 
 { #category : #'gt-extension' }
-BlDevScripterTask >> paintTreeWith: view [
+BlDevScripterStep >> paintTreeWith: view [
 	view nodes
 		shape: [ :each | 
 			BlTextElement new 
@@ -52,15 +52,15 @@ BlDevScripterTask >> paintTreeWith: view [
 				background: Color white;
 				constraintsDo: [ :c | c padding: (BlInsets all: 5) ];
 				text: (each gtDisplayString asRopedText foreground: each labelColor) ];
-		with: (self withDeepCollect: #tasks).
+		with: (self withDeepCollect: #steps).
 	view edges
 		shape: [ :each | BlLineElement new border: (BlBorder paint: (Color gray alpha: 0.5) width: 1 ) ];
-		connectToAll: #tasks.
+		connectToAll: #steps.
 	view layout custom: (GtGradNorthHierarchicalLayout new)
 ]
 
 { #category : #actions }
-BlDevScripterTask >> playIndicatingStateOn: aScripter [
+BlDevScripterStep >> playIndicatingStateOn: aScripter [
 	self 
 		assert: [ state wasExecuted not ]
 		description: [ 'I should not be executed twice' ].
@@ -76,17 +76,17 @@ BlDevScripterTask >> playIndicatingStateOn: aScripter [
 ]
 
 { #category : #actions }
-BlDevScripterTask >> playOn: aScripter [
+BlDevScripterStep >> playOn: aScripter [
 	
 ]
 
 { #category : #accessing }
-BlDevScripterTask >> tasks [
+BlDevScripterStep >> steps [
 	^ #()
 ]
 
 { #category : #testing }
-BlDevScripterTask >> wasExecuted [
+BlDevScripterStep >> wasExecuted [
 	<return: #Boolean>
 	^ state wasExecuted
 ]

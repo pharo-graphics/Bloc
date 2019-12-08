@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDevScripterCheckTask,
-	#superclass : #BlDevScripterTask,
+	#name : #BlDevScripterCheckStep,
+	#superclass : #BlDevScripterStep,
 	#traits : 'TBlDevScripterTarget',
 	#classTraits : 'TBlDevScripterTarget classTrait',
 	#instVars : [
@@ -10,37 +10,37 @@ Class {
 }
 
 { #category : #initialization }
-BlDevScripterCheckTask >> initialize [
+BlDevScripterCheckStep >> initialize [
 	super initialize.
 	
 	self onSelf
 ]
 
 { #category : #accessing }
-BlDevScripterCheckTask >> label [
+BlDevScripterCheckStep >> label [
 	^ 'Check'
 ]
 
 { #category : #actions }
-BlDevScripterCheckTask >> playOn: aScripter [
+BlDevScripterCheckStep >> playOn: aScripter [
 	| anElement |
 	anElement := self target findTargetIn: aScripter element.
 	self validateOn: anElement
 ]
 
 { #category : #accessing }
-BlDevScripterCheckTask >> target [
+BlDevScripterCheckStep >> target [
 	<return: #BlDevScripterEventTarget>
 
 	^ target
 ]
 
 { #category : #accessing }
-BlDevScripterCheckTask >> target: aScripterEventTarget [
+BlDevScripterCheckStep >> target: aScripterEventTarget [
 	target := aScripterEventTarget
 ]
 
 { #category : #actions }
-BlDevScripterCheckTask >> validateOn: anElement [
+BlDevScripterCheckStep >> validateOn: anElement [
 	"validate targeted element"
 ]
