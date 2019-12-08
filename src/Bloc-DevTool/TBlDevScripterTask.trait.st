@@ -20,6 +20,16 @@ TBlDevScripterTask >> click [
 ]
 
 { #category : #tasks }
+TBlDevScripterTask >> subtask [
+	^ self addTask: (BlDevScripterMultipleTask new)
+]
+
+{ #category : #tasks }
+TBlDevScripterTask >> subtask: aLabel [
+	^ self subtask label: aLabel
+]
+
+{ #category : #tasks }
 TBlDevScripterTask >> type [
 	^ self addTask: BlDevScriptTypeTextTask new
 ]
