@@ -7,6 +7,12 @@ Class {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
+{ #category : #actions }
+BlDevScripterTask >> continueOn: aScripter [
+	self wasExecuted ifTrue: [ ^ self ].
+	self playIndicatingStateOn: aScripter.
+]
+
 { #category : #printing }
 BlDevScripterTask >> gtDisplayOn: aStream [
 	aStream nextPutAll: self label
@@ -55,6 +61,9 @@ BlDevScripterTask >> paintTreeWith: view [
 
 { #category : #actions }
 BlDevScripterTask >> playIndicatingStateOn: aScripter [
+	self 
+		assert: [ state wasExecuted not ]
+		description: [ 'I should not be executed twice' ].
 	state := BlDevScripterTaskState executing.
 	[ 
 		self playOn: aScripter.
@@ -74,4 +83,10 @@ BlDevScripterTask >> playOn: aScripter [
 { #category : #accessing }
 BlDevScripterTask >> tasks [
 	^ #()
+]
+
+{ #category : #testing }
+BlDevScripterTask >> wasExecuted [
+	<return: #Boolean>
+	^ state wasExecuted
 ]

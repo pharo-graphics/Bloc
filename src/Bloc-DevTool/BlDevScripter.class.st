@@ -6,6 +6,8 @@ I am designed for Model-based User Interface Testing
 Class {
 	#name : #BlDevScripter,
 	#superclass : #Object,
+	#traits : 'TBlDevScripterTask',
+	#classTraits : 'TBlDevScripterTask classTrait',
 	#instVars : [
 		'element',
 		'space',
@@ -16,13 +18,15 @@ Class {
 }
 
 { #category : #tasks }
-BlDevScripter >> check [
-	^ rootTask addTask: (BlDevScripterMultipleCheckTask new)
+BlDevScripter >> addTask: aScripterTask [
+	<return: #BlDevScripterTask>
+	^ rootTask addTask: aScripterTask
 ]
 
-{ #category : #tasks }
-BlDevScripter >> click [
-	^ rootTask addTask: (BlDevScripterClickTask new)
+{ #category : #actions }
+BlDevScripter >> continue [
+	self pulse.
+	rootTask continueOn: self
 ]
 
 { #category : #accessing }
@@ -87,8 +91,10 @@ BlDevScripter >> gtTreeFor: aView [
 BlDevScripter >> initialize [
 	super initialize.
 	
-	rootTask := BlDevScripterCompositeTask new.
+	rootTask := BlDevScripterMultipleTask new.
 	space := BlSpace new.
+	space title: 'Scripter'.
+	space extent: 800 @ 600.
 	events := OrderedCollection new
 ]
 
@@ -112,4 +118,9 @@ BlDevScripter >> spaceWithElement [
 	self element space = space ifFalse: [ 
 		space addChild: self elementWithoutParent ].
 	^ space
+]
+
+{ #category : #actions }
+BlDevScripter >> syncPlay [
+	BlUseAsyncFeatures disableDuring: [ self play ].
 ]

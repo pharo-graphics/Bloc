@@ -8,3 +8,9 @@ Class {
 BlDevScripterTaskFailureState >> color [
 	^ Color fromHexString: #ffa39e
 ]
+
+{ #category : #testing }
+BlDevScripterTaskFailureState >> wasExecuted [
+	<return: #Boolean>
+	^ true
+]

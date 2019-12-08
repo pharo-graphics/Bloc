@@ -14,6 +14,13 @@ BlDevScripterCompositeTask >> addTask: aTask [
 	^ aTask
 ]
 
+{ #category : #actions }
+BlDevScripterCompositeTask >> continueOn: aScripter [
+	self wasExecuted 
+		ifTrue: [ self tasks do: [ :eachTask | eachTask continueOn: aScripter ] ]
+		ifFalse: [ self playIndicatingStateOn: aScripter ].
+]
+
 { #category : #accessing }
 BlDevScripterCompositeTask >> defaultLabel [
 	^ 'Tasks'

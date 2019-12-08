@@ -52,3 +52,9 @@ BlDevScripterTaskState class >> uniqueInstance [
 BlDevScripterTaskState >> color [
 	^ self subclassResponsibility
 ]
+
+{ #category : #testing }
+BlDevScripterTaskState >> wasExecuted [
+	<return: #Boolean>
+	^ false
+]
