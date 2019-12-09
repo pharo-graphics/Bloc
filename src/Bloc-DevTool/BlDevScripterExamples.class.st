@@ -20,6 +20,14 @@ BlDevScripterExamples >> basicScripter [
 	^ aScript
 ]
 
+{ #category : #'examples - ui' }
+BlDevScripterExamples >> basicStepElement [
+	<gtExample>
+	| anElement |
+	anElement := BlDevScripterStepElement new.
+	^ anElement
+]
+
 { #category : #'examples - click check' }
 BlDevScripterExamples >> clickCheck [
 	<gtExample>

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterMultipleCheckStep,
 	#superclass : #BlDevScripterCompositeStep,
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
 { #category : #accessing }

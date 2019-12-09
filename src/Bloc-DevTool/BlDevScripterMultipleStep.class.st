@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlDevScripterCompositeStep,
 	#traits : 'TBlDevScripterStep - {#addStep:}',
 	#classTraits : 'TBlDevScripterStep classTrait',
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
 { #category : #tasks }

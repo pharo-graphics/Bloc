@@ -10,37 +10,37 @@ TBlDevScripterTarget >> asBreadthFirstSearch [
 
 { #category : #accessing }
 TBlDevScripterTarget >> onChildAt: aNumber [
-	self target: (BlDevScripterIndexedChildEventTarget new index: aNumber)
+	self updateTarget: (BlDevScripterIndexedChildEventTarget new index: aNumber)
 ]
 
 { #category : #accessing }
 TBlDevScripterTarget >> onChildFromMessage: aSymbol [
-	self target: (BlDevScripterSelectorChildEventTarget new selector: aSymbol)
+	self updateTarget: (BlDevScripterSelectorChildEventTarget new selector: aSymbol)
 ]
 
 { #category : #accessing }
 TBlDevScripterTarget >> onChildFromSelectionBlock: anOneArgBlock [
-	self target: (BlDevScripterBlockSelectorEventTarget new block: anOneArgBlock)
+	self updateTarget: (BlDevScripterBlockSelectorEventTarget new block: anOneArgBlock)
 ]
 
 { #category : #accessing }
 TBlDevScripterTarget >> onChildNamed: aSymbol [
-	self target: (BlDevScripterNamedChildEventTarget new name: aSymbol)
+	self updateTarget: (BlDevScripterNamedChildEventTarget new name: aSymbol)
 ]
 
 { #category : #accessing }
 TBlDevScripterTarget >> onElementOfClass: aClass [
-	self target: (BlDevScripterElementClassEventTarget new elementClass: aClass)
+	self updateTarget: (BlDevScripterElementClassEventTarget new elementClass: aClass)
 ]
 
 { #category : #accessing }
 TBlDevScripterTarget >> onNestedChild: anArray [
-	self target: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
+	self updateTarget: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
 ]
 
 { #category : #accessing }
 TBlDevScripterTarget >> onSelf [
-	self target: (BlDevScripterSelfEventTarget new)
+	self updateTarget: (BlDevScripterSelfEventTarget new)
 ]
 
 { #category : #accessing }
@@ -52,4 +52,11 @@ TBlDevScripterTarget >> target [
 { #category : #accessing }
 TBlDevScripterTarget >> target: aScripterEventTarget [
 	self explicitRequirement
+]
+
+{ #category : #accessing }
+TBlDevScripterTarget >> updateTarget: aScripterEventTarget [
+	self target 
+		ifNil: [ self target: aScripterEventTarget ]
+		ifNotNil: [ :aTarget | aTarget updateUsing: aScripterEventTarget on: self ]
 ]

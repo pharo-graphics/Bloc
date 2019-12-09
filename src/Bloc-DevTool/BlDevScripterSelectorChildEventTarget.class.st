@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'selector'
 	],
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Targets'
 }
 
 { #category : #testing }

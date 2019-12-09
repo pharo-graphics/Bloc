@@ -7,7 +7,7 @@ Class {
 		'label',
 		'steps'
 	],
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
 { #category : #adding }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'childrenCount'
 	],
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
 { #category : #accessing }
