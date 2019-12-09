@@ -17,7 +17,7 @@ BlGlutinOpenGLSurfaceRenderer >> initializeForSurface: aSurface [
 		sampleCount: aPixelFormat multisapling;
 		stencilBits: aPixelFormat stencilBits;
 		framebufferId: 0;
-		framebufferFormat: (GtGleamGL basicNew GL_RGBA8);
+		framebufferFormat: GtGleamGL GL_RGBA8 value;
 		extent: aSurface physicalSize asPoint
 ]
 
