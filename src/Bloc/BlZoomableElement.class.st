@@ -9,7 +9,7 @@ Class {
 		'zoomCenter',
 		'contentElement'
 	],
-	#category : #'Bloc-Utilities - Scalable'
+	#category : #'Bloc-Utilities - Zoomable'
 }
 
 { #category : #converting }
