@@ -34,8 +34,10 @@ BlMouseProcessor >> canBeClickEvent: aMouseUpEvent [
 
 { #category : #'event testing' }
 BlMouseProcessor >> canBeDblClickEvent: aMouseUpEvent [
-	^ ((self canBeClickEvent: aMouseUpEvent) and:[lastClickEvent isNotNil])
-		and: [ aMouseUpEvent timestamp - lastClickEvent timestamp < self dblClickDelay ]
+	^ (self canBeClickEvent: aMouseUpEvent) 
+		and: [ lastClickEvent isNotNil
+			and: [ aMouseUpEvent target = lastClickEvent target 
+				and: [ aMouseUpEvent timestamp - lastClickEvent timestamp < self dblClickDelay ] ] ]
 ]
 
 { #category : #'event testing' }
