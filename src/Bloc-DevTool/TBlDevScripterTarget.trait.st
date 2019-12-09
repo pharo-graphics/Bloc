@@ -19,6 +19,11 @@ TBlDevScripterTarget >> onChildFromMessage: aSymbol [
 ]
 
 { #category : #accessing }
+TBlDevScripterTarget >> onChildFromSelectionBlock: anOneArgBlock [
+	self target: (BlDevScripterBlockSelectorEventTarget new block: anOneArgBlock)
+]
+
+{ #category : #accessing }
 TBlDevScripterTarget >> onChildNamed: aSymbol [
 	self target: (BlDevScripterNamedChildEventTarget new name: aSymbol)
 ]

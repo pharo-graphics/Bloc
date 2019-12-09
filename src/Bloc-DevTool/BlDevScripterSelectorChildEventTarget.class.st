@@ -10,7 +10,7 @@ Class {
 { #category : #testing }
 BlDevScripterSelectorChildEventTarget class >> matchesWithInput: anObject [
 	<return: #Boolean>
-	^ anObject isSymbol or: [ anObject isKindOf: BlockClosure ]
+	^ anObject isSymbol
 ]
 
 { #category : #'instance creation' }

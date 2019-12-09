@@ -20,6 +20,14 @@ BlDevScripterBreadthFirstSearchEventTarget >> findTargetIn: anElement [
 	self error: 'Cannot find target at ', self target printString.
 ]
 
+{ #category : #printing }
+BlDevScripterBreadthFirstSearchEventTarget >> printOn: aStream [
+	self target ifNil: [ ^ super printOn: aStream ].
+	aStream 
+		nextPutAll: 'BreadthFirstSearch: ';
+		print: self target.
+]
+
 { #category : #accessing }
 BlDevScripterBreadthFirstSearchEventTarget >> target [
 	<return: #BlDevScripterEventTarget>

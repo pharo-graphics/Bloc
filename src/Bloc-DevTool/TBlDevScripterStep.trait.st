@@ -15,6 +15,19 @@ TBlDevScripterStep >> check [
 ]
 
 { #category : #tasks }
+TBlDevScripterStep >> check: aLabel [
+	^ self check label: aLabel
+]
+
+{ #category : #tasks }
+TBlDevScripterStep >> check: aLabel do: anOneArgBlock [
+	| aStep |
+	aStep := self check: aLabel.
+	anOneArgBlock value: aStep.
+	^ aStep
+]
+
+{ #category : #tasks }
 TBlDevScripterStep >> click [
 	^ self addStep: (BlDevScripterClickStep new)
 ]
