@@ -96,6 +96,15 @@ BlDevScripter >> gtSpaceFor: aView [
 ]
 
 { #category : #'gt-extension' }
+BlDevScripter >> gtSpaceTasksFor: aView [
+	<gtView>
+	space ifNil: [ ^ aView empty ].
+	self spaceTasks ifEmpty: [ ^ aView empty ].
+	^ (self spaceTasks gtItemsFor: aView)
+		title: 'Space Tasks'
+]
+
+{ #category : #'gt-extension' }
 BlDevScripter >> gtTreeFor: aView [
 	<gtView>
 	
@@ -122,6 +131,11 @@ BlDevScripter >> play [
 { #category : #actions }
 BlDevScripter >> pulse [
 	space pulse
+]
+
+{ #category : #accessing }
+BlDevScripter >> spaceTasks [
+	^ space taskQueue tasks
 ]
 
 { #category : #accessing }
