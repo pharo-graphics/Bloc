@@ -58,6 +58,7 @@ BlResizerListener >> dragEvent: anEvent [
 	heightChanged
 		ifTrue: [ self resizeTarget height: theBounds height ].
 	
+	self resizeTarget dispatchEvent: (BlResizerResizedEvent new extent: theBounds extent).
 	anEvent currentTarget dispatchEvent: (BlResizerResizedEvent new extent: theBounds extent)
 ]
 
