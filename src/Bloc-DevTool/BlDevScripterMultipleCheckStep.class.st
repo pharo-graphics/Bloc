@@ -1,6 +1,8 @@
 Class {
 	#name : #BlDevScripterMultipleCheckStep,
 	#superclass : #BlDevScripterCompositeStep,
+	#traits : 'TBlDevScripterCheckStep',
+	#classTraits : 'TBlDevScripterCheckStep classTrait',
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
