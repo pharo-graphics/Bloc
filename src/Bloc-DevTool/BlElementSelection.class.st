@@ -1,3 +1,6 @@
+"
+I am a Halos element. For more information about me, see ${class:BlDevHalosEventListener}$.
+"
 Class {
 	#name : #BlElementSelection,
 	#superclass : #BlElement,
@@ -14,7 +17,7 @@ Class {
 		'paddingElement',
 		'extentElement'
 	],
-	#category : 'Bloc-DevTool-Core'
+	#category : #'Bloc-DevTool-Core'
 }
 
 { #category : #'instance creation' }
@@ -93,7 +96,7 @@ BlElementSelection >> initialize [
 	self initializeClientListener.
 	self layout: BlFrameLayout new.
 
-	zIndex := 1000.
+	self elevation: (BlGlobalElevation elevation: 1000).
 	hasInformation := false
 ]
 

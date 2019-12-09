@@ -10,3 +10,8 @@ BlDevScripterSelfEventTarget >> findTargetIn: anElement [
 
 	^ anElement
 ]
+
+{ #category : #accessing }
+BlDevScripterSelfEventTarget >> identifier [
+	^ 'self'
+]

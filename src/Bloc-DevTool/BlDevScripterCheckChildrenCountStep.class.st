@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDevScripterCheckChildrenCountTask,
-	#superclass : #BlDevScripterCheckTask,
+	#name : #BlDevScripterCheckChildrenCountStep,
+	#superclass : #BlDevScripterCheckStep,
 	#instVars : [
 		'childrenCount'
 	],
@@ -8,17 +8,17 @@ Class {
 }
 
 { #category : #accessing }
-BlDevScripterCheckChildrenCountTask >> childrenCount [
+BlDevScripterCheckChildrenCountStep >> childrenCount [
 	^ childrenCount
 ]
 
 { #category : #accessing }
-BlDevScripterCheckChildrenCountTask >> childrenCount: aNumber [
+BlDevScripterCheckChildrenCountStep >> childrenCount: aNumber [
 	childrenCount := aNumber
 ]
 
 { #category : #printing }
-BlDevScripterCheckChildrenCountTask >> gtDisplayOn: aStream [
+BlDevScripterCheckChildrenCountStep >> gtDisplayOn: aStream [
 	super gtDisplayOn: aStream.
 	aStream
 		nextPutAll: ': ';
@@ -26,11 +26,11 @@ BlDevScripterCheckChildrenCountTask >> gtDisplayOn: aStream [
 ]
 
 { #category : #accessing }
-BlDevScripterCheckChildrenCountTask >> label [
+BlDevScripterCheckChildrenCountStep >> label [
 	^ 'Children'
 ]
 
 { #category : #actions }
-BlDevScripterCheckChildrenCountTask >> validateOn: anElement [
+BlDevScripterCheckChildrenCountStep >> validateOn: anElement [
 	self assert: anElement childrenCount equals: self childrenCount
 ]

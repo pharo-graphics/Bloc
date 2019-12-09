@@ -7,11 +7,27 @@ Class {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
+{ #category : #testing }
+BlDevScripterNamedChildEventTarget class >> matchesWithInput: anObject [
+	<return: #Boolean>
+	^ anObject isString and: [ anObject isSymbol not ]
+]
+
+{ #category : #'instance creation' }
+BlDevScripterNamedChildEventTarget class >> newFromInput: anObject [
+	^ self new name: anObject
+]
+
 { #category : #searching }
 BlDevScripterNamedChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
 	^ anElement childNamed: self name
+]
+
+{ #category : #accessing }
+BlDevScripterNamedChildEventTarget >> identifier [
+	^ self name
 ]
 
 { #category : #accessing }
@@ -22,4 +38,12 @@ BlDevScripterNamedChildEventTarget >> name [
 { #category : #accessing }
 BlDevScripterNamedChildEventTarget >> name: anObject [
 	name := anObject
+]
+
+{ #category : #printing }
+BlDevScripterNamedChildEventTarget >> printOn: aStream [
+	self name ifNil: [ ^ super printOn: aStream ].
+	aStream 
+		nextPutAll: 'Child Named: ';
+		print: self name.
 ]
