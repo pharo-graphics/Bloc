@@ -11,7 +11,7 @@ ${example:BlDevScripterExamples>>#clickCheck|previewExpanded=true|previewHeight=
 Class {
 	#name : #BlDevScripterClickStep,
 	#superclass : #BlDevScripterInteractionStep,
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
 { #category : #accessing }

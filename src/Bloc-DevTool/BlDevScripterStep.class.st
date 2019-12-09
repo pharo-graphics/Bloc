@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'state'
 	],
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
 { #category : #actions }
@@ -31,7 +31,7 @@ BlDevScripterStep >> gtTreeFor: aView [
 { #category : #initialization }
 BlDevScripterStep >> initialize [
 	super initialize.
-	state := BlDevScripterTaskState ready.
+	state := BlDevScripterStepState ready.
 ]
 
 { #category : #accessing }
@@ -48,11 +48,7 @@ BlDevScripterStep >> labelColor [
 BlDevScripterStep >> paintTreeWith: view [
 	view nodes
 		shape: [ :each | 
-			BlTextElement new 
-				zIndex: 10;
-				background: Color white;
-				constraintsDo: [ :c | c padding: (BlInsets all: 5) ];
-				text: (each gtDisplayString asRopedText foreground: each labelColor) ];
+			BlDevScripterStepElement newFromStep: each ];
 		with: (self withDeepCollect: #steps).
 	view edges
 		shape: [ :each | BlLineElement new border: (BlBorder paint: (Color gray alpha: 0.5) width: 1 ) ];
@@ -65,14 +61,14 @@ BlDevScripterStep >> playIndicatingStateOn: aScripter [
 	self 
 		assert: [ state wasExecuted not ]
 		description: [ 'I should not be executed twice' ].
-	state := BlDevScripterTaskState executing.
+	state := BlDevScripterStepState executing.
 	[ 
 		self playOn: aScripter.
-		state := BlDevScripterTaskState success.
+		state := BlDevScripterStepState success.
 	]
 		on: Error 
 		do: [ :anException | 
-			state := BlDevScripterTaskState failure.
+			state := BlDevScripterStepState failure.
 			anException pass ]
 ]
 

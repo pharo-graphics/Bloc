@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterRequestFocusStep,
 	#superclass : #BlDevScripterInteractionStep,
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
 { #category : #accessing }

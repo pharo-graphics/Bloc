@@ -4,8 +4,18 @@ Class {
 	#instVars : [
 		'targets'
 	],
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Targets'
 }
+
+{ #category : #initialization }
+BlDevScripterNestedChildEventTarget >> addTarget: aScripterEventTarget [
+	| theNewTargets |
+	self 
+		assert: [ aScripterEventTarget isNotNil ] 
+		description: [ 'Scripter event target must be non-nil' ].
+	theNewTargets := self targets copyWith: aScripterEventTarget.
+	self targets: theNewTargets
+]
 
 { #category : #searching }
 BlDevScripterNestedChildEventTarget >> findTargetIn: anElement [
@@ -24,6 +34,12 @@ BlDevScripterNestedChildEventTarget >> gtTargetsFor: aView [
 	self targets ifNil: [ ^ aView empty ].
 	^ (self targets gtItemsFor: aView)
 		title: 'Targets'
+]
+
+{ #category : #initialization }
+BlDevScripterNestedChildEventTarget >> initialize [
+	super initialize.
+	targets := #().
 ]
 
 { #category : #printing }
@@ -51,4 +67,10 @@ BlDevScripterNestedChildEventTarget >> targets [
 { #category : #accessing }
 BlDevScripterNestedChildEventTarget >> targets: anObject [
 	targets := anObject
+]
+
+{ #category : #updating }
+BlDevScripterNestedChildEventTarget >> updateUsing: aScripterEventTarget on: aStep [
+	self addTarget: aScripterEventTarget.
+	aStep target: self.
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterEventTarget,
 	#superclass : #Object,
-	#category : #'Bloc-DevTool-Scripter'
+	#category : #'Bloc-DevTool-Scripter-Targets'
 }
 
 { #category : #testing }
@@ -30,4 +30,12 @@ BlDevScripterEventTarget >> findTargetIn: anElement [
 { #category : #accessing }
 BlDevScripterEventTarget >> identifier [
 	^ self className
+]
+
+{ #category : #updating }
+BlDevScripterEventTarget >> updateUsing: aScripterEventTarget on: aStep [
+	| aNestedTarget |
+	aNestedTarget := BlDevScripterNestedChildEventTarget new.
+	aNestedTarget targets: { self. aScripterEventTarget }.
+	aStep target: aNestedTarget.
 ]
