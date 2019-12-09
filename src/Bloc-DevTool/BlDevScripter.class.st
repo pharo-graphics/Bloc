@@ -23,11 +23,6 @@ BlDevScripter >> addStep: aScripterStep [
 	^ rootStep addStep: aScripterStep
 ]
 
-{ #category : #actions }
-BlDevScripter >> asyncContinue [
-	BlUseAsyncFeatures disableDuring: [ self continue ].
-]
-
 { #category : #tasks }
 BlDevScripter >> check [
 	^ self addStep: (BlDevScripterMultipleCheckStep new)
@@ -80,7 +75,17 @@ BlDevScripter >> gtEventsFor: aView [
 	<gtView>
 	self events ifNil: [ ^ aView empty ].
 	^ (self events gtItemsFor: aView)
-		title: 'Events'
+		title: 'Events';
+		priority: 3
+]
+
+{ #category : #'gt-extension' }
+BlDevScripter >> gtReveresedEventsFor: aView [
+	<gtView>
+	self events ifNil: [ ^ aView empty ].
+	^ (self events reversed gtItemsFor: aView)
+		title: 'Events (Reversed)';
+		priority: 4
 ]
 
 { #category : #'gt-extension' }
@@ -152,6 +157,11 @@ BlDevScripter >> spaceWithElement [
 { #category : #tasks }
 BlDevScripter >> substep [
 	^ self addStep: (BlDevScripterMultipleStep new)
+]
+
+{ #category : #actions }
+BlDevScripter >> syncContinue [
+	BlUseAsyncFeatures disableDuring: [ self continue ].
 ]
 
 { #category : #actions }

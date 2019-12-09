@@ -24,6 +24,7 @@ BlDevScripterStep >> gtTreeFor: aView [
 	
 	^ aView mondrian
 		title: 'Steps';
+		priority: 2;
 		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
 ]
 

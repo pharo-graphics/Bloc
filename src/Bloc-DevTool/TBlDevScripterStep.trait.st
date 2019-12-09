@@ -30,6 +30,14 @@ TBlDevScripterStep >> substep: aLabel [
 ]
 
 { #category : #tasks }
+TBlDevScripterStep >> substep: aLabel do: anOneArgBlock [
+	| aStep |
+	aStep := self substep label: aLabel.
+	anOneArgBlock value: aStep.
+	^ aStep
+]
+
+{ #category : #tasks }
 TBlDevScripterStep >> type [
 	^ self addStep: BlDevScriptTypeTextStep new
 ]
