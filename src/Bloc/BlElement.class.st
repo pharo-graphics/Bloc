@@ -2663,15 +2663,15 @@ BlElement >> position: aPosition extent: anExtent [
 		assert: [ anExtent x isInfinite not and: [ anExtent y isInfinite not ] ]
 		description: [ 'Extent can not be infinite' ].
 	
-	isPositionChanged := (self position closeTo: aPosition) not.
-	isExtentChanged := (self extent closeTo: anExtent) not.
+	aPreviousPosition := self position.
+	aPreviousExtent := self extent.
+	
+	isPositionChanged := (aPreviousPosition closeTo: aPosition) not.
+	isExtentChanged := (aPreviousExtent closeTo: anExtent) not.
 
 	"nothing changed, return"
 	(isPositionChanged or: [ isExtentChanged ])
 		ifFalse: [ ^ self ].
-
-	aPreviousPosition := self position.
-	aPreviousExtent := self extent.
 
 	"If we are growing, there is no need to invalidate before extent change"
 	isGrowing := aPreviousExtent <= anExtent.

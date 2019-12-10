@@ -76,7 +76,11 @@ BlZoomableElement >> initialize [
 	super initialize.
 	
 	zoomLevel := nil.
-	zoomCenter := 0.5@0.5
+	zoomCenter := 0.5@0.5.
+	
+	self constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ]
 ]
 
 { #category : #layout }
@@ -150,6 +154,8 @@ BlZoomableElement >> onLayout: aBounds [
 
 	aContentBounds := BlBounds origin: 0 @ 0 extent: self contentElement measuredExtent.
 	aContentBounds translateBy: (self measuredExtent - aContentBounds extent) / 2.0.
+	aContentBounds translateBy: (self measuredExtent) * ((0.5 asPoint - zoomCenter)) * self zoomLevel.
+	aContentBounds translateBy: ((aContentBounds extent - self measuredExtent)) * (0.5 - zoomCenter) * self zoomLevel.
 	
 	self contentElement applyLayoutIn: aContentBounds
 ]
@@ -167,7 +173,9 @@ BlZoomableElement >> onMeasure: anExtentMeasurementSpec [
 	aScaleFactor := self measureScale.
 
 	self contentElement
-		transformDo: [ :t | t scaleBy: aScaleFactor asPoint ].
+		transformDo: [ :t |
+			"t origin: (BlAffineTransformationNormalizedPositionOrigin position: (1 - zoomCenter))."
+			t scaleBy: aScaleFactor asPoint ].
 
 	aTransformedExtent := self contentElement measuredBounds transformed extent.
 	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent).
@@ -178,8 +186,19 @@ BlZoomableElement >> onMeasure: anExtentMeasurementSpec [
 ]
 
 { #category : #accessing }
-BlZoomableElement >> zoomCenter: aNumber [
-	zoomCenter := aNumber.
+BlZoomableElement >> zoomCenter [
+	<return: #Point>
+
+	^ zoomCenter
+]
+
+{ #category : #accessing }
+BlZoomableElement >> zoomCenter: aPoint [
+	"Zoom center defines a point of the content element which should be in the middle of the zoomable
+	element when zoomed in or zoomed out.
+	By default the center of the content element matches the center of the zoomable element, hence the zoomCenter is 0.5@0.5"
+
+	zoomCenter := aPoint asPoint.
 	self requestLayout
 ]
 
