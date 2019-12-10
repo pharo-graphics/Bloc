@@ -61,6 +61,16 @@ BlDevScripter >> events [
 ]
 
 { #category : #'gt-extension' }
+BlDevScripter >> gtElementsFor: aView [
+	<gtView>
+	space ifNil: [ ^ aView empty ].
+	^ (space root gtChildrenFor: aView)
+		title: 'Elements';
+		expandUpTo: 5;
+		priority: 5
+]
+
+{ #category : #'gt-extension' }
 BlDevScripter >> gtEventsFor: aView [
 	<gtView>
 	self events ifNil: [ ^ aView empty ].
@@ -100,10 +110,26 @@ BlDevScripter >> gtSpaceTasksFor: aView [
 ]
 
 { #category : #'gt-extension' }
-BlDevScripter >> gtTreeFor: aView [
+BlDevScripter >> gtStepsMondrianTreeFor: aView [
 	<gtView>
 	
-	^ rootStep gtTreeFor: aView
+	^ rootStep gtStepsMondrianTreeFor: aView
+]
+
+{ #category : #'gt-extension' }
+BlDevScripter >> gtStepsTreeFor: aView [
+	<gtView>
+	
+	^ rootStep gtStepsTreeFor: aView
+]
+
+{ #category : #'gt-extension' }
+BlDevScripter >> gtUserDataFor: aView [
+	<gtView>
+	space ifNil: [ ^ aView empty ].
+	self userData isEmpty ifTrue: [ ^ aView empty ].
+	^ (self userData gtUserDataFor: aView)
+		priority: 7
 ]
 
 { #category : #initialization }

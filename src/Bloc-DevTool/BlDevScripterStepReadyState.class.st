@@ -8,3 +8,8 @@ Class {
 BlDevScripterStepReadyState >> color [
 	^ Color black alpha: 0.65
 ]
+
+{ #category : #accessing }
+BlDevScripterStepReadyState >> name [
+	^ 'ready'
+]

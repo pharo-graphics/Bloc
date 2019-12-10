@@ -29,6 +29,11 @@ BlDevScripterStepState class >> failure [
 ]
 
 { #category : #accessing }
+BlDevScripterStepState class >> haltHere [
+	^ BlDevScripterStepHaltState default
+]
+
+{ #category : #accessing }
 BlDevScripterStepState class >> ready [
 	^ BlDevScripterStepReadyState default
 ]
@@ -50,6 +55,18 @@ BlDevScripterStepState class >> uniqueInstance [
 
 { #category : #accessing }
 BlDevScripterStepState >> color [
+	<return: #Color>
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+BlDevScripterStepState >> isHalt [
+	^ false
+]
+
+{ #category : #accessing }
+BlDevScripterStepState >> name [
+	<return: #String>
 	^ self subclassResponsibility
 ]
 

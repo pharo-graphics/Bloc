@@ -36,7 +36,7 @@ BlDevScripterStepElement >> initialize [
 { #category : #initialization }
 BlDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 	| aStepText aTargetStep |
-	self border: (BlBorder paint: aBlDevScripterStep labelColor width: 2).
+	self border: (BlBorder paint: aBlDevScripterStep stateColor width: 2).
 	aStepText := aBlDevScripterStep gtDisplayText foreground: Color black.
 	labelElement text: aStepText.
 	aTargetStep := aBlDevScripterStep target gtDisplayText 

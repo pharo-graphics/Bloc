@@ -22,6 +22,9 @@ BlDevScripterSelectorChildEventTarget class >> newFromInput: anObject [
 BlDevScripterSelectorChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
+	self assert: self selector isNotNil.
+	(anElement respondsTo: self selector) ifFalse: [ 
+		AssertionFailure signal: anElement printString, ' does not responds to ', self selector asString ].
 	^ self selector cull: anElement
 ]
 
@@ -46,5 +49,11 @@ BlDevScripterSelectorChildEventTarget >> selector [
 
 { #category : #accessing }
 BlDevScripterSelectorChildEventTarget >> selector: aSymbol [
+	self 
+		assert: [ aSymbol isSymbol and: [ aSymbol isNotEmpty ] ]
+		description: [ 'Selector must be a non-empty symbol' ].
+	self 
+		assert: [ aSymbol numArgs = 0 ]
+		description: [ 'Selector must be an unnary message' ].
 	selector := aSymbol
 ]

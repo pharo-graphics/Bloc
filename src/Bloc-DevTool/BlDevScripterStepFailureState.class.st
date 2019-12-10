@@ -9,6 +9,11 @@ BlDevScripterStepFailureState >> color [
 	^ Color fromHexString: #ffa39e
 ]
 
+{ #category : #accessing }
+BlDevScripterStepFailureState >> name [
+	^ 'failed'
+]
+
 { #category : #testing }
 BlDevScripterStepFailureState >> wasExecuted [
 	<return: #Boolean>

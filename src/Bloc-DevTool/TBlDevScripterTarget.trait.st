@@ -32,7 +32,7 @@ TBlDevScripterTarget >> onChildNamed: aSymbol [
 ]
 
 { #category : #'targets - children' }
-TBlDevScripterTarget >> onElementOfClass: aClass [
+TBlDevScripterTarget >> onChildOfClass: aClass [
 	self updateTarget: (BlDevScripterElementClassEventTarget new elementClass: aClass)
 ]
 

@@ -22,6 +22,9 @@ BlDevScripterIndexedChildEventTarget class >> newFromInput: anObject [
 BlDevScripterIndexedChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
+	self 
+		assert: self index <= anElement childrenCount
+		description: [ 'Index ', self index asString, ' is bigger than number of children' ].
 	^ anElement children at: self index
 ]
 

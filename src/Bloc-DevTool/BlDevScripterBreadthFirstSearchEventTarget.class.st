@@ -29,7 +29,7 @@ BlDevScripterBreadthFirstSearchEventTarget >> postCopy [
 BlDevScripterBreadthFirstSearchEventTarget >> printOn: aStream [
 	self target ifNil: [ ^ super printOn: aStream ].
 	aStream 
-		nextPutAll: 'BreadthFirstSearch: ';
+		nextPutAll: 'BreadthFirstSearch ';
 		print: self target.
 ]
 

@@ -22,7 +22,10 @@ BlDevScripterNamedChildEventTarget class >> newFromInput: anObject [
 BlDevScripterNamedChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
-	^ anElement childNamed: self name
+	^ anElement 
+		childNamed: self name
+		ifFound: [ :theChild | theChild ]
+		ifNone: [ AssertionFailure signal: 'Children container named ', self name asString, ' does not exist' ]
 ]
 
 { #category : #accessing }

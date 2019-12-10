@@ -8,3 +8,8 @@ Class {
 BlDevScripterStepExecutingState >> color [
 	^ Color fromHexString: #'45abfe'
 ]
+
+{ #category : #accessing }
+BlDevScripterStepExecutingState >> name [
+	^ 'executing'
+]

@@ -25,13 +25,35 @@ BlDevScripterStep >> gtDisplayOn: aStream [
 ]
 
 { #category : #'gt-extension' }
-BlDevScripterStep >> gtTreeFor: aView [
+BlDevScripterStep >> gtStepsMondrianTreeFor: aView [
 	<gtView>
 	
 	^ aView mondrian
 		title: 'Steps';
 		priority: 2;
 		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
+]
+
+{ #category : #'gt-extension' }
+BlDevScripterStep >> gtStepsTreeFor: aView [
+	<gtView>
+	
+	^ aView columnedTree
+		title: 'Steps In Tree';
+		priority: 2.5;
+		expandUpTo: 3;
+		items: [ { self } ];
+		children: [ :aStep | aStep steps ];
+		column: 'Status' do: [ :aColumn | 
+			aColumn 
+				itemFormat: [ :aStep | aStep stateName asRopedText foreground: aStep stateColor ] ];
+		column: 'Step' item: #label;
+		column: 'Target' item: #target
+]
+
+{ #category : #state }
+BlDevScripterStep >> haltHere [
+	state := BlDevScripterStepState haltHere
 ]
 
 { #category : #initialization }
@@ -48,11 +70,6 @@ BlDevScripterStep >> label [
 { #category : #accessing }
 BlDevScripterStep >> label: anObject [
 	label := anObject
-]
-
-{ #category : #accessing }
-BlDevScripterStep >> labelColor [
-	^ state color
 ]
 
 { #category : #'gt-extension' }
@@ -72,6 +89,7 @@ BlDevScripterStep >> playIndicatingStateOn: aScripter [
 	self 
 		assert: [ state wasExecuted not ]
 		description: [ 'I should not be executed twice' ].
+	state isHalt ifTrue: [ self halt ].
 	state := BlDevScripterStepState executing.
 	[ 
 		self playOn: aScripter.
@@ -86,6 +104,16 @@ BlDevScripterStep >> playIndicatingStateOn: aScripter [
 { #category : #actions }
 BlDevScripterStep >> playOn: aScripter [
 	
+]
+
+{ #category : #state }
+BlDevScripterStep >> stateColor [
+	^ state color
+]
+
+{ #category : #state }
+BlDevScripterStep >> stateName [
+	^ state name
 ]
 
 { #category : #accessing }
