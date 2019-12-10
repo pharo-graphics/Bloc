@@ -9,16 +9,16 @@ Class {
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
+{ #category : #accessing }
+BlDevScripterCheckStep >> defaultLabel [
+	^ 'Check'
+]
+
 { #category : #initialization }
 BlDevScripterCheckStep >> initialize [
 	super initialize.
 	
 	self onSelf
-]
-
-{ #category : #accessing }
-BlDevScripterCheckStep >> label [
-	^ 'Check'
 ]
 
 { #category : #actions }
@@ -28,14 +28,14 @@ BlDevScripterCheckStep >> playOn: aScripter [
 	self validateOn: anElement
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - accessing and updating' }
 BlDevScripterCheckStep >> target [
 	<return: #BlDevScripterEventTarget>
 
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - accessing and updating' }
 BlDevScripterCheckStep >> target: aScripterEventTarget [
 	target := aScripterEventTarget
 ]

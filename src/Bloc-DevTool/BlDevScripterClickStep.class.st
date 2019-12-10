@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : #accessing }
-BlDevScripterClickStep >> label [
+BlDevScripterClickStep >> defaultLabel [
 	^ 'Click'
 ]
 

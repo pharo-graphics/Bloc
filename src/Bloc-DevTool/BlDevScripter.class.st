@@ -6,8 +6,8 @@ I am designed for Model-based User Interface Testing
 Class {
 	#name : #BlDevScripter,
 	#superclass : #Object,
-	#traits : 'TBlDevScripterStep',
-	#classTraits : 'TBlDevScripterStep classTrait',
+	#traits : 'TBlDevScripterActionStep',
+	#classTraits : 'TBlDevScripterActionStep classTrait',
 	#instVars : [
 		'element',
 		'space',
@@ -17,20 +17,10 @@ Class {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
-{ #category : #tasks }
+{ #category : #adding }
 BlDevScripter >> addStep: aScripterStep [
 	<return: #BlDevScripterStep>
 	^ rootStep addStep: aScripterStep
-]
-
-{ #category : #tasks }
-BlDevScripter >> check [
-	^ self addStep: (BlDevScripterMultipleCheckStep new)
-]
-
-{ #category : #tasks }
-BlDevScripter >> click [
-	^ self addStep: (BlDevScripterClickStep new)
 ]
 
 { #category : #actions }
@@ -120,7 +110,7 @@ BlDevScripter >> gtTreeFor: aView [
 BlDevScripter >> initialize [
 	super initialize.
 	
-	rootStep := BlDevScripterMultipleStep new.
+	rootStep := BlDevScripterMultipleActionStep new.
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
@@ -154,9 +144,16 @@ BlDevScripter >> spaceWithElement [
 	^ space
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - storing' }
+BlDevScripter >> storeAt: aSymbol elementInfo: anOneArgBlock [
+	^ self addStep: (BlDevScripterStoreElementInfoStep new
+		key: aSymbol;
+		block: anOneArgBlock)
+]
+
+{ #category : #'steps - subactions' }
 BlDevScripter >> substep [
-	^ self addStep: (BlDevScripterMultipleStep new)
+	^ self addStep: (BlDevScripterMultipleActionStep new)
 ]
 
 { #category : #actions }
@@ -169,7 +166,8 @@ BlDevScripter >> syncPlay [
 	BlUseAsyncFeatures disableDuring: [ self play ].
 ]
 
-{ #category : #tasks }
-BlDevScripter >> type [
-	^ self addStep: BlDevScriptTypeTextStep new
+{ #category : #accessing }
+BlDevScripter >> userData [
+	<return: #BlDevScripterUserData>
+	^ space root devScripterData
 ]

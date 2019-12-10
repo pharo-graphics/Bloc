@@ -7,17 +7,17 @@ Class {
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
+{ #category : #accessing }
+BlDevScripterCheckTotalChildrenCountStep >> defaultLabel [
+	^ 'Total Children'
+]
+
 { #category : #printing }
 BlDevScripterCheckTotalChildrenCountStep >> gtDisplayOn: aStream [
 	super gtDisplayOn: aStream.
 	aStream
 		nextPutAll: ': ';
 		nextPutAll: self totalChildrenCount asString
-]
-
-{ #category : #accessing }
-BlDevScripterCheckTotalChildrenCountStep >> label [
-	^ 'Total children'
 ]
 
 { #category : #accessing }

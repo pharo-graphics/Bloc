@@ -19,7 +19,7 @@ BlDevScripterCheckElementStep >> block: anObject [
 ]
 
 { #category : #accessing }
-BlDevScripterCheckElementStep >> label [
+BlDevScripterCheckElementStep >> defaultLabel [
 	^ self block 
 		ifNotNil: [ :aBlock | aBlock printStringLimitedTo: 42 ] 
 		ifNil: [ self className ]
@@ -31,6 +31,6 @@ BlDevScripterCheckElementStep >> validateOn: anElement [
 		assert: self block isNotNil
 		description: 'Check block must be defined'.
 	self 
-		assert: (self block value: anElement)
+		assert: (self block cull: anElement cull: anElement devScripterData)
 		description: [ 'Element does not satisfy ', self block printString ]
 ]

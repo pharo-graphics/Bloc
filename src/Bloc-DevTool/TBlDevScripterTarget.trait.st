@@ -1,60 +1,63 @@
+"
+I define common step target definitions.
+"
 Trait {
 	#name : #TBlDevScripterTarget,
 	#category : #'Bloc-DevTool-Scripter'
 }
 
-{ #category : #converting }
+{ #category : #'targets - converting' }
 TBlDevScripterTarget >> asBreadthFirstSearch [
 	self target: (BlDevScripterBreadthFirstSearchEventTarget new target: self target)
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onChildAt: aNumber [
 	self updateTarget: (BlDevScripterIndexedChildEventTarget new index: aNumber)
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onChildFromMessage: aSymbol [
 	self updateTarget: (BlDevScripterSelectorChildEventTarget new selector: aSymbol)
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onChildFromSelectionBlock: anOneArgBlock [
 	self updateTarget: (BlDevScripterBlockSelectorEventTarget new block: anOneArgBlock)
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onChildNamed: aSymbol [
 	self updateTarget: (BlDevScripterNamedChildEventTarget new name: aSymbol)
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onElementOfClass: aClass [
 	self updateTarget: (BlDevScripterElementClassEventTarget new elementClass: aClass)
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onNestedChild: anArray [
 	self updateTarget: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onSelf [
 	self updateTarget: (BlDevScripterSelfEventTarget new)
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - accessing and updating' }
 TBlDevScripterTarget >> target [
 	<return: #BlDevScripterEventTarget>
 	self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - accessing and updating' }
 TBlDevScripterTarget >> target: aScripterEventTarget [
 	self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - accessing and updating' }
 TBlDevScripterTarget >> updateTarget: aScripterEventTarget [
 	self target 
 		ifNil: [ self target: aScripterEventTarget ]

@@ -16,14 +16,14 @@ BlDevScripterInteractionStep >> initialize [
 	self onSelf
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - accessing and updating' }
 BlDevScripterInteractionStep >> target [
 	<return: #BlDevScripterEventTarget>
 
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : #'targets - accessing and updating' }
 BlDevScripterInteractionStep >> target: aScripterEventTarget [
 	target := aScripterEventTarget
 ]

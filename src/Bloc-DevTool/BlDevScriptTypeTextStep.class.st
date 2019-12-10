@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-BlDevScriptTypeTextStep >> label [
+BlDevScriptTypeTextStep >> defaultLabel [
 	^ self text 
 		ifNotNil: [ :aString | 'Type: ', aString asString ]
 		ifNil: [ self className ]

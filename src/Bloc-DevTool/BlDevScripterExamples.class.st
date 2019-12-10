@@ -35,7 +35,7 @@ BlDevScripterExamples >> clickCheck [
 	anElement := BlDevHalosEventListenerExamples new containerWithRectangle.
 	aScript := self basicScripter element: anElement.
 	aScript click onChildAt: 1.
-	aScript check clickOnChildAt: 1.
+	aScript check click onChildAt: 1.
 	aScript play.
 	^ aScript
 ]
