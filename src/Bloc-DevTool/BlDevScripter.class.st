@@ -64,10 +64,11 @@ BlDevScripter >> events [
 BlDevScripter >> gtElementsFor: aView [
 	<gtView>
 	space ifNil: [ ^ aView empty ].
-	^ (space root gtChildrenFor: aView)
-		title: 'Elements';
-		expandUpTo: 5;
-		priority: 5
+	^ aView tree
+		title: 'Children';
+		items: [ space root children ];
+		children: #children;
+		expandUpTo: 3
 ]
 
 { #category : #'gt-extension' }
