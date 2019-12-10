@@ -46,6 +46,13 @@ BrStencilValuableExecutor >> resetArguments [
 	arguments removeAll
 ]
 
+{ #category : #printing }
+BrStencilValuableExecutor >> storeOn: aStream [
+	valuable isBlock
+		ifTrue: [ aStream nextPutAll: valuable asString ]
+		ifFalse: [ aStream nextPutAll: '[  ]' ]
+]
+
 { #category : #accessing }
 BrStencilValuableExecutor >> valuable [
 	^ valuable

@@ -68,3 +68,12 @@ BrStencilBuilder >> initialize [
 { #category : #'api - instantiation' }
 BrStencilBuilder >> paramsOn: aStencilExecutor [
 ]
+
+{ #category : #printing }
+BrStencilBuilder >> storeOn: aStream [
+	aStream store: executor.
+	aStream space.
+	aStream nextPutAll: #asStencilBuilder: asString.
+	aStream space.
+	aStream nextPutAll: self class name.
+]

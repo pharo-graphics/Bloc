@@ -100,6 +100,16 @@ BlTextAttribute >> isStyle [
 	^ true
 ]
 
+{ #category : #printing }
+BlTextAttribute >> storeOn: aStream [
+	aStream
+		nextPutAll: self class name;
+		nextPutAll: ' new'.
+
+	isOverwritableByStyler
+		ifFalse: [ aStream nextPutAll: ' ', #beNotOverwritableByStyler asString ]
+]
+
 { #category : #comparing }
 BlTextAttribute >> type [
 	"Return an object that is used to compare attribute by type

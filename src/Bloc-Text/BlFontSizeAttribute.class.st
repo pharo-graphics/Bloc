@@ -57,5 +57,20 @@ BlFontSizeAttribute >> size [
 
 { #category : #accessing }
 BlFontSizeAttribute >> size: aNumber [
+	self
+		assert: [ size isNil ]
+		description: [ 'I am immutable and can not be modified' ].
+
 	size := aNumber
+]
+
+{ #category : #printing }
+BlFontSizeAttribute >> storeOn: aStream [
+	super storeOn: aStream.
+	
+	aStream
+		space;
+		nextPutAll: #size: asString;
+		space;
+		store: size
 ]

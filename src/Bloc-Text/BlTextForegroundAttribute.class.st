@@ -63,3 +63,14 @@ BlTextForegroundAttribute >> printOn: aStream [
 		nextPutAll: 'text-foreground: ';
 		nextPutAll: self paint printString
 ]
+
+{ #category : #printing }
+BlTextForegroundAttribute >> storeOn: aStream [
+	super storeOn: aStream.
+	
+	aStream
+		space;
+		nextPutAll: #paint: asString;
+		space;
+		store: paint
+]
