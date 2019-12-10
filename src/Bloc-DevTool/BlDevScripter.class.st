@@ -6,8 +6,8 @@ I am designed for Model-based User Interface Testing
 Class {
 	#name : #BlDevScripter,
 	#superclass : #Object,
-	#traits : 'TBlDevScripterStep',
-	#classTraits : 'TBlDevScripterStep classTrait',
+	#traits : 'TBlDevScripterActionStep',
+	#classTraits : 'TBlDevScripterActionStep classTrait',
 	#instVars : [
 		'element',
 		'space',
@@ -17,20 +17,10 @@ Class {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
-{ #category : #tasks }
+{ #category : #adding }
 BlDevScripter >> addStep: aScripterStep [
 	<return: #BlDevScripterStep>
 	^ rootStep addStep: aScripterStep
-]
-
-{ #category : #tasks }
-BlDevScripter >> check [
-	^ self addStep: (BlDevScripterMultipleCheckStep new)
-]
-
-{ #category : #tasks }
-BlDevScripter >> click [
-	^ self addStep: (BlDevScripterClickStep new)
 ]
 
 { #category : #actions }
@@ -154,11 +144,6 @@ BlDevScripter >> spaceWithElement [
 	^ space
 ]
 
-{ #category : #tasks }
-BlDevScripter >> substep [
-	^ self addStep: (BlDevScripterMultipleStep new)
-]
-
 { #category : #actions }
 BlDevScripter >> syncContinue [
 	BlUseAsyncFeatures disableDuring: [ self continue ].
@@ -167,9 +152,4 @@ BlDevScripter >> syncContinue [
 { #category : #actions }
 BlDevScripter >> syncPlay [
 	BlUseAsyncFeatures disableDuring: [ self play ].
-]
-
-{ #category : #tasks }
-BlDevScripter >> type [
-	^ self addStep: BlDevScriptTypeTextStep new
 ]
