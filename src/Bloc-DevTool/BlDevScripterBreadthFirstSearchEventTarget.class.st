@@ -20,6 +20,11 @@ BlDevScripterBreadthFirstSearchEventTarget >> findTargetIn: anElement [
 	 AssertionFailure signal: 'Cannot find target at ', self target printString.
 ]
 
+{ #category : #copying }
+BlDevScripterBreadthFirstSearchEventTarget >> postCopy [
+	self target: self target copy
+]
+
 { #category : #printing }
 BlDevScripterBreadthFirstSearchEventTarget >> printOn: aStream [
 	self target ifNil: [ ^ super printOn: aStream ].

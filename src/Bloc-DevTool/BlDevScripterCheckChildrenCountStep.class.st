@@ -17,17 +17,17 @@ BlDevScripterCheckChildrenCountStep >> childrenCount: aNumber [
 	childrenCount := aNumber
 ]
 
+{ #category : #accessing }
+BlDevScripterCheckChildrenCountStep >> defaultLabel [
+	^ 'Children'
+]
+
 { #category : #printing }
 BlDevScripterCheckChildrenCountStep >> gtDisplayOn: aStream [
 	super gtDisplayOn: aStream.
 	aStream
 		nextPutAll: ': ';
 		nextPutAll: self childrenCount asString
-]
-
-{ #category : #accessing }
-BlDevScripterCheckChildrenCountStep >> label [
-	^ 'Children'
 ]
 
 { #category : #actions }

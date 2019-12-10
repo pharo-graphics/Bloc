@@ -42,6 +42,11 @@ BlDevScripterNestedChildEventTarget >> initialize [
 	targets := #().
 ]
 
+{ #category : #copying }
+BlDevScripterNestedChildEventTarget >> postCopy [
+	self targets: self targets copy
+]
+
 { #category : #printing }
 BlDevScripterNestedChildEventTarget >> printOn: aStream [
 	self targets ifNil: [ ^ super printOn: aStream ].

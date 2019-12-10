@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-BlDevScripterRequestFocusStep >> label [
+BlDevScripterRequestFocusStep >> defaultLabel [
 	^ 'Focus'
 ]
 

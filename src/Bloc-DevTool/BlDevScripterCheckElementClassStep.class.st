@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+BlDevScripterCheckElementClassStep >> defaultLabel [
+	^ 'Class: ', self elementClass asString
+]
+
+{ #category : #accessing }
 BlDevScripterCheckElementClassStep >> elementClass [
 	^ elementClass
 ]
@@ -15,11 +20,6 @@ BlDevScripterCheckElementClassStep >> elementClass [
 { #category : #accessing }
 BlDevScripterCheckElementClassStep >> elementClass: anObject [
 	elementClass := anObject
-]
-
-{ #category : #accessing }
-BlDevScripterCheckElementClassStep >> label [
-	^ 'Class: ', self elementClass asString
 ]
 
 { #category : #actions }

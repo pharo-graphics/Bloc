@@ -110,7 +110,7 @@ BlDevScripter >> gtTreeFor: aView [
 BlDevScripter >> initialize [
 	super initialize.
 	
-	rootStep := BlDevScripterMultipleStep new.
+	rootStep := BlDevScripterMultipleActionStep new.
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
@@ -144,6 +144,18 @@ BlDevScripter >> spaceWithElement [
 	^ space
 ]
 
+{ #category : #'steps - storing' }
+BlDevScripter >> storeAt: aSymbol elementInfo: anOneArgBlock [
+	^ self addStep: (BlDevScripterStoreElementInfoStep new
+		key: aSymbol;
+		block: anOneArgBlock)
+]
+
+{ #category : #'steps - subactions' }
+BlDevScripter >> substep [
+	^ self addStep: (BlDevScripterMultipleActionStep new)
+]
+
 { #category : #actions }
 BlDevScripter >> syncContinue [
 	BlUseAsyncFeatures disableDuring: [ self continue ].
@@ -152,4 +164,10 @@ BlDevScripter >> syncContinue [
 { #category : #actions }
 BlDevScripter >> syncPlay [
 	BlUseAsyncFeatures disableDuring: [ self play ].
+]
+
+{ #category : #accessing }
+BlDevScripter >> userData [
+	<return: #BlDevScripterUserData>
+	^ space root devScripterData
 ]

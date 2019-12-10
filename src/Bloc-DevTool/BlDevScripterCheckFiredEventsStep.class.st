@@ -26,6 +26,11 @@ BlDevScripterCheckFiredEventsStep >> assertEventClass: anEventClass withTarget: 
 ]
 
 { #category : #accessing }
+BlDevScripterCheckFiredEventsStep >> defaultLabel [
+	^ 'Click Check'
+]
+
+{ #category : #accessing }
 BlDevScripterCheckFiredEventsStep >> event: aClass [ 
 	self events: { aClass }
 ]
@@ -44,11 +49,6 @@ BlDevScripterCheckFiredEventsStep >> events: aCollection [
 		assert: [ aCollection isCollection and: [ aCollection isNotEmpty ] ]
 		description: [ 'Collection of events must be non-empty' ].
 	events := aCollection
-]
-
-{ #category : #accessing }
-BlDevScripterCheckFiredEventsStep >> label [
-	^ 'Click Check'
 ]
 
 { #category : #actions }

@@ -13,9 +13,16 @@ TBlDevScripterActionStep >> click [
 	^ self addStep: (BlDevScripterClickStep new)
 ]
 
+{ #category : #'steps - storing' }
+TBlDevScripterActionStep >> storeAt: aSymbol elementInfo: anOneArgBlock [
+	^ self addStep: (BlDevScripterStoreElementInfoStep new
+		key: aSymbol;
+		block: anOneArgBlock)
+]
+
 { #category : #'steps - subactions' }
 TBlDevScripterActionStep >> substep [
-	^ self addStep: (BlDevScripterMultipleStep new)
+	^ self addStep: (BlDevScripterMultipleActionStep new)
 ]
 
 { #category : #'steps - subactions' }

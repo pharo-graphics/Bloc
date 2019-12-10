@@ -2,7 +2,8 @@ Class {
 	#name : #BlDevScripterStep,
 	#superclass : #Object,
 	#instVars : [
-		'state'
+		'state',
+		'label'
 	],
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
@@ -11,6 +12,11 @@ Class {
 BlDevScripterStep >> continueOn: aScripter [
 	self wasExecuted ifTrue: [ ^ self ].
 	self playIndicatingStateOn: aScripter.
+]
+
+{ #category : #accessing }
+BlDevScripterStep >> defaultLabel [
+	^ 'Step'
 ]
 
 { #category : #printing }
@@ -36,7 +42,12 @@ BlDevScripterStep >> initialize [
 
 { #category : #accessing }
 BlDevScripterStep >> label [
-	^ 'Task'
+	^ label ifNil: [ self defaultLabel ]
+]
+
+{ #category : #accessing }
+BlDevScripterStep >> label: anObject [
+	label := anObject
 ]
 
 { #category : #accessing }
