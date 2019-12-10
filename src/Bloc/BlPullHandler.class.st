@@ -18,10 +18,25 @@ Class {
 	#superclass : #BlElementEventListener,
 	#instVars : [
 		'originalPosition',
-		'dragStartPosition'
+		'dragStartPosition',
+		'allowedOutOfBounds'
 	],
 	#category : #'Bloc-Utilities - Drag&Drop'
 }
+
+{ #category : #'as yet unclassified' }
+BlPullHandler >> allowOutOfBounds [
+	"Allow the pulled element to be pulled outside of the parent bounds"
+	
+	allowedOutOfBounds := true
+]
+
+{ #category : #'as yet unclassified' }
+BlPullHandler >> disallowOutOfBounds [
+	"Do not allow the pulled element to be pulled outside of the parent bounds"
+	
+	allowedOutOfBounds := false
+]
 
 { #category : #'dnd handlers' }
 BlPullHandler >> dragEndEvent: anEvent [
@@ -30,13 +45,22 @@ BlPullHandler >> dragEndEvent: anEvent [
 
 { #category : #'dnd handlers' }
 BlPullHandler >> dragEvent: anEvent [
-	| dragPosition dragDelta |
+	| dragPosition dragDelta aNewPosition |
 
 	dragPosition := anEvent currentTarget globalPointToParent: anEvent position.
 	dragDelta := dragPosition - (dragStartPosition ifNil: [ dragStartPosition := dragPosition ]).
+	
+	aNewPosition := ((originalPosition ifNil: [ originalPosition := anEvent currentTarget position ]) + dragDelta).
+	
+	allowedOutOfBounds ifFalse: [
+		| aMaxPosition |
+		
+		aMaxPosition := (anEvent currentTarget hasParent
+			ifTrue: [ anEvent currentTarget parent extent - anEvent currentTarget extent ]
+			ifFalse: [ 0@0 ]).		
+		aNewPosition := aNewPosition min: aMaxPosition max: 0@0 ].
 
-	anEvent currentTarget relocate: ((originalPosition ifNil: [ originalPosition := anEvent currentTarget position ]) + dragDelta).
-
+	anEvent currentTarget relocate: aNewPosition.
 	anEvent consumed: true
 ]
 
@@ -50,4 +74,11 @@ BlPullHandler >> dragStartEvent: anEvent [
 	"element position in parent"
 	originalPosition := anEvent currentTarget position.
 
+]
+
+{ #category : #initialization }
+BlPullHandler >> initialize [
+	super initialize.
+	
+	allowedOutOfBounds := true
 ]
