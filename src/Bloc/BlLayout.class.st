@@ -203,8 +203,10 @@ BlLayout >> layoutIgnored: anElement [
 				bounds: (aChild margin expand: childBounds)
 				in: parentBounds
 				with: aChild constraints ignored alignment.
+			childBounds := aChild margin inset: childBounds.
+			aChild measuredBounds position: childBounds origin.
 			"and finally set new bounds"
-			aChild applyLayoutIn: (aChild margin inset: childBounds) ]
+			aChild applyLayoutIn: childBounds ]
 ]
 
 { #category : #direction }
