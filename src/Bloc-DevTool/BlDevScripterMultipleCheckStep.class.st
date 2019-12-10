@@ -10,10 +10,3 @@ Class {
 BlDevScripterMultipleCheckStep >> defaultLabel [
 	^ 'Checks'
 ]
-
-{ #category : #initialization }
-BlDevScripterMultipleCheckStep >> initialize [
-	super initialize.
-
-	
-]

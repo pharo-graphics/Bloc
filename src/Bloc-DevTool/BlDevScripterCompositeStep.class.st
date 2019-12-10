@@ -57,6 +57,15 @@ BlDevScripterCompositeStep >> steps [
 
 { #category : #accessing }
 BlDevScripterCompositeStep >> target [
+	"We access the target of the last sub-step.
+	It simplifies API as we can send a target definition message to me. 
+	We can write: 
+		aStep
+			elementSatisfies: [ :anElement | anElement text asString = 'feenk' ];
+			onElementOfClass: BlTextElement.
+	Instead of 
+		(aStep elementSatisfies: [ :anElement | anElement text asString = 'feenk' ])
+			onElementOfClass: BlTextElement."
 	<return: #BlDevScripterEventTarget>
 	self 
 		assert: [ self steps isNotEmpty ]
@@ -66,6 +75,8 @@ BlDevScripterCompositeStep >> target [
 
 { #category : #accessing }
 BlDevScripterCompositeStep >> target: aScripterEventTarget [
+	"We access the target of the last sub-step.
+	See #target message for the detailed explanation."
 	self 
 		assert: [ self steps isNotEmpty ]
 		description: [ 'A subtask must be defined before defining target' ].

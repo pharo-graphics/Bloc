@@ -17,7 +17,7 @@ BlDevScripterBreadthFirstSearchEventTarget >> findTargetIn: anElement [
 			on: Error
 			do: [ :anException | aResult := nil ].
 		aResult ifNotNil: [ ^ aResult ] ].
-	self error: 'Cannot find target at ', self target printString.
+	 AssertionFailure signal: 'Cannot find target at ', self target printString.
 ]
 
 { #category : #printing }
