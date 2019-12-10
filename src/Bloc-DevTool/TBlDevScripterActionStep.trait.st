@@ -8,22 +8,22 @@ Trait {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
-{ #category : #tasks }
+{ #category : #'steps - actions' }
 TBlDevScripterActionStep >> click [
 	^ self addStep: (BlDevScripterClickStep new)
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - subactions' }
 TBlDevScripterActionStep >> substep [
 	^ self addStep: (BlDevScripterMultipleStep new)
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - subactions' }
 TBlDevScripterActionStep >> substep: aLabel [
 	^ self substep label: aLabel
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - subactions' }
 TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
 	| aStep |
 	aStep := self substep label: aLabel.
@@ -31,12 +31,12 @@ TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
 	^ aStep
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - actions' }
 TBlDevScripterActionStep >> type [
 	^ self addStep: BlDevScriptTypeTextStep new
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - actions' }
 TBlDevScripterActionStep >> type: aString [
 	^ self type text: aString
 ]

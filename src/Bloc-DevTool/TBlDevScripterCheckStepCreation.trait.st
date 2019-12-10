@@ -12,17 +12,17 @@ TBlDevScripterCheckStepCreation >> addStep: aScripterTask [
 	^ self explicitRequirement
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - subchecks' }
 TBlDevScripterCheckStepCreation >> check [
 	^ self addStep: (BlDevScripterMultipleCheckStep new)
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - subchecks' }
 TBlDevScripterCheckStepCreation >> check: aLabel [
 	^ self check label: aLabel
 ]
 
-{ #category : #tasks }
+{ #category : #'steps - subchecks' }
 TBlDevScripterCheckStepCreation >> check: aLabel do: anOneArgBlock [
 	| aStep |
 	aStep := self check: aLabel.
