@@ -46,8 +46,18 @@ BlDevScripterFireEventStep >> initialize [
 ]
 
 { #category : #'accessing - event' }
+BlDevScripterFireEventStep >> mouseOut [
+	self eventOfClass: BlMouseOutEvent
+]
+
+{ #category : #'accessing - event' }
 BlDevScripterFireEventStep >> mouseOver [
 	self eventOfClass: BlMouseOverEvent
+]
+
+{ #category : #'accessing - position' }
+BlDevScripterFireEventStep >> outside [
+	self position: BlDevScripterEventOutsidePosition new
 ]
 
 { #category : #actions }
