@@ -29,6 +29,11 @@ TBlDevScripterActionStep >> modelDo: anOneArgBlock [
 ]
 
 { #category : #'steps - other' }
+TBlDevScripterActionStep >> set [
+	^ self addStep: BlDevScripterSetStep new
+]
+
+{ #category : #'steps - other' }
 TBlDevScripterActionStep >> storeAt: aSymbol elementInfo: anOneArgBlock [
 	^ self addStep: (BlDevScripterStoreElementInfoStep new
 		key: aSymbol;

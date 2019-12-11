@@ -24,7 +24,7 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 
 { #category : #actions }
 BlDevScripterWaitStep >> playOn: aScripter [
-	self waitingBlock value: (self target findTargetIn: aScripter element)
+	self waitingBlock value: (self target findTargetStartingInScripter: aScripter)
 ]
 
 { #category : #accessing }

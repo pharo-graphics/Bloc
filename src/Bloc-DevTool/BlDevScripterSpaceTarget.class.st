@@ -8,9 +8,14 @@ Class {
 BlDevScripterSpaceTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 	self 
-		assert: anElement space isNotNil
+		assert: [ anElement isAttachedToSceneGraph ]
 		description: [ 'Element must be in space' ].
 	^ anElement space
+]
+
+{ #category : #searching }
+BlDevScripterSpaceTarget >> findTargetStartingInScripter: aScripter [
+	^ aScripter space
 ]
 
 { #category : #accessing }

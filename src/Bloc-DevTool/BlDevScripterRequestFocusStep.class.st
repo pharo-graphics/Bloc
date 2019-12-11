@@ -11,6 +11,6 @@ BlDevScripterRequestFocusStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterRequestFocusStep >> playOn: aScripter [
-	(self target findTargetIn: aScripter element) requestFocus.
+	(self target findTargetStartingInScripter: aScripter) requestFocus.
 	aScripter pulse
 ]

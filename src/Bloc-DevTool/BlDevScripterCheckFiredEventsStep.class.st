@@ -57,7 +57,7 @@ BlDevScripterCheckFiredEventsStep >> playOn: aScripter [
 	self
 		assert: [ self events isCollection and: [ self events isNotEmpty ] ]
 		description: [ 'Expected events must be defined' ]. 
-	anElement := self target findTargetIn: aScripter element.
+	anElement := self target findTargetStartingInScripter: aScripter.
 	self events do: [ :eachEventClass | 
 		self assertEventClass: eachEventClass withTarget: anElement on: aScripter ].
 ]

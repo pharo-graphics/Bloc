@@ -16,6 +16,11 @@ BlDevScripterTarget >> findTargetIn: anElement [
 	^ self subclassResponsibility
 ]
 
+{ #category : #searching }
+BlDevScripterTarget >> findTargetStartingInScripter: aScripter [
+	^ self findTargetIn: aScripter element
+]
+
 { #category : #accessing }
 BlDevScripterTarget >> identifier [
 	^ self className

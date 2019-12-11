@@ -36,7 +36,7 @@ BlDevScripterStoreElementInfoStep >> key: anObject [
 { #category : #actions }
 BlDevScripterStoreElementInfoStep >> playOn: aScripter [
 	| aTarget aValue |
-	aTarget := self target findTargetIn: aScripter element.
+	aTarget := self target findTargetStartingInScripter: aScripter.
 	aValue := self block cull: aTarget.
 	aScripter userData at: self key put: aValue
 ]

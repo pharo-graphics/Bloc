@@ -21,6 +21,6 @@ BlDevScripterClickStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterClickStep >> playOn: aScripter [
-	BlSpace simulateClickOn: (self target findTargetIn: aScripter element).
+	BlSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).
 	aScripter pulse
 ]

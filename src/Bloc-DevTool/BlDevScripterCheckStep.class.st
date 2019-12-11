@@ -19,7 +19,7 @@ BlDevScripterCheckStep >> initialize [
 { #category : #actions }
 BlDevScripterCheckStep >> playOn: aScripter [
 	| anElement |
-	anElement := self target findTargetIn: aScripter element.
+	anElement := self target findTargetStartingInScripter: aScripter.
 	self validateOn: anElement
 ]
 

@@ -10,6 +10,11 @@ BlDevScripterModelTarget >> findTargetIn: anElement [
 	^ anElement devScripterData model
 ]
 
+{ #category : #searching }
+BlDevScripterModelTarget >> findTargetStartingInScripter: aScripter [
+	^ aScripter model
+]
+
 { #category : #accessing }
 BlDevScripterModelTarget >> identifier [
 	^ 'model'

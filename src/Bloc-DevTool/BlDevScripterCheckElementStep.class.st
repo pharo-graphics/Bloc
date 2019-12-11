@@ -28,7 +28,7 @@ BlDevScripterCheckElementStep >> defaultLabel [
 { #category : #actions }
 BlDevScripterCheckElementStep >> playOn: aScripter [
 	| anElement |
-	anElement := self target findTargetIn: aScripter element.
+	anElement := self target findTargetStartingInScripter: aScripter.
 	self 
 		assert: self block isNotNil
 		description: 'Check block must be defined'.

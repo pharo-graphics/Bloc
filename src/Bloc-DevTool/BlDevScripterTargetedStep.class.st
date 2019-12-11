@@ -9,11 +9,16 @@ Class {
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
+{ #category : #initialization }
+BlDevScripterTargetedStep >> defaultTarget [
+	^ BlDevScripterSelfEventTarget new
+]
+
 { #category : #'targets - accessing and updating' }
 BlDevScripterTargetedStep >> target [
 	<return: #BlDevScripterEventTarget>
 
-	^ target
+	^ target ifNil: [ target := self defaultTarget ]
 ]
 
 { #category : #'targets - accessing and updating' }
