@@ -83,12 +83,12 @@ BlRopedTextIterator >> nextLine [
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
-		- start index of line
-		- end index of line without line delimiter
-		- end index of line including line delimiter(s)"
+		- start index of line in text coordinates
+		- end index of line without line delimiter in text coordinates
+		- end index of line including line delimiter(s) in text coordinates"
 
 	^ iterator nextLineIndicesDo: [ :aStart :anEnd :aLineEndWithDelimiters |
-		anIndicesBlock cull: ((aStart + 1) min: anEnd) cull: anEnd cull: aLineEndWithDelimiters ]
+		anIndicesBlock cull: aStart + 1 cull: anEnd cull: aLineEndWithDelimiters ]
 ]
 
 { #category : #'iterator - enumeration' }

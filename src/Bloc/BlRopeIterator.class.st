@@ -116,9 +116,9 @@ BlRopeIterator >> nextLine [
 { #category : #'iterator - enumeration' }
 BlRopeIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
-		- start index of line
-		- end index of line without line delimiter
-		- end index of line including line delimiter(s)"
+		- start index of line in cursor coordinates
+		- end index of line without line delimiter in cursor coordinates
+		- end index of line including line delimiter(s) in cursor coordinates"
 	| aLineStart aLineEnd |
 
 	self hasNext

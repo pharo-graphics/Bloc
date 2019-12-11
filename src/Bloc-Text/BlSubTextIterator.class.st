@@ -91,9 +91,9 @@ BlSubTextIterator >> nextLine [
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
-		- start index of line
-		- end index of line without line delimiter
-		- end index of line including line delimiter(s)"
+		- start index of line in text coordinates
+		- end index of line without line delimiter in text coordinates
+		- end index of line including line delimiter(s) in text coordinates"
 		
 	iterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aLineDelimiterEnd |
 		anIndicesBlock
@@ -203,22 +203,18 @@ BlSubTextIterator >> text: aBrSubText from: aStartIndex to: anEndIndex [
 		assert: [ aBrSubText isNotNil ]
 		description: [ 'Text must not be nil' ].
 	self
-		assert: [ aStartIndex between: 0 and: aBrSubText size ]
+		assert: [ aStartIndex between: 1 and: (aBrSubText size + 1) ]
 		description: [ 'Sub-text start index is out of bounds!' ].
 	self
 		assert: [ anEndIndex between: 0 and: aBrSubText size ]
 		description: [ 'Sub-text end index is out of bounds!' ].
 	self
-		assert: [ aBrSubText isNotEmpty or: [ aStartIndex isZero and: [ anEndIndex isZero ] ] ]
-		description: [ 'If text is empty, start and end indices must be Zero!' ].
+		assert: [ aBrSubText isNotEmpty or: [ aStartIndex = 1 and: [ anEndIndex isZero ] ] ]
+		description: [ 'If text is empty, start must be 1 and end index must be Zero!' ].
 	self
-		assert: [ aStartIndex isZero not or: [ anEndIndex isZero ] ]
-		description: [ 'If start index is zero then end index must also be zero' ].
-	self
-		assert: [ anEndIndex isZero not or: [ aStartIndex isZero ] ]
-		description: [ 'If end index is zero then start index must also be zero' ].
-		
-	
+		assert: [ anEndIndex isZero not or: [ aStartIndex = 1 ] ]
+		description: [ 'If end index is zero then start index must be one' ].
+
 	text := aBrSubText.
 	
 	iterator := aBrSubText text
