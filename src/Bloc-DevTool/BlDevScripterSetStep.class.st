@@ -25,6 +25,11 @@ BlDevScripterSetStep >> element: anOneArgBlock [
 ]
 
 { #category : #accessing }
+BlDevScripterSetStep >> key: aKeyBlock value: aValueBlock [
+	self storage: (BlDevScripterUserDataStorage new key: aKeyBlock; value: aValueBlock)
+]
+
+{ #category : #accessing }
 BlDevScripterSetStep >> model: anOneArgBlock [
 	self storage: (BlDevScripterModelStorage new block: anOneArgBlock)
 ]
