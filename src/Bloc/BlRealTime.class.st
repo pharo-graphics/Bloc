@@ -32,14 +32,15 @@ BlRealTime >> every: aDuration while: aWhileBlock do: aDoBlock [
 	aCount := 0.
 
 	aWhileBlock whileTrue: [
-		| anExpectedTime aCurrentTime |
+		| anExpectedTime aCurrentTime aWaitingTime |
 		aDoBlock value.
 		
 		aCount := aCount + 1.
 		
 		anExpectedTime := aStartTime + (aDuration * aCount).
 		aCurrentTime := self now.
-		(anExpectedTime - aCurrentTime) wait ]
+		aWaitingTime := anExpectedTime - aCurrentTime.
+		0 seconds < aWaitingTime ifTrue: [ aWaitingTime wait ] ]
 ]
 
 { #category : #'api - time' }
