@@ -9,7 +9,9 @@ Class {
 
 { #category : #accessing }
 BlDevScripterUserData >> at: aSymbol [
-	^ dictionary at: aSymbol ifAbsent: [ nil ]
+	^ dictionary 
+		at: aSymbol 
+		ifAbsent: [ AssertionFailure signal: 'Scripter user data is not set: ', aSymbol printString ]
 ]
 
 { #category : #accessing }
@@ -39,4 +41,14 @@ BlDevScripterUserData >> initialize [
 { #category : #testing }
 BlDevScripterUserData >> isEmpty [
 	^ dictionary isEmpty
+]
+
+{ #category : #accessing }
+BlDevScripterUserData >> model [
+	^ self at: #scripterModel
+]
+
+{ #category : #accessing }
+BlDevScripterUserData >> model: anObject [
+	^ self at: #scripterModel put: anObject
 ]

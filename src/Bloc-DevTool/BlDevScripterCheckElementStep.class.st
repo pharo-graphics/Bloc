@@ -26,11 +26,13 @@ BlDevScripterCheckElementStep >> defaultLabel [
 ]
 
 { #category : #actions }
-BlDevScripterCheckElementStep >> validateOn: anElement [
+BlDevScripterCheckElementStep >> playOn: aScripter [
+	| anElement |
+	anElement := self target findTargetIn: aScripter element.
 	self 
 		assert: self block isNotNil
 		description: 'Check block must be defined'.
 	self 
-		assert: (self block cull: anElement cull: anElement devScripterData)
-		description: [ 'Element does not satisfy ', self block printString ]
+		assert: (self block cull: anElement cull: aScripter userData)
+		description: [ 'It does not satisfy ', self block printString ]
 ]

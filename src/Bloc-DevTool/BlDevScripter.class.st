@@ -29,12 +29,12 @@ BlDevScripter >> continue [
 	rootStep continueOn: self
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - element' }
 BlDevScripter >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - element' }
 BlDevScripter >> element: anElement [
 	element := anElement.
 	element removeFromParent.
@@ -44,7 +44,7 @@ BlDevScripter >> element: anElement [
 	space addChild: element.
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - element' }
 BlDevScripter >> elementWithoutParent [
 	"Return element removed from a testing ${class:BlSpace}$.
 	Useful when someone wants to display the resulting element.
@@ -53,11 +53,22 @@ BlDevScripter >> elementWithoutParent [
 	^ self element removeFromParent
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - data' }
 BlDevScripter >> events [
 	<return: #Collection of: #BlEvent>
 
 	^ events
+]
+
+{ #category : #'accessing - space' }
+BlDevScripter >> extent [
+	<return: #Point>
+	^ space extent
+]
+
+{ #category : #'accessing - space' }
+BlDevScripter >> extent: aPoint [
+	space extent: aPoint
 ]
 
 { #category : #'gt-extension' }
@@ -144,6 +155,16 @@ BlDevScripter >> initialize [
 	events := OrderedCollection new
 ]
 
+{ #category : #'accessing - data' }
+BlDevScripter >> model [
+	^ self userData model
+]
+
+{ #category : #'accessing - data' }
+BlDevScripter >> model: anObject [
+	self userData model: anObject
+]
+
 { #category : #actions }
 BlDevScripter >> play [
 	self pulse.
@@ -155,12 +176,18 @@ BlDevScripter >> pulse [
 	space pulse
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - space' }
+BlDevScripter >> space [
+	<return: #BlSpace>
+	^ space
+]
+
+{ #category : #'accessing - space' }
 BlDevScripter >> spaceTasks [
 	^ space taskQueue tasks
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - space' }
 BlDevScripter >> spaceWithElement [
 	"Return ${class:BlSpace}$ and ensure that the ==element== is its child
 	Useful when someone wants to display the resulting space (window) with the element.
@@ -181,7 +208,7 @@ BlDevScripter >> syncPlay [
 	BlUseAsyncFeatures disableDuring: [ self play ].
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - data' }
 BlDevScripter >> userData [
 	<return: #BlDevScripterUserData>
 	^ space root devScripterData

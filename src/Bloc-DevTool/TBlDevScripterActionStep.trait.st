@@ -8,34 +8,44 @@ Trait {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
-{ #category : #'steps - actions' }
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> click [
 	^ self addStep: (BlDevScripterClickStep new)
 ]
 
-{ #category : #'steps - actions' }
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> fire [
 	^ self addStep: BlDevScripterFireEventStep new
 ]
 
-{ #category : #'steps - storing' }
+{ #category : #'steps - other' }
+TBlDevScripterActionStep >> model [
+	^ self addStep: BlDevScripterBlockReceivingModelStep new
+]
+
+{ #category : #'steps - other' }
+TBlDevScripterActionStep >> modelDo: anOneArgBlock [
+	^ self model block: anOneArgBlock
+]
+
+{ #category : #'steps - other' }
 TBlDevScripterActionStep >> storeAt: aSymbol elementInfo: anOneArgBlock [
 	^ self addStep: (BlDevScripterStoreElementInfoStep new
 		key: aSymbol;
 		block: anOneArgBlock)
 ]
 
-{ #category : #'steps - subactions' }
+{ #category : #'steps - substeps' }
 TBlDevScripterActionStep >> substep [
 	^ self addStep: (BlDevScripterMultipleActionStep new)
 ]
 
-{ #category : #'steps - subactions' }
+{ #category : #'steps - substeps' }
 TBlDevScripterActionStep >> substep: aLabel [
 	^ self substep label: aLabel
 ]
 
-{ #category : #'steps - subactions' }
+{ #category : #'steps - substeps' }
 TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
 	| aStep |
 	aStep := self substep label: aLabel.
@@ -43,17 +53,17 @@ TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
 	^ aStep
 ]
 
-{ #category : #'steps - actions' }
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> type [
 	^ self addStep: BlDevScripterTypeTextStep new
 ]
 
-{ #category : #'steps - actions' }
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> type: aString [
 	^ self type text: aString
 ]
 
-{ #category : #'steps - waiting' }
+{ #category : #'steps - other' }
 TBlDevScripterActionStep >> wait [
 	^ self addStep: BlDevScripterWaitStep new
 ]

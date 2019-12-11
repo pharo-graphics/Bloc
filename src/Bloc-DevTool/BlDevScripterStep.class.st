@@ -89,9 +89,9 @@ BlDevScripterStep >> playIndicatingStateOn: aScripter [
 	self 
 		assert: [ state wasExecuted not ]
 		description: [ 'I should not be executed twice' ].
-	state isHalt ifTrue: [ self halt ].
-	state := BlDevScripterStepState executing.
 	[ 
+		state isHalt ifTrue: [ self halt ].
+		state := BlDevScripterStepState executing.
 		self playOn: aScripter.
 		state := BlDevScripterStepState success.
 	]
@@ -104,6 +104,12 @@ BlDevScripterStep >> playIndicatingStateOn: aScripter [
 { #category : #actions }
 BlDevScripterStep >> playOn: aScripter [
 	
+]
+
+{ #category : #accessing }
+BlDevScripterStep >> realTarget [
+	<return: #BlDevScripterTarget>
+	^ self target
 ]
 
 { #category : #state }
@@ -119,6 +125,11 @@ BlDevScripterStep >> stateName [
 { #category : #accessing }
 BlDevScripterStep >> steps [
 	^ #()
+]
+
+{ #category : #accessing }
+BlDevScripterStep >> target [
+	^ BlDevScripterSelfEventTarget new
 ]
 
 { #category : #testing }
