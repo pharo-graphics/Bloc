@@ -1,11 +1,6 @@
 Class {
 	#name : #BlDevScripterCheckStep,
-	#superclass : #BlDevScripterStep,
-	#traits : 'TBlDevScripterTarget',
-	#classTraits : 'TBlDevScripterTarget classTrait',
-	#instVars : [
-		'target'
-	],
+	#superclass : #BlDevScripterTargetedStep,
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
@@ -26,18 +21,6 @@ BlDevScripterCheckStep >> playOn: aScripter [
 	| anElement |
 	anElement := self target findTargetIn: aScripter element.
 	self validateOn: anElement
-]
-
-{ #category : #'targets - accessing and updating' }
-BlDevScripterCheckStep >> target [
-	<return: #BlDevScripterEventTarget>
-
-	^ target
-]
-
-{ #category : #'targets - accessing and updating' }
-BlDevScripterCheckStep >> target: aScripterEventTarget [
-	target := aScripterEventTarget
 ]
 
 { #category : #actions }

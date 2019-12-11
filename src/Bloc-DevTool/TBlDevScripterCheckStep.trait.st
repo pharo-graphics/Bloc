@@ -27,6 +27,11 @@ TBlDevScripterCheckStep >> elementIsOfClass: aClass [
 
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> elementSatisfies: anOneArgBlock [
+	^ self satisfies: anOneArgBlock
+]
+
+{ #category : #'steps - checks' }
+TBlDevScripterCheckStep >> satisfies: anOneArgBlock [
 	^ self addStep: (BlDevScripterCheckElementStep new block: anOneArgBlock)
 ]
 

@@ -39,7 +39,7 @@ BlDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 	self border: (BlBorder paint: aBlDevScripterStep stateColor width: 2).
 	aStepText := aBlDevScripterStep gtDisplayText foreground: Color black.
 	labelElement text: aStepText.
-	aTargetStep := aBlDevScripterStep target gtDisplayText 
+	aTargetStep := aBlDevScripterStep realTarget gtDisplayText 
 		foreground: Color gray;
 		fontSize: 10.
 	targetElement text: aTargetStep.

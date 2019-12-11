@@ -49,6 +49,12 @@ BlDevScripterCompositeStep >> previousTarget [
 ]
 
 { #category : #accessing }
+BlDevScripterCompositeStep >> realTarget [
+	<return: #BlDevScripterTarget>
+	^ BlDevScripterTarget null
+]
+
+{ #category : #accessing }
 BlDevScripterCompositeStep >> steps [
 	^ steps
 ]

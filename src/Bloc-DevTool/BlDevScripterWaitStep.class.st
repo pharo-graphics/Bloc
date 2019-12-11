@@ -15,6 +15,7 @@ BlDevScripterWaitStep >> defaultLabel [
 { #category : #initialization }
 BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 	self label: 'Wait For Empty Task Queue'.
+	self onSpace.
 	self waitingBlock: [ :aSpace | aSpace time 
 			every: 100 milliSeconds 
 			while: [ aSpace taskQueue tasks isNotEmpty ] 
@@ -23,7 +24,7 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 
 { #category : #actions }
 BlDevScripterWaitStep >> playOn: aScripter [
-	self waitingBlock value: aScripter element space
+	self waitingBlock value: (self target findTargetIn: aScripter element)
 ]
 
 { #category : #accessing }

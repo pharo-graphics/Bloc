@@ -1,8 +1,13 @@
 Class {
 	#name : #BlDevScripterEventTarget,
-	#superclass : #Object,
+	#superclass : #BlDevScripterTarget,
 	#category : #'Bloc-DevTool-Scripter-Targets'
 }
+
+{ #category : #testing }
+BlDevScripterEventTarget class >> isAbstract [
+	^ self name = #BlDevScripterEventTarget 
+]
 
 { #category : #testing }
 BlDevScripterEventTarget class >> matchesWithInput: anObject [
@@ -18,18 +23,6 @@ BlDevScripterEventTarget class >> targetInstanceFor: anObject [
 	self subclassesDo: [ :eachSubclass | 
 		(eachSubclass matchesWithInput: anObject) ifTrue: [ ^ eachSubclass newFromInput: anObject ] ].
 	self error: 'Cannot find a suitable class for ', anObject printString.
-]
-
-{ #category : #searching }
-BlDevScripterEventTarget >> findTargetIn: anElement [
-	<return: #BlElement>
-
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-BlDevScripterEventTarget >> identifier [
-	^ self className
 ]
 
 { #category : #updating }

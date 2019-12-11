@@ -36,6 +36,11 @@ TBlDevScripterTarget >> onChildOfClass: aClass [
 	self updateTarget: (BlDevScripterElementClassEventTarget new elementClass: aClass)
 ]
 
+{ #category : #'targets - other' }
+TBlDevScripterTarget >> onModel [
+	self updateTarget: (BlDevScripterModelTarget new)
+]
+
 { #category : #'targets - children' }
 TBlDevScripterTarget >> onNestedChild: anArray [
 	self updateTarget: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
@@ -44,6 +49,11 @@ TBlDevScripterTarget >> onNestedChild: anArray [
 { #category : #'targets - children' }
 TBlDevScripterTarget >> onSelf [
 	self updateTarget: (BlDevScripterSelfEventTarget new)
+]
+
+{ #category : #'targets - other' }
+TBlDevScripterTarget >> onSpace [
+	self updateTarget: (BlDevScripterSpaceTarget new)
 ]
 
 { #category : #'targets - accessing and updating' }

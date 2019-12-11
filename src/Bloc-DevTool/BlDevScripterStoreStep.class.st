@@ -27,12 +27,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #BlDevScripterStoreStep,
-	#superclass : #BlDevScripterStep,
-	#traits : 'TBlDevScripterTarget',
-	#classTraits : 'TBlDevScripterTarget classTrait',
-	#instVars : [
-		'target'
-	],
+	#superclass : #BlDevScripterTargetedStep,
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
@@ -53,18 +48,6 @@ BlDevScripterStoreStep >> playOn: aScripter [
 	| anElement |
 	anElement := self target findTargetIn: aScripter element.
 	self validateOn: anElement
-]
-
-{ #category : #'targets - accessing and updating' }
-BlDevScripterStoreStep >> target [
-	<return: #BlDevScripterEventTarget>
-
-	^ target
-]
-
-{ #category : #'targets - accessing and updating' }
-BlDevScripterStoreStep >> target: aScripterEventTarget [
-	target := aScripterEventTarget
 ]
 
 { #category : #actions }
