@@ -177,7 +177,7 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 			self hasNext ifFalse: [ shouldMerge := false ] ] ].
 	
 	self
-		assert: [ actualStart <= actualEnd ]
+		assert: [ actualStart <= (actualEnd + 1) ]
 		description: [ 'Start must not exceed end' ].
 		
 	self

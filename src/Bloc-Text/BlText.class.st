@@ -226,7 +226,7 @@ BlText >> from: aStart to: anEnd [
 	<return: #BlSubText>
 	
 	self
-		assert: [ aStart <= anEnd ]
+		assert: [ aStart <= (anEnd + 1) ]
 		description: [ 'Start must not exceed end' ].
 		
 	self

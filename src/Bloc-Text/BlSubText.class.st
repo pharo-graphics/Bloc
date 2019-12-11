@@ -27,7 +27,7 @@ BlSubText class >> empty: aBrText [
 		
 	^ self
 		text: aBrText
-		from: 0
+		from: 1
 		to: 0
 ]
 
@@ -78,21 +78,23 @@ BlSubText >> assertStart: aStartIndex end: anEndIndex [
 	self
 		assert: [ text isNotNil ]
 		description: [ 'Text must not be nil' ].
+		
+	aStartIndex isZero
+		ifTrue: [ BlTextOutOfBoundsError signal: ('Start index ({1}) must not be zero' format: { aStartIndex }) ].
+
 	self
-		assert: [ aStartIndex between: 0 and: text size ]
-		description: [ 'Sub-text start ({1}) index is out of bounds ({2})!' format: { aStartIndex . (0 to: text size) } ].
+		assert: [ aStartIndex between: 1 and: (text size + 1) ]
+		description: [ 'Sub-text start ({1}) index is out of bounds ({2})!' format: { aStartIndex . (1 to: text size + 1) } ].
 	self
 		assert: [ anEndIndex between: 0 and: text size ]
 		description: [ 'Sub-text end ({1}) index is out of bounds ({2})!' format: { anEndIndex . (0 to: text size) } ].
 	self
-		assert: [ text isNotEmpty or: [ aStartIndex isZero and: [ anEndIndex isZero ] ] ]
-		description: [ 'If text is empty, start and end indices must be Zero!' ].
+		assert: [ text isNotEmpty or: [ aStartIndex = 1 and: [ anEndIndex isZero ] ] ]
+		description: [ 'If text is empty, start must be 1 and end index must be Zero!' ].
+
 	self
-		assert: [ aStartIndex isZero not or: [ anEndIndex isZero ] ]
-		description: [ 'If start index is zero then end index must also be zero' ].
-	self
-		assert: [ anEndIndex isZero not or: [ aStartIndex isZero ] ]
-		description: [ 'If end index is zero then start index must also be zero' ]
+		assert: [ anEndIndex isZero not or: [ aStartIndex = 1 ] ]
+		description: [ 'If end index is zero then start index must be 1' ]
 ]
 
 { #category : #'text - accessing' }
@@ -118,7 +120,7 @@ BlSubText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [
 		description: [ 'Start must not exceed end' ].
 		
 	self
-		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
+		assert: [ aFromIndex > 0 or: [ aFromIndex = 1 and: [ aToIndex = 0 ] ] ]
 		description: [ 'Start and end must be positive or both zero' ].
 
 
@@ -186,8 +188,8 @@ BlSubText >> from: aStart to: anEnd [
 	self assertInvariant.
 	
 	self
-		assert: [ self isNotEmpty or: [ aStart isZero and: [ anEnd isZero ] ] ]
-		description: [ 'If I am empty both start and end must be zero' ].
+		assert: [ self isNotEmpty or: [ aStart = 1 and: [ anEnd isZero ] ] ]
+		description: [ 'If I am empty then start must be 1 and end must be zero' ].
 	
 	^ self text
 		from: ((aStart + start - 1) max: 0)
@@ -217,11 +219,14 @@ BlSubText >> hash [
 { #category : #'text - modifications' }
 BlSubText >> insertString: aString at: anIndex [
 	| aPreviousSize aNewSize |
+	
+	(anIndex <= end)
+		ifFalse: [ BlTextOutOfBoundsError signal: 'Insertion can not happen past the end of the SubText' ].
 
 	aPreviousSize := text size.	
 	text insertString: aString at: start + anIndex - 1.
 	aNewSize := text size.
-
+	
 	end := end + (aNewSize - aPreviousSize)
 ]
 
@@ -239,7 +244,7 @@ BlSubText >> isEmpty [
 BlSubText >> iterator [
 	^ BlSubTextIterator
 		text: self
-		from: (1 min: self size)
+		from: 1
 		to: self size
 ]
 
