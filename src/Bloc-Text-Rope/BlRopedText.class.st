@@ -274,7 +274,7 @@ BlRopedText >> storeOn: aStream [
 		aStream
 			nextPut: $(;
 			nextPut: $';
-			nextPutAll: (self from: eachTuple first to: eachTuple second) asString;
+			nextPutAll: ((self from: eachTuple first to: eachTuple second) asString copyReplaceAll: $' asString with: '''''');
 			nextPut: $';
 			space;
 			nextPutAll: #asRopedText asString.
