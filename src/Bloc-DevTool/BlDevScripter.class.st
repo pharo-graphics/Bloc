@@ -171,18 +171,6 @@ BlDevScripter >> spaceWithElement [
 	^ space
 ]
 
-{ #category : #'steps - storing' }
-BlDevScripter >> storeAt: aSymbol elementInfo: anOneArgBlock [
-	^ self addStep: (BlDevScripterStoreElementInfoStep new
-		key: aSymbol;
-		block: anOneArgBlock)
-]
-
-{ #category : #'steps - subactions' }
-BlDevScripter >> substep [
-	^ self addStep: (BlDevScripterMultipleActionStep new)
-]
-
 { #category : #actions }
 BlDevScripter >> syncContinue [
 	BlUseAsyncFeatures disableDuring: [ self continue ].

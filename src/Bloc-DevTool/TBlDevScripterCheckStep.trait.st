@@ -34,3 +34,10 @@ TBlDevScripterCheckStep >> elementSatisfies: anOneArgBlock [
 TBlDevScripterCheckStep >> totalChildrenCount: aNumber [
 	^ self addStep: (BlDevScripterCheckTotalChildrenCountStep new totalChildrenCount: aNumber)
 ]
+
+{ #category : #accessing }
+TBlDevScripterCheckStep >> withInfoAt: aSymbol elementSatisfies: anOneArgBlock [
+	^ self elementSatisfies: [ :anElement :aScripterData | 
+			(aScripterData includesKey: aSymbol) and: [ 
+				 anOneArgBlock value: anElement value: (aScripterData at: aSymbol) ] ]
+]

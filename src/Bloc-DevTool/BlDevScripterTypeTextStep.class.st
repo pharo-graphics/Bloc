@@ -1,5 +1,5 @@
 Class {
-	#name : #BlDevScriptTypeTextStep,
+	#name : #BlDevScripterTypeTextStep,
 	#superclass : #BlDevScripterInteractionStep,
 	#instVars : [
 		'text'
@@ -8,14 +8,14 @@ Class {
 }
 
 { #category : #accessing }
-BlDevScriptTypeTextStep >> defaultLabel [
+BlDevScripterTypeTextStep >> defaultLabel [
 	^ self text 
 		ifNotNil: [ :aString | 'Type: ', aString asString ]
 		ifNil: [ self className ]
 ]
 
 { #category : #actions }
-BlDevScriptTypeTextStep >> playOn: aScripter [
+BlDevScripterTypeTextStep >> playOn: aScripter [
 	| aTarget anInputEvent |
 	aTarget := self target findTargetIn: aScripter element.
 	anInputEvent := BlTextInputEvent new text: self text.
@@ -26,13 +26,13 @@ BlDevScriptTypeTextStep >> playOn: aScripter [
 ]
 
 { #category : #accessing }
-BlDevScriptTypeTextStep >> text [
+BlDevScripterTypeTextStep >> text [
 	<return: #String>
 	^ text
 ]
 
 { #category : #accessing }
-BlDevScriptTypeTextStep >> text: aStringOrChar [
+BlDevScripterTypeTextStep >> text: aStringOrChar [
 	self 
 		assert: [ aStringOrChar isString or: [ aStringOrChar isCharacter ] ]
 		description: [ 'Text must be a string or character' ].

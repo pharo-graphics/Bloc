@@ -13,6 +13,11 @@ TBlDevScripterActionStep >> click [
 	^ self addStep: (BlDevScripterClickStep new)
 ]
 
+{ #category : #'steps - actions' }
+TBlDevScripterActionStep >> fire [
+	^ self addStep: BlDevScripterFireEventStep new
+]
+
 { #category : #'steps - storing' }
 TBlDevScripterActionStep >> storeAt: aSymbol elementInfo: anOneArgBlock [
 	^ self addStep: (BlDevScripterStoreElementInfoStep new
@@ -40,10 +45,15 @@ TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
 
 { #category : #'steps - actions' }
 TBlDevScripterActionStep >> type [
-	^ self addStep: BlDevScriptTypeTextStep new
+	^ self addStep: BlDevScripterTypeTextStep new
 ]
 
 { #category : #'steps - actions' }
 TBlDevScripterActionStep >> type: aString [
 	^ self type text: aString
+]
+
+{ #category : #'steps - waiting' }
+TBlDevScripterActionStep >> wait [
+	^ self addStep: BlDevScripterWaitStep new
 ]
