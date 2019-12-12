@@ -15,13 +15,6 @@ BlDevScripterCompositeStep >> addStep: aStep [
 	^ aStep
 ]
 
-{ #category : #actions }
-BlDevScripterCompositeStep >> continueOn: aScripter [
-	self wasExecuted 
-		ifTrue: [ self steps do: [ :eachTask | eachTask continueOn: aScripter ] ]
-		ifFalse: [ self playIndicatingStateOn: aScripter ].
-]
-
 { #category : #accessing }
 BlDevScripterCompositeStep >> defaultLabel [
 	^ 'Steps'
@@ -36,7 +29,12 @@ BlDevScripterCompositeStep >> initialize [
 
 { #category : #actions }
 BlDevScripterCompositeStep >> playOn: aScripter [
-	self steps do: [ :eachTask | eachTask playIndicatingStateOn: aScripter ]
+	"self steps do: [ :eachTask | eachTask playIndicatingStateOn: aScripter ]"
+]
+
+{ #category : #actions }
+BlDevScripterCompositeStep >> playOnExecutor: anExecutor [
+	self steps do: [ :eachStep | anExecutor executeStep: eachStep ]
 ]
 
 { #category : #'targets - accessing and updating' }

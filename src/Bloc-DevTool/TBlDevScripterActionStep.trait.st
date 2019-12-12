@@ -52,7 +52,7 @@ TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
 
 { #category : #'steps - interactions' }
 TBlDevScripterActionStep >> type [
-	^ self addStep: BlDevScripterTypeTextStep new
+	^ self addStep: BlDevScripterTypeTextStep new referenceSender
 ]
 
 { #category : #'steps - interactions' }

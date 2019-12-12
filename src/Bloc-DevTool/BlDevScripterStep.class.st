@@ -4,15 +4,15 @@ Class {
 	#instVars : [
 		'state',
 		'label',
-		'reference'
+		'reference',
+		'properties'
 	],
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
 
-{ #category : #actions }
-BlDevScripterStep >> continueOn: aScripter [
-	self wasExecuted ifTrue: [ ^ self ].
-	self playIndicatingStateOn: aScripter.
+{ #category : #'accessing - properties' }
+BlDevScripterStep >> addScreenshotForm: aForm [
+	self properties addScreenshotForm: aForm
 ]
 
 { #category : #accessing }
@@ -31,6 +31,13 @@ BlDevScripterStep >> gtReferenceFor: aView [
 	self reference ifNil: [ ^ aView empty ].
 	^ (self reference gtReferenceFor: aView)
 		priority: 5
+]
+
+{ #category : #accessing }
+BlDevScripterStep >> gtScreenshotFor: aView [
+	<gtView>
+	self properties ifNil: [ ^ aView empty ].
+	^ self properties gtScreenshotFor: aView
 ]
 
 { #category : #'gt-extension' }
@@ -70,6 +77,13 @@ BlDevScripterStep >> initialize [
 	super initialize.
 	state := BlDevScripterStepState ready.
 	reference := BlDevScripterReference null.
+	properties := BlDevScripterStepProperties new.
+]
+
+{ #category : #'accessing - state' }
+BlDevScripterStep >> isHaltState [
+	<return: #Boolean>
+	^ state isHalt
 ]
 
 { #category : #accessing }
@@ -95,25 +109,19 @@ BlDevScripterStep >> paintTreeWith: view [
 ]
 
 { #category : #actions }
-BlDevScripterStep >> playIndicatingStateOn: aScripter [
-	self 
-		assert: [ state wasExecuted not ]
-		description: [ 'I should not be executed twice' ].
-	[ 
-		state isHalt ifTrue: [ self halt ].
-		state := BlDevScripterStepState executing.
-		self playOn: aScripter.
-		state := BlDevScripterStepState success.
-	]
-		on: Error 
-		do: [ :anException | 
-			state := BlDevScripterStepState failure.
-			anException pass ]
+BlDevScripterStep >> playOn: aScripter [
+	
 ]
 
 { #category : #actions }
-BlDevScripterStep >> playOn: aScripter [
-	
+BlDevScripterStep >> playOnExecutor: anExecutor [ 
+	self playOn: anExecutor scripter
+]
+
+{ #category : #'accessing - properties' }
+BlDevScripterStep >> properties [
+	<return: #BlDevScripterStepProperties>
+	^ properties
 ]
 
 { #category : #accessing }
@@ -145,6 +153,32 @@ BlDevScripterStep >> referenceSender [
 	| aDefinition |
 	aDefinition := thisContext stack third method asRingDefinition.
 	self reference: (BlDevScripterReference method: aDefinition).
+]
+
+{ #category : #'accessing - state' }
+BlDevScripterStep >> setFailedExecution [
+	state := BlDevScripterStepState failure.
+]
+
+{ #category : #'accessing - state' }
+BlDevScripterStep >> setSuccessExecution [
+	state := BlDevScripterStepState success.
+]
+
+{ #category : #'accessing - state' }
+BlDevScripterStep >> setUnderExecution [
+	state := BlDevScripterStepState executing.
+]
+
+{ #category : #actions }
+BlDevScripterStep >> startWithExecutor: anExecutor [
+	anExecutor executeStep: self
+]
+
+{ #category : #accessing }
+BlDevScripterStep >> state [
+	<return: #BlDevScripterStepState>
+	^ state
 ]
 
 { #category : #'accessing - state' }

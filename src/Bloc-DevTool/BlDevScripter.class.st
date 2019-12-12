@@ -23,10 +23,13 @@ BlDevScripter >> addStep: aScripterStep [
 	^ rootStep addStep: aScripterStep
 ]
 
-{ #category : #actions }
+{ #category : #execution }
 BlDevScripter >> continue [
-	self pulse.
-	rootStep continueOn: self
+	BlDevScripterStepContinueExecutor new
+		scripter: self;
+		async;
+		"withScreenshots;"
+		play
 ]
 
 { #category : #'accessing - element' }
@@ -148,7 +151,7 @@ BlDevScripter >> gtUserDataFor: aView [
 BlDevScripter >> initialize [
 	super initialize.
 	
-	rootStep := BlDevScripterMultipleActionStep new.
+	rootStep := BlDevScripterRootStep new.
 	rootStep referenceHere.
 	space := BlSpace new.
 	space title: 'Scripter'.
@@ -166,13 +169,16 @@ BlDevScripter >> model: anObject [
 	self userData model: anObject
 ]
 
-{ #category : #actions }
+{ #category : #execution }
 BlDevScripter >> play [
-	self pulse.
-	rootStep playIndicatingStateOn: self
+	BlDevScripterStepPlayOnceExecutor new
+		scripter: self;
+		async;
+		"withScreenshots;"
+		play
 ]
 
-{ #category : #actions }
+{ #category : #execution }
 BlDevScripter >> pulse [
 	space pulse
 ]
@@ -199,14 +205,27 @@ BlDevScripter >> spaceWithElement [
 	^ space
 ]
 
-{ #category : #actions }
-BlDevScripter >> syncContinue [
-	BlUseAsyncFeatures disableDuring: [ self continue ].
+{ #category : #execution }
+BlDevScripter >> startWithExecutor: anExecutor [
+	rootStep startWithExecutor: anExecutor
 ]
 
-{ #category : #actions }
+{ #category : #execution }
+BlDevScripter >> syncContinue [
+	BlDevScripterStepContinueExecutor new
+		scripter: self;
+		sync;
+		"withScreenshots;"
+		play
+]
+
+{ #category : #execution }
 BlDevScripter >> syncPlay [
-	BlUseAsyncFeatures disableDuring: [ self play ].
+	BlDevScripterStepPlayOnceExecutor new
+		scripter: self;
+		sync;
+		"withScreenshots;"
+		play
 ]
 
 { #category : #'accessing - data' }
