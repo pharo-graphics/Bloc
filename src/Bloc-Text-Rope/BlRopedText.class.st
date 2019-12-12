@@ -100,7 +100,7 @@ BlRopedText >> copyFrom: aStartIndex to: anEndIndex [
 
 { #category : #'text - modifications' }
 BlRopedText >> delete: aFromIndex to: aToIndex [
-	
+	| aDeletedRope |
 	self
 		assert: [ aFromIndex <= aToIndex ]
 		description: [ 'Start must not exceed end' ].
@@ -108,9 +108,10 @@ BlRopedText >> delete: aFromIndex to: aToIndex [
 	self
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
 		description: [ 'Start and end must be positive or both zero' ].
-
+	
+	aDeletedRope := rope from: ((aFromIndex - 1) max: 0) to: aToIndex.
 	rope := rope delete: ((aFromIndex - 1) max: 0) to: aToIndex.
-	self notifyDeleted: aFromIndex to: aToIndex
+	self notifyDeleted: aFromIndex to: aToIndex text: (BlRopedText rope: aDeletedRope)
 ]
 
 { #category : #'text - enumeration' }

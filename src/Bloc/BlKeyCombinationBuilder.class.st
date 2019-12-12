@@ -295,3 +295,8 @@ BlKeyCombinationBuilder >> w [
 BlKeyCombinationBuilder >> x [
 	combination with: (BlSingleKeyCombination new key: BlKeyboardKey x)
 ]
+
+{ #category : #'keys - letters' }
+BlKeyCombinationBuilder >> z [
+	combination with: (BlSingleKeyCombination new key: BlKeyboardKey z)
+]

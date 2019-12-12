@@ -312,8 +312,8 @@ BlText >> notifyAttributeAdded: anAttribute from: aFromIndex to: aToIndex [
 ]
 
 { #category : #'text - notifying' }
-BlText >> notifyDeleted: aFromIndex to: aToIndex [
-	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextDeleted from: aFromIndex to: aToIndex) ]
+BlText >> notifyDeleted: aFromIndex to: aToIndex text: aDeletedBlText [
+	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextDeleted from: aFromIndex to: aToIndex text: aDeletedBlText) ]
 ]
 
 { #category : #'text - notifying' }

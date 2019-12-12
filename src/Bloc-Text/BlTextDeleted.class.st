@@ -11,16 +11,18 @@ Class {
 	#superclass : #Announcement,
 	#instVars : [
 		'fromIndex',
-		'toIndex'
+		'toIndex',
+		'text'
 	],
-	#category : 'Bloc-Text-Text-Events'
+	#category : #'Bloc-Text-Text-Events'
 }
 
 { #category : #'instance creation' }
-BlTextDeleted class >> from: aFromIndex to: aToIndex [
+BlTextDeleted class >> from: aFromIndex to: aToIndex text: aDeletedBlText [
 	^ self new
 		fromIndex: aFromIndex;
-		toIndex: aToIndex
+		toIndex: aToIndex;
+		text: aDeletedBlText
 ]
 
 { #category : #accessing }
@@ -31,6 +33,18 @@ BlTextDeleted >> fromIndex [
 { #category : #accessing }
 BlTextDeleted >> fromIndex: anObject [
 	fromIndex := anObject
+]
+
+{ #category : #accessing }
+BlTextDeleted >> text [
+	<return: #BlText>
+
+	^ text
+]
+
+{ #category : #accessing }
+BlTextDeleted >> text: aBlText [
+	text := aBlText
 ]
 
 { #category : #accessing }
