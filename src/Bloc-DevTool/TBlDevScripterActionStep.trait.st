@@ -10,43 +10,42 @@ Trait {
 
 { #category : #'steps - interactions' }
 TBlDevScripterActionStep >> click [
-	^ self addStep: (BlDevScripterClickStep new)
+	^ self addStep: (BlDevScripterClickStep new referenceSender)
+]
+
+{ #category : #'steps - other' }
+TBlDevScripterActionStep >> do [
+	^ self addStep: BlDevScripterActionStep new referenceSender
 ]
 
 { #category : #'steps - interactions' }
 TBlDevScripterActionStep >> fire [
-	^ self addStep: BlDevScripterFireEventStep new
-]
-
-{ #category : #'steps - other' }
-TBlDevScripterActionStep >> model [
-	^ self addStep: BlDevScripterBlockReceivingModelStep new
-]
-
-{ #category : #'steps - other' }
-TBlDevScripterActionStep >> modelDo: anOneArgBlock [
-	^ self model block: anOneArgBlock
+	^ self addStep: BlDevScripterFireEventStep new referenceSender
 ]
 
 { #category : #'steps - other' }
 TBlDevScripterActionStep >> set [
-	^ self addStep: BlDevScripterSetStep new
+	^ self addStep: BlDevScripterSetStep new referenceSender
 ]
 
 { #category : #'steps - substeps' }
 TBlDevScripterActionStep >> substep [
-	^ self addStep: (BlDevScripterMultipleActionStep new)
+	^ self addStep: (BlDevScripterMultipleActionStep new referenceSender)
 ]
 
 { #category : #'steps - substeps' }
 TBlDevScripterActionStep >> substep: aLabel [
-	^ self substep label: aLabel
+	^ self substep 
+		label: aLabel;
+		referenceSender
 ]
 
 { #category : #'steps - substeps' }
 TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
 	| aStep |
-	aStep := self substep label: aLabel.
+	aStep := self substep 
+		label: aLabel;
+		referenceSender.
 	anOneArgBlock value: aStep.
 	^ aStep
 ]
@@ -58,10 +57,12 @@ TBlDevScripterActionStep >> type [
 
 { #category : #'steps - interactions' }
 TBlDevScripterActionStep >> type: aString [
-	^ self type text: aString
+	^ self type 
+		text: aString;
+		referenceSender
 ]
 
 { #category : #'steps - other' }
 TBlDevScripterActionStep >> wait [
-	^ self addStep: BlDevScripterWaitStep new
+	^ self addStep: BlDevScripterWaitStep new referenceSender
 ]

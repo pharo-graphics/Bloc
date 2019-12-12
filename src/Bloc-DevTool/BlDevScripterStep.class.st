@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'state',
-		'label'
+		'label',
+		'reference'
 	],
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
@@ -22,6 +23,14 @@ BlDevScripterStep >> defaultLabel [
 { #category : #printing }
 BlDevScripterStep >> gtDisplayOn: aStream [
 	aStream nextPutAll: self label
+]
+
+{ #category : #'gt-extension' }
+BlDevScripterStep >> gtReferenceFor: aView [
+	<gtView>
+	self reference ifNil: [ ^ aView empty ].
+	^ (self reference gtReferenceFor: aView)
+		priority: 5
 ]
 
 { #category : #'gt-extension' }
@@ -51,7 +60,7 @@ BlDevScripterStep >> gtStepsTreeFor: aView [
 		column: 'Target' item: #target
 ]
 
-{ #category : #state }
+{ #category : #'accessing - state' }
 BlDevScripterStep >> haltHere [
 	state := BlDevScripterStepState haltHere
 ]
@@ -60,6 +69,7 @@ BlDevScripterStep >> haltHere [
 BlDevScripterStep >> initialize [
 	super initialize.
 	state := BlDevScripterStepState ready.
+	reference := BlDevScripterReference null.
 ]
 
 { #category : #accessing }
@@ -112,12 +122,37 @@ BlDevScripterStep >> realTarget [
 	^ self target
 ]
 
-{ #category : #state }
+{ #category : #'accessing - reference' }
+BlDevScripterStep >> reference [
+	<return: #BlDevScripterReference>
+	^ reference
+]
+
+{ #category : #'accessing - reference' }
+BlDevScripterStep >> reference: aBlDevScripterReference [
+	reference := aBlDevScripterReference
+]
+
+{ #category : #'accessing - reference' }
+BlDevScripterStep >> referenceHere [
+	| aDefinition |
+	aDefinition := thisContext stack second method asRingDefinition.
+	self reference: (BlDevScripterReference method: aDefinition).
+]
+
+{ #category : #'accessing - reference' }
+BlDevScripterStep >> referenceSender [
+	| aDefinition |
+	aDefinition := thisContext stack third method asRingDefinition.
+	self reference: (BlDevScripterReference method: aDefinition).
+]
+
+{ #category : #'accessing - state' }
 BlDevScripterStep >> stateColor [
 	^ state color
 ]
 
-{ #category : #state }
+{ #category : #'accessing - state' }
 BlDevScripterStep >> stateName [
 	^ state name
 ]

@@ -10,39 +10,38 @@ Trait {
 
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> childrenCount: aNumber [
-	^ self addStep: (BlDevScripterCheckChildrenCountStep new childrenCount: aNumber)
+	^ self addStep: (BlDevScripterCheckChildrenCountStep new 
+		childrenCount: aNumber;
+		referenceSender)
 ]
 
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> click [
 	^ self addStep: (BlDevScripterCheckFiredEventsStep new 
-		event: BlClickEvent)
+		event: BlClickEvent;
+		referenceSender)
 ]
 
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> elementIsOfClass: aClass [
 	^ self addStep: (BlDevScripterCheckElementClassStep new 
-		elementClass: aClass)
+		elementClass: aClass;
+		referenceSender)
 ]
 
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> elementSatisfies: anOneArgBlock [
-	^ self satisfies: anOneArgBlock
+	^ (self satisfies: anOneArgBlock) referenceSender
 ]
 
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> satisfies: anOneArgBlock [
-	^ self addStep: (BlDevScripterCheckElementStep new block: anOneArgBlock)
+	^ self addStep: (BlDevScripterCheckElementStep new block: anOneArgBlock; referenceSender)
 ]
 
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> totalChildrenCount: aNumber [
-	^ self addStep: (BlDevScripterCheckTotalChildrenCountStep new totalChildrenCount: aNumber)
-]
-
-{ #category : #accessing }
-TBlDevScripterCheckStep >> withInfoAt: aSymbol elementSatisfies: anOneArgBlock [
-	^ self elementSatisfies: [ :anElement :aScripterData | 
-			(aScripterData includesKey: aSymbol) and: [ 
-				 anOneArgBlock value: anElement value: (aScripterData at: aSymbol) ] ]
+	^ self addStep: (BlDevScripterCheckTotalChildrenCountStep new 
+		totalChildrenCount: aNumber;
+		referenceSender)
 ]

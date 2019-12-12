@@ -149,6 +149,7 @@ BlDevScripter >> initialize [
 	super initialize.
 	
 	rootStep := BlDevScripterMultipleActionStep new.
+	rootStep referenceHere.
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
