@@ -225,7 +225,7 @@ BlRopedText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	
 	theProcessedStrings := aCollectionOfStrings collect: [ :eachString | BlTextStringNormalizer new process: eachString ].
 	self
-		notifyStringsInserted: (theProcessedStrings collect: [ :eachProcessedString | (self class items: eachProcessedString) asString ])
+		notifyStringsInserted: (theProcessedStrings collect: [ :eachProcessedString | (self class items: eachProcessedString) characters asString ])
 		atAll: (self
 			insertItems: theProcessedStrings
 			atAll: aCollectionOfIndices)
