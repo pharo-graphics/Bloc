@@ -42,8 +42,9 @@ BlShortcutHandler >> handleEvent: aShortcutEvent [
 		ifNotEmpty: [ :theShortcuts |
 			| aShortcut |
 			aShortcut := theShortcuts first key.
-			aShortcut action cull: aShortcut.
-			aShortcutEvent consumed: true ]
+			"let users explicitely set consumed to false so it bubbles up"
+			aShortcutEvent consumed: true.
+			aShortcut action cull: aShortcut. ]
 ]
 
 { #category : #initialization }
