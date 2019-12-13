@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #cleanup }
@@ -24,7 +24,7 @@ BlEmptyText >> attributes: anAttributesCollection [
 ]
 
 { #category : #'text - modifications' }
-BlEmptyText >> delete: aStart to: anEnd [
+BlEmptyText >> deleteAll: aCollectionOfIntervals [
 ]
 
 { #category : #'text - enumeration' }
@@ -44,7 +44,7 @@ BlEmptyText >> from: aFromIndex to: aToIndex do: aBlock [
 ]
 
 { #category : #'text - modifications' }
-BlEmptyText >> insertString: aString at: anIndex [
+BlEmptyText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 ]
 
 { #category : #'text - modifications' }

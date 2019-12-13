@@ -14,6 +14,13 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlRopedText class >> items: aCollectionOfItems [
+	<return: #BlRopedText>
+
+	^ self rope: (BlCollectionRope collection: aCollectionOfItems)
+]
+
+{ #category : #'instance creation' }
 BlRopedText class >> rope: aRope [
 	^ self new
 		initializeWith: aRope;
@@ -99,19 +106,39 @@ BlRopedText >> copyFrom: aStartIndex to: anEndIndex [
 ]
 
 { #category : #'text - modifications' }
-BlRopedText >> delete: aFromIndex to: aToIndex [
-	| aDeletedRope |
-	self
-		assert: [ aFromIndex <= aToIndex ]
-		description: [ 'Start must not exceed end' ].
-
-	self
-		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
-		description: [ 'Start and end must be positive or both zero' ].
+BlRopedText >> deleteAll: aCollectionOfIntervals [
+	"Intervals must not overlap!"
+	| theDeletedTexts aRope theUpdatedIntervals |
 	
-	aDeletedRope := rope from: ((aFromIndex - 1) max: 0) to: aToIndex.
-	rope := rope delete: ((aFromIndex - 1) max: 0) to: aToIndex.
-	self notifyDeleted: aFromIndex to: aToIndex text: (BlRopedText rope: aDeletedRope)
+	theDeletedTexts := aCollectionOfIntervals
+		collect: [ :eachInterval | self copyFrom: eachInterval first to: eachInterval last ].
+	
+	aRope := rope.
+	
+	theUpdatedIntervals := aCollectionOfIntervals collect: #copy.
+	
+	theUpdatedIntervals
+		do: [ :eachCurrentDeletionInterval |
+			aRope := aRope delete: ((eachCurrentDeletionInterval first - 1) max: 0) to: eachCurrentDeletionInterval last.
+	
+			1 to: theUpdatedIntervals size do: [ :eachIntervalIndex |
+				| aCurrentIntervalToUpdate |
+			
+				aCurrentIntervalToUpdate := theUpdatedIntervals at: eachIntervalIndex.
+				
+				aCurrentIntervalToUpdate first > eachCurrentDeletionInterval last
+					ifTrue: [
+						theUpdatedIntervals
+							at: eachIntervalIndex
+							put: (
+								(aCurrentIntervalToUpdate first - eachCurrentDeletionInterval size)
+								to: (aCurrentIntervalToUpdate last - eachCurrentDeletionInterval size)) ] ] ].
+	
+	rope := aRope.
+	self
+		notifyDeletedAll: theUpdatedIntervals
+		requested: aCollectionOfIntervals
+		texts: theDeletedTexts
 ]
 
 { #category : #'text - enumeration' }
@@ -164,14 +191,45 @@ BlRopedText >> initializeWith: aRope [
 ]
 
 { #category : #'text - modifications' }
-BlRopedText >> insertItems: aCollection at: anIndex [
-	rope := rope insertItems: aCollection at: anIndex
+BlRopedText >> insertItems: aCollectionOfCollectionsOfItems atAll: aCollectionOfIndices [
+	"I return actual indices after insertion"
+	<return: #Collection of: #Number>
+	| theUpdatedIndices aRope aCurrentItemsIndex |
+	
+	aRope := rope.
+	
+	theUpdatedIndices := aCollectionOfIndices copy.
+	
+	aCurrentItemsIndex := 0.
+	aCollectionOfCollectionsOfItems
+		with: theUpdatedIndices
+		do: [ :eachCollection :eachCurrentInsertionIndex |
+			aRope := aRope insertItems: eachCollection at: eachCurrentInsertionIndex.
+	
+			aCurrentItemsIndex := aCurrentItemsIndex + 1.
+			1 to: theUpdatedIndices size do: [ :each |
+				| aCurrentIndexToUpdate |
+				aCurrentIndexToUpdate := theUpdatedIndices at: each.
+				(aCurrentIndexToUpdate >= eachCurrentInsertionIndex and: [ aCurrentItemsIndex ~= each ])
+					ifTrue: [
+						theUpdatedIndices
+							at: each
+							put: (aCurrentIndexToUpdate + eachCollection size) ] ] ].
+	rope := aRope.
+	^ theUpdatedIndices
 ]
 
 { #category : #'text - modifications' }
-BlRopedText >> insertString: aString at: anIndex [
-	self insertItems: (BlTextStringNormalizer new process: aString) at: anIndex.
-	self notifyStringInserted: aString at: anIndex
+BlRopedText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
+	| theProcessedStrings |
+	
+	theProcessedStrings := aCollectionOfStrings collect: [ :eachString | BlTextStringNormalizer new process: eachString ].
+	self
+		notifyStringsInserted: (theProcessedStrings collect: [ :eachProcessedString | (self class items: eachProcessedString) asString ])
+		atAll: (self
+			insertItems: theProcessedStrings
+			atAll: aCollectionOfIndices)
+		requested: aCollectionOfIndices
 ]
 
 { #category : #accessing }
@@ -183,7 +241,10 @@ BlRopedText >> insertText: aText at: anIndex [
 					{aText class name.
 					BlText name} ].
 	rope := rope insert: aText rope at: anIndex.
-	self notifyStringInserted: aText characters asString at: anIndex
+	self
+		notifyStringsInserted: { aText characters asString }
+		atAll: { anIndex }
+		requested: { anIndex }
 ]
 
 { #category : #'text - testing' }

@@ -17,9 +17,13 @@ BlRopedRawText >> asRopedText [
 ]
 
 { #category : #'text - modifications' }
-BlRopedRawText >> insertString: aString at: anIndex [
-	self insertItems: aString at: anIndex.
-	self notifyStringInserted: aString at: anIndex
+BlRopedRawText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
+	self
+		notifyStringsInserted: aCollectionOfStrings
+		atAll: (self
+			insertItems: aCollectionOfStrings
+			atAll: aCollectionOfIndices)
+		requested: aCollectionOfIndices
 ]
 
 { #category : #'text - converting' }

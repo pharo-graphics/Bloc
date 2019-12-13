@@ -147,9 +147,15 @@ BlSubText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
 ]
 
 { #category : #'text - modifications' }
-BlSubText >> delete: aStart to: anEnd [
-	text delete: start + aStart - 1 to: start + anEnd - 1.
-	end := end - (anEnd - aStart + 1)
+BlSubText >> deleteAll: aCollectionOfIntervals [
+
+	aCollectionOfIntervals
+		ifEmpty: [ ^ self ].
+
+	text deleteAll: (aCollectionOfIntervals collect: [ :eachInterval |
+		(eachInterval first + start - 1) to: (eachInterval last + start - 1) ]).
+
+	end := end - (aCollectionOfIntervals sum: #size)
 ]
 
 { #category : #'text - enumeration' }
@@ -217,16 +223,19 @@ BlSubText >> hash [
 ]
 
 { #category : #'text - modifications' }
-BlSubText >> insertString: aString at: anIndex [
+BlSubText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	| aPreviousSize aNewSize |
 	
-	(anIndex <= end)
+	(aCollectionOfIndices allSatisfy: [ :eachIndex | eachIndex <= end ])
 		ifFalse: [ BlTextOutOfBoundsError signal: 'Insertion can not happen past the end of the SubText' ].
-
-	aPreviousSize := text size.	
-	text insertString: aString at: start + anIndex - 1.
-	aNewSize := text size.
 	
+	aPreviousSize := text size.
+	
+	text
+		insertStrings: aCollectionOfStrings
+		atAll: (aCollectionOfIndices collect: [ :eachIndex | start + eachIndex - 1 ]).
+	
+	aNewSize := text size.
 	end := end + (aNewSize - aPreviousSize)
 ]
 

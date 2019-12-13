@@ -181,6 +181,11 @@ BlText >> copyFrom: aStartIndex to: anEndIndex [
 
 { #category : #'text - modifications' }
 BlText >> delete: aStart to: anEnd [
+	self deleteAll: { (aStart to: anEnd) }
+]
+
+{ #category : #'text - modifications' }
+BlText >> deleteAll: aCollectionOfIntervals [
 	self subclassResponsibility
 ]
 
@@ -253,6 +258,13 @@ BlText >> generation [
 
 { #category : #'text - modifications' }
 BlText >> insertString: aString at: anIndex [
+	self
+		insertStrings: { aString }
+		atAll: { anIndex }
+]
+
+{ #category : #'text - modifications' }
+BlText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	self subclassResponsibility
 ]
 
@@ -312,13 +324,20 @@ BlText >> notifyAttributeAdded: anAttribute from: aFromIndex to: aToIndex [
 ]
 
 { #category : #'text - notifying' }
-BlText >> notifyDeleted: aFromIndex to: aToIndex text: aDeletedBlText [
-	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextDeleted from: aFromIndex to: aToIndex text: aDeletedBlText) ]
+BlText >> notifyDeletedAll: theDeletedIntervals requested: theRequestedIntervals texts: theDeletedTexts [
+	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextsDeleted new
+		texts: theDeletedTexts;
+		requestedIntervals: theRequestedIntervals;
+		finalIntervals: theDeletedIntervals) ]
 ]
 
 { #category : #'text - notifying' }
-BlText >> notifyStringInserted: aString at: anIndex [
-	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextStringInserted string: aString at: anIndex) ]
+BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalIndices requested: aCollectionOfRequestedIndices [
+	self announcerDo: [ :anAnnouncer | anAnnouncer
+			announce: (BlTextStringsInserted new
+				strings: aCollectionOfStrings;
+				requestedIndices: aCollectionOfRequestedIndices;
+				finalIndices: aCollectionOfFinalIndices) ]
 ]
 
 { #category : #copying }

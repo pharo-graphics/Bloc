@@ -68,7 +68,7 @@ BlCharacterText >> copyFrom: aStartIndex to: anEndIndex [
 ]
 
 { #category : #'text - modifications' }
-BlCharacterText >> delete: aStart to: anEnd [
+BlCharacterText >> deleteAll: aCollectionOfIntervals [
 	self shouldNotImplement
 ]
 
@@ -99,7 +99,7 @@ BlCharacterText >> hash [
 ]
 
 { #category : #'text - modifications' }
-BlCharacterText >> insertString: aString at: anIndex [
+BlCharacterText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	self shouldNotImplement
 ]
 
