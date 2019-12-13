@@ -354,6 +354,13 @@ BlText >> readonly [
 ]
 
 { #category : #'text - accessing' }
+BlText >> second [
+	<return: #Object>
+	
+	^ self at: 2
+]
+
+{ #category : #'text - accessing' }
 BlText >> size [
 	<return: #Number>
 
@@ -397,6 +404,13 @@ BlText >> textOffset [
 	<return: #Number>
 	
 	^ 0
+]
+
+{ #category : #'text - accessing' }
+BlText >> third [
+	<return: #Object>
+	
+	^ self at: 3
 ]
 
 { #category : #'text - modifications' }
