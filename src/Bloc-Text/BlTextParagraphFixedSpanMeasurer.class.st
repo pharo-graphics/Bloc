@@ -32,6 +32,11 @@ BlTextParagraphFixedSpanMeasurer >> ascent [
 
 { #category : #accessing }
 BlTextParagraphFixedSpanMeasurer >> ascent: aNumber [
+
+	self
+		assert: [ aNumber <= 0 ]
+		description: [ 'Ascent must be negative' ].
+
 	ascent := aNumber
 ]
 
@@ -49,6 +54,10 @@ BlTextParagraphFixedSpanMeasurer >> descent [
 
 { #category : #accessing }
 BlTextParagraphFixedSpanMeasurer >> descent: aNumber [
+	self
+		assert: [ aNumber >= 0 ]
+		description: [ 'Descent must be positive' ].
+	
 	descent := aNumber
 ]
 
@@ -78,7 +87,7 @@ BlTextParagraphFixedSpanMeasurer >> height: aNumber [
 BlTextParagraphFixedSpanMeasurer >> initialize [
 	super initialize.
 
-	ascent := 11.
+	ascent := -11.
 	descent := 4.
 	height := 13.
 	glyphWidth := 5
@@ -94,6 +103,14 @@ BlTextParagraphFixedSpanMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
 
 	measuredWidth := aTextRun size * self glyphWidth.
 	measuredHeight := self height * aTextRun size isZero not asBit.
+	
+	self
+		assert: [ measuredWidth >= 0 ]
+		description: [ 'Width must be positive' ].
+		
+	self
+		assert: [ measuredHeight >= 0 ]
+		description: [ 'Height must be positive' ].
 
 	aParagraphSpan applyFixedMetrics: self.
 	
@@ -119,4 +136,14 @@ BlTextParagraphFixedSpanMeasurer >> measuredHeight [
 { #category : #metrics }
 BlTextParagraphFixedSpanMeasurer >> measuredWidth [
 	^ measuredWidth
+]
+
+{ #category : #accessing }
+BlTextParagraphFixedSpanMeasurer >> textOffset [
+	^ textOffset
+]
+
+{ #category : #accessing }
+BlTextParagraphFixedSpanMeasurer >> textOffset: aNumber [
+	textOffset := aNumber
 ]

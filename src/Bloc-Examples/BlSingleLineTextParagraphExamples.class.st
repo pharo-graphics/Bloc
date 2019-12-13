@@ -11,7 +11,7 @@ Class {
 BlSingleLineTextParagraphExamples >> ascent [
 	<gtExample>
 
-	^ 10
+	^ -10
 ]
 
 { #category : #'font - metrics' }

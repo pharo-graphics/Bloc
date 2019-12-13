@@ -723,14 +723,15 @@ BlElement >> childrenCount [
 ]
 
 { #category : #'children accessing' }
-BlElement >> childrenDo: aBlock [
+BlElement >> childrenDo: aBlockOrSymbol [
 	"Evaluate aBlock with each of my direct children as argument.
 	aBlock can not be nil.
 	aBlock must accept exactly one argument"
-	self assert: aBlock isNotNil.
-	self assert: aBlock argumentCount = 1.
+	self
+		assert: [ aBlockOrSymbol isNotNil ]
+		description: [ 'Block must not be nil' ].
 	
-	self children do: aBlock
+	self children do: aBlockOrSymbol
 ]
 
 { #category : #'api - look' }

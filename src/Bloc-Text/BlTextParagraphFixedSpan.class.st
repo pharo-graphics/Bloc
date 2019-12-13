@@ -12,7 +12,7 @@ BlTextParagraphFixedSpan >> advance: aNumber [
 { #category : #drawing }
 BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 	| theAttributes aTextPainter aFontBuilder aCharacterWidth aCharacterHeight |
-	
+		
 	self spanLength isZero
 		ifTrue: [ ^ self ].
 	
@@ -27,8 +27,7 @@ BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 		anAttribute applyOnSpartaTextPainter: aTextPainter with: self ].
 
 	aTextPainter
-		font: aFontBuilder build;
-		string: self textRun.
+		font: aFontBuilder build.
 
 	aCharacterWidth := (self width / self textRunLength) asFloat.
 	aCharacterHeight := self height.
@@ -39,8 +38,7 @@ BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 		eachBaseline := (self baseline + ((anIndex - 1) * (aCharacterWidth @ 0))) x @ 0.
 	
 		theMetrics := aTextPainter
-			start: anIndex;
-			end: anIndex;
+			string: (self textRun at: anIndex) asString;
 			measure.
 		
 		theBounds := theMetrics textMetrics bounds.
@@ -48,11 +46,15 @@ BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 		aMeasuredWidth := theBounds width.
 		aMeasuredWidth isZero
 			ifTrue: [ aMeasuredWidth := aCharacterWidth ].
-		aMeasuredHeight := theMetrics fontMetrics ascent + theMetrics fontMetrics descent.
+		aMeasuredHeight := theMetrics fontMetrics ascent abs + theMetrics fontMetrics descent.
 		aMeasuredHeight isZero
 			ifTrue: [ aMeasuredHeight := aCharacterHeight ].
 		
 		aHeightScale := (aCharacterHeight * 0.8) / aMeasuredHeight.
+		
+		self
+			assert: [ aHeightScale > 0 ]
+			description: [ 'Height must be positive' ].
 		
 		theFixedBounds := (eachBaseline extent: aCharacterWidth @ aCharacterHeight).
 
@@ -66,19 +68,19 @@ BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 			by: [ :aTransform |
 				aTransform translateBy: eachBaseline.
 				aTransform scaleBy: aHeightScale.
-				aTransform translateBy: (theBounds origin x negated @ theMetrics fontMetrics ascent) + ((aCharacterWidth / aHeightScale) - (theBounds width) / 2.0 @ 0) ]
+				aTransform translateBy: (theBounds origin x negated @ theMetrics fontMetrics ascent abs) + ((aCharacterWidth / aHeightScale) - (theBounds width) / 2.0 @ 0) ]
 			during: [ aTextPainter draw ].
 		
-		
+		anIndex = 1 ifTrue: [
 			aSpartaCanvas text
-				string: (anIndex - 1) asString;
+				string: (anIndex + measurer textOffset - 1) asString;
 				font: (aSpartaCanvas font size: aCharacterHeight * 0.22; build);
 				baseline: ((eachBaseline x - 2) @ (self height - 1));
 				paint: Color gray;
-				draw.
+				draw ].
 
 		aSpartaCanvas text
-			string: (anIndex) asString;
+			string: (anIndex + measurer textOffset) asString;
 			font: (aSpartaCanvas font size: aCharacterHeight * 0.22; build);
 			baseline: ((eachBaseline x + aCharacterWidth - 2) @ (self height - 1));
 			paint: Color gray;

@@ -6,7 +6,7 @@ Class {
 
 { #category : #'font - metrics' }
 BlTextElementMeasurementExamples >> ascent [
-	^ 50
+	^ -50
 ]
 
 { #category : #'instance creation' }
