@@ -27,7 +27,7 @@ BlTextElementMeasurementExamples >> descent [
 
 { #category : #'font - metrics' }
 BlTextElementMeasurementExamples >> glyphHeight [
-	^ self ascent + self descent - 20
+	^ self ascent abs + self descent - 20
 ]
 
 { #category : #'font - metrics' }
@@ -63,14 +63,13 @@ BlTextElementMeasurementExamples >> textElementWithCustomMeasurer [
 { #category : #'text - fit content' }
 BlTextElementMeasurementExamples >> unspecifiedExtent [
 	<gtExample>
-	<noTest>
 	| aTextElement |
 
 	aTextElement := self textElementWithCustomMeasurer.
 	aTextElement measure: (BlExtentMeasurementSpec unspecified).
 
 	self assert: aTextElement measuredWidth equals: (self helloWorldText size * self glyphWidth).
-	self assert: aTextElement measuredHeight equals: (self ascent + self descent).
+	self assert: aTextElement measuredHeight equals: (self glyphHeight).
 
 	^ aTextElement
 ]
@@ -78,7 +77,6 @@ BlTextElementMeasurementExamples >> unspecifiedExtent [
 { #category : #'text - fit content' }
 BlTextElementMeasurementExamples >> unspecifiedExtentShouldRemeasure [
 	<gtExample>
-	<noTest>
 	| aTextElement |
 
 	aTextElement := self unspecifiedExtent.
@@ -94,11 +92,11 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxHeight [
 	| aTextElement |
 	
 	aTextElement := self textElementWithCustomMeasurer.
-	aTextElement constraintsDo: [ :c | c maxHeight: (self ascent + self descent) / 2 ]. 
+	aTextElement constraintsDo: [ :c | c maxHeight: (self ascent abs + self descent) / 2 ]. 
 	aTextElement measure: (BlExtentMeasurementSpec unspecified).
 
 	self assert: aTextElement measuredWidth equals: (self helloWorldText size * self glyphWidth).
-	self assert: aTextElement measuredHeight equals: (self ascent + self descent) / 2.
+	self assert: aTextElement measuredHeight equals: (self ascent abs + self descent) / 2.
 
 	^ aTextElement
 ]
@@ -118,7 +116,6 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxHeightShouldRemeasur
 { #category : #'text - fit content' }
 BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidth [
 	<gtExample>
-	<noTest>
 	| aTextElement |
 
 	aTextElement := self textElementWithCustomMeasurer.
@@ -126,7 +123,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidth [
 	aTextElement measure: (BlExtentMeasurementSpec unspecified).
 
 	self assert: aTextElement measuredWidth equals: (self helloWorldText size * self glyphWidth) / 2.
-	self assert: aTextElement measuredHeight equals: (self ascent + self descent).
+	self assert: aTextElement measuredHeight equals: (self glyphHeight).
 
 	^ aTextElement
 ]
@@ -134,7 +131,6 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidth [
 { #category : #'text - fit content' }
 BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidthShouldRemeasure [
 	<gtExample>
-	<noTest>
 	| aTextElement |
 
 	aTextElement := self unspecifiedExtentWithMaxWidth.

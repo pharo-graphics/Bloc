@@ -464,7 +464,7 @@ BlSingleLineTextParagraphExamples >> measuredEmoji [
 	
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
-	self assert: aLine baseline equals: 0 @ self ascent.
+	self assert: aLine baseline equals: 0 @ self ascent abs.
 	self assert: aLine descent equals: self descent.
 	self assert: aLine from equals: 1.
 	self assert: aLine height equals: self height.
@@ -477,7 +477,7 @@ BlSingleLineTextParagraphExamples >> measuredEmoji [
 	aSpan := aLine spans first.
 	self assert: aSpan advance equals: self emoji size * self glyphWidth.
 	self assert: aSpan ascent equals: self ascent.
-	self assert: aSpan baseline equals: 0 @ self ascent.
+	self assert: aSpan baseline equals: 0 @ self ascent abs.
 	self assert: aSpan descent equals: self descent.
 	self assert: aSpan from equals: 1. 
 	self assert: aSpan height equals: self height.
@@ -510,7 +510,7 @@ BlSingleLineTextParagraphExamples >> measuredEmpty [
 	
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
-	self assert: aLine baseline equals: 0 @ self ascent.
+	self assert: aLine baseline equals: 0 @ self ascent abs.
 	self assert: aLine descent equals: self descent.
 	self assert: aLine from equals: 0.
 	self assert: aLine height equals: 0.
@@ -523,7 +523,7 @@ BlSingleLineTextParagraphExamples >> measuredEmpty [
 	aSpan := aLine spans first.
 	self assert: aSpan advance equals: 0.
 	self assert: aSpan ascent equals: self ascent.
-	self assert: aSpan baseline equals: 0 @ self ascent.
+	self assert: aSpan baseline equals: 0 @ self ascent abs.
 	self assert: aSpan descent equals: self descent.
 	self assert: aSpan from equals: 0. 
 	self assert: aSpan height equals: 0.
@@ -556,7 +556,7 @@ BlSingleLineTextParagraphExamples >> measuredHaba [
 	
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
-	self assert: aLine baseline equals: 0 @ self ascent.
+	self assert: aLine baseline equals: 0 @ self ascent abs.
 	self assert: aLine descent equals: self descent.
 	self assert: aLine from equals: 1.
 	self assert: aLine height equals: self height.
@@ -569,7 +569,7 @@ BlSingleLineTextParagraphExamples >> measuredHaba [
 	aSpan := aLine spans first.
 	self assert: aSpan advance equals: self haba size * self glyphWidth.
 	self assert: aSpan ascent equals: self ascent.
-	self assert: aSpan baseline equals: 0 @ self ascent.
+	self assert: aSpan baseline equals: 0 @ self ascent abs.
 	self assert: aSpan descent equals: self descent.
 	self assert: aSpan from equals: 1. 
 	self assert: aSpan height equals: self height.
@@ -606,7 +606,7 @@ BlSingleLineTextParagraphExamples >> measuredHelloWorld [
 	
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
-	self assert: aLine baseline equals: 0 @ self ascent.
+	self assert: aLine baseline equals: 0 @ self ascent abs.
 	self assert: aLine descent equals: self descent.
 	self assert: aLine from equals: 1.
 	self assert: aLine height equals: self height.
@@ -620,7 +620,7 @@ BlSingleLineTextParagraphExamples >> measuredHelloWorld [
 	aFirstSpan := aLine spans first.
 	self assert: aFirstSpan advance equals: aHello size * self glyphWidth.
 	self assert: aFirstSpan ascent equals: self ascent.
-	self assert: aFirstSpan baseline equals: 0 @ self ascent.
+	self assert: aFirstSpan baseline equals: 0 @ self ascent abs.
 	self assert: aFirstSpan descent equals: self descent.
 	self assert: aFirstSpan from equals: 1. 
 	self assert: aFirstSpan to equals: aHello size.
@@ -641,7 +641,7 @@ BlSingleLineTextParagraphExamples >> measuredHelloWorld [
 	aSecondSpan := aLine spans second.
 	self assert: aSecondSpan advance equals: aWorld size * self glyphWidth.
 	self assert: aSecondSpan ascent equals: self ascent.
-	self assert: aSecondSpan baseline equals: (aFirstSpan width @ self ascent).
+	self assert: aSecondSpan baseline equals: (aFirstSpan width @ self ascent abs).
 	self assert: aSecondSpan descent equals: self descent.
 	self assert: aSecondSpan from equals: aHello size + 1. 
 	self assert: aSecondSpan to equals: aHello size + aWorld size.

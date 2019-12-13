@@ -90,7 +90,8 @@ BlTextParagraphFixedSpanMeasurer >> initialize [
 	ascent := -11.
 	descent := 4.
 	height := 13.
-	glyphWidth := 5
+	glyphWidth := 5.
+	textOffset := 0
 ]
 
 { #category : #measurement }
