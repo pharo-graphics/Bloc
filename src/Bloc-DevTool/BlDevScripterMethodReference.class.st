@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'definition'
 	],
-	#category : #'Bloc-DevTool-Scripter-References'
+	#category : #'Bloc-DevTool-Scripter-Properties'
 }
 
 { #category : #accessing }

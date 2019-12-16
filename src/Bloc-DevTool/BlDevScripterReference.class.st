@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterReference,
-	#superclass : #Object,
-	#category : #'Bloc-DevTool-Scripter-References'
+	#superclass : #BlDevScripterStepProperty,
+	#category : #'Bloc-DevTool-Scripter-Properties'
 }
 
 { #category : #factory }
@@ -17,4 +17,10 @@ BlDevScripterReference class >> null [
 { #category : #'gt-extension' }
 BlDevScripterReference >> gtReferenceFor: aView [
 	^ aView empty
+]
+
+{ #category : #testing }
+BlDevScripterReference >> isReference [
+	<return: #Boolean>
+	^ true
 ]
