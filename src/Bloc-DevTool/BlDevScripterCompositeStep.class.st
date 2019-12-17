@@ -57,6 +57,14 @@ BlDevScripterCompositeStep >> steps [
 	^ steps
 ]
 
+{ #category : #accessing }
+BlDevScripterCompositeStep >> subLabel: aString [
+	self
+		assert: [ self steps isNotEmpty ] 
+		description: [ 'Composite step must have sub-steps in order to set a sub-label' ].
+	self steps last label: aString
+]
+
 { #category : #'targets - accessing and updating' }
 BlDevScripterCompositeStep >> target [
 	"We access the target of the last sub-step.

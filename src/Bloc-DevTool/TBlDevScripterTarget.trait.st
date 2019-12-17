@@ -46,6 +46,11 @@ TBlDevScripterTarget >> onNestedChild: anArray [
 	self updateTarget: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)
 ]
 
+{ #category : #'targets - other' }
+TBlDevScripterTarget >> onScripter [
+	self updateTarget: (BlDevScripterAsTarget new)
+]
+
 { #category : #'targets - children' }
 TBlDevScripterTarget >> onSelf [
 	self updateTarget: (BlDevScripterSelfEventTarget new)
