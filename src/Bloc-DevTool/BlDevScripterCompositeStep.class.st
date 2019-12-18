@@ -27,6 +27,13 @@ BlDevScripterCompositeStep >> initialize [
 	steps := OrderedCollection new
 ]
 
+{ #category : #accessing }
+BlDevScripterCompositeStep >> label: aString [
+	self steps 
+		ifEmpty: [ super label: aString ] 
+		ifNotEmpty: [ self steps last label: aString ]
+]
+
 { #category : #actions }
 BlDevScripterCompositeStep >> playOn: aScripter [
 	"self steps do: [ :eachTask | eachTask playIndicatingStateOn: aScripter ]"
