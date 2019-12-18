@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-DevTool-Scripter-References'
+	#category : #'Bloc-DevTool-Scripter-Properties'
 }
 
 { #category : #cleanup }

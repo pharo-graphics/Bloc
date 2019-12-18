@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'properties'
 	],
-	#category : #'Bloc-DevTool-Scripter-UI'
+	#category : #'Bloc-DevTool-Scripter-Properties'
 }
 
 { #category : #adding }
@@ -30,10 +30,26 @@ BlDevScripterStepProperties >> gtScreenshotFor: aView [
 { #category : #initialization }
 BlDevScripterStepProperties >> initialize [
 	super initialize.
-	properties := OrderedCollection new.
+	properties := OrderedCollection new: 2.
 ]
 
 { #category : #accessing }
 BlDevScripterStepProperties >> properties [
 	^ properties
+]
+
+{ #category : #accessing }
+BlDevScripterStepProperties >> reference [
+	<return: #BlDevScripterReference>
+	^ self properties 
+		detect: [ :eachProperty | eachProperty isReference ]
+		ifFound: [ :aReference | aReference ]
+		ifNone: [ BlDevScripterReference null ]
+]
+
+{ #category : #accessing }
+BlDevScripterStepProperties >> reference: aBlDevScripterReference [
+	<return: #BlDevScripterReference>
+	self properties removeAllSuchThat: #isReference.
+	self add: aBlDevScripterReference.
 ]

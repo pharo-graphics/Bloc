@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'form'
 	],
-	#category : #'Bloc-DevTool-Scripter-UI'
+	#category : #'Bloc-DevTool-Scripter-Properties'
 }
 
 { #category : #accessing }

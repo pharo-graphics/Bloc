@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'state',
 		'label',
-		'reference',
 		'properties'
 	],
 	#category : #'Bloc-DevTool-Scripter-Steps'
@@ -76,7 +75,6 @@ BlDevScripterStep >> haltHere [
 BlDevScripterStep >> initialize [
 	super initialize.
 	state := BlDevScripterStepState ready.
-	reference := BlDevScripterReference null.
 	properties := BlDevScripterStepProperties new.
 ]
 
@@ -133,12 +131,12 @@ BlDevScripterStep >> realTarget [
 { #category : #'accessing - reference' }
 BlDevScripterStep >> reference [
 	<return: #BlDevScripterReference>
-	^ reference
+	^ self properties reference
 ]
 
 { #category : #'accessing - reference' }
 BlDevScripterStep >> reference: aBlDevScripterReference [
-	reference := aBlDevScripterReference
+	self properties reference: aBlDevScripterReference
 ]
 
 { #category : #'accessing - reference' }
