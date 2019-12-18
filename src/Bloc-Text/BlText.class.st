@@ -325,6 +325,15 @@ BlText >> notifyAttributeAdded: anAttribute from: aFromIndex to: aToIndex [
 
 { #category : #'text - notifying' }
 BlText >> notifyDeletedAll: theDeletedIntervals requested: theRequestedIntervals texts: theDeletedTexts [
+	theDeletedIntervals
+		ifEmpty: [ ^ self ].
+		
+	theRequestedIntervals
+		ifEmpty: [ ^ self ].
+		
+	theDeletedTexts
+		ifEmpty: [ ^ self ].
+
 	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextsDeleted new
 		texts: theDeletedTexts;
 		requestedIntervals: theRequestedIntervals;
@@ -333,6 +342,15 @@ BlText >> notifyDeletedAll: theDeletedIntervals requested: theRequestedIntervals
 
 { #category : #'text - notifying' }
 BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalIndices requested: aCollectionOfRequestedIndices [
+	aCollectionOfStrings
+		ifEmpty: [ ^ self ].
+		
+	aCollectionOfFinalIndices
+		ifEmpty: [ ^ self ].
+		
+	aCollectionOfRequestedIndices
+		ifEmpty: [ ^ self ].
+
 	self announcerDo: [ :anAnnouncer | anAnnouncer
 			announce: (BlTextStringsInserted new
 				strings: aCollectionOfStrings;
