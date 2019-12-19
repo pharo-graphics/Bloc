@@ -5,12 +5,23 @@ Class {
 		'alignment',
 		'weight'
 	],
-	#category : 'Bloc-Layout-Frame'
+	#category : #'Bloc-Layout-Frame'
 }
 
 { #category : #alignment }
 BlFrameLayoutConstraintsHorizontal >> alignCenter [
+	"I align the center of the child element horizontally with the center of the parent"
+
 	alignment := BlElementAlignment horizontal center
+]
+
+{ #category : #alignment }
+BlFrameLayoutConstraintsHorizontal >> alignCenterAt: aUnitCoordinateNumber [
+	"Align the center of the element horizontally with a unit-coordinate inside of the parent"
+
+	alignment := BlHorizontalCoordinateStartAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment horizontal center
 ]
 
 { #category : #alignment }
@@ -28,7 +39,7 @@ BlFrameLayoutConstraintsHorizontal >> alignment [
 	^ alignment
 ]
 
-{ #category : #accessing }
+{ #category : #alignment }
 BlFrameLayoutConstraintsHorizontal >> alignment: aBlElementAlignment [
 	alignment := aBlElementAlignment
 ]

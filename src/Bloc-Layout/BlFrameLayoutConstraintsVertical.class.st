@@ -5,7 +5,7 @@ Class {
 		'alignment',
 		'weight'
 	],
-	#category : 'Bloc-Layout-Frame'
+	#category : #'Bloc-Layout-Frame'
 }
 
 { #category : #alignment }
@@ -15,7 +15,18 @@ BlFrameLayoutConstraintsVertical >> alignBottom [
 
 { #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignCenter [
+	"I align the center of the child element vertically with the center of the parent"
+
 	alignment := BlElementAlignment vertical center
+]
+
+{ #category : #alignment }
+BlFrameLayoutConstraintsVertical >> alignCenterAt: aUnitCoordinateNumber [
+	"Align the center of the element horizontally with a unit-coordinate inside of the parent"
+
+	alignment := BlVerticalCoordinateTopAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment vertical center
 ]
 
 { #category : #alignment }
