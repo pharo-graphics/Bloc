@@ -58,7 +58,7 @@ GToolkitImagesExamples >> gtBlUrlImageElement [
 
 	| file element |
 
-	file := GtIcebergUtility documentAtPath: 'feenkcom/gtoolkit-inspector/doc/gt.png' asFileReference path.
+	file := GtIcebergUtility resourceAtPath: Path * 'feenkcom' / 'gtoolkit-inspector' /' doc' / 'gt.png'.
 	element := BlFileImageElement file: file.
 	^element
 ]
