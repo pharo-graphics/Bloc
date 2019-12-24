@@ -241,7 +241,7 @@ BlBorder >> width: aNumber [
 		description: [ 'Width must not be nil' ].
 	self
 		assert: [ aNumber >= 0 ]
-		description: [ 'Width vmust not be negative' ].
+		description: [ 'Width must not be negative' ].
 
 	width isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
