@@ -28,10 +28,16 @@ BlNullWorldRenderer class >> initialize [
 { #category : #accessing }
 BlNullWorldRenderer class >> isApplicableFor: aWorld [
 	<return: #Boolean>
+
+	| cla |
+
 	(isEnabled isNotNil and: [ isEnabled not ])
 		ifTrue: [ ^ false ].
 
-	^ Smalltalk isHeadless and: [ CommandLineArguments new hasOption: 'interactive'  ]
+	cla := CommandLineArguments new.
+	^ Smalltalk isHeadless 
+		and: [ (cla hasOption: 'interactive')
+		and: [ (cla hasOption: 'morphic') not ] ]
 ]
 
 { #category : #accessing }
