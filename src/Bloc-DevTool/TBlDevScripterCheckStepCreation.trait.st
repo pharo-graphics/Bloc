@@ -14,20 +14,30 @@ TBlDevScripterCheckStepCreation >> addStep: aScripterTask [
 
 { #category : #'steps - subchecks' }
 TBlDevScripterCheckStepCreation >> check [
+	^ BlDevScripterFutureCheckStep new parent: self
+]
+
+{ #category : #'steps - subchecks' }
+TBlDevScripterCheckStepCreation >> check: aLabel do: anOneArgBlock [
+	^ self checks: aLabel do: anOneArgBlock
+]
+
+{ #category : #'steps - subchecks' }
+TBlDevScripterCheckStepCreation >> checks [
 	^ self addStep: (BlDevScripterMultipleCheckStep new referenceSender)
 ]
 
 { #category : #'steps - subchecks' }
-TBlDevScripterCheckStepCreation >> check: aLabel [
-	^ self check 
+TBlDevScripterCheckStepCreation >> checks: aLabel [
+	^ self checks 
 		label: aLabel;
 		referenceSender
 ]
 
 { #category : #'steps - subchecks' }
-TBlDevScripterCheckStepCreation >> check: aLabel do: anOneArgBlock [
+TBlDevScripterCheckStepCreation >> checks: aLabel do: anOneArgBlock [
 	| aStep |
-	aStep := self check: aLabel.
+	aStep := self checks: aLabel.
 	aStep referenceSender.
 	anOneArgBlock value: aStep.
 	^ aStep

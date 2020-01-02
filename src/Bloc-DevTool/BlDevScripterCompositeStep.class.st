@@ -1,8 +1,8 @@
 Class {
 	#name : #BlDevScripterCompositeStep,
 	#superclass : #BlDevScripterStep,
-	#traits : 'TBlDevScripterCompositeStepTarget',
-	#classTraits : 'TBlDevScripterCompositeStepTarget classTrait',
+	#traits : 'TBlDevScripterCompositeStepTarget + TBlDevScripterTarget',
+	#classTraits : 'TBlDevScripterCompositeStepTarget classTrait + TBlDevScripterTarget classTrait',
 	#instVars : [
 		'steps'
 	],

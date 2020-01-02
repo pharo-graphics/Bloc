@@ -1,7 +1,5 @@
 Trait {
 	#name : #TBlDevScripterCompositeStepTarget,
-	#traits : 'TBlDevScripterTarget',
-	#classTraits : 'TBlDevScripterTarget classTrait',
 	#category : #'Bloc-DevTool-Scripter'
 }
 

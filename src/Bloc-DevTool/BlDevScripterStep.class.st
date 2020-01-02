@@ -71,6 +71,12 @@ BlDevScripterStep >> haltHere [
 	state := BlDevScripterStepState haltHere
 ]
 
+{ #category : #testing }
+BlDevScripterStep >> hasCustomLabel [
+	<return: #Boolean>
+	^ label isNotNil
+]
+
 { #category : #initialization }
 BlDevScripterStep >> initialize [
 	super initialize.
