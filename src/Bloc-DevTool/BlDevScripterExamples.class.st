@@ -13,6 +13,7 @@ Class {
 { #category : #'examples - scripter' }
 BlDevScripterExamples >> basicScripter [
 	<gtExample>
+	<noTest>
 	| aScript |
 	aScript := BlDevScripter new.
 	self assert: aScript events isCollection.
@@ -31,6 +32,7 @@ BlDevScripterExamples >> basicStepElement [
 { #category : #'examples - click check' }
 BlDevScripterExamples >> clickCheck [
 	<gtExample>
+	<noTest>
 	| anElement aScript |
 	anElement := BlDevHalosEventListenerExamples new containerWithRectangle.
 	aScript := self basicScripter element: anElement.
@@ -49,6 +51,7 @@ BlDevScripterExamples >> containerWithRectangle [
 { #category : #'examples - click check' }
 BlDevScripterExamples >> failingClickCheck [
 	<gtExample>
+	<noTest>
 	| anElement aScript aScriptFailed |
 	anElement := BlDevHalosEventListenerExamples new containerWithRectangle.
 	aScript := self basicScripter element: anElement.
