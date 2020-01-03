@@ -9,6 +9,12 @@ Trait {
 }
 
 { #category : #'steps - checks' }
+TBlDevScripterCheckStep >> anySatisfies: anOneArgBlock [
+	^ self addStep: (BlDevScripterCheckElementStep new block: [ :aCollection | 
+			aCollection anySatisfy: [ :eachItem | anOneArgBlock cull: eachItem ] ]; referenceSender)
+]
+
+{ #category : #'steps - checks' }
 TBlDevScripterCheckStep >> childrenCount: aNumber [
 	^ self addStep: (BlDevScripterCheckChildrenCountStep new 
 		childrenCount: aNumber;

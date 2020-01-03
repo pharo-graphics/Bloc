@@ -61,6 +61,11 @@ TBlDevScripterTarget >> onSpace [
 	self updateTarget: (BlDevScripterSpaceTarget new)
 ]
 
+{ #category : #'targets - text' }
+TBlDevScripterTarget >> onTextAttributesAt: anIndex [
+	self updateTarget: (BlDevScripterTextAttributesAtTarget new index: anIndex)
+]
+
 { #category : #'targets - accessing and updating' }
 TBlDevScripterTarget >> target [
 	<return: #BlDevScripterEventTarget>
