@@ -228,6 +228,12 @@ BlDevScripter >> syncPlay [
 		play
 ]
 
+{ #category : #'accessing - space' }
+BlDevScripter >> time [
+	<return: #BlTime>
+	^ self space time
+]
+
 { #category : #'accessing - data' }
 BlDevScripter >> userData [
 	<return: #BlDevScripterUserData>
