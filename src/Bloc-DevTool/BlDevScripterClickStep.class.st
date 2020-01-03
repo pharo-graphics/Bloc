@@ -22,7 +22,7 @@ BlDevScripterClickStep >> defaultLabel [
 { #category : #actions }
 BlDevScripterClickStep >> omitDoubleClickOn: aScripter [
 	| anEvent aDuration |
-	anEvent := aScripter events detect: [ :eachEvent | eachEvent class = BlClickEvent ] ifNone: [ ^ self ].
+	anEvent := aScripter events reversed detectEventOfClass: BlClickEvent ifNone: [ ^ self ]. 
 	aDuration := BlMouseProcessor dblClickDelay - (aScripter time now - anEvent timestamp).
 	aDuration < 0 seconds ifTrue: [ ^ self ]. 
 	aScripter time wait: aDuration.
