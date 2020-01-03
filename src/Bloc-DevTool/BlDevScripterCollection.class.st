@@ -79,6 +79,16 @@ BlDevScripterCollection >> initialize [
 	collection := OrderedCollection new.
 ]
 
+{ #category : #testing }
+BlDevScripterCollection >> isEmpty [
+	^ self collection isEmpty
+]
+
+{ #category : #testing }
+BlDevScripterCollection >> isNotEmpty [
+	^ self collection isNotEmpty
+]
+
 { #category : #accessing }
 BlDevScripterCollection >> size [
 	^ self collection size

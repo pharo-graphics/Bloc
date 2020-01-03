@@ -52,3 +52,8 @@ BlDevScripterEvents >> gtReveresedEventsFor: aView [
 BlDevScripterEvents >> reversed [
 	^ BlDevScripterReversedEvents new collection: self collection.
 ]
+
+{ #category : #enumerating }
+BlDevScripterEvents >> select: aBlock [ 
+	^ self collection select: aBlock 
+]
