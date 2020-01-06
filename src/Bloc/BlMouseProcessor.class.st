@@ -40,9 +40,13 @@ BlMouseProcessor >> canBeClickEvent: aMouseUpEvent [
 
 { #category : #'event testing' }
 BlMouseProcessor >> canBeDblClickEvent: aMouseUpEvent [
+
+	self flag: 'aMouseUpEvent target = lastClickEvent target is in fact needed, however, it breaks the Phlow list'.
+	self flag: 'https://github.com/feenkcom/gtoolkit/issues/708'.
+
 	^ (self canBeClickEvent: aMouseUpEvent) 
 		and: [ lastClickEvent isNotNil
-			and: [ aMouseUpEvent target = lastClickEvent target 
+			and: [ true"aMouseUpEvent target = lastClickEvent target "
 				and: [ aMouseUpEvent timestamp - lastClickEvent timestamp < self dblClickDelay ] ] ]
 ]
 
