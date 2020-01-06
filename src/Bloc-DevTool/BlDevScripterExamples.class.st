@@ -15,7 +15,7 @@ BlDevScripterExamples >> basicScripter [
 	<gtExample>
 	| aScript |
 	aScript := BlDevScripter new.
-	self assert: aScript events isCollection.
+	self assert: aScript events class equals: BlDevScripterEvents.
 	self assert: aScript events isEmpty.
 	^ aScript
 ]

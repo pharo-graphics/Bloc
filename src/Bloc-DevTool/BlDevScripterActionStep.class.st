@@ -35,11 +35,18 @@ BlDevScripterActionStep >> block: anOneArgBlock [
 
 { #category : #accessing }
 BlDevScripterActionStep >> defaultLabel [
-	^ 'Model Interaction'
+	^ 'Action'
+]
+
+{ #category : #initialization }
+BlDevScripterActionStep >> defaultTarget [
+	^ BlDevScripterModelTarget new
 ]
 
 { #category : #actions }
 BlDevScripterActionStep >> playOn: aScripter [
+	| anObject |
 	self assertBlock: self block.
-	self block value: aScripter model.
+	anObject := self target findTargetStartingInScripter: aScripter.
+	self block value: anObject.
 ]

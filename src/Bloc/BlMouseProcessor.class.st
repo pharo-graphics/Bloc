@@ -25,6 +25,12 @@ Class {
 	#category : #'Bloc-Space - Events'
 }
 
+{ #category : #accessing }
+BlMouseProcessor class >> dblClickDelay [
+	<return: #Duration>
+	^ 300 milliSeconds
+]
+
 { #category : #'event testing' }
 BlMouseProcessor >> canBeClickEvent: aMouseUpEvent [
 	^ dndInProgress not
@@ -52,7 +58,7 @@ BlMouseProcessor >> canStartDrag: aMouseMoveEvent [
 
 { #category : #accessing }
 BlMouseProcessor >> dblClickDelay [
-	^ 300 milliSeconds
+	^ self class dblClickDelay
 ]
 
 { #category : #'event processing' }

@@ -29,21 +29,26 @@ TBlDevScripterActionStep >> set [
 ]
 
 { #category : #'steps - substeps' }
-TBlDevScripterActionStep >> substep [
+TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
+	^ self substeps: aLabel do: anOneArgBlock
+]
+
+{ #category : #'steps - substeps' }
+TBlDevScripterActionStep >> substeps [
 	^ self addStep: (BlDevScripterMultipleActionStep new referenceSender)
 ]
 
 { #category : #'steps - substeps' }
-TBlDevScripterActionStep >> substep: aLabel [
-	^ self substep 
+TBlDevScripterActionStep >> substeps: aLabel [
+	^ self substeps
 		label: aLabel;
 		referenceSender
 ]
 
 { #category : #'steps - substeps' }
-TBlDevScripterActionStep >> substep: aLabel do: anOneArgBlock [
+TBlDevScripterActionStep >> substeps: aLabel do: anOneArgBlock [
 	| aStep |
-	aStep := self substep 
+	aStep := self substeps
 		label: aLabel;
 		referenceSender.
 	anOneArgBlock value: aStep.

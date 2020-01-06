@@ -58,7 +58,7 @@ BlDevScripter >> elementWithoutParent [
 
 { #category : #'accessing - data' }
 BlDevScripter >> events [
-	<return: #Collection of: #BlEvent>
+	<return: #BlDevScripterEvents>
 
 	^ events
 ]
@@ -89,7 +89,7 @@ BlDevScripter >> gtElementsFor: aView [
 BlDevScripter >> gtEventsFor: aView [
 	<gtView>
 	self events ifNil: [ ^ aView empty ].
-	^ (self events gtItemsFor: aView)
+	^ (self events gtEventsFor: aView)
 		title: 'Events';
 		priority: 3
 ]
@@ -98,7 +98,7 @@ BlDevScripter >> gtEventsFor: aView [
 BlDevScripter >> gtReveresedEventsFor: aView [
 	<gtView>
 	self events ifNil: [ ^ aView empty ].
-	^ (self events reversed gtItemsFor: aView)
+	^ (self events gtReveresedEventsFor: aView)
 		title: 'Events (Reversed)';
 		priority: 4
 ]
@@ -156,7 +156,7 @@ BlDevScripter >> initialize [
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
-	events := OrderedCollection new
+	events := BlDevScripterEvents new
 ]
 
 { #category : #'accessing - data' }
@@ -226,6 +226,12 @@ BlDevScripter >> syncPlay [
 		sync;
 		"withScreenshots;"
 		play
+]
+
+{ #category : #'accessing - space' }
+BlDevScripter >> time [
+	<return: #BlTime>
+	^ self space time
 ]
 
 { #category : #'accessing - data' }
