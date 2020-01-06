@@ -7,13 +7,16 @@ BlTextElement >> drawOnSpartaCanvas: aCanvas [
 	paragraph
 		ifNil: [ ^ self ].
 
-	aCanvas transform
-		by: [ :t | t translateBy: self padding topLeft ]
+	aCanvas clip
+		by: (self geometry pathOnSpartaCanvas: aCanvas)
 		during: [
-			paragraph selection: self selection.
-			paragraph containerExtent: self extent.
+			aCanvas transform
+				by: [ :t | t translateBy: self padding topLeft ]
+				during: [
+					paragraph selection: self selection.
+					paragraph containerExtent: self extent.
 
-			paragraph drawOn: aCanvas ].
+					paragraph drawOn: aCanvas ].
 
-	paragraph drawSelectionOnSpartaCanvas: aCanvas
+			paragraph drawSelectionOnSpartaCanvas: aCanvas ]
 ]
