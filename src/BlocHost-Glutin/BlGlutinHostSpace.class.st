@@ -1,14 +1,14 @@
 Class {
 	#name : #BlGlutinHostSpace,
 	#superclass : #Object,
-	#traits : 'TBlHostSpace',
-	#classTraits : 'TBlHostSpace classTrait',
+	#traits : 'TBlHostSpace + TGlutinEventVisitor',
+	#classTraits : 'TBlHostSpace classTrait + TGlutinEventVisitor classTrait',
 	#instVars : [
 		'window',
 		'mousePosition',
-		'lastModifiers',
 		'glutinRenderer',
-		'eventFetcher'
+		'eventFetcher',
+		'modifiers'
 	],
 	#category : #'BlocHost-Glutin-Host'
 }
@@ -114,7 +114,8 @@ BlGlutinHostSpace >> initialize [
 	super initialize.
 
 	mousePosition := 0@0.
-	eventFetcher := BlHostEventFetcher new
+	eventFetcher := BlHostEventFetcher new.
+	modifiers := BlKeyModifiers new
 ]
 
 { #category : #'event - handling' }
@@ -204,21 +205,19 @@ BlGlutinHostSpace >> title: aString [
 	window title: aString
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitCharacterReceivedEvent: anEvent [
 	| aBlocEvent |
 
 	aBlocEvent := BlTextInputEvent new
 		text: anEvent text;
-		timestamp: self space time now.
-	
-	lastModifiers
-		ifNotNil: [ aBlocEvent modifiers: lastModifiers ].
+		timestamp: self space time now;
+		modifiers: modifiers.
 
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 	| aBlocEvent aNewCursorPosition aDelta |
 
@@ -233,14 +232,14 @@ BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 		position: mousePosition;
 		screenPosition: window position + mousePosition;
 		delta: aDelta;
-		modifiers: (lastModifiers := self convertKeyModifiers: anEvent modifiers);
+		modifiers: modifiers;
 		timestamp: self space time now;
 		yourself.
-		
+
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 	| aBlocEvent aState |
 
@@ -258,11 +257,11 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 	aBlocEvent := aState = GlutinEventInputElementState Pressed
 		ifTrue: [ BlKeyDownEvent new ]
 		ifFalse: [ BlKeyUpEvent new ].
-		
+
 	aBlocEvent
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scan_code;
-		modifiers: (lastModifiers := self convertKeyModifiers: anEvent modifiers);
+		modifiers: modifiers;
 		timestamp: self space time now;
 		position: mousePosition;
 		screenPosition: window position + mousePosition.
@@ -270,7 +269,12 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
+BlGlutinHostSpace >> visitModifiersChanged: anEvent [
+	modifiers := self convertKeyModifiers: anEvent
+]
+
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitMouseInputEvent: anEvent [
 	| aState aBlocEvent |
 	
@@ -291,13 +295,13 @@ BlGlutinHostSpace >> visitMouseInputEvent: anEvent [
 		position: mousePosition;
 		screenPosition: window position + mousePosition;
 		button: (self convertButton: anEvent button);
-		modifiers: (lastModifiers := self convertKeyModifiers: anEvent modifiers);
+		modifiers: modifiers;
 		timestamp: self space time now.
 
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
 	| aBlocEvent aDelta aScrollDistance |
 
@@ -320,17 +324,17 @@ BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
 		vector: (BlVector x: aScrollDistance x y: aScrollDistance y);
 		position: mousePosition;
 		screenPosition: window position + mousePosition;
-		modifiers: (lastModifiers := self convertKeyModifiers: anEvent modifiers);
+		modifiers: modifiers;
 		timestamp: self space time now.
 		
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitTouchEvent: anEvent [
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitWindowCloseRequest: anEvent [
 	| aBlocEvent |
 
@@ -341,11 +345,11 @@ BlGlutinHostSpace >> visitWindowCloseRequest: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitWindowDestroyed: anEvent [
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitWindowFocusedEvent: anEvent [
 	| aBlocEvent |
 
@@ -360,15 +364,15 @@ BlGlutinHostSpace >> visitWindowFocusedEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitWindowMovedEvent: anEvent [
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitWindowRedrawRequested: anEvent [
 ]
 
-{ #category : #'event - handling' }
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 	| aBlocEvent |
 	window resize: anEvent width @ anEvent height.

@@ -5,7 +5,19 @@ Class {
 }
 
 { #category : #'event - handling' }
-BlGlutinWindowEventsSensor >> processGlutinEvent: aGlutinWindowEvent forWindow: aWindow [
+BlGlutinWindowEventsSensor >> processDeviceEvent: aGlutinDeviceEvent forWindow: aGlutinWindow [
+
+	self
+		assert: [ aGlutinWindow isValid ]
+		description: [ 'Window must be valid' ].
+
+	BlGlutinHost
+		hostForWindow: aGlutinWindow
+		do: [ :aHostSpace | aGlutinDeviceEvent accept: aHostSpace ]
+]
+
+{ #category : #'event - handling' }
+BlGlutinWindowEventsSensor >> processWindowEvent: aGlutinWindowEvent forWindow: aWindow [
 
 	self
 		assert: [ aWindow isValid ]
