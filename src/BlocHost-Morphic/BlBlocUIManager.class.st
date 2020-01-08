@@ -81,8 +81,8 @@ BlBlocUIManager >> debugProcess: process context: context label: title spawningD
 	debugged process is the Morphic or Bloc UI process.
 	I spawn a new Bloc UI process if the debugged process is the Bloc UI process 
 	or a Morphic UI process if the debugged process is the Morphic UI process."
-	| debugSession isForBlocUIProcess aBlocUniverseIfAny |
-	
+	| debugSession isForBlocUIProcess aBlocUniverseIfAny aDebuggerOpeningAction |
+		
 	debugSession := process newDebugSessionNamed: title startedAt: context.
 	debugSession logStackToFileIfNeeded.
 	
@@ -99,34 +99,41 @@ BlBlocUIManager >> debugProcess: process context: context label: title spawningD
 	
 	debugSession isAboutUIProcess ifTrue: [ 
 		DefaultExecutionEnvironment beActiveDuring: [
-		isForBlocUIProcess "Handle the case of the Bloc UI process"
-			ifTrue: [ self spawnNewBlocProcess: aBlocUniverseIfAny ]
-			ifFalse: [ self spawnNewProcess ] ] ].
+			isForBlocUIProcess "Handle the case of the Bloc UI process"
+				ifTrue: [ self spawnNewBlocProcess: aBlocUniverseIfAny ]
+				ifFalse: [ self spawnNewProcess ] ] ].
 	
-	"Perform the opening of the debugger in defer action to suspend the UI."
-	self defer: [ 
+	aDebuggerOpeningAction := [ 
 		[ 
 			debuggerSpawnBlock value: debugSession.
 		] on: Error do: [ :ex | 	
 			debugSession signalDebuggerError: ex ] ].
 	
-	process suspend.
+	"Perform the opening of the debugger in defer action to suspend the UI."
+	isForBlocUIProcess
+		ifTrue: [ self defer: aDebuggerOpeningAction universe: aBlocUniverseIfAny ]
+		ifFalse: [ debugSession isAboutUIProcess
+			ifTrue: [ self defer: aDebuggerOpeningAction ]
+			ifFalse: [ self
+				universeDo: [ :aBlocUniverse | self defer: aDebuggerOpeningAction universe: aBlocUniverse  ]
+				ifAbsent: [ self defer: aDebuggerOpeningAction ] ] ].
 
+	process suspend
 ]
 
 { #category : #'ui process' }
 BlBlocUIManager >> defer: aBlock [
-	| theUniversesWithUIProcess |
+	"Defer aBlock inside of the Morphic UI process"
+	super defer: aBlock
+]
 
-	theUniversesWithUIProcess := (BlParallelUniverse all select: [ :eachUniverse |
-			eachUniverse hasSpaces
-				and: [ eachUniverse hasUIProcess
-					and: [ eachUniverse hostClass new isRunning ] ] ])
-		sorted: [ :a :b | a hostClass priority < b hostClass priority ].
-
-	theUniversesWithUIProcess
-		ifEmpty: [ super defer: aBlock ]
-		ifNotEmpty: [ :theUniverses | theUniverses first defer: aBlock ]
+{ #category : #'ui process' }
+BlBlocUIManager >> defer: aBlock universe: aBlocUniverseIfAny [
+	"Defer aBloc in a given universe"
+	
+	aBlocUniverseIfAny defer: aBlock.
+	aBlocUniverseIfAny hostClass isRunning
+		ifFalse: [ aBlocUniverseIfAny startUniverse ]
 ]
 
 { #category : #'ui process' }
@@ -210,6 +217,20 @@ BlBlocUIManager >> unhandledErrorDefaultAction: anException [
 
 	"The current computation is terminated. The cause of the error should be logged or reported to the user. If the program is operating in an interactive debugging environment the computation should be suspended and the debugger activated."
 	anException debug
+]
+
+{ #category : #'ui process' }
+BlBlocUIManager >> universeDo: aPresentBlock ifAbsent: anExceptionBlock [
+	| theUniversesWithUIProcess |
+	theUniversesWithUIProcess := (BlParallelUniverse all select: [ :eachUniverse |
+			eachUniverse hasSpaces
+				and: [ eachUniverse hasUIProcess
+					and: [ eachUniverse hostClass new isRunning ] ] ])
+		sorted: [ :a :b | a hostClass priority < b hostClass priority ].
+
+	theUniversesWithUIProcess
+		ifEmpty: anExceptionBlock
+		ifNotEmpty: [ :theUniverses | aPresentBlock value: theUniverses first ]
 ]
 
 { #category : #'ui process' }
