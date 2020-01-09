@@ -11,6 +11,9 @@ Class {
 		'morph',
 		'pressedKeys'
 	],
+	#classVars : [
+		'HorizontalScrolling'
+	],
 	#category : #'BlocHost-Morphic-Support'
 }
 
@@ -227,7 +230,12 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		ifTrue: [ ^ self ].
 
 	aKey := self convertKeyFromEvent: aMorphicEvent.
-	
+	"Ugly mouse hack: F12 (106) toggles a global variable to tell the mouse handler
+	to scroll horizontally."
+	aKey value = 106 ifTrue:
+		[ self toggleHorizontalScrolling.
+		^self ].
+
 	"we ignore `delete` keydown event because it is not distinguishable from backspace.
 	we create keydown event in keystroke:"
 	(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
@@ -374,11 +382,16 @@ BlMorphicEventHandler >> handleMouseUp: anEvent [
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseWheel: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
-		| aBlEvent |
+		| aBlEvent vectorOffset vector |
 
+		vectorOffset := aMorphicEvent direction = Character arrowDown
+			ifTrue: [ -5 ] 
+			ifFalse: [ 5 ].
+		vector := self horizontalScrolling 
+			ifTrue: [ BlVector x: vectorOffset y: 0 ]
+			ifFalse: [ BlVector x: 0 y: vectorOffset ].
 		aBlEvent := BlMouseWheelEvent new
-			vector: (BlVector x: 0 y: (aMorphicEvent direction = Character arrowDown
-				ifTrue: [ -5 ] ifFalse: [ 5 ]));
+			vector: vector;
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
@@ -453,11 +466,18 @@ BlMorphicEventHandler >> hasPressedKey: aKey [
 	^ pressedKeys includes: aKey
 ]
 
+{ #category : #accessing }
+BlMorphicEventHandler >> horizontalScrolling [ 
+
+	^HorizontalScrolling ifNil: [ HorizontalScrolling := false ]
+]
+
 { #category : #initialization }
 BlMorphicEventHandler >> initialize [
 	super initialize.
 
-	pressedKeys := Set new
+	pressedKeys := Set new.
+	HorizontalScrolling := false.
 ]
 
 { #category : #'private - testing' }
@@ -499,6 +519,12 @@ BlMorphicEventHandler >> registerPressedKey: aKey [
 { #category : #accessing }
 BlMorphicEventHandler >> time [
 	^ self window hostSpace space time
+]
+
+{ #category : #'private - keyboard' }
+BlMorphicEventHandler >> toggleHorizontalScrolling [
+
+	HorizontalScrolling := self horizontalScrolling not.
 ]
 
 { #category : #'private - keyboard' }
