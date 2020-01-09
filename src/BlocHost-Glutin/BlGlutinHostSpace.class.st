@@ -114,7 +114,8 @@ BlGlutinHostSpace >> id [
 BlGlutinHostSpace >> initialize [
 	super initialize.
 
-	mousePosition := GtFensterPhysicalPosition x: 0 y: 0.
+	mousePosition := GtFensterPhysicalPosition new.
+	scaleFactor := nil.
 	eventFetcher := BlHostEventFetcher new.
 	modifiers := BlKeyModifiers new
 ]
