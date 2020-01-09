@@ -114,7 +114,7 @@ BlGlutinHostSpace >> id [
 BlGlutinHostSpace >> initialize [
 	super initialize.
 
-	mousePosition := 0@0.
+	mousePosition := BlHostPhysicalPosition x: 0 y: 0.
 	eventFetcher := BlHostEventFetcher new.
 	modifiers := BlKeyModifiers new
 ]
@@ -229,17 +229,19 @@ BlGlutinHostSpace >> visitCharacterReceivedEvent: anEvent [
 BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 	| aBlocEvent aNewCursorPosition aDelta |
 
-	aNewCursorPosition := anEvent x @ anEvent y.
-	aDelta := mousePosition
-		ifNil: [ 0@0 ]
-		ifNotNil: [ aNewCursorPosition - mousePosition ].
+	aNewCursorPosition := OSPlatform current isMacOS
+		"see https://github.com/rust-windowing/winit/issues/1371"
+		ifTrue: [ (BlHostLogicalPosition x: anEvent x y: anEvent y) asPhysical: self scaleFactor ]
+		ifFalse: [ BlHostPhysicalPosition x: anEvent x y: anEvent y ].
+
+	aDelta := aNewCursorPosition - mousePosition.
 
 	mousePosition := aNewCursorPosition.
 
 	aBlocEvent := BlMouseMoveEvent new
-		position: mousePosition;
-		screenPosition: window position + mousePosition;
-		delta: aDelta;
+		position: (mousePosition asLogical: self scaleFactor) asPoint;
+		screenPosition: window position + mousePosition asPoint;
+		delta: (aDelta asLogical: self scaleFactor) asPoint;
 		modifiers: modifiers;
 		timestamp: self space time now;
 		yourself.
@@ -253,9 +255,6 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 
 	anEvent has_virtual_keycode
 		ifFalse: [ ^ self ].
-
-	mousePosition
-		ifNil: [ mousePosition := 0@0 ].
 
 	aState := anEvent state.
 
@@ -271,8 +270,8 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 		scanCode: anEvent scan_code;
 		modifiers: modifiers;
 		timestamp: self space time now;
-		position: mousePosition;
-		screenPosition: window position + mousePosition.
+		position: (mousePosition asLogical: self scaleFactor) asPoint;
+		screenPosition: window position + mousePosition asPoint.
 	
 	self enqueueEvent: aBlocEvent
 ]
@@ -285,10 +284,6 @@ BlGlutinHostSpace >> visitModifiersChanged: anEvent [
 { #category : #'event - visiting' }
 BlGlutinHostSpace >> visitMouseInputEvent: anEvent [
 	| aState aBlocEvent |
-	
-	"cursor position is unknown, we can not properly handle mouse input event, therefore ignore it"
-	mousePosition
-		ifNil: [ ^ self ].
 
 	aState := anEvent state.
 	
@@ -300,8 +295,8 @@ BlGlutinHostSpace >> visitMouseInputEvent: anEvent [
 		ifFalse: [BlMouseUpEvent new ].
 
 	aBlocEvent
-		position: mousePosition;
-		screenPosition: window position + mousePosition;
+		position: (mousePosition asLogical: self scaleFactor) asPoint;
+		screenPosition: window position + mousePosition asPoint;
 		button: (self convertButton: anEvent button);
 		modifiers: modifiers;
 		timestamp: self space time now.
@@ -312,9 +307,6 @@ BlGlutinHostSpace >> visitMouseInputEvent: anEvent [
 { #category : #'event - visiting' }
 BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
 	| aBlocEvent aDelta aScrollDistance |
-
-	mousePosition
-		ifNil: [ ^ self ].
 		
 	aDelta := anEvent delta.
 	
@@ -330,8 +322,8 @@ BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
 	aBlocEvent := BlMouseWheelEvent new
 		isTouch: false;
 		vector: (BlVector x: aScrollDistance x y: aScrollDistance y);
-		position: mousePosition;
-		screenPosition: window position + mousePosition;
+		position: (mousePosition asLogical: self scaleFactor) asPoint;
+		screenPosition: window position + mousePosition asPoint;
 		modifiers: modifiers;
 		timestamp: self space time now.
 		

@@ -10,7 +10,7 @@ BlHostLogicalSize >> asPhysical: aScaleFactor [
 	
 	self
 		assert: [ aScaleFactor > 0 and: [ aScaleFactor isInfinite not ] ]
-		description: [ 'Dpi factor must be a positive non-infinite number' ].
+		description: [ 'Scale factor must be a positive non-infinite number' ].
 
 	aWidth := self width * aScaleFactor.
 	aHeight := self height * aScaleFactor.
