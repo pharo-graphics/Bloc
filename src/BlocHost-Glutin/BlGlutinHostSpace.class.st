@@ -158,7 +158,7 @@ BlGlutinHostSpace >> physicalSize [
 	<return: #BlHostPhysicalSize>
 	| anExtent |
 	
-	anExtent := window framebufferExtent.
+	anExtent := window innerExtent.
 	^ BlHostPhysicalSize width: anExtent x height: anExtent y
 ]
 
