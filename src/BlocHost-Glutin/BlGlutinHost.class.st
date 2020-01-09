@@ -216,26 +216,6 @@ BlGlutinHost >> openMorphicWorld [
 	GlutinWorldRenderer openMorphicWorld
 ]
 
-{ #category : #'event - handling' }
-BlGlutinHost >> processGlutinEvent: aGlutinEvent [
-	<return: #GlutinControlFlow>
-	| aMappedEvent aWindowId |
-		
-	aMappedEvent := aGlutinEvent mapped.
-
-	aMappedEvent isWindowEvent
-		ifTrue: [
-			aWindowId := aGlutinEvent window_id asInteger.
-			self spaceRegistry
-				at: aWindowId
-				ifPresent: [ :aHostSpace | aMappedEvent accept: aHostSpace ] ].
-
-	aMappedEvent isCommonEvent
-		ifTrue: [ aMappedEvent accept: self ].
-
-	^ GlutinControlFlow poll
-]
-
 { #category : #initialize }
 BlGlutinHost >> registerHostSpace: aHostSpace [
 	self spaceRegistry at: aHostSpace window id put: aHostSpace
@@ -267,48 +247,4 @@ BlGlutinHost >> unregisterHostSpace: aHostSpace [
 	self spaceRegistry
 		removeKey: aHostSpace window id
 		ifAbsent: [  ]
-]
-
-{ #category : #'event - handling' }
-BlGlutinHost >> visitEventsCleared: anEvent [
-	| aBlocEvent |
-
-	aBlocEvent := BlUniverseEventsCleared new
-		timestamp: BlTime real now.
-		
-	self universe dispatchEvent: aBlocEvent
-]
-
-{ #category : #'event - handling' }
-BlGlutinHost >> visitLoopDestroyed: anEvent [
-]
-
-{ #category : #'event - handling' }
-BlGlutinHost >> visitNewEvents: anEvent [
-	| aBlocEvent |
-
-	aBlocEvent := BlUniverseEventsArrived new
-		timestamp: BlTime real now.
-		
-	self universe dispatchEvent: aBlocEvent
-]
-
-{ #category : #'event - handling' }
-BlGlutinHost >> visitResumed: anEvent [
-	| aBlocEvent |
-
-	aBlocEvent := BlUniverseResumed new
-		timestamp: BlTime real now.
-		
-	self universe dispatchEvent: aBlocEvent
-]
-
-{ #category : #'event - handling' }
-BlGlutinHost >> visitSuspended: anEvent [
-	| aBlocEvent |
-
-	aBlocEvent := BlUniverseSuspended new
-		timestamp: BlTime real now.
-		
-	self universe dispatchEvent: aBlocEvent
 ]
