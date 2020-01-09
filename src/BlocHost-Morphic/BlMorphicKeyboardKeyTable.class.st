@@ -205,10 +205,12 @@ BlMorphicKeyboardKeyTable >> initializeUnixVirtualKeyTable [
 			
 			"navigation"
 			16r72 Help
+			16r01 Home	"Character home"
 			16r73 Home
 			16r74 PageUp
 			16r75 ForwardDelete
 			16r77 End
+			16r04 End 	"Character end"
 			16r79 PageDown
 			16r1C ArrowLeft
 			16r1D ArrowRight
