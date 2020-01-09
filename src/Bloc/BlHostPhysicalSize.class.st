@@ -5,15 +5,15 @@ Class {
 }
 
 { #category : #converting }
-BlHostPhysicalSize >> asLogical: aDpiFactor [
+BlHostPhysicalSize >> asLogical: aScaleFactor [
 	| aWidth aHeight |
 	
 	self
-		assert: [ aDpiFactor > 0 and: [ aDpiFactor isInfinite not ] ]
+		assert: [ aScaleFactor > 0 and: [ aScaleFactor isInfinite not ] ]
 		description: [ 'Dpi factor must be a positive non-infinite number' ].
 
-	aWidth := self width / aDpiFactor asFloat.
-	aHeight := self height / aDpiFactor asFloat.
+	aWidth := self width / aScaleFactor asFloat.
+	aHeight := self height / aScaleFactor asFloat.
 
 	^ BlHostPhysicalSize width: aWidth height: aHeight
 ]

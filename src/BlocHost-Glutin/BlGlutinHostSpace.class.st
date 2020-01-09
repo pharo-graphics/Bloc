@@ -130,10 +130,8 @@ BlGlutinHostSpace >> logicalSize [
 	The client area is the content of the window, excluding the title bar and borders.
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 	<return: #BlHostLogicalSize>
-	| anExtent |
-	
-	anExtent := window innerExtent.
-	^ BlHostLogicalSize width: anExtent x height: anExtent y
+
+	^ self physicalSize asLogical: self scaleFactor
 ]
 
 { #category : #'host space - rendering' }
@@ -184,6 +182,15 @@ BlGlutinHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
 	Glutin critical: [ self renderer render: self ]
+]
+
+{ #category : #'host space - geometry' }
+BlGlutinHostSpace >> scaleFactor [
+	"Return a scaling dpi factor from logical to physical coordinates.
+	On high dpi (retina) displays scaling factor is > 1"
+	<return: #Number>
+
+	^ scaleFactor ifNil: [ scaleFactor := window scaleFactor ]
 ]
 
 { #category : #'host space - displaying' }
@@ -379,7 +386,23 @@ BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 	window resize: anEvent width @ anEvent height.
 
 	aBlocEvent := BlSpaceResizedEvent new
-		extent: anEvent width @ anEvent height;
+		extent: ((BlHostPhysicalSize width: anEvent width height: anEvent height) asLogical: scaleFactor) asPoint;
+		timestamp: DateAndTime now;
+		yourself.
+
+	self enqueueEvent: aBlocEvent.
+	self universe pulse
+]
+
+{ #category : #'event - visiting' }
+BlGlutinHostSpace >> visitWindowScaleFactorChangedEvent: anEvent [
+	| aBlocEvent |
+
+	scaleFactor := anEvent scale_factor.
+	window resize: anEvent width @ anEvent height.
+	
+	aBlocEvent := BlSpaceResizedEvent new
+		extent: ((BlHostPhysicalSize width: anEvent width height: anEvent height) asLogical: scaleFactor) asPoint;
 		timestamp: DateAndTime now;
 		yourself.
 
@@ -401,5 +424,5 @@ BlGlutinHostSpace >> window: aGlutinWindowedContext [
 
 { #category : #'host space - geometry' }
 BlGlutinHostSpace >> windowExtent: anExtent [
-	window innerExtent: anExtent
+	window innerExtent: ((BlHostLogicalSize width: anExtent x height: anExtent y) asPhysical: self scaleFactor) asPoint
 ]
