@@ -8,7 +8,7 @@ Class {
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'physicalSize',
-		'dpiFactor'
+		'scaleFactor'
 	],
 	#category : #'Bloc-Universe - Renderer'
 }
@@ -44,15 +44,6 @@ BlHostRendererSurface >> createSurfaceRendererOn: anObject [
 ]
 
 { #category : #geometry }
-BlHostRendererSurface >> dpiFactor [
-	"Return a scaling dpi factor from logical to physical coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Number>
-	
-	^ dpiFactor
-]
-
-{ #category : #geometry }
 BlHostRendererSurface >> extent [
 	"Return an actual extent of the underlying surface.
 	Note: #extent may be different from canvas or window extents"
@@ -64,7 +55,7 @@ BlHostRendererSurface >> extent [
 { #category : #initialization }
 BlHostRendererSurface >> initializeForHostSpace: aBlHostSpace [
 	physicalSize := aBlHostSpace physicalSize.
-	dpiFactor := aBlHostSpace dpiFactor
+	scaleFactor := aBlHostSpace scaleFactor
 ]
 
 { #category : #geometry }
@@ -74,7 +65,7 @@ BlHostRendererSurface >> logicalSize [
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 	<return: #BlHostLogicalSize>
 
-	^ self physicalSize asLogical: self dpiFactor
+	^ self physicalSize asLogical: self scaleFactor
 ]
 
 { #category : #geometry }
@@ -85,4 +76,13 @@ BlHostRendererSurface >> physicalSize [
 	<return: #BlHostPhysicalSize>
 
 	^ physicalSize
+]
+
+{ #category : #geometry }
+BlHostRendererSurface >> scaleFactor [
+	"Return a scaling dpi factor from logical to physical coordinates.
+	On high dpi (retina) displays scaling factor is > 1"
+	<return: #Number>
+	
+	^ scaleFactor
 ]

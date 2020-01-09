@@ -8,7 +8,8 @@ Class {
 		'mousePosition',
 		'glutinRenderer',
 		'eventFetcher',
-		'modifiers'
+		'modifiers',
+		'scaleFactor'
 	],
 	#category : #'BlocHost-Glutin-Host'
 }

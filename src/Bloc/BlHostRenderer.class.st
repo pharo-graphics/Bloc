@@ -39,7 +39,7 @@ BlHostRenderer >> hasResized: aHostSpace [
 	
 	"check if the size changed"
 	^ aHostSpace physicalSize ~= surface physicalSize
-		or: [ aHostSpace dpiFactor ~= surface dpiFactor ]
+		or: [ aHostSpace scaleFactor ~= surface scaleFactor ]
 ]
 
 { #category : #initialization }

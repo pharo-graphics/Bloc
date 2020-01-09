@@ -4,8 +4,8 @@ Class {
 	#instVars : [
 		'spartaCanvas',
 		'session',
-		'dpiFactor',
-		'physicalSize'
+		'physicalSize',
+		'scaleFactor'
 	],
 	#category : #'Bloc-Sparta-Renderer'
 }
@@ -15,18 +15,11 @@ BlSpartaSpaceRenderer >> damagedAreasOf: aSpace [
 	^ aSpace dirtyAreas
 ]
 
-{ #category : #accessing }
-BlSpartaSpaceRenderer >> dpiFactor [
-	<return: #Number>
-
-	^ dpiFactor
-]
-
 { #category : #initialization }
 BlSpartaSpaceRenderer >> initializeCanvas: aSpartaCanvas surface: aSurface [
 	spartaCanvas := aSpartaCanvas.
 	physicalSize := aSurface physicalSize.
-	dpiFactor := aSurface dpiFactor.
+	scaleFactor := aSurface scaleFactor.
 	session := Smalltalk session
 ]
 
@@ -55,7 +48,7 @@ BlSpartaSpaceRenderer >> renderSpace: aSpace [
 	self isValid
 		ifFalse: [ ^ self ].
 	
-	aLogicalExtent := (physicalSize asLogical: self dpiFactor) asPoint.
+	aLogicalExtent := (physicalSize asLogical: self scaleFactor) asPoint.
 	
 	"collect the dirty area to be updated"
 	theDirtyAreas := (self damagedAreasOf: aSpace)
@@ -66,7 +59,7 @@ BlSpartaSpaceRenderer >> renderSpace: aSpace [
 		ifEmpty: [ ^ self ].
 
 	spartaCanvas transform
-		by: [ :t | t scaleBy: dpiFactor asPoint ]
+		by: [ :t | t scaleBy: scaleFactor asPoint ]
 		during: [
 			theDirtyAreas do: [ :aBlBounds |
 				spartaCanvas clip by: aBlBounds during: [ aSpace fullDrawOn: spartaCanvas ] ] ].
@@ -74,4 +67,11 @@ BlSpartaSpaceRenderer >> renderSpace: aSpace [
 	spartaCanvas flush.
 	
 	^ theDirtyAreas
+]
+
+{ #category : #accessing }
+BlSpartaSpaceRenderer >> scaleFactor [
+	<return: #Number>
+
+	^ scaleFactor
 ]
