@@ -114,7 +114,7 @@ BlGlutinHostSpace >> id [
 BlGlutinHostSpace >> initialize [
 	super initialize.
 
-	mousePosition := BlHostPhysicalPosition x: 0 y: 0.
+	mousePosition := GtFensterPhysicalPosition x: 0 y: 0.
 	eventFetcher := BlHostEventFetcher new.
 	modifiers := BlKeyModifiers new
 ]
@@ -129,7 +129,7 @@ BlGlutinHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
-	<return: #BlHostLogicalSize>
+	<return: #GtFensterLogicalSize>
 
 	^ self physicalSize asLogical: self scaleFactor
 ]
@@ -154,11 +154,11 @@ BlGlutinHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
 	In most cases physical size is x2 larger than logical size on retina screens."
-	<return: #BlHostPhysicalSize>
+	<return: #GtFensterPhysicalSize>
 	| anExtent |
 	
 	anExtent := window innerExtent.
-	^ BlHostPhysicalSize width: anExtent x height: anExtent y
+	^ GtFensterPhysicalSize width: anExtent x height: anExtent y
 ]
 
 { #category : #'host space - geometry' }
@@ -231,8 +231,8 @@ BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 
 	aNewCursorPosition := OSPlatform current isMacOS
 		"see https://github.com/rust-windowing/winit/issues/1371"
-		ifTrue: [ (BlHostLogicalPosition x: anEvent x y: anEvent y) asPhysical: self scaleFactor ]
-		ifFalse: [ BlHostPhysicalPosition x: anEvent x y: anEvent y ].
+		ifTrue: [ (GtFensterLogicalPosition x: anEvent x y: anEvent y) asPhysical: self scaleFactor ]
+		ifFalse: [ GtFensterPhysicalPosition x: anEvent x y: anEvent y ].
 
 	aDelta := aNewCursorPosition - mousePosition.
 
@@ -378,7 +378,7 @@ BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 	window resize: anEvent width @ anEvent height.
 
 	aBlocEvent := BlSpaceResizedEvent new
-		extent: ((BlHostPhysicalSize width: anEvent width height: anEvent height) asLogical: scaleFactor) asPoint;
+		extent: ((GtFensterPhysicalSize width: anEvent width height: anEvent height) asLogical: scaleFactor) asPoint;
 		timestamp: DateAndTime now;
 		yourself.
 
@@ -394,7 +394,7 @@ BlGlutinHostSpace >> visitWindowScaleFactorChangedEvent: anEvent [
 	window resize: anEvent width @ anEvent height.
 	
 	aBlocEvent := BlSpaceResizedEvent new
-		extent: ((BlHostPhysicalSize width: anEvent width height: anEvent height) asLogical: scaleFactor) asPoint;
+		extent: ((GtFensterPhysicalSize width: anEvent width height: anEvent height) asLogical: scaleFactor) asPoint;
 		timestamp: DateAndTime now;
 		yourself.
 
@@ -416,5 +416,5 @@ BlGlutinHostSpace >> window: aGlutinWindowedContext [
 
 { #category : #'host space - geometry' }
 BlGlutinHostSpace >> windowExtent: anExtent [
-	window innerExtent: ((BlHostLogicalSize width: anExtent x height: anExtent y) asPhysical: self scaleFactor) asPoint
+	window innerExtent: ((GtFensterLogicalSize width: anExtent x height: anExtent y) asPhysical: self scaleFactor) asPoint
 ]

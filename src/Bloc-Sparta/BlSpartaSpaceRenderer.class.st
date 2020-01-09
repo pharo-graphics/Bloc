@@ -34,7 +34,7 @@ BlSpartaSpaceRenderer >> isValid [
 
 { #category : #accessing }
 BlSpartaSpaceRenderer >> physicalSize [
-	<return: #BlHostPhysicalSize>
+	<return: #GtFensterPhysicalSize>
 
 	^ physicalSize
 ]
