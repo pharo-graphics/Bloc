@@ -5,7 +5,7 @@ Class {
 		'EventsSensor',
 		'HostSpaceRegistry',
 		'HostSpaceRegistryMutex',
-		'UIProcess',
+		'PulseLoop',
 		'UserInterruptEventHandler'
 	],
 	#category : #'BlocHost-Glutin-Host'
@@ -19,19 +19,12 @@ BlGlutinHost class >> critical: aBlock [
 
 { #category : #'api - ui process' }
 BlGlutinHost class >> forceResumeOfUIProcess: aProcess [
-	UIProcess := aProcess.
-	UIProcess resume
+	PulseLoop forceStartOfUIProcess: aProcess
 ]
 
 { #category : #'api - ui process' }
 BlGlutinHost class >> forceStartNewUIProcess [
-	UIProcess := [
-		[
-			BlParallelUniverse glutin pulse.
-			2 milliSeconds wait
-		] repeat.
-
-	] forkAt: Processor userSchedulingPriority named: 'Bloc UI Process'
+	PulseLoop forceStartNewUIProcess
 ]
 
 { #category : #'private - windows' }
@@ -44,11 +37,12 @@ BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
 
 { #category : #'class initialization' }
 BlGlutinHost class >> initialize [
+	PulseLoop := BlHostPulseLoop forHost: self.
 	EventsSensor := BlGlutinWindowEventsSensor new.
 	UserInterruptEventHandler := GlutinUserInterruptHandler new uiProcessBlock: [
 		| process |
 		process := nil.
-		BlGlutinHost uiProcessDo: [ :aUIProcess | process := aUIProcess ].
+		self uiProcessDo: [ :aUIProcess | process := aUIProcess ].
 		process ]
 ]
 
@@ -56,8 +50,7 @@ BlGlutinHost class >> initialize [
 BlGlutinHost class >> isRunning [
 	<return: #Boolean>
 
-	self uiProcessDo: [ :aUIProcess | ^ aUIProcess isTerminated not ].
-	^ false
+	^ PulseLoop isRunning
 ]
 
 { #category : #'driver selection' }
@@ -91,7 +84,7 @@ BlGlutinHost class >> spaceRegistry [
 
 { #category : #'api - lifecycle' }
 BlGlutinHost class >> start [
-	self forceStartNewUIProcess.
+	PulseLoop start.
 
 	GlutinEventsFetcher default
 		addEventHandler: UserInterruptEventHandler;
@@ -101,27 +94,15 @@ BlGlutinHost class >> start [
 
 { #category : #'api - lifecycle' }
 BlGlutinHost class >> stop [
-	| aUIProcess |
-
-	aUIProcess := UIProcess.
-	UIProcess := nil.
-	aUIProcess ifNotNil: #terminate
-]
-
-{ #category : #'api - ui process' }
-BlGlutinHost class >> terminateUIProcess [
-	| aProcessToTerminate |
-	
-	self uiProcessDo: [ :aProcess | aProcessToTerminate := aProcess ].
-	UIProcess := nil.
-	aProcessToTerminate terminate
-	
-	"if called from UI thread nothing past this line will be executed"
+	GlutinEventsFetcher default
+		removeEventHandler: UserInterruptEventHandler;
+		removeEventHandler: EventsSensor.
+	PulseLoop stop
 ]
 
 { #category : #'api - ui process' }
 BlGlutinHost class >> uiProcessDo: aBlock [
-	UIProcess ifNotNil: aBlock
+	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
 { #category : #'host - api' }
