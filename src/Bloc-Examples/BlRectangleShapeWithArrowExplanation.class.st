@@ -36,18 +36,18 @@ ${example:BlRectangleShapeWithArrowTurorial>>#rectangleWithTopArrow|previewShow=
 
 "
 Class {
-	#name : #BlRectangleShapeWithArrowTurorial,
+	#name : #BlRectangleShapeWithArrowExplanation,
 	#superclass : #Object,
 	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #'examples - rectangle' }
-BlRectangleShapeWithArrowTurorial >> arrowLength [
+BlRectangleShapeWithArrowExplanation >> arrowLength [
 	^ 30
 ]
 
 { #category : #'examples - rectangle' }
-BlRectangleShapeWithArrowTurorial >> elementWithTopArrowGeometry [
+BlRectangleShapeWithArrowExplanation >> elementWithTopArrowGeometry [
 	<gtExample>
 	
 	^ BlElement new
@@ -58,7 +58,7 @@ BlRectangleShapeWithArrowTurorial >> elementWithTopArrowGeometry [
 ]
 
 { #category : #'examples - rectangle' }
-BlRectangleShapeWithArrowTurorial >> rectangleShape [
+BlRectangleShapeWithArrowExplanation >> rectangleShape [
 	<gtExample>
 	| aRectangle |
 	
@@ -72,7 +72,7 @@ BlRectangleShapeWithArrowTurorial >> rectangleShape [
 ]
 
 { #category : #'examples - rectangle' }
-BlRectangleShapeWithArrowTurorial >> rectangleWithTopArrow [
+BlRectangleShapeWithArrowExplanation >> rectangleWithTopArrow [
 	<gtExample>
 	| aRectangle |
 	
@@ -83,7 +83,7 @@ BlRectangleShapeWithArrowTurorial >> rectangleWithTopArrow [
 ]
 
 { #category : #'examples - rectangle' }
-BlRectangleShapeWithArrowTurorial >> rectangleWithTopInjectedLine [
+BlRectangleShapeWithArrowExplanation >> rectangleWithTopInjectedLine [
 	<gtExample>
 	| aRectangle |
 	
@@ -95,7 +95,7 @@ BlRectangleShapeWithArrowTurorial >> rectangleWithTopInjectedLine [
 ]
 
 { #category : #'examples - rectangle' }
-BlRectangleShapeWithArrowTurorial >> rectangleWithTopPolylineSplitInHalf [
+BlRectangleShapeWithArrowExplanation >> rectangleWithTopPolylineSplitInHalf [
 	<gtExample>
 	| aRectangle |
 	
@@ -106,7 +106,7 @@ BlRectangleShapeWithArrowTurorial >> rectangleWithTopPolylineSplitInHalf [
 ]
 
 { #category : #'examples - rectangle' }
-BlRectangleShapeWithArrowTurorial >> rectangleWithTranslatedTopEdge [
+BlRectangleShapeWithArrowExplanation >> rectangleWithTranslatedTopEdge [
 	<gtExample>
 	| aRectangle |
 	
