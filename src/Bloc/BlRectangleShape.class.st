@@ -64,7 +64,19 @@ BlRectangleShape >> appendPathTo: aPathBuilder [
 	self bottomEdge appendPathTo: aPathBuilder.
 	self bottomLeftCorner appendPathTo: aPathBuilder.
 	self leftEdge appendPathTo: aPathBuilder.
-	self topLeftCorner appendPathTo: aPathBuilder
+	self topLeftCorner appendPathTo: aPathBuilder.
+	
+	aPathBuilder close.
+	
+	(self shapes copyWithoutAll: {
+		self topEdge.
+		self topRightCorner.
+		self rightEdge.
+		self bottomRightCorner.
+		self bottomEdge.
+		self bottomLeftCorner.
+		self leftEdge.
+		self topLeftCorner. }) do: [ :eachShape | eachShape appendPathTo: aPathBuilder ]
 ]
 
 { #category : #'api - geometry' }

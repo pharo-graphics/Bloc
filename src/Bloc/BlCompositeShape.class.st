@@ -18,6 +18,16 @@ BlCompositeShape >> asElementIn: aContainer [
 	self shapes do: [ :each | each asElementIn: aContainer ]
 ]
 
+{ #category : #'gt-extension' }
+BlCompositeShape >> gtShapesFor: aView [
+	<gtView>
+	
+	^ aView list
+		title: 'Shapes';
+		priority: 10;
+		items: [ self shapes ]
+]
+
 { #category : #initialization }
 BlCompositeShape >> initialize [
 	super initialize.

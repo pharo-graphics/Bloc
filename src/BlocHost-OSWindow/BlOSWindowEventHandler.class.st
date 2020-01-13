@@ -121,15 +121,6 @@ BlOSWindowEventHandler >> time: aTime [
 	time := aTime
 ]
 
-{ #category : #'visiting - universe' }
-BlOSWindowEventHandler >> visitEventsCleared: anEvent [
-	self window space pulse.
-	3 milliSeconds wait.
-	
-
-	
-]
-
 { #category : #'visiting - keyboard' }
 BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 	| aBlEvent |
@@ -158,6 +149,15 @@ BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 		screenPosition: window position + anEvent position.
 
 	self enqueue: aBlEvent
+]
+
+{ #category : #'visiting - universe' }
+BlOSWindowEventHandler >> visitMainEventsCleared: anEvent [
+	self window space pulse.
+	3 milliSeconds wait.
+	
+
+	
 ]
 
 { #category : #'visiting - mouse' }

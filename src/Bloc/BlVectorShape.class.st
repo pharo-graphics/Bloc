@@ -83,7 +83,7 @@ BlVectorShape >> buildPathOnSpartaCanvas: aCanvas [
 	^ aPathBuilder finish
 ]
 
-{ #category : #ui }
+{ #category : #'gt-extension' }
 BlVectorShape >> gtAttributesFor: aView [
 	<gtView>
 	self attributes ifNil: [ ^ aView empty ].
@@ -97,7 +97,7 @@ BlVectorShape >> gtAttributesFor: aView [
 			item: [ :anAssociation | anAssociation value ]
 ]
 
-{ #category : #ui }
+{ #category : #'gt-extension' }
 BlVectorShape >> gtLiveFor: aView [
 	<gtView>
 	
