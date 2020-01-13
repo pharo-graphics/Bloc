@@ -35,6 +35,17 @@ BlCompositeShape >> initialize [
 	shapes := OrderedCollection new
 ]
 
+{ #category : #'api - geometry' }
+BlCompositeShape >> myBounds [
+	<return: #Rectangle or: nil>
+	
+	^ nil
+]
+
+{ #category : #'api - geometry' }
+BlCompositeShape >> normalizeMeIn: aRectangle [
+]
+
 { #category : #'api - shapes' }
 BlCompositeShape >> replaceShape: anOldShape with: aNewShape [
 	
@@ -47,6 +58,14 @@ BlCompositeShape >> replaceShape: anOldShape with: aNewShape [
 	aNewShape parent: self.
 
 	shapes replaceAll: anOldShape with: aNewShape
+]
+
+{ #category : #'api - geometry' }
+BlCompositeShape >> scaleMeBy: aScalePoint [
+]
+
+{ #category : #'api - geometry' }
+BlCompositeShape >> scaleMeToFit: aRectangle [
 ]
 
 { #category : #'api - shapes' }

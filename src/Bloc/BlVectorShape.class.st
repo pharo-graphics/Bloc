@@ -70,7 +70,30 @@ BlVectorShape >> attributeAt: aName put: aValue [
 
 { #category : #accessing }
 BlVectorShape >> attributes [
+	<return: #Dictionary>
+
 	^ attributes
+]
+
+{ #category : #'api - geometry' }
+BlVectorShape >> bounds [
+	<return: #Rectangle>
+	
+	^ self allShapes
+		ifEmpty: [ Rectangle origin: 0@0 extent: 0@0 ]
+		ifNotEmpty: [ :theShapes |
+			| theBounds |
+			theBounds := theShapes first myBounds.
+			theShapes allButFirstDo: [ :eachShape |
+				| eachShapeBounds |
+				eachShapeBounds := eachShape bounds.
+				(theBounds isNil and: [ eachShapeBounds isNotNil ])
+					ifTrue: [ theBounds := eachShapeBounds ].
+				eachShapeBounds isNotNil
+					ifTrue: [ theBounds := theBounds quickMerge: eachShapeBounds ] ].
+			theBounds isNil
+				ifTrue: [ theBounds := Rectangle origin: 0@0 extent: 0@0 ].
+			theBounds ]
 ]
 
 { #category : #converting }
@@ -132,6 +155,28 @@ BlVectorShape >> isCurve [
 	^ false
 ]
 
+{ #category : #'api - geometry' }
+BlVectorShape >> myBounds [
+	<return: #Rectangle or: nil>
+	
+	^ self subclassResponsibility
+]
+
+{ #category : #'api - geometry' }
+BlVectorShape >> normalize [
+	self normalizeIn: self bounds
+]
+
+{ #category : #'api - geometry' }
+BlVectorShape >> normalizeIn: aRectangle [
+	self allShapes asSet do: [ :eachShape | eachShape normalizeMeIn: aRectangle ]
+]
+
+{ #category : #'api - geometry' }
+BlVectorShape >> normalizeMeIn: aRectangle [
+	self subclassResponsibility
+]
+
 { #category : #accessing }
 BlVectorShape >> parent [
 	<return: #BlCompositeShape>
@@ -155,7 +200,32 @@ BlVectorShape >> removeAttributeAt: aName [
 	self attributes removeKey: aName ifAbsent: [  ]
 ]
 
+{ #category : #'api - geometry' }
+BlVectorShape >> scaleBy: aScalePoint [
+	self allShapes asSet do: [ :eachShape | eachShape scaleMeBy: aScalePoint ]
+]
+
+{ #category : #'api - geometry' }
+BlVectorShape >> scaleMeBy: aScalePoint [
+	self subclassResponsibility
+]
+
+{ #category : #'api - geometry' }
+BlVectorShape >> scaleMeToFit: aRectangle [
+	self subclassResponsibility
+]
+
+{ #category : #'api - geometry' }
+BlVectorShape >> scaleToFit: aRectangle [
+	self allShapes asSet do: [ :eachShape | eachShape scaleMeToFit: aRectangle ]
+]
+
 { #category : #enumerating }
 BlVectorShape >> shapesDo: aBlock [
 	aBlock value: self
+]
+
+{ #category : #'api - geometry' }
+BlVectorShape >> value: aRectangle [
+	self normalize scaleToFit: aRectangle
 ]

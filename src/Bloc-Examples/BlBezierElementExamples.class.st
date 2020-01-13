@@ -7,12 +7,12 @@ There are two kinds of Bezier curves supported:
 
 !!Quadratic Bezier curves
 
-${example:BlBezierElementExamples>>#quadraticCurveWithAnchors|expandedPreview|noCode=|show=gtLiveFor:}$
+${example:BlBezierElementExamples>>#quadraticCurveWithAnchors|expandedPreview|noCode=|previewShow=gtLiveFor:}$
 
 
 !!Cubic Bezier curves
 
-${example:BlBezierElementExamples>>#curveWithAnchors|expandedPreview|noCode=|show=#gtLiveFor:}$
+${example:BlBezierElementExamples>>#curveWithAnchors|expandedPreview|noCode=|previewShow=#gtLiveFor:}$
 
 "
 Class {

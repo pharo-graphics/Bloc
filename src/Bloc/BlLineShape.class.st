@@ -101,6 +101,15 @@ BlLineShape >> moveBy: aDelta [
 	self toPoint moveBy: aDelta
 ]
 
+{ #category : #printing }
+BlLineShape >> printOn: aStream [
+	aStream
+		nextPutAll: 'Line from ';
+		print: self fromPoint;
+		nextPutAll: ' to ';
+		print: self toPoint
+]
+
 { #category : #'api - transformations' }
 BlLineShape >> splitAt: aFloat [
 	<return: #BlVectorShape>
