@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label "unix"
+    }
     stages {
         stage('Clean Workspace') {
             steps {
