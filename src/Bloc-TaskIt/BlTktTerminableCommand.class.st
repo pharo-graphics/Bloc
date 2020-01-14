@@ -2,7 +2,8 @@ Class {
 	#name : #BlTktTerminableCommand,
 	#superclass : #BlTktDecoratedCommand,
 	#instVars : [
-		'taskExecution'
+		'taskExecution',
+		'skipExecution'
 	],
 	#category : #'Bloc-TaskIt-Commands'
 }

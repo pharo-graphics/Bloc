@@ -12,6 +12,8 @@ BlTaskAtTask is the object added to the queue by BlTaskAtQueue.  It stores the v
 Class {
 	#name : #BlTaskAtTask,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'valuable',
 		'scheduledTime'
@@ -57,4 +59,10 @@ BlTaskAtTask >> scheduledTime [
 { #category : #accessing }
 BlTaskAtTask >> valuable [
 	^ valuable
+]
+
+{ #category : #evaluating }
+BlTaskAtTask >> value [
+	"evaluate valuable"
+	^ self valuable value
 ]

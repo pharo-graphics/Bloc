@@ -84,7 +84,7 @@ BlTaskAtQueue >> processNextEntry [
 		timeRemaining := entry scheduledTime - BlTime real now.
 		timeRemaining < 10 milliSeconds ] ] whileTrue: [ 
 		entry := queue next.
-		[ entry valuable value ]
+		[ entry value ]
 			on: Error 
 			do: [ :ex | BlTaskAtErrorSignal new 
 								exception: ex;
@@ -111,12 +111,19 @@ BlTaskAtQueue >> queueReaderLoop [
 ]
 
 { #category : #operations }
+BlTaskAtQueue >> schedule: aBlTaskAtTask [
+	"Add the supplied task to the queue and trigger the semaphore at the appropriate time"
+
+	queue nextPut: aBlTaskAtTask.
+	(nextTime isNil or: [ aBlTaskAtTask scheduledTime < nextTime ])
+		ifTrue: [ self triggerAt: aBlTaskAtTask scheduledTime ].
+]
+
+{ #category : #operations }
 BlTaskAtQueue >> schedule: aValuable at: aTime [
 	"Add the supplied task to the queue and trigger the semaphore at the appropriate time"
 
-	queue nextPut: (BlTaskAtTask valuable: aValuable at: aTime).
-	(nextTime isNil or: [ aTime < nextTime ])
-		ifTrue: [ self triggerAt: aTime ].
+	self schedule: (BlTaskAtTask valuable: aValuable at: aTime)
 ]
 
 { #category : #control }
