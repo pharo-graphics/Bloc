@@ -5,7 +5,29 @@ Class {
 }
 
 { #category : #accessing }
+BlSigmoidElement >> beAutomatic [
+	self invalidate.
+	self geometry beAutomatic.
+	self invalidate
+]
+
+{ #category : #accessing }
+BlSigmoidElement >> beHorizontal [
+	self invalidate.
+	self geometry beHorizontal.
+	self invalidate
+]
+
+{ #category : #accessing }
+BlSigmoidElement >> beVertical [
+	self invalidate.
+	self geometry beVertical.
+	self invalidate
+]
+
+{ #category : #accessing }
 BlSigmoidElement >> bendingPoint: aFloatNumber [
+	self invalidate.
 	self geometry bendingPoint: aFloatNumber.
 	self invalidate
 ]
@@ -50,6 +72,7 @@ BlSigmoidElement >> measureGeometry [
 
 { #category : #accessing }
 BlSigmoidElement >> sharpness: aFloatNumber [
+	self invalidate.
 	self geometry sharpness: aFloatNumber.
 	self invalidate
 ]

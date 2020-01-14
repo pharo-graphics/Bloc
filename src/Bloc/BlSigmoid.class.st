@@ -7,10 +7,38 @@ Class {
 		'sharpness',
 		'bendingPoint',
 		'fromControl',
-		'toControl'
+		'toControl',
+		'orientation'
+	],
+	#classVars : [
+		'AutomaticOrientation',
+		'HorizontalOrientation',
+		'VerticalOrientation'
 	],
 	#category : #'Bloc-Basic'
 }
+
+{ #category : #'class initialization' }
+BlSigmoid class >> initialize [
+	AutomaticOrientation := #automatic.
+	VerticalOrientation := #vertical.
+	HorizontalOrientation := #horizontal
+]
+
+{ #category : #accessing }
+BlSigmoid >> beAutomatic [
+	self orientation: AutomaticOrientation
+]
+
+{ #category : #accessing }
+BlSigmoid >> beHorizontal [
+	self orientation: HorizontalOrientation
+]
+
+{ #category : #accessing }
+BlSigmoid >> beVertical [
+	self orientation: VerticalOrientation
+]
 
 { #category : #accessing }
 BlSigmoid >> bendingPoint: aFloatNumber [
@@ -36,8 +64,12 @@ BlSigmoid >> computeFromControlPoint [
 	anAbsoluteVector := (to - from) abs.
 	aDistanceBetweenPoints := anAbsoluteVector max.
 	
-	"the horizontal distance between points is more than  vertical"
-	isHorizontal := anAbsoluteVector x >= anAbsoluteVector y.
+	isHorizontal := self isHorizontal
+		ifTrue: [ true ]
+		ifFalse: [ self isVertical
+			ifTrue: [ false ]
+			"the horizontal distance between points is more than vertical"
+			ifFalse: [ anAbsoluteVector x >= anAbsoluteVector y ] ].
 	
 	"when bending point is 0.5 it means that both control points have the same distance from the start and end.
 	if bending point is for example than 0.25 then the distance to `from control point` should twice as small as
@@ -62,8 +94,12 @@ BlSigmoid >> computeToControlPoint [
 	anAbsoluteVector := (to - from) abs.
 	aDistanceBetweenPoints := anAbsoluteVector max.
 	
-	"the horizontal distance between points is more than  vertical"
-	isHorizontal := anAbsoluteVector x >= anAbsoluteVector y.
+	isHorizontal := self isHorizontal
+		ifTrue: [ true ]
+		ifFalse: [ self isVertical
+			ifTrue: [ false ]
+			"the horizontal distance between points is more than vertical"
+			ifFalse: [ anAbsoluteVector x >= anAbsoluteVector y ] ].
 	
 	"when bending point is 0.5 it means that both control points have the same distance from the start and end.
 	if bending point is for example than 0.75 then the distance to `to control point` should twice as small as
@@ -99,7 +135,23 @@ BlSigmoid >> initialize [
 	fromControl := 0 asPoint.
 	toControl := 0 asPoint.
 	bendingPoint := 0.5.
-	sharpness := 0.5
+	sharpness := 0.5.
+	orientation := AutomaticOrientation
+]
+
+{ #category : #private }
+BlSigmoid >> isAutomatic [
+	^ orientation = AutomaticOrientation
+]
+
+{ #category : #private }
+BlSigmoid >> isHorizontal [
+	^ orientation = HorizontalOrientation
+]
+
+{ #category : #private }
+BlSigmoid >> isVertical [
+	^ orientation = VerticalOrientation
 ]
 
 { #category : #geometry }
@@ -107,6 +159,16 @@ BlSigmoid >> matchExtent: aPoint [
 	"Resize geometry to exactly match provided extent as a Point"
 
 	extent := aPoint
+]
+
+{ #category : #private }
+BlSigmoid >> orientation: anOrientation [
+	orientation = anOrientation
+		ifTrue: [ ^ self ].
+	orientation := anOrientation.
+	
+	self updateControlPoints.
+	self releaseCache
 ]
 
 { #category : #accessing }
