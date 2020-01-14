@@ -58,3 +58,9 @@ BlTaskAtTask >> scheduledTime [
 BlTaskAtTask >> valuable [
 	^ valuable
 ]
+
+{ #category : #evaluating }
+BlTaskAtTask >> value [
+	"evaluate valuable"
+	^ self valuable value
+]
