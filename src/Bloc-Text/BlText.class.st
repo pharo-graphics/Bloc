@@ -211,6 +211,33 @@ BlText >> ensureAnnouncer [
 	announcer ifNil: [ announcer := BlTextAnnouncer new ]
 ]
 
+{ #category : #comparing }
+BlText >> equals: anObject [
+	| myIterator otherIterator areSame |
+
+	self == anObject
+		ifTrue: [ ^ true ].
+
+	(anObject isKindOf: BlText)
+		ifFalse: [ ^ false ].
+			
+	self size ~= anObject size
+		ifTrue: [ ^ false ].
+
+	myIterator := self iterator.
+	otherIterator := anObject iterator.
+
+	areSame := true.
+	[ areSame and: [ myIterator hasNext and: [ otherIterator hasNext ] ] ]
+		whileTrue: [
+			areSame :=
+				myIterator next = otherIterator next
+					and: [ myIterator attributes asSet = otherIterator attributes asSet ] ].
+
+	areSame := areSame and: [ myIterator hasNext not and: [ otherIterator hasNext not ] ].
+	^ areSame
+]
+
 { #category : #'text - enumeration' }
 BlText >> finder [
 	^ BlPositionFinder new text: self
