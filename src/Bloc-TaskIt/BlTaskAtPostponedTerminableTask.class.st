@@ -1,5 +1,5 @@
 Class {
-	#name : #BlTaskAtPostponedTerminableTaskItTask,
+	#name : #BlTaskAtPostponedTerminableTask,
 	#superclass : #BlTaskAtTask,
 	#instVars : [
 		'pool',
@@ -7,17 +7,17 @@ Class {
 		'wasExecuted',
 		'mutex'
 	],
-	#category : #'Bloc-TaskIt-Support'
+	#category : #'Bloc-TaskIt-Postponed Tasks'
 }
 
 { #category : #accessing }
-BlTaskAtPostponedTerminableTaskItTask >> command [
+BlTaskAtPostponedTerminableTask >> command [
 	<return: #BlTktTerminableCommand>
 	^ valuable
 ]
 
 { #category : #accessing }
-BlTaskAtPostponedTerminableTaskItTask >> command: aCommand [
+BlTaskAtPostponedTerminableTask >> command: aCommand [
 	self 
 		assert: [ aCommand isNotNil ] 
 		description: [ 'Command must be non-nil' ].
@@ -25,7 +25,7 @@ BlTaskAtPostponedTerminableTaskItTask >> command: aCommand [
 ]
 
 { #category : #initialization }
-BlTaskAtPostponedTerminableTaskItTask >> initialize [
+BlTaskAtPostponedTerminableTask >> initialize [
 	super initialize.
 	shouldTerminate := false.
 	wasExecuted := false.
@@ -33,26 +33,31 @@ BlTaskAtPostponedTerminableTaskItTask >> initialize [
 ]
 
 { #category : #accessing }
-BlTaskAtPostponedTerminableTaskItTask >> pool [
+BlTaskAtPostponedTerminableTask >> pool [
 	<return: #TKTCommonQueueWorkerPool>
 	^ pool
 ]
 
 { #category : #accessing }
-BlTaskAtPostponedTerminableTaskItTask >> pool: aTKTCommonQueueWorkerPool [
+BlTaskAtPostponedTerminableTask >> pool: aTKTCommonQueueWorkerPool [
 	self 
 		assert: [ aTKTCommonQueueWorkerPool isNotNil ] 
 		description: [ 'TaskIt worker pool must be non-nil' ].
 	pool := aTKTCommonQueueWorkerPool
 ]
 
+{ #category : #evaluating }
+BlTaskAtPostponedTerminableTask >> privateExecute [
+	self pool schedule: self command
+]
+
 { #category : #accessing }
-BlTaskAtPostponedTerminableTaskItTask >> scheduledTime: aTime [
+BlTaskAtPostponedTerminableTask >> scheduledTime: aTime [
 	scheduledTime := aTime
 ]
 
 { #category : #actions }
-BlTaskAtPostponedTerminableTaskItTask >> terminate [
+BlTaskAtPostponedTerminableTask >> terminate [
 	mutex critical: [ 
 		wasExecuted ifFalse: [ 
 			shouldTerminate := true.
@@ -61,9 +66,9 @@ BlTaskAtPostponedTerminableTaskItTask >> terminate [
 ]
 
 { #category : #evaluating }
-BlTaskAtPostponedTerminableTaskItTask >> value [
+BlTaskAtPostponedTerminableTask >> value [
 	mutex critical: [ 
 		shouldTerminate ifTrue: [ ^ nil ].
 		wasExecuted := true.
-		self pool schedule: self command ]
+		self privateExecute ]
 ]
