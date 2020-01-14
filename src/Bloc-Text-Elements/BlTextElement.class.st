@@ -385,7 +385,6 @@ BlTextElement >> onRemovedFromSceneGraph [
 	paragraph
 		ifNil: [ ^ self ].
 
-	self releaseParagraph.
 	self requestLayout
 ]
 
@@ -478,7 +477,7 @@ BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 
 	paragraph maxWidth = (self computeMaxWidth: anExtentMeasurementSpec)
 		ifFalse: [ ^ true ].
-		
+
 	paragraph maxHeight = (self computeMaxHeight: anExtentMeasurementSpec)
 		ifFalse: [ ^ true ].
 
@@ -508,6 +507,9 @@ BlTextElement >> text: aTextModel [
 	self
 		assert: [ aTextModel isKindOf: BlText ]
 		description: [ 'A text model must be an instance if Text' ].
+		
+	text = aTextModel
+		ifTrue: [ ^ self ].
 
 	text := aTextModel.
 	self textChanged
