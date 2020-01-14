@@ -33,14 +33,7 @@ BlTktTerminableCommand >> cancelWithReason: aReason [
 BlTktTerminableCommand >> execute [
 	"execute command and return a result"
 	<return: #Object>
-	skipExecution ifTrue: [ ^ nil ].
 	^ self command execute
-]
-
-{ #category : #initialization }
-BlTktTerminableCommand >> initialize [
-	super initialize.
-	skipExecution := false.
 ]
 
 { #category : #accessing }
@@ -74,12 +67,13 @@ BlTktTerminableCommand >> terminate [
 
 { #category : #actions }
 BlTktTerminableCommand >> terminateWithReason: aReason [
-	skipExecution := true.
 	self 
 		assert: [ aReason isNotNil ]
 		description: [ 'Termination reason must be non-nil' ].
+	self 
+		assert: [ taskExecution isNotNil ]
+		description: [ 'Command must be scheduled in a TaskIt worker first' ].
 	self command canHandleTerminationRequest
 		ifTrue: [ self command terminateWithReason: aReason ]
-		ifFalse: [ self taskExecution ifNotNil: [ :anExecution | 
-				anExecution terminateWithReason: aReason ] ]
+		ifFalse: [ self taskExecution terminateWithReason: aReason ]
 ]
