@@ -14,6 +14,27 @@ BlSigmoidElementExamples >> newSigmoid [
 		yourself
 ]
 
+{ #category : #'examples - orientation' }
+BlSigmoidElementExamples >> sigmoidAutomatic [
+	<gtExample>	
+	| aSigmoid attachFrom attachTo |
+	
+	aSigmoid := self newSigmoid.
+	aSigmoid beAutomatic.
+	
+	attachFrom := self attachPoint.
+	attachFrom relocate: 100 @ 100.
+
+	attachTo := self attachPoint.
+	attachTo relocate: 450 @ 200.
+
+	aSigmoid fromAnchor: (BlElementCenterAnchor element: attachFrom).
+	aSigmoid toAnchor: (BlElementCenterAnchor element: attachTo).
+
+	^ self container
+		addChildren: { aSigmoid . attachFrom . attachTo }
+]
+
 { #category : #'examples - bending point' }
 BlSigmoidElementExamples >> sigmoidBendingFirstQuarterPoint [
 	<gtExample>
@@ -100,6 +121,27 @@ BlSigmoidElementExamples >> sigmoidDefault [
 		addChildren: { aSigmoid . attachFrom . attachTo }
 ]
 
+{ #category : #'examples - orientation' }
+BlSigmoidElementExamples >> sigmoidHorizontal [
+	<gtExample>	
+	| aSigmoid attachFrom attachTo |
+	
+	aSigmoid := self newSigmoid.
+	aSigmoid beHorizontal.
+	
+	attachFrom := self attachPoint.
+	attachFrom relocate: 100 @ 100.
+
+	attachTo := self attachPoint.
+	attachTo relocate: 450 @ 200.
+
+	aSigmoid fromAnchor: (BlElementCenterAnchor element: attachFrom).
+	aSigmoid toAnchor: (BlElementCenterAnchor element: attachTo).
+
+	^ self container
+		addChildren: { aSigmoid . attachFrom . attachTo }
+]
+
 { #category : #'examples - sharpness' }
 BlSigmoidElementExamples >> sigmoidSharp [
 	<gtExample>
@@ -150,6 +192,27 @@ BlSigmoidElementExamples >> sigmoidSoft [
 
 	aSigmoid := self newSigmoid.
 	aSigmoid sharpness: 0.5.
+	
+	attachFrom := self attachPoint.
+	attachFrom relocate: 100 @ 100.
+
+	attachTo := self attachPoint.
+	attachTo relocate: 450 @ 200.
+
+	aSigmoid fromAnchor: (BlElementCenterAnchor element: attachFrom).
+	aSigmoid toAnchor: (BlElementCenterAnchor element: attachTo).
+
+	^ self container
+		addChildren: { aSigmoid . attachFrom . attachTo }
+]
+
+{ #category : #'examples - orientation' }
+BlSigmoidElementExamples >> sigmoidVertical [
+	<gtExample>	
+	| aSigmoid attachFrom attachTo |
+	
+	aSigmoid := self newSigmoid.
+	aSigmoid beVertical.
 	
 	attachFrom := self attachPoint.
 	attachFrom relocate: 100 @ 100.
