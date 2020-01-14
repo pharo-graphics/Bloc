@@ -28,9 +28,9 @@ ${example:BlRectangleShapeWithArrowExplanation>>#rectangleWithTopInjectedLine|pr
 We are almost ready to create a rectangular arrow. We just need to split an injected line in half in order to create the top corner of the rectangle. We can do so by sending a ${method:BlLineShape>>#splitAt:}$ to the now middle section of the ==topEdge== which was created by the previous line injection step:
 ${example:BlRectangleShapeWithArrowExplanation>>#rectangleWithTopPolylineSplitInHalf|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=250}$
 
-!! Moving the top of the rectangle
+!! Moving the top of the triangle
 
-Once we have everything we need for the arrow rectangle we can move it up by the length of the arrow. To do so we should send ${method:BlPointShape>>#moveBy:}$ to the connection point of the splitted line in the middle of the ==topEdge==. After doing so we receive the expected vector shape we we can later use together with ${class:BlShapeGeometry}$:
+Once we have everything we need for the arrow triangle we can move it's top up by the length of the arrow. To do so we should send ${method:BlPointShape>>#moveBy:}$ to the connection point of the splitted line in the middle of the ==topEdge==. After doing so we receive the expected vector shape we we can later use together with ${class:BlShapeGeometry}$:
 ${example:BlRectangleShapeWithArrowExplanation>>#rectangleWithTopArrow|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=250}$
 
 
