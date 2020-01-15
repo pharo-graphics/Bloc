@@ -11,6 +11,6 @@ BlTktFutureExecution >> doExecuteTask [
 
 	[ future deploySuccess: task value ]
 		on: BlTktExplicitlyTerminatedTaskException, Error
-		do: [ :error | future deployFailure: error withoutContext ].
+		do: [ :error | future deployFailure: error freezeOrWithoutContext ].
 
 ]

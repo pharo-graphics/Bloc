@@ -19,10 +19,3 @@ BlTktExplicitlyTerminatedTaskException >> isResumable [
 
 	^ false
 ]
-
-{ #category : #handling }
-BlTktExplicitlyTerminatedTaskException >> withoutContext [
-	"nil the signalContext, allowing the exception to be reasoned on without copying the stack"
-
-	signalContext := nil.
-]
