@@ -12,3 +12,10 @@ BlTktExplicitlyTerminatedTaskException >> defaultAction [
 
 	UnhandledError signalForException: self
 ]
+
+{ #category : #testing }
+BlTktExplicitlyTerminatedTaskException >> isResumable [ 
+	"#withoutContext removes the signalContext, so this can't be resumed"
+
+	^ false
+]
