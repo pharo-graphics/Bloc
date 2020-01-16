@@ -230,10 +230,7 @@ BlGlutinHostSpace >> visitCharacterReceivedEvent: anEvent [
 BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 	| aBlocEvent aNewCursorPosition aDelta |
 
-	aNewCursorPosition := OSPlatform current isMacOS
-		"see https://github.com/rust-windowing/winit/issues/1371"
-		ifTrue: [ (GtFensterLogicalPosition x: anEvent x y: anEvent y) asPhysical: self scaleFactor ]
-		ifFalse: [ GtFensterPhysicalPosition x: anEvent x y: anEvent y ].
+	aNewCursorPosition := GtFensterPhysicalPosition x: anEvent x y: anEvent y.
 
 	aDelta := aNewCursorPosition - mousePosition.
 
