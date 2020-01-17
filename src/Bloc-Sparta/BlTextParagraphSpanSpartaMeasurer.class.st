@@ -35,9 +35,7 @@ BlTextParagraphSpanSpartaMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
 
 	aParagraphSpan := self createParagraphSpan.
 	aParagraphSpan applySpartaMetrics: aSpartaMetrics.
-	aParagraphSpan textRun: aTextRun
-		start: (1 min: aTextRun size)
-		end: aTextRun size.
+	aParagraphSpan textRun: aTextRun.
 	
 	^ aParagraphSpan
 ]

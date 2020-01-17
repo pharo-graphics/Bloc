@@ -82,11 +82,7 @@ BlTextParagraphMeasurer >> measureSpan: aBlSpan of: aTextParagraph on: aCanvas w
 	| aParagraphSpan |
 
 	aParagraphSpan := aSpanMeasurer measureSpan: aBlSpan on: aCanvas.
-
-	aParagraphSpan
-		span: aBlSpan
-		start: (1 min: aBlSpan size)
-		end: aBlSpan size.
+	aParagraphSpan span: aBlSpan.
 
 	aParagraphSpan
 		text: aTextParagraph text

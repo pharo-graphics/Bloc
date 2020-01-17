@@ -13,14 +13,10 @@ Class {
 	#superclass : #BlTextParagraphSegment,
 	#instVars : [
 		'textRun',
+		'span',
+		'measurer',
 		'strikethroughOffset',
 		'strikethroughSize',
-		'span',
-		'textRunStart',
-		'textRunEnd',
-		'spanStart',
-		'spanEnd',
-		'measurer',
 		'isVertical'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
@@ -52,45 +48,11 @@ BlTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 	baseline := 0@0
 ]
 
-{ #category : #asserting }
-BlTextParagraphSpan >> assertSpan [
-
-	self
-		assert: [ span isNotNil and: [ spanStart isNotNil and: [ spanEnd isNotNil ] ] ]
-		description: [ 'Span is not initialized' ].
-		
-	self
-		assert: [ span isNotEmpty or: [ spanStart isZero and: [ spanEnd isZero ] ] ]
-		description: [ 'If span text is empty, start and end indices must be zero' ].
-	
-	self
-		assert: [ span isEmpty or: [ spanStart between: 1 and: span size ] ]
-		description: [ 'Span start must be within span bounds if it is not empty' ].
-		
-	self
-		assert: [ span isEmpty or: [ spanEnd between: 1 and: span size ] ]
-		description: [ 'Span end must be within span bounds if it is not empty' ].
-		
-	self
-		assert: [ spanStart <= spanEnd ]
-		description: [ 'Span start must be always smaller or equal to span end' ]
-]
-
-{ #category : #asserting }
-BlTextParagraphSpan >> assertTextRun [
-
-	self
-		assert: [ textRun isNotNil and: [ textRunStart isNotNil and: [ textRunEnd isNotNil ] ] ]
-		description: [ 'Text run is not initialized' ].
-]
-
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> attributes [
 	"Return a set of attributes applied on this span"
 	<return: #Set of: #BlTextAttribute>
-	
-	self assertSpan.
-	
+
 	^ span attributes
 ]
 
@@ -99,6 +61,45 @@ BlTextParagraphSpan >> finalize [
 
 	textRun ifNotNil: [ :aTextRun | aTextRun release ].
 	textRun := nil
+]
+
+{ #category : #'as yet unclassified' }
+BlTextParagraphSpan >> gtPositionsAtIndicesFor: aView [
+	<gtView>
+	
+	^ aView sparta
+		title: 'Positions';
+		priority: 10;
+		matchParent;
+		rendering: [ :aCanvas :anElement |
+			| aScale |
+			
+			aScale := (aCanvas extent min / self extent max) * 0.9.
+			
+			aCanvas transform
+				by: [ :t |
+					t scaleBy: aScale.
+					t translateBy: (0@self top negated) + 2 ]
+				during: [
+					self drawOnSpartaCanvas: aCanvas.
+					0 to: self spanLength do: [ :eachIndex |
+						| aPosition |
+						
+						aPosition := self positionAt: eachIndex on: aCanvas.
+						aCanvas stroke
+							path: (aCanvas shape line: aPosition x @ self top to: aPosition x @ (self top + self height));
+							width: 1.0 / aScale;
+							paint: (Color black alpha: 0.5);
+							draw.
+							
+						aCanvas stroke
+							path: (self bounds);
+							width: 1.0 / aScale;
+							paint: (Color black alpha: 0.5);
+							draw
+						
+					] ]
+		]
 ]
 
 { #category : #geometry }
@@ -192,7 +193,7 @@ BlTextParagraphSpan >> isSplitted [
 	on the next paragraph line"
 	<return: #Boolean>
 	
-	^ spanEnd < span size
+	^ false
 ]
 
 { #category : #testing }
@@ -248,7 +249,7 @@ BlTextParagraphSpan >> positionAt: anIndex on: aCanvas [
 	(anIndex = (self from - 1))
 		ifTrue: [ ^ aPositionX @ aPositionY ].
 	(anIndex = self to)
-		ifTrue: [ ^ (aPositionX + self advance) @ aPositionY ].
+		ifTrue: [ ^ (aPositionX + (self advance max: self width)) @ aPositionY ].
 
 	aSpanIndex := anIndex - self from + 1.
 	aSpanIndex isZero
@@ -263,59 +264,53 @@ BlTextParagraphSpan >> positionAt: anIndex on: aCanvas [
 	aMeasuredSpan := aMeasurer
 		measureSpan: aSubSpan
 		on: aCanvas.
-		
-	^ (aPositionX + aMeasuredSpan width) @ aPositionY
+
+	^ (aPositionX + (aMeasuredSpan advance max: aMeasuredSpan width) + (self left min: 0) + (aMeasuredSpan left min: 0)) @ aPositionY
 ]
 
 { #category : #printing }
 BlTextParagraphSpan >> printOn: aStream [
 	span
 		ifNil: [ aStream nextPutAll: '(not yet initialized)' ]
-		ifNotNil: [ span printOn: aStream from: spanStart to: spanEnd ]
+		ifNotNil: [ aStream print: span ]
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> span [
 	"Return an underlying text span that I represent"
 	<return: #BlSpan>
-	
-	self assertSpan.
 
 	^ span
 ]
 
 { #category : #initialization }
-BlTextParagraphSpan >> span: aBrSpan start: aSpanStart end: aSpanEnd [
+BlTextParagraphSpan >> span: aBrSpan [
 	"Assign an attributed text span with corresponding start and end indices which I measure"
 	
-	span := aBrSpan.
-	spanStart := aSpanStart.
-	spanEnd := aSpanEnd.
-	
-	self assertSpan
+	span := aBrSpan
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanEnd [
 	<return: #Number>
 
-	^ spanEnd
+	^ span size
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanLength [
 	<return: #Number>
 
-	^ (spanStart isZero and: [ spanEnd isZero ])
+	^ (self spanStart isZero and: [ self spanEnd isZero ])
 		ifTrue: [ 0 ]
-		ifFalse: [ spanEnd - spanStart + 1 ]
+		ifFalse: [ self spanEnd - self spanStart + 1 ]
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanStart [
 	<return: #Number>
 
-	^ spanStart
+	^ 1 min: span size
 ]
 
 { #category : #accessing }
@@ -337,32 +332,24 @@ BlTextParagraphSpan >> text: aBrText from: aGlobalTextStart to: aGlobalTextEnd [
 ]
 
 { #category : #'accessing - text run' }
-BlTextParagraphSpan >> textRun [
-	
-	self assertTextRun.
-	
+BlTextParagraphSpan >> textRun [	
 	^ textRun
 ]
 
 { #category : #initialization }
-BlTextParagraphSpan >> textRun: aTextRun start: aTextRunStart end: aTextRunEnd [
+BlTextParagraphSpan >> textRun: aTextRun [
 	"Assign a backend specific text run (collection of glyphs) with corresponding
 	start and end indices which represents an unstyled piece of text"
 	
 	textRun := aTextRun.
-	textRunStart := aTextRunStart.
-	textRunEnd := aTextRunEnd.
-	
-	self assertTextRun
 ]
 
 { #category : #'accessing - text run' }
 BlTextParagraphSpan >> textRunEnd [
 	"Return an index of a last measured glyph in a text run that should be rendered"
 	<return: #Number>
-	self assertTextRun.
 	
-	^ textRunEnd
+	^ textRun size
 ]
 
 { #category : #'accessing - text run' }
@@ -373,18 +360,16 @@ BlTextParagraphSpan >> textRunLength [
 	Note: glyphs can be complex, meaning that they consist of multiple simple glyphs,
 	that is why text run length always equal or greater than span length"
 	<return: #Number>
-	self assertTextRun.
 	
-	^ (textRunStart isZero and: [ textRunEnd isZero ])
+	^ (self textRunStart isZero and: [ self textRunEnd isZero ])
 		ifTrue: [ 0 ]
-		ifFalse: [ textRunEnd - textRunStart + 1 ]
+		ifFalse: [ self textRunEnd - self textRunStart + 1 ]
 ]
 
 { #category : #'accessing - text run' }
 BlTextParagraphSpan >> textRunStart [
 	"Return an index of a first measured glyph in a text run that should be rendered"
 	<return: #Number>
-	self assertTextRun.
 	
-	^ textRunStart
+	^ 1 min: textRun size
 ]
