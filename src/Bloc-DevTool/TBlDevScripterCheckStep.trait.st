@@ -41,6 +41,12 @@ TBlDevScripterCheckStep >> elementSatisfies: anOneArgBlock [
 ]
 
 { #category : #'steps - checks' }
+TBlDevScripterCheckStep >> nonSatisfies: anOneArgBlock [
+	^ self addStep: (BlDevScripterCheckElementStep new block: [ :aCollection | 
+			aCollection allSatisfy: [ :eachItem | (anOneArgBlock cull: eachItem) not ] ]; referenceSender)
+]
+
+{ #category : #'steps - checks' }
 TBlDevScripterCheckStep >> satisfies: anOneArgBlock [
 	^ self addStep: (BlDevScripterCheckElementStep new block: anOneArgBlock; referenceSender)
 ]

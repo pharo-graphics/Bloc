@@ -210,6 +210,11 @@ BlDevScripter >> startWithExecutor: anExecutor [
 	rootStep startWithExecutor: anExecutor
 ]
 
+{ #category : #'steps - substeps' }
+BlDevScripter >> substep: aLabel do: anOneArgBlock [
+	^ (self substeps: aLabel do: anOneArgBlock) referenceSender
+]
+
 { #category : #execution }
 BlDevScripter >> syncContinue [
 	BlDevScripterStepContinueExecutor new

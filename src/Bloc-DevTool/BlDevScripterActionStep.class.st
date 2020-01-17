@@ -38,11 +38,6 @@ BlDevScripterActionStep >> defaultLabel [
 	^ 'Action'
 ]
 
-{ #category : #initialization }
-BlDevScripterActionStep >> defaultTarget [
-	^ BlDevScripterModelTarget new
-]
-
 { #category : #actions }
 BlDevScripterActionStep >> playOn: aScripter [
 	| anObject |

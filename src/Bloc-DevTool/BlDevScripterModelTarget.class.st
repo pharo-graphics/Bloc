@@ -24,3 +24,11 @@ BlDevScripterModelTarget >> identifier [
 BlDevScripterModelTarget >> printOn: aStream [
 	aStream nextPutAll: 'Scripter Model'.
 ]
+
+{ #category : #updating }
+BlDevScripterModelTarget >> updateUsing: aScripterEventTarget on: aStep [
+	| aNestedTarget |
+	aNestedTarget := BlDevScripterNestedChildEventTarget new.
+	aNestedTarget targets: { self. aScripterEventTarget }.
+	aStep target: aNestedTarget.
+]
