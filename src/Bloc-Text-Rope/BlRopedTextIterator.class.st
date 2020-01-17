@@ -75,7 +75,7 @@ BlRopedTextIterator >> next [
 BlRopedTextIterator >> nextLine [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first carriage return character"
-	<return: #BlText>	
+	<return: #BlText>
 	
 	^ self nextLineIndicesDo: [ :aStart :anEnd | BlSubText text: text from: aStart to: anEnd ]
 ]

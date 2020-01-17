@@ -114,11 +114,8 @@ BlTextParagraphFixedSpanMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
 		description: [ 'Height must be positive' ].
 
 	aParagraphSpan applyFixedMetrics: self.
-	
-	aParagraphSpan textRun: aTextRun
-		start: (1 min: aTextRun size)
-		end: aTextRun size.
-	
+	aParagraphSpan textRun: aTextRun.
+
 	^ aParagraphSpan
 ]
 
