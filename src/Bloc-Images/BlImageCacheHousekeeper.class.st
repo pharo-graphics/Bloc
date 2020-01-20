@@ -117,7 +117,11 @@ BlImageCacheHousekeeper >> pruneCache [
 BlImageCacheHousekeeper >> schedulePruneCache [
 	"Prune the receiver's cache in the housekeeping process"
 
-	BlTktWorkerProvider nonUISinglePool schedule: [ self pruneCache ]
+	BlUseAsyncFeatures 
+		ifEnabledDo: [ 
+			BlTktWorkerProvider nonUISinglePool schedule: [ self pruneCache ] ]
+		otherwise: [ 
+			self pruneCache ]
 ]
 
 { #category : #private }
