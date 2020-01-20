@@ -124,7 +124,11 @@ BlImageCacheHousekeeper >> schedulePruneCache [
 BlImageCacheHousekeeper >> scheduleUpdateCurrentSize [
 	"Update the size of the receiver's cache in the housekeeping process"
 
-	cache taskitRunner schedule: [ self updateCurrentSize ]
+	BlUseAsyncFeatures 
+		ifEnabledDo: [ 
+			cache taskitRunner schedule: [ self updateCurrentSize ] ]
+		 otherwise: [ 
+			self updateCurrentSize ]
 ]
 
 { #category : #private }
