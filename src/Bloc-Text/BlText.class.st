@@ -83,12 +83,6 @@ BlText >> asArray [
 		self do: [ :anItem | aStream nextPut: anItem ] ]
 ]
 
-{ #category : #converting }
-BlText >> asElement [
-	^ BlTextElement new
-		text: self asRopedText
-]
-
 { #category : #'text - converting' }
 BlText >> asString [
 	"I return an original String representaion of this text.
