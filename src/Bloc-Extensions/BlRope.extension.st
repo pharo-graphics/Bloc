@@ -20,6 +20,11 @@ BlRope >> gtInspectorTreeIn: composite [
 ]
 
 { #category : #'*Bloc-Extensions' }
+BlRope >> gtLiveFor: aView [
+	^ self gtTreeFor: aView
+]
+
+{ #category : #'*Bloc-Extensions' }
 BlRope >> gtTreeFor: aView [
 	<gtView>
 	

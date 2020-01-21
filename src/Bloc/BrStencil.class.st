@@ -66,13 +66,3 @@ BrStencil >> create [
 
 	^ self subclassResponsibility
 ]
-
-{ #category : #'gt-inspector-extension' }
-BrStencil >> gtPreviewFor: aView [
-	<gtView>
-
-	^ aView explicit
-		title: 'Preview';
-		priority: 0;
-		stencil: [ self asElement ]
-]
