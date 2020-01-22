@@ -13,7 +13,7 @@ Main maintainers : [Glenn Cavarlé](https://github.com/GlennCavarle) & [Aliaksei
 
 ## Installation
 
-The following script installs Bloc intended for [Pharo 7](https://pharo.org/download):<br>
+The following script installs Bloc intended for [Pharo 8](https://pharo.org/download):<br>
 
 ```smalltalk
 [
