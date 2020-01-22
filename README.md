@@ -2,7 +2,7 @@
 
 [Installation](#installation) | [Contributing](#contributing) |  [License](#license)
 
-[![License](https://img.shields.io/github/license/pharo-graphics/Bloc.svg?style=flat-square)][license]
+[![License](https://img.shields.io/github/license/feenkcom/Bloc.svg?style=flat-square)][license]
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
