@@ -191,17 +191,14 @@ BlTaskItGuidelines >> initialize [
 BlTaskItGuidelines >> scheduleCounterTaskAsAsyncUI [
 	<gtExample>
 	<noTest>
-	| aWorkerPool aTask aNamedTask |
+	| aWorkerPool aCommand |
 	aWorkerPool := self asyncUIWorkerPoolWithOneWorker.
-	aTask := [ [ self waitingIncrementCounter ] 
+	aCommand := [ [ self waitingIncrementCounter ] 
 		on: TKTCancelledTaskException 
-		do: [ :anException | self addToCollection: anException. self signalSemaphore ] ] asTask.
-	aNamedTask := aWorkerPool schedule: aTask named: self incrementalCounterTaskName timeout: 1 seconds.
+		do: [ :anException | self addToCollection: anException. self signalSemaphore ] ] asBlTktCommand.
+	aCommand name: self incrementalCounterTaskName.
+	aWorkerPool schedule: aCommand.
 	self waitForSemaphoreSignal.
-	"Task configuration"
-	self assert: aTask ~= aNamedTask.
-	self assert: aNamedTask task equals: aTask.
-	self assert: aNamedTask name equals: self incrementalCounterTaskName.
 	"WorkerPool configuration"
 	self assert: aWorkerPool size equals: 1. "It has one worker"
 	self assert: aWorkerPool taskQueue size equals: 1. "It has one task"

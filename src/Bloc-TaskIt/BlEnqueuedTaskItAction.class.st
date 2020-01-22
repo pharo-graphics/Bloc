@@ -44,8 +44,6 @@ BlEnqueuedTaskItAction >> initialize [
 	self action: [ ].
 	resultCallbacks := OrderedCollection new.
 	exceptionCallbacks := OrderedCollection new.
-	name := nil.
-
 ]
 
 { #category : #accessing }
