@@ -167,6 +167,15 @@ BlAsyncElementExamples >> newSpace [
 	^ aSpace
 ]
 
+{ #category : #'examples -  lazy element preview ' }
+BlAsyncElementExamples >> previewStencil [
+	<gtExample>
+	| aStencil |
+	aStencil := BlLazyElementBasicPreviewStencil new.
+	self assert: (aStencil asElement isKindOf: BlElement).
+	^ aStencil
+]
+
 { #category : #utility }
 BlAsyncElementExamples >> putInSpace: aBlElement [
 	<gtExample>
