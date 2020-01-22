@@ -65,7 +65,7 @@ BlLazyPreviewedElement >> previewStencil [
 
 { #category : #accessing }
 BlLazyPreviewedElement >> previewStencil: aBlLazyElementPreviewStencil [
-	previewStencil := aBlLazyElementPreviewStencil
+	previewStencil := aBlLazyElementPreviewStencil asStencil
 ]
 
 { #category : #implementation }
