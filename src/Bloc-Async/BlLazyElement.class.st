@@ -34,7 +34,8 @@ Class {
 	#superclass : #BlAsyncElement,
 	#instVars : [
 		'elementBuilder',
-		'element'
+		'element',
+		'postAction'
 	],
 	#category : #'Bloc-Async'
 }
@@ -63,15 +64,16 @@ BlLazyElement >> element: aBlElement [
 	element := aBlElement.
 	element ifNotNil: [
 		| anAction |
-		anAction := [ self 
-			removeChildren;
-			addChild: element;
-			invalidate ].
+		anAction := [ 
+			self 
+				removeChildren;
+				addChild: element.
+			self postAction cull: self cull: aBlElement.
+			self invalidate ].
 		BlUseAsyncFeatures 
 			ifEnabledDo: [ 
 				self enqueueTask: (BlTaskAction new action: anAction) ]
 			otherwise: anAction ]
-
 ]
 
 { #category : #accessing }
@@ -83,6 +85,12 @@ BlLazyElement >> elementBuilder [
 BlLazyElement >> elementBuilder: anObject [
 	elementBuilder := anObject.
 	BlUseAsyncFeatures ifDisabledDo: [ self buildElement ].
+]
+
+{ #category : #initialization }
+BlLazyElement >> initialize [
+	super initialize.
+	postAction := [ :theLazyElement :theChild | "do nothing" ].
 ]
 
 { #category : #'async processing' }
@@ -124,6 +132,19 @@ BlLazyElement >> onTransformationInSpaceChanged [
 	super onTransformationInSpaceChanged.
 	self mayQueueAsyncUpdate.
 
+]
+
+{ #category : #accessing }
+BlLazyElement >> postAction [
+	^ postAction
+]
+
+{ #category : #accessing }
+BlLazyElement >> postAction: aTwoArgBlock [
+	"An action that is executed right after an element is added as my child.
+	It can be used to change my attibutes, e.g., background color.
+	[ :theLazyElement :theChild | 'an action' ]."
+	postAction := aTwoArgBlock
 ]
 
 { #category : #'async processing' }

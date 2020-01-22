@@ -64,13 +64,28 @@ BlAsyncElementExamples >> basicLazyElement [
 	^ anElement
 ]
 
+{ #category : #'examples -  lazy element preview ' }
+BlAsyncElementExamples >> basicLazyPreviewedElement [
+	<gtExample>
+	| anElement |
+	anElement := BlLazyPreviewedElement new.
+	self assert: anElement previewStencil isNotNil.
+	self assert: anElement previewDelay isNotNil.
+	^ anElement
+]
+
 { #category : #'examples - children' }
 BlAsyncElementExamples >> finalElement [
 	<gtExample>
 	| anElement aText |
-	anElement := BlTextElement new.
-	anElement padding: (BlInsets all: 3).
-	aText := self finalString asRopedText.
+	anElement := BlTextElement new
+		padding: (BlInsets all: 3);
+		constraintsDo: [ :c | 
+			c horizontal fitContent.
+			c vertical fitContent.
+			c frame horizontal alignCenter.
+			c frame vertical alignCenter ].
+	aText := self finalString asRopedText foreground: Color veryLightGray.
 	anElement text: aText.
 	self assert: anElement text equals: aText.
 	^ anElement
@@ -123,6 +138,21 @@ BlAsyncElementExamples >> lazyElementWithTemporaryChild [
 	anElement addChild: aChild.
 	self assert: anElement elementBuilder isNil.
 	self assert: anElement childrenCount equals: 1.
+	^ anElement
+]
+
+{ #category : #'examples -  lazy element preview ' }
+BlAsyncElementExamples >> lazyPreviewedElement [
+	<gtExample>
+	| anElement |
+	anElement := self basicLazyPreviewedElement.
+	anElement
+		elementBuilder: [ 3 seconds wait. self finalElementBuilder value ];
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ].
+	self assert: anElement previewStencil isNotNil.
+	self assert: anElement previewDelay isNotNil.
 	^ anElement
 ]
 
