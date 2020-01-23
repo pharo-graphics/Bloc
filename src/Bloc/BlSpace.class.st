@@ -377,14 +377,14 @@ BlSpace >> doLayout [
 				self doUpdateLayout.
 				layoutCounter := layoutCounter + 1.
 				layoutCounter = 50
-					ifTrue: [ 'Warning: Layout was performed 50 times per frame!' logCr ] ].
+					ifTrue: [ 'Warning: Layout was performed 50 times per frame!' traceCr ] ].
 
 		self root dispatchLayoutDone
 
 	"I prevent infinite spawn of debuggers"
 	] on: Error do: [ :anError |
 		layoutError := anError.
-		[ layoutError debug ] ensure: [ layoutError := nil ] ]
+		[ layoutError debug ] ensure: [ layoutError := nil ] ].
 ]
 
 { #category : #pulse }
