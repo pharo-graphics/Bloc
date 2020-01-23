@@ -167,6 +167,11 @@ BlAsyncElement >> needsUpdate [
 	^ self updateStrategy needsUpdate: self
 ]
 
+{ #category : #'async processing' }
+BlAsyncElement >> neverUpdate [
+	self updateStrategy: BlAsyncElementUpdateStrategy never
+]
+
 { #category : #'hooks - children' }
 BlAsyncElement >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.

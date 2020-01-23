@@ -22,6 +22,11 @@ BlAsyncElementUpdateStrategy class >> default [
 	^ self uniqueInstance
 ]
 
+{ #category : #factory }
+BlAsyncElementUpdateStrategy class >> never [
+	^ BlUpdateNeverUpdateStrategy default 
+]
+
 { #category : #accessing }
 BlAsyncElementUpdateStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
