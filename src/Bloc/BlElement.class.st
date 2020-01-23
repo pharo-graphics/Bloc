@@ -3373,13 +3373,24 @@ BlElement >> visibility [
 
 { #category : #accessing }
 BlElement >> visibility: aVisibility [
+	"Change the visibility of the element and request layout if needed"
+	| shouldRequestLayout |
+
 	aVisibility = self visibility
 		ifTrue: [ ^ self ].
 
+	"hidden and visible types of visibility do not remove
+	and element from the layout process, therefore we should only request
+	layout if visibility changes from or to gone"
+	shouldRequestLayout := visibility = BlVisibility gone
+		or: [ aVisibility = BlVisibility gone ].
+
 	visibility := aVisibility.
-	self
-		requestLayout;
-		invalidate
+
+	shouldRequestLayout
+		ifTrue: [ self requestLayout ].
+
+	self invalidate
 ]
 
 { #category : #'geometry bounds' }
