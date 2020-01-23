@@ -22,6 +22,22 @@ BlAsyncElementExamples >> assertTextElement: aBlTextElement string: aString [
 	self assert: aBlTextElement text asString equals: aString.
 ]
 
+{ #category : #'examples -  lazy element with preview' }
+BlAsyncElementExamples >> asyncDelayedPreviewStrategy [
+	<gtExample>
+	| aStrategy |
+	aStrategy := BlAsyncDelayedPreviewStrategy new.
+	self assert: aStrategy previewDelay isNotNil.
+	self assert: aStrategy previewStencil isNotNil.
+	^ aStrategy
+]
+
+{ #category : #'examples -  lazy element with preview' }
+BlAsyncElementExamples >> asyncDelayedPreviewStrategyDelay [
+	<gtExample>
+	^ self asyncDelayedPreviewStrategy previewDelay
+]
+
 { #category : #'examples - lazy element in space' }
 BlAsyncElementExamples >> asyncLazyElementInSpace [
 	<gtExample>
@@ -64,13 +80,12 @@ BlAsyncElementExamples >> basicLazyElement [
 	^ anElement
 ]
 
-{ #category : #'examples -  lazy element preview ' }
+{ #category : #'examples -  lazy element with preview' }
 BlAsyncElementExamples >> basicLazyPreviewedElement [
 	<gtExample>
 	| anElement |
-	anElement := BlLazyPreviewedElement new.
-	self assert: anElement previewStencil isNotNil.
-	self assert: anElement previewDelay isNotNil.
+	anElement := BlLazyElement new.
+	self assert: anElement previewStrategy isNotNil.
 	^ anElement
 ]
 
@@ -141,18 +156,20 @@ BlAsyncElementExamples >> lazyElementWithTemporaryChild [
 	^ anElement
 ]
 
-{ #category : #'examples -  lazy element preview ' }
+{ #category : #'examples -  lazy element with preview' }
 BlAsyncElementExamples >> lazyPreviewedElement [
 	<gtExample>
 	| anElement |
 	anElement := self basicLazyPreviewedElement.
 	anElement
+		withDelayedPreview;
 		elementBuilder: [ 3 seconds wait. self finalElementBuilder value ];
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ].
-	self assert: anElement previewStencil isNotNil.
-	self assert: anElement previewDelay isNotNil.
+	self assert: anElement previewStrategy isNotNil.
+	self assert: anElement previewStrategy previewStencil isNotNil.
+	self assert: anElement previewStrategy previewDelay isNotNil.
 	^ anElement
 ]
 
@@ -167,7 +184,7 @@ BlAsyncElementExamples >> newSpace [
 	^ aSpace
 ]
 
-{ #category : #'examples -  lazy element preview ' }
+{ #category : #'examples -  lazy element with preview' }
 BlAsyncElementExamples >> previewStencil [
 	<gtExample>
 	| aStencil |

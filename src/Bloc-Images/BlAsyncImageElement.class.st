@@ -152,10 +152,10 @@ BlAsyncImageElement >> queueEntry [
 ]
 
 { #category : #private }
-BlAsyncImageElement >> setDisplayRendering [
+BlAsyncImageElement >> schedulePreview [
 	"Set the rendering element as a child of the receiver if the form has not already been supplied.
 	This method must be evaluated within the UI process"
 
-	entry ifNotNil: [ ^self ].
-	super setDisplayRendering
+	entry ifNotNil: [ ^ self ].
+	super schedulePreview
 ]

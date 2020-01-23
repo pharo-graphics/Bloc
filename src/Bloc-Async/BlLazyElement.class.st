@@ -1,7 +1,7 @@
 "
-BlLazyElement lazily renders its child element deferring the rendering until the element actually becomes visible in the window.  E.g. if the window can be scrolled and the element is not visible, no action is taken.
+${class:BlLazyElement}$ lazily renders its child element deferring the rendering until the element actually becomes visible in the window.  E.g., if the window can be scrolled and the element is not visible, no action is taken.
 
-!! Async Example 
+!! Async Example With Simple Preview
 
 The lazy element starts with the following temporary content:
 ${example:BlAsyncElementExamples>>#temporaryElement|noCode|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=80}$
@@ -16,6 +16,10 @@ ${example:BlAsyncElementExamples>>#lazyElement|previewExpanded=false|previewShow
 
 In particular cases, in which the lazy rendering needs to be disabled, ${class:BlUseAsyncFeatures}$ can be used as shown in the following example
 ${example:BlAsyncElementExamples>>#syncLazyElement|previewExpanded=false|previewShow=#gtLiveFor:|previewHeight=80}$
+
+!! Async Example With Build-In Preview Support
+
+${class:BlAsyncElement}$ includes a preview support that may be used if ${method:BlAsyncElement>>#withDelayedPreview|label=#selector}$ or ${method:BlAsyncElement>>#withDelayedPreview:|label=#selector}$ are called. See more details in the ${class:BlAsyncDelayedPreviewStrategy}$ class comment.
 
 !! Public API and Key Messages
 

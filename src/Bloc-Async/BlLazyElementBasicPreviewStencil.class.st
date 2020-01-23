@@ -1,6 +1,11 @@
+"
+I represent a basic preview stencil for ${class:BlAsyncDelayedPreviewStrategy}$. 
+
+I generate the following preview: ${example:BlAsyncElementExamples>>#previewStencil|codeExpanded=false|previewExpanded=true}$
+"
 Class {
 	#name : #BlLazyElementBasicPreviewStencil,
-	#superclass : #BlLazyElementPreviewStencil,
+	#superclass : #BlAsyncElementPreviewStencil,
 	#category : #'Bloc-Async'
 }
 
