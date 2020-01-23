@@ -1,3 +1,10 @@
+"
+I am an abstract class.
+I define when a ${class:BlAsyncElement}$ should be updated.
+
+See my subclasses for more details: ${class:BlAsyncElementUpdateStrategy|show=#gtSubclassesFor:|expanded=true|height=150}$.
+
+"
 Class {
 	#name : #BlAsyncElementUpdateStrategy,
 	#superclass : #Object,
