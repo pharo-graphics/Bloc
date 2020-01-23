@@ -57,7 +57,8 @@ Class {
 		'taskitRunner',
 		'errorStencil',
 		'asyncException',
-		'previewStrategy'
+		'previewStrategy',
+		'updateStrategy'
 	],
 	#category : #'Bloc-Async'
 }
@@ -101,12 +102,17 @@ BlAsyncElement >> defaultPreviewDelay [
 
 { #category : #initialization }
 BlAsyncElement >> defaultPreviewStencil [
-	^ BlLazyElementBasicPreviewStencil new
+	^ BlAsyncElementBasicPreviewStencil new
 ]
 
 { #category : #initialization }
 BlAsyncElement >> defaultPreviewStrategy [
 	^ BlAsyncPreviewStrategy null
+]
+
+{ #category : #initialization }
+BlAsyncElement >> defaultUpdateStrategy [
+	^ BlAsyncElementUpdateStrategy whenVisible
 ]
 
 { #category : #accessing }
@@ -120,12 +126,37 @@ BlAsyncElement >> errorStencil: aBrStencil [
 	errorStencil := aBrStencil asStencil
 ]
 
+{ #category : #testing }
+BlAsyncElement >> hasException [
+	^ self asyncException isNotNil
+]
+
 { #category : #initialization }
 BlAsyncElement >> initialize [ 
 
 	super initialize.
 	self setDefaultErrorStencil.
 	self previewStrategy: self defaultPreviewStrategy.
+	self updateStrategy: self defaultUpdateStrategy.
+]
+
+{ #category : #testing }
+BlAsyncElement >> isAlreadyUpdated [
+	"Return true if a child element is already present"
+	<return: #Boolean>
+	^ self hasException
+]
+
+{ #category : #'async processing' }
+BlAsyncElement >> mayQueueAsyncUpdate [
+	self needsUpdate ifFalse: [ ^ self ].
+	self queueAsyncUpdate
+]
+
+{ #category : #'async preview' }
+BlAsyncElement >> maySchedulePreview [
+	"subclasses may decide whether is it necessary to schedule a preview"
+	self needsUpdate ifTrue: [ self schedulePreview ]
 ]
 
 { #category : #testing }
@@ -133,14 +164,37 @@ BlAsyncElement >> needsUpdate [
 	"Answer a boolean indicating whether the receiver needs to be updated (via an asynchronous task).
 	Typically this will be overridden by concrete subclasses to avoid unnecessary updates."
 
-	^asyncException isNil and: [ self isVisibleInSpace ]
-
+	^ self updateStrategy needsUpdate: self
 ]
 
 { #category : #'hooks - children' }
 BlAsyncElement >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.
-	self schedulePreview.
+	self maySchedulePreview.
+	self mayQueueAsyncUpdate.
+]
+
+{ #category : #'hooks - geometry' }
+BlAsyncElement >> onExtentChanged [
+	super onExtentChanged.
+	self maySchedulePreview.
+	self mayQueueAsyncUpdate.
+
+]
+
+{ #category : #'hooks - geometry' }
+BlAsyncElement >> onPositionInSpaceChanged [
+	super onPositionInSpaceChanged.
+	self maySchedulePreview.
+	self mayQueueAsyncUpdate.
+]
+
+{ #category : #'hooks - geometry' }
+BlAsyncElement >> onTransformationInSpaceChanged [
+	super onTransformationInSpaceChanged.
+	self maySchedulePreview.
+	self mayQueueAsyncUpdate.
+
 ]
 
 { #category : #accessing }
@@ -221,6 +275,30 @@ BlAsyncElement >> taskitRunner [
 { #category : #accessing }
 BlAsyncElement >> taskitRunner: anObject [
 	taskitRunner := anObject
+]
+
+{ #category : #accessing }
+BlAsyncElement >> updateStrategy [
+	<return: #BlAsyncElementUpdateStrategy>
+	^ updateStrategy
+]
+
+{ #category : #accessing }
+BlAsyncElement >> updateStrategy: aBlAsyncElementUpdateStrategy [
+	self 
+		assert: [ aBlAsyncElementUpdateStrategy isNotNil ]
+		description: [ 'Async update strategy must be non-nil' ].
+	updateStrategy := aBlAsyncElementUpdateStrategy
+]
+
+{ #category : #'async processing' }
+BlAsyncElement >> updateWhenInScene [
+	self updateStrategy: BlAsyncElementUpdateStrategy whenInScene
+]
+
+{ #category : #'async processing' }
+BlAsyncElement >> updateWhenVisible [
+	self updateStrategy: BlAsyncElementUpdateStrategy whenVisible
 ]
 
 { #category : #accessing }

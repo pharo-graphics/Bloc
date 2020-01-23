@@ -4,13 +4,13 @@ I represent a basic preview stencil for ${class:BlAsyncDelayedPreviewStrategy}$.
 I generate the following preview: ${example:BlAsyncElementExamples>>#previewStencil|codeExpanded=false|previewExpanded=true}$
 "
 Class {
-	#name : #BlLazyElementBasicPreviewStencil,
+	#name : #BlAsyncElementBasicPreviewStencil,
 	#superclass : #BlAsyncElementPreviewStencil,
 	#category : #'Bloc-Async'
 }
 
 { #category : #'api - instantiation' }
-BlLazyElementBasicPreviewStencil >> create [
+BlAsyncElementBasicPreviewStencil >> create [
 	^ BlElement new
 		layout: BlFrameLayout new;
 		background: BlBackground transparent;

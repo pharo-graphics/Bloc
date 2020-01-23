@@ -97,45 +97,17 @@ BlLazyElement >> initialize [
 	postAction := [ :theLazyElement :theChild | "do nothing" ].
 ]
 
+{ #category : #testing }
+BlLazyElement >> isAlreadyUpdated [
+	"Return true if a child element is already present"
+	<return: #Boolean>
+	^ super isAlreadyUpdated or: [ self element isNotNil ]
+]
+
 { #category : #'async processing' }
 BlLazyElement >> mayQueueAsyncUpdate [
-	(self element isNil and: [ self isVisibleInSpace ]) ifFalse: [ ^ self ].
+	self needsUpdate ifFalse: [ ^ self ].
 	self queueAsyncUpdate
-]
-
-{ #category : #testing }
-BlLazyElement >> needsUpdate [
-	"Answer a boolean indicating whether the receiver needs to be updated"
-
-	^super needsUpdate and: [ element isNil ].
-
-]
-
-{ #category : #'hooks - children' }
-BlLazyElement >> onAddedToSceneGraph [
-	super onAddedToSceneGraph.
-	self mayQueueAsyncUpdate.
-
-]
-
-{ #category : #'hooks - geometry' }
-BlLazyElement >> onExtentChanged [
-	super onExtentChanged.
-	self mayQueueAsyncUpdate.
-
-]
-
-{ #category : #'hooks - geometry' }
-BlLazyElement >> onPositionInSpaceChanged [
-	super onPositionInSpaceChanged.
-	self mayQueueAsyncUpdate.
-]
-
-{ #category : #'hooks - geometry' }
-BlLazyElement >> onTransformationInSpaceChanged [
-	super onTransformationInSpaceChanged.
-	self mayQueueAsyncUpdate.
-
 ]
 
 { #category : #accessing }

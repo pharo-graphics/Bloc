@@ -188,7 +188,7 @@ BlAsyncElementExamples >> newSpace [
 BlAsyncElementExamples >> previewStencil [
 	<gtExample>
 	| aStencil |
-	aStencil := BlLazyElementBasicPreviewStencil new.
+	aStencil := BlAsyncElementBasicPreviewStencil new.
 	self assert: (aStencil asElement isKindOf: BlElement).
 	^ aStencil
 ]

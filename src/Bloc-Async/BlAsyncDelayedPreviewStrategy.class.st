@@ -33,7 +33,7 @@ BlAsyncDelayedPreviewStrategy >> defaultPreviewDelay [
 
 { #category : #initialization }
 BlAsyncDelayedPreviewStrategy >> defaultPreviewStencil [
-	^ BlLazyElementBasicPreviewStencil new
+	^ BlAsyncElementBasicPreviewStencil new
 ]
 
 { #category : #implementation }
@@ -89,6 +89,7 @@ BlAsyncDelayedPreviewStrategy >> previewStencil: aBlLazyElementPreviewStencil [
 { #category : #scheduling }
 BlAsyncDelayedPreviewStrategy >> schedulePreviewIn: anElement [
 	"do nothing"
+	anElement hasChildren ifTrue: [ ^ self ].
 	BlUseAsyncFeatures 
 		ifEnabledDo: [ 
 			| aNow |
