@@ -1,3 +1,8 @@
+"
+I do not generate any preview. 
+I am a default ${class:BlAsyncElement}$ preview strategy set in the ${method:BlAsyncElement>>#defaultPreviewStrategy}$ method.
+
+"
 Class {
 	#name : #BlAsyncNoPreviewStrategy,
 	#superclass : #BlAsyncPreviewStrategy,

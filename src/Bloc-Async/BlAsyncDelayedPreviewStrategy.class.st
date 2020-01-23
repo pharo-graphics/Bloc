@@ -1,3 +1,21 @@
+"
+I am a ${class:BlAsyncElement}$ preview strategy.
+I postpone a preview by a given ${method:BlAsyncDelayedPreviewStrategy>>#previewDelay|label=#selector}$ time. The default time is set in ${method:BlAsyncDelayedPreviewStrategy>>#defaultPreviewDelay|label=#selector}$ to ${example:BlAsyncElementExamples>>#asyncDelayedPreviewStrategyDelay|label=#yourself}$. 
+
+I know how to render a preview which is displayed while waiting to calculate the desired ${class:BlElement}$.
+I use ${class:BlAsyncElementPreviewStencil}$ to render a preview ${class:BlElement}$ object.
+
+!! Preview Element 
+
+The following example display a preview for about 3 seconds:
+${example:BlAsyncElementExamples>>#lazyPreviewedElement|codeExpanded=true|previewExpanded=false}$
+
+!! Preview Stencil 
+
+This is the preview that was visible shortly in the example above:
+${example:BlAsyncElementExamples>>#previewStencil|codeExpanded=false|previewExpanded=true}$
+
+"
 Class {
 	#name : #BlAsyncDelayedPreviewStrategy,
 	#superclass : #BlAsyncPreviewStrategy,
@@ -59,7 +77,7 @@ BlAsyncDelayedPreviewStrategy >> previewElement [
 
 { #category : #accessing }
 BlAsyncDelayedPreviewStrategy >> previewStencil [
-	<return: #BlLazyElementPreviewStencil>
+	<return: #BlAsyncElementPreviewStencil>
 	^ previewStencil
 ]
 
