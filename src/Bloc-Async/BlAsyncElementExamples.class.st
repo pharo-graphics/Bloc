@@ -69,8 +69,7 @@ BlAsyncElementExamples >> basicLazyPreviewedElement [
 	<gtExample>
 	| anElement |
 	anElement := BlLazyPreviewedElement new.
-	self assert: anElement previewStencil isNotNil.
-	self assert: anElement previewDelay isNotNil.
+	self assert: anElement previewStrategy isNotNil.
 	^ anElement
 ]
 
@@ -147,12 +146,14 @@ BlAsyncElementExamples >> lazyPreviewedElement [
 	| anElement |
 	anElement := self basicLazyPreviewedElement.
 	anElement
+		withDelayedPreview;
 		elementBuilder: [ 3 seconds wait. self finalElementBuilder value ];
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ].
-	self assert: anElement previewStencil isNotNil.
-	self assert: anElement previewDelay isNotNil.
+	self assert: anElement previewStrategy isNotNil.
+	self assert: anElement previewStrategy previewStencil isNotNil.
+	self assert: anElement previewStrategy previewDelay isNotNil.
 	^ anElement
 ]
 

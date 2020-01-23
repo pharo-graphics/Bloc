@@ -56,7 +56,8 @@ Class {
 		'visibleElement',
 		'taskitRunner',
 		'errorStencil',
-		'asyncException'
+		'asyncException',
+		'previewStrategy'
 	],
 	#category : #'Bloc-Async'
 }
@@ -93,11 +94,19 @@ BlAsyncElement >> asyncExceptionAction [
 				self addChild: exceptionElement ] ]
 ]
 
-{ #category : #presentation }
-BlAsyncElement >> displayRendering [
-	"Display the Rendering message while background processing performed"
+{ #category : #initialization }
+BlAsyncElement >> defaultPreviewDelay [
+	^ 300 milliSeconds
+]
 
-	self enqueueTask: (BlTaskAction new action: [ self setDisplayRendering ])
+{ #category : #initialization }
+BlAsyncElement >> defaultPreviewStencil [
+	^ BlLazyElementBasicPreviewStencil new
+]
+
+{ #category : #initialization }
+BlAsyncElement >> defaultPreviewStrategy [
+	^ BlAsyncPreviewStrategy null
 ]
 
 { #category : #accessing }
@@ -116,7 +125,7 @@ BlAsyncElement >> initialize [
 
 	super initialize.
 	self setDefaultErrorStencil.
-
+	self previewStrategy: self defaultPreviewStrategy.
 ]
 
 { #category : #testing }
@@ -126,6 +135,26 @@ BlAsyncElement >> needsUpdate [
 
 	^asyncException isNil and: [ self isVisibleInSpace ]
 
+]
+
+{ #category : #'hooks - children' }
+BlAsyncElement >> onAddedToSceneGraph [
+	super onAddedToSceneGraph.
+	self schedulePreview.
+]
+
+{ #category : #accessing }
+BlAsyncElement >> previewStrategy [
+	<return: #BlAsyncPreviewStrategy>
+	^ previewStrategy
+]
+
+{ #category : #accessing }
+BlAsyncElement >> previewStrategy: aBlAsyncProgressStrategy [
+	self 
+		assert: [ aBlAsyncProgressStrategy isNotNil ]
+		description: [ 'Async progress strategy must be non-nil' ].
+	previewStrategy := aBlAsyncProgressStrategy
 ]
 
 { #category : #accessing }
@@ -157,37 +186,10 @@ BlAsyncElement >> queueEntry [
 	^self subclassResponsibility
 ]
 
-{ #category : #private }
-BlAsyncElement >> renderingElement [
-	"Answer an element that can be added as a child and displays the standard 'rendering' image"
-
-	| rendering element backgroundPaint container |
-
-	rendering := 'Rendering...' asRopedText 
-			foreground: Color gray lighter;
-			fontSize: 12.
-	element := (BlTextElement new 
-				text: rendering;
-				geometry: (BlRectangle cornerRadius: 7);
-				padding: (BlInsets top: 10 left: 20 bottom: 10 right: 20);
-				constraintsDo: [ :c | 
-					c frame horizontal alignCenter.
-					c frame vertical alignCenter ]).
-	backgroundPaint := BlLinearGradientPaint new
-						stops:
-							{(0.0 -> Color white ).
-							(0.25 -> Color white darker).
-							(1.0 -> Color white)};
-						start: 0@0;
-						end: 1@1.
-	element background: backgroundPaint.
-	container := BlElement new
-		layout: BlFrameLayout new;
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical matchParent ];
-		addChild: element.
-	^container
+{ #category : #'async preview' }
+BlAsyncElement >> schedulePreview [
+	"schedule a preview display"
+	self previewStrategy schedulePreviewIn: self
 ]
 
 { #category : #private }
@@ -199,14 +201,6 @@ BlAsyncElement >> setDefaultErrorStencil [
 			look: BrGlamorousButtonWithLabelAndIconLook;
 			icon: BrGlamorousIcons alarm asElement;
 			action: [ [ exception defaultAction ] fork ] ]
-]
-
-{ #category : #private }
-BlAsyncElement >> setDisplayRendering [
-	"Set the rendering element as a child of the receiver.
-	This method must be evaluated within the UI process"
-
-	self addChild: self renderingElement
 ]
 
 { #category : #'async processing' }
@@ -243,4 +237,18 @@ BlAsyncElement >> visibleElement: aBlElement [
 	Default (nil) = the space's root element"
 
 	visibleElement := aBlElement
+]
+
+{ #category : #'async preview' }
+BlAsyncElement >> withDelayedPreview [
+	"Set default delayed preview.
+	It should be set before added to a scene."
+	self previewStrategy: BlAsyncDelayedPreviewStrategy new.
+]
+
+{ #category : #'async preview' }
+BlAsyncElement >> withDelayedPreview: aStencil [
+	"Set default delayed preview.
+	It should be set before added to a scene."
+	self previewStrategy: (BlAsyncDelayedPreviewStrategy new previewStencil: aStencil).
 ]
