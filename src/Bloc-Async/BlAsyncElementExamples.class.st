@@ -214,7 +214,8 @@ BlAsyncElementExamples >> syncLazyElement [
 		aBuilder := self finalElementBuilder.
 		anElement elementBuilder: aBuilder ].
 	self assert: anElement elementBuilder equals: aBuilder.
-	self assertLazyElement: anElement string: self finalString.
+	self assertLazyElement: anElement string: self temporaryString.
+	self assert: anElement taskQueue tasks size equals: 0.
 	^ anElement
 ]
 
