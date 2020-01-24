@@ -368,8 +368,8 @@ BlBounds >> extent: aPoint [
 	self
 		left: left
 		top: top
-		right: top + aPoint y
-		bottom: left + aPoint x
+		right: left + aPoint x
+		bottom: top + aPoint y
 ]
 
 { #category : #testing }
