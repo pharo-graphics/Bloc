@@ -126,13 +126,6 @@ BlAsyncImageElement >> needsUpdate [
 
 ]
 
-{ #category : #'async processing' }
-BlAsyncImageElement >> onAddedToSceneGraph [
-
-	super onAddedToSceneGraph.
-	self queueAsyncUpdate.
-]
-
 { #category : #accessing }
 BlAsyncImageElement >> preLoad [
 	^ preLoad
