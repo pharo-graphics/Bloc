@@ -6,7 +6,12 @@ BlStadium >> buildPathOnSpartaCanvas: aCanvas [
 	
 	aRadius := self radius.
 	aDiameter := aRadius * 2.
-	
+
+	(aDiameter < self extent y)
+		ifTrue: [
+			aRadius := self extent y / 2.0.
+			^ aCanvas shape circleAt: aRadius asPoint radius: aRadius ].
+
 	^ aCanvas path
 		relative;
 		moveTo: aRadius @ 0;

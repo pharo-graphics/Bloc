@@ -365,8 +365,11 @@ BlBounds >> extent [
 
 { #category : #initialization }
 BlBounds >> extent: aPoint [
-	bottom := top + aPoint y.
-	right := left + aPoint x
+	self
+		left: left
+		top: top
+		right: top + aPoint y
+		bottom: left + aPoint x
 ]
 
 { #category : #testing }
@@ -383,10 +386,10 @@ BlBounds >> height [
 BlBounds >> initialize [
 	super initialize.
 	
-	left := 0.
-	top := 0.
-	right := 0.
-	bottom := 0
+	left := 0.0.
+	top := 0.0.
+	right := 0.0.
+	bottom := 0.0
 ]
 
 { #category : #'rectangle functions' }
@@ -447,21 +450,20 @@ BlBounds >> left: aNumber [
 ]
 
 { #category : #initialization }
-BlBounds >> left: aLeft top: aTop corner: aCorner [
-	left := aLeft.
-	top := aTop.
-	right := aCorner x.
-	bottom := aCorner y.
-
-	self assertFinite
+BlBounds >> left: aLeft top: aTop corner: aCorner [	
+	self
+		left: aLeft
+		top: aTop
+		right: aCorner x
+		bottom: aCorner y
 ]
 
 { #category : #initialization }
 BlBounds >> left: aLeft top: aTop right: aRight bottom: aBottom [
-	left := aLeft.
-	top := aTop.
-	right := aRight.
-	bottom := aBottom.
+	left := aLeft asFloat.
+	top := aTop asFloat.
+	right := aRight asFloat.
+	bottom := aBottom asFloat.
 	
 	self assertFinite
 ]
@@ -519,22 +521,20 @@ BlBounds >> origin [
 
 { #category : #initialization }
 BlBounds >> origin: anOrigin corner: aCorner [
-	left := anOrigin x.
-	top := anOrigin y.
-	right := aCorner x.
-	bottom := aCorner y.
-	
-	self assertFinite
+	self
+		left: anOrigin x
+		top: anOrigin y
+		right: aCorner x
+		bottom: aCorner y
 ]
 
 { #category : #initialization }
 BlBounds >> origin: anOrigin extent: anExtent [
-	left := anOrigin x.
-	top := anOrigin y.
-	right := left + anExtent x.
-	bottom := top + anExtent y.
-	
-	self assertFinite
+	self
+		left: anOrigin x
+		top: anOrigin y
+		right: anOrigin x + anExtent x
+		bottom: anOrigin y + anExtent y
 ]
 
 { #category : #'vector functions' }
