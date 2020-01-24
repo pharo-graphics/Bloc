@@ -52,10 +52,10 @@ BlSpace class >> locationOutside: anElement [
 	anElement topMostParent forceLayout.
 	theBounds := anElement bounds inSpace bounds.
 	aPosition := {
-		theBounds topRight - (theBounds width atRandom @ 100 atRandom).
-		theBounds topRight + (100 atRandom @ theBounds height atRandom).
-		theBounds bottomLeft + (theBounds width atRandom @ 100 atRandom).
-		theBounds bottomLeft - (100 atRandom @ theBounds height atRandom).
+		theBounds topRight - (theBounds width asInteger atRandom @ 100 atRandom).
+		theBounds topRight + (100 atRandom @ theBounds height asInteger atRandom).
+		theBounds bottomLeft + (theBounds width asInteger atRandom @ 100 atRandom).
+		theBounds bottomLeft - (100 atRandom @ theBounds height asInteger atRandom).
 	}	atRandom.
 		
 	self
