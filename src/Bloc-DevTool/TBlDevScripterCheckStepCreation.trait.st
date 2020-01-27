@@ -13,6 +13,11 @@ TBlDevScripterCheckStepCreation >> addStep: aScripterTask [
 ]
 
 { #category : #'steps - subchecks' }
+TBlDevScripterCheckStepCreation >> assert [
+	^ BlDevScripterFutureCheckStep new parent: self
+]
+
+{ #category : #'steps - subchecks' }
 TBlDevScripterCheckStepCreation >> check [
 	^ BlDevScripterFutureCheckStep new parent: self
 ]

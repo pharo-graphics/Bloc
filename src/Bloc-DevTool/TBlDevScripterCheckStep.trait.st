@@ -29,6 +29,11 @@ TBlDevScripterCheckStep >> click [
 ]
 
 { #category : #'steps - checks' }
+TBlDevScripterCheckStep >> do: anOneArgBlock [
+	^ self addStep: (BlDevScripterCheckDoStep new block: anOneArgBlock; referenceSender)
+]
+
+{ #category : #'steps - checks' }
 TBlDevScripterCheckStep >> elementIsOfClass: aClass [
 	^ self addStep: (BlDevScripterCheckElementClassStep new 
 		elementClass: aClass;
