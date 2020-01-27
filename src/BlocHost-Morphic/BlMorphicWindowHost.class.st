@@ -57,6 +57,7 @@ BlMorphicWindowHost >> createMorphicWindowFor: aSpace [
 	aWindow spaceExtent: aSpace extent.
 	aWindow borderless: aSpace borderless.
 	aWindow fullsize: aSpace fullsize.
+	aWindow title: aSpace title.
 
 	^ aWindow
 ]
