@@ -96,7 +96,7 @@ BlGeometry >> geometryBounds: aBounds [
 BlGeometry >> initialize [
 	super initialize.
 	
-	extent := 0@0.
+	extent := 150@100.
 	pathCache := BlPathCache on: self
 ]
 

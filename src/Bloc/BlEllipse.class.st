@@ -20,21 +20,33 @@ Class {
 BlEllipse class >> diameter: aNumber [
 	<return: #BlEllipse>
 
-	^ self new diameter: aNumber
+	self
+		deprecated: 'Use #new instead.'
+		transformWith: '`@receiver radius:' -> '`@receiver new'.
+
+	^ self new
 ]
 
 { #category : #'instance creation' }
 BlEllipse class >> extent: anExtent [
 	<return: #BlEllipse>
 
-	^ self new extent: anExtent
+	self
+		deprecated: 'Use #new instead.'
+		transformWith: '`@receiver radius:' -> '`@receiver new'.
+
+	^ self new
 ]
 
 { #category : #'instance creation' }
 BlEllipse class >> radius: aNumber [
 	<return: #BlEllipse>
+	
+	self
+		deprecated: 'Use #new instead.'
+		transformWith: '`@receiver radius:' -> '`@receiver new'.
 
-	^ self diameter: aNumber * 2
+	^ self new
 ]
 
 { #category : #'geometry testing' }
@@ -59,7 +71,9 @@ BlEllipse >> containsPoint: aPoint in: aBlElement [
 
 { #category : #accessing }
 BlEllipse >> diameter: aNumber [
-	extent := aNumber asPoint
+	self deprecated: 'Manual setting of extent is not supported'.
+
+	^ self extent: aNumber
 ]
 
 { #category : #geometry }
