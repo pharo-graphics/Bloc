@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Basic'
+	#category : #'Bloc-Examples-Basic'
 }
 
 { #category : #examples }
@@ -215,7 +215,7 @@ BlBasicExamples >> elementsWithShadow [
 BlBasicExamples >> ellipse [
 	<gtExample>
 	
-	^ (BlEllipse extent: 200 @ 100) asElement
+	^ ((BlEllipse new ) extent: 200 @ 100) asElement
 		background: (Color red alpha: 0.5);
 		border: (BlBorder paint: Color black width: 2);
 		yourself
