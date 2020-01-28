@@ -19,7 +19,7 @@ ${example:BlAnnulusSectorExamples>>#annulusSectorBottomRight|codeExpanded=false|
 ${example:BlAnnulusSectorExamples>>#annulusSectorBottomLeft|codeExpanded=false|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=100}$
 ${example:BlAnnulusSectorExamples>>#annulusSectorTopLeft|codeExpanded=false|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=100}$
 
-If the overall vector is equal or more than 360 degrees then the sector turns into a annulus:
+If the overall sector is equal or more than 360 degrees then the sector turns into a annulus:
 ${example:BlAnnulusSectorExamples>>#annulus|codeExpanded=false|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=100}$
 
 If inner radius is 0, then the annulus sector degrades to circle sector:
