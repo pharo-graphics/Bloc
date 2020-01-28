@@ -2,8 +2,6 @@
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
-Main maintainers : [Glenn Cavarlé](https://github.com/GlennCavarle) & [Aliaksei Syrel](https://github.com/syrel)
-
 ## Installation
 
 The following script installs Bloc intended for [Pharo 8](https://pharo.org/download):<br>
