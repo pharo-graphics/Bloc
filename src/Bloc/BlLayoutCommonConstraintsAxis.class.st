@@ -22,6 +22,11 @@ BlLayoutCommonConstraintsAxis >> fitContentLimited [
 	self resizer: BlLayoutResizer fitContentLimited
 ]
 
+{ #category : #resizing }
+BlLayoutCommonConstraintsAxis >> fitContentLimitedOffset: aNumber [
+	self resizer: (BlLayoutResizer fitContentLimitedOffset: aNumber)
+]
+
 { #category : #initialization }
 BlLayoutCommonConstraintsAxis >> initialize [
 	super initialize.
