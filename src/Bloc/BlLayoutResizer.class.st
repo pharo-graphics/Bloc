@@ -22,6 +22,11 @@ BlLayoutResizer class >> fitContentLimited [
 ]
 
 { #category : #'instance creation' }
+BlLayoutResizer class >> fitContentLimitedOffset: aNumber [
+	^ BlLayoutFitContentLimitedOffsetResizer offset: aNumber
+]
+
+{ #category : #'instance creation' }
 BlLayoutResizer class >> matchParent [
 	^ BlLayoutMatchParentResizer uniqueInstance
 ]
