@@ -13,6 +13,11 @@ Class {
 	#category : #'Bloc-Basic'
 }
 
+{ #category : #'api - event handlers' }
+BlSceneInformingElement >> onAddedToSceneDo: aBlock [
+	self addEventHandler: (BlElementAddedToSceneGraphEventHandler new valuable: aBlock)
+]
+
 { #category : #'hooks - children' }
 BlSceneInformingElement >> onAddedToSceneGraph [
 	| anEventHandler |
@@ -22,6 +27,11 @@ BlSceneInformingElement >> onAddedToSceneGraph [
 		self fireEvent: BlElementRemovedFromSceneGraphEvent new.
 		anEvent space removeEventHandler: anEventHandler ].
 	self fireEvent: (BlElementAddedToSceneGraphEvent new element: self).
+]
+
+{ #category : #'api - event handlers' }
+BlSceneInformingElement >> onRemovedFromSceneDo: aBlock [
+	self addEventHandler: (BlElementRemovedFromSceneGraphEventHandler new valuable: aBlock)
 ]
 
 { #category : #'hooks - children' }
