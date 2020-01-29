@@ -287,7 +287,7 @@ BlElement >> addChildren: aListOfElements in: aContainerName [
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]
 
-{ #category : #'children accessing' }
+{ #category : #'api - children enumeration' }
 BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock [
 	^ self 
 		allChildrenBreadthFirstDetect: aBlock 
@@ -295,7 +295,7 @@ BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock [
 		ifNone: [ nil ]
 ]
 
-{ #category : #'children accessing' }
+{ #category : #'api - children enumeration' }
 BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	self allChildrenBreadthFirstDo: [ :aChild |
 		(aBlock value: aChild)
@@ -303,13 +303,13 @@ BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock ifNone:
 	^ ifNoneBlock value
 ]
 
-{ #category : #'children accessing' }
+{ #category : #'api - children enumeration' }
 BlElement >> allChildrenBreadthFirstDo: aBlock [ 
 	self childrenDo: aBlock.
 	self childrenDo: [ :each | each allChildrenBreadthFirstDo: aBlock ]
 ]
 
-{ #category : #'children accessing' }
+{ #category : #'api - children enumeration' }
 BlElement >> allChildrenBreadthFirstSelect: aBlock [ 
 	| selectedChildren |
 	selectedChildren := OrderedCollection new.
@@ -722,7 +722,7 @@ BlElement >> childrenCount [
 	^ children size
 ]
 
-{ #category : #'children accessing' }
+{ #category : #'api - children enumeration' }
 BlElement >> childrenDo: aBlockOrSymbol [
 	"Evaluate aBlock with each of my direct children as argument.
 	aBlock can not be nil.
@@ -839,6 +839,7 @@ BlElement >> containsGlobalPoint: aPoint [
 
 { #category : #'geometry testing' }
 BlElement >> containsPoint: aPoint [
+	"Return true if a given point provided in local coordinates is inside of my geometry, false otherwise"
 	<return: #Boolean>
 
 	(self geometryBounds containsPoint: aPoint)
@@ -3449,12 +3450,59 @@ BlElement >> width: aNumber [
 		c horizontal exact: aNumber ]
 ]
 
-{ #category : #'children accessing' }
+{ #category : #'api - children enumeration' }
 BlElement >> withAllChildrenBreadthFirst [
 	| all |
 	all := OrderedCollection with: self.
 	self allChildrenBreadthFirstDo: [ :x | all add: x ].
 	^ all
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> withAllLeafChildrenAt: aPoint [
+	<return: #Collection of: #BlElement>
+
+	^ Array streamContents: [ :aStream | self withAllLeafChildrenAt: aPoint do: [ :eachElement | aStream nextPut: eachElement ] ]
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> withAllLeafChildrenAt: aPoint do: aBlock [
+	"Evaluate a given Block with all leaf elements under a given point provided
+	in *my* local coordinates sorted in the order they are displayed (children reversed + elevation based).
+	Return true if aBlock was evaluated, false otherwise"
+	<return: #Boolean>
+	| isPointInsideMe anyChildFound |
+
+	isPointInsideMe := self containsPoint: aPoint.
+	
+	"if point is not inside of me and I clip children, it literally
+	mean that there neither me nor my children are visible at a given point"
+	(isPointInsideMe not and: [ self clipChildren ])
+		ifTrue: [ ^ false ].
+	
+	"a point is inside of me and I am a leaf element -> evaluate a block with me"
+	(isPointInsideMe and: [ self hasChildren not ])
+		ifTrue: [
+			aBlock value: self.
+			^ true ].
+		
+	anyChildFound := false.
+	
+	self children sortedByElevation reversed do: [ :eachChildElement |
+		| aPointInChildCoordinates |
+		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
+		
+		"(implementation detail) we do not wrap an or: statement in a block closure because we explicitly want to evaluate
+		it no matter of the value of the boolean"
+		anyChildFound := anyChildFound or: (eachChildElement withAllLeafChildrenAt: aPointInChildCoordinates do: aBlock) ].
+	
+	"if a point is inside of me but not in one of my children, then we treat me as a leaf"
+	(isPointInsideMe and: [ anyChildFound not ])
+		ifTrue: [
+			aBlock value: self.
+			^ true ].
+	
+	^ anyChildFound
 ]
 
 { #category : #'children accessing' }
