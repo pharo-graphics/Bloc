@@ -24,6 +24,11 @@ BlTaskAtPostponedTerminableTask >> command: aCommand [
 	valuable := aCommand asBlTktTerminableCommand.
 ]
 
+{ #category : #accessing }
+BlTaskAtPostponedTerminableTask >> entryIdentifier [
+	^ self command entryIdentifier
+]
+
 { #category : #initialization }
 BlTaskAtPostponedTerminableTask >> initialize [
 	super initialize.
