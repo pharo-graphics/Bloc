@@ -13,6 +13,15 @@ Class {
 	#category : #'Bloc-Basic'
 }
 
+{ #category : #'children accessing' }
+BlSceneInformingElement >> child [
+	<return: #BlElement>
+	self 
+		assert: [ self childrenCount = 1 ]
+		description: [ 'Scene informing element must have only one child to use this method' ].
+	^ self childAt: 1
+]
+
 { #category : #'api - event handlers' }
 BlSceneInformingElement >> onAddedToSceneDo: aBlock [
 	self addEventHandler: (BlElementAddedToSceneGraphEventHandler new valuable: aBlock)
