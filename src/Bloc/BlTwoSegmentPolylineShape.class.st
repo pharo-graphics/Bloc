@@ -8,17 +8,17 @@ Class {
 BlTwoSegmentPolylineShape class >> left: aLeftLine right: aRight [
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 BlTwoSegmentPolylineShape >> connection [
 	^ self left toPoint
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 BlTwoSegmentPolylineShape >> left [
 	^ self segmentAt: 1
 ]
 
-{ #category : #accessors }
+{ #category : #accessing }
 BlTwoSegmentPolylineShape >> right [
 	^ self segmentAt: 2
 ]

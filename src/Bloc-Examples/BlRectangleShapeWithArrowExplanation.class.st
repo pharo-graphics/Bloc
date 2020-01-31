@@ -31,7 +31,7 @@ ${example:BlRectangleShapeWithArrowExplanation>>#rectangleWithTopPolylineSplitIn
 !! Moving the top of the triangle
 
 Once we have everything we need for the arrow triangle we can move its top up by the length of the arrow. To do so we should send ${method:BlPointShape>>#moveBy:}$ to the connection point of the splitted line in the middle of the ==topEdge==. After doing so we receive the expected vector shape that we can later use together with ${class:BlShapeGeometry}$:
-${example:BlRectangleShapeWithArrowExplanation>>#rectangleWithTopArrow|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=250}$
+${example:BlRectangleShapeWithArrowExplanation>>#rectangleWithTopArrow|previewExpanded=true|previewHeight=350}$
 
 
 "
@@ -44,6 +44,17 @@ Class {
 { #category : #accessing }
 BlRectangleShapeWithArrowExplanation >> arrowLength [
 	^ 30
+]
+
+{ #category : #'examples - rectangle' }
+BlRectangleShapeWithArrowExplanation >> elementTallWithTopArrowGeometry [
+	<gtExample>
+	
+	^ BlElement new
+		geometry: (BlShapeGeometry new shape: (self rectangleWithTopArrow));
+		size: 300@400;
+		background: (Color veryVeryLightGray);
+		border: (BlBorder paint: Color black width: 2)
 ]
 
 { #category : #'examples - rectangle' }

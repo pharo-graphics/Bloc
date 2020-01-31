@@ -227,5 +227,8 @@ BlVectorShape >> shapesDo: aBlock [
 
 { #category : #'api - geometry' }
 BlVectorShape >> value: aRectangle [
-	self normalize scaleToFit: aRectangle
+	"I allow vector shapes to be used polymorphically with blocks."
+	self 
+		normalize;
+		scaleToFit: aRectangle
 ]

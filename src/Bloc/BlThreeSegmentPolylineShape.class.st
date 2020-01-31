@@ -4,7 +4,7 @@ Class {
 	#category : #'Bloc-Basic-Vector Shapes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BlThreeSegmentPolylineShape >> middle [
 	^ self segmentAt: 2
 ]
