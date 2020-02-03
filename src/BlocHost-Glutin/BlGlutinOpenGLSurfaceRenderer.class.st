@@ -14,6 +14,7 @@ BlGlutinOpenGLSurfaceRenderer >> initializeForSurface: aSurface [
 	aPixelFormat := window pixelFormat.
 
 	aSurface
+		context: window;
 		sampleCount: aPixelFormat multisapling;
 		stencilBits: aPixelFormat stencilBits;
 		framebufferId: 0;
