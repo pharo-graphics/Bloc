@@ -8,7 +8,9 @@ Class {
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'physicalSize',
-		'scaleFactor'
+		'scaleFactor',
+		'shouldUpdateEveryFrame',
+		'updateActions'
 	],
 	#category : #'Bloc-Universe - Renderer'
 }
@@ -27,6 +29,11 @@ BlHostRendererSurface class >> supportedBy: anObject [
 	<return: #Boolean>
 	
 	^ self subclassResponsibility
+]
+
+{ #category : #'api - updates' }
+BlHostRendererSurface >> addUpdateAction: aValuable [
+	updateActions add: aValuable
 ]
 
 { #category : #initialization }
@@ -53,6 +60,14 @@ BlHostRendererSurface >> extent [
 ]
 
 { #category : #initialization }
+BlHostRendererSurface >> initialize [
+	super initialize.
+	
+	shouldUpdateEveryFrame := false.
+	updateActions := OrderedCollection new
+]
+
+{ #category : #initialization }
 BlHostRendererSurface >> initializeForHostSpace: aBlHostSpace [
 	physicalSize := aBlHostSpace physicalSize.
 	scaleFactor := aBlHostSpace scaleFactor
@@ -66,6 +81,11 @@ BlHostRendererSurface >> logicalSize [
 	<return: #GtFensterLogicalSize>
 
 	^ self physicalSize asLogical: self scaleFactor
+]
+
+{ #category : #'api - updates' }
+BlHostRendererSurface >> performUpdates [
+	updateActions do: [ :eachUpdateAction | eachUpdateAction value ]
 ]
 
 { #category : #geometry }
@@ -85,4 +105,16 @@ BlHostRendererSurface >> scaleFactor [
 	<return: #Number>
 	
 	^ scaleFactor
+]
+
+{ #category : #'api - updates' }
+BlHostRendererSurface >> shouldUpdateEveryFrame [
+	<return: #Boolean>
+
+	^ shouldUpdateEveryFrame
+]
+
+{ #category : #'api - updates' }
+BlHostRendererSurface >> updateEveryFrame [
+	shouldUpdateEveryFrame := true
 ]

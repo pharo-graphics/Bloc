@@ -275,6 +275,17 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 ]
 
 { #category : #'event - visiting' }
+BlGlutinHostSpace >> visitMainEventsCleared: anEvent [
+	| aBlocEvent |	
+
+	aBlocEvent := BlSpaceWakeUpEvent new
+		timestamp: self space time now;
+		yourself.
+		
+	self enqueueEvent: aBlocEvent
+]
+
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitModifiersChanged: anEvent [
 	modifiers := self convertKeyModifiers: anEvent
 ]
@@ -330,6 +341,17 @@ BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
 
 { #category : #'event - visiting' }
 BlGlutinHostSpace >> visitTouchEvent: anEvent [
+]
+
+{ #category : #'event - visiting' }
+BlGlutinHostSpace >> visitUserEvent: anEvent [
+	| aBlocEvent |	
+
+	aBlocEvent := BlSpaceWakeUpEvent new
+		timestamp: self space time now;
+		yourself.
+
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - visiting' }

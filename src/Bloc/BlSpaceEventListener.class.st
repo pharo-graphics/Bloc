@@ -164,6 +164,11 @@ BlSpaceEventListener >> spaceScaled: anEvent [
 		requestNextPulse
 ]
 
+{ #category : #'window handlers' }
+BlSpaceEventListener >> spaceWakeUpEvent: anEvent [
+	self space requestNextPulse
+]
+
 { #category : #'other handlers' }
 BlSpaceEventListener >> swipeEvent: anEvent [
 ]

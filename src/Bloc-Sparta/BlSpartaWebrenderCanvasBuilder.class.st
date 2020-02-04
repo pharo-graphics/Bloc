@@ -69,7 +69,13 @@ BlSpartaWebrenderCanvasBuilder >> forOpenGLOn: aRendererSurface [
 		extent: aRendererSurface physicalSize asPoint
 		options: ((self class environment at: #WebrenderRendererOptions) new debugFlag: (self class environment at: #WebrenderDebugFlags) PROFILER_DBG).
 
-	^ (self class environment at: #WebrenderCanvas)
+	aRendererSurface addUpdateAction: [
+		aWebrender update.	
+		aWebrender render: aRendererSurface physicalSize asPoint.
+		aWebrender flushPipelineInfo ].
+	aRendererSurface updateEveryFrame.
+
+	^ (self class environment at: #WebrenderWindowCanvas)
 		extent: aRendererSurface physicalSize asPoint
 		webrender: aWebrender
 ]

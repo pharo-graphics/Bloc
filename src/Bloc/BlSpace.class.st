@@ -910,12 +910,7 @@ BlSpace >> removeChild: anElement [
 BlSpace >> render [
 	"Render this space in my host window if it is assigned, otherwise do nothing"
 
-	self
-		assert: [ self hasDirtyAreas ]
-		description: [ 'I must have dirty areas in order to be rendered' ].
-
-	self
-		hostSpaceDo: [ :aHostSpace | aHostSpace render: self ]
+	self hostSpaceDo: [ :aHostSpace | aHostSpace render: self ]
 ]
 
 { #category : #'focus managing' }

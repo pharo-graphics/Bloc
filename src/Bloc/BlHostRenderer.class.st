@@ -78,11 +78,13 @@ BlHostRenderer >> isValid [
 BlHostRenderer >> render: aHostSpace [
 	"Render a given space according to its dirty areas.
 	Note: if there are no dirty areas nothing will happen, including window or canvas update"
-	| aSpace |
+	| aSpace shouldUpdateEveryFrame isRenderNeeded |
 	
 	aSpace := aHostSpace space.
+	shouldUpdateEveryFrame := surface shouldUpdateEveryFrame.
+	isRenderNeeded := self isRenderNeeded: aSpace.
 
-	(self isRenderNeeded: aSpace)
+	(shouldUpdateEveryFrame or: [ isRenderNeeded ])
 		ifFalse: [ ^ self ].
 
 	self isValid
@@ -90,7 +92,13 @@ BlHostRenderer >> render: aHostSpace [
 
 	[ | theDamagedRectangles |
 		aHostSpace makeCurrent.
-		theDamagedRectangles := spaceRenderer renderSpace: aSpace.
+		
+		theDamagedRectangles := isRenderNeeded
+			ifTrue: [ spaceRenderer renderSpace: aSpace ]
+			ifFalse: [ #() ].
+
+		surface performUpdates.
+
 		surfaceRenderer renderSurface: surface damaged: theDamagedRectangles ]
 			ensure: [ self finishedRender: aSpace ]
 ]
