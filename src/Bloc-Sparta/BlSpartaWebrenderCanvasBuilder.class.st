@@ -32,7 +32,7 @@ BlSpartaWebrenderCanvasBuilder class >> priority [
 	Lower value - more likely canvas becomes a default"
 	<return: #Number>
 
-	^ 1
+	^ 100
 ]
 
 { #category : #testing }
@@ -67,7 +67,9 @@ BlSpartaWebrenderCanvasBuilder >> forOpenGLOn: aRendererSurface [
 	aWebrender := (self class environment at: #Webrender)
 		init: ((self class environment at: #GtGleamGL) loadGl: [ :aSymbol | aRendererSurface context getProcAddress: aSymbol ])
 		extent: aRendererSurface physicalSize asPoint
-		options: ((self class environment at: #WebrenderRendererOptions) new debugFlag: (self class environment at: #WebrenderDebugFlags) PROFILER_DBG).
+		options: ((self class environment at: #WebrenderRendererOptions) new
+			debugFlag: (self class environment at: #WebrenderDebugFlags) PROFILER_DBG";
+			debugFlag: (self class environment at: #WebrenderDebugFlags) COMPACT_PROFILER").
 
 	aRendererSurface addUpdateAction: [
 		aWebrender update.	

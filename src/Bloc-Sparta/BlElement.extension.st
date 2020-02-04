@@ -24,16 +24,6 @@ BlElement >> asSpartaForm [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlElement >> drawBackgroundOnSpartaCanvas: aCanvas [
-	self background drawOnSpartaCanvas: aCanvas of: self
-]
-
-{ #category : #'*Bloc-Sparta' }
-BlElement >> drawBorderOnSpartaCanvas: aCanvas [
-	self border drawOnSpartaCanvas: aCanvas of: self
-]
-
-{ #category : #'*Bloc-Sparta' }
 BlElement >> drawChildrenOnSpartaCanvas: aCanvas [
 
 	"If there are not children no need to draw and clip"
@@ -106,23 +96,19 @@ BlElement >> drawOnSpartaCanvas: aCanvas [
 	isBackgroundTransparent := self background isTransparent.
 	isBorderTransparent := self border isTransparent.
 	areBothTransparent := isBackgroundTransparent and: [ isBorderTransparent ].
-
+	
 	areBothTransparent
 		ifTrue: [ ^ self ].
 
-	"We create a new virtual layer in order to blend background and border only if they are both visible"
-	aCanvas layer
-		when: [ self outskirts wantsLayerOn: self ]
-		during: [
-			aCanvas
-				compose: #composeSource
-				when: [ self outskirts wantsLayerOn: self ]
-				during: [
-					self outskirts
-						drawBackground: [ self drawBackgroundOnSpartaCanvas: aCanvas ]
-						border: [ self drawBorderOnSpartaCanvas: aCanvas ]
-						of: self
-						onSpartaCanvas: aCanvas ] ]
+	aCanvas figure
+		path: (self geometry pathOnSpartaCanvas: aCanvas);
+		background: self background;
+		backgroundAlpha: self background opacity;
+		border: self border paint;
+		borderAlpha: self border opacity;
+		width: self border width;
+		in: [ :aPainter | self border style applyOn: aPainter ];
+		draw
 ]
 
 { #category : #'*Bloc-Sparta' }

@@ -13,7 +13,7 @@ Class {
 	#instVars : [
 		'borderListener'
 	],
-	#category : 'Bloc-Geometry-Arrowheads'
+	#category : #'Bloc-Geometry-Arrowheads'
 }
 
 { #category : #changes }
@@ -24,17 +24,6 @@ BlArrowheadElement >> beForZeroWidth [
 { #category : #initialization }
 BlArrowheadElement >> defaultOutskirts [
 	^ BlOutskirts centered
-]
-
-{ #category : #drawing }
-BlArrowheadElement >> drawOnSpartaCanvas: aCanvas [
-	"Override to avoid creation of new layers"
-
-	self outskirts
-		drawBackground: [ self drawBackgroundOnSpartaCanvas: aCanvas ]
-		border: [ self drawBorderOnSpartaCanvas: aCanvas ]
-		of: self
-		onSpartaCanvas: aCanvas
 ]
 
 { #category : #'geometry hooks' }
