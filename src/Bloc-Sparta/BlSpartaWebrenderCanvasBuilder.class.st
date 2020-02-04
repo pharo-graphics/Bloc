@@ -62,7 +62,7 @@ BlSpartaWebrenderCanvasBuilder class >> supportsOpenGLSurface [
 { #category : #'instance creation' }
 BlSpartaWebrenderCanvasBuilder >> forOpenGLOn: aRendererSurface [
 	| aWebrender |
-	<return: #WebrenderCanvas>
+	<return: #SpartaCanvas>
 	
 	aWebrender := (self class environment at: #Webrender)
 		init: ((self class environment at: #GtGleamGL) loadGl: [ :aSymbol | aRendererSurface context getProcAddress: aSymbol ])
