@@ -8,32 +8,8 @@ Class {
 	#instVars : [
 		'width'
 	],
-	#classInstVars : [
-		'cache',
-		'cacheSession'
-	],
 	#category : #'Bloc-Effect'
 }
-
-{ #category : #cache }
-BlGaussianShadowEffect class >> cache [
-	<return: #LRUCache>
-
-	cacheSession == Smalltalk session
-		ifFalse: [ cache := nil ].
-	^ cache ifNil: [
-		cacheSession := Smalltalk session.
-		cache := LRUCache new beThreadSafe maximumWeight: 100 ]
-]
-
-{ #category : #cache }
-BlGaussianShadowEffect class >> cachedSurfaceFor: aShadowProperties ifAbsentPut: anAbsentBlock [	
-	^ [ self cache
-		at: aShadowProperties
-		ifAbsentPut: anAbsentBlock ]
-			on: Error
-			do: [ anAbsentBlock value ]
-]
 
 { #category : #'instance creation' }
 BlGaussianShadowEffect class >> color: aColor width: aNumber offset: anOffset [
