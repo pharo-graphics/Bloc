@@ -2543,6 +2543,8 @@ BlElement >> outsets [
 
 { #category : #accessing }
 BlElement >> outskirts [
+	<return: #BlOutskirts>
+
 	^ outskirts
 ]
 

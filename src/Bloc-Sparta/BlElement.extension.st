@@ -108,6 +108,13 @@ BlElement >> drawOnSpartaCanvas: aCanvas [
 		borderAlpha: self border opacity;
 		width: self border width;
 		in: [ :aPainter | self border style applyOn: aPainter ];
+		in: [ :aPainter |
+			self outskirts = BlOutskirts outside
+				ifTrue: [ aPainter borderOutside ].
+			self outskirts = BlOutskirts centered
+				ifTrue: [ aPainter borderCentered ].
+			self outskirts = BlOutskirts inside
+				ifTrue: [ aPainter borderInside ] ];
 		draw
 ]
 
