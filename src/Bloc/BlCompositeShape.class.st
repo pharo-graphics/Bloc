@@ -22,10 +22,14 @@ BlCompositeShape >> asElementIn: aContainer [
 BlCompositeShape >> gtShapesFor: aView [
 	<gtView>
 	
-	^ aView list
+	^ aView tree
 		title: 'Shapes';
 		priority: 10;
-		items: [ self shapes ]
+		items: [ {self} ];
+		expandAll;
+		children: [ :each | (each  respondsTo: #shapes) 
+			ifTrue: [each shapes]
+			ifFalse: [{}]]
 ]
 
 { #category : #initialization }
