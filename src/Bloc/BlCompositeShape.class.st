@@ -22,14 +22,28 @@ BlCompositeShape >> asElementIn: aContainer [
 BlCompositeShape >> gtShapesFor: aView [
 	<gtView>
 	
-	^ aView tree
+	^ aView columnedTree
 		title: 'Shapes';
 		priority: 10;
 		items: [ {self} ];
 		expandAll;
 		children: [ :each | (each  respondsTo: #shapes) 
 			ifTrue: [each shapes]
-			ifFalse: [{}]]
+			ifFalse: [{}]];
+		column: 'Preview' do: [ :aColumn |
+			aColumn
+				noResize;
+				rowStencil: [ :eachShape |
+					| container |
+					container := BlVectorShapeContainerElement new
+						layout: BlFitLayout new;
+						constraintsDo: [:c | c horizontal fitContent. c vertical fitContent].
+					(eachShape asElementIn: container).
+					BlElement new
+						size: 50@30;
+						margin: (BlInsets top: 2 bottom: 2);
+						addChild: container asScalableElement ] ];
+		column: 'Shape' item: [ :each | each ]
 ]
 
 { #category : #initialization }
