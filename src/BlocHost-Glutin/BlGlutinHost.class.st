@@ -11,12 +11,6 @@ Class {
 	#category : #'BlocHost-Glutin-Host'
 }
 
-{ #category : #'mutual exclusion' }
-BlGlutinHost class >> critical: aBlock [
-	HostSpaceRegistryMutex ifNil: [ HostSpaceRegistryMutex := Semaphore forMutualExclusion ].
-	HostSpaceRegistryMutex critical: aBlock
-]
-
 { #category : #'api - ui process' }
 BlGlutinHost class >> forceResumeOfUIProcess: aProcess [
 	PulseLoop forceStartOfUIProcess: aProcess
@@ -29,10 +23,14 @@ BlGlutinHost class >> forceStartNewUIProcess [
 
 { #category : #'private - windows' }
 BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
-	self critical: [
+	| aHost |
+	
+	aHost := HostSpaceRegistryMutex critical: [
 		self spaceRegistry
 			at: aWindow id
-			ifPresent: aBlock ]
+			ifAbsent: [ nil ] ].
+	
+	aHost ifNotNil: aBlock
 ]
 
 { #category : #'class initialization' }
@@ -43,7 +41,8 @@ BlGlutinHost class >> initialize [
 		| process |
 		process := nil.
 		self uiProcessDo: [ :aUIProcess | process := aUIProcess ].
-		process ]
+		process ].
+	HostSpaceRegistryMutex := Mutex new
 ]
 
 { #category : #'api - lifecycle' }
@@ -123,40 +122,32 @@ BlGlutinHost >> createHostSpaceFor: aSpace [
 BlGlutinHost >> createWindowSpaceFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
 	I do not create any strong or weak references to provided space"
-	| aHostSpace |
+	| aHostSpace  windowBuilder windowedContext |
 
-	self critical: [
-		| windowBuilder windowedContext |
+	GlutinEventsFetcher default ensureEventsLoop.
 
-		GlutinEventsFetcher default ensureEventsLoop.
-
-		windowBuilder := GlutinWindowBuilder new
-			title: aSpace title;
-			extent: aSpace extent;
-			withDecorations: aSpace borderless not;
-			withTransparency: aSpace borderless;
-			withResizable: aSpace resizable;
-			withMaximized: aSpace maximized;
-			withFullSize: aSpace fullsize.
-		
-		windowedContext := GlutinEventsFetcher default eventsLoop createWindow: windowBuilder.
-		
-		aHostSpace := BlGlutinHostSpace new.
-		aHostSpace window: windowedContext.
-		
-		aHostSpace universe: self universe.
-		aHostSpace host: self.
-		aHostSpace space: aSpace.
-		aHostSpace withSpartaRenderer.
-		
-		self registerHostSpace: aHostSpace ].
+	windowBuilder := GlutinWindowBuilder new
+		title: aSpace title;
+		extent: aSpace extent;
+		withDecorations: aSpace borderless not;
+		withTransparency: aSpace borderless;
+		withResizable: aSpace resizable;
+		withMaximized: aSpace maximized;
+		withFullSize: aSpace fullsize.
+	
+	windowedContext := GlutinEventsFetcher default eventsLoop createWindow: windowBuilder.
+	
+	aHostSpace := BlGlutinHostSpace new.
+	aHostSpace window: windowedContext.
+	
+	aHostSpace universe: self universe.
+	aHostSpace host: self.
+	aHostSpace space: aSpace.
+	aHostSpace withSpartaRenderer.
+	
+	self registerHostSpace: aHostSpace.
 
 	^ aHostSpace
-]
-
-{ #category : #'mutual exclusion' }
-BlGlutinHost >> critical: aBlock [
-	self class critical: aBlock
 ]
 
 { #category : #'host - api' }
@@ -177,7 +168,7 @@ BlGlutinHost >> destroyHostSpaceFor: aSpace [
 
 { #category : #private }
 BlGlutinHost >> destroyWindowSpaceFor: aSpace [
-	self critical: [ self unregisterHostSpace: aSpace hostSpace ]
+	self unregisterHostSpace: aSpace hostSpace
 ]
 
 { #category : #'host - testing' }
@@ -199,7 +190,7 @@ BlGlutinHost >> openMorphicWorld [
 
 { #category : #initialize }
 BlGlutinHost >> registerHostSpace: aHostSpace [
-	self spaceRegistry at: aHostSpace window id put: aHostSpace
+	HostSpaceRegistryMutex critical: [ self spaceRegistry at: aHostSpace window id put: aHostSpace ]
 ]
 
 { #category : #private }
@@ -225,7 +216,7 @@ BlGlutinHost >> supportsOpenGLSurface [
 
 { #category : #initialize }
 BlGlutinHost >> unregisterHostSpace: aHostSpace [
-	self spaceRegistry
+	HostSpaceRegistryMutex critical: [ self spaceRegistry
 		removeKey: aHostSpace window id
-		ifAbsent: [  ]
+		ifAbsent: [  ] ]
 ]
