@@ -12,23 +12,18 @@ BlTktValuableCommand >> defaultValuable [
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
-BlTktValuableCommand >> ensureName [
-	name ifNil: [ self name: self valuable printString ]
-]
-
 { #category : #accessing }
 BlTktValuableCommand >> entryIdentifier [
 	"Answer the identity of the receiver for task scheduling.
 	Defer to my valuable."
 	
-	^valuable entryIdentifier
+	^ valuable entryIdentifier
 ]
 
 { #category : #accessing }
 BlTktValuableCommand >> entryPriority [
 
-	^valuable entryPriority
+	^ valuable entryPriority
 ]
 
 { #category : #initialization }
@@ -48,6 +43,6 @@ BlTktValuableCommand >> valuable: aValuable [
 	self
 		assert: [ aValuable isNotNil ] 
 		description: [ 'Valuable must be non-nil' ].
-	valuable := aValuable.
-	self ensureName.
+
+	valuable := aValuable
 ]

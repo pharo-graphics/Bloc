@@ -3,8 +3,8 @@ Extension { #name : #BlockClosure }
 { #category : #'*Bloc-TaskIt' }
 BlockClosure >> asBlTktCommand [
 	<return: #BlTktValuableCommand>
-	self numArgs = 0 ifTrue: [ ^ BlTktUnresponsiveCommand new valuable: self; name: self printString ].
-	self numArgs = 1 ifTrue: [ ^ BlTktResponsiveCommand new valuable: self; name: self printString ].
+	self numArgs = 0 ifTrue: [ ^ BlTktUnresponsiveCommand new valuable: self; name: 'BlockClosure without arguments' ].
+	self numArgs = 1 ifTrue: [ ^ BlTktResponsiveCommand new valuable: self; name: 'BlockClosure with 1 argument' ].
 	self error: 'BlockClosure must have zero or one argument'
 ]
 

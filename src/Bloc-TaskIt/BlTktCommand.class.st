@@ -18,6 +18,13 @@ BlTktCommand >> catchingErrors [
 	^ Error
 ]
 
+{ #category : #initialization }
+BlTktCommand >> initialize [
+	super initialize.
+	
+	name := 'Default'
+]
+
 { #category : #accessing }
 BlTktCommand >> name [
 	self
