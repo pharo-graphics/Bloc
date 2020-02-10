@@ -61,6 +61,8 @@ BlImageCache >> defaultImageSizes [
 
 	"Start with the larger dimension of the display and divide by 4 down to 200"
 	newSize := Display width max: Display height.
+	"If the display size doesn't look reasonable, use some defaults"
+	newSize < 600 ifTrue: [ newSize := 1200 ].
 	newImageSizes := Array new: 3.
 	newImageSizes
 		at: 1 put: 200;
