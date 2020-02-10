@@ -226,7 +226,7 @@ BlTktExamples >> responsiveValuableCommand [
 	aCommand := aBlock asBlTktCommand.
 	self assert: aCommand class equals: BlTktResponsiveCommand.
 	self assert: aCommand valuable equals: aBlock.
-	self assert: aCommand name equals: aBlock printString.
+	self assert: aCommand name equals: 'BlockClosure with 1 argument'.
 	^ aCommand
 ]
 
@@ -438,7 +438,7 @@ BlTktExamples >> unresponsiveValuableCommand [
 	aCommand := aBlock asBlTktCommand.
 	self assert: aCommand class equals: BlTktUnresponsiveCommand.
 	self assert: aCommand valuable equals: aBlock.
-	self assert: aCommand name equals: aBlock printString.
+	self assert: aCommand name equals: 'BlockClosure without arguments'.
 	^ aCommand
 ]
 
