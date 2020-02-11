@@ -20,6 +20,7 @@ Class {
 		'measurement'
 	],
 	#classVars : [
+		'DefaultText',
 		'ParagraphPool'
 	],
 	#category : #'Bloc-Text-Elements'
@@ -32,7 +33,8 @@ BlTextElement class >> cleanUp [
 
 { #category : #'class initialization' }
 BlTextElement class >> initialize [
-	ParagraphPool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000)
+	ParagraphPool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000).
+	DefaultText := 'Text' asRopedText readonly
 ]
 
 { #category : #'instance creation' }
@@ -132,7 +134,7 @@ BlTextElement >> defaultText [
 	"Return a default text I should be created with"
 	<return: #BlText>
 
-	^ BlRopedText string: 'Text'
+	^ DefaultText
 ]
 
 { #category : #initialization }
@@ -439,6 +441,9 @@ BlTextElement >> select: aFromIndex to: aToIndex [
 
 { #category : #'selection - management' }
 BlTextElement >> selectNone [
+	self selection isEmpty
+		ifTrue: [ ^ self ].
+
 	self selection removeAll.
 	self invalidate
 ]
