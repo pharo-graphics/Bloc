@@ -72,9 +72,11 @@ BlLinearGradientPaint >> matchExtent: anExtent [
 	
 	anExtent isZero
 		ifTrue: [ ^ self ].
-	
-	aDirection := (self end - self start) normalized.
-	
+		
+	aDirection :=  (self end - self start) isZero
+		ifTrue: [ 1@0 ]
+		ifFalse: [ (self end - self start) normalized ].
+
 	aStart := 0@0.
 	anEnd := aStart + (anExtent * aDirection).
 	
