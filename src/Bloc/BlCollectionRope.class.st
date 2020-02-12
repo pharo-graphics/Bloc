@@ -18,15 +18,21 @@ BlCollectionRope class >> collection: aCollection [
 
 { #category : #'instance creation' }
 BlCollectionRope class >> from: aLeftRope and: aRightRope [
+	| aNewSpecies |
+
 	self
-		assert: aLeftRope species = self collectionRope
+		assert: [ aLeftRope species = self collectionRope ]
 		description: [ 'Can only merge two collection ropes' ].
 	
 	self
-		assert: aRightRope species = self collectionRope
+		assert: [ aRightRope species = self collectionRope ]
 		description: [ 'Can only merge two collection ropes' ].
 	
-	^ self collection: (aLeftRope collection species streamContents: [ :aStream |
+	aNewSpecies := aLeftRope collection species = aRightRope collection species
+		ifTrue: [ aLeftRope collection species ]
+		ifFalse: [ Array ].
+	
+	^ self collection: (aNewSpecies streamContents: [ :aStream |
 		aLeftRope do: [ :eachItem | aStream nextPut: eachItem ].
 		aRightRope do: [ :eachItem | aStream nextPut: eachItem ] ])
 ]
@@ -92,6 +98,17 @@ BlCollectionRope >> collection: aCollection [
 	collection := aCollection
 ]
 
+{ #category : #private }
+BlCollectionRope >> copyFrom: aStart to: anEnd [
+	self assertAccessFrom: aStart to: anEnd.
+
+	"return this very rope if the requested interval exactly matches myself"
+	(aStart = 0 and: [ anEnd = self size ])
+		ifTrue: [ ^ self ].
+
+	^ self class collection: (collection copyFrom: aStart + 1 to: anEnd)
+]
+
 { #category : #'rope - deleting' }
 BlCollectionRope >> delete: aStart to: anEnd [
 	<return: #BlRope>
@@ -102,6 +119,10 @@ BlCollectionRope >> delete: aStart to: anEnd [
 	aStart = anEnd
 		ifTrue: [ ^ self ].
 	
+	"deleting from a long collection is not efficient, so we will use subropes instead"
+	self size >= self class combineLength
+		ifTrue: [ ^ (self from: 0 to: aStart) append: (self from: anEnd to: self size) ].
+
 	newCollection := collection species new: collection size - (anEnd - aStart).
 	
 	newCollection
@@ -302,6 +323,13 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 	^ self class
 		concatenate: (self class collectionRope collection: leftArray)
 		and: (self class collectionRope collection: rightArray)
+]
+
+{ #category : #'rope - replacing' }
+BlCollectionRope >> simplified [
+	<return: #BlRope>
+	
+	^ self
 ]
 
 { #category : #'rope - accessing' }

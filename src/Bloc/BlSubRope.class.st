@@ -199,6 +199,17 @@ BlSubRope >> rope: aRope offset: anOffset length: aLength [
 	length := aLength
 ]
 
+{ #category : #'rope - replacing' }
+BlSubRope >> simplified [
+	<return: #BlRope>
+
+	(self rope isLeaf and: [ (self size < self class combineLength) ])
+		ifTrue: [
+			^ self rope copyFrom: offset to: offset + length ].
+
+	^ self
+]
+
 { #category : #'rope - accessing' }
 BlSubRope >> size [
 	<return: #Number>

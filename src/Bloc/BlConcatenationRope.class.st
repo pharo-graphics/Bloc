@@ -278,6 +278,15 @@ BlConcatenationRope >> right [
 	^ right
 ]
 
+{ #category : #'rope - replacing' }
+BlConcatenationRope >> simplified [
+	<return: #BlRope>
+
+	^ self class
+		concatenate: left simplified
+		and: right simplified
+]
+
 { #category : #'rope - accessing' }
 BlConcatenationRope >> size [
 	^ length

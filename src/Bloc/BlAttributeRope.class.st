@@ -264,6 +264,15 @@ BlAttributeRope >> rope [
 	^ rope
 ]
 
+{ #category : #'rope - replacing' }
+BlAttributeRope >> simplified [
+	<return: #BlRope>
+
+	^ self class attributeRope
+		attributes: attributes
+		rope: (rope simplified)
+]
+
 { #category : #'rope - accessing' }
 BlAttributeRope >> size [
 	^ rope size

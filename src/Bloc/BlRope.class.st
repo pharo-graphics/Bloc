@@ -376,8 +376,10 @@ BlRope >> replaceAll: aCollectionOfAssociations [
 		sorted: [ :a :b | a key size > b key size ].
 		
 	aNewRope := self.
-	theSortedReplacements do: [ :eachReplacement | aNewRope := aNewRope replaceAll: eachReplacement key with: eachReplacement value ].
-	
+	theSortedReplacements do: [ :eachReplacement |
+		aNewRope := aNewRope replaceAll: eachReplacement key with: eachReplacement value ].
+	aNewRope := aNewRope simplified.
+
 	^ aNewRope
 ]
 
@@ -396,7 +398,7 @@ BlRope >> replaceAll: oldSubCollection with: newCollection [
 					replaceFrom: currentIndex
 					to: endIndex
 					with: newCollection.
-				startSearch := currentIndex + newCollection size ].
+			startSearch := currentIndex + newCollection size ].
 
 	^ aNewRope
 ]
@@ -406,6 +408,13 @@ BlRope >> replaceFrom: aStart to: anEnd with: aCollection [
 	"Replace a piece of the rope with a given collection of items"
 
 	^ (self delete: aStart to: anEnd) insertItems: aCollection at: aStart
+]
+
+{ #category : #'rope - replacing' }
+BlRope >> simplified [
+	<return: #BlRope>
+
+	^ self subclassResponsibility
 ]
 
 { #category : #'rope - accessing' }
