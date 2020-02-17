@@ -43,6 +43,15 @@ BlFrameLayoutConstraintsHorizontal >> alignRight [
 	alignment := BlElementAlignment horizontal end
 ]
 
+{ #category : #alignment }
+BlFrameLayoutConstraintsHorizontal >> alignRightAt: aUnitCoordinateNumber [
+	"Align the right of the element horizontally with a unit-coordinate inside of the parent"
+
+	alignment := BlHorizontalCoordinateStartAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment horizontal end
+]
+
 { #category : #accessing }
 BlFrameLayoutConstraintsHorizontal >> alignment [
 	^ alignment
