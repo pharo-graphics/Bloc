@@ -185,7 +185,7 @@ BlGlutinHost >> isStillAvailable [
 
 { #category : #'host - api' }
 BlGlutinHost >> openMorphicWorld [
-	GlutinWorldRenderer openMorphicWorld
+	GlutinWorldOpenGLRenderer openMorphicWorld
 ]
 
 { #category : #initialize }
