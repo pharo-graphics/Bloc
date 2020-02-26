@@ -7,7 +7,7 @@ BlHistogram >> buildPathOnSpartaCanvas: aCanvas [
 	self values
 		ifEmpty: [ ^ self geometryBounds ].
 	
-	anOrigin := self computeOrigin.
+	anOrigin := self computeOrigin asFloatPoint.
 	aDelta := self computeDelta.
 	aLengthVector := self computeLengthVector.
 
