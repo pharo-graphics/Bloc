@@ -3453,6 +3453,53 @@ BlElement >> width: aNumber [
 ]
 
 { #category : #'api - children enumeration' }
+BlElement >> withAllChildrenAt: aPoint [
+	<return: #Collection of: #BlElement>
+
+	^ Array streamContents: [ :aStream | self withAllChildrenAt: aPoint do: [ :eachElement | aStream nextPut: eachElement ] ]
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> withAllChildrenAt: aPoint do: aBlock [
+	"Evaluate a given Block with all elements under a given point provided
+	in *my* local coordinates sorted in the order they are displayed (children reversed + elevation based).
+	Return true if aBlock was evaluated, false otherwise"
+	<return: #Boolean>
+	| isPointInsideMe anyChildFound |
+
+	isPointInsideMe := self containsPoint: aPoint.
+	
+	"if point is not inside of me and I clip children, it literally
+	mean that there neither me nor my children are visible at a given point"
+	(isPointInsideMe not and: [ self clipChildren ])
+		ifTrue: [ ^ false ].
+	
+	"a point is inside of me and I am a leaf element -> evaluate a block with me"
+	(isPointInsideMe and: [ self hasChildren not ])
+		ifTrue: [
+			aBlock value: self.
+			^ true ].
+
+	anyChildFound := false.
+	
+	self children sortedByElevation reversed do: [ :eachChildElement |
+		| aPointInChildCoordinates |
+		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
+		
+		"(implementation detail) we do not wrap an or: statement in a block closure because we explicitly want to evaluate
+		it no matter of the value of the boolean"
+		anyChildFound := anyChildFound or: (eachChildElement withAllChildrenAt: aPointInChildCoordinates do: aBlock) ].
+	
+	"if a point is inside of me, evaluate a block regardless whether there were any child"
+	isPointInsideMe
+		ifTrue: [
+			aBlock value: self.
+			^ true ].
+	
+	^ anyChildFound
+]
+
+{ #category : #'api - children enumeration' }
 BlElement >> withAllChildrenBreadthFirst [
 	| all |
 	all := OrderedCollection with: self.

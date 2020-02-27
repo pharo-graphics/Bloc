@@ -35,6 +35,32 @@ TBlDrawingCache classSide >> disableDrawingCacheFor: anElement during: aBlock [
 ]
 
 { #category : #'api - drawing cache' }
+TBlDrawingCache classSide >> drawingCacheBackgroundsFor: anElement [
+	| theBackgrounds isMyselfFound isOpaqueFound |
+	
+	theBackgrounds := OrderedCollection new.
+	
+	isMyselfFound := false.
+	isOpaqueFound := false.
+	anElement topMostParent
+		withAllChildrenAt: anElement bounds inLocal center
+		do: [ :eachChild |
+			isOpaqueFound
+				ifTrue: [ ^ theBackgrounds ].
+			isMyselfFound
+				ifFalse: [ isMyselfFound := eachChild == anElement ].
+			isMyselfFound
+				ifTrue: [	
+					((eachChild background isKindOf: BlPaintBackground)
+						and: [ eachChild background paint isKindOf: BlColorPaint ])
+							ifTrue: [
+								isOpaqueFound := eachChild background isOpaque.
+								theBackgrounds add: eachChild background paint color ] ] ].
+	
+	^ theBackgrounds
+]
+
+{ #category : #'api - drawing cache' }
 TBlDrawingCache classSide >> enableDrawingCacheFor: anElement [
 	anElement userData
 		at: #blDrawingCacheEnabled

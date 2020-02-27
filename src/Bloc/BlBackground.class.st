@@ -67,6 +67,14 @@ BlBackground >> defaultOpacity [
 ]
 
 { #category : #testing }
+BlBackground >> isOpaque [
+	"Return true if the whole background is opaque"
+	<return: #Boolean>
+	
+	^ false
+]
+
+{ #category : #testing }
 BlBackground >> isTransparent [
 	"Return true if background is transparent and should not be rendered, false otherwise"
 	<return: #Boolean>

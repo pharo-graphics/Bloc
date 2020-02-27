@@ -18,7 +18,17 @@ TBlDrawingCache >> drawMeWithEffectsOnCanvas: aCanvas [
 		theBounds := self invalidationBounds: BlBounds new.
 		theBounds scaleBy: aGlobalToLocalScale.
 
-		aCachedSurface := aCanvas similar: theBounds extent ceiling asIntegerPoint during: [ :aCachedCanvas |
+		aCachedSurface := aCanvas 
+			similar: theBounds extent ceiling asIntegerPoint
+			during: [ :aCachedCanvas |
+				| theBackgrounds |
+				
+				theBackgrounds := self class drawingCacheBackgroundsFor: self.
+				theBackgrounds reverseDo: [ :eachColor |
+					aCachedCanvas fill
+						paint: eachColor;
+						path: aCachedCanvas bounds;
+						draw ].
 				aCachedCanvas transform
 					by: [ :aTransform | aTransform scaleBy: aGlobalToLocalScale asPoint ]
 					during: [ super drawMeWithEffectsOnCanvas: aCachedCanvas ].

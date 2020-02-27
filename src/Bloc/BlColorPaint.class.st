@@ -64,6 +64,15 @@ BlColorPaint >> hash [
 ]
 
 { #category : #testing }
+BlColorPaint >> isOpaque [
+	"Color paint is opaque when underlying color is opaque
+	@see BlPaint>>#isOpaque"
+	<return: #Boolean>
+
+	^ color isOpaque
+]
+
+{ #category : #testing }
 BlColorPaint >> isTransparent [
 	"Color paint is transparent when underlying color is transparent
 	@see BlPaint>>#isTransparent"
