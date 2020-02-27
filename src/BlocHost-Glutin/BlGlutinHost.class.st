@@ -8,6 +8,9 @@ Class {
 		'PulseLoop',
 		'UserInterruptEventHandler'
 	],
+	#classInstVars : [
+		'hdpiRenderer'
+	],
 	#category : #'BlocHost-Glutin-Host'
 }
 
@@ -19,6 +22,16 @@ BlGlutinHost class >> forceResumeOfUIProcess: aProcess [
 { #category : #'api - ui process' }
 BlGlutinHost class >> forceStartNewUIProcess [
 	PulseLoop forceStartNewUIProcess
+]
+
+{ #category : #accessing }
+BlGlutinHost class >> hdpiRenderer [
+	^ hdpiRenderer ifNil: [ false ]
+]
+
+{ #category : #accessing }
+BlGlutinHost class >> hdpiRenderer: aBoolean [
+	hdpiRenderer := aBoolean
 ]
 
 { #category : #'private - windows' }
@@ -64,6 +77,19 @@ BlGlutinHost class >> label [
 	<return: #String>
 
 	^ 'Glutin'
+]
+
+{ #category : #preferences }
+BlGlutinHost class >> preferencesOn: aBuilder [
+	<systemsettings>
+			
+	(aBuilder setting: #hdpiRenderer)
+		parent: #Bloc;
+		order: 10;
+		target: self;
+		label: 'Glutin - HDPI';
+		description: 'Enable HDPI Morphic Renderer';
+		default: [ true ]
 ]
 
 { #category : #'driver selection' }
@@ -185,7 +211,9 @@ BlGlutinHost >> isStillAvailable [
 
 { #category : #'host - api' }
 BlGlutinHost >> openMorphicWorld [
-	GlutinWorldOpenGLRenderer openMorphicWorld
+	self class hdpiRenderer
+		ifTrue: [ GlutinWorldSpartaRenderer openMorphicWorld ]
+		ifFalse: [ GlutinWorldOpenGLRenderer openMorphicWorld ]
 ]
 
 { #category : #initialize }
