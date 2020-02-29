@@ -43,7 +43,7 @@ TBlDrawingCache classSide >> drawingCacheBackgroundsFor: anElement [
 	isMyselfFound := false.
 	isOpaqueFound := false.
 	anElement topMostParent
-		withAllChildrenAt: anElement bounds inLocal center
+		withAllChildrenAt: anElement bounds inSpace center
 		do: [ :eachChild |
 			isOpaqueFound
 				ifTrue: [ ^ theBackgrounds ].
