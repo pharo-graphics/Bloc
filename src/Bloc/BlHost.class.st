@@ -85,6 +85,13 @@ BlHost class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 ]
 
+{ #category : #'host space - accessing' }
+BlHost class >> universe [
+	<return: #BlParallelUniverse>
+
+	^ BlParallelUniverse forHost: self
+]
+
 { #category : #'host - api' }
 BlHost >> createHostSpaceFor: aSpace [
 	self subclassResponsibility
@@ -161,5 +168,5 @@ BlHost >> uiProcessDo: aBlock [
 BlHost >> universe [
 	<return: #BlParallelUniverse>
 	
-	^ BlParallelUniverse forHost: self class
+	^ self class universe
 ]
