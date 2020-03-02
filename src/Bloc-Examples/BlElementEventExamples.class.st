@@ -4,7 +4,7 @@ I contain examples of different BlElementEvents
 Class {
 	#name : #BlElementEventExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #examples }
@@ -184,7 +184,7 @@ BlElementEventExamples >> removedFromParent [
 	wasRemoved := 0.
 	
 	child := self child.
-	child addEventHandlerOn: BlElementRemovedEvent do: [ wasRemoved := wasRemoved + 1 ].
+	child addEventHandlerOn: BlElementRemovedFromParentEvent do: [ wasRemoved := wasRemoved + 1 ].
 	
 	parent := self parent.
 	container := self container.

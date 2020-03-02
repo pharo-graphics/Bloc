@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'valuable'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #accessing }

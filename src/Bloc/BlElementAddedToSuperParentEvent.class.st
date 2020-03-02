@@ -9,8 +9,18 @@ Class {
 	#instVars : [
 		'addedElement'
 	],
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Element'
 }
+
+{ #category : #'api - enable / disable' }
+BlElementAddedToSuperParentEvent class >> enableIn: anObject [
+	anObject enableAddedToSuperParent
+]
+
+{ #category : #'api - enable / disable' }
+BlElementAddedToSuperParentEvent class >> wantedIn: anObject [
+	^ anObject wantsAddedToSuperParent
+]
 
 { #category : #accessing }
 BlElementAddedToSuperParentEvent >> addedElement [

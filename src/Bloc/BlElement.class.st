@@ -1074,7 +1074,7 @@ BlElement >> dispatchRemovedFromParent: aParentElement [
 	"Sent after I was removed from my parent and is not longer its direct child.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
-	self dispatchEvent: (BlElementRemovedEvent target: self).
+	self dispatchEvent: (BlElementRemovedFromParentEvent target: self).
 	self onRemovedFromParent: aParentElement
 ]
 
@@ -1615,7 +1615,7 @@ BlElement >> initialize [
 	measuredBounds := BlElementLocalBounds new referenceElement: self.
 	changes := BlElementChanges new.
 
-	eventDispatcher := BlBubblingEventDispatcher on: self.
+	eventDispatcher := BlElementEventDispatcher on: self.
 	constraints := BlLayoutCommonConstraints new.
 	self resetChildrenArray.
 

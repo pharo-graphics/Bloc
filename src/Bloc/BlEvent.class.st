@@ -10,11 +10,20 @@ Class {
 		'currentTarget',
 		'timestamp',
 		'canBePropagated',
-		'consumed',
-		'traversedTargets'
+		'consumed'
 	],
 	#category : #'Bloc-Events'
 }
+
+{ #category : #'api - enable / disable' }
+BlEvent class >> disableIn: anEventDispatcher [
+	anEventDispatcher disableGeneralEventType: self
+]
+
+{ #category : #'api - enable / disable' }
+BlEvent class >> enableIn: anEventDispatcher [
+	anEventDispatcher enableGeneralEventType: self
+]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent [
@@ -40,14 +49,25 @@ BlEvent class >> fireEvent: anEvent target: anEventTarget [
 	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
+{ #category : #accessing }
+BlEvent class >> target: anObject [
+	^ self new
+		target: anObject;
+		yourself
+]
+
+{ #category : #'api - enable / disable' }
+BlEvent class >> wantedIn: anEventDispatcher [
+	^ anEventDispatcher wantsGeneralEventType: self
+]
+
 { #category : #'private - steps' }
 BlEvent >> arrivedTarget: aTBlEventTarget [
 	self
 		assert: [ aTBlEventTarget isNotNil ]
 		description: [ 'Target must not be nil' ].
 
-	currentTarget := aTBlEventTarget.	
-	self traversedTargets add: (BlEventTraversalTargetStep new target: currentTarget)
+	currentTarget := aTBlEventTarget
 ]
 
 { #category : #'private - steps' }
@@ -56,13 +76,14 @@ BlEvent >> bubblingTarget: aTBlEventTarget [
 		assert: [ aTBlEventTarget isNotNil ]
 		description: [ 'Target must not be nil' ].
 
-	currentTarget := aTBlEventTarget.	
-	self traversedTargets add: (BlEventTraversalBubblingStep new target: currentTarget)
+	currentTarget := aTBlEventTarget
 ]
 
 { #category : #testing }
 BlEvent >> canBePropagated [
-	^ canBePropagated ifNil: [ canBePropagated := true ]
+	<return: #Boolean>
+
+	^ canBePropagated
 ]
 
 { #category : #'private - accessing' }
@@ -76,8 +97,7 @@ BlEvent >> capturingTarget: aTBlEventTarget [
 		assert: [ aTBlEventTarget isNotNil ]
 		description: [ 'Target must not be nil' ].
 
-	currentTarget := aTBlEventTarget.	
-	self traversedTargets add: (BlEventTraversalCapturingStep new target: currentTarget)
+	currentTarget := aTBlEventTarget
 ]
 
 { #category : #testing }
@@ -89,10 +109,7 @@ BlEvent >> consumed: aBoolean [
 BlEvent >> copyFrom: anEvent [
 	super copyFrom: anEvent.
 
-	"We re-initialize traversed targets in order to support event convertion like #asClickEvent
-	because the event that we are copying from might have already other traversed targets"
-	traversedTargets := LinkedList new.
-	"new copies are not consumed yet"
+	"new copies are not yet consumed"
 	consumed := false
 ]
 
@@ -121,8 +138,48 @@ BlEvent >> forwardingTarget: aTBlEventTarget [
 		assert: [ aTBlEventTarget isNotNil ]
 		description: [ 'Target must not be nil' ].
 
-	currentTarget := aTBlEventTarget.	
-	self traversedTargets add: (BlEventTraversalForwardingStep new target: currentTarget)
+	currentTarget := aTBlEventTarget
+]
+
+{ #category : #'as yet unclassified' }
+BlEvent >> gtInspectorCurrentTargetIn: composite [
+	<gtInspectorPresentationOrder: 15>
+	
+	(self currentTarget isKindOf: BlElement)
+		ifTrue: [ (self currentTarget gtInspectorPreviewIn: composite) title: 'Current target' ]
+]
+
+{ #category : #'as yet unclassified' }
+BlEvent >> gtInspectorTargetIn: composite [
+	<gtInspectorPresentationOrder: 15>
+	
+	(self target isKindOf: BlElement)
+		ifTrue: [ (self target gtInspectorPreviewIn: composite) title: 'Target' ]
+]
+
+{ #category : #'as yet unclassified' }
+BlEvent >> gtInspectorTraversedTargetsIn: aComposite [
+	<gtInspectorPresentationOrder: 10>
+
+	^ aComposite table
+		title: 'Traversed';
+		display: [ self traversedTargets ];
+		icon: [ :each | each target asSpartaForm scaledToSize: 16@16 ];
+		column: 'Phase'
+			evaluated: [ :each | each type ]
+			width: 100;
+		column: 'Target'
+			evaluated: [ :each | each target ];
+		column: 'Dispatcher'
+			evaluated: [ :each | each dispatcher ]
+]
+
+{ #category : #'as yet unclassified' }
+BlEvent >> gtInspectorTraversedTargetsOnTreeIn: composite [
+	<gtInspectorPresentationOrder: 15>
+	composite blocMondrian
+		title: 'Tree';
+		painting: [ :view | self traversedTargetsTreeWith: view ]
 ]
 
 { #category : #testing }
@@ -136,7 +193,8 @@ BlEvent >> hasSource [
 BlEvent >> initialize [
 	super initialize.
 	
-	traversedTargets := LinkedList new
+	consumed := false.
+	canBePropagated := true
 ]
 
 { #category : #testing }
@@ -161,7 +219,9 @@ BlEvent >> isClick [
 
 { #category : #testing }
 BlEvent >> isConsumed [
-	^ consumed ifNil: [ consumed := false ]
+	<return: #Boolean>
+
+	^ consumed
 ]
 
 { #category : #testing }
@@ -171,6 +231,11 @@ BlEvent >> isDoubleClick [
 
 { #category : #testing }
 BlEvent >> isDrag [
+	^ false
+]
+
+{ #category : #testing }
+BlEvent >> isElementEvent [
 	^ false
 ]
 
@@ -264,9 +329,7 @@ BlEvent >> newCopyFor: aTarget [
 
 { #category : #copying }
 BlEvent >> postCopy [
-	super postCopy.
-	
-	traversedTargets := traversedTargets copy
+	super postCopy
 ]
 
 { #category : #sending }
@@ -324,5 +387,66 @@ BlEvent >> timestamp: aDateAndTime [
 
 { #category : #'api - accessing' }
 BlEvent >> traversedTargets [
-	^ traversedTargets
+	^ #()
+]
+
+{ #category : #'as yet unclassified' }
+BlEvent >> traversedTargetsTreeWith: mondrian [
+	| thePairs connectedTargets topMostTarget aCurrentTarget |
+	
+	self traversedTargets
+		ifEmpty: [ ^ self ].
+	
+	thePairs := Array streamContents: [ :aStream | 
+		self traversedTargets overlappingPairsDo: [ :from :to | aStream nextPut: from -> to ] ].
+
+	aCurrentTarget := self traversedTargets first target.
+	topMostTarget := (aCurrentTarget hasOwner)
+		ifTrue: [ aCurrentTarget owner topMostParent ]
+		ifFalse: [ aCurrentTarget ].
+	connectedTargets := (topMostTarget isKindOf: BlElement)
+		ifFalse: [ { topMostTarget } ] 
+		ifTrue: [					
+			| allNodes |
+			allNodes := OrderedCollection with: topMostTarget.
+			topMostTarget eventDispatcher handlersDo: [ :aHandler |
+					aHandler hasOwner ifTrue: [ allNodes add: aHandler ] ].
+			topMostTarget allChildrenBreadthFirstDo: [ :eachElement |
+				allNodes add: eachElement.
+				eachElement eventDispatcher handlersDo: [ :aHandler |
+					aHandler hasOwner ifTrue: [ allNodes add: aHandler ] ] ].
+			allNodes ]. 
+
+	mondrian nodes
+		shape: [ :aTarget |
+			| text |
+			text := aTarget gtDisplayString asRopedText.
+			text foreground: Color lightGray.
+			BlTextElement new
+				text: text;
+				padding: (BlInsets all: 5) ];
+		with: (connectedTargets).
+	mondrian edges
+		fromRightCenter;
+		toLeftCenter;
+		shape: [ :x | BlLineElement new border: (BlBorder paint: (Color lightGray alpha: 0.4)) ];
+		connect: (connectedTargets select: [ :each | each hasOwner ])
+			from: [ :aTarget | aTarget owner ].
+
+	mondrian edges
+		shape: [ :x |
+			| color |
+			color := Color red.
+			(x value isKindOf: BlEventTraversalBubblingStep) ifTrue: [ color := Color blue ].
+			(x value isKindOf: BlEventTraversalTargetStep) ifTrue: [ color := Color green ].
+			(x value isKindOf: BlEventTraversalForwardingStep) ifTrue: [ color := Color gray ].
+			BlParabollaArcElement new 
+				border: (BlBorder paint: (color alpha: 0.4) width: 2);
+				curvatureFraction: 0.2;
+				toHead: (BlArrowheadSimpleArrow new
+					border: (BlBorder builder paint: (color alpha: 0.4); width: 2; build)) ];
+		passive;
+		connect: thePairs from: [ :x | x key target ]
+		to: [ :x | x value target ].
+	mondrian layout horizontalTree nodeDistance: 40
 ]

@@ -16,7 +16,7 @@ Class {
 		'action',
 		'eventClass'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'instance creation' }
@@ -53,6 +53,16 @@ BlEventHandler >> action: anObject [
 	action := anObject
 ]
 
+{ #category : #'api - hooks' }
+BlEventHandler >> disableEventsIn: anElementEventDispatcher [
+	anElementEventDispatcher disableEventType: self eventClass
+]
+
+{ #category : #'api - hooks' }
+BlEventHandler >> enableEventsIn: anElementEventDispatcher [
+	anElementEventDispatcher enableEventType: self eventClass
+]
+
 { #category : #'private - accessing' }
 BlEventHandler >> eventClass [
 	^ eventClass
@@ -61,6 +71,11 @@ BlEventHandler >> eventClass [
 { #category : #'private - accessing' }
 BlEventHandler >> eventClass: anObject [
 	eventClass := anObject
+]
+
+{ #category : #'as yet unclassified' }
+BlEventHandler >> eventsToHandle [
+	^ { self eventClass }
 ]
 
 { #category : #'api - event managing' }

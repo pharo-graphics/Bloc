@@ -6,7 +6,7 @@ I listen to ${class:BlElementRemovedFromSceneGraphEvent}$ events and perform ${m
 Class {
 	#name : #BlElementRemovedFromSceneGraphEventHandler,
 	#superclass : #BlSceneInformingEventHandler,
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #accessing }

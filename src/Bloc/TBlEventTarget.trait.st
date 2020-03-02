@@ -4,7 +4,7 @@ Any object that needs to be able to handle events should use me.
 "
 Trait {
 	#name : #TBlEventTarget,
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #'event management' }
@@ -52,7 +52,7 @@ TBlEventTarget >> dispatchEvent: anEvent [
 	"I only call my event dispatcher, so the event can be only handled by my event handlers/filters"
 
 	anEvent hasSource
-		ifFalse: [ anEvent source: anEvent ].
+		ifFalse: [ anEvent source: self ].
 
 	anEvent target: self.
 	anEvent forwardingTarget: self.
@@ -74,8 +74,15 @@ TBlEventTarget >> fireEvent: anEvent [
 	"I fire provided event building an event dispatcher chain
 	(from target to the root element) and dispatch the event with it.
 	anEvent must not be nil"
+	| aDispatcherChain |
 
-	BlEvent fireEvent: anEvent target: self
+	anEvent hasSource
+		ifFalse: [ anEvent source: self ].
+
+	anEvent target: self.
+
+	aDispatcherChain := self buildEventDispatchChain: BlEventDispatcherChain empty.
+	aDispatcherChain dispatchEvent: anEvent
 ]
 
 { #category : #'event management accessing' }

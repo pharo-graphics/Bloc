@@ -1,12 +1,12 @@
 Class {
 	#name : #BlInfiniteLayoutStepFlags,
-	#superclass : #BlInfiniteFlags,
+	#superclass : #BlBitflags,
 	#classVars : [
 		'Animations',
 		'Layout',
 		'Start'
 	],
-	#category : 'Bloc-Infinite-Flags'
+	#category : #'Bloc-Infinite-Flags'
 }
 
 { #category : #'accessing - flags' }
@@ -33,9 +33,9 @@ BlInfiniteLayoutStepFlags class >> flagsDecl [
 	self rebuildFlagsAccessors
 	"
 	^ {
-		#START -> 1.
-		#LAYOUT -> (1 << 1).
-		#ANIMATIONS -> (1 << 2).
+		#START.
+		#LAYOUT.
+		#ANIMATIONS.
 	}
 ]
 

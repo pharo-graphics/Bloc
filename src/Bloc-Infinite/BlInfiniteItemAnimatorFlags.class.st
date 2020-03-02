@@ -1,6 +1,6 @@
 Class {
 	#name : #BlInfiniteItemAnimatorFlags,
-	#superclass : #BlInfiniteFlags,
+	#superclass : #BlBitflags,
 	#classVars : [
 		'AppearedInPreLayout',
 		'Changed',
@@ -8,7 +8,7 @@ Class {
 		'Moved',
 		'Removed'
 	],
-	#category : 'Bloc-Infinite-Flags'
+	#category : #'Bloc-Infinite-Flags'
 }
 
 { #category : #'accessing - flags' }

@@ -11,7 +11,7 @@ Class {
 		'previous',
 		'dispatcher'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #'instance creation' }
@@ -54,6 +54,17 @@ BlEventDispatcherChain >> first [
 	^ self hasPrevious
 		ifTrue: [ self previous first ]
 		ifFalse: [ self ]
+]
+
+{ #category : #'as yet unclassified' }
+BlEventDispatcherChain >> gtInspectorDispatchersIn: aComposite [
+	<gtInspectorPresentationOrder: 80>
+
+	^ aComposite fastTable
+		title: 'Dispatchers';
+		display: [ self withAllPrevious reversed select: #hasDispatcher thenCollect: #dispatcher ];
+		column: 'Dispatcher' evaluated: #yourself;
+		column: 'Type' evaluated: #type
 ]
 
 { #category : #'private - testing' }

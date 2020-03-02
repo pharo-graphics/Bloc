@@ -16,7 +16,7 @@ Class {
 		'events',
 		'handledEvents'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'instance creation' }
@@ -58,6 +58,11 @@ BlSharedEventDistributor >> dispatch: anEvent on: anElement [
 { #category : #accessing }
 BlSharedEventDistributor >> elements [
 	^ elements asArray
+]
+
+{ #category : #'as yet unclassified' }
+BlSharedEventDistributor >> eventsToHandle [
+	^ events
 ]
 
 { #category : #'gt-extension' }

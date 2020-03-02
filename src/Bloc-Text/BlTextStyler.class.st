@@ -36,7 +36,7 @@ BlTextStyler >> initialize [
 	super initialize.
 	
 	stylingEnabled := true.
-	eventDispatcher := BlBubblingEventDispatcher on: self.
+	eventDispatcher := BlDirectEventDispatcher on: self.
 ]
 
 { #category : #private }

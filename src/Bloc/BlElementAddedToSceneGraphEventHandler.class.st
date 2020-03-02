@@ -6,7 +6,7 @@ I listen to ${class:BlElementAddedToSceneGraphEvent}$ events and perform ${metho
 Class {
 	#name : #BlElementAddedToSceneGraphEventHandler,
 	#superclass : #BlSceneInformingEventHandler,
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #accessing }

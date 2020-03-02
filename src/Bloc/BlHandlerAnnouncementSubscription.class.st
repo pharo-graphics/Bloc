@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'subscriber'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #comparing }
@@ -43,7 +43,7 @@ BlHandlerAnnouncementSubscription >> hash [
 
 { #category : #accessing }
 BlHandlerAnnouncementSubscription >> subscriber [
-	<return: #TBlEventHandler>
+	<return: #BlBasicEventHandler>
 
 	^ subscriber
 ]

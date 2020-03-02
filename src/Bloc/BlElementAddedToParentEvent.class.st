@@ -18,8 +18,18 @@ parent addChild: child.
 Class {
 	#name : #BlElementAddedToParentEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Element'
 }
+
+{ #category : #'api - enable / disable' }
+BlElementAddedToParentEvent class >> enableIn: anObject [
+	anObject enableAddedToParent
+]
+
+{ #category : #'api - enable / disable' }
+BlElementAddedToParentEvent class >> wantedIn: anObject [
+	^ anObject wantsAddedToParent
+]
 
 { #category : #sending }
 BlElementAddedToParentEvent >> sendTo: anObject [

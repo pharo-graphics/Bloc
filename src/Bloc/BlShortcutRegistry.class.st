@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'shortcuts'
 	],
-	#category : #'Bloc-Events-KeyBinding'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'adding / removing' }

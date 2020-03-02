@@ -1,14 +1,14 @@
 Class {
-	#name : #BlInfiniteFlags,
+	#name : #BlBitflags,
 	#superclass : #Object,
 	#instVars : [
 		'value'
 	],
-	#category : 'Bloc-Infinite-Flags'
+	#category : #'Bloc-DataStructure - Bitflags'
 }
 
 { #category : #'private - class code' }
-BlInfiniteFlags class >> defineFlagAccesorFor: flagName [
+BlBitflags class >> defineFlagAccesorFor: flagName [
 	"Define accessors as class methods"
 	| code |
 	
@@ -22,7 +22,7 @@ BlInfiniteFlags class >> defineFlagAccesorFor: flagName [
 ]
 
 { #category : #'private - instance code' }
-BlInfiniteFlags class >> defineFlagAddAccesorFor: flagName [
+BlBitflags class >> defineFlagAddAccesorFor: flagName [
 	| code |
 	
 	code := 'add', flagName, '
@@ -35,7 +35,7 @@ BlInfiniteFlags class >> defineFlagAddAccesorFor: flagName [
 ]
 
 { #category : #'private - instance code' }
-BlInfiniteFlags class >> defineFlagClearAccesorFor: flagName [
+BlBitflags class >> defineFlagClearAccesorFor: flagName [
 	| code |
 	
 	code := 'clear', flagName, '
@@ -48,7 +48,7 @@ BlInfiniteFlags class >> defineFlagClearAccesorFor: flagName [
 ]
 
 { #category : #'private - instance code' }
-BlInfiniteFlags class >> defineFlagTestAccesorFor: flagName [
+BlBitflags class >> defineFlagTestAccesorFor: flagName [
 	| code |
 	
 	code := 'has', flagName, '
@@ -61,21 +61,36 @@ BlInfiniteFlags class >> defineFlagTestAccesorFor: flagName [
 ]
 
 { #category : #'flags declaration' }
-BlInfiniteFlags class >> flagsDecl [
+BlBitflags class >> flagsDecl [
 	"
 	self rebuildFlagsAccessors
 	"
-	^ #(
-		
-	)
+	
+	"^ {
+		#A.
+		#B.
+		#C -> 4.
+		#D -> [ 8 ]
+	}"
+	
+	^ self subclassResponsibility
 ]
 
 { #category : #private }
-BlInfiniteFlags class >> flagsDictionary [
+BlBitflags class >> flagsDictionary [
 	| decl |
+	
+	self = BlBitflags
+		ifTrue: [ ^ Dictionary new ].
+	
 	decl := self flagsDecl.
-	decl isDictionary
-		ifFalse: [ decl := decl asDictionary ].
+	decl := decl
+		collectWithIndex: [ :eachDeclaration :eachIndex |
+			(eachDeclaration isKindOf: Association)
+				ifTrue: [ eachDeclaration key -> eachDeclaration value value ]
+				ifFalse: [ eachDeclaration -> (1 << (eachIndex - 1)) ] ].
+
+	decl := decl asDictionary.
 	decl := (decl associations collect: [ :each |
 		| key |
 		key := self generateFlagName: each key.
@@ -84,53 +99,58 @@ BlInfiniteFlags class >> flagsDictionary [
 ]
 
 { #category : #'instance creation' }
-BlInfiniteFlags class >> fromFlags: aBlInfiniteFlags [
+BlBitflags class >> fromFlags: aBlInfiniteFlags [
 	^ self fromValue: aBlInfiniteFlags value
 ]
 
 { #category : #'instance creation' }
-BlInfiniteFlags class >> fromValue: aNumber [
+BlBitflags class >> fromValue: aNumber [
 	^ self new
 		initializeWith: aNumber;
 		yourself
 ]
 
 { #category : #private }
-BlInfiniteFlags class >> generateFlagName: aString [
+BlBitflags class >> generateFlagName: aString [
 
-	^ String streamContents: [ :aStream |
-			aString asLowercase
+	^ String streamContents: [ :aStream |		
+			aString
 				splitOn: '_'
-				do: [ :aPart | aStream nextPutAll: aPart capitalized ] ]
+				do: [ :aPart |
+					| eachPart |
+					eachPart := aPart.
+					(eachPart allSatisfy: [ :eachCharater | eachCharater isUppercase ])
+						ifTrue: [ eachPart := eachPart asLowercase ].
+					aStream nextPutAll: eachPart capitalized ] ]
 ]
 
 { #category : #'private - instance code' }
-BlInfiniteFlags class >> generatedFlagsAddProtocolName [
+BlBitflags class >> generatedFlagsAddProtocolName [
 	^ 'flags - add'
 ]
 
 { #category : #'private - instance code' }
-BlInfiniteFlags class >> generatedFlagsClearProtocolName [
+BlBitflags class >> generatedFlagsClearProtocolName [
 	^ 'flags - clear'
 ]
 
 { #category : #'private - class code' }
-BlInfiniteFlags class >> generatedFlagsProtocolName [
+BlBitflags class >> generatedFlagsProtocolName [
 	^ 'accessing - flags'
 ]
 
 { #category : #'private - instance code' }
-BlInfiniteFlags class >> generatedFlagsTestingProtocolName [
+BlBitflags class >> generatedFlagsTestingProtocolName [
 	^ 'flags - testing'
 ]
 
 { #category : #initialization }
-BlInfiniteFlags class >> initialize [
+BlBitflags class >> initialize [
 	self initializeFlags
 ]
 
 { #category : #initialization }
-BlInfiniteFlags class >> initializeFlags [
+BlBitflags class >> initializeFlags [
 
 	self flagsDictionary keysAndValuesDo: [ :eachName :eachValue | 
 		| classBinding flagValue |
@@ -146,7 +166,7 @@ BlInfiniteFlags class >> initializeFlags [
 ]
 
 { #category : #private }
-BlInfiniteFlags class >> rebuildFlagsAccessors [
+BlBitflags class >> rebuildFlagsAccessors [
 	self flagsDictionary keysDo: [ :each | 
 		self defineFlagAccesorFor: each.
 		self defineFlagTestAccesorFor: each.
@@ -155,16 +175,16 @@ BlInfiniteFlags class >> rebuildFlagsAccessors [
 ]
 
 { #category : #operations }
-BlInfiniteFlags >> and: aFlagsOrNumber [
+BlBitflags >> and: aFlagsOrNumber [
 	"Return new instance of infinite flags which is a result of bitwise and
 	with provided flags or a number"
-	<return: #BlInfiniteFlags>
+	<return: #BlBitflags>
 
-	^ self class fromValue: (self value & (aFlagsOrNumber value))
+	^ self class fromValue: (self value bitAnd: (aFlagsOrNumber value))
 ]
 
 { #category : #converting }
-BlInfiniteFlags >> asDictionary [
+BlBitflags >> asDictionary [
 
 	^ (self class classPool associations
 		collect: [ :each | each key -> (self hasNamed: each key) ])
@@ -172,68 +192,59 @@ BlInfiniteFlags >> asDictionary [
 ]
 
 { #category : #removing }
-BlInfiniteFlags >> clear [
+BlBitflags >> clear [
 	value := 0
 ]
 
 { #category : #copying }
-BlInfiniteFlags >> copy [
+BlBitflags >> copy [
 	^ self class fromFlags: self
 ]
 
-{ #category : #'gt-inspector-extension' }
-BlInfiniteFlags >> gtInspectorItemsIn: composite [
-	<gtInspectorPresentationOrder: 0>  
-	^ (composite table)
+{ #category : #'gt-extension' }
+BlBitflags >> gtItemsFor: aView [
+	<gtView>
+
+	^ aView columnedList
 		title: 'Flags';
-		display: [ self asDictionary associations ];
+		items: [ self asDictionary associations sorted: [ :a :b | a key < b key ] ];
 		column: 'Key' 
 			evaluated: [:each | GTObjectPrinter new asTruncatedTextFrom: each key ];
 		column: 'Value' 
-			evaluated: [:each | GTObjectPrinter new asTruncatedTextFrom: each value ];
-		beMultiple;
-		withSmalltalkSearch;
-		send: [ :selection | 
-			selection isNil 
-			ifTrue:[ nil ]
-			ifFalse:[ (selection size = 1) 
-				ifTrue: [ selection anyOne value ] 
-				ifFalse: [ selection collect: #value ] ]];
-		showOnly: 50;
-		helpMessage: 'Quick selection field. Given your INPUT, it executes: self select: [:each | INPUT ]'
+			evaluated: [:each | GTObjectPrinter new asTruncatedTextFrom: each value ]
 ]
 
 { #category : #testing }
-BlInfiniteFlags >> has: aFlag [
-	^ (value & aFlag) ~= 0
+BlBitflags >> has: aFlag [
+	^ (value bitAnd: aFlag) ~= 0
 ]
 
 { #category : #testing }
-BlInfiniteFlags >> hasNamed: aFlagName [
-	^ value & (self class classPool
+BlBitflags >> hasNamed: aFlagName [
+	^ (value bitAnd: (self class classPool
 		at: aFlagName
-		ifAbsent: [ self error: 'Unknown flag: ', aFlagName asString ]) ~= 0
+		ifAbsent: [ self error: 'Unknown flag: ', aFlagName asString ])) ~= 0
 ]
 
 { #category : #initialization }
-BlInfiniteFlags >> initialize [
+BlBitflags >> initialize [
 	super initialize.
 	
 	value := 0
 ]
 
 { #category : #initialization }
-BlInfiniteFlags >> initializeWith: aValue [
+BlBitflags >> initializeWith: aValue [
 	
 	value := aValue
 ]
 
 { #category : #removing }
-BlInfiniteFlags >> remove: aFlag [
-	value := value & (aFlag bitInvert)
+BlBitflags >> remove: aFlag [
+	value := value bitAnd: (aFlag bitInvert)
 ]
 
 { #category : #accessing }
-BlInfiniteFlags >> value [
+BlBitflags >> value [
 	^ value
 ]

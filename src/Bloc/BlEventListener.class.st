@@ -1,7 +1,7 @@
 Class {
 	#name : #BlEventListener,
 	#superclass : #BlBasicEventHandler,
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'focus handlers' }
@@ -43,6 +43,11 @@ BlEventListener >> dragStartEvent: anEvent [
 
 { #category : #'dnd handlers' }
 BlEventListener >> dropEvent: anEvent [
+]
+
+{ #category : #'as yet unclassified' }
+BlEventListener >> eventsToHandle [
+	^ { BlUIEvent }
 ]
 
 { #category : #'focus handlers' }
@@ -238,6 +243,11 @@ BlEventListener >> touchMoveEvent: anEvent [
 
 { #category : #'touch handlers' }
 BlEventListener >> touchUpEvent: anEvent [
+]
+
+{ #category : #'api - event managing' }
+BlEventListener >> wantsEvent: anEvent [
+	^ true
 ]
 
 { #category : #'other handlers' }

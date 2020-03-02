@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'eventClass'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'instance creation' }
@@ -28,6 +28,11 @@ BlEventFilter >> eventClass: aBlEventClass [
 		description: [ 'Filter event class can not be changed once set' ].
 
 	eventClass := aBlEventClass
+]
+
+{ #category : #'as yet unclassified' }
+BlEventFilter >> eventsToHandle [
+	^ { self eventClass }
 ]
 
 { #category : #'api - event managing' }

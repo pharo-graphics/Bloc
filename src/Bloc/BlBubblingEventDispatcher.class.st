@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBubblingEventDispatcher,
 	#superclass : #BlDirectEventDispatcher,
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #dispatching }
@@ -50,7 +50,8 @@ BlBubblingEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChai
 	
 	anEvent isConsumed
 		ifTrue: [ ^ anEvent ].
-		
+	
+	"we give filters a chance to capture this event"
 	self dispatchCapturingEvent: anEvent.
 
 	anEvent isConsumed
