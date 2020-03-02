@@ -49,7 +49,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-! Core'
+	#category : #'Bloc-Infinite-! Core'
 }
 
 { #category : #'children - add/remove' }
@@ -1202,7 +1202,7 @@ BlInfiniteElement >> notifyScrollStateChanged: aScrollState [
 BlInfiniteElement >> notifyScrolled: aPoint [
 	"Notify all event handlers that InfiniteElemnet scrolled by a delta point"
 
-	self fireEvent: (BlElementScrolledEvent delta: aPoint)
+	self eventDispatcher dispatchScrolled: aPoint
 ]
 
 { #category : #'children - geometry' }

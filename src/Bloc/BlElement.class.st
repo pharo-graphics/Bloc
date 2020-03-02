@@ -502,7 +502,7 @@ BlElement >> background: aBlBackground [
 
 	background := aNewBackground.
 	self updateBackground.
-	self dispatchEvent: (BlElementBackgroundChangedEvent target: self).
+	self eventDispatcher dispatchBackgroundChanged.
 	self invalidate
 ]
 
@@ -549,7 +549,7 @@ BlElement >> border: aBlBorder [
 	self invalidate.
 	border := aBlBorder.
 	self geometry releaseStrokedBoundsCache.
-	self dispatchEvent: (BlElementBorderChangedEvent target: self).
+	self eventDispatcher dispatchBorderChanged.
 	self invalidate
 ]
 
@@ -1004,8 +1004,8 @@ BlElement >> dispatchAddedToParent [
 	"Sent after I was added to another element as direct child.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
-	self dispatchEvent: BlElementAddedToParentEvent new.
 	self onAddedToParent.
+	self eventDispatcher dispatchAddedToParent.
 	self dispatchAddedToSuperParent: self
 ]
 
@@ -1023,8 +1023,8 @@ BlElement >> dispatchAddedToSuperParent: anElement [
 	"Sent after I or one of my parents was added to another element as a child.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
-	self dispatchEvent: (BlElementAddedToSuperParentEvent new addedElement: anElement).
 	self onAddedToSuperParent: anElement.
+	self eventDispatcher dispatchAddedToSuperParent: anElement.
 
 	self childrenDo: [ :aChildElement | aChildElement dispatchAddedToSuperParent: anElement ]
 ]
@@ -1074,8 +1074,8 @@ BlElement >> dispatchRemovedFromParent: aParentElement [
 	"Sent after I was removed from my parent and is not longer its direct child.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
-	self dispatchEvent: (BlElementRemovedFromParentEvent target: self).
-	self onRemovedFromParent: aParentElement
+	self onRemovedFromParent: aParentElement.
+	self eventDispatcher dispatchRemovedFromParent
 ]
 
 { #category : #'children dispatching' }
@@ -1868,7 +1868,7 @@ BlElement >> layout: aBlLayout [
 
 	layout := aBlLayout.
 
-	self dispatchEvent: (BlElementLayoutChangedEvent new).
+	self eventDispatcher dispatchLayoutChanged.
 	self requestLayout
 ]
 
@@ -2345,8 +2345,8 @@ BlElement >> nextEventTarget [
 BlElement >> notifyExtentChanged [
 	"Notify element event listeners that my extent changed.
 	Custom event handlers should subscribe to BlElementExtentChangedEvent"
-	
-	self dispatchEvent: (BlElementExtentChangedEvent target: self)
+
+	self eventDispatcher dispatchExtentChanged
 ]
 
 { #category : #'geometry hooks' }
@@ -2354,7 +2354,7 @@ BlElement >> notifyPositionChanged [
 	"Notify element event listeners that my position within a parent changed.
 	Custom event handlers should subscribe to BlElementPositionChangedEvent"
 	
-	self dispatchEvent: (BlElementPositionChangedEvent target: self)
+	self eventDispatcher dispatchPositionChanged
 ]
 
 { #category : #'geometry hooks' }
@@ -2362,7 +2362,7 @@ BlElement >> notifyPositionInSpaceChanged [
 	"Notify element event listeners that my position in space coordinates changed.
 	Custom event handlers should subscribe to BlElementPositionInSpaceChangedEvent"
 	
-	self dispatchEvent: (BlElementPositionInSpaceChangedEvent target: self)
+	self eventDispatcher dispatchPositionInSpaceChanged
 ]
 
 { #category : #'hooks - children' }

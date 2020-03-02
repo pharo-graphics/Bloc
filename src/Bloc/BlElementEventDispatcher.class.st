@@ -38,71 +38,92 @@ BlElementEventDispatcher >> disableGeneralEventType: anEventClass [
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchAddedToParent [
 	activatedElementEvents hasAddedToParent
-		ifTrue: [ self dispatchEvent: (BlElementAddedToParentEvent new) ]
+		ifTrue: [ self dispatchEvent: (BlElementAddedToParentEvent from: self owner) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchAddedToSceneGraph [
 	activatedElementEvents hasAddedToSceneGraph
-		ifTrue: [ self dispatchEvent: (BlElementAddedToSceneGraphEvent target: self owner) ]
+		ifTrue: [ self dispatchEvent: (BlElementAddedToSceneGraphEvent from: self owner) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchAddedToSuperParent: anElement [
 	activatedElementEvents hasAddedToSuperParent
-		ifTrue: [ self ownerDo: [ :anEventTarget | anEventTarget dispatchEvent: (BlElementAddedToSuperParentEvent new addedElement: anElement) ] ]
+		ifTrue: [ self dispatchEvent: ((BlElementAddedToSuperParentEvent from: self owner) addedElement: anElement) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchBackgroundChanged [
 	activatedElementEvents hasBackgroundChanged
-		ifTrue: [ self dispatchEvent: (BlElementBackgroundChangedEvent new) ]
+		ifTrue: [ self dispatchEvent: (BlElementBackgroundChangedEvent from: self) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchBorderChanged [
 	activatedElementEvents hasBorderChanged
-		ifTrue: [ self ownerDo: [ :anEventTarget | anEventTarget dispatchEvent: (BlElementBorderChangedEvent new) ] ]
+		ifTrue: [ self dispatchEvent: (BlElementBorderChangedEvent from: self) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchExtentChanged [
 	activatedElementEvents hasExtentChanged
-		ifTrue: [ self ownerDo: [ :anEventTarget | anEventTarget dispatchEvent: (BlElementExtentChangedEvent new) ] ]
+		ifTrue: [ self dispatchEvent: (BlElementExtentChangedEvent from: self owner) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchLayoutChanged [
 	activatedElementEvents hasLayoutChanged
-		ifTrue: [ self ownerDo: [ :anEventTarget | anEventTarget dispatchEvent: (BlElementLayoutChangedEvent new) ] ]
+		ifTrue: [ self dispatchEvent: (BlElementLayoutChangedEvent from: self) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchPositionChanged [
 	activatedElementEvents hasPositionChanged
-		ifTrue: [ self ownerDo: [ :anEventTarget | anEventTarget dispatchEvent: (BlElementPositionChangedEvent new) ] ]
+		ifTrue: [ self dispatchEvent: (BlElementPositionChangedEvent from: self owner) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchPositionInSpaceChanged [
 	activatedElementEvents hasPositionInSpaceChanged
-		ifTrue: [ self ownerDo: [ :anEventTarget | anEventTarget dispatchEvent: (BlElementPositionInSpaceChangedEvent new) ] ]
+		ifTrue: [ self dispatchEvent: (BlElementPositionInSpaceChangedEvent from: self owner) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchRemovedFromParent [
 	activatedElementEvents hasRemovedFromParent
-		ifTrue: [ self ownerDo: [ :anEventTarget | anEventTarget dispatchEvent: (BlElementRemovedFromParentEvent new) ] ]
+		ifTrue: [ self dispatchEvent: (BlElementRemovedFromParentEvent from: self owner) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchRemovedFromSceneGraph [
 	activatedElementEvents hasRemovedFromSceneGraph
-		ifTrue: [ self ownerDo: [ :anEventTarget | anEventTarget dispatchEvent: (BlElementRemovedFromSceneGraphEvent new) ] ]
+		ifTrue: [ self dispatchEvent: (BlElementRemovedFromSceneGraphEvent from: self) ]
 ]
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchScrolled: aDelta [
+	activatedElementEvents hasScrolledEvent
+		ifTrue: [ self dispatchEvent: ((BlElementScrolledEvent from: self) delta: aDelta) ]
+]
+
+{ #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchSelectionAcquired: theBounds [
+	<return: #Boolean>
+
+	^ activatedElementEvents hasSelectionAcquired
+		ifTrue: [
+			| anEvent |
+			anEvent := (BlElementSelectionAcquiredEvent from: self) bounds: theBounds.
+			self dispatchEvent: anEvent.
+			anEvent isConsumed ]
+		ifFalse: [ false ]
+]
+
+{ #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchSelectionLost [
+	activatedElementEvents hasSelectionLost
+		ifTrue: [ self dispatchEvent: (BlElementSelectionLostEvent from: self) ]
 ]
 
 { #category : #'api - element events' }

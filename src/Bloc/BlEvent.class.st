@@ -50,6 +50,14 @@ BlEvent class >> fireEvent: anEvent target: anEventTarget [
 ]
 
 { #category : #accessing }
+BlEvent class >> from: anEventTarget [
+	^ self new
+		target: anEventTarget;
+		source: anEventTarget;
+		yourself
+]
+
+{ #category : #accessing }
 BlEvent class >> target: anObject [
 	^ self new
 		target: anObject;

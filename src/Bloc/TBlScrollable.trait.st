@@ -48,7 +48,7 @@ TBlScrollable >> dispatchOnScrolled: aPoint [
 TBlScrollable >> notifyScrolled: aPoint [
 	"Notify all event handlers that InfiniteElemnet scrolled by a delta point"
 
-	self fireEvent: (BlElementScrolledEvent delta: aPoint)
+	self eventDispatcher dispatchScrolled: aPoint
 ]
 
 { #category : #'hooks - scrolling' }
