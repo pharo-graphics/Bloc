@@ -42,31 +42,6 @@ BlPannableElement >> contentElement: anElement [
 	self zoomToFit
 ]
 
-{ #category : #ui }
-BlPannableElement >> gtLiveFor: aView [
-	^ (super gtLiveFor: aView)
-		actionStencil: [ 
-			BrButton new 
-				look: BrGlamorousButtonWithIconLook;
-				icon: BrGlamorousIcons zoomin asElement;
-				action: [ self zoomIn ] ];
-		actionStencil: [ 
-			BrButton new 
-				look: BrGlamorousButtonWithIconLook;
-				icon: BrGlamorousIcons zoomout asElement;
-				action: [ self zoomOut ] ];
-		actionStencil: [ 
-			BrButton new 
-				look: BrGlamorousButtonWithIconLook;
-				icon: BrGlamorousIcons zoomtofit asElement;
-				action: [ self zoomToFit ] ];
-		actionStencil: [ 
-			BrButton new
-				look: BrGlamorousButtonWithIconLook;
-				icon: BrGlamorousIcons actualsize asElement;
-				action: [ self zoomToActualSize ] ]
-]
-
 { #category : #'api - testing' }
 BlPannableElement >> hasContentElement [
 	"Return true if I have a content element, false otherwise"
