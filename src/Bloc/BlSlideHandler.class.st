@@ -1,6 +1,6 @@
 Class {
 	#name : #BlSlideHandler,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'originalPosition',
 		'dragStartPosition'

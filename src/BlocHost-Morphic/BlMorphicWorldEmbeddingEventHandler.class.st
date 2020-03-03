@@ -237,7 +237,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseUpEvent: anEvent [
 ]
 
 { #category : #visiting }
-BlMorphicWorldEmbeddingEventHandler >> scrollEvent: anEvent [
+BlMorphicWorldEmbeddingEventHandler >> mouseWheelEvent: anEvent [
 	| vertical aHand aMorphicEvent |
 	
 	anEvent consumed: true.

@@ -4,10 +4,10 @@ Emitted when all of the event loop's events have been processed and control flow
 Class {
 	#name : #BlUniverseEventsCleared,
 	#superclass : #BlUniverseEvent,
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Universe'
 }
 
 { #category : #sending }
 BlUniverseEventsCleared >> sendTo: anObject [
-	anObject eventsCleared: self
+	anObject universeEventsCleared: self
 ]

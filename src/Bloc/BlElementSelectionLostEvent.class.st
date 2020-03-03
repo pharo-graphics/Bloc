@@ -4,7 +4,7 @@ Is sent when element is no longer within mouse selection rectangle
 Class {
 	#name : #BlElementSelectionLostEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -19,5 +19,5 @@ BlElementSelectionLostEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementSelectionLostEvent >> sendTo: anObject [
-	anObject selectionLostEvent: self
+	anObject elementSelectionLostEvent: self
 ]

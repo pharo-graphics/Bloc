@@ -17,7 +17,7 @@ Available actions (see implementation at ${method:BlElementSelection>>#initializ
 "
 Class {
 	#name : #BlDevHalosEventListener,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#category : #'Bloc-DevTool-Core'
 }
 

@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -23,12 +23,7 @@ BlElementAddedToSceneGraphEvent class >> wantedIn: anObject [
 	^ anObject wantsAddedToSceneGraph
 ]
 
-{ #category : #accessing }
-BlElementAddedToSceneGraphEvent >> element [
-	^ element
-]
-
-{ #category : #accessing }
-BlElementAddedToSceneGraphEvent >> element: anObject [
-	element := anObject
+{ #category : #sending }
+BlElementAddedToSceneGraphEvent >> sendTo: anObject [
+	anObject elementAddedToSceneGraphEvent: self
 ]

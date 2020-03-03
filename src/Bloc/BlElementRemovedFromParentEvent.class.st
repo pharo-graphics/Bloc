@@ -19,7 +19,7 @@ parent removeChild: child
 Class {
 	#name : #BlElementRemovedFromParentEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -34,5 +34,5 @@ BlElementRemovedFromParentEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementRemovedFromParentEvent >> sendTo: anObject [
-	anObject elementRemoved: self
+	anObject elementRemovedFromParentEvent: self
 ]

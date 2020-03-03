@@ -18,7 +18,7 @@ parent addChild: child.
 Class {
 	#name : #BlElementAddedToParentEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -33,5 +33,5 @@ BlElementAddedToParentEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementAddedToParentEvent >> sendTo: anObject [
-	anObject elementAddedToParent: self
+	anObject elementAddedToParentEvent: self
 ]

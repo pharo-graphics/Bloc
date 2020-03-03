@@ -7,7 +7,7 @@ Class {
 		'eventProcessingShape',
 		'layoutingShape'
 	],
-	#category : 'Bloc-DevTool-Core'
+	#category : #'Bloc-DevTool-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -87,7 +87,7 @@ BlBenchmarkConsole >> listenSpace: aSpace [
 						frames := 0 ].
 				self renderTime: (evt end - evt start) ]).
 	aSpace eventDispatcher addEventHandler: 
-		(BlEventHandler on: BlSpaceEventEndEvent do: [ :evt | 
+		(BlEventHandler on: BlSpaceEventsProcessedEvent do: [ :evt | 
 					self eventProcessingTime: (evt end - evt start). 
 					  ]).
   	aSpace eventDispatcher addEventHandler: 

@@ -14,7 +14,7 @@ BlEventListener >> clickEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlEventListener >> dblClickEvent: anEvent [
+BlEventListener >> doubleClickEvent: anEvent [
 ]
 
 { #category : #'dnd handlers' }
@@ -43,6 +43,14 @@ BlEventListener >> dragStartEvent: anEvent [
 
 { #category : #'dnd handlers' }
 BlEventListener >> dropEvent: anEvent [
+]
+
+{ #category : #'selection handlers' }
+BlEventListener >> elementSelectionAcquiredEvent: anEvent [
+]
+
+{ #category : #'selection handlers' }
+BlEventListener >> elementSelectionLostEvent: anEvent [
 ]
 
 { #category : #'as yet unclassified' }
@@ -168,20 +176,12 @@ BlEventListener >> mouseStillDownEvent: anEvent [
 BlEventListener >> mouseUpEvent: anEvent [
 ]
 
+{ #category : #'mouse handlers' }
+BlEventListener >> mouseWheelEvent: anEvent [
+]
+
 { #category : #'other handlers' }
 BlEventListener >> rotateEvent: anEvent [
-]
-
-{ #category : #'mouse handlers' }
-BlEventListener >> scrollEvent: anEvent [
-]
-
-{ #category : #'selection handlers' }
-BlEventListener >> selectionAcquiredEvent: anEvent [
-]
-
-{ #category : #'selection handlers' }
-BlEventListener >> selectionLostEvent: anEvent [
 ]
 
 { #category : #'keyboard handlers' }
@@ -247,6 +247,10 @@ BlEventListener >> touchUpEvent: anEvent [
 
 { #category : #'api - event managing' }
 BlEventListener >> wantsEvent: anEvent [
+
+	anEvent isElementEvent
+		ifTrue: [ ^ false ].
+
 	^ true
 ]
 

@@ -3,7 +3,7 @@ I am an event listener that overlay element adds to the reference element in ord
 "
 Class {
 	#name : #BlOverlayListener,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlCustomEventHandler,
 	#instVars : [
 		'overlayElement',
 		'attachmentsCount'
@@ -24,13 +24,18 @@ BlOverlayListener class >> new [
 ]
 
 { #category : #'element handlers' }
-BlOverlayListener >> elementExtentChanged: anEvent [
+BlOverlayListener >> elementExtentChangedEvent: anEvent [
 	self resizeTo: anEvent currentTarget
 ]
 
 { #category : #'element handlers' }
-BlOverlayListener >> elementPositionInSpaceChanged: anEvent [
+BlOverlayListener >> elementPositionInSpaceChangedEvent: anEvent [
 	self relocateTo: anEvent currentTarget
+]
+
+{ #category : #'api - accessing' }
+BlOverlayListener >> eventsToHandle [
+	^ { BlElementExtentChangedEvent  . BlElementPositionInSpaceChangedEvent }
 ]
 
 { #category : #geometry }

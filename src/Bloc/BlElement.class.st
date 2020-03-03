@@ -1015,6 +1015,7 @@ BlElement >> dispatchAddedToSceneGraph [
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
 	self onAddedToSceneGraph.
+	self eventDispatcher dispatchAddedToSceneGraph.
 	self childrenDo: [ :anElement | anElement dispatchAddedToSceneGraph ]
 ]
 
@@ -1084,6 +1085,7 @@ BlElement >> dispatchRemovedFromSceneGraph [
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
 	self onRemovedFromSceneGraph.
+	self eventDispatcher dispatchRemovedFromSceneGraph.
 	self childrenDo: [ :anElement | anElement dispatchRemovedFromSceneGraph ]
 ]
 

@@ -1,6 +1,6 @@
 Class {
 	#name : #BlDevCrossover,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'crossover',
 		'verticalLine',

@@ -53,16 +53,6 @@ BlEventHandler >> action: anObject [
 	action := anObject
 ]
 
-{ #category : #'api - hooks' }
-BlEventHandler >> disableEventsIn: anElementEventDispatcher [
-	anElementEventDispatcher disableEventType: self eventClass
-]
-
-{ #category : #'api - hooks' }
-BlEventHandler >> enableEventsIn: anElementEventDispatcher [
-	anElementEventDispatcher enableEventType: self eventClass
-]
-
 { #category : #'private - accessing' }
 BlEventHandler >> eventClass [
 	^ eventClass

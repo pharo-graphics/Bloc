@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteMouseScrollListener,
 	#superclass : #BlBasicEventHandler,
-	#category : 'Bloc-Infinite-Basic'
+	#category : #'Bloc-Infinite-Basic'
 }
 
 { #category : #'mouse handlers' }
@@ -47,7 +47,7 @@ BlInfiniteMouseScrollListener >> handleEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlInfiniteMouseScrollListener >> scrollEvent: anEvent [
+BlInfiniteMouseScrollListener >> mouseWheelEvent: anEvent [
 	| dX dY anInfiniteElement isHorizontal |
 
 	anEvent vector isZero

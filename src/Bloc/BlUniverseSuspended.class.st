@@ -4,7 +4,7 @@ Emitted when the Universe has been suspended.
 Class {
 	#name : #BlUniverseSuspended,
 	#superclass : #BlUniverseEvent,
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Universe'
 }
 
 { #category : #sending }

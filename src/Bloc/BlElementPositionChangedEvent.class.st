@@ -6,7 +6,7 @@ Note: position may change even if an element has no parent
 Class {
 	#name : #BlElementPositionChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -21,5 +21,5 @@ BlElementPositionChangedEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementPositionChangedEvent >> sendTo: anObject [
-	anObject elementPositionChanged: self
+	anObject elementPositionChangedEvent: self
 ]

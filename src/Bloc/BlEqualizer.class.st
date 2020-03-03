@@ -1,5 +1,5 @@
 Class {
 	#name : #BlEqualizer,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlCustomEventHandler,
 	#category : #'Bloc-Utilities - Equalizer'
 }

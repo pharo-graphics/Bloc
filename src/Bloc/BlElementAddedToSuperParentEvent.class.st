@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'addedElement'
 	],
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -36,5 +36,5 @@ BlElementAddedToSuperParentEvent >> addedElement: anElement [
 
 { #category : #sending }
 BlElementAddedToSuperParentEvent >> sendTo: anObject [
-	anObject elementAddedToSuperParent: self
+	anObject elementAddedToSuperParentEvent: self
 ]

@@ -21,30 +21,3 @@ BlSceneInformingElement >> child [
 		description: [ 'Scene informing element must have only one child to use this method' ].
 	^ self childAt: 1
 ]
-
-{ #category : #'api - event handlers' }
-BlSceneInformingElement >> onAddedToSceneDo: aBlock [
-	self addEventHandler: (BlElementAddedToSceneGraphEventHandler new valuable: aBlock)
-]
-
-{ #category : #'hooks - children' }
-BlSceneInformingElement >> onAddedToSceneGraph [
-	| anEventHandler |
-	super onAddedToSceneGraph.
-	anEventHandler := nil.
-	anEventHandler := BlEventHandler on: BlSpaceClosedEvent do: [ :anEvent |
-		self fireEvent: BlElementRemovedFromSceneGraphEvent new.
-		anEvent space removeEventHandler: anEventHandler ].
-	self fireEvent: (BlElementAddedToSceneGraphEvent new element: self).
-]
-
-{ #category : #'api - event handlers' }
-BlSceneInformingElement >> onRemovedFromSceneDo: aBlock [
-	self addEventHandler: (BlElementRemovedFromSceneGraphEventHandler new valuable: aBlock)
-]
-
-{ #category : #'hooks - children' }
-BlSceneInformingElement >> onRemovedFromSceneGraph [
-	super onRemovedFromSceneGraph.
-	self fireEvent: (BlElementRemovedFromSceneGraphEvent new element: self).
-]

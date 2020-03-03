@@ -15,7 +15,7 @@ element addEventHandler: BlPullHandler new.
 "
 Class {
 	#name : #BlPullHandler,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'originalPosition',
 		'dragStartPosition',

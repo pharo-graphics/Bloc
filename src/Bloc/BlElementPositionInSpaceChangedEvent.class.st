@@ -6,7 +6,7 @@ Position in space may change even if element's #position is still the same. It c
 Class {
 	#name : #BlElementPositionInSpaceChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -21,5 +21,5 @@ BlElementPositionInSpaceChangedEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementPositionInSpaceChangedEvent >> sendTo: anObject [
-	anObject elementPositionInSpaceChanged: self
+	anObject elementPositionInSpaceChangedEvent: self
 ]

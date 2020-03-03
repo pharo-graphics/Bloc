@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'cause'
 	],
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Universe'
 }
 
 { #category : #accessing }
@@ -22,5 +22,5 @@ BlUniverseEventsArrived >> cause: anObject [
 
 { #category : #sending }
 BlUniverseEventsArrived >> sendTo: anObject [
-	anObject eventsArrived: self
+	anObject universeEventsArrived: self
 ]

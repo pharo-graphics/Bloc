@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'delta'
 	],
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'instance creation' }
@@ -34,4 +34,9 @@ BlElementScrolledEvent >> delta [
 { #category : #accessing }
 BlElementScrolledEvent >> delta: aPoint [
 	delta := aPoint
+]
+
+{ #category : #sending }
+BlElementScrolledEvent >> sendTo: anObject [
+	anObject elementScrolledEvent: self
 ]

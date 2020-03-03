@@ -16,11 +16,16 @@ BlWidthEqualizer class >> of: aCollectionOfTargetElements with: aCollectionOfSou
 ]
 
 { #category : #'element handlers' }
-BlWidthEqualizer >> elementExtentChanged: anEvent [
+BlWidthEqualizer >> elementExtentChangedEvent: anEvent [
 	| maxWidth |
 
 	maxWidth := self sourceElements max: #width.
 	self targetElements do: [ :anElement | anElement width: maxWidth ]
+]
+
+{ #category : #'api - accessing' }
+BlWidthEqualizer >> eventsToHandle [
+	^ { BlElementExtentChangedEvent }
 ]
 
 { #category : #accessing }

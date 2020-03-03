@@ -9,12 +9,17 @@ Class {
 	#category : #'Bloc-Universe - Parallel'
 }
 
-{ #category : #'as yet unclassified' }
-BlUniverseEventListener >> eventsArrived: anEvent [
+{ #category : #'api - event managing' }
+BlUniverseEventListener >> handleEvent: anEvent [
+	anEvent sendTo: self
 ]
 
 { #category : #'as yet unclassified' }
-BlUniverseEventListener >> eventsCleared: anEvent [
+BlUniverseEventListener >> universeEventsArrived: anEvent [
+]
+
+{ #category : #'as yet unclassified' }
+BlUniverseEventListener >> universeEventsCleared: anEvent [
 	| nowTime |
 	"Once all events are handled it is time to tell spaces to redraw themselves"
 	
@@ -33,11 +38,6 @@ BlUniverseEventListener >> eventsCleared: anEvent [
 			Processor yield.
 			Processor class relinquishProcessorForMicroseconds: aTimeToWait asMilliSeconds * 1000 ].
 	lastTime := nowTime
-]
-
-{ #category : #'api - event managing' }
-BlUniverseEventListener >> handleEvent: anEvent [
-	anEvent sendTo: self
 ]
 
 { #category : #'as yet unclassified' }

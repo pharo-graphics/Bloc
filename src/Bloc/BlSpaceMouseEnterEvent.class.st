@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceMouseEnterEvent,
 	#superclass : #BlSpaceEvent,
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #'as yet unclassified' }

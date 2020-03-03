@@ -6,7 +6,7 @@ See ==BlElementEventExamples== for related examples.
 Class {
 	#name : #BlElementEvent,
 	#superclass : #BlEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }

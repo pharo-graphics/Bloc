@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'bounds'
 	],
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -39,5 +39,5 @@ BlElementSelectionAcquiredEvent >> bounds: aBlBounds [
 
 { #category : #sending }
 BlElementSelectionAcquiredEvent >> sendTo: anObject [
-	anObject selectionAcquiredEvent: self
+	anObject elementSelectionAcquiredEvent: self
 ]

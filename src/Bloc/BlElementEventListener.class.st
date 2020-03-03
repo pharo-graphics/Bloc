@@ -5,37 +5,37 @@ Class {
 }
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementAddedToParent: anEvent [
+BlElementEventListener >> elementAddedToParentEvent: anEvent [
 ]
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementAddedToSuperParent: anEvent [
+BlElementEventListener >> elementAddedToSuperParentEvent: anEvent [
 ]
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementBackgroundChanged: anEvent [
+BlElementEventListener >> elementBackgroundChangedEvent: anEvent [
 ]
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementBorderChanged: anEvent [
+BlElementEventListener >> elementBorderChangedEvent: anEvent [
 ]
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementExtentChanged: anEvent [
+BlElementEventListener >> elementExtentChangedEvent: anEvent [
 ]
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementLayoutChangedChanged: anEvent [
+BlElementEventListener >> elementLayoutChangedEvent: anEvent [
 ]
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementPositionChanged: anEvent [
+BlElementEventListener >> elementPositionChangedEvent: anEvent [
 ]
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementPositionInSpaceChanged: anEvent [
+BlElementEventListener >> elementPositionInSpaceChangedEvent: anEvent [
 ]
 
 { #category : #'element handlers' }
-BlElementEventListener >> elementRemoved: anEvent [
+BlElementEventListener >> elementRemovedFromParentEvent: anEvent [
 ]

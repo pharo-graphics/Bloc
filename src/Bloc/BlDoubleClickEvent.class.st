@@ -11,5 +11,5 @@ BlDoubleClickEvent >> isDoubleClick [
 
 { #category : #sending }
 BlDoubleClickEvent >> sendTo: anObject [
-	anObject dblClickEvent: self
+	anObject doubleClickEvent: self
 ]

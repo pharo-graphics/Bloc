@@ -5,7 +5,7 @@ An element with applied Resizer Listener sends ==BlResizerResizedEvent== after t
 "
 Class {
 	#name : #BlResizerListener,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'dragStartPosition',
 		'originalPosition',

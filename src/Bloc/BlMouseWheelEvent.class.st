@@ -111,7 +111,7 @@ BlMouseWheelEvent >> isTouch: aBoolean [
 
 { #category : #sending }
 BlMouseWheelEvent >> sendTo: anObject [
-	anObject scrollEvent: self
+	anObject mouseWheelEvent: self
 ]
 
 { #category : #printing }

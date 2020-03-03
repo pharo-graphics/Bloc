@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMultipleDragHandler,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'delegate'
 	],

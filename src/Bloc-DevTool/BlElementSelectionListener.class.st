@@ -18,19 +18,19 @@ BlElementSelectionListener class >> on: aSelectionElement [
 ]
 
 { #category : #'element handlers' }
-BlElementSelectionListener >> elementExtentChanged: anEvent [
+BlElementSelectionListener >> elementExtentChangedEvent: anEvent [
 
 	self selection size: self selection selectionExtent
 ]
 
 { #category : #'element handlers' }
-BlElementSelectionListener >> elementPositionChanged: anEvent [
+BlElementSelectionListener >> elementPositionChangedEvent: anEvent [
 
 	self selection relocate: anEvent target positionInSpace - self selection padding topLeft
 ]
 
 { #category : #'element handlers' }
-BlElementSelectionListener >> elementRemoved: anEvent [
+BlElementSelectionListener >> elementRemovedFromParentEvent: anEvent [
 
 	self selection close
 ]

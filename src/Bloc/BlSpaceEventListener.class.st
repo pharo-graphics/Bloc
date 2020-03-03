@@ -83,13 +83,13 @@ BlSpaceEventListener >> mouseUpEvent: anEvent [
 	self mouseProcessor handleMouseUp: anEvent
 ]
 
-{ #category : #'other handlers' }
-BlSpaceEventListener >> rotateEvent: anEvent [
+{ #category : #'mouse handlers' }
+BlSpaceEventListener >> mouseWheelEvent: anEvent [
+	self mouseProcessor processMouseScroll: anEvent
 ]
 
-{ #category : #'mouse handlers' }
-BlSpaceEventListener >> scrollEvent: anEvent [
-	self mouseProcessor processMouseScroll: anEvent
+{ #category : #'other handlers' }
+BlSpaceEventListener >> rotateEvent: anEvent [
 ]
 
 { #category : #accessing }
@@ -108,13 +108,13 @@ BlSpaceEventListener >> spaceCloseRequest: anEvent [
 ]
 
 { #category : #'drag and drop' }
-BlSpaceEventListener >> spaceDragCancel: anEvent [
+BlSpaceEventListener >> spaceDragCancelEvent: anEvent [
 	anEvent delegate cancel: anEvent position.
 	self space removeEventHandler: mouseDragListener
 ]
 
 { #category : #'drag and drop' }
-BlSpaceEventListener >> spaceDragLift: anEvent [
+BlSpaceEventListener >> spaceDragLiftEvent: anEvent [
 	| aDelegate aPosition |
 
 	aDelegate := anEvent delegate.
@@ -130,7 +130,7 @@ BlSpaceEventListener >> spaceDragLift: anEvent [
 ]
 
 { #category : #'window handlers' }
-BlSpaceEventListener >> spaceEventProcessedEvent: anEvent [
+BlSpaceEventListener >> spaceEventsProcessedEvent: anEvent [
 	self space keyboardProcessor handleSpaceEventProcessedEvent: anEvent
 ]
 
@@ -158,7 +158,7 @@ BlSpaceEventListener >> spaceResizedEvent: anEvent [
 ]
 
 { #category : #'window handlers' }
-BlSpaceEventListener >> spaceScaled: anEvent [
+BlSpaceEventListener >> spaceScaledEvent: anEvent [
 	self space
 		beDirtyArea;
 		requestNextPulse

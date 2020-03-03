@@ -7,10 +7,7 @@ You can use ${class:BlElementRemovedFromSceneGraphEvent}$ to perform specific ac
 Class {
 	#name : #BlElementRemovedFromSceneGraphEvent,
 	#superclass : #BlElementEvent,
-	#instVars : [
-		'element'
-	],
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -23,12 +20,7 @@ BlElementRemovedFromSceneGraphEvent class >> wantedIn: anObject [
 	^ anObject wantsRemovedFromSceneGraph
 ]
 
-{ #category : #accessing }
-BlElementRemovedFromSceneGraphEvent >> element [
-	^ element
-]
-
-{ #category : #accessing }
-BlElementRemovedFromSceneGraphEvent >> element: anObject [
-	element := anObject
+{ #category : #sending }
+BlElementRemovedFromSceneGraphEvent >> sendTo: anObject [
+	anObject elementRemovedFromSceneGraphEvent: self
 ]

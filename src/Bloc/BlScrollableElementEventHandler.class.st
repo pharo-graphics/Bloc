@@ -1,6 +1,6 @@
 Class {
 	#name : #BlScrollableElementEventHandler,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#category : #'Bloc-Utilities - Scrolling'
 }
 
@@ -13,7 +13,7 @@ BlScrollableElementEventHandler >> gestureScrollEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlScrollableElementEventHandler >> scrollEvent: anEvent [
+BlScrollableElementEventHandler >> mouseWheelEvent: anEvent [
 	| aScrollHappened |
 	
 	"I implement touch support, so ignore fake mouse wheel events"

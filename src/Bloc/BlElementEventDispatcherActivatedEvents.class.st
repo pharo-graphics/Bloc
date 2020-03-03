@@ -20,7 +20,7 @@ Class {
 		'SelectionAcquired',
 		'SelectionLost'
 	],
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #'accessing - flags' }

@@ -5,7 +5,7 @@ May be used to implement text selection or desktop like selection behaviour
 "
 Class {
 	#name : #BlSelectionHandler,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

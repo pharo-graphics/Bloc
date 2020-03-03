@@ -14,7 +14,7 @@ element border: (BlBorder paint: Color blue width: 20)
 Class {
 	#name : #BlElementBorderChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -29,5 +29,5 @@ BlElementBorderChangedEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementBorderChangedEvent >> sendTo: anObject [
-	anObject elementBorderChanged: self
+	anObject elementBorderChangedEvent: self
 ]

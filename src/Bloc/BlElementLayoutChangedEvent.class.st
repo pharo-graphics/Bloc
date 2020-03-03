@@ -14,7 +14,7 @@ element layout: BlBasicLayout new
 Class {
 	#name : #BlElementLayoutChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -29,5 +29,5 @@ BlElementLayoutChangedEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementLayoutChangedEvent >> sendTo: anObject [
-	anObject elementLayoutChangedChanged: self
+	anObject elementLayoutChangedEvent: self
 ]

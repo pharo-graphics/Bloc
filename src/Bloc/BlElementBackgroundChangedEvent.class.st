@@ -14,7 +14,7 @@ element background: Color blue
 Class {
 	#name : #BlElementBackgroundChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }
@@ -29,5 +29,5 @@ BlElementBackgroundChangedEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementBackgroundChangedEvent >> sendTo: anObject [
-	anObject elementBackgroundChanged: self
+	anObject elementBackgroundChangedEvent: self
 ]

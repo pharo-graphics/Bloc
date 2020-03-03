@@ -18,7 +18,7 @@ BlSpaceFrameEventPhase >> name [
 BlSpaceFrameEventPhase >> runOn: aSpace [
 
 	aSpace
-		dispatchTimeEvent: BlSpaceEventEndEvent
+		dispatchTimeEvent: BlSpaceEventsProcessedEvent
 		during: [ :theSpace |
 			"We must update focused element before processing events, otherwise keyboard events,
 			for example, will be handled by the wrong element"

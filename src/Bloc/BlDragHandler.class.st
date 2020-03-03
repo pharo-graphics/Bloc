@@ -1,6 +1,6 @@
 Class {
 	#name : #BlDragHandler,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'delegate'
 	],
