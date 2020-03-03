@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'geometryElement'
 	],
-	#category : 'Bloc-Geometry-Anchors'
+	#category : #'Bloc-Geometry-Anchors'
 }
 
 { #category : #'instance creation' }
@@ -20,6 +20,11 @@ BlGeometryAnchorListener class >> for: aGeometryElement [
 { #category : #accessing }
 BlGeometryAnchorListener >> eventClass [
 	^ BlGeometryAnchorMoved
+]
+
+{ #category : #'api - accessing' }
+BlGeometryAnchorListener >> eventsToHandle [
+	^ { self eventClass }
 ]
 
 { #category : #accessing }

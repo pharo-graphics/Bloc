@@ -178,7 +178,7 @@ BlElementEventDispatcher >> enablePositionChanged [
 
 { #category : #'api - element events' }
 BlElementEventDispatcher >> enablePositionInSpaceChanged [
-	activatedElementEvents addPositionChanged
+	activatedElementEvents addPositionInSpaceChanged
 ]
 
 { #category : #'api - element events' }
