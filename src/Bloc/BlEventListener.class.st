@@ -47,7 +47,7 @@ BlEventListener >> dropEvent: anEvent [
 
 { #category : #'as yet unclassified' }
 BlEventListener >> eventsToHandle [
-	^ { BlUIEvent }
+	^ BlUIEvent allSubclasses
 ]
 
 { #category : #'focus handlers' }
