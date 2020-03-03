@@ -3,8 +3,8 @@ I am a keyboard arrow press listener used by focus examples in order to move foc
 "
 Class {
 	#name : #BlFocusExampleNavigationListener,
-	#superclass : #BlElementEventListener,
-	#category : 'Bloc-Examples-Focus'
+	#superclass : #BlEventListener,
+	#category : #'Bloc-Examples-Focus'
 }
 
 { #category : #'keyboard handlers' }

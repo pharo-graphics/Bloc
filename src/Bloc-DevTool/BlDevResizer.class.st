@@ -23,7 +23,7 @@ element
 "
 Class {
 	#name : #BlDevResizer,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'targetElement',
 		'resizer',

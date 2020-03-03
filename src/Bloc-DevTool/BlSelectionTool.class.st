@@ -1,6 +1,6 @@
 Class {
 	#name : #BlSelectionTool,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'selectionRect',
 		'client',

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlExampleSwitchController,
-	#superclass : #BlElementEventListener,
-	#category : 'Bloc-Examples-Widgets'
+	#superclass : #BlEventListener,
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #'mouse handlers' }

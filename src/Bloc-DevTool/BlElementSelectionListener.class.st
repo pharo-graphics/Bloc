@@ -3,7 +3,7 @@ I am an event handler that is used for Halos element. For more information about
 "
 Class {
 	#name : #BlElementSelectionListener,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlCustomEventHandler,
 	#instVars : [
 		'selection'
 	],
@@ -33,6 +33,11 @@ BlElementSelectionListener >> elementPositionChangedEvent: anEvent [
 BlElementSelectionListener >> elementRemovedFromParentEvent: anEvent [
 
 	self selection close
+]
+
+{ #category : #'api - accessing' }
+BlElementSelectionListener >> eventsToHandle [
+	^ { BlElementExtentChangedEvent . BlElementPositionChangedEvent . BlElementRemovedFromParentEvent }
 ]
 
 { #category : #accessing }

@@ -6,7 +6,7 @@ Later, the Morphic can be integrated with OSWindow API to avoid unnecessary conv
 "
 Class {
 	#name : #BlMorphicWorldEmbeddingEventHandler,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'buttons'
 	],

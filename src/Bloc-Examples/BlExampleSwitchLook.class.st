@@ -1,11 +1,11 @@
 Class {
 	#name : #BlExampleSwitchLook,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'widget',
 		'color'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #accessing }
