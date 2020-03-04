@@ -69,9 +69,10 @@ TBlDrawingCache classSide >> enableDrawingCacheFor: anElement [
 
 { #category : #'api - drawing cache' }
 TBlDrawingCache classSide >> isDrawingCacheEnabledFor: anElement [
-	^ anElement userData
+	^ false
+	"^ anElement userData
 		at: #blDrawingCacheEnabled
-		ifAbsent: [ true ]
+		ifAbsent: [ true ]"
 ]
 
 { #category : #'private - accessing' }
