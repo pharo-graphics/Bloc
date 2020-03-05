@@ -15,6 +15,19 @@ BlParentChain class >> of: anElement [
 	^ aChain
 ]
 
+{ #category : #'instance creation' }
+BlParentChain class >> of: anElement upToExclusive: aParentElement [
+	| aChain |
+	
+	aChain := self new.
+	anElement
+		withAllParentsDo: [ :aParent |
+			aParent = aParentElement
+				ifTrue: [ ^ aChain ].
+			aChain addFirst: aParent ].
+	^ aChain
+]
+
 { #category : #'as yet unclassified' }
 BlParentChain >> gtInspectorElementsIn: aComposite [
 	<gtInspectorPresentationOrder: 10>
