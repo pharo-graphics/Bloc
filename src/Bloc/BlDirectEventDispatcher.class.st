@@ -214,9 +214,15 @@ BlDirectEventDispatcher >> removeEventHandler: anHandler [
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventHandlers [
 	"Remove all my event handlers"
-	handlers ifNil: [ ^ self ].
-	
-	handlers do: [ :aHandler | self removeEventHandler: aHandler ]
+	| oldHandlers |
+
+	handlers
+		ifNil: [ ^ self ].
+
+	oldHandlers := handlers.
+	handlers := nil.
+
+	oldHandlers do: [ :eachHandler | eachHandler onUninstalledIn: self owner ]
 ]
 
 { #category : #'api - adding/removing' }

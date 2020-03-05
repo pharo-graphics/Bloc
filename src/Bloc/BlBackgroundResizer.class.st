@@ -18,7 +18,7 @@ BlBackgroundResizer class >> exact: anExtent [
 	anExtent must not be nil"
 	<return: #BlBackgroundResizer>
 	
-	^ BlBackgroundExactResizer extent: anExtent
+	^ BlBackgroundExactResizer new extent: anExtent
 ]
 
 { #category : #'instance creation' }

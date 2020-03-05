@@ -24,8 +24,24 @@ BlEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChain [
 ]
 
 { #category : #'api - accessing' }
+BlEventDispatcher >> handlers [
+	^ Array streamContents: [ :aStream | self handlersDo: [ :eachHandlers | aStream nextPut: eachHandlers ] ]
+]
+
+{ #category : #'api - accessing' }
 BlEventDispatcher >> handlersDo: aBlock [
 	"Evaulate a given block with every event handler as an argument"
+]
+
+{ #category : #'api - testing' }
+BlEventDispatcher >> hasEventHandlerSuchThat: aBlock [
+	<return: #Boolean>
+
+	self handlersDo: [ :eachHandler |
+		(aBlock value: eachHandler)
+			ifTrue: [ ^ true ] ].
+		
+	^ false
 ]
 
 { #category : #'api - accessing' }

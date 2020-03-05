@@ -228,11 +228,6 @@ BlElementEventDispatcher >> initialize [
 	activatedGeneralEvents := Set new
 ]
 
-{ #category : #accessing }
-BlElementEventDispatcher >> ownerDo: aBlock [
-	owner ifNotNil: aBlock
-]
-
 { #category : #'api - element events' }
 BlElementEventDispatcher >> wantsAddedToParent [
 	^ activatedElementEvents hasAddedToParent
