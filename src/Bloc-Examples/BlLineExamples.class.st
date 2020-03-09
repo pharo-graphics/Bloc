@@ -167,9 +167,9 @@ BlLineExamples >> connectGridWith12Lines [
 	
 	^ self container
 		size: 600@600;
-		addChild: anAttachPoint;
 		addChild: aGridElement;
 		addChildren: lines;
+		addChild: anAttachPoint;
 		yourself
 ]
 

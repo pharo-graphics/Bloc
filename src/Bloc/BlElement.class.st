@@ -1624,6 +1624,9 @@ BlElement >> initialize [
 	transformation := self defaultTransformation owner: self.
 	geometry := self defaultGeometry.
 	geometryResizer := self defaultGeometryResizer.
+	"we have to tell geometry to adapt to the element now, otherwise its size will not be updated"
+	geometryResizer adapt: geometry to: self.
+	
 	outskirts := self defaultOutskirts.
 	border := self defaultBorder.
 	background := self defaultBackground asBlBackground.
@@ -2668,7 +2671,7 @@ BlElement >> position: aPosition extent: anExtent [
 	self
 		assert: [ anExtent x isInfinite not and: [ anExtent y isInfinite not ] ]
 		description: [ 'Extent can not be infinite' ].
-	
+
 	aPreviousPosition := self position.
 	aPreviousExtent := self extent.
 	
