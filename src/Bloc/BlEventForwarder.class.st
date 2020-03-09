@@ -51,6 +51,11 @@ BlEventForwarder >> eventTarget: aTBlEventTarget [
 	eventTarget := aTBlEventTarget
 ]
 
+{ #category : #'api - accessing' }
+BlEventForwarder >> eventsToHandle [
+	^ self eventHandler eventsToHandle
+]
+
 { #category : #'api - event managing' }
 BlEventForwarder >> handleEvent: anEvent [
 	| aCurrentTarget |

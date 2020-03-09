@@ -8,6 +8,11 @@ Class {
 	#category : #'Bloc-Events-Handler'
 }
 
+{ #category : #'api - accessing' }
+BlCustomEventHandler >> eventsToHandle [
+	^ self subclassResponsibility
+]
+
 { #category : #'api - event managing' }
 BlCustomEventHandler >> handleEvent: anEvent [
 	anEvent sendTo: self

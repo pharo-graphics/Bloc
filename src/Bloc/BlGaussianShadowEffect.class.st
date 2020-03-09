@@ -66,6 +66,16 @@ BlGaussianShadowEffect >> extraShadowSpace [
 ]
 
 { #category : #initialization }
+BlGaussianShadowEffect >> initialize [
+	super initialize.
+
+	self
+		initializeColor: Color black
+		width: 10
+		offset: 0@0
+]
+
+{ #category : #initialization }
 BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 	self
 		assert: [ color isNil ]

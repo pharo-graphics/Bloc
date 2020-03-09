@@ -30,16 +30,6 @@ BlShadowEffect >> extraShadowSpace [
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
-BlShadowEffect >> initialize [
-	super initialize.
-
-	self
-		initializeColor: Color black
-		width: 10
-		offset: 0@0
-]
-
 { #category : #accessing }
 BlShadowEffect >> offset [
 	<return: #Point>
