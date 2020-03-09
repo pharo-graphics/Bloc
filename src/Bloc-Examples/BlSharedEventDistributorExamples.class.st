@@ -39,8 +39,8 @@ BlSharedEventDistributorExamples >> element100x100 [
 		background: aBackgroundColor;
 		margin: (BlInsets all: 3);
 		addEventHandlerOn: BlClickEvent do: [ :anEvent | anElement background: Color random ];
-		addEventHandlerOn: BlMouseOverEvent do: [ :anEvent | anElement background: aHighlightColor ];
-		addEventHandlerOn: BlMouseOutEvent do: [ :anEvent | anElement background: aBackgroundColor ].
+		addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent | anElement background: aHighlightColor ];
+		addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent | anElement background: aBackgroundColor ].
 ]
 
 { #category : #'examples - sharing events' }
@@ -51,7 +51,7 @@ BlSharedEventDistributorExamples >> example [
 	anElements := aHandler elements.
 	aContainer := self container.
 	aContainer addChildren: anElements.
-	aHandler shareEvents: { BlMouseOverEvent. BlMouseOutEvent. BlClickEvent }.
+	aHandler shareEvents: { BlMouseEnterEvent. BlMouseLeaveEvent. BlClickEvent }.
 	^ aContainer
 ]
 
@@ -78,9 +78,9 @@ BlSharedEventDistributorExamples >> installTwoElements [
 ]
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> mouseOutEventOneOutOfTwoElements [
+BlSharedEventDistributorExamples >> mouseEnterEventOneOutOfTwoElements [
 	<gtExample>
-	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo anEvent |
+	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo |
 	aMouseEnterOne := aMouseEnterTwo := 0.
 	aHandler := self installTwoElements.
 	anElements := aHandler elements.
@@ -89,24 +89,23 @@ BlSharedEventDistributorExamples >> mouseOutEventOneOutOfTwoElements [
 	anElementOne := anElements first.
 	anElementTwo := anElements second.
 
-	aHandler shareEvents: { BlMouseOverEvent. BlMouseOutEvent. BlClickEvent }.
-	anElementOne addEventHandlerOn: BlMouseOutEvent do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
-	anElementTwo addEventHandlerOn: BlMouseOutEvent do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
+	aHandler shareEvents: { BlMouseEnterEvent. BlMouseLeaveEvent. BlClickEvent }.
+	anElementOne when: BlMouseEnterEvent do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
+	anElementTwo when: BlMouseEnterEvent do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
 	
-	anEvent := BlMouseOutEvent new.
-	BlSpace simulateEvent: anEvent on: anElementOne.
+	BlSpace simulateMouseMoveInside: anElementOne.
 
-	"self assert: aMouseEnterOne equals: 1.
-	self assert: aMouseEnterTwo equals: 1."
+	self assert: aMouseEnterOne equals: 1.
+	self assert: aMouseEnterTwo equals: 1.
 	
 	^ aContainer
 ]
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> mouseOverEventOneOutOfTwoElements [
+BlSharedEventDistributorExamples >> mouseLeaveEventOneOutOfTwoElements [
 	<gtExample>
-	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo anEvent |
-	aMouseEnterOne := aMouseEnterTwo := 0.
+	| aHandler anElements aContainer aMouseLeaveTwo aMouseLeaveOne anElementOne anElementTwo |
+	aMouseLeaveOne := aMouseLeaveTwo := 0.
 	aHandler := self installTwoElements.
 	anElements := aHandler elements.
 	aContainer := self container.
@@ -114,15 +113,18 @@ BlSharedEventDistributorExamples >> mouseOverEventOneOutOfTwoElements [
 	anElementOne := anElements first.
 	anElementTwo := anElements second.
 
-	aHandler shareEvents: { BlMouseOverEvent. BlMouseOutEvent. BlClickEvent }.
-	anElementOne addEventHandlerOn: BlMouseOverEvent do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
-	anElementTwo addEventHandlerOn: BlMouseOverEvent do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
-	
-	anEvent := BlMouseOverEvent new.
-	BlSpace simulateEvent: anEvent on: anElementOne.
+	aHandler shareEvents: { BlMouseEnterEvent. BlMouseLeaveEvent. BlClickEvent }.
+	anElementOne when: BlMouseLeaveEvent do: [ aMouseLeaveOne := aMouseLeaveOne + 1 ].
+	anElementTwo when: BlMouseLeaveEvent do: [ aMouseLeaveTwo := aMouseLeaveTwo + 1 ].
 
-	"self assert: aMouseEnterOne equals: 1.
-	self assert: aMouseEnterTwo equals: 1."
+	BlSpace
+		simulateEvents: {
+			BlMouseMoveEvent new position: (BlSpace locationInside: anElementOne); screenPosition: 0@0.
+			BlMouseMoveEvent new position: (BlSpace locationOutside: aContainer); screenPosition: 0@0 }
+		on: aContainer.
+
+	self assert: aMouseLeaveOne equals: 1.
+	self assert: aMouseLeaveTwo equals: 1.
 	
 	^ aContainer
 ]

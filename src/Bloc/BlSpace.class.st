@@ -45,6 +45,23 @@ Class {
 }
 
 { #category : #'debug - simulation' }
+BlSpace class >> locationInside: anElement [
+	"Return a random space location outside of element bounds"	
+	| theBounds aPosition |
+	
+	anElement topMostParent forceLayout.
+	theBounds := anElement bounds inSpace bounds.
+	
+	aPosition := anElement bounds inSpace bounds atRandom.
+		
+	self
+		assert: [ theBounds containsPoint: aPosition ]
+		description: [ 'Point must be inside of the bounds' ].
+		
+	^ aPosition
+]
+
+{ #category : #'debug - simulation' }
 BlSpace class >> locationOutside: anElement [
 	"Return a random space location outside of element bounds"	
 	| theBounds aPosition |
@@ -183,9 +200,7 @@ BlSpace class >> simulateMouseMoveInside: anElement [
 	"Simulate a mouse move event at a random location within element's bounds"
 	| aPosition |
 	
-	"we never know if an element was already layered out"
-	anElement topMostParent forceLayout.
-	aPosition := anElement bounds inSpace bounds atRandom.
+	aPosition := self locationInside: anElement.
 
 	self
 		simulateEvents: { BlMouseMoveEvent primary position: aPosition }

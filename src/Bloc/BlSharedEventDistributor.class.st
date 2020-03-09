@@ -40,7 +40,9 @@ BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 	anOldDiagonal := anOldBounds topLeft - anOldBounds bottomRight.
 	aNewBounds := aNewEvent target boundsInSpace.
 	aNewDiagonal := aNewBounds topLeft - aNewBounds bottomRight.
-	aRatio := anOldDiagonal / aNewDiagonal.
+	aRatio := ((aNewDiagonal x closeTo: 0) or: [ aNewDiagonal y closeTo: 0])
+		ifTrue: [ 1 ]
+		ifFalse: [ anOldDiagonal / aNewDiagonal ].
 	aNewPosition := (anOldEvent position - anOldBounds topLeft) * aRatio + aNewBounds topLeft.
 	aNewEvent position: aNewPosition.
 	aNewEvent screenPosition: anOldEvent screenPosition + (aNewPosition - anOldEvent position)
@@ -51,9 +53,6 @@ BlSharedEventDistributor >> dispatch: anEvent on: anElement [
 	| aNewEvent |
 
 	shouldHandle
-		ifFalse: [ ^ self ].
-	
-	anElement isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
 	
 	aNewEvent := anEvent newCopyFor: anElement.

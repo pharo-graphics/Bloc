@@ -96,7 +96,7 @@ BlBounds >> atRandom [
 	"Return a random integer point within this bounds"
 	<return: #Point>
 	
-	^ (self topLeft + (self width atRandom @ self height atRandom)) asIntegerPoint
+	^ (self topLeft + (self width asInteger atRandom @ self height asInteger atRandom)) asIntegerPoint
 ]
 
 { #category : #accessing }
