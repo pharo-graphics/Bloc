@@ -489,6 +489,13 @@ BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 	^ false
 ]
 
+{ #category : #layout }
+BlTextElement >> supportsBaseline [
+	<return: #Boolean>
+
+	^ true
+]
+
 { #category : #accessing }
 BlTextElement >> text [
 	"Return the text I currently represent.
