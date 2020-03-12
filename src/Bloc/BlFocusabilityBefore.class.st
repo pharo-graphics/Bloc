@@ -5,15 +5,13 @@ Class {
 }
 
 { #category : #focus }
-BlFocusabilityBefore >> focusables: anOrderedCollection along: aBlFocusSearchDirection of: anElement [
+BlFocusabilityBefore >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection of: anElement [
 	"anElement should get focus before descendants"
 
 	anElement isFocusable
-		ifTrue: [ anOrderedCollection add: anElement ].
+		ifTrue: [ aBlFocusFinderCandidates add: anElement ].
 	
 	anElement children
 		select: [ :aChild | aChild isVisible ]
-		thenDo: [ :aChild | aChild focusables: anOrderedCollection along: aBlFocusSearchDirection ].
-		
-	
+		thenDo: [ :aChild | aChild focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection ]
 ]

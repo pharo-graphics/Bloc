@@ -9,9 +9,12 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
+		'direction',
+		'rootElement',
 		'bestCandidateBounds',
 		'temporaryBounds',
-		'focusedBounds'
+		'focusedBounds',
+		'reference'
 	],
 	#category : #'Bloc-Utilities - Focus'
 }
@@ -21,122 +24,112 @@ BlFocusFinder >> bestCandidateBounds [
 	^ bestCandidateBounds
 ]
 
+{ #category : #accessing }
+BlFocusFinder >> direction [
+	^ direction
+]
+
+{ #category : #accessing }
+BlFocusFinder >> direction: anObject [
+	direction := anObject
+]
+
+{ #category : #'api - configuration' }
+BlFocusFinder >> down [
+	self direction: BlFocusSearchDirectionDown new
+]
+
 { #category : #initialization }
 BlFocusFinder >> initialize [
 	super initialize.
 	
 	bestCandidateBounds := BlBounds new.
 	temporaryBounds := BlBounds new.
-	focusedBounds := BlBounds new
+	focusedBounds := BlBounds new.
+
+	direction := BlFocusSearchDirectionDown new.
+	rootElement := BlElement new.
+	reference := BlFocusFinderReferenceArea new bounds: (0@0 extent: 0@0).
 ]
 
-{ #category : #'private - focus' }
-BlFocusFinder >> nextFocus: aFocusedElement in: aCollectionOfElements within: aFocusRootElement from: aFocusedBounds along: aBlFocusSearchDirection [
-	| requestedFocusedBounds |
-	
-	requestedFocusedBounds := aFocusedBounds.
-	
-	aFocusedElement
-		ifNotNil: [
-			requestedFocusedBounds
-				ifNil: [ requestedFocusedBounds := focusedBounds ].
-			aFocusedElement focusedBounds: requestedFocusedBounds.
-			aFocusRootElement localBoundsToMine: requestedFocusedBounds fromChild: aFocusedElement ]
-		ifNil: [
-			requestedFocusedBounds := aFocusedBounds.
-			requestedFocusedBounds
-				ifNil: [
-					requestedFocusedBounds := focusedBounds.
-					aBlFocusSearchDirection initFocusedBounds: requestedFocusedBounds root: aFocusRootElement ] ].
-		
-	^ aBlFocusSearchDirection
-		nextFocus: aFocusedElement
-		in: aCollectionOfElements
-		within: aFocusRootElement
-		from: requestedFocusedBounds
-		finder: self
+{ #category : #'api - configuration' }
+BlFocusFinder >> left [
+	self direction: BlFocusSearchDirectionLeft new
 ]
 
-{ #category : #focus }
-BlFocusFinder >> nextFocus: aFocusedElement within: aFocusRootElement along: aBlFocusSearchDirection [
-
-	^ self
-		nextFocus: aFocusedElement
-		within: aFocusRootElement
-		from: nil
-		along: aBlFocusSearchDirection
+{ #category : #'api - finder' }
+BlFocusFinder >> nextFocusDo: aBlock [
+	"Evaluate aBlock with the next element that should receive focus"
+	
+	self
+		nextFocusDo: aBlock
+		ifNone: [  ]
 ]
 
-{ #category : #'private - focus' }
-BlFocusFinder >> nextFocus: aFocusedElement within: aFocusRootElement from: aFocusedBounds along: aBlFocusSearchDirection [
-	| theFocusables nextFocus |
+{ #category : #'api - finder' }
+BlFocusFinder >> nextFocusDo: aBlock ifNone: anExceptionBlock [
+	"Evaluate aBlock with the next element that should receive focus"
+	| aReferenceBounds aReferenceElement theFocusCandidates |
+
+	aReferenceBounds := reference focusBoundsIn: rootElement.
+	aReferenceElement := reference focusElementIn: rootElement.
+
+	theFocusCandidates := BlFocusFinderCandidates new.
+	rootElement focusables: theFocusCandidates along: direction.
 	
-	nextFocus := nil.
-	theFocusables := OrderedCollection new.
-	
-	aFocusRootElement focusables: theFocusables along: aBlFocusSearchDirection.
-	theFocusables ifNotEmpty: [ 
-		nextFocus := self
-			nextFocus: aFocusedElement
-			in: theFocusables
-			within: aFocusRootElement
-			from: aFocusedBounds
-			along: aBlFocusSearchDirection ].
-	
-	
-	^ nextFocus
+	^ (direction
+		nextFocus: aReferenceElement
+		in: theFocusCandidates
+		within: rootElement
+		from: aReferenceBounds
+		finder: self)
+			ifNotNil: aBlock
+			ifNil: anExceptionBlock
 ]
 
-{ #category : #focus }
-BlFocusFinder >> nextFocusFrom: aFocusedBounds within: aFocusRootElement along: aBlFocusSearchDirection [
-	
-	focusedBounds bounds: aFocusedBounds.
-	^ self
-		nextFocus: nil
-		within: aFocusRootElement
-		from: focusedBounds
-		along: aBlFocusSearchDirection
+{ #category : #accessing }
+BlFocusFinder >> reference [
+	^ reference
 ]
 
-{ #category : #'private - accessing' }
-BlFocusFinder >> nextFocusable: anElement in: aCollection [
-	"Return a next focusable element after a given element within provided collection.
-	If anElement is nil I return the first element from a collection or nil if it is empty"
-	<return: #BlElement or: nil>
-
-	^ anElement
-		ifNotNil: [ | position |
-			position := aCollection lastIndexOf: anElement.
-			(position > 0 and: [ position + 1 <= aCollection size ])
-				ifTrue: [ aCollection at: position + 1 ]
-				ifFalse: [ aCollection
-			ifEmpty: [ nil ]
-			ifNotEmpty: [ aCollection first ] ] ]
-		ifNil: [ aCollection
-			ifEmpty: [ nil ]
-			ifNotEmpty: [ aCollection first ] ]
+{ #category : #accessing }
+BlFocusFinder >> reference: anObject [
+	reference := anObject
 ]
 
-{ #category : #'private - accessing' }
-BlFocusFinder >> previousFocusable: anElement in: aCollection [
-	"Return a previous focusable element before a given element within provided collection.
-	If anElement is nil I return the last element from a collection or nil if it is empty"
-	<return: #BlElement or: nil>
+{ #category : #'api - configuration' }
+BlFocusFinder >> referenceArea: aRectangle [
+	self reference: (BlFocusFinderReferenceArea new bounds: aRectangle)
+]
 
-	^ anElement
-		ifNotNil: [ | position |
-			position := aCollection lastIndexOf: anElement.
-			position > 1
-				ifTrue: [ aCollection at: position - 1 ]
-				ifFalse: [ aCollection
-			ifEmpty: [ nil ]
-			ifNotEmpty: [ aCollection last ] ] ]
-		ifNil: [ aCollection
-			ifEmpty: [ nil ]
-			ifNotEmpty: [ aCollection last ] ]
+{ #category : #'api - configuration' }
+BlFocusFinder >> referenceElement: aBlElement [
+	self reference: (BlFocusFinderReferenceElement new element: aBlElement)
+]
+
+{ #category : #'api - configuration' }
+BlFocusFinder >> right [
+	self direction: BlFocusSearchDirectionRight new
+]
+
+{ #category : #accessing }
+BlFocusFinder >> root [
+	<return: #BlElement>
+
+	^ rootElement
+]
+
+{ #category : #accessing }
+BlFocusFinder >> root: aBlElement [
+	rootElement := aBlElement
 ]
 
 { #category : #accessing }
 BlFocusFinder >> temporaryBounds [
 	^ temporaryBounds
+]
+
+{ #category : #'api - configuration' }
+BlFocusFinder >> up [
+	self direction: BlFocusSearchDirectionUp new
 ]

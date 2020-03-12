@@ -9,29 +9,36 @@ BlFocusSearchDirectionAbsolute >> beam: aFirstBlBounds beats: aSecondBlBounds in
 	"Return true if first bounds are better then second bounds based on
 	wether they are in the beam of source bounds, false otherwise"
 	<return: #Boolean>
-	| firstInBeam secondInBeam |
+	| firstInBeam secondInBeam aFirstDistance aSecondDistance |
 	
 	firstInBeam := self beamsOverlap: aSourceBlBounds and: aFirstBlBounds.
 	secondInBeam := self beamsOverlap: aSourceBlBounds and: aSecondBlBounds.
 	
-	"Return false if first is not in beam or if second is"
-	(secondInBeam or: [ firstInBeam not ])
-		ifTrue: [ ^ false ].
+	(firstInBeam and: [ secondInBeam ])
+		ifFalse: [
+			"Return false if first is not in beam or if second is"
+			(secondInBeam or: [ firstInBeam not ])
+				ifTrue: [ ^ false ].
 
-	"at this point first is in beam, second is not"
+			"at this point first is in beam, second is not"
+			
+			"if second bounds are not in the direction of the source,
+			first bounds are better, return true"
+			(self is: aSecondBlBounds inDirection: aSourceBlBounds)
+				ifFalse: [ ^ true ].
+
+			"In case of horizontal directions bounds in beam are definitely better"
+			self isHorizontal
+				ifTrue: [ ^ true ] ].
+			
+	aFirstDistance := self majorAxisDistanceNormalized: aFirstBlBounds and: aSourceBlBounds.
+	aSecondDistance := self majorAxisDistanceNormalized: aSecondBlBounds and: aSourceBlBounds.
 	
-	"if second bounds are not in the direction of the source,
-	first bounds are better, return true"
-	(self is: aSecondBlBounds inDirection: aSourceBlBounds)
-		ifFalse: [ ^ true ].
-
-	"In case of horizontal directions bounds in beam are definitely better"
-	self isHorizontal
-		ifTrue: [ ^ true ].
+	(firstInBeam and: [ secondInBeam not ])
+		ifTrue: [ ^ aFirstDistance <= aSecondDistance ].
 
 	"In case of vertical directions we should compare bounds based on distance along major axis"
-	^ (self majorAxisDistanceNormalized: aFirstBlBounds and: aSourceBlBounds)
-		< (self majorAxisDistanceToFarEdgeNormalized: aSecondBlBounds and: aSourceBlBounds)
+	^ aFirstDistance < aSecondDistance
 ]
 
 { #category : #testing }
@@ -64,6 +71,7 @@ BlFocusSearchDirectionAbsolute >> isBetterCandidate: aFirstBlBounds then: aSecon
 	"Return true if first bounds is a better candidate then seconds bounds for focus search
 	in this direction from a source bounds, false otherwise"
 	<return: #Boolean>
+	| aFirstMajorDistance aSecondMajorDistance isMajorSmaller isWeightedSmaller |
 	
 	"if first is not even a candidate, second is considered to be better"
 	(self is: aFirstBlBounds candidate: aSourceBlBounds)
@@ -81,14 +89,29 @@ BlFocusSearchDirectionAbsolute >> isBetterCandidate: aFirstBlBounds then: aSecon
 	"second is better by beams"
 	(self beam: aSecondBlBounds beats: aFirstBlBounds in: aSourceBlBounds)
 		ifTrue: [ ^ false ].
+
+	aFirstMajorDistance := self majorAxisDistanceNormalized: aFirstBlBounds and: aSourceBlBounds.
+	aSecondMajorDistance := self majorAxisDistanceNormalized: aSecondBlBounds and: aSourceBlBounds.
 	
-	"compare by distance, the smaller distance is better"
-	^ (self
-		weightedDistance: (self majorAxisDistanceNormalized: aFirstBlBounds and: aSourceBlBounds)
+	isMajorSmaller := aFirstMajorDistance < aSecondMajorDistance.
+	isWeightedSmaller := (self
+		weightedDistance: aFirstMajorDistance
 		and: (self minorAxisDistance: aFirstBlBounds and: aSourceBlBounds))
 			< (self
-				weightedDistance: (self majorAxisDistanceNormalized: aSecondBlBounds and: aSourceBlBounds)
-				and: (self minorAxisDistance: aSecondBlBounds and: aSourceBlBounds))
+				weightedDistance: aSecondMajorDistance
+				and: (self minorAxisDistance: aSecondBlBounds and: aSourceBlBounds)).
+	
+	"if major comparison is in sync with weighted we trust the value"
+	isMajorSmaller = isWeightedSmaller
+		ifTrue: [ ^ isMajorSmaller ].
+	
+	"otherwise we use nearest edge comparison"
+	^ (self
+		weightedDistance: aFirstMajorDistance
+		and: (self minorAxisDistanceToNearEdge: aFirstBlBounds and: aSourceBlBounds))
+			< (self
+				weightedDistance: aSecondMajorDistance
+				and: (self minorAxisDistanceToNearEdge: aSecondBlBounds and: aSourceBlBounds))
 ]
 
 { #category : #testing }
@@ -99,7 +122,7 @@ BlFocusSearchDirectionAbsolute >> isHorizontal [
 	^ self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : #'geometry - major' }
 BlFocusSearchDirectionAbsolute >> majorAxisDistance: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the nearest edge of the destination bounds"
@@ -108,7 +131,7 @@ BlFocusSearchDirectionAbsolute >> majorAxisDistance: aDestinationBlBounds and: a
 	^ self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : #'geometry - major' }
 BlFocusSearchDirectionAbsolute >> majorAxisDistanceNormalized: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the nearest edge of the destination bounds
@@ -118,7 +141,7 @@ BlFocusSearchDirectionAbsolute >> majorAxisDistanceNormalized: aDestinationBlBou
 	^ 0 max: (self majorAxisDistance: aDestinationBlBounds and: aSourceBlBounds)
 ]
 
-{ #category : #geometry }
+{ #category : #'geometry - major' }
 BlFocusSearchDirectionAbsolute >> majorAxisDistanceToFarEdge: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the far edge of the destination bounds"
@@ -127,7 +150,7 @@ BlFocusSearchDirectionAbsolute >> majorAxisDistanceToFarEdge: aDestinationBlBoun
 	^ self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : #'geometry - major' }
 BlFocusSearchDirectionAbsolute >> majorAxisDistanceToFarEdgeNormalized: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the far edge of the destination bounds
@@ -138,10 +161,19 @@ BlFocusSearchDirectionAbsolute >> majorAxisDistanceToFarEdgeNormalized: aDestina
 	^ 1 max: (self majorAxisDistanceToFarEdge: aDestinationBlBounds and: aSourceBlBounds)
 ]
 
-{ #category : #geometry }
+{ #category : #'geometry - minor' }
 BlFocusSearchDirectionAbsolute >> minorAxisDistance: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a minor axis depending on the type of direction
 	from source bounds to the nearest edge of the destination bounds"
+	<return: #Number>
+	
+	^ self subclassResponsibility
+]
+
+{ #category : #'geometry - minor' }
+BlFocusSearchDirectionAbsolute >> minorAxisDistanceToNearEdge: aDestinationBlBounds and: aSourceBlBounds [
+	"Return the distance along a minor axis depending on the type of direction
+	from the furthers source bounds' edge to the neares edge of the destination bounds"
 	<return: #Number>
 	
 	^ self subclassResponsibility
@@ -171,7 +203,7 @@ BlFocusSearchDirectionAbsolute >> nextFocus: aFocusedElement in: aCollectionOfEl
 					ifTrue: [ 
 						bestCandidateBounds bounds: tempBounds.
 						closestElement := anElement ] ] ].
-			
+
 	^ closestElement
 ]
 

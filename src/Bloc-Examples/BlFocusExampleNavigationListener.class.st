@@ -34,6 +34,10 @@ BlFocusExampleNavigationListener >> keyDownEvent: anEvent [
 		ifTrue: [ direction := BlFocusSearchDirectionDown new ].
 				
 	next := direction ifNotNil: [ :aDirection |
-		focusFinder nextFocus: focused within: root along: aDirection ].
+		focusFinder
+			direction: aDirection;
+			root: root;
+			referenceElement: focused;
+			nextFocusDo: #yourself ifNone: [ nil ] ].
 	next ifNotNil: #transferFocus
 ]

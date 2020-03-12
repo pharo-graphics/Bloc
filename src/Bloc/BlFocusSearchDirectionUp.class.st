@@ -48,7 +48,7 @@ BlFocusSearchDirectionUp >> isHorizontal [
 	^ false
 ]
 
-{ #category : #geometry }
+{ #category : #'geometry - major' }
 BlFocusSearchDirectionUp >> majorAxisDistance: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the nearest edge of the destination bounds"
@@ -57,7 +57,7 @@ BlFocusSearchDirectionUp >> majorAxisDistance: aDestinationBlBounds and: aSource
 	^ aSourceBlBounds top - aDestinationBlBounds bottom
 ]
 
-{ #category : #geometry }
+{ #category : #'geometry - major' }
 BlFocusSearchDirectionUp >> majorAxisDistanceToFarEdge: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the far edge of the destination bounds"
@@ -66,14 +66,32 @@ BlFocusSearchDirectionUp >> majorAxisDistanceToFarEdge: aDestinationBlBounds and
 	^ aSourceBlBounds top - aDestinationBlBounds top
 ]
 
-{ #category : #geometry }
+{ #category : #'geometry - minor' }
 BlFocusSearchDirectionUp >> minorAxisDistance: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a minor axis depending on the type of direction
 	from source bounds to the nearest edge of the destination bounds"
 	<return: #Number>
 	
-	^ (((aSourceBlBounds left + aSourceBlBounds width) / 2.0)
-		- ((aDestinationBlBounds left + aDestinationBlBounds width) / 2.0)) abs
+	^ (aDestinationBlBounds center x - aSourceBlBounds center x) abs
+]
+
+{ #category : #'geometry - minor' }
+BlFocusSearchDirectionUp >> minorAxisDistanceToNearEdge: aDestinationBlBounds and: aSourceBlBounds [
+	"Return the distance along a minor axis depending on the type of direction
+	from the furthers source bounds' edge to the neares edge of the destination bounds"
+	<return: #Number>
+	
+	^ (((aSourceBlBounds left - aDestinationBlBounds left) abs
+		min: ((aSourceBlBounds left - aDestinationBlBounds right) abs))
+			min: ((aSourceBlBounds right - aDestinationBlBounds left) abs))
+				min: ((aSourceBlBounds right - aDestinationBlBounds right) abs)
+]
+
+{ #category : #focus }
+BlFocusSearchDirectionUp >> name [
+	<return: #String>
+
+	^ 'up'
 ]
 
 { #category : #geometry }
@@ -83,4 +101,11 @@ BlFocusSearchDirectionUp >> offsetCandidateBounds: aCandidateBounds according: a
 	aCandidateBounds
 		translateX: 0
 		Y: aFocusedBounds height + 1
+]
+
+{ #category : #geometry }
+BlFocusSearchDirectionUp >> vector [
+	<return: #BlVector>
+
+	^ BlVector x: 0 y: -1
 ]

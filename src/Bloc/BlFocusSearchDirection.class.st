@@ -15,8 +15,23 @@ BlFocusSearchDirection >> initFocusedBounds: aFocusedBounds root: aFocusRootElem
 ]
 
 { #category : #focus }
+BlFocusSearchDirection >> name [
+	<return: #String>
+
+	^ 'Uknown'
+]
+
+{ #category : #focus }
 BlFocusSearchDirection >> nextFocus: aFocusedElement in: aCollectionOfElements within: aFocusRootElement from: aFocusedBounds finder: aFocusFinder [
 	<return: #BlElement>
 	
 	^ self subclassResponsibility
+]
+
+{ #category : #geometry }
+BlFocusSearchDirection >> vector [
+	"Return a vector that represents a direction of the search"
+	<return: #BlVector>
+
+	^ BlVector x: 0 y: 0
 ]

@@ -8,7 +8,7 @@ How to:
 Class {
 	#name : #BlFocusExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Focus'
+	#category : #'Bloc-Examples-Focus'
 }
 
 { #category : #examples }
@@ -50,7 +50,7 @@ BlFocusExamples class >> horizontal [
 { #category : #opening }
 BlFocusExamples class >> openInWindow: anElement named: aTitleString [
 	| aSpace |
-		
+
 	aSpace := BlSpace new
 		title: aTitleString.
 

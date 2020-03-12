@@ -1919,6 +1919,10 @@ BlElement >> localBoundsToMine: aBlBounds fromChild: anElement [
 	<return: #BlBounds>
 	| aParentElement |
 	
+	self
+		assert: [ aBlBounds isKindOf: BlBounds ]
+		description: [ 'Bounds should be {1} but was {2}' format: { BlBounds . aBlBounds class } ].
+	
 	anElement == self
 		ifTrue: [ ^ aBlBounds ].
 		
