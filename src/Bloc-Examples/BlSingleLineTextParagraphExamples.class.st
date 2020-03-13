@@ -114,7 +114,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharacterInHelloWorld [
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent on: self measurer ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
-	^ theIndices
+	^ aParagraph
 ]
 
 { #category : #'geometry - Object>>#printOn:' }
@@ -147,7 +147,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInPointWithDot [
 		aParagraph indexAtPosition: aPoint on: self measurer ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
-	^ theIndices
+	^ aParagraph
 ]
 
 { #category : #'geometry - 100@100.' }
@@ -165,7 +165,43 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInRealPointWithD
 		aParagraph indexAtPosition: aPoint on: self realMeasurer ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
-	^ theIndices
+	^ aParagraph
+]
+
+{ #category : #'geometry - tab tab' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInRealTabTab [
+	<gtExample>
+	| aParagraph theIndices |
+
+	aParagraph := self newParagraph.
+	aParagraph text: (String tab, String tab) asRopedText.
+	aParagraph measureOn: self realMeasurer.
+	
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
+		| aPoint |
+		aPoint := aParagraph positionAt: anIndex on: self realMeasurer.
+		aParagraph indexAtPosition: aPoint on: self realMeasurer ].
+	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
+
+	^ aParagraph
+]
+
+{ #category : #'geometry - tab tab' }
+BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInTabTab [
+	<gtExample>
+	| aParagraph theIndices |
+
+	aParagraph := self newParagraph.
+	aParagraph text: (String tab, String tab) asRopedText.
+	aParagraph measureOn: self measurer.
+	
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
+		| aPoint |
+		aPoint := aParagraph positionAt: anIndex on: self measurer.
+		aParagraph indexAtPosition: aPoint on: self measurer ].
+	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
+
+	^ aParagraph
 ]
 
 { #category : #'geometry - haba' }
@@ -191,7 +227,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHell
 
 	self assert: anIndex equals: 1.
 
-	^ anIndex
+	^ aParagraph
 ]
 
 { #category : #'geometry - Object>>#printOn:' }
@@ -222,7 +258,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInReal
 
 	self assert: anIndex equals: 1.
 
-	^ anIndex
+	^ aParagraph
 ]
 
 { #category : #'geometry - haba' }
@@ -249,7 +285,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInHe
 
 	self assert: anIndex equals: 7.
 
-	^ anIndex
+	^ aParagraph
 ]
 
 { #category : #'geometry - Object>>#printOn:' }

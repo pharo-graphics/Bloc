@@ -132,7 +132,10 @@ BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
 			aParagraph := aMeasurer
 				measureSpan: aSubSpan
 				on: aCanvas.
-			(aWidth - aParagraph width) sign ]
+			
+			(aWidth closeTo: aParagraph advance precision: 0.1)
+				ifTrue: [ 0 ]
+				ifFalse: [ (aWidth - aParagraph advance) sign ] ]
 		"exact match"
 		do: [ :anIndex | self from + anIndex - 1 ]
 
@@ -154,7 +157,7 @@ BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
 					aParagraph := aMeasurer
 						measureSpan: aSubSpan
 						on: aCanvas.
-					leftWidth := aParagraph width.
+					leftWidth := aParagraph advance.
 					leftSpanIndex := leftIndex ].
 
 			rightIndex > self spanEnd
@@ -169,7 +172,7 @@ BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
 					aParagraph := aMeasurer
 						measureSpan: aSubSpan
 						on: aCanvas.
-					rightWidth := aParagraph width.
+					rightWidth := aParagraph advance.
 					rightSpanIndex := rightIndex ].
 
 			spanIndex := aWidth <= (leftWidth + ((rightWidth - leftWidth) / 2.0))
