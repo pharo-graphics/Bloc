@@ -6,7 +6,7 @@ BlNormalizedPolyline >> buildPathOnSpartaCanvas: aCanvas [
 	
 	aPathBuilder := aCanvas path. 
 	
-	theScaledVertices := self vertices collect: [ :eachVertex | self extent * eachVertex ].
+	theScaledVertices := self vertices collect: [ :eachVertex | (self extent * eachVertex) asFloatPoint ].
 	theScaledVertices size <= 1
 		ifTrue: [ ^ aPathBuilder build ].
 	
