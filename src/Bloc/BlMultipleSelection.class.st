@@ -81,6 +81,11 @@ BlMultipleSelection >> isNotEmpty [
 	^ selections anySatisfy: #isNotEmpty
 ]
 
+{ #category : #copying }
+BlMultipleSelection >> postCopy [
+	selections := selections collect: [ :eachSelection | eachSelection copy ]
+]
+
 { #category : #'api - enumerating' }
 BlMultipleSelection >> reverseDo: aBlock [
 	"Evaluate a given block with all recorded selection intervals in reverse direction"

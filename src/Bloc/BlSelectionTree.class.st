@@ -167,6 +167,12 @@ BlSelectionTree >> overlappingNeighbours: aMonotoneTextSelection in: aStream [
 		ifTrue: [ self root overlappingNeighbours: aMonotoneTextSelection in: aStream ]
 ]
 
+{ #category : #copying }
+BlSelectionTree >> postCopy [
+	root := root copy.
+	root ifNotNil: [ root parent: self ]
+]
+
 { #category : #printing }
 BlSelectionTree >> printOn: aStream [
 

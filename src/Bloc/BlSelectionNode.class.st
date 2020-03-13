@@ -262,6 +262,21 @@ BlSelectionNode >> parent: aBlSelectionNode [
 	parent := aBlSelectionNode
 ]
 
+{ #category : #copying }
+BlSelectionNode >> postCopy [
+	right := right copy.
+	right ifNotNil: [ right parent: self ].
+	
+	left := left copy.
+	left ifNotNil: [ left parent: self ].
+	
+	high := high copy.
+	selection := selection copy
+	
+	
+	
+]
+
 { #category : #printing }
 BlSelectionNode >> printOn: aStream [
 

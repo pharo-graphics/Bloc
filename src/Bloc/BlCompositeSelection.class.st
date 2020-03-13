@@ -94,6 +94,11 @@ BlCompositeSelection >> isNotEmpty [
 	^ selections isNotEmpty
 ]
 
+{ #category : #copying }
+BlCompositeSelection >> postCopy [
+	selections := selections copy
+]
+
 { #category : #printing }
 BlCompositeSelection >> printOn: aStream [
 	selections printOn: aStream
