@@ -135,7 +135,12 @@ BlSubTextIterator >> nextWhitespace [
 	until the first non-whitespace character without including it"
 	<return: #BlText>
 
-	^ iterator nextWhitespace
+	| aStartPosition aSegment |
+	
+	aStartPosition := iterator position + 1.
+	aSegment :=  iterator nextWhitespace.
+
+	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
 ]
 
 { #category : #'iterator - enumeration' }

@@ -126,8 +126,12 @@ BlRopedTextIterator >> nextWhitespace [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first non-whitespace character without including it"
 	<return: #BlText>
+	| aStartPosition aSegment |
+	
+	aStartPosition := iterator position + 1.
+	aSegment :=  iterator nextWhitespace.
 
-	^ BlRopedText rope: iterator nextWhitespace
+	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
 ]
 
 { #category : #'iterator - enumeration' }

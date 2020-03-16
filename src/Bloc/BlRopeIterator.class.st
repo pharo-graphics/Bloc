@@ -225,7 +225,7 @@ BlRopeIterator >> nextWhitespace [
 BlRopeIterator >> nextWord [
 	<return: #BlRope>
 
-	^ self nextSegment: [ :item | item isCharacter and: [ item isSeparator ] ]
+	^ self nextSegment: [ :item | item isCharacter and: [ item isSeparator not ] ]
 ]
 
 { #category : #'iterator - enumeration' }
