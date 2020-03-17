@@ -45,6 +45,16 @@ BlDevScripterFireEventStep >> initialize [
 	position := BlDevScripterEventPosition new.
 ]
 
+{ #category : #accessing }
+BlDevScripterFireEventStep >> mouseEnter [
+	self eventOfClass: BlMouseEnterEvent
+]
+
+{ #category : #accessing }
+BlDevScripterFireEventStep >> mouseLeave [
+	self eventOfClass: BlMouseLeaveEvent
+]
+
 { #category : #'accessing - event' }
 BlDevScripterFireEventStep >> mouseOut [
 	self eventOfClass: BlMouseOutEvent
