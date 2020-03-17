@@ -4,6 +4,7 @@ I define common action steps
 Trait {
 	#name : #TBlDevScripterActionStep,
 	#traits : 'TBlDevScripterCheckStepCreation',
+	#classTraits : 'TBlDevScripterCheckStepCreation classTrait',
 	#category : #'Bloc-DevTool-Scripter'
 }
 
