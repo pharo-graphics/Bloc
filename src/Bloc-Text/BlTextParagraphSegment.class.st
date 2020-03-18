@@ -153,6 +153,13 @@ BlTextParagraphSegment >> paragraph: aTextParagraph [
 ]
 
 { #category : #accessing }
+BlTextParagraphSegment >> right [
+	<return: #Number>
+	
+	^ left + width
+]
+
+{ #category : #accessing }
 BlTextParagraphSegment >> to [
 	<return: #Number>
 

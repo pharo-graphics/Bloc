@@ -75,8 +75,8 @@ BlTextElement >> baseline: aTextParagraphBaseline [
 { #category : #layout }
 BlTextElement >> baselineOffset [
 	^ paragraph
-		ifNotNil: [ paragraph baseline y ]
-		ifNil: [ 0 ].
+		ifNotNil: [ paragraph baseline y + self padding top ]
+		ifNil: [ 0 ]
 ]
 
 { #category : #'api - text' }

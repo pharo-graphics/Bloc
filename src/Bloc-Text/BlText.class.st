@@ -141,6 +141,23 @@ BlText >> attributesBuilder [
 	^ self
 ]
 
+{ #category : #'text - attributes' }
+BlText >> attributesDo: aBlock [
+	"Evaluate a block with all attributes for each text item"
+	| anIterator |
+	
+	anIterator := self iterator.
+	
+	"even if there is no next we should still ask for attributes, so we start from `do`"
+	[ aBlock cull: anIterator attributes cull: anIterator position ]
+		doWhileTrue: [
+			| hasNext |
+			hasNext := anIterator hasNext.
+			anIterator hasNext
+				ifTrue: [  anIterator next ].
+			hasNext ]
+]
+
 { #category : #'text - copying' }
 BlText >> characters [
 	<return: #BlCharacterText>
