@@ -146,3 +146,17 @@ TBlEventTarget >> shortcuts [
 TBlEventTarget >> when: anEventClass do: aBlock [
 	self addEventHandlerOn: anEventClass do: aBlock
 ]
+
+{ #category : #'event management' }
+TBlEventTarget >> when: anEventClass doOnce: aBlock [
+	| anEventHandler |
+	
+	anEventHandler := nil.
+	anEventHandler := BlEventHandler
+		on: anEventClass
+		do: [ :anEvent |
+			self removeEventHandler: anEventHandler.
+			aBlock cull: anEvent ].
+	
+	self addEventHandler: anEventHandler
+]
