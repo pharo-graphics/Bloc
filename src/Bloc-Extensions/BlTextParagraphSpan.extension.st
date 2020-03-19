@@ -18,7 +18,9 @@ BlTextParagraphSpan >> gtPositionsAtIndicesFor: aView [
 					t scaleBy: aScale.
 					t translateBy: (0@self top negated) + 2 ]
 				during: [
-					self drawOnSpartaCanvas: aCanvas.
+					aCanvas transform
+						by: [ :t | t translateBy: self baseline negated ]
+						during: [ self drawOnSpartaCanvas: aCanvas ].
 					0 to: self spanLength do: [ :eachIndex |
 						| aPosition |
 						

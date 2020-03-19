@@ -9,7 +9,7 @@ BlTextAttribute >> applyOnSpartaTextPainter: aTextPainter with: aSpartaSpan [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlTextAttribute >> applyOnTransformation: aSpartaMatrix with: aBrSpan [
+BlTextAttribute >> applyOnTextParagraph: aTextParagraph from: aStartIndex to: aToIndex [
 ]
 
 { #category : #'*Bloc-Sparta' }

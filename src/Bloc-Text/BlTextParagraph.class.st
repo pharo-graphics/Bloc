@@ -40,10 +40,11 @@ Class {
 		'end',
 		'text',
 		'tabWidth',
-		'selection',
 		'containerExtent',
 		'session',
-		'scale'
+		'scale',
+		'selection',
+		'highlights'
 	],
 	#classInstVars : [
 		'matrix'
@@ -205,6 +206,26 @@ BlTextParagraph >> height [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - highlighting' }
+BlTextParagraph >> highlight: aHighlightAttribute from: aFromIndex to: aToIndex [
+	highlights
+		ifNil: [ highlights := IdentityDictionary new ].
+
+	(highlights
+		at: aHighlightAttribute
+		ifAbsentPut: [ BlTextParagraphHighlight new ])
+			highlight: aHighlightAttribute paint
+			from: ((aFromIndex - 1) max: 0)
+			to: aToIndex
+]
+
+{ #category : #'api - instantiation' }
+BlTextParagraph >> highlights [
+	<return: #Collection of: #BlTextParagraphHighlight>
+
+	^ highlights
+]
+
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> indexAtPosition: aPoint [
 	<return: #Number>
@@ -361,6 +382,7 @@ BlTextParagraph >> reset [
 	session := nil.
 	end := 0.
 	selection := nil.
+	highlights := nil.
 	containerExtent := 0@0.
 	baseline := BlTextParagraphAscentLooseBaseline uniqueInstance.
 	scale := 1

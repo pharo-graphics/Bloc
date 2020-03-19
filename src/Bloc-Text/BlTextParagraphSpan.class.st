@@ -94,7 +94,7 @@ BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
 				measureSpan: aSubSpan
 				on: aCanvas.
 			
-			(aWidth closeTo: aParagraph advance precision: 0.1)
+			(aWidth closeTo: aParagraph advance epsilon: 0.1)
 				ifTrue: [ 0 ]
 				ifFalse: [ (aWidth - aParagraph advance) sign ] ]
 		"exact match"
@@ -195,6 +195,13 @@ BlTextParagraphSpan >> normalize: aScale [
 	top := newTop.
 
 	advance := advance ceilingTicks: aScale
+]
+
+{ #category : #accessing }
+BlTextParagraphSpan >> paragraph: aTextParagraph [
+	super paragraph: aTextParagraph.
+
+	self attributes do: [ :eachAttribute | eachAttribute applyOnTextParagraph: aTextParagraph from: self from to: self to ]
 ]
 
 { #category : #geometry }

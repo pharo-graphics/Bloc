@@ -233,7 +233,9 @@ BlTextElement >> editorMesurement [
 BlTextElement >> indexAtScreenPosition: aPoint [
 	<return: #Number>
 
-	^ self paragraph indexAtPosition: aPoint on: self measurer measurer
+	^ self paragraph
+		indexAtPosition: aPoint - self padding topLeft
+		on: self measurer measurer
 ]
 
 { #category : #initialization }
@@ -426,7 +428,7 @@ BlTextElement >> screenPositionAt: aTextIndex [
 	| aScreenPosition |
 	
 	aScreenPosition := self paragraph positionAt: aTextIndex on: self measurer measurer.
-	^ aScreenPosition x @ (self height / 2.0)
+	^ (aScreenPosition x + self padding left) @ ((self height + self padding height) / 2.0)
 ]
 
 { #category : #'selection - management' }

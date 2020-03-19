@@ -2539,8 +2539,8 @@ BlElement >> opacity: aNumber [
 	transparent, and the other way around, if opacity is almost 1
 	we can treat element as completely opaque.
 	Implementation detail: #reduce has too high precision for our needs"
-	(opacity closeTo: 0.0 precision: 0.001) ifTrue: [ opacity := 0.0 ].
-	(opacity closeTo: 1.0 precision: 0.001) ifTrue: [ opacity := 1.0 ].
+	(opacity closeTo: 0.0 epsilon: 0.001) ifTrue: [ opacity := 0.0 ].
+	(opacity closeTo: 1.0 epsilon: 0.001) ifTrue: [ opacity := 1.0 ].
 
 	self invalidate
 ]
