@@ -121,10 +121,21 @@ BlCollectionRope >> delete: aStart to: anEnd [
 	
 	"deleting from a long collection is not efficient, so we will use subropes instead"
 	self size >= self class combineLength
-		ifTrue: [ ^ (self from: 0 to: aStart) append: (self from: anEnd to: self size) ].
+		ifTrue: [
+			^ aStart isZero
+				ifTrue: [
+					anEnd = self size
+						ifTrue: [ self empty ]
+						ifFalse: [ self from: anEnd to: self size ] ]
+				ifFalse: [
+					| aLeftPart |
+					aLeftPart := self from: 0 to: aStart.
+					anEnd = self size
+						ifTrue: [ aLeftPart ]
+						ifFalse: [ aLeftPart append: (self from: anEnd to: self size) ] ] ].
 
 	newCollection := collection species new: collection size - (anEnd - aStart).
-	
+
 	newCollection
 		replaceFrom: 1 to: aStart
 		with: collection
