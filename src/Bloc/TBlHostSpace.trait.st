@@ -14,6 +14,7 @@ Trait {
 		'renderer'
 	],
 	#traits : 'TBlSpaceProperties',
+	#classTraits : 'TBlSpaceProperties classTrait',
 	#category : #'Bloc-Universe - Host'
 }
 
