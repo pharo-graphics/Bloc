@@ -4,8 +4,8 @@ I am a fallback host space that is chosen if there are no other available and su
 Class {
 	#name : #BlHeadlessHostSpace,
 	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlDebug',
-	#classTraits : 'TBlHostSpace classTrait + TBlDebug classTrait',
+	#traits : 'TBlHostSpace + TBlDebug + TBlSpaceProperties',
+	#classTraits : 'TBlHostSpace classTrait + TBlDebug classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
 		'eventFetcher',
 		'position',

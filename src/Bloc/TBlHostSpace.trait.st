@@ -13,7 +13,6 @@ Trait {
 		'universe',
 		'renderer'
 	],
-	#traits : 'TBlSpaceProperties',
 	#category : #'Bloc-Universe - Host'
 }
 

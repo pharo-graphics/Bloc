@@ -5,8 +5,8 @@ My responsibility is to control OSWindow window using unified host space api.
 Class {
 	#name : #BlOSWindowSpace,
 	#superclass : #Object,
-	#traits : 'TBlHostSpace',
-	#classTraits : 'TBlHostSpace classTrait',
+	#traits : 'TBlHostSpace + TBlSpaceProperties',
+	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
 		'window',
 		'eventFetcher',

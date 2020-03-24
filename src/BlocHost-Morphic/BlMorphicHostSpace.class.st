@@ -6,8 +6,8 @@ For more information and example, please refer to BlMorphicHost.
 Class {
 	#name : #BlMorphicHostSpace,
 	#superclass : #Object,
-	#traits : 'TBlHostSpace',
-	#classTraits : 'TBlHostSpace classTrait',
+	#traits : 'TBlHostSpace + TBlSpaceProperties',
+	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
 		'spaceHostMorph'
 	],

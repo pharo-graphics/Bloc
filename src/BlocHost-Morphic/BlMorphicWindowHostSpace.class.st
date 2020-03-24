@@ -7,8 +7,8 @@ Depends on Bloc-Sparta
 Class {
 	#name : #BlMorphicWindowHostSpace,
 	#superclass : #Object,
-	#traits : 'TBlHostSpace',
-	#classTraits : 'TBlHostSpace classTrait',
+	#traits : 'TBlHostSpace + TBlSpaceProperties',
+	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
 		'morphicWindow',
 		'isFullSize',
