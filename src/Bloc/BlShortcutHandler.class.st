@@ -30,8 +30,8 @@ BlShortcutHandler >> handleEvent: aShortcutEvent [
 	| matchingShortcuts |
 
 	matchingShortcuts := self shortcuts
-		select: [ :aShortcut | aShortcut matches: aShortcutEvent buffer ]
-		thenCollect: [ :aShortcut | aShortcut -> (aShortcut match: aShortcutEvent buffer) ].
+		select: [ :eachShortcut | eachShortcut matches: aShortcutEvent buffer ]
+		thenCollect: [ :eachShortcut | eachShortcut -> (eachShortcut match: aShortcutEvent buffer) ].
 	matchingShortcuts sort: [ :a :b | a value > b value ].
 	
 	"when shortcut event is repeated we only want to process repeatable shortcuts"
@@ -44,7 +44,7 @@ BlShortcutHandler >> handleEvent: aShortcutEvent [
 			aShortcut := theShortcuts first key.
 			"let users explicitely set consumed to false so it bubbles up"
 			aShortcutEvent consumed: true.
-			aShortcut action cull: aShortcut cull: aShortcutEvent ]
+			aShortcut action cull: aShortcutEvent cull: aShortcut ]
 ]
 
 { #category : #initialization }
