@@ -2350,6 +2350,19 @@ BlElement >> nextEventTarget [
 	^ self parent
 ]
 
+{ #category : #'children accessing' }
+BlElement >> nextSiblingDo: aBlock [
+	"Evaluate aBlock with the next child in my parent after me if there is one"
+	self hasParent
+		ifFalse: [ ^ self ].
+	
+	"I am the last and have no next siblings"
+	self parent children last == self
+		ifTrue: [ ^ self ].
+
+	^ aBlock value: (self parent childAt: (self parent childIndexOf: self) + 1)
+]
+
 { #category : #'geometry hooks' }
 BlElement >> notifyExtentChanged [
 	"Notify element event listeners that my extent changed.
@@ -2746,6 +2759,20 @@ BlElement >> preventMouseEvents [
 	It does not influence the ability of the children to handle events, hence I am a local property"
 	
 	shouldHandleMouseEvents := false
+]
+
+{ #category : #'children accessing' }
+BlElement >> previousSiblingDo: aBlock [
+	"Evaluate aBlock with the previous child in my parent before me if there is one"
+
+	self hasParent
+		ifFalse: [ ^ self ].
+	
+	"I am the first and have no previous siblings"
+	self parent children first == self
+		ifTrue: [ ^ self ].
+
+	^ aBlock value: (self parent childAt: (self parent childIndexOf: self) - 1)
 ]
 
 { #category : #printing }

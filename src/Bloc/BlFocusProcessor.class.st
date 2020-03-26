@@ -71,15 +71,10 @@ BlFocusProcessor >> hasFocusOwner [
 
 { #category : #'focus - requesting' }
 BlFocusProcessor >> looseFor: anElement [
-	| evt |
 	focusOwner ~= anElement
 		ifTrue: [ ^ self ].
-	
-	evt := BlBaseFocusEvent new
-		target: anElement;
-		yourself.
 		
-	self processBlur: evt.
+	self processBlur: anElement.
 	"don't forget to forget focused element"
 	focusOwner := nil
 ]

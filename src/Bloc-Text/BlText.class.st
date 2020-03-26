@@ -202,6 +202,11 @@ BlText >> delete: aStart to: anEnd [
 ]
 
 { #category : #'text - modifications' }
+BlText >> deleteAll [
+	self delete: (1 min: self size) to: self size
+]
+
+{ #category : #'text - modifications' }
 BlText >> deleteAll: aCollectionOfIntervals [
 	self subclassResponsibility
 ]

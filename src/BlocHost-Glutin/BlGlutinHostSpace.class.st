@@ -1,8 +1,8 @@
 Class {
 	#name : #BlGlutinHostSpace,
 	#superclass : #Object,
-	#traits : 'TBlHostSpace + TGlutinEventVisitor',
-	#classTraits : 'TBlHostSpace classTrait + TGlutinEventVisitor classTrait',
+	#traits : 'TBlHostSpace + TGlutinEventVisitor + TBlSpaceProperties',
+	#classTraits : 'TBlHostSpace classTrait + TGlutinEventVisitor classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
 		'window',
 		'mousePosition',

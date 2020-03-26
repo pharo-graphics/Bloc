@@ -4,7 +4,7 @@ I contain examples of how to use key combination
 Class {
 	#name : #BlKeyCombinationExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-KeyBinding'
+	#category : #'Bloc-Examples-KeyBinding'
 }
 
 { #category : #examples }
@@ -20,7 +20,7 @@ BlKeyCombinationExamples class >> keyLogger [
 			do: [ :anEvent | self inform: 'Key down: ', anEvent key asString ]);
 		addShortcut: (BlShortcut new
 			combination: (BlKeyCombination builder shift; meta; key: BlKeyboardKey arrowLeft; build);
-			action: [ :aShortcut | self inform: 'Triggered ', aShortcut combination asString ]);
+			action: [ :anEvent :aShortcut | self inform: 'Triggered ', aShortcut combination asString ]);
 		addShortcut: (BlShortcut new
 			combination: (BlSingleKeyCombination key: BlKeyboardKey a);
 			action: [ self inform: 'Shortcut: a' ]);
