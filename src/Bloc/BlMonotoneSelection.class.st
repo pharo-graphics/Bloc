@@ -102,10 +102,12 @@ BlMonotoneSelection >> complement: aMonotoneTextSelection [
 
 { #category : #testing }
 BlMonotoneSelection >> contains: anIndex [
-	"Return true if this selection interval includes a given index, false otherwise"
+	"Return true if this selection interval includes a given index, false otherwise.
+	If selection is [0.. 1] is means that only and item with index 1 is selected"
 	<return: #Boolean>
 	
-	^ self rangeIncludes: anIndex
+	^ anIndex > self from
+		and: [ anIndex <= self to ]
 ]
 
 { #category : #enumerating }
@@ -151,6 +153,19 @@ BlMonotoneSelection >> includes: aMonotoneTextSelection [
 		and: [ aMonotoneTextSelection to <= self to ]
 ]
 
+{ #category : #accessing }
+BlMonotoneSelection >> indices [
+	"Return a collection of selection indices.
+	If the selection interval is [0..1] then selection indices will only contain
+	one index {1}"
+	<return: #Interval>
+
+	self from
+		ifNil: [ ^ 0 to: -1 ].
+
+	^ self from + 1 to: self to
+]
+
 { #category : #testing }
 BlMonotoneSelection >> inside: aMonotoneTextSelection [
 	"Return true if I am fully inside a given selection, false otherwise"
@@ -164,7 +179,9 @@ BlMonotoneSelection >> inside: aMonotoneTextSelection [
 BlMonotoneSelection >> interval [
 	"Return current text selection as interval"
 	<return: #Interval>
-	self from ifNil: [ ^ 0 to: 0 ].
+	self from
+		ifNil: [ ^ 0 to: 0 ].
+	
 	^ self from to: self to
 ]
 

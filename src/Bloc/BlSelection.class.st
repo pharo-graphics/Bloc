@@ -74,6 +74,13 @@ BlSelection >> do: aBlock [
 	self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlSelection >> indices [
+	<return: #Collection of: #Number>
+
+	^ Array streamContents: [ :aStream | self do: [ :eachMonotoneSelection | aStream nextPutAll: eachMonotoneSelection indices ] ]
+]
+
 { #category : #'api - testing' }
 BlSelection >> isEmpty [
 	^ self subclassResponsibility

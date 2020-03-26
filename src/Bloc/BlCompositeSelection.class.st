@@ -10,6 +10,17 @@ Class {
 	#category : #'Bloc-Utilities - Selection'
 }
 
+{ #category : #'instance creation' }
+BlCompositeSelection class >> fromIndices: aCollectionOfIndices [
+	| aBlSelection |
+	
+	aBlSelection := self new.
+	aCollectionOfIndices do: [ :eachIndex |
+		aBlSelection select: eachIndex - 1 to: eachIndex ].
+	
+	^ aBlSelection
+]
+
 { #category : #comparing }
 BlCompositeSelection >> = anObject [
 	self == anObject
