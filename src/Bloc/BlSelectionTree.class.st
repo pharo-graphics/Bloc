@@ -88,9 +88,9 @@ BlSelectionTree >> findOverlappingNeighbours: aMonotoneTextSelection [
 { #category : #accessing }
 BlSelectionTree >> first [
 	self
-		assert: [ self hasRoot ]
-		description: [ 'There must be root!' ].
-		
+		assert: [ self isNotEmpty ]
+		description: [ 'Selection is empty, can not get #first' ].
+
 	^ self root findMin
 ]
 
