@@ -184,7 +184,7 @@ BlMonotoneSelection >> isEmpty [
 	"Return true if selection is empty, false otherwise"
 	<return: #Boolean>
 
-	^ false
+	^ self to <= self from
 ]
 
 { #category : #testing }
@@ -192,7 +192,7 @@ BlMonotoneSelection >> isNotEmpty [
 	"Return true if selection is empty, false otherwise"
 	<return: #Boolean>
 
-	^ true
+	^ self from < self to
 ]
 
 { #category : #testing }
