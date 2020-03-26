@@ -1,15 +1,6 @@
 Extension { #name : #BlSelectionNode }
 
 { #category : #'*Bloc-Extensions' }
-BlSelectionNode >> gtInspectorSelectionGraphIn: aComposite [
-	<gtInspectorPresentationOrder: 1> 
-	
-	^ aComposite blocMondrian
-		title: 'Tree';
-		painting: [ :mondrian :x :presentation | self paintTreeWith: mondrian ]
-]
-
-{ #category : #'*Bloc-Extensions' }
 BlSelectionNode >> gtTreeFor: aView [
 	<gtView>
 	
