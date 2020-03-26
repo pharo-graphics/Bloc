@@ -114,6 +114,7 @@ BlGeometry >> matchExtent: aPoint [
 
 { #category : #copying }
 BlGeometry >> postCopy [
+	pathCache := BlPathCache on: self.
 	self releaseCache
 ]
 
