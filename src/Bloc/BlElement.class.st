@@ -1763,7 +1763,9 @@ BlElement >> isFocusable [
 	"Return true if I am able to take focus, false otherwise"
 	<return: #Boolean>
 
-	^ self isVisible and: [ self shouldHandleMouseEvents ]
+	^ self isVisible
+		and: [ self shouldHandleMouseEvents
+			and: [ self focusability ~= BlFocusability none ] ]
 ]
 
 { #category : #'focus testing' }
@@ -2353,14 +2355,28 @@ BlElement >> nextEventTarget [
 { #category : #'children accessing' }
 BlElement >> nextSiblingDo: aBlock [
 	"Evaluate aBlock with the next child in my parent after me if there is one"
+	^ self
+		nextSiblingSuchThat: [ :eachSibling | true ]
+		do: aBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> nextSiblingSuchThat: aSelectionBlock do: aBlock [
+	"Evaluate aBlock with the next child in my parent that satisfies aSelectionBlock after me if there is one"
+	
 	self hasParent
 		ifFalse: [ ^ self ].
 	
 	"I am the last and have no next siblings"
 	self parent children last == self
 		ifTrue: [ ^ self ].
-
-	^ aBlock value: (self parent childAt: (self parent childIndexOf: self) + 1)
+		
+	(self parent childIndexOf: self) + 1 to: self parent childrenCount do: [ :eachIndex |
+		| aSiblingChild |
+		
+		aSiblingChild := self parent childAt: eachIndex.
+		(aSelectionBlock value: aSiblingChild)
+			ifTrue: [ ^ aBlock value: aSiblingChild ] ]
 ]
 
 { #category : #'geometry hooks' }
@@ -2765,14 +2781,28 @@ BlElement >> preventMouseEvents [
 BlElement >> previousSiblingDo: aBlock [
 	"Evaluate aBlock with the previous child in my parent before me if there is one"
 
+	^ self
+		previousSiblingSuchThat: [ :eachSibling | true ]
+		do: aBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> previousSiblingSuchThat: aSelectionBlock do: aBlock [
+	"Evaluate aBlock with the previous child in my parent that satisfies aSelectionBlock after me if there is one"
+	
 	self hasParent
 		ifFalse: [ ^ self ].
 	
 	"I am the first and have no previous siblings"
 	self parent children first == self
 		ifTrue: [ ^ self ].
+		
+	(self parent childIndexOf: self) - 1 to: 1 by: -1 do: [ :eachIndex |
+		| aSiblingChild |
 
-	^ aBlock value: (self parent childAt: (self parent childIndexOf: self) - 1)
+		aSiblingChild := self parent childAt: eachIndex.
+		(aSelectionBlock value: aSiblingChild)
+			ifTrue: [ ^ aBlock value: aSiblingChild ] ]
 ]
 
 { #category : #printing }
