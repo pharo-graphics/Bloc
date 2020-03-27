@@ -60,11 +60,8 @@ GLMMorphicBlocWrapperMorph >> initialize [
 { #category : #announcements }
 GLMMorphicBlocWrapperMorph >> intoWorld: aWorld [
 	super intoWorld: aWorld.
-	
-	self window
-		ifNil: [ ^ self ].
-	
-	self onAddedToWindow
+
+	self showSpace
 ]
 
 { #category : #api }
@@ -77,6 +74,17 @@ GLMMorphicBlocWrapperMorph >> onAddedToWindow [
 GLMMorphicBlocWrapperMorph >> onWindowClosed [
 
 	self closeSpace
+]
+
+{ #category : #api }
+GLMMorphicBlocWrapperMorph >> showSpace [
+	self space
+		ifNil: [ ^ self ].
+		
+	self space isOpened
+		ifTrue: [ ^ self ].
+
+	self space show
 ]
 
 { #category : #accessing }
