@@ -103,7 +103,16 @@ BlMonotoneSelection >> complement: aMonotoneTextSelection [
 { #category : #testing }
 BlMonotoneSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise.
-	If selection is [0.. 1] is means that only and item with index 1 is selected"
+	If selection is [0.. 1] both 0 and 1 are within this selection"
+	<return: #Boolean>
+	
+	^ self rangeIncludes: anIndex
+]
+
+{ #category : #testing }
+BlMonotoneSelection >> containsIndex: anIndex [
+	"Return true if selection indices include a given index, false otherwise.
+	I am conceptually same as (self indices includes: anIndex)"
 	<return: #Boolean>
 	
 	^ anIndex > self from

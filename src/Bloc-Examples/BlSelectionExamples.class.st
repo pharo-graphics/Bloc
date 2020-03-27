@@ -193,6 +193,20 @@ BlSelectionExamples >> compositeSelection [
 ]
 
 { #category : #'examples - monotone selection' }
+BlSelectionExamples >> monotoneContainsIndex_in_1_to_1 [
+	<gtExample>
+	| aMonotoneSelection |
+	
+	aMonotoneSelection := self monotoneSelect_from_1_to_1.
+	
+	self assert: (aMonotoneSelection containsIndex: 0) not.
+	self assert: (aMonotoneSelection containsIndex: 1) not.
+	self assert: (aMonotoneSelection containsIndex: 2) not.
+	
+	^ aMonotoneSelection
+]
+
+{ #category : #'examples - monotone selection' }
 BlSelectionExamples >> monotoneContains_in_1_to_1 [
 	<gtExample>
 	| aMonotoneSelection |
@@ -200,7 +214,7 @@ BlSelectionExamples >> monotoneContains_in_1_to_1 [
 	aMonotoneSelection := self monotoneSelect_from_1_to_1.
 	
 	self assert: (aMonotoneSelection contains: 0) not.
-	self assert: (aMonotoneSelection contains: 1) not.
+	self assert: (aMonotoneSelection contains: 1).
 	self assert: (aMonotoneSelection contains: 2) not.
 	
 	^ aMonotoneSelection

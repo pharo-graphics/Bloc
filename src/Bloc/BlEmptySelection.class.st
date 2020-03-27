@@ -22,6 +22,15 @@ BlEmptySelection >> contains: anIndex [
 	^ false
 ]
 
+{ #category : #'api - testing' }
+BlEmptySelection >> containsIndex: anIndex [
+	"Return true if selection indices include a given index, false otherwise.
+	I am conceptually same as (self indices includes: anIndex)"
+	<return: #Boolean>
+	
+	^ false
+]
+
 { #category : #'api - enumerating' }
 BlEmptySelection >> do: aBlock [
 	"Evaluate a given block with all recorded selection intervals"

@@ -51,6 +51,15 @@ BlCompositeSelection >> contains: anIndex [
 	^ selections contains: anIndex
 ]
 
+{ #category : #'api - testing' }
+BlCompositeSelection >> containsIndex: anIndex [
+	"Return true if selection indices include a given index, false otherwise.
+	I am conceptually same as (self indices includes: anIndex)"
+	<return: #Boolean>
+	
+	^ selections containsIndex: anIndex
+]
+
 { #category : #'api - selection' }
 BlCompositeSelection >> deselect: aSelection [
 	"Remove a given selection"

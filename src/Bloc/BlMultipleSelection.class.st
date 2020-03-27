@@ -42,6 +42,16 @@ BlMultipleSelection >> contains: anIndex [
 		eachSelection contains: anIndex ]
 ]
 
+{ #category : #'api - testing' }
+BlMultipleSelection >> containsIndex: anIndex [
+	"Return true if selection indices include a given index, false otherwise.
+	I am conceptually same as (self indices includes: anIndex)"
+	<return: #Boolean>
+	
+	^ selections anySatisfy: [ :eachSelection | 
+		eachSelection contains: anIndex ]
+]
+
 { #category : #'api - enumerating' }
 BlMultipleSelection >> do: aBlock [
 	selections do: [ :aSelection | aSelection do: aBlock ]

@@ -83,6 +83,26 @@ BlSelectionNode >> contains: anIndex [
 	^ false
 ]
 
+{ #category : #'tree - testing' }
+BlSelectionNode >> containsIndex: anIndex [
+	"Return true if this selection interval includes a given index, false otherwise"
+	<return: #Boolean>
+
+	anIndex > self high
+		ifTrue: [ ^ false ].
+		
+	(self selection containsIndex: anIndex)
+		ifTrue: [ ^ true ].
+		
+	(self hasLeft and: [ anIndex <= self left high ])
+		ifTrue: [ ^ self left containsIndex: anIndex ].
+		
+	(self hasRight and: [ anIndex <= self right high ])
+		ifTrue: [ ^ self right containsIndex: anIndex ].
+		
+	^ false
+]
+
 { #category : #'instance creation' }
 BlSelectionNode >> createNode: aSelection [
 	^ (self class selection: aSelection)
