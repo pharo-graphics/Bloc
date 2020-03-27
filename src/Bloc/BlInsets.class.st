@@ -95,6 +95,15 @@ BlInsets class >> top: t bottom: b [
 ]
 
 { #category : #'instance creation' }
+BlInsets class >> top: t left: l [
+	^ self 
+		top: t
+		right: 0
+		bottom: 0
+		left: l
+]
+
+{ #category : #'instance creation' }
 BlInsets class >> top: t left: l bottom: b right: r [ 
 	^ self new
 		top: t
