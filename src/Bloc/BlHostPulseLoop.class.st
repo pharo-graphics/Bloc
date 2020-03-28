@@ -43,7 +43,8 @@ BlHostPulseLoop >> createLoopProcess [
 
 { #category : #'loop process' }
 BlHostPulseLoop >> createLoopTask [
-	^ [ [ self firePulse ] repeat ]
+	^ [ [ self firePulse.
+	loopProcess == Processor activeProcess ] whileTrue ]
 ]
 
 { #category : #period }

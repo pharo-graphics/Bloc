@@ -56,17 +56,15 @@ BlBlocUIManagerNotification >> arguments: anArray [
 
 { #category : #private }
 BlBlocUIManagerNotification >> continue: debugSession with: anObject [
+	| context |
+	context := debugSession interruptedContext.
+	[ context notNil
+		and: [ context isBlockContext or: [ context receiver ~~ self ] ] ]
+		whileTrue: [ context := context sender ].
 	debugSession
 		returnValue: anObject
-		from: debugSession interruptedContext.
+		from: (context ifNil: [ debugSession interruptedContext ]).
 	debugSession resume
-]
-
-{ #category : #private }
-BlBlocUIManagerNotification >> createNotificationWithContinuation: aBlock [
-	^ self class notificationHandlers
-		at: request
-		ifPresent: [ :block | block cull: request cull: arguments cull: aBlock ]
 ]
 
 { #category : #'exception handling' }
@@ -129,17 +127,23 @@ BlBlocUIManagerNotification >> request: aSymbol [
 
 { #category : #private }
 BlBlocUIManagerNotification >> showNotificationIn: anElementOrSpace [
-	| session |
-	(self
-		createNotificationWithContinuation: [ :object | self continue: session with: object ])
-		ifNotNil: [ :notification | 
-			^ UIManager default
-				debugProcess: Processor activeProcess
-				context: thisContext
-				label: 'UIManager Notification'
-				spawningDebuggingUsing: [ :debugSession | 
-					session := debugSession.
-					anElementOrSpace showNotification: notification ] ].
+	self class notificationHandlers
+		at: request
+		ifPresent: [ :creationBlock | 
+			creationBlock numArgs <= 2
+				ifTrue: [ anElementOrSpace
+						showNotification: (creationBlock cull: request cull: arguments) ]
+				ifFalse: [ ^ UIManager default
+						debugProcess: Processor activeProcess
+						context: thisContext
+						label: 'UIManager Notification'
+						spawningDebuggingUsing: [ :session | 
+							anElementOrSpace
+								showNotification:
+									(creationBlock
+										cull: request
+										cull: arguments
+										cull: [ :object | self continue: session with: object ]) ] ] ].
 	^ self unhandledAction
 ]
 
