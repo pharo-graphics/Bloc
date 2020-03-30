@@ -249,22 +249,23 @@ BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 
 { #category : #'event - visiting' }
 BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
-	| aBlocEvent aState |
-
-	anEvent has_virtual_keycode
-		ifFalse: [ ^ self ].
+	| aBlocEvent aKeyboardKey aState |
 
 	aState := anEvent state.
 
 	aState = GlutinEventInputElementState Unknown
 		ifTrue: [ ^ self ].
+
+	aKeyboardKey := anEvent has_virtual_keycode
+		ifTrue: [ self convertKeyFromEvent: anEvent ]
+		ifFalse: [ BlKeyboardKey unknown: anEvent scan_code ].
 	
 	aBlocEvent := aState = GlutinEventInputElementState Pressed
 		ifTrue: [ BlKeyDownEvent new ]
 		ifFalse: [ BlKeyUpEvent new ].
 
 	aBlocEvent
-		key: (self convertKeyFromEvent: anEvent);
+		key: aKeyboardKey;
 		scanCode: anEvent scan_code;
 		modifiers: modifiers;
 		timestamp: self space time now;
