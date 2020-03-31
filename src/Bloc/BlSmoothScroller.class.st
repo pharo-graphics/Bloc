@@ -10,6 +10,14 @@ Class {
 	#category : #'Bloc-Utilities - Scrolling'
 }
 
+{ #category : #initialization }
+BlSmoothScroller >> initialize [
+	super initialize.
+	
+	isRunning := false.
+	pendingInitialRun := true
+]
+
 { #category : #'api - testing' }
 BlSmoothScroller >> isPendingInitialRun [
 	^ pendingInitialRun

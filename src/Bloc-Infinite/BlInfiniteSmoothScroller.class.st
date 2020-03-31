@@ -14,7 +14,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Scroller'
+	#category : #'Bloc-Infinite-Scroller'
 }
 
 { #category : #'children - accessing' }
@@ -51,16 +51,6 @@ BlInfiniteSmoothScroller >> initialize [
 	super initialize.
 	
 	action := self defaultAction
-]
-
-{ #category : #testing }
-BlInfiniteSmoothScroller >> isPendingInitialRun [
-	^ pendingInitialRun
-]
-
-{ #category : #testing }
-BlInfiniteSmoothScroller >> isRunning [
-	^ isRunning
 ]
 
 { #category : #accessing }
