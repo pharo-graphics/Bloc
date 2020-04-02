@@ -16,6 +16,11 @@ Class {
 	#category : #'Bloc-Basic-Changes'
 }
 
+{ #category : #'instance creation' }
+BlElementChange class >> epsilon [
+	^ 0.01
+]
+
 { #category : #notifying }
 BlElementChange >> commitChange: anNewValue on: anElement [
 	"Send an event letting element's event handlers know that a property changed.
@@ -91,10 +96,10 @@ BlElementChange >> newChangeValue: anObject [
 { #category : #recording }
 BlElementChange >> old: anOldValue new: aNewValue [
 	self
-		assert: [ records isEmpty or: [ records last changedValue = anOldValue ] ]
+		assert: [ records isEmpty or: [ self compare: records last changedValue with: anOldValue ] ]
 		description: [ 'Last recorded value must be equal to the old value that is being changed' ].
 	self
-		assert: [ anOldValue ~= aNewValue ]
+		assert: [ (self compare: anOldValue with: aNewValue) not ]
 		description: [ 'Old and new values must be different' ].
 
 	self records

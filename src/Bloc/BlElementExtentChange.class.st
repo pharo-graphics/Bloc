@@ -19,8 +19,8 @@ BlElementExtentChange >> commitChange: anNewValue on: anElement [
 BlElementExtentChange >> compare: aNewValue with: anOldValue [
 	"Return true if new value is equal (or close to) to new value"
 	<return: #Boolean>
-
-	^ aNewValue closeTo: anOldValue
+	
+	^ aNewValue closeTo: anOldValue epsilon: self class epsilon
 ]
 
 { #category : #accessing }

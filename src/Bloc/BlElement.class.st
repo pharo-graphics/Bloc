@@ -2708,8 +2708,8 @@ BlElement >> position: aPosition extent: anExtent [
 	aPreviousPosition := self position.
 	aPreviousExtent := self extent.
 	
-	isPositionChanged := (aPreviousPosition closeTo: aPosition) not.
-	isExtentChanged := (aPreviousExtent closeTo: anExtent) not.
+	isPositionChanged := (aPreviousPosition closeTo: aPosition epsilon: BlElementChange epsilon) not.
+	isExtentChanged := (aPreviousExtent closeTo: anExtent epsilon: BlElementChange epsilon) not.
 
 	"nothing changed, return"
 	(isPositionChanged or: [ isExtentChanged ])
@@ -3046,6 +3046,9 @@ BlElement >> requestFocus: aChildElement [
 BlElement >> requestLayout [
 	"Request invalidation of layout on next space pulse
 	@see #requestLayout: for more information"
+
+	Bloc debugModeEnabled
+		ifTrue: [ BlRequestLayoutSignal emit ].
 
 	self requestLayout: self
 ]

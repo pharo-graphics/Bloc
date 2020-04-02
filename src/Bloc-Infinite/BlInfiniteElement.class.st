@@ -1228,6 +1228,7 @@ BlInfiniteElement >> offsetChildrenVerticallyBy: aNumber [
 	
 	childrenManager childrenDo: [ :anElement |
 		| previousPosition newPosition |
+
 		previousPosition := anElement position.
 		newPosition := previousPosition x @ (previousPosition y + aNumber).
 
@@ -1237,7 +1238,7 @@ BlInfiniteElement >> offsetChildrenVerticallyBy: aNumber [
 		anElement commitChanges.
 
 		self
-			assert: [ newPosition closeTo: anElement position ]
+			assert: [ newPosition closeTo: anElement position epsilon: BlElementChange epsilon ]
 			description: [ 'Position didn''t change as expected! It is super important for scrolling, since we assume that I DO offset children by a number regardless of anything' ] ]
 ]
 
