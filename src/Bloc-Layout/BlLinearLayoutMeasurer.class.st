@@ -117,7 +117,63 @@ BlLinearLayoutMeasurer >> lengthSpec [
 ]
 
 { #category : #measurement }
+BlLinearLayoutMeasurer >> limitedMeasure [
+	| excessSpace remainingExcess remainingNodesCount theLimitedNodes totalLimitedLength maxEachLimitedLength theNodesToShrink totalShrinkedLength |
+	
+	"Either expand children with weight to take up available space or shrink them if they extend beyond our current bounds.
+	If we skipped measurement on any children, we need to measure them now."
+	excessSpace := measuredLength - totalLength + usedExcessSpace.
+	excessSpace >= 0
+		ifTrue: [ ^ self ].
+
+	excessSpace := excessSpace abs.
+	remainingExcess := excessSpace.
+	
+	"we should reduce the size of the fit content limited children"
+	theLimitedNodes := self nodes select: [ :eachNode | eachNode lengthResizer isFitContentLimited ].
+	theLimitedNodes
+		ifEmpty: [ ^ self ].
+	
+	totalLimitedLength := (theLimitedNodes inject: 0.0 into: [ :aSum :eachNode | aSum + eachNode measuredLength + eachNode marginLength ]) - remainingExcess.
+	totalLimitedLength < 0
+		ifTrue: [ ^ self ].
+	
+	maxEachLimitedLength := totalLimitedLength / theLimitedNodes size.
+	
+	"let's select those nodes that are larger than the max length and need to be schinked"
+	theNodesToShrink := theLimitedNodes select: [ :eachNode | eachNode measuredLength > maxEachLimitedLength ].
+	theNodesToShrink
+		ifEmpty: [ ^ self ].
+	
+	totalShrinkedLength := (theNodesToShrink inject: 0.0 into: [ :aSum :eachNode | aSum + eachNode measuredLength + eachNode marginLength ]) - remainingExcess.
+	totalShrinkedLength < 0
+		ifTrue: [ ^ self ].
+	
+	remainingNodesCount := theNodesToShrink size.
+	theNodesToShrink do: [ :eachNode |
+			| shareLength childLength childLengthSpec childBreadthSpec |
+			
+			shareLength := remainingExcess / remainingNodesCount.
+			remainingExcess := remainingExcess - shareLength.
+			remainingNodesCount := remainingNodesCount - 1.
+			
+			childLength := eachNode measuredLength - shareLength.
+				
+			childLengthSpec := BlMeasurementSpec exact: (0 max: childLength).
+			childBreadthSpec := parent layout
+				measurementSpecFor: breadthSpec
+				usedSize: (orientation paddingBreadth: parent) + (eachNode marginBreadth)
+				resizer: eachNode breadthResizer.
+				
+			 eachNode measure: (orientation extentSpecBreadth: childBreadthSpec lengthSpec: childLengthSpec) ].
+		
+	measuredLength := measuredLength - excessSpace.
+	totalLength := totalLength - excessSpace.
+]
+
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> measure [
+
 	self preMeasure.
 
 	self baselineMeasure.
@@ -125,6 +181,13 @@ BlLinearLayoutMeasurer >> measure [
 
 	totalLength := totalLength + (orientation paddingLength: parent).
 	
+	"Check against our minimum length"
+	measuredLength := totalLength max: (orientation minimalLength: parent).
+
+	"Reconcile our calculated size with the lengthSpec"
+	measuredLength := lengthSpec sizeFor: measuredLength.
+	
+	self limitedMeasure.
 	self weightedMeasure.
 	self postMeasure.
 	self uniformMeasure
@@ -185,10 +248,10 @@ BlLinearLayoutMeasurer >> preMeasure [
 			ifTrue: [ self measureExactUsingExcessSpace: aNode ]
 			ifFalse: [
 				| usedLength childLength |
-				"The widthMode is either UNSPECIFIED or AT_MOST, and
+				"The lengthMode is either UNSPECIFIED or AT_MOST, and
 				this child is only laid out using excess space.
-				Measure using WRAP_CONTENT so that we can find out the view's optimal width.
-				We'll restore the original width of 0 after measurement."
+				Measure using FIT_CONTENT so that we can find out the view's optimal length.
+				We'll restore the original length of 0 after measurement."
 				shouldUseExcessSpace
 					ifTrue: [ aNode lengthResizer: BlLayoutResizer fitContent ].
 
@@ -274,9 +337,10 @@ BlLinearLayoutMeasurer >> remainingWeightSum [
 { #category : #measurement }
 BlLinearLayoutMeasurer >> uniformMeasure [
 	| uniformMeasureSpec |
+
 	matchBreadth
 		ifFalse: [ ^ self ].
-		
+
 	"Pretend that the linear layout has an exact size. This is the measured height of ourselves.
 	The measured height should be the max height of the children, changed to accommodate the heightMeasureSpec from the parent"
 	

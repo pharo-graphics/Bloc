@@ -68,6 +68,11 @@ BlLayoutResizer >> isFitContent [
 ]
 
 { #category : #testing }
+BlLayoutResizer >> isFitContentLimited [
+	^ false
+]
+
+{ #category : #testing }
 BlLayoutResizer >> isMatchParent [
 	^ false
 ]

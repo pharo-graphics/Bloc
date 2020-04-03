@@ -29,6 +29,11 @@ BlLayoutFitContentLimitedResizer >> isFitContent [
 	^ true
 ]
 
+{ #category : #testing }
+BlLayoutFitContentLimitedResizer >> isFitContentLimited [
+	^ true
+]
+
 { #category : #'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementAtMostWith: aNumber [
 	"Child wants to determine its own size. It can't be bigger than us."
