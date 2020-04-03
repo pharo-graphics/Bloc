@@ -623,6 +623,62 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChild [
 ]
 
 { #category : #'layout - fit content limited' }
+BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndThreeChildlren [
+	<gtExample>
+	| subChildren childA childB childC childD parent |
+
+	subChildren := 4 timesCollect: [
+		BlElement new
+			background: (Color red alpha: 0.5);
+			margin: (BlInsets all: 20);
+			size: 200@100 ].
+
+	childA := BlElement new.
+	childA layout: BlLinearLayout vertical.
+	childA background: (Color red alpha: 0.3).
+	childA border: (BlBorder paint: Color red width: 2).
+	childA constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical fitContentLimited ].
+	childA addChildren: subChildren.
+
+	childB := BlElement new.
+	childB background: (Color blue alpha: 0.3).
+	childB border: (BlBorder paint: Color blue width: 2).
+	childB size: 100@75.
+	
+	childC := BlElement new.
+	childC background: (Color blue alpha: 0.3).
+	childC border: (BlBorder paint: Color blue width: 2).
+	childC size: 75@50.
+	
+	childD := BlElement new.
+	childD background: (Color green darker alpha: 0.3).
+	childD border: (BlBorder paint: Color green muchDarker width: 2).
+	childD constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+
+	parent := BlElement new.
+	parent layout: (BlLinearLayout vertical cellSpacing: 20).
+	parent background: (Color gray alpha: 0.3).
+	parent constraintsDo: [ :c |
+		c horizontal exact: 300.
+		c vertical exact: 400 ].
+	parent addChildren: { childC . childA. childB . childD }.
+	parent padding: (BlInsets left: 20 right: 20).
+	parent forceLayout. 
+
+	self assert: parent extent equals: (300@400).
+	self assert: childA extent equals: (260@175).
+	self assert: childB extent equals: (100@75).
+	self assert: childC extent equals: (75@50).
+	self assert: childD extent equals: (260@0).
+
+	^ parent
+]
+
+{ #category : #'layout - fit content limited' }
 BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndTwoChildlren [
 	<gtExample>
 	| subChildren childA childB childC parent |
@@ -666,6 +722,62 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndTwoChildlr
 	self assert: childA extent equals: (260@195).
 	self assert: childB extent equals: (100@75).
 	self assert: childC extent equals: (75@50).
+
+	^ parent
+]
+
+{ #category : #'layout - fit content limited' }
+BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndThreeChildlren [
+	<gtExample>
+	| subChildren childA childB childC childD parent |
+
+	subChildren := 1 timesCollect: [
+		BlElement new
+			background: (Color red alpha: 0.5);
+			margin: (BlInsets all: 20);
+			size: 200@100 ].
+
+	childA := BlElement new.
+	childA layout: BlLinearLayout vertical.
+	childA background: (Color red alpha: 0.3).
+	childA border: (BlBorder paint: Color red width: 2).
+	childA constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical fitContentLimited ].
+	childA addChildren: subChildren.
+
+	childB := BlElement new.
+	childB background: (Color blue alpha: 0.3).
+	childB border: (BlBorder paint: Color blue width: 2).
+	childB size: 100@75.
+	
+	childC := BlElement new.
+	childC background: (Color blue alpha: 0.3).
+	childC border: (BlBorder paint: Color blue width: 2).
+	childC size: 75@50.
+	
+	childD := BlElement new.
+	childD background: (Color green darker alpha: 0.3).
+	childD border: (BlBorder paint: Color green muchDarker width: 2).
+	childD constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+
+	parent := BlElement new.
+	parent layout: (BlLinearLayout vertical cellSpacing: 20).
+	parent background: (Color gray alpha: 0.3).
+	parent constraintsDo: [ :c |
+		c horizontal exact: 300.
+		c vertical exact: 400 ].
+	parent addChildren: { childC . childA. childB . childD }.
+	parent padding: (BlInsets left: 20 right: 20).
+	parent forceLayout. 
+
+	self assert: parent extent equals: (300@400).
+	self assert: childA extent equals: (260@140).
+	self assert: childB extent equals: (100@75).
+	self assert: childC extent equals: (75@50).
+	self assert: childD extent equals: (260@35).
 
 	^ parent
 ]
