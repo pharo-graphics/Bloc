@@ -116,13 +116,12 @@ BlSubText >> attributes: anAttributesCollection [
 BlSubText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [ 
 
 	self
-		assert: [ aFromIndex <= aToIndex ]
+		assert: [ aFromIndex <= (aToIndex + 1) ]
 		description: [ 'Start must not exceed end' ].
-		
-	self
-		assert: [ aFromIndex > 0 or: [ aFromIndex = 1 and: [ aToIndex = 0 ] ] ]
-		description: [ 'Start and end must be positive or both zero' ].
 
+	self
+		assert: [ self isNotEmpty or: [ aFromIndex = 1 and: [ aToIndex isZero ] ] ]
+		description: [ 'If I am empty then start must be 1 and end must be zero' ].
 
 	self text
 		attributes: anAttributesCollection

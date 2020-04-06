@@ -284,8 +284,8 @@ BlText >> from: aStart to: anEnd [
 		description: [ 'Start must not exceed end' ].
 		
 	self
-		assert: [ aStart > 0 or: [ aStart = 0 and: [ anEnd = 0 ] ] ]
-		description: [ 'Start and end must be positive or both zero' ].
+		assert: [ self isNotEmpty or: [ aStart = 1 and: [ anEnd isZero ] ] ]
+		description: [ 'If I am empty then start must be 1 and end must be zero' ].
 
 	^ BlSubText text: self from: aStart to: anEnd
 ]
