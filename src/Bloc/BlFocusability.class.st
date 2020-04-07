@@ -7,7 +7,8 @@ Class {
 		'after',
 		'before',
 		'block',
-		'none'
+		'none',
+		'ignore'
 	],
 	#category : #'Bloc-Basic-Properties'
 }
@@ -34,7 +35,13 @@ BlFocusability class >> cleanUp [
 	before := nil.
 	after := nil.
 	block := nil.
-	none := nil
+	none := nil.
+	ignore := nil
+]
+
+{ #category : #accessing }
+BlFocusability class >> ignore [
+	^ ignore ifNil: [ ignore := BlFocusabilityIgnore new ]
 ]
 
 { #category : #accessing }

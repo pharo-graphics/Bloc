@@ -878,6 +878,22 @@ BlElement >> deepCopy [
 	self shouldNotImplement
 ]
 
+{ #category : #'focus accessing' }
+BlElement >> deepestFocusedChild [
+	"Return a child that is focused, if any.
+	I may return nil of there is no such child"
+	<return: #BlElement or: nil>
+
+	self isFocused
+		ifTrue: [ ^ self ].
+
+	self children do: [ :eachChildElement | 
+		eachChildElement deepestFocusedChild
+			ifNotNil: [ :aFocusedChild | ^ aFocusedChild ] ].
+	
+	^ nil
+]
+
 { #category : #initialization }
 BlElement >> defaultBackground [
 	"Return an object that should be used as element's background by default.
