@@ -157,6 +157,11 @@ BlKeyCombinationBuilder >> home [
 		with: (BlSingleKeyCombination new key: BlKeyboardKey home)
 ]
 
+{ #category : #'keys - letters' }
+BlKeyCombinationBuilder >> i [
+	combination with: (BlSingleKeyCombination new key: BlKeyboardKey i)
+]
+
 { #category : #initialization }
 BlKeyCombinationBuilder >> initialize [
 	super initialize.
