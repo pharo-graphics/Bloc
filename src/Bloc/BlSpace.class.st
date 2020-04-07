@@ -51,12 +51,11 @@ BlSpace class >> locationInside: anElement [
 	
 	anElement topMostParent forceLayout.
 	theBounds := anElement bounds inSpace bounds.
-	
-	aPosition := anElement bounds inSpace bounds atRandom.
+	aPosition := theBounds atRandom.
 		
 	self
 		assert: [ theBounds containsPoint: aPosition ]
-		description: [ 'Point must be inside of the bounds' ].
+		description: [ 'Point({1}) must be inside of the bounds({2})' format: { aPosition . theBounds } ].
 		
 	^ aPosition
 ]
