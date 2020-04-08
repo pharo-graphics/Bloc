@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSvgPathCloseSegment,
 	#superclass : #BlSvgPathSegment,
-	#category : 'Bloc-SVG-Path'
+	#category : #'Bloc-Geometry-SVG'
 }
 
 { #category : #comparing }

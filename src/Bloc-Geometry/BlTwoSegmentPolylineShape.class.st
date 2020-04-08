@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTwoSegmentPolylineShape,
 	#superclass : #BlPolylineShape,
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #'instance creation' }

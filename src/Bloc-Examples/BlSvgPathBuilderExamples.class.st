@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSvgPathBuilderExamples,
 	#superclass : #Object,
-	#category : 'Bloc-SVG-Examples'
+	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #commands }

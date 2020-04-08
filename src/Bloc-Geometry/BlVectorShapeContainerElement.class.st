@@ -1,7 +1,7 @@
 Class {
 	#name : #BlVectorShapeContainerElement,
 	#superclass : #BlElement,
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #'as yet unclassified' }

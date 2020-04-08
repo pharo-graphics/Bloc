@@ -1,7 +1,7 @@
 Class {
 	#name : #BlThreeSegmentPolylineShape,
 	#superclass : #BlPolylineShape,
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #accessing }

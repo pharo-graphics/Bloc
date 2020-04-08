@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'point'
 	],
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #converting }

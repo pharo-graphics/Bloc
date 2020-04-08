@@ -37,6 +37,11 @@ BlTransformationBuilder >> apply [
 	target transformation: anElementTransformation
 ]
 
+{ #category : #origin }
+BlTransformationBuilder >> centerOrigin [
+	self origin: BlAffineTransformationCenterOrigin new
+]
+
 { #category : #accessing }
 BlTransformationBuilder >> element [
 	self 
@@ -87,7 +92,7 @@ BlTransformationBuilder >> matrix: aMatrix [
 	transformation addTransformation: ((BlMatrixTransformation matrix: aMatrix) origin: BlAffineTransformationTopLeftOrigin new)
 ]
 
-{ #category : #transformations }
+{ #category : #origin }
 BlTransformationBuilder >> origin: anAffineTransformationOrigin [
 	"Change transformation origin for all future transformations.
 	Note: I do not change origins of already exisiting transformations"
@@ -141,6 +146,11 @@ BlTransformationBuilder >> target [
 { #category : #accessing }
 BlTransformationBuilder >> target: anObject [
 	target := anObject
+]
+
+{ #category : #origin }
+BlTransformationBuilder >> topLeftOrigin [
+	self origin: BlAffineTransformationTopLeftOrigin new
 ]
 
 { #category : #transformations }

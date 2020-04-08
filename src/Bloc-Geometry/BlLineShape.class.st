@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLineShape,
 	#superclass : #BlCurveShape,
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #converting }

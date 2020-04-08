@@ -1,7 +1,7 @@
 Class {
 	#name : #BlCurveShape,
 	#superclass : #BlCompositeShape,
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #accessing }

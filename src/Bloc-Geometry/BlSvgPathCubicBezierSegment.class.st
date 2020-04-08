@@ -6,7 +6,7 @@ Class {
 		'secondViaPoint',
 		'curveTo'
 	],
-	#category : 'Bloc-SVG-Path'
+	#category : #'Bloc-Geometry-SVG'
 }
 
 { #category : #comparing }

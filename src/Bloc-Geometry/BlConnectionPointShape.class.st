@@ -1,7 +1,7 @@
 Class {
 	#name : #BlConnectionPointShape,
 	#superclass : #BlPointShape,
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #'api - transformation' }

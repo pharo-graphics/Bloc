@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'isAbsolute'
 	],
-	#category : 'Bloc-SVG-Path'
+	#category : #'Bloc-Geometry-SVG'
 }
 
 { #category : #'instance creation' }

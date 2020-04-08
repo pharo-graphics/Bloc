@@ -5,7 +5,7 @@ Class {
 		'RectangleCornerAttribute',
 		'RectangleEdgeAttribute'
 	],
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #'class initialization' }

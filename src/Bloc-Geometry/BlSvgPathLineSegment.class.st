@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lineTo'
 	],
-	#category : 'Bloc-SVG-Path'
+	#category : #'Bloc-Geometry-SVG'
 }
 
 { #category : #comparing }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'shapes'
 	],
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #'api - shapes' }

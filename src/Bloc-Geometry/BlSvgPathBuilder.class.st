@@ -1,23 +1,21 @@
-"
-Clone of ASPathConverter from Athens-SVG.
-Temporary class in order to break all Athens dependencies and waiting a new SVG implementation.
-"
 Class {
 	#name : #BlSvgPathBuilder,
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'stream',
-		'path',
-		'absolute',
-		'min',
-		'max',
+		'commands',
 		'segments',
-		'commands'
+		'absolute',
+		'stream'
 	],
-	#category : 'Bloc-SVG-Path'
+	#category : #'Bloc-Geometry-SVG'
 }
+
+{ #category : #'instance creation' }
+BlSvgPathBuilder class >> fromStream: aStream [
+	^ self new fromStream: aStream
+]
 
 { #category : #commands }
 BlSvgPathBuilder >> A [
@@ -83,34 +81,14 @@ BlSvgPathBuilder >> a [
 	self relative; ellipticalArc
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> absolute [
 	absolute := true
 ]
 
 { #category : #adding }
-BlSvgPathBuilder >> addSegment [
-
-	| sel args |
-	
-	self halt.
-	sel := 	thisContext sender selector.
-	args := thisContext sender arguments.
-	"update min/max for calculatin bounding box"
-	
-	path add: { sel. args }
-]
-
-{ #category : #adding }
 BlSvgPathBuilder >> addSegment: aPathSegment [
 	segments add: aPathSegment
-]
-
-{ #category : #converting }
-BlSvgPathBuilder >> assertValidCommand: aCharacter [ 
-
-	( #( $M $m $Z $z $L $l $H $h $V $v $C $c $S $s $Q $q $T $t $A $a ) includes: aCharacter )
-		ifFalse: [ self error: 'invalid path segment command' ]
 ]
 
 { #category : #accessing }
@@ -124,7 +102,7 @@ BlSvgPathBuilder >> c [
 	^ self relative; cubicBezier 
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> close [
 	self addSegment: (BlSvgPathCloseSegment absolute: absolute)
 ]
@@ -134,17 +112,6 @@ BlSvgPathBuilder >> commands [
 	<return: #Dictionary>
 	
 	^ commands
-]
-
-{ #category : #operations }
-BlSvgPathBuilder >> convertedPathData [
-
-	segments := OrderedCollection new.
-	
-	[ self skipBlanks. stream atEnd ]
-		whileFalse: [ self performCommandNamed: stream next asString asSymbol ].
-
-	^ segments
 ]
 
 { #category : #operations }
@@ -180,12 +147,12 @@ At the end of the command, the new current point becomes the final (x,y) coordin
 
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> curveVia: aPoint and: aPoint2 to: aPoint3 [ 
 	self addSegment: ((BlSvgPathCubicBezierSegment absolute: absolute) firstViaPoint: aPoint; secondViaPoint: aPoint2; curveTo: aPoint2)
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> curveVia: aPoint to: aPoint2 [ 
 	self addSegment: ((BlSvgPathQuadraticBezierSegment absolute: absolute) viaPoint: aPoint; curveTo: aPoint2)
 ]
@@ -229,10 +196,39 @@ Draws an elliptical arc from the current point to (x, y). The size and orientati
 
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> ellipticalArc: r xrot: xrot large: large sweep: sweep to: pt [
 
-	self addSegment
+	self halt
+]
+
+{ #category : #initialization }
+BlSvgPathBuilder >> fromStream: aStream [
+	stream := aStream.
+	self parsePathCommands
+]
+
+{ #category : #'gt-extension' }
+BlSvgPathBuilder >> gtCommandsFor: aView [
+	<gtView>
+
+	^ aView columnedList
+		title: 'Commands';
+		priority: 2;
+		items: [ self commands associations ];
+		column: 'Letter' item: [ :each | each key ];
+		column: 'Command' item: [ :each | each value ];
+		send: #value
+]
+
+{ #category : #'gt-extension' }
+BlSvgPathBuilder >> gtSegmentsFor: aView [
+	<gtView>
+
+	^ aView list
+		title: 'Segments';
+		priority: 1;
+		items: [ self segments ]
 ]
 
 { #category : #commands }
@@ -264,7 +260,6 @@ BlSvgPathBuilder >> initialize [
 	super initialize.
 
 	segments := OrderedCollection new.
-	path := OrderedCollection new.
 	
 	commands := IdentityDictionary new.
 	"absolute commands"
@@ -297,12 +292,6 @@ BlSvgPathBuilder >> l [
 ]
 
 { #category : #operations }
-BlSvgPathBuilder >> lastBezierPoint [
-	segments reverseDo: [ :arr | arr first caseOf: { 
-		[ #relative ] -> [ "ignore" ] } ]
-]
-
-{ #category : #operations }
 BlSvgPathBuilder >> lineTo [
 " 
 L (absolute) l (relative)
@@ -322,7 +311,7 @@ Draw a line from the current point to the given (x,y) coordinate which becomes t
 	[ pt := self readPoint. pt notNil ] whileTrue: [ self lineTo: pt ]
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> lineTo: aPoint [
 	self addSegment: ((BlSvgPathLineSegment absolute: absolute) lineTo: aPoint)
 ]
@@ -368,12 +357,12 @@ BlSvgPathBuilder >> moveTo [
 
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> moveTo: aPoint [
 	self addSegment: ((BlSvgPathMoveSegment absolute: absolute) moveTo: aPoint)
 ]
 
-{ #category : #'parsing-public' }
+{ #category : #'private - parsing' }
 BlSvgPathBuilder >> nextNumber [
 	"read the number from stream.
 	or answer nil if not successfull"
@@ -424,10 +413,10 @@ Within the SVG DOM, a <number> is represented as a float or an SVGAnimatedNumber
 
 ]
 
-{ #category : #parsing }
-BlSvgPathBuilder >> parseColor: aString [
-
-	^ Color fromString: aString
+{ #category : #'private - parsing' }
+BlSvgPathBuilder >> parsePathCommands [
+	[ self skipBlanks. stream atEnd ]
+		whileFalse: [ self performCommandNamed: stream next asString asSymbol ]
 ]
 
 { #category : #commands }
@@ -471,7 +460,7 @@ Draws a quadratic Bézier curve from the current point to (x,y) using (x1,y1) a
 
 ]
 
-{ #category : #operations }
+{ #category : #'private - parsing' }
 BlSvgPathBuilder >> readFraction [
 "
 read fraction, what is after the decimal point:
@@ -492,7 +481,7 @@ read fraction, what is after the decimal point:
 	^ result
 ]
 
-{ #category : #'write and read' }
+{ #category : #'private - parsing' }
 BlSvgPathBuilder >> readInteger [
 	| result |
 	(stream atEnd or: [ stream peek isDigit not ]) ifTrue: [ ^ nil ].
@@ -504,7 +493,7 @@ BlSvgPathBuilder >> readInteger [
 	^ result
 ]
 
-{ #category : #operations }
+{ #category : #'private - parsing' }
 BlSvgPathBuilder >> readPoint [
 	" A path data permits specifying points without comma separator "
 	| x y pos |
@@ -547,18 +536,18 @@ cubic Bézier curve from the current point to (x,y). The first control point is 
 
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> reflectedCurveTo: aPoint [
 
 
-	self addSegment 
+	self halt
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> reflectedCurveVia: aPoint to: aPoint2 [ 
 
 
-	self addSegment 
+	self halt
 ]
 
 { #category : #operations }
@@ -588,7 +577,7 @@ Draws a quadratic Bézier curve from the current point to (x,y). The control poi
 
 ]
 
-{ #category : #'builder commands' }
+{ #category : #'api - builder' }
 BlSvgPathBuilder >> relative [
 	absolute := false
 ]
@@ -603,12 +592,12 @@ BlSvgPathBuilder >> segments [
 	^ segments
 ]
 
-{ #category : #operations }
+{ #category : #'private - parsing' }
 BlSvgPathBuilder >> skipBlanks [
 	[ stream atEnd not and: [ stream peek isSeparator ] ] whileTrue: [ stream next ].
 ]
 
-{ #category : #operations }
+{ #category : #'private - parsing' }
 BlSvgPathBuilder >> skipBlanksAndComma [
 	[ stream atEnd not and: [ stream peek isSeparator or: [stream peek =$,]] ] whileTrue: [ stream next ].
 ]
@@ -616,11 +605,6 @@ BlSvgPathBuilder >> skipBlanksAndComma [
 { #category : #accessing }
 BlSvgPathBuilder >> stream [
 	^ stream
-]
-
-{ #category : #accessing }
-BlSvgPathBuilder >> stream: aStream [
-	stream := aStream
 ]
 
 { #category : #commands }

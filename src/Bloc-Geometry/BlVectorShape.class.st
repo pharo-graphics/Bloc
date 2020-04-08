@@ -9,7 +9,7 @@ Class {
 		'CurveFromPointAttribute',
 		'CurveToPointAttribute'
 	],
-	#category : #'Bloc-Basic-Vector Shapes'
+	#category : #'Bloc-Geometry-Shaper'
 }
 
 { #category : #'class initialization' }

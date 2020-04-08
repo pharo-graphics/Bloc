@@ -22,8 +22,13 @@ Class {
 		'shapeBuilder',
 		'vectorShape'
 	],
-	#category : #'Bloc-Basic'
+	#category : #'Bloc-Geometry-Shaper'
 }
+
+{ #category : #'as yet unclassified' }
+BlShapeGeometry >> buildPathOnSpartaCanvas: aCanvas [
+	^ vectorShape buildPathOnSpartaCanvas: aCanvas
+]
 
 { #category : #private }
 BlShapeGeometry >> createVectorShape [
