@@ -8,6 +8,11 @@ Class {
 	#category : #'Bloc-Basic'
 }
 
+{ #category : #'geometry testing' }
+BlSquare >> containsPoint: aPoint in: aBlElement [
+	^ (self geometryBounds: BlBounds new) containsPoint: aPoint
+]
+
 { #category : #'geometry bounds' }
 BlSquare >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.
