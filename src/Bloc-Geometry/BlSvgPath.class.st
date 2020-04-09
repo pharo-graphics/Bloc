@@ -15,7 +15,8 @@ Class {
 	#superclass : #BlGeometry,
 	#instVars : [
 		'position',
-		'segments'
+		'segments',
+		'viewbox'
 	],
 	#category : #'Bloc-Geometry-SVG'
 }
@@ -31,32 +32,20 @@ BlSvgPath class >> fromStream: aStream [
 ]
 
 { #category : #initialization }
-BlSvgPath >> build: aBlock [
+BlSvgPath >> build: aBlock viewbox: aRectangle [
 	| aPathbuilder |
 	aPathbuilder := BlSvgPathBuilder new.
 	aBlock value: aPathbuilder.
-	segments := aPathbuilder segments
-]
-
-{ #category : #'as yet unclassified' }
-BlSvgPath >> buildPathOnSpartaCanvas: aCanvas [
-	| pathBuilder|
-
-	pathBuilder := aCanvas path.
-	segments do: [ :each |  each executeOn: pathBuilder ].
-	^ pathBuilder finish
-]
-
-{ #category : #initialization }
-BlSvgPath >> fromStream: aStream [
-	segments := (BlSvgPathBuilder fromStream: aStream) segments
+	segments := aPathbuilder segments.
+	viewbox := aRectangle
 ]
 
 { #category : #initialization }
 BlSvgPath >> initialize [
 	super initialize.
 	
-	segments := #()
+	segments := #().
+	viewbox := 0@0 extent: 50@50
 ]
 
 { #category : #accessing }
@@ -65,6 +54,7 @@ BlSvgPath >> matchExtent: anExtent [
 ]
 
 { #category : #initialization }
-BlSvgPath >> svg: aString [
-	segments := (BlSvgPathBuilder fromStream: aString readStream) segments
+BlSvgPath >> svg: anSvgString viewbox: aRectangle [
+	segments := (BlSvgPathBuilder fromStream: anSvgString readStream) segments.
+	viewbox := aRectangle
 ]

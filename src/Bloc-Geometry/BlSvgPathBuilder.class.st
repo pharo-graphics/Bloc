@@ -133,7 +133,7 @@ At the end of the command, the new current point becomes the final (x,y) coordin
 	
 	p3 ifNil: [ self error: 'Invalid path data: 3 points expected for cubic bezier '].
 
-	self curveVia: p1 and:  p2 to: p3. 
+	self curveVia: p1 and: p2 to: p3. 
 	
 	[ 
 		(p1 := self readPoint) ifNil: [ ^ self ].
@@ -149,12 +149,17 @@ At the end of the command, the new current point becomes the final (x,y) coordin
 
 { #category : #'api - builder' }
 BlSvgPathBuilder >> curveVia: aPoint and: aPoint2 to: aPoint3 [ 
-	self addSegment: ((BlSvgPathCubicBezierSegment absolute: absolute) firstViaPoint: aPoint; secondViaPoint: aPoint2; curveTo: aPoint2)
+	self addSegment: ((BlSvgPathCubicBezierSegment absolute: absolute)
+		firstViaPoint: aPoint;
+		secondViaPoint: aPoint2;
+		curveTo: aPoint3)
 ]
 
 { #category : #'api - builder' }
 BlSvgPathBuilder >> curveVia: aPoint to: aPoint2 [ 
-	self addSegment: ((BlSvgPathQuadraticBezierSegment absolute: absolute) viaPoint: aPoint; curveTo: aPoint2)
+	self addSegment: ((BlSvgPathQuadraticBezierSegment absolute: absolute) 
+		viaPoint: aPoint;
+		curveTo: aPoint2)
 ]
 
 { #category : #operations }
