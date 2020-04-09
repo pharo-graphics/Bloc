@@ -3,16 +3,25 @@ Class {
 	#superclass : #BlTaskAtPostponedTerminableTask,
 	#instVars : [
 		'onSuccess',
-		'onFailure'
+		'onFailure',
+		'futureMutex',
+		'future'
 	],
 	#category : #'Bloc-TaskIt-Postponed Tasks'
 }
+
+{ #category : #handling }
+BlTaskAtPostponedTerminableFuture >> handleNotScheduledBecauseOfPreviousTask: aBlTaskAtTask [
+	self transferCallbacksTo: aBlTaskAtTask.
+	super handleNotScheduledBecauseOfPreviousTask: aBlTaskAtTask
+]
 
 { #category : #initialization }
 BlTaskAtPostponedTerminableFuture >> initialize [
 	super initialize.
 	onFailure := OrderedCollection new: 2.
 	onSuccess := OrderedCollection new: 2.
+	futureMutex := Mutex new.
 ]
 
 { #category : #accessing }
@@ -23,7 +32,11 @@ BlTaskAtPostponedTerminableFuture >> onFailure [
 
 { #category : #accessing }
 BlTaskAtPostponedTerminableFuture >> onFailureDo: aBlock [
-	onFailure add: aBlock
+	futureMutex critical: [ 
+		future 
+			ifNil: [ onFailure add: aBlock ]
+			ifNotNil: [ future onFailureDo: aBlock ]
+	]
 ]
 
 { #category : #accessing }
@@ -34,16 +47,29 @@ BlTaskAtPostponedTerminableFuture >> onSuccess [
 
 { #category : #accessing }
 BlTaskAtPostponedTerminableFuture >> onSuccessDo: aBlock [
-	onSuccess add: aBlock
+	futureMutex critical: [ 
+		future 
+			ifNil: [ onSuccess add: aBlock ]
+			ifNotNil: [ future onSuccessDo: aBlock ]
+	]
 ]
 
 { #category : #evaluating }
 BlTaskAtPostponedTerminableFuture >> privateExecute [
-	| aFuture |
-	aFuture := self pool future: self command.
-	self onSuccess do: [ :eachCallback | 
-		aFuture onSuccessDo: eachCallback ].
-	self onFailure do: [ :eachCallback | 
-		aFuture onFailureDo: eachCallback ].
-	
+	futureMutex critical: [ 
+		future := self pool future: self command.
+		self onSuccess do: [ :eachCallback | 
+			future onSuccessDo: eachCallback ].
+		self onFailure do: [ :eachCallback | 
+			future onFailureDo: eachCallback ].
+	]
+]
+
+{ #category : #private }
+BlTaskAtPostponedTerminableFuture >> transferCallbacksTo: aBlTaskAtTask [
+	aBlTaskAtTask class = self class ifFalse: [ ^ self ].
+	self onSuccess
+		do: [ :eachCallback | aBlTaskAtTask onSuccessDo: eachCallback ].
+	self onFailure
+		do: [ :eachCallback | aBlTaskAtTask onFailureDo: eachCallback ]
 ]

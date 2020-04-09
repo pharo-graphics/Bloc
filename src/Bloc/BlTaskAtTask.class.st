@@ -34,6 +34,11 @@ BlTaskAtTask >> entryPriority [
 	^(scheduledTime - BlTime real now) asMilliSeconds max: 0
 ]
 
+{ #category : #handling }
+BlTaskAtTask >> handleNotScheduledBecauseOfPreviousTask: aBlTaskAtTask [
+	"subclasses can act on this event"
+]
+
 { #category : #initialization }
 BlTaskAtTask >> initialize: aValuable at: aTime [
 
@@ -54,6 +59,11 @@ BlTaskAtTask >> printOn: aStream [
 { #category : #accessing }
 BlTaskAtTask >> scheduledTime [
 	^ scheduledTime
+]
+
+{ #category : #accessing }
+BlTaskAtTask >> scheduledTime: aTime [
+	scheduledTime := aTime
 ]
 
 { #category : #accessing }

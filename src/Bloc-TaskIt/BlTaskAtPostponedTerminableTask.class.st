@@ -5,10 +5,21 @@ Class {
 		'pool',
 		'shouldTerminate',
 		'wasExecuted',
-		'mutex'
+		'notScheduledHandler',
+		'executionMutex'
 	],
 	#category : #'Bloc-TaskIt-Postponed Tasks'
 }
+
+{ #category : #initialization }
+BlTaskAtPostponedTerminableTask >> beRegularNotScheduledHandler [
+	self notScheduledHandler: BlTaskAtNotScheduledHandler default 
+]
+
+{ #category : #initialization }
+BlTaskAtPostponedTerminableTask >> beShiftingNotScheduledHandler [
+	self notScheduledHandler: BlTaskAtNotScheduledHandler shifting 
+]
 
 { #category : #accessing }
 BlTaskAtPostponedTerminableTask >> command [
@@ -21,7 +32,12 @@ BlTaskAtPostponedTerminableTask >> command: aCommand [
 	self 
 		assert: [ aCommand isNotNil ] 
 		description: [ 'Command must be non-nil' ].
-	valuable := aCommand asBlTktTerminableCommand.
+	valuable := aCommand asBlTktCommand asBlTktTerminableCommand.
+]
+
+{ #category : #defaults }
+BlTaskAtPostponedTerminableTask >> defaultNotScheduledHandler [
+	^ BlTaskAtNotScheduledHandler default
 ]
 
 { #category : #accessing }
@@ -29,12 +45,28 @@ BlTaskAtPostponedTerminableTask >> entryIdentifier [
 	^ self command entryIdentifier
 ]
 
+{ #category : #handling }
+BlTaskAtPostponedTerminableTask >> handleNotScheduledBecauseOfPreviousTask: aBlTaskAtTask [
+	self notScheduledHandler notScheduled: self becauseOf: aBlTaskAtTask
+]
+
 { #category : #initialization }
 BlTaskAtPostponedTerminableTask >> initialize [
 	super initialize.
 	shouldTerminate := false.
 	wasExecuted := false.
-	mutex := Mutex new.
+	executionMutex := Mutex new.
+	notScheduledHandler := self defaultNotScheduledHandler.
+]
+
+{ #category : #accessing }
+BlTaskAtPostponedTerminableTask >> notScheduledHandler [
+	^ notScheduledHandler
+]
+
+{ #category : #accessing }
+BlTaskAtPostponedTerminableTask >> notScheduledHandler: anObject [
+	notScheduledHandler := anObject
 ]
 
 { #category : #accessing }
@@ -56,14 +88,9 @@ BlTaskAtPostponedTerminableTask >> privateExecute [
 	self pool schedule: self command
 ]
 
-{ #category : #accessing }
-BlTaskAtPostponedTerminableTask >> scheduledTime: aTime [
-	scheduledTime := aTime
-]
-
 { #category : #actions }
 BlTaskAtPostponedTerminableTask >> terminate [
-	mutex critical: [ 
+	executionMutex critical: [ 
 		wasExecuted ifFalse: [ 
 			shouldTerminate := true.
 			^ self ] ].
@@ -72,7 +99,7 @@ BlTaskAtPostponedTerminableTask >> terminate [
 
 { #category : #evaluating }
 BlTaskAtPostponedTerminableTask >> value [
-	mutex critical: [ 
+	executionMutex critical: [ 
 		shouldTerminate ifTrue: [ ^ nil ].
 		wasExecuted := true.
 		self privateExecute ]

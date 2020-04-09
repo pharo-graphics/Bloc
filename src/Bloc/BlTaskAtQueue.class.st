@@ -112,11 +112,18 @@ BlTaskAtQueue >> queueReaderLoop [
 
 { #category : #operations }
 BlTaskAtQueue >> schedule: aBlTaskAtTask [
-	"Add the supplied task to the queue and trigger the semaphore at the appropriate time"
+	"Add the supplied task to the queue and trigger the semaphore at the appropriate time.
+	Return the scheduled task or a similar previously scheduled task."
 
-	queue nextPut: aBlTaskAtTask.
+	| aResult |
+	aResult := queue nextPut: aBlTaskAtTask.
+	aResult == aBlTaskAtTask  ifFalse: [ 
+		aBlTaskAtTask handleNotScheduledBecauseOfPreviousTask: aResult.
+		^ aResult ].
+	
 	(nextTime isNil or: [ aBlTaskAtTask scheduledTime < nextTime ])
 		ifTrue: [ self triggerAt: aBlTaskAtTask scheduledTime ].
+	^ aBlTaskAtTask.
 ]
 
 { #category : #operations }

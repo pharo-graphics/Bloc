@@ -146,8 +146,9 @@ SharedPriorityUniqueQueue >> nextPut: anObject [
 
 	^[ monitor critical: [ | result itemAdded |
 		itemAdded := false.
-		result := anObject entryIdentifier ifNotNil: [ :identifier |
-			items detect: [ :each | each entryIdentifier = identifier ]
+		result := anObject entryIdentifier 
+			ifNotNil: [ :identifier |
+				items detect: [ :each | each entryIdentifier = identifier ]
 					ifFound: [ :existing | existing ]
 					ifNone: [ [ itemAdded := true. items addLast: anObject ] valueWithoutTermination ] ]
 			ifNil: [ itemAdded := true. items addLast: anObject ].
