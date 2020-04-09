@@ -117,7 +117,7 @@ BlTaskAtQueue >> schedule: aBlTaskAtTask [
 
 	| aResult |
 	aResult := queue nextPut: aBlTaskAtTask.
-	aResult == aBlTaskAtTask  ifFalse: [ 
+	aResult == aBlTaskAtTask ifFalse: [ 
 		aBlTaskAtTask handleNotScheduledBecauseOfPreviousTask: aResult.
 		^ aResult ].
 	
