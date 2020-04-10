@@ -8,6 +8,13 @@ TKTWatchDog >> hasPoolWorkerNamed: aString [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+TKTWatchDog >> numberOfFailedTasks [
+	^ self pool 
+			ifNotNil: [ :aPool | aPool numberOfFailedTasks ]
+			ifNil: 0
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTWatchDog >> taskQueueSize [
 	^ self pool 
 			ifNotNil: [ :aPool | aPool taskQueue size ]

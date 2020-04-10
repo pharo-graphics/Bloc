@@ -32,6 +32,12 @@ TKTCommonQueueWorkerPool >> killWatchDog [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+TKTCommonQueueWorkerPool >> numberOfFailedTasks [
+	<return: #Integer>
+	^ failedTasks ifNotNil: #size ifNil: 0
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTCommonQueueWorkerPool >> poolMaxSize [
 
 	^poolMaxSize
