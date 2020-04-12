@@ -6,6 +6,11 @@ TKTService >> hasPoolWorkerNamed: aString [
 ]
 
 { #category : #'*Bloc-TaskIt' }
+TKTService >> numberOfFailedTasks [
+	^ 0
+]
+
+{ #category : #'*Bloc-TaskIt' }
 TKTService >> taskQueueSize [
 	^ 0
 ]
