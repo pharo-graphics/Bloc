@@ -95,8 +95,12 @@ BlBounds >> assertFinite [
 BlBounds >> atRandom [
 	"Return a random integer point within this bounds"
 	<return: #Point>
+	| aMaxWidth aMaxHeight |
 	
-	^ (self topLeft + (self width asInteger atRandom @ self height asInteger atRandom)) asIntegerPoint
+	aMaxWidth := (self width ceiling asInteger - 1) max: 0.
+	aMaxHeight := (self height ceiling asInteger - 1) max: 0.
+	
+	^ (self topLeft + (aMaxWidth atRandom @ aMaxHeight atRandom)) asIntegerPoint
 ]
 
 { #category : #accessing }
