@@ -150,8 +150,6 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 	I do not create any strong or weak references to provided space"
 	| aHostSpace  windowBuilder windowedContext |
 
-	GlutinEventsFetcher default ensureEventsLoop.
-
 	windowBuilder := GlutinWindowBuilder new
 		title: aSpace title;
 		extent: aSpace extent;
@@ -161,7 +159,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 		withMaximized: aSpace maximized;
 		withFullSize: aSpace fullsize.
 	
-	windowedContext := GlutinEventsFetcher default eventsLoop createWindow: windowBuilder.
+	windowedContext := GlutinEventsFetcher default eventLoop createWindow: windowBuilder.
 	
 	aHostSpace := BlGlutinHostSpace new.
 	aHostSpace window: windowedContext.
