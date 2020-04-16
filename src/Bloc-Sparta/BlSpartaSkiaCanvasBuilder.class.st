@@ -113,4 +113,5 @@ BlSpartaSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
 	^ (self class environment at: #SkiaCanvas)
 		createFromRenderTarget: aSkiaBackendRenderTarget
 		format: (self class environment at: #SkiaColorType) RGBA8888
+		context: aRendererSurface context
 ]
