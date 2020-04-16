@@ -1781,7 +1781,8 @@ BlElement >> isFocusable [
 
 	^ self isVisible
 		and: [ self shouldHandleMouseEvents
-			and: [ self focusability ~= BlFocusability none ] ]
+			and: [ self focusability ~= BlFocusability none
+				and: [ self focusability ~= BlFocusability ignore ] ] ]
 ]
 
 { #category : #'focus testing' }
