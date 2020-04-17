@@ -194,6 +194,9 @@ BlFocusProcessor >> requestFor: anElement [
 
 	focusOwner = anElement
 		ifTrue: [ ^ self ].
+		
+	anElement isFocusable
+		ifFalse: [ ^ self ].
 
 	"we should only process blur event when there is focused element, otherwise skip it"
 	self hasFocusOwner
