@@ -110,6 +110,13 @@ BlDirectEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChain 
 ]
 
 { #category : #'api - accessing' }
+BlDirectEventDispatcher >> filtersDo: aBlock [
+	"Evaulate a given block with every event filter as an argument"
+
+	filters ifNotNil: [ :aRegistry | aRegistry filters do: aBlock ]
+]
+
+{ #category : #'api - accessing' }
 BlDirectEventDispatcher >> handlersDo: aBlock [
 	"Evaulate a given block with every event handler as an argument"
 

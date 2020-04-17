@@ -264,6 +264,11 @@ BlLayoutCommonConstraints >> minWidth: aNumber [
 	minWidth := aNumber
 ]
 
+{ #category : #accessing }
+BlLayoutCommonConstraints >> other [
+	^ constraints ifNil: [ ^ Dictionary new ]
+]
+
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> padding [
 	"Return an immutable padding property,

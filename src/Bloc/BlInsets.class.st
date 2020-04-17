@@ -237,6 +237,17 @@ BlInsets >> isEmpty [
 				and: [ self left isZero ] ] ]
 ]
 
+{ #category : #testing }
+BlInsets >> isUniform [
+	"Return true if all insets (right, left, top, bottom) are same"
+	<return: #Boolean>
+
+	^ (self top closeTo: self right)
+		and: [ (self right closeTo: self bottom)
+			and: [ (self bottom closeTo: self left)
+				and: [ self left closeTo: self top ] ] ]
+]
+
 { #category : #accessing }
 BlInsets >> left [
 	<return: #Number>
@@ -260,9 +271,24 @@ BlInsets >> negated [
 
 { #category : #printing }
 BlInsets >> printOn: aStream [
-	super printOn: aStream.
+
 	aStream
-		nextPutAll: ' top: ';
+		nextPutAll: self class name;
+		space.
+	
+	self isEmpty
+		ifTrue: [
+			aStream nextPutAll: 'empty'.
+			^ self ].
+		
+	self isUniform
+		ifTrue: [
+			aStream nextPutAll: 'all: '.
+			aStream print: self top.
+			^ self ].
+
+	aStream
+		nextPutAll: 'top: ';
 		print: top;
 		nextPutAll: ' right: ';
 		print: right;

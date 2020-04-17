@@ -24,8 +24,18 @@ BlEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChain [
 ]
 
 { #category : #'api - accessing' }
+BlEventDispatcher >> filters [
+	^ Array streamContents: [ :aStream | self filtersDo: [ :eachFilter | aStream nextPut: eachFilter ] ]
+]
+
+{ #category : #'api - accessing' }
+BlEventDispatcher >> filtersDo: aBlock [
+	"Evaulate a given block with every event filter as an argument"
+]
+
+{ #category : #'api - accessing' }
 BlEventDispatcher >> handlers [
-	^ Array streamContents: [ :aStream | self handlersDo: [ :eachHandlers | aStream nextPut: eachHandlers ] ]
+	^ Array streamContents: [ :aStream | self handlersDo: [ :eachHandler | aStream nextPut: eachHandler ] ]
 ]
 
 { #category : #'api - accessing' }
