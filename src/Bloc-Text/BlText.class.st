@@ -273,6 +273,12 @@ BlText >> first [
 ]
 
 { #category : #'text - accessing' }
+BlText >> first: aNumber [
+	<return: #BlRope>
+	^ self from: 1 to: aNumber
+]
+
+{ #category : #'text - accessing' }
 BlText >> from: aStart to: anEnd [
 	"Create and return a subtext of this text form aStart to anEnd.
 	Note: All modifications that are happening to the subtext automatically
@@ -429,6 +435,12 @@ BlText >> printOn: aWriteStream from: aStart to: anEnd [
 			anItem isCharacter
 				ifTrue: [ aWriteStream nextPut: anItem ]
 				ifFalse: [ aWriteStream print: anItem ] ]
+]
+
+{ #category : #'text - enumeration' }
+BlText >> readStream [
+	"Compatibility with ${method:SequenceableCollection>>#readStream}$"
+	^ BlTextReadStream new iterator: self iterator
 ]
 
 { #category : #'text - copying' }
