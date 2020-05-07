@@ -49,9 +49,9 @@ BlLazyElement >> buildElement [
 	"Build the element and display it"
 
 	self 
-		assert: [ elementBuilder isNotNil ]
+		assert: [ self elementBuilder isNotNil ]
 		description: [ 'No element builder has been set' ].
-	self element: elementBuilder value.
+	self element: self elementBuilder value.
 
 ]
 
@@ -87,7 +87,8 @@ BlLazyElement >> elementBuilder [
 
 { #category : #accessing }
 BlLazyElement >> elementBuilder: aValuable [
-	elementBuilder := aValuable
+	elementBuilder := aValuable.
+	BlUseAsyncFeatures ifDisabledDo: [ self buildElement ].
 ]
 
 { #category : #initialization }
@@ -128,7 +129,7 @@ BlLazyElement >> queueEntry [
 
 	^ ((BlTktUnresponsiveCommand new 
 			valuable: (BlLazyElementValuable element: self);
-			name: 'BlLazyElement(', elementBuilder printString, ')';
+			name: 'BlLazyElement(', self elementBuilder printString, ')';
 			yourself) asBlTktSingleCommand
 				identifier: self) asBlTktLoggingCommand
 

@@ -76,6 +76,7 @@ BlAsyncElementExamples >> basicLazyElement [
 			c vertical fitContent.
 			c horizontal fitContent ].
 	self assert: anElement elementBuilder isNil.
+	self assert: anElement element isNil.
 	self assert: anElement hasChildren not.
 	^ anElement
 ]
@@ -129,6 +130,7 @@ BlAsyncElementExamples >> lazyElement [
 	aBuilder := self finalElementBuilder.
 	anElement elementBuilder: aBuilder.
 	self assert: anElement elementBuilder equals: aBuilder.
+	self assert: anElement element isNil.
 	self assertLazyElement: anElement string: self temporaryString.
 	^ anElement
 ]
@@ -210,11 +212,12 @@ BlAsyncElementExamples >> syncLazyElement [
 	<gtExample>
 	| anElement aBuilder |
 	anElement := self lazyElementWithTemporaryChild.
+	aBuilder := self finalElementBuilder.
 	BlUseAsyncFeatures disableDuring: [ 
-		aBuilder := self finalElementBuilder.
 		anElement elementBuilder: aBuilder ].
 	self assert: anElement elementBuilder equals: aBuilder.
-	self assertLazyElement: anElement string: self temporaryString.
+	self assert: anElement element isNotNil.
+	self assertLazyElement: anElement string: self finalString.
 	self assert: anElement taskQueue tasks size equals: 0.
 	^ anElement
 ]
