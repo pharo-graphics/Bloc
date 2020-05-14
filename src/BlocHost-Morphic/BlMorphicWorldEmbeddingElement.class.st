@@ -22,18 +22,6 @@ BlMorphicWorldEmbeddingElement class >> open [
 ]
 
 { #category : #'instance creation' }
-BlMorphicWorldEmbeddingElement class >> openEmbedded [
-	<script: 'self openEmbedded'>
-	| aSpace |
-
-	aSpace := BlSpace new.
-	aSpace title: 'Morph World'.
-	aSpace extent: 1280@800.
-	aSpace addChild: (GtInspector createOn: self new beMain).
-	aSpace show
-]
-
-{ #category : #'instance creation' }
 BlMorphicWorldEmbeddingElement class >> openMain [
 	<script: 'self open'>
 	| aSpace |
