@@ -28,6 +28,15 @@ BlIgnoredLayoutConstraintsVertical >> alignTop [
 	alignment := BlElementAlignment vertical start
 ]
 
+{ #category : #alignment }
+BlIgnoredLayoutConstraintsVertical >> alignTopAt: aUnitCoordinateNumber [
+	"Align the top of the element vertically with a unit-coordinate inside of the parent"
+
+	alignment := BlVerticalCoordinateTopAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment vertical start
+]
+
 { #category : #accessing }
 BlIgnoredLayoutConstraintsVertical >> alignment [
 	^ alignment

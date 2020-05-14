@@ -221,6 +221,7 @@ BlInsets >> inset: aRectangle [
 
 	self isEmpty
 		ifTrue: [ ^ aRectangle ].
+
 	^ (aRectangle left + self left) @ (aRectangle top + self top)
 		corner: (aRectangle right - self right) @ (aRectangle bottom - self bottom)
 ]

@@ -78,19 +78,28 @@ BlBitflags class >> flagsDecl [
 
 { #category : #private }
 BlBitflags class >> flagsDictionary [
-	| decl |
+	| decl theCurrentDeclarations |
 	
 	self = BlBitflags
 		ifTrue: [ ^ Dictionary new ].
 	
-	decl := self flagsDecl.
-	decl := decl
-		collectWithIndex: [ :eachDeclaration :eachIndex |
-			(eachDeclaration isKindOf: Association)
-				ifTrue: [ eachDeclaration key -> eachDeclaration value value ]
-				ifFalse: [ eachDeclaration -> (1 << (eachIndex - 1)) ] ].
+	theCurrentDeclarations := Dictionary new.
+	
+	self flagsDecl doWithIndex: [ :eachDeclaration :eachIndex |
+		| aKey aValue |
+		
+		(eachDeclaration isKindOf: Association)
+			ifTrue: [
+				aKey := eachDeclaration key.
+				aValue := eachDeclaration value isClosure
+					ifTrue: [ eachDeclaration value cull: theCurrentDeclarations ]
+					ifFalse: [ eachDeclaration value value ] ]
+			ifFalse: [
+				aKey := eachDeclaration.
+				aValue := (1 << (eachIndex - 1)) ].
+		theCurrentDeclarations at: aKey put: aValue ].
 
-	decl := decl asDictionary.
+	decl := theCurrentDeclarations.
 	decl := (decl associations collect: [ :each |
 		| key |
 		key := self generateFlagName: each key.
@@ -237,6 +246,13 @@ BlBitflags >> initialize [
 BlBitflags >> initializeWith: aValue [
 	
 	value := aValue
+]
+
+{ #category : #testing }
+BlBitflags >> isEmpty [
+	<return: #Boolean>
+
+	^ self value isZero
 ]
 
 { #category : #removing }

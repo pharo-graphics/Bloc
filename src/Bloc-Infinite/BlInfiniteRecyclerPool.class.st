@@ -1,3 +1,12 @@
+"
+! Recycler pool
+
+I let users to share Elements between multiple ${class:BlInfiniteElement}$.
+
+If you want to recycle elements across ==InfiniteElement==, create an instance of ==RecyclerPool== and use ${method:BlInfiniteElement>>#recyclerPool:}$.
+
+==InfiniteElement== automatically creates a pool for itself if you don't provide one.
+"
 Class {
 	#name : #BlInfiniteRecyclerPool,
 	#superclass : #Object,
@@ -8,7 +17,7 @@ Class {
 		'maxScrap',
 		'attachCount'
 	],
-	#category : 'Bloc-Infinite-Recycler'
+	#category : #'Bloc-Infinite-Recycler'
 }
 
 { #category : #recycling }
@@ -28,6 +37,11 @@ BlInfiniteRecyclerPool >> at: anIntemType [
 		ifAbsent: [ nil ]
 ]
 
+{ #category : #'as yet unclassified' }
+BlInfiniteRecyclerPool >> attach [
+	attachCount := attachCount + 1
+]
+
 { #category : #invalidate }
 BlInfiniteRecyclerPool >> clear [
 	scrap removeAll
@@ -41,6 +55,11 @@ BlInfiniteRecyclerPool >> dataSourceChangedFrom: anOldDataSource to: aNewDataSou
 { #category : #initialization }
 BlInfiniteRecyclerPool >> defaultMaxScrap [
 	^ 5
+]
+
+{ #category : #'as yet unclassified' }
+BlInfiniteRecyclerPool >> detach [
+	attachCount := attachCount - 1
 ]
 
 { #category : #accessing }

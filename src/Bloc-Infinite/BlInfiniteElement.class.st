@@ -249,6 +249,80 @@ BlInfiniteElement >> clearOldPositions [
 	recycler clearOldPositions
 ]
 
+{ #category : #'api - scrolling thumb' }
+BlInfiniteElement >> computeHorizontalScrollExtent [
+	"Compute the horizontal extent of the horizontal scrollbar's thumb within the horizontal range.
+	This value is used to compute the length of the thumb within the scrollbar's track.
+	The extent is expressed in arbitrary units that must be the same as the units used by
+	#computeHorizontalScrollRange and #computeHorizontalScrollOffset."
+	<return: #Number>
+	
+	^ self layout canScrollHorizontally
+		ifTrue: [ self layout computeHorizontalScrollExtent ]
+		ifFalse: [ 0 ]
+]
+
+{ #category : #'api - scrolling thumb' }
+BlInfiniteElement >> computeHorizontalScrollOffset [
+	"Compute the horizontal offset of the horizontal scrollbar's thumb within the horizontal range.
+	The offset is expressed in arbitrary units that must be the same as the units used by
+	#computeHorizontalScrollExtent and #computeHorizontalScrollRange."
+	<return: #Number>
+	
+	^ self layout canScrollHorizontally
+		ifTrue: [ self layout computeHorizontalScrollOffset ]
+		ifFalse: [ 0 ]
+]
+
+{ #category : #'api - scrolling thumb' }
+BlInfiniteElement >> computeHorizontalScrollRange [
+	"Compute the horizontal range that the horizontal scrollbar represents.
+	The range is expressed in arbitrary units that must be the same as the units used by
+	#computeHorizontalScrollExtent and #computeHorizontalScrollOffset."
+	<return: #Number>
+	
+	^ self layout canScrollHorizontally
+		ifTrue: [ self layout computeHorizontalScrollRange ]
+		ifFalse: [ 0 ]
+]
+
+{ #category : #'api - scrolling thumb' }
+BlInfiniteElement >> computeVerticalScrollExtent [
+	"Compute the vertical extent of the vertical scrollbar's thumb within the vertical range.
+	This value is used to compute the length of the thumb within the scrollbar's track.
+	The extent is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollRange and #computeVerticalScrollOffset"
+	<return: #Number>
+	
+	^ self layout canScrollVertically
+		ifTrue: [ self layout computeVerticalScrollExtent ]
+		ifFalse: [ 0 ]
+]
+
+{ #category : #'api - scrolling thumb' }
+BlInfiniteElement >> computeVerticalScrollOffset [
+	"Compute the vertical offset of the vertical scrollbar's thumb within the vertical range.
+	The offset is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollExtent and #computeVerticalScrollRange."
+	<return: #Number>
+	
+	^ self layout canScrollVertically
+		ifTrue: [ self layout computeVerticalScrollOffset ]
+		ifFalse: [ 0 ]
+]
+
+{ #category : #'api - scrolling thumb' }
+BlInfiniteElement >> computeVerticalScrollRange [
+	"Compute the vertical range that the vertical scrollbar represents.
+	The range is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollExtent and #computeVerticalScrollOffset."
+	<return: #Number>
+	
+	^ self layout canScrollVertically
+		ifTrue: [ self layout computeVerticalScrollRange ]
+		ifFalse: [ 0 ]
+]
+
 { #category : #'private - commands' }
 BlInfiniteElement >> consumePendingDataSourceCommands [
 	"I help to reflect data changes to the state.
@@ -1570,7 +1644,24 @@ BlInfiniteElement >> recoverFocusFromState [
 
 { #category : #accessing }
 BlInfiniteElement >> recycler [
+	<return: #BlInfiniteRecycler>
+
 	^ recycler
+]
+
+{ #category : #'accessing - pool' }
+BlInfiniteElement >> recyclerPool [
+	<return: #BlInfiniteRecyclerPool>
+	
+	^ self recycler pool
+]
+
+{ #category : #'accessing - pool' }
+BlInfiniteElement >> recyclerPool: aBlInfiniteRecyclerPool [
+	"Infinite recycler pools allow multiple InfiniteElements to share a common pool of scrap elements.
+	This can be useful if you have multiple InfiniteElements with data sources that use the same element types."
+
+	self recycler pool: aBlInfiniteRecyclerPool
 ]
 
 { #category : #'children - add/remove' }

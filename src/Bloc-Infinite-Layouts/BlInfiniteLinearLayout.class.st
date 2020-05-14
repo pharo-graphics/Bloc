@@ -2,17 +2,18 @@ Class {
 	#name : #BlInfiniteLinearLayout,
 	#superclass : #BlInfiniteLayout,
 	#instVars : [
-		'shouldReverseLayout',
-		'orientation',
 		'layoutState',
+		'orientation',
+		'lastStackFromEnd',
 		'reverseLayout',
+		'shouldReverseLayout',
+		'stackFromEnd',
+		'smoothScrollbarEnabled',
 		'pendingScrollPosition',
 		'pendingScrollPositionOffset',
-		'lastStackFromEnd',
-		'anchorInfo',
-		'stackFromEnd'
+		'anchorInfo'
 	],
-	#category : 'Bloc-Infinite-Layouts-Linear'
+	#category : #'Bloc-Infinite-Layouts-Linear'
 }
 
 { #category : #factory }
@@ -108,10 +109,11 @@ BlInfiniteLinearLayout >> computeExtraLayoutSpace [
 	<return: #Point>
 	| anExtraSpace anExtraForStart anExtraForEnd |
 	
+	anExtraForStart := anExtraForEnd := 0.
+	
 	"Linear layout may decide to layout items for 'extra' pixels to account for scrolling target,
 	caching or predictive animations."
 	anExtraSpace := self extraLayoutSpace.
-	anExtraForStart := anExtraForEnd := 0.
 	
 	" If the previous scroll delta was less than zero, the extra space should be laid out
 		at the start. Otherwise, it should be at the end"
@@ -154,6 +156,57 @@ BlInfiniteLinearLayout >> computeExtraLayoutSpace [
 	^ anExtraForStart @ anExtraForEnd
 ]
 
+{ #category : #'scrolling - thumb' }
+BlInfiniteLinearLayout >> computeHorizontalScrollExtent [
+	<return: #Number>
+
+	^ self computeScrollExtent
+]
+
+{ #category : #'scrolling - thumb' }
+BlInfiniteLinearLayout >> computeHorizontalScrollOffset [
+	<return: #Number>
+
+	^ self computeScrollOffset
+]
+
+{ #category : #'scrolling - thumb' }
+BlInfiniteLinearLayout >> computeHorizontalScrollRange [
+	<return: #Number>
+
+	^ self computeScrollRange
+]
+
+{ #category : #'private - scrolling' }
+BlInfiniteLinearLayout >> computeScrollExtent [
+	<return: #Number>
+	
+	self hasChildren
+		ifFalse: [ ^ 0 ].
+	
+	^ self createScrollbarHelper computeScrollExtent
+]
+
+{ #category : #'private - scrolling' }
+BlInfiniteLinearLayout >> computeScrollOffset [
+	<return: #Number>
+	
+	self hasChildren
+		ifFalse: [ ^ 0 ].
+	
+	^ self createScrollbarHelper computeScrollOffset
+]
+
+{ #category : #'private - scrolling' }
+BlInfiniteLinearLayout >> computeScrollRange [
+	<return: #Number>
+	
+	self hasChildren
+		ifFalse: [ ^ 0 ].
+	
+	^ self createScrollbarHelper computeScrollRange
+]
+
 { #category : #scrolling }
 BlInfiniteLinearLayout >> computeScrollVectorForPosition: aPosition [
 	<return: #Point>
@@ -170,6 +223,41 @@ BlInfiniteLinearLayout >> computeScrollVectorForPosition: aPosition [
 	^ self orientation isHorizontal
 		ifTrue: [ aDirection @ 0 ]
 		ifFalse: [ 0 @ aDirection ]
+]
+
+{ #category : #'scrolling - thumb' }
+BlInfiniteLinearLayout >> computeVerticalScrollExtent [
+	<return: #Number>
+
+	^ self computeScrollExtent
+]
+
+{ #category : #'scrolling - thumb' }
+BlInfiniteLinearLayout >> computeVerticalScrollOffset [
+	<return: #Number>
+
+	^ self computeScrollOffset
+]
+
+{ #category : #'scrolling - thumb' }
+BlInfiniteLinearLayout >> computeVerticalScrollRange [
+	<return: #Number>
+
+	^ self computeScrollRange
+]
+
+{ #category : #'private - scrolling' }
+BlInfiniteLinearLayout >> createScrollbarHelper [
+	<return: #BlInfiniteScrollbarHelper>
+
+	^ BlInfiniteScrollbarHelper new
+		state: infiniteElement state;
+		orientation: orientation;
+		startElement: (self findFirstVisibleChildClosestToStartCompletelyVisible: smoothScrollbarEnabled not acceptPartiallyVisible: true);
+		endElement: (self findFirstVisibleChildClosestToEndCompletelyVisible: smoothScrollbarEnabled not acceptPartiallyVisible: true);
+		layout: self;
+		smoothScrollbarEnabled: smoothScrollbarEnabled;
+		isReversedLayout: shouldReverseLayout
 ]
 
 { #category : #initialization }
@@ -199,6 +287,11 @@ BlInfiniteLinearLayout >> defaultOrientation [
 { #category : #initialization }
 BlInfiniteLinearLayout >> defaultReverseLayout [
 	^ false
+]
+
+{ #category : #initialization }
+BlInfiniteLinearLayout >> defaultSmoothScrollbarEnabled [
+	^ true
 ]
 
 { #category : #initialization }
@@ -307,6 +400,92 @@ BlInfiniteLinearLayout >> fillLayoutResultScroll: aResult [
 ]
 
 { #category : #'private - children' }
+BlInfiniteLinearLayout >> findFirstVisibleChildClosestToEndCompletelyVisible: isCompletelyVisible acceptPartiallyVisible: shouldAcceptPartiallyVisible [
+	"Convenience method to find the visible child closes to end. Caller should check if it has enough children."
+	<return: #BlElement or: nil>
+	
+	^ shouldReverseLayout
+		ifTrue: [
+			self
+				findVisibleChildFrom: 1
+				to: self childrenCount
+				completelyVisible: isCompletelyVisible
+				acceptPartiallyVisible: shouldAcceptPartiallyVisible ]
+		ifFalse: [
+			self
+				findVisibleChildFrom: self childrenCount
+				to: 1
+				completelyVisible: isCompletelyVisible
+				acceptPartiallyVisible: shouldAcceptPartiallyVisible ]
+]
+
+{ #category : #'private - children' }
+BlInfiniteLinearLayout >> findFirstVisibleChildClosestToStartCompletelyVisible: isCompletelyVisible acceptPartiallyVisible: shouldAcceptPartiallyVisible [
+	"Convenience method to find the visible child closes to start. Caller should check if it has enough children."
+	<return: #BlElement or: nil>
+	
+	^ shouldReverseLayout
+		ifTrue: [
+			self
+				findVisibleChildFrom: self childrenCount
+				to: 1
+				completelyVisible: isCompletelyVisible
+				acceptPartiallyVisible: shouldAcceptPartiallyVisible ]
+		ifFalse: [
+			self
+				findVisibleChildFrom: 1
+				to: self childrenCount
+				completelyVisible: isCompletelyVisible
+				acceptPartiallyVisible: shouldAcceptPartiallyVisible ]
+]
+
+{ #category : #'private - children' }
+BlInfiniteLinearLayout >> findVisibleChildFrom: aFromIndex to: aToIndex completelyVisible: isCompletelyVisible acceptPartiallyVisible: shouldAcceptPartiallyVisible [
+	"Returns the first child that is visible in the provided index range, i.e. either partially or
+	fully visible depending on the arguments provided. Completely invisible children are not acceptable by this method,
+	but could be returned using #findOnePartiallyOrCompletelyInvisibleChild"
+	<return: #BlElement or: nil>
+	| preferredConstraints acceptableConstraints |
+	
+	preferredConstraints := BlBoundsMatcherConstraints new.
+	acceptableConstraints := BlBoundsMatcherConstraints new.
+	
+	isCompletelyVisible
+		ifTrue: [
+			preferredConstraints
+				addChildStartGreaterThanParentStart;
+				addChildStartEqualParentStart;
+				addChildEndLessThanParentEnd;
+				addChildEndEqualParentEnd ]
+		ifFalse: [
+			preferredConstraints
+				addChildStartLessThanParentEnd;
+				addChildEndGreaterThanParentStart ].
+			
+	shouldAcceptPartiallyVisible
+		ifTrue: [
+			acceptableConstraints
+				addChildStartLessThanParentEnd;
+				addChildEndGreaterThanParentStart ].
+			
+	^ self orientation isHorizontal
+		ifTrue: [
+			horizontalChildFinder
+				preferredConstraints: preferredConstraints;
+				acceptableConstraints: acceptableConstraints;
+				fromIndex: aFromIndex;
+				toIndex: aToIndex;
+				detect ]
+		ifFalse: [
+			verticalChildFinder
+				preferredConstraints: preferredConstraints;
+				acceptableConstraints: acceptableConstraints;
+				fromIndex: aFromIndex;
+				toIndex: aToIndex;
+				detect ]
+]
+
+{ #category : #'private - children' }
 BlInfiniteLinearLayout >> firstReferenceChildIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	<return: #BlElement or: nil>
 
@@ -397,6 +576,7 @@ BlInfiniteLinearLayout >> initialize [
 	self stackFromEnd: self defaultStackFromEnd.
 	layoutState := self defaultLayoutState.
 	anchorInfo := self defaultAnchorInfo.
+	smoothScrollbarEnabled := self defaultSmoothScrollbarEnabled.
 	
 	"Initialize cache inst.vars"
 	lastStackFromEnd := false.
@@ -772,12 +952,15 @@ BlInfiniteLinearLayout >> onAnchorReady: anAnchorInfo firstLayoutItemDirection: 
 
 { #category : #accessing }
 BlInfiniteLinearLayout >> orientation [
+	<return: #BlInfiniteLayoutOrientation>
+
 	^ orientation
 ]
 
 { #category : #accessing }
 BlInfiniteLinearLayout >> orientation: anInfiniteLayoutOrientation [
-
+	"Sets the orientation of the layout. 
+	I will do my best to keep scroll position."
 	self
 		assert: [ anInfiniteLayoutOrientation isNotNil ]
 		description: [ 'Orientation must not be nil' ].
@@ -979,7 +1162,7 @@ BlInfiniteLinearLayout >> referenceChildWithin: anIndexInterval between: aPositi
 	^ anOutOfBoundsElement ifNil: [ anInvalidElement ]
 ]
 
-{ #category : #'layout - computations' }
+{ #category : #'private - computations' }
 BlInfiniteLinearLayout >> resolveIsInfinite [
 	"Return true if we should add children infinitely until we run out of items in data source or hit maxHeight/ maxWidth"
 	<return: #Boolean>
@@ -988,8 +1171,11 @@ BlInfiniteLinearLayout >> resolveIsInfinite [
 		and: [ self orientation end isZero ]
 ]
 
-{ #category : #'layout - computations' }
+{ #category : #'private - computations' }
 BlInfiniteLinearLayout >> resolveShouldLayoutReverse [
+	"Calculates the element layout order. (e.g. from end to start or start to end)
+	RTL layout support is applied automatically.
+	So if layout is RTL and #shouldReverseLayout is true, elements will be laid out starting from left."
 	<return: #Boolean>
 
 	shouldReverseLayout := (self orientation isVertical or: [ self isLayoutRTL not ])
@@ -1113,6 +1299,7 @@ BlInfiniteLinearLayout >> shouldReverseLayout [
 
 { #category : #testing }
 BlInfiniteLinearLayout >> shouldStackFromEnd [
+	"Return if the list should fill its content starting from the bottom of the infinite element, false otherwise"
 	<return: #Boolean>
 
 	^ stackFromEnd
@@ -1129,9 +1316,9 @@ BlInfiniteLinearLayout >> smoothScrollToPosition: aPosition [
 
 { #category : #accessing }
 BlInfiniteLinearLayout >> stackFromEnd: aBoolean [
-
+	"When stack from bottom is set to true, the list fills its content starting from the bottom of the infinite element"
 	self assertNotInLayoutOrScroll.
-	
+
 	stackFromEnd = aBoolean
 		ifTrue: [ ^ self ].
 	

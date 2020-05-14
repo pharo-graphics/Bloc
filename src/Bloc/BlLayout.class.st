@@ -97,9 +97,9 @@ BlLayout >> align: anElement bounds: elementBounds in: theParentBounds with: aBl
 	aTranslation := alignment translationOf: elementBounds in: theParentBounds.
 
 	aTranslation x isZero
-		ifTrue: [ aTranslation := theParentBounds left @ aTranslation y ].
+		ifTrue: [ aTranslation := ((theParentBounds left - elementBounds left) max: 0)  @ aTranslation y ].
 	aTranslation y isZero
-		ifTrue: [ aTranslation := aTranslation x @ theParentBounds top ].
+		ifTrue: [ aTranslation := aTranslation x @ ((theParentBounds top - elementBounds top) max: 0) ].
 
 	^ elementBounds translateBy: aTranslation
 ]

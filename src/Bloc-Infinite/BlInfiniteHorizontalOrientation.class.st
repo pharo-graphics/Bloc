@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteHorizontalOrientation,
 	#superclass : #BlInfiniteLayoutOrientation,
-	#category : 'Bloc-Infinite-Layout'
+	#category : #'Bloc-Infinite-Layout'
 }
 
 { #category : #'children - geometry' }
@@ -43,6 +43,8 @@ BlInfiniteHorizontalOrientation >> end [
 
 { #category : #geometry }
 BlInfiniteHorizontalOrientation >> endWithPadding [
+	<return: #Number>
+
 	^ self layout width - self layout paddingRight
 ]
 
@@ -95,5 +97,7 @@ BlInfiniteHorizontalOrientation >> paddingStart [
 
 { #category : #geometry }
 BlInfiniteHorizontalOrientation >> startWithPadding [
+	<return: #Number>
+
 	^ self layout paddingLeft
 ]

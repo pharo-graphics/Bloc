@@ -3006,13 +3006,17 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 	anElement must be my direct child"
 	| aChildIndex |
 
-	self assert: aChildElement isNotNil.
-	self assert: aChildElement parent == self.
-	self assert: anotherElement isNotNil.
+	self assert: [ aChildElement isNotNil ].
+	self assert: [ aChildElement parent == self ].
+	self assert: [ anotherElement isNotNil ].
 	
 	aChildIndex := self childIndexOf: aChildElement.
 	self removeChildAt: aChildIndex.
-	self addChild: anotherElement at: aChildIndex
+	
+	aChildElement userData
+		at: #blocContainer
+		ifPresent: [ :aName | self addChild: anotherElement at: aChildIndex as: aName ]
+		ifAbsent: [ self addChild: anotherElement at: aChildIndex ]
 ]
 
 { #category : #'children add/remove' }

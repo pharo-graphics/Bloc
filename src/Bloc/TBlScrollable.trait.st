@@ -33,6 +33,86 @@ TBlScrollable >> canScrollVertically [
 	^ true
 ]
 
+{ #category : #'api - scrolling thumb' }
+TBlScrollable >> computeHorizontalScrollExtent [
+	"Compute the horizontal extent of the horizontal scrollbar's thumb within the horizontal range.
+	This value is used to compute the length of the thumb within the scrollbar's track.
+	The extent is expressed in arbitrary units that must be the same as the units used by
+	#computeHorizontalScrollRange and #computeHorizontalScrollOffset.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+	
+	^ 0
+]
+
+{ #category : #'api - scrolling thumb' }
+TBlScrollable >> computeHorizontalScrollOffset [
+	"Compute the horizontal offset of the horizontal scrollbar's thumb within the horizontal range.
+	The offset is expressed in arbitrary units that must be the same as the units used by
+	#computeHorizontalScrollExtent and #computeHorizontalScrollRange.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+	
+	^ 0
+]
+
+{ #category : #'api - scrolling thumb' }
+TBlScrollable >> computeHorizontalScrollRange [
+	"Compute the horizontal range that the horizontal scrollbar represents.
+	The range is expressed in arbitrary units that must be the same as the units used by
+	#computeHorizontalScrollExtent and #computeHorizontalScrollOffset.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+	
+	^ 0
+]
+
+{ #category : #'api - scrolling thumb' }
+TBlScrollable >> computeVerticalScrollExtent [
+	"Compute the vertical extent of the vertical scrollbar's thumb within the vertical range.
+	This value is used to compute the length of the thumb within the scrollbar's track.
+	The extent is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollRange and #computeVerticalScrollOffset.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+	
+	^ 0
+]
+
+{ #category : #'api - scrolling thumb' }
+TBlScrollable >> computeVerticalScrollOffset [
+	"Compute the vertical offset of the vertical scrollbar's thumb within the vertical range.
+	The offset is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollExtent and #computeVerticalScrollRange.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+	
+	^ 0
+]
+
+{ #category : #'api - scrolling thumb' }
+TBlScrollable >> computeVerticalScrollRange [
+	"Compute the vertical range that the vertical scrollbar represents.
+	The range is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollExtent and #computeVerticalScrollOffset.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+	
+	^ 0
+]
+
 { #category : #'api - scrolling overscroll' }
 TBlScrollable >> considerReleasingGlowsOnScroll: aDeltaPoint [
 ]

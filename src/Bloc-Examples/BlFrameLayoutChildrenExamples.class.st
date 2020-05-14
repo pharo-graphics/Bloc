@@ -6,7 +6,7 @@ Class {
 	#category : #'Bloc-Examples-Layout'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'examples - setup' }
 BlFrameLayoutChildrenExamples >> childElementWithExactSize100per50 [
 	<gtExample>
 	| element |

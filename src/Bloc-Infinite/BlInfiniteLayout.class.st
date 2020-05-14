@@ -20,6 +20,8 @@ Class {
 	#instVars : [
 		'childManager',
 		'infiniteElement',
+		'horizontalChildFinder',
+		'verticalChildFinder',
 		'width',
 		'height',
 		'heightSpec',
@@ -34,7 +36,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-! Core'
+	#category : #'Bloc-Infinite-! Core'
 }
 
 { #category : #constraints }
@@ -353,6 +355,10 @@ BlInfiniteLayout >> childrenDo: aBlock [
 
 { #category : #'scrolling - thumb' }
 BlInfiniteLayout >> computeHorizontalScrollExtent [
+	"Compute and return the horizontal extent of the scrollbar's thumb.
+	Override me if you want to support scroll bars."
+	<return: #Number>
+
 	^ 0
 ]
 
@@ -368,6 +374,10 @@ BlInfiniteLayout >> computeHorizontalScrollRange [
 
 { #category : #'scrolling - thumb' }
 BlInfiniteLayout >> computeVerticalScrollExtent [
+	"Compute and return the vertical extent of the scrollbar's thumb.
+	Override me if you want to support scroll bars."
+	<return: #Number>
+
 	^ 0
 ]
 
@@ -580,7 +590,13 @@ BlInfiniteLayout >> hasFocus [
 
 { #category : #geometry }
 BlInfiniteLayout >> height [
-	"Return the height of the parent infinite element"
+	"Returns the height that is currently relevant to the layout.
+
+	This value is usually equal to the laid out height of the InfiniteElement
+	but may reflect the current MeasurementSpec height if the InfiniteLayout
+	is using AutoMeasure and the InfiniteElement is in the process of measuring.
+	
+	The InfiniteLayout must always use this method to retrieve the height relevant to it at any given time."
 	<return: #Number>
 	
 	^ height
@@ -638,6 +654,9 @@ BlInfiniteLayout >> infoRemoveHolder: anElementHolder [
 { #category : #initialization }
 BlInfiniteLayout >> initialize [
 	super initialize.
+	
+	horizontalChildFinder := BlInfiniteHorizontalChildBoundsBasedFinder new layout: self.
+	verticalChildFinder := BlInfiniteVerticalChildBoundsBasedFinder new layout: self.
 	
 	requestedSimpleAnimations := false.
 	autoMeasure := self defaultAutoMeasure.
@@ -1393,7 +1412,13 @@ BlInfiniteLayout >> when: anAnnouncementClass send: aSelector to: anObject [
 
 { #category : #geometry }
 BlInfiniteLayout >> width [
-	"Return the width of the parent infinite element"
+	"Returns the width that is currently relevant to the layout.
+
+	This value is usually equal to the laid out width of the InfiniteElement
+	but may reflect the current MeasurementSpec width if the InfiniteLayout
+	is using AutoMeasure and the InfiniteElement is in the process of measuring.
+	
+	The InfiniteLayout must always use this method to retrieve the width relevant to it at any given time."
 	<return: #Number>
 
 	^ width

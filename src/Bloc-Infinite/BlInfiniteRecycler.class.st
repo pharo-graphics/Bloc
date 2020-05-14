@@ -43,7 +43,7 @@ Class {
 		'userCache',
 		'eventDispatcher'
 	],
-	#category : 'Bloc-Infinite-! Core'
+	#category : #'Bloc-Infinite-! Core'
 }
 
 { #category : #private }
@@ -343,6 +343,13 @@ BlInfiniteRecycler >> pool [
 	<return: #BlInfiniteRecyclerPool>
 
 	^ recyclerPool
+]
+
+{ #category : #accessing }
+BlInfiniteRecycler >> pool: aBlInfiniteRecyclerPool [
+	recyclerPool detach.
+	recyclerPool := aBlInfiniteRecyclerPool.
+	recyclerPool attach
 ]
 
 { #category : #'accessing - position' }

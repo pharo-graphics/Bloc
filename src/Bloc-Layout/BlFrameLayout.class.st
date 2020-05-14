@@ -123,19 +123,20 @@ BlFrameLayout >> layout: anElement in: aRectangle [
 	self
 		layeredChildren: anElement
 		do: [ :aChild |
-			| childBounds alloowedBounds |
+			| childBounds allowedBounds |
 			"ask child for its measured bounds"
 			childBounds := aChild measuredBounds bounds copy.
-			alloowedBounds := aChild margin inset: parentBounds copy.
-		
+			allowedBounds := aChild margin inset: parentBounds copy.
+
 			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
-			childBounds := childBounds := self
+			childBounds := self
 				align: aChild
 				bounds: childBounds
-				in: alloowedBounds
+				in: allowedBounds
 				with: aChild constraints frame alignment.
+
 			"and finally set new bounds"
-			aChild applyLayoutIn: childBounds ].
+			aChild applyLayoutIn: childBounds ]
 ]
 
 { #category : #measure }
