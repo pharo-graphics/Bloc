@@ -1022,7 +1022,7 @@ BlFrameLayoutSingleChildExamples >> relocateChildLargerWithPadding [
 
 	parent forceLayout.
 
-	self assert: child position equals: 50@75.
+	self assert: child position equals: 25@50.
 	self assert: child extent equals: 200@100.
 
 	self assert: parent position equals: 0@0.
@@ -1071,6 +1071,88 @@ BlFrameLayoutSingleChildExamples >> relocateChildToZeroWithPadding [
 	parent forceLayout.
 
 	self assert: child position equals: 25@50.
+	self assert: child extent equals: 200@100.
+
+	self assert: parent position equals: 0@0.
+	self assert: parent extent equals: 400@300.
+
+	^ parent
+]
+
+{ #category : #'examples - padding' }
+BlFrameLayoutSingleChildExamples >> relocateChildWithoutAlignmentLargerWithPadding [
+	<gtExample>
+	| parent child |
+
+	child := self childElementWithVisualProperties.
+	child constraintsDo: [ :c |
+		c frame horizontal alignNone.
+		c frame vertical alignNone ].
+	child size: 200@100.
+	"relocate more than padding"
+	child relocate: 50@75.
+
+	parent := self parentWithFrameLayoutAndFixedSize.
+	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).
+	parent addChild: child.
+
+	parent forceLayout.
+
+	self assert: child position equals: 50@75.
+	self assert: child extent equals: 200@100.
+
+	self assert: parent position equals: 0@0.
+	self assert: parent extent equals: 400@300.
+
+	^ parent
+]
+
+{ #category : #'examples - padding' }
+BlFrameLayoutSingleChildExamples >> relocateChildWithoutAlignmentSmallWithPadding [
+	<gtExample>
+	| parent child |
+
+	child := self childElementWithVisualProperties.
+	child constraintsDo: [ :c |
+		c frame horizontal alignNone.
+		c frame vertical alignNone ].
+	child size: 200@100.
+	"relocate less than padding"
+	child relocate: 10@5.
+
+	parent := self parentWithFrameLayoutAndFixedSize.
+	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).
+	parent addChild: child.
+	
+	parent forceLayout.
+
+	self assert: child position equals: 10@5.
+	self assert: child extent equals: 200@100.
+
+	self assert: parent position equals: 0@0.
+	self assert: parent extent equals: 400@300.
+
+	^ parent
+]
+
+{ #category : #'examples - padding' }
+BlFrameLayoutSingleChildExamples >> relocateChildWithoutAlignmentToZeroWithPadding [
+	<gtExample>
+	| parent child |
+
+	child := self childElementWithVisualProperties.
+	child constraintsDo: [ :c |
+		c frame horizontal alignNone.
+		c frame vertical alignNone ].
+	child size: 200@100.
+	child relocate: 0@0.
+
+	parent := self parentWithFrameLayoutAndFixedSize.
+	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).
+	parent addChild: child.
+	parent forceLayout.
+
+	self assert: child position equals: 0@0.
 	self assert: child extent equals: 200@100.
 
 	self assert: parent position equals: 0@0.

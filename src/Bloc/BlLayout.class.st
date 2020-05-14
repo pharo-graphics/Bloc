@@ -96,10 +96,17 @@ BlLayout >> align: anElement bounds: elementBounds in: theParentBounds with: aBl
 	alignment := aBlElementAlignment directed: self direction.
 	aTranslation := alignment translationOf: elementBounds in: theParentBounds.
 
-	aTranslation x isZero
-		ifTrue: [ aTranslation := ((theParentBounds left - elementBounds left) max: 0)  @ aTranslation y ].
-	aTranslation y isZero
-		ifTrue: [ aTranslation := aTranslation x @ ((theParentBounds top - elementBounds top) max: 0) ].
+	alignment horizontal
+		ifNotNull: [
+			aTranslation x isZero
+				ifTrue: [
+					aTranslation := ((theParentBounds left - elementBounds left) max: 0)  @ aTranslation y ]. ].
+
+	alignment vertical
+		ifNotNull: [
+			aTranslation y isZero
+				ifTrue: [
+					aTranslation := aTranslation x @ ((theParentBounds top - elementBounds top) max: 0) ]. ].
 
 	^ elementBounds translateBy: aTranslation
 ]

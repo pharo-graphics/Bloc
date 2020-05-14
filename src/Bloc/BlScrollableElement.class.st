@@ -151,6 +151,16 @@ BlScrollableElement >> layoutFixGap [
 	aContent measuredBounds position: scrollPosition
 ]
 
+{ #category : #'hooks - children' }
+BlScrollableElement >> onChildAdded: anElement [
+	super onChildAdded: anElement.
+	
+	anElement
+		constraintsDo: [ :c |
+			c frame horizontal alignNone.
+			c frame vertical alignNone ]
+]
+
 { #category : #layout }
 BlScrollableElement >> onLayout: aBounds [
 	self scrollFlinger isIdle

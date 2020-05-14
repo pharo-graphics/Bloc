@@ -39,6 +39,11 @@ BlFrameLayoutConstraintsHorizontal >> alignLeftAt: aUnitCoordinateNumber [
 ]
 
 { #category : #alignment }
+BlFrameLayoutConstraintsHorizontal >> alignNone [
+	alignment := BlElementAlignment horizontal null
+]
+
+{ #category : #alignment }
 BlFrameLayoutConstraintsHorizontal >> alignRight [
 	alignment := BlElementAlignment horizontal end
 ]
@@ -66,7 +71,7 @@ BlFrameLayoutConstraintsHorizontal >> alignment: aBlElementAlignment [
 BlFrameLayoutConstraintsHorizontal >> initialize [
 	super initialize.
 	
-	alignment := BlElementAlignment horizontal null.
+	alignment := BlElementAlignment horizontal start.
 	weight := 1.0
 ]
 

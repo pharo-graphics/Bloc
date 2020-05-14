@@ -30,6 +30,11 @@ BlFrameLayoutConstraintsVertical >> alignCenterAt: aUnitCoordinateNumber [
 ]
 
 { #category : #alignment }
+BlFrameLayoutConstraintsVertical >> alignNone [
+	alignment := BlElementAlignment vertical null
+]
+
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignTop [
 	alignment := BlElementAlignment vertical start
 ]
@@ -56,8 +61,8 @@ BlFrameLayoutConstraintsVertical >> alignment: aBlElementAlignment [
 { #category : #initialization }
 BlFrameLayoutConstraintsVertical >> initialize [
 	super initialize.
-	
-	alignment := BlElementAlignment vertical null.
+
+	alignment := BlElementAlignment vertical start.
 	weight := 1.0
 ]
 
