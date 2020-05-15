@@ -929,8 +929,12 @@ BlInfiniteLinearLayout >> layoutChunkMeasureVertical: anElement result: aResult 
 BlInfiniteLinearLayout >> layoutCompleted [
 	super layoutCompleted.
 
-	pendingScrollPosition := NoPosition.
-	pendingScrollPositionOffset := self class invalidOffset.
+	(infiniteElement notNil
+		and: [ infiniteElement bounds extent > (0 @ 0) ])
+		ifTrue: [
+			pendingScrollPosition := NoPosition.
+			pendingScrollPositionOffset := self class invalidOffset ].
+
 	anchorInfo reset
 ]
 
