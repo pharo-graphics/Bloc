@@ -46,7 +46,7 @@ BlRope >> paintTreeWith: view [
 						text: (BlRopedText rope: (each from: 0 to: (100 min: each size))) ]
 				ifFalse: [ 
 					BlElement new 
-						when: BlClickEvent do: [:event | event target fireEvent: (GtPhlowObjectToSpawn new object: each; sourceElement: event target)];
+						when: BlClickEvent do: [:event | event target phlow spawnObject: each ];
 						zIndex: 10;
 						geometry: BlEllipse new;
 						border: (BlBorder paint: Color black width: 1);
