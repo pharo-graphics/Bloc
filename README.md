@@ -1,3 +1,6 @@
+# This repository is discontinued.
+Active development happens in https://github.com/feenkcom/Bloc
+
 # Bloc
 
 [Installation](#installation) | [Contributing](#contributing) |  [License](#license)
