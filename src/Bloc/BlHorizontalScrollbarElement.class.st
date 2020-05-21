@@ -71,6 +71,10 @@ BlHorizontalScrollbarElement >> updateScrollPosition [
 	horizontalScrollOffset := scrollable computeHorizontalScrollOffset.
 	horizontalScrollExtent := scrollable computeHorizontalScrollExtent.
 	
+	horizontalContentLength <= horizontalScrollExtent 
+		ifTrue: [ self visibility: BlVisibility hidden]
+		ifFalse: [ self visibility: BlVisibility visible].
+	
 	realThumbWeight := (horizontalScrollExtent / horizontalContentLength) asFloat.
 	thumbLeft := (horizontalScrollOffset / horizontalContentLength) asFloat.
 	
