@@ -105,6 +105,13 @@ BlVector3D >> hash [
 	^ (self x hash bitXor: self y hash) bitXor: self z hash
 ]
 
+{ #category : #testing }
+BlVector3D >> isOne [
+	<return: #Boolean>
+	
+	^ (self x closeTo: 1) and: [ (self y closeTo: 1) and: [ self z closeTo: 1 ] ]
+]
+
 { #category : #'vector functions' }
 BlVector3D >> length [
 	<return: #Number>

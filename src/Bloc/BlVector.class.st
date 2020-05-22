@@ -185,6 +185,13 @@ BlVector >> hash [
 ]
 
 { #category : #testing }
+BlVector >> isOne [
+	<return: #Boolean>
+	
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
 BlVector >> isParallel: aBlVector [
 	<return: #Boolean>
 

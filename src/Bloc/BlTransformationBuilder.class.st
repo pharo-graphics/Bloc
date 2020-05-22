@@ -112,9 +112,14 @@ BlTransformationBuilder >> rotateBy: aDegreesAngle around: aVector [
 
 { #category : #transformations }
 BlTransformationBuilder >> scaleBy: aVector [
+	| aScaleVector |
 	"Append a scaling transformation by a given vector"
 
-	transformation addTransformation: ((BlScalingTransformation scale: aVector asScale3D) origin: origin)
+	aScaleVector := aVector asScale3D.
+	aScaleVector isOne
+		ifTrue: [ ^ self ].
+
+	transformation addTransformation: ((BlScalingTransformation scale: aScaleVector) origin: origin)
 ]
 
 { #category : #transformations }
@@ -156,6 +161,11 @@ BlTransformationBuilder >> topLeftOrigin [
 { #category : #transformations }
 BlTransformationBuilder >> translateBy: aVector [
 	"Append a translation transformation by a given vector"
+	| aTranslationVector |
 	
-	transformation addTransformation: ((BlTranslationTransformation translation: aVector asTranslate3D) origin: origin)
+	aTranslationVector := aVector asTranslate3D.
+	aTranslationVector isZero
+		ifTrue: [ ^ self ].
+	
+	transformation addTransformation: ((BlTranslationTransformation translation: aTranslationVector) origin: origin)
 ]

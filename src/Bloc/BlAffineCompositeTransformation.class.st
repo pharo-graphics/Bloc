@@ -44,6 +44,13 @@ BlAffineCompositeTransformation >> isIdentity [
 ]
 
 { #category : #testing }
+BlAffineCompositeTransformation >> isTranslation [
+	<return: #Boolean>
+
+	^ self transformations allSatisfy: #isTranslation
+]
+
+{ #category : #testing }
 BlAffineCompositeTransformation >> multiplyOn: aBlMatrix [
 	self transformations do: [ :aTransformation | aTransformation multiplyOn: aBlMatrix ]
 ]

@@ -43,10 +43,10 @@ GLMBlocMatrixElement >> initialize [
 		c vertical fitContent ].
 	
 	leftParentheses := self newParenthesesElement.
-	leftParentheses text: (self asParenthesesText: '⟮').
+	leftParentheses text: (self asParenthesesText: '(').
 
 	rightParentheses := self newParenthesesElement.
-	rightParentheses text: (self asParenthesesText: '⟯').
+	rightParentheses text: (self asParenthesesText: ')').
 
 	gridElement := self newGridElement.
 	

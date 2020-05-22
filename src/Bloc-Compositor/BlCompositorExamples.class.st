@@ -4,7 +4,7 @@ I contain examples related to ===BlCompositor===
 Class {
 	#name : #BlCompositorExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Compositor'
+	#category : #'Bloc-Compositor'
 }
 
 { #category : #'examples - compositor' }
@@ -15,7 +15,7 @@ BlCompositorExamples >> compositorRendering [
 	element := self elementWithElevatedChildren.
 	element forceLayout.
 	
-	canvas := MozCanvas checker: element extent.
+	canvas := Bloc preferableSpartaCanvas extent: element extent.
 	compositor := BlCompositor on: element.
 	compositor drawOnSpartaCanvas: canvas.
 	

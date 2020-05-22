@@ -38,6 +38,13 @@ BlTranslationTransformation >> is2D [
 	^ self translation z isZero
 ]
 
+{ #category : #testing }
+BlTranslationTransformation >> isTranslation [
+	<return: #Boolean>
+
+	^ true
+]
+
 { #category : #'mathematical functions' }
 BlTranslationTransformation >> multiplyOn: aBlMatrix [
 

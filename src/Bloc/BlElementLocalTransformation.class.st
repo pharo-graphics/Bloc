@@ -71,6 +71,14 @@ BlElementLocalTransformation >> isIdentity [
 	^ self transformation isIdentity
 ]
 
+{ #category : #testing }
+BlElementLocalTransformation >> isPureTranslation [
+	"Return true if I represent an pure translation, false otherwise"
+	<return: #Boolean>
+	
+	^ self transformation isTranslation
+]
+
 { #category : #copying }
 BlElementLocalTransformation >> postCopy [
 	super postCopy.

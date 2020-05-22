@@ -38,6 +38,14 @@ BlMatrix2D class >> rotation: anAngle [
 	^ self new rotation: anAngle
 ]
 
+{ #category : #'instance creation' }
+BlMatrix2D class >> scale: aBlVector [
+	"Return a matrix which corresponds to a scale transformation by given factor"
+	<return: #BlMatrix2D>
+
+	^ self new scaleBy: aBlVector
+]
+
 { #category : #comparing }
 BlMatrix2D >> = anObject [
 	self == anObject

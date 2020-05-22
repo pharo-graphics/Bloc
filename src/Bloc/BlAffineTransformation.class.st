@@ -64,6 +64,14 @@ BlAffineTransformation >> isIdentity [
 	^ false
 ]
 
+{ #category : #testing }
+BlAffineTransformation >> isTranslation [
+	"Return true if this transformation is translation"
+	<return: #Boolean>
+	
+	^ false
+]
+
 { #category : #'mathematical functions' }
 BlAffineTransformation >> multiplyOn: aBlMatrix [
 	self subclassResponsibility

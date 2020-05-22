@@ -153,6 +153,13 @@ BlVector2D >> hash [
 	^ self x hash bitXor: self y hash
 ]
 
+{ #category : #testing }
+BlVector2D >> isOne [
+	<return: #Boolean>
+	
+	^ (self x closeTo: 1) and: [ self y closeTo: 1 ]
+]
+
 { #category : #'vector functions' }
 BlVector2D >> length [
 	<return: #Number>

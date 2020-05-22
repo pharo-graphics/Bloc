@@ -961,7 +961,7 @@ BlElement >> defaultOutskirts [
 { #category : #initialization }
 BlElement >> defaultTransformation [
 	"Return an instance of BlTransformation that plays a role of my default transformation"
-	<return: #BlTransformation>
+	<return: #BlElementTransformation>
 
 	^ BlElementLocalTransformation new
 ]

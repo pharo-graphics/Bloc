@@ -62,8 +62,16 @@ BlElementCompositeTransformation >> is3D [
 BlElementCompositeTransformation >> isIdentity [
 	"Return true if I represent an identity transformation, false otherwise"
 	<return: #Boolean>
-	
+
 	^ self transformations allSatisfy: #isIdentity
+]
+
+{ #category : #testing }
+BlElementCompositeTransformation >> isPureTranslation [
+	"Return true if I represent an pure translation, false otherwise"
+	<return: #Boolean>
+
+	^ self transformations allSatisfy: #isPureTranslation
 ]
 
 { #category : #accessing }
@@ -82,5 +90,7 @@ BlElementCompositeTransformation >> owner: anElement [
 
 { #category : #accessing }
 BlElementCompositeTransformation >> transformations [
+	<return: #Collection of: #BlElementTransformation>
+
 	^ transformations
 ]
