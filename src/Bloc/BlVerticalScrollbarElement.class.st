@@ -71,6 +71,10 @@ BlVerticalScrollbarElement >> updateScrollPosition [
 	verticalScrollOffset := scrollable computeVerticalScrollOffset.
 	verticalScrollExtent := scrollable computeVerticalScrollExtent.
 	
+	verticalContentLength <= verticalScrollExtent 
+		ifTrue: [ self visibility: BlVisibility hidden]
+		ifFalse: [ self visibility: BlVisibility visible].
+	
 	realThumbWeight := (verticalScrollExtent / verticalContentLength) asFloat.
 	thumbTop := (verticalScrollOffset / verticalContentLength) asFloat.
 	
