@@ -1,4 +1,4 @@
-# Bloc [![License](https://img.shields.io/github/license/feenkcom/Bloc.svg?style=flat-square)][license]
+# Bloc 
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
@@ -7,13 +7,10 @@ Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/)
 The following script installs Bloc intended for [Pharo 8](https://pharo.org/download):<br>
 
 ```smalltalk
-[
-    EpMonitor current disable.
-    Metacello new
+Metacello new
         baseline: 'Bloc';
         repository: 'github://feenkcom/Bloc/src';
         load
-] ensure: [ EpMonitor current enable ]
 ```
 
 ## Contributing
