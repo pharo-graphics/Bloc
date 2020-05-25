@@ -89,7 +89,8 @@ Class {
 		'shouldHandleMouseEvents',
 		'shouldChildrenHandleMouseEvents',
 		'taskQueue',
-		'errorHandler'
+		'errorHandler',
+		'needsPaint'
 	],
 	#classInstVars : [
 		'invalidateBounds'
@@ -1662,6 +1663,8 @@ BlElement >> initialize [
 	
 	taskQueue := BlTaskQueue new.
 	errorHandler := self defaultErrorHandler.
+	
+	needsPaint := true
 ]
 
 { #category : #'geometry bounds' }
@@ -1704,32 +1707,16 @@ BlElement >> invalidate [
 	Please, don't forget that elements or rendering backends may implement a rendering cache that
 	is also invalidated on every #invalidate message sent, so use me wisely."
 
-	"If I am not added to scene graph, there is no need to invalidate damaged area"
-	"we are guarding owerselves from unnecessary computations of rectangle transformation"
-	self isAttachedToSceneGraph
-		ifFalse: [ ^ self ].
-
-	"If I don't have a parent and I am not the root of the space it means
-	that I am detached from space. no need to invalidate (users probably know what they are doing)"
-	(self hasParent not and: [ self space root ~~ self ])
-		ifTrue: [ ^ self ].
-
-	self invalidRect: (self invalidationBounds: self class invalidationBounds)
-
+	self markNeedsPaint
 ]
 
 { #category : #'change reporting' }
 BlElement >> invalidateInParent [
-	| aBlBounds |
-
 	self isAttachedToSceneGraph
 		ifFalse: [ ^ self ].
-
-	aBlBounds := self invalidationBounds: self class invalidationBounds.
-	self localBoundsToParent: aBlBounds.
+		
 	self hasParent
-		ifTrue: [ self parent invalidRect: aBlBounds ]
-		ifFalse: [ self space invalidRect: aBlBounds from: self ]
+		ifTrue: [ self parent markNeedsPaint ]
 ]
 
 { #category : #'change reporting' }
@@ -2117,6 +2104,24 @@ BlElement >> margin: aBlInsets [
 	self constraintsDo: [ :c | c margin: aBlInsets ]
 ]
 
+{ #category : #'change reporting' }
+BlElement >> markNeedsPaint [
+	self needsPaint
+		ifTrue: [ ^ self ].
+
+	self isAttachedToSceneGraph
+		ifFalse: [ ^ self ].
+
+	needsPaint := true.
+
+	self wantsCompositionLayer
+		ifTrue: [ self space markNeedsPaint: self ]
+		ifFalse: [
+			self hasParent
+				ifTrue: [ self parent markNeedsPaint ]
+				ifFalse: [ self space markNeedsPaint: self ] ]
+]
+
 { #category : #'layout constraints' }
 BlElement >> maxExtent [
 	self 
@@ -2357,6 +2362,11 @@ BlElement >> mouseCursor [
 { #category : #accessing }
 BlElement >> mouseCursor: aCursor [
 	mouseCursor := aCursor
+]
+
+{ #category : #'change reporting' }
+BlElement >> needsPaint [
+	^ needsPaint
 ]
 
 { #category : #'event management accessing' }

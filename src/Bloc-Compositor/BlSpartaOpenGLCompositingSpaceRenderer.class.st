@@ -23,7 +23,7 @@ BlSpartaOpenGLCompositingSpaceRenderer >> initializeForSurface: aSurface [
 		surface: aSurface.
 		
 	compositor ifNotNil: #release.
-	compositor := SkiaCompositor accelerated: (GlutinEventsFetcher default eventLoop) windowedContext: aSurface context workers: 6
+	compositor := SkiaCompositor workers: 1"accelerated: (GlutinEventsFetcher default eventLoop) windowedContext: aSurface context workers: 6"
 ]
 
 { #category : #rendering }
@@ -46,7 +46,10 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 	spartaCanvas transform
 		by: [ :t | t scaleBy: scaleFactor asPoint ]
 		during: [
-			| rootLayer painter skiaLayer |
+			| rootLayer painter skiaLayer recordSstart |
+			
+			recordSstart := DateAndTime now.
+			
 			rootLayer := BlCompositionContainerLayer new.
 			painter := BlCompositionPainter new bounds: (0@0 extent: aSpace extent).
 			painter containerLayer: rootLayer.
@@ -55,17 +58,24 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 			painter stopRecording.
 
 			skiaLayer := rootLayer asSkiaLayer.
+			
+			"NonInteractiveTranscript stdout
+				nextPutAll: 'Recording done! ';
+				nextPutAll: ((DateAndTime now - recordSstart) asMicroseconds / 1000.0) asString;
+				nextPutAll: 'ms';
+				cr."
+			
 			compositor draw: skiaLayer on: spartaCanvas.
 			skiaLayer release.
 		].
 
 	spartaCanvas flush.
 	
-	NonInteractiveTranscript stdout
+	"NonInteractiveTranscript stdout
 		nextPutAll: 'Render done! ';
 		nextPutAll: ((DateAndTime now - start) asMicroseconds / 1000.0) asString;
 		nextPutAll: 'ms';
-		cr.
+		cr."
 	
 	^ (self damagedAreasOf: aSpace)
 ]

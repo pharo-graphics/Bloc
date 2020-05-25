@@ -84,7 +84,7 @@ BlCompositionPainter >> matrix: aMatrix [
 { #category : #'api - layer' }
 BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangleOrNull thenPaint: aPaintBlock [
 	<return: #BlCompositionPainter>
-	| aContainerLayer aNewPainter aNextPainter |
+	| aContainerLayer aNewPainter |
 	
 	aContainerLayer := aNewLayer.
 	aContainerLayer removeAllLayers.
@@ -95,14 +95,12 @@ BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangle
 		ifTrue: [ aContainerLayer ]
 		ifFalse: [ (BlCompositionTransformationLayer new matrix: matrix) addLayer: aContainerLayer ]).
 	
-	aNewPainter := self class new
+	aNewPainter := BlCompositionLayeredPainter new
 		containerLayer: aContainerLayer;
 		bounds: aRectangleOrNull;
 		matrix: matrix.
-	aNextPainter := aPaintBlock cull: aNewPainter cull: anOffset.
-	aNewPainter stopRecording.
-	
-	^ aNextPainter
+	 aPaintBlock cull: aNewPainter cull: anOffset.
+	aNewPainter stopRecording
 ]
 
 { #category : #'api - layer' }
@@ -135,8 +133,8 @@ BlCompositionPainter >> pushOpacity: anAlpha offset: anOffset bounds: aRectangle
 { #category : #'api - layer' }
 BlCompositionPainter >> pushTransform: aMatrix offset: anOffset compositing: wantsCompositing bounds: aRectangleOrNull from: anElement thenPaint: aPaintBlock [
 	<return: #BlCompositionPainter>
-	
-	^ wantsCompositing
+
+	^ (self shouldCreateNewLayer: wantsCompositing)
 		ifTrue: [
 			self
 				pushLayer: (BlCompositionTransformationLayer new
@@ -155,6 +153,11 @@ BlCompositionPainter >> pushTransform: aMatrix offset: anOffset compositing: wan
 					translateBy: anOffset negated ]
 				during: [ aNextPainter := aPaintBlock cull: self cull: anOffset ].
 			aNextPainter ]
+]
+
+{ #category : #testing }
+BlCompositionPainter >> shouldCreateNewLayer: wantsCompositionLayer [
+	^ wantsCompositionLayer
 ]
 
 { #category : #'private - canvas' }

@@ -39,7 +39,8 @@ Class {
 		'time',
 		'touchProcessor',
 		'frame',
-		'gestureProcessor'
+		'gestureProcessor',
+		'elementsNeedingPaint'
 	],
 	#category : #'Bloc-Space'
 }
@@ -444,6 +445,11 @@ BlSpace >> dragboard: anObject [
 	dragboard := anObject
 ]
 
+{ #category : #'change reporting' }
+BlSpace >> elementsNeedingPaint [
+	^ elementsNeedingPaint
+]
+
 { #category : #'api - tasks' }
 BlSpace >> enqueueTask: aBlTask [
 	aBlTask onEnqueued: self.
@@ -720,6 +726,7 @@ BlSpace >> initialize [
 	nextPulseRequested := true.
 	session := Smalltalk session.
 	dirtyAreas := OrderedCollection new.
+	elementsNeedingPaint := Set new.
 	
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
@@ -827,6 +834,14 @@ BlSpace >> makeDirty: aBlBounds [
 	self dirtyAreas
 		ifEmpty: [ self dirtyAreas add: aBlBounds copy ]
 		ifNotEmpty: [ :aCollection | aCollection first merge: aBlBounds ].
+]
+
+{ #category : #'change reporting' }
+BlSpace >> markNeedsPaint: anElement [
+
+	self beDirtyArea.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ].
+	self requestNextPulse
 ]
 
 { #category : #'api - displaying' }

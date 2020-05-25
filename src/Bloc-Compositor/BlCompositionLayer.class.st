@@ -102,5 +102,5 @@ BlCompositionLayer >> removeFromParent [
 	self hasParent
 		ifFalse: [ ^ self ].
 
-	self parent removeChild: self
+	self parent removeLayer: self
 ]
