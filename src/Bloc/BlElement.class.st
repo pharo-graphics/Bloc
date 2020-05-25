@@ -3524,6 +3524,11 @@ BlElement >> visualBoundsOn: aCanvas [
 	^ (self visualBounds: BlBounds new on: aCanvas) asRectangle
 ]
 
+{ #category : #testing }
+BlElement >> wantsCompositionLayer [
+	^ false
+]
+
 { #category : #'event handling' }
 BlElement >> wantsMouseEventAt: aPoint [
 	"Return true if I can be picked as target for mouse event at given location specified in space coordinates.

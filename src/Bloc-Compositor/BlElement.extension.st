@@ -112,8 +112,3 @@ BlElement >> paintOn: aCompositorPainter offset: anOffset [
 		by: [ :t | t translateBy: anOffset ]
 		during: [ self drawOnSpartaCanvas: aCanvas ]
 ]
-
-{ #category : #'*Bloc-Compositor' }
-BlElement >> wantsCompositionLayer [
-	^ false
-]
