@@ -1664,7 +1664,8 @@ BlElement >> initialize [
 	taskQueue := BlTaskQueue new.
 	errorHandler := self defaultErrorHandler.
 	
-	needsPaint := true
+	"set to true once layout is done"
+	needsPaint := false
 ]
 
 { #category : #'geometry bounds' }
