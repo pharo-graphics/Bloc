@@ -9,17 +9,20 @@ Class {
 
 { #category : #converting }
 BlCompositionTransformationLayer >> asSkiaLayer [
-	| anOffsetLayer aTransformationLayer theChildLayers |
+	|  aTransformationLayer theChildLayers |
 
-	anOffsetLayer := super newSkiaLayer.
 	aTransformationLayer := self newSkiaLayer.
 	
 	theChildLayers := self children collect: [ :eachLayer | eachLayer asSkiaLayer ].
 	theChildLayers do: [ :eachLayer | aTransformationLayer addLayer: eachLayer ].
 	
-	anOffsetLayer addLayer: aTransformationLayer.
-	
-	^ anOffsetLayer
+	^ self offset isZero
+		ifTrue: [ aTransformationLayer ]
+		ifFalse: [
+			| anOffsetLayer |
+			anOffsetLayer := super newSkiaLayer.
+			anOffsetLayer addLayer: aTransformationLayer.
+			anOffsetLayer ]
 ]
 
 { #category : #accessing }
@@ -34,7 +37,7 @@ BlCompositionTransformationLayer >> matrix: anObject [
 
 { #category : #accessing }
 BlCompositionTransformationLayer >> name [
-	^ 'Transform'
+	^ 'Transform {1}' format: { self offset }
 ]
 
 { #category : #converting }

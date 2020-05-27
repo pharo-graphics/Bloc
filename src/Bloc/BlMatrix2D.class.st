@@ -46,6 +46,14 @@ BlMatrix2D class >> scale: aBlVector [
 	^ self new scaleBy: aBlVector
 ]
 
+{ #category : #'instance creation' }
+BlMatrix2D class >> translation: aBlVector [
+	"Return a matrix which corresponds to a translation transformation by given factor"
+	<return: #BlMatrix2D>
+
+	^ self new translateBy: aBlVector
+]
+
 { #category : #comparing }
 BlMatrix2D >> = anObject [
 	self == anObject

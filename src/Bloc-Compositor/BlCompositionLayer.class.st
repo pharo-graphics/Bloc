@@ -43,11 +43,27 @@ BlCompositionLayer >> drawOnSpartaCanvas: aCanvas [
 ]
 
 { #category : #'gt-extension' }
+BlCompositionLayer >> gtPreviewFor: aView [
+	<gtView>
+	
+	^ aView sparta
+		title: 'Preview';
+		priority: 3;
+		matchParent;
+		rendering: [ :aCanvas |
+			| aSkiaLayer aCompositor |
+			aSkiaLayer := self asSkiaLayer.			
+			aCompositor := SkiaCompositor workers: 1.
+			aCompositor draw: aSkiaLayer on: aCanvas ]
+]
+
+{ #category : #'gt-extension' }
 BlCompositionLayer >> gtTreeFor: aView [
 	<gtView>
 	
 	^ aView mondrian
 		title: 'Tree';
+		priority: 2;
 		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
 ]
 
@@ -66,19 +82,31 @@ BlCompositionLayer >> paintTreeWith: view [
 	view nodes
 		shape: [ :each |
 			BlElement new
-				layout: BlLinearLayout vertical alignCenter;
+				layout: (BlLinearLayout vertical alignCenter);
 				constraintsDo: [ :c |
 					c horizontal fitContent.
 					c vertical fitContent ];
-				padding: (BlInsets top: 5 left: 8 bottom: 5 right: 8);
-				border: (BlBorder paint: Color gray width: 1);
 				background: Color white;
 				when: BlClickEvent do: [ :anEvent | anEvent currentTarget phlow spawnObject: each ];
+				padding: (BlInsets all: 10);
 				zIndex: 10;
-				addChildren: {
-					BlTextElement new
-						constraintsDo: [ :c | c padding: (BlInsets all: 1) ];
-						text: each name asRopedText glamorousRegularFontAndSize } ];
+				addChild: (BlTextElement new
+					padding: (BlInsets top: 5 left: 8 bottom: 5 right: 8);
+					border: (BlBorder paint: Color gray width: 1);
+					text: each name asRopedText glamorousRegularFontAndSize);
+				in: [ :aNodeElement |
+					(each isKindOf: BlCompositionPictureLayer)
+						ifTrue: [ aNodeElement addChild: (each picture asForm asElement asScalableElement
+							fitWidth;
+							background: Color white;
+							margin: (BlInsets top: 10);
+							look: BrShadowLook new;
+							constraintsDo: [ :c |
+								c horizontal exact: 100.
+								c vertical fitContent ]
+						) ]
+				];
+				yourself ];
 		with: (self withDeepCollect: #children).
 	view edges
 		fromNearestBounds;

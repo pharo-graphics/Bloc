@@ -23,7 +23,7 @@ BlCompositionOffsetLayer >> initialize [
 
 { #category : #accessing }
 BlCompositionOffsetLayer >> name [
-	^ 'Offset'
+	^ 'Offset {1}' format: { self offset }
 ]
 
 { #category : #converting }

@@ -4,28 +4,25 @@ Extension { #name : #BlElement }
 BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
 	| aLayer |
 
-	needsPaint
+	self shouldBePainted
 		ifTrue: [
-			| anOffsetLayer |
+			| anOffsetLayer anAddedLayer |
 			
 			anOffsetLayer := BlCompositionOffsetLayer new
 				creatorElement: self;
 				offset: anOffset.
 			
-			aCompositorPainter
+			anAddedLayer := aCompositorPainter
 				pushLayer: anOffsetLayer
 				offset: 0@0
 				bounds: self invalidationBounds
 				thenPaint: [ :aChildPainter :aChildOffset |
 					self fullPaintWithOpacityOn: aChildPainter offset: aChildOffset.
 					aChildPainter stopRecording ].
-				self userData at: #compositionLayer put: anOffsetLayer ].
+				self userData at: #compositionLayer put: anAddedLayer ]
+			ifFalse: [ aCompositorPainter stopRecording ].
 	
 	aLayer := self userData at: #compositionLayer.
-		
-	self
-		assert: [ aLayer isKindOf: BlCompositionOffsetLayer ]
-		description: [ 'Must be offset layer' ].
 		
 	aLayer offset: anOffset.
 	aLayer removeFromParent.
@@ -111,4 +108,11 @@ BlElement >> paintOn: aCompositorPainter offset: anOffset [
 	aCanvas transform
 		by: [ :t | t translateBy: anOffset ]
 		during: [ self drawOnSpartaCanvas: aCanvas ]
+]
+
+{ #category : #'*Bloc-Compositor' }
+BlElement >> shouldBePainted [
+	<return: #Boolean>
+
+	^ needsPaint or: [ (self userData includesKey: #compositionLayer) not ]
 ]

@@ -11,6 +11,16 @@ Class {
 	#category : #'Bloc-Compositor-Painter'
 }
 
+{ #category : #'instance creation' }
+BlCompositionPainter class >> root: anExtent [
+	"Create a root composition painter to be used as the first entrance point of the space painting"
+	<return: #BlCompositionPainter>
+
+	^ self new
+		bounds: (0@0 extent: anExtent);
+		containerLayer: (BlCompositionContainerLayer new)
+]
+
 { #category : #'private - layers' }
 BlCompositionPainter >> addLayer: aCompositionLayer [
 	containerLayer addLayer: aCompositionLayer
@@ -61,6 +71,25 @@ BlCompositionPainter >> gtLayersTreeFor: aView [
 		view: #gtTreeFor:
 ]
 
+{ #category : #'gt-extensions' }
+BlCompositionPainter >> gtPreviewFor: aView [
+	<gtView>
+	
+	^ aView explicit
+		title: 'Preview';
+		priority: 3;
+		stencil: [
+			| aCanvas aSkiaLayer aCompositor |
+			
+			aCanvas := SkiaCanvas extent: self bounds extent ceiling asIntegerPoint.
+			aSkiaLayer := self containerLayer asSkiaLayer.
+			
+			aCompositor := SkiaCompositor workers: 1.
+			
+			aCompositor draw: aSkiaLayer on: aCanvas.
+			aCanvas asForm ]
+]
+
 { #category : #initialization }
 BlCompositionPainter >> initialize [
 	super initialize.
@@ -83,24 +112,30 @@ BlCompositionPainter >> matrix: aMatrix [
 
 { #category : #'api - layer' }
 BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangleOrNull thenPaint: aPaintBlock [
-	<return: #BlCompositionPainter>
-	| aContainerLayer aNewPainter |
-	
-	aContainerLayer := aNewLayer.
-	aContainerLayer removeAllLayers.
+	<return: #BlCompositionLayer>
+	| anAddedLayer aNewPainter aChildLayer |
 	
 	self stopRecording.
 	
-	self addLayer: (matrix isIdentity
-		ifTrue: [ aContainerLayer ]
-		ifFalse: [ (BlCompositionTransformationLayer new matrix: matrix) addLayer: aContainerLayer ]).
+	aChildLayer := aNewLayer.
 	
-	aNewPainter := BlCompositionLayeredPainter new
-		containerLayer: aContainerLayer;
+	self addLayer: (matrix isIdentity
+		ifTrue: [ anAddedLayer := aNewLayer ]
+		ifFalse: [
+			| aTransformLayer |
+			aTransformLayer := BlCompositionLeftOverTransformationLayer new matrix: matrix.
+			anAddedLayer := aTransformLayer addLayer: aChildLayer.
+			anAddedLayer ]).
+	
+	aNewPainter := self class new
+		containerLayer: aChildLayer;
 		bounds: aRectangleOrNull;
 		matrix: matrix.
 	 aPaintBlock cull: aNewPainter cull: anOffset.
-	aNewPainter stopRecording
+
+	aNewPainter stopRecording.
+	
+	^ anAddedLayer
 ]
 
 { #category : #'api - layer' }
@@ -149,9 +184,9 @@ BlCompositionPainter >> pushTransform: aMatrix offset: anOffset compositing: wan
 			self canvas transform
 				by: [ :t | t
 					translateBy: anOffset;
-					multiplyBy: aMatrix;
-					translateBy: anOffset negated ]
-				during: [ aNextPainter := aPaintBlock cull: self cull: anOffset ].
+					multiplyBy: aMatrix";
+					translateBy: anOffset negated" ]
+				during: [ aNextPainter := aPaintBlock cull: self cull: 0@0 ].
 			aNextPainter ]
 ]
 

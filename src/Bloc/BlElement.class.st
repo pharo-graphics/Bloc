@@ -3526,8 +3526,17 @@ BlElement >> visualBoundsOn: aCanvas [
 ]
 
 { #category : #testing }
+BlElement >> wantCompositionLayer [
+	self userData
+		at: #wantsCompositionLayer
+		put: true
+]
+
+{ #category : #testing }
 BlElement >> wantsCompositionLayer [
-	^ false
+	^ self userData
+		at: #wantsCompositionLayer
+		ifAbsent: [ false ]
 ]
 
 { #category : #'event handling' }
