@@ -8,16 +8,15 @@ BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
 		ifTrue: [
 			| anOffsetLayer anAddedLayer |
 			
-			anOffsetLayer := BlCompositionOffsetLayer new
-				creatorElement: self;
-				offset: anOffset.
+			anOffsetLayer := BlCompositionOffsetLayer new offset: anOffset.
 			
 			anAddedLayer := aCompositorPainter
 				pushLayer: anOffsetLayer
 				offset: 0@0
-				bounds: self invalidationBounds
+				bounds: (self invalidationBounds)
+				buffered: self wantsCompositionBufferLayer
 				thenPaint: [ :aChildPainter :aChildOffset |
-					self fullPaintWithOpacityOn: aChildPainter offset: aChildOffset.
+					self paintMeAndChildrenOn: aChildPainter offset: aChildOffset.					
 					aChildPainter stopRecording ].
 				self userData at: #compositionLayer put: anAddedLayer ]
 			ifFalse: [ aCompositorPainter stopRecording ].
@@ -30,14 +29,23 @@ BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
 ]
 
 { #category : #'*Bloc-Compositor' }
+BlElement >> fullPaintMeAndChildrenOn: aCompositorPainter offset: anOffset [
+	(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer) 
+		ifTrue: [	 self fullPaintCompositedOn: aCompositorPainter offset: anOffset ]
+		ifFalse: [ self paintMeAndChildrenOn: aCompositorPainter offset: anOffset ]
+]
+
+{ #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 	"invisible elements are not rendered too"
 	self isVisible
 		ifFalse: [ ^ aCompositorPainter ].
 
-	(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer) 
+	"(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer) 
 		ifTrue: [	 self fullPaintCompositedOn: aCompositorPainter offset: anOffset + self position ]
-		ifFalse: [ self fullPaintWithOpacityOn: aCompositorPainter offset: anOffset + self position ].
+		ifFalse: [ self fullPaintWithOpacityOn: aCompositorPainter offset: anOffset + self position ]."
+
+	self fullPaintWithTransformOn: aCompositorPainter offset: anOffset + self position.
 
 	needsPaint := false
 ]
@@ -62,22 +70,22 @@ BlElement >> fullPaintWithOpacityOn: aCompositorPainter offset: anOffset [
 { #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintWithTransformOn: aCompositorPainter offset: anOffset [
 	self transformation isIdentity
-		ifTrue: [ self paintMeAndChildrenOn: aCompositorPainter offset: anOffset ]
+		ifTrue: [ self fullPaintMeAndChildrenOn: aCompositorPainter offset: anOffset ]
 		ifFalse: [
 			(self transformation isPureTranslation)
 				ifTrue: [
 					| aTranslation |
 					aTranslation := self transformation transformPoint: 0@0.
-					self paintMeAndChildrenOn: aCompositorPainter offset: anOffset + aTranslation ]
+					self fullPaintMeAndChildrenOn: aCompositorPainter offset: anOffset + aTranslation ]
 				ifFalse: [
 					aCompositorPainter
 						pushTransform: self transformation matrix
 						offset: anOffset
-						compositing: self wantsCompositionLayer
 						bounds: self invalidationBounds
-						from: self
+						compositing: self wantsCompositionLayer
+						buffered: self wantsCompositionBufferLayer
 						thenPaint: [ :aTransformCompositorPainter :aTransformOffset |
-							self paintMeAndChildrenOn: aTransformCompositorPainter offset: aTransformOffset ] ] ]
+							self fullPaintMeAndChildrenOn: aTransformCompositorPainter offset: aTransformOffset ] ] ]
 ]
 
 { #category : #'*Bloc-Compositor' }
@@ -93,6 +101,7 @@ BlElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintMeAndChildrenOn: aCompositorPainter offset: anOffset [
+	
 	self paintOn: aCompositorPainter offset: anOffset.
 
 	self

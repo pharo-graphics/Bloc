@@ -265,7 +265,8 @@ BlSpace >> clearDirtyAreas [
 	"Clear all dirty areas.
 	Default implementation simply removes all areas from the collection"
 
-	self dirtyAreas removeAll
+	self dirtyAreas removeAll.
+	self elementsNeedingPaint removeAll
 ]
 
 { #category : #'api - displaying' }

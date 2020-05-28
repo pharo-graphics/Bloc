@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'parent',
-		'creatorElement'
+		'skiaLayer'
 	],
 	#category : #'Bloc-Compositor-Layers'
 }
@@ -21,16 +21,6 @@ BlCompositionLayer >> attachToParent: aCompositionLayer [
 { #category : #accessing }
 BlCompositionLayer >> children [
 	^ #()
-]
-
-{ #category : #accessing }
-BlCompositionLayer >> creatorElement [
-	^ creatorElement
-]
-
-{ #category : #accessing }
-BlCompositionLayer >> creatorElement: anObject [
-	creatorElement := anObject
 ]
 
 { #category : #'as yet unclassified' }

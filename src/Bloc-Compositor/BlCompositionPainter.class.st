@@ -111,7 +111,7 @@ BlCompositionPainter >> matrix: aMatrix [
 ]
 
 { #category : #'api - layer' }
-BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangleOrNull thenPaint: aPaintBlock [
+BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangleOrNull buffered: shouldBeBuffered thenPaint: aPaintBlock [
 	<return: #BlCompositionLayer>
 	| anAddedLayer aNewPainter aChildLayer |
 	
@@ -127,7 +127,9 @@ BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangle
 			anAddedLayer := aTransformLayer addLayer: aChildLayer.
 			anAddedLayer ]).
 	
-	aNewPainter := self class new
+	aNewPainter := (shouldBeBuffered
+			ifTrue: [ BlCompositionLayeredPainter new ]
+			ifFalse: [ self class new ])
 		containerLayer: aChildLayer;
 		bounds: aRectangleOrNull;
 		matrix: matrix.
@@ -139,45 +141,32 @@ BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangle
 ]
 
 { #category : #'api - layer' }
-BlCompositionPainter >> pushOffset: anOffset bounds: aRectangleOrNull from: anElement thenPaint: aPaintBlock [
-	<return: #BlCompositionPainter>
-	
-	^ self
-		pushLayer: (BlCompositionOffsetLayer new
-			creatorElement: anElement;
-			offset: anOffset)
-		offset: 0@0
-		bounds: aRectangleOrNull
-		thenPaint: aPaintBlock
-]
-
-{ #category : #'api - layer' }
 BlCompositionPainter >> pushOpacity: anAlpha offset: anOffset bounds: aRectangleOrNull from: anElement thenPaint: aPaintBlock [
 	<return: #BlCompositionPainter>
 	
 	^ self
 		pushLayer: (BlCompositionOpacityLayer new
-			creatorElement: anElement;
 			opacity: anAlpha;
 			offset: anOffset)
 		offset: 0@0
 		bounds: aRectangleOrNull
+		buffered: false
 		thenPaint: aPaintBlock
 ]
 
 { #category : #'api - layer' }
-BlCompositionPainter >> pushTransform: aMatrix offset: anOffset compositing: wantsCompositing bounds: aRectangleOrNull from: anElement thenPaint: aPaintBlock [
+BlCompositionPainter >> pushTransform: aMatrix offset: anOffset bounds: aRectangleOrNull compositing: wantsCompositing buffered: wantsBufferedCompositing thenPaint: aPaintBlock [
 	<return: #BlCompositionPainter>
 
 	^ (self shouldCreateNewLayer: wantsCompositing)
 		ifTrue: [
 			self
 				pushLayer: (BlCompositionTransformationLayer new
-					creatorElement: anElement;
 					matrix: aMatrix;
 					offset: anOffset)
 				offset: 0@0
 				bounds: aRectangleOrNull
+				buffered: wantsBufferedCompositing
 				thenPaint: aPaintBlock ]
 		ifFalse: [
 			| aNextPainter |
