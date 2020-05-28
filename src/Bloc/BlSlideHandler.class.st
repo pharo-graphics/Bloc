@@ -10,13 +10,18 @@ Class {
 
 { #category : #'dnd handlers' }
 BlSlideHandler >> dragEvent: anEvent [
-	| aSlideDelta |
 	anEvent consumed: true.
-	
-	aSlideDelta := anEvent localPosition - dragStartPosition.
 
-	anEvent currentTarget children accountedByLayout do: [ :aChild | aChild relocate: aChild position + aSlideDelta ].
-	dragStartPosition := anEvent localPosition.
+	anEvent currentTarget children accountedByLayout do: [ :aChild |
+		| aChildStartPosition aSlideDeltaInChild |
+		
+		aChildStartPosition := aChild userData
+			at: #slideHandlerStartPosition
+			ifAbsentPut: [ aChild position ].
+		
+		aSlideDeltaInChild := anEvent localPosition - dragStartPosition.
+		
+		aChild relocate: aChildStartPosition + aSlideDeltaInChild ]
 ]
 
 { #category : #'dnd handlers' }
@@ -25,4 +30,7 @@ BlSlideHandler >> dragStartEvent: anEvent [
 
 	"drag start position in local"
 	dragStartPosition := anEvent localPosition.
+	
+	anEvent currentTarget children accountedByLayout
+		do: [ :aChild | aChild userData at: #slideHandlerStartPosition put: aChild position ]
 ]

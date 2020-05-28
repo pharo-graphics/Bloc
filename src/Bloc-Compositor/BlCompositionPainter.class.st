@@ -6,7 +6,8 @@ Class {
 		'pictureLayer',
 		'canvas',
 		'bounds',
-		'matrix'
+		'matrix',
+		'needsCache'
 	],
 	#category : #'Bloc-Compositor-Painter'
 }
@@ -95,7 +96,8 @@ BlCompositionPainter >> initialize [
 	super initialize.
 	
 	bounds := 0@0 extent: 0@0.
-	matrix := SpartaMatrix new
+	matrix := SpartaMatrix new.
+	needsCache := false
 ]
 
 { #category : #testing }
@@ -108,6 +110,16 @@ BlCompositionPainter >> isRecording [
 { #category : #accessing }
 BlCompositionPainter >> matrix: aMatrix [
 	matrix := aMatrix
+]
+
+{ #category : #accessing }
+BlCompositionPainter >> needsCache [
+	^ needsCache
+]
+
+{ #category : #accessing }
+BlCompositionPainter >> needsCache: anObject [
+	needsCache := anObject
 ]
 
 { #category : #'api - layer' }
@@ -200,6 +212,7 @@ BlCompositionPainter >> stopRecording [
 	matrix := canvas transform current.
 
 	pictureLayer picture: canvas snapshot.
+	pictureLayer needsCache: needsCache.
 	pictureLayer := nil.
 	canvas := nil
 ]

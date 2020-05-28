@@ -61,8 +61,8 @@ BlExampleBouncingAtomsElement >> initializeWith: aNumberOfAtoms ofSize: anAtomEx
 BlExampleBouncingAtomsElement >> invalidRect: aBlBounds from: anElement [
 	damageReported
 		ifTrue: [ ^ self ].
-		
-	super invalidRect: (self invalidationBounds: self class invalidationBounds) from: anElement.
+
+	super invalidRect: (self invalidationBounds) from: anElement.
 		
 	damageReported := true
 ]

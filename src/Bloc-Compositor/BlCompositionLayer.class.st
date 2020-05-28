@@ -2,8 +2,7 @@ Class {
 	#name : #BlCompositionLayer,
 	#superclass : #Object,
 	#instVars : [
-		'parent',
-		'skiaLayer'
+		'parent'
 	],
 	#category : #'Bloc-Compositor-Layers'
 }
@@ -90,6 +89,7 @@ BlCompositionLayer >> paintTreeWith: view [
 							fitWidth;
 							background: Color white;
 							margin: (BlInsets top: 10);
+							border: (each needsCache ifTrue: [ BlBorder paint: Color red width: 1 ] ifFalse: [ BlBorder empty ]);
 							look: BrShadowLook new;
 							constraintsDo: [ :c |
 								c horizontal exact: 100.

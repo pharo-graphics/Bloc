@@ -16,6 +16,7 @@ BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
 				bounds: (self invalidationBounds)
 				buffered: self wantsCompositionBufferLayer
 				thenPaint: [ :aChildPainter :aChildOffset |
+					aChildPainter needsCache: true.
 					self paintMeAndChildrenOn: aChildPainter offset: aChildOffset.					
 					aChildPainter stopRecording ].
 				self userData at: #compositionLayer put: anAddedLayer ]
@@ -39,11 +40,14 @@ BlElement >> fullPaintMeAndChildrenOn: aCompositorPainter offset: anOffset [
 BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 	"invisible elements are not rendered too"
 	self isVisible
-		ifFalse: [ ^ aCompositorPainter ].
-
-	"(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer) 
-		ifTrue: [	 self fullPaintCompositedOn: aCompositorPainter offset: anOffset + self position ]
-		ifFalse: [ self fullPaintWithOpacityOn: aCompositorPainter offset: anOffset + self position ]."
+		ifFalse: [
+			needsPaint := false.
+			^ self ].
+	
+	(self width isZero or: [ self height isZero ])
+		ifTrue: [
+			needsPaint := false.
+			^ self ].
 
 	self fullPaintWithTransformOn: aCompositorPainter offset: anOffset + self position.
 
@@ -101,7 +105,6 @@ BlElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintMeAndChildrenOn: aCompositorPainter offset: anOffset [
-	
 	self paintOn: aCompositorPainter offset: anOffset.
 
 	self
@@ -116,7 +119,11 @@ BlElement >> paintOn: aCompositorPainter offset: anOffset [
 	aCanvas := aCompositorPainter canvas.
 	aCanvas transform
 		by: [ :t | t translateBy: anOffset ]
-		during: [ self drawOnSpartaCanvas: aCanvas ]
+		during: [
+			self effect
+				applyEffectOnSpartaCanvas: aCanvas
+				for: self
+				around: [ :anEffectCanvas | self drawOnSpartaCanvas: anEffectCanvas ] ]
 ]
 
 { #category : #'*Bloc-Compositor' }

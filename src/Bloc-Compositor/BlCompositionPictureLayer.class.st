@@ -2,7 +2,8 @@ Class {
 	#name : #BlCompositionPictureLayer,
 	#superclass : #BlCompositionLayer,
 	#instVars : [
-		'picture'
+		'picture',
+		'needsCache'
 	],
 	#category : #'Bloc-Compositor-Layers'
 }
@@ -13,7 +14,7 @@ BlCompositionPictureLayer >> asSkiaLayer [
 		assert: [ self picture isNotNil ]
 		description: [ 'Can not create a layer for nil picture' ].
 
-	^ SkiaCompositionPictureLayer picture: self picture
+	^ (SkiaCompositionPictureLayer picture: self picture) needsCache: self needsCache
 ]
 
 { #category : #drawing }
@@ -35,9 +36,26 @@ BlCompositionPictureLayer >> gtPictureFor: aView [
 			ifNotNil: [ self picture asForm asElement ] ]
 ]
 
+{ #category : #initialization }
+BlCompositionPictureLayer >> initialize [
+	super initialize.
+	
+	needsCache := false
+]
+
 { #category : #accessing }
 BlCompositionPictureLayer >> name [
 	^ 'Picture #', self picture uniqueId asString
+]
+
+{ #category : #accessing }
+BlCompositionPictureLayer >> needsCache [
+	^ needsCache
+]
+
+{ #category : #accessing }
+BlCompositionPictureLayer >> needsCache: aBoolean [
+	needsCache := aBoolean
 ]
 
 { #category : #accessing }

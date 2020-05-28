@@ -108,7 +108,7 @@ TBlDrawingCache >> invalidRect: aBlBounds from: anElement [
 	self damageReported == true
 		ifTrue: [ ^ self ].
 
-	super invalidRect: (self invalidationBounds: self class invalidationBounds) from: anElement.
+	super invalidRect: (self invalidationBounds) from: anElement.
 
 	self damageReported: true.
 	
