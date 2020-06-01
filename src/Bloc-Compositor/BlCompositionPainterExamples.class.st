@@ -1,3 +1,6 @@
+"
+! Hello 1
+"
 Class {
 	#name : #BlCompositionPainterExamples,
 	#superclass : #Object,
@@ -23,6 +26,76 @@ BlCompositionPainterExamples >> elementWantingLayerWithTranslationTransform [
 		border: (BlBorder paint: Color red width: 1).
 
 	aContainer addChild: aChildA.
+	aContainer forceLayout.
+	
+	^ aContainer
+]
+
+{ #category : #'instance creation' }
+BlCompositionPainterExamples >> elementWithTransformationBetweenWantingLayer [
+	<gtExample>
+	|  aContainer aContent aWrapper aScaled aChildA  aChildB aChildC |
+	
+	aContainer := BlElement new
+		size: 600@400;
+		border: (BlBorder paint: Color veryLightGray width: 1).
+	
+	aContent := BlElement new
+		size: 560@360;
+		relocate: 20@20;
+		background: Color veryVeryLightGray.
+
+	aWrapper := BlElement new
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent ].
+	
+	aScaled := BlElement new size: (560@360) / 2.
+	aScaled constraintsDo: [ :c |
+		c ignoreByLayout.
+		c ignored vertical alignCenter.
+		c ignored horizontal alignCenter ].
+	aScaled transformDo: [ :t | t scaleBy: 1.5 ].
+	aScaled effect: BlGaussianShadowEffect default.
+	aScaled background: Color white.
+	
+	aChildA := BlExampleElementThatWantsCompositionLayer new
+		size: 200@40;
+		relocate: 20@20;
+		background: (Color paleBlue);
+		border: (BlBorder paint: Color blue width: 1).
+		
+	aChildB := BlExampleElementThatWantsCompositionLayer new
+		size: 200@40;
+		relocate: 20@80;
+		background: (Color paleRed);
+		border: (BlBorder paint: Color red width: 1).
+		
+	aChildC := BlElement new
+		size: 200@20;
+		relocate: 20@140;
+		background: (Color veryVeryLightGray);
+		border: (BlBorder paint: Color veryLightGray width: 1).
+
+	aScaled addChildren:  { aChildA . aChildB . aChildC }.
+	
+	aWrapper addChild: aScaled.
+	aContent addChild: aWrapper.
+		
+	aContent addChild: (BlElement new
+		size: 30@30;
+		relocate: 55@30;
+		background: Color lightGray;
+		geometry: (BlCircle new)).
+		
+	aContent addChild: (BlElement new
+		size: 30@30;
+		relocate: 475@30;
+		background: Color lightGray;
+		geometry: (BlCircle new)).
+		
+	aContainer addChild: aContent.
+
 	aContainer forceLayout.
 	
 	^ aContainer
@@ -177,6 +250,125 @@ BlCompositionPainterExamples >> overlappingSimpleElementWantingLayerInbetweenOth
 	^ aContainer
 ]
 
+{ #category : #'instance creation' }
+BlCompositionPainterExamples >> overlappingSimpleElementWantingLayerInbetweenOtherElementsInParentWithTransformation [
+	<gtExample>
+	|  aContainer aChildA aChildB aChildC |
+	
+	aContainer := BlElement new
+		constraintsDo: [ :c |
+			c horizontal exact: 400.
+			c vertical exact: 400 ];
+		transformDo: [ :t | t topLeftOrigin scaleBy: 1.2 ];
+		border: (BlBorder paint: Color veryLightGray width: 1).
+		
+	aChildA := BlElement new
+		size: 300@300;
+		relocate: 0@0;
+		background: (Color paleBlue);
+		border: (BlBorder paint: Color blue width: 1).
+		
+	aChildB := BlExampleElementThatWantsCompositionLayer new
+		size: 300@300;
+		relocate: 50@50;
+		background: (Color paleRed);
+		border: (BlBorder paint: Color red width: 1).
+	
+	aChildC := BlElement new
+		size: 300@300;
+		relocate: 100@100;
+		background: (Color paleGreen);
+		border: (BlBorder paint: Color green width: 1).
+
+	aContainer addChildren:  { aChildA . aChildB . aChildC }.
+	aContainer forceLayout.
+	
+	^ aContainer
+]
+
+{ #category : #'instance creation' }
+BlCompositionPainterExamples >> overlappingSimpleElementWantingLayerWithTransformInbetweenOtherElements [
+	<gtExample>
+	|  aContainer aChildA aChildB aChildC |
+	
+	aContainer := BlExampleElementThatWantsCompositionLayer new
+		constraintsDo: [ :c |
+			c horizontal exact: 400.
+			c vertical exact: 400 ];
+		border: (BlBorder paint: Color veryLightGray width: 1).
+		
+	aChildA := BlElement new
+		size: 300@300;
+		relocate: 0@0;
+		background: (Color paleBlue);
+		border: (BlBorder paint: Color blue width: 1).
+		
+	aChildB := BlElement new
+		size: (300 asPoint / 1.2);
+		relocate: 50@50;
+		background: (Color paleRed);
+		transformDo: [ :t | t topLeftOrigin scaleBy: 1.2 ];
+		border: (BlBorder paint: Color red width: 1);
+		addChild: (BlExampleElementThatWantsCompositionLayer new
+			size: 100@100;
+			relocate: 25@25;
+			background: (Color red alpha: 0.2);
+			border: (BlBorder paint: Color red width: 1)).
+	
+	aChildC := BlElement new
+		size: 300@300;
+		relocate: 100@100;
+		background: (Color paleGreen);
+		border: (BlBorder paint: Color green width: 1).
+
+	aContainer addChildren:  { aChildA . aChildB . aChildC }.
+	aContainer forceLayout.
+	
+	^ aContainer
+]
+
+{ #category : #'instance creation' }
+BlCompositionPainterExamples >> overlappingSimpleElementsWantingLayerInbetweenOtherElementsInParentWithTransformation [
+	<gtExample>
+	|  aContainer aChildA aChildB aChildC aChildD |
+	
+	aContainer := BlElement new
+		constraintsDo: [ :c |
+			c horizontal exact: 450.
+			c vertical exact: 450 ];
+		transformDo: [ :t | t topLeftOrigin scaleBy: 1.2 ];
+		border: (BlBorder paint: Color veryLightGray width: 1).
+		
+	aChildA := BlElement new
+		size: 300@300;
+		relocate: 0@0;
+		background: (Color paleBlue);
+		border: (BlBorder paint: Color blue width: 1).
+		
+	aChildB := BlExampleElementThatWantsCompositionLayer new
+		size: 300@300;
+		relocate: 50@50;
+		background: (Color paleRed);
+		border: (BlBorder paint: Color red width: 1).
+		
+	aChildC := BlExampleElementThatWantsCompositionLayer new
+		size: 300@300;
+		relocate: 100@100;
+		background: (Color paleYellow);
+		border: (BlBorder paint: Color yellow darker width: 1).
+	
+	aChildD := BlElement new
+		size: 300@300;
+		relocate: 150@150;
+		background: (Color paleGreen);
+		border: (BlBorder paint: Color green width: 1).
+
+	aContainer addChildren:  { aChildA . aChildB . aChildC . aChildD }.
+	aContainer forceLayout.
+	
+	^ aContainer
+]
+
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform [
 	<gtExample>
@@ -190,6 +382,44 @@ BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform
 	aPainter stopRecording.
 	
 	aRootLayer := aPainter containerLayer.
+	"self assert: aRootLayer layers size equals: 2.
+	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
+	self assert: aRootLayer layers first needsCache not.
+	
+	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
+	self assert: aRootLayer layers second offset equals: 150.0@75.0.
+	self assert: aRootLayer layers second layers size equals: 1.
+	
+	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
+	self assert: aRootLayer layers second layers first needsCache."
+	
+	^ aPainter
+]
+
+{ #category : #'examples - painter' }
+BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLayer [
+	<gtExample>
+	| aContainer aPainter aRootLayer |
+	
+	aContainer := self elementWithTransformationBetweenWantingLayer.
+	aContainer forceLayout.
+	
+	aPainter := BlCompositionPainter root: aContainer extent.
+	"self halt."
+	aContainer fullPaintOn: aPainter offset: 0@0.
+	aPainter stopRecording.
+	
+	aRootLayer := aPainter containerLayer.
+	"self assert: aRootLayer layers size equals: 2.
+	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
+	self assert: aRootLayer layers first needsCache not.
+	
+	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
+	self assert: aRootLayer layers second offset equals: 150.0@75.0.
+	self assert: aRootLayer layers second layers size equals: 1.
+	
+	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
+	self assert: aRootLayer layers second layers first needsCache."
 	
 	^ aPainter
 ]
@@ -207,14 +437,26 @@ BlCompositionPainterExamples >> paintElementsWantingLayerInsideScalable [
 	aPainter stopRecording.
 	
 	aRootLayer := aPainter containerLayer.
-	self assert: aRootLayer layers size equals: 4.
+	"self assert: aRootLayer layers size equals: 4.
 	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
 	self assert: (aRootLayer layers second isKindOf: BlCompositionLeftOverTransformationLayer).
 	self assert: (aRootLayer layers third isKindOf: BlCompositionLeftOverTransformationLayer).
 	self assert: (aRootLayer layers fourth isKindOf: BlCompositionPictureLayer).
 
+	self assert: (aRootLayer layers second matrix closeTo: (
+		SpartaMatrix new
+			sx: 0.283;
+			sy: 0.283;
+			y: 36.623) epsilon: 0.001).
+			
+	self assert: (aRootLayer layers third matrix closeTo: (
+		SpartaMatrix new
+			sx: 0.283;
+			sy: 0.283;
+			y: 36.623) epsilon: 0.001).
+
 	self assert: (aRootLayer layers second layers first offset) equals: (30@30).
-	self assert: (aRootLayer layers third layers first offset) equals: (25@485).
+	self assert: (aRootLayer layers third layers first offset) equals: (25@485)."
 	
 	^ aPainter
 ]
@@ -242,6 +484,18 @@ BlCompositionPainterExamples >> paintElementsWantingLayerInsideScalableTwice [
 	self assert: (aRootLayer layers third isKindOf: BlCompositionLeftOverTransformationLayer).
 	self assert: (aRootLayer layers fourth isKindOf: BlCompositionPictureLayer).
 
+	self assert: (aRootLayer layers second matrix closeTo: (
+		SpartaMatrix new
+			sx: 0.283;
+			sy: 0.283;
+			y: 36.623) epsilon: 0.001).
+			
+	self assert: (aRootLayer layers third matrix closeTo: (
+		SpartaMatrix new
+			sx: 0.283;
+			sy: 0.283;
+			y: 36.623) epsilon: 0.001).
+
 	self assert: (aRootLayer layers second layers first offset) equals: (30@30).
 	self assert: (aRootLayer layers third layers first offset) equals: (25@485)."
 	
@@ -260,15 +514,7 @@ BlCompositionPainterExamples >> paintOverlappingElementWantingLayerInbetweenOthe
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
-	aRootLayer := aPainter containerLayer.
-	
-	"self assert: aRootLayer layers size equals: 3.
-	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
-	self assert: aRootLayer layers second offset equals: 50@50.
-	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer)."
-	
+	aRootLayer := aPainter containerLayer.	
 	
 	^ aPainter
 ]
@@ -289,11 +535,45 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 	
 	"self assert: aRootLayer layers size equals: 3.
 	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers first needsCache not).
+
 	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
 	self assert: aRootLayer layers second offset equals: 50@50.
 	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer)."
+	self assert: (aRootLayer layers second layers first needsCache).
+
+	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers third needsCache not)."
 	
+	^ aPainter
+]
+
+{ #category : #'examples - painter' }
+BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetweenOtherElementsInParentWithTransformation [
+	<gtExample>
+	| aContainer aPainter aRootLayer |
+	
+	aContainer := self overlappingSimpleElementWantingLayerInbetweenOtherElementsInParentWithTransformation.
+	aContainer forceLayout.
+	
+	aPainter := BlCompositionPainter root: aContainer transformedBounds extent.
+	
+	aContainer fullPaintOn: aPainter offset: 0@0.
+	aPainter stopRecording.
+	
+	aRootLayer := aPainter containerLayer.
+	
+	"self assert: aRootLayer layers size equals: 3.
+	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers first needsCache not).
+
+	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
+	self assert: aRootLayer layers second offset equals: 50@50.
+	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers second layers first needsCache).
+
+	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers third needsCache not)."
 	
 	^ aPainter
 ]
@@ -311,7 +591,35 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 	aPainter stopRecording.
 	
 	aPainter := BlCompositionPainter root: aContainer extent.
-	"self halt."
+	aContainer fullPaintOn: aPainter offset: 0@0.
+	aPainter stopRecording.
+	
+	"aRootLayer := aPainter containerLayer.
+	
+	self assert: aRootLayer layers size equals: 3.
+	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers first needsCache not).
+
+	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
+	self assert: aRootLayer layers second offset equals: 50@50.
+	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers second layers first needsCache).
+
+	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers third needsCache not)."
+	
+	^ aPainter
+]
+
+{ #category : #'examples - painter' }
+BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerWithTransformInbetweenOtherElements [
+	<gtExample>
+	| aContainer aPainter aRootLayer |
+	
+	aContainer := self overlappingSimpleElementWantingLayerWithTransformInbetweenOtherElements.
+	aContainer forceLayout.
+	
+	aPainter := BlCompositionPainter root: aContainer extent.
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
@@ -319,11 +627,31 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 	
 	"self assert: aRootLayer layers size equals: 3.
 	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers first needsCache not).
+
 	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
 	self assert: aRootLayer layers second offset equals: 50@50.
 	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer)."
+	self assert: (aRootLayer layers second layers first needsCache).
+
+	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer).
+	self assert: (aRootLayer layers third needsCache not)."
 	
+	^ aPainter
+]
+
+{ #category : #'examples - painter' }
+BlCompositionPainterExamples >> paintOverlappingSimpleElementsWantingLayerInbetweenOtherElementsInParentWithTransformation [
+	<gtExample>
+	| aContainer aPainter aRootLayer |
+	
+	aContainer := self overlappingSimpleElementsWantingLayerInbetweenOtherElementsInParentWithTransformation.
+	
+	aPainter := BlCompositionPainter root: aContainer transformedBounds extent.
+	aContainer fullPaintOn: aPainter offset: 0@0.
+	aPainter stopRecording.
+	
+	aRootLayer := aPainter containerLayer.	
 	
 	^ aPainter
 ]

@@ -8,6 +8,13 @@ Class {
 	#category : #'Bloc-Compositor-Layers'
 }
 
+{ #category : #accessing }
+BlCompositionPictureLayer >> asForm [
+	^ self picture
+		ifNil: [ Form extent: 0@0 depth: 32 ]
+		ifNotNil: [ self picture asForm ]
+]
+
 { #category : #converting }
 BlCompositionPictureLayer >> asSkiaLayer [
 	self
@@ -45,7 +52,9 @@ BlCompositionPictureLayer >> initialize [
 
 { #category : #accessing }
 BlCompositionPictureLayer >> name [
-	^ 'Picture #', self picture uniqueId asString
+	^ self picture
+		ifNil: [ 'Picture (none)' ]
+		ifNotNil: [ 'Picture #', self picture uniqueId asString ]
 ]
 
 { #category : #accessing }

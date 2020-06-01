@@ -71,6 +71,17 @@ BlCompositionContainerLayer >> removeLayer: aBlCompositionLayer [
 ]
 
 { #category : #removing }
+BlCompositionContainerLayer >> swapLayer: aChildLayer and: anOtherLayer [
+	| aFirstIndex aSecondIndex |
+	
+	aFirstIndex := children indexOf: aChildLayer.
+	aSecondIndex := children indexOf: anOtherLayer.
+	
+	children at: aFirstIndex put: anOtherLayer.
+	children at: aSecondIndex put: aChildLayer.
+]
+
+{ #category : #removing }
 BlCompositionContainerLayer >> wrapLayer: aChildLayer in: anOtherLayer [
 	| anIndex |
 	

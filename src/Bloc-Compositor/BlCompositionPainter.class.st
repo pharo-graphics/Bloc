@@ -6,7 +6,7 @@ Class {
 		'pictureLayer',
 		'canvas',
 		'bounds',
-		'matrix',
+		'state',
 		'needsCache'
 	],
 	#category : #'Bloc-Compositor-Painter'
@@ -43,6 +43,18 @@ BlCompositionPainter >> canvas [
 
 	canvas ifNil: [ self startRecording ].
 	^ canvas
+]
+
+{ #category : #'private - canvas' }
+BlCompositionPainter >> canvasDo: aBlock [
+	^ self canvasDo: aBlock ifAbsent: [  ]
+]
+
+{ #category : #'private - canvas' }
+BlCompositionPainter >> canvasDo: aBlock ifAbsent: anAbsentBlock [
+	^ canvas
+		ifNil: anAbsentBlock
+		ifNotNil: aBlock
 ]
 
 { #category : #accessing }
@@ -91,25 +103,28 @@ BlCompositionPainter >> gtPreviewFor: aView [
 			aCanvas asForm ]
 ]
 
-{ #category : #initialization }
-BlCompositionPainter >> initialize [
-	super initialize.
-	
-	bounds := 0@0 extent: 0@0.
-	matrix := SpartaMatrix new.
-	needsCache := false
-]
-
-{ #category : #testing }
-BlCompositionPainter >> isRecording [
+{ #category : #'private - canvas' }
+BlCompositionPainter >> hasCanvas [
 	<return: #Boolean>
 
 	^ canvas isNotNil
 ]
 
-{ #category : #accessing }
-BlCompositionPainter >> matrix: aMatrix [
-	matrix := aMatrix
+{ #category : #initialization }
+BlCompositionPainter >> initialize [
+	super initialize.
+	
+	bounds := 0@0 extent: 0@0.
+	needsCache := false.
+	
+	state := BlCompositionPainterState new.
+]
+
+{ #category : #'private - canvas' }
+BlCompositionPainter >> isRecording [
+	<return: #Boolean>
+
+	^ self hasCanvas
 ]
 
 { #category : #accessing }
@@ -123,6 +138,30 @@ BlCompositionPainter >> needsCache: anObject [
 ]
 
 { #category : #'api - layer' }
+BlCompositionPainter >> pushClip: aClipPath offset: anOffset bounds: aRectangle compositing: wantsCompositingLayer thenPaint: aPaintBlock [
+	
+	wantsCompositingLayer
+		ifTrue: [
+			self
+				pushLayer: (BlCompositionClipLayer new
+					path: aClipPath;
+					offset: anOffset)
+				offset: anOffset
+				bounds: aRectangle
+				buffered: false
+				thenPaint: aPaintBlock ]
+		ifFalse: [
+			self canvasDo: [ :aCanvas |
+				aCanvas clip push: aClipPath offset: anOffset ].
+			state pushClip: aClipPath offset: anOffset.
+			
+			aPaintBlock cull: self cull: anOffset.
+			
+			state pop.
+			self canvasDo: [ :aCanvas | aCanvas clip pop ] ]
+]
+
+{ #category : #'api - layer' }
 BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangleOrNull buffered: shouldBeBuffered thenPaint: aPaintBlock [
 	<return: #BlCompositionLayer>
 	| anAddedLayer aNewPainter aChildLayer |
@@ -130,21 +169,23 @@ BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangle
 	self stopRecording.
 	
 	aChildLayer := aNewLayer.
+	anAddedLayer := aChildLayer.
 	
-	self addLayer: (matrix isIdentity
-		ifTrue: [ anAddedLayer := aNewLayer ]
+	anAddedLayer := state isEmpty
+		ifTrue: [ anAddedLayer ]
 		ifFalse: [
-			| aTransformLayer |
-			aTransformLayer := BlCompositionLeftOverTransformationLayer new matrix: matrix.
-			anAddedLayer := aTransformLayer addLayer: aChildLayer.
-			anAddedLayer ]).
-	
+			| aStateLayer |
+			aStateLayer := BlCompositionLeftoverStateLayer new state: state copy.
+			aStateLayer addLayer: anAddedLayer ].
+
+	self addLayer: anAddedLayer.
+
 	aNewPainter := (shouldBeBuffered
 			ifTrue: [ BlCompositionLayeredPainter new ]
 			ifFalse: [ self class new ])
 		containerLayer: aChildLayer;
 		bounds: aRectangleOrNull;
-		matrix: matrix.
+		needsCache: needsCache.
 	 aPaintBlock cull: aNewPainter cull: anOffset.
 
 	aNewPainter stopRecording.
@@ -168,9 +209,8 @@ BlCompositionPainter >> pushOpacity: anAlpha offset: anOffset bounds: aRectangle
 
 { #category : #'api - layer' }
 BlCompositionPainter >> pushTransform: aMatrix offset: anOffset bounds: aRectangleOrNull compositing: wantsCompositing buffered: wantsBufferedCompositing thenPaint: aPaintBlock [
-	<return: #BlCompositionPainter>
 
-	^ (self shouldCreateNewLayer: wantsCompositing)
+	(self shouldCreateNewLayer: wantsCompositing)
 		ifTrue: [
 			self
 				pushLayer: (BlCompositionTransformationLayer new
@@ -181,14 +221,22 @@ BlCompositionPainter >> pushTransform: aMatrix offset: anOffset bounds: aRectang
 				buffered: wantsBufferedCompositing
 				thenPaint: aPaintBlock ]
 		ifFalse: [
-			| aNextPainter |
-			self canvas transform
-				by: [ :t | t
-					translateBy: anOffset;
-					multiplyBy: aMatrix";
-					translateBy: anOffset negated" ]
-				during: [ aNextPainter := aPaintBlock cull: self cull: 0@0 ].
-			aNextPainter ]
+			| aTransform |
+			aTransform := self
+				canvasDo: [ :aCanvas |
+					aCanvas transform
+						translateBy: anOffset;
+						multiplyBy: aMatrix;
+						push ]
+				ifAbsent: [ nil ].
+			
+			state pushTransform: aMatrix offset: anOffset.
+			
+			aPaintBlock cull: self cull: 0@0.
+			
+			self canvasDo: [ :aCanvas | aTransform ifNotNil: [ aCanvas transform pop: aTransform ] ].
+
+			state pop ]
 ]
 
 { #category : #testing }
@@ -200,19 +248,27 @@ BlCompositionPainter >> shouldCreateNewLayer: wantsCompositionLayer [
 BlCompositionPainter >> startRecording [
 	pictureLayer := BlCompositionPictureLayer new.
 	canvas := SkiaCanvas recording: bounds.
+	
+	"the new recording canvas should inherit current clip and transformation"
+	state applyOn: canvas.
+
 	containerLayer addLayer: pictureLayer
 ]
 
 { #category : #'private - canvas' }
 BlCompositionPainter >> stopRecording [
+	| aPicture |
+
 	self isRecording
-		ifFalse: [ ^ nil ].
+		ifFalse: [ ^ self ].
 
-	"a leftover transformation matrix"
-	matrix := canvas transform current.
+	aPicture := canvas snapshot.
+	
+	aPicture isEmpty
+		ifTrue: [ pictureLayer removeFromParent ]
+		ifFalse: [ pictureLayer needsCache: needsCache ].
 
-	pictureLayer picture: canvas snapshot.
-	pictureLayer needsCache: needsCache.
+	pictureLayer picture: aPicture.
 	pictureLayer := nil.
 	canvas := nil
 ]

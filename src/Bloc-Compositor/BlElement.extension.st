@@ -17,13 +17,13 @@ BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
 				buffered: self wantsCompositionBufferLayer
 				thenPaint: [ :aChildPainter :aChildOffset |
 					aChildPainter needsCache: true.
-					self paintMeAndChildrenOn: aChildPainter offset: aChildOffset.					
-					aChildPainter stopRecording ].
-				self userData at: #compositionLayer put: anAddedLayer ]
+					self paintMeAndChildrenOn: aChildPainter offset: aChildOffset ].
+				self userData at: #compositionLayer put: anAddedLayer.
+			^ self ]
 			ifFalse: [ aCompositorPainter stopRecording ].
 	
 	aLayer := self userData at: #compositionLayer.
-		
+
 	aLayer offset: anOffset.
 	aLayer removeFromParent.
 	aCompositorPainter addLayer: aLayer
@@ -94,13 +94,24 @@ BlElement >> fullPaintWithTransformOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
-	
+	self children sortedByElevation
+		do: [ :anElement | anElement fullPaintOn: aCompositorPainter offset: anOffset ]
+]
+
+{ #category : #'*Bloc-Compositor' }
+BlElement >> paintClippedChildrenOn: aCompositorPainter offset: anOffset [
 	"If there are not children no need to draw and clip"
 	self hasChildren
 		ifFalse: [ ^ self ].
 
-	self children sortedByElevation
-		do: [ :anElement | anElement fullPaintOn: aCompositorPainter offset: anOffset ]
+	self clipChildren
+		ifTrue: [ aCompositorPainter
+			pushClip: (self geometry pathOnSpartaCanvas: aCompositorPainter canvas)
+			offset: anOffset
+			bounds: self invalidationBounds
+			compositing: self wantsCompositionLayer
+			thenPaint: [ :aClippedPainter :aClippedOffset | self paintChildrenOn: aClippedPainter offset: aClippedOffset ] ]
+		ifFalse: [ self paintChildrenOn: aCompositorPainter offset: anOffset ]
 ]
 
 { #category : #'*Bloc-Compositor' }
@@ -108,13 +119,25 @@ BlElement >> paintMeAndChildrenOn: aCompositorPainter offset: anOffset [
 	self paintOn: aCompositorPainter offset: anOffset.
 
 	self
-		paintChildrenOn: aCompositorPainter
+		paintClippedChildrenOn: aCompositorPainter
 		offset: anOffset
 ]
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintOn: aCompositorPainter offset: anOffset [
-	| aCanvas |
+	| aCanvas isOriginal |
+	
+	"For performance reasons we would like to limit amount of access
+	to the painter's canvas. To do so we detect before-hand if there is anything
+	we need to draw using #shouldDrawBackgroundOrBorder, however this only works
+	if #drawOnSpartaCanvas: is not overriden (=is original)"
+	isOriginal := (self class == BlElement) or: [  
+		self class classAndMethodFor: #drawOnSpartaCanvas:
+			do: [ :aClass :m | aClass == BlElement ]
+			ifAbsent: [ true ] ].
+
+	(isOriginal and: [ self shouldDrawBackgroundOrBorder not ])
+		ifTrue: [ ^ self ].
 	
 	aCanvas := aCompositorPainter canvas.
 	aCanvas transform

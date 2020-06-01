@@ -2083,7 +2083,20 @@ BlElement >> margin: aBlInsets [
 
 { #category : #'change reporting' }
 BlElement >> markNeedsPaint [
-	self needsPaint
+	self userData
+		removeKey: #compositionLayer
+		ifAbsent: [ ].
+
+	self isAttachedToSceneGraph
+		ifFalse: [ ^ self ].
+
+	needsPaint := true.
+
+	self hasParent
+		ifTrue: [ self parent markNeedsPaint ]
+		ifFalse: [ self space markNeedsPaint: self ].
+
+	"self needsPaint
 		ifTrue: [ ^ self ].
 
 	self isAttachedToSceneGraph
@@ -2096,7 +2109,7 @@ BlElement >> markNeedsPaint [
 		ifFalse: [
 			self hasParent
 				ifTrue: [ self parent markNeedsPaint ]
-				ifFalse: [ self space markNeedsPaint: self ] ]
+				ifFalse: [ self space markNeedsPaint: self ] ]"
 ]
 
 { #category : #'layout constraints' }

@@ -90,15 +90,9 @@ BlElement >> drawMeWithEffectsOnCanvas: aCanvas [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlElement >> drawOnSpartaCanvas: aCanvas [
-	| isBackgroundTransparent isBorderTransparent areBothTransparent |
-	
-	isBackgroundTransparent := self background isTransparent.
-	isBorderTransparent := self border isTransparent.
-	areBothTransparent := isBackgroundTransparent and: [ isBorderTransparent ].
-	
-	areBothTransparent
-		ifTrue: [ ^ self ].
+BlElement >> drawOnSpartaCanvas: aCanvas [	
+	self shouldDrawBackgroundOrBorder
+		ifFalse: [ ^ self ].
 
 	aCanvas figure
 		path: (self geometry pathOnSpartaCanvas: aCanvas);
@@ -144,4 +138,18 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 							self drawMeWithEffectsOnCanvas: aCanvas.
 							misc debug ifTrue: [ self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ]
 						failed: [ :anError | self drawError: anError onSpartaCanvas: aCanvas ] ] ]
+]
+
+{ #category : #'*Bloc-Sparta' }
+BlElement >> shouldDrawBackgroundOrBorder [
+	"I determine if background or border should be drawn.
+	In its current form we just check if any of them are transparent"
+	<return: #Boolean>
+	| isBackgroundTransparent isBorderTransparent areBothTransparent |
+	
+	isBackgroundTransparent := self background isTransparent.
+	isBorderTransparent := self border isTransparent.
+	areBothTransparent := isBackgroundTransparent and: [ isBorderTransparent ].
+	
+	^ areBothTransparent not
 ]

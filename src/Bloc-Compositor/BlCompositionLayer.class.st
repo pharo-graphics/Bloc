@@ -81,15 +81,16 @@ BlCompositionLayer >> paintTreeWith: view [
 				zIndex: 10;
 				addChild: (BlTextElement new
 					padding: (BlInsets top: 5 left: 8 bottom: 5 right: 8);
-					border: (BlBorder paint: Color gray width: 1);
+					border: (((each isKindOf: BlCompositionPictureLayer) and: [ each needsCache ])
+						ifTrue: [ BlBorder paint: Color red width: 1 ]
+						ifFalse: [ BlBorder paint: Color gray width: 1 ]);
 					text: each name asRopedText glamorousRegularFontAndSize);
 				in: [ :aNodeElement |
 					(each isKindOf: BlCompositionPictureLayer)
-						ifTrue: [ aNodeElement addChild: (each picture asForm asElement asScalableElement
+						ifTrue: [ aNodeElement addChild: (each asForm asElement asScalableElement
 							fitWidth;
 							background: Color white;
 							margin: (BlInsets top: 10);
-							border: (each needsCache ifTrue: [ BlBorder paint: Color red width: 1 ] ifFalse: [ BlBorder empty ]);
 							look: BrShadowLook new;
 							constraintsDo: [ :c |
 								c horizontal exact: 100.

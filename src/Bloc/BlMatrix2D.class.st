@@ -268,6 +268,10 @@ BlMatrix2D >> perspective: aDepth [
 	"2D matrix does not have a perspective components"
 ]
 
+{ #category : #printing }
+BlMatrix2D >> printOn: aStream [
+]
+
 { #category : #'matrix - transformations' }
 BlMatrix2D >> reflectBy: aDiagonalVector [
 	"Apply a reflection transformation given by a diagonal vector"
