@@ -504,6 +504,15 @@ BlElement >> baselineOffset [
 	^ 0
 ]
 
+{ #category : #testing }
+BlElement >> beInSeparateCompositionLayer [
+	"Make me that I want to be rendered in a separate composition layer"
+
+	self userData
+		at: #wantsCompositionLayer
+		put: true
+]
+
 { #category : #'api - look' }
 BlElement >> border [
 	<return: #BlBorder>
@@ -3536,13 +3545,6 @@ BlElement >> visualBoundsOn: aCanvas [
 BlElement >> wantCompositionBufferLayer [
 	self userData
 		at: #wantsCompositionBufferLayer
-		put: true
-]
-
-{ #category : #testing }
-BlElement >> wantCompositionLayer [
-	self userData
-		at: #wantsCompositionLayer
 		put: true
 ]
 
