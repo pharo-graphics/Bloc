@@ -12,13 +12,13 @@ Class {
 BlCompositionOffsetLayer >> asSkiaLayer [
 	<return: #SkiaCompositionOffsetLayer>
 
-	skiaLayer
-		ifNil: [
+	(skiaLayer isNil or: [ self needsComposition ])
+		ifTrue: [
 			| theChildLayers |
 			skiaLayer := self newSkiaLayer.
 			theChildLayers := self children collect: [ :eachLayer | eachLayer asSkiaLayer ].
 			theChildLayers do: [ :eachLayer | skiaLayer addLayer: eachLayer ] ]
-		ifNotNil: [ skiaLayer offset: self offset ].
+		ifFalse: [ skiaLayer offset: self offset ].
 
 	^ skiaLayer
 ]
@@ -55,6 +55,8 @@ BlCompositionOffsetLayer >> offset [
 ]
 
 { #category : #accessing }
-BlCompositionOffsetLayer >> offset: aNumber [
-	offset := aNumber
+BlCompositionOffsetLayer >> offset: aPoint [
+	offset = aPoint
+		ifFalse: [ self markNeedsComposition ].
+	offset := aPoint
 ]

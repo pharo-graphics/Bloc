@@ -10,7 +10,9 @@ Class {
 { #category : #removing }
 BlCompositionContainerLayer >> addLayer: aBlCompositionLayer [
 	children add: aBlCompositionLayer.
-	aBlCompositionLayer attachToParent: self
+	aBlCompositionLayer attachToParent: self.
+	
+	self markNeedsComposition
 ]
 
 { #category : #converting }
@@ -27,6 +29,13 @@ BlCompositionContainerLayer >> asSkiaLayer [
 { #category : #accessing }
 BlCompositionContainerLayer >> children [
 	^ self layers
+]
+
+{ #category : #'private - composition' }
+BlCompositionContainerLayer >> computeNeedsComposition [
+	self layers do: [ :eachLayer |
+		eachLayer computeNeedsComposition.
+		needsComposition := needsComposition or: [ eachLayer needsComposition ] ]
 ]
 
 { #category : #drawing }
@@ -61,34 +70,15 @@ BlCompositionContainerLayer >> newSkiaLayer [
 { #category : #removing }
 BlCompositionContainerLayer >> removeAllLayers [
 	children do: [ :each | each detachFromParent ].
-	children := OrderedCollection new
+	children := OrderedCollection new.
+	
+	self markNeedsComposition
 ]
 
 { #category : #removing }
 BlCompositionContainerLayer >> removeLayer: aBlCompositionLayer [
 	children remove: aBlCompositionLayer.
-	aBlCompositionLayer detachFromParent
-]
+	aBlCompositionLayer detachFromParent.
 
-{ #category : #removing }
-BlCompositionContainerLayer >> swapLayer: aChildLayer and: anOtherLayer [
-	| aFirstIndex aSecondIndex |
-	
-	aFirstIndex := children indexOf: aChildLayer.
-	aSecondIndex := children indexOf: anOtherLayer.
-	
-	children at: aFirstIndex put: anOtherLayer.
-	children at: aSecondIndex put: aChildLayer.
-]
-
-{ #category : #removing }
-BlCompositionContainerLayer >> wrapLayer: aChildLayer in: anOtherLayer [
-	| anIndex |
-	
-	anIndex := children indexOf: aChildLayer.
-	aChildLayer detachFromParent.
-	
-	anOtherLayer addLayer: aChildLayer.
-	children at: anIndex put: anOtherLayer.
-	anOtherLayer attachToParent: self
+	self markNeedsComposition
 ]

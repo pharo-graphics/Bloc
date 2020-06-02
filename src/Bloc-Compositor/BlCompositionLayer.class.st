@@ -2,7 +2,8 @@ Class {
 	#name : #BlCompositionLayer,
 	#superclass : #Object,
 	#instVars : [
-		'parent'
+		'parent',
+		'needsComposition'
 	],
 	#category : #'Bloc-Compositor-Layers'
 }
@@ -20,6 +21,16 @@ BlCompositionLayer >> attachToParent: aCompositionLayer [
 { #category : #accessing }
 BlCompositionLayer >> children [
 	^ #()
+]
+
+{ #category : #'private - composition' }
+BlCompositionLayer >> cleanNeedsComposition [
+	needsComposition := false
+]
+
+{ #category : #'private - composition' }
+BlCompositionLayer >> computeNeedsComposition [
+	
 ]
 
 { #category : #'as yet unclassified' }
@@ -61,9 +72,26 @@ BlCompositionLayer >> hasParent [
 	^ parent isNotNil
 ]
 
+{ #category : #initialization }
+BlCompositionLayer >> initialize [
+	super initialize.
+	
+	needsComposition := true
+]
+
+{ #category : #'private - composition' }
+BlCompositionLayer >> markNeedsComposition [
+	needsComposition := true.
+]
+
 { #category : #accessing }
 BlCompositionLayer >> name [
 	^ self subclassResponsibility
+]
+
+{ #category : #'private - composition' }
+BlCompositionLayer >> needsComposition [
+	^ needsComposition
 ]
 
 { #category : #'gt-extension' }
@@ -81,7 +109,7 @@ BlCompositionLayer >> paintTreeWith: view [
 				zIndex: 10;
 				addChild: (BlTextElement new
 					padding: (BlInsets top: 5 left: 8 bottom: 5 right: 8);
-					border: (((each isKindOf: BlCompositionPictureLayer) and: [ each needsCache ])
+					border: (((each isKindOf: BlCompositionPictureLayer) and: [ each isWorthCaching ])
 						ifTrue: [ BlBorder paint: Color red width: 1 ]
 						ifFalse: [ BlBorder paint: Color gray width: 1 ]);
 					text: each name asRopedText glamorousRegularFontAndSize);

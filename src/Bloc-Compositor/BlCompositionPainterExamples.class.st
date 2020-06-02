@@ -372,26 +372,31 @@ BlCompositionPainterExamples >> overlappingSimpleElementsWantingLayerInbetweenOt
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform [
 	<gtExample>
-	| aContainer aPainter aRootLayer |
+	| aContainer aPainter aRootLayer anOffsetLayer |
 	
 	aContainer := self elementWantingLayerWithTranslationTransform.
 	aContainer forceLayout.
 	
 	aPainter := BlCompositionPainter root: aContainer extent.
+	
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
 	aRootLayer := aPainter containerLayer.
-	"self assert: aRootLayer layers size equals: 2.
+	self assert: aRootLayer layers size equals: 2.
 	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
 	self assert: aRootLayer layers first needsCache not.
 	
-	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
-	self assert: aRootLayer layers second offset equals: 150.0@75.0.
-	self assert: aRootLayer layers second layers size equals: 1.
+	self assert: (aRootLayer layers second isKindOf: BlCompositionLeftoverStateLayer).
 	
-	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
-	self assert: aRootLayer layers second layers first needsCache."
+	anOffsetLayer := aRootLayer layers second layers first.
+	
+	"self assert: (anOffsetLayer isKindOf: BlCompositionOffsetLayer).
+	self assert: anOffsetLayer offset equals: 150.0@75.0.
+	self assert: anOffsetLayer layers size equals: 1.
+	
+	self assert: (anOffsetLayer layers first isKindOf: BlCompositionPictureLayer).
+	self assert: anOffsetLayer layers first needsCache."
 	
 	^ aPainter
 ]

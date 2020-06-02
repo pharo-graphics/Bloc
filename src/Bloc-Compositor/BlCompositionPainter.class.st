@@ -12,6 +12,30 @@ Class {
 	#category : #'Bloc-Compositor-Painter'
 }
 
+{ #category : #painting }
+BlCompositionPainter class >> repaintCompositedElement: anElement [
+	| anOffsetLayer aPainter |
+	
+	"NonInteractiveTranscript stdout
+		nextPutAll: '[repaint] '; 
+		nextPutAll: anElement asString;
+		cr."
+
+	anOffsetLayer := anElement compositionLayer
+		ifNil: [ BlCompositionOffsetLayer new ]
+		ifNotNil: [ :aLayer | aLayer removeAllLayers ].
+
+	aPainter := self new
+		containerLayer: anOffsetLayer;
+		bounds: anElement invalidationBounds;
+		needsCache: anElement wantsCompositionLayer.
+
+	anElement fullPaintWithTransformOn: aPainter offset: 0@0.
+
+	aPainter stopRecording.
+	anElement compositionLayer: anOffsetLayer
+]
+
 { #category : #'instance creation' }
 BlCompositionPainter class >> root: anExtent [
 	"Create a root composition painter to be used as the first entrance point of the space painting"
@@ -22,9 +46,27 @@ BlCompositionPainter class >> root: anExtent [
 		containerLayer: (BlCompositionContainerLayer new)
 ]
 
-{ #category : #'private - layers' }
+{ #category : #'api - layer' }
 BlCompositionPainter >> addLayer: aCompositionLayer [
-	containerLayer addLayer: aCompositionLayer
+	"Add a composition layer wrapping it in a leftover layer if the state is not empty.
+	I make sure that a given composition layer is not added to any other layer"
+	| anAddedLayer |
+	
+	aCompositionLayer removeFromParent.
+	
+	anAddedLayer := state isEmpty
+		ifTrue: [ aCompositionLayer ]
+		ifFalse: [
+			| aStateLayer |
+			aStateLayer := BlCompositionLeftoverStateLayer new state: state copy.
+			aStateLayer addLayer: aCompositionLayer ].
+	
+	containerLayer layers
+		select: [ :each | each isKindOf: BlCompositionPictureLayer ]
+		thenDo: [ :each | each needsCache: false ].
+
+	containerLayer addLayer: anAddedLayer.
+	
 ]
 
 { #category : #accessing }
@@ -163,34 +205,19 @@ BlCompositionPainter >> pushClip: aClipPath offset: anOffset bounds: aRectangle 
 
 { #category : #'api - layer' }
 BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangleOrNull buffered: shouldBeBuffered thenPaint: aPaintBlock [
-	<return: #BlCompositionLayer>
-	| anAddedLayer aNewPainter aChildLayer |
+	| aNewPainter |
+	
+	self addLayer: aNewLayer.
 	
 	self stopRecording.
-	
-	aChildLayer := aNewLayer.
-	anAddedLayer := aChildLayer.
-	
-	anAddedLayer := state isEmpty
-		ifTrue: [ anAddedLayer ]
-		ifFalse: [
-			| aStateLayer |
-			aStateLayer := BlCompositionLeftoverStateLayer new state: state copy.
-			aStateLayer addLayer: anAddedLayer ].
 
-	self addLayer: anAddedLayer.
-
-	aNewPainter := (shouldBeBuffered
-			ifTrue: [ BlCompositionLayeredPainter new ]
-			ifFalse: [ self class new ])
-		containerLayer: aChildLayer;
+	aNewPainter := self class new
+		containerLayer: aNewLayer;
 		bounds: aRectangleOrNull;
-		needsCache: needsCache.
+		needsCache: true.
 	 aPaintBlock cull: aNewPainter cull: anOffset.
 
-	aNewPainter stopRecording.
-	
-	^ anAddedLayer
+	aNewPainter stopRecording
 ]
 
 { #category : #'api - layer' }
@@ -266,7 +293,7 @@ BlCompositionPainter >> stopRecording [
 	
 	aPicture isEmpty
 		ifTrue: [ pictureLayer removeFromParent ]
-		ifFalse: [ pictureLayer needsCache: needsCache ].
+		ifFalse: [ pictureLayer needsCache: (needsCache and: [ containerLayer layers size <= 1 ]) ].
 
 	pictureLayer picture: aPicture.
 	pictureLayer := nil.

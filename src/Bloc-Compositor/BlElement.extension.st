@@ -1,39 +1,30 @@
 Extension { #name : #BlElement }
 
 { #category : #'*Bloc-Compositor' }
+BlElement >> compositionDepth [
+	<return: #Number>
+	| aDepth |
+
+	aDepth := 1.
+	self allParentsDo: [ :eachParent | aDepth := aDepth + 1 ].
+	^ aDepth
+]
+
+{ #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
 	| aLayer |
 
 	self shouldBePainted
-		ifTrue: [
-			| anOffsetLayer anAddedLayer |
-			
-			anOffsetLayer := BlCompositionOffsetLayer new offset: anOffset.
-			
-			anAddedLayer := aCompositorPainter
-				pushLayer: anOffsetLayer
-				offset: 0@0
-				bounds: (self invalidationBounds)
-				buffered: self wantsCompositionBufferLayer
-				thenPaint: [ :aChildPainter :aChildOffset |
-					aChildPainter needsCache: true.
-					self paintMeAndChildrenOn: aChildPainter offset: aChildOffset ].
-				self userData at: #compositionLayer put: anAddedLayer.
-			^ self ]
-			ifFalse: [ aCompositorPainter stopRecording ].
-	
-	aLayer := self userData at: #compositionLayer.
+		ifTrue: [ BlCompositionPainter repaintCompositedElement: self ].
 
+	aCompositorPainter stopRecording.
+
+	aLayer := self compositionLayer.
 	aLayer offset: anOffset.
-	aLayer removeFromParent.
+	
+	self assert: [ aLayer isKindOf: BlCompositionOffsetLayer ].
+	
 	aCompositorPainter addLayer: aLayer
-]
-
-{ #category : #'*Bloc-Compositor' }
-BlElement >> fullPaintMeAndChildrenOn: aCompositorPainter offset: anOffset [
-	(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer) 
-		ifTrue: [	 self fullPaintCompositedOn: aCompositorPainter offset: anOffset ]
-		ifFalse: [ self paintMeAndChildrenOn: aCompositorPainter offset: anOffset ]
 ]
 
 { #category : #'*Bloc-Compositor' }
@@ -49,7 +40,9 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 			needsPaint := false.
 			^ self ].
 
-	self fullPaintWithTransformOn: aCompositorPainter offset: anOffset + self position.
+	(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer)
+		ifTrue: [ self fullPaintCompositedOn: aCompositorPainter offset: anOffset + self position ]
+		ifFalse: [ self fullPaintWithTransformOn: aCompositorPainter offset: anOffset + self position ].
 
 	needsPaint := false
 ]
@@ -74,22 +67,27 @@ BlElement >> fullPaintWithOpacityOn: aCompositorPainter offset: anOffset [
 { #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintWithTransformOn: aCompositorPainter offset: anOffset [
 	self transformation isIdentity
-		ifTrue: [ self fullPaintMeAndChildrenOn: aCompositorPainter offset: anOffset ]
+		ifTrue: [ self paintMeAndChildrenOn: aCompositorPainter offset: anOffset ]
 		ifFalse: [
-			(self transformation isPureTranslation)
-				ifTrue: [
-					| aTranslation |
-					aTranslation := self transformation transformPoint: 0@0.
-					self fullPaintMeAndChildrenOn: aCompositorPainter offset: anOffset + aTranslation ]
-				ifFalse: [
-					aCompositorPainter
-						pushTransform: self transformation matrix
-						offset: anOffset
-						bounds: self invalidationBounds
-						compositing: self wantsCompositionLayer
-						buffered: self wantsCompositionBufferLayer
-						thenPaint: [ :aTransformCompositorPainter :aTransformOffset |
-							self fullPaintMeAndChildrenOn: aTransformCompositorPainter offset: aTransformOffset ] ] ]
+			aCompositorPainter
+				pushTransform: self transformation matrix
+				offset: anOffset
+				bounds: self invalidationBounds
+				compositing: self wantsCompositionLayer
+				buffered: self wantsCompositionBufferLayer
+				thenPaint: [ :aTransformCompositorPainter :aTransformOffset |
+					self paintMeAndChildrenOn: aTransformCompositorPainter offset: aTransformOffset ] ]
+]
+
+{ #category : #'*Bloc-Compositor' }
+BlElement >> markSkippedPaint [
+	self wantsCompositionLayer
+		ifTrue: [
+			self compositionLayer
+				ifNil: [ ^ self ].
+			needsPaint := true ]
+		ifFalse: [ self hasParent
+			ifTrue: [ self parent markSkippedPaint ] ]
 ]
 
 { #category : #'*Bloc-Compositor' }
@@ -153,5 +151,5 @@ BlElement >> paintOn: aCompositorPainter offset: anOffset [
 BlElement >> shouldBePainted [
 	<return: #Boolean>
 
-	^ needsPaint or: [ (self userData includesKey: #compositionLayer) not ]
+	^ self needsPaint or: [ self compositionLayer isNil ]
 ]

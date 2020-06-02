@@ -3,7 +3,8 @@ Class {
 	#superclass : #BlCompositionLayer,
 	#instVars : [
 		'picture',
-		'needsCache'
+		'needsCache',
+		'isSimple'
 	],
 	#category : #'Bloc-Compositor-Layers'
 }
@@ -21,7 +22,7 @@ BlCompositionPictureLayer >> asSkiaLayer [
 		assert: [ self picture isNotNil ]
 		description: [ 'Can not create a layer for nil picture' ].
 
-	^ (SkiaCompositionPictureLayer picture: self picture) needsCache: self needsCache
+	^ (SkiaCompositionPictureLayer picture: self picture) needsCache: self isWorthCaching
 ]
 
 { #category : #drawing }
@@ -48,6 +49,20 @@ BlCompositionPictureLayer >> initialize [
 	super initialize.
 	
 	needsCache := false
+]
+
+{ #category : #testing }
+BlCompositionPictureLayer >> isSimple [
+	<return: #Boolean>
+	
+	^ isSimple
+]
+
+{ #category : #testing }
+BlCompositionPictureLayer >> isWorthCaching [
+	<return: #Boolean>
+
+	^ self needsCache and: [ self isSimple not ]
 ]
 
 { #category : #accessing }
@@ -78,5 +93,6 @@ BlCompositionPictureLayer >> picture: anObject [
 		assert: [ anObject isNotNil ]
 		description: [ 'Picture must not be nil' ].
 		
-	picture := anObject
+	picture := anObject.
+	isSimple := picture isSimple
 ]
