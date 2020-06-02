@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #notifying }
-BlElementExtentChange >> commitChange: anNewValue on: anElement [
+BlElementExtentChange >> commitChange: anNewValue from: aPreviousValue on: anElement [
 	"Notify element event listeners that element's extent changed.
 	Custom event handlers should subscribe to BlElementExtentChangedEvent"
 

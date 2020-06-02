@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #notifying }
-BlElementPositionChange >> commitChange: anNewValue on: anElement [
+BlElementPositionChange >> commitChange: anNewValue from: aPreviousValue on: anElement [
 	"Notify element event listeners that position within parent has been changed.
 	Custom event handlers should subscribe to BlElementPositionChangedEvent"
 	
-	anElement onPositionChanged.
+	anElement onPositionChangedFrom: (aPreviousValue ifNil: [ 0@0 ]) to: anNewValue.
 	anElement onPositionInSpaceChanged.
 
 	self notifyPositionInSpaceChanged: anElement

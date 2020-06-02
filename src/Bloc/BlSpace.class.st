@@ -838,8 +838,16 @@ BlSpace >> makeDirty: aBlBounds [
 ]
 
 { #category : #'change reporting' }
-BlSpace >> markNeedsPaint: anElement [
+BlSpace >> markNeedsCompositionPaint: anElement from: aSourceElement [
 	self beDirtyArea.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ].
+	self requestNextPulse
+]
+
+{ #category : #'change reporting' }
+BlSpace >> markNeedsPaint: anElement from: aSourceElement [
+	self beDirtyArea.
+	self elementsNeedingPaint add: anElement.
 	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ].
 	self requestNextPulse
 ]

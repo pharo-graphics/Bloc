@@ -4,7 +4,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Scroller'
+	#category : #'Bloc-Infinite-Scroller'
 }
 
 { #category : #'instance creation' }
@@ -46,6 +46,4 @@ BlInfiniteScrollFlinger >> onPrepareToRun [
 
 { #category : #hooks }
 BlInfiniteScrollFlinger >> onSmoothScrolled [
-	self scrollable hasItemDecorations
-		ifTrue: [ self scrollable invalidate ]
 ]

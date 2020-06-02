@@ -22,7 +22,7 @@ BlElementChange class >> epsilon [
 ]
 
 { #category : #notifying }
-BlElementChange >> commitChange: anNewValue on: anElement [
+BlElementChange >> commitChange: anNewValue from: aPreviousValue on: anElement [
 	"Send an event letting element's event handlers know that a property changed.
 	Should be done once"
 	
@@ -42,7 +42,7 @@ BlElementChange >> commitOn: anElement [
 	(previousValue isNil or: [ (self compare: lastValue with: previousValue) not ])
 		ifTrue: [
 			records last beNotified.
-			self commitChange: lastValue on: anElement ].
+			self commitChange: lastValue from: previousValue on: anElement ].
 
 	previousValue := lastValue.
 	hasActiveChanges := false

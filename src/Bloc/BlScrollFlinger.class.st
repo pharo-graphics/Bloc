@@ -259,9 +259,6 @@ BlScrollFlinger >> run [
 			
 			aState didScroll
 				ifTrue: [ scrollable dispatchOnScrolled: aState hResult @ aState vResult ].
-			
-			scrollable awakenScrollBars
-				ifFalse: [ scrollable invalidate ].
 				
 			self runFinalizeOn: aScroller with: aState ].
 	

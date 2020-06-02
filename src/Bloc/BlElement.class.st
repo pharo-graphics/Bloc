@@ -523,7 +523,6 @@ BlElement >> border: aBlBorder [
 	self border = aBlBorder
 		ifTrue: [ ^ self ].
 
-	self invalidate.
 	border := aBlBorder.
 	self geometry releaseStrokedBoundsCache.
 	self eventDispatcher dispatchBorderChanged.
@@ -727,6 +726,25 @@ BlElement >> commitChanges [
 
 	self changes commitOn: self.
 	self childrenDo: [ :anElement | anElement commitChanges ]
+]
+
+{ #category : #'api - painting' }
+BlElement >> compositionLayer [
+	"Return my composition layer if I have one or nil otherwise"
+	<return: #BlCompositionLayer or: nil>
+	
+	^ self userData
+		at: #compositionLayer
+		ifAbsent: [ nil ]
+]
+
+{ #category : #'api - painting' }
+BlElement >> compositionLayer: aCompositionLayer [
+	"Assign a given composition layer to me"
+	
+	self userData
+		at: #compositionLayer
+		put: aCompositionLayer
 ]
 
 { #category : #'private - layout' }
@@ -975,6 +993,16 @@ BlElement >> detachChild: anElement [
 	self children remove: anElement
 ]
 
+{ #category : #'api - painting' }
+BlElement >> detachCompositionLayer [
+	"Detach my composition layer if any"
+
+	self compositionLayer
+		ifNotNil: [ :aLayer |
+			aLayer removeFromParent.
+			self compositionLayer: nil ]
+]
+
 { #category : #'children add/remove' }
 BlElement >> detachFromParentWhile: aBlock [
 	"Detach myself from a parent while evaluating a given block.
@@ -1139,7 +1167,6 @@ BlElement >> effect: anEffect [
 	
 	self flag: 'What should happen when we already have an effect?'.
 	
-	self invalidate.
 	anEffect on: self.
 	effect := anEffect.
 	self invalidate
@@ -1345,9 +1372,6 @@ BlElement >> geometry [
 
 { #category : #'api - look' }
 BlElement >> geometry: aBlGeometry [
-
-	"invalidate before changing geometry"
-	self invalidate.
 	
 	"clean the cache of the old geometry"
 	self geometry releaseCache.
@@ -1684,16 +1708,23 @@ BlElement >> invalidate [
 	Please, don't forget that elements or rendering backends may implement a rendering cache that
 	is also invalidated on every #invalidate message sent, so use me wisely."
 
-	self markNeedsPaint
+	self markNeedsPaintFrom: self
 ]
 
 { #category : #'change reporting' }
-BlElement >> invalidateInParent [
-	self isAttachedToSceneGraph
-		ifFalse: [ ^ self ].
-		
-	self hasParent
-		ifTrue: [ self parent markNeedsPaint ]
+BlElement >> invalidateAfterRelocate: anOffset [
+	"Invalidate due to relocation by a given offset"
+
+	self wantsCompositionLayer
+		ifTrue: [ self compositionLayer
+				ifNil: [ self hasParent
+						ifTrue: [ self parent invalidate ] ]
+				ifNotNil: [ :aLayer |
+					aLayer offset: aLayer offset + anOffset.
+					self isAttachedToSceneGraph
+						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ] ]
+		ifFalse: [ self hasParent
+				ifTrue: [ self parent invalidate ] ]
 ]
 
 { #category : #'change reporting' }
@@ -2081,35 +2112,22 @@ BlElement >> margin: aBlInsets [
 	self constraintsDo: [ :c | c margin: aBlInsets ]
 ]
 
-{ #category : #'change reporting' }
-BlElement >> markNeedsPaint [
-	self userData
-		removeKey: #compositionLayer
-		ifAbsent: [ ].
-
-	self isAttachedToSceneGraph
-		ifFalse: [ ^ self ].
-
+{ #category : #'api - painting' }
+BlElement >> markNeedsPaintFrom: anElement [
+	"Make me as dirty and request renderer to re-paint me.
+	anElement is the element from which the re-painting request originates"
 	needsPaint := true.
-
-	self hasParent
-		ifTrue: [ self parent markNeedsPaint ]
-		ifFalse: [ self space markNeedsPaint: self ].
-
-	"self needsPaint
-		ifTrue: [ ^ self ].
-
-	self isAttachedToSceneGraph
-		ifFalse: [ ^ self ].
-
-	needsPaint := true.
-
+	
 	self wantsCompositionLayer
-		ifTrue: [ self space markNeedsPaint: self ]
-		ifFalse: [
+		ifTrue: [
+			self isAttachedToSceneGraph
+				ifTrue: [ self space markNeedsPaint: self from: anElement ] ]
+		ifFalse: [ 
 			self hasParent
-				ifTrue: [ self parent markNeedsPaint ]
-				ifFalse: [ self space markNeedsPaint: self ] ]"
+				ifTrue: [ self parent markNeedsPaintFrom: anElement ]
+				ifFalse: [
+					self isAttachedToSceneGraph
+						ifTrue: [ self space markNeedsPaint: self from: anElement ] ] ]
 ]
 
 { #category : #'layout constraints' }
@@ -2354,8 +2372,11 @@ BlElement >> mouseCursor: aCursor [
 	mouseCursor := aCursor
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'api - painting' }
 BlElement >> needsPaint [
+	"Return true if I am marked as dirty and am wating to be re-painted"
+	<return: #Boolean>
+
 	^ needsPaint
 ]
 
@@ -2508,8 +2529,15 @@ BlElement >> onMeasure: anExtentMeasurementSpec [
 BlElement >> onPositionChanged [
 	"Is sent when my position changed within a parent"
 	
-	self invalidateInParent.
 	self notifyPositionChanged
+]
+
+{ #category : #'hooks - geometry' }
+BlElement >> onPositionChangedFrom: aPreviousPosition to: aNewPosition [
+	"Is sent when my position changed within a parent"
+	
+	self invalidateAfterRelocate: aNewPosition - aPreviousPosition.
+	self onPositionChanged
 ]
 
 { #category : #'hooks - geometry' }
@@ -2534,7 +2562,8 @@ BlElement >> onRemovedFromSceneGraph [
 	At this point #isAttachedToSceneGraph results in false.
 	Note: Always send onRemovedFromSceneGraph to super class if you override me!"
 
-	space := nil
+	space := nil.
+	self detachCompositionLayer
 ]
 
 { #category : #'hooks - geometry' }
@@ -2615,7 +2644,6 @@ BlElement >> outskirts: aBlOutskirts [
 	aBlOutskirts = self outskirts
 		ifTrue: [ ^ self ].
 
-	self invalidate.
 	outskirts := aBlOutskirts.
 	self geometry releaseStrokedBoundsCache.
 	self invalidate
@@ -2712,7 +2740,7 @@ BlElement >> position: aPosition extent: anExtent [
 	Note, I do not request layout update and do not send invalidate to myself if only
 	position changes, instead I send invalidate with my effect bounds in parent coordinates
 	to my parent. It allows developers to implement drawing cache"
-	| isPositionChanged isExtentChanged aPreviousExtent isGrowing isShrinking aPreviousPosition | 
+	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition | 
 	
 	self
 		assert: [ aPosition x isInfinite not and: [ aPosition y isInfinite not ] ]
@@ -2731,20 +2759,6 @@ BlElement >> position: aPosition extent: anExtent [
 	"nothing changed, return"
 	(isPositionChanged or: [ isExtentChanged ])
 		ifFalse: [ ^ self ].
-
-	"If we are growing, there is no need to invalidate before extent change"
-	isGrowing := aPreviousExtent <= anExtent.
-	"if we are shrinking, there is no need to invalidate after extent change"
-	isShrinking := aPreviousExtent >= anExtent.
-
-	"damage area according to my previous space bounds"
-	(isPositionChanged or: [ isShrinking or: [ isGrowing not ] ])
-		ifTrue: [
-			isExtentChanged
-				"If extent changes we have to invalidate my own damaged area"
-				ifTrue: [ self invalidate ]
-				"Otherwise invalidate in my parent"
-				ifFalse: [ self invalidateInParent ] ].
 
 	isPositionChanged ifTrue: [
 		"change my position"
@@ -3306,8 +3320,11 @@ BlElement >> space [
 	Each element has a reference to the current space which is set at demand."
 	<return: #BlSpace>
 	
-	space ifNotNil:[^ space].
-	 self parent ifNotNil: [ :p | space := p space ].
+	space
+		ifNotNil: [ ^ space ].
+	
+	self parent ifNotNil: [ :eachParent | space := eachParent space ].
+	
 	^ space
 ]
 
@@ -3316,7 +3333,10 @@ BlElement >> space: aSpace [
 	"Set space to be accessed directly from my multiple methods.
 	Update the space reference for my children.
 	aSpace must not be nil."
-	self assert: aSpace isNotNil.
+	self
+		assert: [ aSpace isNotNil ]
+		description: [ 'Space must not be nil' ].
+
 	space := aSpace.
 	self childrenDo: [ :each | each space: aSpace ]
 ]
@@ -3377,8 +3397,6 @@ BlElement >> transformation [
 
 { #category : #transformations }
 BlElement >> transformation: anElementTransformation [
-
-	self invalidate.
 	transformation := anElementTransformation owner: self.
 	self boundsCache invalidateBoundsInSpace.
 	self invalidate.
@@ -3537,6 +3555,9 @@ BlElement >> wantsCompositionBufferLayer [
 
 { #category : #testing }
 BlElement >> wantsCompositionLayer [
+	"Return true if I should be painted in my own composition layer (if supported)"
+	<return: #Boolean>
+
 	^ self userData
 		at: #wantsCompositionLayer
 		ifAbsent: [ false ]

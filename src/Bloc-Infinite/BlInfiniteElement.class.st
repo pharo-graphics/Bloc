@@ -1834,9 +1834,6 @@ BlInfiniteElement >> scrollByInternal: aDeltaPoint from: anEventPoint [
 	self onExitLayoutOrScroll.
 	self resumeRequestLayout: false.
 	
-	self hasItemDecorations
-		ifTrue: [ self invalidate ].
-	
 	self overScrollMode ~= BlOverScrollMode never
 		ifTrue: [ 
 			anEventPoint ifNotNil: [ 
@@ -1845,9 +1842,6 @@ BlInfiniteElement >> scrollByInternal: aDeltaPoint from: anEventPoint [
 	
 	(consumedX isZero and: [ consumedY isZero ])
 		ifFalse: [ self dispatchOnScrolled: consumedX @ consumedY ].
-		
-	self awakenScrollBars
-		ifFalse: [ self invalidate ].
 	
 	^ consumedX isZero not or: [ consumedY isZero not ]
 ]
