@@ -63,3 +63,8 @@ BlElementEffect >> postCopy [
 	super postCopy.
 	input := nil
 ]
+
+{ #category : #testing }
+BlElementEffect >> wantsCompositionLayer [
+	^ false
+]

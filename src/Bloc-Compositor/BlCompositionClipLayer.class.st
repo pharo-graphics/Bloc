@@ -42,10 +42,12 @@ BlCompositionClipLayer >> path: anObject [
 
 { #category : #'private - clipping' }
 BlCompositionClipLayer >> pushCircle: aSpartaCircle [
+	^ SkiaCompositionClipLayer rectangle: aSpartaCircle asRectangle offset: self offset
 ]
 
 { #category : #'private - clipping' }
 BlCompositionClipLayer >> pushEllipse: aSpartaEllipse [
+	^ SkiaCompositionClipLayer rectangle: aSpartaEllipse asRectangle offset: self offset
 ]
 
 { #category : #'private - clipping' }

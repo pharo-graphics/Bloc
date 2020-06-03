@@ -123,7 +123,7 @@ BlElement >> paintMeAndChildrenOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintOn: aCompositorPainter offset: anOffset [
-	| aCanvas isOriginal |
+	| isOriginal |
 	
 	"For performance reasons we would like to limit amount of access
 	to the painter's canvas. To do so we detect before-hand if there is anything
@@ -136,15 +136,17 @@ BlElement >> paintOn: aCompositorPainter offset: anOffset [
 
 	(isOriginal and: [ self shouldDrawBackgroundOrBorder not ])
 		ifTrue: [ ^ self ].
-	
-	aCanvas := aCompositorPainter canvas.
-	aCanvas transform
-		by: [ :t | t translateBy: anOffset ]
-		during: [
-			self effect
-				applyEffectOnSpartaCanvas: aCanvas
-				for: self
-				around: [ :anEffectCanvas | self drawOnSpartaCanvas: anEffectCanvas ] ]
+		
+	self effect
+		paintOn: aCompositorPainter
+		offset: anOffset
+		for: self
+		thenPaint: [ :anEffectPainter :anEffectOffset |
+			| aCanvas |
+			aCanvas := anEffectPainter canvas.
+			aCanvas transform
+				by: [ :t | t translateBy: anEffectOffset ]
+				during: [ self drawOnSpartaCanvas: aCanvas ] ]
 ]
 
 { #category : #'*Bloc-Compositor' }

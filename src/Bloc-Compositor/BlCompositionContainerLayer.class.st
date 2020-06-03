@@ -20,6 +20,9 @@ BlCompositionContainerLayer >> asSkiaLayer [
 	| aLayer theChildLayers |
 
 	aLayer := self newSkiaLayer.
+	self
+		assert: [ aLayer isKindOf: SkiaCompositionLayer ]
+		description: [ 'Must be Skia composition layer' ].
 	theChildLayers := self children collect: [ :eachLayer | eachLayer asSkiaLayer ].
 	theChildLayers do: [ :eachLayer | aLayer addLayer: eachLayer ].
 	

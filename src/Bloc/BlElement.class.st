@@ -3560,9 +3560,9 @@ BlElement >> wantsCompositionLayer [
 	"Return true if I should be painted in my own composition layer (if supported)"
 	<return: #Boolean>
 
-	^ self userData
+	^ (self userData
 		at: #wantsCompositionLayer
-		ifAbsent: [ false ]
+		ifAbsent: [ false ]) or: [ self effect wantsCompositionLayer ]
 ]
 
 { #category : #'event handling' }

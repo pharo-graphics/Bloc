@@ -30,7 +30,7 @@ BlSpartaOpenGLCompositingSpaceRenderer >> initializeForSurface: aSurface [
 
 { #category : #'as yet unclassified' }
 BlSpartaOpenGLCompositingSpaceRenderer >> logCr [
-	NonInteractiveTranscript stdout cr
+	"NonInteractiveTranscript stdout cr"
 ]
 
 { #category : #'as yet unclassified' }
@@ -41,9 +41,9 @@ BlSpartaOpenGLCompositingSpaceRenderer >> logTime: aName during: aBlock [
 	
 	aBlock value.
 	
-	NonInteractiveTranscript stdout
+	"NonInteractiveTranscript stdout
 		nextPutAll: aName; space;
-		nextPutAll: ((DateAndTime now - start) asMicroseconds / 1000.0) asString, 'ms'; cr.
+		nextPutAll: ((DateAndTime now - start) asMicroseconds / 1000.0) asString, 'ms'; cr."
 ]
 
 { #category : #rendering }

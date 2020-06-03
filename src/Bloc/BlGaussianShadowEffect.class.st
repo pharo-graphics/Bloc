@@ -94,6 +94,11 @@ BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 	offset := aPoint asPoint
 ]
 
+{ #category : #testing }
+BlGaussianShadowEffect >> wantsCompositionLayer [
+	^ true
+]
+
 { #category : #accessing }
 BlGaussianShadowEffect >> width [
 	<return: #Number>

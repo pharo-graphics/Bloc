@@ -235,6 +235,33 @@ BlCompositionPainter >> pushOpacity: anAlpha offset: anOffset bounds: aRectangle
 ]
 
 { #category : #'api - layer' }
+BlCompositionPainter >> pushShadow: aShadowPath shadowOffset: aShadowOffset shadowColor: aShadowColor shadowWidth: aShadowWidth offset: anOffset bounds: aRectangle compositing: wantsCompositingLayer thenPaint: aPaintBlock [
+	
+	wantsCompositingLayer
+		ifTrue: [
+			self
+				pushLayer: (BlCompositionShadowLayer new
+					offset: anOffset;
+					shadowOffset: aShadowOffset;
+					shadowColor: aShadowColor;
+					shadowWidth: aShadowWidth)
+				offset: anOffset
+				bounds: aRectangle
+				buffered: false
+				thenPaint: aPaintBlock ]
+		ifFalse: [
+			self canvas stroke
+				path: aShadowPath;
+				paint: (self canvas paint boxShadow
+					color: aShadowColor;
+					offset: aShadowOffset + anOffset;
+					radius: aShadowWidth);
+				width: aShadowWidth;
+				draw.
+			aPaintBlock cull: self cull: anOffset ]
+]
+
+{ #category : #'api - layer' }
 BlCompositionPainter >> pushTransform: aMatrix offset: anOffset bounds: aRectangleOrNull compositing: wantsCompositing buffered: wantsBufferedCompositing thenPaint: aPaintBlock [
 
 	(self shouldCreateNewLayer: wantsCompositing)
