@@ -7,6 +7,17 @@ Class {
 	#category : #'Bloc-Compositor-Painter'
 }
 
+{ #category : #comparing }
+BlCompositionPainterStateClip >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ offset = anObject offset and: [ clip = anObject clip ]
+]
+
 { #category : #accessing }
 BlCompositionPainterStateClip >> clip [
 	^ clip
@@ -20,6 +31,13 @@ BlCompositionPainterStateClip >> clip: anObject [
 { #category : #accessing }
 BlCompositionPainterStateClip >> commandString [
 	^ self clip asString
+]
+
+{ #category : #comparing }
+BlCompositionPainterStateClip >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ offset hash bitXor: clip hash
 ]
 
 { #category : #hook }

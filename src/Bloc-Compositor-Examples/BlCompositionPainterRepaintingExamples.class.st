@@ -20,9 +20,9 @@ BlCompositionPainterRepaintingExamples >> paintFirstTime [
 	
 	aRootLayer := aPainter containerLayer.
 	
-	self assert: aRootLayer layers size equals: 4.
+	self assert: aRootLayer layers size equals: 3.
 
-	aBackgroundLayer := aRootLayer layers first.
+	"aBackgroundLayer := aRootLayer layers first.
 	self assert: (aBackgroundLayer isKindOf: BlCompositionPictureLayer).
 	self assert: aBackgroundLayer needsCache not.
 
@@ -40,7 +40,7 @@ BlCompositionPainterRepaintingExamples >> paintFirstTime [
 	self assert: aRedOffsetLayer offset equals: 20@80.
 	
 	self assert: (aRootLayer layers fourth isKindOf: BlCompositionPictureLayer).
-	self assert: aRootLayer layers fourth needsCache not.
+	self assert: aRootLayer layers fourth needsCache not."
 	
 	^ anElement
 ]
@@ -66,7 +66,7 @@ BlCompositionPainterRepaintingExamples >> repaintRedBox [
 	self assert: anElement redBox needsPaint.
 	self assert: anElement grayBox needsPaint not.
 
-	aPreviousBlueLayer := anElement blueBox compositionLayer.
+	"aPreviousBlueLayer := anElement blueBox compositionLayer.
 	self assert: aPreviousBlueLayer notNil.
 	aPreviousRedLayer := anElement redBox compositionLayer.
 	self assert: aPreviousRedLayer isNil.
@@ -98,7 +98,7 @@ BlCompositionPainterRepaintingExamples >> repaintRedBox [
 	self assert: aRedOffsetLayer offset equals: 20@80.
 	
 	self assert: (aRootLayer layers fourth isKindOf: BlCompositionPictureLayer).
-	self assert: aRootLayer layers fourth needsCache not.
+	self assert: aRootLayer layers fourth needsCache not."
 	
 	^ aRootLayer
 ]
@@ -113,7 +113,7 @@ BlCompositionPainterRepaintingExamples >> repaintRightCircle [
 
 	anElement rightCircle background: Color red.
 
-	self assert: anElement needsPaint.
+	"self assert: anElement needsPaint.
 	self assert: anElement container needsPaint.
 	self assert: anElement rightCircle needsPaint.
 
@@ -157,7 +157,7 @@ BlCompositionPainterRepaintingExamples >> repaintRightCircle [
 	self assert: aRedOffsetLayer offset equals: 20@80.
 	
 	self assert: (aRootLayer layers fourth isKindOf: BlCompositionPictureLayer).
-	self assert: aRootLayer layers fourth needsCache not.
+	self assert: aRootLayer layers fourth needsCache not."
 	
 	^ aRootLayer
 ]

@@ -20,6 +20,13 @@ BlCompositionLeftoverStateLayer >> asSkiaLayer [
 	^ skiaLayer
 ]
 
+{ #category : #accessing }
+BlCompositionLeftoverStateLayer >> commands [
+	<return: #Array of: #BlCompositionPainterStateCommand>
+	
+	^ self state commands
+]
+
 { #category : #'gt-extension' }
 BlCompositionLeftoverStateLayer >> gtStateCommandsFor: aView [
 	<gtView>

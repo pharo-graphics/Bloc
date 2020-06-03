@@ -17,6 +17,16 @@ BlCompositionPainterState >> applyOnLayer: aSkiaLayer [
 	commands reverseDo: [ :eachCommand | eachCommand pushOnLayer: aSkiaLayer ]
 ]
 
+{ #category : #'api - commands' }
+BlCompositionPainterState >> commands [
+	"Return a snapshot of current commands as an array"
+	<return: #Array of: #BlCompositionPainterStateCommand>
+	
+	^ Array
+		new: commands size
+		streamContents: [ :aStream | commands reverseDo: [ :eachCommand | aStream nextPut: eachCommand ] ]
+]
+
 { #category : #initialization }
 BlCompositionPainterState >> initialize [
 	super initialize.
