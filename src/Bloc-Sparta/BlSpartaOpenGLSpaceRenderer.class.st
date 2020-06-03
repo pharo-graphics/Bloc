@@ -1,6 +1,6 @@
 Class {
 	#name : #BlSpartaOpenGLSpaceRenderer,
-	#superclass : #BlSpartaSpaceRenderer,
+	#superclass : #BlSpartaHardwareAcceleratedSpaceRenderer,
 	#category : #'Bloc-Sparta-Renderer'
 }
 

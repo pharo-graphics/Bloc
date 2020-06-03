@@ -33,17 +33,6 @@ BlCompositionPictureLayer >> drawOnSpartaCanvas: aCanvas [
 		draw
 ]
 
-{ #category : #'gt-extension' }
-BlCompositionPictureLayer >> gtPictureFor: aView [
-	<gtView>
-	^ aView explicit
-		title: 'Picture';
-		priority: 5;
-		stencil: [ self picture
-			ifNil: [ BlElement new ]
-			ifNotNil: [ self picture asForm asElement ] ]
-]
-
 { #category : #initialization }
 BlCompositionPictureLayer >> initialize [
 	super initialize.

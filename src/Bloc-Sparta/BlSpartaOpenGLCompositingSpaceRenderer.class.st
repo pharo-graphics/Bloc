@@ -1,11 +1,11 @@
 Class {
 	#name : #BlSpartaOpenGLCompositingSpaceRenderer,
-	#superclass : #BlSpartaSpaceRenderer,
+	#superclass : #BlSpartaHardwareAcceleratedSpaceRenderer,
 	#instVars : [
 		'compositor',
 		'rootLayer'
 	],
-	#category : #'Bloc-Compositor-Painter'
+	#category : #'Bloc-Sparta-Renderer'
 }
 
 { #category : #rendering }
@@ -96,9 +96,7 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 				
 			self
 				logTime: '[draw]'
-				during: [
-					spartaCanvas surfaceCanvas clear: Color transparent.
-					
+				during: [					
 					spartaCanvas transform
 						by: [ :t | t scaleBy: scaleFactor asPoint ]
 						during: [ compositor draw: skiaLayer on: spartaCanvas ]. ].

@@ -35,6 +35,8 @@ BaselineOfBloc >> baseline: spec [
 				spec repository: 'github://feenkcom/Bloc/src' ];
 			baseline: 'Sparta' with: [
 				spec repository: 'github://feenkcom/Sparta/src' ];
+			baseline: 'SpartaSkia' with: [
+				spec repository: 'github://feenkcom/Sparta/src' ];
 			baseline: 'TaskIt' with: [
 				spec repository: 'github://sbragagnolo/taskit:v1.0.2' ];
 			baseline: 'GToolkitExamplesEngine' with: [
@@ -59,7 +61,7 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Text-Elements' with: [
 				spec requires: #(#BlocCore 'Bloc-Text' 'Bloc-Text-Rope' ). ];
 			package: #'Bloc-Sparta' with: [
-				spec requires: #(#BlocCore 'Bloc-Text' #Sparta ). ];
+				spec requires: #(#BlocCore 'Bloc-Text' #Sparta 'Bloc-Compositor'). ];
 			package: #'Bloc-Exporter' with: [
 				spec requires: #(#BlocCore 'Bloc-Sparta' ). ];
 			package: #'Bloc-DevTool' with: [
@@ -77,7 +79,16 @@ BaselineOfBloc >> baseline: spec [
 			spec
 				package: #'BlocHost-Morphic7' with: [
 					spec requires: #(#BlocCore ). ] ].
-
+		
+		"Compositor"
+		spec
+			package: #'Bloc-Compositor' with: [
+				spec requires: #(#BlocCore SpartaSkia). ];
+			package: #'Bloc-Compositor-Examples' with: [
+				spec requires: #('Bloc-Compositor' 'Bloc-Examples'). ];
+			package: #'Bloc-Compositor-GToolkit' with: [
+				spec requires: #('Bloc-Compositor'). ].
+		
 		spec
 			package: #'BlocHost-Glutin' with: [
 				spec requires: #(#BlocCore 'Bloc-Sparta' Glutin). ];

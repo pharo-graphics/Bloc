@@ -277,7 +277,7 @@ BlCompositionPainter >> startRecording [
 	canvas := SkiaCanvas recording: bounds.
 	
 	"the new recording canvas should inherit current clip and transformation"
-	state applyOn: canvas.
+	state applyOnCanvas: canvas.
 
 	containerLayer addLayer: pictureLayer
 ]
