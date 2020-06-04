@@ -96,7 +96,8 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 				
 			self
 				logTime: '[draw]'
-				during: [					
+				during: [	
+					spartaCanvas surfaceCanvas clear: Color transparent.
 					spartaCanvas transform
 						by: [ :t | t scaleBy: scaleFactor asPoint ]
 						during: [ compositor draw: skiaLayer on: spartaCanvas ]. ].
