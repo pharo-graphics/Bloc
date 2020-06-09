@@ -538,6 +538,13 @@ BlBlocUIManager >> spawnNewBlocProcess: aUniverse [
 ]
 
 { #category : #services }
+BlBlocUIManager >> syntaxErrorNotificationDefaultAction: anException [
+	^ BlBlocUIManagerNotification
+		requestOrNil: #syntaxErrorNotificationDefaultAction:
+		with: {anException}
+]
+
+{ #category : #services }
 BlBlocUIManager >> textEntry: aStringOrText title: aString entryText: defaultEntryText [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #textEntry:title:entryText:
