@@ -134,7 +134,7 @@ BlElement >> paintOn: aCompositorPainter offset: anOffset [
 			do: [ :aClass :m | aClass == BlElement ]
 			ifAbsent: [ true ] ].
 
-	(isOriginal and: [ self shouldDrawBackgroundOrBorder not ])
+	(isOriginal and: [ self shouldDrawBackgroundOrBorder not and: [ self effect isNullEffect ] ])
 		ifTrue: [ ^ self ].
 		
 	self effect

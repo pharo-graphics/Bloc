@@ -51,6 +51,11 @@ BlElementEffect >> input: anElementOrEffect [
 	input := anElementOrEffect
 ]
 
+{ #category : #testing }
+BlElementEffect >> isNullEffect [
+	^ false
+]
+
 { #category : #initialization }
 BlElementEffect >> on: anElement [
 	self input 

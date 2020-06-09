@@ -3,3 +3,8 @@ Class {
 	#superclass : #BlElementEffect,
 	#category : #'Bloc-Effect'
 }
+
+{ #category : #testing }
+BlNullEffect >> isNullEffect [
+	^ true
+]
