@@ -244,7 +244,8 @@ BlCompositionPainter >> pushShadow: aShadowPath shadowOffset: aShadowOffset shad
 					offset: anOffset;
 					shadowOffset: aShadowOffset;
 					shadowColor: aShadowColor;
-					shadowWidth: aShadowWidth)
+					shadowWidth: aShadowWidth;
+					shadowPath: aShadowPath)
 				offset: anOffset
 				bounds: aRectangle
 				buffered: false

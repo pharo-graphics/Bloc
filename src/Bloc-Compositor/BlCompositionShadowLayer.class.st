@@ -1,8 +1,7 @@
 Class {
 	#name : #BlCompositionShadowLayer,
-	#superclass : #BlCompositionContainerLayer,
+	#superclass : #BlCompositionOffsetLayer,
 	#instVars : [
-		'offset',
 		'shadowOffset',
 		'shadowColor',
 		'shadowWidth',
@@ -11,6 +10,24 @@ Class {
 	#category : #'Bloc-Compositor-Layers'
 }
 
+{ #category : #converting }
+BlCompositionShadowLayer >> asSkiaLayer [
+	|  aShadowLayer theChildLayers |
+
+	aShadowLayer := self newSkiaLayer.
+	
+	theChildLayers := self children collect: [ :eachLayer | eachLayer asSkiaLayer ].
+	theChildLayers do: [ :eachLayer | aShadowLayer addLayer: eachLayer ].
+	
+	^ self offset isZero
+		ifTrue: [ aShadowLayer ]
+		ifFalse: [
+			| anOffsetLayer |
+			anOffsetLayer := super newSkiaLayer.
+			anOffsetLayer addLayer: aShadowLayer.
+			anOffsetLayer ]
+]
+
 { #category : #accessing }
 BlCompositionShadowLayer >> name [
 	^ 'Shadow'
@@ -18,17 +35,17 @@ BlCompositionShadowLayer >> name [
 
 { #category : #converting }
 BlCompositionShadowLayer >> newSkiaLayer [
-	^ SkiaCompositionOffsetLayer offset: self offset
-]
+	<return: #SkiaCompositionShadowLayer>
+	| aSkiaLayer |
+	
+	aSkiaLayer := SkiaCompositionShadowLayer
+		color: self shadowColor
+		radius: self shadowWidth asPoint
+		offset: self shadowOffset.
 
-{ #category : #accessing }
-BlCompositionShadowLayer >> offset [
-	^ offset
-]
-
-{ #category : #accessing }
-BlCompositionShadowLayer >> offset: anObject [
-	offset := anObject
+	self shadowPath spartaClipOn: self with: aSkiaLayer.
+	
+	^ aSkiaLayer
 ]
 
 { #category : #accessing }
