@@ -5,7 +5,8 @@ BlGaussianShadowEffect >> paintOn: aCompositorPainter offset: anOffset for: anEl
 	aCompositorPainter
 		pushShadow: (anElement geometry pathOnSpartaCanvas: aCompositorPainter canvas)
 		shadowOffset: offset
-		shadowColor: color shadowWidth: width
+		shadowColor: color
+		shadowWidth: width
 		offset: anOffset
 		bounds: anElement invalidationBounds
 		compositing: anElement wantsCompositionLayer

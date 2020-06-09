@@ -40,7 +40,7 @@ BlCompositionShadowLayer >> newSkiaLayer [
 	
 	aSkiaLayer := SkiaCompositionShadowLayer
 		color: self shadowColor
-		radius: self shadowWidth asPoint
+		radius: (self shadowWidth / 1.2) asPoint
 		offset: self shadowOffset.
 
 	self shadowPath spartaClipOn: self with: aSkiaLayer.
