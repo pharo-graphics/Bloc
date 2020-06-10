@@ -1725,13 +1725,15 @@ BlElement >> invalidateAfterRelocate: anOffset [
 	"Invalidate due to relocation by a given offset"
 
 	self wantsCompositionLayer
-		ifTrue: [ self compositionLayer
-				ifNil: [ self hasParent
-						ifTrue: [ self parent invalidate ] ]
-				ifNotNil: [ :aLayer |
+		ifTrue: [ self hasCompositionLayer
+				ifTrue: [
+					| aLayer |
+					aLayer := self compositionLayer.
 					aLayer offset: aLayer offset + anOffset.
 					self isAttachedToSceneGraph
-						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ] ]
+						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
+				ifFalse: [ self hasParent
+						ifTrue: [ self parent invalidate ] ] ]
 		ifFalse: [ self hasParent
 				ifTrue: [ self parent invalidate ] ]
 ]

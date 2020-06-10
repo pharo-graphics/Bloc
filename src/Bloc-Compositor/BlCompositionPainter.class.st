@@ -21,9 +21,9 @@ BlCompositionPainter class >> repaintCompositedElement: anElement [
 		nextPutAll: anElement asString;
 		cr."
 
-	anOffsetLayer := anElement compositionLayer
-		ifNil: [ BlCompositionOffsetLayer new ]
-		ifNotNil: [ :aLayer | aLayer removeAllLayers ].
+	anOffsetLayer := anElement hasCompositionLayer
+		ifTrue: [ anElement compositionLayer removeAllLayers ]
+		ifFalse: [ BlCompositionOffsetLayer new ].
 
 	aPainter := self new
 		containerLayer: anOffsetLayer;

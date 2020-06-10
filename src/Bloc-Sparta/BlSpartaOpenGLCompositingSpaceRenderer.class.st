@@ -80,15 +80,17 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 								during: [
 									(eachElement shouldBePainted and: [ eachElement isAttachedToSceneGraph ])
 										ifTrue: [
-											eachElement compositionLayer
-												ifNil: [ eachElement markSkippedPaint ]
-												ifNotNil: [ BlCompositionPainter repaintCompositedElement: eachElement ] ] ] ] ].
+											eachElement hasCompositionLayer
+												ifTrue: [ BlCompositionPainter repaintCompositedElement: eachElement ]
+												ifFalse: [ eachElement markSkippedPaint ] ] ] ] ].
 
-			aRootLayer := aSpace root compositionLayer ifNil: [
-				self
-				logTime: '[repaint root]'
-				during: [ BlCompositionPainter repaintCompositedElement: aSpace root. ]  ].
-			
+			aRootLayer := aSpace root hasCompositionLayer
+				ifTrue: [ aSpace root compositionLayer ]
+				ifFalse: [
+					self
+						logTime: '[repaint root]'
+						during: [ BlCompositionPainter repaintCompositedElement: aSpace root ]  ].
+	
 			aRootLayer computeNeedsComposition.
 			
 			self

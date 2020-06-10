@@ -80,11 +80,18 @@ BlElement >> fullPaintWithTransformOn: aCompositorPainter offset: anOffset [
 ]
 
 { #category : #'*Bloc-Compositor' }
+BlElement >> hasCompositionLayer [
+	<return: #Boolean>
+
+	^ self compositionLayer isNotNil and: [ self compositionLayer isValid ]
+]
+
+{ #category : #'*Bloc-Compositor' }
 BlElement >> markSkippedPaint [
 	self wantsCompositionLayer
 		ifTrue: [
-			self compositionLayer
-				ifNil: [ ^ self ].
+			self hasCompositionLayer
+				ifFalse: [ ^ self ].
 			needsPaint := true ]
 		ifFalse: [ self hasParent
 			ifTrue: [ self parent markSkippedPaint ] ]
@@ -153,5 +160,5 @@ BlElement >> paintOn: aCompositorPainter offset: anOffset [
 BlElement >> shouldBePainted [
 	<return: #Boolean>
 
-	^ self needsPaint or: [ self compositionLayer isNil ]
+	^ self needsPaint or: [ self hasCompositionLayer not ]
 ]

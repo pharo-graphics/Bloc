@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'parent',
-		'needsComposition'
+		'needsComposition',
+		'session'
 	],
 	#category : #'Bloc-Compositor-Layers'
 }
@@ -56,7 +57,15 @@ BlCompositionLayer >> hasParent [
 BlCompositionLayer >> initialize [
 	super initialize.
 	
-	needsComposition := true
+	needsComposition := true.
+	session := Smalltalk session
+]
+
+{ #category : #testing }
+BlCompositionLayer >> isValid [
+	<return: #Boolean>
+	
+	^ session == Smalltalk session
 ]
 
 { #category : #'private - composition' }

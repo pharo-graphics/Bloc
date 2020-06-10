@@ -1,6 +1,6 @@
 Class {
 	#name : #BlCompositionShadowLayer,
-	#superclass : #BlCompositionOffsetLayer,
+	#superclass : #BlCompositionWithOffsetLayer,
 	#instVars : [
 		'shadowOffset',
 		'shadowColor',

@@ -1,6 +1,6 @@
 Class {
 	#name : #BlCompositionTransformationLayer,
-	#superclass : #BlCompositionOffsetLayer,
+	#superclass : #BlCompositionWithOffsetLayer,
 	#instVars : [
 		'matrix'
 	],
