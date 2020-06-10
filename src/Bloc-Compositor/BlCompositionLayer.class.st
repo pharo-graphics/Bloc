@@ -29,6 +29,11 @@ BlCompositionLayer >> cleanNeedsComposition [
 ]
 
 { #category : #'private - composition' }
+BlCompositionLayer >> cleanNeedsCompositionFromAllLayers [
+	self cleanNeedsComposition
+]
+
+{ #category : #'private - composition' }
 BlCompositionLayer >> computeNeedsComposition [
 	
 ]

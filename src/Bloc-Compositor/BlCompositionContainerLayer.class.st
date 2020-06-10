@@ -35,6 +35,12 @@ BlCompositionContainerLayer >> children [
 ]
 
 { #category : #'private - composition' }
+BlCompositionContainerLayer >> cleanNeedsCompositionFromAllLayers [
+	super cleanNeedsCompositionFromAllLayers.
+	self layers do: [ :eachLayer | eachLayer cleanNeedsCompositionFromAllLayers ]
+]
+
+{ #category : #'private - composition' }
 BlCompositionContainerLayer >> computeNeedsComposition [
 	self layers do: [ :eachLayer |
 		eachLayer computeNeedsComposition.

@@ -33,7 +33,10 @@ BlCompositionPainter class >> repaintCompositedElement: anElement [
 	anElement fullPaintWithTransformOn: aPainter offset: 0@0.
 
 	aPainter stopRecording.
-	anElement compositionLayer: anOffsetLayer
+	anElement wantsCompositionLayer
+		ifTrue: [ anElement compositionLayer: anOffsetLayer ].
+	
+	^ anOffsetLayer
 ]
 
 { #category : #'instance creation' }

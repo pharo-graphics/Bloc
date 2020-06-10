@@ -35,15 +35,17 @@ BlSpartaOpenGLCompositingSpaceRenderer >> logCr [
 
 { #category : #'as yet unclassified' }
 BlSpartaOpenGLCompositingSpaceRenderer >> logTime: aName during: aBlock [
-	| start |
+	| start result |
 	
 	start := DateAndTime now.
 	
-	aBlock value.
+	result := aBlock value.
 	
 	"NonInteractiveTranscript stdout
 		nextPutAll: aName; space;
-		nextPutAll: ((DateAndTime now - start) asMicroseconds / 1000.0) asString, 'ms'; cr."
+		nextPutAll: ((DateAndTime now - start) asMicroseconds / 1000.0) asString, 'ms'; cr.".
+		
+	^ result
 ]
 
 { #category : #rendering }
@@ -85,14 +87,15 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 			aRootLayer := aSpace root compositionLayer ifNil: [
 				self
 				logTime: '[repaint root]'
-				during: [ BlCompositionPainter repaintCompositedElement: aSpace root. ].
-				aSpace root compositionLayer  ].
+				during: [ BlCompositionPainter repaintCompositedElement: aSpace root. ]  ].
 			
 			aRootLayer computeNeedsComposition.
 			
 			self
 				logTime: '[asSkiaLayer]'
 				during: [ skiaLayer := aRootLayer asSkiaLayer ].
+				
+			aRootLayer cleanNeedsCompositionFromAllLayers.
 				
 			self
 				logTime: '[draw]'
@@ -104,12 +107,11 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 
 			self
 				logTime: '[flush]'
-				during: [ spartaCanvas flush. ].
+				during: [ spartaCanvas flush ].
 
 			self
 				logTime: '[release]'
-				during: [ skiaLayer release. ].		
-		].
+				during: [ skiaLayer release ] ].
 	
 	self logCr.
 	
