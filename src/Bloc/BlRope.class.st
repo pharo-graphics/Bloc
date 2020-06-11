@@ -148,6 +148,8 @@ BlRope >> at: anIndex [
 
 { #category : #'rope - attributes' }
 BlRope >> attributes: anAttributesCollection [
+
+	anAttributesCollection ifEmpty: [ ^self ].
 	^ self attributes: anAttributesCollection from: 0 to: self size
 ]
 
