@@ -7,6 +7,7 @@ Class {
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
+		'id',
 		'deferredActions',
 		'postponedActions',
 		'eventDispatcher',
@@ -16,6 +17,7 @@ Class {
 		'isPulsing'
 	],
 	#classVars : [
+		'UniqueIdGenerator',
 		'Universes',
 		'UniversesMutex'
 	],
@@ -54,11 +56,22 @@ BlParallelUniverse class >> forHost: aHostClass [
 { #category : #'class initialization' }
 BlParallelUniverse class >> initialize [
 	Universes := #().
-	UniversesMutex := Mutex new
+	UniversesMutex := Mutex new.
+	UniqueIdGenerator := BlUniqueIdGenerator new
+]
+
+{ #category : #accessing }
+BlParallelUniverse class >> universeWithId: aUniverseId do: aBlock [
+	^ self allSubInstances
+		detect: [ :eachUniverse | eachUniverse id = aUniverseId ]
+		ifFound: aBlock
+		ifNone: [ nil ]
 ]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
+	aSpace isOpened
+		ifFalse: [ ^ self ].
 	self defer: [ self closeSpaceSynchronously: aSpace ]
 ]
 
@@ -70,7 +83,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 		assert: [ aSpace isNotNil ]
 		description: [ 'Space must not be nil' ].
 
-	"If space is not event opened we should do nothing"
+	"If space is not even opened we should do nothing"
 	aSpace isOpened
 		ifFalse: [ ^ self ].
 		
@@ -142,9 +155,7 @@ BlParallelUniverse >> defer: aValuable [
 	"#defer: can be used from any thread to execute a valuable in the GUI thread at the beginning of the next pulse.
 	You can use it to update the GUI states from any other thread"
 
-	(BlParallelUniverseDeferredActionAddedSignal new
-		universe: self;
-		action: aValuable) emit.
+	(BlParallelUniverseDeferredActionAddedSignal new universeId: self id) emit.
 
 	deferredActions nextPut: aValuable
 ]
@@ -189,9 +200,18 @@ BlParallelUniverse >> hostClass: aHostClass [
 	hostClass := aHostClass
 ]
 
+{ #category : #accessing }
+BlParallelUniverse >> id [
+	<return: #Number>
+	
+	^ id
+]
+
 { #category : #initialization }
 BlParallelUniverse >> initialize [
 	super initialize.
+
+	id := UniqueIdGenerator generateUniqueId.
 
 	spaceManager := BlSpaceManager new.
 	hostClass := BlHeadlessHost.
@@ -224,8 +244,8 @@ BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
 
 	(BlParallelUniverseOpenSpaceRequestSignal new
-		universe: self;
-		space: aSpace;
+		universeId: self id;
+		spaceId: aSpace id;
 		isRunning: aSpace host isRunning) emit.
 
 	self defer: [ self openSpaceSynchronously: aSpace ].
@@ -233,16 +253,16 @@ BlParallelUniverse >> openSpace: aSpace [
 	aSpace host isRunning
 		ifFalse: [
 			(BlParallelUniverseHostStartRequestSignal new
-				universe: self;
-				space: aSpace;
-				host: aSpace host) emit.
+				universeId: self id;
+				spaceId: aSpace id;
+				host: aSpace host class) emit.
 			
 			self startUniverse.
 			
 			(BlParallelUniverseHostStartedSignal new
-				universe: self;
-				space: aSpace;
-				host: aSpace host;
+				universeId: self id;
+				spaceId: aSpace id;
+				host: aSpace host class;
 				isRunning: aSpace host isRunning) emit ]
 ]
 
@@ -268,23 +288,21 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 	spaceManager addSpace: aSpace.
 	
 	(BlParallelUniverseSpaceAddedSignal new
-		universe: self;
-		space: aSpace) emit.
+		universeId: self id;
+		spaceId: aSpace id) emit.
 
 	"then create and show it in a host space"
 	aSpace host createHostSpaceFor: aSpace.
 	
 	(BlParallelUniverseHostSpaceCreatedSignal new
-		universe: self;
-		space: aSpace;
-		hostSpace: aSpace hostSpace) emit.
+		universeId: self id;
+		spaceId: aSpace id) emit.
 
 	aSpace hostSpace show.
 	
 	(BlParallelUniverseHostSpaceShownSignal new
-		universe: self;
-		space: aSpace;
-		hostSpace: aSpace hostSpace) emit.
+		universeId: self id;
+		spaceId: aSpace id) emit.
 
 	self
 		assert: [ aSpace hasHostSpace ]
@@ -298,14 +316,14 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 	aSpace root space: aSpace.
 	
 	(BlParallelUniverseSpaceRootAssignedSignal new
-		universe: self;
-		space: aSpace) emit.
+		universeId: self id;
+		spaceId: aSpace id) emit.
 	
 	aSpace root dispatchAddedToSceneGraph.
 	
 	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
-		universe: self;
-		space: aSpace) emit
+		universeId: self id;
+		spaceId: aSpace id) emit
 ]
 
 { #category : #'api - ui process' }
@@ -385,13 +403,11 @@ BlParallelUniverse >> stopUniverse [
 BlParallelUniverse >> tryToRunDeferredActions [
 	| nextInQueue |
 
-	(BlParallelUniverseTryToRunDeferredActionsSignal new universe: self) emit.
+	(BlParallelUniverseTryToRunDeferredActionsSignal new universeId: self id) emit.
 
 	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
 		whileTrue: [
-			(BlParallelUniverseRunDeferredActionSignal new
-				universe: self;
-				action: nextInQueue) emit.
+			(BlParallelUniverseRunDeferredActionSignal new universeId: self id) emit.
 			nextInQueue value ]
 ]
 

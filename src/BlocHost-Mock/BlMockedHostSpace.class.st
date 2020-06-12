@@ -151,7 +151,7 @@ BlMockedHostSpace >> icon: aForm [
 BlMockedHostSpace >> initialize [
 	super initialize.
 
-	eventFetcher := BlHostEventFetcher new.
+	eventFetcher := BlHostEventFetcher hostSpace: self.
 
 	visible := false.
 	minimized := false.

@@ -119,7 +119,9 @@ BlSpaceFrame >> phases [
 
 { #category : #running }
 BlSpaceFrame >> runCurrentPhaseOn: aSpace [
-	self currentPhase runOn: aSpace
+	aSpace telemetry
+		timeSync: self currentPhase name
+		during: [ self currentPhase runOn: aSpace ]
 ]
 
 { #category : #running }

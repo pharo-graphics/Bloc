@@ -23,12 +23,14 @@ BlParallelUniverseHostStartedSignal class >> nextSignals [
 
 { #category : #accessing }
 BlParallelUniverseHostStartedSignal >> host [
+	<return: #'BlHost class'>
+
 	^ host
 ]
 
 { #category : #accessing }
-BlParallelUniverseHostStartedSignal >> host: anObject [
-	host := anObject
+BlParallelUniverseHostStartedSignal >> host: aBlHostClass [
+	host := aBlHostClass
 ]
 
 { #category : #accessing }

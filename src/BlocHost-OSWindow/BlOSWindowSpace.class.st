@@ -98,7 +98,7 @@ BlOSWindowSpace >> hide [
 BlOSWindowSpace >> initialize [
 	super initialize.
 	
-	eventFetcher := BlHostEventFetcher new
+	eventFetcher := BlHostEventFetcher hostSpace: self.
 ]
 
 { #category : #initialization }

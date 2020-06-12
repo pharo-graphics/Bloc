@@ -97,7 +97,7 @@ BlHeadlessHostSpace >> icon: aForm [
 BlHeadlessHostSpace >> initialize [
 	super initialize.
 	
-	eventFetcher := BlHostEventFetcher new
+	eventFetcher := BlHostEventFetcher hostSpace: self.
 ]
 
 { #category : #'host space - testing' }

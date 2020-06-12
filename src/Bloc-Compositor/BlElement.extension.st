@@ -39,10 +39,13 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 		ifTrue: [
 			needsPaint := false.
 			^ self ].
-
-	(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer)
-		ifTrue: [ self fullPaintCompositedOn: aCompositorPainter offset: anOffset + self position ]
-		ifFalse: [ self fullPaintWithTransformOn: aCompositorPainter offset: anOffset + self position ].
+		
+	self telemetry
+		timeSync: [ 'Paint ', self class name ]
+		during: [
+			(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer)
+				ifTrue: [ self fullPaintCompositedOn: aCompositorPainter offset: anOffset + self position ]
+				ifFalse: [ self fullPaintWithTransformOn: aCompositorPainter offset: anOffset + self position ]. ].
 
 	needsPaint := false
 ]
@@ -74,7 +77,7 @@ BlElement >> fullPaintWithTransformOn: aCompositorPainter offset: anOffset [
 				offset: anOffset
 				bounds: self invalidationBounds
 				compositing: self wantsCompositionLayer
-				buffered: self wantsCompositionBufferLayer
+				buffered: false
 				thenPaint: [ :aTransformCompositorPainter :aTransformOffset |
 					self paintMeAndChildrenOn: aTransformCompositorPainter offset: aTransformOffset ] ]
 ]

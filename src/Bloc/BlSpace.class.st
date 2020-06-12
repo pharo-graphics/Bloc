@@ -3,7 +3,7 @@ I am the logical representation of a window in Bloc regardless the current Host 
 
 !! Gracefully closing the image when a space is closed
 
-A common use-case is to shutdown Pharo when some particular space is closed. To do so we provide ${class:BlSpaceShutdownOnCloseListener} which can be added to any space as an event handler. It listens to ${class:BlSpaceClosedEvent} which is sent after a space is closed. See the listener class for configuration options.
+A common use-case is to shutdown Pharo when some particular space is closed. To do so we provide ${class:BlSpaceShutdownOnCloseListener}$ which can be added to any space as an event handler. It listens to ${class:BlSpaceClosedEvent}$ which is sent after a space is closed. See the listener class for configuration options.
 "
 Class {
 	#name : #BlSpace,
@@ -11,6 +11,7 @@ Class {
 	#traits : 'TBlEventTarget + TBlSpaceProperties + TBlDebug',
 	#classTraits : 'TBlEventTarget classTrait + TBlSpaceProperties classTrait + TBlDebug classTrait',
 	#instVars : [
+		'id',
 		'host',
 		'hostSpace',
 		'extent',
@@ -40,10 +41,19 @@ Class {
 		'touchProcessor',
 		'frame',
 		'gestureProcessor',
-		'elementsNeedingPaint'
+		'elementsNeedingPaint',
+		'telemetry'
+	],
+	#classVars : [
+		'UniqueIdGenerator'
 	],
 	#category : #'Bloc-Space'
 }
+
+{ #category : #'class initialization' }
+BlSpace class >> initialize [
+	UniqueIdGenerator := BlUniqueIdGenerator new
+]
 
 { #category : #'debug - simulation' }
 BlSpace class >> locationInside: anElement [
@@ -233,6 +243,14 @@ BlSpace class >> simulateMouseUpOn: anElement [
 		on: anElement
 ]
 
+{ #category : #'class initialization' }
+BlSpace class >> spaceWithId: aSpaceId do: aBlock [
+	^ self allSubInstances
+		detect: [ :eachSpace | eachSpace id = aSpaceId ]
+		ifFound: aBlock
+		ifNone: [ nil ]
+]
+
 { #category : #'api - adding children' }
 BlSpace >> addChild: anElement [
 	"Add a given element as a direct child to the space root"
@@ -346,7 +364,8 @@ BlSpace >> densityDpi [
 
 { #category : #'api - tasks' }
 BlSpace >> dequeueTask: aBlTask [
-	self taskQueue dequeue: aBlTask
+	self taskQueue dequeue: aBlTask.
+	self requestNextPulse
 ]
 
 { #category : #'host space - accessing' }
@@ -455,12 +474,14 @@ BlSpace >> elementsNeedingPaint [
 BlSpace >> enqueueTask: aBlTask [
 	aBlTask onEnqueued: self.
 	self taskQueue enqueue: aBlTask.
+	self requestNextPulse
 ]
 
 { #category : #'api - tasks' }
 BlSpace >> enqueueTasksFrom: aTaskQueue [
 	aTaskQueue tasks do: [ :eachTask | eachTask onEnqueued: self ].	
-	self taskQueue enqueueFrom: aTaskQueue
+	self taskQueue enqueueFrom: aTaskQueue.
+	self requestNextPulse
 ]
 
 { #category : #pulse }
@@ -714,6 +735,13 @@ BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
 	^ aBlock cull: self hostSpace
 ]
 
+{ #category : #accessing }
+BlSpace >> id [
+	<return: #Number>
+	
+	^ id
+]
+
 { #category : #initialization }
 BlSpace >> initDispatcher [
 	self eventDispatcher addEventFilter: self eventListener
@@ -722,7 +750,9 @@ BlSpace >> initDispatcher [
 { #category : #initialization }
 BlSpace >> initialize [
 	super initialize.
-
+	
+	id := UniqueIdGenerator generateUniqueId.
+	
 	host := BlHost pickHost.
 	nextPulseRequested := true.
 	session := Smalltalk session.
@@ -743,6 +773,7 @@ BlSpace >> initialize [
 	tasks := BlTaskQueue new.
 	time := BlTime real.
 	frame := BlSpaceFrame new.
+	telemetry := BlNullTelemetry new.
 
 	root := self defaultRoot.
 
@@ -917,10 +948,18 @@ BlSpace >> printOn: aStream [
 { #category : #pulse }
 BlSpace >> processPulse [
 	self ensureSession.
+	
+	self pulseRequested
+		ifFalse: [ ^ self ].
+	
+	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
+	nextPulseRequested := false.
 
-	self frame runOn: self.
-
-	nextPulseRequested := false
+	self telemetry
+		reset;
+		timeSync: 'Frame'
+			during: [ self frame runOn: self ];
+		emit.
 ]
 
 { #category : #pulse }
@@ -1028,7 +1067,7 @@ BlSpace >> rootDo: aBlock [
 BlSpace >> runTasks [
 	"Run animations and other runnable tasks"
 
-	self taskQueue run
+	self taskQueue runOn: self
 ]
 
 { #category : #accessing }
@@ -1070,6 +1109,18 @@ BlSpace >> taskQueue [
 	<return: #BlTaskQueue>
 	
 	^ tasks
+]
+
+{ #category : #accessing }
+BlSpace >> telemetry [
+	<return: #BlTelemetry>
+	
+	^ telemetry
+]
+
+{ #category : #accessing }
+BlSpace >> telemetry: aBlTelemetry [
+	telemetry := aBlTelemetry
 ]
 
 { #category : #accessing }

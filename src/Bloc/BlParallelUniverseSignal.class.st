@@ -2,8 +2,7 @@ Class {
 	#name : #BlParallelUniverseSignal,
 	#superclass : #BeaconSignal,
 	#instVars : [
-		'universe',
-		'universeID'
+		'universeId'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
@@ -33,12 +32,11 @@ BlParallelUniverseSignal class >> nextSignals [
 ]
 
 { #category : #accessing }
-BlParallelUniverseSignal >> universe [
-	^ universe
+BlParallelUniverseSignal >> universeId [
+	^ universeId
 ]
 
 { #category : #accessing }
-BlParallelUniverseSignal >> universe: aParallelUniverse [
-	universe := aParallelUniverse.
-	universeID := aParallelUniverse identityHash
+BlParallelUniverseSignal >> universeId: aNumber [
+	universeId := aNumber
 ]

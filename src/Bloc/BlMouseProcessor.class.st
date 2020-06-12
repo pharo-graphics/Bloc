@@ -145,7 +145,7 @@ BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsDropEvent: anEvent [
-
+	
 	self	fireEvent:
 			(anEvent asDropEvent
 				gestureSource: currentDragTarget;

@@ -84,7 +84,7 @@ BlPullHandler >> disallowOutOfBounds [
 
 { #category : #'event handling' }
 BlPullHandler >> dragEndEvent: anEvent [
-	anEvent consumed: true.
+	"anEvent consumed: true."
 	
 	anEvent currentTarget dispatchEvent: BlPullEndEvent new
 ]

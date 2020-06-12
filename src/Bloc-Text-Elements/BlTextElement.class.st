@@ -322,7 +322,10 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 		maxHeight: aMaxHeight;
 		scale: self globalScale.
 
-	paragraph measureOn: self measurer.
+	self telemetry
+		timeSync: [ 'Paragraph measureOn: ', self class name ]
+		during: [ paragraph measureOn: self measurer ].
+
 	"text layout is measured at this point"
 
 	aMeasuredBounds := measurement boundsOf: paragraph.
@@ -377,9 +380,14 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 		description: [ 'Text model must be nil!' ].
 
 	(self shouldMeasure: anExtentMeasurementSpec)
-		ifTrue: [ self measureParagraph: anExtentMeasurementSpec ].
+		ifTrue: [ 
+			self telemetry
+				timeSync: [ 'Measure paragraph: ', self class name ]
+				during: [ self measureParagraph: anExtentMeasurementSpec ] ].
 	
-	self measureChildren: anExtentMeasurementSpec
+	self telemetry
+		timeSync: [ 'Measure children: ', self class name ]
+		during: [ self measureChildren: anExtentMeasurementSpec ]
 ]
 
 { #category : #'children hooks' }

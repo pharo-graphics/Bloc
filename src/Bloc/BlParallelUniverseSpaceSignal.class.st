@@ -2,7 +2,7 @@ Class {
 	#name : #BlParallelUniverseSpaceSignal,
 	#superclass : #BlParallelUniverseSignal,
 	#instVars : [
-		'space'
+		'spaceId'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
@@ -13,11 +13,13 @@ BlParallelUniverseSpaceSignal class >> isAbstract [
 ]
 
 { #category : #accessing }
-BlParallelUniverseSpaceSignal >> space [
-	^ space
+BlParallelUniverseSpaceSignal >> spaceId [
+	<return: #Number>
+
+	^ spaceId
 ]
 
 { #category : #accessing }
-BlParallelUniverseSpaceSignal >> space: anObject [
-	space := anObject
+BlParallelUniverseSpaceSignal >> spaceId: aNumber [
+	spaceId := aNumber
 ]

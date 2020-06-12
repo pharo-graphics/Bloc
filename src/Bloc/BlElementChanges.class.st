@@ -36,7 +36,10 @@ BlElementChanges >> commitOn: anElement [
 	"Commit all accumulated changes done to the given element.
 	As the result, all changes are marked as comitted"
 
-	self changesDo: [ :aChange | aChange commitOn: anElement ]
+	self changesDo: [ :aChange |
+		anElement telemetry
+			timeSync: [ 'Commit ', aChange class name ]
+			during: [ aChange commitOn: anElement ] ]
 ]
 
 { #category : #'api - changes' }

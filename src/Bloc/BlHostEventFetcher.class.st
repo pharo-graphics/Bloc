@@ -7,17 +7,29 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'eventQueue'
+		'eventQueue',
+		'hostSpace'
 	],
 	#category : #'Bloc-Universe - Host'
 }
+
+{ #category : #accessing }
+BlHostEventFetcher class >> hostSpace: aBlHostSpace [
+	^ self basicNew initialize hostSpace: aBlHostSpace
+]
+
+{ #category : #accessing }
+BlHostEventFetcher class >> new [
+	self error: 'Do not create an instance of ', self name, ' using new. Please use #hostSpace: instead'
+]
 
 { #category : #'event processing' }
 BlHostEventFetcher >> enqueueEvent: aBlEvent [
 	"Enqueue a given Bloc Event in the event queue.
 	Do not use me directly, instead rely on #enqueueEvent: from HostSpace"
 
-	eventQueue nextPut: aBlEvent
+	eventQueue nextPut: aBlEvent.
+	self hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
 ]
 
 { #category : #'event processing' }
@@ -28,6 +40,16 @@ BlHostEventFetcher >> fetchedEventsDo: aBlock [
 	theEvents := LinkedList new.
 	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
 	theEvents do: aBlock
+]
+
+{ #category : #accessing }
+BlHostEventFetcher >> hostSpace [
+	^ hostSpace
+]
+
+{ #category : #accessing }
+BlHostEventFetcher >> hostSpace: anObject [
+	hostSpace := anObject
 ]
 
 { #category : #'initialize-release' }

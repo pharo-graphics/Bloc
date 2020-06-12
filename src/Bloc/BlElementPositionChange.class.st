@@ -12,10 +12,17 @@ BlElementPositionChange >> commitChange: anNewValue from: aPreviousValue on: anE
 	"Notify element event listeners that position within parent has been changed.
 	Custom event handlers should subscribe to BlElementPositionChangedEvent"
 	
-	anElement onPositionChangedFrom: (aPreviousValue ifNil: [ 0@0 ]) to: anNewValue.
-	anElement onPositionInSpaceChanged.
-
-	self notifyPositionInSpaceChanged: anElement
+	anElement telemetry
+		timeSync: [ 'onPositionChanged ', anElement class name ]
+		during: [ anElement onPositionChangedFrom: (aPreviousValue ifNil: [ 0@0 ]) to: anNewValue. ].
+	
+	anElement telemetry
+		timeSync: [ 'onPositionInSpaceChanged ', anElement class name ]
+		during: [ anElement onPositionInSpaceChanged ].
+		
+	anElement telemetry
+		timeSync: [ 'notifyPositionInSpaceChanged: ', anElement class name ]
+		during: [ self notifyPositionInSpaceChanged: anElement ]
 ]
 
 { #category : #comparing }

@@ -368,8 +368,11 @@ BlElement >> applyLayoutSafelyIn: aRectangle [
 
 	"if my extent did not change and if I or any of my children did not request layout we do nothing"
 	(extentChanged or: [ self isLayoutRequested ])
-		ifTrue: [ self onLayout: aRectangle ].
-		
+		ifTrue: [
+			self telemetry
+				timeSync: [ 'Layout ', self class name ]
+				during: [ self onLayout: aRectangle ] ].
+
 	"we are done, mark that there are no layout requests pending"
 	self layout requestingLayout: false
 ]
@@ -508,9 +511,7 @@ BlElement >> baselineOffset [
 BlElement >> beInSeparateCompositionLayer [
 	"Make me that I want to be rendered in a separate composition layer"
 
-	self userData
-		at: #wantsCompositionLayer
-		put: true
+	misc wantsCompositionLayer: true
 ]
 
 { #category : #'api - look' }
@@ -733,8 +734,13 @@ BlElement >> clipChildren: anObject [
 BlElement >> commitChanges [
 	"Commit all accumulated element changes since previous commit"
 
-	self changes commitOn: self.
-	self childrenDo: [ :anElement | anElement commitChanges ]
+	self telemetry
+		timeSync: [ 'Commit me ', self class name ]
+		during: [ self changes commitOn: self ].
+
+	self telemetry
+		timeSync: [ 'Commit children ', self class name ]
+		during: [ self childrenDo: [ :anElement | anElement commitChanges ] ]
 ]
 
 { #category : #'api - painting' }
@@ -1721,7 +1727,7 @@ BlElement >> invalidate [
 ]
 
 { #category : #'change reporting' }
-BlElement >> invalidateAfterRelocate: anOffset [
+BlElement >> invalidateAfterFrom: aPreviousPosition to: aNewPosition [
 	"Invalidate due to relocation by a given offset"
 
 	self wantsCompositionLayer
@@ -1729,7 +1735,25 @@ BlElement >> invalidateAfterRelocate: anOffset [
 				ifTrue: [
 					| aLayer |
 					aLayer := self compositionLayer.
-					aLayer offset: aLayer offset + anOffset.
+					aLayer offset: aLayer offset + aNewPosition - aPreviousPosition.
+					self isAttachedToSceneGraph
+						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
+				ifFalse: [ self hasParent
+						ifTrue: [ self parent invalidate ] ] ]
+		ifFalse: [ self hasParent
+				ifTrue: [ self parent invalidate ] ]
+]
+
+{ #category : #'change reporting' }
+BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
+	"Invalidate due to relocation by a given offset"
+
+	self wantsCompositionLayer
+		ifTrue: [ self hasCompositionLayer
+				ifTrue: [
+					| aLayer |
+					aLayer := self compositionLayer.
+					aLayer offset: aLayer offset + aNewPosition - aPreviousPosition.
 					self isAttachedToSceneGraph
 						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
 				ifFalse: [ self hasParent
@@ -2238,8 +2262,9 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 	self layout previousMeasurementSpec: anExtentMeasurementSpec.
 
 	"Perform measuring algorithm"
-	self onMeasure: anExtentMeasurementSpec.
-	
+	self telemetry
+		timeSync: [ 'Measure ', self class name ]
+		during: [ self onMeasure: anExtentMeasurementSpec ]
 ]
 
 { #category : #'private - layout' }
@@ -2516,7 +2541,7 @@ BlElement >> onLayout: aBounds [
 	If needed override this method to do some additional actions.
 	@see BlLayoutStrategy>>#layout: self in: aBounds - override if
 	custom layout strategy is needed"
-	
+
 	self layout layout: self in: aBounds
 ]
 
@@ -2547,7 +2572,7 @@ BlElement >> onPositionChanged [
 BlElement >> onPositionChangedFrom: aPreviousPosition to: aNewPosition [
 	"Is sent when my position changed within a parent"
 	
-	self invalidateAfterRelocate: aNewPosition - aPreviousPosition.
+	self invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition.
 	self onPositionChanged
 ]
 
@@ -3109,7 +3134,7 @@ BlElement >> requestLayout: anElement [
 
 	self layout requestingLayout: true.
 	"checking for parent to be not nil is faster when inlined instead
-	of using withParent:. It is critical because this method is being
+	of using hasParent. It is critical because this method is being
 	sent quite often and should be performant"
 	self parent
 		ifNotNil: [ :aParent | aParent requestLayout: anElement ]
@@ -3352,6 +3377,11 @@ BlElement >> space: aSpace [
 	self childrenDo: [ :each | each space: aSpace ]
 ]
 
+{ #category : #accessing }
+BlElement >> spaceDo: aBlock [
+	self space ifNotNil: aBlock
+]
+
 { #category : #layout }
 BlElement >> supportsBaseline [
 	"Return true if I support baseline alignment"
@@ -3378,6 +3408,15 @@ BlElement >> taskQueue [
 	<return: #BlTaskQueue>
 	
 	^ taskQueue
+]
+
+{ #category : #accessing }
+BlElement >> telemetry [
+	<return: #BlTelemetry>
+
+	^ self space
+		ifNil: [ BlNullTelemetry uniqueInstance ]
+		ifNotNil: [ :aSpace | aSpace telemetry ]
 ]
 
 { #category : #'children accessing' }
@@ -3544,27 +3583,11 @@ BlElement >> visualBoundsOn: aCanvas [
 ]
 
 { #category : #testing }
-BlElement >> wantCompositionBufferLayer [
-	self userData
-		at: #wantsCompositionBufferLayer
-		put: true
-]
-
-{ #category : #testing }
-BlElement >> wantsCompositionBufferLayer [
-	^ self userData
-		at: #wantsCompositionBufferLayer
-		ifAbsent: [ false ]
-]
-
-{ #category : #testing }
 BlElement >> wantsCompositionLayer [
 	"Return true if I should be painted in my own composition layer (if supported)"
 	<return: #Boolean>
 
-	^ (self userData
-		at: #wantsCompositionLayer
-		ifAbsent: [ false ]) or: [ self effect wantsCompositionLayer ]
+	^ misc wantsCompositionLayer or: [ self effect wantsCompositionLayer ]
 ]
 
 { #category : #'event handling' }

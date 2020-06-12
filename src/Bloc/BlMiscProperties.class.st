@@ -9,7 +9,8 @@ Class {
 		'mouseTransparent',
 		'userData',
 		'debug',
-		'label'
+		'label',
+		'wantsCompositionLayer'
 	],
 	#category : #'Bloc-Basic-Support'
 }
@@ -49,6 +50,7 @@ BlMiscProperties >> initialize [
 	super initialize.
 	
 	clipChildren := true.
+	wantsCompositionLayer := false.
 	userData := IdentityDictionary new.
 	debug := false.
 	label := ''.
@@ -75,4 +77,16 @@ BlMiscProperties >> userData [
 { #category : #accessing }
 BlMiscProperties >> userData: aDict [
 	userData := aDict
+]
+
+{ #category : #accessing }
+BlMiscProperties >> wantsCompositionLayer [
+	<return: #Boolean>
+
+	^ wantsCompositionLayer
+]
+
+{ #category : #accessing }
+BlMiscProperties >> wantsCompositionLayer: aBoolean [
+	wantsCompositionLayer := aBoolean
 ]

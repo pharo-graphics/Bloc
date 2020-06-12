@@ -81,7 +81,7 @@ BlTaskQueue >> initialize [
 ]
 
 { #category : #'api - running' }
-BlTaskQueue >> run [
+BlTaskQueue >> runOn: aSpace [
 	| theTasks |
 	
 	lock critical: [
@@ -91,8 +91,10 @@ BlTaskQueue >> run [
 		tasks := #() ].
 
 	"since we have an immutble reference to original array, there is need to execute task within a lock"
-	theTasks do: [ :aTask | 
-		BlTaskExecutionSignal for: aTask block: [ aTask run ] ]
+	theTasks do: [ :aTask |
+		aSpace telemetry
+			timeSync: [ 'Run task ', aTask class name ]
+			during: [ BlTaskExecutionSignal for: aTask block: [ aTask run ] ] ]
 ]
 
 { #category : #'api - accessing' }

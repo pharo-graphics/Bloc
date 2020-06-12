@@ -12,7 +12,9 @@ BlElementExtentChange >> commitChange: anNewValue from: aPreviousValue on: anEle
 	"Notify element event listeners that element's extent changed.
 	Custom event handlers should subscribe to BlElementExtentChangedEvent"
 
-	anElement onExtentChanged
+	anElement telemetry
+		timeSync: [ 'onExtentChanged ', anElement class name ]
+		during: [ anElement onExtentChanged ]
 ]
 
 { #category : #comparing }

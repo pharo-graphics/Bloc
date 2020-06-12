@@ -116,7 +116,7 @@ BlGlutinHostSpace >> initialize [
 
 	mousePosition := GtFensterPhysicalPosition new.
 	scaleFactor := nil.
-	eventFetcher := BlHostEventFetcher new.
+	eventFetcher := BlHostEventFetcher hostSpace: self.
 	modifiers := BlKeyModifiers new
 ]
 
@@ -277,13 +277,13 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 
 { #category : #'event - visiting' }
 BlGlutinHostSpace >> visitMainEventsCleared: anEvent [
-	| aBlocEvent |	
+	"| aBlocEvent |	
 
 	aBlocEvent := BlSpaceWakeUpEvent new
 		timestamp: self space time now;
 		yourself.
 		
-	self enqueueEvent: aBlocEvent
+	self enqueueEvent: aBlocEvent"
 ]
 
 { #category : #'event - visiting' }

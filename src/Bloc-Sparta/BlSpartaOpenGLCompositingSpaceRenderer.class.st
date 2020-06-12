@@ -63,20 +63,20 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 	compositor isNull
 		ifTrue: [ ^ self ].
 	
-	self
-		logTime: '[renderSpace]'
+	aSpace telemetry
+		timeSync: 'Render space'
 		during: [
 			elementsToRepaint := aSpace elementsNeedingPaint collect: [ :eachElement | eachElement -> eachElement compositionDepth ] as: Array.
 			elementsToRepaint sort: [ :a :b | a value > b value ].
 			
-			self
-				logTime: '[repaint]'
+			aSpace telemetry
+				timeSync: 'Repaint'
 				during: [
 					elementsToRepaint
 						collect: [ :eachAssociation | eachAssociation key ]
 						thenDo: [ :eachElement |
-							self
-								logTime: '[', eachElement asString, ']'
+							aSpace telemetry
+								timeSync: [ 'Paint ', eachElement class asString ]
 								during: [
 									(eachElement shouldBePainted and: [ eachElement isAttachedToSceneGraph ])
 										ifTrue: [
@@ -87,33 +87,29 @@ BlSpartaOpenGLCompositingSpaceRenderer >> renderSpace: aSpace [
 			aRootLayer := aSpace root hasCompositionLayer
 				ifTrue: [ aSpace root compositionLayer ]
 				ifFalse: [
-					self
-						logTime: '[repaint root]'
+					aSpace telemetry
+						timeSync: 'Repaint root'
 						during: [ BlCompositionPainter repaintCompositedElement: aSpace root ]  ].
 	
 			aRootLayer computeNeedsComposition.
 			
-			self
-				logTime: '[asSkiaLayer]'
+			aSpace telemetry
+				timeSync: 'As Skia layer'
 				during: [ skiaLayer := aRootLayer asSkiaLayer ].
 				
 			aRootLayer cleanNeedsCompositionFromAllLayers.
 				
-			self
-				logTime: '[draw]'
+			aSpace telemetry
+				timeSync: 'Draw'
 				during: [	
 					spartaCanvas surfaceCanvas clear: Color transparent.
 					spartaCanvas transform
 						by: [ :t | t scaleBy: scaleFactor asPoint ]
 						during: [ compositor draw: skiaLayer on: spartaCanvas ]. ].
-
-			self
-				logTime: '[flush]'
-				during: [ spartaCanvas flush ].
-
-			self
-				logTime: '[release]'
-				during: [ skiaLayer release ] ].
+			
+			aSpace telemetry
+				timeSync: 'Flush'
+				during: [ spartaCanvas flush ] ].
 	
 	self logCr.
 	
