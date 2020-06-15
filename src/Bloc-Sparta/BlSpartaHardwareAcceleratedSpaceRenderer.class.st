@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 BlSpartaHardwareAcceleratedSpaceRenderer class >> defaultUseCompositor [
-	^ false
+	^ true
 ]
 
 { #category : #settings }
