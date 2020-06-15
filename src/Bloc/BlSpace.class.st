@@ -986,7 +986,11 @@ BlSpace >> removeChild: anElement [
 BlSpace >> render [
 	"Render this space in my host window if it is assigned, otherwise do nothing"
 
-	self hostSpaceDo: [ :aHostSpace | aHostSpace render: self ]
+	self
+		hostSpaceDo: [ :aHostSpace | aHostSpace render: self ]
+		"if there is no host we should clear dirty areas, otherwise
+		it may lead to memory leaks"
+		ifAbsent: [ self clearDirtyAreas ]
 ]
 
 { #category : #'focus managing' }
