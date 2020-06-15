@@ -114,7 +114,7 @@ BlRopeableCollectionFile >> copyFrom: startIndex to: endIndex [
 	[ receiverIndex <= endIndex ] whileTrue:
 		[ bufferIndex > bufferedSize ifTrue: 
 			[ self ensureBuffered: receiverIndex.
-			bufferIndex := receiverIndex - bufferStart + 1 ].
+			bufferIndex := receiverIndex - bufferStart ].
 		results at: resultIndex put: (buffer at: bufferIndex).
 		receiverIndex := receiverIndex + 1.
 		resultIndex := resultIndex + 1.
@@ -156,7 +156,7 @@ BlRopeableCollectionFile >> ensureBuffered: anInteger [
 	not discarding and creating on each iteration"
 
 	[ (anInteger > (bufferStart + bufferedSize - 1)) or: [ bufferStart = 0 ] ] whileTrue:
-		[ bufferStart := mapEntry key.
+		[ bufferStart := bufferStart + bufferedSize.
 		rawBuffer := characterStream next: bufferSize.
 		buffer := normalizer process: rawBuffer.
 		bufferedSize := buffer size.
