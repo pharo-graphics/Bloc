@@ -35,8 +35,8 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 			needsPaint := false.
 			^ self ].
 	
-	(self width isZero or: [ self height isZero ])
-		ifTrue: [
+	self invalidationBounds hasPositiveExtent
+		ifFalse: [
 			needsPaint := false.
 			^ self ].
 		
