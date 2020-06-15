@@ -4,7 +4,7 @@ I contain examples of a collection rope
 Class {
 	#name : #BlCollectionRopeExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - attributes' }
@@ -31,7 +31,7 @@ BlCollectionRopeExamples >> attributes_small_0_to_0 [
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 0.
 
 	self assert: anAttributedRope left attributes equals: { 1 }.
-	self assert: anAttributedRope left rope collection equals: ''.
+	self assert: anAttributedRope left rope asString equals: ''.
 
 	self assert: anAttributedRope right == aRope.
 
@@ -47,9 +47,9 @@ BlCollectionRopeExamples >> attributes_small_0_to_1 [
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 1.
 
 	self assert: anAttributedRope left attributes equals: { 1 }.
-	self assert: anAttributedRope left rope collection equals: 'H'.
+	self assert: anAttributedRope left rope asString equals: 'H'.
 
-	self assert: anAttributedRope right collection equals: 'ello'.
+	self assert: anAttributedRope right asString equals: 'ello'.
 
 	^ anAttributedRope
 ]
@@ -76,12 +76,12 @@ BlCollectionRopeExamples >> attributes_small_2_to_2 [
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 2 to: 2.
 
-	self assert: anAttributedRope left collection equals: 'He'.
+	self assert: anAttributedRope left asString equals: 'He'.
 
-	self assert: anAttributedRope right left rope collection equals: ''.
+	self assert: anAttributedRope right left rope asString equals: ''.
 	self assert: anAttributedRope right left attributes equals: { 1 }.
 
-	self assert: anAttributedRope right right collection equals: 'llo'.
+	self assert: anAttributedRope right right asString equals: 'llo'.
 
 	^ anAttributedRope
 ]
@@ -94,10 +94,10 @@ BlCollectionRopeExamples >> attributes_small_4_to_5 [
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 4 to: 5.
 
-	self assert: anAttributedRope left collection equals: 'Hell'.
+	self assert: anAttributedRope left asString equals: 'Hell'.
 
 	self assert: anAttributedRope right attributes equals: { 1 }.
-	self assert: anAttributedRope right rope collection equals: 'o'.
+	self assert: anAttributedRope right rope asString equals: 'o'.
 
 	^ anAttributedRope
 ]
@@ -110,10 +110,10 @@ BlCollectionRopeExamples >> attributes_small_5_to_5 [
 	aRope := self small.
 	anAttributedRope := aRope attributes: { 1 } from: 5 to: 5.
 
-	self assert: anAttributedRope left collection equals: 'Hello'.
+	self assert: anAttributedRope left asString equals: 'Hello'.
 
 	self assert: anAttributedRope right attributes equals: { 1 }.
-	self assert: anAttributedRope right rope collection equals: ''.
+	self assert: anAttributedRope right rope asString equals: ''.
 
 	^ anAttributedRope
 ]
@@ -199,7 +199,7 @@ BlCollectionRopeExamples >> small_delete_0_to_1 [
 	aNewRope := aRope delete: 0 to: 1.
 	
 	self assert: aNewRope size equals: 4.
-	self assert: aNewRope collection equals: 'ello'.
+	self assert: aNewRope asString equals: 'ello'.
 	
 	^ aNewRope
 ]
@@ -213,7 +213,7 @@ BlCollectionRopeExamples >> small_delete_0_to_5 [
 	aNewRope := aRope delete: 0 to: 5.
 	
 	self assert: aNewRope size equals: 0.
-	self assert: aNewRope collection equals: ''.
+	self assert: aNewRope asString equals: ''.
 	
 	^ aNewRope
 ]
@@ -240,7 +240,7 @@ BlCollectionRopeExamples >> small_delete_1_to_3 [
 	aNewRope := aRope delete: 1 to: 3.
 	
 	self assert: aNewRope size equals: 3.
-	self assert: aNewRope collection equals: 'Hlo'.
+	self assert: aNewRope asString equals: 'Hlo'.
 
 	^ aNewRope
 ]
@@ -254,7 +254,7 @@ BlCollectionRopeExamples >> small_delete_1_to_5 [
 	aNewRope := aRope delete: 1 to: 5.
 	
 	self assert: aNewRope size equals: 1.
-	self assert: aNewRope collection equals: 'H'.
+	self assert: aNewRope asString equals: 'H'.
 	
 	^ aNewRope
 ]
@@ -268,7 +268,7 @@ BlCollectionRopeExamples >> small_delete_4_to_5 [
 	aNewRope := aRope delete: 4 to: 5.
 	
 	self assert: aNewRope size equals: 4.
-	self assert: aNewRope collection equals: 'Hell'.
+	self assert: aNewRope asString equals: 'Hell'.
 
 	^ aNewRope
 ]
@@ -320,7 +320,7 @@ BlCollectionRopeExamples >> small_empty [
 	anEmpty := aRope empty.
 
 	self assert: anEmpty size equals: 0.
-	self assert: anEmpty collection equals: ''.
+	self assert: anEmpty asString equals: ''.
 
 	^ anEmpty
 ]
@@ -334,7 +334,7 @@ BlCollectionRopeExamples >> small_from_0_to_0 [
 	aNewRope := aRope from: 0 to: 0.
 	
 	self assert: aNewRope size equals: 0.
-	self assert: aNewRope collection equals: ''.
+	self assert: aNewRope asString equals: ''.
 	
 	^ aNewRope
 ]
@@ -361,7 +361,7 @@ BlCollectionRopeExamples >> small_from_0_to_1 [
 	aNewRope := aRope from: 0 to: 1.
 	
 	self assert: aNewRope size equals: 1.
-	self assert: aNewRope collection equals: 'H'.
+	self assert: aNewRope asString equals: 'H'.
 	
 	^ aNewRope
 ]
@@ -414,7 +414,7 @@ BlCollectionRopeExamples >> small_from_1_to_1 [
 	aNewRope := aRope from: 1 to: 1.
 	
 	self assert: aNewRope size equals: 0.
-	self assert: aNewRope collection equals: ''.
+	self assert: aNewRope asString equals: ''.
 	
 	^ aNewRope
 ]
@@ -441,7 +441,7 @@ BlCollectionRopeExamples >> small_from_1_to_2 [
 	aNewRope := aRope from: 1 to: 2.
 	
 	self assert: aNewRope size equals: 1.
-	self assert: aNewRope collection equals: 'e'.
+	self assert: aNewRope asString equals: 'e'.
 	
 	^ aNewRope
 ]
@@ -468,7 +468,7 @@ BlCollectionRopeExamples >> small_from_1_to_5 [
 	aNewRope := aRope from: 1 to: 5.
 	
 	self assert: aNewRope size equals: 4.
-	self assert: aNewRope collection equals: 'ello'.
+	self assert: aNewRope asString equals: 'ello'.
 	
 	^ aNewRope
 ]
@@ -495,7 +495,7 @@ BlCollectionRopeExamples >> small_from_3_to_5 [
 	aNewRope := aRope from: 3 to: 5.
 	
 	self assert: aNewRope size equals: 2.
-	self assert: aNewRope collection equals: 'lo'.
+	self assert: aNewRope asString equals: 'lo'.
 	
 	^ aNewRope
 ]
@@ -522,7 +522,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_0 [
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 0.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: '123Hello'.
+	self assert: aNewRope asString equals: '123Hello'.
 
 	^ aNewRope
 ]
@@ -536,7 +536,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_1 [
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 1.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'H123ello'.
+	self assert: aNewRope asString equals: 'H123ello'.
 
 	^ aNewRope
 ]
@@ -550,7 +550,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_2 [
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 2.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'He123llo'.
+	self assert: aNewRope asString equals: 'He123llo'.
 
 	^ aNewRope
 ]
@@ -564,7 +564,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_3 [
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 3.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'Hel123lo'.
+	self assert: aNewRope asString equals: 'Hel123lo'.
 
 	^ aNewRope
 ]
@@ -578,7 +578,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_4 [
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 4.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'Hell123o'.
+	self assert: aNewRope asString equals: 'Hell123o'.
 
 	^ aNewRope
 ]
@@ -592,7 +592,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_5 [
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 5.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'Hello123'.
+	self assert: aNewRope asString equals: 'Hello123'.
 
 	^ aNewRope
 ]
@@ -606,7 +606,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_0 [
 	aNewRope := aRope insertItems: '123' at: 0.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: '123Hello'.
+	self assert: aNewRope asString equals: '123Hello'.
 	
 	^ aNewRope
 ]
@@ -620,7 +620,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_1 [
 	aNewRope := aRope insertItems: '123' at: 1.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'H123ello'.
+	self assert: aNewRope asString equals: 'H123ello'.
 	
 	^ aNewRope
 ]
@@ -634,7 +634,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_2 [
 	aNewRope := aRope insertItems: '123' at: 2.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'He123llo'.
+	self assert: aNewRope asString equals: 'He123llo'.
 	
 	^ aNewRope
 ]
@@ -648,7 +648,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_3 [
 	aNewRope := aRope insertItems: '123' at: 3.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'Hel123lo'.
+	self assert: aNewRope asString equals: 'Hel123lo'.
 	
 	^ aNewRope
 ]
@@ -662,7 +662,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_4 [
 	aNewRope := aRope insertItems: '123' at: 4.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'Hell123o'.
+	self assert: aNewRope asString equals: 'Hell123o'.
 	
 	^ aNewRope
 ]
@@ -676,7 +676,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_5 [
 	aNewRope := aRope insertItems: '123' at: 5.
 
 	self assert: aNewRope size equals: 8.
-	self assert: aNewRope collection equals: 'Hello123'.
+	self assert: aNewRope asString equals: 'Hello123'.
 
 	^ aNewRope
 ]
