@@ -7,7 +7,9 @@ Class {
 	#category : #'Bloc-Compositor-Examples'
 }
 
-{ #category : #testing }
-BlExampleElementThatWantsCompositionLayer >> wantsCompositionLayer [
-	^ true
+{ #category : #initialization }
+BlExampleElementThatWantsCompositionLayer >> initialize [
+	super initialize.
+	
+	self beInSeparateCompositionLayer
 ]

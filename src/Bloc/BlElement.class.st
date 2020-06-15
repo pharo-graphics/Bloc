@@ -507,11 +507,18 @@ BlElement >> baselineOffset [
 	^ 0
 ]
 
-{ #category : #testing }
+{ #category : #'api - compositing' }
 BlElement >> beInSeparateCompositionLayer [
-	"Make me that I want to be rendered in a separate composition layer"
+	"Make me that I want to be rendered in a separate compositing layer"
 
-	misc wantsCompositionLayer: true
+	misc compositingMode: BlCompositingSeparateLayerMode uniqueInstance
+]
+
+{ #category : #'api - compositing' }
+BlElement >> beInSingleCompositionLayer [
+	"Make me and my children be rendered in a single compositing layer"
+
+	misc compositingMode: BlCompositingSingleLayerMode uniqueInstance
 ]
 
 { #category : #'api - look' }
@@ -741,6 +748,13 @@ BlElement >> commitChanges [
 	self telemetry
 		timeSync: [ 'Commit children ', self class name ]
 		during: [ self childrenDo: [ :anElement | anElement commitChanges ] ]
+]
+
+{ #category : #accessing }
+BlElement >> compositingMode [
+	<return: #BlCompositingMode>
+
+	^ misc compositingMode
 ]
 
 { #category : #'api - painting' }
@@ -1730,7 +1744,7 @@ BlElement >> invalidate [
 BlElement >> invalidateAfterFrom: aPreviousPosition to: aNewPosition [
 	"Invalidate due to relocation by a given offset"
 
-	self wantsCompositionLayer
+	self wantsSeparateCompositingLayer
 		ifTrue: [ self hasCompositionLayer
 				ifTrue: [
 					| aLayer |
@@ -1748,7 +1762,7 @@ BlElement >> invalidateAfterFrom: aPreviousPosition to: aNewPosition [
 BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 	"Invalidate due to relocation by a given offset"
 
-	self wantsCompositionLayer
+	self wantsSeparateCompositingLayer
 		ifTrue: [ self hasCompositionLayer
 				ifTrue: [
 					| aLayer |
@@ -2153,7 +2167,7 @@ BlElement >> markNeedsPaintFrom: anElement [
 	anElement is the element from which the re-painting request originates"
 	needsPaint := true.
 	
-	self wantsCompositionLayer
+	self wantsSeparateCompositingLayer
 		ifTrue: [
 			self isAttachedToSceneGraph
 				ifTrue: [ self space markNeedsPaint: self from: anElement ] ]
@@ -3582,14 +3596,6 @@ BlElement >> visualBoundsOn: aCanvas [
 	^ (self visualBounds: BlBounds new on: aCanvas) asRectangle
 ]
 
-{ #category : #testing }
-BlElement >> wantsCompositionLayer [
-	"Return true if I should be painted in my own composition layer (if supported)"
-	<return: #Boolean>
-
-	^ misc wantsCompositionLayer or: [ self effect wantsCompositionLayer ]
-]
-
 { #category : #'event handling' }
 BlElement >> wantsMouseEventAt: aPoint [
 	"Return true if I can be picked as target for mouse event at given location specified in space coordinates.
@@ -3597,6 +3603,20 @@ BlElement >> wantsMouseEventAt: aPoint [
 	<return: #Boolean>
 
 	^ self isVisible and: [ self containsGlobalPoint: aPoint ]
+]
+
+{ #category : #'api - compositing' }
+BlElement >> wantsSeparateCompositingLayer [
+	<return: #Boolean>
+
+	(self compositingMode wantsCompositionLayer or:  [ self effect wantsCompositionLayer ])
+		ifFalse: [ ^ false ].
+
+	self allParentsDo: [ :eachParent |
+			eachParent compositingMode wantsBufferedLayer
+				ifTrue: [ ^ false ] ].
+
+	^ true
 ]
 
 { #category : #'api - bounds' }

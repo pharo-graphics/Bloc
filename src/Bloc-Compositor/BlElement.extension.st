@@ -43,28 +43,11 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 	self telemetry
 		timeSync: [ 'Paint ', self class name ]
 		during: [
-			(aCompositorPainter shouldCreateNewLayer: self wantsCompositionLayer)
+			self wantsSeparateCompositingLayer
 				ifTrue: [ self fullPaintCompositedOn: aCompositorPainter offset: anOffset + self position ]
 				ifFalse: [ self fullPaintWithTransformOn: aCompositorPainter offset: anOffset + self position ]. ].
 
 	needsPaint := false
-]
-
-{ #category : #'*Bloc-Compositor' }
-BlElement >> fullPaintWithOpacityOn: aCompositorPainter offset: anOffset [
-
-	"We do not draw transparent (opacity is zero) elements at all"
-	self isTransparent
-		ifTrue: [ ^ self ].
-
-	self isTranslucent
-		ifTrue: [ aCompositorPainter
-			pushOpacity: self opacity
-			offset: anOffset
-			bounds: self invalidationBounds
-			from: self
-			thenPaint: [ :anOpacityPainter :anOpacityOffset | self fullPaintWithTransformOn: anOpacityPainter offset: anOpacityOffset ] ]
-		ifFalse: [ self fullPaintWithTransformOn: aCompositorPainter offset: anOffset ]
 ]
 
 { #category : #'*Bloc-Compositor' }
@@ -76,8 +59,7 @@ BlElement >> fullPaintWithTransformOn: aCompositorPainter offset: anOffset [
 				pushTransform: self transformation matrix
 				offset: anOffset
 				bounds: self invalidationBounds
-				compositing: self wantsCompositionLayer
-				buffered: false
+				compositing: self compositingMode
 				thenPaint: [ :aTransformCompositorPainter :aTransformOffset |
 					self paintMeAndChildrenOn: aTransformCompositorPainter offset: aTransformOffset ] ]
 ]
@@ -91,7 +73,7 @@ BlElement >> hasCompositionLayer [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> markSkippedPaint [
-	self wantsCompositionLayer
+	self wantsSeparateCompositingLayer
 		ifTrue: [
 			self hasCompositionLayer
 				ifFalse: [ ^ self ].
@@ -102,8 +84,12 @@ BlElement >> markSkippedPaint [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
-	self children sortedByElevation
-		do: [ :anElement | anElement fullPaintOn: aCompositorPainter offset: anOffset ]
+	aCompositorPainter
+		pushChildren: self children sortedByElevation
+		offset: anOffset
+		compositing: self compositingMode
+		thenPaint: [ :aChildElement :aChildPainter :aChildOffset |
+			aChildElement fullPaintOn: aChildPainter offset: aChildOffset ]
 ]
 
 { #category : #'*Bloc-Compositor' }
@@ -117,7 +103,7 @@ BlElement >> paintClippedChildrenOn: aCompositorPainter offset: anOffset [
 			pushClip: (self geometry pathOnSpartaCanvas: aCompositorPainter canvas)
 			offset: anOffset
 			bounds: self invalidationBounds
-			compositing: self wantsCompositionLayer
+			compositing: self compositingMode
 			thenPaint: [ :aClippedPainter :aClippedOffset | self paintChildrenOn: aClippedPainter offset: aClippedOffset ] ]
 		ifFalse: [ self paintChildrenOn: aCompositorPainter offset: anOffset ]
 ]

@@ -10,7 +10,7 @@ Class {
 		'userData',
 		'debug',
 		'label',
-		'wantsCompositionLayer'
+		'compositingMode'
 	],
 	#category : #'Bloc-Basic-Support'
 }
@@ -23,6 +23,18 @@ BlMiscProperties >> clipChildren [
 { #category : #accessing }
 BlMiscProperties >> clipChildren: anObject [
 	clipChildren := anObject
+]
+
+{ #category : #accessing }
+BlMiscProperties >> compositingMode [
+	<return: #BlCompositingMode>
+
+	^ compositingMode
+]
+
+{ #category : #accessing }
+BlMiscProperties >> compositingMode: aBlCompositingMode [
+	compositingMode := aBlCompositingMode
 ]
 
 { #category : #accessing }
@@ -50,7 +62,7 @@ BlMiscProperties >> initialize [
 	super initialize.
 	
 	clipChildren := true.
-	wantsCompositionLayer := false.
+	compositingMode := BlCompositingWithoutLayerMode uniqueInstance.
 	userData := IdentityDictionary new.
 	debug := false.
 	label := ''.
@@ -77,16 +89,4 @@ BlMiscProperties >> userData [
 { #category : #accessing }
 BlMiscProperties >> userData: aDict [
 	userData := aDict
-]
-
-{ #category : #accessing }
-BlMiscProperties >> wantsCompositionLayer [
-	<return: #Boolean>
-
-	^ wantsCompositionLayer
-]
-
-{ #category : #accessing }
-BlMiscProperties >> wantsCompositionLayer: aBoolean [
-	wantsCompositionLayer := aBoolean
 ]

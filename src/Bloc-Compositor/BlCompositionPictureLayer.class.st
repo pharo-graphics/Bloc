@@ -18,11 +18,9 @@ BlCompositionPictureLayer >> asForm [
 
 { #category : #converting }
 BlCompositionPictureLayer >> asSkiaLayer [
-	self
-		assert: [ self picture isNotNil ]
-		description: [ 'Can not create a layer for nil picture' ].
-
-	^ (SkiaCompositionPictureLayer picture: self picture) needsCache: self isWorthCaching
+	^ self picture
+		ifNil: [ SkiaCompositionPictureLayer new ]
+		ifNotNil: [ :aPicture | (SkiaCompositionPictureLayer picture: aPicture) needsCache: self isWorthCaching ]
 ]
 
 { #category : #drawing }

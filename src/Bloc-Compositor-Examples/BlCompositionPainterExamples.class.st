@@ -102,6 +102,77 @@ BlCompositionPainterExamples >> elementWithTransformationBetweenWantingLayer [
 ]
 
 { #category : #'instance creation' }
+BlCompositionPainterExamples >> elementWithTransformationBetweenWantingLayerInSingleLayer [
+	<gtExample>
+	|  aContainer aContent aWrapper aScaled aChildA  aChildB aChildC |
+	
+	aContainer := BlElement new
+		size: 600@400;
+		border: (BlBorder paint: Color veryLightGray width: 1).
+	
+	aContent := BlElement new
+		size: 560@360;
+		relocate: 20@20;
+		background: Color veryVeryLightGray.
+
+	aWrapper := BlElement new
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent ].
+	
+	aScaled := BlElement new size: (560@360) / 2.
+	aScaled constraintsDo: [ :c |
+		c ignoreByLayout.
+		c ignored vertical alignCenter.
+		c ignored horizontal alignCenter ].
+	aScaled transformDo: [ :t | t scaleBy: 1.5 ].
+	aScaled effect: BlGaussianShadowEffect default.
+	aScaled beInSingleCompositionLayer.
+	aScaled background: Color white.
+	
+	aChildA := BlExampleElementThatWantsCompositionLayer new
+		size: 200@40;
+		relocate: 20@20;
+		background: (Color paleBlue);
+		border: (BlBorder paint: Color blue width: 1).
+		
+	aChildB := BlExampleElementThatWantsCompositionLayer new
+		size: 200@40;
+		relocate: 20@80;
+		background: (Color paleRed);
+		border: (BlBorder paint: Color red width: 1).
+		
+	aChildC := BlElement new
+		size: 200@20;
+		relocate: 20@140;
+		background: (Color veryVeryLightGray);
+		border: (BlBorder paint: Color veryLightGray width: 1).
+
+	aScaled addChildren:  { aChildA . aChildB . aChildC }.
+	
+	aWrapper addChild: aScaled.
+	aContent addChild: aWrapper.
+		
+	aContent addChild: (BlElement new
+		size: 30@30;
+		relocate: 55@30;
+		background: Color lightGray;
+		geometry: (BlCircle new)).
+		
+	aContent addChild: (BlElement new
+		size: 30@30;
+		relocate: 475@30;
+		background: Color lightGray;
+		geometry: (BlCircle new)).
+		
+	aContainer addChild: aContent.
+
+	aContainer forceLayout.
+	
+	^ aContainer
+]
+
+{ #category : #'instance creation' }
 BlCompositionPainterExamples >> elementsWantingLayerInsideScalable [
 	<gtExample>
 	|  aContainer aTitle aFooter aContent aChildA aChildB |
@@ -372,12 +443,12 @@ BlCompositionPainterExamples >> overlappingSimpleElementsWantingLayerInbetweenOt
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform [
 	<gtExample>
-	| aContainer aPainter aRootLayer aWhitePictureLayer aLeftoverLayer anOffsetLayer aTransformationLayer aRedPictureLayer |
+	| aContainer aPainter aRootLayer aWhitePictureLayer aLeftoverLayer aTransformationLayer aRedPictureLayer |
 	
 	aContainer := self elementWantingLayerWithTranslationTransform.
 	aContainer forceLayout.
 	
-	aPainter := BlCompositionPainter root: aContainer extent.
+	aPainter := BlCompositionLayeredPainter root: aContainer extent.
 	
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
@@ -401,15 +472,13 @@ BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform
 			clip: (SpartaRoundedRectangle rectangle: (0@0 extent: 300@300) radii: (SpartaCornerRadii fromArray: #(4 4 4 4)))
 	}).
 	
-	anOffsetLayer := aLeftoverLayer layers first.
+	aTransformationLayer := aLeftoverLayer layers first.
 	
-	self assert: (anOffsetLayer isKindOf: BlCompositionOffsetLayer).
-	self assert: anOffsetLayer offset equals: 0.0@0.
-	self assert: anOffsetLayer layers size equals: 1.
+	self assert: (aTransformationLayer isKindOf: BlCompositionTransformationLayer).
+	self assert: aTransformationLayer offset equals: 0.0@0.
+	self assert: aTransformationLayer matrix equals: (BlMatrix2D translation: 150@75).
+	self assert: aTransformationLayer layers size equals: 1.
 
-	aTransformationLayer := anOffsetLayer layers first.
-	self assert: (anOffsetLayer isKindOf: BlCompositionOffsetLayer).
-	
 	aRedPictureLayer := aTransformationLayer layers first.
 	
 	self assert: (aRedPictureLayer isKindOf: BlCompositionPictureLayer).
@@ -428,8 +497,26 @@ BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLaye
 	aContainer := self elementWithTransformationBetweenWantingLayer.
 	aContainer forceLayout.
 	
-	aPainter := BlCompositionPainter root: aContainer extent.
+	aPainter := BlCompositionLayeredPainter root: aContainer extent.
 	
+	aContainer fullPaintOn: aPainter offset: 0@0.
+	aPainter stopRecording.
+	
+	aRootLayer := aPainter containerLayer.
+	
+	^ aPainter
+]
+
+{ #category : #'examples - painter' }
+BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLayerInSingleLayer [
+	<gtExample>
+	| aContainer aPainter aRootLayer |
+	
+	aContainer := self elementWithTransformationBetweenWantingLayerInSingleLayer.
+	aContainer forceLayout.
+	
+	aPainter := BlCompositionLayeredPainter root: aContainer extent.
+
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	

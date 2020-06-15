@@ -12,28 +12,30 @@ Class {
 	#category : #'Bloc-Compositor-Painter'
 }
 
+{ #category : #'instance creation' }
+BlCompositionPainter class >> forElement: anElement [
+	^ anElement wantsSeparateCompositingLayer
+		ifTrue: [ BlCompositionLayeredPainter new ]
+		ifFalse: [ BlCompositionBufferedPainter new ]
+]
+
 { #category : #painting }
 BlCompositionPainter class >> repaintCompositedElement: anElement [
 	| anOffsetLayer aPainter |
-	
-	"NonInteractiveTranscript stdout
-		nextPutAll: '[repaint] '; 
-		nextPutAll: anElement asString;
-		cr."
 
 	anOffsetLayer := anElement hasCompositionLayer
 		ifTrue: [ anElement compositionLayer removeAllLayers ]
 		ifFalse: [ BlCompositionOffsetLayer new ].
 
-	aPainter := self new
+	aPainter := (self forElement: anElement)
 		containerLayer: anOffsetLayer;
 		bounds: anElement invalidationBounds;
-		needsCache: anElement wantsCompositionLayer.
+		needsCache: anElement wantsSeparateCompositingLayer.
 
 	anElement fullPaintWithTransformOn: aPainter offset: 0@0.
 
 	aPainter stopRecording.
-	anElement wantsCompositionLayer
+	anElement wantsSeparateCompositingLayer
 		ifTrue: [ anElement compositionLayer: anOffsetLayer ].
 	
 	^ anOffsetLayer
@@ -72,6 +74,57 @@ BlCompositionPainter >> addLayer: aCompositionLayer [
 	
 ]
 
+{ #category : #'private - layer' }
+BlCompositionPainter >> applyClip: aClipPath offset: anOffset thenPaint: aPaintBlock [
+	self canvasDo: [ :aCanvas |
+		aCanvas clip push: aClipPath offset: anOffset ].
+	state pushClip: aClipPath offset: anOffset.
+	
+	aPaintBlock cull: self cull: anOffset.
+	
+	state pop.
+	self canvasDo: [ :aCanvas | aCanvas clip pop ]
+]
+
+{ #category : #'private - layer' }
+BlCompositionPainter >> applyShadow: aShadowPath shadowOffset: aShadowOffset shadowColor: aShadowColor shadowWidth: aShadowWidth offset: anOffset thenPaint: aPaintBlock [
+	self canvas stroke
+		path: aShadowPath;
+		paint: (self canvas paint boxShadow
+			color: aShadowColor;
+			offset: aShadowOffset + anOffset;
+			radius: aShadowWidth);
+		width: aShadowWidth;
+		draw.
+	aPaintBlock cull: self cull: anOffset
+]
+
+{ #category : #'private - layer' }
+BlCompositionPainter >> applyTransform: aMatrix offset: anOffset thenPaint: aPaintBlock [
+	| aTransform |
+
+	aTransform := self
+		canvasDo: [ :aCanvas |
+			aCanvas transform
+				translateBy: anOffset;
+				multiplyBy: aMatrix;
+				push ]
+		ifAbsent: [ nil ].
+	
+	state pushTransform: aMatrix offset: anOffset.
+	
+	aPaintBlock cull: self cull: 0@0.
+	
+	self canvasDo: [ :aCanvas | aTransform ifNotNil: [ aCanvas transform pop: aTransform ] ].
+
+	state pop
+]
+
+{ #category : #converting }
+BlCompositionPainter >> asBufferedPainter [
+	^ self subclassResponsibility
+]
+
 { #category : #accessing }
 BlCompositionPainter >> bounds [
 	^ bounds
@@ -88,6 +141,11 @@ BlCompositionPainter >> canvas [
 
 	canvas ifNil: [ self startRecording ].
 	^ canvas
+]
+
+{ #category : #accessing }
+BlCompositionPainter >> canvas: anObject [
+	canvas := anObject
 ]
 
 { #category : #'private - canvas' }
@@ -182,119 +240,34 @@ BlCompositionPainter >> needsCache: anObject [
 	needsCache := anObject
 ]
 
-{ #category : #'api - layer' }
-BlCompositionPainter >> pushClip: aClipPath offset: anOffset bounds: aRectangle compositing: wantsCompositingLayer thenPaint: aPaintBlock [
-	
-	wantsCompositingLayer
-		ifTrue: [
-			self
-				pushLayer: (BlCompositionClipLayer new
-					path: aClipPath;
-					offset: anOffset)
-				offset: anOffset
-				bounds: aRectangle
-				buffered: false
-				thenPaint: aPaintBlock ]
-		ifFalse: [
-			self canvasDo: [ :aCanvas |
-				aCanvas clip push: aClipPath offset: anOffset ].
-			state pushClip: aClipPath offset: anOffset.
-			
-			aPaintBlock cull: self cull: anOffset.
-			
-			state pop.
-			self canvasDo: [ :aCanvas | aCanvas clip pop ] ]
+{ #category : #accessing }
+BlCompositionPainter >> pictureLayer [
+	^ pictureLayer
+]
+
+{ #category : #accessing }
+BlCompositionPainter >> pictureLayer: anObject [
+	pictureLayer := anObject
 ]
 
 { #category : #'api - layer' }
-BlCompositionPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangleOrNull buffered: shouldBeBuffered thenPaint: aPaintBlock [
-	| aNewPainter |
-	
-	self addLayer: aNewLayer.
-	
-	self stopRecording.
-
-	aNewPainter := self class new
-		containerLayer: aNewLayer;
-		bounds: aRectangleOrNull;
-		needsCache: true.
-	 aPaintBlock cull: aNewPainter cull: anOffset.
-
-	aNewPainter stopRecording
+BlCompositionPainter >> pushChildren: theChildren offset: anOffset compositing: aBlCompositingMode thenPaint: aBlock [
+	self subclassResponsibility
 ]
 
 { #category : #'api - layer' }
-BlCompositionPainter >> pushOpacity: anAlpha offset: anOffset bounds: aRectangleOrNull from: anElement thenPaint: aPaintBlock [
-	<return: #BlCompositionPainter>
-	
-	^ self
-		pushLayer: (BlCompositionOpacityLayer new
-			opacity: anAlpha;
-			offset: anOffset)
-		offset: 0@0
-		bounds: aRectangleOrNull
-		buffered: false
-		thenPaint: aPaintBlock
+BlCompositionPainter >> pushClip: aClipPath offset: anOffset bounds: aRectangle compositing: aBlCompositingMode thenPaint: aPaintBlock [
+	self subclassResponsibility
 ]
 
 { #category : #'api - layer' }
-BlCompositionPainter >> pushShadow: aShadowPath shadowOffset: aShadowOffset shadowColor: aShadowColor shadowWidth: aShadowWidth offset: anOffset bounds: aRectangle compositing: wantsCompositingLayer thenPaint: aPaintBlock [
-	
-	wantsCompositingLayer
-		ifTrue: [
-			self
-				pushLayer: (BlCompositionShadowLayer new
-					offset: anOffset;
-					shadowOffset: aShadowOffset;
-					shadowColor: aShadowColor;
-					shadowWidth: aShadowWidth;
-					shadowPath: aShadowPath)
-				offset: anOffset
-				bounds: aRectangle
-				buffered: false
-				thenPaint: aPaintBlock ]
-		ifFalse: [
-			self canvas stroke
-				path: aShadowPath;
-				paint: (self canvas paint boxShadow
-					color: aShadowColor;
-					offset: aShadowOffset + anOffset;
-					radius: aShadowWidth);
-				width: aShadowWidth;
-				draw.
-			aPaintBlock cull: self cull: anOffset ]
+BlCompositionPainter >> pushShadow: aShadowPath shadowOffset: aShadowOffset shadowColor: aShadowColor shadowWidth: aShadowWidth offset: anOffset bounds: aRectangle compositing: aBlCompositingMode thenPaint: aPaintBlock [
+	self subclassResponsibility
 ]
 
 { #category : #'api - layer' }
-BlCompositionPainter >> pushTransform: aMatrix offset: anOffset bounds: aRectangleOrNull compositing: wantsCompositing buffered: wantsBufferedCompositing thenPaint: aPaintBlock [
-
-	(self shouldCreateNewLayer: wantsCompositing)
-		ifTrue: [
-			self
-				pushLayer: (BlCompositionTransformationLayer new
-					matrix: aMatrix;
-					offset: anOffset)
-				offset: 0@0
-				bounds: aRectangleOrNull
-				buffered: wantsBufferedCompositing
-				thenPaint: aPaintBlock ]
-		ifFalse: [
-			| aTransform |
-			aTransform := self
-				canvasDo: [ :aCanvas |
-					aCanvas transform
-						translateBy: anOffset;
-						multiplyBy: aMatrix;
-						push ]
-				ifAbsent: [ nil ].
-			
-			state pushTransform: aMatrix offset: anOffset.
-			
-			aPaintBlock cull: self cull: 0@0.
-			
-			self canvasDo: [ :aCanvas | aTransform ifNotNil: [ aCanvas transform pop: aTransform ] ].
-
-			state pop ]
+BlCompositionPainter >> pushTransform: aMatrix offset: anOffset bounds: aRectangleOrNull compositing: aBlCompositingMode thenPaint: aPaintBlock [
+	self subclassResponsibility
 ]
 
 { #category : #testing }
@@ -311,6 +284,16 @@ BlCompositionPainter >> startRecording [
 	state applyOnCanvas: canvas.
 
 	containerLayer addLayer: pictureLayer
+]
+
+{ #category : #accessing }
+BlCompositionPainter >> state [
+	^ state
+]
+
+{ #category : #accessing }
+BlCompositionPainter >> state: anObject [
+	state := anObject
 ]
 
 { #category : #'private - canvas' }
