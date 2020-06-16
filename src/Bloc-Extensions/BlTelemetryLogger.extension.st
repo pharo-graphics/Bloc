@@ -28,6 +28,5 @@ BlTelemetryLogger >> gtFramesFor: aView [
 				barWidthData: [ :eachTask | eachTask durationInMilliseconds ];
 				barWidthScale: (GtPlotterLinearScale new domainFrom: 0 to: 100.0);
 				barHeightScale: (GtPlotterConstantScale new constant: 8);
-				tickLabelFormat: [ :eachDuration | eachDuration asString, ' ms' ]
-		]
+				tickLabelFormat: [ :eachDuration | eachDuration asString, ' ms' ] ]
 ]
