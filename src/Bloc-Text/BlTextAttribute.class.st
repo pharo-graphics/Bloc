@@ -100,6 +100,13 @@ BlTextAttribute >> isStyle [
 	^ true
 ]
 
+{ #category : #testing }
+BlTextAttribute >> mayHaveExternalReferences [
+	"Answer if this attribute can have references to some external objects like AST nodes or computation results"
+
+	^ false
+]
+
 { #category : #printing }
 BlTextAttribute >> storeOn: aStream [
 	aStream

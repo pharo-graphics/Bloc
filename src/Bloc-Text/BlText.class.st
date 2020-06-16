@@ -196,6 +196,15 @@ BlText >> copyFrom: aStartIndex to: anEndIndex [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'text - copying' }
+BlText >> copyWithoutExternalReferences [
+	<return: #BlText>
+
+	^ (self copyFrom: 1 to: self size)
+		clearAttributes: [ :eachAttribute | eachAttribute mayHaveExternalReferences ];
+		yourself.
+]
+
 { #category : #'text - modifications' }
 BlText >> delete: aStart to: anEnd [
 	self deleteAll: { (aStart to: anEnd) }
