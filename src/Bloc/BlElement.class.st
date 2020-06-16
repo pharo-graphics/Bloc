@@ -1678,7 +1678,7 @@ BlElement >> initialize [
 	elevation := self defaultElevation.
 	focusability := self defaultFocusability.
 	visibility := self defaultVisibility.
-	effect := BlNullEffect on: self.
+	effect := BlNullEffect new.
 
 	shouldHandleMouseEvents := true.
 	shouldChildrenHandleMouseEvents := true.
