@@ -227,6 +227,28 @@ BlGlutinHostSpace >> visitCharacterReceivedEvent: anEvent [
 ]
 
 { #category : #'event - visiting' }
+BlGlutinHostSpace >> visitCursorEnteredEvent: anEvent [
+	| aBlocEvent |
+
+	aBlocEvent := BlSpaceMouseEnterEvent new
+		timestamp: self space time now;
+		yourself.
+
+	self enqueueEvent: aBlocEvent
+]
+
+{ #category : #'event - visiting' }
+BlGlutinHostSpace >> visitCursorLeftEvent: anEvent [
+	| aBlocEvent |
+
+	aBlocEvent := BlSpaceMouseLeaveEvent new
+		timestamp: self space time now;
+		yourself.
+
+	self enqueueEvent: aBlocEvent
+]
+
+{ #category : #'event - visiting' }
 BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 	| aBlocEvent aNewCursorPosition aDelta |
 
