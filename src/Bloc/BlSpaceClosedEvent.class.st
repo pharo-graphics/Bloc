@@ -24,6 +24,11 @@ Class {
 	#category : #'Bloc-Events-Type-Space'
 }
 
+{ #category : #sending }
+BlSpaceClosedEvent >> sendTo: anObject [
+	anObject spaceClosedEvent: self
+]
+
 { #category : #accessing }
 BlSpaceClosedEvent >> space [
 	<return: #BlSpace>

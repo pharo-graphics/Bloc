@@ -126,6 +126,12 @@ BlFocusProcessor >> newFocusTransferEvent [
 	^ BlFocusTransferEvent new
 ]
 
+{ #category : #'initialize-release' }
+BlFocusProcessor >> onSpaceClosed [
+	focusOwner := nil.
+	focusChain := nil
+]
+
 { #category : #'focus - processing' }
 BlFocusProcessor >> processBlur: anElement [
 	self

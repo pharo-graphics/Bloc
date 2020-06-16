@@ -28,6 +28,11 @@ BlBaseEventProcessor >> fireEvent: anEvent [
 	^ BlEvent fireEvent: anEvent
 ]
 
+{ #category : #'initialize-release' }
+BlBaseEventProcessor >> onSpaceClosed [
+	"React to space closed in order to clean up the state"
+]
+
 { #category : #accessing }
 BlBaseEventProcessor >> space [
 	^ space

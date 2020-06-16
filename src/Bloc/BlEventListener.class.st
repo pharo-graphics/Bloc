@@ -185,6 +185,11 @@ BlEventListener >> spaceCloseRequest: anEvent [
 ]
 
 { #category : #'space handlers' }
+BlEventListener >> spaceClosedEvent: anEvent [
+	"Is sent after space is closed"
+]
+
+{ #category : #'space handlers' }
 BlEventListener >> spaceEvent: anEvent [
 ]
 

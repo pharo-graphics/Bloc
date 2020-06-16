@@ -325,6 +325,20 @@ BlMouseProcessor >> isValidDragTarget: aEvent [
 	^ (aEvent target = self space root) not
 ]
 
+{ #category : #'initialize-release' }
+BlMouseProcessor >> onSpaceClosed [
+	lastEnteredTargets := #().
+	lastOverTarget := nil.
+	lastClickEvent := nil.
+	isMouseStillDown := 0.
+	currentDragTarget := nil.
+	lastMouseTarget := nil.
+	dndInProgress := nil.
+	dragStartMask := 0.
+	pressedButtons := Set new.
+	previousMouseDownEvent := nil
+]
+
 { #category : #'event processing' }
 BlMouseProcessor >> postProcess: aMouseEvent [
 	
