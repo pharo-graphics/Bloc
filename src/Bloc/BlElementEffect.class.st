@@ -9,18 +9,8 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#instVars : [
-		'input'
-	],
 	#category : #'Bloc-Effect'
 }
-
-{ #category : #'as yet unclassified' }
-BlElementEffect class >> on: anObject [
-	^ self new
-		on: anObject;
-		yourself
-]
 
 { #category : #geometry }
 BlElementEffect >> computeBounds: aBlBounds [
@@ -32,23 +22,8 @@ BlElementEffect >> computeBounds: aBlBounds [
 ]
 
 { #category : #geometry }
-BlElementEffect >> effectBounds [
-	^ (self effectBounds: BlBounds new) asRectangle
-]
-
-{ #category : #geometry }
-BlElementEffect >> effectBounds: aBlBounds [
-	^ self computeBounds: (aBlBounds rectangle: self input visualBounds)
-]
-
-{ #category : #accessing }
-BlElementEffect >> input [
-	^ input
-]
-
-{ #category : #accessing }
-BlElementEffect >> input: anElementOrEffect [
-	input := anElementOrEffect
+BlElementEffect >> effectBounds: aBlBounds of: anElement [
+	^ self computeBounds: (aBlBounds rectangle: anElement visualBounds)
 ]
 
 { #category : #testing }
@@ -58,15 +33,6 @@ BlElementEffect >> isNullEffect [
 
 { #category : #initialization }
 BlElementEffect >> on: anElement [
-	self input 
-		ifNil: [ self input: anElement ] 
-		ifNotNil: [ :anInput | anInput on: anElement ]
-]
-
-{ #category : #copying }
-BlElementEffect >> postCopy [
-	super postCopy.
-	input := nil
 ]
 
 { #category : #testing }

@@ -1193,10 +1193,7 @@ BlElement >> effect: anEffect [
 	self
 		assert: [ anEffect isNotNil ]
 		description: [ 'anEffect must not be nil' ].
-	
-	self flag: 'What should happen when we already have an effect?'.
-	
-	anEffect on: self.
+
 	effect := anEffect.
 	self invalidate
 ]
@@ -1208,7 +1205,7 @@ BlElement >> effectBounds [
 
 { #category : #'geometry bounds' }
 BlElement >> effectBounds: aSpartaRectangle [
-	^ self effect effectBounds: aSpartaRectangle
+	^ self effect effectBounds: aSpartaRectangle of: self
 ]
 
 { #category : #'api - look' }
