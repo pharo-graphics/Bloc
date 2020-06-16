@@ -146,6 +146,16 @@ BlSpaceEventListener >> spaceFocusOutEvent: anEvent [
 ]
 
 { #category : #'window handlers' }
+BlSpaceEventListener >> spaceMouseEnterEvent: anEvent [
+	self mouseProcessor handleMouseEntered: anEvent
+]
+
+{ #category : #'window handlers' }
+BlSpaceEventListener >> spaceMouseLeaveEvent: anEvent [
+	self mouseProcessor handleMouseLeft: anEvent
+]
+
+{ #category : #'window handlers' }
 BlSpaceEventListener >> spaceMovedEvent: anEvent [
 	self space setPosition: anEvent position
 ]
