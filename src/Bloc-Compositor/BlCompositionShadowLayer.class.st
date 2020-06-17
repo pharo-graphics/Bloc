@@ -28,6 +28,20 @@ BlCompositionShadowLayer >> asSkiaLayer [
 			anOffsetLayer ]
 ]
 
+{ #category : #converting }
+BlCompositionShadowLayer >> asSymbolTree [
+	^ {
+		#Shadow . {
+			#offset. { self offset }.
+			#shadowOffset . { self shadowOffset }.
+			#shadowColor . { self shadowColor red .  self shadowColor green . self shadowColor blue . self shadowColor alpha }.
+			#shadowWidth . { self shadowWidth }.
+			#shadowPath . { self shadowPath class name }.
+			self layers collect: [ :eachLayer | eachLayer asSymbolTree ]
+		}
+	}
+]
+
 { #category : #accessing }
 BlCompositionShadowLayer >> name [
 	^ 'Shadow'

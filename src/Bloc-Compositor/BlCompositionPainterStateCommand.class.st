@@ -7,6 +7,11 @@ Class {
 	#category : #'Bloc-Compositor-Painter'
 }
 
+{ #category : #converting }
+BlCompositionPainterStateCommand >> asSymbolTree [
+	^ self subclassResponsibility
+]
+
 { #category : #accessing }
 BlCompositionPainterStateCommand >> commandString [
 	^ ''

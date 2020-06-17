@@ -9,12 +9,21 @@ Class {
 	#category : #'Bloc-Compositor-Layers'
 }
 
+{ #category : #printing }
+BlCompositionLayer class >> printSymbolTree: anArray on: aStream [
+]
+
 { #category : #converting }
 BlCompositionLayer >> asSkiaLayer [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #converting }
+BlCompositionLayer >> asSymbolTree [
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 BlCompositionLayer >> attachToParent: aCompositionLayer [
 	parent := aCompositionLayer
 ]
@@ -39,7 +48,7 @@ BlCompositionLayer >> computeNeedsComposition [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BlCompositionLayer >> detachFromParent [
 	parent := nil
 ]

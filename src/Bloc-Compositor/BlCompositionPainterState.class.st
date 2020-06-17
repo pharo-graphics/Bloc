@@ -17,6 +17,11 @@ BlCompositionPainterState >> applyOnLayer: aSkiaLayer [
 	commands reverseDo: [ :eachCommand | eachCommand pushOnLayer: aSkiaLayer ]
 ]
 
+{ #category : #converting }
+BlCompositionPainterState >> asSymbolTree [
+	^ self commands collect: [ :eachCommand | eachCommand asSymbolTree ]
+]
+
 { #category : #'api - commands' }
 BlCompositionPainterState >> commands [
 	"Return a snapshot of current commands as an array"

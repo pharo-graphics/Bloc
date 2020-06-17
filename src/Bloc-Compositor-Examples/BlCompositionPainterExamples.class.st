@@ -443,7 +443,7 @@ BlCompositionPainterExamples >> overlappingSimpleElementsWantingLayerInbetweenOt
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform [
 	<gtExample>
-	| aContainer aPainter aRootLayer aWhitePictureLayer aLeftoverLayer aTransformationLayer aRedPictureLayer |
+	| aContainer aPainter aRootLayer aWhitePictureLayer aLeftoverLayer anOffsetLayer aTransformationLayer aRedPictureLayer |
 	
 	aContainer := self elementWantingLayerWithTranslationTransform.
 	aContainer forceLayout.
@@ -472,7 +472,12 @@ BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform
 			clip: (SpartaRoundedRectangle rectangle: (0@0 extent: 300@300) radii: (SpartaCornerRadii fromArray: #(4 4 4 4)))
 	}).
 	
-	aTransformationLayer := aLeftoverLayer layers first.
+	anOffsetLayer := aLeftoverLayer layers first.
+	self assert: (anOffsetLayer isKindOf: BlCompositionOffsetLayer).
+	self assert: anOffsetLayer offset equals: 0.0@0.
+	self assert: anOffsetLayer layers size equals: 1.
+	
+	aTransformationLayer := anOffsetLayer layers first.
 	
 	self assert: (aTransformationLayer isKindOf: BlCompositionTransformationLayer).
 	self assert: aTransformationLayer offset equals: 0.0@0.
@@ -533,7 +538,7 @@ BlCompositionPainterExamples >> paintElementsWantingLayerInsideScalable [
 	aContainer := self elementsWantingLayerInsideScalable.
 	aContainer forceLayout.
 	
-	aPainter := BlCompositionPainter root: aContainer extent.
+	aPainter := BlCompositionLayeredPainter root: aContainer extent.
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
@@ -570,7 +575,7 @@ BlCompositionPainterExamples >> paintOverlappingElementWantingLayerInbetweenOthe
 	aContainer := self overlappingElementWantingLayerInbetweenOtherElements.
 	aContainer forceLayout.
 	
-	aPainter := BlCompositionPainter root: aContainer extent.
+	aPainter := BlCompositionLayeredPainter root: aContainer extent.
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
@@ -587,7 +592,7 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 	aContainer := self overlappingSimpleElementWantingLayerInbetweenOtherElements.
 	aContainer forceLayout.
 	
-	aPainter := BlCompositionPainter root: aContainer extent.
+	aPainter := BlCompositionLayeredPainter root: aContainer extent.
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
@@ -628,7 +633,7 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 	aContainer := self overlappingSimpleElementWantingLayerInbetweenOtherElementsInParentWithTransformation.
 	aContainer forceLayout.
 	
-	aPainter := BlCompositionPainter root: aContainer transformedBounds extent.
+	aPainter := BlCompositionLayeredPainter root: aContainer transformedBounds extent.
 	
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
@@ -658,7 +663,7 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerWithTra
 	aContainer := self overlappingSimpleElementWantingLayerWithTransformInbetweenOtherElements.
 	aContainer forceLayout.
 	
-	aPainter := BlCompositionPainter root: aContainer extent.
+	aPainter := BlCompositionLayeredPainter root: aContainer extent.
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
@@ -686,7 +691,7 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementsWantingLayerInbetw
 	
 	aContainer := self overlappingSimpleElementsWantingLayerInbetweenOtherElementsInParentWithTransformation.
 	
-	aPainter := BlCompositionPainter root: aContainer transformedBounds extent.
+	aPainter := BlCompositionLayeredPainter root: aContainer transformedBounds extent.
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	

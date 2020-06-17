@@ -12,7 +12,7 @@ BlCompositionPainterRepaintingExamples >> paintFirstTime [
 	anElement := BCompositionExampleElementWithMultipleLayersAndTransformation new.
 	anElement forceLayout.
 	
-	aPainter := BlCompositionPainter root: anElement transformedBounds extent.
+	aPainter := BlCompositionLayeredPainter root: anElement transformedBounds extent.
 	anElement fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
@@ -22,12 +22,12 @@ BlCompositionPainterRepaintingExamples >> paintFirstTime [
 	
 	self assert: aRootLayer layers size equals: 3.
 
-	"aBackgroundLayer := aRootLayer layers first.
+	aBackgroundLayer := aRootLayer layers first.
 	self assert: (aBackgroundLayer isKindOf: BlCompositionPictureLayer).
 	self assert: aBackgroundLayer needsCache not.
 
 	self assert: (aRootLayer layers second isKindOf: BlCompositionLeftoverStateLayer).
-	self assert: (aRootLayer layers third isKindOf: BlCompositionLeftoverStateLayer).
+	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer).
 
 	aBlueOffsetLayer := aRootLayer layers second layers first.
 	self assert: (aBlueOffsetLayer isKindOf: BlCompositionOffsetLayer).
@@ -40,9 +40,9 @@ BlCompositionPainterRepaintingExamples >> paintFirstTime [
 	self assert: aRedOffsetLayer offset equals: 20@80.
 	
 	self assert: (aRootLayer layers fourth isKindOf: BlCompositionPictureLayer).
-	self assert: aRootLayer layers fourth needsCache not."
+	self assert: aRootLayer layers fourth needsCache not.
 	
-	^ anElement
+	^ aPainter
 ]
 
 { #category : #'repaint - examples' }

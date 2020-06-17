@@ -7,6 +7,11 @@ Class {
 	#category : #'Bloc-Compositor-Painter'
 }
 
+{ #category : #converting }
+BlCompositionPainterStateTransformation >> asSymbolTree [
+	^ { #Transform . self matrix asMatrixCollection asArray }
+]
+
 { #category : #accessing }
 BlCompositionPainterStateTransformation >> commandString [
 	^ String streamContents: [ :aStream | self matrix decomposition asDictionary associations

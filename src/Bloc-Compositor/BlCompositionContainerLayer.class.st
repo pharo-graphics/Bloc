@@ -29,6 +29,13 @@ BlCompositionContainerLayer >> asSkiaLayer [
 	^ aLayer
 ]
 
+{ #category : #converting }
+BlCompositionContainerLayer >> asSymbolTree [
+	^ {
+		#Container . self layers collect: [ :eachLayer | eachLayer asSymbolTree ]
+	}
+]
+
 { #category : #accessing }
 BlCompositionContainerLayer >> children [
 	^ self layers

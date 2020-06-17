@@ -9,6 +9,6 @@ BlGaussianShadowEffect >> paintOn: aCompositorPainter offset: anOffset for: anEl
 		shadowWidth: width
 		offset: anOffset
 		bounds: anElement invalidationBounds
-		compositing: anElement compositingMode
+		compositing: BlCompositingSeparateLayerMode uniqueInstance
 		thenPaint: aBlock
 ]

@@ -23,6 +23,16 @@ BlCompositionPictureLayer >> asSkiaLayer [
 		ifNotNil: [ :aPicture | (SkiaCompositionPictureLayer picture: aPicture) needsCache: self isWorthCaching ]
 ]
 
+{ #category : #converting }
+BlCompositionPictureLayer >> asSymbolTree [
+	^ {
+		#Picture . {
+			#cache . { self needsCache }.
+			#simple . { self isSimple }
+		}
+	}
+]
+
 { #category : #drawing }
 BlCompositionPictureLayer >> drawOnSpartaCanvas: aCanvas [
 	aCanvas fill
@@ -35,7 +45,8 @@ BlCompositionPictureLayer >> drawOnSpartaCanvas: aCanvas [
 BlCompositionPictureLayer >> initialize [
 	super initialize.
 	
-	needsCache := false
+	needsCache := false.
+	isSimple := false
 ]
 
 { #category : #testing }

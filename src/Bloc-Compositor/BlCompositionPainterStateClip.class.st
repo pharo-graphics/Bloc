@@ -18,6 +18,11 @@ BlCompositionPainterStateClip >> = anObject [
 	^ offset = anObject offset and: [ clip = anObject clip ]
 ]
 
+{ #category : #converting }
+BlCompositionPainterStateClip >> asSymbolTree [
+	^ { #Clip . self clip class name }
+]
+
 { #category : #accessing }
 BlCompositionPainterStateClip >> clip [
 	^ clip

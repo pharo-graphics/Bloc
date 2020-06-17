@@ -22,6 +22,16 @@ BlCompositionOffsetLayer >> asSkiaLayer [
 	^ skiaLayer
 ]
 
+{ #category : #converting }
+BlCompositionOffsetLayer >> asSymbolTree [
+	^ {
+		#Offset . {
+			#offset. { self offset }.
+			self layers collect: [ :eachLayer | eachLayer asSymbolTree ]
+		}
+	}
+]
+
 { #category : #drawing }
 BlCompositionOffsetLayer >> drawOnSpartaCanvas: aCanvas [
 	aCanvas transform

@@ -270,6 +270,7 @@ BlMatrix2D >> perspective: aDepth [
 
 { #category : #printing }
 BlMatrix2D >> printOn: aStream [
+	aStream print: self asMatrixCollection
 ]
 
 { #category : #'matrix - transformations' }
