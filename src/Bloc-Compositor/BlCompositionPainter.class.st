@@ -206,6 +206,17 @@ BlCompositionPainter >> gtPreviewFor: aView [
 			aCanvas asForm ]
 ]
 
+{ #category : #'gt-extensions' }
+BlCompositionPainter >> gtSymbolTreeFor: aView [
+	<gtView>
+	
+	^ aView forward
+		title: 'Tree Print';
+		priority: 4;
+		object: [ self containerLayer ];
+		view: #gtSymbolTreeFor:
+]
+
 { #category : #'private - canvas' }
 BlCompositionPainter >> hasCanvas [
 	<return: #Boolean>

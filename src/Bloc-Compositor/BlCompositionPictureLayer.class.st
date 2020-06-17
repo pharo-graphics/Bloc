@@ -26,10 +26,9 @@ BlCompositionPictureLayer >> asSkiaLayer [
 { #category : #converting }
 BlCompositionPictureLayer >> asSymbolTree [
 	^ {
-		#Picture . {
-			#cache . { self needsCache }.
-			#simple . { self isSimple }
-		}
+		#Picture .
+			#cache . self needsCache.
+			#simple . self isSimple
 	}
 ]
 

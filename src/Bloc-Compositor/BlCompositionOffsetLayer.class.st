@@ -25,10 +25,9 @@ BlCompositionOffsetLayer >> asSkiaLayer [
 { #category : #converting }
 BlCompositionOffsetLayer >> asSymbolTree [
 	^ {
-		#Offset . {
-			#offset. { self offset }.
-			self layers collect: [ :eachLayer | eachLayer asSymbolTree ]
-		}
+		#Offset .
+			#offset. { self offset x . self offset y }.
+			self layers collect: [ :eachLayer | eachLayer asSymbolTree ] as: Array
 	}
 ]
 

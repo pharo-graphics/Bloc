@@ -32,7 +32,8 @@ BlCompositionContainerLayer >> asSkiaLayer [
 { #category : #converting }
 BlCompositionContainerLayer >> asSymbolTree [
 	^ {
-		#Container . self layers collect: [ :eachLayer | eachLayer asSymbolTree ]
+		#Container .
+			self layers collect: [ :eachLayer | eachLayer asSymbolTree ] as: Array
 	}
 ]
 

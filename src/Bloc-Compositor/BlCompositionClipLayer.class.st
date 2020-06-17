@@ -11,11 +11,10 @@ Class {
 { #category : #converting }
 BlCompositionClipLayer >> asSymbolTree [
 	^ {
-		#Clip . {
-			#offset. { self offset }.
-			#path. { self path class name }.
-			self layers collect: [ :eachLayer | eachLayer asSymbolTree ]
-		}
+		#Clip .
+			#offset. { self offset x . self offset y }.
+			#path. self path class name.
+			self layers collect: [ :eachLayer | eachLayer asSymbolTree ] as: Array
 	}
 ]
 

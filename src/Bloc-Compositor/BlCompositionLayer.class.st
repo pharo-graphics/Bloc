@@ -10,7 +10,41 @@ Class {
 }
 
 { #category : #printing }
+BlCompositionLayer class >> printSymbolTree: anArray [
+	^ String streamContents: [ :aStream | self printSymbolTree: anArray on: aStream ]
+]
+
+{ #category : #printing }
 BlCompositionLayer class >> printSymbolTree: anArray on: aStream [
+	aStream nextPut: $#.
+	self printSymbolTree: anArray on: aStream depth: 0.
+]
+
+{ #category : #printing }
+BlCompositionLayer class >> printSymbolTree: anArray on: aStream depth: aDepth [
+	| thePropertiesArray |
+	aStream
+		nextPut: $(;
+		nextPutAll: anArray first.
+	
+	thePropertiesArray := anArray allButFirst.
+	thePropertiesArray pairsDo: [ :eachName :eachProperty |
+		aStream
+			cr;
+			space: (aDepth + 1) * 2;
+			nextPutAll: eachName; space;
+			print: eachProperty ].
+		
+	thePropertiesArray size odd
+		ifTrue: [
+			aStream cr.
+			aStream space: (aDepth + 1) * 2; nextPut: $(.
+			thePropertiesArray last withIndexDo: [ :eachSubTree :eachIndex |
+				eachIndex > 1
+					ifTrue: [ aStream cr; space: (aDepth + 1) * 2 ].
+				self printSymbolTree: eachSubTree on: aStream depth: aDepth + 1 ].
+			aStream nextPut: $). ].
+	aStream nextPut: $).
 ]
 
 { #category : #converting }

@@ -23,10 +23,9 @@ BlCompositionLeftoverStateLayer >> asSkiaLayer [
 { #category : #converting }
 BlCompositionLeftoverStateLayer >> asSymbolTree [
 	^ {
-		#Leftover . {
+		#Leftover.
 			#state. self state asSymbolTree.
-			self layers collect: [ :eachLayer | eachLayer asSymbolTree ]
-		}
+			self layers collect: [ :eachLayer | eachLayer asSymbolTree ] as: Array
 	}
 ]
 

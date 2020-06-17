@@ -28,11 +28,10 @@ BlCompositionTransformationLayer >> asSkiaLayer [
 { #category : #converting }
 BlCompositionTransformationLayer >> asSymbolTree [
 	^ {
-		#Transformation . {
-			#offset. { self offset }.
+		#Transformation .
+			#offset. { self offset x . self offset y }.
 			#matrix. self matrix asMatrixCollection asArray.
-			self layers collect: [ :eachLayer | eachLayer asSymbolTree ]
-		}
+			self layers collect: [ :eachLayer | eachLayer asSymbolTree ] as: Array
 	}
 ]
 

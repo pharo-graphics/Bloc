@@ -22,7 +22,7 @@ BlCompositionLayer >> gtSymbolTreeFor: aView [
 		title: 'Tree Print';
 		priority: 4;
 		look: BrGlamorousCodeEditorLook new;
-		text: [ self asSymbolTree printString asRopedText ]
+		text: [ self class printSymbolTree: self asSymbolTree ]
 ]
 
 { #category : #'*Bloc-Compositor-GToolkit' }

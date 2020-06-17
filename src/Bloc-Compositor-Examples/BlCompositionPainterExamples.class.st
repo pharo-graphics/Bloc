@@ -443,7 +443,7 @@ BlCompositionPainterExamples >> overlappingSimpleElementsWantingLayerInbetweenOt
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform [
 	<gtExample>
-	| aContainer aPainter aRootLayer aWhitePictureLayer aLeftoverLayer anOffsetLayer aTransformationLayer aRedPictureLayer |
+	| aContainer aPainter |
 	
 	aContainer := self elementWantingLayerWithTranslationTransform.
 	aContainer forceLayout.
@@ -452,44 +452,22 @@ BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform
 	
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
-	
-	aRootLayer := aPainter containerLayer.
-	self assert: aRootLayer layers size equals: 2.
-	
-	aWhitePictureLayer := aRootLayer layers first.
-	
-	self assert: (aWhitePictureLayer isKindOf: BlCompositionPictureLayer).
-	self assert: aWhitePictureLayer needsCache not.
-	self assert: aWhitePictureLayer isSimple.
-	self assert: aWhitePictureLayer isWorthCaching not.
-	
-	aLeftoverLayer := aRootLayer layers second.
-	self assert: (aLeftoverLayer isKindOf: BlCompositionLeftoverStateLayer).
-	self assert: aLeftoverLayer layers size equals: 1.
-	self assert: aLeftoverLayer commands equals: ({
-		BlCompositionPainterStateClip new
-			offset: 0@0;
-			clip: (SpartaRoundedRectangle rectangle: (0@0 extent: 300@300) radii: (SpartaCornerRadii fromArray: #(4 4 4 4)))
-	}).
-	
-	anOffsetLayer := aLeftoverLayer layers first.
-	self assert: (anOffsetLayer isKindOf: BlCompositionOffsetLayer).
-	self assert: anOffsetLayer offset equals: 0.0@0.
-	self assert: anOffsetLayer layers size equals: 1.
-	
-	aTransformationLayer := anOffsetLayer layers first.
-	
-	self assert: (aTransformationLayer isKindOf: BlCompositionTransformationLayer).
-	self assert: aTransformationLayer offset equals: 0.0@0.
-	self assert: aTransformationLayer matrix equals: (BlMatrix2D translation: 150@75).
-	self assert: aTransformationLayer layers size equals: 1.
 
-	aRedPictureLayer := aTransformationLayer layers first.
-	
-	self assert: (aRedPictureLayer isKindOf: BlCompositionPictureLayer).
-	self assert: aRedPictureLayer needsCache.
-	self assert: aRedPictureLayer isSimple.
-	self assert: aRedPictureLayer isWorthCaching not.
+	self assert: aPainter containerLayer asSymbolTree equals:
+	#(Container
+	  ((Picture
+	    cache false
+	    simple true)
+	  (Leftover
+	    state #(#(#Clip #SpartaRoundedRectangle))
+	    ((Offset
+	      offset #(0 0)
+	      ((Transformation
+	        offset #(0 0)
+	        matrix #(1.0 0.0 150.0 0.0 1.0 75.0 0 0 1)
+	        ((Picture
+	          cache true
+	          simple true))))))))).
 
 	^ aPainter
 ]
@@ -497,7 +475,7 @@ BlCompositionPainterExamples >> paintElementWantingLayerWithTranslationTransform
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLayer [
 	<gtExample>
-	| aContainer aPainter aRootLayer |
+	| aContainer aPainter |
 	
 	aContainer := self elementWithTransformationBetweenWantingLayer.
 	aContainer forceLayout.
@@ -507,7 +485,52 @@ BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLaye
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
-	aRootLayer := aPainter containerLayer.
+	self assert: aPainter containerLayer asSymbolTree equals:
+	#(Container
+	  ((Picture
+	    cache false
+	    simple true)
+	  (Leftover
+	    state #(#(#Clip #Rectangle) #(#Clip #Rectangle) #(#Clip #Rectangle))
+	    ((Offset
+	      offset #(160.0 110.0)
+	      ((Picture
+	        cache false
+	        simple true)
+	      (Leftover
+	        state #(#(#Transform #(1.5 0.0 -70.0 0.0 1.5 -45.0 0 0 1)))
+	        ((Shadow
+	          offset #(0 0)
+	          shadowOffset #(10 20)
+	          shadowColor #(0.0 0.0 0.0 0.2980392156862745)
+	          shadowWidth 15
+	          shadowPath #Rectangle
+	          ((Picture
+	            cache true
+	            simple true)))))
+	      (Picture
+	        cache false
+	        simple true)
+	      (Leftover
+	        state #(#(#Transform #(1.5 0.0 -70.0 0.0 1.5 -45.0 0 0 1)) #(#Clip #Rectangle))
+	        ((Offset
+	          offset #(20 20)
+	          ((Picture
+	            cache true
+	            simple true)))))
+	      (Leftover
+	        state #(#(#Transform #(1.5 0.0 -70.0 0.0 1.5 -45.0 0 0 1)) #(#Clip #Rectangle))
+	        ((Offset
+	          offset #(20 80)
+	          ((Picture
+	            cache true
+	            simple true)))))
+	      (Picture
+	        cache false
+	        simple false)))))
+	  (Picture
+	    cache false
+	    simple true))).
 	
 	^ aPainter
 ]
@@ -515,7 +538,7 @@ BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLaye
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLayerInSingleLayer [
 	<gtExample>
-	| aContainer aPainter aRootLayer |
+	| aContainer aPainter |
 	
 	aContainer := self elementWithTransformationBetweenWantingLayerInSingleLayer.
 	aContainer forceLayout.
@@ -525,7 +548,21 @@ BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLaye
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
-	aRootLayer := aPainter containerLayer.
+	self assert: aPainter containerLayer asSymbolTree equals:
+#(Container
+  ((Picture
+    cache false
+    simple true)
+  (Leftover
+    state #(#(#Clip #SpartaRoundedRectangle))
+    ((Offset
+      offset #(0 0)
+      ((Transformation
+        offset #(0 0)
+        matrix #(1.0 0.0 150.0 0.0 1.0 75.0 0 0 1)
+        ((Picture
+          cache true
+          simple true))))))))).
 	
 	^ aPainter
 ]
@@ -533,7 +570,7 @@ BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLaye
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintElementsWantingLayerInsideScalable [
 	<gtExample>
-	| aContainer aPainter aRootLayer |
+	| aContainer aPainter |
 	
 	aContainer := self elementsWantingLayerInsideScalable.
 	aContainer forceLayout.
@@ -542,27 +579,28 @@ BlCompositionPainterExamples >> paintElementsWantingLayerInsideScalable [
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
-	aRootLayer := aPainter containerLayer.
-	"self assert: aRootLayer layers size equals: 4.
-	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers second isKindOf: BlCompositionLeftOverTransformationLayer).
-	self assert: (aRootLayer layers third isKindOf: BlCompositionLeftOverTransformationLayer).
-	self assert: (aRootLayer layers fourth isKindOf: BlCompositionPictureLayer).
-
-	self assert: (aRootLayer layers second matrix closeTo: (
-		SpartaMatrix new
-			sx: 0.283;
-			sy: 0.283;
-			y: 36.623) epsilon: 0.001).
-			
-	self assert: (aRootLayer layers third matrix closeTo: (
-		SpartaMatrix new
-			sx: 0.283;
-			sy: 0.283;
-			y: 36.623) epsilon: 0.001).
-
-	self assert: (aRootLayer layers second layers first offset) equals: (30@30).
-	self assert: (aRootLayer layers third layers first offset) equals: (25@485)."
+	self assert: aPainter containerLayer asSymbolTree equals:
+#(Container
+  ((Picture
+    cache false
+    simple false)
+  (Leftover
+    state #(#(#Clip #SpartaRoundedRectangle) #(#Clip #Rectangle) #(#Transform #(0.2830188679245283 0.0 380.0 0.0 0.2830188679245283 469.62264150943395 0 0 1)) #(#Clip #Rectangle))
+    ((Offset
+      offset #(30 30)
+      ((Picture
+        cache true
+        simple true)))))
+  (Leftover
+    state #(#(#Clip #SpartaRoundedRectangle) #(#Clip #Rectangle) #(#Transform #(0.2830188679245283 0.0 380.0 0.0 0.2830188679245283 469.62264150943395 0 0 1)) #(#Clip #Rectangle))
+    ((Offset
+      offset #(25 485)
+      ((Picture
+        cache true
+        simple true)))))
+  (Picture
+    cache false
+    simple true))).
 	
 	^ aPainter
 ]
@@ -570,7 +608,7 @@ BlCompositionPainterExamples >> paintElementsWantingLayerInsideScalable [
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintOverlappingElementWantingLayerInbetweenOtherElements [
 	<gtExample>
-	| aContainer aPainter aRootLayer |
+	| aContainer aPainter |
 	
 	aContainer := self overlappingElementWantingLayerInbetweenOtherElements.
 	aContainer forceLayout.
@@ -579,7 +617,41 @@ BlCompositionPainterExamples >> paintOverlappingElementWantingLayerInbetweenOthe
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
-	aRootLayer := aPainter containerLayer.	
+	self assert: aPainter containerLayer asSymbolTree equals:
+#(Container
+  ((Picture
+    cache false
+    simple true)
+  (Leftover
+    state #(#(#Clip #Rectangle) #(#Clip #Rectangle))
+    ((Offset
+      offset #(25 25)
+      ((Picture
+        cache true
+        simple true)))))
+  (Leftover
+    state #(#(#Clip #Rectangle))
+    ((Offset
+      offset #(50 50)
+      ((Picture
+        cache false
+        simple true)
+      (Clip
+        offset #(0 0)
+        path #Rectangle
+        ((Picture
+          cache true
+          simple true)))))))
+  (Picture
+    cache false
+    simple true)
+  (Leftover
+    state #(#(#Clip #Rectangle) #(#Clip #Rectangle))
+    ((Offset
+      offset #(125 125)
+      ((Picture
+        cache true
+        simple true))))))).
 	
 	^ aPainter
 ]
@@ -587,7 +659,7 @@ BlCompositionPainterExamples >> paintOverlappingElementWantingLayerInbetweenOthe
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetweenOtherElements [
 	<gtExample>
-	| aContainer aPainter aRootLayer aLeftoverLayer anOffsetLayer aRedPictureLayer |
+	| aContainer aPainter |
 	
 	aContainer := self overlappingSimpleElementWantingLayerInbetweenOtherElements.
 	aContainer forceLayout.
@@ -596,31 +668,21 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
-	aRootLayer := aPainter containerLayer.
-	
-	self assert: aRootLayer layers size equals: 3.
-	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers first needsCache not).
-
-	aLeftoverLayer := aRootLayer layers second.
-	self assert: (aLeftoverLayer isKindOf: BlCompositionLeftoverStateLayer).
-	self assert: aLeftoverLayer commands equals: ({
-		BlCompositionPainterStateClip new
-			offset: 0@0;
-			clip: (0@0 extent: 400@400) }).
-	
-	anOffsetLayer := aLeftoverLayer layers first.
-	self assert: (anOffsetLayer isKindOf: BlCompositionOffsetLayer).
-	self assert: anOffsetLayer offset equals: 50@50.
-	
-	aRedPictureLayer := anOffsetLayer layers first.
-	self assert: (aRedPictureLayer isKindOf: BlCompositionPictureLayer).
-	self assert: aRedPictureLayer needsCache.
-	self assert: aRedPictureLayer isSimple.
-	self assert: aRedPictureLayer isWorthCaching not.
-
-	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers third needsCache not).
+	self assert: aPainter containerLayer asSymbolTree equals:
+#(Container
+  ((Picture
+    cache false
+    simple true)
+  (Leftover
+    state #(#(#Clip #Rectangle))
+    ((Offset
+      offset #(50 50)
+      ((Picture
+        cache true
+        simple true)))))
+  (Picture
+    cache false
+    simple true))).
 	
 	^ aPainter
 ]
@@ -628,7 +690,7 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetweenOtherElementsInParentWithTransformation [
 	<gtExample>
-	| aContainer aPainter aRootLayer |
+	| aContainer aPainter |
 	
 	aContainer := self overlappingSimpleElementWantingLayerInbetweenOtherElementsInParentWithTransformation.
 	aContainer forceLayout.
@@ -638,19 +700,21 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
-	aRootLayer := aPainter containerLayer.
-	
-	"self assert: aRootLayer layers size equals: 3.
-	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers first needsCache not).
-
-	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
-	self assert: aRootLayer layers second offset equals: 50@50.
-	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers second layers first needsCache).
-
-	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers third needsCache not)."
+	self assert: aPainter containerLayer asSymbolTree equals:
+#(Container
+  ((Picture
+    cache false
+    simple true)
+  (Leftover
+    state #(#(#Transform #(1.2 0.0 0.0 0.0 1.2 0.0 0 0 1)) #(#Clip #Rectangle))
+    ((Offset
+      offset #(50 50)
+      ((Picture
+        cache true
+        simple true)))))
+  (Picture
+    cache false
+    simple true))).
 	
 	^ aPainter
 ]
@@ -658,7 +722,7 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerInbetwe
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerWithTransformInbetweenOtherElements [
 	<gtExample>
-	| aContainer aPainter aRootLayer |
+	| aContainer aPainter |
 	
 	aContainer := self overlappingSimpleElementWantingLayerWithTransformInbetweenOtherElements.
 	aContainer forceLayout.
@@ -666,20 +730,30 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerWithTra
 	aPainter := BlCompositionLayeredPainter root: aContainer extent.
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
-	
-	aRootLayer := aPainter containerLayer.
-	
-	"self assert: aRootLayer layers size equals: 3.
-	self assert: (aRootLayer layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers first needsCache not).
-
-	self assert: (aRootLayer layers second isKindOf: BlCompositionOffsetLayer).
-	self assert: aRootLayer layers second offset equals: 50@50.
-	self assert: (aRootLayer layers second layers first isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers second layers first needsCache).
-
-	self assert: (aRootLayer layers third isKindOf: BlCompositionPictureLayer).
-	self assert: (aRootLayer layers third needsCache not)."
+		
+	self assert: aPainter containerLayer asSymbolTree equals:
+#(Container
+  ((Offset
+    offset #(0 0)
+    ((Picture
+      cache false
+      simple true)
+    (Clip
+      offset #(0 0)
+      path #Rectangle
+      ((Picture
+        cache false
+        simple true)
+      (Leftover
+        state #(#(#Transform #(1.2 0.0 0.0 0.0 1.2 0.0 0 0 1)) #(#Clip #Rectangle))
+        ((Offset
+          offset #(25 25)
+          ((Picture
+            cache true
+            simple true)))))
+      (Picture
+        cache false
+        simple true))))))).
 	
 	^ aPainter
 ]
@@ -687,7 +761,7 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementWantingLayerWithTra
 { #category : #'examples - painter' }
 BlCompositionPainterExamples >> paintOverlappingSimpleElementsWantingLayerInbetweenOtherElementsInParentWithTransformation [
 	<gtExample>
-	| aContainer aPainter aRootLayer |
+	| aContainer aPainter |
 	
 	aContainer := self overlappingSimpleElementsWantingLayerInbetweenOtherElementsInParentWithTransformation.
 	
@@ -695,7 +769,28 @@ BlCompositionPainterExamples >> paintOverlappingSimpleElementsWantingLayerInbetw
 	aContainer fullPaintOn: aPainter offset: 0@0.
 	aPainter stopRecording.
 	
-	aRootLayer := aPainter containerLayer.	
+	self assert: aPainter containerLayer asSymbolTree equals:
+#(Container
+  ((Picture
+    cache false
+    simple true)
+  (Leftover
+    state #(#(#Transform #(1.2 0.0 0.0 0.0 1.2 0.0 0 0 1)) #(#Clip #Rectangle))
+    ((Offset
+      offset #(50 50)
+      ((Picture
+        cache true
+        simple true)))))
+  (Leftover
+    state #(#(#Transform #(1.2 0.0 0.0 0.0 1.2 0.0 0 0 1)) #(#Clip #Rectangle))
+    ((Offset
+      offset #(100 100)
+      ((Picture
+        cache true
+        simple true)))))
+  (Picture
+    cache false
+    simple true))).
 	
 	^ aPainter
 ]
