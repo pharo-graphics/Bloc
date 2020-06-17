@@ -237,6 +237,7 @@ BlMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 			ifFalse: [ BlMouseLeaveEvent new ].
 
 		anEvent
+			position: 0@0;
 			target: eachEnteredTarget;
 			canBePropagated: false;
 			timestamp: self space time now.
