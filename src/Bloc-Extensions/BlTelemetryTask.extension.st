@@ -2,12 +2,15 @@ Extension { #name : #BlTelemetryTask }
 
 { #category : #'*Bloc-Extensions' }
 BlTelemetryTask >> gtBarElements [
-	^ self gtBarElementsWithGlobalWeight: 1.0 local: 1.0
+	^ (self gtBarElementsWithGlobalWeight: 1.0 local: 1.0) asScrollableElement
+		margin: (BlInsets all: 10)
 ]
 
 { #category : #'*Bloc-Extensions' }
 BlTelemetryTask >> gtBarElementsWithGlobalWeight: aWeight local: aLocalWeight [
-	| taskElements |
+	| taskElements aBarColor |
+	
+	aBarColor := BlColorTransition interpolate: Color veryLightGray to: BrGlamorousColors errorBorderColor at: aWeight.
 	
 	taskElements := aWeight > 0.1
 		ifTrue: [
@@ -26,42 +29,50 @@ BlTelemetryTask >> gtBarElementsWithGlobalWeight: aWeight local: aLocalWeight [
 			self tasks
 				ifEmpty: [ #() ]
 				ifNotEmpty: [ {
-					BrHorizontalPane new
+					BlElement new
+						layout: BlLinearLayout horizontal;
+						constraintsDo: [ :c |
+							c horizontal matchParent.
+							c vertical exact: 20 ];
 						when: BlClickEvent
 						do: [ :anEvent |
 							anEvent consumed: true.
 							anEvent currentTarget phlow spawnObject: self ];
-						vExact: 20;
-						hMatchParent;
 						geometry: (BlRectangle cornerRadius: 3);
 						border: (BlBorder paint: Color transparent width: (aWeight max: 0.1));
-						background: (Color gray alpha: 0.2) } ] ].
+						background: (BlLinearGradientPaint vertical stops: {
+							0 -> aBarColor.
+							0.4 -> (aBarColor alpha: 0.5).
+							1 -> (aBarColor alpha: 0)}) } ] ].
 	
-	^ BrVerticalPane new
-		hMatchParent;
-		vFitContent;
-		addChild: (BrHorizontalPane new
+	^ BlElement new
+		layout: BlLinearLayout vertical;
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical fitContent ];
+		addChild: (BlElement new
+			layout: BlLinearLayout horizontal alignCenter;
 			when: BlClickEvent
 			do: [ :anEvent |
 				anEvent consumed: true.
 				anEvent currentTarget phlow spawnObject: self ];
-			hMatchParent;
-			alignCenter;
-			vExact: 20;
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical exact: 20 ];
 			padding: (BlInsets top: 3 bottom: 3);
 			geometry: (BlRectangle cornerRadius: 3);
 			border: (BlBorder paint: Color transparent width: 0.25);
-			background: ((BlColorTransition interpolate: Color gray to: Color red at: aWeight) alpha: 0.4 + (20 atRandom / 100.0));
+			background: aBarColor;
 			in: [ :aPane | aWeight > 0.005
 				ifTrue: [ aPane addChild: (BrLabel new
 					look: (BrGlamorousLabelLook new fontSize: 10);
 					text: self printString) asScalableElement ] ];
 			yourself);
-		addChild: (BrHorizontalPane new
-			alignTopCenter;
-			hMatchParent;
-			vFitContent;
-			weightSum: 1;
+		addChild: (BlElement new
+			layout: (BlLinearLayout horizontal alignTopCenter weightSum: 1);
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical fitContent ];
 			addChildren: taskElements);
 		yourself
 ]
