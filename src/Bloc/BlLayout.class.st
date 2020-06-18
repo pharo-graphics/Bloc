@@ -78,7 +78,7 @@ Class {
 		'previousMeasurementSpec',
 		'direction',
 		'waitingLayout',
-		'layoutRequestEaten'
+		'ignoreLayoutRequests'
 	],
 	#category : #'Bloc-Layouts-Basic'
 }
@@ -149,15 +149,6 @@ BlLayout >> direction: aBlLayoutDirection [
 	direction := aBlLayoutDirection
 ]
 
-{ #category : #protected }
-BlLayout >> eatRequestLayoutDuring: aBlock [
-	| wasEaten |
-
-	wasEaten := layoutRequestEaten.
-	layoutRequestEaten := true.
-	aBlock ensure: [ layoutRequestEaten := wasEaten ]
-]
-
 { #category : #geometry }
 BlLayout >> findClosestChildOf: anElement to: aPoint [
 	"Find and return the closest direct child of a given element to a provided point in the coordinate system of anElement"
@@ -166,13 +157,22 @@ BlLayout >> findClosestChildOf: anElement to: aPoint [
 	^ anElement children first
 ]
 
+{ #category : #protected }
+BlLayout >> ignoreRequestLayoutDuring: aBlock [
+	| wasIgnored |
+
+	wasIgnored := ignoreLayoutRequests.
+	ignoreLayoutRequests := true.
+	aBlock ensure: [ ignoreLayoutRequests := wasIgnored ]
+]
+
 { #category : #initialization }
 BlLayout >> initialize [
 	super initialize.
 	
 	requestingLayout := true.
 	waitingLayout := true.
-	layoutRequestEaten := false.
+	ignoreLayoutRequests := false.
 	direction := self defaultDirection
 ]
 
@@ -401,7 +401,7 @@ BlLayout >> requestLayout: anElement from: aSourceElement [
 	check since there can be a case when I am requesting layout, but my parent
 	still does not"
 	
-	layoutRequestEaten
+	ignoreLayoutRequests
 		ifTrue: [ ^ self ].
 
 	self requestingLayout: true.

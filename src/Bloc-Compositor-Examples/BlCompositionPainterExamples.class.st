@@ -554,15 +554,30 @@ BlCompositionPainterExamples >> paintElementWithTransformationBetweenWantingLaye
     cache false
     simple true)
   (Leftover
-    state #(#(#Clip #SpartaRoundedRectangle))
+    state #(#(#Clip #Rectangle) #(#Clip #Rectangle) #(#Clip #Rectangle))
     ((Offset
-      offset #(0 0)
+      offset #(160.0 110.0)
       ((Transformation
         offset #(0 0)
-        matrix #(1.0 0.0 150.0 0.0 1.0 75.0 0 0 1)
-        ((Picture
-          cache true
-          simple true))))))))).
+        matrix #(1.5 0.0 -70.0 0.0 1.5 -45.0 0 0 1)
+        ((Shadow
+          offset #(0 0)
+          shadowOffset #(10 20)
+          shadowColor #(0.0 0.0 0.0 0.2980392156862745)
+          shadowWidth 15
+          shadowPath #Rectangle
+          ((Picture
+            cache true
+            simple true)))
+        (Clip
+          offset #(0 0)
+          path #Rectangle
+          ((Picture
+            cache true
+            simple false)))))))))
+  (Picture
+    cache false
+    simple true))).
 	
 	^ aPainter
 ]

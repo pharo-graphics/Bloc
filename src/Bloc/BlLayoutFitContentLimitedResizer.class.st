@@ -52,7 +52,10 @@ BlLayoutFitContentLimitedResizer >> measurementExactlyWith: aNumber [
 
 { #category : #'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementUnspecifiedWith: aNumber [
-	^ BlMeasurementSpec unspecified
+	"Child wants to determine its own size.... find out how big it should be"
+	<return: #BlMeasurementSpec>
+
+	^ BlMeasurementSpec unspecified: aNumber
 ]
 
 { #category : #printing }
