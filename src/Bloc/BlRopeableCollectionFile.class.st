@@ -1,33 +1,55 @@
 "
 Definition of Ropeable from wordnik.com (from Australia, New Zealand) Angry to the point of needing to be restrained from violent action.
 
-BlRopableCollectionFile looks enough like the Arrays used by BlCollectionRope after the string has been normalised to be used in BlCollectionRope. 
+BlRopableCollectionFile looks enough like the Strings used by BlCollectionRope after the string has been normalised to be used in BlCollectionRope. 
 
 Since the entire file is not read until needed the size is an estimation which is guaranteed to be larger than or equal to the text size (since there are currently no cases in which a single byte from the file is converted to multiple characters / symbols in the resulting text).
+
+The default behaviour is to interpret the file as UTF-8 encoded.  If an encoding error is encountered, the remainder of the file is interpreted as ascii (null-encoding).
+
+The read stream on the receiver's file is automatically closed when the receiver is garbage collected.
 
 
 Public API and Key Messages
 
-- message one   
-- message two 
-- (for bonus points) how to create instances.
-
-   One simple example is simply gorgeous.
- 
-Internal Representation and Key Implementation Points.
-
-    Instance Variables
-	fileReference:		<Object>
-	map:		<SortedCollection> Character index -> Byte index
+- ropeFor: 		Answer a BlRopedText on the supplied file.
 
 
-    Implementation Points
+!!Internal Representation and Key Implementation Points.
+
+!!!Instance Variables
+
+	binaryStream: 		<ZnBufferedReadStream> The underlying stream for the receiver's file.
+	bufferSize: 			<Integer> See implementation notes
+	buffer: 				<String> See implementation notes
+	bufferStart: 		<Integer> The character offset of the first character in the buffer
+	bufferedSize: 		<Integer> The number of valid characters in the buffer
+	fileReference:		<FileReference> The file being read
+	haveSize: 			<Boolean> True if the actual character size of the file is known
+	map:					<SortedCollection> Character index -> Byte index
+	strict: 				<Boolean> If true, an exception will be raised when decoding the file (UTF-8).  If false, the character stream will be interpreted as ascii (null-encoding).
+
+
+!!!Implementation Points
+
+!!!!Buffer Efficiency
+
+Currently characters are read from the stream using #next:, creating a new buffer object each time the file is read.  Performance can be improved by re-using a single buffer and reading in to it (thus bufferedSize).
+
+!!!!size 
+
+The #size method currently returns an estimate of the actual size is not known.  This can cause problems if a user attempts to copy the entire contents using `text size` as the end position.
+
+Probably size should be reified and a StringSize object used to indicate the end of the string.  However it isn't clear how comparisons with numbers should be performed, and no exceptions have actually occurred, so this has been deferred until an actual case can be analysed.
+
+Once that has been done, #size should be modified to raise an exception if the actual size isn't known.  #approximateSize can be used to get an idea of the receiver's size.
 "
 Class {
 	#name : #BlRopeableCollectionFile,
 	#superclass : #Object,
 	#instVars : [
 		'fileReference',
+		'strict',
 		'binaryStream',
 		'map',
 		'bufferSize',
@@ -60,6 +82,17 @@ BlRopeableCollectionFile >> = anObject [
 	^ fileReference
 		ifNil: [ '' = anObject ]
 		ifNotNil: [ fileReference contents = anObject ]
+]
+
+{ #category : #accessing }
+BlRopeableCollectionFile >> approximateSize [ 
+	"Answer the receiver's size, if known.   If not use the file size, which will be either correct or an over-estimate"
+
+	^ haveSize
+		ifTrue: [ map last key ]
+		ifFalse: [ fileReference
+			ifNil: [ 0 ]
+			ifNotNil: [ fileReference size ] ]
 ]
 
 { #category : #accessing }
@@ -124,6 +157,35 @@ BlRopeableCollectionFile >> copyFrom: startIndex to: endIndex [
 
 ]
 
+{ #category : #copying }
+BlRopeableCollectionFile >> copyToEndFrom: startIndex [
+	"Copy the receiver's contents from startIndex to the end.
+	This should be used instead of #copyFrom:to: since the receiver's length may not be known."
+	| length results receiverIndex bufferIndex resultIndex endIndex |
+
+	self ensureBuffered: startIndex.
+	endIndex := self approximateSize.
+	length := endIndex - startIndex + 1.
+	length <= 0 ifTrue: [ ^ '' ].
+	results := Array new: length.
+	receiverIndex := startIndex.
+	resultIndex := 1.
+	bufferIndex := startIndex - bufferStart + 1.
+
+	[ receiverIndex <= endIndex ] whileTrue:
+		[ bufferIndex > bufferedSize ifTrue: 
+			[ self ensureBuffered: receiverIndex.
+			bufferIndex := receiverIndex - bufferStart.
+			endIndex := self approximateSize ].
+		results at: resultIndex put: (buffer at: bufferIndex).
+		receiverIndex := receiverIndex + 1.
+		resultIndex := resultIndex + 1.
+		bufferIndex := bufferIndex + 1. ].
+
+	^ results
+
+]
+
 { #category : #enumerating }
 BlRopeableCollectionFile >> do: aBlock [ 
 	| characterStream ch |
@@ -157,7 +219,7 @@ BlRopeableCollectionFile >> ensureBuffered: anInteger [
 
 	[ (anInteger > (bufferStart + bufferedSize - 1)) or: [ bufferStart = 0 ] ] whileTrue:
 		[ bufferStart := bufferStart + bufferedSize.
-		rawBuffer := characterStream next: bufferSize.
+		rawBuffer := self loadNext: bufferSize with: characterStream.
 		buffer := normalizer process: rawBuffer.
 		bufferedSize := buffer size.
 		map add: (bufferStart + bufferedSize - 1) -> binaryStream position.
@@ -205,7 +267,25 @@ BlRopeableCollectionFile >> initialize [
 	haveSize := false.
 	bufferStart := 0.
 	bufferedSize := 0.
+	strict := false.
 	
+]
+
+{ #category : #private }
+BlRopeableCollectionFile >> loadNext: aNumber with: aReadStream [
+	"Answer the next aNumber characters using aReadstream.
+	If an encoding error occurs and strict is false, fall back to null encoding"
+	| startPosition |
+
+	startPosition := binaryStream position.
+	^ [ aReadStream next: aNumber ]
+		on: ZnCharacterEncodingError
+		do: [ :ex | 
+			strict ifTrue: 
+				[ ex pass ]
+			ifFalse:
+				[ binaryStream position: startPosition.
+				self loadNext: aNumber with: self nullEncodedStream ] ]
 ]
 
 { #category : #'private - testing' }
@@ -252,6 +332,15 @@ BlRopeableCollectionFile >> mapEntryFor: anInteger [
 
 ]
 
+{ #category : #private }
+BlRopeableCollectionFile >> nullEncodedStream [
+	"Answer a read stream with null (ascii) character decoding on the receiver's binary stream"
+
+	^ ZnCharacterReadStream 
+		on: binaryStream 
+		encoding: 'null'
+]
+
 { #category : #accessing }
 BlRopeableCollectionFile >> size [ 
 	"Answer the receiver's size.
@@ -269,4 +358,14 @@ BlRopeableCollectionFile >> species [
 	"Answer a class that can be used to create new in-memory ropes"
 
 	^ String
+]
+
+{ #category : #accessing }
+BlRopeableCollectionFile >> strict [
+	^ strict
+]
+
+{ #category : #accessing }
+BlRopeableCollectionFile >> strict: anObject [
+	strict := anObject
 ]
