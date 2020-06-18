@@ -112,6 +112,7 @@ BlPullHandler >> dragEvent: anEvent [
 	anEvent consumed: true.
 
 	anEvent currentTarget dispatchEvent: (BlPullEvent new
+		initialPosition: originalPosition;
 		oldPosition: dragPosition;
 		newPosition: aNewPosition;
 		delta: dragDelta)

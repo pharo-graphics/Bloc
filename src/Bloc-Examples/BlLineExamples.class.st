@@ -209,6 +209,65 @@ BlLineExamples >> connectTwoGridsWith6Lines [
 		yourself
 ]
 
+{ #category : #'example - connections' }
+BlLineExamples >> draggableLineWithTwoAnchors [
+	<gtExample>
+	| fromElement toElement line container |
+	
+	fromElement := BlElement new
+		size: 20 @ 20;
+		geometry: BlCircle new;
+		relocate: 75 @ 140;
+		addEventHandler: BlPullHandler new;
+		background: Color gray.
+
+	toElement := BlElement new
+		size: 20 @ 20;
+		geometry: BlCircle new;
+		relocate: 200 @ 240;
+		addEventHandler: BlPullHandler new;
+		background: Color gray.
+
+	line := BlLineElement new
+		fromAnchor: (BlElementCenterAnchor element: fromElement);
+		toAnchor: (BlElementCenterAnchor element: toElement);
+		border: (BlBorder paint: Color blue width: 4);
+		addEventHandler: BlPullHandler new;
+		when: BlPullStartEvent
+			do: [ :anEvent | 
+			fromElement userData
+				at: #initialDragPosition
+				put: fromElement position.
+			toElement userData at: #initialDragPosition put: toElement position ];
+		when: BlPullEvent
+			do: [ :anEvent | 
+			fromElement
+				relocate:
+					(fromElement userData at: #initialDragPosition)
+						+ anEvent absoluteDelta.
+			toElement
+				relocate: (toElement userData at: #initialDragPosition) + anEvent absoluteDelta ];
+		when: BlMouseEnterEvent
+			do: [ :anEvent | anEvent currentTarget border: (BlBorder paint: Color red width: 4) ];
+		when: BlMouseLeaveEvent
+			do:	 [ :anEvent | anEvent currentTarget border: (BlBorder paint: Color blue width: 4) ];
+		yourself.
+
+	container := BlElement new
+		background: Color white;
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ];
+		yourself.
+	
+	container addChildren: {
+		line.
+		fromElement.
+		toElement
+	}.
+	^ container
+]
+
 { #category : #'example - visual properties' }
 BlLineExamples >> grayLine [
 	<gtExample>
