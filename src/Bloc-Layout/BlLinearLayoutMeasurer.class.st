@@ -174,7 +174,7 @@ BlLinearLayoutMeasurer >> limitedMeasure [
 { #category : #measurement }
 BlLinearLayoutMeasurer >> measure [
 
-	self preMeasure.
+	layout eatRequestLayoutDuring: [ self preMeasure ].
 
 	self baselineMeasure.
 	self largestMeasure.

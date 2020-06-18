@@ -77,7 +77,8 @@ Class {
 		'requestingLayout',
 		'previousMeasurementSpec',
 		'direction',
-		'waitingLayout'
+		'waitingLayout',
+		'layoutRequestEaten'
 	],
 	#category : #'Bloc-Layouts-Basic'
 }
@@ -148,6 +149,15 @@ BlLayout >> direction: aBlLayoutDirection [
 	direction := aBlLayoutDirection
 ]
 
+{ #category : #protected }
+BlLayout >> eatRequestLayoutDuring: aBlock [
+	| wasEaten |
+
+	wasEaten := layoutRequestEaten.
+	layoutRequestEaten := true.
+	aBlock ensure: [ layoutRequestEaten := wasEaten ]
+]
+
 { #category : #geometry }
 BlLayout >> findClosestChildOf: anElement to: aPoint [
 	"Find and return the closest direct child of a given element to a provided point in the coordinate system of anElement"
@@ -162,6 +172,7 @@ BlLayout >> initialize [
 	
 	requestingLayout := true.
 	waitingLayout := true.
+	layoutRequestEaten := false.
 	direction := self defaultDirection
 ]
 
@@ -383,6 +394,29 @@ BlLayout >> previousMeasurementSpec: anObject [
 ]
 
 { #category : #protected }
+BlLayout >> requestLayout: anElement from: aSourceElement [
+	"Request invalidation of layout on next space pulse originally
+	emitted by a given element.
+	Note: there should be no ===self isLayoutRequested ifTrue: [ ^ self ]===
+	check since there can be a case when I am requesting layout, but my parent
+	still does not"
+	
+	layoutRequestEaten
+		ifTrue: [ ^ self ].
+
+	self requestingLayout: true.
+	"checking for parent to be not nil is faster when inlined instead
+	of using hasParent. It is critical because this method is being
+	sent quite often and should be performant"
+	anElement parent
+		ifNotNil: [ :aParent | aParent requestLayout: aSourceElement ]
+		"There is no parent, probably I am a root element, let's check Space"
+		ifNil: [ anElement space
+			"If my parent is nil, but I am added to space, we need to let it know that we requested a layout by asking for a next pulse"
+			ifNotNil: [ :aSpace | aSpace requestNextPulse ] ]
+]
+
+{ #category : #protected }
 BlLayout >> requestingLayout [
 	"Return true if element requested layout on next space pulse, false otherwise"
 	<return: #Boolean>
@@ -392,7 +426,7 @@ BlLayout >> requestingLayout [
 
 { #category : #protected }
 BlLayout >> requestingLayout: aBoolean [
-		
+
 	aBoolean
 		ifTrue: [ waitingLayout := true ]
 		ifFalse: [ self waitingLayout

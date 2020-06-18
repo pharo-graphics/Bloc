@@ -3143,16 +3143,7 @@ BlElement >> requestLayout: anElement [
 	check since there can be a case when I am requesting layout, but my parent
 	still does not"
 
-	self layout requestingLayout: true.
-	"checking for parent to be not nil is faster when inlined instead
-	of using hasParent. It is critical because this method is being
-	sent quite often and should be performant"
-	self parent
-		ifNotNil: [ :aParent | aParent requestLayout: anElement ]
-		"There is no parent, probably I am a root element, let's check Space"
-		ifNil: [ self space
-			"If my parent is nil, but I am added to space, we need to let it know that we requested a layout by asking for a next pulse"
-			ifNotNil: [ :aSpace | aSpace requestNextPulse ] ]
+	self layout requestLayout: self from: anElement
 ]
 
 { #category : #layout }
