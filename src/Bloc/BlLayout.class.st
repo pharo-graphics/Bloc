@@ -237,7 +237,7 @@ BlLayout >> measure: anElement with: anExtentSpec [
 	"Default simple and naive implementation that does not support #fitContent resizing
 	strategy of the anElement that uses a layout with this version of measurement"
 
-	anElement measuredExtent: (anExtentSpec sizeFor: 0@0).
+	anElement measuredExtent: (anExtentSpec sizeFor: 0.0@0.0).
 	self measuredChildren: anElement do: [ :aChild |
 		self
 			measureChild: aChild
@@ -253,8 +253,8 @@ BlLayout >> measureChild: aChildElement parentSpec: anExtentSpec [
 	self
 		measureChild: aChildElement
 		parentSpec: anExtentSpec
-		widthUsed: 0
-		heightUsed: 0
+		widthUsed: 0.0
+		heightUsed: 0.0
 ]
 
 { #category : #protected }
@@ -369,10 +369,12 @@ BlLayout >> measurementSpecFor: parentSpec usedSize: usedSize resizer: childResi
 	 - Wrap Content: child tries to be big enough to fit contained subnodes
 	 - Exactly: child knows exactly how big it wants to be
 	"
+	<argument: #usedSize satisfies: #isBlocFiniteFloat>
 	<return: #BlMeasurementSpec>
-
 	| size |
-   size := 0 max: ((parentSpec size ifNil: [ 0 ]) - usedSize).
+
+   size := 0.0 max: ((parentSpec size ifNil: [ 0.0 ]) - usedSize).
+
 	^ parentSpec mode measurement: childResizer with: size
 ]
 

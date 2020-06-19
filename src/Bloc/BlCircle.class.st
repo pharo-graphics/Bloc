@@ -16,7 +16,7 @@ BlCircle >> geometryBounds: aBounds [
 
 	^ aBounds
 		origin: self origin
-		extent: (self radius * 2) asPoint
+		extent: (self radius * 2.0) asPoint
 ]
 
 { #category : #initialization }

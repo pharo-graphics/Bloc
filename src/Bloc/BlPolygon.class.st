@@ -49,6 +49,6 @@ BlPolygon >> vertices [
 { #category : #accessing }
 BlPolygon >> vertices: aCollectionOfPoints [
 
-	vertices := aCollectionOfPoints.
+	vertices := aCollectionOfPoints collect: [ :eachPoint | eachPoint asFloatPoint ].
 	extent := vertices max
 ]

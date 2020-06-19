@@ -124,8 +124,8 @@ BlLayoutCommonConstraints >> initialize [
 
 	maxHeight := Float infinity.
 	maxWidth := Float infinity.
-	minHeight := 0.
-	minWidth := 0.
+	minHeight := 0.0.
+	minWidth := 0.0.
 	
 	ignoredByLayout := false.
 	
@@ -166,16 +166,9 @@ BlLayoutCommonConstraints >> maxHeight: aNumber [
 	"Set maximal height to be aNumber,
 	aNumber must not be nil
 	aNumber must be non-negative"
+	<argument: #aNumber satisfies: #isBlocPositive>
 	
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Maximal height must not be nil' ].
-		
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Maximal height must be non-negative' ].
-	
-	maxHeight := aNumber
+	maxHeight := aNumber asFloat
 ]
 
 { #category : #'api - constraints' }
@@ -192,16 +185,9 @@ BlLayoutCommonConstraints >> maxWidth: aNumber [
 	"Set maximal width to be aNumber,
 	aNumber must not be nil
 	aNumber must be non-negative"
+	<argument: #aNumber satisfies: #isBlocPositive>
 	
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Maximal width must not be nil' ].
-		
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Maximal width must be non-negative' ].
-	
-	maxWidth := aNumber
+	maxWidth := aNumber asFloat
 ]
 
 { #category : #'api - constraints' }
@@ -218,20 +204,9 @@ BlLayoutCommonConstraints >> minHeight: aNumber [
 	aNumber must not be nil
 	aNumber must not be infinite
 	aNumber must be non-negative"
+	<argument: #aNumber satisfies: #isBlocPositive>
 	
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Minimal height must not be nil' ].
-		
-	self
-		assert: [ aNumber < Float infinity ]
-		description: [ 'Minimal height must not be infinite' ].
-	
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Minimal height must be non-negative' ].
-	
-	minHeight := aNumber
+	minHeight := aNumber asFloat
 ]
 
 { #category : #'api - constraints' }
@@ -248,20 +223,9 @@ BlLayoutCommonConstraints >> minWidth: aNumber [
 	aNumber must not be nil
 	aNumber must not be infinite
 	aNumber must be non-negative"
-	
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Minimal width must not be nil' ].
+	<argument: #aNumber satisfies: #isBlocPositive>
 		
-	self
-		assert: [ aNumber < Float infinity ]
-		description: [ 'Minimal width must not be infinite' ].
-	
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Minimal width must be non-negative' ].
-		
-	minWidth := aNumber
+	minWidth := aNumber asFloat
 ]
 
 { #category : #accessing }

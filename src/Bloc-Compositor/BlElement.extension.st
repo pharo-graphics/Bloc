@@ -12,6 +12,8 @@ BlElement >> compositionDepth [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+
 	| aLayer |
 
 	self shouldBePainted
@@ -29,6 +31,8 @@ BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+
 	"invisible elements are not rendered too"
 	self isVisible
 		ifFalse: [
@@ -39,7 +43,7 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 		ifFalse: [
 			needsPaint := false.
 			^ self ].
-		
+
 	self telemetry
 		timeSync: [ 'Paint ', self class name ]
 		during: [
@@ -52,6 +56,8 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintWithTransformOn: aCompositorPainter offset: anOffset [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+
 	self transformation isIdentity
 		ifTrue: [ self paintMeAndChildrenOn: aCompositorPainter offset: anOffset ]
 		ifFalse: [
@@ -94,6 +100,8 @@ BlElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintClippedChildrenOn: aCompositorPainter offset: anOffset [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+
 	"If there are not children no need to draw and clip"
 	self hasChildren
 		ifFalse: [ ^ self ].
@@ -110,6 +118,8 @@ BlElement >> paintClippedChildrenOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintMeAndChildrenOn: aCompositorPainter offset: anOffset [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+
 	self paintOn: aCompositorPainter offset: anOffset.
 
 	self

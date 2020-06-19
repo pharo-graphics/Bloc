@@ -67,7 +67,7 @@ BlLinearLayout >> cellSpacing [
 
 { #category : #accessing }
 BlLinearLayout >> cellSpacing: aNumber [	
-	cellSpacing := aNumber
+	cellSpacing := aNumber asFloat
 ]
 
 { #category : #initialization }
@@ -123,7 +123,7 @@ BlLinearLayout >> initialize [
 	
 	weightSum := self defaultWeightSum.
 	shouldUseLargestChild := false.
-	cellSpacing := 0.
+	cellSpacing := 0.0.
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
 	
@@ -205,7 +205,7 @@ BlLinearLayout >> weightSum [
 
 { #category : #accessing }
 BlLinearLayout >> weightSum: aNumber [
-	weightSum := aNumber
+	weightSum := aNumber asFloat
 ]
 
 { #category : #'api - configuration' }

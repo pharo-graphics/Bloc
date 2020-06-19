@@ -250,6 +250,8 @@ BlInfiniteLayout >> calculateSize: aMeasurementSpec desired: aDesiredSize min: a
 	"Calculates a size from the given measurement specs and parameters
 	that is closest to the desired size and also complies with the spec"
 	<return: #Number>
+	<argument: #aDesiredSize satisfies: #isBlocFiniteFloat>
+	<argument: #aMinSize satisfies: #isBlocFiniteFloat>
 
 	aMeasurementSpec isExact
 		ifTrue: [ ^ aMeasurementSpec size ].

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlAnchorRelativeToElementBounds,
 	#superclass : #BlAnchorRelativeToElement,
-	#category : 'Bloc-Geometry-Anchors'
+	#category : #'Bloc-Geometry-Anchors'
 }
 
 { #category : #geometry }
@@ -13,7 +13,7 @@ BlAnchorRelativeToElementBounds >> computePositionWithin: aGeometryElement [
 	^ aGeometryElement
 		firstCommonParent: self referenceElement
 		ifFound: [ :aCommonParent | self positionWithinBounds: ((self referenceElement bounds inParent: aCommonParent) inChild: aGeometryElement) inParent ]
-		ifNone: [ 0@0 ]
+		ifNone: [ 0.0@0.0 ]
 ]
 
 { #category : #geometry }

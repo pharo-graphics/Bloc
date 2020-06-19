@@ -38,6 +38,16 @@ Point >> closeTo: anotherPoint epsilon: anEpsilon [
 ]
 
 { #category : #'*Bloc' }
+Point >> isBlocFiniteFloatPoint [
+	^ self x isBlocFiniteFloat and: [ self y isBlocFiniteFloat ]
+]
+
+{ #category : #'*Bloc' }
+Point >> isBlocPositivePoint [
+	^ self x >= 0.0 and: [ self y >= 0.0 ]
+]
+
+{ #category : #'*Bloc' }
 Point >> isPoint2D [
 	"Return true if I represent a 2D point, false otherwise"
 	<return: #Boolean>

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'spec'
 	],
-	#category : 'Bloc-Layout-Grid'
+	#category : #'Bloc-Layout-Grid'
 }
 
 { #category : #alignment }
@@ -75,5 +75,5 @@ BlGridLayoutConstraintsAxis >> weight: aNumber [
 	self assert: aNumber isNotNil.
 	self assert: aNumber >= 0.
 
-	spec := self spec copyWithWeight: aNumber
+	spec := self spec copyWithWeight: aNumber asFloat
 ]

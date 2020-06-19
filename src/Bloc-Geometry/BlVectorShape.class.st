@@ -80,7 +80,7 @@ BlVectorShape >> bounds [
 	<return: #Rectangle>
 	
 	^ self allShapes
-		ifEmpty: [ Rectangle origin: 0@0 extent: 0@0 ]
+		ifEmpty: [ Rectangle origin: 0.0@0.0 extent: 0.0@0.0 ]
 		ifNotEmpty: [ :theShapes |
 			| theBounds |
 			theBounds := theShapes first myBounds.

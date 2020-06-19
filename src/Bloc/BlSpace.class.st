@@ -135,7 +135,7 @@ BlSpace class >> simulateDragOn: anElement by: aBlVector [
 	anElement topMostParent forceLayout.
 	aPosition := anElement bounds inSpace center.
 	
-	aDelta := (anElement localBoundsToGlobal: (BlBounds origin: 0@0 extent: aBlVector)) extent.
+	aDelta := (anElement localBoundsToGlobal: (BlBounds origin: 0.0@0.0 extent: aBlVector)) extent.
 	
 	"we simulate a click with a sequence of low level mouse down/up events"
 	self
@@ -261,7 +261,7 @@ BlSpace >> addChild: anElement [
 { #category : #'change reporting' }
 BlSpace >> beDirtyArea [
 	self
-		invalidRect: (BlBounds origin: 0 @ 0 extent: self extent)
+		invalidRect: (BlBounds origin: 0.0 @ 0.0 extent: self extent)
 		from: self root
 ]
 
@@ -443,11 +443,11 @@ BlSpace >> doUpdateLayout: anElement [
 	anElement measure: (BlExtentMeasurementSpec new
 		widthSpec: (anElement layout
 			measurementSpecFor: (BlMeasurementSpec new beExact: self width)
-			usedSize:  0
+			usedSize:  0.0
 			resizer: BlLayoutResizer matchParent);
 		heightSpec: (anElement layout
 			measurementSpecFor: (BlMeasurementSpec new beExact: self height)
-			usedSize:  0
+			usedSize:  0.0
 			resizer: BlLayoutResizer matchParent)).
 
 	"...then we layout in measured during previous step bounds"

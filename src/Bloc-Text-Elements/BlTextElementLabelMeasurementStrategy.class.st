@@ -12,5 +12,5 @@ BlTextElementLabelMeasurementStrategy >> boundsOf: aParagraph [
 	aMeasuredWidth := aParagraph width.
 	aMeasuredHeight := (aParagraph ascent abs + aParagraph descent).
 
-	^ BlBounds origin: 0@0 extent: aMeasuredWidth @ aMeasuredHeight
+	^ BlBounds origin: 0.0@0.0 extent: aMeasuredWidth @ aMeasuredHeight
 ]

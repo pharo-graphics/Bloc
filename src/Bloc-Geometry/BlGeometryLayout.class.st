@@ -6,7 +6,7 @@ Note, that I don't take element's padding into account when computing it's fitCo
 Class {
 	#name : #BlGeometryLayout,
 	#superclass : #BlLayout,
-	#category : 'Bloc-Geometry'
+	#category : #'Bloc-Geometry'
 }
 
 { #category : #layout }
@@ -40,11 +40,9 @@ BlGeometryLayout >> measure: anElement with: anExtentSpec [
 	and does not take children into account.
 	We can optimise children measurement and complete everything in just one pass"
 	maxExtent := anElement geometryBounds extent.
+
 	maxWidth := maxExtent x.
 	maxHeight := maxExtent y.
-	
-	maxWidth := maxWidth.
-	maxHeight := maxHeight.
 	
 	maxWidth := maxWidth min: anElement constraints maxWidth.
 	maxHeight := maxHeight min: anElement constraints maxHeight.
@@ -70,7 +68,7 @@ BlGeometryLayout >> measureChildren: anElement with: anExtentSpec [
 
 			childWidthSpec := aChild constraints horizontal resizer isMatchParent
 				ifTrue: [ 
-					BlMeasurementSpec exact: ((availableWidth - aChild outsets width) max: 0) ]
+					BlMeasurementSpec exact: ((availableWidth - aChild outsets width) max: 0.0) ]
 				ifFalse: [ self
 						measurementSpecFor: anExtentSpec widthSpec
 						usedSize: anElement insets width + aChild outsets width
@@ -78,7 +76,7 @@ BlGeometryLayout >> measureChildren: anElement with: anExtentSpec [
 			
 			childHeightSpec := aChild constraints vertical resizer isMatchParent
 				ifTrue: [ 
-					BlMeasurementSpec exact: ((availableHeight - aChild outsets height) max: 0) ]
+					BlMeasurementSpec exact: ((availableHeight - aChild outsets height) max: 0.0) ]
 				ifFalse: [ self
 						measurementSpecFor: anExtentSpec heightSpec
 						usedSize: anElement insets height + aChild outsets height

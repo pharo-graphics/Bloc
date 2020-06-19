@@ -54,7 +54,7 @@ BlVerticalScrollbarElement >> scrollTo: aPoint [
 	scrollingBy isZero
 		ifTrue: [ ^ self ].
 
-	scrollable scrollBy: 0 @ scrollingBy.
+	scrollable scrollBy: 0.0 @ scrollingBy.
 	
 	dragPosition := aPoint
 ]

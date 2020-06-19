@@ -76,6 +76,8 @@ BlCompositionPainter >> addLayer: aCompositionLayer [
 
 { #category : #'private - layer' }
 BlCompositionPainter >> applyClip: aClipPath offset: anOffset thenPaint: aPaintBlock [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+
 	self canvasDo: [ :aCanvas |
 		aCanvas clip push: aClipPath offset: anOffset ].
 	state pushClip: aClipPath offset: anOffset.

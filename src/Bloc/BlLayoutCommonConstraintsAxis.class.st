@@ -9,7 +9,7 @@ Class {
 
 { #category : #resizing }
 BlLayoutCommonConstraintsAxis >> exact: aNumber [
-	self resizer: (BlLayoutResizer exact: aNumber)
+	self resizer: (BlLayoutResizer exact: aNumber asFloat)
 ]
 
 { #category : #resizing }
@@ -31,7 +31,7 @@ BlLayoutCommonConstraintsAxis >> fitContentLimitedOffset: aNumber [
 BlLayoutCommonConstraintsAxis >> initialize [
 	super initialize.
 	
-	resizer := BlLayoutResizer exact: 50
+	resizer := BlLayoutResizer exact: 50.0
 ]
 
 { #category : #resizing }

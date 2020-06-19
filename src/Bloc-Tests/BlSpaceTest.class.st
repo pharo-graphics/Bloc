@@ -5,7 +5,7 @@ Class {
 		'space',
 		'host'
 	],
-	#category : 'Bloc-Tests-Space'
+	#category : #'Bloc-Tests-Space'
 }
 
 { #category : #initialization }
@@ -84,7 +84,7 @@ BlSpaceTest >> testRender [
 	self assert: space hostSpace renderCount equals: 1.
 	self assert: space pulseRequested not.
 
-	space invalidRect: (BlBounds origin: 50@70 extent: 300@200) from: space root.
+	space invalidRect: (BlBounds origin: 50.0@70.0 extent: 300.0@200.0) from: space root.
 	self assert: space pulseRequested.
 	self assert: self dirtyAreas equals: { 50@70 extent: 300@200 }.
 	space pulse.

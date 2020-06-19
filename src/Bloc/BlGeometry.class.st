@@ -63,10 +63,8 @@ BlGeometry >> extent: aPoint [
 	Do not try to provide a fraction as x or y of the point!
 	aPoint must not be nil
 	aPoint must be positive"
-
-	self
-		assert: [ aPoint x >= 0 and: [ aPoint y >= 0 ] ]
-		description: [ 'Geometry extent must be non-negative!' ].
+	<argument: #aPoint satisfies: #isBlocFiniteFloatPoint>
+	<argument: #aPoint satisfies: #isBlocPositivePoint>
 
 	extent := aPoint
 ]
@@ -88,7 +86,7 @@ BlGeometry >> geometryBounds: aBounds [
 	<return: #BlBounds>
 
 	^ aBounds
-		origin: 0@0
+		origin: 0.0@0.0
 		extent: self extent
 ]
 

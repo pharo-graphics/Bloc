@@ -17,6 +17,8 @@ BlCompositionLayeredPainter >> asBufferedPainter [
 
 { #category : #'api - layer' }
 BlCompositionLayeredPainter >> pushChildren: theChildren offset: anOffset compositing: aBlCompositingMode thenPaint: aBlock [	
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+
 	aBlCompositingMode wantsBufferedLayer
 		ifTrue: [
 			| aNewPainter |
@@ -29,6 +31,7 @@ BlCompositionLayeredPainter >> pushChildren: theChildren offset: anOffset compos
 
 { #category : #'api - layer' }
 BlCompositionLayeredPainter >> pushClip: aClipPath offset: anOffset bounds: aRectangle compositing: aBlCompositingMode thenPaint: aPaintBlock [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
 	
 	aBlCompositingMode wantsCompositionLayer
 		ifTrue: [
@@ -45,6 +48,7 @@ BlCompositionLayeredPainter >> pushClip: aClipPath offset: anOffset bounds: aRec
 
 { #category : #'private - layer' }
 BlCompositionLayeredPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRectangleOrNull compositing: aBlCompositingMode thenPaint: aPaintBlock [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
 	| aNewPainter |
 	
 	self addLayer: aNewLayer.
@@ -62,6 +66,7 @@ BlCompositionLayeredPainter >> pushLayer: aNewLayer offset: anOffset bounds: aRe
 
 { #category : #'api - layer' }
 BlCompositionLayeredPainter >> pushShadow: aShadowPath shadowOffset: aShadowOffset shadowColor: aShadowColor shadowWidth: aShadowWidth offset: anOffset bounds: aRectangle compositing: aBlCompositingMode thenPaint: aPaintBlock [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
 	
 	aBlCompositingMode wantsCompositionLayer
 		ifTrue: [
@@ -88,6 +93,7 @@ BlCompositionLayeredPainter >> pushShadow: aShadowPath shadowOffset: aShadowOffs
 
 { #category : #'api - layer' }
 BlCompositionLayeredPainter >> pushTransform: aMatrix offset: anOffset bounds: aRectangleOrNull compositing: aBlCompositingMode thenPaint: aPaintBlock [
+	<argument: #anOffset satisfies: #isSpartaScalarPoint>
 
 	aBlCompositingMode wantsCompositionLayer
 		ifTrue: [

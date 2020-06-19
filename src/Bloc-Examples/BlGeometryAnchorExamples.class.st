@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Geometry'
+	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #'anchor - accessing' }
@@ -14,7 +14,7 @@ BlGeometryAnchorExamples >> bottomCenterAnchor [
 	anAnchor := BlElementBottomCenterAnchor new.
 
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 140@120.
 
 	^ anAnchor
@@ -28,7 +28,7 @@ BlGeometryAnchorExamples >> bottomLeftAnchor [
 	anAnchor := BlElementBottomLeftAnchor new.
 
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 40@120.
 
 	^ anAnchor
@@ -42,7 +42,7 @@ BlGeometryAnchorExamples >> bottomRightAnchor [
 	anAnchor := BlElementBottomRightAnchor new.
 
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 240@120.
 
 	^ anAnchor
@@ -56,7 +56,7 @@ BlGeometryAnchorExamples >> centerAnchor [
 	anAnchor := BlElementCenterAnchor new.
 	
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 140@70.
 	
 	^ anAnchor
@@ -70,7 +70,7 @@ BlGeometryAnchorExamples >> centerLeftAnchor [
 	anAnchor := BlElementCenterLeftAnchor new.
 
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 40@70.
 
 	^ anAnchor
@@ -84,7 +84,7 @@ BlGeometryAnchorExamples >> centerRightAnchor [
 	anAnchor := BlElementCenterRightAnchor new.
 
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 240@70.
 
 	^ anAnchor
@@ -98,7 +98,7 @@ BlGeometryAnchorExamples >> topCenterAnchor [
 	anAnchor := BlElementTopCenterAnchor new.
 
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 140@20.
 
 	^ anAnchor
@@ -112,7 +112,7 @@ BlGeometryAnchorExamples >> topLeftAnchor [
 	anAnchor := BlElementTopLeftAnchor new.
 
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 40@20.
 
 	^ anAnchor
@@ -126,7 +126,7 @@ BlGeometryAnchorExamples >> topRightAnchor [
 	anAnchor := BlElementTopRightAnchor new.
 
 	self
-		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40@20 extent: 200@100))
+		assert: (anAnchor positionWithinBounds: (BlBounds origin: 40.0@20.0 extent: 200.0@100.0))
 		equals: 240@20.
 
 	^ anAnchor

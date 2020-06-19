@@ -79,7 +79,7 @@ BlScrollableElement >> initialize [
 	super initialize.
 
 	scrollFlinger := BlScrollFlinger on: self.
-	scrollPosition := 0@0.
+	scrollPosition := 0.0@0.0.
 	scrollState := #idle.
 	horizontalAlignment := self defaultHorizontalAlignment.
 	verticalAlignment := self defaultVerticalAlignment.
@@ -97,13 +97,13 @@ BlScrollableElement >> layoutApplyAlignment [
 		ifTrue: [
 			| aHorizontalTranslation |
 			aHorizontalTranslation := (self horizontalAlignment translationOf: aContent measuredBounds bounds in: self bounds inLocal bounds) x.
-			scrollPosition := scrollPosition + (aHorizontalTranslation @ 0) ].
+			scrollPosition := scrollPosition + (aHorizontalTranslation @ 0.0) ].
 		
 	(aContent measuredHeight < self height)
 		ifTrue: [
 			| aVerticalTranslation |
 			aVerticalTranslation := (self verticalAlignment translationOf: aContent measuredBounds bounds in: self bounds inLocal bounds) y.
-			scrollPosition := scrollPosition + (0 @ aVerticalTranslation) ].
+			scrollPosition := scrollPosition + (0.0 @ aVerticalTranslation) ].
 	
 	aContent measuredBounds position: scrollPosition
 ]
@@ -115,13 +115,13 @@ BlScrollableElement >> layoutClampPosition [
 	aContent := self scrolledElement.
 	
 	aCurrentPositionX := scrollPosition x.
-	aMinPositionX := (self width - aContent measuredWidth) min: 0.
-	aMaxPositionX := 0.
+	aMinPositionX := (self width - aContent measuredWidth) min: 0.0.
+	aMaxPositionX := 0.0.
 	aNewClampedPositionX := (aCurrentPositionX max: aMinPositionX) min: aMaxPositionX.
 	
 	aCurrentPositionY := scrollPosition y.
-	aMinPositionY := (self height - aContent measuredHeight) min: 0.
-	aMaxPositionY := 0.
+	aMinPositionY := (self height - aContent measuredHeight) min: 0.0.
+	aMaxPositionY := 0.0.
 	aNewClampedPositionY := (aCurrentPositionY max: aMinPositionY) min: aMaxPositionY.
 	scrollPosition := aNewClampedPositionX @ aNewClampedPositionY.
 
@@ -134,18 +134,18 @@ BlScrollableElement >> layoutFixGap [
 	
 	aContent := self scrolledElement.
 	
-	aGapX := (self width - aContent measuredBounds right) max: 0.
+	aGapX := (self width - aContent measuredBounds right) max: 0.0.
 	scrollPosition x < 0
 		ifTrue: [
 			| aNewX |
-			aNewX := (scrollPosition x + aGapX) min: 0.
+			aNewX := (scrollPosition x + aGapX) min: 0.0.
 			scrollPosition := aNewX @ scrollPosition y ].
 	
-	aGapY := (self height - aContent measuredBounds bottom) max: 0.	
+	aGapY := (self height - aContent measuredBounds bottom) max: 0.0.	
 	scrollPosition y < 0
 		ifTrue: [
 			| aNewY |
-			aNewY := (scrollPosition y + aGapY) min: 0.
+			aNewY := (scrollPosition y + aGapY) min: 0.0.
 			scrollPosition := scrollPosition x @ aNewY ].
 
 	aContent measuredBounds position: scrollPosition
@@ -201,24 +201,24 @@ BlScrollableElement >> scrollBy: aPoint [
 			| aNewPosition aMinPosition aMaxPosition aNewClampedPosition |
 			
 			aNewPosition := self scrollPosition x + dX.
-			aMinPosition := (self width - aContent width) min: 0.
-			aMaxPosition := 0.
+			aMinPosition := (self width - aContent width) min: 0.0.
+			aMaxPosition := 0.0.
 			aNewClampedPosition := (aNewPosition max: aMinPosition) min: aMaxPosition.
 			
 			dX := aNewClampedPosition - self scrollPosition x ]
-		ifFalse: [ dX := 0 ].
+		ifFalse: [ dX := 0.0 ].
 	
 	self canScrollVertically
 		ifTrue: [
 			| aNewPosition aMinPosition aMaxPosition aNewClampedPosition |
 			
 			aNewPosition := self scrollPosition y + dY.
-			aMinPosition := (self height - aContent height) min: 0.
-			aMaxPosition := 0.
+			aMinPosition := (self height - aContent height) min: 0.0.
+			aMaxPosition := 0.0.
 			aNewClampedPosition := (aNewPosition max: aMinPosition) min: aMaxPosition.
 			
 			dY := aNewClampedPosition - self scrollPosition y ]
-		ifFalse: [ dY := 0 ].
+		ifFalse: [ dY := 0.0 ].
 	
 	dX isZero
 		ifFalse: [self scrollHorizontallyBy: dX  ].
@@ -244,7 +244,7 @@ BlScrollableElement >> scrollHorizontallyBy: aNumber [
 	| aContent |
 	
 	aContent := self children first.
-	scrollPosition := scrollPosition + (aNumber @ 0).
+	scrollPosition := scrollPosition + (aNumber asFloat @ 0.0).
 	aContent relocate: scrollPosition.
 
 	^ aNumber
@@ -254,14 +254,14 @@ BlScrollableElement >> scrollHorizontallyBy: aNumber [
 BlScrollableElement >> scrollMaximum [
 	<return: #Point>
 	
-	^ 0@0
+	^ 0.0@0.0
 ]
 
 { #category : #'api - scrolling geometry' }
 BlScrollableElement >> scrollMinimum [
 	<return: #Point>
 	
-	^ (self extent - self scrolledElement extent) min: 0@0
+	^ (self extent - self scrolledElement extent) min: 0.0@0.0
 ]
 
 { #category : #'api - scrolling geometry' }
@@ -301,7 +301,7 @@ BlScrollableElement >> scrollVerticallyBy: aNumber [
 	| aContent |
 	
 	aContent := self children first.
-	scrollPosition := scrollPosition + (0 @ aNumber).
+	scrollPosition := scrollPosition + (0.0 @ aNumber asFloat).
 	aContent relocate: scrollPosition.
 
 	^ aNumber
@@ -323,10 +323,10 @@ BlScrollableElement >> smoothScrollBy: aPoint [
 	dY := aPoint y.
 	
 	self canScrollHorizontally
-		ifFalse: [ dX := 0 ].
+		ifFalse: [ dX := 0.0 ].
 	
 	self canScrollVertically
-		ifFalse: [ dY := 0 ].
+		ifFalse: [ dY := 0.0 ].
 	
 	(dX isZero and: [ dY isZero ])
 		ifFalse: [ scrollFlinger smoothScrollBy: dX @ dY ]

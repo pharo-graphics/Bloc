@@ -790,7 +790,7 @@ BlElement >> computeLayout [
 			
 			maxExtent := self isAttachedToSceneGraph
 				ifTrue: [ self space extent ]
-				ifFalse: [ 800 @ 600 ].
+				ifFalse: [ 800.0 @ 600.0 ].
 			
 			widthSpec := BlMeasurementSpec exact: maxExtent x.
 			heightSpec := BlMeasurementSpec exact: maxExtent y.
@@ -798,11 +798,11 @@ BlElement >> computeLayout [
 			self measure: (BlExtentMeasurementSpec new
 				widthSpec: (self layout
 					measurementSpecFor: widthSpec
-					usedSize:  0
+					usedSize:  0.0
 					resizer: self constraints horizontal resizer);
 				heightSpec: (self layout
 					measurementSpecFor: heightSpec
-					usedSize:  0
+					usedSize:  0.0
 					resizer: self constraints vertical resizer)).
 			
 			"...then we layout in measured on previous step bounds"
@@ -2312,9 +2312,8 @@ BlElement >> measuredExtent: anExtent [
 	"Set newly measured extent.
 	@see BlElement>>#measuredExtent for more info
 	anExtent must not be nil"
-	self
-		assert: [ anExtent isNotNil ]
-		description: [ 'Measured extent must not be nil' ].
+	<argument: #anExtent satisfies: #isBlocFiniteFloatPoint>
+	<argument: #anExtent satisfies: #isBlocPositivePoint>
 	
 	self measuredBounds extent: anExtent
 ]
@@ -2788,14 +2787,9 @@ BlElement >> position: aPosition extent: anExtent [
 	position changes, instead I send invalidate with my effect bounds in parent coordinates
 	to my parent. It allows developers to implement drawing cache"
 	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition | 
-	
-	self
-		assert: [ aPosition x isInfinite not and: [ aPosition y isInfinite not ] ]
-		description: [ 'Position can not be infinite' ].
-	
-	self
-		assert: [ anExtent x isInfinite not and: [ anExtent y isInfinite not ] ]
-		description: [ 'Extent can not be infinite' ].
+	<argument: #aPosition satisfies: #isBlocFiniteFloatPoint>
+	<argument: #anExtent satisfies: #isBlocFiniteFloatPoint>
+	<argument: #anExtent satisfies: #isBlocPositivePoint>
 
 	aPreviousPosition := self position.
 	aPreviousExtent := self extent.

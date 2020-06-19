@@ -50,7 +50,7 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : 'Bloc-Layout-Grid'
+	#category : #'Bloc-Layout-Grid'
 }
 
 { #category : #constraints }
@@ -94,7 +94,7 @@ BlGridLayout >> cellSpacing [
 
 { #category : #accessing }
 BlGridLayout >> cellSpacing: aNumber [
-	cellSpacing := aNumber
+	cellSpacing := aNumber asFloat
 ]
 
 { #category : #accessing }

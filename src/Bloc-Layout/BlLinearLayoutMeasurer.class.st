@@ -49,19 +49,19 @@ BlLinearLayoutMeasurer >> initialize [
 
 	useLargestChild := false.
 	isBaselineAligned := false.
-	cellSpacing := 0.
+	cellSpacing := 0.0.
 
-	totalLength := 0.
-	totalWeight := 0.
-	usedExcessSpace := 0.
+	totalLength := 0.0.
+	totalWeight := 0.0.
+	usedExcessSpace := 0.0.
 	skippedMeasure := false.
 	matchBreadth := false.
-	largestChildLength := 0.
-	measuredLength := 0.
-	alternativeMaxBreadth := 0.
-	maxBreadth := 0.
+	largestChildLength := 0.0.
+	measuredLength := 0.0.
+	alternativeMaxBreadth := 0.0.
+	maxBreadth := 0.0.
 	allFillParent := true.
-	weightedMaxBreadth := 0
+	weightedMaxBreadth := 0.0
 ]
 
 { #category : #initialization }
@@ -159,7 +159,7 @@ BlLinearLayoutMeasurer >> limitedMeasure [
 			
 			childLength := eachNode measuredLength - shareLength.
 				
-			childLengthSpec := BlMeasurementSpec exact: (0 max: childLength).
+			childLengthSpec := BlMeasurementSpec exact: (0.0 max: childLength).
 			childBreadthSpec := parent layout
 				measurementSpecFor: breadthSpec
 				usedSize: (orientation paddingBreadth: parent) + (eachNode marginBreadth)
@@ -220,7 +220,7 @@ BlLinearLayoutMeasurer >> postMeasure [
 
 	(allFillParent not and: [ breadthSpec isExact not ])
 		ifTrue: [ maxBreadth := alternativeMaxBreadth ].
-		
+
 	maxBreadth := maxBreadth + (orientation paddingBreadth: parent).
 
 	"Check against our minimum height"
@@ -434,7 +434,7 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 								"This child had some intrinsic width to which we need to add its share of excess space."
 								ifFalse: [ aNode measuredLength + shareSpace ] ].
 							
-						childLengthSpec := BlMeasurementSpec exact: (0 max: childLength).
+						childLengthSpec := BlMeasurementSpec exact: (0.0 max: childLength).
 						childBreadthSpec := parent layout
 							measurementSpecFor: breadthSpec
 							usedSize: (orientation paddingBreadth: parent) + (aNode marginBreadth)

@@ -328,10 +328,10 @@ BlInsets >> top: aTop right: aRight bottom: aBottom left: aLeft [
 		assert: [ left isNil ]
 		description: [ 'Insets is immutable and can not be changed' ].
 
-	top := aTop.
-	right := aRight.
-	bottom := aBottom.
-	left := aLeft
+	top := aTop asFloat.
+	right := aRight asFloat.
+	bottom := aBottom asFloat.
+	left := aLeft asFloat
 ]
 
 { #category : #accessing }

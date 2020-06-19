@@ -4,7 +4,7 @@ I contain examples of element bounds api
 Class {
 	#name : #BlElementBoundsExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Basic'
+	#category : #'Bloc-Examples-Basic'
 }
 
 { #category : #examples }
@@ -31,8 +31,8 @@ BlElementBoundsExamples >> boundsInLocal [
 	parent := self parentWithChild.
 	child := parent children first.
 
-	self assert: child bounds inLocal asRectangle equals: (0@0 extent: self childExtent).
-	self assert: parent bounds inLocal asRectangle equals: (0@0 extent: self parentExtent).
+	self assert: child bounds inLocal asRectangle equals: (0.0@0.0 extent: self childExtent).
+	self assert: parent bounds inLocal asRectangle equals: (0.0@0.0 extent: self parentExtent).
 
 	^ parent
 ]

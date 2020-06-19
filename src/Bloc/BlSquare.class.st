@@ -21,7 +21,7 @@ BlSquare >> geometryBounds: aBounds [
 
 	^ aBounds
 		origin: self origin
-		extent: (self length * 2) asPoint
+		extent: (self length * 2.0) asPoint
 ]
 
 { #category : #accessing }

@@ -39,10 +39,8 @@ BlElementLocalBounds >> extent [
 
 { #category : #accessing }
 BlElementLocalBounds >> extent: aPoint [
-
-	self
-		assert: [ aPoint isNotNil ]
-		description: [ 'Extent must not be nil' ].
+	<argument: #aPoint satisfies: #isBlocFiniteFloatPoint>
+	<argument: #aPoint satisfies: #isBlocPositivePoint>
 
 	extent := aPoint
 ]
@@ -61,7 +59,7 @@ BlElementLocalBounds >> inChild: anElement [
 	^ BlElementBoundsInChild new
 		originalElement: self referenceElement;
 		referenceElement: anElement;
-		bounds: (anElement globalBoundsToMine: (BlBounds new left: 0 top: 0 corner: self extent) fromParent: self referenceElement);
+		bounds: (anElement globalBoundsToMine: (BlBounds new left: 0.0 top: 0.0 corner: self extent) fromParent: self referenceElement);
 		yourself
 ]
 
@@ -71,7 +69,7 @@ BlElementLocalBounds >> inLocal [
 
 	^ BlElementBoundsInLocal new
 		referenceElement: self referenceElement;
-		bounds: (BlBounds new left: 0 top: 0 corner: self extent);
+		bounds: (BlBounds new left: 0.0 top: 0.0 corner: self extent);
 		yourself
 ]
 
@@ -82,7 +80,7 @@ BlElementLocalBounds >> inParent [
 	^ BlElementBoundsInParent new
 		originalElement: self referenceElement;
 		referenceElement: self referenceElement;
-		bounds: (self localBoundsToParent: (BlBounds new left: 0 top: 0 corner: self extent));
+		bounds: (self localBoundsToParent: (BlBounds new left: 0.0 top: 0.0 corner: self extent));
 		yourself
 ]
 
@@ -99,7 +97,7 @@ BlElementLocalBounds >> inParent: anElement [
 	^ BlElementBoundsInParent new
 		originalElement: self referenceElement;
 		referenceElement: subParent;
-		bounds: (anElement localBoundsToMine: (BlBounds new left: 0 top: 0 corner: self extent) fromChild: self referenceElement);
+		bounds: (anElement localBoundsToMine: (BlBounds new left: 0.0 top: 0.0 corner: self extent) fromChild: self referenceElement);
 		yourself
 ]
 
@@ -109,7 +107,7 @@ BlElementLocalBounds >> inSpace [
 	
 	^ BlElementBoundsInSpace new
 		referenceElement: self referenceElement;
-		bounds: (self localBoundsToSpace: (BlBounds new left: 0 top: 0 corner: self extent));
+		bounds: (self localBoundsToSpace: (BlBounds new left: 0.0 top: 0.0 corner: self extent));
 		yourself
 ]
 
@@ -117,8 +115,8 @@ BlElementLocalBounds >> inSpace [
 BlElementLocalBounds >> initialize [
 	super initialize.
 
-	position := 0@0.
-	extent := 0@0
+	position := 0.0@0.0.
+	extent := 0.0@0.0
 ]
 
 { #category : #accessing }
@@ -131,9 +129,7 @@ BlElementLocalBounds >> position [
 
 { #category : #accessing }
 BlElementLocalBounds >> position: aPoint [
-	self
-		assert: [ aPoint isNotNil ]
-		description: [ 'Position must not be nil' ].
+	<argument: #aPoint satisfies: #isBlocFiniteFloatPoint>
 	
 	position := aPoint
 ]

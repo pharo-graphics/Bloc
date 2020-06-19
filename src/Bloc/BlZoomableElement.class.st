@@ -94,7 +94,7 @@ BlZoomableElement >> measureMatching: anExtentMeasurementSpec [
 		ifFalse: [ 
 			self layout
 				measurementSpecFor: anExtentMeasurementSpec widthSpec
-				usedSize: 0
+				usedSize: 0.0
 				resizer: self contentElement constraints horizontal resizer ].
 			
 	heightSpec := self contentElement constraints vertical resizer isMatchParent
@@ -102,7 +102,7 @@ BlZoomableElement >> measureMatching: anExtentMeasurementSpec [
 		ifFalse: [
 			self layout
 				measurementSpecFor: anExtentMeasurementSpec heightSpec
-				usedSize: 0
+				usedSize: 0.0
 				resizer: self contentElement constraints vertical resizer ].
 			
 	self contentElement measure: widthSpec @ heightSpec
@@ -152,7 +152,7 @@ BlZoomableElement >> onLayout: aBounds [
 	self hasContentElement
 		ifFalse: [ ^ self ].
 
-	aContentBounds := BlBounds origin: 0 @ 0 extent: self contentElement measuredExtent.
+	aContentBounds := BlBounds origin: 0.0@0.0 extent: self contentElement measuredExtent.
 	aContentBounds translateBy: (self measuredExtent - aContentBounds extent) / 2.0.
 	aContentBounds translateBy: (self measuredExtent) * ((0.5 asPoint - zoomCenter)) * self zoomLevel.
 	aContentBounds translateBy: ((aContentBounds extent - self measuredExtent)) * (0.5 - zoomCenter) * self zoomLevel.

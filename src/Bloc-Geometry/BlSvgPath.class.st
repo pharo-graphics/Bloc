@@ -45,7 +45,7 @@ BlSvgPath >> initialize [
 	super initialize.
 	
 	segments := #().
-	viewbox := 0@0 extent: 50@50
+	viewbox := 0.0@0.0 extent: 50.0@50.0
 ]
 
 { #category : #accessing }
@@ -56,5 +56,5 @@ BlSvgPath >> matchExtent: anExtent [
 { #category : #initialization }
 BlSvgPath >> svg: anSvgString viewbox: aRectangle [
 	segments := (BlSvgPathBuilder fromStream: anSvgString readStream) segments.
-	viewbox := aRectangle
+	viewbox := aRectangle asBlocFloatRectangle
 ]

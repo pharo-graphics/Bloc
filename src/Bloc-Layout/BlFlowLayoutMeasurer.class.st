@@ -12,7 +12,7 @@ Class {
 		'heightMode',
 		'checkCanFit'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #'instance creation' }
@@ -295,7 +295,7 @@ BlFlowLayoutMeasurer >> measure: anElement with: anExtentSpec [
 	
 	lastLine := lines last.
 	
-	contentLength := lines inject: 0 into: [ :aContentLength :aLine | aContentLength max: aLine length ].
+	contentLength := lines inject: 0.0 into: [ :aContentLength :aLine | aContentLength max: aLine length ].
 	contentBreadth := lastLine startBreadth + lastLine breadth.
 	
 	parentLength := self size: contentLength max: self maxLength for: anExtentSpec widthSpec.

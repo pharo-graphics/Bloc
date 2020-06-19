@@ -37,7 +37,8 @@ BlShapeGeometry >> createVectorShape [
 
 { #category : #geometry }
 BlShapeGeometry >> extent: aPoint [
-	extent := aPoint.
+	super extent: aPoint.
+
 	vectorShape := self createVectorShape.
 	self releaseCache
 ]

@@ -118,7 +118,7 @@ BlFrameLayout >> layout: anElement in: aRectangle [
 	self layoutIgnored: anElement.
 	
 	"first store parent's local bounds"
-	parentBounds := anElement padding inset: (0@0 extent: aRectangle extent).
+	parentBounds := anElement padding inset: (0.0@0.0 extent: aRectangle extent).
 
 	self
 		layeredChildren: anElement
@@ -176,8 +176,8 @@ BlFrameLayout >> measureChild: aChildElement of: anElement with: anExtentSpec wi
 	aChildElement constraints horizontal resizer isMatchParent
 		ifTrue: [ 
 			| weight width |
-			weight := (aChildElement constraints frame horizontal weight max: 0).
-			width := ((aParentWidth - anElement insets width - aChildElement outsets width) * weight) max: 0.
+			weight := (aChildElement constraints frame horizontal weight max: 0.0).
+			width := ((aParentWidth - anElement insets width - aChildElement outsets width) * weight) max: 0.0.
 			childWidthMeasureSpec := BlMeasurementSpec exact: width ]
 		ifFalse: [ 
 			childWidthMeasureSpec := self
@@ -188,8 +188,8 @@ BlFrameLayout >> measureChild: aChildElement of: anElement with: anExtentSpec wi
 	aChildElement constraints vertical resizer isMatchParent
 		ifTrue: [ 
 			| weight height |
-			weight := (aChildElement constraints frame vertical weight max: 0).
-			height := ((aParentHeight - anElement insets height - aChildElement outsets height) * weight) max: 0.
+			weight := (aChildElement constraints frame vertical weight max: 0.0).
+			height := ((aParentHeight - anElement insets height - aChildElement outsets height) * weight) max: 0.0.
 			childHeightMeasureSpec := BlMeasurementSpec exact: height ]
 		ifFalse: [ 
 			childHeightMeasureSpec := self
@@ -210,8 +210,8 @@ BlFrameLayout >> measureChildren: anElement with: anExtentSpec [
 	
 	matchParentChildren := LinkedList new.
 
-	maxWidth := 0.
-	maxHeight := 0.
+	maxWidth := 0.0.
+	maxHeight := 0.0.
 	
 	aConstrainedExtentSpec := anExtentSpec
 		min: (anElement constraints minWidth @ anElement constraints minHeight)

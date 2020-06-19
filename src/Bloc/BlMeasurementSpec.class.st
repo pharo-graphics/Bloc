@@ -28,7 +28,7 @@ BlMeasurementSpec class >> size: aSize mode: aMode [
 
 { #category : #'instance creation' }
 BlMeasurementSpec class >> unspecified [
-	^ self unspecified: 0
+	^ self unspecified: 0.0
 ]
 
 { #category : #'instance creation' }
@@ -127,10 +127,14 @@ BlMeasurementSpec >> size [
 
 { #category : #accessing }
 BlMeasurementSpec >> size: aNumber [
+	<argument: #aNumber satisfies: #isBlocPositiveFloat>
+
 	size := aNumber
 ]
 
 { #category : #geometry }
 BlMeasurementSpec >> sizeFor: aNumber [
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+
 	^ self mode size: aNumber with: size
 ]
