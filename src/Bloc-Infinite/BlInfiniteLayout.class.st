@@ -215,7 +215,7 @@ BlInfiniteLayout >> calculateChildMeasureSpec: aParentSize parentSpec: aParentSp
 	<return: #BlMeasurementSpec>
 	| aSize |
 	
-	aSize := aParentSize - aPadding.
+	aSize := (aParentSize - aPadding) max: 0.0.
 	
 	aChildResizer isExact
 		ifTrue: [ ^ BlMeasurementSpec exact: aChildResizer size ].	
