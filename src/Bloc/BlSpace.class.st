@@ -773,7 +773,7 @@ BlSpace >> initialize [
 	tasks := BlTaskQueue new.
 	time := BlTime real.
 	frame := BlSpaceFrame new.
-	telemetry := BlNullTelemetry new.
+	telemetry := BlNullTelemetry uniqueInstance.
 
 	root := self defaultRoot.
 
