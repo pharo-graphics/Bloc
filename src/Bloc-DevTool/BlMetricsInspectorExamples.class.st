@@ -35,10 +35,10 @@ BlMetricsInspectorExamples >> metricsInspectorOnElementWithMetrics [
 	anElement := self elementWithMetrics.
 	anInspector for: anElement.
 	self assert: anInspector childrenCount equals: 1.
-	self assert: ((anInspector childAt: 1) childAt: 2) text asString equals: '1'.
-	self assert: ((anInspector childAt: 1) childAt: 3) text asString equals: '2'.
-	self assert: ((anInspector childAt: 1) childAt: 4) text asString equals: '3'.
-	self assert: ((anInspector childAt: 1) childAt: 5) text asString equals: '4'.
+	self assert: ((anInspector childAt: 1) childAt: 2) text asString equals: '1.0'.
+	self assert: ((anInspector childAt: 1) childAt: 3) text asString equals: '2.0'.
+	self assert: ((anInspector childAt: 1) childAt: 4) text asString equals: '3.0'.
+	self assert: ((anInspector childAt: 1) childAt: 5) text asString equals: '4.0'.
 	^ anInspector
 ]
 
