@@ -79,7 +79,7 @@ BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex 
 
 { #category : #'text - attributes' }
 BlRopedText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
-	
+	| aPreviousRope |
 	self
 		assert: [ aFromIndex <= aToIndex ]
 		description: [ 'Start must not exceed end' ].
@@ -88,7 +88,10 @@ BlRopedText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
 		description: [ 'Start and end must be positive or both zero' ].
 	
-	self rope: (rope clearAttributes: ((aFromIndex - 1) max: 0) to: aToIndex if: aBlock)
+	aPreviousRope := rope.
+	self rope: (rope clearAttributes: ((aFromIndex - 1) max: 0) to: aToIndex if: aBlock).
+	aPreviousRope == rope
+		ifFalse: [ self notifyAttributesRemovedFrom: aFromIndex to: aToIndex ]
 ]
 
 { #category : #'text - copying' }
@@ -364,7 +367,7 @@ BlRopedText >> storeOn: aStream [
 { #category : #'text - attributes' }
 BlRopedText >> unstyle: aFromIndex to: aToIndex [
 	<return: #BlText>
-	| anUnstyledRope |
+	| anUnstyledRope aPreviousRope |
 
 	self
 		assert: [ aFromIndex <= aToIndex ]
@@ -374,12 +377,17 @@ BlRopedText >> unstyle: aFromIndex to: aToIndex [
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
 		description: [ 'Start and end must be positive or both zero' ].
 
+	aPreviousRope := rope.
+
 	"First refer original rope to support multithreading"
 	anUnstyledRope := rope.
 	anUnstyledRope := anUnstyledRope
 		clearAttributes: ((aFromIndex - 1) max: 0)
 		to: aToIndex
 		if: [ :anAttribute | anAttribute isOverwritableByStyler ].
-
-	self rope: anUnstyledRope
+	
+	self rope: anUnstyledRope.
+	
+	aPreviousRope == anUnstyledRope
+		ifFalse: [ self notifyAttributesRemovedFrom: aFromIndex to: aToIndex ]
 ]

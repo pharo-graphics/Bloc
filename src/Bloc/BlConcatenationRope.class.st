@@ -77,9 +77,18 @@ BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	self assertAccessFrom: aStart to: anEnd.
 	
 	(aStart = 0 and: [ anEnd = self size ])
-		ifTrue: [ ^ self class
-			concatenate: (left clearAttributes: 0 to: left size if: aBlock)
-			and: (right clearAttributes: 0 to: right size if: aBlock) ].
+		ifTrue: [
+			| aNewLeft aNewRight |
+			
+			aNewLeft := left clearAttributes: 0 to: left size if: aBlock.
+			aNewRight := right clearAttributes: 0 to: right size if: aBlock.
+			
+			^ (left == aNewLeft and: [ right == aNewRight ])
+				ifTrue: [ self ]
+				ifFalse: [
+					self class
+						concatenate: aNewLeft
+						and: aNewRight ] ].
 
 	leftSize := left size.
 	newLeft := nil.
@@ -97,9 +106,12 @@ BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 			ifTrue: [ right clearAttributes: 0 to: anEnd - leftSize if: aBlock ]
 			ifFalse: [ right ] ].
 
-	^ self class
-		concatenate: newLeft
-		and: newRight
+	^ (left == newLeft and: [ right == newRight ])
+		ifTrue: [ self ]
+		ifFalse: [
+			self class
+				concatenate: newLeft
+				and: newRight ]
 ]
 
 { #category : #'rope - deleting' }

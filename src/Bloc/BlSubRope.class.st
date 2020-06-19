@@ -75,7 +75,9 @@ BlSubRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	self assertAccessFrom: aStart to: anEnd.
 
 	anClearedRope := self rope clearAttributes: aStart + offset to: anEnd + offset if: aBlock.
-	^ anClearedRope from: offset to: offset + length
+	^ anClearedRope == self rope
+		ifTrue: [ self ]
+		ifFalse: [ anClearedRope from: offset to: offset + length ]
 ]
 
 { #category : #'rope - deleting' }

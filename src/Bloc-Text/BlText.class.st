@@ -384,7 +384,14 @@ BlText >> nextGeneration [
 
 { #category : #'text - notifying' }
 BlText >> notifyAttributeAdded: anAttribute from: aFromIndex to: aToIndex [
-	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextAttributeAdded attribute: anAttribute from: aFromIndex to: aToIndex) ]
+	self announcerDo: [ :anAnnouncer | anAnnouncer
+		announce: (BlTextAttributeAdded attribute: anAttribute from: aFromIndex to: aToIndex) ]
+]
+
+{ #category : #'text - notifying' }
+BlText >> notifyAttributesRemovedFrom: aFromIndex to: aToIndex [
+	self announcerDo: [ :anAnnouncer | anAnnouncer
+		announce: (BlTextAttributesRemoved from: aFromIndex to: aToIndex) ]
 ]
 
 { #category : #'text - notifying' }

@@ -141,17 +141,22 @@ BlAttributeRope >> children [
 
 { #category : #'rope - attributes' }
 BlAttributeRope >> clearAttributes: aStart to: anEnd if: aBlock [
-	| aSubRope aClearedRope preservedAttributes  |
+	| aSubRope aClearedRope preservedAttributes anyAttributeRemoved |
 	self assertAccessFrom: aStart to: anEnd.
-
+	
 	preservedAttributes := self attributes reject: [ :anAssociation | aBlock value: anAssociation value ].
-
+	anyAttributeRemoved := preservedAttributes size ~= self attributes size.
+	
 	aSubRope := self rope from: aStart to: anEnd.
 	
 	aClearedRope := aSubRope
 		clearAttributes: 0
 		to: aSubRope size
 		if: aBlock.
+
+	anyAttributeRemoved := anyAttributeRemoved or: [ aSubRope ~= aClearedRope ].
+	anyAttributeRemoved
+		ifFalse: [ ^ self ].
 
 	preservedAttributes ifNotEmpty: [ :theAttributes | aClearedRope := aClearedRope attributes: theAttributes ].
 
