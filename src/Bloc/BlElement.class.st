@@ -469,12 +469,9 @@ BlElement >> background: aBlBackground [
 	It is also possible to create a more complicated composite background with the help of ==BlBackgroundBuilder==.
 
 	aBlBackground must not be nil"
-	<event: #BlElementBackgroundChangedEvent>
+	<argument: #aBlBackground satisfies: #notNil>
+	<event: #BlElementBackgroundChangedEvent>	
 	| aNewBackground |
-
-	self
-		assert: [ aBlBackground isNotNil ]
-		description: [ 'Background must not be nil' ].
 		
 	aNewBackground := aBlBackground asBlBackground.
 	self background = aNewBackground
@@ -531,11 +528,8 @@ BlElement >> border [
 { #category : #'api - look' }
 BlElement >> border: aBlBorder [
 	"Change my border and invalidate me"
+	<argument: #aBlBorder satisfies: #notNil>
 	<event: #BlElementBorderChangedEvent>
-
-	self
-		assert: [ aBlBorder isNotNil ]
-		description: [ 'Background must not be nil' ].
 
 	self border = aBlBorder
 		ifTrue: [ ^ self ].
@@ -720,9 +714,7 @@ BlElement >> childrenDo: aBlockOrSymbol [
 	"Evaluate aBlock with each of my direct children as argument.
 	aBlock can not be nil.
 	aBlock must accept exactly one argument"
-	self
-		assert: [ aBlockOrSymbol isNotNil ]
-		description: [ 'Block must not be nil' ].
+	<argument: #aBlockOrSymbol satisfies: #notNil>
 	
 	self children do: aBlockOrSymbol
 ]
@@ -828,10 +820,7 @@ BlElement >> constraints [
 BlElement >> constraints: aLayoutConstraints [
 	"Set new layout constraints and request layout update.
 	aLayoutConstraints must not be nil"
-	
-	self
-		assert: [ aLayoutConstraints isNotNil]
-		description: [ 'Constraints must not be nil' ].
+	<argument: #aLayoutConstraints satisfies: #notNil>
 		
 	self
 		assert: [ (aLayoutConstraints isKindOf: BlockClosure) not ]
@@ -1189,10 +1178,7 @@ BlElement >> effect [
 BlElement >> effect: anEffect [
 	"Change my effect to a given one requesting draw area invalidations.
 	anEffect must not be nil"
-	
-	self
-		assert: [ anEffect isNotNil ]
-		description: [ 'anEffect must not be nil' ].
+	<argument: #anEffect satisfies: #notNil>
 
 	effect := anEffect.
 	self invalidate
@@ -1925,11 +1911,8 @@ BlElement >> layout: aBlLayout [
 	"Change my current layout to a given one.
 	After the layout change I request the layout recomputation.
 	aBlLayout must not be nil"
+	<argument: #aBlLayout satisfies: #notNil>
 	<event: #BlElementLayoutChangedEvent>
-
-	self
-		assert: [ aBlLayout isNotNil ]
-		description: [ 'Layout must not be nil' ].
 
 	layout := aBlLayout.
 
@@ -2150,10 +2133,8 @@ BlElement >> margin [
 ]
 
 { #category : #'api - layout' }
-BlElement >> margin: aBlInsets [	
-	self
-		assert: [ aBlInsets isNotNil ]
-		description: [ 'Margin must not be nil' ].
+BlElement >> margin: aBlInsets [
+	<argument: #aBlInsets satisfies: #notNil>
 
 	self constraintsDo: [ :c | c margin: aBlInsets ]
 ]
@@ -2252,9 +2233,7 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 	Subclasses should not override me, instead override onMeasure:
 	for concrete implementation.
 	anExtentMeasurementSpec must not be nil"
-	self
-		assert: [ anExtentMeasurementSpec isNotNil ]
-		description: [ 'Extent spec must not be nil' ].
+	<argument: #anExtentMeasurementSpec satisfies: #notNil>
 	
 	"Fast exit if I or any of my children did not request layout update
 	and my previous measurement specification equals to new one"
@@ -2682,10 +2661,7 @@ BlElement >> outskirts [
 BlElement >> outskirts: aBlOutskirts [
 	"Change my outskirts - the way the border is interpreted.
 	See BlOutskirts for more information"
-	
-	self
-		assert: [ aBlOutskirts isNotNil ]
-		description: [ 'Outskirts must not be nil' ].
+	<argument: #aBlOutskirts satisfies: #notNil>
 
 	aBlOutskirts = self outskirts
 		ifTrue: [ ^ self ].
@@ -2713,9 +2689,7 @@ BlElement >> padding [
 
 { #category : #'api - layout' }
 BlElement >> padding: aBlInsets [
-	self
-		assert: [ aBlInsets isNotNil ]
-		description: [ 'Padding must not be nil' ].
+	<argument: #aBlInsets satisfies: #notNil>
 
 	self constraintsDo: [ :c | c padding: aBlInsets ]
 ]
@@ -2895,12 +2869,9 @@ BlElement >> relocate: aPoint [
 	Note: We can not guarantee that new element's position will be equal to reqeusted one,
 	since it depends on the applied layout.
 	aPoint must not be nil"
+	<argument: #aPoint satisfies: #notNil>
 	<event: #BlElementPositionChangedEvent>
 	<event: #BlElementPositionInSpaceChangedEvent>
-
-	self
-		assert: [ aPoint isNotNil ]
-		description: [ 'aPoint must not be nil' ].
 
 	self measuredBounds position = aPoint
 		ifTrue: [ ^ self ].
@@ -3005,7 +2976,7 @@ BlElement >> removeChildren: aListOfElements [
 	@use BlElement>>#removeChildren if you want to remove all my children
 	@see BlElement>>#removeChild: for more info
 	aListOfElements must not be nil."
-	self assert: aListOfElements isNotNil.
+	<argument: #aListOfElements satisfies: #notNil>
 	self
 		assert: [ aListOfElements allSatisfy: [ :anElement | anElement parent == self ] ]
 		description: [ 'I can only remove my direct children!' ].
@@ -3365,9 +3336,7 @@ BlElement >> space: aSpace [
 	"Set space to be accessed directly from my multiple methods.
 	Update the space reference for my children.
 	aSpace must not be nil."
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
+	<argument: #aSpace satisfies: #notNil>
 
 	space := aSpace.
 	self childrenDo: [ :each | each space: aSpace ]
@@ -3509,9 +3478,6 @@ BlElement >> userData [
 	"Returns a Dictionary that holds application dependent and temporary objects.
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 	<return: #Dictionary>
-	self
-		assert: [ misc userData isNotNil ]
-		description: [ 'User data must not be nil' ].
 
 	^ misc userData
 ]
