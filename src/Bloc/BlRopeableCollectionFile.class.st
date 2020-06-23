@@ -346,6 +346,9 @@ BlRopeableCollectionFile >> size [
 	"Answer the receiver's size.
 	If the entire file has not been scanned use the file size, which will be either correct or an over-estimate"
 
+	"Ensure that the initial buffer has been loaded, which will improve accuracy in many cases"
+	bufferedSize = 0 ifTrue: [ self ensureBuffered: 1 ].
+
 	^ haveSize
 		ifTrue: [ map last key ]
 		ifFalse: [ BlTextIndexEOS new text: self ]

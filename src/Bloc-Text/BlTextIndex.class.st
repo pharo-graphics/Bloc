@@ -60,6 +60,15 @@ BlTextIndex >> index [
 ]
 
 { #category : #testing }
+BlTextIndex >> isNumber [
+	"Answer true so that an expression such as:
+	aSmallInteger = aBlCollectionRope size
+	can evaluate correctly"
+
+	^ true
+]
+
+{ #category : #testing }
 BlTextIndex >> isTextIndex [
 
 	^ true
