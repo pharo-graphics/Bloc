@@ -73,7 +73,7 @@ BlSubText >> assertInvariant [
 { #category : #asserting }
 BlSubText >> assertStart: aStartIndex end: anEndIndex [
 	self
-		assert: [ aStartIndex isInteger and: [ anEndIndex isInteger ] ]
+		assert: [ aStartIndex isTextIndex and: [ anEndIndex isTextIndex ] ]
 		description: [ 'Only integers are alowed as start and end indices' ].
 	self
 		assert: [ text isNotNil ]
