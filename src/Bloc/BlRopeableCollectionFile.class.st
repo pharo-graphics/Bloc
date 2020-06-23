@@ -100,7 +100,7 @@ BlRopeableCollectionFile >> at: anInteger [
 	"Answer the character at anInteger"
 
 	self ensureBuffered: anInteger.
-	^ buffer at: (anInteger - bufferStart + 1).
+	^ buffer at: (anInteger - bufferStart + 1) asInteger.
 ]
 
 { #category : #accessing }
@@ -224,7 +224,7 @@ BlRopeableCollectionFile >> ensureBuffered: anInteger [
 		bufferedSize := buffer size.
 		map add: (bufferStart + bufferedSize - 1) -> binaryStream position.
 		haveSize := haveSize or: [ binaryStream atEnd ].
-		(haveSize and: [ anInteger > self size ]) ifTrue: [ ^self ] ].
+		(haveSize and: [ anInteger >= self size ]) ifTrue: [ ^self ] ].
 
 ]
 
@@ -348,9 +348,7 @@ BlRopeableCollectionFile >> size [
 
 	^ haveSize
 		ifTrue: [ map last key ]
-		ifFalse: [ fileReference
-			ifNil: [ 0 ]
-			ifNotNil: [ fileReference size ] ]
+		ifFalse: [ BlTextIndexEOS new text: self ]
 ]
 
 { #category : #private }
