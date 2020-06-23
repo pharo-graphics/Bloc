@@ -242,7 +242,7 @@ BlRopeIteratorExamples >> next_line_CrLf_at_0 [
 	<gtExample>
 	| anIterator |
 	
-	anIterator := (BlCollectionRope collection: { BlTextLineEndingWindows new }) iterator.
+	anIterator := (BlCollectionRope collection: String crlf) iterator.
 	
 	anIterator nextLineIndicesDo: [ :aStart :anEnd :anEndDelimiter |
 		self assert: aStart equals: 0.

@@ -38,6 +38,23 @@ BlCharacterText >> = anObject [
 	^ true
 ]
 
+{ #category : #'text - converting' }
+BlCharacterText >> asString [
+	"I return an original String representaion of this text.
+	There is no guarantee that the size of the resulting string is the same
+	as of this text"
+	<return: #String>
+	| nel lf |
+
+	nel := Character nel.
+	lf := Character lf.
+	^ String streamContents: [ :aStream |
+		self do: [ :aCharacter |
+			aCharacter == nel
+				ifTrue: [ aStream nextPut: lf ]
+				ifFalse: [ aStream nextPut: aCharacter ] ] ]
+]
+
 { #category : #accessing }
 BlCharacterText >> at: anIndex [
 	"Return a character at a given index"

@@ -35,10 +35,9 @@ BlRopeableCollectionFileExamples >> copyFromTo [
 
 	self 
 		assert: (self ropeableCollection copyFrom: 1 to: 10)
-		equals: '0000000000' asArray.
+		equals: '0000000000'.
 
-	expected := 'efghix00000' asArray.
-	expected at: 6 put: BlTextLineEndingUnix new.
+	expected := 'efghi', String lf, '00000'.
 	self 
 		assert: (self ropeableCollection copyFrom: 199995 to: 200005)
 		equals: expected.

@@ -89,12 +89,14 @@ BlText >> asString [
 	There is no guarantee that the size of the resulting string is the same
 	as of this text"
 	<return: #String>
-	
+	| nel |
+
+	nel := Character nel.
 	^ String streamContents: [ :aStream |
-		self do: [ :anItem |
-			anItem isCharacter
-				ifTrue: [ aStream nextPut: anItem ]
-				ifFalse: [ aStream nextPutAll: anItem asString ] ] ]
+		self do: [ :aCharacter |
+			aCharacter == nel
+				ifTrue: [ aStream nextPutAll: String crlf ]
+				ifFalse: [ aStream nextPut: aCharacter ] ] ]
 ]
 
 { #category : #'text - accessing' }
@@ -436,10 +438,8 @@ BlText >> postCopy [
 
 { #category : #'text - printing' }
 BlText >> printOn: aStream [
-	self do: [ :anItem |
-		anItem isCharacter
-			ifTrue: [ aStream nextPut: anItem ]
-			ifFalse: [ aStream print: anItem ] ]
+
+	BlTextNonPrintableCharacterPrinter print: self on: aStream
 ]
 
 { #category : #'text - printing' }

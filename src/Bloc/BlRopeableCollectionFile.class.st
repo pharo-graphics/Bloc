@@ -139,7 +139,7 @@ BlRopeableCollectionFile >> copyFrom: startIndex to: endIndex [
 	self ensureBuffered: startIndex.
 	length := endIndex - startIndex + 1.
 	length <= 0 ifTrue: [ ^ '' ].
-	results := Array new: length.
+	results := String new: length.
 	receiverIndex := startIndex.
 	resultIndex := 1.
 	bufferIndex := startIndex - bufferStart + 1.
