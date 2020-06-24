@@ -322,6 +322,47 @@ BlText >> generation [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'text - testing' }
+BlText >> ifEmpty: aBlock [
+	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
+
+	"Note that the fact that this method returns its receiver in case the receiver is not empty allows one to write expressions like the following ones: self classifyMethodAs: (myProtocol ifEmpty: ['As yet unclassified'])"
+
+	^ self isEmpty
+		ifTrue: aBlock value
+		ifFalse: [ self ]
+]
+
+{ #category : #'text - testing' }
+BlText >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
+	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise"
+	"If the notEmptyBlock has an argument, eval with the receiver as its argument"
+
+	^ self isEmpty
+		ifTrue: emptyBlock
+		ifFalse: [ notEmptyBlock cull: self ]
+]
+
+{ #category : #'text - testing' }
+BlText >> ifNotEmpty: aBlock [
+	"Evaluate the given block with the receiver as argument, answering its value
+    unless the receiver is empty, in which case answer the receiver."
+
+	^ self isEmpty
+		ifTrue: [ self ]
+		ifFalse: [ aBlock cull: self ]
+]
+
+{ #category : #'text - testing' }
+BlText >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
+	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise
+	 If the notEmptyBlock has an argument, eval with the receiver as its argument"
+
+	^ self isEmpty
+		ifTrue: emptyBlock
+		ifFalse: [ notEmptyBlock cull: self ]
+]
+
 { #category : #'text - modifications' }
 BlText >> insertString: aString at: anIndex [
 	self

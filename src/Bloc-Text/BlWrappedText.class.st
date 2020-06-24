@@ -10,6 +10,11 @@ Class {
 	#category : #'Bloc-Text-Text'
 }
 
+{ #category : #testing }
+BlWrappedText class >> isAbstract [
+	^ self name = #BlWrappedText 
+]
+
 { #category : #'instance creation' }
 BlWrappedText class >> new [
 	self error: 'Use one of my factories instead (e.g. #text:)'
