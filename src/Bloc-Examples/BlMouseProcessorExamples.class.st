@@ -151,15 +151,6 @@ BlMouseProcessorExamples >> scripter [
 	^ BlDevScripter new
 ]
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorExamples >> scripterElement [
-	<gtExample>
-	
-	^ BlExampleMouseEventHandlingElement new
-		size: 100@75;
-		relocate: 50@50
-]
-
 { #category : #examples }
 BlMouseProcessorExamples >> secondaryDown [
 	<gtExample>

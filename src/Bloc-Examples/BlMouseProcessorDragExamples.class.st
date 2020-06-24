@@ -12,7 +12,12 @@ BlMouseProcessorDragExamples >> mouseDown [
 	aScripter := self mouseEnter.
 	
 	aScripter substeps: 'Mouse down' do: [ :aStep |			
-		aStep mouseDown ].
+		aStep mouseDown.
+		
+		aStep check
+			label: 'Check mouse down fired';
+			value: [ :anElement | anElement draggable mouseDownCount ] equals: 1;
+			onSelf ].
 	
 	^ aScripter syncContinue
 ]
@@ -30,7 +35,22 @@ BlMouseProcessorDragExamples >> mouseEnter [
 			by: 30@30.
 
 		aStep mouseMove
-			by: 50@60 ].
+			by: 50@60.
+		
+		aStep check
+			label: 'Check mouse move fired';
+			value: [ :anElement | anElement draggable mouseMoveCount ] equals: 1;
+			onSelf.
+		
+		aStep check
+			label: 'Check mouse enter fired';
+			value: [ :anElement | anElement draggable mouseEnterCount ] equals: 1;
+			onSelf.
+			
+		aStep check
+			label: 'Check mouse over fired';
+			value: [ :anElement | anElement draggable mouseOverCount ] equals: 1;
+			onSelf ].
 	
 	^ aScripter syncContinue
 ]
@@ -45,12 +65,27 @@ BlMouseProcessorDragExamples >> mouseMove [
 	aScripter substeps: 'Mouse move' do: [ :aStep |			
 		aStep mouseMove
 			by: 60@10.
-		
+
+		aStep check
+			label: 'Check drag start enter fired';
+			value: [ :anElement | anElement draggable dragStartCount ] equals: 1;
+			onSelf.
+
+		aStep check
+			label: 'Check drag fired';
+			value: [ :anElement | anElement draggable dragCount ] equals: 1;
+			onSelf.
+
+		aStep check
+			label: 'Check mouse move not fired because drag started';
+			value: [ :anElement | anElement draggable mouseMoveCount ] equals: 1;
+			onSelf.
+
 		aStep check
 			label: 'Check element was dragged';
-			satisfies: [ :anElement | anElement position = (110.0@60.0) ];
+			value: [ :anElement | anElement draggable position ] equals: (110.0@60.0);
 			onSelf ].
-	
+
 	^ aScripter syncContinue
 ]
 
@@ -66,8 +101,20 @@ BlMouseProcessorDragExamples >> mouseUp [
 		
 		aStep check
 			label: 'Check element was dragged';
-			satisfies: [ :anElement | anElement position = (110.0@60.0) ];
-			onSelf ].
+			value: [ :anElement | anElement draggable position ] equals: (110.0@60.0);
+			onSelf.
+			
+		aStep check
+			label: 'Check mouse up fired';
+			value: [ :anElement | anElement draggable mouseUpCount ] equals: 0;
+			onSelf
+	
+	].
 	
 	^ aScripter syncContinue
+]
+
+{ #category : #'examples - scripter' }
+BlMouseProcessorDragExamples >> scripterElement [
+	^ BlExampleDragAndDropElement new
 ]

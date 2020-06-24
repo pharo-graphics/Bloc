@@ -122,16 +122,6 @@ BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 ]
 
 { #category : #'event firing' }
-BlMouseProcessor >> fireAsDragOverEvent: anEvent [
-	self	fireEvent:
-			(anEvent asDragOverEvent
-				startButtons: dragStartMask;
-				gestureSource: currentDragTarget;
-				dragboard: self space dragboard;
-				yourself)
-]
-
-{ #category : #'event firing' }
 BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 	^ self fireEvent:
 			(anEvent asDragStartEvent
@@ -503,9 +493,6 @@ BlMouseProcessor >> subprocessDragEnterExitEvent: aMouseEvent [
 		newEnteredTargets := currentEnteredTargets reject: [ :anElement | lastEnteredTargets includes: anElement ].
 		self fireAsDragLeaveEvent: aMouseEvent targets: newExitedTargets.
 		self fireAsDragEnterEvent: aMouseEvent targets: newEnteredTargets ].
-
-	"fire dragover event to current target"
-	self fireAsDragOverEvent: aMouseEvent.
 	
 	"store last entered targets"
 	lastEnteredTargets := currentEnteredTargets

@@ -111,3 +111,12 @@ BlMouseProcessorClickExamples >> mouseEnter [
 	
 	^ aScripter
 ]
+
+{ #category : #'examples - scripter' }
+BlMouseProcessorClickExamples >> scripterElement [
+	<gtExample>
+	
+	^ BlExampleEventsCountingElement new
+		size: 100@75;
+		relocate: 50@50
+]
