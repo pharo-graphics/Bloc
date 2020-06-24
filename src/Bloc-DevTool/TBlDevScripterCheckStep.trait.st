@@ -62,3 +62,11 @@ TBlDevScripterCheckStep >> totalChildrenCount: aNumber [
 		totalChildrenCount: aNumber;
 		referenceSender)
 ]
+
+{ #category : #'steps - checks' }
+TBlDevScripterCheckStep >> value: anOneArgBlock equals: anEqualsBlock [
+	^ self addStep: (BlDevScripterCheckElementValueStep new
+		valueBlock: anOneArgBlock;
+		equalsBlock: anEqualsBlock;
+		referenceSender)
+]
