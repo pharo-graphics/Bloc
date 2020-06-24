@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTouchExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #examples }
@@ -38,6 +38,6 @@ BlTouchExamples class >> multiTouchDemo [
 	space := BlSpace new.
 	space position: 100@100.
 	space title: 'Touch Demo'.
-	space root addChild: container.
+	space addChild: container.
 	space show
 ]

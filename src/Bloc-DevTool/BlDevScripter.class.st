@@ -41,10 +41,10 @@ BlDevScripter >> element [
 BlDevScripter >> element: anElement [
 	element := anElement.
 	element removeFromParent.
-	
-	element addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent copy ].
 
-	space addChild: element.
+	element addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent ].
+
+	space addChild: element
 ]
 
 { #category : #'accessing - element' }
@@ -86,6 +86,47 @@ BlDevScripter >> gtElementsFor: aView [
 ]
 
 { #category : #'gt-extension' }
+BlDevScripter >> gtEventTracesIn: aContainer [
+	| anEventColor |
+	
+	anEventColor := Color r: 0.270772238514174 g: 0.6705767350928641 b: 0.9960899315738025 alpha: 1.0.
+	
+	self events do: [ :eachEvent |
+		eachEvent class = BlMouseDownEvent
+			ifTrue: [
+				aContainer addChild: (BlElement new
+					geometry: (BlCircle new);
+					size: 6@6;
+					background: anEventColor;
+					effect: (BlGaussianShadowEffect
+						color: anEventColor
+						width: 1
+						offset: 0@0);
+					border: (BlBorder paint: Color white width: 1);
+					relocate: eachEvent position - (3@3)) ].
+				
+		eachEvent class = BlMouseUpEvent
+			ifTrue: [
+				aContainer addChild: (BlElement new
+					geometry: (BlCircle new);
+					size: 6@6;
+					background: Color white;
+					border: (BlBorder paint: anEventColor width: 1);
+					effect: (BlGaussianShadowEffect
+						color: anEventColor
+						width: 1
+						offset: 0@0);
+					relocate: eachEvent position - (3@3)) ].
+		
+		eachEvent class = BlMouseMoveEvent
+			ifTrue: [
+				aContainer addChild: (BlLineElement new
+					border: (BlBorder paint: anEventColor width: 1);
+					fromAnchor: (BlAbsolutePositionAnchor position: eachEvent position - eachEvent delta);
+					toAnchor: (BlAbsolutePositionAnchor position: eachEvent position)) ] ]
+]
+
+{ #category : #'gt-extension' }
 BlDevScripter >> gtEventsFor: aView [
 	<gtView>
 	self events ifNil: [ ^ aView empty ].
@@ -106,8 +147,26 @@ BlDevScripter >> gtReveresedEventsFor: aView [
 { #category : #'gt-extension' }
 BlDevScripter >> gtSpaceFor: aView [
 	<gtView>
-	space ifNil: [ ^ aView empty ].
-	^ (space gtPreviewFor: aView)
+	space
+		ifNil: [ ^ aView empty ].
+		
+	^ aView explicit
+		title: 'Preview';
+		priority: 0;
+		stencil: [
+			| aContainer |
+			
+			aContainer := BlElement new.
+			aContainer constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ].
+			
+			(space gtPreviewFor: GtPhlowEmptyView new)
+				asElementDo: [ :anElement | aContainer addChild: anElement ].
+			
+			self gtEventTracesIn: aContainer.
+			
+			aContainer ];
 		actionButtonLabel: 'Open' 
 			action: [ self spaceWithElement show ];
 		actionButtonLabel: 'Inspect' 
@@ -156,6 +215,8 @@ BlDevScripter >> initialize [
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
+	space host: BlHeadlessHost new.
+	space addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent ].
 	events := BlDevScripterEvents new
 ]
 

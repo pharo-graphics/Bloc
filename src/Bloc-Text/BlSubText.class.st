@@ -284,6 +284,13 @@ BlSubText >> postCopy [
 	text := text copy
 ]
 
+{ #category : #'text - converting' }
+BlSubText >> printOn: aStream [
+
+	end > text size ifTrue: [ ^ aStream << 'BlSubText(end>text size)' ].
+	^ super printOn: aStream
+]
+
 { #category : #'text - accessing' }
 BlSubText >> size [
 	self assertInvariant.

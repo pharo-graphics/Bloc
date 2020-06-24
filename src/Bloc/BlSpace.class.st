@@ -176,7 +176,7 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 			"element may be removed from the space."
 			aSpace := anElement space.
 			aSpace pulse.
-			aCollectionOfEvents do: [ :anEvent | anElement space dispatchEvent: anEvent ].
+			aCollectionOfEvents do: [ :anEvent | aSpace dispatchEvent: anEvent ].
 			aSpace pulse ]
 		ifFalse: [ 
 			| temporarySpace topMostElement |
@@ -206,6 +206,15 @@ BlSpace class >> simulateMouseDownOn: anElement [
 ]
 
 { #category : #'debug - simulation' }
+BlSpace class >> simulateMouseDownOn: anElement at: aPoint [
+	"Simulate a mouse down event at a given location in the space of the element"
+
+	self
+		simulateEvents: { BlMouseDownEvent primary position: aPoint }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
 BlSpace class >> simulateMouseMoveInside: anElement [
 	"Simulate a mouse move event at a random location within element's bounds"
 	| aPosition |
@@ -214,6 +223,26 @@ BlSpace class >> simulateMouseMoveInside: anElement [
 
 	self
 		simulateEvents: { BlMouseMoveEvent primary position: aPosition }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateMouseMoveOn: anElement at: aPoint [
+	"Simulate a mouse move event at a given location in the space of the element"
+	
+	self
+		simulateEvents: { BlMouseMoveEvent primary position: aPoint }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint [
+	"Simulate a mouse move event at a given location in the space of the element"
+	
+	self
+		simulateEvents: { BlMouseMoveEvent primary
+			position: aToPoint;
+			delta: (aToPoint - aFromPoint)  }
 		on: anElement
 ]
 
@@ -240,6 +269,15 @@ BlSpace class >> simulateMouseUpOn: anElement [
 
 	self
 		simulateEvents: { BlMouseUpEvent primary position: aPosition }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateMouseUpOn: anElement at: aPoint [
+	"Simulate a mouse up event at a given location in the space of the element"
+
+	self
+		simulateEvents: { BlMouseUpEvent primary position: aPoint }
 		on: anElement
 ]
 

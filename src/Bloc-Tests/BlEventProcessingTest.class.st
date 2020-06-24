@@ -1,7 +1,7 @@
 Class {
 	#name : #BlEventProcessingTest,
 	#superclass : #BlEventTestCase,
-	#category : 'Bloc-Tests-Universe'
+	#category : #'Bloc-Tests-Universe'
 }
 
 { #category : #tests }
@@ -60,7 +60,6 @@ BlEventProcessingTest >> testDragCreation [
 	self assertFiredEventIs: BlDragStartEvent target: self child withPropagation: true.
 	self assertFiredEventIs: BlDragEvent target: self child withPropagation: true.
 	self assertFiredEventIs: BlDragLeaveEvent target: self child withPropagation: false.
-	self assertFiredEventIs: BlDragOverEvent target: self root withPropagation: true.
 	
 	self sendOutsideTargetEvent: BlMouseUpEvent primary.
 

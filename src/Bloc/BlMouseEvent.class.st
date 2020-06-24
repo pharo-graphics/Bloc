@@ -78,13 +78,6 @@ BlMouseEvent >> asDragLeaveEvent [
 ]
 
 { #category : #converting }
-BlMouseEvent >> asDragOverEvent [
-	^ BlDragOverEvent new
-		copyFrom: self;
-		yourself
-]
-
-{ #category : #converting }
 BlMouseEvent >> asDragStartEvent [
 	"Convert the receiver into a mouse move"
 

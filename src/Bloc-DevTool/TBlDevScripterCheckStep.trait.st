@@ -4,7 +4,6 @@ I define common check steps.
 Trait {
 	#name : #TBlDevScripterCheckStep,
 	#traits : 'TBlDevScripterCheckStepCreation',
-	#classTraits : 'TBlDevScripterCheckStepCreation classTrait',
 	#category : #'Bloc-DevTool-Scripter'
 }
 
@@ -60,5 +59,13 @@ TBlDevScripterCheckStep >> satisfies: anOneArgBlock [
 TBlDevScripterCheckStep >> totalChildrenCount: aNumber [
 	^ self addStep: (BlDevScripterCheckTotalChildrenCountStep new 
 		totalChildrenCount: aNumber;
+		referenceSender)
+]
+
+{ #category : #'steps - checks' }
+TBlDevScripterCheckStep >> value: anOneArgBlock equals: anEqualsBlock [
+	^ self addStep: (BlDevScripterCheckElementValueStep new
+		valueBlock: anOneArgBlock;
+		equalsBlock: anEqualsBlock;
 		referenceSender)
 ]

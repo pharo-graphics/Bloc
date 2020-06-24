@@ -9,7 +9,9 @@ BlDevScripterEvents >> add: anEvent [
 	self 
 		assert: [ anEvent isNotNil ]
 		description: [ 'Event must be non-nil' ].
-	self collection add: anEvent
+	
+	(self collection includes: anEvent)
+		ifFalse: [ self collection add: anEvent ]
 ]
 
 { #category : #accessing }

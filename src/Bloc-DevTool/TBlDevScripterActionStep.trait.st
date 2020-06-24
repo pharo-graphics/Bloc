@@ -4,7 +4,6 @@ I define common action steps
 Trait {
 	#name : #TBlDevScripterActionStep,
 	#traits : 'TBlDevScripterCheckStepCreation',
-	#classTraits : 'TBlDevScripterCheckStepCreation classTrait',
 	#category : #'Bloc-DevTool-Scripter'
 }
 
@@ -21,6 +20,21 @@ TBlDevScripterActionStep >> do [
 { #category : #'steps - interactions' }
 TBlDevScripterActionStep >> fire [
 	^ self addStep: BlDevScripterFireEventStep new referenceSender
+]
+
+{ #category : #'steps - interactions' }
+TBlDevScripterActionStep >> mouseDown [
+	^ self addStep: (BlDevScripterMouseDownStep new referenceSender)
+]
+
+{ #category : #'steps - interactions' }
+TBlDevScripterActionStep >> mouseMove [
+	^ self addStep: (BlDevScripterMouseMoveStep new referenceSender)
+]
+
+{ #category : #'steps - interactions' }
+TBlDevScripterActionStep >> mouseUp [
+	^ self addStep: (BlDevScripterMouseUpStep new referenceSender)
 ]
 
 { #category : #'steps - other' }

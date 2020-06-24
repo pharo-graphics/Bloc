@@ -30,9 +30,9 @@ BlDevScripterCheckElementStep >> playOn: aScripter [
 	| anElement |
 	anElement := self target findTargetStartingInScripter: aScripter.
 	self 
-		assert: self block isNotNil
-		description: 'Check block must be defined'.
+		assert: [ self block isNotNil ]
+		description: [ 'Check block must be defined' ].
 	self 
-		assert: (self block cull: anElement cull: aScripter userData)
+		assert: [ self block cull: anElement cull: aScripter userData ]
 		description: [ 'It does not satisfy ', self block printString ]
 ]

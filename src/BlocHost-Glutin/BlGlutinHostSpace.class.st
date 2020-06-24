@@ -425,8 +425,7 @@ BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 		timestamp: DateAndTime now;
 		yourself.
 
-	self enqueueEvent: aBlocEvent.
-	self universe pulse
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - visiting' }

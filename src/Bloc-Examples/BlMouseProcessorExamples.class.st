@@ -4,7 +4,7 @@ I contain examples-tests of mouse processor
 Class {
 	#name : #BlMouseProcessorExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #'examples - sequence' }
@@ -142,6 +142,13 @@ BlMouseProcessorExamples >> primaryMouseUpEvent [
 	<gtExample>
 
 	^ BlMouseUpEvent primary
+]
+
+{ #category : #'examples - scripter' }
+BlMouseProcessorExamples >> scripter [
+	<gtExample>
+
+	^ BlDevScripter new
 ]
 
 { #category : #examples }
