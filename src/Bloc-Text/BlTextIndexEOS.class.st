@@ -46,6 +46,18 @@ BlTextIndexEOS >> - aNumber [
 		offset: offset - aNumber
 ]
 
+{ #category : #arithmetic }
+BlTextIndexEOS >> // aNumber [ 
+
+	^ self index // aNumber
+]
+
+{ #category : #arithmetic }
+BlTextIndexEOS >> \\ aNumber [ 
+
+	^ self index \\ aNumber
+]
+
 { #category : #accessing }
 BlTextIndexEOS >> approximateSize [
 	"Answer the receiver's text's approximate size.
