@@ -41,10 +41,10 @@ BlDevScripter >> element [
 BlDevScripter >> element: anElement [
 	element := anElement.
 	element removeFromParent.
-	
-	element addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent copy ].
 
-	space addChild: element.
+	element addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent ].
+
+	space addChild: element
 ]
 
 { #category : #'accessing - element' }
@@ -156,6 +156,8 @@ BlDevScripter >> initialize [
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
+	space host: BlHeadlessHost new.
+	space addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent ].
 	events := BlDevScripterEvents new
 ]
 
