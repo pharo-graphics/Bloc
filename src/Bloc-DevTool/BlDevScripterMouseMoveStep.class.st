@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+BlDevScripterMouseMoveStep >> by: aPoint [
+	delta := aPoint
+]
+
+{ #category : #accessing }
 BlDevScripterMouseMoveStep >> defaultLabel [
 	^ 'Mouse move'
 ]

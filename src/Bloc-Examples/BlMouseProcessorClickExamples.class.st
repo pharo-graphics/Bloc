@@ -83,11 +83,11 @@ BlMouseProcessorClickExamples >> mouseEnter [
 	
 	aScripter substeps: 'Mouse Enter' do: [ :aStep |			
 		aStep mouseMove
-			delta: 30@30.
+			by: 30@30.
 
 		aStep mouseMove
-			delta: 70@60.
-		
+			by: 70@60.
+
 		"aStep check 
 			label: 'Check last click event is not nil';
 			satisfies: [ :aMouseProcessor | aMouseProcessor lastClickEvent isNotNil ];

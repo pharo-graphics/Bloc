@@ -32,6 +32,8 @@ BlExampleMouseEventHandlingElement >> initialize [
 		anEvent consumed: true.
 		anEvent currentTarget incrementClickCount ].
 	
+	self when: BlMouseDownEvent do: [  ].
+	
 	self addEventHandler: BlPullHandler new.
 	
 	self background: Color veryVeryLightGray

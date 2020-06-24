@@ -27,10 +27,10 @@ BlMouseProcessorDragExamples >> mouseEnter [
 	
 	aScripter substeps: 'Mouse Enter' do: [ :aStep |			
 		aStep mouseMove
-			delta: 30@30.
+			by: 30@30.
 
 		aStep mouseMove
-			delta: 50@60 ].
+			by: 50@60 ].
 	
 	^ aScripter syncContinue
 ]
@@ -44,7 +44,7 @@ BlMouseProcessorDragExamples >> mouseMove [
 	
 	aScripter substeps: 'Mouse move' do: [ :aStep |			
 		aStep mouseMove
-			delta: 60@10.
+			by: 60@10.
 		
 		aStep check
 			label: 'Check element was dragged';
