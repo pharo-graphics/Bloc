@@ -161,10 +161,6 @@ BlEventListener >> mouseOverEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlEventListener >> mouseStillDownEvent: anEvent [
-]
-
-{ #category : #'mouse handlers' }
 BlEventListener >> mouseUpEvent: anEvent [
 ]
 

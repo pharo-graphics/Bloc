@@ -41,6 +41,11 @@ TBlDevScripterTarget >> onModel [
 	self updateTarget: (BlDevScripterModelTarget new)
 ]
 
+{ #category : #'targets - other' }
+TBlDevScripterTarget >> onMouseProcessor [
+	self updateTarget: (BlDevScripterMouseProcessorTarget new)
+]
+
 { #category : #'targets - children' }
 TBlDevScripterTarget >> onNestedChild: anArray [
 	self updateTarget: (BlDevScripterNestedChildEventTarget new targetSequence: anArray)

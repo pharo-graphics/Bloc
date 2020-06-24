@@ -12,7 +12,6 @@ Class {
 		'lastEnteredTargets',
 		'lastOverTarget',
 		'lastClickEvent',
-		'isMouseStillDown',
 		'currentDragTarget',
 		'lastMouseTarget',
 		'dndInProgress',
@@ -188,18 +187,8 @@ BlMouseProcessor >> fireAsMouseOverEvent: aMouseEvent [
 	self fireEvent: aMouseEvent asMouseOverEvent 
 ]
 
-{ #category : #'event firing' }
-BlMouseProcessor >> fireAsMouseStillDownEvent: anEvent [
-	self fireEvent:
-			(anEvent asMouseStillDownEvent
-				timestamp: DateAndTime now;
-				yourself)
-]
-
 { #category : #'event processing' }
 BlMouseProcessor >> generateEvents [
-	(isMouseStillDown ~= 0 and: [ currentDragTarget isNil ])
-		ifTrue: [ self fireAsMouseStillDownEvent: previousMouseDownEvent ]
 ]
 
 { #category : #'mouse down' }
@@ -282,7 +271,7 @@ BlMouseProcessor >> handleMouseMove: aMouseMoveEvent [
 BlMouseProcessor >> handleMouseUp: aMouseUpEvent [
 	"DragEnd, Simple click and Dbl click"
 	| aTargetElement |
-
+	
 	"if mouse button was not registered as pressed we can ignore this particular event"
 	(self pressedButtons includes: aMouseUpEvent button)
 		ifFalse: [ ^ self ].
@@ -304,7 +293,6 @@ BlMouseProcessor >> handleMouseUp: aMouseUpEvent [
 BlMouseProcessor >> initialize [
 	super initialize.
 	lastEnteredTargets := #().
-	isMouseStillDown := 0.
 	dragStartMask := 0.
 	dndInProgress := false.
 
@@ -326,12 +314,18 @@ BlMouseProcessor >> isValidDragTarget: aEvent [
 	^ (aEvent target = self space root) not
 ]
 
+{ #category : #accessing }
+BlMouseProcessor >> lastClickEvent [
+	<return: #BlClickEvent or: nil>
+
+	^ lastClickEvent
+]
+
 { #category : #'initialize-release' }
 BlMouseProcessor >> onSpaceClosed [
 	lastEnteredTargets := #().
 	lastOverTarget := nil.
 	lastClickEvent := nil.
-	isMouseStillDown := 0.
 	currentDragTarget := nil.
 	lastMouseTarget := nil.
 	dndInProgress := nil.
@@ -466,9 +460,10 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 				lastClickEvent := nil.
 				self fireEvent: aMouseUpEvent asDoubleClickEvent ]
 			ifFalse:[
-				lastClickEvent := aMouseUpEvent.
-				self fireEvent: aMouseUpEvent asClickEvent.
-			] ]
+				| aClickEvent |
+				aClickEvent := aMouseUpEvent asClickEvent.
+				self fireEvent: aClickEvent.
+				lastClickEvent := aClickEvent copy ] ]
 ]
 
 { #category : #'event processing' }
