@@ -31,10 +31,10 @@ BlExampleDragAndDropElement >> initialize [
 		relocate: 50@50.
 		
 	drop := BlExampleEventsCountingElement new
-		background: Color transparent;
+		background: Color white;
 		border: (BlBorder builder dashed paint: Color lightGray; width: 1; build);
 		size: 200@150;
 		relocate: 200@100.
 		
-	self addChildren: { draggable . drop }
+	self addChildren: { drop . draggable }
 ]

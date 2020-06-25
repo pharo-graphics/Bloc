@@ -12,7 +12,10 @@ Class {
 		'mouseLeaveCount',
 		'mouseMoveCount',
 		'mouseOverCount',
-		'mouseOutCount'
+		'mouseOutCount',
+		'dropCount',
+		'dragEnterCount',
+		'dragLeaveCount'
 	],
 	#category : #'Bloc-Examples-Event'
 }
@@ -48,6 +51,26 @@ BlExampleEventsCountingElement >> dragEndCount: anObject [
 ]
 
 { #category : #accessing }
+BlExampleEventsCountingElement >> dragEnterCount [
+	^ dragEnterCount
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> dragEnterCount: anObject [
+	dragEnterCount := anObject
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> dragLeaveCount [
+	^ dragLeaveCount
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> dragLeaveCount: anObject [
+	dragLeaveCount := anObject
+]
+
+{ #category : #accessing }
 BlExampleEventsCountingElement >> dragStartCount [
 	^ dragStartCount
 ]
@@ -58,56 +81,81 @@ BlExampleEventsCountingElement >> dragStartCount: anObject [
 ]
 
 { #category : #accessing }
+BlExampleEventsCountingElement >> dropCount [
+	^ dropCount
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> dropCount: anObject [
+	dropCount := anObject
+]
+
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementClickCount [
 	clickCount := clickCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementDragCount [
 	dragCount := dragCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementDragEndCount [
 	dragEndCount := dragEndCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
+BlExampleEventsCountingElement >> incrementDragEnterCount [
+	dragEnterCount := dragEnterCount + 1
+]
+
+{ #category : #increment }
+BlExampleEventsCountingElement >> incrementDragLeaveCount [
+	dragEnterCount := dragLeaveCount + 1
+]
+
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementDragStartCount [
 	dragStartCount := dragStartCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
+BlExampleEventsCountingElement >> incrementDropCount [
+	dropCount := dropCount + 1
+]
+
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementMouseDownCount [
 	mouseDownCount := mouseDownCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementMouseEnterCount [
 	mouseEnterCount := mouseEnterCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementMouseLeaveCount [
 	mouseLeaveCount := mouseLeaveCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementMouseMoveCount [
 	mouseMoveCount := mouseMoveCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementMouseOutCount [
 	mouseOutCount := mouseOutCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementMouseOverCount [
 	mouseOverCount := mouseOverCount + 1
 ]
 
-{ #category : #accessing }
+{ #category : #increment }
 BlExampleEventsCountingElement >> incrementMouseUpCount [
 	mouseUpCount := mouseUpCount + 1
 ]
@@ -127,6 +175,9 @@ BlExampleEventsCountingElement >> initialize [
 	dragStartCount := 0.
 	dragCount := 0.
 	dragEndCount := 0.
+	dragEnterCount := 0.
+	dragLeaveCount := 0.
+	dropCount := 0.
 	
 	self when: BlClickEvent do: [ :anEvent |
 		anEvent consumed: true.
@@ -171,6 +222,18 @@ BlExampleEventsCountingElement >> initialize [
 	self when: BlDragEndEvent do: [ :anEvent |
 		anEvent consumed: true.
 		anEvent currentTarget incrementDragEndCount ].
+	
+	self when: BlDragEnterEvent do: [ :anEvent |
+		anEvent consumed: true.
+		anEvent currentTarget incrementDragEnterCount ].
+	
+	self when: BlDragLeaveEvent do: [ :anEvent |
+		anEvent consumed: true.
+		anEvent currentTarget incrementDragLeaveCount ].
+	
+	self when: BlDropEvent do: [ :anEvent |
+		anEvent consumed: true.
+		anEvent currentTarget incrementDropCount ].
 	
 	self addEventHandler: BlPullHandler new.
 	
