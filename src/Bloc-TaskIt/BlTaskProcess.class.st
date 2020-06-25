@@ -23,11 +23,6 @@ BlTaskProcess >> hasProcessAnnotations [
 ]
 
 { #category : #accessing }
-BlTaskProcess >> invocatedByElement [
-	^ self task ifNotNil: #invocatedByElement
-]
-
-{ #category : #accessing }
 BlTaskProcess >> processAnnotation [
 	^ processAnnotation ifNil: [ processAnnotation := WeakValueDictionary new ]
 ]
