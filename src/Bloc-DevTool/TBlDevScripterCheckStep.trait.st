@@ -1,10 +1,10 @@
 "
 I define common check steps.
+
+My users must also use ${class:TBlDevScripterCheckStepCreation}$
 "
 Trait {
 	#name : #TBlDevScripterCheckStep,
-	#traits : 'TBlDevScripterCheckStepCreation',
-	#classTraits : 'TBlDevScripterCheckStepCreation classTrait',
 	#category : #'Bloc-DevTool-Scripter'
 }
 

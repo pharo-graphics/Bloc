@@ -1,10 +1,10 @@
 "
-I define common action steps
+I define common action steps.
+
+My users must also use ${class:TBlDevScripterCheckStepCreation}$
 "
 Trait {
 	#name : #TBlDevScripterActionStep,
-	#traits : 'TBlDevScripterCheckStepCreation',
-	#classTraits : 'TBlDevScripterCheckStepCreation classTrait',
 	#category : #'Bloc-DevTool-Scripter'
 }
 

@@ -1,8 +1,8 @@
 Class {
 	#name : #BlDevScripterFutureCheckStep,
 	#superclass : #BlDevScripterCheckStep,
-	#traits : 'TBlDevScripterCheckStep + TBlDevScripterCompositeStepTarget',
-	#classTraits : 'TBlDevScripterCheckStep classTrait + TBlDevScripterCompositeStepTarget classTrait',
+	#traits : 'TBlDevScripterCheckStep + TBlDevScripterCheckStepCreation + TBlDevScripterCompositeStepTarget',
+	#classTraits : 'TBlDevScripterCheckStep classTrait + TBlDevScripterCheckStepCreation classTrait + TBlDevScripterCompositeStepTarget classTrait',
 	#instVars : [
 		'parent',
 		'hasCustomTarget',

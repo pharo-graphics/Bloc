@@ -6,8 +6,8 @@ I am designed for Model-based User Interface Testing
 Class {
 	#name : #BlDevScripter,
 	#superclass : #Object,
-	#traits : 'TBlDevScripterActionStep',
-	#classTraits : 'TBlDevScripterActionStep classTrait',
+	#traits : 'TBlDevScripterActionStep + TBlDevScripterCheckStepCreation',
+	#classTraits : 'TBlDevScripterActionStep classTrait + TBlDevScripterCheckStepCreation classTrait',
 	#instVars : [
 		'element',
 		'space',

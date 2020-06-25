@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterMultipleActionStep,
 	#superclass : #BlDevScripterCompositeStep,
-	#traits : 'TBlDevScripterActionStep - {#addStep:}',
-	#classTraits : 'TBlDevScripterActionStep classTrait',
+	#traits : 'TBlDevScripterActionStep + (TBlDevScripterCheckStepCreation - {#addStep:})',
+	#classTraits : 'TBlDevScripterActionStep classTrait + TBlDevScripterCheckStepCreation classTrait',
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
