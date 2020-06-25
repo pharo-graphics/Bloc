@@ -379,6 +379,12 @@ BlLayout >> measurementSpecFor: parentSpec usedSize: usedSize resizer: childResi
 ]
 
 { #category : #'hooks - layout' }
+BlLayout >> onCleanUp: anElement [
+	"Is sent when the layout caches should be cleaned up.
+	This happens for example when an element is removed from the scene"
+]
+
+{ #category : #'hooks - layout' }
 BlLayout >> onLayoutDone: anElement [
 	"Is sent after layout is completely computed.
 	All layout changes done within this hook will be performed during the next frame.

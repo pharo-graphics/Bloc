@@ -2588,7 +2588,8 @@ BlElement >> onRemovedFromSceneGraph [
 	Note: Always send onRemovedFromSceneGraph to super class if you override me!"
 
 	space := nil.
-	self detachCompositionLayer
+	self detachCompositionLayer.
+	self layout onCleanUp: self
 ]
 
 { #category : #'hooks - geometry' }
