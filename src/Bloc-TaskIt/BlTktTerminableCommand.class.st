@@ -36,6 +36,12 @@ BlTktTerminableCommand >> execute [
 	^ self command execute
 ]
 
+{ #category : #testing }
+BlTktTerminableCommand >> includesTerminableCommand [
+	<return: #Boolean>
+	^ true
+]
+
 { #category : #accessing }
 BlTktTerminableCommand >> name [
 	<return: #String>

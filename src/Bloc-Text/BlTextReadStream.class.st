@@ -53,6 +53,14 @@ BlTextReadStream >> next: anAmount [
 	^ aText
 ]
 
+{ #category : #accessing }
+BlTextReadStream >> nextLine [
+	"Return an instance of BrText which represents a piece of text from current position
+	until the first carriage return character"
+	<return: #BlText>
+	^ self iterator nextLine
+]
+
 { #category : #'stream - enumeration' }
 BlTextReadStream >> peek [
 	"Return an item (character) at current position.

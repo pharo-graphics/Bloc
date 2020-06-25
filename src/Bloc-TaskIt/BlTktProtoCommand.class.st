@@ -90,6 +90,12 @@ BlTktProtoCommand >> includesSingleCommand [
 	^ false
 ]
 
+{ #category : #testing }
+BlTktProtoCommand >> includesTerminableCommand [
+	<return: #Boolean>
+	^ false
+]
+
 { #category : #accessing }
 BlTktProtoCommand >> name [
 	<return: #String>

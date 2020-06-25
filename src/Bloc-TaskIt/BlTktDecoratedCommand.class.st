@@ -7,6 +7,11 @@ Class {
 	#category : #'Bloc-TaskIt-Commands'
 }
 
+{ #category : #testing }
+BlTktDecoratedCommand class >> isAbstract [
+	^ self name = #BlTktDecoratedCommand 
+]
+
 { #category : #converting }
 BlTktDecoratedCommand >> asBlTktLoggingCommand [
 	^ self includesLoggingCommand 
@@ -18,6 +23,13 @@ BlTktDecoratedCommand >> asBlTktLoggingCommand [
 BlTktDecoratedCommand >> asBlTktSingleCommand [
 	^ self includesSingleCommand 
 		ifFalse: [ BlTktSingleCommand new command: self ]
+		ifTrue: [ self ]
+]
+
+{ #category : #converting }
+BlTktDecoratedCommand >> asBlTktTerminableCommand [
+	^ self includesTerminableCommand 
+		ifFalse: [ super asBlTktTerminableCommand ]
 		ifTrue: [ self ]
 ]
 
@@ -72,6 +84,12 @@ BlTktDecoratedCommand >> includesLoggingCommand [
 BlTktDecoratedCommand >> includesSingleCommand [
 	<return: #Boolean>
 	^ self command includesSingleCommand
+]
+
+{ #category : #testing }
+BlTktDecoratedCommand >> includesTerminableCommand [
+	<return: #Boolean>
+	^ self command includesTerminableCommand
 ]
 
 { #category : #initialization }

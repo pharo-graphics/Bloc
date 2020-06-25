@@ -29,6 +29,12 @@ BlTktResponsiveCommand >> execute [
 	^ self valuable value: request.
 ]
 
+{ #category : #testing }
+BlTktResponsiveCommand >> includesTerminableCommand [
+	<return: #Boolean>
+	^ true
+]
+
 { #category : #initialization }
 BlTktResponsiveCommand >> initialize [
 	super initialize.
