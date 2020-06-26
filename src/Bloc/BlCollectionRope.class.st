@@ -336,6 +336,13 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 		and: (self class collectionRope collection: rightArray)
 ]
 
+{ #category : #accessing }
+BlCollectionRope >> readStream [ 
+	"Answer a read stream that iterates over the characters in the receiver's collection"
+
+	^ collection readStream
+]
+
 { #category : #'rope - replacing' }
 BlCollectionRope >> simplified [
 	<return: #BlRope>

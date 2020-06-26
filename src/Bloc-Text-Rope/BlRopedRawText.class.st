@@ -28,12 +28,6 @@ BlRopedRawText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndice
 
 { #category : #'text - converting' }
 BlRopedRawText >> normalized [
-	self error: 'Should never get here, BlTextLineEndings are deprecated'.
 	
-	^ BlRopedText rope: (self rope replaceAll: ({
-			BlTextLineEndingMacClassic .
-			BlTextLineEndingUnix .
-			BlTextLineEndingWindows .
-			BlTextTab
-		} collect: [ :eachItemClass | eachItemClass uniqueInstance asString -> { eachItemClass uniqueInstance } ]))
+	^ BlRopedText string: rope
 ]
