@@ -29,6 +29,7 @@ BlRopedText class >> rope: aRope [
 
 { #category : #'instance creation' }
 BlRopedText class >> string: aString [
+	"Take the supplied string like object, convert it to a normalised string and answer as roped text"
 	<return: #BlRopedText>
 
 	^ self rope: (BlCollectionRope collection: (BlTextStringNormalizer new process: aString))
