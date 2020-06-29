@@ -283,6 +283,12 @@ BlRopedText >> iterator: aFromIndex to: aToIndex [
 	^ BlRopedTextIterator text: self from: aFromIndex to: aToIndex
 ]
 
+{ #category : #'text - converting' }
+BlRopedText >> normalized [
+	
+	^ self class rope: rope normalized
+]
+
 { #category : #accessing }
 BlRopedText >> rope [
 	^ rope

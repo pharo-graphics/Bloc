@@ -336,6 +336,12 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 		and: (self class collectionRope collection: rightArray)
 ]
 
+{ #category : #'text - converting' }
+BlCollectionRope >> normalized [ 
+
+	^ self class collection: (BlTextStringNormalizer new process: collection)
+]
+
 { #category : #accessing }
 BlCollectionRope >> readStream [ 
 	"Answer a read stream that iterates over the characters in the receiver's collection"

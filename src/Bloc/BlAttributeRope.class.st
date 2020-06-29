@@ -264,6 +264,14 @@ BlAttributeRope >> iterator: aStart to: anEnd [
 	^ BlAttributeRopeIterator rope: self from: aStart to: anEnd
 ]
 
+{ #category : #'text - converting' }
+BlAttributeRope >> normalized [ 
+
+	^ self class attributeRope
+		attributes: attributes
+		rope: rope normalized
+]
+
 { #category : #accessing }
 BlAttributeRope >> readStream [ 
 

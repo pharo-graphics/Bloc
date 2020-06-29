@@ -346,6 +346,12 @@ BlRope >> last [
 	^ self at: self size
 ]
 
+{ #category : #'text - converting' }
+BlRope >> normalized [
+
+	^ self subclassResponsibility
+]
+
 { #category : #'rope - printing' }
 BlRope >> printOn: aStream [
 	

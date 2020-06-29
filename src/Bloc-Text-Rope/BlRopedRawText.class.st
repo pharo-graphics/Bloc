@@ -25,9 +25,3 @@ BlRopedRawText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndice
 			atAll: aCollectionOfIndices)
 		requested: aCollectionOfIndices
 ]
-
-{ #category : #'text - converting' }
-BlRopedRawText >> normalized [
-	
-	^ BlRopedText string: rope
-]
