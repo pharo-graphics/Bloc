@@ -80,6 +80,12 @@ BlSubRope >> clearAttributes: aStart to: anEnd if: aBlock [
 		ifFalse: [ anClearedRope from: offset to: offset + length ]
 ]
 
+{ #category : #copying }
+BlSubRope >> copyFrom: startIndex to: endIndex [
+
+	^ self from: startIndex-1 to: endIndex
+]
+
 { #category : #'rope - deleting' }
 BlSubRope >> delete: aStart to: anEnd [
 	<return: #BlRope>
@@ -182,7 +188,7 @@ BlSubRope >> offset [
 { #category : #accessing }
 BlSubRope >> readStream [ 
 
-	^ self asString readStream
+	^ ReadStream on: self
 ]
 
 { #category : #accessing }

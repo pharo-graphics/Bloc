@@ -114,6 +114,12 @@ BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 				and: newRight ]
 ]
 
+{ #category : #copying }
+BlConcatenationRope >> copyFrom: startIndex to: endIndex [
+
+	^ self from: startIndex-1 to: endIndex
+]
+
 { #category : #'rope - deleting' }
 BlConcatenationRope >> delete: aStart to: anEnd [
 	self assertAccessFrom: aStart to: anEnd.
@@ -253,7 +259,7 @@ BlConcatenationRope >> left: aLeftRope right: aRightRope [
 { #category : #accessing }
 BlConcatenationRope >> readStream [ 
 
-	^ self asString readStream
+	^ ReadStream on: self
 ]
 
 { #category : #'rope - replacing' }

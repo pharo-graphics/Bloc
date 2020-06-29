@@ -262,8 +262,8 @@ BlConcatenationRopeExamples >> readStreamSmall [
 	stream := rope readStream.
 
 	self assert: stream next equals: $H.
-	self assert: (stream next: 3) equals: 'ell'.
-	self assert: stream upToEnd equals: 'oWorld'.
+	self assert: (stream next: 3) asString equals: 'ell'.
+	self assert: stream upToEnd asString equals: 'oWorld'.
 ]
 
 { #category : #'instance creation' }
