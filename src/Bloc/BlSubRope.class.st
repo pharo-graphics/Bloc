@@ -180,6 +180,12 @@ BlSubRope >> offset [
 ]
 
 { #category : #accessing }
+BlSubRope >> readStream [ 
+
+	^ self asString readStream
+]
+
+{ #category : #accessing }
 BlSubRope >> rope [
 	<return: #BlRope>
 

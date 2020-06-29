@@ -265,6 +265,12 @@ BlAttributeRope >> iterator: aStart to: anEnd [
 ]
 
 { #category : #accessing }
+BlAttributeRope >> readStream [ 
+
+	^ rope readStream
+]
+
+{ #category : #accessing }
 BlAttributeRope >> rope [
 	^ rope
 ]

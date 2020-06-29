@@ -364,6 +364,12 @@ BlRope >> putOn: aStream from: aStart to: anEnd [
 	self from: aStart to: anEnd do: [ :anItem | aStream nextPut: anItem ]
 ]
 
+{ #category : #accessing }
+BlRope >> readStream [ 
+
+	^ self subclassResponsibility 
+]
+
 { #category : #'rope - replacing' }
 BlRope >> replaceAll: aCollectionOfAssociations [
 	"Answer a copy of the receiver in which all occurrences of the collections as keys have been replaced by corresponding values.

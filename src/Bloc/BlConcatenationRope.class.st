@@ -250,6 +250,12 @@ BlConcatenationRope >> left: aLeftRope right: aRightRope [
 	length := left size + right size
 ]
 
+{ #category : #accessing }
+BlConcatenationRope >> readStream [ 
+
+	^ self asString readStream
+]
+
 { #category : #'rope - replacing' }
 BlConcatenationRope >> replaceFrom: aStart to: anEnd with: aCollection [
 	"Replace a piece of the rope with a given collection of items"
