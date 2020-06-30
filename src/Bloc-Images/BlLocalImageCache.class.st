@@ -182,18 +182,18 @@ BlLocalImageCache >> emergencySize [
 BlLocalImageCache >> ensureCacheFileForFile: aFileReference size: minImageSize [
 	"Ensure that the appropriate cache file entry has been created and answer the file reference or nil if no cache entry applies"
 
-	| fileReference cacheSize cacheFile form |
+	| fileReference cacheSize cacheFile image |
 
 	fileReference := aFileReference asFileReference.
 	cacheSize := self cacheSizeFor: minImageSize.
 	(minImageSize isNil or: [ cacheSize isNil ]) ifTrue: [ ^nil ].
 	cacheFile := self cacheFileFor: fileReference size: cacheSize.
 	cacheFile exists ifTrue: [ ^cacheFile ].
-	form := self formFor: fileReference.
-	cacheSize >= form extent max ifTrue: [ ^nil ].
-	form := form scaledToSize: cacheSize@cacheSize.
+	image := self imageFor: fileReference.
+	cacheSize >= image extent max ifTrue: [ ^nil ].
+	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: #High.
 	self ensureCreateDirectory: cacheFile parent.
-	PluginBasedJPEGReadWriter putForm: form onFileNamed: cacheFile.
+	image saveFile: cacheFile asAbsolute pathString format: #JPEG quality: 80.
 	housekeeper add: cacheFile.
 	^cacheFile.
 
@@ -222,26 +222,26 @@ BlLocalImageCache >> fileAt: aFileReference size: minImageSize [
 	If minImageSize isNil, answer the form from the original file.
 	Otherwise answer the cached image which is larger than minImageSize."
 
-	| fileReference cacheSize cacheFile form |
+	| fileReference cacheSize cacheFile image |
 
 	fileReference := aFileReference asFileReference.
 	cacheSize := self cacheSizeFor: minImageSize.
 	(minImageSize isNil or: [ cacheSize isNil ]) ifTrue: [ 
-		form := self formFor: fileReference.
-		^self answerForm: form size: form extent max isOriginal: true ].
+		image := self imageFor: fileReference.
+		^self answerImage: image size: image extent max isOriginal: true ].
 	cacheFile := self cacheFileFor: fileReference size: cacheSize.
 	cacheFile exists ifTrue: [ 
 		hits := hits + 1.
-		^self answerForm: (self formFor: cacheFile) size: cacheSize isOriginal: false ].
-	form := self formFor: fileReference.
-	cacheSize >= form extent max ifTrue: 
-		[ ^self answerForm: form size: form extent max isOriginal: true ].
-	form := form scaledToSize: cacheSize@cacheSize.
+		^self answerImage: (self imageFor: cacheFile) size: cacheSize isOriginal: false ].
+	image := self imageFor: fileReference.
+	cacheSize >= image extent max ifTrue: 
+		[ ^self answerImage: image size: image extent max isOriginal: true ].
+	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: #High.
 	self ensureCreateDirectory: cacheFile parent.
-	PluginBasedJPEGReadWriter putForm: form onFileNamed: cacheFile.
+	image saveFile: cacheFile asAbsolute pathString format: #JPEG quality: 80.
 	housekeeper add: cacheFile.
 	misses := misses + 1.
-	^self answerForm: form size: cacheSize isOriginal: false.
+	^self answerImage: image size: cacheSize isOriginal: false.
 
 ]
 
@@ -360,7 +360,7 @@ BlLocalImageCache >> url: aUrl size: minImageSize for: anObject [
 	If minImageSize isNil, answer the form from the original file.
 	Otherwise answer the cached image which is larger than minImageSize."
 
-	| znUrl content fileReference cacheSize cacheFile form originalSize |
+	| znUrl content fileReference cacheSize cacheFile image originalSize |
 
 	znUrl := aUrl asZnUrl.
 	"If the appropriate cache entry already exists, just return it.
@@ -370,7 +370,7 @@ BlLocalImageCache >> url: aUrl size: minImageSize for: anObject [
 		cacheFile := self cacheFileForUrl: znUrl size: cacheSize.
 		cacheFile exists ifTrue: [ 
 			hits := hits + 1.
-			^self set: anObject form: (self formFor: cacheFile) size: cacheSize isOriginal: false ] ].
+			^self set: anObject image: (self imageFor: cacheFile) size: cacheSize isOriginal: false ] ].
 
 	"The cache file doesn't exist or the original has been requested"
 	"Ensure we have the original saved to file and its form loaded"
@@ -386,23 +386,22 @@ BlLocalImageCache >> url: aUrl size: minImageSize for: anObject [
 		fileReference binaryWriteStreamDo: [ :stream |
 			stream nextPutAll: content ].
 		housekeeper add: fileReference.
-		misses := misses + 1.
-		form := ImageReadWriter formFromStream: content readStream ]
-	ifTrue:
-		[ form := self formFor: fileReference ].
-	originalSize := form extent max.
+		misses := misses + 1 ].
+	image := self imageFor: fileReference.
+	originalSize := image extent max.
 
-	minImageSize ifNil: [ ^self set: anObject form: form size: originalSize isOriginal: true ].
+	minImageSize ifNil: [ ^self set: anObject image: image size: originalSize isOriginal: true ].
 
 	"If the requested cache size is larger than the original, just return the original"
-	cacheSize >= form extent max ifTrue: [ ^self set: anObject form: form size: originalSize isOriginal: true ].
+	cacheSize >= image extent max ifTrue: 
+		[ ^self set: anObject image: image size: originalSize isOriginal: true ].
 
 	"Answer the form scaled to cacheSize"
-	form := form scaledToSize: cacheSize@cacheSize.
+	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: 80.
 	self ensureCreateDirectory: cacheFile parent.
-	PluginBasedJPEGReadWriter putForm: form onFileNamed: cacheFile.
+	image saveFile: cacheFile asAbsolute pathString format: #JPEG quality: 80.
 	housekeeper add: cacheFile.
 	misses := misses + 1.
-	^self set: anObject form: form size: cacheSize isOriginal: false.
+	^self set: anObject image: image size: cacheSize isOriginal: false.
 
 ]
