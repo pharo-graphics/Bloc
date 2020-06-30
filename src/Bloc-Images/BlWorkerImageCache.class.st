@@ -19,24 +19,24 @@ BlWorkerImageCache >> fileAt: aFileReference size: minImageSize [
 	If minImageSize isNil, set the form from the original file.
 	Otherwise set the cached image which is larger than minImageSize."
 
-	| fileReference cacheSize cacheFile form |
+	| fileReference cacheSize cacheFile image |
 
 	fileReference := aFileReference asFileReference.
 	cacheSize := self cacheSizeFor: minImageSize.
 	(minImageSize isNil or: [ cacheSize isNil ]) ifTrue: [ 
-		form := self formFor: fileReference.
-		^self answerForm: form size: form extent max isOriginal: true ].
+		image := self imageFor: fileReference.
+		^self answerImage: image size: image extent max isOriginal: true ].
 	cacheFile := self cacheFileFor: fileReference size: cacheSize.
 	cacheFile exists ifTrue: [ 
 		hits := hits + 1.
-		^self answerForm: (self formFor: cacheFile) size: cacheSize isOriginal: false ].
+		^self answerImage: (self imageFor: cacheFile) size: cacheSize isOriginal: false ].
 
 	misses := misses + 1.
 	"Ask the worker to ensure that cache entry exists, then load it"
 	cacheFile := (BlTlpWorkerPool current evaluate: [ BlLocalImageCache current ensureCacheFileForFile: aFileReference size: minImageSize ]).
 	^cacheFile
-		ifNotNil: [ self answerForm: (self formFor: cacheFile) size: cacheSize isOriginal: false ]
+		ifNotNil: [ self answerImage: (self imageFor: cacheFile) size: cacheSize isOriginal: false ]
 		ifNil: [ 
-			form := self formFor: fileReference.
-			self answerForm: form size: form extent max isOriginal: true ]
+			image := self imageFor: fileReference.
+			self answerForm: image size: image extent max isOriginal: true ]
 ]

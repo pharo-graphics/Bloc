@@ -11,7 +11,7 @@ These allow the user to determine whether it is worthwhile attempting to get a s
 !!Internal Representation and Key Implementation Points.
 
 !!!Instance Variables
-	form:		<Form>
+	image:				<SkImage>
 	isOriginal:		<Boolean>
 	isSmallest:		<Boolean>
 
@@ -21,7 +21,7 @@ Class {
 	#name : #BlImageCacheEntry,
 	#superclass : #Object,
 	#instVars : [
-		'form',
+		'image',
 		'isSmallest',
 		'isOriginal'
 	],
@@ -29,13 +29,13 @@ Class {
 }
 
 { #category : #accessing }
-BlImageCacheEntry >> form [
-	^ form
+BlImageCacheEntry >> image [
+	^ image
 ]
 
 { #category : #accessing }
-BlImageCacheEntry >> form: anObject [
-	form := anObject
+BlImageCacheEntry >> image: anObject [
+	image := anObject
 ]
 
 { #category : #accessing }
