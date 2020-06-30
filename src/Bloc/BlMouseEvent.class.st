@@ -2,7 +2,9 @@ Class {
 	#name : #BlMouseEvent,
 	#superclass : #BlUIEvent,
 	#instVars : [
-		'delta'
+		'position',
+		'screenPosition',
+		'button'
 	],
 	#category : #'Bloc-Events'
 }
@@ -122,13 +124,15 @@ BlMouseEvent >> asMouseOverEvent [
 ]
 
 { #category : #accessing }
-BlMouseEvent >> delta [
-	^ delta
+BlMouseEvent >> button [
+	<return: #BlMouseButton>
+
+	^ button
 ]
 
 { #category : #accessing }
-BlMouseEvent >> delta: anObject [
-	delta := anObject
+BlMouseEvent >> button: aBlMouseButton [
+	button := aBlMouseButton
 ]
 
 { #category : #testing }
@@ -136,14 +140,66 @@ BlMouseEvent >> isMouse [
 	^ true
 ]
 
+{ #category : #'api - geometry' }
+BlMouseEvent >> localPosition [
+	"Return an event position in local coordinates of a #currentTarget"
+	<return: #Point>
+	
+	^ self currentTarget globalPointToLocal: self position
+]
+
 { #category : #testing }
 BlMouseEvent >> middleButtonPressed [
 	^ button = BlMouseButton middle
 ]
 
+{ #category : #'api - geometry' }
+BlMouseEvent >> parentPosition [
+	"Return an event position in parent coordinates of a #currentTarget"
+	<return: #Point>
+	
+	^ self currentTarget globalPointToParent: self position
+]
+
+{ #category : #'api - geometry' }
+BlMouseEvent >> position [
+	^ position
+]
+
+{ #category : #accessing }
+BlMouseEvent >> position: anObject [
+	position := anObject
+]
+
 { #category : #testing }
 BlMouseEvent >> primaryButtonPressed [
 	^ button = BlMouseButton primary
+]
+
+{ #category : #printing }
+BlMouseEvent >> printOn: aStream [
+	aStream 
+		nextPutAll: self class name;
+		nextPut:$(;
+		nextPutAll:'position: ';
+		print: position;
+		nextPutAll:'; screenPosition: ';
+		print: screenPosition;
+		nextPutAll:'; modifiers: ';
+		print: modifiers;
+		nextPutAll:'; button: ';
+		print: button;
+		nextPut:$)
+]
+
+{ #category : #'api - geometry' }
+BlMouseEvent >> screenPosition [
+	^ screenPosition
+]
+
+{ #category : #accessing }
+BlMouseEvent >> screenPosition: anObject [
+	screenPosition := anObject
 ]
 
 { #category : #testing }
