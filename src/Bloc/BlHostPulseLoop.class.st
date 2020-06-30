@@ -33,6 +33,11 @@ BlHostPulseLoop class >> new [
 	self error: 'Use #forUniverse: instead'
 ]
 
+{ #category : #accessing }
+BlHostPulseLoop class >> processId [
+	^ 'Bloc Main Loop'
+]
+
 { #category : #'loop process' }
 BlHostPulseLoop >> createLoopProcess [
 	^ self createLoopTask newProcess
@@ -124,7 +129,7 @@ BlHostPulseLoop >> loopProcess [
 
 { #category : #'loop process' }
 BlHostPulseLoop >> processId [
-	^ 'Bloc Main Loop'
+	^ self class processId
 ]
 
 { #category : #period }

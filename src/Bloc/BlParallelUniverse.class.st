@@ -364,7 +364,7 @@ BlParallelUniverse >> requestStopPulsation [
 			UI process or from a process that was not the Bloc UI process previously. This avoids 
 			reseting the pulsing status when the debugger terminates a previously suspended UI process."
 			(currentUIProcess == Processor activeProcess or: [ 
-				Processor activeProcess name ~= 'Bloc UI Process' ]) ifTrue: [ 
+				Processor activeProcess isBlocPulseLoopProcess not ]) ifTrue: [ 
 					self markAsNotPulsing ] ] ]
 ]
 
