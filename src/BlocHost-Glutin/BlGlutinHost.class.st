@@ -237,7 +237,7 @@ BlGlutinHost >> supportsOpenGLSurface [
 	"Return true if this host can work with OpenGL surface, false otherwise"
 	<return: #Boolean>
 	
-	^ OSPlatform current isWindows not
+	^ true
 ]
 
 { #category : #initialize }
