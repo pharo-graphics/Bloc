@@ -135,8 +135,6 @@ BlKeyboardProcessor >> processWindowFocusOut: anEvent [
 			BlKeyUpEvent new
 				key: aKeyDownEvent key;
 				scanCode: aKeyDownEvent scanCode;
-				timestamp: self space time now;
-				position: aKeyDownEvent position;
-				screenPosition: aKeyDownEvent screenPosition ]
+				timestamp: self space time now ]
 		thenDo: [ :aKeyUpEvent | self processKeyUp: aKeyUpEvent ]
 ]

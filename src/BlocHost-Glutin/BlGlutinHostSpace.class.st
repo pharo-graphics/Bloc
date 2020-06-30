@@ -290,9 +290,7 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 		key: aKeyboardKey;
 		scanCode: anEvent scan_code;
 		modifiers: modifiers;
-		timestamp: self space time now;
-		position: (mousePosition asLogical: self scaleFactor) asPoint;
-		screenPosition: window position + mousePosition asPoint.
+		timestamp: self space time now.
 	
 	self enqueueEvent: aBlocEvent
 ]

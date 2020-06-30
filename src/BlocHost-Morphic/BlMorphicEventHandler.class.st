@@ -121,9 +121,7 @@ BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 		key: BlKeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: DateAndTime now;
-		position: aMorphicEvent position;
-		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
+		timestamp: self time now.
 
 	self registerPressedKey: BlKeyboardKey backspace.
 	self enqueue: aBlEvent
@@ -137,9 +135,7 @@ BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
 		key: BlKeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: DateAndTime now;
-		position: aMorphicEvent position;
-		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
+		timestamp: self time now.
 
 	self unregisterPressedKey: BlKeyboardKey backspace.
 	self enqueue: aBlEvent
@@ -153,9 +149,7 @@ BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 		key: BlKeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: DateAndTime now;
-		position: aMorphicEvent position;
-		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
+		timestamp: self time now.
 
 	self registerPressedKey: BlKeyboardKey delete.
 
@@ -197,9 +191,7 @@ BlMorphicEventHandler >> handleDeleteUp: aMorphicEvent [
 		key: BlKeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: DateAndTime now;
-		position: aMorphicEvent position;
-		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
+		timestamp: self time now.
 	
 	self unregisterPressedKey: BlKeyboardKey delete.
 	self enqueue: aBlEvent
@@ -251,9 +243,7 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: theModifiers;
-		timestamp: DateAndTime now;
-		position: aMorphicEvent position;
-		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
+		timestamp: self time now.
 	
 	self registerPressedKey: aKey.
 
@@ -283,9 +273,7 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: theModifiers;
-		timestamp: DateAndTime now;
-		position: aMorphicEvent position;
-		screenPosition: (self globalMousePositionForEvent: aMorphicEvent).
+		timestamp: self time now.
 
 	self unregisterPressedKey: aKey.
 	self enqueue: aBlEvent
@@ -518,6 +506,8 @@ BlMorphicEventHandler >> registerPressedKey: aKey [
 
 { #category : #accessing }
 BlMorphicEventHandler >> time [
+	<return: #BlTime>
+
 	^ self window hostSpace space time
 ]
 

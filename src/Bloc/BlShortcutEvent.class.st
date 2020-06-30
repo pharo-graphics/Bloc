@@ -16,7 +16,7 @@ I must be set to ===consumed=== if there was a matching shortcut.
 "
 Class {
 	#name : #BlShortcutEvent,
-	#superclass : #BlKeyboardEvent,
+	#superclass : #BlUIEvent,
 	#instVars : [
 		'buffer',
 		'isRepeated'

@@ -6,6 +6,9 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mousemove
 Class {
 	#name : #BlMouseMoveEvent,
 	#superclass : #BlMouseEvent,
+	#instVars : [
+		'delta'
+	],
 	#category : #'Bloc-Events'
 }
 
@@ -43,6 +46,16 @@ BlMouseMoveEvent class >> secondary [
 	<return: #BlMouseMoveEvent>
 	
 	^ self button: BlMouseButton secondary
+]
+
+{ #category : #accessing }
+BlMouseMoveEvent >> delta [
+	^ delta
+]
+
+{ #category : #accessing }
+BlMouseMoveEvent >> delta: aPoint [
+	delta := aPoint
 ]
 
 { #category : #testing }

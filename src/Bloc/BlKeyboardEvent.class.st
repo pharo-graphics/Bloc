@@ -3,30 +3,40 @@ Class {
 	#superclass : #BlUIEvent,
 	#instVars : [
 		'scanCode',
-		'repeat'
+		'key'
 	],
 	#category : #'Bloc-Events'
 }
-
-{ #category : #initialization }
-BlKeyboardEvent >> initialize [
-	super initialize.
-	repeat := 0.
-]
 
 { #category : #testing }
 BlKeyboardEvent >> isKeyboard [
 	^ true
 ]
 
-{ #category : #accessing }
-BlKeyboardEvent >> repeat [
-	^ repeat
+{ #category : #'key - accessing' }
+BlKeyboardEvent >> key [
+	<return: #BlKeyboardKey>
+
+	^ key
 ]
 
-{ #category : #accessing }
-BlKeyboardEvent >> repeat: anObject [
-	repeat := anObject
+{ #category : #'key - accessing' }
+BlKeyboardEvent >> key: aBlKeyboardKey [
+	key := aBlKeyboardKey
+]
+
+{ #category : #printing }
+BlKeyboardEvent >> printOn: aStream [
+	aStream 
+		nextPutAll: self class name;
+		nextPut: $(;
+		nextPutAll: 'key: ';
+		print: key;
+		nextPutAll: '; scan code: ';
+		print: scanCode;
+		nextPutAll: '; modifiers: ';
+		print: modifiers;
+		nextPut: $)
 ]
 
 { #category : #'key - accessing' }
@@ -40,6 +50,6 @@ BlKeyboardEvent >> scanCode [
 ]
 
 { #category : #'key - accessing' }
-BlKeyboardEvent >> scanCode: anObject [
-	scanCode := anObject
+BlKeyboardEvent >> scanCode: aNumber [
+	scanCode := aNumber
 ]

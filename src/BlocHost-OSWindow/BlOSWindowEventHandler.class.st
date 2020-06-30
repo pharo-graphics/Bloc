@@ -129,9 +129,7 @@ BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: self time now;
-		position: anEvent position;
-		screenPosition: window position + anEvent position.
+		timestamp: self time now.
 
 	self enqueue: aBlEvent
 ]
@@ -144,9 +142,7 @@ BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: self time now;
-		position: anEvent position;
-		screenPosition: window position + anEvent position.
+		timestamp: self time now.
 
 	self enqueue: aBlEvent
 ]
