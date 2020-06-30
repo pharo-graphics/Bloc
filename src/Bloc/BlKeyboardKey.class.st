@@ -683,6 +683,16 @@ BlKeyboardKey >> value [
 	^ value
 ]
 
+{ #category : #accessing }
+BlKeyboardKey >> valueOrZero [
+	"Return a platform and host specific value behind the key.
+	If value is not specified I return 0.
+	I am useless for a typical user and have only debugging purpose"
+	<return: #Number>
+	
+	^ value ifNil: [ 0 ]
+]
+
 { #category : #initialization }
 BlKeyboardKey >> withName: aName [
 	name := aName asSymbol

@@ -215,7 +215,7 @@ BlDevScripter >> initialize [
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
-	space host: BlHeadlessHost new.
+	space host: BlMockedHost new.
 	space addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent ].
 	events := BlDevScripterEvents new
 ]

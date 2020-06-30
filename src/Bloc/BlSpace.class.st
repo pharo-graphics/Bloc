@@ -192,6 +192,24 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 ]
 
 { #category : #'debug - simulation' }
+BlSpace class >> simulateKeyDownOn: anElement key: aBlKeyboardKey [
+	"Simulate a key down event"
+
+	self
+		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateKeyUpOn: anElement key: aBlKeyboardKey [
+	"Simulate a key up event"
+
+	self
+		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
 BlSpace class >> simulateMouseDownOn: anElement [
 	"Simulate a mouse down event in the middle of a given element"
 	| aPosition |

@@ -24,6 +24,21 @@ TBlDevScripterActionStep >> fire [
 ]
 
 { #category : #'steps - interactions' }
+TBlDevScripterActionStep >> keyClick: aBlKeyboardKey [
+	^ self addStep: (BlDevScripterKeyClickStep new referenceSender key: aBlKeyboardKey)
+]
+
+{ #category : #'steps - interactions' }
+TBlDevScripterActionStep >> keyDown: aBlKeyboardKey [
+	^ self addStep: (BlDevScripterKeyDownStep new referenceSender key: aBlKeyboardKey)
+]
+
+{ #category : #'steps - interactions' }
+TBlDevScripterActionStep >> keyUp: aBlKeyboardKey [
+	^ self addStep: (BlDevScripterKeyUpStep new referenceSender key: aBlKeyboardKey)
+]
+
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> mouseDown [
 	^ self addStep: (BlDevScripterMouseDownStep new referenceSender)
 ]
@@ -36,6 +51,11 @@ TBlDevScripterActionStep >> mouseMove [
 { #category : #'steps - interactions' }
 TBlDevScripterActionStep >> mouseUp [
 	^ self addStep: (BlDevScripterMouseUpStep new referenceSender)
+]
+
+{ #category : #'steps - interactions' }
+TBlDevScripterActionStep >> requestFocus [
+	^ self addStep: BlDevScripterRequestFocusStep new referenceSender
 ]
 
 { #category : #'steps - other' }
