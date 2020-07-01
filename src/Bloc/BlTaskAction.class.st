@@ -13,18 +13,20 @@ BlTaskAction >> action [
 ]
 
 { #category : #accessing }
-BlTaskAction >> action: anObject [
-	action := anObject
+BlTaskAction >> action: aBlock [
+	action := aBlock
 ]
 
 { #category : #initialization }
 BlTaskAction >> initialize [
 	super initialize.
 	
-	action := [  ]
+	action := [ :optionalThisTask | ]
 ]
 
 { #category : #running }
 BlTaskAction >> run [
-	self action value
+	self action isClosure
+		ifTrue: [ self action cull: self ]
+		ifFalse: [ self action value ]
 ]
