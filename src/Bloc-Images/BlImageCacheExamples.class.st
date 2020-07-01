@@ -26,7 +26,7 @@ BlImageCacheExamples >> getCachedSize100 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self image1200 size: 100 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	"The next largest size is 200"
 	self 
@@ -47,7 +47,7 @@ BlImageCacheExamples >> getCachedSize200 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self image1200 size: 200 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	"The next largest size is 200"
 	self 
@@ -68,7 +68,7 @@ BlImageCacheExamples >> getCachedSize2000 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self image1200 size: 2000 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	"The next largest size is 200"
 	self 
@@ -89,7 +89,7 @@ BlImageCacheExamples >> getCachedSize400 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self image400 size: 400 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	"The next largest size is 200"
 	self 
@@ -110,7 +110,7 @@ BlImageCacheExamples >> getCachedSize700 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self image1200 size: 700 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	"The next largest size is 200"
 	self 
@@ -131,7 +131,7 @@ BlImageCacheExamples >> getCachedUrlSize300 [
 	element := BlImageCacheTestEntry new.
 	cache url: self image1200 asZnUrl size: 300 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	self 
 		assert: maxDimension 
@@ -151,7 +151,7 @@ BlImageCacheExamples >> getCachedUrlSize400 [
 	element := BlImageCacheTestEntry new.
 	cache url: self image400 asZnUrl size: 400 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	self 
 		assert: maxDimension 
@@ -171,7 +171,7 @@ BlImageCacheExamples >> getCachedUrlSize800 [
 	element := BlImageCacheTestEntry new.
 	cache url: self image400 asZnUrl size: 800 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	self 
 		assert: maxDimension 
@@ -246,14 +246,13 @@ BlImageCacheExamples >> testCacheSizeFor [
 ]
 
 { #category : #tests }
-BlImageCacheExamples >> testDeafultImageSizes [
+BlImageCacheExamples >> testDefaultImageSizes [
 	<gtExample>
 
 	| defaultSizes |
 
 	defaultSizes := BlMemoryImageCache new defaultImageSizes.
-	self assert: defaultSizes size equals: 3.
-	self assert: defaultSizes first equals: 200.
+	self assert: defaultSizes equals: #(300 600 1280 2560).
 	^defaultSizes
 ]
 
