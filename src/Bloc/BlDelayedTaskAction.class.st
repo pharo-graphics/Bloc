@@ -13,18 +13,20 @@ BlDelayedTaskAction >> action [
 ]
 
 { #category : #accessing }
-BlDelayedTaskAction >> action: anObject [
-	action := anObject
+BlDelayedTaskAction >> action: aBlock [
+	action := aBlock
 ]
 
 { #category : #initialization }
 BlDelayedTaskAction >> initialize [
 	super initialize.
 	
-	action := [  ]
+	action := [ :optionalThisTask | ]
 ]
 
 { #category : #'api - running' }
 BlDelayedTaskAction >> onRun [
-	self action value
+	self action isClosure
+		ifTrue: [ self action cull: self ]
+		ifFalse: [ self action value ]
 ]

@@ -245,6 +245,11 @@ BlDevScripter >> pulse [
 ]
 
 { #category : #'accessing - space' }
+BlDevScripter >> root [
+	^ self space root
+]
+
+{ #category : #'accessing - space' }
 BlDevScripter >> space [
 	<return: #BlSpace>
 	^ space

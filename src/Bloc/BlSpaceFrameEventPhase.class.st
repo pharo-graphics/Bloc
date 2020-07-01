@@ -38,7 +38,6 @@ BlSpaceFrameEventPhase >> runOn: aSpace [
 						theSpace eventRecorder record: anEvent.
 						theSpace eventDispatcher dispatchEvent: anEvent ] ] ].
 				
-				theSpace hostSpaceDo: [ :aHostSpace |
-					aHostSpace generateEvents.
-					theSpace mouseProcessor generateEvents ] ] ]
+				theSpace hostSpaceDo: [ :aHostSpace | aHostSpace generateEvents ] ].
+			theSpace mouseProcessor generateEvents ]
 ]

@@ -111,7 +111,10 @@ BlKeyboardProcessor >> processKeyUp: anEvent [
 	
 	aTarget := self findTarget: anEvent.
 	anEvent target: aTarget.
-	self fireEvent: anEvent
+	self fireEvent: anEvent.
+
+	self buffer isEmpty
+		ifTrue: [ preventKeystrokes := false ]
 ]
 
 { #category : #'event processing' }

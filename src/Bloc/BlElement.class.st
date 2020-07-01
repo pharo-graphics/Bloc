@@ -3504,7 +3504,7 @@ BlElement >> visibility: aVisibility [
 		ifTrue: [ ^ self ].
 
 	"hidden and visible types of visibility do not remove
-	and element from the layout process, therefore we should only request
+	an element from the layout process, therefore we should only request
 	layout if visibility changes from or to gone"
 	shouldRequestLayout := visibility = BlVisibility gone
 		or: [ aVisibility = BlVisibility gone ].

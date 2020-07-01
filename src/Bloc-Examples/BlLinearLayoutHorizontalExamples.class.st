@@ -1,8 +1,6 @@
 Class {
 	#name : #BlLinearLayoutHorizontalExamples,
-	#superclass : #Object,
-	#traits : 'TBlLayoutExamplesSetup',
-	#classTraits : 'TBlLayoutExamplesSetup classTrait',
+	#superclass : #BlLinearLayoutExamples,
 	#category : #'Bloc-Examples-Layout'
 }
 
@@ -231,6 +229,56 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
 	self assert: parent position equals: 0@0.
 	
 	^ parent
+]
+
+{ #category : #'examples - visibility' }
+BlLinearLayoutHorizontalExamples >> one_child_set_visibility_gone [
+	<gtExample>
+	| aContainer aRed aBlue |
+	
+	aContainer := BlElement new
+		layout: (BlLinearLayout horizontal cellSpacing: 20);
+		padding: (BlInsets top: 10 bottom: 10);
+		size: 500@400.
+		
+	aRed := BlElement new
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent ];
+		border: (BlBorder paint: Color red darker width: 1);
+		background: (Color red alpha: 0.3).
+		
+	aBlue := BlElement new
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent ];
+		border: (BlBorder paint: Color blue darker width: 1);
+		background: (Color blue alpha: 0.3).
+		
+	aContainer addChildren: { aRed . aBlue }.
+	
+	aContainer forceLayout.
+	
+	self assert: aContainer extent equals: 500@400.
+	self assert: aRed position equals: 20@10.
+	self assert: aRed extent equals: 220@380.
+	
+	self assert: aBlue position equals: 260@10.
+	self assert: aBlue extent equals: 220@380.
+	
+	aRed visibility: BlVisibility gone.
+	
+	aContainer forceLayout.
+	
+	self assert: aContainer extent equals: 500@400.
+	"red keeps its position and extent from the previous pass"
+	self assert: aRed position equals: 20@10.
+	self assert: aRed extent equals: 220@380.
+	
+	self assert: aBlue position equals: 20@10.
+	self assert: aBlue extent equals: 460@380.
+	
+	^ aContainer
 ]
 
 { #category : #'examples - setup' }

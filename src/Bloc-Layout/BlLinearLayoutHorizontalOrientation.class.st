@@ -47,7 +47,7 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle [
 	right := left.
 	bottom := top.
 
-	theLayeredChildren := self layout layeredChildren: anElement.
+	theLayeredChildren := anElement children accountedByLayout.
 
 	self layout direction
 		with: theLayeredChildren

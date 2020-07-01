@@ -3,12 +3,38 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
+	#instVars : [
+		'id'
+	],
+	#classVars : [
+		'UniqueIdGenerator'
+	],
 	#category : #'Bloc-Space - Tasks'
 }
+
+{ #category : #'class initialization' }
+BlTask class >> initialize [
+	UniqueIdGenerator := BlUniqueIdGenerator new
+]
 
 { #category : #converting }
 BlTask >> asBeaconLoggingTask [
 	^ BlBeaconLoggingTask subtask: self
+]
+
+{ #category : #accessing }
+BlTask >> id [
+	"Return a unique id of this task"
+	<return: #Number>
+
+	^ id
+]
+
+{ #category : #initialization }
+BlTask >> initialize [
+	super initialize.
+	
+	id := UniqueIdGenerator generateUniqueId
 ]
 
 { #category : #hooks }

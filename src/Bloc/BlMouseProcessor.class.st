@@ -63,6 +63,13 @@ BlMouseProcessor >> dblClickDelay [
 	^ self class dblClickDelay
 ]
 
+{ #category : #accessing }
+BlMouseProcessor >> enteredTargets [
+	<return: #Collection of: #BlElement>
+
+	^ lastEnteredTargets
+]
+
 { #category : #'event processing' }
 BlMouseProcessor >> fillTargetHierarchy: aTarget [
 	^ Array streamContents: [ :aStream |
@@ -156,7 +163,7 @@ BlMouseProcessor >> fireAsEnterEvent: anEvent targets: aCollection [
 ]
 
 { #category : #'event firing' }
-BlMouseProcessor >> fireAsLeaveEvent: anEvent targets: aCollection [
+BlMouseProcessor >> fireAsMouseLeaveEvent: anEvent targets: aCollection [
 	aCollection
 		do:	[ :t | 
 			self dispatchEvent:
@@ -173,12 +180,31 @@ BlMouseProcessor >> fireAsMouseOutEvent: aMouseEvent [
 ]
 
 { #category : #'event firing' }
+BlMouseProcessor >> fireAsMouseOutEvent: aMouseEvent targets: aCollection [
+	aCollection do: [ :eachElement |
+		self fireEvent: (aMouseEvent asMouseOutEvent target: eachElement) ]
+]
+
+{ #category : #'event firing' }
 BlMouseProcessor >> fireAsMouseOverEvent: aMouseEvent [
 	self fireEvent: aMouseEvent asMouseOverEvent 
 ]
 
 { #category : #'event processing' }
 BlMouseProcessor >> generateEvents [
+	(lastEnteredTargets reject: [ :eachElement | eachElement isAttachedToSceneGraph ])
+		ifNotEmpty: [ :removedEnteredTargets |
+			| aMouseEvent |
+			
+			aMouseEvent := BlMouseEvent new
+				button: (pressedButtons ifEmpty: [ nil ] ifNotEmpty: [ pressedButtons anyOne ]);
+				position: 0@0;
+				screenPosition: 0@0.
+			
+			self fireAsMouseLeaveEvent: aMouseEvent targets: removedEnteredTargets.
+			self fireAsMouseOutEvent: aMouseEvent targets: removedEnteredTargets.
+			
+			lastEnteredTargets := lastEnteredTargets select: [ :eachElement | eachElement isAttachedToSceneGraph ] ]
 ]
 
 { #category : #'mouse down' }
@@ -404,7 +430,7 @@ BlMouseProcessor >> processMouseEnterLeaveEvent: aMouseEvent [
 	newLeavedTargets := lastEnteredTargets reject: [ :anElement | (currentEnteredTargets includes: anElement) ].
 	newLeavedTargets := newLeavedTargets select: #isAttachedToSceneGraph.
 
-	self fireAsLeaveEvent: aMouseEvent targets: newLeavedTargets.
+	self fireAsMouseLeaveEvent: aMouseEvent targets: newLeavedTargets.
 	
 	"fire mouse event to the current target"
 	self fireAsMouseOverEvent: aMouseEvent.

@@ -11,7 +11,7 @@ ${example:BlFrameLayoutCompositionExamples>>#exampleReverseOrder|previewExpanded
 "
 Class {
 	#name : #BlFrameLayoutCompositionExamples,
-	#superclass : #Object,
+	#superclass : #BlFrameLayoutExamples,
 	#category : #'Bloc-Examples-Layout'
 }
 

@@ -26,7 +26,6 @@ Class {
 	#superclass : #BlAsyncElement,
 	#instVars : [
 		'entry',
-		'bitmap',
 		'preLoad'
 	],
 	#category : #'Bloc-Images-Elements'
@@ -43,22 +42,20 @@ BlAsyncImageElement >> applyLayoutIn: aBlBounds [
 { #category : #initialization }
 BlAsyncImageElement >> clearForm [
 
-	entry := bitmap := nil.
+	entry := nil.
 ]
 
 { #category : #drawing }
 BlAsyncImageElement >> drawOnSpartaCanvas: aCanvas [
 
-	| ratio imageExtent translation form |
+	| ratio imageExtent translation image |
 
 	super drawOnSpartaCanvas: aCanvas.
 	entry ifNil: [ ^self ].
-	form := entry form.
+	image := entry image.
 
-	bitmap ifNil: [ bitmap := aCanvas bitmap fromForm: form ].
-	
-	ratio := (self extent x / form width min: self extent y / form height) asFloat.
-	imageExtent := form extent * ratio.
+	ratio := (self extent x / image width min: self extent y / image height) asFloat.
+	imageExtent := image extent * ratio.
 	translation := (((self extent x - imageExtent x ) / 2.0) @
 		((self extent y - imageExtent y) / 2.0)) asIntegerPoint.
 
@@ -70,8 +67,8 @@ BlAsyncImageElement >> drawOnSpartaCanvas: aCanvas [
 				 ]
 		during: [
 			aCanvas fill
-				path: (0@0 extent: form extent);
-				paint: bitmap;
+				path: (0@0 extent: image extent);
+				paint: image;
 				draw ].
 
 ]
@@ -88,7 +85,6 @@ BlAsyncImageElement >> entry: aBlImageCacheEntry [
 	This can be called from a background process, thus ensure the invalidation is done in the UI process"
 
 	entry := aBlImageCacheEntry.
-	bitmap := nil.
 	entry ifNotNil: [ 
 		self enqueueTask: (BlTaskAction new action: [ 
 			self 
@@ -106,7 +102,7 @@ BlAsyncImageElement >> form [
 BlAsyncImageElement >> needsUpdate [
 	"Answer a boolean indicating whether the current form is too small or too large"
 
-	| currentExtent formSize currentSize ratio noExtent |
+	| cache currentExtent imageSize currentSize noExtent |
 
 	asyncException ifNotNil: [ ^false ].
 	currentExtent := self extent.
@@ -115,14 +111,12 @@ BlAsyncImageElement >> needsUpdate [
 	(preLoad isNil and: [ noExtent ]) ifTrue: [ ^false ].
 	entry ifNil: [ ^true ].
 	noExtent ifTrue: [ ^false ].
-	formSize := (entry form width * entry form height) asFloat.
-	currentSize := (currentExtent x * currentExtent y) asFloat.
-	ratio := currentSize / formSize.
-	"The form needs to be reloaded if:
-	- The current size is significantly smaller than the form and the form isn't the smallest available, OR
-	- The current size is significantly larger than the form and the form isn't the original"
-	^(ratio < 0.25 and: [ entry isSmallest not ]) or:
-		[ ratio > 1.1 and: [ entry isOriginal not ] ]
+
+	imageSize := entry image extent max.
+	currentSize := currentExtent max.
+	"The image needs to be reloaded if the image cache would use a different entry"
+	cache := BlLocalImageCache current.
+	^ (cache cacheSizeFor: imageSize) ~= (cache cacheSizeFor: currentSize).
 
 ]
 

@@ -17,11 +17,16 @@ BlDevScripterTypeTextStep >> defaultLabel [
 { #category : #actions }
 BlDevScripterTypeTextStep >> playOn: aScripter [
 	| aTarget anInputEvent |
+
 	aTarget := self target findTargetStartingInScripter: aScripter.
-	anInputEvent := BlTextInputEvent new text: self text.
+
+	anInputEvent := BlTextInputEvent new
+		text: self text.
+
 	BlSpace
 		simulateEvent: anInputEvent
 		on: aTarget.
+
 	aScripter pulse.
 ]
 

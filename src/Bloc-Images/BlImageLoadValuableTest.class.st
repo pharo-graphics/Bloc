@@ -35,8 +35,8 @@ BlImageLoadValuableTest >> testValue [
 
 	self assert: entry class equals: BlImageCacheEntry.
 	"The source form is only 7@7, so the original will be returned."
-	self assert: entry form width equals: 7.
-	self assert: entry form height equals: 7.
+	self assert: entry image width equals: 7.
+	self assert: entry image height equals: 7.
 	self assert: entry isOriginal.
 	self assert: entry isSmallest.
 ]

@@ -13,18 +13,20 @@ BlRepeatedTaskAction >> action [
 ]
 
 { #category : #accessing }
-BlRepeatedTaskAction >> action: anObject [
-	action := anObject
+BlRepeatedTaskAction >> action: aBlock [
+	action := aBlock
 ]
 
 { #category : #initialization }
 BlRepeatedTaskAction >> initialize [
 	super initialize.
 	
-	action := [  ]
+	action := [ :optionalThisTask | ]
 ]
 
 { #category : #'api - running' }
 BlRepeatedTaskAction >> onRun [
-	self action value
+	self action isClosure
+		ifTrue: [ self action cull: self ]
+		ifFalse: [ self action value ]
 ]

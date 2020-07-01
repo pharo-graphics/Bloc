@@ -97,18 +97,6 @@ BlLayout >> align: anElement bounds: elementBounds in: theParentBounds with: aBl
 	alignment := aBlElementAlignment directed: self direction.
 	aTranslation := alignment translationOf: elementBounds in: theParentBounds.
 
-	alignment horizontal
-		ifNotNull: [
-			aTranslation x isZero
-				ifTrue: [
-					aTranslation := ((theParentBounds left - elementBounds left) max: 0)  @ aTranslation y ]. ].
-
-	alignment vertical
-		ifNotNull: [
-			aTranslation y isZero
-				ifTrue: [
-					aTranslation := aTranslation x @ ((theParentBounds top - elementBounds top) max: 0) ]. ].
-
 	^ elementBounds translateBy: aTranslation
 ]
 
@@ -177,14 +165,6 @@ BlLayout >> initialize [
 ]
 
 { #category : #enumeration }
-BlLayout >> layeredChildren: anElement [
-	"Return a collecton of the anElement's children that should be layered out by the layout"
-	
-	^ Array streamContents: [ :aStream |
-		self layeredChildren: anElement do: [ :aChild | aStream nextPut: aChild ] ]
-]
-
-{ #category : #enumeration }
 BlLayout >> layeredChildren: anElement do: aBlock [
 	"Evaluate a given block with all children of anElement
 	that should be layered out within anElement.
@@ -212,16 +192,18 @@ BlLayout >> layoutIgnored: anElement [
 	anElement children
 		select: [ :aChild | aChild constraints ignoredByLayout ]
 		thenDo: [ :aChild |
-			| childBounds |
+			| childBounds allowedBounds |
 			"ask child for its measured bounds"
-			childBounds := aChild measuredBounds bounds.
+			childBounds := aChild measuredBounds bounds copy.
+			allowedBounds := aChild margin inset: parentBounds copy.
+
 			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
 			childBounds := self
 				align: aChild
-				bounds: (aChild margin expand: childBounds)
-				in: parentBounds
+				bounds: childBounds
+				in: allowedBounds
 				with: aChild constraints ignored alignment.
-			childBounds := aChild margin inset: childBounds.
+				
 			aChild measuredBounds position: childBounds origin.
 			"and finally set new bounds"
 			aChild applyLayoutIn: childBounds ]
@@ -327,14 +309,6 @@ BlLayout >> measureIgnored: anElement with: anExtentSpec [
 			self
 				measureChild: aChild
 				parentSpec: aWidthSpec @ aHeightSpec ]
-]
-
-{ #category : #enumeration }
-BlLayout >> measuredChildren: anElement [
-	"Return a collecton of the anElement's children that should be measures by the layout"
-	
-	^ Array streamContents: [ :aStream |
-		self measuredChildren: anElement do: [ :aChild | aStream nextPut: aChild ] ]
 ]
 
 { #category : #enumeration }

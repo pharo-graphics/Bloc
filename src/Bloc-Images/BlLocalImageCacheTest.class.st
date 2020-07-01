@@ -58,13 +58,12 @@ BlLocalImageCacheTest >> testCacheSizeFor [
 
 	cache := BlLocalImageCache new.
 	cache taskitRunner: TKTLocalProcessTaskRunner new.
-	self assert: (cache cacheSizeFor: 100) equals: 200.
-	self assert: (cache cacheSizeFor: 200) equals: 200.
+	self assert: (cache cacheSizeFor: 10) equals: cache defaultImageSizes first.
 	requestedSize := cache defaultImageSizes second - 1.
 	self assert: (cache cacheSizeFor: requestedSize) equals: cache defaultImageSizes second.
 	requestedSize := cache defaultImageSizes second.
 	self assert: (cache cacheSizeFor: requestedSize) equals: cache defaultImageSizes second.
-	requestedSize := cache defaultImageSizes second + 1.
+	requestedSize := cache defaultImageSizes third + 1.
 	self assert: (cache cacheSizeFor: requestedSize) equals: cache defaultImageSizes last.
 	requestedSize := cache defaultImageSizes last + 1.
 	self assert: (cache cacheSizeFor: requestedSize) isNil.
@@ -80,7 +79,7 @@ BlLocalImageCacheTest >> testCachedSize100 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self resource image1200 size: 100 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	"The next largest size is 200"
 	self 
@@ -98,7 +97,7 @@ BlLocalImageCacheTest >> testCachedSize200 [
 	cache := self cache.
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self resource image1200 size: 200 for: element.
-	cachedForm := element entry form.
+	cachedForm := element entry image.
 	maxDimension := cachedForm extent max.
 	"The next largest size is 200"
 	self 
@@ -115,7 +114,7 @@ BlLocalImageCacheTest >> testCachedSize2000 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self resource image1200 size: 2000 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	"This is larger than the original, we should get back the original"
 	self 
@@ -134,7 +133,7 @@ BlLocalImageCacheTest >> testCachedSize400 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self resource image400 size: 400 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm extent max.
 	self 
 		assert: maxDimension 
@@ -152,7 +151,7 @@ BlLocalImageCacheTest >> testCachedSize700 [
 	element := BlImageCacheTestEntry new.
 	cache fileAt: self resource image1200 size: 700 for: element.
 	entry := element entry.
-	cachedForm := entry form.
+	cachedForm := entry image.
 	maxDimension := cachedForm width max: cachedForm height.
 	"The next largest size is 800"
 	self 
@@ -172,8 +171,8 @@ BlLocalImageCacheTest >> testCachedSizeNil [
 	cache fileAt: self resource image1200 size: nil for: element.
 	entry := element entry.
 	self 
-		assert: entry form bitsSize
-		equals: (ImageReadWriter gtFormFromFileReference: self resource image1200) bitsSize.
+		assert: entry image extent
+		equals: (ImageReadWriter gtFormFromFileReference: self resource image1200) extent.
 	self assert: entry isOriginal.
 	self deny: entry isSmallest.
 ]
@@ -189,7 +188,7 @@ BlLocalImageCacheTest >> testCachedUrlSize100 [
 	entry := element entry.
 	"The next largest size is 200"
 	self 
-		assert: entry form extent max
+		assert: entry image extent max
 		equals: 200.
 	self assert: entry isSmallest.
 	self deny: entry isOriginal.
@@ -205,7 +204,7 @@ BlLocalImageCacheTest >> testCachedUrlSize400 [
 	cache url: self resource image400 asZnUrl size: 400 for: element.
 	entry := element entry.
 	self 
-		assert: entry form extent max
+		assert: entry image extent max
 		equals: 400.
 	self assert: entry isOriginal.
 	self deny: entry isSmallest.
@@ -222,20 +221,10 @@ BlLocalImageCacheTest >> testCachedUrlSize800 [
 	entry := element entry.
 	"800 is larger than the original, so we should get back the original"
 	self 
-		assert: entry form extent max
+		assert: entry image extent max
 		equals: 400.
 	self assert: entry isOriginal.
 	self deny: entry isSmallest.
-]
-
-{ #category : #tests }
-BlLocalImageCacheTest >> testDeafultImageSizes [
-
-	| defaultSizes |
-
-	defaultSizes := BlLocalImageCache new defaultImageSizes.
-	self assert: defaultSizes size equals: 3.
-	self assert: defaultSizes first equals: 200.
 ]
 
 { #category : #tests }
