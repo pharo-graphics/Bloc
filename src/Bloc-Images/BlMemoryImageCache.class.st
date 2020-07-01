@@ -87,25 +87,25 @@ BlMemoryImageCache >> fileAt: aFileReference size: minImageSize [
 	If minImageSize isNil, answer the form from the original file.
 	Otherwise answer the cached image which is larger than minImageSize."
 
-	| fileReference cacheSize cacheKey cacheEntry form |
+	| fileReference cacheSize cacheKey cacheEntry image |
 
 	fileReference := aFileReference asFileReference.
 	cacheSize := self cacheSizeFor: minImageSize.
 	(minImageSize isNil or: [ cacheSize isNil ]) ifTrue: [ 
-		form := self formFor: fileReference.
-		^self answerForm: form size: form extent max isOriginal: true ].
+		image := self imageFor: fileReference.
+		^self answerImage: image size: image extent max isOriginal: true ].
 
 	cacheKey := self cacheFileFor: fileReference size: cacheSize.
 	(self entryAt: cacheKey) ifNotNil: [ :entry | 
 		hits := hits + 1.
 		^entry ].
 
-	form := self formFor: fileReference.
+	image := self imageFor: fileReference.
 	misses := misses + 1.
-	cacheSize >= form extent max ifTrue: 
-		[ ^self answerForm: form size: form extent max isOriginal: true ].
-	form := form scaledToSize: cacheSize@cacheSize.
-	cacheEntry := self answerForm: form size: cacheSize isOriginal: false.
+	cacheSize >= image extent max ifTrue: 
+		[ ^self answerImage: image size: image extent max isOriginal: true ].
+	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: 80.
+	cacheEntry := self answerImage: image size: cacheSize isOriginal: false.
 	self entryAt: cacheKey put: cacheEntry.
 	^cacheEntry.
 
@@ -147,7 +147,7 @@ BlMemoryImageCache >> url: aUrl size: minImageSize for: anObject [
 	If minImageSize isNil, answer the form from the original file.
 	Otherwise answer the cached image which is larger than minImageSize."
 
-	| znUrl content cacheSize cacheKey cacheEntry form originalSize |
+	| znUrl content cacheSize cacheKey cacheEntry image originalSize |
 
 	znUrl := aUrl asZnUrl.
 	"If the appropriate cache entry already exists, just return it.
@@ -170,13 +170,13 @@ BlMemoryImageCache >> url: aUrl size: minImageSize for: anObject [
 				ifFalse: [ (ZnEasy get: znUrl) entity bytes ]
 				ifTrue: [ znUrl asFileReference gtBinaryContents ].
 		misses := misses + 1.
-		form := ImageReadWriter formFromStream: content readStream.
-		originalSize := form extent max.
-		cacheEntry := self answerForm: form size: originalSize isOriginal: true.
+		image := SkiaImage fromForm: (ImageReadWriter formFromStream: content readStream).
+		originalSize := image extent max.
+		cacheEntry := self answerImage: image size: originalSize isOriginal: true.
 		self entryAt: cacheKey put: cacheEntry ]
 	ifNotNil: 
-		[ form := cacheEntry form.
-		originalSize := form extent max ].
+		[ image := cacheEntry image.
+		originalSize := image extent max ].
 
 	minImageSize ifNil: [ ^anObject entry: cacheEntry ].
 
@@ -184,8 +184,8 @@ BlMemoryImageCache >> url: aUrl size: minImageSize for: anObject [
 	cacheSize >= originalSize ifTrue: [ ^anObject entry: cacheEntry ].
 
 	"Answer the form scaled to cacheSize"
-	form := form scaledToSize: cacheSize@cacheSize.
-	cacheEntry := self answerForm: form size: cacheSize isOriginal: false.
+	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: 80.
+	cacheEntry := self answerImage: image size: cacheSize isOriginal: false.
 	misses := misses + 1.
 	^anObject entry: cacheEntry.
 
