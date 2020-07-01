@@ -54,21 +54,9 @@ BlImageCache >> clearStats [
 
 { #category : #private }
 BlImageCache >> defaultImageSizes [
-	"Answer the default cache sizes to use, i.e.
-	#(200, <in the middle>, <Display max dimension>)"
+	"Answer the default cache sizes to use"
 
-	| newImageSizes newSize |
-
-	"Start with the larger dimension of the display and divide by 4 down to 200"
-	newSize := Display width max: Display height.
-	"If the display size doesn't look reasonable, use some defaults"
-	newSize < 600 ifTrue: [ newSize := 1200 ].
-	newImageSizes := Array new: 3.
-	newImageSizes
-		at: 1 put: 200;
-		at: 2 put: (newSize // 2);
-		at: 3 put: newSize.
-	^newImageSizes
+	^ #(300 600 1280 2560)
 ]
 
 { #category : #accessing }
