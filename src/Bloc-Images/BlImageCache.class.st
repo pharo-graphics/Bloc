@@ -27,12 +27,12 @@ Class {
 }
 
 { #category : #private }
-BlImageCache >> answerForm: aForm size: aSize isOriginal: isOriginal [
+BlImageCache >> answerImage: aForm size: aSize isOriginal: isOriginal [
 
 	^BlImageCacheEntry new
 		isSmallest: (aSize <= imageSizes first);
 		isOriginal: isOriginal;
-		form: aForm;
+		image: aForm;
 		yourself
 ]
 
@@ -54,21 +54,9 @@ BlImageCache >> clearStats [
 
 { #category : #private }
 BlImageCache >> defaultImageSizes [
-	"Answer the default cache sizes to use, i.e.
-	#(200, <in the middle>, <Display max dimension>)"
+	"Answer the default cache sizes to use"
 
-	| newImageSizes newSize |
-
-	"Start with the larger dimension of the display and divide by 4 down to 200"
-	newSize := Display width max: Display height.
-	"If the display size doesn't look reasonable, use some defaults"
-	newSize < 600 ifTrue: [ newSize := 1200 ].
-	newImageSizes := Array new: 3.
-	newImageSizes
-		at: 1 put: 200;
-		at: 2 put: (newSize // 2);
-		at: 3 put: newSize.
-	^newImageSizes
+	^ #(300 600 1280 2560)
 ]
 
 { #category : #accessing }
@@ -96,33 +84,6 @@ BlImageCache >> flush [
 	^self subclassResponsibility 
 ]
 
-{ #category : #private }
-BlImageCache >> formFor: aFileReference [
-	"Answer the form in the specified file"
-
-	^ImageReadWriter gtFormFromBuffer: (self getBufferFor: aFileReference).
-]
-
-{ #category : #private }
-BlImageCache >> getBufferFor: aFileReference [
-	"Answer the contents of the specified file in a ByteArray.
-	While this method is synchronous, file access is async"
-
-	| file asyncFile fileSemaphore buffer |
-
-	file := aFileReference asFileReference.
-	asyncFile := AsyncFile new.
-	fileSemaphore := Semaphore new.
-	(asyncFile open: file pathString forWrite: false) ifNil: 
-		[ ^file binaryReadStreamDo: [ :stream | stream upToEnd ] ].
-	[ asyncFile readByteCount: file size fromFilePosition: 0 onCompletionDo: 
-		[ :buf | buffer := buf.  fileSemaphore signal ].
-        fileSemaphore wait. ] ensure: [ asyncFile close ].
-	"Hack to work around AsyncFile returning a string instead of a ByteArray"
-	ByteArray adoptInstance: buffer.
-	^buffer
-]
-
 { #category : #accessing }
 BlImageCache >> hitRate [
 	"Answer the receiver's hit rate"
@@ -138,6 +99,13 @@ BlImageCache >> hitRate [
 { #category : #accessing }
 BlImageCache >> hits [
 	^ hits
+]
+
+{ #category : #private }
+BlImageCache >> imageFor: aFileReference [
+	"Answer the image in the specified file"
+
+	^SkiaImage fromFile: aFileReference asAbsolute pathString.
 ]
 
 { #category : #accessing }
@@ -180,10 +148,10 @@ BlImageCache >> misses [
 ]
 
 { #category : #private }
-BlImageCache >> set: anObject form: aForm size: anInteger isOriginal: aBoolean [
+BlImageCache >> set: anObject image: anImage size: anInteger isOriginal: aBoolean [
 	"Set the entry in anObject with the supplied information"
 
-	^anObject entry: (self answerForm: aForm size: anInteger isOriginal: aBoolean)
+	^anObject entry: (self answerImage: anImage size: anInteger isOriginal: aBoolean)
 ]
 
 { #category : #accessing }

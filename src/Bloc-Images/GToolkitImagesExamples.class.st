@@ -11,9 +11,10 @@ GToolkitImagesExamples >> gridElementForDirectory: aFileReference [
 	| gridElement scrollPane jpgs previewSize children |
 
 	gridElement := BlElement new.
-	gridElement layout: (BlGridLayout new columnCount: 2; cellSpacing: 2).
+	"gridElement layout: (BlGridLayout new columnCount: 2; cellSpacing: 2)."
+	gridElement layout: BlFlowLayout new.
 	gridElement constraintsDo: [ :c | 
-		c horizontal fitContent.
+		c horizontal matchParent.
 		c vertical fitContent ].
 
 	jpgs := aFileReference asFileReference children sorted
