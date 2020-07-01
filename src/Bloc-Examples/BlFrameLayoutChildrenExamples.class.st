@@ -1,8 +1,6 @@
 Class {
 	#name : #BlFrameLayoutChildrenExamples,
-	#superclass : #Object,
-	#traits : 'TBlLayoutExamplesSetup',
-	#classTraits : 'TBlLayoutExamplesSetup classTrait',
+	#superclass : #BlFrameLayoutExamples,
 	#category : #'Bloc-Examples-Layout'
 }
 
