@@ -291,6 +291,11 @@ BlChildren >> reject: aBlock [
 	^ self select: [ :anElement | (aBlock value: anElement) == false ]
 ]
 
+{ #category : #'children - enumerating' }
+BlChildren >> reverseDo: aBlock [
+	self reversed do: aBlock
+]
+
 { #category : #'children - subsets' }
 BlChildren >> reversed [
 	<return: #BlChildren>
