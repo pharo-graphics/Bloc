@@ -193,7 +193,7 @@ BlLocalImageCache >> ensureCacheFileForFile: aFileReference size: minImageSize [
 	cacheSize >= image extent max ifTrue: [ ^nil ].
 	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: #High.
 	self ensureCreateDirectory: cacheFile parent.
-	image saveFile: cacheFile asAbsolute pathString format: #JPEG quality: 80.
+	image saveFile: cacheFile asAbsolute pathString format: SkiaEncodedImageFormat JPEG quality: 80.
 	housekeeper add: cacheFile.
 	^cacheFile.
 
@@ -238,7 +238,7 @@ BlLocalImageCache >> fileAt: aFileReference size: minImageSize [
 		[ ^self answerImage: image size: image extent max isOriginal: true ].
 	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: #High.
 	self ensureCreateDirectory: cacheFile parent.
-	image saveFile: cacheFile asAbsolute pathString format: #JPEG quality: 80.
+	image saveFile: cacheFile asAbsolute pathString format: SkiaEncodedImageFormat JPEG quality: 80.
 	housekeeper add: cacheFile.
 	misses := misses + 1.
 	^self answerImage: image size: cacheSize isOriginal: false.
@@ -397,9 +397,9 @@ BlLocalImageCache >> url: aUrl size: minImageSize for: anObject [
 		[ ^self set: anObject image: image size: originalSize isOriginal: true ].
 
 	"Answer the form scaled to cacheSize"
-	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: 80.
+	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: SkiaFilterQuality High.
 	self ensureCreateDirectory: cacheFile parent.
-	image saveFile: cacheFile asAbsolute pathString format: #JPEG quality: 80.
+	image saveFile: cacheFile asAbsolute pathString format: SkiaEncodedImageFormat JPEG quality: 80.
 	housekeeper add: cacheFile.
 	misses := misses + 1.
 	^self set: anObject image: image size: cacheSize isOriginal: false.

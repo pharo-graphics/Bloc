@@ -104,7 +104,7 @@ BlMemoryImageCache >> fileAt: aFileReference size: minImageSize [
 	misses := misses + 1.
 	cacheSize >= image extent max ifTrue: 
 		[ ^self answerImage: image size: image extent max isOriginal: true ].
-	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: 80.
+	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: SkiaFilterQuality High.
 	cacheEntry := self answerImage: image size: cacheSize isOriginal: false.
 	self entryAt: cacheKey put: cacheEntry.
 	^cacheEntry.
@@ -184,7 +184,7 @@ BlMemoryImageCache >> url: aUrl size: minImageSize for: anObject [
 	cacheSize >= originalSize ifTrue: [ ^anObject entry: cacheEntry ].
 
 	"Answer the form scaled to cacheSize"
-	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: 80.
+	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: SkiaFilterQuality High.
 	cacheEntry := self answerImage: image size: cacheSize isOriginal: false.
 	misses := misses + 1.
 	^anObject entry: cacheEntry.
