@@ -14,6 +14,11 @@ BlDevScripterTargetedStep >> defaultTarget [
 	^ BlDevScripterSelfEventTarget new
 ]
 
+{ #category : #'targets - children' }
+BlDevScripterTargetedStep >> onChildFromSelectionBlock: anOneArgBlock [
+	self updateTarget: (BlDevScripterSelectFilterEventTarget new block: anOneArgBlock)
+]
+
 { #category : #'targets - accessing and updating' }
 BlDevScripterTargetedStep >> target [
 	<return: #BlDevScripterEventTarget>

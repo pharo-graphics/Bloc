@@ -3636,10 +3636,11 @@ BlElement >> withAllChildrenAt: aPoint do: aBlock [
 
 { #category : #'api - children enumeration' }
 BlElement >> withAllChildrenBreadthFirst [
-	| all |
-	all := OrderedCollection with: self.
-	self allChildrenBreadthFirstDo: [ :x | all add: x ].
-	^ all
+	<return: #Collection of: #BlElement>
+	
+	^ Array streamContents: [ :aStream |
+		aStream nextPut: self.
+		self allChildrenBreadthFirstDo: [ :eachElement | aStream nextPut: eachElement ] ]
 ]
 
 { #category : #'api - children enumeration' }

@@ -9,6 +9,12 @@ Trait {
 }
 
 { #category : #'steps - checks' }
+TBlDevScripterCheckStep >> allSatisfy: anOneArgBlock [
+	^ self addStep: (BlDevScripterCheckElementStep new block: [ :aCollection | 
+			aCollection allSatisfy: [ :eachItem | anOneArgBlock cull: eachItem ] ]; referenceSender)
+]
+
+{ #category : #'steps - checks' }
 TBlDevScripterCheckStep >> anySatisfies: anOneArgBlock [
 	^ self addStep: (BlDevScripterCheckElementStep new block: [ :aCollection | 
 			aCollection anySatisfy: [ :eachItem | anOneArgBlock cull: eachItem ] ]; referenceSender)
@@ -43,6 +49,13 @@ TBlDevScripterCheckStep >> elementIsOfClass: aClass [
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> elementSatisfies: anOneArgBlock [
 	^ (self satisfies: anOneArgBlock) referenceSender
+]
+
+{ #category : #'steps - checks' }
+TBlDevScripterCheckStep >> equals: anEqualsBlock [
+	^ self addStep: (BlDevScripterCheckElementEqualsStep new
+		equalsBlock: anEqualsBlock;
+		referenceSender)
 ]
 
 { #category : #'steps - checks' }

@@ -82,6 +82,11 @@ BlPannableElement >> zoomOut [
 ]
 
 { #category : #'api - zooming' }
+BlPannableElement >> zoomStep: aNumber [
+	self zoomableElement zoomStep: aNumber
+]
+
+{ #category : #'api - zooming' }
 BlPannableElement >> zoomTo: aZoomFactor [
 	self zoomableElement zoomLevel: aZoomFactor
 ]

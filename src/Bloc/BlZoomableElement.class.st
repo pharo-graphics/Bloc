@@ -7,6 +7,7 @@ Class {
 	#instVars : [
 		'zoomLevel',
 		'zoomCenter',
+		'zoomStep',
 		'contentElement'
 	],
 	#category : #'Bloc-Utilities - Zoomable'
@@ -77,6 +78,7 @@ BlZoomableElement >> initialize [
 	
 	zoomLevel := nil.
 	zoomCenter := 0.5@0.5.
+	zoomStep := 0.1.
 	
 	self constraintsDo: [ :c |
 		c horizontal matchParent.
@@ -218,7 +220,7 @@ BlZoomableElement >> zoomLevel [
 
 { #category : #accessing }
 BlZoomableElement >> zoomLevel: aNumber [
-	zoomLevel := aNumber.
+	zoomLevel := aNumber max: 0.001.
 	self requestLayout
 ]
 
@@ -239,5 +241,10 @@ BlZoomableElement >> zoomReset [
 
 { #category : #accessing }
 BlZoomableElement >> zoomStep [
-	^ 0.1
+	^ zoomStep
+]
+
+{ #category : #accessing }
+BlZoomableElement >> zoomStep: aNumber [
+	zoomStep := aNumber
 ]

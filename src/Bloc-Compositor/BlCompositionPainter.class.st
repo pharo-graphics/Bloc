@@ -41,6 +41,39 @@ BlCompositionPainter class >> repaintCompositedElement: anElement [
 	^ anOffsetLayer
 ]
 
+{ #category : #painting }
+BlCompositionPainter class >> repaintSpace: aSpace [
+	| elementsToRepaint aRootLayer |
+
+	elementsToRepaint := aSpace elementsNeedingPaint collect: [ :eachElement | eachElement -> eachElement compositionDepth ] as: Array.
+	elementsToRepaint sort: [ :a :b | a value > b value ].
+			
+	aSpace telemetry
+		timeSync: 'Repaint'
+		during: [
+			elementsToRepaint
+				collect: [ :eachAssociation | eachAssociation key ]
+				thenDo: [ :eachElement |
+					aSpace telemetry
+						timeSync: [ 'Paint ', eachElement class asString ]
+						during: [
+							(eachElement shouldBePainted and: [ eachElement isAttachedToSceneGraph ])
+								ifTrue: [
+									eachElement hasCompositionLayer
+										ifTrue: [ BlCompositionPainter repaintCompositedElement: eachElement ]
+										ifFalse: [ eachElement markSkippedPaint ] ] ] ] ].
+
+	aRootLayer := aSpace root hasCompositionLayer
+		ifTrue: [ aSpace root compositionLayer ]
+		ifFalse: [
+			aSpace telemetry
+				timeSync: 'Repaint root'
+				during: [ BlCompositionPainter repaintCompositedElement: aSpace root ]  ].
+
+	aRootLayer computeNeedsComposition.
+	^ aRootLayer
+]
+
 { #category : #'instance creation' }
 BlCompositionPainter class >> root: anExtent [
 	"Create a root composition painter to be used as the first entrance point of the space painting"

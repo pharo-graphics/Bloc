@@ -1,5 +1,5 @@
 Class {
-	#name : #BlDevScripterBlockSelectorEventTarget,
+	#name : #BlDevScripterSelectFilterEventTarget,
 	#superclass : #BlDevScripterEventTarget,
 	#instVars : [
 		'block'
@@ -8,24 +8,24 @@ Class {
 }
 
 { #category : #testing }
-BlDevScripterBlockSelectorEventTarget class >> matchesWithInput: anObject [
+BlDevScripterSelectFilterEventTarget class >> matchesWithInput: anObject [
 	<return: #Boolean>
 	^ anObject isKindOf: BlockClosure
 ]
 
 { #category : #'instance creation' }
-BlDevScripterBlockSelectorEventTarget class >> newFromInput: anObject [
+BlDevScripterSelectFilterEventTarget class >> newFromInput: anObject [
 	^ self new block: anObject
 ]
 
 { #category : #accessing }
-BlDevScripterBlockSelectorEventTarget >> block [
+BlDevScripterSelectFilterEventTarget >> block [
 	<return: #BlockClosure>
 	^ block
 ]
 
 { #category : #accessing }
-BlDevScripterBlockSelectorEventTarget >> block: anOneArgBlock [
+BlDevScripterSelectFilterEventTarget >> block: anOneArgBlock [
 	self 
 		assert: [ anOneArgBlock isBlock and: [ anOneArgBlock argumentCount = 1 ] ] 
 		description: [ 'Block selector must be one-argument block closure' ].
@@ -33,24 +33,21 @@ BlDevScripterBlockSelectorEventTarget >> block: anOneArgBlock [
 ]
 
 { #category : #searching }
-BlDevScripterBlockSelectorEventTarget >> findTargetIn: anElement [
+BlDevScripterSelectFilterEventTarget >> findTargetIn: aCollection [
 	<return: #BlElement>
-	| aChildren |
-	aChildren := anElement children select: [ :eachChild | 
-		[ self block value: eachChild ] on: Error do: [ :anException | false ] ].
-	self assert: aChildren size equals: 1.
-	^ aChildren first
+
+	^ aCollection select: self block
 ]
 
 { #category : #accessing }
-BlDevScripterBlockSelectorEventTarget >> identifier [
+BlDevScripterSelectFilterEventTarget >> identifier [
 	^ self block ifNil: [ self ]
 ]
 
 { #category : #printing }
-BlDevScripterBlockSelectorEventTarget >> printOn: aStream [
+BlDevScripterSelectFilterEventTarget >> printOn: aStream [
 	self block ifNil: [ ^ super printOn: aStream ].
 	aStream 
-		nextPutAll: 'Block Selector: ';
+		nextPutAll: 'select: ';
 		print: self block.
 ]

@@ -34,6 +34,11 @@ BlDevScripterCompositeStep >> label: aString [
 		ifNotEmpty: [ self steps last label: aString ]
 ]
 
+{ #category : #'targets - children' }
+BlDevScripterCompositeStep >> onChildFromSelectionBlock: anOneArgBlock [
+	self updateTarget: (BlDevScripterSelectFilterEventTarget new block: anOneArgBlock)
+]
+
 { #category : #actions }
 BlDevScripterCompositeStep >> playOn: aScripter [
 	"self steps do: [ :eachTask | eachTask playIndicatingStateOn: aScripter ]"

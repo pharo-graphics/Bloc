@@ -440,8 +440,9 @@ BlRope >> size [
 
 { #category : #'rope - accessing' }
 BlRope >> withAllChildrenBreadthFirst [
-	| all |
-	all := OrderedCollection with: self.
-	self allChildrenBreadthFirstDo: [ :x | all add: x ].
-	^ all
+	<return: #Collection of: #BlRope>
+	
+	^ Array streamContents: [ :aStream |
+		aStream nextPut: self.
+		self allChildrenBreadthFirstDo: [ :eachElement | aStream nextPut: eachElement ] ]
 ]

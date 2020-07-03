@@ -3,7 +3,7 @@ Extension { #name : #BlCompositionLayer }
 { #category : #'*Bloc-Compositor-GToolkit' }
 BlCompositionLayer >> gtPreviewFor: aView [
 	<gtView>
-	
+
 	^ aView sparta
 		title: 'Preview';
 		priority: 3;
@@ -56,15 +56,29 @@ BlCompositionLayer >> paintTreeWith: view [
 					text: each name asRopedText glamorousRegularFontAndSize);
 				in: [ :aNodeElement |
 					(each isKindOf: BlCompositionPictureLayer)
-						ifTrue: [ aNodeElement addChild: (each asForm asElement asScalableElement
-							fitWidth;
-							background: Color white;
-							margin: (BlInsets top: 10);
-							look: BrShadowLook new;
-							constraintsDo: [ :c |
-								c horizontal exact: 100.
-								c vertical fitContent ]
-						) ]
+						ifTrue: [
+							| aForm aFormElement |
+							
+							aForm := each asForm.
+							aFormElement := each asForm asElement asScalableElement
+								background: Color white;
+								margin: (BlInsets top: 10);
+								look: BrShadowLook new.
+								
+							aForm width > aForm height
+								ifTrue: [
+									aFormElement
+										fitWidth;
+										constraintsDo: [ :c |
+											c horizontal exact: 100.
+											c vertical fitContent ] ]
+								ifFalse: [
+									aFormElement
+										fitHeight;
+										constraintsDo: [ :c |
+											c horizontal fitContent.
+											c vertical exact: 100 ] ].							
+							aNodeElement addChild: aFormElement ]
 				];
 				yourself ];
 		with: (self withDeepCollect: #children).

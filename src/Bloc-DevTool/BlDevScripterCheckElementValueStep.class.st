@@ -36,7 +36,9 @@ BlDevScripterCheckElementValueStep >> playOn: aScripter [
 		
 	self
 		assert: (self valueBlock cull: anElement cull: aScripter userData)
-		equals: (self equalsBlock value)
+		equals: (self equalsBlock isClosure
+			ifTrue: [ self equalsBlock cull: anElement cull: aScripter userData ]
+			ifFalse: [ self equalsBlock value ] )
 ]
 
 { #category : #accessing }

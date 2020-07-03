@@ -12,6 +12,11 @@ TBlDevScripterTarget >> asBreadthFirstSearch [
 ]
 
 { #category : #'targets - children' }
+TBlDevScripterTarget >> onAllChildrenBreadthFirst [
+	self updateTarget: (BlDevScripterAllChildrenBreadthFirstEventTarget new)
+]
+
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onChildAt: aNumber [
 	self updateTarget: (BlDevScripterIndexedChildEventTarget new index: aNumber)
 ]
@@ -23,7 +28,7 @@ TBlDevScripterTarget >> onChildFromMessage: aSymbol [
 
 { #category : #'targets - children' }
 TBlDevScripterTarget >> onChildFromSelectionBlock: anOneArgBlock [
-	self updateTarget: (BlDevScripterBlockSelectorEventTarget new block: anOneArgBlock)
+	self updateTarget: (BlDevScripterSelectFilterEventTarget new block: anOneArgBlock)
 ]
 
 { #category : #'targets - children' }
@@ -57,6 +62,11 @@ TBlDevScripterTarget >> onScripter [
 ]
 
 { #category : #'targets - children' }
+TBlDevScripterTarget >> onSelected: aBlock [
+	self updateTarget: (BlDevScripterSelectFilterEventTarget new block: aBlock)
+]
+
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onSelf [
 	self updateTarget: (BlDevScripterSelfEventTarget new)
 ]
@@ -69,6 +79,11 @@ TBlDevScripterTarget >> onSpace [
 { #category : #'targets - text' }
 TBlDevScripterTarget >> onTextAttributesAt: anIndex [
 	self updateTarget: (BlDevScripterTextAttributesAtTarget new index: anIndex)
+]
+
+{ #category : #'targets - children' }
+TBlDevScripterTarget >> onWithAllChildrenBreadthFirst [
+	self updateTarget: (BlDevScripterWithAllChildrenBreadthFirstEventTarget new)
 ]
 
 { #category : #'targets - accessing and updating' }
