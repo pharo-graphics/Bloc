@@ -140,6 +140,21 @@ BlTransformationBuilder >> scaleTo: aVector [
 	
 ]
 
+{ #category : #transformations }
+BlTransformationBuilder >> shearBy: aCoefficientPoint [
+	transformation addTransformation: ((BlShearTransformation new coefficient: aCoefficientPoint) origin: origin)
+]
+
+{ #category : #transformations }
+BlTransformationBuilder >> skewX: anAngleInDegrees [
+	transformation addTransformation: ((BlShearTransformation new angleX: anAngleInDegrees) origin: origin)
+]
+
+{ #category : #transformations }
+BlTransformationBuilder >> skewY: anAngleInDegrees [
+	transformation addTransformation: ((BlShearTransformation new angleY: anAngleInDegrees) origin: origin)
+]
+
 { #category : #accessing }
 BlTransformationBuilder >> target [
 	"Return a target object whose transformation we build"

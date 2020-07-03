@@ -4,9 +4,9 @@ https://en.wikipedia.org/wiki/Matrix_(mathematics)
 
 My components are named according to mathematical convention:
 
- |  a11  a12  |                 |   sx     shy  |
- |  a21  a22  |       =>     |  shx    sy    |
- |  a31  a32  |                 |    x        y     |
+ |  a11  a12  |                 |   sx    shy  |
+ |  a21  a22  |       =>        |  shx     sy  |
+ |  a31  a32  |                 |    x      y  |
 "
 Class {
 	#name : #BlMatrix2D,
@@ -44,6 +44,14 @@ BlMatrix2D class >> scale: aBlVector [
 	<return: #BlMatrix2D>
 
 	^ self new scaleBy: aBlVector
+]
+
+{ #category : #'instance creation' }
+BlMatrix2D class >> shear: aCoefficientPoint [
+	"Return a matrix which corresponds to a shear transformation by given coefficient"
+	<return: #BlMatrix2D>
+
+	^ self new shear: aCoefficientPoint
 ]
 
 { #category : #'instance creation' }
@@ -346,6 +354,18 @@ BlMatrix2D >> scaleBy: aBlVector [
 	sy := sy * aScale3D y.
 	x := x * aScale3D x.
 	y := y * aScale3D y
+]
+
+{ #category : #initialization }
+BlMatrix2D >> shear: aCoefficientPoint [
+	"Set me to be a 2D matrix representing a shear by a given coefficient (shx, shy)"
+	
+	x := 0.0.
+	y := 0.0.
+	sx := 1.0.
+	sy := 1.0.
+	shx := aCoefficientPoint x.
+	shy := aCoefficientPoint y
 ]
 
 { #category : #'matrix - accessing' }
