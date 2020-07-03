@@ -28,7 +28,7 @@ TBlDevScripterTarget >> onChildFromMessage: aSymbol [
 
 { #category : #'targets - children' }
 TBlDevScripterTarget >> onChildFromSelectionBlock: anOneArgBlock [
-	self updateTarget: (BlDevScripterSelectFilterEventTarget new block: anOneArgBlock)
+	self updateTarget: (BlDevScripterBlockSelectorEventTarget new block: anOneArgBlock)
 ]
 
 { #category : #'targets - children' }
