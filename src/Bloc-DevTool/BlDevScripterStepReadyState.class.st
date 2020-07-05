@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 BlDevScripterStepReadyState >> color [
-	^ Color black alpha: 0.65
+	^ BrGlamorousColors neutralBackgroundColor
 ]
 
 { #category : #accessing }

@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 BlDevScripterStepFailureState >> color [
-	^ Color fromHexString: #ffa39e
+	^ BrGlamorousColors errorBackgroundColor
 ]
 
 { #category : #accessing }
