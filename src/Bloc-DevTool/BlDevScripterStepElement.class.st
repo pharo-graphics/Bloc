@@ -55,9 +55,9 @@ BlDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 
 { #category : #initialization }
 BlDevScripterStepElement >> initializeLabelElement [
-	labelElement := BlTextElement new 
+	labelElement := BrLabel new 
 		zIndex: 10;
-		background: Color white;
+		look: BrGlamorousLabelLook;
 		addEventHandlerOn: BlClickEvent do: [ :anEvent | BlEvent fireEvent: anEvent target: self ];
 		constraintsDo: [ :c | 
 			c vertical fitContent.
@@ -72,10 +72,11 @@ BlDevScripterStepElement >> initializeStatusElement [
 
 { #category : #initialization }
 BlDevScripterStepElement >> initializeTargetElement [
-	targetElement := BlTextElement new 
+	targetElement := BrLabel new
+		look: (BrGlamorousLabelLook new fontSize: 10; foreground: Color gray); 
 		addEventHandlerOn: BlClickEvent do: [ :anEvent | BlEvent fireEvent: anEvent target: self ];
 		constraintsDo: [ :c | 
 			c vertical fitContent.
 			c horizontal fitContent. ];
-		text:  ('Target' asRopedText fontSize: 10; foreground: Color gray)
+		text:  'Target'
 ]
