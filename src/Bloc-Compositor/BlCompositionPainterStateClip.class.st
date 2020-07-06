@@ -45,6 +45,10 @@ BlCompositionPainterStateClip >> hash [
 	^ offset hash bitXor: clip hash
 ]
 
+{ #category : #'mathematical functions' }
+BlCompositionPainterStateClip >> multiplyOn: aBlMatrix2D [
+]
+
 { #category : #hook }
 BlCompositionPainterStateClip >> pushOn: aCanvas [
 	aCanvas clip push: clip offset: offset

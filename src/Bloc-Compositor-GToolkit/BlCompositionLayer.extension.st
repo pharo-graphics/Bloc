@@ -1,6 +1,16 @@
 Extension { #name : #BlCompositionLayer }
 
 { #category : #'*Bloc-Compositor-GToolkit' }
+BlCompositionLayer >> gtExplosionLayersFor: aView [
+	<gtView>
+
+	^ aView explicit
+		title: 'Layers';
+		priority: 5;
+		stencil: [ self asExplosionElement ]
+]
+
+{ #category : #'*Bloc-Compositor-GToolkit' }
 BlCompositionLayer >> gtPreviewFor: aView [
 	<gtView>
 

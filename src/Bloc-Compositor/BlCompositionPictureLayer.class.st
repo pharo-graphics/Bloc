@@ -9,6 +9,31 @@ Class {
 	#category : #'Bloc-Compositor-Layers'
 }
 
+{ #category : #converting }
+BlCompositionPictureLayer >> asElement [
+	<return: #BlElement>
+	| anElement |
+	
+	anElement := BlSpartaElement new
+		size: self picture bounds extent;
+		relocate: self picture bounds origin;
+		rendering: [ :aCanvas :aSpartaElement |
+			aSpartaElement userData
+				at: #skiaLayer
+				ifPresent: [ :aSkiaLayer | SkiaCompositor newDuring: [ :aCompositor | aCompositor draw: aSkiaLayer on: aCanvas ] ].
+
+			self needsCache
+				ifTrue: [ 
+					aCanvas stroke
+						path: aSpartaElement bounds inLocal asRectangle;
+						paint: (Color gray alpha: 0.4);
+						width: (self totalMatrix inverse transformX: 2.0 Y: 2.0) max;
+						draw ]. ].
+
+	anElement userData at: #skiaLayer put: (self asSkiaLayer needsCache: false).
+	^ anElement
+]
+
 { #category : #accessing }
 BlCompositionPictureLayer >> asForm [
 	^ self picture
@@ -30,6 +55,21 @@ BlCompositionPictureLayer >> asSymbolTree [
 			#cache . self needsCache.
 			#simple . self isSimple
 	}
+]
+
+{ #category : #accessing }
+BlCompositionPictureLayer >> depth [
+	| aDepth |
+	
+	aDepth := 0.
+	self parentsDo: [ :eachLayer | (eachLayer isKindOf: BlCompositionOffsetLayer)
+		ifTrue: [ aDepth := aDepth + 1 ] ].
+	
+	self
+		parentSuchThat: [ :eachLayer | eachLayer isKindOf: BlCompositionOffsetLayer ]
+		do: [ :anOffsetLayer | aDepth + (anOffsetLayer allPictureLayers indexOf: self) ].	
+
+	^ aDepth
 ]
 
 { #category : #drawing }
@@ -92,4 +132,18 @@ BlCompositionPictureLayer >> picture: anObject [
 		
 	picture := anObject.
 	isSimple := picture isSimple
+]
+
+{ #category : #'private - context' }
+BlCompositionPictureLayer >> pictureLayersDo: aBlock [
+	aBlock value: self
+]
+
+{ #category : #'private - context' }
+BlCompositionPictureLayer >> totalMatrix [
+	| aMatrix |
+	
+	aMatrix := BlMatrix2D new.
+	self reversedParentsDo: [ :eachLayer | eachLayer multiplyOn: aMatrix ].
+	^ aMatrix
 ]

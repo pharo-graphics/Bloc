@@ -47,6 +47,11 @@ BlCompositionLeftoverStateLayer >> gtStateCommandsFor: aView [
 		view: #gtCommandsFor:
 ]
 
+{ #category : #'private - context' }
+BlCompositionLeftoverStateLayer >> multiplyOn: aBlMatrix2D [
+	self commands do: [ :eachCommand | eachCommand multiplyOn: aBlMatrix2D ]
+]
+
 { #category : #accessing }
 BlCompositionLeftoverStateLayer >> name [
 	^ 'Leftover state'

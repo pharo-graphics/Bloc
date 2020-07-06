@@ -17,6 +17,11 @@ BlCompositionPainterStateCommand >> commandString [
 	^ ''
 ]
 
+{ #category : #'mathematical functions' }
+BlCompositionPainterStateCommand >> multiplyOn: aBlMatrix2D [
+	self subclassResponsibility
+]
+
 { #category : #accessing }
 BlCompositionPainterStateCommand >> offset [
 	^ offset

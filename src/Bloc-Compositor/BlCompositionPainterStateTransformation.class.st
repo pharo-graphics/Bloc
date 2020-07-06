@@ -32,6 +32,12 @@ BlCompositionPainterStateTransformation >> matrix: anObject [
 	matrix := anObject
 ]
 
+{ #category : #'mathematical functions' }
+BlCompositionPainterStateTransformation >> multiplyOn: aBlMatrix2D [
+	aBlMatrix2D translateBy: self offset.
+	aBlMatrix2D multiplyBy: self matrix
+]
+
 { #category : #hook }
 BlCompositionPainterStateTransformation >> pushOn: aCanvas [
 	aCanvas transform

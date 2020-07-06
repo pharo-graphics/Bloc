@@ -48,19 +48,6 @@ BlShearTransformation >> multiplyOn: aBlMatrix [
 	aBlMatrix multiplyBy: (BlMatrix2D shear: self coefficient)
 ]
 
-{ #category : #'mathematical functions' }
-BlShearTransformation >> multiplyOn: aBlMatrix in: aBlElement [
-	| anOriginPoint aVector |
-
-	anOriginPoint := (self origin originIn: aBlElement).
-	aVector := anOriginPoint asBlocVector.
-	
-	(((aBlElement extent - anOriginPoint) * self coefficient negated) asBlocVector) traceCr.
-	aBlMatrix translateBy: aVector negated + ((aBlElement extent - anOriginPoint) * self coefficient negated) asBlocVector.
-	self multiplyOn: aBlMatrix.
-	aBlMatrix translateBy: aVector
-]
-
 { #category : #printing }
 BlShearTransformation >> printOn: aStream [
 	aStream

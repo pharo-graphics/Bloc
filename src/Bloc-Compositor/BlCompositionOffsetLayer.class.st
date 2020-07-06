@@ -38,6 +38,11 @@ BlCompositionOffsetLayer >> drawOnSpartaCanvas: aCanvas [
 		during: [ super drawOnSpartaCanvas: aCanvas ]
 ]
 
+{ #category : #'private - context' }
+BlCompositionOffsetLayer >> multiplyOn: aBlMatrix2D [
+	aBlMatrix2D translateBy: self offset
+]
+
 { #category : #accessing }
 BlCompositionOffsetLayer >> name [
 	^ 'Offset {1}' format: { self offset }

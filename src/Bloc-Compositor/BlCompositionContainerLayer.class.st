@@ -15,6 +15,11 @@ BlCompositionContainerLayer >> addLayer: aBlCompositionLayer [
 	self markNeedsComposition
 ]
 
+{ #category : #'private - context' }
+BlCompositionContainerLayer >> allPictureLayers [
+	^ Array streamContents: [ :aStream | self pictureLayersDo: [ :eachLayer | aStream nextPut: eachLayer ] ]
+]
+
 { #category : #converting }
 BlCompositionContainerLayer >> asSkiaLayer [
 	| aLayer theChildLayers |
@@ -82,6 +87,11 @@ BlCompositionContainerLayer >> name [
 { #category : #converting }
 BlCompositionContainerLayer >> newSkiaLayer [
 	^ SkiaCompositionOffsetLayer offset: 0@0
+]
+
+{ #category : #'private - context' }
+BlCompositionContainerLayer >> pictureLayersDo: aBlock [
+	self layers do: [ :eachLayer | eachLayer pictureLayersDo: aBlock ]
 ]
 
 { #category : #removing }

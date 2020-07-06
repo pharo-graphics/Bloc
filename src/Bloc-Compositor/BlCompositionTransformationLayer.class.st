@@ -52,6 +52,12 @@ BlCompositionTransformationLayer >> matrix: anObject [
 	matrix := anObject
 ]
 
+{ #category : #'private - context' }
+BlCompositionTransformationLayer >> multiplyOn: aBlMatrix2D [
+	aBlMatrix2D translateBy: self offset.
+	aBlMatrix2D multiplyBy: self matrix
+]
+
 { #category : #accessing }
 BlCompositionTransformationLayer >> name [
 	^ 'Transform {1}' format: { self offset }
