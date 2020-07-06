@@ -216,6 +216,12 @@ BlLocalImageCache >> ensureCreateDirectory: aFileReference [
 
 ]
 
+{ #category : #entries }
+BlLocalImageCache >> entryCount [ 
+
+	^ housekeeper entryCount
+]
+
 { #category : #'accessing - cache' }
 BlLocalImageCache >> fileAt: aFileReference size: minImageSize [
 	"Answer the BlImageCacheEntry for the specified file and requested size.
@@ -275,6 +281,7 @@ BlLocalImageCache >> gtStatusFor: aView [
 			'Max Cache Size' -> maxCacheSize humanReadableSIByteSize.
 			'Target Size' -> self targetSize humanReadableSIByteSize.
 			'Emergency Size' -> self emergencySize humanReadableSIByteSize.
+			'Entry Count' -> self entryCount asString.
 			'Hits' -> self hits asString.
 			'Misses' -> self misses asString.
 			'Total Accesses' -> self totalAccesses asString.

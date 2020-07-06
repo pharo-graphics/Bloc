@@ -1213,6 +1213,10 @@ BlElement >> elevation: aBlElevation [
 
 { #category : #'api - tasks' }
 BlElement >> enqueueTask: aBlTask [
+	"Queue the supplied task to be executed in the next frame.
+	If you want the task executed in the UI process as soon as possible, use #inUIProcessDo:.
+	Note that the task is not guaranteed to be executed (if the element is never attached to a scene)."
+
 	aBlTask onEnqueuedInElement: self.
 	self isAttachedToSceneGraph
 		ifTrue: [ self space enqueueTask: aBlTask ]
@@ -1640,6 +1644,19 @@ BlElement >> height: aNumber [
 
 	self constraintsDo: [ :c |
 		c vertical exact: aNumber ]
+]
+
+{ #category : #processing }
+BlElement >> inUIProcessDo: aBlock [ 
+	"Run the supplied block in the UI process.
+	If the current process is the ui process, evaluate immediately, otherwise queue up for the next frame."
+	| uiProcess |
+
+	self isAttachedToSceneGraph and: [ self space host uiProcessDo: 
+			[ :uiProc | uiProcess := uiProc ] ].
+	uiProcess = Processor activeProcess
+		ifTrue: [ aBlock value ]
+		ifFalse: [ self enqueueTask: (BlTaskAction new action: aBlock) ]
 ]
 
 { #category : #initialization }
