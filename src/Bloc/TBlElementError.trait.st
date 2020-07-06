@@ -15,7 +15,7 @@ TBlElementError >> defaultErrorStencil [
 		container := BlElement new.
 		container 
 			layout: BlLinearLayout horizontal.
-		message := errorText ifNil: [ anException message ].
+		message := errorText ifNil: [ anException messageText ].
 		container addChild: (BrButton new
 			label: 'Debug' translated asRopedText;
 			look: BrGlamorousButtonWithLabelAndIconLook;
