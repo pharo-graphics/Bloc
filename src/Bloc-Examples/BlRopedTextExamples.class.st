@@ -7,6 +7,44 @@ Class {
 	#category : #'Bloc-Examples-Text'
 }
 
+{ #category : #'example - insert' }
+BlRopedTextExamples >> append_empty_text [
+	<gtExample>
+	| aText wasAnnounced |
+	
+	aText := 'Hello' asRopedText.
+	
+	wasAnnounced := 0.
+	aText when: BlTextStringsInserted do: [ wasAnnounced := wasAnnounced + 1 ].
+
+	aText, '' asRopedText.
+
+	self assert: aText asString equals: 'Hello'.
+	self assert: wasAnnounced equals: 0.
+
+	^ aText
+]
+
+{ #category : #'example - insert' }
+BlRopedTextExamples >> insert_empty_strings [
+	<gtExample>
+	| aText insertedStrings |
+	
+	aText := 'Hello' asRopedText.
+	
+	insertedStrings := #().
+	aText when: BlTextStringsInserted do: [ :anAnnouncement |
+		insertedStrings := anAnnouncement strings.
+	].
+
+	aText insertStrings: { '' . 'World' } atAll: { 1 . 5 }.
+
+	self assert: aText asString equals: 'HelloWorld'.
+	self assert: insertedStrings equals: { 'World' }.
+
+	^ aText
+]
+
 { #category : #'examples - next span' }
 BlRopedTextExamples >> nextSpanFontColorOnHelloWorldWithColor [
 	<gtExample>

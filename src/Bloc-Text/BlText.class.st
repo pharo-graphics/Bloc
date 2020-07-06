@@ -465,11 +465,31 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 	aCollectionOfRequestedIndices
 		ifEmpty: [ ^ self ].
 
-	self announcerDo: [ :anAnnouncer | anAnnouncer
+	self announcerDo: [ :anAnnouncer |
+		| aNonEmptyCollectionOfStrings aNonEmptyCollectionOfFinalIndices aNonEmptyCollectionOfRequestedIndices |
+		
+		aNonEmptyCollectionOfStrings := Array streamContents: [ :aStreamCollectionOfStrings |
+			aNonEmptyCollectionOfFinalIndices := Array streamContents: [ :aStreamCollectionOfFinalIndices |
+				aNonEmptyCollectionOfRequestedIndices := Array streamContents: [ :aStreamCollectionOfRequestedIndices |
+					aCollectionOfStrings withIndexDo: [ :eachString :eachIndex |
+						eachString ifNotEmpty: [
+							aStreamCollectionOfStrings nextPut: eachString.
+							aStreamCollectionOfFinalIndices nextPut: (aCollectionOfFinalIndices at: eachIndex).
+							aStreamCollectionOfRequestedIndices nextPut: (aCollectionOfRequestedIndices at: eachIndex)
+						]
+					].
+				]
+			]
+		].
+	
+		aNonEmptyCollectionOfStrings
+			ifEmpty: [ ^ self ].
+		
+		anAnnouncer
 			announce: (BlTextStringsInserted new
-				strings: aCollectionOfStrings;
-				requestedIndices: aCollectionOfRequestedIndices;
-				finalIndices: aCollectionOfFinalIndices) ]
+				strings: aNonEmptyCollectionOfStrings;
+				requestedIndices: aNonEmptyCollectionOfFinalIndices;
+				finalIndices: aNonEmptyCollectionOfRequestedIndices) ]
 ]
 
 { #category : #copying }
