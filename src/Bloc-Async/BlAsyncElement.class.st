@@ -51,49 +51,17 @@ Public API and Key Messages
 Class {
 	#name : #BlAsyncElement,
 	#superclass : #BlElement,
+	#traits : 'TBlElementError',
+	#classTraits : 'TBlElementError classTrait',
 	#instVars : [
 		'priority',
 		'visibleElement',
 		'taskitRunner',
-		'errorStencil',
-		'asyncException',
 		'previewStrategy',
 		'updateStrategy'
 	],
 	#category : #'Bloc-Async'
 }
-
-{ #category : #accessing }
-BlAsyncElement >> asyncException [
-	^ asyncException
-]
-
-{ #category : #accessing }
-BlAsyncElement >> asyncException: anException [
-	"Set the exception raised while trying to asynchronously process the receiver's content.
-	This can be called from a background process, so ensure element updates occur in the UI process"
-
-	anException freeze.
-	asyncException := anException.
-	BlUseAsyncFeatures 
-		ifEnabledDo: [ self enqueueTask: (BlTaskAction new action: self asyncExceptionAction) ]
-		otherwise: [ self asyncExceptionAction value ]
-]
-
-{ #category : #accessing }
-BlAsyncElement >> asyncExceptionAction [
-	^ [ 
-		asyncException 
-			ifNil: [ self removeChildren ]
-			ifNotNil: [ | exceptionElement |
-				exceptionElement := (self errorStencil arguments: { asyncException }) create.
-				exceptionElement constraintsDo: [ :c | 
-					c horizontal fitContent.
-					c vertical fitContent.
-					c frame vertical alignCenter.
-					c frame horizontal alignCenter ].
-				self addChild: exceptionElement ] ]
-]
 
 { #category : #initialization }
 BlAsyncElement >> defaultPreviewDelay [
@@ -115,27 +83,15 @@ BlAsyncElement >> defaultUpdateStrategy [
 	^ BlAsyncElementUpdateStrategy whenVisible
 ]
 
-{ #category : #accessing }
-BlAsyncElement >> errorStencil [
-	^ errorStencil
-]
-
-{ #category : #accessing }
-BlAsyncElement >> errorStencil: aBrStencil [
-
-	errorStencil := aBrStencil asStencil
-]
-
 { #category : #testing }
 BlAsyncElement >> hasException [
-	^ self asyncException isNotNil
+	^ self exception isNotNil
 ]
 
 { #category : #initialization }
 BlAsyncElement >> initialize [ 
 
 	super initialize.
-	self setDefaultErrorStencil.
 	self previewStrategy: self defaultPreviewStrategy.
 	self updateStrategy: self defaultUpdateStrategy.
 ]
@@ -249,17 +205,6 @@ BlAsyncElement >> queueEntry [
 BlAsyncElement >> schedulePreview [
 	"schedule a preview display"
 	self previewStrategy schedulePreviewIn: self
-]
-
-{ #category : #private }
-BlAsyncElement >> setDefaultErrorStencil [
-
-	self errorStencil: [ :exception |
-		BrButton new
-			label: 'Debug' translated asRopedText;
-			look: BrGlamorousButtonWithLabelAndIconLook;
-			icon: BrGlamorousIcons alarm asElement;
-			action: [ [ exception defaultAction ] fork ] ]
 ]
 
 { #category : #'async processing' }

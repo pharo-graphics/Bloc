@@ -104,7 +104,7 @@ BlAsyncImageElement >> needsUpdate [
 
 	| cache currentExtent imageSize currentSize noExtent |
 
-	asyncException ifNotNil: [ ^false ].
+	self exception ifNotNil: [ ^false ].
 	currentExtent := self extent.
 	noExtent := currentExtent isNil or: [ currentExtent = (0@0) ].
 	"If not pre-loading, and the image is zero size, no need to update"
