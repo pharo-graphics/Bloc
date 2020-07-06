@@ -99,5 +99,5 @@ BlAsyncElementValuable >> value [
 			ifTrue: [ self updateElement ]
 			ifFalse: [ nil ] ]
 		on: Error
-		do: [ :ex | element asyncException: ex ]
+		do: [ :ex | element exception: ex ]
 ]

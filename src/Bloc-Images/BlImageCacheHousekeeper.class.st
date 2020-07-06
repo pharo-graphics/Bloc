@@ -79,6 +79,12 @@ BlImageCacheHousekeeper >> emergencySize [
 	^emergencySize 
 ]
 
+{ #category : #accessing }
+BlImageCacheHousekeeper >> entryCount [
+
+	^ entryCount
+]
+
 { #category : #initialization }
 BlImageCacheHousekeeper >> initialize [ 
 
