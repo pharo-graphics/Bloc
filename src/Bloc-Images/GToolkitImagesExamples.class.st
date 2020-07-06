@@ -59,7 +59,7 @@ GToolkitImagesExamples >> gtBlUrlImageElement [
 
 	| file element |
 
-	file := GtResourcesUtility resourceAtPath: Path * 'feenkcom' / 'gtoolkit-inspector' /' doc' / 'gt.png'.
+	file := GtResourcesUtility resourceAtPath: Path * 'feenkcom' / 'gtoolkit-inspector' / 'doc' / 'gt.png'.
 	element := BlFileImageElement file: file.
 	^element
 ]

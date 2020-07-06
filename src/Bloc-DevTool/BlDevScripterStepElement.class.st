@@ -3,7 +3,8 @@ Class {
 	#superclass : #BlElement,
 	#instVars : [
 		'labelElement',
-		'targetElement'
+		'targetElement',
+		'statusElement'
 	],
 	#category : #'Bloc-DevTool-Scripter-UI'
 }
@@ -15,28 +16,35 @@ BlDevScripterStepElement class >> newFromStep: aBlDevScripterStep [
 
 { #category : #initialization }
 BlDevScripterStepElement >> initialize [
+	| contents |
 	super initialize.
 	self 
-		layout: BlLinearLayout vertical alignCenter;
+		layout: BlLinearLayout horizontal;
+		look: BrShadowLook;
 		zIndex: 10;
-		border: (BlBorder paint: Color black width: 2);
 		background: Color white;
+		constraintsDo: [ :c | 
+			c vertical fitContent.
+			c horizontal fitContent ].
+	contents := BlElement new
+		layout: BlLinearLayout vertical alignCenter;
 		constraintsDo: [ :c | 
 			c vertical fitContent.
 			c horizontal fitContent.
 			c padding: (BlInsets all: 5) ].
-
+	self initializeStatusElement.
 	self initializeLabelElement.
 	self initializeTargetElement.
-	self addChild: labelElement as: #label.
-	self addChild: targetElement as: #target.
-	
+	self addChild: statusElement as: #status.
+	self addChild: contents.
+	contents addChild: labelElement as: #label.
+	contents addChild: targetElement as: #target.
 ]
 
 { #category : #initialization }
 BlDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 	| aStepText aTargetStep |
-	self border: (BlBorder paint: aBlDevScripterStep stateColor width: 2).
+	statusElement background: aBlDevScripterStep stateColor.
 	aStepText := aBlDevScripterStep gtDisplayText foreground: Color black.
 	labelElement text: aStepText.
 	aTargetStep := aBlDevScripterStep realTarget gtDisplayText 
@@ -47,9 +55,9 @@ BlDevScripterStepElement >> initializeFromStep: aBlDevScripterStep [
 
 { #category : #initialization }
 BlDevScripterStepElement >> initializeLabelElement [
-	labelElement := BlTextElement new 
+	labelElement := BrLabel new 
 		zIndex: 10;
-		background: Color white;
+		look: BrGlamorousLabelLook;
 		addEventHandlerOn: BlClickEvent do: [ :anEvent | BlEvent fireEvent: anEvent target: self ];
 		constraintsDo: [ :c | 
 			c vertical fitContent.
@@ -57,12 +65,18 @@ BlDevScripterStepElement >> initializeLabelElement [
 		text: 'Step' asRopedText
 ]
 
+{ #category : #accessing }
+BlDevScripterStepElement >> initializeStatusElement [
+	statusElement := BrVerticalPane new vMatchParent; hExact: 15; background: Color white
+]
+
 { #category : #initialization }
 BlDevScripterStepElement >> initializeTargetElement [
-	targetElement := BlTextElement new 
+	targetElement := BrLabel new
+		look: (BrGlamorousLabelLook new fontSize: 10; foreground: Color gray); 
 		addEventHandlerOn: BlClickEvent do: [ :anEvent | BlEvent fireEvent: anEvent target: self ];
 		constraintsDo: [ :c | 
 			c vertical fitContent.
 			c horizontal fitContent. ];
-		text:  ('Target' asRopedText fontSize: 10; foreground: Color gray)
+		text:  'Target'
 ]

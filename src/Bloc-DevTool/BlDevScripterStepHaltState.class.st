@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 BlDevScripterStepHaltState >> color [
 	<return: #Color>
-	^ Color yellow
+	^ BrGlamorousColors failureBackgroundColor
 ]
 
 { #category : #testing }
