@@ -45,7 +45,7 @@ BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 		ifFalse: [ anOldDiagonal / aNewDiagonal ].
 	aNewPosition := (anOldEvent position - anOldBounds topLeft) * aRatio + aNewBounds topLeft.
 	aNewEvent position: aNewPosition.
-	aNewEvent screenPosition: anOldEvent screenPosition + (aNewPosition - anOldEvent position)
+	aNewEvent screenPosition: (anOldEvent screenPosition ifNil: [ 0@0 ]) + (aNewPosition - anOldEvent position)
 ]
 
 { #category : #'api - event managing' }
