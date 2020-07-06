@@ -855,23 +855,32 @@ BlInfiniteLinearLayout >> layoutChunkAdd [
 	<return: #BlElement>
 	| anElement |
 
-	anElement := layoutState nextElement: self recycler.
+	infiniteElement telemetry
+		timeSync: [ 'Get next element' ]
+		during: [ anElement := layoutState nextElement: self recycler in: infiniteElement ].
+
 	self
 		assert: [ anElement isNotNil ]
 		description: [ 'Next element can not be nil if we have items to display' ].
 	
-	layoutState hasScrapList
-		ifFalse: [ (shouldReverseLayout = layoutState isLayoutStartDirection)
-			"add child as last"
-			ifTrue: [ self addChild: anElement ]
-			"add child as first"
-			ifFalse: [ self addChild: anElement at: 1 ] ]
-		ifTrue: [ (shouldReverseLayout = layoutState isLayoutStartDirection)
-			"add child as last"
-			ifTrue: [ self addDisappearingChild: anElement ]
-			"add child as first"
-			ifFalse: [ self addDisappearingChild: anElement at: 1 ] ].
-	self notifyChunkAdded: anElement.
+	infiniteElement telemetry
+		timeSync: [ 'Add {1} as child' format: { anElement } ]
+		during: [
+			layoutState hasScrapList
+				ifFalse: [ (shouldReverseLayout = layoutState isLayoutStartDirection)
+					"add child as last"
+					ifTrue: [ self addChild: anElement ]
+					"add child as first"
+					ifFalse: [ self addChild: anElement at: 1 ] ]
+				ifTrue: [ (shouldReverseLayout = layoutState isLayoutStartDirection)
+					"add child as last"
+					ifTrue: [ self addDisappearingChild: anElement ]
+					"add child as first"
+					ifFalse: [ self addDisappearingChild: anElement at: 1 ] ] ].
+
+	infiniteElement telemetry
+		timeSync: [ 'Notify chunk added {1}' format: { anElement } ]
+		during: [ self notifyChunkAdded: anElement. ].
 	
 	^ anElement
 ]

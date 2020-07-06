@@ -61,7 +61,7 @@ BlCompositionPainter class >> repaintSpace: aSpace [
 								ifTrue: [
 									eachElement hasCompositionLayer
 										ifTrue: [ BlCompositionPainter repaintCompositedElement: eachElement ]
-										ifFalse: [ eachElement markSkippedPaint ] ] ] ] ].
+										ifFalse: [ "eachElement markSkippedPaint" ] ] ] ] ].
 
 	aRootLayer := aSpace root hasCompositionLayer
 		ifTrue: [ aSpace root compositionLayer ]

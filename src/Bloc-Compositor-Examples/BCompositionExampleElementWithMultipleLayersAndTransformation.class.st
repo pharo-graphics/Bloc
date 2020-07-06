@@ -38,11 +38,13 @@ BCompositionExampleElementWithMultipleLayersAndTransformation >> initialize [
 		border: (BlBorder paint: Color veryLightGray width: 1).
 	
 	container := BlElement new
+		labeled: 'container';
 		size: 560@360;
 		relocate: 20@20;
 		background: Color veryVeryLightGray.
 
 	wrapper := BlElement new
+		labeled: 'wrapper';
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
@@ -52,14 +54,16 @@ BCompositionExampleElementWithMultipleLayersAndTransformation >> initialize [
 				ifTrue: [ scaled removeFromParent ]
 				ifFalse: [ wrapper addChild: scaled ] ].
 	
-	scaled := BlElement new size: (560@360) / 2.
-	scaled constraintsDo: [ :c |
-		c ignoreByLayout.
-		c ignored vertical alignCenter.
-		c ignored horizontal alignCenter ].
-	scaled transformDo: [ :t | t scaleBy: 1.5 ].
-	scaled effect: BlGaussianShadowEffect default.
-	scaled background: Color white.
+	scaled := BlElement new
+		labeled: 'scaled / shadow';
+		size: (560@360) / 2;
+		constraintsDo: [ :c |
+			c ignoreByLayout.
+			c ignored vertical alignCenter.
+			c ignored horizontal alignCenter ];
+		transformDo: [ :t | t scaleBy: 1.5 ];
+		effect: BlGaussianShadowEffect default;
+		background: Color white.
 	
 	blueBox := BlExampleElementThatWantsCompositionLayer new
 		size: 200@40;

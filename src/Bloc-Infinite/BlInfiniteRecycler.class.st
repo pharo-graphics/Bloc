@@ -192,7 +192,10 @@ BlInfiniteRecycler >> elementFor: aPosition dryRun: dryRun [
 	(aPosition < 1 and: [ aPosition > self controller dataSourceItemCount ])
 		ifTrue: [ Error signal: 'Position is out of bounds!' ].
 
-	fetchedResult := fetcher elementFor: aPosition dryRun: dryRun controller: self controller.
+	self controller infiniteElement telemetry
+		timeSync: [ 'Fetch element at {1}' format: { aPosition } ]
+		during: [ fetchedResult := fetcher elementFor: aPosition dryRun: dryRun controller: self controller ].
+	
 	holder := fetchedResult key.
 	fromScrap := fetchedResult value.
 
@@ -208,7 +211,9 @@ BlInfiniteRecycler >> elementFor: aPosition dryRun: dryRun [
 				holder isRemoved ifTrue: [ Error signal: 'Removed holder should come here only in pre-layout!' ].
 				offsetPosition := self controller computePositionOffset: aPosition.
 				holder infiniteElement: self controller infiniteElement.
+				
 				self controller bindHolder: holder at: offsetPosition.
+				
 				bound := true.
 				self controller isPreLayout
 					ifTrue: [ holder preLayoutPosition: aPosition ] ] ].

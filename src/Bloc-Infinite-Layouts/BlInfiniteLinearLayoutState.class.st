@@ -18,7 +18,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Layouts-Linear-Utilities'
+	#category : #'Bloc-Infinite-Layouts-Linear-Utilities'
 }
 
 { #category : #accessing }
@@ -218,16 +218,23 @@ BlInfiniteLinearLayoutState >> layoutDirection: aLayoutDirection [
 ]
 
 { #category : #recycling }
-BlInfiniteLinearLayoutState >> nextElement: aRecycler [
+BlInfiniteLinearLayoutState >> nextElement: aRecycler in: anInfiniteElement [
 	"Get the element for the next item that we should layout.
 	Also update current item index to the next item, based on itemDirection."
 	<return: #BlElement>
 
 	^ self hasScrapList
-		ifTrue: [ self nextElementFromScrapList ]
+		ifTrue: [
+			anInfiniteElement telemetry
+				timeSync: [ 'Get next element from scrap list' ]
+				during: [ self nextElementFromScrapList ] ]
 		ifFalse: [ 
 			| anElement |
-			anElement := aRecycler elementFor: currentPosition.
+			
+			anInfiniteElement telemetry
+				timeSync: [ 'Get next element from recycler' ]
+				during: [ anElement := aRecycler elementFor: currentPosition. ].
+			
 			currentPosition := currentPosition + itemDirection multiplier.
 			anElement ]
 ]

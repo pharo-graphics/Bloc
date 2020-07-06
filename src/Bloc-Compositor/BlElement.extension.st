@@ -84,8 +84,9 @@ BlElement >> markSkippedPaint [
 			self hasCompositionLayer
 				ifFalse: [ ^ self ].
 			needsPaint := true ]
-		ifFalse: [ self hasParent
-			ifTrue: [ self parent markSkippedPaint ] ]
+		ifFalse: [
+			self hasParent
+				ifTrue: [ self parent markSkippedPaint ] ]
 ]
 
 { #category : #'*Bloc-Compositor' }

@@ -13,7 +13,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
 { #category : #'instance creation' }
@@ -28,7 +28,10 @@ BlInfiniteDataSource >> bindHolder: anElementHolder at: aPosition [
 		clearDataSourcePositionUnknown;
 		addBound.
 
-	self onBindHolder: anElementHolder at: aPosition payloads: anElementHolder payloads.
+	anElementHolder infiniteElement telemetry
+		timeSync: [ 'Bind holder {1} at {2}' format: { anElementHolder class name . aPosition } ]
+		during: [ self onBindHolder: anElementHolder at: aPosition payloads: anElementHolder payloads. ].
+	
 	anElementHolder clearPayload.
 	anElementHolder itemElement constraints infinite insetsDirty: true
 ]
