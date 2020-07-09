@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteRecyclerChangedScrapFetcher,
 	#superclass : #BlInfiniteRecyclerFetcher,
-	#category : 'Bloc-Infinite-Recycler'
+	#category : #'Bloc-Infinite-Recycler'
 }
 
 { #category : #private }
@@ -21,12 +21,16 @@ BlInfiniteRecyclerChangedScrapFetcher >> defaultNext [
 
 { #category : #'element fetching' }
 BlInfiniteRecyclerChangedScrapFetcher >> elementFor: aPosition dryRun: dryRun controller: aRecyclerController [
-	| holder |
-
-	^ (aRecyclerController isPreLayout and: [ 
-		(holder := (self changedScrapFor: aPosition dryRun: dryRun controller: aRecyclerController)) isNotNil ])
-			ifTrue: [ holder -> true ]
-			ifFalse: [ self nextDo: [ :next | next elementFor: aPosition dryRun: dryRun controller: aRecyclerController ] ]
+	
+	^ aRecyclerController infiniteElement telemetry
+		timeSync: [ 'Fetch element from changed scrap at {1}' format: { aPosition } ]
+		during: [
+			| holder |
+			
+			(aRecyclerController isPreLayout and: [ 
+				(holder := (self changedScrapFor: aPosition dryRun: dryRun controller: aRecyclerController)) isNotNil ])
+					ifTrue: [ holder -> true ]
+					ifFalse: [ self nextDo: [ :next | next elementFor: aPosition dryRun: dryRun controller: aRecyclerController ] ] ]
 ]
 
 { #category : #private }

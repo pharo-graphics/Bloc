@@ -34,12 +34,16 @@ BrStencilBuilder >> asStencilBuilder: aStencilBuilderClass [
 { #category : #building }
 BrStencilBuilder >> build [
 	<return: #BrStencil>
-	| anExecutor |
+	| anExecutor aResult |
 	
 	anExecutor := executor.
 	anExecutor resetArguments.
 	self paramsOn: anExecutor.
-	^ anExecutor execute
+	aResult := anExecutor execute.
+	
+	anExecutor resetArguments.
+	self reset.
+	^ aResult
 ]
 
 { #category : #'api - instantiation' }
@@ -67,6 +71,12 @@ BrStencilBuilder >> initialize [
 
 { #category : #'api - instantiation' }
 BrStencilBuilder >> paramsOn: aStencilExecutor [
+]
+
+{ #category : #initialization }
+BrStencilBuilder >> reset [
+	"Is called after the #build to de-reference dynamic parameters passed
+	by the called of the build"
 ]
 
 { #category : #printing }

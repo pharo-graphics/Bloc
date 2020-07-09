@@ -682,6 +682,16 @@ BlElement >> childNamed: aChildName [
 ]
 
 { #category : #'children accessing' }
+BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
+	<return: #Object>
+
+	^ self
+		childNamed: aContainerName
+		ifFound: ifFoundBlock
+		ifNone: [  ]
+]
+
+{ #category : #'children accessing' }
 BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
 
@@ -2114,35 +2124,6 @@ BlElement >> managed: aBoolean [
 		aBoolean
 			ifTrue: [ c accountByLayout ]
 			ifFalse: [ c ignoreByLayout ] ]
-]
-
-{ #category : #'children accessing' }
-BlElement >> managedChildren [
-	"Return an array of all my direct managed children.
-	Managed children are taken into account during layout process.
-	children can not be nil"
-	<return: #Array>
-	self 
-		deprecated: 'Use "children accountedByLayout" instead'
-		on: 	'17 March 2018' 
-		in: 'Pharo-6.0-60539-'.
-		
-	^ self children accountedByLayout
-]
-
-{ #category : #'children accessing' }
-BlElement >> managedChildrenDo: aBlock [
-   "Evaluate aBlock with each of my direct managed children as argument.
-	aBlock can not be nil.
-	aBlock must accept exactly one argument"
-	self assert: aBlock isNotNil.
-	self assert: aBlock argumentCount = 1.
-	self 
-		deprecated: 'Use "children accountedByLayout do:" instead'
-		on: 	'17 March 2018' 
-		in: 'Pharo-6.0-60539-'.
-		
-	^ self children accountedByLayout do: aBlock
 ]
 
 { #category : #'api - layout' }
