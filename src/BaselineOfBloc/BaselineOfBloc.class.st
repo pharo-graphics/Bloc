@@ -38,7 +38,7 @@ BaselineOfBloc >> baseline: spec [
 			baseline: 'SpartaSkia' with: [
 				spec repository: 'github://feenkcom/Sparta/src' ];
 			baseline: 'TaskIt' with: [
-				spec repository: 'github://sbragagnolo/taskit:v1.0.2' ];
+				spec repository: 'github://feenkcom/taskit:feenk102' ];
 			baseline: 'GToolkitExamplesEngine' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
 			baseline: 'Glutin' with: [
