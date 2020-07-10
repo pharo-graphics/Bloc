@@ -17,6 +17,11 @@ TBlDevScripterTarget >> onAllChildrenBreadthFirst [
 ]
 
 { #category : #'targets - children' }
+TBlDevScripterTarget >> onBreadthFirstChildOfClass: aClass [
+	self updateTarget: (BlDevScripterDeepChildOfClassEventTarget new elementClass: aClass)
+]
+
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onChildAt: aNumber [
 	self updateTarget: (BlDevScripterIndexedChildEventTarget new index: aNumber)
 ]

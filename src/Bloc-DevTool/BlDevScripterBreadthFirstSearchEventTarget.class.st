@@ -2,7 +2,8 @@ Class {
 	#name : #BlDevScripterBreadthFirstSearchEventTarget,
 	#superclass : #BlDevScripterEventTarget,
 	#instVars : [
-		'target'
+		'target',
+		'elementClass'
 	],
 	#category : #'Bloc-DevTool-Scripter-Targets'
 }
