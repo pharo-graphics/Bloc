@@ -1,4 +1,8 @@
 "
+! Keyboard key
+
+I represent a named keyboard key such as ==arrowLeft== or ==A==.
+
 !! Code generation
 
 Instance creation methods for the english alphabet are generated using the following script
@@ -125,6 +129,16 @@ BlKeyboardKey class >> F9 [
 BlKeyboardKey class >> a [
 	<return: #BlKeyboardKey>
 	^ self named: #A
+]
+
+{ #category : #'instance creation' }
+BlKeyboardKey class >> all [
+	<return: #Collection of: #BlKeyboardKey>
+	<script: 'self all inspect'>
+	
+	^ self class methods
+		select: [ :eachMethod | eachMethod protocol beginsWith: 'key' ]
+		thenCollect: [ :eachMethod | self perform: eachMethod selector ]
 ]
 
 { #category : #'keys - modifiers' }
@@ -371,7 +385,7 @@ BlKeyboardKey class >> n [
 BlKeyboardKey class >> named: aName [
 	<return: #BlKeyboardKey>
 
-	^ self new withName: aName
+	^ self new setName: aName
 ]
 
 { #category : #'keys - digits' }
@@ -608,6 +622,11 @@ BlKeyboardKey >> = anObject [
 		ifFalse: [ name = anObject name ]
 ]
 
+{ #category : #converting }
+BlKeyboardKey >> asKeyCombination [
+	^ BlSingleKeyCombination key: self
+]
+
 { #category : #comparing }
 BlKeyboardKey >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
@@ -670,8 +689,32 @@ BlKeyboardKey >> printOn: aStream [
 ]
 
 { #category : #private }
+BlKeyboardKey >> setName: aName [
+	name := aName asSymbol
+]
+
+{ #category : #private }
 BlKeyboardKey >> setValue: aValue [
 	value := aValue
+]
+
+{ #category : #printing }
+BlKeyboardKey >> storeOn: aStream [
+	aStream
+		nextPut: $(;
+		nextPutAll: self class name;
+		space;
+		nextPutAll: 'new';
+		space;
+		nextPutAll: #setName:;
+			space;
+			store: name;
+			nextPut: $;;
+			space;
+		nextPutAll: #setValue:;
+			space;
+			store: value;
+		nextPut: $)
 ]
 
 { #category : #accessing }
@@ -691,9 +734,4 @@ BlKeyboardKey >> valueOrZero [
 	<return: #Number>
 	
 	^ value ifNil: [ 0 ]
-]
-
-{ #category : #initialization }
-BlKeyboardKey >> withName: aName [
-	name := aName asSymbol
 ]
