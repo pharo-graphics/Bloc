@@ -61,6 +61,17 @@ BlTktCommonQueueWorkerPool >> privateManageWorkersAfter [
 ]
 
 { #category : #private }
+BlTktCommonQueueWorkerPool >> privateNewWorker [
+	workers
+		add:
+			(TKTWorker new
+				name: self name , ' Worker #' , (self size + 1) asString;
+				taskQueue: taskQueue;
+				processPriority: processPriority;
+				start)
+]
+
+{ #category : #private }
 BlTktCommonQueueWorkerPool >> privateRemoveIdleWorkerIfNeeded [
 	"Trying to terminate idle workers produces more delays than resource saving.
 	Leave workers waiting on the queue (they're light-weight anyway)"
