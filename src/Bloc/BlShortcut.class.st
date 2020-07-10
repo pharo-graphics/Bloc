@@ -18,8 +18,8 @@ Public API and Key Messages
 Example of a shortcut that is triggered when user presses shift + meta + arrowLeft:
 
    BlShortcut new
-	combination: (BlKeyCombination builder shift; meta; key: Key arrowLeft; build);
-	action: [ :aShortcut | self inform: 'Triggered ', aShortcut combination asString ]
+	  combination: (BlKeyCombination builder shift; meta; key: Key arrowLeft; build);
+	  action: [ :aShortcutEvent :aShortcut | self inform: 'Triggered ', aShortcut combination asString ]
  
 Internal Representation and Key Implementation Points.
 
@@ -50,12 +50,13 @@ BlShortcut >> action [
 ]
 
 { #category : #accessing }
-BlShortcut >> action: anObject [
+BlShortcut >> action: aBlockClosure [
+	"An action should be a block closure in a form [ :aShortcutEvent :aShortcut | ]"
 	self
-		assert: [ anObject isNotNil ]
+		assert: [ aBlockClosure isNotNil ]
 		description: [ 'Action must not be nil' ].
 
-	action := anObject
+	action := aBlockClosure
 ]
 
 { #category : #accessing }
@@ -82,7 +83,8 @@ BlShortcut >> description: anObject [
 BlShortcut >> initialize [
 	super initialize.
 	
-	repeatable := true
+	repeatable := true.
+	action := [ :aShortcutEvent :aShortcut | ]
 ]
 
 { #category : #'key matching' }
@@ -106,6 +108,13 @@ BlShortcut >> name [
 { #category : #accessing }
 BlShortcut >> name: anObject [
 	name := anObject
+]
+
+{ #category : #evaluation }
+BlShortcut >> performDueTo: aShortcutEvent [
+	self action
+		cull: aShortcutEvent
+		cull: self
 ]
 
 { #category : #printing }
