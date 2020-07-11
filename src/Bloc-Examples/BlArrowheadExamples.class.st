@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Geometry'
+	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #examples }
@@ -73,7 +73,7 @@ BlArrowheadExamples >> curveWithCircleArrowheads [
 	<gtExample>
 	| container curve |
 	
-	container := BlParabollaExamples new relativeCurvatureWithoutDecorations.
+	container := BlParabollaArcElementExamples new relativeCurvatureWithoutDecorations.
 	curve := container children first.
 	
 	curve fromHead: self circleArrowhead.
@@ -88,7 +88,7 @@ BlArrowheadExamples >> curveWithDifferentArrowheads [
 	<gtExample>
 
 	| container curve |
-	container := BlParabollaExamples new relativeCurvature.
+	container := BlParabollaArcElementExamples new relativeCurvature.
 	container := BlBezierElementExamples new curveWithAnchors.
 	curve := container children first.
 	curve fromHead: (BlArrowheadSimpleArrow new
@@ -107,7 +107,7 @@ BlArrowheadExamples >> curveWithSimpleArrowArrowheads [
 	<gtExample>
 	| container curve |
 	
-	container := BlParabollaExamples new relativeCurvatureWithoutDecorations.
+	container := BlParabollaArcElementExamples new relativeCurvatureWithoutDecorations.
 	curve := container children first.
 	
 	curve fromHead: self simpleArrowArrowhead.
@@ -122,7 +122,7 @@ BlArrowheadExamples >> curveWithSimpleRoundedArrowArrowheads [
 	<gtExample>
 	| container curve |
 	
-	container := BlParabollaExamples new relativeCurvatureWithoutDecorations.
+	container := BlParabollaArcElementExamples new relativeCurvatureWithoutDecorations.
 	curve := container children first.
 	
 	curve fromHead: self simpleRoundedArrowArrowhead.
@@ -137,7 +137,7 @@ BlArrowheadExamples >> curveWithTriangleArrowheads [
 	<gtExample>
 	| container curve |
 	
-	container := BlParabollaExamples new relativeCurvatureWithoutDecorations.
+	container := BlParabollaArcElementExamples new relativeCurvatureWithoutDecorations.
 	curve := container children first.
 	
 	curve fromHead: self triangleArrowhead.

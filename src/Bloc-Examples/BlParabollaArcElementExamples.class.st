@@ -2,13 +2,13 @@
 I contain examples and a few usecases of ===BlArcElement===
 "
 Class {
-	#name : #BlParabollaExamples,
+	#name : #BlParabollaArcElementExamples,
 	#superclass : #BlGeometryElementExamples,
 	#category : #'Bloc-Examples-Geometry'
 }
 
 { #category : #examples }
-BlParabollaExamples class >> absoluteCurvature [
+BlParabollaArcElementExamples class >> absoluteCurvature [
 	<script: 'self absoluteCurvature'>
 
 	self
@@ -18,7 +18,7 @@ BlParabollaExamples class >> absoluteCurvature [
 ]
 
 { #category : #examples }
-BlParabollaExamples class >> relativeCurvature [
+BlParabollaArcElementExamples class >> relativeCurvature [
 	<script: 'self relativeCurvature'>
 
 	self openInWindow:
@@ -28,7 +28,7 @@ BlParabollaExamples class >> relativeCurvature [
 ]
 
 { #category : #'examples - connections' }
-BlParabollaExamples >> absoluteCurvature [
+BlParabollaArcElementExamples >> absoluteCurvature [
 	<gtExample>	
 	| redArc attachFrom attachTo perpendicularAttach fromLine toLine connectLine |
 	
@@ -68,7 +68,7 @@ BlParabollaExamples >> absoluteCurvature [
 ]
 
 { #category : #'instance creation' }
-BlParabollaExamples >> arc [
+BlParabollaArcElementExamples >> arc [
 	<gtExample>
 	
 	^ BlParabollaArcElement new
@@ -77,14 +77,14 @@ BlParabollaExamples >> arc [
 ]
 
 { #category : #'examples - visual properties' }
-BlParabollaExamples >> blueArc [
+BlParabollaArcElementExamples >> blueArc [
 	<gtExample>
 
 	^ self arc border: (BlBorder paint: Color blue width: 4)
 ]
 
 { #category : #'examples - visual properties' }
-BlParabollaExamples >> blueArcWithToHead [
+BlParabollaArcElementExamples >> blueArcWithToHead [
 	<gtExample>
 
 	^ self blueArc
@@ -95,7 +95,7 @@ BlParabollaExamples >> blueArcWithToHead [
 ]
 
 { #category : #'examples - self edges' }
-BlParabollaExamples >> bottomCenterToTopCenter [
+BlParabollaArcElementExamples >> bottomCenterToTopCenter [
 	<gtExample>
 	| aCurve anElement |
 	
@@ -110,7 +110,7 @@ BlParabollaExamples >> bottomCenterToTopCenter [
 ]
 
 { #category : #'examples - self edges' }
-BlParabollaExamples >> bottomToTopBidirectional [
+BlParabollaArcElementExamples >> bottomToTopBidirectional [
 	<gtExample>
 	| aCurveDown aCurveUp anElement |
 	
@@ -128,7 +128,7 @@ BlParabollaExamples >> bottomToTopBidirectional [
 ]
 
 { #category : #'examples - visual properties' }
-BlParabollaExamples >> greyLine [
+BlParabollaArcElementExamples >> greyLine [
 	<gtExample>
 
 	^ self line
@@ -136,7 +136,7 @@ BlParabollaExamples >> greyLine [
 ]
 
 { #category : #'examples - self edges' }
-BlParabollaExamples >> leftToRightBidirectional [
+BlParabollaArcElementExamples >> leftToRightBidirectional [
 	<gtExample>
 	| aCurveLeft aCurveRight anElement |
 	
@@ -154,7 +154,7 @@ BlParabollaExamples >> leftToRightBidirectional [
 ]
 
 { #category : #'instance creation' }
-BlParabollaExamples >> line [
+BlParabollaArcElementExamples >> line [
 	<gtExample>
 	
 	^ BlLineElement new
@@ -163,14 +163,14 @@ BlParabollaExamples >> line [
 ]
 
 { #category : #'examples - visual properties' }
-BlParabollaExamples >> redArc [
+BlParabollaArcElementExamples >> redArc [
 	<gtExample>
 
 	^ self arc border: (BlBorder paint: Color red width: 4)
 ]
 
 { #category : #'examples - visual properties' }
-BlParabollaExamples >> redArcWithToHead [
+BlParabollaArcElementExamples >> redArcWithToHead [
 	<gtExample>
 
 	^ self redArc
@@ -181,7 +181,7 @@ BlParabollaExamples >> redArcWithToHead [
 ]
 
 { #category : #'instance creation' }
-BlParabollaExamples >> referenceElement [
+BlParabollaArcElementExamples >> referenceElement [
 	<gtExample>
 	
 	^ BlElement new
@@ -191,7 +191,7 @@ BlParabollaExamples >> referenceElement [
 ]
 
 { #category : #'examples - connections' }
-BlParabollaExamples >> relativeCurvature [
+BlParabollaArcElementExamples >> relativeCurvature [
 	<gtExample>	
 	| redArc attachFrom attachTo perpendicularAttach fromLine toLine connectLine |
 	
@@ -231,7 +231,7 @@ BlParabollaExamples >> relativeCurvature [
 ]
 
 { #category : #'examples - connections' }
-BlParabollaExamples >> relativeCurvatureWithoutDecorations [
+BlParabollaArcElementExamples >> relativeCurvatureWithoutDecorations [
 	<gtExample>	
 	| redArc attachFrom attachTo |
 	
@@ -249,7 +249,7 @@ BlParabollaExamples >> relativeCurvatureWithoutDecorations [
 ]
 
 { #category : #'examples - self edges' }
-BlParabollaExamples >> rightCenterToTopCenter [
+BlParabollaArcElementExamples >> rightCenterToTopCenter [
 	<gtExample>
 	| aCurve anElement |
 	
@@ -264,7 +264,7 @@ BlParabollaExamples >> rightCenterToTopCenter [
 ]
 
 { #category : #'examples - self edges' }
-BlParabollaExamples >> topCenterToBottomCenter [
+BlParabollaArcElementExamples >> topCenterToBottomCenter [
 	<gtExample>
 	| aCurve anElement |
 	
@@ -279,7 +279,7 @@ BlParabollaExamples >> topCenterToBottomCenter [
 ]
 
 { #category : #'examples - self edges' }
-BlParabollaExamples >> topCenterToRightCenter [
+BlParabollaArcElementExamples >> topCenterToRightCenter [
 	<gtExample>
 	| aCurve anElement |
 	
