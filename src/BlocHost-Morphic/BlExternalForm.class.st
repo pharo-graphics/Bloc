@@ -3,7 +3,7 @@ An ExternalForm is a specialized Form whose pixel-data is stored in memory that 
 
 NOTE: This is a copy of original ExternalForm implementation
 
-IMPORTANT: Moved form FFI to SDL2 because is not needed there anymore but OSWindow-SDL2 package uses it.
+IMPORTANT: Moved from FFI to SDL2 because is not needed there anymore but OSWindow-SDL2 package uses it.
 
 The user is responsible for both releasing the image-memory, as well as destroying the surface handle (perhaps the latter should be handled by automatic finalization).
 
