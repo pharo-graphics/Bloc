@@ -70,7 +70,7 @@ BlGridLayoutExamples >> exampleCellSpacingHorizontal1 [
 ]
 
 { #category : #'examples - layout' }
-BlGridLayoutExamples >> exampleCellSpacingVerical1 [
+BlGridLayoutExamples >> exampleCellSpacingVertical1 [
 	<gtExample>
 	| parent childA childB |
 	
