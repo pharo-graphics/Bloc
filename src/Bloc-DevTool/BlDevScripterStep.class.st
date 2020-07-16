@@ -52,16 +52,16 @@ BlDevScripterStep >> gtStepsMondrianTreeFor: aView [
 { #category : #'gt-extension' }
 BlDevScripterStep >> gtStepsTreeFor: aView [
 	<gtView>
-	
 	^ aView columnedTree
 		title: 'Steps In Tree';
 		priority: 2.5;
 		expandUpTo: 3;
-		items: [ { self } ];
+		items: [ {self} ];
 		children: [ :aStep | aStep steps ];
-		column: 'Status' do: [ :aColumn | 
-			aColumn 
-				itemFormat: [ :aStep | aStep stateName asRopedText foreground: aStep stateColor ] ];
+		column: 'Status'
+			do: [ :aColumn | 
+			aColumn
+				text: [ :aStep | aStep stateName asRopedText foreground: aStep stateColor ] ];
 		column: 'Step' item: #label;
 		column: 'Target' item: #target
 ]
