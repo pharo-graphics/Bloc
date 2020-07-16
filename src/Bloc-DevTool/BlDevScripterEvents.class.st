@@ -37,8 +37,13 @@ BlDevScripterEvents >> gtEventsFor: aView [
 		title: 'Events';
 		priority: 3;
 		items: [ self ];
-		column: 'Index' item: [ :eachItem :eachIndex | eachIndex asRopedText foreground: Color gray ] width: 80;
-		column: 'Item' item: [ :eachItem :eachIndex | eachItem ] format: [ :eachItem | eachItem gtDisplayText ]
+		column: 'Index'
+			item:
+				[ :eachItem :eachIndex | eachIndex asRopedText foreground: Color gray ]
+			width: 80;
+		column: 'Item'
+			item: [ :eachItem :eachIndex | eachItem ]
+			text: [ :eachItem | eachItem gtDisplayText ]
 ]
 
 { #category : #'gt-extension' }
