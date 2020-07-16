@@ -11,8 +11,7 @@ BlCompositionPainterState >> gtCommandsFor: aView [
 		column: 'Type' item: [ :eachCommand | eachCommand type ] width: 100;
 		column: 'By' do: [ :aColumn |
 			aColumn
-				matchParent;
-				itemStencil: [ :eachCommand |
+				stencil: [ :eachCommand |
 					BrEditor new
 						hMatchParent;
 						vFitContent;

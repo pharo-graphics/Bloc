@@ -59,9 +59,7 @@ BlDevScripterStep >> gtStepsTreeFor: aView [
 		expandUpTo: 3;
 		items: [ { self } ];
 		children: [ :aStep | aStep steps ];
-		column: 'Status' do: [ :aColumn | 
-			aColumn 
-				itemFormat: [ :aStep | aStep stateName asRopedText foreground: aStep stateColor ] ];
+		column: 'Status' text: [ :aStep | aStep stateName asRopedText foreground: aStep stateColor ];
 		column: 'Step' item: #label;
 		column: 'Target' item: #target
 ]

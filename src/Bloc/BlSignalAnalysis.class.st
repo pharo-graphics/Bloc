@@ -205,10 +205,7 @@ BlSignalAnalysis >> gtCurrentProcessFor: aView [
 		title: 'Current Process' translated;
 		priority: 40;
 		items: [ self getCurrentProcessSignals ];
-		column: 'Signal' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each asString ]; 
-				matchParent ]
+		column: 'Signal' translated item: [ :each | each asString ]
 ]
 
 { #category : #inspecting }
@@ -218,22 +215,11 @@ BlSignalAnalysis >> gtRecordingsFor: aView [
 		title: 'Recordings' translated;
 		priority: 50;
 		items: [ self recordings reverse ];
-		column: 'Timestamp' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each timestamp asString ]; 
-				matchParent ];
-		column: 'Process' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each processId asString ]; 
-				matchParent ];
-		column: 'Type' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each name ]; 
-				matchParent ];
-		column: 'Contents' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | String streamContents: [ :s | each printOneLineContentsOn: s ] ]; 
-				matchParent ]
+		column: 'Timestamp' translated item: [ :each | each timestamp asString ];
+		column: 'Process' translated item: [ :each | each processId asString ];
+		column: 'Type' translated item: [ :each | each name ];
+		column: 'Contents' translated item: [ :each | 
+			String streamContents: [ :s | each printOneLineContentsOn: s ] ]
 ]
 
 { #category : #inspecting }
@@ -244,14 +230,8 @@ BlSignalAnalysis >> gtSlowFor: aView [
 		title: 'Slow Tasks' translated;
 		priority: 40;
 		items: [ self slow ];
-		column: 'Duration' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each first asString ]; 
-				matchParent ];
-		column: 'Target' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each second target asString ]; 
-				matchParent ]
+		column: 'Duration' translated item: [ :each | each first asString ];
+		column: 'Target' translated item: [ :each | each second target asString ]
 ]
 
 { #category : #inspecting }
@@ -262,10 +242,7 @@ BlSignalAnalysis >> gtSlowPulsesFor: aView [
 		title: 'Pulses' translated;
 		priority: 40;
 		items: [ self getSlowPulses ];
-		column: 'Signal' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each asString ]; 
-				matchParent ]
+		column: 'Signal' translated item: [ :each | each asString ]
 ]
 
 { #category : #inspecting }
@@ -285,22 +262,11 @@ BlSignalAnalysis >> gtUnfinishedFor: aView [
 		title: 'Unfinished' translated;
 		priority: 45;
 		items: [ self unfinished reverse ];
-		column: 'Timestamp' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each timestamp asString ]; 
-				matchParent ];
-		column: 'Process' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each processId asString ]; 
-				matchParent ];
-		column: 'Type' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | each name ]; 
-				matchParent ];
-		column: 'Contents' translated do: [ :aColumn | 
-			aColumn 
-				item: [ :each | String streamContents: [ :s | each printOneLineContentsOn: s ] ]; 
-				matchParent ]
+		column: 'Timestamp' translated item: [ :each | each timestamp asString ]
+		column: 'Process' translated item: [ :each | each processId asString ]
+		column: 'Type' translated item: [ :each | each name ];
+		column: 'Contents' translated item: [ :each | 
+			String streamContents: [ :s | each printOneLineContentsOn: s ] ]
 ]
 
 { #category : #initialization }

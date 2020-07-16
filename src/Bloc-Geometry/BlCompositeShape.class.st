@@ -32,8 +32,7 @@ BlCompositeShape >> gtShapesFor: aView [
 			ifFalse: [{}]];
 		column: 'Preview' do: [ :aColumn |
 			aColumn
-				noResize;
-				rowStencil: [ :eachShape |
+				stencil: [ :eachShape |
 					| container |
 					container := BlVectorShapeContainerElement new
 						layout: BlFitLayout new;
