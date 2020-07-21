@@ -35,9 +35,9 @@ BlSkiaImageElement >> drawOnSpartaCanvas: aCanvas [
 
 	aCanvas transform
 		by: [ :t | 
-			t 
-				translateBy: translation;
-				scaleBy: ratio
+			t translateBy: translation.
+			ratio isZero ifFalse: [
+				t scaleBy: ratio ].
 				 ]
 		during: [
 			aCanvas fill
