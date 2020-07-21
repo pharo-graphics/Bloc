@@ -8,7 +8,7 @@ Class {
 BlScrollableElementEventHandler >> gestureScrollEvent: anEvent [
 	| aScrollHappened |
 
-	aScrollHappened := anEvent currentTarget scrollBy: anEvent vector * 400.
+	aScrollHappened := anEvent currentTarget scrollBy: (anEvent vector * 400) negated.
 	anEvent consumed: aScrollHappened
 ]
 
@@ -20,6 +20,6 @@ BlScrollableElementEventHandler >> mouseWheelEvent: anEvent [
 	anEvent isTouch
 		ifTrue: [ ^ self ].
 
-	aScrollHappened := anEvent currentTarget scrollBy: anEvent vector * 20.
+	aScrollHappened := anEvent currentTarget scrollBy: (anEvent vector * 20) negated.
 	anEvent consumed: aScrollHappened
 ]

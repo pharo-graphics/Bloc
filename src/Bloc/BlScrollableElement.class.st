@@ -19,13 +19,44 @@ BlScrollableElement >> asScrollableElement [
 	^ self
 ]
 
-{ #category : #accessing }
-BlScrollableElement >> contentElement [
-	self 
-		deprecated: 'Use contentElement instead'
-		on: 	'8 May 2018' 
-		in: 'Pharo-6.0-60540-'.
-	^ self contentElement
+{ #category : #'api - scrolling thumb' }
+BlScrollableElement >> computeVerticalScrollExtent [
+	"Compute the vertical extent of the vertical scrollbar's thumb within the vertical range.
+	This value is used to compute the length of the thumb within the scrollbar's track.
+	The extent is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollRange and #computeVerticalScrollOffset.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+	
+	^ self height
+]
+
+{ #category : #'api - scrolling thumb' }
+BlScrollableElement >> computeVerticalScrollOffset [
+	"Compute the vertical offset of the vertical scrollbar's thumb within the vertical range.
+	The offset is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollExtent and #computeVerticalScrollRange.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+
+	^ scrollPosition y negated
+]
+
+{ #category : #'api - scrolling thumb' }
+BlScrollableElement >> computeVerticalScrollRange [
+	"Compute the vertical range that the vertical scrollbar represents.
+	The range is expressed in arbitrary units that must be the same as the units used by
+	#computeVerticalScrollExtent and #computeVerticalScrollOffset.
+	Default implementation returns 0.
+	
+	Override me in your scrollable element to support scroll bars"
+	<return: #Number>
+
+	^ self scrolledElement height + self scrolledElement margin height + self padding height
 ]
 
 { #category : #initialization }
@@ -163,11 +194,14 @@ BlScrollableElement >> onChildAdded: anElement [
 
 { #category : #layout }
 BlScrollableElement >> onLayout: aBounds [
+	| aPreviousScrollPosition |
 	self scrollFlinger isIdle
 		ifFalse: [ ^ super onLayout: aBounds ].
 		
 	self hasScrolledElement
 		ifFalse: [ ^ self ].
+	
+	aPreviousScrollPosition := scrollPosition.
 	
 	"first we fix a gap"	
 	self layoutFixGap.
@@ -178,7 +212,9 @@ BlScrollableElement >> onLayout: aBounds [
 	"then we allign content if it is smaller than the scrollpane"
 	self layoutApplyAlignment.
 
-	super onLayout: aBounds
+	super onLayout: aBounds.
+	
+	self dispatchOnScrolled: scrollPosition - aPreviousScrollPosition
 ]
 
 { #category : #scrolling }
@@ -193,8 +229,8 @@ BlScrollableElement >> scrollBy: aPoint [
 
 	aContent := self scrolledElement.
 
-	dX := aPoint x negated.
-	dY := aPoint y.
+	dX := aPoint x.
+	dY := aPoint y negated.
 	
 	self canScrollHorizontally
 		ifTrue: [
@@ -242,10 +278,12 @@ BlScrollableElement >> scrollHorizontallyBy: aNumber [
 	The default implementation does nothing and returns 0."
 	<return: #Number>
 	| aContent |
-	
+
 	aContent := self children first.
 	scrollPosition := scrollPosition + (aNumber asFloat @ 0.0).
 	aContent relocate: scrollPosition.
+
+	self dispatchOnScrolled: aNumber @ 0.
 
 	^ aNumber
 ]
@@ -303,6 +341,8 @@ BlScrollableElement >> scrollVerticallyBy: aNumber [
 	aContent := self children first.
 	scrollPosition := scrollPosition + (0.0 @ aNumber asFloat).
 	aContent relocate: scrollPosition.
+	
+	self dispatchOnScrolled: 0 @ aNumber.
 
 	^ aNumber
 ]
@@ -312,6 +352,13 @@ BlScrollableElement >> scrolledElement [
 	<return: #BlElement>
 
 	^ self children first
+]
+
+{ #category : #accessing }
+BlScrollableElement >> scrolledElementDo: aBlock [
+	"Evaluate a given block with the scrolled element if any"
+
+	self children ifNotEmpty: [ :theChildren | aBlock value: theChildren first ]
 ]
 
 { #category : #scrolling }

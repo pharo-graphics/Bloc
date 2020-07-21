@@ -50,7 +50,7 @@ BlHorizontalScrollbarElement >> scrollTo: aPoint [
 		offset: scrollable computeHorizontalScrollOffset
 		range: scrollable computeHorizontalScrollRange
 		length: self width.
-		
+
 	scrollingBy isZero
 		ifTrue: [ ^ self ].
 

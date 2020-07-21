@@ -90,7 +90,7 @@ BlScrollbarElement >> initialize [
 	self layout: BlFrameLayout new.
 
 	minimumSize := 0.05.
-	
+
 	scrollHandler := BlEventHandler
 		on: BlElementScrolledEvent
 		do: [ :anEvent | self onScrolled: anEvent currentTarget ].

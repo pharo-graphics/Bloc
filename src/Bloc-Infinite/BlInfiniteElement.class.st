@@ -1807,7 +1807,7 @@ BlInfiniteElement >> scrollBy: aPoint [
 				ifFalse: [ 0 ]) @ (canScrollVertical
 					ifTrue: [ aPoint y ]
 					ifFalse: [ 0 ])
-					from: nil ]
+			from: nil ]
 ]
 
 { #category : #'private - scrolling' }
