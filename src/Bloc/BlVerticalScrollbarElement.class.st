@@ -65,8 +65,6 @@ BlVerticalScrollbarElement >> updateScrollPosition [
 		
 	verticalContentLength := scrollable computeVerticalScrollRange.
 	
-	NonInteractiveTranscript stdout nextPutAll: verticalContentLength asString; cr.
-	
 	verticalContentLength isZero
 		ifTrue: [ ^ self ].
 	
