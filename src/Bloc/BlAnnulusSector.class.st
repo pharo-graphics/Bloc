@@ -1,6 +1,5 @@
 "
 ! Annulus sector
-
 I am a sector of an annulus. In mathematics, an annulus (the Latin word for ""little ring"" is anulus / annulus, with plural anuli / annuli) is a ring-shaped object, a region bounded by two concentric circles.
 *https://en.wikipedia.org/wiki/Annulus_(mathematics)*
 
