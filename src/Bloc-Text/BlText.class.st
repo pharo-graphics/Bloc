@@ -329,7 +329,7 @@ BlText >> ifEmpty: aBlock [
 	"Note that the fact that this method returns its receiver in case the receiver is not empty allows one to write expressions like the following ones: self classifyMethodAs: (myProtocol ifEmpty: ['As yet unclassified'])"
 
 	^ self isEmpty
-		ifTrue: aBlock value
+		ifTrue: aBlock
 		ifFalse: [ self ]
 ]
 
