@@ -10,7 +10,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'extentChange',
-		'positionChange'
+		'positionChange',
+		'isDirty'
 	],
 	#category : #'Bloc-Basic-Changes'
 }
@@ -35,18 +36,24 @@ BlElementChanges >> changesDo: aBlock [
 BlElementChanges >> commitOn: anElement [
 	"Commit all accumulated changes done to the given element.
 	As the result, all changes are marked as comitted"
+	
+	isDirty
+		ifFalse: [ ^ self ].
 
 	self changesDo: [ :aChange |
 		anElement telemetry
 			timeSync: [ 'Commit ', aChange class name ]
-			during: [ aChange commitOn: anElement ] ]
+			during: [ aChange commitOn: anElement ] ].
+	
+	isDirty := false
 ]
 
 { #category : #'api - changes' }
 BlElementChanges >> extentChange: anOldExtent to: aNewExtent [
 	"Log the extent change of the element"
 
-	extentChange old: anOldExtent new: aNewExtent
+	extentChange old: anOldExtent new: aNewExtent.
+	isDirty := true
 ]
 
 { #category : #initialization }
@@ -54,7 +61,8 @@ BlElementChanges >> initialize [
 	super initialize.
 	
 	extentChange := BlElementExtentChange new.
-	positionChange := BlElementPositionChange new
+	positionChange := BlElementPositionChange new.
+	isDirty := true
 ]
 
 { #category : #testing }
@@ -75,5 +83,6 @@ BlElementChanges >> isPositionChanged [
 BlElementChanges >> positionChange: anOldPosition to: aNewPosition [
 	"Log the position change of the element"
 
-	positionChange old: anOldPosition new: aNewPosition
+	positionChange old: anOldPosition new: aNewPosition.
+	isDirty := true
 ]
