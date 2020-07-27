@@ -46,13 +46,11 @@ Class {
 	#instVars : [
 		'elevation',
 		'geometry',
-		'geometryResizer',
 		'parent',
 		'boundsCache',
 		'eventDispatcher',
 		'border',
 		'background',
-		'backgroundResizer',
 		'constraints',
 		'layout',
 		'children',
@@ -468,18 +466,6 @@ BlElement >> background: aBlBackground [
 	self updateBackground.
 	self eventDispatcher dispatchBackgroundChanged.
 	self invalidate
-]
-
-{ #category : #'private - accessing' }
-BlElement >> backgroundResizer [
-	<return: #BlBackgroundResizer>
-
-	^ backgroundResizer
-]
-
-{ #category : #'private - accessing' }
-BlElement >> backgroundResizer: aBackgroundResizer [
-	 backgroundResizer := aBackgroundResizer
 ]
 
 { #category : #layout }
@@ -914,11 +900,6 @@ BlElement >> defaultBackground [
 ]
 
 { #category : #initialization }
-BlElement >> defaultBackgroundResizer [
-	^ BlBackgroundResizer match
-]
-
-{ #category : #initialization }
 BlElement >> defaultBorder [
 	"Return an instance of BlBorder that should be my default border"
 	<return: #BlBorder>
@@ -951,11 +932,6 @@ BlElement >> defaultFocusability [
 { #category : #initialization }
 BlElement >> defaultGeometry [
 	^ BlRectangle new
-]
-
-{ #category : #initialization }
-BlElement >> defaultGeometryResizer [
-	^ BlGeometryResizer match
 ]
 
 { #category : #initialization }
@@ -1439,18 +1415,6 @@ BlElement >> geometryBoundsInSpace: aSpartaRectangle [
 	^ aSpartaRectangle
 ]
 
-{ #category : #'private - accessing' }
-BlElement >> geometryResizer [
-	<return: #BlGeometryResizer>
-
-	^ geometryResizer
-]
-
-{ #category : #'private - accessing' }
-BlElement >> geometryResizer: aGeometryResizer [
-	 geometryResizer := aGeometryResizer
-]
-
 { #category : #'geometry bounds convertion' }
 BlElement >> globalBoundsToLocal: aBounds [
 	"In-place transform bounds from global space coordinates to local coordinates.
@@ -1666,14 +1630,14 @@ BlElement >> initialize [
 
 	transformation := self defaultTransformation owner: self.
 	geometry := self defaultGeometry.
-	geometryResizer := self defaultGeometryResizer.
 	"we have to tell geometry to adapt to the element now, otherwise its size will not be updated"
-	geometryResizer adapt: geometry to: self.
+	geometry matchElement: self.
 	
 	outskirts := self defaultOutskirts.
 	border := self defaultBorder.
 	background := self defaultBackground asBlBackground.
-	backgroundResizer := self defaultBackgroundResizer.
+	background matchExtent: self extent.
+	
 	layout := self defaultLayout.
 	elevation := self defaultElevation.
 	focusability := self defaultFocusability.
@@ -3462,12 +3426,12 @@ BlElement >> translateX: xFactor Y: yFactor [
 
 { #category : #'change reporting' }
 BlElement >> updateBackground [
-	self backgroundResizer adapt: self background to: self
+	self background matchExtent: self extent
 ]
 
 { #category : #'change reporting' }
 BlElement >> updateGeometry [
-	self geometryResizer adapt: self geometry to: self
+	self geometry matchElement: self
 ]
 
 { #category : #accessing }
