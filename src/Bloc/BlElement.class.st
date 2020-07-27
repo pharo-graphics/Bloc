@@ -1614,7 +1614,7 @@ BlElement >> inUIProcessDo: aBlock [
 BlElement >> initialize [
 	super initialize.
 
-	visuals := BlEmptyVisuals uniqueInstance.
+	visuals := BlDefaultVisuals uniqueInstance.
 
 	boundsCache := BlBoundsCache on: self.
 	bounds := BlElementLocalBounds new referenceElement: self.

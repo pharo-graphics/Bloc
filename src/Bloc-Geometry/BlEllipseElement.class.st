@@ -53,7 +53,7 @@ BlEllipseElement >> defaultCenterAnchor [
 BlEllipseElement >> initialize [
 	super initialize.
 	
-	visuals := BlConcreteVisuals new
+	visuals := BlCustomVisuals new
 		geometry: BlEllipse new.
 	
 	centerAnchor := self defaultCenterAnchor.

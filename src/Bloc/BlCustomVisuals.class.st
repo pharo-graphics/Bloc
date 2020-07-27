@@ -1,5 +1,5 @@
 Class {
-	#name : #BlConcreteVisuals,
+	#name : #BlCustomVisuals,
 	#superclass : #BlElementVisuals,
 	#instVars : [
 		'geometry',
@@ -20,12 +20,12 @@ Class {
 }
 
 { #category : #accessing }
-BlConcreteVisuals >> background [
+BlCustomVisuals >> background [
 	^ background ifNil: [ self defaultBackground ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> background: aBlBackground [
+BlCustomVisuals >> background: aBlBackground [
 	"Change the background and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -33,12 +33,12 @@ BlConcreteVisuals >> background: aBlBackground [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> border [
+BlCustomVisuals >> border [
 	^ border ifNil: [ self defaultBorder ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> border: aBlBorder [
+BlCustomVisuals >> border: aBlBorder [
 	"Change the border and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -46,12 +46,12 @@ BlConcreteVisuals >> border: aBlBorder [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> clipChildren [
+BlCustomVisuals >> clipChildren [
 	^ clipChildren ifNil: [ self defaultClipChildren ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> clipChildren: aBoolean [
+BlCustomVisuals >> clipChildren: aBoolean [
 	"Change if children should be clipped and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -59,12 +59,12 @@ BlConcreteVisuals >> clipChildren: aBoolean [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> compositingMode [
+BlCustomVisuals >> compositingMode [
 	^ compositingMode ifNil: [ self defaultCompositingMode ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> compositingMode: aBlCompositingMode [
+BlCustomVisuals >> compositingMode: aBlCompositingMode [
 	"Change the compositing mode and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -72,12 +72,12 @@ BlConcreteVisuals >> compositingMode: aBlCompositingMode [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> effect [
+BlCustomVisuals >> effect [
 	^ effect ifNil: [ self defaultEffect ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> effect: aBlElementEffect [
+BlCustomVisuals >> effect: aBlElementEffect [
 	"Change the effect and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -85,12 +85,12 @@ BlConcreteVisuals >> effect: aBlElementEffect [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> elevation [
+BlCustomVisuals >> elevation [
 	^ elevation ifNil: [ self defaultElevation ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> elevation: aBlElevation [
+BlCustomVisuals >> elevation: aBlElevation [
 	"Change the elevation and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -98,12 +98,12 @@ BlConcreteVisuals >> elevation: aBlElevation [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> focusability [
+BlCustomVisuals >> focusability [
 	^ focusability ifNil: [ self defaultFocusability ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> focusability: aBlFocusability [
+BlCustomVisuals >> focusability: aBlFocusability [
 	"Change the focusability and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -111,12 +111,12 @@ BlConcreteVisuals >> focusability: aBlFocusability [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> focused [
+BlCustomVisuals >> focused [
 	^ focused ifNil: [ self defaultFocused ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> focused: aBoolean [
+BlCustomVisuals >> focused: aBoolean [
 	"Change focused state and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -124,12 +124,12 @@ BlConcreteVisuals >> focused: aBoolean [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> geometry [
+BlCustomVisuals >> geometry [
 	^ geometry ifNil: [ self defaultGeometry ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> geometry: aBlElementGeometry [
+BlCustomVisuals >> geometry: aBlElementGeometry [
 	"Change the geometry and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -137,12 +137,12 @@ BlConcreteVisuals >> geometry: aBlElementGeometry [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> mouseCursor [
+BlCustomVisuals >> mouseCursor [
 	^ mouseCursor ifNil: [ self defaultMouseCursor ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> mouseCursor: aBlCursor [
+BlCustomVisuals >> mouseCursor: aBlCursor [
 	"Change the mouse cursor and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -150,12 +150,12 @@ BlConcreteVisuals >> mouseCursor: aBlCursor [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> opacity [
+BlCustomVisuals >> opacity [
 	^ opacity ifNil: [ self defaultOpacity ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> opacity: aNumber [
+BlCustomVisuals >> opacity: aNumber [
 	"Change the opacity and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -163,12 +163,12 @@ BlConcreteVisuals >> opacity: aNumber [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> outskirts [
+BlCustomVisuals >> outskirts [
 	^ outskirts ifNil: [ self defaultOutskirts ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> outskirts: aBlOutskirts [
+BlCustomVisuals >> outskirts: aBlOutskirts [
 	"Change the outskirts and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
@@ -176,12 +176,12 @@ BlConcreteVisuals >> outskirts: aBlOutskirts [
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> visibility [
+BlCustomVisuals >> visibility [
 	^ visibility ifNil: [ self defaultVisibility ]
 ]
 
 { #category : #accessing }
-BlConcreteVisuals >> visibility: aBlVisibility [
+BlCustomVisuals >> visibility: aBlVisibility [
 	"Change the visibility and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
