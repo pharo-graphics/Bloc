@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'nearestToElement'
 	],
-	#category : 'Bloc-Geometry-Anchors'
+	#category : #'Bloc-Geometry-Anchors'
 }
 
 { #category : #'instance creation' }
@@ -36,5 +36,13 @@ BlNearestPositionAnchor >> nearestToElement [
 
 { #category : #accessing }
 BlNearestPositionAnchor >> nearestToElement: anElement [
-	nearestToElement := anElement
+	nearestToElement := anElement.
+	nearestToElement := anElement.
+
+	nearestToElement
+		addEventHandlerOn: BlElementPositionInSpaceChangedEvent
+		do: [ :anEvent | self dispatchMoveEvent ].
+	nearestToElement
+		addEventHandlerOn: BlElementExtentChangedEvent
+		do: [ :anEvent | self dispatchMoveEvent ]
 ]
