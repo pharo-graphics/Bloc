@@ -39,7 +39,7 @@ BlPathCache >> checkSession [
 { #category : #accessing }
 BlPathCache >> geometry [
 	"Return a geometry whose path I cache"
-	<return: #BlGeometry>
+	<return: #BlElementVectorGeometry>
 
 	^ geometry
 ]

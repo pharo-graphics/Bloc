@@ -7,7 +7,7 @@ BlOutskirtsInside >> drawBackground: aBackgroundBlock border: aBorderBlock of: a
 	
 	aCanvas clip
 		when: [ anElement border isTransparent not ]
-		by:  [ anElement geometry pathOnSpartaCanvas: aCanvas ]
+		by:  [ anElement geometry pathOnSpartaCanvas: aCanvas of: anElement ]
 		during: [
 			aBackgroundBlock value.
 			anElement border isTransparent
@@ -21,7 +21,7 @@ BlOutskirtsInside >> drawBorder: aBlBorder onSpartaCanvas: aCanvas of: anElement
 	aCanvas stroke
 		alpha: aBlBorder opacity;
 		paint: aBlBorder paint;
-		path: (anElement geometry pathOnSpartaCanvas: aCanvas);
+		path: (anElement geometry pathOnSpartaCanvas: aCanvas of: anElement);
 		width: aBlBorder width * 2.0;	 "we draw inside, so should multiply width by 2"
 		in: [ :aPainter | aBlBorder style applyOn: aPainter ];
 		draw

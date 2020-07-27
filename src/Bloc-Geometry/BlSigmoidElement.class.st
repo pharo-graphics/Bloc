@@ -34,7 +34,7 @@ BlSigmoidElement >> bendingPoint: aFloatNumber [
 
 { #category : #initialization }
 BlSigmoidElement >> defaultGeometry [
-	<return: #BlGeometry>
+	<return: #BlElementVectorGeometry>
 
 	^ BlSigmoid new
 ]

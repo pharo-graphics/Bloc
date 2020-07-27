@@ -1,6 +1,6 @@
 Class {
 	#name : #BlSquare,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'length',
 		'origin'

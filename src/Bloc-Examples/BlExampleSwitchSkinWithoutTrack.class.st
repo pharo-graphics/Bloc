@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'thumb'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #accessing }
@@ -20,7 +20,7 @@ BlExampleSwitchSkinWithoutTrack >> initializeSkin [
 	widget layout: BlFrameLayout new.
 	widget padding: (BlInsets all: 3).
 	widget border: (BlBorder builder width: 1; build).
-	widget geometry: (BlRectangle cornerRadius: 8).
+	widget geometry: (BlRoundedRectangleGeometry cornerRadius: 8).
 
 	thumb := self newThumbElement.
 

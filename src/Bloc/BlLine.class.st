@@ -3,7 +3,7 @@ I define a geometry of a straight line
 "
 Class {
 	#name : #BlLine,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'from',
 		'to'

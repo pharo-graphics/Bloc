@@ -8,7 +8,7 @@ See ${class:BlHistogramExamples}$ for more examples
 "
 Class {
 	#name : #BlHistogram,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'values',
 		'orientation'

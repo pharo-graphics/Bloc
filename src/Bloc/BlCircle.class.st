@@ -1,6 +1,6 @@
 Class {
 	#name : #BlCircle,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'radius',
 		'origin'

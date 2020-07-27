@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMultiPolygon,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'polygons'
 	],

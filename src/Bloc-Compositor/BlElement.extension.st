@@ -109,7 +109,7 @@ BlElement >> paintClippedChildrenOn: aCompositorPainter offset: anOffset [
 
 	self clipChildren
 		ifTrue: [ aCompositorPainter
-			pushClip: (self geometry pathOnSpartaCanvas: aCompositorPainter canvas)
+			pushClip: (self geometry pathOnSpartaCanvas: aCompositorPainter canvas of: self)
 			offset: anOffset
 			bounds: self invalidationBounds
 			compositing: self compositingMode

@@ -16,17 +16,17 @@ BlDragView class >> on: aForm [
 BlDragView >> drawOnSpartaCanvas: aCanvas [
 	aCanvas fill
 		paint: self background fill;
-		path: (self geometry pathOnSpartaCanvas: aCanvas);
+		path: (self geometry pathOnSpartaCanvas: aCanvas of: self);
 		draw.
 			
 	aCanvas fill
 		paint: target;
-		path: (self geometry pathOnSpartaCanvas: aCanvas);
+		path: (self geometry pathOnSpartaCanvas: aCanvas of: self);
 		draw.
 
 	aCanvas stroke
 		paint: self border;
-		path: (self geometry pathOnSpartaCanvas: aCanvas);
+		path: (self geometry pathOnSpartaCanvas: aCanvas of: self);
 		width: self border width;
 		draw
 ]

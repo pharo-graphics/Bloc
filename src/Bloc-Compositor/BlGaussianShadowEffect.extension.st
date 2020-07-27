@@ -3,7 +3,7 @@ Extension { #name : #BlGaussianShadowEffect }
 { #category : #'*Bloc-Compositor' }
 BlGaussianShadowEffect >> paintOn: aCompositorPainter offset: anOffset for: anElement thenPaint: aBlock [
 	aCompositorPainter
-		pushShadow: (anElement geometry pathOnSpartaCanvas: aCompositorPainter canvas)
+		pushShadow: (anElement geometry pathOnSpartaCanvas: aCompositorPainter canvas of: anElement)
 		shadowOffset: offset
 		shadowColor: color
 		shadowWidth: width

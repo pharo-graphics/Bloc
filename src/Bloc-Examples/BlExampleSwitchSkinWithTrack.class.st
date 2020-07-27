@@ -6,7 +6,7 @@ Class {
 		'thumb',
 		'cornerRadius'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #accessing }
@@ -36,7 +36,7 @@ BlExampleSwitchSkinWithTrack >> initializeSkin [
 	widget layout: BlFrameLayout new.
 	widget padding: (BlInsets all: 4).
 	widget border: (BlBorder builder width: 1; build).
-	widget geometry: (BlRectangle new).
+	widget geometry: (BlRoundedRectangleGeometry new).
 
 	widget size: 36@14.
 
@@ -86,5 +86,5 @@ BlExampleSwitchSkinWithTrack >> updateColor [
 
 { #category : #updating }
 BlExampleSwitchSkinWithTrack >> updateCornerRadius [
-	widget geometry: (BlRectangle cornerRadius: self cornerRadius)
+	widget geometry: (BlRoundedRectangleGeometry cornerRadius: self cornerRadius)
 ]

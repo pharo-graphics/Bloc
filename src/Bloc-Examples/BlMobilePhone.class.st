@@ -4,7 +4,7 @@ BlMobilePhone open
 Class {
 	#name : #BlMobilePhone,
 	#superclass : #BlElement,
-	#category : 'Bloc-Examples-Showcase-Mobile Phone'
+	#category : #'Bloc-Examples-Showcase-Mobile Phone'
 }
 
 { #category : #dimensions }
@@ -158,7 +158,7 @@ BlMobilePhone class >> pxTopHeight [
 BlMobilePhone >> initialize [
 	super initialize.
 	self border: (BlBorder paint: Color black width: 2).
-	self geometry: (BlRectangle cornerRadius: 20).
+	self geometry: (BlRoundedRectangleGeometry cornerRadius: 20).
 	self size: self class pxBodyWidth @ self class pxBodyHeight.
 	self padding: (BlInsets all: 5).
 	self constraintsDo: [ :c| 

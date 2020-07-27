@@ -32,36 +32,9 @@ BlElement >> drawChildrenOnSpartaCanvas: aCanvas [
 
 	aCanvas clip
 		when: [ self clipChildren ]
-		by: [ self geometry pathOnSpartaCanvas: aCanvas ]
+		by: [ self geometry pathOnSpartaCanvas: aCanvas of: self ]
 		during: [ self children sortedByElevation
 			do: [ :anElement | anElement fullDrawOnSpartaCanvas: aCanvas ] ]
-]
-
-{ #category : #'*Bloc-Sparta' }
-BlElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
-	| aWidth |
-
-	aWidth := (self globalBoundsToLocal: (BlBounds origin: 0@0 extent: 1@1)) width.
-
-	aCanvas stroke
-		path: self geometryBounds;
-		paint: (Color red alpha: 0.5);
-		dashPattern: { aWidth * 6 . aWidth * 6 };
-		width: aWidth;
-		draw.
-
-	aCanvas stroke
-		path: self visualBounds;
-		paint: (Color blue alpha: 0.5);
-		width: aWidth;
-		draw.
-		
-	aCanvas stroke
-		path: self bounds inLocal asRectangle;
-		paint: (Color gray alpha: 0.5);
-		dashPattern: { aWidth * 6 . aWidth * 6 };
-		width: aWidth;
-		draw
 ]
 
 { #category : #'*Bloc-Sparta' }
@@ -95,7 +68,7 @@ BlElement >> drawOnSpartaCanvas: aCanvas [
 		ifFalse: [ ^ self ].
 
 	aCanvas figure
-		path: (self geometry pathOnSpartaCanvas: aCanvas);
+		path: (self geometry pathOnSpartaCanvas: aCanvas of: self);
 		background: self background;
 		backgroundAlpha: self background opacity;
 		border: self border paint;
@@ -134,9 +107,7 @@ BlElement >> fullDrawOnSpartaCanvas: aCanvas [
 				during: [ :aTransformedCanvas |
 					self errorHandler
 						with: self
-						do: [
-							self drawMeWithEffectsOnCanvas: aCanvas.
-							misc debug ifTrue: [ self drawDebugInfoOnSpartaCanvas: aTransformedCanvas ] ]
+						do: [ self drawMeWithEffectsOnCanvas: aCanvas ]
 						failed: [ :anError | self drawError: anError onSpartaCanvas: aCanvas ] ] ]
 ]
 

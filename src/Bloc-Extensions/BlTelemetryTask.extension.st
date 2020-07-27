@@ -38,7 +38,7 @@ BlTelemetryTask >> gtBarElementsWithGlobalWeight: aWeight local: aLocalWeight [
 						do: [ :anEvent |
 							anEvent consumed: true.
 							anEvent currentTarget phlow spawnObject: self ];
-						geometry: (BlRectangle cornerRadius: 3);
+						geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
 						border: (BlBorder paint: Color transparent width: (aWeight max: 0.1));
 						background: (BlLinearGradientPaint vertical stops: {
 							0 -> aBarColor.
@@ -60,7 +60,7 @@ BlTelemetryTask >> gtBarElementsWithGlobalWeight: aWeight local: aLocalWeight [
 				c horizontal matchParent.
 				c vertical exact: 20 ];
 			padding: (BlInsets top: 3 bottom: 3);
-			geometry: (BlRectangle cornerRadius: 3);
+			geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
 			border: (BlBorder paint: Color transparent width: 0.25);
 			background: aBarColor;
 			in: [ :aPane | aWeight > 0.005

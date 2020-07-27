@@ -12,7 +12,7 @@ BlTransformationAnimationExamples >> animationElement [
 	^ BlElement new
 		size: 50@50;
 		background: Color veryLightGray;
-		geometry: (BlRectangle cornerRadius: 5)
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 5)
 ]
 
 { #category : #assertions }
@@ -28,7 +28,7 @@ BlTransformationAnimationExamples >> containerElement [
 	<gtExample>
 	^ BlElement new
 		size: 350@350;
-		geometry: (BlRectangle cornerRadius: 5);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 5);
 		border: ((BlBorder paint: Color gray width: 2)).
 ]
 

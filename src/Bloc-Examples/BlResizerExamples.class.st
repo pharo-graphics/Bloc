@@ -1,7 +1,7 @@
 Class {
 	#name : #BlResizerExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Overlay'
+	#category : #'Bloc-Examples-Overlay'
 }
 
 { #category : #examples }
@@ -49,7 +49,7 @@ BlResizerExamples >> bottomResizerBarInsideContainer [
 
 	aResizer := BlElement new.
 	aResizer background: (Color gray alpha: 0.5).
-	aResizer geometry: (BlRectangle cornerRadius: 2).
+	aResizer geometry: (BlRoundedRectangleGeometry cornerRadius: 2).
 	aResizer constraintsDo: [ :c |
 		c ignoreByLayout.
 		c vertical exact: 4.

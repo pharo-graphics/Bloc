@@ -17,7 +17,7 @@ ${example:BlShapeGeometryExample>>#elementLargeWithRectangleGeometry|previewExpa
 "
 Class {
 	#name : #BlShapeGeometry,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'shapeBuilder',
 		'vectorShape'

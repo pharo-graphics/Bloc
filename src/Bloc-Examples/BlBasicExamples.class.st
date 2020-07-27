@@ -138,7 +138,7 @@ BlBasicExamples >> coloredButton [
 	
 	button := BlElement new
 		background: (Color r: 63 g: 81 b: 181 range: 255);
-		geometry: (BlRectangle cornerRadius: 2);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
 		relocate: 100@100;
 		padding: (BlInsets top: 8 right: 16 bottom: 8 left: 16);
 		layout: BlLinearLayout horizontal;
@@ -328,7 +328,7 @@ BlBasicExamples >> rectangle [
 	<gtExample>
 	
 	^ BlElement new
-		geometry: BlRectangle new;
+		geometry: BlRoundedRectangleGeometry new;
 		size: 200 @ 100;
 		background: Color transparent;
 		effect: (BlBlurBelowEffect radius: 4);
@@ -343,7 +343,7 @@ BlBasicExamples >> rectangleWithImage [
 	^ BlElement new
 		size: 400@200;
 		relocate: 100 @ 100;
-		geometry: (BlRectangle cornerRadius: 10);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
 		background: BlBackgroundExamples new buildBackgroundWithImagesAndColor;
 		yourself
 ]
@@ -355,7 +355,7 @@ BlBasicExamples >> rectangleWithLinearGradient [
 	^ BlElement new
 		size: 300@200;
 		relocate: 100 @ 100;
-		geometry: (BlRectangle cornerRadius: 40);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 40);
 		background: self linearGradient;
 		yourself
 ]
@@ -387,7 +387,7 @@ BlBasicExamples >> roundedRectangle [
 	<gtExample>
 	
 	^ BlElement new
-		geometry: (BlRectangle cornerRadius: 20);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 20);
 		size: 150@80;
 		background: Color yellow;
 		border: (BlBorder paint: Color red width: 7);
@@ -422,7 +422,7 @@ BlBasicExamples >> square [
 	<gtExample>
 
 	^ BlElement new
-		geometry: BlRectangle new;
+		geometry: BlRoundedRectangleGeometry new;
 		size: 80@80;
 		background: Color green;
 		border: (BlBorder paint: Color black width: 2);

@@ -1,6 +1,6 @@
 Class {
 	#name : #BlNormalizedPolygon,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'vertices'
 	],

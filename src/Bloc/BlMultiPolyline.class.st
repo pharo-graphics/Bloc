@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMultiPolyline,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'polylines'
 	],

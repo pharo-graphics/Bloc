@@ -44,33 +44,24 @@ Class {
 	#traits : 'TBlTransformable + TBlEventTarget + TBlDebug',
 	#classTraits : 'TBlTransformable classTrait + TBlEventTarget classTrait + TBlDebug classTrait',
 	#instVars : [
-		'elevation',
-		'geometry',
-		'parent',
-		'boundsCache',
-		'eventDispatcher',
-		'border',
-		'background',
-		'constraints',
-		'layout',
-		'children',
-		'effect',
-		'visibility',
-		'focusability',
 		'space',
-		'misc',
-		'mouseCursor',
-		'opacity',
-		'outskirts',
+		'parent',
+		'children',
 		'bounds',
 		'measuredBounds',
-		'changes',
-		'transformation',
+		'boundsCache',
+		'eventDispatcher',
 		'shouldHandleMouseEvents',
 		'shouldChildrenHandleMouseEvents',
+		'constraints',
+		'layout',
+		'changes',
+		'transformation',
 		'taskQueue',
 		'errorHandler',
-		'needsPaint'
+		'needsPaint',
+		'userData',
+		'visuals'
 	],
 	#category : #'Bloc-Basic'
 }
@@ -444,7 +435,7 @@ BlElement >> background [
 	Background can not be nil"
 	<return: #BlBackground>
 
-	^ background
+	^ visuals background
 ]
 
 { #category : #'api - look' }
@@ -462,7 +453,7 @@ BlElement >> background: aBlBackground [
 	self background = aNewBackground
 		ifTrue: [ ^ self ].
 
-	background := aNewBackground.
+	visuals := visuals background: aNewBackground.
 	self updateBackground.
 	self eventDispatcher dispatchBackgroundChanged.
 	self invalidate
@@ -481,21 +472,21 @@ BlElement >> baselineOffset [
 BlElement >> beInSeparateCompositionLayer [
 	"Make me that I want to be rendered in a separate compositing layer"
 
-	misc compositingMode: BlCompositingSeparateLayerMode uniqueInstance
+	visuals := visuals compositingMode: BlCompositingSeparateLayerMode uniqueInstance
 ]
 
 { #category : #'api - compositing' }
 BlElement >> beInSingleCompositionLayer [
 	"Make me and my children be rendered in a single compositing layer"
 
-	misc compositingMode: BlCompositingSingleLayerMode uniqueInstance
+	visuals := visuals compositingMode: BlCompositingSingleLayerMode uniqueInstance
 ]
 
 { #category : #'api - look' }
 BlElement >> border [
 	<return: #BlBorder>
 
-	^ border
+	^ visuals border
 ]
 
 { #category : #'api - look' }
@@ -507,7 +498,7 @@ BlElement >> border: aBlBorder [
 	self border = aBlBorder
 		ifTrue: [ ^ self ].
 
-	border := aBlBorder.
+	visuals := visuals border: aBlBorder.
 	self geometry releaseStrokedBoundsCache.
 	self eventDispatcher dispatchBorderChanged.
 	self invalidate
@@ -529,7 +520,7 @@ BlElement >> boundsCache [
 BlElement >> boundsInLocal [
 	<return: #Rectangle>
 
-	^ self bounds inLocal asRectangle
+	^ boundsCache boundsInLocal
 ]
 
 { #category : #'geometry bounds' }
@@ -689,7 +680,7 @@ BlElement >> childrenCount [
 	"Return amount of my direct children"
 	<return: #Number>
 
-	^ children size
+	^ self children size
 ]
 
 { #category : #'api - children enumeration' }
@@ -704,12 +695,17 @@ BlElement >> childrenDo: aBlockOrSymbol [
 
 { #category : #'api - look' }
 BlElement >> clipChildren [
-	^ misc clipChildren
+	<return: #Boolean>
+
+	^ visuals clipChildren
 ]
 
 { #category : #'api - look' }
-BlElement >> clipChildren: anObject [
-	misc clipChildren: anObject
+BlElement >> clipChildren: aBoolean [
+	self clipChildren = aBoolean
+		ifTrue: [ ^ self ].
+
+	visuals := visuals clipChildren: aBoolean
 ]
 
 { #category : #'change reporting' }
@@ -729,7 +725,7 @@ BlElement >> commitChanges [
 BlElement >> compositingMode [
 	<return: #BlCompositingMode>
 
-	^ misc compositingMode
+	^ visuals compositingMode
 ]
 
 { #category : #'api - painting' }
@@ -858,15 +854,6 @@ BlElement >> copy [
 	self shouldNotImplement
 ]
 
-{ #category : #accessing }
-BlElement >> debug: aBoolean [
-	"When set to true I will render various debug information
-	on top of the element, default is false"
-	
-	misc debug: aBoolean.
-	self invalidate
-]
-
 { #category : #copying }
 BlElement >> deepCopy [
 	"See method comment of #copy"
@@ -931,7 +918,7 @@ BlElement >> defaultFocusability [
 
 { #category : #initialization }
 BlElement >> defaultGeometry [
-	^ BlRectangle new
+	^ BlRectangleGeometry new
 ]
 
 { #category : #initialization }
@@ -1144,7 +1131,7 @@ BlElement >> effect [
 	effect can not be nil"
 	<return: #BlElementEffect>
 
-	^ effect
+	^ visuals effect
 ]
 
 { #category : #accessing }
@@ -1153,7 +1140,7 @@ BlElement >> effect: anEffect [
 	anEffect must not be nil"
 	<argument: #anEffect satisfies: #notNil>
 
-	effect := anEffect.
+	visuals := visuals effect: anEffect.
 	self invalidate
 ]
 
@@ -1171,12 +1158,12 @@ BlElement >> effectBounds: aSpartaRectangle [
 BlElement >> elevation [
 	<return: #BlElevation>
 
-	^ elevation
+	^ visuals elevation
 ]
 
 { #category : #'api - look' }
 BlElement >> elevation: aBlElevation [
-	elevation := aBlElevation
+	visuals := visuals elevation: aBlElevation
 ]
 
 { #category : #'api - tasks' }
@@ -1281,12 +1268,15 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 BlElement >> focusability [
 	<return: #BlFocusability>
 
-	^ focusability
+	^ visuals focusability
 ]
 
 { #category : #accessing }
 BlElement >> focusability: aFocusability [
-	focusability := aFocusability
+	self focusability = aFocusability
+		ifTrue: [ ^ self ].
+
+	visuals := visuals focusability: aFocusability
 ]
 
 { #category : #'focus accessing' }
@@ -1302,12 +1292,14 @@ BlElement >> focusables: anOrderedCollection along: aBlFocusSearchDirection [
 
 { #category : #accessing }
 BlElement >> focused [
-	^ misc focused
+	<return: #Boolean>
+
+	^ visuals focused
 ]
 
 { #category : #accessing }
 BlElement >> focused: aBoolean [
-	misc focused: aBoolean
+	visuals := visuals focused: aBoolean
 ]
 
 { #category : #'geometry bounds' }
@@ -1354,9 +1346,9 @@ BlElement >> forceLayout [
 BlElement >> geometry [
 	"Return my geometry used to clip/fill/stroke me and to clip my children during rendering.
 	geometry can not be nil."
-	<return: #BlGeometry>
+	<return: #BlElementGeometry>
 
-	^ geometry
+	^ visuals geometry
 ]
 
 { #category : #'api - look' }
@@ -1364,7 +1356,7 @@ BlElement >> geometry: aBlGeometry [
 	
 	"clean the cache of the old geometry"
 	self geometry releaseCache.
-	geometry := aBlGeometry.
+	visuals := visuals geometry: aBlGeometry.
 
 	"clear path cache after updating geometry path"
 	self geometry releaseCache.
@@ -1393,7 +1385,7 @@ BlElement >> geometryBounds: aBounds [
 	I am a part of internal api, use me with caution"
 	<return: #BlBounds>
 
-	^ self geometry geometryBounds: aBounds
+	^ self geometry geometryBounds: aBounds of: self
 ]
 
 { #category : #'geometry bounds' }
@@ -1505,7 +1497,10 @@ BlElement >> globalScale [
 
 { #category : #printing }
 BlElement >> gtDisplayOn: aStream [
-	^ aStream nextPutAll: misc label
+	self userData
+		at: #blocElementLabel
+		ifPresent: [ :aString | aStream nextPutAll: aString ]
+		ifAbsent: [ self printOn: aStream ]
 ]
 
 { #category : #'children testing' }
@@ -1619,6 +1614,8 @@ BlElement >> inUIProcessDo: aBlock [
 BlElement >> initialize [
 	super initialize.
 
+	visuals := BlEmptyVisuals uniqueInstance.
+
 	boundsCache := BlBoundsCache on: self.
 	bounds := BlElementLocalBounds new referenceElement: self.
 	measuredBounds := BlElementLocalBounds new referenceElement: self.
@@ -1629,28 +1626,15 @@ BlElement >> initialize [
 	self resetChildrenArray.
 
 	transformation := self defaultTransformation owner: self.
-	geometry := self defaultGeometry.
-	"we have to tell geometry to adapt to the element now, otherwise its size will not be updated"
-	geometry matchElement: self.
-	
-	outskirts := self defaultOutskirts.
-	border := self defaultBorder.
-	background := self defaultBackground asBlBackground.
-	background matchExtent: self extent.
-	
+
 	layout := self defaultLayout.
-	elevation := self defaultElevation.
-	focusability := self defaultFocusability.
-	visibility := self defaultVisibility.
-	effect := BlNullEffect new.
 
 	shouldHandleMouseEvents := true.
 	shouldChildrenHandleMouseEvents := true.
 
-	misc := BlMiscProperties new.
-	misc label: self className.
-	opacity := 1.0.
-	
+	"initialized lazily"
+	userData := nil.
+
 	taskQueue := BlTaskQueue new.
 	errorHandler := self defaultErrorHandler.
 	
@@ -1752,9 +1736,6 @@ BlElement >> invalidationBounds: aBounds [
 	| anInvalidationBounds |
 
 	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
-	
-	"in order to support debug drawing"
-	misc debug ifTrue: [ anInvalidationBounds expandBy: 1 ].
 
 	self clipChildren ifFalse: [ 
 		| aChildBounds |
@@ -1874,7 +1855,7 @@ BlElement >> isVisibleInSpace [
 
 { #category : #accessing }
 BlElement >> labeled: aString [
-	misc label: aString
+	self userData at: #blocElementLabel put: aString asString
 ]
 
 { #category : #'api - layout' }
@@ -2344,12 +2325,12 @@ BlElement >> minWidth: aNumber [
 
 { #category : #accessing }
 BlElement >> mouseCursor [
-	^ mouseCursor 
+	^ visuals mouseCursor 
 ]
 
 { #category : #accessing }
 BlElement >> mouseCursor: aCursor [
-	mouseCursor := aCursor
+	visuals := visuals mouseCursor: aCursor
 ]
 
 { #category : #'api - painting' }
@@ -2567,7 +2548,7 @@ BlElement >> opacity [
 	@see BlElement>>#opacity: for more information"
 	<return: #Number>
 
-	^ opacity
+	^ visuals opacity
 ]
 
 { #category : #accessing }
@@ -2584,19 +2565,22 @@ BlElement >> opacity: aNumber [
 	so if aNumber is -1 opacity will be 0 and the same way if opacity
 	is requested to be 2 it will infact become 1.
 	aNumber must not be nil"
+	| aNewOpacity |
 
 	self
 		assert: [ aNumber isNotNil ]
 		description: [ 'Opacity can not be nil' ].
 
-	opacity := (aNumber asFloat max: 0.0) min: 1.0.
+	aNewOpacity := (aNumber asFloat max: 0.0) min: 1.0.
 	
 	"If opacity is very close to zero, element actually should be completely
 	transparent, and the other way around, if opacity is almost 1
 	we can treat element as completely opaque.
 	Implementation detail: #reduce has too high precision for our needs"
-	(opacity closeTo: 0.0 epsilon: 0.001) ifTrue: [ opacity := 0.0 ].
-	(opacity closeTo: 1.0 epsilon: 0.001) ifTrue: [ opacity := 1.0 ].
+	(aNewOpacity closeTo: 0.0 epsilon: 0.001) ifTrue: [ aNewOpacity := 0.0 ].
+	(aNewOpacity closeTo: 1.0 epsilon: 0.001) ifTrue: [ aNewOpacity := 1.0 ].
+	
+	visuals := visuals opacity: aNewOpacity.
 
 	self invalidate
 ]
@@ -2610,7 +2594,7 @@ BlElement >> outsets [
 BlElement >> outskirts [
 	<return: #BlOutskirts>
 
-	^ outskirts
+	^ visuals outskirts
 ]
 
 { #category : #accessing }
@@ -2622,7 +2606,7 @@ BlElement >> outskirts: aBlOutskirts [
 	aBlOutskirts = self outskirts
 		ifTrue: [ ^ self ].
 
-	outskirts := aBlOutskirts.
+	visuals := visuals outskirts: aBlOutskirts.
 	self geometry releaseStrokedBoundsCache.
 	self invalidate
 ]
@@ -2809,8 +2793,14 @@ BlElement >> previousSiblingSuchThat: aSelectionBlock do: aBlock [
 
 { #category : #printing }
 BlElement >> printOn: aStream [
+	| aLabel |
+
+	aLabel := self userData
+		at: #blocElementLabel
+		ifAbsent: [ self class name ].
+
 	aStream
-		nextPutAll: misc label;
+		nextPutAll: aLabel;
 		nextPutAll: ' @ ';
 		store: self identityHash
 ]
@@ -3440,19 +3430,14 @@ BlElement >> userData [
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 	<return: #Dictionary>
 
-	^ misc userData
-]
-
-{ #category : #accessing }
-BlElement >> userData: aDictionary [
-	misc userData: aDictionary
+	^ userData ifNil: [ userData := IdentityDictionary new ]
 ]
 
 { #category : #accessing }
 BlElement >> visibility [
 	<return: #BlVisibility>
 
-	^ visibility
+	^ visuals visibility
 ]
 
 { #category : #accessing }
@@ -3466,10 +3451,10 @@ BlElement >> visibility: aVisibility [
 	"hidden and visible types of visibility do not remove
 	an element from the layout process, therefore we should only request
 	layout if visibility changes from or to gone"
-	shouldRequestLayout := visibility = BlVisibility gone
+	shouldRequestLayout := self visibility = BlVisibility gone
 		or: [ aVisibility = BlVisibility gone ].
 
-	visibility := aVisibility.
+	visuals := visuals visibility: aVisibility.
 
 	shouldRequestLayout
 		ifTrue: [ self requestLayout ].

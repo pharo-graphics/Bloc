@@ -11,7 +11,7 @@ BlPolygon vertices: {
 "
 Class {
 	#name : #BlPolygon,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'vertices'
 	],

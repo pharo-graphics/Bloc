@@ -157,7 +157,7 @@ BlDevKeyboard >> keyboardWidth [
 BlDevKeyboard >> newButton: anExtent [
 	^ BlElement new
 		size: anExtent;
-		geometry: (BlRectangle cornerRadius: 4);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 		border: (BlBorder paint: (Color gray alpha: 0.2) width: 1);
 		layout: (BlFrameLayout new);
 		effect: (BlGaussianShadowEffect color: (Color black alpha: 0.1) width: 2 offset: 0@1);

@@ -16,7 +16,7 @@ BlCompositionPainterExamples >> elementWantingLayerWithTranslationTransform [
 		constraintsDo: [ :c |
 			c horizontal exact: 300.
 			c vertical exact: 300 ];
-		geometry: (BlRectangle cornerRadius: 4);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 		border: (BlBorder paint: Color veryLightGray width: 1).
 
 	aChildA := BlExampleElementThatWantsCompositionLayer new
@@ -182,7 +182,7 @@ BlCompositionPainterExamples >> elementsWantingLayerInsideScalable [
 		constraintsDo: [ :c |
 			c horizontal exact: 300.
 			c vertical fitContent ];
-		geometry: (BlRectangle cornerRadius: 4);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 		border: (BlBorder paint: Color veryLightGray width: 1).
 		
 	aTitle := BlTextElement new

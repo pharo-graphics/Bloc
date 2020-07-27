@@ -32,7 +32,7 @@ BlDrawingErrorHandler >> processError: aHandledError [
 		addChild: (BlTextElement new
 			padding: (BlInsets all: 5);
 			text: 'Debug draw error' asRopedText;
-			geometry: (BlRectangle cornerRadius: 3);
+			geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
 			border: (BlBorder paint: Color gray width: 1);
 			background: Color white;
 			when: BlClickEvent do: [ :anEvent |

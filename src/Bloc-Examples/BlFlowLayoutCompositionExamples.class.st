@@ -83,7 +83,7 @@ BlFlowLayoutCompositionExamples class >> exampleText [
 			aBreak := false ] ].
 
 	floatA := BlElement new
-		geometry: (BlRectangle cornerRadius: 5);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 5);
 		constraintsDo: [ :c | 
 			c flow float.
 			c horizontal exact: 63.

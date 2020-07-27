@@ -1,6 +1,6 @@
 Class {
 	#name : #BlCircleSector,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'startAngle',
 		'endAngle'

@@ -12,7 +12,7 @@ Class {
 		'majorRadius',
 		'minorRadius'
 	],
-	#category : 'Bloc-Geometry-Ellipse'
+	#category : #'Bloc-Geometry-Ellipse'
 }
 
 { #category : #'instance creation' }
@@ -50,13 +50,11 @@ BlEllipseElement >> defaultCenterAnchor [
 ]
 
 { #category : #initialization }
-BlEllipseElement >> defaultGeometry [
-	^ BlEllipse new
-]
-
-{ #category : #initialization }
 BlEllipseElement >> initialize [
 	super initialize.
+	
+	visuals := BlConcreteVisuals new
+		geometry: BlEllipse new.
 	
 	centerAnchor := self defaultCenterAnchor.
 	majorRadius := 75.

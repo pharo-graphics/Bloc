@@ -35,7 +35,7 @@ BlOpacityExamples >> colorfulElement [
 	anElement size: 100@75.
 	anElement background: ((BlLinearGradientPaint direction: 1@1) from: Color red to: Color blue).
 	anElement border: (BlBorder paint: ((BlLinearGradientPaint direction: 1@1) matchExtent: 100@75; from: Color blue to: Color red) width: 5).
-	anElement geometry: (BlRectangle cornerRadius: 20).
+	anElement geometry: (BlRoundedRectangleGeometry cornerRadius: 20).
 
 	^ anElement
 ]

@@ -1,7 +1,7 @@
-Extension { #name : #BlRectangle }
+Extension { #name : #BlRoundedRectangleGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlRectangle >> buildPathOnSpartaCanvas: aCanvas [
+BlRoundedRectangleGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	<return: #TSpartaPath>
 
 	^ cornerRadii max isZero

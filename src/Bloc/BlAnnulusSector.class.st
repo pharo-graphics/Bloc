@@ -9,7 +9,7 @@ See ${class:BlAnnulusSectorExamples}$ to learn more
 "
 Class {
 	#name : #BlAnnulusSector,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'startAngle',
 		'endAngle',

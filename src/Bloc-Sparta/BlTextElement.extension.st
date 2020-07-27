@@ -11,7 +11,7 @@ BlTextElement >> drawOnSpartaCanvas: aCanvas [
 	paragraph selection: self selection.
 
 	aCanvas clip
-		by: (self geometry pathOnSpartaCanvas: aCanvas)
+		by: (self geometry pathOnSpartaCanvas: aCanvas of: self)
 		during: [
 			paragraph
 				drawHighlightsOnSpartaCanvas: aCanvas

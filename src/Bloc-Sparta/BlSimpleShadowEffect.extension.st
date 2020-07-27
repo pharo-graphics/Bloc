@@ -5,7 +5,7 @@ BlSimpleShadowEffect >> applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement 
 	| anExtraShadowSpace aShadowPath |
 
 	anExtraShadowSpace := self extraShadowSpace.
-	aShadowPath := anElement geometry pathOnSpartaCanvas: aSpartaCanvas.
+	aShadowPath := anElement geometry pathOnSpartaCanvas: aSpartaCanvas of: anElement.
 
 	aSpartaCanvas transform
 		by: [ :t | t translateBy: anExtraShadowSpace + self offset ]

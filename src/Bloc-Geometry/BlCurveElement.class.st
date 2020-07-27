@@ -42,7 +42,7 @@ BlCurveElement >> defaultFromAnchor [
 
 { #category : #initialization }
 BlCurveElement >> defaultGeometry [
-	<return: #BlGeometry>
+	<return: #BlElementVectorGeometry>
 
 	^ self subclassResponsibility
 ]
@@ -85,33 +85,6 @@ BlCurveElement >> drawChildrenOnSpartaCanvas: aCanvas [
 ]
 
 { #category : #drawing }
-BlCurveElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
-	| aFont |
-
-	super drawDebugInfoOnSpartaCanvas: aCanvas.
-	
-	aFont := aCanvas font
-		size: 9;
-		build.
-	
-	self decoratedAnchorPositions withIndexDo: [ :aPoint :anIndex |
-		| anAnchorPosition |
-		anAnchorPosition := self parentPointToLocal: aPoint.
-		aCanvas stroke
-			path: (aCanvas shape circleAt: anAnchorPosition radius: 10);
-			width: 1;
-			paint: Color gray;
-			draw.
-		
-		aCanvas text
-			string: anIndex asString;
-			font: aFont;
-			baseline: anAnchorPosition;
-			draw.
-		 ]
-]
-
-{ #category : #drawing }
 BlCurveElement >> drawOnSpartaCanvas: aCanvas [
 
 	aCanvas layer
@@ -122,7 +95,7 @@ BlCurveElement >> drawOnSpartaCanvas: aCanvas [
 			aCanvas stroke
 				alpha: self border opacity;
 				paint: aBorder paint;
-				path: (self geometry pathOnSpartaCanvas: aCanvas);
+				path: (self geometry pathOnSpartaCanvas: aCanvas of: self);
 				width: aBorder width;
 				in: [ :aPainter | aBorder style applyOn: aPainter ];
 				draw.
@@ -230,6 +203,10 @@ BlCurveElement >> hasToHead [
 { #category : #initialization }
 BlCurveElement >> initialize [
 	super initialize.
+	
+	visuals := BlConcreteVisuals new
+		geometry: self defaultGeometry;
+		outskirts: self defaultOutskirts.
 	
 	fromAnchor := self defaultFromAnchor.
 	toAnchor := self defaultToAnchor.

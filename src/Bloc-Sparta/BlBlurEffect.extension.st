@@ -11,7 +11,7 @@ BlBlurEffect >> applyOnSpartaCanvas: aSpartaCanvas for: anElement [
 		ifFalse: [ 1 ].
 	
 	aSpartaCanvas clip
-		by: (anElement geometry pathOnSpartaCanvas: aSpartaCanvas)
+		by: (anElement geometry pathOnSpartaCanvas: aSpartaCanvas of: anElement)
 		during: [
 			aSpartaCanvas transform
 				by: [ :t | t scaleBy: 1.0 / aWindowScale ]

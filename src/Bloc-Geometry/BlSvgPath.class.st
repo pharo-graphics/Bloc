@@ -12,7 +12,7 @@ Instance creation examples:
 "
 Class {
 	#name : #BlSvgPath,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'position',
 		'segments',

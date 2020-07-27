@@ -122,7 +122,7 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> layoutLabel: aString [
 BlFitContentVerticallyInHorizontalLayoutsExamples >> leftResizer: anElement [
 	^ BlElement new
 		background: (Color gray alpha: 0.4);
-		geometry: (BlRectangle cornerRadius: 3);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
 		width: 6;
 		constraintsDo: [ :c |
 			c vertical matchParent.
