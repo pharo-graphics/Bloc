@@ -464,7 +464,7 @@ BlTextElement >> text: aTextModel [
 		
 	self
 		assert: [ aTextModel isKindOf: BlText ]
-		description: [ 'A text model must be an instance if Text' ].
+		description: [ 'A text model must be an instance of Text' ].
 		
 	text = aTextModel
 		ifTrue: [ ^ self ].
