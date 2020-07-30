@@ -48,7 +48,8 @@ BlArrowheadElement >> handleWidthChanged: aWidth [
 { #category : #initialization }
 BlArrowheadElement >> initialize [
 	super initialize.
-	
+	visuals := BlCustomVisuals new
+		outskirts: self defaultOutskirts.
 	borderListener := BlEventHandler
 		on: BlElementBorderChangedEvent
 		do: [ :anEvent | self handleWidthChanged: anEvent currentTarget border width ]
