@@ -38,10 +38,6 @@ BlRope class >> combineLength [
 BlRope class >> concatenate: aLeftRope and: aRightRope [
 	| totalSize |
 	
-	self
-		assert: [ (aLeftRope isEmpty and: [ aRightRope isEmpty  ]) not ]
-		description: [ 'Can not concatenate two empty ropes' ].
-	
 	aLeftRope isEmpty
 		ifTrue: [ ^ aRightRope ].
 
