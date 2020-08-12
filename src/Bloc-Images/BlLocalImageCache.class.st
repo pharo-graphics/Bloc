@@ -130,7 +130,7 @@ BlLocalImageCache >> cacheFileFor: aFileReference size: cacheSize [
 	cacheFile := fileRoot.
 	aFileReference path segments do: 
 		[ :each | cacheFile := cacheFile / each ].
-	cacheFile := cacheFile / (cacheSize printString, '.jpg').
+	cacheFile := cacheFile / (cacheSize printString, '.png').
 	^cacheFile
 ]
 
@@ -142,7 +142,7 @@ BlLocalImageCache >> cacheFileForUrl: znUrl size: cacheSize [
 	hash := (SHA256 new hashStream: znUrl asString readStream) hex.
 	fileReference := networkRoot / hash / (cacheSize
 		ifNil: [ 'original.image' ]
-		ifNotNil: [ cacheSize asString, '.jpg' ]).
+		ifNotNil: [ cacheSize asString, '.png' ]).
 	^fileReference
 ]
 
@@ -386,9 +386,14 @@ BlLocalImageCache >> url: aUrl size: minImageSize for: anObject [
 	fileReference exists ifFalse:
 		"Workaround for ZnEasy not being completely general
 		(it doesn't handle #file scheme)"
-		[ content := znUrl scheme = #file
-				ifFalse: [ (ZnEasy get: znUrl) entity bytes ]
-				ifTrue: [ znUrl asFileReference gtBinaryContents ].
+		[ content := znUrl scheme = #file ifTrue: 
+			[ znUrl asFileReference gtBinaryContents ]
+		ifFalse: 
+			[ | entity |
+			 entity := (ZnEasy get: znUrl) entity.
+			entity isByteArrayEntity
+				ifTrue: [ entity bytes ]
+				ifFalse: [ self error: 'Not an image' ] ].
 		self ensureCreateDirectory: fileReference parent.
 		fileReference binaryWriteStreamDo: [ :stream |
 			stream nextPutAll: content ].
@@ -406,7 +411,7 @@ BlLocalImageCache >> url: aUrl size: minImageSize for: anObject [
 	"Answer the form scaled to cacheSize"
 	image := image scalex: cacheSize y: cacheSize keepAspectRatio: true quality: SkiaFilterQuality High.
 	self ensureCreateDirectory: cacheFile parent.
-	image saveFile: cacheFile asAbsolute pathString format: SkiaEncodedImageFormat JPEG quality: 80.
+	image saveFile: cacheFile asAbsolute pathString format: SkiaEncodedImageFormat PNG quality: 80.
 	housekeeper add: cacheFile.
 	misses := misses + 1.
 	^self set: anObject image: image size: cacheSize isOriginal: false.
