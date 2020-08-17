@@ -44,7 +44,7 @@ Class {
 	#traits : 'TBlTransformable + TBlEventTarget + TBlDebug',
 	#classTraits : 'TBlTransformable classTrait + TBlEventTarget classTrait + TBlDebug classTrait',
 	#instVars : [
-		'space',
+		'spaceReference',
 		'parent',
 		'children',
 		'bounds',
@@ -426,7 +426,20 @@ BlElement >> attachChild: anElement at: anIndex [
 	self assert: anIndex <= (self children size + 1).
 
 	anElement parent: self.
+	
+	anElement withAllChildrenBreadthFirstDo: [ :eachElement |
+		eachElement isDetachedFromSceneGraph
+			ifTrue: [ eachElement attachSpace ]
+			ifFalse: [
+				eachElement isRemovedFromSceneGraph
+					ifTrue: [ eachElement onAddedToSceneGraph ] ] ].
+
 	self children add: anElement at: anIndex
+]
+
+{ #category : #'api - space' }
+BlElement >> attachSpace [
+	spaceReference := BlAttachedSpaceReference uniqueInstance
 ]
 
 { #category : #'api - look' }
@@ -968,6 +981,7 @@ BlElement >> detachChild: anElement [
 	self assert: anElement parent == self.
 
 	anElement parent: nil.
+	anElement withAllChildrenBreadthFirstDo: [ :eachElement | eachElement detachSpace ].
 	self children remove: anElement
 ]
 
@@ -998,6 +1012,11 @@ BlElement >> detachFromParentWhile: aBlock [
 			[ aBlock value ] ensure: [ aParentElement attachChild: self at: aChildIndex ] ]
 ]
 
+{ #category : #'api - space' }
+BlElement >> detachSpace [
+	spaceReference := BlDetachedSpaceReference uniqueInstance
+]
+
 { #category : #'children dispatching' }
 BlElement >> dispatchAddedToParent [
 	"Sent after I was added to another element as direct child.
@@ -1014,7 +1033,6 @@ BlElement >> dispatchAddedToSceneGraph [
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
 	self onAddedToSceneGraph.
-	self eventDispatcher dispatchAddedToSceneGraph.
 	self childrenDo: [ :anElement | anElement dispatchAddedToSceneGraph ]
 ]
 
@@ -1613,7 +1631,8 @@ BlElement >> inUIProcessDo: aBlock [
 { #category : #initialization }
 BlElement >> initialize [
 	super initialize.
-
+	
+	spaceReference := BlNullSpaceReference uniqueInstance.
 	visuals := BlDefaultVisuals uniqueInstance.
 
 	boundsCache := BlBoundsCache on: self.
@@ -1748,16 +1767,21 @@ BlElement >> invalidationBounds: aBounds [
 	^ anInvalidationBounds
 ]
 
-{ #category : #'children testing' }
+{ #category : #'api - space' }
 BlElement >> isAttachedToSceneGraph [
 	"Return true if I am inside of a scene graph, e.g. I have a space's root element
 	as my top-most parent, false otherwise"
 	<return: #Boolean>
 
-	"To support temporary detachment/attachment which sets parent to nil but
-	preserves reference to space we can not recursively go up in parent's hierarchy
-	and have to check space reference existence instead"
-	^ self space isNotNil
+	^ spaceReference isAttachedToSceneGraph
+]
+
+{ #category : #'api - space' }
+BlElement >> isDetachedFromSceneGraph [
+	"Return true if I am detached from the scene graph"
+	<return: #Boolean>
+
+	^ spaceReference isDetachedFromSceneGraph
 ]
 
 { #category : #'focus testing' }
@@ -1804,6 +1828,14 @@ BlElement >> isOpaque [
 	<return: #Boolean>
 
 	^ self opacity = 1.0
+]
+
+{ #category : #'api - space' }
+BlElement >> isRemovedFromSceneGraph [
+	"Return true if I am not in the scene graph"
+	<return: #Boolean>
+
+	^ spaceReference isNull
 ]
 
 { #category : #testing }
@@ -2414,11 +2446,15 @@ BlElement >> onAddedToSceneGraph [
 	"Sent after one of my parents or I was added to scene graph, e.g. root element.
 	At this point #isAttachedToSceneGraph results in true.
 	Note: Always send onAddedToSceneGraph to super class if you override me!"
-	
+
+	self isAttachedToSceneGraph
+		ifFalse: [ self attachSpace ].
+
 	self isFocused
 		ifTrue: [ self requestFocus ].
-		
-	self space enqueueTasksFrom: self taskQueue
+
+	self space enqueueTasksFrom: self taskQueue.
+	self eventDispatcher dispatchAddedToSceneGraph
 ]
 
 { #category : #'hooks - children' }
@@ -2523,7 +2559,7 @@ BlElement >> onRemovedFromSceneGraph [
 	At this point #isAttachedToSceneGraph results in false.
 	Note: Always send onRemovedFromSceneGraph to super class if you override me!"
 
-	space := nil.
+	spaceReference := BlNullSpaceReference uniqueInstance.
 	self detachCompositionLayer.
 	self layout onCleanUp: self
 ]
@@ -3281,24 +3317,30 @@ BlElement >> size: aPoint [
 BlElement >> space [
 	"Return space to which I belong. Direct reference boosts performance.
 	Each element has a reference to the current space which is set at demand."
-	<return: #BlSpace>
+	<return: #BlSpace or: nil>
 	
-	space
-		ifNotNil: [ ^ space ].
+	spaceReference spaceDo: [ :aSpace | ^ aSpace ].
 	
-	self parent ifNotNil: [ :eachParent | space := eachParent space ].
+	spaceReference isAttachedToSceneGraph
+		ifFalse: [ ^ nil ].
 	
-	^ space
+	self parent ifNotNil: [ :eachParent |
+		eachParent space ifNotNil: [ :aSpace |
+			spaceReference := aSpace asReference ] ].
+	
+	spaceReference spaceDo: [ :aSpace | ^ aSpace ].
+	^ nil
 ]
 
 { #category : #accessing }
 BlElement >> space: aSpace [
-	"Set space to be accessed directly from my multiple methods.
+	"**I am internal Bloc api, do not use me diectly!**
+	Set space to be accessed directly from my multiple methods.
 	Update the space reference for my children.
 	aSpace must not be nil."
 	<argument: #aSpace satisfies: #notNil>
 
-	space := aSpace.
+	spaceReference := aSpace asReference.
 	self childrenDo: [ :each | each space: aSpace ]
 ]
 
@@ -3595,6 +3637,12 @@ BlElement >> withAllChildrenBreadthFirst [
 	^ Array streamContents: [ :aStream |
 		aStream nextPut: self.
 		self allChildrenBreadthFirstDo: [ :eachElement | aStream nextPut: eachElement ] ]
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> withAllChildrenBreadthFirstDo: aBlock [ 
+	aBlock value: self.
+	self allChildrenBreadthFirstDo: aBlock
 ]
 
 { #category : #'api - children enumeration' }

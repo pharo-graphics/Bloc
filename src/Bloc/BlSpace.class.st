@@ -42,7 +42,8 @@ Class {
 		'frame',
 		'gestureProcessor',
 		'elementsNeedingPaint',
-		'telemetry'
+		'telemetry',
+		'reference'
 	],
 	#classVars : [
 		'UniqueIdGenerator'
@@ -314,10 +315,17 @@ BlSpace >> addChild: anElement [
 	self root addChild: anElement
 ]
 
+{ #category : #accessing }
+BlSpace >> asReference [
+	<return: #BlSpaceReference>
+
+	^ reference ifNil: [ reference := BlAttachedCachedSpaceReference forSpace: self ]
+]
+
 { #category : #'change reporting' }
 BlSpace >> beDirtyArea [
 	self
-		invalidRect: (BlBounds origin: 0.0 @ 0.0 extent: self extent)
+		invalidRect: (BlBounds origin: 0.0 @ 0.0 extent: self root extent)
 		from: self root
 ]
 

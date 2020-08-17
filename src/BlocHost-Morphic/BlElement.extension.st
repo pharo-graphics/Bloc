@@ -4,5 +4,7 @@ Extension { #name : #BlElement }
 BlElement >> showNotification: anElement [
 	parent notNil
 		ifTrue: [ parent showNotification: anElement ]
-		ifFalse: [ space showNotification: anElement ]
+		ifFalse: [
+			self isAttachedToSceneGraph
+				ifTrue: [ self space showNotification: anElement ] ]
 ]
