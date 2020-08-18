@@ -1092,9 +1092,13 @@ BlElement >> dispatchChildRemoved: anElement [
 	"Let child dispatch necessary events and hooks"
 	anElement dispatchRemovedFromParent: self.
 	
-	"If an only if I am attached to scene graph we let child know
-	that it is not a part of the scene graph anymore"
-	self isAttachedToSceneGraph
+	"If an only if I am attached to scene graph or I am detached from the scene graph
+	we let child know that it is not a part of the scene graph anymore.
+	
+	We need to also handle the detached case here, as when detaching the 
+	parent element this event is not triggered (this event will not be triggred at 
+	all in case the parent is reattached)."
+	(self isAttachedToSceneGraph or: [self isDetachedFromSceneGraph])
 		ifTrue: [ anElement dispatchRemovedFromSceneGraph ].
 ]
 
