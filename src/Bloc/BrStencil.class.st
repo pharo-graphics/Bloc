@@ -2,7 +2,10 @@
 From the Oxford Dictionary:
 Stencil - a thin sheet of card, plastic, or metal with a pattern or letters cut out of it, used to produce the cut design on the surface below by the application of ink or paint through the holes.
 
-In Brick I play a role of an abstract factory to create predefined objects. The most common use case for a stencil is to produce widgets, hence create visual elements. Stencils are intended to be reusable.
+In Bloc I play a role of an abstract factory to create predefined visual elements. The two scenarios where stencils should be used are:
+
+# When lazy element creation is needed, e.g. a variable number of tabs in a view.
+# When the element being created depends on run time information, e.g. the structure or content of the data to be displayed.
 
 The idea behind a stencil as concept is to help developers reduce the use of block closures used with scripting API. The reason for that is the fact that block closures can not be recompiled while in a debugger, which makes system less debuggable and live programmable.
 
