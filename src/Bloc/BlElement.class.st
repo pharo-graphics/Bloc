@@ -426,15 +426,20 @@ BlElement >> attachChild: anElement at: anIndex [
 	self assert: anIndex <= (self children size + 1).
 
 	anElement parent: self.
+	self children add: anElement at: anIndex.
 	
+	"if it is not attached to the scene graph we do not need to attach children"
+	self isAttachedToSceneGraph
+		ifFalse: [ ^ self ].
+
 	anElement withAllChildrenBreadthFirstDo: [ :eachElement |
 		eachElement isDetachedFromSceneGraph
 			ifTrue: [ eachElement attachSpace ]
 			ifFalse: [
 				eachElement isRemovedFromSceneGraph
-					ifTrue: [ eachElement onAddedToSceneGraph ] ] ].
-
-	self children add: anElement at: anIndex
+					ifTrue: [
+						eachElement attachSpace.
+						eachElement onAddedToSceneGraph ] ] ]
 ]
 
 { #category : #'api - space' }
@@ -981,8 +986,11 @@ BlElement >> detachChild: anElement [
 	self assert: anElement parent == self.
 
 	anElement parent: nil.
-	anElement withAllChildrenBreadthFirstDo: [ :eachElement | eachElement detachSpace ].
-	self children remove: anElement
+	self children remove: anElement.
+
+	anElement withAllChildrenBreadthFirstDo: [ :eachElement |
+		eachElement isAttachedToSceneGraph
+			ifTrue: [ eachElement detachSpace ] ].
 ]
 
 { #category : #'api - painting' }
@@ -1014,6 +1022,10 @@ BlElement >> detachFromParentWhile: aBlock [
 
 { #category : #'api - space' }
 BlElement >> detachSpace [
+	self
+		assert: [ self isAttachedToSceneGraph ]
+		description: [ 'Can not detach space when not attached' ].
+
 	spaceReference := BlDetachedSpaceReference uniqueInstance
 ]
 
@@ -1032,8 +1044,17 @@ BlElement >> dispatchAddedToSceneGraph [
 	"Sent after any of my parents or I was added to scene graph.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
+	self
+		assert: [ self isAttachedToSceneGraph ]
+		description: [ 'I must already be attached to the scene graph' ].
+
 	self onAddedToSceneGraph.
-	self childrenDo: [ :anElement | anElement dispatchAddedToSceneGraph ]
+	self childrenDo: [ :anElement |
+
+		anElement isAttachedToSceneGraph
+			ifFalse: [ anElement attachSpace ].
+		
+		anElement dispatchAddedToSceneGraph ]
 ]
 
 { #category : #'children dispatching' }
@@ -1055,10 +1076,12 @@ BlElement >> dispatchChildAdded: anElement [
 	"Let child dispatch necessary events and hooks"
 	anElement dispatchAddedToParent.
 
-	"If an only if I am attached to scene graph we let child know
+	"If and only if I am attached to scene graph we let child know
 	that it is a part of the scene graph now"
 	self isAttachedToSceneGraph
-		ifTrue: [ anElement dispatchAddedToSceneGraph ].
+		ifTrue: [
+			anElement attachSpace.
+			anElement dispatchAddedToSceneGraph ]
 ]
 
 { #category : #'children dispatching' }
@@ -2447,8 +2470,9 @@ BlElement >> onAddedToSceneGraph [
 	At this point #isAttachedToSceneGraph results in true.
 	Note: Always send onAddedToSceneGraph to super class if you override me!"
 
-	self isAttachedToSceneGraph
-		ifFalse: [ self attachSpace ].
+	self
+		assert: [ self isAttachedToSceneGraph ]
+		description: [ 'I must already be attached to the scene graph' ].
 
 	self isFocused
 		ifTrue: [ self requestFocus ].
