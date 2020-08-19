@@ -1098,8 +1098,8 @@ BlElement >> dispatchChildRemoved: anElement [
 	We need to also handle the detached case here, as when detaching the 
 	parent element this event is not triggered (this event will not be triggred at 
 	all in case the parent is reattached)."
-	(self isAttachedToSceneGraph or: [self isDetachedFromSceneGraph])
-		ifTrue: [ anElement dispatchRemovedFromSceneGraph ].
+	(self isAttachedToSceneGraph or: [ self isDetachedFromSceneGraph ])
+		ifTrue: [ anElement dispatchRemovedFromSceneGraph ]
 ]
 
 { #category : #layout }

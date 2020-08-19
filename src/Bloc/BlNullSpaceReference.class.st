@@ -1,3 +1,7 @@
+"
+! Null space reference
+Null space reference ${class:BlSpaceReference}$ is set when an element is ==removed== from the scene graph.
+"
 Class {
 	#name : #BlNullSpaceReference,
 	#superclass : #BlSpaceReference,

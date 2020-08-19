@@ -1,3 +1,7 @@
+"
+! Attached space reference
+Attached space reference ${class:BlSpaceReference}$ is set when an element is ==attached== to the scene graph.
+"
 Class {
 	#name : #BlAttachedSpaceReference,
 	#superclass : #BlSpaceReference,

@@ -1,3 +1,7 @@
+"
+! Detached space reference
+Detached space reference ${class:BlSpaceReference}$ is set when an element is temporarily ==detached== from the scene graph.
+"
 Class {
 	#name : #BlDetachedSpaceReference,
 	#superclass : #BlSpaceReference,
