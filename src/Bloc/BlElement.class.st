@@ -2,7 +2,7 @@
 ! Welcome to Bloc
 I am the root class of all visual elements in Bloc and can be composed out of other elements that we will refer to as ==children==. 
 !! Visual properties
-Being a root class and a core element I let users to configure a few esential visual properties such as background, border, opacity, size and a few more. In this part we will go through each of them.
+Being a root class and a core element, I let users configure a few essential visual properties such as background, border, opacity, size and a few more. Let's go through each of them.
 !!! Background
 ${class:BlBackground}$describes how an element should be filled, e.g. its background.
 ${class:BlBackgroundExamples}$ gives a detailed insight in the world of bloc backgrounds.
@@ -13,9 +13,9 @@ ${class:BlBorderExamples}$ provides more detailed information about a border.
 Opacity defines how transparent an element is. It does not influence event propagation.
 ${class:BlOpacityExamples}$ shows in details how opacity affects the element.
 !! Composition
-To be in-line with Bloc design we prefer composition over iheritance. Thus it is better to have tiny bloc elements with small and simple api and clear responsibilities that can later be composed into a more sophisticated graphical scene. In this paragraph we will learn the basic composition aspects and corresponding API.
+To be in-line with Bloc design, we prefer composition over inheritance. Thus it is better to have tiny bloc elements - each with a small and simple API and clear responsibilities - that can later be composed into a more sophisticated graphical scene. In this paragraph we will learn the basic composition aspects and corresponding API.
 
-The composition relation between parent and children is 1:N meaning that an element can have at most one parent. Therefore by design it is only possible to add an element to just one element. Trying to add an element that is already a child to some other element results in ${class:BlAlreadyAddedAsChildError}$ 
+The composition relation between parent and children is 1:N meaning that an element can have at most one parent. Therefore by design it is only possible to add an element to just one other element. Trying to add an element that is already a child to some other element results in ${class:BlAlreadyAddedAsChildError}$ 
 
 Bloc elements provide a set of methods to add and remove children.
 !!! Adding children
@@ -31,12 +31,11 @@ parent addChild: child
 
 Users may also choose to add an element as the first child, for that purpose Bloc provides ${method:BlElement>>#addChildFirst:}$.
 !!Geometry and bounds
-Every element is responsible for drawing itself. At the same time, every element has a ${class:BlGeometry}$ that defines the bounds and the clipping.
+Every element is responsible for drawing itself. At the same time, every element has a ${class:BlElementGeometry}$ that defines the bounds and the clipping.
 
 See ${class:BlGeometryVisualAndLayoutBoundsExamples}$ for concrete details.
 !!Tutorial
 You can learn Bloc following a memory game tutorial: ${icebergFile:path=feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar}$.
-
 "
 Class {
 	#name : #BlElement,
