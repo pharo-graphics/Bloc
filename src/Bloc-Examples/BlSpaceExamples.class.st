@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Space'
+	#category : #'Bloc-Examples-Space'
 }
 
 { #category : #'as yet unclassified' }
@@ -94,7 +94,7 @@ BlSpaceExamples >> spaceWithSlownDownTime [
 
 	aSpace := BlSpace new.
 	aSpace time: aTime.
-	
+
 	^ aSpace
 ]
 
