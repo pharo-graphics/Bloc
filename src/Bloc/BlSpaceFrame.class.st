@@ -1,14 +1,14 @@
 "
 ! Frame model
 
-I represent one space frame. There are usually 60 frames per seconds, which means that ideally frame should take less than 16ms to go through all phases.
+I represent one frame in a space. There are usually 60 frames per second, which means that ideally a frame should take less than 16ms to go through all phases.
 
-The frame consists of three important phases
+My phases are:
 - event handling
 - scheduled tasks processing / animation
 - layout
 - rendering
--idle
+- idle
 
 I know my currentPhase which is one of the registered phases.
 

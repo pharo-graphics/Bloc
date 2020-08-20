@@ -1,18 +1,15 @@
 "
-I am the lowest level in Bloc.
-My responsibility is to manage the low-level services such as managing windows, event queue and the drawing synchronization. 
+I am Bloc's lowest level. 
+My responsibility is to manage low-level services such as managing windows, event queue and drawing synchronization. 
 
-My main responsibility is to manage and to keep in sync the opened Spaces.
+My main responsibility is to manage the open ${class:BlSpace|label=spaces}$ and keep them in sync. I use a ${class:BlSpaceManager}$ to keep track of multiple spaces.
 
-I am the interface used to create/delete window.
-To achieve that, i use the notion of Host (see: BlHost).
-
-Users can choose a preferable host. In order to do that a universe must be stopped first.
-Example:
-
+I am the interface used to create/delete windows. To achieve that, I use a ${class:BlHost|label=Host}$, which can be customized and specified by the user (NB. I must be stopped first). For example:
+[[[language=smalltalk
 universe stop.
 universe preferableHost: MyHost new.
 universe start.
+]]]
 "
 Class {
 	#name : #BlUniverse,
