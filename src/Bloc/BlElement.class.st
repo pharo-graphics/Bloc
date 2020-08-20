@@ -31,9 +31,14 @@ parent addChild: child
 
 Users may also choose to add an element as the first child, for that purpose Bloc provides ${method:BlElement>>#addChildFirst:}$.
 !!Geometry and bounds
-Every element is responsible for drawing itself. At the same time, every element has a ${class:BlElementGeometry}$ that defines the bounds and the clipping.
+Every element is responsible for drawing itself. At the same time, every element has a ${class:BlElementGeometry}$ that defines the bounds and the clipping. There are many types of geometry available:
+[[[
+BlElementGeometry allSubclasses
+]]]
 
 See ${class:BlGeometryVisualAndLayoutBoundsExamples}$ for concrete details.
+!!Layout
+There are many built-in ${class:BlLayout}$ strategies available, or you can create your own.
 !!Tutorial
 You can learn Bloc following a memory game tutorial: ${icebergFile:path=feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar}$.
 "
