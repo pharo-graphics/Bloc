@@ -3282,15 +3282,6 @@ BlElement >> scaleY: factor [
 		apply
 ]
 
-{ #category : #'api - layout' }
-BlElement >> setMatchParentConstraints [
-	"Convenience method to set matchParent constraints vertically and horizontally"
-
-	self constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ].
-]
-
 { #category : #'event handling' }
 BlElement >> shouldChildrenHandleMouseEvents [
 	"Return true if my children are allowed to handle mouse events.
