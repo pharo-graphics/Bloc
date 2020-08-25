@@ -105,7 +105,9 @@ BlImageCache >> hits [
 BlImageCache >> imageFor: aFileReference [
 	"Answer the image in the specified file"
 
-	^SkiaImage fromFile: aFileReference asAbsolute pathString.
+	^ [ SkiaImage fromFile: aFileReference asAbsolute pathString ] 
+		on: Error 
+		do: [ SkiaImage fromForm: (ImageReadWriter gtFormFromFileReference: aFileReference) ].
 ]
 
 { #category : #accessing }
