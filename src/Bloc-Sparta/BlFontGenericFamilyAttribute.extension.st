@@ -1,6 +1,6 @@
 Extension { #name : #BlFontGenericFamilyAttribute }
 
 { #category : #'*Bloc-Sparta' }
-BlFontGenericFamilyAttribute >> applyOnSpartaFontBuilder: aFontBuilder with: aSpartaSpan [
+BlFontGenericFamilyAttribute >> applyOnSpartaFontBuilder: aFontBuilder [
 	aFontBuilder perform: family
 ]

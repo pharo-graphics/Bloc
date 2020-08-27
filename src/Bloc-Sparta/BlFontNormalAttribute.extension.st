@@ -1,6 +1,6 @@
 Extension { #name : #BlFontNormalAttribute }
 
 { #category : #'*Bloc-Sparta' }
-BlFontNormalAttribute >> applyOnSpartaFontBuilder: aFontBuilder with: aSpartaSpan [
+BlFontNormalAttribute >> applyOnSpartaFontBuilder: aFontBuilder [
 	aFontBuilder styleNormal
 ]

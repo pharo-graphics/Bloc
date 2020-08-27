@@ -1,6 +1,6 @@
 Extension { #name : #BlTextOrientationAttribute }
 
 { #category : #'*Bloc-Sparta' }
-BlTextOrientationAttribute >> applyOnSpartaTextPainter: aTextPainter with: aSpartaSpan [
+BlTextOrientationAttribute >> applyOnSpartaTextPainter: aTextPainter [
 	"Not supported"
 ]

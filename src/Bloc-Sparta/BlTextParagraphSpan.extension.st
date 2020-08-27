@@ -33,15 +33,12 @@ BlTextParagraphSpan >> applySpartaMetrics: aSpMetrics [
 { #category : #'*Bloc-Sparta' }
 BlTextParagraphSpan >> drawOnSpartaCanvas: aCanvas [
 	| theAttributes aTextPainter |
-
 	theAttributes := self attributes.
-
 	aTextPainter := aCanvas text.
 	theAttributes
-		do: [ :anAttribute |
+		do: [ :anAttribute | 
 			anAttribute drawBelowOnSpartaCanvas: aCanvas with: self.
-			anAttribute applyOnSpartaTextPainter: aTextPainter with: self ].
-
+			anAttribute applyOnSpartaTextPainter: aTextPainter ].
 	aTextPainter
 		text: self textRun;
 		baseline: self baseline;
@@ -49,6 +46,7 @@ BlTextParagraphSpan >> drawOnSpartaCanvas: aCanvas [
 		draw.
 
 	"And finally let attributes to render above the text"
-	theAttributes do: [ :anAttribute |
-		anAttribute drawAboveOnSpartaCanvas: aCanvas with: self ]
+	theAttributes
+		do:
+			[ :anAttribute | anAttribute drawAboveOnSpartaCanvas: aCanvas with: self ]
 ]
