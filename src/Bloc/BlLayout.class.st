@@ -5,35 +5,37 @@ I am the superclass for layouts in Bloc and I define the API that a concrete lay
 I am attached to a bloc element and define the visual structure of that bloc element. Typically this includes the position of child elements within the parent, or the size of the parent element. 
 
 !!Layout constraints
-I support a set of attributes (refered to as constraints in Bloc) which define the visual properties of the layout. A small set of constraints, like padding, margin or minimal and maximum dimensions, are common among all the layouts. Each layout has a dedicated constraint objects, instance of ${class:BlLayoutCommonConstraints}$, that contain these common constraints. Each type of layout can further define its own specific constraints by creating a subclass of ${class:BlLayoutConstraints}$. 
+I support a set of attributes (refered to as constraints in Bloc) which define the visual properties of the layout. A small set of constraints, like padding, margin or minimal and maximum dimensions, are common among all the layouts. Each layout has a dedicated constraint object, an instance of ${class:BlLayoutCommonConstraints}$, that contains these universal constraints. Each type of layout can further define its own specific constraints by creating a subclass of ${class:BlLayoutConstraints}$. 
 
 TODO: constraints API
 
 !!Layout phase in a frame
-Layouting of elements is a phase executed by a space during every frame. 
+Element layout is a phase executed by a space during each frame. 
 
-Every frame, the space goes through several phases (${method:BlSpaceFrame>>#initializePhases}$). Phases are modeled as subclasses of ${class:BlSpaceFramePhase}$ and are executed once per frame. One of them, ${class:BlSpaceFrameLayoutPhase}$, consists in layouting the elements contained in the space. This is done after events and tasks have been executed, but before the drawing phase.
+Every frame, the space goes through several phases (${method:BlSpaceFrame>>#initializePhases}$), which are modeled as subclasses of ${class:BlSpaceFramePhase}$ and are executed once per frame. One of them, ${class:BlSpaceFrameLayoutPhase}$,  lays out the elements contained in the space. This is done after events and tasks have been executed, but before the drawing phase.
 
-Layouting should be executed during a frame when various properties like, width, height or position change in any element contained by the space. However, an important aspect in Bloc, is that when one of these properties changes, layouting is not performed immediately. Instead, a layout request is issued by the element whose property changed using the message ${method:BlElement>>#requestLayout:}$. This has the advantage that if no element request layout, this phase can be skipped. Also it does not matter if layout is requested once or a 1000 times; only one layout phase is performed, improving performance. 
+Layout should happen during a frame whenever various properties like width, height or position change for any element contained by the space. However, an important aspect in Bloc, is that when one of these properties changes, layout is not performed immediately. Instead, a layout request is issued by the element whose property changed via the ${method:BlElement>>#requestLayout:}$ message. This has two advantages that improve performance:
+# If no element requests layout, this phase can be skipped.
+# It does not matter if layout is requested once or 1000 times during a frame; only one layout phase is performed. 
 
-Hence, in Bloc layout is not executed immediately after a property like the width of an element changes. Instead layout is requested and performed, if needed, during every frame. When needing to test layouts, however, it is necessary to apply a layout immediately, instead of waiting for a frame to end. That can be done using the message ${method:BlElement>>#forceLayout}$; this should not be used outside of tests, as it bypasses the normal layouting system from Bloc.
+Hence, layout does not happen immediately after a property like the width of an element changes. Instead, once requested, you only know that layout will happen at some point during every frame. When needing to test layouts, however, it is necessary to apply a layout immediately, instead of waiting for a frame to end. This can be done using the ${method:BlElement>>#forceLayout}$ message, but it should not be used outside of tests, as it bypasses the normal layout system.
 
-In a space where all elements have no event handlers for layout events, elements are going to be layouted exactly once during the layouting phase. However, often elements need to reach and perform actions, when for example their position or extent changes. They can react by requesting another layout. A typical example is dealing with edges. An edge can be layouted only after the position of the elements that it connects to is known. Hence, often the layout needs to be applied twice, or more, during the layouting phase. The space only allows layout requests during the layouting phase a limited number of times (${method:BlSpace>>#computeLayout}$) to avoid blocking rendering due to infinite recursions caused by layout requests, or avoid spending too much time on layouts in a frame. More technical details can be found in the method ${method:BlSpace>>#doLayout}$, the main entry point for executing the layout phase in a space.
+In a space where all elements have no event handlers for layout events, elements are going to be laid out exactly once during the layout phase. However, often elements need to react and perform actions, for example when their position or extent changes. In these cases, they may request another layout. A typical example is dealing with edges. An edge can be laid out only after the position of the elements to which it connects is known. Hence, often the layout needs to be applied twice, or more, during the layout phase. However, spaces only allow a limited number of layout requests during each layout phase to avoid blocking rendering due to infinite recursions caused by layout requests, or avoid spending too much time on layouts in a frame. More technical details can be found in the method ${method:BlSpace>>#doLayout}$, the main entry point for executing the layout phase in a space.
 
 !!Performing a layout
-The space starts the layouting process on the root element of that space. Performing the layout on an element consists of executing three main steps:
-	- measuring bounds: determine the bounds of the element according to its layout;
-	- applying the layout: determine the position of children within the element;
-	- commiting changes: raise layout events like position or extent changed.
+The space starts the layout process on the root element of that space. Performing the layout on an element consists of executing three main steps:
+# Measure bounds: determine the bounds of the element according to its layout;
+# Apply the layout: determine the position of children within the element;
+# commit changes: raise layout events like position or extent changed.
 
 TODO: why three separate steps?
 
 !!!Measuring bounds
 This is the first step when performing a layout of an element and consists in determining the measured bounds of that element. 
 
-Each element can decide how it wants to be measured (${method:BlElement>>#onMeasure:}$). By default ${class:BlElement}$ delegates the measuring to its layout. Layouts should override ${method:BlLayout>>#measure:with:}$ to implement the actual measuring. Normally layouts follow a top to bottom approach: they measure the current element and then ask their children to do the measuring.
+Each element can decide how it wants to be measured (${method:BlElement>>#onMeasure:}$). By default, ${class:BlElement}$ delegates measuring to its layout. Layouts should override ${method:BlLayout>>#measure:with:}$ to implement the actual measuring. Normally, layouts follow a top-to-bottom approach: they measure the current element and then ask their children measure themselves.
 
-Each element has real bounds (${BlElement>>#bounds}$) and measured bounds (${BlElement>>#measuredBounds}$). The real bounds contain the actual position and extent of an element that users of that element should rely on. The measured bounds are used during layouting to hold the new extent of an element. The measuring phase changes only the extent in the measured bounds. After the entire layout phase is completed the real bounds and measured bounds will have the same value. The measured bounds act like a temporary cache for the new bounds of an element. They were introduced to avoid changing the real extent of element while layouting of children is still being performed. 
+Each element has real bounds (${method:BlElement>>#bounds}$) and measured bounds (${method:BlElement>>#measuredBounds}$). The real bounds contain the actual position and extent of an element that users of that element should rely on. The measured bounds are used during layout to hold the new extent of an element. The measuring phase changes only the extent in the measured bounds. After the entire layout phase is completed the real bounds and measured bounds will have the same value. The measured bounds act like a temporary cache for the new bounds of an element. They were introduced to avoid changing the real extent of element while layout of children is still being performed. 
 
 (TODO: explain why position is sometime changed in the measured bounds)
 
@@ -58,7 +60,14 @@ TODO
 TODO
 
 !!Layout API
-I define an api of a layout. Concrete implementations should focus on measure:with: and layout:in:
+I define an api of a layout. Concrete implementations should focus on ==measure:with:== and ==layout:in:==
+
+!!Available Layouts
+There are many built-in layout strategies available:
+[[[
+BlLayout allSubclasses
+]]]
+
 
 
 

@@ -1,24 +1,13 @@
 "
-I am a Universe space manager.
+I am a  ${class:BlUniverse}$ space manager.
 
-I contain Bloc spaces, can add or remove them. I am also responsible for sending pulses(tick) messages to spaces I know.
+I contain Bloc ${class:BlSpace|label=spaces}$ which can be added or removed. I am also responsible for sending pulses (tick) messages to my ${class:BlSpace|label=spaces}$.
 
-I am used by Universe in order to provide support of multiple spaces within the Universe.
-
-- addSpace: add a space
-- removeSpace: remove a given space
-- clear close all spaces
-- pulse send pulse message to all spaces
-
-   One simple example is simply gorgeous.
- 
-Internal Representation and Key Implementation Points.
-
-    Instance Variables
-	spaces:		<Object>
-
-
-    Implementation Points
+I am used by ${class:BlUniverse}$ so that it can support multiple ${class:BlSpace|label=spaces}$.
+Here are some of my core operations:
+- ${method:BlSpaceManager>>#addSpace:}$
+- ${method:BlSpaceManager>>#removeSpace:}$
+- ${method:BlSpaceManager>>#pulse}$ - send a pulse message to all spaces
 "
 Class {
 	#name : #BlSpaceManager,
