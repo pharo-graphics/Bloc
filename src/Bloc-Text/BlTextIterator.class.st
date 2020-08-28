@@ -94,7 +94,7 @@ BlTextIterator >> nextAttributeStartAndEnd: aBlTextAttribute indicesDo: anIndice
 		aCurrentPosition := self position + 1.
 
 		aSpan := self nextSpan.
-		hasAttribute := aSpan attributes includes: aBlTextAttribute.
+		hasAttribute := aSpan attributes anySatisfy: [ :eachAttribute | eachAttribute == aBlTextAttribute ] .
 		
 		"we found the start of the attribute"
 		(hasAttribute and: [ isAttributeStartFound not ])
