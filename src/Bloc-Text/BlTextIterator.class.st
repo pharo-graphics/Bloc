@@ -75,6 +75,55 @@ BlTextIterator >> next [
 ]
 
 { #category : #'iterator - enumeration' }
+BlTextIterator >> nextAttributeStartAndEnd: aBlTextAttribute indicesDo: anIndicesBlock [
+	"Find and iterate over the start and end indices of the given attribute"	
+	| startPosition endPosition isAttributeStartFound isAttributeEndFound |
+
+	self hasNext
+		ifFalse: [ self error: 'reached end of rope' ].
+	
+	startPosition := nil.
+	endPosition := nil.
+	
+	isAttributeStartFound := false.
+	isAttributeEndFound := false.
+
+	[ self hasNext and: [
+		| hasAttribute aSpan aCurrentPosition |
+
+		aCurrentPosition := self position + 1.
+
+		aSpan := self nextSpan.
+		hasAttribute := aSpan attributes includes: aBlTextAttribute.
+		
+		"we found the start of the attribute"
+		(hasAttribute and: [ isAttributeStartFound not ])
+			ifTrue: [
+				startPosition := aCurrentPosition.
+				isAttributeStartFound := true ].
+	
+		"we found the end of the attribute"
+		(hasAttribute not and: [ isAttributeStartFound ])
+			ifTrue: [
+				endPosition := aCurrentPosition - 1.
+				isAttributeEndFound := true ].
+		
+		(isAttributeStartFound and: [ isAttributeEndFound ]) not
+	] ] whileTrue.
+
+	(isAttributeStartFound and: [ isAttributeEndFound not ])
+		ifTrue: [
+			endPosition := self position.
+			isAttributeEndFound := true ].
+	
+	^ (isAttributeStartFound and: [ isAttributeEndFound ])
+		ifTrue: [ 
+			anIndicesBlock
+				value: startPosition
+				value: endPosition ]
+]
+
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 	"Find and iterate over the last indices of the attributes for which aBlock returns true"	
 	| startPosition endPosition theEndedAttributes |

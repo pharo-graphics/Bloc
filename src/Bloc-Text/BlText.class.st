@@ -271,6 +271,13 @@ BlText >> equals: anObject [
 	^ areSame
 ]
 
+{ #category : #'text - attributes' }
+BlText >> findAttribute: aBlTextAttribute indicesDo: aBlock [	
+	^ self iterator
+		nextAttributeStartAndEnd: aBlTextAttribute
+		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
+]
+
 { #category : #'text - enumeration' }
 BlText >> finder [
 	^ BlPositionFinder new text: self

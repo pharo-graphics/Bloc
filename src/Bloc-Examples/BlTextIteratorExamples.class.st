@@ -310,6 +310,164 @@ BlTextIteratorExamples >> attributed_start_next_span_any_at_5 [
 	^ anIterator
 ]
 
+{ #category : #'examples - attribute indices' }
+BlTextIteratorExamples >> findAttribute_beginning [
+	<gtExample>
+	| attribute text interval |
+	attribute := BlTextForegroundAttribute paint: Color red.
+
+	text := 'HelloWorld' asRopedText
+		attributes: { attribute }
+		from: 1 to: 5.
+
+	interval := text
+		findAttribute: attribute
+		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+
+	self assert: interval equals: (1 to: 5).
+	
+	^ text
+]
+
+{ #category : #'examples - attribute indices' }
+BlTextIteratorExamples >> findAttribute_beginning_subtext_equal [
+	<gtExample>
+	| attribute text subText interval |
+	attribute := BlTextForegroundAttribute paint: Color red.
+
+	text := 'HelloWorld' asRopedText
+		attributes: { attribute }
+		from: 1 to: 5.
+		
+	subText := text from: 1 to: 5.
+
+	interval := subText
+		findAttribute: attribute
+		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+
+	self assert: interval equals: (1 to: 5).
+	
+	^ subText
+]
+
+{ #category : #'examples - attribute indices' }
+BlTextIteratorExamples >> findAttribute_beginning_subtext_larger [
+	<gtExample>
+	| attribute text subText interval |
+	attribute := BlTextForegroundAttribute paint: Color red.
+
+	text := 'HelloWorld' asRopedText
+		attributes: { attribute }
+		from: 1 to: 5.
+
+	subText := text from: 1 to: 7.
+
+	interval := subText
+		findAttribute: attribute
+		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+
+	self assert: interval equals: (1 to: 5).
+	
+	^ subText
+]
+
+{ #category : #'examples - attribute indices' }
+BlTextIteratorExamples >> findAttribute_beginning_subtext_shifted [
+	<gtExample>
+	| attribute text subText interval |
+	attribute := BlTextForegroundAttribute paint: Color red.
+
+	text := 'HelloWorld' asRopedText
+		attributes: { attribute }
+		from: 1 to: 5.
+
+	subText := text from: 3 to: 7.
+
+	interval := subText
+		findAttribute: attribute
+		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+
+	self assert: interval equals: (1 to: 3).
+	
+	^ subText
+]
+
+{ #category : #'examples - attribute indices' }
+BlTextIteratorExamples >> findAttribute_beginning_subtext_smaller [
+	<gtExample>
+	| attribute text subText interval |
+	attribute := BlTextForegroundAttribute paint: Color red.
+
+	text := 'HelloWorld' asRopedText
+		attributes: { attribute }
+		from: 1 to: 5.
+		
+	subText := text from: 1 to: 2.
+
+	interval := subText
+		findAttribute: attribute
+		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+
+	self assert: interval equals: (1 to: 2).
+	
+	^ subText
+]
+
+{ #category : #'examples - attribute indices' }
+BlTextIteratorExamples >> findAttribute_end [
+	<gtExample>
+	| attribute text interval |
+	attribute := BlTextForegroundAttribute paint: Color red.
+
+	text := 'HelloWorld' asRopedText
+		attributes: { attribute }
+		from: 6 to: 10.
+
+	interval := text
+		findAttribute: attribute
+		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+
+	self assert: interval equals: (6 to: 10).
+	
+	^ text
+]
+
+{ #category : #'examples - attribute indices' }
+BlTextIteratorExamples >> findAttribute_middle [
+	<gtExample>
+	| attribute text interval |
+	attribute := BlTextForegroundAttribute paint: Color red.
+
+	text := 'HelloWorld' asRopedText
+		attributes: { attribute }
+		from: 3 to: 7.
+
+	interval := text
+		findAttribute: attribute
+		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+
+	self assert: interval equals: (3 to: 7).
+	
+	^ text
+]
+
+{ #category : #'examples - attribute indices' }
+BlTextIteratorExamples >> findAttribute_none [
+	<gtExample>
+	| attribute text interval |
+	attribute := BlTextForegroundAttribute paint: Color red.
+
+	text := 'HelloWorld' asRopedText.
+
+	interval := text
+		findAttribute: attribute
+		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+
+	self assert: interval isNil.
+	
+	^ text
+]
+
 { #category : #'instance creation' }
 BlTextIteratorExamples >> simple [
 	<gtExample>
