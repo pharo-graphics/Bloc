@@ -4,7 +4,6 @@ Extension { #name : #BlRadialGradientPaint }
 BlRadialGradientPaint >> asSpartaPaintOn: aSpartaCanvas [
 	^ aSpartaCanvas paint radialGradient
 		stops: self stops;
-		outerCenter: self center;
-		outerRadius: self radius;
-		innerCenter: self focalPoint
+		center: self center;
+		radius: self radius
 ]
