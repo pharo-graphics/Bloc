@@ -53,6 +53,22 @@ BlRopeableCollectionFileExamples >> deleteLargeFile [
 ]
 
 { #category : #examples }
+BlRopeableCollectionFileExamples >> emptyFile [
+	<gtExample>
+
+	^ (FileSystem memory root / 'empty.file') ensureCreateFile 
+]
+
+{ #category : #examples }
+BlRopeableCollectionFileExamples >> emptyFileSize [
+	<gtExample>
+	| ropeSize |
+
+	ropeSize := (BlRopeableCollectionFile ropeFor: self emptyFile) size.
+	self assert: ropeSize equals: 0.
+]
+
+{ #category : #examples }
 BlRopeableCollectionFileExamples >> largeFile [
 	<gtExample>
 
