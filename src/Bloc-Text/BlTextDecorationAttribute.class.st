@@ -112,8 +112,8 @@ BlTextDecorationAttribute >> wavy [
 BlTextDecorationAttribute >> width: aNumber [
 	self
 		deprecated: 'Use thickness: instead'
-		transformWith: '`@receiver thickness: `@statements1'
+		transformWith: '`@receiver width: `@statements1'
 				-> '`@receiver thickness: `@statements1'.
-				
+
 	self thickness: aNumber
 ]

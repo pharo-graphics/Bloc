@@ -1,13 +1,13 @@
 "
 ! Underline attribute
 
-The simplest way to apply an underline attribute on a whole text would be to use ${method:TBlTextStyleable>>#underlinePaint:width:}$
+The simplest way to apply an underline attribute on a whole text would be to use ${method:TBlTextStyleable>>#underlineColor:thickness:}$
 ${example:BlTextUnderlineAttributeExamples>>#textWithUnderline_1_to_5|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}$
 
 To add an underline to just a part of text it can be scoped with ${method:BlText>>#from:to:}$
 ${example:BlTextUnderlineAttributeExamples>>#textWithUnderline_3_to_4|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}$
 
-In addition to the simple API an underline attribute can be customized and then applied on a text using ${method:TBlTextStyleable>>#underlineDo:}$ helper method. Users should pass a block that accepts ${class:BlTextUnderlineAttribute}$ as an argument.
+In addition to the simple API an underline attribute can be customized and then applied on a text using ${method:TBlTextStyleable>>#underlineDo:}$ helper method. Users should pass a block that accepts ${class:BlTextDecorationAttribute}$ as an argument.
 ${example:BlTextUnderlineAttributeExamples>>#textWithUnderlineDo|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}$
 "
 Class {
@@ -31,7 +31,7 @@ BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
 	
 	aLine := anAttribute lineOnSpartaCanvas: aCanvas with: aSpan.
 	self assert: aLine from equals: 21@12.
-	self assert: aLine to equals: 49@12.
+	self assert: aLine to equals: 50@12.
 
 	^ aLine
 ]
@@ -46,31 +46,27 @@ BlTextUnderlineAttributeExamples >> text [
 { #category : #accessing }
 BlTextUnderlineAttributeExamples >> textWithUnderlineDo [
 	<gtExample>
-
-	^ self text underlineDo: [ :anUnderline |
-		anUnderline
-			paint: Color red;
-			opacity: 0.5;
-			width: 6;
-			beAbove;
-			lineCap: BlStrokeLineCap round;
-			dashArray: #(10 10) ]
+	^ self text
+		underlineDo: [ :anUnderline | 
+			anUnderline
+				color: Color red;
+				thickness: 6 ]
 ]
 
 { #category : #accessing }
 BlTextUnderlineAttributeExamples >> textWithUnderline_1_to_5 [
 	<gtExample>
-
-	^ self text underlinePaint: (Color red alpha: 0.5) width: 6
+	^ self text underlineColor: (Color red alpha: 0.5) thickness: 6
 ]
 
 { #category : #accessing }
 BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_3 [
 	<gtExample>
 	| aText |
-
 	aText := self text.
-	(aText from: 2 to: 3) underlinePaint: (Color red alpha: 0.5) width: 6.
+	(aText from: 2 to: 3)
+		underlineColor: (Color red alpha: 0.5)
+		thickness: 6.
 	^ aText
 ]
 
@@ -78,9 +74,10 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_3 [
 BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_4 [
 	<gtExample>
 	| aText |
-
 	aText := self text.
-	(aText from: 2 to: 4) underlinePaint: (Color red alpha: 0.5) width: 6.
+	(aText from: 2 to: 4)
+		underlineColor: (Color red alpha: 0.5)
+		thickness: 6.
 	^ aText
 ]
 
@@ -88,9 +85,10 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_4 [
 BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_4 [
 	<gtExample>
 	| aText |
-
 	aText := self text.
-	(aText from: 3 to: 4) underlinePaint: (Color red alpha: 0.5) width: 6.
+	(aText from: 3 to: 4)
+		underlineColor: (Color red alpha: 0.5)
+		thickness: 6.
 	^ aText
 ]
 
@@ -98,9 +96,10 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_4 [
 BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_5 [
 	<gtExample>
 	| aText |
-
 	aText := self text.
-	(aText from: 3 to: 5) underlinePaint: (Color red alpha: 0.5) width: 6.
+	(aText from: 3 to: 5)
+		underlineColor: (Color red alpha: 0.5)
+		thickness: 6.
 	^ aText
 ]
 
@@ -109,19 +108,10 @@ BlTextUnderlineAttributeExamples >> underlineAttribute [
 	<gtExample>
 	| anAttribute |
 
-	anAttribute := BlTextUnderlineAttribute new.
-	self assert: anAttribute isBelow.
-	self assert: anAttribute isAbove not.
+	anAttribute := BlTextDecorationAttribute new underline.
 	
-	self assert: anAttribute opacity equals: 1.
-	self assert: anAttribute width equals: 2.
-	self assert: anAttribute paint color equals: Color black.
-	self assert: anAttribute style equals: (BlStrokeStyle new
-		lineCap: BlStrokeLineCap square;
-		lineJoin: BlStrokeLineJoin round;
-		miterLimit: 10.0;
-		dashArray: #();
-		dashOffset: 5).
+	self assert: anAttribute thickness equals: 1.
+	self assert: anAttribute color equals: Color black.
 
 	^ anAttribute
 ]
