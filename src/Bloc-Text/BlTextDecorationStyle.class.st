@@ -1,6 +1,6 @@
 "
 ! Text decoration style
-Describes the style of the text decoration (like ${class:BlTextDecorationDashedStyle|label=dashed}$, ${class:BlTextDecorationDottedStyle|label=dotted}$, ${class:BlTextDecorationDoubleStyle|label=double}$, ${class:BlTextDecorationSolidStyle|label=solid}$, ${class:BlTextDecorationWavyStyle|label=wavy}$).
+Describes the style of the text ${class:BlTextDecoration|label=decoration}$ (like ${class:BlTextDecorationDashedStyle|label=dashed}$, ${class:BlTextDecorationDottedStyle|label=dotted}$, ${class:BlTextDecorationDoubleStyle|label=double}$, ${class:BlTextDecorationSolidStyle|label=solid}$, ${class:BlTextDecorationWavyStyle|label=wavy}$).
 "
 Class {
 	#name : #BlTextDecorationStyle,

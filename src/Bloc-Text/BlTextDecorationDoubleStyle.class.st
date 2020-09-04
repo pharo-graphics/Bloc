@@ -1,3 +1,7 @@
+"
+!Double style
+${example:BlTextDecorationStyleExamples>>#double|codeExpanded=false|previewExpanded=true|previewShow=#gtPreviewFor:|previewHeight=50}$
+"
 Class {
 	#name : #BlTextDecorationDoubleStyle,
 	#superclass : #BlTextDecorationStyle,

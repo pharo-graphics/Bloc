@@ -1,7 +1,6 @@
 "
 !Dashed style
-
-${example:BlTextDecorationStyleExamples>>#dashed}$
+${example:BlTextDecorationStyleExamples>>#dashed|codeExpanded=false|previewExpanded=true|previewShow=#gtPreviewFor:|previewHeight=50}$
 "
 Class {
 	#name : #BlTextDecorationDashedStyle,
