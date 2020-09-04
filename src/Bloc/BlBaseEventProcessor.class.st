@@ -42,3 +42,12 @@ BlBaseEventProcessor >> space [
 BlBaseEventProcessor >> space: aSpace [
 	space := aSpace
 ]
+
+{ #category : #accessing }
+BlBaseEventProcessor >> telemetry [
+	<return: #BlTelemetry>
+
+	^ self space
+		ifNil: [ BlNullTelemetry uniqueInstance ]
+		ifNotNil: [ :aSpace | aSpace telemetry ]
+]

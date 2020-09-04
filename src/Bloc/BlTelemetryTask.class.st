@@ -6,6 +6,8 @@ Class {
 		'endTime',
 		'realStartTime',
 		'realEndTime',
+		'gcStartTime',
+		'gcEndTime',
 		'name',
 		'tasks'
 	],
@@ -26,7 +28,7 @@ BlTelemetryTask >> childrenOverhead [
 
 { #category : #accessing }
 BlTelemetryTask >> duration [
-	^ self endTime - self startTime - self childrenOverhead
+	^ self endTime - self startTime - self childrenOverhead - (self gcEndTime - self gcStartTime)
 ]
 
 { #category : #printing }
@@ -44,11 +46,31 @@ BlTelemetryTask >> endTime: anObject [
 	endTime := anObject
 ]
 
+{ #category : #accessing }
+BlTelemetryTask >> gcEndTime [
+	^ gcEndTime
+]
+
+{ #category : #accessing }
+BlTelemetryTask >> gcEndTime: anObject [
+	gcEndTime := anObject
+]
+
+{ #category : #accessing }
+BlTelemetryTask >> gcStartTime [
+	^ gcStartTime
+]
+
+{ #category : #accessing }
+BlTelemetryTask >> gcStartTime: anObject [
+	gcStartTime := anObject
+]
+
 { #category : #initialization }
 BlTelemetryTask >> initialize [
 	super initialize.
 	
-	tasks := OrderedCollection new.
+	tasks := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -63,7 +85,7 @@ BlTelemetryTask >> name: anObject [
 
 { #category : #accessing }
 BlTelemetryTask >> overhead [
-	^ (self realEndTime - self realStartTime) - (self endTime - self startTime)
+	^ (self realEndTime - self realStartTime) - (self endTime - self startTime) + (self gcEndTime - self gcStartTime)
 ]
 
 { #category : #printing }
