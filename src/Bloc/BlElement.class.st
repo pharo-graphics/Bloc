@@ -130,20 +130,25 @@ BlElement >> addChild: anElement at: anIndex [
 	anElement parent: self.
 
 	"actually add child"
-	self children add: anElement at: anIndex.
+	self telemetry
+		timeSync: [ 'Add child {1} to {2} at {3}' format: { anElement . self . anIndex } ]
+		during: [ self children add: anElement at: anIndex ].
 
 	"dispatch events/hooks after element has been added"
-	self dispatchChildAdded: anElement.
-
-	"mt managed children changed, request invalidation"
-	self childrenChanged.
-
+	self telemetry
+		timeSync: [ 'Dispatch child added' ]
+		during: [ self dispatchChildAdded: anElement ].
+	
 	"only requesting layout is not enough, because if size or position does not change
 	there will be no invalidated bounds and nothing will be rendered"
-	anElement invalidate.
+	self telemetry
+		timeSync: [ 'Invalidate child after adding it' ]
+		during: [ anElement invalidate ].
 	
 	"We should request layout from newly added element to mark it as dirty too"
-	anElement requestLayout
+	self telemetry
+		timeSync: [ 'Request child layout after adding it' ]
+		during: [ anElement requestLayout ].
 ]
 
 { #category : #'children add/remove' }
@@ -228,8 +233,6 @@ BlElement >> addChildren: aListOfElements [
 	self children addAll: aListOfElements.
 	"send hook after elements have been added"
 	aListOfElements do: [ :anElement | self dispatchChildAdded: anElement ].
-	"finally requesting children changed"
-	self childrenChanged.
 	"We should request layout from newly added elements to mark them as dirty too"
 	aListOfElements do: [ :anElement | anElement requestLayout ]
 ]
@@ -693,10 +696,6 @@ BlElement >> children [
 	^ children
 ]
 
-{ #category : #'children dispatching' }
-BlElement >> childrenChanged [
-]
-
 { #category : #'children accessing' }
 BlElement >> childrenCount [
 	"Return amount of my direct children"
@@ -1040,7 +1039,9 @@ BlElement >> dispatchAddedToParent [
 
 	self onAddedToParent.
 	self eventDispatcher dispatchAddedToParent.
-	self dispatchAddedToSuperParent: self
+	self telemetry
+		timeSync: [ 'Dispatch added to super-parent {1}' format: { self } ]
+		during: [ self dispatchAddedToSuperParent: self ]
 ]
 
 { #category : #'children dispatching' }
@@ -1067,25 +1068,38 @@ BlElement >> dispatchAddedToSuperParent: anElement [
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
 	self onAddedToSuperParent: anElement.
-	self eventDispatcher dispatchAddedToSuperParent: anElement.
 
-	self childrenDo: [ :aChildElement | aChildElement dispatchAddedToSuperParent: anElement ]
+	self telemetry
+		timeSync: [ 'Notify added to super-parent {1}' format: { anElement } ]
+		during: [ self eventDispatcher dispatchAddedToSuperParent: anElement ].
+
+	self telemetry
+		timeSync: [ 'Dispatch to children added to super-parent {1}' format: { anElement } ]
+		during: [ self childrenDo: [ :aChildElement | aChildElement dispatchAddedToSuperParent: anElement ] ]
 ]
 
 { #category : #'children dispatching' }
 BlElement >> dispatchChildAdded: anElement [
 	
 	"First send hook to myself"
-	self onChildAdded: anElement.
-	"Let child dispatch necessary events and hooks"
-	anElement dispatchAddedToParent.
+	self telemetry
+		timeSync: [ 'On child added {1}' format: { anElement } ]
+		during: [ self onChildAdded: anElement ].
 
 	"If and only if I am attached to scene graph we let child know
 	that it is a part of the scene graph now"
 	self isAttachedToSceneGraph
 		ifTrue: [
-			anElement attachSpace.
-			anElement dispatchAddedToSceneGraph ]
+			self telemetry
+				timeSync: [ 'Dispatch added to scene graph {1}' format: { anElement } ]
+				during: [
+					anElement attachSpace.
+					anElement dispatchAddedToSceneGraph ] ].
+
+	"Let child dispatch necessary events and hooks"
+	self telemetry
+		timeSync: [ 'Dispatch added to parent {1}' format: { anElement } ]
+		during: [ anElement dispatchAddedToParent ].
 ]
 
 { #category : #'children dispatching' }
@@ -2907,9 +2921,6 @@ BlElement >> removeChild: anElement [
 	self children remove: anElement.
 	self dispatchChildRemoved: anElement.
 	
-	"child removed"
-	self childrenChanged.
-	
 	"First of all, we have to damage area occupied by removed element"
 	self invalidate.
 
@@ -2942,7 +2953,6 @@ BlElement >> removeChildAt: anIndex [
 
 	self children removeAt: anIndex.
 	self dispatchChildRemoved: anElement.
-	self childrenChanged.
 	
 	"First of all, we have to damage area occupied by removed element"
 	self invalidate.
@@ -2976,8 +2986,6 @@ BlElement >> removeChildren [
 	self resetChildrenArray.
 	"send hook after elements has been removes"
 	oldChildren do: [ :anElement | self dispatchChildRemoved: anElement ].
-	"finally requesting children changed"
-	self childrenChanged.
 	
 	"First of all, we have to damage area occupied by removed element"
 	self invalidate.
@@ -3002,8 +3010,6 @@ BlElement >> removeChildren: aListOfElements [
 		anElement parent: nil ].
 	self children removeAll: aListOfElements.
 	aListOfElements do: [ :anElement | self dispatchChildRemoved: anElement ].
-
-	self childrenChanged.
 	
 	"First of all, we have to damage area occupied by removed element"
 	self invalidate.
