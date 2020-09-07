@@ -80,6 +80,13 @@ BlTaskQueue >> initialize [
 	lock := Monitor new
 ]
 
+{ #category : #'api - accessing' }
+BlTaskQueue >> isEmpty [
+	<return: #Boolean>
+
+	^ lock critical: [ tasks isEmpty ]
+]
+
 { #category : #'api - running' }
 BlTaskQueue >> runOn: aSpace [
 	| theTasks |
