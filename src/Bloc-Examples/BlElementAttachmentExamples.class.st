@@ -152,3 +152,40 @@ BlElementAttachmentExamples >> detachAndRemoveContainer [
 	
 	^ aContainer
 ]
+
+{ #category : #examples }
+BlElementAttachmentExamples >> detachRequestFocusAndAttachChild [
+	<gtExample>
+	| aContainer aChild focusEvents |
+
+	aContainer := self addToSpace.
+	aChild := aContainer children first.
+	
+	focusEvents := OrderedCollection new.
+	aContainer when: BlFocusInEvent do: [ :anEvent | focusEvents add: anEvent currentTarget ].
+	aChild when: BlFocusEvent do: [ :anEvent | focusEvents add: anEvent currentTarget ].
+
+	self assert: aChild isFocused not.
+	aContainer detachChild: aChild.
+
+	aChild requestFocus.
+
+	self assert: aContainer isAttachedToSceneGraph.
+	self assert: aChild isAttachedToSceneGraph not.
+	self assert: aChild isDetachedFromSceneGraph.
+	self assert: aChild space isNil.
+	self assert: aChild parent isNil.
+	self assert: aChild isFocused.
+
+	self assert: focusEvents asArray equals: {  }.
+
+	aContainer attachChild: aChild.
+
+	self assert: aContainer isAttachedToSceneGraph.
+	self assert: aChild isAttachedToSceneGraph.
+	self assert: aChild space focusOwner equals: aChild.
+
+	self assert: focusEvents asArray equals: { aContainer . aChild  }.
+
+	^ aContainer
+]

@@ -451,7 +451,13 @@ BlElement >> attachChild: anElement at: anIndex [
 
 { #category : #'api - space' }
 BlElement >> attachSpace [
-	spaceReference := BlAttachedSpaceReference uniqueInstance
+	spaceReference := BlAttachedSpaceReference uniqueInstance.
+	
+	self isFocused
+		ifTrue: [ self requestFocus ].
+	
+	self taskQueue isEmpty
+		ifFalse: [ self space enqueueTasksFrom: self taskQueue ]
 ]
 
 { #category : #'api - look' }
@@ -2496,10 +2502,6 @@ BlElement >> onAddedToSceneGraph [
 		assert: [ self isAttachedToSceneGraph ]
 		description: [ 'I must already be attached to the scene graph' ].
 
-	self isFocused
-		ifTrue: [ self requestFocus ].
-
-	self space enqueueTasksFrom: self taskQueue.
 	self eventDispatcher dispatchAddedToSceneGraph
 ]
 
