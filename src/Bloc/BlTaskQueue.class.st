@@ -25,17 +25,22 @@ BlTaskQueue >> dequeue: aBlTask [
 ]
 
 { #category : #'api - enqueue' }
-BlTaskQueue >> enqueue: aBlTask [	
+BlTaskQueue >> enqueue: aBlTask [
+	| taskExists |
+
 	self
 		assert: [ aBlTask isNotNil ]
 		description: [ 'Task must not be nil' ].
 
 	lock critical: [
+		taskExists := tasks includes: aBlTask.
+		taskExists ifFalse:
+			[ tasks := tasks copyWith: aBlTask ] ].
+
 		self
-			assert: [ (tasks includes: aBlTask) not ]
+			assert: [ taskExists not ]
 			description: [ 'Task must not exist' ].
-		
-		tasks := tasks copyWith: aBlTask ]
+
 ]
 
 { #category : #'api - enqueue' }
