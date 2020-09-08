@@ -15,6 +15,7 @@ BlCompositeSelection >> gtInspectorSelectionListIn: aComposite [
 ]
 
 { #category : #'*Bloc-Extensions' }
-BlCompositeSelection >> gtTreeFor: aView [		
+BlCompositeSelection >> gtTreeFor: aView [
+	<gtView>		
 	^ selections gtTreeFor: aView
 ]
