@@ -1,3 +1,20 @@
+"
+BlDelayedTask delays its action until after the specified time by being scheduled on every pulse, but simply marking itself for requeue if the appointed time has not yet been reached.
+
+ 
+!!Internal Representation and Key Implementation Points.
+
+!!!Instance Variables
+	delay:		<Object>
+	element:		<Object>
+	isRunning:		<Object>
+	requeue:		<Boolean>
+	startTime:		<Object>
+	time:		<Object>
+
+
+    Implementation Points
+"
 Class {
 	#name : #BlDelayedTask,
 	#superclass : #BlTask,
@@ -6,7 +23,8 @@ Class {
 		'element',
 		'time',
 		'isRunning',
-		'startTime'
+		'startTime',
+		'requeue'
 	],
 	#category : #'Bloc-Space - Tasks'
 }
@@ -61,7 +79,8 @@ BlDelayedTask >> initialize [
 	
 	delay := 500 milliSeconds.
 	time := BlTime real.
-	isRunning := true
+	isRunning := true.
+	requeue := false.
 ]
 
 { #category : #'api - testing' }
@@ -92,14 +111,21 @@ BlDelayedTask >> onRun [
 	"Override me to implement a custom action"
 ]
 
+{ #category : #'private - testing' }
+BlDelayedTask >> requeueTaskAfterExecution [
+	"Answer a boolean indicating whether the receiver should be requeued after execution."
+
+	^ requeue
+]
+
 { #category : #'api - running' }
 BlDelayedTask >> run [
 	self isRunning
 		ifFalse: [ ^ self ].
 	
-	"time didn't come yet for me to run"
-	(self time now < (startTime + self delay))
-		ifTrue: [ ^ self enqueue ].
+	"time didn't come yet for me to run?"
+	(requeue := self time now < (startTime + self delay)) 
+		ifTrue: [ ^ self ].
 	
 	self onRun.
 	self stop
@@ -110,10 +136,13 @@ BlDelayedTask >> start [
 	self
 		assert: [ element isNotNil ]
 		description: [ 'Task must be attached to the element' ].
+	self
+		assert: [ self isNew or: [ self isComplete ] ]
+		description: 'Can''t start a queued task'.
 
 	isRunning := true.
 	startTime := self time now.
-	element ifNotNil: [ self dequeue ].
+	self setNew.
 	self enqueue
 ]
 
