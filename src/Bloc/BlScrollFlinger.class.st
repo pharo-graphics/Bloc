@@ -11,7 +11,8 @@ Class {
 		'step',
 		'eatRunOnAnimationRequest',
 		'reSchedulePostAnimationCallback',
-		'scrollable'
+		'scrollable',
+		'requeue'
 	],
 	#category : #'Bloc-Utilities - Scrolling'
 }
@@ -133,7 +134,8 @@ BlScrollFlinger >> initialize [
 	interpolator := self defaultInterpolator.
 	scroller := self createScrollerFor: interpolator.
 	eatRunOnAnimationRequest := false.
-	reSchedulePostAnimationCallback := false
+	reSchedulePostAnimationCallback := false.
+	requeue := false.
 ]
 
 { #category : #initialization }
@@ -216,11 +218,17 @@ BlScrollFlinger >> postOnAnimation [
 		assert: [ scrollable isNotNil ]
 		description: [ 'Can not post on animation if I am not attached to a scrollable' ].
 
-	eatRunOnAnimationRequest
-		ifTrue: [ reSchedulePostAnimationCallback := true ]
-		ifFalse: [
-			self scrollable dequeueTask: self.	
-			self scrollable enqueueTask: self ]
+	eatRunOnAnimationRequest ifTrue: 
+		[ reSchedulePostAnimationCallback := true ]
+	ifFalse:
+		[ self isNew ifTrue: 
+			[ self scrollable enqueueTask: self ]
+		ifFalse: [ self isExecuting ifTrue: 
+			[ requeue := true ]
+		ifFalse: 	[ self isComplete ifTrue: 
+			[ self setNew.
+			requeue := false.
+			self scrollable enqueueTask: self ] ] ] ].
 ]
 
 { #category : #running }
@@ -228,6 +236,13 @@ BlScrollFlinger >> pulse [
 	"To work with animation manager"
 
 	self run
+]
+
+{ #category : #'private - testing' }
+BlScrollFlinger >> requeueTaskAfterExecution [
+	"Answer a boolean indicating whether the receiver should be requeued after execution."
+
+	^ requeue
 ]
 
 { #category : #running }
