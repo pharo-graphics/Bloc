@@ -213,6 +213,7 @@ BlScrollFlinger >> onSmoothScrolled [
 
 { #category : #scheduling }
 BlScrollFlinger >> postOnAnimation [
+	| space |
 
 	self
 		assert: [ scrollable isNotNil ]
@@ -224,7 +225,11 @@ BlScrollFlinger >> postOnAnimation [
 		[ self isNew ifTrue: 
 			[ self scrollable enqueueTask: self ]
 		ifFalse: [ self isExecuting ifTrue: 
-			[ requeue := true ]
+			[ requeue := true.
+			space := self scrollable space.
+			space ifNotNil: 
+				[ self onEnqueued: space.
+				space requestNextPulse. ] ]
 		ifFalse: 	[ self isComplete ifTrue: 
 			[ self setNew.
 			requeue := false.
