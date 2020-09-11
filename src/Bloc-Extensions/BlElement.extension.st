@@ -189,22 +189,6 @@ BlElement >> gtInspectorShortcutsIn: composite [
 ]
 
 { #category : #'*Bloc-Extensions' }
-BlElement >> gtInspectorTransformationsIn: aComposite [
-	<gtInspectorPresentationOrder: 19>
-	
-	aComposite
-		composite: [ :aTabbedComposite |
-			aTabbedComposite title: 'Transformation'.
-			(self transformation
-				gtInspectorTransformationsIn: aTabbedComposite)
-					title: 'Composition'.
-			self transformation
-				gtInspectorMatrixIn: aTabbedComposite.
-			self transformation
-				gtInspectorDecompositionIn: aTabbedComposite ].
-]
-
-{ #category : #'*Bloc-Extensions' }
 BlElement >> gtInspectorUserDataIn: composite [
 	<gtInspectorPresentationOrder: 20>  
 	^ (self userData gtInspectorItemsIn: composite) 

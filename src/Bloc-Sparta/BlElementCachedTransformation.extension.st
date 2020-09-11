@@ -1,9 +1,9 @@
-Extension { #name : #BlElementTransformation }
+Extension { #name : #BlElementCachedTransformation }
 
 { #category : #'*Bloc-Sparta' }
-BlElementTransformation >> spartaMultiplyWith: aSpartaMatrix [
+BlElementCachedTransformation >> spartaMultiplyWith: aSpartaMatrix [
 	"Multiple a given sparta matrix by my transformation only if I am not identity"
 
-	self isIdentity
+	self transformation isIdentity
 		ifFalse: [ aSpartaMatrix multiplyBy: self matrix ]
 ]

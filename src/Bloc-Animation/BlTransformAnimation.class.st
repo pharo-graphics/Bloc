@@ -17,7 +17,7 @@ Class {
 		'toMatrix',
 		'isAbsolute'
 	],
-	#category : 'Bloc-Animation-Animation'
+	#category : #'Bloc-Animation-Animation'
 }
 
 { #category : #'instance creation' }
@@ -65,18 +65,19 @@ BlTransformAnimation >> initStart [
 	super initStart.
 
 	isAbsolute
+		ifTrue: [ transformation := transformation asCachedTransformation ]
 		ifFalse: [
 			| aCompositeTransformation |
 			aCompositeTransformation := BlElementCompositeTransformation new.
-			aCompositeTransformation add: self target transformation.
+			aCompositeTransformation add: self target transformation transformation.
 			aCompositeTransformation add: transformation.
-			transformation := aCompositeTransformation ].
-	
-	transformation owner: self target.
+			transformation := aCompositeTransformation asCachedTransformation ].
 	
 	"matrix depends on computed layout bounds, we should manually trigger layout recomputation"
 	self target space isLayoutRequested
 		ifTrue: [ self target space doLayout ].
+	
+	transformation bounds: self target bounds inLocal asRectangle.
 
 	fromMatrix := self target transformation matrix.
 	toMatrix := transformation matrix
@@ -111,6 +112,6 @@ BlTransformAnimation >> transformation: anElementTransformation [
 BlTransformAnimation >> valueForStep: aDelta [
 	
 	"we should recompute destination matrix every step because transformation origins may have changed"
-	toMatrix := transformation invalidateMatrix matrix.
+	toMatrix := (transformation bounds: self target bounds inLocal asRectangle) matrix.
 	^ BlElementAbsoluteTransformation matrix: (fromMatrix interpolate: aDelta to: toMatrix)
 ]

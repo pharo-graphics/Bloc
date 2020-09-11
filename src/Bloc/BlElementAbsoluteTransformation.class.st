@@ -4,6 +4,9 @@ I represent an absolute transformation defined only by transformation matrix
 Class {
 	#name : #BlElementAbsoluteTransformation,
 	#superclass : #BlElementTransformation,
+	#instVars : [
+		'matrix'
+	],
 	#category : #'Bloc-Basic-Transformations'
 }
 
@@ -12,16 +15,16 @@ BlElementAbsoluteTransformation class >> matrix: aBlMatrix [
 	^ self new matrix: aBlMatrix
 ]
 
+{ #category : #computation }
+BlElementAbsoluteTransformation >> computeMatrix: aBlMatrix in: aRectangle [
+	aBlMatrix multiplyBy: self matrix
+]
+
 { #category : #initialization }
 BlElementAbsoluteTransformation >> initialize [
 	super initialize.
 	
 	matrix := BlMatrix2D new
-]
-
-{ #category : #invalidation }
-BlElementAbsoluteTransformation >> invalidateMatrix [
-	"Do nothing, since matrix is statically defined"
 ]
 
 { #category : #testing }
@@ -46,6 +49,14 @@ BlElementAbsoluteTransformation >> isIdentity [
 	<return: #Boolean>
 	
 	^ self matrix isIdentity
+]
+
+{ #category : #testing }
+BlElementAbsoluteTransformation >> isPureTranslation [
+	"Return true if the receiver specifies no rotation or scaling and represents only translation in xy 2D plane"
+	<return: #Boolean>
+	
+	^ false
 ]
 
 { #category : #accessing }

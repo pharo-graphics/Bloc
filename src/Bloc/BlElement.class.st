@@ -1706,7 +1706,7 @@ BlElement >> initialize [
 	constraints := BlLayoutCommonConstraints new.
 	self resetChildrenArray.
 
-	transformation := self defaultTransformation owner: self.
+	transformation := self defaultTransformation asCachedTransformation.
 
 	layout := self defaultLayout.
 
@@ -2548,7 +2548,7 @@ BlElement >> onExtentChanged [
 	"clear path cache after updating geometry path"
 	self geometry releaseCache.
 	
-	self transformation invalidateMatrix.
+	self updateTransformationBounds.
 
 	self invalidate.
 	self notifyExtentChanged
@@ -3456,7 +3456,9 @@ BlElement >> transformation [
 
 { #category : #transformations }
 BlElement >> transformation: anElementTransformation [
-	transformation := anElementTransformation owner: self.
+	transformation := anElementTransformation asCachedTransformation
+		bounds: self bounds inLocal asRectangle.
+
 	self boundsCache invalidateBoundsInSpace.
 	self invalidate.
 
@@ -3515,6 +3517,14 @@ BlElement >> updateBackground [
 { #category : #'change reporting' }
 BlElement >> updateGeometry [
 	self geometry matchElement: self
+]
+
+{ #category : #transformations }
+BlElement >> updateTransformationBounds [
+	"Update the bounds of the cached transformation in order to recompute its martix
+	since transformation origin depends on the element's bounds"
+
+	transformation bounds: self bounds inLocal asRectangle
 ]
 
 { #category : #accessing }

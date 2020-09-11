@@ -46,28 +46,8 @@ Class {
 		'selection',
 		'highlights'
 	],
-	#classInstVars : [
-		'matrix'
-	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
-
-{ #category : #cleanup }
-BlTextParagraph class >> cleanUp [
-	super cleanUp.
-	
-	matrix := nil
-]
-
-{ #category : #accessing }
-BlTextParagraph class >> matrix [
-	"Return a temporary matrix used to collect data in.
-	It is a shared singleton to minimize object creation.
-	Must only be used on UI thread!"
-	<return: #BlTransformation>
-	
-	^ matrix ifNil: [ matrix := BlTransformation new ]
-]
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> ascent [

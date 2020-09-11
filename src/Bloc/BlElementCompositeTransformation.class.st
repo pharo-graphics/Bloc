@@ -12,17 +12,15 @@ Class {
 
 { #category : #adding }
 BlElementCompositeTransformation >> add: anElementTransformation [
-	
-	anElementTransformation owner: self owner.
 	self transformations add: anElementTransformation
 ]
 
 { #category : #computation }
-BlElementCompositeTransformation >> computeMatrix [	
+BlElementCompositeTransformation >> computeMatrix: aBlMatrix in: aRectangle [
 	self transformations
 		"when composing transformations we should perform left multiplication.
 		since multiplyBy: is a right multiplication we should iterate in reversed order"
-		reverseDo: [ :anElementTransformation | matrix multiplyBy: anElementTransformation matrix ]
+		reverseDo: [ :anElementTransformation | anElementTransformation computeMatrix: aBlMatrix in: aRectangle ]
 ]
 
 { #category : #initialization }
@@ -30,17 +28,6 @@ BlElementCompositeTransformation >> initialize [
 	super initialize.
 	
 	transformations := OrderedCollection new
-]
-
-{ #category : #invalidation }
-BlElementCompositeTransformation >> invalidateMatrix [
-	"Matrix is computed out of affine transformation composition
-	which may contain transformations that depend on element's properties
-	such as extent. It means that when element changes we need to invalidate and
-	recompute the matrix => set it to nil to trigger computation on next matrix access"
-
-	matrix := nil.
-	self transformations do: #invalidateMatrix
 ]
 
 { #category : #testing }
@@ -72,20 +59,6 @@ BlElementCompositeTransformation >> isPureTranslation [
 	<return: #Boolean>
 
 	^ self transformations allSatisfy: #isPureTranslation
-]
-
-{ #category : #accessing }
-BlElementCompositeTransformation >> matrix [
-	<return: #BlMatrix>
-
-	self ensureMatrix.
-	^ matrix
-]
-
-{ #category : #accessing }
-BlElementCompositeTransformation >> owner: anElement [
-	super owner: anElement.
-	self transformations do: [ :aTransformation | aTransformation owner: anElement ]
 ]
 
 { #category : #accessing }
