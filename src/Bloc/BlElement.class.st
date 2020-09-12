@@ -2251,10 +2251,14 @@ BlElement >> maxWidth: aNumber [
 
 { #category : #layout }
 BlElement >> measure: anExtentMeasurementSpec [
+	<return: #Point>
+
 	self errorHandler
 		with: self
 		do: [ self measureSafely: anExtentMeasurementSpec ]
-		failed: [ self measureThatFailed: anExtentMeasurementSpec ]
+		failed: [ self measureThatFailed: anExtentMeasurementSpec ].
+
+	^ self measuredExtent
 ]
 
 { #category : #'private - layout' }
@@ -2917,6 +2921,7 @@ BlElement >> relocate: aPoint [
 	self measuredBounds position = aPoint
 		ifTrue: [ ^ self ].
 
+	self constraints position: aPoint.
 	self measuredBounds position: aPoint.
 	self requestParentLayout
 ]

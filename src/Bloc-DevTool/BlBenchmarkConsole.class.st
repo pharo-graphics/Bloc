@@ -74,15 +74,15 @@ BlBenchmarkConsole >> layoutTime: aNumber [
 { #category : #initialization }
 BlBenchmarkConsole >> listenSpace: aSpace [
 	| lastTime frames framesLimit |
-	lastTime := 0.
+	lastTime := DateAndTime now.
 	frames := 0.
-	framesLimit := 30.
+	framesLimit := 120.
 	aSpace eventDispatcher addEventHandler: 
 		(BlEventHandler on: BlSpaceRenderEndEvent do: [ :evt | 
 				frames := frames + 1.
 				frames % framesLimit = 0
 					ifTrue: [
-						self fps: (1000.0 /( ((evt end - lastTime) / framesLimit) max:1)) ceiling.
+						self fps: (1000.0 /( ((evt end - lastTime) / framesLimit) asMilliSeconds max:1)) ceiling.
 						lastTime := evt end.
 						frames := 0 ].
 				self renderTime: (evt end - evt start) ]).

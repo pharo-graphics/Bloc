@@ -84,6 +84,7 @@ BlFrameLayoutConstraintsHorizontal >> weight [
 
 { #category : #accessing }
 BlFrameLayoutConstraintsHorizontal >> weight: aNumber [
+	"If the weight is zero, a child will have zero size along the corresponding axis"
 	self
 		assert: [ aNumber isNotNil ]
 		description: [ 'Weight can not be nil' ].

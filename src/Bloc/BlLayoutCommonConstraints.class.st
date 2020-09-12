@@ -36,6 +36,7 @@ Class {
 	#superclass : #BlLayoutConstraints,
 	#instVars : [
 		'constraints',
+		'position',
 		'margin',
 		'padding',
 		'minHeight',
@@ -44,7 +45,8 @@ Class {
 		'maxWidth',
 		'ignoredByLayout',
 		'previouslyAccessedConstraints',
-		'previouslyAccessedConstraintsType'
+		'previouslyAccessedConstraintsType',
+		'accountTransformation'
 	],
 	#category : #'Bloc-Layouts-Basic'
 }
@@ -54,6 +56,13 @@ BlLayoutCommonConstraints >> accountByLayout [
 	"Makes an element with this constraits be accounted by layout (not ignored)"
 
 	ignoredByLayout := false
+]
+
+{ #category : #'api - constraints' }
+BlLayoutCommonConstraints >> accountTransformation [
+	"Let the layout know that the element's transformation should be taken into account during layout"
+	
+	accountTransformation := true
 ]
 
 { #category : #accessing }
@@ -119,6 +128,8 @@ BlLayoutCommonConstraints >> ignoredByLayout [
 BlLayoutCommonConstraints >> initialize [
 	super initialize.
 	
+	position := 0.0@0.0.
+	
 	margin := BlInsets empty.
 	padding := BlInsets empty.
 
@@ -128,6 +139,7 @@ BlLayoutCommonConstraints >> initialize [
 	minWidth := 0.0.
 	
 	ignoredByLayout := false.
+	accountTransformation := false.
 	
 	"Initialzed lazily in at:"
 	constraints := nil
@@ -251,4 +263,23 @@ BlLayoutCommonConstraints >> padding: aBlPadding [
 		description: [ 'Padding must not be nil' ].
 	
 	padding := aBlPadding
+]
+
+{ #category : #'api - constraints' }
+BlLayoutCommonConstraints >> position [
+	<return: #Point>
+
+	^ position
+]
+
+{ #category : #'api - constraints' }
+BlLayoutCommonConstraints >> position: aPoint [
+	position := aPoint
+]
+
+{ #category : #testing }
+BlLayoutCommonConstraints >> shouldAccountTransformation [
+	<return: #Boolean>
+
+	^ accountTransformation
 ]

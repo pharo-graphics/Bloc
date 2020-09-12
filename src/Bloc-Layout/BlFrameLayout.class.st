@@ -95,8 +95,8 @@ BlFrameLayout >> align: aChildElement vertical: aBlAlignment [
 	aChildElement constraintsDo: [ :c | (c at: self class) vertical alignment: aBlAlignment ]
 ]
 
-{ #category : #measure }
-BlFrameLayout >> canMeasureChildFirstPass: aChild parentSpec: anExtentSpec [
+{ #category : #private }
+BlFrameLayout >> canMeasureNodeFirstPass: aChild parentSpec: anExtentSpec [
 	"Return true if we can measure a given child during the first measurement pass given that we received the provided parent extent spec, false otherwise"
 	<return: #Boolean>
 	| canMeasureWidth canMeasureHeight |
@@ -105,180 +105,170 @@ BlFrameLayout >> canMeasureChildFirstPass: aChild parentSpec: anExtentSpec [
 	anExtentSpec isExact
 		ifTrue: [ ^ true ].
 
-	canMeasureWidth := anExtentSpec widthSpec isExact or: [ aChild constraints horizontal resizer isMatchParent not ].
-	canMeasureHeight := anExtentSpec heightSpec isExact or: [ aChild constraints vertical resizer isMatchParent not ].
+	canMeasureWidth := anExtentSpec widthSpec isExact or: [ aChild isHorizontalMatchParent not ].
+	canMeasureHeight := anExtentSpec heightSpec isExact or: [ aChild isVerticalMatchParent not ].
 
 	^ canMeasureWidth and: [ canMeasureHeight ]
 ]
 
 { #category : #layout }
-BlFrameLayout >> layout: anElement in: aRectangle [
+BlFrameLayout >> layout: aParentNode [
 	| parentBounds |
+
+	"first store parent's local bounds"
+	parentBounds := aParentNode padding inset: (0.0@0.0 extent: aParentNode layoutExtent).
+
+	aParentNode childrenDo: [ :eachChildNode |
+		| childBounds allowedBounds aTranslation alignment |
+
+		"ask child for its measured bounds"
+		childBounds := eachChildNode measuredBounds inParent.
+		allowedBounds := eachChildNode margin inset: parentBounds.
+
+		"a composite alignment"
+		alignment := eachChildNode constraints frame alignment directed: self direction.
+		aTranslation := alignment translationOf: childBounds in: allowedBounds.
+		
+		"and finally set new bounds"
+		eachChildNode layoutBounds: (childBounds inLocal translateBy: aTranslation) ]
+]
+
+{ #category : #layout }
+BlFrameLayout >> layout: anElement in: aRectangle [
+	| aParentNode |
 	
 	self layoutIgnored: anElement.
-	
-	"first store parent's local bounds"
-	parentBounds := anElement padding inset: (0.0@0.0 extent: aRectangle extent).
 
-	self
-		layeredChildren: anElement
-		do: [ :aChild |
-			| childBounds allowedBounds |
-			"ask child for its measured bounds"
-			childBounds := aChild measuredBounds bounds copy.
-			allowedBounds := aChild margin inset: parentBounds copy.
+	aParentNode := anElement userData
+		at: #layoutNode
+		ifAbsent: [ ^ self ].
 
-			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
-			childBounds := self
-				align: aChild
-				bounds: childBounds
-				in: allowedBounds
-				with: aChild constraints frame alignment.
+	aParentNode layoutExtent: aRectangle extent.
 
-			"and finally set new bounds"
-			aChild applyLayoutIn: childBounds ]
+	self layout: aParentNode.
+	aParentNode children with: anElement children accountedByLayout do: [ :eachChildNode :eachChildElement |
+		eachChildElement applyLayoutIn: eachChildNode layoutBounds ]
+]
+
+{ #category : #measure }
+BlFrameLayout >> measure: aParentNode [
+	self preMeasureChildrenNodes: aParentNode.
+	self measureParentNode: aParentNode.
+	self postMeasureChildrenNodes: aParentNode
 ]
 
 { #category : #measure }
 BlFrameLayout >> measure: anElement with: anExtentSpec [
-	| matchParentChildren |
+	| aParentNode |
+	self measureIgnored: anElement with: anExtentSpec.
 
-	"First measure children that know their size (exact and fit content),
-	collecting those that needs to be measured later after we know parent's size"
-	matchParentChildren := self measureChildren: anElement with: anExtentSpec.
-	"Second pass to measure children that match parent"
-	self measureMatching: matchParentChildren of: anElement with: anExtentSpec
+	aParentNode := (BlLayoutParentNode toMeasure: anElement) extentSpec: anExtentSpec.
+	self measure: aParentNode.
+	anElement measuredExtent: aParentNode measuredExtent.
+	anElement userData at: #layoutNode put: aParentNode
 ]
 
 { #category : #measure }
-BlFrameLayout >> measureChild: aChildElement of: anElement with: anExtentSpec [
-	| aParentHeight aParentWidth |
+BlFrameLayout >> measureParentNode: aParentNode [
+	"Compute the measured extent of the parent node based on the measured extents of the children and their weight"
+	| maxExtent aMeasuredExtent |
 
-	aParentWidth := anExtentSpec widthSpec isUnspecified
-		ifTrue: [ 0 ]
-		ifFalse: [ anExtentSpec widthSpec size ].
-	aParentHeight := anExtentSpec heightSpec isUnspecified
-		ifTrue: [ 0 ]
-		ifFalse: [ anExtentSpec heightSpec size ].
+	maxExtent := 0.0 @ 0.0.
+	aParentNode
+		childrenDo: [ :eachChildNode | 
+			| aWeightX aWeightY aProportion |
 
-	self
-		measureChild: aChildElement
-		of: anElement
-		with: anExtentSpec
-		width: aParentWidth
-		height: aParentHeight
+			aWeightX := eachChildNode constraints frame horizontal weight.
+			aWeightY := eachChildNode constraints frame vertical weight.
+
+			aProportion := (aWeightX isZero
+				ifTrue: [ 0.0 ]
+				ifFalse: [ 1.0 / aWeightX ])
+				@
+					(aWeightY isZero
+						ifTrue: [ 0.0 ]
+						ifFalse: [ 1.0 / aWeightY ]).
+			maxExtent := maxExtent max: (eachChildNode measuredExtent inParent asPoint * aProportion) + eachChildNode margin extent + aParentNode padding extent ].
+
+	maxExtent := maxExtent + aParentNode padding extent.
+	maxExtent := maxExtent
+		min: aParentNode maxExtent
+		max: aParentNode minExtent.
+
+	aMeasuredExtent := aParentNode extentSpec sizeFor: maxExtent.
+
+	aMeasuredExtent := aMeasuredExtent
+		min: aParentNode maxExtent
+		max: aParentNode minExtent.
+
+	aParentNode measuredExtent: aMeasuredExtent
 ]
 
-{ #category : #measure }
-BlFrameLayout >> measureChild: aChildElement of: anElement with: anExtentSpec width: aParentWidth height: aParentHeight [
-	| childWidthMeasureSpec childHeightMeasureSpec |
+{ #category : #private }
+BlFrameLayout >> measurementSpecFor: aChildNode parentExtent: aParentExtent [
+	<return: #BlExtentMeasurementSpec>
+	| aParentWidth aParentHeight childWidthMeasureSpec childHeightMeasureSpec |
 
-	aChildElement constraints horizontal resizer isMatchParent
+	aParentWidth := aParentExtent x.
+	aParentHeight := aParentExtent y.
+
+	aChildNode isHorizontalMatchParent
 		ifTrue: [ 
 			| weight width |
-			weight := (aChildElement constraints frame horizontal weight max: 0.0).
-			width := ((aParentWidth - anElement insets width - aChildElement outsets width) * weight) max: 0.0.
+			weight := (aChildNode constraints frame horizontal weight max: 0.0).
+			width := ((aParentWidth - aChildNode parent padding width - aChildNode margin width) * weight) max: 0.0.
 			childWidthMeasureSpec := BlMeasurementSpec exact: width ]
 		ifFalse: [ 
 			childWidthMeasureSpec := self
-				measurementSpecFor: anExtentSpec widthSpec
-				usedSize: anElement insets width + aChildElement outsets width
-				resizer: aChildElement constraints horizontal resizer ].
-
-	aChildElement constraints vertical resizer isMatchParent
+				measurementSpecFor: aChildNode parent widthSpec
+				usedSize: aChildNode parent padding width + aChildNode padding width
+				resizer: aChildNode horizontalResizer ].
+ 
+	aChildNode isVerticalMatchParent
 		ifTrue: [ 
 			| weight height |
-			weight := (aChildElement constraints frame vertical weight max: 0.0).
-			height := ((aParentHeight - anElement insets height - aChildElement outsets height) * weight) max: 0.0.
+			weight := (aChildNode  constraints frame vertical weight max: 0.0).
+			height := ((aParentHeight - aChildNode parent padding height - aChildNode margin height) * weight) max: 0.0.
 			childHeightMeasureSpec := BlMeasurementSpec exact: height ]
 		ifFalse: [ 
 			childHeightMeasureSpec := self
-				measurementSpecFor: anExtentSpec heightSpec
-				usedSize: anElement insets height + aChildElement outsets height
-				resizer: aChildElement constraints vertical resizer ].
+				measurementSpecFor: aChildNode parent heightSpec
+				usedSize: aChildNode parent padding height + aChildNode margin height
+				resizer: aChildNode verticalResizer ].
 
-	aChildElement measure: childWidthMeasureSpec @ childHeightMeasureSpec
+	^ childWidthMeasureSpec @ childHeightMeasureSpec
 ]
 
 { #category : #measure }
-BlFrameLayout >> measureChildren: anElement with: anExtentSpec [
+BlFrameLayout >> postMeasureChildrenNodes: aParentNode [
+	aParentNode childrenDo: [ :eachChildNode |
+		eachChildNode measure: (self measurementSpecFor: eachChildNode parentExtent: aParentNode measuredExtent) ]
+]
+
+{ #category : #measure }
+BlFrameLayout >> preMeasureChildrenNodes: aParentNode [
 	"Perform a first measurement pass and measure those children for which we can
-	determine an extent, otherwise add children to a collection that should be
-	measured during second pass and return it"
-	<return: #LinkedList of: #BlElement>
-	| matchParentChildren aConstrainedExtentSpec maxHeight maxWidth aMeasuredExtent aMeasuredWidth aMeasuredHeight |
-	
-	matchParentChildren := LinkedList new.
+	determine an extent, otherwise skip them"
+	| aConstrainedExtentSpec |
 
-	maxWidth := 0.0.
-	maxHeight := 0.0.
-	
-	aConstrainedExtentSpec := anExtentSpec
-		min: (anElement constraints minWidth @ anElement constraints minHeight)
-		max: (anElement constraints maxWidth @ anElement constraints maxHeight).
+	aConstrainedExtentSpec := aParentNode extentSpec
+		min: aParentNode minExtent
+		max: aParentNode maxExtent.
 
-	self measureIgnored: anElement with: anExtentSpec.
-	
-	self
-		measuredChildren: anElement
-		do: [ :aChild |
-			| shouldMeasureChild |
-			
-			"true if aChild should be measured NOW or false if it should happen during second measurement pass.
-			we measure children if parent is exact or if child does not match parent"
-			shouldMeasureChild := self canMeasureChildFirstPass: aChild parentSpec: aConstrainedExtentSpec.
-			shouldMeasureChild
-				"measure now"
-				ifTrue: [
-					| aWeightX aWeightY aProportionX aProportionY |
-					self measureChild: aChild of: anElement with: aConstrainedExtentSpec.
-					
-					aWeightX := aChild constraints frame horizontal weight.
-					aWeightY := aChild constraints frame vertical weight.
-					aProportionX := aWeightX isZero
-						ifTrue: [ 0.0 ]
-						ifFalse: [ 1.0 / aWeightX ].
-						
-					aProportionY := aWeightY isZero
-						ifTrue: [ 0.0 ]
-						ifFalse: [ 1.0 / aWeightY ].
-					
-					maxWidth := maxWidth max: (aChild measuredWidth * aProportionX + aChild outsets width).
-					maxHeight := maxHeight max: (aChild measuredHeight * aProportionY + aChild outsets height) ]
-				"or during second pass"
-				ifFalse: [ matchParentChildren add: aChild ] ].
-	
-	maxWidth := maxWidth + anElement insets width.
-	maxHeight := maxHeight + anElement insets height.
-
-	maxWidth := maxWidth min: anElement constraints maxWidth max: anElement constraints minWidth.
-	maxHeight := maxHeight min: anElement constraints maxHeight max: anElement constraints minHeight.
-	
-	aMeasuredExtent := anExtentSpec sizeFor: maxWidth @ maxHeight.
-
-	aMeasuredWidth := aMeasuredExtent x min: anElement constraints maxWidth max: anElement constraints minWidth.
-	aMeasuredHeight := aMeasuredExtent y min: anElement constraints maxHeight max: anElement constraints minHeight.
-	anElement measuredExtent: aMeasuredWidth @ aMeasuredHeight.
-	
-	^ matchParentChildren
+	aParentNode childrenDo: [ :eachChildNode |
+		(self canMeasureNodeFirstPass: eachChildNode parentSpec: aConstrainedExtentSpec)
+			ifTrue: [ eachChildNode measure: (self preMeasurementSpecFor: eachChildNode parentSpec: aConstrainedExtentSpec) ] ]
 ]
 
-{ #category : #measure }
-BlFrameLayout >> measureMatching: theChildren of: anElement with: anExtentSpec [
-	theChildren
-		ifEmpty: [ ^ self ].
+{ #category : #private }
+BlFrameLayout >> preMeasurementSpecFor: aChildNode parentSpec: aParentSpec [
+	<return: #BlExtentMeasurementSpec>
+	| aParentWidth aParentHeight |
 
-	theChildren do: [ :aChildElement |
-		self measureMatchingChild: aChildElement of: anElement with: anExtentSpec ]
-]
+	aParentWidth := aParentSpec widthSpec size.
+	aParentHeight := aParentSpec heightSpec size.
 
-{ #category : #measure }
-BlFrameLayout >> measureMatchingChild: aChildElement of: anElement with: anExtentSpec [
-
-	self
-		measureChild: aChildElement
-		of: anElement
-		with: anExtentSpec
-		width: anElement measuredWidth
-		height: anElement measuredHeight
+	^ self
+		measurementSpecFor: aChildNode
+		parentExtent: aParentWidth @ aParentHeight
 ]

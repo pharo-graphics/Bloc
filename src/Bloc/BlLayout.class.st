@@ -119,6 +119,18 @@ BlLayout >> align: aChildElement horizontal: aBlAlignment [
 	"
 ]
 
+{ #category : #'private - alignment' }
+BlLayout >> align: elementBounds in: theParentBounds with: aBlElementAlignment [
+	"I don't additionally take element margin or parent padding"
+	| aTranslation alignment |
+
+	"a composite alignment"
+	alignment := aBlElementAlignment directed: self direction.
+	aTranslation := alignment translationOf: elementBounds in: theParentBounds.
+
+	^ elementBounds translateBy: aTranslation
+]
+
 { #category : #'api - alignment' }
 BlLayout >> align: aChildElement vertical: aBlAlignment [
 	"I should be used to dispatch children alignment configuration through layout to provide higher level uniform alignment api.	
@@ -186,6 +198,7 @@ BlLayout >> layeredChildren: anElement do: aBlock [
 
 { #category : #layout }
 BlLayout >> layout: anElement in: aRectangle [
+	
 ]
 
 { #category : #layout }
@@ -208,8 +221,7 @@ BlLayout >> layoutIgnored: anElement [
 
 			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
 			childBounds := self
-				align: aChild
-				bounds: childBounds
+				align: childBounds
 				in: allowedBounds
 				with: aChild constraints ignored alignment.
 				
@@ -356,7 +368,7 @@ BlLayout >> measurementSpecFor: parentSpec usedSize: usedSize resizer: childResi
 	<return: #BlMeasurementSpec>
 	| size |
 
-   size := 0.0 max: ((parentSpec size ifNil: [ 0.0 ]) - usedSize).
+   size := 0.0 max: (parentSpec size - usedSize).
 
 	^ parentSpec mode measurement: childResizer with: size
 ]
