@@ -178,12 +178,12 @@ BlTaskQueue >> runOn: aSpace [
 { #category : #'api - accessing' }
 BlTaskQueue >> tasks [
 	"Return a new collection instance holding all my tasks"
-	| theTasks |
-		
-	lock critical: [ theTasks := tasks ].
 
+	tasks ifNil: [ ^ #() ].
 	"tasks are an OrderedCollection (or nil), thus converting to anArray is guaranteed to answer a copy"
-	^ theTasks 
-		ifNil: [ #() ]
-		ifNotNil: [ theTasks asArray ]
+	^ lock critical: 
+		[ tasks 
+			ifNil: [ #() ]
+			ifNotNil: [ tasks asArray ] ].
+
 ]
