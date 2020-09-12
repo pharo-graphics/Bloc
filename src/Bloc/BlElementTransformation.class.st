@@ -17,6 +17,11 @@ BlElementTransformation >> asCachedTransformation [
 ]
 
 { #category : #converting }
+BlElementTransformation >> asElementTransformation [
+	^ self
+]
+
+{ #category : #converting }
 BlElementTransformation >> asMatrix: aRectangle [
 	<return: #BlMatrix>
 	| aMatrix |

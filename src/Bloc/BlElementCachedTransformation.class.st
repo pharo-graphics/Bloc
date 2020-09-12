@@ -25,6 +25,11 @@ BlElementCachedTransformation >> asCachedTransformation [
 	^ self
 ]
 
+{ #category : #converting }
+BlElementCachedTransformation >> asElementTransformation [
+	^ self transformation
+]
+
 { #category : #accessing }
 BlElementCachedTransformation >> bounds [
 	^ bounds
@@ -108,6 +113,11 @@ BlElementCachedTransformation >> invert [
 { #category : #private }
 BlElementCachedTransformation >> inverted [
 	^ self copy invert
+]
+
+{ #category : #testing }
+BlElementCachedTransformation >> isIdentity [
+	^ self transformation isIdentity
 ]
 
 { #category : #accessing }
