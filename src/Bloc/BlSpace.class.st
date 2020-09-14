@@ -838,7 +838,7 @@ BlSpace >> initialize [
 	touchProcessor := BlTouchProcessor space: self.
 	gestureProcessor := BlGestureProcessor space: self.
 
-	tasks := BlTaskQueue new.
+	tasks := BlSpaceTaskQueue space: self.
 	time := BlTime real.
 	frame := BlSpaceFrame new.
 	telemetry := BlNullTelemetry uniqueInstance.
@@ -1178,7 +1178,7 @@ BlSpace >> showSpace: aSpace [
 
 { #category : #'api - tasks' }
 BlSpace >> taskQueue [
-	<return: #BlTaskQueue>
+	<return: #BlSpaceTaskQueue>
 	
 	^ tasks
 ]

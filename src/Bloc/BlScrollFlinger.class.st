@@ -225,11 +225,7 @@ BlScrollFlinger >> postOnAnimation [
 		[ self isNew ifTrue: 
 			[ self scrollable enqueueTask: self ]
 		ifFalse: [ self isExecuting ifTrue: 
-			[ requeue := true.
-			space := self scrollable space.
-			space ifNotNil: 
-				[ self onEnqueued: space.
-				space requestNextPulse. ] ]
+			[ requeue := true ]
 		ifFalse: 	[ self isComplete ifTrue: 
 			[ self setNew.
 			requeue := false.
