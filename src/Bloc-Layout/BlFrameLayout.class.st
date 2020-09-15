@@ -160,12 +160,13 @@ BlFrameLayout >> measure: aParentNode [
 { #category : #measure }
 BlFrameLayout >> measure: anElement with: anExtentSpec [
 	| aParentNode |
-	self measureIgnored: anElement with: anExtentSpec.
 
 	aParentNode := (BlLayoutParentNode toMeasure: anElement) extentSpec: anExtentSpec.
 	self measure: aParentNode.
 	anElement measuredExtent: aParentNode measuredExtent.
-	anElement userData at: #layoutNode put: aParentNode
+	anElement userData at: #layoutNode put: aParentNode.
+	
+	self measureIgnored: anElement with: anExtentSpec
 ]
 
 { #category : #measure }
@@ -188,7 +189,7 @@ BlFrameLayout >> measureParentNode: aParentNode [
 					(aWeightY isZero
 						ifTrue: [ 0.0 ]
 						ifFalse: [ 1.0 / aWeightY ]).
-			maxExtent := maxExtent max: (eachChildNode measuredExtent inParent asPoint * aProportion) + eachChildNode margin extent + aParentNode padding extent ].
+			maxExtent := maxExtent max: (eachChildNode measuredExtent inParent asPoint * aProportion) + eachChildNode margin extent ].
 
 	maxExtent := maxExtent + aParentNode padding extent.
 	maxExtent := maxExtent

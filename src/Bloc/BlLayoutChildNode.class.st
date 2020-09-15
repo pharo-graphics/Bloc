@@ -140,6 +140,11 @@ BlLayoutChildNode >> transformation: aBlElementTransformation [
 ]
 
 { #category : #'api - resizer' }
+BlLayoutChildNode >> vExact: aNumber [
+	self constraints vertical exact: aNumber
+]
+
+{ #category : #'api - resizer' }
 BlLayoutChildNode >> vMatchParent [
 	self constraints vertical matchParent
 ]

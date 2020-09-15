@@ -4,7 +4,7 @@ Class {
 	#category : #'Bloc-Examples-Layout'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BlFrameLayoutNodeExamples >> empty_parent_at_most [
 	<gtExample>
 	| aLayout aParentNode |
@@ -21,7 +21,7 @@ BlFrameLayoutNodeExamples >> empty_parent_at_most [
 	^ aParentNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BlFrameLayoutNodeExamples >> empty_parent_exact [
 	<gtExample>
 	| aLayout aParentNode |
@@ -38,7 +38,7 @@ BlFrameLayoutNodeExamples >> empty_parent_exact [
 	^ aParentNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BlFrameLayoutNodeExamples >> one_child_match_parent_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode |
@@ -67,7 +67,37 @@ BlFrameLayoutNodeExamples >> one_child_match_parent_exact [
 	^ aParentNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
+BlFrameLayoutNodeExamples >> one_child_match_parent_fit_content [
+	<gtExample>
+	| aLayout aParentNode aChildNode |
+
+	aChildNode := BlLayoutChildNode new
+		constraints: (BlLayoutCommonConstraints new);
+		measurement: (BlLayoutNodeResizerMeasurement new);
+		hMatchParent;
+		vExact: 50.
+
+	aParentNode := BlLayoutParentNode new
+		constraints: (BlLayoutCommonConstraints new padding: (BlInsets all: 15));
+		extentSpec: (BlMeasurementSpec exact: 200) @ BlMeasurementSpec unspecified;
+		children: { aChildNode }.
+
+	aLayout := BlFrameLayout new.
+	aLayout measure: aParentNode.
+	
+	self assert: aParentNode measuredExtent equals: 200.0@80.0.
+	self assert: aChildNode measuredExtent equals: 170.0@50.0.
+
+	aParentNode layoutExtent: aParentNode measuredExtent.
+	aLayout layout: aParentNode.
+
+	self assert: aChildNode layoutBounds asRectangle equals: (15@15 extent: 170.0@50.0).
+
+	^ aParentNode
+]
+
+{ #category : #examples }
 BlFrameLayoutNodeExamples >> one_child_match_parent_matrix_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode |
@@ -97,7 +127,7 @@ BlFrameLayoutNodeExamples >> one_child_match_parent_matrix_exact [
 	^ aParentNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_downscacle_align_top_right_parent_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode aChildConstraints |
@@ -131,7 +161,7 @@ BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_downscacle_align_top_
 	^ aParentNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_upscale_align_top_right_parent_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode aChildConstraints |
@@ -165,7 +195,7 @@ BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_upscale_align_top_rig
 	^ aParentNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BlFrameLayoutNodeExamples >> one_child_match_weight_parent_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode aChildConstraints |
