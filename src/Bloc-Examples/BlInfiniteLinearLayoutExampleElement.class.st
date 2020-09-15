@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteLinearLayoutExampleElement,
 	#superclass : #BlInfiniteElement,
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #initialization }
@@ -17,6 +17,11 @@ BlInfiniteLinearLayoutExampleElement >> defaultLayout [
 { #category : #accessing }
 BlInfiniteLinearLayoutExampleElement >> itemConstraintsDo: aBlock [
 	self dataSource constraintsDo: aBlock
+]
+
+{ #category : #accessing }
+BlInfiniteLinearLayoutExampleElement >> itemDo: aBlock [
+	self dataSource itemDo: aBlock
 ]
 
 { #category : #accessing }

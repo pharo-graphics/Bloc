@@ -4,7 +4,7 @@ I contain examples of a vertical linear layout
 Class {
 	#name : #BlInfiniteLinearLayoutVerticalExample,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #'instance creation' }
@@ -222,4 +222,80 @@ BlInfiniteLinearLayoutVerticalExample >> verticalFitContentHorizontalExactChildr
 		equals: (aVisibleItemCount timesCollect: [ aListWidth @ anItemHeight ]).
 
 	^ aList
+]
+
+{ #category : #examples }
+BlInfiniteLinearLayoutVerticalExample >> verticalMatchParentHorizontalFitzContentLimitedChildrenExact [
+	<gtExample>
+	| aContainer aList chunksAdded |
+
+	aContainer := self container.
+	aContainer size: 300@300.
+
+	aList := self list.
+	aList constraintsDo: [ :c |
+		c horizontal fitContentLimited.
+		c vertical fitContent ].
+	aList items: 1.
+	aList itemConstraintsDo: [ :c |
+		c horizontal fitContentLimited.
+		c vertical fitContent ].
+	aList itemDo: [ :anItem |
+		anItem layout: BlFlowLayout horizontal.
+		anItem addChildren: (10 timesCollect: [
+			BlElement new
+				background: (Color white alpha: (1000 atRandom / 1000.0));
+				size: 130@50
+		])
+	].
+
+	chunksAdded := 0.
+	aList layoutDo: [ :anInfiniteLayout | anInfiniteLayout when: BlInfiniteLinearLayoutChunkAdded do: [ chunksAdded := chunksAdded + 1 ] ].
+
+	aContainer addChild: aList.
+	aContainer forceLayout.
+
+	self assert: aContainer extent equals: 300.0@300.0.
+	self assert: aList extent equals: (260.0 @ 250.0).
+	self assert: aList childrenCount equals: 1.
+	
+	"in case of non exact infinite list, chunks are added twice;
+	once during measurement and one more time during layout steps"
+	self assert: chunksAdded equals: 1 * 4.
+
+	self
+		assert: (aList children collect: #extent)
+		equals: (1 timesCollect: [ 260@250 ]).
+
+	^ aContainer
+]
+
+{ #category : #examples }
+BlInfiniteLinearLayoutVerticalExample >> verticalMatchParentHorizontalFitzContentLimitedChildrenExact_enlarge [
+	<gtExample>
+	| aContainer aList chunksAdded |
+
+	aContainer := self verticalMatchParentHorizontalFitzContentLimitedChildrenExact.
+	aContainer width: 500.
+
+	aList := aContainer children first.
+
+	chunksAdded := 0.
+	aList layoutDo: [ :anInfiniteLayout | anInfiniteLayout when: BlInfiniteLinearLayoutChunkAdded do: [ chunksAdded := chunksAdded + 1 ] ].
+
+	aContainer forceLayout.
+
+	self assert: aContainer extent equals: 500.0@300.0.
+	self assert: aList extent equals: (390.0 @ 200.0).
+	self assert: aList childrenCount equals: 1.
+	
+	"in case of non exact infinite list, chunks are added twice;
+	once during measurement and one more time during layout steps"
+	self assert: chunksAdded equals: 2.
+
+	self
+		assert: (aList children collect: #extent)
+		equals: (1 timesCollect: [ 390@200 ]).
+
+	^ aContainer
 ]

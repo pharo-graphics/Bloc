@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteLinearLayoutExampleHolder,
 	#superclass : #BlInfiniteHolder,
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #accessing }
@@ -20,4 +20,9 @@ BlInfiniteLinearLayoutExampleHolder >> initialize [
 	
 	itemElement := BlElement new.
 	itemElement size: 0@0
+]
+
+{ #category : #accessing }
+BlInfiniteLinearLayoutExampleHolder >> itemDo: aBlock [
+	aBlock value: itemElement
 ]

@@ -708,9 +708,9 @@ BlInfiniteLayout >> isMeasurementUpToDate: aMeasuredSize spec: aMeasurementSpec 
 	aMeasurementSpec isUnspecified
 		ifTrue: [ ^ true ].
 
-	aMeasurementSpec isAtMost
+	(aMeasurementSpec isAtMost and: [ aResizer isFitContentLimited not ])
 		ifTrue: [ ^ aMeasurementSpec size >= aMeasuredSize ].
-		
+
 	aMeasurementSpec isExact
 		ifTrue: [ ^ aMeasurementSpec size = aMeasuredSize ].
 		

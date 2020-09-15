@@ -3,9 +3,10 @@ Class {
 	#superclass : #BlInfiniteDataSource,
 	#instVars : [
 		'constraintsBlock',
+		'itemBlock',
 		'colors'
 	],
-	#category : 'Bloc-Examples-Infinite'
+	#category : #'Bloc-Examples-Infinite'
 }
 
 { #category : #accessing }
@@ -28,6 +29,8 @@ BlInfiniteLinearLayoutExampleDataSource >> initialize [
 		c horizontal exact: 100.
 		c vertical exact: 50 ].
 	
+	itemBlock := [ :anElement | ].
+	
 	colors := Color registeredColorNames collect: [ :aColorName | Color named: aColorName ]
 ]
 
@@ -36,11 +39,18 @@ BlInfiniteLinearLayoutExampleDataSource >> itemCount [
 	^ colors size
 ]
 
+{ #category : #accessing }
+BlInfiniteLinearLayoutExampleDataSource >> itemDo: aBlock [
+	itemBlock := aBlock.
+	self notifyChanged
+]
+
 { #category : #'instance creation' }
 BlInfiniteLinearLayoutExampleDataSource >> onBindHolder: anElementHolder at: aPosition [
 	anElementHolder
 		color: (colors at: aPosition);
-		constraintsDo: constraintsBlock
+		constraintsDo: constraintsBlock;
+		itemDo: itemBlock
 ]
 
 { #category : #'instance creation' }
