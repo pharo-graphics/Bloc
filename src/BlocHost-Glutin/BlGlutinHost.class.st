@@ -160,6 +160,8 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 		withFullSize: aSpace fullsize.
 	
 	windowedContext := GlutinEventsFetcher default eventLoop createWindow: windowBuilder.
+	aSpace knowsPosition
+		ifTrue: [ windowedContext position: aSpace position ].
 	
 	aHostSpace := BlGlutinHostSpace new.
 	aHostSpace window: windowedContext.

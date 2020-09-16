@@ -846,7 +846,6 @@ BlSpace >> initialize [
 	root := self defaultRoot.
 
 	self extent: self defaultExtent.
-	self position: 0@0.
 
 	self resizable: true.
 	self borderless: false.
@@ -915,6 +914,16 @@ BlSpace >> keyboardProcessor [
 { #category : #'accessing - processors' }
 BlSpace >> keyboardProcessor: aKeyboardProcessor [
 	keyboardProcessor := aKeyboardProcessor
+]
+
+{ #category : #'window - properties' }
+BlSpace >> knowsPosition [
+	"Return true if this space knows its position.
+	By default, spaces don't know their position and let window manager to choose one.
+	Setting an explicit position during space creation will result in a window created at a specified position"
+	<return: #Boolean>
+
+	^ position notNil
 ]
 
 { #category : #'focus managing' }
@@ -992,7 +1001,7 @@ BlSpace >> position [
 	
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace position ]
-		ifAbsent: [ position ]
+		ifAbsent: [ position ifNil: [ 0@0 ] ]
 ]
 
 { #category : #'window - properties' }
