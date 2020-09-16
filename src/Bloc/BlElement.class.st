@@ -458,7 +458,10 @@ BlElement >> attachSpace [
 	request will never reach the space.
 	(https://github.com/feenkcom/gtoolkit/issues/1457)"
 	self isFocused
-		ifTrue: [ self requestFocus ].
+		ifTrue: [ self requestFocus ]
+		ifFalse: [
+			self space focusOwner == self
+				ifTrue: [ self looseFocus: self ] ].
 	
 	self taskQueue isEmpty
 		ifFalse: [ self space enqueueTasksFrom: self taskQueue ].
