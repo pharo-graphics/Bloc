@@ -47,30 +47,32 @@ BlAsyncImageElement >> clearForm [
 
 { #category : #drawing }
 BlAsyncImageElement >> drawOnSpartaCanvas: aCanvas [
-
 	| ratio imageExtent translation image |
-
 	super drawOnSpartaCanvas: aCanvas.
-	entry ifNil: [ ^self ].
-	image := entry image.
+	
+	entry
+		ifNil: [ ^ self ].
 
-	ratio := (self extent x / image width min: self extent y / image height) asFloat.
+	image := entry image.
+	
+	(image width isZero or: [ image height isZero ])
+		ifTrue: [ ^ self ].
+	
+	ratio := (self extent / image extent) min asFloat.
+
 	imageExtent := image extent * ratio.
-	translation := (((self extent x - imageExtent x ) / 2.0) @
-		((self extent y - imageExtent y) / 2.0)) asIntegerPoint.
+	translation := ((self extent - imageExtent ) / 2.0) asIntegerPoint.
 
 	aCanvas transform
-		by: [ :t | 
-			t 
+		by: [ :t |
+			t
 				translateBy: translation;
-				scaleBy: ratio
-				 ]
+				scaleBy: ratio ]
 		during: [
 			aCanvas fill
 				path: (0@0 extent: image extent);
 				paint: image;
-				draw ].
-
+				draw ]
 ]
 
 { #category : #accessing }

@@ -13,12 +13,9 @@ BlElement >> asSpartaForm [
 
 	aCanvas := Bloc preferableSpartaCanvas extent: aBoundsInLocal extent ceiling.
 	
-	TBlDrawingCache
-		disableDrawingCacheFor: self
-		during: [
-			aCanvas transform
-				by: [ :aTransform | aTransform translateBy: aBoundsInLocal origin negated ]
-				during: [ self drawMeAndChildrenOnSpartaCanvas: aCanvas	 ] ].
+	aCanvas transform
+		by: [ :aTransform | aTransform translateBy: aBoundsInLocal origin negated ]
+		during: [ self drawMeAndChildrenOnSpartaCanvas: aCanvas	 ].
 
 	^ aCanvas asForm
 ]
