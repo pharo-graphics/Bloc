@@ -41,23 +41,32 @@ BlFitLayout >> fit: anElement with: anExtentSpec [
 ]
 
 { #category : #layout }
-BlFitLayout >> layout: anElement in: aRectangle [
-	| aDelta |
-	
-	aDelta := self normalizedDelta: anElement in: aRectangle.
+BlFitLayout >> layout: aParentNode [
+	aParentNode childrenDo: [ :eachChildNode | eachChildNode layoutBounds: (eachChildNode measuredBounds) ]
+]
 
+{ #category : #layout }
+BlFitLayout >> layout: anElement in: aRectangle [
+	| aDelta aParentNode |
+	
 	self layoutIgnored: anElement.
-	self
-		layeredChildren: anElement
-		do: [ :aChild | aChild applyLayoutIn: (aChild measuredPosition + aDelta extent: aChild measuredExtent) ]
+	
+	aParentNode := anElement userData
+		at: #layoutNode
+		ifAbsent: [ ^ self ].
+
+	"aDelta := self normalizedDelta: anElement in: aRectangle."
+	
+	self layout: aParentNode.
+	
+	aParentNode children do: [ :eachChildNode |
+		eachChildNode element applyLayoutIn: eachChildNode layoutBounds ]
 ]
 
 { #category : #measure }
 BlFitLayout >> measure: aParentLayoutNode [
 	"Override me to implement a custom child position measurement algorithm.
 	Graph or visualisation layouts should implement me"
-	
-	self subclassResponsibility
 ]
 
 { #category : #measure }
@@ -82,7 +91,7 @@ BlFitLayout >> measurePositions: anElement with: anExtentSpec [
 	aParentNode := (BlLayoutParentNode alreadyMeasured: anElement) extentSpec: anExtentSpec.
 
 	self measure: aParentNode.
-	
+
 	aParentNode children do: [ :eachChildNode |
 		eachChildNode element measuredBounds position: eachChildNode measurement position.
 		eachChildNode element measuredBounds extent: eachChildNode measurement extent ].

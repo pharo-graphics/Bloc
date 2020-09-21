@@ -299,7 +299,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_0x60 [
 		up;
 		root: aContainer;
 		referenceArea: (0@60 corner: 0@60).
-		
+
 	aNextFocus := aFocusFinder
 		nextFocusDo: #yourself
 		ifNone: [ nil ].

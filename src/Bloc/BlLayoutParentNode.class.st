@@ -31,7 +31,7 @@ BlLayoutParentNode class >> alreadyMeasured: aBlElement [
 				eachNode := BlLayoutChildNode new
 					constraints: eachChild constraints;
 					measurement: (BlLayoutNodeComputedMeasurement new
-						position: 0@0;
+						position: eachChild constraints position;
 						extent: eachChild measuredExtent).
 				
 				aTransformation
