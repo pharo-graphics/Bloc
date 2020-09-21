@@ -1,8 +1,8 @@
 Class {
 	#name : #BlLayoutParentNode,
 	#superclass : #BlLayoutNode,
-	#traits : 'TBlLayoutNode',
-	#classTraits : 'TBlLayoutNode classTrait',
+	#traits : 'TBlLayoutNode + TBlLayoutParentNode',
+	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutParentNode classTrait',
 	#instVars : [
 		'children',
 		'extentSpec',
@@ -75,12 +75,7 @@ BlLayoutParentNode >> children [
 { #category : #accessing }
 BlLayoutParentNode >> children: aCollectionOfChildNodes [
 	children := aCollectionOfChildNodes as: BlLayoutNodeChildren.
-	children do: [ :eachChild | eachChild parent: self ]
-]
-
-{ #category : #enumerating }
-BlLayoutParentNode >> childrenDo: aBlock [
-	self children do: aBlock
+	children do: [ :eachChild | eachChild parent: self parent ]
 ]
 
 { #category : #accessing }
@@ -101,18 +96,6 @@ BlLayoutParentNode >> extentSpec [
 { #category : #accessing }
 BlLayoutParentNode >> extentSpec: anObject [
 	extentSpec := anObject
-]
-
-{ #category : #'api - enumerating' }
-BlLayoutParentNode >> filter: aSelectBlock [
-	"Filter my children based on the given block and in-place replace them"
-	
-	children := children select: aSelectBlock
-]
-
-{ #category : #'api - extent spec' }
-BlLayoutParentNode >> heightSpec [
-	^ extentSpec heightSpec
 ]
 
 { #category : #initialization }
@@ -145,14 +128,15 @@ BlLayoutParentNode >> measuredExtent: anObject [
 	measuredExtent := anObject
 ]
 
-{ #category : #'api - enumerating' }
-BlLayoutParentNode >> select: aSelectBlock [
-	"Create a new parent node with selected children"
-	
-	^ self copy children: (children select: aSelectBlock)
+{ #category : #accessing }
+BlLayoutParentNode >> parent [
+	^ self
 ]
 
-{ #category : #'api - extent spec' }
-BlLayoutParentNode >> widthSpec [
-	^ extentSpec widthSpec
+{ #category : #'api - converting' }
+BlLayoutParentNode >> withFilter: aSelectBlock [
+	^ BlLayoutParentNodeWithFilter new
+		parentNode: self;
+		filterBlock: aSelectBlock;
+		children: (self children select: aSelectBlock)
 ]

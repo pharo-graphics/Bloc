@@ -6,7 +6,7 @@ I should be considered to be a root of graph or visualisation layouts. For that 
 Class {
 	#name : #BlFitLayout,
 	#superclass : #BlLayout,
-	#category : 'Bloc-Layout-Fit'
+	#category : #'Bloc-Layout-Fit'
 }
 
 { #category : #measure }
@@ -53,6 +53,14 @@ BlFitLayout >> layout: anElement in: aRectangle [
 ]
 
 { #category : #measure }
+BlFitLayout >> measure: aParentLayoutNode [
+	"Override me to implement a custom child position measurement algorithm.
+	Graph or visualisation layouts should implement me"
+	
+	self subclassResponsibility
+]
+
+{ #category : #measure }
 BlFitLayout >> measure: anElement with: anExtentSpec [
 	
 	self measuredChildren: anElement do: [ :aChild |
@@ -69,8 +77,17 @@ BlFitLayout >> measure: anElement with: anExtentSpec [
 
 { #category : #measure }
 BlFitLayout >> measurePositions: anElement with: anExtentSpec [
-	"Override me to implement a custom child position measurement algorithm.
-	Graph or visualisation layouts should implement me"
+	| aParentNode |
+
+	aParentNode := (BlLayoutParentNode alreadyMeasured: anElement) extentSpec: anExtentSpec.
+
+	self measure: aParentNode.
+	
+	aParentNode children do: [ :eachChildNode |
+		eachChildNode element measuredBounds position: eachChildNode measurement position.
+		eachChildNode element measuredBounds extent: eachChildNode measurement extent ].
+
+	anElement userData at: #layoutNode put: aParentNode
 ]
 
 { #category : #measure }

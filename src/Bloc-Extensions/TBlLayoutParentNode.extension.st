@@ -1,7 +1,7 @@
-Extension { #name : #BlLayoutParentNode }
+Extension { #name : #TBlLayoutParentNode }
 
 { #category : #'*Bloc-Extensions' }
-BlLayoutParentNode >> gtChildrenFor: aView [
+TBlLayoutParentNode >> gtChildrenFor: aView [
 	<gtView>
 	
 	^ aView forward
@@ -12,7 +12,7 @@ BlLayoutParentNode >> gtChildrenFor: aView [
 ]
 
 { #category : #'*Bloc-Extensions' }
-BlLayoutParentNode >> gtMeasuredBoundsFor: aView [
+TBlLayoutParentNode >> gtMeasuredBoundsFor: aView [
 	<gtView>
 
 	^ aView text
@@ -28,7 +28,7 @@ BlLayoutParentNode >> gtMeasuredBoundsFor: aView [
 ]
 
 { #category : #'*Bloc-Extensions' }
-BlLayoutParentNode >> gtPreviewFor: aView [
+TBlLayoutParentNode >> gtPreviewFor: aView [
 	<gtView>
 
 	^ aView explicit
