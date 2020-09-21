@@ -1,22 +1,16 @@
 Class {
 	#name : #BlLayoutExtentInParent,
 	#superclass : #BlLayoutExtent,
-	#category : #'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #'api - converting' }
 BlLayoutExtentInParent >> inLocal [
 	<return: #BlLayoutExtentInLocal>
-	| aLocalBounds |
-	
-	aLocalBounds := transformation
-		ifNil: [ self ]
-		ifNotNil: [ :aTransformation | aTransformation inverseTransformBounds: (BlBounds origin: 0@0 extent: self width @ self height) ].
 
 	^ BlLayoutExtentInLocal new
-		width: aLocalBounds width;
-		height: aLocalBounds height;
-		transformation: transformation
+		width: self width;
+		height: self height
 ]
 
 { #category : #'api - converting' }

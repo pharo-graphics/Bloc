@@ -1,7 +1,7 @@
 Class {
 	#name : #BlHorizontalCoordinateEndAlignment,
 	#superclass : #BlHorizontalCoordinateAlignment,
-	#category : #'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #factory }

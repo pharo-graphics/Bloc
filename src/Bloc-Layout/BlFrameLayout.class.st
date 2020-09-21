@@ -128,7 +128,7 @@ BlFrameLayout >> layout: aParentNode [
 		"a composite alignment"
 		alignment := eachChildNode constraints frame alignment directed: self direction.
 		aTranslation := alignment translationOf: childBounds in: allowedBounds.
-		
+
 		"and finally set new bounds"
 		eachChildNode layoutBounds: (childBounds inLocal translateBy: aTranslation) ]
 ]
@@ -146,8 +146,9 @@ BlFrameLayout >> layout: anElement in: aRectangle [
 	aParentNode layoutExtent: aRectangle extent.
 
 	self layout: aParentNode.
-	aParentNode children with: anElement children accountedByLayout do: [ :eachChildNode :eachChildElement |
-		eachChildElement applyLayoutIn: eachChildNode layoutBounds ]
+
+	aParentNode children do: [ :eachChildNode |
+		eachChildNode element applyLayoutIn: eachChildNode layoutBounds ]
 ]
 
 { #category : #measure }
@@ -165,7 +166,7 @@ BlFrameLayout >> measure: anElement with: anExtentSpec [
 	self measure: aParentNode.
 	anElement measuredExtent: aParentNode measuredExtent.
 	anElement userData at: #layoutNode put: aParentNode.
-	
+
 	self measureIgnored: anElement with: anExtentSpec
 ]
 

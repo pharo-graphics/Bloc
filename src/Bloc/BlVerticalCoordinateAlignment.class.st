@@ -33,7 +33,7 @@ Class {
 		'coordinate',
 		'relativeAlignment'
 	],
-	#category : #'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #accessing }

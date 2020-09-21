@@ -1,23 +1,31 @@
 Class {
 	#name : #BlLayoutChildNode,
 	#superclass : #BlLayoutNode,
+	#traits : 'TBlLayoutNode + TBlLayoutChildNode',
+	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutChildNode classTrait',
 	#instVars : [
 		'parent',
 		'measurement',
 		'layoutBounds',
-		'transformation'
+		'constraints',
+		'userData'
 	],
-	#category : #'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Model'
 }
 
-{ #category : #'api - resizer' }
-BlLayoutChildNode >> hMatchParent [
-	self constraints horizontal matchParent
+{ #category : #accessing }
+BlLayoutChildNode >> children [
+	^ #()
 ]
 
-{ #category : #'api - resizer' }
-BlLayoutChildNode >> horizontalResizer [
-	^ self constraints horizontal resizer
+{ #category : #accessing }
+BlLayoutChildNode >> constraints [
+	^ constraints
+]
+
+{ #category : #accessing }
+BlLayoutChildNode >> constraints: aBlLayoutConstraints [
+	constraints := aBlLayoutConstraints
 ]
 
 { #category : #initialization }
@@ -25,52 +33,29 @@ BlLayoutChildNode >> initialize [
 	super initialize.
 	
 	measurement := BlLayoutNodeNullMeasurement new.
-	parent := nil
+	parent := nil.
+	userData := nil
 ]
 
-{ #category : #'api - resizer' }
-BlLayoutChildNode >> isHorizontalMatchParent [
-	^ self horizontalResizer isMatchParent
-]
-
-{ #category : #'api - resizer' }
-BlLayoutChildNode >> isVerticalMatchParent [
-	^ self verticalResizer isMatchParent
-]
-
-{ #category : #accessing }
+{ #category : #'api - geometry' }
 BlLayoutChildNode >> layoutBounds [
 	<return: #BlBounds>
 
 	^ layoutBounds
 ]
 
-{ #category : #accessing }
+{ #category : #'api - geometry' }
 BlLayoutChildNode >> layoutBounds: aBlLayoutBounds [
 	self
 		assert: [ aBlLayoutBounds isKindOf: BlLayoutBounds ]
 		description: [ 'Must be an instance of a special layout bounds class' ].
 
-	layoutBounds := aBlLayoutBounds inLocal asBounds.
-	transformation ifNotNil: [ :aTransformation | aTransformation bounds: (BlBounds origin: 0.0@0.0 extent: layoutBounds extent) ]
+	layoutBounds := aBlLayoutBounds inLocal asBounds
 ]
 
-{ #category : #'api - resizer' }
-BlLayoutChildNode >> matchParent [
-	self
-		hMatchParent;
-		vMatchParent
-]
-
-{ #category : #'api - transformation' }
-BlLayoutChildNode >> matrix: aBlMatrix [
-	self transformation: (BlElementAbsoluteTransformation matrix: aBlMatrix)
-]
-
-{ #category : #measure }
+{ #category : #'api - measure' }
 BlLayoutChildNode >> measure: anExtentSpec [
-	measurement := measurement measure: self with: anExtentSpec.
-	transformation ifNotNil: [ :aTransformation | aTransformation bounds: (BlBounds origin: 0.0@0.0 extent: self measurement extent) ]
+	measurement := measurement measure: self with: anExtentSpec
 ]
 
 { #category : #'api - geometry' }
@@ -79,8 +64,7 @@ BlLayoutChildNode >> measuredBounds [
 	
 	^ BlLayoutBoundsInLocal new
 		position: self measurement position;
-		extent: self measurement extent;
-		transformation: transformation
+		extent: self measurement extent
 ]
 
 { #category : #'api - geometry' }
@@ -90,8 +74,7 @@ BlLayoutChildNode >> measuredExtent [
 	<return: #BlLayoutExtent>
 
 	^ BlLayoutExtentInLocal new
-		size: self measurement extent;
-		transformation: transformation
+		size: self measurement extent
 ]
 
 { #category : #accessing }
@@ -103,8 +86,7 @@ BlLayoutChildNode >> measurement [
 
 { #category : #accessing }
 BlLayoutChildNode >> measurement: aBlLayoutNodeMeasurement [
-	measurement := aBlLayoutNodeMeasurement.
-	transformation ifNotNil: [ :aTransformation | aTransformation bounds: (BlBounds origin: 0.0@0.0 extent: self measurement extent) ]
+	measurement := aBlLayoutNodeMeasurement
 ]
 
 { #category : #accessing }
@@ -117,39 +99,54 @@ BlLayoutChildNode >> parent: anObject [
 	parent := anObject
 ]
 
-{ #category : #'api - transformation' }
-BlLayoutChildNode >> pointToLocal: aPoint [
-	^ transformation
-		ifNil: [ aPoint ]
-		ifNotNil: [ :aTransformation | aTransformation inverseTransformPoint: aPoint ]
+{ #category : #printing }
+BlLayoutChildNode >> printOn: aStream [
+	aStream
+		nextPutAll: 'Node position: ';
+		print: self measurement position;
+		nextPutAll: ' extent: ';
+		print: self measurement extent
 ]
 
-{ #category : #'api - transformation' }
-BlLayoutChildNode >> pointToParent: aPoint [
-	^ transformation
-		ifNil: [ aPoint ]
-		ifNotNil: [ :aTransformation | aTransformation transformPoint: aPoint ]
+{ #category : #accessing }
+BlLayoutChildNode >> userData [
+	<return: #Dictionary>
+	
+	^ userData ifNil: [ userData := Dictionary new ]
 ]
 
-{ #category : #'api - transformation' }
-BlLayoutChildNode >> transformation: aBlElementTransformation [
-	transformation := aBlElementTransformation
-		ifNotNil: [ :aTransformation |
-			aTransformation asCachedTransformation
-				bounds: (BlBounds origin: 0.0@0.0 extent: self measurement extent)]
+{ #category : #converting }
+BlLayoutChildNode >> withEdges: aCollectionOfLayoutEdges [
+	^ BlLayoutChildNodeWithEdges new
+		childNode: self;
+		connectedEdges: aCollectionOfLayoutEdges
 ]
 
-{ #category : #'api - resizer' }
-BlLayoutChildNode >> vExact: aNumber [
-	self constraints vertical exact: aNumber
+{ #category : #converting }
+BlLayoutChildNode >> withElement: aBlElement [
+	^ BlLayoutChildNodeWithElement new
+		childNode: self;
+		element: aBlElement
 ]
 
-{ #category : #'api - resizer' }
-BlLayoutChildNode >> vMatchParent [
-	self constraints vertical matchParent
+{ #category : #converting }
+BlLayoutChildNode >> withMatrix: aBlMatrix [
+	^ BlLayoutChildNodeWithTransformation new
+		childNode: self;
+		matrix:  aBlMatrix
 ]
 
-{ #category : #'api - resizer' }
-BlLayoutChildNode >> verticalResizer [
-	^ self constraints vertical resizer
+{ #category : #converting }
+BlLayoutChildNode >> withTransformation: aBlElementTransformation [
+	^ BlLayoutChildNodeWithTransformation new
+		childNode: self;
+		transformation:  aBlElementTransformation
+]
+
+{ #category : #converting }
+BlLayoutChildNode >> withoutElement [
+	"Return a layout node that does not know the element"
+	<return: #BlLayoutChildNode>
+
+	^ self
 ]

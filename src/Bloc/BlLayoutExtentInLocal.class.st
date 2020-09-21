@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLayoutExtentInLocal,
 	#superclass : #BlLayoutExtent,
-	#category : #'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #comparing }
@@ -27,7 +27,7 @@ BlLayoutExtentInLocal >> hash [
 
 { #category : #'api - converting' }
 BlLayoutExtentInLocal >> inLocal [
-	<return: #BlLayoutExtentInParent>
+	<return: #BlLayoutExtentInLocal>
 
 	^ self
 ]
@@ -35,14 +35,8 @@ BlLayoutExtentInLocal >> inLocal [
 { #category : #'api - converting' }
 BlLayoutExtentInLocal >> inParent [
 	<return: #BlLayoutExtentInParent>
-	| aParentBounds |
-	
-	aParentBounds := transformation
-		ifNil: [ self ]
-		ifNotNil: [ :aTransformation | aTransformation transformBounds: (BlBounds origin: 0@0 extent: self width @ self height) ].
 
 	^ BlLayoutExtentInParent new
-		width: aParentBounds width;
-		height: aParentBounds height;
-		transformation: transformation
+		width: self width;
+		height: self height
 ]

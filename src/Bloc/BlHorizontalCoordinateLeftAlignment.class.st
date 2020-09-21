@@ -4,7 +4,7 @@ The coordinate is measured from the left side of the outer bounds
 Class {
 	#name : #BlHorizontalCoordinateLeftAlignment,
 	#superclass : #BlHorizontalCoordinateAlignment,
-	#category : #'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #translation }

@@ -102,11 +102,10 @@ BlFrameLayoutNodeExamples >> one_child_match_parent_matrix_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode |
 
-	aChildNode := BlLayoutChildNode new
+	aChildNode := (BlLayoutChildNode new
 		constraints: (BlLayoutCommonConstraints new);
 		measurement: (BlLayoutNodeResizerMeasurement new);
-		matrix: (BlMatrix2D scale: 2@2);
-		matchParent.
+		matchParent) withMatrix: (BlMatrix2D scale: 2@2).
 
 	aParentNode := BlLayoutParentNode new
 		constraints: (BlLayoutCommonConstraints new);
@@ -136,11 +135,10 @@ BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_downscacle_align_top_
 	aChildConstraints frame horizontal weight: 0.5; alignRight.
 	aChildConstraints frame vertical weight: 0.5; alignTop.
 
-	aChildNode := BlLayoutChildNode new
+	aChildNode := (BlLayoutChildNode new
 		constraints: (aChildConstraints);
 		measurement: (BlLayoutNodeResizerMeasurement new);
-		matrix: (BlMatrix2D scale: 0.5);
-		matchParent.
+		matchParent) withMatrix: (BlMatrix2D scale: 0.5).
 
 	aParentNode := BlLayoutParentNode new
 		constraints: (BlLayoutCommonConstraints new);
@@ -170,11 +168,11 @@ BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_upscale_align_top_rig
 	aChildConstraints frame horizontal weight: 0.5; alignRight.
 	aChildConstraints frame vertical weight: 0.5; alignTop.
 
-	aChildNode := BlLayoutChildNode new
+	aChildNode := (BlLayoutChildNode new
 		constraints: (aChildConstraints);
 		measurement: (BlLayoutNodeResizerMeasurement new);
-		matrix: (BlMatrix2D scale: 2);
-		matchParent.
+		matchParent)
+			withMatrix: (BlMatrix2D scale: 2).
 
 	aParentNode := BlLayoutParentNode new
 		constraints: (BlLayoutCommonConstraints new);

@@ -5,7 +5,7 @@ Class {
 		'position',
 		'extent'
 	],
-	#category : #'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #accessing }

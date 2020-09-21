@@ -8,7 +8,7 @@ Class {
 		'height',
 		'transformation'
 	],
-	#category : #'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #accessing }
@@ -78,6 +78,11 @@ BlLayoutBounds >> left [
 { #category : #accessing }
 BlLayoutBounds >> left: anObject [
 	left := anObject
+]
+
+{ #category : #accessing }
+BlLayoutBounds >> perimeter [
+	^ (self width + self height) * 2
 ]
 
 { #category : #accessing }

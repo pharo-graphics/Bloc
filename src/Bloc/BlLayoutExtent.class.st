@@ -3,10 +3,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'width',
-		'height',
-		'transformation'
+		'height'
 	],
-	#category : #'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #'api - converting' }
@@ -16,12 +15,14 @@ BlLayoutExtent >> asPoint [
 
 { #category : #accessing }
 BlLayoutExtent >> height [
+	<return: #Number>
+
 	^ height
 ]
 
 { #category : #accessing }
-BlLayoutExtent >> height: anObject [
-	height := anObject
+BlLayoutExtent >> height: aNumber [
+	height := aNumber
 ]
 
 { #category : #'api - converting' }
@@ -46,21 +47,13 @@ BlLayoutExtent >> size: aPoint [
 ]
 
 { #category : #accessing }
-BlLayoutExtent >> transformation [
-	
-]
-
-{ #category : #accessing }
-BlLayoutExtent >> transformation: anObject [
-	transformation := anObject
-]
-
-{ #category : #accessing }
 BlLayoutExtent >> width [
+	<return: #Number>
+
 	^ width
 ]
 
 { #category : #accessing }
-BlLayoutExtent >> width: anObject [
-	width := anObject
+BlLayoutExtent >> width: aNumber [
+	width := aNumber
 ]

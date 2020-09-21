@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLayoutBoundsInParent,
 	#superclass : #BlLayoutBounds,
-	#category : #'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #'api - converting' }

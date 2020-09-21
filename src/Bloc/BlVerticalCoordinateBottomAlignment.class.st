@@ -1,7 +1,7 @@
 Class {
 	#name : #BlVerticalCoordinateBottomAlignment,
 	#superclass : #BlVerticalCoordinateAlignment,
-	#category : #'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #translation }
