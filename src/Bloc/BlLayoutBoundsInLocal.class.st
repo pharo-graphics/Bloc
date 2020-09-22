@@ -21,9 +21,7 @@ BlLayoutBoundsInLocal >> inParent [
 		ifNotNil: [ :aTransformation | aTransformation transformBounds: self asBounds ].
 
 	^ BlLayoutBoundsInParent new
-		left: aParentBounds left;
-		top: aParentBounds top;
-		width: aParentBounds width;
-		height: aParentBounds height;
+		position: aParentBounds position
+			extent: aParentBounds extent;
 		transformation: transformation
 ]

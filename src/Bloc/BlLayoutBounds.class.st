@@ -40,20 +40,8 @@ BlLayoutBounds >> extent [
 ]
 
 { #category : #accessing }
-BlLayoutBounds >> extent: aPoint [
-	self
-		width: aPoint x;
-		height: aPoint y
-]
-
-{ #category : #accessing }
 BlLayoutBounds >> height [
 	^ height
-]
-
-{ #category : #accessing }
-BlLayoutBounds >> height: anObject [
-	height := anObject
 ]
 
 { #category : #'api - converting' }
@@ -76,20 +64,21 @@ BlLayoutBounds >> left [
 ]
 
 { #category : #accessing }
-BlLayoutBounds >> left: anObject [
-	left := anObject
-]
-
-{ #category : #accessing }
 BlLayoutBounds >> perimeter [
 	^ (self width + self height) * 2
 ]
 
 { #category : #accessing }
-BlLayoutBounds >> position: aPoint [
-	self
-		left: aPoint x;
-		top: aPoint y
+BlLayoutBounds >> position [
+	^ self left @ self top
+]
+
+{ #category : #'instance creation' }
+BlLayoutBounds >> position: aPosition extent: anExtent [
+	left := aPosition x.
+	top := aPosition y.
+	width := anExtent x.
+	height := anExtent y
 ]
 
 { #category : #accessing }
@@ -100,11 +89,6 @@ BlLayoutBounds >> right [
 { #category : #accessing }
 BlLayoutBounds >> top [
 	^ top
-]
-
-{ #category : #accessing }
-BlLayoutBounds >> top: anObject [
-	top := anObject
 ]
 
 { #category : #accessing }
@@ -126,9 +110,4 @@ BlLayoutBounds >> translateBy: aPoint [
 { #category : #accessing }
 BlLayoutBounds >> width [
 	^ width
-]
-
-{ #category : #accessing }
-BlLayoutBounds >> width: anObject [
-	width := anObject
 ]

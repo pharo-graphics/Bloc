@@ -61,8 +61,8 @@ BlLayoutChildNodeWithTransformation >> measuredBounds [
 	<return: #BlLayoutBoundsInLocal>
 	
 	^ BlLayoutBoundsInLocal new
-		position: self measurement position;
-		extent: self measurement extent;
+		position: self measurement position
+			extent: self measurement extent;
 		transformation: self transformation
 ]
 

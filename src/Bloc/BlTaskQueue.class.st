@@ -166,7 +166,7 @@ BlTaskQueue >> runOn: aSpace [
 		[ theTasks do: [ :aTask |
 			aTask setExecuting.
 			aSpace telemetry
-				timeSync: [ 'Run task ', aTask class name ]
+				timeSync: [ 'Run task {1} ({2})' format: { aTask class name . aTask } ]
 				during: [ BlTaskExecutionSignal for: aTask block: [ aTask run ] ].
 			aTask requeueTaskAfterExecution ifTrue: 
 				[ self requeue: aTask ]

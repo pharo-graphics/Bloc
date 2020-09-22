@@ -24,6 +24,16 @@ BlTaskAction >> initialize [
 	action := [ :optionalThisTask | ]
 ]
 
+{ #category : #printing }
+BlTaskAction >> printOn: aStream [
+	aStream
+		print: self class name;
+		space;
+		nextPut: $(;
+		print: self action;
+		nextPut: $)
+]
+
 { #category : #running }
 BlTaskAction >> run [
 	self action isClosure
