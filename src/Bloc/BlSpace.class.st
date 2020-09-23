@@ -177,9 +177,9 @@ BlSpace class >> simulateEvent: anEvent on: anElement [
 	If you would like to simulate a higher level event you could directly fire or dispatch them
 	by asking any element to #fireEvent: or #dispatchEvent:
 	Note: UI mouse events require to set #position: given in space coordinates or in root most parent
-	coordiantes of the provided element.
+	coordinates of the provided element.
 	Note: I create a temporary space if provided element does not have one. if you need to simulate
-	of sequence of dependent events it is better to use #simulateEvents:on: directy"
+	a sequence of dependent events it is better to use #simulateEvents:on: directy"
 
 	self simulateEvents: { anEvent } on: anElement
 ]
@@ -190,7 +190,7 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 	If you would like to simulate a higher level event you could directly fire or dispatch them
 	by asking any element to #fireEvent: or #dispatchEvent:
 	Note: UI mouse events require to set #position: given in space coordinates or in root most parent
-	coordiantes of the provided element"
+	coordinates of the provided element"
 	
 	"we should update timestamps"
 	aCollectionOfEvents do: [ :anEvent | anEvent timestamp: DateAndTime now ].
@@ -751,7 +751,7 @@ BlSpace >> hasLayoutError [
 
 { #category : #testing }
 BlSpace >> hasOwner [
-	"To be polymorhic with BlElement's traversal API.
+	"To be polymorphic with BlElement's traversal API.
 	Space does not have an owner"
 	<return: #Boolean>
 	
@@ -939,7 +939,7 @@ BlSpace >> keyboardProcessor: aKeyboardProcessor [
 { #category : #'window - properties' }
 BlSpace >> knowsPosition [
 	"Return true if this space knows its position.
-	By default, spaces don't know their position and let window manager to choose one.
+	By default, spaces don't know their position and allow the window manager to choose one.
 	Setting an explicit position during space creation will result in a window created at a specified position"
 	<return: #Boolean>
 
@@ -1026,7 +1026,7 @@ BlSpace >> position [
 
 { #category : #'window - properties' }
 BlSpace >> position: aPoint [
-	"Request to change window's position to a given point in screen corrdinates"
+	"Request to change window's position to a given point in screen coordinates"
 
 	self setPosition: aPoint.
 	self hostSpaceDo: [ :aHostSpace | aHostSpace position: aPoint ]
@@ -1158,7 +1158,7 @@ BlSpace >> root: anElement [
 
 { #category : #accessing }
 BlSpace >> rootDo: aBlock [
-	"A helper method to evaluate a given block with root element an argument.
+	"A helper method to evaluate a given block with the root element as its argument.
 	May be useful for scripting"
 
 	aBlock value: self root
