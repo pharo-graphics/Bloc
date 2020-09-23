@@ -23,6 +23,11 @@ BlLayoutNodeChildren >> normalizePositions [
 	self do: [ :eachNode | eachNode measurement position: eachNode measurement position - theTopLeft ]
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutNodeChildren >> roundPositions [	
+	self do: [ :eachNode | eachNode measurement position: eachNode measurement position rounded ]
+]
+
 { #category : #converting }
 BlLayoutNodeChildren >> withoutElement [
 	^ self collect: [ :eachNode | eachNode withoutElement ]
