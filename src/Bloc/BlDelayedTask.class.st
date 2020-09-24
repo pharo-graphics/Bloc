@@ -13,7 +13,9 @@ BlDelayedTask delays its action until after the specified time by being schedule
 	time:		<Object>
 
 
-    Implementation Points
+!!!Implementation Points
+
+The task state is currently not thread-safe, so the time between checking the task state and acting on it provides a window where another process could issue a conflicting instruction.  This hasn't been a problem so far, so is left open.
 "
 Class {
 	#name : #BlDelayedTask,
@@ -144,6 +146,22 @@ BlDelayedTask >> start [
 	startTime := self time now.
 	self setNew.
 	self enqueue
+]
+
+{ #category : #'api - running' }
+BlDelayedTask >> startOrRestart [
+	"Ensure that the receiver is running and enqueued.
+	If already running, reset the start time (there is always the possibility that this will be called just after the task has started running, so will continue rather than waiting the full delay)."
+
+	self
+		assert: [ element isNotNil ]
+		description: [ 'Task must be attached to the element' ].
+
+	(self isNew or: [ self isComplete ]) ifTrue: 
+		[ ^ self start ].
+
+	startTime := self time now.
+
 ]
 
 { #category : #'api - running' }
