@@ -4,57 +4,39 @@ Trait {
 }
 
 { #category : #'api - geometry' }
+TBlLayoutChildNode >> bounds [
+	<return: #BlBounds>
+	
+	^ BlBounds
+		origin: self position
+		extent: self extent
+]
+
+{ #category : #'api - geometry' }
+TBlLayoutChildNode >> extent [
+	"Return the size of the node in the parent coordinate system"
+	<return: #Point>
+
+	^ self explicitRequirement
+]
+
+{ #category : #'api - geometry' }
+TBlLayoutChildNode >> height [
+	<return: #Number>
+	
+	^ self extent y
+]
+
+{ #category : #'api - geometry' }
 TBlLayoutChildNode >> layoutBounds [
 	<return: #BlBounds>
 
 	^ self explicitRequirement
 ]
 
-{ #category : #'api - geometry' }
-TBlLayoutChildNode >> layoutBounds: aBlLayoutBounds [
-	self explicitRequirement
-]
-
 { #category : #'api - measure' }
 TBlLayoutChildNode >> measure: anExtentSpec [
 	self explicitRequirement
-]
-
-{ #category : #'api - geometry' }
-TBlLayoutChildNode >> measuredBounds [
-	<return: #BlLayoutBoundsInLocal>
-	
-	^ self explicitRequirement
-]
-
-{ #category : #'api - geometry' }
-TBlLayoutChildNode >> measuredExtent [
-	"Return the measured extent of the child node in the child's coordinate system
-	without taking child's transformation into account"
-	<return: #BlLayoutExtentInLocal>
-
-	^ self explicitRequirement
-]
-
-{ #category : #'api - geometry' }
-TBlLayoutChildNode >> measuredHeight [
-	<return: #Number>
-	
-	^ self measuredExtent height
-]
-
-{ #category : #'api - geometry' }
-TBlLayoutChildNode >> measuredWidth [
-	<return: #Number>
-	
-	^ self measuredExtent width
-]
-
-{ #category : #accessing }
-TBlLayoutChildNode >> measurement [
-	<return: #BlLayoutNodeMeasurement>
-	
-	^ self explicitRequirement
 ]
 
 { #category : #accessing }
@@ -74,9 +56,44 @@ TBlLayoutChildNode >> parent: aBlLayoutParentNode [
 	self explicitRequirement
 ]
 
+{ #category : #'api - geometry' }
+TBlLayoutChildNode >> perimeter [
+	^ (self width + self height) * 2
+]
+
+{ #category : #'api - geometry' }
+TBlLayoutChildNode >> position [
+	"Return a position of the top left corner in the parent coordinate system"
+	<return: #Point>
+	
+	^ self explicitRequirement
+]
+
+{ #category : #'api - geometry' }
+TBlLayoutChildNode >> position: aPoint [
+	"Set position of the top left corner in the parent coordinate system"
+	<return: #Point>
+	
+	self explicitRequirement
+]
+
+{ #category : #accessing }
+TBlLayoutChildNode >> privateMeasurement [
+	<return: #BlLayoutNodeMeasurement>
+	
+	^ self explicitRequirement
+]
+
 { #category : #accessing }
 TBlLayoutChildNode >> userData [
 	<return: #Dictionary>
 	
 	^ self explicitRequirement
+]
+
+{ #category : #'api - geometry' }
+TBlLayoutChildNode >> width [
+	<return: #Number>
+	
+	^ self extent x
 ]

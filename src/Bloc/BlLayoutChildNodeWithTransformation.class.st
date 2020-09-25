@@ -31,17 +31,27 @@ BlLayoutChildNodeWithTransformation >> constraints: aBlLayoutConstraints [
 ]
 
 { #category : #'api - geometry' }
-BlLayoutChildNodeWithTransformation >> layoutBounds [
-	<return: #BlBounds>
+BlLayoutChildNodeWithTransformation >> extent [
+	"Return the size of the node in the parent coordinate system"
+	<return: #Point>
 
-	^ childNode layoutBounds
+	^ self extentToParent: childNode extent
+]
+
+{ #category : #'api - transformation' }
+BlLayoutChildNodeWithTransformation >> extentToParent: aPoint [
+	<return: #Point>
+
+	^ (transformation transformBounds: (BlBounds origin: 0@0 extent: aPoint)) extent
 ]
 
 { #category : #'api - geometry' }
-BlLayoutChildNodeWithTransformation >> layoutBounds: aBlLayoutBounds [
-	childNode layoutBounds: aBlLayoutBounds.
+BlLayoutChildNodeWithTransformation >> layoutBounds [
+	<return: #BlBounds>
 
-	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: self layoutBounds extent)
+	^ BlBounds
+		origin: childNode position
+		extent: self privateMeasurement extent
 ]
 
 { #category : #'api - transformation' }
@@ -53,35 +63,7 @@ BlLayoutChildNodeWithTransformation >> matrix: aBlMatrix [
 BlLayoutChildNodeWithTransformation >> measure: anExtentSpec [
 	childNode measure: anExtentSpec.
 
-	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: self measurement extent)
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNodeWithTransformation >> measuredBounds [
-	<return: #BlLayoutBoundsInLocal>
-	
-	^ BlLayoutBoundsInLocal new
-		position: self measurement position
-			extent: self measurement extent;
-		transformation: self transformation
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNodeWithTransformation >> measuredExtent [
-	"Return the measured extent of the child node in the child's coordinate system
-	without taking child's transformation into account"
-	<return: #BlLayoutExtent>
-
-	^ BlLayoutExtentInLocalWithTransformation new
-		size: self measurement extent;
-		transformation: self transformation
-]
-
-{ #category : #accessing }
-BlLayoutChildNodeWithTransformation >> measurement [
-	<return: #BlLayoutNodeMeasurement>
-	
-	^ childNode measurement
+	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: self privateMeasurement extent)
 ]
 
 { #category : #accessing }
@@ -92,7 +74,7 @@ BlLayoutChildNodeWithTransformation >> measurement: aBlLayoutNodeMeasurement [
 		assert: [ transformation notNil ]
 		description: [ 'Transformation should be set before measurement' ].
 
-	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: self measurement extent)
+	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: self privateMeasurement extent)
 ]
 
 { #category : #accessing }
@@ -121,6 +103,23 @@ BlLayoutChildNodeWithTransformation >> pointToParent: aPoint [
 	^ transformation transformPoint: aPoint
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutChildNodeWithTransformation >> position [
+	^ childNode position + (self pointToParent: 0@0)
+]
+
+{ #category : #'api - geometry' }
+BlLayoutChildNodeWithTransformation >> position: aPoint [
+	childNode position: aPoint - (self pointToParent: 0@0)
+]
+
+{ #category : #accessing }
+BlLayoutChildNodeWithTransformation >> privateMeasurement [
+	<return: #BlLayoutNodeMeasurement>
+	
+	^ childNode privateMeasurement
+]
+
 { #category : #accessing }
 BlLayoutChildNodeWithTransformation >> transformation [
 	<return: #BlElementTransformation>
@@ -138,7 +137,12 @@ BlLayoutChildNodeWithTransformation >> transformation: aBlElementTransformation 
 		description: [ 'Transformation must not be nil' ].
 
 	transformation := aBlElementTransformation asCachedTransformation
-		bounds: (BlBounds origin: 0.0@0.0 extent: self measurement extent)
+		bounds: (BlBounds origin: 0.0@0.0 extent: self privateMeasurement extent)
+]
+
+{ #category : #accessing }
+BlLayoutChildNodeWithTransformation >> transformationDo: aBlock [
+	aBlock value: transformation asElementTransformation
 ]
 
 { #category : #accessing }

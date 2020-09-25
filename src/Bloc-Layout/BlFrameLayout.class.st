@@ -122,7 +122,7 @@ BlFrameLayout >> layout: aParentNode [
 		| childBounds allowedBounds aTranslation alignment |
 
 		"ask child for its measured bounds"
-		childBounds := eachChildNode measuredBounds inParent.
+		childBounds := eachChildNode bounds.
 		allowedBounds := eachChildNode margin inset: parentBounds.
 
 		"a composite alignment"
@@ -130,7 +130,7 @@ BlFrameLayout >> layout: aParentNode [
 		aTranslation := alignment translationOf: childBounds in: allowedBounds.
 
 		"and finally set new bounds"
-		eachChildNode layoutBounds: (childBounds inLocal translateBy: aTranslation) ]
+		eachChildNode position: (childBounds position + aTranslation) ]
 ]
 
 { #category : #layout }
@@ -190,7 +190,7 @@ BlFrameLayout >> measureParentNode: aParentNode [
 					(aWeightY isZero
 						ifTrue: [ 0.0 ]
 						ifFalse: [ 1.0 / aWeightY ]).
-			maxExtent := maxExtent max: (eachChildNode measuredExtent inParent asPoint * aProportion) + eachChildNode margin extent ].
+			maxExtent := maxExtent max: (eachChildNode extent * aProportion) + eachChildNode margin extent ].
 
 	maxExtent := maxExtent + aParentNode padding extent.
 	maxExtent := maxExtent

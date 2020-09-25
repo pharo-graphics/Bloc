@@ -6,8 +6,13 @@ Class {
 }
 
 { #category : #'api - geometry' }
-BlLayoutNodeChildren >> measuredBounds [
-	^ self collect: [ :eachChild | eachChild measuredBounds asRectangle ] as: Array
+BlLayoutNodeChildren >> extent [
+	^ self collect: [ :eachChild | eachChild extent ] as: Array
+]
+
+{ #category : #'api - geometry' }
+BlLayoutNodeChildren >> layoutBounds [
+	^ self collect: [ :eachChild | eachChild layoutBounds asRectangle ] as: Array
 ]
 
 { #category : #'api - geometry' }
@@ -17,15 +22,15 @@ BlLayoutNodeChildren >> normalizePositions [
 	self
 		ifEmpty: [ ^ self ].
 
-	theTopLeft := self inject: self first measurement position into: [ :topLeft :eachNode | 
-		topLeft min: eachNode measurement position ].
+	theTopLeft := self inject: self first position into: [ :topLeft :eachNode | 
+		topLeft min: eachNode position ].
 	
-	self do: [ :eachNode | eachNode measurement position: eachNode measurement position - theTopLeft ]
+	self do: [ :eachNode | eachNode position: eachNode position - theTopLeft ]
 ]
 
 { #category : #'api - geometry' }
 BlLayoutNodeChildren >> roundPositions [	
-	self do: [ :eachNode | eachNode measurement position: eachNode measurement position rounded ]
+	self do: [ :eachNode | eachNode position: eachNode position rounded ]
 ]
 
 { #category : #converting }

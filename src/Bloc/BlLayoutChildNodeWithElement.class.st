@@ -45,43 +45,23 @@ BlLayoutChildNodeWithElement >> element: anObject [
 ]
 
 { #category : #'api - geometry' }
+BlLayoutChildNodeWithElement >> extent [
+	"Return the size of the node in the parent coordinate system"
+	<return: #Point>
+
+	^ childNode extent
+]
+
+{ #category : #'api - geometry' }
 BlLayoutChildNodeWithElement >> layoutBounds [
 	<return: #BlBounds>
 
 	^ childNode layoutBounds
 ]
 
-{ #category : #'api - geometry' }
-BlLayoutChildNodeWithElement >> layoutBounds: aBlLayoutBounds [
-	childNode layoutBounds: aBlLayoutBounds
-]
-
 { #category : #'api - measure' }
 BlLayoutChildNodeWithElement >> measure: anExtentSpec [
 	childNode measure: anExtentSpec
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNodeWithElement >> measuredBounds [
-	<return: #BlLayoutBoundsInLocal>
-	
-	^ childNode measuredBounds
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNodeWithElement >> measuredExtent [
-	"Return the measured extent of the child node in the child's coordinate system
-	without taking child's transformation into account"
-	<return: #BlLayoutExtentInLocal>
-
-	^ childNode measuredExtent
-]
-
-{ #category : #accessing }
-BlLayoutChildNodeWithElement >> measurement [
-	<return: #BlLayoutNodeMeasurement>
-	
-	^ childNode measurement
 ]
 
 { #category : #accessing }
@@ -101,6 +81,22 @@ BlLayoutChildNodeWithElement >> parent: aBlLayoutParentNode [
 	childNode parent: aBlLayoutParentNode
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutChildNodeWithElement >> position [
+	"Return a position of the top left corner in the parent coordinate system"
+	<return: #Point>
+	
+	^ childNode position
+]
+
+{ #category : #'api - geometry' }
+BlLayoutChildNodeWithElement >> position: aPoint [
+	"Set position of the top left corner in the parent coordinate system"
+	<return: #Point>
+	
+	childNode position: aPoint
+]
+
 { #category : #printing }
 BlLayoutChildNodeWithElement >> printOn: aStream [
 	aStream
@@ -108,6 +104,18 @@ BlLayoutChildNodeWithElement >> printOn: aStream [
 		print: self element measuredBounds position;
 		nextPutAll: ' extent: ';
 		print: self element measuredBounds extent
+]
+
+{ #category : #accessing }
+BlLayoutChildNodeWithElement >> privateMeasurement [
+	<return: #BlLayoutNodeMeasurement>
+	
+	^ childNode privateMeasurement
+]
+
+{ #category : #accessing }
+BlLayoutChildNodeWithElement >> transformationDo: aBlock [
+	childNode transformationDo: aBlock
 ]
 
 { #category : #accessing }

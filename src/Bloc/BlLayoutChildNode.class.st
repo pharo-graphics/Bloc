@@ -28,6 +28,14 @@ BlLayoutChildNode >> constraints: aBlLayoutConstraints [
 	constraints := aBlLayoutConstraints
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutChildNode >> extent [
+	"Return the size of the node in the parent coordinate system"
+	<return: #Point>
+
+	^ measurement extent
+]
+
 { #category : #initialization }
 BlLayoutChildNode >> initialize [
 	super initialize.
@@ -41,47 +49,14 @@ BlLayoutChildNode >> initialize [
 BlLayoutChildNode >> layoutBounds [
 	<return: #BlBounds>
 
-	^ layoutBounds
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNode >> layoutBounds: aBlLayoutBounds [
-	self
-		assert: [ aBlLayoutBounds isKindOf: BlLayoutBounds ]
-		description: [ 'Must be an instance of a special layout bounds class' ].
-
-	layoutBounds := aBlLayoutBounds inLocal asBounds
+	^ BlBounds
+		origin: self position
+		extent: measurement extent
 ]
 
 { #category : #'api - measure' }
 BlLayoutChildNode >> measure: anExtentSpec [
 	measurement := measurement measure: self with: anExtentSpec
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNode >> measuredBounds [
-	<return: #BlLayoutBoundsInLocal>
-	
-	^ BlLayoutBoundsInLocal new
-		position: self measurement position
-			extent: self measurement extent
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNode >> measuredExtent [
-	"Return the measured extent of the child node in the child's coordinate system
-	without taking child's transformation into account"
-	<return: #BlLayoutExtent>
-
-	^ BlLayoutExtentInLocal new
-		size: self measurement extent
-]
-
-{ #category : #accessing }
-BlLayoutChildNode >> measurement [
-	<return: #BlLayoutNodeMeasurement>
-
-	^ measurement
 ]
 
 { #category : #accessing }
@@ -99,13 +74,40 @@ BlLayoutChildNode >> parent: anObject [
 	parent := anObject
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutChildNode >> position [
+	"Return a position of the top left corner in the parent coordinate system"
+	<return: #Point>
+	
+	^ measurement position
+]
+
+{ #category : #'api - geometry' }
+BlLayoutChildNode >> position: aPoint [
+	"Set position of the top left corner in the parent coordinate system"
+	<return: #Point>
+	
+	measurement position: aPoint
+]
+
 { #category : #printing }
 BlLayoutChildNode >> printOn: aStream [
 	aStream
 		nextPutAll: 'Node position: ';
-		print: self measurement position;
+		print: measurement position;
 		nextPutAll: ' extent: ';
-		print: self measurement extent
+		print: measurement extent
+]
+
+{ #category : #accessing }
+BlLayoutChildNode >> privateMeasurement [
+	<return: #BlLayoutNodeMeasurement>
+	
+	^ measurement
+]
+
+{ #category : #accessing }
+BlLayoutChildNode >> transformationDo: aBlock [
 ]
 
 { #category : #accessing }

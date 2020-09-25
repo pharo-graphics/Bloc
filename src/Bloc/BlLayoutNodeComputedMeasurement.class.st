@@ -9,11 +9,6 @@ Class {
 }
 
 { #category : #accessing }
-BlLayoutNodeComputedMeasurement >> asTransformed: aBlElementCachedTransformation [
-	
-]
-
-{ #category : #accessing }
 BlLayoutNodeComputedMeasurement >> extent [
 	^ extent
 ]

@@ -53,6 +53,14 @@ BlLayoutChildNodeWithEdges >> constraints: aBlLayoutConstraints [
 	childNode constraints: aBlLayoutConstraints
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutChildNodeWithEdges >> extent [
+	"Return the size of the node in the parent coordinate system"
+	<return: #Point>
+
+	^ childNode extent
+]
+
 { #category : #'api - edges' }
 BlLayoutChildNodeWithEdges >> hasNodesAlongIncomingEdges [
 	<return: #Boolean>
@@ -86,37 +94,9 @@ BlLayoutChildNodeWithEdges >> layoutBounds [
 	^ childNode layoutBounds
 ]
 
-{ #category : #'api - geometry' }
-BlLayoutChildNodeWithEdges >> layoutBounds: aBlLayoutBounds [
-	childNode layoutBounds: aBlLayoutBounds
-]
-
 { #category : #'api - measure' }
 BlLayoutChildNodeWithEdges >> measure: anExtentSpec [
 	childNode measure: anExtentSpec
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNodeWithEdges >> measuredBounds [
-	<return: #BlLayoutBoundsInLocal>
-	
-	^ childNode measuredBounds
-]
-
-{ #category : #'api - geometry' }
-BlLayoutChildNodeWithEdges >> measuredExtent [
-	"Return the measured extent of the child node in the child's coordinate system
-	without taking child's transformation into account"
-	<return: #BlLayoutExtentInLocal>
-
-	^ childNode measuredExtent
-]
-
-{ #category : #accessing }
-BlLayoutChildNodeWithEdges >> measurement [
-	<return: #BlLayoutNodeMeasurement>
-
-	^ childNode measurement
 ]
 
 { #category : #accessing }
@@ -155,6 +135,22 @@ BlLayoutChildNodeWithEdges >> parent: aBlLayoutParentNode [
 	childNode parent: aBlLayoutParentNode
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutChildNodeWithEdges >> position [
+	"Return a position of the top left corner in the parent coordinate system"
+	<return: #Point>
+	
+	^ childNode position
+]
+
+{ #category : #'api - geometry' }
+BlLayoutChildNodeWithEdges >> position: aPoint [
+	"Set position of the top left corner in the parent coordinate system"
+	<return: #Point>
+	
+	childNode position: aPoint
+]
+
 { #category : #printing }
 BlLayoutChildNodeWithEdges >> printOn: aStream [
 	aStream
@@ -164,6 +160,18 @@ BlLayoutChildNodeWithEdges >> printOn: aStream [
 		print: self incomingEdges size;
 		nextPutAll: ' outgoing: ';
 		print: self outgoingEdges size
+]
+
+{ #category : #accessing }
+BlLayoutChildNodeWithEdges >> privateMeasurement [
+	<return: #BlLayoutNodeMeasurement>
+	
+	^ childNode privateMeasurement
+]
+
+{ #category : #accessing }
+BlLayoutChildNodeWithEdges >> transformationDo: aBlock [
+	childNode transformationDo: aBlock
 ]
 
 { #category : #accessing }

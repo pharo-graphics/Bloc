@@ -11,6 +11,19 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #accessing }
+BlElementTransformation class >> scale: aBlVector [
+	| aScaleTransformation aTransformation |
+	
+	aScaleTransformation := BlScalingTransformation new
+		origin: BlAffineTransformationCenterOrigin new;
+		scale: aBlVector.
+	
+	aTransformation := (BlElementLocalTransformation with: aScaleTransformation).
+	
+	^ aTransformation
+]
+
 { #category : #converting }
 BlElementTransformation >> asCachedTransformation [
 	^ BlElementCachedTransformation forTransformation: self
