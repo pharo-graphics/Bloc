@@ -95,8 +95,8 @@ BlLayoutChildNodeWithEdges >> layoutBounds [
 ]
 
 { #category : #'api - measure' }
-BlLayoutChildNodeWithEdges >> measure: anExtentSpec [
-	childNode measure: anExtentSpec
+BlLayoutChildNodeWithEdges >> measure: anExtentSpecOrBlock [
+	childNode measure: anExtentSpecOrBlock
 ]
 
 { #category : #accessing }
@@ -135,6 +135,13 @@ BlLayoutChildNodeWithEdges >> parent: aBlLayoutParentNode [
 	childNode parent: aBlLayoutParentNode
 ]
 
+{ #category : #'api - actions' }
+BlLayoutChildNodeWithEdges >> popAction [
+	<return: #BlLayoutNodeElementAction or: #nil>
+
+	^ childNode popAction
+]
+
 { #category : #'api - geometry' }
 BlLayoutChildNodeWithEdges >> position [
 	"Return a position of the top left corner in the parent coordinate system"
@@ -169,6 +176,11 @@ BlLayoutChildNodeWithEdges >> privateMeasurement [
 	^ childNode privateMeasurement
 ]
 
+{ #category : #'api - actions' }
+BlLayoutChildNodeWithEdges >> pushAction: aBlLayoutNodeElementAction [
+	childNode pushAction: aBlLayoutNodeElementAction
+]
+
 { #category : #accessing }
 BlLayoutChildNodeWithEdges >> transformationDo: aBlock [
 	childNode transformationDo: aBlock
@@ -195,7 +207,14 @@ BlLayoutChildNodeWithEdges >> withElement: aBlElement [
 
 { #category : #converting }
 BlLayoutChildNodeWithEdges >> withTransformation: aBlElementTransformation [
-	^ BlLayoutChildNodeWithTransformation new
-		childNode: self;
-		transformation:  aBlElementTransformation
+	^ self class new
+		childNode: (childNode withTransformation: aBlElementTransformation);
+		connectedEdges: connectedEdges
+]
+
+{ #category : #converting }
+BlLayoutChildNodeWithEdges >> withoutTransformation [
+	^ self class new
+		childNode: childNode withoutTransformation;
+		connectedEdges: connectedEdges
 ]

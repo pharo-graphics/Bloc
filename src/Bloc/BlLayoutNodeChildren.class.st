@@ -6,6 +6,24 @@ Class {
 }
 
 { #category : #'api - geometry' }
+BlLayoutNodeChildren >> boundingBox [
+	<return: #Rectangle>
+	| aBoundingBox |
+
+	self isEmpty
+		ifTrue: [ ^ BlBounds new asRectangle ].
+
+	aBoundingBox := nil.
+
+	self do: [ :aChild |
+		aBoundingBox
+			ifNil: [ aBoundingBox := aChild bounds ]
+			ifNotNil: [ aBoundingBox merge: aChild bounds ] ].
+
+	^ aBoundingBox expanded asRectangle
+]
+
+{ #category : #'api - geometry' }
 BlLayoutNodeChildren >> extent [
 	^ self collect: [ :eachChild | eachChild extent ] as: Array
 ]
@@ -36,4 +54,9 @@ BlLayoutNodeChildren >> roundPositions [
 { #category : #converting }
 BlLayoutNodeChildren >> withoutElement [
 	^ self collect: [ :eachNode | eachNode withoutElement ]
+]
+
+{ #category : #converting }
+BlLayoutNodeChildren >> withoutTransformation [
+	^ self collect: [ :eachNode | eachNode withoutTransformation ]
 ]

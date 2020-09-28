@@ -60,8 +60,8 @@ BlLayoutChildNodeWithElement >> layoutBounds [
 ]
 
 { #category : #'api - measure' }
-BlLayoutChildNodeWithElement >> measure: anExtentSpec [
-	childNode measure: anExtentSpec
+BlLayoutChildNodeWithElement >> measure: anExtentSpecOrBlock [
+	childNode measure: anExtentSpecOrBlock
 ]
 
 { #category : #accessing }
@@ -79,6 +79,13 @@ BlLayoutChildNodeWithElement >> parent [
 { #category : #accessing }
 BlLayoutChildNodeWithElement >> parent: aBlLayoutParentNode [
 	childNode parent: aBlLayoutParentNode
+]
+
+{ #category : #'api - actions' }
+BlLayoutChildNodeWithElement >> popAction [
+	<return: #BlLayoutNodeElementAction or: #nil>
+
+	^ childNode popAction
 ]
 
 { #category : #'api - geometry' }
@@ -113,6 +120,11 @@ BlLayoutChildNodeWithElement >> privateMeasurement [
 	^ childNode privateMeasurement
 ]
 
+{ #category : #'api - actions' }
+BlLayoutChildNodeWithElement >> pushAction: aBlLayoutNodeElementAction [
+	childNode pushAction: aBlLayoutNodeElementAction
+]
+
 { #category : #accessing }
 BlLayoutChildNodeWithElement >> transformationDo: aBlock [
 	childNode transformationDo: aBlock
@@ -139,12 +151,19 @@ BlLayoutChildNodeWithElement >> withElement: aBlElement [
 
 { #category : #converting }
 BlLayoutChildNodeWithElement >> withTransformation: aBlElementTransformation [
-	^ BlLayoutChildNodeWithTransformation new
-		childNode: self;
-		transformation:  aBlElementTransformation
+	^ self class new
+		childNode: (childNode withTransformation: aBlElementTransformation);
+		element: element
 ]
 
 { #category : #converting }
 BlLayoutChildNodeWithElement >> withoutElement [
 	^ childNode
+]
+
+{ #category : #converting }
+BlLayoutChildNodeWithElement >> withoutTransformation [
+	^ self class new
+		childNode: childNode withoutTransformation;
+		element: element
 ]

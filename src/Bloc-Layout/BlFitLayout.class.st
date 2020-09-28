@@ -28,9 +28,19 @@ BlFitLayout >> childrenBoundingBox: aParentNode [
 ]
 
 { #category : #layout }
+BlFitLayout >> computeAlignmentTranslation: aParentLayoutNode [
+	| boundingBox delta |
+
+	boundingBox := self childrenBoundingBox: aParentLayoutNode.
+	delta := ((aParentLayoutNode extent / 2.0) - boundingBox center).
+
+	^ delta
+]
+
+{ #category : #layout }
 BlFitLayout >> layout: aParentNode [
 	| aDelta |
-	aDelta := self normalizedDelta: aParentNode.
+	aDelta := self computeAlignmentTranslation: aParentNode.
 
 	aParentNode childrenDo: [ :eachChildNode | eachChildNode position: (eachChildNode position + aDelta) ]
 ]
@@ -45,7 +55,7 @@ BlFitLayout >> layout: anElement in: aRectangle [
 		at: #layoutNode
 		ifAbsent: [ ^ self ].
 		
-	aParentNode layoutExtent: aRectangle extent.
+	aParentNode extent: aRectangle extent.
 
 	self layout: aParentNode.
 
@@ -58,7 +68,7 @@ BlFitLayout >> measure: aParentLayoutNode [
 	"Override me to implement a custom child position measurement algorithm.
 	Graph or visualisation layouts should implement me"
 
-	self measureChildrenNodes: aParentLayoutNode.
+	self measureChildrenPositions: aParentLayoutNode.
 	self measureParentNode: aParentLayoutNode
 ]
 
@@ -75,7 +85,7 @@ BlFitLayout >> measure: anElement with: anExtentSpec [
 
 	self measure: aParentNode.
 
-	anElement measuredExtent: aParentNode measuredExtent.
+	anElement measuredExtent: aParentNode extent.
 
 	anElement userData at: #layoutNode put: aParentNode.
 
@@ -83,7 +93,7 @@ BlFitLayout >> measure: anElement with: anExtentSpec [
 ]
 
 { #category : #measure }
-BlFitLayout >> measureChildrenNodes: aParentLayoutNode [
+BlFitLayout >> measureChildrenPositions: aParentLayoutNode [
 	"Override me to implement a custom child position measurement algorithm.
 	Graph or visualisation layouts should implement me"
 ]
@@ -98,15 +108,5 @@ BlFitLayout >> measureParentNode: aParentNode [
 	width := boundingBox width + aParentNode padding width.
 	height := boundingBox height + aParentNode padding height.
 
-	aParentNode measuredExtent: (aParentNode extentSpec sizeFor: width @ height)
-]
-
-{ #category : #layout }
-BlFitLayout >> normalizedDelta: aParentLayoutNode [
-	| boundingBox delta |
-
-	boundingBox := self childrenBoundingBox: aParentLayoutNode.
-	delta := ((aParentLayoutNode layoutExtent / 2.0) - boundingBox center).
-
-	^ delta
+	aParentNode extent: (aParentNode extentSpec sizeFor: width @ height)
 ]

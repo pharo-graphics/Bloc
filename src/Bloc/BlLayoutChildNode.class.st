@@ -8,7 +8,8 @@ Class {
 		'measurement',
 		'layoutBounds',
 		'constraints',
-		'userData'
+		'userData',
+		'actions'
 	],
 	#category : #'Bloc-Layouts-Model'
 }
@@ -42,7 +43,8 @@ BlLayoutChildNode >> initialize [
 	
 	measurement := BlLayoutNodeNullMeasurement new.
 	parent := nil.
-	userData := nil
+	userData := nil.
+	actions := Stack new
 ]
 
 { #category : #'api - geometry' }
@@ -55,8 +57,8 @@ BlLayoutChildNode >> layoutBounds [
 ]
 
 { #category : #'api - measure' }
-BlLayoutChildNode >> measure: anExtentSpec [
-	measurement := measurement measure: self with: anExtentSpec
+BlLayoutChildNode >> measure: anExtentSpecOrBlock [
+	measurement := measurement measure: self with: anExtentSpecOrBlock
 ]
 
 { #category : #accessing }
@@ -72,6 +74,15 @@ BlLayoutChildNode >> parent [
 { #category : #accessing }
 BlLayoutChildNode >> parent: anObject [
 	parent := anObject
+]
+
+{ #category : #'api - actions' }
+BlLayoutChildNode >> popAction [
+	<return: #BlLayoutNodeElementAction or: #nil>
+
+	^ actions
+		ifEmpty: [ nil ]
+		ifNotEmpty: [ :theActions | theActions pop ]
 ]
 
 { #category : #'api - geometry' }
@@ -104,6 +115,11 @@ BlLayoutChildNode >> privateMeasurement [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ measurement
+]
+
+{ #category : #'api - actions' }
+BlLayoutChildNode >> pushAction: aBlLayoutNodeElementAction [
+	actions push: aBlLayoutNodeElementAction
 ]
 
 { #category : #accessing }
@@ -150,5 +166,10 @@ BlLayoutChildNode >> withoutElement [
 	"Return a layout node that does not know the element"
 	<return: #BlLayoutChildNode>
 
+	^ self
+]
+
+{ #category : #converting }
+BlLayoutChildNode >> withoutTransformation [
 	^ self
 ]

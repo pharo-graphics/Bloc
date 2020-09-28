@@ -26,7 +26,7 @@ BlLayoutNodeComputedMeasurement >> initialize [
 ]
 
 { #category : #measure }
-BlLayoutNodeComputedMeasurement >> measure: aLayoutChildNode with: anExtentSpec [
+BlLayoutNodeComputedMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ self

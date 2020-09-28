@@ -116,7 +116,7 @@ BlFrameLayout >> layout: aParentNode [
 	| parentBounds |
 
 	"first store parent's local bounds"
-	parentBounds := aParentNode padding inset: (0.0@0.0 extent: aParentNode layoutExtent).
+	parentBounds := aParentNode padding inset: (0.0@0.0 extent: aParentNode extent).
 
 	aParentNode childrenDo: [ :eachChildNode |
 		| childBounds allowedBounds aTranslation alignment |
@@ -143,7 +143,7 @@ BlFrameLayout >> layout: anElement in: aRectangle [
 		at: #layoutNode
 		ifAbsent: [ ^ self ].
 
-	aParentNode layoutExtent: aRectangle extent.
+	aParentNode extent: aRectangle extent.
 
 	self layout: aParentNode.
 
@@ -164,7 +164,7 @@ BlFrameLayout >> measure: anElement with: anExtentSpec [
 
 	aParentNode := (BlLayoutParentNode toMeasure: anElement) extentSpec: anExtentSpec.
 	self measure: aParentNode.
-	anElement measuredExtent: aParentNode measuredExtent.
+	anElement measuredExtent: aParentNode extent.
 	anElement userData at: #layoutNode put: aParentNode.
 
 	self measureIgnored: anElement with: anExtentSpec
@@ -203,7 +203,7 @@ BlFrameLayout >> measureParentNode: aParentNode [
 		min: aParentNode maxExtent
 		max: aParentNode minExtent.
 
-	aParentNode measuredExtent: aMeasuredExtent
+	aParentNode extent: aMeasuredExtent
 ]
 
 { #category : #private }
@@ -244,7 +244,7 @@ BlFrameLayout >> measurementSpecFor: aChildNode parentExtent: aParentExtent [
 { #category : #measure }
 BlFrameLayout >> postMeasureChildrenNodes: aParentNode [
 	aParentNode childrenDo: [ :eachChildNode |
-		eachChildNode measure: (self measurementSpecFor: eachChildNode parentExtent: aParentNode measuredExtent) ]
+		eachChildNode measure: [ (self measurementSpecFor: eachChildNode parentExtent: aParentNode extent) ] ]
 ]
 
 { #category : #measure }

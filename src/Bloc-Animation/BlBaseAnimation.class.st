@@ -338,6 +338,11 @@ BlBaseAnimation >> repeats [
 	^ loopCount
 ]
 
+{ #category : #'private - testing' }
+BlBaseAnimation >> requeueTaskAfterExecution [
+	^ self isRunning
+]
+
 { #category : #initialization }
 BlBaseAnimation >> reset [	
 	elapsedTime := 0 milliSeconds.
@@ -351,7 +356,6 @@ BlBaseAnimation >> reset [
 
 { #category : #'api - running' }
 BlBaseAnimation >> run [
-
 	self isStarted
 		ifFalse: [ self start ].
 
@@ -365,10 +369,7 @@ BlBaseAnimation >> run [
 
 	"I am a sub-animation, so I am not registred as animation"
 	self isSubAnimation
-		ifTrue: [ ^ self ].
-
-	self isRunning
-		ifTrue: [ self enqueue ]
+		ifTrue: [ ^ self ]
 ]
 
 { #category : #'private - testing' }

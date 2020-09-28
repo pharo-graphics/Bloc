@@ -5,9 +5,11 @@ Class {
 }
 
 { #category : #measure }
-BlLayoutNodeResizerMeasurement >> measure: aLayoutChildNode with: anExtentSpec [
+BlLayoutNodeResizerMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
-	| width measuredWidth height measuredHeight |
+	| anExtentSpec width measuredWidth height measuredHeight |
+
+	anExtentSpec := anExtentSpecOrBlock value.
 
    width := 0.0 max: (anExtentSpec widthSpec size).
 	measuredWidth := (anExtentSpec widthSpec mode measurement: aLayoutChildNode horizontalResizer with: width) size.

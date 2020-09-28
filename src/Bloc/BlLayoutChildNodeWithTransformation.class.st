@@ -60,8 +60,8 @@ BlLayoutChildNodeWithTransformation >> matrix: aBlMatrix [
 ]
 
 { #category : #'api - measure' }
-BlLayoutChildNodeWithTransformation >> measure: anExtentSpec [
-	childNode measure: anExtentSpec.
+BlLayoutChildNodeWithTransformation >> measure: anExtentSpecOrBlock [
+	childNode measure: anExtentSpecOrBlock.
 
 	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: self privateMeasurement extent)
 ]
@@ -103,6 +103,13 @@ BlLayoutChildNodeWithTransformation >> pointToParent: aPoint [
 	^ transformation transformPoint: aPoint
 ]
 
+{ #category : #'api - actions' }
+BlLayoutChildNodeWithTransformation >> popAction [
+	<return: #BlLayoutNodeElementAction or: #nil>
+
+	^ childNode popAction
+]
+
 { #category : #'api - geometry' }
 BlLayoutChildNodeWithTransformation >> position [
 	^ childNode position + (self pointToParent: 0@0)
@@ -118,6 +125,11 @@ BlLayoutChildNodeWithTransformation >> privateMeasurement [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ childNode privateMeasurement
+]
+
+{ #category : #'api - actions' }
+BlLayoutChildNodeWithTransformation >> pushAction: aBlLayoutNodeElementAction [
+	childNode pushAction: aBlLayoutNodeElementAction
 ]
 
 { #category : #accessing }
@@ -168,5 +180,10 @@ BlLayoutChildNodeWithTransformation >> withElement: aBlElement [
 
 { #category : #converting }
 BlLayoutChildNodeWithTransformation >> withTransformation: aBlElementTransformation [
-	^ self
+	self transformation: aBlElementTransformation
+]
+
+{ #category : #converting }
+BlLayoutChildNodeWithTransformation >> withoutTransformation [
+	^ childNode
 ]

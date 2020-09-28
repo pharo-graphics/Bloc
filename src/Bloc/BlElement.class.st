@@ -3467,6 +3467,9 @@ BlElement >> transformation: anElementTransformation [
 	transformation := anElementTransformation asCachedTransformation
 		bounds: self bounds inLocal asRectangle.
 
+	self constraints shouldAccountTransformation
+		ifTrue: [ self requestParentLayout ].
+
 	self boundsCache invalidateBoundsInSpace.
 	self invalidate.
 

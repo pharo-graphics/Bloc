@@ -61,6 +61,22 @@ TBlLayoutChildNode >> perimeter [
 	^ (self width + self height) * 2
 ]
 
+{ #category : #'api - actions' }
+TBlLayoutChildNode >> popAction [
+	<return: #BlLayoutNodeElementAction or: #nil>
+
+	^ self explicitRequirement
+]
+
+{ #category : #'api - actions' }
+TBlLayoutChildNode >> popActions [
+	<return: #Collection of: #BlLayoutNodeElementAction>
+	
+	^ Array streamContents: [ :aStream |
+		| eachAction |
+		[ (eachAction := self popAction) notNil ] whileTrue: [ aStream nextPut: eachAction ] ]
+]
+
 { #category : #'api - geometry' }
 TBlLayoutChildNode >> position [
 	"Return a position of the top left corner in the parent coordinate system"
@@ -82,6 +98,11 @@ TBlLayoutChildNode >> privateMeasurement [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ self explicitRequirement
+]
+
+{ #category : #'api - actions' }
+TBlLayoutChildNode >> pushAction: aBlLayoutNodeElementAction [
+	self explicitRequirement
 ]
 
 { #category : #accessing }

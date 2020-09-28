@@ -15,7 +15,7 @@ BlLayoutNodeMeasurement >> extent [
 ]
 
 { #category : #measure }
-BlLayoutNodeMeasurement >> measure: aLayoutChildNode with: anExtentSpec [
+BlLayoutNodeMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ self

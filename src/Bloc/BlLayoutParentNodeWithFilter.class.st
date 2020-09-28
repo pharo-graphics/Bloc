@@ -34,6 +34,16 @@ BlLayoutParentNodeWithFilter >> constraints: aBlLayoutConstraints [
 	parentNode constraints: aBlLayoutConstraints
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutParentNodeWithFilter >> extent [
+	^ parentNode extent
+]
+
+{ #category : #'api - geometry' }
+BlLayoutParentNodeWithFilter >> extent: aPoint [
+	parentNode extent: aPoint
+]
+
 { #category : #'api - extent spec' }
 BlLayoutParentNodeWithFilter >> extentSpec [
 	<return: #BlExtentMeasurementSpec>
@@ -49,28 +59,6 @@ BlLayoutParentNodeWithFilter >> extentSpec: aBlExtentMeasurementSpec [
 { #category : #accessing }
 BlLayoutParentNodeWithFilter >> filterBlock: aBlockClosure [
 	filter := aBlockClosure
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithFilter >> layoutExtent [
-	^ parentNode layoutExtent
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithFilter >> layoutExtent: aPoint [
-	parentNode layoutExtent: aPoint
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithFilter >> measuredExtent [
-	<return: #Point>
-
-	^ parentNode measuredExtent
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithFilter >> measuredExtent: aPoint [
-	parentNode measuredExtent: aPoint
 ]
 
 { #category : #accessing }

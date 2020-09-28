@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #measure }
-BlLayoutNodeNullMeasurement >> measure: aLayoutChildNode with: anExtentSpec [
+BlLayoutNodeNullMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ self

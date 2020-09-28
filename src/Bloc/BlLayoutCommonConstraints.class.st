@@ -103,6 +103,13 @@ BlLayoutCommonConstraints >> defaultVertical [
 ]
 
 { #category : #'api - constraints' }
+BlLayoutCommonConstraints >> doNotAccountTransformation [
+	"Let the layout know that the element's transformation should *not* be taken into account during layout"
+	
+	accountTransformation := false
+]
+
+{ #category : #'api - constraints' }
 BlLayoutCommonConstraints >> ignoreByLayout [
 	"Makes an element with this constraits be ignored by layout.
 	An element will still be measured but will not be taken into account

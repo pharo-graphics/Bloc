@@ -6,9 +6,8 @@ Class {
 	#instVars : [
 		'children',
 		'extentSpec',
-		'measuredExtent',
-		'layoutExtent',
-		'constraints'
+		'constraints',
+		'extent'
 	],
 	#category : #'Bloc-Layouts-Model'
 }
@@ -21,12 +20,7 @@ BlLayoutParentNode class >> alreadyMeasured: aBlElement [
 			aBlElement children accountedByLayout collect: [ :eachChild |
 				| aTransformation eachNode |
 				
-				aTransformation := eachChild constraints shouldAccountTransformation
-					ifTrue: [ eachChild transformation asElementTransformation. ]
-					ifFalse: [ nil ].
-				aTransformation := (aTransformation isNil or: [ aTransformation isIdentity ])
-					ifTrue: [ nil ]
-					ifFalse: [ aTransformation ].
+				aTransformation := self getTransformation: eachChild.
 					
 				eachNode := BlLayoutChildNode new
 					constraints: eachChild constraints;
@@ -41,6 +35,33 @@ BlLayoutParentNode class >> alreadyMeasured: aBlElement [
 ]
 
 { #category : #'instance creation' }
+BlLayoutParentNode class >> alreadyMeasuredWithoutTransformation: aBlElement [
+	^ self new
+		constraints: aBlElement constraints;
+		children: (
+			aBlElement children accountedByLayout collect: [ :eachChild |
+				(BlLayoutChildNode new
+					constraints: eachChild constraints;
+					measurement: (BlLayoutNodeComputedMeasurement new
+						position: eachChild constraints position;
+						extent: eachChild measuredExtent)) withElement: eachChild ])
+]
+
+{ #category : #'instance creation' }
+BlLayoutParentNode class >> getTransformation: anElement [
+	| aTransformation |
+
+	aTransformation := anElement constraints shouldAccountTransformation
+		ifTrue: [ anElement transformation asElementTransformation. ]
+		ifFalse: [ nil ].
+	aTransformation := (aTransformation isNil or: [ aTransformation isIdentity ])
+		ifTrue: [ nil ]
+		ifFalse: [ aTransformation ].
+
+	^ aTransformation
+]
+
+{ #category : #'instance creation' }
 BlLayoutParentNode class >> toMeasure: aBlElement [
 	^ self new
 		constraints: aBlElement constraints;
@@ -48,12 +69,7 @@ BlLayoutParentNode class >> toMeasure: aBlElement [
 			aBlElement children accountedByLayout collect: [ :eachChild |
 				| aTransformation eachNode |
 				
-				aTransformation := eachChild constraints shouldAccountTransformation
-					ifTrue: [ eachChild transformation asElementTransformation. ]
-					ifFalse: [ nil ].
-				aTransformation := (aTransformation isNil or: [ aTransformation isIdentity ])
-					ifTrue: [ nil ]
-					ifFalse: [ aTransformation ].
+				aTransformation := self getTransformation: eachChild.
 				
 				eachNode := BlLayoutChildNode new
 					constraints: eachChild constraints;
@@ -88,6 +104,16 @@ BlLayoutParentNode >> constraints: aBlLayoutConstraints [
 	constraints := aBlLayoutConstraints
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutParentNode >> extent [
+	^ extent
+]
+
+{ #category : #'api - geometry' }
+BlLayoutParentNode >> extent: aPoint [
+	extent := aPoint
+]
+
 { #category : #'api - extent spec' }
 BlLayoutParentNode >> extentSpec [
 	^ extentSpec
@@ -103,29 +129,7 @@ BlLayoutParentNode >> initialize [
 	super initialize.
 	
 	children := #().
-	measuredExtent := 0.0@0.0
-]
-
-{ #category : #accessing }
-BlLayoutParentNode >> layoutExtent [
-	^ layoutExtent
-]
-
-{ #category : #accessing }
-BlLayoutParentNode >> layoutExtent: anObject [
-	layoutExtent := anObject
-]
-
-{ #category : #accessing }
-BlLayoutParentNode >> measuredExtent [
-	<return: #Point>
-
-	^ measuredExtent
-]
-
-{ #category : #accessing }
-BlLayoutParentNode >> measuredExtent: anObject [
-	measuredExtent := anObject
+	extent := 0.0@0.0
 ]
 
 { #category : #accessing }

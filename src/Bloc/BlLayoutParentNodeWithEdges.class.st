@@ -33,6 +33,16 @@ BlLayoutParentNodeWithEdges >> constraints: aBlLayoutConstraints [
 	parentNode constraints: aBlLayoutConstraints
 ]
 
+{ #category : #'api - geometry' }
+BlLayoutParentNodeWithEdges >> extent [
+	^ parentNode extent
+]
+
+{ #category : #'api - geometry' }
+BlLayoutParentNodeWithEdges >> extent: aPoint [
+	parentNode extent: aPoint
+]
+
 { #category : #'api - extent spec' }
 BlLayoutParentNodeWithEdges >> extentSpec [
 	<return: #BlExtentMeasurementSpec>
@@ -43,28 +53,6 @@ BlLayoutParentNodeWithEdges >> extentSpec [
 { #category : #'api - extent spec' }
 BlLayoutParentNodeWithEdges >> extentSpec: aBlExtentMeasurementSpec [
 	parentNode extentSpec: aBlExtentMeasurementSpec
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithEdges >> layoutExtent [
-	^ parentNode layoutExtent
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithEdges >> layoutExtent: aPoint [
-	parentNode layoutExtent: aPoint
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithEdges >> measuredExtent [
-	<return: #Point>
-
-	^ parentNode measuredExtent
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithEdges >> measuredExtent: aPoint [
-	parentNode measuredExtent: aPoint
 ]
 
 { #category : #accessing }
