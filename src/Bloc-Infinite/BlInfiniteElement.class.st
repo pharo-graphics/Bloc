@@ -3,7 +3,7 @@ I'm an element which is supposed to contain huge amount of children and layout o
 I work with DataSources to fetch data from and can present data within different Infinite Layouts.
 
 I fire the following events:
-   - BlInfiniteChildDetachedEvent when a child element is detached
+   - BlInfiniteElementDetachedEvent when a child element is detached
 
 My main collaborators are:
  - BlInfiniteHolder
