@@ -44,9 +44,9 @@ BlTaskQueue >> enqueue: aBlTask [
 	self
 		assert: [ aBlTask isNew ]
 		description: [ 'Tasks cannot be submitted twice' ].
-	tasks ifNil: [ tasks := self newTasks ].
 
 	lock critical: [
+		tasks ifNil: [ tasks := self newTasks ].
 		taskExists := tasks includes: aBlTask.
 		taskExists ifFalse:
 			[ tasks add: aBlTask.
@@ -66,8 +66,8 @@ BlTaskQueue >> enqueueAll: aCollectionOfBlTask [
 		assert: [ aCollectionOfBlTask isNotNil ]
 		description: [ 'Tasks must not be nil' ].
 
-	tasks ifNil: [ tasks := self newTasks ].
 	lock critical: [
+		tasks ifNil: [ tasks := self newTasks ].
 		taskExists := tasks includesAny: aCollectionOfBlTask.
 		taskExists ifFalse:
 			[ aCollectionOfBlTask do: [ :task | task setQueued ].
@@ -94,9 +94,10 @@ BlTaskQueue >> enqueueFrom: aBlTaskQueue [
 BlTaskQueue >> flush [
 	| theTasks |
 
-	"Assignments without message sends are atomic, so no lock required"
-	theTasks := tasks.
-	tasks := nil.
+	"While assignments without message sends are atomic, so the sequence can't be interrupted, it's possible that a process switch would clear the tasks while another process is within the lock, so take the lock out here."
+	lock critical: [
+		theTasks := tasks.
+		tasks := nil ].
 
 	^ theTasks.
 
@@ -154,7 +155,7 @@ BlTaskQueue >> runOn: aSpace [
 	lock critical: [
 		"We store reference to tasks Array because it is possible
 		that a random task is removed while enumerating a collection.
-		This switch can be made atomic without the lock, but is here while state management is enabled."
+		This switch can be made atomic without the lock, but is here since the tasks shouldn't be updated while another process has the lock."
 		theTasks := tasks.
 		tasks := nil.
 		"Mark all tasks as pending"
