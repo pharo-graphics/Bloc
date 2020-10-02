@@ -4,13 +4,13 @@ I contain examples of a grid layout
 I show how different resizing strategies work and how to build advanced layouts with the help of a grid
 "
 Class {
-	#name : #BlGridLayoutUsageExplanation,
+	#name : #BlGridLayoutUsageExamples,
 	#superclass : #Object,
 	#category : #'Bloc-Examples-! Documentation - Layouts'
 }
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleDistributed2x2Grid [
+BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 	<gtExample>
 	| e1 e2 e3 e4 el space|
 	
@@ -49,7 +49,7 @@ BlGridLayoutUsageExplanation >> exampleDistributed2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleDistributedWithSpan2x2Grid [
+BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 	<gtExample>
 	| e1 e2 e3 el space|
 
@@ -85,7 +85,7 @@ BlGridLayoutUsageExplanation >> exampleDistributedWithSpan2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleDistributedWithWeight2x2Grid [
+BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 	<gtExample>
 	| e1 e2 e3 e4 el space|
 	
@@ -126,7 +126,7 @@ BlGridLayoutUsageExplanation >> exampleDistributedWithWeight2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleHorizontal2x1Grid [
+BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 	<gtExample>
 	| e1 e2 el space|
 	
@@ -149,7 +149,7 @@ BlGridLayoutUsageExplanation >> exampleHorizontal2x1Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleHorizontalSpacing2x1Grid [
+BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 	<gtExample>
 	| e1 e2 el space|
 	
@@ -176,7 +176,7 @@ BlGridLayoutUsageExplanation >> exampleHorizontalSpacing2x1Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleInCellAlignment2x2Grid [
+BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 	<gtExample>
 	| e1 e2 e3 el space|
 
@@ -213,7 +213,7 @@ BlGridLayoutUsageExplanation >> exampleInCellAlignment2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleNautilusGrid [
+BlGridLayoutUsageExamples >> exampleNautilusGrid [
 	<gtExample>
 	| e1 e2 e3 e4 e5 el space|
 	
@@ -259,7 +259,7 @@ BlGridLayoutUsageExplanation >> exampleNautilusGrid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleSimple2x2Grid [
+BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 	<gtExample>
 	| e1 e2 e3 e4 el space|
 	
@@ -290,7 +290,7 @@ BlGridLayoutUsageExplanation >> exampleSimple2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleSpacing9x9Grid [
+BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 	<gtExample>
 	| children el space dim |
 	
@@ -318,7 +318,7 @@ BlGridLayoutUsageExplanation >> exampleSpacing9x9Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleVertical1x2Grid [
+BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 	<gtExample>
 	| e1 e2 el space|
 	
@@ -341,7 +341,7 @@ BlGridLayoutUsageExplanation >> exampleVertical1x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> exampleVerticalSpacing1x2Grid [
+BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 	<gtExample>
 	| e1 e2 el space|
 	
@@ -368,7 +368,7 @@ BlGridLayoutUsageExplanation >> exampleVerticalSpacing1x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> verticalSpan [
+BlGridLayoutUsageExamples >> verticalSpan [
 	<gtExample>
 	| grid child1 child2 child3 |
 

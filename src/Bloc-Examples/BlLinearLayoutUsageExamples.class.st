@@ -9,9 +9,31 @@ Class {
 	#category : #'Bloc-Examples-Layout'
 }
 
+{ #category : #'layout - space equalization' }
+BlLinearLayoutUsageExamples >> equalizingHeighAndWidth [
+	<gtExample>		
+	| parent |
+
+	parent := self twoChildrenMatchParentInFitContent.
+	parent layoutDo: [ :aLayout | aLayout withSpaceEqualization ].
+
+	^ parent
+]
+
+{ #category : #'layout - space equalization' }
+BlLinearLayoutUsageExamples >> equalizingWidth [
+	<gtExample>		
+	| parent |
+
+	"width is by default equalized"
+	parent := self twoChildrenMatchParentInFitContent.
+
+	^ parent
+]
+
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleHorizontalListFixedWidthLTR [
-	<example>
+BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthLTR [
+	<gtExample>
 	| e1 e2 e3 el space |
 	e1 := BlElement new
 		border: (BlBorder paint: Color darkGray width: 4);
@@ -41,16 +63,12 @@ BlLinearLayoutUsageExamples class >> exampleHorizontalListFixedWidthLTR [
 		padding:(BlInsets all: 10);
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-		
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space show
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleHorizontalListFixedWidthRTL [
-	<example>
+BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthRTL [
+	<gtExample>
 	| e1 e2 e3 el space |
 	e1 := BlElement new
 		border: (BlBorder paint: Color darkGray width: 4);
@@ -80,16 +98,12 @@ BlLinearLayoutUsageExamples class >> exampleHorizontalListFixedWidthRTL [
 		padding:(BlInsets all: 10);
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-		
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space show
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleHorizontalListLTR [
-<example>
+BlLinearLayoutUsageExamples >> exampleHorizontalListLTR [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -116,17 +130,12 @@ BlLinearLayoutUsageExamples class >> exampleHorizontalListLTR [
 		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-	
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleHorizontalListRTL [
-<example>
+BlLinearLayoutUsageExamples >> exampleHorizontalListRTL [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -153,16 +162,12 @@ BlLinearLayoutUsageExamples class >> exampleHorizontalListRTL [
 		relocate: 200 @ 100;
 		background: Color veryVeryLightGray;
 		addChildren: { e1. e2. e3 }.
-
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleHorizontalTopCenterBottomLTR [
-<example>
+BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomLTR [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -186,17 +191,12 @@ BlLinearLayoutUsageExamples class >> exampleHorizontalTopCenterBottomLTR [
 		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-	
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleHorizontalTopCenterBottomRTL [
-<example>
+BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomRTL [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -220,17 +220,12 @@ BlLinearLayoutUsageExamples class >> exampleHorizontalTopCenterBottomRTL [
 		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-	
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleHorizontalUsingWeightLTR [
-<example>
+BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightLTR [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -260,17 +255,12 @@ BlLinearLayoutUsageExamples class >> exampleHorizontalUsingWeightLTR [
 		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleHorizontalUsingWeightRTL [
-<example>
+BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightRTL [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -300,17 +290,12 @@ BlLinearLayoutUsageExamples class >> exampleHorizontalUsingWeightRTL [
 		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleVerticalLeftCenterRightLRT [
-	<example>
+BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightLRT [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -337,17 +322,12 @@ BlLinearLayoutUsageExamples class >> exampleVerticalLeftCenterRightLRT [
 		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 }.
-	
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleVerticalLeftCenterRightRTL [
-	<example>
+BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightRTL [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -374,17 +354,12 @@ BlLinearLayoutUsageExamples class >> exampleVerticalLeftCenterRightRTL [
 		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 }.
-	
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleVerticalList [
-<example>
+BlLinearLayoutUsageExamples >> exampleVerticalList [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -415,17 +390,12 @@ BlLinearLayoutUsageExamples class >> exampleVerticalList [
 		padding: (BlInsets all: 10);
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-	
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlLinearLayoutUsageExamples class >> exampleVerticalListFixedHeight [
-	<example>
+BlLinearLayoutUsageExamples >> exampleVerticalListFixedHeight [
+	<gtExample>
 	| e1 e2 e3 el space|
 	
 	e1 := BlElement new
@@ -450,34 +420,7 @@ BlLinearLayoutUsageExamples class >> exampleVerticalListFixedHeight [
 		padding:(BlInsets all: 10);
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
-	
-	space := BlSpace new.
-	space root addChild:el.
-	BlElementSelection on: el.
-	space show
-	
-]
-
-{ #category : #'layout - space equalization' }
-BlLinearLayoutUsageExamples >> equalizingHeighAndWidth [
-	<gtExample>		
-	| parent |
-
-	parent := self twoChildrenMatchParentInFitContent.
-	parent layoutDo: [ :aLayout | aLayout withSpaceEqualization ].
-
-	^ parent
-]
-
-{ #category : #'layout - space equalization' }
-BlLinearLayoutUsageExamples >> equalizingWidth [
-	<gtExample>		
-	| parent |
-
-	"width is by default equalized"
-	parent := self twoChildrenMatchParentInFitContent.
-
-	^ parent
+	^ el
 ]
 
 { #category : #'layout - fit content' }
