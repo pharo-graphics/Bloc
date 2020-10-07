@@ -39,11 +39,12 @@ BlRope >> paintTreeWith: view [
 		shape: [ :each | 
 			(each isKindOf: BlCollectionRope)
 				ifTrue: [
-					BlTextElement new 
+					BrLabel new
+						look: BrGlamorousLabelLook; 
 						zIndex: 10;
 						background: Color white;
 						constraintsDo: [ :c | c padding: (BlInsets all: 5) ];
-						text: (BlRopedText rope: (each from: 0 to: (100 min: each size))) ]
+						text: ((each from: 0 to: (100 min: each size))) ]
 				ifFalse: [ 
 					BlElement new 
 						when: BlClickEvent do: [:event | event target phlow spawnObject: each ];
@@ -56,7 +57,7 @@ BlRope >> paintTreeWith: view [
 	view edges
 		shape: [ :each | BlLineElement new border: (BlBorder paint: (Color gray alpha: 0.5) width: 1 ) ];
 		connectToAll: #children.
-	view layout custom: (GtGradNorthHierarchicalLayout new)
+	view layout custom: (GtGraphTreeLayout new)
 "view layout tree 
 		nodeDistance: 20;
 		levelDistance: 40"
