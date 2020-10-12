@@ -3,11 +3,11 @@ BlTasks are the entities submitted to BlElements for execution during a pulse.
 
 Tasks may only be submitted to a queue once.  To help identify duplicate submission, tasks now have a state, one of: 
 
-- #new 					A new task 
-- #queued 				The task has been submitted to a queue
-- #pendingExecution 	The task has been removed from the queue and is awaiting execution, see ${method:BlTaskQueue>>#runOn:}$.
-- #executing 			The task is currently being executed.
-- #complete 				The task has completed execution.
+- ==#new== 					A new task 
+- ==#queued==				The task has been submitted to a queue
+- ==#pendingExecution== 	The task has been removed from the queue and is awaiting execution, see ${method:BlTaskQueue>>#runOn:}$.
+- ==#executing== 			The task is currently being executed.
+- ==#complete==				The task has completed execution.
 
 The state must be #new when the task is submitted, otherwise an error will be raised.  This moves the discovery of duplicate task submission back from the time the task is executed in the queue to the time it is submitted.
 
