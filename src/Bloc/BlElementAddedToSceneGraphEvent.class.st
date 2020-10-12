@@ -1,8 +1,5 @@
 "
-I am used by ${class:BlSceneInformingElement}$ in ${method:BlSceneInformingElement>>#onAddedToSceneGraph|label=#selector}$.
-I inform that an element was attached to a scene.
-
-You can use ${class:BlElementAddedToSceneGraphEventHandler}$ to perform specific actions.
+I inform that an element was attached to a scene. I can be added to any Bloc element.
 "
 Class {
 	#name : #BlElementAddedToSceneGraphEvent,
