@@ -1000,7 +1000,7 @@ BlElement >> detachChild: anElement [
 	"Detaches anElement from myself. Detaching an element should be followed either by attachChild: or removeDetachedChild:
 	Detachment should only be temporary; reattachment or removal should happen within the same drawing cycle as detachment.
 	When an element is detached, its parent is nil and cannot be retrieved using `children at:`
-	I must not be used within removeChild: because I have completely different intent; I meant to be temporary, while
+	I must not be used within removeChild: because I have completely different intent; I am meant to be temporary, while
 	removeChild: is permanent.
 	I don't clean focus in order to be able to preserve it in case child is attached back.
 	anElement must not be nil.
@@ -1130,7 +1130,7 @@ BlElement >> dispatchChildRemoved: anElement [
 	"Let child dispatch necessary events and hooks"
 	anElement dispatchRemovedFromParent: self.
 	
-	"If an only if I am attached to scene graph or I am detached from the scene graph
+	"If and only if I am attached to scene graph or I am detached from the scene graph
 	we let child know that it is not a part of the scene graph anymore.
 	
 	We need to also handle the detached case here, as when detaching the 
@@ -1185,7 +1185,7 @@ BlElement >> distanceTo: aPoint [
 
 { #category : #'geometry bounds' }
 BlElement >> distanceToX: aPoint [
-	"Compute the horizontal distance from my closest edge to a provided x coorinate of a point both given in my parent coordinates"
+	"Compute the horizontal distance from my closest edge to a provided x coordinate of a point both given in my parent coordinates"
 	<return: #Number>
 	| aClampedCoordinate theBoundsInParent |
 	
@@ -1197,7 +1197,7 @@ BlElement >> distanceToX: aPoint [
 
 { #category : #'geometry bounds' }
 BlElement >> distanceToY: aPoint [
-	"Compute the vertical distance from my closest edge to a provided y coorinate of a point both given in my parent coordinates"
+	"Compute the vertical distance from my closest edge to a provided y coordinate of a point both given in my parent coordinates"
 	<return: #Number>
 	| aClampedCoordinate theBoundsInParent |
 	
@@ -1302,7 +1302,7 @@ BlElement >> extent: aPoint [
 BlElement >> findMouseEventTargetAt: aPoint [
 	"Return the deepest child element among all my children or myself that may be a target for mouse event at provided location.
 	The coordinate point is given in space coordinates.
-	I may return nil if no such child found and if I can not be event target either"
+	I may return nil if no such child is found and if I can not be event target either"
 	<return: #BlElement or: nil>
 	| doWantEvent |
 	
@@ -1931,7 +1931,7 @@ BlElement >> isTransparent [
 BlElement >> isVisible [
 	"Return true if I should be visible, false otherwise.
 	Note, that I am not the same as isTransparent/isOpaque, those
-	just influence rendering and not behaviour or interraction.
+	just influence rendering and not behaviour or interaction.
 	If element is invisible it does not receive events such as mouse clicks"
 	<return: #Boolean>
 
@@ -2114,7 +2114,7 @@ BlElement >> looseFocus [
 
 { #category : #'focus requesting' }
 BlElement >> looseFocus: aChildElement [
-	"Propagate focus loose up in the scene graph with an original
+	"Propagate focus loss up in the scene graph with an original
 	element that looses focus"
 
 	self
@@ -2436,7 +2436,7 @@ BlElement >> mouseCursor: aCursor [
 
 { #category : #'api - painting' }
 BlElement >> needsPaint [
-	"Return true if I am marked as dirty and am wating to be re-painted"
+	"Return true if I am marked as dirty and am waiting to be re-painted"
 	<return: #Boolean>
 
 	^ needsPaint
@@ -2794,7 +2794,7 @@ BlElement >> position: aPoint [
 
 { #category : #accessing }
 BlElement >> position: aPosition extent: anExtent [
-	"I do a hard work of changing element's position and extent.
+	"I do the hard work of changing my position and extent.
 	This action must be very optimized in the sense of invalidation.
 	For example if element becomes smaller in both axis (horizontal and vertical)
 	it is enough to invalidate damaged area only once within old bounds,
@@ -2914,7 +2914,7 @@ BlElement >> relocate: aPoint [
 	Note: I do not invalidate drawing bounds nor change actual position.
 	I only register an update request and ask my parent (if there is one) to recompute
 	layout. Do nothing if previous #relocate request was performed with the same coordinates.
-	Note: We can not guarantee that new element's position will be equal to reqeusted one,
+	Note: We can not guarantee that new element's position will be equal to requested one,
 	since it depends on the applied layout.
 	aPoint must not be nil"
 	<argument: #aPoint satisfies: #notNil>
@@ -3005,13 +3005,13 @@ BlElement >> removeChildren [
 
 	"actually remove children"
 	self resetChildrenArray.
-	"send hook after elements has been removes"
+	"send hook after elements have been removed"
 	oldChildren do: [ :anElement | self dispatchChildRemoved: anElement ].
 	
-	"First of all, we have to damage area occupied by removed element"
+	"First of all, we have to damage area occupied by removed elements"
 	self invalidate.
 	
-	"then we request layout update while element is not yet removed"
+	"then we request layout update while elements are not yet removed"
 	self requestLayout
 ]
 
@@ -3032,10 +3032,10 @@ BlElement >> removeChildren: aListOfElements [
 	self children removeAll: aListOfElements.
 	aListOfElements do: [ :anElement | self dispatchChildRemoved: anElement ].
 	
-	"First of all, we have to damage area occupied by removed element"
+	"First of all, we have to damage area occupied by removed elements"
 	self invalidate.
 	
-	"then we request layout update while element is not yet removed"
+	"then we request layout update while elements are not yet removed"
 	self requestLayout
 ]
 
@@ -3071,7 +3071,7 @@ BlElement >> removeFromParent [
 
 { #category : #'children add/remove' }
 BlElement >> replaceChild: aChildElement with: anotherElement [
-	"Relace a given child relement with another element preserving the children order.
+	"Replace a given child relement with another element preserving the children order.
 	Request layout and redraw an area occupied by anElement.
 	As result anElement sends BlElementRemovedEvent
 	anElement must not be nil.
@@ -3093,7 +3093,7 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 
 { #category : #'children add/remove' }
 BlElement >> replaceChild: aChildElement with: anotherElement as: aSymbol [
-	"Relace a given child relement with another element preserving the children order.
+	"Replace a given child relement with another element preserving the children order.
 	Request layout and redraw an area occupied by anElement.
 	As result anElement sends BlElementRemovedEvent
 	anElement must not be nil.
@@ -3366,7 +3366,7 @@ BlElement >> size: aPoint [
 { #category : #accessing }
 BlElement >> space [
 	"Return space to which I belong. Direct reference boosts performance.
-	Each element has a reference to the current space which is set at demand."
+	Each element has a reference to the current space which is set on demand."
 	<return: #BlSpace or: nil>
 	
 	spaceReference spaceDo: [ :aSpace | ^ aSpace ].
@@ -3384,7 +3384,7 @@ BlElement >> space [
 
 { #category : #accessing }
 BlElement >> space: aSpace [
-	"**I am internal Bloc api, do not use me diectly!**
+	"**I am internal Bloc api, do not use me directly!**
 	Set space to be accessed directly from my multiple methods.
 	Update the space reference for my children.
 	aSpace must not be nil."
@@ -3438,8 +3438,8 @@ BlElement >> telemetry [
 
 { #category : #'children accessing' }
 BlElement >> topMostParent [
-	"Return a topmot parent in a scene graph.
-	A topmost parent is an element that does not have a parent by its own"
+	"Return a topmost parent in a scene graph.
+	A topmost parent is an element that does not have a parent of its own"
 	<return: #BlElement>
 
 	^ self hasParent
@@ -3532,7 +3532,7 @@ BlElement >> updateGeometry [
 
 { #category : #transformations }
 BlElement >> updateTransformationBounds [
-	"Update the bounds of the cached transformation in order to recompute its martix
+	"Update the bounds of the cached transformation in order to recompute its matrix
 	since transformation origin depends on the element's bounds"
 
 	transformation bounds: self bounds inLocal asRectangle
@@ -3664,7 +3664,7 @@ BlElement >> withAllChildrenAt: aPoint do: aBlock [
 	isPointInsideMe := self containsPoint: aPoint.
 	
 	"if point is not inside of me and I clip children, it literally
-	mean that there neither me nor my children are visible at a given point"
+	means that there neither me nor my children are visible at a given point"
 	(isPointInsideMe not and: [ self clipChildren ])
 		ifTrue: [ ^ false ].
 	
@@ -3684,7 +3684,7 @@ BlElement >> withAllChildrenAt: aPoint do: aBlock [
 		it no matter of the value of the boolean"
 		anyChildFound := anyChildFound or: (eachChildElement withAllChildrenAt: aPointInChildCoordinates do: aBlock) ].
 	
-	"if a point is inside of me, evaluate a block regardless whether there were any child"
+	"if a point is inside of me, evaluate a block regardless whether there was any child"
 	isPointInsideMe
 		ifTrue: [
 			aBlock value: self.
