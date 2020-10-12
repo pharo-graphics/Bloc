@@ -1,5 +1,5 @@
 "
-${class:BlPulseStatSignal}$ records some basic statistics about the Bloc main loop and is emitted each time a pulse is fired.  See ${class:BlPulseLoop}$ for more details and ${method:name=BlPulseLoop>>#wait}$ for a description of milliSecs.
+${class:BlPulseStatSignal}$ records some basic statistics about the Bloc main loop and is emitted each time a pulse is fired.  See  ${class:BlHostPulseLoop}$ for more details and  ${method:name=BlHostPulseLoop>>#wait}$ for a description of milliSecs.
 ${method:BlPulseStatSignal>>#sampleCount}$ is the number of pulses fired in this sample.
 
 ${method:BlPulseStatSignal>>#l2}$ is the number of times milliSecs <= 2.
@@ -11,7 +11,7 @@ ${method:BlPulseStatSignal>>#lowPriorityDelayCount}$ is the number of times a mi
 
 !!!Using BlPulseStatSignal
 
-${method:BlPulseLoop>>#wait}$ calls ${method:name=BlPulseStatSignal class>>#duration:delayForced:}$ each time it waits.  A signal is then emitted every sampleCount times.
+${method:BlHostPulseLoop>>#wait}$ calls ${method:name=BlPulseStatSignal class>>#duration:delayForced:}$ each time it waits.  A signal is then emitted every sampleCount times.
 
 Normally the signals are caputred using ${class:name=CircularMemoryLogger}$ or ${class:name=MemoryLogger}$.
 
