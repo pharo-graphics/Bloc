@@ -1,7 +1,7 @@
 "
-BlAsyncElementValuable is an abstract class that collaborates with BlAsyncElement to asynchronously update the state of BlAsyncElements with minimal impact on UI responsiveness.
+BlAsyncElementValuable is an abstract class that collaborates with ${class:name=BlAsyncElement}$ to asynchronously update the state of BlAsyncElements with minimal impact on UI responsiveness.
 
-BlAsyncElementValuable works with ${class:name=BlAsyncUIWorkerPool}$ to ensure that elements that are currently visible on the screen are updated before elements that are not visible by prioritising tasks based on the elements visibility and distance from the viewable area, see ${method:name=BlAsyncElementValuable>>#taskPriority}$.
+BlAsyncElementValuable uses the queue priority mechanism in ${class:name=BlTktCommonPriorityQueueWorkerPool}$ to update elements that are currently visible on the screen before those that are not.  The priority of the task is based on the element's visiblity and distance from the viewable area, see ${method:name=BlAsyncElementValuable>>#entryPriority}$.
 
 Subclasses are responsible for deterining the contents and update their element, see ${method:name=BlAsyncElementValuable>>#updateElement}$.
 

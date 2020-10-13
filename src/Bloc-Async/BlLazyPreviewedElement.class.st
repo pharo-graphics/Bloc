@@ -1,7 +1,7 @@
 "
 I am a lazy element that extends the ${class:BlLazyElement}$ behavior.
 I know how to render a preview which is displayed while waiting to calculate the desired ${class:BlElement}$.
-I use ${class:BlLazyElementPreviewStencil}$ to render a preview ${class:BlElement}$ object.
+I use ${class:BlAsyncDelayedPreviewStrategy}$ to render a preview ${class:BlElement}$ object.
 
 !! Preview Element 
 
