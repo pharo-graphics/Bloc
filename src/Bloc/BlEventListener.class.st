@@ -244,7 +244,7 @@ BlEventListener >> wantsEvent: anEvent [
 	anEvent isElementEvent
 		ifTrue: [ ^ false ].
 
-	^ true
+	^ anEvent isKindOf: BlUIEvent
 ]
 
 { #category : #'other handlers' }
