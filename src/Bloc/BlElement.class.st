@@ -461,7 +461,7 @@ BlElement >> attachSpace [
 		ifTrue: [ self requestFocus: self ]
 		ifFalse: [
 			self space focusOwner == self
-				ifTrue: [ self looseFocus: self ] ].
+				ifTrue: [ self loseFocus: self ] ].
 	
 	self taskQueue isEmpty
 		ifFalse: [ self space enqueueTasksFrom: self taskQueue ].
@@ -2107,6 +2107,26 @@ BlElement >> localPointToParent: aPoint [
 
 { #category : #'focus requesting' }
 BlElement >> looseFocus [
+	self
+		deprecated: 'Use #loseFocus instead.'
+		transformWith: '`@receiver looseFocus' -> '`@receiver loseFocus'.
+
+	self loseFocus
+]
+
+{ #category : #'focus requesting' }
+BlElement >> looseFocus: aChildElement [
+	self
+		deprecated: 'Please use loseFocus: instead.'
+		transformWith:
+			'`@receiver looseFocus: `@statements1'
+				-> '`@receiver loseFocus: `@statements1'.
+
+	self loseFocus: aChildElement
+]
+
+{ #category : #'focus requesting' }
+BlElement >> loseFocus [
 	| anElementToLooseFocus |
 
 	anElementToLooseFocus := self focusedChild
@@ -2116,12 +2136,12 @@ BlElement >> looseFocus [
 		ifFalse: [ ^ self ].
 
 	anElementToLooseFocus isAttachedToSceneGraph
-		ifTrue: [ anElementToLooseFocus looseFocus: anElementToLooseFocus ]
+		ifTrue: [ anElementToLooseFocus loseFocus: anElementToLooseFocus ]
 		ifFalse: [ anElementToLooseFocus focused: false ]
 ]
 
 { #category : #'focus requesting' }
-BlElement >> looseFocus: aChildElement [
+BlElement >> loseFocus: aChildElement [
 	"Propagate focus loss up in the scene graph with an original
 	element that looses focus"
 
@@ -2130,8 +2150,8 @@ BlElement >> looseFocus: aChildElement [
 		description: [ 'I must be attached to the scene graph' ].
 		
 	(self hasParent and: [ self parent isAttachedToSceneGraph ])
-		ifTrue: [ self parent looseFocus: aChildElement ]
-		ifFalse: [ self space looseFocusFor: aChildElement ]
+		ifTrue: [ self parent loseFocus: aChildElement ]
+		ifFalse: [ self space loseFocusFor: aChildElement ]
 ]
 
 { #category : #accessing }

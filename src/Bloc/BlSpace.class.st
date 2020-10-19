@@ -949,7 +949,18 @@ BlSpace >> knowsPosition [
 { #category : #'focus managing' }
 BlSpace >> looseFocusFor: anElement [
 			
-	self focusProcessor looseFor: anElement
+	self
+		deprecated: 'Please use loseFocusFor: instead.'
+		transformWith:
+			'`@receiver looseFocusFor: `@statements1'
+				-> '`@receiver loseFocusFor: `@statements1'.
+				
+	self loseFocusFor: anElement
+]
+
+{ #category : #'focus managing' }
+BlSpace >> loseFocusFor: anElement [
+	self focusProcessor loseFor: anElement
 ]
 
 { #category : #'change reporting' }
