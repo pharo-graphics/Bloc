@@ -7,8 +7,29 @@ Class {
 	#category : #'Bloc-Examples-KeyBinding'
 }
 
+{ #category : #'instance creation' }
+BlKeyCombinationExamples >> alternativeCombination [
+	<gtExample>
+	
+	^ BlAlternativeCombination new
+]
+
+{ #category : #'instance creation' }
+BlKeyCombinationExamples >> arrowLeft [
+	<gtExample>
+	
+	^ BlKeyboardKey arrowLeft
+]
+
+{ #category : #'instance creation' }
+BlKeyCombinationExamples >> compulsoryCombination [
+	<gtExample>
+	
+	^ BlCompulsoryCombination new
+]
+
 { #category : #examples }
-BlKeyCombinationExamples class >> keyLogger [
+BlKeyCombinationExamples >> keyLogger [
 	<gtExample>
 
 	^ BlElement new
@@ -35,27 +56,6 @@ BlKeyCombinationExamples class >> keyLogger [
 			action: [ self inform: 'Shortcut: meta + shift + arrowUp' ]);
 		requestFocus;
 		yourself
-]
-
-{ #category : #'instance creation' }
-BlKeyCombinationExamples >> alternativeCombination [
-	<gtExample>
-	
-	^ BlAlternativeCombination new
-]
-
-{ #category : #'instance creation' }
-BlKeyCombinationExamples >> arrowLeft [
-	<gtExample>
-	
-	^ BlKeyboardKey arrowLeft
-]
-
-{ #category : #'instance creation' }
-BlKeyCombinationExamples >> compulsoryCombination [
-	<gtExample>
-	
-	^ BlCompulsoryCombination new
 ]
 
 { #category : #'instance creation' }

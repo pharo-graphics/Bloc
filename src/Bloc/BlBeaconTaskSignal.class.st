@@ -1,7 +1,7 @@
 "
 I am a ${class:Beacon}$ signal.
 I am emitted by ${class:BlBeaconLoggingTask}$.
-I inform about scheduling and executing of ${class:BLTask}$.
+I inform about scheduling and executing of  ${class:BlTask}$.
 "
 Class {
 	#name : #BlBeaconTaskSignal,

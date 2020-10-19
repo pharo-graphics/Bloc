@@ -9,7 +9,7 @@ Class {
 
 { #category : #examples }
 BlFlowLayoutCompositionExamples class >> exampleHorizontalList [
-	<example>
+	<gtExample>
 	| e1 e2 e3 e4 el space e5 |
 
 	e1 := BlElement new
@@ -45,19 +45,12 @@ BlFlowLayoutCompositionExamples class >> exampleHorizontalList [
 		border: (BlBorder paint: Color lightGray width: 8);
 		padding: (BlInsets all: 8);
 		addChildren: { e1. e2. e3. e4 . e5 }.
-
-	space := BlSpace new.
-	space root addChild:el.
-	space root addEventHandler:
-			(BlEventHandler
-				on: BlDoubleClickEvent
-				do: [ :evt | BlElementSelection on: evt target ]).
-	space show
+	^ el
 ]
 
 { #category : #examples }
 BlFlowLayoutCompositionExamples class >> exampleText [
-	<example>
+	<gtExample>
 	| aText aLineIterator  theWords aParent aSpace floatA aFloatIndex |
 
 	theWords := OrderedCollection new.
@@ -111,15 +104,7 @@ BlFlowLayoutCompositionExamples class >> exampleText [
 		border: (BlBorder paint: Color lightGray width: 8);
 		addChildren: theWords;
 		yourself.
-
-	aSpace := BlSpace new.
-	aSpace root addChild: aParent.
-	
-	aSpace root addEventHandler:
-			(BlEventHandler
-				on: BlDoubleClickEvent
-				do: [ :evt | BlElementSelection on: evt target ]).
-	aSpace show
+	^ aParent
 ]
 
 { #category : #examples }

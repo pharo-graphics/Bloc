@@ -4,14 +4,14 @@ I contain examples of a grid layout
 I show how different resizing strategies work and how to build advanced layouts with the help of a grid
 "
 Class {
-	#name : #BlGridLayoutUsageExplanation,
+	#name : #BlGridLayoutUsageExamples,
 	#superclass : #Object,
 	#category : #'Bloc-Examples-! Documentation - Layouts'
 }
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleDistributed2x2Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
+	<gtExample>
 	| e1 e2 e3 e4 el space|
 	
 	e1 := BlElement new
@@ -45,17 +45,12 @@ BlGridLayoutUsageExplanation class >> exampleDistributed2x2Grid [
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 };
 		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleDistributedWithSpan2x2Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
+	<gtExample>
 	| e1 e2 e3 el space|
 
 	e1 := BlElement new
@@ -86,17 +81,12 @@ BlGridLayoutUsageExplanation class >> exampleDistributedWithSpan2x2Grid [
 		background: Color blue;
 		addChildren: { e1. e2. e3 };
 		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleDistributedWithWeight2x2Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
+	<gtExample>
 	| e1 e2 e3 e4 el space|
 	
 	e1 := BlElement new
@@ -132,17 +122,12 @@ BlGridLayoutUsageExplanation class >> exampleDistributedWithWeight2x2Grid [
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 };
 		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el	
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleHorizontal2x1Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
+	<gtExample>
 	| e1 e2 el space|
 	
 	e1 := BlElement new
@@ -160,18 +145,12 @@ BlGridLayoutUsageExplanation class >> exampleHorizontal2x1Grid [
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleHorizontalSpacing2x1Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
+	<gtExample>
 	| e1 e2 el space|
 	
 	e1 := BlElement new
@@ -193,18 +172,12 @@ BlGridLayoutUsageExplanation class >> exampleHorizontalSpacing2x1Grid [
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleInCellAlignment2x2Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
+	<gtExample>
 	| e1 e2 e3 el space|
 
 	e1 := BlElement new
@@ -236,17 +209,12 @@ BlGridLayoutUsageExplanation class >> exampleInCellAlignment2x2Grid [
 		background: Color blue;
 		addChildren: { e1. e2. e3 };
 		yourself.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleNautilusGrid [
-	<example>
+BlGridLayoutUsageExamples >> exampleNautilusGrid [
+	<gtExample>
 	| e1 e2 e3 e4 e5 el space|
 	
 	e1 := BlElement new
@@ -287,18 +255,12 @@ BlGridLayoutUsageExplanation class >> exampleNautilusGrid [
 		background: Color veryLightGray;
 		addChildren: { e1. e2. e3. e4. e5 };
 		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleSimple2x2Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
+	<gtExample>
 	| e1 e2 e3 e4 el space|
 	
 	e1 := BlElement new
@@ -324,18 +286,12 @@ BlGridLayoutUsageExplanation class >> exampleSimple2x2Grid [
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 };
 		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleSpacing9x9Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
+	<gtExample>
 	| children el space dim |
 	
 	dim := 9.
@@ -358,18 +314,12 @@ BlGridLayoutUsageExplanation class >> exampleSpacing9x9Grid [
 		background: Color blue;
 		addChildren: children;
 		yourself.
-
-	el forceLayout.
-	
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
+	^ el 
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleVertical1x2Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
+	<gtExample>
 	| e1 e2 el space|
 	
 	e1 := BlElement new
@@ -387,18 +337,12 @@ BlGridLayoutUsageExplanation class >> exampleVertical1x2Grid [
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation class >> exampleVerticalSpacing1x2Grid [
-	<example>
+BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
+	<gtExample>
 	| e1 e2 el space|
 	
 	e1 := BlElement new
@@ -420,17 +364,11 @@ BlGridLayoutUsageExplanation class >> exampleVerticalSpacing1x2Grid [
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.
-	
-	el forceLayout.
-	space := BlSpace new.
-	space root addChild: el.
-	BlElementSelection on: el.
-	space	show
-	
+	^ el
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExplanation >> verticalSpan [
+BlGridLayoutUsageExamples >> verticalSpan [
 	<gtExample>
 	| grid child1 child2 child3 |
 

@@ -40,6 +40,14 @@ BlSvgPath >> build: aBlock viewbox: aRectangle [
 	viewbox := aRectangle
 ]
 
+{ #category : #accessing }
+BlSvgPath >> gtSegmentsFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Segments';
+		items: [segments]
+]
+
 { #category : #initialization }
 BlSvgPath >> initialize [
 	super initialize.

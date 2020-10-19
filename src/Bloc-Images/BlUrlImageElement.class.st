@@ -1,9 +1,7 @@
 "
 BlUrlImageElement provides a simple Bloc element for displaying images retrieved over the internet.
 
-BlUrlImageElement takes care of retrieving and caching the image in a background process so that UI responsiveness is not affected.
-
-The number of images retrieved concurrently is defined in ${method:name=BlUrlImageElement>>#maxPoolSize}$.
+BlUrlImageElement takes care of retrieving and caching the image in a background process so that UI responsiveness is not affected.  The priority at which the background process runs, and the number of concurrent tasks is defined by the queue that the task is submitted to, see ${method:name=BlUrlImageElement>>#taskPool}$.
 
 
 !!Public API and Key Messages

@@ -1,10 +1,7 @@
 "
 BlFileImageElement provides a simple Bloc element for displaying images retrieved from disk.
 
-BlFileImageElement takes care of retrieving and caching the image in a background process so that UI responsiveness is not affected.
-
-The number of images retrieved concurrently is defined in ${method:name=BlAsyncElement>>#maxPoolSize}$.
-
+BlFileImageElement takes care of retrieving and caching the image in a background process so that UI responsiveness is not affected.  The priority at which the background process runs, and the number of concurrent tasks is defined by the queue that the task is submitted to, see ${method:name=BlFileImageElement>>#taskPool}$.
 
 !!Public API and Key Messages
 
