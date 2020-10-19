@@ -458,7 +458,7 @@ BlElement >> attachSpace [
 	request will never reach the space.
 	(https://github.com/feenkcom/gtoolkit/issues/1457)"
 	self isFocused
-		ifTrue: [ self requestFocus ]
+		ifTrue: [ self requestFocus: self ]
 		ifFalse: [
 			self space focusOwner == self
 				ifTrue: [ self looseFocus: self ] ].
@@ -2107,9 +2107,17 @@ BlElement >> localPointToParent: aPoint [
 
 { #category : #'focus requesting' }
 BlElement >> looseFocus [
-	self isAttachedToSceneGraph
-		ifTrue: [ self looseFocus: self ]
-		ifFalse: [ self focused: false ]
+	| anElementToLooseFocus |
+
+	anElementToLooseFocus := self focusedChild
+		ifNil: [ self ].
+
+	anElementToLooseFocus isFocused
+		ifFalse: [ ^ self ].
+
+	anElementToLooseFocus isAttachedToSceneGraph
+		ifTrue: [ anElementToLooseFocus looseFocus: anElementToLooseFocus ]
+		ifFalse: [ anElementToLooseFocus focused: false ]
 ]
 
 { #category : #'focus requesting' }
@@ -3115,6 +3123,9 @@ BlElement >> requestFocus [
 	"Request a focus for this element.
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
+
+	self isFocused
+		ifTrue: [ ^ self ].
 
 	self isAttachedToSceneGraph
 		ifTrue: [ self requestFocus: self ]
