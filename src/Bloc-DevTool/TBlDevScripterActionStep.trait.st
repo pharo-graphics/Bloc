@@ -19,6 +19,11 @@ TBlDevScripterActionStep >> do [
 ]
 
 { #category : #'steps - interactions' }
+TBlDevScripterActionStep >> doubleClick [
+	^ self addStep: (BlDevScripterDoubleClickStep new referenceSender)
+]
+
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> fire [
 	^ self addStep: BlDevScripterFireEventStep new referenceSender
 ]
