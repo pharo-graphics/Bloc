@@ -18,7 +18,9 @@ Class {
 		'RemovedFromSceneGraph',
 		'ScrolledEvent',
 		'SelectionAcquired',
-		'SelectionLost'
+		'SelectionLost',
+		'TransformationChanged',
+		'TransformationInSpaceChanged'
 	],
 	#category : #'Bloc-Events-Dispatcher'
 }
@@ -107,6 +109,18 @@ BlElementEventDispatcherActivatedEvents class >> SelectionLost [
 	^ SelectionLost value
 ]
 
+{ #category : #'accessing - flags' }
+BlElementEventDispatcherActivatedEvents class >> TransformationChanged [
+	"This method was automatically generated"
+	^ TransformationChanged value
+]
+
+{ #category : #'accessing - flags' }
+BlElementEventDispatcherActivatedEvents class >> TransformationInSpaceChanged [
+	"This method was automatically generated"
+	^ TransformationInSpaceChanged value
+]
+
 { #category : #'flags declaration' }
 BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 	"
@@ -127,7 +141,9 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 		#RemovedFromSceneGraph.
 		#ScrolledEvent.
 		#SelectionAcquired.
-		#SelectionLost
+		#SelectionLost.
+		#TransformationChanged.
+		#TransformationInSpaceChanged.
 	}
 ]
 
@@ -220,6 +236,18 @@ BlElementEventDispatcherActivatedEvents >> addSelectionLost [
 	value := value | SelectionLost value
 ]
 
+{ #category : #'flags - add' }
+BlElementEventDispatcherActivatedEvents >> addTransformationChanged [
+	"This method was automatically generated"
+	value := value | TransformationChanged value
+]
+
+{ #category : #'flags - add' }
+BlElementEventDispatcherActivatedEvents >> addTransformationInSpaceChanged [
+	"This method was automatically generated"
+	value := value | TransformationInSpaceChanged value
+]
+
 { #category : #'flags - clear' }
 BlElementEventDispatcherActivatedEvents >> clearAddedToParent [
 	"This method was automatically generated"
@@ -304,6 +332,18 @@ BlElementEventDispatcherActivatedEvents >> clearSelectionLost [
 	value := value & (SelectionLost value bitInvert)
 ]
 
+{ #category : #'flags - clear' }
+BlElementEventDispatcherActivatedEvents >> clearTransformationChanged [
+	"This method was automatically generated"
+	value := value & (TransformationChanged value bitInvert)
+]
+
+{ #category : #'flags - clear' }
+BlElementEventDispatcherActivatedEvents >> clearTransformationInSpaceChanged [
+	"This method was automatically generated"
+	value := value & (TransformationInSpaceChanged value bitInvert)
+]
+
 { #category : #'flags - testing' }
 BlElementEventDispatcherActivatedEvents >> hasAddedToParent [
 	"This method was automatically generated"
@@ -386,4 +426,16 @@ BlElementEventDispatcherActivatedEvents >> hasSelectionAcquired [
 BlElementEventDispatcherActivatedEvents >> hasSelectionLost [
 	"This method was automatically generated"
 	^ (value & SelectionLost value) ~= 0
+]
+
+{ #category : #'flags - testing' }
+BlElementEventDispatcherActivatedEvents >> hasTransformationChanged [
+	"This method was automatically generated"
+	^ (value & TransformationChanged value) ~= 0
+]
+
+{ #category : #'flags - testing' }
+BlElementEventDispatcherActivatedEvents >> hasTransformationInSpaceChanged [
+	"This method was automatically generated"
+	^ (value & TransformationInSpaceChanged value) ~= 0
 ]

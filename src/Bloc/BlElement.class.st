@@ -2660,6 +2660,7 @@ BlElement >> onRemovedFromSceneGraph [
 BlElement >> onTransformationChanged [
 	"Is sent when my transformation changed"
 	
+	self eventDispatcher dispatchTransformationChanged.
 	self onTransformationInSpaceChanged
 ]
 
@@ -2667,6 +2668,7 @@ BlElement >> onTransformationChanged [
 BlElement >> onTransformationInSpaceChanged [
 	"Is sent when my transformation in space changed, it may be that my own transformation changed or of my parent"
 	
+	self eventDispatcher dispatchTransformationInSpaceChanged.
 	self children do: [ :eachChild | eachChild onTransformationInSpaceChanged ]
 ]
 

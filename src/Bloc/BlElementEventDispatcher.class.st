@@ -126,6 +126,18 @@ BlElementEventDispatcher >> dispatchSelectionLost [
 		ifTrue: [ self dispatchEvent: (BlElementSelectionLostEvent from: self) ]
 ]
 
+{ #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchTransformationChanged [
+	activatedElementEvents hasTransformationChanged
+		ifTrue: [ self dispatchEvent: (BlElementTransformationChangedEvent from: self owner) ]
+]
+
+{ #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchTransformationInSpaceChanged [
+	activatedElementEvents hasTransformationInSpaceChanged
+		ifTrue: [ self dispatchEvent: (BlElementTransformationInSpaceChangedEvent from: self owner) ]
+]
+
 { #category : #'api - element events' }
 BlElementEventDispatcher >> enableAddedToParent [
 	activatedElementEvents addAddedToParent
@@ -204,6 +216,16 @@ BlElementEventDispatcher >> enableSelectionAcquired [
 { #category : #'api - element events' }
 BlElementEventDispatcher >> enableSelectionLost [
 	activatedElementEvents addSelectionLost
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> enableTransformationChanged [
+	activatedElementEvents addTransformationChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> enableTransformationInSpaceChanged [
+	activatedElementEvents addTransformationInSpaceChanged
 ]
 
 { #category : #'gt-extension' }
@@ -305,4 +327,14 @@ BlElementEventDispatcher >> wantsSelectionAcquired [
 { #category : #'api - element events' }
 BlElementEventDispatcher >> wantsSelectionLost [
 	^ activatedElementEvents hasSelectionLost
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> wantsTransformationChanged [
+	^ activatedElementEvents hasTransformationChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> wantsTransformationInSpaceChanged [
+	^ activatedElementEvents hasTransformationInSpaceChanged
 ]
