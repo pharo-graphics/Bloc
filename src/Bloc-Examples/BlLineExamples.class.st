@@ -388,6 +388,32 @@ BlLineExamples >> line [
 ]
 
 { #category : #'example - connections' }
+BlLineExamples >> lineBetweenElementBottomAndTopCenters [
+	<gtExample>
+	| redLine fromBox toBox |
+	
+	fromBox := self box.
+	fromBox relocate: 150@50.
+	fromBox
+		when: BlClickEvent
+		do: [ :anEvent | anEvent currentTarget addAnimation: (BlTransformAnimation scale: 0.75) ].
+	
+	toBox := self box.
+	toBox relocate: 250@250.
+	toBox
+		when: BlClickEvent
+		do: [ :anEvent | anEvent currentTarget addAnimation: (BlTransformAnimation scale: 1.25) ].
+	
+	redLine := self redLine.
+	
+	redLine fromAnchor: (BlElementBottomCenterAnchor element: fromBox).
+	redLine toAnchor: (BlElementTopCenterAnchor element: toBox).
+	
+	^ self container
+		addChildren: { fromBox . toBox . redLine }
+]
+
+{ #category : #'example - connections' }
 BlLineExamples >> lineBetweenElementBottomCenters [
 	<gtExample>
 	| redLine fromBox toBox |

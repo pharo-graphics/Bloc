@@ -44,5 +44,8 @@ BlNearestPositionAnchor >> nearestToElement: anElement [
 		do: [ :anEvent | self dispatchMoveEvent ].
 	nearestToElement
 		addEventHandlerOn: BlElementExtentChangedEvent
+		do: [ :anEvent | self dispatchMoveEvent ].
+	nearestToElement
+		addEventHandlerOn: BlElementTransformationInSpaceChangedEvent
 		do: [ :anEvent | self dispatchMoveEvent ]
 ]

@@ -8,7 +8,7 @@ Class {
 		'moveDispatched',
 		'referenceElement'
 	],
-	#category : 'Bloc-Geometry-Anchors'
+	#category : #'Bloc-Geometry-Anchors'
 }
 
 { #category : #'instance creation' }
@@ -134,5 +134,8 @@ BlAnchorRelativeToElement >> referenceElement: anElement [
 		do: [ :anEvent | self dispatchMoveEvent ].
 	referenceElement
 		addEventHandlerOn: BlElementExtentChangedEvent
+		do: [ :anEvent | self dispatchMoveEvent ].
+	referenceElement
+		addEventHandlerOn: BlElementTransformationInSpaceChangedEvent
 		do: [ :anEvent | self dispatchMoveEvent ]
 ]
