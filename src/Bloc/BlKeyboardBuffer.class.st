@@ -46,7 +46,8 @@ BlKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
 	"Return true if the buffer has exactly a collection of given keys"
 	<return: #Boolean>
 	
-	^ events keys asSet = aCollectionOfKeys asSet
+	"see https://github.com/feenkcom/gtoolkit/issues/1578"
+	^ (events keys asSet reject: #isUnkownKey) = aCollectionOfKeys asSet
 ]
 
 { #category : #initialization }
