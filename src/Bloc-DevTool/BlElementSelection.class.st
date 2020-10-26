@@ -247,7 +247,7 @@ BlElementSelection >> showInfo [
 	self relocate: self selectionPosition.
 	self size: self selectionExtent.
 
-	self effect: (BlBlurBelowEffect radius: 1.5).
+	self effect: (BlGaussianShadowEffect new).
 	self background: (Color white alpha: 0.5).
 	
 	marginElement := BlElement new.

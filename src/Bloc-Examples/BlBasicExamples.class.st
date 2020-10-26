@@ -331,7 +331,7 @@ BlBasicExamples >> rectangle [
 		geometry: BlRoundedRectangleGeometry new;
 		size: 200 @ 100;
 		background: Color transparent;
-		effect: (BlBlurBelowEffect radius: 4);
+		effect: (BlGaussianShadowEffect new);
 		border: (BlBorder paint: Color blue width: 4);
 		yourself
 ]
