@@ -66,22 +66,13 @@ BlOverlayElement >> isAttached [
 	^ referenceElement isNotNil
 ]
 
-{ #category : #layout }
-BlOverlayElement >> measureMyBounds [
-	"I compute by position and size in relation to the reference element"
-	self
-		assert: [ self isAttached ]
-		description: [ 'I must be attached to the reference element to measure myself' ].
-		
-	self relocate: (overlayListener positionFor: referenceElement).
-	self size: (overlayListener extentFor: referenceElement).
-]
-
-{ #category : #layout }
-BlOverlayElement >> onMeasure: anExtentMeasurementSpec [
-
+{ #category : #'hooks - children' }
+BlOverlayElement >> onAddedToSceneGraph [
+	super onAddedToSceneGraph.
+	
 	self isAttached
-		ifTrue: [ self measureMyBounds ].
-
-	super onMeasure: anExtentMeasurementSpec
+		ifFalse: [ ^ self ].
+		
+	overlayListener relocateTo: referenceElement.
+	overlayListener resizeTo: referenceElement.
 ]

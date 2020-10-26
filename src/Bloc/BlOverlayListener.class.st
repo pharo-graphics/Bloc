@@ -33,9 +33,19 @@ BlOverlayListener >> elementPositionInSpaceChangedEvent: anEvent [
 	self relocateTo: anEvent currentTarget
 ]
 
+{ #category : #'element handlers' }
+BlOverlayListener >> elementTransformationInSpaceChangedEvent: anEvent [
+	self relocateTo: anEvent currentTarget.
+	self resizeTo: anEvent currentTarget.
+]
+
 { #category : #'api - accessing' }
 BlOverlayListener >> eventsToHandle [
-	^ { BlElementExtentChangedEvent  . BlElementPositionInSpaceChangedEvent }
+	^ {
+		BlElementExtentChangedEvent .
+		BlElementPositionInSpaceChangedEvent .
+		BlElementTransformationInSpaceChangedEvent .
+	}
 ]
 
 { #category : #geometry }
@@ -104,6 +114,7 @@ BlOverlayListener >> positionFor: anElement [
 
 { #category : #'api - updating' }
 BlOverlayListener >> relocateTo: anElement [
+	NonInteractiveTranscript stdout nextPutAll: ((self positionFor: anElement)) asString; cr.
 	self overlayElement relocate: (self positionFor: anElement)
 ]
 

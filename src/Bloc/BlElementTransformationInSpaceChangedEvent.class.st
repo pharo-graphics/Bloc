@@ -18,3 +18,8 @@ BlElementTransformationInSpaceChangedEvent class >> enableIn: anEventDispatcher 
 BlElementTransformationInSpaceChangedEvent class >> wantedIn: anEventDispatcher [
 	^ anEventDispatcher wantsTransformationInSpaceChanged
 ]
+
+{ #category : #sending }
+BlElementTransformationInSpaceChangedEvent >> sendTo: anObject [
+	anObject elementTransformationInSpaceChangedEvent: self
+]

@@ -18,3 +18,8 @@ BlElementTransformationChangedEvent class >> enableIn: anEventDispatcher [
 BlElementTransformationChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsTransformationChanged
 ]
+
+{ #category : #sending }
+BlElementTransformationChangedEvent >> sendTo: anObject [
+	anObject elementTransformationChangedEvent: self
+]

@@ -296,6 +296,18 @@ BlElement >> allParentsDo: aBlock [
 	self parent withAllParentsDo: aBlock
 ]
 
+{ #category : #'children accessing' }
+BlElement >> allParentsTo: aParentElement do: aBlock [
+	"Evaluate a block with each of my parents as an argument starting from my direct parent
+	up to the given parent element (excluding myself).
+	If I don't have a parent - does nothing"
+	
+	self allParentsDo: [ :eachParent |
+		aBlock value: eachParent.
+		eachParent == aParentElement
+			ifTrue: [ ^ self ] ]
+]
+
 { #category : #'event handling' }
 BlElement >> allowChildrenMouseEvents [
 	"Allow my children to receive mouse events"
@@ -1864,6 +1876,17 @@ BlElement >> isFocused [
 	<return: #Boolean>
 
 	^ self focused
+]
+
+{ #category : #layout }
+BlElement >> isLayoutBoundary [
+	"Return true if I am a layout boundary, e.g. the layout recomputation requests should not be propagated up in the hierarchy.
+	Imagine an element matches parent in both directions or has a fixed size, in this case even if my children request layout update
+	I do not have to propagate it further because it will not have any influence on the parent"
+	<return: #Boolean>
+	
+	^ (self constraints horizontal resizer isExact or: [ self constraints horizontal resizer isMatchParent ])
+		and: [ self constraints vertical resizer isExact or: [ self constraints vertical resizer isMatchParent ] ]
 ]
 
 { #category : #layout }

@@ -1,11 +1,11 @@
 Class {
-	#name : #BlResizerExamples,
+	#name : #BlResizerElementExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Overlay'
+	#category : #'Bloc-Examples-Utilities - Resizable'
 }
 
 { #category : #examples }
-BlResizerExamples >> bottomCenterResize [
+BlResizerElementExamples >> bottomCenterResize [
 	<gtExample>
 	| container vector |
 	
@@ -21,7 +21,7 @@ BlResizerExamples >> bottomCenterResize [
 ]
 
 { #category : #examples }
-BlResizerExamples >> bottomLeftResize [
+BlResizerElementExamples >> bottomLeftResize [
 	<gtExample>
 	| container vector |
 	
@@ -37,7 +37,7 @@ BlResizerExamples >> bottomLeftResize [
 ]
 
 { #category : #'examples - advanced' }
-BlResizerExamples >> bottomResizerBarInsideContainer [
+BlResizerElementExamples >> bottomResizerBarInsideContainer [
 	<gtExample>
 	| aContainer aResizer |
 
@@ -65,7 +65,7 @@ BlResizerExamples >> bottomResizerBarInsideContainer [
 ]
 
 { #category : #examples }
-BlResizerExamples >> bottomRightResize [
+BlResizerElementExamples >> bottomRightResize [
 	<gtExample>
 	| container vector |
 	
@@ -81,7 +81,7 @@ BlResizerExamples >> bottomRightResize [
 ]
 
 { #category : #'instance creation' }
-BlResizerExamples >> container [
+BlResizerElementExamples >> container [
 	<gtExample>
 	
 	^ BlElement new
@@ -90,7 +90,7 @@ BlResizerExamples >> container [
 ]
 
 { #category : #'instance creation' }
-BlResizerExamples >> containerWithResizable [
+BlResizerElementExamples >> containerWithResizable [
 	<gtExample>
 	| container resizable resizer |
 	
@@ -106,17 +106,17 @@ BlResizerExamples >> containerWithResizable [
 ]
 
 { #category : #'instance creation' }
-BlResizerExamples >> initialExtent [
+BlResizerElementExamples >> initialExtent [
 	^ 100@100
 ]
 
 { #category : #'instance creation' }
-BlResizerExamples >> initialPosition [
+BlResizerElementExamples >> initialPosition [
 	^ 100@100
 ]
 
 { #category : #examples }
-BlResizerExamples >> middleLeftResize [
+BlResizerElementExamples >> middleLeftResize [
 	<gtExample>
 	| container vector |
 	
@@ -132,7 +132,7 @@ BlResizerExamples >> middleLeftResize [
 ]
 
 { #category : #examples }
-BlResizerExamples >> middleRightResize [
+BlResizerElementExamples >> middleRightResize [
 	<gtExample>
 	| container vector |
 	
@@ -148,7 +148,7 @@ BlResizerExamples >> middleRightResize [
 ]
 
 { #category : #'instance creation' }
-BlResizerExamples >> resizable [
+BlResizerElementExamples >> resizable [
 	<gtExample>
 	
 	^ BlElement new
@@ -158,14 +158,14 @@ BlResizerExamples >> resizable [
 ]
 
 { #category : #'instance creation' }
-BlResizerExamples >> resizer [
+BlResizerElementExamples >> resizer [
 	<gtExample>
 
 	^ BlResizerElement new
 ]
 
 { #category : #examples }
-BlResizerExamples >> topCenterResize [
+BlResizerElementExamples >> topCenterResize [
 	<gtExample>
 	| container vector |
 	
@@ -181,7 +181,7 @@ BlResizerExamples >> topCenterResize [
 ]
 
 { #category : #examples }
-BlResizerExamples >> topLeftResize [
+BlResizerElementExamples >> topLeftResize [
 	<gtExample>
 	| container vector |
 	
@@ -197,7 +197,7 @@ BlResizerExamples >> topLeftResize [
 ]
 
 { #category : #examples }
-BlResizerExamples >> topRightResize [
+BlResizerElementExamples >> topRightResize [
 	<gtExample>
 	| container vector |
 	

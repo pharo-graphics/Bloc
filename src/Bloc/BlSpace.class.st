@@ -46,6 +46,7 @@ Class {
 		'frame',
 		'gestureProcessor',
 		'elementsNeedingPaint',
+		'elementsNeedingLayout',
 		'telemetry',
 		'reference'
 	],
@@ -346,7 +347,7 @@ BlSpace >> asReference [
 	^ reference ifNil: [ reference := BlAttachedCachedSpaceReference forSpace: self ]
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> beDirtyArea [
 	self
 		invalidRect: (BlBounds origin: 0.0 @ 0.0 extent: self root extent)
@@ -366,7 +367,7 @@ BlSpace >> borderless: aBoolean [
 	 self hostSpaceDo: [ :aHostSpace | aHostSpace borderless: aBoolean ].
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> clearDirtyAreas [
 	"Clear all dirty areas.
 	Default implementation simply removes all areas from the collection"
@@ -483,7 +484,7 @@ BlSpace >> dispatchTimeEvent: aSpaceStepEventClass during: aBlock [
 				yourself)
 ]
 
-{ #category : #pulse }
+{ #category : #'change - layout' }
 BlSpace >> doLayout [
 	| layoutCounter maxLayoutCount |
 
@@ -495,7 +496,7 @@ BlSpace >> doLayout [
 		layoutCounter := 0.
 		maxLayoutCount := 100.
 
-		[ self hasLayoutError not and: [ self root isLayoutRequested and: [ layoutCounter < maxLayoutCount ] ] ]
+		[ self hasLayoutError not and: [ self isLayoutRequested and: [ layoutCounter < maxLayoutCount ] ] ]
 			whileTrue: [
 				self doUpdateLayout.
 				layoutCounter := layoutCounter + 1.
@@ -516,14 +517,46 @@ BlSpace >> doUpdateFocus [
 		ifNil: [ self initializeFocus ]
 ]
 
-{ #category : #pulse }
+{ #category : #'change - layout' }
 BlSpace >> doUpdateLayout [
-	"Start layouting process"
+	| elementsToLayout |
+	
+	self elementsNeedingLayout copy do: [ :eachElement |
+		eachElement layout previousMeasurementSpec
+			ifNil: [
+				self elementsNeedingLayout remove: eachElement.
+				eachElement requestLayout ] ].
+	
+	elementsToLayout := self elementsNeedingLayout reject: [ :eachElement |
+		| shouldIgnore |
+		
+		shouldIgnore := false.
+		
+		self elementsNeedingLayout do: [ :eachPotentialParent |
+			(eachElement hasParent: eachPotentialParent)
+				ifTrue: [
+					eachElement
+						allParentsTo: eachPotentialParent
+						do: [ :eachParent | eachParent layout requestingLayout: true ].
+					shouldIgnore := true ] ].
+		
+		shouldIgnore ].
+	
+	"we should clear the elements needing layout before we compute layout to support multiple layout passes"
+	self elementsNeedingLayout removeAll.
+	
+	elementsToLayout := elementsToLayout
+		collect: [ :eachElement | eachElement -> eachElement compositionDepth ] as: Array.
+	elementsToLayout := (elementsToLayout sort: [ :a :b | a value > b value ]) collect: [ :each | each key ].
 
-	self doUpdateLayout: self root
+	elementsToLayout do: [ :eachElement |
+		self doUpdateLayoutBoundary: eachElement ].
+	
+	self root isLayoutRequested
+		ifTrue: [ self doUpdateLayout: self root ].
 ]
 
-{ #category : #pulse }
+{ #category : #'change - layout' }
 BlSpace >> doUpdateLayout: anElement [
 	"Perform layout of a given element (e.g. root or glass)"
 
@@ -543,6 +576,18 @@ BlSpace >> doUpdateLayout: anElement [
 	anElement commitChanges
 ]
 
+{ #category : #'change - layout' }
+BlSpace >> doUpdateLayoutBoundary: anElement [
+	"Perform layout of a given element (e.g. root or glass)"
+
+	"first we measure.."
+	anElement measure: anElement layout previousMeasurementSpec.
+
+	"...then we layout in measured during previous step bounds"
+	anElement applyLayoutIn: (anElement position extent: anElement measuredBounds extent).
+	anElement commitChanges
+]
+
 { #category : #accessing }
 BlSpace >> dragboard [
 	^ dragboard
@@ -553,7 +598,12 @@ BlSpace >> dragboard: anObject [
 	dragboard := anObject
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - layout' }
+BlSpace >> elementsNeedingLayout [
+	^ elementsNeedingLayout
+]
+
+{ #category : #'change - rendering' }
 BlSpace >> elementsNeedingPaint [
 	^ elementsNeedingPaint
 ]
@@ -846,6 +896,7 @@ BlSpace >> initialize [
 	session := Smalltalk session.
 	dirtyAreas := OrderedCollection new.
 	elementsNeedingPaint := Set new.
+	elementsNeedingLayout := Set new.
 	
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
@@ -886,7 +937,7 @@ BlSpace >> initializeFocus [
 		ifTrue: [ self root requestFocus ]
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> invalidRect: aBlBounds from: anElement [
 	self makeDirty: aBlBounds.
 	self requestNextPulse.
@@ -899,12 +950,12 @@ BlSpace >> isFocused [
 	^ self focused
 ]
 
-{ #category : #testing }
+{ #category : #'change - layout' }
 BlSpace >> isLayoutRequested [
 	"Indicates whether or not root element's layout needs to be updated next frame"
 	<return: #Boolean>
 	
-	^ self root isLayoutRequested
+	^ self root isLayoutRequested or: [ self elementsNeedingLayout isNotEmpty ]
 ]
 
 { #category : #testing }
@@ -963,7 +1014,7 @@ BlSpace >> loseFocusFor: anElement [
 	self focusProcessor loseFor: anElement
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> makeDirty: aBlBounds [
 
 	self
@@ -976,14 +1027,14 @@ BlSpace >> makeDirty: aBlBounds [
 		ifNotEmpty: [ :aCollection | aCollection first merge: aBlBounds ].
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> markNeedsCompositionPaint: anElement from: aSourceElement [
 	self beDirtyArea.
 	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ].
 	self requestNextPulse
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> markNeedsPaint: anElement from: aSourceElement [
 	self beDirtyArea.
 	self elementsNeedingPaint add: anElement.
@@ -1075,7 +1126,7 @@ BlSpace >> pulse [
 	self processPulse
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> pulseRequested [
 	"Return true if space pulse was requested, false otherwise"
 	<return: #Boolean>
@@ -1110,7 +1161,14 @@ BlSpace >> requestFocusFor: anElement [
 	self focusProcessor requestFor: anElement
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - layout' }
+BlSpace >> requestLayout: anElement [
+	ContextStackSignal emit.
+	elementsNeedingLayout add: anElement.
+	self requestNextPulse
+]
+
+{ #category : #'change - rendering' }
 BlSpace >> requestNextPulse [
 	nextPulseRequested := true
 ]

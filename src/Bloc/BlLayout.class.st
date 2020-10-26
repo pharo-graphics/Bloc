@@ -408,6 +408,17 @@ BlLayout >> requestLayout: anElement from: aSourceElement [
 		ifTrue: [ ^ self ].
 
 	self requestingLayout: true.
+	
+	(anElement ~~ aSourceElement and: [
+		anElement isAttachedToSceneGraph and: [
+			anElement layout previousMeasurementSpec isNotNil and: [
+				anElement isLayoutBoundary and: [
+					anElement hasParent and: [
+						anElement parent isLayoutRequested not ] ] ] ] ])
+		ifTrue: [
+			anElement space requestLayout: anElement.
+			^ self ].
+	
 	"checking for parent to be not nil is faster when inlined instead
 	of using hasParent. It is critical because this method is being
 	sent quite often and should be performant"
