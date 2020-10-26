@@ -1968,6 +1968,9 @@ BlElement >> layout: aBlLayout [
 	<argument: #aBlLayout satisfies: #notNil>
 	<event: #BlElementLayoutChangedEvent>
 
+	layout = aBlLayout
+		ifTrue: [ ^ self ].
+
 	layout := aBlLayout.
 
 	self eventDispatcher dispatchLayoutChanged.
@@ -2189,6 +2192,8 @@ BlElement >> margin [
 BlElement >> margin: aBlInsets [
 	<argument: #aBlInsets satisfies: #notNil>
 
+	self margin = aBlInsets
+		ifTrue: [ ^ self ].
 	self constraintsDo: [ :c | c margin: aBlInsets ]
 ]
 
@@ -2214,68 +2219,6 @@ BlElement >> markNeedsPaintFrom: anElement [
 				ifFalse: [
 					self isAttachedToSceneGraph
 						ifTrue: [ self space markNeedsPaint: self from: anElement ] ] ]
-]
-
-{ #category : #'layout constraints' }
-BlElement >> maxExtent [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	^ self maxWidth @ self maxHeight
-]
-
-{ #category : #'layout constraints' }
-BlElement >> maxExtent: aPoint [
-	self 
-		deprecated: 'Use #constraintsDo: instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	self  maxWidth: aPoint x.
-	self  maxHeight: aPoint y
-]
-
-{ #category : #'layout constraints' }
-BlElement >> maxHeight [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	^ self constraints maxHeight
-]
-
-{ #category : #'layout constraints' }
-BlElement >> maxHeight: aNumber [
-	self 
-		deprecated: 'Use #constraintsDo: instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	self constraints maxHeight: aNumber
-]
-
-{ #category : #'layout constraints' }
-BlElement >> maxWidth [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	^ self constraints maxWidth
-]
-
-{ #category : #'layout constraints' }
-BlElement >> maxWidth: aNumber [
-	
-	self 
-		deprecated: 'Use #constraintsDo: instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self constraints maxWidth: aNumber
 ]
 
 { #category : #layout }
@@ -2387,67 +2330,6 @@ BlElement >> measuredWidth [
 	<return: #Number>
 	
 	^ self measuredBounds width
-]
-
-{ #category : #'layout constraints' }
-BlElement >> minExtent [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	^ self minWidth @ self minHeight
-]
-
-{ #category : #'layout constraints' }
-BlElement >> minExtent: aPoint [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	self  minWidth: aPoint x.
-	self  minHeight: aPoint y
-]
-
-{ #category : #'layout constraints' }
-BlElement >> minHeight [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	^ self constraints minHeight
-]
-
-{ #category : #'layout constraints' }
-BlElement >> minHeight: aNumber [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	 self constraints minHeight:  aNumber
-]
-
-{ #category : #'layout constraints' }
-BlElement >> minWidth [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	^  self constraints minWidth
-]
-
-{ #category : #'layout constraints' }
-BlElement >> minWidth: aNumber [
-	self 
-		deprecated: 'Use #constraints instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-		
-	self constraints minWidth: aNumber
 ]
 
 { #category : #accessing }
@@ -2760,6 +2642,9 @@ BlElement >> padding [
 { #category : #'api - layout' }
 BlElement >> padding: aBlInsets [
 	<argument: #aBlInsets satisfies: #notNil>
+
+	self padding = aBlInsets
+		ifTrue: [ ^ self ].
 
 	self constraintsDo: [ :c | c padding: aBlInsets ]
 ]

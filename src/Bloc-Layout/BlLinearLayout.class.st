@@ -29,6 +29,23 @@ BlLinearLayout class >> vertical [
 	^ self new beVertical
 ]
 
+{ #category : #comparing }
+BlLinearLayout >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ weightSum = anObject weightSum
+		and: [ verticalAlignment = anObject verticalAlignment
+				and: [ shouldUseLargestChild = anObject shouldUseLargestChild
+						and: [ orientation = anObject orientation
+								and: [ horizontalAlignment = anObject horizontalAlignment
+										and: [ direction = anObject direction
+												and: [ cellSpacing = anObject cellSpacing ] ] ] ] ] ]
+]
+
 { #category : #'api - alignment' }
 BlLinearLayout >> align: aChildElement horizontal: aBlAlignment [
 	aChildElement constraintsDo: [ :c | (c at: self class) horizontal alignment: aBlAlignment ]
@@ -105,6 +122,22 @@ BlLinearLayout >> defaultWeightSum [
 	<return: #Number>
 	
 	^ 0
+]
+
+{ #category : #comparing }
+BlLinearLayout >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ weightSum hash
+		bitXor:
+			(verticalAlignment hash
+				bitXor:
+					(shouldUseLargestChild hash
+						bitXor:
+							(orientation hash
+								bitXor:
+									(horizontalAlignment hash
+										bitXor: (direction hash bitXor: cellSpacing hash)))))
 ]
 
 { #category : #accessing }

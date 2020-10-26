@@ -4,8 +4,15 @@ Class {
 	#instVars : [
 		'layout'
 	],
-	#category : 'Bloc-Layout-Linear-Utilities'
+	#category : #'Bloc-Layout-Linear-Utilities'
 }
+
+{ #category : #comparing }
+BlLinearLayoutOrientation >> = anObject [
+	self == anObject
+		ifTrue: [ ^ true ].
+	^ self class = anObject class
+]
 
 { #category : #accessing }
 BlLinearLayoutOrientation >> applyLayoutIn: aLinearLayout [
@@ -35,6 +42,11 @@ BlLinearLayoutOrientation >> extentBreadth: breadth lengthSpec: length [
 { #category : #orientation }
 BlLinearLayoutOrientation >> extentSpecBreadth: breadthSpec lengthSpec: lengthSpec [
 	^ self subclassResponsibility
+]
+
+{ #category : #comparing }
+BlLinearLayoutOrientation >> hash [
+	^ self class hash
 ]
 
 { #category : #testing }
