@@ -1,5 +1,5 @@
 "
-I am an ${class:BlElementEventListener}$ event listener and I can display halos around an element. Halos then permits to inspect or delete.
+I am an ${class:BlEventListener}$ event listener and I can display halos around an element. Halos then permits to inspect or delete.
 
 You can install me on any ${class:BlSpace}$ (window) using ${method:BlSpace>>#withHalos}$.
 
