@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Animation'
+	#category : #'Bloc-Examples-Animation'
 }
 
 { #category : #examples }
@@ -50,7 +50,7 @@ BlClockExample >> clock [
 	<gtExample>
 
 	^ BlElement new
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		border: (BlBorder paint: Color black width: 1);
 		layout: BlFrameLayout new;
 		size: self radius asPoint * 2
@@ -77,7 +77,7 @@ BlClockExample >> handDot [
 	^ BlElement new
 		background: Color red;
 		size: 15@15;
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		constraintsDo: [ :c |
 			c frame vertical alignCenter.
 			c frame horizontal alignRight ];

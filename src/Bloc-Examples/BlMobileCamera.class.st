@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMobileCamera,
 	#superclass : #BlMobileSubElement,
-	#category : 'Bloc-Examples-Showcase-Mobile Phone'
+	#category : #'Bloc-Examples-Showcase-Mobile Phone'
 }
 
 { #category : #'as yet unclassified' }
@@ -20,7 +20,7 @@ BlMobileCamera >> createGradientPaint [
 { #category : #initialization }
 BlMobileCamera >> initialize [
 	super initialize.
-	self geometry: BlEllipse new.
+	self geometry: BlEllipseGeometry new.
 	self background: self createGradientPaint.
 	self border: (BlBorder 
 		paint: Color black lighter 

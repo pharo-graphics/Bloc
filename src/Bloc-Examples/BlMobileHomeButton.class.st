@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMobileHomeButton,
 	#superclass : #BlMobileSubElement,
-	#category : 'Bloc-Examples-Showcase-Mobile Phone'
+	#category : #'Bloc-Examples-Showcase-Mobile Phone'
 }
 
 { #category : #'as yet unclassified' }
@@ -20,7 +20,7 @@ BlMobileHomeButton >> createGradientPaint [
 { #category : #initialization }
 BlMobileHomeButton >> initialize [
 	super initialize.
-	self geometry: BlEllipse new.
+	self geometry: BlEllipseGeometry new.
 	self background: Color black.
 	self border: (BlBorder paint: self createGradientPaint width: 3).
 	self margin: (BlInsets top: BlMobilePhone pxHomeButtonTopMargin ).

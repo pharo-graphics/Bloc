@@ -194,10 +194,10 @@ BlBasicExamples >> elementWithEllipticBorders [
 		layout: BlFrameLayout new;
 		size: 300@150;
 		relocate: 50@50;
-		addChild: (self leftBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
-		addChild: (self rightBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
-		addChild: (self topBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
-		addChild: (self bottomBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
+		addChild: (self leftBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
+		addChild: (self rightBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
+		addChild: (self topBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
+		addChild: (self bottomBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
 		addChild: self borderTextElement
 ]
 
@@ -215,7 +215,7 @@ BlBasicExamples >> elementsWithShadow [
 BlBasicExamples >> ellipse [
 	<gtExample>
 	
-	^ ((BlEllipse new ) extent: 200 @ 100) asElement
+	^ ((BlEllipseGeometry new ) extent: 200 @ 100) asElement
 		background: (Color red alpha: 0.5);
 		border: (BlBorder paint: Color black width: 2);
 		yourself
@@ -226,7 +226,7 @@ BlBasicExamples >> ellipseWithShadow [
 	<gtExample>
 	
 	^ BlElement new
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		size: 300@150;
 		relocate: 50@50;
 		border: (BlBorder paint: Color black width: 2);
@@ -242,7 +242,7 @@ BlBasicExamples >> fabButton [
 
 	button := BlElement new
 		background: (Color r: 255 g: 64 b: 129 range: 255);
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		relocate: 100@100;
 		size: 56@56;
 		layout: BlFrameLayout new;

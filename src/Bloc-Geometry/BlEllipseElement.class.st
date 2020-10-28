@@ -54,7 +54,7 @@ BlEllipseElement >> initialize [
 	super initialize.
 	
 	visuals := BlCustomVisuals new
-		geometry: BlEllipse new.
+		geometry: BlEllipseGeometry new.
 	
 	centerAnchor := self defaultCenterAnchor.
 	majorRadius := 75.

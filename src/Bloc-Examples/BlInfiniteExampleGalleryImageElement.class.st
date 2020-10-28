@@ -88,7 +88,7 @@ BlInfiniteExampleGalleryImageElement >> initialize [
 	self background: Color veryVeryDarkGray lighter.
 	
 	itemElement := BlTextElement new
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		background: (Color gray alpha: 0.4);
 		border: (BlBorder paint: (Color white alpha: 0.2) width: 1);
 		constraintsDo: [ :c |

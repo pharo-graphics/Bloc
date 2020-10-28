@@ -32,7 +32,7 @@ BlFocusChain >> gtInspectorChainIn: aComposite [
 			view nodes
 				shape: [ :each |
 					BlElement new
-						geometry: BlEllipse new;
+						geometry: BlEllipseGeometry new;
 						size: 20@20;
 						border: (BlBorder paint: (each isFocused ifTrue: [ Color blue ] ifFalse: [ Color lightGray ]) width: 1) ];
 				with: self asArray.

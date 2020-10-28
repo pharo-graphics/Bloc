@@ -55,6 +55,11 @@ BlElementGeometry >> releaseStrokedBoundsCache [
 	self subclassResponsibility
 ]
 
+{ #category : #serialization }
+BlElementGeometry >> storeOn: aStream [
+	aStream nextPutAll: self class name; space; nextPutAll: 'new'
+]
+
 { #category : #'api - bounds' }
 BlElementGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.

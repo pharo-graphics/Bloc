@@ -11,7 +11,7 @@ BlZoomableElementExamples >> contentElement [
 	^ BlElement new
 		size: 300@200;
 		background: ((BlLinearGradientPaint direction: 1@1) from: Color red to: Color blue);
-		geometry: BlEllipse new
+		geometry: BlEllipseGeometry new
 ]
 
 { #category : #'examples - instance creation' }

@@ -34,7 +34,7 @@ BlFlowLayoutCompositionExamples class >> exampleHorizontalList [
 	
 	e5 := BlElement new
 		size: 50 asPoint;
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		background: Color orange.
 
 	el := BlElement new

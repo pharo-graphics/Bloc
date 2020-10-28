@@ -19,7 +19,7 @@ BlTouchExamples class >> multiTouchDemo [
 		| aNewElement |
 
 		aNewElement := BlElement new.
-		aNewElement geometry: BlEllipse new.
+		aNewElement geometry: BlEllipseGeometry new.
 		aNewElement size: 100@100.
 		aNewElement relocate: anEvent localPosition - (50@50).
 		aNewElement background: Color gray.

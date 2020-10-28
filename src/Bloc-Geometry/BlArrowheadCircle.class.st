@@ -13,12 +13,12 @@ Class {
 	#instVars : [
 		'scale'
 	],
-	#category : 'Bloc-Geometry-Arrowheads'
+	#category : #'Bloc-Geometry-Arrowheads'
 }
 
 { #category : #initialization }
 BlArrowheadCircle >> defaultGeometry [
-	^ BlEllipse new
+	^ BlEllipseGeometry new
 ]
 
 { #category : #initialization }

@@ -49,7 +49,7 @@ BlRope >> paintTreeWith: view [
 					BlElement new 
 						when: BlClickEvent do: [:event | event target phlow spawnObject: each ];
 						zIndex: 10;
-						geometry: BlEllipse new;
+						geometry: BlEllipseGeometry new;
 						border: (BlBorder paint: Color black width: 1);
 						background: ((each isKindOf: BlAttributeRope) ifTrue: [ Color orange ] ifFalse: [ Color white ]);
 						size: 10@10 ] ];

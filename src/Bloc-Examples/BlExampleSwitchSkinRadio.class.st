@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'thumb'
 	],
-	#category : 'Bloc-Examples-Widgets'
+	#category : #'Bloc-Examples-Widgets'
 }
 
 { #category : #accessing }
@@ -20,7 +20,7 @@ BlExampleSwitchSkinRadio >> initializeSkin [
 	widget layout: BlFrameLayout new.
 	widget padding: (BlInsets all: 3).
 	widget border: (BlBorder builder width: 1; build).
-	widget geometry: BlEllipse new.
+	widget geometry: BlEllipseGeometry new.
 
 	thumb := self newThumbElement.
 
@@ -32,7 +32,7 @@ BlExampleSwitchSkinRadio >> initializeSkin [
 { #category : #'instance creation' }
 BlExampleSwitchSkinRadio >> newThumbElement [
 	^ BlElement new
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ]

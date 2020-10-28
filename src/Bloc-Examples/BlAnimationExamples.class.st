@@ -20,7 +20,7 @@ BlAnimationExamples class >> ballsAnim [
 
 	(1 to:100) do: [:i| |el tr alp ii| 
 		ii := i % 25.
-		el := (BlEllipse new extent: 30@30) asElement 
+		el := (BlEllipseGeometry new extent: 30@30) asElement 
 		background: (Color white alpha: 0);
 		relocate: (ii*15)@10.
 			

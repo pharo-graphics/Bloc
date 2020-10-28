@@ -100,22 +100,22 @@ BlElementSelection >> initialize [
 BlElementSelection >> initializeActions [
 	| initialPosition initialSize |
 
-	removeButton := BlElementSelectionButton icon: BlEllipse new extent: 12@12.
+	removeButton := BlElementSelectionButton icon: BlEllipseGeometry new extent: 12@12.
 	removeButton opacity: 0.75.
 	removeButton background: Color red.
 	removeButton border: (BlBorder builder width: 1; paint: Color black; build).
 	
-	inspectButton := BlElementSelectionButton icon: BlEllipse new  extent: 12@12.
+	inspectButton := BlElementSelectionButton icon: BlEllipseGeometry new  extent: 12@12.
 	inspectButton opacity: 0.75.
 	inspectButton background: Color blue.
 	inspectButton border: (BlBorder builder width: 1; paint: Color black; build).
 	
-	resizeButton := BlElementSelectionButton icon: BlEllipse new extent: 12@12.
+	resizeButton := BlElementSelectionButton icon: BlEllipseGeometry new extent: 12@12.
 	resizeButton opacity: 0.75.
 	resizeButton background: Color yellow.
 	resizeButton border: (BlBorder builder width: 1; paint: Color black; build).
 	
-	infoButton := BlElementSelectionButton icon: BlEllipse new extent: 12@12.
+	infoButton := BlElementSelectionButton icon: BlEllipseGeometry new extent: 12@12.
 	infoButton opacity: 0.75.
 	infoButton background: Color green.
 	infoButton border: (BlBorder builder width: 1; paint: Color black; build).

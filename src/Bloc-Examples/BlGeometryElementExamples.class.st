@@ -11,7 +11,7 @@ BlGeometryElementExamples >> attachPoint [
 	<gtExample>	
 
 	^ BlElement new
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		size: 30@30;
 		background: (Color blue alpha: 0.3);
 		border: BlBorder empty;

@@ -17,7 +17,7 @@ BlClipOutGeometryEffect class >> example [
 	| element elementWithBorder container |
 	element := BlElement new.
 	element background: (Color green darker alpha: 1).
-	element geometry: BlEllipse new.
+	element geometry: BlEllipseGeometry new.
 	element size: 200 @ 100.
 	element when: BlClickEvent do: [ self inform: 'Click' ].
 	element
@@ -28,7 +28,7 @@ BlClipOutGeometryEffect class >> example [
 	element forceLayout.
 	elementWithBorder := BlElement new.
 	elementWithBorder background: (Color blue alpha: 1).
-	elementWithBorder geometry: BlEllipse new.
+	elementWithBorder geometry: BlEllipseGeometry new.
 	elementWithBorder
 		border: (BlBorder paint: (Color red alpha: 1) width: 25).
 	elementWithBorder size: 250 @ 150.

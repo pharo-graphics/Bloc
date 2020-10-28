@@ -9,7 +9,7 @@ BlEllipseExamples >> default [
 	<gtExample>
 	| anEllipse |
 	
-	anEllipse := BlEllipse new.
+	anEllipse := BlEllipseGeometry new.
 	
 	self assert: anEllipse extent equals: 150@100.
 	
