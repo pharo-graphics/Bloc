@@ -114,7 +114,6 @@ BlOverlayListener >> positionFor: anElement [
 
 { #category : #'api - updating' }
 BlOverlayListener >> relocateTo: anElement [
-	NonInteractiveTranscript stdout nextPutAll: ((self positionFor: anElement)) asString; cr.
 	self overlayElement relocate: (self positionFor: anElement)
 ]
 
