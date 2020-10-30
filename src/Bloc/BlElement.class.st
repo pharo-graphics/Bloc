@@ -1064,6 +1064,18 @@ BlElement >> detachSpace [
 	spaceReference := BlDetachedSpaceReference uniqueInstance
 ]
 
+{ #category : #'children accessing' }
+BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	<return: #Object>
+
+	self childrenDo: [ :aChild |
+		aChild userData
+			at: #blocContainer
+			ifPresent: [ :aName | (aName = aContainerName)
+				ifTrue: [ ^ ifFoundBlock cull: aChild ] ] ].
+	^ ifNoneBlock value
+]
+
 { #category : #'children dispatching' }
 BlElement >> dispatchAddedToParent [
 	"Sent after I was added to another element as direct child.
