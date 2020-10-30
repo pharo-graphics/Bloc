@@ -1,10 +1,10 @@
 Extension { #name : #BlElement }
 
 { #category : #'*BlocHost-Morphic' }
-BlElement >> showNotification: anElement [
+BlElement >> showNotification: aNotification [
 	parent notNil
-		ifTrue: [ parent showNotification: anElement ]
+		ifTrue: [ parent showNotification: aNotification ]
 		ifFalse: [
 			self isAttachedToSceneGraph
-				ifTrue: [ self space showNotification: anElement ] ]
+				ifTrue: [ self space showNotification: aNotification ] ]
 ]
