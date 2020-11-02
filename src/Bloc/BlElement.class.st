@@ -94,15 +94,14 @@ BlElement >> addChild: anElement as: aContainerName [
 	self
 		assert: [ (self children
 			detect: [ :aChild |
-				aChild userData
-					at: #blocContainer
-					ifPresent: [ :aName | aName = aContainerName ]
-					ifAbsent: [ false ] ]
+				aChild containerName
+					ifNotNil: [ :aName | aName = aContainerName ]
+					ifNil: [ false ] ]
 			ifFound: [ true ]
 			ifNone: [ false ]) not ]
 		description: [ 'Child named #', aContainerName asString, ' already exists' ].
 	
-	anElement userData at: #blocContainer put: aContainerName.
+	anElement containerName: aContainerName.
 	self addChild: anElement
 ]
 
@@ -159,15 +158,14 @@ BlElement >> addChild: anElement at: anIndex as: aContainerName [
 	self
 		assert: [ (self children
 			detect: [ :aChild |
-				aChild userData
-					at: #blocContainer
-					ifPresent: [ :aName | aName = aContainerName ]
-					ifAbsent: [ false ] ]
+				aChild containerName
+					ifNotNil: [ :aName | aName = aContainerName ]
+					ifNil: [ false ] ]
 			ifFound: [ true ]
 			ifNone: [ false ]) not ]
 		description: [ 'Child named #', aContainerName asString, ' already exists' ].
 	
-	anElement userData at: #blocContainer put: aContainerName.
+	anElement containerName: aContainerName.
 	self addChild: anElement at: anIndex
 ]
 
@@ -206,7 +204,7 @@ BlElement >> addChildFirst: anElement as: aContainerName [
 	"Add a given element as my first child and make it a named container, so that
 	we could add children in that container"
 
-	anElement userData at: #blocContainer put: aContainerName.
+	anElement containerName: aContainerName.
 	self addChildFirst: anElement
 ]
 
@@ -712,9 +710,8 @@ BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBloc
 	<return: #Object>
 
 	self allChildrenBreadthFirstDo: [ :aChild |
-		aChild userData
-			at: #blocContainer
-			ifPresent: [ :aName | (aName = aContainerName)
+		aChild containerName ifNotNil: [ :aName |
+			(aName = aContainerName)
 				ifTrue: [ ^ ifFoundBlock cull: aChild ] ] ].
 	^ ifNoneBlock value
 ]
@@ -873,6 +870,24 @@ BlElement >> constraintsDo: aBlock [
 	
 	aBlock value: self constraints.
 	self requestLayout
+]
+
+{ #category : #accessing }
+BlElement >> containerName [
+	<return: #Symbol or: nil>
+
+	^ self userData
+		at: #blocContainer
+		ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+BlElement >> containerName: aSymbol [
+	"Give this element a container name (a Symbol) which can be used to find an element by its name"
+	
+	self userData
+		at: #blocContainer
+		put: aSymbol asString
 ]
 
 { #category : #'geometry testing' }
@@ -1069,9 +1084,8 @@ BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNo
 	<return: #Object>
 
 	self childrenDo: [ :aChild |
-		aChild userData
-			at: #blocContainer
-			ifPresent: [ :aName | (aName = aContainerName)
+		aChild containerName ifNotNil: [ :aName |
+			(aName = aContainerName)
 				ifTrue: [ ^ ifFoundBlock cull: aChild ] ] ].
 	^ ifNoneBlock value
 ]
@@ -1985,7 +1999,7 @@ BlElement >> isVisibleInSpace [
 
 { #category : #accessing }
 BlElement >> labeled: aString [
-	self userData at: #blocElementLabel put: aString asString
+	self containerName: aString asSymbol
 ]
 
 { #category : #'api - layout' }
@@ -2568,6 +2582,9 @@ BlElement >> onRemovedFromSceneGraph [
 	At this point #isAttachedToSceneGraph results in false.
 	Note: Always send onRemovedFromSceneGraph to super class if you override me!"
 
+	self isFocused
+		ifTrue: [ self loseFocus ].
+
 	spaceReference := BlNullSpaceReference uniqueInstance.
 	self detachCompositionLayer.
 	self layout onCleanUp: self
@@ -3033,10 +3050,9 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 	aChildIndex := self childIndexOf: aChildElement.
 	self removeChildAt: aChildIndex.
 	
-	aChildElement userData
-		at: #blocContainer
-		ifPresent: [ :aName | self addChild: anotherElement at: aChildIndex as: aName ]
-		ifAbsent: [ self addChild: anotherElement at: aChildIndex ]
+	aChildElement containerName
+		ifNotNil: [ :aName | self addChild: anotherElement at: aChildIndex as: aName ]
+		ifNil: [ self addChild: anotherElement at: aChildIndex ]
 ]
 
 { #category : #'children add/remove' }

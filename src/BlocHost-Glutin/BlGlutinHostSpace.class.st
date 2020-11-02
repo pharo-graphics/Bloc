@@ -419,7 +419,7 @@ BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 	window resize: anEvent width @ anEvent height.
 
 	aBlocEvent := BlSpaceResizedEvent new
-		extent: ((GtFensterPhysicalSize width: anEvent width height: anEvent height) asLogical: scaleFactor) asPoint;
+		extent: ((GtFensterPhysicalSize width: anEvent width height: anEvent height) asLogical: self scaleFactor) asPoint;
 		timestamp: DateAndTime now;
 		yourself.
 
