@@ -43,6 +43,11 @@ BlAlternativeCombination >> accept: aKeyCombinationVisitor [
 	^ aKeyCombinationVisitor visitAlternative: self
 ]
 
+{ #category : #converting }
+BlAlternativeCombination >> asBufferKeys [
+	^ combinations first asBufferKeys
+]
+
 { #category : #accessing }
 BlAlternativeCombination >> combinations [
 	<return: #SequenceableCollection of: #BlKeyCombination>

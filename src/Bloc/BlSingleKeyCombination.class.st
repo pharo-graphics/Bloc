@@ -57,6 +57,11 @@ BlSingleKeyCombination >> accept: aKeyCombinationVisitor [
 	^ aKeyCombinationVisitor visitKey: self
 ]
 
+{ #category : #converting }
+BlSingleKeyCombination >> asBufferKeys [
+	^ { key } asSet
+]
+
 { #category : #comparing }
 BlSingleKeyCombination >> hash [
 	"Answer an integer value that is related to the identity of the receiver."

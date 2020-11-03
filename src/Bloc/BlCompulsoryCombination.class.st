@@ -48,6 +48,11 @@ BlCompulsoryCombination >> and: anotherKeyCombination [
 	^ self with: anotherKeyCombination
 ]
 
+{ #category : #converting }
+BlCompulsoryCombination >> asBufferKeys [
+	^ combinations flatCollect: [ :eachCombination | eachCombination asBufferKeys ] as: Set
+]
+
 { #category : #accessing }
 BlCompulsoryCombination >> combinations [
 	<return: #SequenceableCollection of: #BlKeyCombination>
