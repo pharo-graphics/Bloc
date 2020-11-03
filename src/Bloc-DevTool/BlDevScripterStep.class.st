@@ -88,6 +88,11 @@ BlDevScripterStep >> isHaltState [
 	^ state isHalt
 ]
 
+{ #category : #testing }
+BlDevScripterStep >> isRootStep [
+	^ false
+]
+
 { #category : #accessing }
 BlDevScripterStep >> label [
 	^ label ifNil: [ self defaultLabel ]

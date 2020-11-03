@@ -17,6 +17,11 @@ Class {
 	#category : #'Bloc-DevTool-Scripter'
 }
 
+{ #category : #accessing }
+BlDevScripter class >> scripterDirectory [
+	^ SystemResolver defaultLocalDirectory / 'scripter'
+]
+
 { #category : #adding }
 BlDevScripter >> addStep: aScripterStep [
 	<return: #BlDevScripterStep>

@@ -14,6 +14,10 @@ BlDevScripterReference class >> null [
 	^ BlDevScripterNoReference uniqueInstance
 ]
 
+{ #category : #enumerating }
+BlDevScripterReference >> definitionDo: aBlock [
+]
+
 { #category : #'gt-extension' }
 BlDevScripterReference >> gtReferenceFor: aView [
 	^ aView empty

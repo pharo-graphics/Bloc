@@ -17,6 +17,11 @@ BlDevScripterMethodReference >> definition: anObject [
 	definition := anObject
 ]
 
+{ #category : #enumerating }
+BlDevScripterMethodReference >> definitionDo: aBlock [
+	aBlock value: self definition
+]
+
 { #category : #'gt-extension' }
 BlDevScripterMethodReference >> gtReferenceFor: aView [
 	<gtView>

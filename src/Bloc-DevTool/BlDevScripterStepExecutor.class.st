@@ -58,10 +58,12 @@ BlDevScripterStepExecutor >> executeRootStep: aStep [
 		aStep setUnderExecution.
 		aStep steps do: [ :eachStep | self executeStep: eachStep ].
 		aStep setSuccessExecution.
+		self executePostPlayActivitiesOnStep: aStep
 	]
 		on: Error 
 		do: [ :anException | 
 			aStep setFailedExecution.
+			self executePostPlayActivitiesOnStep: aStep.
 			anException pass ]
 ]
 
@@ -75,10 +77,12 @@ BlDevScripterStepExecutor >> executeStep: aStep [
 		aStep setUnderExecution.
 		self strategy playStep: aStep executor: self.
 		aStep setSuccessExecution.
+		self executePostPlayActivitiesOnStep: aStep
 	] 
 		on: Error 
 		do: [ :anException | 
 			aStep setFailedExecution.
+			self executePostPlayActivitiesOnStep: aStep.
 			anException pass ]
 ]
 
@@ -88,6 +92,7 @@ BlDevScripterStepExecutor >> initialize [
 	self sync.
 	activities := OrderedCollection new.
 
+	self withScreenshotExportOnFailure
 ]
 
 { #category : #actions }
@@ -119,6 +124,11 @@ BlDevScripterStepExecutor >> strategy: anObject [
 { #category : #'initialization - execution' }
 BlDevScripterStepExecutor >> sync [
 	self strategy: BlDevScripterStepExecutorSyncStrategy new
+]
+
+{ #category : #'initialization - activities' }
+BlDevScripterStepExecutor >> withScreenshotExportOnFailure [
+	self addActivity: BlDevScripterStepExecutorScreenshotExportOnFailActivity new
 ]
 
 { #category : #'initialization - activities' }
