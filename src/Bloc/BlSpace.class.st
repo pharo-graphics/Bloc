@@ -203,6 +203,7 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 			aSpace := anElement space.
 			aSpace pulse.
 			aCollectionOfEvents do: [ :anEvent | aSpace dispatchEvent: anEvent ].
+			aSpace dispatchEvent: BlSpaceEventsProcessedEvent new.
 			aSpace pulse ]
 		ifFalse: [ 
 			| temporarySpace topMostElement |
@@ -212,6 +213,7 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 				temporarySpace root addChild: topMostElement.
 				temporarySpace pulse.
 				aCollectionOfEvents do: [ :anEvent | temporarySpace dispatchEvent: anEvent ].
+				temporarySpace dispatchEvent: BlSpaceEventsProcessedEvent new.
 				temporarySpace pulse
 			] ensure: [ topMostElement removeFromParent ] ]
 	
