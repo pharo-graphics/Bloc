@@ -3036,7 +3036,7 @@ BlElement >> removeFromParent [
 
 { #category : #'children add/remove' }
 BlElement >> replaceChild: aChildElement with: anotherElement [
-	"Replace a given child relement with another element preserving the children order.
+	"Replace a given child element with another element preserving the children order.
 	Request layout and redraw an area occupied by anElement.
 	As result anElement sends BlElementRemovedEvent
 	anElement must not be nil.
