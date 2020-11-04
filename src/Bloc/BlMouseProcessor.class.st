@@ -192,7 +192,7 @@ BlMouseProcessor >> fireAsMouseOverEvent: aMouseEvent [
 
 { #category : #'event processing' }
 BlMouseProcessor >> generateEvents [
-	(lastEnteredTargets reject: [ :eachElement | eachElement isAttachedToSceneGraph ])
+	((lastEnteredTargets, { lastOverTarget }) reject: [ :eachElement | eachElement isNil or: [ eachElement space == self space ] ]) asSet
 		ifNotEmpty: [ :removedEnteredTargets |
 			| aMouseEvent |
 			
@@ -202,23 +202,11 @@ BlMouseProcessor >> generateEvents [
 				screenPosition: 0@0.
 			
 			self fireAsMouseLeaveEvent: aMouseEvent targets: removedEnteredTargets.
-			self fireAsMouseOutEvent: aMouseEvent targets: removedEnteredTargets.
-			
-			lastEnteredTargets := lastEnteredTargets select: [ :eachElement | eachElement isAttachedToSceneGraph ] ].
-		
+			self fireAsMouseOutEvent: aMouseEvent targets: removedEnteredTargets ].
+	
+	lastEnteredTargets := lastEnteredTargets select: [ :eachElement | eachElement isAttachedToSceneGraph ].
 	(lastOverTarget notNil and: [ lastOverTarget space ~~ self space ])
-		ifTrue: [
-			| aMouseEvent |
-			
-			aMouseEvent := BlMouseEvent new
-				button: (pressedButtons ifEmpty: [ nil ] ifNotEmpty: [ pressedButtons anyOne ]);
-				position: 0@0;
-				screenPosition: 0@0.
-			
-			self fireAsMouseLeaveEvent: aMouseEvent targets: { lastOverTarget }.
-			self fireAsMouseOutEvent: aMouseEvent targets: { lastOverTarget }.
-			
-			lastOverTarget := nil ].
+		ifTrue: [ lastOverTarget := nil ].
 	
 	(self isMouseEventValid: previousMouseDownEvent)
 		ifFalse: [ previousMouseDownEvent := nil ].
