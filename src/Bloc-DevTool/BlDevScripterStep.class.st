@@ -19,6 +19,13 @@ BlDevScripterStep >> defaultLabel [
 	^ 'Step'
 ]
 
+{ #category : #'private - accessing' }
+BlDevScripterStep >> getMousePositionIn: aScripter [
+	^ (aScripter userData includesKey: #mousePosition)
+		ifTrue: [ aScripter userData at: #mousePosition ]
+		ifFalse: [ 0.0@0.0 ]
+]
+
 { #category : #printing }
 BlDevScripterStep >> gtDisplayOn: aStream [
 	aStream nextPutAll: self label
@@ -73,6 +80,11 @@ BlDevScripterStep >> haltHere [
 BlDevScripterStep >> hasCustomLabel [
 	<return: #Boolean>
 	^ label isNotNil
+]
+
+{ #category : #'private - accessing' }
+BlDevScripterStep >> hasMousePositionIn: aScripter [
+	^ aScripter userData includesKey: #mousePosition
 ]
 
 { #category : #initialization }
@@ -165,6 +177,11 @@ BlDevScripterStep >> referenceSender [
 { #category : #'accessing - state' }
 BlDevScripterStep >> setFailedExecution [
 	state := BlDevScripterStepState failure.
+]
+
+{ #category : #'private - accessing' }
+BlDevScripterStep >> setMousePosition: aPoint in: aScripter [
+	aScripter userData at: #mousePosition put: aPoint
 ]
 
 { #category : #'accessing - state' }

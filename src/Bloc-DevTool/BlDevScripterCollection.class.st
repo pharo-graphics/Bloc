@@ -89,6 +89,11 @@ BlDevScripterCollection >> isNotEmpty [
 	^ self collection isNotEmpty
 ]
 
+{ #category : #removing }
+BlDevScripterCollection >> removeAll [
+	collection removeAll
+]
+
 { #category : #accessing }
 BlDevScripterCollection >> size [
 	^ self collection size

@@ -22,6 +22,19 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 			do: [ aSpace pulse ] ]
 ]
 
+{ #category : #initialization }
+BlDevScripterWaitStep >> forEmptySpaceTaskQueueTimeout: aDuration [
+	self label: ('Wait For Empty Task Queue with {1} timeout' format: { aDuration }).
+	self onSpace.
+	self waitingBlock: [ :aSpace |
+		| aStartTime |
+		aStartTime := aSpace time now.		
+		aSpace time 
+			every: 100 milliSeconds 
+			while: [ (aSpace time now < (aStartTime + aDuration)) and: [ aSpace taskQueue tasks isNotEmpty ] ] 
+			do: [ aSpace pulse ] ]
+]
+
 { #category : #actions }
 BlDevScripterWaitStep >> playOn: aScripter [
 	self waitingBlock value: (self target findTargetStartingInScripter: aScripter)

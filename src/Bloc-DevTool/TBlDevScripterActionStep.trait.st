@@ -54,6 +54,11 @@ TBlDevScripterActionStep >> mouseMove [
 ]
 
 { #category : #'steps - interactions' }
+TBlDevScripterActionStep >> mouseMoveOver [
+	^ self addStep: (BlDevScripterMouseMoveOverStep new referenceSender)
+]
+
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> mouseUp [
 	^ self addStep: (BlDevScripterMouseUpStep new referenceSender)
 ]
