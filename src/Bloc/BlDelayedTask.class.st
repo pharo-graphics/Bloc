@@ -171,7 +171,8 @@ BlDelayedTask >> stop [
 		ifTrue: [ self dequeue ].
 
 	isRunning := false.
-	startTime := nil
+	startTime := nil.
+	"requeue := false"
 ]
 
 { #category : #accessing }
