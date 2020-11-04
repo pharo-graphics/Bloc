@@ -172,7 +172,7 @@ BlDelayedTask >> stop [
 
 	isRunning := false.
 	startTime := nil.
-	"requeue := false"
+	requeue := false
 ]
 
 { #category : #accessing }
