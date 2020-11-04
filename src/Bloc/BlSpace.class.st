@@ -1165,7 +1165,6 @@ BlSpace >> requestFocusFor: anElement [
 
 { #category : #'change - layout' }
 BlSpace >> requestLayout: anElement [
-	ContextStackSignal emit.
 	elementsNeedingLayout add: anElement.
 	self requestNextPulse
 ]
