@@ -355,9 +355,9 @@ BlMouseProcessor >> isMouseEventValid: anEvent [
 			| eachTargetSpace |
 			eachTargetSpace := (eachTargetElement isKindOf: BlSpace)
 				ifTrue: [ eachTargetElement ]
-				ifFalse: [ eachTargetElement ].
+				ifFalse: [ eachTargetElement space ].
 			eachTargetSpace ~~ self space ])
-			ifTrue: [ ^ false ].
+				ifTrue: [ ^ false ].
 	
 	^ true
 ]
