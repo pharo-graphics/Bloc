@@ -55,10 +55,12 @@ BlDevScripterExamples >> failingClickCheck [
 	aScript click onChildAt: 1.
 	aScript check click.
 	aScriptFailed := false.
-	[ aScript play ] 
+	[ aScript syncPlay ] 
 		on: AssertionFailure 
 		do: [ :anException | aScriptFailed := true ].
+
 	self assert: aScriptFailed description: 'The script must fail'.
+
 	^ aScript
 ]
 
