@@ -183,7 +183,7 @@ BlHostPulseLoop >> wait [
 	milliSecs := (self pulsePeriod - (DateAndTime now - pulseStartTime)).
 	"But also ensure that background processes get some execution time.
 	If the nextReadyProcess has a priority of 11 it is the idle process and we don't need to wait"
-	forceDelay := Processor nextReadyProcess priority > 11.
+	forceDelay := Processor gtNextReadyProcess priority > 11.
 	maxWait := forceDelay
 			ifTrue: [ self pulsePeriod // 2 ]
 			ifFalse: [ 0 milliSeconds ].
