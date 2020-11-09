@@ -9,7 +9,7 @@ Class {
 		'event',
 		'handler'
 	],
-	#category : 'Bloc-Tests-KeyBinding'
+	#category : #'Bloc-Tests-KeyBinding'
 }
 
 { #category : #initialization }
@@ -34,7 +34,7 @@ BlKeyCombinationTest >> testKeyCodeCombination [
 	buffer pressed: false key: BlKeyboardKey altRight.
 	buffer pressed: true key: BlKeyboardKey c.
 				
-	shortcut := BlShortcut new
+	shortcut := BlShortcutWithAction new
 		combination: (BlKeyCombination builder alt; control; key: BlKeyboardKey c; build);
 		action: [ flag := true ].
 
@@ -57,7 +57,7 @@ BlKeyCombinationTest >> testNoMatchKeyCodeCombination [
 	buffer pressed: false key: BlKeyboardKey altRight.
 	buffer pressed: true key: BlKeyboardKey c.
 				
-	shortcut := BlShortcut new
+	shortcut := BlShortcutWithAction new
 		combination: (BlKeyCombination builder alt; control; key: BlKeyboardKey c; build);
 		action: [ flag := true ].
 

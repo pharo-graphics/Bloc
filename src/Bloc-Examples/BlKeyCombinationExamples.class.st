@@ -39,19 +39,19 @@ BlKeyCombinationExamples >> keyLogger [
 			do: [ :anEvent | self inform: 'Text input: ', anEvent text ]);
 		addEventHandler: (BlEventHandler on: BlKeyDownEvent
 			do: [ :anEvent | self inform: 'Key down: ', anEvent key asString ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: (BlKeyCombination builder shift; meta; key: BlKeyboardKey arrowLeft; build);
 			action: [ :anEvent :aShortcut | self inform: 'Triggered ', aShortcut combination asString ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: (BlSingleKeyCombination key: BlKeyboardKey a);
 			action: [ self inform: 'Shortcut: a' ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: (BlSingleKeyCombination key: BlKeyboardKey arrowUp);
 			action: [ self inform: 'Shortcut: arrowUp' ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: (BlKeyCombination builder meta; key: BlKeyboardKey arrowUp; build);
 			action: [ self inform: 'Shortcut: meta + arrowUp' ]);
-		addShortcut: (BlShortcut new
+		addShortcut: (BlShortcutWithAction new
 			combination: (BlKeyCombination builder shift; meta; key: BlKeyboardKey arrowUp; build);
 			action: [ self inform: 'Shortcut: meta + shift + arrowUp' ]);
 		requestFocus;
