@@ -153,6 +153,14 @@ BlTaskAtQueue >> processTime [
 	^ processTime
 ]
 
+{ #category : #'private - accessing' }
+BlTaskAtQueue >> processTime: aDateAndTime [
+	"Set the time for processing the current entry.
+	This is only used for testing."
+
+	processTime := aDateAndTime.
+]
+
 { #category : #private }
 BlTaskAtQueue >> queueReaderLoop [
 

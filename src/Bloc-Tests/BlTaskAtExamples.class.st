@@ -19,6 +19,9 @@ BlTaskAtExamples >> checkQueueOrder [
 	queue schedule: 7 at: now + 70 seconds.
 	queue schedule: 2 at: now + 20 seconds.
 
+	"Set the queue process time so entryPriority can be calculated"
+	queue processTime: now.
+
 	entries := OrderedCollection new.
 	5 timesRepeat: [ entries add: queue next valuable ].
 
