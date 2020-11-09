@@ -24,6 +24,13 @@ Class {
 	#category : #'Bloc-Events-KeyBinding'
 }
 
+{ #category : #converting }
+BlBasicShortcut >> asShortcut [
+	<return: #BlBasicShortcut>
+	
+	^ self
+]
+
 { #category : #accessing }
 BlBasicShortcut >> combination [
 	^ combination
