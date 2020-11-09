@@ -16,7 +16,8 @@ Class {
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'valuable',
-		'scheduledTime'
+		'scheduledTime',
+		'queue'
 	],
 	#category : #'Bloc-Space - Tasks'
 }
@@ -29,9 +30,11 @@ BlTaskAtTask class >> valuable: aValuable at: aTime [
 
 { #category : #accessing }
 BlTaskAtTask >> entryPriority [ 
-	"Answer the receiver's priority - 0 is highest"
+	"Answer the receiver's priority.
+	0 is highest, so earlier scheduled tasks have a higher priority"
 
-	^(scheduledTime - BlTime real now) asMilliSeconds max: 0
+	^ (scheduledTime - queue processTime) asMilliSeconds max: 0
+
 ]
 
 { #category : #handling }
@@ -54,6 +57,16 @@ BlTaskAtTask >> printOn: aStream [
 		<< '(';
 		print: scheduledTime;
 		<< ')'
+]
+
+{ #category : #accessing }
+BlTaskAtTask >> queue [
+	^ queue
+]
+
+{ #category : #accessing }
+BlTaskAtTask >> queue: anObject [
+	queue := anObject
 ]
 
 { #category : #accessing }
