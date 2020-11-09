@@ -18,11 +18,13 @@ The queue executes tasks within a single pharo process at #userSchedulingPriorit
 	executorProcess:		<Process>
 	queue:						<SharedPriorityUniqueQueue>
 	scheduleSemaphore:		<Semaphore>
+	processTime: 			<DateAndTime>
 
 
 !!!Implementation Points
 
 - Assumes that there is only one reader of the queue.
+- processTime holds the current DateAndTime for the evaluation cycle.  Since ${class:name=BlTaskAtTask}$s use the time to calculate their entry priority this significantly reduces the number of times that the VM is called to retrieve the time.
 "
 Class {
 	#name : #BlTaskAtQueue,
@@ -31,7 +33,10 @@ Class {
 		'queue',
 		'scheduleSemaphore',
 		'executorProcess',
-		'nextTime'
+		'nextTimeDelay',
+		'cutoffDuration',
+		'clock',
+		'processTime'
 	],
 	#classVars : [
 		'Default'
@@ -43,6 +48,44 @@ Class {
 BlTaskAtQueue class >> default [ 
 
 	^Default ifNil: [ Default := self new start ]
+]
+
+{ #category : #accessing }
+BlTaskAtQueue >> clock [
+	"Answer the clock used to schedule the receiver"
+	<return: #BlTime>
+
+	^ clock
+]
+
+{ #category : #'private - accessing' }
+BlTaskAtQueue >> clock: aBlTime [
+	"Set the clock used to schedule the receiver.
+	This is normally only changed for testing purposes."
+
+	clock := aBlTime
+]
+
+{ #category : #accessing }
+BlTaskAtQueue >> cutoffDuration [
+	"Answer the duration used to determine whether to execute a task.
+	I.e. tasks scheduled for less than cutoffDuration from now are run."
+	<return: #Duration>
+
+	^ cutoffDuration
+]
+
+{ #category : #accessing }
+BlTaskAtQueue >> cutoffDuration: anObject [
+	cutoffDuration := anObject
+]
+
+{ #category : #private }
+BlTaskAtQueue >> forceProcess [
+	"Force #processNextEntry to scan the queue.
+	For testing purposes"
+
+	scheduleSemaphore signal.
 ]
 
 { #category : #private }
@@ -62,7 +105,9 @@ BlTaskAtQueue >> initialize [
 	super initialize.
 	queue := SharedPriorityUniqueQueue new.
 	scheduleSemaphore := Semaphore new.
-
+	cutoffDuration := 10 milliSeconds.
+	nextTimeDelay := 15 seconds.
+	clock := BlTime real.
 ]
 
 { #category : #private }
@@ -78,11 +123,12 @@ BlTaskAtQueue >> processNextEntry [
 
 	| entry timeRemaining |
 
-	scheduleSemaphore wait.
+	scheduleSemaphore waitTimeoutMSecs: nextTimeDelay asMilliSeconds .
+	processTime := clock now.
 	[ entry := queue peek.
 	entry isNotNil and: [ 
-		timeRemaining := entry scheduledTime - BlTime real now.
-		timeRemaining < 10 milliSeconds ] ] whileTrue: [ 
+		timeRemaining := entry scheduledTime - processTime.
+		timeRemaining < cutoffDuration ] ] whileTrue: [ 
 		entry := queue next.
 		[ entry value ]
 			on: Error 
@@ -90,12 +136,21 @@ BlTaskAtQueue >> processNextEntry [
 								exception: ex;
 								task: entry;
 								message: 'Entry execution exception - continuing';
-								emit ] ].
+								emit ].
+		processTime := clock now ].
 	entry := queue peek.
-	entry 
-		ifNil: [ nextTime := nil ]
-		ifNotNil: [ self triggerAt: entry scheduledTime ].
+	nextTimeDelay := entry 
+		ifNil: [ 1 hour ]
+		ifNotNil: [ entry scheduledTime - clock now ].
 
+]
+
+{ #category : #accessing }
+BlTaskAtQueue >> processTime [
+	"Answer the time that should be used for determining task priority and whether the task should be run now"
+	<return: #DateAndTime>
+
+	^ processTime
 ]
 
 { #category : #private }
@@ -112,17 +167,16 @@ BlTaskAtQueue >> queueReaderLoop [
 
 { #category : #operations }
 BlTaskAtQueue >> schedule: aBlTaskAtTask [
-	"Add the supplied task to the queue and trigger the semaphore at the appropriate time.
+	"Add the supplied task to the queue and trigger the semaphore (which will either run the task immediately, or update the timeout, if required).
 	Return the scheduled task or a similar previously scheduled task."
-
 	| aResult |
+
+	aBlTaskAtTask queue: self.
 	aResult := queue nextPut: aBlTaskAtTask.
 	aResult == aBlTaskAtTask ifFalse: [ 
 		aBlTaskAtTask handleNotScheduledBecauseOfPreviousTask: aResult.
 		^ aResult ].
-	
-	(nextTime isNil or: [ aBlTaskAtTask scheduledTime < nextTime ])
-		ifTrue: [ self triggerAt: aBlTaskAtTask scheduledTime ].
+	scheduleSemaphore signal.
 	^ aBlTaskAtTask.
 ]
 
@@ -131,6 +185,12 @@ BlTaskAtQueue >> schedule: aValuable at: aTime [
 	"Add the supplied task to the queue and trigger the semaphore at the appropriate time"
 
 	self schedule: (BlTaskAtTask valuable: aValuable at: aTime)
+]
+
+{ #category : #accessing }
+BlTaskAtQueue >> size [
+
+	^ queue size
 ]
 
 { #category : #control }
@@ -145,30 +205,4 @@ BlTaskAtQueue >> stop [
 	executorProcess ifNil: [ ^self ].
 	executorProcess terminate.
 	executorProcess := nil.
-]
-
-{ #category : #private }
-BlTaskAtQueue >> triggerAfter: aDelay [
-
-	self
-		assert: [ aDelay isKindOf: Duration ]
-		description: [ 'Delay must be a duration' ].
-
-	[	aDelay wait.
-		scheduleSemaphore signal ]
-			forkAt: Processor userSchedulingPriority
-			named: 'BlTaskAt: ', aDelay asMilliSeconds asString
-]
-
-{ #category : #private }
-BlTaskAtQueue >> triggerAt: aTime [
-	"Signal the scheduleSemaphore at the requested time"
-	| durationUntilRequestedTime |
-
-	durationUntilRequestedTime := aTime - BlTime real now.
-	durationUntilRequestedTime < 10 milliSeconds
-		ifTrue: [ scheduleSemaphore signal ]
-		ifFalse: [ 
-			nextTime := aTime.
-			self triggerAfter: durationUntilRequestedTime ]
 ]
