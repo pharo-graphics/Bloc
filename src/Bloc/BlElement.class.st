@@ -2582,9 +2582,6 @@ BlElement >> onRemovedFromSceneGraph [
 	At this point #isAttachedToSceneGraph results in false.
 	Note: Always send onRemovedFromSceneGraph to super class if you override me!"
 
-	self isFocused
-		ifTrue: [ self loseFocus ].
-
 	spaceReference := BlNullSpaceReference uniqueInstance.
 	self detachCompositionLayer.
 	self layout onCleanUp: self
