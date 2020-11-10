@@ -1362,23 +1362,28 @@ BlInfiniteElement >> offsetPositionRecordsForMove: aFromPosition to: aToPosition
 { #category : #'private - commands' }
 BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: anItemCount applyToPreLayout: applyToPreLayout [
 	| aPositionEnd |
-
+	
 	aPositionEnd := aPositionStart + anItemCount.
 	
 	childrenManager unfilteredChildrenDo: [ :anElement |
 		| anElementHolder |
 		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder shouldIgnore
-			ifFalse: [ 
-				anElementHolder position >= aPositionEnd
-					ifTrue: [	anElementHolder
-							offsetPositionBy: anItemCount negated
-							applyToPreLayout: applyToPreLayout ]
-					ifFalse: [ anElementHolder
-						flagRemovedAndOffsetPosition: aPositionStart - 1
-						by: anItemCount negated
-						applyToPreLayout: applyToPreLayout ].
-				state structureChanged: true ] ].
+			ifFalse: [ 	
+				anElementHolder position >= aPositionEnd 
+					ifTrue: [	
+							anElementHolder
+								offsetPositionBy: anItemCount negated
+								applyToPreLayout: applyToPreLayout.
+							state structureChanged: true ]
+					ifFalse: [ 
+						anElementHolder position >= aPositionStart
+							ifTrue: [
+								anElementHolder
+									flagRemovedAndOffsetPosition: aPositionStart - 1
+									by: anItemCount negated
+									applyToPreLayout: applyToPreLayout.
+								state structureChanged: true ] ] ] ].
 
 	recycler
 		offsetPositionRecordsForRemove: aPositionStart
