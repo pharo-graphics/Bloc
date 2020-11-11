@@ -36,6 +36,30 @@ BlEvent class >> fireEvent: anEvent [
 ]
 
 { #category : #'event management' }
+BlEvent class >> fireEvent: anEvent from: aTopEventTarget [
+	<return: #BlEvent>
+
+	^ self fireEvent: anEvent from: aTopEventTarget to: anEvent target
+]
+
+{ #category : #'event management' }
+BlEvent class >> fireEvent: anEvent from: aTopEventTarget to: aTargetEventTarget [
+	<return: #BlEvent>
+	| theEvent aDispatcherChain |
+
+	theEvent := anEvent.
+
+	anEvent hasSource
+		ifFalse: [ anEvent source: aTargetEventTarget ].
+
+	anEvent target = aTargetEventTarget
+		ifFalse: [ theEvent := anEvent newCopyFor: aTargetEventTarget].
+
+	aDispatcherChain := aTargetEventTarget buildEventDispatchChain: BlEventDispatcherChain empty upTo: aTopEventTarget.
+	^ aDispatcherChain dispatchEvent: theEvent
+]
+
+{ #category : #'event management' }
 BlEvent class >> fireEvent: anEvent target: anEventTarget [
 	<return: #BlEvent>
 	| theEvent aDispatcherChain |

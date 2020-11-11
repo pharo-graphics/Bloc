@@ -47,6 +47,11 @@ TBlDevScripterTarget >> onChildOfClass: aClass [
 ]
 
 { #category : #'targets - other' }
+TBlDevScripterTarget >> onFocusProcessor [
+	self updateTarget: (BlDevScripterFocusProcessorTarget new)
+]
+
+{ #category : #'targets - other' }
 TBlDevScripterTarget >> onModel [
 	self updateTarget: (BlDevScripterModelTarget new)
 ]

@@ -9,13 +9,6 @@ Class {
 }
 
 { #category : #'event firing' }
-BlFocusProcessor >> dispatchFocusInEvent: anElement [
-	"Send focusIn event that should bubble"
-
-	anElement dispatchEvent: self newFocusInEvent
-]
-
-{ #category : #'event firing' }
 BlFocusProcessor >> fireBlurEvent: anElement [
 	"Create and send blur event that doesn't bubble, perform simple direct dispatch to the given target element"
 	self
@@ -40,10 +33,24 @@ BlFocusProcessor >> fireFocusInEvent: anElement [
 ]
 
 { #category : #'event firing' }
+BlFocusProcessor >> fireFocusInEvent: anElement from: aTopEventTarget [
+	"Send focusIn event that should bubble"
+
+	self fireEvent: (self newFocusInEvent target: anElement) from: aTopEventTarget
+]
+
+{ #category : #'event firing' }
 BlFocusProcessor >> fireFocusOutEvent: anElement [
 	"Send focusOut event that should bubble"
 
 	self fireEvent: (self newFocusOutEvent target: anElement)
+]
+
+{ #category : #'event firing' }
+BlFocusProcessor >> fireFocusOutEvent: anElement from: aTopEventTarget [
+	"Send focusOut event that should bubble"
+
+	self fireEvent: (self newFocusOutEvent target: anElement) from: aTopEventTarget
 ]
 
 { #category : #'event firing' }
@@ -174,7 +181,11 @@ BlFocusProcessor >> processBlur: anElement dueToFocus: aNewFocusedElement [
 	focusChain leafsDo: [ :aLeafElement |
 		"if a new focused element is a child we don't have to send focus-out event"
 		(aNewFocusedElement hasParent: aLeafElement)
-			ifFalse: [ self fireFocusOutEvent: aLeafElement ] ].
+			ifFalse: [
+				aLeafElement
+					firstCommonParent: aNewFocusedElement
+					ifFound: [ :aCommonParent | self fireFocusOutEvent: aLeafElement from: aCommonParent ]
+					ifNone: [ self fireFocusOutEvent: aLeafElement ] ] ].
 
 	self fireBlurEvent: anElement
 ]
@@ -220,8 +231,12 @@ BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 	focusChain leafsDo: [ :aLeafElement |
 		"if a new focused element is a child we don't have to send focus-in event"
 		(aLeafElement hasParent: aPreviousFocus)
-			ifFalse: [ self fireFocusInEvent: aLeafElement ]
-			ifTrue: [ aLeafElement withAllParentsUpTo: aPreviousFocus do: [ :eachParent | self dispatchFocusInEvent: eachParent ] ] ].
+			ifFalse: [
+				aLeafElement
+					firstCommonParent: aPreviousFocus
+					ifFound: [ :aCommonParent | self fireFocusInEvent: aLeafElement from: aCommonParent ]
+					ifNone: [ self fireFocusInEvent: aLeafElement ] ]
+			ifTrue: [ self fireFocusInEvent: aLeafElement from: aPreviousFocus ] ].
 	
 	self fireFocusEvent: anElement
 ]

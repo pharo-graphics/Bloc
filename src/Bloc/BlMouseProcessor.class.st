@@ -362,6 +362,13 @@ BlMouseProcessor >> lastClickEvent [
 	^ lastClickEvent
 ]
 
+{ #category : #accessing }
+BlMouseProcessor >> lastOverTarget [
+	<return: #BlElement>
+
+	^ lastOverTarget
+]
+
 { #category : #'initialize-release' }
 BlMouseProcessor >> onSpaceClosed [
 	lastEnteredTargets := #().
@@ -400,6 +407,13 @@ BlMouseProcessor >> pressedButtons [
 	<return: #Collection of: #BlMouseButton>
 
 	^ pressedButtons
+]
+
+{ #category : #accessing }
+BlMouseProcessor >> previousMouseDownEvent [
+	<return: #BlElement or: nil>
+
+	^ previousMouseDownEvent
 ]
 
 { #category : #'mouse drag' }

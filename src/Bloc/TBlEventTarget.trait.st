@@ -48,6 +48,22 @@ TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain [
 ]
 
 { #category : #'event management' }
+TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain upTo: anOtherEventTarget [
+	"Build an event dispatch chain up to but excluding a given other event target
+	Note: Dispatcher chain is persistent - I return a new instance"
+	<return: #BlEventDispatcherChain>
+	| aResultChain |
+
+	aResultChain := aBlEventDispatcherChain.
+	aResultChain := aResultChain withNext: self eventDispatcher.
+
+	(self hasNextEventTarget and: [ self nextEventTarget ~~ anOtherEventTarget ])
+		ifTrue: [ aResultChain := self nextEventTarget buildEventDispatchChain: aResultChain upTo: anOtherEventTarget ].
+
+	^ aResultChain
+]
+
+{ #category : #'event management' }
 TBlEventTarget >> dispatchEvent: anEvent [
 	"I only call my event dispatcher, so the event can be only handled by my event handlers/filters"
 

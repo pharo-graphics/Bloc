@@ -49,28 +49,22 @@ BlMouseProcessorClickExamples >> mouseDown [
 	aScripter substeps: 'Click' do: [ :aStep |			
 		aStep mouseDown.
 		
-		"aStep check 
-			label: 'Check last click event is not nil';
-			satisfies: [ :aMouseProcessor | aMouseProcessor lastClickEvent isNotNil ];
+		aStep check 
+			label: 'Check previous mouse down event';
+			value: [ :aMouseProcessor | aMouseProcessor previousMouseDownEvent target ] equals: [ aScripter element ];
 			onMouseProcessor.
 
 		aStep check 
-			label: 'Check last click event is ClickEvent';
-			satisfies: [ :aMouseProcessor | aMouseProcessor lastClickEvent isKindOf: BlClickEvent ];
+			label: 'Check last over target is the element';
+			value: [ :aMouseProcessor | aMouseProcessor lastOverTarget ] equals: [ aScripter element ];
 			onMouseProcessor.
-			
+
 		aStep check 
-			label: 'Check last click event has correct target';
-			satisfies: [ :aMouseProcessor | aMouseProcessor lastClickEvent target = aScripter element ];
-			onMouseProcessor.
-			
-		aStep check 
-			label: 'Check element was clicked';
-			satisfies: [ :anElement | anElement clickCount = 1 ];
-			onSelf" ].
-	aScripter syncContinue.
+			label: 'Check entered targets';
+			value: [ :aMouseProcessor | aMouseProcessor enteredTargets ] equals: [ { aScripter element. aScripter root } ] ;
+			onMouseProcessor ].
 	
-	^ aScripter
+	^ aScripter syncContinue
 ]
 
 { #category : #'examples - scripter' }
@@ -88,25 +82,16 @@ BlMouseProcessorClickExamples >> mouseEnter [
 		aStep mouseMove
 			by: 70@60.
 
-		"aStep check 
-			label: 'Check last click event is not nil';
-			satisfies: [ :aMouseProcessor | aMouseProcessor lastClickEvent isNotNil ];
+		aStep check 
+			label: 'Check last over target is the element';
+			value: [ :aMouseProcessor | aMouseProcessor lastOverTarget ] equals: [ aScripter element ];
 			onMouseProcessor.
 
 		aStep check 
-			label: 'Check last click event is ClickEvent';
-			satisfies: [ :aMouseProcessor | aMouseProcessor lastClickEvent isKindOf: BlClickEvent ];
-			onMouseProcessor.
-			
-		aStep check 
-			label: 'Check last click event has correct target';
-			satisfies: [ :aMouseProcessor | aMouseProcessor lastClickEvent target = aScripter element ];
-			onMouseProcessor."
-			
-		"aStep check 
-			label: 'Check element was clicked';
-			satisfies: [ :anElement | anElement clickCount = 1 ];
-			onSelf" ].
+			label: 'Check entered targets';
+			value: [ :aMouseProcessor | aMouseProcessor enteredTargets ] equals: [ { aScripter element. aScripter root } ] ;
+			onMouseProcessor ].
+
 	aScripter syncContinue.
 	
 	^ aScripter

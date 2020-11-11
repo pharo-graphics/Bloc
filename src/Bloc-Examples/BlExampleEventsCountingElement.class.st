@@ -15,10 +15,24 @@ Class {
 		'mouseOutCount',
 		'dropCount',
 		'dragEnterCount',
-		'dragLeaveCount'
+		'dragLeaveCount',
+		'focusInCount',
+		'focusOutCount',
+		'focusCount',
+		'blurCount'
 	],
 	#category : #'Bloc-Examples-Event'
 }
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> blurCount [
+	^ blurCount
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> blurCount: anObject [
+	blurCount := anObject
+]
 
 { #category : #accessing }
 BlExampleEventsCountingElement >> clickCount [
@@ -90,6 +104,41 @@ BlExampleEventsCountingElement >> dropCount: anObject [
 	dropCount := anObject
 ]
 
+{ #category : #accessing }
+BlExampleEventsCountingElement >> focusCount [
+	^ focusCount
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> focusCount: anObject [
+	focusCount := anObject
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> focusInCount [
+	^ focusInCount
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> focusInCount: anObject [
+	focusInCount := anObject
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> focusOutCount [
+	^ focusOutCount
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> focusOutCount: anObject [
+	focusOutCount := anObject
+]
+
+{ #category : #increment }
+BlExampleEventsCountingElement >> incrementBlurCount [
+	blurCount := blurCount + 1
+]
+
 { #category : #increment }
 BlExampleEventsCountingElement >> incrementClickCount [
 	clickCount := clickCount + 1
@@ -123,6 +172,21 @@ BlExampleEventsCountingElement >> incrementDragStartCount [
 { #category : #increment }
 BlExampleEventsCountingElement >> incrementDropCount [
 	dropCount := dropCount + 1
+]
+
+{ #category : #increment }
+BlExampleEventsCountingElement >> incrementFocusCount [
+	focusCount := focusCount + 1
+]
+
+{ #category : #increment }
+BlExampleEventsCountingElement >> incrementFocusInCount [
+	focusInCount := focusInCount + 1
+]
+
+{ #category : #increment }
+BlExampleEventsCountingElement >> incrementFocusOutCount [
+	focusOutCount := focusOutCount + 1
 ]
 
 { #category : #increment }
@@ -178,6 +242,10 @@ BlExampleEventsCountingElement >> initialize [
 	dragEnterCount := 0.
 	dragLeaveCount := 0.
 	dropCount := 0.
+	focusInCount := 0.
+	focusOutCount := 0.
+	focusCount := 0.
+	blurCount := 0.
 	
 	self when: BlClickEvent do: [ :anEvent |
 		anEvent consumed: true.
@@ -234,6 +302,18 @@ BlExampleEventsCountingElement >> initialize [
 	self when: BlDropEvent do: [ :anEvent |
 		anEvent consumed: true.
 		anEvent currentTarget incrementDropCount ].
+	
+	self when: BlFocusInEvent do: [ :anEvent |
+		anEvent currentTarget incrementFocusInCount ].
+	
+	self when: BlFocusOutEvent do: [ :anEvent |
+		anEvent currentTarget incrementFocusOutCount ].
+	
+	self when: BlFocusEvent do: [ :anEvent |
+		anEvent currentTarget incrementFocusCount ].
+	
+	self when: BlBlurEvent do: [ :anEvent |
+		anEvent currentTarget incrementBlurCount ].
 	
 	self addEventHandler: BlPullHandler new.
 	
