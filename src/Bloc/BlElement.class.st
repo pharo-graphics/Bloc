@@ -3744,6 +3744,16 @@ BlElement >> withAllParentsDo: aBlock [
 	self allParentsDo: aBlock
 ]
 
+{ #category : #'children accessing' }
+BlElement >> withAllParentsUpTo: aParentElement do: aBlock [
+	"Evaluate a block with each of my parents as an argument starting from myself up to but excluding the given parent element"
+	
+	self withAllParentsDo: [ :eachParent |
+		eachParent == aParentElement
+			ifTrue: [ ^ self ].
+		aBlock value: eachParent ]
+]
+
 { #category : #accessing }
 BlElement >> zIndex: aNumber [
 	self elevation: (BlRelativeElevation elevation: aNumber)
