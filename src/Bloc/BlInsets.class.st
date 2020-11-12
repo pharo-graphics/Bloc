@@ -354,3 +354,39 @@ BlInsets >> width [
 
 	^ left + right
 ]
+
+{ #category : #accessing }
+BlInsets >> withBottom: aBottom [
+	^ self class
+		top: self top
+		right: self right
+		bottom: aBottom
+		left: self left
+]
+
+{ #category : #accessing }
+BlInsets >> withLeft: aLeft [
+	^ self class
+		top: self top
+		right: self right
+		bottom: self bottom
+		left: aLeft
+]
+
+{ #category : #accessing }
+BlInsets >> withRight: aRight [
+	^ self class
+		top: self top
+		right: aRight
+		bottom: self bottom
+		left: self left
+]
+
+{ #category : #accessing }
+BlInsets >> withTop: aTop [
+	^ self class
+		top: aTop
+		right: self right
+		bottom: self bottom
+		left: self left
+]
