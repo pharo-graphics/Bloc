@@ -110,7 +110,7 @@ BlInfiniteLayout >> addChild: anElement at: anIndex disappearing: isDisappearing
 					
 			anInfiniteConstraints pendingInvalidate ifTrue: [ 
 				self flag: 'Do we need to request layout here?'.
-				anElementHolder itemElement invalidate.
+				"anElementHolder itemElement invalidate."
 				anInfiniteConstraints pendingInvalidate: false ] ]
 			
 ]
@@ -1169,7 +1169,7 @@ BlInfiniteLayout >> removeAndRecycleScrap [
 	aScrapCount isZero
 		ifFalse: [
 			self flag: 'Do we need to request layout here?'.
-			infiniteElement invalidate ]
+			"infiniteElement invalidate" ]
 ]
 
 { #category : #'children - add/remove' }

@@ -69,7 +69,8 @@ BlCompositionPainter class >> repaintSpace: aSpace [
 			aSpace telemetry
 				timeSync: 'Repaint root'
 				during: [ BlCompositionPainter repaintCompositedElement: aSpace root ]  ].
-
+	
+	aSpace root withAllChildrenBreadthFirstDo: [ :eachChild | eachChild markDoesNotNeedPaint ].
 	aRootLayer computeNeedsComposition.
 	^ aRootLayer
 ]

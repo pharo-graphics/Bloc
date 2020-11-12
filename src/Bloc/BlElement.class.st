@@ -2247,6 +2247,11 @@ BlElement >> margin: aBlInsets [
 ]
 
 { #category : #'api - painting' }
+BlElement >> markDoesNotNeedPaint [
+	needsPaint := false
+]
+
+{ #category : #'api - painting' }
 BlElement >> markNeedsPaintFrom: anElement [
 	"Make me as dirty and request renderer to re-paint me.
 	anElement is the element from which the re-painting request originates"
