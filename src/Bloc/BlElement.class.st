@@ -1284,7 +1284,12 @@ BlElement >> elevation [
 
 { #category : #'api - look' }
 BlElement >> elevation: aBlElevation [
-	visuals := visuals elevation: aBlElevation
+	visuals := visuals elevation: aBlElevation.
+
+	"when elevation changes, it is enough to just notify our parent, since
+	my rendering state does not change, only the order in which parent paints its children"
+	self hasParent
+		ifTrue: [ self parent invalidate ]
 ]
 
 { #category : #'api - tasks' }
@@ -1803,24 +1808,6 @@ BlElement >> invalidate [
 	is also invalidated on every #invalidate message sent, so use me wisely."
 
 	self markNeedsPaintFrom: self
-]
-
-{ #category : #'change reporting' }
-BlElement >> invalidateAfterFrom: aPreviousPosition to: aNewPosition [
-	"Invalidate due to relocation by a given offset"
-
-	self wantsSeparateCompositingLayer
-		ifTrue: [ self hasCompositionLayer
-				ifTrue: [
-					| aLayer |
-					aLayer := self compositionLayer.
-					aLayer offset: aLayer offset + aNewPosition - aPreviousPosition.
-					self isAttachedToSceneGraph
-						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
-				ifFalse: [ self hasParent
-						ifTrue: [ self parent invalidate ] ] ]
-		ifFalse: [ self hasParent
-				ifTrue: [ self parent invalidate ] ]
 ]
 
 { #category : #'change reporting' }
