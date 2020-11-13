@@ -365,6 +365,15 @@ BlInsets >> withBottom: aBottom [
 ]
 
 { #category : #accessing }
+BlInsets >> withExtraBottom: aBottom [
+	^ self class
+		top: self top
+		right: self right
+		bottom: self bottom + aBottom
+		left: self left
+]
+
+{ #category : #accessing }
 BlInsets >> withLeft: aLeft [
 	^ self class
 		top: self top

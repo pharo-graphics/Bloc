@@ -1168,8 +1168,8 @@ BlInfiniteLayout >> removeAndRecycleScrap [
 	"invalidate infinite element if needed"
 	aScrapCount isZero
 		ifFalse: [
-			self flag: 'Do we need to request layout here?'.
-			"infiniteElement invalidate" ]
+			"invalidate is required, otherwise the removed items may not visually disappear"
+			infiniteElement invalidate ]
 ]
 
 { #category : #'children - add/remove' }
