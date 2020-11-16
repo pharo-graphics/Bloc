@@ -4,6 +4,11 @@ Trait {
 }
 
 { #category : #'api - geometry' }
+TBlLayoutChildNode >> bottom [
+	^ self position y + self height
+]
+
+{ #category : #'api - geometry' }
 TBlLayoutChildNode >> bounds [
 	<return: #BlBounds>
 	
@@ -103,6 +108,11 @@ TBlLayoutChildNode >> privateMeasurement [
 { #category : #'api - actions' }
 TBlLayoutChildNode >> pushAction: aBlLayoutNodeElementAction [
 	self explicitRequirement
+]
+
+{ #category : #'api - geometry' }
+TBlLayoutChildNode >> right [
+	^ self position x + self width
 ]
 
 { #category : #accessing }

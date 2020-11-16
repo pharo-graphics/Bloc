@@ -119,67 +119,67 @@ BlScrollableElement >> initialize [
 ]
 
 { #category : #layout }
-BlScrollableElement >> layoutApplyAlignment [
-	| aContent |
+BlScrollableElement >> layoutApplyAlignment: aLayoutNode [
+	| aContentNode |
 	
-	aContent := self scrolledElement.
+	aContentNode := aLayoutNode children first.
 	
-	(aContent measuredWidth < self width)
+	(aContentNode width < self width)
 		ifTrue: [
 			| aHorizontalTranslation |
-			aHorizontalTranslation := (self horizontalAlignment translationOf: aContent measuredBounds bounds in: self bounds inLocal bounds) x.
+			aHorizontalTranslation := (self horizontalAlignment translationOf: aContentNode bounds in: self bounds inLocal bounds) x.
 			scrollPosition := scrollPosition + (aHorizontalTranslation @ 0.0) ].
 		
-	(aContent measuredHeight < self height)
+	(aContentNode height < self height)
 		ifTrue: [
 			| aVerticalTranslation |
-			aVerticalTranslation := (self verticalAlignment translationOf: aContent measuredBounds bounds in: self bounds inLocal bounds) y.
+			aVerticalTranslation := (self verticalAlignment translationOf: aContentNode bounds in: self bounds inLocal bounds) y.
 			scrollPosition := scrollPosition + (0.0 @ aVerticalTranslation) ].
 	
-	aContent measuredBounds position: scrollPosition
+	aContentNode position: scrollPosition
 ]
 
 { #category : #layout }
-BlScrollableElement >> layoutClampPosition [
-	| aCurrentPositionX aContent aMinPositionX aMaxPositionX aNewClampedPositionX aCurrentPositionY aMinPositionY aMaxPositionY aNewClampedPositionY |
+BlScrollableElement >> layoutClampPosition: aLayoutNode [
+	| aCurrentPositionX aContentNode aMinPositionX aMaxPositionX aNewClampedPositionX aCurrentPositionY aMinPositionY aMaxPositionY aNewClampedPositionY |
 	
-	aContent := self scrolledElement.
+	aContentNode := aLayoutNode children first.
 	
 	aCurrentPositionX := scrollPosition x.
-	aMinPositionX := (self width - aContent measuredWidth) min: 0.0.
+	aMinPositionX := (self width - aContentNode width) min: 0.0.
 	aMaxPositionX := 0.0.
 	aNewClampedPositionX := (aCurrentPositionX max: aMinPositionX) min: aMaxPositionX.
 	
 	aCurrentPositionY := scrollPosition y.
-	aMinPositionY := (self height - aContent measuredHeight) min: 0.0.
+	aMinPositionY := (self height - aContentNode height) min: 0.0.
 	aMaxPositionY := 0.0.
 	aNewClampedPositionY := (aCurrentPositionY max: aMinPositionY) min: aMaxPositionY.
 	scrollPosition := aNewClampedPositionX @ aNewClampedPositionY.
-
-	aContent measuredBounds position: scrollPosition.
+	
+	aContentNode position: scrollPosition
 ]
 
 { #category : #layout }
-BlScrollableElement >> layoutFixGap [
-	| aContent aGapX aGapY |
+BlScrollableElement >> layoutFixGap: aLayoutNode [
+	| aContentNode aGapX aGapY |
 	
-	aContent := self scrolledElement.
+	aContentNode := aLayoutNode children first.
 	
-	aGapX := (self width - aContent measuredBounds right) max: 0.0.
+	aGapX := (self width - aContentNode right) max: 0.0.
 	scrollPosition x < 0
 		ifTrue: [
 			| aNewX |
 			aNewX := (scrollPosition x + aGapX) min: 0.0.
 			scrollPosition := aNewX @ scrollPosition y ].
 	
-	aGapY := (self height - aContent measuredBounds bottom) max: 0.0.	
+	aGapY := (self height - aContentNode bottom) max: 0.0.	
 	scrollPosition y < 0
 		ifTrue: [
 			| aNewY |
 			aNewY := (scrollPosition y + aGapY) min: 0.0.
 			scrollPosition := scrollPosition x @ aNewY ].
 
-	aContent measuredBounds position: scrollPosition
+	aContentNode position: scrollPosition
 ]
 
 { #category : #'hooks - children' }
@@ -194,23 +194,27 @@ BlScrollableElement >> onChildAdded: anElement [
 
 { #category : #layout }
 BlScrollableElement >> onLayout: aBounds [
-	| aPreviousScrollPosition |
+	| aPreviousScrollPosition aLayoutNode |
 	self scrollFlinger isIdle
 		ifFalse: [ ^ super onLayout: aBounds ].
 		
 	self hasScrolledElement
 		ifFalse: [ ^ self ].
+		
+	aLayoutNode := self userData
+		at: #layoutNode
+		ifAbsent: [ ^ self ].
 	
 	aPreviousScrollPosition := scrollPosition.
 	
 	"first we fix a gap"	
-	self layoutFixGap.
+	self layoutFixGap: aLayoutNode.
 
 	"now clamp position"
-	self layoutClampPosition.
+	self layoutClampPosition: aLayoutNode.
 
 	"then we allign content if it is smaller than the scrollpane"
-	self layoutApplyAlignment.
+	self layoutApplyAlignment: aLayoutNode.
 
 	super onLayout: aBounds.
 	
