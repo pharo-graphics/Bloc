@@ -42,10 +42,9 @@ BlScrollableElementExamples >> scrollableContent [
 	anElement addChildren:  (self data flatCollect: [ :eachClassName |
 		{ BlTextElement new
 			text: eachClassName asRopedText;
-			padding: (BlInsets all: 15);
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical fitContent ].
+			padding: (BlInsets left: 15);
+			height: 45;
+			constraintsDo: [ :c | c horizontal matchParent ].
 		BlElement new
 			background: (Color gray alpha: 0.2);
 			constraintsDo: [ :c |
@@ -100,13 +99,13 @@ BlScrollableElementExamples >> scrollableExactHeight_02_scrollToEnd [
 	| aScrollableElement |
 	
 	aScrollableElement := self scrollableExactHeight_01_default.
-	aScrollableElement scrollBy: 0@2903.
+	aScrollableElement scrollBy: 0@2852.
 
 	aScrollableElement forceLayout.
-	self assert: aScrollableElement scrolledElement height equals: 2903.0.
+	self assert: aScrollableElement scrolledElement height equals: 2852.0.
 	self assert: aScrollableElement extent equals: (300 @ 200).
-	self assert: aScrollableElement scrollPosition equals: 0@2703 negated.
-	self assert: aScrollableElement scrolledElement position equals: 0@2703 negated.
+	self assert: aScrollableElement scrollPosition equals: 0@2652 negated.
+	self assert: aScrollableElement scrolledElement position equals: 0@2652 negated.
 
 	^ aScrollableElement
 ]
@@ -139,7 +138,7 @@ BlScrollableElementExamples >> scrollableFitContent [
 		c vertical fitContent ].
 
 	aScrollableElement forceLayout.
-	self assert: aScrollableElement scrolledElement height equals: 2903.0.
+	self assert: aScrollableElement scrolledElement height equals: 2852.0.
 	self assert: aScrollableElement extent equals: (300 @ aScrollableElement scrolledElement height).
 
 	^ aScrollableElement
