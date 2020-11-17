@@ -25,7 +25,8 @@ BlDevScripterClickStep >> omitDoubleClickOn: aScripter [
 
 	anEvent := aScripter events reversed detectEventOfClass: BlClickEvent ifNone: [ ^ self ]. 
 	aDuration := BlMouseProcessor dblClickDelay - (aScripter time now - anEvent timestamp).
-	aDuration < 0 seconds ifTrue: [ ^ self ]. 
+	aDuration < 0 seconds
+		ifTrue: [ ^ self ]. 
 	aScripter time wait: aDuration.
 ]
 

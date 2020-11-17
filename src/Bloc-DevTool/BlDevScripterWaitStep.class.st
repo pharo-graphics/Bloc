@@ -16,8 +16,9 @@ BlDevScripterWaitStep >> defaultLabel [
 BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 	self label: 'Wait For Empty Task Queue'.
 	self onSpace.
-	self waitingBlock: [ :aSpace | aSpace time 
-			every: 100 milliSeconds 
+	self waitingBlock: [ :aSpace |
+		aSpace time 
+			every: 20 milliSeconds 
 			while: [ aSpace taskQueue tasks isNotEmpty ] 
 			do: [ aSpace pulse ] ]
 ]
