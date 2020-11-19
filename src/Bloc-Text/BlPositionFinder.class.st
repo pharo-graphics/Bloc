@@ -23,6 +23,18 @@ BlPositionFinder >> caseInsensitiveSubstring: aString [
 ]
 
 { #category : #'api - configuration' }
+BlPositionFinder >> caseSensitiveSubstring: aString [
+	self
+		assert: [ aString notNil ] 
+		description: [ 'Searched sub-string must be non-nil' ].
+
+	self pattern: [ :aText :aPosition | 
+		aString = (aText 
+			from: aPosition 
+			to: ((aPosition + aString size - 1) min: aText size)) asString ]
+]
+
+{ #category : #'api - configuration' }
 BlPositionFinder >> character: aCharacter [
 	self
 		assert: [ aCharacter notNil ] 
@@ -83,6 +95,34 @@ BlPositionFinder >> search [
 		aCurrentIndex := aCurrentIndex + stepLength ].
 	"No pattern was satisfied"
 	^ 0
+]
+
+{ #category : #'api - processing' }
+BlPositionFinder >> searchClosest [
+	<return: #Integer>
+	| aStartIndex aForwardLocation aBackwardLocation |
+	
+	aStartIndex := startIndex.
+	
+	aForwardLocation := self search.
+	aForwardLocation = aStartIndex
+		ifTrue: [ ^ aForwardLocation ].
+	
+	aBackwardLocation := self
+		startAtPosition: aStartIndex;
+		reversed;
+		search.
+	self reversed.
+
+	aBackwardLocation isZero
+		ifTrue: [ ^ aForwardLocation ].
+		
+	aForwardLocation isZero
+		ifTrue: [ ^ aBackwardLocation ].
+
+	^ (aForwardLocation - aStartIndex) abs < (aBackwardLocation - aStartIndex) abs
+		ifTrue: [ aForwardLocation ]
+		ifFalse: [ aBackwardLocation ]
 ]
 
 { #category : #'api - configuration' }

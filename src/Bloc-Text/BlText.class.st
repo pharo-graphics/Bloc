@@ -77,6 +77,11 @@ BlText >> append: aText [
 	self insertText: aText at: self size
 ]
 
+{ #category : #'text - modifications' }
+BlText >> appendString: aString [
+	self insertString: aString at: self size
+]
+
 { #category : #'text - converting' }
 BlText >> asArray [
     ^ Array streamContents: [ :aStream |
@@ -533,6 +538,20 @@ BlText >> readonly [
 	<return: #BlReadonlyText>
 
 	^ BlReadonlyText text: self
+]
+
+{ #category : #'text - attributes' }
+BlText >> removeAttributes: aCollectionOfAttributes [
+	| theAttributesToRemove |
+	
+	theAttributesToRemove := aCollectionOfAttributes asIdentitySet.
+	self clearAttributes: [ :eachAttribute | theAttributesToRemove includes: eachAttribute ]
+]
+
+{ #category : #'text - modifications' }
+BlText >> replace: aStart to: anEnd withString: aString [
+	self delete: aStart to: anEnd.
+	self insertString: aString at: aStart
 ]
 
 { #category : #'text - accessing' }
