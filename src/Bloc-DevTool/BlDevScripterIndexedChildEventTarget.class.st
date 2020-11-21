@@ -22,9 +22,14 @@ BlDevScripterIndexedChildEventTarget class >> newFromInput: anObject [
 BlDevScripterIndexedChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
+	self
+		assert: [ anElement notNil ]
+		description: [ 'Element must not be nil' ].
+
 	self 
-		assert: self index <= anElement childrenCount
-		description: [ 'Index ', self index asString, ' is bigger than number of children' ].
+		assert: [ self index between: 1 and: anElement childrenCount ]
+		description: [ 'Child index ', self index asString, ' is out of bounds, must be between 1 and {1})' format: { anElement childrenCount } ].
+
 	^ anElement children at: self index
 ]
 

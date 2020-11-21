@@ -51,7 +51,8 @@ BlDevScripterDeepChildOfClassEventTarget >> findTargetIn: anElement [
 
 	^ anElement 
 		allChildrenBreadthFirstDetect: [ :eachChild | eachChild class = self elementClass ]
-		ifFound: [:x | x ]
+		ifFound: [ :aTargetElement | aTargetElement ]
+		ifNone: [ AssertionFailure signal: 'Cannot find target element of class ', self elementClass printString ]
 ]
 
 { #category : #accessing }

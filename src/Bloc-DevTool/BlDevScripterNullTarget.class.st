@@ -49,6 +49,7 @@ BlDevScripterNullTarget class >> uniqueInstance [
 { #category : #searching }
 BlDevScripterNullTarget >> findTargetIn: anElement [
 	<return: #BlElement>
+
 	AssertionFailure signal: 'Target is not defined'
 ]
 

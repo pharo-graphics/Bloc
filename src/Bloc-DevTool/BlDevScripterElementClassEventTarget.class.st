@@ -48,10 +48,13 @@ BlDevScripterElementClassEventTarget >> elementClass: aClass [
 { #category : #searching }
 BlDevScripterElementClassEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
-
 	| aChildren |
+
 	aChildren := anElement children select: [ :eachChild | eachChild class = self elementClass ].
-	self assert: aChildren size equals: 1.
+	self
+		assert: [ aChildren size = 1 ]
+		description: [ 'Found {1} potential targets, while it must be just 1' format: { aChildren size } ].
+
 	^ aChildren first
 ]
 
