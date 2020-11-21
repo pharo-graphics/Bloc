@@ -13,8 +13,10 @@ BlDevScripterStepExecutorScreenshotExportOnFailActivity >> executePostPlayOnStep
 		ifTrue: [ ^ self ].
 
 	aStep reference definitionDo: [ :aCompiledMethod |
-		| aStepDirectory aScreenshotName |
-		aStepDirectory := BlDevScripter scripterDirectory / aCompiledMethod methodClass name / aCompiledMethod selector.
+		| aStepDirectory aScreenshotName aSafeSelectorName |
+		
+		aSafeSelectorName := (aCompiledMethod selector copyReplaceAll: ':' with: ' ') asCamelCase uncapitalized.
+		aStepDirectory := BlDevScripter scripterDirectory / aCompiledMethod methodClass name / aSafeSelectorName.
 		aStepDirectory ensureCreateDirectory.
 		
 		aScreenshotName := aStep label asCamelCase asValidSelector, '.png'.

@@ -54,6 +54,7 @@ BlDevScripterCheckFiredEventsStep >> events: aCollection [
 { #category : #actions }
 BlDevScripterCheckFiredEventsStep >> playOn: aScripter [
 	| anElement |
+
 	self
 		assert: [ self events isCollection and: [ self events isNotEmpty ] ]
 		description: [ 'Expected events must be defined' ]. 
