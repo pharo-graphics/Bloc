@@ -14,8 +14,7 @@ Class {
 
 { #category : #accessing }
 BlBlocUIManagerNotification class >> notificationHandlers [
-	^ NotificationHandlers
-		ifNil: [ NotificationHandlers := Dictionary new ]
+	^ BlBlocUIManagerNotificationHandler notificationHandlers
 ]
 
 { #category : #signaling }
@@ -54,24 +53,10 @@ BlBlocUIManagerNotification >> arguments: anArray [
 	arguments := anArray
 ]
 
-{ #category : #private }
-BlBlocUIManagerNotification >> continue: debugSession with: anObject [
-	| context |
-	context := debugSession interruptedContext.
-	[ context notNil
-		and: [ context isBlockContext or: [ context receiver ~~ self ] ] ]
-		whileTrue: [ context := context sender ].
-	debugSession
-		returnValue: anObject
-		from: (context ifNil: [ debugSession interruptedContext ]).
-	debugSession resume
-]
-
 { #category : #'exception handling' }
 BlBlocUIManagerNotification >> defaultAction [
-	self isFromMorphic
-		ifTrue: [ ^ self processInMorphic ].
-	self elementDoOrSpaceDo: [ :each | ^ self showNotificationIn: each ].
+	self isFromMorphic ifTrue: [ ^ self processInMorphic ].
+	self handlerDo: [ :aHandler | ^ aHandler show ].
 	^ self unhandledAction
 ]
 
@@ -80,15 +65,13 @@ BlBlocUIManagerNotification >> defaultBlock: aBlock [
 	defaultBlock := aBlock
 ]
 
-{ #category : #private }
-BlBlocUIManagerNotification >> elementDoOrSpaceDo: aBlock [
-	| context |
-	context := thisContext.
-	[ context notNil ]
-		whileTrue: [ ((context receiver isKindOf: BlElement)
-				or: [ context receiver isKindOf: BlSpace ])
-				ifTrue: [ ^ aBlock value: context receiver ].
-			context := context sender ]
+{ #category : #'private - accessing' }
+BlBlocUIManagerNotification >> handlerDo: aBlock [
+	| aClass anInstance |
+	aClass := BlBlocUIManagerNotificationHandler preferredHandler.
+	aClass ifNil: [ ^ self ].
+	anInstance := aClass managerNotification: self.
+	aBlock cull: anInstance.
 ]
 
 { #category : #testing }
@@ -123,28 +106,6 @@ BlBlocUIManagerNotification >> request [
 { #category : #accessing }
 BlBlocUIManagerNotification >> request: aSymbol [
 	request := aSymbol
-]
-
-{ #category : #private }
-BlBlocUIManagerNotification >> showNotificationIn: anElementOrSpace [
-	self class notificationHandlers
-		at: request
-		ifPresent: [ :creationBlock | 
-			creationBlock numArgs <= 2
-				ifTrue: [ anElementOrSpace
-						showNotification: (creationBlock cull: request cull: arguments) ]
-				ifFalse: [ ^ UIManager default
-						debugProcess: Processor activeProcess
-						context: thisContext
-						label: 'UIManager Notification'
-						spawningDebuggingUsing: [ :session | 
-							anElementOrSpace
-								showNotification:
-									(creationBlock
-										cull: request
-										cull: arguments
-										cull: [ :object | self continue: session with: object ]) ] ] ].
-	^ self unhandledAction
 ]
 
 { #category : #private }
