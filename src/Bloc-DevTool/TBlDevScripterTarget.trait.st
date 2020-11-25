@@ -86,6 +86,11 @@ TBlDevScripterTarget >> onSpace [
 	self updateTarget: (BlDevScripterSpaceTarget new)
 ]
 
+{ #category : #'targets - other' }
+TBlDevScripterTarget >> onSpaceRoot [
+	self updateTarget: (BlDevScripterSpaceRootTarget new)
+]
+
 { #category : #'targets - text' }
 TBlDevScripterTarget >> onTextAttributesAt: anIndex [
 	self updateTarget: (BlDevScripterTextAttributesAtTarget new index: anIndex)
