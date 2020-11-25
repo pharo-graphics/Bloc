@@ -68,6 +68,11 @@ TBlDevScripterActionStep >> requestFocus [
 	^ self addStep: BlDevScripterRequestFocusStep new referenceSender
 ]
 
+{ #category : #'steps - interactions' }
+TBlDevScripterActionStep >> secondaryClick [
+	^ self addStep: (BlDevScripterSecondaryClickStep new referenceSender)
+]
+
 { #category : #'steps - other' }
 TBlDevScripterActionStep >> set [
 	^ self addStep: BlDevScripterSetStep new referenceSender

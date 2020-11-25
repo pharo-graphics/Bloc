@@ -21,7 +21,7 @@ BlDevScripterShortcutStep >> combination: anObject [
 BlDevScripterShortcutStep >> playOn: aScripter [
 	| aTarget aBuffer anEvent |
 	aTarget := self target findTargetStartingInScripter: aScripter.
-
+	
 	aBuffer := BlKeyboardBuffer new.
 	combination asBufferKeys do: [ :eachKeyboardKey | aBuffer add: (BlKeyDownEvent new key: eachKeyboardKey) ].
 

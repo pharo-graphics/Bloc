@@ -77,6 +77,15 @@ BlTextIterator >> next [
 { #category : #'iterator - enumeration' }
 BlTextIterator >> nextAttributeStartAndEnd: aBlTextAttribute indicesDo: anIndicesBlock [
 	"Find and iterate over the start and end indices of the given attribute"	
+	
+	^ self
+		nextAttributeStartAndEndSuchThat: [ :eachAttribute | eachAttribute == aBlTextAttribute ]
+		indicesDo: anIndicesBlock
+]
+
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> nextAttributeStartAndEndSuchThat: aComparisonBlock indicesDo: anIndicesBlock [
+	"Find and iterate over the start and end indices of the given attribute"	
 	| startPosition endPosition isAttributeStartFound isAttributeEndFound |
 
 	self hasNext
@@ -94,7 +103,7 @@ BlTextIterator >> nextAttributeStartAndEnd: aBlTextAttribute indicesDo: anIndice
 		aCurrentPosition := self position + 1.
 
 		aSpan := self nextSpan.
-		hasAttribute := aSpan attributes anySatisfy: [ :eachAttribute | eachAttribute == aBlTextAttribute ] .
+		hasAttribute := aSpan attributes anySatisfy: [ :eachAttribute | aComparisonBlock value: eachAttribute ] .
 		
 		"we found the start of the attribute"
 		(hasAttribute and: [ isAttributeStartFound not ])

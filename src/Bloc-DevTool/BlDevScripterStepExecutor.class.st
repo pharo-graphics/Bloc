@@ -99,6 +99,7 @@ BlDevScripterStepExecutor >> initialize [
 BlDevScripterStepExecutor >> play [
 	self scripter pulse.
 	self strategy startOnScripter: self scripter executor: self.
+	self scripter pulse.
 ]
 
 { #category : #accessing }

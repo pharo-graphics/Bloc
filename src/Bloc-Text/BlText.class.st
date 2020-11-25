@@ -283,6 +283,13 @@ BlText >> findAttribute: aBlTextAttribute indicesDo: aBlock [
 		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
 ]
 
+{ #category : #'text - attributes' }
+BlText >> findAttributeSuchThat: aComparisonBlock indicesDo: aBlock [	
+	^ self iterator
+		nextAttributeStartAndEndSuchThat: aComparisonBlock
+		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
+]
+
 { #category : #'text - enumeration' }
 BlText >> finder [
 	^ BlPositionFinder new text: self
@@ -332,6 +339,16 @@ BlText >> generation [
 	<return: #Object>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'text - attributes' }
+BlText >> hasAttributeSuchThat: aComparisonBlock [
+	<return: #Boolean>
+	self
+		findAttributeSuchThat: aComparisonBlock
+		indicesDo: [ :aStart :anEnd | ^ true ].
+		
+	^ false
 ]
 
 { #category : #'text - testing' }
