@@ -214,14 +214,17 @@ BlDevScripter >> gtUserDataFor: aView [
 BlDevScripter >> initialize [
 	super initialize.
 	
+	events := BlDevScripterEvents new.
+
 	rootStep := BlDevScripterRootStep new.
 	rootStep referenceHere.
+
 	space := BlSpace new.
 	space title: 'Scripter'.
 	space extent: 800 @ 600.
 	space host: BlMockedHost new.
 	space addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent ].
-	events := BlDevScripterEvents new
+	space root addEventFilterOn: BlEvent do: [ :anEvent | events add: anEvent ].
 ]
 
 { #category : #'accessing - data' }
