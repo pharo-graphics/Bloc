@@ -12,6 +12,11 @@ TBlDevScripterTarget >> asBreadthFirstSearch [
 ]
 
 { #category : #'targets - children' }
+TBlDevScripterTarget >> id: aBlElementId [
+	self updateTarget: (BlDevScripterElementIdEventTarget new elementId: aBlElementId)
+]
+
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onAllChildrenBreadthFirst [
 	self updateTarget: (BlDevScripterAllChildrenBreadthFirstEventTarget new)
 ]
@@ -38,7 +43,7 @@ TBlDevScripterTarget >> onChildFromSelectionBlock: anOneArgBlock [
 
 { #category : #'targets - children' }
 TBlDevScripterTarget >> onChildNamed: aSymbol [
-	self updateTarget: (BlDevScripterNamedChildEventTarget new name: aSymbol)
+	self id: aSymbol
 ]
 
 { #category : #'targets - children' }

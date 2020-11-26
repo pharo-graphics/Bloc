@@ -87,21 +87,21 @@ BlElement >> addChild: anElement [
 ]
 
 { #category : #'children add/remove' }
-BlElement >> addChild: anElement as: aContainerName [
+BlElement >> addChild: anElement as: aBlElementId [
 	"Add a given element to my children and make it a named container, so that
 	we could add children in that container"
+	| aChildId |
+	
+	aChildId := aBlElementId asBlocElementId.
 	
 	self
 		assert: [ (self children
-			detect: [ :aChild |
-				aChild containerName
-					ifNotNil: [ :aName | aName = aContainerName ]
-					ifNil: [ false ] ]
+			detect: [ :aChild | aChild id = aChildId ]
 			ifFound: [ true ]
 			ifNone: [ false ]) not ]
-		description: [ 'Child named #', aContainerName asString, ' already exists' ].
+		description: [ 'Child with id #', aBlElementId asString, ' already exists' ].
 	
-	anElement containerName: aContainerName.
+	anElement id: aChildId.
 	self addChild: anElement
 ]
 
@@ -709,10 +709,23 @@ BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
 BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
 
+	^ self
+		childWithId: aContainerName
+		ifFound: ifFoundBlock
+		ifNone: ifNoneBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	<return: #Object>
+	| targetId |
+	
+	targetId := aBlElementId asBlocElementId.
+
 	self allChildrenBreadthFirstDo: [ :aChild |
-		aChild containerName ifNotNil: [ :aName |
-			(aName = aContainerName)
-				ifTrue: [ ^ ifFoundBlock cull: aChild ] ] ].
+		aChild id = targetId
+			ifTrue: [ ^ ifFoundBlock cull: aChild ] ].
+
 	^ ifNoneBlock value
 ]
 
@@ -876,18 +889,14 @@ BlElement >> constraintsDo: aBlock [
 BlElement >> containerName [
 	<return: #Symbol or: nil>
 
-	^ self userData
-		at: #blocContainer
-		ifAbsent: [ nil ]
+	^ self id asSymbol
 ]
 
 { #category : #accessing }
 BlElement >> containerName: aSymbol [
 	"Give this element a container name (a Symbol) which can be used to find an element by its name"
-	
-	self userData
-		at: #blocContainer
-		put: aSymbol asString
+
+	self id: aSymbol
 ]
 
 { #category : #'geometry testing' }
@@ -1719,6 +1728,25 @@ BlElement >> height: aNumber [
 
 	self constraintsDo: [ :c |
 		c vertical exact: aNumber ]
+]
+
+{ #category : #accessing }
+BlElement >> id [
+	"Return an id of this element if it was defined"
+	<return: #BlElementId>
+	
+	^ self userData
+		at: #elementId
+		ifAbsent: [ BlElementId noId ]
+]
+
+{ #category : #accessing }
+BlElement >> id: aBlElementId [
+	"Give this element an id which can be used to query this element"
+	
+	self userData
+		at: #elementId
+		put: aBlElementId asBlocElementId
 ]
 
 { #category : #processing }
@@ -3529,7 +3557,10 @@ BlElement >> visibility: aVisibility [
 	shouldRequestLayout
 		ifTrue: [ self requestLayout ].
 
-	self invalidate
+	"visibility does not change how *this* element is rendered,
+	instead it affects the rendering of the parent"
+	self hasParent
+		ifTrue: [ self parent invalidate ]
 ]
 
 { #category : #'geometry bounds' }
