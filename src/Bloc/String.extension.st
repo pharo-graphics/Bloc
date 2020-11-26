@@ -4,5 +4,5 @@ Extension { #name : #String }
 String >> asBlocElementId [
 	<return: #BlElementId>
 
-	^ BlElementId named: self asString
+	^ BlElementId named: self asSymbol
 ]

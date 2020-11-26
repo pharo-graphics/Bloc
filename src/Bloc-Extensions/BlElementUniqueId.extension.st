@@ -56,7 +56,7 @@ BlElementUniqueId class >> gtSimilarUniqueIdsFor: aView [
 	^ aView forward
 		title: 'Similar Unique Ids';
 		priority: 0.8;
-		object: [ (self allSuperclassesIncluding: BlElementUniqueId) first ];
+		object: [ ((self allSuperclassesIncluding: BlElementUniqueId) select: [ :eachIdClass | eachIdClass isAbstract ]) first ];
 		view: #gtAllUniqueIdsFor:
 ]
 
