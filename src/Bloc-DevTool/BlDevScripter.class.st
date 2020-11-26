@@ -83,11 +83,10 @@ BlDevScripter >> extent: aPoint [
 BlDevScripter >> gtElementsFor: aView [
 	<gtView>
 	space ifNil: [ ^ aView empty ].
-	^ aView tree
+	^ aView forward
 		title: 'Children';
-		items: [ space root children ];
-		children: #children;
-		expandUpTo: 3
+		object: [ space root ];
+		view: #gtChildrenFor:
 ]
 
 { #category : #'gt-extension' }
