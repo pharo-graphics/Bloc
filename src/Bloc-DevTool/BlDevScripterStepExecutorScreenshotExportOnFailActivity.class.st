@@ -11,19 +11,16 @@ BlDevScripterStepExecutorScreenshotExportOnFailActivity >> executePostPlayOnStep
 		
 	aStep isRootStep
 		ifTrue: [ ^ self ].
+		
+	self class debugFileNameFor: aStep do: [ :aDirectory :aFileName |
+		| aScreenshotName |
 
-	aStep reference definitionDo: [ :aCompiledMethod |
-		| aStepDirectory aScreenshotName aSafeSelectorName |
-		
-		aSafeSelectorName := (aCompiledMethod selector copyReplaceAll: ':' with: ' ') asCamelCase uncapitalized.
-		aStepDirectory := BlDevScripter scripterDirectory / aCompiledMethod methodClass name / aSafeSelectorName.
-		aStepDirectory ensureCreateDirectory.
-		
-		aScreenshotName := aStep label asCamelCase asValidSelector, '.png'.
+		aDirectory ensureCreateDirectory.
+		aScreenshotName := aFileName, '.png'.
 		
 		(anExecutor scripter gtSpaceFor: GtPhlowEmptyView new) asElementDo: [ :aPreview |
 			BlExporter png
-				fileName: aStepDirectory / aScreenshotName;
+				fileName: aDirectory / aScreenshotName;
 				element: aPreview;
 				export ] ]
 ]

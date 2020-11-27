@@ -14,6 +14,11 @@ BlDevScripterEvents >> add: anEvent [
 		ifFalse: [ self collection add: anEvent ]
 ]
 
+{ #category : #converting }
+BlDevScripterEvents >> asArray [
+	^ self collection asArray
+]
+
 { #category : #accessing }
 BlDevScripterEvents >> at: anIndex [
 	^ self collection at: anIndex

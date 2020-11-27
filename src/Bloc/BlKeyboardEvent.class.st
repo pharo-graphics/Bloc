@@ -8,6 +8,14 @@ Class {
 	#category : #'Bloc-Events'
 }
 
+{ #category : #converting }
+BlKeyboardEvent >> asDictionaryForExport [
+	^ super asDictionaryForExport
+		at: #scanCode put: scanCode printString;
+		at: #key put: key printString;
+		yourself
+]
+
 { #category : #testing }
 BlKeyboardEvent >> isKeyboard [
 	^ true

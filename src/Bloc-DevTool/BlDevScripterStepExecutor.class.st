@@ -92,7 +92,8 @@ BlDevScripterStepExecutor >> initialize [
 	self sync.
 	activities := OrderedCollection new.
 
-	self withScreenshotExportOnFailure
+	self withScreenshotExportOnFailure.
+	self withEventsExportOnFailure
 ]
 
 { #category : #actions }
@@ -125,6 +126,11 @@ BlDevScripterStepExecutor >> strategy: anObject [
 { #category : #'initialization - execution' }
 BlDevScripterStepExecutor >> sync [
 	self strategy: BlDevScripterStepExecutorSyncStrategy new
+]
+
+{ #category : #'initialization - activities' }
+BlDevScripterStepExecutor >> withEventsExportOnFailure [
+	self addActivity: BlDevScripterStepExecutorEventsExportOnFailActivity new
 ]
 
 { #category : #'initialization - activities' }

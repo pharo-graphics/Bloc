@@ -7,11 +7,23 @@ Class {
 	#category : #'Bloc-Events'
 }
 
+{ #category : #converting }
+BlUIEvent >> asDictionaryForExport [
+	^ super asDictionaryForExport
+		at: #modifiers put: modifiers printString;
+		yourself
+]
+
 { #category : #initialization }
 BlUIEvent >> initialize [
 	super initialize.
 
 	modifiers := BlKeyModifiers new
+]
+
+{ #category : #testing }
+BlUIEvent >> isUIEvent [
+	^ true
 ]
 
 { #category : #accessing }

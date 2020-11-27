@@ -121,6 +121,15 @@ BlDevScripter >> gtEventTracesIn: aContainer [
 						width: 1
 						offset: 0@0);
 					relocate: eachEvent position - (3@3)) ].
+				
+		eachEvent class = BlClickEvent
+			ifTrue: [
+				aContainer addChild: (BlElement new
+					geometry: (BlCircle new);
+					size: 12@12;
+					background: Color transparent;
+					border: (BlBorder paint: anEventColor width: 1);
+					relocate: eachEvent position - (6@6)) ].
 		
 		eachEvent class = BlMouseMoveEvent
 			ifTrue: [

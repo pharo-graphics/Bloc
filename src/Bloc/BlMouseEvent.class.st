@@ -47,6 +47,15 @@ BlMouseEvent >> anyButtonPressed [
 ]
 
 { #category : #converting }
+BlMouseEvent >> asDictionaryForExport [
+	^ super asDictionaryForExport
+		at: #position put: position printString;
+		at: #screenPosition put: screenPosition printString;
+		at: #button put: button printString;
+		yourself
+]
+
+{ #category : #converting }
 BlMouseEvent >> asDragEndEvent [
 	
 	^ BlDragEndEvent new
