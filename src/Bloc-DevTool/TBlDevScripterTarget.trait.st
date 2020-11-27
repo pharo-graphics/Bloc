@@ -96,6 +96,11 @@ TBlDevScripterTarget >> onSpaceRoot [
 	self updateTarget: (BlDevScripterSpaceRootTarget new)
 ]
 
+{ #category : #'targets - children' }
+TBlDevScripterTarget >> onTarget: oneArgBlock [
+	oneArgBlock value: self
+]
+
 { #category : #'targets - text' }
 TBlDevScripterTarget >> onTextAttributesAt: anIndex [
 	self updateTarget: (BlDevScripterTextAttributesAtTarget new index: anIndex)
