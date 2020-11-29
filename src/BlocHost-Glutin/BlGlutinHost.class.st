@@ -111,15 +111,15 @@ BlGlutinHost class >> spaceRegistry [
 BlGlutinHost class >> start [
 	PulseLoop start.
 
-	GlutinEventsFetcher default
+	GlutinEventFetcher default
 		addEventHandler: UserInterruptEventHandler;
 		addEventHandler: EventsSensor.
-	GlutinEventsFetcher install
+	GlutinEventFetcher install
 ]
 
 { #category : #'api - lifecycle' }
 BlGlutinHost class >> stop [
-	GlutinEventsFetcher default
+	GlutinEventFetcher default
 		removeEventHandler: UserInterruptEventHandler;
 		removeEventHandler: EventsSensor.
 	PulseLoop stop
@@ -159,7 +159,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 		withMaximized: aSpace maximized;
 		withFullSize: aSpace fullsize.
 	
-	windowedContext := GlutinEventsFetcher default eventLoop createWindow: windowBuilder.
+	windowedContext := GlutinEventFetcher default eventLoop createWindow: windowBuilder.
 	aSpace knowsPosition
 		ifTrue: [ windowedContext position: aSpace position ].
 	
