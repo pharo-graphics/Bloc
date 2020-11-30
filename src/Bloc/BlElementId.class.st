@@ -1,7 +1,7 @@
 "
 ! Element id
 
-Allows to assign id to ${class:Element}$. This allows us query a tree of elements
+Allows to assign id to ${class:BlElement}$. This allows us query a tree of elements
 "
 Class {
 	#name : #BlElementId,
