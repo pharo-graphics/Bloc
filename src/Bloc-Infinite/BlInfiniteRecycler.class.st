@@ -189,7 +189,7 @@ BlInfiniteRecycler >> elementFor: aPosition dryRun: dryRun [
 
 	| holder fromScrap fetchedResult bound itemElement anInfiniteConstraints |
 	
-	(aPosition < 1 and: [ aPosition > self controller dataSourceItemCount ])
+	(aPosition < 1 or: [ aPosition > self controller dataSourceItemCount ])
 		ifTrue: [ Error signal: 'Position is out of bounds!' ].
 
 	self controller infiniteElement telemetry
