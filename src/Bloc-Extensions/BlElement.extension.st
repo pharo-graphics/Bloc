@@ -194,3 +194,25 @@ BlElement >> gtInspectorUserDataIn: composite [
 	^ (self userData gtInspectorItemsIn: composite) 
 		title: 'User data'
 ]
+
+{ #category : #'*Bloc-Extensions' }
+BlElement >> gtPropertiesFor: aView [
+	<gtView>
+
+	^ aView forward
+		title: 'Properties';
+		priority: 10;
+		object: [ self properties ];
+		view: #gtPropertiesFor:
+]
+
+{ #category : #'*Bloc-Extensions' }
+BlElement >> gtStatesFor: aView [
+	<gtView>
+
+	^ aView forward
+		title: 'States';
+		priority: 10;
+		object: [ self states ];
+		view: #gtStatesFor:
+]
