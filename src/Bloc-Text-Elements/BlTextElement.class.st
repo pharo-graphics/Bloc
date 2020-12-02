@@ -165,6 +165,12 @@ BlTextElement >> editorMesurement [
 	self editorMeasurement
 ]
 
+{ #category : #accessing }
+BlTextElement >> fontSize: aNumber [
+	self text fontSize: aNumber.
+	self textChanged
+]
+
 { #category : #geometry }
 BlTextElement >> indexAtScreenPosition: aPoint [
 	<return: #Number>

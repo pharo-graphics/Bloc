@@ -48,7 +48,9 @@ Class {
 		'elementsNeedingPaint',
 		'elementsNeedingLayout',
 		'telemetry',
-		'reference'
+		'reference',
+		'elementsNeedingStyle',
+		'elementsNeedingPropertiesComputation'
 	],
 	#classVars : [
 		'UniqueIdGenerator'
@@ -510,6 +512,100 @@ BlSpace >> dispatchTimeEvent: aSpaceStepEventClass during: aBlock [
 				yourself)
 ]
 
+{ #category : #'change - properties' }
+BlSpace >> doComputeProperties [
+	| theElementToProcess |
+	
+	"if everything is clean, do nothing"
+	(self needsPropertiesComputation)
+		ifFalse: [ ^ self ].
+
+	"only care about element that are attached to this space"
+	theElementToProcess := self extractAttachedElementsToComputeProperties: self elementsNeedingPropertiesComputation.
+
+	"first we should make sure that all parents have resolved properties"
+	theElementToProcess := self extractUnresolvedToComputeProperties: theElementToProcess.
+
+	"then we should eliminate child elements if their parent is already on the list"
+	theElementToProcess := self extractRootsToComputeProperties: theElementToProcess.
+	
+	self elementsNeedingPropertiesComputation removeAll.
+	
+	((theElementToProcess includes: self root) or: [ self root needsPropertiesComputation ])
+		ifTrue: [ self doComputePropertiesFromRoot: self root ]
+		ifFalse: [ self doComputePropertiesOf: theElementToProcess ]
+]
+
+{ #category : #'change - properties' }
+BlSpace >> doComputeProperties: anElement withGlobalProperties: aGlobalResolvedProperties [
+	self
+		assert: [ anElement hasParent ]
+		description: [ 'Can not compute properties of an element without parent' ].
+
+	self
+		assert: [ anElement parent needsPropertiesComputation not ]
+		description: [ 'Parent properties must be computed' ].
+
+	self
+		doComputeProperties: anElement
+		withParentProperties: anElement parent properties maybeResolvedProperties
+		withGlobalProperties: aGlobalResolvedProperties
+]
+
+{ #category : #'change - properties' }
+BlSpace >> doComputeProperties: anElement withParentProperties: aParentResolvedProperties withGlobalProperties: aGlobalResolvedProperties [
+	| theResolvedProperties thePropagatableProperties |
+
+	theResolvedProperties := anElement properties
+		resolveWithParentProperties: aParentResolvedProperties
+		orGlobal: aGlobalResolvedProperties.
+
+	thePropagatableProperties := theResolvedProperties propertiesToPropagateToChildren.
+
+	anElement childrenDo: [ :eachChild |
+		self
+			doComputeProperties: eachChild
+			withParentProperties: thePropagatableProperties 
+			withGlobalProperties: aGlobalResolvedProperties ].
+
+	"we need to merge properties starting from global"
+	((aGlobalResolvedProperties
+		mergedWithProperties: aParentResolvedProperties)
+			mergedWithProperties: theResolvedProperties)
+				applyOnElement: anElement
+]
+
+{ #category : #'change - properties' }
+BlSpace >> doComputePropertiesFromRoot: aRootElement [
+	| theGlobalResolvedProperties |
+
+	aRootElement properties
+		resolveWithParentProperties: BlElementResolvedProperties new
+		orGlobal: BlElementResolvedProperties new.
+	
+	theGlobalResolvedProperties := aRootElement properties maybeResolvedProperties propertiesToPropagateToChildren.
+	
+	self
+		doComputeProperties: aRootElement
+		withParentProperties: theGlobalResolvedProperties
+		withGlobalProperties: theGlobalResolvedProperties
+]
+
+{ #category : #'change - properties' }
+BlSpace >> doComputePropertiesOf: aCollectionOfElements [
+	| theGlobalResolvedProperties |
+
+	self
+		assert: [ (aCollectionOfElements includes: self root) not ]
+		description: [ 'Must not include root' ].
+
+	theGlobalResolvedProperties := self root properties maybeResolvedProperties propertiesToPropagateToChildren.
+	aCollectionOfElements do: [ :eachElement |
+		self
+			doComputeProperties: eachElement
+			withGlobalProperties: theGlobalResolvedProperties ]
+]
+
 { #category : #'change - layout' }
 BlSpace >> doLayout [
 	| layoutCounter maxLayoutCount |
@@ -535,6 +631,40 @@ BlSpace >> doLayout [
 	] on: Error do: [ :anError |
 		layoutError := anError.
 		[ layoutError debug ] ensure: [ layoutError := nil ] ].
+]
+
+{ #category : #'change - style' }
+BlSpace >> doStyle [
+	| theElementsToStyle |
+	
+	theElementsToStyle := self elementsNeedingStyle copy.
+	self elementsNeedingStyle removeAll.
+	
+	theElementsToStyle do: [ :eachElement |
+			| theInheritedStates |
+			
+			theInheritedStates := Set new.
+
+			eachElement hasParent
+				ifTrue: [ theInheritedStates := eachElement parent states statesToInherit ].
+			
+			self doStyle: eachElement withInheritedStates: theInheritedStates ]
+]
+
+{ #category : #'change - style' }
+BlSpace >> doStyle: anElement withInheritedStates: aCollectionOfStates [
+	| theStatesToInherit |
+	anElement states inheritedStates: aCollectionOfStates.
+	anElement style applyStylesForStates: anElement states allStates.
+	
+	theStatesToInherit := anElement states statesToInherit.
+	theStatesToInherit
+		ifEmpty: [ ^ self ].
+
+	anElement children do: [ :eachChild |
+		self
+			doStyle: eachChild
+			withInheritedStates: theStatesToInherit ]
 ]
 
 { #category : #pulse }
@@ -634,6 +764,17 @@ BlSpace >> elementsNeedingPaint [
 	^ elementsNeedingPaint
 ]
 
+{ #category : #'change - layout' }
+BlSpace >> elementsNeedingPropertiesComputation [
+	^ elementsNeedingPropertiesComputation ifNil: [ elementsNeedingPropertiesComputation := Set new ]
+]
+
+{ #category : #'change - layout' }
+BlSpace >> elementsNeedingStyle [
+	^ elementsNeedingStyle
+		ifNil: [ elementsNeedingStyle := Set new ]
+]
+
 { #category : #'api - tasks' }
 BlSpace >> enqueueTask: aBlTask [
 	aBlTask onEnqueued: self.
@@ -697,6 +838,46 @@ BlSpace >> extent [
 { #category : #'window - properties' }
 BlSpace >> extent: aNewExtent [
 	self windowExtent: aNewExtent
+]
+
+{ #category : #'change - properties' }
+BlSpace >> extractAttachedElementsToComputeProperties: aSetOfElements [
+	^ aSetOfElements select: [ :eachElement |
+		eachElement isAttachedToSceneGraph
+			and: [ eachElement space == self ] ]
+]
+
+{ #category : #'change - properties' }
+BlSpace >> extractRootsToComputeProperties: aSetOfElements [
+	| theElementsToCheck theElementsToProcess |
+	
+	theElementsToCheck := aSetOfElements as: Stack.
+	theElementsToProcess := Set new.
+	
+	[ theElementsToCheck isEmpty ] whileFalse: [
+		| eachElement |
+		
+		eachElement := theElementsToCheck pop.
+		(theElementsToCheck anySatisfy: [ :eachPotentialParent | eachElement hasParent: eachPotentialParent ])
+			ifFalse: [ theElementsToProcess add: eachElement ] ].
+
+	^ theElementsToProcess
+]
+
+{ #category : #'change - properties' }
+BlSpace >> extractUnresolvedToComputeProperties: aSetOfElements [
+	| theElementToProcess |
+
+	theElementToProcess := Set new.
+	
+	"first we should make sure that all parents have resolved properties"
+	aSetOfElements do: [ :eachElement |
+		eachElement
+			topMostParentSuchThat: [ :eachParent | eachParent needsPropertiesComputation ]
+			ifFound: [ :aNotYetResolvedParent | theElementToProcess add: aNotYetResolvedParent ]
+			ifNone: [ theElementToProcess add: eachElement ] ].
+
+	^ theElementToProcess
 ]
 
 { #category : #'focus managing' }
@@ -923,6 +1104,8 @@ BlSpace >> initialize [
 	dirtyAreas := OrderedCollection new.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
+	elementsNeedingStyle := Set new.
+	elementsNeedingPropertiesComputation := Set new.
 	
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
@@ -1102,6 +1285,14 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 	mouseProcessor := aMouseProcessor
 ]
 
+{ #category : #'change - properties' }
+BlSpace >> needsPropertiesComputation [
+	<return: #Boolean>
+	
+	^ self elementsNeedingPropertiesComputation isNotEmpty
+		or: [ self root needsPropertiesComputation ]
+]
+
 { #category : #'window - properties' }
 BlSpace >> position [
 	"Return window's position in screen coordinates"
@@ -1196,6 +1387,18 @@ BlSpace >> requestLayout: anElement [
 { #category : #'change - rendering' }
 BlSpace >> requestNextPulse [
 	nextPulseRequested := true
+]
+
+{ #category : #'change - properties' }
+BlSpace >> requestPropertiesComputation: anElement [
+	self elementsNeedingPropertiesComputation add: anElement.
+	self requestNextPulse
+]
+
+{ #category : #'change - style' }
+BlSpace >> requestStyle: anElement [		
+	self elementsNeedingStyle add: anElement.
+	self requestNextPulse
 ]
 
 { #category : #'window - properties' }

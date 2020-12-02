@@ -101,6 +101,16 @@ TBlEventTarget >> fireEvent: anEvent [
 	aDispatcherChain dispatchEvent: anEvent
 ]
 
+{ #category : #'event management' }
+TBlEventTarget >> hasEventFilter: anEventHandler [
+	^ self eventDispatcher hasFilter: anEventHandler
+]
+
+{ #category : #'event management' }
+TBlEventTarget >> hasEventHandler: anEventHandler [
+	^ self eventDispatcher hasHandler: anEventHandler
+]
+
 { #category : #'event management accessing' }
 TBlEventTarget >> hasNextEventTarget [
 	"Return true if this event target has a logical successor within a dispatch chain.

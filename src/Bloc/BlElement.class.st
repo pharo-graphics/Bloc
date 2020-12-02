@@ -481,7 +481,13 @@ BlElement >> attachSpace [
 	propagation of the repainting request, elements wanting a composition layer
 	will not be repainted (https://github.com/feenkcom/gtoolkit/issues/1459)"
 	self needsPaint
-		ifTrue: [ self markNeedsPaintFrom: self ]
+		ifTrue: [ self markNeedsPaintFrom: self ].
+
+	self needsStyle
+		ifTrue: [ self requestStyle ].
+
+	self needsPropertiesComputation
+		ifTrue: [ self requestPropertiesComputation ]
 ]
 
 { #category : #'api - look' }
@@ -2419,6 +2425,18 @@ BlElement >> needsPaint [
 	^ needsPaint
 ]
 
+{ #category : #'api - properties' }
+BlElement >> needsPropertiesComputation [
+	<return: #Boolean>
+
+	^ self properties needsPropertiesComputation
+]
+
+{ #category : #'api - style' }
+BlElement >> needsStyle [
+	^ self style needsStyle
+]
+
 { #category : #'event management accessing' }
 BlElement >> nextEventTarget [
 	"Return next event target that should be contained in dispatch chain.
@@ -2889,6 +2907,13 @@ BlElement >> printOn: aStream [
 		store: self identityHash
 ]
 
+{ #category : #'api - properties' }
+BlElement >> properties [
+	^ self userData
+		at: #blocProperties
+		ifAbsentPut: [ BlElementLocalProperties new element: self ]
+]
+
 { #category : #'api - bounds' }
 BlElement >> relocate: aPoint [
 	"Request position change in parent coordinates that will happen on the next frame or next layout pass triggered by #forceLayout.
@@ -3152,6 +3177,24 @@ BlElement >> requestParentLayout [
 	self parent requestLayout
 ]
 
+{ #category : #'api - properties' }
+BlElement >> requestPropertiesComputation [
+	self properties markDirty.
+
+	self isAttachedToSceneGraph
+		ifTrue: [ self space requestPropertiesComputation: self ]
+		ifFalse: [  ].
+]
+
+{ #category : #'api - style' }
+BlElement >> requestStyle [
+	self style markDirty.
+
+	self isAttachedToSceneGraph
+		ifTrue: [ self space requestStyle: self ]
+		ifFalse: [  ].
+]
+
 { #category : #initialization }
 BlElement >> resetChildrenArray [
 	children := Bloc preferableChildrenDataStructure new
@@ -3383,6 +3426,20 @@ BlElement >> spaceDo: aBlock [
 	self space ifNotNil: aBlock
 ]
 
+{ #category : #'api - style' }
+BlElement >> states [
+	^ self userData
+		at: #blocStates
+		ifAbsentPut: [ BlElementStates new element: self ]
+]
+
+{ #category : #'api - style' }
+BlElement >> style [
+	^ self userData
+		at: #blocStyles
+		ifAbsentPut: [ BlElementStyles new element: self ]
+]
+
 { #category : #layout }
 BlElement >> supportsBaseline [
 	"Return true if I support baseline alignment"
@@ -3429,6 +3486,22 @@ BlElement >> topMostParent [
 	^ self hasParent
 		ifTrue: [ self parent topMostParent ]
 		ifFalse: [ self ]
+]
+
+{ #category : #'children accessing' }
+BlElement >> topMostParentSuchThat: aConditionBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	"Find the topmost parent in a scene graph that satisfies a given condition."
+	| aTargetParent |
+	
+	aTargetParent := nil.
+	
+	self allParentsDo: [ :eachParent |
+		(aConditionBlock value: eachParent)
+			ifTrue: [ aTargetParent := eachParent ] ].
+		
+	^ aTargetParent
+		ifNil: ifNoneBlock
+		ifNotNil: ifFoundBlock
 ]
 
 { #category : #'focus requesting' }

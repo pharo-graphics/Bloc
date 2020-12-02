@@ -246,7 +246,7 @@ BlElementEventDispatcher >> initialize [
 	super initialize.
 
 	activatedElementEvents := BlElementEventDispatcherActivatedEvents new.
-	activatedGeneralEvents := Set new
+	activatedGeneralEvents := IdentitySet new
 ]
 
 { #category : #'api - element events' }
