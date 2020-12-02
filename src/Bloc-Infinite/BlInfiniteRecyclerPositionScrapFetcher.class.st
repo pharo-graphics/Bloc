@@ -94,7 +94,8 @@ BlInfiniteRecyclerPositionScrapFetcher >> validateHolder: aHolder controller: aR
 		^ aRecyclerController isPreLayout ].
 
 	(aHolder position <= 0 or: [ aHolder position > aRecyclerController dataSourceItemCount ])
-		ifTrue: [ Error signal: 'Holder has completely wrong position!' ].
+		ifTrue: [ Error signal: ('Holder has completely wrong position! position = {1}, count = {2}'
+			format: { aHolder position. aRecyclerController dataSourceItemCount. }) ].
 
 	aRecyclerController isPreLayout ifFalse: [ 
 		| type |
