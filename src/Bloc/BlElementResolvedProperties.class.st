@@ -12,6 +12,11 @@ BlElementResolvedProperties >> applyOnElement: anElement [
 	properties do: [ :eachProperty | eachProperty applyOnElement: anElement ]
 ]
 
+{ #category : #'adding / removing' }
+BlElementResolvedProperties >> flushPropertiesToRemove [
+	properties := properties reject: [ :eachPropertyWithStatus | eachPropertyWithStatus isToBeRemoved ]
+]
+
 { #category : #accessing }
 BlElementResolvedProperties >> mergedWithProperties: aBlElementResolvedProperties [
 	| theProperties |
@@ -37,6 +42,8 @@ BlElementResolvedProperties >> properties: aDictionaryOfProperties [
 
 { #category : #accessing }
 BlElementResolvedProperties >> propertiesToPropagateToChildren [
+	
+	"only properties that are not to be removed should be propagated to children"
 	^ BlElementPropagatableProperties new properties: (properties
 		select: [ :eachPropertyWithStatus | eachPropertyWithStatus canPropagateToChildren ]
 		thenCollect: [ :eachPropertyWithStatus | eachPropertyWithStatus property ])

@@ -13,11 +13,11 @@ Class {
 }
 
 { #category : #'adding / removing' }
-BlElementLocalProperties >> addProperties: aCollectionOfBlElementProperty [
+BlElementLocalProperties >> addProperties: aCollectionOfElementProperties [
 	| anythingChanged |
 	
 	anythingChanged := false.
-	aCollectionOfBlElementProperty do: [ :eachProperty | anythingChanged := anythingChanged or: (self basicAddProperty: eachProperty) ].
+	aCollectionOfElementProperties do: [ :eachProperty | anythingChanged := anythingChanged or: (self basicAddProperty: eachProperty) ].
 	anythingChanged
 		ifTrue: [ self onPropertiesChanged ]
 ]
@@ -59,12 +59,17 @@ BlElementLocalProperties >> basicAddProperty: aBlElementProperty [
 
 { #category : #private }
 BlElementLocalProperties >> basicRemoveProperty: aBlElementProperty [
+	"We do not actually remove a property, we simply mark it as to be removed.
+	This will later give a property a chance to clean up the element"
+	<return: #Boolean>
+
 	properties
-		removeKey: aBlElementProperty type
-		ifAbsent: [
-			properties
-				keysAndValuesRemove: [ :eachPropertyType :eachProperty |
-					eachProperty = aBlElementProperty ] ]
+		at: aBlElementProperty type
+		ifPresent: [ :anExistingPropertyWithStatus |
+			anExistingPropertyWithStatus addToBeRemoved.
+			^ true ].
+		
+	^ false
 ]
 
 { #category : #accessing }
@@ -75,6 +80,12 @@ BlElementLocalProperties >> element [
 { #category : #accessing }
 BlElementLocalProperties >> element: anObject [
 	element := anObject
+]
+
+{ #category : #'adding / removing' }
+BlElementLocalProperties >> flushPropertiesToRemove [
+	properties := properties reject: [ :eachPropertyWithStatus | eachPropertyWithStatus isToBeRemoved ].
+	self maybeResolvedProperties flushPropertiesToRemove
 ]
 
 { #category : #initialization }
@@ -119,15 +130,19 @@ BlElementLocalProperties >> postCopy [
 ]
 
 { #category : #'adding / removing' }
-BlElementLocalProperties >> removeProperties: aCollectionOfElementProperties [
-	aCollectionOfElementProperties do: [ :eachProperty | self basicRemoveProperty: eachProperty ].
-	self onPropertiesChanged
+BlElementLocalProperties >> removeProperties: aCollectionOfElementProperties [	
+	| anythingChanged |
+	
+	anythingChanged := false.
+	aCollectionOfElementProperties do: [ :eachProperty | anythingChanged := anythingChanged or: (self basicRemoveProperty: eachProperty) ].
+	anythingChanged
+		ifTrue: [ self onPropertiesChanged ]
 ]
 
 { #category : #'adding / removing' }
 BlElementLocalProperties >> removeProperty: aBlElementProperty [
-	self basicRemoveProperty: aBlElementProperty.
-	self onPropertiesChanged
+	(self basicRemoveProperty: aBlElementProperty)
+		ifTrue: [ self onPropertiesChanged ]
 ]
 
 { #category : #accessing }

@@ -31,6 +31,23 @@ BlElementForwardedStyle >> asForwarded: aTargetObject [
 		ifFalse: [ super asForwarded: aTargetObject ]
 ]
 
+{ #category : #actions }
+BlElementForwardedStyle >> cleanUpOnElement: anElement [
+	(targetObject isClosure and: [ targetObject argumentCount > 0 ])
+		ifTrue: [
+			targetObject value: [ :eachResolvedTargetObject |
+				eachResolvedTargetObject properties removeProperties: self properties ] ]
+		ifFalse: [
+			| aResolvedTargetObject |
+			
+			aResolvedTargetObject := targetObject value.
+			"the object is maybe not yet created"
+			aResolvedTargetObject
+				ifNil: [ ^ self ].
+			
+			aResolvedTargetObject properties removeProperties: self properties ]
+]
+
 { #category : #testing }
 BlElementForwardedStyle >> isForwarded [
 	^ true

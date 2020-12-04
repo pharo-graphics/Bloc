@@ -37,17 +37,22 @@ BlElementPropertyWithStatus >> addToBeRemoved [
 
 { #category : #'api - property' }
 BlElementPropertyWithStatus >> applyOnElement: anElement [
-	self isApplied
-		ifTrue: [ ^ self ].
-
-	self property applyOnElement: anElement.
-
-	status := Applied
+	self isToBeRemoved
+		ifTrue: [
+			self isApplied
+				ifTrue: [
+					self property cleanUpOnElement: anElement.
+					self clearApplied ] ]
+		ifFalse: [
+			self isApplied
+				ifFalse: [
+					self property applyOnElement: anElement.
+					status := Applied ] ]
 ]
 
 { #category : #testing }
 BlElementPropertyWithStatus >> canPropagateToChildren [
-	^ self property canPropagateToChildren
+	^ self property canPropagateToChildren and: [ self isToBeRemoved not ]
 ]
 
 { #category : #'private - status' }

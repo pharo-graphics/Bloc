@@ -580,7 +580,9 @@ BlSpace >> doComputeProperties: anElement withParentProperties: aParentResolvedP
 	((aGlobalResolvedProperties
 		mergedWithProperties: aParentResolvedProperties)
 			mergedWithProperties: theResolvedProperties)
-				applyOnElement: anElement
+				applyOnElement: anElement.
+
+	anElement properties flushPropertiesToRemove
 ]
 
 { #category : #'change - properties' }

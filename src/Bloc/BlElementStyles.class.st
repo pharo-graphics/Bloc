@@ -2,6 +2,7 @@ Class {
 	#name : #BlElementStyles,
 	#superclass : #BlStyles,
 	#instVars : [
+		'previousAppliedStyles',
 		'isDirty',
 		'element'
 	],
@@ -10,8 +11,16 @@ Class {
 
 { #category : #private }
 BlElementStyles >> applyStylesForStates: aCollectionOfStates [
-	(self matchingStyles: aCollectionOfStates)
-		do: [ :eachStyle | eachStyle applyOnElement: self element ].
+	| theNewAppliedStyles  |
+	
+	theNewAppliedStyles := self matchingStyles: aCollectionOfStates.
+	(previousAppliedStyles difference: theNewAppliedStyles)
+		ifNotEmpty: [ :theStylesToRemove | theStylesToRemove do: [ :eachStyle |
+			eachStyle cleanUpOnElement: self element
+		] ].
+
+	theNewAppliedStyles do: [ :eachStyle | eachStyle applyOnElement: self element ].
+	previousAppliedStyles := theNewAppliedStyles asSet.
 
 	isDirty := false
 ]
@@ -75,7 +84,8 @@ BlElementStyles >> for: aTargetObject [
 BlElementStyles >> initialize [
 	super initialize.
 
-	isDirty := true
+	isDirty := true.
+	previousAppliedStyles := Set new
 ]
 
 { #category : #accessing }

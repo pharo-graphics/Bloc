@@ -17,6 +17,10 @@ BlElementProperty >> canPropagateToChildren [
 ]
 
 { #category : #'api - property' }
+BlElementProperty >> cleanUpOnElement: anElement [
+]
+
+{ #category : #'api - property' }
 BlElementProperty >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
 	^ self
 ]

@@ -33,6 +33,11 @@ BlElementStyle >> asForwarded: aTargetObject [
 		targetObject: aTargetObject
 ]
 
+{ #category : #actions }
+BlElementStyle >> cleanUpOnElement: anElement [
+	anElement properties removeProperties: self properties
+]
+
 { #category : #testing }
 BlElementStyle >> hasProperties [
 	^ self properties isNotEmpty
