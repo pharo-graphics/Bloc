@@ -53,26 +53,6 @@ TBlElementProperties >> gone [
 	self visibility: BlVisibility gone
 ]
 
-{ #category : #'api - properties constraints' }
-TBlElementProperties >> hExact: aWidth [
-	self addProperty: (BlElementLayoutHorizontalResizerProperty new exact: aWidth)
-]
-
-{ #category : #'api - properties constraints' }
-TBlElementProperties >> hFitContent [
-	self addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent)
-]
-
-{ #category : #'api - properties constraints' }
-TBlElementProperties >> hFitContentLimited [
-	self addProperty: (BlElementLayoutHorizontalResizerProperty new fitContentLimited)
-]
-
-{ #category : #'api - properties constraints' }
-TBlElementProperties >> hMatchParent [
-	self addProperty: (BlElementLayoutHorizontalResizerProperty new matchParent)
-]
-
 { #category : #'api - properties' }
 TBlElementProperties >> hidden [
 	self visibility: BlVisibility hidden
@@ -86,26 +66,6 @@ TBlElementProperties >> margin: aBlInsets [
 { #category : #'api - properties constraints' }
 TBlElementProperties >> padding: aBlInsets [
 	self addProperty: (BlElementPaddingProperty new padding: aBlInsets)
-]
-
-{ #category : #'api - properties constraints' }
-TBlElementProperties >> vExact: aHeight [
-	self addProperty: (BlElementLayoutVerticalResizerProperty new exact: aHeight)
-]
-
-{ #category : #'api - properties constraints' }
-TBlElementProperties >> vFitContent [
-	self addProperty: (BlElementLayoutVerticalResizerProperty new fitContent)
-]
-
-{ #category : #'api - properties constraints' }
-TBlElementProperties >> vFitContentLimited [
-	self addProperty: (BlElementLayoutVerticalResizerProperty new fitContentLimited)
-]
-
-{ #category : #'api - properties constraints' }
-TBlElementProperties >> vMatchParent [
-	self addProperty: (BlElementLayoutVerticalResizerProperty new matchParent)
 ]
 
 { #category : #'api - properties' }
