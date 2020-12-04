@@ -20,3 +20,8 @@ BlElementProperty >> canPropagateToChildren [
 BlElementProperty >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
 	^ self
 ]
+
+{ #category : #'api - property' }
+BlElementProperty >> type [
+	^ self class
+]

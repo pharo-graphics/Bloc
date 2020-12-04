@@ -1,20 +1,15 @@
 Class {
 	#name : #BlElementExpandedState,
-	#superclass : #BlElementUniqueState,
+	#superclass : #BlElementExpansionState,
 	#category : #'Bloc-Basic-State'
 }
 
 { #category : #enumerating }
-BlElementExpandedState >> optionalEventHandlerDo: aBlock [
-	aBlock value: BlElementExpandedStateEventHandler uniqueInstance
+BlElementExpandedState >> optionalOnAddedTo: anElement [
+	anElement dispatchEvent: BrExpandedEvent new
 ]
 
 { #category : #printing }
 BlElementExpandedState >> printOn: aStream [
 	aStream nextPutAll: 'expanded'
-]
-
-{ #category : #accessing }
-BlElementExpandedState >> priority [
-	^ UserPriority
 ]

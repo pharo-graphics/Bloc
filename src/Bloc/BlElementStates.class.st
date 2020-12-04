@@ -16,11 +16,14 @@ Class {
 { #category : #adding }
 BlElementStates >> addState: aBlElementState [
 	"Add a given local state overwriting any existing one of the same type"
-
 	(localStates hasState: aBlElementState)
 		ifTrue: [ ^ self ].
 
-	localStates remove: aBlElementState ifAbsent: [  ].
+	(localStates
+		remove: aBlElementState
+		ifAbsent: [ nil ])
+			ifNotNil: [ :aRemovedState | aRemovedState optionalOnRemovedFrom: self element ].
+
 	localStates add: aBlElementState.
 	aBlElementState optionalOnAddedTo: self element.
 
@@ -99,9 +102,13 @@ BlElementStates >> onStatesChanged [
 { #category : #adding }
 BlElementStates >> removeState: aBlElementState [
 	"remove all state of the same type"
-	localStates
+	| aRemovedState |
+
+	aRemovedState := localStates
 		remove: aBlElementState
 		ifAbsent: [ ^ self ].
+
+	aRemovedState optionalOnRemovedFrom: self element.
 
 	self element requestStyle.
 	self onStatesChanged
@@ -109,11 +116,14 @@ BlElementStates >> removeState: aBlElementState [
 
 { #category : #adding }
 BlElementStates >> removeStatesSuchThat: aBlock [
-	| sizeBefore |
-	sizeBefore := localStates size.
-	localStates removeAllSuchThat: aBlock.
-	sizeBefore = localStates size
-		ifTrue: [ ^ self ].
+	| toBeRemoved |
+	
+	toBeRemoved := localStates select: aBlock.
+	toBeRemoved
+		ifEmpty: [ ^ self ].
+
+	localStates removeAll: toBeRemoved.
+	toBeRemoved do: [ :eachRemovedState | eachRemovedState optionalOnRemovedFrom: self element ].
 
 	self element requestStyle.
 	self onStatesChanged

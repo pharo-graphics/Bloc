@@ -18,6 +18,11 @@ TBlElementProperties >> border: aBlBorder [
 	self addProperty: (BlElementBorderProperty new border: aBlBorder)
 ]
 
+{ #category : #'api - properties' }
+TBlElementProperties >> do: anBlock [
+	self addProperty: (BlElementDynamicProperty new action: anBlock)
+]
+
 { #category : #'api - properties font' }
 TBlElementProperties >> fontSize: aBlElementPropertyLength [
 	self addProperty: (BlElementFontSizeProperty new fontSize: aBlElementPropertyLength)

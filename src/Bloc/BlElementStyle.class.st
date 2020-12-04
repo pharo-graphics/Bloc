@@ -42,7 +42,7 @@ BlElementStyle >> hasProperties [
 BlElementStyle >> initialize [
 	super initialize.
 	
-	properties := BlElementProperties new
+	properties := BlElementExternalProperties new
 ]
 
 { #category : #testing }

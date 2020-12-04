@@ -36,7 +36,7 @@ BlStyles >> basicAddStyle: aStyle [
 
 { #category : #'private - adding' }
 BlStyles >> basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle [
-	anExistingStyle removeProperties: aStyleToRemove properties asArray
+	anExistingStyle removeProperties: aStyleToRemove properties
 ]
 
 { #category : #'private - adding' }

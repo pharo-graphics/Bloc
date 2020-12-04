@@ -548,13 +548,21 @@ BlSpace >> doComputeProperties: anElement withGlobalProperties: aGlobalResolvedP
 
 	self
 		doComputeProperties: anElement
-		withParentProperties: anElement parent properties maybeResolvedProperties
+		withParentProperties: anElement parent properties maybeResolvedProperties propertiesToPropagateToChildren
 		withGlobalProperties: aGlobalResolvedProperties
 ]
 
 { #category : #'change - properties' }
 BlSpace >> doComputeProperties: anElement withParentProperties: aParentResolvedProperties withGlobalProperties: aGlobalResolvedProperties [
 	| theResolvedProperties thePropagatableProperties |
+
+	self
+		assert: [ aParentResolvedProperties isKindOf: BlElementPropagatableProperties ]
+		description: [ 'Parent properties must be propagatable' ].
+		
+	self
+		assert: [ aGlobalResolvedProperties isKindOf: BlElementPropagatableProperties ]
+		description: [ 'Global properties must be propagatable' ].
 
 	theResolvedProperties := anElement properties
 		resolveWithParentProperties: aParentResolvedProperties
@@ -678,15 +686,8 @@ BlSpace >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	| theStatesToInherit |
 
 	anElement states inheritedStates: aCollectionOfStates.
-		
-	"NonInteractiveTranscript stdout
-		nextPutAll: 'applyStylesForStates: ';
-		nextPutAll: anElement asString; space;
-		nextPutAll: anElement states allStates asString;
-		cr."
-
 	anElement style applyStylesForStates: anElement states allStates.
-	
+
 	theStatesToInherit := anElement states statesToInherit.
 
 	anElement children do: [ :eachChild |

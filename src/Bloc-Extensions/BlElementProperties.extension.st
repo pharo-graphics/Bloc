@@ -7,5 +7,5 @@ BlElementProperties >> gtPropertiesFor: aView [
 	^ aView list
 		title: 'Properties';
 		priority: 5;
-		items: [ properties values ]
+		items: [ self properties asArray ]
 ]

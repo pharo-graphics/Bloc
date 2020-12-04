@@ -21,3 +21,8 @@ BlElementDynamicProperty >> action: anObject [
 BlElementDynamicProperty >> applyOnElement: anElement [
 	self action cull: anElement
 ]
+
+{ #category : #generated }
+BlElementDynamicProperty >> type [
+	^ self action
+]

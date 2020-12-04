@@ -1,6 +1,9 @@
 Class {
 	#name : #BlElementResolvedProperties,
 	#superclass : #BlElementMaybeResolvedProperties,
+	#instVars : [
+		'properties'
+	],
 	#category : #'Bloc-Basic-Properties'
 }
 
@@ -27,9 +30,16 @@ BlElementResolvedProperties >> properties [
 	^ properties
 ]
 
+{ #category : #private }
+BlElementResolvedProperties >> properties: aDictionaryOfProperties [
+	properties := aDictionaryOfProperties
+]
+
 { #category : #accessing }
 BlElementResolvedProperties >> propertiesToPropagateToChildren [
-	^ BlElementPropagatableProperties new properties: (properties select: [ :eachProperty | eachProperty canPropagateToChildren ])
+	^ BlElementPropagatableProperties new properties: (properties
+		select: [ :eachPropertyWithStatus | eachPropertyWithStatus canPropagateToChildren ]
+		thenCollect: [ :eachPropertyWithStatus | eachPropertyWithStatus property ])
 ]
 
 { #category : #accessing }

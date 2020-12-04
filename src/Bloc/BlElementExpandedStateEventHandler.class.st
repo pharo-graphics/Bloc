@@ -7,18 +7,25 @@ Class {
 { #category : #private }
 BlElementExpandedStateEventHandler >> element: anElement expanded: aBoolean [
 	aBoolean
-		ifTrue: [ anElement states removeState: BlElementState expanded ]
-		ifFalse: [ anElement states addState: BlElementState expanded ]
+		ifTrue: [ anElement states addState: BlElementState expanded ]
+		ifFalse: [ anElement states addState: BlElementState collapsed ]
 ]
 
 { #category : #'api - accessing' }
 BlElementExpandedStateEventHandler >> eventsToHandle [
-	^ { BlElementExpandedStateWish }
+	^ {
+		BrExpansionToggleWish.
+	}
 ]
 
-{ #category : #'api - event managing' }
-BlElementExpandedStateEventHandler >> handleEvent: aBlElementExpandedStateWish [
+{ #category : #'focus handlers' }
+BlElementExpandedStateEventHandler >> handleEvent: aBrExpansionToggleWish [
+	| anElement |
+	
+	aBrExpansionToggleWish consumed: true.
+	
+	anElement := aBrExpansionToggleWish currentTarget.
 	self
-		element: aBlElementExpandedStateWish currentTarget
-		expanded: aBlElementExpandedStateWish expanded
+		element: anElement
+		expanded: (anElement states hasState: BlElementState expanded) not
 ]

@@ -12,6 +12,7 @@ Class {
 BlElementStyles >> applyStylesForStates: aCollectionOfStates [
 	(self matchingStyles: aCollectionOfStates)
 		do: [ :eachStyle | eachStyle applyOnElement: self element ].
+
 	isDirty := false
 ]
 
@@ -38,7 +39,7 @@ BlElementStyles >> basicAddStyle: aStyle [
 BlElementStyles >> basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle [
 	super basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle.
 	
-	self element properties removeProperties: aStyleToRemove properties asArray
+	self element properties removeProperties: aStyleToRemove properties
 ]
 
 { #category : #'private - adding' }

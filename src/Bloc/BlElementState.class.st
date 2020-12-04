@@ -9,7 +9,7 @@ Class {
 
 { #category : #'instance creation' }
 BlElementState class >> collapsed [
-	^ self expanded not
+	^ BlElementCollapsedState uniqueInstance
 ]
 
 { #category : #'instance creation' }
@@ -105,6 +105,10 @@ BlElementState >> optionalEventHandlerDo: aBlock [
 
 { #category : #enumerating }
 BlElementState >> optionalOnAddedTo: anElement [
+]
+
+{ #category : #enumerating }
+BlElementState >> optionalOnRemovedFrom: anElement [
 ]
 
 { #category : #controlling }
