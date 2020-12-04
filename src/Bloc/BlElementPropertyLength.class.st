@@ -29,6 +29,24 @@ BlElementPropertyLength class >> rem: aNumber [
 		unit: BlElementPropertyUnit rem
 ]
 
+{ #category : #comparing }
+BlElementPropertyLength >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ value = anObject value and: [ unit = anObject unit ]
+]
+
+{ #category : #comparing }
+BlElementPropertyLength >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ value hash bitXor: unit hash
+]
+
 { #category : #initialization }
 BlElementPropertyLength >> initialize [
 	super initialize.

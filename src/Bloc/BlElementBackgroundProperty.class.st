@@ -33,6 +33,11 @@ BlElementBackgroundProperty >> background: anObject [
 	background := anObject
 ]
 
+{ #category : #'api - property' }
+BlElementBackgroundProperty >> cleanUpOnElement: anElement [
+	anElement background: BlElementVisuals defaultBackground
+]
+
 { #category : #comparing }
 BlElementBackgroundProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."

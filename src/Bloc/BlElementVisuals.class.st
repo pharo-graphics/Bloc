@@ -22,6 +22,16 @@ Class {
 	#category : #'Bloc-Basic'
 }
 
+{ #category : #initialization }
+BlElementVisuals class >> defaultBackground [
+	^ DefaultBackground
+]
+
+{ #category : #initialization }
+BlElementVisuals class >> defaultBorder [
+	^ DefaultBorder
+]
+
 { #category : #'class initialization' }
 BlElementVisuals class >> initialize [
 	DefaultBackground := BlBackground transparent.

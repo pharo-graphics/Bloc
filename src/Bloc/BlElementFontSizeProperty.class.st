@@ -17,6 +17,17 @@ BlElementFontSizeProperty class >> defaultFontSize [
 	^ BlElementPropertyLength pt: 16
 ]
 
+{ #category : #comparing }
+BlElementFontSizeProperty >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ fontSize = anObject fontSize
+]
+
 { #category : #'api - property' }
 BlElementFontSizeProperty >> applyOnElement: anElement [
 	(anElement respondsTo: #fontSize:)
@@ -40,6 +51,13 @@ BlElementFontSizeProperty >> fontSize: aBlElementPropertyLength [
 	fontSize := aBlElementPropertyLength isNumber
 		ifTrue: [ BlElementPropertyLength pt: aBlElementPropertyLength ]
 		ifFalse: [ aBlElementPropertyLength ]
+]
+
+{ #category : #comparing }
+BlElementFontSizeProperty >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ fontSize hash
 ]
 
 { #category : #'api - property' }

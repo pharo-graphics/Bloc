@@ -92,7 +92,7 @@ BlElementLocalProperties >> flushPropertiesToRemove [
 BlElementLocalProperties >> initialize [
 	super initialize.
 	
-	properties := IdentityDictionary new.
+	properties := Dictionary new.
 	isDirty := false
 ]
 
