@@ -521,13 +521,13 @@ BlSpace >> doComputeProperties [
 		ifFalse: [ ^ self ].
 
 	"only care about element that are attached to this space"
-	theElementToProcess := self extractAttachedElementsToComputeProperties: self elementsNeedingPropertiesComputation.
+	theElementToProcess := self extractAttachedElements: self elementsNeedingPropertiesComputation.
 
 	"first we should make sure that all parents have resolved properties"
 	theElementToProcess := self extractUnresolvedToComputeProperties: theElementToProcess.
 
 	"then we should eliminate child elements if their parent is already on the list"
-	theElementToProcess := self extractRootsToComputeProperties: theElementToProcess.
+	theElementToProcess := self extractRoots: theElementToProcess.
 	
 	self elementsNeedingPropertiesComputation removeAll.
 	
@@ -637,29 +637,57 @@ BlSpace >> doLayout [
 BlSpace >> doStyle [
 	| theElementsToStyle |
 	
-	theElementsToStyle := self elementsNeedingStyle copy.
+	"NonInteractiveTranscript stdout
+		nextPutAll: 'elementsNeedingStyle ';
+		nextPutAll: elementsNeedingStyle asString;
+		cr.
+	"
+	"only care about element that are attached to this space"
+	theElementsToStyle := self extractAttachedElements: self elementsNeedingStyle.
+
+	"first we should make sure that all parents are styled"
+	theElementsToStyle := self extractUnstyled: theElementsToStyle.
+
+	"then we should eliminate child elements if their parent is already on the list"
+	theElementsToStyle := self extractRoots: theElementsToStyle.
+	
 	self elementsNeedingStyle removeAll.
 	
-	theElementsToStyle do: [ :eachElement |
-			| theInheritedStates |
-			
-			theInheritedStates := Set new.
+	"NonInteractiveTranscript stdout
+		nextPutAll: 'theElementsToStyle ';
+		nextPutAll: theElementsToStyle asString;
+		cr."
+	
+	theElementsToStyle do: [ :eachElement | self doStyle: eachElement ]
+]
 
-			eachElement hasParent
-				ifTrue: [ theInheritedStates := eachElement parent states statesToInherit ].
+{ #category : #'change - style' }
+BlSpace >> doStyle: anElement [
+	| theInheritedStates |
 			
-			self doStyle: eachElement withInheritedStates: theInheritedStates ]
+	theInheritedStates := BlElementStatesSet new.
+
+	anElement hasParent
+		ifTrue: [ theInheritedStates := anElement parent states statesToInherit ].
+	
+	self doStyle: anElement withInheritedStates: theInheritedStates
 ]
 
 { #category : #'change - style' }
 BlSpace >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	| theStatesToInherit |
+
 	anElement states inheritedStates: aCollectionOfStates.
+		
+	"NonInteractiveTranscript stdout
+		nextPutAll: 'applyStylesForStates: ';
+		nextPutAll: anElement asString; space;
+		nextPutAll: anElement states allStates asString;
+		cr."
+
 	anElement style applyStylesForStates: anElement states allStates.
 	
 	theStatesToInherit := anElement states statesToInherit.
-	theStatesToInherit
-		ifEmpty: [ ^ self ].
 
 	anElement children do: [ :eachChild |
 		self
@@ -840,15 +868,30 @@ BlSpace >> extent: aNewExtent [
 	self windowExtent: aNewExtent
 ]
 
-{ #category : #'change - properties' }
-BlSpace >> extractAttachedElementsToComputeProperties: aSetOfElements [
+{ #category : #'private - change' }
+BlSpace >> extractAttachedElements: aSetOfElements [
 	^ aSetOfElements select: [ :eachElement |
 		eachElement isAttachedToSceneGraph
 			and: [ eachElement space == self ] ]
 ]
 
-{ #category : #'change - properties' }
-BlSpace >> extractRootsToComputeProperties: aSetOfElements [
+{ #category : #'private - change' }
+BlSpace >> extractParents: aSetOfElements suchThat: aConditionBlock [
+	| theElementToProcess |
+
+	theElementToProcess := Set new.
+
+	aSetOfElements do: [ :eachElement |
+		eachElement
+			topMostParentSuchThat: aConditionBlock
+			ifFound: [ :aNotYetResolvedParent | theElementToProcess add: aNotYetResolvedParent ]
+			ifNone: [ theElementToProcess add: eachElement ] ].
+
+	^ theElementToProcess
+]
+
+{ #category : #'private - change' }
+BlSpace >> extractRoots: aSetOfElements [
 	| theElementsToCheck theElementsToProcess |
 	
 	theElementsToCheck := aSetOfElements as: Stack.
@@ -866,18 +909,16 @@ BlSpace >> extractRootsToComputeProperties: aSetOfElements [
 
 { #category : #'change - properties' }
 BlSpace >> extractUnresolvedToComputeProperties: aSetOfElements [
-	| theElementToProcess |
+	^ self
+		extractParents: aSetOfElements
+		suchThat: [ :eachParent | eachParent needsPropertiesComputation ]
+]
 
-	theElementToProcess := Set new.
-	
-	"first we should make sure that all parents have resolved properties"
-	aSetOfElements do: [ :eachElement |
-		eachElement
-			topMostParentSuchThat: [ :eachParent | eachParent needsPropertiesComputation ]
-			ifFound: [ :aNotYetResolvedParent | theElementToProcess add: aNotYetResolvedParent ]
-			ifNone: [ theElementToProcess add: eachElement ] ].
-
-	^ theElementToProcess
+{ #category : #'change - style' }
+BlSpace >> extractUnstyled: aSetOfElements [
+	^ self
+		extractParents: aSetOfElements
+		suchThat: [ :eachParent | eachParent needsStyle ]
 ]
 
 { #category : #'focus managing' }

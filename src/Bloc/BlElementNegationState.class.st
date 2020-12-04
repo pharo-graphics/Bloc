@@ -61,3 +61,13 @@ BlElementNegationState >> state [
 BlElementNegationState >> state: anObject [
 	state := anObject
 ]
+
+{ #category : #accessing }
+BlElementNegationState >> type [
+	"Return an object used to compare two states when adding to the collection of states in order to prevent
+	elements from having duplicated states"
+	<return: #Object>
+
+	"Negated state has the same type as normal state"
+	^ self state type
+]

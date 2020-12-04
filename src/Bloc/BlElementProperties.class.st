@@ -46,6 +46,11 @@ BlElementProperties >> basicRemoveProperty: aBlElementProperty [
 					eachProperty = aBlElementProperty ] ]
 ]
 
+{ #category : #enumerating }
+BlElementProperties >> do: aBlock [
+	properties do: aBlock
+]
+
 { #category : #initialization }
 BlElementProperties >> initialize [
 	super initialize.
@@ -97,4 +102,9 @@ BlElementProperties >> removeProperties: aCollectionOfElementProperties [
 BlElementProperties >> removeProperty: aBlElementProperty [
 	self basicRemoveProperty: aBlElementProperty.
 	self onPropertiesChanged
+]
+
+{ #category : #accessing }
+BlElementProperties >> size [
+	^ properties size
 ]

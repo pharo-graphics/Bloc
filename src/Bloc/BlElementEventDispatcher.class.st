@@ -48,12 +48,6 @@ BlElementEventDispatcher >> dispatchAddedToSceneGraph [
 ]
 
 { #category : #'api - event managing' }
-BlElementEventDispatcher >> dispatchAddedToSuperParent: anElement [
-	activatedElementEvents hasAddedToSuperParent
-		ifTrue: [ self dispatchEvent: ((BlElementAddedToSuperParentEvent from: self owner) addedElement: anElement) ]
-]
-
-{ #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchBackgroundChanged [
 	activatedElementEvents hasBackgroundChanged
 		ifTrue: [ self dispatchEvent: (BlElementBackgroundChangedEvent from: self) ]

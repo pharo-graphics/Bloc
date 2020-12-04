@@ -422,7 +422,10 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 						| shareSpace childLengthSpec childBreadthSpec |
 						
 						self flag: 'deal with precision'.
-						shareSpace := (childWeight * remainingExcess / remainingWeightSum) asFloat.
+						shareSpace := (remainingWeightSum closeTo: 0)
+							ifTrue: [ 0.0 ]
+							ifFalse: [ (childWeight * remainingExcess / remainingWeightSum) asFloat ].
+
 						remainingExcess := remainingExcess - shareSpace.
 						remainingWeightSum := remainingWeightSum - childWeight.
 

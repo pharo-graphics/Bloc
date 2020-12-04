@@ -37,7 +37,9 @@ BlElementFontSizeProperty >> fontSize [
 
 { #category : #accessing }
 BlElementFontSizeProperty >> fontSize: aBlElementPropertyLength [
-	fontSize := aBlElementPropertyLength
+	fontSize := aBlElementPropertyLength isNumber
+		ifTrue: [ BlElementPropertyLength pt: aBlElementPropertyLength ]
+		ifFalse: [ aBlElementPropertyLength ]
 ]
 
 { #category : #'api - property' }

@@ -1111,10 +1111,7 @@ BlElement >> dispatchAddedToParent [
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
 	self onAddedToParent.
-	self eventDispatcher dispatchAddedToParent.
-	self telemetry
-		timeSync: [ 'Dispatch added to super-parent {1}' format: { self } ]
-		during: [ self dispatchAddedToSuperParent: self ]
+	self eventDispatcher dispatchAddedToParent
 ]
 
 { #category : #'children dispatching' }
@@ -1133,22 +1130,6 @@ BlElement >> dispatchAddedToSceneGraph [
 			ifFalse: [ anElement attachSpace ].
 		
 		anElement dispatchAddedToSceneGraph ]
-]
-
-{ #category : #'children dispatching' }
-BlElement >> dispatchAddedToSuperParent: anElement [
-	"Sent after I or one of my parents was added to another element as a child.
-	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
-
-	self onAddedToSuperParent: anElement.
-
-	self telemetry
-		timeSync: [ 'Notify added to super-parent {1}' format: { anElement } ]
-		during: [ self eventDispatcher dispatchAddedToSuperParent: anElement ].
-
-	self telemetry
-		timeSync: [ 'Dispatch to children added to super-parent {1}' format: { anElement } ]
-		during: [ self childrenDo: [ :aChildElement | aChildElement dispatchAddedToSuperParent: anElement ] ]
 ]
 
 { #category : #'children dispatching' }
@@ -2516,13 +2497,6 @@ BlElement >> onAddedToSceneGraph [
 		description: [ 'I must already be attached to the scene graph' ].
 
 	self eventDispatcher dispatchAddedToSceneGraph
-]
-
-{ #category : #'hooks - children' }
-BlElement >> onAddedToSuperParent: aParentElement [
-	"I am sent after I or any of my parents is added to other element as a child.
-	You can access my parent by sending #parent to myself.
-	Note: Always send onAddedToSuperParent: to super class if you override me!"
 ]
 
 { #category : #'hooks - children' }

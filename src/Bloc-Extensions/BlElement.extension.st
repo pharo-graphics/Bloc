@@ -216,3 +216,14 @@ BlElement >> gtStatesFor: aView [
 		object: [ self states ];
 		view: #gtStatesFor:
 ]
+
+{ #category : #'*Bloc-Extensions' }
+BlElement >> gtStylesFor: aView [
+	<gtView>
+
+	^ aView forward
+		title: 'Styles';
+		priority: 10;
+		object: [ self style ];
+		view: #gtStylesFor:
+]

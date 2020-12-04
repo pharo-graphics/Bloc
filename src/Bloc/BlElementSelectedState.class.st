@@ -16,5 +16,5 @@ BlElementSelectedState >> printOn: aStream [
 
 { #category : #accessing }
 BlElementSelectedState >> priority [
-	^ 50
+	^ UserPriority
 ]

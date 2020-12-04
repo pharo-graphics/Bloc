@@ -60,3 +60,11 @@ BlElementCompositeState >> right [
 BlElementCompositeState >> right: anObject [
 	right := anObject
 ]
+
+{ #category : #accessing }
+BlElementCompositeState >> type [
+	"Composition state can not be element state, so this method should not be implemented"
+	<return: #Object>
+
+	^ self shouldNotImplement
+]

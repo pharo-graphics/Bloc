@@ -1,6 +1,9 @@
 Class {
 	#name : #BlElementState,
 	#superclass : #Object,
+	#classVars : [
+		'UserPriority'
+	],
 	#category : #'Bloc-Basic-State'
 }
 
@@ -44,6 +47,11 @@ BlElementState class >> hovered [
 	^ BlElementHoveredState uniqueInstance
 ]
 
+{ #category : #'class initialization' }
+BlElementState class >> initialize [
+	UserPriority := 50
+]
+
 { #category : #'instance creation' }
 BlElementState class >> pressed [
 	^ BlElementPressedState uniqueInstance
@@ -71,7 +79,7 @@ BlElementState >> = anotherState [
 
 { #category : #controlling }
 BlElementState >> and: anAnotherState [
-	^ BrConjunctionState new
+	^ BlElementConjunctionState new
 		left: self;
 		right: anAnotherState
 ]
@@ -83,21 +91,25 @@ BlElementState >> hash [
 
 { #category : #testing }
 BlElementState >> matches: aSetOfStates [
-	^ aSetOfStates includes: self
+	^ aSetOfStates hasState: self
 ]
 
 { #category : #controlling }
 BlElementState >> not [
-	^ BrNegationState new state: self
+	^ BlElementNegationState new state: self
 ]
 
 { #category : #enumerating }
 BlElementState >> optionalEventHandlerDo: aBlock [
 ]
 
+{ #category : #enumerating }
+BlElementState >> optionalOnAddedTo: anElement [
+]
+
 { #category : #controlling }
 BlElementState >> or: anAnotherState [
-	^ BrDisjunctionState new
+	^ BlElementDisjunctionState new
 		left: self;
 		right: anAnotherState
 ]
@@ -110,6 +122,15 @@ BlElementState >> priority [
 { #category : #testing }
 BlElementState >> shouldPropagateToChildren [
 	^ false
+]
+
+{ #category : #accessing }
+BlElementState >> type [
+	"Return an object used to compare two states when adding to the collection of states in order to prevent
+	elements from having duplicated states"
+	<return: #Object>
+
+	^ self subclassResponsibility
 ]
 
 { #category : #controlling }

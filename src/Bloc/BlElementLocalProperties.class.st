@@ -21,11 +21,6 @@ BlElementLocalProperties >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #'api - properties' }
-BlElementLocalProperties >> foreground: aPaint [
-	self addProperty: (BlElementForegroundProperty new foreground: aPaint)
-]
-
 { #category : #initialization }
 BlElementLocalProperties >> initialize [
 	super initialize.
