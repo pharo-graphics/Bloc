@@ -828,6 +828,12 @@ BlElement >> computeLayout [
 		whileTrue: [
 			| widthSpec heightSpec maxExtent |
 			
+			BlSpace doStyle: self.
+			BlSpace new
+				doComputeProperties: self
+				withParentProperties: BlElementPropagatableProperties new
+				withGlobalProperties: BlElementPropagatableProperties new.
+			
 			maxExtent := self isAttachedToSceneGraph
 				ifTrue: [ self space extent ]
 				ifFalse: [ 800.0 @ 600.0 ].
