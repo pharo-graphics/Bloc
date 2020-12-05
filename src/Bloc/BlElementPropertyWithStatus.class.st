@@ -35,21 +35,6 @@ BlElementPropertyWithStatus >> addToBeRemoved [
 	status := status | ToBeRemoved
 ]
 
-{ #category : #'api - property' }
-BlElementPropertyWithStatus >> applyOnElement: anElement [
-	self isToBeRemoved
-		ifTrue: [
-			self isApplied
-				ifTrue: [
-					self property cleanUpOnElement: anElement.
-					self clearApplied ] ]
-		ifFalse: [
-			self isApplied
-				ifFalse: [
-					self property applyOnElement: anElement.
-					status := Applied ] ]
-]
-
 { #category : #testing }
 BlElementPropertyWithStatus >> canPropagateToChildren [
 	^ self property canPropagateToChildren and: [ self isToBeRemoved not ]
@@ -90,6 +75,26 @@ BlElementPropertyWithStatus >> isJustAddded [
 { #category : #'private - status' }
 BlElementPropertyWithStatus >> isToBeRemoved [
 	^ 0 ~= (status & ToBeRemoved) 
+]
+
+{ #category : #'api - property' }
+BlElementPropertyWithStatus >> maybeApplyOnElement: anElement [
+	self isToBeRemoved
+		ifFalse: [
+			self isApplied
+				ifFalse: [
+					self property applyOnElement: anElement.
+					status := Applied ] ]
+]
+
+{ #category : #'api - property' }
+BlElementPropertyWithStatus >> maybeCleanUpOnElement: anElement [
+	self isToBeRemoved
+		ifTrue: [
+			self isApplied
+				ifTrue: [
+					self property cleanUpOnElement: anElement.
+					self clearApplied ] ]
 ]
 
 { #category : #accessing }

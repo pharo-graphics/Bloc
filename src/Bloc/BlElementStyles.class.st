@@ -16,8 +16,7 @@ BlElementStyles >> applyStylesForStates: aCollectionOfStates [
 	theNewAppliedStyles := self matchingStyles: aCollectionOfStates.
 	(previousAppliedStyles difference: theNewAppliedStyles)
 		ifNotEmpty: [ :theStylesToRemove | theStylesToRemove do: [ :eachStyle |
-			eachStyle cleanUpOnElement: self element
-		] ].
+			eachStyle cleanUpOnElement: self element ] ].
 
 	theNewAppliedStyles do: [ :eachStyle | eachStyle applyOnElement: self element ].
 	previousAppliedStyles := theNewAppliedStyles asSet.

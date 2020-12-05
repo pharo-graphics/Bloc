@@ -9,7 +9,8 @@ Class {
 
 { #category : #actions }
 BlElementResolvedProperties >> applyOnElement: anElement [
-	properties do: [ :eachProperty | eachProperty applyOnElement: anElement ]
+	properties do: [ :eachPropertyWithStatus | eachPropertyWithStatus maybeCleanUpOnElement: anElement ].
+	properties do: [ :eachPropertyWithStatus | eachPropertyWithStatus maybeApplyOnElement: anElement ]
 ]
 
 { #category : #'adding / removing' }
