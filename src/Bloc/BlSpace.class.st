@@ -58,6 +58,33 @@ Class {
 	#category : #'Bloc-Space'
 }
 
+{ #category : #'change - style' }
+BlSpace class >> doStyle: anElement [
+	| theInheritedStates |
+			
+	theInheritedStates := BlElementStatesSet new.
+
+	anElement hasParent
+		ifTrue: [ theInheritedStates := anElement parent states statesToInherit ].
+	
+	self doStyle: anElement withInheritedStates: theInheritedStates
+]
+
+{ #category : #'change - style' }
+BlSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
+	| theStatesToInherit |
+
+	anElement states inheritedStates: aCollectionOfStates.
+	anElement style applyStylesForStates: anElement states allStates.
+
+	theStatesToInherit := anElement states statesToInherit.
+
+	anElement children do: [ :eachChild |
+		self
+			doStyle: eachChild
+			withInheritedStates: theStatesToInherit ]
+]
+
 { #category : #'class initialization' }
 BlSpace class >> initialize [
 	UniqueIdGenerator := BlUniqueIdGenerator new
@@ -666,29 +693,7 @@ BlSpace >> doStyle [
 
 { #category : #'change - style' }
 BlSpace >> doStyle: anElement [
-	| theInheritedStates |
-			
-	theInheritedStates := BlElementStatesSet new.
-
-	anElement hasParent
-		ifTrue: [ theInheritedStates := anElement parent states statesToInherit ].
-	
-	self doStyle: anElement withInheritedStates: theInheritedStates
-]
-
-{ #category : #'change - style' }
-BlSpace >> doStyle: anElement withInheritedStates: aCollectionOfStates [
-	| theStatesToInherit |
-
-	anElement states inheritedStates: aCollectionOfStates.
-	anElement style applyStylesForStates: anElement states allStates.
-
-	theStatesToInherit := anElement states statesToInherit.
-
-	anElement children do: [ :eachChild |
-		self
-			doStyle: eachChild
-			withInheritedStates: theStatesToInherit ]
+	self class doStyle: anElement
 ]
 
 { #category : #pulse }
