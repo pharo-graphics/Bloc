@@ -647,11 +647,9 @@ BlSpace >> doLayout [
 BlSpace >> doStyle [
 	| theElementsToStyle |
 	
-	"NonInteractiveTranscript stdout
-		nextPutAll: 'elementsNeedingStyle ';
-		nextPutAll: elementsNeedingStyle asString;
-		cr.
-	"
+	self needsStyleComputation
+		ifFalse: [ ^ self ].
+	
 	"only care about element that are attached to this space"
 	theElementsToStyle := self extractAttachedElements: self elementsNeedingStyle.
 
@@ -662,11 +660,6 @@ BlSpace >> doStyle [
 	theElementsToStyle := self extractRoots: theElementsToStyle.
 	
 	self elementsNeedingStyle removeAll.
-	
-	"NonInteractiveTranscript stdout
-		nextPutAll: 'theElementsToStyle ';
-		nextPutAll: theElementsToStyle asString;
-		cr."
 	
 	theElementsToStyle do: [ :eachElement | self doStyle: eachElement ]
 ]
@@ -1335,6 +1328,31 @@ BlSpace >> needsPropertiesComputation [
 	
 	^ self elementsNeedingPropertiesComputation isNotEmpty
 		or: [ self root needsPropertiesComputation ]
+]
+
+{ #category : #'change - properties' }
+BlSpace >> needsPropertiesComputation: anElement [
+	"Return true if a given element or any of its children wants properties computation"
+	<return: #Boolean>
+
+	^ self elementsNeedingPropertiesComputation
+		anySatisfy: [ :eachElement | eachElement = anElement or: [ eachElement hasParent: anElement ] ]
+]
+
+{ #category : #'change - style' }
+BlSpace >> needsStyleComputation [
+	<return: #Boolean>
+	
+	^ self elementsNeedingStyle isNotEmpty
+]
+
+{ #category : #'change - style' }
+BlSpace >> needsStyleComputation: anElement [
+	"Return true if a given element or any of its children wants style computation"
+	<return: #Boolean>
+	
+	^ self elementsNeedingStyle
+		anySatisfy: [ :eachElement | eachElement = anElement or: [ eachElement hasParent: anElement ] ]
 ]
 
 { #category : #'window - properties' }

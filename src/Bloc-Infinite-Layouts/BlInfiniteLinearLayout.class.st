@@ -878,6 +878,24 @@ BlInfiniteLinearLayout >> layoutChunkAdd [
 					"add child as first"
 					ifFalse: [ self addDisappearingChild: anElement at: 1 ] ] ].
 
+	infiniteElement isAttachedToSceneGraph
+		ifTrue: [ 
+			(infiniteElement space needsStyleComputation: anElement)
+				ifTrue: [
+					infiniteElement telemetry
+						timeSync: [ 'Compute chunk style {1}' format: { anElement } ]
+						during: [
+							anElement layout ignoreRequestLayoutDuring: [
+								infiniteElement space doStyle: anElement ] ]. ].
+			
+			(infiniteElement space needsPropertiesComputation: anElement)
+				ifTrue: [
+					infiniteElement telemetry
+						timeSync: [ 'Compute chunk properties {1}' format: { anElement } ]
+						during: [
+							anElement layout ignoreRequestLayoutDuring: [
+								infiniteElement space doComputePropertiesOf: { anElement } ] ] ] ].
+
 	infiniteElement telemetry
 		timeSync: [ 'Notify chunk added {1}' format: { anElement } ]
 		during: [ self notifyChunkAdded: anElement. ].
