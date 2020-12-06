@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+BlElementSelectedStateWish class >> selected: aBoolean [
+	^ self new selected: aBoolean
+]
+
+{ #category : #accessing }
 BlElementSelectedStateWish >> selected [
 	^ selected
 ]
