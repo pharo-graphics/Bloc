@@ -18,6 +18,9 @@ BlTextDelegatedAttributesBuilder >> attribute: aTextAttribute [
 	isOverwritableByStyler
 		ifTrue: [ aTextAttribute beOverwritableByStyler ]
 		ifFalse: [ aTextAttribute beNotOverwritableByStyler ].
+		
+	(self hasAttribute: aTextAttribute)
+		ifTrue: [ ^ self ].
 	
 	super attribute: aTextAttribute.
 	self attributesTarget ifNotNil: [ :aTarget | aTarget attribute: aTextAttribute ].

@@ -60,6 +60,14 @@ BlTextAttributesBuilder >> attributesBuilder [
 	^ self
 ]
 
+{ #category : #testing }
+BlTextAttributesBuilder >> hasAttribute: anAttribute [
+	^ self attributes
+		detect: [ :eachAttribute | eachAttribute type = anAttribute type ]
+		ifFound: [ :eachAttribute | eachAttribute equals: anAttribute ]
+		ifNone: [ false ]
+]
+
 { #category : #initialization }
 BlTextAttributesBuilder >> initialize [
 	super initialize.
