@@ -30,6 +30,11 @@ BlElementProperty >> maybeCleanUpOnElement: anElement [
 ]
 
 { #category : #'api - property' }
+BlElementProperty >> property [
+	^ self
+]
+
+{ #category : #'api - property' }
 BlElementProperty >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
 	^ self
 ]
