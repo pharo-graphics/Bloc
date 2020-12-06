@@ -887,8 +887,8 @@ BlInfiniteLinearLayout >> layoutChunkAdd [
 						during: [
 							anElement layout ignoreRequestLayoutDuring: [
 								infiniteElement space doStyle: anElement ] ]. ].
-			
-			(infiniteElement space needsPropertiesComputation: anElement)
+
+			((infiniteElement space canComputeProperties: anElement) and: [ infiniteElement space needsPropertiesComputation: anElement ])
 				ifTrue: [
 					infiniteElement telemetry
 						timeSync: [ 'Compute chunk properties {1}' format: { anElement } ]

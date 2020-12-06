@@ -422,6 +422,14 @@ BlSpace >> borderless: aBoolean [
 	 self hostSpaceDo: [ :aHostSpace | aHostSpace borderless: aBoolean ].
 ]
 
+{ #category : #'change - properties' }
+BlSpace >> canComputeProperties: anElement [
+	"Return true if properties of the given element can be computed"
+	<return: #Boolean>
+
+	^ anElement hasParent and: [ anElement parent needsPropertiesComputation not ]
+]
+
 { #category : #'change - rendering' }
 BlSpace >> clearDirtyAreas [
 	"Clear all dirty areas.
@@ -1341,7 +1349,11 @@ BlSpace >> needsPropertiesComputation: anElement [
 	<return: #Boolean>
 
 	^ self elementsNeedingPropertiesComputation
-		anySatisfy: [ :eachElement | eachElement = anElement or: [ eachElement hasParent: anElement ] ]
+		anySatisfy: [ :eachElement | 
+			(eachElement = anElement
+				or: [ eachElement hasParent: anElement ])
+					and: [ anElement hasParent
+						and: [ anElement parent needsPropertiesComputation not ] ] ]
 ]
 
 { #category : #'change - style' }
