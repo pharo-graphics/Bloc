@@ -34,8 +34,15 @@ BlElementStates >> addState: aBlElementState [
 { #category : #accessing }
 BlElementStates >> allStates [
 	<return: #BlElementStatesSet>
+	| theAllStates |
+	
+	theAllStates := localStates copy.
+	inheritedStates do: [ :eachInheritedState |
+		eachInheritedState shouldOverwriteChildState
+			ifTrue: [ theAllStates remove: eachInheritedState ifAbsent: [  ] ].
+		theAllStates add: eachInheritedState ].
 
-	^ localStates copy, inheritedStates
+	^ theAllStates
 ]
 
 { #category : #accessing }
@@ -132,6 +139,13 @@ BlElementStates >> removeStatesSuchThat: aBlock [
 { #category : #accessing }
 BlElementStates >> statesToInherit [
 	<return: #BlElementStatesSet>
+	| theAllStates |
+	
+	"local states have priority over inherited when propagating "
+	theAllStates := localStates copy select: [ :eachState | eachState shouldPropagateToChildren ].
+	inheritedStates
+		select: [ :eachInheritedState | eachInheritedState shouldPropagateToChildren ]
+		thenDo: [ :eachInheritedState | theAllStates add: eachInheritedState ].
 
-	^ self allStates select: [ :eachState | eachState shouldPropagateToChildren ]
+	^ theAllStates
 ]

@@ -14,6 +14,7 @@ BlElementStyles >> applyStylesForStates: aCollectionOfStates [
 	| theNewAppliedStyles  |
 	
 	theNewAppliedStyles := self matchingStyles: aCollectionOfStates.
+	
 	(previousAppliedStyles difference: theNewAppliedStyles)
 		ifNotEmpty: [ :theStylesToRemove | theStylesToRemove do: [ :eachStyle |
 			eachStyle cleanUpOnElement: self element ] ].
@@ -61,6 +62,11 @@ BlElementStyles >> basicRemoveStyle: aStyle [
 	self element requestStyle
 ]
 
+{ #category : #initialization }
+BlElementStyles >> createStylesCollection [
+	^ SortedCollection sortUsing: #priority ascending
+]
+
 { #category : #accessing }
 BlElementStyles >> element [
 	^ element
@@ -90,6 +96,20 @@ BlElementStyles >> initialize [
 { #category : #accessing }
 BlElementStyles >> markDirty [
 	isDirty := true
+]
+
+{ #category : #private }
+BlElementStyles >> matchingProperties [
+	"An utility debug method to get all currently matching styles"
+
+	^ (self matchingStyles: self element states allStates) asArray flatCollect: [ :eachStyle | eachStyle properties ]
+]
+
+{ #category : #private }
+BlElementStyles >> matchingStyles [
+	"An utility debug method to get all currently matching styles"
+
+	^ self matchingStyles: self element states allStates
 ]
 
 { #category : #testing }

@@ -129,6 +129,13 @@ BlElementLocalProperties >> postCopy [
 	properties := properties copy
 ]
 
+{ #category : #accessing }
+BlElementLocalProperties >> properties [
+	<return: #Dictionary>
+
+	^ properties collect: [ :eachPropertyWithStatus |  eachPropertyWithStatus property ]
+]
+
 { #category : #'adding / removing' }
 BlElementLocalProperties >> removeProperties: aCollectionOfElementProperties [	
 	| anythingChanged |

@@ -52,6 +52,11 @@ BlStyles >> basicRemoveStyle: aStyle [
 	styles remove: aStyle ifAbsent: [  ]
 ]
 
+{ #category : #initialization }
+BlStyles >> createStylesCollection [
+	^ OrderedCollection new: 10
+]
+
 { #category : #'api - styles' }
 BlStyles >> for: aTargetObject [
 	^ BlForwardedStyles new
@@ -63,7 +68,7 @@ BlStyles >> for: aTargetObject [
 BlStyles >> initialize [
 	super initialize.
 	
-	styles := SortedCollection sortUsing: #priority ascending
+	styles := self createStylesCollection
 ]
 
 { #category : #private }

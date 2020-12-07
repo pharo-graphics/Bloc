@@ -1623,10 +1623,7 @@ BlElement >> globalScale [
 
 { #category : #printing }
 BlElement >> gtDisplayOn: aStream [
-	self userData
-		at: #blocElementLabel
-		ifPresent: [ :aString | aStream nextPutAll: aString ]
-		ifAbsent: [ self printOn: aStream ]
+	self printOn: aStream
 ]
 
 { #category : #'children testing' }
@@ -2875,16 +2872,14 @@ BlElement >> previousSiblingSuchThat: aSelectionBlock do: aBlock [
 
 { #category : #printing }
 BlElement >> printOn: aStream [
-	| aLabel |
-
-	aLabel := self userData
-		at: #blocElementLabel
-		ifAbsent: [ self class name ].
-
 	aStream
-		nextPutAll: aLabel;
+		nextPutAll: self class name;
 		nextPutAll: ' @ ';
-		store: self identityHash
+		store: self identityHash;
+		space;
+		nextPut: $(;
+		print: self id;
+		nextPut: $)
 ]
 
 { #category : #'api - properties' }

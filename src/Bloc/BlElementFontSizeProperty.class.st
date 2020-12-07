@@ -9,12 +9,12 @@ Class {
 
 { #category : #defaults }
 BlElementFontSizeProperty class >> default [
-	^ self new fontSize: (BlElementPropertyLength pt: 16)
+	^ self new fontSize: self defaultFontSize
 ]
 
 { #category : #defaults }
 BlElementFontSizeProperty class >> defaultFontSize [
-	^ BlElementPropertyLength pt: 16
+	^ BlElementPropertyLength pt: 14
 ]
 
 { #category : #comparing }

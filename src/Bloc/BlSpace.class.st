@@ -60,29 +60,49 @@ Class {
 
 { #category : #'change - style' }
 BlSpace class >> doStyle: anElement [
-	| theInheritedStates |
+	| theInheritedStates childSpecificStatesToInherit |
 			
 	theInheritedStates := BlElementStatesSet new.
+	childSpecificStatesToInherit := theInheritedStates.
 
 	anElement hasParent
-		ifTrue: [ theInheritedStates := anElement parent states statesToInherit ].
+		ifTrue: [
+			theInheritedStates := anElement parent states statesToInherit.
+			theInheritedStates do: [ :eachState | eachState prepareToPropagateFrom: anElement parent ].
+			childSpecificStatesToInherit := theInheritedStates collect: [ :eachState |
+				eachState propagatedStateFrom: anElement parent to: anElement ]. ].
 	
-	self doStyle: anElement withInheritedStates: theInheritedStates
+	self doStyle: anElement withInheritedStates: childSpecificStatesToInherit.
+	
+	theInheritedStates do: [ :eachState | eachState finishedPropagateFrom: anElement ]
 ]
 
 { #category : #'change - style' }
 BlSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
-	| theStatesToInherit |
+	| theStatesToInherit allNewStates newInheritedStates |
 
 	anElement states inheritedStates: aCollectionOfStates.
-	anElement style applyStylesForStates: anElement states allStates.
+	allNewStates := anElement states allStates.
+	
+	newInheritedStates := aCollectionOfStates intersection: allNewStates.
+	newInheritedStates do: [ :eachNewInheritedState | eachNewInheritedState optionalOnAddedTo: anElement ].
+	
+	anElement style applyStylesForStates: allNewStates.
 
 	theStatesToInherit := anElement states statesToInherit.
+	theStatesToInherit do: [ :eachState | eachState prepareToPropagateFrom: anElement ].
 
 	anElement children do: [ :eachChild |
+		| childSpecificStatesToInherit |
+
+		childSpecificStatesToInherit := theStatesToInherit collect: [ :eachState |
+			eachState propagatedStateFrom: anElement to: eachChild ].
+
 		self
 			doStyle: eachChild
-			withInheritedStates: theStatesToInherit ]
+			withInheritedStates: childSpecificStatesToInherit ].
+
+	theStatesToInherit do: [ :eachState | eachState finishedPropagateFrom: anElement ]
 ]
 
 { #category : #'class initialization' }
