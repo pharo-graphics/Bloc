@@ -76,6 +76,11 @@ TBlElementProperties >> padding: aBlInsets [
 ]
 
 { #category : #'api - properties' }
+TBlElementProperties >> scaleBy: aNumber [
+	self addProperty: (BlElementTransformationScaleProperty new scaleFactor: aNumber)
+]
+
+{ #category : #'api - properties' }
 TBlElementProperties >> visibility: aBlVisibility [
 	self addProperty: (BlElementVisibilityProperty new visibility: aBlVisibility)
 ]
