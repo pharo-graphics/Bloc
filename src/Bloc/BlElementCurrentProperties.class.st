@@ -1,5 +1,5 @@
 Class {
-	#name : #BlElementLocalProperties,
+	#name : #BlElementCurrentProperties,
 	#superclass : #BlElementProperties,
 	#traits : 'TBlElementProperties - {#addProperty:}',
 	#classTraits : 'TBlElementProperties classTrait',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #'adding / removing' }
-BlElementLocalProperties >> addProperties: aCollectionOfElementProperties [
+BlElementCurrentProperties >> addProperties: aCollectionOfElementProperties [
 	| anythingChanged |
 	
 	anythingChanged := false.
@@ -23,18 +23,18 @@ BlElementLocalProperties >> addProperties: aCollectionOfElementProperties [
 ]
 
 { #category : #'adding / removing' }
-BlElementLocalProperties >> addProperty: aBlElementProperty [
+BlElementCurrentProperties >> addProperty: aBlElementProperty [
 	(self basicAddProperty: aBlElementProperty)
 		ifTrue: [ self onPropertiesChanged ]
 ]
 
 { #category : #converting }
-BlElementLocalProperties >> asArray [
+BlElementCurrentProperties >> asArray [
 	^ properties asArray
 ]
 
 { #category : #private }
-BlElementLocalProperties >> basicAddProperty: aBlElementProperty [
+BlElementCurrentProperties >> basicAddProperty: aBlElementProperty [
 	"Return true if properties changed, false otherwise"
 	<return: #Boolean>
 
@@ -58,7 +58,7 @@ BlElementLocalProperties >> basicAddProperty: aBlElementProperty [
 ]
 
 { #category : #private }
-BlElementLocalProperties >> basicRemoveProperty: aBlElementProperty [
+BlElementCurrentProperties >> basicRemoveProperty: aBlElementProperty [
 	"We do not actually remove a property, we simply mark it as to be removed.
 	This will later give a property a chance to clean up the element"
 	<return: #Boolean>
@@ -73,23 +73,23 @@ BlElementLocalProperties >> basicRemoveProperty: aBlElementProperty [
 ]
 
 { #category : #accessing }
-BlElementLocalProperties >> element [
+BlElementCurrentProperties >> element [
 	^ element
 ]
 
 { #category : #accessing }
-BlElementLocalProperties >> element: anObject [
+BlElementCurrentProperties >> element: anObject [
 	element := anObject
 ]
 
 { #category : #'adding / removing' }
-BlElementLocalProperties >> flushPropertiesToRemove [
+BlElementCurrentProperties >> flushPropertiesToRemove [
 	properties := properties reject: [ :eachPropertyWithStatus | eachPropertyWithStatus isToBeRemoved ].
 	self maybeResolvedProperties flushPropertiesToRemove
 ]
 
 { #category : #initialization }
-BlElementLocalProperties >> initialize [
+BlElementCurrentProperties >> initialize [
 	super initialize.
 	
 	properties := Dictionary new.
@@ -97,47 +97,47 @@ BlElementLocalProperties >> initialize [
 ]
 
 { #category : #accessing }
-BlElementLocalProperties >> markClean [
+BlElementCurrentProperties >> markClean [
 	isDirty := false
 ]
 
 { #category : #accessing }
-BlElementLocalProperties >> markDirty [
+BlElementCurrentProperties >> markDirty [
 	isDirty := true.
 	resolvedProperties := nil
 ]
 
 { #category : #accessing }
-BlElementLocalProperties >> maybeResolvedProperties [
+BlElementCurrentProperties >> maybeResolvedProperties [
 	^ resolvedProperties ifNil: [ BlElementUnresolvedProperties new ]
 ]
 
 { #category : #testing }
-BlElementLocalProperties >> needsPropertiesComputation [
+BlElementCurrentProperties >> needsPropertiesComputation [
 	<return: #Boolean>
 
 	^ resolvedProperties isNil
 ]
 
 { #category : #private }
-BlElementLocalProperties >> onPropertiesChanged [
+BlElementCurrentProperties >> onPropertiesChanged [
 	self element requestPropertiesComputation
 ]
 
 { #category : #copying }
-BlElementLocalProperties >> postCopy [
+BlElementCurrentProperties >> postCopy [
 	properties := properties copy
 ]
 
 { #category : #accessing }
-BlElementLocalProperties >> properties [
+BlElementCurrentProperties >> properties [
 	<return: #Dictionary>
 
 	^ properties collect: [ :eachPropertyWithStatus |  eachPropertyWithStatus property ]
 ]
 
 { #category : #'adding / removing' }
-BlElementLocalProperties >> removeProperties: aCollectionOfElementProperties [	
+BlElementCurrentProperties >> removeProperties: aCollectionOfElementProperties [	
 	| anythingChanged |
 	
 	anythingChanged := false.
@@ -147,13 +147,13 @@ BlElementLocalProperties >> removeProperties: aCollectionOfElementProperties [
 ]
 
 { #category : #'adding / removing' }
-BlElementLocalProperties >> removeProperty: aBlElementProperty [
+BlElementCurrentProperties >> removeProperty: aBlElementProperty [
 	(self basicRemoveProperty: aBlElementProperty)
 		ifTrue: [ self onPropertiesChanged ]
 ]
 
 { #category : #accessing }
-BlElementLocalProperties >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
+BlElementCurrentProperties >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
 	| theResolvedProperties |
 
 	theResolvedProperties := properties

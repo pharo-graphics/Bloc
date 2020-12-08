@@ -2886,7 +2886,7 @@ BlElement >> printOn: aStream [
 BlElement >> properties [
 	^ self userData
 		at: #blocProperties
-		ifAbsentPut: [ BlElementLocalProperties new element: self ]
+		ifAbsentPut: [ BlElementCurrentProperties new element: self ]
 ]
 
 { #category : #'api - bounds' }

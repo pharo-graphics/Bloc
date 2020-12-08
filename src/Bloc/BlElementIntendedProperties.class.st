@@ -1,5 +1,5 @@
 Class {
-	#name : #BlElementExternalProperties,
+	#name : #BlElementIntendedProperties,
 	#superclass : #BlElementProperties,
 	#instVars : [
 		'properties'
@@ -8,36 +8,36 @@ Class {
 }
 
 { #category : #adding }
-BlElementExternalProperties >> addProperties: aCollectionOfBlElementProperty [
+BlElementIntendedProperties >> addProperties: aCollectionOfBlElementProperty [
 	aCollectionOfBlElementProperty do: [ :eachProperty | self addProperty: eachProperty ]
 ]
 
 { #category : #adding }
-BlElementExternalProperties >> addProperty: aBlElementProperty [
+BlElementIntendedProperties >> addProperty: aBlElementProperty [
 	properties
 		at: aBlElementProperty type
 		put: aBlElementProperty
 ]
 
 { #category : #initialization }
-BlElementExternalProperties >> initialize [
+BlElementIntendedProperties >> initialize [
 	super initialize.
 	
 	properties := IdentityDictionary new
 ]
 
 { #category : #accessing }
-BlElementExternalProperties >> properties [
+BlElementIntendedProperties >> properties [
 	^ properties
 ]
 
 { #category : #removing }
-BlElementExternalProperties >> removeProperties: aCollectionOfElementProperties [
+BlElementIntendedProperties >> removeProperties: aCollectionOfElementProperties [
 	aCollectionOfElementProperties do: [ :eachProperty | self removeProperty: eachProperty ]
 ]
 
 { #category : #'adding / removing' }
-BlElementExternalProperties >> removeProperty: aBlElementProperty [
+BlElementIntendedProperties >> removeProperty: aBlElementProperty [
 	properties
 		removeKey: aBlElementProperty type
 		ifAbsent: [
