@@ -141,11 +141,14 @@ BlElementStates >> statesToInherit [
 	<return: #BlElementStatesSet>
 	| theAllStates |
 	
-	"local states have priority over inherited when propagating "
+	"local states have priority over inherited when propagating but only if propagated state does not want to overwrite the local one"
 	theAllStates := localStates copy select: [ :eachState | eachState shouldPropagateToChildren ].
 	inheritedStates
 		select: [ :eachInheritedState | eachInheritedState shouldPropagateToChildren ]
-		thenDo: [ :eachInheritedState | theAllStates add: eachInheritedState ].
+		thenDo: [ :eachInheritedState |
+			eachInheritedState shouldOverwriteChildState
+				ifTrue: [ theAllStates remove: eachInheritedState ifAbsent: [  ] ].
+			theAllStates add: eachInheritedState ].
 
 	^ theAllStates
 ]
