@@ -23,6 +23,14 @@ TBlEventTarget >> addEventHandler: anEventHandler [
 ]
 
 { #category : #'event management' }
+TBlEventTarget >> addEventHandlerIfNotPresent: anEventHandler [
+	(self hasEventHandler: anEventHandler)
+		ifTrue: [ ^ self ].
+
+	self addEventHandler: anEventHandler
+]
+
+{ #category : #'event management' }
 TBlEventTarget >> addEventHandlerOn: anEventClass do: aBlock [
 	self addEventHandler: (BlEventHandler on: anEventClass do: aBlock)
 ]

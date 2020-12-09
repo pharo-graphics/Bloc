@@ -152,3 +152,8 @@ BlElementStates >> statesToInherit [
 
 	^ theAllStates
 ]
+
+{ #category : #'api - states' }
+BlElementStates >> withHover [
+	self element addEventHandlerIfNotPresent: BlElementHoveredStateEventHandler uniqueInstance
+]

@@ -4,16 +4,6 @@ Trait {
 }
 
 { #category : #'api - styles' }
-TBlElementCommonStyles >> collapsed [
-	^ self styleFor: BlElementState collapsed
-]
-
-{ #category : #'api - styles' }
-TBlElementCommonStyles >> collapsed: aBlock [
-	aBlock value: self collapsed
-]
-
-{ #category : #'api - styles' }
 TBlElementCommonStyles >> default [
 	^ self styleFor: BlElementState default
 ]
@@ -51,16 +41,6 @@ TBlElementCommonStyles >> enabled [
 { #category : #'api - styles' }
 TBlElementCommonStyles >> enabled: aBlock [
 	aBlock value: self enabled
-]
-
-{ #category : #'api - styles' }
-TBlElementCommonStyles >> expanded [
-	^ self styleFor: BlElementState expanded
-]
-
-{ #category : #'api - styles' }
-TBlElementCommonStyles >> expanded: aBlock [
-	aBlock value: self expanded
 ]
 
 { #category : #'api - styles' }

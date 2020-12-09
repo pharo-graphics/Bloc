@@ -8,11 +8,6 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlElementState class >> collapsed [
-	^ BlElementCollapsedState uniqueInstance
-]
-
-{ #category : #'instance creation' }
 BlElementState class >> default [
 	^ BlElementDefaultState uniqueInstance
 ]
@@ -30,11 +25,6 @@ BlElementState class >> disabled [
 { #category : #'instance creation' }
 BlElementState class >> enabled [
 	^ self disabled not
-]
-
-{ #category : #'instance creation' }
-BlElementState class >> expanded [
-	^ BlElementExpandedState uniqueInstance
 ]
 
 { #category : #'instance creation' }
