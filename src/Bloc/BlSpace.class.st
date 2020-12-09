@@ -666,9 +666,13 @@ BlSpace >> doComputePropertiesOf: aCollectionOfElements [
 
 	theGlobalResolvedProperties := self root properties maybeResolvedProperties propertiesToPropagateToChildren.
 	aCollectionOfElements do: [ :eachElement |
-		self
-			doComputeProperties: eachElement
-			withGlobalProperties: theGlobalResolvedProperties ]
+		"it is possible that properties manipulate the graphical scene,
+		therefore we have to check it here again"
+		eachElement hasParent
+			ifTrue: [
+				self
+					doComputeProperties: eachElement
+					withGlobalProperties: theGlobalResolvedProperties ] ]
 ]
 
 { #category : #'change - layout' }
