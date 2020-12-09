@@ -878,7 +878,7 @@ BlInfiniteLinearLayout >> layoutChunkAdd [
 					"add child as first"
 					ifFalse: [ self addDisappearingChild: anElement at: 1 ] ] ].
 
-	infiniteElement isAttachedToSceneGraph
+	(infiniteElement isAttachedToSceneGraph and: [ infiniteElement space notNil ])
 		ifTrue: [ 
 			(infiniteElement space needsStyleComputation: anElement)
 				ifTrue: [
@@ -886,8 +886,11 @@ BlInfiniteLinearLayout >> layoutChunkAdd [
 						timeSync: [ 'Compute chunk style {1}' format: { anElement } ]
 						during: [
 							anElement layout ignoreRequestLayoutDuring: [
-								infiniteElement space doStyle: anElement ] ]. ].
-
+								infiniteElement space doStyle: anElement ] ] ] ].
+	
+	"we should check if an element is attached to the scene graph again, because styles may remove it from the space"
+	(infiniteElement isAttachedToSceneGraph and: [ infiniteElement space notNil ])
+		ifTrue: [ 
 			((infiniteElement space canComputeProperties: anElement) and: [ infiniteElement space needsPropertiesComputation: anElement ])
 				ifTrue: [
 					infiniteElement telemetry
