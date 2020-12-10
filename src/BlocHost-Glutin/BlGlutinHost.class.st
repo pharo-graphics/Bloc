@@ -209,13 +209,6 @@ BlGlutinHost >> isStillAvailable [
 	^ self class isSupported
 ]
 
-{ #category : #'host - api' }
-BlGlutinHost >> openMorphicWorld [
-	self class hdpiRenderer
-		ifTrue: [ GlutinWorldSpartaRenderer openMorphicWorld ]
-		ifFalse: [ GlutinWorldOpenGLRenderer openMorphicWorld ]
-]
-
 { #category : #initialize }
 BlGlutinHost >> registerHostSpace: aHostSpace [
 	HostSpaceRegistryMutex critical: [ self spaceRegistry at: aHostSpace window id put: aHostSpace ]
@@ -224,14 +217,6 @@ BlGlutinHost >> registerHostSpace: aHostSpace [
 { #category : #private }
 BlGlutinHost >> spaceRegistry [
 	^ self class spaceRegistry
-]
-
-{ #category : #'host - testing' }
-BlGlutinHost >> supportsBufferSurface [
-	"Return true if this host can work with buffer surface, false otherwise"
-	<return: #Boolean>
-	
-	^ true
 ]
 
 { #category : #'host - testing' }

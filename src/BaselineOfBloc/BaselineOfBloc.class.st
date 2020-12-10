@@ -41,8 +41,10 @@ BaselineOfBloc >> baseline: spec [
 				spec repository: 'github://feenkcom/taskit:feenk102' ];
 			baseline: 'GToolkitExamplesEngine' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
-			baseline: 'Glutin' with: [
-				spec repository: 'github://feenkcom/gtoolkit-glutin/src' ].
+			
+			"Glutin window host, provides OpenGL context and Window events"
+			baseline: 'BlocGlutin' with: [
+				spec repository: 'github://feenkcom/Bloc/src' ].
 		spec 
 			package: #'Bloc-Geometry' with: [
 				spec requires: #(#BlocCore ). ];
@@ -90,8 +92,6 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #('Bloc-Compositor'). ].
 		
 		spec
-			package: #'BlocHost-Glutin' with: [
-				spec requires: #(#BlocCore 'Bloc-Sparta' Glutin). ];
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [

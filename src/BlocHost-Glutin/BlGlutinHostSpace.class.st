@@ -54,13 +54,6 @@ BlGlutinHostSpace >> convertKeyModifiers: theGlutinModifiers [
 ]
 
 { #category : #initialization }
-BlGlutinHostSpace >> createBufferSurfaceRenderer [
-	<return: #BlHostSurfaceRenderer>
-	
-	^ BlGlutinBufferSurfaceRenderer new window: self window
-]
-
-{ #category : #initialization }
 BlGlutinHostSpace >> createOpenGLSurfaceRenderer [
 	<return: #BlHostSurfaceRenderer>
 
