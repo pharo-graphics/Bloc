@@ -19,10 +19,20 @@ TBlElementProperties >> border: aBlBorder [
 ]
 
 { #category : #'api - properties' }
+TBlElementProperties >> do: anApplyBlock [
+	self do: anApplyBlock after: [  ]
+]
+
+{ #category : #'api - properties' }
 TBlElementProperties >> do: anApplyBlock after: aCleanBlock [
 	self addProperty: (BlElementDynamicProperty new
 		applyAction: anApplyBlock;
 		cleanAction: aCleanBlock)
+]
+
+{ #category : #'api - properties constraints' }
+TBlElementProperties >> effect: aBlEffect [
+	self addProperty: (BlElementEffectProperty new effect: aBlEffect)
 ]
 
 { #category : #'api - properties font' }

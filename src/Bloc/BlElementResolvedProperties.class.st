@@ -29,6 +29,11 @@ BlElementResolvedProperties >> mergedWithProperties: aBlElementResolvedPropertie
 	^ BlElementResolvedProperties new properties: theProperties
 ]
 
+{ #category : #copying }
+BlElementResolvedProperties >> postCopy [
+	properties := properties copy
+]
+
 { #category : #private }
 BlElementResolvedProperties >> properties [
 	<return: #Dictionary>

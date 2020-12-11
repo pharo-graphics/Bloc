@@ -59,9 +59,19 @@ TBlDevScripterCheckStep >> equals: anEqualsBlock [
 ]
 
 { #category : #'steps - checks' }
+TBlDevScripterCheckStep >> exists [
+	^ self addStep: (BlDevScripterCheckElementExistsStep new referenceSender)
+]
+
+{ #category : #'steps - checks' }
 TBlDevScripterCheckStep >> nonSatisfies: anOneArgBlock [
 	^ self addStep: (BlDevScripterCheckElementStep new block: [ :aCollection | 
 			aCollection allSatisfy: [ :eachItem | (anOneArgBlock cull: eachItem) not ] ]; referenceSender)
+]
+
+{ #category : #'steps - checks' }
+TBlDevScripterCheckStep >> notExists [
+	^ self addStep: (BlDevScripterCheckElementNotExistsStep new referenceSender)
 ]
 
 { #category : #'steps - checks' }

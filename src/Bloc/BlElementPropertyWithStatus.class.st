@@ -97,6 +97,19 @@ BlElementPropertyWithStatus >> maybeCleanUpOnElement: anElement [
 					self clearApplied ] ]
 ]
 
+{ #category : #printing }
+BlElementPropertyWithStatus >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' property: ';
+		print: property.
+	aStream
+		nextPutAll: ' status: ';
+		print: status
+]
+
 { #category : #accessing }
 BlElementPropertyWithStatus >> property [
 	^ property

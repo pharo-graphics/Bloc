@@ -26,6 +26,11 @@ BlElementIntendedProperties >> initialize [
 	properties := IdentityDictionary new
 ]
 
+{ #category : #copying }
+BlElementIntendedProperties >> postCopy [
+	properties := properties copy
+]
+
 { #category : #accessing }
 BlElementIntendedProperties >> properties [
 	^ properties

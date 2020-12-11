@@ -57,6 +57,21 @@ BlGaussianShadowEffect >> copyWithWidth: aNumber [
 		offset: self offset
 ]
 
+{ #category : #initialization }
+BlGaussianShadowEffect >> defaultColor [
+	^ Color black
+]
+
+{ #category : #initialization }
+BlGaussianShadowEffect >> defaultOffset [
+	^ 0@0
+]
+
+{ #category : #initialization }
+BlGaussianShadowEffect >> defaultWidth [
+	^ 10
+]
+
 { #category : #geometry }
 BlGaussianShadowEffect >> extraShadowSpace [
 	"Compute extra space that should be freed for shadow around element.
@@ -70,9 +85,9 @@ BlGaussianShadowEffect >> initialize [
 	super initialize.
 
 	self
-		initializeColor: Color black
-		width: 10
-		offset: 0@0
+		initializeColor: self defaultColor
+		width: self defaultWidth
+		offset: self defaultOffset
 ]
 
 { #category : #initialization }

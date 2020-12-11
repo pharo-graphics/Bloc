@@ -87,6 +87,24 @@ BlElement >> addChild: anElement [
 ]
 
 { #category : #'children add/remove' }
+BlElement >> addChild: anElement after: anotherElement [
+	"Add anElement as my direct child right after anotherElement.
+	Throws an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
+	anElement must not be a direct child of any other element!
+	anElement must not be nil"
+	| anotherElementIndex |
+
+	anotherElementIndex := self childIndexOf: anotherElement.
+	anotherElementIndex isZero
+		ifTrue: [
+			(BlChildDoesNotExistError new
+				parent: self;
+				child: anotherElement) signal ].
+
+	self addChild: anElement at: (anotherElementIndex + 1)
+]
+
+{ #category : #'children add/remove' }
 BlElement >> addChild: anElement as: aBlElementId [
 	"Add a given element to my children and make it a named container, so that
 	we could add children in that container"
@@ -167,6 +185,24 @@ BlElement >> addChild: anElement at: anIndex as: aContainerName [
 	
 	anElement containerName: aContainerName.
 	self addChild: anElement at: anIndex
+]
+
+{ #category : #'children add/remove' }
+BlElement >> addChild: anElement before: anotherElement [
+	"Add anElement as my direct child right before anotherElement.
+	Throws an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
+	anElement must not be a direct child of any other element!
+	anElement must not be nil"
+	| anotherElementIndex |
+
+	anotherElementIndex := self childIndexOf: anotherElement.
+	anotherElementIndex isZero
+		ifTrue: [
+			(BlChildDoesNotExistError new
+				parent: self;
+				child: anotherElement) signal ].
+
+	self addChild: anElement at: anotherElementIndex
 ]
 
 { #category : #'children add/remove' }

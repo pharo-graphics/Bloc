@@ -46,9 +46,24 @@ BlElementStyles >> basicAddStyle: aStyle [
 
 { #category : #'private - adding' }
 BlElementStyles >> basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle [
+	| thePropertiesBefore |
+	
+	self
+		assert: [ aStyleToRemove ~~ anExistingStyle ]
+		description: [ 'Must not be the same style instance' ].
+		
+	self
+		assert: [ aStyleToRemove properties ~~ anExistingStyle properties ]
+		description: [ 'Must not be the same properties instance' ].
+
+	thePropertiesBefore := aStyleToRemove properties size.
 	super basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle.
 	
-	self element properties removeProperties: aStyleToRemove properties
+	self
+		assert: [ thePropertiesBefore = aStyleToRemove properties size. ]
+		description: [ 'Styles to remove should not be modified' ].
+
+	self element properties removeProperties: aStyleToRemove properties.
 ]
 
 { #category : #'private - adding' }
