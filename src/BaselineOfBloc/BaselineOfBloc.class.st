@@ -101,7 +101,6 @@ BaselineOfBloc >> postLoadBloc: spec [
 		
 	PostLoaded := true.
 	self postLoadDisableTaskItDebugger: spec.
-	self postLoadMorphicHost: spec
 	
 ]
 
