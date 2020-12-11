@@ -72,15 +72,6 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #('GToolkitExamplesEngine' 'BlocLayout' 'Bloc-Geometry' 'Bloc-Infinite' 'Bloc-Infinite-Layouts' 'Bloc-DevTool' 'Bloc-Text-Elements' ). ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#BlocCore ). ].
-
-		SystemVersion current major >= 8 ifTrue: [ 
-			spec
-				package: #'BlocHost-Morphic' with: [
-					spec requires: #(#BlocCore ). ] ]
-		ifFalse: [ 
-			spec
-				package: #'BlocHost-Morphic7' with: [
-					spec requires: #(#BlocCore ). ] ].
 		
 		"Compositor"
 		spec
@@ -118,12 +109,4 @@ BaselineOfBloc >> postLoadBloc: spec [
 BaselineOfBloc >> postLoadDisableTaskItDebugger: spec [
 	(self class environment at: #TKTConfiguration) profileNamed: #gtTest.
 	(self class environment at: #TKTDebugger) disable.
-]
-
-{ #category : #'post load' }
-BaselineOfBloc >> postLoadMorphicHost: spec [
-
-	"This will select an appropriate UI manager"
-	SystemVersion current major < 8
-		ifTrue: [ UIManager default: UIManager forCurrentSystemConfiguration ]
 ]
