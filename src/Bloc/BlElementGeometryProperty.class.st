@@ -23,6 +23,11 @@ BlElementGeometryProperty >> applyOnElement: anElement [
 	anElement geometry: self geometry
 ]
 
+{ #category : #'api - property' }
+BlElementGeometryProperty >> cleanUpOnElement: anElement [
+	anElement geometry: BlElementVisuals defaultGeometry
+]
+
 { #category : #accessing }
 BlElementGeometryProperty >> geometry [
 	^ geometry

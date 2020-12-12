@@ -75,6 +75,11 @@ TBlElementProperties >> hidden [
 	self visibility: BlVisibility hidden
 ]
 
+{ #category : #'api - properties' }
+TBlElementProperties >> layout: aBlLayout [
+	self addProperty: (BlElementLayoutProperty new layout: aBlLayout)
+]
+
 { #category : #'api - properties constraints' }
 TBlElementProperties >> margin: aBlInsets [
 	self addProperty: (BlElementMarginProperty new margin: aBlInsets)

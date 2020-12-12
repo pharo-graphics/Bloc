@@ -32,6 +32,11 @@ BlElementVisuals class >> defaultBorder [
 	^ DefaultBorder
 ]
 
+{ #category : #initialization }
+BlElementVisuals class >> defaultGeometry [
+	^ DefaultGeometry
+]
+
 { #category : #'class initialization' }
 BlElementVisuals class >> initialize [
 	DefaultBackground := BlBackground transparent.
