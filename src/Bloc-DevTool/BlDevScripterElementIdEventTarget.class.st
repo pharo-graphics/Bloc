@@ -35,7 +35,7 @@ BlDevScripterElementIdEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
 	^ anElement 
-		childNamed: self elementId
+		childWithId: self elementId
 		ifFound: [ :theChild | theChild ]
 		ifNone: [ AssertionFailure signal: 'Element with id ', self elementId asSymbol, ' does not exist' ]
 ]

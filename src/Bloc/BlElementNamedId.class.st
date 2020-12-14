@@ -13,9 +13,14 @@ BlElementNamedId >> = anObject [
 
 	self == anObject
 		ifTrue: [ ^ true ].
-	self class = anObject class
+	
+	(anObject isKindOf: BlElementId)
 		ifFalse: [ ^ false ].
-	^ identifier = anObject identifier
+		
+	self class = anObject class
+		ifTrue: [ ^ identifier = anObject identifier ].
+
+	^ self asSymbol = anObject asSymbol
 ]
 
 { #category : #converting }
