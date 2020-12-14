@@ -55,13 +55,13 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Animation-Tests' with: [
 				spec requires: #('Bloc-Animation' #GToolkitExamplesEngine ). ];
 			package: #'Bloc-Sparta' with: [
-				spec requires: #(#BlocCore 'BlocText' #Sparta 'Bloc-Compositor'). ];
+				spec requires: #(#BlocCore 'BlocText' 'Sparta' 'Bloc-Compositor'). ];
 			package: #'Bloc-Exporter' with: [
 				spec requires: #(#BlocCore 'Bloc-Sparta' ). ];
 			package: #'Bloc-DevTool' with: [
 				spec requires: #(#BlocCore #BlocLayout ). ];
 			package: #'Bloc-Examples' with: [
-				spec requires: #('GToolkitExamplesEngine' 'BlocLayout' 'Bloc-Geometry' 'Bloc-DevTool' 'Bloc-Text-Elements' ). ];
+				spec requires: #('GToolkitExamplesEngine' 'BlocLayout' 'BlocText' 'Bloc-Geometry' 'Bloc-DevTool'). ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#BlocCore ). ].
 		
@@ -78,7 +78,7 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
 			package: 'Bloc-TaskIt' with: [
-				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' ). ];
+				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' 'BlocText' ). ];
 			package: #'Bloc-Async' with: [
 				spec requires: #(#'Bloc-TaskIt' ). ];
 			package: #'Bloc-Images' with: [
