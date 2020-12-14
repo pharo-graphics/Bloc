@@ -1191,6 +1191,17 @@ BlAnimationExamples >> baseAnimationWithDelayAndTwoLoops [
 	^ aBaseAnimation
 ]
 
+{ #category : #accessing }
+BlAnimationExamples >> blueAt: anIndex [
+	| radians |
+	"0.0 <= anIndex <= 1.0"
+	
+	radians := self radiansAt: anIndex.
+	radians < (Float pi / 2.0)
+		ifTrue: [ ^ 0 ].
+	^ (radians - (Float pi / 2.0)) sin
+]
+
 { #category : #examples }
 BlAnimationExamples >> bouncingChicken [
 	<gtExample>
@@ -1250,10 +1261,19 @@ BlAnimationExamples >> bouncingText [
 ]
 
 { #category : #accessing }
-BlAnimationExamples >> colorAt: aDelta [
-	"Return a Color from a spectrum at a given delta in [0...1]"
+BlAnimationExamples >> colorAt: anIndex [
+	| normalizedIndex |
+	"0.0 <= anIndex <= 1.0"
 	
-	^ (BlInfiniteExampleColorsDataSource new colorAt: ((aDelta / 2)+ 0.5) % 1) "darker" alpha: 0.5
+	normalizedIndex := anIndex.
+	"Because of float errors"
+	normalizedIndex > 1 ifTrue: [ normalizedIndex := 1 ].
+	normalizedIndex < 0 ifTrue: [ normalizedIndex := 0 ].
+	
+	^ Color
+		r: (self redAt: normalizedIndex)
+		g: (self greenAt: normalizedIndex)
+		b: (self blueAt: normalizedIndex)
 ]
 
 { #category : #'examples - base animation' }
@@ -1291,6 +1311,17 @@ BlAnimationExamples >> frameContainer [
 			c horizontal matchParent.
 			c vertical matchParent ];
 		clipChildren: false
+]
+
+{ #category : #accessing }
+BlAnimationExamples >> greenAt: anIndex [
+	| radians |
+	"0.0 <= anIndex <= 1.0"
+	
+	radians := self radiansAt: anIndex.
+	radians > Float pi
+		ifTrue: [ ^ 0 ].
+	^ radians sin
 ]
 
 { #category : #'examples - base animation' }
@@ -1331,6 +1362,29 @@ BlAnimationExamples >> jiggleAnimation [
 	anAnimation duration: 1 second.
 	
 	^ anAnimation
+]
+
+{ #category : #accessing }
+BlAnimationExamples >> radiansAt: anIndex [
+	"0.0 <= anIndex <= 1.0"
+	self assert: [ anIndex between: 0.0 and: 1.0 ].
+	
+	^ anIndex * (Float pi * 3) / 2.0
+]
+
+{ #category : #accessing }
+BlAnimationExamples >> redAt: anIndex [
+	| radians |
+	"0.0 <= anIndex <= 1.0"
+	
+	radians := self radiansAt: anIndex.
+	(radians between: Float pi / 2.0 and: Float pi) 
+		ifTrue: [ ^ 0 ].
+
+	radians < (Float pi/ 2.0)
+		ifTrue: [ ^ (radians + (Float pi / 2)) sin ].
+
+	^ (radians + Float pi) sin
 ]
 
 { #category : #'examples - sequential animation' }

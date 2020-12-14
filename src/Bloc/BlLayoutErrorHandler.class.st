@@ -19,7 +19,7 @@ BlLayoutErrorHandler >> processError: aBlHandledError [
 	Should be replaced with a more generic solution."
 	aBlHandledError element
 		withAllParentsDo: [ :aParentElement | 
-			(aParentElement isKindOf: BlInfiniteElement)
+			(aParentElement isKindOf: #BlInfiniteElement asClass)
 				ifTrue: [ aParentElement state beStepStart ] ].
 
 	aBlHandledError debug

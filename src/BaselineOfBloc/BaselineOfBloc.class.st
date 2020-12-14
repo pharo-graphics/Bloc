@@ -33,6 +33,8 @@ BaselineOfBloc >> baseline: spec [
 				spec repository: 'github://feenkcom/Bloc/src' ];
 			baseline: 'BlocLayout' with: [
 				spec repository: 'github://feenkcom/Bloc/src' ];
+			baseline: 'BlocText' with: [
+				spec repository: 'github://feenkcom/Bloc/src' ];
 			baseline: 'Sparta' with: [
 				spec repository: 'github://feenkcom/Sparta/src' ];
 			baseline: 'SpartaSkia' with: [
@@ -50,26 +52,16 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#BlocCore ). ];
 			package: #'Bloc-Animation' with: [
 				spec requires: #(#BlocCore ). ];
-			package: #'Bloc-Infinite' with: [
-				spec requires: #(#BlocCore 'Bloc-Animation' ). ];
-			package: #'Bloc-Infinite-Layouts' with: [
-				spec requires: #('Bloc-Infinite' ). ];
 			package: #'Bloc-Animation-Tests' with: [
 				spec requires: #('Bloc-Animation' #GToolkitExamplesEngine ). ];
-			package: #'Bloc-Text' with: [
-				spec requires: #(#BlocCore ). ];
-			package: #'Bloc-Text-Rope' with: [
-				spec requires: #(#BlocCore 'Bloc-Text' ). ];
-			package: #'Bloc-Text-Elements' with: [
-				spec requires: #(#BlocCore 'Bloc-Text' 'Bloc-Text-Rope' ). ];
 			package: #'Bloc-Sparta' with: [
-				spec requires: #(#BlocCore 'Bloc-Text' #Sparta 'Bloc-Compositor'). ];
+				spec requires: #(#BlocCore 'BlocText' #Sparta 'Bloc-Compositor'). ];
 			package: #'Bloc-Exporter' with: [
 				spec requires: #(#BlocCore 'Bloc-Sparta' ). ];
 			package: #'Bloc-DevTool' with: [
 				spec requires: #(#BlocCore #BlocLayout ). ];
 			package: #'Bloc-Examples' with: [
-				spec requires: #('GToolkitExamplesEngine' 'BlocLayout' 'Bloc-Geometry' 'Bloc-Infinite' 'Bloc-Infinite-Layouts' 'Bloc-DevTool' 'Bloc-Text-Elements' ). ];
+				spec requires: #('GToolkitExamplesEngine' 'BlocLayout' 'Bloc-Geometry' 'Bloc-DevTool' 'Bloc-Text-Elements' ). ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#BlocCore ). ].
 		
