@@ -312,6 +312,12 @@ BlElement >> allChildrenBreadthFirstSelect: aBlock [
 	^ selectedChildren
 ]
 
+{ #category : #'api - children enumeration' }
+BlElement >> allChildrenDepthFirstDo: aBlock [
+	self childrenDo: [ :each | each allChildrenDepthFirstDo: aBlock ].
+	self childrenDo: aBlock
+]
+
 { #category : #'children accessing' }
 BlElement >> allParentsDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	self allParentsDo: [ :aParent | 
@@ -671,32 +677,6 @@ BlElement >> boundsInWindow [
 	^ self isAttachedToSceneGraph
 		ifTrue: [ boundsCache boundsInSpace scaleBy: self space windowScale ]
 		ifFalse: [ boundsCache boundsInSpace ]
-]
-
-{ #category : #'geometry transform' }
-BlElement >> centerRotateByDegrees: anAngle [ 
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		inherit;
-		rotateBy: anAngle axis: BlVector zAxis;
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> centerRotateByRadians: anAngle [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		inherit;
-		rotateBy: anAngle radiansToDegrees axis: BlVector zAxis;
-		apply
 ]
 
 { #category : #updating }
@@ -1965,16 +1945,6 @@ BlElement >> isLayoutRequested [
 	^ self layout requestingLayout
 ]
 
-{ #category : #layout }
-BlElement >> isManaged [
-	self 
-		deprecated: 'Use "constraints ignoredByLayout not" instead'
-		on: 	'17 March 2018' 
-		in: 'Pharo-6.0-60539-'.
-		
-	^ self constraints ignoredByLayout not
-]
-
 { #category : #testing }
 BlElement >> isOpaque [
 	"Return true if I am completely opaque (my opacity is 1)"
@@ -2243,30 +2213,6 @@ BlElement >> loseFocus: aChildElement [
 	(self hasParent and: [ self parent isAttachedToSceneGraph ])
 		ifTrue: [ self parent loseFocus: aChildElement ]
 		ifFalse: [ self space loseFocusFor: aChildElement ]
-]
-
-{ #category : #accessing }
-BlElement >> managed [
-	self 
-		deprecated: 'Use "constraints ignoredByLayout not" instead'
-		on: 	'17 March 2018' 
-		in: 'Pharo-6.0-60539-'.
-	
-	^ self isManaged
-]
-
-{ #category : #accessing }
-BlElement >> managed: aBoolean [
-	"If false is provided, then the element is not subject to the parent's layout"
-	self 
-		deprecated: 'Use "constraintsDo: [ :c | c ignoreByLayout ]" instead'
-		on: 	'17 March 2018' 
-		in: 'Pharo-6.0-60539-'.
-
-	self constraintsDo: [ :c |
-		aBoolean
-			ifTrue: [ c accountByLayout ]
-			ifFalse: [ c ignoreByLayout ] ]
 ]
 
 { #category : #'api - layout' }
@@ -3211,146 +3157,6 @@ BlElement >> resetChildrenArray [
 	children := Bloc preferableChildrenDataStructure new
 ]
 
-{ #category : #'geometry transform' }
-BlElement >> rotateByDegrees: anAngle [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	"self transform
-		inherit;
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		rotateBy: anAngle axis: BlVector zAxis;
-		apply"
-]
-
-{ #category : #'geometry transform' }
-BlElement >> rotateByDegrees: angle axis: aVector [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		inherit;
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		rotateBy: angle axis: aVector;
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> rotateByDegrees: angle axis: aVector around: anOrigin [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		inherit;
-		origin: anOrigin;
-		rotateBy: angle axis: aVector;
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> rotateByDegrees: angle center: aPoint [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		inherit;
-		origin: (BlAffineTransformationPositionOrigin position: aPoint);
-		rotateBy: angle axis: BlVector zAxis;
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> rotateByRadians: anAngle [ 
-	self 
-		deprecated: 'Use rotateByDegrees: instead'
-		on: 	'16 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-	^ self rotateByDegrees: anAngle radiansToDegrees
-]
-
-{ #category : #'geometry transform' }
-BlElement >> rotateByRadians: angle center: aPoint [ 
-	self 
-		deprecated: 'Use rotateByDegrees:center: instead'
-		on: 	'16 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-	^ self rotateByDegrees: angle radiansToDegrees center: aPoint 
-]
-
-{ #category : #'geometry transform' }
-BlElement >> scaleBy: aVector [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		inherit;
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		scaleBy: (BlVector x: aVector asPoint x y: aVector asPoint y z: 1);
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> scaleTo: aFactorPoint [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		scaleBy: (BlVector x: aFactorPoint asPoint x y: aFactorPoint asPoint y z: 1);
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> scaleX: factor [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		scaleBy: (BlVector x: factor y: 1 z: 1);
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> scaleX: fx Y: fy [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		scaleBy: (BlVector x: fx y: fy z: 1);
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> scaleY: factor [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		scaleBy: (BlVector x: 1 y: factor z: 1);
-		apply
-]
-
 { #category : #'event handling' }
 BlElement >> shouldChildrenHandleMouseEvents [
 	"Return true if my children are allowed to handle mouse events.
@@ -3553,39 +3359,6 @@ BlElement >> transformedBounds [
 BlElement >> transformedBounds: aSpartaRectangle [
 
 	^ transformation transformBounds: (self boundsInLocal: aSpartaRectangle)
-]
-
-{ #category : #'geometry transform' }
-BlElement >> translateBy: aDelta [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		inherit;
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		translateBy: (BlVector x: aDelta asPoint x y: aDelta asPoint y z: 0);
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> translateTo: aPoint [
-	self 
-		deprecated: 'Use Transformation Builder instead'
-		on: 	'15 October 2017' 
-		in: 'Pharo-7.0+alpha.build.171.sha.df95d5fd8faa4c6bfd3537e26d67bb2c37daf99f (32 Bit)'.
-
-	self transform
-		origin: (BlAffineTransformationPositionOrigin position: 0@0);
-		translateBy: (BlVector x: aPoint asPoint x y: aPoint asPoint y z: 0);
-		apply
-]
-
-{ #category : #'geometry transform' }
-BlElement >> translateX: xFactor Y: yFactor [
-	self deprecated: 'Use translateBy: aBlPoint'.
-	self translateBy: xFactor @ yFactor
 ]
 
 { #category : #'change reporting' }
