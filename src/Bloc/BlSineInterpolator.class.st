@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'range'
 	],
-	#category : 'Bloc-Animation-Interpolators'
+	#category : #'Bloc-Basic-Interpolators'
 }
 
 { #category : #initialization }

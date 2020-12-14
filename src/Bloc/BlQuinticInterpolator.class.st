@@ -11,7 +11,7 @@ It can be simplified to
 Class {
 	#name : #BlQuinticInterpolator,
 	#superclass : #BlInterpolator,
-	#category : 'Bloc-Animation-Interpolators'
+	#category : #'Bloc-Basic-Interpolators'
 }
 
 { #category : #interpolation }
