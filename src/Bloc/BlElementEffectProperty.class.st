@@ -20,20 +20,11 @@ BlElementEffectProperty >> = anObject [
 
 { #category : #'api - property' }
 BlElementEffectProperty >> applyOnElement: anElement [
-	NonInteractiveTranscript stdout
-		nextPutAll: 'apply up effect on: ';
-		nextPutAll: anElement printString;
-		cr.
 	anElement effect: self effect
 ]
 
 { #category : #'api - property' }
 BlElementEffectProperty >> cleanUpOnElement: anElement [
-	NonInteractiveTranscript stdout
-		nextPutAll: 'clean up effect on: ';
-		nextPutAll: anElement printString;
-		cr.
-
 	anElement effect: BlNullEffect new
 ]
 
