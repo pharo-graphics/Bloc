@@ -9,19 +9,8 @@ Class {
 
 { #category : #actions }
 BlElementForwardedStyle >> applyOnElement: anElement [
-	(targetObject isClosure and: [ targetObject argumentCount > 0 ])
-		ifTrue: [
-			targetObject value: [ :eachResolvedTargetObject |
-				eachResolvedTargetObject properties addProperties: self properties ] ]
-		ifFalse: [
-			| aResolvedTargetObject |
-			
-			aResolvedTargetObject := targetObject value.
-			"the object is maybe not yet created"
-			aResolvedTargetObject
-				ifNil: [ ^ self ].
-			
-			aResolvedTargetObject properties addProperties: self properties ]
+	(targetObject asBlocResolvedElementsFrom: anElement) asCollection
+		do: [ :eachTargetObject | eachTargetObject properties addProperties: self properties ]
 ]
 
 { #category : #converting }
@@ -33,19 +22,8 @@ BlElementForwardedStyle >> asForwarded: aTargetObject [
 
 { #category : #actions }
 BlElementForwardedStyle >> cleanUpOnElement: anElement [
-	(targetObject isClosure and: [ targetObject argumentCount > 0 ])
-		ifTrue: [
-			targetObject value: [ :eachResolvedTargetObject |
-				eachResolvedTargetObject properties removeProperties: self properties ] ]
-		ifFalse: [
-			| aResolvedTargetObject |
-			
-			aResolvedTargetObject := targetObject value.
-			"the object is maybe not yet created"
-			aResolvedTargetObject
-				ifNil: [ ^ self ].
-			
-			aResolvedTargetObject properties removeProperties: self properties ]
+	(targetObject asBlocResolvedElementsFrom: anElement) asCollection
+		do: [ :eachTargetObject | eachTargetObject properties removeProperties: self properties ]
 ]
 
 { #category : #testing }

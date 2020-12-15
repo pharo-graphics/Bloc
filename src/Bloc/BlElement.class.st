@@ -422,6 +422,11 @@ BlElement >> applyLayoutThatFailedIn: aRectangle [
 ]
 
 { #category : #converting }
+BlElement >> asBlocResolvedElementsFrom: anElement [
+	^ { self }
+]
+
+{ #category : #converting }
 BlElement >> asElement [
 	^ self 
 ]
