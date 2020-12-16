@@ -88,8 +88,6 @@ BlDevScripter >> element: anElement [
 
 	anElement addEventFilter: self eventHandler.
 	
-	anElement space = self space ifTrue: [ ^ self ].
-	
 	anElement removeFromParent.
 	self space addChild: anElement.
 ]

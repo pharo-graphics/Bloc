@@ -2,7 +2,8 @@ Class {
 	#name : #BlDevScripterWaitStep,
 	#superclass : #BlDevScripterInteractionStep,
 	#instVars : [
-		'waitingBlock'
+		'waitingBlock',
+		'cycles'
 	],
 	#category : #'Bloc-DevTool-Scripter-Steps'
 }
@@ -18,10 +19,11 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 	self onSpace.
 	self waitingBlock: [ :aSpace |
 		aSpace pulse.
+		self increaseCycle.
 		aSpace time 
 			every: 20 milliSeconds 
 			while: [ aSpace taskQueue tasks isNotEmpty ] 
-			do: [ aSpace pulse ] ]
+			do: [ aSpace pulse. self increaseCycle ] ]
 ]
 
 { #category : #initialization }
@@ -35,6 +37,17 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueueTimeout: aDuration [
 			every: 100 milliSeconds 
 			while: [ (aSpace time now < (aStartTime + aDuration)) and: [ aSpace taskQueue tasks isNotEmpty ] ] 
 			do: [ aSpace pulse ] ]
+]
+
+{ #category : #'private - adding' }
+BlDevScripterWaitStep >> increaseCycle [
+	cycles := cycles + 1.
+]
+
+{ #category : #initialization }
+BlDevScripterWaitStep >> initialize [
+	super initialize.
+	cycles := 0.
 ]
 
 { #category : #actions }

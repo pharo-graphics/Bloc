@@ -128,24 +128,9 @@ BlAsyncElement >> neverUpdate [
 	self updateStrategy: BlAsyncElementUpdateStrategy never
 ]
 
-{ #category : #'hooks - children' }
-BlAsyncElement >> onAddedToSceneGraph [
-	super onAddedToSceneGraph.
-	self maySchedulePreview.
-	self mayQueueAsyncUpdate.
-]
-
-{ #category : #'hooks - geometry' }
-BlAsyncElement >> onExtentChanged [
-	super onExtentChanged.
-	self maySchedulePreview.
-	self mayQueueAsyncUpdate.
-
-]
-
-{ #category : #'hooks - geometry' }
-BlAsyncElement >> onPositionInSpaceChanged [
-	super onPositionInSpaceChanged.
+{ #category : #'hooks - layout' }
+BlAsyncElement >> onLayoutDone [
+	super onLayoutDone.
 	self maySchedulePreview.
 	self mayQueueAsyncUpdate.
 ]
