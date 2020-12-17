@@ -41,7 +41,7 @@ Class {
 	#classVars : [
 		'Default'
 	],
-	#category : #'Bloc-Space - Tasks'
+	#category : #'Bloc-DataStructure - Priority Queue'
 }
 
 { #category : #accessing }
@@ -192,7 +192,7 @@ BlTaskAtQueue >> schedule: aBlTaskAtTask [
 BlTaskAtQueue >> schedule: aValuable at: aTime [
 	"Add the supplied task to the queue and trigger the semaphore at the appropriate time"
 
-	self schedule: (BlTaskAtTask valuable: aValuable at: aTime)
+	self schedule: (BlTaskAtQueueTask valuable: aValuable at: aTime)
 ]
 
 { #category : #accessing }

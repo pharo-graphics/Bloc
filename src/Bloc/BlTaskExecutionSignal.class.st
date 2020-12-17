@@ -103,17 +103,11 @@ BlTaskExecutionSignal class >> ignoreClass: aBlTask [
 		[ IgnoredTasks := IgnoredTasks copyWith: aBlTask ].
 ]
 
-{ #category : #filtering }
+{ #category : #accessing }
 BlTaskExecutionSignal class >> ignoreRepeatedTasks [
 
 	BlRepeatedTask withAllSubclasses do: [ :each |
 		self ignoreClass: each ].
-]
-
-{ #category : #'class initialization' }
-BlTaskExecutionSignal class >> initialize [ 
-
-	self ignoreRepeatedTasks
 ]
 
 { #category : #'instance creation' }
