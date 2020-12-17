@@ -88,8 +88,6 @@ BlDevScripter >> element: anElement [
 
 	anElement addEventFilter: self eventHandler.
 	
-	anElement space = self space ifTrue: [ ^ self ].
-	
 	anElement removeFromParent.
 	self space addChild: anElement.
 ]
@@ -271,7 +269,6 @@ BlDevScripter >> gtUserDataFor: aView [
 { #category : #initialization }
 BlDevScripter >> initialize [
 	super initialize.
-	
 	events := BlDevScripterEvents new.
 
 	rootStep := BlDevScripterRootStep new.
@@ -280,7 +277,8 @@ BlDevScripter >> initialize [
 	eventHandler := BlDevScripterEventCollectorHandler new scripter: self.
 
 	space := self defaultSpace.
-	self subscribeToSpace.
+	self space addEventFilter: self eventHandler.
+	self space root addEventFilter: self eventHandler
 ]
 
 { #category : #'accessing - data' }
@@ -328,14 +326,6 @@ BlDevScripter >> space [
 ]
 
 { #category : #'accessing - space' }
-BlDevScripter >> space: aSpace [
-	self assertSpace: aSpace.
-	self unsubscribeFromSpace.
-	space := aSpace.
-	self subscribeToSpace.
-]
-
-{ #category : #'accessing - space' }
 BlDevScripter >> spaceTasks [
 	^ self space taskQueue tasks
 ]
@@ -354,12 +344,6 @@ BlDevScripter >> spaceWithElement [
 { #category : #execution }
 BlDevScripter >> startWithExecutor: anExecutor [
 	rootStep startWithExecutor: anExecutor
-]
-
-{ #category : #'private - subscriptions' }
-BlDevScripter >> subscribeToSpace [
-	self space addEventFilter: self eventHandler.
-	self space root addEventFilter: self eventHandler.
 ]
 
 { #category : #'steps - substeps' }
@@ -389,13 +373,6 @@ BlDevScripter >> syncPlay [
 BlDevScripter >> time [
 	<return: #BlTime>
 	^ self space time
-]
-
-{ #category : #'private - subscriptions' }
-BlDevScripter >> unsubscribeFromSpace [
-	self space ifNil: [ ^ self ].
-	self space removeEventFilter: self eventHandler.
-	self space root removeEventFilter: self eventHandler.
 ]
 
 { #category : #'accessing - data' }

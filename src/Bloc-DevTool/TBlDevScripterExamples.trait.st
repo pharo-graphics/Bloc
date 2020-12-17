@@ -49,23 +49,10 @@ TBlDevScripterExamples >> scripterWithModel: aModelBlock [
 ]
 
 { #category : #'examples - scripter' }
-TBlDevScripterExamples >> scripterWithSpace: aSpace [
+TBlDevScripterExamples >> scripterWithModel: aModelBlock element: anElementBlock [
 	<gtExample>
-	| aScripter |
-	aScripter := self scripter.
-	aScripter space: aSpace.
-	
-	self assert: aScripter space equals: aSpace.
-	
-	^ aScripter.
-]
-
-{ #category : #'examples - scripter' }
-TBlDevScripterExamples >> scripterWithSpace: aSpace model: aModelBlock element: anElementBlock [
-	<gtExample>
-	| aScripter |
-	aScripter := self scripterWithSpace: aSpace.
-	self scripter: aScripter withModel: aModelBlock element: anElementBlock.
-	
-	^ aScripter
+	^ self 
+		scripter: self scripter 
+		withModel: aModelBlock 
+		element: anElementBlock
 ]

@@ -11,5 +11,7 @@ Class {
 { #category : #testing }
 BlUpdateWhenVisibleStrategy >> needsUpdate: anAsyncElement [
 	<return: #Boolean>
-	^ anAsyncElement isAlreadyUpdated not and: [ anAsyncElement isVisibleInSpace ]
+	^ anAsyncElement isAlreadyUpdated not and: [ 
+		anAsyncElement isVisibleInSpace and: [
+		 anAsyncElement isLayoutRequested not ] ]
 ]
