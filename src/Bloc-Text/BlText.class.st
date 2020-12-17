@@ -558,6 +558,11 @@ BlText >> readonly [
 ]
 
 { #category : #'text - attributes' }
+BlText >> removeAttribute: aBlTextAttribute [
+	self removeAttributes: { aBlTextAttribute }
+]
+
+{ #category : #'text - attributes' }
 BlText >> removeAttributes: aCollectionOfAttributes [
 	| theAttributesToRemove |
 	

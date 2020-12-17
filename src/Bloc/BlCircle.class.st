@@ -8,6 +8,12 @@ Class {
 	#category : #'Bloc-Basic'
 }
 
+{ #category : #comparing }
+BlCircle >> = anObject [
+	self == anObject ifTrue: [ ^ true ].
+	^ self class = anObject class
+]
+
 { #category : #'geometry bounds' }
 BlCircle >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.
@@ -17,6 +23,11 @@ BlCircle >> geometryBounds: aBounds [
 	^ aBounds
 		origin: self origin
 		extent: (self radius * 2.0) asPoint
+]
+
+{ #category : #comparing }
+BlCircle >> hash [
+	^ self class hash
 ]
 
 { #category : #initialization }
