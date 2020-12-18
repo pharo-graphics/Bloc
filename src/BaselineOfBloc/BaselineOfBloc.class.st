@@ -29,23 +29,21 @@ BaselineOfBloc >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'BlocCore' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ];
+				self thisRepositoryFor: spec ];
 			baseline: 'BlocLayout' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ];
+				self thisRepositoryFor: spec ];
 			baseline: 'BlocAnimation' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ];
+				self thisRepositoryFor: spec ];
 			baseline: 'BlocText' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ];
+				self thisRepositoryFor: spec ];
 			baseline: 'Sparta' with: [
-				spec repository: 'github://feenkcom/Sparta/src' ];
+				self repository: 'github://feenkcom/Sparta/src' for: spec ];
 			baseline: 'SpartaSkia' with: [
-				spec repository: 'github://feenkcom/Sparta/src' ];
-			baseline: 'GToolkitExamplesEngine' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples/src' ];
+				self repository: 'github://feenkcom/Sparta/src' for: spec ];
 			
 			"Glutin window host, provides OpenGL context and Window events"
 			baseline: 'BlocGlutin' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ].
+				self thisRepositoryFor: spec ].
 		spec 
 			package: #'Bloc-Sparta' with: [
 				spec requires: #(#BlocCore 'BlocText' 'Sparta' 'Bloc-Compositor'). ];
@@ -54,7 +52,7 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-DevTool' with: [
 				spec requires: #(#BlocCore #BlocLayout ). ];
 			package: #'Bloc-Examples' with: [
-				spec requires: #('GToolkitExamplesEngine' 'BlocLayout' 'BlocText' 'Bloc-DevTool'). ];
+				spec requires: #('BlocLayout' 'BlocText' 'Bloc-DevTool'). ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#BlocCore ). ].
 		
