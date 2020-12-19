@@ -27,6 +27,8 @@ Class {
 BaselineOfBloc >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
+		spec postLoadDoIt: #'postLoadBloc:'.
+
 		spec 
 			baseline: 'Beacon' with: [
 				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
@@ -88,4 +90,21 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('Bloc' 'Bloc-Sparta' #'Bloc-Animation' 'Bloc-DevTool' ). ] ].
 
+]
+
+{ #category : #'post load' }
+BaselineOfBloc >> postLoadBloc: spec [
+	(PostLoaded isNotNil and: [ PostLoaded ])
+		ifTrue: [ ^ self ].
+		
+	PostLoaded := true.
+	self postLoadMorphicHost: spec
+]
+
+{ #category : #'post load' }
+BaselineOfBloc >> postLoadMorphicHost: spec [
+
+	"This will select an appropriate UI manager"
+	SystemVersion current major < 8
+		ifTrue: [ UIManager default: UIManager forCurrentSystemConfiguration ]
 ]
