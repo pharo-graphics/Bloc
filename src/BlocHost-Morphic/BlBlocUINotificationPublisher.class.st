@@ -2,8 +2,8 @@ Class {
 	#name : #BlBlocUINotificationPublisher,
 	#superclass : #Object,
 	#instVars : [
-		'space',
-		'notification'
+		'notification',
+		'element'
 	],
 	#category : #'BlocHost-Morphic-Support'
 }
@@ -27,22 +27,32 @@ BlBlocUINotificationPublisher class >> priority [
 ]
 
 { #category : #'api - instance creation' }
-BlBlocUINotificationPublisher class >> showNotification: aNotification inSpace: aSpace [
+BlBlocUINotificationPublisher class >> showNotification: aNotification inElement: anElement [
 	^ self preferredPublisher new
-		space: aSpace;
+		element: anElement;
 		notification: aNotification;
 		show
 ]
 
-{ #category : #'private - accessing' }
+{ #category : #'private - displaying' }
+BlBlocUINotificationPublisher >> addNotification [
+	self subclassResponsibility
+]
+
+{ #category : #'api - accessing' }
 BlBlocUINotificationPublisher >> element [
 	<return: #BlElement>
-	^ self notification asElement
+	^ element
+]
+
+{ #category : #'api - accessing' }
+BlBlocUINotificationPublisher >> element: anElement [
+	element := anElement
 ]
 
 { #category : #'private - displaying' }
 BlBlocUINotificationPublisher >> enqueueTaskAction: aBlock [
-	self space enqueueTask: (BlTaskAction new 
+	self element enqueueTask: (BlTaskAction new 
 		action: aBlock)
 ]
 
@@ -59,18 +69,5 @@ BlBlocUINotificationPublisher >> notification: aNotification [
 
 { #category : #'api - displaying' }
 BlBlocUINotificationPublisher >> show [
-	"Display a notification in a space.
-	Notification may come from any process."
-	self subclassResponsibility
-]
-
-{ #category : #'api - accessing' }
-BlBlocUINotificationPublisher >> space [
-	<return: #BlSpace>
-	^ space
-]
-
-{ #category : #'api - accessing' }
-BlBlocUINotificationPublisher >> space: aSpace [
-	space := aSpace
+	self enqueueTaskAction: [ self addNotification ]
 ]
