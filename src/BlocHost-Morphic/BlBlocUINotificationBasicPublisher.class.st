@@ -12,6 +12,6 @@ BlBlocUINotificationBasicPublisher class >> priority [
 ]
 
 { #category : #'api - displaying' }
-BlBlocUINotificationBasicPublisher >> show [
-	self enqueueTaskAction: [ self space addChild: self element ]
+BlBlocUINotificationBasicPublisher >> addNotification [
+	^ self element addChild: self notification asElement
 ]
