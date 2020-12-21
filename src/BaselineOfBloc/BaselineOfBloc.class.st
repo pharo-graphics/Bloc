@@ -68,10 +68,6 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#Bloc 'Bloc-Text' 'Sparta' 'Bloc-Compositor'). ];
 			package: #'Bloc-Exporter' with: [
 				spec requires: #(#Bloc 'Bloc-Sparta' ). ];
-			package: #'Bloc-DevTool' with: [
-				spec requires: #(#Bloc #'Bloc-Layout'). ];
-			package: #'Bloc-Examples' with: [
-				spec requires: #('Bloc' 'Bloc-Text' 'Bloc-DevTool'). ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#Bloc). ];
 			package: #'BlocHost-Glutin' with: [
@@ -87,6 +83,20 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #('Bloc-Compositor'). ].
 		
 		spec
+			package: #'Bloc-DevTool' with: [
+				spec requires: #(#Bloc #'Bloc-Layout'). ];
+			package: #'Bloc-Examples' with: [
+				spec requires: #(
+					#'Bloc'
+					#'Bloc-Animation'
+					#'Bloc-DevTool'
+					#'Bloc-Layout'
+					#'Bloc-Layout-Tests'
+					#'Bloc-Tests'
+					#'Bloc-Text'
+					#'Bloc-Text-Elements'
+					#'Bloc-Text-Rope'
+					#'BlocHost-Morphic'). ];
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('Bloc' 'Bloc-Sparta' #'Bloc-Animation' 'Bloc-DevTool' ). ] ].
 

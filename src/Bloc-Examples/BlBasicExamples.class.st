@@ -283,17 +283,6 @@ BlBasicExamples >> leftBorder [
 			c frame horizontal alignLeft ]
 ]
 
-{ #category : #'examples - shape' }
-BlBasicExamples >> line [
-	<gtExample>
-
-	^ BlLineElement new
-		fromAnchor: (BlAbsolutePositionAnchor position: 75 @ 140);
-		toAnchor: (BlAbsolutePositionAnchor position: 200 @ 240);
-		border: (BlBorder paint: Color red width: 4);
-		yourself
-]
-
 { #category : #'examples - background' }
 BlBasicExamples >> linearGradient [
 	<gtExample>
