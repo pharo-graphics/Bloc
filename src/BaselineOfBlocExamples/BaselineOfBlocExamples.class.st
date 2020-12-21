@@ -15,16 +15,20 @@ BaselineOfBlocExamples >> baseline: spec [
 		spec 
 			baseline: 'Bloc' with: [
 				spec repository: 'github://feenkcom/Bloc/src' ];
-			baseline: 'BlocPacScripter' with: [
+			baseline: 'BlocPac' with: [
 				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
-			baseline: 'BlocPacResizable' with: [
-				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
+			baseline: 'Beacon' with: [
+				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
+			baseline: 'SpartaSkia' with: [
+				spec repository: 'github://feenkcom/Sparta/src' ];
+			baseline: 'TaskIt' with: [
+				spec repository: 'github://feenkcom/taskit:feenk102' ];
 			baseline: 'GToolkitExamplesEngine' with: [
 				spec repository: 'github://feenkcom/gtoolkit-examples/src' ].
 
 		spec 
 			package: #'Bloc-Compositor-Examples' with: [
-				spec requires: #(#'Bloc' #'BlocPacScripter'). ];
+				spec requires: #('Bloc' 'Bloc-Examples'). ];
 			package: #'Bloc-Examples' with: [
-				spec requires: #(#'Bloc' #'BlocPacScripter' #'BlocPacResizable' #'GToolkitExamplesEngine') ] ].
+				spec requires: #(#'Bloc' #'BlocPac') ] ].
 ]
