@@ -77,26 +77,12 @@ BaselineOfBloc >> baseline: spec [
 		spec
 			package: #'Bloc-Compositor' with: [
 				spec requires: #(#Bloc SpartaSkia). ];
-			package: #'Bloc-Compositor-Examples' with: [
-				spec requires: #('Bloc-Compositor' 'Bloc-Examples'). ];
 			package: #'Bloc-Compositor-GToolkit' with: [
 				spec requires: #('Bloc-Compositor'). ].
 		
 		spec
 			package: #'Bloc-DevTool' with: [
 				spec requires: #(#Bloc #'Bloc-Layout'). ];
-			package: #'Bloc-Examples' with: [
-				spec requires: #(
-					#'Bloc'
-					#'Bloc-Animation'
-					#'Bloc-DevTool'
-					#'Bloc-Layout'
-					#'Bloc-Layout-Tests'
-					#'Bloc-Tests'
-					#'Bloc-Text'
-					#'Bloc-Text-Elements'
-					#'Bloc-Text-Rope'
-					#'BlocHost-Morphic'). ];
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('Bloc' 'Bloc-Sparta' #'Bloc-Animation' 'Bloc-DevTool' ). ] ].
 
