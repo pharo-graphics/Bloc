@@ -1055,6 +1055,16 @@ BlSpace >> grabFocus [
 	self focused: true
 ]
 
+{ #category : #accessing }
+BlSpace >> gtSpaceTasksFor: aView [
+	<gtView>
+	self taskQueue ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Tasks';
+		object: [ self taskQueue ];
+		view: #gtTasksFor:
+]
+
 { #category : #testing }
 BlSpace >> hasDirtyAreas [
 	"Return true if space has dirty areas and therefore needs to be rendered,
