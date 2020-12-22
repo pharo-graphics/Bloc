@@ -118,21 +118,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> layoutLabel: aString [
 			c ignored horizontal alignCenter ]
 ]
 
-{ #category : #'private - helpers' }
-BlFitContentVerticallyInHorizontalLayoutsExamples >> leftResizer: anElement [
-	^ BlElement new
-		background: (Color gray alpha: 0.4);
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
-		width: 6;
-		constraintsDo: [ :c |
-			c vertical matchParent.
-			c ignoreByLayout.
-			c ignored horizontal alignRight.
-			c ignored vertical alignCenter.
-			c ignored vertical weight: 0.5 ];
-		addEventHandler: (BlResizerRightListener new resizeTarget: anElement; minimumExtent: 50@0)
-]
-
 { #category : #'instance creation' }
 BlFitContentVerticallyInHorizontalLayoutsExamples >> list [
 	<gtExample>
@@ -155,7 +140,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlow [
 
 	flow := self flow.
 	flow width: (self oneColumnWidthDepth: 1).
-	flow addChild: (self leftResizer: flow).
 	flow addChildren: { self red. self blue. self green }.
 	flow forceLayout.
 	
@@ -177,7 +161,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowGridGrid [
 	
 	secondGrid := self grid.
 	secondGrid width: (self oneColumnWidthDepth: 3).
-	secondGrid addChild: (self leftResizer: secondGrid).
 	secondGrid addChild: firstGrid.
 	secondGrid forceLayout.
 
@@ -198,7 +181,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowList [
 	
 	list := self list.
 	list width: (self oneColumnWidthDepth: 2) + 1.
-	list addChild: (self leftResizer: list).
 	list addChild: flow.
 	
 	list forceLayout.
@@ -224,7 +206,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowListGrid [
 	
 	grid := self grid.
 	grid width: (self oneColumnWidthDepth: 3).
-	grid addChild: (self leftResizer: grid).
 	grid addChild: list.
 	grid forceLayout.
 
@@ -248,7 +229,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> oneColumnFlowListList [
 	
 	secondList := self list.
 	secondList width: (self oneColumnWidthDepth: 3).
-	secondList addChild: (self leftResizer: secondList).
 	secondList addChild: firstList.
 	secondList forceLayout.
 
@@ -336,7 +316,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnFlowGridGrid [
 
 	secondGrid := self grid.
 	secondGrid width: (self threeColumnWidthDepth: 3).
-	secondGrid addChild: (self leftResizer: secondGrid).
 	secondGrid addChild: firstGrid.
 	secondGrid forceLayout.
 
@@ -360,7 +339,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnFlowListGrid [
 
 	grid := self grid.
 	grid width: (self threeColumnWidthDepth: 3).
-	grid addChild: (self leftResizer: grid).
 	grid addChild: list.
 	grid forceLayout.
 
@@ -384,7 +362,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> threeColumnFlowListList [
 
 	secondList := self list.
 	secondList width: (self threeColumnWidthDepth: 3).
-	secondList addChild: (self leftResizer: secondList).
 	secondList addChild: firstList.
 	secondList forceLayout.
 
@@ -440,7 +417,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlow [
 
 	flow := self flow.
 	flow width: (self twoColumnWidthDepth: 1).
-	flow addChild: (self leftResizer: flow).
 	flow addChildren: { self red. self blue. self green }.
 	flow forceLayout.
 
@@ -462,7 +438,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowFlowFlow [
 
 	thirdFlow := self flow.
 	thirdFlow width: (self twoColumnWidthDepth: 3).
-	thirdFlow addChild: (self leftResizer: thirdFlow).
 	thirdFlow addChild: secondFlow.
 	thirdFlow forceLayout.
 
@@ -486,7 +461,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowFlowList [
 
 	list := self list.
 	list width: (self twoColumnWidthDepth: 3).
-	list addChild: (self leftResizer: list).
 	list addChild: secondFlow.
 	list forceLayout.
 
@@ -510,7 +484,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowGridGrid [
 
 	secondGrid := self grid.
 	secondGrid width: (self twoColumnWidthDepth: 3).
-	secondGrid addChild: (self leftResizer: secondGrid).
 	secondGrid addChild: firstGrid.
 	secondGrid forceLayout.
 
@@ -534,7 +507,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowGridList [
 
 	list := self list.
 	list width: (self twoColumnWidthDepth: 3).
-	list addChild: (self leftResizer: list).
 	list addChild: grid.
 	list forceLayout.
 
@@ -555,7 +527,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowList [
 
 	list := self list.
 	list width: (self twoColumnWidthDepth: 2).
-	list addChild: (self leftResizer: list).
 	list addChild: flow.
 	list forceLayout.
 
@@ -578,7 +549,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowListGrid [
 
 	grid := self grid.
 	grid width: (self twoColumnWidthDepth: 3).
-	grid addChild: (self leftResizer: grid).
 	grid addChild: list.
 	grid forceLayout.
 
@@ -602,7 +572,6 @@ BlFitContentVerticallyInHorizontalLayoutsExamples >> twoColumnFlowListList [
 
 	secondList := self list.
 	secondList width: (self twoColumnWidthDepth: 3).
-	secondList addChild: (self leftResizer: secondList).
 	secondList addChild: firstList.
 	secondList forceLayout.
 

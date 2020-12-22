@@ -315,8 +315,6 @@ BlExampleEventsCountingElement >> initialize [
 	self when: BlBlurEvent do: [ :anEvent |
 		anEvent currentTarget incrementBlurCount ].
 	
-	self addEventHandler: BlPullHandler new.
-	
 	self background: Color veryVeryLightGray
 ]
 
