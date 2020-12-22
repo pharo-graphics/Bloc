@@ -36,17 +36,6 @@ BlCompositionLeftoverStateLayer >> commands [
 	^ self state commands
 ]
 
-{ #category : #'gt-extension' }
-BlCompositionLeftoverStateLayer >> gtStateCommandsFor: aView [
-	<gtView>
-	
-	^ aView forward
-		title: 'State commands';
-		priority: 4;
-		object: [ self state ];
-		view: #gtCommandsFor:
-]
-
 { #category : #'private - context' }
 BlCompositionLeftoverStateLayer >> multiplyOn: aBlMatrix2D [
 	self commands do: [ :eachCommand | eachCommand multiplyOn: aBlMatrix2D ]

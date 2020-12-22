@@ -36,8 +36,6 @@ BaselineOfBloc >> baseline: spec [
 				spec repository: 'github://feenkcom/gtoolkit-fenster/src' ];
 			baseline: 'Sparta' with: [
 				spec repository: 'github://feenkcom/Sparta/src' ];
-			baseline: 'SpartaSkia' with: [
-				spec repository: 'github://feenkcom/Sparta/src' ];
 			baseline: 'Glutin' with: [
 				spec repository: 'github://feenkcom/gtoolkit-glutin/src' ].
 		
@@ -46,8 +44,8 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#Beacon GToolkitFenster) ];
 			package: #'Bloc-Animation' with: [
 				spec requires: #(#Bloc) ];
-			package: #'Bloc-Layout' with: [
-				spec requires: #(#Bloc) ];
+			package: #'Bloc-Layout' with: [ "animation is required by animated layouts"
+				spec requires: #(#Bloc #'Bloc-Animation') ];
 			package: #'Bloc-Layout-Tests' with: [
 				spec requires: #('Bloc-Layout') ];
 			package: #'Bloc-Text' with: [
@@ -64,10 +62,6 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#Bloc 'BlocHost-Mock' ). ].
 			
 		spec 
-			package: #'Bloc-Sparta' with: [
-				spec requires: #(#Bloc 'Bloc-Text' 'Sparta' 'Bloc-Compositor'). ];
-			package: #'Bloc-Exporter' with: [
-				spec requires: #(#Bloc 'Bloc-Sparta' ). ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#Bloc). ];
 			package: #'BlocHost-Glutin' with: [
@@ -76,13 +70,19 @@ BaselineOfBloc >> baseline: spec [
 		"Compositor"
 		spec
 			package: #'Bloc-Compositor' with: [
-				spec requires: #(#Bloc SpartaSkia). ];
+				spec requires: #(#Bloc 'Sparta'). ];
 			package: #'Bloc-Compositor-GToolkit' with: [
 				spec requires: #('Bloc-Compositor'). ].
-		
+			
+		spec
+			package: #'Bloc-Sparta' with: [
+				spec requires: #('Sparta' 'Bloc' 'Bloc-Text' 'Bloc-Text-Elements' 'Bloc-Compositor'). ];
+			package: #'Bloc-Exporter' with: [
+				spec requires: #(#Bloc 'Bloc-Sparta' ). ].
+
 		spec
 			package: #'Bloc-DevTool' with: [
-				spec requires: #(#Bloc #'Bloc-Layout'). ];
+				spec requires: #(#Bloc #'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope'). ];
 			package: #'Bloc-Scripter' with: [
 				spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock'). ];
 			package: #'Bloc-Extensions' with: [

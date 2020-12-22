@@ -1,6 +1,62 @@
 Extension { #name : #BlCompositionLayer }
 
 { #category : #'*Bloc-Compositor-GToolkit' }
+BlCompositionLayer >> asExplosionElement [
+	<return: #BlElement>
+	| aContainer theBounds |
+
+	aContainer := BlElement new.
+	aContainer clipChildren: false.
+	aContainer constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent ].
+	
+	theBounds := nil.
+	
+	self pictureLayersDo: [ :eachPictureLayer |
+		| aPictureElement pictureBounds |
+		
+		pictureBounds := (BlBounds fromRectangle: eachPictureLayer picture bounds).
+		
+		aPictureElement := eachPictureLayer asElement.
+		
+		eachPictureLayer needsCache
+			ifTrue: [ aPictureElement background: (Color gray alpha: 0.15) ].
+		aPictureElement zIndex: eachPictureLayer depth.
+		aPictureElement transformDo: [ :t |
+			t
+				topLeftOrigin;
+					matrix: eachPictureLayer totalMatrix;
+					scaleBy: 0.8@1;
+					skewX: 30;
+					rotateBy: 30;
+					translateBy: (0 @ 30) negated * eachPictureLayer depth ].
+	
+		aPictureElement localBoundsToParent: pictureBounds.
+		theBounds
+			ifNil: [ theBounds := pictureBounds ]
+			ifNotNil: [ theBounds merge: pictureBounds ].
+		
+		aContainer addChild: aPictureElement ].
+	
+	^ theBounds
+		ifNil: [ aContainer ]
+		ifNotNil: [
+			| aWrapper |			
+			aContainer size: theBounds extent.
+			aContainer transformDo: [ :t | t translateBy: theBounds origin negated ].
+			
+			aWrapper := BlElement new
+				layout: BlLinearLayout horizontal;
+				constraintsDo: [ :c |
+					c horizontal fitContent.
+					c vertical fitContent ];
+				addChild: aContainer.
+				
+			aWrapper asScalableElement ]
+]
+
+{ #category : #'*Bloc-Compositor-GToolkit' }
 BlCompositionLayer >> gtExplosionLayersFor: aView [
 	<gtView>
 
