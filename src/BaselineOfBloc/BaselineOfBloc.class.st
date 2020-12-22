@@ -83,6 +83,8 @@ BaselineOfBloc >> baseline: spec [
 		spec
 			package: #'Bloc-DevTool' with: [
 				spec requires: #(#Bloc #'Bloc-Layout'). ];
+			package: #'Bloc-Scripter' with: [
+				spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock'). ];
 			package: #'Bloc-Extensions' with: [
 				spec requires: #('Bloc' 'Bloc-Sparta' #'Bloc-Animation' 'Bloc-DevTool' ). ] ].
 

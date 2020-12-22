@@ -15,8 +15,6 @@ BaselineOfBlocExamples >> baseline: spec [
 		spec 
 			baseline: 'Bloc' with: [
 				spec repository: 'github://feenkcom/Bloc/src' ];
-			baseline: 'BlocPac' with: [
-				spec repository: 'github://feenkcom/bloc-pac:main/src' ];
 			baseline: 'Beacon' with: [
 				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
 			baseline: 'SpartaSkia' with: [
@@ -30,5 +28,5 @@ BaselineOfBlocExamples >> baseline: spec [
 			package: #'Bloc-Compositor-Examples' with: [
 				spec requires: #('Bloc' 'Bloc-Examples'). ];
 			package: #'Bloc-Examples' with: [
-				spec requires: #(#'Bloc' #'BlocPac') ] ].
+				spec requires: #(#'Bloc') ] ].
 ]
