@@ -13,9 +13,9 @@ BaselineOfBlocMorphic >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'BlocCore' with: [
-				self thisRepositoryFor: spec ];
+				spec repository: 'github://feenkcom/Bloc/src' ];
 			baseline: 'GToolkitFenster' with: [
-				self repository: 'github://feenkcom/gtoolkit-fenster/src' for: spec ].
+				spec repository: 'github://feenkcom/gtoolkit-fenster/src' ].
 
 		spec 
 			package: #'BlocHost-Morphic' with: [
