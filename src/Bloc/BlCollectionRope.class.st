@@ -339,7 +339,7 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 { #category : #'text - converting' }
 BlCollectionRope >> normalized [ 
 
-	^ self class collection: (BlTextStringNormalizer new process: collection)
+	^ self class collection: (BlStringNormalizer new process: collection)
 ]
 
 { #category : #accessing }

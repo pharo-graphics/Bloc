@@ -3,18 +3,18 @@ I process a given string and replace some characters with special items such as 
 I return an array of items (characters or other objects)
 "
 Class {
-	#name : #BlTextStringNormalizer,
+	#name : #BlStringNormalizer,
 	#superclass : #Object,
 	#instVars : [
 		'cr',
 		'lf',
 		'nel'
 	],
-	#category : #'Bloc-Text-Text'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #initialization }
-BlTextStringNormalizer >> initialize [
+BlStringNormalizer >> initialize [
 
 	super initialize.
 	cr := Character cr.
@@ -23,7 +23,7 @@ BlTextStringNormalizer >> initialize [
 ]
 
 { #category : #accessing }
-BlTextStringNormalizer >> process: aString [
+BlStringNormalizer >> process: aString [
 	<return: #String>
 
 	^ String streamContents: [ :writeStream |

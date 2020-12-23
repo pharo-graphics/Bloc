@@ -1,6 +1,6 @@
 Extension { #name : #BlCompositionPainterState }
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionPainterState >> gtCommandsFor: aView [
 	<gtView>
 	

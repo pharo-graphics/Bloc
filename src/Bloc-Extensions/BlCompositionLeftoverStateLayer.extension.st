@@ -1,6 +1,6 @@
 Extension { #name : #BlCompositionLeftoverStateLayer }
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionLeftoverStateLayer >> gtStateCommandsFor: aView [
 	<gtView>
 	

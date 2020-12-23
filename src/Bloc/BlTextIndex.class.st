@@ -7,7 +7,7 @@ See BlTextIndexEOS.
 Class {
 	#name : #BlTextIndex,
 	#superclass : #Magnitude,
-	#category : #'Bloc-Text-Text-Operator'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #testing }

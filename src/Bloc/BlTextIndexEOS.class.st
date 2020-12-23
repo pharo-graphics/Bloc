@@ -27,7 +27,7 @@ Class {
 		'offset',
 		'approximateSize'
 	],
-	#category : #'Bloc-Text-Text-Operator'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #arithmetic }

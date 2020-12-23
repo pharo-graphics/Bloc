@@ -68,12 +68,6 @@ BlRopeableCollectionFile class >> defaultBufferSize [
 	^ 200000
 ]
 
-{ #category : #'instance creation' }
-BlRopeableCollectionFile class >> ropeFor: aFileReference [
-
-	^ BlRopedText rope: (BlCollectionRope collection: (self new fileReference: aFileReference))
-]
-
 { #category : #comparing }
 BlRopeableCollectionFile >> = anObject [
 	"Compare the contents of the receiver to anObject.
@@ -212,7 +206,7 @@ BlRopeableCollectionFile >> ensureBuffered: anInteger [
 	bufferStart := mapEntry key.
 	bufferedSize := 0.
 	characterStream := self characterStream.
-	normalizer := BlTextStringNormalizer new.
+	normalizer := BlStringNormalizer new.
 
 	"All of the below should be modified to work with existing collections,
 	not discarding and creating on each iteration"

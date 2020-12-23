@@ -1,6 +1,6 @@
 Extension { #name : #BlCompositionPainter }
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionPainter >> gtLayersTreeFor: aView [
 	<gtView>
 	
@@ -11,7 +11,7 @@ BlCompositionPainter >> gtLayersTreeFor: aView [
 		view: #gtTreeFor:
 ]
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionPainter >> gtPreviewFor: aView [
 	<gtView>
 	
@@ -30,7 +30,7 @@ BlCompositionPainter >> gtPreviewFor: aView [
 			aCanvas asForm ]
 ]
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionPainter >> gtSymbolTreeFor: aView [
 	<gtView>
 	

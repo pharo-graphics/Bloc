@@ -1,6 +1,6 @@
 Extension { #name : #BlCompositionLayer }
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionLayer >> asExplosionElement [
 	<return: #BlElement>
 	| aContainer theBounds |
@@ -56,7 +56,7 @@ BlCompositionLayer >> asExplosionElement [
 			aWrapper asScalableElement ]
 ]
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionLayer >> gtExplosionLayersFor: aView [
 	<gtView>
 
@@ -66,7 +66,7 @@ BlCompositionLayer >> gtExplosionLayersFor: aView [
 		stencil: [ self asExplosionElement ]
 ]
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionLayer >> gtPreviewFor: aView [
 	<gtView>
 
@@ -80,7 +80,7 @@ BlCompositionLayer >> gtPreviewFor: aView [
 			SkiaCompositor newDuring: [ :aCompositor | aCompositor draw: aSkiaLayer on: aCanvas ] ]
 ]
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionLayer >> gtSymbolTreeFor: aView [
 	<gtView>
 	
@@ -91,7 +91,7 @@ BlCompositionLayer >> gtSymbolTreeFor: aView [
 		text: [ self class printSymbolTree: self asSymbolTree ]
 ]
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionLayer >> gtTreeFor: aView [
 	<gtView>
 	
@@ -101,7 +101,7 @@ BlCompositionLayer >> gtTreeFor: aView [
 		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
 ]
 
-{ #category : #'*Bloc-Compositor-GToolkit' }
+{ #category : #'*Bloc-Extensions' }
 BlCompositionLayer >> paintTreeWith: view [
 	view nodes
 		shape: [ :each |
