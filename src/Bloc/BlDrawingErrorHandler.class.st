@@ -21,22 +21,16 @@ BlDrawingErrorHandler >> processError: aHandledError [
 	aHandledError element
 		childNamed: #errorContainer
 		ifFound: [ :anElement | anErrorContainer := anElement ]
-		ifNone: [
-			aHandledError element addChild: (anErrorContainer := BlElement new
-				layout: BlLinearLayout vertical;
-				constraintsDo: [ :c |
-					c horizontal fitContent.
-					c vertical fitContent ]) as: #errorContainer ].
+		ifNone: [ aHandledError element ].
 	
 	anErrorContainer
-		addChild: (BlTextElement new
-			padding: (BlInsets all: 5);
-			text: 'Debug draw error' asRopedText;
+		addChild: (BlElement new
+			size: 100@40;
+			id: #error;
 			geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
 			border: (BlBorder paint: Color gray width: 1);
-			background: Color white;
+			background: Color red;
 			when: BlClickEvent do: [ :anEvent |
 				anEvent consumed: true.
-				aHandledError error debug
-			])
+				aHandledError error debug ])
 ]

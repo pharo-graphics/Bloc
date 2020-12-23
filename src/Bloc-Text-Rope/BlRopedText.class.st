@@ -14,6 +14,13 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlRopedText class >> file: aFileReference [
+	<return: #BlRopedText>
+
+	^ self rope: (BlCollectionRope collection: (BlRopeableCollectionFile new fileReference: aFileReference))
+]
+
+{ #category : #'instance creation' }
 BlRopedText class >> items: aCollectionOfItems [
 	<return: #BlRopedText>
 
@@ -32,7 +39,7 @@ BlRopedText class >> string: aString [
 	"Take the supplied string like object, convert it to a normalised string and answer as roped text"
 	<return: #BlRopedText>
 
-	^ self rope: (BlCollectionRope collection: (BlTextStringNormalizer new process: aString))
+	^ self rope: (BlCollectionRope collection: (BlStringNormalizer new process: aString))
 ]
 
 { #category : #'text - converting' }
@@ -228,7 +235,7 @@ BlRopedText >> insertItems: aCollectionOfCollectionsOfItems atAll: aCollectionOf
 BlRopedText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	| theProcessedStrings |
 	
-	theProcessedStrings := aCollectionOfStrings collect: [ :eachString | BlTextStringNormalizer new process: eachString ].
+	theProcessedStrings := aCollectionOfStrings collect: [ :eachString | BlStringNormalizer new process: eachString ].
 	self
 		notifyStringsInserted: (theProcessedStrings collect: [ :eachProcessedString | (self class items: eachProcessedString) characters asString ])
 		atAll: (self

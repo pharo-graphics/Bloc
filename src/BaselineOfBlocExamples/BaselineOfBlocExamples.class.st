@@ -1,9 +1,6 @@
 Class {
 	#name : #BaselineOfBlocExamples,
 	#superclass : #BaselineOf,
-	#classVars : [
-		'PostLoaded'
-	],
 	#category : #BaselineOfBlocExamples
 }
 

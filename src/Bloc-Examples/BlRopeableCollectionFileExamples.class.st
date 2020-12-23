@@ -64,7 +64,7 @@ BlRopeableCollectionFileExamples >> emptyFileSize [
 	<gtExample>
 	| ropeSize |
 
-	ropeSize := (BlRopeableCollectionFile ropeFor: self emptyFile) size.
+	ropeSize := (BlRopedText file: self emptyFile) size.
 	self assert: ropeSize equals: 0.
 ]
 

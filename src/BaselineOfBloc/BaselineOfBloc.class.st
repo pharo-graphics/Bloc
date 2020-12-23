@@ -70,9 +70,7 @@ BaselineOfBloc >> baseline: spec [
 		"Compositor"
 		spec
 			package: #'Bloc-Compositor' with: [
-				spec requires: #(#Bloc 'Sparta'). ];
-			package: #'Bloc-Compositor-GToolkit' with: [
-				spec requires: #('Bloc-Compositor'). ].
+				spec requires: #(#Bloc 'Sparta'). ].
 			
 		spec
 			package: #'Bloc-Sparta' with: [
@@ -84,10 +82,7 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-DevTool' with: [
 				spec requires: #(#Bloc #'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope'). ];
 			package: #'Bloc-Scripter' with: [
-				spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock'). ];
-			package: #'Bloc-Extensions' with: [
-				spec requires: #('Bloc' 'Bloc-Sparta' #'Bloc-Animation' 'Bloc-DevTool' ). ] ].
-
+				spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock'). ] ].
 ]
 
 { #category : #'post load' }
