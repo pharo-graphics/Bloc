@@ -50,7 +50,8 @@ Class {
 		'telemetry',
 		'reference',
 		'elementsNeedingStyle',
-		'elementsNeedingPropertiesComputation'
+		'elementsNeedingPropertiesComputation',
+		'iconStencil'
 	],
 	#classVars : [
 		'UniqueIdGenerator'
@@ -1162,6 +1163,18 @@ BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
 		ifTrue: [ ^ anAbsentBlock value ].
 		
 	^ aBlock cull: self hostSpace
+]
+
+{ #category : #'window - properties' }
+BlSpace >> icon [
+	"Return an object that understands #asElement, or nil"
+	^ iconStencil
+]
+
+{ #category : #'window - properties' }
+BlSpace >> icon: aStencil [
+	"aStencil is an object that undestands #asElement and returns ${class:BlElement}$"
+	iconStencil := aStencil
 ]
 
 { #category : #accessing }
