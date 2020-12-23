@@ -445,8 +445,7 @@ BlBlocUIManager >> onPrimitiveError: aString [
 					20
 						timesRepeat: [context == nil
 								ifFalse: [s cr; print: (context := context sender)]]].
-	GtEmergencyDebugger askForEmergencyEvaluatorOrExitWithText: message.
-
+	Smalltalk tools emergencyDebugger askForEmergencyEvaluatorOrExitWithText: message.
 ]
 
 { #category : #services }
