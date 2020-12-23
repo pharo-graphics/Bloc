@@ -35,11 +35,7 @@ BlDevScripterBlockSelectorEventTarget >> block: anOneArgBlock [
 { #category : #searching }
 BlDevScripterBlockSelectorEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
-	| aChildren |
-	aChildren := anElement children select: [ :eachChild | 
-		[ self block value: eachChild ] on: Error do: [ :anException | false ] ].
-	self assert: aChildren size equals: 1.
-	^ aChildren first
+	^ self block value: anElement.
 ]
 
 { #category : #accessing }

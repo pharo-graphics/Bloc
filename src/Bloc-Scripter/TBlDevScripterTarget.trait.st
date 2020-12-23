@@ -32,13 +32,13 @@ TBlDevScripterTarget >> onChildAt: aNumber [
 ]
 
 { #category : #'targets - children' }
-TBlDevScripterTarget >> onChildFromMessage: aSymbol [
-	self updateTarget: (BlDevScripterSelectorChildEventTarget new selector: aSymbol)
+TBlDevScripterTarget >> onChildFromBlock: anOneArgBlock [
+	self updateTarget: (BlDevScripterBlockSelectorEventTarget new block: anOneArgBlock)
 ]
 
 { #category : #'targets - children' }
-TBlDevScripterTarget >> onChildFromSelectionBlock: anOneArgBlock [
-	self updateTarget: (BlDevScripterBlockSelectorEventTarget new block: anOneArgBlock)
+TBlDevScripterTarget >> onChildFromMessage: aSymbol [
+	self updateTarget: (BlDevScripterSelectorChildEventTarget new selector: aSymbol)
 ]
 
 { #category : #'targets - children' }
