@@ -32,8 +32,8 @@ BaselineOfBloc >> baseline: spec [
 		spec 
 			baseline: 'Beacon' with: [
 				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
-			baseline: 'GToolkitFenster' with: [
-				spec repository: 'github://feenkcom/gtoolkit-fenster/src' ];
+			baseline: 'Fenster' with: [
+				spec repository: 'github://feenkcom/fenster/src' ];
 			baseline: 'Sparta' with: [
 				spec repository: 'github://feenkcom/Sparta/src' ];
 			baseline: 'Glutin' with: [
@@ -41,7 +41,7 @@ BaselineOfBloc >> baseline: spec [
 		
 		spec 
 			package: #Bloc with: [
-				spec requires: #(#Beacon GToolkitFenster) ];
+				spec requires: #(#Beacon Fenster) ];
 			package: #'Bloc-Animation' with: [
 				spec requires: #(#Bloc) ];
 			package: #'Bloc-Layout' with: [ "animation is required by animated layouts"
@@ -65,7 +65,7 @@ BaselineOfBloc >> baseline: spec [
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#Bloc). ];
 			package: #'BlocHost-Glutin' with: [
-				spec requires: #(#Bloc #GToolkitFenster #Glutin) ].
+				spec requires: #(#Bloc #Fenster #Glutin) ].
 		
 		"Compositor"
 		spec
