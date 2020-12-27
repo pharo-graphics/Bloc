@@ -8,7 +8,8 @@ Class {
 		'session',
 		'surface',
 		'surfaceRenderer',
-		'spaceRenderer'
+		'spaceRenderer',
+		'textMeasurer'
 	],
 	#category : #'Bloc-Universe - Renderer'
 }
@@ -68,10 +69,16 @@ BlHostRenderer >> isValid [
 
 	(surface isNil
 		or: [ surfaceRenderer isNil
-			or: [ spaceRenderer isNil ] ])
+			or: [ spaceRenderer isNil
+				or: [ textMeasurer isNil ] ] ])
 		ifTrue: [ ^ false ].
 	
 	^ true
+]
+
+{ #category : #rendering }
+BlHostRenderer >> measureTextParagraph: aBlTextParagraph [
+	textMeasurer measureTextParagraph: aBlTextParagraph
 ]
 
 { #category : #rendering }

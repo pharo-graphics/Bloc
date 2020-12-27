@@ -16,7 +16,6 @@ Class {
 		'paragraph',
 		'selection',
 		'baseline',
-		'measurer',
 		'measurement'
 	],
 	#classVars : [
@@ -53,13 +52,6 @@ BlTextElement >> acquireParagraph [
 	^ aParagraph
 ]
 
-{ #category : #'api - text' }
-BlTextElement >> ascentBaseline [
-	self deprecated: 'Use `#labelMeasurement` instead'.
-	
-	self labelMeasurement
-]
-
 { #category : #accessing }
 BlTextElement >> baseline [
 	
@@ -79,11 +71,14 @@ BlTextElement >> baselineOffset [
 		ifNil: [ 0 ]
 ]
 
-{ #category : #'api - text' }
-BlTextElement >> boundsBaseline [
-	self deprecated: 'Use `#tightMesurement` instead'.
-
-	self tightMeasurement
+{ #category : #layout }
+BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
+	self isAttachedToSceneGraph
+		ifTrue: [
+			self space
+				measureTextParagraph: aBlTextParagraph
+				ifNotAvailable: [  ] ]
+		ifFalse: [  ]
 ]
 
 { #category : #layout }
@@ -137,11 +132,6 @@ BlTextElement >> defaultText [
 	^ DefaultText
 ]
 
-{ #category : #initialization }
-BlTextElement >> defaultTextMeasurer [
-	^ BlTextElementOffscreenCanvasMeasurer new
-]
-
 { #category : #'selection - management' }
 BlTextElement >> deselect: aFromIndex to: aToIndex [
 
@@ -156,13 +146,6 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 BlTextElement >> editorMeasurement [
 	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
 	self baseline: BlTextParagraphAscentLooseBaseline uniqueInstance
-]
-
-{ #category : #'api - text' }
-BlTextElement >> editorMesurement [
-	self deprecated: 'Use `#editorMeasurement` instead'.
-
-	self editorMeasurement
 ]
 
 { #category : #accessing }
@@ -189,13 +172,12 @@ BlTextElement >> initialize [
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
 	paragraph := nil.
-	
+
 	self constraintsDo: [ :c | 
 		c horizontal fitContent.
 		c vertical fitContent ].
 
 	selection := BlCompositeSelection new.
-	measurer := self defaultTextMeasurer.
 	
 	"self debug: true"
 ]
@@ -204,13 +186,6 @@ BlTextElement >> initialize [
 BlTextElement >> labelMeasurement [
 	self measurement: BlTextElementLabelMeasurementStrategy uniqueInstance.
 	self baseline: BlTextParagraphAscentTightBaseline uniqueInstance
-]
-
-{ #category : #'api - text' }
-BlTextElement >> looseMesurement [
-	self deprecated: 'Use `#labelMeasurement` instead'.
-
-	self labelMeasurement
 ]
 
 { #category : #layout }
@@ -266,7 +241,7 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 
 	self telemetry
 		timeSync: [ 'Paragraph measureOn: ', self class name ]
-		during: [ paragraph measureOn: self measurer ].
+		during: [ self basicMeasureParagraph: paragraph ].
 
 	"text layout is measured at this point"
 
@@ -304,17 +279,6 @@ BlTextElement >> measurement: aTextElementMeasurementStrategy [
 	self textChanged
 ]
 
-{ #category : #accessing }
-BlTextElement >> measurer [
-	^ measurer
-]
-
-{ #category : #accessing }
-BlTextElement >> measurer: aTextElementMeasurer [
-	measurer := aTextElementMeasurer.
-	self textChanged
-]
-
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 	self
@@ -330,16 +294,6 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 	self telemetry
 		timeSync: [ 'Measure children: ', self class name ]
 		during: [ self measureChildren: anExtentMeasurementSpec ]
-]
-
-{ #category : #'children hooks' }
-BlTextElement >> onRemovedFromSceneGraph [
-	super onRemovedFromSceneGraph.
-	
-	paragraph
-		ifNil: [ ^ self ].
-
-	self requestLayout
 ]
 
 { #category : #'private - paragraph' }
@@ -500,11 +454,4 @@ BlTextElement >> textDo: aBlock [
 BlTextElement >> tightMeasurement [
 	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
 	self baseline: BlTextParagraphBoundsBaseline uniqueInstance
-]
-
-{ #category : #'api - text' }
-BlTextElement >> tightMesurement [
-	self deprecated: 'Use `#tightMeasurement` instead'.
-
-	self tightMeasurement
 ]

@@ -2,13 +2,13 @@
 I measure a text span in a context of sparta canvas
 "
 Class {
-	#name : #BlTextParagraphSpanSpartaMeasurer,
+	#name : #BlSpartaTextParagraphSpanMeasurer,
 	#superclass : #BlTextParagraphSpanMeasurer,
 	#category : #'Bloc-Sparta-Text'
 }
 
 { #category : #measurement }
-BlTextParagraphSpanSpartaMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
+BlSpartaTextParagraphSpanMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
 	"Measure a given text span and return paragraph span with computed metrics"
 
 	<return: #BlTextParagraphSpan>

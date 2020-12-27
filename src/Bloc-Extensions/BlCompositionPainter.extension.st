@@ -24,7 +24,7 @@ BlCompositionPainter >> gtPreviewFor: aView [
 			aCanvas := SkiaCanvas extent: self bounds extent ceiling asIntegerPoint.
 			aSkiaLayer := self containerLayer asSkiaLayer.
 			
-			aCompositor := SkiaCompositor workers: 1.
+			aCompositor := SkiaCompositor new.
 			
 			aCompositor draw: aSkiaLayer on: aCanvas.
 			aCanvas asForm ]

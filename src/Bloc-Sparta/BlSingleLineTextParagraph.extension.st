@@ -76,5 +76,5 @@ BlSingleLineTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas padding: aBlIn
 BlSingleLineTextParagraph >> measureOnSpartaCanvas: aSpartaCanvas [
 	self
 		measureOn: aSpartaCanvas
-		with: BlTextParagraphSpanSpartaMeasurer new
+		with: BlSpartaTextParagraphSpanMeasurer new
 ]

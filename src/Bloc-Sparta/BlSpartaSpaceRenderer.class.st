@@ -75,3 +75,10 @@ BlSpartaSpaceRenderer >> scaleFactor [
 
 	^ scaleFactor
 ]
+
+{ #category : #accessing }
+BlSpartaSpaceRenderer >> spartaCanvas [
+	<return: #SpartaCanvas>
+
+	^ spartaCanvas
+]

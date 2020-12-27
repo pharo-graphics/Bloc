@@ -129,5 +129,7 @@ BlSpartaRenderer >> initializeForHostSpace: aBlHostSpace [
 
 	"creates spaceRenderer from the allocated surface"
 	spaceRenderer := surface createSpaceRendererOn: self.
-	spaceRenderer initializeForSurface: surface
+	spaceRenderer initializeForSurface: surface.
+
+	textMeasurer := BlSpartaTextMeasurer new spaceRenderer: spaceRenderer
 ]

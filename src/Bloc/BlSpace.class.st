@@ -1359,6 +1359,13 @@ BlSpace >> maximized [
 	^ false
 ]
 
+{ #category : #pulse }
+BlSpace >> measureTextParagraph: aBlTextParagraph ifNotAvailable: aBlock [
+	self
+		hostSpaceDo: [ :aHostSpace | aHostSpace measureTextParagraph: aBlTextParagraph ]
+		ifAbsent: aBlock
+]
+
 { #category : #'api - displaying' }
 BlSpace >> minimize [
 	self hostSpace ifNotNil: [ :hw | hw minimize ]

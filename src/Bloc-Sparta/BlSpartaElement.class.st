@@ -17,7 +17,7 @@ Class {
 	#instVars : [
 		'renderingStrategy'
 	],
-	#category : #'Bloc-Sparta-Text'
+	#category : #'Bloc-Sparta'
 }
 
 { #category : #drawing }

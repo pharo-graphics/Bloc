@@ -51,18 +51,6 @@ BlSpaceFrame >> currentPhase [
 	^ currentPhaseLink value
 ]
 
-{ #category : #'as yet unclassified' }
-BlSpaceFrame >> gtInspectorPhasesIn: aComposite [
-	<gtInspectorPresentationOrder: 0>
-	
-	^ aComposite fastList
-		title: 'Phases';
-		display: [ self phases ];
-		format: [ :each | each = self currentPhase
-			ifTrue: [ each name asText allBold ]
-			ifFalse: [ each name ] ]
-]
-
 { #category : #testing }
 BlSpaceFrame >> hasNextPhase [
 	<return: #Boolean>
@@ -88,8 +76,8 @@ BlSpaceFrame >> initializePhases [
 		BlSpaceFrameTaskPhase new.
 		BlSpaceFrameStylePhase new.
 		BlSpaceFramePropertiesPhase new.
-		BlSpaceFrameLayoutPhase new.
 		BlSpaceFrameDrawingValidationPhase new.
+		BlSpaceFrameLayoutPhase new.
 		BlSpaceFrameDrawingPhase new }
 ]
 
