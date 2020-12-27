@@ -16,7 +16,8 @@ Class {
 		'paragraph',
 		'selection',
 		'baseline',
-		'measurement'
+		'measurement',
+		'measurer'
 	],
 	#classVars : [
 		'DefaultText',
@@ -73,12 +74,7 @@ BlTextElement >> baselineOffset [
 
 { #category : #layout }
 BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
-	self isAttachedToSceneGraph
-		ifTrue: [
-			self space
-				measureTextParagraph: aBlTextParagraph
-				ifNotAvailable: [  ] ]
-		ifFalse: [  ]
+	measurer measureTextParagraph: aBlTextParagraph of: self
 ]
 
 { #category : #layout }
@@ -125,6 +121,11 @@ BlTextElement >> createTextParagraph [
 ]
 
 { #category : #initialization }
+BlTextElement >> defaultMeasurer [
+	^ BlTextElementHostMeasurer new
+]
+
+{ #category : #initialization }
 BlTextElement >> defaultText [
 	"Return a default text I should be created with"
 	<return: #BlText>
@@ -166,19 +167,20 @@ BlTextElement >> indexAtScreenPosition: aPoint [
 { #category : #initialization }
 BlTextElement >> initialize [
 	super initialize.
-	
+
 	self tightMeasurement.
-	
+
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
 	paragraph := nil.
+	measurer := self defaultMeasurer.
 
 	self constraintsDo: [ :c | 
 		c horizontal fitContent.
 		c vertical fitContent ].
 
 	selection := BlCompositeSelection new.
-	
+
 	"self debug: true"
 ]
 
@@ -276,6 +278,17 @@ BlTextElement >> measurement [
 { #category : #accessing }
 BlTextElement >> measurement: aTextElementMeasurementStrategy [
 	measurement := aTextElementMeasurementStrategy.
+	self textChanged
+]
+
+{ #category : #accessing }
+BlTextElement >> measurer [
+	^ measurer
+]
+
+{ #category : #accessing }
+BlTextElement >> measurer: anObject [
+	measurer := anObject.
 	self textChanged
 ]
 

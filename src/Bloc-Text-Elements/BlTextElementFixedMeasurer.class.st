@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTextElementFixedMeasurer,
-	#superclass : #BlHostTextMeasurer,
+	#superclass : #BlTextElementMeasurer,
 	#instVars : [
 		'measurer'
 	],
@@ -59,6 +59,6 @@ BlTextElementFixedMeasurer >> initialize [
 ]
 
 { #category : #initialization }
-BlTextElementFixedMeasurer >> measureTextParagraph: aBlTextParagraph [
+BlTextElementFixedMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
 	measurer measureTextParagraph: aBlTextParagraph
 ]
