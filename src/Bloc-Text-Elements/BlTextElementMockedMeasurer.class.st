@@ -1,5 +1,5 @@
 Class {
-	#name : #BlTextElementFixedMeasurer,
+	#name : #BlTextElementMockedMeasurer,
 	#superclass : #BlTextElementMeasurer,
 	#instVars : [
 		'measurer'
@@ -8,50 +8,50 @@ Class {
 }
 
 { #category : #'font - metrics' }
-BlTextElementFixedMeasurer >> ascent [
+BlTextElementMockedMeasurer >> ascent [
 	^ measurer ascent
 ]
 
 { #category : #'font - metrics' }
-BlTextElementFixedMeasurer >> ascent: aNumber [
+BlTextElementMockedMeasurer >> ascent: aNumber [
 	measurer ascent: aNumber
 ]
 
 { #category : #'font - metrics' }
-BlTextElementFixedMeasurer >> descent [
+BlTextElementMockedMeasurer >> descent [
 	^ measurer descent
 ]
 
 { #category : #'font - metrics' }
-BlTextElementFixedMeasurer >> descent: aNumber [
+BlTextElementMockedMeasurer >> descent: aNumber [
 	measurer descent: aNumber
 ]
 
 { #category : #'font - metrics' }
-BlTextElementFixedMeasurer >> glyphHeight [
+BlTextElementMockedMeasurer >> glyphHeight [
 	^ measurer height
 ]
 
 { #category : #'font - metrics' }
-BlTextElementFixedMeasurer >> glyphHeight: aNumber [
+BlTextElementMockedMeasurer >> glyphHeight: aNumber [
 	measurer height: aNumber
 ]
 
 { #category : #'font - metrics' }
-BlTextElementFixedMeasurer >> glyphWidth [
+BlTextElementMockedMeasurer >> glyphWidth [
 	^ measurer glyphWidth
 ]
 
 { #category : #'font - metrics' }
-BlTextElementFixedMeasurer >> glyphWidth: aNumber [
+BlTextElementMockedMeasurer >> glyphWidth: aNumber [
 	measurer glyphWidth: aNumber
 ]
 
 { #category : #initialization }
-BlTextElementFixedMeasurer >> initialize [
+BlTextElementMockedMeasurer >> initialize [
 	super initialize.
 	
-	measurer := BlTextParagraphFixedSpanMeasurer new.
+	measurer := BlMockedTextMeasurer new.
 	measurer ascent: -10.
 	measurer descent: 5.
 	measurer glyphWidth: 10.
@@ -59,6 +59,6 @@ BlTextElementFixedMeasurer >> initialize [
 ]
 
 { #category : #initialization }
-BlTextElementFixedMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
+BlTextElementMockedMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
 	measurer measureTextParagraph: aBlTextParagraph
 ]

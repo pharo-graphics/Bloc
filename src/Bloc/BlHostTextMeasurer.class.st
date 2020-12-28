@@ -8,3 +8,8 @@ Class {
 BlHostTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 	self subclassResponsibility
 ]
+
+{ #category : #dispatch }
+BlHostTextMeasurer >> measureTextSpan: aBlTextSpan [
+	self subclassResponsibility
+]

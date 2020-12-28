@@ -24,6 +24,35 @@ BlSingleLineTextParagraph >> baselineChanged [
 	self line baseline: self baseline
 ]
 
+{ #category : #'paragraph - measuring' }
+BlSingleLineTextParagraph >> basicMeasureOn: aSpanMeasurer [
+	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
+	| anIterator aMeasurer |
+
+	aMeasurer := self createMeasurer.
+	aMeasurer line paragraph: self.
+
+	(self text isEmpty) ifTrue: [ 
+		aMeasurer
+			measureSpan: (BlSpan text: self text empty attributes: #())
+			of: self
+			with: aSpanMeasurer ].
+
+	anIterator := text iterator.
+	[ anIterator hasNext and: [ line isEmpty or: [ aMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
+		"If we pass #hasNext check we will definitely move to the next span,
+		so can do the same with position"
+		aMeasurer movePosition: anIterator position + 1.
+		aMeasurer
+			measureSpan: anIterator nextSpan
+			of: self
+			with: aSpanMeasurer ].
+
+	"measurer creates a line with baseline set to 0@0"
+	line := aMeasurer line.
+	end := line to
+]
+
 { #category : #'paragraph - geometry' }
 BlSingleLineTextParagraph >> bounds [
 	^ self line bounds
@@ -74,37 +103,6 @@ BlSingleLineTextParagraph >> line [
 { #category : #'paragraph - geometry' }
 BlSingleLineTextParagraph >> looseBounds [
 	^ 0 @ 0 extent: self line advance @ (self ascent abs + self descent)
-]
-
-{ #category : #'paragraph - measuring' }
-BlSingleLineTextParagraph >> measureOn: aCanvas with: aSpanMeasurer [
-	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
-	| anIterator aMeasurer |
-
-	aMeasurer := self createMeasurer.
-	aMeasurer line paragraph: self.
-
-	(self text isEmpty) ifTrue: [ 
-		aMeasurer
-			measureSpan: (BlSpan text: self text empty attributes: #())
-			of: self
-			on: aCanvas
-			with: aSpanMeasurer ].
-
-	anIterator := text iterator.
-	[ anIterator hasNext and: [ line isEmpty or: [ aMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
-		"If we pass #hasNext check we will definitely move to the next span,
-		so can do the same with position"
-		aMeasurer movePosition: anIterator position + 1.
-		aMeasurer
-			measureSpan: anIterator nextSpan
-			of: self
-			on: aCanvas
-			with: aSpanMeasurer ].
-
-	"measurer creates a line with baseline set to 0@0"
-	line := aMeasurer line.
-	end := line to
 ]
 
 { #category : #'paragraph - measuring' }

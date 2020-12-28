@@ -111,7 +111,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharacterInHelloWorld [
 
 	aParagraph := self measuredHelloWorld.
 
-	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent on: self measurer ].
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
@@ -126,7 +126,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInObjectPrintOn 
 	aParagraph text: self objectPrintOnText.
 	aParagraph measureOn: self measurer.
 	
-	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent on: self measurer ].
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ theIndices
@@ -143,8 +143,8 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInPointWithDot [
 	
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
 		| aPoint |
-		aPoint := aParagraph positionAt: anIndex on: self measurer.
-		aParagraph indexAtPosition: aPoint on: self measurer ].
+		aPoint := aParagraph positionAt: anIndex.
+		aParagraph indexAtPosition: aPoint ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
@@ -161,8 +161,8 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInRealPointWithD
 	
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
 		| aPoint |
-		aPoint := aParagraph positionAt: anIndex on: self realMeasurer.
-		aParagraph indexAtPosition: aPoint on: self realMeasurer ].
+		aPoint := aParagraph positionAt: anIndex.
+		aParagraph indexAtPosition: aPoint ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
@@ -179,8 +179,8 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInRealTabTab [
 	
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
 		| aPoint |
-		aPoint := aParagraph positionAt: anIndex on: self realMeasurer.
-		aParagraph indexAtPosition: aPoint on: self realMeasurer ].
+		aPoint := aParagraph positionAt: anIndex.
+		aParagraph indexAtPosition: aPoint ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
@@ -197,8 +197,8 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenAllCharactersInTabTab [
 	
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
 		| aPoint |
-		aPoint := aParagraph positionAt: anIndex on: self measurer.
-		aParagraph indexAtPosition: aPoint on: self measurer ].
+		aPoint := aParagraph positionAt: anIndex.
+		aParagraph indexAtPosition: aPoint ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
@@ -210,7 +210,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHaba
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: self glyphWidth @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: self glyphWidth @ self ascent.
 	
 	self assert: anIndex equals: 1.
 
@@ -223,7 +223,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHell
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHelloWorld.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent.
 
 	self assert: anIndex equals: 1.
 
@@ -239,7 +239,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInObje
 	aParagraph text: self objectPrintOnText.
 	aParagraph measureOn: self measurer.
 	
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent.
 
 	self assert: anIndex equals: 1.
 
@@ -253,8 +253,8 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInReal
 
 	aParagraph := self realMeasuredHelloWorld.
 	
-	aPosition := aParagraph positionAt: 1 on: self realMeasurer.
-	anIndex := aParagraph indexAtPosition: aPosition on: self realMeasurer.
+	aPosition := aParagraph positionAt: 1.
+	anIndex := aParagraph indexAtPosition: aPosition.
 
 	self assert: anIndex equals: 1.
 
@@ -267,7 +267,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenHalfsOfFirstCharacterInHaba [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth / 2.0) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth / 2.0) @ self ascent.
 	
 	self assert: anIndex equals: 0.
 
@@ -281,7 +281,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInHe
 
 	aParagraph := self measuredHelloWorld.
 	
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent.
 
 	self assert: anIndex equals: 7.
 
@@ -297,7 +297,7 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInOb
 	aParagraph text: self objectPrintOnText.
 	aParagraph measureOn: self measurer.
 	
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent.
 
 	self assert: anIndex equals: 7.
 
@@ -311,8 +311,8 @@ BlSingleLineTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInRe
 
 	aParagraph := self realMeasuredHelloWorld.
 	
-	aPosition := aParagraph positionAt: 7 on: self realMeasurer.
-	anIndex := aParagraph indexAtPosition: aPosition on: self realMeasurer.
+	aPosition := aParagraph positionAt: 7.
+	anIndex := aParagraph indexAtPosition: aPosition.
 
 	self assert: anIndex equals: 7.
 
@@ -325,7 +325,7 @@ BlSingleLineTextParagraphExamples >> indexAtFarBottomLeftPointInEmpty [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: (self ascent * 10) negated @ (self ascent * 10) on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self ascent * 10) negated @ (self ascent * 10).
 	
 	self assert: anIndex equals: 0.
 	
@@ -338,7 +338,7 @@ BlSingleLineTextParagraphExamples >> indexAtFarBottomLeftPointInHaba [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * self haba size * 10) negated @ (self ascent * 10) on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth * self haba size * 10) negated @ (self ascent * 10).
 	
 	self assert: anIndex equals: 0.
 	
@@ -351,7 +351,7 @@ BlSingleLineTextParagraphExamples >> indexAtFarBottomPointInEmpty [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: 0 @ (self ascent * 10) on: self measurer.
+	anIndex := aParagraph indexAtPosition: 0 @ (self ascent * 10).
 	
 	self assert: anIndex equals: 0.
 	
@@ -364,7 +364,7 @@ BlSingleLineTextParagraphExamples >> indexAtFarBottomRightPointInEmpty [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: (self ascent * 10) @ (self ascent * 10) on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self ascent * 10) @ (self ascent * 10).
 	
 	self assert: anIndex equals: 0.
 	
@@ -377,7 +377,7 @@ BlSingleLineTextParagraphExamples >> indexAtFarTopLeftPointInEmpty [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: (self ascent * 10) asPoint negated on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self ascent * 10) asPoint negated.
 	
 	self assert: anIndex equals: 0.
 	
@@ -390,7 +390,7 @@ BlSingleLineTextParagraphExamples >> indexAtFarTopPointInEmpty [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: 0@(self ascent * 10) negated on: self measurer.
+	anIndex := aParagraph indexAtPosition: 0@(self ascent * 10) negated.
 	
 	self assert: anIndex equals: 0.
 	
@@ -403,7 +403,7 @@ BlSingleLineTextParagraphExamples >> indexAtFarTopRightPointInEmpty [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: (self ascent * 10) @ (self ascent * 10) negated on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self ascent * 10) @ (self ascent * 10) negated.
 	
 	self assert: anIndex equals: 0.
 	
@@ -416,7 +416,7 @@ BlSingleLineTextParagraphExamples >> indexAtFarZeroInEmpty [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: 0@0 on: self measurer.
+	anIndex := aParagraph indexAtPosition: 0@0.
 	
 	self assert: anIndex equals: 0.
 	
@@ -429,7 +429,7 @@ BlSingleLineTextParagraphExamples >> indexAtLeftHalfOfFirstCharacterInHaba [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth / 3.0) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth / 3.0) @ self ascent.
 	
 	self assert: anIndex equals: 0.
 
@@ -442,7 +442,7 @@ BlSingleLineTextParagraphExamples >> indexAtLeftHalfOfForthCharacterInHaba [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 3) + (self glyphWidth / 3.0)) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 3) + (self glyphWidth / 3.0)) @ self ascent.
 	
 	self assert: anIndex equals: 3.
 
@@ -455,7 +455,7 @@ BlSingleLineTextParagraphExamples >> indexAtLeftHalfOfSecondCharacterInHaba [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 1) + (self glyphWidth / 3.0)) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 1) + (self glyphWidth / 3.0)) @ self ascent.
 	
 	self assert: anIndex equals: 1.
 
@@ -468,7 +468,7 @@ BlSingleLineTextParagraphExamples >> indexAtLeftHalfOfThirdCharacterInHaba [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 2) + (self glyphWidth / 3.0)) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 2) + (self glyphWidth / 3.0)) @ self ascent.
 	
 	self assert: anIndex equals: 2.
 
@@ -481,7 +481,7 @@ BlSingleLineTextParagraphExamples >> indexAtRightHalfOfFirstCharacterInHaba [
 	| aParagraph anIndex |
 
 	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth / 1.5) @ self ascent on: self measurer.
+	anIndex := aParagraph indexAtPosition: (self glyphWidth / 1.5) @ self ascent.
 	
 	self assert: anIndex equals: 1.
 	
@@ -702,7 +702,7 @@ BlSingleLineTextParagraphExamples >> measurer [
 	<gtExample>
 	| aMeasurer |
 	
-	aMeasurer := BlTextParagraphFixedSpanMeasurer new.
+	aMeasurer := BlMockedTextMeasurer new.
 	aMeasurer ascent: self ascent.
 	aMeasurer descent: self descent.
 	aMeasurer glyphWidth: self glyphWidth.
@@ -762,7 +762,7 @@ BlSingleLineTextParagraphExamples >> positionAtIndexInEmpty [
 	| aParagraph aPoint |
 	
 	aParagraph := self measuredEmpty.
-	aPoint := aParagraph positionAt: 0 on: self measurer.
+	aPoint := aParagraph positionAt: 0.
 	
 	self assert: aPoint equals: 0 @ aParagraph baseline y.
 	
@@ -775,7 +775,7 @@ BlSingleLineTextParagraphExamples >> realMeasuredHelloWorld [
 	| aParagraph aLine aFirstSpan aSecondSpan aText aHello aWorld |
 	
 	aParagraph := self helloWorldParagraph.
-	aParagraph measureOn: Bloc preferableSpartaCanvas offscreen.
+	aParagraph measureOn: self realMeasurer.
 	
 	aText := aParagraph text.
 	aHello := aText from: 1 to: 5.
@@ -819,7 +819,7 @@ BlSingleLineTextParagraphExamples >> realMeasuredHelloWorld [
 BlSingleLineTextParagraphExamples >> realMeasurer [
 	<gtExample>
 
-	^ Bloc preferableSpartaCanvas offscreen
+	^ BlSpartaCanvasTextMeasurer new spartaCanvas: Bloc preferableSpartaCanvas offscreen
 ]
 
 { #category : #'geometry - empty' }

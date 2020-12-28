@@ -1,15 +1,15 @@
 Class {
-	#name : #BlTextParagraphFixedSpan,
+	#name : #BlMockedTextParagraphSpan,
 	#superclass : #BlTextParagraphSpan,
 	#category : #'Bloc-Text-Text-Mocked'
 }
 
 { #category : #accessing }
-BlTextParagraphFixedSpan >> advance: aNumber [
+BlMockedTextParagraphSpan >> advance: aNumber [
 	advance := aNumber
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpan >> left: aNumber [
+BlMockedTextParagraphSpan >> left: aNumber [
 	left := aNumber
 ]

@@ -24,7 +24,7 @@ BlTextParagraphSpan >> gtPositionsAtIndicesFor: aView [
 					0 to: self spanLength do: [ :eachIndex |
 						| aPosition |
 						
-						aPosition := self positionAt: eachIndex on: aCanvas.
+						aPosition := self positionAt: eachIndex.
 						aCanvas stroke
 							path: (aCanvas shape line: aPosition x @ self top to: aPosition x @ (self top + self height));
 							width: 1.0 / aScale;

@@ -159,9 +159,7 @@ BlTextElement >> fontSize: aNumber [
 BlTextElement >> indexAtScreenPosition: aPoint [
 	<return: #Number>
 
-	^ self paragraph
-		indexAtPosition: aPoint - self padding topLeft
-		on: self measurer measurer
+	^ self paragraph indexAtPosition: aPoint - self padding topLeft
 ]
 
 { #category : #initialization }
@@ -344,7 +342,7 @@ BlTextElement >> screenPositionAt: aTextIndex [
 	<return: #Point>
 	| aScreenPosition |
 	
-	aScreenPosition := self paragraph positionAt: aTextIndex on: self measurer measurer.
+	aScreenPosition := self paragraph positionAt: aTextIndex.
 	^ (aScreenPosition x + self padding left) @ ((self height + self padding height) / 2.0)
 ]
 
