@@ -157,11 +157,10 @@ BlTextElement >> fontSize: aNumber [
 
 { #category : #geometry }
 BlTextElement >> indexAtScreenPosition: aPoint [
-	<return: #Number>
-
-	^ self paragraph
-		indexAtPosition: aPoint - self padding topLeft
-		on: self measurer measurer
+        <return: #Number>
+        ^ self paragraph
+                indexAtPosition: aPoint - self padding topLeft
+                on: Bloc preferableSpartaCanvas offscreen
 ]
 
 { #category : #initialization }
@@ -341,11 +340,10 @@ BlTextElement >> releaseParagraph [
 
 { #category : #geometry }
 BlTextElement >> screenPositionAt: aTextIndex [
-	<return: #Point>
-	| aScreenPosition |
-	
-	aScreenPosition := self paragraph positionAt: aTextIndex on: self measurer measurer.
-	^ (aScreenPosition x + self padding left) @ ((self height + self padding height) / 2.0)
+        <return: #Point>
+        | aScreenPosition |
+        aScreenPosition := self paragraph positionAt: aTextIndex on: Bloc preferableSpartaCanvas offscreen.
+        ^ (aScreenPosition x + self padding left) @ ((self height + self padding height) / 2.0)
 ]
 
 { #category : #'selection - management' }

@@ -1174,7 +1174,12 @@ BlSpace >> icon [
 { #category : #'window - properties' }
 BlSpace >> icon: aStencil [
 	"aStencil is an object that undestands #asElement and returns ${class:BlElement}$"
-	iconStencil := aStencil
+	
+	iconStencil = aStencil ifTrue: [ ^ self ].
+	
+	iconStencil := aStencil.
+	
+	self fireEvent: (BlSpaceIconChangedEvent new iconStencil: aStencil)
 ]
 
 { #category : #accessing }
