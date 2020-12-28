@@ -62,3 +62,13 @@ BlTextElementMockedMeasurer >> initialize [
 BlTextElementMockedMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
 	measurer measureTextParagraph: aBlTextParagraph
 ]
+
+{ #category : #'font - metrics' }
+BlTextElementMockedMeasurer >> textOffset [
+	^ measurer textOffset
+]
+
+{ #category : #'font - metrics' }
+BlTextElementMockedMeasurer >> textOffset: aNumber [
+	measurer textOffset: aNumber
+]
