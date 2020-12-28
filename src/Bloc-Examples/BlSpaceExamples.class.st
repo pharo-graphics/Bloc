@@ -29,6 +29,29 @@ BlSpaceExamples >> animatedElement [
 		addAnimation: self infiniteAnimation
 ]
 
+{ #category : #'examples - icon' }
+BlSpaceExamples >> changeIcon [
+	<gtExample>
+	| aSpace aCollection |
+	aSpace := self emptySpace.
+	
+	aCollection := OrderedCollection new.
+	aSpace 
+		when: BlSpaceIconChangedEvent 
+		do: [ :anEvent | aCollection add: anEvent ].
+	
+	aSpace icon: self iconStencil.
+	
+	self assert: aCollection size equals: 1.
+	self assert: aCollection first class equals: BlSpaceIconChangedEvent.
+	self assert: aCollection first iconStencil class equals: BlSpaceIconDummyStencil.
+	
+	aSpace icon: aSpace icon.
+	self assert: aCollection size equals: 1.
+	
+	^ aSpace
+]
+
 { #category : #'instance creation' }
 BlSpaceExamples >> emptySpace [
 	<gtExample>
@@ -52,6 +75,7 @@ BlSpaceExamples >> emptySpace [
 	self assert: aSpace isLayoutRequested.
 	self assert: aSpace isVisible not.
 	self assert: aSpace title isEmpty.
+	self assert: aSpace icon isNil.
 
 	^ aSpace
 ]
@@ -69,6 +93,24 @@ BlSpaceExamples >> firstPulse [
 	self assert: aSpace root extent equals: aSpace extent.
 
 	^ aSpace
+]
+
+{ #category : #'examples - icon' }
+BlSpaceExamples >> iconElement [
+	<gtExample>
+	^ BlElement new
+		size: 16@16;
+		background: (Color green alpha: 0.5);
+		geometry: BlCircle new.
+]
+
+{ #category : #'examples - icon' }
+BlSpaceExamples >> iconStencil [
+	<gtExample>
+	| aStencil |
+	aStencil := BlSpaceIconDummyStencil new.
+	aStencil block: [ self iconElement ].
+	^ aStencil
 ]
 
 { #category : #'private - instance creation' }
