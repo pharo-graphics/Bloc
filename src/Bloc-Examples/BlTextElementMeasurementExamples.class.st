@@ -13,7 +13,7 @@ BlTextElementMeasurementExamples >> ascent [
 BlTextElementMeasurementExamples >> customMeasurer [
 	<gtExample>
 	
-	^ BlTextElementFixedMeasurer new
+	^ BlTextElementMockedMeasurer new
 		ascent: self ascent;
 		descent: self descent;
 		glyphHeight: self glyphHeight;

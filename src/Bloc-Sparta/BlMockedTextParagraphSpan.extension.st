@@ -1,7 +1,7 @@
-Extension { #name : #BlTextParagraphFixedSpan }
+Extension { #name : #BlMockedTextParagraphSpan }
 
 { #category : #'*Bloc-Sparta' }
-BlTextParagraphFixedSpan >> drawOnSpartaCanvas: aSpartaCanvas [
+BlMockedTextParagraphSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 	| theAttributes aTextPainter aFontBuilder aCharacterWidth aCharacterHeight |
 	self spanLength isZero
 		ifTrue: [ ^ self ].

@@ -19,6 +19,14 @@ BlTextParagraphSpanMeasurer >> createParagraphSpan [
 ]
 
 { #category : #measurement }
+BlTextParagraphSpanMeasurer >> measureSpan: aBlSpan [
+	"Measure a given text span and return paragraph span with computed metrics"
+	<return: #BlTextParagraphSpan>
+	
+	self subclassResponsibility
+]
+
+{ #category : #measurement }
 BlTextParagraphSpanMeasurer >> measureSpan: aBlSpan on: aCanvas [
 	"Measure a given text span and return paragraph span with computed metrics"
 	<return: #BlTextParagraphSpan>

@@ -22,7 +22,7 @@ BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
 	| anAttribute aCanvas aSpan aLine |
 
 	anAttribute := self underlineAttribute.
-	aSpan := BlTextParagraphFixedSpan new
+	aSpan := BlMockedTextParagraphSpan new
 		left: -5;
 		baseline: 20@10;
 		advance: 30.

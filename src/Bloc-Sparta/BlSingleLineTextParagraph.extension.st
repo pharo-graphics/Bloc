@@ -18,10 +18,10 @@ BlSingleLineTextParagraph >> drawHighlightsOnSpartaCanvas: aCanvas padding: aBlI
 
 			aSelectionStartPosition := aStart isZero
 				ifTrue: [ 0@0 ]
-				ifFalse: [ (aSelectionStartSpan positionAt: aStart on: aCanvas) + (aBlInsets left @ 0) ].
+				ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (aBlInsets left @ 0) ].
 			aSelectionEndPosition := anEnd = self text size
-				ifTrue: [ (aSelectionEndSpan positionAt: anEnd on: aCanvas) + (aBlInsets width @ 0) ]
-				ifFalse: [ (aSelectionEndSpan positionAt: anEnd on: aCanvas) + (aBlInsets left @ 0) ].
+				ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (aBlInsets width @ 0) ]
+				ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (aBlInsets left @ 0) ].
 
 			aSelectionBounds := (aSelection to > self text size)
 				"containerExtent includes padding"
@@ -56,10 +56,10 @@ BlSingleLineTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas padding: aBlIn
 
 		aSelectionStartPosition := aStart isZero
 			ifTrue: [ 0@0 ]
-			ifFalse: [ (aSelectionStartSpan positionAt: aStart on: aCanvas) + (aBlInsets left @ 0) ].
+			ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (aBlInsets left @ 0) ].
 		aSelectionEndPosition := anEnd = self text size
-			ifTrue: [ (aSelectionEndSpan positionAt: anEnd on: aCanvas) + (aBlInsets width @ 0) ]
-			ifFalse: [ (aSelectionEndSpan positionAt: anEnd on: aCanvas) + (aBlInsets left @ 0) ].
+			ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (aBlInsets width @ 0) ]
+			ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (aBlInsets left @ 0) ].
 
 		aSelectionBounds := (aSelection to > self text size)
 			"containerExtent includes padding"
@@ -70,11 +70,4 @@ BlSingleLineTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas padding: aBlIn
 			paint: ((Color r: 105 g: 171 b: 253 range: 255) alpha: 0.35);
 			path: aSelectionBounds;
 			draw ]
-]
-
-{ #category : #'*Bloc-Sparta' }
-BlSingleLineTextParagraph >> measureOnSpartaCanvas: aSpartaCanvas [
-	self
-		measureOn: aSpartaCanvas
-		with: BlSpartaTextParagraphSpanMeasurer new
 ]

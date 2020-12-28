@@ -19,8 +19,7 @@ BlTextElement >> drawOnSpartaCanvas: aCanvas [
 
 			aCanvas transform
 				by: [ :t | t translateBy: self padding topLeft ]
-				during: [
-					paragraph drawOn: aCanvas ].
+				during: [ paragraph drawOn: aCanvas ].
 
 			paragraph
 				drawSelectionOnSpartaCanvas: aCanvas

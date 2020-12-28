@@ -27,8 +27,3 @@ BlTextParagraph >> createSpartaTextPainter: aBrSpan on: aSpartaCanvas [
 BlTextParagraph >> drawOnSpartaCanvas: aCanvas [
 	self subclassResponsibility
 ]
-
-{ #category : #'*Bloc-Sparta' }
-BlTextParagraph >> measureOnSpartaCanvas: aSpartaCanvas [
-	self subclassResponsibility
-]

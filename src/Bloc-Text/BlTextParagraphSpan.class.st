@@ -65,11 +65,6 @@ BlTextParagraphSpan >> finalize [
 
 { #category : #geometry }
 BlTextParagraphSpan >> indexAtPosition: aPoint [
-	self deprecated: 'Use indexAtPosition:on:'
-]
-
-{ #category : #geometry }
-BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
 	"I return a cursor index at a given position as a Point provided in local coordinates of this span"
 	<return: #Number>
 	| aWidth aMeasurer |
@@ -90,9 +85,7 @@ BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
 				text: (span text from: (1 min: anIndex) to: anIndex)
 				attributes: self span attributes.
 			
-			aParagraph := aMeasurer
-				measureSpan: aSubSpan
-				on: aCanvas.
+			aParagraph := aMeasurer measureTextSpan: aSubSpan.
 			
 			(aWidth closeTo: aParagraph advance epsilon: 0.1)
 				ifTrue: [ 0 ]
@@ -115,9 +108,7 @@ BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
 					aSubSpan := BlSpan
 						text: (span text from: (1 min: leftIndex) to: leftIndex)
 						attributes: self span attributes.
-					aParagraph := aMeasurer
-						measureSpan: aSubSpan
-						on: aCanvas.
+					aParagraph := aMeasurer measureTextSpan: aSubSpan.
 					leftWidth := aParagraph advance.
 					leftSpanIndex := leftIndex ].
 
@@ -130,9 +121,7 @@ BlTextParagraphSpan >> indexAtPosition: aPoint on: aCanvas [
 					aSubSpan := BlSpan
 						text: (span text from: (1 min: rightIndex) to: rightIndex)
 						attributes: self span attributes.
-					aParagraph := aMeasurer
-						measureSpan: aSubSpan
-						on: aCanvas.
+					aParagraph := aMeasurer measureTextSpan: aSubSpan.
 					rightWidth := aParagraph advance.
 					rightSpanIndex := rightIndex ].
 
@@ -206,11 +195,6 @@ BlTextParagraphSpan >> paragraph: aTextParagraph [
 
 { #category : #geometry }
 BlTextParagraphSpan >> positionAt: anIndex [
-	self deprecated: 'Use positionAt:on:'
-]
-
-{ #category : #geometry }
-BlTextParagraphSpan >> positionAt: anIndex on: aCanvas [
 	<return: #Point>
 	| aSpanIndex aSubSpan aMeasuredSpan aMeasurer aPositionY aPositionX |
 
@@ -230,9 +214,7 @@ BlTextParagraphSpan >> positionAt: anIndex on: aCanvas [
 		text: (span text from: (1 min: aSpanIndex) to: aSpanIndex)
 		attributes: self span attributes.
 
-	aMeasuredSpan := aMeasurer
-		measureSpan: aSubSpan
-		on: aCanvas.
+	aMeasuredSpan := aMeasurer measureTextSpan: aSubSpan.
 	
 	^ (aPositionX + aMeasuredSpan advance) @ aPositionY
 ]

@@ -4,10 +4,8 @@ I am a span measurer that assignes a fixed extent to every text character ignori
 Useful for testing the paragraph behaviour
 "
 Class {
-	#name : #BlTextParagraphFixedSpanMeasurer,
-	#superclass : #BlTextParagraphSpanMeasurer,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#name : #BlMockedTextMeasurer,
+	#superclass : #BlHostTextMeasurer,
 	#instVars : [
 		'ascent',
 		'descent',
@@ -24,14 +22,14 @@ Class {
 }
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> ascent [
+BlMockedTextMeasurer >> ascent [
 	<return: #Number>
 
 	^ ascent
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> ascent: aNumber [
+BlMockedTextMeasurer >> ascent: aNumber [
 
 	self
 		assert: [ aNumber <= 0 ]
@@ -41,19 +39,19 @@ BlTextParagraphFixedSpanMeasurer >> ascent: aNumber [
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphFixedSpanMeasurer >> createParagraphSpan [
-	^ BlTextParagraphFixedSpan new measurer: self
+BlMockedTextMeasurer >> createParagraphSpan [
+	^ BlMockedTextParagraphSpan new measurer: self
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> descent [
+BlMockedTextMeasurer >> descent [
 	<return: #Number>
 
 	^ descent
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> descent: aNumber [
+BlMockedTextMeasurer >> descent: aNumber [
 	self
 		assert: [ aNumber >= 0 ]
 		description: [ 'Descent must be positive' ].
@@ -62,29 +60,29 @@ BlTextParagraphFixedSpanMeasurer >> descent: aNumber [
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> glyphWidth [
+BlMockedTextMeasurer >> glyphWidth [
 	<return: #Number>
 
 	^ glyphWidth
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> glyphWidth: aNumber [
+BlMockedTextMeasurer >> glyphWidth: aNumber [
 	glyphWidth := aNumber
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> height [
+BlMockedTextMeasurer >> height [
 	^ height
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> height: aNumber [
+BlMockedTextMeasurer >> height: aNumber [
 	height := aNumber
 ]
 
 { #category : #initialization }
-BlTextParagraphFixedSpanMeasurer >> initialize [
+BlMockedTextMeasurer >> initialize [
 	super initialize.
 
 	ascent := -11.
@@ -94,8 +92,13 @@ BlTextParagraphFixedSpanMeasurer >> initialize [
 	textOffset := 0
 ]
 
+{ #category : #dispatch }
+BlMockedTextMeasurer >> measureTextParagraph: aBrTextParagraph [
+	aBrTextParagraph measureOn: self
+]
+
 { #category : #measurement }
-BlTextParagraphFixedSpanMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
+BlMockedTextMeasurer >> measureTextSpan: aBlSpan [
 	<return: #BlTextParagraphSpan>
 	| aTextRun aParagraphSpan |
 
@@ -119,29 +122,22 @@ BlTextParagraphFixedSpanMeasurer >> measureSpan: aBlSpan on: aSpartaCanvas [
 	^ aParagraphSpan
 ]
 
-{ #category : #dispatch }
-BlTextParagraphFixedSpanMeasurer >> measureTextParagraph: aBrTextParagraph [
-	aBrTextParagraph
-		measureOn: self
-		with: self
-]
-
 { #category : #metrics }
-BlTextParagraphFixedSpanMeasurer >> measuredHeight [
+BlMockedTextMeasurer >> measuredHeight [
 	^ measuredHeight
 ]
 
 { #category : #metrics }
-BlTextParagraphFixedSpanMeasurer >> measuredWidth [
+BlMockedTextMeasurer >> measuredWidth [
 	^ measuredWidth
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> textOffset [
+BlMockedTextMeasurer >> textOffset [
 	^ textOffset
 ]
 
 { #category : #accessing }
-BlTextParagraphFixedSpanMeasurer >> textOffset: aNumber [
+BlMockedTextMeasurer >> textOffset: aNumber [
 	textOffset := aNumber
 ]
