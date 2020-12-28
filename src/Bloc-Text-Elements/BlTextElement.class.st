@@ -393,6 +393,9 @@ BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 
 	paragraph
 		ifNil: [ ^ true ].
+		
+	paragraph isEmpty
+		ifTrue: [ ^ true ].
 
 	(self layout previousMeasurementSpec = anExtentMeasurementSpec)
 		ifFalse: [ ^ true ].
