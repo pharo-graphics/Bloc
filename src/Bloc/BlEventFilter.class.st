@@ -30,7 +30,7 @@ BlEventFilter >> eventClass: aBlEventClass [
 	eventClass := aBlEventClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api - accessing' }
 BlEventFilter >> eventsToHandle [
 	^ { self eventClass }
 ]
