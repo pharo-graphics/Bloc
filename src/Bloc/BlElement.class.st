@@ -1404,14 +1404,14 @@ BlElement >> focusables: anOrderedCollection along: aBlFocusSearchDirection [
 		of: self
 ]
 
-{ #category : #accessing }
+{ #category : #'private - accessing' }
 BlElement >> focused [
 	<return: #Boolean>
 
 	^ visuals focused
 ]
 
-{ #category : #accessing }
+{ #category : #'private - accessing' }
 BlElement >> focused: aBoolean [
 	visuals := visuals focused: aBoolean
 ]
@@ -1630,7 +1630,7 @@ BlElement >> hasChildren [
 
 { #category : #'focus testing' }
 BlElement >> hasFocus [
-	"Return true if I have or contain a focused element, false otherwise"
+	"Return true if an element is focused or contains a focused element, false otherwise"
 	<return: #Boolean>
 
 	^ self isFocused or: [
@@ -1889,7 +1889,8 @@ BlElement >> isFocusable [
 
 { #category : #'focus testing' }
 BlElement >> isFocused [
-	"Returns true if I have focus, false otherwise"
+	"Returns true if I am focused, false otherwise.
+	Note: It is possible that an element has focus but is not focused by itself"
 	<return: #Boolean>
 
 	^ self focused
