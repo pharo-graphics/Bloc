@@ -2554,6 +2554,15 @@ BlElement >> onRemovedFromSceneGraph [
 	self layout onCleanUp: self
 ]
 
+{ #category : #'hooks - session' }
+BlElement >> onSessionChanged: aNewSession [
+	"Is sent when a Session is changed, for example if the program is closed and re-opened.
+	When this happens the external heap memory (FFI Objects) is no longer valid.
+	If an element relies on an external memory it is a good place to trigger an update here"
+
+	self childrenDo: [ :eachChild | eachChild onSessionChanged: aNewSession ]
+]
+
 { #category : #'hooks - geometry' }
 BlElement >> onTransformationChanged [
 	"Is sent when my transformation changed"

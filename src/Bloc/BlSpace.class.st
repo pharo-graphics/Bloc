@@ -858,9 +858,7 @@ BlSpace >> ensureSession [
 	session == Smalltalk session
 		ifTrue: [ ^ self ].
 
-	session := Smalltalk session.
-	self beDirtyArea.
-	self requestNextPulse
+	self onSessionChanged: Smalltalk session
 ]
 
 { #category : #'event management accessing' }
@@ -1429,6 +1427,15 @@ BlSpace >> needsStyleComputation: anElement [
 	
 	^ self elementsNeedingStyle
 		anySatisfy: [ :eachElement | eachElement = anElement or: [ eachElement hasParent: anElement ] ]
+]
+
+{ #category : #pulse }
+BlSpace >> onSessionChanged: aNewSession [
+	session := aNewSession.
+	self beDirtyArea.
+	self requestNextPulse.
+	
+	self root onSessionChanged: aNewSession
 ]
 
 { #category : #'window - properties' }

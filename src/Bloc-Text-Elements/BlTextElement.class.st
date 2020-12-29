@@ -307,6 +307,13 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 		during: [ self measureChildren: anExtentMeasurementSpec ]
 ]
 
+{ #category : #'hooks - session' }
+BlTextElement >> onSessionChanged: aNewSession [
+	super onSessionChanged: aNewSession.
+	
+	self textChanged
+]
+
 { #category : #'private - paragraph' }
 BlTextElement >> paragraph [
 	<return: #BlTextParagraph>
