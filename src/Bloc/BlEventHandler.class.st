@@ -63,7 +63,7 @@ BlEventHandler >> eventClass: anObject [
 	eventClass := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api - accessing' }
 BlEventHandler >> eventsToHandle [
 	^ { self eventClass }
 ]
