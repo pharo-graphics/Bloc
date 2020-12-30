@@ -46,6 +46,7 @@ BlTextParagraphMeasurer >> hasAvailableSpace [
 	<return: #Boolean>
 
 	^ self availableWidth > 0
+		and: [ self availableHeight > 0 ]
 ]
 
 { #category : #initialization }

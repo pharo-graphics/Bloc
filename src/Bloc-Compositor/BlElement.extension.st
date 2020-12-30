@@ -131,7 +131,7 @@ BlElement >> paintMeAndChildrenOn: aCompositorPainter offset: anOffset [
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintOn: aCompositorPainter offset: anOffset [
 	| isOriginal |
-	
+
 	"For performance reasons we would like to limit amount of access
 	to the painter's canvas. To do so we detect before-hand if there is anything
 	we need to draw using #shouldDrawBackgroundOrBorder, however this only works
@@ -143,7 +143,7 @@ BlElement >> paintOn: aCompositorPainter offset: anOffset [
 
 	(isOriginal and: [ self shouldDrawBackgroundOrBorder not and: [ self effect isNullEffect ] ])
 		ifTrue: [ ^ self ].
-		
+
 	self effect
 		paintOn: aCompositorPainter
 		offset: anOffset

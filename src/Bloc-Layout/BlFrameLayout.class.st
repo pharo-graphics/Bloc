@@ -76,7 +76,7 @@ For more example on how to use frame layouts, check out these classes:
 "
 Class {
 	#name : #BlFrameLayout,
-	#superclass : #BlLayout,
+	#superclass : #BlNodeBasedLayout,
 	#category : #'Bloc-Layout-Frame'
 }
 
@@ -133,41 +133,11 @@ BlFrameLayout >> layout: aParentNode [
 		eachChildNode position: (childBounds position + aTranslation) ]
 ]
 
-{ #category : #layout }
-BlFrameLayout >> layout: anElement in: aRectangle [
-	| aParentNode |
-	
-	self layoutIgnored: anElement.
-
-	aParentNode := anElement userData
-		at: #layoutNode
-		ifAbsent: [ ^ self ].
-
-	aParentNode extent: aRectangle extent.
-
-	self layout: aParentNode.
-
-	aParentNode children do: [ :eachChildNode |
-		eachChildNode element applyLayoutIn: eachChildNode layoutBounds ]
-]
-
 { #category : #measure }
 BlFrameLayout >> measure: aParentNode [
 	self preMeasureChildrenNodes: aParentNode.
 	self measureParentNode: aParentNode.
 	self postMeasureChildrenNodes: aParentNode
-]
-
-{ #category : #measure }
-BlFrameLayout >> measure: anElement with: anExtentSpec [
-	| aParentNode |
-
-	aParentNode := (BlLayoutParentNode toMeasure: anElement) extentSpec: anExtentSpec.
-	self measure: aParentNode.
-	anElement measuredExtent: aParentNode extent.
-	anElement userData at: #layoutNode put: aParentNode.
-
-	self measureIgnored: anElement with: anExtentSpec
 ]
 
 { #category : #measure }

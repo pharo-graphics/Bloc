@@ -65,17 +65,6 @@ BlTextParagraphLine >> isEmpty [
 	^ self spans isEmpty
 ]
 
-{ #category : #measurement }
-BlTextParagraphLine >> layout [
-
-	self spans
-		ifEmpty: [ ^ self ].
-
-	self spanAdded: self spans first.	
-	2 to: self spans size do:
-		[ :index | self spanAdded: (self spans at: index) after: (self spans at: index - 1) ]
-]
-
 { #category : #private }
 BlTextParagraphLine >> moveSpansBy: aPoint [
 	"Move baseline of all spans by a given delta as a point"
@@ -93,7 +82,18 @@ BlTextParagraphLine >> normalize: aScale [
 		
 	spans do: [ :aSpan | aSpan normalize: aScale ].
 	
-	self layout
+	self recomputeLineLayout
+]
+
+{ #category : #measurement }
+BlTextParagraphLine >> recomputeLineLayout [
+
+	self spans
+		ifEmpty: [ ^ self ].
+
+	self spanAdded: self spans first.	
+	2 to: self spans size do:
+		[ :index | self spanAdded: (self spans at: index) after: (self spans at: index - 1) ]
 ]
 
 { #category : #hooks }

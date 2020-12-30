@@ -13,9 +13,9 @@ BlTextElementHostMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextEle
 			aTextElement space
 				measureTextParagraph: aBlTextParagraph
 				ifNotAvailable: [
-					(BlSpartaCanvasTextMeasurer new spartaCanvas: Bloc preferableSpartaCanvas offscreen)
+					(BlSpartaCanvasTextMeasurer new canvas: Bloc preferableSpartaCanvas offscreen)
 						measureTextParagraph: aBlTextParagraph ] ]
 		ifFalse: [
-			(BlSpartaCanvasTextMeasurer new spartaCanvas: Bloc preferableSpartaCanvas offscreen)
+			(BlSpartaCanvasTextMeasurer new canvas: Bloc preferableSpartaCanvas offscreen)
 				measureTextParagraph: aBlTextParagraph ]
 ]
