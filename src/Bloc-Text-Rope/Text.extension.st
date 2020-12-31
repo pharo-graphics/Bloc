@@ -1,6 +1,6 @@
 Extension { #name : #Text }
 
-{ #category : #'*Bloc-Text' }
+{ #category : #'*Bloc-Text-Rope' }
 Text >> asRopedText [ 
 	"Answer a RopedText with most of the attributes of the receiver.
 	This is really ssssllllooowwww"
