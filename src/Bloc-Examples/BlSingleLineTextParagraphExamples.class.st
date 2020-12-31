@@ -819,7 +819,7 @@ BlSingleLineTextParagraphExamples >> realMeasuredHelloWorld [
 BlSingleLineTextParagraphExamples >> realMeasurer [
 	<gtExample>
 
-	^ BlSpartaCanvasTextMeasurer new spartaCanvas: Bloc preferableSpartaCanvas offscreen
+	^ BlSpartaCanvasTextMeasurer new canvas: Bloc preferableSpartaCanvas offscreen
 ]
 
 { #category : #'geometry - empty' }

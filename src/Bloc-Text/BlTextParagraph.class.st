@@ -385,6 +385,11 @@ BlTextParagraph >> selection: aBlTextSelection [
 	selection := aBlTextSelection
 ]
 
+{ #category : #accessing }
+BlTextParagraph >> session [
+	^ session
+]
+
 { #category : #testing }
 BlTextParagraph >> skipWhitespaceIn: aString after: aStart [
 	"Return an index of the first non-whitespace character in aString after aStart index"

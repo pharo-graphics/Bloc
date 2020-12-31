@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #accessing }
-BlSpartaCanvasTextMeasurer >> spartaCanvas [
-	^ spartaCanvas
+BlSpartaCanvasTextMeasurer >> canvas: anObject [
+	spartaCanvas := anObject
 ]
 
 { #category : #accessing }
-BlSpartaCanvasTextMeasurer >> spartaCanvas: anObject [
-	spartaCanvas := anObject
+BlSpartaCanvasTextMeasurer >> spartaCanvas [
+	^ spartaCanvas
 ]

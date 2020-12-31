@@ -290,6 +290,17 @@ BlTextElement >> measurer: anObject [
 	self textChanged
 ]
 
+{ #category : #'hooks - session' }
+BlTextElement >> onAddedToSceneGraph [
+	super onAddedToSceneGraph.
+	
+	paragraph
+		ifNil: [ ^ self ].
+		
+	paragraph session == Smalltalk session
+		ifFalse: [ self textChanged ]
+]
+
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 	self
@@ -335,6 +346,9 @@ BlTextElement >> rawParagraph [
 { #category : #'private - paragraph' }
 BlTextElement >> releaseParagraph [
 	| aParagraph |
+	
+	paragraph
+		ifNil: [ ^ self ].
 
 	aParagraph := paragraph.
 
@@ -457,7 +471,7 @@ BlTextElement >> text: aTextModel [
 { #category : #'change reporting' }
 BlTextElement >> textChanged [
 	"text layout is no more valid, remove it"
-	paragraph := nil.
+	self releaseParagraph.
 
 	"request redraw and layout"
 	self requestLayout.
