@@ -1,3 +1,22 @@
+"
+I am a port of the old BouncingAtomsMorph demo.
+
+The following will open a demo in a new window:
+[[[
+BlExampleBouncingAtomsElement open
+]]]
+
+Alternatively inspect the following:
+[[[
+BlExampleBouncingAtomsElement demo 
+]]]
+
+For a demo, open a new Inspector window.
+Inspect the children and select a random one.
+Set its background color to blue (self background: Color blue).
+Query and set its velocity to 0@0 and 20@20, and its size to 10@10.
+
+"
 Class {
 	#name : #BlExampleBouncingAtomsElement,
 	#superclass : #BlElement,
@@ -8,6 +27,15 @@ Class {
 	],
 	#category : #'Bloc-Examples-Showcase - Bouncing Atoms'
 }
+
+{ #category : #accessing }
+BlExampleBouncingAtomsElement class >> demo [
+	<script: 'self demo'>
+	^ self new
+		background: Color lightGreen;
+		border: (BlBorder paint: Color green width: 1);
+		initializeWith: 300 ofSize: 5 @ 5 within: 400 @ 300
+]
 
 { #category : #'instance creation' }
 BlExampleBouncingAtomsElement class >> open [
@@ -86,8 +114,9 @@ BlExampleBouncingAtomsElement >> randomizePositionOf: anAtomElement in: aRectang
 { #category : #'stepping and presenter' }
 BlExampleBouncingAtomsElement >> step [
 	"Bounce those atoms!"
-	| r |
 
-	r := self bounds topLeft corner: (self bounds extent - (8@8)).
+	| r |
+	r := self measuredBounds topLeft
+		corner: self bounds extent - BlExampleAtomElement defaultSize.
 	self childrenDo: [ :m | m bounceIn: r ]
 ]

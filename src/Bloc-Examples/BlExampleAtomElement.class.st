@@ -1,3 +1,11 @@
+"
+I am an atom that bounces inside a ${class:name=BlExampleBouncingAtomsElement}$. 
+For a demo, inspect:
+[[[
+BlExampleBouncingAtomsElement demo
+]]]
+
+"
 Class {
 	#name : #BlExampleAtomElement,
 	#superclass : #BlElement,
@@ -6,6 +14,11 @@ Class {
 	],
 	#category : #'Bloc-Examples-Showcase - Bouncing Atoms'
 }
+
+{ #category : #accessing }
+BlExampleAtomElement class >> defaultSize [
+	^ 8 @ 7
+]
 
 { #category : #private }
 BlExampleAtomElement >> bounceIn: aRect [
@@ -56,7 +69,7 @@ BlExampleAtomElement >> initialize [
 	"Make a new atom with a random position and velocity."
 	super initialize.
 
-	self size: 8 @ 7.
+	self size: self class defaultSize.
 	self background: Color red
 ]
 
