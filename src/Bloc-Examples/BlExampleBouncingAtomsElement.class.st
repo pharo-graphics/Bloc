@@ -69,11 +69,17 @@ BlExampleBouncingAtomsElement >> drawMeAndChildrenOnSpartaCanvas: aCanvas [
 ]
 
 { #category : #initialization }
-BlExampleBouncingAtomsElement >> initialize [
-	super initialize.
+BlExampleBouncingAtomsElement >> go [
+	"Start the animation"
 	
 	self enqueueTask: (BlRepeatedTaskAction new delay: 0 milliSeconds; action: [ self step ]).
 	damageReported := false
+]
+
+{ #category : #initialization }
+BlExampleBouncingAtomsElement >> initialize [
+	super initialize.
+	self go
 ]
 
 { #category : #initialization }
