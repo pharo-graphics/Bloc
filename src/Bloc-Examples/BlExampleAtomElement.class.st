@@ -67,10 +67,16 @@ BlExampleAtomElement >> fullDrawOnSpartaCanvas: aCanvas [
 { #category : #private }
 BlExampleAtomElement >> initialize [
 	"Make a new atom with a random position and velocity."
-	super initialize.
 
+	super initialize.
 	self size: self class defaultSize.
-	self background: Color red
+	self background: Color red.
+	self addEventHandler: BlPullHandler new.
+	self
+		addEventHandler:
+			(BlEventHandler
+				on: BlDoubleClickEvent
+				do: [ :evt | self phlow spawnObject: self ])
 ]
 
 { #category : #accessing }
