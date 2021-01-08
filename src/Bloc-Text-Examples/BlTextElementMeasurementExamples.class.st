@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTextElementMeasurementExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Text-Element'
+	#category : #'Bloc-Text-Examples-Measurement'
 }
 
 { #category : #'font - metrics' }

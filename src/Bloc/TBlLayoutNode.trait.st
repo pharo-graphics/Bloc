@@ -14,6 +14,18 @@ TBlLayoutNode >> constraints: aBlLayoutConstraints [
 ]
 
 { #category : #'api - resizer' }
+TBlLayoutNode >> fitContent [
+	self
+		hFitContent;
+		vFitContent
+]
+
+{ #category : #'api - resizer' }
+TBlLayoutNode >> hFitContent [
+	self constraints horizontal fitContent
+]
+
+{ #category : #'api - resizer' }
 TBlLayoutNode >> hMatchParent [
 	self constraints horizontal matchParent
 ]
@@ -83,6 +95,11 @@ TBlLayoutNode >> padding [
 { #category : #'api - resizer' }
 TBlLayoutNode >> vExact: aNumber [
 	self constraints vertical exact: aNumber
+]
+
+{ #category : #'api - resizer' }
+TBlLayoutNode >> vFitContent [
+	self constraints vertical fitContent
 ]
 
 { #category : #'api - resizer' }

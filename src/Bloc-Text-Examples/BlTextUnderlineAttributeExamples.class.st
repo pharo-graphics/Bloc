@@ -13,7 +13,7 @@ ${example:BlTextUnderlineAttributeExamples>>#textWithUnderlineDo|previewShow=#gt
 Class {
 	#name : #BlTextUnderlineAttributeExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Text'
+	#category : #'Bloc-Text-Examples-Model'
 }
 
 { #category : #attribute }

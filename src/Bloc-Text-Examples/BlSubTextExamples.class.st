@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSubTextExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Text'
+	#category : #'Bloc-Text-Examples-Model'
 }
 
 { #category : #'instance creation' }

@@ -24,6 +24,8 @@ BaselineOfBlocExamples >> baseline: spec [
 		spec 
 			package: #'Bloc-Compositor-Examples' with: [
 				spec requires: #('Bloc' 'Bloc-Examples'). ];
+			package: #'Bloc-Text-Examples' with: [
+				spec requires: #(#'Bloc') ];
 			package: #'Bloc-Examples' with: [
 				spec requires: #(#'Bloc') ] ].
 ]
