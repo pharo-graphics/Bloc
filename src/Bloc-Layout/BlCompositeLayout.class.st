@@ -24,6 +24,13 @@ BlCompositeLayout >> layout: aParentLayoutNode [
 	layouts do: [ :eachLayout | eachLayout layout: aParentLayoutNode ]
 ]
 
+{ #category : #protected }
+BlCompositeLayout >> mayInfluencePosition [
+	"Return true if the layout may influence the position of the element with this layout"
+
+	^ layouts anySatisfy: [ :eachLayout | eachLayout mayInfluencePosition ]
+]
+
 { #category : #measure }
 BlCompositeLayout >> measure: aParentLayoutNode [
 	layouts do: [ :eachLayout | eachLayout measure: aParentLayoutNode ]

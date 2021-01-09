@@ -7,7 +7,8 @@ Class {
 		'children',
 		'extentSpec',
 		'constraints',
-		'extent'
+		'extent',
+		'position'
 	],
 	#category : #'Bloc-Layouts-Model'
 }
@@ -129,12 +130,23 @@ BlLayoutParentNode >> initialize [
 	super initialize.
 	
 	children := #().
-	extent := 0.0@0.0
+	position := 0.0@0.0.
+	extent := 0.0@0.0.
 ]
 
 { #category : #accessing }
 BlLayoutParentNode >> parent [
 	^ self
+]
+
+{ #category : #accessing }
+BlLayoutParentNode >> position [
+	^ position
+]
+
+{ #category : #accessing }
+BlLayoutParentNode >> position: aPoint [
+	position := aPoint
 ]
 
 { #category : #'api - converting' }

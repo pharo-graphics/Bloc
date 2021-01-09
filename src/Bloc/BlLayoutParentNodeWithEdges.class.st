@@ -70,6 +70,16 @@ BlLayoutParentNodeWithEdges >> parentNode: anObject [
 	parentNode := anObject
 ]
 
+{ #category : #accessing }
+BlLayoutParentNodeWithEdges >> position [
+	^ parentNode position
+]
+
+{ #category : #accessing }
+BlLayoutParentNodeWithEdges >> position: aPoint [
+	parentNode position: aPoint
+]
+
 { #category : #'api - converting' }
 BlLayoutParentNodeWithEdges >> withFilter: aSelectBlock [
 	^ BlLayoutParentNodeWithFilter new

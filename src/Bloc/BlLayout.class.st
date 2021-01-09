@@ -235,6 +235,13 @@ BlLayout >> leftToRight [
 	direction := BlLayoutDirection leftToRight
 ]
 
+{ #category : #protected }
+BlLayout >> mayInfluencePosition [
+	"Return true if the layout may influence the position of the element with this layout"
+
+	^ false
+]
+
 { #category : #measure }
 BlLayout >> measure: anElement with: anExtentSpec [
 	"Default simple and naive implementation that does not support #fitContent resizing

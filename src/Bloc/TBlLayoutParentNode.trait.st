@@ -83,6 +83,16 @@ TBlLayoutParentNode >> parent [
 	^ self explicitRequirement
 ]
 
+{ #category : #accessing }
+TBlLayoutParentNode >> position [
+	^ self explicitRequirement
+]
+
+{ #category : #accessing }
+TBlLayoutParentNode >> position: aPoint [
+	^ self explicitRequirement
+]
+
 { #category : #'api - extent spec' }
 TBlLayoutParentNode >> widthSpec [
 	^ self extentSpec widthSpec

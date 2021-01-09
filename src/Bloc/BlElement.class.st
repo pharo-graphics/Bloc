@@ -395,14 +395,16 @@ BlElement >> applyLayoutSafelyIn: aRectangle [
 
 	"Fast exit if I or any of my children did not request layout update
 	and if my current bounds are the same as aRectangle"
-	(self isLayoutRequested or: [ extentChanged or: [ newPosition ~= self position ] ])
+	(self isLayoutRequested or: [
+		self layout mayInfluencePosition not
+			or: [ extentChanged or: [ newPosition ~= self position ] ] ])
 		ifFalse: [ ^ self ].
 
 	"! actually change my position and extent !"
 	self position: newPosition extent: newExtent.
 
 	"if my extent did not change and if I or any of my children did not request layout we do nothing"
-	(extentChanged or: [ self isLayoutRequested ])
+	(extentChanged or: [ self isLayoutRequested or: [ self layout mayInfluencePosition ] ])
 		ifTrue: [
 			self telemetry
 				timeSync: [ 'Layout ', self class name ]
