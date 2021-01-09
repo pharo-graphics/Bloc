@@ -136,6 +136,12 @@ BlKeyCombinationBuilder >> end [
 ]
 
 { #category : #'keys - special' }
+BlKeyCombinationBuilder >> equal [
+	combination
+		with: (BlSingleKeyCombination new key: BlKeyboardKey equal)
+]
+
+{ #category : #'keys - special' }
 BlKeyCombinationBuilder >> escape [
 	combination
 		with: (BlSingleKeyCombination new key: BlKeyboardKey escape)
@@ -198,6 +204,12 @@ BlKeyCombinationBuilder >> meta [
 
 	combination
 		with: meta
+]
+
+{ #category : #'keys - special' }
+BlKeyCombinationBuilder >> minus [
+	combination
+		with: (BlSingleKeyCombination new key: BlKeyboardKey minus)
 ]
 
 { #category : #'keys - letters' }
