@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlLayoutExamplesSetup,
-	#category : #'Bloc-Layout-Tests-Utilities'
+	#category : #'Bloc-Layout-Examples-Core'
 }
 
 { #category : #assertions }

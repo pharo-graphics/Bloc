@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TAssertable',
 	#classTraits : 'TAssertable classTrait',
-	#category : #'Bloc-Examples'
+	#category : #'Bloc-Examples-Tasks'
 }
 
 { #category : #examples }

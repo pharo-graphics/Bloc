@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLinearLayoutVerticalExamples,
 	#superclass : #BlLinearLayoutExamples,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Linear'
 }
 
 { #category : #examples }

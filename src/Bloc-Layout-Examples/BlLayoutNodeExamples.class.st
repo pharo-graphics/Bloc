@@ -1,5 +1,5 @@
 Class {
 	#name : #BlLayoutNodeExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Core'
 }

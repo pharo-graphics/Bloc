@@ -6,7 +6,7 @@ I show how different resizing strategies work and how to use weight in order to 
 Class {
 	#name : #BlLinearLayoutUsageExamples,
 	#superclass : #BlLinearLayoutExamples,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Linear'
 }
 
 { #category : #'layout - space equalization' }

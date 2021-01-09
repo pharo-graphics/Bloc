@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFrameLayoutNodeExamples,
 	#superclass : #BlFrameLayoutExamples,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Frame'
 }
 
 { #category : #examples }

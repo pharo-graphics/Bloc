@@ -6,7 +6,7 @@ This is a very important use case for complex UIs that involve vertical lists
 Class {
 	#name : #BlFitContentVerticallyInHorizontalLayoutsExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples'
 }
 
 { #category : #'instance creation' }

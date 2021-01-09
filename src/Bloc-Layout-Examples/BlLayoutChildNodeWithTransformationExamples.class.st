@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLayoutChildNodeWithTransformationExamples,
 	#superclass : #BlLayoutNodeExamples,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Core'
 }
 
 { #category : #'examples - transformation' }

@@ -12,7 +12,7 @@ ${example:BlFrameLayoutCompositionExamples>>#exampleReverseOrder|previewExpanded
 Class {
 	#name : #BlFrameLayoutCompositionExamples,
 	#superclass : #BlFrameLayoutExamples,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Frame'
 }
 
 { #category : #'instance creation' }

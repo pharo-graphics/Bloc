@@ -4,7 +4,7 @@ I contain examples of a flow layout
 Class {
 	#name : #BlFlowLayoutCompositionExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Flow'
 }
 
 { #category : #examples }

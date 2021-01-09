@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBasicLayoutExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Basic'
 }
 
 { #category : #'instance creation' }

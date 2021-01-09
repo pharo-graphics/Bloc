@@ -12,7 +12,7 @@ Class {
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 	<gtExample>
-	| e1 e2 e3 e4 el space|
+	| e1 e2 e3 e4 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -51,7 +51,7 @@ BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 	<gtExample>
-	| e1 e2 e3 el space|
+	| e1 e2 e3 el |
 
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -87,7 +87,7 @@ BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 	<gtExample>
-	| e1 e2 e3 e4 el space|
+	| e1 e2 e3 e4 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -128,7 +128,7 @@ BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 	<gtExample>
-	| e1 e2 el space|
+	| e1 e2 el |
 	
 	e1 := BlElement new
 		size: 150 asPoint;
@@ -151,7 +151,7 @@ BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 	<gtExample>
-	| e1 e2 el space|
+	| e1 e2 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -178,7 +178,7 @@ BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 	<gtExample>
-	| e1 e2 e3 el space|
+	| e1 e2 e3 el |
 
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -215,7 +215,7 @@ BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleNautilusGrid [
 	<gtExample>
-	| e1 e2 e3 e4 e5 el space|
+	| e1 e2 e3 e4 e5 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -251,7 +251,6 @@ BlGridLayoutUsageExamples >> exampleNautilusGrid [
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 4; cellSpacing: 10);
 		size: 300@300;
-		relocate: 200 @ 100;
 		background: Color veryLightGray;
 		addChildren: { e1. e2. e3. e4. e5 };
 		yourself.
@@ -261,7 +260,7 @@ BlGridLayoutUsageExamples >> exampleNautilusGrid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 	<gtExample>
-	| e1 e2 e3 e4 el space|
+	| e1 e2 e3 e4 el |
 	
 	e1 := BlElement new
 		size: 150 asPoint;
@@ -292,7 +291,7 @@ BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 	<gtExample>
-	| children el space dim |
+	| children el dim |
 	
 	dim := 9.
 	
@@ -320,7 +319,7 @@ BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 	<gtExample>
-	| e1 e2 el space|
+	| e1 e2 el |
 	
 	e1 := BlElement new
 		size: 150 asPoint;
@@ -343,7 +342,7 @@ BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 { #category : #examples }
 BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 	<gtExample>
-	| e1 e2 el space|
+	| e1 e2 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |

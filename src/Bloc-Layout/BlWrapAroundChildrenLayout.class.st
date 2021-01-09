@@ -1,3 +1,6 @@
+"
+! Layout that wraps an element around its children
+"
 Class {
 	#name : #BlWrapAroundChildrenLayout,
 	#superclass : #BlCompositeLayout,
@@ -9,9 +12,13 @@ BlWrapAroundChildrenLayout >> layout: aParentLayoutNode [
 	| anOrigin |
 	super layout: aParentLayoutNode.
 
+	"first we should find the position of the top-left child"
 	anOrigin := aParentLayoutNode children boundingBox origin.
-
+	
+	"we move all children so that the most top-left child has position 0@0"
 	aParentLayoutNode childrenDo: [ :eachChild | eachChild position: eachChild position - anOrigin ].
+	"it also means that the position of the parent must be adjusted too, in this case exactly by the same amount by which
+	all children were moved, to compensate their movement"
 	aParentLayoutNode position: aParentLayoutNode position + anOrigin
 ]
 
@@ -22,15 +29,9 @@ BlWrapAroundChildrenLayout >> mayInfluencePosition [
 
 { #category : #measure }
 BlWrapAroundChildrenLayout >> measure: aParentLayoutNode [
-	super measure: aParentLayoutNode.
-
-	self measureParentNode: aParentLayoutNode
-]
-
-{ #category : #measure }
-BlWrapAroundChildrenLayout >> measureParentNode: aParentLayoutNode [
 	"Compute the measured extent of the parent node based on the measured bounds of the children"
 	| boundingBox width height |
+	super measure: aParentLayoutNode.
 
 	boundingBox := aParentLayoutNode children boundingBox.
 

@@ -4,7 +4,7 @@ I contain examples of positioning a single element within a parent element that 
 Class {
 	#name : #BlFrameLayoutSingleChildExamples,
 	#superclass : #BlFrameLayoutChildrenExamples,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Frame'
 }
 
 { #category : #'examples - setup' }

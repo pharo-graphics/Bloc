@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlLayoutExamplesSetup + TGtExampleAssertable',
 	#classTraits : 'TBlLayoutExamplesSetup classTrait + TGtExampleAssertable classTrait',
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Grid'
 }
 
 { #category : #'examples - layout' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFitChildrenLayoutExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Fit'
 }
 
 { #category : #'examples - fit children' }

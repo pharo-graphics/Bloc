@@ -46,8 +46,6 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#Bloc) ];
 			package: #'Bloc-Layout' with: [ "animation is required by animated layouts"
 				spec requires: #(#Bloc #'Bloc-Animation') ];
-			package: #'Bloc-Layout-Tests' with: [
-				spec requires: #('Bloc-Layout') ];
 			package: #'Bloc-Text' with: [
 				spec requires: #('Bloc'). ];
 			package: #'Bloc-Text-Rope' with: [

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlIgnoredLayoutExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Layout'
+	#category : #'Bloc-Layout-Examples-Ignored'
 }
 
 { #category : #'examples - alignment' }
