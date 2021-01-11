@@ -78,7 +78,7 @@ BlDevCrossover >> mouseMoveEvent: anEvent [
 		c frame horizontal weight: 1 - (anEvent localPosition x / (crossover width max: 1)).
 		c frame vertical weight: (anEvent localPosition y / (crossover height max: 1)) ].
 		
-	mousePositionText text: (anEvent localPosition rounded asString asRopedText monospace fontSize: 11; foreground: Color gray)
+	mousePositionText text: (anEvent localPosition rounded asString asRopedText fontSize: 11; foreground: Color gray)
 ]
 
 { #category : #'api - hooks' }
