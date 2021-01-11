@@ -88,6 +88,21 @@ BlElementCurrentProperties >> flushPropertiesToRemove [
 	self maybeResolvedProperties flushPropertiesToRemove
 ]
 
+{ #category : #'api - properties font' }
+BlElementCurrentProperties >> fontSizeEm: aNumber [
+	self fontSize: (BlValueWithUnit em: aNumber)
+]
+
+{ #category : #'api - properties font' }
+BlElementCurrentProperties >> fontSizePt: aNumber [
+	self fontSize: (BlValueWithUnit pt: aNumber)
+]
+
+{ #category : #'api - properties font' }
+BlElementCurrentProperties >> fontSizeRem: aNumber [
+	self fontSize: (BlValueWithUnit rem: aNumber)
+]
+
 { #category : #initialization }
 BlElementCurrentProperties >> initialize [
 	super initialize.

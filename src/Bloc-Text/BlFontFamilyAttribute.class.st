@@ -14,6 +14,11 @@ BlFontFamilyAttribute class >> named: aString [
 		yourself
 ]
 
+{ #category : #'text style' }
+BlFontFamilyAttribute >> applyOnTextStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder familyName: self name
+]
+
 { #category : #comparing }
 BlFontFamilyAttribute >> equals: anAnotherAttribute [
 	^ self name = anAnotherAttribute name

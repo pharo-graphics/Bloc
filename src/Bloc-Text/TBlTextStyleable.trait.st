@@ -61,7 +61,7 @@ TBlTextStyleable >> highlight: aPaint [
 
 { #category : #'api - text orientation' }
 TBlTextStyleable >> horizontal [
-	self attributesBuilder attribute: (BlTextOrientationAttribute horizontal)
+	
 ]
 
 { #category : #'api - text emphasis' }
@@ -84,9 +84,9 @@ TBlTextStyleable >> medium [
 	self attributesBuilder attribute: BlFontWeightAttribute medium
 ]
 
-{ #category : #'api - text font' }
+{ #category : #'api - text style' }
 TBlTextStyleable >> monospace [
-	self attributesBuilder attribute: (BlFontGenericFamilyAttribute monospace)
+	
 ]
 
 { #category : #'api - text emphasis' }
@@ -156,7 +156,7 @@ TBlTextStyleable >> underlinePaint: aColor width: aNumber [
 
 { #category : #'api - text orientation' }
 TBlTextStyleable >> vertical [
-	self attributesBuilder attribute: (BlTextOrientationAttribute vertical)
+	
 ]
 
 { #category : #'api - text weight' }

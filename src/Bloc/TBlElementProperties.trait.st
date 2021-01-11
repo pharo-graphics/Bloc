@@ -42,17 +42,17 @@ TBlElementProperties >> fontSize: aBlElementPropertyLength [
 
 { #category : #'api - properties font' }
 TBlElementProperties >> fontSizeEm: aNumber [
-	self fontSize: (BlElementPropertyLength em: aNumber)
+	self fontSize: (BlValueWithUnit em: aNumber)
 ]
 
 { #category : #'api - properties font' }
 TBlElementProperties >> fontSizePt: aNumber [
-	self fontSize: (BlElementPropertyLength pt: aNumber)
+	self fontSize: (BlValueWithUnit pt: aNumber)
 ]
 
 { #category : #'api - properties font' }
 TBlElementProperties >> fontSizeRem: aNumber [
-	self fontSize: (BlElementPropertyLength rem: aNumber)
+	self fontSize: (BlValueWithUnit rem: aNumber)
 ]
 
 { #category : #'api - properties' }

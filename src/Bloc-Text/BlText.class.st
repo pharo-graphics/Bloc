@@ -182,6 +182,16 @@ BlText >> clearAttributes: aStart to: anEnd if: aBlock [
 	self subclassResponsibility
 ]
 
+{ #category : #'text - attributes' }
+BlText >> clearAttributesOfClass: aBlTextAttributeClass [
+	self clearAttributes: [ :eachAttribute | eachAttribute isKindOf: aBlTextAttributeClass ]
+]
+
+{ #category : #'text - attributes' }
+BlText >> clearAttributesOfType: aBlTextAttributeType [
+	self clearAttributes: [ :eachAttribute | ]
+]
+
 { #category : #'text - enumeration' }
 BlText >> collect: aBlock [
 	"Evaluate aBlock with each of the text's items as the argument.  
@@ -288,6 +298,14 @@ BlText >> findAttributeSuchThat: aComparisonBlock indicesDo: aBlock [
 	^ self iterator
 		nextAttributeStartAndEndSuchThat: aComparisonBlock
 		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
+]
+
+{ #category : #'text - attributes' }
+BlText >> findAttributes: aCollectionOfBlTextAttribute indicesDo: aBlock [
+	aCollectionOfBlTextAttribute do: [ :eachAttribute |
+		self iterator
+			nextAttributeStartAndEnd: eachAttribute
+			indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ] ]
 ]
 
 { #category : #'text - enumeration' }

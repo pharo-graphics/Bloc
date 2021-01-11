@@ -31,6 +31,11 @@ BlFontSizeAttribute class >> size: aNumber [
 		yourself
 ]
 
+{ #category : #'text style' }
+BlFontSizeAttribute >> applyOnTextStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder fontSize: self size
+]
+
 { #category : #comparing }
 BlFontSizeAttribute >> equals: anAnotherAttribute [
 	^ self size = anAnotherAttribute size

@@ -14,7 +14,7 @@ BlElementFontSizeProperty class >> default [
 
 { #category : #defaults }
 BlElementFontSizeProperty class >> defaultFontSize [
-	^ BlElementPropertyLength pt: 14
+	^ BlValueWithUnit pt: 14
 ]
 
 { #category : #comparing }
@@ -41,7 +41,7 @@ BlElementFontSizeProperty >> canPropagateToChildren [
 
 { #category : #accessing }
 BlElementFontSizeProperty >> fontSize [
-	<return: #BlElementPropertyLength>
+	<return: #BlValueWithUnit>
 
 	^ fontSize
 ]
@@ -49,7 +49,7 @@ BlElementFontSizeProperty >> fontSize [
 { #category : #accessing }
 BlElementFontSizeProperty >> fontSize: aBlElementPropertyLength [
 	fontSize := aBlElementPropertyLength isNumber
-		ifTrue: [ BlElementPropertyLength pt: aBlElementPropertyLength ]
+		ifTrue: [ BlValueWithUnit pt: aBlElementPropertyLength ]
 		ifFalse: [ aBlElementPropertyLength ]
 ]
 
@@ -77,5 +77,5 @@ BlElementFontSizeProperty >> resolveWithParentProperties: theParentProperties or
 				ifFound: [ :aResolvedParentProperty | aResolvedParentProperty fontSize value ]
 				ifNone: [ self class defaultFontSize value ] ].
 
-	^ self class new fontSize: (BlElementPropertyLength pt: aResolvedValue)
+	^ self class new fontSize: (BlValueWithUnit pt: aResolvedValue)
 ]
