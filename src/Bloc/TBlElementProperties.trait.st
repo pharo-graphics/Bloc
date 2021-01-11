@@ -36,11 +36,6 @@ TBlElementProperties >> effect: aBlEffect [
 ]
 
 { #category : #'api - properties font' }
-TBlElementProperties >> fontSize: aBlElementPropertyLength [
-	self addProperty: (BlElementFontSizeProperty new fontSize: aBlElementPropertyLength)
-]
-
-{ #category : #'api - properties font' }
 TBlElementProperties >> fontSizeEm: aNumber [
 	self fontSize: (BlValueWithUnit em: aNumber)
 ]

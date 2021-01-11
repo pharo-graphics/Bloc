@@ -1,5 +1,5 @@
 Class {
-	#name : #BlFontStyle,
+	#name : #BlFontSlant,
 	#superclass : #SharedPool,
 	#instVars : [
 		'name',
@@ -15,8 +15,8 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlFontStyle class >> fromNumber: aNumber [
-	<return: #SpartaFontSlant>
+BlFontSlant class >> fromNumber: aNumber [
+	<return: #BlFontSlant>
 	Slants
 		ifNil: [ Slants := (self classPool values
 				select: [ :eachValue | eachValue isKindOf: self ]
@@ -26,36 +26,36 @@ BlFontStyle class >> fromNumber: aNumber [
 ]
 
 { #category : #'class initialization' }
-BlFontStyle class >> initialize [
+BlFontSlant class >> initialize [
 	Normal := self slant: 0 name: #normal.
 	Italic := self slant: 1 name: #italic.
 	Oblique := self slant: 2 name: #oblique
 ]
 
 { #category : #accessing }
-BlFontStyle class >> italic [
+BlFontSlant class >> italic [
 	^ Italic
 ]
 
 { #category : #accessing }
-BlFontStyle class >> normal [
+BlFontSlant class >> normal [
 	^ Normal
 ]
 
 { #category : #accessing }
-BlFontStyle class >> oblique [
+BlFontSlant class >> oblique [
 	^ Oblique
 ]
 
 { #category : #'instance creation' }
-BlFontStyle class >> slant: aSlantValue name: aSlantName [
+BlFontSlant class >> slant: aSlantValue name: aSlantName [
 	^ self new
 		value: aSlantValue;
 		name: aSlantName
 ]
 
 { #category : #comparing }
-BlFontStyle >> = anObject [
+BlFontSlant >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
 	self == anObject
@@ -66,26 +66,26 @@ BlFontStyle >> = anObject [
 ]
 
 { #category : #comparing }
-BlFontStyle >> hash [
+BlFontSlant >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ value hash
 ]
 
 { #category : #accessing }
-BlFontStyle >> name [
+BlFontSlant >> name [
 	<return: #Symbol>
 
 	^ name
 ]
 
 { #category : #accessing }
-BlFontStyle >> name: aSymbol [
+BlFontSlant >> name: aSymbol [
 	name := aSymbol
 ]
 
 { #category : #printing }
-BlFontStyle >> printOn: aStream [
+BlFontSlant >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
 	super printOn: aStream.
@@ -98,13 +98,13 @@ BlFontStyle >> printOn: aStream [
 ]
 
 { #category : #accessing }
-BlFontStyle >> value [
+BlFontSlant >> value [
 	<return: #Number>
 
 	^ value
 ]
 
 { #category : #accessing }
-BlFontStyle >> value: aNumber [
+BlFontSlant >> value: aNumber [
 	value := aNumber
 ]

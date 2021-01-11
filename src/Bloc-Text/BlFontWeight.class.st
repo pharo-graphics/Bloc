@@ -49,7 +49,7 @@ BlFontWeight class >> extraLight [
 
 { #category : #'class initialization' }
 BlFontWeight class >> fromNumber: aNumber [
-	<return: #SpartaFontWeight>
+	<return: #BlFontWeight>
 	Weights
 		ifNil: [ Weights := (self classPool values
 				select: [ :eachValue | eachValue isKindOf: self ]

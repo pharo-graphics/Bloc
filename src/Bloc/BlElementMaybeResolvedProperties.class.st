@@ -10,15 +10,6 @@ BlElementMaybeResolvedProperties >> applyOnElement: anElement [
 ]
 
 { #category : #accessing }
-BlElementMaybeResolvedProperties >> fontSize [
-	<return: #BlElementFontSizeProperty>
-
-	^ (self
-		propertyAt: BlElementFontSizeProperty
-		ifNone: [ BlElementFontSizeProperty default ]) fontSize
-]
-
-{ #category : #accessing }
 BlElementMaybeResolvedProperties >> propertyAt: aPropertyType ifFound: aFoundBlock [
 	^ self 
 		propertyAt: aPropertyType

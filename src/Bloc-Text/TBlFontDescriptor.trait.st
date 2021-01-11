@@ -38,6 +38,20 @@ TBlFontDescriptor >> fontSize: aBlValueWithUnitOrNumber [
 		ifFalse: [ aBlValueWithUnitOrNumber ])
 ]
 
+{ #category : #'font - slant' }
+TBlFontDescriptor >> fontSlant [
+	<return: #BlFontSlant>
+
+	^ self font privateFontSlant
+]
+
+{ #category : #'font - slant' }
+TBlFontDescriptor >> fontSlant: aBlFontSlantOrNumber [
+	self font privateFontSlant: (aBlFontSlantOrNumber isNumber
+		ifTrue: [ BlFontSlant fromNumber: aBlFontSlantOrNumber ]
+		ifFalse: [ aBlFontSlantOrNumber ])
+]
+
 { #category : #'font - stretch' }
 TBlFontDescriptor >> fontStretch [
 	<return: #BlFontStretch>
@@ -48,20 +62,6 @@ TBlFontDescriptor >> fontStretch [
 { #category : #'font - stretch' }
 TBlFontDescriptor >> fontStretch: aBlFontStretch [
 	self font privateFontStretch: aBlFontStretch
-]
-
-{ #category : #'font - style' }
-TBlFontDescriptor >> fontStyle [
-	<return: #BlFontStyle>
-
-	^ self font privateFontStyle
-]
-
-{ #category : #'font - style' }
-TBlFontDescriptor >> fontStyle: aBlFontStyleOrNumber [
-	self font privateFontStyle: (aBlFontStyleOrNumber isNumber
-		ifTrue: [ BlFontStyle fromNumber: aBlFontStyleOrNumber ]
-		ifFalse: [ aBlFontStyleOrNumber ])
 ]
 
 { #category : #'font - weight' }
@@ -76,6 +76,26 @@ TBlFontDescriptor >> fontWeight: aBlFontWeightOrNumber [
 	self font privateFontWeight: (aBlFontWeightOrNumber isNumber
 		ifTrue: [ BlFontWeight fromNumber: aBlFontWeightOrNumber ]
 		ifFalse: [ aBlFontWeightOrNumber ])
+]
+
+{ #category : #'font - slant' }
+TBlFontDescriptor >> slantItalic [
+	self fontSlant: BlFontSlant italic
+]
+
+{ #category : #'font - slant' }
+TBlFontDescriptor >> slantNormal [
+	self fontSlant: BlFontSlant normal
+]
+
+{ #category : #'font - slant' }
+TBlFontDescriptor >> slantOblique [
+	self fontSlant: BlFontSlant oblique
+]
+
+{ #category : #'font - slant' }
+TBlFontDescriptor >> slantReset [
+	self slantNormal
 ]
 
 { #category : #'font - stretch' }
@@ -126,26 +146,6 @@ TBlFontDescriptor >> stretchUltraCondensed [
 { #category : #'font - stretch' }
 TBlFontDescriptor >> stretchUltraExpanded [
 	self fontStretch: BlFontStretch ultraExpanded
-]
-
-{ #category : #'font - style' }
-TBlFontDescriptor >> styleItalic [
-	self fontStyle: BlFontStyle italic
-]
-
-{ #category : #'font - style' }
-TBlFontDescriptor >> styleNormal [
-	self fontStyle: BlFontStyle normal
-]
-
-{ #category : #'font - style' }
-TBlFontDescriptor >> styleOblique [
-	self fontStyle: BlFontStyle oblique
-]
-
-{ #category : #'font - style' }
-TBlFontDescriptor >> styleReset [
-	self styleNormal
 ]
 
 { #category : #'font - weight' }

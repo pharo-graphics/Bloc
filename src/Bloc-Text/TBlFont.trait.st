@@ -4,7 +4,7 @@ Trait {
 		'fontFamilyName',
 		'fontSize',
 		'fontStretch',
-		'fontStyle',
+		'fontSlant',
 		'fontWeight'
 	],
 	#category : #'Bloc-Text-Font'
@@ -35,6 +35,18 @@ TBlFont >> privateFontSize: aBlValueWithUnit [
 ]
 
 { #category : #private }
+TBlFont >> privateFontSlant [
+	<return: #BlFontSlant>
+
+	^ fontSlant
+]
+
+{ #category : #private }
+TBlFont >> privateFontSlant: aBlFontSlant [
+	fontSlant := aBlFontSlant
+]
+
+{ #category : #private }
 TBlFont >> privateFontStretch [
 	<return: #BlFontStretch>
 
@@ -44,18 +56,6 @@ TBlFont >> privateFontStretch [
 { #category : #private }
 TBlFont >> privateFontStretch: aBlFontStretch [
 	fontStretch := aBlFontStretch
-]
-
-{ #category : #private }
-TBlFont >> privateFontStyle [
-	<return: #BlFontStyle>
-
-	^ fontStyle
-]
-
-{ #category : #private }
-TBlFont >> privateFontStyle: aBlFontStyle [
-	fontStyle := aBlFontStyle
 ]
 
 { #category : #private }

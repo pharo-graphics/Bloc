@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'fontSize'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : #'Bloc-Text-Elements'
 }
 
 { #category : #defaults }
@@ -14,7 +14,7 @@ BlElementFontSizeProperty class >> default [
 
 { #category : #defaults }
 BlElementFontSizeProperty class >> defaultFontSize [
-	^ BlValueWithUnit pt: 14
+	^ BlValueWithUnit pt: BlFont defaultFontSize
 ]
 
 { #category : #comparing }
