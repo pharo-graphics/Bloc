@@ -185,6 +185,13 @@ BlLayout >> initialize [
 	direction := self defaultDirection
 ]
 
+{ #category : #protected }
+BlLayout >> isInfluencedByTransformation [
+	"Return true if the layout may be influenced by the element's transformation"
+
+	^ false
+]
+
 { #category : #enumeration }
 BlLayout >> layeredChildren: anElement do: aBlock [
 	"Evaluate a given block with all children of anElement

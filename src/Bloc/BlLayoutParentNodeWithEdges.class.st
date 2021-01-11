@@ -80,6 +80,11 @@ BlLayoutParentNodeWithEdges >> position: aPoint [
 	parentNode position: aPoint
 ]
 
+{ #category : #accessing }
+BlLayoutParentNodeWithEdges >> transformationDo: aBlock [
+	parentNode transformationDo: aBlock
+]
+
 { #category : #'api - converting' }
 BlLayoutParentNodeWithEdges >> withFilter: aSelectBlock [
 	^ BlLayoutParentNodeWithFilter new

@@ -86,6 +86,11 @@ BlLayoutParentNodeWithFilter >> position: aPoint [
 	parentNode position: aPoint
 ]
 
+{ #category : #accessing }
+BlLayoutParentNodeWithFilter >> transformationDo: aBlock [
+	parentNode transformationDo: aBlock
+]
+
 { #category : #'api - converting' }
 BlLayoutParentNodeWithFilter >> withFilter: aSelectBlockOrFilterObject [
 	"implement filter as an object to support comparison and not filter twice"

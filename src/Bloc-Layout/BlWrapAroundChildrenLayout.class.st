@@ -9,20 +9,32 @@ Class {
 	#category : #'Bloc-Layout-Fit'
 }
 
+{ #category : #protected }
+BlWrapAroundChildrenLayout >> isInfluencedByTransformation [
+	^ true
+]
+
 { #category : #layout }
 BlWrapAroundChildrenLayout >> layout: aParentLayoutNode [
 	| anOrigin anOriginWithPadding |
 	super layout: aParentLayoutNode.
 
 	"first we should find the position of the top-left child"
-	anOrigin := aParentLayoutNode children boundingBox origin.	
+	anOrigin := aParentLayoutNode children boundingBox origin.
+		
 	anOriginWithPadding := anOrigin - aParentLayoutNode padding topLeft.
 
 	"we move all children so that the most top-left child has position 0@0"
-	aParentLayoutNode childrenDo: [ :eachChild | eachChild position: eachChild position - anOriginWithPadding ].
+	aParentLayoutNode childrenDo: [ :eachChild |		
+		eachChild position: eachChild position - anOriginWithPadding ].
+
 	"it also means that the position of the parent must be adjusted too, in this case exactly by the same amount by which
-	all children were moved, to compensate their movement"
-	aParentLayoutNode position: aParentLayoutNode position + anOriginWithPadding
+	all children were moved, to compensate their movement and taking parent transformation into account"
+	aParentLayoutNode transformationDo: [ :aTransformation |
+		anOriginWithPadding := anOriginWithPadding + (aTransformation inverseTransformPoint: aParentLayoutNode padding topLeft).
+		anOriginWithPadding := (aTransformation transformBounds: (BlBounds origin: 0@0 extent: anOriginWithPadding abs)) extent * anOriginWithPadding sign ].
+
+	aParentLayoutNode position: aParentLayoutNode constraints position + anOriginWithPadding
 ]
 
 { #category : #protected }

@@ -49,6 +49,21 @@ BlLayoutParentNode class >> alreadyMeasuredWithoutTransformation: aBlElement [
 ]
 
 { #category : #'instance creation' }
+BlLayoutParentNode class >> getParentTransformation: anElement [
+	| aTransformation |
+
+	aTransformation := anElement layout isInfluencedByTransformation
+		ifTrue: [ anElement transformation asElementTransformation ]
+		ifFalse: [ nil ].
+
+	aTransformation := (aTransformation isNil or: [ aTransformation isIdentity ])
+		ifTrue: [ nil ]
+		ifFalse: [ aTransformation ].
+
+	^ aTransformation
+]
+
+{ #category : #'instance creation' }
 BlLayoutParentNode class >> getTransformation: anElement [
 	| aTransformation |
 
@@ -64,7 +79,10 @@ BlLayoutParentNode class >> getTransformation: anElement [
 
 { #category : #'instance creation' }
 BlLayoutParentNode class >> toMeasure: aBlElement [
-	^ self new
+	| anElementTransformation aParentNode |
+	
+	anElementTransformation := self getParentTransformation: aBlElement.
+	aParentNode := self new
 		constraints: aBlElement constraints;
 		children: (
 			aBlElement children accountedByLayout collect: [ :eachChild |
@@ -79,7 +97,12 @@ BlLayoutParentNode class >> toMeasure: aBlElement [
 				aTransformation
 					ifNotNil: [ eachNode := eachNode withTransformation: aTransformation ].
 
-				eachNode withElement: eachChild ])
+				eachNode withElement: eachChild ]).
+			
+	anElementTransformation ifNotNil: [
+		aParentNode := aParentNode withTransformation: anElementTransformation ].
+	
+	^ aParentNode
 ]
 
 { #category : #accessing }
@@ -149,10 +172,21 @@ BlLayoutParentNode >> position: aPoint [
 	position := aPoint
 ]
 
+{ #category : #accessing }
+BlLayoutParentNode >> transformationDo: aBlock [
+]
+
 { #category : #'api - converting' }
 BlLayoutParentNode >> withFilter: aSelectBlock [
 	^ BlLayoutParentNodeWithFilter new
 		parentNode: self;
 		filterBlock: aSelectBlock;
 		children: (self children select: aSelectBlock)
+]
+
+{ #category : #'api - converting' }
+BlLayoutParentNode >> withTransformation: aBlElementTransformation [
+	^ BlLayoutParentNodeWithTransformation new
+		parentNode: self;
+		transformation: aBlElementTransformation
 ]

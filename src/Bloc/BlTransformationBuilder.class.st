@@ -105,6 +105,11 @@ BlTransformationBuilder >> origin: anAffineTransformationOrigin [
 	origin := anAffineTransformationOrigin
 ]
 
+{ #category : #origin }
+BlTransformationBuilder >> rightCenterOrigin [
+	self origin: BlAffineTransformationRightCenterOrigin new
+]
+
 { #category : #transformations }
 BlTransformationBuilder >> rotateBy: aDegreesAngle [
 	transformation addTransformation: (BlRotationTransformation new angle: aDegreesAngle; axis: BlVector zAxis; origin: origin)

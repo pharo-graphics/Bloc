@@ -2518,7 +2518,7 @@ BlElement >> onMeasure: anExtentMeasurementSpec [
 { #category : #'hooks - geometry' }
 BlElement >> onPositionChanged [
 	"Is sent when my position changed within a parent"
-	
+
 	self notifyPositionChanged
 ]
 
@@ -3325,6 +3325,9 @@ BlElement >> transformation: anElementTransformation [
 
 	self constraints shouldAccountTransformation
 		ifTrue: [ self requestParentLayout ].
+
+	self layout isInfluencedByTransformation
+		ifTrue: [ self requestLayout ].
 
 	self boundsCache invalidateBoundsInSpace.
 	self invalidate.

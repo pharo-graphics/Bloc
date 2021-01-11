@@ -24,7 +24,10 @@ BlNodeBasedLayout >> layout: anElement in: aRectangle [
 
 	"the layout wants to change my position"
 	aParentNode position = aRectangle origin
-		ifFalse: [ anElement position: aParentNode position extent: aRectangle extent ].
+		ifFalse: [
+			anElement
+				position: aParentNode position
+				extent: aRectangle extent ].
 
 	aParentNode children do: [ :eachChildNode |
 		eachChildNode element applyLayoutIn: eachChildNode layoutBounds ].

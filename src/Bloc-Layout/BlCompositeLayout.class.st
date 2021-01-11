@@ -19,6 +19,13 @@ BlCompositeLayout >> initialize [
 	layouts := OrderedCollection new
 ]
 
+{ #category : #protected }
+BlCompositeLayout >> isInfluencedByTransformation [
+	"Return true if the layout may be influence the transformation"
+
+	^ layouts anySatisfy: [ :eachLayout | eachLayout isInfluencedByTransformation ]
+]
+
 { #category : #layout }
 BlCompositeLayout >> layout: aParentLayoutNode [
 	layouts do: [ :eachLayout | eachLayout layout: aParentLayoutNode ]
