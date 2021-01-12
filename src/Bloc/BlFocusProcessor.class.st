@@ -283,12 +283,13 @@ BlFocusProcessor >> requestFor: anElement [
 	anElement isFocusable
 		ifFalse: [ ^ self ].
 
+	"keep reference to the previous focus owner"
+	aPreviousFocusOwner := self focusOwner.
+
 	"we should only process blur event when there is focused element, otherwise skip it"
 	self hasFocusOwner
 		ifTrue: [ self processBlur: self focusOwner dueToFocus: anElement ].
 
-	"don't forget to forget focused element"
-	aPreviousFocusOwner := self focusOwner.
 	self focusOwner: nil.
 	"focus is processed with new requested focus owner"
 	aPreviousFocusOwner
