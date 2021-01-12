@@ -83,7 +83,7 @@ BlDevScripterStepExecutor >> executeStep: aStep [
 		do: [ :anException | 
 			aStep setFailedExecution.
 			self executePostPlayActivitiesOnStep: aStep.
-			anException pass ]
+			anException passWithScripter: self scripter. ]
 ]
 
 { #category : #initialization }
