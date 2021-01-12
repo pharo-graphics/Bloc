@@ -23,16 +23,23 @@ BlSpartaTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 BlSpartaTextMeasurer >> measureTextSpan: aBlSpan [
 	"Measure a given text span and return paragraph span with computed metrics"
 	<return: #BlTextParagraphSpan>
-	| aFontBuilder aTextPainter theAttributes aTextRun aSpartaMetrics aParagraphSpan |
+	| aFontBuilder aFontAndStyleBuilder aFont aTextPainter theAttributes aTextRun aSpartaMetrics aParagraphSpan |
 
-	theAttributes := aBlSpan attributes.
+	"we first collect font properties and text style from the attributes"
+	aFontAndStyleBuilder := BlTextFontAndStyleBuilder new.
 	
+	theAttributes := aBlSpan attributes.
+	theAttributes do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: aFontAndStyleBuilder ].
+
+	"build an abstract font and resolve not yet resolved properties"
+	aFont := aFontAndStyleBuilder font.
+
 	aTextPainter := self spartaCanvas text.
 	aFontBuilder := self spartaCanvas font.
-	
-	theAttributes do: [ :anAttribute | 
-		anAttribute applyOnSpartaFontBuilder: aFontBuilder.
-		anAttribute applyOnSpartaTextPainter: aTextPainter ].
+
+	aFont applyOnSpartaFontBuilder: aFontBuilder.
+	aFontAndStyleBuilder applyOnSpartaTextPainter: aTextPainter.
+
 	aTextPainter font: aFontBuilder build.
 	aTextPainter string: (String streamContents: [ :aStream | aBlSpan do: [ :anItem | anItem textRunOn: aStream ] ]).
 

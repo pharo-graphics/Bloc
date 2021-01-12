@@ -77,7 +77,7 @@ BlFontWeightAttribute class >> weight: aNumber [
 ]
 
 { #category : #'text style' }
-BlFontWeightAttribute >> applyOnTextStyleBuilder: aBlTextStyleBuilder [
+BlFontWeightAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
 	aBlTextStyleBuilder fontWeight: self weight
 ]
 

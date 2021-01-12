@@ -7,18 +7,17 @@ Trait {
 TBlFontDescriptor >> familyName [
 	<return: #String>
 
-	^ self font privateFontFamilyName
+	^ self fontPropertiesTarget privateFontFamilyName
 ]
 
 { #category : #'font - name' }
 TBlFontDescriptor >> familyName: aString [
-	<return: #String>
 
-	self font privateFontFamilyName: aString
+	self fontPropertiesTarget privateFontFamilyName: aString
 ]
 
 { #category : #accessing }
-TBlFontDescriptor >> font [
+TBlFontDescriptor >> fontPropertiesTarget [
 	<return: #TBlFont>
 
 	^ self explicitRequirement
@@ -28,12 +27,12 @@ TBlFontDescriptor >> font [
 TBlFontDescriptor >> fontSize [
 	<return: #BlValueWithUnit>
 	
-	^ self font privateFontSize
+	^ self fontPropertiesTarget privateFontSize
 ]
 
 { #category : #'font - size' }
 TBlFontDescriptor >> fontSize: aBlValueWithUnitOrNumber [
-	self font privateFontSize: (aBlValueWithUnitOrNumber isNumber
+	self fontPropertiesTarget privateFontSize: (aBlValueWithUnitOrNumber isNumber
 		ifTrue: [ BlValueWithUnit pt: aBlValueWithUnitOrNumber ]
 		ifFalse: [ aBlValueWithUnitOrNumber ])
 ]
@@ -42,12 +41,12 @@ TBlFontDescriptor >> fontSize: aBlValueWithUnitOrNumber [
 TBlFontDescriptor >> fontSlant [
 	<return: #BlFontSlant>
 
-	^ self font privateFontSlant
+	^ self fontPropertiesTarget privateFontSlant
 ]
 
 { #category : #'font - slant' }
 TBlFontDescriptor >> fontSlant: aBlFontSlantOrNumber [
-	self font privateFontSlant: (aBlFontSlantOrNumber isNumber
+	self fontPropertiesTarget privateFontSlant: (aBlFontSlantOrNumber isNumber
 		ifTrue: [ BlFontSlant fromNumber: aBlFontSlantOrNumber ]
 		ifFalse: [ aBlFontSlantOrNumber ])
 ]
@@ -56,24 +55,24 @@ TBlFontDescriptor >> fontSlant: aBlFontSlantOrNumber [
 TBlFontDescriptor >> fontStretch [
 	<return: #BlFontStretch>
 
-	^ self font privateFontStretch
+	^ self fontPropertiesTarget privateFontStretch
 ]
 
 { #category : #'font - stretch' }
 TBlFontDescriptor >> fontStretch: aBlFontStretch [
-	self font privateFontStretch: aBlFontStretch
+	self fontPropertiesTarget privateFontStretch: aBlFontStretch
 ]
 
 { #category : #'font - weight' }
 TBlFontDescriptor >> fontWeight [
 	<return: #BlFontWeight>
 
-	^ self font privateFontWeight
+	^ self fontPropertiesTarget privateFontWeight
 ]
 
 { #category : #'font - weight' }
 TBlFontDescriptor >> fontWeight: aBlFontWeightOrNumber [
-	self font privateFontWeight: (aBlFontWeightOrNumber isNumber
+	self fontPropertiesTarget privateFontWeight: (aBlFontWeightOrNumber isNumber
 		ifTrue: [ BlFontWeight fromNumber: aBlFontWeightOrNumber ]
 		ifFalse: [ aBlFontWeightOrNumber ])
 ]

@@ -1,22 +1,5 @@
-"
-I represent a font size attribute.
-I am used together with BrText and BrTextStyler to style text.
-
-Public API and Key Messages
-
-- size: set font size in points
-
-Example:
-
-	BrFontSizeAttribute size: 20
- 
-Internal Representation and Key Implementation Points.
-
-    Instance Variables
-	size		<Number> 
-"
 Class {
-	#name : #BlFontSizeAttribute,
+	#name : #BlFontSizeDefaultAttribute,
 	#superclass : #BlTextAttribute,
 	#instVars : [
 		'size'
@@ -25,43 +8,43 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlFontSizeAttribute class >> size: aNumber [
+BlFontSizeDefaultAttribute class >> size: aNumber [
 	^ self new
 		size: aNumber;
 		yourself
 ]
 
 { #category : #'text style' }
-BlFontSizeAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder fontSize: self size
+BlFontSizeDefaultAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder defaultFontSizePt: self size value
 ]
 
 { #category : #comparing }
-BlFontSizeAttribute >> equals: anAnotherAttribute [
+BlFontSizeDefaultAttribute >> equals: anAnotherAttribute [
 	^ self size = anAnotherAttribute size
 ]
 
 { #category : #comparing }
-BlFontSizeAttribute >> hash [
+BlFontSizeDefaultAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self size hash
 ]
 
 { #category : #printing }
-BlFontSizeAttribute >> printOn: aStream [
+BlFontSizeDefaultAttribute >> printOn: aStream [
 	aStream
-		nextPutAll: 'font-size: ';
+		nextPutAll: 'font-size-default: ';
 		nextPutAll: self size asString
 ]
 
 { #category : #accessing }
-BlFontSizeAttribute >> size [
+BlFontSizeDefaultAttribute >> size [
 	^ size
 ]
 
 { #category : #accessing }
-BlFontSizeAttribute >> size: aNumber [
+BlFontSizeDefaultAttribute >> size: aNumber [
 	self
 		assert: [ size isNil ]
 		description: [ 'I am immutable and can not be modified' ].
@@ -70,7 +53,7 @@ BlFontSizeAttribute >> size: aNumber [
 ]
 
 { #category : #printing }
-BlFontSizeAttribute >> storeOn: aStream [
+BlFontSizeDefaultAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	
 	aStream
