@@ -28,28 +28,10 @@ BlFont >> applyOnText: aBlText [
 ]
 
 { #category : #accessing }
-BlFont >> font [
+BlFont >> fontPropertiesTarget [
 	<return: #TBlFont>
 
 	^ self
-]
-
-{ #category : #'gt-extension' }
-BlFont >> gtPreviewFor: aView [
-	<gtView>
-	
-	^ aView text
-		title: 'Preview';
-		priority: 5;
-		text: [
-			| aText |
-			aText := 'ABCDEFGHIJKLM
-NOPQRSTUVWXYZ
-abcdefghijklm
-nopqrstuvwxyz
-1234567890' asRopedText.
-			self applyOnText: aText.
-			aText ]
 ]
 
 { #category : #initialization }

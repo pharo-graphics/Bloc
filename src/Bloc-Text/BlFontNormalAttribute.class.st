@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #'text style' }
-BlFontNormalAttribute >> applyOnTextStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder styleNormal
+BlFontNormalAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder slantNormal
 ]
 
 { #category : #accessing }

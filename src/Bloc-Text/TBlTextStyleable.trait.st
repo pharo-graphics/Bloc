@@ -40,6 +40,11 @@ TBlTextStyleable >> decorationDo: aBlock [
 ]
 
 { #category : #'api - text font' }
+TBlTextStyleable >> defaultFontSize: aNumber [
+	self attributesBuilder attribute: (BlFontSizeDefaultAttribute size: aNumber)
+]
+
+{ #category : #'api - text font' }
 TBlTextStyleable >> fontName: aString [
 	self attributesBuilder attribute: (BlFontFamilyAttribute named: aString)
 ]
