@@ -7,7 +7,7 @@ I contain examples of how one can add support of selection.
 Class {
 	#name : #BlSelectionHandlerExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Selection'
+	#category : #'Bloc-Examples-Selection'
 }
 
 { #category : #examples }
@@ -44,9 +44,9 @@ BlSelectionHandlerExamples >> cell [
 		size: 75@75;
 		background: Color random paler;
 		addEventHandlerOn: BlElementSelectionAcquiredEvent
-			do: [ :anEvent | anEvent target border: (BlBorder builder width: 2; paint: Color blue; build)  ];
+			do: [ :anEvent | anEvent currentTarget border: (BlBorder builder width: 2; paint: Color blue; build)  ];
 		addEventHandlerOn: BlElementSelectionLostEvent
-			do: [ :anEvent | anEvent target border: BlBorder empty ]
+			do: [ :anEvent | anEvent currentTarget border: BlBorder empty ]
 ]
 
 { #category : #'instance creation' }

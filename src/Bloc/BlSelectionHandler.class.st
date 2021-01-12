@@ -5,7 +5,7 @@ May be used to implement text selection or desktop like selection behaviour
 "
 Class {
 	#name : #BlSelectionHandler,
-	#superclass : #BlEventListener,
+	#superclass : #BlCustomEventHandler,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -24,9 +24,7 @@ BlSelectionHandler >> computeSelectionArea [
 ]
 
 { #category : #'dnd handlers' }
-BlSelectionHandler >> dragEndEvent: anEvent [
-	super dragEndEvent: anEvent.
-	
+BlSelectionHandler >> dragEndEvent: anEvent [	
 	anEvent consumed: true.
 		
 	origin := nil.
@@ -40,7 +38,7 @@ BlSelectionHandler >> dragEvent: anEvent [
 	on the elemen I attached to"
 		
 	self hasOrigin
-		ifFalse: [ ^ super dragOverEvent: anEvent ].
+		ifFalse: [ ^ self ].
 	
 	anEvent consumed: true.
 	
@@ -55,6 +53,15 @@ BlSelectionHandler >> dragStartEvent: anEvent [
 	anEvent consumed: true.
 
 	origin := anEvent position
+]
+
+{ #category : #accessing }
+BlSelectionHandler >> eventsToHandle [
+	^ {
+		BlDragEvent.
+		BlDragStartEvent.
+		BlDragEndEvent
+	}
 ]
 
 { #category : #'selection - handling' }

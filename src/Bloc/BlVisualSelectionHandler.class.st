@@ -15,21 +15,32 @@ Class {
 { #category : #'dnd handlers' }
 BlVisualSelectionHandler >> dragEndEvent: anEvent [
 	super dragEndEvent: anEvent.
-	
+
 	container removeChild: selection
+]
+
+{ #category : #'dnd handlers' }
+BlVisualSelectionHandler >> dragEvent: anEvent [
+	super dragEvent: anEvent.
 ]
 
 { #category : #'dnd handlers' }
 BlVisualSelectionHandler >> dragStartEvent: anEvent [
 	super dragStartEvent: anEvent.
-	
+
 	container addChild: selection
+]
+
+{ #category : #accessing }
+BlVisualSelectionHandler >> eventsToHandle [
+	^ super eventsToHandle, {
+		BlMouseDownEvent
+	}
 ]
 
 { #category : #'mouse handlers' }
 BlVisualSelectionHandler >> mouseDownEvent: anEvent [
 	| oldSelected |
-	super mouseDownEvent: anEvent.
 	
 	oldSelected := selected copy.
 	selected removeAll.
