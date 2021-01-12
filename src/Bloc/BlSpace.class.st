@@ -731,6 +731,9 @@ BlSpace >> doStyle: anElement [
 
 { #category : #pulse }
 BlSpace >> doUpdateFocus [
+	(self focusOwner notNil and: [ self focusOwner isAttachedToSceneGraph not ])
+		ifTrue: [ self focusProcessor focusOwner: nil ].
+
 	self focusOwner
 		ifNil: [ self initializeFocus ]
 ]
