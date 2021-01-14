@@ -229,6 +229,18 @@ BlBounds >> corner [
 	^ right @ bottom
 ]
 
+{ #category : #accessing }
+BlBounds >> corners [
+	"Return an array of corner points in the clockwise order starting from top left"
+
+	^ Array
+		with: self topLeft
+		with: self topRight
+		with: self bottomRight
+		with: self bottomLeft
+
+]
+
 { #category : #'vector functions' }
 BlBounds >> counterClockwiseEdges [
 	<return: #Collection of: #BlRay>

@@ -31,12 +31,14 @@ BlShortcutEvent >> beRepeated [
 
 { #category : #accessing }
 BlShortcutEvent >> buffer [
+	<return: #BlKeyboardBuffer>
+
 	^ buffer
 ]
 
 { #category : #accessing }
-BlShortcutEvent >> buffer: anObject [
-	buffer := anObject
+BlShortcutEvent >> buffer: aBlKeyboardBuffer [
+	buffer := aBlKeyboardBuffer
 ]
 
 { #category : #initialization }
