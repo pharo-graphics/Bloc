@@ -60,6 +60,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_2 [
 { #category : #'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_3 [
 	<gtExample>
+	<noTest>
 	 | aScripter |
 
 	aScripter := self bounds_in_space_2.
