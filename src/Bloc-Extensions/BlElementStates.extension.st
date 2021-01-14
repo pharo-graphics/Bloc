@@ -12,5 +12,6 @@ BlElementStates >> gtStatesFor: aView [
 			(inheritedStates asArray collect: [ :eachState | eachState -> #inherited ]) ];
 		column: 'State' text: [ :assoc | assoc key ];
 		column: 'Type' text: [ :assoc | assoc value ];
-		updateWhen: #statesChanged in: self announcer
+		updateWhen: #statesChanged in: self announcer;
+		send: [ :assoc | assoc key ]
 ]
