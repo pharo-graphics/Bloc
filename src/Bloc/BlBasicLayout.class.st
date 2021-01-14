@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #layout }
-BlBasicLayout >> layout: anElement in: aRectangle [
+BlBasicLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 
 	anElement children accountedByLayout do: [ :child |
-		child applyLayoutIn: child measuredBounds asRectangle ].
+		child applyLayoutIn: child measuredBounds asRectangle context: aBlElementBoundsUpdater ].
 
-	self layoutIgnored: anElement
+	self layoutIgnored: anElement context: aBlElementBoundsUpdater
 ]
 
 { #category : #measure }

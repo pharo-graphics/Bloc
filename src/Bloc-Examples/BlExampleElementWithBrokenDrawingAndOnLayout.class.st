@@ -13,6 +13,6 @@ BlExampleElementWithBrokenDrawingAndOnLayout >> drawOnSpartaCanvas: aCanvas [
 ]
 
 { #category : #layout }
-BlExampleElementWithBrokenDrawingAndOnLayout >> onLayout: aBounds [
+BlExampleElementWithBrokenDrawingAndOnLayout >> onLayout: aBounds context: aBlElementBoundsUpdater [
 	#() at: 1
 ]

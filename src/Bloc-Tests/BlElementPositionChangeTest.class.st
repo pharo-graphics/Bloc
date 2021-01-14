@@ -4,7 +4,7 @@ I contain examples of position change logging functionality
 Class {
 	#name : #BlElementPositionChangeTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Changes'
+	#category : #'Bloc-Tests-Basic-Changes'
 }
 
 { #category : #accessing }
@@ -44,6 +44,7 @@ BlElementPositionChangeTest >> parentPositionChanged [
 		parent parentPositionChangedListener parentPositionInSpaceChangedListener parentPositionChanged parentPositionInSpaceChanged
 		child childPositionChangedListener childPositionInSpaceChangedListener childPositionChanged childPositionInSpaceChanged
 		subChild subChildPositionChangedListener subChildPositionInSpaceChangedListener subChildPositionChanged subChildPositionInSpaceChanged
+		anUpdater
 	|
 
 	parentPositionChanged := parentPositionInSpaceChanged := 0.
@@ -90,11 +91,12 @@ BlElementPositionChangeTest >> parentPositionChanged [
 	subChild addEventHandler: subChildPositionChangedListener.
 	subChild addEventHandler: subChildPositionInSpaceChangedListener.
 	
+	anUpdater := BlElementBoundsUpdater new.
 	"change parent's position directy directly"
-	parent position: 50@50 extent: parent extent.
+	parent position: 50@50 extent: parent extent context: anUpdater.
 	
 	"notify changed"
-	parent commitChanges.
+	anUpdater commitChanges.
 
 	self assert: parent position equals: 50@50.
 	self assert: parentPositionChanged equals: 1.
@@ -113,11 +115,11 @@ BlElementPositionChangeTest >> parentPositionChanged [
 	
 	child removeEventHandler: childPositionChangedListener.
 	child removeEventHandler: childPositionInSpaceChangedListener.
-	
+
 	subChild removeEventHandler: subChildPositionChangedListener.
 	subChild removeEventHandler: subChildPositionInSpaceChangedListener.
-	
-	parent position: 0@0 extent: parent extent.
+
+	parent position: 0@0 extent: parent extent context: anUpdater.
 	
 	^ parent
 ]
@@ -125,7 +127,7 @@ BlElementPositionChangeTest >> parentPositionChanged [
 { #category : #tests }
 BlElementPositionChangeTest >> positionChangeBoundsChange [
 	<gtExample>
-	| element |
+	| element anUpdater |
 	
 	element := self element.
 	element background: Color blue.
@@ -133,17 +135,19 @@ BlElementPositionChangeTest >> positionChangeBoundsChange [
 	element relocate: 0@0.
 	element forceLayout.
 	
+	anUpdater := BlElementBoundsUpdater new.
+	
 	self assert: element boundsInLocal equals: (0@0 extent: 100@100).
 	self assert: element bounds inParent asRectangle equals: (0@0 extent: 100@100).
 	
 	"As soon as we change position bounds should change too"
-	element position: 30@30 extent: element extent.
+	element position: 30@30 extent: element extent context: anUpdater.
 	
 	self assert: element boundsInLocal equals: (0@0 extent: 100@100).
 	self assert: element bounds inParent asRectangle equals: (30@30 extent: 100@100).
 	
 	"change position and extent at the same time"
-	element position: 50@50 extent: 150@150.
+	element position: 50@50 extent: 150@150 context: anUpdater.
 	
 	self assert: element boundsInLocal equals: (0@0 extent: 150@150).
 	self assert: element bounds inParent asRectangle equals: (50@50 extent: 150@150).
@@ -160,11 +164,13 @@ BlElementPositionChangeTest >> positionChangeBoundsChange [
 { #category : #tests }
 BlElementPositionChangeTest >> positionChangeLoop [
 	<gtExample>
-	| element positionChanged positionChangedListener positionInSpaceChanged positionInSpaceChangedListener |
+	| element positionChanged positionChangedListener positionInSpaceChanged positionInSpaceChangedListener anUpdater |
 	
 	element := self element.
 	positionChanged := 0.
 	positionInSpaceChanged := 0.
+	
+	anUpdater := BlElementBoundsUpdater new.
 
 	positionChangedListener := BlEventHandler
 		on: BlElementPositionChangedEvent
@@ -176,8 +182,8 @@ BlElementPositionChangeTest >> positionChangeLoop [
 	element addEventHandler: positionChangedListener.
 	element addEventHandler: positionInSpaceChangedListener.
 	
-	element position: 30@30 extent: element extent.
-	element commitChanges.
+	element position: 30@30 extent: element extent context: anUpdater.
+	anUpdater commitChanges.
 	
 	self assert: positionChanged equals: 1.
 	self assert: positionInSpaceChanged equals: 1.
@@ -185,9 +191,10 @@ BlElementPositionChangeTest >> positionChangeLoop [
 	positionChanged := 0.
 	positionInSpaceChanged := 0.
 	
-	element position: 40@40 extent: element extent.
-	element position: 30@30 extent: element extent.
-	element commitChanges.
+	anUpdater := BlElementBoundsUpdater new.
+	element position: 40@40 extent: element extent context: anUpdater.
+	element position: 30@30 extent: element extent context: anUpdater..
+	anUpdater commitChanges.
 	
 	self assert: positionChanged equals: 0.
 	self assert: positionInSpaceChanged equals: 0.

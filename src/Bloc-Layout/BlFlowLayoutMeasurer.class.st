@@ -219,7 +219,7 @@ BlFlowLayoutMeasurer >> layout: aLayout [
 ]
 
 { #category : #layout }
-BlFlowLayoutMeasurer >> layout: anElement in: newBounds [
+BlFlowLayoutMeasurer >> layout: anElement in: newBounds context: aBlElementBoundsUpdateContext [
 	lines do: [ :aLine |
 		aLine children do: [ :aChild |
 			| constraints left top width height |
@@ -228,7 +228,7 @@ BlFlowLayoutMeasurer >> layout: anElement in: newBounds [
 			top := anElement padding top + aLine lineY + aChild inlineY + constraints margin top.
 			width := aChild width.
 			height := aChild height.
-			aChild element applyLayoutIn: (left @ top extent: width @ height) ] ]
+			aChild element applyLayoutIn: (left @ top extent: width @ height) context: aBlElementBoundsUpdateContext ] ]
 ]
 
 { #category : #accessing }

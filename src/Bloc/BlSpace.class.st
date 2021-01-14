@@ -106,6 +106,23 @@ BlSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	theStatesToInherit do: [ :eachState | eachState finishedPropagateFrom: anElement ]
 ]
 
+{ #category : #'private - change' }
+BlSpace class >> extractRoots: aSetOfElements [
+	| theElementsToCheck theElementsToProcess |
+	
+	theElementsToCheck := aSetOfElements as: Stack.
+	theElementsToProcess := Set new.
+	
+	[ theElementsToCheck isEmpty ] whileFalse: [
+		| eachElement |
+		
+		eachElement := theElementsToCheck pop.
+		(theElementsToCheck anySatisfy: [ :eachPotentialParent | eachElement hasParent: eachPotentialParent ])
+			ifFalse: [ theElementsToProcess add: eachElement ] ].
+
+	^ theElementsToProcess
+]
+
 { #category : #'class initialization' }
 BlSpace class >> initialize [
 	UniqueIdGenerator := BlUniqueIdGenerator new
@@ -740,7 +757,7 @@ BlSpace >> doUpdateFocus [
 
 { #category : #'change - layout' }
 BlSpace >> doUpdateLayout [
-	| elementsToLayout |
+	| elementsToLayout aBlElementBoundsUpdater |
 	
 	self elementsNeedingLayout copy do: [ :eachElement |
 		eachElement layout previousMeasurementSpec
@@ -770,15 +787,19 @@ BlSpace >> doUpdateLayout [
 		collect: [ :eachElement | eachElement -> eachElement compositionDepth ] as: Array.
 	elementsToLayout := (elementsToLayout sort: [ :a :b | a value > b value ]) collect: [ :each | each key ].
 
+	aBlElementBoundsUpdater := BlElementBoundsUpdater new.
+
 	elementsToLayout do: [ :eachElement |
-		self doUpdateLayoutBoundary: eachElement ].
+		self doUpdateLayoutBoundary: eachElement context: aBlElementBoundsUpdater ].
 	
 	self root isLayoutRequested
-		ifTrue: [ self doUpdateLayout: self root ].
+		ifTrue: [ self doUpdateLayout: self root context: aBlElementBoundsUpdater ].
+		
+	aBlElementBoundsUpdater commitChanges
 ]
 
 { #category : #'change - layout' }
-BlSpace >> doUpdateLayout: anElement [
+BlSpace >> doUpdateLayout: anElement context: aBlElementBoundsUpdater [
 	"Perform layout of a given element (e.g. root or glass)"
 
 	"first we measure.."
@@ -793,20 +814,18 @@ BlSpace >> doUpdateLayout: anElement [
 			resizer: BlLayoutResizer matchParent)).
 
 	"...then we layout in measured during previous step bounds"
-	anElement applyLayoutIn: anElement measuredBounds asRectangle.
-	anElement commitChanges
+	anElement applyLayoutIn: anElement measuredBounds asRectangle context: aBlElementBoundsUpdater
 ]
 
 { #category : #'change - layout' }
-BlSpace >> doUpdateLayoutBoundary: anElement [
+BlSpace >> doUpdateLayoutBoundary: anElement context: aBlElementBoundsUpdater [
 	"Perform layout of a given element (e.g. root or glass)"
 
 	"first we measure.."
 	anElement measure: anElement layout previousMeasurementSpec.
 
 	"...then we layout in measured during previous step bounds"
-	anElement applyLayoutIn: (anElement position extent: anElement measuredBounds extent).
-	anElement commitChanges
+	anElement applyLayoutIn: (anElement position extent: anElement measuredBounds extent) context: aBlElementBoundsUpdater
 ]
 
 { #category : #accessing }
@@ -927,19 +946,7 @@ BlSpace >> extractParents: aSetOfElements suchThat: aConditionBlock [
 
 { #category : #'private - change' }
 BlSpace >> extractRoots: aSetOfElements [
-	| theElementsToCheck theElementsToProcess |
-	
-	theElementsToCheck := aSetOfElements as: Stack.
-	theElementsToProcess := Set new.
-	
-	[ theElementsToCheck isEmpty ] whileFalse: [
-		| eachElement |
-		
-		eachElement := theElementsToCheck pop.
-		(theElementsToCheck anySatisfy: [ :eachPotentialParent | eachElement hasParent: eachPotentialParent ])
-			ifFalse: [ theElementsToProcess add: eachElement ] ].
-
-	^ theElementsToProcess
+	^ self class extractRoots: aSetOfElements
 ]
 
 { #category : #'change - properties' }
@@ -1239,8 +1246,7 @@ BlSpace >> initialize [
 
 	self updateCursor: BlCursor default.
 
-	self root space: self.
-	self withHalos
+	self root space: self
 ]
 
 { #category : #'focus managing' }

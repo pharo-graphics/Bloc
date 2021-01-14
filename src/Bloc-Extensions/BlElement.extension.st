@@ -1,12 +1,6 @@
 Extension { #name : #BlElement }
 
 { #category : #'*Bloc-Extensions' }
-BlElement >> gtInspectorChangesIn: aComposite [
-	<gtInspectorPresentationOrder: 20>  
-	^ self changes gtInspectorChangesIn: aComposite
-]
-
-{ #category : #'*Bloc-Extensions' }
 BlElement >> gtInspectorChildrenIn: composite [
 	<gtInspectorPresentationOrder: 80>
 	

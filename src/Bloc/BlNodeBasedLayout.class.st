@@ -9,10 +9,10 @@ BlNodeBasedLayout >> layout: aParentLayoutNode [
 ]
 
 { #category : #layout }
-BlNodeBasedLayout >> layout: anElement in: aRectangle [
+BlNodeBasedLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	| aParentNode |
 	
-	self layoutIgnored: anElement.
+	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext.
 	
 	aParentNode := anElement userData
 		at: #layoutNode
@@ -27,10 +27,11 @@ BlNodeBasedLayout >> layout: anElement in: aRectangle [
 		ifFalse: [
 			anElement
 				position: aParentNode position
-				extent: aRectangle extent ].
+				extent: aRectangle extent
+				context: aBlElementBoundsUpdateContext ].
 
 	aParentNode children do: [ :eachChildNode |
-		eachChildNode element applyLayoutIn: eachChildNode layoutBounds ].
+		eachChildNode element applyLayoutIn: eachChildNode layoutBounds context: aBlElementBoundsUpdateContext ].
 ]
 
 { #category : #measure }

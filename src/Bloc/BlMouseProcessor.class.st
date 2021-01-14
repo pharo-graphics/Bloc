@@ -267,6 +267,7 @@ BlMouseProcessor >> handleMouseMove: aMouseMoveEvent [
 	"picking and mouse move"
 	
 	aTargetElement := self processPicking: aMouseMoveEvent.
+
 	self
 		assert: [ aTargetElement isAttachedToSceneGraph ]
 		description: [ 'Target element must be attached to the scene graph' ].
@@ -530,7 +531,7 @@ BlMouseProcessor >> processPicking: aMouseEvent [
 		ifTrue: [ lastOverTarget := nil ].
 
 	"if the last over target contains the point we can start picking from it"
-	(aMouseEvent isMouseMove and: [ lastOverTarget isNotNil and: [ lastOverTarget containsGlobalPoint: aMouseEvent position ] ])
+	(false"aMouseEvent isMouseMove and: [ lastOverTarget isNotNil and: [ lastOverTarget containsGlobalPoint: aMouseEvent position ] ]")
 		ifTrue: [ aTargetElement := lastOverTarget findMouseEventTargetAt: aMouseEvent position ]
 		ifFalse: [ aTargetElement := self space root findMouseEventTargetAt: aMouseEvent position ].
 	"we have to ensure that aTarget is not nil"

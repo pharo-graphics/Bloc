@@ -102,9 +102,9 @@ GLMBlocMatrixElement >> newParenthesesElement [
 ]
 
 { #category : #layout }
-GLMBlocMatrixElement >> onLayout: aBounds [
+GLMBlocMatrixElement >> onLayout: aBounds context: aBlElementBoundsUpdater [
 	| leftScale rightScale |
-	super onLayout: aBounds.
+	super onLayout: aBounds context: aBlElementBoundsUpdater.
 
 	leftScale := (leftParentheses parent extent / leftParentheses extent) asFloatPoint.
 	rightScale := (rightParentheses parent extent / rightParentheses extent) asFloatPoint.

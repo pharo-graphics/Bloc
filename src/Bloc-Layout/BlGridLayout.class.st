@@ -150,9 +150,9 @@ BlGridLayout >> initialize [
 ]
 
 { #category : #layout }
-BlGridLayout >> layout: anElement in: aRectangle [
-	impl layout: anElement in: aRectangle.
-	self layoutIgnored: anElement
+BlGridLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
+	impl layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext.
+	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #measure }

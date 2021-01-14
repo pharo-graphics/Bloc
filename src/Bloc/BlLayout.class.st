@@ -204,12 +204,11 @@ BlLayout >> layeredChildren: anElement do: aBlock [
 ]
 
 { #category : #layout }
-BlLayout >> layout: anElement in: aRectangle [
-	
+BlLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 ]
 
 { #category : #layout }
-BlLayout >> layoutIgnored: anElement [
+BlLayout >> layoutIgnored: anElement context: aBlElementBoundsUpdateContext [
 	"Layout children ignored by layout so that their measured bounds
 	become actual bounds in parent"
 	| parentBounds |
@@ -234,7 +233,7 @@ BlLayout >> layoutIgnored: anElement [
 				
 			aChild measuredBounds position: childBounds origin.
 			"and finally set new bounds"
-			aChild applyLayoutIn: childBounds ]
+			aChild applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #direction }

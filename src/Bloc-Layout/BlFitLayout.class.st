@@ -46,10 +46,10 @@ BlFitLayout >> layout: aParentNode [
 ]
 
 { #category : #layout }
-BlFitLayout >> layout: anElement in: aRectangle [
+BlFitLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 	| aParentNode |
 	
-	self layoutIgnored: anElement.
+	self layoutIgnored: anElement context: aBlElementBoundsUpdater.
 	
 	aParentNode := anElement userData
 		at: #layoutNode
@@ -60,7 +60,7 @@ BlFitLayout >> layout: anElement in: aRectangle [
 	self layout: aParentNode.
 
 	aParentNode children do: [ :eachChildNode |
-		eachChildNode element applyLayoutIn: eachChildNode layoutBounds ]
+		eachChildNode element applyLayoutIn: eachChildNode layoutBounds context: aBlElementBoundsUpdater ]
 ]
 
 { #category : #measure }

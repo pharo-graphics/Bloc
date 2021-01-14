@@ -37,7 +37,7 @@ BlLinearLayoutHorizontalOrientation >> isHorizontal [
 ]
 
 { #category : #layout }
-BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle [
+BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	|top right bottom left majorBounds elementInnerBounds theLayeredChildren |
 	"Layout subnodes vertically in column one by one
 	based on previousely measured extent"
@@ -93,7 +93,7 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle [
 			"telling each subnode what bounds to use for layouting process.
 			Because measuring process does not modify actual extent
 			we need to use a measured one"
-			child applyLayoutIn: childBounds.
+			child applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext.
 			"translating origin horizontally right for next subnode"
 			(origin x + child measuredWidth + (child outsets width max: 0.0) + self layout cellSpacing) @ origin y ]
 ]

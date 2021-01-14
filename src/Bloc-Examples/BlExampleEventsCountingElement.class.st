@@ -19,7 +19,8 @@ Class {
 		'focusInCount',
 		'focusOutCount',
 		'focusCount',
-		'blurCount'
+		'blurCount',
+		'positionInSpaceChangedCount'
 	],
 	#category : #'Bloc-Examples-Event'
 }
@@ -224,6 +225,11 @@ BlExampleEventsCountingElement >> incrementMouseUpCount [
 	mouseUpCount := mouseUpCount + 1
 ]
 
+{ #category : #increment }
+BlExampleEventsCountingElement >> incrementPositionInSpaceChangedCount [
+	positionInSpaceChangedCount := positionInSpaceChangedCount + 1
+]
+
 { #category : #initialization }
 BlExampleEventsCountingElement >> initialize [
 	super initialize.
@@ -246,6 +252,7 @@ BlExampleEventsCountingElement >> initialize [
 	focusOutCount := 0.
 	focusCount := 0.
 	blurCount := 0.
+	positionInSpaceChangedCount := 0.
 	
 	self when: BlClickEvent do: [ :anEvent |
 		anEvent consumed: true.
@@ -314,6 +321,9 @@ BlExampleEventsCountingElement >> initialize [
 	
 	self when: BlBlurEvent do: [ :anEvent |
 		anEvent currentTarget incrementBlurCount ].
+	
+	self when: BlElementPositionInSpaceChangedEvent do: [ :anEvent |
+		anEvent currentTarget incrementPositionInSpaceChangedCount ].
 	
 	self background: Color veryVeryLightGray
 ]
@@ -386,4 +396,14 @@ BlExampleEventsCountingElement >> mouseUpCount [
 { #category : #accessing }
 BlExampleEventsCountingElement >> mouseUpCount: anObject [
 	mouseUpCount := anObject
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> positionInSpaceChangedCount [
+	^ positionInSpaceChangedCount
+]
+
+{ #category : #accessing }
+BlExampleEventsCountingElement >> positionInSpaceChangedCount: anObject [
+	positionInSpaceChangedCount := anObject
 ]
