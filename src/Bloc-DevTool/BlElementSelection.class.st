@@ -194,17 +194,17 @@ BlElementSelection >> initializeHandlers [
 ]
 
 { #category : #layout }
-BlElementSelection >> onLayout: aBounds [
-	super onLayout: aBounds.
+BlElementSelection >> onLayout: aBounds context: aBlElementBoundsUpdater [
+	super onLayout: aBounds context: aBlElementBoundsUpdater.
 
 	"put remove button to the top left corner"
-	removeButton position: 0@0 extent: removeButton extent.
+	removeButton position: 0@0 extent: removeButton extent context: aBlElementBoundsUpdater.
 
 	"put inspect button to the bottom left corner"
-	inspectButton position:  0@ (aBounds height - inspectButton height) extent: inspectButton extent.
+	inspectButton position:  0@ (aBounds height - inspectButton height) extent: inspectButton extent context: aBlElementBoundsUpdater.
 
 	"put resize button to the bottom right corner"
-	resizeButton position: aBounds extent - (resizeButton width @ resizeButton height) extent: resizeButton extent.
+	resizeButton position: aBounds extent - (resizeButton width @ resizeButton height) extent: resizeButton extent context: aBlElementBoundsUpdater.
 ]
 
 { #category : #geometry }

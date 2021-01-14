@@ -85,8 +85,8 @@ BlMorphicWorldEmbeddingElement >> onAddedToSceneGraph [
 ]
 
 { #category : #layout }
-BlMorphicWorldEmbeddingElement >> onLayout: aRectangle [
-	super onLayout: aRectangle.
+BlMorphicWorldEmbeddingElement >> onLayout: aRectangle context: aBlElementBoundsUpdater [
+	super onLayout: aRectangle context: aBlElementBoundsUpdater.
 
 	world fullBounds.
 	

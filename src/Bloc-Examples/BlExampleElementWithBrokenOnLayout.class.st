@@ -8,6 +8,6 @@ Class {
 }
 
 { #category : #layout }
-BlExampleElementWithBrokenOnLayout >> onLayout: aBounds [
+BlExampleElementWithBrokenOnLayout >> onLayout: aBounds context: aBlElementBoundsUpdater [
 	#() at: 1
 ]

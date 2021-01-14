@@ -59,10 +59,10 @@ BlOnceLayout >> layout: aBlLayout [
 ]
 
 { #category : #layout }
-BlOnceLayout >> layout: anElement in: aRectangle [
+BlOnceLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	self isStopped
-		ifTrue: [ ^ super layout: anElement in: aRectangle ].
-	self layout layout: anElement in: aRectangle
+		ifTrue: [ ^ super layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext ].
+	self layout layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #measure }

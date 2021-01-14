@@ -14,11 +14,6 @@ BlLinearLayoutOrientation >> = anObject [
 	^ self class = anObject class
 ]
 
-{ #category : #accessing }
-BlLinearLayoutOrientation >> applyLayoutIn: aLinearLayout [
-	layout := aLinearLayout
-]
-
 { #category : #orientation }
 BlLinearLayoutOrientation >> breadthMode [
 	^ self subclassResponsibility
@@ -64,8 +59,13 @@ BlLinearLayoutOrientation >> layout [
 	^ layout
 ]
 
+{ #category : #accessing }
+BlLinearLayoutOrientation >> layout: aLinearLayout [
+	layout := aLinearLayout
+]
+
 { #category : #layout }
-BlLinearLayoutOrientation >> layout: anElement in: aRectangle [
+BlLinearLayoutOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	^ self subclassResponsibility
 ]
 

@@ -174,9 +174,9 @@ BlLinearLayout >> isVertical [
 ]
 
 { #category : #layout }
-BlLinearLayout >> layout: anElement in: aRectangle [
-	self orientation layout: anElement in: aRectangle.
-	self layoutIgnored: anElement
+BlLinearLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
+	self orientation layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext.
+	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #measure }
@@ -207,7 +207,7 @@ BlLinearLayout >> orientation [
 { #category : #accessing }
 BlLinearLayout >> orientation: anOrientation [
 	orientation := anOrientation.
-	anOrientation applyLayoutIn: self
+	anOrientation layout: self
 ]
 
 { #category : #testing }

@@ -58,8 +58,8 @@ BlSquaredLayout >> layout: aLayout [
 ]
 
 { #category : #measure }
-BlSquaredLayout >> layout: anElement in: aRectangle [
-	self layout layout: anElement in: aRectangle
+BlSquaredLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
+	self layout layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #measure }

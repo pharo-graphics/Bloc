@@ -59,7 +59,6 @@ Class {
 		'shouldChildrenHandleMouseEvents',
 		'constraints',
 		'layout',
-		'changes',
 		'transformation',
 		'taskQueue',
 		'errorHandler',
@@ -69,6 +68,11 @@ Class {
 	],
 	#category : #'Bloc-Basic'
 }
+
+{ #category : #'instance creation' }
+BlElement class >> epsilon [
+	^ 0.01
+]
 
 { #category : #'api - animations' }
 BlElement >> addAnimation: aBlBaseAnimation [
@@ -373,14 +377,19 @@ BlElement >> allowMouseEvents [
 
 { #category : #layout }
 BlElement >> applyLayoutIn: aBlBounds [
+	
+]
+
+{ #category : #layout }
+BlElement >> applyLayoutIn: aBlBounds context: aBlElementBoundsUpdateContext [
 	self errorHandler
 		with: self
-		do: [ self applyLayoutSafelyIn: aBlBounds ]
-		failed: [ self applyLayoutThatFailedIn: aBlBounds ]
+		do: [ self applyLayoutSafelyIn: aBlBounds context: aBlElementBoundsUpdateContext ]
+		failed: [ self applyLayoutThatFailedIn: aBlBounds context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #'private - layout' }
-BlElement >> applyLayoutSafelyIn: aRectangle [
+BlElement >> applyLayoutSafelyIn: aRectangle context: aBlElementBoundsUpdateContext [
 	"Layout me and my children within aRectangle in my local coordinates.
 	Note: aRectangle may be a temporary or mutable rectangle, so you must not
 	store or refer it without making a copy!
@@ -401,24 +410,25 @@ BlElement >> applyLayoutSafelyIn: aRectangle [
 		ifFalse: [ ^ self ].
 
 	"! actually change my position and extent !"
-	self position: newPosition extent: newExtent.
+	self position: newPosition extent: newExtent context: aBlElementBoundsUpdateContext.
 
 	"if my extent did not change and if I or any of my children did not request layout we do nothing"
 	(extentChanged or: [ self isLayoutRequested or: [ self layout mayInfluencePosition ] ])
 		ifTrue: [
 			self telemetry
 				timeSync: [ 'Layout ', self class name ]
-				during: [ self onLayout: aRectangle ] ].
+				during: [ self onLayout: aRectangle context: aBlElementBoundsUpdateContext ] ].
 
 	"we are done, mark that there are no layout requests pending"
 	self layout requestingLayout: false
 ]
 
 { #category : #'private - layout' }
-BlElement >> applyLayoutThatFailedIn: aRectangle [
+BlElement >> applyLayoutThatFailedIn: aRectangle context: aBlElementBoundsUpdater [
 	"Perform fallback safe action when layout computation failed"
+	NonInteractiveTranscript stdout nextPutAll: 'Layout failed in ', self class name; cr.
 
-	self position: aRectangle origin extent: aRectangle extent.
+	self position: aRectangle origin extent: aRectangle extent context: aBlElementBoundsUpdater.
 	"we are done, mark that there are no layout requests pending"
 	self layout requestingLayout: false
 ]
@@ -656,13 +666,6 @@ BlElement >> changed [
 	self error: 'Never use me, instead invalidate only what is needed'
 ]
 
-{ #category : #'private - accessing' }
-BlElement >> changes [
-	<return: #BlElementChanges>
-	
-	^ changes
-]
-
 { #category : #'children accessing' }
 BlElement >> childAt: anIndex [
 	<return: #BlElement>
@@ -707,6 +710,16 @@ BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBloc
 		childWithId: aContainerName
 		ifFound: ifFoundBlock
 		ifNone: ifNoneBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> childWithId: aBlElementId [
+	<return: #BlElement>
+
+	self
+		childWithId: aBlElementId
+		ifFound: [ :anElement | ^ anElement ]
+		ifNone: [ self error: 'Children with id ', aBlElementId asString, ' does not exist' ]
 ]
 
 { #category : #'children accessing' }
@@ -765,19 +778,6 @@ BlElement >> clipChildren: aBoolean [
 	visuals := visuals clipChildren: aBoolean
 ]
 
-{ #category : #'change reporting' }
-BlElement >> commitChanges [
-	"Commit all accumulated element changes since previous commit"
-
-	self telemetry
-		timeSync: [ 'Commit me ', self class name ]
-		during: [ self changes commitOn: self ].
-
-	self telemetry
-		timeSync: [ 'Commit children ', self class name ]
-		during: [ self childrenDo: [ :anElement | anElement commitChanges ] ]
-]
-
 { #category : #accessing }
 BlElement >> compositingMode [
 	<return: #BlCompositingMode>
@@ -807,7 +807,7 @@ BlElement >> compositionLayer: aCompositionLayer [
 { #category : #'private - layout' }
 BlElement >> computeLayout [
 	"Private! Never use me outside of #forceLayout"
-	| relayoutCounter maxRelayoutCount |
+	| relayoutCounter maxRelayoutCount aBlElementBoundsUpdateContext |
 
 	relayoutCounter := 0.
 	maxRelayoutCount := 100.
@@ -840,9 +840,9 @@ BlElement >> computeLayout [
 					resizer: self constraints vertical resizer)).
 			
 			"...then we layout in measured on previous step bounds"
-			self applyLayoutIn: self measuredBounds asRectangle.
-			
-			self commitChanges.
+			aBlElementBoundsUpdateContext := BlElementBoundsUpdater new.
+			self applyLayoutIn: self measuredBounds asRectangle context: aBlElementBoundsUpdateContext.
+			aBlElementBoundsUpdateContext commitChanges.
 			
 			relayoutCounter := relayoutCounter + 1 ]
 ]
@@ -1750,7 +1750,6 @@ BlElement >> initialize [
 	boundsCache := BlBoundsCache on: self.
 	bounds := BlElementLocalBounds new referenceElement: self.
 	measuredBounds := BlElementLocalBounds new referenceElement: self.
-	changes := BlElementChanges new.
 
 	eventDispatcher := BlElementEventDispatcher on: self.
 	constraints := BlLayoutCommonConstraints new.
@@ -2489,14 +2488,14 @@ BlElement >> onExtentChanged [
 ]
 
 { #category : #layout }
-BlElement >> onLayout: aBounds [
+BlElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	"I am sent then and only then when my extent changed as the result of a layout"
 	"By default let layout strategy do the layouting job.
 	If needed override this method to do some additional actions.
 	@see BlLayoutStrategy>>#layout: self in: aBounds - override if
 	custom layout strategy is needed"
 
-	self layout layout: self in: aBounds
+	self layout layout: self in: aBounds context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #'hooks - layout' }
@@ -2734,7 +2733,7 @@ BlElement >> position: aPoint [
 ]
 
 { #category : #accessing }
-BlElement >> position: aPosition extent: anExtent [
+BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdater [
 	"I do the hard work of changing my position and extent.
 	This action must be very optimized in the sense of invalidation.
 	For example if element becomes smaller in both axis (horizontal and vertical)
@@ -2750,9 +2749,9 @@ BlElement >> position: aPosition extent: anExtent [
 
 	aPreviousPosition := self position.
 	aPreviousExtent := self extent.
-	
-	isPositionChanged := (aPreviousPosition closeTo: aPosition epsilon: BlElementChange epsilon) not.
-	isExtentChanged := (aPreviousExtent closeTo: anExtent epsilon: BlElementChange epsilon) not.
+
+	isPositionChanged := (aPreviousPosition closeTo: aPosition epsilon: self class epsilon) not.
+	isExtentChanged := (aPreviousExtent closeTo: anExtent epsilon: self class epsilon) not.
 
 	"nothing changed, return"
 	(isPositionChanged or: [ isExtentChanged ])
@@ -2761,7 +2760,7 @@ BlElement >> position: aPosition extent: anExtent [
 	isPositionChanged ifTrue: [
 		"change my position"
 		self bounds position: aPosition.
-		self changes positionChange: aPreviousPosition to: aPosition.
+		aBlElementBoundsUpdater changePositionFrom: aPreviousPosition to: aPosition of: self.
 
 		"position changed without extent => invalidate cached space bounds.
 		Note, that if extent changes we invalidate bounds cache anyway"
@@ -2770,7 +2769,7 @@ BlElement >> position: aPosition extent: anExtent [
 	isExtentChanged ifTrue: [ 
 		"change my extent"
 		self bounds extent: anExtent.
-		self changes extentChange: aPreviousExtent to: anExtent.
+		aBlElementBoundsUpdater changeExtentFrom: aPreviousExtent to: anExtent of: self.
 		boundsCache invalidateBoundsInLocal ]
 ]
 
