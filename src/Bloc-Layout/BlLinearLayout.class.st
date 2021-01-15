@@ -1,8 +1,8 @@
 Class {
 	#name : #BlLinearLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable',
-	#classTraits : 'TBlAlignable classTrait',
+	#traits : 'TBlAlignable + TBlDirectionalLayout',
+	#classTraits : 'TBlAlignable classTrait + TBlDirectionalLayout classTrait',
 	#instVars : [
 		'weightSum',
 		'verticalAlignment',
@@ -194,7 +194,7 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 		extentSpec: anExtentSpec
 		orientation: self orientation.
 	
-	aMeasurer measure.
+	aMeasurer measureOn: anElement.
 	
 	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
 ]

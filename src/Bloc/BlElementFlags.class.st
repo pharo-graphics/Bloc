@@ -6,6 +6,7 @@ Class {
 		'NeedsPaint',
 		'ShouldChildrenHandleMouseEvents',
 		'ShouldHandleMouseEvents',
+		'ShouldIgnoreLayoutRequests',
 		'WaitingLayout'
 	],
 	#category : #'Bloc-Basic-Support'
@@ -36,6 +37,12 @@ BlElementFlags class >> ShouldHandleMouseEvents [
 ]
 
 { #category : #'accessing - flags' }
+BlElementFlags class >> ShouldIgnoreLayoutRequests [
+	"This method was automatically generated"
+	^ ShouldIgnoreLayoutRequests value
+]
+
+{ #category : #'accessing - flags' }
 BlElementFlags class >> WaitingLayout [
 	"This method was automatically generated"
 	^ WaitingLayout value
@@ -53,6 +60,7 @@ BlElementFlags class >> flagsDecl [
 		#NeedsPaint.
 		#NeedsLayout.
 		#WaitingLayout.
+		#ShouldIgnoreLayoutRequests.
 	}
 ]
 
@@ -86,6 +94,12 @@ BlElementFlags >> addShouldHandleMouseEvents [
 ]
 
 { #category : #'flags - add' }
+BlElementFlags >> addShouldIgnoreLayoutRequests [
+	"This method was automatically generated"
+	value := value | ShouldIgnoreLayoutRequests value
+]
+
+{ #category : #'flags - add' }
 BlElementFlags >> addWaitingLayout [
 	"This method was automatically generated"
 	value := value | WaitingLayout value
@@ -116,6 +130,12 @@ BlElementFlags >> clearShouldHandleMouseEvents [
 ]
 
 { #category : #'flags - clear' }
+BlElementFlags >> clearShouldIgnoreLayoutRequests [
+	"This method was automatically generated"
+	value := value & (ShouldIgnoreLayoutRequests value bitInvert)
+]
+
+{ #category : #'flags - clear' }
 BlElementFlags >> clearWaitingLayout [
 	"This method was automatically generated"
 	value := value & (WaitingLayout value bitInvert)
@@ -143,6 +163,12 @@ BlElementFlags >> hasShouldChildrenHandleMouseEvents [
 BlElementFlags >> hasShouldHandleMouseEvents [
 	"This method was automatically generated"
 	^ (value & ShouldHandleMouseEvents value) ~= 0
+]
+
+{ #category : #'flags - testing' }
+BlElementFlags >> hasShouldIgnoreLayoutRequests [
+	"This method was automatically generated"
+	^ (value & ShouldIgnoreLayoutRequests value) ~= 0
 ]
 
 { #category : #'flags - testing' }

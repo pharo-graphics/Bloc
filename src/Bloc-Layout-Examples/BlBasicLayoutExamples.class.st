@@ -29,7 +29,7 @@ BlBasicLayoutExamples >> parentWithChildExactSize [
 	| child parent |
 
 	child := BlElement new.
-	child layout: BlBasicLayout new.
+	child layout: BlBasicLayout uniqueInstance.
 	child background: (Color red alpha: 0.3).
 	child border: (BlBorder paint: Color red width: 1).
 	child constraintsDo: [ :c |
@@ -37,7 +37,7 @@ BlBasicLayoutExamples >> parentWithChildExactSize [
 		c vertical exact: 100 ].
 
 	parent := BlElement new.
-	parent layout: BlBasicLayout new.
+	parent layout: BlBasicLayout uniqueInstance.
 	parent background: (Color gray alpha: 0.3).
 	parent padding: (BlInsets all: 25).
 	parent constraintsDo: [ :c |

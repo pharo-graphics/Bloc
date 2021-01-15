@@ -760,7 +760,7 @@ BlSpace >> doUpdateLayout [
 	| elementsToLayout aBlElementBoundsUpdater |
 	
 	self elementsNeedingLayout copy do: [ :eachElement |
-		eachElement layout previousMeasurementSpec
+		eachElement privatePreviousMeasurementSpec
 			ifNil: [
 				self elementsNeedingLayout remove: eachElement.
 				eachElement requestLayout ] ].
@@ -822,7 +822,7 @@ BlSpace >> doUpdateLayoutBoundary: anElement context: aBlElementBoundsUpdater [
 	"Perform layout of a given element (e.g. root or glass)"
 
 	"first we measure.."
-	anElement measure: anElement layout previousMeasurementSpec.
+	anElement measure: anElement privatePreviousMeasurementSpec.
 
 	"...then we layout in measured during previous step bounds"
 	anElement applyLayoutIn: (anElement position extent: anElement measuredBounds extent) context: aBlElementBoundsUpdater

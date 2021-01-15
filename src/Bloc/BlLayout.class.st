@@ -82,11 +82,6 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#instVars : [
-		'previousMeasurementSpec',
-		'direction',
-		'ignoreLayoutRequests'
-	],
 	#category : #'Bloc-Layouts-Basic'
 }
 
@@ -139,21 +134,16 @@ BlLayout >> align: aChildElement vertical: aBlAlignment [
 	"
 ]
 
-{ #category : #initialization }
+{ #category : #'api - direction' }
 BlLayout >> defaultDirection [
 	<return: #BlLayoutDirection>
 
 	^ BlLayoutDirection leftToRight
 ]
 
-{ #category : #direction }
+{ #category : #'api - direction' }
 BlLayout >> direction [
-	^ direction
-]
-
-{ #category : #direction }
-BlLayout >> direction: aBlLayoutDirection [
-	direction := aBlLayoutDirection
+	^ self defaultDirection
 ]
 
 { #category : #geometry }
@@ -162,23 +152,6 @@ BlLayout >> findClosestChildOf: anElement to: aPoint [
 	<return: #BlElement>
 	
 	^ anElement children first
-]
-
-{ #category : #protected }
-BlLayout >> ignoreRequestLayoutDuring: aBlock [
-	| wasIgnored |
-
-	wasIgnored := ignoreLayoutRequests.
-	ignoreLayoutRequests := true.
-	aBlock ensure: [ ignoreLayoutRequests := wasIgnored ]
-]
-
-{ #category : #initialization }
-BlLayout >> initialize [
-	super initialize.
-
-	ignoreLayoutRequests := false.
-	direction := self defaultDirection
 ]
 
 { #category : #protected }
@@ -230,11 +203,6 @@ BlLayout >> layoutIgnored: anElement context: aBlElementBoundsUpdateContext [
 			aChild measuredBounds position: childBounds origin.
 			"and finally set new bounds"
 			aChild applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext ]
-]
-
-{ #category : #direction }
-BlLayout >> leftToRight [
-	direction := BlLayoutDirection leftToRight
 ]
 
 { #category : #protected }
@@ -393,24 +361,4 @@ BlLayout >> onLayoutDone: anElement [
 	"Is sent after layout is completely computed.
 	All layout changes done within this hook will be performed during the next frame.
 	Note: I am sent before the drawing process"
-]
-
-{ #category : #private }
-BlLayout >> previousMeasurementSpec [
-	^ previousMeasurementSpec
-]
-
-{ #category : #private }
-BlLayout >> previousMeasurementSpec: anObject [
-	previousMeasurementSpec := anObject
-]
-
-{ #category : #direction }
-BlLayout >> rightToLeft [
-	direction := BlLayoutDirection rightToLeft
-]
-
-{ #category : #private }
-BlLayout >> shouldIgnoreLayoutRequests [
-	^ ignoreLayoutRequests
 ]

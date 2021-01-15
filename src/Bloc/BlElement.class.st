@@ -998,7 +998,7 @@ BlElement >> defaultGeometry [
 
 { #category : #initialization }
 BlElement >> defaultLayout [
-	^ BlBasicLayout new
+	^ BlBasicLayout uniqueInstance
 ]
 
 { #category : #initialization }
@@ -1725,6 +1725,18 @@ BlElement >> id: aBlElementId [
 		put: aBlElementId asBlocElementId
 ]
 
+{ #category : #layout }
+BlElement >> ignoreRequestLayoutDuring: aBlock [
+	| wasIgnored |
+
+	wasIgnored := flags hasShouldIgnoreLayoutRequests.
+	flags addShouldIgnoreLayoutRequests.
+	aBlock ensure: [
+		wasIgnored
+			ifTrue: [ flags addShouldIgnoreLayoutRequests ]
+			ifFalse: [ flags clearShouldIgnoreLayoutRequests ] ]
+]
+
 { #category : #processing }
 BlElement >> inUIProcessDo: aBlock [ 
 	"Run the supplied block in the UI process.
@@ -2255,7 +2267,7 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 	"Fast exit if I or any of my children did not request layout update
 	and my previous measurement specification equals to new one"
 	(self isLayoutRequested not
-		and: [ self layout previousMeasurementSpec = anExtentMeasurementSpec ])
+		and: [ self privatePreviousMeasurementSpec = anExtentMeasurementSpec ])
 		ifTrue: [ ^ self ].
 
 	"we have to eat layout request first marking it as false in order
@@ -2266,7 +2278,7 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 	flags clearWaitingLayout.
 
 	"Store extent specification to be used for checking next time measure: is sent"
-	self layout previousMeasurementSpec: anExtentMeasurementSpec.
+	self privatePreviousMeasurementSpec: anExtentMeasurementSpec.
 
 	"Perform measuring algorithm"
 	self telemetry
@@ -2278,7 +2290,7 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 BlElement >> measureThatFailed: anExtentMeasurementSpec [
 	
 	flags clearWaitingLayout.
-	self layout previousMeasurementSpec: anExtentMeasurementSpec
+	self privatePreviousMeasurementSpec: anExtentMeasurementSpec
 ]
 
 { #category : #layout }
@@ -2843,6 +2855,20 @@ BlElement >> printOn: aStream [
 ]
 
 { #category : #'private - layout' }
+BlElement >> privatePreviousMeasurementSpec [
+	^ self userData
+		at: #blocPreviousMeasurementSpec
+		ifAbsent: [ nil ]
+]
+
+{ #category : #'private - layout' }
+BlElement >> privatePreviousMeasurementSpec: anObject [
+	self userData
+		at: #blocPreviousMeasurementSpec
+		put: anObject
+]
+
+{ #category : #'private - layout' }
 BlElement >> privateRequestingLayout: aBoolean [
 	aBoolean
 		ifTrue: [ flags addWaitingLayout ]
@@ -3110,14 +3136,14 @@ BlElement >> requestLayout: aSourceElement [
 	check since there can be a case when I am requesting layout, but my parent
 	still does not"
 
-	self layout shouldIgnoreLayoutRequests
+	flags hasShouldIgnoreLayoutRequests
 		ifTrue: [ ^ self ].
 
 	self privateRequestingLayout: true.
 
 	(self ~~ aSourceElement and: [
 		self isAttachedToSceneGraph and: [
-			self layout previousMeasurementSpec isNotNil and: [
+			self privatePreviousMeasurementSpec notNil and: [
 				self isLayoutBoundary and: [
 					self hasParent and: [
 						self parent isLayoutRequested not ] ] ] ] ])

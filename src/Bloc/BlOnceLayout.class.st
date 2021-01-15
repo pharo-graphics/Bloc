@@ -35,7 +35,7 @@ BlOnceLayout >> initialize [
 	super initialize.
 
 	isStopped := false.
-	layout := BlBasicLayout new
+	layout := BlBasicLayout uniqueInstance
 ]
 
 { #category : #accessing }

@@ -33,7 +33,7 @@ BlSquaredLayout >> beTight [
 BlSquaredLayout >> initialize [
 	super initialize.
 	
-	layout := BlBasicLayout new.
+	layout := BlBasicLayout uniqueInstance.
 	isTight := false "be loose by default"
 ]
 
