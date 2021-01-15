@@ -64,6 +64,11 @@ TBlDevScripterActionStep >> mouseUp [
 ]
 
 { #category : #'steps - interactions' }
+TBlDevScripterActionStep >> mouseWheel [
+	^ self addStep: (BlDevScripterMouseWheelStep new referenceSender)
+]
+
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> requestFocus [
 	^ self addStep: BlDevScripterRequestFocusStep new referenceSender
 ]

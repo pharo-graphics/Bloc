@@ -40,6 +40,15 @@ TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock element: an
 ]
 
 { #category : #'examples - scripter' }
+TBlDevScripterExamples >> scripterWithElement: anElementBlock [
+	<gtExample>
+	^ self 
+		scripter: self scripter 
+		withModel: [ nil ] 
+		element: anElementBlock
+]
+
+{ #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithModel: aModelBlock [
 	<gtExample>
 	^ self 

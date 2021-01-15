@@ -398,6 +398,28 @@ BlSpace class >> simulateMouseUpOn: anElement at: aPoint [
 ]
 
 { #category : #'debug - simulation' }
+BlSpace class >> simulateMouseWheelOn: anElement by: aBlVector [
+	"Simulate a mouse wheel event in the middle of a given element"
+	| aPosition aBlocEvent |
+
+	"we never know if an element was already layered out"
+	anElement topMostParent forceLayout.
+	aPosition := anElement bounds inSpace center.
+	
+	"Bloc event"
+	aBlocEvent := BlMouseWheelEvent new
+		isTouch: false;
+		vector: aBlVector asBlocVector;
+		position: aPosition.
+	
+	self
+		simulateEvent: aBlocEvent
+		on: anElement.
+		
+	^ aPosition
+]
+
+{ #category : #'debug - simulation' }
 BlSpace class >> simulateSecondaryClickOn: anElement [
 	"Simulate a secondary click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
