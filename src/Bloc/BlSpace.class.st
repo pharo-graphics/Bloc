@@ -775,7 +775,7 @@ BlSpace >> doUpdateLayout [
 				ifTrue: [
 					eachElement
 						allParentsTo: eachPotentialParent
-						do: [ :eachParent | eachParent layout requestingLayout: true ].
+						do: [ :eachParent | eachParent privateRequestingLayout: true ].
 					shouldIgnore := true ] ].
 		
 		shouldIgnore ].

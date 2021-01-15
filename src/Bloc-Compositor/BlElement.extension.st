@@ -36,12 +36,12 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 	"invisible elements are not rendered too"
 	self isVisible
 		ifFalse: [
-			needsPaint := false.
+			self markDoesNotNeedPaint.
 			^ self ].
 	
 	self invalidationBounds hasPositiveExtent
 		ifFalse: [
-			needsPaint := false.
+			self markDoesNotNeedPaint.
 			^ self ].
 
 	self telemetry
@@ -51,7 +51,7 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 				ifTrue: [ self fullPaintCompositedOn: aCompositorPainter offset: anOffset + self position ]
 				ifFalse: [ self fullPaintWithTransformOn: aCompositorPainter offset: anOffset + self position ]. ].
 
-	needsPaint := false
+	self markDoesNotNeedPaint
 ]
 
 { #category : #'*Bloc-Compositor' }
@@ -83,7 +83,7 @@ BlElement >> markSkippedPaint [
 		ifTrue: [
 			self hasCompositionLayer
 				ifFalse: [ ^ self ].
-			needsPaint := true ]
+			flags addNeedsPaint. ]
 		ifFalse: [
 			self hasParent
 				ifTrue: [ self parent markSkippedPaint ] ]
