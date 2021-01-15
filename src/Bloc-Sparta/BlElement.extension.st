@@ -84,7 +84,7 @@ BlElement >> drawOnSpartaCanvas: aCanvas [
 
 { #category : #'*Bloc-Sparta' }
 BlElement >> fullDrawOnSpartaCanvas: aCanvas [
-	needsPaint := false.
+	flags clearNeedsPaint.
 	
 	"We do not draw transparent elements at all"
 	self isTransparent

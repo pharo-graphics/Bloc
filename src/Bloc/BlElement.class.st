@@ -55,16 +55,14 @@ Class {
 		'measuredBounds',
 		'boundsCache',
 		'eventDispatcher',
-		'shouldHandleMouseEvents',
-		'shouldChildrenHandleMouseEvents',
 		'constraints',
 		'layout',
 		'transformation',
 		'taskQueue',
 		'errorHandler',
-		'needsPaint',
 		'userData',
-		'visuals'
+		'visuals',
+		'flags'
 	],
 	#category : #'Bloc-Basic'
 }
@@ -356,15 +354,15 @@ BlElement >> allParentsTo: aParentElement do: aBlock [
 BlElement >> allowChildrenMouseEvents [
 	"Allow my children to receive mouse events"
 
-	shouldChildrenHandleMouseEvents := true
+	flags addShouldChildrenHandleMouseEvents
 ]
 
 { #category : #'event handling' }
 BlElement >> allowMeAndChildrenMouseEvents [
 	"Allow me and my children to receive mouse events"
 
-	shouldHandleMouseEvents := true.
-	shouldChildrenHandleMouseEvents := true
+	flags addShouldHandleMouseEvents.
+	flags addShouldChildrenHandleMouseEvents
 ]
 
 { #category : #'event handling' }
@@ -372,7 +370,7 @@ BlElement >> allowMouseEvents [
 	"Allow *me* to handle mouse events.
 	It does not influence the ability of the children to handle events, hence I am a local property"
 
-	shouldHandleMouseEvents := true
+	flags addShouldHandleMouseEvents.
 ]
 
 { #category : #layout }
@@ -420,7 +418,7 @@ BlElement >> applyLayoutSafelyIn: aRectangle context: aBlElementBoundsUpdateCont
 				during: [ self onLayout: aRectangle context: aBlElementBoundsUpdateContext ] ].
 
 	"we are done, mark that there are no layout requests pending"
-	self layout requestingLayout: false
+	self privateRequestingLayout: false
 ]
 
 { #category : #'private - layout' }
@@ -430,7 +428,7 @@ BlElement >> applyLayoutThatFailedIn: aRectangle context: aBlElementBoundsUpdate
 
 	self position: aRectangle origin extent: aRectangle extent context: aBlElementBoundsUpdater.
 	"we are done, mark that there are no layout requests pending"
-	self layout requestingLayout: false
+	self privateRequestingLayout: false
 ]
 
 { #category : #converting }
@@ -1000,7 +998,7 @@ BlElement >> defaultGeometry [
 
 { #category : #initialization }
 BlElement >> defaultLayout [
-	^ BlBasicLayout new
+	^ BlBasicLayout uniqueInstance
 ]
 
 { #category : #initialization }
@@ -1727,6 +1725,18 @@ BlElement >> id: aBlElementId [
 		put: aBlElementId asBlocElementId
 ]
 
+{ #category : #layout }
+BlElement >> ignoreRequestLayoutDuring: aBlock [
+	| wasIgnored |
+
+	wasIgnored := flags hasShouldIgnoreLayoutRequests.
+	flags addShouldIgnoreLayoutRequests.
+	aBlock ensure: [
+		wasIgnored
+			ifTrue: [ flags addShouldIgnoreLayoutRequests ]
+			ifFalse: [ flags clearShouldIgnoreLayoutRequests ] ]
+]
+
 { #category : #processing }
 BlElement >> inUIProcessDo: aBlock [ 
 	"Run the supplied block in the UI process.
@@ -1759,17 +1769,17 @@ BlElement >> initialize [
 
 	layout := self defaultLayout.
 
-	shouldHandleMouseEvents := true.
-	shouldChildrenHandleMouseEvents := true.
+	flags := BlElementFlags new.
+	flags addShouldHandleMouseEvents.
+	flags addShouldChildrenHandleMouseEvents.
+	flags addNeedsLayout.
+	flags addWaitingLayout.
 
 	"initialized lazily"
 	userData := nil.
 
 	taskQueue := BlTaskQueue new.
-	errorHandler := self defaultErrorHandler.
-	
-	"set to true once layout is done"
-	needsPaint := false
+	errorHandler := self defaultErrorHandler
 ]
 
 { #category : #'geometry bounds' }
@@ -1914,7 +1924,7 @@ BlElement >> isLayoutRequested [
 	Return true if the layout will be forced during next layout pass, false otherwise"
 	<return: #Boolean>
 
-	^ self layout requestingLayout
+	^ flags hasNeedsLayout
 ]
 
 { #category : #testing }
@@ -2207,14 +2217,14 @@ BlElement >> margin: aBlInsets [
 
 { #category : #'api - painting' }
 BlElement >> markDoesNotNeedPaint [
-	needsPaint := false
+	flags clearNeedsPaint
 ]
 
 { #category : #'api - painting' }
 BlElement >> markNeedsPaintFrom: anElement [
 	"Make me as dirty and request renderer to re-paint me.
 	anElement is the element from which the re-painting request originates"
-	needsPaint := true.
+	flags addNeedsPaint.
 	
 	self wantsSeparateCompositingLayer
 		ifTrue: [
@@ -2257,7 +2267,7 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 	"Fast exit if I or any of my children did not request layout update
 	and my previous measurement specification equals to new one"
 	(self isLayoutRequested not
-		and: [ self layout previousMeasurementSpec = anExtentMeasurementSpec ])
+		and: [ self privatePreviousMeasurementSpec = anExtentMeasurementSpec ])
 		ifTrue: [ ^ self ].
 
 	"we have to eat layout request first marking it as false in order
@@ -2265,10 +2275,10 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 	It works as follows: if during measurement or layout an element
 	requests a layout (because of event for example) #waitingLayout
 	is put back to true and we will do another layout pass as result"
-	self layout waitingLayout: false.
+	flags clearWaitingLayout.
 
 	"Store extent specification to be used for checking next time measure: is sent"
-	self layout previousMeasurementSpec: anExtentMeasurementSpec.
+	self privatePreviousMeasurementSpec: anExtentMeasurementSpec.
 
 	"Perform measuring algorithm"
 	self telemetry
@@ -2279,9 +2289,8 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 { #category : #'private - layout' }
 BlElement >> measureThatFailed: anExtentMeasurementSpec [
 	
-	self layout
-		waitingLayout: false;
-		previousMeasurementSpec: anExtentMeasurementSpec
+	flags clearWaitingLayout.
+	self privatePreviousMeasurementSpec: anExtentMeasurementSpec
 ]
 
 { #category : #layout }
@@ -2360,7 +2369,7 @@ BlElement >> needsPaint [
 	"Return true if I am marked as dirty and am waiting to be re-painted"
 	<return: #Boolean>
 
-	^ needsPaint
+	^ flags hasNeedsPaint
 ]
 
 { #category : #'api - properties' }
@@ -2786,15 +2795,15 @@ BlElement >> positionInSpace [
 BlElement >> preventChildrenMouseEvents [
 	"Prevent my children from receiving mouse events"
 
-	shouldChildrenHandleMouseEvents := false
+	flags clearShouldChildrenHandleMouseEvents
 ]
 
 { #category : #'event handling' }
 BlElement >> preventMeAndChildrenMouseEvents [
 	"Prevent me and my children from receiving mouse events"
 
-	shouldHandleMouseEvents := false.
-	shouldChildrenHandleMouseEvents := false
+	flags clearShouldHandleMouseEvents.
+	flags clearShouldChildrenHandleMouseEvents
 ]
 
 { #category : #'event handling' }
@@ -2802,7 +2811,7 @@ BlElement >> preventMouseEvents [
 	"Prevent *me* from handling mouse events.
 	It does not influence the ability of the children to handle events, hence I am a local property"
 	
-	shouldHandleMouseEvents := false
+	flags clearShouldHandleMouseEvents.
 ]
 
 { #category : #'children accessing' }
@@ -2843,6 +2852,35 @@ BlElement >> printOn: aStream [
 		nextPut: $(;
 		print: self id;
 		nextPut: $)
+]
+
+{ #category : #'private - layout' }
+BlElement >> privatePreviousMeasurementSpec [
+	^ self userData
+		at: #blocPreviousMeasurementSpec
+		ifAbsent: [ nil ]
+]
+
+{ #category : #'private - layout' }
+BlElement >> privatePreviousMeasurementSpec: anObject [
+	self userData
+		at: #blocPreviousMeasurementSpec
+		put: anObject
+]
+
+{ #category : #'private - layout' }
+BlElement >> privateRequestingLayout: aBoolean [
+	aBoolean
+		ifTrue: [ flags addWaitingLayout ]
+		ifFalse: [
+			"If hasWaitingLayout is false it means that measurement and layout passes began,
+			true means that I still have to wait"
+			flags hasWaitingLayout
+				ifTrue: [ ^ self ] ].
+
+	aBoolean
+		ifTrue: [ flags addNeedsLayout ]
+		ifFalse: [ flags clearNeedsLayout ]
 ]
 
 { #category : #'api - properties' }
@@ -3087,21 +3125,41 @@ BlElement >> requestLayout [
 	"Request invalidation of layout on next space pulse
 	@see #requestLayout: for more information"
 
-	Bloc debugModeEnabled
-		ifTrue: [ BlRequestLayoutSignal emit ].
-
 	self requestLayout: self
 ]
 
 { #category : #layout }
-BlElement >> requestLayout: anElement [
+BlElement >> requestLayout: aSourceElement [
 	"Request invalidation of layout on next space pulse originally
 	emitted by a given element.
 	Note: there should be no ===self isLayoutRequested ifTrue: [ ^ self ]===
 	check since there can be a case when I am requesting layout, but my parent
 	still does not"
 
-	self layout requestLayout: self from: anElement
+	flags hasShouldIgnoreLayoutRequests
+		ifTrue: [ ^ self ].
+
+	self privateRequestingLayout: true.
+
+	(self ~~ aSourceElement and: [
+		self isAttachedToSceneGraph and: [
+			self privatePreviousMeasurementSpec notNil and: [
+				self isLayoutBoundary and: [
+					self hasParent and: [
+						self parent isLayoutRequested not ] ] ] ] ])
+		ifTrue: [
+			self space requestLayout: self.
+			^ self ].
+	
+	"checking for parent to be not nil is faster when inlined instead
+	of using hasParent. It is critical because this method is being
+	sent quite often and should be performant"
+	self parent
+		ifNotNil: [ :aParent | aParent requestLayout: aSourceElement ]
+		"There is no parent, probably I am a root element, let's check Space"
+		ifNil: [ self space
+			"If my parent is nil, but I am added to space, we need to let it know that we requested a layout by asking for a next pulse"
+			ifNotNil: [ :aSpace | aSpace requestNextPulse ] ]
 ]
 
 { #category : #layout }
@@ -3144,7 +3202,7 @@ BlElement >> shouldChildrenHandleMouseEvents [
 	Preventing my children from handling mouse event does not stop me from handling them"
 	<return: #Boolean>
 
-	^ shouldChildrenHandleMouseEvents
+	^ flags hasShouldChildrenHandleMouseEvents
 ]
 
 { #category : #'event handling' }
@@ -3153,7 +3211,7 @@ BlElement >> shouldHandleMouseEvents [
 	Preventing me from handling mouse event does not stop my children from doing so"
 	<return: #Boolean>
 
-	^ shouldHandleMouseEvents
+	^ flags hasShouldHandleMouseEvents
 ]
 
 { #category : #'api - opening' }

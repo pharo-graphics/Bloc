@@ -89,7 +89,7 @@ BlElement >> gtInspectorMeasurementChainIn: aComposite [
 		display: [ withAllParents reversed withIndexCollect: [ :anElement :anIndex |
 				{
 					#index -> anIndex .
-					#spec -> anElement layout previousMeasurementSpec.
+					#spec -> anElement privatePreviousMeasurementSpec.
 					#element -> anElement.
 					#layout -> anElement layout
 				} asDictionary ]  ];
