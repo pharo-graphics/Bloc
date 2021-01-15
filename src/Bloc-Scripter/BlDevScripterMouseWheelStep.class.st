@@ -36,7 +36,7 @@ BlDevScripterMouseWheelStep >> initialize [
 
 { #category : #accessing }
 BlDevScripterMouseWheelStep >> leftBy: aNumber [
-	self verticallyBy: aNumber abs
+	self verticallyBy: aNumber abs negated
 ]
 
 { #category : #actions }
@@ -54,7 +54,7 @@ BlDevScripterMouseWheelStep >> playOn: aScripter [
 
 { #category : #accessing }
 BlDevScripterMouseWheelStep >> rightBy: aNumber [
-	self verticallyBy: aNumber abs negated
+	self verticallyBy: aNumber abs
 ]
 
 { #category : #accessing }
