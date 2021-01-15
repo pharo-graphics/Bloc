@@ -57,7 +57,7 @@ BlMetricsInspectorExamples >> metricsInspectorOnUninitializedElement [
 
 { #category : #'examples - helpers' }
 BlMetricsInspectorExamples >> metricsPhlowView [
-	<gtExample>
+	"<gtExample>"
 	| anElement aPhlowClass aPhlow |
 	anElement := self elementWithMetrics.
 	aPhlowClass := self class environment at: #GtPhlowView ifAbsent: [ ^ self ].
