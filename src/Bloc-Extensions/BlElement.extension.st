@@ -195,7 +195,7 @@ BlElement >> gtPropertiesFor: aView [
 
 	^ aView forward
 		title: 'Properties';
-		priority: 10;
+		priority: 11;
 		object: [ self properties ];
 		view: #gtPropertiesFor:
 ]
