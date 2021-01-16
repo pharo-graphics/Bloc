@@ -9,71 +9,49 @@ Class {
 	#superclass : #BlBasicEventHandler,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#instVars : [
-		'shortcutRegistry'
-	],
 	#category : #'Bloc-Events-Handler'
 }
 
-{ #category : #accessing }
+{ #category : #'api - adding / removing' }
 BlShortcutHandler >> addShortcut: aBlShortcut [
-	self shortcuts add: aBlShortcut
-]
+	"Return a shortcut handler with an added given shortcut.
+	Note: The returned instance may or may not be the same as the receiver"
+	<return: #BlShortcutHandler>
 
-{ #category : #'private - accessing' }
-BlShortcutHandler >> eventClass [ 
- 	^ BlShortcutEvent
+	^ self subclassResponsibility
 ]
 
 { #category : #'api - event managing' }
 BlShortcutHandler >> handleEvent: aShortcutEvent [
-	| matchingShortcuts |
-
-	matchingShortcuts := self shortcuts
-		select: [ :eachShortcut | eachShortcut matches: aShortcutEvent buffer ]
-		thenCollect: [ :eachShortcut | eachShortcut -> (eachShortcut match: aShortcutEvent buffer) ].
-	matchingShortcuts sort: [ :a :b | a value > b value ].
-	
-	"when shortcut event is repeated we only want to process repeatable shortcuts"
-	aShortcutEvent isRepeated
-		ifTrue: [ matchingShortcuts := matchingShortcuts select: [ :anAssociation | anAssociation key repeatable ] ].
-
-	matchingShortcuts
-		ifNotEmpty: [ :theShortcuts |
-			| aShortcut |
-			aShortcut := theShortcuts first key.
-			"let users explicitely set consumed to false so it bubbles up"
-			aShortcutEvent consumed: true.
-			aShortcut performDueTo: aShortcutEvent ]
+	self subclassResponsibility
 ]
 
-{ #category : #initialization }
-BlShortcutHandler >> initialize [
-	super initialize.
-	shortcutRegistry := BlShortcutRegistry new
-]
-
-{ #category : #accessing }
+{ #category : #'api - adding / removing' }
 BlShortcutHandler >> removeAllWithCombination: aBlKeyCombination [
-	self shortcutRegistry removeAllWithCombination: aBlKeyCombination
+	"Return a shortcut handler without all shortcuts with a given key combination.
+	Note: The returned instance may or may not be the same as the receiver"
+	<return: #BlShortcutHandler>
+
+	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : #'api - adding / removing' }
 BlShortcutHandler >> removeShortcut: aBlShortcut [
-	self shortcutRegistry add: aBlShortcut
-]
+	"Return a shortcut handler without a given shortcut.
+	Note: The returned instance may or may not be the same as the receiver"
+	<return: #BlShortcutHandler>
 
-{ #category : #accessing }
-BlShortcutHandler >> shortcutRegistry [
-	^ shortcutRegistry 
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 BlShortcutHandler >> shortcuts [
-	^ self shortcutRegistry shortcuts 
+	<return: #Collection of: #BlBasicShortcut>
+
+	^ self subclassResponsibility
 ]
 
 { #category : #'api - event managing' }
 BlShortcutHandler >> wantsEvent: anEvent [
-	^ anEvent class == self eventClass or: [ anEvent class inheritsFrom: self eventClass ]
+	^ self subclassResponsibility
 ]

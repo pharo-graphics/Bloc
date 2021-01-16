@@ -67,6 +67,11 @@ BlDirectEventDispatcher >> addEventHandler: aHandler [
 	aHandler onInstalledIn: self owner
 ]
 
+{ #category : #'api - adding/removing' }
+BlDirectEventDispatcher >> addShortcut: aBlShortcut [
+	shortcutHandler := shortcutHandler addShortcut: aBlShortcut
+]
+
 { #category : #initialization }
 BlDirectEventDispatcher >> defaultFilterRegistry [
 	^ Bloc preferableEventHandlerRegistry new
@@ -149,7 +154,7 @@ BlDirectEventDispatcher >> initialize [
 	not visible to users, think of it as implementation detail"
 	filters := nil. "BlHandlerRegistry"
 	handlers := nil. "BlHandlerRegistry"
-	shortcutHandler := BlShortcutHandler new
+	shortcutHandler := BlShortcutHandlerWithoutShortcuts uniqueInstance
 ]
 
 { #category : #'api - accessing' }
@@ -172,6 +177,11 @@ BlDirectEventDispatcher >> owner: aTBlEventTarget [
 BlDirectEventDispatcher >> printOn: aStream [
 	aStream nextPutAll: self type, ' event dispatcher for '.
 	self owner printOn: aStream
+]
+
+{ #category : #'api - adding/removing' }
+BlDirectEventDispatcher >> removeAllShortcutsWithCombination: aBlKeyCombination [
+	shortcutHandler := shortcutHandler removeAllWithCombination: aBlKeyCombination
 ]
 
 { #category : #'api - adding/removing' }
@@ -244,6 +254,11 @@ BlDirectEventDispatcher >> removeEventHandlersSuchThat: aBlock [
 		ifTrue: [ handlers := nil ].
 	
 	toBeRemoved do: [ :aHandler | aHandler onUninstalledIn: self owner ]
+]
+
+{ #category : #'api - adding/removing' }
+BlDirectEventDispatcher >> removeShortcut: aBlShortcut [
+	shortcutHandler := shortcutHandler removeShortcut: aBlShortcut
 ]
 
 { #category : #'private - accessing' }

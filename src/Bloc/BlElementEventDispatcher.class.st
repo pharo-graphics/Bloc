@@ -32,7 +32,11 @@ BlElementEventDispatcher >> disableEventType: anEventClass [
 
 { #category : #'api - general events' }
 BlElementEventDispatcher >> disableGeneralEventType: anEventClass [
-	activatedGeneralEvents remove: anEventClass ifAbsent: [  ]
+	activatedGeneralEvents
+		ifNil: [ ^ self ].
+	activatedGeneralEvents remove: anEventClass ifAbsent: [  ].
+	activatedGeneralEvents
+		ifEmpty: [ activatedGeneralEvents := nil ]
 ]
 
 { #category : #'api - event managing' }
@@ -169,6 +173,8 @@ BlElementEventDispatcher >> enableExtentChanged [
 
 { #category : #'api - general events' }
 BlElementEventDispatcher >> enableGeneralEventType: anEventClass [
+	activatedGeneralEvents
+		ifNil: [ activatedGeneralEvents := self newActivatedGeneralEvents ].
 	activatedGeneralEvents add: anEventClass
 ]
 
@@ -230,7 +236,7 @@ BlElementEventDispatcher >> gtEventsFor: aView [
 		title: 'Events';
 		items: [ (activatedElementEvents asDictionary associations
 				sorted: [ :a :b | a key < b key ])
-				, (activatedGeneralEvents asArray collect: [ :each | each -> true ]) ];
+				, ((activatedGeneralEvents ifNil: [ #() ]) asArray collect: [ :each | each -> true ]) ];
 		column: 'Type' item: [ :each | each key ];
 		column: 'Enabled' item: [ :each | each value ]
 ]
@@ -240,7 +246,15 @@ BlElementEventDispatcher >> initialize [
 	super initialize.
 
 	activatedElementEvents := BlElementEventDispatcherActivatedEvents new.
-	activatedGeneralEvents := IdentitySet new
+	
+	"IdentitySet on 64bit systems occupies in total 72 bytes, which is quite a lot.
+	Since we do not provide accessors it is fine to initialize it lazily"
+	activatedGeneralEvents := nil
+]
+
+{ #category : #initialization }
+BlElementEventDispatcher >> newActivatedGeneralEvents [
+	^ IdentitySet new
 ]
 
 { #category : #'api - element events' }
@@ -280,7 +294,9 @@ BlElementEventDispatcher >> wantsExtentChanged [
 
 { #category : #'api - general events' }
 BlElementEventDispatcher >> wantsGeneralEventType: anEventClass [
-	^ activatedGeneralEvents includes: anEventClass
+	^ activatedGeneralEvents
+		ifNil: [ false ]
+		ifNotNil: [ :theActivatedEvents | theActivatedEvents includes: anEventClass ]
 ]
 
 { #category : #'api - element events' }
