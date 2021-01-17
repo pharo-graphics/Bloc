@@ -26,7 +26,7 @@ BlElementTransformation class >> scale: aBlVector [
 
 { #category : #converting }
 BlElementTransformation >> asCachedTransformation [
-	^ BlElementCachedTransformation forTransformation: self
+	^ BlElementCachedExplicitTransformation forTransformation: self
 ]
 
 { #category : #converting }
