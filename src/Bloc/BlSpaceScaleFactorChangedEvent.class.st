@@ -22,5 +22,5 @@ BlSpaceScaleFactorChangedEvent >> scaleFactor: anObject [
 
 { #category : #sending }
 BlSpaceScaleFactorChangedEvent >> sendTo: anObject [
-	anObject spaceScaledEvent: self
+	anObject spaceScaleFactorChangedEvent: self
 ]

@@ -233,7 +233,7 @@ BlGlutinHostSpace >> scaleFactorChangedTo: aScaleFactor physicalSize: aFensterPh
 		yourself.
 
 	self enqueueEvent: aBlocEvent.
-	self universe pulse
+	self universe ifNotNil: [ :aUniverse | aUniverse pulse ]
 ]
 
 { #category : #'host space - displaying' }
