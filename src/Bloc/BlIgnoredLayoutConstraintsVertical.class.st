@@ -14,6 +14,15 @@ BlIgnoredLayoutConstraintsVertical >> alignBottom [
 ]
 
 { #category : #alignment }
+BlIgnoredLayoutConstraintsVertical >> alignBottomAt: aUnitCoordinateNumber [
+	"Align the bottom of the element vertically with a unit-coordinate inside of the parent"
+
+	alignment := BlVerticalCoordinateBottomAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment vertical end
+]
+
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsVertical >> alignCenter [
 	alignment := BlElementAlignment vertical center
 ]
