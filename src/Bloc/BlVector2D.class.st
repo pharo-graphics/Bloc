@@ -134,6 +134,13 @@ BlVector2D >> closeTo: anotherVector [
 		and: [ self y closeTo: anotherVector y ]
 ]
 
+{ #category : #accessing }
+BlVector2D >> degrees [
+	"Return vector degrees"
+	<return: #Number>
+	^ self radians * 180 / Float pi
+]
+
 { #category : #arithmetic }
 BlVector2D >> dotProduct2D: anotherVector [
 	<return: #Number>
@@ -206,6 +213,24 @@ BlVector2D >> printOn: aStream [
 		nextPutAll: ', ';
 		nextPutAll: self y asString;
 		nextPut: $)
+]
+
+{ #category : #accessing }
+BlVector2D >> radians [
+	"Return vector radians"
+	<return: #Number>
+	| aResult |
+	(self x isZero and: [ self y isZero ]) ifTrue: [ 
+		self error: 'Cannot compute radians for ', self printString ].
+	(self x isZero and: [ self y < 0 ]) ifTrue: [ ^ Float pi + Float halfPi ].
+	(self x isZero and: [ self y > 0 ]) ifTrue: [ ^ Float halfPi ].
+
+	aResult := (self y abs / self x abs) arcTan.
+
+	(self x >= 0 and: [ self y < 0 ]) ifTrue: [ ^ Float twoPi - aResult ].
+	(self x < 0 and: [ self y < 0 ]) ifTrue: [ ^ Float pi + aResult ].
+	(self x < 0 and: [ self y >= 0 ]) ifTrue: [ ^ Float pi - aResult ].
+	^ aResult
 ]
 
 { #category : #'vector functions' }
