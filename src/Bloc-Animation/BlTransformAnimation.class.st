@@ -69,7 +69,7 @@ BlTransformAnimation >> initStart [
 		ifFalse: [
 			| aCompositeTransformation |
 			aCompositeTransformation := BlElementCompositeTransformation new.
-			aCompositeTransformation add: self target transformation transformation.
+			aCompositeTransformation add: self target transformation asElementTransformation.
 			aCompositeTransformation add: transformation.
 			transformation := aCompositeTransformation asCachedTransformation ].
 	

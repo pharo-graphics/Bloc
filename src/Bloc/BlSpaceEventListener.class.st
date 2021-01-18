@@ -175,7 +175,7 @@ BlSpaceEventListener >> spaceResizedEvent: anEvent [
 ]
 
 { #category : #'window handlers' }
-BlSpaceEventListener >> spaceScaledEvent: anEvent [
+BlSpaceEventListener >> spaceScaleFactorChangedEvent: anEvent [
 	self space
 		beDirtyArea;
 		requestNextPulse

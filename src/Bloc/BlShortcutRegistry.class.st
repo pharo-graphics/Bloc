@@ -61,3 +61,8 @@ BlShortcutRegistry >> shortcuts [
 BlShortcutRegistry >> shortcuts: anObject [
 	shortcuts := anObject
 ]
+
+{ #category : #accessing }
+BlShortcutRegistry >> size [
+	^ shortcuts size
+]

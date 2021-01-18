@@ -37,7 +37,7 @@ TBlEventTarget >> addEventHandlerOn: anEventClass do: aBlock [
 
 { #category : #'shortcut management' }
 TBlEventTarget >> addShortcut: aShortcut [
-	self shortcuts add: aShortcut
+	self eventDispatcher addShortcut: aShortcut
 ]
 
 { #category : #'event management' }
@@ -161,19 +161,19 @@ TBlEventTarget >> removeEventHandlersSuchThat: aBlock [
 
 { #category : #'shortcut management' }
 TBlEventTarget >> removeShortcut: aShortcut [
-	self shortcuts remove: aShortcut
+	self eventDispatcher removeShortcut: aShortcut
 ]
 
 { #category : #'shortcut management' }
 TBlEventTarget >> removeShortcutsWithCombination: aBlKeyCombination [
-	self shortcuts removeAllWithCombination: aBlKeyCombination
+	self eventDispatcher removeAllShortcutsWithCombination: aBlKeyCombination
 ]
 
 { #category : #'shortcut management' }
 TBlEventTarget >> shortcuts [
 	<return: #BlShortcutRegistry>
 
-	^ self eventDispatcher shortcutHandler shortcutRegistry
+	^ self eventDispatcher shortcutHandler shortcuts
 ]
 
 { #category : #'event management' }

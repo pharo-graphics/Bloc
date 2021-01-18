@@ -1011,7 +1011,7 @@ BlElement >> defaultTransformation [
 	"Return an instance of BlTransformation that plays a role of my default transformation"
 	<return: #BlElementTransformation>
 
-	^ BlElementLocalTransformation new
+	^ BlElementIdentityTransformation uniqueInstance
 ]
 
 { #category : #initialization }
