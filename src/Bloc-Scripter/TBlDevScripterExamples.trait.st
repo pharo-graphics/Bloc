@@ -33,9 +33,9 @@ TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock element: an
 		aStep set 
 			label: 'Initialize UI';
 			element: anElementBlock;
-			onModel ].
-		
-	aScripter wait forEmptySpaceTaskQueue.
+			onModel.
+		aStep wait forEmptySpaceTaskQueue.		
+	].
 	^ aScripter syncContinue
 ]
 
