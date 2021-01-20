@@ -15,6 +15,11 @@ BlDevScripterUserData >> at: aSymbol [
 ]
 
 { #category : #accessing }
+BlDevScripterUserData >> at: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
+	^ dictionary at: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock
+]
+
+{ #category : #accessing }
 BlDevScripterUserData >> at: aSymbol put: aValue [
 	dictionary at: aSymbol put: aValue
 ]

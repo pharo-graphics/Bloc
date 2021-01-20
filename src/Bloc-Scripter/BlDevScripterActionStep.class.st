@@ -18,8 +18,8 @@ BlDevScripterActionStep >> assertBlock: anOneArgBlock [
 		assert: [ anOneArgBlock isNotNil ] 
 		description: [ 'Block must be non-nil' ].
 	self 
-		assert: [ anOneArgBlock numArgs = 1 ] 
-		description: [ 'Block must receive one argument' ].
+		assert: [ anOneArgBlock numArgs < 4 ] 
+		description: [ 'Block must receive less then 4 arguments' ].
 ]
 
 { #category : #accessing }
@@ -40,10 +40,10 @@ BlDevScripterActionStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterActionStep >> playOn: aScripter [
-	| anObject |
+	| aTarget |
 	self assertBlock: self block.
-	anObject := self target findTargetStartingInScripter: aScripter.
-	self block value: anObject.
+	aTarget := self target findTargetStartingInScripter: aScripter.
+	self block cull: aTarget cull: aScripter userData cull: aScripter.
 ]
 
 { #category : #accessing }
