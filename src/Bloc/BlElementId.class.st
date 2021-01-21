@@ -30,6 +30,24 @@ BlElementId >> asSymbol [
 	^ self subclassResponsibility
 ]
 
+{ #category : #comparing }
+BlElementId >> hash [
+	"Hash must always be based on the symbolm to support proper comparison between ids that are just
+	constructed differently but have same symbolic id"
+
+	^ self asSymbol hash
+]
+
+{ #category : #converting }
+BlElementId >> indexed: anIndex [
+	"Convert me to an indexed id with a given index"
+	<return: #BlElementId>
+
+	^ BlElementIndexedId new
+		prefixId: self;
+		index: anIndex
+]
+
 { #category : #printing }
 BlElementId >> printOn: aStream [
 	self class isAbstract

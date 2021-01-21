@@ -16,23 +16,18 @@ BlElementNamedId >> = anObject [
 	
 	(anObject isKindOf: BlElementId)
 		ifFalse: [ ^ false ].
-		
+	
+	"if anObject is of the same class it is faster to directly compare identifiers"
 	self class = anObject class
 		ifTrue: [ ^ identifier = anObject identifier ].
-
+	
+	"otherwise fallback to the symbol comparison, but watch out, #asSymbol may not be cheap!"
 	^ self asSymbol = anObject asSymbol
 ]
 
 { #category : #converting }
 BlElementNamedId >> asSymbol [
 	^ self identifier
-]
-
-{ #category : #comparing }
-BlElementNamedId >> hash [
-	"Answer an integer value that is related to the identity of the receiver."
-
-	^ identifier hash
 ]
 
 { #category : #accessing }

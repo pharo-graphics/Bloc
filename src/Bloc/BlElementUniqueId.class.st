@@ -22,6 +22,14 @@ BlElementUniqueId class >> cleanUp [
 	uniqueInstance := nil
 ]
 
+{ #category : #converting }
+BlElementUniqueId class >> indexed: anIndex [
+	"Convert me to an indexed id with a given index"
+	<return: #BlElementId>
+	
+	^ self asBlocElementId indexed: anIndex
+]
+
 { #category : #testing }
 BlElementUniqueId class >> isAbstract [
 	^ self = BlElementUniqueId
@@ -41,9 +49,4 @@ BlElementUniqueId >> = anObject [
 { #category : #accessing }
 BlElementUniqueId >> description [
 	^ self class comment
-]
-
-{ #category : #comparing }
-BlElementUniqueId >> hash [
-	^ self class hash
 ]
