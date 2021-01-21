@@ -29,7 +29,7 @@ ${example:BlMouseOverOutAndEnterLeaveEventExplanation>>#mouseOverAndOutConsumed|
 Class {
 	#name : #BlMouseOverOutAndEnterLeaveEventExplanation,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-! Documentation - Events'
+	#category : #'Bloc-Docs'
 }
 
 { #category : #'examples - events' }

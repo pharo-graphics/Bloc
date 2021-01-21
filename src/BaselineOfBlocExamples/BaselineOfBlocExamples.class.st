@@ -29,5 +29,7 @@ BaselineOfBlocExamples >> baseline: spec [
 			package: #'Bloc-Layout-Examples' with: [
 				spec requires: #(#'Bloc' #'GToolkitExamplesEngine') ];
 			package: #'Bloc-Examples' with: [
+				spec requires: #(#'Bloc') ];
+			package: #'Bloc-Docs' with: [
 				spec requires: #(#'Bloc') ] ].
 ]

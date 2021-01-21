@@ -6,7 +6,7 @@ I show how different resizing strategies work and how to build advanced layouts 
 Class {
 	#name : #BlGridLayoutUsageExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-! Documentation - Layouts'
+	#category : #'Bloc-Docs'
 }
 
 { #category : #examples }
