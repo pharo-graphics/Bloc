@@ -3667,6 +3667,19 @@ BlElement >> withAllParentsDo: aBlock [
 ]
 
 { #category : #'children accessing' }
+BlElement >> withAllParentsUpTo: aParentElement detect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	"Evaluate a block with each of my parents as an argument starting from myself up to but excluding the given parent element
+	and evaluate ifFoundBlock if for any any of the parents aBlock returned true"
+
+	self withAllParentsDo: [ :eachParent | 
+		eachParent == aParentElement
+			ifTrue: [ ^ ifNoneBlock value ].
+		(aBlock value: eachParent)
+			ifTrue: [ ^ ifFoundBlock value: eachParent ] ].
+	^ ifNoneBlock value
+]
+
+{ #category : #'children accessing' }
 BlElement >> withAllParentsUpTo: aParentElement do: aBlock [
 	"Evaluate a block with each of my parents as an argument starting from myself up to but excluding the given parent element"
 	
