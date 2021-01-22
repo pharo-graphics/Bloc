@@ -44,3 +44,10 @@ BlElementGeometryProperty >> hash [
 
 	^ geometry hash
 ]
+
+{ #category : #printing }
+BlElementGeometryProperty >> printOn: aStream [
+	aStream
+		nextPutAll: 'Geometry - ';
+		print: self geometry
+]

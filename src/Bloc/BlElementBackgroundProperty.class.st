@@ -44,3 +44,10 @@ BlElementBackgroundProperty >> hash [
 
 	^ background hash
 ]
+
+{ #category : #printing }
+BlElementBackgroundProperty >> printOn: aStream [
+	aStream
+		nextPutAll: 'Background - ';
+		print: self background
+]

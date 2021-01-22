@@ -14,10 +14,12 @@ As you can see, the use-cases for the ${method:BlElement>>#onAddedToSceneGraph}$
 !! When to not rely on the scene graph attachment hook?
 It is a mistake to rely on the ==attached to the scene graph event== when the state of an element directly or indirectly depends on the state of its parents. Let's consider a font size and assume that the font size of a child depends on the font size of its parent. This situation may happen when the font size is defined in ==em== units.
 ==1em== means that child should have the same font size as its parent, ==0.5== means that the font size of a child is twice as small.
-Everytime there is a change in the composition of the parents the font size should be recomputed. It should also be recomputed when the font size of any parent changes. What will happen when an element is transfered from one parent to the other within the same frame? It is very likely that the recomputation of the font size becomes inefficient and slow. A better solution would be to rely on ${class:BlElementProperty}$ which can be propagated to children (${method:BlElementProperty>>#canPropagateToChildren}$)
+Everytime there is a change in the composition of the parents the font size should be recomputed. It should also be recomputed when the font size of any parent changes. What will happen when an element is transfered from one parent to the other within the same frame? It is very likely that the recomputation of the font size becomes inefficient and slow. A better solution would be to rely on ${class:BlElementProperty}$ which can be propagated to children (${method:BlElementProperty>>#canPropagateToChildren}$).
+
+See ${class:BlElementPropertyExplanation}$ for more information about properties.
 "
 Class {
 	#name : #BlElementOnAddedToSceneGraphExplanation,
 	#superclass : #Object,
-	#category : #'Bloc-Docs'
+	#category : #'Bloc-Docs-Element'
 }

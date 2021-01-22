@@ -24,11 +24,6 @@ BlElementForegroundProperty >> applyOnElement: anElement [
 		ifTrue: [ anElement foreground: self foreground ]
 ]
 
-{ #category : #testing }
-BlElementForegroundProperty >> canPropagateToChildren [
-	^ true
-]
-
 { #category : #accessing }
 BlElementForegroundProperty >> foreground [
 	^ foreground

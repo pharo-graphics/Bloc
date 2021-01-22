@@ -208,6 +208,19 @@ BlBorder >> paint: aBlPaint [
 	paint := aBlPaint asBlPaint
 ]
 
+{ #category : #printing }
+BlBorder >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' width: ';
+		print: width.
+	aStream
+		nextPutAll: ' paint: ';
+		print: paint
+]
+
 { #category : #accessing }
 BlBorder >> style [
 	<return: #BlStrokeStyle>

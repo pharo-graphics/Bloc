@@ -1,5 +1,5 @@
 "
-!Style property
+!Element property
 "
 Class {
 	#name : #BlElementProperty,
@@ -20,13 +20,16 @@ BlElementProperty >> canPropagateToChildren [
 BlElementProperty >> cleanUpOnElement: anElement [
 ]
 
-{ #category : #'api - property' }
+{ #category : #private }
 BlElementProperty >> maybeApplyOnElement: anElement [
+	"Private method to be polymorphic with a property with status"
+
 	self applyOnElement: anElement
 ]
 
-{ #category : #'api - property' }
+{ #category : #private }
 BlElementProperty >> maybeCleanUpOnElement: anElement [
+	"Private method to be polymorphic with a property with status"
 ]
 
 { #category : #'api - property' }

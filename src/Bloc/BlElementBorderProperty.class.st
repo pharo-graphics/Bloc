@@ -44,3 +44,10 @@ BlElementBorderProperty >> hash [
 
 	^ border hash
 ]
+
+{ #category : #printing }
+BlElementBorderProperty >> printOn: aStream [
+	aStream
+		nextPutAll: 'Border - ';
+		print: self border
+]

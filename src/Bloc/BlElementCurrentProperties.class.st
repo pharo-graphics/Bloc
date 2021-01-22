@@ -1,7 +1,7 @@
 Class {
 	#name : #BlElementCurrentProperties,
 	#superclass : #BlElementProperties,
-	#traits : 'TBlElementProperties - {#addProperty:}',
+	#traits : 'TBlElementProperties',
 	#classTraits : 'TBlElementProperties classTrait',
 	#instVars : [
 		'properties',
