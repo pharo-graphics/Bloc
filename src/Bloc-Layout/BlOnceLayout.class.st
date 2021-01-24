@@ -14,13 +14,13 @@ Example:
 "
 Class {
 	#name : #BlOnceLayout,
-	#superclass : #BlBasicLayout,
+	#superclass : #BlLayout,
 	#instVars : [
 		'layout',
 		'isStopped',
 		'measuredExtent'
 	],
-	#category : #'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layout-Once'
 }
 
 { #category : #'instance creation' }
@@ -61,15 +61,23 @@ BlOnceLayout >> layout: aBlLayout [
 { #category : #layout }
 BlOnceLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	self isStopped
-		ifTrue: [ ^ super layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext ].
-	self layout layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext
+		ifFalse: [ ^ self layout layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext ].
+		
+	anElement children accountedByLayout do: [ :child |
+		| childLayoutBounds |
+		childLayoutBounds := child constraints position extent: child measuredExtent.
+		child applyLayoutIn: childLayoutBounds context: aBlElementBoundsUpdateContext ].
+
+	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #measure }
 BlOnceLayout >> measure: anElement with: anExtentSpec [
 	self isStopped
-		ifTrue: [ ^ super measure: anElement with: (BlExtentMeasurementSpec exact: measuredExtent) ].
-	self layout measure: anElement with: anExtentSpec
+		ifFalse: [ ^ self layout measure: anElement with: anExtentSpec ].
+	
+	super measure: anElement with: (BlExtentMeasurementSpec exact: measuredExtent).
+	self measureIgnored: anElement with: anExtentSpec
 ]
 
 { #category : #'hooks - layout' }
@@ -77,6 +85,13 @@ BlOnceLayout >> onLayoutDone: anElement [
 	super onLayoutDone: anElement.
 	
 	isStopped := true.
-	anElement childrenDo: [ :aChildElement | aChildElement measuredBounds position: aChildElement position ].
+	anElement childrenDo: [ :aChildElement |
+		aChildElement constraints position: aChildElement position.
+		
+		aChildElement constraints horizontal resizer isFitContent
+			ifFalse: [ aChildElement constraints horizontal exact: aChildElement width ].
+			
+		aChildElement constraints vertical resizer isFitContent
+			ifFalse: [ aChildElement constraints vertical exact: aChildElement height ] ].
 	measuredExtent := anElement extent
 ]

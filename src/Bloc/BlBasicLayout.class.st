@@ -24,7 +24,9 @@ BlBasicLayout class >> uniqueInstance [
 BlBasicLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 
 	anElement children accountedByLayout do: [ :child |
-		child applyLayoutIn: child measuredBounds asRectangle context: aBlElementBoundsUpdater ].
+		| childLayoutBounds |
+		childLayoutBounds := child constraints position extent: child measuredExtent.
+		child applyLayoutIn: childLayoutBounds context: aBlElementBoundsUpdater ].
 
 	self layoutIgnored: anElement context: aBlElementBoundsUpdater
 ]

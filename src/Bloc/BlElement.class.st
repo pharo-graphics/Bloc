@@ -842,7 +842,10 @@ BlElement >> computeLayout [
 			self applyLayoutIn: self measuredBounds asRectangle context: aBlElementBoundsUpdateContext.
 			aBlElementBoundsUpdateContext commitChanges.
 			
-			relayoutCounter := relayoutCounter + 1 ]
+			relayoutCounter := relayoutCounter + 1 ].
+		
+	relayoutCounter isZero
+		ifFalse: [ self dispatchLayoutDone ]
 ]
 
 { #category : #'private - accessing' }
