@@ -210,7 +210,9 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 				usedSize: 0.0
 				resizer: aHeightResizer ].
 	
-		aChild measure: aWidthSpec @ aHeightSpec ]
+		aChild measure: aWidthSpec @ aHeightSpec ].
+	
+	self layout measureIgnored: self with: anExtentMeasurementSpec
 ]
 
 { #category : #layout }
