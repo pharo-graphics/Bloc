@@ -743,6 +743,17 @@ BlElement >> children [
 	^ children
 ]
 
+{ #category : #'geometry bounds convertion' }
+BlElement >> childrenBoundsToLocal: aBounds [
+	"In-place transform bounds from my childrens' coordinates to my local coordinates.
+	Note, that I do not return a new rectangle and instead mutate provided one,
+	so do not forget to send #asRectangle to given mutable rectangle in order to get
+	immutable one that can be safely stored as instance variable."
+	<return: #BlBounds>
+	
+	^ aBounds
+]
+
 { #category : #'children accessing' }
 BlElement >> childrenCount [
 	"Return amount of my direct children"
@@ -759,6 +770,14 @@ BlElement >> childrenDo: aBlockOrSymbol [
 	<argument: #aBlockOrSymbol satisfies: #notNil>
 	
 	self children do: aBlockOrSymbol
+]
+
+{ #category : #'geometry position convertion' }
+BlElement >> childrenPointToLocal: aPoint [
+	"Transform a given point from the local coordinates of my children to my local coordinates"
+	<return: #Point>
+
+	^ aPoint
 ]
 
 { #category : #'api - look' }
@@ -1573,6 +1592,14 @@ BlElement >> globalBoundsToMine: aBlBounds fromParent: aParentElement [
 ]
 
 { #category : #'geometry position convertion' }
+BlElement >> globalPointToChildren: aPoint [
+	"Transform a given point from the coordinates of my top most parent to my children coordinates"
+	<return: #Point>
+
+	^ self localPointToChildren: (self globalPointToLocal: aPoint)
+]
+
+{ #category : #'geometry position convertion' }
 BlElement >> globalPointToLocal: aPoint [
 	"Transform a given point from the coordinates of my root most parent to my local coordinates"
 	<return: #Point>
@@ -2036,6 +2063,17 @@ BlElement >> layoutDo: aBlock [
 ]
 
 { #category : #'geometry bounds convertion' }
+BlElement >> localBoundsToChildren: aBounds [
+	"In-place transform bounds from my local coordinates to my childrens' coordinates.
+	Note, that I do not return a new rectangle and instead mutate provided one,
+	so do not forget to send #asRectangle to given mutable rectangle in order to get
+	immutable one that can be safely stored as instance variable."
+	<return: #BlBounds>
+	
+	^ aBounds
+]
+
+{ #category : #'geometry bounds convertion' }
 BlElement >> localBoundsToGlobal: aBounds [
 	"In-place transform bounds from local coordinates to global space coordinates.
 	Note, that I do not return a new rectangle and instead mutate provided one,
@@ -2094,11 +2132,14 @@ BlElement >> localBoundsToParent: aBounds [
 	<return: #BlBounds>
 
 	"first apply transformation if we have one"
-	transformation transformBounds: aBounds.
+	self transformation transformBounds: aBounds.
 
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"
 	aBounds translateBy: self position.
+	
+	self hasParent
+		ifTrue: [ self parent childrenBoundsToLocal: aBounds ].
 	
 	^ aBounds
 ]
@@ -2126,12 +2167,21 @@ BlElement >> localBoundsToWindow: aBounds [
 ]
 
 { #category : #'geometry position convertion' }
+BlElement >> localPointToChildren: aPoint [
+	"Transform a given point from my local coordinates to the local coordinates of my children."
+	<return: #Point>
+
+	^ aPoint
+]
+
+{ #category : #'geometry position convertion' }
 BlElement >> localPointToGlobal: aPoint [
 	"Transform a given point from my local coordinates to the coordinates of the root most parent"
 	<return: #Point>
 	| pt |
 
 	pt := self localPointToParent: aPoint.
+
 	^ self hasParent
 		ifTrue: [ self parent localPointToGlobal: pt ]
 		ifFalse: [ pt ]
@@ -2139,7 +2189,7 @@ BlElement >> localPointToGlobal: aPoint [
 
 { #category : #'geometry position convertion' }
 BlElement >> localPointToParent: aPoint [
-	"Transforma a given point from my local coordinates to local coordinates of my parent.
+	"Transform a given point from my local coordinates to local coordinates of my parent.
 	Since this transfortmation does not actually involve my parent, it can be performed
 	regardless of if I have one"
 	<return: #Point>
@@ -2148,7 +2198,12 @@ BlElement >> localPointToParent: aPoint [
 	effecting local nature of a coordinate"
 	pt := self transformation transformPoint: aPoint.
 	"next we should translate it to be within my parent's local coordinates"
-	^ pt translateBy: self position
+	pt := pt translateBy: self position.
+	
+	self hasParent
+		ifTrue: [ pt := self parent childrenPointToLocal: pt ].
+		
+	^ pt
 ]
 
 { #category : #'focus requesting' }
@@ -2707,6 +2762,9 @@ BlElement >> parentBoundsToLocal: aBounds [
 	immutable one that can be safely stored as instance variable."
 	<return: #BlBounds>
 
+	self hasParent
+		ifTrue: [ self parent localBoundsToChildren: aBounds ].
+
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"
 	aBounds translateBy: self position negated.
@@ -2723,7 +2781,11 @@ BlElement >> parentPointToLocal: aPoint [
 	<return: #Point>
 	| aLocalPoint |
 
-	aLocalPoint := aPoint translateBy: self position negated.
+	aLocalPoint := self hasParent
+		ifTrue: [ self parent localPointToChildren: aPoint ]
+		ifFalse: [ aPoint ].
+
+	aLocalPoint := aLocalPoint translateBy: self position negated.
 	aLocalPoint := self transformation inverseTransformPoint: aLocalPoint.
 	^ aLocalPoint
 ]
