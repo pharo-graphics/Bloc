@@ -120,6 +120,13 @@ BlText >> attribute: aTextAttribute [
 ]
 
 { #category : #'text - attributes' }
+BlText >> attribute: aTextAttribute from: aStart to: anEnd [
+	"Apply a given attribute on the text from aStart to anEnd"
+
+	self attributes: { aTextAttribute } from: aStart to: anEnd
+]
+
+{ #category : #'text - attributes' }
 BlText >> attributes: anAttributesCollection [
 	"Apply given attributes on the whole text"
 
