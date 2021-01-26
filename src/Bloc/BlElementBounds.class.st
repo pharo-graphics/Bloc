@@ -146,13 +146,6 @@ BlElementBounds >> inSpace [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'geometry bounds' }
-BlElementBounds >> inWindow [
-	<return: #BlElementBounds>
-
-	^ self subclassResponsibility
-]
-
 { #category : #'geometry - accessing' }
 BlElementBounds >> left [
 	<return: #Number>

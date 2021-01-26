@@ -23,6 +23,17 @@ BlFocusChain class >> of: anElement [
 ]
 
 { #category : #enumerating }
+BlFocusChain >> deepestAttachedElementDo: aBlock ifAbsent: ifAbsentBlock [
+	"Evaluate a given block with the first attached older parent of the focused element"
+
+	self reverseDo: [ :anElement |
+		(anElement isAttachedToSceneGraph and: [ anElement isFocusable ])
+			ifTrue: [ ^ aBlock value: anElement ] ].
+		
+	^ ifAbsentBlock value
+]
+
+{ #category : #enumerating }
 BlFocusChain >> leafsDo: aBlock [
 	"Evaluate a given block with all leaf elements in the chain starting from the focused element in reverse order"
 	| previousElementHadParent |

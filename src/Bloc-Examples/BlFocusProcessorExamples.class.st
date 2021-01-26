@@ -47,7 +47,324 @@ BlFocusProcessorExamples >> elementWithFocusHandler [
 			aLabel text: aTextBuilder value ]
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : #'examples - lose focus' }
+BlFocusProcessorExamples >> loseFocus_01_give_focus_to_child_1 [
+	<gtExample>
+	| aScripter |
+	
+	aScripter := self scripter.
+	aScripter element: self scripterElement.
+	
+	aScripter substeps: 'Give focus to child-1' do: [ :aStep |			
+		aStep requestFocus onChildNamed: #'child-1'.
+		
+		aStep check
+			label: 'Check focus-in fired on child-1';
+			value: [ :anElement | anElement focusInCount ] equals: 1;
+			onChildNamed: #'child-1'.
+			
+		aStep check
+			label: 'Check focus fired on child-1';
+			value: [ :anElement | anElement focusCount ] equals: 1;
+			onChildNamed: #'child-1'.
+			
+		aStep check
+			label: 'Check focus-out not fired on child-1';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onChildNamed: #'child-1'.
+			
+		aStep check
+			label: 'Check blur not fired on child-1';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onChildNamed: #'child-1'.
+		
+		aStep check
+			label: 'Check focus-in fired on container-2';
+			value: [ :anElement | anElement focusInCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check focus fired on container-2';
+			value: [ :anElement | anElement focusCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check focus-out not fired on conatiner-1';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check blur not fired on container-1';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onChildNamed: #'container-2'.
+		
+		aStep check
+			label: 'Check focus-in fired on container-1';
+			value: [ :anElement | anElement focusInCount ] equals: 1;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check focus fired on container-1';
+			value: [ :anElement | anElement focusCount ] equals: 0;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check focus-out fired on conatiner-1';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check blur fired on container-1';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onChildNamed: #'container-1'.
+		
+		aStep check
+			label: 'Check focus-in fired';
+			value: [ :anElement | anElement focusInCount ] equals: 1;
+			onSelf.
+			
+		aStep check
+			label: 'Check focus fired';
+			value: [ :anElement | anElement focusCount ] equals: 0;
+			onSelf.
+			
+		aStep check
+			label: 'Check focus-out not fired';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onSelf.
+			
+		aStep check
+			label: 'Check blur not fired';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onSelf.
+
+		aStep check
+			label: 'Check focus owner';
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'child-1' ];
+			onFocusProcessor.
+	].
+	
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - lose focus' }
+BlFocusProcessorExamples >> loseFocus_02_remove_child_1 [
+	<gtExample>
+	| aScripter aChild1 |
+	
+	aScripter := self loseFocus_01_give_focus_to_child_1.
+	
+	aChild1 := aScripter root childWithId: #'child-1'.
+	aScripter set key: #'child-1' value: [ aChild1 ].
+	
+	aScripter substeps: 'Remove child-1' do: [ :aStep |
+		
+		aStep do
+			action: [ :anElement | anElement removeFromParent ];
+			id: #'child-1'.
+		
+		aStep check
+			label: 'Check focus-in fired on child-1';
+			value: [ aChild1 focusInCount ] equals: 1.
+			
+		aStep check
+			label: 'Check focus fired on child-1';
+			value: [ aChild1 focusCount ] equals: 1.
+
+		aStep check
+			label: 'Check focus-out not fired on child-1';
+			value: [ aChild1 focusOutCount ] equals: 1.
+
+		aStep check
+			label: 'Check blur not fired on child-1';
+			value: [ aChild1 blurCount ] equals: 1.
+		
+		aStep check
+			label: 'Check focus-in fired on container-2';
+			value: [ :anElement | anElement focusInCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check focus fired on container-2';
+			value: [ :anElement | anElement focusCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check focus-out not fired on conatiner-1';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check blur not fired on container-1';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onChildNamed: #'container-2'.
+		
+		aStep check
+			label: 'Check focus-in fired on container-1';
+			value: [ :anElement | anElement focusInCount ] equals: 1;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check focus fired on container-1';
+			value: [ :anElement | anElement focusCount ] equals: 1;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check focus-out fired on conatiner-1';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check blur fired on container-1';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onChildNamed: #'container-1'.
+		
+		aStep check
+			label: 'Check focus-in fired';
+			value: [ :anElement | anElement focusInCount ] equals: 1;
+			onSelf.
+			
+		aStep check
+			label: 'Check focus fired';
+			value: [ :anElement | anElement focusCount ] equals: 0;
+			onSelf.
+			
+		aStep check
+			label: 'Check focus-out not fired';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onSelf.
+
+		aStep check
+			label: 'Check blur not fired';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onSelf.
+
+		aStep check
+			label: 'Check container-1 is focused';
+			satisfies: [ :anElement | anElement isFocused ];
+			id: #'container-1'.
+
+		aStep check
+			label: 'Check child-1 is still marked as focused';
+			satisfies: [ aChild1 isFocused ].
+
+		aStep check
+			label: 'Check focus owner';
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'container-1' ];
+			onFocusProcessor ].
+	
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - lose focus' }
+BlFocusProcessorExamples >> loseFocus_03_add_back_child_1 [
+	<gtExample>
+	| aScripter aChild1 |
+	
+	aScripter := self loseFocus_02_remove_child_1.
+	
+	aChild1 := aScripter userData at: #'child-1'.
+	
+	aScripter substeps: 'Add child-1 back' do: [ :aStep |
+		
+		aStep do
+			action: [ :anElement | anElement addChild: aChild1 ];
+			id: #'container-1'.
+		
+		aStep check
+			label: 'Check focus-in fired on child-1';
+			value: [ aChild1 focusInCount ] equals: 2.
+			
+		aStep check
+			label: 'Check focus fired on child-1';
+			value: [ aChild1 focusCount ] equals: 2.
+			
+		aStep check
+			label: 'Check focus-out not fired on child-1';
+			value: [ aChild1 focusOutCount ] equals: 1.
+
+		aStep check
+			label: 'Check blur not fired on child-1';
+			value: [ aChild1 blurCount ] equals: 1.
+		
+		aStep check
+			label: 'Check focus-in fired on container-2';
+			value: [ :anElement | anElement focusInCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check focus fired on container-2';
+			value: [ :anElement | anElement focusCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check focus-out not fired on conatiner-1';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onChildNamed: #'container-2'.
+			
+		aStep check
+			label: 'Check blur not fired on container-1';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onChildNamed: #'container-2'.
+		
+		aStep check
+			label: 'Check focus-in fired on container-1';
+			value: [ :anElement | anElement focusInCount ] equals: 1;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check focus fired on container-1';
+			value: [ :anElement | anElement focusCount ] equals: 1;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check focus-out fired on conatiner-1';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onChildNamed: #'container-1'.
+			
+		aStep check
+			label: 'Check blur fired on container-1';
+			value: [ :anElement | anElement blurCount ] equals: 1;
+			onChildNamed: #'container-1'.
+		
+		aStep check
+			label: 'Check focus-in fired';
+			value: [ :anElement | anElement focusInCount ] equals: 1;
+			onSelf.
+			
+		aStep check
+			label: 'Check focus fired';
+			value: [ :anElement | anElement focusCount ] equals: 0;
+			onSelf.
+
+		aStep check
+			label: 'Check focus-out not fired';
+			value: [ :anElement | anElement focusOutCount ] equals: 0;
+			onSelf.
+
+		aStep check
+			label: 'Check blur not fired';
+			value: [ :anElement | anElement blurCount ] equals: 0;
+			onSelf.
+
+		aStep check
+			label: 'Check child-1 is still marked as focused';
+			satisfies: [ aChild1 isFocused ].
+			
+		aStep check
+			label: 'Check container-1 is no longer focused';
+			satisfies: [ :anElement | anElement isFocused not ];
+			id: #'container-1'.
+
+		aStep check
+			label: 'Check focus owner';
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'child-1' ];
+			onFocusProcessor ].
+	
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_01_parent [
 	<gtExample>
 	| aScripter |
@@ -87,7 +404,7 @@ BlFocusProcessorExamples >> requestFocus_01_parent [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_02_container_1 [
 	<gtExample>
 	| aScripter |
@@ -146,7 +463,7 @@ BlFocusProcessorExamples >> requestFocus_02_container_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_03_container_2 [
 	<gtExample>
 	| aScripter |
@@ -225,7 +542,7 @@ BlFocusProcessorExamples >> requestFocus_03_container_2 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_04_child_1 [
 	<gtExample>
 	| aScripter |
@@ -324,7 +641,7 @@ BlFocusProcessorExamples >> requestFocus_04_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_05_child_4 [
 	<gtExample>
 	| aScripter |
@@ -443,7 +760,7 @@ BlFocusProcessorExamples >> requestFocus_05_child_4 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_06_container_1 [
 	<gtExample>
 	| aScripter |
@@ -562,7 +879,7 @@ BlFocusProcessorExamples >> requestFocus_06_container_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : #'private - instance creation' }
 BlFocusProcessorExamples >> scripterElement [
 	<gtExample>
 	

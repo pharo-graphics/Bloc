@@ -494,7 +494,7 @@ BlElement >> attachSpace [
 		ifFalse: [
 			self space focusOwner == self
 				ifTrue: [ self loseFocus: self ] ].
-	
+
 	self taskQueue isEmpty
 		ifFalse: [ self space enqueueTasksFrom: self taskQueue ].
 
@@ -1622,6 +1622,19 @@ BlElement >> globalPointToParent: aPoint [
 		ifFalse: [ aPoint ]
 ]
 
+{ #category : #'geometry position convertion' }
+BlElement >> globalPointToParentChildren: aPoint [
+	"Transform a given point from the coordinates of my top most parent to my parent's children coordinates"
+	<return: #Point>
+	| pt |
+	
+	pt := self globalPointToParent: aPoint.
+	self hasParent
+		ifTrue: [ pt := self parent localPointToChildren: pt ].
+
+	^ pt
+]
+
 { #category : #'geometry transform' }
 BlElement >> globalScale [
 	"Return a scale factor from "
@@ -2230,8 +2243,10 @@ BlElement >> looseFocus: aChildElement [
 BlElement >> loseFocus [
 	| anElementToLooseFocus |
 
-	anElementToLooseFocus := self focusedChild
-		ifNil: [ self ].
+	anElementToLooseFocus := self isFocused
+		ifTrue: [ self ]
+		ifFalse: [ self deepestFocusedChild
+			ifNil: [ self ] ].
 
 	anElementToLooseFocus isFocused
 		ifFalse: [ ^ self ].
@@ -2533,6 +2548,22 @@ BlElement >> onChildAdded: anElement [
 BlElement >> onChildRemoved: anElement [
 	"I am sent after anElement was ramoved from me and is no longer my direct child.
 	Note: Always send onChildRemoved: to super class if you override me!"
+]
+
+{ #category : #'children dispatching' }
+BlElement >> onChildToBeRemoved: anElement [
+	"Is sent right before a given child element is about to be removed"
+	
+	"at this point we should make sure that the focus is transfered to me (its parent) if the removed
+	child (or one of its children) had focus"
+	(self isAttachedToSceneGraph and: [ self space hasFocus: anElement ])
+		ifTrue: [
+			| aPreviousFocusOwner |
+			aPreviousFocusOwner := self space focusOwner.
+			self requestFocusDueTo: BlFocusDueToRemovedFromParentReason uniqueInstance.
+			"we should make sure that the removed element that previously had focus keeps the focused flag
+			in order to get focus back next time it is added to the scene"
+			aPreviousFocusOwner focused: true ].
 ]
 
 { #category : #'hooks - geometry' }
@@ -2985,6 +3016,8 @@ BlElement >> removeChild: anElement [
 	anElement must be my direct child"
 	self assert: [ anElement notNil ].
 	self assert: [ anElement parent == self ].
+	
+	self onChildToBeRemoved: anElement.
 
 	anElement parent: nil.
 	self children remove: anElement.
@@ -3017,7 +3050,8 @@ BlElement >> removeChildAt: anIndex [
 		description: [ 'anIndex must be within children array bounds' ].
 	
 	anElement := self children at: anIndex.
-
+	
+	self onChildToBeRemoved: anElement.
 	anElement parent: nil.
 
 	self children removeAt: anIndex.
@@ -3048,7 +3082,8 @@ BlElement >> removeChildren [
 	
 	"first update element's parent to nil"
 	oldChildren := self children.
-
+	
+	oldChildren do: [ :anElement | self onChildToBeRemoved: anElement ].
 	oldChildren do: [ :anElement | anElement parent: nil ].
 
 	"actually remove children"
@@ -3075,6 +3110,7 @@ BlElement >> removeChildren: aListOfElements [
 		assert: [ aListOfElements allSatisfy: [ :anElement | anElement parent == self ] ]
 		description: [ 'I can only remove my direct children!' ].
 	
+	aListOfElements do: [ :anElement | self onChildToBeRemoved: anElement ].
 	aListOfElements do: [ :anElement |
 		anElement parent: nil ].
 	self children removeAll: aListOfElements.
@@ -3103,6 +3139,7 @@ BlElement >> removeDetachedChild: anElement [
 	I must not be used within removeChild: because I have completely different intent; I am used to balance temporary
 	child detaching, while removeChild: is permanent."
 
+	self onChildToBeRemoved: anElement.
 	"send hook to the element that it was removed"
 	self dispatchChildRemoved: anElement
 ]
@@ -3163,16 +3200,19 @@ BlElement >> requestFocus [
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
 
-	self isFocused
-		ifTrue: [ ^ self ].
-
-	self isAttachedToSceneGraph
-		ifTrue: [ self requestFocus: self ]
-		ifFalse: [ self focused: true ]
+	self requestFocusDueTo: BlFocusUnknownReason uniqueInstance
 ]
 
 { #category : #'focus requesting' }
 BlElement >> requestFocus: aChildElement [
+	"Propagate focus request up in the scene graph with an original
+	element that requested focus"
+
+	self requestFocus: aChildElement dueTo: BlFocusUnknownReason uniqueInstance
+]
+
+{ #category : #'focus requesting' }
+BlElement >> requestFocus: aChildElement dueTo: aFocusReason [
 	"Propagate focus request up in the scene graph with an original
 	element that requested focus"
 
@@ -3181,8 +3221,22 @@ BlElement >> requestFocus: aChildElement [
 		description: [ 'I must be attached to the scene graph' ].
 
 	(self hasParent and: [ self parent isAttachedToSceneGraph ])
-		ifTrue: [ self parent requestFocus: aChildElement ]
-		ifFalse: [ self space requestFocusFor: aChildElement ]
+		ifTrue: [ self parent requestFocus: aChildElement dueTo: aFocusReason ]
+		ifFalse: [ self space requestFocusFor: aChildElement dueTo: aFocusReason ]
+]
+
+{ #category : #'focus requesting' }
+BlElement >> requestFocusDueTo: aFocusReason [
+	"Request a focus for this element.
+	If I am not added to the scene graph mark me as focused in order to re-try focus
+	request as soon I am added to the scene graph"
+
+	self isFocused
+		ifTrue: [ ^ self ].
+
+	self isAttachedToSceneGraph
+		ifTrue: [ self requestFocus: self dueTo: aFocusReason ]
+		ifFalse: [ self focused: true ]
 ]
 
 { #category : #layout }
@@ -3423,11 +3477,6 @@ BlElement >> topMostParentSuchThat: aConditionBlock ifFound: ifFoundBlock ifNone
 	^ aTargetParent
 		ifNil: ifNoneBlock
 		ifNotNil: ifFoundBlock
-]
-
-{ #category : #'focus requesting' }
-BlElement >> transferFocus [
-	self space transferFocusTo: self
 ]
 
 { #category : #transformations }

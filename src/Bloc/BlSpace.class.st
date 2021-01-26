@@ -30,7 +30,7 @@ Class {
 		'mouseProcessor',
 		'focusProcessor',
 		'keyboardProcessor',
-		'focusOwner',
+		'focusChain',
 		'dragboard',
 		'nextPulseRequested',
 		'currentCursor',
@@ -768,10 +768,14 @@ BlSpace >> doStyle: anElement [
 	self class doStyle: anElement
 ]
 
-{ #category : #pulse }
+{ #category : #'focus managing' }
 BlSpace >> doUpdateFocus [
 	(self focusOwner notNil and: [ self focusOwner isAttachedToSceneGraph not ])
-		ifTrue: [ self focusProcessor focusOwner: nil ].
+		ifTrue: [
+			focusChain
+				deepestAttachedElementDo: [ :aNewFocusOwner |
+					aNewFocusOwner requestFocusDueTo: BlFocusDueToRemovedFromSpaceReason uniqueInstance ]
+				ifAbsent: [ self focusProcessor focusOwner: nil ] ].
 
 	self focusOwner
 		ifNil: [ self initializeFocus ]
@@ -987,12 +991,14 @@ BlSpace >> extractUnstyled: aSetOfElements [
 
 { #category : #'focus managing' }
 BlSpace >> focusOwner [
-	^ focusOwner
+	<return: #BlElement>
+
+	^ focusChain ifNotNil: [ :aFocusChain | aFocusChain last ]
 ]
 
 { #category : #'focus managing' }
 BlSpace >> focusOwner: anElement [
-	focusOwner := anElement
+	focusChain := anElement ifNotNil: [ BlFocusChain of: anElement ]
 ]
 
 { #category : #'accessing - processors' }
@@ -1103,6 +1109,19 @@ BlSpace >> hasDirtyAreas [
 	<return: #Boolean>
 	
 	^ self dirtyAreas isNotEmpty
+]
+
+{ #category : #'focus managing' }
+BlSpace >> hasFocus: anElement [
+	"Return true if a given element is within the focus chain"
+	
+	self focusOwner
+		ifNil: [ ^ false ].
+		
+	self focusOwner == anElement
+		ifTrue: [ ^ true ].
+		
+	^ self focusOwner hasParent: anElement
 ]
 
 { #category : #'host space - accessing' }
@@ -1546,12 +1565,12 @@ BlSpace >> render [
 ]
 
 { #category : #'focus managing' }
-BlSpace >> requestFocusFor: anElement [
+BlSpace >> requestFocusFor: anElement dueTo: aFocusReason [
 	self
 		assert: [ anElement space = self ]
 		description: [ 'anElement must be attached to the scenegraph owned by this space' ].
 		
-	self focusProcessor requestFor: anElement
+	self focusProcessor requestFor: anElement dueTo: aFocusReason
 ]
 
 { #category : #'change - layout' }
@@ -1747,15 +1766,6 @@ BlSpace >> touchProcessor [
 	<return: #BlTouchProcessor>
 
 	^ touchProcessor
-]
-
-{ #category : #'focus managing' }
-BlSpace >> transferFocusTo: anElement [
-	self
-		assert: [ anElement space = self ]
-		description: [ 'anElement must be attached to the scenegraph owned by this space' ].
-		
-	self focusProcessor transferTo: anElement
 ]
 
 { #category : #'focus managing' }
