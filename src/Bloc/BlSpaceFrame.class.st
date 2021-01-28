@@ -20,6 +20,7 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
+		'id',
 		'phases',
 		'currentPhaseLink'
 	],
@@ -58,10 +59,24 @@ BlSpaceFrame >> hasNextPhase [
 	^ currentPhaseLink nextLink isNotNil
 ]
 
+{ #category : #accessing }
+BlSpaceFrame >> id [
+	"Return the frame id, which is a linearly increasing counter of frames"
+	<return: #Number>
+	
+	^ id
+]
+
+{ #category : #private }
+BlSpaceFrame >> incrementFrameId [
+	id := id + 1
+]
+
 { #category : #initialization }
 BlSpaceFrame >> initialize [
 	super initialize.
-
+	
+	id := 0.
 	phases := LinkedList new.
 	self initializePhases.
 	currentPhaseLink := phases firstLink
@@ -79,6 +94,13 @@ BlSpaceFrame >> initializePhases [
 		BlSpaceFrameDrawingValidationPhase new.
 		BlSpaceFrameLayoutPhase new.
 		BlSpaceFrameDrawingPhase new }
+]
+
+{ #category : #testing }
+BlSpaceFrame >> isAtFirstPhase [
+	<return: #Boolean>
+	
+	^ currentPhaseLink == phases firstLink
 ]
 
 { #category : #accessing }
@@ -116,7 +138,7 @@ BlSpaceFrame >> runCurrentPhaseOn: aSpace [
 
 { #category : #running }
 BlSpaceFrame >> runOn: aSpace [
-
+	self incrementFrameId.
 	self runCurrentPhaseOn: aSpace.
 
 	[ self hasNextPhase ] whileTrue: [
