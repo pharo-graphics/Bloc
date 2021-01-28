@@ -112,6 +112,11 @@ BlTextDecorationCompositeType >> types [
 	^ types
 ]
 
+{ #category : #enumerating }
+BlTextDecorationCompositeType >> typesDo: aBlock [
+	self types do: [ :eachType | eachType typesDo: aBlock ]
+]
+
 { #category : #'api - composition' }
 BlTextDecorationCompositeType >> withLineThrough [
 	self addType: self class lineThrough

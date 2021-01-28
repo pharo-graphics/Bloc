@@ -77,6 +77,11 @@ BlTextDecorationSingleType >> storeOn: aStream [
 		nextPutAll: self class constructor
 ]
 
+{ #category : #enumerating }
+BlTextDecorationSingleType >> typesDo: aBlock [
+	aBlock value: self
+]
+
 { #category : #'logical operations' }
 BlTextDecorationSingleType >> | anOtherDecorationType [
 	^ BlTextDecorationCompositeType new

@@ -24,6 +24,11 @@ BlTextDecorationType class >> underline [
 	^ BlTextDecorationUnderlineType uniqueInstance
 ]
 
+{ #category : #enumerating }
+BlTextDecorationType >> typesDo: aBlock [
+	
+]
+
 { #category : #'logical operations' }
 BlTextDecorationType >> | anOtherDecorationType [
 	^ self subclassResponsibility

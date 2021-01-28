@@ -18,12 +18,26 @@ BlTextDecorationAttribute >> drawAboveOnSpartaCanvas: aSpartaCanvas with: aSpart
 
 { #category : #'*Bloc-Sparta' }
 BlTextDecorationAttribute >> lineOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan [
-	| aFromPoint aToPoint |
+	| fromX toX aPathBuilder |
 	
-	aFromPoint := ((aSpartaSpan baseline x + (self thickness / 2.0)) @ (aSpartaSpan baseline y + 2)) rounded.
-	aToPoint := ((aSpartaSpan baseline x + aSpartaSpan advance - (self thickness / 2.0)) @ (aSpartaSpan baseline y + 2)) rounded.
+	fromX := aSpartaSpan baseline x + (self thickness / 2.0).
+	toX := aSpartaSpan baseline x + aSpartaSpan advance - (self thickness / 2.0).
 	
-	^ aSpartaCanvas shape 
-		line: aFromPoint
-		to: aToPoint
+	aPathBuilder := aSpartaCanvas path.
+	
+	decoration typesDo: [ :eachType |
+		eachType = BlTextDecorationType lineThrough
+			ifTrue: [				
+				aPathBuilder
+					moveTo: (fromX @ ((aSpartaSpan baseline y / 2.0) - aSpartaSpan strikethroughOffset)) rounded;
+					lineTo: (toX @ ((aSpartaSpan baseline y / 2.0) - aSpartaSpan strikethroughOffset)) rounded ].
+
+		eachType = BlTextDecorationType underline
+			ifTrue: [
+				aPathBuilder
+					moveTo: (fromX @ (aSpartaSpan baseline y + 2)) rounded;
+					lineTo: (toX @ (aSpartaSpan baseline y + 2)) rounded ] ].
+	
+	
+	^ aPathBuilder build
 ]

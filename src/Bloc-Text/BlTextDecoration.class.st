@@ -191,6 +191,11 @@ BlTextDecoration >> type: aBlTextDecorationType [
 	type := aBlTextDecorationType
 ]
 
+{ #category : #accessing }
+BlTextDecoration >> typesDo: aBlock [
+	self type typesDo: aBlock
+]
+
 { #category : #'api - decoration' }
 BlTextDecoration >> wavy [
 	self style: BlTextDecorationStyle wavy
