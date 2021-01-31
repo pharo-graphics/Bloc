@@ -30,6 +30,9 @@ BlBlocUIManager class >> initialize [
 BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
 	| isHeadlessVM isInteractiveMode |
 	
+	SystemVersion current major <= 8
+		ifFalse: [ ^ false ].
+	
 	isHeadlessVM := Smalltalk os windowSystemName isNil or: [ Smalltalk os windowSystemName = 'null' ].
 	
 	"The --interactive parameter should be passed in order to select a graphical UI manager.
