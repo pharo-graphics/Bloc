@@ -11,11 +11,11 @@ BaselineOfBlocCore >> baseline: spec [
 		spec 
 			baseline: 'Beacon' with: [
 				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
-			baseline: 'GToolkitFenster' with: [
-				spec repository: 'github://feenkcom/gtoolkit-fenster/src' ].
+			baseline: 'Fenster' with: [
+				spec repository: 'github://feenkcom/fenster/src' ].
 		spec 
 			package: #Bloc with: [
-				spec requires: #(#Beacon GToolkitFenster) ];
+				spec requires: #(#Beacon Fenster) ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#Bloc ). ];
 			package: #'Bloc-Tests' with: [
