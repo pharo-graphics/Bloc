@@ -9,9 +9,7 @@ Class {
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
-	"Only works in headful vm"
-
-	^ (Smalltalk os windowSystemName isNil or: [ Smalltalk os windowSystemName = 'null' ]) not
+	^ true
 ]
 
 { #category : #'driver selection' }
