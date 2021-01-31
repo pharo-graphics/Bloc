@@ -30,8 +30,8 @@ BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
 	aCanvas := Bloc preferableSpartaCanvas offscreen.
 	
 	aLine := anAttribute lineOnSpartaCanvas: aCanvas with: aSpan.
-	self assert: aLine from equals: 21@12.
-	self assert: aLine to equals: 50@12.
+	self assert: (aLine containsPoint: 21@12 on: aCanvas).
+	self assert: (aLine containsPoint: 50@12 on: aCanvas).
 
 	^ aLine
 ]
