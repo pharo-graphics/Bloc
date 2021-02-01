@@ -13,12 +13,12 @@ BaselineOfBlocOSWindow >> baseline: spec [
 				spec repository: 'github://feenkcom/Bloc/src' ];
 			baseline: 'Beacon' with: [
 				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
-			baseline: 'GToolkitFenster' with: [
-				spec repository: 'github://feenkcom/gtoolkit-fenster/src' ].
+			baseline: 'Fenster' with: [
+				spec repository: 'github://feenkcom/fenster/src' ].
 
 		spec
 			package: #'BlocHost-OSWindow' with: [
-				spec requires: #(#BlocCore #GToolkitFenster #Beacon). ];
+				spec requires: #(#BlocCore #tFenster #Beacon). ];
 			package: #'BlocHost-OSWindow-SDL2' with: [
 				spec requires: #(#'BlocHost-OSWindow'). ] ].
 ]
