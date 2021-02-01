@@ -18,7 +18,7 @@ BaselineOfBlocOSWindow >> baseline: spec [
 
 		spec
 			package: #'BlocHost-OSWindow' with: [
-				spec requires: #(#BlocCore #tFenster #Beacon). ];
+				spec requires: #(#BlocCore #Fenster #Beacon). ];
 			package: #'BlocHost-OSWindow-SDL2' with: [
 				spec requires: #(#'BlocHost-OSWindow'). ] ].
 ]
