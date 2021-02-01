@@ -5,7 +5,14 @@ https://en.wikipedia.org/wiki/Euclidean_vector
 
 Instance creation:
 
-	vector := (2, 3)
+	vector := (2, 3).
+	
+!! Examples
+!!! 45 Degrees
+${example:BlVector2DExamples>>#vector_45degrees|codeExpanded=false|previewExpanded=true}$
+!!! 346 Degrees
+${example:BlVector2DExamples>>#vector_346degrees|codeExpanded=false|previewExpanded=true}$
+
 "
 Class {
 	#name : #BlVector2D,
