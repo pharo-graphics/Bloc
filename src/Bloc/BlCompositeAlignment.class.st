@@ -6,7 +6,7 @@ Class {
 		'horizontal',
 		'direction'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #'instance creation' }

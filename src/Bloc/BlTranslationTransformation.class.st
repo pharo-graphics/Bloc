@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'translation'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #'instance creation' }
@@ -36,6 +36,13 @@ BlTranslationTransformation >> is2D [
 	<return: #Boolean>
 
 	^ self translation z isZero
+]
+
+{ #category : #testing }
+BlTranslationTransformation >> isTranslation [
+	<return: #Boolean>
+
+	^ true
 ]
 
 { #category : #'mathematical functions' }

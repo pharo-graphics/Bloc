@@ -16,7 +16,7 @@ I must be set to ===consumed=== if there was a matching shortcut.
 "
 Class {
 	#name : #BlShortcutEvent,
-	#superclass : #BlKeyboardEvent,
+	#superclass : #BlUIEvent,
 	#instVars : [
 		'buffer',
 		'isRepeated'
@@ -31,12 +31,14 @@ BlShortcutEvent >> beRepeated [
 
 { #category : #accessing }
 BlShortcutEvent >> buffer [
+	<return: #BlKeyboardBuffer>
+
 	^ buffer
 ]
 
 { #category : #accessing }
-BlShortcutEvent >> buffer: anObject [
-	buffer := anObject
+BlShortcutEvent >> buffer: aBlKeyboardBuffer [
+	buffer := aBlKeyboardBuffer
 ]
 
 { #category : #initialization }

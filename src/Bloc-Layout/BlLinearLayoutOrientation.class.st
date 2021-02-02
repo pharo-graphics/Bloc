@@ -4,12 +4,14 @@ Class {
 	#instVars : [
 		'layout'
 	],
-	#category : 'Bloc-Layout-Linear-Utilities'
+	#category : #'Bloc-Layout-Linear-Utilities'
 }
 
-{ #category : #accessing }
-BlLinearLayoutOrientation >> applyLayoutIn: aLinearLayout [
-	layout := aLinearLayout
+{ #category : #comparing }
+BlLinearLayoutOrientation >> = anObject [
+	self == anObject
+		ifTrue: [ ^ true ].
+	^ self class = anObject class
 ]
 
 { #category : #orientation }
@@ -19,11 +21,6 @@ BlLinearLayoutOrientation >> breadthMode [
 
 { #category : #orientation }
 BlLinearLayoutOrientation >> breadthProperties: anElement [
-	^ self subclassResponsibility
-]
-
-{ #category : #orientation }
-BlLinearLayoutOrientation >> breadthSpec [
 	^ self subclassResponsibility
 ]
 
@@ -42,6 +39,11 @@ BlLinearLayoutOrientation >> extentSpecBreadth: breadthSpec lengthSpec: lengthSp
 	^ self subclassResponsibility
 ]
 
+{ #category : #comparing }
+BlLinearLayoutOrientation >> hash [
+	^ self class hash
+]
+
 { #category : #testing }
 BlLinearLayoutOrientation >> isHorizontal [
 	^ false
@@ -57,8 +59,13 @@ BlLinearLayoutOrientation >> layout [
 	^ layout
 ]
 
+{ #category : #accessing }
+BlLinearLayoutOrientation >> layout: aLinearLayout [
+	layout := aLinearLayout
+]
+
 { #category : #layout }
-BlLinearLayoutOrientation >> layout: anElement in: aRectangle [
+BlLinearLayoutOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	^ self subclassResponsibility
 ]
 
@@ -74,11 +81,6 @@ BlLinearLayoutOrientation >> lengthMode [
 
 { #category : #orientation }
 BlLinearLayoutOrientation >> lengthProperties: anElement [
-	^ self subclassResponsibility
-]
-
-{ #category : #layout }
-BlLinearLayoutOrientation >> lengthSpec [
 	^ self subclassResponsibility
 ]
 

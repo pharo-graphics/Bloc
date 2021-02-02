@@ -4,7 +4,7 @@ I contain examples of rope iterators
 Class {
 	#name : #BlRopeIteratorExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - next span' }
@@ -170,6 +170,40 @@ BlRopeIteratorExamples >> next_line_Cr123_at_1 [
 ]
 
 { #category : #'examples - next line' }
+BlRopeIteratorExamples >> next_line_Cr1_at_0 [
+	<gtExample>
+	| anIterator |
+	
+	anIterator := (BlCollectionRope collection: String cr, '1') iterator.
+	
+	anIterator nextLineIndicesDo: [ :aStart :anEnd :anEndDelimiter |
+		self assert: aStart equals: 0.
+		self assert: anEnd equals: 0.
+		self assert: anEndDelimiter equals: 1 ].
+
+	self assert: anIterator position equals: 1.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlRopeIteratorExamples >> next_line_Cr1_at_1 [
+	<gtExample>
+	| anIterator |
+	
+	anIterator := self next_line_Cr1_at_0.
+	
+	anIterator nextLineIndicesDo: [ :aStart :anEnd :anEndDelimiter |
+		self assert: aStart equals: 1.
+		self assert: anEnd equals: 2.
+		self assert: anEndDelimiter equals: 2 ].
+
+	self assert: anIterator position equals: 2.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_CrCr_at_0 [
 	<gtExample>
 	| anIterator |
@@ -213,9 +247,9 @@ BlRopeIteratorExamples >> next_line_CrLf_at_0 [
 	anIterator nextLineIndicesDo: [ :aStart :anEnd :anEndDelimiter |
 		self assert: aStart equals: 0.
 		self assert: anEnd equals: 0.
-		self assert: anEndDelimiter equals: 2 ].
+		self assert: anEndDelimiter equals: 1 ].
 
-	self assert: anIterator position equals: 2.
+	self assert: anIterator position equals: 1.
 	
 	^ anIterator
 ]

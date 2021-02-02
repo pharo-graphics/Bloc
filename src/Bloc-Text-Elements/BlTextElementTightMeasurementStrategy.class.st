@@ -7,6 +7,10 @@ Class {
 { #category : #'as yet unclassified' }
 BlTextElementTightMeasurementStrategy >> boundsOf: aParagraph [
 	<return: #BlBounds>
+	| aMeasuredWidth aMeasuredHeight |
 
-	^ BlBounds fromRectangle: aParagraph bounds
+	aMeasuredWidth := aParagraph width.
+	aMeasuredHeight := (aParagraph height).
+
+	^ BlBounds origin: aParagraph left @ 0.0 extent: aMeasuredWidth @ aMeasuredHeight
 ]

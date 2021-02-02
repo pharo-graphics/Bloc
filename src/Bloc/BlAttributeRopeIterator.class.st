@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'subIterator'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'iterator - attributes' }

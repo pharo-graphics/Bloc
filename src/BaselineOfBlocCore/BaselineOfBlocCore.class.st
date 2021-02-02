@@ -8,13 +8,16 @@ Class {
 BaselineOfBlocCore >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
-		spec baseline: 'GToolkitExamplesEngine' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples/src' ].
 		spec 
-			package: #Bloc;
+			baseline: 'Beacon' with: [
+				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
+			baseline: 'Fenster' with: [
+				spec repository: 'github://feenkcom/fenster/src' ].
+		spec 
+			package: #Bloc with: [
+				spec requires: #(#Beacon Fenster) ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#Bloc ). ];
 			package: #'Bloc-Tests' with: [
-				spec requires: #(#Bloc #GToolkitExamplesEngine 'BlocHost-Mock' ). ]. ].
-
+				spec requires: #(#Bloc 'BlocHost-Mock' ). ]. ].
 ]

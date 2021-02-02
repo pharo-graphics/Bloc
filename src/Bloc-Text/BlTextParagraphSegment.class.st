@@ -16,10 +16,18 @@ Class {
 		'baseline',
 		'from',
 		'to',
+		'advance',
 		'paragraph'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
+
+{ #category : #accessing }
+BlTextParagraphSegment >> advance [
+	<return: #Number>
+
+	^ advance
+]
 
 { #category : #accessing }
 BlTextParagraphSegment >> ascent [
@@ -83,6 +91,7 @@ BlTextParagraphSegment >> initialize [
 	top := 0.
 	width := 0.
 	height := 0.
+	advance := 0.
 	
 	baseline := 0@0.
 	
@@ -141,6 +150,13 @@ BlTextParagraphSegment >> paragraph: aTextParagraph [
 		description: [ 'Text paragraph must not be nil' ].
 
 	paragraph := aTextParagraph
+]
+
+{ #category : #accessing }
+BlTextParagraphSegment >> right [
+	<return: #Number>
+	
+	^ left + width
 ]
 
 { #category : #accessing }

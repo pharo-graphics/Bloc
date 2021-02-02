@@ -4,7 +4,7 @@ I contain examples of a concatenation rope
 Class {
 	#name : #BlConcatenationRopeExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - attributes' }
@@ -251,6 +251,19 @@ BlConcatenationRopeExamples >> attributes_small_9_to_10 [
 	self assert: anAttributedRope right right attributes equals: { 1 }.
 
 	^ anAttributedRope
+]
+
+{ #category : #'as yet unclassified' }
+BlConcatenationRopeExamples >> readStreamSmall [
+	<gtExample>
+	| rope stream |
+
+	rope := self small.
+	stream := rope readStream.
+
+	self assert: stream next equals: $H.
+	self assert: (stream next: 3) asString equals: 'ell'.
+	self assert: stream upToEnd asString equals: 'oWorld'.
 ]
 
 { #category : #'instance creation' }

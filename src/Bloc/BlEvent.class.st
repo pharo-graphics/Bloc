@@ -1,5 +1,8 @@
 "
-The specific announcement superclass for the context of Bloc.
+Bloc's root announcement class. I have many subclasses representing concrete event types:
+[[[
+BlEvent allSubclasses
+]]]
 "
 Class {
 	#name : #BlEvent,
@@ -10,17 +13,50 @@ Class {
 		'currentTarget',
 		'timestamp',
 		'canBePropagated',
-		'consumed',
-		'traversedTargets'
+		'consumed'
 	],
 	#category : #'Bloc-Events'
 }
+
+{ #category : #'api - enable / disable' }
+BlEvent class >> disableIn: anEventDispatcher [
+	anEventDispatcher disableGeneralEventType: self
+]
+
+{ #category : #'api - enable / disable' }
+BlEvent class >> enableIn: anEventDispatcher [
+	anEventDispatcher enableGeneralEventType: self
+]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent [
 	<return: #BlEvent>
 
 	^ self fireEvent: anEvent target: anEvent target
+]
+
+{ #category : #'event management' }
+BlEvent class >> fireEvent: anEvent from: aTopEventTarget [
+	<return: #BlEvent>
+
+	^ self fireEvent: anEvent from: aTopEventTarget to: anEvent target
+]
+
+{ #category : #'event management' }
+BlEvent class >> fireEvent: anEvent from: aTopEventTarget to: aTargetEventTarget [
+	<return: #BlEvent>
+	| theEvent aDispatcherChain |
+
+	theEvent := anEvent.
+
+	anEvent hasSource
+		ifFalse: [ anEvent source: aTargetEventTarget ].
+
+	anEvent target = aTargetEventTarget
+		ifFalse: [ theEvent := anEvent newCopyFor: aTargetEventTarget].
+
+	aDispatcherChain := aTargetEventTarget buildEventDispatchChain: BlEventDispatcherChain empty upTo: aTopEventTarget.
+	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
 { #category : #'event management' }
@@ -40,14 +76,61 @@ BlEvent class >> fireEvent: anEvent target: anEventTarget [
 	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
+{ #category : #accessing }
+BlEvent class >> from: anEventTarget [
+	^ self new
+		target: anEventTarget;
+		source: anEventTarget;
+		yourself
+]
+
+{ #category : #accessing }
+BlEvent class >> target: anObject [
+	^ self new
+		target: anObject;
+		yourself
+]
+
+{ #category : #private }
+BlEvent class >> targetToDictionaryForExport: anObject [
+	| aDictionary |
+
+	aDictionary := OrderedDictionary new 
+		at: #class put: anObject class name;
+		at: #hash put: anObject identityHash;
+		yourself.
+
+	(anObject respondsTo: #id)
+		ifTrue: [ aDictionary at: #id put: anObject id asString ].
+
+	^ aDictionary
+]
+
+{ #category : #'api - enable / disable' }
+BlEvent class >> wantedIn: anEventDispatcher [
+	^ anEventDispatcher wantsGeneralEventType: self
+]
+
 { #category : #'private - steps' }
 BlEvent >> arrivedTarget: aTBlEventTarget [
 	self
 		assert: [ aTBlEventTarget isNotNil ]
 		description: [ 'Target must not be nil' ].
 
-	currentTarget := aTBlEventTarget.	
-	self traversedTargets add: (BlEventTraversalTargetStep new target: currentTarget)
+	currentTarget := aTBlEventTarget
+]
+
+{ #category : #converting }
+BlEvent >> asDictionaryForExport [
+	^ OrderedDictionary new 
+		at: #event put: self class name;
+		at: #source put: (source ifNotNil: [ :aSource | self class targetToDictionaryForExport: aSource ]);
+		at: #target put: (target ifNotNil: [ :aTarget | self class targetToDictionaryForExport: aTarget ]);
+		at: #currentTarget put: (currentTarget ifNotNil: [ :aCurrentTarget | self class targetToDictionaryForExport: aCurrentTarget ]);
+		at: #timestamp put: timestamp asString;
+		at: #canBePropagated put: canBePropagated;
+		at: #consumed put: consumed;
+		yourself
 ]
 
 { #category : #'private - steps' }
@@ -56,13 +139,14 @@ BlEvent >> bubblingTarget: aTBlEventTarget [
 		assert: [ aTBlEventTarget isNotNil ]
 		description: [ 'Target must not be nil' ].
 
-	currentTarget := aTBlEventTarget.	
-	self traversedTargets add: (BlEventTraversalBubblingStep new target: currentTarget)
+	currentTarget := aTBlEventTarget
 ]
 
 { #category : #testing }
 BlEvent >> canBePropagated [
-	^ canBePropagated ifNil: [ canBePropagated := true ]
+	<return: #Boolean>
+
+	^ canBePropagated
 ]
 
 { #category : #'private - accessing' }
@@ -76,8 +160,7 @@ BlEvent >> capturingTarget: aTBlEventTarget [
 		assert: [ aTBlEventTarget isNotNil ]
 		description: [ 'Target must not be nil' ].
 
-	currentTarget := aTBlEventTarget.	
-	self traversedTargets add: (BlEventTraversalCapturingStep new target: currentTarget)
+	currentTarget := aTBlEventTarget
 ]
 
 { #category : #testing }
@@ -89,17 +172,14 @@ BlEvent >> consumed: aBoolean [
 BlEvent >> copyFrom: anEvent [
 	super copyFrom: anEvent.
 
-	"We re-initialize traversed targets in order to support event convertion like #asClickEvent
-	because the event that we are copying from might have already other traversed targets"
-	traversedTargets := LinkedList new.
-	"new copies are not consumed yet"
+	"new copies are not yet consumed"
 	consumed := false
 ]
 
 { #category : #'api - accessing' }
 BlEvent >> currentTarget [
 	"Identifies the current target for the event, as the event traverses the scene graph.
-	It always refers to the element to which the event handler has been attached, as opposed to #arget which identifies the element on which the event occurred."
+	It always refers to the element to which the event handler has been attached, as opposed to #target which identifies the element on which the event occurred."
 	<return: #TBlEventTarget>
 
 	^ currentTarget
@@ -121,8 +201,7 @@ BlEvent >> forwardingTarget: aTBlEventTarget [
 		assert: [ aTBlEventTarget isNotNil ]
 		description: [ 'Target must not be nil' ].
 
-	currentTarget := aTBlEventTarget.	
-	self traversedTargets add: (BlEventTraversalForwardingStep new target: currentTarget)
+	currentTarget := aTBlEventTarget
 ]
 
 { #category : #testing }
@@ -136,7 +215,8 @@ BlEvent >> hasSource [
 BlEvent >> initialize [
 	super initialize.
 	
-	traversedTargets := LinkedList new
+	consumed := false.
+	canBePropagated := true
 ]
 
 { #category : #testing }
@@ -161,7 +241,9 @@ BlEvent >> isClick [
 
 { #category : #testing }
 BlEvent >> isConsumed [
-	^ consumed ifNil: [ consumed := false ]
+	<return: #Boolean>
+
+	^ consumed
 ]
 
 { #category : #testing }
@@ -171,6 +253,11 @@ BlEvent >> isDoubleClick [
 
 { #category : #testing }
 BlEvent >> isDrag [
+	^ false
+]
+
+{ #category : #testing }
+BlEvent >> isElementEvent [
 	^ false
 ]
 
@@ -249,6 +336,16 @@ BlEvent >> isTouch [
 	^ false
 ]
 
+{ #category : #testing }
+BlEvent >> isUIEvent [
+	^ false
+]
+
+{ #category : #testing }
+BlEvent >> isUniverseEvent [
+	^ false
+]
+
 { #category : #firing }
 BlEvent >> newCopyFor: aTarget [
 	^ self class new
@@ -259,9 +356,7 @@ BlEvent >> newCopyFor: aTarget [
 
 { #category : #copying }
 BlEvent >> postCopy [
-	super postCopy.
-	
-	traversedTargets := traversedTargets copy
+	super postCopy
 ]
 
 { #category : #sending }
@@ -272,7 +367,6 @@ BlEvent >> sendTo: anObject [
 { #category : #accessing }
 BlEvent >> source [
 	"Return an event target that plays a role of a source of this event"
-	<return: #BlEventTarget>
 
 	self
 		assert: [ self hasSource ]
@@ -282,12 +376,7 @@ BlEvent >> source [
 ]
 
 { #category : #accessing }
-BlEvent >> source: aBlEventTarget [
-	
-	self
-		assert: [ self hasSource not ]
-		description: [ 'Source can not be changed' ].
-	
+BlEvent >> source: aBlEventTarget [	
 	source := aBlEventTarget
 ]
 
@@ -321,9 +410,4 @@ BlEvent >> timestamp: aDateAndTime [
 		description: [ 'Number can not be used as a timestamp, use DateAndTime instead' ].
 
 	timestamp := aDateAndTime
-]
-
-{ #category : #'api - accessing' }
-BlEvent >> traversedTargets [
-	^ traversedTargets
 ]

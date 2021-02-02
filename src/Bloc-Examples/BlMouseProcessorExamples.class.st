@@ -3,8 +3,8 @@ I contain examples-tests of mouse processor
 "
 Class {
 	#name : #BlMouseProcessorExamples,
-	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#superclass : #BlEventProcessorExamples,
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #'examples - sequence' }

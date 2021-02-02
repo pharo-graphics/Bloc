@@ -5,7 +5,7 @@ For more information see class comment of BlMeasurementMode
 Class {
 	#name : #BlMeasurementAtMostMode,
 	#superclass : #BlMeasurementMode,
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #testing }
@@ -15,6 +15,7 @@ BlMeasurementAtMostMode >> isAtMost [
 
 { #category : #geometry }
 BlMeasurementAtMostMode >> measurement: aResizing with: aNumber [
+	<argument: #aNumber satisfies: #isFloat>
 	<return: #BlMeasurementSpec>
 	
 	^ aResizing measurementAtMostWith: aNumber
@@ -34,7 +35,18 @@ BlMeasurementAtMostMode >> printOn: aStream size: aNumber [
 ]
 
 { #category : #geometry }
+BlMeasurementAtMostMode >> size: aNumber min: aMinSize max: aMaxSize [
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	<argument: #aMinSize satisfies: #isBlocFiniteFloat>
+	<argument: #aMaxSize satisfies: #isFloat>
+	<return: #Number>
+	
+	^ BlMeasurementSpec atMost: (aNumber min: aMaxSize)
+]
+
+{ #category : #geometry }
 BlMeasurementAtMostMode >> size: aNumber with: aSpecSize [
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 	<return: #Number>
 	
 	^ aNumber min: aSpecSize

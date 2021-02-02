@@ -8,9 +8,13 @@ Class {
 	#superclass : #BlHostRendererSurface,
 	#instVars : [
 		'context',
-		'extent'
+		'extent',
+		'stencilBits',
+		'sampleCount',
+		'framebufferId',
+		'framebufferFormat'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #accessing }
@@ -36,6 +40,20 @@ BlHostRendererOpenGLSurface >> context: anObject [
 	context := anObject
 ]
 
+{ #category : #initialization }
+BlHostRendererOpenGLSurface >> createSpaceRendererOn: anObject [
+	<return: #BlHostSpaceRenderer>
+
+	^ anObject createOpenGLSpaceRenderer
+]
+
+{ #category : #initialization }
+BlHostRendererOpenGLSurface >> createSurfaceRendererOn: anObject [
+	<return: #BlHostSurfaceRenderer>
+
+	^ anObject createOpenGLSurfaceRenderer
+]
+
 { #category : #accessing }
 BlHostRendererOpenGLSurface >> extent [
 	^ extent
@@ -46,34 +64,42 @@ BlHostRendererOpenGLSurface >> extent: anObject [
 	extent := anObject
 ]
 
-{ #category : #initialization }
-BlHostRendererOpenGLSurface >> initializeOn: anObject [	
-	anObject initializeForOpenGL: self
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> framebufferFormat [
+	^ framebufferFormat
 ]
 
-{ #category : #initialization }
-BlHostRendererOpenGLSurface >> initializeResourcesOn: aHostRenderer [
-	"Initialize me and host renderer depending on surface type.
-	must be implemented by subclasses"
-	
-	self initializeOn: aHostRenderer
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> framebufferFormat: anObject [
+	framebufferFormat := anObject
 ]
 
-{ #category : #rendering }
-BlHostRendererOpenGLSurface >> prepareToRender: aSpace [
-	"Dispatch preparation to render through host space based on surface type"
-	
-	self hostSpace prepareToRender: aSpace onOpenGLSurface: self
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> framebufferId [
+	^ framebufferId
 ]
 
-{ #category : #presenting }
-BlHostRendererOpenGLSurface >> presentAreas: aCollectionOfRectangles [
-	hostSpace presentOpenGLSurface: self areas: aCollectionOfRectangles
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> framebufferId: anObject [
+	framebufferId := anObject
 ]
 
-{ #category : #rendering }
-BlHostRendererOpenGLSurface >> renderFor: aSpace [
-	"Dispatch render process through host space based on surface type"
-	
-	self hostSpace render: aSpace onOpenGLSurface: self
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> sampleCount [
+	^ sampleCount
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> sampleCount: anObject [
+	sampleCount := anObject
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> stencilBits [
+	^ stencilBits
+]
+
+{ #category : #accessing }
+BlHostRendererOpenGLSurface >> stencilBits: anObject [
+	stencilBits := anObject
 ]

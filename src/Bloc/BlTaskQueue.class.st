@@ -7,7 +7,7 @@ Class {
 		'tasks',
 		'lock'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #private }
@@ -17,39 +17,66 @@ BlTaskQueue >> critical: aBlock [
 
 { #category : #'api - enqueue' }
 BlTaskQueue >> dequeue: aBlTask [	
+	"Remove the task from the queue.
+	If complete, mark the task as new so it may be reused."
+
 	self
 		assert: [ aBlTask isNotNil ]
 		description: [ 'Task must not be nil' ].
 
-	lock critical: [ tasks := tasks copyWithout: aBlTask ]
+	tasks ifNotNil:
+		[ lock critical: 
+			[ (tasks includes: aBlTask) ifTrue: 
+				[ tasks remove: aBlTask.
+				aBlTask setNew ] ] ].
 ]
 
 { #category : #'api - enqueue' }
-BlTaskQueue >> enqueue: aBlTask [	
+BlTaskQueue >> enqueue: aBlTask [
+	| taskExists |
+
 	self
 		assert: [ aBlTask isNotNil ]
 		description: [ 'Task must not be nil' ].
+
+	"Tasks must be new.
+	Tasks that are already complete could also be allowed, but requiring new tasks means that any state in the task should have also been reset"
+	self
+		assert: [ aBlTask isNew ]
+		description: [ 'Tasks cannot be submitted twice' ].
 
 	lock critical: [
-		self
-			assert: [ (tasks includes: aBlTask) not ]
-			description: [ 'Task must not exist' ].
-		
-		tasks := tasks copyWith: aBlTask ]
+		tasks ifNil: [ tasks := self newTasks ].
+		taskExists := tasks includes: aBlTask.
+		taskExists ifFalse:
+			[ tasks add: aBlTask.
+			aBlTask setQueued ] ].
+
+	self
+		assert: [ taskExists not ]
+		description: [ 'Task must not exist' ].
+
 ]
 
 { #category : #'api - enqueue' }
-BlTaskQueue >> enqueueAll: aCollectionOfBlTask [	
+BlTaskQueue >> enqueueAll: aCollectionOfBlTask [
+	| taskExists |
+
 	self
 		assert: [ aCollectionOfBlTask isNotNil ]
 		description: [ 'Tasks must not be nil' ].
 
 	lock critical: [
-		self
-			assert: [ (tasks includesAny: aCollectionOfBlTask) not ]
-			description: [ 'Tasks must not exist' ].
-		
-		tasks := tasks, aCollectionOfBlTask ]
+		tasks ifNil: [ tasks := self newTasks ].
+		taskExists := tasks includesAny: aCollectionOfBlTask.
+		taskExists ifFalse:
+			[ aCollectionOfBlTask do: [ :task | task setQueued ].
+			tasks addAll: aCollectionOfBlTask ] ].
+
+	self
+		assert: [ taskExists not ]
+		description: [ 'Tasks must not exist' ].
+
 ]
 
 { #category : #'api - enqueue' }
@@ -65,44 +92,99 @@ BlTaskQueue >> enqueueFrom: aBlTaskQueue [
 
 { #category : #'api - enqueue' }
 BlTaskQueue >> flush [
-	^ lock critical: [
-		| theTasks |
+	| theTasks |
+
+	"While assignments without message sends are atomic, so the sequence can't be interrupted, it's possible that a process switch would clear the tasks while another process is within the lock, so take the lock out here."
+	lock critical: [
 		theTasks := tasks.
-		tasks := #().
-		theTasks ]
+		tasks := nil ].
+
+	^ theTasks.
+
 ]
 
 { #category : #initialization }
 BlTaskQueue >> initialize [
 	super initialize.
 	
-	tasks := Array new.
 	lock := Monitor new
 ]
 
+{ #category : #'api - accessing' }
+BlTaskQueue >> isEmpty [
+	<return: #Boolean>
+
+	^ lock critical: [ tasks isNil or: [ tasks isEmpty ] ]
+]
+
+{ #category : #private }
+BlTaskQueue >> newTasks [
+	"Answer a new collection for storing tasks"
+
+	^ OrderedCollection new.
+]
+
+{ #category : #printing }
+BlTaskQueue >> printOn: aStream [
+
+	super printOn: aStream.
+	tasks ifNotNil: 
+		[ aStream
+			nextPut: $(;
+			print: tasks size;
+			nextPut: $) ]
+]
+
+{ #category : #private }
+BlTaskQueue >> requeue: aBlTask [
+	"Requeue the supplied task"
+
+	"This is only used internally as part of the task execution, thus the task's state should be executing"
+	self
+		assert: [ aBlTask isExecuting ]
+		description: [ 'Tasks cannot be requeued outside execution' ].
+
+	aBlTask setNew.
+	self enqueue: aBlTask
+]
+
 { #category : #'api - running' }
-BlTaskQueue >> run [
+BlTaskQueue >> runOn: aSpace [
 	| theTasks |
 	
 	lock critical: [
 		"We store reference to tasks Array because it is possible
-		that a random task is removed while enumerating a collection"
+		that a random task is removed while enumerating a collection.
+		This switch can be made atomic without the lock, but is here since the tasks shouldn't be updated while another process has the lock."
 		theTasks := tasks.
-		tasks := #() ].
+		tasks := nil.
+		"Mark all tasks as pending"
+		theTasks ifNotNil:
+			[ theTasks do: [ :task | task setPendingExecution ] ] ].
 
-	"since we have an immutble reference to original array, there is need to execute task within a lock"
-	theTasks do: [ :aTask | aTask run ]
+	"since we have an immutable reference to original array, there is need to execute task within a lock"
+	theTasks ifNotNil:
+		[ theTasks do: [ :aTask |
+			aTask setExecuting.
+			aSpace telemetry
+				timeSync: [ 'Run task {1} ({2})' format: { aTask class name . aTask } ]
+				during: [ BlTaskExecutionSignal for: aTask block: [ aTask run ] ].
+			aTask requeueTaskAfterExecution ifTrue: 
+				[ self requeue: aTask ]
+			ifFalse:
+				[ aTask setComplete ] ] ].
+
 ]
 
 { #category : #'api - accessing' }
 BlTaskQueue >> tasks [
 	"Return a new collection instance holding all my tasks"
-	| theTasks |
-		
-	lock critical: [
-		"We store reference to tasks Array because it is possible
-		that a random task is removed while enumerating a collection"
-		theTasks := tasks ].
-	
-	^ theTasks
+
+	tasks ifNil: [ ^ #() ].
+	"tasks are an OrderedCollection (or nil), thus converting to anArray is guaranteed to answer a copy"
+	^ lock critical: 
+		[ tasks 
+			ifNil: [ #() ]
+			ifNotNil: [ tasks asArray ] ].
+
 ]

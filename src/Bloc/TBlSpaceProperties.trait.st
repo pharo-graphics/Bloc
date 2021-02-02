@@ -6,7 +6,7 @@ By using this Trait in both Space and HostSpace we make sure that they have the 
 "
 Trait {
 	#name : #TBlSpaceProperties,
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space'
 }
 
 { #category : #'window - properties' }
@@ -37,6 +37,26 @@ TBlSpaceProperties >> fullscreen [
 TBlSpaceProperties >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
 	and exit fullscreen mode if false is given"
+
+	self explicitRequirement
+]
+
+{ #category : #'window - properties' }
+TBlSpaceProperties >> fullsize [
+	"Return true if an underlying window is in fullsize mode,
+	false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
+	and has no window title"
+	<return: #Boolean>
+
+	^ self explicitRequirement
+]
+
+{ #category : #'window - properties' }
+TBlSpaceProperties >> fullsize: aBoolean [
+	"Switch underlying window to fullsize if true is given
+	and exit fullsize mode if false is given.
+	See ${method:TBlSpaceProperties>>#fullsize}"
 
 	self explicitRequirement
 ]

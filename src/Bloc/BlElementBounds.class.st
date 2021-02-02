@@ -1,8 +1,8 @@
 "
 I represent rectangular bounds in a context of a reference element.
-I define an api to convert element bounds from one coordinate system to other coordinate systems.
+I define an API to convert element bounds from one coordinate system to other coordinate systems.
 
-Reference element always corresponds to an element which was used to compute bounds
+The reference element always corresponds to the element which was used to compute the bounds.
 "
 Class {
 	#name : #BlElementBounds,
@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'referenceElement'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #converting }
@@ -68,8 +68,8 @@ BlElementBounds >> boundsInLocal: aBlBounds [
 	<return: #BlBounds>
 
 	^ aBlBounds
-		left: 0
-		top: 0
+		left: 0.0
+		top: 0.0
 		corner: self extent;
 		yourself
 ]
@@ -146,13 +146,6 @@ BlElementBounds >> inSpace [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'geometry bounds' }
-BlElementBounds >> inWindow [
-	<return: #BlElementBounds>
-
-	^ self subclassResponsibility
-]
-
 { #category : #'geometry - accessing' }
 BlElementBounds >> left [
 	<return: #Number>
@@ -219,6 +212,11 @@ BlElementBounds >> localBoundsToTransformed: aBounds [
 	self referenceElement transformation transformBounds: aBounds.
 
 	^ aBounds
+]
+
+{ #category : #'geometry - accessing' }
+BlElementBounds >> perimeter [
+	^ (self width + self height) * 2
 ]
 
 { #category : #accessing }

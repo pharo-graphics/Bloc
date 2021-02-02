@@ -6,7 +6,7 @@ Class {
 		'center',
 		'top'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #factory }

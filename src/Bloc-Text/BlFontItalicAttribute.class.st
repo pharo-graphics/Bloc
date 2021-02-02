@@ -4,19 +4,14 @@ Class {
 	#category : #'Bloc-Text-Text-Attributes'
 }
 
+{ #category : #'text style' }
+BlFontItalicAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder slantItalic
+]
+
 { #category : #accessing }
 BlFontItalicAttribute >> emphasisName [
 	<return: #String>
 	
 	^ 'italic'
-]
-
-{ #category : #comparing }
-BlFontItalicAttribute >> equals: aTextAttribute [
-	^ true
-]
-
-{ #category : #comparing }
-BlFontItalicAttribute >> hash [
-	^ self class hash
 ]

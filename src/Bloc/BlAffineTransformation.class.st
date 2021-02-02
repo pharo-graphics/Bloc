@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'origin'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #converting }
@@ -59,6 +59,14 @@ BlAffineTransformation >> is3D [
 { #category : #testing }
 BlAffineTransformation >> isIdentity [
 	"Return true if thiss transformation is identity"
+	<return: #Boolean>
+	
+	^ false
+]
+
+{ #category : #testing }
+BlAffineTransformation >> isTranslation [
+	"Return true if this transformation is translation"
 	<return: #Boolean>
 	
 	^ false

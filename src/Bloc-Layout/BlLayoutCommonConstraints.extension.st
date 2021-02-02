@@ -19,3 +19,13 @@ BlLayoutCommonConstraints >> grid [
 BlLayoutCommonConstraints >> linear [
 	^ self at: BlLinearLayout
 ]
+
+{ #category : #'*Bloc-Layout' }
+BlLayoutCommonConstraints >> relative [
+	^ self at: BlRelativeLayout
+]
+
+{ #category : #'*Bloc-Layout' }
+BlLayoutCommonConstraints >> zoomable [
+	^ self at: BlZoomableLayout
+]

@@ -14,6 +14,11 @@ Class {
 }
 
 { #category : #accessing }
+BlHandledError >> debug [
+	self error debug
+]
+
+{ #category : #accessing }
 BlHandledError >> element [
 	<return: #BlElement>
 
@@ -47,7 +52,7 @@ BlHandledError >> errorHandler: anObject [
 
 { #category : #accessing }
 BlHandledError >> framePhase [
-	<return: #SpaceFramePhase>
+	<return: #BlSpaceFramePhase>
 
 	^ framePhase
 ]

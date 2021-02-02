@@ -9,7 +9,7 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #cleanup }
@@ -67,11 +67,27 @@ BlSelection >> contains: anIndex [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - testing' }
+BlSelection >> containsIndex: anIndex [
+	"Return true if selection indices include a given index, false otherwise.
+	I am conceptually same as (self indices includes: anIndex)"
+	<return: #Boolean>
+
+	^ self subclassResponsibility
+]
+
 { #category : #'api - enumerating' }
 BlSelection >> do: aBlock [
 	"Evaluate a given block with all recorded selection intervals"
 	
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+BlSelection >> indices [
+	<return: #Collection of: #Number>
+
+	^ Array streamContents: [ :aStream | self do: [ :eachMonotoneSelection | aStream nextPutAll: eachMonotoneSelection indices ] ]
 ]
 
 { #category : #'api - testing' }

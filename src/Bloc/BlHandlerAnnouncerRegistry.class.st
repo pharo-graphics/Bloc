@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'announcer'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #testing }
@@ -49,10 +49,19 @@ BlHandlerAnnouncerRegistry >> do: aBlock [
 		self announcer subscriptions subscriptions do: [ :aSubscription | aBlock value: aSubscription subscriber ] ]
 ]
 
+{ #category : #'as yet unclassified' }
+BlHandlerAnnouncerRegistry >> gtInspectorSubscriptionsIn: aComposite [
+	<gtInspectorPresentationOrder: 2>
+
+	^ aComposite list
+		title: 'Subscriptions';
+		display: [ self subscriptions ]
+]
+
 { #category : #'api - accessing' }
 BlHandlerAnnouncerRegistry >> handlers [
 	"Return an immutable collection of all registered event handlers"
-	<return: #Array of: #TBlEventHandler>
+	<return: #Array of: #BlBasicEventHandler>
 	
 	^ self subscriptions collect: #subscriber
 ]

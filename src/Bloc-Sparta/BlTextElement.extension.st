@@ -2,28 +2,26 @@ Extension { #name : #BlTextElement }
 
 { #category : #'*Bloc-Sparta' }
 BlTextElement >> drawOnSpartaCanvas: aCanvas [
-	| aParagraphBounds aWidgetBounds |
 	super drawOnSpartaCanvas: aCanvas.
 
 	paragraph
 		ifNil: [ ^ self ].
+		
+	paragraph containerExtent: self extent.
+	paragraph selection: self selection.
 
-	aCanvas transform
-		by: [ :t | t translateBy: self padding topLeft ]
+	aCanvas clip
+		by: (self geometry pathOnSpartaCanvas: aCanvas of: self)
 		during: [
-			paragraph selection: self selection.
-			paragraph containerExtent: self extent.
+			paragraph
+				drawHighlightsOnSpartaCanvas: aCanvas
+				padding: self padding.
 
-			paragraph drawOn: aCanvas ]
+			aCanvas transform
+				by: [ :t | t translateBy: self padding topLeft ]
+				during: [ paragraph drawOn: aCanvas ].
 
-	"aParagraphBounds := BlBounds fromRectangle: (paragraph bounds translateBy: paragraph baseline).
-	aWidgetBounds := BlBounds fromRectangle: self bounds inLocal asRectangle.
-
-	aCanvas transform
-		by: [ :t | t translateBy: aWidgetBounds center - aParagraphBounds center ]
-		during: [
-			paragraph selection: self selection.
-			paragraph containerExtent: self extent.
-
-			paragraph drawOn: aCanvas ]"
+			paragraph
+				drawSelectionOnSpartaCanvas: aCanvas
+				padding: self padding ]
 ]

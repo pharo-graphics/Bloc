@@ -31,14 +31,21 @@ BlFontSizeAttribute class >> size: aNumber [
 		yourself
 ]
 
+{ #category : #'text style' }
+BlFontSizeAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder fontSize: self size
+]
+
 { #category : #comparing }
-BlFontSizeAttribute >> equals: aTextAttribute [
-	^ self size = aTextAttribute size
+BlFontSizeAttribute >> equals: anAnotherAttribute [
+	^ self size = anAnotherAttribute size
 ]
 
 { #category : #comparing }
 BlFontSizeAttribute >> hash [
-	^ self class hash bitXor: self size hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self size hash
 ]
 
 { #category : #printing }
@@ -55,5 +62,20 @@ BlFontSizeAttribute >> size [
 
 { #category : #accessing }
 BlFontSizeAttribute >> size: aNumber [
+	self
+		assert: [ size isNil ]
+		description: [ 'I am immutable and can not be modified' ].
+
 	size := aNumber
+]
+
+{ #category : #printing }
+BlFontSizeAttribute >> storeOn: aStream [
+	super storeOn: aStream.
+	
+	aStream
+		space;
+		nextPutAll: #size: asString;
+		space;
+		store: size
 ]

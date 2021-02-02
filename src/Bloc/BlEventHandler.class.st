@@ -16,7 +16,7 @@ Class {
 		'action',
 		'eventClass'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'instance creation' }
@@ -61,6 +61,11 @@ BlEventHandler >> eventClass [
 { #category : #'private - accessing' }
 BlEventHandler >> eventClass: anObject [
 	eventClass := anObject
+]
+
+{ #category : #'api - accessing' }
+BlEventHandler >> eventsToHandle [
+	^ { self eventClass }
 ]
 
 { #category : #'api - event managing' }

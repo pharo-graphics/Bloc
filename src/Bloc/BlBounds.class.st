@@ -1,12 +1,10 @@
 "
-I am mutable implementation of Rectangle which stores coordinates as Numbers and not Points.
-I am very usefull for chainable bounds transformations and may be transformed in-place by BlMatrix2D and BlMatrix3D
+I am a mutable implementation of Rectangle which stores coordinates as Numbers and not Points.
+I am very useful for chainable bounds transformations and may be transformed in-place by BlMatrix2D and BlMatrix3D
 "
 Class {
 	#name : #BlBounds,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'left',
 		'top',
@@ -37,11 +35,8 @@ BlBounds class >> origin: anOrigin corner: aCorner [
 ]
 
 { #category : #'instance creation' }
-BlBounds class >> origin: anOrigin extent: anExtent [
-
-	self
-		assert: [ anExtent x >= 0 and: [ anExtent y >= 0 ] ]
-		description: [ 'Extent must be positive!' ].
+BlBounds class >> origin: anOrigin extent: anExtent [	
+	<argument: #anExtent satisfies: #isBlocPositivePoint>
 
 	^ self new
 		left: anOrigin x
@@ -72,31 +67,16 @@ BlBounds >> asRectangle [
 	^ Rectangle left: left right: right top: top bottom: bottom
 ]
 
-{ #category : #'debug - asserting' }
-BlBounds >> assertFinite [
-	self
-		assert: [ left < Float infinity and: [ left > Float negativeInfinity ] ]
-		description: [ 'Left must not be infinity' ].
-	
-	self
-		assert: [ right < Float infinity and: [ right > Float negativeInfinity ] ]
-		description: [ 'Right must not be infinity' ].
-
-	self
-		assert: [ top < Float infinity and: [ top > Float negativeInfinity ] ]
-		description: [ 'Top must not be infinity' ].
-
-	self
-		assert: [ bottom < Float infinity and: [ bottom > Float negativeInfinity ] ]
-		description: [ 'Bottom must not be infinity' ].
-]
-
 { #category : #accessing }
 BlBounds >> atRandom [
 	"Return a random integer point within this bounds"
 	<return: #Point>
+	| aMaxWidth aMaxHeight |
 	
-	^ (self topLeft + (self width atRandom @ self height atRandom)) asIntegerPoint
+	aMaxWidth := (self width ceiling asInteger - 1) max: 0.
+	aMaxHeight := (self height ceiling asInteger - 1) max: 0.
+	
+	^ (self topLeft + (aMaxWidth atRandom @ aMaxHeight atRandom)) asIntegerPoint
 ]
 
 { #category : #accessing }
@@ -106,9 +86,9 @@ BlBounds >> bottom [
 
 { #category : #accessing }
 BlBounds >> bottom: aNumber [
-	bottom := aNumber.
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 
-	self assertFinite
+	bottom := aNumber
 ]
 
 { #category : #accessing }
@@ -249,6 +229,18 @@ BlBounds >> corner [
 	^ right @ bottom
 ]
 
+{ #category : #accessing }
+BlBounds >> corners [
+	"Return an array of corner points in the clockwise order starting from top left"
+
+	^ Array
+		with: self topLeft
+		with: self topRight
+		with: self bottomRight
+		with: self bottomLeft
+
+]
+
 { #category : #'vector functions' }
 BlBounds >> counterClockwiseEdges [
 	<return: #Collection of: #BlRay>
@@ -279,13 +271,12 @@ BlBounds >> encompass [
 { #category : #'rectangle functions' }
 BlBounds >> encompass: aPoint [ 
 	"Inplace encompass me so that I contain both the receiver and aPoint."
-
-	top := top min: aPoint y.
-	right := right max: aPoint x.
-	left := left min: aPoint x.
-	bottom := bottom max: aPoint y.
 	
-	self assertFinite
+	self
+		left: (left min: aPoint x)
+		top: (top min: aPoint y)
+		right: (right max: aPoint x)
+		bottom: (bottom max: aPoint y)
 ]
 
 { #category : #'rectangle functions' }
@@ -303,46 +294,43 @@ BlBounds >> expandBy: aDelta [
 
 { #category : #'rectangle functions' }
 BlBounds >> expandByLeft: aLeft top: aTop right: aRight bottom: aBottom [
-
+	<argument: #aLeft satisfies: #isBlocFinite>
+	<argument: #aTop satisfies: #isBlocFinite>
+	<argument: #aRight satisfies: #isBlocFinite>
+	<argument: #aBottom satisfies: #isBlocFinite>
+	
 	left := left - aLeft.
 	top := top - aTop.
 	right := right + aRight.
-	bottom := bottom + aBottom.
-	
-	self assertFinite
+	bottom := bottom + aBottom
 ]
 
 { #category : #'rectangle functions' }
-BlBounds >> expandByMargin: aMargin [ 
-
-	left := left - aMargin left.
-	top := top - aMargin top.
-	right := right + aMargin right.
-	bottom := bottom + aMargin bottom.
-	
-	self assertFinite
+BlBounds >> expandByMargin: aMargin [ 	
+	self
+		left: left - aMargin left
+		top: top - aMargin top
+		right: right + aMargin right
+		bottom: bottom + aMargin bottom
 ]
 
 { #category : #'rectangle functions' }
-BlBounds >> expandByNumber: aNumber [ 
+BlBounds >> expandByNumber: aNumber [
+	<argument: #aNumber satisfies: #isBlocFinite>
 		
 	left := left - aNumber.
 	top := top - aNumber.
 	right := right + aNumber.
-	bottom := bottom + aNumber.
-	
-	self assertFinite
+	bottom := bottom + aNumber
 ]
 
 { #category : #'rectangle functions' }
-BlBounds >> expandByPoint: aPoint [ 
-	
-	left := left - aPoint x.
-	top := top - aPoint y.
-	right := right + aPoint x.
-	bottom := bottom + aPoint y.
-	
-	self assertFinite
+BlBounds >> expandByPoint: aPoint [
+	self
+		left: left - aPoint x
+		top: top - aPoint y
+		right: right + aPoint x
+		bottom: bottom + aPoint y
 ]
 
 { #category : #accessing }
@@ -365,8 +353,11 @@ BlBounds >> extent [
 
 { #category : #initialization }
 BlBounds >> extent: aPoint [
-	bottom := top + aPoint y.
-	right := left + aPoint x
+	self
+		left: left
+		top: top
+		right: left + aPoint x
+		bottom: top + aPoint y
 ]
 
 { #category : #testing }
@@ -383,10 +374,10 @@ BlBounds >> height [
 BlBounds >> initialize [
 	super initialize.
 	
-	left := 0.
-	top := 0.
-	right := 0.
-	bottom := 0
+	left := 0.0.
+	top := 0.0.
+	right := 0.0.
+	bottom := 0.0
 ]
 
 { #category : #'rectangle functions' }
@@ -441,29 +432,31 @@ BlBounds >> left [
 
 { #category : #accessing }
 BlBounds >> left: aNumber [
-	left := aNumber.
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 
-	self assertFinite
+	left := aNumber
 ]
 
 { #category : #initialization }
-BlBounds >> left: aLeft top: aTop corner: aCorner [
-	left := aLeft.
-	top := aTop.
-	right := aCorner x.
-	bottom := aCorner y.
-
-	self assertFinite
+BlBounds >> left: aLeft top: aTop corner: aCorner [	
+	self
+		left: aLeft
+		top: aTop
+		right: aCorner x
+		bottom: aCorner y
 ]
 
 { #category : #initialization }
 BlBounds >> left: aLeft top: aTop right: aRight bottom: aBottom [
+	<argument: #aLeft satisfies: #isBlocFiniteFloat>
+	<argument: #aTop satisfies: #isBlocFiniteFloat>
+	<argument: #aRight satisfies: #isBlocFiniteFloat>
+	<argument: #aBottom satisfies: #isBlocFiniteFloat>
+
 	left := aLeft.
 	top := aTop.
 	right := aRight.
-	bottom := aBottom.
-	
-	self assertFinite
+	bottom := aBottom
 ]
 
 { #category : #'rectangle functions' }
@@ -509,7 +502,11 @@ BlBounds >> merge: aRectangle [
 	right := maxX.
 	bottom := maxY.
 	
-	self assertFinite
+	self
+		left: minX
+		top: minY
+		right: maxX
+		bottom: maxY
 ]
 
 { #category : #accessing }
@@ -519,22 +516,20 @@ BlBounds >> origin [
 
 { #category : #initialization }
 BlBounds >> origin: anOrigin corner: aCorner [
-	left := anOrigin x.
-	top := anOrigin y.
-	right := aCorner x.
-	bottom := aCorner y.
-	
-	self assertFinite
+	self
+		left: anOrigin x
+		top: anOrigin y
+		right: aCorner x
+		bottom: aCorner y
 ]
 
 { #category : #initialization }
 BlBounds >> origin: anOrigin extent: anExtent [
-	left := anOrigin x.
-	top := anOrigin y.
-	right := left + anExtent x.
-	bottom := top + anExtent y.
-	
-	self assertFinite
+	self
+		left: anOrigin x
+		top: anOrigin y
+		right: anOrigin x + anExtent x
+		bottom: anOrigin y + anExtent y
 ]
 
 { #category : #'vector functions' }
@@ -581,9 +576,9 @@ BlBounds >> right [
 
 { #category : #accessing }
 BlBounds >> right: aNumber [
-	right := aNumber.
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 
-	self assertFinite
+	right := aNumber
 ]
 
 { #category : #accessing }
@@ -606,13 +601,13 @@ BlBounds >> scaleBy: aFactor [
 
 { #category : #transforming }
 BlBounds >> scaleX: aX Y: aY [
+	<argument: #aX satisfies: #isBlocFinite>
+	<argument: #aY satisfies: #isBlocFinite>
 
 	left := left * aX.
 	top := top * aY.
 	right := right * aX.
-	bottom := bottom * aY.
-	
-	self assertFinite
+	bottom := bottom * aY
 ]
 
 { #category : #printing }
@@ -631,9 +626,9 @@ BlBounds >> top [
 
 { #category : #accessing }
 BlBounds >> top: aNumber [
-	top := aNumber.
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 
-	self assertFinite
+	top := aNumber
 ]
 
 { #category : #accessing }
@@ -668,13 +663,13 @@ BlBounds >> translateBy: aPoint [
 
 { #category : #transforming }
 BlBounds >> translateX: aX Y: aY [
+	<argument: #aX satisfies: #isBlocFinite>
+	<argument: #aY satisfies: #isBlocFinite>
 
 	left := left + aX.
 	top := top + aY.
 	right := right + aX.
-	bottom := bottom + aY.
-	
-	self assertFinite
+	bottom := bottom + aY
 ]
 
 { #category : #accessing }

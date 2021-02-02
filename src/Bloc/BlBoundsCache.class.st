@@ -10,9 +10,9 @@ Class {
 		'transformedBounds',
 		'geometryBounds',
 		'geometryBoundsInSpace',
-		'boundsInParent'
+		'invalidationBounds'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #'as yet unclassified' }
@@ -24,14 +24,6 @@ BlBoundsCache class >> on: anElement [
 BlBoundsCache >> boundsInLocal [
 	^ boundsInLocal ifNil: [
 		boundsInLocal := (self owner boundsInLocal: BlBounds new) asRectangle ]
-]
-
-{ #category : #accessing }
-BlBoundsCache >> boundsInParent [
-	self deprecated: 'Use `element bounds inParent` instead'.
-
-	^ boundsInParent ifNil: [
-		boundsInParent := (self owner boundsInParent: BlBounds new) asRectangle ]
 ]
 
 { #category : #accessing }
@@ -58,6 +50,7 @@ BlBoundsCache >> invalidateBoundsInLocal [
 
 	boundsInLocal := nil.
 	geometryBounds := nil.
+	invalidationBounds := nil.
 
 	self invalidateBoundsInSpace
 ]
@@ -68,10 +61,15 @@ BlBoundsCache >> invalidateBoundsInSpace [
 	boundsInSpace := nil.
 	geometryBoundsInSpace := nil.
 	transformedBounds := nil.
-	boundsInParent := nil.
 
 	self owner childrenDo: [ :anElement |
 		anElement boundsCache invalidateBoundsInSpace ]
+]
+
+{ #category : #accessing }
+BlBoundsCache >> invalidationBounds [
+	^ invalidationBounds ifNil: [
+		invalidationBounds := (self owner invalidationBounds: BlBounds new) asRectangle ]
 ]
 
 { #category : #accessing }

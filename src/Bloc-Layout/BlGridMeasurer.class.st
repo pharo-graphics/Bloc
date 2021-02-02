@@ -5,7 +5,7 @@ Class {
 		'element',
 		'layout'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #margin }
@@ -98,12 +98,12 @@ BlGridMeasurer >> measureChild: anElement parentSpec: anExtentSpec widthResizer:
 	childWidthSpec := self layout
 		measurementSpecFor: anExtentSpec widthSpec
 		usedSize: (self totalMarginOf: anElement isHorizontal: true)
-		resizer: (widthResizer ifMatchParent: [ BlLayoutResizer exact: 0 ]).
+		resizer: (widthResizer ifMatchParent: [ BlLayoutResizer exact: 0.0 ]).
 
 	childHeightSpec := self layout
 		measurementSpecFor: anExtentSpec heightSpec
 		usedSize: (self totalMarginOf: anElement isHorizontal: false)
-		resizer: (heightResizer ifMatchParent: [ BlLayoutResizer exact: 0 ]).
+		resizer: (heightResizer ifMatchParent: [ BlLayoutResizer exact: 0.0 ]).
 		
 	anElement measure: (childWidthSpec @ childHeightSpec)
 ]

@@ -1,13 +1,13 @@
 Class {
 	#name : #BlTaskExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Tasks'
+	#category : #'Bloc-Examples-Tasks'
 }
 
-{ #category : #adding }
+{ #category : #'adding - single task' }
 BlTaskExamples >> addElementWithTaskToSpace [
 	<gtExample>
-	| anElement aSpace |
+	| anElement aSpace aTask |
 
 	anElement := self addTaskToTheElementWithoutSpace.
 	
@@ -20,19 +20,22 @@ BlTaskExamples >> addElementWithTaskToSpace [
 	self assert: aSpace taskQueue tasks size equals: 1.
 
 	"it was not executed yet"
-	self assert: aSpace taskQueue tasks first action ~~ #done. 
+	aTask := aSpace taskQueue tasks first.
+	self assert: aTask action ~~ #done.
+	self assert: aTask isQueued.
 
 	^ aSpace
 ]
 
-{ #category : #adding }
+{ #category : #'adding - single task' }
 BlTaskExamples >> addTaskToTheElementWithoutSpace [
 	<gtExample>
 	| anElement aTask anAction |
 	
 	anElement := BlElement new.
 	aTask := BlTaskAction new.
-	
+	self assert: aTask isNew.
+
 	anAction := [ aTask action: #done ].
 	aTask action: anAction.
 	
@@ -42,11 +45,12 @@ BlTaskExamples >> addTaskToTheElementWithoutSpace [
 	self assert: anElement taskQueue tasks asArray equals: { aTask }.
 	"it was not executed"
 	self assert: aTask action equals: anAction. 
-	
+	self assert: aTask isQueued.
+
 	^ anElement
 ]
 
-{ #category : #adding }
+{ #category : #'adding - single task' }
 BlTaskExamples >> pulseSpaceWithTask [
 	<gtExample>
 	| aSpace aTask |

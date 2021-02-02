@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #comparing }
@@ -16,7 +16,7 @@ BlMatrix >> = anObject [
 
 { #category : #converting }
 BlMatrix >> asMatrixCollection [
-	<return: #Matrix>
+	<return: #Array2D>
 	
 	^ self subclassResponsibility
 ]

@@ -9,7 +9,7 @@ Class {
 		'iterator',
 		'text'
 	],
-	#category : 'Bloc-Text-Rope-Text'
+	#category : #'Bloc-Text-Rope-Text'
 }
 
 { #category : #'instance creation' }
@@ -75,7 +75,7 @@ BlRopedTextIterator >> next [
 BlRopedTextIterator >> nextLine [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first carriage return character"
-	<return: #BlText>	
+	<return: #BlText>
 	
 	^ self nextLineIndicesDo: [ :aStart :anEnd | BlSubText text: text from: aStart to: anEnd ]
 ]
@@ -83,12 +83,12 @@ BlRopedTextIterator >> nextLine [
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
-		- start index of line
-		- end index of line without line delimiter
-		- end index of line including line delimiter(s) CR, LF or CRLF"
+		- start index of line in text coordinates
+		- end index of line without line delimiter in text coordinates
+		- end index of line including line delimiter(s) in text coordinates"
 
 	^ iterator nextLineIndicesDo: [ :aStart :anEnd :aLineEndWithDelimiters |
-		anIndicesBlock cull: ((aStart + 1) min: anEnd) cull: anEnd cull: aLineEndWithDelimiters ]
+		anIndicesBlock cull: aStart + 1 cull: anEnd cull: aLineEndWithDelimiters ]
 ]
 
 { #category : #'iterator - enumeration' }
@@ -126,8 +126,12 @@ BlRopedTextIterator >> nextWhitespace [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first non-whitespace character without including it"
 	<return: #BlText>
+	| aStartPosition aSegment |
+	
+	aStartPosition := iterator position + 1.
+	aSegment :=  iterator nextWhitespace.
 
-	^ BlRopedText rope: iterator nextWhitespace
+	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
 ]
 
 { #category : #'iterator - enumeration' }

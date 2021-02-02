@@ -11,7 +11,7 @@ Class {
 		'leftToRight',
 		'rightToLeft'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #'class initialization' }

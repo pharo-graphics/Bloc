@@ -11,7 +11,7 @@ Class {
 		'buffer',
 		'extent'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #accessing }
@@ -37,6 +37,20 @@ BlHostRendererBufferSurface >> buffer: aPixelBuffer [
 	buffer := aPixelBuffer
 ]
 
+{ #category : #initialization }
+BlHostRendererBufferSurface >> createSpaceRendererOn: anObject [
+	<return: #BlHostSpaceRenderer>
+
+	^ anObject createBufferSpaceRenderer
+]
+
+{ #category : #initialization }
+BlHostRendererBufferSurface >> createSurfaceRendererOn: anObject [
+	<return: #BlHostSurfaceRenderer>
+	
+	^ anObject createBufferSurfaceRenderer
+]
+
 { #category : #geometry }
 BlHostRendererBufferSurface >> extent [
 	"Return actual extent of the underlying surface.
@@ -49,35 +63,6 @@ BlHostRendererBufferSurface >> extent [
 { #category : #geometry }
 BlHostRendererBufferSurface >> extent: aPoint [
 	extent := aPoint
-]
-
-{ #category : #initialization }
-BlHostRendererBufferSurface >> initializeOn: anObject [
-	anObject initializeForBuffer: self
-]
-
-{ #category : #initialization }
-BlHostRendererBufferSurface >> initializeResourcesOn: aHostRenderer [
-	self initializeOn: aHostRenderer
-]
-
-{ #category : #rendering }
-BlHostRendererBufferSurface >> prepareToRender: aSpace [
-	"Dispatch preparation to render through host space based on surface type"
-	
-	self hostSpace prepareToRender: aSpace onBufferSurface: self
-]
-
-{ #category : #presenting }
-BlHostRendererBufferSurface >> presentAreas: aCollectionOfRectangles [
-	hostSpace presentBufferSurface: self areas: aCollectionOfRectangles
-]
-
-{ #category : #rendering }
-BlHostRendererBufferSurface >> renderFor: aSpace [
-	"Dispatch render process through host space based on surface type"
-	
-	self hostSpace render: aSpace onBufferSurface: self
 ]
 
 { #category : #accessing }

@@ -1,3 +1,10 @@
+"
+I am a virtual keyboard to debug key press events
+
+[[[
+	BlDevKeyboard new asScalableElement
+]]]
+"
 Class {
 	#name : #BlDevKeyboard,
 	#superclass : #BlElement,
@@ -47,21 +54,26 @@ BlDevKeyboard >> initializeBottomRow [
 
 { #category : #initialization }
 BlDevKeyboard >> initializeEventListeners [
-	self when: BlKeyDownEvent do: [ :anEvent |
-		('down: ', anEvent key asString) logCr.
-
-		keymap
-			at: anEvent key
-			ifPresent: [ :aButton | aButton background: (Color veryVeryLightGray) ]
-			ifAbsent: [
-				self inform: 'Unknown: ', anEvent key asString.
-				NonInteractiveTranscript stdout show: ('Unknown: ', anEvent key asString); cr ] ].
-		
-	self when: BlKeyUpEvent do: [ :anEvent |
-		('up ', anEvent key asString) logCr.
-		keymap
-			at: anEvent key
-			ifPresent: [ :aButton | aButton background: (Color white) ] ].
+	self
+		when: BlKeyDownEvent
+		do: [ :anEvent | 
+			('down: ' , anEvent key asString) traceCr.
+			StringSignal emit: 'down: ' , anEvent key asString.
+			keymap
+				at: anEvent key
+				ifPresent: [ :aButton | aButton background: Color veryVeryLightGray ]
+				ifAbsent: [ self inform: 'Unknown: ' , anEvent key asString.
+					NonInteractiveTranscript stdout
+						show: 'Unknown: ' , anEvent key asString;
+						cr ] ].
+	self
+		when: BlKeyUpEvent
+		do: [ :anEvent | 
+			('up ' , anEvent key asString) traceCr.
+			StringSignal emit: 'up: ' , anEvent key asString.
+			keymap
+				at: anEvent key
+				ifPresent: [ :aButton | aButton background: Color white ] ]
 ]
 
 { #category : #initialization }
@@ -145,10 +157,10 @@ BlDevKeyboard >> keyboardWidth [
 BlDevKeyboard >> newButton: anExtent [
 	^ BlElement new
 		size: anExtent;
-		geometry: (BlRectangle cornerRadius: 4);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 		border: (BlBorder paint: (Color gray alpha: 0.2) width: 1);
 		layout: (BlFrameLayout new);
-		effect: (BlDropShadowEffect color: (Color black alpha: 0.1) width: 4 offset: 0@1);
+		effect: (BlGaussianShadowEffect color: (Color black alpha: 0.1) width: 2 offset: 0@1);
 		margin: (BlInsets all: self spacing);
 		background: (Color white)
 ]
@@ -170,7 +182,7 @@ BlDevKeyboard >> simpleKey: aString [
 	button := self newButton: self simpleKeyExtent.
 
 	label := BlTextElement new.
-	label boundsBaseline.
+	label tightMeasurement.
 	label clipChildren: false.
 	label text: (aString asRopedText fontSize: 16).
 	label constraintsDo: [ :c |
@@ -198,7 +210,7 @@ BlDevKeyboard >> simpleSmallKey: aString [
 	button := self newButton: self simpleKeyExtent.
 
 	label := BlTextElement new.
-	label boundsBaseline.
+	label tightMeasurement.
 	label clipChildren: false.
 	label text: (aString asRopedText fontSize: 11).
 	label constraintsDo: [ :c |
@@ -221,7 +233,7 @@ BlDevKeyboard >> wideKey: aString span: aNumber [
 	button := self newButton: (self wideWidth: aNumber) @ self rowHeight.
 
 	label := BlTextElement new.
-	label boundsBaseline.
+	label tightMeasurement.
 	label clipChildren: false.
 	label text: (aString asRopedText fontSize: 13).
 	label constraintsDo: [ :c |
@@ -239,7 +251,7 @@ BlDevKeyboard >> wideSmallKey: aString span: aNumber [
 	button := self newButton: (self wideWidth: aNumber) @ self rowHeight.
 
 	label := BlTextElement new.
-	label boundsBaseline.
+	label tightMeasurement.
 	label clipChildren: false.
 	label text: (aString asRopedText fontSize: 11).
 	label constraintsDo: [ :c |

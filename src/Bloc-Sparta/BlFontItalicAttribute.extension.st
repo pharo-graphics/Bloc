@@ -1,6 +1,6 @@
 Extension { #name : #BlFontItalicAttribute }
 
 { #category : #'*Bloc-Sparta' }
-BlFontItalicAttribute >> applyOnSpartaFontBuilder: aFontBuilder with: aSpartaSpan [
+BlFontItalicAttribute >> applyOnSpartaFontBuilder: aFontBuilder [
 	aFontBuilder styleItalic
 ]

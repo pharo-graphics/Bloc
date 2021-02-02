@@ -18,7 +18,7 @@ Class {
 		'handlers',
 		'shortcutHandler'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #'instance creation' }
@@ -67,6 +67,11 @@ BlDirectEventDispatcher >> addEventHandler: aHandler [
 	aHandler onInstalledIn: self owner
 ]
 
+{ #category : #'api - adding/removing' }
+BlDirectEventDispatcher >> addShortcut: aBlShortcut [
+	shortcutHandler := shortcutHandler addShortcut: aBlShortcut
+]
+
 { #category : #initialization }
 BlDirectEventDispatcher >> defaultFilterRegistry [
 	^ Bloc preferableEventHandlerRegistry new
@@ -110,10 +115,24 @@ BlDirectEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChain 
 ]
 
 { #category : #'api - accessing' }
+BlDirectEventDispatcher >> filtersDo: aBlock [
+	"Evaulate a given block with every event filter as an argument"
+
+	filters ifNotNil: [ :aRegistry | aRegistry handlers do: aBlock ]
+]
+
+{ #category : #'api - accessing' }
 BlDirectEventDispatcher >> handlersDo: aBlock [
 	"Evaulate a given block with every event handler as an argument"
 
 	handlers ifNotNil: [ :aRegistry | aRegistry handlers do: aBlock ]
+]
+
+{ #category : #'api - testing' }
+BlDirectEventDispatcher >> hasFilter: anEventHandler [
+	^ filters
+		ifNil: [ false ]
+		ifNotNil: [ filters hasHandler: anEventHandler ]
 ]
 
 { #category : #'api - testing' }
@@ -135,7 +154,7 @@ BlDirectEventDispatcher >> initialize [
 	not visible to users, think of it as implementation detail"
 	filters := nil. "BlHandlerRegistry"
 	handlers := nil. "BlHandlerRegistry"
-	shortcutHandler := BlShortcutHandler new
+	shortcutHandler := BlShortcutHandlerWithoutShortcuts uniqueInstance
 ]
 
 { #category : #'api - accessing' }
@@ -161,14 +180,37 @@ BlDirectEventDispatcher >> printOn: aStream [
 ]
 
 { #category : #'api - adding/removing' }
-BlDirectEventDispatcher >> removeEventFilter: aFilter [
+BlDirectEventDispatcher >> removeAllShortcutsWithCombination: aBlKeyCombination [
+	shortcutHandler := shortcutHandler removeAllWithCombination: aBlKeyCombination
+]
 
+{ #category : #'api - adding/removing' }
+BlDirectEventDispatcher >> removeEventFilter: aFilter [
+	(self hasFilter: aFilter)
+		ifFalse: [ ^ self ].
+
+	filters
+		ifNil: [ ^ self ].
 	filters remove: aFilter.
 	"free memory as soon as we got rid of all event filters"
 	filters isEmpty
 		ifTrue: [ filters := nil ].
 	
 	aFilter onUninstalledIn: self owner
+]
+
+{ #category : #'api - adding/removing' }
+BlDirectEventDispatcher >> removeEventFiltersSuchThat: aBlock [
+	"remove all event handlers for those aBlock returns true"
+	| toBeRemoved |
+	filters
+		ifNil: [ ^ self ].
+	
+	toBeRemoved := filters removeAllSuchThat: aBlock.
+	filters isEmpty
+		ifTrue: [ filters := nil ].
+	
+	toBeRemoved do: [ :aHandler | aHandler onUninstalledIn: self owner ]
 ]
 
 { #category : #'api - adding/removing' }
@@ -189,9 +231,15 @@ BlDirectEventDispatcher >> removeEventHandler: anHandler [
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventHandlers [
 	"Remove all my event handlers"
-	handlers ifNil: [ ^ self ].
-	
-	handlers do: [ :aHandler | self removeEventHandler: aHandler ]
+	| oldHandlers |
+
+	handlers
+		ifNil: [ ^ self ].
+
+	oldHandlers := handlers.
+	handlers := nil.
+
+	oldHandlers do: [ :eachHandler | eachHandler onUninstalledIn: self owner ]
 ]
 
 { #category : #'api - adding/removing' }
@@ -206,6 +254,11 @@ BlDirectEventDispatcher >> removeEventHandlersSuchThat: aBlock [
 		ifTrue: [ handlers := nil ].
 	
 	toBeRemoved do: [ :aHandler | aHandler onUninstalledIn: self owner ]
+]
+
+{ #category : #'api - adding/removing' }
+BlDirectEventDispatcher >> removeShortcut: aBlShortcut [
+	shortcutHandler := shortcutHandler removeShortcut: aBlShortcut
 ]
 
 { #category : #'private - accessing' }

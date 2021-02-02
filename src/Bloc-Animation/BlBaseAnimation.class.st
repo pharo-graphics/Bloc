@@ -1,3 +1,7 @@
+"
+I am an abstract class for all Bloc animations. 
+See my subclasses for futher documentation and examples: ${class:BlBaseAnimation|show=gtSubclassesFor:|expanded=true}$
+"
 Class {
 	#name : #BlBaseAnimation,
 	#superclass : #BlTask,
@@ -19,7 +23,7 @@ Class {
 		'eventDispatcher',
 		'loopDoneTime'
 	],
-	#category : 'Bloc-Animation-Basic'
+	#category : #'Bloc-Animation-Basic'
 }
 
 { #category : #'action  handling' }
@@ -69,26 +73,6 @@ BlBaseAnimation >> computedElapsedTime [
 		description: [ 'Animation is not yet started, I don''t know the elapsed time' ].
 
 	^ (self time now - self delayedStartTime) min: self duration
-]
-
-{ #category : #'api - running' }
-BlBaseAnimation >> continue [
-	"try to prepare animation for the next loop and return true if animation should continue, false otherwise"
-	<return: #Boolean>
-
-	"We have done an animation loop, notify listeners"
-	self notifyOnFinishedHandlers.
-
-	loopCount := loopCount + 1.
-
-	(self isInfinite or: [ loopCount < loop ])
-		ifFalse: [ ^ false ].
-	
-	"If I am an infinite animation and loop limit is not hit
-	we prepare ourselves for a next loop"
-	self initStart.
-	
-	^ true
 ]
 
 { #category : #'api - accessing' }
@@ -354,6 +338,11 @@ BlBaseAnimation >> repeats [
 	^ loopCount
 ]
 
+{ #category : #'private - testing' }
+BlBaseAnimation >> requeueTaskAfterExecution [
+	^ self isRunning
+]
+
 { #category : #initialization }
 BlBaseAnimation >> reset [	
 	elapsedTime := 0 milliSeconds.
@@ -367,7 +356,6 @@ BlBaseAnimation >> reset [
 
 { #category : #'api - running' }
 BlBaseAnimation >> run [
-
 	self isStarted
 		ifFalse: [ self start ].
 
@@ -379,12 +367,9 @@ BlBaseAnimation >> run [
 	self shouldStop
 		ifTrue: [ self stop ].
 
-	"I am a sub-animation, so I am not registred is animation"
+	"I am a sub-animation, so I am not registred as animation"
 	self isSubAnimation
-		ifTrue: [ ^ self ].
-
-	self isRunning
-		ifTrue: [ self enqueue ]
+		ifTrue: [ ^ self ]
 ]
 
 { #category : #'private - testing' }
@@ -488,7 +473,10 @@ BlBaseAnimation >> stop [
 		assert: [ self isRunning ]
 		description: [ 'Animation is not running' ].
 
-	isRunning := false
+	isRunning := false.
+
+	"We have done an animation, notify listeners"
+	self notifyOnFinishedHandlers
 ]
 
 { #category : #accessing }

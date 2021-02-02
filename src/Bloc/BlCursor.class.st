@@ -1,75 +1,97 @@
 "
-I represent the cursor used in my world.
+I represent the cursor used in the space.
+
+There are two general types of a cursor: ${class:BlNamedCursor}$ and ${class:BlStaticCursor}$
 "
 Class {
 	#name : #BlCursor,
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space - Cursor'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
+BlCursor class >> crosshair [
+	^ BlCrosshairCursor new
+]
+
+{ #category : #'instance creation' }
 BlCursor class >> default [
-	^ BlStaticCursor new image: Cursor normal
+	^ BlDefaultCursor new
 ]
 
-{ #category : #constants }
+{ #category : #'instance creation' }
 BlCursor class >> overEditableText [ 
-	^ BlStaticCursor new image: Cursor overEditableText 
+	^ BlTextCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> resizeBottom [
-	^ BlStaticCursor new image: Cursor resizeBottom
+	^ BlResizeBottomCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> resizeBottomLeft [
-	^ BlStaticCursor new image: Cursor resizeBottomLeft
+	^ BlResizeBottomLeftCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> resizeBottomRight [
-	^ BlStaticCursor new image: Cursor resizeBottomRight
+	^ BlResizeBottomRightCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> resizeLeft [
-	^ BlStaticCursor new image: Cursor resizeLeft
+	^ BlResizeLeftCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> resizeRight [
-	^ BlStaticCursor new image: Cursor resizeRight
+	^ BlResizeRightCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> resizeTop [
-	^ BlStaticCursor new image: Cursor resizeTop
+	^ BlResizeTopCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> resizeTopLeft [
-	^ BlStaticCursor new image: Cursor resizeTopLeft
+	^ BlResizeTopLeftCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> resizeTopRight [
-	^ BlStaticCursor new image: Cursor resizeTopRight
+	^ BlResizeTopRightCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlCursor class >> wait [
-	^ BlStaticCursor new image: Cursor wait
+	^ BlWaitCursor new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
+BlCursor class >> zoomIn [
+	^ BlZoomInCursor new
+]
+
+{ #category : #'instance creation' }
+BlCursor class >> zoomOut [
+	^ BlZoomOutCursor new
+]
+
+{ #category : #'api - cursor' }
 BlCursor >> activateOn: aSpace [
-	
+	aSpace updateCursor: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #converting }
+BlCursor >> asForm [
+	^ self subclassResponsibility
+]
+
+{ #category : #'api - cursor' }
 BlCursor >> deactivateOn: aSpace [
 	
 ]

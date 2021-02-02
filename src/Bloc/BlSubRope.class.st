@@ -9,7 +9,7 @@ Class {
 		'offset',
 		'length'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'instance creation' }
@@ -75,7 +75,15 @@ BlSubRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	self assertAccessFrom: aStart to: anEnd.
 
 	anClearedRope := self rope clearAttributes: aStart + offset to: anEnd + offset if: aBlock.
-	^ anClearedRope from: offset to: offset + length
+	^ anClearedRope == self rope
+		ifTrue: [ self ]
+		ifFalse: [ anClearedRope from: offset to: offset + length ]
+]
+
+{ #category : #copying }
+BlSubRope >> copyFrom: startIndex to: endIndex [
+
+	^ self from: startIndex-1 to: endIndex
 ]
 
 { #category : #'rope - deleting' }
@@ -170,11 +178,23 @@ BlSubRope >> iterator: aStart to: anEnd [
 	^ BlSubRopeIterator rope: self from: aStart to: anEnd
 ]
 
+{ #category : #'text - converting' }
+BlSubRope >> normalized [ 
+
+	^ (self rope copyFrom: offset to: offset + length) normalized
+]
+
 { #category : #accessing }
 BlSubRope >> offset [
 	<return: #Number>
 
 	^ offset
+]
+
+{ #category : #accessing }
+BlSubRope >> readStream [ 
+
+	^ ReadStream on: self
 ]
 
 { #category : #accessing }
@@ -197,6 +217,17 @@ BlSubRope >> rope: aRope offset: anOffset length: aLength [
 	rope := aRope.
 	offset := anOffset.
 	length := aLength
+]
+
+{ #category : #'rope - replacing' }
+BlSubRope >> simplified [
+	<return: #BlRope>
+
+	(self rope isLeaf and: [ (self size < self class combineLength) ])
+		ifTrue: [
+			^ self rope copyFrom: offset to: offset + length ].
+
+	^ self
 ]
 
 { #category : #'rope - accessing' }

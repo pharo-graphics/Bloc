@@ -36,6 +36,22 @@ BlOutskirts class >> outside [
 	^ Outside ifNil: [ Outside := BlOutskirtsOutside new ]
 ]
 
+{ #category : #comparing }
+BlOutskirts >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	^ self class = anObject class
+]
+
+{ #category : #comparing }
+BlOutskirts >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ self class hash
+]
+
 { #category : #'visual bounds' }
 BlOutskirts >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	^ self subclassResponsibility

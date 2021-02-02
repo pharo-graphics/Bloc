@@ -5,7 +5,7 @@ Class {
 		'processor',
 		'space'
 	],
-	#category : 'Bloc-Tests-Universe'
+	#category : #'Bloc-Tests-Universe'
 }
 
 { #category : #initialization }
@@ -33,5 +33,6 @@ BlKeyboardProcessorTest >> testProcessKeyDown [
 	eventA key: BlKeyboardKey a.
 
 	processor processKeyDown: eventA.
+	self assert: processor keystrokesAllowed.
 	self assert: (processor buffer hasEvent: BlKeyboardKey a)
 ]

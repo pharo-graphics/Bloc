@@ -1,8 +1,18 @@
+"
+I am a ${class:BlMouseEvent}$.
+I am a mouse wheel scroll event.
+I use ${class:BlVector2D}$, indicating the user scroll direction and length.
+!! Examples
+!!! 45 Degrees
+${example:BlMouseWheelEventExamples>>#mouseWheelEvent_45degrees|codeExpanded=false|previewExpanded=true}$
+!!! 346 Degrees
+${example:BlMouseWheelEventExamples>>#mouseWheelEvent_346degrees|codeExpanded=false|previewExpanded=true}$
+
+"
 Class {
 	#name : #BlMouseWheelEvent,
 	#superclass : #BlMouseEvent,
 	#instVars : [
-		'direction',
 		'vector',
 		'isTouch'
 	],
@@ -41,16 +51,6 @@ BlMouseWheelEvent class >> up [
 		direction: Character arrowUp
 ]
 
-{ #category : #accessing }
-BlMouseWheelEvent >> direction [
-	^ direction
-]
-
-{ #category : #accessing }
-BlMouseWheelEvent >> direction: anObject [
-	direction := anObject
-]
-
 { #category : #initialization }
 BlMouseWheelEvent >> initialize [
 	super initialize.
@@ -68,7 +68,12 @@ BlMouseWheelEvent >> isHorizontal [
 
 { #category : #testing }
 BlMouseWheelEvent >> isScrollDown [
-	^ direction = Character arrowDown
+	"We scroll down when direction vector has negative y component,
+	because the content should move in the same direction as a hand on a touchpad.
+	When hand is moved up (down scroll) the content that is below the viewport should become visible"
+	<return: #Boolean>
+
+	^ vector y < 0
 ]
 
 { #category : #testing }
@@ -93,7 +98,12 @@ BlMouseWheelEvent >> isScrollRight [
 
 { #category : #testing }
 BlMouseWheelEvent >> isScrollUp [
-	^ direction = Character arrowUp
+	"We scroll up when direction vector has positive y component,
+	because the content should move in the same direction as a hand on a touchpad.
+	When hand is moved down (up scroll) the content that is above the viewport should become visible"
+	<return: #Boolean>
+
+	^ vector y > 0
 ]
 
 { #category : #accessing }
@@ -112,7 +122,7 @@ BlMouseWheelEvent >> isTouch: aBoolean [
 
 { #category : #sending }
 BlMouseWheelEvent >> sendTo: anObject [
-	anObject scrollEvent: self
+	anObject mouseWheelEvent: self
 ]
 
 { #category : #printing }
@@ -133,10 +143,6 @@ BlMouseWheelEvent >> storeOn: aStream [
 	aStream nextPutAll: self screenPosition asString.
 	aStream nextPut: $;.
 	aStream cr; tab.
-	aStream nextPutAll: 'direction: '.
-	aStream store: self direction.
-	aStream nextPut: $;.
-	aStream cr; tab.
 	aStream nextPutAll: 'timestamp: ('.
 	aStream nextPutAll: DateAndTime name.
 	aStream nextPutAll: ' fromString: '''.
@@ -153,6 +159,6 @@ BlMouseWheelEvent >> vector [
 ]
 
 { #category : #accessing }
-BlMouseWheelEvent >> vector: anObject [
-	vector := anObject
+BlMouseWheelEvent >> vector: aBlVector [
+	vector := aBlVector
 ]

@@ -6,84 +6,107 @@ I should be considered to be a root of graph or visualisation layouts. For that 
 Class {
 	#name : #BlFitLayout,
 	#superclass : #BlLayout,
-	#category : 'Bloc-Layout-Fit'
+	#category : #'Bloc-Layout-Fit'
 }
 
 { #category : #measure }
-BlFitLayout >> boundingBox: anElement [
+BlFitLayout >> childrenBoundingBox: aParentNode [
 	<return: #Rectangle>
 	| aBoundingBox |
 
-	anElement children isEmpty
+	aParentNode children isEmpty
 		ifTrue: [ ^ BlBounds new asRectangle ].
 
 	aBoundingBox := nil.
-	self
-		layeredChildren: anElement
-		do: [ :aChild |
-			aBoundingBox
-				ifNil: [ aBoundingBox := BlBounds fromRectangle: aChild measuredBounds bounds ]
-				ifNotNil: [ aBoundingBox merge: aChild measuredBounds bounds ] ].
+
+	aParentNode children do: [ :aChild |
+		aBoundingBox
+			ifNil: [ aBoundingBox := aChild bounds ]
+			ifNotNil: [ aBoundingBox merge: aChild bounds ] ].
 
 	^ aBoundingBox expanded asRectangle
 ]
 
 { #category : #layout }
-BlFitLayout >> fit: anElement with: anExtentSpec [
-	| boundingBox width height |
-		
-	boundingBox := self boundingBox: anElement.
-	
-	width := boundingBox width + anElement padding width.
-	height := boundingBox height + anElement padding height.
+BlFitLayout >> computeAlignmentTranslation: aParentLayoutNode [
+	| boundingBox delta |
 
-	anElement measuredExtent: (width @ height)
+	boundingBox := self childrenBoundingBox: aParentLayoutNode.
+	delta := ((aParentLayoutNode extent / 2.0) - boundingBox center).
+
+	^ delta
 ]
 
 { #category : #layout }
-BlFitLayout >> layout: anElement in: aRectangle [
+BlFitLayout >> layout: aParentNode [
+	| aDelta |
+	aDelta := self computeAlignmentTranslation: aParentNode.
 
-	self normalize: anElement in: aRectangle.
+	aParentNode childrenDo: [ :eachChildNode | eachChildNode position: (eachChildNode position + aDelta) ]
+]
 
-	self layoutIgnored: anElement.
-	self
-		layeredChildren: anElement
-		do: [ :aChild | aChild applyLayoutIn: aChild measuredBounds asRectangle ]
+{ #category : #layout }
+BlFitLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
+	| aParentNode |
+	
+	self layoutIgnored: anElement context: aBlElementBoundsUpdater.
+	
+	aParentNode := anElement userData
+		at: #layoutNode
+		ifAbsent: [ ^ self ].
+		
+	aParentNode extent: aRectangle extent.
+
+	self layout: aParentNode.
+
+	aParentNode children do: [ :eachChildNode |
+		eachChildNode element applyLayoutIn: eachChildNode layoutBounds context: aBlElementBoundsUpdater ]
+]
+
+{ #category : #measure }
+BlFitLayout >> measure: aParentLayoutNode [
+	"Override me to implement a custom child position measurement algorithm.
+	Graph or visualisation layouts should implement me"
+
+	self measureChildrenPositions: aParentLayoutNode.
+	self measureParentNode: aParentLayoutNode
 ]
 
 { #category : #measure }
 BlFitLayout >> measure: anElement with: anExtentSpec [
-	
+	| aParentNode |
+
 	self measuredChildren: anElement do: [ :aChild |
 		self
 			measureChild: aChild
 			parentSpec: anExtentSpec ].
 
-	self measureIgnored: anElement with: anExtentSpec.
-	self measurePositions: anElement with: anExtentSpec.
-	
-	self fit: anElement with: anExtentSpec
+	aParentNode := (BlLayoutParentNode alreadyMeasured: anElement) extentSpec: anExtentSpec.
+
+	self measure: aParentNode.
+
+	anElement measuredExtent: aParentNode extent.
+
+	anElement userData at: #layoutNode put: aParentNode.
+
+	self measureIgnored: anElement with: anExtentSpec
 ]
 
 { #category : #measure }
-BlFitLayout >> measurePositions: anElement with: anExtentSpec [
+BlFitLayout >> measureChildrenPositions: aParentLayoutNode [
 	"Override me to implement a custom child position measurement algorithm.
 	Graph or visualisation layouts should implement me"
 ]
 
 { #category : #measure }
-BlFitLayout >> normalize: anElement in: aRectangle [
-	| boundingBox delta |
+BlFitLayout >> measureParentNode: aParentNode [
+	"Compute the measured extent of the parent node based on the measured bounds of the children"
+	| boundingBox width height |
 
-	boundingBox := self boundingBox: anElement.
-	delta := ((aRectangle extent / 2.0) - boundingBox center).
-	"bounding box depends on element positions, while position themselves depend on bounding box.
-	That is why we have to implement a cycle breaking mechanism. In our case it makes sense to
-	to not relocate children if delta is less then 1 point"
-	delta abs < (1@1)
-		ifTrue: [ ^ self ].
+	boundingBox := self childrenBoundingBox: aParentNode.
 
-	self
-		layeredChildren: anElement
-		do: [ :aChild | aChild measuredBounds position: aChild measuredBounds position + delta ]
+	width := boundingBox width + aParentNode padding width.
+	height := boundingBox height + aParentNode padding height.
+
+	aParentNode extent: (aParentNode extentSpec sizeFor: width @ height)
 ]

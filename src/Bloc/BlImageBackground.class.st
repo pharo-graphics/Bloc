@@ -10,9 +10,7 @@ Class {
 	#name : #BlImageBackground,
 	#superclass : #BlBackground,
 	#instVars : [
-		'image',
-		'session',
-		'bitmap'
+		'image'
 	],
 	#category : #'Bloc-Basic-Background'
 }
@@ -38,8 +36,7 @@ BlImageBackground >> image: aForm [
 	image isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
 		
-	image := aForm.
-	bitmap := nil
+	image := aForm
 ]
 
 { #category : #testing }

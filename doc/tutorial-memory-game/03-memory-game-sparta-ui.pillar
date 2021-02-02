@@ -1,0 +1,74 @@
+! Building Card Graphical Elements with Sparta Framework
+
+In this chapter, we will build the visual appearance of the cards step by step, using a ${class:SpartaCanvas}$ API. *Sparta>https://github.com/syrel/Sparta* is an almost stateless vector graphics API for Pharo that provides bindings to the *Moz2D>https://wiki.mozilla.org/Platform/GFX/Moz2D* rendering backend. Moz2D is the extracted graphical engine from *Mozilla Firefox>https://en.wikipedia.org/wiki/Firefox* compiled as standalone shared library together with the external C bindings required to call the engine from Pharo.The Bloc graphical engine uses Sparta to draw ${class:BlElement}$ graphical widgets. All Bloc visual objects subclass the ${class:BlElement}$. Bloc widgets are drawn calling Sparta in ${method:BlElement>>#drawOnSpartaCanvas:}$, which is the method we will override in this section.
+
+!! The Card Element
+
+Our graphic element, called ${class:RawCardElement}$, representing a card will be a subclass of the ${class:BlElement}$ which has a reference to a card model: ${changes:changes/60-raw-card-element-class.ombu}$
+We then define accessor and initialize methods, defining a default size and card model: ${changes:changes/61-raw-card-element-basic-methods.ombu}$The ${method:RawCardElement>>#initialize|expanded=true}$ method defines the element size and a default card model.You can observe the result of the current implementation executing the following snippet:[[[RawCardElement new]]]
+As you can see there is nothing visible yet. You can observe the effect of setting the element size at the Measurement tab in the inspector above.
+!!! Drawing a CardOur card have two sides, back and face, that needs to be implemented. We implement them by overriding the ${method:BlElement>>#drawOnSpartaCanvas:}$ method. !!!! Back SideLet's start with the back side, that will be represented by two diagonal lines, across the ${class:RawCardElement}$ card. First, we need to define a basic card shape, represented by a rectangle: ${changes:changes/62-raw-card-element-basic-shape.ombu}$
+You can observe the result of the current implementation executing the following snippet:[[[
+RawCardElement new
+]]]
+
+As you can see, that the ${method:RawCardElement>>#drawOnSpartaCanvas:|expanded=true}$ method uses ${class:SpartaCanvas}$ to draw a rectangle. 
+
+We would like to represent the card with a rounded rectangle. To do so, we will use ${method:SpartaShapeFactory>>#roundedRectangle:radii:}$:  ${changes:changes/63-raw-card-element-rounded-shape.ombu}$
+
+Let's look closer at the  ${method:RawCardElement>>#drawOnSpartaCanvas:|expanded=true}$ method.
+We use ${class:SpartaFillPainter}$ to fill a path with a color (paint). We use ${class:SpartaShapeFactory}$ to define a rounded-rectangle shape.
+By creating an element instance, we should be able to observe a rounded-rectangle back side card. To do so, execute the following snippet:[[[RawCardElement new.]]]
+
+!!!!! Back Side Crosses 
+
+In the following step, we add one cross line to the back side: ${changes:changes/64-raw-card-element-cross-line.ombu}$
+
+We use ${class:SpartaShapeFactory}$ to define the cross line, see the  ${method:RawCardElement>>#drawOnSpartaCanvas:|expanded=true}$ method.
+
+By executing the following script, you will notice that the cross line is not ideal as it is not clipped to the rounded-rectangle corners:
+[[[RawCardElement new.]]]
+
+To make the line clipping working, we need to consider the rounded-rectangle radius:  ${changes:changes/65-raw-card-element-clipped-line.ombu}$
+
+By executing the following script, we should see a clipped line:
+[[[RawCardElement new.]]]
+
+Let's draw the other cross-line the same way: ${changes:changes/66-raw-card-element-both-lines.ombu}$
+
+By executing the following script, we should see two clipped lines:
+[[[RawCardElement new.]]]
+!!!! Refactoring The Drawing Method
+
+Before we start to implement the face side, we refactor the ${method:RawCardElement>>#drawOnSpartaCanvas:}$. The rounded rectangle is same for both sides and we need to add a logic to decide which side (back or face) to draw:  ${changes:changes/67-raw-card-element-refactoring.ombu}$
+
+Drawing the back side should work as before:
+[[[RawCardElement new.]]]
+
+By drawing the face side, you should see an empty rounded rectangle:
+[[[
+|  aCard |
+aCard := Card new flip.RawCardElement new card: aCard.]]]
+
+!!!! Face Side
+
+Let's implement the face side which displays a character (a symbol), implementing the ${method:RawCardElement>>#drawFaceSideOnSpartaCanvas:}$ method: ${changes:changes/68-raw-card-element-face.ombu}$
+ The ${method:RawCardElement>>#drawFaceSideOnSpartaCanvas:|expanded=true}$ method uses a ${class:SpartaFontBuilder}$ to define a font and ${class:SpartaTextPainter}$ to draw a text with a given color and font.
+
+The following code snippet show us how a card face side is currently displayed:[[[|  aCard |
+aCard := Card new symbol: $A; flip.RawCardElement new card: aCard.]]]
+The symbol is not centered. To center well the text, we have to use exact font metrics. Bloc supports multiple graphical back-ends such as Cairo, Moz2D. The font metrics should be measured and manipulated via the same back-end abstraction. For this purpose, the expression ==aCanvas text== returns a text painter ${class:SpartaTextPainter}$ and such a text painter provide access to the font measures ${class:SpMetrics}$. Using such measure we can then get access to the text metrics and compute propertly the symbol center: ${changes:changes/69-raw-card-element-face-align-horizontally.ombu}$
+
+The following code snippet show us that the card symbol is properly centered horizontally, not vertically:[[[|  aCard |
+aCard := Card new symbol: $A; flip.RawCardElement new card: aCard.]]]
+To be able to align the symbol also vertically, we need to take into account symbol's font size: ${changes:changes/70-raw-card-element-face-centered.ombu}$
+
+Executing again the code snippet, we will see properly aligned symbol:[[[|  aCard |
+aCard := Card new symbol: $A; flip.RawCardElement new card: aCard.]]]
+!!! Updating Element on Card ChangesTu summarize current progress, we have the game model, including ${class:Card}$, ${class:Game}$, and announcements ${class:CardFlipped}$ and ${class:CardDisappeared}$. The UI element ${class:RawCardElement}$ can display back and face card sides. The UI element does not reflect the model changes as we can check by executing the following snippet:[[[aCardOne := Card new symbol: $A.RawCardElement new card: aCardOne.]]]
+and by flipping the card: 
+[[[
+aCardOne flip.
+]]]
+It should display the card's face side. The reason is that the graphical widget does not register to the card model changes in the ${method:RawCardElement>>#card:|expanded=true}$ method.The following code registers to the card ${class:CardFlipped}$ changes and updates the UI widget accordingly: ${changes:changes/71-raw-card-element-hooks}$The ${class:RawCardElement}$ now registers to ${class:Card}$ changes in the ${method:RawCardElement>>#card:|expanded=true}$ method:It also triggers an ${method:RawCardElement>>#onUpdated|expanded=true}$ that invalidates the element, requiring its redrawing :
+The ${method:RawCardElement>>#onUpdated}$ is also called when  ${class:CardFlipped}$ is triggered as you can see in the ${method:RawCardElement>>#card:|expanded=true}$ method:To test the existing code, you can execute the following snippet that initialize a card and its element:[[[aCardTwo := Card new symbol: $A.RawCardElement new card: aCardTwo.]]]To switch the card side, execute several times the following snippet and observe the changes in the result above:[[[aCardTwo flip.]]]!!! Disappearing Card ElementTo make a card disappear from a game board, we will register to the ${class:CardDisappeared}$ announcement and set the card element's ${class:BlVisibility}$: ${changes:changes/72-raw-card-element-disappear}$${class:RawCardElement}$ now registers to the ${class:CardDisappeared}$ announcement at ${method:RawCardElement>>#card:|expanded=true}$:The ${method:RawCardElement>>#onDisappear|expanded=true}$ is implemented by changing the element visibility:By displaying the card:[[[aCardThree := Card new symbol: $B.RawCardElement new card: aCardThree.]]]we can make it disappear by executing the following snippet:[[[aCardThree disappear.]]]Notice, that we do not have an =appear== action as the game does not require it.

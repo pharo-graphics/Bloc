@@ -2,44 +2,27 @@ Class {
 	#name : #BlWidthEqualizer,
 	#superclass : #BlEqualizer,
 	#instVars : [
-		'sourceElements',
-		'targetElements'
+		'widthBlock'
 	],
-	#category : 'Bloc-Utilities - Equalizer'
+	#category : #'Bloc-Utilities - Equalizer'
 }
 
-{ #category : #'as yet unclassified' }
-BlWidthEqualizer class >> of: aCollectionOfTargetElements with: aCollectionOfSourceElements [
-	^ self new
-		sourceElements: aCollectionOfSourceElements;
-		targetElements: aCollectionOfTargetElements
-]
-
 { #category : #'element handlers' }
-BlWidthEqualizer >> elementExtentChanged: anEvent [
+BlWidthEqualizer >> elementExtentChangedEvent: anEvent [
 	| maxWidth |
 
 	maxWidth := self sourceElements max: #width.
-	self targetElements do: [ :anElement | anElement width: maxWidth ]
+	self targetElements do: [ :anElement | widthBlock value: anElement value: maxWidth ]
+]
+
+{ #category : #initialization }
+BlWidthEqualizer >> initialize [
+	super initialize.
+	
+	widthBlock := [ :anElement :aWidth | anElement width: aWidth ]
 ]
 
 { #category : #accessing }
-BlWidthEqualizer >> sourceElements [
-	^ sourceElements
-]
-
-{ #category : #accessing }
-BlWidthEqualizer >> sourceElements: aCollection [
-	sourceElements := aCollection.
-	sourceElements do: [ :anElement | anElement addEventHandler: self ]
-]
-
-{ #category : #accessing }
-BlWidthEqualizer >> targetElements [
-	^ targetElements
-]
-
-{ #category : #accessing }
-BlWidthEqualizer >> targetElements: anObject [
-	targetElements := anObject
+BlWidthEqualizer >> width: aBlock [
+	widthBlock := aBlock
 ]

@@ -50,10 +50,10 @@ BlLinearLayoutHorizontalMeasurer >> prepareForWeightedMeasure [
 	maxAscent removeAll.
 	maxDescent removeAll.
 	
-	totalLength := 0.
+	totalLength := 0.0.
 	
 	self flag: 'Why reset max breadth?'.
-	maxBreadth := 0.
+	maxBreadth := 0.0.
 ]
 
 { #category : #'private - measurement' }

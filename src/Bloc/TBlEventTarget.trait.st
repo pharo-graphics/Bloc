@@ -4,7 +4,7 @@ Any object that needs to be able to handle events should use me.
 "
 Trait {
 	#name : #TBlEventTarget,
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #'event management' }
@@ -23,13 +23,21 @@ TBlEventTarget >> addEventHandler: anEventHandler [
 ]
 
 { #category : #'event management' }
+TBlEventTarget >> addEventHandlerIfNotPresent: anEventHandler [
+	(self hasEventHandler: anEventHandler)
+		ifTrue: [ ^ self ].
+
+	self addEventHandler: anEventHandler
+]
+
+{ #category : #'event management' }
 TBlEventTarget >> addEventHandlerOn: anEventClass do: aBlock [
 	self addEventHandler: (BlEventHandler on: anEventClass do: aBlock)
 ]
 
 { #category : #'shortcut management' }
 TBlEventTarget >> addShortcut: aShortcut [
-	self shortcuts add: aShortcut
+	self eventDispatcher addShortcut: aShortcut
 ]
 
 { #category : #'event management' }
@@ -48,11 +56,27 @@ TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain [
 ]
 
 { #category : #'event management' }
+TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain upTo: anOtherEventTarget [
+	"Build an event dispatch chain up to but excluding a given other event target
+	Note: Dispatcher chain is persistent - I return a new instance"
+	<return: #BlEventDispatcherChain>
+	| aResultChain |
+
+	aResultChain := aBlEventDispatcherChain.
+	aResultChain := aResultChain withNext: self eventDispatcher.
+
+	(self hasNextEventTarget and: [ self nextEventTarget ~~ anOtherEventTarget ])
+		ifTrue: [ aResultChain := self nextEventTarget buildEventDispatchChain: aResultChain upTo: anOtherEventTarget ].
+
+	^ aResultChain
+]
+
+{ #category : #'event management' }
 TBlEventTarget >> dispatchEvent: anEvent [
 	"I only call my event dispatcher, so the event can be only handled by my event handlers/filters"
 
 	anEvent hasSource
-		ifFalse: [ anEvent source: anEvent ].
+		ifFalse: [ anEvent source: self ].
 
 	anEvent target: self.
 	anEvent forwardingTarget: self.
@@ -74,8 +98,25 @@ TBlEventTarget >> fireEvent: anEvent [
 	"I fire provided event building an event dispatcher chain
 	(from target to the root element) and dispatch the event with it.
 	anEvent must not be nil"
+	| aDispatcherChain |
 
-	BlEvent fireEvent: anEvent target: self
+	anEvent hasSource
+		ifFalse: [ anEvent source: self ].
+
+	anEvent target: self.
+
+	aDispatcherChain := self buildEventDispatchChain: BlEventDispatcherChain empty.
+	aDispatcherChain dispatchEvent: anEvent
+]
+
+{ #category : #'event management' }
+TBlEventTarget >> hasEventFilter: anEventHandler [
+	^ self eventDispatcher hasFilter: anEventHandler
+]
+
+{ #category : #'event management' }
+TBlEventTarget >> hasEventHandler: anEventHandler [
+	^ self eventDispatcher hasHandler: anEventHandler
 ]
 
 { #category : #'event management accessing' }
@@ -104,6 +145,11 @@ TBlEventTarget >> removeEventFilter: anEventHandler [
 ]
 
 { #category : #'event management' }
+TBlEventTarget >> removeEventFiltersSuchThat: aBlock [
+	self eventDispatcher removeEventFiltersSuchThat: aBlock
+]
+
+{ #category : #'event management' }
 TBlEventTarget >> removeEventHandler: anEventHandler [
 	self eventDispatcher removeEventHandler: anEventHandler
 ]
@@ -115,15 +161,36 @@ TBlEventTarget >> removeEventHandlersSuchThat: aBlock [
 
 { #category : #'shortcut management' }
 TBlEventTarget >> removeShortcut: aShortcut [
-	self shortcuts remove: aShortcut
+	self eventDispatcher removeShortcut: aShortcut
+]
+
+{ #category : #'shortcut management' }
+TBlEventTarget >> removeShortcutsWithCombination: aBlKeyCombination [
+	self eventDispatcher removeAllShortcutsWithCombination: aBlKeyCombination
 ]
 
 { #category : #'shortcut management' }
 TBlEventTarget >> shortcuts [
+	<return: #BlShortcutRegistry>
+
 	^ self eventDispatcher shortcutHandler shortcuts
 ]
 
 { #category : #'event management' }
 TBlEventTarget >> when: anEventClass do: aBlock [
 	self addEventHandlerOn: anEventClass do: aBlock
+]
+
+{ #category : #'event management' }
+TBlEventTarget >> when: anEventClass doOnce: aBlock [
+	| anEventHandler |
+	
+	anEventHandler := nil.
+	anEventHandler := BlEventHandler
+		on: anEventClass
+		do: [ :anEvent |
+			self removeEventHandler: anEventHandler.
+			aBlock cull: anEvent ].
+	
+	self addEventHandler: anEventHandler
 ]

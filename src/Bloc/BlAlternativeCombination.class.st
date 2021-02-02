@@ -27,9 +27,25 @@ Class {
 	#category : #'Bloc-Events-KeyBinding'
 }
 
+{ #category : #comparing }
+BlAlternativeCombination >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ combinations = anObject combinations
+]
+
 { #category : #visiting }
 BlAlternativeCombination >> accept: aKeyCombinationVisitor [
 	^ aKeyCombinationVisitor visitAlternative: self
+]
+
+{ #category : #converting }
+BlAlternativeCombination >> asBufferKeys [
+	^ combinations first asBufferKeys
 ]
 
 { #category : #accessing }
@@ -37,6 +53,13 @@ BlAlternativeCombination >> combinations [
 	<return: #SequenceableCollection of: #BlKeyCombination>
 
 	^ combinations
+]
+
+{ #category : #comparing }
+BlAlternativeCombination >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ combinations hash
 ]
 
 { #category : #testing }
@@ -94,6 +117,24 @@ BlAlternativeCombination >> printOn: aStream [
 	self combinations
 		do: [ :aCombination | aCombination printOn: aStream ]
 		separatedBy: [ aStream nextPutAll: ' | ' ].
+
+	aStream nextPut: $)
+]
+
+{ #category : #printing }
+BlAlternativeCombination >> storeOn: aStream [
+	aStream nextPut: $(.
+
+	combinations size <= 1
+		ifTrue: [
+			aStream nextPutAll: self class name; space; nextPutAll: 'new'.
+			combinations size = 1
+				ifTrue: [ aStream space nextPutAll: #with:; space; store: combinations first ] ]
+		ifFalse: [ 
+			1 to: combinations size - 1 do: [ :i | aStream nextPut: $( ].
+			combinations
+				do: [ :eachCombination | aStream store: eachCombination ]
+				separatedBy: [ aStream nextPutAll: ') or: ' ] ].
 
 	aStream nextPut: $)
 ]

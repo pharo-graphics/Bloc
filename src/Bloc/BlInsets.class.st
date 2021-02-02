@@ -19,7 +19,7 @@ Class {
 	#classVars : [
 		'Empty'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #'instance creation' }
@@ -92,6 +92,15 @@ BlInsets class >> top: t bottom: b [
 		right: 0
 		bottom: b
 		left: 0
+]
+
+{ #category : #'instance creation' }
+BlInsets class >> top: t left: l [
+	^ self 
+		top: t
+		right: 0
+		bottom: 0
+		left: l
 ]
 
 { #category : #'instance creation' }
@@ -212,6 +221,7 @@ BlInsets >> inset: aRectangle [
 
 	self isEmpty
 		ifTrue: [ ^ aRectangle ].
+
 	^ (aRectangle left + self left) @ (aRectangle top + self top)
 		corner: (aRectangle right - self right) @ (aRectangle bottom - self bottom)
 ]
@@ -228,11 +238,27 @@ BlInsets >> isEmpty [
 				and: [ self left isZero ] ] ]
 ]
 
+{ #category : #testing }
+BlInsets >> isUniform [
+	"Return true if all insets (right, left, top, bottom) are same"
+	<return: #Boolean>
+
+	^ (self top closeTo: self right)
+		and: [ (self right closeTo: self bottom)
+			and: [ (self bottom closeTo: self left)
+				and: [ self left closeTo: self top ] ] ]
+]
+
 { #category : #accessing }
 BlInsets >> left [
 	<return: #Number>
 
 	^ left
+]
+
+{ #category : #accessing }
+BlInsets >> max [
+	^ self top max: (self right max: (self bottom max: self left))
 ]
 
 { #category : #converting }
@@ -246,9 +272,24 @@ BlInsets >> negated [
 
 { #category : #printing }
 BlInsets >> printOn: aStream [
-	super printOn: aStream.
+
 	aStream
-		nextPutAll: ' top: ';
+		nextPutAll: self class name;
+		space.
+	
+	self isEmpty
+		ifTrue: [
+			aStream nextPutAll: 'empty'.
+			^ self ].
+		
+	self isUniform
+		ifTrue: [
+			aStream nextPutAll: 'all: '.
+			aStream print: self top.
+			^ self ].
+
+	aStream
+		nextPutAll: 'top: ';
 		print: top;
 		nextPutAll: ' right: ';
 		print: right;
@@ -287,10 +328,10 @@ BlInsets >> top: aTop right: aRight bottom: aBottom left: aLeft [
 		assert: [ left isNil ]
 		description: [ 'Insets is immutable and can not be changed' ].
 
-	top := aTop.
-	right := aRight.
-	bottom := aBottom.
-	left := aLeft
+	top := aTop asFloat.
+	right := aRight asFloat.
+	bottom := aBottom asFloat.
+	left := aLeft asFloat
 ]
 
 { #category : #accessing }
@@ -312,4 +353,49 @@ BlInsets >> width [
 	<return: #Number>
 
 	^ left + right
+]
+
+{ #category : #accessing }
+BlInsets >> withBottom: aBottom [
+	^ self class
+		top: self top
+		right: self right
+		bottom: aBottom
+		left: self left
+]
+
+{ #category : #accessing }
+BlInsets >> withExtraBottom: aBottom [
+	^ self class
+		top: self top
+		right: self right
+		bottom: self bottom + aBottom
+		left: self left
+]
+
+{ #category : #accessing }
+BlInsets >> withLeft: aLeft [
+	^ self class
+		top: self top
+		right: self right
+		bottom: self bottom
+		left: aLeft
+]
+
+{ #category : #accessing }
+BlInsets >> withRight: aRight [
+	^ self class
+		top: self top
+		right: aRight
+		bottom: self bottom
+		left: self left
+]
+
+{ #category : #accessing }
+BlInsets >> withTop: aTop [
+	^ self class
+		top: aTop
+		right: self right
+		bottom: self bottom
+		left: self left
 ]

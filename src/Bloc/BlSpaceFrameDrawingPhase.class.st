@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceFrameDrawingPhase,
 	#superclass : #BlSpaceFramePhase,
-	#category : #'Bloc-Space-Frame'
+	#category : #'Bloc-Space - Frame'
 }
 
 { #category : #testing }
@@ -18,5 +18,5 @@ BlSpaceFrameDrawingPhase >> name [
 BlSpaceFrameDrawingPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpaceRenderEndEvent
-		during: [ :theSpace | theSpace hasDirtyAreas ifTrue: [ theSpace render ] ]
+		during: [ :theSpace | BlSpaceRenderSignal for: theSpace block: [ theSpace render ] ]
 ]

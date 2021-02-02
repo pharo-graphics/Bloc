@@ -9,8 +9,18 @@ Class {
 	#instVars : [
 		'bounds'
 	],
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Element'
 }
+
+{ #category : #'api - enable / disable' }
+BlElementSelectionAcquiredEvent class >> enableIn: anObject [
+	anObject enableSelectionAcquired
+]
+
+{ #category : #'api - enable / disable' }
+BlElementSelectionAcquiredEvent class >> wantedIn: anObject [
+	^ anObject wantsSelectionAcquired
+]
 
 { #category : #accessing }
 BlElementSelectionAcquiredEvent >> bounds [
@@ -29,5 +39,5 @@ BlElementSelectionAcquiredEvent >> bounds: aBlBounds [
 
 { #category : #sending }
 BlElementSelectionAcquiredEvent >> sendTo: anObject [
-	anObject selectionAcquiredEvent: self
+	anObject elementSelectionAcquiredEvent: self
 ]

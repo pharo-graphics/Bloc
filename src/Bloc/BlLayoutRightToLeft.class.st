@@ -4,7 +4,7 @@ I am a concrete right-to-left direction
 Class {
 	#name : #BlLayoutRightToLeft,
 	#superclass : #BlLayoutDirection,
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #testing }

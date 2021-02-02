@@ -4,8 +4,8 @@ I am a mocked host space that behaves just like a real one but is invisible and 
 Class {
 	#name : #BlMockedHostSpace,
 	#superclass : #Object,
-	#traits : 'TBlHostSpace',
-	#classTraits : 'TBlHostSpace classTrait',
+	#traits : 'TBlHostSpace + TBlSpaceProperties',
+	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
 		'borderless',
 		'cursor',
@@ -14,17 +14,16 @@ Class {
 		'eventFetcher',
 		'visible',
 		'opened',
-		'windowExtent',
-		'canvasExtent',
 		'densityDpi',
 		'renderCount',
-		'space',
-		'host',
 		'isFullscreen',
 		'position',
-		'title'
+		'title',
+		'isFullsize',
+		'physicalSize',
+		'logicalSize'
 	],
-	#category : 'BlocHost-Mock-Host'
+	#category : #'BlocHost-Mock-Host'
 }
 
 { #category : #'window - properties' }
@@ -43,18 +42,8 @@ BlMockedHostSpace >> borderless: aBoolean [
 ]
 
 { #category : #'host space - accessing' }
-BlMockedHostSpace >> canvasExtent [
-	"Return a window canvas size in user coordinates.
-	This size may differ from the window size on high dpi (retina) screens.
-	In most cases canvas is x2 larger than window in pixel on retina screens."
-	<return: #Point>
-
-	^ canvasExtent
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> canvasExtent: aPoint [
-	canvasExtent := aPoint
+BlMockedHostSpace >> canvasExtent: anExtent [
+	physicalSize := FensterPhysicalSize width: anExtent x height: anExtent y
 ]
 
 { #category : #'host space - displaying' }
@@ -76,21 +65,21 @@ BlMockedHostSpace >> cursor: aCursor [
 ]
 
 { #category : #initialization }
-BlMockedHostSpace >> defaultCanvasExtent [
-	^ 800 @ 600
-]
-
-{ #category : #initialization }
 BlMockedHostSpace >> defaultDensityDpi [
 	^ 96.0
 ]
 
 { #category : #initialization }
-BlMockedHostSpace >> defaultWindowExtent [
+BlMockedHostSpace >> defaultLogicalSize [
 	^ 400 @ 300
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #initialization }
+BlMockedHostSpace >> defaultPhysicalSize [
+	^ 800 @ 600
+]
+
+{ #category : #'host space - geometry' }
 BlMockedHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -101,15 +90,6 @@ BlMockedHostSpace >> densityDpi [
 { #category : #'host space - accessing' }
 BlMockedHostSpace >> densityDpi: aNumber [
 	densityDpi := aNumber
-]
-
-{ #category : #'host space - events' }
-BlMockedHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
-
-	^ eventFetcher
 ]
 
 { #category : #'window - properties' }
@@ -129,6 +109,24 @@ BlMockedHostSpace >> fullscreen: aBoolean [
 	isFullscreen := aBoolean
 ]
 
+{ #category : #'window - properties' }
+BlMockedHostSpace >> fullsize [
+	"Return true if an underlying window is in fullsize mode,
+	false otherwise"
+	<return: #Boolean>
+
+	^ isFullsize
+]
+
+{ #category : #'window - properties' }
+BlMockedHostSpace >> fullsize: aBoolean [
+	"Switch underlying window to fullsize if true is given
+	and exit fullsize mode if false is given.
+	See ${method:TBlSpaceProperties>>#fullsize}"
+
+	isFullsize := aBoolean
+]
+
 { #category : #'host space - testing' }
 BlMockedHostSpace >> hasResized [
 	"Return true if renderer extent changed.
@@ -144,21 +142,6 @@ BlMockedHostSpace >> hide [
 	visible := false
 ]
 
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> host [
-	"Return a host that was used to create this host space"
-	<return: #BlHost>
-
-	^ host
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> host: aBlHost [
-	"Assign a host that was used to create this host space"
-	
-	host := aBlHost
-]
-
 { #category : #'window - properties' }
 BlMockedHostSpace >> icon: aForm [
 	"Change window's icon to the given one"
@@ -168,7 +151,7 @@ BlMockedHostSpace >> icon: aForm [
 BlMockedHostSpace >> initialize [
 	super initialize.
 
-	eventFetcher := BlHostEventFetcher new.
+	eventFetcher := BlHostEventFetcher hostSpace: self.
 
 	visible := false.
 	minimized := false.
@@ -176,8 +159,8 @@ BlMockedHostSpace >> initialize [
 	borderless := false.
 	opened := false.
 
-	canvasExtent := self defaultCanvasExtent.
-	windowExtent := self defaultWindowExtent.
+	physicalSize := self defaultPhysicalSize.
+	logicalSize := self defaultLogicalSize.
 	densityDpi := self defaultDensityDpi.
 	renderCount := 0
 ]
@@ -190,6 +173,16 @@ BlMockedHostSpace >> isVisible [
 	<return: #Boolean>
 
 	^ visible
+]
+
+{ #category : #'host space - geometry' }
+BlMockedHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #FensterLogicalSize>
+
+	^ logicalSize
 ]
 
 { #category : #'host space - displaying' }
@@ -218,10 +211,28 @@ BlMockedHostSpace >> minimized [
 	^ minimized
 ]
 
+{ #category : #'host space - testing' }
+BlMockedHostSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+	
+	^ false
+]
+
 { #category : #'host space - displaying' }
 BlMockedHostSpace >> open [
 	opened := true.
 	self show
+]
+
+{ #category : #'host space - geometry' }
+BlMockedHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #FensterPhysicalSize>
+
+	^ physicalSize
 ]
 
 { #category : #'window - properties' }
@@ -256,33 +267,9 @@ BlMockedHostSpace >> renderCount [
 	^ renderCount
 ]
 
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
-	
-	^ self canvasExtent / self windowExtent
-]
-
 { #category : #'host space - displaying' }
 BlMockedHostSpace >> show [
 	visible := true
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> space [
-	"Return a space I am assigned to"
-	<return: #BlSpace>
-
-	^ space
-]
-
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> space: aSpace [
-	"Assign me to a given space"
-
-	space := aSpace
 ]
 
 { #category : #'window - properties' }
@@ -300,17 +287,7 @@ BlMockedHostSpace >> title: aString [
 	title := aString
 ]
 
-{ #category : #'host space - accessing' }
-BlMockedHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	^ windowExtent
-]
-
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMockedHostSpace >> windowExtent: anExtent [
-	windowExtent := anExtent
+	logicalSize := FensterLogicalSize width: anExtent x height: anExtent y
 ]

@@ -50,13 +50,20 @@ BlChildrenCollection >> addFirst: anElement [
 ]
 
 { #category : #'children - removing' }
-BlChildrenCollection >> remove: anElement [
+BlChildrenCollection >> remove: anElement [	
+	self
+		remove: anElement
+		ifAbsent: [ self errorNotFound: anElement ]
+]
+
+{ #category : #'children - removing' }
+BlChildrenCollection >> remove: anElement ifAbsent: anExceptionBlock [
 	| anIndex |
 
 	anIndex := self indexOf: anElement.
 	anIndex isZero
-		ifTrue: [ self errorNotFound: anElement ].
-		
+		ifTrue: [ anExceptionBlock value ].
+
 	self removeAt: anIndex
 ]
 
@@ -68,4 +75,31 @@ BlChildrenCollection >> removeAll: aCollectionOfBlElement [
 { #category : #'children - removing' }
 BlChildrenCollection >> removeAt: anIndex [
 	self subclassResponsibility
+]
+
+{ #category : #'children - swapping' }
+BlChildrenCollection >> swapAt: aChildIndex with: anotherChildIndex [
+	| lesserIndex greaterIndex fristChild secondChild  | 
+	aChildIndex = anotherChildIndex
+		ifTrue: [ ^ self ].
+		
+	self
+		assert: [ aChildIndex between: 1 and: self size ]
+		description: [ 'Child index must be within bounds' ].
+		
+	self
+		assert: [ anotherChildIndex between: 1 and: self size ]
+		description: [ 'Child index must be within bounds' ].
+		
+	lesserIndex := aChildIndex min: anotherChildIndex.
+	greaterIndex := aChildIndex max: anotherChildIndex.
+	
+	fristChild := self at: lesserIndex.
+	secondChild := self at: greaterIndex.
+
+	self removeAt: greaterIndex.
+	self removeAt: lesserIndex.
+
+	self add: secondChild at: lesserIndex.
+	self add: fristChild at: greaterIndex
 ]

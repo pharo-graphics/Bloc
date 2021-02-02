@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'subscriber'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #comparing }
@@ -14,6 +14,12 @@ BlHandlerAnnouncementSubscription >> = anotherObject [
 	(anotherObject isKindOf: self class)
 		ifFalse: [ ^ false ].
 	^ anotherObject subscriber = self subscriber
+]
+
+{ #category : #accessing }
+BlHandlerAnnouncementSubscription >> announcementClass [
+	"Polymorphic to ${method:AnnouncementSubscription>>#announcementClass}$"
+	^ self class
 ]
 
 { #category : #announcing }
@@ -37,7 +43,7 @@ BlHandlerAnnouncementSubscription >> hash [
 
 { #category : #accessing }
 BlHandlerAnnouncementSubscription >> subscriber [
-	<return: #TBlEventHandler>
+	<return: #BlBasicEventHandler>
 
 	^ subscriber
 ]

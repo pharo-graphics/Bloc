@@ -1,10 +1,13 @@
+"
+I am an event handler that is used for Halos element. For more information about me, see ${class:BlDevHalosEventListener}$.
+"
 Class {
 	#name : #BlElementSelectionListener,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlCustomEventHandler,
 	#instVars : [
 		'selection'
 	],
-	#category : 'Bloc-DevTool-Core'
+	#category : #'Bloc-DevTool-Core'
 }
 
 { #category : #'instance creation' }
@@ -15,21 +18,26 @@ BlElementSelectionListener class >> on: aSelectionElement [
 ]
 
 { #category : #'element handlers' }
-BlElementSelectionListener >> elementExtentChanged: anEvent [
+BlElementSelectionListener >> elementExtentChangedEvent: anEvent [
 
 	self selection size: self selection selectionExtent
 ]
 
 { #category : #'element handlers' }
-BlElementSelectionListener >> elementPositionChanged: anEvent [
+BlElementSelectionListener >> elementPositionChangedEvent: anEvent [
 
 	self selection relocate: anEvent target positionInSpace - self selection padding topLeft
 ]
 
 { #category : #'element handlers' }
-BlElementSelectionListener >> elementRemoved: anEvent [
+BlElementSelectionListener >> elementRemovedFromParentEvent: anEvent [
 
 	self selection close
+]
+
+{ #category : #'api - accessing' }
+BlElementSelectionListener >> eventsToHandle [
+	^ { BlElementExtentChangedEvent . BlElementPositionChangedEvent . BlElementRemovedFromParentEvent }
 ]
 
 { #category : #accessing }

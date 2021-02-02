@@ -11,7 +11,7 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #'instance creation' }
@@ -176,8 +176,11 @@ BlGridLayoutImpl >> layout: aGridLayout [
 ]
 
 { #category : #layout }
-BlGridLayoutImpl >> layout: anElement in: aRectangle [
+BlGridLayoutImpl >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	| targetWidth targetHeight paddingLeft paddingTop paddingRight paddingBottom hLocations vLocations|
+	
+	measurer layout
+		ifNil: [ ^ self ].
 	
 	self checkConsistency: anElement.
 	
@@ -189,8 +192,8 @@ BlGridLayoutImpl >> layout: anElement in: aRectangle [
 	paddingTop := anElement insets top.
 	paddingBottom := anElement insets bottom.
 	
-	horizontalAxis applyLayoutIn: targetWidth - paddingLeft - paddingRight.
-	verticalAxis applyLayoutIn: targetHeight - paddingTop - paddingBottom.
+	horizontalAxis applyLayoutWithin: targetWidth - paddingLeft - paddingRight.
+	verticalAxis applyLayoutWithin: targetHeight - paddingTop - paddingBottom.
 	
 	hLocations := horizontalAxis locations.
 	vLocations := verticalAxis locations.
@@ -244,8 +247,8 @@ BlGridLayoutImpl >> layout: anElement in: aRectangle [
 		
 		 (width ~= child measuredWidth or: [ height ~= child measuredHeight ])
 			ifTrue: [ child measure: (BlExtentMeasurementSpec exact: width @ height) ].
-			
-		child applyLayoutIn: (cx @ cy extent: width @ height) ]
+
+		child applyLayoutIn: (cx @ cy extent: width @ height) context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #measure }

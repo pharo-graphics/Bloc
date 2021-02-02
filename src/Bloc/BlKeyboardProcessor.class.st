@@ -1,15 +1,20 @@
+"
+! Keyboard event processor
+Is responsible for processing ${class:BlKeyboardEvent}$ which are sent by the ${class:TBlHostSpace}$ to the ${class:BlSpace}$. In addition, the ==keyboard event processor== generates additional events such as ${class:BlShortcutEvent}$ 
+"
 Class {
 	#name : #BlKeyboardProcessor,
 	#superclass : #BlBaseEventProcessor,
 	#instVars : [
 		'buffer',
+		'textInputBuffer',
 		'preventKeystrokes',
 		'shortcutRepeatDelay',
 		'shortcutRepeatInterval',
 		'previousShortcutTime',
 		'previousShortcutRepeatTime'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #accessing }
@@ -20,8 +25,8 @@ BlKeyboardProcessor >> buffer [
 ]
 
 { #category : #'target detection' }
-BlKeyboardProcessor >> findTarget: anEvent [
-	"Find and return an appropriate element target for a given keyboard event.
+BlKeyboardProcessor >> findTarget [
+	"Find and return an appropriate element target for a keyboard event.
 	By default a keyboard event target is currently focused element if exists
 	or space's root element otherwise.
 	Note: target can not be nil"
@@ -36,6 +41,8 @@ BlKeyboardProcessor >> findTarget: anEvent [
 BlKeyboardProcessor >> handleSpaceEventProcessedEvent: anEvent [
 	| aShortcutEvent aTimeNow |
 	
+	self processBufferedTextInput.
+
 	self buffer isEmpty
 		ifTrue: [ ^ self ].
 	
@@ -50,7 +57,7 @@ BlKeyboardProcessor >> handleSpaceEventProcessedEvent: anEvent [
 	aShortcutEvent := BlShortcutEvent new.
 	aShortcutEvent beRepeated.
 	aShortcutEvent buffer: self buffer.
-	aShortcutEvent target: (self findTarget: anEvent).
+	aShortcutEvent target: self findTarget.
 	self fireEvent: aShortcutEvent.
 
 	previousShortcutRepeatTime := self space time now
@@ -61,6 +68,7 @@ BlKeyboardProcessor >> initialize [
 	super initialize.
 	
 	buffer := BlKeyboardBuffer new.
+	textInputBuffer := BlTextInputBuffer new.
 	preventKeystrokes := false.
 
 	shortcutRepeatInterval := 100 milliSeconds. "how often a shortcut even should be sent while user still presses keys"
@@ -79,6 +87,24 @@ BlKeyboardProcessor >> keystrokesAllowed [
 ]
 
 { #category : #'event processing' }
+BlKeyboardProcessor >> processBufferedTextInput [
+	| aTarget |
+
+	aTarget := nil.
+
+	textInputBuffer textInputEventsDo: [ :eachEvent |
+		"initialize target here to not search for the target if there are no buffered input"
+		aTarget
+			ifNil: [ aTarget := self findTarget ].
+		eachEvent
+			timestamp: self space time now;
+			target: aTarget.
+		self fireEvent: eachEvent ].
+	
+	textInputBuffer reset
+]
+
+{ #category : #'event processing' }
 BlKeyboardProcessor >> processKeyDown: anEvent [
 	| aTarget aShortcutEvent |
 
@@ -87,14 +113,24 @@ BlKeyboardProcessor >> processKeyDown: anEvent [
 
 	self buffer add: anEvent.
 	
-	aTarget := self findTarget: anEvent.
+	aTarget := self telemetry
+		timeSync: [ 'Find key down target ' ]
+		during: [ self findTarget ].
+
 	anEvent target: aTarget.
-	self fireEvent: anEvent.
+	
+	self telemetry
+		timeSync: [ 'Fire key down event ' ]
+		during: [ self fireEvent: anEvent ].
 
 	aShortcutEvent := BlShortcutEvent new.
 	aShortcutEvent buffer: self buffer.
 	aShortcutEvent target: aTarget.
-	self fireEvent: aShortcutEvent.
+
+	self telemetry
+		timeSync: [ 'Fire shortcut event ' ]
+		during: [ self fireEvent: aShortcutEvent ].
+
 	previousShortcutTime := self space time now.
 
 	preventKeystrokes := aShortcutEvent isConsumed
@@ -109,28 +145,39 @@ BlKeyboardProcessor >> processKeyUp: anEvent [
 	
 	self buffer remove: anEvent.
 	
-	aTarget := self findTarget: anEvent.
+	aTarget := self telemetry
+		timeSync: [ 'Find key up target ' ]
+		during: [ self findTarget ].
+
 	anEvent target: aTarget.
-	self fireEvent: anEvent
+
+	self telemetry
+		timeSync: [ 'Fire key up event ' ]
+		during: [ self fireEvent: anEvent ].
+
+	self buffer isEmpty
+		ifTrue: [ preventKeystrokes := false ]
 ]
 
 { #category : #'event processing' }
-BlKeyboardProcessor >> processKeystroke: anEvent [
-	| aTarget |
-	
+BlKeyboardProcessor >> processTextInput: anEvent [	
 	self keystrokesAllowed
 		ifFalse: [ ^ self ].
-
-	aTarget := self findTarget: anEvent.
-	anEvent target: aTarget.
-	self fireEvent: anEvent.
+	
+	textInputBuffer
+		text: anEvent text
+		modifiers: anEvent modifiers
 ]
 
 { #category : #'event processing' }
-BlKeyboardProcessor >> processTextInput: anEvent [
-	| aTarget |
-	
-	aTarget := self findTarget: anEvent.
-	anEvent target: aTarget.
-	self fireEvent: anEvent.
+BlKeyboardProcessor >> processWindowFocusOut: anEvent [
+
+	"Take all registered key down events from the buffer and send them as key up events to release keys"
+	self buffer events
+		collect: [ :aKeyDownEvent |
+			BlKeyUpEvent new
+				key: aKeyDownEvent key;
+				scanCode: aKeyDownEvent scanCode;
+				timestamp: self space time now ]
+		thenDo: [ :aKeyUpEvent | self processKeyUp: aKeyUpEvent ]
 ]

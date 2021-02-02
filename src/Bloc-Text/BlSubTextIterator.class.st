@@ -5,7 +5,7 @@ Class {
 		'text',
 		'iterator'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #initialization }
@@ -91,9 +91,9 @@ BlSubTextIterator >> nextLine [
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
-		- start index of line
-		- end index of line without line delimiter
-		- end index of line including line delimiter(s) CR, LF or CRLF"
+		- start index of line in text coordinates
+		- end index of line without line delimiter in text coordinates
+		- end index of line including line delimiter(s) in text coordinates"
 		
 	iterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aLineDelimiterEnd |
 		anIndicesBlock
@@ -110,6 +110,18 @@ BlSubTextIterator >> nextSegment: aBlock [
 ]
 
 { #category : #'iterator - enumeration' }
+BlSubTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
+	"@see BlTextIterator>>#nextSegment:indicesDo:"
+	<return: #Object>
+		
+	^ iterator nextSegment: aBlock indicesDo: [ :aSegmentStart :aSegmentEnd :anInitialValue |
+		anIndicesBlock
+			cull: aSegmentStart - self text textOffset
+			cull: aSegmentEnd - self text textOffset
+			cull: anInitialValue ]
+]
+
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextSpan [
 	"Return a next homogeneous text span"
 	<return: #BlSpan>
@@ -123,7 +135,12 @@ BlSubTextIterator >> nextWhitespace [
 	until the first non-whitespace character without including it"
 	<return: #BlText>
 
-	^ iterator nextWhitespace
+	| aStartPosition aSegment |
+	
+	aStartPosition := iterator position + 1.
+	aSegment :=  iterator nextWhitespace.
+
+	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
 ]
 
 { #category : #'iterator - enumeration' }
@@ -185,28 +202,24 @@ BlSubTextIterator >> text [
 BlSubTextIterator >> text: aBrSubText from: aStartIndex to: anEndIndex [
 	
 	self
-		assert: [ aStartIndex isInteger and: [ anEndIndex isInteger ] ]
+		assert: [ aStartIndex isTextIndex and: [ anEndIndex isTextIndex ] ]
 		description: [ 'Only integers are alowed as start and end indices' ].
 	self
 		assert: [ aBrSubText isNotNil ]
 		description: [ 'Text must not be nil' ].
 	self
-		assert: [ aStartIndex between: 0 and: aBrSubText size ]
+		assert: [ aStartIndex between: 1 and: (aBrSubText size + 1) ]
 		description: [ 'Sub-text start index is out of bounds!' ].
 	self
 		assert: [ anEndIndex between: 0 and: aBrSubText size ]
 		description: [ 'Sub-text end index is out of bounds!' ].
 	self
-		assert: [ aBrSubText isNotEmpty or: [ aStartIndex isZero and: [ anEndIndex isZero ] ] ]
-		description: [ 'If text is empty, start and end indices must be Zero!' ].
+		assert: [ aBrSubText isNotEmpty or: [ aStartIndex = 1 and: [ anEndIndex isZero ] ] ]
+		description: [ 'If text is empty, start must be 1 and end index must be Zero!' ].
 	self
-		assert: [ aStartIndex isZero not or: [ anEndIndex isZero ] ]
-		description: [ 'If start index is zero then end index must also be zero' ].
-	self
-		assert: [ anEndIndex isZero not or: [ aStartIndex isZero ] ]
-		description: [ 'If end index is zero then start index must also be zero' ].
-		
-	
+		assert: [ anEndIndex isZero not or: [ aStartIndex = 1 ] ]
+		description: [ 'If end index is zero then start index must be one' ].
+
 	text := aBrSubText.
 	
 	iterator := aBrSubText text

@@ -12,8 +12,8 @@ There are multiple pre-built types of background:
  - composite background ${class:BlCompositeBackground}$ letting users to compose different types of background into one more complex background
  - transparent background ${class:BlTransparentBackground}$ as a special type of background that 
 
-Background can be instantiated and composed directly or with the help of ==BlBackgroundBuilder==
-See ==BlBackgroundBuilder== for the related example
+Background can be instantiated and composed directly or with the help of ==BlBackgroundBuilder==.
+See ==BlBackgroundBuilder== for the related examples.
 "
 Class {
 	#name : #BlBackground,
@@ -64,6 +64,14 @@ BlBackground >> defaultOpacity [
 	<return: #Number>
 
 	^ 1.0
+]
+
+{ #category : #testing }
+BlBackground >> isOpaque [
+	"Return true if the whole background is opaque"
+	<return: #Boolean>
+	
+	^ false
 ]
 
 { #category : #testing }

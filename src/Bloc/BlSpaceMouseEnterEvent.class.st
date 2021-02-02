@@ -1,10 +1,13 @@
+"
+Is sent to the space when mouse cursor enters the window
+"
 Class {
 	#name : #BlSpaceMouseEnterEvent,
 	#superclass : #BlSpaceEvent,
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Space'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #sending }
 BlSpaceMouseEnterEvent >> sendTo: anObject [
 	anObject spaceMouseEnterEvent: self
 ]

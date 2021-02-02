@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #cleanup }
@@ -29,6 +29,11 @@ BlLayoutFitContentLimitedResizer >> isFitContent [
 	^ true
 ]
 
+{ #category : #testing }
+BlLayoutFitContentLimitedResizer >> isFitContentLimited [
+	^ true
+]
+
 { #category : #'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementAtMostWith: aNumber [
 	"Child wants to determine its own size. It can't be bigger than us."
@@ -47,7 +52,10 @@ BlLayoutFitContentLimitedResizer >> measurementExactlyWith: aNumber [
 
 { #category : #'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementUnspecifiedWith: aNumber [
-	^ BlMeasurementSpec unspecified
+	"Child wants to determine its own size.... find out how big it should be"
+	<return: #BlMeasurementSpec>
+
+	^ BlMeasurementSpec unspecified: aNumber
 ]
 
 { #category : #printing }

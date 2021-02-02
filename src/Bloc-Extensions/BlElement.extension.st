@@ -1,12 +1,6 @@
 Extension { #name : #BlElement }
 
 { #category : #'*Bloc-Extensions' }
-BlElement >> gtInspectorChangesIn: aComposite [
-	<gtInspectorPresentationOrder: 20>  
-	^ self changes gtInspectorChangesIn: aComposite
-]
-
-{ #category : #'*Bloc-Extensions' }
 BlElement >> gtInspectorChildrenIn: composite [
 	<gtInspectorPresentationOrder: 80>
 	
@@ -60,19 +54,20 @@ BlElement >> gtInspectorLiveIn: composite [
 	^ composite bloc
 		title: 'Live' translated;
 		element: [ 
-			self addEventHandlerOn: GtPhlowObjectToSelect do: [ :anEvent | 
-				self fireEvent: (GLMBlocObjectToSelect new 
-					toSelect: anEvent object; 
-					fromElement: anEvent sourceElement) ].
-			self addEventHandlerOn: GtPhlowObjectToSpawn do: [ :anEvent | 
-				self fireEvent: (GLMBlocObjectToSelect new 
-					toSelect: anEvent object; 
-					fromElement: anEvent sourceElement) ]
-			];
+			self class environment at: #GtPhlowObjectToSelect ifPresent: [ :anEventClass |
+				self addEventHandlerOn: anEventClass do: [ :anEvent | 
+					self fireEvent: (GLMBlocObjectToSelect new 
+						toSelect: anEvent object; 
+						fromElement: anEvent sourceElement) ] ].
+				
+			self class environment at: #GtPhlowObjectToSpawn ifPresent: [ :anEventClass |
+				self addEventHandlerOn: anEventClass do: [ :anEvent | 
+					self fireEvent: (GLMBlocObjectToSelect new 
+						toSelect: anEvent object; 
+						fromElement: anEvent sourceElement) ] ].
+			self ];
 		act: [ :pres | self space root background: (Color fromHexString: '162425') ] entitled: 'Dark background';
 		act: [ :pres | self space root background: (Color white) ] entitled: 'White background';
-		act: [ :pres | self debug: true ] entitled: 'Debug me';
-		act: [ :pres | self withAllChildrenBreadthFirst do: [ :anElement | anElement debug: true ] ] entitled: 'Debug all';
 		when: [ self topMostParent == self and: [ self isAttachedToSceneGraph not ] ]
 ]
 
@@ -94,7 +89,7 @@ BlElement >> gtInspectorMeasurementChainIn: aComposite [
 		display: [ withAllParents reversed withIndexCollect: [ :anElement :anIndex |
 				{
 					#index -> anIndex .
-					#spec -> anElement layout previousMeasurementSpec.
+					#spec -> anElement privatePreviousMeasurementSpec.
 					#element -> anElement.
 					#layout -> anElement layout
 				} asDictionary ]  ];
@@ -132,21 +127,28 @@ BlElement >> gtInspectorPreviewIn: composite [
 	<gtInspectorPresentationOrder: 15>
 	| morphPresentation |
 	morphPresentation := composite morph.
-	morphPresentation 
+	morphPresentation
 		title: 'Preview' translated;
-		display: [
-			[self asSpartaForm asMorph
-				on: #mouseDown send: #value: to: [ :event | 
-					morphPresentation selection: (self findMouseEventTargetAt: (self localPointToGlobal: event position)) ]] on:Error
-			do: [ :error |
-				error freeze.
-				(IconicListItem
-					text: error messageText
-					icon: #smallWarningIcon asIcon)
-						on: #mouseDown send: #value: to: [ :event | error defaultAction ];
+		display: [ [ self asSpartaForm asMorph
+				on: #mouseDown
+				send: #value:
+				to: [ :event | 
+					morphPresentation
+						selection:
+							(self
+								findMouseEventTargetAt: (self localPointToGlobal: event position)) ] ]
+				on: Error
+				do: [ :error | 
+					error freeze.
+					(IconicListItem
+						text: error messageText
+						icon:
+						(self iconNamed: #smallWarningIcon))
+						on: #mouseDown
+							send: #value:
+							to: [ :event | error defaultAction ];
 						yourself ] ];
 		act: [ :pres | self removeFromParent ] entitled: 'Delete'.
-		
 	^ morphPresentation
 ]
 
@@ -181,24 +183,41 @@ BlElement >> gtInspectorShortcutsIn: composite [
 ]
 
 { #category : #'*Bloc-Extensions' }
-BlElement >> gtInspectorTransformationsIn: aComposite [
-	<gtInspectorPresentationOrder: 19>
-	
-	aComposite
-		composite: [ :aTabbedComposite |
-			aTabbedComposite title: 'Transformation'.
-			(self transformation
-				gtInspectorTransformationsIn: aTabbedComposite)
-					title: 'Composition'.
-			self transformation
-				gtInspectorMatrixIn: aTabbedComposite.
-			self transformation
-				gtInspectorDecompositionIn: aTabbedComposite ].
-]
-
-{ #category : #'*Bloc-Extensions' }
 BlElement >> gtInspectorUserDataIn: composite [
 	<gtInspectorPresentationOrder: 20>  
 	^ (self userData gtInspectorItemsIn: composite) 
 		title: 'User data'
+]
+
+{ #category : #'*Bloc-Extensions' }
+BlElement >> gtPropertiesFor: aView [
+	<gtView>
+
+	^ aView forward
+		title: 'Properties';
+		priority: 11;
+		object: [ self properties ];
+		view: #gtPropertiesFor:
+]
+
+{ #category : #'*Bloc-Extensions' }
+BlElement >> gtStatesFor: aView [
+	<gtView>
+
+	^ aView forward
+		title: 'States';
+		priority: 10;
+		object: [ self states ];
+		view: #gtStatesFor:
+]
+
+{ #category : #'*Bloc-Extensions' }
+BlElement >> gtStylesFor: aView [
+	<gtView>
+
+	^ aView forward
+		title: 'Styles';
+		priority: 10;
+		object: [ self style ];
+		view: #gtStylesFor:
 ]

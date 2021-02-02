@@ -30,6 +30,24 @@ Point >> asTranslate3D [
 ]
 
 { #category : #'*Bloc' }
+Point >> closeTo: anotherPoint epsilon: anEpsilon [
+	"are these two Points close?"
+
+	^ (x closeTo: anotherPoint x epsilon: anEpsilon)
+		and: [ y closeTo: anotherPoint y epsilon: anEpsilon ]
+]
+
+{ #category : #'*Bloc' }
+Point >> isBlocFiniteFloatPoint [
+	^ self x isBlocFiniteFloat and: [ self y isBlocFiniteFloat ]
+]
+
+{ #category : #'*Bloc' }
+Point >> isBlocPositivePoint [
+	^ self x >= 0.0 and: [ self y >= 0.0 ]
+]
+
+{ #category : #'*Bloc' }
 Point >> isPoint2D [
 	"Return true if I represent a 2D point, false otherwise"
 	<return: #Boolean>

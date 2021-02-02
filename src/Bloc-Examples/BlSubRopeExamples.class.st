@@ -144,6 +144,19 @@ BlSubRopeExamples >> clear_attributes_empty_0_to_0 [
 	^ aRopeWithoutAttributes
 ]
 
+{ #category : #'as yet unclassified' }
+BlSubRopeExamples >> readStreamSmall [
+	<gtExample>
+	| rope stream |
+
+	rope := self small.
+	stream := rope readStream.
+
+	self assert: stream next equals: $H.
+	self assert: (stream next: 3) asString equals: 'ell'.
+	self assert: stream upToEnd asString equals: 'o'.
+]
+
 { #category : #'instance creation' }
 BlSubRopeExamples >> small [
 	<gtExample>

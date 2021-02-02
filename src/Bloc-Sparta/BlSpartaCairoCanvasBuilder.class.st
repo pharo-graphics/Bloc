@@ -7,18 +7,11 @@ Class {
 	#category : 'Bloc-Sparta'
 }
 
-{ #category : #'instance creation' }
-BlSpartaCairoCanvasBuilder class >> checker: aPoint [
-	<return: #SpartaCanvas>
-	
-	^ (self class environment at: #SpartaCairoCanvas) checker: aPoint
-]
-
 { #category : #'api - instance creation' }
 BlSpartaCairoCanvasBuilder class >> extent: aPoint [
 	<return: #SpartaCanvas>
 	
-	^ (self class environment at: #SpartaCairoCanvas) extent: aPoint
+	^ (self environment at: #SpartaCairoCanvas) extent: aPoint
 ]
 
 { #category : #accessing }
@@ -47,7 +40,7 @@ BlSpartaCairoCanvasBuilder class >> pdf: aFileName extent: aPoint [
 
 { #category : #accessing }
 BlSpartaCairoCanvasBuilder class >> priority [
-	^ 20
+	^ 30
 ]
 
 { #category : #testing }

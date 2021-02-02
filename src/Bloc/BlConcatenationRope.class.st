@@ -9,7 +9,7 @@ Class {
 		'right',
 		'length'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'instance creation' }
@@ -77,9 +77,18 @@ BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	self assertAccessFrom: aStart to: anEnd.
 	
 	(aStart = 0 and: [ anEnd = self size ])
-		ifTrue: [ ^ self class
-			concatenate: (left clearAttributes: 0 to: left size if: aBlock)
-			and: (right clearAttributes: 0 to: right size if: aBlock) ].
+		ifTrue: [
+			| aNewLeft aNewRight |
+			
+			aNewLeft := left clearAttributes: 0 to: left size if: aBlock.
+			aNewRight := right clearAttributes: 0 to: right size if: aBlock.
+			
+			^ (left == aNewLeft and: [ right == aNewRight ])
+				ifTrue: [ self ]
+				ifFalse: [
+					self class
+						concatenate: aNewLeft
+						and: aNewRight ] ].
 
 	leftSize := left size.
 	newLeft := nil.
@@ -97,9 +106,18 @@ BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 			ifTrue: [ right clearAttributes: 0 to: anEnd - leftSize if: aBlock ]
 			ifFalse: [ right ] ].
 
-	^ self class
-		concatenate: newLeft
-		and: newRight
+	^ (left == newLeft and: [ right == newRight ])
+		ifTrue: [ self ]
+		ifFalse: [
+			self class
+				concatenate: newLeft
+				and: newRight ]
+]
+
+{ #category : #copying }
+BlConcatenationRope >> copyFrom: startIndex to: endIndex [
+
+	^ self from: startIndex-1 to: endIndex
 ]
 
 { #category : #'rope - deleting' }
@@ -238,11 +256,68 @@ BlConcatenationRope >> left: aLeftRope right: aRightRope [
 	length := left size + right size
 ]
 
+{ #category : #'text - converting' }
+BlConcatenationRope >> normalized [
+	<return: #BlRope>
+
+	^ self class
+		concatenate: left normalized
+		and: right normalized
+]
+
+{ #category : #accessing }
+BlConcatenationRope >> readStream [ 
+
+	^ ReadStream on: self
+]
+
+{ #category : #'rope - replacing' }
+BlConcatenationRope >> replaceFrom: aStart to: anEnd with: aCollection [
+	"Replace a piece of the rope with a given collection of items"
+	<return: #BlRope>
+	| leftSize |
+	self assertAccessFrom: aStart to: anEnd.
+	
+	aStart = anEnd
+		ifTrue: [ ^ self ].
+
+	aCollection
+		ifEmpty: [ ^ self ].
+
+	leftSize := left size.
+	
+	"we only replace something in the left part"
+	anEnd <= leftSize
+		ifTrue: [
+			^ self class
+				concatenate: (left replaceFrom: aStart to: anEnd with: aCollection )
+				and: right ].
+
+	"we only replace something in the right part"
+	aStart >= leftSize
+		ifTrue: [
+			^ self class
+				concatenate: left
+				and: (right replaceFrom: aStart - leftSize to: anEnd - leftSize with: aCollection) ].
+	
+	"there is nothing else we can do except falling back to the primitive algorithm"
+	^ (self delete: aStart to: anEnd) insertItems: aCollection at: aStart
+]
+
 { #category : #accessing }
 BlConcatenationRope >> right [
 	<return: #BlRope>
 
 	^ right
+]
+
+{ #category : #'rope - replacing' }
+BlConcatenationRope >> simplified [
+	<return: #BlRope>
+
+	^ self class
+		concatenate: left simplified
+		and: right simplified
 ]
 
 { #category : #'rope - accessing' }

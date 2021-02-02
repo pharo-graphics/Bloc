@@ -3,11 +3,8 @@ I am a concrete implementation of a BlHost that allows users to open host bloc s
 "
 Class {
 	#name : #BlMorphicWindowHost,
-	#superclass : #BlHost,
-	#instVars : [
-		'isRunning'
-	],
-	#category : 'BlocHost-Morphic-Host'
+	#superclass : #BlMorphicSteppingHost,
+	#category : #'BlocHost-Morphic-Host - Window'
 }
 
 { #category : #'driver selection' }
@@ -26,7 +23,7 @@ BlMorphicWindowHost class >> priority [
 	Morphic host is the most stable and will work on any machine"
 	<return: #Number>
 
-	^ 0
+	^ 20
 ]
 
 { #category : #'host - api' }
@@ -41,6 +38,7 @@ BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	aWindow := self createMorphicWindowFor: aSpace.
 	aHostSpace := BlMorphicWindowHostSpace new morphicWindow: aWindow.
 	aHostSpace host: self.
+	aHostSpace universe: self universe.
 	aHostSpace space: aSpace.
 	aHostSpace withSpartaRenderer.
 
@@ -56,6 +54,8 @@ BlMorphicWindowHost >> createMorphicWindowFor: aSpace [
 	aWindow := BlMorphicWindow new.
 	aWindow spaceExtent: aSpace extent.
 	aWindow borderless: aSpace borderless.
+	aWindow fullsize: aSpace fullsize.
+	aWindow title: aSpace title.
 
 	^ aWindow
 ]
@@ -67,48 +67,16 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
 	
-	aSpace hostSpace close.
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 
-{ #category : #initialization }
-BlMorphicWindowHost >> initialize [
-	super initialize.
-
-	isRunning := false
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> isRunning [
-	^ isRunning
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> start [
-	isRunning := true
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> stop [
-	isRunning := false
-]
-
 { #category : #'host - testing' }
-BlMorphicWindowHost >> supportsBufferSurface [
-	^ false
-]
-
-{ #category : #'host - testing' }
-BlMorphicWindowHost >> supportsFormSurface [
-	^ true
-]
-
-{ #category : #'host - testing' }
-BlMorphicWindowHost >> supportsOpenGLSurface [
-	^ false
+BlMorphicWindowHost >> isStillAvailable [
+	^ self class isSupported
 ]

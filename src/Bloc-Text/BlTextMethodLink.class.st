@@ -8,13 +8,3 @@ Class {
 BlTextMethodLink class >> selector: aSymbol [
 	^ self new
 ]
-
-{ #category : #comparing }
-BlTextMethodLink >> equals: aTextAttribute [
-	^ true
-]
-
-{ #category : #comparing }
-BlTextMethodLink >> hash [
-	^ self class hash
-]

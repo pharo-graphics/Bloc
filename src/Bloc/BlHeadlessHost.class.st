@@ -7,12 +7,25 @@ Class {
 	#instVars : [
 		'isRunning'
 	],
-	#category : 'Bloc-Universe'
+	#classVars : [
+		'PulseLoop'
+	],
+	#category : #'Bloc-Universe - Host Headless'
 }
+
+{ #category : #'class initialization' }
+BlHeadlessHost class >> initialize [
+	PulseLoop := BlHostPulseLoop forHost: self
+]
+
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> isRunning [
+	^ PulseLoop isRunning
+]
 
 { #category : #'driver selection' }
 BlHeadlessHost class >> label [
-	^ 'Null'
+	^ 'Headless'
 ]
 
 { #category : #'driver selection' }
@@ -23,35 +36,50 @@ BlHeadlessHost class >> priority [
 	^ Float infinity
 ]
 
-{ #category : #api }
-BlHeadlessHost >> createHostSpaceFor: aSpace [
-
-	aSpace hostSpace: (BlHeadlessHostSpace new host: self)
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> start [
+	PulseLoop start
 ]
 
-{ #category : #api }
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> stop [
+	PulseLoop stop
+]
+
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+	
+	PulseLoop loopProcess ifNotNil: aBlock
+]
+
+{ #category : #'host - api' }
+BlHeadlessHost >> createHostSpaceFor: aSpace [	
+	| aHostSpace |
+	
+	aHostSpace := BlHeadlessHostSpace new.
+	aHostSpace universe: self universe.
+	aHostSpace host: self.
+	aHostSpace space: aSpace.
+	aHostSpace withSpartaRenderer.
+
+	aSpace hostSpace: aHostSpace
+]
+
+{ #category : #'host - api' }
 BlHeadlessHost >> destroyHostSpaceFor: aSpace [
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 
-{ #category : #initialization }
-BlHeadlessHost >> initialize [
-	super initialize.
+{ #category : #'host - testing' }
+BlHeadlessHost >> supportsBufferSurface [
+	<return: #Boolean>
 	
-	isRunning := false
-]
-
-{ #category : #api }
-BlHeadlessHost >> isRunning [
-	^ isRunning
-]
-
-{ #category : #api }
-BlHeadlessHost >> start [
-	isRunning := true
-]
-
-{ #category : #api }
-BlHeadlessHost >> stop [
-	isRunning := false
+	^ true
 ]

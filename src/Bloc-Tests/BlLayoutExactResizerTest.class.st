@@ -4,14 +4,14 @@ Class {
 	#instVars : [
 		'resizer'
 	],
-	#category : 'Bloc-Tests-Layouts-Support'
+	#category : #'Bloc-Tests-Layouts-Support'
 }
 
 { #category : #initialization }
 BlLayoutExactResizerTest >> setUp [
 	super setUp.
 	
-	resizer := BlLayoutExactResizer new size: 100
+	resizer := BlLayoutExactResizer new size: 100.0
 ]
 
 { #category : #initialization }
@@ -29,22 +29,22 @@ BlLayoutExactResizerTest >> testEquals [
 		equals: (BlLayoutExactResizer zero).
 	
 	self
-		assert: (BlLayoutExactResizer new size: 10)
-		equals: (BlLayoutExactResizer new size: 10).
+		assert: (BlLayoutExactResizer new size: 10.0)
+		equals: (BlLayoutExactResizer new size: 10.0).
 
 	self
-		assert: (BlLayoutExactResizer new size: 10) ~= (BlLayoutExactResizer new size: 20).
+		assert: (BlLayoutExactResizer new size: 10.0) ~= (BlLayoutExactResizer new size: 20.0).
 
 	self
-		assert: (BlLayoutExactResizer new size: 10) ~= (BlLayoutResizer fitContent).
+		assert: (BlLayoutExactResizer new size: 10.0) ~= (BlLayoutResizer fitContent).
 ]
 
 { #category : #tests }
 BlLayoutExactResizerTest >> testHash [
 
 	self
-		assert: (BlLayoutExactResizer new size: 10) hash
-		equals: (BlLayoutExactResizer new size: 10) hash.
+		assert: (BlLayoutExactResizer new size: 10.0) hash
+		equals: (BlLayoutExactResizer new size: 10.0) hash.
 ]
 
 { #category : #tests }
@@ -118,10 +118,10 @@ BlLayoutExactResizerTest >> testSize [
 	| testResizer |
 	
 	testResizer := BlLayoutExactResizer new.
-	testResizer size: 75.
-	self assert: testResizer size equals: 75.
+	testResizer size: 75.0.
+	self assert: testResizer size equals: 75.0.
 	
 	testResizer := BlLayoutExactResizer new.
-	testResizer size: 150.
-	self assert: testResizer size equals: 150
+	testResizer size: 150.0.
+	self assert: testResizer size equals: 150.0
 ]

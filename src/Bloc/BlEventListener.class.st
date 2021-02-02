@@ -1,7 +1,7 @@
 Class {
 	#name : #BlEventListener,
 	#superclass : #BlBasicEventHandler,
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'focus handlers' }
@@ -14,7 +14,7 @@ BlEventListener >> clickEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlEventListener >> dblClickEvent: anEvent [
+BlEventListener >> doubleClickEvent: anEvent [
 ]
 
 { #category : #'dnd handlers' }
@@ -43,6 +43,11 @@ BlEventListener >> dragStartEvent: anEvent [
 
 { #category : #'dnd handlers' }
 BlEventListener >> dropEvent: anEvent [
+]
+
+{ #category : #'api - accessing' }
+BlEventListener >> eventsToHandle [
+	^ BlUIEvent allSubclasses
 ]
 
 { #category : #'focus handlers' }
@@ -118,28 +123,12 @@ BlEventListener >> handleEvent: anEvent [
 	anEvent sendTo: self
 ]
 
-{ #category : #'other handlers' }
-BlEventListener >> inputMethodEvent: anEvent [
-]
-
 { #category : #'keyboard handlers' }
 BlEventListener >> keyDownEvent: anEvent [
 ]
 
 { #category : #'keyboard handlers' }
 BlEventListener >> keyUpEvent: anEvent [
-]
-
-{ #category : #'keyboard handlers' }
-BlEventListener >> keysPressedEvent: anEvent [
-]
-
-{ #category : #'keyboard handlers' }
-BlEventListener >> keystrokeEvent: anEvent [
-]
-
-{ #category : #'other handlers' }
-BlEventListener >> menuEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
@@ -172,27 +161,15 @@ BlEventListener >> mouseOverEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlEventListener >> mouseStillDownEvent: anEvent [
+BlEventListener >> mouseUpEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlEventListener >> mouseUpEvent: anEvent [
+BlEventListener >> mouseWheelEvent: anEvent [
 ]
 
 { #category : #'other handlers' }
 BlEventListener >> rotateEvent: anEvent [
-]
-
-{ #category : #'mouse handlers' }
-BlEventListener >> scrollEvent: anEvent [
-]
-
-{ #category : #'selection handlers' }
-BlEventListener >> selectionAcquiredEvent: anEvent [
-]
-
-{ #category : #'selection handlers' }
-BlEventListener >> selectionLostEvent: anEvent [
 ]
 
 { #category : #'keyboard handlers' }
@@ -201,6 +178,11 @@ BlEventListener >> shortcutEvent: anEvent [
 
 { #category : #'space handlers' }
 BlEventListener >> spaceCloseRequest: anEvent [
+]
+
+{ #category : #'space handlers' }
+BlEventListener >> spaceClosedEvent: anEvent [
+	"Is sent after space is closed"
 ]
 
 { #category : #'space handlers' }
@@ -213,6 +195,10 @@ BlEventListener >> spaceFocusInEvent: anEvent [
 
 { #category : #'space handlers' }
 BlEventListener >> spaceFocusOutEvent: anEvent [
+]
+
+{ #category : #'space handlers' }
+BlEventListener >> spaceIconChangedEvent: anEvent [
 ]
 
 { #category : #'space handlers' }
@@ -254,6 +240,15 @@ BlEventListener >> touchMoveEvent: anEvent [
 
 { #category : #'touch handlers' }
 BlEventListener >> touchUpEvent: anEvent [
+]
+
+{ #category : #'api - event managing' }
+BlEventListener >> wantsEvent: anEvent [
+
+	anEvent isElementEvent
+		ifTrue: [ ^ false ].
+
+	^ (anEvent isKindOf: BlUIEvent) or: [ anEvent isKindOf: BlSpaceEvent ]
 ]
 
 { #category : #'other handlers' }

@@ -9,7 +9,7 @@ Public API and Key Messages
 
 - horizontalTranslationFor: elementBounds in: allowedBounds calculate horizontal translation
 - verticalTranslationFor: elementBounds in: allowedBounds calculate vertical translation
-- #new to create instances.
+- new to create instances.
  
 Internal Representation and Key Implementation Points.
 both element and allowed bounds should be in element's parent coordinate system
@@ -25,7 +25,7 @@ Class {
 		'start',
 		'vertical'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #factory }

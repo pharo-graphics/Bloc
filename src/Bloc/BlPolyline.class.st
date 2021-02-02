@@ -11,11 +11,11 @@ BlPolyline vertices: {
 "
 Class {
 	#name : #BlPolyline,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'vertices'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'instance creation' }

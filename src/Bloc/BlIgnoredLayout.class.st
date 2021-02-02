@@ -4,7 +4,7 @@ Ignore me :)
 Class {
 	#name : #BlIgnoredLayout,
 	#superclass : #BlLayout,
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #constraints }

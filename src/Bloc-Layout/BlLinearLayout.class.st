@@ -1,8 +1,8 @@
 Class {
 	#name : #BlLinearLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable',
-	#classTraits : 'TBlAlignable classTrait',
+	#traits : 'TBlAlignable + TBlDirectionalLayout',
+	#classTraits : 'TBlAlignable classTrait + TBlDirectionalLayout classTrait',
 	#instVars : [
 		'weightSum',
 		'verticalAlignment',
@@ -27,6 +27,23 @@ BlLinearLayout class >> horizontal [
 { #category : #factory }
 BlLinearLayout class >> vertical [
 	^ self new beVertical
+]
+
+{ #category : #comparing }
+BlLinearLayout >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ weightSum = anObject weightSum
+		and: [ verticalAlignment = anObject verticalAlignment
+				and: [ shouldUseLargestChild = anObject shouldUseLargestChild
+						and: [ orientation = anObject orientation
+								and: [ horizontalAlignment = anObject horizontalAlignment
+										and: [ direction = anObject direction
+												and: [ cellSpacing = anObject cellSpacing ] ] ] ] ] ]
 ]
 
 { #category : #'api - alignment' }
@@ -67,7 +84,7 @@ BlLinearLayout >> cellSpacing [
 
 { #category : #accessing }
 BlLinearLayout >> cellSpacing: aNumber [	
-	cellSpacing := aNumber
+	cellSpacing := aNumber asFloat
 ]
 
 { #category : #initialization }
@@ -107,6 +124,22 @@ BlLinearLayout >> defaultWeightSum [
 	^ 0
 ]
 
+{ #category : #comparing }
+BlLinearLayout >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ weightSum hash
+		bitXor:
+			(verticalAlignment hash
+				bitXor:
+					(shouldUseLargestChild hash
+						bitXor:
+							(orientation hash
+								bitXor:
+									(horizontalAlignment hash
+										bitXor: (direction hash bitXor: cellSpacing hash)))))
+]
+
 { #category : #accessing }
 BlLinearLayout >> horizontalAlignment [
 	^ horizontalAlignment
@@ -123,7 +156,7 @@ BlLinearLayout >> initialize [
 	
 	weightSum := self defaultWeightSum.
 	shouldUseLargestChild := false.
-	cellSpacing := 0.
+	cellSpacing := 0.0.
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
 	
@@ -141,9 +174,9 @@ BlLinearLayout >> isVertical [
 ]
 
 { #category : #layout }
-BlLinearLayout >> layout: anElement in: aRectangle [
-	self orientation layout: anElement in: aRectangle.
-	self layoutIgnored: anElement
+BlLinearLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
+	self orientation layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext.
+	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #measure }
@@ -161,7 +194,7 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 		extentSpec: anExtentSpec
 		orientation: self orientation.
 	
-	aMeasurer measure.
+	aMeasurer measureOn: anElement.
 	
 	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
 ]
@@ -174,7 +207,7 @@ BlLinearLayout >> orientation [
 { #category : #accessing }
 BlLinearLayout >> orientation: anOrientation [
 	orientation := anOrientation.
-	anOrientation applyLayoutIn: self
+	anOrientation layout: self
 ]
 
 { #category : #testing }
@@ -205,7 +238,7 @@ BlLinearLayout >> weightSum [
 
 { #category : #accessing }
 BlLinearLayout >> weightSum: aNumber [
-	weightSum := aNumber
+	weightSum := aNumber asFloat
 ]
 
 { #category : #'api - configuration' }

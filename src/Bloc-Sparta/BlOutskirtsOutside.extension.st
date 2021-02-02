@@ -11,10 +11,10 @@ BlOutskirtsOutside >> drawBackground: aBackgroundBlock border: aBorderBlock of: 
 
 			"remove parts of the border where we will draw background"	
 			aCanvas clip
-				by: (anElement geometry pathOnSpartaCanvas: aCanvas)
+				by: (anElement geometry pathOnSpartaCanvas: aCanvas of: anElement)
 				during: [
 					aCanvas fill
-						path: (anElement geometry pathOnSpartaCanvas: aCanvas);
+						path: (anElement geometry pathOnSpartaCanvas: aCanvas of: anElement);
 						paint: Color white;
 						drawOptions: (aCanvas drawOptions composeDestOut; antialiasGray);
 						draw ] ].
@@ -30,7 +30,7 @@ BlOutskirtsOutside >> drawBorder: aBlBorder onSpartaCanvas: aCanvas of: anElemen
 	aCanvas stroke
 		alpha: aBlBorder opacity;
 		paint: aBlBorder paint;
-		path: (anElement geometry pathOnSpartaCanvas: aCanvas);
+		path: (anElement geometry pathOnSpartaCanvas: aCanvas of: anElement);
 		width: aBlBorder width * 2.0;	 "we draw outside, so should multiply width by 2"
 		in: [ :aPainter | aBlBorder style applyOn: aPainter ];
 		draw

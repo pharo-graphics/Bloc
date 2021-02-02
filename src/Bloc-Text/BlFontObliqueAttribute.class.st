@@ -4,19 +4,14 @@ Class {
 	#category : #'Bloc-Text-Text-Attributes'
 }
 
+{ #category : #'text style' }
+BlFontObliqueAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder slantOblique
+]
+
 { #category : #accessing }
 BlFontObliqueAttribute >> emphasisName [
 	<return: #String>
 	
 	^ 'oblique'
-]
-
-{ #category : #comparing }
-BlFontObliqueAttribute >> equals: aTextAttribute [
-	^ true
-]
-
-{ #category : #comparing }
-BlFontObliqueAttribute >> hash [
-	^ self class hash
 ]

@@ -13,13 +13,3 @@ BlTextClassLink class >> class: aClass [
 BlTextClassLink class >> className: aString [
 	^ self new
 ]
-
-{ #category : #comparing }
-BlTextClassLink >> equals: aTextAttribute [
-	^ true
-]
-
-{ #category : #comparing }
-BlTextClassLink >> hash [
-	^ self class hash
-]

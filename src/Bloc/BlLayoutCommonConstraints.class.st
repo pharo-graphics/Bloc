@@ -36,6 +36,7 @@ Class {
 	#superclass : #BlLayoutConstraints,
 	#instVars : [
 		'constraints',
+		'position',
 		'margin',
 		'padding',
 		'minHeight',
@@ -44,9 +45,10 @@ Class {
 		'maxWidth',
 		'ignoredByLayout',
 		'previouslyAccessedConstraints',
-		'previouslyAccessedConstraintsType'
+		'previouslyAccessedConstraintsType',
+		'accountTransformation'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #'api - constraints' }
@@ -54,6 +56,13 @@ BlLayoutCommonConstraints >> accountByLayout [
 	"Makes an element with this constraits be accounted by layout (not ignored)"
 
 	ignoredByLayout := false
+]
+
+{ #category : #'api - constraints' }
+BlLayoutCommonConstraints >> accountTransformation [
+	"Let the layout know that the element's transformation should be taken into account during layout"
+	
+	accountTransformation := true
 ]
 
 { #category : #accessing }
@@ -94,6 +103,13 @@ BlLayoutCommonConstraints >> defaultVertical [
 ]
 
 { #category : #'api - constraints' }
+BlLayoutCommonConstraints >> doNotAccountTransformation [
+	"Let the layout know that the element's transformation should *not* be taken into account during layout"
+	
+	accountTransformation := false
+]
+
+{ #category : #'api - constraints' }
 BlLayoutCommonConstraints >> ignoreByLayout [
 	"Makes an element with this constraits be ignored by layout.
 	An element will still be measured but will not be taken into account
@@ -119,15 +135,18 @@ BlLayoutCommonConstraints >> ignoredByLayout [
 BlLayoutCommonConstraints >> initialize [
 	super initialize.
 	
+	position := 0.0@0.0.
+	
 	margin := BlInsets empty.
 	padding := BlInsets empty.
 
 	maxHeight := Float infinity.
 	maxWidth := Float infinity.
-	minHeight := 0.
-	minWidth := 0.
+	minHeight := 0.0.
+	minWidth := 0.0.
 	
 	ignoredByLayout := false.
+	accountTransformation := false.
 	
 	"Initialzed lazily in at:"
 	constraints := nil
@@ -137,7 +156,7 @@ BlLayoutCommonConstraints >> initialize [
 BlLayoutCommonConstraints >> margin [
 	"Return an immutable margin property,
 	margin can not be nil"
-	<return: #BlInset>
+	<return: #BlInsets>
 	^ margin
 ]
 
@@ -166,16 +185,9 @@ BlLayoutCommonConstraints >> maxHeight: aNumber [
 	"Set maximal height to be aNumber,
 	aNumber must not be nil
 	aNumber must be non-negative"
+	<argument: #aNumber satisfies: #isBlocPositive>
 	
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Maximal height must not be nil' ].
-		
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Maximal height must be non-negative' ].
-	
-	maxHeight := aNumber
+	maxHeight := aNumber asFloat
 ]
 
 { #category : #'api - constraints' }
@@ -192,16 +204,9 @@ BlLayoutCommonConstraints >> maxWidth: aNumber [
 	"Set maximal width to be aNumber,
 	aNumber must not be nil
 	aNumber must be non-negative"
+	<argument: #aNumber satisfies: #isBlocPositive>
 	
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Maximal width must not be nil' ].
-		
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Maximal width must be non-negative' ].
-	
-	maxWidth := aNumber
+	maxWidth := aNumber asFloat
 ]
 
 { #category : #'api - constraints' }
@@ -218,20 +223,9 @@ BlLayoutCommonConstraints >> minHeight: aNumber [
 	aNumber must not be nil
 	aNumber must not be infinite
 	aNumber must be non-negative"
+	<argument: #aNumber satisfies: #isBlocPositive>
 	
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Minimal height must not be nil' ].
-		
-	self
-		assert: [ aNumber < Float infinity ]
-		description: [ 'Minimal height must not be infinite' ].
-	
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Minimal height must be non-negative' ].
-	
-	minHeight := aNumber
+	minHeight := aNumber asFloat
 ]
 
 { #category : #'api - constraints' }
@@ -248,27 +242,21 @@ BlLayoutCommonConstraints >> minWidth: aNumber [
 	aNumber must not be nil
 	aNumber must not be infinite
 	aNumber must be non-negative"
-	
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Minimal width must not be nil' ].
+	<argument: #aNumber satisfies: #isBlocPositive>
 		
-	self
-		assert: [ aNumber < Float infinity ]
-		description: [ 'Minimal width must not be infinite' ].
-	
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Minimal width must be non-negative' ].
-		
-	minWidth := aNumber
+	minWidth := aNumber asFloat
+]
+
+{ #category : #accessing }
+BlLayoutCommonConstraints >> other [
+	^ constraints ifNil: [ ^ Dictionary new ]
 ]
 
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> padding [
 	"Return an immutable padding property,
 	margin can not be nil"
-	<return: #BlInset>
+	<return: #BlInsets>
 
 	^ padding
 ]
@@ -282,4 +270,23 @@ BlLayoutCommonConstraints >> padding: aBlPadding [
 		description: [ 'Padding must not be nil' ].
 	
 	padding := aBlPadding
+]
+
+{ #category : #'api - constraints' }
+BlLayoutCommonConstraints >> position [
+	<return: #Point>
+
+	^ position
+]
+
+{ #category : #'api - constraints' }
+BlLayoutCommonConstraints >> position: aPoint [
+	position := aPoint
+]
+
+{ #category : #testing }
+BlLayoutCommonConstraints >> shouldAccountTransformation [
+	<return: #Boolean>
+
+	^ accountTransformation
 ]

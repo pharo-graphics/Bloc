@@ -20,7 +20,7 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #accessing }

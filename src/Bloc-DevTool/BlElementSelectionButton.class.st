@@ -1,7 +1,10 @@
+"
+I am one button inside of a Halos element. For more information about me, see ${class:BlDevHalosEventListener}$.
+"
 Class {
 	#name : #BlElementSelectionButton,
 	#superclass : #BlElement,
-	#category : 'Bloc-DevTool-Core'
+	#category : #'Bloc-DevTool-Core'
 }
 
 { #category : #'instance creation' }

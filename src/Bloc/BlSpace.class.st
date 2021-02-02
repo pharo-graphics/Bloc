@@ -1,6 +1,13 @@
 "
-I am the logical representation of a window in Bloc regardless the current Host in use.
+I am the logical representation of a window in Bloc regardless of the current Host in use.
+Here are some of the important objects I use and talk to:
+- ${class:BlCursor}$
+- ${class:BlTime}$
+- Various ${class:BlBaseEventProcessor}$ subclasses broker different${class:BlEvent}$types
+- ${class:BlSpaceFrame}$
+!! Gracefully closing the image when a space is closed
 
+A common use case is to quit the application when some particular space is closed. To do this, we provide ${class:BlSpaceShutdownOnCloseListener}$ which can be added to any space as an event handler. It listens for a ${class:BlSpaceClosedEvent}$, which is sent after a space is closed. See the listener class for configuration options.
 "
 Class {
 	#name : #BlSpace,
@@ -8,6 +15,7 @@ Class {
 	#traits : 'TBlEventTarget + TBlSpaceProperties + TBlDebug',
 	#classTraits : 'TBlEventTarget classTrait + TBlSpaceProperties classTrait + TBlDebug classTrait',
 	#instVars : [
+		'id',
 		'host',
 		'hostSpace',
 		'extent',
@@ -15,7 +23,6 @@ Class {
 		'root',
 		'resizable',
 		'borderless',
-		'rootStyler',
 		'dirtyAreas',
 		'eventDispatcher',
 		'eventListener',
@@ -23,7 +30,7 @@ Class {
 		'mouseProcessor',
 		'focusProcessor',
 		'keyboardProcessor',
-		'focusOwner',
+		'focusChain',
 		'dragboard',
 		'nextPulseRequested',
 		'currentCursor',
@@ -31,15 +38,111 @@ Class {
 		'focused',
 		'title',
 		'fullscreen',
+		'fullsize',
 		'layoutError',
 		'tasks',
 		'time',
 		'touchProcessor',
 		'frame',
-		'gestureProcessor'
+		'gestureProcessor',
+		'elementsNeedingPaint',
+		'elementsNeedingLayout',
+		'telemetry',
+		'reference',
+		'elementsNeedingStyle',
+		'elementsNeedingPropertiesComputation',
+		'iconStencil'
+	],
+	#classVars : [
+		'UniqueIdGenerator'
 	],
 	#category : #'Bloc-Space'
 }
+
+{ #category : #'change - style' }
+BlSpace class >> doStyle: anElement [
+	| theInheritedStates childSpecificStatesToInherit |
+			
+	theInheritedStates := BlElementStatesSet new.
+	childSpecificStatesToInherit := theInheritedStates.
+
+	anElement hasParent
+		ifTrue: [
+			theInheritedStates := anElement parent states statesToInherit.
+			theInheritedStates do: [ :eachState | eachState prepareToPropagateFrom: anElement parent ].
+			childSpecificStatesToInherit := theInheritedStates collect: [ :eachState |
+				eachState propagatedStateFrom: anElement parent to: anElement ]. ].
+	
+	self doStyle: anElement withInheritedStates: childSpecificStatesToInherit.
+	
+	theInheritedStates do: [ :eachState | eachState finishedPropagateFrom: anElement ]
+]
+
+{ #category : #'change - style' }
+BlSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
+	| theStatesToInherit allNewStates newInheritedStates |
+
+	anElement states inheritedStates: aCollectionOfStates.
+	allNewStates := anElement states allStates.
+	
+	newInheritedStates := aCollectionOfStates intersection: allNewStates.
+	newInheritedStates do: [ :eachNewInheritedState | eachNewInheritedState optionalOnAddedTo: anElement ].
+	
+	anElement style applyStylesForStates: allNewStates.
+
+	theStatesToInherit := anElement states statesToInherit.
+	theStatesToInherit do: [ :eachState | eachState prepareToPropagateFrom: anElement ].
+
+	anElement children do: [ :eachChild |
+		| childSpecificStatesToInherit |
+
+		childSpecificStatesToInherit := theStatesToInherit collect: [ :eachState |
+			eachState propagatedStateFrom: anElement to: eachChild ].
+
+		self
+			doStyle: eachChild
+			withInheritedStates: childSpecificStatesToInherit ].
+
+	theStatesToInherit do: [ :eachState | eachState finishedPropagateFrom: anElement ]
+]
+
+{ #category : #'private - change' }
+BlSpace class >> extractRoots: aSetOfElements [
+	| theElementsToCheck theElementsToProcess |
+	
+	theElementsToCheck := aSetOfElements as: Stack.
+	theElementsToProcess := Set new.
+	
+	[ theElementsToCheck isEmpty ] whileFalse: [
+		| eachElement |
+		
+		eachElement := theElementsToCheck pop.
+		(theElementsToCheck anySatisfy: [ :eachPotentialParent | eachElement hasParent: eachPotentialParent ])
+			ifFalse: [ theElementsToProcess add: eachElement ] ].
+
+	^ theElementsToProcess
+]
+
+{ #category : #'class initialization' }
+BlSpace class >> initialize [
+	UniqueIdGenerator := BlUniqueIdGenerator new
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> locationInside: anElement [
+	"Return a random space location outside of element bounds"	
+	| theBounds aPosition |
+	
+	anElement topMostParent forceLayout.
+	theBounds := anElement bounds inSpace bounds.
+	aPosition := theBounds atRandom.
+		
+	self
+		assert: [ theBounds containsPoint: aPosition ]
+		description: [ 'Point({1}) must be inside of the bounds({2})' format: { aPosition . theBounds } ].
+		
+	^ aPosition
+]
 
 { #category : #'debug - simulation' }
 BlSpace class >> locationOutside: anElement [
@@ -49,10 +152,10 @@ BlSpace class >> locationOutside: anElement [
 	anElement topMostParent forceLayout.
 	theBounds := anElement bounds inSpace bounds.
 	aPosition := {
-		theBounds topRight - (theBounds width atRandom @ 100 atRandom).
-		theBounds topRight + (100 atRandom @ theBounds height atRandom).
-		theBounds bottomLeft + (theBounds width atRandom @ 100 atRandom).
-		theBounds bottomLeft - (100 atRandom @ theBounds height atRandom).
+		theBounds topRight - (theBounds width asInteger atRandom @ 100 atRandom).
+		theBounds topRight + (100 atRandom @ theBounds height asInteger atRandom).
+		theBounds bottomLeft + (theBounds width asInteger atRandom @ 100 atRandom).
+		theBounds bottomLeft - (100 atRandom @ theBounds height asInteger atRandom).
 	}	atRandom.
 		
 	self
@@ -66,6 +169,7 @@ BlSpace class >> locationOutside: anElement [
 BlSpace class >> simulateClickOn: anElement [
 	"Simulate a click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
+	<return: #Point>
 	| aPosition |
 	
 	"we never know if an element was already layered out"
@@ -77,7 +181,9 @@ BlSpace class >> simulateClickOn: anElement [
 		simulateEvents: {
 			BlMouseDownEvent primary position: aPosition.
 			BlMouseUpEvent primary position: aPosition }
-		on: anElement
+		on: anElement.
+		
+	^ aPosition
 ]
 
 { #category : #'debug - simulation' }
@@ -96,6 +202,26 @@ BlSpace class >> simulateClickOutside: anElement [
 ]
 
 { #category : #'debug - simulation' }
+BlSpace class >> simulateDoubleClickOn: anElement [
+	"Simulate a double click event in the middle of a given element by
+	performing mouse down and mouse up events in a sequence"
+	| aPosition |
+	
+	"we never know if an element was already layered out"
+	anElement topMostParent forceLayout.
+	aPosition := anElement bounds inSpace center.
+	
+	"we simulate a double click with a sequence of low level mouse down/up events"
+	self
+		simulateEvents: {
+			BlMouseDownEvent primary position: aPosition.
+			BlMouseUpEvent primary position: aPosition.
+			BlMouseDownEvent primary position: aPosition.
+			BlMouseUpEvent primary position: aPosition. }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
 BlSpace class >> simulateDragOn: anElement by: aBlVector [
 	"Simulate a click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
@@ -105,7 +231,7 @@ BlSpace class >> simulateDragOn: anElement by: aBlVector [
 	anElement topMostParent forceLayout.
 	aPosition := anElement bounds inSpace center.
 	
-	aDelta := (anElement localBoundsToGlobal: (BlBounds origin: 0@0 extent: aBlVector)) extent.
+	aDelta := (anElement localBoundsToGlobal: (BlBounds origin: 0.0@0.0 extent: aBlVector)) extent.
 	
 	"we simulate a click with a sequence of low level mouse down/up events"
 	self
@@ -122,9 +248,9 @@ BlSpace class >> simulateEvent: anEvent on: anElement [
 	If you would like to simulate a higher level event you could directly fire or dispatch them
 	by asking any element to #fireEvent: or #dispatchEvent:
 	Note: UI mouse events require to set #position: given in space coordinates or in root most parent
-	coordiantes of the provided element.
+	coordinates of the provided element.
 	Note: I create a temporary space if provided element does not have one. if you need to simulate
-	of sequence of dependent events it is better to use #simulateEvents:on: directy"
+	a sequence of dependent events it is better to use #simulateEvents:on: directy"
 
 	self simulateEvents: { anEvent } on: anElement
 ]
@@ -135,16 +261,20 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 	If you would like to simulate a higher level event you could directly fire or dispatch them
 	by asking any element to #fireEvent: or #dispatchEvent:
 	Note: UI mouse events require to set #position: given in space coordinates or in root most parent
-	coordiantes of the provided element"
+	coordinates of the provided element"
 	
 	"we should update timestamps"
 	aCollectionOfEvents do: [ :anEvent | anEvent timestamp: DateAndTime now ].
 	
 	anElement isAttachedToSceneGraph
 		ifTrue: [
-			anElement space pulse.
-			aCollectionOfEvents do: [ :anEvent | anElement space dispatchEvent: anEvent ].
-			anElement space pulse ]
+			| aSpace |
+			"element may be removed from the space."
+			aSpace := anElement space.
+			aSpace pulse.
+			aCollectionOfEvents do: [ :anEvent | aSpace dispatchEvent: anEvent ].
+			aSpace dispatchEvent: BlSpaceEventsProcessedEvent new.
+			aSpace pulse ]
 		ifFalse: [ 
 			| temporarySpace topMostElement |
 			topMostElement := anElement topMostParent.
@@ -153,9 +283,28 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 				temporarySpace root addChild: topMostElement.
 				temporarySpace pulse.
 				aCollectionOfEvents do: [ :anEvent | temporarySpace dispatchEvent: anEvent ].
+				temporarySpace dispatchEvent: BlSpaceEventsProcessedEvent new.
 				temporarySpace pulse
 			] ensure: [ topMostElement removeFromParent ] ]
 	
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateKeyDownOn: anElement key: aBlKeyboardKey [
+	"Simulate a key down event"
+
+	self
+		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateKeyUpOn: anElement key: aBlKeyboardKey [
+	"Simulate a key up event"
+
+	self
+		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		on: anElement
 ]
 
 { #category : #'debug - simulation' }
@@ -173,16 +322,43 @@ BlSpace class >> simulateMouseDownOn: anElement [
 ]
 
 { #category : #'debug - simulation' }
+BlSpace class >> simulateMouseDownOn: anElement at: aPoint [
+	"Simulate a mouse down event at a given location in the space of the element"
+
+	self
+		simulateEvents: { BlMouseDownEvent primary position: aPoint }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
 BlSpace class >> simulateMouseMoveInside: anElement [
 	"Simulate a mouse move event at a random location within element's bounds"
 	| aPosition |
 	
-	"we never know if an element was already layered out"
-	anElement topMostParent forceLayout.
-	aPosition := anElement bounds inSpace bounds atRandom.
+	aPosition := self locationInside: anElement.
 
 	self
 		simulateEvents: { BlMouseMoveEvent primary position: aPosition }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateMouseMoveOn: anElement at: aPoint [
+	"Simulate a mouse move event at a given location in the space of the element"
+	
+	self
+		simulateEvents: { BlMouseMoveEvent primary position: aPoint }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint [
+	"Simulate a mouse move event at a given location in the space of the element"
+	
+	self
+		simulateEvents: { BlMouseMoveEvent primary
+			position: aToPoint;
+			delta: (aToPoint - aFromPoint)  }
 		on: anElement
 ]
 
@@ -212,50 +388,122 @@ BlSpace class >> simulateMouseUpOn: anElement [
 		on: anElement
 ]
 
-{ #category : #'api - adding' }
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateMouseUpOn: anElement at: aPoint [
+	"Simulate a mouse up event at a given location in the space of the element"
+
+	self
+		simulateEvents: { BlMouseUpEvent primary position: aPoint }
+		on: anElement
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateMouseWheelOn: anElement by: aBlVector [
+	"Simulate a mouse wheel event in the middle of a given element"
+	| aPosition aBlocEvent |
+
+	"we never know if an element was already layered out"
+	anElement topMostParent forceLayout.
+	aPosition := anElement bounds inSpace center.
+	
+	"Bloc event"
+	aBlocEvent := BlMouseWheelEvent new
+		isTouch: false;
+		vector: aBlVector asBlocVector;
+		position: aPosition.
+	
+	self
+		simulateEvent: aBlocEvent
+		on: anElement.
+		
+	^ aPosition
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateSecondaryClickOn: anElement [
+	"Simulate a secondary click event in the middle of a given element by
+	performing mouse down and mouse up events in a sequence"
+	<return: #Point>
+	| aPosition |
+	
+	"we never know if an element was already layered out"
+	anElement topMostParent forceLayout.
+	aPosition := anElement bounds inSpace center.
+	
+	"we simulate a secondary click with a sequence of low level mouse down/up events"
+	self
+		simulateEvents: {
+			BlMouseDownEvent secondary position: aPosition.
+			BlMouseUpEvent secondary position: aPosition }
+		on: anElement.
+		
+	^ aPosition
+]
+
+{ #category : #'class initialization' }
+BlSpace class >> spaceWithId: aSpaceId do: aBlock [
+	^ self allSubInstances
+		detect: [ :eachSpace | eachSpace id = aSpaceId ]
+		ifFound: aBlock
+		ifNone: [ nil ]
+]
+
+{ #category : #'api - adding children' }
 BlSpace >> addChild: anElement [
 	"Add a given element as a direct child to the space root"
 	
 	self root addChild: anElement
 ]
 
-{ #category : #'change reporting' }
+{ #category : #accessing }
+BlSpace >> asReference [
+	<return: #BlSpaceReference>
+
+	^ reference ifNil: [ reference := BlAttachedCachedSpaceReference forSpace: self ]
+]
+
+{ #category : #'change - rendering' }
 BlSpace >> beDirtyArea [
-	self makeDirty: (BlBounds origin: 0 @ 0 extent: self extent)
+	self
+		invalidRect: (BlBounds origin: 0.0 @ 0.0 extent: self root extent)
+		from: self root
 ]
 
 { #category : #'window - properties' }
 BlSpace >> borderless [
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace borderless ]
-		ifNil: [ borderless ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace borderless ]
+		ifAbsent: [ borderless ]
 ]
 
 { #category : #'window - properties' }
 BlSpace >> borderless: aBoolean [
 	borderless := aBoolean.
-	 self hostSpace ifNotNil: [ :hw | hw borderless: aBoolean ].
+	 self hostSpaceDo: [ :aHostSpace | aHostSpace borderless: aBoolean ].
 ]
 
-{ #category : #'event management' }
-BlSpace >> buildEventDispatchChain: aBlEventDispatcherChain [
-	<return: #BlEventDispatcherChain>
+{ #category : #'change - properties' }
+BlSpace >> canComputeProperties: anElement [
+	"Return true if properties of the given element can be computed"
+	<return: #Boolean>
 
-	^ aBlEventDispatcherChain
+	^ anElement hasParent and: [ anElement parent needsPropertiesComputation not ]
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> clearDirtyAreas [
 	"Clear all dirty areas.
 	Default implementation simply removes all areas from the collection"
 
-	self dirtyAreas removeAll
+	self dirtyAreas removeAll.
+	self elementsNeedingPaint removeAll
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> close [
 	"Delegate closing work to the Universe"
-	BlUniverse default closeSpaceWindow: self
+	
+	(BlParallelUniverse forHost: self host class) closeSpace: self
 ]
 
 { #category : #'cursor managing' }
@@ -268,7 +516,7 @@ BlSpace >> currentCursor: aCursor [
 
 	currentCursor ifNotNil: [ :cc | cc deactivateOn: self ].
 	currentCursor := aCursor.
-	currentCursor ifNil: [ ^ self updateCursorImage: Cursor normal ].
+	currentCursor ifNil: [ ^ self updateCursor: BlCursor default ].
 	currentCursor activateOn: self
 ]
 
@@ -287,7 +535,7 @@ BlSpace >> defaultEventRecorder [
 	^ BlEmptyEventRecorder new
 ]
 
-{ #category : #'change reporting' }
+{ #category : #initialization }
 BlSpace >> defaultExtent [
 	^ 800@600
 ]
@@ -311,49 +559,32 @@ BlSpace >> defaultRootLabel [
 ]
 
 { #category : #initialization }
-BlSpace >> defaultRootStyler [
-	^ self class environment
-		at: #BrRootStyler
-		ifPresent: [ :aStylerClass | aStylerClass on: self root ]
-		ifAbsent: [ BlNullStyler new ]
-]
-
-{ #category : #initialization }
 BlSpace >> defaultTitle [
 	^ ''
 ]
 
-{ #category : #'dragboard managing' }
-BlSpace >> deleteDragboard [
-	| d |
-	d := self dragboard.
-	self dragboard clear.
-	self dragboard: nil.
-	^ d
-]
-
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
 
-	self hostSpace
-		ifNotNil: [ :hw | ^ hw densityDpi ].
-
-	"Without actual window we can only guess"
-	^ 96.0
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace densityDpi ]
+		"Without an actual window we can only guess"
+		ifAbsent: [ 96.0 ]
 ]
 
 { #category : #'api - tasks' }
 BlSpace >> dequeueTask: aBlTask [
-	self taskQueue dequeue: aBlTask
+	self taskQueue dequeue: aBlTask.
+	self requestNextPulse
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> detachHostSpace [
 	"Detach my current host space if I have one"
 
-	self hostSpaceProperty value: nil
+	hostSpace := nil
 ]
 
 { #category : #accessing }
@@ -376,7 +607,115 @@ BlSpace >> dispatchTimeEvent: aSpaceStepEventClass during: aBlock [
 				yourself)
 ]
 
-{ #category : #pulse }
+{ #category : #'change - properties' }
+BlSpace >> doComputeProperties [
+	| theElementToProcess |
+	
+	"if everything is clean, do nothing"
+	(self needsPropertiesComputation)
+		ifFalse: [ ^ self ].
+
+	"only care about element that are attached to this space"
+	theElementToProcess := self extractAttachedElements: self elementsNeedingPropertiesComputation.
+
+	"first we should make sure that all parents have resolved properties"
+	theElementToProcess := self extractUnresolvedToComputeProperties: theElementToProcess.
+
+	"then we should eliminate child elements if their parent is already on the list"
+	theElementToProcess := self extractRoots: theElementToProcess.
+	
+	self elementsNeedingPropertiesComputation removeAll.
+	
+	((theElementToProcess includes: self root) or: [ self root needsPropertiesComputation ])
+		ifTrue: [ self doComputePropertiesFromRoot: self root ]
+		ifFalse: [ self doComputePropertiesOf: theElementToProcess ]
+]
+
+{ #category : #'change - properties' }
+BlSpace >> doComputeProperties: anElement withGlobalProperties: aGlobalResolvedProperties [
+	self
+		assert: [ anElement hasParent ]
+		description: [ 'Can not compute properties of an element without parent' ].
+
+	self
+		assert: [ anElement parent needsPropertiesComputation not ]
+		description: [ 'Parent properties must be computed' ].
+
+	self
+		doComputeProperties: anElement
+		withParentProperties: anElement parent properties maybeResolvedProperties propertiesToPropagateToChildren
+		withGlobalProperties: aGlobalResolvedProperties
+]
+
+{ #category : #'change - properties' }
+BlSpace >> doComputeProperties: anElement withParentProperties: aParentResolvedProperties withGlobalProperties: aGlobalResolvedProperties [
+	| theResolvedProperties thePropagatableProperties |
+
+	self
+		assert: [ aParentResolvedProperties isKindOf: BlElementPropagatableProperties ]
+		description: [ 'Parent properties must be propagatable' ].
+		
+	self
+		assert: [ aGlobalResolvedProperties isKindOf: BlElementPropagatableProperties ]
+		description: [ 'Global properties must be propagatable' ].
+
+	theResolvedProperties := anElement properties
+		resolveWithParentProperties: aParentResolvedProperties
+		orGlobal: aGlobalResolvedProperties.
+
+	thePropagatableProperties := theResolvedProperties propertiesToPropagateToChildren.
+
+	anElement childrenDo: [ :eachChild |
+		self
+			doComputeProperties: eachChild
+			withParentProperties: thePropagatableProperties 
+			withGlobalProperties: aGlobalResolvedProperties ].
+
+	"we need to merge properties starting from global"
+	((aGlobalResolvedProperties
+		mergedWithProperties: aParentResolvedProperties)
+			mergedWithProperties: theResolvedProperties)
+				applyOnElement: anElement.
+
+	anElement properties flushPropertiesToRemove
+]
+
+{ #category : #'change - properties' }
+BlSpace >> doComputePropertiesFromRoot: aRootElement [
+	| theGlobalResolvedProperties |
+
+	aRootElement properties
+		resolveWithParentProperties: BlElementResolvedProperties new
+		orGlobal: BlElementResolvedProperties new.
+	
+	theGlobalResolvedProperties := aRootElement properties maybeResolvedProperties propertiesToPropagateToChildren.
+	
+	self
+		doComputeProperties: aRootElement
+		withParentProperties: theGlobalResolvedProperties
+		withGlobalProperties: theGlobalResolvedProperties
+]
+
+{ #category : #'change - properties' }
+BlSpace >> doComputePropertiesOf: aCollectionOfElements [
+	| theGlobalResolvedProperties |
+
+	self
+		assert: [ (aCollectionOfElements includes: self root) not ]
+		description: [ 'Must not include root' ].
+
+	theGlobalResolvedProperties := self root properties maybeResolvedProperties propertiesToPropagateToChildren.
+	aCollectionOfElements do: [ :eachElement |
+		"it is possible that properties manipulate the graphical scene,
+		therefore we have to check it here again"
+		eachElement hasParent
+			ifTrue: [
+				self
+					doComputeProperties: eachElement
+					withGlobalProperties: theGlobalResolvedProperties ] ]
+]
+
+{ #category : #'change - layout' }
 BlSpace >> doLayout [
 	| layoutCounter maxLayoutCount |
 
@@ -388,52 +727,131 @@ BlSpace >> doLayout [
 		layoutCounter := 0.
 		maxLayoutCount := 100.
 
-		[ self hasLayoutError not and: [ self root isLayoutRequested and: [ layoutCounter < maxLayoutCount ] ] ]
+		[ self hasLayoutError not and: [ self isLayoutRequested and: [ layoutCounter < maxLayoutCount ] ] ]
 			whileTrue: [
 				self doUpdateLayout.
 				layoutCounter := layoutCounter + 1.
 				layoutCounter = 50
-					ifTrue: [ 'Warning: Layout was performed 50 times per frame!' logCr ] ].
+					ifTrue: [ 'Warning: Layout was performed 50 times per frame!' traceCr ] ].
 
 		self root dispatchLayoutDone
 
 	"I prevent infinite spawn of debuggers"
 	] on: Error do: [ :anError |
 		layoutError := anError.
-		[ layoutError debug ] ensure: [ layoutError := nil ] ]
+		[ layoutError debug ] ensure: [ layoutError := nil ] ].
 ]
 
-{ #category : #pulse }
+{ #category : #'change - style' }
+BlSpace >> doStyle [
+	| theElementsToStyle |
+	
+	self needsStyleComputation
+		ifFalse: [ ^ self ].
+	
+	"only care about element that are attached to this space"
+	theElementsToStyle := self extractAttachedElements: self elementsNeedingStyle.
+
+	"first we should make sure that all parents are styled"
+	theElementsToStyle := self extractUnstyled: theElementsToStyle.
+
+	"then we should eliminate child elements if their parent is already on the list"
+	theElementsToStyle := self extractRoots: theElementsToStyle.
+	
+	self elementsNeedingStyle removeAll.
+	
+	theElementsToStyle do: [ :eachElement | self doStyle: eachElement ]
+]
+
+{ #category : #'change - style' }
+BlSpace >> doStyle: anElement [
+	self class doStyle: anElement
+]
+
+{ #category : #'focus managing' }
 BlSpace >> doUpdateFocus [
+	(self focusOwner notNil and: [ self focusOwner isAttachedToSceneGraph not ])
+		ifTrue: [
+			focusChain
+				deepestAttachedElementDo: [ :aNewFocusOwner |
+					aNewFocusOwner requestFocusDueTo: BlFocusDueToRemovedFromSpaceReason uniqueInstance ]
+				ifAbsent: [ self focusProcessor focusOwner: nil ] ].
+
 	self focusOwner
 		ifNil: [ self initializeFocus ]
 ]
 
-{ #category : #pulse }
+{ #category : #'change - layout' }
 BlSpace >> doUpdateLayout [
-	"Start layouting process"
+	| elementsToLayout aBlElementBoundsUpdater |
+	
+	self elementsNeedingLayout copy do: [ :eachElement |
+		eachElement privatePreviousMeasurementSpec
+			ifNil: [
+				self elementsNeedingLayout remove: eachElement.
+				eachElement requestLayout ] ].
+	
+	elementsToLayout := self elementsNeedingLayout reject: [ :eachElement |
+		| shouldIgnore |
+		
+		shouldIgnore := false.
+		
+		self elementsNeedingLayout do: [ :eachPotentialParent |
+			(eachElement hasParent: eachPotentialParent)
+				ifTrue: [
+					eachElement
+						allParentsTo: eachPotentialParent
+						do: [ :eachParent | eachParent privateRequestingLayout: true ].
+					shouldIgnore := true ] ].
+		
+		shouldIgnore ].
+	
+	"we should clear the elements needing layout before we compute layout to support multiple layout passes"
+	self elementsNeedingLayout removeAll.
+	
+	elementsToLayout := elementsToLayout
+		collect: [ :eachElement | eachElement -> eachElement compositionDepth ] as: Array.
+	elementsToLayout := (elementsToLayout sort: [ :a :b | a value > b value ]) collect: [ :each | each key ].
 
-	self doUpdateLayout: self root
+	aBlElementBoundsUpdater := BlElementBoundsUpdater new.
+
+	elementsToLayout do: [ :eachElement |
+		self doUpdateLayoutBoundary: eachElement context: aBlElementBoundsUpdater ].
+	
+	self root isLayoutRequested
+		ifTrue: [ self doUpdateLayout: self root context: aBlElementBoundsUpdater ].
+		
+	aBlElementBoundsUpdater commitChanges
 ]
 
-{ #category : #pulse }
-BlSpace >> doUpdateLayout: anElement [
+{ #category : #'change - layout' }
+BlSpace >> doUpdateLayout: anElement context: aBlElementBoundsUpdater [
 	"Perform layout of a given element (e.g. root or glass)"
 
 	"first we measure.."
 	anElement measure: (BlExtentMeasurementSpec new
 		widthSpec: (anElement layout
 			measurementSpecFor: (BlMeasurementSpec new beExact: self width)
-			usedSize:  0
+			usedSize:  0.0
 			resizer: BlLayoutResizer matchParent);
 		heightSpec: (anElement layout
 			measurementSpecFor: (BlMeasurementSpec new beExact: self height)
-			usedSize:  0
+			usedSize:  0.0
 			resizer: BlLayoutResizer matchParent)).
 
 	"...then we layout in measured during previous step bounds"
-	anElement applyLayoutIn: anElement measuredBounds asRectangle.
-	anElement commitChanges
+	anElement applyLayoutIn: anElement measuredBounds asRectangle context: aBlElementBoundsUpdater
+]
+
+{ #category : #'change - layout' }
+BlSpace >> doUpdateLayoutBoundary: anElement context: aBlElementBoundsUpdater [
+	"Perform layout of a given element (e.g. root or glass)"
+
+	"first we measure.."
+	anElement measure: anElement privatePreviousMeasurementSpec.
+
+	"...then we layout in measured during previous step bounds"
+	anElement applyLayoutIn: (anElement position extent: anElement measuredBounds extent) context: aBlElementBoundsUpdater
 ]
 
 { #category : #accessing }
@@ -446,16 +864,39 @@ BlSpace >> dragboard: anObject [
 	dragboard := anObject
 ]
 
+{ #category : #'change - layout' }
+BlSpace >> elementsNeedingLayout [
+	^ elementsNeedingLayout
+]
+
+{ #category : #'change - rendering' }
+BlSpace >> elementsNeedingPaint [
+	^ elementsNeedingPaint
+]
+
+{ #category : #'change - layout' }
+BlSpace >> elementsNeedingPropertiesComputation [
+	^ elementsNeedingPropertiesComputation ifNil: [ elementsNeedingPropertiesComputation := Set new ]
+]
+
+{ #category : #'change - layout' }
+BlSpace >> elementsNeedingStyle [
+	^ elementsNeedingStyle
+		ifNil: [ elementsNeedingStyle := Set new ]
+]
+
 { #category : #'api - tasks' }
 BlSpace >> enqueueTask: aBlTask [
 	aBlTask onEnqueued: self.
 	self taskQueue enqueue: aBlTask.
+	self requestNextPulse
 ]
 
 { #category : #'api - tasks' }
 BlSpace >> enqueueTasksFrom: aTaskQueue [
 	aTaskQueue tasks do: [ :eachTask | eachTask onEnqueued: self ].	
-	self taskQueue enqueueFrom: aTaskQueue
+	self taskQueue enqueueFrom: aTaskQueue.
+	self requestNextPulse
 ]
 
 { #category : #pulse }
@@ -465,9 +906,7 @@ BlSpace >> ensureSession [
 	session == Smalltalk session
 		ifTrue: [ ^ self ].
 
-	session := Smalltalk session.
-	self beDirtyArea.
-	self requestNextPulse
+	self onSessionChanged: Smalltalk session
 ]
 
 { #category : #'event management accessing' }
@@ -487,6 +926,8 @@ BlSpace >> eventListener: anObject [
 
 { #category : #accessing }
 BlSpace >> eventRecorder [
+	<return: #BlSpaceEventRecorder>
+
 	^ eventRecorder
 ]
 
@@ -495,55 +936,93 @@ BlSpace >> eventRecorder: anEventRecorder [
 	eventRecorder := anEventRecorder
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> extent [
 	<return: #Point>
 
 	^ self windowExtent
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> extent: aNewExtent [
 	self windowExtent: aNewExtent
 ]
 
+{ #category : #'private - change' }
+BlSpace >> extractAttachedElements: aSetOfElements [
+	^ aSetOfElements select: [ :eachElement |
+		eachElement isAttachedToSceneGraph
+			and: [ eachElement space == self ] ]
+]
+
+{ #category : #'private - change' }
+BlSpace >> extractParents: aSetOfElements suchThat: aConditionBlock [
+	| theElementToProcess |
+
+	theElementToProcess := Set new.
+
+	aSetOfElements do: [ :eachElement |
+		eachElement
+			topMostParentSuchThat: aConditionBlock
+			ifFound: [ :aNotYetResolvedParent | theElementToProcess add: aNotYetResolvedParent ]
+			ifNone: [ theElementToProcess add: eachElement ] ].
+
+	^ theElementToProcess
+]
+
+{ #category : #'private - change' }
+BlSpace >> extractRoots: aSetOfElements [
+	^ self class extractRoots: aSetOfElements
+]
+
+{ #category : #'change - properties' }
+BlSpace >> extractUnresolvedToComputeProperties: aSetOfElements [
+	^ self
+		extractParents: aSetOfElements
+		suchThat: [ :eachParent | eachParent needsPropertiesComputation ]
+]
+
+{ #category : #'change - style' }
+BlSpace >> extractUnstyled: aSetOfElements [
+	^ self
+		extractParents: aSetOfElements
+		suchThat: [ :eachParent | eachParent needsStyle ]
+]
+
 { #category : #'focus managing' }
 BlSpace >> focusOwner [
-	^ focusOwner
+	<return: #BlElement>
+
+	^ focusChain ifNotNil: [ :aFocusChain | aFocusChain last ]
 ]
 
 { #category : #'focus managing' }
 BlSpace >> focusOwner: anElement [
-	focusOwner := anElement
+	focusChain := anElement ifNotNil: [ BlFocusChain of: anElement ]
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> focusProcessor [
 	<return: #BlFocusProcessor>
 
 	^ focusProcessor
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> focusProcessor: aFocusProcessor [
 	focusProcessor := aFocusProcessor
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> focused [
 	<return: #Boolean>
 
-	^ self focusedProperty value
+	^ focused
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> focused: aBoolean [
-	self focusedProperty value: aBoolean
-]
-
-{ #category : #'accessing properties' }
-BlSpace >> focusedProperty [
-	^ focused ifNil: [ focused := BlObjectProperty on: self named: #focused default: false ]
+	focused := aBoolean
 ]
 
 { #category : #accessing }
@@ -564,9 +1043,9 @@ BlSpace >> fullscreen [
 	false otherwise"
 	<return: #Boolean>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace fullscreen ]
-		ifNil: [ fullscreen ]
+	^ self 
+		hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen ]
+		ifAbsent: [ fullscreen ]
 ]
 
 { #category : #'window - properties' }
@@ -575,10 +1054,33 @@ BlSpace >> fullscreen: aBoolean [
 	and exit fullscreen mode if false is given"
 
 	fullscreen := aBoolean.
-	 self hostSpace ifNotNil: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
+	 self hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
+BlSpace >> fullsize [
+	"Return true if an underlying window is in fullsize mode,
+	false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
+	and has no window title"
+	<return: #Boolean>
+
+	^ self 
+		hostSpaceDo: [ :aHostSpace | aHostSpace fullsize ]
+		ifAbsent: [ fullsize ]
+]
+
+{ #category : #'window - properties' }
+BlSpace >> fullsize: aBoolean [
+	"Switch underlying window to fullsize if true is given
+	and exit fullsize mode if false is given.
+	See ${method:TBlSpaceProperties>>#fullsize}"
+
+	fullsize := aBoolean.
+	 self hostSpaceDo: [ :aHostSpace | aHostSpace fullsize: aBoolean ]
+]
+
+{ #category : #'accessing - processors' }
 BlSpace >> gestureProcessor [
 	<return: #BlGestureProcessor>
 
@@ -590,6 +1092,16 @@ BlSpace >> grabFocus [
 	self focused: true
 ]
 
+{ #category : #accessing }
+BlSpace >> gtSpaceTasksFor: aView [
+	<gtView>
+	self taskQueue ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Tasks';
+		object: [ self taskQueue ];
+		view: #gtTasksFor:
+]
+
 { #category : #testing }
 BlSpace >> hasDirtyAreas [
 	"Return true if space has dirty areas and therefore needs to be rendered,
@@ -599,7 +1111,20 @@ BlSpace >> hasDirtyAreas [
 	^ self dirtyAreas isNotEmpty
 ]
 
-{ #category : #testing }
+{ #category : #'focus managing' }
+BlSpace >> hasFocus: anElement [
+	"Return true if a given element is within the focus chain"
+	
+	self focusOwner
+		ifNil: [ ^ false ].
+		
+	self focusOwner == anElement
+		ifTrue: [ ^ true ].
+		
+	^ self focusOwner hasParent: anElement
+]
+
+{ #category : #'host space - accessing' }
 BlSpace >> hasHostSpace [
 	"Return true if I have a host space, false otherwise"
 	<return: #Boolean>
@@ -617,41 +1142,41 @@ BlSpace >> hasLayoutError [
 
 { #category : #testing }
 BlSpace >> hasOwner [
-	"To be polymorhic with BlElement's traversal API.
+	"To be polymorphic with BlElement's traversal API.
 	Space does not have an owner"
 	<return: #Boolean>
 	
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> height [
 	<return: #Number>
 
 	^ self extent y
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> hide [
 	self hostSpace ifNotNil: [ :hw | hw hide ]
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> host [
 	^ host
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> host: aHost [
 	host := aHost
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> hostSpace [
-	^ self hostSpaceProperty value
+	^ hostSpace
 ]
 
-{ #category : #'host - accessing' }
+{ #category : #'host space - accessing' }
 BlSpace >> hostSpace: aHostSpace [
 	"Assign a host space window that will be a source of UI events
 	and will provide a rendering surface on which I will be rendered.
@@ -661,11 +1186,11 @@ BlSpace >> hostSpace: aHostSpace [
 		assert: [ aHostSpace isNotNil ]
 		description: [ 'Host space must not be nil!' ].
 
-	self hostSpaceProperty value: aHostSpace.
+	hostSpace := aHostSpace.
 	self hostSpaceChanged.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'host space - accessing' }
 BlSpace >> hostSpaceChanged [
 	"When host space changed we might want to adapt sizes"
 	self windowExtent: self windowExtent.
@@ -673,9 +1198,44 @@ BlSpace >> hostSpaceChanged [
 	self beDirtyArea
 ]
 
-{ #category : #'accessing properties' }
-BlSpace >> hostSpaceProperty [
-	^ hostSpace ifNil: [ hostSpace := BlObjectProperty on: self named: #hostSpace ]
+{ #category : #'host space - accessing' }
+BlSpace >> hostSpaceDo: aBlock [
+	^ self hostSpaceDo: aBlock ifAbsent: [ self ]
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
+	self hasHostSpace
+		ifFalse: [ ^ anAbsentBlock value ].
+
+	self hostSpace needsRebuild
+		ifTrue: [ ^ anAbsentBlock value ].
+		
+	^ aBlock cull: self hostSpace
+]
+
+{ #category : #'window - properties' }
+BlSpace >> icon [
+	"Return an object that understands #asElement, or nil"
+	^ iconStencil
+]
+
+{ #category : #'window - properties' }
+BlSpace >> icon: aStencil [
+	"aStencil is an object that undestands #asElement and returns ${class:BlElement}$"
+	
+	iconStencil = aStencil ifTrue: [ ^ self ].
+	
+	iconStencil := aStencil.
+	
+	self fireEvent: (BlSpaceIconChangedEvent new iconStencil: aStencil)
+]
+
+{ #category : #accessing }
+BlSpace >> id [
+	<return: #Number>
+	
+	^ id
 ]
 
 { #category : #initialization }
@@ -687,9 +1247,16 @@ BlSpace >> initDispatcher [
 BlSpace >> initialize [
 	super initialize.
 	
+	id := UniqueIdGenerator generateUniqueId.
+	
+	host := BlHost pickHost.
 	nextPulseRequested := true.
 	session := Smalltalk session.
 	dirtyAreas := OrderedCollection new.
+	elementsNeedingPaint := Set new.
+	elementsNeedingLayout := Set new.
+	elementsNeedingStyle := Set new.
+	elementsNeedingPropertiesComputation := Set new.
 	
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
@@ -702,23 +1269,23 @@ BlSpace >> initialize [
 	touchProcessor := BlTouchProcessor space: self.
 	gestureProcessor := BlGestureProcessor space: self.
 
-	tasks := BlTaskQueue new.
+	tasks := BlSpaceTaskQueue space: self.
 	time := BlTime real.
 	frame := BlSpaceFrame new.
+	telemetry := BlNullTelemetry uniqueInstance.
 
 	root := self defaultRoot.
 
-	rootStyler := self defaultRootStyler.
-
 	self extent: self defaultExtent.
-	self position: 0@0.
 
 	self resizable: true.
 	self borderless: false.
 	self fullscreen: false.
+	self fullsize: false.
 	self title: self defaultTitle.
+	self focused: false.
 
-	self updateCursorImage: Cursor normal.
+	self updateCursor: BlCursor default.
 
 	self root space: self
 ]
@@ -729,11 +1296,12 @@ BlSpace >> initializeFocus [
 		ifTrue: [ self root requestFocus ]
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> invalidRect: aBlBounds from: anElement [
-
 	self makeDirty: aBlBounds.
-	self requestNextPulse
+	self requestNextPulse.
+	
+	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ]
 ]
 
 { #category : #testing }
@@ -741,12 +1309,22 @@ BlSpace >> isFocused [
 	^ self focused
 ]
 
-{ #category : #testing }
+{ #category : #'change - layout' }
 BlSpace >> isLayoutRequested [
 	"Indicates whether or not root element's layout needs to be updated next frame"
 	<return: #Boolean>
 	
-	^ self root isLayoutRequested
+	^ self root isLayoutRequested or: [ self elementsNeedingLayout isNotEmpty ]
+]
+
+{ #category : #testing }
+BlSpace >> isOpened [
+	"Return true if the space was shown (by sending #show message), false otherwise.
+	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
+	<return: #Boolean>
+
+	^ (BlParallelUniverse existsForHost: self host class)
+		and: [ (BlParallelUniverse forHost: self host class) hasSpace: self ]
 ]
 
 { #category : #testing }
@@ -756,25 +1334,46 @@ BlSpace >> isVisible [
 		ifFalse: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> keyboardProcessor [
 	<return: #BlKeyboardProcessor>
 
 	^ keyboardProcessor
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> keyboardProcessor: aKeyboardProcessor [
 	keyboardProcessor := aKeyboardProcessor
+]
+
+{ #category : #'window - properties' }
+BlSpace >> knowsPosition [
+	"Return true if this space knows its position.
+	By default, spaces don't know their position and allow the window manager to choose one.
+	Setting an explicit position during space creation will result in a window created at a specified position"
+	<return: #Boolean>
+
+	^ position notNil
 ]
 
 { #category : #'focus managing' }
 BlSpace >> looseFocusFor: anElement [
 			
-	self focusProcessor looseFor: anElement
+	self
+		deprecated: 'Please use loseFocusFor: instead.'
+		transformWith:
+			'`@receiver looseFocusFor: `@statements1'
+				-> '`@receiver loseFocusFor: `@statements1'.
+				
+	self loseFocusFor: anElement
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'focus managing' }
+BlSpace >> loseFocusFor: anElement [
+	self focusProcessor loseFor: anElement
+]
+
+{ #category : #'change - rendering' }
 BlSpace >> makeDirty: aBlBounds [
 
 	self
@@ -787,44 +1386,106 @@ BlSpace >> makeDirty: aBlBounds [
 		ifNotEmpty: [ :aCollection | aCollection first merge: aBlBounds ].
 ]
 
-{ #category : #displaying }
+{ #category : #'change - rendering' }
+BlSpace >> markNeedsCompositionPaint: anElement from: aSourceElement [
+	self beDirtyArea.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ].
+	self requestNextPulse
+]
+
+{ #category : #'change - rendering' }
+BlSpace >> markNeedsPaint: anElement from: aSourceElement [
+	self beDirtyArea.
+	self elementsNeedingPaint add: anElement.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ].
+	self requestNextPulse
+]
+
+{ #category : #'api - displaying' }
 BlSpace >> maximize [
 	self hostSpace ifNotNil: [ :hw | hw maximize ]
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> maximized [
 	self hostSpace ifNotNil: [ :hw | ^ hw maximized ].
 	^ false
 ]
 
-{ #category : #displaying }
+{ #category : #pulse }
+BlSpace >> measureTextParagraph: aBlTextParagraph ifNotAvailable: aBlock [
+	self
+		hostSpaceDo: [ :aHostSpace | aHostSpace measureTextParagraph: aBlTextParagraph ]
+		ifAbsent: aBlock
+]
+
+{ #category : #'api - displaying' }
 BlSpace >> minimize [
 	self hostSpace ifNotNil: [ :hw | hw minimize ]
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> minimized [
 	self hostSpace ifNotNil: [ :hw | ^ hw minimized ].
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> mouseProcessor [
 	<return: #BlMouseProcessor>
 
 	^ mouseProcessor
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> mouseProcessor: aMouseProcessor [
 	mouseProcessor := aMouseProcessor
 ]
 
-{ #category : #'dragboard managing' }
-BlSpace >> newDragboard [
-	self dragboard: (BlDragboard space: self).
-	^ self dragboard
+{ #category : #'change - properties' }
+BlSpace >> needsPropertiesComputation [
+	<return: #Boolean>
+	
+	^ self elementsNeedingPropertiesComputation isNotEmpty
+		or: [ self root needsPropertiesComputation ]
+]
+
+{ #category : #'change - properties' }
+BlSpace >> needsPropertiesComputation: anElement [
+	"Return true if a given element or any of its children wants properties computation"
+	<return: #Boolean>
+
+	^ self elementsNeedingPropertiesComputation
+		anySatisfy: [ :eachElement | 
+			(eachElement = anElement
+				or: [ eachElement hasParent: anElement ])
+					and: [ anElement hasParent
+						and: [ anElement parent needsPropertiesComputation not ] ] ]
+]
+
+{ #category : #'change - style' }
+BlSpace >> needsStyleComputation [
+	<return: #Boolean>
+	
+	^ self elementsNeedingStyle isNotEmpty
+]
+
+{ #category : #'change - style' }
+BlSpace >> needsStyleComputation: anElement [
+	"Return true if a given element or any of its children wants style computation"
+	<return: #Boolean>
+	
+	^ self elementsNeedingStyle
+		anySatisfy: [ :eachElement | eachElement = anElement or: [ eachElement hasParent: anElement ] ]
+]
+
+{ #category : #pulse }
+BlSpace >> onSessionChanged: aNewSession [
+	session := aNewSession.
+	self beDirtyArea.
+	self requestNextPulse.
+	
+	self root onSessionChanged: aNewSession
 ]
 
 { #category : #'window - properties' }
@@ -832,43 +1493,44 @@ BlSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
 	
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace position ]
-		ifNil: [ position ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace position ]
+		ifAbsent: [ position ifNil: [ 0@0 ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> position: aPoint [
-	"Request to change window's position to a given point in screen corrdinates"
+	"Request to change window's position to a given point in screen coordinates"
 
-	self hasHostSpace
-		ifTrue: [ self hostSpace position: aPoint ]
-		ifFalse: [ self setPosition: aPoint ]
+	self setPosition: aPoint.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace position: aPoint ]
 ]
 
-{ #category : #pulse }
-BlSpace >> processEvents [
-	"Process events enqueued by host space and dispatch them to the scene graph"
+{ #category : #printing }
+BlSpace >> printOn: aStream [
 
-	self
-		assert: [ self hasHostSpace ]
-		description: [ 'Events can only be processed if I have a host space' ].
-
-	self eventRecorder onPulse.
-	self hostSpace fetchedEventsDo: [ :anEvent |
-		self eventRecorder record: anEvent.
-		self eventDispatcher dispatchEvent: anEvent ].
-
-	self mouseProcessor generateEvents
+	super printOn: aStream.
+	aStream
+		<< '(';
+		print: title;
+		<< ')'
 ]
 
 { #category : #pulse }
 BlSpace >> processPulse [
 	self ensureSession.
+	
+	self pulseRequested
+		ifFalse: [ ^ self ].
+	
+	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
+	nextPulseRequested := false.
 
-	self frame runOn: self.
-
-	nextPulseRequested := false
+	self telemetry
+		reset;
+		timeSync: 'Frame'
+			during: [ self frame runOn: self ];
+		emit.
 ]
 
 { #category : #pulse }
@@ -876,7 +1538,7 @@ BlSpace >> pulse [
 	self processPulse
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - rendering' }
 BlSpace >> pulseRequested [
 	"Return true if space pulse was requested, false otherwise"
 	<return: #Boolean>
@@ -884,35 +1546,54 @@ BlSpace >> pulseRequested [
 	^ nextPulseRequested
 ]
 
+{ #category : #'api - adding children' }
+BlSpace >> removeChild: anElement [
+	"Remove a given element from the space root"
+	
+	self root removeChild: anElement
+]
+
 { #category : #pulse }
 BlSpace >> render [
 	"Render this space in my host window if it is assigned, otherwise do nothing"
 
 	self
-		assert: [ self hasDirtyAreas ]
-		description: [ 'I must have dirty areas in order to be rendered' ].
-
-	self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace render: self ]
+		hostSpaceDo: [ :aHostSpace | aHostSpace render: self ]
+		"if there is no host we should clear dirty areas, otherwise
+		it may lead to memory leaks"
+		ifAbsent: [ self clearDirtyAreas ]
 ]
 
 { #category : #'focus managing' }
-BlSpace >> requestFocusFor: anElement [
+BlSpace >> requestFocusFor: anElement dueTo: aFocusReason [
 	self
 		assert: [ anElement space = self ]
 		description: [ 'anElement must be attached to the scenegraph owned by this space' ].
 		
-	self focusProcessor requestFor: anElement
+	self focusProcessor requestFor: anElement dueTo: aFocusReason
 ]
 
-{ #category : #'change reporting' }
+{ #category : #'change - layout' }
+BlSpace >> requestLayout: anElement [
+	elementsNeedingLayout add: anElement.
+	self requestNextPulse
+]
+
+{ #category : #'change - rendering' }
 BlSpace >> requestNextPulse [
-	nextPulseRequested := true.
-	
-	"By the contract next pulse can be only requested if universe is running.
-	It is done to not create pulse loop when it is actually not needed (for example during testing)"
-	BlUniverse default isRunning
-		ifTrue: [ BlUniverse default requestNextPulse ]
+	nextPulseRequested := true
+]
+
+{ #category : #'change - properties' }
+BlSpace >> requestPropertiesComputation: anElement [
+	self elementsNeedingPropertiesComputation add: anElement.
+	self requestNextPulse
+]
+
+{ #category : #'change - style' }
+BlSpace >> requestStyle: anElement [		
+	self elementsNeedingStyle add: anElement.
+	self requestNextPulse
 ]
 
 { #category : #'window - properties' }
@@ -920,9 +1601,9 @@ BlSpace >> resizable [
 	"Return true if underlying window is resizable, false otherwise"
 	<return: #Boolean>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace resizable ]
-		ifNil: [ resizable ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace resizable ]
+		ifAbsent: [ resizable ]
 ]
 
 { #category : #'window - properties' }
@@ -930,7 +1611,7 @@ BlSpace >> resizable: aBoolean [
 	"Make underlying window resizable if true is given"
 	
 	resizable := aBoolean.
-	self hostSpace ifNotNil: [ :aHostSpace | aHostSpace resizable: aBoolean ]
+	self hostSpaceDo: [ :aHostSpace | aHostSpace resizable: aBoolean ]
 ]
 
 { #category : #accessing }
@@ -964,30 +1645,22 @@ BlSpace >> root: anElement [
 		space: self;
 		size: self extent.
 
-	root := anElement.
-	"Root styler is created for the root element. Since we change root element
-	we must also recreate a styler"
-	rootStyler := self defaultRootStyler
+	root := anElement
 ]
 
 { #category : #accessing }
 BlSpace >> rootDo: aBlock [
-	"A helper method to evaluate a given block with root element an argument.
+	"A helper method to evaluate a given block with the root element as its argument.
 	May be useful for scripting"
 
 	aBlock value: self root
-]
-
-{ #category : #accessing }
-BlSpace >> rootStyler [
-	^ rootStyler
 ]
 
 { #category : #pulse }
 BlSpace >> runTasks [
 	"Run animations and other runnable tasks"
 
-	self taskQueue run
+	self taskQueue runOn: self
 ]
 
 { #category : #accessing }
@@ -1010,24 +1683,37 @@ BlSpace >> setPosition: aPoint [
 	position := aPoint
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> show [
 	"Open me in a window and show it to the user"
 
-	"delegate showing work to the Universe"
-	BlUniverse default showSpaceWindow: self.
-	
-	"Notify root element that it is now visible to the user"
-	root dispatchAddedToSceneGraph.
-	
-	self requestNextPulse.
+	"delegate showing work to the Universe"	
+	(BlParallelUniverse forHost: self host class) openSpace: self
+]
+
+{ #category : #'api - displaying' }
+BlSpace >> showSpace: aSpace [
+	"I show a given space either inside of me or let it open by default"
+	aSpace show
 ]
 
 { #category : #'api - tasks' }
 BlSpace >> taskQueue [
-	<return: #BlTaskQueue>
+	<return: #BlSpaceTaskQueue>
 	
 	^ tasks
+]
+
+{ #category : #accessing }
+BlSpace >> telemetry [
+	<return: #BlTelemetry>
+	
+	^ telemetry
+]
+
+{ #category : #accessing }
+BlSpace >> telemetry: aBlTelemetry [
+	telemetry := aBlTelemetry
 ]
 
 { #category : #accessing }
@@ -1047,31 +1733,25 @@ BlSpace >> title [
 	"Return window's title as a string"
 	<return: #String>
 
-	^ self titleProperty value
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace title ]
+		ifAbsent: [ title ]
 ]
 
 { #category : #'window - properties' }
 BlSpace >> title: aString [
 	"Change window's title"
 
-	self titleProperty value: aString
+	title := aString.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace title: aString ]
 ]
 
-{ #category : #'accessing properties' }
-BlSpace >> titleProperty [
-	^ title ifNil: [
-		title := BlDelegateProperty
-			on: self
-			named: #title
-			delegateTo: self hostSpaceProperty ]
-]
-
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> toBack [
 	self hostSpace ifNotNil: [ :hw | hw toBack ]
 ]
 
-{ #category : #displaying }
+{ #category : #'api - displaying' }
 BlSpace >> toFront [
 	self hostSpace ifNotNil: [ :hw | hw toFront ]
 ]
@@ -1081,7 +1761,7 @@ BlSpace >> topMostParent [
 	^ self root
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
 BlSpace >> touchProcessor [
 	<return: #BlTouchProcessor>
 
@@ -1089,62 +1769,57 @@ BlSpace >> touchProcessor [
 ]
 
 { #category : #'focus managing' }
-BlSpace >> transferFocusTo: anElement [
-	self
-		assert: [ anElement space = self ]
-		description: [ 'anElement must be attached to the scenegraph owned by this space' ].
-		
-	self focusProcessor transferTo: anElement
-]
-
-{ #category : #'focus managing' }
 BlSpace >> ungrabFocus [
 	self focused: false
 ]
 
-{ #category : #'cursor managing' }
-BlSpace >> updateCursorImage: anImage [
+{ #category : #accessing }
+BlSpace >> universe [
+	<return: #BlParallelUniverse>
 
-	self hostSpace ifNotNil: [ :aHostSpace |
-		aHostSpace cursor: anImage ]
+	^ BlParallelUniverse forHost: self host class
 ]
 
-{ #category : #accessing }
+{ #category : #'cursor managing' }
+BlSpace >> updateCursor: aBlCursor [
+	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
+]
+
+{ #category : #'window - properties' }
 BlSpace >> width [
 	<return: #Number>
 
 	^ self extent x
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> windowExtent [
 	"Return the window size in screen coordinates.
 	This size may differ from the size in pixels on high dpi (retina) screens.
 	Use #extent to get actual pixel size"
-	<return: #Point>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace windowExtent ]
-		ifNil: [ extent ]
+	<return: #Point>
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace logicalSize width @ aHostSpace logicalSize height ]
+		ifAbsent: [ extent ]
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> windowExtent: anExtent [
 	"Request to change a window size to aNewExtent.
 	Note, that window size may be different from renderer size on high dpi (retina) displays"
 
-	self hasHostSpace
-		ifTrue: [ self hostSpace windowExtent: anExtent ]
-		ifFalse: [ self setExtent: anExtent ]
+	self setExtent: anExtent.
+	self hostSpaceDo: [ :aHostSpace | aHostSpace windowExtent: anExtent ]
 ]
 
-{ #category : #accessing }
+{ #category : #'window - properties' }
 BlSpace >> windowScale [
 	"Return a scaling factor from space to window coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
 	<return: #Point>
 
-	^ self hostSpace
-		ifNotNil: [ :aHostSpace | aHostSpace scaleFactor ]
-		ifNil: [ 1.0 asPoint ]
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace scaleFactor ]
+		ifAbsent: [ 1.0 asPoint ]
 ]

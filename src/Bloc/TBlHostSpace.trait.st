@@ -7,24 +7,39 @@ This area is typically an host-specific window.
 "
 Trait {
 	#name : #TBlHostSpace,
-	#traits : 'TBlSpaceProperties',
-	#classTraits : 'TBlSpaceProperties classTrait',
-	#category : 'Bloc-Universe'
+	#instVars : [
+		'host',
+		'space',
+		'universe',
+		'renderer'
+	],
+	#category : #'Bloc-Universe - Host'
 }
-
-{ #category : #'host space - accessing' }
-TBlHostSpace >> canvasExtent [
-	"Return a window canvas size in user coordinates.
-	This size may differ from the window size on high dpi (retina) screens.
-	In most cases canvas is x2 larger than window in pixel on retina screens."
-	<return: #Point>
-
-	^ self explicitRequirement
-]
 
 { #category : #'host space - displaying' }
 TBlHostSpace >> close [
 	self explicitRequirement
+]
+
+{ #category : #initialization }
+TBlHostSpace >> createBufferSurfaceRenderer [
+	<return: #BlHostSurfaceRenderer>
+	
+	^ self explicitRequirement
+]
+
+{ #category : #initialization }
+TBlHostSpace >> createFormSurfaceRenderer [
+	<return: #BlHostSurfaceRenderer>
+	
+	^ self explicitRequirement
+]
+
+{ #category : #initialization }
+TBlHostSpace >> createOpenGLSurfaceRenderer [
+	<return: #BlHostSurfaceRenderer>
+
+	^ self explicitRequirement
 ]
 
 { #category : #'host space - cursor' }
@@ -34,7 +49,7 @@ TBlHostSpace >> cursor: aCursor [
 	self explicitRequirement
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 TBlHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -42,29 +57,42 @@ TBlHostSpace >> densityDpi [
 	^ self explicitRequirement
 ]
 
-{ #category : #'host space - events' }
-TBlHostSpace >> enqueueEvent: aBlEvent [
-	"Enqueue a given Bloc Event in the event queue.
-	I am useful for testing and benchmark purposes"
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachHost [
+	host := nil
+]
 
-	self eventFetcher enqueueEvent: aBlEvent.
-	self space requestNextPulse
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachSpace [
+	space := nil
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> detachUniverse [
+	universe := nil
 ]
 
 { #category : #'host space - events' }
-TBlHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
+TBlHostSpace >> enqueueEvent: aBlEvent [
+	"I dispatch events directly to the universe or space as soon as they come"
 
-	^ self explicitRequirement
+	aBlEvent isUniverseEvent
+		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
+
+	aBlEvent isSpaceEvent
+		ifTrue: [ ^ self space dispatchEvent: aBlEvent ].
+
+	self space dispatchEvent: aBlEvent
 ]
 
 { #category : #'host space - events' }
 TBlHostSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
+]
 
-	self eventFetcher fetchedEventsDo: aBlock
+{ #category : #'host space - events' }
+TBlHostSpace >> generateEvents [
+	"Generate more complex state change events such as window scale event when resolution of the screen changes"
 ]
 
 { #category : #'host space - testing' }
@@ -74,12 +102,7 @@ TBlHostSpace >> hasResized [
 	e.g. from normal display to retina"
 	<return: #Boolean>
 
-	^ self renderer hasResized
-]
-
-{ #category : #'host space - displaying' }
-TBlHostSpace >> hide [
-	self explicitRequirement
+	^ self renderer hasResized: self
 ]
 
 { #category : #'host space - accessing' }
@@ -87,47 +110,19 @@ TBlHostSpace >> host [
 	"Return a host that was used to create this host space"
 	<return: #BlHost>
 
-	^ self explicitRequirement
+	^ host
 ]
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> host: aBlHost [
 	"Assign a host that was used to create this host space"
 	
-	self explicitRequirement
+	host := aBlHost
 ]
 
 { #category : #initialization }
-TBlHostSpace >> initializeForBuffer: aBufferSurface [
-	"Asks host space to initialize itself to be used together with a pixel buffer surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	aBufferSurface hostSpace: self.
-	aBufferSurface hostRenderer: self renderer.
-
-	self renderer surface: aBufferSurface
-]
-
-{ #category : #initialization }
-TBlHostSpace >> initializeForForm: anFormSurface [
-	"Asks host space to initialize itself to be used together with a Form surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	anFormSurface hostSpace: self.
-	anFormSurface hostRenderer: self renderer.
-
-	self renderer surface: anFormSurface
-]
-
-{ #category : #initialization }
-TBlHostSpace >> initializeForOpenGL: anOpenGLSurface [
-	"Asks host space to initialize itself to be used together with an OpenGL surface.
-	Default implementation simply connects renderer, host space and surface together"
-
-	anOpenGLSurface hostSpace: self.
-	anOpenGLSurface hostRenderer: self renderer.
-
-	self renderer surface: anOpenGLSurface
+TBlHostSpace >> initializeRenderer [
+	self renderer initializeForHostSpace: self
 ]
 
 { #category : #'host space - testing' }
@@ -140,6 +135,21 @@ TBlHostSpace >> isVisible [
 	^ self explicitRequirement
 ]
 
+{ #category : #'host space - geometry' }
+TBlHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #FensterLogicalSize>
+
+	^ self explicitRequirement
+]
+
+{ #category : #'host space - rendering' }
+TBlHostSpace >> makeCurrent [
+	"When displaying visual content on the screen very often a window framebuffer must be marked as a current"
+]
+
 { #category : #'host space - displaying' }
 TBlHostSpace >> maximize [
 
@@ -148,8 +158,12 @@ TBlHostSpace >> maximize [
 
 { #category : #'host space - displaying' }
 TBlHostSpace >> maximized [
-
 	^ self explicitRequirement
+]
+
+{ #category : #'host space - rendering' }
+TBlHostSpace >> measureTextParagraph: aBlTextParagraph [
+	self renderer measureTextParagraph: aBlTextParagraph
 ]
 
 { #category : #'host space - displaying' }
@@ -160,100 +174,70 @@ TBlHostSpace >> minimize [
 
 { #category : #'host space - displaying' }
 TBlHostSpace >> minimized [
-
 	^ self explicitRequirement
 ]
 
-{ #category : #'host space - displaying' }
-TBlHostSpace >> open [
-	self explicitRequirement
+{ #category : #'host space - testing' }
+TBlHostSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+	
+	^ self explicitRequirement
 ]
 
-{ #category : #'host space - rendering' }
-TBlHostSpace >> prepareToRender: aBlSpace onBufferSurface: aBlHostRendererBufferSurface [
-	"Prepare host space to a given space on a buffer surface.
-	By default dispatch directly to the renderer"
+{ #category : #'host space - geometry' }
+TBlHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #FensterPhysicalSize>
 
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> prepareToRender: aBlSpace onFormSurface: aBlHostRendererFormSurface [
-	"Prepare host space to a given space on a Form surface.
-	By default dispatch directly to the renderer"
-
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> prepareToRender: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
-	"Prepare host space to a given space on an OpenGL surface.
-	By default dispatch directly to the renderer"
-
-	self renderer prepareToRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> presentBufferSurface: aBlHostRendererBufferSurface areas: aCollectionOfAreas [
-	self explicitRequirement
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
-	self explicitRequirement
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> presentOpenGLSurface: aBlHostRendererOpenGLSurface areas: aCollectionOfAreas [
-	self explicitRequirement
+	^ self explicitRequirement
 ]
 
 { #category : #'host space - rendering' }
 TBlHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
-	self renderer render: aSpace
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> render: aBlSpace onBufferSurface: aBlHostRendererBufferSurface [
-	"Render a given space on an a buffer surface.
-	By default dispatch directly to the renderer"
-
-	self renderer doRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> render: aBlSpace onFormSurface: aBlHostRendererFormSurface [
-	"Render a given space on an a Form surface.
-	By default dispatch directly to the renderer"
-
-	self renderer doRender: aBlSpace
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> render: aBlSpace onOpenGLSurface: aBlHostRendererOpenGLSurface [
-	"Render a given space on an OpenGL surface.
-	By default dispatch directly to the renderer"
-
-	self renderer doRender: aBlSpace
+	self renderer render: self
 ]
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> renderer [
 	"Return host renderer used to render spaces"
-	<return: #TBlHostRenderer>
+	<return: #BlHostRenderer>
 
-	^ self explicitRequirement
+	^ renderer
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - rendering' }
+TBlHostSpace >> requestRedraw [
+	"Space needs to redraw the window"
+]
+
+{ #category : #'host space - geometry' }
 TBlHostSpace >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
+	"Return a scaling dpi factor from logical to physical coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
+	<return: #Number>
+	| aPhysicalSize aLogicalSize aWidthScale aHeightScale |
 	
-	^ self explicitRequirement
+	aPhysicalSize := self physicalSize.
+	aLogicalSize := self logicalSize.
+	
+	(aPhysicalSize isZero
+		or: [ aLogicalSize isZero ])
+		ifTrue: [ ^ 1 ].
+
+	aWidthScale := (aPhysicalSize width / aLogicalSize width) asFloat.
+	aHeightScale := (aPhysicalSize height / aLogicalSize height) asFloat.
+	
+	(aWidthScale closeTo: aHeightScale epsilon: 0.1)
+		ifFalse: [ NonInteractiveTranscript stdout
+			show: ('DPI factor is different for width {1} and height {2}' format: { aWidthScale . aHeightScale });
+			cr ].
+
+	^ aWidthScale
 ]
 
 { #category : #'host space - displaying' }
@@ -266,14 +250,14 @@ TBlHostSpace >> space [
 	"Return a space I am assigned to"
 	<return: #BlSpace>
 
-	^ self explicitRequirement
+	^ space
 ]
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> space: aSpace [
 	"Assign me to a given space"
 
-	self explicitRequirement
+	space := aSpace
 ]
 
 { #category : #'host space - testing' }
@@ -311,16 +295,18 @@ TBlHostSpace >> toFront [
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
+TBlHostSpace >> universe [
+	<return: #BlParallelUniverse>
 
-	^ self explicitRequirement
+	^ universe
 ]
 
 { #category : #'host space - accessing' }
+TBlHostSpace >> universe: aUniverse [
+	universe := aUniverse
+]
+
+{ #category : #'host space - geometry' }
 TBlHostSpace >> windowExtent: anExtent [
 	self explicitRequirement
 ]

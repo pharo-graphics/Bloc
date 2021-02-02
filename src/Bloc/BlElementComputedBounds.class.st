@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'bounds'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #converting }
@@ -33,6 +33,8 @@ BlElementComputedBounds >> bounds [
 
 { #category : #accessing }
 BlElementComputedBounds >> bounds: aBlBounds [
+	<argument: #aBlBounds isKindOf: #BlBounds>
+
 	bounds := aBlBounds
 ]
 
@@ -58,7 +60,7 @@ BlElementComputedBounds >> inChild: anElement [
 	<return: #BlElementBounds>
 
 	^ BlElementBoundsInChild new
-		originalElement: self originalElement;
+		originalElement: self referenceElement;
 		referenceElement: anElement;
 		bounds: (anElement globalBoundsToMine: self bounds copy fromParent: self referenceElement);
 		yourself

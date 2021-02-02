@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #cleanup }
@@ -23,8 +23,20 @@ BlEmptyText class >> uniqueInstance [
 BlEmptyText >> attributes: anAttributesCollection [
 ]
 
+{ #category : #'text - copying' }
+BlEmptyText >> copyFrom: aStartIndex to: anEndIndex [
+	"Create a copy of this text within a given indices interval.
+	Note: I am different from ==#from:to:== in a sense that I don't create a sub-text that points
+	to the original text, I create an independent copy which can be safely used in text editors and other tools.
+	
+	README: For compatibility reasons with the rest of the system we allow aStartIndex to be bigger than anEndIndex and also bigger than self size."
+	<return: #BlText>
+
+	^ self
+]
+
 { #category : #'text - modifications' }
-BlEmptyText >> delete: aStart to: anEnd [
+BlEmptyText >> deleteAll: aCollectionOfIntervals [
 ]
 
 { #category : #'text - enumeration' }
@@ -44,7 +56,7 @@ BlEmptyText >> from: aFromIndex to: aToIndex do: aBlock [
 ]
 
 { #category : #'text - modifications' }
-BlEmptyText >> insertString: aString at: anIndex [
+BlEmptyText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 ]
 
 { #category : #'text - modifications' }

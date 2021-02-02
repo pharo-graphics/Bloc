@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'selections'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #'instance creation' }
@@ -36,6 +36,16 @@ BlMultipleSelection >> children [
 { #category : #'api - testing' }
 BlMultipleSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
+	<return: #Boolean>
+	
+	^ selections anySatisfy: [ :eachSelection | 
+		eachSelection contains: anIndex ]
+]
+
+{ #category : #'api - testing' }
+BlMultipleSelection >> containsIndex: anIndex [
+	"Return true if selection indices include a given index, false otherwise.
+	I am conceptually same as (self indices includes: anIndex)"
 	<return: #Boolean>
 	
 	^ selections anySatisfy: [ :eachSelection | 
@@ -79,6 +89,11 @@ BlMultipleSelection >> isEmpty [
 { #category : #'api - testing' }
 BlMultipleSelection >> isNotEmpty [
 	^ selections anySatisfy: #isNotEmpty
+]
+
+{ #category : #copying }
+BlMultipleSelection >> postCopy [
+	selections := selections collect: [ :eachSelection | eachSelection copy ]
 ]
 
 { #category : #'api - enumerating' }

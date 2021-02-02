@@ -21,7 +21,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #accessing }
@@ -79,10 +79,19 @@ BlHandlerRegistry >> do: aBlock [
 	self subclassResponsibility
 ]
 
+{ #category : #'as yet unclassified' }
+BlHandlerRegistry >> gtInspectorHandlersIn: aComposite [
+	<gtInspectorPresentationOrder: 1>
+
+	^ aComposite list
+		title: 'Handlers';
+		display: [ self handlers ]
+]
+
 { #category : #'api - accessing' }
 BlHandlerRegistry >> handlers [
 	"Return an immutable collection of all registered event handlers"
-	<return: #Array of: #TBlEventHandler>
+	<return: #Array of: #BlBasicEventHandler>
 
 	^ self subclassResponsibility
 ]

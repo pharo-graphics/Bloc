@@ -14,7 +14,7 @@ Class {
 		'start',
 		'end'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'instance creation' }
@@ -90,35 +90,11 @@ BlRopeIterator >> hasPrevious [
 ]
 
 { #category : #'iterator - testing' }
-BlRopeIterator >> isCarriageReturn: anItem [
-	"Return true of given item represents a carriage return, false otherwise"
-	<return: #Boolean>
-
-	^ anItem = Character cr
-]
-
-{ #category : #'iterator - testing' }
 BlRopeIterator >> isLineDelimiter: anItem [
 	"Return true of given item represents a line delimiter symbol, false otherwise"
 	<return: #Boolean>
 
-	^ (self isCarriageReturn: anItem) or: [ self isLineFeed: anItem ]
-]
-
-{ #category : #'iterator - testing' }
-BlRopeIterator >> isLineFeed: anItem [
-	"Return true of given item represents a line feed, false otherwise"
-	<return: #Boolean>
-
-	^ anItem = Character lf
-]
-
-{ #category : #'iterator - testing' }
-BlRopeIterator >> isNewLine: anItem [
-	"Return true of given item represents a carriage return, false otherwise"
-	<return: #Boolean>
-
-	^ anItem = Character cr or: [ anItem = Character lf ]
+	^ anItem isLineBreak
 ]
 
 { #category : #'iterator - enumeration' }
@@ -140,10 +116,10 @@ BlRopeIterator >> nextLine [
 { #category : #'iterator - enumeration' }
 BlRopeIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
-		- start index of line
-		- end index of line without line delimiter
-		- end index of line including line delimiter(s) CR, LF or CRLF"
-	| aLineStart aLineEnd aLineSeparator |
+		- start index of line in cursor coordinates
+		- end index of line without line delimiter in cursor coordinates
+		- end index of line including line delimiter(s) in cursor coordinates"
+	| aLineStart aLineEnd |
 
 	self hasNext
 		ifFalse: [ self errorReachedTheEnd ].
@@ -156,9 +132,6 @@ BlRopeIterator >> nextLineIndicesDo: anIndicesBlock [
 			indicesDo: [ :aStart :anEnd | aLineEnd := anEnd ] ].
 
 	(self hasNext and: [ self isLineDelimiter: self peek ])
-		ifTrue: [ aLineSeparator := self next ].
-		
-	(self hasNext and: [ (self isLineFeed: self peek) and: [ self isCarriageReturn: aLineSeparator ] ])
 		ifTrue: [ self next ].
 
 	^ anIndicesBlock
@@ -252,7 +225,7 @@ BlRopeIterator >> nextWhitespace [
 BlRopeIterator >> nextWord [
 	<return: #BlRope>
 
-	^ self nextSegment: [ :item | item isCharacter and: [ item isSeparator ] ]
+	^ self nextSegment: [ :item | item isCharacter and: [ item isSeparator not ] ]
 ]
 
 { #category : #'iterator - enumeration' }

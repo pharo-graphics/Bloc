@@ -9,9 +9,9 @@ BlElementEffect >> applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlElementEffect >> applyEffectOnSpartaCanvas: anSpartaCanvas for: anElement around: aBlock [
+BlElementEffect >> applyEffectOnSpartaCanvas: aSpartaCanvas for: anElement around: aBlock [
 	
-	self applyBeforeOnSpartaCanvas: anSpartaCanvas for: anElement.
-	aBlock value.
-	self applyAfterOnSpartaCanvas: anSpartaCanvas for: anElement
+	self applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement.
+	aBlock value: aSpartaCanvas.
+	self applyAfterOnSpartaCanvas: aSpartaCanvas for: anElement
 ]

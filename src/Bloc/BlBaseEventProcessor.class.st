@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'as yet unclassified' }
@@ -28,6 +28,18 @@ BlBaseEventProcessor >> fireEvent: anEvent [
 	^ BlEvent fireEvent: anEvent
 ]
 
+{ #category : #'event firing' }
+BlBaseEventProcessor >> fireEvent: anEvent from: aTopEventTarget [
+	<return: #BlEvent>
+
+	^ BlEvent fireEvent: anEvent from: aTopEventTarget
+]
+
+{ #category : #'initialize-release' }
+BlBaseEventProcessor >> onSpaceClosed [
+	"React to space closed in order to clean up the state"
+]
+
 { #category : #accessing }
 BlBaseEventProcessor >> space [
 	^ space
@@ -36,4 +48,13 @@ BlBaseEventProcessor >> space [
 { #category : #accessing }
 BlBaseEventProcessor >> space: aSpace [
 	space := aSpace
+]
+
+{ #category : #accessing }
+BlBaseEventProcessor >> telemetry [
+	<return: #BlTelemetry>
+
+	^ self space
+		ifNil: [ BlNullTelemetry uniqueInstance ]
+		ifNotNil: [ :aSpace | aSpace telemetry ]
 ]

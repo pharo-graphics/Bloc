@@ -1,15 +1,15 @@
 Extension { #name : #BlTextAttribute }
 
 { #category : #'*Bloc-Sparta' }
-BlTextAttribute >> applyOnSpartaFontBuilder: aFontBuilder with: aSpartaSpan [
+BlTextAttribute >> applyOnSpartaFontBuilder: aFontBuilder [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlTextAttribute >> applyOnSpartaTextPainter: aTextPainter with: aSpartaSpan [
+BlTextAttribute >> applyOnSpartaTextPainter: aTextPainter [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlTextAttribute >> applyOnTransformation: aSpartaMatrix with: aBrSpan [
+BlTextAttribute >> applyOnTextParagraph: aTextParagraph from: aStartIndex to: aToIndex [
 ]
 
 { #category : #'*Bloc-Sparta' }

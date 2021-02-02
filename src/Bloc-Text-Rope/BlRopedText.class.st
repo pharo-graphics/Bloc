@@ -10,8 +10,22 @@ Class {
 	#instVars : [
 		'rope'
 	],
-	#category : 'Bloc-Text-Rope-Text'
+	#category : #'Bloc-Text-Rope-Text'
 }
+
+{ #category : #'instance creation' }
+BlRopedText class >> file: aFileReference [
+	<return: #BlRopedText>
+
+	^ self rope: (BlCollectionRope collection: (BlRopeableCollectionFile new fileReference: aFileReference))
+]
+
+{ #category : #'instance creation' }
+BlRopedText class >> items: aCollectionOfItems [
+	<return: #BlRopedText>
+
+	^ self rope: (BlCollectionRope collection: aCollectionOfItems)
+]
 
 { #category : #'instance creation' }
 BlRopedText class >> rope: aRope [
@@ -22,17 +36,15 @@ BlRopedText class >> rope: aRope [
 
 { #category : #'instance creation' }
 BlRopedText class >> string: aString [
-	^ self rope: (BlCollectionRope collection: aString)
+	"Take the supplied string like object, convert it to a normalised string and answer as roped text"
+	<return: #BlRopedText>
+
+	^ self rope: (BlCollectionRope collection: (BlStringNormalizer new process: aString))
 ]
 
 { #category : #'text - converting' }
 BlRopedText >> asRopedText [
 	^ self
-]
-
-{ #category : #'text - converting' }
-BlRopedText >> asString [
-	^ rope asString
 ]
 
 { #category : #'text - accessing' }
@@ -45,35 +57,49 @@ BlRopedText >> at: anIndex [
 
 { #category : #'text - attributes' }
 BlRopedText >> attributes: anAttributesCollection [
+	| aNewRope |
+	
+	aNewRope := rope attributes: anAttributesCollection.
+	self rope: aNewRope.
 
-	self rope: (rope attributes: anAttributesCollection)
+	anAttributesCollection do: [ :eachAttribute |
+		self notifyAttributeAdded: eachAttribute from: (1 min: aNewRope size) to: aNewRope size ]
 ]
 
 { #category : #'text - attributes' }
 BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [
+	| aNewRope |
+	
 	self
-		assert: [ aFromIndex <= aToIndex ]
+		assert: [ aFromIndex <= (aToIndex + 1) ]
 		description: [ 'Start must not exceed end' ].
 
 	self
-		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
-		description: [ 'Start and end must be positive or both zero' ].
-
-	self rope: (rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: aToIndex)
+		assert: [ self isNotEmpty or: [ aFromIndex = 1 and: [ aToIndex isZero ] ] ]
+		description: [ 'If I am empty then start must be 1 and end must be zero' ].
+	
+	aNewRope := rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: aToIndex.
+	self rope: aNewRope.
+	
+	anAttributesCollection do: [ :eachAttribute |
+		self notifyAttributeAdded: eachAttribute from: aFromIndex to: aToIndex ]
 ]
 
 { #category : #'text - attributes' }
 BlRopedText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
-	
+	| aPreviousRope |
 	self
 		assert: [ aFromIndex <= aToIndex ]
 		description: [ 'Start must not exceed end' ].
-		
+
 	self
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
 		description: [ 'Start and end must be positive or both zero' ].
 	
-	self rope: (rope clearAttributes: ((aFromIndex - 1) max: 0) to: aToIndex if: aBlock)
+	aPreviousRope := rope.
+	self rope: (rope clearAttributes: ((aFromIndex - 1) max: 0) to: aToIndex if: aBlock).
+	aPreviousRope == rope
+		ifFalse: [ self notifyAttributesRemovedFrom: aFromIndex to: aToIndex ]
 ]
 
 { #category : #'text - copying' }
@@ -92,18 +118,39 @@ BlRopedText >> copyFrom: aStartIndex to: anEndIndex [
 ]
 
 { #category : #'text - modifications' }
-BlRopedText >> delete: aFromIndex to: aToIndex [
+BlRopedText >> deleteAll: aCollectionOfIntervals [
+	"Intervals must not overlap!"
+	| theDeletedTexts aRope theUpdatedIntervals |
 	
+	theDeletedTexts := aCollectionOfIntervals
+		collect: [ :eachInterval | self copyFrom: eachInterval first to: eachInterval last ].
+	
+	aRope := rope.
+	
+	theUpdatedIntervals := aCollectionOfIntervals collect: #copy.
+	
+	theUpdatedIntervals
+		do: [ :eachCurrentDeletionInterval |
+			aRope := aRope delete: ((eachCurrentDeletionInterval first - 1) max: 0) to: eachCurrentDeletionInterval last.
+	
+			1 to: theUpdatedIntervals size do: [ :eachIntervalIndex |
+				| aCurrentIntervalToUpdate |
+			
+				aCurrentIntervalToUpdate := theUpdatedIntervals at: eachIntervalIndex.
+				
+				aCurrentIntervalToUpdate first > eachCurrentDeletionInterval last
+					ifTrue: [
+						theUpdatedIntervals
+							at: eachIntervalIndex
+							put: (
+								(aCurrentIntervalToUpdate first - eachCurrentDeletionInterval size)
+								to: (aCurrentIntervalToUpdate last - eachCurrentDeletionInterval size)) ] ] ].
+	
+	rope := aRope.
 	self
-		assert: [ aFromIndex <= aToIndex ]
-		description: [ 'Start must not exceed end' ].
-
-	self
-		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
-		description: [ 'Start and end must be positive or both zero' ].
-
-	rope := rope delete: ((aFromIndex - 1) max: 0) to: aToIndex.
-	self notifyDeleted: aFromIndex to: aToIndex
+		notifyDeletedAll: theUpdatedIntervals
+		requested: aCollectionOfIntervals
+		texts: theDeletedTexts
 ]
 
 { #category : #'text - enumeration' }
@@ -156,15 +203,60 @@ BlRopedText >> initializeWith: aRope [
 ]
 
 { #category : #'text - modifications' }
-BlRopedText >> insertString: aString at: anIndex [
-	rope := rope insertItems: aString at: anIndex.
-	self notifyStringInserted: aString at: anIndex
+BlRopedText >> insertItems: aCollectionOfCollectionsOfItems atAll: aCollectionOfIndices [
+	"I return actual indices after insertion"
+	<return: #Collection of: #Number>
+	| theUpdatedIndices aRope aCurrentItemsIndex |
+	
+	aRope := rope.
+	
+	theUpdatedIndices := aCollectionOfIndices copy.
+	
+	aCurrentItemsIndex := 0.
+	aCollectionOfCollectionsOfItems
+		with: theUpdatedIndices
+		do: [ :eachCollection :eachCurrentInsertionIndex |
+			aRope := aRope insertItems: eachCollection at: eachCurrentInsertionIndex.
+	
+			aCurrentItemsIndex := aCurrentItemsIndex + 1.
+			1 to: theUpdatedIndices size do: [ :each |
+				| aCurrentIndexToUpdate |
+				aCurrentIndexToUpdate := theUpdatedIndices at: each.
+				(aCurrentIndexToUpdate >= eachCurrentInsertionIndex and: [ aCurrentItemsIndex ~= each ])
+					ifTrue: [
+						theUpdatedIndices
+							at: each
+							put: (aCurrentIndexToUpdate + eachCollection size) ] ] ].
+	rope := aRope.
+	^ theUpdatedIndices
+]
+
+{ #category : #'text - modifications' }
+BlRopedText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
+	| theProcessedStrings |
+	
+	theProcessedStrings := aCollectionOfStrings collect: [ :eachString | BlStringNormalizer new process: eachString ].
+	self
+		notifyStringsInserted: (theProcessedStrings collect: [ :eachProcessedString | (self class items: eachProcessedString) characters asString ])
+		atAll: (self
+			insertItems: theProcessedStrings
+			atAll: aCollectionOfIndices)
+		requested: aCollectionOfIndices
 ]
 
 { #category : #accessing }
-BlRopedText >> insertText: aString at: anIndex [
-	rope := rope insertItems: aString at: anIndex.
-	self notifyStringInserted: aString at: anIndex
+BlRopedText >> insertText: aText at: anIndex [
+	self
+		assert: [ aText isKindOf: BlText ]
+		description: [ 'Trying to insert a {1} instead of {2}'
+				format:
+					{aText class name.
+					BlText name} ].
+	rope := rope insert: aText rope at: anIndex.
+	self
+		notifyStringsInserted: { aText characters asString }
+		atAll: { anIndex }
+		requested: { anIndex }
 ]
 
 { #category : #'text - testing' }
@@ -198,6 +290,12 @@ BlRopedText >> iterator: aFromIndex to: aToIndex [
 	^ BlRopedTextIterator text: self from: aFromIndex to: aToIndex
 ]
 
+{ #category : #'text - converting' }
+BlRopedText >> normalized [
+	
+	^ self class rope: rope normalized
+]
+
 { #category : #accessing }
 BlRopedText >> rope [
 	^ rope
@@ -213,10 +311,77 @@ BlRopedText >> size [
 	^ self rope size
 ]
 
+{ #category : #'text - printing' }
+BlRopedText >> storeOn: aStream [
+	| anIterator allPieces attributesMap bindingsMap |
+		
+	anIterator := self iterator.
+	
+	allPieces := Array streamContents: [ :anArrayStream |
+		[ anIterator hasNext ] whileTrue: [
+			| aSpan aSpanIterator aDelta |
+			aDelta := anIterator position.
+			aSpan := anIterator nextSpan.
+			aSpanIterator := aSpan iterator.
+			[ aSpanIterator hasNext ] whileTrue: [
+				aSpanIterator
+					nextAttributedEnd: [ :eachAttribute | true ]
+					indicesDo: [ :aStart :anEnd :theAttributes |
+						anArrayStream nextPut: { aStart + aDelta . anEnd + aDelta . theAttributes }  ] ] ] ].
+	
+	attributesMap := (allPieces flatCollect: [ :eachTuple | eachTuple last ])
+		groupedBy: [ :eachAttribute | eachAttribute ]
+		having: [ :eachGroup | eachGroup size > 1 ].
+	attributesMap := attributesMap collect: #size.
+
+	attributesMap := attributesMap associations groupedBy: [ :eachAssociation | eachAssociation key class ].
+	bindingsMap := IdentityDictionary new.
+
+	attributesMap keysAndValuesDo: [ :eachClass :theAttributes |
+		theAttributes withIndexDo: [ :eachAttribute :eachIndex |
+			bindingsMap at: eachAttribute key put: 'a', eachClass name, eachIndex asString ] ].
+
+	bindingsMap keysAndValuesDo: [ :eachAttribute :eachVariableName |
+		aStream nextPutAll: eachVariableName.
+		aStream nextPutAll: ' := '.
+		aStream store: eachAttribute.
+		aStream nextPut: $. ; cr ].
+	
+	allPieces withIndexDo: [ :eachTuple :anIndex |
+		anIndex > 1
+			ifTrue: [ aStream nextPutAll: ', '; cr ].
+		
+		aStream
+			nextPut: $(;
+			nextPut: $';
+			nextPutAll: ((self from: eachTuple first to: eachTuple second) asString copyReplaceAll: $' asString with: '''''');
+			nextPut: $';
+			space;
+			nextPutAll: #asRopedText asString.
+		
+		eachTuple third ifNotEmpty: [ :theAttributes |
+			aStream
+				space;
+				nextPutAll: #attributes: asString;
+				space.
+			aStream nextPut: ${; cr.
+			theAttributes
+				do: [ :eachAttribute |
+					aStream tab.
+					
+					aStream nextPutAll: (bindingsMap
+						at: eachAttribute
+						ifAbsent: [ eachAttribute storeString ]) ]
+				separatedBy: [ aStream nextPut: $.; cr ].
+			aStream cr; nextPut: $} ].
+		aStream nextPut: $)
+	]
+]
+
 { #category : #'text - attributes' }
 BlRopedText >> unstyle: aFromIndex to: aToIndex [
 	<return: #BlText>
-	| anUnstyledRope |
+	| anUnstyledRope aPreviousRope |
 
 	self
 		assert: [ aFromIndex <= aToIndex ]
@@ -226,12 +391,17 @@ BlRopedText >> unstyle: aFromIndex to: aToIndex [
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
 		description: [ 'Start and end must be positive or both zero' ].
 
+	aPreviousRope := rope.
+
 	"First refer original rope to support multithreading"
 	anUnstyledRope := rope.
 	anUnstyledRope := anUnstyledRope
 		clearAttributes: ((aFromIndex - 1) max: 0)
 		to: aToIndex
 		if: [ :anAttribute | anAttribute isOverwritableByStyler ].
-
-	self rope: anUnstyledRope
+	
+	self rope: anUnstyledRope.
+	
+	aPreviousRope == anUnstyledRope
+		ifFalse: [ self notifyAttributesRemovedFrom: aFromIndex to: aToIndex ]
 ]

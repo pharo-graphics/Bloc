@@ -12,7 +12,7 @@ Class {
 		'heightMode',
 		'checkCanFit'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #'instance creation' }
@@ -219,7 +219,7 @@ BlFlowLayoutMeasurer >> layout: aLayout [
 ]
 
 { #category : #layout }
-BlFlowLayoutMeasurer >> layout: anElement in: newBounds [
+BlFlowLayoutMeasurer >> layout: anElement in: newBounds context: aBlElementBoundsUpdateContext [
 	lines do: [ :aLine |
 		aLine children do: [ :aChild |
 			| constraints left top width height |
@@ -228,7 +228,7 @@ BlFlowLayoutMeasurer >> layout: anElement in: newBounds [
 			top := anElement padding top + aLine lineY + aChild inlineY + constraints margin top.
 			width := aChild width.
 			height := aChild height.
-			aChild element applyLayoutIn: (left @ top extent: width @ height) ] ]
+			aChild element applyLayoutIn: (left @ top extent: width @ height) context: aBlElementBoundsUpdateContext ] ]
 ]
 
 { #category : #accessing }
@@ -295,7 +295,7 @@ BlFlowLayoutMeasurer >> measure: anElement with: anExtentSpec [
 	
 	lastLine := lines last.
 	
-	contentLength := lines inject: 0 into: [ :aContentLength :aLine | aContentLength max: aLine length ].
+	contentLength := lines inject: 0.0 into: [ :aContentLength :aLine | aContentLength max: aLine length ].
 	contentBreadth := lastLine startBreadth + lastLine breadth.
 	
 	parentLength := self size: contentLength max: self maxLength for: anExtentSpec widthSpec.

@@ -9,7 +9,7 @@ Class {
 		'fifty',
 		'hundred'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #cleanup }
@@ -23,12 +23,12 @@ BlLayoutExactResizer class >> cleanUp [
 
 { #category : #accessing }
 BlLayoutExactResizer class >> fifty [
-	^ fifty ifNil: [ fifty := self new size: 50 ]
+	^ fifty ifNil: [ fifty := self new size: 50.0 ]
 ]
 
 { #category : #accessing }
 BlLayoutExactResizer class >> hundred [
-	^ hundred ifNil: [ hundred := self new size: 100 ]
+	^ hundred ifNil: [ hundred := self new size: 100.0 ]
 ]
 
 { #category : #accessing }
@@ -49,7 +49,7 @@ BlLayoutExactResizer class >> size: aNumber [
 
 { #category : #accessing }
 BlLayoutExactResizer class >> zero [
-	^ zero ifNil: [ zero := self new size: 0 ]
+	^ zero ifNil: [ zero := self new size: 0.0 ]
 ]
 
 { #category : #comparing }
@@ -114,9 +114,8 @@ BlLayoutExactResizer >> size [
 
 { #category : #accessing }
 BlLayoutExactResizer >> size: aNumber [
-	self
-		assert: [ size isNil ]
-		description: [ 'Size can not be changed once set (immutability)' ].
-		
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	<argument: #aNumber satisfies: #isBlocPositiveFloat>
+
 	size := aNumber
 ]

@@ -4,20 +4,22 @@ Class {
 	#instVars : [
 		'image'
 	],
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space - Cursor'
 }
 
-{ #category : #'as yet unclassified' }
-BlStaticCursor >> activateOn: aSpace [
-	aSpace updateCursorImage: self image
+{ #category : #converting }
+BlStaticCursor >> asForm [
+	^ self image
 ]
 
 { #category : #accessing }
 BlStaticCursor >> image [
+	<return: #Form>
+
 	^ image
 ]
 
 { #category : #accessing }
-BlStaticCursor >> image: anObject [
-	image := anObject
+BlStaticCursor >> image: aForm [
+	image := aForm
 ]

@@ -45,9 +45,19 @@ BlBorderBuilder >> buildStyle [
 		dashOffset: self dashOffset
 ]
 
-{ #category : #styles }
+{ #category : #'api - line cap' }
+BlBorderBuilder >> capButt [
+	self lineCap: BlStrokeLineCap butt
+]
+
+{ #category : #'api - line cap' }
 BlBorderBuilder >> capRound [
 	self lineCap: BlStrokeLineCap round
+]
+
+{ #category : #'api - line cap' }
+BlBorderBuilder >> capSquare [
+	self lineCap: BlStrokeLineCap square
 ]
 
 { #category : #accessing }
@@ -141,14 +151,14 @@ BlBorderBuilder >> joinRound [
 	self lineJoin: BlStrokeLineJoin round
 ]
 
-{ #category : #accessing }
+{ #category : #'api - line cap' }
 BlBorderBuilder >> lineCap [
 	<return: #BlStrokeLineCap>
 
 	^ lineCap
 ]
 
-{ #category : #accessing }
+{ #category : #'api - line cap' }
 BlBorderBuilder >> lineCap: aBlStrokeLineCap [
 	lineCap := aBlStrokeLineCap
 ]

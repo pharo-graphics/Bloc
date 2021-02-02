@@ -1,9 +1,13 @@
 "
+! Text model
+
 I am a data structure independent text abstraction.
 
 I define a public API of the text model. User must only talk with me using provided methods. My subclasses provide implementation based on concrete data structures, for example rope or string.
 
 I only store string and corresponding attributes. I don't know anything about text layout or paragraphs. I should be used together with BrTextParagraph in order to be measured, layered out and rendered. 
+
+Once a piece of string is converted ${BlText}$ users must not make any assumption on the internat structure of that string inside of the text. For example I replace all occurrences of ==CrLf== with a special marker that is exactly one item instead of two characters (==Cr== and ==Lf==)
 
 I provide a fluent text styling api:
 
@@ -14,6 +18,10 @@ text := 'Hello world' asRopedText.
 (text from: 7 to: 11) foreground: Color red.
 text	
 ]]]
+
+!! Attributes
+
+- ${class:BlTextUnderlineAttribute}$
 "
 Class {
 	#name : #BlText,
@@ -31,13 +39,18 @@ BlText class >> empty [
 	^ BlEmptyText uniqueInstance
 ]
 
+{ #category : #'text - modifications' }
+BlText >> , aText [
+	self append: aText
+]
+
 { #category : #'text - enumeration' }
 BlText >> allSatisfy: aBlock [
-	"Evaluate aBlock with all text character's.
+	"Evaluate aBlock with all text items.
 	If aBlock returns false for any element return false, otherwise return true"
 	<return: #Boolean>
 
-	self do: [ :aCharacter | (aBlock value: aCharacter)
+	self do: [ :anItem | (aBlock value: anItem)
 		ifFalse: [ ^ false] ].
 	^ true
 ]
@@ -50,24 +63,51 @@ BlText >> announcerDo: aBlockClosure [
 
 { #category : #'text - enumeration' }
 BlText >> anySatisfy: aBlock [
-	"Evaluate aBlock with all text character's.
+	"Evaluate aBlock with all text items.
 	If aBlock returns true for any element return true, otherwise return false"
 	<return: #Boolean>
 	
-	self do: [ :aCharacter | (aBlock value: aCharacter)
+	self do: [ :anItem | (aBlock value: anItem)
 			ifTrue: [ ^ true ] ].
 	^ false
 ]
 
+{ #category : #'text - modifications' }
+BlText >> append: aText [
+	self insertText: aText at: self size
+]
+
+{ #category : #'text - modifications' }
+BlText >> appendString: aString [
+	self insertString: aString at: self size
+]
+
+{ #category : #'text - converting' }
+BlText >> asArray [
+    ^ Array streamContents: [ :aStream |
+		self do: [ :anItem | aStream nextPut: anItem ] ]
+]
+
 { #category : #'text - converting' }
 BlText >> asString [
-    ^ self printStringLimitedTo: Float infinity
+	"I return an original String representaion of this text.
+	There is no guarantee that the size of the resulting string is the same
+	as of this text"
+	<return: #String>
+	| nel |
+
+	nel := Character nel.
+	^ String streamContents: [ :aStream |
+		self do: [ :aCharacter |
+			aCharacter == nel
+				ifTrue: [ aStream nextPutAll: String crlf ]
+				ifFalse: [ aStream nextPut: aCharacter ] ] ]
 ]
 
 { #category : #'text - accessing' }
 BlText >> at: anIndex [
-	"Return a character at a given index"
-	<return: #Character>
+	"Return an item at a given index"
+	<return: #Object>
 	
 	^ self subclassResponsibility
 ]
@@ -77,6 +117,13 @@ BlText >> attribute: aTextAttribute [
 	"Apply a given attribute on the whole text"
 
 	self attributes: { aTextAttribute }
+]
+
+{ #category : #'text - attributes' }
+BlText >> attribute: aTextAttribute from: aStart to: anEnd [
+	"Apply a given attribute on the text from aStart to anEnd"
+
+	self attributes: { aTextAttribute } from: aStart to: anEnd
 ]
 
 { #category : #'text - attributes' }
@@ -109,6 +156,30 @@ BlText >> attributesBuilder [
 ]
 
 { #category : #'text - attributes' }
+BlText >> attributesDo: aBlock [
+	"Evaluate a block with all attributes for each text item"
+	| anIterator |
+	
+	anIterator := self iterator.
+	
+	"even if there is no next we should still ask for attributes, so we start from `do`"
+	[ aBlock cull: anIterator attributes cull: anIterator position ]
+		doWhileTrue: [
+			| hasNext |
+			hasNext := anIterator hasNext.
+			anIterator hasNext
+				ifTrue: [  anIterator next ].
+			hasNext ]
+]
+
+{ #category : #'text - copying' }
+BlText >> characters [
+	<return: #BlCharacterText>
+
+	^ BlCharacterText text: self
+]
+
+{ #category : #'text - attributes' }
 BlText >> clearAttributes: aBlock [
 	self clearAttributes: (1 min: self size) to: self size if: aBlock
 ]
@@ -118,14 +189,23 @@ BlText >> clearAttributes: aStart to: anEnd if: aBlock [
 	self subclassResponsibility
 ]
 
+{ #category : #'text - attributes' }
+BlText >> clearAttributesOfClass: aBlTextAttributeClass [
+	self clearAttributes: [ :eachAttribute | eachAttribute isKindOf: aBlTextAttributeClass ]
+]
+
+{ #category : #'text - attributes' }
+BlText >> clearAttributesOfType: aBlTextAttributeType [
+	self clearAttributes: [ :eachAttribute | ]
+]
+
 { #category : #'text - enumeration' }
 BlText >> collect: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	Collect the resulting values into a collection like the receiver. Answer  
-	the new collection."
+	"Evaluate aBlock with each of the text's items as the argument.  
+	Collect the resulting values into a collection like the receiver. Answer the new collection."
 
 	^ Array streamContents: [ :aStream |
-		self do: [ :aCharacter | aStream nextPut: (aBlock value: aCharacter) ] ]
+		self do: [ :anItem | aStream nextPut: (aBlock value: anItem) ] ]
 ]
 
 { #category : #'text - copying' }
@@ -140,15 +220,36 @@ BlText >> copyFrom: aStartIndex to: anEndIndex [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'text - copying' }
+BlText >> copyWithoutExternalReferences [
+	<return: #BlText>
+
+	^ (self copyFrom: 1 to: self size)
+		clearAttributes: [ :eachAttribute | eachAttribute mayHaveExternalReferences ];
+		yourself.
+]
+
 { #category : #'text - modifications' }
 BlText >> delete: aStart to: anEnd [
+	self deleteAll: { (aStart to: anEnd) }
+]
+
+{ #category : #'text - modifications' }
+BlText >> deleteAll [
+	self delete: (1 min: self size) to: self size
+]
+
+{ #category : #'text - modifications' }
+BlText >> deleteAll: aCollectionOfIntervals [
 	self subclassResponsibility
 ]
 
 { #category : #'text - enumeration' }
 BlText >> do: aBlock [
-	"Evaluate aBlock with every character as argument"
-	
+	"Evaluate aBlock with every item as argument.
+	We do not guarantee that all items of this text are Characters. Some items may be special objects such as line breaks.
+	Basically, you should never assume a type of the argument with which aBlock will be evaluated"
+
 	self subclassResponsibility
 ]
 
@@ -165,16 +266,71 @@ BlText >> ensureAnnouncer [
 	announcer ifNil: [ announcer := BlTextAnnouncer new ]
 ]
 
+{ #category : #comparing }
+BlText >> equals: anObject [
+	| myIterator otherIterator areSame |
+
+	self == anObject
+		ifTrue: [ ^ true ].
+
+	(anObject isKindOf: BlText)
+		ifFalse: [ ^ false ].
+			
+	self size ~= anObject size
+		ifTrue: [ ^ false ].
+
+	myIterator := self iterator.
+	otherIterator := anObject iterator.
+
+	areSame := true.
+	[ areSame and: [ myIterator hasNext and: [ otherIterator hasNext ] ] ]
+		whileTrue: [
+			areSame :=
+				myIterator next = otherIterator next
+					and: [ myIterator attributes asSet = otherIterator attributes asSet ] ].
+
+	areSame := areSame and: [ myIterator hasNext not and: [ otherIterator hasNext not ] ].
+	^ areSame
+]
+
+{ #category : #'text - attributes' }
+BlText >> findAttribute: aBlTextAttribute indicesDo: aBlock [	
+	^ self iterator
+		nextAttributeStartAndEnd: aBlTextAttribute
+		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
+]
+
+{ #category : #'text - attributes' }
+BlText >> findAttributeSuchThat: aComparisonBlock indicesDo: aBlock [	
+	^ self iterator
+		nextAttributeStartAndEndSuchThat: aComparisonBlock
+		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
+]
+
+{ #category : #'text - attributes' }
+BlText >> findAttributes: aCollectionOfBlTextAttribute indicesDo: aBlock [
+	aCollectionOfBlTextAttribute do: [ :eachAttribute |
+		self iterator
+			nextAttributeStartAndEnd: eachAttribute
+			indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ] ]
+]
+
 { #category : #'text - enumeration' }
 BlText >> finder [
-	^ BlPositionFinder new text: self.
+	^ BlPositionFinder new text: self
 ]
 
 { #category : #'text - accessing' }
 BlText >> first [
-	<return: #Character>
+	<return: #Object>
 	
 	^ self at: 1
+]
+
+{ #category : #'text - accessing' }
+BlText >> first: aNumber [
+	<return: #BlRope>
+	^ self from: 1 to: aNumber
 ]
 
 { #category : #'text - accessing' }
@@ -185,19 +341,19 @@ BlText >> from: aStart to: anEnd [
 	<return: #BlSubText>
 	
 	self
-		assert: [ aStart <= anEnd ]
+		assert: [ aStart <= (anEnd + 1) ]
 		description: [ 'Start must not exceed end' ].
 		
 	self
-		assert: [ aStart > 0 or: [ aStart = 0 and: [ anEnd = 0 ] ] ]
-		description: [ 'Start and end must be positive or both zero' ].
+		assert: [ self isNotEmpty or: [ aStart = 1 and: [ anEnd isZero ] ] ]
+		description: [ 'If I am empty then start must be 1 and end must be zero' ].
 
 	^ BlSubText text: self from: aStart to: anEnd
 ]
 
 { #category : #'text - enumeration' }
 BlText >> from: aFromIndex to: aToIndex do: aBlock [
-	"Evaluate aBlock with every character as argument within interval [aFromIndex, aToIndex]"
+	"Evaluate aBlock with every item as argument within interval [aFromIndex, aToIndex]"
 	
 	self subclassResponsibility
 ]
@@ -210,13 +366,66 @@ BlText >> generation [
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
-BlText >> initialize [
-	super initialize.
+{ #category : #'text - attributes' }
+BlText >> hasAttributeSuchThat: aComparisonBlock [
+	<return: #Boolean>
+	self
+		findAttributeSuchThat: aComparisonBlock
+		indicesDo: [ :aStart :anEnd | ^ true ].
+		
+	^ false
+]
+
+{ #category : #'text - testing' }
+BlText >> ifEmpty: aBlock [
+	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
+
+	"Note that the fact that this method returns its receiver in case the receiver is not empty allows one to write expressions like the following ones: self classifyMethodAs: (myProtocol ifEmpty: ['As yet unclassified'])"
+
+	^ self isEmpty
+		ifTrue: aBlock
+		ifFalse: [ self ]
+]
+
+{ #category : #'text - testing' }
+BlText >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
+	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise"
+	"If the notEmptyBlock has an argument, eval with the receiver as its argument"
+
+	^ self isEmpty
+		ifTrue: emptyBlock
+		ifFalse: [ notEmptyBlock cull: self ]
+]
+
+{ #category : #'text - testing' }
+BlText >> ifNotEmpty: aBlock [
+	"Evaluate the given block with the receiver as argument, answering its value
+    unless the receiver is empty, in which case answer the receiver."
+
+	^ self isEmpty
+		ifTrue: [ self ]
+		ifFalse: [ aBlock cull: self ]
+]
+
+{ #category : #'text - testing' }
+BlText >> ifNotEmpty: notEmptyBlock ifEmpty: emptyBlock [
+	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise
+	 If the notEmptyBlock has an argument, eval with the receiver as its argument"
+
+	^ self isEmpty
+		ifTrue: emptyBlock
+		ifFalse: [ notEmptyBlock cull: self ]
 ]
 
 { #category : #'text - modifications' }
 BlText >> insertString: aString at: anIndex [
+	self
+		insertStrings: { aString }
+		atAll: { anIndex }
+]
+
+{ #category : #'text - modifications' }
+BlText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	self subclassResponsibility
 ]
 
@@ -241,7 +450,7 @@ BlText >> isNotEmpty [
 
 { #category : #'text - enumeration' }
 BlText >> iterator [
-	"Return an iterator pointing to the first text item (character) limited only by the text size"
+	"Return an iterator pointing to the first text item limited only by the text size"
 	<return: #BlTextIterator>
 
 	^ self subclassResponsibility
@@ -249,7 +458,7 @@ BlText >> iterator [
 
 { #category : #'text - enumeration' }
 BlText >> iterator: aStartIndex to: anEndIndex [
-	"Return an iterator pointing to the character at anStartIndex and limited by anEndIndex"
+	"Return an iterator pointing to the item at anStartIndex and limited by anEndIndex"
 	<return: #BlTextIterator>
 
 	^ self subclassResponsibility
@@ -257,7 +466,7 @@ BlText >> iterator: aStartIndex to: anEndIndex [
 
 { #category : #'text - accessing' }
 BlText >> last [
-	<return: #Character>
+	<return: #Object>
 	
 	^ self at: self size
 ]
@@ -271,27 +480,98 @@ BlText >> nextGeneration [
 ]
 
 { #category : #'text - notifying' }
-BlText >> notifyDeleted: aFromIndex to: aToIndex [
-	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextDeleted from: aFromIndex to: aToIndex) ]
+BlText >> notifyAttributeAdded: anAttribute from: aFromIndex to: aToIndex [
+	self announcerDo: [ :anAnnouncer | anAnnouncer
+		announce: (BlTextAttributeAdded attribute: anAttribute from: aFromIndex to: aToIndex) ]
 ]
 
 { #category : #'text - notifying' }
-BlText >> notifyStringInserted: aString at: anIndex [
-	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextStringInserted string: aString at: anIndex) ]
+BlText >> notifyAttributesRemovedFrom: aFromIndex to: aToIndex [
+	self announcerDo: [ :anAnnouncer | anAnnouncer
+		announce: (BlTextAttributesRemoved from: aFromIndex to: aToIndex) ]
+]
+
+{ #category : #'text - notifying' }
+BlText >> notifyDeletedAll: theDeletedIntervals requested: theRequestedIntervals texts: theDeletedTexts [
+	theDeletedIntervals
+		ifEmpty: [ ^ self ].
+		
+	theRequestedIntervals
+		ifEmpty: [ ^ self ].
+		
+	theDeletedTexts
+		ifEmpty: [ ^ self ].
+
+	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextsDeleted new
+		texts: theDeletedTexts;
+		requestedIntervals: theRequestedIntervals;
+		finalIntervals: theDeletedIntervals) ]
+]
+
+{ #category : #'text - notifying' }
+BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalIndices requested: aCollectionOfRequestedIndices [
+	aCollectionOfStrings
+		ifEmpty: [ ^ self ].
+		
+	aCollectionOfFinalIndices
+		ifEmpty: [ ^ self ].
+		
+	aCollectionOfRequestedIndices
+		ifEmpty: [ ^ self ].
+
+	self announcerDo: [ :anAnnouncer |
+		| aNonEmptyCollectionOfStrings aNonEmptyCollectionOfFinalIndices aNonEmptyCollectionOfRequestedIndices |
+		
+		aNonEmptyCollectionOfStrings := Array streamContents: [ :aStreamCollectionOfStrings |
+			aNonEmptyCollectionOfFinalIndices := Array streamContents: [ :aStreamCollectionOfFinalIndices |
+				aNonEmptyCollectionOfRequestedIndices := Array streamContents: [ :aStreamCollectionOfRequestedIndices |
+					aCollectionOfStrings withIndexDo: [ :eachString :eachIndex |
+						eachString ifNotEmpty: [
+							aStreamCollectionOfStrings nextPut: eachString.
+							aStreamCollectionOfFinalIndices nextPut: (aCollectionOfFinalIndices at: eachIndex).
+							aStreamCollectionOfRequestedIndices nextPut: (aCollectionOfRequestedIndices at: eachIndex)
+						]
+					].
+				]
+			]
+		].
+	
+		aNonEmptyCollectionOfStrings
+			ifEmpty: [ ^ self ].
+		
+		anAnnouncer
+			announce: (BlTextStringsInserted new
+				strings: aNonEmptyCollectionOfStrings;
+				requestedIndices: aNonEmptyCollectionOfFinalIndices;
+				finalIndices: aNonEmptyCollectionOfRequestedIndices) ]
+]
+
+{ #category : #copying }
+BlText >> postCopy [
+	announcer := nil
 ]
 
 { #category : #'text - printing' }
 BlText >> printOn: aStream [
-	 [ self do: [ :aChar | aStream nextPut: aChar ] ]
-		on: Error do: [ :e | aStream nextPutAll: e description ]
+
+	BlTextNonPrintableCharacterPrinter print: self on: aStream
 ]
 
 { #category : #'text - printing' }
-BlText >> putOn: aWriteStream from: aStart to: anEnd [
+BlText >> printOn: aWriteStream from: aStart to: anEnd [
 	self
 		from: aStart
 		to: anEnd
-		do: [ :aChar | aWriteStream nextPut: aChar ]
+		do: [ :anItem |
+			anItem isCharacter
+				ifTrue: [ aWriteStream nextPut: anItem ]
+				ifFalse: [ aWriteStream print: anItem ] ]
+]
+
+{ #category : #'text - enumeration' }
+BlText >> readStream [
+	"Compatibility with ${method:SequenceableCollection>>#readStream}$"
+	^ BlTextReadStream new iterator: self iterator
 ]
 
 { #category : #'text - copying' }
@@ -300,6 +580,32 @@ BlText >> readonly [
 	<return: #BlReadonlyText>
 
 	^ BlReadonlyText text: self
+]
+
+{ #category : #'text - attributes' }
+BlText >> removeAttribute: aBlTextAttribute [
+	self removeAttributes: { aBlTextAttribute }
+]
+
+{ #category : #'text - attributes' }
+BlText >> removeAttributes: aCollectionOfAttributes [
+	| theAttributesToRemove |
+	
+	theAttributesToRemove := aCollectionOfAttributes asIdentitySet.
+	self clearAttributes: [ :eachAttribute | theAttributesToRemove includes: eachAttribute ]
+]
+
+{ #category : #'text - modifications' }
+BlText >> replace: aStart to: anEnd withString: aString [
+	self delete: aStart to: anEnd.
+	self insertString: aString at: aStart
+]
+
+{ #category : #'text - accessing' }
+BlText >> second [
+	<return: #Object>
+	
+	^ self at: 2
 ]
 
 { #category : #'text - accessing' }
@@ -348,9 +654,18 @@ BlText >> textOffset [
 	^ 0
 ]
 
+{ #category : #'text - accessing' }
+BlText >> third [
+	<return: #Object>
+	
+	^ self at: 3
+]
+
 { #category : #'text - modifications' }
 BlText >> trimmer [
-	^ BlTextTrimmer new text: self.
+	<return: #BlTextTrimmer>
+
+	^ BlTextTrimmer new text: self
 ]
 
 { #category : #'text - attributes' }
@@ -400,8 +715,8 @@ BlText >> withIndexCollect: elementAndIndexBlock [
 	^ Array streamContents: [ :aStream |
 		| anIndex |
 		anIndex := 1.
-		self do: [ :aCharacter |
-			aStream nextPut: (elementAndIndexBlock value: aCharacter value: anIndex).
+		self do: [ :anItem |
+			aStream nextPut: (elementAndIndexBlock value: anItem value: anIndex).
 			anIndex := anIndex + 1 ] ]
 ]
 

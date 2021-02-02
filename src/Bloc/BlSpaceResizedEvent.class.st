@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'extent'
 	],
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #accessing }

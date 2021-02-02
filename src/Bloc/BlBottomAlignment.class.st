@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBottomAlignment,
 	#superclass : #BlVerticalAlignment,
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #'class initialization' }

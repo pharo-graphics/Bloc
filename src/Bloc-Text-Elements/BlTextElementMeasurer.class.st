@@ -4,12 +4,7 @@ Class {
 	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : #dispatch }
-BlTextElementMeasurer >> measureTextParagraph: aParagraph [
-	aParagraph measureOn: self measurer
-]
-
-{ #category : #'instance creation' }
-BlTextElementMeasurer >> measurer [
-	^ self subclassResponsibility
+{ #category : #'host space - rendering' }
+BlTextElementMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
+	self subclassResponsibility
 ]

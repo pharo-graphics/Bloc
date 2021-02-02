@@ -65,17 +65,6 @@ BlTextParagraphLine >> isEmpty [
 	^ self spans isEmpty
 ]
 
-{ #category : #measurement }
-BlTextParagraphLine >> layout [
-
-	self spans
-		ifEmpty: [ ^ self ].
-
-	self spanAdded: self spans first.	
-	2 to: self spans size do:
-		[ :index | self spanAdded: (self spans at: index) after: (self spans at: index - 1) ]
-]
-
 { #category : #private }
 BlTextParagraphLine >> moveSpansBy: aPoint [
 	"Move baseline of all spans by a given delta as a point"
@@ -93,7 +82,18 @@ BlTextParagraphLine >> normalize: aScale [
 		
 	spans do: [ :aSpan | aSpan normalize: aScale ].
 	
-	self layout
+	self recomputeLineLayout
+]
+
+{ #category : #measurement }
+BlTextParagraphLine >> recomputeLineLayout [
+
+	self spans
+		ifEmpty: [ ^ self ].
+
+	self spanAdded: self spans first.	
+	2 to: self spans size do:
+		[ :index | self spanAdded: (self spans at: index) after: (self spans at: index - 1) ]
 ]
 
 { #category : #hooks }
@@ -107,6 +107,7 @@ BlTextParagraphLine >> spanAdded: aSpan [
 	top := aSpan top.
 	width := aSpan width.
 	height := aSpan height.
+	advance := aSpan advance.
 	
 	ascent := aSpan ascent.
 	descent := aSpan descent.
@@ -119,8 +120,19 @@ BlTextParagraphLine >> spanAdded: aSpan [
 
 { #category : #hooks }
 BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
+	aLastSpan isVertical
+		ifTrue: [ aPreviousSpan isVertical
+			ifTrue: [ self spanAddedVertical: aLastSpan afterVertical: aPreviousSpan ]
+			ifFalse: [ self spanAddedVertical: aLastSpan afterHorizontal: aPreviousSpan ] ]
+		ifFalse: [ aPreviousSpan isVertical
+			ifTrue: [ self spanAddedHorizontal: aLastSpan afterVertical: aPreviousSpan ]
+			ifFalse: [ self spanAddedHorizontal: aLastSpan afterHorizontal: aPreviousSpan ] ]
+]
+
+{ #category : #hooks }
+BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterHorizontal: aPreviousSpan [
 	| previousBottom newBottom |
-	
+
 	aLastSpan baseline: aPreviousSpan baseline + (aPreviousSpan advance @ 0).
 
 	previousBottom := top + height.
@@ -129,11 +141,27 @@ BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 	height := height max: ((previousBottom max: newBottom) - top).
 
 	width := aLastSpan baseline x + aLastSpan left + aLastSpan width.
+	advance := advance + aLastSpan advance.
 
-	ascent := ascent max: aLastSpan ascent.
+	ascent := ascent min: aLastSpan ascent.
 	descent := descent max: aLastSpan descent.
 
 	to := aLastSpan to
+]
+
+{ #category : #hooks }
+BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterVertical: aPreviousSpan [
+	self shouldBeImplemented
+]
+
+{ #category : #hooks }
+BlTextParagraphLine >> spanAddedVertical: aLastSpan afterHorizontal: aPreviousSpan [
+	self shouldBeImplemented
+]
+
+{ #category : #hooks }
+BlTextParagraphLine >> spanAddedVertical: aLastSpan afterVertical: aPreviousSpan [
+	self shouldBeImplemented
 ]
 
 { #category : #accessing }

@@ -10,14 +10,21 @@ Class {
 		'widthSpec',
 		'heightSpec'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
+
+{ #category : #'instance creation' }
+BlExtentMeasurementSpec class >> atMost: anExtent [
+	^ self new
+		widthSpec: (BlMeasurementSpec atMost: anExtent x asFloat);
+		heightSpec: (BlMeasurementSpec atMost: anExtent y asFloat)
+]
 
 { #category : #'instance creation' }
 BlExtentMeasurementSpec class >> exact: anExtent [
 	^ self new
-		widthSpec: (BlMeasurementSpec exact: anExtent x);
-		heightSpec: (BlMeasurementSpec exact: anExtent y)
+		widthSpec: (BlMeasurementSpec exact: anExtent x asFloat);
+		heightSpec: (BlMeasurementSpec exact: anExtent y asFloat)
 ]
 
 { #category : #'instance creation' }
@@ -58,6 +65,11 @@ BlExtentMeasurementSpec >> isExact [
 	^ self widthSpec isExact and: [ self heightSpec isExact ]
 ]
 
+{ #category : #geometry }
+BlExtentMeasurementSpec >> min: aMinSize max: aMaxSize [
+	^ (self widthSpec min: aMinSize x max: aMaxSize x) @ (self heightSpec min: aMinSize y max: aMaxSize y)
+]
+
 { #category : #printing }
 BlExtentMeasurementSpec >> printOn: aStream [
 	aStream nextPutAll: 'width: ('.
@@ -69,10 +81,10 @@ BlExtentMeasurementSpec >> printOn: aStream [
 
 { #category : #geometry }
 BlExtentMeasurementSpec >> sizeFor: anExtent [
-	|width height|
+	| width height |
 	width := self widthSpec sizeFor: anExtent x.
 	height := self heightSpec sizeFor: anExtent y.
-	^ width@height
+	^ width @ height
 ]
 
 { #category : #accessing }

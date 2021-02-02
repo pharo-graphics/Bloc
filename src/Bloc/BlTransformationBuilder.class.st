@@ -18,7 +18,7 @@ Class {
 		'origin',
 		'target'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #'instance creation' }
@@ -35,6 +35,11 @@ BlTransformationBuilder >> apply [
 
 	anElementTransformation := BlElementLocalTransformation with: transformation.
 	target transformation: anElementTransformation
+]
+
+{ #category : #origin }
+BlTransformationBuilder >> centerOrigin [
+	self origin: BlAffineTransformationCenterOrigin new
 ]
 
 { #category : #accessing }
@@ -69,7 +74,7 @@ BlTransformationBuilder >> flipY [
 BlTransformationBuilder >> inherit [
 	"Append existing element's transformations to the new transformation list"
 	
-	target transformation transformation
+	target transformation asElementTransformation transformation
 		do: [ :aTransformation | transformation addTransformation: aTransformation ]
 ]
 
@@ -87,12 +92,22 @@ BlTransformationBuilder >> matrix: aMatrix [
 	transformation addTransformation: ((BlMatrixTransformation matrix: aMatrix) origin: BlAffineTransformationTopLeftOrigin new)
 ]
 
-{ #category : #transformations }
+{ #category : #origin }
+BlTransformationBuilder >> normalizedOrigin: aPoint [
+	origin := BlAffineTransformationNormalizedPositionOrigin position: aPoint
+]
+
+{ #category : #origin }
 BlTransformationBuilder >> origin: anAffineTransformationOrigin [
 	"Change transformation origin for all future transformations.
 	Note: I do not change origins of already exisiting transformations"
 
 	origin := anAffineTransformationOrigin
+]
+
+{ #category : #origin }
+BlTransformationBuilder >> rightCenterOrigin [
+	self origin: BlAffineTransformationRightCenterOrigin new
 ]
 
 { #category : #transformations }
@@ -107,9 +122,14 @@ BlTransformationBuilder >> rotateBy: aDegreesAngle around: aVector [
 
 { #category : #transformations }
 BlTransformationBuilder >> scaleBy: aVector [
+	| aScaleVector |
 	"Append a scaling transformation by a given vector"
 
-	transformation addTransformation: ((BlScalingTransformation scale: aVector asScale3D) origin: origin)
+	aScaleVector := aVector asScale3D.
+	aScaleVector isOne
+		ifTrue: [ ^ self ].
+
+	transformation addTransformation: ((BlScalingTransformation scale: aScaleVector) origin: origin)
 ]
 
 { #category : #transformations }
@@ -130,6 +150,21 @@ BlTransformationBuilder >> scaleTo: aVector [
 	
 ]
 
+{ #category : #transformations }
+BlTransformationBuilder >> shearBy: aCoefficientPoint [
+	transformation addTransformation: ((BlShearTransformation new coefficient: aCoefficientPoint) origin: origin)
+]
+
+{ #category : #transformations }
+BlTransformationBuilder >> skewX: anAngleInDegrees [
+	transformation addTransformation: ((BlShearTransformation new angleX: anAngleInDegrees) origin: origin)
+]
+
+{ #category : #transformations }
+BlTransformationBuilder >> skewY: anAngleInDegrees [
+	transformation addTransformation: ((BlShearTransformation new angleY: anAngleInDegrees) origin: origin)
+]
+
 { #category : #accessing }
 BlTransformationBuilder >> target [
 	"Return a target object whose transformation we build"
@@ -143,9 +178,19 @@ BlTransformationBuilder >> target: anObject [
 	target := anObject
 ]
 
+{ #category : #origin }
+BlTransformationBuilder >> topLeftOrigin [
+	self origin: BlAffineTransformationTopLeftOrigin new
+]
+
 { #category : #transformations }
 BlTransformationBuilder >> translateBy: aVector [
 	"Append a translation transformation by a given vector"
+	| aTranslationVector |
 	
-	transformation addTransformation: ((BlTranslationTransformation translation: aVector asTranslate3D) origin: origin)
+	aTranslationVector := aVector asTranslate3D.
+	aTranslationVector isZero
+		ifTrue: [ ^ self ].
+	
+	transformation addTransformation: ((BlTranslationTransformation translation: aTranslationVector) origin: origin)
 ]

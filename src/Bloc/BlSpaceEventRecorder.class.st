@@ -4,7 +4,7 @@ I am used to record space events coming from the host window
 Class {
 	#name : #BlSpaceEventRecorder,
 	#superclass : #Object,
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'api - recording' }

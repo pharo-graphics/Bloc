@@ -4,16 +4,31 @@ I am a very basic layout that supports very simple measurement and positions ele
 Class {
 	#name : #BlBasicLayout,
 	#superclass : #BlLayout,
-	#category : 'Bloc-Layouts-Basic'
+	#classInstVars : [
+		'uniqueInstance'
+	],
+	#category : #'Bloc-Layouts-Basic'
 }
 
+{ #category : #accessing }
+BlBasicLayout class >> cleanUp [
+	uniqueInstance := nil
+]
+
+{ #category : #accessing }
+BlBasicLayout class >> uniqueInstance [
+	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
+]
+
 { #category : #layout }
-BlBasicLayout >> layout: anElement in: aRectangle [
+BlBasicLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 
 	anElement children accountedByLayout do: [ :child |
-		child applyLayoutIn: child measuredBounds asRectangle ].
+		| childLayoutBounds |
+		childLayoutBounds := child constraints position extent: child measuredExtent.
+		child applyLayoutIn: childLayoutBounds context: aBlElementBoundsUpdater ].
 
-	self layoutIgnored: anElement
+	self layoutIgnored: anElement context: aBlElementBoundsUpdater
 ]
 
 { #category : #measure }

@@ -109,7 +109,7 @@ BlGridLayoutAxis >> addComponentSizesIn: theArcs links: links [
 ]
 
 { #category : #measure }
-BlGridLayoutAxis >> applyLayoutIn: size [
+BlGridLayoutAxis >> applyLayoutWithin: size [
 
 	self parentConstraintsMin: size max: size.
 	self locations

@@ -2,10 +2,9 @@ Class {
 	#name : #BlFocusProcessor,
 	#superclass : #BlBaseEventProcessor,
 	#instVars : [
-		'focusOwner',
 		'focusChain'
 	],
-	#category : #'Bloc-Space-Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'event firing' }
@@ -13,6 +12,14 @@ BlFocusProcessor >> fireBlurEvent: anElement [
 	"Create and send blur event that doesn't bubble, perform simple direct dispatch to the given target element"
 	self
 		dispatchEvent: (self newBlurEvent target: anElement)
+		target: anElement
+]
+
+{ #category : #'event firing' }
+BlFocusProcessor >> fireBlurEvent: anElement dueTo: aFocusReason [
+	"Create and send blur event that doesn't bubble, perform simple direct dispatch to the given target element"
+	self
+		dispatchEvent: (self newBlurEvent target: anElement; reason: aFocusReason)
 		target: anElement
 ]
 
@@ -33,10 +40,34 @@ BlFocusProcessor >> fireFocusInEvent: anElement [
 ]
 
 { #category : #'event firing' }
+BlFocusProcessor >> fireFocusInEvent: anElement from: aTopEventTarget [
+	"Send focusIn event that should bubble"
+	
+	anElement == aTopEventTarget
+		ifTrue: [ ^ self ].
+	
+	self fireEvent: (self newFocusInEvent target: anElement) from: aTopEventTarget
+]
+
+{ #category : #'event firing' }
 BlFocusProcessor >> fireFocusOutEvent: anElement [
 	"Send focusOut event that should bubble"
 
 	self fireEvent: (self newFocusOutEvent target: anElement)
+]
+
+{ #category : #'event firing' }
+BlFocusProcessor >> fireFocusOutEvent: anElement dueTo: aFocusReason [
+	"Send focusOut event that should bubble"
+
+	self fireEvent: (self newFocusOutEvent target: anElement; reason: aFocusReason)
+]
+
+{ #category : #'event firing' }
+BlFocusProcessor >> fireFocusOutEvent: anElement from: aTopEventTarget dueTo: aFocusReason [
+	"Send focusOut event that should bubble"
+
+	self fireEvent: (self newFocusOutEvent target: anElement; reason: aFocusReason) from: aTopEventTarget
 ]
 
 { #category : #'event firing' }
@@ -51,7 +82,12 @@ BlFocusProcessor >> fireFocusTransferEvent: anElement from: aPreviousFocusedElem
 
 { #category : #accessing }
 BlFocusProcessor >> focusOwner [
-	^ focusOwner
+	^ self space focusOwner
+]
+
+{ #category : #accessing }
+BlFocusProcessor >> focusOwner: anElement [
+	self space focusOwner: anElement
 ]
 
 { #category : #'focus - processing' }
@@ -66,22 +102,28 @@ BlFocusProcessor >> hasFocusOwner [
 	Note: focus owner may not exist during space initialization or inbetween blur and focus events"
 	<return: #Boolean>
 
-	^ focusOwner isNotNil
+	^ self focusOwner notNil
 ]
 
 { #category : #'focus - requesting' }
 BlFocusProcessor >> looseFor: anElement [
-	| evt |
-	focusOwner ~= anElement
+	self
+		deprecated: 'Please use loseFor: instead.'
+		transformWith:
+			'`@receiver looseFor: `@statements1'
+				-> '`@receiver loseFor: `@statements1'.
+
+	self loseFor: anElement
+]
+
+{ #category : #'focus - requesting' }
+BlFocusProcessor >> loseFor: anElement [
+	self focusOwner ~= anElement
 		ifTrue: [ ^ self ].
-	
-	evt := BlBaseFocusEvent new
-		target: anElement;
-		yourself.
 		
-	self processBlur: evt.
+	self processBlur: anElement.
 	"don't forget to forget focused element"
-	focusOwner := nil
+	self focusOwner: nil
 ]
 
 { #category : #'instance creation' }
@@ -131,6 +173,12 @@ BlFocusProcessor >> newFocusTransferEvent [
 	^ BlFocusTransferEvent new
 ]
 
+{ #category : #'initialize-release' }
+BlFocusProcessor >> onSpaceClosed [
+	self focusOwner: nil.
+	focusChain := nil
+]
+
 { #category : #'focus - processing' }
 BlFocusProcessor >> processBlur: anElement [
 	self
@@ -138,9 +186,32 @@ BlFocusProcessor >> processBlur: anElement [
 		description: [ 'Blur event can only be processed when there is a focused element' ].
 
 	"First make a given element to loose focus, then send events"
+	self space focusOwner: nil.
 	anElement focused: false.
 	focusChain leafsDo: [ :aLeafElement | self fireFocusOutEvent: aLeafElement ].
 	self fireBlurEvent: anElement
+]
+
+{ #category : #'focus - processing' }
+BlFocusProcessor >> processBlur: anElement dueToFocus: aNewFocusedElement dueTo: aFocusReason [
+	self
+		assert: [ self hasFocusOwner ]
+		description: [ 'Blur event can only be processed when there is a focused element' ].
+
+	"First make a given element to loose focus, then send events"
+	self space focusOwner: nil.
+	anElement focused: false.
+
+	focusChain leafsDo: [ :aLeafElement |
+		"if a new focused element is a child we don't have to send focus-out event"
+		(aNewFocusedElement hasParent: aLeafElement)
+			ifFalse: [
+				aLeafElement
+					firstCommonParent: aNewFocusedElement
+					ifFound: [ :aCommonParent | self fireFocusOutEvent: aLeafElement from: aCommonParent dueTo: aFocusReason ]
+					ifNone: [ self fireFocusOutEvent: aLeafElement dueTo: aFocusReason ] ] ].
+
+	self fireBlurEvent: anElement dueTo: aFocusReason
 ]
 
 { #category : #'focus - processing' }
@@ -149,14 +220,12 @@ BlFocusProcessor >> processFocus: anElement [
 		assert: [ anElement isNotNil ]
 		description: [ 'Can not give focus to nil' ].
 	self
-		assert: [ anElement ~= focusOwner ]
+		assert: [ anElement ~= self focusOwner ]
 		description: [ 'Can not give focus to the already focused element' ].
 
 	"first make element to be focused"
-	focusOwner := anElement.
-	focusChain := BlFocusChain of: focusOwner.
-
-	self space focusOwner: anElement.
+	self focusOwner: anElement.
+	focusChain := BlFocusChain of: self focusOwner.
 	anElement focused: true.
 
 	"then send events"
@@ -165,18 +234,34 @@ BlFocusProcessor >> processFocus: anElement [
 ]
 
 { #category : #'focus - processing' }
-BlFocusProcessor >> processTransfer: anElement [
+BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 	self
 		assert: [ anElement isNotNil ]
 		description: [ 'Can not give focus to nil' ].
 	self
-		assert: [ anElement ~= focusOwner ]
+		assert: [ anElement ~= self focusOwner ]
 		description: [ 'Can not give focus to the already focused element' ].
-	self
-		assert: [ self hasFocusOwner ]
-		description: [ 'Can not transfer focus from non-focused element' ].
 
-	self fireFocusTransferEvent: anElement from: focusOwner
+	"first make element to be focused"
+	self focusOwner: anElement.
+	focusChain := BlFocusChain of: self focusOwner.
+	anElement focused: true.
+
+	"(anElement id asSymbol = #'container-1')
+		ifTrue: [ self halt ]."
+
+	"then send events"	
+	focusChain leafsDo: [ :aLeafElement |
+		"if a new focused element is a child we don't have to send focus-in event"
+		(aLeafElement hasParent: aPreviousFocus)
+			ifFalse: [
+				aLeafElement
+					firstCommonParent: aPreviousFocus
+					ifFound: [ :aCommonParent | self fireFocusInEvent: aLeafElement from: aCommonParent ]
+					ifNone: [ self fireFocusInEvent: aLeafElement ] ]
+			ifTrue: [ self fireFocusInEvent: aLeafElement from: aPreviousFocus ] ].
+	
+	self fireFocusEvent: anElement
 ]
 
 { #category : #'focus - processing' }
@@ -192,36 +277,28 @@ BlFocusProcessor >> processWindowFocusOut: anEvent [
 ]
 
 { #category : #'focus - requesting' }
-BlFocusProcessor >> requestFor: anElement [
+BlFocusProcessor >> requestFor: anElement dueTo: aFocusReason [
+	| aPreviousFocusOwner |
 	self
 		assert: [ anElement isNotNil ]
 		description: [ 'Focus requester must not be nil!' ].
 
-	focusOwner = anElement
+	self focusOwner = anElement
 		ifTrue: [ ^ self ].
+
+	anElement isFocusable
+		ifFalse: [ ^ self ].
+
+	"keep reference to the previous focus owner"
+	aPreviousFocusOwner := self focusOwner.
 
 	"we should only process blur event when there is focused element, otherwise skip it"
 	self hasFocusOwner
-		ifTrue: [ self processBlur: focusOwner ].
+		ifTrue: [ self processBlur: aPreviousFocusOwner dueToFocus: anElement dueTo: aFocusReason ].
 
-	"don't forget to forget focused element"
-	focusOwner := nil.
+	self focusOwner: nil.
 	"focus is processed with new requested focus owner"
-	self processFocus: anElement
-]
-
-{ #category : #'focus - requesting' }
-BlFocusProcessor >> transferTo: anElement [
-	self
-		assert: [ anElement isNotNil ]
-		description: [ 'Can not transfer focus to nil!' ].
-
-	self hasFocusOwner
-		ifFalse: [ ^ self requestFor: anElement ].
-
-	self processTransfer: anElement.
-	self processBlur: focusOwner.
-	"don't forget to forget focused element"
-	focusOwner := nil.
-	self processFocus: anElement
+	aPreviousFocusOwner
+		ifNil: [ self processFocus: anElement ]
+		ifNotNil: [ self processFocus: anElement dueToTransferFrom: aPreviousFocusOwner ]
 ]

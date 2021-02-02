@@ -15,7 +15,7 @@ Class {
 		'high',
 		'parent'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #'instance creation' }
@@ -83,6 +83,26 @@ BlSelectionNode >> contains: anIndex [
 	^ false
 ]
 
+{ #category : #'tree - testing' }
+BlSelectionNode >> containsIndex: anIndex [
+	"Return true if this selection interval includes a given index, false otherwise"
+	<return: #Boolean>
+
+	anIndex > self high
+		ifTrue: [ ^ false ].
+		
+	(self selection containsIndex: anIndex)
+		ifTrue: [ ^ true ].
+		
+	(self hasLeft and: [ anIndex <= self left high ])
+		ifTrue: [ ^ self left containsIndex: anIndex ].
+		
+	(self hasRight and: [ anIndex <= self right high ])
+		ifTrue: [ ^ self right containsIndex: anIndex ].
+		
+	^ false
+]
+
 { #category : #'instance creation' }
 BlSelectionNode >> createNode: aSelection [
 	^ (self class selection: aSelection)
@@ -143,7 +163,7 @@ BlSelectionNode >> do: aBlock [
 { #category : #'tree - searching' }
 BlSelectionNode >> findMax [
 	"Return a minimum node in a subtree"
-	<return: #BltextSelectionNode>
+	<return: #BlSelectionNode>
 	| aCurrentNode |
 	
 	aCurrentNode := self.
@@ -155,7 +175,7 @@ BlSelectionNode >> findMax [
 { #category : #'tree - searching' }
 BlSelectionNode >> findMin [
 	"Return a minimum node in a subtree"
-	<return: #BltextSelectionNode>
+	<return: #BlSelectionNode>
 	| aCurrentNode |
 	
 	aCurrentNode := self.
@@ -260,6 +280,21 @@ BlSelectionNode >> parent [
 { #category : #accessing }
 BlSelectionNode >> parent: aBlSelectionNode [
 	parent := aBlSelectionNode
+]
+
+{ #category : #copying }
+BlSelectionNode >> postCopy [
+	right := right copy.
+	right ifNotNil: [ right parent: self ].
+	
+	left := left copy.
+	left ifNotNil: [ left parent: self ].
+	
+	high := high copy.
+	selection := selection copy
+	
+	
+	
 ]
 
 { #category : #printing }

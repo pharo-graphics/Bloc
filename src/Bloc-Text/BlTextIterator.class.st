@@ -8,7 +8,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'iterator - accessing' }
@@ -66,20 +66,70 @@ BlTextIterator >> hasPrevious [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - testing' }
-BlTextIterator >> isNewLine: anItem [
-	"Return true of given item represents a carriage return, false otherwise"
-	<return: #Boolean>
-
-	^ anItem = Character cr or: [ anItem = Character lf ]
-]
-
 { #category : #'iterator - enumeration' }
 BlTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
 	<return: #Character or: #Object>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> nextAttributeStartAndEnd: aBlTextAttribute indicesDo: anIndicesBlock [
+	"Find and iterate over the start and end indices of the given attribute"	
+	
+	^ self
+		nextAttributeStartAndEndSuchThat: [ :eachAttribute | eachAttribute == aBlTextAttribute ]
+		indicesDo: anIndicesBlock
+]
+
+{ #category : #'iterator - enumeration' }
+BlTextIterator >> nextAttributeStartAndEndSuchThat: aComparisonBlock indicesDo: anIndicesBlock [
+	"Find and iterate over the start and end indices of the given attribute"	
+	| startPosition endPosition isAttributeStartFound isAttributeEndFound |
+
+	self hasNext
+		ifFalse: [ self error: 'reached end of rope' ].
+	
+	startPosition := nil.
+	endPosition := nil.
+	
+	isAttributeStartFound := false.
+	isAttributeEndFound := false.
+
+	[ self hasNext and: [
+		| hasAttribute aSpan aCurrentPosition |
+
+		aCurrentPosition := self position + 1.
+
+		aSpan := self nextSpan.
+		hasAttribute := aSpan attributes anySatisfy: [ :eachAttribute | aComparisonBlock value: eachAttribute ] .
+		
+		"we found the start of the attribute"
+		(hasAttribute and: [ isAttributeStartFound not ])
+			ifTrue: [
+				startPosition := aCurrentPosition.
+				isAttributeStartFound := true ].
+	
+		"we found the end of the attribute"
+		(hasAttribute not and: [ isAttributeStartFound ])
+			ifTrue: [
+				endPosition := aCurrentPosition - 1.
+				isAttributeEndFound := true ].
+		
+		(isAttributeStartFound and: [ isAttributeEndFound ]) not
+	] ] whileTrue.
+
+	(isAttributeStartFound and: [ isAttributeEndFound not ])
+		ifTrue: [
+			endPosition := self position.
+			isAttributeEndFound := true ].
+	
+	^ (isAttributeStartFound and: [ isAttributeEndFound ])
+		ifTrue: [ 
+			anIndicesBlock
+				value: startPosition
+				value: endPosition ]
 ]
 
 { #category : #'iterator - enumeration' }
@@ -143,7 +193,7 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
 		- start index of line
 		- end index of line without line delimiter
-		- end index of line including line delimiter(s) CR, LF or CRLF"
+		- end index of line including line delimiter(s)"
 		
 	self subclassResponsibility
 ]
@@ -154,13 +204,13 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 		execute aSplitBlock with the 3 arguments for each potential line:
 			- start index of line
 			- end index of line without line delimiter
-			- end index of line including line delimiter(s) CR, LF or CRLF.
+			- end index of line including line delimiter(s).
 	
 	If aMergeBlock returns false, then procide with
 		execute anIndicesBlock with 3 arguments for each line:
 			- start index of line
 			- end index of line without line delimiter
-			- end index of line including line delimiter(s) CR, LF or CRLF.
+			- end index of line including line delimiter(s).
 	
 	else if aMergeBlock returns true ignore a line delimiter and `merge` lines"
 	| shouldMerge actualStart actualEnd actualDelimiterIndex |
@@ -180,10 +230,12 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 				ifNil: [ actualStart := aStart ].
 			
 			actualEnd := anEnd.
-			actualDelimiterIndex := aDelimiterEnd ] ].
+			actualDelimiterIndex := aDelimiterEnd.
+			
+			self hasNext ifFalse: [ shouldMerge := false ] ] ].
 	
 	self
-		assert: [ actualStart <= actualEnd ]
+		assert: [ actualStart <= (actualEnd + 1) ]
 		description: [ 'Start must not exceed end' ].
 		
 	self

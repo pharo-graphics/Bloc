@@ -7,10 +7,12 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'hostSpace',
-		'hostRenderer'
+		'physicalSize',
+		'scaleFactor',
+		'shouldUpdateEveryFrame',
+		'updateActions'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #accessing }
@@ -29,96 +31,90 @@ BlHostRendererSurface class >> supportedBy: anObject [
 	^ self subclassResponsibility
 ]
 
-{ #category : #geometry }
-BlHostRendererSurface >> canvasExtent [
-	"Return current canvas extent in pixels as a Point.
-	Note, that canvas extent is different from windowExtent
-	and is normally x2 bigger on retina screens"
-	<return: #Point>
+{ #category : #'api - updates' }
+BlHostRendererSurface >> addUpdateAction: aValuable [
+	updateActions add: aValuable
+]
 
-	^ self hostSpace canvasExtent
+{ #category : #initialization }
+BlHostRendererSurface >> createSpaceRendererOn: anObject [
+	<return: #BlHostSpaceRenderer>
+
+	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+BlHostRendererSurface >> createSurfaceRendererOn: anObject [
+	<return: #BlHostSurfaceRenderer>
+
+	^ self subclassResponsibility
 ]
 
 { #category : #geometry }
 BlHostRendererSurface >> extent [
 	"Return an actual extent of the underlying surface.
-	Note: between frames #extent may be different from canvas or window extents because
-	those two methods return immediate/current window extent by asking host window directly"
+	Note: #extent may be different from canvas or window extents"
 	<return: #Point>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-BlHostRendererSurface >> hostRenderer [
-	^ hostRenderer
-]
-
-{ #category : #accessing }
-BlHostRendererSurface >> hostRenderer: anObject [
-	hostRenderer := anObject
-]
-
-{ #category : #accessing }
-BlHostRendererSurface >> hostSpace [
-	^ hostSpace
-]
-
-{ #category : #accessing }
-BlHostRendererSurface >> hostSpace: anObject [
-	hostSpace := anObject
+{ #category : #initialization }
+BlHostRendererSurface >> initialize [
+	super initialize.
+	
+	shouldUpdateEveryFrame := false.
+	updateActions := OrderedCollection new
 ]
 
 { #category : #initialization }
-BlHostRendererSurface >> initializeOn: anObject [
-	"Initialize a given object to work with this surface.
-	must be implemented by subclasses"
-	
-	self subclassResponsibility
+BlHostRendererSurface >> initializeForHostSpace: aBlHostSpace [
+	physicalSize := aBlHostSpace physicalSize.
+	scaleFactor := aBlHostSpace scaleFactor
 ]
 
-{ #category : #initialization }
-BlHostRendererSurface >> initializeResourcesOn: aHostRenderer [
-	"Initialize me and host renderer depending on surface type.
-	must be implemented by subclasses"
-	
-	self subclassResponsibility
+{ #category : #geometry }
+BlHostRendererSurface >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #FensterLogicalSize>
+
+	^ self physicalSize asLogical: self scaleFactor
 ]
 
-{ #category : #rendering }
-BlHostRendererSurface >> prepareToRender: aSpace [
-	"Dispatch preparation to render through host space based on surface type"
-	
-	self subclassResponsibility
+{ #category : #'api - updates' }
+BlHostRendererSurface >> performUpdates [
+	updateActions do: [ :eachUpdateAction | eachUpdateAction value ]
 ]
 
-{ #category : #presenting }
-BlHostRendererSurface >> presentAreas: aCollectionOfRectangles [
-	self subclassResponsibility
-]
+{ #category : #geometry }
+BlHostRendererSurface >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #FensterPhysicalSize>
 
-{ #category : #rendering }
-BlHostRendererSurface >> renderFor: aSpace [
-	"Dispatch render process through host space based on surface type"
-	
-	self subclassResponsibility
+	^ physicalSize
 ]
 
 { #category : #geometry }
 BlHostRendererSurface >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
+	"Return a scaling dpi factor from logical to physical coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
+	<return: #Number>
 	
-	^ self hostSpace scaleFactor
+	^ scaleFactor
 ]
 
-{ #category : #geometry }
-BlHostRendererSurface >> windowExtent [
-	"Return current window extent in pixels as a Point.
-	Note, that window extent is different from canvasExtent
-	and is normally x2 smaller on retina screens"
-	<return: #Point>
+{ #category : #'api - updates' }
+BlHostRendererSurface >> shouldUpdateEveryFrame [
+	<return: #Boolean>
 
-	^ self hostSpace windowExtent
+	^ shouldUpdateEveryFrame
+]
+
+{ #category : #'api - updates' }
+BlHostRendererSurface >> updateEveryFrame [
+	shouldUpdateEveryFrame := true
 ]
