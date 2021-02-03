@@ -1,7 +1,8 @@
-# This repository is discontinued.
-Active development happens in https://github.com/feenkcom/Bloc
-
 # Bloc
+This repository contains the code for Bloc that may be included in the future in Pharo.
+It retrofits a part of the development made at http://github.com/feenkcom/bloc.
+This version may contain less features and evolve slower. We are currently identifying the core we want for Pharo.
+
 
 [Installation](#installation) | [Contributing](#contributing) |  [License](#license)
 
