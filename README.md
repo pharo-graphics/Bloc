@@ -1,7 +1,7 @@
 # Bloc
 This repository contains the code for Bloc that may be included in the future in Pharo.
 It retrofits a part of the development made at http://github.com/feenkcom/bloc.
-This version will focus on diverse features and stability.  
+This version will focus on core features and stability.  
 We are currently identifying the core we want for Pharo.
 
 
