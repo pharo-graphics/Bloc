@@ -17,7 +17,8 @@ Class {
 		'selection',
 		'baseline',
 		'measurement',
-		'measurer'
+		'measurer',
+		'defaultFontSize'
 	],
 	#classVars : [
 		'DefaultText',
@@ -120,6 +121,17 @@ BlTextElement >> createTextParagraph [
 	^ BlSingleLineTextParagraph new
 ]
 
+{ #category : #accessing }
+BlTextElement >> defaultFontSize: aNumber [	
+	defaultFontSize = aNumber
+		ifTrue: [ ^ self ].
+
+	defaultFontSize := aNumber.
+	
+	self text defaultFontSize: aNumber.
+	self textChanged
+]
+
 { #category : #initialization }
 BlTextElement >> defaultMeasurer [
 	^ BlTextElementHostMeasurer new
@@ -147,12 +159,6 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 BlTextElement >> editorMeasurement [
 	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
 	self baseline: BlTextParagraphAscentLooseBaseline uniqueInstance
-]
-
-{ #category : #accessing }
-BlTextElement >> fontSize: aNumber [
-	self text fontSize: aNumber.
-	self textChanged
 ]
 
 { #category : #geometry }
@@ -452,11 +458,20 @@ BlTextElement >> text: aBlText [
 	"Change a text I represent.
 	Note, that aTextModel should be an instance of BrText.
 	aTextModel must not be nil"
+
+	self
+		assert: [ aBlText isNotNil ]
+		description: [ 'A text must not be nil' ].
 		
+	self
+		assert: [ aBlText isKindOf: BlText ]
+		description: [ 'A text must be an instance of Text' ].
+
 	text = aBlText
 		ifTrue: [ ^ self ].
 
 	text := aBlText.
+	defaultFontSize ifNotNil: [ :aDefaultFontSize | text defaultFontSize: aDefaultFontSize ].
 	self textChanged
 ]
 

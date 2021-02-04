@@ -169,10 +169,11 @@ BlElementCurrentProperties >> removeProperty: aBlElementProperty [
 
 { #category : #accessing }
 BlElementCurrentProperties >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
-	| theResolvedProperties |
+	| theResolvedPropertiesWithStatus |
 
-	theResolvedProperties := properties
+	theResolvedPropertiesWithStatus := properties
 		collect: [ :eachPropertyWithStatus | eachPropertyWithStatus resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties ].
-
-	^ resolvedProperties := BlElementResolvedProperties new properties: theResolvedProperties
+		
+	^ resolvedProperties := theParentProperties
+		mergedWithPropertiesWithStatus: (BlElementResolvedProperties new properties: theResolvedPropertiesWithStatus)
 ]
