@@ -40,6 +40,12 @@ BlElementFontSizeProperty >> canPropagateToChildren [
 	^ true
 ]
 
+{ #category : #'api - property' }
+BlElementFontSizeProperty >> cleanUpOnElement: anElement [
+	(anElement respondsTo: #defaultFontSize:)
+		ifTrue: [ anElement defaultFontSize: BlFont defaultFontSize ]
+]
+
 { #category : #accessing }
 BlElementFontSizeProperty >> fontSize [
 	<return: #BlValueWithUnit>
