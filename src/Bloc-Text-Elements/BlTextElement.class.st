@@ -121,7 +121,7 @@ BlTextElement >> createTextParagraph [
 	^ BlSingleLineTextParagraph new
 ]
 
-{ #category : #accessing }
+{ #category : #'api - font size' }
 BlTextElement >> defaultFontSize: aNumber [	
 	defaultFontSize = aNumber
 		ifTrue: [ ^ self ].
@@ -362,6 +362,11 @@ BlTextElement >> releaseParagraph [
 	ParagraphPool release: aParagraph.
 	
 	paragraph := nil
+]
+
+{ #category : #'api - font size' }
+BlTextElement >> resetDefaultFontSize [
+	defaultFontSize := nil
 ]
 
 { #category : #geometry }
