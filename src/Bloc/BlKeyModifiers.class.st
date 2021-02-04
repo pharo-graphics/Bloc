@@ -146,6 +146,16 @@ BlKeyModifiers >> isShift [
 ]
 
 { #category : #testing }
+BlKeyModifiers >> isSoftEmpty [
+	"Return true if none of the following modifiers is pressed: CMD, CTRL, SHIFT, SUPER, ALT"
+	^ self isAlt not and: [ 
+		self isCmd not and: [ 
+			self isCtrl not and: [ 
+				self isShift not and: [ 
+					self isSuper not ] ] ] ]
+]
+
+{ #category : #testing }
 BlKeyModifiers >> isSuper [
 	^ self isCmd
 ]

@@ -10,7 +10,7 @@ Class {
 		'from',
 		'to'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #'instance creation' }
@@ -102,10 +102,21 @@ BlMonotoneSelection >> complement: aMonotoneTextSelection [
 
 { #category : #testing }
 BlMonotoneSelection >> contains: anIndex [
-	"Return true if this selection interval includes a given index, false otherwise"
+	"Return true if this selection interval includes a given index, false otherwise.
+	If selection is [0.. 1] both 0 and 1 are within this selection"
 	<return: #Boolean>
 	
 	^ self rangeIncludes: anIndex
+]
+
+{ #category : #testing }
+BlMonotoneSelection >> containsIndex: anIndex [
+	"Return true if selection indices include a given index, false otherwise.
+	I am conceptually same as (self indices includes: anIndex)"
+	<return: #Boolean>
+	
+	^ anIndex > self from
+		and: [ anIndex <= self to ]
 ]
 
 { #category : #enumerating }
@@ -151,6 +162,19 @@ BlMonotoneSelection >> includes: aMonotoneTextSelection [
 		and: [ aMonotoneTextSelection to <= self to ]
 ]
 
+{ #category : #accessing }
+BlMonotoneSelection >> indices [
+	"Return a collection of selection indices.
+	If the selection interval is [0..1] then selection indices will only contain
+	one index {1}"
+	<return: #Interval>
+
+	self from
+		ifNil: [ ^ 0 to: -1 ].
+
+	^ self from + 1 to: self to
+]
+
 { #category : #testing }
 BlMonotoneSelection >> inside: aMonotoneTextSelection [
 	"Return true if I am fully inside a given selection, false otherwise"
@@ -164,7 +188,9 @@ BlMonotoneSelection >> inside: aMonotoneTextSelection [
 BlMonotoneSelection >> interval [
 	"Return current text selection as interval"
 	<return: #Interval>
-	self from ifNil: [ ^ 0 to: 0 ].
+	self from
+		ifNil: [ ^ 0 to: 0 ].
+	
 	^ self from to: self to
 ]
 
@@ -184,7 +210,7 @@ BlMonotoneSelection >> isEmpty [
 	"Return true if selection is empty, false otherwise"
 	<return: #Boolean>
 
-	^ false
+	^ self to <= self from
 ]
 
 { #category : #testing }
@@ -192,7 +218,7 @@ BlMonotoneSelection >> isNotEmpty [
 	"Return true if selection is empty, false otherwise"
 	<return: #Boolean>
 
-	^ true
+	^ self from < self to
 ]
 
 { #category : #testing }

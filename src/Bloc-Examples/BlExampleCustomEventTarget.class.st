@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'eventDispatcher'
 	],
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #accessing }
@@ -24,5 +24,5 @@ BlExampleCustomEventTarget >> eventDispatcher [
 BlExampleCustomEventTarget >> initialize [
 	super initialize.
 	
-	eventDispatcher := BlBubblingEventDispatcher on: self
+	eventDispatcher := BlDirectEventDispatcher on: self
 ]

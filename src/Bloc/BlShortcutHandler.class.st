@@ -2,67 +2,56 @@
 I am a special type of event handler designed to handle keyboard events in order to detect when it is time to perform a shortcut action.
 All defined shortcuts are stored in ===BlShortcutRegistry=== which can be accessed using #shortcutRegistry.
 
-I am a part of ===BlSimpleEventDispatcher=== which is a default event dispatcher in ===BlElement===
+I am a part of ===BlDirectEventDispatcher===
 "
 Class {
 	#name : #BlShortcutHandler,
 	#superclass : #BlBasicEventHandler,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#instVars : [
-		'shortcutRegistry'
-	],
-	#category : #'Bloc-Events-KeyBinding'
+	#category : #'Bloc-Events-Handler'
 }
 
-{ #category : #accessing }
+{ #category : #'api - adding / removing' }
 BlShortcutHandler >> addShortcut: aBlShortcut [
-	self shortcuts add: aBlShortcut
-]
+	"Return a shortcut handler with an added given shortcut.
+	Note: The returned instance may or may not be the same as the receiver"
+	<return: #BlShortcutHandler>
 
-{ #category : #'private - accessing' }
-BlShortcutHandler >> eventClass [ 
- 	^ BlShortcutEvent
+	^ self subclassResponsibility
 ]
 
 { #category : #'api - event managing' }
 BlShortcutHandler >> handleEvent: aShortcutEvent [
-	| matchingShortcuts |
-
-	"no process for repeated key events"
-	aShortcutEvent repeat isZero
-		ifFalse: [ ^ self ].
-
-	matchingShortcuts := self shortcuts
-		select: [ :aShortcut | aShortcut matches: aShortcutEvent buffer ]
-		thenCollect: [ :aShortcut | aShortcut -> (aShortcut match: aShortcutEvent buffer) ].
-	matchingShortcuts sort: [ :a :b | a value > b value ].
-
-	matchingShortcuts
-		ifNotEmpty: [ :theShortcuts |
-			| aShortcut |
-			aShortcut := theShortcuts first key.
-			aShortcut action cull: aShortcut.
-			aShortcutEvent consumed: true ]
+	self subclassResponsibility
 ]
 
-{ #category : #initialization }
-BlShortcutHandler >> initialize [
-	super initialize.
-	shortcutRegistry := BlShortcutRegistry new
+{ #category : #'api - adding / removing' }
+BlShortcutHandler >> removeAllWithCombination: aBlKeyCombination [
+	"Return a shortcut handler without all shortcuts with a given key combination.
+	Note: The returned instance may or may not be the same as the receiver"
+	<return: #BlShortcutHandler>
+
+	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-BlShortcutHandler >> shortcutRegistry [
-	^ shortcutRegistry 
+{ #category : #'api - adding / removing' }
+BlShortcutHandler >> removeShortcut: aBlShortcut [
+	"Return a shortcut handler without a given shortcut.
+	Note: The returned instance may or may not be the same as the receiver"
+	<return: #BlShortcutHandler>
+
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 BlShortcutHandler >> shortcuts [
-	^ self shortcutRegistry shortcuts 
+	<return: #Collection of: #BlBasicShortcut>
+
+	^ self subclassResponsibility
 ]
 
 { #category : #'api - event managing' }
 BlShortcutHandler >> wantsEvent: anEvent [
-	^ anEvent class == self eventClass or: [ anEvent class inheritsFrom: self eventClass ]
+	^ self subclassResponsibility
 ]

@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #'api - event managing' }
@@ -24,8 +24,34 @@ BlEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChain [
 ]
 
 { #category : #'api - accessing' }
+BlEventDispatcher >> filters [
+	^ Array streamContents: [ :aStream | self filtersDo: [ :eachFilter | aStream nextPut: eachFilter ] ]
+]
+
+{ #category : #'api - accessing' }
+BlEventDispatcher >> filtersDo: aBlock [
+	"Evaulate a given block with every event filter as an argument"
+]
+
+{ #category : #'api - accessing' }
+BlEventDispatcher >> handlers [
+	^ Array streamContents: [ :aStream | self handlersDo: [ :eachHandler | aStream nextPut: eachHandler ] ]
+]
+
+{ #category : #'api - accessing' }
 BlEventDispatcher >> handlersDo: aBlock [
 	"Evaulate a given block with every event handler as an argument"
+]
+
+{ #category : #'api - testing' }
+BlEventDispatcher >> hasEventHandlerSuchThat: aBlock [
+	<return: #Boolean>
+
+	self handlersDo: [ :eachHandler |
+		(aBlock value: eachHandler)
+			ifTrue: [ ^ true ] ].
+		
+	^ false
 ]
 
 { #category : #'api - accessing' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'transformations'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #adding }
@@ -41,6 +41,13 @@ BlAffineCompositeTransformation >> is2D [
 { #category : #testing }
 BlAffineCompositeTransformation >> isIdentity [
 	^ self hasTransformations not
+]
+
+{ #category : #testing }
+BlAffineCompositeTransformation >> isTranslation [
+	<return: #Boolean>
+
+	^ self transformations allSatisfy: #isTranslation
 ]
 
 { #category : #testing }

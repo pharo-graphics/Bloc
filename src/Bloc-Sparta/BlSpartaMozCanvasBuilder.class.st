@@ -7,18 +7,11 @@ Class {
 	#category : 'Bloc-Sparta'
 }
 
-{ #category : #'instance creation' }
-BlSpartaMozCanvasBuilder class >> checker: aPoint [
-	<return: #SpartaCanvas>
-
-	^ (self class environment at: #MozCanvas) checker: aPoint
-]
-
 { #category : #'api - instance creation' }
 BlSpartaMozCanvasBuilder class >> extent: aPoint [
 	<return: #SpartaCanvas>
 
-	^ (self class environment at: #MozCanvas) extent: aPoint
+	^ (self environment at: #MozCanvas) extent: aPoint
 ]
 
 { #category : #accessing }
@@ -49,7 +42,7 @@ BlSpartaMozCanvasBuilder class >> pdf: aFileName extent: aPoint [
 
 { #category : #accessing }
 BlSpartaMozCanvasBuilder class >> priority [
-	^ 10
+	^ 20
 ]
 
 { #category : #testing }

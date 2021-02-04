@@ -18,8 +18,14 @@ BlKeyboardKeyTable >> initialize: aMapDictionary with: aMapArray [
 		aMapDictionary at: eachCode put: ((BlKeyboardKey perform: aName) setValue: eachCode) ]
 ]
 
+{ #category : #initialization }
+BlKeyboardKeyTable >> initialize: aMapDictionary withKeys: aMapArray [
+	aMapArray pairsDo: [ :eachCode :eachKey |
+		aMapDictionary at: eachCode put: (eachKey copy setValue: eachCode) ]
+]
+
 { #category : #'api - converting' }
-BlKeyboardKeyTable >> keyFromScanCode: aScanCode [
+BlKeyboardKeyTable >> keyFromVirtualCode: aScanCode [
 	<return: #BlKeyboardKey>
 
 	^ self subclassResponsibility

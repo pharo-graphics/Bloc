@@ -3,43 +3,17 @@ Class {
 	#superclass : #BlUIEvent,
 	#instVars : [
 		'scanCode',
-		'repeat'
+		'key'
 	],
 	#category : #'Bloc-Events'
 }
 
-{ #category : #accessing }
-BlKeyboardEvent >> button [
-	self shouldNotImplement
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> button: anObject [
-	self shouldNotImplement
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> charCode [
-	self 
-		deprecated: 'Use charCode instead'
-		on: 	'1 July 2017' 
-		in: 'Pharo-6.0-60501-'.
-	self halt
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> charCode: anObject [ 
-	self 
-		deprecated: 'Use charCode: instead'
-		on: 	'1 July 2017' 
-		in: 'Pharo-6.0-60501-'.
-	self halt
-]
-
-{ #category : #initialization }
-BlKeyboardEvent >> initialize [
-	super initialize.
-	repeat := 0.
+{ #category : #converting }
+BlKeyboardEvent >> asDictionaryForExport [
+	^ super asDictionaryForExport
+		at: #scanCode put: scanCode printString;
+		at: #key put: key printString;
+		yourself
 ]
 
 { #category : #testing }
@@ -47,32 +21,30 @@ BlKeyboardEvent >> isKeyboard [
 	^ true
 ]
 
-{ #category : #accessing }
-BlKeyboardEvent >> keyValue [
-	self 
-		deprecated: 'Use keyValue instead'
-		on: 	'1 July 2017' 
-		in: 'Pharo-6.0-60501-'.
-	self halt
+{ #category : #'key - accessing' }
+BlKeyboardEvent >> key [
+	<return: #BlKeyboardKey>
+
+	^ key
 ]
 
-{ #category : #accessing }
-BlKeyboardEvent >> keyValue: anObject [ 
-	self 
-		deprecated: 'Use key: instead'
-		on: 	'1 July 2017' 
-		in: 'Pharo-6.0-60501-'.
-	self halt
+{ #category : #'key - accessing' }
+BlKeyboardEvent >> key: aBlKeyboardKey [
+	key := aBlKeyboardKey
 ]
 
-{ #category : #accessing }
-BlKeyboardEvent >> repeat [
-	^ repeat
-]
-
-{ #category : #accessing }
-BlKeyboardEvent >> repeat: anObject [
-	repeat := anObject
+{ #category : #printing }
+BlKeyboardEvent >> printOn: aStream [
+	aStream 
+		nextPutAll: self class name;
+		nextPut: $(;
+		nextPutAll: 'key: ';
+		print: key;
+		nextPutAll: '; scan code: ';
+		print: scanCode;
+		nextPutAll: '; modifiers: ';
+		print: modifiers;
+		nextPut: $)
 ]
 
 { #category : #'key - accessing' }
@@ -86,6 +58,6 @@ BlKeyboardEvent >> scanCode [
 ]
 
 { #category : #'key - accessing' }
-BlKeyboardEvent >> scanCode: anObject [
-	scanCode := anObject
+BlKeyboardEvent >> scanCode: aNumber [
+	scanCode := aNumber
 ]

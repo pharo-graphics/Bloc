@@ -32,13 +32,15 @@ BlTextForegroundAttribute class >> paint: aPaint [
 ]
 
 { #category : #comparing }
-BlTextForegroundAttribute >> equals: aTextAttribute [
-	^ self paint = aTextAttribute paint
+BlTextForegroundAttribute >> equals: anAnotherAttribute [
+	^ self paint = anAnotherAttribute paint
 ]
 
 { #category : #comparing }
 BlTextForegroundAttribute >> hash [
-	^ self class hash bitXor: self paint hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self paint hash
 ]
 
 { #category : #accessing }
@@ -60,4 +62,15 @@ BlTextForegroundAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'text-foreground: ';
 		nextPutAll: self paint printString
+]
+
+{ #category : #printing }
+BlTextForegroundAttribute >> storeOn: aStream [
+	super storeOn: aStream.
+	
+	aStream
+		space;
+		nextPutAll: #paint: asString;
+		space;
+		store: paint
 ]

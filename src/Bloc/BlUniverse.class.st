@@ -1,18 +1,15 @@
 "
-I am the lowest level in Bloc.
-My responsibility is to manage the low-level services such as managing windows, event queue and the drawing synchronization. 
+I am Bloc's lowest level. 
+My responsibility is to manage low-level services such as managing windows, event queue and drawing synchronization. 
 
-My main responsibility is to manage and to keep in sync the opened Spaces.
+My main responsibility is to manage the open ${class:BlSpace|label=spaces}$ and keep them in sync. I use a ${class:BlSpaceManager}$ to keep track of multiple spaces.
 
-I am the interface used to create/delete window.
-To achieve that, i use the notion of Host (see: BlHost).
-
-Users can choose a preferable host. In order to do that a universe must be stopped first.
-Example:
-
+I am the interface used to create/delete windows. To achieve that, I use a ${class:BlHost|label=Host}$, which can be customized and specified by the user (NB. I must be stopped first). For example:
+[[[language=smalltalk
 universe stop.
 universe preferableHost: MyHost new.
 universe start.
+]]]
 "
 Class {
 	#name : #BlUniverse,
@@ -21,18 +18,18 @@ Class {
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'pulseLoop',
-		'preferableHost',
 		'pulseListeners',
 		'spaceManager',
 		'announcer',
 		'deferredActions',
-		'nextPulseRequested'
+		'nextPulseRequested',
+		'host'
 	],
 	#classVars : [
 		'Default',
 		'Session'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #accessing }
@@ -108,7 +105,7 @@ BlUniverse >> closeSpaceWindow: aSpace [
 	"Send space closed event.
 	Note: a new space may be spawned as a reaction to the event, that is why
 	we send it before stopping host and universe"
-	aSpace dispatchEvent: (BlSpaceClosedEvent new space: self).
+	aSpace dispatchEvent: (BlSpaceClosedEvent new space: aSpace).
 	
 	(self spaceManager spaces anySatisfy: [ :eachSpace | eachSpace host == aSpace host ])
 		ifFalse: [ aSpace host isRunning ifTrue: [ aSpace host stop ] ].
@@ -124,7 +121,7 @@ BlUniverse >> closeSpaceWindow: aSpace [
 
 { #category : #'initialize-release' }
 BlUniverse >> defaultPulseLoop [
-	^ BlPulseLoop new
+	^ BlHostPulseLoop forHost: self
 ]
 
 { #category : #'deferred actions' }
@@ -148,7 +145,21 @@ BlUniverse >> firePulse: aPulseEvent [
 
 { #category : #accessing }
 BlUniverse >> host [
-	^ preferableHost ifNil: [ BlHost pickHost ]
+	^ host ifNil: [ BlHost pickHost ]
+]
+
+{ #category : #accessing }
+BlUniverse >> host: aBlHost [
+
+	self
+		assert: [ self isRunning not ]
+		description: [ 'Universe must not be running!' ].
+
+	self
+		assert: [ host isNil or: [ host isRunning not ] ]
+		description: [ 'Existing preferable host must not be running!' ].
+
+	host := aBlHost
 ]
 
 { #category : #'initialize-release' }
@@ -182,12 +193,12 @@ BlUniverse >> isUIProcess: aProcess [
 
 { #category : #'pulse managing' }
 BlUniverse >> mainLoopPriority [
-	^ self host mainLoopPriority
+	^ 40
 ]
 
 { #category : #accessing }
 BlUniverse >> preferableHost [
-	^ preferableHost
+	^ host
 ]
 
 { #category : #accessing }
@@ -198,14 +209,15 @@ BlUniverse >> preferableHost: aBlHost [
 		description: [ 'Universe must not be running!' ].
 
 	self
-		assert: [ preferableHost isNil or: [ preferableHost isRunning not ] ]
+		assert: [ host isNil or: [ host isRunning not ] ]
 		description: [ 'Existing preferable host must not be running!' ].
 
-	preferableHost := aBlHost
+	host := aBlHost
 ]
 
 { #category : #accessing }
 BlUniverse >> pulseLoop [
+	<return: #BlHostPulseLoop>
 	^ pulseLoop
 ]
 
@@ -281,6 +293,12 @@ BlUniverse >> showSpaceWindow: aSpace [
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
 	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).
+	
+	"Notify root element that it is now visible to the user"
+	aSpace root space: aSpace.
+	aSpace root dispatchAddedToSceneGraph.
+	
+	self requestNextPulse.
 ]
 
 { #category : #accessing }

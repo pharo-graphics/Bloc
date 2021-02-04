@@ -5,7 +5,7 @@ Class {
 		'alignment',
 		'weight'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #alignment }
@@ -14,13 +14,45 @@ BlIgnoredLayoutConstraintsVertical >> alignBottom [
 ]
 
 { #category : #alignment }
+BlIgnoredLayoutConstraintsVertical >> alignBottomAt: aUnitCoordinateNumber [
+	"Align the bottom of the element vertically with a unit-coordinate inside of the parent"
+
+	alignment := BlVerticalCoordinateBottomAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment vertical end
+]
+
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsVertical >> alignCenter [
 	alignment := BlElementAlignment vertical center
 ]
 
 { #category : #alignment }
+BlIgnoredLayoutConstraintsVertical >> alignCenterAt: aUnitCoordinateNumber [
+	"Align the center of the element vertically with a unit-coordinate inside of the parent"
+
+	alignment := BlVerticalCoordinateTopAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment vertical center
+]
+
+{ #category : #alignment }
+BlIgnoredLayoutConstraintsVertical >> alignNone [
+	alignment := BlElementAlignment vertical null
+]
+
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsVertical >> alignTop [
 	alignment := BlElementAlignment vertical start
+]
+
+{ #category : #alignment }
+BlIgnoredLayoutConstraintsVertical >> alignTopAt: aUnitCoordinateNumber [
+	"Align the top of the element vertically with a unit-coordinate inside of the parent"
+
+	alignment := BlVerticalCoordinateTopAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment vertical start
 ]
 
 { #category : #accessing }

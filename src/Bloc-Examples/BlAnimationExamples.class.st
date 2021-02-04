@@ -8,7 +8,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Animation'
+	#category : #'Bloc-Examples-Animation'
 }
 
 { #category : #examples }
@@ -20,7 +20,7 @@ BlAnimationExamples class >> ballsAnim [
 
 	(1 to:100) do: [:i| |el tr alp ii| 
 		ii := i % 25.
-		el :=(BlEllipse diameter: 30) asElement 
+		el := (BlEllipseGeometry new extent: 30@30) asElement 
 		background: (Color white alpha: 0);
 		relocate: (ii*15)@10.
 			
@@ -44,16 +44,6 @@ BlAnimationExamples class >> ballsAnim [
 	space show.
 
 	space root addAnimation: (BlParallelAnimation new addAll: anims)
-]
-
-{ #category : #examples }
-BlAnimationExamples class >> bouncingChicken [
-	<script: 'self bouncingChicken'>
-	
-	self
-		openInWindow: self new bouncingChicken
-		named: 'Bouncing chicken'
-		extent: 600@600
 ]
 
 { #category : #examples }
@@ -1191,30 +1181,15 @@ BlAnimationExamples >> baseAnimationWithDelayAndTwoLoops [
 	^ aBaseAnimation
 ]
 
-{ #category : #examples }
-BlAnimationExamples >> bouncingChicken [
-	<gtExample>
-	| element animation |
-	element := BlChicken chicken.
-	element relocate: 140@40.
-	element transform
-		scaleBy: 0.1@0.1;
-		translateBy: (100@300) negated;
-		rotateBy: -30;
-		apply.
-	animation := BlTransformAnimation new.
-	animation transform
-		scaleBy: 1@1;
-		translateBy: 0@0;
-		rotateBy: 0;
-		apply.
-	animation absolute.
-	animation duration: 4 seconds.
-	animation easing: BlEasing bounceIn.
+{ #category : #accessing }
+BlAnimationExamples >> blueAt: anIndex [
+	| radians |
+	"0.0 <= anIndex <= 1.0"
 	
-	element addAnimation: animation.
-	
-	^ element
+	radians := self radiansAt: anIndex.
+	radians < (Float pi / 2.0)
+		ifTrue: [ ^ 0 ].
+	^ (radians - (Float pi / 2.0)) sin
 ]
 
 { #category : #examples }
@@ -1250,10 +1225,19 @@ BlAnimationExamples >> bouncingText [
 ]
 
 { #category : #accessing }
-BlAnimationExamples >> colorAt: aDelta [
-	"Return a Color from a spectrum at a given delta in [0...1]"
+BlAnimationExamples >> colorAt: anIndex [
+	| normalizedIndex |
+	"0.0 <= anIndex <= 1.0"
 	
-	^ (BlInfiniteExampleColorsDataSource new colorAt: ((aDelta / 2)+ 0.5) % 1) "darker" alpha: 0.5
+	normalizedIndex := anIndex.
+	"Because of float errors"
+	normalizedIndex > 1 ifTrue: [ normalizedIndex := 1 ].
+	normalizedIndex < 0 ifTrue: [ normalizedIndex := 0 ].
+	
+	^ Color
+		r: (self redAt: normalizedIndex)
+		g: (self greenAt: normalizedIndex)
+		b: (self blueAt: normalizedIndex)
 ]
 
 { #category : #'examples - base animation' }
@@ -1291,6 +1275,17 @@ BlAnimationExamples >> frameContainer [
 			c horizontal matchParent.
 			c vertical matchParent ];
 		clipChildren: false
+]
+
+{ #category : #accessing }
+BlAnimationExamples >> greenAt: anIndex [
+	| radians |
+	"0.0 <= anIndex <= 1.0"
+	
+	radians := self radiansAt: anIndex.
+	radians > Float pi
+		ifTrue: [ ^ 0 ].
+	^ radians sin
 ]
 
 { #category : #'examples - base animation' }
@@ -1331,6 +1326,29 @@ BlAnimationExamples >> jiggleAnimation [
 	anAnimation duration: 1 second.
 	
 	^ anAnimation
+]
+
+{ #category : #accessing }
+BlAnimationExamples >> radiansAt: anIndex [
+	"0.0 <= anIndex <= 1.0"
+	self assert: [ anIndex between: 0.0 and: 1.0 ].
+	
+	^ anIndex * (Float pi * 3) / 2.0
+]
+
+{ #category : #accessing }
+BlAnimationExamples >> redAt: anIndex [
+	| radians |
+	"0.0 <= anIndex <= 1.0"
+	
+	radians := self radiansAt: anIndex.
+	(radians between: Float pi / 2.0 and: Float pi) 
+		ifTrue: [ ^ 0 ].
+
+	radians < (Float pi/ 2.0)
+		ifTrue: [ ^ (radians + (Float pi / 2)) sin ].
+
+	^ (radians + Float pi) sin
 ]
 
 { #category : #'examples - sequential animation' }
@@ -1432,5 +1450,5 @@ BlAnimationExamples >> textElement: aCharacter [
 	
 	^ BlTextElement new 
 		text: aText;
-		effect: (BlDropShadowEffect color: (Color gray alpha: 0.5) width: 20 offset: 0@0)
+		effect: (BlGaussianShadowEffect color: (Color gray alpha: 0.5) width: 10 offset: 0@0)
 ]

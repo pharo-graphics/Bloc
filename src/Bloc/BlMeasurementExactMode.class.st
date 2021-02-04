@@ -5,7 +5,7 @@ For more information see class comment of BlMeasurementMode
 Class {
 	#name : #BlMeasurementExactMode,
 	#superclass : #BlMeasurementMode,
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #testing }
@@ -15,6 +15,7 @@ BlMeasurementExactMode >> isExact [
 
 { #category : #geometry }
 BlMeasurementExactMode >> measurement: aResizing with: aNumber [
+	<argument: #aNumber satisfies: #isFloat>
 	<return: #BlMeasurementSpec>
 	
 	^ aResizing measurementExactlyWith: aNumber
@@ -34,7 +35,18 @@ BlMeasurementExactMode >> printOn: aStream size: aNumber [
 ]
 
 { #category : #geometry }
+BlMeasurementExactMode >> size: aNumber min: aMinSize max: aMaxSize [
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	<argument: #aMinSize satisfies: #isBlocFiniteFloat>
+	<argument: #aMaxSize satisfies: #isFloat>
+	<return: #Number>
+	
+	^ BlMeasurementSpec exact: (aNumber min: aMaxSize max: aMinSize)
+]
+
+{ #category : #geometry }
 BlMeasurementExactMode >> size: aNumber with: aSpecSize [
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 	<return: #Number>
 	
 	^ aSpecSize

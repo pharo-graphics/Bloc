@@ -19,7 +19,7 @@ BlLinearLayoutVerticalMeasurer >> measureExactUsingExcessSpace: aNode [
 
 { #category : #'private - measurement' }
 BlLinearLayoutVerticalMeasurer >> prepareForWeightedMeasure [
-	totalLength := 0
+	totalLength := 0.0
 ]
 
 { #category : #measurement }

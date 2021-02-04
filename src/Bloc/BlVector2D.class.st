@@ -5,7 +5,14 @@ https://en.wikipedia.org/wiki/Euclidean_vector
 
 Instance creation:
 
-	vector := (2, 3)
+	vector := (2, 3).
+	
+!! Examples
+!!! 45 Degrees
+${example:BlVector2DExamples>>#vector_45degrees|codeExpanded=false|previewExpanded=true}$
+!!! 346 Degrees
+${example:BlVector2DExamples>>#vector_346degrees|codeExpanded=false|previewExpanded=true}$
+
 "
 Class {
 	#name : #BlVector2D,
@@ -14,7 +21,7 @@ Class {
 		'x',
 		'y'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #arithmetic }
@@ -134,6 +141,13 @@ BlVector2D >> closeTo: anotherVector [
 		and: [ self y closeTo: anotherVector y ]
 ]
 
+{ #category : #accessing }
+BlVector2D >> degrees [
+	"Return vector degrees"
+	<return: #Number>
+	^ self radians * 180 / Float pi
+]
+
 { #category : #arithmetic }
 BlVector2D >> dotProduct2D: anotherVector [
 	<return: #Number>
@@ -151,6 +165,13 @@ BlVector2D >> dotProduct: anotherVector [
 { #category : #comparing }
 BlVector2D >> hash [
 	^ self x hash bitXor: self y hash
+]
+
+{ #category : #testing }
+BlVector2D >> isOne [
+	<return: #Boolean>
+	
+	^ (self x closeTo: 1) and: [ self y closeTo: 1 ]
 ]
 
 { #category : #'vector functions' }
@@ -199,6 +220,24 @@ BlVector2D >> printOn: aStream [
 		nextPutAll: ', ';
 		nextPutAll: self y asString;
 		nextPut: $)
+]
+
+{ #category : #accessing }
+BlVector2D >> radians [
+	"Return vector radians"
+	<return: #Number>
+	| aResult |
+	(self x isZero and: [ self y isZero ]) ifTrue: [ 
+		self error: 'Cannot compute radians for ', self printString ].
+	(self x isZero and: [ self y < 0 ]) ifTrue: [ ^ Float pi + Float halfPi ].
+	(self x isZero and: [ self y > 0 ]) ifTrue: [ ^ Float halfPi ].
+
+	aResult := (self y abs / self x abs) arcTan.
+
+	(self x >= 0 and: [ self y < 0 ]) ifTrue: [ ^ Float twoPi - aResult ].
+	(self x < 0 and: [ self y < 0 ]) ifTrue: [ ^ Float pi + aResult ].
+	(self x < 0 and: [ self y >= 0 ]) ifTrue: [ ^ Float pi - aResult ].
+	^ aResult
 ]
 
 { #category : #'vector functions' }

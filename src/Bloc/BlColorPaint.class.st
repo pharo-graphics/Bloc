@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'color'
 	],
-	#category : 'Bloc-Paint'
+	#category : #'Bloc-Paint'
 }
 
 { #category : #'instance creation' }
@@ -61,6 +61,15 @@ BlColorPaint >> color: aColor [
 { #category : #comparing }
 BlColorPaint >> hash [
 	^ self color hash
+]
+
+{ #category : #testing }
+BlColorPaint >> isOpaque [
+	"Color paint is opaque when underlying color is opaque
+	@see BlPaint>>#isOpaque"
+	<return: #Boolean>
+
+	^ color isOpaque
 ]
 
 { #category : #testing }

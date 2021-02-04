@@ -5,7 +5,7 @@ May be used to implement text selection or desktop like selection behaviour
 "
 Class {
 	#name : #BlSelectionHandler,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlCustomEventHandler,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -15,7 +15,7 @@ Class {
 		'container',
 		'selected'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #geometry }
@@ -24,9 +24,7 @@ BlSelectionHandler >> computeSelectionArea [
 ]
 
 { #category : #'dnd handlers' }
-BlSelectionHandler >> dragEndEvent: anEvent [
-	super dragEndEvent: anEvent.
-	
+BlSelectionHandler >> dragEndEvent: anEvent [	
 	anEvent consumed: true.
 		
 	origin := nil.
@@ -40,7 +38,7 @@ BlSelectionHandler >> dragEvent: anEvent [
 	on the elemen I attached to"
 		
 	self hasOrigin
-		ifFalse: [ ^ super dragOverEvent: anEvent ].
+		ifFalse: [ ^ self ].
 	
 	anEvent consumed: true.
 	
@@ -57,30 +55,28 @@ BlSelectionHandler >> dragStartEvent: anEvent [
 	origin := anEvent position
 ]
 
+{ #category : #accessing }
+BlSelectionHandler >> eventsToHandle [
+	^ {
+		BlDragEvent.
+		BlDragStartEvent.
+		BlDragEndEvent
+	}
+]
+
 { #category : #'selection - handling' }
 BlSelectionHandler >> handleDeselected: anElement [
-	| anEvent |
-	
-	anEvent := BlElementSelectionLostEvent new.
-	anEvent target: anElement.
-	anElement dispatchEvent: anEvent
+	anElement eventDispatcher dispatchSelectionLost
 ]
 
 { #category : #'selection - handling' }
 BlSelectionHandler >> handleSelected: anElement in: anIntersection [
-	| anEvent |
-
 	"we should make sure that we don't destroy existing BlBounds by performing destructive operation"
 	self
 		assert: [ anIntersection ~~ self selectionArea  ]
 		description: [ 'Intersection must be a different bounds object than selection area' ].
-	
-	anEvent := BlElementSelectionAcquiredEvent new.
-	anEvent bounds: anIntersection encompass.
-	anEvent target: anElement.
-	anElement dispatchEvent: anEvent.
 
-	^ anEvent isConsumed
+	^ anElement eventDispatcher dispatchSelectionAcquired: anIntersection encompass
 ]
 
 { #category : #testing }

@@ -29,6 +29,33 @@ Number >> asTranslate3D [
 ]
 
 { #category : #'*Bloc' }
+Number >> closeTo: num epsilon: anEpsilon [
+	"are these two numbers close?"
+
+	^ (self - num) abs <= anEpsilon
+]
+
+{ #category : #'*Bloc' }
+Number >> isBlocFinite [
+	^ self isInfinite not and: [ self isNaN not ]
+]
+
+{ #category : #'*Bloc' }
+Number >> isBlocFiniteFloat [
+	^ self isFloat and: [ self isInfinite not and: [ self isNaN not ] ]
+]
+
+{ #category : #'*Bloc' }
+Number >> isBlocPositive [
+	^ self >= 0.0
+]
+
+{ #category : #'*Bloc' }
+Number >> isBlocPositiveFloat [
+	^ self isFloat and: [ self >= 0.0 ]
+]
+
+{ #category : #'*Bloc' }
 Number >> scalarMultiplicate2D: aVector2D [
 	"Perform a scalar multiplication of a given 2D vector by me"
 	<return: #BlVector>

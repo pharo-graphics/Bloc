@@ -5,12 +5,21 @@ Class {
 		'alignment',
 		'weight'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #alignment }
 BlIgnoredLayoutConstraintsHorizontal >> alignCenter [
 	alignment := BlElementAlignment horizontal center
+]
+
+{ #category : #accessing }
+BlIgnoredLayoutConstraintsHorizontal >> alignCenterAt: aUnitCoordinateNumber [
+	"Align the center of the element vertically with a unit-coordinate inside of the parent"
+
+	alignment := BlHorizontalCoordinateStartAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment horizontal center
 ]
 
 { #category : #alignment }
@@ -19,8 +28,22 @@ BlIgnoredLayoutConstraintsHorizontal >> alignLeft [
 ]
 
 { #category : #alignment }
+BlIgnoredLayoutConstraintsHorizontal >> alignNone [
+	alignment := BlElementAlignment horizontal null
+]
+
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsHorizontal >> alignRight [
 	alignment := BlElementAlignment horizontal end
+]
+
+{ #category : #accessing }
+BlIgnoredLayoutConstraintsHorizontal >> alignRightAt: aUnitCoordinateNumber [
+	"Align the right of the element horizontally with a unit-coordinate inside of the parent"
+
+	alignment := BlHorizontalCoordinateStartAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment horizontal end
 ]
 
 { #category : #accessing }

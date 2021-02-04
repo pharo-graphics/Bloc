@@ -12,7 +12,7 @@ Class {
 		'angle',
 		'matrix'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #accessing }
@@ -115,7 +115,7 @@ BlMatrixDecomposition2D >> interpolate: aFactor to: anotherDecomposition [
 
 { #category : #accessing }
 BlMatrixDecomposition2D >> matrix [
-	<return: #Matrix>
+	<return: #Array2D>
 
 	^ matrix
 ]

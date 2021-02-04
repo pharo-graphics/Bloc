@@ -4,8 +4,29 @@ I exemplify selection interval
 Class {
 	#name : #BlSelectionExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Selection'
+	#category : #'Bloc-Examples-Selection'
 }
+
+{ #category : #'examples - composite selection' }
+BlSelectionExamples >> compositeSelect_from_0_to_1 [
+	<gtExample>
+	| aCompositeSelection |
+	
+	aCompositeSelection := self compositeSelection.
+	aCompositeSelection select: 0 to: 1.
+	
+	self assert: aCompositeSelection from equals: 0.
+	self assert: aCompositeSelection to equals: 1.
+	self assert: aCompositeSelection displayString equals: '[0,1]'.
+	self assert: aCompositeSelection printString equals: '[0,1]'.
+	self assert: aCompositeSelection gtDisplayString equals: '[0,1]'.
+	self assert: aCompositeSelection isNotEmpty.
+	self assert: aCompositeSelection isEmpty not.
+	
+	self assert: aCompositeSelection allSelections equals: { BlMonotoneSelection from: 0 to: 1 }.
+
+	^ aCompositeSelection
+]
 
 { #category : #'examples - composite selection' }
 BlSelectionExamples >> compositeSelect_from_1_to_1 [
@@ -15,15 +36,12 @@ BlSelectionExamples >> compositeSelect_from_1_to_1 [
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 1 to: 1.
 	
-	self assert: aCompositeSelection from equals: 1.
-	self assert: aCompositeSelection to equals: 1.
-	self assert: aCompositeSelection displayString equals: '[1,1]'.
-	self assert: aCompositeSelection printString equals: '[1,1]'.
-	self assert: aCompositeSelection gtDisplayString equals: '[1,1]'.
-	self assert: aCompositeSelection isNotEmpty.
-	self assert: aCompositeSelection isEmpty not.
+	self assert: aCompositeSelection isEmpty.
+	self assert: aCompositeSelection displayString equals: ''.
+	self assert: aCompositeSelection printString equals: ''.
+	self assert: aCompositeSelection gtDisplayString equals: ''.
 	
-	self assert: aCompositeSelection allSelections equals: { BlMonotoneSelection from: 1 to: 1 }.
+	self assert: aCompositeSelection allSelections equals: {}.
 
 	^ aCompositeSelection
 ]
@@ -175,6 +193,34 @@ BlSelectionExamples >> compositeSelection [
 ]
 
 { #category : #'examples - monotone selection' }
+BlSelectionExamples >> monotoneContainsIndex_in_1_to_1 [
+	<gtExample>
+	| aMonotoneSelection |
+	
+	aMonotoneSelection := self monotoneSelect_from_1_to_1.
+	
+	self assert: (aMonotoneSelection containsIndex: 0) not.
+	self assert: (aMonotoneSelection containsIndex: 1) not.
+	self assert: (aMonotoneSelection containsIndex: 2) not.
+	
+	^ aMonotoneSelection
+]
+
+{ #category : #'examples - monotone selection' }
+BlSelectionExamples >> monotoneContains_in_1_to_1 [
+	<gtExample>
+	| aMonotoneSelection |
+	
+	aMonotoneSelection := self monotoneSelect_from_1_to_1.
+	
+	self assert: (aMonotoneSelection contains: 0) not.
+	self assert: (aMonotoneSelection contains: 1).
+	self assert: (aMonotoneSelection contains: 2) not.
+	
+	^ aMonotoneSelection
+]
+
+{ #category : #'examples - monotone selection' }
 BlSelectionExamples >> monotoneNeighbours_1_to_1_and_3_to_4 [
 	<gtExample>
 	| from1to1 from3to4  |
@@ -300,13 +346,10 @@ BlSelectionExamples >> monotoneSelect_from_1_to_1 [
 	
 	aMonotoneSelection := self monotoneSelection from: 1 to: 1.
 	
-	self assert: aMonotoneSelection from equals: 1.
-	self assert: aMonotoneSelection to equals: 1.
 	self assert: aMonotoneSelection displayString equals: '[1,1]'.
 	self assert: aMonotoneSelection printString equals: '[1,1]'.
 	self assert: aMonotoneSelection gtDisplayString equals: '[1,1]'.
-	self assert: aMonotoneSelection isNotEmpty.
-	self assert: aMonotoneSelection isEmpty not.
+	self assert: aMonotoneSelection isEmpty.
 	
 	self assert: aMonotoneSelection allSelections equals: { BlMonotoneSelection from: 1 to: 1 }.
 	

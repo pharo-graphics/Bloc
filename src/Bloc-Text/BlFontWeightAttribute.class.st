@@ -28,6 +28,13 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlFontWeightAttribute class >> black [
+	^ self new
+		weight: LogicalFont weightBlack;
+		yourself
+]
+
+{ #category : #'instance creation' }
 BlFontWeightAttribute class >> bold [
 	^ self new
 		weight: LogicalFont weightBold;
@@ -42,9 +49,16 @@ BlFontWeightAttribute class >> light [
 ]
 
 { #category : #'instance creation' }
-BlFontWeightAttribute class >> normal [
+BlFontWeightAttribute class >> medium [
 	^ self new
 		weight: LogicalFont weightMedium;
+		yourself
+]
+
+{ #category : #'instance creation' }
+BlFontWeightAttribute class >> normal [
+	^ self new
+		weight: LogicalFont weightRegular;
 		yourself
 ]
 
@@ -62,14 +76,21 @@ BlFontWeightAttribute class >> weight: aNumber [
 		yourself
 ]
 
+{ #category : #'text style' }
+BlFontWeightAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder fontWeight: self weight
+]
+
 { #category : #comparing }
-BlFontWeightAttribute >> equals: aTextAttribute [
-	^ self weight = aTextAttribute weight
+BlFontWeightAttribute >> equals: anAnotherAttribute [
+	^ self weight = anAnotherAttribute weight
 ]
 
 { #category : #comparing }
 BlFontWeightAttribute >> hash [
-	^ self weight hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self weight hash
 ]
 
 { #category : #printing }

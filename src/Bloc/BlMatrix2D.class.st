@@ -4,9 +4,9 @@ https://en.wikipedia.org/wiki/Matrix_(mathematics)
 
 My components are named according to mathematical convention:
 
- |  a11  a12  |                 |   sx     shy  |
- |  a21  a22  |       =>     |  shx    sy    |
- |  a31  a32  |                 |    x        y     |
+ |  a11  a12  |                 |   sx    shy  |
+ |  a21  a22  |       =>        |  shx     sy  |
+ |  a31  a32  |                 |    x      y  |
 "
 Class {
 	#name : #BlMatrix2D,
@@ -19,7 +19,7 @@ Class {
 		'sx',
 		'sy'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #'instance creation' }
@@ -36,6 +36,30 @@ BlMatrix2D class >> rotation: anAngle [
 	<return: #BlMatrix2D>
 
 	^ self new rotation: anAngle
+]
+
+{ #category : #'instance creation' }
+BlMatrix2D class >> scale: aBlVector [
+	"Return a matrix which corresponds to a scale transformation by given factor"
+	<return: #BlMatrix2D>
+
+	^ self new scaleBy: aBlVector
+]
+
+{ #category : #'instance creation' }
+BlMatrix2D class >> shear: aCoefficientPoint [
+	"Return a matrix which corresponds to a shear transformation by given coefficient"
+	<return: #BlMatrix2D>
+
+	^ self new shear: aCoefficientPoint
+]
+
+{ #category : #'instance creation' }
+BlMatrix2D class >> translation: aBlVector [
+	"Return a matrix which corresponds to a translation transformation by given factor"
+	<return: #BlMatrix2D>
+
+	^ self new translateBy: aBlVector
 ]
 
 { #category : #comparing }
@@ -56,7 +80,7 @@ BlMatrix2D >> = anObject [
 
 { #category : #converting }
 BlMatrix2D >> asMatrixCollection [
-	^ Matrix rows: 3 columns: 3 contents: {
+	^ Array2D rows: 3 columns: 3 contents: {
 		sx . shx . x.
 		shy . sy . y.
 		0 . 0. 1
@@ -114,7 +138,7 @@ BlMatrix2D >> decomposition [
 			row1x := (sn negated * m11) + (cs * m21).
 			row1y := (sn negated * m12) + (cs * m22) ].
 	
-	matrix := Matrix
+	matrix := Array2D
 		rows: 2
 		columns: 2
 		contents: { row0x . row0y . row1x . row1y }.
@@ -252,6 +276,11 @@ BlMatrix2D >> perspective: aDepth [
 	"2D matrix does not have a perspective components"
 ]
 
+{ #category : #printing }
+BlMatrix2D >> printOn: aStream [
+	aStream print: self asMatrixCollection
+]
+
 { #category : #'matrix - transformations' }
 BlMatrix2D >> reflectBy: aDiagonalVector [
 	"Apply a reflection transformation given by a diagonal vector"
@@ -325,6 +354,18 @@ BlMatrix2D >> scaleBy: aBlVector [
 	sy := sy * aScale3D y.
 	x := x * aScale3D x.
 	y := y * aScale3D y
+]
+
+{ #category : #initialization }
+BlMatrix2D >> shear: aCoefficientPoint [
+	"Set me to be a 2D matrix representing a shear by a given coefficient (shx, shy)"
+	
+	x := 0.0.
+	y := 0.0.
+	sx := 1.0.
+	sy := 1.0.
+	shx := aCoefficientPoint x.
+	shy := aCoefficientPoint y
 ]
 
 { #category : #'matrix - accessing' }

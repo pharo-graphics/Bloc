@@ -6,9 +6,11 @@ Class {
 	#classInstVars : [
 		'after',
 		'before',
-		'block'
+		'block',
+		'none',
+		'ignore'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
 { #category : #accessing }
@@ -32,7 +34,19 @@ BlFocusability class >> cleanUp [
 	
 	before := nil.
 	after := nil.
-	block := nil
+	block := nil.
+	none := nil.
+	ignore := nil
+]
+
+{ #category : #accessing }
+BlFocusability class >> ignore [
+	^ ignore ifNil: [ ignore := BlFocusabilityIgnore new ]
+]
+
+{ #category : #accessing }
+BlFocusability class >> none [
+	^ none ifNil: [ none := BlFocusabilityNone new ]
 ]
 
 { #category : #comparing }

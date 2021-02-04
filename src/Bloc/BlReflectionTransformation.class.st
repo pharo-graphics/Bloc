@@ -16,7 +16,7 @@ Class {
 	#instVars : [
 		'reflection'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #factory }

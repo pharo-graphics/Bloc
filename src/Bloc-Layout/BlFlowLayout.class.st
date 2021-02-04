@@ -9,7 +9,7 @@ Class {
 		'horizontalAlignment',
 		'verticalAlignment'
 	],
-	#category : 'Bloc-Layout-Flow'
+	#category : #'Bloc-Layout-Flow'
 }
 
 { #category : #constraints }
@@ -86,9 +86,9 @@ BlFlowLayout >> initialize [
 ]
 
 { #category : #layout }
-BlFlowLayout >> layout: anElement in: newBounds [
-	measurer layout: anElement in: newBounds.
-	self layoutIgnored: anElement
+BlFlowLayout >> layout: anElement in: newBounds context: aBlElementBoundsUpdateContext [
+	measurer layout: anElement in: newBounds context: aBlElementBoundsUpdateContext.
+	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #measure }

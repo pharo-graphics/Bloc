@@ -5,12 +5,23 @@ Class {
 		'alignment',
 		'weight'
 	],
-	#category : 'Bloc-Layout-Frame'
+	#category : #'Bloc-Layout-Frame'
 }
 
 { #category : #alignment }
 BlFrameLayoutConstraintsHorizontal >> alignCenter [
+	"I align the center of the child element horizontally with the center of the parent"
+
 	alignment := BlElementAlignment horizontal center
+]
+
+{ #category : #alignment }
+BlFrameLayoutConstraintsHorizontal >> alignCenterAt: aUnitCoordinateNumber [
+	"Align the center of the element horizontally with a unit-coordinate inside of the parent"
+
+	alignment := BlHorizontalCoordinateStartAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment horizontal center
 ]
 
 { #category : #alignment }
@@ -19,8 +30,31 @@ BlFrameLayoutConstraintsHorizontal >> alignLeft [
 ]
 
 { #category : #alignment }
+BlFrameLayoutConstraintsHorizontal >> alignLeftAt: aUnitCoordinateNumber [
+	"Align the left of the element horizontally with a unit-coordinate inside of the parent"
+
+	alignment := BlHorizontalCoordinateStartAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment horizontal start
+]
+
+{ #category : #alignment }
+BlFrameLayoutConstraintsHorizontal >> alignNone [
+	alignment := BlElementAlignment horizontal null
+]
+
+{ #category : #alignment }
 BlFrameLayoutConstraintsHorizontal >> alignRight [
 	alignment := BlElementAlignment horizontal end
+]
+
+{ #category : #alignment }
+BlFrameLayoutConstraintsHorizontal >> alignRightAt: aUnitCoordinateNumber [
+	"Align the right of the element horizontally with a unit-coordinate inside of the parent"
+
+	alignment := BlHorizontalCoordinateStartAlignment new
+		coordinate: aUnitCoordinateNumber;
+		relativeAlignment: BlElementAlignment horizontal end
 ]
 
 { #category : #accessing }
@@ -28,7 +62,7 @@ BlFrameLayoutConstraintsHorizontal >> alignment [
 	^ alignment
 ]
 
-{ #category : #accessing }
+{ #category : #alignment }
 BlFrameLayoutConstraintsHorizontal >> alignment: aBlElementAlignment [
 	alignment := aBlElementAlignment
 ]
@@ -37,7 +71,7 @@ BlFrameLayoutConstraintsHorizontal >> alignment: aBlElementAlignment [
 BlFrameLayoutConstraintsHorizontal >> initialize [
 	super initialize.
 	
-	alignment := BlElementAlignment horizontal null.
+	alignment := BlElementAlignment horizontal start.
 	weight := 1.0
 ]
 
@@ -50,6 +84,7 @@ BlFrameLayoutConstraintsHorizontal >> weight [
 
 { #category : #accessing }
 BlFrameLayoutConstraintsHorizontal >> weight: aNumber [
+	"If the weight is zero, a child will have zero size along the corresponding axis"
 	self
 		assert: [ aNumber isNotNil ]
 		description: [ 'Weight can not be nil' ].

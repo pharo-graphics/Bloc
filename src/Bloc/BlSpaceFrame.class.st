@@ -1,14 +1,14 @@
 "
 ! Frame model
 
-I represent one space frame. There are usually 60 frames per seconds, which means that ideally frame should take less than 16ms to go through all phases.
+I represent one frame in a space. There are usually 60 frames per second, which means that ideally a frame should take less than 16ms to go through all phases.
 
-The frame consists of three important phases
+My phases are:
 - event handling
 - scheduled tasks processing / animation
 - layout
 - rendering
--idle
+- idle
 
 I know my currentPhase which is one of the registered phases.
 
@@ -20,10 +20,11 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
+		'id',
 		'phases',
 		'currentPhaseLink'
 	],
-	#category : #'Bloc-Space-Frame'
+	#category : #'Bloc-Space - Frame'
 }
 
 { #category : #adding }
@@ -58,10 +59,24 @@ BlSpaceFrame >> hasNextPhase [
 	^ currentPhaseLink nextLink isNotNil
 ]
 
+{ #category : #accessing }
+BlSpaceFrame >> id [
+	"Return the frame id, which is a linearly increasing counter of frames"
+	<return: #Number>
+	
+	^ id
+]
+
+{ #category : #private }
+BlSpaceFrame >> incrementFrameId [
+	id := id + 1
+]
+
 { #category : #initialization }
 BlSpaceFrame >> initialize [
 	super initialize.
-
+	
+	id := 0.
 	phases := LinkedList new.
 	self initializePhases.
 	currentPhaseLink := phases firstLink
@@ -71,10 +86,21 @@ BlSpaceFrame >> initialize [
 BlSpaceFrame >> initializePhases [
 	self addPhases: { 
 		BlSpaceFrameIdlePhase new.
+		BlSpaceFrameHostValidationPhase new.
 		BlSpaceFrameEventPhase new.
 		BlSpaceFrameTaskPhase new.
+		BlSpaceFrameStylePhase new.
+		BlSpaceFramePropertiesPhase new.
+		BlSpaceFrameDrawingValidationPhase new.
 		BlSpaceFrameLayoutPhase new.
 		BlSpaceFrameDrawingPhase new }
+]
+
+{ #category : #testing }
+BlSpaceFrame >> isAtFirstPhase [
+	<return: #Boolean>
+	
+	^ currentPhaseLink == phases firstLink
 ]
 
 { #category : #accessing }
@@ -105,12 +131,14 @@ BlSpaceFrame >> phases [
 
 { #category : #running }
 BlSpaceFrame >> runCurrentPhaseOn: aSpace [
-	self currentPhase runOn: aSpace
+	aSpace telemetry
+		timeSync: self currentPhase name
+		during: [ self currentPhase runOn: aSpace ]
 ]
 
 { #category : #running }
 BlSpaceFrame >> runOn: aSpace [
-
+	self incrementFrameId.
 	self runCurrentPhaseOn: aSpace.
 
 	[ self hasNextPhase ] whileTrue: [

@@ -18,15 +18,21 @@ BlCollectionRope class >> collection: aCollection [
 
 { #category : #'instance creation' }
 BlCollectionRope class >> from: aLeftRope and: aRightRope [
+	| aNewSpecies |
+
 	self
-		assert: aLeftRope species = self collectionRope
+		assert: [ aLeftRope species = self collectionRope ]
 		description: [ 'Can only merge two collection ropes' ].
 	
 	self
-		assert: aRightRope species = self collectionRope
+		assert: [ aRightRope species = self collectionRope ]
 		description: [ 'Can only merge two collection ropes' ].
 	
-	^ self collection: (aLeftRope collection species streamContents: [ :aStream |
+	aNewSpecies := aLeftRope collection species = aRightRope collection species
+		ifTrue: [ aLeftRope collection species ]
+		ifFalse: [ Array ].
+	
+	^ self collection: (aNewSpecies streamContents: [ :aStream |
 		aLeftRope do: [ :eachItem | aStream nextPut: eachItem ].
 		aRightRope do: [ :eachItem | aStream nextPut: eachItem ] ])
 ]
@@ -92,6 +98,17 @@ BlCollectionRope >> collection: aCollection [
 	collection := aCollection
 ]
 
+{ #category : #private }
+BlCollectionRope >> copyFrom: aStart to: anEnd [
+	self assertAccessFrom: aStart to: anEnd.
+
+	"return this very rope if the requested interval exactly matches myself"
+	(aStart = 0 and: [ anEnd = self size ])
+		ifTrue: [ ^ self ].
+
+	^ self class collection: (collection copyFrom: aStart + 1 to: anEnd)
+]
+
 { #category : #'rope - deleting' }
 BlCollectionRope >> delete: aStart to: anEnd [
 	<return: #BlRope>
@@ -102,8 +119,23 @@ BlCollectionRope >> delete: aStart to: anEnd [
 	aStart = anEnd
 		ifTrue: [ ^ self ].
 	
+	"deleting from a long collection is not efficient, so we will use subropes instead"
+	self size >= self class combineLength
+		ifTrue: [
+			^ aStart isZero
+				ifTrue: [
+					anEnd = self size
+						ifTrue: [ self empty ]
+						ifFalse: [ self from: anEnd to: self size ] ]
+				ifFalse: [
+					| aLeftPart |
+					aLeftPart := self from: 0 to: aStart.
+					anEnd = self size
+						ifTrue: [ aLeftPart ]
+						ifFalse: [ aLeftPart append: (self from: anEnd to: self size) ] ] ].
+
 	newCollection := collection species new: collection size - (anEnd - aStart).
-	
+
 	newCollection
 		replaceFrom: 1 to: aStart
 		with: collection
@@ -205,11 +237,13 @@ BlCollectionRope >> iterator: aStart to: anEnd [
 BlCollectionRope >> merge: aCollection at: anIndex [
 	| newCollection |
 	newCollection := anIndex = 0
-		ifTrue: [ aCollection asArray , collection ]
+		ifTrue: [ aCollection species = collection species
+			ifTrue: [ aCollection, collection ]
+			ifFalse: [ aCollection, (collection as: aCollection species) ] ]
 		ifFalse: [ anIndex = self size
-				ifTrue: [ collection , aCollection ]
+				ifTrue: [ (collection as: aCollection species) , aCollection ]
 				ifFalse: [ | tmpCollection |
-					tmpCollection := Array new: collection size + aCollection size.
+					tmpCollection := aCollection species new: collection size + aCollection size.
 					tmpCollection
 						replaceFrom: 1
 						to: anIndex
@@ -235,8 +269,8 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 	
 	totalSize := collection size + aCollection size.
 	middle := (totalSize / 2) asInteger.
-	leftArray := Array new: middle.
-	rightArray := Array new: totalSize - middle.
+	leftArray := collection species new: middle.
+	rightArray := collection species new: totalSize - middle.
 	
 	leftAmountBeforeIndex := (middle min: anIndex) max: 0.
 	alreadyFilledAmount := leftAmountBeforeIndex.
@@ -300,6 +334,26 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 	^ self class
 		concatenate: (self class collectionRope collection: leftArray)
 		and: (self class collectionRope collection: rightArray)
+]
+
+{ #category : #'text - converting' }
+BlCollectionRope >> normalized [ 
+
+	^ self class collection: (BlStringNormalizer new process: collection)
+]
+
+{ #category : #accessing }
+BlCollectionRope >> readStream [ 
+	"Answer a read stream that iterates over the characters in the receiver's collection"
+
+	^ collection readStream
+]
+
+{ #category : #'rope - replacing' }
+BlCollectionRope >> simplified [
+	<return: #BlRope>
+	
+	^ self
 ]
 
 { #category : #'rope - accessing' }

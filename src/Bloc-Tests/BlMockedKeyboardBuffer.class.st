@@ -10,6 +10,14 @@ Class {
 	#category : 'Bloc-Tests-KeyBinding'
 }
 
+{ #category : #testing }
+BlMockedKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
+	"Return true if the buffer has exactly a collection of given keys"
+	<return: #Boolean>
+
+	^ (states associations select: #value thenCollect: #key) asSet = aCollectionOfKeys asSet
+]
+
 { #category : #initialization }
 BlMockedKeyboardBuffer >> initialize [
 	super initialize.

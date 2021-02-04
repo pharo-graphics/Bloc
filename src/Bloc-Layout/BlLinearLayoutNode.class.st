@@ -91,8 +91,8 @@ BlLinearLayoutNode >> marginLength [
 ]
 
 { #category : #measure }
-BlLinearLayoutNode >> measure: anExtentSpec [
-	self element measure: anExtentSpec
+BlLinearLayoutNode >> measure: anExtentSpecOrBlock [
+	self element measure: anExtentSpecOrBlock value
 ]
 
 { #category : #'accessing - properties' }

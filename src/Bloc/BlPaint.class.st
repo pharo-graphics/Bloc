@@ -1,5 +1,5 @@
 "
-I am a root class of all Paints in Bloc.
+I am the root class of all Paints in Bloc.
 Paints are used for background, border, text fill or stroke.
 
 All paints are meant to be immutable
@@ -9,7 +9,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Paint'
+	#category : #'Bloc-Paint'
 }
 
 { #category : #'instance creation' }
@@ -28,6 +28,16 @@ BlPaint >> asBlBackground [
 { #category : #converting }
 BlPaint >> asBlPaint [
 	^ self
+]
+
+{ #category : #testing }
+BlPaint >> isOpaque [
+	"Return true if I am opaque, false otherwise.
+	It is important to implement paint specific logic in subclasses.
+	If paint is opeque we don't have to render elements behind it"
+	<return: #Boolean>
+
+	^ false
 ]
 
 { #category : #testing }

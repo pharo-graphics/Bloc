@@ -11,7 +11,7 @@ Class {
 	#instVars : [
 		'events'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'adding / removing' }
@@ -28,7 +28,9 @@ BlKeyboardBuffer >> eventAt: aKey [
 
 { #category : #accessing }
 BlKeyboardBuffer >> events [
-	^ events
+	<return: #Collection of: #BlKeyDownEvent>
+
+	^ events values
 ]
 
 { #category : #testing }
@@ -37,6 +39,15 @@ BlKeyboardBuffer >> hasEvent: aKey [
 	<return: #Boolean>
 	
 	^ events includesKey: aKey
+]
+
+{ #category : #testing }
+BlKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
+	"Return true if the buffer has exactly a collection of given keys"
+	<return: #Boolean>
+
+	"see https://github.com/feenkcom/gtoolkit/issues/1578"
+	^ (events keys asSet reject: #isUnkownKey) = aCollectionOfKeys asSet
 ]
 
 { #category : #initialization }
@@ -68,7 +79,7 @@ BlKeyboardBuffer >> isPressed: aKey [
 BlKeyboardBuffer >> printOn: aStream [
 
 	aStream nextPut: $(.
-	self events values
+	events values
 		do: [ :anEvent | aStream nextPutAll: anEvent key name asString ]
 		separatedBy: [ aStream nextPutAll: ' ' ].
 	aStream nextPut: $)

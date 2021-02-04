@@ -1,6 +1,6 @@
 Extension { #name : #BlFontSizeAttribute }
 
 { #category : #'*Bloc-Sparta' }
-BlFontSizeAttribute >> applyOnSpartaFontBuilder: aFontBuilder with: aSpartaSpan [
+BlFontSizeAttribute >> applyOnSpartaFontBuilder: aFontBuilder [
 	aFontBuilder size: size
 ]

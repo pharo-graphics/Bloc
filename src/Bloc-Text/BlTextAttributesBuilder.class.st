@@ -18,7 +18,7 @@ Class {
 	#instVars : [
 		'attributes'
 	],
-	#category : 'Bloc-Text-Text-Support'
+	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #hook }
@@ -30,7 +30,15 @@ BlTextAttributesBuilder >> applyOn: aBlText [
 
 { #category : #accessing }
 BlTextAttributesBuilder >> attribute: aTextAttribute [
-	self attributes add: aTextAttribute
+	| anExistingAttributeIndex |
+
+	anExistingAttributeIndex := (self attributes
+		detectIndex: [ :eachAttribute | eachAttribute type = aTextAttribute type ]
+		ifNone: [ 0 ]).
+
+	anExistingAttributeIndex isZero
+		ifTrue: [ self attributes add: aTextAttribute ]
+		ifFalse: [ self attributes at: anExistingAttributeIndex put: aTextAttribute ]
 ]
 
 { #category : #accessing }
@@ -40,11 +48,24 @@ BlTextAttributesBuilder >> attributes [
 	^ attributes
 ]
 
+{ #category : #hook }
+BlTextAttributesBuilder >> attributes: aCollectionOfAttributes [
+	aCollectionOfAttributes do: [ :eachAttribute | self attribute: eachAttribute ]
+]
+
 { #category : #accessing }
 BlTextAttributesBuilder >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ self
+]
+
+{ #category : #testing }
+BlTextAttributesBuilder >> hasAttribute: anAttribute [
+	^ self attributes
+		detect: [ :eachAttribute | eachAttribute type = anAttribute type ]
+		ifFound: [ :eachAttribute | eachAttribute equals: anAttribute ]
+		ifNone: [ false ]
 ]
 
 { #category : #initialization }

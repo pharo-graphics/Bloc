@@ -33,7 +33,7 @@ Class {
 		'zero',
 		'one'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #cleanup }
@@ -181,6 +181,13 @@ BlVector >> dotProduct: anotherVector [
 
 { #category : #comparing }
 BlVector >> hash [
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+BlVector >> isOne [
+	<return: #Boolean>
+	
 	^ self subclassResponsibility
 ]
 

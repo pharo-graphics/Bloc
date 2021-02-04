@@ -14,7 +14,7 @@ Class {
 	#instVars : [
 		'elevation'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
 { #category : #'instance creation' }

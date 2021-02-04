@@ -40,13 +40,6 @@ BlMouseDownEvent class >> secondary [
 	^ self button: BlMouseButton secondary
 ]
 
-{ #category : #converting }
-BlMouseDownEvent >> asMouseStillDownEvent [
-	^ BlMouseStillDownEvent new
-		copyFrom: self;
-		yourself
-]
-
 { #category : #testing }
 BlMouseDownEvent >> isMouseDown [
 	^ true

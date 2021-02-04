@@ -1,25 +1,6 @@
 Extension { #name : #BlBorder }
 
 { #category : #'*Bloc-Extensions' }
-BlBorder >> gtInspectorPreviewIn: aComposite [
-	<gtInspectorPresentationOrder: 5>
-
-	aComposite sparta
-		title: [ 'Preview' translated ];
-		extent: [ 350@250 ];
-		draw: [ :aCanvas | | anElement |
-			anElement := BlElement new
-				size: (aCanvas extent / 1.5);
-				outskirts: BlOutskirts inside;
-				border: self;
-				forceLayout.
-			
-			aCanvas transform
-				by: [ :aTransform | aTransform translateBy: (aCanvas extent - (aCanvas extent / 1.5)) / 2.0 ]
-				during: [ :aTransform | self drawOnSpartaCanvas: aCanvas of: anElement ] ]
-]
-
-{ #category : #'*Bloc-Extensions' }
 BlBorder >> gtViewBorderFor: aView [
 	<gtView>
 	^ aView explicit

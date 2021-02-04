@@ -5,7 +5,7 @@ My users are layout related classes
 "
 Trait {
 	#name : #TBlAlignable,
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #'api - alignment' }
@@ -42,6 +42,12 @@ TBlAlignable >> alignCenterLeft [
 TBlAlignable >> alignCenterRight [
 	self verticalAlignment: BlElementAlignment vertical center.
 	self horizontalAlignment: BlElementAlignment horizontal end
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> alignNone [
+	self verticalAlignment: BlElementAlignment vertical null.
+	self horizontalAlignment: BlElementAlignment horizontal null
 ]
 
 { #category : #'api - alignment' }

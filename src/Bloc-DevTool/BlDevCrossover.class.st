@@ -1,6 +1,6 @@
 Class {
 	#name : #BlDevCrossover,
-	#superclass : #BlElementEventListener,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'crossover',
 		'verticalLine',
@@ -57,7 +57,7 @@ BlDevCrossover >> initialize [
 
 	mousePositionText := BlTextElement new.
 	mousePositionText padding: (BlInsets all: 4).
-	mousePositionText geometry: (BlRectangle cornerRadius: 4).
+	mousePositionText geometry: (BlRoundedRectangleGeometry cornerRadius: 4).
 	mousePositionText background: (Color white alpha: 0.85).
 	mousePositionText text: '' asRopedText.
 	mousePositionText constraintsDo: [ :c |
@@ -73,12 +73,12 @@ BlDevCrossover >> initialize [
 BlDevCrossover >> mouseMoveEvent: anEvent [
 	verticalLine relocate: anEvent localPosition x @ 0.
 	horizontalLine relocate: 0 @ anEvent localPosition y.
-		
+
 	topRightContainer constraintsDo: [ :c |
 		c frame horizontal weight: 1 - (anEvent localPosition x / (crossover width max: 1)).
 		c frame vertical weight: (anEvent localPosition y / (crossover height max: 1)) ].
 		
-	mousePositionText text: (anEvent localPosition rounded asString asRopedText monospace fontSize: 11; foreground: Color gray)
+	mousePositionText text: (anEvent localPosition rounded asString asRopedText fontSize: 11; foreground: Color gray)
 ]
 
 { #category : #'api - hooks' }

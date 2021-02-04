@@ -1,17 +1,27 @@
 "
-I build sparta canvas using Skia backend
+I am a copy of class BlSpartaMozCanvasBuilder. This comment is copied from there, and might not be entirely accurate
+
+I build sparta canvas using Moz2D backend
 "
 Class {
 	#name : #BlSpartaSkiaCanvasBuilder,
 	#superclass : #BlSpartaCanvasBuilder,
-	#category : 'Bloc-Sparta'
+	#category : #'Bloc-Sparta'
 }
+
+{ #category : #'api - instance creation' }
+BlSpartaSkiaCanvasBuilder class >> extent: aPoint [
+	<return: #SpartaCanvas>
+
+	^ (self environment at: #SkiaCanvas) extent: aPoint
+]
 
 { #category : #accessing }
 BlSpartaSkiaCanvasBuilder class >> isSupported [
 	<return: #Boolean>
-	
-	^ (self environment includesKey: #SkiaCanvas) and: [ (self environment at: #SkiaCanvas) isSupported ]
+
+	^ (self environment includesKey: #SkiaCanvas)
+		and: [ (self environment at: #SkiaLibrary) uniqueInstance hasModule ]
 ]
 
 { #category : #accessing }
@@ -24,12 +34,17 @@ BlSpartaSkiaCanvasBuilder class >> label [
 BlSpartaSkiaCanvasBuilder class >> offscreen [
 	<return: #SpartaCanvas>
 
-	^ (self environment at: #SkiaOffscreenCanvas) uniqueInstance
+	^ (self environment at: #SkiaCanvas) offscreen
+]
+
+{ #category : #'api - instance creation' }
+BlSpartaSkiaCanvasBuilder class >> pdf: aFileName extent: aPoint [
+	self shouldBeImplemented
 ]
 
 { #category : #accessing }
 BlSpartaSkiaCanvasBuilder class >> priority [
-	^ 30
+	^ 5
 ]
 
 { #category : #testing }
@@ -37,7 +52,7 @@ BlSpartaSkiaCanvasBuilder class >> supportsBufferSurface [
 	"Return true if this canvas builder can work with a buffer surface, false otherwise"
 	<return: #Boolean>
 	
-	^ false
+	^ true
 ]
 
 { #category : #testing }
@@ -45,7 +60,7 @@ BlSpartaSkiaCanvasBuilder class >> supportsFormSurface [
 	"Return true if this canvas builder can work with form surface, false otherwise"
 	<return: #Boolean>
 	
-	^ false
+	^ true
 ]
 
 { #category : #testing }
@@ -56,25 +71,47 @@ BlSpartaSkiaCanvasBuilder class >> supportsOpenGLSurface [
 	^ true
 ]
 
+{ #category : #'api - instance creation' }
+BlSpartaSkiaCanvasBuilder class >> svg: aFileName extent: aPoint [
+	self shouldBeImplemented
+]
+
 { #category : #'instance creation' }
 BlSpartaSkiaCanvasBuilder >> forBufferOn: aRendererSurface [
 	<return: #SpartaCanvas>
-	
-	^ self shouldNotImplement
+
+	^ (self class environment at: #SkiaCanvas)
+		createForData: aRendererSurface buffer
+		extent: aRendererSurface extent
+		stride: aRendererSurface stride
+		format: (self class environment at: #SkiaColorType) BGRA8888
 ]
 
 { #category : #'instance creation' }
 BlSpartaSkiaCanvasBuilder >> forFormOn: aRendererSurface [
 	<return: #SpartaCanvas>
-	
-	^ self shouldNotImplement
+
+	^ (self class environment at: #SkiaCanvas)
+		createForData: aRendererSurface pointer
+		extent: aRendererSurface extent
+		stride: aRendererSurface stride
+		format: (self class environment at: #SkiaColorType) BGRA8888
 ]
 
 { #category : #'instance creation' }
 BlSpartaSkiaCanvasBuilder >> forOpenGLOn: aRendererSurface [
+	| aSkiaBackendRenderTarget |
 	<return: #SpartaCanvas>
-	
+
+	aSkiaBackendRenderTarget := (self class environment at: #SkiaBackendRenderTarget)
+		newGlExtent: aRendererSurface physicalSize asPoint
+		sampleCount: aRendererSurface sampleCount
+		stencilBits: aRendererSurface stencilBits
+		framebufferId: aRendererSurface framebufferId
+		framebufferFormat: aRendererSurface framebufferFormat.
+
 	^ (self class environment at: #SkiaCanvas)
-		extent: aRendererSurface windowExtent
-		renderExtent: aRendererSurface canvasExtent
+		createFromRenderTarget: aSkiaBackendRenderTarget
+		format: (self class environment at: #SkiaColorType) RGBA8888
+		context: aRendererSurface context
 ]

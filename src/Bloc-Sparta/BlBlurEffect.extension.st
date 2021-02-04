@@ -11,7 +11,7 @@ BlBlurEffect >> applyOnSpartaCanvas: aSpartaCanvas for: anElement [
 		ifFalse: [ 1 ].
 	
 	aSpartaCanvas clip
-		by: (anElement geometry pathOnSpartaCanvas: aSpartaCanvas)
+		by: (anElement geometry pathOnSpartaCanvas: aSpartaCanvas of: anElement)
 		during: [
 			aSpartaCanvas transform
 				by: [ :t | t scaleBy: 1.0 / aWindowScale ]
@@ -19,7 +19,7 @@ BlBlurEffect >> applyOnSpartaCanvas: aSpartaCanvas for: anElement [
 					aSpartaCanvas filter
 						area: anEffectBounds; "source in device window coordinates"
 						to: 0@0; "destination in local coordinates of canvas"
-						type: (aSpartaCanvas gaussianBlurFilter
+						type: (aSpartaCanvas filters blur
 							stdDeviation: self radius;
 							source: aSpartaCanvas);
 						draw ] ]

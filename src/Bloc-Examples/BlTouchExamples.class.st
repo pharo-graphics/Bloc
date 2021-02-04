@@ -1,17 +1,14 @@
 Class {
 	#name : #BlTouchExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #examples }
 BlTouchExamples class >> multiTouchDemo [
 	<script: 'self multiTouchDemo'>
 	| container space |
-	
-	(Smalltalk hasClassNamed: #BlOSWindowHost)
-		ifFalse: [ ^ self ].
-	
+
 	container := BlElement new.
 	container background: Color veryVeryLightGray.
 	container constraintsDo: [ :c |
@@ -22,7 +19,7 @@ BlTouchExamples class >> multiTouchDemo [
 		| aNewElement |
 
 		aNewElement := BlElement new.
-		aNewElement geometry: BlEllipse new.
+		aNewElement geometry: BlEllipseGeometry new.
 		aNewElement size: 100@100.
 		aNewElement relocate: anEvent localPosition - (50@50).
 		aNewElement background: Color gray.
@@ -41,7 +38,6 @@ BlTouchExamples class >> multiTouchDemo [
 	space := BlSpace new.
 	space position: 100@100.
 	space title: 'Touch Demo'.
-	space host: #BlOSWindowHost asClass new.
-	space root addChild: container.
+	space addChild: container.
 	space show
 ]

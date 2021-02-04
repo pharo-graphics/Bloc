@@ -9,6 +9,9 @@ The central concept is ${class:BlElement}$.
 
 The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray: ${class:BaselineOfBloc|show=#gtPackagesMapFor:|expanded=true}$
 
+!!Tutorial
+
+You can learn Bloc following a memory game tutorial: ${icebergFile:path=feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar}$.
 
 "
 Class {
@@ -25,53 +28,59 @@ BaselineOfBloc >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec postLoadDoIt: #'postLoadBloc:'.
-		spec 
-			baseline: 'BlocCore' with: [
-				spec repository: 'github://pharo-graphics/Bloc/src' ];
-			baseline: 'BlocLayout' with: [
-				spec repository: 'github://pharo-graphics/Bloc/src' ];
-			baseline: 'Sparta' with: [
-				spec repository: 'github://syrel/Sparta/src' ];
-			baseline: 'TaskIt' with: [
-				spec repository: 'github://sbragagnolo/taskit:v1.0.1' ];
-			baseline: 'GToolkitExamplesEngine' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples/src' ].
-		spec 
-			package: #'Bloc-Geometry' with: [
-				spec requires: #(#BlocCore ). ];
-			package: #'Bloc-Animation' with: [
-				spec requires: #(#BlocCore ). ];
-			package: #'Bloc-Infinite' with: [
-				spec requires: #(#BlocCore 'Bloc-Animation' ). ];
-			package: #'Bloc-Infinite-Layouts' with: [
-				spec requires: #('Bloc-Infinite' ). ];
-			package: #'Bloc-Animation-Tests' with: [
-				spec requires: #('Bloc-Animation' #GToolkitExamplesEngine ). ];
-			package: #'Bloc-Text' with: [
-				spec requires: #(#BlocCore ). ];
-			package: #'Bloc-Text-Rope' with: [
-				spec requires: #(#BlocCore 'Bloc-Text' ). ];
-			package: #'Bloc-Text-Elements' with: [
-				spec requires: #(#BlocCore 'Bloc-Text' 'Bloc-Text-Rope' ). ];
-			package: #'Bloc-Sparta' with: [
-				spec requires: #(#BlocCore 'Bloc-Text' #Sparta ). ];
-			package: #'Bloc-Exporter' with: [
-				spec requires: #(#BlocCore 'Bloc-Sparta' ). ];
-			package: #'Bloc-DevTool' with: [
-				spec requires: #(#BlocCore #BlocLayout ). ];
-			package: #'Bloc-Examples' with: [
-				spec requires: #('GToolkitExamplesEngine' 'BlocLayout' 'Bloc-Geometry' 'Bloc-Infinite' 'Bloc-Infinite-Layouts' 'Bloc-DevTool' 'Bloc-Text-Elements' ). ];
-			package: #'BlocHost-Mock' with: [
-				spec requires: #(#BlocCore ). ];
-			package: #'BlocHost-Morphic' with: [
-				spec requires: #(#BlocCore ). ];
-			package: #'BlocHost-OSWindow' with: [
-				spec requires: #(#BlocCore 'Bloc-Sparta'). ];
-			package: #'Bloc-Extensions' with: [
-				spec requires: #('BlocCore' 'Bloc-Sparta' 'Bloc-Animation' 'Bloc-DevTool' ). ];
-			package: 'Bloc-TaskIt' with: [
-				spec requires: #('TaskIt' 'BlocCore' #'Bloc-Animation' #'Bloc-Text-Elements' ). ]. ].
 
+		spec 
+			baseline: 'Beacon' with: [
+				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
+			baseline: 'Fenster' with: [
+				spec repository: 'github://feenkcom/fenster/src' ];
+			baseline: 'Sparta' with: [
+				spec repository: 'github://feenkcom/Sparta/src' ];
+			baseline: 'Glutin' with: [
+				spec repository: 'github://feenkcom/gtoolkit-glutin/src' ].
+		
+		spec 
+			package: #Bloc with: [
+				spec requires: #(#Beacon Fenster) ];
+			package: #'Bloc-Animation' with: [
+				spec requires: #(#Bloc) ];
+			package: #'Bloc-Layout' with: [ "animation is required by animated layouts"
+				spec requires: #(#Bloc #'Bloc-Animation') ];
+			package: #'Bloc-Text' with: [
+				spec requires: #('Bloc'). ];
+			package: #'Bloc-Text-Rope' with: [
+				spec requires: #('Bloc' 'Bloc-Text') ];
+			package: #'Bloc-Text-Elements' with: [
+				spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Text-Rope'). ];
+			package: #'BlocHost-Mock' with: [
+				spec requires: #(#Bloc). ];
+			package: #'BlocHost-Morphic' with: [
+				spec requires: #(#'Bloc') ];
+			package: #'Bloc-Tests' with: [
+				spec requires: #(#Bloc 'BlocHost-Mock' ). ].
+			
+		spec 
+			package: #'BlocHost-Mock' with: [
+				spec requires: #(#Bloc). ];
+			package: #'BlocHost-Glutin' with: [
+				spec requires: #(#Bloc #Fenster #Glutin) ].
+		
+		"Compositor"
+		spec
+			package: #'Bloc-Compositor' with: [
+				spec requires: #(#Bloc 'Sparta'). ].
+			
+		spec
+			package: #'Bloc-Sparta' with: [
+				spec requires: #('Sparta' 'Bloc' 'Bloc-Text' 'Bloc-Text-Elements' 'Bloc-Compositor'). ];
+			package: #'Bloc-Exporter' with: [
+				spec requires: #(#Bloc 'Bloc-Sparta' ). ].
+
+		spec
+			package: #'Bloc-DevTool' with: [
+				spec requires: #(#Bloc #'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope'). ];
+			package: #'Bloc-Scripter' with: [
+				spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock'). ] ].
 ]
 
 { #category : #'post load' }
@@ -80,18 +89,13 @@ BaselineOfBloc >> postLoadBloc: spec [
 		ifTrue: [ ^ self ].
 		
 	PostLoaded := true.
-	self postLoadDisableTaskItDebugger: spec.
 	self postLoadMorphicHost: spec
-	
-]
-
-{ #category : #'post load' }
-BaselineOfBloc >> postLoadDisableTaskItDebugger: spec [
-	TKTConfiguration profile: TKTProfile test.
-	TKTDebugger disable.
 ]
 
 { #category : #'post load' }
 BaselineOfBloc >> postLoadMorphicHost: spec [
-	BlBlocMorphicUIManager useAsDefault
+
+	"This will select an appropriate UI manager"
+	SystemVersion current major < 8
+		ifTrue: [ UIManager default: UIManager forCurrentSystemConfiguration ]
 ]

@@ -11,9 +11,10 @@ Class {
 		'session',
 		'canvasIdentity',
 		'geometry',
-		'geometryPath'
+		'geometryPath',
+		'strokedBounds'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #'instance creation' }
@@ -38,7 +39,7 @@ BlPathCache >> checkSession [
 { #category : #accessing }
 BlPathCache >> geometry [
 	"Return a geometry whose path I cache"
-	<return: #BlGeometry>
+	<return: #BlElementVectorGeometry>
 
 	^ geometry
 ]
@@ -58,5 +59,23 @@ BlPathCache >> geometry: aBlGeometry [
 BlPathCache >> releaseCache [
 	"Release path caches requiring their fresh creation"
 
-	geometryPath := nil
+	geometryPath ifNotNil: #release.
+	geometryPath := nil.
+	self releaseStrokedBoundsCache
+]
+
+{ #category : #accessing }
+BlPathCache >> releaseStrokedBoundsCache [
+	"Release stroked bounds to force its recomputation"
+
+	strokedBounds := nil
+]
+
+{ #category : #geometry }
+BlPathCache >> strokedBounds: aBlBounds of: anElement on: aCanvas [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+	<return: #BlBounds>
+
+	^ strokedBounds ifNil: [ strokedBounds := anElement outskirts strokedBounds: BlBounds new of: anElement on: aCanvas ]
 ]

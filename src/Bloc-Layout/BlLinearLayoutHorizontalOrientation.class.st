@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLinearLayoutHorizontalOrientation,
 	#superclass : #BlLinearLayoutOrientation,
-	#category : 'Bloc-Layout-Linear-Utilities'
+	#category : #'Bloc-Layout-Linear-Utilities'
 }
 
 { #category : #orientation }
@@ -12,11 +12,6 @@ BlLinearLayoutHorizontalOrientation >> breadthMode [
 { #category : #orientation }
 BlLinearLayoutHorizontalOrientation >> breadthProperties: anElement [
 	^ anElement constraints vertical
-]
-
-{ #category : #orientation }
-BlLinearLayoutHorizontalOrientation >> breadthSpec [
-	^ self layout cache heightMeasureSpec
 ]
 
 { #category : #orientation }
@@ -42,7 +37,7 @@ BlLinearLayoutHorizontalOrientation >> isHorizontal [
 ]
 
 { #category : #layout }
-BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle [
+BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	|top right bottom left majorBounds elementInnerBounds theLayeredChildren |
 	"Layout subnodes vertically in column one by one
 	based on previousely measured extent"
@@ -52,13 +47,13 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle [
 	right := left.
 	bottom := top.
 
-	theLayeredChildren := self layout layeredChildren: anElement.
+	theLayeredChildren := anElement children accountedByLayout.
 
 	self layout direction
 		with: theLayeredChildren
 		do: [ :child |
-			right := right + child measuredWidth + (child outsets width max: 0).
-			bottom := bottom max: child measuredHeight + (child outsets height max: 0) ].
+			right := right + child measuredWidth + (child outsets width max: 0.0).
+			bottom := bottom max: child measuredHeight + (child outsets height max: 0.0) ].
 	
 	majorBounds := (left@top corner: right@bottom).
 	elementInnerBounds := anElement padding inset: anElement boundsInLocal.
@@ -78,8 +73,8 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle [
 		into: [ :origin :child |
 			| childBounds childMarginBounds childConstraints |
 			childConstraints := child constraints linear.
-			childBounds := origin + (child outsets topLeft max: 0@0) extent: child measuredExtent.
-			childMarginBounds := origin extent: child measuredExtent + (child outsets extent max: 0@0).  
+			childBounds := origin + (child outsets topLeft max: 0.0@0.0) extent: child measuredExtent.
+			childMarginBounds := origin extent: child measuredExtent + (child outsets extent max: 0.0@0.0).  
 
 			self layout verticalAlignment ifNotNull: [ 
 				| translation allowedBounds |
@@ -93,14 +88,14 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle [
 				translation := childConstraints vertical alignment translationOf: childMarginBounds in: allowedBounds.
 				childBounds := childBounds translateBy: translation ].
 			
-			childBounds := childBounds translateBy: (self layout cellSpacing @ 0).
+			childBounds := childBounds translateBy: (self layout cellSpacing @ 0.0).
 			
 			"telling each subnode what bounds to use for layouting process.
 			Because measuring process does not modify actual extent
 			we need to use a measured one"
-			child applyLayoutIn: childBounds.
+			child applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext.
 			"translating origin horizontally right for next subnode"
-			(origin x + child measuredWidth + (child outsets width max: 0) + self layout cellSpacing) @ origin y ]
+			(origin x + child measuredWidth + (child outsets width max: 0.0) + self layout cellSpacing) @ origin y ]
 ]
 
 { #category : #orientation }
@@ -116,11 +111,6 @@ BlLinearLayoutHorizontalOrientation >> lengthMode [
 { #category : #orientation }
 BlLinearLayoutHorizontalOrientation >> lengthProperties: aChildElement [
 	^ aChildElement constraints horizontal
-]
-
-{ #category : #orientation }
-BlLinearLayoutHorizontalOrientation >> lengthSpec [
-	^ self layout cache widthMeasureSpec
 ]
 
 { #category : #orientation }

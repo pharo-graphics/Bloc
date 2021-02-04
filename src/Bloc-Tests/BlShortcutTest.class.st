@@ -4,14 +4,14 @@ Class {
 	#instVars : [
 		'shortcut'
 	],
-	#category : 'Bloc-Tests-KeyBinding'
+	#category : #'Bloc-Tests-KeyBinding'
 }
 
 { #category : #initialization }
 BlShortcutTest >> setUp [
 	super setUp.
 	
-	shortcut := BlShortcut new
+	shortcut := BlShortcutWithAction new
 ]
 
 { #category : #tests }

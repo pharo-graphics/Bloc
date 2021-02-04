@@ -21,7 +21,7 @@ Important API methods:
 "
 Class {
 	#name : #BlChildren,
-	#superclass : #Object,
+	#superclass : #Collection,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-Basic-Children'
@@ -291,6 +291,11 @@ BlChildren >> reject: aBlock [
 	^ self select: [ :anElement | (aBlock value: anElement) == false ]
 ]
 
+{ #category : #'children - enumerating' }
+BlChildren >> reverseDo: aBlock [
+	self reversed do: aBlock
+]
+
 { #category : #'children - subsets' }
 BlChildren >> reversed [
 	<return: #BlChildren>
@@ -340,6 +345,13 @@ BlChildren >> sortedByElevation [
 	<return: #BlChildren>
 
 	^ BlChildrenSortedByElevation on: self
+]
+
+{ #category : #'children - subsets' }
+BlChildren >> sortedByPerimeter [
+	<return: #BlChildren>
+
+	^ BlChildrenSortedByPerimeter on: self
 ]
 
 { #category : #private }

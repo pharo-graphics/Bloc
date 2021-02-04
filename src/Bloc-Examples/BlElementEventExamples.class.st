@@ -4,7 +4,7 @@ I contain examples of different BlElementEvents
 Class {
 	#name : #BlElementEventExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #examples }
@@ -26,31 +26,6 @@ BlElementEventExamples >> addedToParent [
 	container addChild: parent.
 	
 	self assert: wasAdded equals: 1.
-	^ container
-]
-
-{ #category : #examples }
-BlElementEventExamples >> addedToSuperParent [
-	<gtExample>
-	| parent child container events |
-	
-	events := OrderedCollection new.
-	
-	child := self child.
-	child addEventHandlerOn: BlElementAddedToSuperParentEvent do: [ :anEvent | events add: anEvent ].
-	
-	parent := self parent.
-	container := self container.
-	
-	"is sent when child is added to the parent"
-	parent addChild: child.
-	"will also be sent when adding parent to a container"
-	container addChild: parent.
-	
-	self assert: events size equals: 2.
-	self assert: events first addedElement equals: child.
-	self assert: events second addedElement equals: parent.
-
 	^ container
 ]
 
@@ -184,7 +159,7 @@ BlElementEventExamples >> removedFromParent [
 	wasRemoved := 0.
 	
 	child := self child.
-	child addEventHandlerOn: BlElementRemovedEvent do: [ wasRemoved := wasRemoved + 1 ].
+	child addEventHandlerOn: BlElementRemovedFromParentEvent do: [ wasRemoved := wasRemoved + 1 ].
 	
 	parent := self parent.
 	container := self container.

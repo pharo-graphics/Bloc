@@ -20,7 +20,7 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #cleanup }
@@ -52,6 +52,17 @@ BlCornerRadii >> = aBlCornerRadii [
 		and: [ self bottomRight = aBlCornerRadii bottomRight
 			and: [ self topLeft = aBlCornerRadii topLeft
 				and: [ self topRight = aBlCornerRadii topRight ] ] ]
+]
+
+{ #category : #converting }
+BlCornerRadii >> asArray [
+	<return: #Array of: #Number>
+	^ { 
+		topLeft.
+		topRight.
+		bottomRight.
+		bottomLeft
+	}
 ]
 
 { #category : #accessing }

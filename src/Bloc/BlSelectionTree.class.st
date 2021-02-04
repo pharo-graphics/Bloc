@@ -47,6 +47,16 @@ BlSelectionTree >> contains: anIndex [
 		ifFalse: [ false ]
 ]
 
+{ #category : #'tree - testing' }
+BlSelectionTree >> containsIndex: anIndex [
+	"Return true if this selection interval includes a given index, false otherwise"
+	<return: #Boolean>
+	
+	^ self hasRoot
+		ifTrue: [ self root containsIndex: anIndex ]
+		ifFalse: [ false ]
+]
+
 { #category : #'tree - deletion' }
 BlSelectionTree >> delete: aMonotoneTextSelection [
 	| theOverlapping |
@@ -88,9 +98,9 @@ BlSelectionTree >> findOverlappingNeighbours: aMonotoneTextSelection [
 { #category : #accessing }
 BlSelectionTree >> first [
 	self
-		assert: [ self hasRoot ]
-		description: [ 'There must be root!' ].
-		
+		assert: [ self isNotEmpty ]
+		description: [ 'Selection is empty, can not get #first' ].
+
 	^ self root findMin
 ]
 
@@ -165,6 +175,12 @@ BlSelectionTree >> overlappingNeighbours: aMonotoneTextSelection in: aStream [
 	
 	self hasRoot
 		ifTrue: [ self root overlappingNeighbours: aMonotoneTextSelection in: aStream ]
+]
+
+{ #category : #copying }
+BlSelectionTree >> postCopy [
+	root := root copy.
+	root ifNotNil: [ root parent: self ]
 ]
 
 { #category : #printing }

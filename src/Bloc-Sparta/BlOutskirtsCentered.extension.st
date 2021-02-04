@@ -17,7 +17,7 @@ BlOutskirtsCentered >> drawBorder: aBlBorder onSpartaCanvas: aCanvas of: anEleme
 	aCanvas stroke
 		alpha: aBlBorder opacity;
 		paint: aBlBorder paint;
-		path: (anElement geometry pathOnSpartaCanvas: aCanvas);
+		path: (anElement geometry pathOnSpartaCanvas: aCanvas of: anElement);
 		width: aBlBorder width;
 		in: [ :aPainter | aBlBorder style applyOn: aPainter ];
 		draw

@@ -5,7 +5,7 @@ I export bloc elements as SVG file.
 | element |
 element := BlElement new.
 element background: Color red.
-element geometry: BlEllipse new.
+element geometry: BlEllipseGeometry new.
 element size: 400@200.
 
 (BlExporter svg element: element; fileName: 'test.svg'; export) inspect
@@ -14,7 +14,7 @@ element size: 400@200.
 Class {
 	#name : #BlSvgExporter,
 	#superclass : #BlFileExporter,
-	#category : 'Bloc-Exporter'
+	#category : #'Bloc-Exporter'
 }
 
 { #category : #'instance creation' }

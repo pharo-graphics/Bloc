@@ -4,12 +4,12 @@ Class {
 	#instVars : [
 		'resizer'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #resizing }
 BlLayoutCommonConstraintsAxis >> exact: aNumber [
-	self resizer: (BlLayoutResizer exact: aNumber)
+	self resizer: (BlLayoutResizer exact: aNumber asFloat)
 ]
 
 { #category : #resizing }
@@ -22,11 +22,16 @@ BlLayoutCommonConstraintsAxis >> fitContentLimited [
 	self resizer: BlLayoutResizer fitContentLimited
 ]
 
+{ #category : #resizing }
+BlLayoutCommonConstraintsAxis >> fitContentLimitedOffset: aNumber [
+	self resizer: (BlLayoutResizer fitContentLimitedOffset: aNumber)
+]
+
 { #category : #initialization }
 BlLayoutCommonConstraintsAxis >> initialize [
 	super initialize.
 	
-	resizer := BlLayoutResizer exact: 50
+	resizer := BlLayoutResizer exact: 50.0
 ]
 
 { #category : #resizing }
@@ -43,5 +48,9 @@ BlLayoutCommonConstraintsAxis >> resizer [
 
 { #category : #accessing }
 BlLayoutCommonConstraintsAxis >> resizer: aBlLayoutResizer [
+	self
+		assert: [ aBlLayoutResizer isKindOf: BlLayoutResizer ]
+		description: [ 'Resizer must be a special resizer object' ].
+
 	resizer := aBlLayoutResizer
 ]

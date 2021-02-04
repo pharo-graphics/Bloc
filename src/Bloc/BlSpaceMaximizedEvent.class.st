@@ -1,5 +1,5 @@
 Class {
 	#name : #BlSpaceMaximizedEvent,
 	#superclass : #BlSpaceResizedEvent,
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Space'
 }

@@ -4,7 +4,7 @@ I contain examples of element bounds api
 Class {
 	#name : #BlElementBoundsExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Basic'
+	#category : #'Bloc-Examples-Basic'
 }
 
 { #category : #examples }
@@ -31,8 +31,8 @@ BlElementBoundsExamples >> boundsInLocal [
 	parent := self parentWithChild.
 	child := parent children first.
 
-	self assert: child bounds inLocal asRectangle equals: (0@0 extent: self childExtent).
-	self assert: parent bounds inLocal asRectangle equals: (0@0 extent: self parentExtent).
+	self assert: child bounds inLocal asRectangle equals: (0.0@0.0 extent: self childExtent).
+	self assert: parent bounds inLocal asRectangle equals: (0.0@0.0 extent: self parentExtent).
 
 	^ parent
 ]
@@ -348,14 +348,14 @@ BlElementBoundsExamples >> shadowEffectBoundsWithoutOffset [
 
 	parent := self parentWithChild.
 	child := parent children first.
-	child effect: (BlDropShadowEffect color: Color black width: shadowWidth offset: 0@0).
+	child effect: (BlGaussianShadowEffect color: Color black width: shadowWidth offset: 0@0).
 
-	self assert: child effectBounds equals: (shadowWidth asPoint negated corner: self childExtent + shadowWidth asPoint).
+	self assert: child effectBounds equals: (shadowWidth * 3 asPoint negated corner: self childExtent + (shadowWidth * 3 asPoint)).
 
 	child size: self childExtent * 2.
 	child forceLayout.
 
-	self assert: child effectBounds equals: (shadowWidth asPoint negated corner: (self childExtent * 2) + shadowWidth asPoint).
+	self assert: child effectBounds equals: (shadowWidth * 3 asPoint negated corner: (self childExtent * 2) + (shadowWidth * 3 asPoint)).
 
 	^ parent
 ]

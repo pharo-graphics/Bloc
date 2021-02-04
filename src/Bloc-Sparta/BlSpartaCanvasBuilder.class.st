@@ -7,13 +7,6 @@ Class {
 	#category : 'Bloc-Sparta'
 }
 
-{ #category : #'instance creation' }
-BlSpartaCanvasBuilder class >> checker: aPoint [
-	<return: #SpartaCanvas>
-	
-	^ self subclassResponsibility
-]
-
 { #category : #'api - instance creation' }
 BlSpartaCanvasBuilder class >> extent: aPoint [
 	"Create a default canvas of a given size that should be used for output on screen"
@@ -90,11 +83,6 @@ BlSpartaCanvasBuilder class >> svg: aFileName extent: aPoint [
 	<return: #SpartaCanvas>
 	
 	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-BlSpartaCanvasBuilder >> checker: anExtent [
-	^ self class checker: anExtent
 ]
 
 { #category : #accessing }

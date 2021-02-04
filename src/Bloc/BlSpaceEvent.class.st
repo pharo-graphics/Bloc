@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceEvent,
 	#superclass : #BlEvent,
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #testing }

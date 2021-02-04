@@ -5,7 +5,7 @@ Class {
 		'size',
 		'mode'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #'instance creation' }
@@ -28,7 +28,7 @@ BlMeasurementSpec class >> size: aSize mode: aMode [
 
 { #category : #'instance creation' }
 BlMeasurementSpec class >> unspecified [
-	^ self unspecified: 0
+	^ self unspecified: 0.0
 ]
 
 { #category : #'instance creation' }
@@ -100,6 +100,11 @@ BlMeasurementSpec >> isUnspecified [
 	^ self mode isUnspecified
 ]
 
+{ #category : #geometry }
+BlMeasurementSpec >> min: aMinSize max: aMaxSize [
+	^ self mode size: self size min: aMinSize max: aMaxSize
+]
+
 { #category : #accessing }
 BlMeasurementSpec >> mode [
 	^ mode
@@ -122,10 +127,14 @@ BlMeasurementSpec >> size [
 
 { #category : #accessing }
 BlMeasurementSpec >> size: aNumber [
+	<argument: #aNumber satisfies: #isBlocPositiveFloat>
+
 	size := aNumber
 ]
 
 { #category : #geometry }
 BlMeasurementSpec >> sizeFor: aNumber [
+	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+
 	^ self mode size: aNumber with: size
 ]

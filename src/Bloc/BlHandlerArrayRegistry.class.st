@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'handlers'
 	],
-	#category : #'Bloc-Events-Handling'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #testing }
@@ -59,7 +59,7 @@ BlHandlerArrayRegistry >> do: aBlock [
 { #category : #'api - accessing' }
 BlHandlerArrayRegistry >> handlers [
 	"Return an immutable collection of all registered event handlers"
-	<return: #Array of: #TBlEventHandler>
+	<return: #Array of: #BlBasicEventHandler>
 
 	^ handlers
 ]

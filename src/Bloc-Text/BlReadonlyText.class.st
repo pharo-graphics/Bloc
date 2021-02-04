@@ -1,16 +1,16 @@
 Class {
 	#name : #BlReadonlyText,
 	#superclass : #BlWrappedText,
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'text - modifications' }
-BlReadonlyText >> delete: aStart to: anEnd [
+BlReadonlyText >> deleteAll: aCollectionOfIntervals [
 	"Read only text can not be modified"
 ]
 
 { #category : #'text - modifications' }
-BlReadonlyText >> insertString: aString at: anIndex [
+BlReadonlyText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	"Read only text can not be modified"
 ]
 

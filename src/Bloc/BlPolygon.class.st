@@ -11,11 +11,11 @@ BlPolygon vertices: {
 "
 Class {
 	#name : #BlPolygon,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'vertices'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'instance creation' }
@@ -48,7 +48,13 @@ BlPolygon >> vertices [
 
 { #category : #accessing }
 BlPolygon >> vertices: aCollectionOfPoints [
-
-	vertices := aCollectionOfPoints.
-	extent := vertices max
+	| theNewVertices |
+	theNewVertices := aCollectionOfPoints collect: [ :eachPoint | eachPoint asFloatPoint ].
+	
+	theNewVertices = vertices
+		ifTrue: [ ^ self ].
+	
+	vertices := theNewVertices.
+	extent := vertices max.
+	self releaseCache
 ]

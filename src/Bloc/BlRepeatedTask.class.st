@@ -8,7 +8,7 @@ Class {
 		'previousRunTime',
 		'isRunning'
 	],
-	#category : 'Bloc-Space-Support'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #accessing }
@@ -90,22 +90,13 @@ BlRepeatedTask >> onRun [
 
 { #category : #'api - running' }
 BlRepeatedTask >> run [
-
-	self isRunning
+	(self isRunning and: [ self element isAttachedToSceneGraph  ])
 		ifFalse: [ ^ self ].
 
-	"time didn't come yet for me to run"
-	(previousRunTime isNotNil and: [ self time now < (previousRunTime + self delay) ])
-		ifTrue: [ ^ self enqueue ].
-	
-	self onRun.
-	previousRunTime := previousRunTime
-		ifNil: [ self time now ]
-		ifNotNil: [ previousRunTime + self delay ].
-	
-	"it is possible that we stop the task in #onRun"
-	self isRunning
-		ifTrue: [ self enqueue ]
+	BlTaskAtQueue default 
+		schedule: [ self element enqueueTask: 
+				(BlTaskAction new action: [ self onRun; run ]) ]
+		at: self time now + self delay
 ]
 
 { #category : #'api - running' }

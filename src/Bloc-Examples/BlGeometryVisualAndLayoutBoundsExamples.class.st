@@ -128,7 +128,6 @@ BlGeometryVisualAndLayoutBoundsExamples >> debuggingAlignedIcon [
 	<gtExample>
 	| aContainerElement |
 	aContainerElement := self alignedIcon.
-	aContainerElement children first debug: true.
 	^ aContainerElement
 ]
 
@@ -137,7 +136,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> debuggingMisalignedIcon [
 	<gtExample>
 	| aContainerElement |
 	aContainerElement := self misalignedIcon.
-	aContainerElement children first debug: true.
+	aContainerElement children first.
 	^ aContainerElement
 ]
 
@@ -145,17 +144,15 @@ BlGeometryVisualAndLayoutBoundsExamples >> debuggingMisalignedIcon [
 BlGeometryVisualAndLayoutBoundsExamples >> debuggingMode [
 	<gtExample>
 	<label: 'Triangle polygon with visual and geometry bounds'>
-	| aContainer aTriangleElement |
+	| aContainer |
 	aContainer := self fullyVisibleTriangle.
-	aTriangleElement := aContainer children first.
-	aTriangleElement debug: true.
 	^ aContainer
 ]
 
 { #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> emptyIconElement [
 	<gtExample>
-	^ BlElement new
+	^ BlDevElement new
 		size: 8 @ 12;
 		background: Color green muchDarker.
 ]
@@ -257,12 +254,11 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometry [
 	<label: 'Rectangle element in debug mode, displaying bounds'>
 	| aRectangleElement |
 	
-	aRectangleElement := BlElement new.
+	aRectangleElement := BlDevElement new.
 	aRectangleElement geometry: self rectanglePolygon.
 	aRectangleElement size: 200@150.
 	aRectangleElement background: (Color gray alpha: 0.2).
 	aRectangleElement border: (BlBorder paint: (Color gray alpha: 0.5) width: 10).
-	aRectangleElement debug: true.
 	
 	^ aRectangleElement
 ]
@@ -326,13 +322,11 @@ BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometry [
 	<gtExample>
 	<label: 'Star element in debug mode, displaying bounds'>
 	| aStarElement |
-	aStarElement := BlElement new.
+	aStarElement := BlDevElement new.
 	aStarElement geometry: self starPolygon.
 	aStarElement size: 200 @ 200.
 	aStarElement background: (Color gray alpha: 0.2).
-	aStarElement
-		border: (BlBorder paint: (Color gray alpha: 0.5) width: 10).
-	aStarElement debug: true.
+	aStarElement border: (BlBorder paint: (Color gray alpha: 0.5) width: 10).
 	^ aStarElement
 ]
 

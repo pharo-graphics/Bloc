@@ -14,10 +14,20 @@ element layout: BlBasicLayout new
 Class {
 	#name : #BlElementLayoutChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Element'
 }
+
+{ #category : #'api - enable / disable' }
+BlElementLayoutChangedEvent class >> enableIn: anObject [
+	anObject enableLayoutChanged
+]
+
+{ #category : #'api - enable / disable' }
+BlElementLayoutChangedEvent class >> wantedIn: anObject [
+	^ anObject wantsLayoutChanged
+]
 
 { #category : #sending }
 BlElementLayoutChangedEvent >> sendTo: anObject [
-	anObject elementLayoutChangedChanged: self
+	anObject elementLayoutChangedEvent: self
 ]

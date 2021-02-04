@@ -3,7 +3,10 @@
 
 """"I am independent from Sparta """"
 
-${class:BlTextElementBaselineExamples}$
+I support multiple measurement strategies, see examples for more detailed explanation:
+${class:BlTextElementMeasurementStrategyExamples}$
+
+
 "
 Class {
 	#name : #BlTextElement,
@@ -13,20 +16,41 @@ Class {
 		'paragraph',
 		'selection',
 		'baseline',
-		'measurer',
-		'measurement'
+		'measurement',
+		'measurer'
+	],
+	#classVars : [
+		'DefaultText',
+		'ParagraphPool'
 	],
 	#category : #'Bloc-Text-Elements'
 }
+
+{ #category : #'class initialization' }
+BlTextElement class >> cleanUp [
+	self initialize
+]
+
+{ #category : #'class initialization' }
+BlTextElement class >> initialize [
+	ParagraphPool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000).
+	DefaultText := 'Text' asRopedText readonly
+]
 
 { #category : #'instance creation' }
 BlTextElement class >> text: aBrText [
 	^ self new text: aBrText
 ]
 
-{ #category : #'api - text' }
-BlTextElement >> ascentBaseline [
-	self baseline: BlTextParagraphAscentBaseline uniqueInstance
+{ #category : #'private - paragraph' }
+BlTextElement >> acquireParagraph [
+	| aParagraph |
+	
+	aParagraph := ParagraphPool acquire
+		ifNil: [ self createTextParagraph ].
+	aParagraph reset.
+
+	^ aParagraph
 ]
 
 { #category : #accessing }
@@ -44,13 +68,13 @@ BlTextElement >> baseline: aTextParagraphBaseline [
 { #category : #layout }
 BlTextElement >> baselineOffset [
 	^ paragraph
-		ifNotNil: [ paragraph baseline y ]
-		ifNil: [ 0 ].
+		ifNotNil: [ paragraph baseline y + self padding top ]
+		ifNil: [ 0 ]
 ]
 
-{ #category : #'api - text' }
-BlTextElement >> boundsBaseline [
-	self baseline: BlTextParagraphBoundsBaseline uniqueInstance
+{ #category : #layout }
+BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
+	measurer measureTextParagraph: aBlTextParagraph of: self
 ]
 
 { #category : #layout }
@@ -88,25 +112,25 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 	^ aMaxWidth
 ]
 
+{ #category : #'private - paragraph' }
+BlTextElement >> createTextParagraph [
+	"Create a text paragraph used to measure and render text"
+	<return: #BlTextParagraph>
+
+	^ BlSingleLineTextParagraph new
+]
+
+{ #category : #initialization }
+BlTextElement >> defaultMeasurer [
+	^ BlTextElementHostMeasurer new
+]
+
 { #category : #initialization }
 BlTextElement >> defaultText [
 	"Return a default text I should be created with"
 	<return: #BlText>
 
-	^ BlRopedText string: 'Text'
-]
-
-{ #category : #initialization }
-BlTextElement >> defaultTextMeasurer [
-	^ BlTextElementCanvasMeasurer new
-]
-
-{ #category : #initialization }
-BlTextElement >> defaultTextParagraph [
-	"Create a text paragraph used to measure and render text"
-	<return: #BlTextParagraph>
-
-	^ BlSingleLineTextParagraph new
+	^ DefaultText
 ]
 
 { #category : #'selection - management' }
@@ -119,94 +143,49 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 	self invalidate
 ]
 
-{ #category : #drawing }
-BlTextElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
-	| aBaselineOffset anAscentOffset aDescentOffset aLineWidth |
-	
-	paragraph
-		ifNil: [ ^ self ].
+{ #category : #'api - text' }
+BlTextElement >> editorMeasurement [
+	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
+	self baseline: BlTextParagraphAscentLooseBaseline uniqueInstance
+]
 
-	aLineWidth := 1.0 / self globalScale.
+{ #category : #accessing }
+BlTextElement >> fontSize: aNumber [
+	self text fontSize: aNumber.
+	self textChanged
+]
 
-	aCanvas stroke
-		path: self boundsInLocal;
-		paint: Color red;
-		width: aLineWidth;
-		draw.
+{ #category : #geometry }
+BlTextElement >> indexAtScreenPosition: aPoint [
+	<return: #Number>
 
-	aBaselineOffset := self baselineOffset.
-
-	anAscentOffset := aBaselineOffset - paragraph ascent.
-	aDescentOffset := aBaselineOffset + paragraph descent.
-
-	aCanvas stroke
-		path: (aCanvas shape line: 0@aBaselineOffset to: self bounds width @aBaselineOffset);
-		paint: Color black;
-		width: aLineWidth;
-		draw.
-	
-	aCanvas stroke
-		path: (aCanvas shape line: (self width / 2.0) @ 0 to: (self width / 2.0) @ self height);
-		paint: Color green muchDarker;
-		width: aLineWidth;
-		draw.
-		
-	aCanvas stroke
-		path: (aCanvas shape
-			line: (BlBounds fromRectangle: (paragraph bounds translateBy: paragraph baseline)) topCenter
-			to: (BlBounds fromRectangle: (paragraph bounds translateBy: paragraph baseline)) bottomCenter);
-		paint: Color magenta;
-		width: aLineWidth;
-		draw.
-		
-	aCanvas stroke
-		path: (aCanvas shape line: 0@anAscentOffset to: self bounds width @anAscentOffset);
-		paint: Color red;
-		width: aLineWidth;
-		draw.
-
-	aCanvas stroke
-		path: (aCanvas shape line: 0@aDescentOffset to: self bounds width @aDescentOffset);
-		paint: Color blue;
-		width: aLineWidth;
-		draw.
-
-	aCanvas stroke
-		path: (paragraph bounds translateBy: paragraph baseline);
-		paint: Color gray;
-		width: aLineWidth;
-		draw.
-
-	aCanvas fill
-		path:  (aCanvas shape circleAt: paragraph baseline radius: (10 / self globalScale));
-		paint: Color blue;
-		draw
+	^ self paragraph indexAtPosition: aPoint - self padding topLeft
 ]
 
 { #category : #initialization }
 BlTextElement >> initialize [
 	super initialize.
-	
+
+	self tightMeasurement.
+
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
 	paragraph := nil.
-	
+	measurer := self defaultMeasurer.
+
 	self constraintsDo: [ :c | 
 		c horizontal fitContent.
 		c vertical fitContent ].
 
 	selection := BlCompositeSelection new.
-	measurer := self defaultTextMeasurer.
 
-	self tightMesurement.
-	self boundsBaseline.
-	
 	"self debug: true"
 ]
 
 { #category : #'api - text' }
-BlTextElement >> looseMesurement [
-	self measurement: BlTextElementLooseMeasurementStrategy uniqueInstance
+BlTextElement >> labelMeasurement [
+	self measurement: BlTextElementLabelMeasurementStrategy uniqueInstance.
+	self baseline: BlTextParagraphAscentTightBaseline uniqueInstance
 ]
 
 { #category : #layout }
@@ -221,17 +200,19 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 			ifTrue: [ aWidthSpec := BlMeasurementSpec exact: self measuredWidth ]
 			ifFalse: [ aWidthSpec := self layout
 				measurementSpecFor: anExtentMeasurementSpec widthSpec
-				usedSize: 0
+				usedSize: 0.0
 				resizer: aWidthResizer ].
 
 		aHeightResizer isMatchParent
 			ifTrue: [ aHeightSpec := BlMeasurementSpec exact: self measuredHeight ]
 			ifFalse: [ aHeightSpec := self layout
 				measurementSpecFor: anExtentMeasurementSpec heightSpec
-				usedSize: 0
+				usedSize: 0.0
 				resizer: aHeightResizer ].
 	
-		aChild measure: aWidthSpec @ aHeightSpec ]
+		aChild measure: aWidthSpec @ aHeightSpec ].
+	
+	self layout measureIgnored: self with: anExtentMeasurementSpec
 ]
 
 { #category : #layout }
@@ -249,7 +230,7 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 
 	paragraph
 		"Create a new text layout"
-		ifNil: [ paragraph := self defaultTextParagraph ]
+		ifNil: [ paragraph := self acquireParagraph ]
 		"or reuse existing"
 		ifNotNil: [ paragraph reset ].
 
@@ -260,7 +241,10 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 		maxHeight: aMaxHeight;
 		scale: self globalScale.
 
-	paragraph measureOn: self measurer.
+	self telemetry
+		timeSync: [ 'Paragraph measureOn: ', self class name ]
+		during: [ self basicMeasureParagraph: paragraph ].
+
 	"text layout is measured at this point"
 
 	aMeasuredBounds := measurement boundsOf: paragraph.
@@ -303,9 +287,20 @@ BlTextElement >> measurer [
 ]
 
 { #category : #accessing }
-BlTextElement >> measurer: aTextElementMeasurer [
-	measurer := aTextElementMeasurer.
+BlTextElement >> measurer: anObject [
+	measurer := anObject.
 	self textChanged
+]
+
+{ #category : #'hooks - session' }
+BlTextElement >> onAddedToSceneGraph [
+	super onAddedToSceneGraph.
+	
+	paragraph
+		ifNil: [ ^ self ].
+		
+	paragraph session == Smalltalk session
+		ifFalse: [ self textChanged ]
 ]
 
 { #category : #layout }
@@ -315,25 +310,63 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 		description: [ 'Text model must be nil!' ].
 
 	(self shouldMeasure: anExtentMeasurementSpec)
-		ifTrue: [ self measureParagraph: anExtentMeasurementSpec ].
+		ifTrue: [ 
+			self telemetry
+				timeSync: [ 'Measure paragraph: ', self class name ]
+				during: [ self measureParagraph: anExtentMeasurementSpec ] ].
 	
-	self measureChildren: anExtentMeasurementSpec
+	self telemetry
+		timeSync: [ 'Measure children: ', self class name ]
+		during: [ self measureChildren: anExtentMeasurementSpec ]
 ]
 
-{ #category : #'children hooks' }
-BlTextElement >> onRemovedFromSceneGraph [
-	super onRemovedFromSceneGraph.
+{ #category : #'hooks - session' }
+BlTextElement >> onSessionChanged: aNewSession [
+	super onSessionChanged: aNewSession.
+	
+	self textChanged
+]
+
+{ #category : #'private - paragraph' }
+BlTextElement >> paragraph [
+	<return: #BlTextParagraph>
+
+	self
+		assert: [ self rawParagraph isNotNil ]
+		description: [ 'Can not access paragraph if it is nil' ].
+
+	^ self rawParagraph
+]
+
+{ #category : #'private - paragraph' }
+BlTextElement >> rawParagraph [
+	<return: #BlTextParagraph>
+
+	^ paragraph
+]
+
+{ #category : #'private - paragraph' }
+BlTextElement >> releaseParagraph [
+	| aParagraph |
 	
 	paragraph
 		ifNil: [ ^ self ].
 
-	paragraph wantsAutoRelease
-		ifFalse: [ paragraph finalize ]
+	aParagraph := paragraph.
+
+	aParagraph reset.
+	ParagraphPool release: aParagraph.
+	
+	paragraph := nil
 ]
 
-{ #category : #accessing }
-BlTextElement >> paragraph [
-	^ paragraph
+{ #category : #geometry }
+BlTextElement >> screenPositionAt: aTextIndex [
+	<return: #Point>
+	| aScreenPosition |
+	
+	aScreenPosition := self paragraph positionAt: aTextIndex.
+	^ (aScreenPosition x + self padding left) @ ((self height + self padding height) / 2.0)
 ]
 
 { #category : #'selection - management' }
@@ -348,6 +381,9 @@ BlTextElement >> select: aFromIndex to: aToIndex [
 
 { #category : #'selection - management' }
 BlTextElement >> selectNone [
+	self selection isEmpty
+		ifTrue: [ ^ self ].
+
 	self selection removeAll.
 	self invalidate
 ]
@@ -380,17 +416,27 @@ BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 
 	paragraph
 		ifNil: [ ^ true ].
+		
+	paragraph isEmpty
+		ifTrue: [ ^ true ].
 
-	(self layout previousMeasurementSpec = anExtentMeasurementSpec)
+	(self privatePreviousMeasurementSpec = anExtentMeasurementSpec)
 		ifFalse: [ ^ true ].
 
 	paragraph maxWidth = (self computeMaxWidth: anExtentMeasurementSpec)
 		ifFalse: [ ^ true ].
-		
+
 	paragraph maxHeight = (self computeMaxHeight: anExtentMeasurementSpec)
 		ifFalse: [ ^ true ].
 
 	^ false
+]
+
+{ #category : #layout }
+BlTextElement >> supportsBaseline [
+	<return: #Boolean>
+
+	^ true
 ]
 
 { #category : #accessing }
@@ -415,7 +461,10 @@ BlTextElement >> text: aTextModel [
 		
 	self
 		assert: [ aTextModel isKindOf: BlText ]
-		description: [ 'A text model must be an instance if Text' ].
+		description: [ 'A text model must be an instance of Text' ].
+		
+	text = aTextModel
+		ifTrue: [ ^ self ].
 
 	text := aTextModel.
 	self textChanged
@@ -424,7 +473,7 @@ BlTextElement >> text: aTextModel [
 { #category : #'change reporting' }
 BlTextElement >> textChanged [
 	"text layout is no more valid, remove it"
-	paragraph := nil.
+	self releaseParagraph.
 
 	"request redraw and layout"
 	self requestLayout.
@@ -439,6 +488,7 @@ BlTextElement >> textDo: aBlock [
 ]
 
 { #category : #'api - text' }
-BlTextElement >> tightMesurement [
-	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance
+BlTextElement >> tightMeasurement [
+	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
+	self baseline: BlTextParagraphBoundsBaseline uniqueInstance
 ]

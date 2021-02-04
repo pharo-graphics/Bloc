@@ -6,15 +6,24 @@ Class {
 	#superclass : #BlTextAttributesBuilder,
 	#instVars : [
 		'attributesTarget',
-		'attributeAddedBlock'
+		'attributeAddedBlock',
+		'isOverwritableByStyler'
 	],
 	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #accessing }
 BlTextDelegatedAttributesBuilder >> attribute: aTextAttribute [
+	
+	isOverwritableByStyler
+		ifTrue: [ aTextAttribute beOverwritableByStyler ]
+		ifFalse: [ aTextAttribute beNotOverwritableByStyler ].
+		
+	(self hasAttribute: aTextAttribute)
+		ifTrue: [ ^ self ].
+	
 	super attribute: aTextAttribute.
-	self attributesTarget attribute: aTextAttribute.
+	self attributesTarget ifNotNil: [ :aTarget | aTarget attribute: aTextAttribute ].
 	
 	attributeAddedBlock cull: aTextAttribute
 ]
@@ -32,11 +41,22 @@ BlTextDelegatedAttributesBuilder >> attributesTarget: aTBlTextStyleable [
 	self applyOn: attributesTarget
 ]
 
+{ #category : #accessing }
+BlTextDelegatedAttributesBuilder >> beNotOverwritableByStyler [
+	isOverwritableByStyler := false
+]
+
+{ #category : #accessing }
+BlTextDelegatedAttributesBuilder >> beOverwritableByStyler [
+	isOverwritableByStyler := true
+]
+
 { #category : #initialization }
 BlTextDelegatedAttributesBuilder >> initialize [
 	super initialize.
 	
-	attributeAddedBlock := [  ]
+	attributeAddedBlock := [  ].
+	isOverwritableByStyler := true
 ]
 
 { #category : #scripting }

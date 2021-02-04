@@ -7,7 +7,7 @@ BlPolygon >> buildPathOnSpartaCanvas: aCanvas [
 	pathBuilder := aCanvas path
 		absolute;
 		moveTo: aCollection first.
-	aCollection do: [ :pt | pathBuilder lineTo: pt ].
+	aCollection allButFirstDo: [ :pt | pathBuilder lineTo: pt ].
 	pathBuilder close.
 	^ pathBuilder finish
 ]

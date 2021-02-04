@@ -25,12 +25,11 @@ space show
 "
 Class {
 	#name : #BlMorphicHost,
-	#superclass : #BlHost,
+	#superclass : #BlMorphicSteppingHost,
 	#instVars : [
-		'isRunning',
 		'containerMorph'
 	],
-	#category : 'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host - Morph'
 }
 
 { #category : #testing }
@@ -41,7 +40,7 @@ BlMorphicHost class >> isSupported [
 
 { #category : #testing }
 BlMorphicHost class >> label [
-	^ 'Morphic - Embed'
+	^ 'Morphic - Embedded'
 ]
 
 { #category : #testing }
@@ -74,7 +73,9 @@ BlMorphicHost >> createHostSpaceFor: aSpace [
 		description: [ 'Space must not have a host!' ].
 
 	aMorph := self createMorphFor: aSpace.
-	aHostSpace := BlMorphicHostSpace new morph: aMorph.
+
+	aHostSpace := BlMorphicHostSpace new spaceHostMorph: aMorph.
+	aHostSpace universe: self universe.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.
 	aHostSpace withSpartaRenderer.
@@ -86,7 +87,7 @@ BlMorphicHost >> createHostSpaceFor: aSpace [
 BlMorphicHost >> createMorphFor: aSpace [
 	| aMorph |
 
-	aMorph := BlMorphicSpaceMorph new.
+	aMorph := BlMorphicSpaceHostMorph new.
 	aMorph color: Color transparent.
 	aMorph extent: aSpace extent.
 
@@ -100,7 +101,12 @@ BlMorphicHost >> destroyHostSpaceFor: aSpace [
 		assert: [ aSpace hasHostSpace ]
 		description: [ 'Space must have a host!' ].
 	
-	aSpace hostSpace close.
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 
@@ -108,41 +114,5 @@ BlMorphicHost >> destroyHostSpaceFor: aSpace [
 BlMorphicHost >> initialize [
 	super initialize.
 
-	isRunning := false.
 	containerMorph := Morph new
-]
-
-{ #category : #'host - testing' }
-BlMorphicHost >> isRunning [
-	^ isRunning
-]
-
-{ #category : #'host - api' }
-BlMorphicHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
-]
-
-{ #category : #'host - api' }
-BlMorphicHost >> start [
-	isRunning := true
-]
-
-{ #category : #'host - api' }
-BlMorphicHost >> stop [
-	isRunning := false
-]
-
-{ #category : #'host - testing' }
-BlMorphicHost >> supportsBufferSurface [
-	^ false
-]
-
-{ #category : #'host - testing' }
-BlMorphicHost >> supportsFormSurface [
-	^ true
-]
-
-{ #category : #'host - testing' }
-BlMorphicHost >> supportsOpenGLSurface [
-	^ false
 ]

@@ -7,23 +7,30 @@ Depends on Bloc-Sparta
 Class {
 	#name : #BlMorphicWindowHostSpace,
 	#superclass : #Object,
-	#traits : 'TBlHostSpace',
-	#classTraits : 'TBlHostSpace classTrait',
+	#traits : 'TBlHostSpace + TBlSpaceProperties',
+	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
 		'morphicWindow',
-		'mirrowWindows',
-		'renderer',
-		'mutex',
-		'eventFetcher',
-		'space',
-		'host'
+		'isFullSize',
+		'isBorderless'
 	],
-	#category : 'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Host - Window'
 }
 
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> canvasExtent [
-	^ self windowExtent
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> borderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	<return: #Boolean>
+	
+	^ isBorderless
+]
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> borderless: aBoolean [
+	"Make host window borderless if true is given"
+
+	isBorderless := aBoolean.
+	morphicWindow borderless: aBoolean
 ]
 
 { #category : #'host space - displaying' }
@@ -31,13 +38,20 @@ BlMorphicWindowHostSpace >> close [
 	morphicWindow close
 ]
 
-{ #category : #'host space - cursor' }
-BlMorphicWindowHostSpace >> cursor: aCursorForm [
-	"Change current cursor image/view to the given one"
-	World currentHand showTemporaryCursor: aCursorForm
+{ #category : #initialization }
+BlMorphicWindowHostSpace >> createFormSurfaceRenderer [
+	<return: #BlHostSurfaceRenderer>
+	
+	^ BlMorphicFormSurfaceRenderer new spaceHostMorph: morphicWindow spaceHostMorph
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'host space - cursor' }
+BlMorphicWindowHostSpace >> cursor: aCursor [
+	"Change current cursor image/view to the given one"
+	World currentHand showTemporaryCursor: aCursor asForm
+]
+
+{ #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -45,59 +59,45 @@ BlMorphicWindowHostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #'host space - events' }
-BlMorphicWindowHostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
-
-	^ eventFetcher
-]
-
-{ #category : #'host space - testing' }
-BlMorphicWindowHostSpace >> hasResized [
-	"Return true if renderer extent changed.
-	It may happen if window moved between displays with different dpi,
-	e.g. from normal display to retina"
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> fullsize [
+	"Return true if an underlying window is in fullsize mode,
+	false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
+	and has no window title"
 	<return: #Boolean>
 
-	^ false
+	^ isFullSize
 ]
 
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> host [
-	"Return a host that was used to create this host space"
-	<return: #BlHost>
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> fullsize: aBoolean [
+	"Switch underlying window to fullsize if true is given
+	and exit fullsize mode if false is given.
+	See ${method:TBlSpaceProperties>>#fullsize}"
 
-	^ host
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> host: aBlHost [
-	"Assign a host that was used to create this host space"
-	
-	host := aBlHost
+	isFullSize := aBoolean.
+	morphicWindow fullsize: aBoolean.
 ]
 
 { #category : #initialization }
 BlMorphicWindowHostSpace >> initialize [
 	super initialize.
-
-	eventFetcher := BlHostEventFetcher new.
-	mutex := Mutex new.
-	mirrowWindows := OrderedCollection new
-]
-
-{ #category : #'private - accessing' }
-BlMorphicWindowHostSpace >> lock [
-	^ mutex
-]
-
-{ #category : #'private - accessing' }
-BlMorphicWindowHostSpace >> mirrowWindow: aWindow [
 	
-	mirrowWindows add: aWindow.
-	aWindow hostSpace: self
+	isBorderless := false.
+	isFullSize := false
+]
+
+{ #category : #'host space - geometry' }
+BlMorphicWindowHostSpace >> logicalSize [
+	"Returns the logical size of the host's client area.
+	The client area is the content of the window, excluding the title bar and borders.
+	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	<return: #FensterLogicalSize>
+
+	^ FensterLogicalSize
+		width: morphicWindow spaceExtent x
+		height: morphicWindow spaceExtent y
 ]
 
 { #category : #'private - accessing' }
@@ -111,9 +111,24 @@ BlMorphicWindowHostSpace >> morphicWindow: aWindow [
 	morphicWindow hostSpace: self
 ]
 
-{ #category : #'host space - displaying' }
-BlMorphicWindowHostSpace >> open [
-	self show
+{ #category : #'host space - testing' }
+BlMorphicWindowHostSpace >> needsRebuild [
+	"Return true if window should be recreated after user saved and quit pharo"
+	<return: #Boolean>
+
+	^ false
+]
+
+{ #category : #'host space - geometry' }
+BlMorphicWindowHostSpace >> physicalSize [
+	"Return a physical host size which is what the framebuffer size should be.
+	This size may differ from the logical size on high dpi (retina) screens.
+	In most cases physical size is x2 larger than logical size on retina screens."
+	<return: #FensterPhysicalSize>
+
+	^ FensterPhysicalSize
+		width: morphicWindow spaceExtent x
+		height: morphicWindow spaceExtent y
 ]
 
 { #category : #'window - properties' }
@@ -131,37 +146,6 @@ BlMorphicWindowHostSpace >> position: aPoint [
 	morphicWindow position: aPoint
 ]
 
-{ #category : #'host space - rendering' }
-BlMorphicWindowHostSpace >> presentFormSurface: aBlHostRendererFormSurface areas: aCollectionOfAreas [
-
-	morphicWindow form: aBlHostRendererFormSurface form.
-	mirrowWindows do: [ :each | each form: aBlHostRendererFormSurface form ]
-]
-
-{ #category : #'host space - rendering' }
-BlMorphicWindowHostSpace >> render: aSpace [
-	"Render a given abstract space on an underlying window or visual area"
-
-	self lock critical: [ renderer render: aSpace ]
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> renderer [
-	"Return host renderer used to render spaces"
-	<return: #TBlHostRenderer>
-
-	^ renderer
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> scaleFactor [
-	"Return a scaling factor from space to window coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Point>
-	
-	^ 1@1
-]
-
 { #category : #'host space - displaying' }
 BlMorphicWindowHostSpace >> show [
 	| anExtent |
@@ -169,21 +153,6 @@ BlMorphicWindowHostSpace >> show [
 	anExtent := morphicWindow extent.
 	morphicWindow openInWorld.
 	morphicWindow extent: anExtent
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> space [
-	"Return a space I am assigned to"
-	<return: #BlSpace>
-
-	^ space
-]
-
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> space: aSpace [
-	"Assign me to a given space"
-
-	space := aSpace
 ]
 
 { #category : #'window - properties' }
@@ -201,24 +170,7 @@ BlMorphicWindowHostSpace >> title: aString [
 	morphicWindow title: aString
 ]
 
-{ #category : #'host space - accessing' }
-BlMorphicWindowHostSpace >> windowExtent [
-	"Return the window size in screen coordinates.
-	This size may differ from the size in pixels of underlying surface 
-	on high dpi (retina) screens"
-	<return: #Point>
-
-	^ morphicWindow spaceExtent
-]
-
-{ #category : #'host space - accessing' }
+{ #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> windowExtent: anExtent [
 	morphicWindow spaceExtent: anExtent
-]
-
-{ #category : #'instance creation' }
-BlMorphicWindowHostSpace >> withSpartaRenderer [
-
-	renderer := BlSpartaRenderer new.
-	renderer initializeHostSpace: self
 ]

@@ -10,7 +10,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Paint'
+	#category : #'Bloc-Paint'
 }
 
 { #category : #cleanup }
@@ -49,6 +49,14 @@ BlTransparentPaint >> initialize [
 	super initialize.
 	
 	color := Color transparent
+]
+
+{ #category : #testing }
+BlTransparentPaint >> isOpaque [
+	"I am transparent by definition and therefore always return false"
+	<return: #Boolean>
+
+	^ false
 ]
 
 { #category : #testing }

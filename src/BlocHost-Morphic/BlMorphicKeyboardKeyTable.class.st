@@ -9,7 +9,7 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'BlocHost-Morphic-Host'
+	#category : #'BlocHost-Morphic-Support'
 }
 
 { #category : #cleanup }
@@ -41,6 +41,7 @@ BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 	self
 		initialize: (macosVirtualKeyTable := Dictionary new)
 		with: #(
+			"special"
 			16r24 Return
 			16r30 Tab
 			16r31 Space
@@ -49,6 +50,7 @@ BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 			16r35 Escape
 			16r39 CapsLock
 			
+			"modifiers"
 			16r38 ShiftLeft
 			16r3C ShiftRight
 			16r3A AltLeft
@@ -56,12 +58,15 @@ BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 			16r3B ControlLeft
 			16r3E ControlRight
 			16r37 MetaLeft
-			16r36 MetaRight
-	
+			16r36 MetaRight	
 			16r3F Function
+
+			"sound"
 			16r48 VolumeUp
 			16r49 VolumeDown
 			16r4A Mute
+			
+			"functions"
 			16r7A F1
 			16r78 F2
 			16r63 F3
@@ -71,13 +76,13 @@ BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 			16r62 F7
 			16r64 F8
 			16r65 F9
-			16r67 F11
-			16r6D F10
+			16r67 F10
+			16r6D F11
 			16r6F F12
+
 			16r72 Help
 			16r73 Home
 			16r74 PageUp
-			16r75 ForwardDelete
 			16r77 End
 			16r79 PageDown
 			16r7B ArrowLeft
@@ -194,21 +199,23 @@ BlMorphicKeyboardKeyTable >> initializeUnixVirtualKeyTable [
 			16r62 F7
 			16r64 F8
 			16r65 F9
-			16r67 F11
-			16r6D F10
+			16r67 F10
+			16r6D F11
 			16r6F F12
 			
 			"navigation"
 			16r72 Help
+			16r01 Home	"Character home"
 			16r73 Home
 			16r74 PageUp
 			16r75 ForwardDelete
 			16r77 End
+			16r04 End 	"Character end"
 			16r79 PageDown
-			16r7B ArrowLeft
-			16r7C ArrowRight
-			16r7D ArrowDown
-			16r7E ArrowUp
+			16r1C ArrowLeft
+			16r1D ArrowRight
+			16r1F ArrowDown
+			16r1E ArrowUp
 			
 			"letters"
 			16r61 a
@@ -281,10 +288,13 @@ BlMorphicKeyboardKeyTable >> initializeUnixVirtualKeyTable [
 			16r2D Minus
 			16r3D Equal
 			16r5B LeftBracket
+			16r7B LeftBracket
 			16r5D RightBracket
+			16r7D RightBracket
 			16r27 Quote
 			16r3B Semicolon
 			16r5C Backslash
+			16r7C Backslash
 			16r2C Comma
 			16r2F Slash
 			16r2E Period
@@ -317,24 +327,31 @@ BlMorphicKeyboardKeyTable >> initializeWindowsVirtualKeyTable [
 	self
 		initialize: (windowsVirtualKeyTable := Dictionary new)
 		with: #(
-			16r0d Return
+			"special"
+			16r0D Return
 			16r09 Tab
 			16r20 Space
-			16r2e Delete
-			16r1b Escape
-			16r5B Command
-			16r5c Command
-			16r10 Shift
+			16r7F Delete
+			16r08 Backspace
+			16r1B Escape
 			16r14 CapsLock
-			16r12 Option
-			16r11 Control
-			16ra0 RightShift
-			16ra5 RightOption
-			16ra3 RightControl
-			-1 Function
-			16raf VolumeUp
-			16rae VolumeDown
-			16rad Mute
+			
+			"modifiers"
+			16r10 ShiftLeft
+			"16r10 ShiftRight"
+			16r12 AltLeft
+			"16r12 AltRight"
+			16r11 ControlLeft
+			"16r11 ControlRight"
+			16r5B MetaLeft
+			16r5C MetaRight
+			
+			"sound"
+			16rF8 VolumeUp
+			16rA8 VolumeDown
+			16rC5 Mute
+			
+			"functions"
 			16r70 F1
 			16r71 F2
 			16r72 F3
@@ -344,19 +361,23 @@ BlMorphicKeyboardKeyTable >> initializeWindowsVirtualKeyTable [
 			16r76 F7
 			16r77 F8
 			16r78 F9
-			16r79 F11
-			16r7a F10
-			16r7b F12
-			16r2f Help
+			16r79 F10
+			16r7A F11
+			16r7B F12
+			
+			"navigation"
+			16r2F Help
 			16r24 Home
 			16r21 PageUp
-			16r2e ForwardDelete
+			16r2E ForwardDelete
 			16r23 End
 			16r22 PageDown
-			16r1c LeftArrow
-			16r1d RightArrow
-			16r1f DownArrow
-			16r1e UpArrow
+			16r1C ArrowLeft
+			16r1D ArrowRight
+			16r1F ArrowDown
+			16r1E ArrowUp
+
+			"letters"
 			16r41 A
 			16r42 B
 			16r43 C
@@ -384,6 +405,7 @@ BlMorphicKeyboardKeyTable >> initializeWindowsVirtualKeyTable [
 			16r59 Y
 			16r5a Z
 
+			"digits"
 			48 Zero
 			49 One
 			50 Two
@@ -394,45 +416,28 @@ BlMorphicKeyboardKeyTable >> initializeWindowsVirtualKeyTable [
 			55 Seven
 			56 Eight
 			57 Nine
-
-			16rbd Minus
-			61 Equal
-			16rdb LeftBracket
-			16rdd RightBracket
-			1 Quote
-			16rba Semicolon
-			16rbf Backslash
-			16rbc Comma
-			16rdc Slash
-			16rbe Period
-			16rc0 Grave
-			16r6e KeypadDecimal
-			16r6a KeypadMultiply
-			16r6b KeypadPlus
-			16r0c KeypadClear
-			16r6f KeypadDivide
-			16r0d KeypadEnter
-			16r6d KeypadMinus
-			1 KeypadEquals
-			16r60 Keypad0
-			16r61 Keypad1
-			16r62 Keypad2
-			16r63 Keypad3
-			16r64 Keypad4
-			16r65 Keypad5
-			16r66 Keypad6
-			16r67 Keypad7
-			16r68 Keypad8
-			16r69 Keypad9
+			
+			"symbols"
+			16rDF Minus
+			16rC8 Equal
+			16rF3 LeftBracket
+			16rFA RightBracket
+			16rFB Quote
+			16rBC Semicolon
+			16r86 Backslash
+			16rDE Comma
+			16rC0 Slash
+			16rF0 Period
+			16rCB Grave
 		)
 ]
 
 { #category : #'api - converting' }
-BlMorphicKeyboardKeyTable >> keyFromScanCode: aScanCode [
+BlMorphicKeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
 	"Morphic's key scan codes depend on the current platform, therefore we have to dispatch it through OSPlatform"
 	<return: #BlKeyboardKey>
 
-	^ OSPlatform current blocKeyFor: aScanCode in: self
+	^ OSPlatform current blocKeyFor: aVirtualCode in: self
 ]
 
 { #category : #'map - macos' }

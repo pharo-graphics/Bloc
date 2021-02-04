@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Space'
+	#category : #'Bloc-Examples-Space'
 }
 
 { #category : #'as yet unclassified' }
@@ -27,6 +27,29 @@ BlSpaceExamples >> animatedElement [
 		size: 150@150;
 		relocate: 100@100;
 		addAnimation: self infiniteAnimation
+]
+
+{ #category : #'examples - icon' }
+BlSpaceExamples >> changeIcon [
+	<gtExample>
+	| aSpace aCollection |
+	aSpace := self emptySpace.
+	
+	aCollection := OrderedCollection new.
+	aSpace 
+		when: BlSpaceIconChangedEvent 
+		do: [ :anEvent | aCollection add: anEvent ].
+	
+	aSpace icon: self iconStencil.
+	
+	self assert: aCollection size equals: 1.
+	self assert: aCollection first class equals: BlSpaceIconChangedEvent.
+	self assert: aCollection first iconStencil class equals: BlSpaceIconDummyStencil.
+	
+	aSpace icon: aSpace icon.
+	self assert: aCollection size equals: 1.
+	
+	^ aSpace
 ]
 
 { #category : #'instance creation' }
@@ -52,6 +75,7 @@ BlSpaceExamples >> emptySpace [
 	self assert: aSpace isLayoutRequested.
 	self assert: aSpace isVisible not.
 	self assert: aSpace title isEmpty.
+	self assert: aSpace icon isNil.
 
 	^ aSpace
 ]
@@ -64,11 +88,29 @@ BlSpaceExamples >> firstPulse [
 	aSpace := self emptySpace.
 	aSpace pulse.
 	
-	self assert: aSpace dirtyAreas asArray equals: { BlBounds origin: 0@0 extent: aSpace extent }.
+	self assert: aSpace dirtyAreas isEmpty.
 	self assert: aSpace root position equals: 0@0.
 	self assert: aSpace root extent equals: aSpace extent.
 
 	^ aSpace
+]
+
+{ #category : #'examples - icon' }
+BlSpaceExamples >> iconElement [
+	<gtExample>
+	^ BlElement new
+		size: 16@16;
+		background: (Color green alpha: 0.5);
+		geometry: BlCircle new.
+]
+
+{ #category : #'examples - icon' }
+BlSpaceExamples >> iconStencil [
+	<gtExample>
+	| aStencil |
+	aStencil := BlSpaceIconDummyStencil new.
+	aStencil block: [ self iconElement ].
+	^ aStencil
 ]
 
 { #category : #'private - instance creation' }
@@ -94,7 +136,7 @@ BlSpaceExamples >> spaceWithSlownDownTime [
 
 	aSpace := BlSpace new.
 	aSpace time: aTime.
-	
+
 	^ aSpace
 ]
 

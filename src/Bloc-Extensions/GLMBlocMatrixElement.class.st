@@ -43,10 +43,10 @@ GLMBlocMatrixElement >> initialize [
 		c vertical fitContent ].
 	
 	leftParentheses := self newParenthesesElement.
-	leftParentheses text: (self asParenthesesText: '⟮').
+	leftParentheses text: (self asParenthesesText: '(').
 
 	rightParentheses := self newParenthesesElement.
-	rightParentheses text: (self asParenthesesText: '⟯').
+	rightParentheses text: (self asParenthesesText: ')').
 
 	gridElement := self newGridElement.
 	
@@ -102,9 +102,9 @@ GLMBlocMatrixElement >> newParenthesesElement [
 ]
 
 { #category : #layout }
-GLMBlocMatrixElement >> onLayout: aBounds [
+GLMBlocMatrixElement >> onLayout: aBounds context: aBlElementBoundsUpdater [
 	| leftScale rightScale |
-	super onLayout: aBounds.
+	super onLayout: aBounds context: aBlElementBoundsUpdater.
 
 	leftScale := (leftParentheses parent extent / leftParentheses extent) asFloatPoint.
 	rightScale := (rightParentheses parent extent / rightParentheses extent) asFloatPoint.

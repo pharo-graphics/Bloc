@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'alignment'
 	],
-	#category : 'Bloc-Layout-Linear'
+	#category : #'Bloc-Layout-Linear'
 }
 
 { #category : #alignment }
@@ -36,5 +36,5 @@ BlLinearLayoutConstraintsHorizontal >> alignment: aBlElementAlignment [
 BlLinearLayoutConstraintsHorizontal >> initialize [
 	super initialize.
 	
-	alignment := BlElementAlignment null horizontal
+	alignment := BlElementAlignment horizontal start
 ]

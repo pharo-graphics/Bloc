@@ -1,34 +1,30 @@
 "
-I am a concrete implementation of a BlHost that allows users to open host bloc spaces within OSWindow windows
+I am a concrete implementation of a BlHost that allows users to open host bloc spaces within OSWindow windows.
+
+OSWindow is an abstraction of different windowing backends, for example SDL2 or Glutin. See my subclasses for available backends.
+
+OSWindow host relies on native windows that already have their own event loop, therefore I do event fetching and rendering in the same UI thread
 "
 Class {
 	#name : #BlOSWindowHost,
 	#superclass : #BlHost,
-	#instVars : [
-		'wasRunning',
-		'isRunning'
-	],
-	#category : 'BlocHost-OSWindow-Host'
+	#category : #'BlocHost-OSWindow-Host'
 }
 
-{ #category : #'driver selection' }
-BlOSWindowHost class >> isSupported [
-	^ true
+{ #category : #'instance creation' }
+BlOSWindowHost class >> default [
+	"Pick a specific OSWindow backend from available ones"
+	<return: #BlOSWindowHost>
+
+	^ BlOSWindowHost suitableHostClass new
 ]
 
-{ #category : #'driver selection' }
-BlOSWindowHost class >> label [
-	^ 'OS-Window'
-]
+{ #category : #'instance creation' }
+BlOSWindowHost class >> new [
+	self = BlOSWindowHost
+		ifTrue: [ self error: 'Please use #default instead to pick up a suitable backend' ].
 
-{ #category : #'driver selection' }
-BlOSWindowHost class >> priority [
-	"Return host priority as positive number which influences host order
-	and selection of a default host.
-	Lower value - more likely host becomes a default"
-	<return: #Number>
-	
-	^ 40
+	^ self basicNew initialize
 ]
 
 { #category : #private }
@@ -36,24 +32,33 @@ BlOSWindowHost >> createAttributesFor: aSpace [
 	| theAttributes |
 	theAttributes := OSWindowAttributes new.
 	theAttributes
+		title: aSpace title;
 		extent: aSpace extent;
 		resizable: aSpace resizable;
 		borderless: aSpace borderless;
 		position: aSpace position;
+		preferableDriver: self preferableDriver;
 		visible: false. "There is a race before opening a window and setting the event handler."
 	^ theAttributes
+]
+
+{ #category : #private }
+BlOSWindowHost >> createHostSpace [
+	^ BlOSWindowSpace new
 ]
 
 { #category : #'host - api' }
 BlOSWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new oswindow host space for given bloc space"
 	| aHostSpace|
-	
+
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host!' ].
-		
+	
 	aHostSpace := self createWindowSpaceFor: aSpace.
+
+	aHostSpace universe: self universe.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.
 	aHostSpace withSpartaRenderer.
@@ -65,8 +70,23 @@ BlOSWindowHost >> createHostSpaceFor: aSpace [
 BlOSWindowHost >> createWindowSpaceFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
 	I do not create any strong or weak references to provided space"
+	| aHostSpace theGLAttributes theWindowAttributes |
 	
-	^ BlOSWindowSpace new
+	theGLAttributes := OSWindowGLAttributes new.
+	theGLAttributes redSize: 8.
+	theGLAttributes greenSize: 8.
+	theGLAttributes blueSize: 8.
+	theGLAttributes stencilSize: 8.
+	
+	theWindowAttributes := self createAttributesFor: aSpace.
+	theWindowAttributes glAttributes: theGLAttributes.
+	
+	aHostSpace := self createHostSpace.
+
+	aHostSpace keyboardKeyTable: self keyboardKeyTable.
+	aHostSpace initializeWithAttributes: theWindowAttributes.
+	
+	^ aHostSpace
 ]
 
 { #category : #'host - api' }
@@ -78,29 +98,25 @@ BlOSWindowHost >> destroyHostSpaceFor: aSpace [
 ]
 
 { #category : #initialization }
-BlOSWindowHost >> initialize [
-	super initialize.
-	
-	isRunning := false
+BlOSWindowHost >> keyboardKeyTable [
+	^ self subclassResponsibility
 ]
 
 { #category : #'host - api' }
-BlOSWindowHost >> isRunning [
-	"Return true if host is initialized and running"
-	<return: #Boolean>
-
-	^ isRunning
+BlOSWindowHost >> openMorphicWorld [
+	OSWorldRenderer openMorphicWorld
 ]
 
-{ #category : #'host - api' }
-BlOSWindowHost >> start [
-	isRunning := true
+{ #category : #'host - events' }
+BlOSWindowHost >> pollEvents [
+	self subclassResponsibility
 ]
 
-{ #category : #'host - api' }
-BlOSWindowHost >> stop [
+{ #category : #initialization }
+BlOSWindowHost >> preferableDriver [
+	<return: #OSWindowDriver>
 
-	isRunning := false
+	^ self subclassResponsibility
 ]
 
 { #category : #'host - testing' }
@@ -109,20 +125,4 @@ BlOSWindowHost >> supportsBufferSurface [
 	<return: #Boolean>
 	
 	^ true
-]
-
-{ #category : #'host - testing' }
-BlOSWindowHost >> supportsFormSurface [
-	"Return true if this host can work with form surface, false otherwise"
-	<return: #Boolean>
-	
-	^ true
-]
-
-{ #category : #'host - testing' }
-BlOSWindowHost >> supportsOpenGLSurface [
-	"Return true if this host can work with OpenGL surface, false otherwise"
-	<return: #Boolean>
-	
-	^ false
 ]

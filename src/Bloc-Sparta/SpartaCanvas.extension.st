@@ -9,8 +9,3 @@ SpartaCanvas >> drawTextParagraph: aTextParagraph [
 SpartaCanvas >> fullDraw: anObject [
 	^ anObject fullDrawOnSpartaCanvas: self
 ]
-
-{ #category : #'*Bloc-Sparta' }
-SpartaCanvas >> measureTextParagraph: aTextParagraph [
-	aTextParagraph measureOnSpartaCanvas: self
-]

@@ -1,0 +1,41 @@
+!! The Game Element
+In the previous section, we implemented the card element that is able to display back- and face- card sides, to flip, and to disappear. In this section, we implement the board with 4x4 cards as we defined previously in ${method:Game>>#gridSize}$.To this purpose, we will define ${class:GameElement}$:  ${changes:changes/40-card-element-class.ombu}$.We then define accessors and initialize methods, defining a widget layout, background color and size: ${changes:changes/41-card-element-basic-methods}$
+
+We need to implement the ${method:GameElement>>#newCardElement}$: ${changes:changes/41-board-element-bloc-card}$
+${method:GameElement>>#initialize|expanded=true}$ defines the board visual aspects, including ${class:BlGridLayout}$, background color, and constraints to occupy the minimum horizontal and vertical size to display all cards:${method:GameElement>>#game:|expanded=true}$ set the game model ${class:Game}$ and call an update hook.The ${method:GameElement>>#onUpdated|expanded=true}$ method then defines ${class:BlGridLayout}$ layout dimensions calling ${method:BlGridLayout>>#columnCount:}$ and add all ${class:CardElement}$ instances representing cards.You can check the current implementation executing the following snippet: [[[height=500| aGame |aGame := Game numbers.GameElement new game: aGame.]]]!!! Handling Mouse ClicksIf you try to click on cards above, you will notice that they do not flip as it is expected in this game. The reason is that we have not implemented a mouse click events yet. To handle the mouse click events, we will subclass ${class:BlEventListener}$: ${changes:changes/43-event-listener.ombu}$We then implement accessors and the mouse click event handler: ${changes:changes/44-event-listener-methods.ombu}$The ${method:CardEventListener>>#clickEvent:|expanded=true}$ calls the ${method:Game>>#chooseCard:}$ method when a user clicks on a card:The ${class:CardEventListener}$ has to be added to each ${class:CardElement}$ object when a game view is initialized. The initialization happens in the ${method:GameElement>>#onUpdated|expanded=true}$ method.Here, we need to add one line to register the listener: ${changes:changes/45-game-register-listener.ombu}$! Playing GameWe just finished the last piece of code to be able to play a game with numbers:[[[height=500| aGame |aGame := Game numbers.GameElement new game: aGame.]]]
+! Visual Animations
+
+Bloc offers element animations using ${class:BlBaseAnimation|show=gtSubclassesFor:|expanded=true}$ subclasses. 
+
+You can for example translate an element:
+${example:BlTransformationAnimationExamples>>#elementWithLinearTranslationAnimation}$
+
+You can also translate with more complex logic: 
+${example:BlTransformationAnimationExamples>>#elementWithLinearTranslationAnimationWithDurationAndEasing}$
+
+In this tutorial we will use ${class:BlTransformAnimation}$ to scale ${class:CardElement}$ when a mouse is over the card.
+
+!! Enlarging Card
+
+In the following part, we will learn how to enlarge a card when we move a mouse over. To do so, we add a method to the ${class:CardEventListener}$: ${changes:changes/46-game-animation-mouse-enter}$
+
+You can now test it playing the game:[[[height=500| aGame |aGame := Game numbers.GameElement new game: aGame.]]]
+
+!! Shrinking Card
+
+As you noticed, enlarging works well, but we also need to shrink a card as the mouse leaves the card. To do so, we will use the same animation: ${changes:changes/47-game-animation-shrinking}$
+
+You can now test it again here:[[[height=500| aGame |aGame := Game numbers.GameElement new game: aGame.]]]
+
+!! Improving the Animation
+
+The just written code has a potential issue. If you move your mouse fast enough, enlarging and shrinking animations will be at a queue at a same time, using ${method:BlElement>>#addAnimation:}$ and executed in parallel. It means, that the ${method:CardEventListener>>#mouseLeaveEvent:}$ animation is performed while the ${method:CardEventListener>>#mouseEnterEvent:}$ animation is not over yet. Same issue happens if the ${method:CardEventListener>>#mouseLeaveEvent:}$ animation is not over yet and we add the ${method:CardEventListener>>#mouseEnterEvent:}$ animation.
+
+We can fix it by remembering what animation is in progress and stop it by calling ${method:BlBaseAnimation>>#stop}$ before adding a new animation: ${changes:changes/48-game-animation-stop}$
+
+Let's try it again:[[[height=500| aGame |aGame := Game numbers.GameElement new game: aGame.]]]
+
+! Ready to Play
+
+You just finished the tutorial. You can play the game executing the code snippet above, or challenge yourself playing with emojis or chinese symbols.
+Emojis:[[[height=500| aGame |aGame := Game emoji.GameElement new game: aGame.]]]Chinese:[[[height=500| aGame |aGame := Game chinese.GameElement new game: aGame.]]]

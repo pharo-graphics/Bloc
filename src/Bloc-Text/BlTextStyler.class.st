@@ -10,13 +10,9 @@ Class {
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
-		'backgroundProcess',
 		'text',
-		'monitor',
-		'view',
 		'stylingEnabled',
-		'eventDispatcher',
-		'delay'
+		'eventDispatcher'
 	],
 	#category : #'Bloc-Text-Text-Styler'
 }
@@ -29,86 +25,60 @@ BlTextStyler >> eventDispatcher [
 	^ eventDispatcher
 ]
 
+{ #category : #styling }
+BlTextStyler >> fireStyledEventForText: aStyledText andAfterAction: aBlock [
+	"This method must be called from a Bloc UI process only."
+	self fireEvent: (BlTextStyledEvent new text: aStyledText; afterAction: aBlock)
+]
+
+{ #category : #'gt-extension' }
+BlTextStyler >> gtStylesFor: aView [
+	<gtView>
+	
+	self stylers
+		ifEmpty: [ ^ aView empty ].
+	
+	^ aView tree
+		title: 'Styles';
+		priority: 5;
+		items: [ { self } ];
+		children: #stylers;
+		expandAll
+]
+
 { #category : #initialization }
 BlTextStyler >> initialize [
 	super initialize.
 	
 	stylingEnabled := true.
-	eventDispatcher := BlBubblingEventDispatcher on: self.
-	delay := 200 milliSeconds
-]
-
-{ #category : #private }
-BlTextStyler >> monitor [
-	monitor isNil
-		ifTrue: [monitor := Monitor new].
-	^ monitor
+	eventDispatcher := BlDirectEventDispatcher on: self.
 ]
 
 { #category : #private }
 BlTextStyler >> privateStyle: aText [ 
-	self shouldBeImplemented
+	<return: #BlText>
+
+	^ self subclassResponsibility
 ]
 
 { #category : #styling }
-BlTextStyler >> style: aBrText [
-	| styledText |
-
-	self terminateBackgroundStylingProcess.
-
+BlTextStyler >> style: aBlText [
+	| anUnstyledText aStyledText |
+	<return: #BlText>
 	stylingEnabled
-		ifFalse: [ ^ self ].
-
-	styledText := self privateStyle: aBrText unstyle.
-	self fireEvent: (BlTextStyledEvent new text: styledText).
-	^ styledText
+		ifFalse: [ ^ aBlText ].
+		
+	anUnstyledText := aBlText unstyle.
+	aStyledText := self privateStyle: anUnstyledText characters.
+	^ aStyledText text
 ]
 
-{ #category : #styling }
-BlTextStyler >> styleInBackgroundProcess: aBrText [
-	self styleInBackgroundProcess: aBrText andAfterDo: [ "nothing" ]
-]
+{ #category : #accessing }
+BlTextStyler >> stylers [
+	"In case of a composite styler, return children stylers"
+	<return: #Collection of: #BlTextStyler>
 
-{ #category : #styling }
-BlTextStyler >> styleInBackgroundProcess: aBrText andAfterDo: aBlock [
-
-	self terminateBackgroundStylingProcess.
-	
-	stylingEnabled
-		ifFalse: [ ^ self ].
-
-	self monitor critical: [
-		backgroundProcess := [
-			| styledText |
-			delay asDelay wait.
-			text := aBrText unstyle.
-			styledText := self privateStyle: text.
-			BlUniverse defer: [ 
-				self fireEvent: (BlTextStyledEvent new text: styledText).
-				aBlock value ].
-		 ] forkAt: Processor userBackgroundPriority ]
-]
-
-{ #category : #styling }
-BlTextStyler >> styleInBackgroundProcessNow: aBrText [
-	
-	self terminateBackgroundStylingProcess.
-	
-	stylingEnabled
-		ifFalse: [ ^ self ].
-
-	self monitor critical: [
-		backgroundProcess := [
-			| styledText |
-			text := aBrText unstyle.
-			styledText := self privateStyle: text.
-			BlUniverse defer: [ self fireEvent: (BlTextStyledEvent new text: styledText) ].
-		 ] forkAt: Processor userBackgroundPriority ]
-]
-
-{ #category : #styling }
-BlTextStyler >> styledTextFor: aText [ 
-	^self privateStyle: aText
+	^ #()
 ]
 
 { #category : #private }
@@ -119,22 +89,4 @@ BlTextStyler >> stylingEnabled [
 { #category : #private }
 BlTextStyler >> stylingEnabled: aBoolean [
 	stylingEnabled := aBoolean
-]
-
-{ #category : #private }
-BlTextStyler >> terminateBackgroundStylingProcess [
-	self monitor critical: [
-		backgroundProcess ifNotNil: [
-			backgroundProcess terminate.
-			backgroundProcess := nil ] ]
-]
-
-{ #category : #styling }
-BlTextStyler >> unstyledTextFrom: aBrText [ 
-	^ aBrText unstyled
-]
-
-{ #category : #accessing }
-BlTextStyler >> view: aViewOrMorph [ 
-	view := aViewOrMorph
 ]

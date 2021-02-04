@@ -13,15 +13,11 @@ Class {
 	#superclass : #BlTextParagraphSegment,
 	#instVars : [
 		'textRun',
+		'span',
+		'measurer',
 		'strikethroughOffset',
 		'strikethroughSize',
-		'span',
-		'textRunStart',
-		'textRunEnd',
-		'spanStart',
-		'spanEnd',
-		'measurer',
-		'advance'
+		'isVertical'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -52,45 +48,11 @@ BlTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 	baseline := 0@0
 ]
 
-{ #category : #asserting }
-BlTextParagraphSpan >> assertSpan [
-
-	self
-		assert: [ span isNotNil and: [ spanStart isNotNil and: [ spanEnd isNotNil ] ] ]
-		description: [ 'Span is not initialized' ].
-		
-	self
-		assert: [ span isNotEmpty or: [ spanStart isZero and: [ spanEnd isZero ] ] ]
-		description: [ 'If span text is empty, start and end indices must be zero' ].
-	
-	self
-		assert: [ span isEmpty or: [ spanStart between: 1 and: span size ] ]
-		description: [ 'Span start must be within span bounds if it is not empty' ].
-		
-	self
-		assert: [ span isEmpty or: [ spanEnd between: 1 and: span size ] ]
-		description: [ 'Span end must be within span bounds if it is not empty' ].
-		
-	self
-		assert: [ spanStart <= spanEnd ]
-		description: [ 'Span start must be always smaller or equal to span end' ]
-]
-
-{ #category : #asserting }
-BlTextParagraphSpan >> assertTextRun [
-
-	self
-		assert: [ textRun isNotNil and: [ textRunStart isNotNil and: [ textRunEnd isNotNil ] ] ]
-		description: [ 'Text run is not initialized' ].
-]
-
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> attributes [
 	"Return a set of attributes applied on this span"
 	<return: #Set of: #BlTextAttribute>
-	
-	self assertSpan.
-	
+
 	^ span attributes
 ]
 
@@ -103,68 +65,78 @@ BlTextParagraphSpan >> finalize [
 
 { #category : #geometry }
 BlTextParagraphSpan >> indexAtPosition: aPoint [
+	"I return a cursor index at a given position as a Point provided in local coordinates of this span"
 	<return: #Number>
 	| aWidth aMeasurer |
 
-	aWidth := (aPoint x - self origin x) max: 0.
+	aWidth := aPoint x max: 0.
 	aMeasurer := self measurer.
 
 	(aWidth <= 0)
 		ifTrue: [ ^ (self from - 1) max: 0 ].
-	(aWidth >= self width)
+	(aWidth >= self advance)
 		ifTrue: [ ^ self to ].
 
-	^ (self textRunStart to: self textRunEnd)
+	^ (self spanStart to: self spanEnd)
 		findBinary: [ :anIndex |
-			aMeasurer
-				reset;
-				measureSpan: self
-					from: self textRunStart
-					to: anIndex
-					width: self width.
-			(aWidth - aMeasurer width) sign ]
+			| aSubSpan aParagraph |
+			
+			aSubSpan := BlSpan
+				text: (span text from: (1 min: anIndex) to: anIndex)
+				attributes: self span attributes.
+			
+			aParagraph := aMeasurer measureTextSpan: aSubSpan.
+			
+			(aWidth closeTo: aParagraph advance epsilon: 0.1)
+				ifTrue: [ 0 ]
+				ifFalse: [ (aWidth - aParagraph advance) sign ] ]
 		"exact match"
-		do: [ :anIndex | self from + aMeasurer spanEnd - 1 ]
+		do: [ :anIndex | self from + anIndex - 1 ]
 
 		"need to measure a bit more"
 		ifNone: [ :a :b |
 			| leftIndex rightIndex leftWidth leftSpanIndex rightWidth rightSpanIndex spanIndex |
-			leftIndex := a ifNil: [ self textRunStart - 1 ].
-			rightIndex := b ifNil: [ self textRunEnd + 1 ].
+			leftIndex := a ifNil: [ self spanStart - 1 ].
+			rightIndex := b ifNil: [ self spanEnd + 1 ].
 			
-			leftIndex < self textRunStart
+			leftIndex < self spanStart
 				ifTrue: [
 					leftWidth := 0.
 					leftSpanIndex := (self spanStart - 1) max: 0 ]
 				ifFalse: [
-					aMeasurer
-						reset;
-						measureSpan: self
-							from: self textRunStart
-							to: leftIndex
-							width: self width.
-					leftWidth := aMeasurer width.
-					leftSpanIndex := aMeasurer spanEnd ].
+					| aSubSpan aParagraph |
+					aSubSpan := BlSpan
+						text: (span text from: (1 min: leftIndex) to: leftIndex)
+						attributes: self span attributes.
+					aParagraph := aMeasurer measureTextSpan: aSubSpan.
+					leftWidth := aParagraph advance.
+					leftSpanIndex := leftIndex ].
 
-			rightIndex > self textRunEnd
+			rightIndex > self spanEnd
 				ifTrue: [
-					rightWidth := self width.
+					rightWidth := self advance.
 					rightSpanIndex := self spanEnd ]
 				ifFalse: [
-					aMeasurer
-						reset;
-						measureSpan: self
-							from: self textRunStart
-							to: rightIndex
-							width: self width.
-					rightWidth := aMeasurer width.
-					rightSpanIndex := aMeasurer spanEnd ].
+					| aSubSpan aParagraph |
+					aSubSpan := BlSpan
+						text: (span text from: (1 min: rightIndex) to: rightIndex)
+						attributes: self span attributes.
+					aParagraph := aMeasurer measureTextSpan: aSubSpan.
+					rightWidth := aParagraph advance.
+					rightSpanIndex := rightIndex ].
 
 			spanIndex := aWidth <= (leftWidth + ((rightWidth - leftWidth) / 2.0))
 				ifTrue: [ leftSpanIndex ]
 				ifFalse: [ rightSpanIndex ].
 
 			self from + spanIndex - 1 ]
+]
+
+{ #category : #initialization }
+BlTextParagraphSpan >> initialize [
+	super initialize.
+	
+	isVertical := false
 ]
 
 { #category : #testing }
@@ -174,7 +146,12 @@ BlTextParagraphSpan >> isSplitted [
 	on the next paragraph line"
 	<return: #Boolean>
 	
-	^ spanEnd < span size
+	^ false
+]
+
+{ #category : #testing }
+BlTextParagraphSpan >> isVertical [
+	^ isVertical
 ]
 
 { #category : #accessing }
@@ -209,10 +186,17 @@ BlTextParagraphSpan >> normalize: aScale [
 	advance := advance ceilingTicks: aScale
 ]
 
+{ #category : #accessing }
+BlTextParagraphSpan >> paragraph: aTextParagraph [
+	super paragraph: aTextParagraph.
+
+	self attributes do: [ :eachAttribute | eachAttribute applyOnTextParagraph: aTextParagraph from: self from to: self to ]
+]
+
 { #category : #geometry }
 BlTextParagraphSpan >> positionAt: anIndex [
 	<return: #Point>
-	| aSpanIndex aSpanIterator currentEnd transformedSpanIndex aMeasurer aPositionY aPositionX |
+	| aSpanIndex aSubSpan aMeasuredSpan aMeasurer aPositionY aPositionX |
 
 	aPositionY := self baseline y.
 	aPositionX := self baseline x.
@@ -220,84 +204,64 @@ BlTextParagraphSpan >> positionAt: anIndex [
 	(anIndex = (self from - 1))
 		ifTrue: [ ^ aPositionX @ aPositionY ].
 	(anIndex = self to)
-		ifTrue: [ ^ (aPositionX + self width) @ aPositionY ].
+		ifTrue: [ ^ (aPositionX + self advance) @ aPositionY ].
 
 	aSpanIndex := anIndex - self from + 1.
-	aSpanIterator := span iterator: 1 to: aSpanIndex.	
-	
-	currentEnd := 0.
-	transformedSpanIndex := 0.
-	[ aSpanIterator hasNext and: [ currentEnd < aSpanIndex ] ]
-		whileTrue: [ (aSpanIterator next = Character tab)
-			ifTrue: [ transformedSpanIndex := transformedSpanIndex + 3 ]	"3 is how many spaces one tab is. #FIXME"
-			ifFalse: [ transformedSpanIndex := transformedSpanIndex + 1 ].
-			currentEnd := currentEnd + 1 ].
 
 	aMeasurer := self measurer.
 
-	transformedSpanIndex isZero
-		ifTrue: [ ^ aPositionX @ aPositionY ].
+	aSubSpan := BlSpan
+		text: (span text from: (1 min: aSpanIndex) to: aSpanIndex)
+		attributes: self span attributes.
+
+	aMeasuredSpan := aMeasurer measureTextSpan: aSubSpan.
 	
-	aMeasurer
-		reset;
-		measureSpan: self
-			from: 1
-			to: transformedSpanIndex
-			width: Float infinity.
-		
-	^ (aPositionX + aMeasurer width) @ aPositionY
+	^ (aPositionX + aMeasuredSpan advance) @ aPositionY
 ]
 
 { #category : #printing }
 BlTextParagraphSpan >> printOn: aStream [
 	span
 		ifNil: [ aStream nextPutAll: '(not yet initialized)' ]
-		ifNotNil: [ span putOn: aStream from: spanStart to: spanEnd ]
-	
+		ifNotNil: [ aStream print: span ]
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> span [
 	"Return an underlying text span that I represent"
 	<return: #BlSpan>
-	
-	self assertSpan.
 
 	^ span
 ]
 
 { #category : #initialization }
-BlTextParagraphSpan >> span: aBrSpan start: aSpanStart end: aSpanEnd [
+BlTextParagraphSpan >> span: aBrSpan [
 	"Assign an attributed text span with corresponding start and end indices which I measure"
 	
-	span := aBrSpan.
-	spanStart := aSpanStart.
-	spanEnd := aSpanEnd.
-	
-	self assertSpan
+	span := aBrSpan
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanEnd [
 	<return: #Number>
 
-	^ spanEnd
+	^ span size
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanLength [
 	<return: #Number>
 
-	^ (spanStart isZero and: [ spanEnd isZero ])
+	^ (self spanStart isZero and: [ self spanEnd isZero ])
 		ifTrue: [ 0 ]
-		ifFalse: [ spanEnd - spanStart + 1 ]
+		ifFalse: [ self spanEnd - self spanStart + 1 ]
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanStart [
 	<return: #Number>
 
-	^ spanStart
+	^ 1 min: span size
 ]
 
 { #category : #accessing }
@@ -319,32 +283,24 @@ BlTextParagraphSpan >> text: aBrText from: aGlobalTextStart to: aGlobalTextEnd [
 ]
 
 { #category : #'accessing - text run' }
-BlTextParagraphSpan >> textRun [
-	
-	self assertTextRun.
-	
+BlTextParagraphSpan >> textRun [	
 	^ textRun
 ]
 
 { #category : #initialization }
-BlTextParagraphSpan >> textRun: aTextRun start: aTextRunStart end: aTextRunEnd [
+BlTextParagraphSpan >> textRun: aTextRun [
 	"Assign a backend specific text run (collection of glyphs) with corresponding
 	start and end indices which represents an unstyled piece of text"
 	
 	textRun := aTextRun.
-	textRunStart := aTextRunStart.
-	textRunEnd := aTextRunEnd.
-	
-	self assertTextRun
 ]
 
 { #category : #'accessing - text run' }
 BlTextParagraphSpan >> textRunEnd [
 	"Return an index of a last measured glyph in a text run that should be rendered"
 	<return: #Number>
-	self assertTextRun.
 	
-	^ textRunEnd
+	^ textRun size
 ]
 
 { #category : #'accessing - text run' }
@@ -355,18 +311,16 @@ BlTextParagraphSpan >> textRunLength [
 	Note: glyphs can be complex, meaning that they consist of multiple simple glyphs,
 	that is why text run length always equal or greater than span length"
 	<return: #Number>
-	self assertTextRun.
 	
-	^ (textRunStart isZero and: [ textRunEnd isZero ])
+	^ (self textRunStart isZero and: [ self textRunEnd isZero ])
 		ifTrue: [ 0 ]
-		ifFalse: [ textRunEnd - textRunStart + 1 ]
+		ifFalse: [ self textRunEnd - self textRunStart + 1 ]
 ]
 
 { #category : #'accessing - text run' }
 BlTextParagraphSpan >> textRunStart [
 	"Return an index of a first measured glyph in a text run that should be rendered"
 	<return: #Number>
-	self assertTextRun.
 	
-	^ textRunStart
+	^ 1 min: textRun size
 ]

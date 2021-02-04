@@ -8,13 +8,3 @@ Class {
 BlTextVariableLink class >> variableName: aString [
 	^ self new
 ]
-
-{ #category : #comparing }
-BlTextVariableLink >> equals: aTextAttribute [
-	^ true
-]
-
-{ #category : #comparing }
-BlTextVariableLink >> hash [
-	^ self class hash
-]

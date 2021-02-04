@@ -32,13 +32,15 @@ BlTextBackgroundAttribute class >> paint: aPaint [
 ]
 
 { #category : #comparing }
-BlTextBackgroundAttribute >> equals: aTextAttribute [
-	^ self paint = aTextAttribute paint
+BlTextBackgroundAttribute >> equals: anAnotherAttribute [
+	^ self paint = anAnotherAttribute paint
 ]
 
 { #category : #comparing }
 BlTextBackgroundAttribute >> hash [
-	^ self class hash bitXor: self paint hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self paint hash
 ]
 
 { #category : #accessing }

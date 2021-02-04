@@ -7,7 +7,7 @@ See BlStrokeLineJoin for other types
 Class {
 	#name : #BlStrokeLineMiterJoin,
 	#superclass : #BlStrokeLineJoin,
-	#category : 'Bloc-Paint-Support'
+	#category : #'Bloc-Paint-Support'
 }
 
 { #category : #accessing }

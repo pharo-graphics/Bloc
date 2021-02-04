@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #'instance creation' }
@@ -19,6 +19,11 @@ BlLayoutResizer class >> fitContent [
 { #category : #'instance creation' }
 BlLayoutResizer class >> fitContentLimited [
 	^ BlLayoutFitContentLimitedResizer uniqueInstance
+]
+
+{ #category : #'instance creation' }
+BlLayoutResizer class >> fitContentLimitedOffset: aNumber [
+	^ BlLayoutFitContentLimitedOffsetResizer offset: aNumber
 ]
 
 { #category : #'instance creation' }
@@ -59,6 +64,11 @@ BlLayoutResizer >> isExact [
 
 { #category : #testing }
 BlLayoutResizer >> isFitContent [
+	^ false
+]
+
+{ #category : #testing }
+BlLayoutResizer >> isFitContentLimited [
 	^ false
 ]
 

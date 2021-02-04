@@ -1,14 +1,14 @@
 "
 I am the abstract class for a Host.
 I define an environment that can be used to provide actual screen spaces and rendering.
-An Host can be compared to a driver that communicate with native multimedia API.
+A Host can be compared to a driver that communicates with the native multimedia API.
 "
 Class {
 	#name : #BlHost,
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'driver selection' }
@@ -20,16 +20,9 @@ BlHost class >> availableHostClasses [
 		sort: [ :a :b | a priority < b priority ]
 ]
 
-{ #category : #'driver selection' }
-BlHost class >> defaultHostClass [
-	"Find a default bloc host among all available.
-	Return a special null one if there are no available hosts"
-	<return: #'BlHost class'>
-
-	^ self availableHostClasses
-		"There are no availbale hosts, return a null one"
-		ifEmpty: [ BlHeadlessHost ]
-		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
+{ #category : #'api - lifecycle' }
+BlHost class >> isRunning [
+	^ self subclassResponsibility
 ]
 
 { #category : #'driver selection' }
@@ -65,9 +58,43 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - lifecycle' }
+BlHost class >> start [
+	self subclassResponsibility
+]
+
+{ #category : #'api - lifecycle' }
+BlHost class >> stop [
+	self subclassResponsibility
+]
+
+{ #category : #'driver selection' }
+BlHost class >> suitableHostClass [
+	"Find a default bloc host among all available.
+	Return a special null one if there are no available hosts"
+	<return: #'BlHost class'>
+
+	^ self availableHostClasses
+		"There are no availbale hosts, return a null one"
+		ifEmpty: [ BlHeadlessHost ]
+		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
+]
+
+{ #category : #'api - ui process' }
+BlHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+]
+
+{ #category : #'host space - accessing' }
+BlHost class >> universe [
+	<return: #BlParallelUniverse>
+
+	^ BlParallelUniverse forHost: self
+]
+
 { #category : #'host - api' }
 BlHost >> createHostSpaceFor: aSpace [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #'host - api' }
@@ -78,27 +105,34 @@ BlHost >> destroyHostSpaceFor: aSpace [
 	self subclassResponsibility
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
 	<return: #Boolean>
 
-	^ self subclassResponsibility
+	^ self class isRunning
 ]
 
-{ #category : #'host - api' }
-BlHost >> mainLoopPriority [
-	^ Processor userSchedulingPriority - 1
+{ #category : #'host - testing' }
+BlHost >> isStillAvailable [
+	"Let's assume that a space is opened with me as a host.
+	I return true if I am still available host for the current system.
+	For example if a space is opened in a native window with a headless VM
+	and then reopened with a headfull VM all those spaces should be re-opened
+	with a different host, for example morphic"
+	<return: #Boolean>
+
+	^ true
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlHost >> start [
-	self subclassResponsibility
+	self class start
 ]
 
-{ #category : #'host - api' }
+{ #category : #'api - lifecycle' }
 BlHost >> stop [
-	self subclassResponsibility
+	self class stop
 ]
 
 { #category : #'host - testing' }
@@ -123,4 +157,16 @@ BlHost >> supportsOpenGLSurface [
 	<return: #Boolean>
 	
 	^ false
+]
+
+{ #category : #enumerating }
+BlHost >> uiProcessDo: aBlock [
+	self class uiProcessDo: aBlock
+]
+
+{ #category : #'host space - accessing' }
+BlHost >> universe [
+	<return: #BlParallelUniverse>
+	
+	^ self class universe
 ]

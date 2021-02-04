@@ -64,6 +64,19 @@ BlBorder class >> paint: aPaint width: aNumber [
 		build
 ]
 
+{ #category : #comparing }
+BlBorder >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ opacity = anObject opacity
+		and: [ paint = anObject paint
+				and: [ style = anObject style and: [ width = anObject width ] ] ]
+]
+
 { #category : #copy }
 BlBorder >> copyWithOpacity: aNumber [
 	self
@@ -127,6 +140,14 @@ BlBorder >> copyWithWidth: aWidth [
 		yourself
 ]
 
+{ #category : #comparing }
+BlBorder >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ opacity hash
+		bitXor: (paint hash bitXor: (style hash bitXor: width hash))
+]
+
 { #category : #testing }
 BlBorder >> isTransparent [
 	"Return true if I am is transparent and should not be rendered,
@@ -187,6 +208,19 @@ BlBorder >> paint: aBlPaint [
 	paint := aBlPaint asBlPaint
 ]
 
+{ #category : #printing }
+BlBorder >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' width: ';
+		print: width.
+	aStream
+		nextPutAll: ' paint: ';
+		print: paint
+]
+
 { #category : #accessing }
 BlBorder >> style [
 	<return: #BlStrokeStyle>
@@ -220,7 +254,7 @@ BlBorder >> width: aNumber [
 		description: [ 'Width must not be nil' ].
 	self
 		assert: [ aNumber >= 0 ]
-		description: [ 'Width vmust not be negative' ].
+		description: [ 'Width must not be negative' ].
 
 	width isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].

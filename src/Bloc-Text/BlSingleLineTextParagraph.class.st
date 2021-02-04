@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #'paragraph - geometry' }
+BlSingleLineTextParagraph >> advance [
+	^ self line advance
+]
+
+{ #category : #'paragraph - geometry' }
 BlSingleLineTextParagraph >> ascent [
 	<return: #Number>
 
@@ -17,6 +22,35 @@ BlSingleLineTextParagraph >> ascent [
 { #category : #baselines }
 BlSingleLineTextParagraph >> baselineChanged [
 	self line baseline: self baseline
+]
+
+{ #category : #'paragraph - measuring' }
+BlSingleLineTextParagraph >> basicMeasureOn: aSpanMeasurer [
+	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
+	| anIterator aMeasurer |
+
+	aMeasurer := self createMeasurer.
+	aMeasurer line paragraph: self.
+
+	(self text isEmpty) ifTrue: [ 
+		aMeasurer
+			measureSpan: (BlSpan text: self text empty attributes: #())
+			of: self
+			with: aSpanMeasurer ].
+
+	anIterator := text iterator.
+	[ anIterator hasNext and: [ line isEmpty or: [ aMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
+		"If we pass #hasNext check we will definitely move to the next span,
+		so can do the same with position"
+		aMeasurer movePosition: anIterator position + 1.
+		aMeasurer
+			measureSpan: anIterator nextSpan
+			of: self
+			with: aSpanMeasurer ].
+
+	"measurer creates a line with baseline set to 0@0"
+	line := aMeasurer line.
+	end := line to
 ]
 
 { #category : #'paragraph - geometry' }
@@ -66,35 +100,9 @@ BlSingleLineTextParagraph >> line [
 	^ line
 ]
 
-{ #category : #'paragraph - measuring' }
-BlSingleLineTextParagraph >> measureOn: aCanvas with: aSpanMeasurer [
-	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
-	| anIterator aMeasurer |
-
-	aMeasurer := self createMeasurer.
-	aMeasurer line paragraph: self.
-
-	(self text isEmpty) ifTrue: [ 
-		aMeasurer
-			measureSpan: (BlSpan text: self text empty attributes: #())
-			of: self
-			on: aCanvas
-			with: aSpanMeasurer ].
-
-	anIterator := text iterator.
-	[ anIterator hasNext and: [ line isEmpty or: [ aMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
-		"If we pass #hasNext check we will definitely move to the next span,
-		so can do the same with position"
-		aMeasurer movePosition: anIterator position + 1.
-		aMeasurer
-			measureSpan: anIterator nextSpan
-			of: self
-			on: aCanvas
-			with: aSpanMeasurer ].
-
-	"measurer creates a line with baseline set to 0@0"
-	line := aMeasurer line.
-	end := line to
+{ #category : #'paragraph - geometry' }
+BlSingleLineTextParagraph >> looseBounds [
+	^ 0 @ 0 extent: self line advance @ (self ascent abs + self descent)
 ]
 
 { #category : #'paragraph - measuring' }
@@ -113,7 +121,7 @@ BlSingleLineTextParagraph >> reset [
 
 { #category : #'paragraph - geometry' }
 BlSingleLineTextParagraph >> spanAtIndex: anIndex [
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 
 	self
 		assert: [ self line isEmpty not ]
@@ -150,13 +158,13 @@ BlSingleLineTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: an
 	"Find a paragraph span that contains a given point given in a paragraph coordinates
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closest span to a point"
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 
 	^ self line spans
 		findBinary: [ :aParagraphSpan |
 			| originX cornerX |
 			originX := aParagraphSpan baseline x.
-			cornerX := originX + aParagraphSpan width.
+			cornerX := originX + aParagraphSpan advance.
 			(aPoint x between: originX and: cornerX )
 				ifTrue: [ 0 ]
 				ifFalse: [ | spanCenter |
@@ -166,6 +174,11 @@ BlSingleLineTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: an
 						ifFalse: [ 1 ] ] ]
 		do: [ :aParagraphSpan | aFoundBlock cull: aParagraphSpan ]
 		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
+]
+
+{ #category : #'paragraph - geometry' }
+BlSingleLineTextParagraph >> tightBounds [
+	^ self line bounds translateBy: self baseline
 ]
 
 { #category : #'paragraph - geometry' }

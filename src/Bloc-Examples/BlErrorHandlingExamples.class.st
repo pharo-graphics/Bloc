@@ -10,6 +10,7 @@ Class {
 { #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawing [
 	<gtExample>
+	<noTest>
 	| aFaultyElement theErrors aSceneElement |
 	
 	aFaultyElement := BlExampleElementWithBrokenDrawing new.
@@ -30,6 +31,7 @@ BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawing [
 { #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawingAndOnLayout [
 	<gtExample>
+	<noTest>
 	| aFaultyElement theErrors aSceneElement |
 	
 	aFaultyElement := BlExampleElementWithBrokenDrawingAndOnLayout new.
@@ -56,6 +58,7 @@ BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawingAndOnLayout [
 { #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenOnLayout [
 	<gtExample>
+	<noTest>
 	| aSceneElement aFaultyElement  theErrors |
 
 	aFaultyElement := BlExampleElementWithBrokenOnLayout new.
@@ -112,6 +115,7 @@ BlErrorHandlingExamples >> sceneWith: aFaultyElement [
 	aContainer addChildren: { aLeftChild . aRightChild }.
 	
 	aSpace := BlSpace new.
+	aSpace host: BlMorphicWindowHost new.
 	aSpace addChild: aContainer.
 	aSpace show.
 	aSpace pulse.

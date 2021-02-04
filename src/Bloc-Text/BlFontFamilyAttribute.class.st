@@ -14,14 +14,21 @@ BlFontFamilyAttribute class >> named: aString [
 		yourself
 ]
 
+{ #category : #'text style' }
+BlFontFamilyAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
+	aBlTextStyleBuilder familyName: self name
+]
+
 { #category : #comparing }
-BlFontFamilyAttribute >> equals: aTextAttribute [
-	^ self name = aTextAttribute name
+BlFontFamilyAttribute >> equals: anAnotherAttribute [
+	^ self name = anAnotherAttribute name
 ]
 
 { #category : #comparing }
 BlFontFamilyAttribute >> hash [
-	^ self class hash bitXor: self name hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: self name hash
 ]
 
 { #category : #accessing }
@@ -30,8 +37,12 @@ BlFontFamilyAttribute >> name [
 ]
 
 { #category : #accessing }
-BlFontFamilyAttribute >> name: anObject [
-	name := anObject
+BlFontFamilyAttribute >> name: aString [	
+	self
+		assert: [ name isNil ]
+		description: [ 'I am immutable and can not be modified' ].
+
+	name := aString
 ]
 
 { #category : #printing }
@@ -39,4 +50,15 @@ BlFontFamilyAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'font-family: ';
 		nextPutAll: self name printString
+]
+
+{ #category : #printing }
+BlFontFamilyAttribute >> storeOn: aStream [
+	super storeOn: aStream.
+	
+	aStream
+		space;
+		nextPutAll: #name: asString;
+		space;
+		store: name
 ]

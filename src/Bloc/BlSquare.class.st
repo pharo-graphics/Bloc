@@ -1,12 +1,17 @@
 Class {
 	#name : #BlSquare,
-	#superclass : #BlGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'length',
 		'origin'
 	],
 	#category : #'Bloc-Basic'
 }
+
+{ #category : #'geometry testing' }
+BlSquare >> containsPoint: aPoint in: aBlElement [
+	^ (self geometryBounds: BlBounds new) containsPoint: aPoint
+]
 
 { #category : #'geometry bounds' }
 BlSquare >> geometryBounds: aBounds [
@@ -16,7 +21,7 @@ BlSquare >> geometryBounds: aBounds [
 
 	^ aBounds
 		origin: self origin
-		extent: (self length * 2) asPoint
+		extent: (self length * 2.0) asPoint
 ]
 
 { #category : #accessing }

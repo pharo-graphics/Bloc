@@ -11,14 +11,21 @@ BlBounds >> asSpartaPathOn: aSpartaCanvas [
 BlBounds >> spartaClipOn: aSpartaCanvas with: aSpartaClipper [
 	"I am polymorphic with TSpartaPath and can be used directly"
 
-	aSpartaClipper pushRectangle: self
+	^ aSpartaClipper pushRectangle: self
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlBounds >> spartaFillOn: aSpartaCanvas with: aSpartaFiller [
+BlBounds >> spartaDrawFigureOn: aSpartaCanvas with: aSpartaFigurePainter [
 	"I am polymorphic with TSpartaPath and can be used directly"
 
-	aSpartaFiller fillRectangle: self
+	aSpartaFigurePainter drawRectangle: self
+]
+
+{ #category : #'*Bloc-Sparta' }
+BlBounds >> spartaFillOn: aSpartaCanvas with: aSpartaFillPainter [
+	"I am polymorphic with TSpartaPath and can be used directly"
+
+	aSpartaFillPainter fillRectangle: self
 ]
 
 { #category : #'*Bloc-Sparta' }

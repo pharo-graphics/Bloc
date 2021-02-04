@@ -33,6 +33,14 @@ BlChildrenSubset class >> on: aBlChildren [
 	^ self new initializeFrom: aBlChildren
 ]
 
+{ #category : #adding }
+BlChildrenSubset >> add: newObject [ 
+	"Include newObject as one of the receiver's elements. Answer newObject. 
+	ArrayedCollections cannot respond to this message."
+
+	self shouldNotImplement
+]
+
 { #category : #'children - accessing' }
 BlChildrenSubset >> at: anIndex [
 	<return: #BlElement>
@@ -63,6 +71,17 @@ BlChildrenSubset >> initializeFrom: aBlChildren [
 { #category : #accessing }
 BlChildrenSubset >> name [
 	^ 'Subset'
+]
+
+{ #category : #removing }
+BlChildrenSubset >> remove: oldObject ifAbsent: anExceptionBlock [ 
+	"Remove oldObject from the receiver's elements. If several of the 
+	elements are equal to oldObject, only one is removed. If no element is 
+	equal to oldObject, answer the result of evaluating anExceptionBlock. 
+	Otherwise, answer the argument, oldObject. ArrayedCollections cannot 
+	respond to this message."
+
+	self shouldNotImplement
 ]
 
 { #category : #'children - accessing' }

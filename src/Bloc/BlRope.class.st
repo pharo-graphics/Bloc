@@ -38,10 +38,6 @@ BlRope class >> combineLength [
 BlRope class >> concatenate: aLeftRope and: aRightRope [
 	| totalSize |
 	
-	self
-		assert: [ (aLeftRope isEmpty and: [ aRightRope isEmpty  ]) not ]
-		description: [ 'Can not concatenate two empty ropes' ].
-	
 	aLeftRope isEmpty
 		ifTrue: [ ^ aRightRope ].
 
@@ -148,6 +144,8 @@ BlRope >> at: anIndex [
 
 { #category : #'rope - attributes' }
 BlRope >> attributes: anAttributesCollection [
+
+	anAttributesCollection ifEmpty: [ ^self ].
 	^ self attributes: anAttributesCollection from: 0 to: self size
 ]
 
@@ -224,6 +222,38 @@ BlRope >> from: aStart to: anEnd do: aBlock [
 	self subclassResponsibility
 ]
 
+{ #category : #'rope - enumeration' }
+BlRope >> indexOfSubCollection: aCollection startingAt: aStart ifAbsent: exceptionBlock [
+	"Answer the index of the receiver's first element, such that that element 
+	equals the first element of aCollection, and the next elements equal 
+	the rest of the elements of aCollection. Begin the search at element 
+	aStart of the receiver. If no such match is found, answer the result of 
+	evaluating argument, exceptionBlock."
+	| first iterator |
+
+	aCollection isEmpty
+		ifTrue: [^ exceptionBlock value].
+	
+	first := aCollection first.
+	iterator := self iterator: aStart to: self size - aCollection size + 1.
+	[ iterator hasNext ]
+		whileTrue: [
+			iterator next = first
+				ifTrue: [
+					| aSubIterator anIndex |
+					aCollection size = 1
+						ifTrue: [ ^ iterator position - 1 ].
+					anIndex := 2.
+					aSubIterator := self iterator: iterator position to: self size.
+					[ (aSubIterator next) = (aCollection at: anIndex) ]
+						whileTrue: [
+							anIndex = aCollection size
+								ifTrue: [ ^ iterator position - 1 ].
+							anIndex := anIndex + 1 ] ] ].
+
+	^ exceptionBlock value
+]
+
 { #category : #'rope - inserting' }
 BlRope >> insert: aRope at: anIndex [
 	"Insert aRope after anIndex"
@@ -236,7 +266,7 @@ BlRope >> insert: aRope at: anIndex [
 	(anIndex < 0 or: [ anIndex > self size ])
 		ifTrue: [ self error: 'Insert index ', anIndex asString, ' is out of bounds' ].
 
-	^ ((self from: 1 to: anIndex) append: aRope) append: (self from: anIndex + 1 to: self size)
+	^ ((self from: 0 to: anIndex) append: aRope) append: (self from: anIndex to: self size)
 ]
 
 { #category : #'rope - inserting' }
@@ -312,6 +342,12 @@ BlRope >> last [
 	^ self at: self size
 ]
 
+{ #category : #'text - converting' }
+BlRope >> normalized [
+
+	^ self subclassResponsibility
+]
+
 { #category : #'rope - printing' }
 BlRope >> printOn: aStream [
 	
@@ -330,6 +366,67 @@ BlRope >> putOn: aStream from: aStart to: anEnd [
 	self from: aStart to: anEnd do: [ :anItem | aStream nextPut: anItem ]
 ]
 
+{ #category : #accessing }
+BlRope >> readStream [ 
+
+	^ self subclassResponsibility 
+]
+
+{ #category : #'rope - replacing' }
+BlRope >> replaceAll: aCollectionOfAssociations [
+	"Answer a copy of the receiver in which all occurrences of the collections as keys have been replaced by corresponding values.
+	I preserve text attributes"
+	<return: #BlRope>
+	| theSortedReplacements aNewRope |
+
+	aCollectionOfAssociations
+		ifEmpty: [ ^ self ].
+
+	theSortedReplacements := (aCollectionOfAssociations collect: [ :eachAssociation | eachAssociation key asArray -> eachAssociation value ])
+		sorted: [ :a :b | a key size > b key size ].
+		
+	aNewRope := self.
+	theSortedReplacements do: [ :eachReplacement |
+		aNewRope := aNewRope replaceAll: eachReplacement key with: eachReplacement value ].
+	aNewRope := aNewRope simplified.
+
+	^ aNewRope
+]
+
+{ #category : #'rope - replacing' }
+BlRope >> replaceAll: oldSubCollection with: newCollection [
+	"Answer a copy of the receiver in which all occurrences of
+	oldSubCollection have been replaced by newCollection "
+	| aNewRope startSearch currentIndex endIndex |
+
+	aNewRope := self.
+	startSearch := 0.
+	[ (currentIndex := aNewRope indexOfSubCollection: oldSubCollection startingAt: startSearch ifAbsent: [ -1 ]) >= 0 ]
+		whileTrue: [
+			endIndex := currentIndex + oldSubCollection size.
+			aNewRope := aNewRope
+					replaceFrom: currentIndex
+					to: endIndex
+					with: newCollection.
+			startSearch := currentIndex + newCollection size ].
+
+	^ aNewRope
+]
+
+{ #category : #'rope - replacing' }
+BlRope >> replaceFrom: aStart to: anEnd with: aCollection [ 
+	"Replace a piece of the rope with a given collection of items"
+
+	^ (self delete: aStart to: anEnd) insertItems: aCollection at: aStart
+]
+
+{ #category : #'rope - replacing' }
+BlRope >> simplified [
+	<return: #BlRope>
+
+	^ self subclassResponsibility
+]
+
 { #category : #'rope - accessing' }
 BlRope >> size [
 	<return: #Number>
@@ -339,8 +436,9 @@ BlRope >> size [
 
 { #category : #'rope - accessing' }
 BlRope >> withAllChildrenBreadthFirst [
-	| all |
-	all := OrderedCollection with: self.
-	self allChildrenBreadthFirstDo: [ :x | all add: x ].
-	^ all
+	<return: #Collection of: #BlRope>
+	
+	^ Array streamContents: [ :aStream |
+		aStream nextPut: self.
+		self allChildrenBreadthFirstDo: [ :eachElement | aStream nextPut: eachElement ] ]
 ]

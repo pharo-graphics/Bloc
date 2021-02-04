@@ -1,6 +1,6 @@
 Extension { #name : #BlFontObliqueAttribute }
 
 { #category : #'*Bloc-Sparta' }
-BlFontObliqueAttribute >> applyOnSpartaFontBuilder: aFontBuilder with: aSpartaSpan [
+BlFontObliqueAttribute >> applyOnSpartaFontBuilder: aFontBuilder [
 	aFontBuilder styleOblique
 ]

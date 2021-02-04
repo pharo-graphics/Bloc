@@ -6,7 +6,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Basic'
+	#category : #'Bloc-Examples-Basic'
 }
 
 { #category : #examples }
@@ -138,11 +138,11 @@ BlBasicExamples >> coloredButton [
 	
 	button := BlElement new
 		background: (Color r: 63 g: 81 b: 181 range: 255);
-		geometry: (BlRectangle cornerRadius: 2);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
 		relocate: 100@100;
 		padding: (BlInsets top: 8 right: 16 bottom: 8 left: 16);
 		layout: BlLinearLayout horizontal;
-		effect: (BlDropShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2);
+		effect: (BlGaussianShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2);
 		constraintsDo: [ :c |
 			c horizontal fitContent.
 			c vertical fitContent ].
@@ -194,10 +194,10 @@ BlBasicExamples >> elementWithEllipticBorders [
 		layout: BlFrameLayout new;
 		size: 300@150;
 		relocate: 50@50;
-		addChild: (self leftBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
-		addChild: (self rightBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
-		addChild: (self topBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
-		addChild: (self bottomBorder background: (Color gray alpha: 0.3); geometry: BlEllipse new);
+		addChild: (self leftBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
+		addChild: (self rightBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
+		addChild: (self topBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
+		addChild: (self bottomBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
 		addChild: self borderTextElement
 ]
 
@@ -215,7 +215,7 @@ BlBasicExamples >> elementsWithShadow [
 BlBasicExamples >> ellipse [
 	<gtExample>
 	
-	^ (BlEllipse extent: 200 @ 100) asElement
+	^ ((BlEllipseGeometry new ) extent: 200 @ 100) asElement
 		background: (Color red alpha: 0.5);
 		border: (BlBorder paint: Color black width: 2);
 		yourself
@@ -226,7 +226,7 @@ BlBasicExamples >> ellipseWithShadow [
 	<gtExample>
 	
 	^ BlElement new
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		size: 300@150;
 		relocate: 50@50;
 		border: (BlBorder paint: Color black width: 2);
@@ -242,11 +242,11 @@ BlBasicExamples >> fabButton [
 
 	button := BlElement new
 		background: (Color r: 255 g: 64 b: 129 range: 255);
-		geometry: BlEllipse new;
+		geometry: BlEllipseGeometry new;
 		relocate: 100@100;
 		size: 56@56;
 		layout: BlFrameLayout new;
-		effect: (BlDropShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2).
+		effect: (BlGaussianShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2).
 
 	icon := (BlPolygon vertices: ({
 			36@0. 48@0 . 48@36 . 84@36.
@@ -283,17 +283,6 @@ BlBasicExamples >> leftBorder [
 			c frame horizontal alignLeft ]
 ]
 
-{ #category : #'examples - shape' }
-BlBasicExamples >> line [
-	<gtExample>
-
-	^ BlLineElement new
-		fromAnchor: (BlAbsolutePositionAnchor position: 75 @ 140);
-		toAnchor: (BlAbsolutePositionAnchor position: 200 @ 240);
-		border: (BlBorder paint: Color red width: 4);
-		yourself
-]
-
 { #category : #'examples - background' }
 BlBasicExamples >> linearGradient [
 	<gtExample>
@@ -328,10 +317,10 @@ BlBasicExamples >> rectangle [
 	<gtExample>
 	
 	^ BlElement new
-		geometry: BlRectangle new;
+		geometry: BlRoundedRectangleGeometry new;
 		size: 200 @ 100;
 		background: Color transparent;
-		effect: (BlBlurBelowEffect radius: 4);
+		effect: (BlGaussianShadowEffect new);
 		border: (BlBorder paint: Color blue width: 4);
 		yourself
 ]
@@ -343,7 +332,7 @@ BlBasicExamples >> rectangleWithImage [
 	^ BlElement new
 		size: 400@200;
 		relocate: 100 @ 100;
-		geometry: (BlRectangle cornerRadius: 10);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
 		background: BlBackgroundExamples new buildBackgroundWithImagesAndColor;
 		yourself
 ]
@@ -355,7 +344,7 @@ BlBasicExamples >> rectangleWithLinearGradient [
 	^ BlElement new
 		size: 300@200;
 		relocate: 100 @ 100;
-		geometry: (BlRectangle cornerRadius: 40);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 40);
 		background: self linearGradient;
 		yourself
 ]
@@ -387,7 +376,7 @@ BlBasicExamples >> roundedRectangle [
 	<gtExample>
 	
 	^ BlElement new
-		geometry: (BlRectangle cornerRadius: 20);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 20);
 		size: 150@80;
 		background: Color yellow;
 		border: (BlBorder paint: Color red width: 7);
@@ -398,7 +387,7 @@ BlBasicExamples >> roundedRectangle [
 BlBasicExamples >> shadowEffect [
 	<gtExample>
 	
-	^ BlDropShadowEffect color: Color black width: 20 offset: 10@10
+	^ BlGaussianShadowEffect color: Color black width: 10 offset: 10@10
 ]
 
 { #category : #'examples - composition' }
@@ -409,7 +398,6 @@ BlBasicExamples >> shapes [
 		addChildren: { 
 			self circle relocate: 250 @ 200.
 			self ellipse relocate: 10 @ 20.
-			self line.
 			self polygon relocate: 220 @ 0.
 			self rectangle relocate: 10 @ 190.
 			self roundedRectangle relocate: 430 @ 50.
@@ -422,7 +410,7 @@ BlBasicExamples >> square [
 	<gtExample>
 
 	^ BlElement new
-		geometry: BlRectangle new;
+		geometry: BlRoundedRectangleGeometry new;
 		size: 80@80;
 		background: Color green;
 		border: (BlBorder paint: Color black width: 2);

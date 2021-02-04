@@ -49,19 +49,19 @@ BlLinearLayoutMeasurer >> initialize [
 
 	useLargestChild := false.
 	isBaselineAligned := false.
-	cellSpacing := 0.
+	cellSpacing := 0.0.
 
-	totalLength := 0.
-	totalWeight := 0.
-	usedExcessSpace := 0.
+	totalLength := 0.0.
+	totalWeight := 0.0.
+	usedExcessSpace := 0.0.
 	skippedMeasure := false.
 	matchBreadth := false.
-	largestChildLength := 0.
-	measuredLength := 0.
-	alternativeMaxBreadth := 0.
-	maxBreadth := 0.
+	largestChildLength := 0.0.
+	measuredLength := 0.0.
+	alternativeMaxBreadth := 0.0.
+	maxBreadth := 0.0.
 	allFillParent := true.
-	weightedMaxBreadth := 0
+	weightedMaxBreadth := 0.0
 ]
 
 { #category : #initialization }
@@ -117,17 +117,58 @@ BlLinearLayoutMeasurer >> lengthSpec [
 ]
 
 { #category : #measurement }
-BlLinearLayoutMeasurer >> measure [
-	self preMeasure.
-
-	self baselineMeasure.
-	self largestMeasure.
-
-	totalLength := totalLength + (orientation paddingLength: parent).
+BlLinearLayoutMeasurer >> limitedMeasure [
+	| excessSpace remainingExcess remainingNodesCount theLimitedNodes totalLimitedLength maxEachLimitedLength theNodesToShrink totalShrinkedLength |
 	
-	self weightedMeasure.
-	self postMeasure.
-	self uniformMeasure
+	"Either expand children with weight to take up available space or shrink them if they extend beyond our current bounds.
+	If we skipped measurement on any children, we need to measure them now."
+	excessSpace := measuredLength - totalLength + usedExcessSpace.
+	excessSpace >= 0
+		ifTrue: [ ^ self ].
+
+	excessSpace := excessSpace abs.
+	remainingExcess := excessSpace.
+	
+	"we should reduce the size of the fit content limited children"
+	theLimitedNodes := self nodes select: [ :eachNode | eachNode lengthResizer isFitContentLimited ].
+	theLimitedNodes
+		ifEmpty: [ ^ self ].
+	
+	totalLimitedLength := (theLimitedNodes inject: 0.0 into: [ :aSum :eachNode | aSum + eachNode measuredLength + eachNode marginLength ]) - remainingExcess.
+	totalLimitedLength < 0
+		ifTrue: [ ^ self ].
+	
+	maxEachLimitedLength := totalLimitedLength / theLimitedNodes size.
+	
+	"let's select those nodes that are larger than the max length and need to be schinked"
+	theNodesToShrink := theLimitedNodes select: [ :eachNode | eachNode measuredLength > maxEachLimitedLength ].
+	theNodesToShrink
+		ifEmpty: [ ^ self ].
+	
+	totalShrinkedLength := (theNodesToShrink inject: 0.0 into: [ :aSum :eachNode | aSum + eachNode measuredLength + eachNode marginLength ]) - remainingExcess.
+	totalShrinkedLength < 0
+		ifTrue: [ ^ self ].
+	
+	remainingNodesCount := theNodesToShrink size.
+	theNodesToShrink do: [ :eachNode |
+			| shareLength childLength childLengthSpec childBreadthSpec |
+			
+			shareLength := remainingExcess / remainingNodesCount.
+			remainingExcess := remainingExcess - shareLength.
+			remainingNodesCount := remainingNodesCount - 1.
+			
+			childLength := eachNode measuredLength - shareLength.
+				
+			childLengthSpec := BlMeasurementSpec exact: (0.0 max: childLength).
+			childBreadthSpec := parent layout
+				measurementSpecFor: breadthSpec
+				usedSize: (orientation paddingBreadth: parent) + (eachNode marginBreadth)
+				resizer: eachNode breadthResizer.
+				
+			 eachNode measure: (orientation extentSpecBreadth: childBreadthSpec lengthSpec: childLengthSpec) ].
+		
+	measuredLength := measuredLength - excessSpace.
+	totalLength := totalLength - excessSpace.
 ]
 
 { #category : #'private - measurement' }
@@ -136,6 +177,28 @@ BlLinearLayoutMeasurer >> measureExactUsingExcessSpace: aNode [
 	These views will get measured later if we have space to distribute."
 	
 	self subclassResponsibility
+]
+
+{ #category : #measurement }
+BlLinearLayoutMeasurer >> measureOn: anElement [
+
+	anElement ignoreRequestLayoutDuring: [ self preMeasure ].
+
+	self baselineMeasure.
+	self largestMeasure.
+
+	totalLength := totalLength + (orientation paddingLength: parent).
+	
+	"Check against our minimum length"
+	measuredLength := totalLength max: (orientation minimalLength: parent).
+
+	"Reconcile our calculated size with the lengthSpec"
+	measuredLength := lengthSpec sizeFor: measuredLength.
+	
+	self limitedMeasure.
+	self weightedMeasure.
+	self postMeasure.
+	self uniformMeasure
 ]
 
 { #category : #accessing }
@@ -157,7 +220,7 @@ BlLinearLayoutMeasurer >> postMeasure [
 
 	(allFillParent not and: [ breadthSpec isExact not ])
 		ifTrue: [ maxBreadth := alternativeMaxBreadth ].
-		
+
 	maxBreadth := maxBreadth + (orientation paddingBreadth: parent).
 
 	"Check against our minimum height"
@@ -185,10 +248,10 @@ BlLinearLayoutMeasurer >> preMeasure [
 			ifTrue: [ self measureExactUsingExcessSpace: aNode ]
 			ifFalse: [
 				| usedLength childLength |
-				"The widthMode is either UNSPECIFIED or AT_MOST, and
+				"The lengthMode is either UNSPECIFIED or AT_MOST, and
 				this child is only laid out using excess space.
-				Measure using WRAP_CONTENT so that we can find out the view's optimal width.
-				We'll restore the original width of 0 after measurement."
+				Measure using FIT_CONTENT so that we can find out the view's optimal length.
+				We'll restore the original length of 0 after measurement."
 				shouldUseExcessSpace
 					ifTrue: [ aNode lengthResizer: BlLayoutResizer fitContent ].
 
@@ -274,9 +337,10 @@ BlLinearLayoutMeasurer >> remainingWeightSum [
 { #category : #measurement }
 BlLinearLayoutMeasurer >> uniformMeasure [
 	| uniformMeasureSpec |
+
 	matchBreadth
 		ifFalse: [ ^ self ].
-		
+
 	"Pretend that the linear layout has an exact size. This is the measured height of ourselves.
 	The measured height should be the max height of the children, changed to accommodate the heightMeasureSpec from the parent"
 	
@@ -340,7 +404,7 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 	"Either expand children with weight to take up available space or shrink them if they extend beyond our current bounds.
 	If we skipped measurement on any children, we need to measure them now."
 	remainingExcess := measuredLength - totalLength + usedExcessSpace.
-	
+
 	(skippedMeasure or: [ remainingExcess > 0 and: [ totalWeight > 0 ] ])
 		ifTrue: [
 			| remainingWeightSum |
@@ -357,7 +421,11 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 					ifTrue: [
 						| shareSpace childLengthSpec childBreadthSpec |
 						
-						shareSpace := (childWeight * remainingExcess / remainingWeightSum) asInteger.
+						self flag: 'deal with precision'.
+						shareSpace := (remainingWeightSum closeTo: 0)
+							ifTrue: [ 0.0 ]
+							ifFalse: [ (childWeight * remainingExcess / remainingWeightSum) asFloat ].
+
 						remainingExcess := remainingExcess - shareSpace.
 						remainingWeightSum := remainingWeightSum - childWeight.
 
@@ -369,7 +437,7 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 								"This child had some intrinsic width to which we need to add its share of excess space."
 								ifFalse: [ aNode measuredLength + shareSpace ] ].
 							
-						childLengthSpec := BlMeasurementSpec exact: (0 max: childLength).
+						childLengthSpec := BlMeasurementSpec exact: (0.0 max: childLength).
 						childBreadthSpec := parent layout
 							measurementSpecFor: breadthSpec
 							usedSize: (orientation paddingBreadth: parent) + (aNode marginBreadth)

@@ -5,7 +5,7 @@ Class {
 		'delegate',
 		'position'
 	],
-	#category : #'Bloc-Events'
+	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #accessing }
@@ -30,5 +30,5 @@ BlSpaceDragLiftEvent >> position: anObject [
 
 { #category : #sending }
 BlSpaceDragLiftEvent >> sendTo: anObject [
-	anObject spaceDragLift: self
+	anObject spaceDragLiftEvent: self
 ]

@@ -38,36 +38,16 @@ Class {
 		'maxHeight',
 		'maxWidth',
 		'end',
-		'autoRelease',
 		'text',
 		'tabWidth',
-		'selection',
 		'containerExtent',
 		'session',
-		'scale'
-	],
-	#classInstVars : [
-		'matrix'
+		'scale',
+		'selection',
+		'highlights'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
-
-{ #category : #cleanup }
-BlTextParagraph class >> cleanUp [
-	super cleanUp.
-	
-	matrix := nil
-]
-
-{ #category : #accessing }
-BlTextParagraph class >> matrix [
-	"Return a temporary matrix used to collect data in.
-	It is a shared singleton to minimize object creation.
-	Must only be used on UI thread!"
-	<return: #BlTransformation>
-	
-	^ matrix ifNil: [ matrix := BlTransformation new ]
-]
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> ascent [
@@ -95,6 +75,10 @@ BlTextParagraph >> baseline: aTextParagraphBaseline [
 BlTextParagraph >> baselineChanged [
 	"Is sent when baseline needs to be recomputed"
 	self subclassResponsibility
+]
+
+{ #category : #'paragraph - measuring' }
+BlTextParagraph >> basicMeasureOn: aBlHostTextMeasurer [
 ]
 
 { #category : #'paragraph - geometry' }
@@ -125,7 +109,6 @@ BlTextParagraph >> createMeasurer [
 	^ self defaultMeasurer
 		maxWidth: maxWidth;
 		maxHeight: maxHeight;
-		text: self text;
 		yourself
 ]
 
@@ -153,7 +136,7 @@ BlTextParagraph >> drawOn: aCanvas [
 	Note: I double dispatch through aCanvas to support multiple completely different canvasses"
 
 	session == Smalltalk session
-		ifFalse: [ self measureOn: aCanvas ].
+		ifFalse: [ ^ self ].
 
 	aCanvas drawTextParagraph: self
 ]
@@ -171,6 +154,13 @@ BlTextParagraph >> extent [
 BlTextParagraph >> finalize [
 
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+BlTextParagraph >> gtTextFor: aView [
+	<gtView>
+	self text isNil ifTrue: [ ^ aView empty ].
+	^ self text gtTextFor: aView
 ]
 
 { #category : #testing }
@@ -200,6 +190,26 @@ BlTextParagraph >> height [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - highlighting' }
+BlTextParagraph >> highlight: aHighlightAttribute from: aFromIndex to: aToIndex [
+	highlights
+		ifNil: [ highlights := IdentityDictionary new ].
+
+	(highlights
+		at: aHighlightAttribute
+		ifAbsentPut: [ BlTextParagraphHighlight new ])
+			highlight: aHighlightAttribute paint
+			from: ((aFromIndex - 1) max: 0)
+			to: aToIndex
+]
+
+{ #category : #'api - instantiation' }
+BlTextParagraph >> highlights [
+	<return: #Collection of: #BlTextParagraphHighlight>
+
+	^ highlights
+]
+
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> indexAtPosition: aPoint [
 	<return: #Number>
@@ -218,8 +228,7 @@ BlTextParagraph >> indexAtPosition: aPoint [
 { #category : #initialization }
 BlTextParagraph >> initialize [
 	super initialize.
-	
-	autoRelease := true.
+
 	self reset
 ]
 
@@ -280,11 +289,11 @@ BlTextParagraph >> maxWidth: aNumber [
 ]
 
 { #category : #'paragraph - measuring' }
-BlTextParagraph >> measureOn: aCanvas [
-	"Measure myself with a given canvas as a backend-specific context.
-	Note: I double dispatch through aCanvas to support multiple completely different canvasses"
+BlTextParagraph >> measureOn: aBlHostTextMeasurer [
+	"Measure myself with a given text measurer as a backend-specific context.
+	Note: I double dispatch through aBlHostTextMeasurer to support multiple completely different canvases"
 
-	aCanvas measureTextParagraph: self.
+	self basicMeasureOn: aBlHostTextMeasurer.
 
 	"we should store a session of the last successfull measurement"
 	session := Smalltalk session.
@@ -295,11 +304,6 @@ BlTextParagraph >> measureOn: aCanvas [
 	self
 		assert: [ self isNotEmpty ]
 		description: [ 'I must not be empty after measurement!' ]
-]
-
-{ #category : #'paragraph - measuring' }
-BlTextParagraph >> measureOn: aCanvas with: aSpanMeasurer [
-	^ self subclassResponsibility
 ]
 
 { #category : #'paragraph - geometry' }
@@ -336,19 +340,18 @@ BlTextParagraph >> renderOn: aCanvas [
 
 { #category : #initialization }
 BlTextParagraph >> reset [
-	self wantsAutoRelease
-		ifFalse: [ self finalize ].
+	self finalize.
 
 	text := BlText empty.
-	autoRelease := true.
 	tabWidth := self defaultTabWidth.
 	maxHeight := Float infinity.
 	maxWidth := Float infinity.
+	session := nil.
 	end := 0.
-	autoRelease := true.
 	selection := nil.
+	highlights := nil.
 	containerExtent := 0@0.
-	baseline := BlTextParagraphAscentBaseline uniqueInstance.
+	baseline := BlTextParagraphAscentLooseBaseline uniqueInstance.
 	scale := 1
 ]
 
@@ -382,6 +385,11 @@ BlTextParagraph >> selection: aBlTextSelection [
 	selection := aBlTextSelection
 ]
 
+{ #category : #accessing }
+BlTextParagraph >> session [
+	^ session
+]
+
 { #category : #testing }
 BlTextParagraph >> skipWhitespaceIn: aString after: aStart [
 	"Return an index of the first non-whitespace character in aString after aStart index"
@@ -400,14 +408,14 @@ BlTextParagraph >> skipWhitespaceIn: aString after: aStart [
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtIndex: anIndex [
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtPoint: aPoint [
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 	
 	^ self
 		spanAtPoint: aPoint
@@ -420,22 +428,9 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 	"Find a paragraph span that contains a given point given in a paragraph coordinates
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closed span to a point"
-	<return: #BrTextparagraphSpan>
+	<return: #BlTextParagraphSpan>
 	
 	^ self subclassResponsibility
-]
-
-{ #category : #'paragraph - replacement' }
-BlTextParagraph >> spanToString: aBrText [
-	"Convert a given text span to a string replacing tabs and special character with the ones that should
-	be measured and rendered"
-	<return: #String>
-
-	^ String streamContents: [ :aStream |
-		aBrText do: [ :aChar |
-			aChar = Character tab
-				ifTrue: [ self tabWidth timesRepeat: [ aStream nextPut: Character space ] ]
-				ifFalse: [ aStream nextPut: aChar ] ] ]
 ]
 
 { #category : #'paragraph - accessing' }
@@ -484,7 +479,7 @@ BlTextParagraph >> top [
 
 { #category : #testing }
 BlTextParagraph >> wantsAutoRelease [
-	^ autoRelease
+	^ true
 ]
 
 { #category : #'paragraph - geometry' }
