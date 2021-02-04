@@ -9,9 +9,11 @@
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
+:warning:
 This repository contains the code for Bloc that may be included in the future in Pharo.
-It retrofits a part of the development made at http://github.com/feenkcom/bloc.
-This version may contain less features and evolve slower. We are currently identifying the core we want for Pharo.
+It retrofits a part of the development made at http://github.com/feenkcom/bloc.  
+This version will focus on core features and stability.  
+We are currently identifying the core we want for Pharo.
 
 ## Installation
 
