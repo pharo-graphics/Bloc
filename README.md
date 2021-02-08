@@ -3,8 +3,7 @@
 [Installation](#installation) | [Contributing](#contributing) |  [License](#license)
 
 [![License](https://img.shields.io/github/license/pharo-graphics/Bloc.svg?style=flat-square)][license]
-[![Travis](https://img.shields.io/travis/pharo-graphics/Bloc.svg?style=flat-square)][travis]
-[![AppVeyor](https://img.shields.io/appveyor/ci/pharo-graphics/Bloc.svg?style=flat-square)][appveyor]
+
 [![Coveralls](https://img.shields.io/coveralls/pharo-graphics/Bloc.svg?style=flat-square)][coveralls]
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
@@ -17,14 +16,25 @@ We are currently identifying the core we want for Pharo.
 
 ## Installation
 
-The following script installs Bloc intended for [Pharo 8](https://pharo.org/download):<br>
+The following script installs Bloc intended for [Pharo 8](https://pharo.org/download):
 
+To load the most bare bone bloc (just Bloc , BlocHost-Mock and Bloc-Tests packages):
 ```smalltalk
 Metacello new
-        baseline: 'Bloc';
-        repository: 'github://feenkcom/Bloc/src';
+        baseline: 'BlocCore';
+        repository: 'github://pharo-graphics/Bloc/src';
         load
 ```
+
+To also load a rendering engine we can use the following baseline which in addition to BlocCore also loads Bloc-Text and Bloc-Sparta:
+
+```
+Metacello new
+    baseline: 'BlocSparta';
+    repository: 'github://pharo-graphics/Bloc/src';
+    load.
+```
+
 
 ## Contributing
 
