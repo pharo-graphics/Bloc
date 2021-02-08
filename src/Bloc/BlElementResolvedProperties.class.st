@@ -68,6 +68,11 @@ BlElementResolvedProperties >> properties: aDictionaryOfProperties [
 	properties := aDictionaryOfProperties
 ]
 
+{ #category : #private }
+BlElementResolvedProperties >> propertiesAsArray [
+	^ properties values
+]
+
 { #category : #accessing }
 BlElementResolvedProperties >> propertiesToPropagateToChildren [
 	
