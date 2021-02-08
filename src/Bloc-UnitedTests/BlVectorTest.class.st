@@ -3,19 +3,19 @@ I have been automatically converted and probably manually tweaked from BlVector2
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlVector2DTest,
+	#name : #BlVectorTest,
 	#superclass : #TestCase,
 	#category : #'Bloc-UnitedTests'
 }
 
 { #category : #metadata }
-BlVector2DTest >> originClassName [
+BlVectorTest >> originClassName [
 	"This test was generated from..."
 	^ 'BlVector2DExamples'
 ]
 
 { #category : #tests }
-BlVector2DTest >> testVector0degrees [
+BlVectorTest >> testVector0degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: 10 y: 0.
@@ -25,7 +25,7 @@ BlVector2DTest >> testVector0degrees [
 ]
 
 { #category : #tests }
-BlVector2DTest >> testVector180degrees [
+BlVectorTest >> testVector180degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: -10 y: 0.
@@ -35,7 +35,7 @@ BlVector2DTest >> testVector180degrees [
 ]
 
 { #category : #tests }
-BlVector2DTest >> testVector270degrees [
+BlVectorTest >> testVector270degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: 0 y: -10.
@@ -45,7 +45,7 @@ BlVector2DTest >> testVector270degrees [
 ]
 
 { #category : #'tests - arithmetic' }
-BlVector2DTest >> testVector2DAddition [
+BlVectorTest >> testVector2DAddition [
 	<gtExample>
 	| aVector anotherVector sum |
 	aVector := BlVector x: 10 y: 0.
@@ -57,7 +57,7 @@ BlVector2DTest >> testVector2DAddition [
 ]
 
 { #category : #'tests - arithmetic' }
-BlVector2DTest >> testVector2DAdditionWith3D [
+BlVectorTest >> testVector2DAdditionWith3D [
 	<gtExample>
 	| aVector anotherVector sum |
 	aVector := BlVector x: 10 y: 0 z: -20.
@@ -70,7 +70,7 @@ BlVector2DTest >> testVector2DAdditionWith3D [
 ]
 
 { #category : #'tests - arithmetic' }
-BlVector2DTest >> testVector2DMultiplication [
+BlVectorTest >> testVector2DMultiplication [
 	<gtExample>
 	| aVector mul |
 	aVector := BlVector x: 10 y: 2.
@@ -81,7 +81,7 @@ BlVector2DTest >> testVector2DMultiplication [
 ]
 
 { #category : #'tests - arithmetic' }
-BlVector2DTest >> testVector2DMultiplicationConstantFirst [
+BlVectorTest >> testVector2DMultiplicationConstantFirst [
 	<gtExample>
 	| aVector mul |
 	aVector := BlVector x: 10 y: 2.
@@ -92,7 +92,7 @@ BlVector2DTest >> testVector2DMultiplicationConstantFirst [
 ]
 
 { #category : #tests }
-BlVector2DTest >> testVector346degrees [
+BlVectorTest >> testVector346degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: 4 y: -1.
@@ -108,7 +108,7 @@ BlVector2DTest >> testVector346degrees [
 ]
 
 { #category : #'tests - arithmetic' }
-BlVector2DTest >> testVector3DAddition [
+BlVectorTest >> testVector3DAddition [
 	<gtExample>
 	| aVector anotherVector sum |
 	aVector := BlVector x: 10 y: 0 z: -20.
@@ -121,7 +121,7 @@ BlVector2DTest >> testVector3DAddition [
 ]
 
 { #category : #'tests - arithmetic' }
-BlVector2DTest >> testVector3DAdditionWith2D [
+BlVectorTest >> testVector3DAdditionWith2D [
 	<gtExample>
 	| aVector anotherVector sum |
 	aVector := BlVector x: 10 y: 0 z: -20.
@@ -134,7 +134,7 @@ BlVector2DTest >> testVector3DAdditionWith2D [
 ]
 
 { #category : #'tests - arithmetic' }
-BlVector2DTest >> testVector3DMultiplication [
+BlVectorTest >> testVector3DMultiplication [
 	<gtExample>
 	| aVector mul |
 	aVector := BlVector x: 10 y: 2 z: -2.
@@ -146,7 +146,7 @@ BlVector2DTest >> testVector3DMultiplication [
 ]
 
 { #category : #tests }
-BlVector2DTest >> testVector45degrees [
+BlVectorTest >> testVector45degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: 10 y: 10.
@@ -159,7 +159,7 @@ BlVector2DTest >> testVector45degrees [
 ]
 
 { #category : #'tests - arithmetic' }
-BlVector2DTest >> testVectorMultiplicationConstantFirst [
+BlVectorTest >> testVectorMultiplicationConstantFirst [
 	<gtExample>
 	| aVector mul |
 	aVector := BlVector x: 10 y: 2.
