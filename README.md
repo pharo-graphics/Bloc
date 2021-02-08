@@ -35,6 +35,17 @@ Metacello new
     load.
 ```
 
+And finally, to be able to render bloc inside of the morphic we can load morphic host (independent from Sparta)
+
+```
+Metacello new
+    baseline: 'BlocMorphic';
+    repository: 'github://pharo-graphics/Bloc/src';
+    load.
+```
+
+
+
 
 ## Contributing
 
