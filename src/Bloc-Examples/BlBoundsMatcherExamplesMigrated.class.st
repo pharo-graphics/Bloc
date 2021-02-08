@@ -1,11 +1,11 @@
 Class {
-	#name : #BlBoundsMatcherExamples,
+	#name : #BlBoundsMatcherExamplesMigrated,
 	#superclass : #Object,
 	#category : #'Bloc-Examples-Basic'
 }
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartEqualParentStartWhenEquals [
+BlBoundsMatcherExamplesMigrated >> childStartEqualParentStartWhenEquals [
 	<gtExample>
 	| aMatcher |
 	
@@ -21,7 +21,7 @@ BlBoundsMatcherExamples >> childStartEqualParentStartWhenEquals [
 ]
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartEqualParentStartWhenGreater [
+BlBoundsMatcherExamplesMigrated >> childStartEqualParentStartWhenGreater [
 	<gtExample>
 	| aMatcher |
 	
@@ -37,7 +37,7 @@ BlBoundsMatcherExamples >> childStartEqualParentStartWhenGreater [
 ]
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartEqualParentStartWhenLess [
+BlBoundsMatcherExamplesMigrated >> childStartEqualParentStartWhenLess [
 	<gtExample>
 	| aMatcher |
 	
@@ -53,7 +53,7 @@ BlBoundsMatcherExamples >> childStartEqualParentStartWhenLess [
 ]
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartGreaterThanParentStartWhenEquals [
+BlBoundsMatcherExamplesMigrated >> childStartGreaterThanParentStartWhenEquals [
 	<gtExample>
 	| aMatcher |
 	
@@ -69,7 +69,7 @@ BlBoundsMatcherExamples >> childStartGreaterThanParentStartWhenEquals [
 ]
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartGreaterThanParentStartWhenGreater [
+BlBoundsMatcherExamplesMigrated >> childStartGreaterThanParentStartWhenGreater [
 	<gtExample>
 	| aMatcher |
 	
@@ -85,7 +85,7 @@ BlBoundsMatcherExamples >> childStartGreaterThanParentStartWhenGreater [
 ]
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartGreaterThanParentStartWhenLess [
+BlBoundsMatcherExamplesMigrated >> childStartGreaterThanParentStartWhenLess [
 	<gtExample>
 	| aMatcher |
 	
@@ -101,7 +101,7 @@ BlBoundsMatcherExamples >> childStartGreaterThanParentStartWhenLess [
 ]
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartLessThanParentStartWhenEquals [
+BlBoundsMatcherExamplesMigrated >> childStartLessThanParentStartWhenEquals [
 	<gtExample>
 	| aMatcher |
 	
@@ -117,7 +117,7 @@ BlBoundsMatcherExamples >> childStartLessThanParentStartWhenEquals [
 ]
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartLessThanParentStartWhenGreater [
+BlBoundsMatcherExamplesMigrated >> childStartLessThanParentStartWhenGreater [
 	<gtExample>
 	| aMatcher |
 	
@@ -133,7 +133,7 @@ BlBoundsMatcherExamples >> childStartLessThanParentStartWhenGreater [
 ]
 
 { #category : #'examples - matcher' }
-BlBoundsMatcherExamples >> childStartLessThanParentStartWhenLess [
+BlBoundsMatcherExamplesMigrated >> childStartLessThanParentStartWhenLess [
 	<gtExample>
 	| aMatcher |
 	
