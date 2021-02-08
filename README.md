@@ -50,7 +50,7 @@ Metacello new
 ## Contributing
 
 Want to contribute on Bloc? Awesome!
-We have [instructions to help you get started contributing code or documentation][contributing].
+Get the latest versions, run the tests and you can start sending PR.
 
 ## License
 
