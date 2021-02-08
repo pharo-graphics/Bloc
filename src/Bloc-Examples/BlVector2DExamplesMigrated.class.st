@@ -1,7 +1,7 @@
 Class {
 	#name : #BlVector2DExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Basic'
+	#category : #'Bloc-Examples-BasicMigrated'
 }
 
 { #category : #examples }

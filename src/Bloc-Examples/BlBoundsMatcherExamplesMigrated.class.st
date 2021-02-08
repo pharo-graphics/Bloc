@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBoundsMatcherExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Basic'
+	#category : #'Bloc-Examples-BasicMigrated'
 }
 
 { #category : #'examples - matcher' }

@@ -2,13 +2,13 @@
 I contain examples of element bounds api
 "
 Class {
-	#name : #BlElementBoundsExamples,
+	#name : #BlElementBoundsExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Basic'
+	#category : #'Bloc-Examples-BasicMigrated'
 }
 
 { #category : #examples }
-BlElementBoundsExamples >> bounds [
+BlElementBoundsExamplesMigrated >> bounds [
 	"Element bounds consist of position and extent"
 	<gtExample>
 	| parent child |
@@ -23,7 +23,7 @@ BlElementBoundsExamples >> bounds [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInLocal [
+BlElementBoundsExamplesMigrated >> boundsInLocal [
 	"Bounds in local always have position 0@0"
 	<gtExample>
 	| parent child |
@@ -38,7 +38,7 @@ BlElementBoundsExamples >> boundsInLocal [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInLocalInLocal [
+BlElementBoundsExamplesMigrated >> boundsInLocalInLocal [
 	<gtExample>
 	| parent child |
 	
@@ -52,7 +52,7 @@ BlElementBoundsExamples >> boundsInLocalInLocal [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInLocalInParent [
+BlElementBoundsExamplesMigrated >> boundsInLocalInParent [
 	<gtExample>
 	| parent child |
 	
@@ -69,7 +69,7 @@ BlElementBoundsExamples >> boundsInLocalInParent [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInLocalInSpace [
+BlElementBoundsExamplesMigrated >> boundsInLocalInSpace [
 	<gtExample>
 	| parent child |
 	
@@ -86,7 +86,7 @@ BlElementBoundsExamples >> boundsInLocalInSpace [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInParent [
+BlElementBoundsExamplesMigrated >> boundsInParent [
 	<gtExample>
 	| parent child |
 	
@@ -103,7 +103,7 @@ BlElementBoundsExamples >> boundsInParent [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInParentInLocal [
+BlElementBoundsExamplesMigrated >> boundsInParentInLocal [
 	<gtExample>
 	| parent child |
 	
@@ -120,7 +120,7 @@ BlElementBoundsExamples >> boundsInParentInLocal [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInParentInParent [
+BlElementBoundsExamplesMigrated >> boundsInParentInParent [
 	<gtExample>
 	| parent child |
 	
@@ -141,7 +141,7 @@ BlElementBoundsExamples >> boundsInParentInParent [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInParentInParentInParent [
+BlElementBoundsExamplesMigrated >> boundsInParentInParentInParent [
 	<gtExample>
 	| parent child |
 	
@@ -162,7 +162,7 @@ BlElementBoundsExamples >> boundsInParentInParentInParent [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInSpace [
+BlElementBoundsExamplesMigrated >> boundsInSpace [
 	<gtExample>
 	| parent child |
 	
@@ -179,7 +179,7 @@ BlElementBoundsExamples >> boundsInSpace [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInSpaceInLocal [
+BlElementBoundsExamplesMigrated >> boundsInSpaceInLocal [
 	<gtExample>
 	| parent child |
 	
@@ -196,7 +196,7 @@ BlElementBoundsExamples >> boundsInSpaceInLocal [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInSpaceInParent [
+BlElementBoundsExamplesMigrated >> boundsInSpaceInParent [
 	<gtExample>
 	| parent child |
 	
@@ -213,7 +213,7 @@ BlElementBoundsExamples >> boundsInSpaceInParent [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInSpecificChild [
+BlElementBoundsExamplesMigrated >> boundsInSpecificChild [
 	<gtExample>
 	| parent child |
 
@@ -231,7 +231,7 @@ BlElementBoundsExamples >> boundsInSpecificChild [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInSpecificChildInSpecificParent [
+BlElementBoundsExamplesMigrated >> boundsInSpecificChildInSpecificParent [
 	<gtExample>
 	| parent child |
 
@@ -252,7 +252,7 @@ BlElementBoundsExamples >> boundsInSpecificChildInSpecificParent [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInSpecificParent [
+BlElementBoundsExamplesMigrated >> boundsInSpecificParent [
 	<gtExample>
 	| parent child |
 
@@ -270,7 +270,7 @@ BlElementBoundsExamples >> boundsInSpecificParent [
 ]
 
 { #category : #examples }
-BlElementBoundsExamples >> boundsInSpecificParentInSpecificChild [
+BlElementBoundsExamplesMigrated >> boundsInSpecificParentInSpecificChild [
 	<gtExample>
 	| parent child |
 
@@ -291,7 +291,7 @@ BlElementBoundsExamples >> boundsInSpecificParentInSpecificChild [
 ]
 
 { #category : #'instance creation' }
-BlElementBoundsExamples >> child [
+BlElementBoundsExamplesMigrated >> child [
 	<gtExample>
 	
 	^ BlElement new
@@ -301,17 +301,17 @@ BlElementBoundsExamples >> child [
 ]
 
 { #category : #config }
-BlElementBoundsExamples >> childExtent [
+BlElementBoundsExamplesMigrated >> childExtent [
 	^ 100@50
 ]
 
 { #category : #config }
-BlElementBoundsExamples >> childPosition [
+BlElementBoundsExamplesMigrated >> childPosition [
 	^ 200@150
 ]
 
 { #category : #'instance creation' }
-BlElementBoundsExamples >> parent [
+BlElementBoundsExamplesMigrated >> parent [
 	<gtExample>
 	
 	^ BlElement new
@@ -321,17 +321,17 @@ BlElementBoundsExamples >> parent [
 ]
 
 { #category : #config }
-BlElementBoundsExamples >> parentExtent [
+BlElementBoundsExamplesMigrated >> parentExtent [
 	^ 500@400
 ]
 
 { #category : #config }
-BlElementBoundsExamples >> parentPosition [
+BlElementBoundsExamplesMigrated >> parentPosition [
 	^ 100@75
 ]
 
 { #category : #'instance creation' }
-BlElementBoundsExamples >> parentWithChild [
+BlElementBoundsExamplesMigrated >> parentWithChild [
 	<gtExample>
 	
 	^ self parent
@@ -340,7 +340,7 @@ BlElementBoundsExamples >> parentWithChild [
 ]
 
 { #category : #'examples - special' }
-BlElementBoundsExamples >> shadowEffectBoundsWithoutOffset [
+BlElementBoundsExamplesMigrated >> shadowEffectBoundsWithoutOffset [
 	<gtExample>
 	| parent child shadowWidth |
 
