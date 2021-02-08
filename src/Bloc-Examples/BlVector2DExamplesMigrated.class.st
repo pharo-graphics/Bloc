@@ -1,11 +1,11 @@
 Class {
-	#name : #BlVector2DExamples,
+	#name : #BlVector2DExamplesMigrated,
 	#superclass : #Object,
 	#category : #'Bloc-Examples-Basic'
 }
 
 { #category : #examples }
-BlVector2DExamples >> vector_0degrees [
+BlVector2DExamplesMigrated >> vector_0degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: 10 y: 0.
@@ -17,7 +17,7 @@ BlVector2DExamples >> vector_0degrees [
 ]
 
 { #category : #examples }
-BlVector2DExamples >> vector_180degrees [
+BlVector2DExamplesMigrated >> vector_180degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: -10 y: 0.
@@ -29,7 +29,7 @@ BlVector2DExamples >> vector_180degrees [
 ]
 
 { #category : #examples }
-BlVector2DExamples >> vector_270degrees [
+BlVector2DExamplesMigrated >> vector_270degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: 0 y: -10.
@@ -41,7 +41,7 @@ BlVector2DExamples >> vector_270degrees [
 ]
 
 { #category : #examples }
-BlVector2DExamples >> vector_346degrees [
+BlVector2DExamplesMigrated >> vector_346degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: 4 y: -1.
@@ -57,7 +57,7 @@ BlVector2DExamples >> vector_346degrees [
 ]
 
 { #category : #examples }
-BlVector2DExamples >> vector_45degrees [
+BlVector2DExamplesMigrated >> vector_45degrees [
 	<gtExample>
 	| aVector |
 	aVector := BlVector x: 10 y: 10.
