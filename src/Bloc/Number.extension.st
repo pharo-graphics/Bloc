@@ -2,6 +2,7 @@ Extension { #name : #Number }
 
 { #category : #'*Bloc' }
 Number >> , aNumber [
+	"Returns a Vector"
 	<return: #BlVector>
 
 	^ BlVector2D x: self y: aNumber
@@ -67,7 +68,7 @@ Number >> scalarMultiplicate2D: aVector2D [
 
 { #category : #'*Bloc' }
 Number >> scalarMultiplicate3D: aVector3D [
-	"Perform a scalar multiplication of a given 3D vector by me"
+	"Return a new vector by performing a scalar multiplication of a given 3D vector by me."
 	<return: #BlVector>
 
 	^ BlVector

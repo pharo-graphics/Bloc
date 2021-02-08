@@ -7,11 +7,13 @@ Instance creation:
 
 	vector := (2, 3).
 	
-!! Examples
-!!! 45 Degrees
-${example:BlVector2DExamples>>#vector_45degrees|codeExpanded=false|previewExpanded=true}$
-!!! 346 Degrees
-${example:BlVector2DExamples>>#vector_346degrees|codeExpanded=false|previewExpanded=true}$
+##Examples
+
+45 Degrees
+`BlVector2DExamples>>#testVector45degrees`
+
+346 Degrees
+`BlVector2DExamples>>#testVector346degrees`
 
 "
 Class {
@@ -26,7 +28,7 @@ Class {
 
 { #category : #arithmetic }
 BlVector2D >> * aScalar [
-	"Multiplicate me by a given scalar (it can be a number, point, or vector)"
+	"Return a new vector as a multiplicate of the receiver by a given scalar (it can be a number, point, or vector)."
 	<return: #BlVector>
 	
 	^ aScalar scalarMultiplicate2D: self

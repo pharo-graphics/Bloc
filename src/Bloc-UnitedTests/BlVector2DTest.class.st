@@ -44,6 +44,53 @@ BlVector2DTest >> testVector270degrees [
 	^ aVector
 ]
 
+{ #category : #'tests - arithmetic' }
+BlVector2DTest >> testVector2DAddition [
+	<gtExample>
+	| aVector anotherVector sum |
+	aVector := BlVector x: 10 y: 0.
+	anotherVector :=  BlVector x: 100 y: 100.
+	sum := aVector + anotherVector.
+	self assert: sum x equals: 110.
+	self assert: sum y equals: 100.
+	^ sum
+]
+
+{ #category : #'tests - arithmetic' }
+BlVector2DTest >> testVector2DAdditionWith3D [
+	<gtExample>
+	| aVector anotherVector sum |
+	aVector := BlVector x: 10 y: 0 z: -20.
+	anotherVector :=  BlVector x: 100 y: 100.
+	sum := anotherVector + aVector.
+	self assert: sum x equals: 110.
+	self assert: sum y equals: 100.
+	self assert: sum z equals: -20.
+	^ sum
+]
+
+{ #category : #'tests - arithmetic' }
+BlVector2DTest >> testVector2DMultiplication [
+	<gtExample>
+	| aVector mul |
+	aVector := BlVector x: 10 y: 2.
+	mul := aVector * 3.
+	self assert: mul x equals: 30.
+	self assert: mul y equals: 6.
+	^ mul
+]
+
+{ #category : #'tests - arithmetic' }
+BlVector2DTest >> testVector2DMultiplicationConstantFirst [
+	<gtExample>
+	| aVector mul |
+	aVector := BlVector x: 10 y: 2.
+	mul :=  3 * aVector.
+	self assert: mul x equals: 30.
+	self assert: mul y equals: 6.
+	^ mul
+]
+
 { #category : #tests }
 BlVector2DTest >> testVector346degrees [
 	<gtExample>
@@ -60,6 +107,44 @@ BlVector2DTest >> testVector346degrees [
 	^ aVector
 ]
 
+{ #category : #'tests - arithmetic' }
+BlVector2DTest >> testVector3DAddition [
+	<gtExample>
+	| aVector anotherVector sum |
+	aVector := BlVector x: 10 y: 0 z: -20.
+	anotherVector :=  BlVector x: 100 y: 100 z: 4.
+	sum := aVector + anotherVector.
+	self assert: sum x equals: 110.
+	self assert: sum y equals: 100.
+	self assert: sum z equals: -16.
+	^ sum
+]
+
+{ #category : #'tests - arithmetic' }
+BlVector2DTest >> testVector3DAdditionWith2D [
+	<gtExample>
+	| aVector anotherVector sum |
+	aVector := BlVector x: 10 y: 0 z: -20.
+	anotherVector :=  BlVector x: 100 y: 100.
+	sum := aVector + anotherVector.
+	self assert: sum x equals: 110.
+	self assert: sum y equals: 100.
+	self assert: sum z equals: -20.
+	^ sum
+]
+
+{ #category : #'tests - arithmetic' }
+BlVector2DTest >> testVector3DMultiplication [
+	<gtExample>
+	| aVector mul |
+	aVector := BlVector x: 10 y: 2 z: -2.
+	mul := aVector * 3.
+	self assert: mul x equals: 30.
+	self assert: mul y equals: 6.
+	self assert: mul z equals: -6.
+	^ mul
+]
+
 { #category : #tests }
 BlVector2DTest >> testVector45degrees [
 	<gtExample>
@@ -71,4 +156,15 @@ BlVector2DTest >> testVector45degrees [
 				, aVector length asString ].
 	self assert: aVector degrees equals: 45.
 	^ aVector
+]
+
+{ #category : #'tests - arithmetic' }
+BlVector2DTest >> testVectorMultiplicationConstantFirst [
+	<gtExample>
+	| aVector mul |
+	aVector := BlVector x: 10 y: 2.
+	mul :=  3 * aVector.
+	self assert: mul x equals: 30.
+	self assert: mul y equals: 6.
+	^ mul
 ]
