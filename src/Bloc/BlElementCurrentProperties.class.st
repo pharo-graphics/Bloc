@@ -88,26 +88,12 @@ BlElementCurrentProperties >> flushPropertiesToRemove [
 	self maybeResolvedProperties flushPropertiesToRemove
 ]
 
-{ #category : #'api - properties font' }
-BlElementCurrentProperties >> fontSizeEm: aNumber [
-	self fontSize: (BlValueWithUnit em: aNumber)
-]
-
-{ #category : #'api - properties font' }
-BlElementCurrentProperties >> fontSizePt: aNumber [
-	self fontSize: (BlValueWithUnit pt: aNumber)
-]
-
-{ #category : #'api - properties font' }
-BlElementCurrentProperties >> fontSizeRem: aNumber [
-	self fontSize: (BlValueWithUnit rem: aNumber)
-]
-
 { #category : #initialization }
 BlElementCurrentProperties >> initialize [
 	super initialize.
 	
 	properties := Dictionary new.
+	resolvedProperties := BlElementResolvedProperties new.
 	isDirty := false
 ]
 
@@ -149,6 +135,13 @@ BlElementCurrentProperties >> properties [
 	<return: #Dictionary>
 
 	^ properties collect: [ :eachPropertyWithStatus |  eachPropertyWithStatus property ]
+]
+
+{ #category : #converting }
+BlElementCurrentProperties >> propertiesWithoutStatusAsArray [
+	^ Array streamContents: [ :aStream |
+		properties valuesDo: [ :eachPropertyWithStatus |
+			aStream nextPut: eachPropertyWithStatus property ] ]
 ]
 
 { #category : #'adding / removing' }
