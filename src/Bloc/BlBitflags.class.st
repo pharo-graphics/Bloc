@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'private - class code' }
-BlBitflags class >> defineFlagAccesorFor: flagName [
+BlBitflags class >> defineFlagAccessorFor: flagName [
 	"Define accessors as class methods"
 	| code |
 	
@@ -22,7 +22,7 @@ BlBitflags class >> defineFlagAccesorFor: flagName [
 ]
 
 { #category : #'private - instance code' }
-BlBitflags class >> defineFlagAddAccesorFor: flagName [
+BlBitflags class >> defineFlagAddAccessorFor: flagName [
 	| code |
 	
 	code := 'add', flagName, '
@@ -35,7 +35,7 @@ BlBitflags class >> defineFlagAddAccesorFor: flagName [
 ]
 
 { #category : #'private - instance code' }
-BlBitflags class >> defineFlagClearAccesorFor: flagName [
+BlBitflags class >> defineFlagClearAccessorFor: flagName [
 	| code |
 	
 	code := 'clear', flagName, '
@@ -48,7 +48,7 @@ BlBitflags class >> defineFlagClearAccesorFor: flagName [
 ]
 
 { #category : #'private - instance code' }
-BlBitflags class >> defineFlagTestAccesorFor: flagName [
+BlBitflags class >> defineFlagTestAccessorFor: flagName [
 	| code |
 	
 	code := 'has', flagName, '
@@ -177,10 +177,10 @@ BlBitflags class >> initializeFlags [
 { #category : #private }
 BlBitflags class >> rebuildFlagsAccessors [
 	self flagsDictionary keysDo: [ :each | 
-		self defineFlagAccesorFor: each.
-		self defineFlagTestAccesorFor: each.
-		self defineFlagClearAccesorFor: each.
-		self defineFlagAddAccesorFor: each ]
+		self defineFlagAccessorFor: each.
+		self defineFlagTestAccessorFor: each.
+		self defineFlagClearAccessorFor: each.
+		self defineFlagAddAccessorFor: each ]
 ]
 
 { #category : #operations }

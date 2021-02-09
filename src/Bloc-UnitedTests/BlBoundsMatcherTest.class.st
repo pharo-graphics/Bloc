@@ -36,7 +36,7 @@ BlBoundsMatcherTest >> testChildStartEqualParentStartWhenGreater [
 	aMatcher
 		childStart: 40;
 		parentStart: 30.
-	self assert: aMatcher matches not.
+	self deny: aMatcher matches.
 	^ aMatcher
 ]
 
@@ -49,7 +49,7 @@ BlBoundsMatcherTest >> testChildStartEqualParentStartWhenLess [
 	aMatcher
 		childStart: 20;
 		parentStart: 30.
-	self assert: aMatcher matches not.
+	self deny: aMatcher matches.
 	^ aMatcher
 ]
 
@@ -62,7 +62,7 @@ BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenEquals [
 	aMatcher
 		childStart: 30;
 		parentStart: 30.
-	self assert: aMatcher matches not.
+	self deny: aMatcher matches.
 	^ aMatcher
 ]
 
@@ -88,7 +88,7 @@ BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenLess [
 	aMatcher
 		childStart: 20;
 		parentStart: 30.
-	self assert: aMatcher matches not.
+	self deny: aMatcher matches.
 	^ aMatcher
 ]
 
@@ -101,7 +101,7 @@ BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenEquals [
 	aMatcher
 		childStart: 30;
 		parentStart: 30.
-	self assert: aMatcher matches not.
+	self deny: aMatcher matches.
 	^ aMatcher
 ]
 
@@ -114,7 +114,7 @@ BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenGreater [
 	aMatcher
 		childStart: 40;
 		parentStart: 30.
-	self assert: aMatcher matches not.
+	self deny: aMatcher matches.
 	^ aMatcher
 ]
 
