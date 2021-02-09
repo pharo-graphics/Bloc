@@ -83,14 +83,14 @@ BlChildrenCollection >> swapAt: aChildIndex with: anotherChildIndex [
 	aChildIndex = anotherChildIndex
 		ifTrue: [ ^ self ].
 		
-	self
+	"self
 		assert: [ aChildIndex between: 1 and: self size ]
 		description: [ 'Child index must be within bounds' ].
 		
 	self
 		assert: [ anotherChildIndex between: 1 and: self size ]
 		description: [ 'Child index must be within bounds' ].
-		
+	"	
 	lesserIndex := aChildIndex min: anotherChildIndex.
 	greaterIndex := aChildIndex max: anotherChildIndex.
 	

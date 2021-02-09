@@ -10,6 +10,7 @@ Point >> @ aNumber [
 
 { #category : #'*Bloc' }
 Point >> asBlocVector [
+	"Return a 2D vector of the receiver by using the receiver as the two dimensions of the vector."
 	^ BlVector x: x y: y
 ]
 

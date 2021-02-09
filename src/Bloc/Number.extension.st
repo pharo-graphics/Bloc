@@ -10,6 +10,8 @@ Number >> , aNumber [
 
 { #category : #'*Bloc' }
 Number >> asBlocVector [
+	"Return a 2D vector of the receiver by using the receiver as the two dimensions."
+	
 	^ BlVector x: self y: self
 ]
 

@@ -73,6 +73,7 @@ BlBoundsMatcher >> initialize [
 
 { #category : #'api - matcher' }
 BlBoundsMatcher >> matches [
+	"Returns whether the contraints of the matcher are correct"
 	<return: #Boolean>
 	
 	(constraints has: (BlBoundsMatcherConstraints Mask << BlBoundsMatcherConstraints ChildStartAndParentStart))

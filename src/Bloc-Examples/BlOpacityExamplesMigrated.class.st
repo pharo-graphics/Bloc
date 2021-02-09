@@ -21,13 +21,13 @@ element
 
 "
 Class {
-	#name : #BlOpacityExamples,
+	#name : #BlOpacityExamplesMigrated,
 	#superclass : #Object,
 	#category : #'Bloc-Examples-! Documentation examples'
 }
 
 { #category : #'instance creation' }
-BlOpacityExamples >> colorfulElement [
+BlOpacityExamplesMigrated >> colorfulElement [
 	<gtExample>
 	| anElement |
 
@@ -41,7 +41,7 @@ BlOpacityExamples >> colorfulElement [
 ]
 
 { #category : #'examples - opacity' }
-BlOpacityExamples >> defaultOpacity [
+BlOpacityExamplesMigrated >> defaultOpacity [
 	<gtExample>
 	| anElement |
 
@@ -56,7 +56,7 @@ BlOpacityExamples >> defaultOpacity [
 ]
 
 { #category : #'examples - opacity' }
-BlOpacityExamples >> makeOpaque [
+BlOpacityExamplesMigrated >> makeOpaque [
 	<gtExample>
 	| anElement |
 
@@ -72,7 +72,7 @@ BlOpacityExamples >> makeOpaque [
 ]
 
 { #category : #'examples - opacity' }
-BlOpacityExamples >> makeTranslucent [
+BlOpacityExamplesMigrated >> makeTranslucent [
 	<gtExample>
 	| anElement |
 
@@ -88,7 +88,7 @@ BlOpacityExamples >> makeTranslucent [
 ]
 
 { #category : #'examples - opacity' }
-BlOpacityExamples >> makeTransparent [
+BlOpacityExamplesMigrated >> makeTransparent [
 	<gtExample>
 	| anElement |
 

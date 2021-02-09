@@ -133,7 +133,7 @@ BlVector >> = anObject [
 
 { #category : #arithmetic }
 BlVector >> add2D: aVector2D [
-	"Add me to a given 2D vector"
+	"Add the receiver to a given 2D vector."
 	<return: #BlVector>
 
 	^ self subclassResponsibility
@@ -141,7 +141,7 @@ BlVector >> add2D: aVector2D [
 
 { #category : #arithmetic }
 BlVector >> add3D: aVector3D [
-	"Add me to a given 3D vector"
+	"Add the receiver to a given 3D vector."
 	<return: #BlVector>
 
 	^ self subclassResponsibility
@@ -226,7 +226,7 @@ BlVector >> negated [
 
 { #category : #'vector functions' }
 BlVector >> normal [
-	"Find a unit vector rotated clockwise. For the zero length vector return (-1, 0)"
+	"Return a unit vector rotated clockwise. For the zero length vector return (-1, 0)."
 	<return: #BlVector>
 	
 	^ self subclassResponsibility

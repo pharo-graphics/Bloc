@@ -145,8 +145,9 @@ BlVector2D >> closeTo: anotherVector [
 
 { #category : #accessing }
 BlVector2D >> degrees [
-	"Return vector degrees"
+	"Return the receiver degrees"
 	<return: #Number>
+	
 	^ self radians * 180 / Float pi
 ]
 
@@ -194,6 +195,7 @@ BlVector2D >> negated [
 
 { #category : #'vector functions' }
 BlVector2D >> normal [
+	"Return a unit vector rotated clockwise. For the zero length vector return (-1, 0)."
 	<return: #BlVector>
 
 	^ self asPoint normal asBlocVector
@@ -264,6 +266,8 @@ BlVector2D >> scalarMultiplicate2D: aVector2D [
 
 { #category : #arithmetic }
 BlVector2D >> sign [
+	"Returns a vector as the receiver sign."
+	
 	^ self class x: self x sign y: self y sign
 ]
 
