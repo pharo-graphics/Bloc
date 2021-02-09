@@ -14,6 +14,56 @@ BlVectorTest >> originClassName [
 	^ 'BlVector2DExamples'
 ]
 
+{ #category : #'tests - conversions' }
+BlVectorTest >> testAsBlocVector [
+	<gtExample>
+	| v |
+	v := 10 asBlocVector.
+	
+	self assert: v x equals: 10.
+	self assert: v y equals: 10.
+]
+
+{ #category : #'tests - conversions' }
+BlVectorTest >> testAsBlocVectorNumber [
+	<gtExample>
+	| v |
+	v := 10 asBlocVector.
+	
+	self assert: v x equals: 10.
+	self assert: v y equals: 10.
+]
+
+{ #category : #'tests - conversions' }
+BlVectorTest >> testAsBlocVectorPoint [
+	<gtExample>
+	| v |
+	v := (10@20) asBlocVector.
+	
+	self assert: v x equals: 10.
+	self assert: v y equals: 20.
+]
+
+{ #category : #'tests - maths' }
+BlVectorTest >> testNormal [ 
+	<gtExample>
+	| v norm |
+	v := (1@0) asBlocVector.
+	norm := v normal.
+	self assert: norm x equals: 0.
+	self assert: norm y equals: 1.
+	self assert: (v asPoint crossProduct: norm asPoint) equals: 1
+]
+
+{ #category : #'tests - conversions' }
+BlVectorTest >> testSign [
+	<gtExample>
+	| signVector | 
+	signVector := (100@ -2) asBlocVector sign.
+	self assert: signVector x equals: 1.
+	self assert: signVector y equals: -1.
+]
+
 { #category : #tests }
 BlVectorTest >> testVector0degrees [
 	<gtExample>
@@ -46,7 +96,7 @@ BlVectorTest >> testVector270degrees [
 
 { #category : #'tests - arithmetic' }
 BlVectorTest >> testVector2DAddition [
-	<gtExample>
+	<gtExample>	
 	| aVector anotherVector sum |
 	aVector := BlVector x: 10 y: 0.
 	anotherVector :=  BlVector x: 100 y: 100.
@@ -58,7 +108,7 @@ BlVectorTest >> testVector2DAddition [
 
 { #category : #'tests - arithmetic' }
 BlVectorTest >> testVector2DAdditionWith3D [
-	<gtExample>
+	<gtExample>	
 	| aVector anotherVector sum |
 	aVector := BlVector x: 10 y: 0 z: -20.
 	anotherVector :=  BlVector x: 100 y: 100.
@@ -71,7 +121,7 @@ BlVectorTest >> testVector2DAdditionWith3D [
 
 { #category : #'tests - arithmetic' }
 BlVectorTest >> testVector2DMultiplication [
-	<gtExample>
+	<gtExample>	
 	| aVector mul |
 	aVector := BlVector x: 10 y: 2.
 	mul := aVector * 3.
@@ -82,7 +132,7 @@ BlVectorTest >> testVector2DMultiplication [
 
 { #category : #'tests - arithmetic' }
 BlVectorTest >> testVector2DMultiplicationConstantFirst [
-	<gtExample>
+	<gtExample>	
 	| aVector mul |
 	aVector := BlVector x: 10 y: 2.
 	mul :=  3 * aVector.
@@ -109,7 +159,7 @@ BlVectorTest >> testVector346degrees [
 
 { #category : #'tests - arithmetic' }
 BlVectorTest >> testVector3DAddition [
-	<gtExample>
+	<gtExample>	
 	| aVector anotherVector sum |
 	aVector := BlVector x: 10 y: 0 z: -20.
 	anotherVector :=  BlVector x: 100 y: 100 z: 4.
