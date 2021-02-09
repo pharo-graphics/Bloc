@@ -20,7 +20,7 @@ Class {
 
 { #category : #arithmetic }
 BlVector3D >> * aScalar [
-	"Multiplicate me by a given scalar (it can be a number, point, or vector)"
+	"Return a new vector as a multiplicate of the receiver by a given scalar (it can be a number, point, or vector)."
 	<return: #BlVector>
 	
 	^ aScalar scalarMultiplicate3D: self
@@ -28,7 +28,7 @@ BlVector3D >> * aScalar [
 
 { #category : #arithmetic }
 BlVector3D >> + anotherVector [
-	"Perform an addition of a given vector and me"
+	"Return the addition of a given vector and the receiver."
 	<return: #BlVector>
 
 	^ anotherVector add3D: self

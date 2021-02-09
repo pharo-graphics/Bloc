@@ -18,6 +18,8 @@ BaselineOfBlocCore >> baseline: spec [
 				spec requires: #(#Beacon Fenster) ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#Bloc ). ];
+			package: #'Bloc-UnitedTests' with: [
+				spec requires: #(#Bloc )];
 			package: #'Bloc-Tests' with: [
 				spec requires: #(#Bloc 'BlocHost-Mock' ). ]. ].
 ]

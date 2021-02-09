@@ -1,6 +1,6 @@
 "
 I represent an abstract dimension-less vector.
-My subclasses implement API for concrete spaces (2D, 3D, etc).
+My subclasses implement API for concrete spaces (2D, 3D, etc). Users should not directly refer to my subclasses. Such classes are implementation classes.
 
 I define basic vector function such as:
 	- length
@@ -11,15 +11,18 @@ Instance creation examples:
 
 Create a 2D vector:
 
+```
 	BlVector x: 10 y: 20
 	or
 	(10, 20)
-	
+```	
 Create a 3D vector:
 
+```
 	BlVector x: 10 y: 20 z: 30
 	or
 	(10, 20, 30)
+```
 "
 Class {
 	#name : #BlVector,
@@ -49,7 +52,7 @@ BlVector class >> cleanUp [
 
 { #category : #'instance creation' }
 BlVector class >> one [
-	"Return a vector with all components being ones"
+	"Return a vector with all components being ones."
 	<return: #BlVector>
 	
 	^ one ifNil: [ one := self x: 1 y: 1 z: 1 ]
@@ -62,6 +65,8 @@ BlVector class >> x: aX y: aY [
 
 { #category : #'instance creation' }
 BlVector class >> x: aX y: aY z: aZ [
+	"Return a 3 dimensional vector."
+	
 	^ BlVector3D new x: aX y: aY z: aZ
 ]
 
@@ -91,7 +96,7 @@ BlVector class >> zAxis [
 
 { #category : #'instance creation' }
 BlVector class >> zero [
-	"Return a vector of zero length"
+	"Return a vector of zero length."
 	<return: #BlVector>
 	
 	^ zero ifNil: [ zero := self x: 0 y: 0 z: 0 ]
@@ -99,7 +104,7 @@ BlVector class >> zero [
 
 { #category : #arithmetic }
 BlVector >> * aScalar [
-	"Multiplicate me by a given scalar (it can be a number, point, or vector)"
+	"Return a new vector as a multiplicate of the receiver by a given scalar (it can be a number, point, or vector)."
 	<return: #BlVector>
 	
 	^ self subclassResponsibility
@@ -254,7 +259,7 @@ BlVector >> scalarMultiplicate2D: aVector2D [
 
 { #category : #arithmetic }
 BlVector >> scalarMultiplicate3D: aVector3D [
-	"Perform a scalar multiplication of a given 3D vector by me"
+	"Return a new vector by performing a scalar multiplication of a given 3D vector by me."
 	<return: #BlVector>
 
 	^ self subclassResponsibility
