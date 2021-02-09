@@ -64,11 +64,6 @@ BlElementFlags class >> flagsDecl [
 	}
 ]
 
-{ #category : #initialization }
-BlElementFlags class >> initialize [
-	super initialize.
-]
-
 { #category : #'flags - add' }
 BlElementFlags >> addNeedsLayout [
 	"This method was automatically generated"

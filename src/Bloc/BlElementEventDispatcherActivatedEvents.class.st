@@ -147,11 +147,6 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 	}
 ]
 
-{ #category : #'flags declaration' }
-BlElementEventDispatcherActivatedEvents class >> initialize [
-	super initialize.
-]
-
 { #category : #'flags - add' }
 BlElementEventDispatcherActivatedEvents >> addAddedToParent [
 	"This method was automatically generated"

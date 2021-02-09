@@ -209,11 +209,6 @@ BlBoundsMatcherConstraints class >> flagsDecl [
 	}
 ]
 
-{ #category : #initialization }
-BlBoundsMatcherConstraints class >> initialize [
-	super initialize
-]
-
 { #category : #'flags - add' }
 BlBoundsMatcherConstraints >> addChildEndAndParentEnd [
 	"This method was automatically generated"
