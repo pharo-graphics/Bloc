@@ -10,10 +10,10 @@ BaselineOfBlocLayout >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'BlocCore' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ].
+				spec repository: 'github://pharo-graphics/Bloc/src' ].
 		spec 
 			package: #'Bloc-Layout' with: [
 				spec requires: #(#BlocCore ). ];
-			package: #'Bloc-Layout-Tests' with: [
+			package: #'Bloc-Layout-Examples' with: [
 				spec requires: #('Bloc-Layout'). ]. ].
 ]
