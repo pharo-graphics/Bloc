@@ -64,6 +64,14 @@ BlElementFlags class >> flagsDecl [
 	}
 ]
 
+{ #category : #'flags declaration' }
+BlElementFlags class >> initialize [
+	"this method is needed else the information is not created. 
+	This is the sign of a bad design.
+	"
+	super initialize.
+]
+
 { #category : #'flags - add' }
 BlElementFlags >> addNeedsLayout [
 	"This method was automatically generated"

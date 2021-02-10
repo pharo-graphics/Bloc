@@ -147,6 +147,14 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 	}
 ]
 
+{ #category : #initialization }
+BlElementEventDispatcherActivatedEvents class >> initialize [
+	"this method is needed else the information is not created. 
+	This is the sign of a bad design.
+	"
+	super initialize.
+]
+
 { #category : #'flags - add' }
 BlElementEventDispatcherActivatedEvents >> addAddedToParent [
 	"This method was automatically generated"
