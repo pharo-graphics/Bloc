@@ -125,7 +125,7 @@ BlBasicExamples >> circle [
 	<gtExample>
 
 	^ BlElement new
-		geometry: BlCircle new;
+		geometry: BlCircleGeometry new;
 		background: (Color red alpha: 0.8);
 		border: (BlBorder paint: (Color blue alpha: 0.5) width: 6);
 		yourself
@@ -302,7 +302,7 @@ BlBasicExamples >> linearGradient [
 BlBasicExamples >> polygon [
 	<gtExample>
 	
-	^ (BlPolygon vertices: { 100@10. 40@198. 190@78. 10@78. 160@198} ) asElement
+	^ (BlPolygonGeometry vertices: { 100@10. 40@198. 190@78. 10@78. 160@198} ) asElement
 		size: 200@200;
 		background: (Color blue alpha: 0.4);
 		outskirts: BlOutskirts outside;
