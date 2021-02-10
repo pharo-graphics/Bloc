@@ -42,7 +42,7 @@ BlAnnulusSectorExamples >> annulus [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		startAngle: 0;
 		endAngle: 360.
 	
@@ -65,7 +65,7 @@ BlAnnulusSectorExamples >> annulusSectorBottomLeft [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		startAngle: 90;
 		endAngle: 180;
 		innerRadius: 0.5;
@@ -90,7 +90,7 @@ BlAnnulusSectorExamples >> annulusSectorBottomRight [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		startAngle: 0;
 		endAngle: 90;
 		innerRadius: 0.5;
@@ -115,7 +115,7 @@ BlAnnulusSectorExamples >> annulusSectorTopLeft [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		startAngle: 180;
 		endAngle: 270;
 		innerRadius: 0.5;
@@ -140,7 +140,7 @@ BlAnnulusSectorExamples >> annulusSectorTopRight [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		startAngle: 270;
 		endAngle: 360;
 		innerRadius: 0.5;
@@ -165,7 +165,7 @@ BlAnnulusSectorExamples >> circle [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		startAngle: 0;
 		endAngle: 360;
 		innerRadius: 0.
@@ -189,7 +189,7 @@ BlAnnulusSectorExamples >> circleSector [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		startAngle: 0;
 		endAngle: 270;
 		innerRadius: 0.
@@ -213,7 +213,7 @@ BlAnnulusSectorExamples >> default [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new.
+	aSector := BlAnnulusSectorGeometry new.
 	
 	self assert: aSector extent equals: 150@100.
 	self assert: aSector startAngle equals: 0.
@@ -234,7 +234,7 @@ BlAnnulusSectorExamples >> outerRadiusSmallerThanInner [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		innerRadius: 1.0;
 		outerRadius: 0.5.
 	
@@ -257,7 +257,7 @@ BlAnnulusSectorExamples >> pacman [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		startAngle: 45;
 		endAngle: 315;
 		innerRadius: 0.
@@ -281,7 +281,7 @@ BlAnnulusSectorExamples >> radiiOutsideOfValidInterval [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		innerRadius: -10;
 		outerRadius: 20.
 	
@@ -304,7 +304,7 @@ BlAnnulusSectorExamples >> sameRadii [
 	<gtExample>
 	| aSector |
 	
-	aSector := BlAnnulusSector new
+	aSector := BlAnnulusSectorGeometry new
 		innerRadius: 0.5;
 		outerRadius: 0.5.
 	

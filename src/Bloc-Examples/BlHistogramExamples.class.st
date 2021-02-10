@@ -40,7 +40,7 @@ BlHistogramExamples >> bottomToTop [
 	<gtExample>
 	| aHistogram |
 	
-	aHistogram := BlHistogram new
+	aHistogram := BlHistogramGeometry new
 		beBottomToTop;
 		values: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
 
@@ -52,7 +52,7 @@ BlHistogramExamples >> default [
 	<gtExample>
 	| aHistogram |
 	
-	aHistogram := BlHistogram new.
+	aHistogram := BlAnnulusSectorGeometry new.
 	
 	self assert: aHistogram extent equals: 150@100.
 	self assert: aHistogram values equals: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
@@ -72,7 +72,7 @@ BlHistogramExamples >> leftToRight [
 	<gtExample>
 	| aHistogram |
 	
-	aHistogram := BlHistogram new
+	aHistogram := BlAnnulusSectorGeometry new
 		beLeftToRight;
 		values: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
 
@@ -84,7 +84,7 @@ BlHistogramExamples >> rightToLeft [
 	<gtExample>
 	| aHistogram |
 	
-	aHistogram := BlHistogram new
+	aHistogram := BlAnnulusSectorGeometry new
 		beRightToLeft;
 		values: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
 
@@ -96,7 +96,7 @@ BlHistogramExamples >> topToBottom [
 	<gtExample>
 	| aHistogram |
 	
-	aHistogram := BlHistogram new
+	aHistogram := BlAnnulusSectorGeometry new
 		beTopToBottom;
 		values: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
 
