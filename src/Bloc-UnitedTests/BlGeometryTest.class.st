@@ -4,7 +4,7 @@ An AkGroupTest is a test class for testing the behavior of AkGroup
 Class {
 	#name : #BlGeometryTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic'
+	#category : #'Bloc-UnitedTests'
 }
 
 { #category : #'contains tests' }

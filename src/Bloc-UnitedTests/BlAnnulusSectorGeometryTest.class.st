@@ -4,7 +4,7 @@ I have been automatically converted and probably manually tweaked from BlAnnulus
 "
 Class {
 	#name : #BlAnnulusSectorGeometryTest,
-	#superclass : #TestCase,
+	#superclass : #BlGeometryTest,
 	#category : #'Bloc-UnitedTests'
 }
 

@@ -23,7 +23,7 @@ element
 Class {
 	#name : #BlOpacityExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-! Documentation examples'
+	#category : #'Bloc-Examples-DocumentationMigrated'
 }
 
 { #category : #'instance creation' }

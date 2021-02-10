@@ -33,8 +33,8 @@ ${example:BlAnnulusSectorExamples>>#circle|codeExpanded=false|previewShow=#gtLiv
 "
 Class {
 	#name : #BlAnnulusSectorGeometryExamplesMigrated,
-	#superclass : #BlGeometryExamples,
-	#category : #'Bloc-Examples-! Documentation examples'
+	#superclass : #BlGeometryExamplesMigrated,
+	#category : #'Bloc-Examples-DocumentationMigrated'
 }
 
 { #category : #examples }

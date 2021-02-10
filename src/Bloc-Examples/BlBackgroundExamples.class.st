@@ -17,7 +17,7 @@ The simplest of the available backgrounds is the paint background. A paint can b
 Class {
 	#name : #BlBackgroundExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-! Documentation examples'
+	#category : #'Bloc-Examples-Documentation examples'
 }
 
 { #category : #'background - builder' }

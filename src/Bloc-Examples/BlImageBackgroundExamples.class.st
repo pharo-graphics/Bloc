@@ -28,7 +28,7 @@ ${example:BlImageBackgroundExamples>>#emptyImageBackground|previewHeight=200|sho
 Class {
 	#name : #BlImageBackgroundExamples,
 	#superclass : #BlBackgroundExamples,
-	#category : #'Bloc-Examples-! Documentation examples'
+	#category : #'Bloc-Examples-Documentation examples'
 }
 
 { #category : #'background - image' }

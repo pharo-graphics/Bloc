@@ -1,5 +1,5 @@
 Class {
 	#name : #BlBuilderBackgroundExamples,
 	#superclass : #BlBackgroundExamples,
-	#category : #'Bloc-Examples-! Documentation examples'
+	#category : #'Bloc-Examples-Documentation examples'
 }

@@ -32,7 +32,7 @@ ${example:BlPaintBackgroundExamples>>#transparentColorBackground|expandedPreview
 Class {
 	#name : #BlPaintBackgroundExamples,
 	#superclass : #BlBackgroundExamples,
-	#category : #'Bloc-Examples-! Documentation examples'
+	#category : #'Bloc-Examples-Documentation examples'
 }
 
 { #category : #'background - color' }

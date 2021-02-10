@@ -26,7 +26,7 @@ ${example:BlBorderExamples>>#copyWithWidth}$
 Class {
 	#name : #BlBorderExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-! Documentation examples'
+	#category : #'Bloc-Examples-Documentation examples'
 }
 
 { #category : #'examples - immutability' }
