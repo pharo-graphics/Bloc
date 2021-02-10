@@ -30,13 +30,13 @@ ${method:BlHistogram>>#beRightToLeft}$
 ${example:BlHistogramExamples>>#rightToLeft|codeExpanded=false|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=100}$
 "
 Class {
-	#name : #BlHistogramExamples,
+	#name : #BlHistogramGeometryExamples,
 	#superclass : #BlGeometryExamples,
 	#category : #'Bloc-Examples-! Documentation examples'
 }
 
 { #category : #examples }
-BlHistogramExamples >> bottomToTop [
+BlHistogramGeometryExamples >> bottomToTop [
 	<gtExample>
 	| aHistogram |
 	
@@ -48,7 +48,7 @@ BlHistogramExamples >> bottomToTop [
 ]
 
 { #category : #examples }
-BlHistogramExamples >> default [
+BlHistogramGeometryExamples >> default [
 	<gtExample>
 	| aHistogram |
 	
@@ -68,7 +68,7 @@ BlHistogramExamples >> default [
 ]
 
 { #category : #examples }
-BlHistogramExamples >> leftToRight [
+BlHistogramGeometryExamples >> leftToRight [
 	<gtExample>
 	| aHistogram |
 	
@@ -80,7 +80,7 @@ BlHistogramExamples >> leftToRight [
 ]
 
 { #category : #examples }
-BlHistogramExamples >> rightToLeft [
+BlHistogramGeometryExamples >> rightToLeft [
 	<gtExample>
 	| aHistogram |
 	
@@ -92,7 +92,7 @@ BlHistogramExamples >> rightToLeft [
 ]
 
 { #category : #examples }
-BlHistogramExamples >> topToBottom [
+BlHistogramGeometryExamples >> topToBottom [
 	<gtExample>
 	| aHistogram |
 	

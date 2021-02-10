@@ -1,11 +1,11 @@
 Class {
-	#name : #BlEllipseExamples,
+	#name : #BlEllipseGeometryExamples,
 	#superclass : #BlGeometryExamples,
 	#category : #'Bloc-Examples-! Documentation examples'
 }
 
 { #category : #accessing }
-BlEllipseExamples >> default [
+BlEllipseGeometryExamples >> default [
 	<gtExample>
 	| anEllipse |
 	

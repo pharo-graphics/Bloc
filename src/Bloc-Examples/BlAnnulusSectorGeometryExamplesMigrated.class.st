@@ -32,13 +32,13 @@ If in addition to that the angle is >=360 we get a circle:
 ${example:BlAnnulusSectorExamples>>#circle|codeExpanded=false|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=100}$
 "
 Class {
-	#name : #BlAnnulusSectorExamples,
+	#name : #BlAnnulusSectorGeometryExamplesMigrated,
 	#superclass : #BlGeometryExamples,
 	#category : #'Bloc-Examples-! Documentation examples'
 }
 
 { #category : #examples }
-BlAnnulusSectorExamples >> annulus [
+BlAnnulusSectorGeometryExamplesMigrated >> annulus [
 	<gtExample>
 	| aSector |
 	
@@ -61,7 +61,7 @@ BlAnnulusSectorExamples >> annulus [
 ]
 
 { #category : #examples }
-BlAnnulusSectorExamples >> annulusSectorBottomLeft [
+BlAnnulusSectorGeometryExamplesMigrated >> annulusSectorBottomLeft [
 	<gtExample>
 	| aSector |
 	
@@ -86,7 +86,7 @@ BlAnnulusSectorExamples >> annulusSectorBottomLeft [
 ]
 
 { #category : #examples }
-BlAnnulusSectorExamples >> annulusSectorBottomRight [
+BlAnnulusSectorGeometryExamplesMigrated >> annulusSectorBottomRight [
 	<gtExample>
 	| aSector |
 	
@@ -111,7 +111,7 @@ BlAnnulusSectorExamples >> annulusSectorBottomRight [
 ]
 
 { #category : #examples }
-BlAnnulusSectorExamples >> annulusSectorTopLeft [
+BlAnnulusSectorGeometryExamplesMigrated >> annulusSectorTopLeft [
 	<gtExample>
 	| aSector |
 	
@@ -136,7 +136,7 @@ BlAnnulusSectorExamples >> annulusSectorTopLeft [
 ]
 
 { #category : #examples }
-BlAnnulusSectorExamples >> annulusSectorTopRight [
+BlAnnulusSectorGeometryExamplesMigrated >> annulusSectorTopRight [
 	<gtExample>
 	| aSector |
 	
@@ -161,7 +161,7 @@ BlAnnulusSectorExamples >> annulusSectorTopRight [
 ]
 
 { #category : #examples }
-BlAnnulusSectorExamples >> circle [
+BlAnnulusSectorGeometryExamplesMigrated >> circle [
 	<gtExample>
 	| aSector |
 	
@@ -185,7 +185,7 @@ BlAnnulusSectorExamples >> circle [
 ]
 
 { #category : #examples }
-BlAnnulusSectorExamples >> circleSector [
+BlAnnulusSectorGeometryExamplesMigrated >> circleSector [
 	<gtExample>
 	| aSector |
 	
@@ -209,7 +209,7 @@ BlAnnulusSectorExamples >> circleSector [
 ]
 
 { #category : #examples }
-BlAnnulusSectorExamples >> default [
+BlAnnulusSectorGeometryExamplesMigrated >> default [
 	<gtExample>
 	| aSector |
 	
@@ -230,7 +230,7 @@ BlAnnulusSectorExamples >> default [
 ]
 
 { #category : #'examples - corner cases' }
-BlAnnulusSectorExamples >> outerRadiusSmallerThanInner [
+BlAnnulusSectorGeometryExamplesMigrated >> outerRadiusSmallerThanInner [
 	<gtExample>
 	| aSector |
 	
@@ -253,7 +253,7 @@ BlAnnulusSectorExamples >> outerRadiusSmallerThanInner [
 ]
 
 { #category : #examples }
-BlAnnulusSectorExamples >> pacman [
+BlAnnulusSectorGeometryExamplesMigrated >> pacman [
 	<gtExample>
 	| aSector |
 	
@@ -277,7 +277,7 @@ BlAnnulusSectorExamples >> pacman [
 ]
 
 { #category : #'examples - corner cases' }
-BlAnnulusSectorExamples >> radiiOutsideOfValidInterval [
+BlAnnulusSectorGeometryExamplesMigrated >> radiiOutsideOfValidInterval [
 	<gtExample>
 	| aSector |
 	
@@ -300,7 +300,7 @@ BlAnnulusSectorExamples >> radiiOutsideOfValidInterval [
 ]
 
 { #category : #'examples - corner cases' }
-BlAnnulusSectorExamples >> sameRadii [
+BlAnnulusSectorGeometryExamplesMigrated >> sameRadii [
 	<gtExample>
 	| aSector |
 	
