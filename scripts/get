@@ -1,2 +1,0 @@
-wget -O - http://get.pharo.org/60+vm | bash
-./pharo Pharo.image eval --save "Metacello new baseline:'Bloc';repository:'github://pharo-graphics/Bloc/src';load."
