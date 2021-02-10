@@ -1,7 +1,7 @@
-Extension { #name : #BlSigmoid }
+Extension { #name : #BlSigmoidGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlSigmoid >> buildPathOnSpartaCanvas: aCanvas [
+BlSigmoidGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	^ aCanvas path
 		moveTo: from;
 		curveVia: fromControl

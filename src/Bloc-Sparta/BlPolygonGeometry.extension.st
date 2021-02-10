@@ -1,15 +1,13 @@
-Extension { #name : #BlPolyline }
+Extension { #name : #BlPolygonGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlPolyline >> buildPathOnSpartaCanvas: aCanvas [
+BlPolygonGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	| aCollection pathBuilder |
-	
 	aCollection := self vertices.
-	
 	pathBuilder := aCanvas path
 		absolute;
 		moveTo: aCollection first.
-	aCollection do: [ :pt | pathBuilder lineTo: pt ].
-	
+	aCollection allButFirstDo: [ :pt | pathBuilder lineTo: pt ].
+	pathBuilder close.
 	^ pathBuilder finish
 ]

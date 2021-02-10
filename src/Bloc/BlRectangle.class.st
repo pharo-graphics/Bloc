@@ -1,7 +1,7 @@
 Class {
 	#name : #BlRectangle,
 	#superclass : #BlRoundedRectangleGeometry,
-	#category : #'Bloc-Basic'
+	#category : #'Bloc-Basic-Deprecated'
 }
 
 { #category : #testing }

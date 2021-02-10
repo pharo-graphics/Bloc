@@ -1,7 +1,7 @@
-Extension { #name : #BlMultiPolygon }
+Extension { #name : #BlMultiPolygonGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlMultiPolygon >> buildPathOnSpartaCanvas: aCanvas [
+BlMultiPolygonGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	| pathBuilder |
 	
 	pathBuilder := aCanvas path absolute.

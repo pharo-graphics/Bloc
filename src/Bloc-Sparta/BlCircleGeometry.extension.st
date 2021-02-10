@@ -1,7 +1,7 @@
-Extension { #name : #BlCircle }
+Extension { #name : #BlCircleGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlCircle >> buildPathOnSpartaCanvas: aCanvas [
+BlCircleGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	^ aCanvas shape
 		circleAt: self origin + radius asPoint
 		radius: radius

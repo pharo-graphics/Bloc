@@ -1,7 +1,7 @@
-Extension { #name : #BlBezierCurve }
+Extension { #name : #BlBezierCurveGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlBezierCurve >> buildPathOnSpartaCanvas: aCanvas [
+BlBezierCurveGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	self order = 0
 		ifTrue: [ ^ aCanvas path build ].
 	

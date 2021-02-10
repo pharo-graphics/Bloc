@@ -1,7 +1,7 @@
-Extension { #name : #BlAnnulusSector }
+Extension { #name : #BlAnnulusSectorGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlAnnulusSector >> buildPathOnSpartaCanvas: aCanvas [
+BlAnnulusSectorGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	| aCenter anAbsoluteInnerRadius anAbsoluteOuterRadius aStartAngleInRadians anEndAngleInRadians aPathBuilder anInnerStartPoint anInnerEndPoint anOuterStartPoint anOuterEndPoint |
 	
 	aCenter := self center.

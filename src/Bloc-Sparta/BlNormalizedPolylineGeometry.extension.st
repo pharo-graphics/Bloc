@@ -1,7 +1,7 @@
-Extension { #name : #BlNormalizedPolyline }
+Extension { #name : #BlNormalizedPolylineGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlNormalizedPolyline >> buildPathOnSpartaCanvas: aCanvas [
+BlNormalizedPolylineGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	| theScaledVertices aPathBuilder |
 	
 	aPathBuilder := aCanvas path. 

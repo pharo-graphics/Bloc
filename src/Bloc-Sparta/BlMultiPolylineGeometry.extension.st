@@ -1,7 +1,7 @@
-Extension { #name : #BlMultiPolyline }
+Extension { #name : #BlMultiPolylineGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlMultiPolyline >> buildPathOnSpartaCanvas: aCanvas [
+BlMultiPolylineGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	| pathBuilder |
 	
 	pathBuilder := aCanvas path absolute.

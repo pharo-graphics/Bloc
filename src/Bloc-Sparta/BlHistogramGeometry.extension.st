@@ -1,7 +1,7 @@
-Extension { #name : #BlHistogram }
+Extension { #name : #BlHistogramGeometry }
 
 { #category : #'*Bloc-Sparta' }
-BlHistogram >> buildPathOnSpartaCanvas: aCanvas [
+BlHistogramGeometry >> buildPathOnSpartaCanvas: aCanvas [
 	| aBuilder anOrigin aDelta aLengthVector |
 	
 	self values
