@@ -34,13 +34,12 @@ BlClickEventExamples >> clickInHiddenChild [
 ]
 
 { #category : #'examples - events' }
-BlClickEventExamples >> clickInHiddenChildAndVisibleNephew [
+BlClickEventExamples >> clickInHiddenChildAndVisibleGrandchild [
 	<gtExample>
-	<noTest>
 	| aScripter |
 	aScripter := self threeElementsInScripter.
 	
-	aScripter substeps: 'Click in hidden nephew' do: [ :aStep |
+	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
 		
 		aStep do
 			label: 'Set child with hidden visibility';
@@ -64,12 +63,13 @@ BlClickEventExamples >> clickInHiddenChildAndVisibleNephew [
 ]
 
 { #category : #'examples - events' }
-BlClickEventExamples >> clickInHiddenChildAndVisibleUnclippedNephew [
+BlClickEventExamples >> clickInHiddenChildAndVisibleUnclippedGrandchild [
 	<gtExample>
+	<noTest>
 	| aScripter |
 	aScripter := self threeElementsWithFalseChildClippingInScripter.
 	
-	aScripter substeps: 'Click in hidden nephew' do: [ :aStep |
+	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
 		
 		aStep do
 			label: 'Set child with hidden visibility';
