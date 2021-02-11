@@ -16,6 +16,11 @@ BaselineOfBlocLayout >> baseline: spec [
 		spec 
 			package: #'Bloc-Layout' with: [
 				spec requires: #(#BlocCore #BlocAnimation). ];
+			"Layout depends also on compositor see https://github.com/pharo-graphics/Bloc/issues/87"
+			
+			package: #'Bloc-Layout-Tests' with: [
+				spec requires: #('Bloc-Layout')];
+			
 			package: #'Bloc-Layout-Examples' with: [
 				spec requires: #('Bloc-Layout'). ]. ].
 ]

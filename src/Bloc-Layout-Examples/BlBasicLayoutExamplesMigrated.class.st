@@ -1,11 +1,11 @@
 Class {
-	#name : #BlBasicLayoutExamples,
+	#name : #BlBasicLayoutExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Layout-Examples-Basic'
+	#category : #'Bloc-Layout-Examples-BasicMigrated'
 }
 
 { #category : #'instance creation' }
-BlBasicLayoutExamples >> forceLayoutOfMatchParent [
+BlBasicLayoutExamplesMigrated >> forceLayoutOfMatchParent [
 	<gtExample>
 	| anElement |
 
@@ -24,7 +24,7 @@ BlBasicLayoutExamples >> forceLayoutOfMatchParent [
 ]
 
 { #category : #'instance creation' }
-BlBasicLayoutExamples >> parentWithChildExactSize [
+BlBasicLayoutExamplesMigrated >> parentWithChildExactSize [
 	<gtExample>
 	| child parent |
 
@@ -53,7 +53,7 @@ BlBasicLayoutExamples >> parentWithChildExactSize [
 ]
 
 { #category : #'instance creation' }
-BlBasicLayoutExamples >> parentWithChildFitContent [
+BlBasicLayoutExamplesMigrated >> parentWithChildFitContent [
 	<gtExample>
 	| child parent |
 
@@ -72,7 +72,7 @@ BlBasicLayoutExamples >> parentWithChildFitContent [
 ]
 
 { #category : #'instance creation' }
-BlBasicLayoutExamples >> parentWithChildMatchParent [
+BlBasicLayoutExamplesMigrated >> parentWithChildMatchParent [
 	<gtExample>
 	| child parent |
 
