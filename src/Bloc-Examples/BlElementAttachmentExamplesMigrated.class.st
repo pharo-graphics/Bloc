@@ -1,11 +1,11 @@
 Class {
-	#name : #BlElementAttachmentExamples,
-	#superclass : #BlElementExamples,
-	#category : #'Bloc-Examples-Basic'
+	#name : #BlElementAttachmentExamplesMigrated,
+	#superclass : #BlElementExamplesMigrated,
+	#category : #'Bloc-Examples-BasicMigrated'
 }
 
 { #category : #examples }
-BlElementAttachmentExamples >> addToSpace [
+BlElementAttachmentExamplesMigrated >> addToSpace [
 	<gtExample>
 	| aSpace aContainer aChild addedToScene removedFromScene |
 	
@@ -35,7 +35,7 @@ BlElementAttachmentExamples >> addToSpace [
 ]
 
 { #category : #examples }
-BlElementAttachmentExamples >> detachAndAttachChild [
+BlElementAttachmentExamplesMigrated >> detachAndAttachChild [
 	<gtExample>
 	| aContainer aChild addedToScene removedFromScene |
 
@@ -73,7 +73,7 @@ BlElementAttachmentExamples >> detachAndAttachChild [
 ]
 
 { #category : #examples }
-BlElementAttachmentExamples >> detachAndRemoveChild [
+BlElementAttachmentExamplesMigrated >> detachAndRemoveChild [
 	<gtExample>
 	| aContainer aChild addedToScene removedFromScene |
 
@@ -111,7 +111,7 @@ BlElementAttachmentExamples >> detachAndRemoveChild [
 ]
 
 { #category : #examples }
-BlElementAttachmentExamples >> detachAndRemoveContainer [
+BlElementAttachmentExamplesMigrated >> detachAndRemoveContainer [
 	<gtExample>
 	| aRoot aContainer aChild addedToScene removedFromScene |
 
@@ -154,7 +154,7 @@ BlElementAttachmentExamples >> detachAndRemoveContainer [
 ]
 
 { #category : #examples }
-BlElementAttachmentExamples >> detachRequestFocusAndAttachChild [
+BlElementAttachmentExamplesMigrated >> detachRequestFocusAndAttachChild [
 	<gtExample>
 	| aContainer aChild focusEvents |
 

@@ -1,11 +1,11 @@
 Class {
-	#name : #BlElementLayoutBoundaryExamples,
-	#superclass : #BlElementExamples,
-	#category : #'Bloc-Examples-Basic'
+	#name : #BlElementLayoutBoundaryExamplesMigrated,
+	#superclass : #BlElementExamplesMigrated,
+	#category : #'Bloc-Examples-BasicMigrated'
 }
 
 { #category : #examples }
-BlElementLayoutBoundaryExamples >> exactLayoutBoundary_01_pulse [
+BlElementLayoutBoundaryExamplesMigrated >> exactLayoutBoundary_01_pulse [
 	<gtExample>
 	| aSpace |
 	
@@ -28,7 +28,7 @@ BlElementLayoutBoundaryExamples >> exactLayoutBoundary_01_pulse [
 ]
 
 { #category : #examples }
-BlElementLayoutBoundaryExamples >> exactLayoutBoundary_02_requestLayoutChild [
+BlElementLayoutBoundaryExamplesMigrated >> exactLayoutBoundary_02_requestLayoutChild [
 	<gtExample>
 	| aSpace |
 	
@@ -53,7 +53,7 @@ BlElementLayoutBoundaryExamples >> exactLayoutBoundary_02_requestLayoutChild [
 ]
 
 { #category : #'instance creation' }
-BlElementLayoutBoundaryExamples >> spaceWithExactLayoutBoundary [
+BlElementLayoutBoundaryExamplesMigrated >> spaceWithExactLayoutBoundary [
 	<gtExample>
 	| aSpace aContainer aLayoutBoundary aChild |
 	

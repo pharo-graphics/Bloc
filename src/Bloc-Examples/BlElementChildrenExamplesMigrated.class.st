@@ -6,13 +6,13 @@ Each visual element in ==Bloc== is composed out of other elements using a compos
 
 "
 Class {
-	#name : #BlElementChildrenExamples,
-	#superclass : #BlElementExamples,
-	#category : #'Bloc-Examples-Basic'
+	#name : #BlElementChildrenExamplesMigrated,
+	#superclass : #BlElementExamplesMigrated,
+	#category : #'Bloc-Examples-BasicMigrated'
 }
 
 { #category : #'examples - enumeration' }
-BlElementChildrenExamples >> allLeafChildrenAt_100_200 [
+BlElementChildrenExamplesMigrated >> allLeafChildrenAt_100_200 [
 	<gtExample>
 	| aContainer theChildren |
 	
@@ -25,7 +25,7 @@ BlElementChildrenExamples >> allLeafChildrenAt_100_200 [
 ]
 
 { #category : #'examples - enumeration' }
-BlElementChildrenExamples >> allLeafChildrenAt_200_100 [
+BlElementChildrenExamplesMigrated >> allLeafChildrenAt_200_100 [
 	<gtExample>
 	| aContainer theChildren |
 
@@ -38,7 +38,7 @@ BlElementChildrenExamples >> allLeafChildrenAt_200_100 [
 ]
 
 { #category : #'examples - enumeration' }
-BlElementChildrenExamples >> allLeafChildrenAt_200_200 [
+BlElementChildrenExamplesMigrated >> allLeafChildrenAt_200_200 [
 	<gtExample>
 	| aContainer theChildren |
 	
@@ -51,7 +51,7 @@ BlElementChildrenExamples >> allLeafChildrenAt_200_200 [
 ]
 
 { #category : #'examples - enumeration' }
-BlElementChildrenExamples >> allLeafChildrenAt_50_50 [
+BlElementChildrenExamplesMigrated >> allLeafChildrenAt_50_50 [
 	<gtExample>
 	| aContainer theChildren |
 	
@@ -64,7 +64,7 @@ BlElementChildrenExamples >> allLeafChildrenAt_50_50 [
 ]
 
 { #category : #'examples - enumeration' }
-BlElementChildrenExamples >> allLeafChildrenAt_600_600 [
+BlElementChildrenExamplesMigrated >> allLeafChildrenAt_600_600 [
 	<gtExample>
 	| aContainer theChildren |
 	
@@ -77,7 +77,7 @@ BlElementChildrenExamples >> allLeafChildrenAt_600_600 [
 ]
 
 { #category : #'instance creation' }
-BlElementChildrenExamples >> overlappingChildren [
+BlElementChildrenExamplesMigrated >> overlappingChildren [
 	<gtExample>
 	| aContainer aRedChild aBlueChild |
 	
