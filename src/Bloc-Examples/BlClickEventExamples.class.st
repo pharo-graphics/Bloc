@@ -94,7 +94,6 @@ BlClickEventExamples >> clickInHiddenChildAndVisibleGrandchild [
 { #category : #'examples - events' }
 BlClickEventExamples >> clickInHiddenChildAndVisibleUnclippedGrandchild [
 	<gtExample>
-	<noTest>
 	| aScripter |
 	aScripter := self threeElementsWithFalseChildClippingInScripter.
 	
