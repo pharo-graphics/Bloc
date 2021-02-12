@@ -34,6 +34,35 @@ BlClickEventExamples >> clickInHiddenChild [
 ]
 
 { #category : #'examples - events' }
+BlClickEventExamples >> clickInHiddenChildAndVisibleClippedGrandchild [
+	<gtExample>
+	| aScripter |
+	aScripter := self threeElementsWithTrueChildClippingInScripter.
+	
+	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
+		
+		aStep do
+			label: 'Set child with hidden visibility';
+			block: [ :aChild | aChild visibility: BlVisibility hidden ];
+			onChildAt: 1.
+		
+		aStep click 
+			onChildAt: 1;
+			onChildAt: 1.
+		
+		aStep check 
+			label: 'Check the click was consumed by parent';
+			do: [
+				| aClickCollection |
+				aClickCollection := aScripter userData at: #clicks.
+				self assert: aClickCollection size equals: 1.
+				self assert: aClickCollection first equals: #parent. ] 
+	].
+	
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - events' }
 BlClickEventExamples >> clickInHiddenChildAndVisibleGrandchild [
 	<gtExample>
 	| aScripter |
@@ -226,6 +255,41 @@ BlClickEventExamples >> threeElementsWithFalseChildClippingInScripter [
 	^ self scripterWithElement: [ :aTarget :aScripter | 
 		| anElement aChild anEventCollection |
 		anElement := self threeElementsWithFalseChildClipping. 
+		anEventCollection := aScripter userData 
+			at: #clicks 
+			ifAbsentPut: [ OrderedCollection new ].
+		anElement when: BlClickEvent do: [ :anEvent | 
+			anEventCollection add: #parent.
+			anEvent consumed: true  ].
+		aChild := anElement childAt: 1.
+		aChild when: BlClickEvent do: [ :anEvent | 
+			anEventCollection add: #child.
+			anEvent consumed: true ].
+		(aChild childAt: 1) when: BlClickEvent do: [ :anEvent | 
+			anEventCollection add: #grandchild.
+			anEvent consumed: true ].
+		anElement
+	]
+]
+
+{ #category : #'examples - elements' }
+BlClickEventExamples >> threeElementsWithTrueChildClipping [
+	<gtExample>
+	| aParent aChild |
+	aParent := self threeElementsWithFalseChildClipping.
+	
+	aChild := aParent childAt: 1.
+	aChild clipChildren: true.
+	
+	^ aParent
+]
+
+{ #category : #'examples - elements in scripter' }
+BlClickEventExamples >> threeElementsWithTrueChildClippingInScripter [
+	<gtExample>
+	^ self scripterWithElement: [ :aTarget :aScripter | 
+		| anElement aChild anEventCollection |
+		anElement := self threeElementsWithTrueChildClipping. 
 		anEventCollection := aScripter userData 
 			at: #clicks 
 			ifAbsentPut: [ OrderedCollection new ].
