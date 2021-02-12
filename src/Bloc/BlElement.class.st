@@ -1347,6 +1347,10 @@ BlElement >> findMouseEventTargetAt: aPoint [
 	<return: #BlElement or: nil>
 	| doWantEvent |
 	
+	"fast exit if I am not visible, since it implies that 
+	neither I receive mouse events nor my (clipped or unclipped) children"
+	self isVisible ifFalse: [ ^ nil ].
+	
 	doWantEvent := self wantsMouseEventAt: aPoint.
 
 	"fast exit if my children are not allowed to handle mouse events
