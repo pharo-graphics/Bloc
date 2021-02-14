@@ -1,8 +1,8 @@
 Class {
 	#name : #BlGridLayoutExamples,
 	#superclass : #Object,
-	#traits : 'TBlLayoutExamplesSetup + TGtExampleAssertable',
-	#classTraits : 'TBlLayoutExamplesSetup classTrait + TGtExampleAssertable classTrait',
+	#traits : 'TBlLayoutExamplesSetup',
+	#classTraits : 'TBlLayoutExamplesSetup classTrait',
 	#category : #'Bloc-Layout-Examples-Grid'
 }
 
