@@ -3,8 +3,13 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'NewBloc',
       #directory : 'src',
-      #failOnZeroTests : false, 
+     
       #platforms : [ #pharo ]
     }
   ]
+  #testing: {
+    #include : {
+     #packages : [ 'Bloc.*' ]
+    }
+  }
 }
