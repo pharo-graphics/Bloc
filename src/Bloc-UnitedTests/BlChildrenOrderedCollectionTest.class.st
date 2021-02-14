@@ -5,8 +5,8 @@ I have been automatically converted and probably manually tweaked from BlChildre
 Class {
 	#name : #BlChildrenOrderedCollectionTest,
 	#superclass : #TestCase,
-	#traits : 'AnObsoleteTBlChildrenTest',
-	#classTraits : 'AnObsoleteTBlChildrenTest classTrait',
+	#traits : 'TBlChildrenTest',
+	#classTraits : 'TBlChildrenTest classTrait',
 	#category : #'Bloc-UnitedTests-Children'
 }
 

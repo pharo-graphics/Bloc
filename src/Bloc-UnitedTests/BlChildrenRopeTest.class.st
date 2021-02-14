@@ -5,8 +5,8 @@ I have been automatically converted and probably manually tweaked from BlChildre
 Class {
 	#name : #BlChildrenRopeTest,
 	#superclass : #TestCase,
-	#traits : 'TBlChildrenExamplesMigrated',
-	#classTraits : 'TBlChildrenExamplesMigrated classTrait',
+	#traits : 'TBlChildrenTest',
+	#classTraits : 'TBlChildrenTest classTrait',
 	#category : #'Bloc-UnitedTests-Rope'
 }
 
