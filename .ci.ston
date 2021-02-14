@@ -5,5 +5,10 @@ SmalltalkCISpec {
       #directory : 'src',
       #platforms : [ #pharo ]
     }
-  ]
+  ],
+  #testing: {
+    #include : {
+     #packages : [ 'Bloc.*' ]
+    }
+  }
 }
