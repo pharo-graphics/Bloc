@@ -15,7 +15,7 @@ BaselineOfBlocCore >> baseline: spec [
 				spec repository: 'github://pharo-graphics/fenster/src' ].
 		spec 
 			package: #Bloc with: [
-				spec requires: #(#Beacon Fenster) ];
+				spec requires: #(#Fenster) ];
 			package: #'BlocHost-Mock' with: [
 				spec requires: #(#Bloc ). ];
 			package: #'Bloc-UnitedTests' with: [
