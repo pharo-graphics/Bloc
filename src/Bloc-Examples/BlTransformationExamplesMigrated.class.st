@@ -2,15 +2,15 @@
 I contain examples of how to apply different transformations on visual elements (e.g. scale, rotation, translation)
 "
 Class {
-	#name : #BlTransformationExamples,
+	#name : #BlTransformationExamplesMigrated,
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : 'Bloc-Examples-Basic'
+	#category : #'Bloc-Examples-BasicMigrated'
 }
 
 { #category : #examples }
-BlTransformationExamples class >> reflected [
+BlTransformationExamplesMigrated class >> reflected [
 	<script: 'self reflected'>
 
 	self
@@ -20,7 +20,7 @@ BlTransformationExamples class >> reflected [
 ]
 
 { #category : #examples }
-BlTransformationExamples class >> rotated [
+BlTransformationExamplesMigrated class >> rotated [
 	<script: 'self rotated'>
 
 	self
@@ -30,7 +30,7 @@ BlTransformationExamples class >> rotated [
 ]
 
 { #category : #examples }
-BlTransformationExamples class >> scaled [
+BlTransformationExamplesMigrated class >> scaled [
 	<script: 'self scaled'>
 
 	self
@@ -40,7 +40,7 @@ BlTransformationExamples class >> scaled [
 ]
 
 { #category : #'instance creation' }
-BlTransformationExamples >> element [
+BlTransformationExamplesMigrated >> element [
 	<gtExample>
 	
 	^ BlElement new
@@ -51,17 +51,17 @@ BlTransformationExamples >> element [
 ]
 
 { #category : #'instance creation' }
-BlTransformationExamples >> extent [
+BlTransformationExamplesMigrated >> extent [
 	^ 100@100
 ]
 
 { #category : #'instance creation' }
-BlTransformationExamples >> position [
+BlTransformationExamplesMigrated >> position [
 	^ 100@100
 ]
 
 { #category : #'examples - transformation' }
-BlTransformationExamples >> reflection [
+BlTransformationExamplesMigrated >> reflection [
 	<gtExample>
 	| element |
 	
@@ -76,7 +76,7 @@ BlTransformationExamples >> reflection [
 ]
 
 { #category : #'examples - transformation' }
-BlTransformationExamples >> rotate [
+BlTransformationExamplesMigrated >> rotate [
 	<gtExample>
 	| element expectedOrigin expectedExtent |
 	
@@ -103,7 +103,7 @@ BlTransformationExamples >> rotate [
 ]
 
 { #category : #'examples - transformation' }
-BlTransformationExamples >> scale [
+BlTransformationExamplesMigrated >> scale [
 	<gtExample>
 	| element expectedOrigin expectedExtent |
 	
@@ -127,7 +127,7 @@ BlTransformationExamples >> scale [
 ]
 
 { #category : #'examples - transformation' }
-BlTransformationExamples >> translate [
+BlTransformationExamplesMigrated >> translate [
 	<gtExample>
 	| element expectedOrigin expectedExtent |
 	
