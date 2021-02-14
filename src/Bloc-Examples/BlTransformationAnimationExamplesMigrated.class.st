@@ -1,13 +1,13 @@
 Class {
-	#name : #BlTransformationAnimationExamples,
+	#name : #BlTransformationAnimationExamplesMigrated,
 	#superclass : #Object,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : #'Bloc-Examples-Animation'
+	#category : #'Bloc-Examples-AnimationMigrated'
 }
 
 { #category : #'setup - elements' }
-BlTransformationAnimationExamples >> animationElement [
+BlTransformationAnimationExamplesMigrated >> animationElement [
 	<gtExample>
 	^ BlElement new
 		size: 50@50;
@@ -16,7 +16,7 @@ BlTransformationAnimationExamples >> animationElement [
 ]
 
 { #category : #assertions }
-BlTransformationAnimationExamples >> assertNotStartedAnimation: animation [
+BlTransformationAnimationExamplesMigrated >> assertNotStartedAnimation: animation [
 	self assert: animation isStarted not.
 	self assert: animation isRunning not.
 	self assert: animation progress equals: 0.0.
@@ -24,7 +24,7 @@ BlTransformationAnimationExamples >> assertNotStartedAnimation: animation [
 ]
 
 { #category : #'setup - elements' }
-BlTransformationAnimationExamples >> containerElement [
+BlTransformationAnimationExamplesMigrated >> containerElement [
 	<gtExample>
 	^ BlElement new
 		size: 350@350;
@@ -33,7 +33,7 @@ BlTransformationAnimationExamples >> containerElement [
 ]
 
 { #category : #'setup - elements' }
-BlTransformationAnimationExamples >> containerWithOneElement [
+BlTransformationAnimationExamplesMigrated >> containerWithOneElement [
 	<gtExample>
 	| container element |
 	container := self containerElement.
@@ -44,7 +44,7 @@ BlTransformationAnimationExamples >> containerWithOneElement [
 ]
 
 { #category : #'examples - elements animation' }
-BlTransformationAnimationExamples >> elementWithLinearTranslationAnimation [
+BlTransformationAnimationExamplesMigrated >> elementWithLinearTranslationAnimation [
 	<gtExample>
 	| container element animation |
 	
@@ -61,7 +61,7 @@ BlTransformationAnimationExamples >> elementWithLinearTranslationAnimation [
 ]
 
 { #category : #'examples - elements animation' }
-BlTransformationAnimationExamples >> elementWithLinearTranslationAnimationWithDelayAndLoop [
+BlTransformationAnimationExamplesMigrated >> elementWithLinearTranslationAnimationWithDelayAndLoop [
 	<gtExample>
 	| container animation |
 	
@@ -73,7 +73,7 @@ BlTransformationAnimationExamples >> elementWithLinearTranslationAnimationWithDe
 ]
 
 { #category : #'examples - elements animation' }
-BlTransformationAnimationExamples >> elementWithLinearTranslationAnimationWithDurationAndEasing [
+BlTransformationAnimationExamplesMigrated >> elementWithLinearTranslationAnimationWithDurationAndEasing [
 	<gtExample>
 	| container animation |
 	
@@ -85,7 +85,7 @@ BlTransformationAnimationExamples >> elementWithLinearTranslationAnimationWithDu
 ]
 
 { #category : #'examples - animations' }
-BlTransformationAnimationExamples >> linearTranslationAnimation [
+BlTransformationAnimationExamplesMigrated >> linearTranslationAnimation [
 	<gtExample>
 	| animation |
 	animation := BlTransformAnimation new.
@@ -101,7 +101,7 @@ BlTransformationAnimationExamples >> linearTranslationAnimation [
 ]
 
 { #category : #'examples - animations' }
-BlTransformationAnimationExamples >> linearTranslationAnimationWithDelayAndLoop [
+BlTransformationAnimationExamplesMigrated >> linearTranslationAnimationWithDelayAndLoop [
 	<gtExample>
 	| animation |
 	animation := BlTransformAnimation new.
@@ -122,7 +122,7 @@ BlTransformationAnimationExamples >> linearTranslationAnimationWithDelayAndLoop 
 ]
 
 { #category : #'examples - animations' }
-BlTransformationAnimationExamples >> linearTranslationAnimationWithDurationAndEasing [
+BlTransformationAnimationExamplesMigrated >> linearTranslationAnimationWithDurationAndEasing [
 	<gtExample>
 	| animation |
 	animation := BlTransformAnimation new.
