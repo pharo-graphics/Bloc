@@ -8,7 +8,7 @@ Class {
 	#category : #'Bloc-UnitedTests'
 }
 
-{ #category : #tests }
+{ #category : #'test seeds' }
 BlTransformationTest >> element [
 	<gtExample>
 	^ BlElement new
@@ -19,7 +19,7 @@ BlTransformationTest >> element [
 		forceLayout
 ]
 
-{ #category : #tests }
+{ #category : #hooks }
 BlTransformationTest >> extent [
 	^ 100 @ 100
 ]
@@ -30,12 +30,12 @@ BlTransformationTest >> originClassName [
 	^ 'BlTransformationExamples'
 ]
 
-{ #category : #tests }
+{ #category : #hooks }
 BlTransformationTest >> position [
 	^ 100 @ 100
 ]
 
-{ #category : #'tx bounds tests' }
+{ #category : #tests }
 BlTransformationTest >> testElTxBoundsWithScale [
 	| g n |
 
@@ -131,7 +131,7 @@ BlTransformationTest >> testScale [
 	^ element
 ]
 
-{ #category : #'tx bounds tests' }
+{ #category : #tests }
 BlTransformationTest >> testScaleBy [
 	| n |
 
@@ -159,7 +159,7 @@ BlTransformationTest >> testScaleBy [
 
 ]
 
-{ #category : #'tx bounds tests' }
+{ #category : #tests }
 BlTransformationTest >> testScaleTo [
 	| n |
 
@@ -208,7 +208,7 @@ BlTransformationTest >> testTranslate [
 	^ element
 ]
 
-{ #category : #'tx bounds tests' }
+{ #category : #tests }
 BlTransformationTest >> testTranslateTo [
 	| n |
 
