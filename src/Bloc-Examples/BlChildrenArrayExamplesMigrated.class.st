@@ -13,15 +13,15 @@ ${example:BlChildrenArrayExamples>>#add}$
 ${example:BlChildrenArrayExamples>>#remove}$
 "
 Class {
-	#name : #BlChildrenArrayExamples,
+	#name : #BlChildrenArrayExamplesMigrated,
 	#superclass : #Object,
-	#traits : 'TBlChildrenExample',
-	#classTraits : 'TBlChildrenExample classTrait',
-	#category : #'Bloc-Examples-Children'
+	#traits : 'TBlChildrenExamplesMigrated',
+	#classTraits : 'TBlChildrenExamplesMigrated classTrait',
+	#category : #'Bloc-Examples-ChildrenMigrated'
 }
 
 { #category : #'examples - children' }
-BlChildrenArrayExamples >> emptyChildrenExplicitCreation [
+BlChildrenArrayExamplesMigrated >> emptyChildrenExplicitCreation [
 	<gtExample>
 	| theChildren |
 
@@ -34,7 +34,7 @@ BlChildrenArrayExamples >> emptyChildrenExplicitCreation [
 ]
 
 { #category : #'examples - children' }
-BlChildrenArrayExamples >> emptyChildrenFactoryMethodCreation [
+BlChildrenArrayExamplesMigrated >> emptyChildrenFactoryMethodCreation [
 	<gtExample>
 	| theChildren |
 
@@ -50,6 +50,6 @@ BlChildrenArrayExamples >> emptyChildrenFactoryMethodCreation [
 ]
 
 { #category : #'instance creation' }
-BlChildrenArrayExamples >> newChildrenCollection [
+BlChildrenArrayExamplesMigrated >> newChildrenCollection [
 	^ BlChildrenArray new
 ]

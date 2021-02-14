@@ -2,13 +2,13 @@
 I provide examples for subclasses of ${class:BlChildrenSubset}$.
 "
 Class {
-	#name : #BlChildrenSubsetExamples,
+	#name : #BlChildrenSubsetExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Children'
+	#category : #'Bloc-Examples-ChildrenMigrated'
 }
 
 { #category : #'examples - acounted-by-layout' }
-BlChildrenSubsetExamples >> accountedByLayout [
+BlChildrenSubsetExamplesMigrated >> accountedByLayout [
 	<gtExample>
 	| childrenArray childrenIterator |
 	childrenArray := self childrenArrayWith5Elements.
@@ -27,7 +27,7 @@ BlChildrenSubsetExamples >> accountedByLayout [
 ]
 
 { #category : #'examples - acounted-by-layout' }
-BlChildrenSubsetExamples >> accountedByLayoutAndIgnoredByLayout [
+BlChildrenSubsetExamplesMigrated >> accountedByLayoutAndIgnoredByLayout [
 	<gtExample>
 	| childrenIterator childrenIteratorIgnoredByLayout |
 	
@@ -41,7 +41,7 @@ BlChildrenSubsetExamples >> accountedByLayoutAndIgnoredByLayout [
 ]
 
 { #category : #'examples - acounted-by-layout' }
-BlChildrenSubsetExamples >> accountedByLayoutAndReversed [
+BlChildrenSubsetExamplesMigrated >> accountedByLayoutAndReversed [
 	<gtExample>
 	| childrenIterator childrenIteratorReversed |
 	
@@ -58,7 +58,7 @@ BlChildrenSubsetExamples >> accountedByLayoutAndReversed [
 ]
 
 { #category : #'examples - acounted-by-layout' }
-BlChildrenSubsetExamples >> accountedByLayoutChildrenFromElement [
+BlChildrenSubsetExamplesMigrated >> accountedByLayoutChildrenFromElement [
 	<gtExample>
 	| element accountedByLayoutChildren |
 	element := self elementWithChildren.
@@ -69,7 +69,7 @@ BlChildrenSubsetExamples >> accountedByLayoutChildrenFromElement [
 ]
 
 { #category : #'examples - acounted-by-layout' }
-BlChildrenSubsetExamples >> accountedByLayoutTwice [
+BlChildrenSubsetExamplesMigrated >> accountedByLayoutTwice [
 	<gtExample>
 	| childrenIterator childrenIteratorAccountedByLayout |
 	childrenIterator := self accountedByLayout.
@@ -81,7 +81,7 @@ BlChildrenSubsetExamples >> accountedByLayoutTwice [
 ]
 
 { #category : #'examples - children' }
-BlChildrenSubsetExamples >> childrenArrayWith5Elements [
+BlChildrenSubsetExamplesMigrated >> childrenArrayWith5Elements [
 	<gtExample>
 	| childrenArray zIndex|
 	childrenArray := BlChildrenArray new.
@@ -104,7 +104,7 @@ BlChildrenSubsetExamples >> childrenArrayWith5Elements [
 ]
 
 { #category : #'examples - combined' }
-BlChildrenSubsetExamples >> childrenWithMultipleCombinedSubsets [
+BlChildrenSubsetExamplesMigrated >> childrenWithMultipleCombinedSubsets [
 <gtExample>
 	| element children |
 	element := self elementWithChildren.
@@ -122,7 +122,7 @@ BlChildrenSubsetExamples >> childrenWithMultipleCombinedSubsets [
 ]
 
 { #category : #'examples - element' }
-BlChildrenSubsetExamples >> elementWithChildren [
+BlChildrenSubsetExamplesMigrated >> elementWithChildren [
 	<gtExample>
 	| element |
 	element := BlElement new.
@@ -134,7 +134,7 @@ BlChildrenSubsetExamples >> elementWithChildren [
 ]
 
 { #category : #'examples - ignored-by-layout' }
-BlChildrenSubsetExamples >> ignoredByLayout [
+BlChildrenSubsetExamplesMigrated >> ignoredByLayout [
 	<gtExample>
 	| childrenArray childrenIterator |
 	childrenArray := self childrenArrayWith5Elements.
@@ -150,7 +150,7 @@ BlChildrenSubsetExamples >> ignoredByLayout [
 ]
 
 { #category : #'examples - ignored-by-layout' }
-BlChildrenSubsetExamples >> ignoredByLayoutAndAcountedByLayout [
+BlChildrenSubsetExamplesMigrated >> ignoredByLayoutAndAcountedByLayout [
 	<gtExample>
 	| childrenIterator childrenIteratorAcountedByLayout |
 	
@@ -164,7 +164,7 @@ BlChildrenSubsetExamples >> ignoredByLayoutAndAcountedByLayout [
 ]
 
 { #category : #'examples - ignored-by-layout' }
-BlChildrenSubsetExamples >> ignoredByLayoutAndReverse [
+BlChildrenSubsetExamplesMigrated >> ignoredByLayoutAndReverse [
 	<gtExample>
 	| childrenIterator childrenIteratorReversed |
 	
@@ -180,7 +180,7 @@ BlChildrenSubsetExamples >> ignoredByLayoutAndReverse [
 ]
 
 { #category : #'examples - ignored-by-layout' }
-BlChildrenSubsetExamples >> ignoredByLayoutExplicitCreation [
+BlChildrenSubsetExamplesMigrated >> ignoredByLayoutExplicitCreation [
 	<gtExample>
 	| childrenArray childrenIterator |
 	childrenArray := self childrenArrayWith5Elements.
@@ -196,7 +196,7 @@ BlChildrenSubsetExamples >> ignoredByLayoutExplicitCreation [
 ]
 
 { #category : #'examples - ignored-by-layout' }
-BlChildrenSubsetExamples >> ignoredByLayoutFromElement [
+BlChildrenSubsetExamplesMigrated >> ignoredByLayoutFromElement [
 	<gtExample>
 	| element ignoredByLayoutChildren |
 	element := self elementWithChildren.
@@ -207,7 +207,7 @@ BlChildrenSubsetExamples >> ignoredByLayoutFromElement [
 ]
 
 { #category : #'examples - ignored-by-layout' }
-BlChildrenSubsetExamples >> ignoredByLayoutTwice [
+BlChildrenSubsetExamplesMigrated >> ignoredByLayoutTwice [
 	<gtExample>
 	| childrenIterator childrenIteratorIgnoredByLayout |
 	childrenIterator := self ignoredByLayout.
@@ -219,7 +219,7 @@ BlChildrenSubsetExamples >> ignoredByLayoutTwice [
 ]
 
 { #category : #private }
-BlChildrenSubsetExamples >> newChildAt: anIndex [
+BlChildrenSubsetExamplesMigrated >> newChildAt: anIndex [
 	| anElement |
 	anElement := BlElement new.
 	anElement userData at: #index put: anIndex.
@@ -227,7 +227,7 @@ BlChildrenSubsetExamples >> newChildAt: anIndex [
 ]
 
 { #category : #'examples - reversed' }
-BlChildrenSubsetExamples >> reversed [
+BlChildrenSubsetExamplesMigrated >> reversed [
 	<gtExample>
 	| childrenArray childrenIterator |
 	childrenArray := self childrenArrayWith5Elements.
@@ -242,7 +242,7 @@ BlChildrenSubsetExamples >> reversed [
 ]
 
 { #category : #'examples - reversed' }
-BlChildrenSubsetExamples >> reversedAndAcountedByLayout [
+BlChildrenSubsetExamplesMigrated >> reversedAndAcountedByLayout [
 	<gtExample>
 	| childrenIterator childrenIteratorAcountedByLayout |
 	
@@ -262,7 +262,7 @@ BlChildrenSubsetExamples >> reversedAndAcountedByLayout [
 ]
 
 { #category : #'examples - reversed' }
-BlChildrenSubsetExamples >> reversedAndIgnoredByLayout [
+BlChildrenSubsetExamplesMigrated >> reversedAndIgnoredByLayout [
 	<gtExample>
 	| childrenIterator childrenIteratorIgnoredByLayout |
 	
@@ -281,7 +281,7 @@ BlChildrenSubsetExamples >> reversedAndIgnoredByLayout [
 ]
 
 { #category : #'examples - reversed' }
-BlChildrenSubsetExamples >> reversedChildrenFromElement [
+BlChildrenSubsetExamplesMigrated >> reversedChildrenFromElement [
 	<gtExample>
 	| element reversedChildren |
 	element := self elementWithChildren.
@@ -292,7 +292,7 @@ BlChildrenSubsetExamples >> reversedChildrenFromElement [
 ]
 
 { #category : #'examples - reversed' }
-BlChildrenSubsetExamples >> reversedTwice [
+BlChildrenSubsetExamplesMigrated >> reversedTwice [
 	<gtExample>
 	| childrenIterator |
 	childrenIterator := self reversed reversed.
@@ -306,7 +306,7 @@ BlChildrenSubsetExamples >> reversedTwice [
 ]
 
 { #category : #'examples - elevation' }
-BlChildrenSubsetExamples >> sortedByElevation [
+BlChildrenSubsetExamplesMigrated >> sortedByElevation [
 	<gtExample>
 	| childrenArray childrenIterator expectedOrder |
 	childrenArray := self childrenArrayWith5Elements.
@@ -325,7 +325,7 @@ BlChildrenSubsetExamples >> sortedByElevation [
 ]
 
 { #category : #'examples - elevation' }
-BlChildrenSubsetExamples >> sortedByElevationAndAcountedByLayout [
+BlChildrenSubsetExamplesMigrated >> sortedByElevationAndAcountedByLayout [
 	<gtExample>
 	| childrenIterator childrenIteratorAcountedByLayout |
 	childrenIterator := self sortedByElevation.
@@ -341,7 +341,7 @@ BlChildrenSubsetExamples >> sortedByElevationAndAcountedByLayout [
 ]
 
 { #category : #'examples - elevation' }
-BlChildrenSubsetExamples >> sortedByElevationAndIgnoredByLayout [
+BlChildrenSubsetExamplesMigrated >> sortedByElevationAndIgnoredByLayout [
 	<gtExample>
 	| childrenIterator childrenIteratorIgnoredByLayout |
 	childrenIterator := self sortedByElevation.
@@ -356,7 +356,7 @@ BlChildrenSubsetExamples >> sortedByElevationAndIgnoredByLayout [
 ]
 
 { #category : #'examples - elevation' }
-BlChildrenSubsetExamples >> sortedByElevationAndReversed [
+BlChildrenSubsetExamplesMigrated >> sortedByElevationAndReversed [
 	<gtExample>
 	| childrenIterator childrenIteratorReversed expectedOrder |
 	childrenIterator := self sortedByElevation.
@@ -375,7 +375,7 @@ BlChildrenSubsetExamples >> sortedByElevationAndReversed [
 ]
 
 { #category : #'examples - elevation' }
-BlChildrenSubsetExamples >> sortedByElevationFromElement [
+BlChildrenSubsetExamplesMigrated >> sortedByElevationFromElement [
 	<gtExample>
 	| element sortedByElevationChildren |
 	element := self elementWithChildren.
@@ -386,7 +386,7 @@ BlChildrenSubsetExamples >> sortedByElevationFromElement [
 ]
 
 { #category : #'examples - elevation' }
-BlChildrenSubsetExamples >> sortedByElevationTwice [
+BlChildrenSubsetExamplesMigrated >> sortedByElevationTwice [
 	<gtExample>
 	| childrenIterator childrenIteratorSortedByElevation |
 	childrenIterator := self sortedByElevation.

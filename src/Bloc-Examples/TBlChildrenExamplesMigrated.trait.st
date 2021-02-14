@@ -4,12 +4,12 @@ I define examples common to all types of ${class:BlChildrenCollection}$.
 Classes that are using me should define the concrete type of ${class:BlChildrenCollection}$ that is being tested using the method ${method:TBlChildrenExample>>#newChildrenCollection}$.
 "
 Trait {
-	#name : #TBlChildrenExample,
-	#category : #'Bloc-Examples-Children'
+	#name : #TBlChildrenExamplesMigrated,
+	#category : #'Bloc-Examples-ChildrenMigrated'
 }
 
 { #category : #'examples - add' }
-TBlChildrenExample >> add [
+TBlChildrenExamplesMigrated >> add [
 	<gtExample>
 	| theChildren indices |
 	
@@ -31,7 +31,7 @@ TBlChildrenExample >> add [
 ]
 
 { #category : #'examples - add' }
-TBlChildrenExample >> addAt [
+TBlChildrenExamplesMigrated >> addAt [
 	<gtExample>
 	| theChildren indices |
 	
@@ -65,7 +65,7 @@ TBlChildrenExample >> addAt [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> asArray [
+TBlChildrenExamplesMigrated >> asArray [
 	<gtExample>
 	| theChildren indices |
 	
@@ -78,7 +78,7 @@ TBlChildrenExample >> asArray [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> asArrayEmpty [
+TBlChildrenExamplesMigrated >> asArrayEmpty [
 	<gtExample>
 	| theChildren indices |
 	
@@ -91,7 +91,7 @@ TBlChildrenExample >> asArrayEmpty [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> at [
+TBlChildrenExamplesMigrated >> at [
 	<gtExample>
 	| theChildren |
 	
@@ -107,7 +107,7 @@ TBlChildrenExample >> at [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> atIfAbsent [
+TBlChildrenExamplesMigrated >> atIfAbsent [
 	<gtExample>
 	| theChildren |
 	
@@ -136,7 +136,7 @@ TBlChildrenExample >> atIfAbsent [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> emptyChildren [
+TBlChildrenExamplesMigrated >> emptyChildren [
 	<gtExample>
 	| theChildren |
 
@@ -149,7 +149,7 @@ TBlChildrenExample >> emptyChildren [
 ]
 
 { #category : #private }
-TBlChildrenExample >> fill: aNumber [
+TBlChildrenExamplesMigrated >> fill: aNumber [
 	| childrenArray |
 	
 	childrenArray := self emptyChildren.	
@@ -160,7 +160,7 @@ TBlChildrenExample >> fill: aNumber [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> first [
+TBlChildrenExamplesMigrated >> first [
 	<gtExample>
 	| theChildren |
 	
@@ -171,7 +171,7 @@ TBlChildrenExample >> first [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> ifEmpty [
+TBlChildrenExamplesMigrated >> ifEmpty [
 	<gtExample>
 	| theChildren |
 	
@@ -182,7 +182,7 @@ TBlChildrenExample >> ifEmpty [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> ifEmptyNot [
+TBlChildrenExamplesMigrated >> ifEmptyNot [
 	<gtExample>
 	| theChildren |
 	
@@ -193,7 +193,7 @@ TBlChildrenExample >> ifEmptyNot [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> indexOf [
+TBlChildrenExamplesMigrated >> indexOf [
 	<gtExample>
 	| theChildren |
 	
@@ -205,7 +205,7 @@ TBlChildrenExample >> indexOf [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> indexOfUnknown [
+TBlChildrenExamplesMigrated >> indexOfUnknown [
 	<gtExample>
 	| theChildren |
 	
@@ -216,7 +216,7 @@ TBlChildrenExample >> indexOfUnknown [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> isEmpty [
+TBlChildrenExamplesMigrated >> isEmpty [
 	<gtExample>
 	| theChildren |
 	
@@ -230,7 +230,7 @@ TBlChildrenExample >> isEmpty [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> isNotEmpty [
+TBlChildrenExamplesMigrated >> isNotEmpty [
 	<gtExample>
 	| theChildren |
 	
@@ -244,7 +244,7 @@ TBlChildrenExample >> isNotEmpty [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> last [
+TBlChildrenExamplesMigrated >> last [
 	<gtExample>
 	| theChildren |
 	
@@ -255,7 +255,7 @@ TBlChildrenExample >> last [
 ]
 
 { #category : #private }
-TBlChildrenExample >> newChildAt: anIndex [
+TBlChildrenExamplesMigrated >> newChildAt: anIndex [
 	| anElement |
 	anElement := BlElement new.
 	anElement userData at: #index put: anIndex.
@@ -263,13 +263,13 @@ TBlChildrenExample >> newChildAt: anIndex [
 ]
 
 { #category : #'instance creation' }
-TBlChildrenExample >> newChildrenCollection [
+TBlChildrenExamplesMigrated >> newChildrenCollection [
 	"Instantiate the type of children collection under test"
 	^ self explicitRequirement
 ]
 
 { #category : #'examples - remove' }
-TBlChildrenExample >> remove [
+TBlChildrenExamplesMigrated >> remove [
 	<gtExample>
 	| theChildren indices |
 	
@@ -284,7 +284,7 @@ TBlChildrenExample >> remove [
 ]
 
 { #category : #'examples - remove' }
-TBlChildrenExample >> removeAll [
+TBlChildrenExamplesMigrated >> removeAll [
 	<gtExample>
 	| theChildren indices |
 	
@@ -303,7 +303,7 @@ TBlChildrenExample >> removeAll [
 ]
 
 { #category : #'examples - remove' }
-TBlChildrenExample >> removeAt [
+TBlChildrenExamplesMigrated >> removeAt [
 	<gtExample>
 	| theChildren indices |
 	
@@ -320,7 +320,7 @@ TBlChildrenExample >> removeAt [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> second [
+TBlChildrenExamplesMigrated >> second [
 	<gtExample>
 	| theChildren |
 	
@@ -331,7 +331,7 @@ TBlChildrenExample >> second [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> size [
+TBlChildrenExamplesMigrated >> size [
 	<gtExample>
 	| theChildren |
 	
@@ -342,7 +342,7 @@ TBlChildrenExample >> size [
 ]
 
 { #category : #'examples - children' }
-TBlChildrenExample >> sizeEmpty [
+TBlChildrenExamplesMigrated >> sizeEmpty [
 	<gtExample>
 	| theChildren |
 	

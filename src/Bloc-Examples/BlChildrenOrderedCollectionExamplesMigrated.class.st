@@ -10,15 +10,15 @@ ${example:BlChildrenOrderedCollectionExamples>>#add}$
 ${example:BlChildrenOrderedCollectionExamples>>#remove}$
 "
 Class {
-	#name : #BlChildrenOrderedCollectionExamples,
+	#name : #BlChildrenOrderedCollectionExamplesMigrated,
 	#superclass : #Object,
-	#traits : 'TBlChildrenExample',
-	#classTraits : 'TBlChildrenExample classTrait',
-	#category : #'Bloc-Examples-Children'
+	#traits : 'TBlChildrenExamplesMigrated',
+	#classTraits : 'TBlChildrenExamplesMigrated classTrait',
+	#category : #'Bloc-Examples-ChildrenMigrated'
 }
 
 { #category : #'examples - children' }
-BlChildrenOrderedCollectionExamples >> emptyChildrenExplicitCreation [
+BlChildrenOrderedCollectionExamplesMigrated >> emptyChildrenExplicitCreation [
 	<gtExample>
 	| theChildren |
 
@@ -31,6 +31,6 @@ BlChildrenOrderedCollectionExamples >> emptyChildrenExplicitCreation [
 ]
 
 { #category : #'instance creation' }
-BlChildrenOrderedCollectionExamples >> newChildrenCollection [
+BlChildrenOrderedCollectionExamplesMigrated >> newChildrenCollection [
 	^ BlChildrenOrderedCollection new
 ]

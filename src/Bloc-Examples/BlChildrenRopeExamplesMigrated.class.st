@@ -10,15 +10,15 @@ ${example:BlChildrenRopeExamples>>#add}$
 ${example:BlChildrenRopeExamples>>#remove}$
 "
 Class {
-	#name : #BlChildrenRopeExamples,
+	#name : #BlChildrenRopeExamplesMigrated,
 	#superclass : #Object,
-	#traits : 'TBlChildrenExample',
-	#classTraits : 'TBlChildrenExample classTrait',
-	#category : #'Bloc-Examples-Children'
+	#traits : 'TBlChildrenExamplesMigrated',
+	#classTraits : 'TBlChildrenExamplesMigrated classTrait',
+	#category : #'Bloc-Examples-ChildrenMigrated'
 }
 
 { #category : #'examples - children' }
-BlChildrenRopeExamples >> emptyChildrenExplicitCreation [
+BlChildrenRopeExamplesMigrated >> emptyChildrenExplicitCreation [
 	<gtExample>
 	| theChildren |
 
@@ -31,6 +31,6 @@ BlChildrenRopeExamples >> emptyChildrenExplicitCreation [
 ]
 
 { #category : #'instance creation' }
-BlChildrenRopeExamples >> newChildrenCollection [
+BlChildrenRopeExamplesMigrated >> newChildrenCollection [
 	^ BlChildrenRope new
 ]

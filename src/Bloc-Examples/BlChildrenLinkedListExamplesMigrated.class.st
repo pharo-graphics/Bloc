@@ -10,15 +10,15 @@ ${example:BlChildrenLinkedListExamples>>#add}$
 ${example:BlChildrenLinkedListExamples>>#remove}$
 "
 Class {
-	#name : #BlChildrenLinkedListExamples,
+	#name : #BlChildrenLinkedListExamplesMigrated,
 	#superclass : #Object,
-	#traits : 'TBlChildrenExample',
-	#classTraits : 'TBlChildrenExample classTrait',
-	#category : #'Bloc-Examples-Children'
+	#traits : 'TBlChildrenExamplesMigrated',
+	#classTraits : 'TBlChildrenExamplesMigrated classTrait',
+	#category : #'Bloc-Examples-ChildrenMigrated'
 }
 
 { #category : #'examples - children' }
-BlChildrenLinkedListExamples >> emptyChildrenExplicitCreation [
+BlChildrenLinkedListExamplesMigrated >> emptyChildrenExplicitCreation [
 	<gtExample>
 	| theChildren |
 
@@ -31,6 +31,6 @@ BlChildrenLinkedListExamples >> emptyChildrenExplicitCreation [
 ]
 
 { #category : #'instance creation' }
-BlChildrenLinkedListExamples >> newChildrenCollection [
+BlChildrenLinkedListExamplesMigrated >> newChildrenCollection [
 	^ BlChildrenLinkedList new
 ]
