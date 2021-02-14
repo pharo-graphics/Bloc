@@ -5,7 +5,7 @@ Class {
 		'space',
 		'host'
 	],
-	#category : 'Bloc-Tests-Basic'
+	#category : #'Bloc-Tests-Basic'
 }
 
 { #category : #initialization }
@@ -54,7 +54,6 @@ BlElementTest >> testDefault [
 	
 	self assert: element position equals: 0@0.
 	self assert: element extent equals: 0@0.
-	self assert: element geometry extent equals: 0@0
 ]
 
 { #category : #'focus testing' }

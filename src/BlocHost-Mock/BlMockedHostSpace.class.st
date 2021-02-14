@@ -71,7 +71,7 @@ BlMockedHostSpace >> defaultDensityDpi [
 
 { #category : #initialization }
 BlMockedHostSpace >> defaultLogicalSize [
-	^ 400 @ 300
+	^ FensterLogicalSize fromPoint: (400 @ 300)
 ]
 
 { #category : #initialization }
