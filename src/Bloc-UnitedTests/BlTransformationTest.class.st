@@ -68,17 +68,6 @@ BlTransformationTest >> testElTxBoundsWithScale [
 ]
 
 { #category : #tests }
-BlTransformationTest >> testElement [
-	<gtExample>
-	^ BlElement new
-		background: Color blue;
-		size: self extent;
-		relocate: self position;
-		"to compute extent and position"
-			forceLayout
-]
-
-{ #category : #tests }
 BlTransformationTest >> testReflection [
 	<gtExample>
 	| element |
@@ -90,6 +79,7 @@ BlTransformationTest >> testReflection [
 		flipX;
 		flipY;
 		apply.
+	self flag: #noAssertion.
 	^ element
 ]
 
