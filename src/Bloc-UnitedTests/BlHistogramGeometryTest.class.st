@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlHistogr
 Class {
 	#name : #BlHistogramGeometryTest,
 	#superclass : #BlGeometryTest,
-	#category : #'Bloc-UnitedTests'
+	#category : #'Bloc-UnitedTests-Geometry'
 }
 
 { #category : #metadata }
