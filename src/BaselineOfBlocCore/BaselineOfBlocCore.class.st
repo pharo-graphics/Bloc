@@ -9,10 +9,10 @@ BaselineOfBlocCore >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec 
-			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
+			"baseline: 'Beacon' with: [
+				spec repository: 'github://feenkcom/pharo-beacon/repository' ];"
 			baseline: 'Fenster' with: [
-				spec repository: 'github://feenkcom/fenster/src' ].
+				spec repository: 'github://pharo-graphics/fenster/src' ].
 		spec 
 			package: #Bloc with: [
 				spec requires: #(#Beacon Fenster) ];

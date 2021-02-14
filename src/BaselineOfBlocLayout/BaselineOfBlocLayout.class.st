@@ -13,6 +13,7 @@ BaselineOfBlocLayout >> baseline: spec [
 				spec repository: 'github://pharo-graphics/Bloc/src' ];
 			baseline: 'BlocAnimation' with: [
 				spec repository: 'github://pharo-graphics/Bloc/src' ].
+
 		spec 
 			package: #'Bloc-Layout' with: [
 				spec requires: #(#BlocCore #BlocAnimation). ];
