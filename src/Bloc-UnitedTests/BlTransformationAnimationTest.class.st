@@ -5,8 +5,6 @@ I have been automatically converted and probably manually tweaked from BlTransfo
 Class {
 	#name : #BlTransformationAnimationTest,
 	#superclass : #TestCase,
-	#traits : 'TBlExample',
-	#classTraits : 'TBlExample classTrait',
 	#category : #'Bloc-UnitedTests-Animation'
 }
 
