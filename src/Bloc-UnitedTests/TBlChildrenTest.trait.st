@@ -1,10 +1,5 @@
-"
-I have been automatically converted and probably manually tweaked from TBlChildrenExample. Pay attention there is an important design decision in such tests. First to let GT people execute them, the tests and helpers are tagged with <gtExample> do not remove them, let also the <label:...>.
-	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
-"
-Class {
+Trait {
 	#name : #TBlChildrenTest,
-	#superclass : #TestCase,
 	#category : #'Bloc-UnitedTests-Children'
 }
 
