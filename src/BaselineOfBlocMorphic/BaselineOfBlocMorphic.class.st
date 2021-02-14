@@ -12,7 +12,7 @@ BaselineOfBlocMorphic >> baseline: spec [
 			baseline: 'BlocCore' with: [
 				spec repository: 'github://pharo-graphics/Bloc/src' ];
 			baseline: 'Fenster' with: [
-				spec repository: 'github://feenkcom/fenster/src' ].
+				spec repository: 'github://pharo-graphics/fenster/src' ].
 
 		spec 
 			package: #'BlocHost-Morphic' with: [
