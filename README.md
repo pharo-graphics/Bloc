@@ -1,10 +1,9 @@
-# Bloc
-
-[Installation](#installation) | [Contributing](#contributing) |  [License](#license)
+# Bloc 
 
 [![License](https://img.shields.io/github/license/pharo-graphics/Bloc.svg?style=flat-square)][license]
+![Complete Test](https://github.com/pharo-graphics/Bloc/workflows/Complete%20Test/badge.svg)
 
-[![Coveralls](https://img.shields.io/coveralls/pharo-graphics/Bloc.svg?style=flat-square)][coveralls]
+[Installation](#installation) | [Contributing](#contributing) |  [License](#license)
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
@@ -25,7 +24,8 @@ Metacello new
         load.
 ```
 
-Alternatively, you can do it in a terminal by creating a directory and executing `scripts/build.sh` on this repository, that first downloads the Pharo image and VM, and then loads the project.
+Alternatively, you can do it by terminal (MacOS & linux). 
+Create a directory and execute `<this_repo>/scripts/build.sh`, which first downloads the Pharo image and VM and then loads the project.
 
 
 ## Contributing
