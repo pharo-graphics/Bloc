@@ -18,33 +18,14 @@ We are currently identifying the core we want for Pharo.
 
 The following script installs Bloc intended for [Pharo 8](https://pharo.org/download):
 
-To load the most bare bone bloc (just Bloc , BlocHost-Mock and Bloc-Tests packages):
 ```smalltalk
 Metacello new
-        baseline: 'BlocCore';
+        baseline: 'NewBloc';
         repository: 'github://pharo-graphics/Bloc/src';
-        load
+        load.
 ```
 
-To also load a rendering engine we can use the following baseline which in addition to BlocCore also loads Bloc-Text and Bloc-Sparta:
-
-```
-Metacello new
-    baseline: 'BlocSparta';
-    repository: 'github://pharo-graphics/Bloc/src';
-    load.
-```
-
-And finally, to be able to render bloc inside of the morphic we can load morphic host (independent from Sparta)
-
-```
-Metacello new
-    baseline: 'BlocMorphic';
-    repository: 'github://pharo-graphics/Bloc/src';
-    load.
-```
-
-
+Alternatively, you can do it in a terminal by creating a directory and executing `scripts/build.sh` on this repository, that first downloads the Pharo image and VM, and then loads the project.
 
 
 ## Contributing
