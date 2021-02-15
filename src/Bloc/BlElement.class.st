@@ -74,7 +74,7 @@ BlElement class >> epsilon [
 
 { #category : #'api - animations' }
 BlElement >> addAnimation: aBlBaseAnimation [
-
+ 
 	aBlBaseAnimation target: self.
 	self enqueueTask: aBlBaseAnimation
 ]
