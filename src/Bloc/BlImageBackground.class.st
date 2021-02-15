@@ -29,9 +29,6 @@ BlImageBackground >> image [
 
 { #category : #accessing }
 BlImageBackground >> image: aForm [
-	self
-		assert: [ aForm isNotNil ]
-		description: [ 'Image must not be nil' ].
 
 	image isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].

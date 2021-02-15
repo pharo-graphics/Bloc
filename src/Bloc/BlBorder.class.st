@@ -79,9 +79,6 @@ BlBorder >> = anObject [
 
 { #category : #copy }
 BlBorder >> copyWithOpacity: aNumber [
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Opacity must not be nil' ].
 
 	^ self class basicNew
 		initialize;
@@ -95,9 +92,6 @@ BlBorder >> copyWithOpacity: aNumber [
 { #category : #copy }
 BlBorder >> copyWithPaint: aPaint [
 
-	self
-		assert: [ aPaint isNotNil ]
-		description: [ 'Paint must not be nil' ].
 
 	^ self class basicNew
 		initialize;
@@ -111,10 +105,6 @@ BlBorder >> copyWithPaint: aPaint [
 { #category : #copy }
 BlBorder >> copyWithStyle: aStrokeStyle [
 
-	self
-		assert: [ aStrokeStyle isNotNil ]
-		description: [ 'Style must not be nil' ].
-
 	^ self class basicNew
 		initialize;
 		paint: paint;
@@ -126,10 +116,6 @@ BlBorder >> copyWithStyle: aStrokeStyle [
 
 { #category : #copy }
 BlBorder >> copyWithWidth: aWidth [
-
-	self
-		assert: [ aWidth isNotNil ]
-		description: [ 'Width must not be nil' ].
 
 	^ self class basicNew
 		initialize;
@@ -176,9 +162,7 @@ BlBorder >> opacity [
 
 { #category : #accessing }
 BlBorder >> opacity: aNumber [
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Opacity must not be nil' ].
+
 	self
 		assert: [ aNumber between: 0.0 and: 1.0 ]
 		description: [ 'Opacity value must be within interval [0..1]' ].
@@ -198,9 +182,6 @@ BlBorder >> paint [
 
 { #category : #accessing }
 BlBorder >> paint: aBlPaint [
-	self
-		assert: [ aBlPaint isNotNil ]
-		description: [ 'Paint must not be nil' ].
 
 	paint isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
@@ -230,9 +211,6 @@ BlBorder >> style [
 
 { #category : #accessing }
 BlBorder >> style: aBlStrokeStyle [
-	self
-		assert: [ aBlStrokeStyle isNotNil ]
-		description: [ 'Style must not be nil' ].
 
 	style isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
@@ -249,9 +227,6 @@ BlBorder >> width [
 
 { #category : #accessing }
 BlBorder >> width: aNumber [
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Width must not be nil' ].
 	self
 		assert: [ aNumber >= 0 ]
 		description: [ 'Width must not be negative' ].
