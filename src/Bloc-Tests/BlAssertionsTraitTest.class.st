@@ -1,12 +1,15 @@
 Class {
 	#name : #BlAssertionsTraitTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #tests }
 BlAssertionsTraitTest >> testAllAssertDescriptionUseDebugTrait [
 	| senders classes superclasses blocClasses |
+	self skip.
+	self flag: #toRemove.
+	"keep the logic to remove it cleanly."
 	
 	senders := (#assert:description: senders
 		select: [ :aSender | aSender method isGTExampleMethod not ])
@@ -26,7 +29,9 @@ BlAssertionsTraitTest >> testAllAssertDescriptionUseDebugTrait [
 { #category : #tests }
 BlAssertionsTraitTest >> testAllAssertUseDebugTrait [
 	| senders classes superclasses blocClasses |
-	
+	self skip.
+	self flag: #toRemove.
+	"keep the logic to remove it cleanly."
 	senders := (#assert: senders
 		select: [ :aSender | aSender method isGTExampleMethod not ])
 		select: [ :aSender | ((aSender methodClass withAllSuperclasses flatCollect: #traits) includes: TBlDebug) not ].

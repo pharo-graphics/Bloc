@@ -1,12 +1,15 @@
 Class {
 	#name : #BlDeferredActionTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Universe'
+	#category : #'Bloc-Tests-Universe'
 }
 
 { #category : #tests }
 BlDeferredActionTest >> testDeferredAction [
 	| runFlag processflag |
+	self skip.
+	self flag: #toFix.
+	"Was breaking the image"
 	processflag := runFlag := false.
 	BlUniverse reset.
 	BlUniverse default
