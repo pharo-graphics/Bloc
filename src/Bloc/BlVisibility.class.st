@@ -13,8 +13,6 @@ If you want to make element transparent and preserve ability to handle events se
 Class {
 	#name : #BlVisibility,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [
 		'gone',
 		'hidden',
