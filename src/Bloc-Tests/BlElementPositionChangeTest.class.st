@@ -14,7 +14,7 @@ BlElementPositionChangeTest >> element [
 	^ BlElement new
 ]
 
-{ #category : #tests }
+{ #category : #accessing }
 BlElementPositionChangeTest >> elementTree [
 	<gtExample>
 	| parent child subChild |
@@ -38,7 +38,7 @@ BlElementPositionChangeTest >> elementTree [
 ]
 
 { #category : #tests }
-BlElementPositionChangeTest >> parentPositionChanged [
+BlElementPositionChangeTest >> testParentPositionChanged [
 	<gtExample>
 	|
 		parent parentPositionChangedListener parentPositionInSpaceChangedListener parentPositionChanged parentPositionInSpaceChanged
@@ -125,7 +125,7 @@ BlElementPositionChangeTest >> parentPositionChanged [
 ]
 
 { #category : #tests }
-BlElementPositionChangeTest >> positionChangeBoundsChange [
+BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	<gtExample>
 	| element anUpdater |
 	
@@ -162,7 +162,7 @@ BlElementPositionChangeTest >> positionChangeBoundsChange [
 ]
 
 { #category : #tests }
-BlElementPositionChangeTest >> positionChangeLoop [
+BlElementPositionChangeTest >> testPositionChangeLoop [
 	<gtExample>
 	| element positionChanged positionChangedListener positionInSpaceChanged positionInSpaceChangedListener anUpdater |
 	

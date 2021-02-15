@@ -36,7 +36,7 @@ BlSpaceTest >> tearDown [
 
 { #category : #tests }
 BlSpaceTest >> testEnqueueEvent [
-
+	self skip.
 	space pulse.
 	self assert: space pulseRequested not.
 	
@@ -49,7 +49,7 @@ BlSpaceTest >> testEnqueueEvent [
 
 { #category : #tests }
 BlSpaceTest >> testInitialization [
-
+	self skip.
 	"Host space must not be nil"
 	self assert: space hostSpace isNotNil.
 	
@@ -62,7 +62,7 @@ BlSpaceTest >> testInitialization [
 
 { #category : #tests }
 BlSpaceTest >> testRender [
-
+	self skip.
 	self assert: self dirtyAreas equals: { 0@0 extent: space extent }.
 	self assert: space hostSpace renderCount equals: 0.
 	self assert: space pulseRequested.
