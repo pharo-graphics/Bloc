@@ -1,10 +1,9 @@
-# Bloc
-
-[Installation](#installation) | [Contributing](#contributing) |  [License](#license)
+# Bloc 
 
 [![License](https://img.shields.io/github/license/pharo-graphics/Bloc.svg?style=flat-square)][license]
+![Complete Test](https://github.com/pharo-graphics/Bloc/workflows/Complete%20Test/badge.svg)
 
-[![Coveralls](https://img.shields.io/coveralls/pharo-graphics/Bloc.svg?style=flat-square)][coveralls]
+[Installation](#installation) | [Contributing](#contributing) |  [License](#license)
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
@@ -18,33 +17,15 @@ We are currently identifying the core we want for Pharo.
 
 The following script installs Bloc intended for [Pharo 8](https://pharo.org/download):
 
-To load the most bare bone bloc (just Bloc , BlocHost-Mock and Bloc-Tests packages):
 ```smalltalk
 Metacello new
-        baseline: 'BlocCore';
+        baseline: 'NewBloc';
         repository: 'github://pharo-graphics/Bloc/src';
-        load
+        load.
 ```
 
-To also load a rendering engine we can use the following baseline which in addition to BlocCore also loads Bloc-Text and Bloc-Sparta:
-
-```
-Metacello new
-    baseline: 'BlocSparta';
-    repository: 'github://pharo-graphics/Bloc/src';
-    load.
-```
-
-And finally, to be able to render bloc inside of the morphic we can load morphic host (independent from Sparta)
-
-```
-Metacello new
-    baseline: 'BlocMorphic';
-    repository: 'github://pharo-graphics/Bloc/src';
-    load.
-```
-
-
+Alternatively, you can do it by terminal (MacOS & linux). 
+Create a directory and execute `<this_repo>/scripts/build.sh`, which first downloads the Pharo image and VM and then loads the project.
 
 
 ## Contributing
