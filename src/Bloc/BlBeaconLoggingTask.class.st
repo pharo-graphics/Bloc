@@ -85,8 +85,5 @@ BlBeaconLoggingTask >> subtask [
 
 { #category : #accessing }
 BlBeaconLoggingTask >> subtask: aBlTask [
-	self 
-		assert: [ aBlTask isNotNil ]
-		description: [ 'Sub-Task must be non-nil' ].
 	subtask := aBlTask
 ]
