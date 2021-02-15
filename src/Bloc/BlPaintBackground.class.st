@@ -63,9 +63,6 @@ BlPaintBackground >> paint [
 
 { #category : #accessing }
 BlPaintBackground >> paint: aBlPaint [
-	self
-		assert: [ aBlPaint isNotNil ]
-		description: [ 'Paint must not be nil' ].
 
 	paint isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
