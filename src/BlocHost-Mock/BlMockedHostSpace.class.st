@@ -43,7 +43,7 @@ BlMockedHostSpace >> borderless: aBoolean [
 
 { #category : #'host space - accessing' }
 BlMockedHostSpace >> canvasExtent: anExtent [
-	physicalSize := FensterPhysicalSize width: anExtent x height: anExtent y
+	physicalSize := (anExtent x @ anExtent y) asPhysicalSize
 ]
 
 { #category : #'host space - displaying' }
@@ -71,7 +71,7 @@ BlMockedHostSpace >> defaultDensityDpi [
 
 { #category : #initialization }
 BlMockedHostSpace >> defaultLogicalSize [
-	^ FensterLogicalSize fromPoint: (400 @ 300)
+	^ (400 @ 300) asLogicalSize
 ]
 
 { #category : #initialization }

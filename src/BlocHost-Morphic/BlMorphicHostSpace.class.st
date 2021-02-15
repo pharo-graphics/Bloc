@@ -110,9 +110,7 @@ BlMorphicHostSpace >> physicalSize [
 	In most cases physical size is x2 larger than logical size on retina screens."
 	<return: #FensterPhysicalSize>
 
-	^ FensterPhysicalSize
-		width: spaceHostMorph width
-		height: spaceHostMorph height
+	^ (spaceHostMorph width @ spaceHostMorph height) asPhysicalSize
 ]
 
 { #category : #'window - properties' }

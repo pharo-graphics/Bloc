@@ -126,9 +126,7 @@ BlMorphicWindowHostSpace >> physicalSize [
 	In most cases physical size is x2 larger than logical size on retina screens."
 	<return: #FensterPhysicalSize>
 
-	^ FensterPhysicalSize
-		width: morphicWindow spaceExtent x
-		height: morphicWindow spaceExtent y
+	^ (morphicWindow spaceExtent x @ morphicWindow spaceExtent y) asPhysicalSize
 ]
 
 { #category : #'window - properties' }

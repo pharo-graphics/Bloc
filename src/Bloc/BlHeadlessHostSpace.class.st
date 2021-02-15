@@ -162,7 +162,7 @@ BlHeadlessHostSpace >> physicalSize [
 	In most cases physical size is x2 larger than logical size on retina screens."
 	<return: #FensterPhysicalSize>
 
-	^ FensterPhysicalSize width: 0 height: 0
+	^ (0@0) asPhysicalSize
 ]
 
 { #category : #'window - properties' }
