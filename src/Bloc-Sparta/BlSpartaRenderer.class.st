@@ -20,7 +20,8 @@ BlSpartaRenderer class >> availableCanvasBuilderClasses [
 	^ ((BlSpartaCanvasBuilder allSubclasses select: [ :aBuilderClass | aBuilderClass isSupported ])
 		select: [ :aBuilderClass | 
 			BlHostRendererSurface allSurfaces anySatisfy: [ :aSurfaceClass |
-				(aSurfaceClass supportedBy: aBuilderClass) and: [ aSurfaceClass supportedBy: BlUniverse default host ] ] ])
+				(aSurfaceClass supportedBy: aBuilderClass) and: [ 
+					aSurfaceClass supportedBy: BlHost pickHost ] ] ])
 		sort: [ :a :b | a priority < b priority ]
 ]
 
