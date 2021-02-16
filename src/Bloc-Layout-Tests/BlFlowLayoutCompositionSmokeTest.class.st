@@ -1,14 +1,14 @@
 "
-I contain examples of a flow layout
+Pay attention no assertion... smoke tests.
 "
 Class {
-	#name : #BlFlowLayoutCompositionExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Layout-Examples-FlowMigrated'
+	#name : #BlFlowLayoutCompositionSmokeTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Layout-Tests'
 }
 
 { #category : #examples }
-BlFlowLayoutCompositionExamples class >> exampleHorizontalList [
+BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
 	<gtExample>
 	| e1 e2 e3 e4 el space e5 |
 
@@ -49,7 +49,7 @@ BlFlowLayoutCompositionExamples class >> exampleHorizontalList [
 ]
 
 { #category : #examples }
-BlFlowLayoutCompositionExamples class >> exampleText [
+BlFlowLayoutCompositionSmokeTest class >> exampleText [
 	<gtExample>
 	| aText aLineIterator  theWords aParent aSpace floatA aFloatIndex |
 
@@ -108,7 +108,7 @@ BlFlowLayoutCompositionExamples class >> exampleText [
 ]
 
 { #category : #examples }
-BlFlowLayoutCompositionExamples class >> floatingCells [
+BlFlowLayoutCompositionSmokeTest class >> floatingCells [
 	| aSpace |
 	<script: 'self floatingCells'>
 
@@ -122,7 +122,7 @@ BlFlowLayoutCompositionExamples class >> floatingCells [
 ]
 
 { #category : #'examples - setup' }
-BlFlowLayoutCompositionExamples >> blueCell [
+BlFlowLayoutCompositionSmokeTest >> blueCell [
 	<gtExample>
 
 	^ self cell
@@ -131,7 +131,7 @@ BlFlowLayoutCompositionExamples >> blueCell [
 ]
 
 { #category : #'examples - setup' }
-BlFlowLayoutCompositionExamples >> cell [
+BlFlowLayoutCompositionSmokeTest >> cell [
 	<gtExample>
 	
 	^ BlElement new
@@ -143,7 +143,7 @@ BlFlowLayoutCompositionExamples >> cell [
 ]
 
 { #category : #'examples - setup' }
-BlFlowLayoutCompositionExamples >> container [
+BlFlowLayoutCompositionSmokeTest >> container [
 	<gtExample>
 	
 	^ BlElement new
@@ -153,7 +153,7 @@ BlFlowLayoutCompositionExamples >> container [
 ]
 
 { #category : #'examples - setup' }
-BlFlowLayoutCompositionExamples >> floatBlueCell [
+BlFlowLayoutCompositionSmokeTest >> floatBlueCell [
 	<gtExample>
 
 	^ self floatCell
@@ -162,7 +162,7 @@ BlFlowLayoutCompositionExamples >> floatBlueCell [
 ]
 
 { #category : #'examples - setup' }
-BlFlowLayoutCompositionExamples >> floatCell [
+BlFlowLayoutCompositionSmokeTest >> floatCell [
 	<gtExample>
 
 	^ BlElement new
@@ -172,7 +172,7 @@ BlFlowLayoutCompositionExamples >> floatCell [
 ]
 
 { #category : #'examples - setup' }
-BlFlowLayoutCompositionExamples >> floatRedCell [
+BlFlowLayoutCompositionSmokeTest >> floatRedCell [
 	<gtExample>
 
 	^ self floatCell
@@ -181,7 +181,7 @@ BlFlowLayoutCompositionExamples >> floatRedCell [
 ]
 
 { #category : #'examples - list with floats' }
-BlFlowLayoutCompositionExamples >> floatingCells [
+BlFlowLayoutCompositionSmokeTest >> floatingCells [
 	<gtExample>
 	
 	^ self container
@@ -196,7 +196,7 @@ BlFlowLayoutCompositionExamples >> floatingCells [
 ]
 
 { #category : #'examples - setup' }
-BlFlowLayoutCompositionExamples >> grayCell [
+BlFlowLayoutCompositionSmokeTest >> grayCell [
 	<gtExample>
 
 	^ self cell
@@ -205,7 +205,7 @@ BlFlowLayoutCompositionExamples >> grayCell [
 ]
 
 { #category : #'examples - setup' }
-BlFlowLayoutCompositionExamples >> redCell [
+BlFlowLayoutCompositionSmokeTest >> redCell [
 	<gtExample>
 
 	^ self cell

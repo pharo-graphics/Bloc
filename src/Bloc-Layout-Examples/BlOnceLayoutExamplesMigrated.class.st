@@ -1,13 +1,13 @@
 Class {
-	#name : #BlOnceLayoutExamples,
+	#name : #BlOnceLayoutExamplesMigrated,
 	#superclass : #Object,
 	#traits : 'TBlLayoutExamplesSetup',
 	#classTraits : 'TBlLayoutExamplesSetup classTrait',
-	#category : #'Bloc-Layout-Examples-Once'
+	#category : #'Bloc-Layout-Examples-OnceMIgrated'
 }
 
 { #category : #examples }
-BlOnceLayoutExamples >> onceLinearLayoutExact [
+BlOnceLayoutExamplesMigrated >> onceLinearLayoutExact [
 	<gtExample>
 	| aContainer aChildA aChildB aChildC |
 	
@@ -44,7 +44,7 @@ BlOnceLayoutExamples >> onceLinearLayoutExact [
 ]
 
 { #category : #examples }
-BlOnceLayoutExamples >> onceLinearLayoutMatchParent [
+BlOnceLayoutExamplesMigrated >> onceLinearLayoutMatchParent [
 	<gtExample>
 	| aContainer aChildA aChildB aChildC |
 	

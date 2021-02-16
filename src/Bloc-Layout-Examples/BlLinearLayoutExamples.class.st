@@ -3,5 +3,5 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlLayoutExamplesSetup',
 	#classTraits : 'TBlLayoutExamplesSetup classTrait',
-	#category : #'Bloc-Layout-Examples-Linear'
+	#category : #'Bloc-Layout-Examples-LinearMigrated'
 }

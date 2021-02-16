@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLinearLayoutHorizontalExamples,
 	#superclass : #BlLinearLayoutExamples,
-	#category : #'Bloc-Layout-Examples-Linear'
+	#category : #'Bloc-Layout-Examples-LinearMigrated'
 }
 
 { #category : #examples }
