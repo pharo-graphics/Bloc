@@ -3,8 +3,8 @@ I contain examples of positioning a single element within a parent element that 
 "
 Class {
 	#name : #BlFrameLayoutSingleChildExamples,
-	#superclass : #BlFrameLayoutChildrenExamples,
-	#category : #'Bloc-Layout-Examples-Frame'
+	#superclass : #BlFrameLayoutChildrenExamplesMigrated,
+	#category : #'Bloc-Layout-Examples-FrameMigrated'
 }
 
 { #category : #'examples - setup' }

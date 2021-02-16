@@ -1,11 +1,11 @@
 Class {
-	#name : #BlFrameLayoutNodeExamples,
-	#superclass : #BlFrameLayoutExamples,
-	#category : #'Bloc-Layout-Examples-Frame'
+	#name : #BlFrameLayoutNodeExamplesMigrated,
+	#superclass : #BlFrameLayoutExamplesMigrated,
+	#category : #'Bloc-Layout-Examples-BasicMigrated'
 }
 
 { #category : #examples }
-BlFrameLayoutNodeExamples >> empty_parent_at_most [
+BlFrameLayoutNodeExamplesMigrated >> empty_parent_at_most [
 	<gtExample>
 	| aLayout aParentNode |
 
@@ -22,7 +22,7 @@ BlFrameLayoutNodeExamples >> empty_parent_at_most [
 ]
 
 { #category : #examples }
-BlFrameLayoutNodeExamples >> empty_parent_exact [
+BlFrameLayoutNodeExamplesMigrated >> empty_parent_exact [
 	<gtExample>
 	| aLayout aParentNode |
 
@@ -39,7 +39,7 @@ BlFrameLayoutNodeExamples >> empty_parent_exact [
 ]
 
 { #category : #examples }
-BlFrameLayoutNodeExamples >> one_child_match_parent_exact [
+BlFrameLayoutNodeExamplesMigrated >> one_child_match_parent_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode |
 
@@ -67,7 +67,7 @@ BlFrameLayoutNodeExamples >> one_child_match_parent_exact [
 ]
 
 { #category : #examples }
-BlFrameLayoutNodeExamples >> one_child_match_parent_fit_content [
+BlFrameLayoutNodeExamplesMigrated >> one_child_match_parent_fit_content [
 	<gtExample>
 	| aLayout aParentNode aChildNode |
 
@@ -96,7 +96,7 @@ BlFrameLayoutNodeExamples >> one_child_match_parent_fit_content [
 ]
 
 { #category : #examples }
-BlFrameLayoutNodeExamples >> one_child_match_parent_matrix_exact [
+BlFrameLayoutNodeExamplesMigrated >> one_child_match_parent_matrix_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode |
 
@@ -124,7 +124,7 @@ BlFrameLayoutNodeExamples >> one_child_match_parent_matrix_exact [
 ]
 
 { #category : #examples }
-BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_downscacle_align_top_right_parent_exact [
+BlFrameLayoutNodeExamplesMigrated >> one_child_match_weight_matrix_downscacle_align_top_right_parent_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode aChildConstraints |
 
@@ -156,7 +156,7 @@ BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_downscacle_align_top_
 ]
 
 { #category : #examples }
-BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_upscale_align_top_right_parent_exact [
+BlFrameLayoutNodeExamplesMigrated >> one_child_match_weight_matrix_upscale_align_top_right_parent_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode aChildConstraints |
 
@@ -189,7 +189,7 @@ BlFrameLayoutNodeExamples >> one_child_match_weight_matrix_upscale_align_top_rig
 ]
 
 { #category : #examples }
-BlFrameLayoutNodeExamples >> one_child_match_weight_parent_exact [
+BlFrameLayoutNodeExamplesMigrated >> one_child_match_weight_parent_exact [
 	<gtExample>
 	| aLayout aParentNode aChildNode aChildConstraints |
 

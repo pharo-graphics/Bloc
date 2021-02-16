@@ -10,13 +10,13 @@ In case we add children in the reverse order, red, green and yellow, we just see
 ${example:BlFrameLayoutCompositionExamples>>#exampleReverseOrder|previewExpanded|previewHeight=450}$
 "
 Class {
-	#name : #BlFrameLayoutCompositionExamples,
-	#superclass : #BlFrameLayoutExamples,
-	#category : #'Bloc-Layout-Examples-Frame'
+	#name : #BlFrameLayoutCompositionExamplesMigrated,
+	#superclass : #BlFrameLayoutExamplesMigrated,
+	#category : #'Bloc-Layout-Examples-BasicMigrated'
 }
 
 { #category : #'instance creation' }
-BlFrameLayoutCompositionExamples >> container [
+BlFrameLayoutCompositionExamplesMigrated >> container [
 	<gtExample>
 	
 	^ self element
@@ -25,14 +25,14 @@ BlFrameLayoutCompositionExamples >> container [
 ]
 
 { #category : #'instance creation' }
-BlFrameLayoutCompositionExamples >> element [
+BlFrameLayoutCompositionExamplesMigrated >> element [
 	<gtExample>
 	
 	^ BlElement new
 ]
 
 { #category : #example }
-BlFrameLayoutCompositionExamples >> example [
+BlFrameLayoutCompositionExamplesMigrated >> example [
 	<gtExample>
 	| yellow green red container |
 	
@@ -64,7 +64,7 @@ BlFrameLayoutCompositionExamples >> example [
 ]
 
 { #category : #example }
-BlFrameLayoutCompositionExamples >> exampleReverseOrder [
+BlFrameLayoutCompositionExamplesMigrated >> exampleReverseOrder [
 	<gtExample>
 	| yellow green red container |
 	
@@ -96,7 +96,7 @@ BlFrameLayoutCompositionExamples >> exampleReverseOrder [
 ]
 
 { #category : #'instance creation' }
-BlFrameLayoutCompositionExamples >> green [
+BlFrameLayoutCompositionExamplesMigrated >> green [
 	<gtExample>
 	
 	^ self element
@@ -105,7 +105,7 @@ BlFrameLayoutCompositionExamples >> green [
 ]
 
 { #category : #'instance creation' }
-BlFrameLayoutCompositionExamples >> red [
+BlFrameLayoutCompositionExamplesMigrated >> red [
 	<gtExample>
 	
 	^ self element
@@ -114,7 +114,7 @@ BlFrameLayoutCompositionExamples >> red [
 ]
 
 { #category : #'instance creation' }
-BlFrameLayoutCompositionExamples >> yellow [
+BlFrameLayoutCompositionExamplesMigrated >> yellow [
 	<gtExample>
 	
 	^ self element

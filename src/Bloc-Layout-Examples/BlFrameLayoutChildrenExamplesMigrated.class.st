@@ -1,11 +1,11 @@
 Class {
-	#name : #BlFrameLayoutChildrenExamples,
-	#superclass : #BlFrameLayoutExamples,
-	#category : #'Bloc-Layout-Examples-Frame'
+	#name : #BlFrameLayoutChildrenExamplesMigrated,
+	#superclass : #BlFrameLayoutExamplesMigrated,
+	#category : #'Bloc-Layout-Examples-FrameMigrated'
 }
 
 { #category : #'examples - setup' }
-BlFrameLayoutChildrenExamples >> childElementWithExactSize100per50 [
+BlFrameLayoutChildrenExamplesMigrated >> childElementWithExactSize100per50 [
 	<gtExample>
 	| element |
 	element :=  self childElementWithVisualProperties.
@@ -21,7 +21,7 @@ BlFrameLayoutChildrenExamples >> childElementWithExactSize100per50 [
 ]
 
 { #category : #'examples - setup' }
-BlFrameLayoutChildrenExamples >> parentWithFrameLayoutAndFixedSize [
+BlFrameLayoutChildrenExamplesMigrated >> parentWithFrameLayoutAndFixedSize [
 	<gtExample>
 	| element |
 	element :=  self parentWithFixedSize.
@@ -34,7 +34,7 @@ BlFrameLayoutChildrenExamples >> parentWithFrameLayoutAndFixedSize [
 ]
 
 { #category : #'examples - setup' }
-BlFrameLayoutChildrenExamples >> parentWithFrameLayoutAndFixedSize300per250 [
+BlFrameLayoutChildrenExamplesMigrated >> parentWithFrameLayoutAndFixedSize300per250 [
 	<gtExample>
 	| element |
 	element :=  BlElement new

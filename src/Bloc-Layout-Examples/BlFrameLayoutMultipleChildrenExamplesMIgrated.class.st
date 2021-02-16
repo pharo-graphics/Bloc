@@ -1,11 +1,11 @@
 Class {
-	#name : #BlFrameLayoutMultipleChildrenExamples,
-	#superclass : #BlFrameLayoutChildrenExamples,
-	#category : #'Bloc-Layout-Examples-Frame'
+	#name : #BlFrameLayoutMultipleChildrenExamplesMIgrated,
+	#superclass : #BlFrameLayoutChildrenExamplesMigrated,
+	#category : #'Bloc-Layout-Examples-FrameMigrated'
 }
 
 { #category : #'examples - setup' }
-BlFrameLayoutMultipleChildrenExamples >> childElementWithExactSize140per140 [
+BlFrameLayoutMultipleChildrenExamplesMIgrated >> childElementWithExactSize140per140 [
 	<gtExample>
 	| element |
 	element :=  self childElementWithVisualProperties.
@@ -21,7 +21,7 @@ BlFrameLayoutMultipleChildrenExamples >> childElementWithExactSize140per140 [
 ]
 
 { #category : #'examples - alignment' }
-BlFrameLayoutMultipleChildrenExamples >> elementWithExactChildAlignLeftCenterAndExactChildCenter [
+BlFrameLayoutMultipleChildrenExamplesMIgrated >> elementWithExactChildAlignLeftCenterAndExactChildCenter [
 	<gtExample>
 	| parent childOne childTwo |
 	
@@ -49,7 +49,7 @@ BlFrameLayoutMultipleChildrenExamples >> elementWithExactChildAlignLeftCenterAnd
 ]
 
 { #category : #'examples - alignment' }
-BlFrameLayoutMultipleChildrenExamples >> elementWithExactChildAlignTopLeftAndExactChildRightCenter [
+BlFrameLayoutMultipleChildrenExamplesMIgrated >> elementWithExactChildAlignTopLeftAndExactChildRightCenter [
 	<gtExample>
 	| parent childOne childTwo |
 	
@@ -74,7 +74,7 @@ BlFrameLayoutMultipleChildrenExamples >> elementWithExactChildAlignTopLeftAndExa
 ]
 
 { #category : #'examples - alignment' }
-BlFrameLayoutMultipleChildrenExamples >> elementWithNineExactChildrenWithAllAlignments [
+BlFrameLayoutMultipleChildrenExamplesMIgrated >> elementWithNineExactChildrenWithAllAlignments [
 	<gtExample>
 	| parent childTopLeft childTopCenter childTopRight childCenterLeft childCenterCenter childCenterRight childBottomLeft childBottomCenter childBottomRight|
 	
@@ -149,7 +149,7 @@ BlFrameLayoutMultipleChildrenExamples >> elementWithNineExactChildrenWithAllAlig
 ]
 
 { #category : #'examples - weight' }
-BlFrameLayoutMultipleChildrenExamples >> elementWithTwoChildrenMatchingParentWithWeight [
+BlFrameLayoutMultipleChildrenExamplesMIgrated >> elementWithTwoChildrenMatchingParentWithWeight [
 	<gtExample>
 	| parent childOne childTwo |
 	
@@ -178,7 +178,7 @@ BlFrameLayoutMultipleChildrenExamples >> elementWithTwoChildrenMatchingParentWit
 ]
 
 { #category : #'examples - fit content' }
-BlFrameLayoutMultipleChildrenExamples >> elementWithTwoExactChildrenAndFitContentParent [
+BlFrameLayoutMultipleChildrenExamplesMIgrated >> elementWithTwoExactChildrenAndFitContentParent [
 	<gtExample>
 	| parent childOne childTwo |
 	
@@ -213,7 +213,7 @@ BlFrameLayoutMultipleChildrenExamples >> elementWithTwoExactChildrenAndFitConten
 ]
 
 { #category : #'examples - alignment' }
-BlFrameLayoutMultipleChildrenExamples >> elementWithTwoExactChildrenAndNoAlignment [
+BlFrameLayoutMultipleChildrenExamplesMIgrated >> elementWithTwoExactChildrenAndNoAlignment [
 	<gtExample>
 	| parent childOne childTwo |
 	

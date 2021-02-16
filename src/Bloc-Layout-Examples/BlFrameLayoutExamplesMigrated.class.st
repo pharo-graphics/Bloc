@@ -1,7 +1,7 @@
 Class {
-	#name : #BlFrameLayoutExamples,
+	#name : #BlFrameLayoutExamplesMigrated,
 	#superclass : #Object,
 	#traits : 'TBlLayoutExamplesSetup',
 	#classTraits : 'TBlLayoutExamplesSetup classTrait',
-	#category : #'Bloc-Layout-Examples-Frame'
+	#category : #'Bloc-Layout-Examples-FrameMigrated'
 }

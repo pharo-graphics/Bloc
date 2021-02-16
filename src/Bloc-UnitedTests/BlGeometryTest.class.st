@@ -7,6 +7,12 @@ Class {
 	#category : #'Bloc-UnitedTests-Geometry'
 }
 
+{ #category : #testing }
+BlGeometryTest class >> shouldInheritSelectors [
+	^ true
+	
+]
+
 { #category : #'contains tests' }
 BlGeometryTest >> test3ElContainsPoint [
 	| g c1 c2 |
