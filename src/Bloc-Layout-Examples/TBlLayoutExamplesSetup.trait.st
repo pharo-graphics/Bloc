@@ -13,6 +13,7 @@ TBlLayoutExamplesSetup >> assertExactConstraint: aPoint forElement: anElement [
 TBlLayoutExamplesSetup >> childElementMatchingParent [
 	<gtExample>
 	| element |
+	self flag:'labordep: to delete, transfered to BlBasicLayoutTest'.
 	element := self childElementWithVisualProperties.
 	element constraintsDo: [ :c | 
 		c vertical matchParent.
@@ -30,6 +31,7 @@ TBlLayoutExamplesSetup >> childElementMatchingParent [
 TBlLayoutExamplesSetup >> childElementWithVisualProperties [
 	<gtExample>
 	| element |
+	self flag:'labordep: to delete, transfered to BlBasicLayoutTest'.
 	element :=  BlElement new
 		background: (Color cyan alpha: 0.2);
 		border: (BlBorder builder paint: (Color blue alpha: 0.5); width: 1; build);
@@ -71,6 +73,7 @@ TBlLayoutExamplesSetup >> childExactWidth: aNumber [
 TBlLayoutExamplesSetup >> parentWithFixedSize [
 	<gtExample>
 	| element |
+	self flag:'labordep: to delete, transfered to BlBasicLayoutTest'.
 	element :=  BlElement new
 		border: (BlBorder builder dashed; paint: Color red; width: 3; build);
 		size: 400@300;

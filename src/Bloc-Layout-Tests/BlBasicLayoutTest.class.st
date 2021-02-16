@@ -15,8 +15,38 @@ BlBasicLayoutTest >> originClassName [
 ]
 
 { #category : #tests }
+BlBasicLayoutTest >> testChildElementMatchingParent [
+	| element |
+	element := self testChildElementWithVisualProperties. 
+	element constraintsDo: [ :c | 
+		c vertical matchParent.
+		c horizontal matchParent ].
+	
+	self assert: element position equals: 0@0.
+	self assert: element extent equals: 0@0.
+	self assert: element constraints horizontal resizer isMatchParent.
+	self assert: element constraints vertical resizer isMatchParent.
+	
+	^ element
+]
+
+{ #category : #tests }
+BlBasicLayoutTest >> testChildElementWithVisualProperties [
+	| element |
+	element :=  BlElement new
+		background: (Color cyan alpha: 0.2);
+		border: (BlBorder builder paint: (Color blue alpha: 0.5); width: 1; build);
+		yourself.
+	
+	self assert: element border width equals: 1.
+	self assert: element border paint equals: (Color blue alpha: 0.5) asBlPaint.
+	self assert: element background equals: (Color cyan alpha: 0.2) asBlBackground.
+		
+	^ element
+]
+
+{ #category : #tests }
 BlBasicLayoutTest >> testForceLayoutOfMatchParent [
-	<gtExample>
 	| anElement |
 	anElement := BlElement new.
 	anElement border: (BlBorder paint: Color gray width: 2).
@@ -32,7 +62,6 @@ BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 
 { #category : #tests }
 BlBasicLayoutTest >> testParentWithChildExactSize [
-	<gtExample>
 	| child parent |
 	child := BlElement new.
 	child layout: BlBasicLayout uniqueInstance.
@@ -63,7 +92,6 @@ BlBasicLayoutTest >> testParentWithChildExactSize [
 
 { #category : #tests }
 BlBasicLayoutTest >> testParentWithChildFitContent [
-	<gtExample>
 	| child parent |
 	parent := self testParentWithChildExactSize.
 	child := parent children first.
@@ -79,7 +107,6 @@ BlBasicLayoutTest >> testParentWithChildFitContent [
 
 { #category : #tests }
 BlBasicLayoutTest >> testParentWithChildMatchParent [
-	<gtExample>
 	| child parent |
 	parent := self testParentWithChildExactSize.
 	child := parent children first.
@@ -91,4 +118,22 @@ BlBasicLayoutTest >> testParentWithChildMatchParent [
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 300 @ 300.
 	^ parent
+]
+
+{ #category : #tests }
+BlBasicLayoutTest >> testParentWithFixedSize [
+	| element |
+	element :=  BlElement new
+		border: (BlBorder builder dashed; paint: Color red; width: 3; build);
+		size: 400@300;
+		yourself.
+		
+	self assert: element position equals: 0@0.
+	self assert: element extent equals: 0@0.
+	self assert: element constraints horizontal resizer size equals: 400.
+	self assert: element constraints vertical resizer size equals: 300.
+	self assert: element border width equals: 3.
+	self assert: element border paint equals: Color red asBlPaint.
+	
+	^ element
 ]
