@@ -743,6 +743,35 @@ BlElement >> children [
 	^ children
 ]
 
+{ #category : #'api - children enumeration' }
+BlElement >> childrenAt: aPoint do: aBlock [
+	"Evaluate a given Block with my directs children under a given point provided
+	in *my* local coordinates sorted in the order they are displayed (children reversed + elevation based).
+	Return true if aBlock was evaluated, false otherwise"
+	<return: #Boolean>
+	| isPointInsideMe anyChildFound |
+
+	isPointInsideMe := self containsPoint: aPoint.
+	
+	"if point is not inside of me and I clip children, it literally
+	means that there neither me nor my children are visible at a given point"
+	(isPointInsideMe not and: [ self clipChildren ])
+		ifTrue: [ ^ false ].
+
+	anyChildFound := false.
+	
+	self children sortedByElevation reversed do: [ :eachChildElement |
+		| aPointInChildCoordinates |
+		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
+
+		(eachChildElement containsPoint: aPointInChildCoordinates)
+			ifTrue: [
+				aBlock value: eachChildElement.
+				anyChildFound := true ] ].
+
+	^ anyChildFound
+]
+
 { #category : #'geometry bounds convertion' }
 BlElement >> childrenBoundsToLocal: aBounds [
 	"In-place transform bounds from my childrens' coordinates to my local coordinates.
