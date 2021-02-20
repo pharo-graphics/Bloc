@@ -131,9 +131,6 @@ BlElement >> addChild: anElement at: anIndex [
 	anElement must not be a direct child of any other element!
 	anElement must not be nil
 	anIndex must be greater or equal to 1 and less or equal than amount of existing children + 1"
-	self
-		assert: [ anElement isNotNil ]
-		description: [ 'Can not add nil element' ].
 
 	anElement hasParent
 		ifTrue: [ (BlAlreadyAddedAsChildError element: anElement) signal ].	
