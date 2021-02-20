@@ -28,9 +28,7 @@ BlTextReadStream >> iterator [
 
 { #category : #accessing }
 BlTextReadStream >> iterator: aBlTextIterator [
-	self 
-		assert: [ aBlTextIterator isNotNil ] 
-		description: [ 'Text iterator must be non-nil' ].
+
 	iterator := aBlTextIterator
 ]
 

@@ -199,30 +199,25 @@ BlSubTextIterator >> text [
 ]
 
 { #category : #initialization }
-BlSubTextIterator >> text: aBrSubText from: aStartIndex to: anEndIndex [
-	
+BlSubTextIterator >> text: aBrSubText from: aStartIntegerIndex to: anEndIntegerIndex [
+	"aStartIntegerIndex and anEndIntegerIndex are integers."
+
 	self
-		assert: [ aStartIndex isTextIndex and: [ anEndIndex isTextIndex ] ]
-		description: [ 'Only integers are alowed as start and end indices' ].
-	self
-		assert: [ aBrSubText isNotNil ]
-		description: [ 'Text must not be nil' ].
-	self
-		assert: [ aStartIndex between: 1 and: (aBrSubText size + 1) ]
+		assert: [ aStartIntegerIndex between: 1 and: (aBrSubText size + 1) ]
 		description: [ 'Sub-text start index is out of bounds!' ].
 	self
-		assert: [ anEndIndex between: 0 and: aBrSubText size ]
+		assert: [ anEndIntegerIndex between: 0 and: aBrSubText size ]
 		description: [ 'Sub-text end index is out of bounds!' ].
 	self
-		assert: [ aBrSubText isNotEmpty or: [ aStartIndex = 1 and: [ anEndIndex isZero ] ] ]
+		assert: [ aBrSubText isNotEmpty or: [ aStartIntegerIndex = 1 and: [ anEndIntegerIndex isZero ] ] ]
 		description: [ 'If text is empty, start must be 1 and end index must be Zero!' ].
 	self
-		assert: [ anEndIndex isZero not or: [ aStartIndex = 1 ] ]
+		assert: [ anEndIntegerIndex isZero not or: [ aStartIntegerIndex = 1 ] ]
 		description: [ 'If end index is zero then start index must be one' ].
 
 	text := aBrSubText.
 	
 	iterator := aBrSubText text
-		iterator: ((aStartIndex + text start - 1) max: 0)
-		to: ((anEndIndex + text start - 1) max: 0)
+		iterator: ((aStartIntegerIndex + text start - 1) max: 0)
+		to: ((anEndIntegerIndex + text start - 1) max: 0)
 ]

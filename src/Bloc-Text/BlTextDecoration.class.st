@@ -171,9 +171,7 @@ BlTextDecoration >> thickness [
 
 { #category : #'api - decoration' }
 BlTextDecoration >> thickness: aNumber [
-	self 
-		assert: [ aNumber notNil ] 
-		description: [ 'Thickness must be non-nil' ].
+
 	self 
 		assert: [ aNumber >= 0 ] 
 		description: [ 'Thickness must be a pozitive number' ].

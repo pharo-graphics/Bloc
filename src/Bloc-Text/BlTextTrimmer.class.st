@@ -33,9 +33,7 @@ BlTextTrimmer >> initialize [
 
 { #category : #'api - configuration' }
 BlTextTrimmer >> left: anOneArgBlock [
-	self 
-		assert: [ anOneArgBlock notNil ]
-		description: [ 'Left trimming block must be non-nil' ].
+
 	leftTrimPatterns add: anOneArgBlock
 ]
 
@@ -51,9 +49,7 @@ BlTextTrimmer >> leftSeparators [
 
 { #category : #'api - configuration' }
 BlTextTrimmer >> right: anOneArgBlock [
-	self 
-		assert: [ anOneArgBlock notNil ]
-		description: [ 'Right trimming block must be non-nil' ].
+
 	rightTrimPatterns add: anOneArgBlock
 ]
 

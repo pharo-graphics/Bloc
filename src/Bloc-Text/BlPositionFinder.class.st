@@ -12,9 +12,6 @@ Class {
 { #category : #'api - configuration' }
 BlPositionFinder >> caseInsensitiveSubstring: aString [
 	| aLowerCaseString |
-	self
-		assert: [ aString notNil ] 
-		description: [ 'Searched sub-string must be non-nil' ].
 	aLowerCaseString := aString asLowercase.
 	self pattern: [ :aText :aPosition | 
 		aLowerCaseString = (aText 
@@ -24,9 +21,6 @@ BlPositionFinder >> caseInsensitiveSubstring: aString [
 
 { #category : #'api - configuration' }
 BlPositionFinder >> caseSensitiveSubstring: aString [
-	self
-		assert: [ aString notNil ] 
-		description: [ 'Searched sub-string must be non-nil' ].
 
 	self pattern: [ :aText :aPosition | 
 		aString = (aText 
@@ -36,18 +30,14 @@ BlPositionFinder >> caseSensitiveSubstring: aString [
 
 { #category : #'api - configuration' }
 BlPositionFinder >> character: aCharacter [
-	self
-		assert: [ aCharacter notNil ] 
-		description: [ 'Searched character must be non-nil' ].
+
 	self pattern: [ :aText :aPosition | 
 		aCharacter = (aText at: aPosition) ]
 ]
 
 { #category : #'api - configuration' }
 BlPositionFinder >> characters: aString [
-	self
-		assert: [ aString notNil ] 
-		description: [ 'Searched characters must be non-nil' ].
+
 	aString do: [ :eachCharacter |
 		self pattern: [ :aText :aPosition | 
 			eachCharacter = (aText at: aPosition) ] ]
@@ -69,9 +59,7 @@ BlPositionFinder >> isCurrentIndexInsideOfText: aCurrentIndex [
 
 { #category : #'api - configuration' }
 BlPositionFinder >> pattern: anOneArgBlock [
-	self
-		assert: [ anOneArgBlock notNil ] 
-		description: [ 'Pattern block must be non-nil' ].
+
 	patterns add: anOneArgBlock
 ]
 
@@ -132,12 +120,7 @@ BlPositionFinder >> startAtEnd [
 
 { #category : #'api - configuration' }
 BlPositionFinder >> startAtPosition: anInteger [
-	self 
-		assert: [ anInteger notNil ] 
-		description: [ 'Starting search position must be non-nil' ].
-	self 
-		assert: [ anInteger isInteger ] 
-		description: [ 'Starting search position must be an integer' ].
+
 	self 
 		assert: [ anInteger > 0 and: [ anInteger <= self text size ] ] 
 		description: [ 'Starting search position ', anInteger asString, 
@@ -147,23 +130,15 @@ BlPositionFinder >> startAtPosition: anInteger [
 
 { #category : #'api - configuration' }
 BlPositionFinder >> stepBy: anInteger [
-	self 
-		assert: [ anInteger notNil ] 
-		description: [ 'Step lenght must be non-nil' ].
-	self 
-		assert: [ anInteger isInteger ] 
-		description: [ 'Step lenght must be an integer' ].
-	self 
-		assert: [ anInteger isZero not ] 
-		description: [ 'Step lenght must be non-zero value' ].
+	
+	anInteger isZero
+		ifTrue: [ self error: 'Step length must be non-zero value' ].
 	stepLength := anInteger.
 ]
 
 { #category : #'api - configuration' }
 BlPositionFinder >> substring: aString [
-	self
-		assert: [ aString notNil ] 
-		description: [ 'Searched sub-string must be non-nil' ].
+
 	self pattern: [ :aText :aPosition | 
 		aString = (aText 
 			from: aPosition 

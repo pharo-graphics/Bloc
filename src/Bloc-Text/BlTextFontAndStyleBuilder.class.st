@@ -37,9 +37,6 @@ BlTextFontAndStyleBuilder >> decoration: aBlTextDecoration [
 
 { #category : #'font - size' }
 BlTextFontAndStyleBuilder >> defaultFontSizePt: aNumber [
-	self
-		assert: [ aNumber isNumber ]
-		description: [ 'Must be a number' ].
 
 	defaultFontSize := aNumber
 ]

@@ -87,10 +87,8 @@ BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex 
 
 { #category : #'text - attributes' }
 BlRopedText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
+	"aFromIndex should be lower or equal than aToIndex."
 	| aPreviousRope |
-	self
-		assert: [ aFromIndex <= aToIndex ]
-		description: [ 'Start must not exceed end' ].
 
 	self
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
@@ -245,16 +243,11 @@ BlRopedText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 ]
 
 { #category : #accessing }
-BlRopedText >> insertText: aText at: anIndex [
+BlRopedText >> insertText: aBlText at: anIndex [
+
+	rope := rope insert: aBlText rope at: anIndex.
 	self
-		assert: [ aText isKindOf: BlText ]
-		description: [ 'Trying to insert a {1} instead of {2}'
-				format:
-					{aText class name.
-					BlText name} ].
-	rope := rope insert: aText rope at: anIndex.
-	self
-		notifyStringsInserted: { aText characters asString }
+		notifyStringsInserted: { aBlText characters asString }
 		atAll: { anIndex }
 		requested: { anIndex }
 ]
@@ -380,12 +373,9 @@ BlRopedText >> storeOn: aStream [
 
 { #category : #'text - attributes' }
 BlRopedText >> unstyle: aFromIndex to: aToIndex [
+	"aFromIndex should be <= than aToIndex"
 	<return: #BlText>
 	| anUnstyledRope aPreviousRope |
-
-	self
-		assert: [ aFromIndex <= aToIndex ]
-		description: [ 'Start must not exceed end' ].
 
 	self
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]

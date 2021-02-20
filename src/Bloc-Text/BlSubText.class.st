@@ -21,9 +21,8 @@ BlSubText class >> empty: aBrText [
 	"Returns a sub-text that is backed up by an empty text"
 	<return: #BlSubText>
 	
-	self
-		assert: [ aBrText isEmpty ]
-		description: [ 'Underlying text must be empty in order to create empty sub-text' ].
+	aBrText isEmpty 
+		ifFalse: [ self error: 'Underlying text must be empty to create empty sub-text' ].
 		
 	^ self
 		text: aBrText
@@ -72,9 +71,7 @@ BlSubText >> assertInvariant [
 
 { #category : #asserting }
 BlSubText >> assertStart: aStartIndex end: anEndIndex [
-	self
-		assert: [ aStartIndex isTextIndex and: [ anEndIndex isTextIndex ] ]
-		description: [ 'Only integers are alowed as start and end indices' ].
+
 	self
 		assert: [ text isNotNil ]
 		description: [ 'Text must not be nil' ].
