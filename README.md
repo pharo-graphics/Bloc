@@ -15,7 +15,7 @@ We are currently identifying the core we want for Pharo.
 
 ## Installation
 
-The following script installs Bloc intended for [Pharo 8](https://pharo.org/download):
+The following script installs Bloc in [Pharo 8 and 9](https://pharo.org/download):
 
 ```smalltalk
 Metacello new
@@ -24,7 +24,7 @@ Metacello new
         load.
 ```
 
-Alternatively, you can do it by terminal (MacOS & linux). 
+Alternatively, you can do it by terminal (MacOS, linux... and should work as well in Windows with MINGW64). 
 Create a directory and execute `<this_repo>/scripts/build.sh`, which first downloads the Pharo image and VM and then loads the project.
 
 

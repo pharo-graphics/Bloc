@@ -17,7 +17,6 @@ esac
 REPO_DIR="$(dirname "$SCRIPTS_DIR")"
 
 # Get a fresh image and load code
-curl https://get.pharo.org/64/80+vm | bash
+curl https://get.pharo.org/64/90+vm | bash
 ./pharo Pharo.image metacello install "tonel://$REPO_DIR/src" BaselineOfNewBloc
-#./pharo Pharo.image metacello install "tonel://$REPO_DIR/src" BaselineOfBlocSparta
-#./pharo Pharo.image metacello install "tonel://$REPO_DIR/src" BaselineOfBlocMorphic
+
