@@ -21,38 +21,15 @@ form destroySurface.
 "
 Class {
 	#name : #BlExternalForm,
-	#superclass : #Form,
+	#superclass : #OSSDL2ExternalForm,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#instVars : [
-		'pointer'
-	],
 	#category : #'BlocHost-Morphic-Host - Common'
 }
-
-{ #category : #initialize }
-BlExternalForm >> allocateSpace [
-	"Convenient way to allocate space for the pixels.  This isn't done by default, because it is common to use a pointer obtained from elsewhere."
-	| addr |
-	pointer ifNotNil: [self error: 'space is already allocated'].
-	addr := ExternalAddress gcallocate: width*height * depth/8. "area times bytes/pixel"
-	self setManualSurfacePointer: addr.
-]
 
 { #category : #'external resource management' }
 BlExternalForm >> autoRelease [
 	^ self class finalizationRegistry add: self
-]
-
-{ #category : #initialize }
-BlExternalForm >> destroySurface [
-	"Users must call this explicitly when this object is no longer needed; otherwise, resource-leakage will occur in the SurfacePlugin"
-
-	bits ifNotNil: [:surfaceID |
-		bits := nil.
-		[ self primDestroyManualSurface: surfaceID ]
-			on: PrimitiveFailed
-			do: [ "Surface is already destroyed" ] ]
 ]
 
 { #category : #finalization }
@@ -62,43 +39,9 @@ BlExternalForm >> finalize [
 	self destroySurface
 ]
 
-{ #category : #initialization }
-BlExternalForm >> initialize [
-	super initialize.
-	
-	pointer := nil
-]
-
 { #category : #testing }
 BlExternalForm >> isNull [
 	^ pointer isNil or: [ pointer isNull ]
-]
-
-{ #category : #accessing }
-BlExternalForm >> pointer [
-	^pointer
-]
-
-{ #category : #primitives }
-BlExternalForm >> primCreateManualSurfaceWidth: width height: height rowPitch: rowPitch depth: depth isMSB: isMSB [
-	<primitive: 'primitiveCreateManualSurface' module: 'SqueakFFIPrims'>
-	self primitiveFailed
-
-]
-
-{ #category : #primitives }
-BlExternalForm >> primDestroyManualSurface: surfaceID [
-	<primitive: 'primitiveDestroyManualSurface' module: 'SqueakFFIPrims'>
-	self primitiveFailed
-
-]
-
-{ #category : #primitives }
-BlExternalForm >> primManualSurface: surfaceID setPointer: pointer [
-	"The 'surfaceID' is a handle returned by #primitiveCreateManualSurface from SurfacePlugin. The pointer is a 32-bit unsigned integer that SurfacePlugin casts to a void*."
-	<primitive: 'primitiveSetManualSurfacePointer' module: 'SqueakFFIPrims'>
-	self primitiveFailed
-
 ]
 
 { #category : #initialize }
@@ -116,30 +59,6 @@ BlExternalForm >> setExtent: extent depth: bitsPerPixel [
 		rowPitch: self stride
 		depth: bitsPerPixel
 		isMSB: true.
-]
-
-{ #category : #initialize }
-BlExternalForm >> setExtent: extent depth: bitsPerPixel bits: pointer [
-	self setExtent: extent depth: bitsPerPixel.
-	self setManualSurfacePointer: pointer.
-]
-
-{ #category : #initialize }
-BlExternalForm >> setManualSurfacePointer: newPointer [ "ExternalStructure, ExternalAddress, or nil"
-	"Set the memory-location of the image data.  It is OK to set a NULL pointer;
-	 in this case, any attempt to BitBlt to or from the form will result in a primitive-failure."
-	pointer := newPointer.
-	pointer ifNil: [^self primManualSurface: bits setPointer: 0].
-	pointer isExternalAddress
-		ifFalse: ["must already be ExternalStructure, so nothing to do"]
-		ifTrue: [pointer := ExternalData 
-							fromHandle: newPointer 
-							type: ExternalType void asPointerType].
-	"The primitive expects an unsigned integer arg, not an ExternalAddress."
-	"NOTE: it used to be acceptable for 'newPointer' to be an Integer... 
-	 if you get a MNU for #getHandle here, you should update your code 
-	 to pass in either an ExternalStructure or an ExternalAddress."
-	self primManualSurface: bits setPointer: pointer getHandle asInteger
 ]
 
 { #category : #accessing }
