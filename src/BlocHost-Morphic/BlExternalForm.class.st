@@ -29,14 +29,15 @@ Class {
 
 { #category : #'external resource management' }
 BlExternalForm >> autoRelease [
+
 	^ self class finalizationRegistry add: self
 ]
 
 { #category : #finalization }
 BlExternalForm >> finalize [
+
 	super finalize.
-	
-	self destroySurface
+	self isNull ifFalse: [ self destroySurface ]
 ]
 
 { #category : #testing }
