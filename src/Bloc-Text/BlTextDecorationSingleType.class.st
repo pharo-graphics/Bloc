@@ -41,22 +41,6 @@ BlTextDecorationSingleType >> = anObject [
 	^ self class = anObject class
 ]
 
-{ #category : #'gt-extension' }
-BlTextDecorationSingleType >> gtPreviewFor: aView [
-	<gtView>
-
-	self class isAbstract
-		ifTrue: [ ^ aView empty ].
-	
-	^ aView text
-		title: 'Preview';
-		priority: 1;
-		text: [
-			self class label asRopedText
-				fontSize: 20;
-				decorationDo: [ :aTextDecorationAttribute | aTextDecorationAttribute decoration type: self ] ]
-]
-
 { #category : #comparing }
 BlTextDecorationSingleType >> hash [
 	"Answer an integer value that is related to the identity of the receiver."

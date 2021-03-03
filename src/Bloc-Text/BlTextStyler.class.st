@@ -31,21 +31,6 @@ BlTextStyler >> fireStyledEventForText: aStyledText andAfterAction: aBlock [
 	self fireEvent: (BlTextStyledEvent new text: aStyledText; afterAction: aBlock)
 ]
 
-{ #category : #'gt-extension' }
-BlTextStyler >> gtStylesFor: aView [
-	<gtView>
-	
-	self stylers
-		ifEmpty: [ ^ aView empty ].
-	
-	^ aView tree
-		title: 'Styles';
-		priority: 5;
-		items: [ { self } ];
-		children: #stylers;
-		expandAll
-]
-
 { #category : #initialization }
 BlTextStyler >> initialize [
 	super initialize.

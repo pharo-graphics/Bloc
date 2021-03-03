@@ -53,22 +53,6 @@ BlTextDecoration >> double [
 	self style: BlTextDecorationStyle double
 ]
 
-{ #category : #'gt-extension' }
-BlTextDecoration >> gtPreviewFor: aView [
-	<gtView>
-
-	self class isAbstract
-		ifTrue: [ ^ aView empty ].
-	
-	^ aView text
-		title: 'Preview';
-		priority: 1;
-		text: [
-			'Decoration' asRopedText
-				fontSize: 20;
-				decorationDo: [ :aTextDecorationAttribute | aTextDecorationAttribute decoration: self ] ]
-]
-
 { #category : #comparing }
 BlTextDecoration >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
