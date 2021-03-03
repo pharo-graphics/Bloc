@@ -13,17 +13,6 @@ BlTelemetrySignal >> duration [
 ]
 
 { #category : #accessing }
-BlTelemetrySignal >> gtMapFor: aView [
-	<gtView>
-	
-	^ aView forward
-		title: 'Map';
-		priority: 0;
-		object: [ self task ];
-		view: #gtMapFor:
-]
-
-{ #category : #accessing }
 BlTelemetrySignal >> task [
 	<return: #BlTelemetryTask>
 

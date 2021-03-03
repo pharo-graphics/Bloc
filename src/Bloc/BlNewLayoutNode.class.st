@@ -70,17 +70,6 @@ BlNewLayoutNode >> extentSpec: aBlExtentMeasurementSpec [
 	extentSpec := aBlExtentMeasurementSpec
 ]
 
-{ #category : #ui }
-BlNewLayoutNode >> gtChildrenFor: aView [
-	<gtView>
-	
-	^ aView forward
-		title: 'Children';
-		priority: 5;
-		object: [ self children ];
-		view: #gtChildrenFor:
-]
-
 { #category : #initialization }
 BlNewLayoutNode >> initialize [
 	super initialize.

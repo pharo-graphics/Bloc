@@ -74,15 +74,6 @@ BlSharedEventDistributor >> eventsToHandle [
 	^ handledEvents
 ]
 
-{ #category : #'gt-extension' }
-BlSharedEventDistributor >> gtRegisteredElementsFor: aView [
-	<gtView>
-	elements ifNil: [ ^ aView empty ].
-	elements ifEmpty: [ ^ aView empty ].
-	^ (elements gtItemsFor: aView)
-		title: 'Registered Elements'
-]
-
 { #category : #'api - event managing' }
 BlSharedEventDistributor >> handleEvent: anEvent [
 
