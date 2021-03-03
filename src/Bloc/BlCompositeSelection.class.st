@@ -87,11 +87,6 @@ BlCompositeSelection >> from [
 	^ selections first selection from
 ]
 
-{ #category : #printing }
-BlCompositeSelection >> gtDisplayOn: aStream [
-	self printOn: aStream
-]
-
 { #category : #comparing }
 BlCompositeSelection >> hash [
 	^ self class hash bitXor: self selections hash
