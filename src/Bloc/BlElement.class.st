@@ -1647,11 +1647,6 @@ BlElement >> globalScale [
 	^ (aGlobalOrigin distanceTo: aGlobalCorner) / (anOrigin distanceTo: aCorner)
 ]
 
-{ #category : #printing }
-BlElement >> gtDisplayOn: aStream [
-	self printOn: aStream
-]
-
 { #category : #'children testing' }
 BlElement >> hasChild: anElement [
 	<return: #Boolean>
