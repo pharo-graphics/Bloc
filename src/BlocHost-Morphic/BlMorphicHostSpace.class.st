@@ -78,11 +78,6 @@ BlMorphicHostSpace >> generateEvents [
 	spaceHostMorph world ifNil: [ spaceHostMorph announceDeleted ]
 ]
 
-{ #category : #initialization }
-BlMorphicHostSpace >> initialize [
-	super initialize
-]
-
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
