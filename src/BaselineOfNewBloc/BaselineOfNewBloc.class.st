@@ -33,5 +33,13 @@ BaselineOfNewBloc >> baseline: spec [
 
 			spec
 				group: 'default'
-				with: #('Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout) ]
+				with: #('Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout) ].
+			
+		
+	spec
+		for: #'pharo8.x'
+		do: [
+			spec
+				group: 'default'
+				with: #(BlocSparta BlocMorphic BlocLayout) ].
 ]
