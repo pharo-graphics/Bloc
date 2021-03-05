@@ -26,7 +26,12 @@ BaselineOfNewBloc >> baseline: spec [
 					with: [ spec repository: 'github://pharo-graphics/Bloc/src' ];
 				baseline: 'BlocSparta'
 					with: [ spec repository: 'github://pharo-graphics/Bloc/src' ].
+
+			spec 
+				package: #'Bloc-Spec2';
+				package: #'Bloc-Spec2-Tests' with: [ spec requires: #('Bloc-Spec2' ) ].
+
 			spec
 				group: 'default'
-				with: #(BlocSparta BlocMorphic BlocLayout) ]
+				with: #('Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout) ]
 ]
