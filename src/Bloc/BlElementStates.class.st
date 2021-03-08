@@ -77,6 +77,11 @@ BlElementStates >> inheritedStates: aSetOfStates [
 	self onStatesChanged
 ]
 
+{ #category : #accessing }
+BlElementStates >> inheritedStatesCopy [
+	^ inheritedStates copy
+]
+
 { #category : #initialization }
 BlElementStates >> initialize [
 	super initialize.
@@ -97,6 +102,11 @@ BlElementStates >> isEnabled [
 	^ self isDisabled not
 ]
 
+{ #category : #accessing }
+BlElementStates >> localStatesCopy [
+	^ localStates copy
+]
+
 { #category : #private }
 BlElementStates >> onStatesChanged [
 
@@ -104,6 +114,11 @@ BlElementStates >> onStatesChanged [
 	announcer
 		ifNil: [ ^ self ].
 	announcer announce: #statesChanged
+]
+
+{ #category : #private }
+BlElementStates >> privateLocalStates [
+	^ localStates
 ]
 
 { #category : #adding }

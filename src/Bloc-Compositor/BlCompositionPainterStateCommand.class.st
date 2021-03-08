@@ -33,6 +33,11 @@ BlCompositionPainterStateCommand >> offset: anObject [
 ]
 
 { #category : #hook }
+BlCompositionPainterStateCommand >> popOn: aCanvas [
+	self subclassResponsibility
+]
+
+{ #category : #hook }
 BlCompositionPainterStateCommand >> pushOn: aCanvas [
 	self subclassResponsibility
 ]

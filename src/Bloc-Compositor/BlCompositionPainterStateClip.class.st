@@ -50,6 +50,11 @@ BlCompositionPainterStateClip >> multiplyOn: aBlMatrix2D [
 ]
 
 { #category : #hook }
+BlCompositionPainterStateClip >> popOn: aCanvas [
+	aCanvas clip pop
+]
+
+{ #category : #hook }
 BlCompositionPainterStateClip >> pushOn: aCanvas [
 	aCanvas clip push: clip offset: offset
 ]

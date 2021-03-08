@@ -111,7 +111,7 @@ BlCompositionPainter >> addLayer: aCompositionLayer [
 { #category : #'private - layer' }
 BlCompositionPainter >> applyClip: aClipPath offset: anOffset thenPaint: aPaintBlock [
 	<argument: #anOffset satisfies: #isSpartaScalarPoint>
-
+	
 	self canvasDo: [ :aCanvas |
 		aCanvas clip push: aClipPath offset: anOffset ].
 	state pushClip: aClipPath offset: anOffset.
@@ -137,23 +137,20 @@ BlCompositionPainter >> applyShadow: aShadowPath shadowOffset: aShadowOffset sha
 
 { #category : #'private - layer' }
 BlCompositionPainter >> applyTransform: aMatrix offset: anOffset thenPaint: aPaintBlock [
-	| aTransform |
-
-	aTransform := self
-		canvasDo: [ :aCanvas |
-			aCanvas transform
-				translateBy: anOffset;
-				multiplyBy: aMatrix;
-				push ]
-		ifAbsent: [ nil ].
+	| thePoppedState |
+	
+	self canvasDo: [ :aCanvas |
+		aCanvas transform
+			translateBy: anOffset;
+			multiplyBy: aMatrix;
+			push ].
 	
 	state pushTransform: aMatrix offset: anOffset.
 	
 	aPaintBlock cull: self cull: 0@0.
-	
-	self canvasDo: [ :aCanvas | aTransform ifNotNil: [ aCanvas transform pop: aTransform ] ].
 
-	state pop
+	thePoppedState := state pop.
+	self canvasDo: [ :aCanvas | thePoppedState popOn: aCanvas ]
 ]
 
 { #category : #converting }
