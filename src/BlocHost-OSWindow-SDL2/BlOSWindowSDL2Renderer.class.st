@@ -33,8 +33,8 @@ BlOSWindowSDL2Renderer >> canvasExtent [
 	width := FFIExternalArray externalNewType: 'int' size: 1.
 	height := FFIExternalArray externalNewType: 'int' size: 1.
 
-	window handle
-		osWindowHostGetRendererSize: window handle osWindowHostGetRenderer
+	backendWindow sdl2Window
+		osWindowHostGetRendererSize: backendWindow sdl2Window osWindowHostGetRenderer
 		width: width getHandle
 		height: height getHandle.
 	extent := (width at: 1) @ (height at: 1).
@@ -58,8 +58,8 @@ BlOSWindowSDL2Renderer >> initialize [
 { #category : #initialization }
 BlOSWindowSDL2Renderer >> initializeWindowHandle: aWindowHandle [
 
-	self window: aWindowHandle.
-	renderer := window handle createRenderer: -1 flags: SDL_RENDERER_ACCELERATED
+	self backendWindow: aWindowHandle.
+	renderer := backendWindow sdl2Window createAcceleratedRenderer
 ]
 
 { #category : #'updating screen' }

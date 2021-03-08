@@ -245,6 +245,9 @@ BlOSWindowEventHandler >> visitTouchActionPointerDownEvent: anEvent [
 { #category : #'visiting - touch' }
 BlOSWindowEventHandler >> visitTouchActionPointerMoveEvent: anEvent [
 	| aBlocEvent |
+	
+	true ifTrue: [ ^ self ].
+
 	aBlocEvent := BlTouchMoveEvent new
 		position:
 			window logicalSize width @ window logicalSize height

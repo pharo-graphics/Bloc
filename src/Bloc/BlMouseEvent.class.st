@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'position',
 		'screenPosition',
-		'button'
+		'button',
+		'delta'
 	],
 	#category : #'Bloc-Events'
 }
@@ -142,6 +143,16 @@ BlMouseEvent >> button [
 { #category : #accessing }
 BlMouseEvent >> button: aBlMouseButton [
 	button := aBlMouseButton
+]
+
+{ #category : #accessing }
+BlMouseEvent >> delta [
+	^ delta
+]
+
+{ #category : #accessing }
+BlMouseEvent >> delta: aPoint [
+	delta := aPoint
 ]
 
 { #category : #testing }

@@ -21,6 +21,11 @@ OSWindow >> minimized [
 ]
 
 { #category : #'*BlocHost-OSWindow' }
+OSWindow >> newBlocRenderer [
+	^ self validHandle newBlocRenderer
+]
+
+{ #category : #'*BlocHost-OSWindow' }
 OSWindow >> windowExtent [
 	^ self extent
 ]

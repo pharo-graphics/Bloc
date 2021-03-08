@@ -1,32 +1,32 @@
-Extension { #name : #OSWindowHandle }
+Extension { #name : #OSBackendWindow }
 
 { #category : #'*BlocHost-OSWindow' }
-OSWindowHandle >> canvasExtent [
+OSBackendWindow >> canvasExtent [
 	^ renderer canvasExtent
 ]
 
 { #category : #'*BlocHost-OSWindow' }
-OSWindowHandle >> fullscreen [
+OSBackendWindow >> fullscreen [
 	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'*BlocHost-OSWindow' }
-OSWindowHandle >> maximized [
+OSBackendWindow >> maximized [
 	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'*BlocHost-OSWindow' }
-OSWindowHandle >> minimized [
+OSBackendWindow >> minimized [
 	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'*BlocHost-OSWindow' }
-OSWindowHandle >> newBlocRenderer [
+OSBackendWindow >> newBlocRenderer [
 	^ self subclassResponsibility
 ]

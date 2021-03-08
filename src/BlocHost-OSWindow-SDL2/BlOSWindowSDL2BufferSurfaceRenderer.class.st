@@ -22,7 +22,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aSurface [
 		createRGBSurfaceForCairoWidth: textureExtent x
 		height: textureExtent y.
 
-	renderer := window handle renderer renderer.
+	renderer := window backendWindow  renderer renderer.
 
 	texture := renderer
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888

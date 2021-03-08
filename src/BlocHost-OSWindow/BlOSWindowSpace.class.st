@@ -141,11 +141,11 @@ BlOSWindowSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
-	<return: #GtFensterLogicalSize>
-	| anExtent |
+	<return: #FensterLogicalSize>
 
+	| anExtent |
 	anExtent := window extent.
-	^ GtFensterLogicalSize width: anExtent x height: anExtent y
+	^ FensterLogicalSize width: anExtent x height: anExtent y
 ]
 
 { #category : #'host space - displaying' }
@@ -186,11 +186,11 @@ BlOSWindowSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
 	In most cases physical size is x2 larger than logical size on retina screens."
-	<return: #GtFensterPhysicalSize>
-	| anExtent |
+	<return: #FensterPhysicalSize>
 
+	| anExtent |
 	anExtent := window canvasExtent.
-	^ GtFensterPhysicalSize width: anExtent x height: anExtent y
+	^ FensterPhysicalSize width: anExtent x height: anExtent y
 ]
 
 { #category : #'host space - geometry' }
