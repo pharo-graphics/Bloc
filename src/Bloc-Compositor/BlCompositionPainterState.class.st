@@ -46,7 +46,7 @@ BlCompositionPainterState >> isEmpty [
 
 { #category : #'api - commands' }
 BlCompositionPainterState >> pop [
-	commands pop
+	^ commands pop
 ]
 
 { #category : #copying }
