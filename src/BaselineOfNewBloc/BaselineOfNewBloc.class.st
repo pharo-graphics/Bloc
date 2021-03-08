@@ -25,6 +25,8 @@ BaselineOfNewBloc >> baseline: spec [
 				baseline: 'BlocMorphic'
 					with: [ spec repository: 'github://pharo-graphics/Bloc/src' ];
 				baseline: 'BlocSparta'
+					with: [ spec repository: 'github://pharo-graphics/Bloc/src' ];
+				baseline: 'BlocOSWindow'
 					with: [ spec repository: 'github://pharo-graphics/Bloc/src' ].
 			spec
 				group: 'default'

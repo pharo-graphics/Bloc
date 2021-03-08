@@ -10,15 +10,15 @@ BaselineOfBlocOSWindow >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'BlocCore' with: [
-				spec repository: 'github://feenkcom/Bloc/src' ];
-			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
+				spec repository: 'github://pharo-graphics/Bloc/src' ];
+"			baseline: 'Beacon' with: [
+				spec repository: 'github://pharo-graphics/pharo-beacon/repository' ];"
 			baseline: 'Fenster' with: [
-				spec repository: 'github://feenkcom/fenster/src' ].
+				spec repository: 'github://pharo-graphics/fenster/src' ].
 
 		spec
 			package: #'BlocHost-OSWindow' with: [
-				spec requires: #(#BlocCore #Fenster #Beacon). ];
+				spec requires: #(#BlocCore #Fenster "#Beacon"). ];
 			package: #'BlocHost-OSWindow-SDL2' with: [
 				spec requires: #(#'BlocHost-OSWindow'). ] ].
 ]
