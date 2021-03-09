@@ -186,9 +186,7 @@ BlOSWindowSpace >> physicalSize [
 	In most cases physical size is x2 larger than logical size on retina screens."
 	<return: #FensterPhysicalSize>
 
-	| anExtent |
-	anExtent := window canvasExtent.
-	^ FensterPhysicalSize width: anExtent x height: anExtent y
+	^ window canvasExtent asPhysicalSize
 ]
 
 { #category : #'host space - geometry' }
