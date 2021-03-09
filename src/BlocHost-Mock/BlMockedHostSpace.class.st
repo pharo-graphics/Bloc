@@ -289,5 +289,5 @@ BlMockedHostSpace >> title: aString [
 
 { #category : #'host space - geometry' }
 BlMockedHostSpace >> windowExtent: anExtent [
-	logicalSize := FensterLogicalSize width: anExtent x height: anExtent y
+	logicalSize := anExtent asLogicalSize
 ]

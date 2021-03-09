@@ -143,9 +143,7 @@ BlOSWindowSpace >> logicalSize [
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 	<return: #FensterLogicalSize>
 
-	| anExtent |
-	anExtent := window extent.
-	^ FensterLogicalSize width: anExtent x height: anExtent y
+	^ window extent asLogicalSize
 ]
 
 { #category : #'host space - displaying' }

@@ -85,9 +85,7 @@ BlMorphicHostSpace >> logicalSize [
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 	<return: #FensterLogicalSize>
 
-	^ FensterLogicalSize
-		width: spaceHostMorph width
-		height: spaceHostMorph height
+	^ spaceHostMorph extent asLogicalSize
 ]
 
 { #category : #'host space - testing' }

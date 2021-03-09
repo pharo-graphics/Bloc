@@ -95,9 +95,7 @@ BlMorphicWindowHostSpace >> logicalSize [
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 	<return: #FensterLogicalSize>
 
-	^ FensterLogicalSize
-		width: morphicWindow spaceExtent x
-		height: morphicWindow spaceExtent y
+	^ morphicWindow spaceExtent asLogicalSize
 ]
 
 { #category : #'private - accessing' }
