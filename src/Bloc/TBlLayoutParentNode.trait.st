@@ -42,6 +42,11 @@ TBlLayoutParentNode >> extentSpec: aBlExtentMeasurementSpec [
 	self explicitRequirement
 ]
 
+{ #category : #'api - geometry' }
+TBlLayoutParentNode >> height [
+	^ self extent height
+]
+
 { #category : #'api - extent spec' }
 TBlLayoutParentNode >> heightSpec [
 	^ self extentSpec heightSpec
@@ -91,6 +96,11 @@ TBlLayoutParentNode >> position [
 { #category : #accessing }
 TBlLayoutParentNode >> position: aPoint [
 	^ self explicitRequirement
+]
+
+{ #category : #'api - geometry' }
+TBlLayoutParentNode >> width [
+	^ self extent x
 ]
 
 { #category : #'api - extent spec' }

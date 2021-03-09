@@ -21,6 +21,11 @@ TBlLayoutNode >> fitContent [
 ]
 
 { #category : #'api - resizer' }
+TBlLayoutNode >> hExact: aNumber [
+	self constraints horizontal exact: aNumber
+]
+
+{ #category : #'api - resizer' }
 TBlLayoutNode >> hFitContent [
 	self constraints horizontal fitContent
 ]
