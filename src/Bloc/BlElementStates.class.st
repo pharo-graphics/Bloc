@@ -152,6 +152,15 @@ BlElementStates >> removeStatesSuchThat: aBlock [
 ]
 
 { #category : #accessing }
+BlElementStates >> stateLike: aBlElementState ifFound: aFoundBlock ifNone: aNoneBlock [
+	^ (localStates
+		like: aBlElementState
+		ifAbsent: [ nil ])
+			ifNil: aNoneBlock
+			ifNotNil: aFoundBlock
+]
+
+{ #category : #accessing }
 BlElementStates >> statesToInherit [
 	<return: #BlElementStatesSet>
 	| theAllStates |
