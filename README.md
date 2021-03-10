@@ -3,15 +3,11 @@
 [![License](https://img.shields.io/github/license/pharo-graphics/Bloc.svg?style=flat-square)][license]
 ![Complete Test](https://github.com/pharo-graphics/Bloc/workflows/Complete%20Test/badge.svg)
 
-[Installation](#installation) | [Contributing](#contributing) |  [License](#license)
-
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
 :warning:
 This repository contains the code for Bloc that may be included in the future in Pharo.
-It retrofits a part of the development made at http://github.com/feenkcom/bloc.  
-This version will focus on core features and stability.  
-We are currently identifying the core we want for Pharo.
+It retrofits a part of the development made at http://github.com/feenkcom/bloc. This version will focus on core features and stability. We are currently identifying the core we want for Pharo.
 
 ## Installation
 
