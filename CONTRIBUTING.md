@@ -2,28 +2,6 @@
 
 The following is a set of guidelines for contributing to [Bloc](https://github.com/pharo-graphics/Bloc), which are hosted in the [Pharo Graphics Organization](https://github.com/pharo-graphics) on GitHub.
 
-#### Table Of Contents
-* [What should I know before I get started?](#what-should-i-know-before-i-get-started)
-  * [*User* and *Developer* versions](#user-and-developer-versions)
-  * [Design Decisions](#design-decisions)
-* [How Can I Contribute?](#how-can-i-contribute)
-  * [Reporting Bugs](#reporting-bugs-and-suggesting-enhancements)
-  * [Submitting changes](#submitting-changes)
-
-## What should I know before I get started?
-
-### *User* and *Developer* versions
-
-To load the sources in a Pharo image, you have the choice between the *User* and *Developer* versions. 
-More detailed informations are available [here](INSTALL.md).
-
-Being able to load the *Developer* version does not necessarily mean that you are allowed to contribute directly on the *master* branch. Only members of the [Pharo Graphics Organization](https://github.com/orgs/pharo-graphics/people) are able to make direct contributions ([How Can I Contribute?](#how-can-i-contribute)).
-  
-
-### Design Decisions
-
-When we make a significant decision, we will document it in [Issues](https://github.com/issues?q=is%3Aissue+user%3Apharo-graphics+sort%3Acomments-desc) or/and in [pharo-graphics/design-decisions repository](https://github.com/pharo-graphics/design-decisions) (soon). If you have a question around how we do things, check also to see if it is documented [there](https://github.com/pharo-graphics/Bloc/wiki). If it is *not* documented there, please open a new topic on [Issues](https://github.com/pharo-graphics/Bloc/issues) and ask your question.
-
 
 ## How Can I Contribute?
 

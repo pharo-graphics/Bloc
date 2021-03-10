@@ -28,14 +28,9 @@ Alternatively, you can do it by terminal (MacOS, linux... and should work as wel
 Create a directory and execute `<this_repo>/scripts/build.sh`, which first downloads the Pharo image and VM and then loads the project.
 
 
-## Contributing
+## License and Contributing
 
-Want to contribute on Bloc? Awesome!
-Get the latest versions, run the tests and you can start sending PR.
-
-## License
-
-Licensed under the [MIT license][license].
+This code is licensed under the [MIT license][license].
 
 [license]: ./LICENSE
 [contributing]: ./CONTRIBUTING.md
