@@ -25,10 +25,15 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlTextForegroundAttribute class >> paint: aPaint [
+BlTextForegroundAttribute class >> color: aColor [
 	^ self new
-		paint: aPaint;
+		paint: aColor;
 		yourself
+]
+
+{ #category : #'instance creation' }
+BlTextForegroundAttribute class >> paint: aPaint [
+	^ self color: aPaint
 ]
 
 { #category : #comparing }
@@ -53,6 +58,10 @@ BlTextForegroundAttribute >> paint: aPaint [
 	self
 		assert: [ paint isNil ]
 		description: [ 'I am immutable and can not be modified' ].
+		
+	self
+		assert: [ aPaint isColor ]
+		description: [ 'Foreground must be a color' ].
 
 	paint := aPaint
 ]
