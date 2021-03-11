@@ -30,7 +30,7 @@ BaselineOfNewBloc >> baseline: spec [
 					with: [ spec repository: 'github://pharo-graphics/Bloc/src' ].
 			spec
 				group: 'default'
-				with: #(BlocSparta BlocMorphic BlocLayout) ].
+				with: #(BlocSparta BlocMorphic BlocLayout BlocOSWindow) ].
 
 	spec
 		for: #'pharo9.x'
@@ -40,5 +40,5 @@ BaselineOfNewBloc >> baseline: spec [
 				package: #'Bloc-Spec2-Tests' with: [ spec requires: #('Bloc-Spec2' ) ].
 			spec
 				group: 'default'
-				with: #('Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout) ].
+				with: #('Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout BlocOSWindow) ].
 ]
