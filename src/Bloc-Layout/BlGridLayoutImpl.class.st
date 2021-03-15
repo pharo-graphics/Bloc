@@ -274,7 +274,8 @@ BlGridLayoutImpl >> measure: anElement with: anExtentSpec [
 	widthSpecSansPadding := self adjust: widthSpec by: hPadding negated.
 	heightSpecSansPadding := self adjust: heightSpec by: vPadding negated.
 
-	self measurer measureChildren: anElement parentSpec: anExtentSpec isFirstPass: true.
+	anElement ignoreRequestLayoutDuring: [
+		self measurer measureChildren: anElement parentSpec: anExtentSpec isFirstPass: true ].
 
 	self orientation isHorizontal
 		ifTrue: [
