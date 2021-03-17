@@ -48,6 +48,11 @@ BlElementId >> indexed: anIndex [
 		index: anIndex
 ]
 
+{ #category : #testing }
+BlElementId >> isIndexed [
+	^ false
+]
+
 { #category : #printing }
 BlElementId >> printOn: aStream [
 	self class isAbstract
