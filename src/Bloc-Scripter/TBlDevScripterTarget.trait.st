@@ -17,6 +17,12 @@ TBlDevScripterTarget >> id: aBlElementId [
 ]
 
 { #category : #'targets - children' }
+TBlDevScripterTarget >> id: aBlElementId index: anIndex [
+	"Find the Nth element with a given index"
+	self updateTarget: (BlDevScripterElementIdEventTarget new elementId: aBlElementId; index: anIndex)
+]
+
+{ #category : #'targets - children' }
 TBlDevScripterTarget >> onAllChildrenBreadthFirst [
 	self updateTarget: (BlDevScripterAllChildrenBreadthFirstEventTarget new)
 ]

@@ -17,6 +17,11 @@ BlElementUniqueId class >> asBlocElementId [
 	^ self uniqueInstance
 ]
 
+{ #category : #converting }
+BlElementUniqueId class >> asSymbol [
+	^ self uniqueInstance asSymbol
+]
+
 { #category : #accessing }
 BlElementUniqueId class >> cleanUp [
 	uniqueInstance := nil
