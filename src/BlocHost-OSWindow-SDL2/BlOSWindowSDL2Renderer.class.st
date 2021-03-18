@@ -15,7 +15,9 @@ Class {
 
 { #category : #'instance creation' }
 BlOSWindowSDL2Renderer class >> for: aWindowHandle [
-	^ self new
+
+	^ self basicNew
+		initialize;
 		initializeWindowHandle: aWindowHandle;
 		yourself
 ]
