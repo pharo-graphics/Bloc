@@ -178,12 +178,6 @@ BlSubRope >> iterator: aStart to: anEnd [
 	^ BlSubRopeIterator rope: self from: aStart to: anEnd
 ]
 
-{ #category : #'text - converting' }
-BlSubRope >> normalized [ 
-
-	^ (self rope copyFrom: offset to: offset + length) normalized
-]
-
 { #category : #accessing }
 BlSubRope >> offset [
 	<return: #Number>
