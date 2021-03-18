@@ -39,7 +39,7 @@ BlRopedText class >> string: aString [
 	"Take the supplied string like object, convert it to a normalised string and answer as roped text"
 	<return: #BlRopedText>
 
-	^ self rope: (BlCollectionRope collection: (BlStringNormalizer new process: aString))
+	^ self rope: (BlCollectionRope collection: aString)
 ]
 
 { #category : #'text - converting' }
@@ -233,13 +233,10 @@ BlRopedText >> insertItems: aCollectionOfCollectionsOfItems atAll: aCollectionOf
 
 { #category : #'text - modifications' }
 BlRopedText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
-	| theProcessedStrings |
-	
-	theProcessedStrings := aCollectionOfStrings collect: [ :eachString | BlStringNormalizer new process: eachString ].
 	self
-		notifyStringsInserted: (theProcessedStrings collect: [ :eachProcessedString | (self class items: eachProcessedString) characters asString ])
+		notifyStringsInserted: aCollectionOfStrings
 		atAll: (self
-			insertItems: theProcessedStrings
+			insertItems: aCollectionOfStrings
 			atAll: aCollectionOfIndices)
 		requested: aCollectionOfIndices
 ]
@@ -288,12 +285,6 @@ BlRopedText >> iterator: aFromIndex to: aToIndex [
 		description: [ 'Start and end must be positive or both zero' ].
 
 	^ BlRopedTextIterator text: self from: aFromIndex to: aToIndex
-]
-
-{ #category : #'text - converting' }
-BlRopedText >> normalized [
-	
-	^ self class rope: rope normalized
 ]
 
 { #category : #accessing }

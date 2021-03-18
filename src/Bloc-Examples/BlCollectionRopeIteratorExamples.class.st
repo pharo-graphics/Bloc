@@ -4,6 +4,274 @@ Class {
 	#category : #'Bloc-Examples-Rope'
 }
 
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineIndicesWithCrlf_0 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := (BlCollectionRope collection: ('Line 1', String crlf, 'Line 2', String crlf, String crlf, 'Line 4')) iterator.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 8.
+	self assert: aNextLine equals: {  0 . 6 . 8 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 1'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineIndicesWithCrlf_08 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineIndicesWithCrlf_0.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 16.
+	self assert: aNextLine equals: {  8 . 14 . 16 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 2'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineIndicesWithCrlf_16 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineIndicesWithCrlf_08.
+	
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 18.
+	self assert: aNextLine equals: { 16 . 16 . 18 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: ''.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineIndicesWithCrlf_18 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineIndicesWithCrlf_16.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 24.
+	self assert: aNextLine equals: {  18 . 24 . 24 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 4'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithCr_0 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := (BlCollectionRope collection: ('Line 1', String cr, 'Line 2', String cr, String cr, 'Line 4')) iterator.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 7.
+	self assert: aNextLine equals: {  0 . 6 . 7 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 1'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithCr_07 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineWithCr_0.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 14.
+	self assert: aNextLine equals: {  7 . 13 . 14 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 2'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithCr_14 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineWithCr_07.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 15.
+	self assert: aNextLine equals: {  14 . 14 . 15 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: ''.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithCr_15 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineWithCr_14.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 21.
+	self assert: aNextLine equals: {  15 . 21 . 21 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 4'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithCrlf [
+	<gtExample>
+	| anIterator |
+	
+	anIterator := (BlCollectionRope collection: ('Line 1', String crlf, 'Line 2', String crlf, String crlf, 'Line 4')) iterator.
+
+	self assert: anIterator nextLine asString equals: 'Line 1'.
+	self assert: anIterator nextLine asString equals: 'Line 2'.
+	self assert: anIterator nextLine asString equals: ''.
+	self assert: anIterator nextLine asString equals: 'Line 4'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithLf_0 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := (BlCollectionRope collection: ('Line 1', String lf, 'Line 2', String lf, String lf, 'Line 4')) iterator.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 7.
+	self assert: aNextLine equals: {  0 . 6 . 7 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 1'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithLf_07 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineWithLf_0.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 14.
+	self assert: aNextLine equals: {  7 . 13 . 14 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 2'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithLf_14 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineWithLf_07.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 15.
+	self assert: aNextLine equals: {  14 . 14 . 15 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: ''.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next line' }
+BlCollectionRopeIteratorExamples >> nextLineWithLf_15 [
+	<gtExample>
+	| anIterator aNextLine |
+	
+	anIterator := self nextLineWithLf_14.
+	aNextLine := anIterator nextLineIndicesDo: [ :aLineStart :aLineEnd :aDelimitedEnd |
+		{ aLineStart . aLineEnd . aDelimitedEnd } ].
+	
+	self assert: anIterator position equals: 21.
+	self assert: aNextLine equals: {  15 . 21 . 21 }.
+	self assert: (anIterator rope from: aNextLine first to: aNextLine second) asString equals: 'Line 4'.
+	
+	^ anIterator
+]
+
+{ #category : #'examples - next segment' }
+BlCollectionRopeIteratorExamples >> nextSegmentWithLookAhead_at_0 [
+	<gtExample>
+	| anIterator aSegmentResult |
+	
+	anIterator := self small.
+	
+	aSegmentResult := anIterator
+		nextSegment: [ :aBuffer | aBuffer first = aBuffer second ]
+		indicesDo: [ :aFromIndex :aToIndex :anInitialValue :aFinalValue | { 
+			aFromIndex . aToIndex . anInitialValue . aFinalValue
+		} ]
+		lookahead: 3.
+
+	self assert: aSegmentResult equals: {  0 . 2 . false . true }.
+	self assert: (anIterator rope from: aSegmentResult first to: aSegmentResult second) asString equals: 'He'.
+
+	^ anIterator
+]
+
+{ #category : #'examples - next segment' }
+BlCollectionRopeIteratorExamples >> nextSegmentWithLookAhead_at_3 [
+	<gtExample>
+	| anIterator aSegmentResult |
+	
+	anIterator := self nextSegmentWithLookAhead_at_0.
+	
+	aSegmentResult := anIterator
+		nextSegment: [ :aBuffer | aBuffer first = aBuffer second ]
+		indicesDo: [ :aFromIndex :aToIndex :anInitialValue :aFinalValue | { 
+			aFromIndex . aToIndex . anInitialValue . aFinalValue
+		} ]
+		lookahead: 3.
+
+	self assert: aSegmentResult equals: {  2 . 3 . true . false }.
+	self assert: (anIterator rope from: aSegmentResult first to: aSegmentResult second) asString equals: 'l'.
+
+	^ anIterator
+]
+
+{ #category : #'examples - next segment' }
+BlCollectionRopeIteratorExamples >> nextSegmentWithLookAhead_at_5 [
+	<gtExample>
+	| anIterator aSegmentResult |
+	
+	anIterator := self nextSegmentWithLookAhead_at_3.
+	
+	aSegmentResult := anIterator
+		nextSegment: [ :aBuffer | aBuffer first = aBuffer second ]
+		indicesDo: [ :aFromIndex :aToIndex :anInitialValue :aFinalValue | { 
+			aFromIndex . aToIndex . anInitialValue . aFinalValue
+		} ]
+		lookahead: 3.
+
+	self assert: aSegmentResult equals: {  3 . 5 . false . false }.
+	self assert: (anIterator rope from: aSegmentResult first to: aSegmentResult second) asString equals: 'lo'.
+
+	^ anIterator
+]
+
 { #category : #'instance creation' }
 BlCollectionRopeIteratorExamples >> small [
 	<gtExample>

@@ -188,6 +188,13 @@ BlConcatenationRopeIterator >> position [
 	^ position
 ]
 
+{ #category : #copying }
+BlConcatenationRopeIterator >> postCopy [
+	super postCopy.
+
+	currentIterator := currentIterator copy
+]
+
 { #category : #'iterator - enumeration' }
 BlConcatenationRopeIterator >> previous [
 	<return: #Object>
