@@ -41,6 +41,35 @@ BlBasicShortcut >> combination: anObject [
 	combination := anObject
 ]
 
+{ #category : #'api - combination' }
+BlBasicShortcut >> combinationForMacOS [
+	^ self combination
+]
+
+{ #category : #'api - combination' }
+BlBasicShortcut >> combinationForPlatform [
+	OSPlatform current isMacOS
+		ifTrue: [ ^ self combinationForMacOS ].
+		
+	OSPlatform current isUnix
+		ifTrue: [ ^ self combinationForUnix ].
+		
+	OSPlatform current isWindows
+		ifTrue: [ ^ self combinationForWindows ].
+		
+	^ self combination
+]
+
+{ #category : #'api - combination' }
+BlBasicShortcut >> combinationForUnix [
+	^ self combination
+]
+
+{ #category : #'api - combination' }
+BlBasicShortcut >> combinationForWindows [
+	^ self combination
+]
+
 { #category : #accessing }
 BlBasicShortcut >> description [
 	^ self subclassResponsibility
@@ -55,14 +84,14 @@ BlBasicShortcut >> initialize [
 
 { #category : #'key matching' }
 BlBasicShortcut >> match: anEventBuffer [
-	^ self combination match: anEventBuffer
+	^ self combinationForPlatform match: anEventBuffer
 ]
 
 { #category : #'key matching' }
 BlBasicShortcut >> matches: anKeyboardBuffer [
 	| aCombinationInDNF |
 
-	aCombinationInDNF := self combination accept: BlKeyCombinationConverterDNF new.
+	aCombinationInDNF := self combinationForPlatform accept: BlKeyCombinationConverterDNF new.
 	^ aCombinationInDNF matches: anKeyboardBuffer
 ]
 
