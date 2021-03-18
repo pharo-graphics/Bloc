@@ -89,14 +89,6 @@ BlRopeIterator >> hasPrevious [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - testing' }
-BlRopeIterator >> isLineDelimiter: anItem [
-	"Return true of given item represents a line delimiter symbol, false otherwise"
-	<return: #Boolean>
-
-	^ anItem isLineBreak
-]
-
 { #category : #'iterator - enumeration' }
 BlRopeIterator >> next [
 	"Return next element in the rope"
@@ -119,25 +111,43 @@ BlRopeIterator >> nextLineIndicesDo: anIndicesBlock [
 		- start index of line in cursor coordinates
 		- end index of line without line delimiter in cursor coordinates
 		- end index of line including line delimiter(s) in cursor coordinates"
-	| aLineStart aLineEnd |
+	| aLineStart aLineEnd aDelimitedLineEnd |
 
 	self hasNext
 		ifFalse: [ self errorReachedTheEnd ].
 
-	aLineStart := aLineEnd := self position.
+	aLineStart := aLineEnd := aDelimitedLineEnd := self position.
 
-	(self isLineDelimiter: self peek) ifFalse: [
-		self
-			nextSegment: [ :anItem | self isLineDelimiter: anItem ]
-			indicesDo: [ :aStart :anEnd | aLineEnd := anEnd ] ].
+	self
+		nextSegment: [ :aBuffer |
+			aBuffer first = Character lf
+				ifTrue: [ 1 ]
+				ifFalse: [
+					(aBuffer first = Character cr and: [ aBuffer second ~= Character lf ])
+						ifTrue: [ 1 ]
+						ifFalse: [
+							(aBuffer first = Character cr and: [ aBuffer second = Character lf ])
+								ifTrue: [ 2 ]
+								ifFalse: [ 0 ] ] ] ]
+		indicesDo: [ :aStart :anEnd :anInitialMatchedLength :aFinalMatchedLength |
+			aLineEnd := anInitialMatchedLength > 0
+				ifTrue: [ aStart ]
+				ifFalse: [ anEnd. ].
+			aDelimitedLineEnd := anInitialMatchedLength > 0
+				ifTrue: [ aLineEnd + anInitialMatchedLength ]
+				ifFalse: [ aLineEnd + aFinalMatchedLength ].
 
-	(self hasNext and: [ self isLineDelimiter: self peek ])
-		ifTrue: [ self next ].
+			((aDelimitedLineEnd - anEnd) max: 0)
+				timesRepeat: [
+					self hasNext
+						ifTrue: [ self next ] ] ]
+		lookahead: 2
+		breakWhen: [ :matchedBufferlength | matchedBufferlength > 0 ].
 
 	^ anIndicesBlock
 		value: aLineStart
 		value: aLineEnd
-		value: self position
+		value: aDelimitedLineEnd
 ]
 
 { #category : #'iterator - enumeration' }
@@ -181,6 +191,80 @@ BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 		cull: fromIndex
 		cull: toIndex
 		cull: initialValue
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock lookahead: aLookaheadAmount [
+	"Evaluate aBlock with every item in the forward direction until aBlock returns a different value compared to the value
+	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
+
+	Once completed evaluate anIndicesBlock with the start and end position of the iterator thus defining a homogenous segment
+	for every item of which aBlock returns the same value. The third argument of the anIndicesBlock is (optional) initial value which was used for comparison.
+	Please note, that the result of evaluation of aBlock should not necessarily be a boolean, it can be any object.
+
+	I return the result of evaluation of anIndicesBlock"
+	^ self
+		nextSegment: aBlock
+		indicesDo: anIndicesBlock
+		lookahead: aLookaheadAmount
+		breakWhen: [ :aSegmentValue | false ]
+]
+
+{ #category : #'iterator - enumeration' }
+BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock lookahead: aLookaheadAmount breakWhen: aBreakBlock [
+	"Evaluate aBlock with every item in the forward direction until aBlock returns a different value compared to the value
+	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
+
+	Once completed evaluate anIndicesBlock with the start and end position of the iterator thus defining a homogenous segment
+	for every item of which aBlock returns the same value. The third argument of the anIndicesBlock is (optional) initial value which was used for comparison.
+	Please note, that the result of evaluation of aBlock should not necessarily be a boolean, it can be any object.
+
+	I return the result of evaluation of anIndicesBlock"
+	| fromIndex toIndex lookaheadBuffer lookaheadIterator initialValue currentValue shouldBreak |
+	<return: #Object>
+
+	self hasNext
+		ifFalse: [ self errorReachedTheEnd ].
+	
+	"store position right before iteration"
+	fromIndex := self position.
+
+	"allocate a look ahead buffer that will be used to preload N items before passing to the comparison block"
+	lookaheadBuffer := LinkedList new.
+	lookaheadIterator := self copy.
+
+	aLookaheadAmount timesRepeat: [
+		lookaheadIterator hasNext
+			ifTrue: [ lookaheadBuffer addLast: lookaheadIterator next ]
+			ifFalse: [ lookaheadBuffer addLast: nil ] ].
+	
+	self next.
+	"we want to have homogenous segments, so check what is the initial value"
+	initialValue := aBlock value: lookaheadBuffer.
+	currentValue := initialValue.
+	shouldBreak := aBreakBlock value: currentValue.
+
+	"we skip all items that do not belong to segment"
+	[ shouldBreak not and: [ self hasNext and: [
+		lookaheadBuffer removeFirst.
+			lookaheadIterator hasNext
+				ifTrue: [ lookaheadBuffer addLast: lookaheadIterator peek ]
+				ifFalse: [ lookaheadBuffer addLast: nil ].
+		currentValue := aBlock value: lookaheadBuffer.	
+		shouldBreak := aBreakBlock value: currentValue.
+		currentValue = initialValue ] ] ]
+			whileTrue: [
+				self next .
+				lookaheadIterator hasNext
+					ifTrue: [ lookaheadIterator next ] ].
+
+	toIndex := self position.
+
+	^ anIndicesBlock
+		cull: fromIndex
+		cull: toIndex
+		cull: initialValue
+		cull: currentValue
 ]
 
 { #category : #'iterator - enumeration' }
@@ -267,6 +351,11 @@ BlRopeIterator >> position [
 	<return: #Number>
 
 	^ self subclassResponsibility
+]
+
+{ #category : #copying }
+BlRopeIterator >> postCopy [
+	
 ]
 
 { #category : #'iterator - enumeration' }

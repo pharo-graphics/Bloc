@@ -195,7 +195,7 @@ BlRopeableCollectionFile >> do: aBlock [
 { #category : #private }
 BlRopeableCollectionFile >> ensureBuffered: anInteger [
 	"Ensure the character at anInteger is buffered"
-	| mapEntry characterStream normalizer rawBuffer |
+	| mapEntry characterStream rawBuffer |
 
 	((anInteger between: bufferStart and: bufferStart + bufferedSize - 1) and: [ bufferStart > 0 ]) ifTrue: [ ^self ].
 	(haveSize and: [ anInteger > self size ]) ifTrue: [ ^self ].
@@ -206,7 +206,6 @@ BlRopeableCollectionFile >> ensureBuffered: anInteger [
 	bufferStart := mapEntry key.
 	bufferedSize := 0.
 	characterStream := self characterStream.
-	normalizer := BlStringNormalizer new.
 
 	"All of the below should be modified to work with existing collections,
 	not discarding and creating on each iteration"
@@ -214,7 +213,7 @@ BlRopeableCollectionFile >> ensureBuffered: anInteger [
 	[ (anInteger > (bufferStart + bufferedSize - 1)) or: [ bufferStart = 0 ] ] whileTrue:
 		[ bufferStart := bufferStart + bufferedSize.
 		rawBuffer := self loadNext: bufferSize with: characterStream.
-		buffer := normalizer process: rawBuffer.
+		buffer := rawBuffer.
 		bufferedSize := buffer size.
 		map add: (bufferStart + bufferedSize - 1) -> binaryStream position.
 		haveSize := haveSize or: [ binaryStream atEnd ].

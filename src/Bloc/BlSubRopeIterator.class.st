@@ -50,6 +50,13 @@ BlSubRopeIterator >> position [
 	^ subIterator position - rope offset
 ]
 
+{ #category : #copying }
+BlSubRopeIterator >> postCopy [
+	super postCopy.
+
+	subIterator := subIterator copy
+]
+
 { #category : #'iterator - enumeration' }
 BlSubRopeIterator >> previous [
 	^ subIterator previous

@@ -91,17 +91,11 @@ BlText >> asArray [
 { #category : #'text - converting' }
 BlText >> asString [
 	"I return an original String representaion of this text.
-	There is no guarantee that the size of the resulting string is the same
-	as of this text"
+	It is guaranteed that the size of the resulting string is the same as of this text"
 	<return: #String>
-	| nel |
 
-	nel := Character nel.
 	^ String streamContents: [ :aStream |
-		self do: [ :aCharacter |
-			aCharacter == nel
-				ifTrue: [ aStream nextPutAll: String crlf ]
-				ifFalse: [ aStream nextPut: aCharacter ] ] ]
+		self do: [ :aCharacter | aStream nextPut: aCharacter ] ]
 ]
 
 { #category : #'text - accessing' }

@@ -62,6 +62,13 @@ BlAttributeRopeIterator >> position [
 	^ subIterator position
 ]
 
+{ #category : #copying }
+BlAttributeRopeIterator >> postCopy [
+	super postCopy.
+
+	subIterator := subIterator copy
+]
+
 { #category : #'iterator - enumeration' }
 BlAttributeRopeIterator >> previous [
 	^ subIterator previous

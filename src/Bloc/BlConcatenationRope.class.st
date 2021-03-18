@@ -256,15 +256,6 @@ BlConcatenationRope >> left: aLeftRope right: aRightRope [
 	length := left size + right size
 ]
 
-{ #category : #'text - converting' }
-BlConcatenationRope >> normalized [
-	<return: #BlRope>
-
-	^ self class
-		concatenate: left normalized
-		and: right normalized
-]
-
 { #category : #accessing }
 BlConcatenationRope >> readStream [ 
 
