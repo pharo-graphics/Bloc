@@ -91,7 +91,7 @@ BlRepeatedTask >> onRun [
 { #category : #'api - running' }
 BlRepeatedTask >> run [
 	(self isRunning and: [ self element isAttachedToSceneGraph  ])
-		ifFalse: [ ^ self ].
+		ifFalse: [ self stop. ^ self ].
 
 	BlTaskAtQueue default 
 		schedule: [ self element enqueueTask: 
