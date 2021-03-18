@@ -15,8 +15,7 @@ Class {
 
 { #category : #'instance creation' }
 BlOSWindowSDL2Renderer class >> for: aWindowHandle [
-	^ self basicNew
-		initialize;
+	^ self new
 		initializeWindowHandle: aWindowHandle;
 		yourself
 ]
@@ -43,16 +42,6 @@ BlOSWindowSDL2Renderer >> canvasExtent [
 	height free.
 	
 	^ extent
-]
-
-{ #category : #deleting }
-BlOSWindowSDL2Renderer >> destroy [
-	super destroy
-]
-
-{ #category : #initialization }
-BlOSWindowSDL2Renderer >> initialize [
-	super initialize
 ]
 
 { #category : #initialization }
