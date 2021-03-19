@@ -52,6 +52,19 @@ BlMultipleSelection >> containsIndex: anIndex [
 		eachSelection contains: anIndex ]
 ]
 
+{ #category : #copying }
+BlMultipleSelection >> copyFrom: aStartIndex to: anEndIndex [
+	| newSelectionsSet newSelection |
+	
+	newSelectionsSet := selections
+		collect: [ :eachSelection | eachSelection copyFrom: aStartIndex to: anEndIndex ]
+		as: Set.
+		
+	newSelection := self class new.
+	newSelectionsSet do: [ :eachSelection | newSelection add: eachSelection ].
+	^ newSelection
+]
+
 { #category : #'api - enumerating' }
 BlMultipleSelection >> do: aBlock [
 	selections do: [ :aSelection | aSelection do: aBlock ]

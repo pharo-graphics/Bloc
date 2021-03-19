@@ -76,6 +76,11 @@ BlSelection >> containsIndex: anIndex [
 	^ self subclassResponsibility
 ]
 
+{ #category : #copying }
+BlSelection >> copyFrom: aStartIndex to: anEndIndex [
+	^ self subclassResponsibility
+]
+
 { #category : #'api - enumerating' }
 BlSelection >> do: aBlock [
 	"Evaluate a given block with all recorded selection intervals"

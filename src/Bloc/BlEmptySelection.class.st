@@ -31,6 +31,11 @@ BlEmptySelection >> containsIndex: anIndex [
 	^ false
 ]
 
+{ #category : #copying }
+BlEmptySelection >> copyFrom: aStartIndex to: anEndIndex [
+	^ self copy
+]
+
 { #category : #'api - enumerating' }
 BlEmptySelection >> do: aBlock [
 	"Evaluate a given block with all recorded selection intervals"

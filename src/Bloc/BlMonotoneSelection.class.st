@@ -119,6 +119,19 @@ BlMonotoneSelection >> containsIndex: anIndex [
 		and: [ anIndex <= self to ]
 ]
 
+{ #category : #copying }
+BlMonotoneSelection >> copyFrom: aStartIndex to: anEndIndex [
+	aStartIndex <= self to
+		ifTrue: [ ^ BlMonotoneSelection from: aStartIndex to: aStartIndex ].
+
+	anEndIndex >= self from
+		ifTrue: [ ^ BlMonotoneSelection from: anEndIndex to: anEndIndex ].
+
+	^ BlSelection
+		from: (aStartIndex max: self from)
+		to: (anEndIndex min: self to)
+]
+
 { #category : #enumerating }
 BlMonotoneSelection >> do: aBlock [
 	aBlock value: self

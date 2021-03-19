@@ -60,6 +60,17 @@ BlCompositeSelection >> containsIndex: anIndex [
 	^ selections containsIndex: anIndex
 ]
 
+{ #category : #copying }
+BlCompositeSelection >> copyFrom: aStartIndex to: anEndIndex [
+	| aNewSelection |
+	
+	aNewSelection := self class new.
+	self do: [ :eachMonotoneSelection |
+		aNewSelection select: (eachMonotoneSelection copyFrom: aStartIndex to: anEndIndex) ].
+	
+	^ aNewSelection
+]
+
 { #category : #'api - selection' }
 BlCompositeSelection >> deselect: aSelection [
 	"Remove a given selection"
