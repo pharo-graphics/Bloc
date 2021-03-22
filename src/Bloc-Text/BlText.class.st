@@ -188,11 +188,6 @@ BlText >> clearAttributesOfClass: aBlTextAttributeClass [
 	self clearAttributes: [ :eachAttribute | eachAttribute isKindOf: aBlTextAttributeClass ]
 ]
 
-{ #category : #'text - attributes' }
-BlText >> clearAttributesOfType: aBlTextAttributeType [
-	self clearAttributes: [ :eachAttribute | ]
-]
-
 { #category : #'text - enumeration' }
 BlText >> collect: aBlock [
 	"Evaluate aBlock with each of the text's items as the argument.  
