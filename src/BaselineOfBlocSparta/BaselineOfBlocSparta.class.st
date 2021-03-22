@@ -10,7 +10,7 @@ BaselineOfBlocSparta >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'Sparta' with: [
-				spec repository: 'github://feenkcom/Sparta/src' ];
+				spec repository: 'github://pharo-graphics/Sparta/src' ];
 			baseline: 'BlocCore' with: [
 				spec repository: 'github://pharo-graphics/Bloc/src' ];
 			baseline: 'BlocText' with: [
