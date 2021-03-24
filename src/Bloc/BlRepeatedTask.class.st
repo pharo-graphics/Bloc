@@ -1,3 +1,8 @@
+"
+Enhancement: a repeated task should re-enqueue itself with its element when that element is removed from the scene graph. See *https://github.com/feenkcom/gtoolkit/issues/1840*.
+See the ${method:name=BlRepeatedTask>>#run}$ method.
+
+"
 Class {
 	#name : #BlRepeatedTask,
 	#superclass : #BlTask,
@@ -90,6 +95,10 @@ BlRepeatedTask >> onRun [
 
 { #category : #'api - running' }
 BlRepeatedTask >> run [
+	"Enhancement: a repeated task should re-enqueue itself with 
+	its element when that element is removed from the scene graph. 
+	See *https://github.com/feenkcom/gtoolkit/issues/1840*."
+
 	(self isRunning and: [ self element isAttachedToSceneGraph  ])
 		ifFalse: [ self stop. ^ self ].
 
