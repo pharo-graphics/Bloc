@@ -46,6 +46,12 @@ BlOSWindowSDL2Renderer >> canvasExtent [
 	^ extent
 ]
 
+{ #category : #deleting }
+BlOSWindowSDL2Renderer >> destroy [
+	renderer destroy.
+	super destroy.
+]
+
 { #category : #initialization }
 BlOSWindowSDL2Renderer >> initializeWindowHandle: aWindowHandle [
 
