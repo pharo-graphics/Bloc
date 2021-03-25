@@ -37,6 +37,7 @@ BaselineOfNewBloc >> baseline: spec [
 		do: [
 			spec 
 				package: #'Bloc-Spec2';
+				package: #'Bloc-PharoExtensions';
 				package: #'Bloc-Spec2-Tests' with: [ spec requires: #('Bloc-Spec2' ) ].
 			spec
 				group: 'default'
