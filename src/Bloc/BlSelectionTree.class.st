@@ -1,7 +1,7 @@
 "
-I represent an augmented search binary tree to store intervals  described in Cormen et al. (2009, Section 14.3: Interval trees, pp. 348–354)[1]
+I represent an augmented search binary tree to store intervals described in Cormen et al. (2009, Section 14.3: Interval trees, pp. 348–354)[1]
 
-I am used by ${class:BlCompositeSelection}$
+I am used by `BlCompositeSelection`.
 
 I do not allow overlapping intervals to be stored in the same tree. Before every insertions I find overlapping and neighbouring intervals, merge them and replace all merged intervals with a single one.
 
