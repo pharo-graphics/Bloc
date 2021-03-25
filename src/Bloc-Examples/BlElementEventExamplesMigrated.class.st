@@ -2,13 +2,13 @@
 I contain examples of different BlElementEvents
 "
 Class {
-	#name : #BlElementEventExamples,
+	#name : #BlElementEventExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-EventMigrated'
 }
 
 { #category : #examples }
-BlElementEventExamples >> addedToParent [
+BlElementEventExamplesMigrated >> addedToParent [
 	<gtExample>
 	| wasAdded parent child container |
 	
@@ -30,7 +30,7 @@ BlElementEventExamples >> addedToParent [
 ]
 
 { #category : #examples }
-BlElementEventExamples >> backgroundChanged [
+BlElementEventExamplesMigrated >> backgroundChanged [
 	<gtExample>
 	| backgroundChanged element |
 	backgroundChanged := 0.
@@ -45,7 +45,7 @@ BlElementEventExamples >> backgroundChanged [
 ]
 
 { #category : #examples }
-BlElementEventExamples >> borderChanged [
+BlElementEventExamplesMigrated >> borderChanged [
 	<gtExample>
 	| borderChanged element |
 	borderChanged := 0.
@@ -60,7 +60,7 @@ BlElementEventExamples >> borderChanged [
 ]
 
 { #category : #'instance creation' }
-BlElementEventExamples >> child [
+BlElementEventExamplesMigrated >> child [
 	<gtExample>
 
 	^ BlElement new
@@ -69,7 +69,7 @@ BlElementEventExamples >> child [
 ]
 
 { #category : #'instance creation' }
-BlElementEventExamples >> container [
+BlElementEventExamplesMigrated >> container [
 	<gtExample>
 
 	^ BlElement new
@@ -78,7 +78,7 @@ BlElementEventExamples >> container [
 ]
 
 { #category : #examples }
-BlElementEventExamples >> extentChanged [
+BlElementEventExamplesMigrated >> extentChanged [
 	<gtExample>
 	| extentChanged element |
 	extentChanged := 0.
@@ -102,7 +102,7 @@ BlElementEventExamples >> extentChanged [
 ]
 
 { #category : #examples }
-BlElementEventExamples >> layoutChanged [
+BlElementEventExamplesMigrated >> layoutChanged [
 	<gtExample>
 	| layoutChanged element |
 	layoutChanged := 0.
@@ -117,7 +117,7 @@ BlElementEventExamples >> layoutChanged [
 ]
 
 { #category : #'instance creation' }
-BlElementEventExamples >> parent [
+BlElementEventExamplesMigrated >> parent [
 	<gtExample>
 
 	^ BlElement new
@@ -126,7 +126,7 @@ BlElementEventExamples >> parent [
 ]
 
 { #category : #examples }
-BlElementEventExamples >> positionChanged [
+BlElementEventExamplesMigrated >> positionChanged [
 	<gtExample>
 	| positionChanged parent child |
 	
@@ -152,7 +152,7 @@ BlElementEventExamples >> positionChanged [
 ]
 
 { #category : #examples }
-BlElementEventExamples >> removedFromParent [
+BlElementEventExamplesMigrated >> removedFromParent [
 	<gtExample>
 	| wasRemoved parent child container |
 	

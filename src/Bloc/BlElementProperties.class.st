@@ -1,5 +1,5 @@
 "
-I represent lement properties that can be propagated from the parent element to the children.
+I represent element properties that can be propagated from the parent element to the children.
 For example font size is by default inherited by the children.
 "
 Class {
