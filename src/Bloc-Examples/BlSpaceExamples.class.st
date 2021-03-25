@@ -99,7 +99,7 @@ BlSpaceExamples >> iconElement [
 	^ BlElement new
 		size: 16@16;
 		background: (Color green alpha: 0.5);
-		geometry: BlCircle new.
+		geometry: BlCircleGeometry new.
 ]
 
 { #category : #'examples - icon' }
