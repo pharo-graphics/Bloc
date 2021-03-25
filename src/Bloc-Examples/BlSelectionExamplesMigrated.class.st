@@ -2,13 +2,13 @@
 I exemplify selection interval
 "
 Class {
-	#name : #BlSelectionExamples,
+	#name : #BlSelectionExamplesMigrated,
 	#superclass : #Object,
 	#category : #'Bloc-Examples-SelectionMigrated'
 }
 
 { #category : #'examples - composite selection' }
-BlSelectionExamples >> compositeSelect_from_0_to_1 [
+BlSelectionExamplesMigrated >> compositeSelect_from_0_to_1 [
 	<gtExample>
 	| aCompositeSelection |
 	
@@ -29,7 +29,7 @@ BlSelectionExamples >> compositeSelect_from_0_to_1 [
 ]
 
 { #category : #'examples - composite selection' }
-BlSelectionExamples >> compositeSelect_from_1_to_1 [
+BlSelectionExamplesMigrated >> compositeSelect_from_1_to_1 [
 	<gtExample>
 	| aCompositeSelection |
 	
@@ -47,7 +47,7 @@ BlSelectionExamples >> compositeSelect_from_1_to_1 [
 ]
 
 { #category : #'examples - composite selection' }
-BlSelectionExamples >> compositeSelect_from_1_to_3 [
+BlSelectionExamplesMigrated >> compositeSelect_from_1_to_3 [
 	<gtExample>
 	| aCompositeSelection |
 	
@@ -68,7 +68,7 @@ BlSelectionExamples >> compositeSelect_from_1_to_3 [
 ]
 
 { #category : #'examples - composite selection' }
-BlSelectionExamples >> compositeSelect_from_1_to_3_and_2_to_6 [
+BlSelectionExamplesMigrated >> compositeSelect_from_1_to_3_and_2_to_6 [
 	<gtExample>
 	| aCompositeSelection |
 	
@@ -90,7 +90,7 @@ BlSelectionExamples >> compositeSelect_from_1_to_3_and_2_to_6 [
 ]
 
 { #category : #'examples - composite selection' }
-BlSelectionExamples >> compositeSelect_from_1_to_3_and_4_to_6 [
+BlSelectionExamplesMigrated >> compositeSelect_from_1_to_3_and_4_to_6 [
 	<gtExample>
 	| aCompositeSelection |
 	
@@ -116,7 +116,7 @@ BlSelectionExamples >> compositeSelect_from_1_to_3_and_4_to_6 [
 ]
 
 { #category : #'examples - composite selection' }
-BlSelectionExamples >> compositeSelect_from_1_to_3_and_5_to_6 [
+BlSelectionExamplesMigrated >> compositeSelect_from_1_to_3_and_5_to_6 [
 	<gtExample>
 	| aCompositeSelection |
 	
@@ -140,7 +140,7 @@ BlSelectionExamples >> compositeSelect_from_1_to_3_and_5_to_6 [
 ]
 
 { #category : #'examples - composite selection' }
-BlSelectionExamples >> compositeSelect_from_1_to_4_and_4_to_6 [
+BlSelectionExamplesMigrated >> compositeSelect_from_1_to_4_and_4_to_6 [
 	<gtExample>
 	| aCompositeSelection |
 	
@@ -162,7 +162,7 @@ BlSelectionExamples >> compositeSelect_from_1_to_4_and_4_to_6 [
 ]
 
 { #category : #'examples - composite selection' }
-BlSelectionExamples >> compositeSelect_from_5_to_6_and_1_to_3 [
+BlSelectionExamplesMigrated >> compositeSelect_from_5_to_6_and_1_to_3 [
 	<gtExample>
 	| aCompositeSelection |
 	
@@ -186,14 +186,14 @@ BlSelectionExamples >> compositeSelect_from_5_to_6_and_1_to_3 [
 ]
 
 { #category : #'examples - instance creation' }
-BlSelectionExamples >> compositeSelection [
+BlSelectionExamplesMigrated >> compositeSelection [
 	<gtExample>
 	
 	^ BlCompositeSelection new
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneContainsIndex_in_1_to_1 [
+BlSelectionExamplesMigrated >> monotoneContainsIndex_in_1_to_1 [
 	<gtExample>
 	| aMonotoneSelection |
 	
@@ -207,7 +207,7 @@ BlSelectionExamples >> monotoneContainsIndex_in_1_to_1 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneContains_in_1_to_1 [
+BlSelectionExamplesMigrated >> monotoneContains_in_1_to_1 [
 	<gtExample>
 	| aMonotoneSelection |
 	
@@ -221,7 +221,7 @@ BlSelectionExamples >> monotoneContains_in_1_to_1 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneNeighbours_1_to_1_and_3_to_4 [
+BlSelectionExamplesMigrated >> monotoneNeighbours_1_to_1_and_3_to_4 [
 	<gtExample>
 	| from1to1 from3to4  |
 	
@@ -235,7 +235,7 @@ BlSelectionExamples >> monotoneNeighbours_1_to_1_and_3_to_4 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneNeighbours_1_to_3_and_1_to_1 [
+BlSelectionExamplesMigrated >> monotoneNeighbours_1_to_3_and_1_to_1 [
 	<gtExample>
 	| from1to3 from1to1 |
 	
@@ -249,7 +249,7 @@ BlSelectionExamples >> monotoneNeighbours_1_to_3_and_1_to_1 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneNeighbours_1_to_3_and_3_to_4 [
+BlSelectionExamplesMigrated >> monotoneNeighbours_1_to_3_and_3_to_4 [
 	<gtExample>
 	| from1to3 from3to4 |
 	
@@ -263,7 +263,7 @@ BlSelectionExamples >> monotoneNeighbours_1_to_3_and_3_to_4 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneNeighbours_1_to_3_and_4_to_6 [
+BlSelectionExamplesMigrated >> monotoneNeighbours_1_to_3_and_4_to_6 [
 	<gtExample>
 	| from1to3 from4to6 |
 
@@ -277,7 +277,7 @@ BlSelectionExamples >> monotoneNeighbours_1_to_3_and_4_to_6 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneNeighbours_1_to_4_and_4_to_6 [
+BlSelectionExamplesMigrated >> monotoneNeighbours_1_to_4_and_4_to_6 [
 	<gtExample>
 	| from1to4 from4to6 |
 	
@@ -291,7 +291,7 @@ BlSelectionExamples >> monotoneNeighbours_1_to_4_and_4_to_6 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneRangeIncludes_in_1_to_1 [
+BlSelectionExamplesMigrated >> monotoneRangeIncludes_in_1_to_1 [
 	<gtExample>
 	| aMonotoneSelection |
 	
@@ -305,7 +305,7 @@ BlSelectionExamples >> monotoneRangeIncludes_in_1_to_1 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneRangeIncludes_in_1_to_3 [
+BlSelectionExamplesMigrated >> monotoneRangeIncludes_in_1_to_3 [
 	<gtExample>
 	| aMonotoneSelection |
 	
@@ -321,7 +321,7 @@ BlSelectionExamples >> monotoneRangeIncludes_in_1_to_3 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneRangeIncludes_in_4_to_6 [
+BlSelectionExamplesMigrated >> monotoneRangeIncludes_in_4_to_6 [
 	<gtExample>
 	| aMonotoneSelection |
 	
@@ -340,7 +340,7 @@ BlSelectionExamples >> monotoneRangeIncludes_in_4_to_6 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneSelect_from_1_to_1 [
+BlSelectionExamplesMigrated >> monotoneSelect_from_1_to_1 [
 	<gtExample>
 	| aMonotoneSelection |
 	
@@ -357,7 +357,7 @@ BlSelectionExamples >> monotoneSelect_from_1_to_1 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneSelect_from_1_to_3 [
+BlSelectionExamplesMigrated >> monotoneSelect_from_1_to_3 [
 	<gtExample>
 	| aMonotoneSelection |
 	
@@ -377,7 +377,7 @@ BlSelectionExamples >> monotoneSelect_from_1_to_3 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneSelect_from_1_to_4 [
+BlSelectionExamplesMigrated >> monotoneSelect_from_1_to_4 [
 	<gtExample>
 	| aMonotoneSelection |
 
@@ -397,7 +397,7 @@ BlSelectionExamples >> monotoneSelect_from_1_to_4 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneSelect_from_3_to_4 [
+BlSelectionExamplesMigrated >> monotoneSelect_from_3_to_4 [
 	<gtExample>
 	| aMonotoneSelection |
 
@@ -417,7 +417,7 @@ BlSelectionExamples >> monotoneSelect_from_3_to_4 [
 ]
 
 { #category : #'examples - monotone selection' }
-BlSelectionExamples >> monotoneSelect_from_4_to_6 [
+BlSelectionExamplesMigrated >> monotoneSelect_from_4_to_6 [
 	<gtExample>
 	| aMonotoneSelection |
 	
@@ -437,7 +437,7 @@ BlSelectionExamples >> monotoneSelect_from_4_to_6 [
 ]
 
 { #category : #'examples - instance creation' }
-BlSelectionExamples >> monotoneSelection [
+BlSelectionExamplesMigrated >> monotoneSelection [
 	<gtExample>
 	
 	^ BlMonotoneSelection
