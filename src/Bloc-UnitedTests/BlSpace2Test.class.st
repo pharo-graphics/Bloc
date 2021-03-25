@@ -76,20 +76,16 @@ BlSpace2Test >> testChangeIcon [
 	
 	| aSpace aCollection |
 	aSpace := self testEmptySpace.
-
 	aCollection := OrderedCollection new.
 	aSpace
 		when: BlSpaceIconChangedEvent
 		do: [ :anEvent | aCollection add: anEvent ].
-
 	aSpace icon: self iconStencil.
-
 	self assert: aCollection size equals: 1.
 	self assert: aCollection first class equals: BlSpaceIconChangedEvent.
 	self
 		assert: aCollection first iconStencil class
 		equals: BlSpaceIconDummyStencil.
-
 	aSpace icon: aSpace icon.
 	self assert: aCollection size equals: 1.
 
