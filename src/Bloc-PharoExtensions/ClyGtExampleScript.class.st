@@ -13,7 +13,7 @@ ClyGtExampleScript class >> canBeProvidedByMethod: aMethod [
 
 { #category : #'script detection' }
 ClyGtExampleScript class >> isImplementedByMethod: aMethod [
-	^ (aMethod hasPragmaNamed: #gtExample)
+	^ (aMethod hasPragmaNamed: #gtExample) and: [ (aMethod isTestMethod) not ]
 ]
 
 { #category : #accessing }
