@@ -2,13 +2,13 @@
 I contain example of how to use space
 "
 Class {
-	#name : #BlSpaceExamples,
+	#name : #BlSpaceExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Space'
+	#category : #'Bloc-Examples-SpaceMigrated'
 }
 
 { #category : #script }
-BlSpaceExamples class >> slownDownSpace [
+BlSpaceExamplesMigrated class >> slownDownSpace [
 	<script: 'self slownDownSpace'>
 	
 	self new spaceWithSlownDownTimeAndAnimatedElement
@@ -17,7 +17,7 @@ BlSpaceExamples class >> slownDownSpace [
 ]
 
 { #category : #'private - instance creation' }
-BlSpaceExamples >> animatedElement [
+BlSpaceExamplesMigrated >> animatedElement [
 	<gtExample>
 	
 	^ BlElement new
@@ -28,7 +28,7 @@ BlSpaceExamples >> animatedElement [
 ]
 
 { #category : #'examples - icon' }
-BlSpaceExamples >> changeIcon [
+BlSpaceExamplesMigrated >> changeIcon [
 	<gtExample>
 	| aSpace aCollection |
 	aSpace := self emptySpace.
@@ -51,7 +51,7 @@ BlSpaceExamples >> changeIcon [
 ]
 
 { #category : #'instance creation' }
-BlSpaceExamples >> emptySpace [
+BlSpaceExamplesMigrated >> emptySpace [
 	<gtExample>
 	| aSpace |
 	
@@ -79,7 +79,7 @@ BlSpaceExamples >> emptySpace [
 ]
 
 { #category : #lifecycle }
-BlSpaceExamples >> firstPulse [
+BlSpaceExamplesMigrated >> firstPulse [
 	<gtExample>
 	| aSpace |
 	
@@ -94,7 +94,7 @@ BlSpaceExamples >> firstPulse [
 ]
 
 { #category : #'examples - icon' }
-BlSpaceExamples >> iconElement [
+BlSpaceExamplesMigrated >> iconElement [
 	<gtExample>
 	^ BlElement new
 		size: 16@16;
@@ -103,7 +103,7 @@ BlSpaceExamples >> iconElement [
 ]
 
 { #category : #'examples - icon' }
-BlSpaceExamples >> iconStencil [
+BlSpaceExamplesMigrated >> iconStencil [
 	<gtExample>
 	| aStencil |
 	aStencil := BlSpaceIconDummyStencil new.
@@ -112,7 +112,7 @@ BlSpaceExamples >> iconStencil [
 ]
 
 { #category : #'private - instance creation' }
-BlSpaceExamples >> infiniteAnimation [
+BlSpaceExamplesMigrated >> infiniteAnimation [
 	<gtExample>
 	| anAnimation |
 
@@ -125,7 +125,7 @@ BlSpaceExamples >> infiniteAnimation [
 ]
 
 { #category : #'examples - time' }
-BlSpaceExamples >> spaceWithSlownDownTime [
+BlSpaceExamplesMigrated >> spaceWithSlownDownTime [
 	<gtExample>
 	| aTime aSpace |
 
@@ -139,7 +139,7 @@ BlSpaceExamples >> spaceWithSlownDownTime [
 ]
 
 { #category : #'examples - time' }
-BlSpaceExamples >> spaceWithSlownDownTimeAndAnimatedElement [
+BlSpaceExamplesMigrated >> spaceWithSlownDownTimeAndAnimatedElement [
 	<gtExample>
 	| aSpace |
 
