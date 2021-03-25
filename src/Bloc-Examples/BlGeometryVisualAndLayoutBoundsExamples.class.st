@@ -219,7 +219,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> misalignedIcon [
 BlGeometryVisualAndLayoutBoundsExamples >> misalignedTrianglePolygon [
 	<gtExample>
 	<label: 'Triangle polygon'>
-	^ BlPolygon
+	^ BlPolygonGeometry 
 		vertices:
 			{(0 @ 3).
 			(8 @ 7.5).
@@ -243,7 +243,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> outsideOutskirts [
 BlGeometryVisualAndLayoutBoundsExamples >> rectanglePolygon [
 	<gtExample>
 	<label: 'Rectangle polygon'>
-	^ BlPolygon vertices: {
+	^ BlPolygonGeometry vertices: {
 		(50@50). (150@50). (150@100). (50@100)
 	}
 ]
@@ -303,7 +303,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryOutside [
 BlGeometryVisualAndLayoutBoundsExamples >> starPolygon [
 	<gtExample>
 	<label: 'Star polygon'>
-	^ BlPolygon
+	^ BlPolygonGeometry
 		vertices:
 			{(100 @ 50).
 			(115 @ 90).
@@ -376,7 +376,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> textElementWithRunText [
 BlGeometryVisualAndLayoutBoundsExamples >> trianglePolygon [
 	<gtExample>
 	<label: 'Triangle polygon'>
-	^ BlPolygon
+	^ BlPolygonGeometry 
 		vertices:
 			{(0 @ 0).
 			(8 @ 6).
