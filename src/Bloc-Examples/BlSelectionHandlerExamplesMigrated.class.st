@@ -5,13 +5,13 @@ I contain examples of how one can add support of selection.
 2) Press and drag with the mouse as if you would select something on your computer desktop
 "
 Class {
-	#name : #BlSelectionHandlerExamples,
+	#name : #BlSelectionHandlerExamplesMigrated,
 	#superclass : #Object,
-	#category : #'Bloc-Examples-Selection'
+	#category : #'Bloc-Examples-SelectionMigrated'
 }
 
 { #category : #examples }
-BlSelectionHandlerExamples class >> grid [
+BlSelectionHandlerExamplesMigrated class >> grid [
 	<script: 'self grid'>
 	| space element |
 	
@@ -24,7 +24,7 @@ BlSelectionHandlerExamples class >> grid [
 ]
 
 { #category : #examples }
-BlSelectionHandlerExamples class >> gridRow [
+BlSelectionHandlerExamplesMigrated class >> gridRow [
 	<script: 'self gridRow'>
 	| space element |
 	
@@ -37,7 +37,7 @@ BlSelectionHandlerExamples class >> gridRow [
 ]
 
 { #category : #'instance creation' }
-BlSelectionHandlerExamples >> cell [
+BlSelectionHandlerExamplesMigrated >> cell [
 	<gtExample>
 	
 	^ BlElement new
@@ -50,7 +50,7 @@ BlSelectionHandlerExamples >> cell [
 ]
 
 { #category : #'instance creation' }
-BlSelectionHandlerExamples >> container [
+BlSelectionHandlerExamplesMigrated >> container [
 	<gtExample>
 	
 	^ BlElement new
@@ -61,21 +61,21 @@ BlSelectionHandlerExamples >> container [
 ]
 
 { #category : #examples }
-BlSelectionHandlerExamples >> containerWithOneGrid [
+BlSelectionHandlerExamplesMigrated >> containerWithOneGrid [
 	<gtExample>
 	
 	^ self container addChild: self gridWith11Cells
 ]
 
 { #category : #examples }
-BlSelectionHandlerExamples >> containerWithOneGridAndVisualHandler [
+BlSelectionHandlerExamplesMigrated >> containerWithOneGridAndVisualHandler [
 	<gtExample>
 	
 	^ self containerWithOneGrid addEventHandler: self visualHandler
 ]
 
 { #category : #examples }
-BlSelectionHandlerExamples >> containerWithThreeGrids [
+BlSelectionHandlerExamplesMigrated >> containerWithThreeGrids [
 	<gtExample>
 	
 	^ self container
@@ -83,14 +83,14 @@ BlSelectionHandlerExamples >> containerWithThreeGrids [
 ]
 
 { #category : #examples }
-BlSelectionHandlerExamples >> containerWithThreeGridsAndVisualHandler [
+BlSelectionHandlerExamplesMigrated >> containerWithThreeGridsAndVisualHandler [
 	<gtExample>
 	
 	^ self containerWithThreeGrids addEventHandler: self visualHandler
 ]
 
 { #category : #'instance creation' }
-BlSelectionHandlerExamples >> grid [
+BlSelectionHandlerExamplesMigrated >> grid [
 	<gtExample>
 	
 	^ BlElement new
@@ -103,7 +103,7 @@ BlSelectionHandlerExamples >> grid [
 ]
 
 { #category : #examples }
-BlSelectionHandlerExamples >> gridWith11Cells [
+BlSelectionHandlerExamplesMigrated >> gridWith11Cells [
 	<gtExample>
 	
 	^ self grid
@@ -112,7 +112,7 @@ BlSelectionHandlerExamples >> gridWith11Cells [
 ]
 
 { #category : #examples }
-BlSelectionHandlerExamples >> threeGrids [
+BlSelectionHandlerExamplesMigrated >> threeGrids [
 	<gtExample>
 	
 	^ self container
@@ -122,7 +122,7 @@ BlSelectionHandlerExamples >> threeGrids [
 ]
 
 { #category : #'instance creation' }
-BlSelectionHandlerExamples >> visualHandler [
+BlSelectionHandlerExamplesMigrated >> visualHandler [
 	<gtExample>
 	
 	^ BlVisualSelectionHandler new
