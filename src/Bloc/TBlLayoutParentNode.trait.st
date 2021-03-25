@@ -44,7 +44,7 @@ TBlLayoutParentNode >> extentSpec: aBlExtentMeasurementSpec [
 
 { #category : #'api - geometry' }
 TBlLayoutParentNode >> height [
-	^ self extent height
+	^ self extent y
 ]
 
 { #category : #'api - extent spec' }
