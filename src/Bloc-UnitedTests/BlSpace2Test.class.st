@@ -31,7 +31,7 @@ BlSpace2Test >> iconStencil [
 	<gtExample>
 	
 	| aStencil |
-	aStencil := BlSpaceIconDummyStencil new.
+	aStencil := BlSpaceIconDummyStencil2 new.
 	aStencil block: [ self iconElement ].
 	^ aStencil
 ]
@@ -85,7 +85,7 @@ BlSpace2Test >> testChangeIcon [
 	self assert: aCollection first class equals: BlSpaceIconChangedEvent.
 	self
 		assert: aCollection first iconStencil class
-		equals: BlSpaceIconDummyStencil.
+		equals: BlSpaceIconDummyStencil2.
 	aSpace icon: aSpace icon.
 	self assert: aCollection size equals: 1.
 

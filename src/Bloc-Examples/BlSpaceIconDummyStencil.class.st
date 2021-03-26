@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'block'
 	],
-	#category : #'Bloc-Examples-Space'
+	#category : #'Bloc-Examples-SpaceMigrated'
 }
 
 { #category : #'api - converting' }
