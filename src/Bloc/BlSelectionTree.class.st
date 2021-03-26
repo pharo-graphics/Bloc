@@ -34,7 +34,7 @@ BlSelectionTree >> = anObject [
 		
 	^ self hasRoot
 		ifTrue: [ self root = anObject root ]
-		ifFalse: [ false ]
+		ifFalse: [ true ]
 ]
 
 { #category : #'tree - testing' }
