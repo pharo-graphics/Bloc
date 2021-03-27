@@ -88,7 +88,7 @@ BlSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	newInheritedStates := aCollectionOfStates intersection: allNewStates.
 	newInheritedStates do: [ :eachNewInheritedState | eachNewInheritedState optionalOnAddedTo: anElement ].
 	
-	anElement style applyStylesForStates: allNewStates.
+	anElement styles applyStylesForStates: allNewStates.
 
 	theStatesToInherit := anElement states statesToInherit.
 	theStatesToInherit do: [ :eachState | eachState prepareToPropagateFrom: anElement ].

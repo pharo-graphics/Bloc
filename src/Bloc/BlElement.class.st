@@ -2471,7 +2471,7 @@ BlElement >> needsPropertiesComputation [
 
 { #category : #'api - style' }
 BlElement >> needsStyle [
-	^ self style needsStyle
+	^ self styles needsStyle
 ]
 
 { #category : #'event management accessing' }
@@ -3321,7 +3321,7 @@ BlElement >> requestPropertiesComputation [
 
 { #category : #'api - style' }
 BlElement >> requestStyle [
-	self style markDirty.
+	self styles markDirty.
 
 	self isAttachedToSceneGraph
 		ifTrue: [ self space requestStyle: self ]
@@ -3440,6 +3440,19 @@ BlElement >> states [
 
 { #category : #'api - style' }
 BlElement >> style [
+	self
+		deprecated: 'Please use #styles instead'
+		transformWith: '`@receiver style' -> '`@receiver styles'.
+
+	^ self styles
+]
+
+{ #category : #'api - style' }
+BlElement >> styles [
+	"Return current element styles.
+	See ${class:BlStyles}$ to learn more about styles"
+	<return: #BlElementStyles>
+
 	^ self userData
 		at: #blocStyles
 		ifAbsentPut: [ BlElementStyles new element: self ]

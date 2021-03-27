@@ -218,6 +218,6 @@ BlElement >> gtStylesFor: aView [
 	^ aView forward
 		title: 'Styles';
 		priority: 10;
-		object: [ self style ];
+		object: [ self styles ];
 		view: #gtStylesFor:
 ]

@@ -1,3 +1,7 @@
+"
+!Forwarded element styles
+Extends ${class:BlElementStyles}$ by adding an ability to customise ${method:BlForwardedElementStyles>>#targetObject}$ on which styles are applied.
+"
 Class {
 	#name : #BlForwardedElementStyles,
 	#superclass : #BlElementStyles,
