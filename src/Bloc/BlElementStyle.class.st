@@ -1,3 +1,9 @@
+"
+! Element style
+An element style is an association between ${class:BlElementState}$ and corresponding collection of ${class:BlElementProperty}$. ${class:BlElementStyle}$ is responsible for managing properties and applying them on an element. ${class:BlElementStyle}$ is usually grouped as ${class:BlStyles}$ or stored in the element as part of ${class:BlElementStyles}$.
+!! Properties
+In addition to general api to add and remove ${class:BlElementProperty}$, ${class:BlElementStyle}$ by using ${class:TBlElementProperties}$ allows users to fluently add most common properties such as ${method:TBlElementProperties>>#background:}$ or ${method:TBlElementProperties>>#border:}$.
+"
 Class {
 	#name : #BlElementStyle,
 	#superclass : #Object,
