@@ -40,7 +40,7 @@ BlRope >> paintTreeWith: view [
 			(each isKindOf: BlCollectionRope)
 				ifTrue: [
 					BrLabel new
-						look: BrGlamorousLabelLook; 
+						aptitude: BrGlamorousLabelAptitude; 
 						zIndex: 10;
 						background: Color white;
 						constraintsDo: [ :c | c padding: (BlInsets all: 5) ];
