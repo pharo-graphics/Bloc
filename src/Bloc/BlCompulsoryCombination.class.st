@@ -93,8 +93,7 @@ BlCompulsoryCombination >> key: aKey [
 BlCompulsoryCombination >> match: aKeyboardBuffer [
 	<return: #Number>
 
-	^ self combinations
-		detectSum: [ :aCombination | aCombination match: aKeyboardBuffer ]
+	^ self combinations sum: [ :aCombination | aCombination match: aKeyboardBuffer ]
 ]
 
 { #category : #'key matching' }
