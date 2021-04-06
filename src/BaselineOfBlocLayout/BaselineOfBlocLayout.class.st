@@ -15,8 +15,10 @@ BaselineOfBlocLayout >> baseline: spec [
 				spec repository: 'github://pharo-graphics/Bloc/src' ].
 
 		spec 
+			package: #'Bloc-LayoutZoomable' with: [
+				spec requires: #(#Bloc-Layout #BlocAnimation). ];
 			package: #'Bloc-Layout' with: [
-				spec requires: #(#BlocCore #BlocAnimation). ];
+				spec requires: #(#BlocCore). ];
 			"Layout depends also on compositor see https://github.com/pharo-graphics/Bloc/issues/87"
 			
 			package: #'Bloc-Layout-Tests' with: [
