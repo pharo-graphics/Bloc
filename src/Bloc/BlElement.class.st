@@ -522,13 +522,12 @@ BlElement >> background [
 BlElement >> background: aBlBackground [
 	"Change my background to a given one.
 	Color and Form can be used as background - they will be converted to an appropriate background object.
-	It is also possible to create a more complicated composite background with the help of ==BlBackgroundBuilder==.
-
-	aBlBackground must not be nil"
-	<argument: #aBlBackground satisfies: #notNil>
-	<event: #BlElementBackgroundChangedEvent>	
-	| aNewBackground |
+	It is also possible to create a more complicated composite background with the help of BlBackgroundBuilder.
+	Raises BlElementBackgroundChangedEvent.
+	aBlBackground must not be nil. "
+	<event: #BlElementBackgroundChangedEvent>
 		
+	| aNewBackground |	
 	aNewBackground := aBlBackground asBlBackground.
 	self background = aNewBackground
 		ifTrue: [ ^ self ].
@@ -571,13 +570,12 @@ BlElement >> border [
 
 { #category : #'api - look' }
 BlElement >> border: aBlBorder [
-	"Change my border and invalidate me"
-	<argument: #aBlBorder satisfies: #notNil>
+	"Change my border and invalidate me. aBlBorder can be created using BlBorderBuilder. Raises BlElementBorderChangedEvent"
+	
 	<event: #BlElementBorderChangedEvent>
 
 	self border = aBlBorder
 		ifTrue: [ ^ self ].
-
 	visuals := visuals border: aBlBorder.
 	self geometry releaseStrokedBoundsCache.
 	self eventDispatcher dispatchBorderChanged.
@@ -1263,12 +1261,11 @@ BlElement >> effect [
 ]
 
 { #category : #accessing }
-BlElement >> effect: anEffect [
+BlElement >> effect: aBlEffect [
 	"Change my effect to a given one requesting draw area invalidations.
-	anEffect must not be nil"
-	<argument: #anEffect satisfies: #notNil>
+	anEffect must not be nil but an instance of subclasses of BlEffect."
 
-	visuals := visuals effect: anEffect.
+	visuals := visuals effect: aBlEffect.
 	self invalidate
 ]
 
@@ -2039,10 +2036,10 @@ BlElement >> layout [
 
 { #category : #'api - layout' }
 BlElement >> layout: aBlLayout [
-	"Change my current layout to a given one.
+	"Change my current layout to a given one, instance of subclasses of BlLayout.
 	After the layout change I request the layout recomputation.
-	aBlLayout must not be nil"
-	<argument: #aBlLayout satisfies: #notNil>
+	aBlLayout must not be nil. Raises BlElementLayoutChangedEvent"
+
 	<event: #BlElementLayoutChangedEvent>
 
 	layout = aBlLayout

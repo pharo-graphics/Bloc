@@ -92,7 +92,7 @@ BlCustomVisuals >> effect [
 
 { #category : #accessing }
 BlCustomVisuals >> effect: aBlElementEffect [
-	"Change the effect and return new visuals to be used instead of the previous one (not necessarily a new instance)"
+	"Change the effect and return new visuals to be used instead of the previous one (not necessarily a new instance)."
 	<return: #BlElementVisuals>
 
 	effect := aBlElementEffect
