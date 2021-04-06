@@ -1,3 +1,17 @@
+"
+I'm the counterpart of the `BlDefaultVisuals`. I'm usually stored in place of `BlDefaultVisuals` singleton to accumulate modifications of the default. I accumulate modifications because contrary to `BlDefaultVisuals` my setters modify myself.
+
+To use me correctly my users should always store the result of the setters sent to a visuals as shown in the example below.
+
+```
+BlElement >> effect: anEffect
+	""Change my effect to a given one requesting draw area invalidations.
+	anEffect must not be nil""
+
+	visuals := visuals effect: anEffect.
+	self invalidate
+```
+"
 Class {
 	#name : #BlCustomVisuals,
 	#superclass : #BlElementVisuals,

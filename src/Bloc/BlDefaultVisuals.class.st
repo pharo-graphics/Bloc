@@ -1,3 +1,49 @@
+"
+I'm a singleton that holds many default values to be shared between multiples elements. 
+In addition, I'm kind of read only because when my setters are executed, they do not modify myself but 
+create and return a new instance of `BlCustomVisuals`.
+
+Check for example:
+
+```
+BlDefaultVisuals >> effect: aBlElementEffect
+		""Change the effect and return new visuals to be used instead of the previous one (not necessarily a new instance)""
+		<return: #BlElementVisuals>
+
+		^ BlCustomVisuals new effect: aBlElementEffect
+```
+
+The KEY point is that in BlElement the RESULT of the setter (badly name message in fact) must be stored.
+
+```
+BlElement >> effect: anEffect
+		""Change my effect to a given one requesting draw area invalidations.
+		anEffect must not be nil""
+
+		visuals := visuals effect: anEffect.
+		self invalidate
+```
+
+My counterpart, `BlCustomVisuals` is offering the same API but its setter are normal setters that modify the instance. 
+
+
+```
+BlCustomVisuals >> effect: aBlElementEffect
+		""Change the effect and return new visuals to be used instead of the previous one (not necessarily a new instance)""
+		<return: #BlElementVisuals>
+
+		effect := aBlElementEffect
+```
+
+### Discussion 
+The result could have been achieved by having an instance variable and a classVariable with the instance variable pointing to the classVariable by default. But this implementation would have forced to copy the customized version after each setter. 
+
+
+
+
+
+	
+"
 Class {
 	#name : #BlDefaultVisuals,
 	#superclass : #BlElementVisuals,

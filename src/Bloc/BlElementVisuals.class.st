@@ -1,5 +1,6 @@
 "
-! Element's visual properties
+I'm a kind of pattern to make sure that many default values can be shared by default, but that modifications to these defaults can also be used on a per instance level. 
+Read the comments of `BlDefaultVisuals` and `BlCustomVisuals`.
 "
 Class {
 	#name : #BlElementVisuals,
