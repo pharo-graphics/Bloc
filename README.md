@@ -11,7 +11,7 @@ It retrofits a part of the development made at https://github.com/feenkcom/bloc.
 
 ## Installation
 
-The following script installs Bloc in [Pharo 8 and 9](https://pharo.org/download):
+The following script installs Bloc in [Pharo 9](https://pharo.org/download):
 
 ```smalltalk
 Metacello new
