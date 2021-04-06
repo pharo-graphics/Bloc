@@ -5,7 +5,7 @@ Class {
 		'scaleFactor',
 		'isDirty'
 	],
-	#category : #'Bloc-Layout-Zoomable'
+	#category : #'Bloc-LayoutZoomable'
 }
 
 { #category : #initialization }

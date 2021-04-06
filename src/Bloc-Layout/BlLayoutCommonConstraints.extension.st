@@ -24,8 +24,3 @@ BlLayoutCommonConstraints >> linear [
 BlLayoutCommonConstraints >> relative [
 	^ self at: BlRelativeLayout
 ]
-
-{ #category : #'*Bloc-Layout' }
-BlLayoutCommonConstraints >> zoomable [
-	^ self at: BlZoomableLayout
-]

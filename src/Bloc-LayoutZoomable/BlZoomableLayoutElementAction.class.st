@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'animationDuration'
 	],
-	#category : #'Bloc-Layout-Zoomable'
+	#category : #'Bloc-LayoutZoomable'
 }
 
 { #category : #accessing }

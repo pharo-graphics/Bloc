@@ -5,7 +5,7 @@ Class {
 		'animationDuration',
 		'defaultScale'
 	],
-	#category : #'Bloc-Layout-Zoomable'
+	#category : #'Bloc-LayoutZoomable'
 }
 
 { #category : #constraints }
