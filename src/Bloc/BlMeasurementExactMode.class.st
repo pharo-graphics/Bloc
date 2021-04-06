@@ -14,11 +14,10 @@ BlMeasurementExactMode >> isExact [
 ]
 
 { #category : #geometry }
-BlMeasurementExactMode >> measurement: aResizing with: aNumber [
-	<argument: #aNumber satisfies: #isFloat>
+BlMeasurementExactMode >> measurement: aResizing with: aFloat [
 	<return: #BlMeasurementSpec>
 	
-	^ aResizing measurementExactlyWith: aNumber
+	^ aResizing measurementExactlyWith: aFloat
 ]
 
 { #category : #printing }
@@ -35,18 +34,17 @@ BlMeasurementExactMode >> printOn: aStream size: aNumber [
 ]
 
 { #category : #geometry }
-BlMeasurementExactMode >> size: aNumber min: aMinSize max: aMaxSize [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
-	<argument: #aMinSize satisfies: #isBlocFiniteFloat>
-	<argument: #aMaxSize satisfies: #isFloat>
+BlMeasurementExactMode >> size: aNumber min: aMinSizeFloat max: aMaxSizeFloat [
+	"aNumber should satisfy #isBlocFiniteFloat,
+	aMinSizeFloat and aMaxSizeFloat  #isBlocFiniteFloat"
 	<return: #Number>
 	
-	^ BlMeasurementSpec exact: (aNumber min: aMaxSize max: aMinSize)
+	^ BlMeasurementSpec exact: (aNumber min: aMaxSizeFloat max: aMinSizeFloat)
 ]
 
 { #category : #geometry }
 BlMeasurementExactMode >> size: aNumber with: aSpecSize [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	"aNumber should satisfy: #isBlocFiniteFloat"
 	<return: #Number>
 	
 	^ aSpecSize

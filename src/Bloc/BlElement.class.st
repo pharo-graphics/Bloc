@@ -758,13 +758,12 @@ BlElement >> childrenCount [
 ]
 
 { #category : #'api - children enumeration' }
-BlElement >> childrenDo: aBlockOrSymbol [
+BlElement >> childrenDo: aBlock [
 	"Evaluate aBlock with each of my direct children as argument.
 	aBlock can not be nil.
 	aBlock must accept exactly one argument"
-	<argument: #aBlockOrSymbol satisfies: #notNil>
 	
-	self children do: aBlockOrSymbol
+	self children do: aBlock
 ]
 
 { #category : #'geometry position convertion' }
@@ -877,11 +876,6 @@ BlElement >> constraints [
 BlElement >> constraints: aLayoutConstraints [
 	"Set new layout constraints and request layout update.
 	aLayoutConstraints must not be nil"
-	<argument: #aLayoutConstraints satisfies: #notNil>
-		
-	self
-		assert: [ (aLayoutConstraints isKindOf: BlockClosure) not ]
-		description: [ 'Did you mean constraintsDo: ? Constraints should be an object' ].
 
 	constraints := aLayoutConstraints.
 	self requestLayout
@@ -2270,7 +2264,6 @@ BlElement >> margin [
 
 { #category : #'api - layout' }
 BlElement >> margin: aBlInsets [
-	<argument: #aBlInsets satisfies: #notNil>
 
 	self margin = aBlInsets
 		ifTrue: [ ^ self ].
@@ -2324,13 +2317,12 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 	Subclasses should not override me, instead override onMeasure:
 	for concrete implementation.
 	anExtentMeasurementSpec must not be nil"
-	<argument: #anExtentMeasurementSpec satisfies: #notNil>
-	
+
 	"Fast exit if I or any of my children did not request layout update
 	and my previous measurement specification equals to new one"
 	(self isLayoutRequested not
 		and: [ self privatePreviousMeasurementSpec = anExtentMeasurementSpec ])
-		ifTrue: [ ^ self ].
+			ifTrue: [ ^ self ].
 
 	"we have to eat layout request first marking it as false in order
 	to do a second or third layout pass if needed.
@@ -2367,7 +2359,7 @@ BlElement >> measuredBounds [
 
 { #category : #layout }
 BlElement >> measuredExtent [
-	"Return my measured extent used during layout by layout strategies.
+	"Return my measured extent (as a Point) used during layout by layout strategies.
 	It is being computed during measuring step.
 	@see BlElement>>onMeasure:
 	measuredExtent can not be nil"
@@ -2377,14 +2369,12 @@ BlElement >> measuredExtent [
 ]
 
 { #category : #layout }
-BlElement >> measuredExtent: anExtent [
-	"Set newly measured extent.
-	@see BlElement>>#measuredExtent for more info
+BlElement >> measuredExtent: anExtentPoint [
+	"Set newly measured extent (should respect #isBlocFiniteFloatPoint and #isBlocPositivePoint).
+	@see `BlElement>>#measuredExtent` for more info
 	anExtent must not be nil"
-	<argument: #anExtent satisfies: #isBlocFiniteFloatPoint>
-	<argument: #anExtent satisfies: #isBlocPositivePoint>
 	
-	self measuredBounds extent: anExtent
+	self measuredBounds extent: anExtentPoint
 ]
 
 { #category : #layout }
@@ -2727,7 +2717,6 @@ BlElement >> outskirts [
 BlElement >> outskirts: aBlOutskirts [
 	"Change my outskirts - the way the border is interpreted.
 	See BlOutskirts for more information"
-	<argument: #aBlOutskirts satisfies: #notNil>
 
 	aBlOutskirts = self outskirts
 		ifTrue: [ ^ self ].
@@ -2755,7 +2744,6 @@ BlElement >> padding [
 
 { #category : #'api - layout' }
 BlElement >> padding: aBlInsets [
-	<argument: #aBlInsets satisfies: #notNil>
 
 	self padding = aBlInsets
 		ifTrue: [ ^ self ].
@@ -2836,11 +2824,11 @@ BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdat
 	Note, I do not request layout update and do not send invalidate to myself if only
 	position changes, instead I send invalidate with my effect bounds in parent coordinates
 	to my parent. It allows developers to implement drawing cache"
+	
+	"aPosition should satisfy #isBlocFiniteFloatPoint"
+	"anExtent should satisfy #isBlocFiniteFloatPoint and #isBlocPositivePoint"
+	
 	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition | 
-	<argument: #aPosition satisfies: #isBlocFiniteFloatPoint>
-	<argument: #anExtent satisfies: #isBlocFiniteFloatPoint>
-	<argument: #anExtent satisfies: #isBlocPositivePoint>
-
 	aPreviousPosition := self position.
 	aPreviousExtent := self extent.
 
@@ -2984,10 +2972,8 @@ BlElement >> relocate: aPoint [
 	layout. Do nothing if previous #relocate request was performed with the same coordinates.
 	Note: We can not guarantee that new element's position will be equal to requested one,
 	since it depends on the applied layout.
+	Raises `BlElementPositionChangedEvent` and `BlElementPositionInSpaceChangedEvent`
 	aPoint must not be nil"
-	<argument: #aPoint satisfies: #notNil>
-	<event: #BlElementPositionChangedEvent>
-	<event: #BlElementPositionInSpaceChangedEvent>
 
 	self measuredBounds position = aPoint
 		ifTrue: [ ^ self ].
@@ -3090,18 +3076,13 @@ BlElement >> removeChildren [
 { #category : #'children add/remove' }
 BlElement >> removeChildren: aListOfElements [
 	"Remove all elements listed in aListOfElements from my direct children.
-	All elements must be my direct children.
-	@use BlElement>>#removeChildren if you want to remove all my children
-	@see BlElement>>#removeChild: for more info
+	All elements must be my direct children (i.e., anElement parent == self).
+	Use `BlElement>>#removeChildren` if you want to remove all my children.
+	See `BlElement>>#removeChild:` for more info
 	aListOfElements must not be nil."
-	<argument: #aListOfElements satisfies: #notNil>
-	self
-		assert: [ aListOfElements allSatisfy: [ :anElement | anElement parent == self ] ]
-		description: [ 'I can only remove my direct children!' ].
 	
 	aListOfElements do: [ :anElement | self onChildToBeRemoved: anElement ].
-	aListOfElements do: [ :anElement |
-		anElement parent: nil ].
+	aListOfElements do: [ :anElement | anElement parent: nil ].
 	self children removeAll: aListOfElements.
 	aListOfElements do: [ :anElement | self dispatchChildRemoved: anElement ].
 	
@@ -3379,7 +3360,6 @@ BlElement >> space: aSpace [
 	Set space to be accessed directly from my multiple methods.
 	Update the space reference for my children.
 	aSpace must not be nil."
-	<argument: #aSpace satisfies: #notNil>
 
 	spaceReference := aSpace asReference.
 	self childrenDo: [ :each | each space: aSpace ]

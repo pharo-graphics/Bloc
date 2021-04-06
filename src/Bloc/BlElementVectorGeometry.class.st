@@ -45,10 +45,7 @@ BlElementVectorGeometry >> extent [
 BlElementVectorGeometry >> extent: aPoint [
 	"The argument has to be a Point of numbers (integer or float).
 	Do not try to provide a fraction as x or y of the point!
-	aPoint must not be nil
-	aPoint must be positive"
-	<argument: #aPoint satisfies: #isBlocFiniteFloatPoint>
-	<argument: #aPoint satisfies: #isBlocPositivePoint>
+	aPoint must be positive (#isBlocFiniteFloatPoint and #isBlocPositivePoint)"
 
 	extent := aPoint
 ]

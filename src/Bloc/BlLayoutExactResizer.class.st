@@ -114,8 +114,7 @@ BlLayoutExactResizer >> size [
 
 { #category : #accessing }
 BlLayoutExactResizer >> size: aNumber [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
-	<argument: #aNumber satisfies: #isBlocPositiveFloat>
+	"aNumber should satisfy #isBlocFiniteFloat and #isBlocPositiveFloat"
 
 	size := aNumber
 ]

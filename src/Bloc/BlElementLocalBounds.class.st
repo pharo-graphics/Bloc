@@ -39,8 +39,7 @@ BlElementLocalBounds >> extent [
 
 { #category : #accessing }
 BlElementLocalBounds >> extent: aPoint [
-	<argument: #aPoint satisfies: #isBlocFiniteFloatPoint>
-	<argument: #aPoint satisfies: #isBlocPositivePoint>
+	"aPoint should satisfy isBlocFiniteFloatPoint and isBlocPositivePoint"
 
 	extent := aPoint
 ]
@@ -129,7 +128,7 @@ BlElementLocalBounds >> position [
 
 { #category : #accessing }
 BlElementLocalBounds >> position: aPoint [
-	<argument: #aPoint satisfies: #isBlocFiniteFloatPoint>
+	"aPoint should satisfy #isBlocFiniteFloatPoint"
 	
 	position := aPoint
 ]

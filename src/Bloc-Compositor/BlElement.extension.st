@@ -12,26 +12,20 @@ BlElement >> compositionDepth [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintCompositedOn: aCompositorPainter offset: anOffset [
-	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+	"anOffsetPoint should satisfies #isSpartaScalarPoint"
 
 	| aLayer |
-
 	self shouldBePainted
 		ifTrue: [ BlCompositionPainter repaintCompositedElement: self ].
-
 	aCompositorPainter stopRecording.
-
 	aLayer := self compositionLayer.
 	aLayer offset: anOffset.
-	
-	self assert: [ aLayer isKindOf: BlCompositionOffsetLayer ].
-	
 	aCompositorPainter addLayer: aLayer
 ]
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
-	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+	"anOffsetPoint should satisfies #isSpartaScalarPoint"
 
 	"invisible elements are not rendered too"
 	self isVisible
@@ -56,7 +50,7 @@ BlElement >> fullPaintOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> fullPaintWithTransformOn: aCompositorPainter offset: anOffset [
-	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+	"anOffsetPoint should satisfies isSpartaScalarPoint"
 
 	self transformation isIdentity
 		ifTrue: [ self paintMeAndChildrenOn: aCompositorPainter offset: anOffset ]
@@ -101,9 +95,8 @@ BlElement >> paintChildrenOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintClippedChildrenOn: aCompositorPainter offset: anOffset [
-	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+	"anOffsetPoint should satisfies #isSpartaScalarPoint"
 
-	"If there are not children no need to draw and clip"
 	self hasChildren
 		ifFalse: [ ^ self ].
 
@@ -119,10 +112,9 @@ BlElement >> paintClippedChildrenOn: aCompositorPainter offset: anOffset [
 
 { #category : #'*Bloc-Compositor' }
 BlElement >> paintMeAndChildrenOn: aCompositorPainter offset: anOffset [
-	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+	"anOffsetPoint should satisfies #isSpartaScalarPoint"
 
 	self paintOn: aCompositorPainter offset: anOffset.
-
 	self
 		paintClippedChildrenOn: aCompositorPainter
 		offset: anOffset

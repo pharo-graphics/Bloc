@@ -35,14 +35,14 @@ BlBounds class >> origin: anOrigin corner: aCorner [
 ]
 
 { #category : #'instance creation' }
-BlBounds class >> origin: anOrigin extent: anExtent [	
-	<argument: #anExtent satisfies: #isBlocPositivePoint>
+BlBounds class >> origin: anOrigin extent: aPointExtent [	
+	"aPointExtent should satisfy #isBlocPositivePoint"
 
 	^ self new
 		left: anOrigin x
 		top: anOrigin y
-		right: anOrigin x + anExtent x
-		bottom: anOrigin y + anExtent y;
+		right: anOrigin x + aPointExtent x
+		bottom: anOrigin y + aPointExtent y;
 		yourself
 ]
 
@@ -86,7 +86,7 @@ BlBounds >> bottom [
 
 { #category : #accessing }
 BlBounds >> bottom: aNumber [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	"aNumber should satify #isBlocFiniteFloat"
 
 	bottom := aNumber
 ]
@@ -294,10 +294,7 @@ BlBounds >> expandBy: aDelta [
 
 { #category : #'rectangle functions' }
 BlBounds >> expandByLeft: aLeft top: aTop right: aRight bottom: aBottom [
-	<argument: #aLeft satisfies: #isBlocFinite>
-	<argument: #aTop satisfies: #isBlocFinite>
-	<argument: #aRight satisfies: #isBlocFinite>
-	<argument: #aBottom satisfies: #isBlocFinite>
+	"All arguments should satisfy #isBlocFinite"
 	
 	left := left - aLeft.
 	top := top - aTop.
@@ -316,7 +313,7 @@ BlBounds >> expandByMargin: aMargin [
 
 { #category : #'rectangle functions' }
 BlBounds >> expandByNumber: aNumber [
-	<argument: #aNumber satisfies: #isBlocFinite>
+	"aNumber should satisfy #isBlocFinite"
 		
 	left := left - aNumber.
 	top := top - aNumber.
@@ -432,7 +429,7 @@ BlBounds >> left [
 
 { #category : #accessing }
 BlBounds >> left: aNumber [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	"aNumber should satisfy #isBlocFinite"
 
 	left := aNumber
 ]
@@ -448,10 +445,7 @@ BlBounds >> left: aLeft top: aTop corner: aCorner [
 
 { #category : #initialization }
 BlBounds >> left: aLeft top: aTop right: aRight bottom: aBottom [
-	<argument: #aLeft satisfies: #isBlocFiniteFloat>
-	<argument: #aTop satisfies: #isBlocFiniteFloat>
-	<argument: #aRight satisfies: #isBlocFiniteFloat>
-	<argument: #aBottom satisfies: #isBlocFiniteFloat>
+	"All arguments should satisfy #isBlocFinite"
 
 	left := aLeft.
 	top := aTop.
@@ -576,7 +570,7 @@ BlBounds >> right [
 
 { #category : #accessing }
 BlBounds >> right: aNumber [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	"aNumber should satisfy #isBlocFiniteFloat"
 
 	right := aNumber
 ]
@@ -601,8 +595,7 @@ BlBounds >> scaleBy: aFactor [
 
 { #category : #transforming }
 BlBounds >> scaleX: aX Y: aY [
-	<argument: #aX satisfies: #isBlocFinite>
-	<argument: #aY satisfies: #isBlocFinite>
+	"Arguments should satisfy #isBlocFinite"
 
 	left := left * aX.
 	top := top * aY.
@@ -626,7 +619,7 @@ BlBounds >> top [
 
 { #category : #accessing }
 BlBounds >> top: aNumber [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	"anNumber should satisfy #isBlocFiniteFloat"
 
 	top := aNumber
 ]
@@ -663,8 +656,7 @@ BlBounds >> translateBy: aPoint [
 
 { #category : #transforming }
 BlBounds >> translateX: aX Y: aY [
-	<argument: #aX satisfies: #isBlocFinite>
-	<argument: #aY satisfies: #isBlocFinite>
+	"Arguments should satisfy #isBlocFinite"
 
 	left := left + aX.
 	top := top + aY.

@@ -99,11 +99,10 @@ BlMorphicWorldEmbeddingElement >> onLayout: aRectangle context: aBlElementBounds
 
 { #category : #layout }
 BlMorphicWorldEmbeddingElement >> onMeasure: anExtentMeasurementSpec [
+
 	super onMeasure: anExtentMeasurementSpec.
-	
 	world extent = self measuredExtent
 		ifTrue: [ ^ self ].
-
 	world extent: self measuredExtent
 ]
 

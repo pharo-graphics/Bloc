@@ -127,14 +127,14 @@ BlMeasurementSpec >> size [
 
 { #category : #accessing }
 BlMeasurementSpec >> size: aNumber [
-	<argument: #aNumber satisfies: #isBlocPositiveFloat>
+	"aNumber should satisfy: #isBlocPositiveFloat"
 
 	size := aNumber
 ]
 
 { #category : #geometry }
 BlMeasurementSpec >> sizeFor: aNumber [
-	<argument: #aNumber satisfies: #isBlocFiniteFloat>
+	"aNumber should satisfy: #isBlocFiniteFloat"
 
 	^ self mode size: aNumber with: size
 ]

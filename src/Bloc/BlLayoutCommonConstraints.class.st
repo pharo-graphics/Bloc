@@ -184,8 +184,7 @@ BlLayoutCommonConstraints >> maxHeight [
 BlLayoutCommonConstraints >> maxHeight: aNumber [
 	"Set maximal height to be aNumber,
 	aNumber must not be nil
-	aNumber must be non-negative"
-	<argument: #aNumber satisfies: #isBlocPositive>
+	aNumber must be non-negative (#isBlocPositive)"
 	
 	maxHeight := aNumber asFloat
 ]
@@ -203,8 +202,7 @@ BlLayoutCommonConstraints >> maxWidth [
 BlLayoutCommonConstraints >> maxWidth: aNumber [
 	"Set maximal width to be aNumber,
 	aNumber must not be nil
-	aNumber must be non-negative"
-	<argument: #aNumber satisfies: #isBlocPositive>
+	aNumber must be non-negative (#isBlocPositive)"
 	
 	maxWidth := aNumber asFloat
 ]
@@ -222,8 +220,7 @@ BlLayoutCommonConstraints >> minHeight: aNumber [
 	"Set minimal height to be aNumber,
 	aNumber must not be nil
 	aNumber must not be infinite
-	aNumber must be non-negative"
-	<argument: #aNumber satisfies: #isBlocPositive>
+	aNumber must be non-negative (#isBlocPositive)"
 	
 	minHeight := aNumber asFloat
 ]
@@ -241,8 +238,7 @@ BlLayoutCommonConstraints >> minWidth: aNumber [
 	"Set minimal width to be aNumber,
 	aNumber must not be nil
 	aNumber must not be infinite
-	aNumber must be non-negative"
-	<argument: #aNumber satisfies: #isBlocPositive>
+	aNumber must be non-negative (#isBlocPositive)"
 		
 	minWidth := aNumber asFloat
 ]

@@ -109,14 +109,14 @@ BlCompositionPainter >> addLayer: aCompositionLayer [
 ]
 
 { #category : #'private - layer' }
-BlCompositionPainter >> applyClip: aClipPath offset: anOffset thenPaint: aPaintBlock [
-	<argument: #anOffset satisfies: #isSpartaScalarPoint>
+BlCompositionPainter >> applyClip: aClipPath offset: anOffsetPoint thenPaint: aPaintBlock [
+	"anOffsetPoint should satisfies #isSpartaScalarPoint"
 
 	self canvasDo: [ :aCanvas |
-		aCanvas clip push: aClipPath offset: anOffset ].
-	state pushClip: aClipPath offset: anOffset.
+		aCanvas clip push: aClipPath offset: anOffsetPoint ].
+	state pushClip: aClipPath offset: anOffsetPoint.
 	
-	aPaintBlock cull: self cull: anOffset.
+	aPaintBlock cull: self cull: anOffsetPoint.
 	
 	state pop.
 	self canvasDo: [ :aCanvas | aCanvas clip pop ]

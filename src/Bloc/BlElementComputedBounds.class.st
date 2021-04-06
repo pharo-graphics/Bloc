@@ -33,8 +33,7 @@ BlElementComputedBounds >> bounds [
 
 { #category : #accessing }
 BlElementComputedBounds >> bounds: aBlBounds [
-	<argument: #aBlBounds isKindOf: #BlBounds>
-
+	
 	bounds := aBlBounds
 ]
 
