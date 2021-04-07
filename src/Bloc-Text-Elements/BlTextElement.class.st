@@ -306,8 +306,7 @@ BlTextElement >> onAddedToSceneGraph [
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 
-	text isNotNil
-		ifTrue: [ self error: 'Text model must be nil!' ].
+	text ifNil: [ self error: 'Text model must not be nil!' ].
 
 	(self shouldMeasure: anExtentMeasurementSpec)
 		ifTrue: [ 
