@@ -313,7 +313,7 @@ BlTextElement >> onAddedToSceneGraph [
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 	self
 		assert: [ text isNotNil ]
-		description: [ 'Text model must be nil!' ].
+		description: [ 'Text model must not be nil!' ].
 
 	(self shouldMeasure: anExtentMeasurementSpec)
 		ifTrue: [ 
