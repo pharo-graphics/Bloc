@@ -27,12 +27,3 @@ BlParentChain class >> of: anElement upToExclusive: aParentElement [
 			aChain addFirst: aParent ].
 	^ aChain
 ]
-
-{ #category : #'as yet unclassified' }
-BlParentChain >> gtInspectorElementsIn: aComposite [
-	<gtInspectorPresentationOrder: 10>
-	
-	^ aComposite fastList
-		title: 'Elements';
-		display: [ self asArray ]
-]

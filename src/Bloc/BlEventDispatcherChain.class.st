@@ -56,17 +56,6 @@ BlEventDispatcherChain >> first [
 		ifFalse: [ self ]
 ]
 
-{ #category : #'as yet unclassified' }
-BlEventDispatcherChain >> gtInspectorDispatchersIn: aComposite [
-	<gtInspectorPresentationOrder: 80>
-
-	^ aComposite fastTable
-		title: 'Dispatchers';
-		display: [ self withAllPrevious reversed select: #hasDispatcher thenCollect: #dispatcher ];
-		column: 'Dispatcher' evaluated: #yourself;
-		column: 'Type' evaluated: #type
-]
-
 { #category : #'private - testing' }
 BlEventDispatcherChain >> hasDispatcher [
 	<return: #Boolean>

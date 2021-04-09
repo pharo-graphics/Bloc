@@ -49,15 +49,6 @@ BlHandlerAnnouncerRegistry >> do: aBlock [
 		self announcer subscriptions subscriptions do: [ :aSubscription | aBlock value: aSubscription subscriber ] ]
 ]
 
-{ #category : #'as yet unclassified' }
-BlHandlerAnnouncerRegistry >> gtInspectorSubscriptionsIn: aComposite [
-	<gtInspectorPresentationOrder: 2>
-
-	^ aComposite list
-		title: 'Subscriptions';
-		display: [ self subscriptions ]
-]
-
 { #category : #'api - accessing' }
 BlHandlerAnnouncerRegistry >> handlers [
 	"Return an immutable collection of all registered event handlers"
