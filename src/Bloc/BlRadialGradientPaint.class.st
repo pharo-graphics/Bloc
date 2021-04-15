@@ -3,8 +3,7 @@ Class {
 	#superclass : #BlGradientPaint,
 	#instVars : [
 		'center',
-		'radius',
-		'focalPoint'
+		'radius'
 	],
 	#category : #'Bloc-Paint'
 }
