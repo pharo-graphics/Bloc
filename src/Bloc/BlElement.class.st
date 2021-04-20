@@ -721,6 +721,18 @@ BlElement >> childWithId: aBlElementId [
 ]
 
 { #category : #'children accessing' }
+BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock [
+	"Find (deeply) the first child element with a given id and evaluate a ifFoundBlock if such
+	child exists and return the result of the evaluation. Return nil otherwise."
+	<return: #Object or: nil>
+
+	^ self
+		childWithId: aBlElementId
+		ifFound: ifFoundBlock
+		ifNone: [ nil ]
+]
+
+{ #category : #'children accessing' }
 BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
 	| targetId |
