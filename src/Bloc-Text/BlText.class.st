@@ -283,6 +283,20 @@ BlText >> equals: anObject [
 ]
 
 { #category : #'text - attributes' }
+BlText >> findAllAttributesSuchThat: aComparisonBlock indicesDo: aBlock [	
+	| iterator  |
+	iterator := self iterator.
+	[ iterator hasNext ] whileTrue: [ 
+	iterator
+		nextAttributedEnd: aComparisonBlock
+		indicesDo: [ :_ :__ :theEndedAttributes |			
+			theEndedAttributes do: [ :eachAttribute |
+				self
+					findAttribute: eachAttribute
+					indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd value: eachAttribute ] ] ] ].
+]
+
+{ #category : #'text - attributes' }
 BlText >> findAttribute: aBlTextAttribute indicesDo: aBlock [	
 	^ self iterator
 		nextAttributeStartAndEnd: aBlTextAttribute
