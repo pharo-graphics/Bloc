@@ -317,12 +317,6 @@ BlBlocUIManager >> debugProcess: process context: context label: title spawningD
 ]
 
 { #category : #'ui process' }
-BlBlocUIManager >> defer: aBlock [
-	"Defer aBlock inside of the Morphic UI process"
-	super defer: aBlock
-]
-
-{ #category : #'ui process' }
 BlBlocUIManager >> defer: aBlock universe: aBlocUniverseIfAny [
 	"Defer aBloc in a given universe"
 	
@@ -554,13 +548,6 @@ BlBlocUIManager >> textEntry: aStringOrText title: aString entryText: defaultEnt
 			{aStringOrText.
 			aString.
 			defaultEntryText}
-]
-
-{ #category : #'default actions' }
-BlBlocUIManager >> unhandledErrorDefaultAction: anException [
-
-	"The current computation is terminated. The cause of the error should be logged or reported to the user. If the program is operating in an interactive debugging environment the computation should be suspended and the debugger activated."
-	anException debug
 ]
 
 { #category : #'ui process' }

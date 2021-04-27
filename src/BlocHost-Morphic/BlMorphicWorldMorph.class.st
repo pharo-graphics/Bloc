@@ -162,11 +162,6 @@ BlMorphicWorldMorph >> layoutChanged [
 		ifTrue: [ worldState element requestLayout ]
 ]
 
-{ #category : #'events-processing' }
-BlMorphicWorldMorph >> processEvent: anEvent [
-	^ super processEvent: anEvent
-]
-
 { #category : #drawing }
 BlMorphicWorldMorph >> validateDrawingCache [
 	mySession == Smalltalk session 
