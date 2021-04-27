@@ -94,9 +94,9 @@ BlMorphicWindow >> spaceExtent: anExtent [
 		self spaceExtent = anExtent
 			ifFalse: [
 				| aDelta |
-				"we compute decorations extent first"
+				"We compute decorations extent first"
 				aDelta := self fullBounds extent - spaceHostMorph extent.
-				super extent: anExtent + aDelta ] ]
+				self extent: anExtent + aDelta ] ]
 ]
 
 { #category : #accessing }

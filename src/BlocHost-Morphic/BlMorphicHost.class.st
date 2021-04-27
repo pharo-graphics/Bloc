@@ -66,32 +66,32 @@ BlMorphicHost >> containerMorph: aMorph [
 { #category : #'host - api' }
 BlMorphicHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
-	| aMorph aHostSpace|
 
+	| aMorph aHostSpace|
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host!' ].
 
 	aMorph := self createMorphFor: aSpace.
 
-	aHostSpace := BlMorphicHostSpace new spaceHostMorph: aMorph.
-	aHostSpace universe: self universe.
-	aHostSpace host: self.
-	aHostSpace space: aSpace.
-	aHostSpace withSpartaRenderer.
+	aHostSpace := BlMorphicHostSpace new
+		spaceHostMorph: aMorph;
+		universe: self universe;
+		host: self;
+		space: aSpace;
+		withSpartaRenderer;
+		yourself.
 
 	aSpace hostSpace: aHostSpace
 ]
 
 { #category : #private }
 BlMorphicHost >> createMorphFor: aSpace [
-	| aMorph |
 
-	aMorph := BlMorphicSpaceHostMorph new.
-	aMorph color: Color transparent.
-	aMorph extent: aSpace extent.
-
-	^ aMorph
+	^ BlMorphicSpaceHostMorph new
+		  color: Color transparent;
+		  extent: aSpace extent;
+		  yourself
 ]
 
 { #category : #'host - api' }
