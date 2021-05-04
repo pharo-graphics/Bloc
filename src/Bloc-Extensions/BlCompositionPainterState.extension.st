@@ -15,7 +15,7 @@ BlCompositionPainterState >> gtCommandsFor: aView [
 					BrEditor new
 						hMatchParent;
 						vFitContent;
-						look: (BrGlamorousRegularEditorAptitude new glamorousCodeTinySize);
+						aptitude: (BrGlamorousRegularEditorAptitude new glamorousCodeTinySize);
 						text: eachCommand commandString ] ];
 		column: 'Offset' item: [ :eachCommand | eachCommand offset ] width: 100
 ]

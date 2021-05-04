@@ -87,7 +87,7 @@ BlCompositionLayer >> gtSymbolTreeFor: aView [
 	^ aView textEditor
 		title: 'Tree Print';
 		priority: 4;
-		look: BrGlamorousCodeEditorAptitude;
+		aptitude: BrGlamorousCodeEditorAptitude;
 		text: [ self class printSymbolTree: self asSymbolTree ]
 ]
 
@@ -129,7 +129,7 @@ BlCompositionLayer >> paintTreeWith: view [
 							aFormElement := each asForm asElement asScalableElement
 								background: Color white;
 								margin: (BlInsets top: 10);
-								look: BrShadowAptitude new.
+								aptitude: BrShadowAptitude new.
 								
 							aForm width > aForm height
 								ifTrue: [
