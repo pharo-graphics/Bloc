@@ -16,14 +16,8 @@ BlDrawingErrorHandler >> matches: aFramePhase [
 
 { #category : #'error handling' }
 BlDrawingErrorHandler >> processError: aHandledError [
-	| anErrorContainer |
-	
+
 	aHandledError element
-		childNamed: #errorContainer
-		ifFound: [ :anElement | anErrorContainer := anElement ]
-		ifNone: [ aHandledError element ].
-	
-	anErrorContainer
 		addChild: (BlElement new
 			size: 100@40;
 			id: #error;
