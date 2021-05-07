@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTaskExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-Tasks'
 }
 

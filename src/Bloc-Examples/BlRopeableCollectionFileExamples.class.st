@@ -1,6 +1,6 @@
 Class {
 	#name : #BlRopeableCollectionFileExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#instVars : [
 		'largeFile'
 	],

@@ -3,7 +3,7 @@ I exemplify ${class:BlSharedEventDistributor}$.
 "
 Class {
 	#name : #BlSharedEventDistributorExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-EventHandling'
 }
 

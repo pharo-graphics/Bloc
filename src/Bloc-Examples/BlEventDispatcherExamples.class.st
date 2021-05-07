@@ -3,8 +3,8 @@ I am a collection of event dispatcher examples
 "
 Class {
 	#name : #BlEventDispatcherExamples,
-	#superclass : #Object,
-	#category : 'Bloc-Examples-EventHandling'
+	#superclass : #BlExamplesTest,
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #examples }

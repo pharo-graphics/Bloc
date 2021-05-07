@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMouseEventExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-Event'
 }
 

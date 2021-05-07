@@ -3,7 +3,7 @@ I am a collection of basic most simple examples that show most important Bloc fe
 "
 Class {
 	#name : #BlBasicExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
 	#category : #'Bloc-Examples-Basic'

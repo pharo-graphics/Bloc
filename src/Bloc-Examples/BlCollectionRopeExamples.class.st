@@ -3,7 +3,7 @@ I contain examples of a collection rope
 "
 Class {
 	#name : #BlCollectionRopeExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-Rope'
 }
 

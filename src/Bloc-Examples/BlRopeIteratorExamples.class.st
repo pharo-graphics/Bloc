@@ -3,7 +3,7 @@ I contain examples of rope iterators
 "
 Class {
 	#name : #BlRopeIteratorExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-Rope'
 }
 

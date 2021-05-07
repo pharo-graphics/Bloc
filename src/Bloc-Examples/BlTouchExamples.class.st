@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTouchExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-Event'
 }
 

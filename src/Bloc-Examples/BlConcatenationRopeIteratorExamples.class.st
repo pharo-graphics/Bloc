@@ -1,6 +1,6 @@
 Class {
 	#name : #BlConcatenationRopeIteratorExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-Rope'
 }
 

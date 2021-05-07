@@ -1,6 +1,6 @@
 Class {
 	#name : #BlKeyboardKeyExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-KeyBinding'
 }
 

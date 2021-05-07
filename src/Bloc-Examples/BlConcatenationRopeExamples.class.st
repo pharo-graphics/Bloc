@@ -3,7 +3,7 @@ I contain examples of a concatenation rope
 "
 Class {
 	#name : #BlConcatenationRopeExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-Rope'
 }
 

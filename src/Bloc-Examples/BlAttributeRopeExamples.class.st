@@ -3,8 +3,8 @@ I contain examples of an attribute rope
 "
 Class {
 	#name : #BlAttributeRopeExamples,
-	#superclass : #Object,
-	#category : 'Bloc-Examples-Rope'
+	#superclass : #BlExamplesTest,
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - attributes' }

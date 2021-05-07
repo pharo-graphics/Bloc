@@ -5,7 +5,7 @@ DOES NOT WORK
 "
 Class {
 	#name : #BlAnimationExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
 	#category : #'Bloc-Examples-Animation'

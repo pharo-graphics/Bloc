@@ -3,8 +3,8 @@ I contain examples of space related events
 "
 Class {
 	#name : #BlSpaceEventExamples,
-	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#superclass : #BlExamplesTest,
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #'event handling' }

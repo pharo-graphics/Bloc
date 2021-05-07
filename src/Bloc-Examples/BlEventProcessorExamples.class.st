@@ -1,6 +1,6 @@
 Class {
 	#name : #BlEventProcessorExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Examples-Event'
 }
 
