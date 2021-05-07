@@ -65,7 +65,7 @@ BlTelemetryTask >> gtBarElementsWithGlobalWeight: aWeight local: aLocalWeight [
 			background: aBarColor;
 			in: [ :aPane | aWeight > 0.005
 				ifTrue: [ aPane addChild: (BrLabel new
-					look: (BrGlamorousLabelLook new fontSize: 10);
+					aptitude: (BrGlamorousLabelAptitude new fontSize: 10);
 					text: self printString) asScalableElement ] ];
 			yourself);
 		addChild: (BlElement new
