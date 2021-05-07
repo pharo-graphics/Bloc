@@ -39,6 +39,13 @@ BaselineOfNewBloc >> baseline: spec [
 				package: #'Bloc-Spec2';
 				package: #'Bloc-PharoExtensions';
 				package: #'Bloc-Spec2-Tests' with: [ spec requires: #('Bloc-Spec2' ) ].
+
+			spec
+				package: #'Bloc-DevTool' with: [
+					spec requires: #(#Bloc #'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope'). ];
+				package: #'Bloc-Scripter' with: [
+					spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock') ].
+
 			spec
 				group: 'default'
 				with: #('Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout BlocOSWindow) ].
