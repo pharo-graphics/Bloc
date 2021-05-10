@@ -1,6 +1,6 @@
 Class {
 	#name : #BlDevElementExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Scripter-Examples'
 }
 

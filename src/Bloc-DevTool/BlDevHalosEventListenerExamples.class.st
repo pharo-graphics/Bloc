@@ -3,7 +3,7 @@ I exemplify ${class:BlDevHalosEventListener}$.
 "
 Class {
 	#name : #BlDevHalosEventListenerExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-DevTool-Examples'
 }
 

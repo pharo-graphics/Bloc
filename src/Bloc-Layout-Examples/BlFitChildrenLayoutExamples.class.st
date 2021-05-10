@@ -1,6 +1,6 @@
 Class {
 	#name : #BlFitChildrenLayoutExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Layout-Examples-Fit'
 }
 

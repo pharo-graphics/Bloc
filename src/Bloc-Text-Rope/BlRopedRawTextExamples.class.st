@@ -1,6 +1,6 @@
 Class {
 	#name : #BlRopedRawTextExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Text-Rope-Examples'
 }
 

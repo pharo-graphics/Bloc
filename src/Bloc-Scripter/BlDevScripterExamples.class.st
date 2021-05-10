@@ -3,7 +3,7 @@ I exemplify ${class:BlDevScripter}$.
 "
 Class {
 	#name : #BlDevScripterExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#instVars : [
 		'elementExamples'
 	],
