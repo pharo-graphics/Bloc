@@ -40,11 +40,11 @@ BaselineOfNewBloc >> baseline: spec [
 				package: #'Bloc-PharoExtensions';
 				package: #'Bloc-Spec2-Tests' with: [ spec requires: #('Bloc-Spec2' ) ].
 
-			spec
+"			spec
 				package: #'Bloc-DevTool' with: [
 					spec requires: #(#Bloc #'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope'). ];
 				package: #'Bloc-Scripter' with: [
-					spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock') ].
+					spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock') ]."
 
 			spec
 				group: 'default'
