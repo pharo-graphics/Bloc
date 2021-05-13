@@ -48,5 +48,5 @@ BaselineOfNewBloc >> baseline: spec [
 
 			spec
 				group: 'default'
-				with: #('Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout BlocOSWindow) ].
+				with: #(#'Bloc-Scripter' 'Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout BlocOSWindow) ].
 ]
