@@ -76,6 +76,8 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawing [
 	<noTest>
 
 	| aFaultyElement theErrors aSceneElement |
+	self skip.
+	
 	aFaultyElement := BlElementWithBrokenDrawingMock new.
 	aFaultyElement background: Color gray.
 
@@ -99,6 +101,8 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 	<noTest>
 
 	| aFaultyElement theErrors aSceneElement |
+	self skip.
+
 	aFaultyElement := BlElementWithBrokenDrawingAndOnLayoutMock new.
 	aFaultyElement background: Color gray.
 
@@ -130,6 +134,8 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenOnLayout [
 	<noTest>
 
 	| aSceneElement aFaultyElement theErrors |
+	self skip.
+
 	aFaultyElement := BlElementWithBrokenOnLayoutMock new.
 	aFaultyElement background: Color gray.
 
