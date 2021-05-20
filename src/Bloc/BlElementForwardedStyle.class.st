@@ -9,7 +9,7 @@ Class {
 
 { #category : #actions }
 BlElementForwardedStyle >> applyOnElement: anElement [
-	(targetObject asBlocResolvedElementsFrom: anElement) asCollection
+	(targetObject asBlocResolvedElementsFrom: anElement)
 		do: [ :eachTargetObject | eachTargetObject properties addProperties: self properties ]
 ]
 
@@ -22,7 +22,7 @@ BlElementForwardedStyle >> asForwarded: aTargetObject [
 
 { #category : #actions }
 BlElementForwardedStyle >> cleanUpOnElement: anElement [
-	(targetObject asBlocResolvedElementsFrom: anElement) asCollection
+	(targetObject asBlocResolvedElementsFrom: anElement)
 		do: [ :eachTargetObject | eachTargetObject properties removeProperties: self properties ]
 ]
 
