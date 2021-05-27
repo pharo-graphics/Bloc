@@ -86,7 +86,7 @@ BlTextFontAndStyleBuilder >> hasCustomDecoration [
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomFamilyName [
-	^ fontFamilyName notNil or: [ defaultFontFamilyName ]
+	^ fontFamilyName notNil or: [ defaultFontFamilyName notNil ]
 ]
 
 { #category : #testing }
