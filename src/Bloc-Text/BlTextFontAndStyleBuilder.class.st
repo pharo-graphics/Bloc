@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'color',
 		'decoration',
-		'defaultFontSize'
+		'defaultFontSize',
+		'defaultFontFamilyName'
 	],
 	#category : #'Bloc-Text-Text-Support'
 }
@@ -35,6 +36,11 @@ BlTextFontAndStyleBuilder >> decoration: aBlTextDecoration [
 	decoration := aBlTextDecoration
 ]
 
+{ #category : #'font - name' }
+BlTextFontAndStyleBuilder >> defaultFamilyName: aString [
+	defaultFontFamilyName := aString
+]
+
 { #category : #'font - size' }
 BlTextFontAndStyleBuilder >> defaultFontSizePt: aNumber [
 	self
@@ -51,7 +57,7 @@ BlTextFontAndStyleBuilder >> font [
 	aFont := BlFont new.
 	
 	self hasCustomFamilyName
-		ifTrue: [ aFont familyName: self familyName ].
+		ifTrue: [ aFont familyName: self resolvedFontFamilyName ].
 	self hasCustomFontSize
 		ifTrue: [ aFont fontSize: self resolvedFontSize ].
 	self hasCustomFontSlant
@@ -83,7 +89,7 @@ BlTextFontAndStyleBuilder >> hasCustomDecoration [
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomFamilyName [
-	^ fontFamilyName notNil
+	^ fontFamilyName notNil or: [ defaultFontFamilyName ]
 ]
 
 { #category : #testing }
@@ -114,6 +120,13 @@ BlTextFontAndStyleBuilder >> hasCustomFontWeight [
 { #category : #initialization }
 BlTextFontAndStyleBuilder >> initialize [
 	super initialize
+]
+
+{ #category : #'font - name' }
+BlTextFontAndStyleBuilder >> resolvedFontFamilyName [
+	<return: #String>
+	
+	^ self familyName ifNil: [ defaultFontFamilyName ]
 ]
 
 { #category : #'font - size' }
