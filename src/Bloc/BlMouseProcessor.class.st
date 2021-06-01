@@ -31,9 +31,10 @@ BlMouseProcessor class >> dblClickDelay [
 
 { #category : #'event testing' }
 BlMouseProcessor >> canBeClickEvent: aMouseUpEvent [
-	^ dndInProgress not
-		and: [ (previousMouseDownEvent isNotNil and: [ previousMouseDownEvent primaryButtonPressed ])
-				and: [ aMouseUpEvent target = previousMouseDownEvent target ] ]
+
+	^ dndInProgress not and: [ 
+		  previousMouseDownEvent isNotNil and: [ 
+			  aMouseUpEvent target = previousMouseDownEvent target ] ]
 ]
 
 { #category : #'event testing' }
