@@ -108,11 +108,6 @@ BlTextFontAndStyleBuilder >> hasCustomFontWeight [
 	^ fontWeight notNil
 ]
 
-{ #category : #initialization }
-BlTextFontAndStyleBuilder >> initialize [
-	super initialize
-]
-
 { #category : #'font - size' }
 BlTextFontAndStyleBuilder >> resolvedFontSize [	
 	<return: #BlValueWithUnit>

@@ -116,13 +116,6 @@ BlElementAlignment >> ifNull: aBlock [
 	"not null"
 ]
 
-{ #category : #initialization }
-BlElementAlignment >> initialize [
-	super initialize.
-	
-	
-]
-
 { #category : #translation }
 BlElementAlignment >> translationOf: aBounds in: aContainerBounds [
 	^ self subclassResponsibility

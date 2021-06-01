@@ -59,13 +59,6 @@ BlLinearGradientPaint >> end: aPoint [
 	end := aPoint
 ]
 
-{ #category : #initialization }
-BlLinearGradientPaint >> initialize [
-	super initialize.
-	
-	
-]
-
 { #category : #geometry }
 BlLinearGradientPaint >> matchExtent: anExtent [
 	| aDirection aStart anEnd aDelta aScaleX aScaleY |
