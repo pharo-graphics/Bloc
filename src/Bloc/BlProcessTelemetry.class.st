@@ -60,20 +60,6 @@ BlProcessTelemetry >> default [
 	^ self class defaultTelemetryClass new
 ]
 
-{ #category : #'instance creation' }
-BlProcessTelemetry >> emit [
-	NonInteractiveTranscript stdout
-		nextPutAll: 'Emit! ';
-		print: self tasks size;
-		cr.
-
-	self tasks ifNotEmpty: [ :theTasks |
-		(BlTelemetrySignal new
-			task: self tasks asTask;
-			telemetry: self) emit ].
-	self reset
-]
-
 { #category : #accessing }
 BlProcessTelemetry >> ensureValue [
 	^ self valueOrNil
@@ -91,11 +77,7 @@ BlProcessTelemetry >> finishSync [
 ]
 
 { #category : #tasks }
-BlProcessTelemetry >> reset [
-	NonInteractiveTranscript stdout
-		nextPutAll: 'Reset!';
-		cr.
-		
+BlProcessTelemetry >> reset [	
 	self value reset
 ]
 
@@ -107,17 +89,4 @@ BlProcessTelemetry >> startSync: aNameBlock [
 { #category : #tasks }
 BlProcessTelemetry >> tasks [
 	^ self value tasks
-]
-
-{ #category : #tasks }
-BlProcessTelemetry >> timeSync: aNameBlock during: aBlock [
-	NonInteractiveTranscript stdout
-		nextPutAll: 'Time sync! ';
-		nextPutAll: aNameBlock value;
-		space;
-		nextPutAll: self value class name;
-		cr.
-
-	self startSync: aNameBlock.
-	^ aBlock ensure: [ self finishSync ]
 ]
