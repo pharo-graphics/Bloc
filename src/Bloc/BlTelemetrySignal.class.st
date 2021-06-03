@@ -2,7 +2,8 @@ Class {
 	#name : #BlTelemetrySignal,
 	#superclass : #BeaconSignal,
 	#instVars : [
-		'task'
+		'task',
+		'telemetry'
 	],
 	#category : #'Bloc-Space - Telemetry'
 }
@@ -24,6 +25,14 @@ BlTelemetrySignal >> gtMapFor: aView [
 ]
 
 { #category : #accessing }
+BlTelemetrySignal >> signal [
+	<objectGetter: #telemetrySignal>
+	<return: #BlTelemetrySignal>
+
+	^ self
+]
+
+{ #category : #accessing }
 BlTelemetrySignal >> task [
 	<return: #BlTelemetryTask>
 
@@ -33,4 +42,14 @@ BlTelemetrySignal >> task [
 { #category : #accessing }
 BlTelemetrySignal >> task: aBlTelemetryTask [
 	task := aBlTelemetryTask
+]
+
+{ #category : #accessing }
+BlTelemetrySignal >> telemetry [
+	^ telemetry
+]
+
+{ #category : #accessing }
+BlTelemetrySignal >> telemetry: anObject [
+	telemetry := anObject
 ]
