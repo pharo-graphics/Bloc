@@ -23,11 +23,14 @@ BlTextStyler >> privateStyle: aText [
 { #category : #'api - styling' }
 BlTextStyler >> style: aBlText [
 	<return: #BlText>
-	| anUnstyledText aStyledText |
-		
-	anUnstyledText := aBlText unstyle.
-	aStyledText := self privateStyle: anUnstyledText characters.
-	^ aStyledText text
+
+	^ BlTextStylerTelemetry
+		rootTimeSync: [ Processor activeProcess name, '  ', self class name, ': ', (aBlText first: (20 min: aBlText size)) asString ]
+		during: [
+			| anUnstyledText aStyledText |
+			anUnstyledText := aBlText unstyle.
+			aStyledText := self privateStyle: anUnstyledText characters.
+			aStyledText text ]
 ]
 
 { #category : #accessing }

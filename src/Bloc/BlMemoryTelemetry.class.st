@@ -11,7 +11,7 @@ Class {
 { #category : #tasks }
 BlMemoryTelemetry >> finishSync [
 	| anEndTime |
-	
+
 	tasksStack
 		ifEmpty: [ ^ self ].
 

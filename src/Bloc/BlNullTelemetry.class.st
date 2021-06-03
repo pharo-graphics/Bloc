@@ -1,9 +1,6 @@
 Class {
 	#name : #BlNullTelemetry,
 	#superclass : #BlTelemetry,
-	#instVars : [
-		'm'
-	],
 	#classInstVars : [
 		'uniqueInstance'
 	],

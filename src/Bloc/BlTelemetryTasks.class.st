@@ -12,7 +12,7 @@ BlTelemetryTasks >> asTask [
 			name: 'Total';
 			startTime: self first startTime;
 			endTime: self last endTime;
-			tasks: self ]
+			tasks: self copy ]
 ]
 
 { #category : #accessing }
