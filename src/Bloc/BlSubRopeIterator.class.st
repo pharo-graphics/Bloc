@@ -1,5 +1,6 @@
 "
 I am a special iterator used to iterate over sub-rope
+
 "
 Class {
 	#name : #BlSubRopeIterator,

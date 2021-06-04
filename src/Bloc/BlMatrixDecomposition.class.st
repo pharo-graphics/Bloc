@@ -13,6 +13,7 @@ For example in case of 2D matrix they are:
 	- skew
 	- perspective
 	- quaternion
+
 "
 Class {
 	#name : #BlMatrixDecomposition,

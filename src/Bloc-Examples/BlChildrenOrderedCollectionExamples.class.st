@@ -1,13 +1,14 @@
 "
-I define examples for the class ${class:BlChildrenOrderedCollection}$.
+I define examples for the class {{gtClass:BlChildrenOrderedCollection}}.
 
-Instances of ${class:BlChildrenOrderedCollection}$ are created by directly instatiating the class.
-${example:BlChildrenOrderedCollectionExamples>>#emptyChildrenExplicitCreation}$
+Instances of {{gtClass:BlChildrenOrderedCollection}} are created by directly instatiating the class.
+{{gtExample:BlChildrenOrderedCollectionExamples>>#emptyChildrenExplicitCreation}}
 
 Bloc elements can then be added and removed from the collection.
-${example:BlChildrenOrderedCollectionExamples>>#add}$
+{{gtExample:BlChildrenOrderedCollectionExamples>>#add}}
 
-${example:BlChildrenOrderedCollectionExamples>>#remove}$
+{{gtExample:BlChildrenOrderedCollectionExamples>>#remove}}
+
 "
 Class {
 	#name : #BlChildrenOrderedCollectionExamples,

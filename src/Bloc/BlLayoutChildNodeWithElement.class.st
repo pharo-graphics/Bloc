@@ -1,6 +1,7 @@
 "
-!Layout node with an element
+# Layout node with an element
 Is used to keep track of the child node and its associated element
+
 "
 Class {
 	#name : #BlLayoutChildNodeWithElement,

@@ -1,6 +1,7 @@
 "
-!Solid style
-${example:BlTextDecorationStyleExamples>>#solid|codeExpanded=false|previewExpanded=true|previewShow=#gtPreviewFor:|previewHeight=50}$
+# Solid style
+{{gtExample:BlTextDecorationStyleExamples>>#solid|codeExpanded=false|previewExpanded=true|previewShow=#gtPreviewFor:|previewHeight=50}}
+
 "
 Class {
 	#name : #BlTextDecorationSolidStyle,

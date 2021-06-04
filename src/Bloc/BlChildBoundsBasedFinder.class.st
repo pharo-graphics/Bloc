@@ -1,7 +1,8 @@
 "
-! Child bounds-based finder
+# Child bounds-based finder
 
 I help users to find a child element within its parent based on the bounds constraints
+
 "
 Class {
 	#name : #BlChildBoundsBasedFinder,

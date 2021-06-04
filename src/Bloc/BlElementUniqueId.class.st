@@ -1,7 +1,8 @@
 "
-! Custom id
+# Custom id
 
 Is intended to be subclassed for custom object-oriented ids
+
 "
 Class {
 	#name : #BlElementUniqueId,

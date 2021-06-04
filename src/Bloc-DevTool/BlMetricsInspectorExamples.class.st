@@ -1,5 +1,6 @@
 "
-I exemplify ${class:BlMetricsInspector}$.
+I exemplify {{gtClass:BlMetricsInspector}}.
+
 "
 Class {
 	#name : #BlMetricsInspectorExamples,

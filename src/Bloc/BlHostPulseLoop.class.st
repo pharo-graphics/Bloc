@@ -5,6 +5,7 @@ I indicate to the Universe that is time to synchronize the state of the elements
 A pulse is fired every 16ms (if possible) to obtain 60 frames per second (fps) maximum.  This may be delayed if there are background processes wanting to run (to ensure that background calculation of UI elements can complete).  See ${method:name=BlPulseLoop>>#wait} for details of how the loop time is regulated.
 
 The opened spaces listen the pulse to be synchronized and to update their state when it is needed.
+
 "
 Class {
 	#name : #BlHostPulseLoop,

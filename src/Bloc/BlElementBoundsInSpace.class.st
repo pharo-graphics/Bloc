@@ -1,5 +1,6 @@
 "
 I represent bounds in space
+
 "
 Class {
 	#name : #BlElementBoundsInSpace,

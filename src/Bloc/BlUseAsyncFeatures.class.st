@@ -3,11 +3,12 @@ I define whether asynchronous features should be used and a code execution there
 
 All code that trigger async executions should use one of my class side methods:
 
-- ${method:BlUseAsyncFeatures class>>#ifEnabledDo:otherwise:}$
-- ${method:BlUseAsyncFeatures class>>#ifEnabledDo:}$
-- ${method:BlUseAsyncFeatures class>>#ifDisabledDo:}$
+- {{gtMethod:BlUseAsyncFeatures class>>#ifEnabledDo:otherwise:}}
+- {{gtMethod:BlUseAsyncFeatures class>>#ifEnabledDo:}}
+- {{gtMethod:BlUseAsyncFeatures class>>#ifDisabledDo:}}
 
-In the cases where the async should be disabled, ${method:BlUseAsyncFeatures class>>#disableDuring:}$ should be used.
+In the cases where the async should be disabled, {{gtMethod:BlUseAsyncFeatures class>>#disableDuring:}} should be used.
+
 
 "
 Class {

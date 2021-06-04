@@ -1,5 +1,6 @@
 "
 I represent a pool of objects
+
 "
 Class {
 	#name : #BlObjectPool,

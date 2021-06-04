@@ -8,6 +8,7 @@ I can play a role of a square if both width and height are equal. In this case c
 In order to explicitely create a rectangle use extent:
 
 	BlRectangle extent: 50@30 ""create a rectangle with width 50 and height 30""
+
 "
 Class {
 	#name : #BlRoundedRectangleGeometry,

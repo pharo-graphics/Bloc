@@ -1,5 +1,6 @@
 "
 A mutable Integer - used to avoid heap allocation during the layout operation
+
 "
 Class {
 	#name : #BlGridMutableInteger,

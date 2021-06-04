@@ -1,5 +1,6 @@
 "
 I contain examples of a flow layout
+
 "
 Class {
 	#name : #BlFlowLayoutCompositionExamples,

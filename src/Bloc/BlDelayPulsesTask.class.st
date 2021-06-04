@@ -5,15 +5,16 @@ Public API and Key Messages
 
 - count:   set the number of pulses to wait, default = 1.
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 	count:			<Integer> 	The number of pulses to wait.
 	element:		<BlElement>	The element where the receiver was queued.
 	requeue:		<Boolean>		A boolean indicating whether the task needs to be requeued (there are still pulses to wait through)
 
 
-!!!Implementation Points
+### Implementation Points
+
 "
 Class {
 	#name : #BlDelayPulsesTask,

@@ -3,6 +3,7 @@ Unit quaternions, also known as versors, provide a convenient mathematical notat
 When used to represent rotation, unit quaternions are also called rotation quaternions. When used to represent an orientation (rotation relative to a reference coordinate system), they are called orientation quaternions or attitude quaternions.
 
 https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation#Using_quaternion_rotations
+
 "
 Class {
 	#name : #BlQuaternion,

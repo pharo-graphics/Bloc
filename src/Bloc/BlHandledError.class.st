@@ -1,5 +1,6 @@
 "
 I represent an error that bloc gracefully handled during some specific frame phase
+
 "
 Class {
 	#name : #BlHandledError,

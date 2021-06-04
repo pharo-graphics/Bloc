@@ -1,5 +1,6 @@
 "
-I am sent when a there was a deferred action added to the universe using ==defer:==
+I am sent when a there was a deferred action added to the universe using `defer:`
+
 "
 Class {
 	#name : #BlParallelUniverseDeferredActionAddedSignal,

@@ -1,5 +1,6 @@
 "
 Ignore me :)
+
 "
 Class {
 	#name : #BlIgnoredLayout,

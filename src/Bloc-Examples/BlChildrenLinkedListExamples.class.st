@@ -1,13 +1,14 @@
 "
-I define examples for the class ${class:BlChildrenLinkedList}$.
+I define examples for the class {{gtClass:BlChildrenLinkedList}}.
 
-Instances of ${class:BlChildrenLinkedList}$ are created by directly instatiating the class.
-${example:BlChildrenLinkedListExamples>>#emptyChildrenExplicitCreation}$
+Instances of {{gtClass:BlChildrenLinkedList}} are created by directly instatiating the class.
+{{gtExample:BlChildrenLinkedListExamples>>#emptyChildrenExplicitCreation}}
 
 Bloc elements can then be added and removed from the collection.
-${example:BlChildrenLinkedListExamples>>#add}$
+{{gtExample:BlChildrenLinkedListExamples>>#add}}
 
-${example:BlChildrenLinkedListExamples>>#remove}$
+{{gtExample:BlChildrenLinkedListExamples>>#remove}}
+
 "
 Class {
 	#name : #BlChildrenLinkedListExamples,

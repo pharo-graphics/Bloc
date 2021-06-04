@@ -1,10 +1,11 @@
 "
 I am a collection of event dispatcher examples
+
 "
 Class {
 	#name : #BlEventDispatcherExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-EventHandling'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #examples }

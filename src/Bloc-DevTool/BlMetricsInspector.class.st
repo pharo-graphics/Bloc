@@ -1,15 +1,16 @@
 "
 I am an element metrics inspector and give a summary of target's bounds, margin border and padding.
 
-!! Example
+## Example
 
 On an element that is defined with the following margin and padding methics: 
-${example:BlMetricsInspectorExamples>>#elementWithMetrics}$
+{{gtExample:BlMetricsInspectorExamples>>#elementWithMetrics}}
 
 I provide the following overview:
-${example:BlMetricsInspectorExamples>>#metricsInspectorOnElementWithMetrics|codeExpanded=false|previewExpanded=true}$
+{{gtExample:BlMetricsInspectorExamples>>#metricsInspectorOnElementWithMetrics|codeExpanded=false|previewExpanded=true}}
 
-The view is available for any ${example:BlMetricsInspectorExamples>>#elementWithMetrics|label=#className}$ instance throught ${method:BlElement>>#gtMetricsFor:}$ inspector extension. You can find it when you inspect a view and switch to ${example:BlMetricsInspectorExamples>>#metricsPhlowView|label=#title}$ tab.
+The view is available for any {{gtExample:BlMetricsInspectorExamples>>#elementWithMetrics|label=#className}} instance throught {{gtMethod:BlElement>>#gtMetricsFor:}} inspector extension. You can find it when you inspect a view and switch to {{gtExample:BlMetricsInspectorExamples>>#metricsPhlowView|label=#title}} tab.
+
 
 "
 Class {

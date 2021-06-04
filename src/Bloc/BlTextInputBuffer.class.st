@@ -1,6 +1,7 @@
 "
-!Text input buffer
+# Text input buffer
 Collects all the text input events during a frame
+
 "
 Class {
 	#name : #BlTextInputBuffer,

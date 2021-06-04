@@ -1,5 +1,6 @@
 "
 I exemplify how Bloc handles errors in different parts of the BlElement such as drawing, layout or event handling
+
 "
 Class {
 	#name : #BlErrorHandlingExamples,

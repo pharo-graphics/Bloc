@@ -1,7 +1,8 @@
 "
-! Layout that helps an element to wrap around its children
-Makes sure that the element wraps around its children, taking into account the position of each child and the ==padding== of the container element. I am a composite layout and must be used together with some concrete layout that computes the initial positions of the children. ==fitContent== is the only container's layout constraint that makes sense in the context of this layout. See an example below:
-${example:BlWrapAroundChildrenLayoutExamples>>#containerWithNodes|previewExpanded=true|codeExpanded=false|previewShow=#gtLiveFor:|previewHeight=350}$
+# Layout that helps an element to wrap around its children
+Makes sure that the element wraps around its children, taking into account the position of each child and the `padding` of the container element. I am a composite layout and must be used together with some concrete layout that computes the initial positions of the children. `fitContent` is the only container's layout constraint that makes sense in the context of this layout. See an example below:
+{{gtExample:BlWrapAroundChildrenLayoutExamples>>#containerWithNodes|previewExpanded=true|codeExpanded=false|previewShow=#gtLiveFor:|previewHeight=350}}
+
 "
 Class {
 	#name : #BlWrapAroundChildrenLayout,

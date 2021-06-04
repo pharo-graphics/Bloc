@@ -1,7 +1,11 @@
+"
+This class contains tests
+
+"
 Class {
 	#name : #BlCornerRadiiTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Support'
+	#category : #'Bloc-Tests-Basic-Support'
 }
 
 { #category : #tests }

@@ -1,5 +1,6 @@
 "
 Emitted when the Universe has been resumed.
+
 "
 Class {
 	#name : #BlUniverseResumed,

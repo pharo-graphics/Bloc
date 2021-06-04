@@ -2,6 +2,7 @@
 I exemplify what happens if we compose horizontal grid, linear and flow layout and configure them to fit content vertically.
 
 This is a very important use case for complex UIs that involve vertical lists
+
 "
 Class {
 	#name : #BlFitContentVerticallyInHorizontalLayoutsExamples,

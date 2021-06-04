@@ -1,5 +1,6 @@
 "
 I inform that an element was removed from a scene.  I can be added to any Bloc element.
+
 "
 Class {
 	#name : #BlElementRemovedFromSceneGraphEvent,

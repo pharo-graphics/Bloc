@@ -1,5 +1,6 @@
 "
 Let's the layout know that the node should be measurement during the first pass of the layout
+
 "
 Class {
 	#name : #BlLayoutNodeElementMeasurement,

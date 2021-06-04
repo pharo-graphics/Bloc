@@ -1,15 +1,15 @@
 "
-!Backgrounds
+# Backgrounds
 
-The class ${class:BlBackground}$ defines the background of a Bloc element. As this is an abstract class, the actual concrete types of backgrounds are defined by its subclasses. 
+The class {{gtClass:BlBackground}} defines the background of a Bloc element. As this is an abstract class, the actual concrete types of backgrounds are defined by its subclasses. 
 
 There are four main types of backgrounds:
-- ${class:BlPaintBackground}$: color background defined using a ${class:BlPaint}$ object;
-- ${class:BlImageBackground}$: image background defined using a ${class:Form}$ object;
-- ${class:BlTransparentBackground}$: a special case of a transparent background;
-- ${class:BlCompositeBackground}$: a background that provided the ability to compose multiple other ${class:BlBackground}$ objects.
+- {{gtClass:BlPaintBackground}}: color background defined using a {{gtClass:BlPaint}} object;
+- {{gtClass:BlImageBackground}}: image background defined using a {{gtClass:Form}} object;
+- {{gtClass:BlTransparentBackground}}: a special case of a transparent background;
+- {{gtClass:BlCompositeBackground}}: a background that provided the ability to compose multiple other {{gtClass:BlBackground}} objects.
 
-!! Paint Backgrounds
+## Paint Backgrounds
 The simplest of the available backgrounds is the paint background. A paint can be either a simple color or a type of gradient.
 
 

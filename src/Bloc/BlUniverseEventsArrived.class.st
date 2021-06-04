@@ -1,5 +1,6 @@
 "
 Emitted when new events arrive from the OS to be processed by Universe
+
 "
 Class {
 	#name : #BlUniverseEventsArrived,

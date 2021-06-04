@@ -1,5 +1,6 @@
 "
 I contain examples of element bounds api
+
 "
 Class {
 	#name : #BlElementBoundsExamples,

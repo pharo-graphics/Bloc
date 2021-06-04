@@ -1,7 +1,11 @@
+"
+This class contains tests
+
+"
 Class {
 	#name : #BlFocusProcessingTest,
 	#superclass : #BlEventTestCase,
-	#category : 'Bloc-Tests-Universe'
+	#category : #'Bloc-Tests-Universe'
 }
 
 { #category : #accessing }

@@ -1,5 +1,6 @@
 "
-I exemplify ${class:BlVector2DDescriptionElement}$.
+I exemplify {{gtClass:BlVector2DDescriptionElement}}.
+
 "
 Class {
 	#name : #BlVector2DDescriptionElementExamples,

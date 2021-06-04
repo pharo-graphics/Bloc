@@ -1,5 +1,6 @@
 "
-I am an extended version of the attributes builder with an ability to delegate the applying of attributes to the other stylable, which can be a ${class:BlText}$ or the other ${class:BlTextAttributesBuilder}$
+I am an extended version of the attributes builder with an ability to delegate the applying of attributes to the other stylable, which can be a {{gtClass:BlText}} or the other {{gtClass:BlTextAttributesBuilder}}
+
 "
 Class {
 	#name : #BlTextDelegatedAttributesBuilder,

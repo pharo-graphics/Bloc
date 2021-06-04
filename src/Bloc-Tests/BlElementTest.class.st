@@ -1,3 +1,7 @@
+"
+This class contains tests
+
+"
 Class {
 	#name : #BlElementTest,
 	#superclass : #TestCase,
@@ -5,7 +9,7 @@ Class {
 		'space',
 		'host'
 	],
-	#category : 'Bloc-Tests-Basic'
+	#category : #'Bloc-Tests-Basic'
 }
 
 { #category : #initialization }

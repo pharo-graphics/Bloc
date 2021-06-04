@@ -45,6 +45,7 @@ Internal Representation and Key Implementation Points.
 	parentMin:		<Object>
 	trailingMargins:		<Object>
 	trailingMarginsValid:		<Object>
+
 "
 Class {
 	#name : #BlGridLayoutAxis,

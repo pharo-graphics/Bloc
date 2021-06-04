@@ -1,14 +1,15 @@
 "
-An Interval represents a contiguous range of values that lie between the interval's #min and #max values *excluding #max*.
+An Interval represents a contiguous range of values that lie between the interval's #min and #max values .
 
-I am different from ${class:Interval}$ in a sense that I don't include #max and my size is computed as (max - min)
+I am different from {{gtClass:Interval}} in a sense that I don't include #max and my size is computed as (max - min)
 
 Intervals are immutable so may be passed as values and used as keys in hash tables.
 It is not necessary to have multiple instances of Intervals which have the same #min and #max values.
 
 Intervals are often written as [min, max) and represent the set of values min <= x < max.
 
-I am used by ${class:BlGridLayoutArc}$
+I am used by {{gtClass:BlGridLayoutArc}}
+
 "
 Class {
 	#name : #BlGridLayoutInterval,

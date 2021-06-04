@@ -1,12 +1,13 @@
 "
 BlTaskAtTask is the object added to the queue by BlTaskAtQueue.  It stores the valuable and scheduled execution time.
 
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	scheduledTime:		<DateAndTime>
 	valuable:				<Object>
+
 
 "
 Class {

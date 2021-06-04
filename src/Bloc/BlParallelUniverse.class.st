@@ -1,5 +1,6 @@
 "
 I am a parallel Universe. There can exist multiple parallel universes
+
 "
 Class {
 	#name : #BlParallelUniverse,

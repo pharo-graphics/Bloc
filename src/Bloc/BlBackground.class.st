@@ -1,19 +1,20 @@
 "
-! Background
+# Background
 
-I represent a background of the ${class:BlElement}$. 
-""""I am immutable and can not be changed once created."""" To modify the background, create a new instance and set it by sending ${method:BlElement>>#background:}$
+I represent a background of the {{gtClass:BlElement}}. 
+**I am immutable and can not be changed once created.** To modify the background, create a new instance and set it by sending {{gtMethod:BlElement>>#background:}}
 
-!! Types of background
+## Types of background
 
 There are multiple pre-built types of background:
- - paint background ${class:BlPaintBackground}$ which allows users to use any ${class:BlPaint}$ as a background
- - image background ${class:BlImageBackground}$ to use a bitmap ${class:Form}$
- - composite background ${class:BlCompositeBackground}$ letting users to compose different types of background into one more complex background
- - transparent background ${class:BlTransparentBackground}$ as a special type of background that 
+ - paint background {{gtClass:BlPaintBackground}} which allows users to use any {{gtClass:BlPaint}} as a background
+ - image background {{gtClass:BlImageBackground}} to use a bitmap {{gtClass:Form}}
+ - composite background {{gtClass:BlCompositeBackground}} letting users to compose different types of background into one more complex background
+ - transparent background {{gtClass:BlTransparentBackground}} as a special type of background that 
 
-Background can be instantiated and composed directly or with the help of ==BlBackgroundBuilder==.
-See ==BlBackgroundBuilder== for the related examples.
+Background can be instantiated and composed directly or with the help of `BlBackgroundBuilder`.
+See `BlBackgroundBuilder` for the related examples.
+
 "
 Class {
 	#name : #BlBackground,

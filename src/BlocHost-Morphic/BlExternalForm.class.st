@@ -9,14 +9,14 @@ The user is responsible for both releasing the image-memory, as well as destroyi
 
 Example usage:
 
-| extent form ptr |
-extent := 400@300.
+extent form ptrextent := 400@300.
 form := ExternalForm extent: extent depth: 32.
-ptr := ExternalAddress gcallocate: (extent x * extent y * 4).
+ptr := ExternalAddress gcallocate: (extent x  4).
 form setManualSurfacePointer: ptr.
 Display displayScaledOn: form.
 form displayAt: 0@0.
 form destroySurface.
+
 
 "
 Class {

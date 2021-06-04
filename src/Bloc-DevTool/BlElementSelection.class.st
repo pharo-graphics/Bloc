@@ -1,5 +1,6 @@
 "
-I am a Halos element. For more information about me, see ${class:BlDevHalosEventListener}$.
+I am a Halos element. For more information about me, see {{gtClass:BlDevHalosEventListener}}.
+
 "
 Class {
 	#name : #BlElementSelection,

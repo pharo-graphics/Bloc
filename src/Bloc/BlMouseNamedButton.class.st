@@ -1,5 +1,6 @@
 "
 I am a root class of all mouse buttons with a name, e.g. ""primary"", ""secondary"" or ""middle""
+
 "
 Class {
 	#name : #BlMouseNamedButton,

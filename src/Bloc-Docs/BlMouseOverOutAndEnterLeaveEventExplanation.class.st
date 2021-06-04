@@ -1,30 +1,31 @@
 "
-! Mouse over/out and enter/leave events
+# Mouse over/out and enter/leave events
 
-In this explanation we will take a look at what happens when mouse moves between elements and what is the difference between two families of mouse events: ==enter/leave== and ==over/out==.
+In this explanation we will take a look at what happens when mouse moves between elements and what is the difference between two families of mouse events: `enter/leave` and `over/out`.
 
-!!! Quick comparison:
-''(hover elements below to see the difference)''
-${example:BlMouseOverOutAndEnterLeaveEventExplanation>>#quickComparison|noCode=true|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=250}$
+### Quick comparison:
+*(hover elements below to see the difference)*
+{{gtExample:BlMouseOverOutAndEnterLeaveEventExplanation>>#quickComparison|noCode=true|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=250}}
 
-!!! ==BlMouseEnterEvent== and ==BlMouseLeaveEvent==
+### `BlMouseEnterEvent` and `BlMouseLeaveEvent`
 
-If you are looking for the simplest way to detect when a user hovers an element with the mouse use a combination of ${class:BlMouseEnterEvent}$ and ${class:BlMouseLeaveEvent}$.
+If you are looking for the simplest way to detect when a user hovers an element with the mouse use a combination of {{gtClass:BlMouseEnterEvent}} and {{gtClass:BlMouseLeaveEvent}}.
 They trigger when the mouse pointer enters/leaves the element:
-''(mouse your mouse over the preview element below)''
-${example:BlMouseOverOutAndEnterLeaveEventExplanation>>#basicMouseEnterAndLeave|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}$
+*(mouse your mouse over the preview element below)*
+{{gtExample:BlMouseOverOutAndEnterLeaveEventExplanation>>#basicMouseEnterAndLeave|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}}
 
-${class:BlMouseEnterEvent}$ and ${class:BlMouseLeaveEvent}$ are sent directly (==dispatched==) to the element, ignoring any mouse transitions inside the element, therefore both mouse enter and leave events do not bubble. In the example below, notice how parent container does not receive mouse leave event when mouse transitions between children:
-${example:BlMouseOverOutAndEnterLeaveEventExplanation>>#mouseEnterAndLeaveConsumed|noCode=true|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}$
+{{gtClass:BlMouseEnterEvent}} and {{gtClass:BlMouseLeaveEvent}} are sent directly (`dispatched`) to the element, ignoring any mouse transitions inside the element, therefore both mouse enter and leave events do not bubble. In the example below, notice how parent container does not receive mouse leave event when mouse transitions between children:
+{{gtExample:BlMouseOverOutAndEnterLeaveEventExplanation>>#mouseEnterAndLeaveConsumed|noCode=true|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}}
 
-!!! ==BlMouseOverEvent== and ==BlMouseOutEvent==
+### `BlMouseOverEvent` and `BlMouseOutEvent`
 
-Similar to the mouse enter but a bit more advanced, ${class:BlMouseOverEvent}$ occurs when a mouse pointer comes over an element, and ${class:BlMouseOutEvent}$ – when it leaves:
-${example:BlMouseOverOutAndEnterLeaveEventExplanation>>#basicMouseOverAndOut|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}$
+Similar to the mouse enter but a bit more advanced, {{gtClass:BlMouseOverEvent}} occurs when a mouse pointer comes over an element, and {{gtClass:BlMouseOutEvent}} – when it leaves:
+{{gtExample:BlMouseOverOutAndEnterLeaveEventExplanation>>#basicMouseOverAndOut|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}}
 
 An important feature of mouseout – it triggers, when the pointer moves from an element to its descendant, e.g. from #parent to #child. It also means that mouse over/out events bubble.
 In the example below, notice how parent container receives mouse out event when mouse transitions from it to deeper child elements:
-${example:BlMouseOverOutAndEnterLeaveEventExplanation>>#mouseOverAndOutConsumed|noCode=true|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}$
+{{gtExample:BlMouseOverOutAndEnterLeaveEventExplanation>>#mouseOverAndOutConsumed|noCode=true|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}}
+
 "
 Class {
 	#name : #BlMouseOverOutAndEnterLeaveEventExplanation,

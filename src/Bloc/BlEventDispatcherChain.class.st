@@ -1,5 +1,6 @@
 "
 I am a chain of BlEventDispatchers
+
 "
 Class {
 	#name : #BlEventDispatcherChain,

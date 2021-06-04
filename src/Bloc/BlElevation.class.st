@@ -5,6 +5,7 @@ Elevation allows us to achieve very advanced rendering effects that is not possi
 Taking elevation into account forces us to have a separate composition rendering tree which is different from an element's structure tree.
 
 Note: Elevation is not influenced by transformation matrix!
+
 "
 Class {
 	#name : #BlElevation,

@@ -17,6 +17,7 @@ BlAlternativeCombination new
 	with: (BlSingleKeyCombination key: Key leftMeta);
 	with: (BlSingleKeyCombination key: Key rightMeta);
 	yourself
+
 "
 Class {
 	#name : #BlAlternativeCombination,

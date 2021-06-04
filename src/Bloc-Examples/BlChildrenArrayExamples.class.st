@@ -1,16 +1,17 @@
 "
-I define examples for the class ${class:BlChildrenArray}$.
+I define examples for the class {{gtClass:BlChildrenArray}}.
 
-Instances of ${class:BlChildrenArray}$ are created by directly instatiating the class.
-${example:BlChildrenArrayExamples>>#emptyChildrenExplicitCreation}$
+Instances of {{gtClass:BlChildrenArray}} are created by directly instatiating the class.
+{{gtExample:BlChildrenArrayExamples>>#emptyChildrenExplicitCreation}}
 
-Alternatively, instances can be created using the factory method ${method:BlChildrenArray class>>#from:}$
-${example:BlChildrenArrayExamples>>#emptyChildrenFactoryMethodCreation}$
+Alternatively, instances can be created using the factory method {{gtMethod:BlChildrenArray class>>#from:}}
+{{gtExample:BlChildrenArrayExamples>>#emptyChildrenFactoryMethodCreation}}
 
 Bloc elements can then be added and removed from the collection.
-${example:BlChildrenArrayExamples>>#add}$
+{{gtExample:BlChildrenArrayExamples>>#add}}
 
-${example:BlChildrenArrayExamples>>#remove}$
+{{gtExample:BlChildrenArrayExamples>>#remove}}
+
 "
 Class {
 	#name : #BlChildrenArrayExamples,

@@ -1,5 +1,6 @@
 "
 I describe which phase the event flow is currently being evaluated.
+
 "
 Class {
 	#name : #BlEventTraversalStep,

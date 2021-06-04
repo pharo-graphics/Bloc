@@ -4,7 +4,7 @@ If corner radius is zero, the corner is square, not rounded. The radius also cau
 
 Negative values are not allowed.
 
-@see BlRectangle
+
 "
 Class {
 	#name : #BlCornerRadii,

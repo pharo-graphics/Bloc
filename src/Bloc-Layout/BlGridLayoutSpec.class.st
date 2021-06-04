@@ -24,6 +24,7 @@ Instance Variables
 	span:		<BlGridLayoutInterval>
 	startDefined:		<Boolean>
 	weight:		<Number>
+
 "
 Class {
 	#name : #BlGridLayoutSpec,

@@ -1,6 +1,7 @@
 "
-!Cached identity transformation
+# Cached identity transformation
 Represents an identity transformation with a unique instance cached identity matrix
+
 "
 Class {
 	#name : #BlElementCachedIdentityTransformation,

@@ -1,5 +1,6 @@
 "
 I contain examples of different BlElementEvents
+
 "
 Class {
 	#name : #BlElementEventExamples,

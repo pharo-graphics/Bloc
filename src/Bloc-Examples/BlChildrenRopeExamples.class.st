@@ -1,13 +1,14 @@
 "
-I define examples for the class ${class:BlChildrenRope}$.
+I define examples for the class {{gtClass:BlChildrenRope}}.
 
-Instances of ${class:BlChildrenRope}$ are created by directly instatiating the class.
-${example:BlChildrenRopeExamples>>#emptyChildrenExplicitCreation}$
+Instances of {{gtClass:BlChildrenRope}} are created by directly instatiating the class.
+{{gtExample:BlChildrenRopeExamples>>#emptyChildrenExplicitCreation}}
 
 Bloc elements can then be added and removed from the collection.
-${example:BlChildrenRopeExamples>>#add}$
+{{gtExample:BlChildrenRopeExamples>>#add}}
 
-${example:BlChildrenRopeExamples>>#remove}$
+{{gtExample:BlChildrenRopeExamples>>#remove}}
+
 "
 Class {
 	#name : #BlChildrenRopeExamples,

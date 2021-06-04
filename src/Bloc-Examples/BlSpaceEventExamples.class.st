@@ -1,10 +1,11 @@
 "
 I contain examples of space related events
+
 "
 Class {
 	#name : #BlSpaceEventExamples,
 	#superclass : #Object,
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #'event handling' }

@@ -8,6 +8,7 @@ Concrete interpolators or easing function implementations must subclass me and i
 Example
 
    BlEasingElastic interpolate: 0.5
+
 "
 Class {
 	#name : #BlInterpolator,

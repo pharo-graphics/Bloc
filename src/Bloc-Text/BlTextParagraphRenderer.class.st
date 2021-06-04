@@ -7,6 +7,7 @@ Note: definition #render:on: accepts any kind of canvas, however every concrete 
 Public API and Key Messages
 
 - render:on: renders a given text paragraph on a provided canvas
+
 "
 Class {
 	#name : #BlTextParagraphRenderer,

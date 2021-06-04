@@ -1,5 +1,6 @@
 "
 I am a composite transformation that consists of other element transformations, either absolute, local or composite
+
 "
 Class {
 	#name : #BlElementCompositeTransformation,

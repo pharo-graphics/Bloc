@@ -1,13 +1,14 @@
 "
-I am an ${class:BlElement}$.
-I visually display ${class:BlVector2D}$.
-!! Examples
-!!! 45° Vector
-${example:BlVector2DDescriptionElementExamples>>#vectorDescriptionElement_45degrees|codeExpanded=false|previewExpanded=true|previewHeight=300|previewShow=#gtLiveFor:}$
-!!! 270° Vector
-${example:BlVector2DDescriptionElementExamples>>#vectorDescriptionElement_270degrees|codeExpanded=false|previewExpanded=true|previewHeight=300|previewShow=#gtLiveFor:}$
-!!! Zero-length vector
-${example:BlVector2DDescriptionElementExamples>>#vectorDescriptionElement_ZeroLength|codeExpanded=false|previewExpanded=true|previewHeight=300|previewShow=#gtLiveFor:}$
+I am an {{gtClass:BlElement}}.
+I visually display {{gtClass:BlVector2D}}.
+## Examples
+### 45° Vector
+{{gtExample:BlVector2DDescriptionElementExamples>>#vectorDescriptionElement_45degrees|codeExpanded=false|previewExpanded=true|previewHeight=300|previewShow=#gtLiveFor:}}
+### 270° Vector
+{{gtExample:BlVector2DDescriptionElementExamples>>#vectorDescriptionElement_270degrees|codeExpanded=false|previewExpanded=true|previewHeight=300|previewShow=#gtLiveFor:}}
+### Zero-length vector
+{{gtExample:BlVector2DDescriptionElementExamples>>#vectorDescriptionElement_ZeroLength|codeExpanded=false|previewExpanded=true|previewHeight=300|previewShow=#gtLiveFor:}}
+
 
 "
 Class {

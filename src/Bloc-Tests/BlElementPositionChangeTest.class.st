@@ -1,5 +1,6 @@
 "
 I contain examples of position change logging functionality
+
 "
 Class {
 	#name : #BlElementPositionChangeTest,

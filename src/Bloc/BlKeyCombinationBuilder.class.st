@@ -1,5 +1,5 @@
 "
-I am helper builder class used to create composite ===BlKeyCombination===
+I am helper builder class used to create composite `=BlKeyCombination`=
 
 Public API and Key Messages
 
@@ -18,6 +18,7 @@ Example:
 	shift;
 	key: Key arrowUp;
 	build
+
 "
 Class {
 	#name : #BlKeyCombinationBuilder,

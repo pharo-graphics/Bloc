@@ -1,5 +1,6 @@
 "
 I am sent after every animation step with current progress as a parameter
+
 "
 Class {
 	#name : #BlAnimationStepEvent,
@@ -7,7 +8,7 @@ Class {
 	#instVars : [
 		'progress'
 	],
-	#category : 'Bloc-Animation-Events'
+	#category : #'Bloc-Animation-Events'
 }
 
 { #category : #accessing }

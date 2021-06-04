@@ -7,6 +7,7 @@ My interpolation function is
 
 It can be simplified to
    f(x) = (x - 1)^5 + 1
+
 "
 Class {
 	#name : #BlQuinticInterpolator,

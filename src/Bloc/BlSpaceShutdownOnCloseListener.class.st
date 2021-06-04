@@ -1,8 +1,8 @@
 "
-! Shutdown pharo when space is closed
+# Shutdown pharo when space is closed
 
 When added to a ${class: BlSpace} I will shutdown Pharo as soon as that space is closed.
-I can be configured to save the image before quitting by setting ${method:BlSpaceShutdownOnCloseListener>>#shouldSave:} to ==true==.
+I can be configured to save the image before quitting by setting ${method:BlSpaceShutdownOnCloseListener>>#shouldSave:} to `true`.
 
 Example: 
 [[[
@@ -12,6 +12,7 @@ space extent: 200@200.
 space addEventHandler: BlSpaceShutdownOnCloseListener new.
 space show
 ]]
+
 
 "
 Class {

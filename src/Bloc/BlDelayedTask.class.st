@@ -2,9 +2,9 @@
 BlDelayedTask delays its action until after the specified time by being scheduled on every pulse, but simply marking itself for requeue if the appointed time has not yet been reached.
 
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 	delay:		<Object>
 	element:		<Object>
 	isRunning:		<Object>
@@ -13,9 +13,10 @@ BlDelayedTask delays its action until after the specified time by being schedule
 	time:		<Object>
 
 
-!!!Implementation Points
+### Implementation Points
 
 The task state is currently not thread-safe, so the time between checking the task state and acting on it provides a window where another process could issue a conflicting instruction.  This hasn't been a problem so far, so is left open.
+
 "
 Class {
 	#name : #BlDelayedTask,

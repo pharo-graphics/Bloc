@@ -3,6 +3,7 @@ Specifies a rotation by the angle specified in the parameter about the origin of
 
 Corresponds to SVG rotate() function
 https://drafts.csswg.org/css-transforms/#valdef-transform-rotate
+
 "
 Class {
 	#name : #BlRotationTransformation,

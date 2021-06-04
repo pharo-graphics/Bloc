@@ -1,5 +1,6 @@
 "
-! Element's visual properties
+# Element's visual properties
+
 "
 Class {
 	#name : #BlElementVisuals,

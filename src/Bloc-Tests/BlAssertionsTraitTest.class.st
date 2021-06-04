@@ -1,7 +1,11 @@
+"
+This class contains tests
+
+"
 Class {
 	#name : #BlAssertionsTraitTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #tests }

@@ -1,5 +1,6 @@
 "
-I am an ${class:Error}$ providing extra ${class:BlDevScripter}$ information.
+I am an {{gtClass:Error}} providing extra {{gtClass:BlDevScripter}} information.
+
 "
 Class {
 	#name : #BlDevScripterError,

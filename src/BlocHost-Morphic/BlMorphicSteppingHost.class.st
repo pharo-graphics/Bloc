@@ -1,5 +1,6 @@
 "
 I am a host that lives in a Morphic World's UI thread and uses stepping mechanism to pulse the universe
+
 "
 Class {
 	#name : #BlMorphicSteppingHost,

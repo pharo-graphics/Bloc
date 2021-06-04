@@ -2,6 +2,7 @@
 Is sent when element's transformation changes.
 
 Note: transformation may change even if an element has no parent
+
 "
 Class {
 	#name : #BlElementTransformationChangedEvent,

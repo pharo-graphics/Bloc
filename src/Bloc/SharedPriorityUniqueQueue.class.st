@@ -12,17 +12,18 @@ Currently no optimisations are done to handle large queues, so the performance w
 
 Entries must respond to the #taskPriority message with zero or positive number.
 
-!!Public API and Key Messages
+## Public API and Key Messages
 
 SharedPriorityUniqueQueue has the same public interface as SharedQueue.
 
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
 
-!!!Implementation Points
+### Implementation Points
 
 Some care is taken to ensure that the queue is not corrupted by some other process attempting to terminate the owner of the monitor.  This is done by increasing the process priority by wrapping the operation in #valueWithoutUserInterruption while queue modifications are made.
+
 "
 Class {
 	#name : #SharedPriorityUniqueQueue,

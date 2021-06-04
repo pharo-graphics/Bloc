@@ -13,6 +13,7 @@ Public API and Key Messages
  
 Internal Representation and Key Implementation Points.
 both element and allowed bounds should be in element's parent coordinate system
+
 "
 Class {
 	#name : #BlElementAlignment,

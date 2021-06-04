@@ -1,5 +1,6 @@
 "
-I am one button inside of a Halos element. For more information about me, see ${class:BlDevHalosEventListener}$.
+I am one button inside of a Halos element. For more information about me, see {{gtClass:BlDevHalosEventListener}}.
+
 "
 Class {
 	#name : #BlElementSelectionButton,

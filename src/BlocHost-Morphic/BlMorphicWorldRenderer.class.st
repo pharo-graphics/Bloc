@@ -1,5 +1,6 @@
 "
 I know how to render the world in a Bloc element
+
 "
 Class {
 	#name : #BlMorphicWorldRenderer,

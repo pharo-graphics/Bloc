@@ -1,5 +1,6 @@
 "
 I contain examples of rope iterators
+
 "
 Class {
 	#name : #BlRopeIteratorExamples,

@@ -3,6 +3,7 @@ I am a concrete implementation of a text model backed up by a persistent rope da
 
 See BrText for more information.
 See BrRope to learn more about rope
+
 "
 Class {
 	#name : #BlRopedText,

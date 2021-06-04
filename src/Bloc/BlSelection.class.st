@@ -1,5 +1,6 @@
 "
 I represent a text selection defined as interval [from...to]
+
 "
 Class {
 	#name : #BlSelection,
