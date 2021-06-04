@@ -1,5 +1,6 @@
 "
 I am an affine transformation that is directly defined by transformation matrix
+
 "
 Class {
 	#name : #BlMatrixTransformation,

@@ -7,13 +7,12 @@ Instance creation:
 
 	vector := (2, 3).
 	
-##Examples
+## Examples
+### 45 Degrees
+{{gtExample:BlVector2DExamples>>#vector_45degrees|codeExpanded=false|previewExpanded=true}}
+### 346 Degrees
+{{gtExample:BlVector2DExamples>>#vector_346degrees|codeExpanded=false|previewExpanded=true}}
 
-45 Degrees
-`BlVector2DExamples>>#testVector45degrees`
-
-346 Degrees
-`BlVector2DExamples>>#testVector346degrees`
 
 "
 Class {

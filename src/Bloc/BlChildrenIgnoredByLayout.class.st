@@ -1,7 +1,8 @@
 "
 I represent a subset of children that are ignored by layout.
 
-${example:BlChildrenSubsetExamples>>#ignoredByLayoutFromElement}$
+{{gtExample:BlChildrenSubsetExamples>>#ignoredByLayoutFromElement}}
+
 "
 Class {
 	#name : #BlChildrenIgnoredByLayout,

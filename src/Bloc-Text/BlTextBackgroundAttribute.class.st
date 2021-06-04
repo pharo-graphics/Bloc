@@ -14,6 +14,7 @@ Internal Representation and Key Implementation Points.
 
     Instance Variables
 	paint:		<Object> can be a Color, Pattern, Gradient. Basically anything that is knows how to convert itself to canvas specific paint
+
 "
 Class {
 	#name : #BlTextBackgroundAttribute,

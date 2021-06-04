@@ -8,6 +8,7 @@ My components are named according to mathematical convention:
  |  a21  a22  a23  a24  |       =>     |  shx0    sy     shz1   wy  |
  |  a31  a32  a33  a34  |                 |  shx1  shy1    sz      wz  |
  |  a41  a42  a43  a44  |                 |     x         y         z        w    |
+
 "
 Class {
 	#name : #BlMatrix3D,

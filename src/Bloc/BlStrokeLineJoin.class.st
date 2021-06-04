@@ -9,7 +9,8 @@ Possible types are:
  - round: BlStrokeLineRoundJoin
 
 Evaluate to see a visual preview:
-=== BlStrokeLineJoin new inspect ===
+`= BlStrokeLineJoin new inspect `=
+
 "
 Class {
 	#name : #BlStrokeLineJoin,

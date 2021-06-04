@@ -1,5 +1,6 @@
 "
 I contain examples-tests of mouse processor
+
 "
 Class {
 	#name : #BlMouseProcessorExamples,

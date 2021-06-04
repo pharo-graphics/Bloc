@@ -1,5 +1,6 @@
 "
 I contain examples of a text paragraph
+
 "
 Class {
 	#name : #BlSingleLineTextParagraphExamples,

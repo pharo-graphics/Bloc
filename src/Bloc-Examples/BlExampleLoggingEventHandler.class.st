@@ -1,5 +1,6 @@
 "
-I am a special event handler that increases ==counter== every time I handle an event
+I am a special event handler that increases `counter` every time I handle an event
+
 "
 Class {
 	#name : #BlExampleLoggingEventHandler,
@@ -7,7 +8,7 @@ Class {
 	#instVars : [
 		'counter'
 	],
-	#category : 'Bloc-Examples-EventHandling'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #'instance creation' }

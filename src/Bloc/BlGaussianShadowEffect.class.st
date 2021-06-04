@@ -1,6 +1,7 @@
 "
 I use gaussian blur to produce a smooth shadow in a form of element's geometry.
 The use of gaussian shadow is quite expensive in terms of rendering. Therefore I implement a drawing cache of the blurred shadow itself
+
 "
 Class {
 	#name : #BlGaussianShadowEffect,

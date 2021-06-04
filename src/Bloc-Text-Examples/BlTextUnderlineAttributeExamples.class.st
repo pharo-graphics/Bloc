@@ -1,14 +1,15 @@
 "
-! Underline attribute
+# Underline attribute
 
-The simplest way to apply an underline attribute on a whole text would be to use ${method:TBlTextStyleable>>#underlineColor:thickness:}$
-${example:BlTextUnderlineAttributeExamples>>#textWithUnderline_1_to_5|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}$
+The simplest way to apply an underline attribute on a whole text would be to use {{gtMethod:TBlTextStyleable>>#underlineColor:thickness:}}
+{{gtExample:BlTextUnderlineAttributeExamples>>#textWithUnderline_1_to_5|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}}
 
-To add an underline to just a part of text it can be scoped with ${method:BlText>>#from:to:}$
-${example:BlTextUnderlineAttributeExamples>>#textWithUnderline_3_to_4|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}$
+To add an underline to just a part of text it can be scoped with {{gtMethod:BlText>>#from:to:}}
+{{gtExample:BlTextUnderlineAttributeExamples>>#textWithUnderline_3_to_4|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}}
 
-In addition to the simple API an underline attribute can be customized and then applied on a text using ${method:TBlTextStyleable>>#underlineDo:}$ helper method. Users should pass a block that accepts ${class:BlTextDecorationAttribute}$ as an argument.
-${example:BlTextUnderlineAttributeExamples>>#textWithUnderlineDo|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}$
+In addition to the simple API an underline attribute can be customized and then applied on a text using {{gtMethod:TBlTextStyleable>>#underlineDo:}} helper method. Users should pass a block that accepts {{gtClass:BlTextDecorationAttribute}} as an argument.
+{{gtExample:BlTextUnderlineAttributeExamples>>#textWithUnderlineDo|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}}
+
 "
 Class {
 	#name : #BlTextUnderlineAttributeExamples,

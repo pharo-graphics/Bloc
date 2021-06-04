@@ -1,5 +1,6 @@
 "
 I am a collection of event dispatcher examples
+
 "
 Class {
 	#name : #BlEventDispatcherExamples,

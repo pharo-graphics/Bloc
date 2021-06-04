@@ -1,5 +1,6 @@
 "
 Sent when one or more attributes are removed within an interval
+
 "
 Class {
 	#name : #BlTextAttributesRemoved,

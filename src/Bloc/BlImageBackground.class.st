@@ -3,8 +3,9 @@ I am a special image type background given as Form.
 
 Note: I am never #isTransparent even if all Form pixels are transparent. The reason for this is the fact that ther is no fast way to detect if a Form is completly transparent without checking all pixels.
 
-!! Examples 
-Examples are provided by the class ${class:BlImageBackgroundExamples}$.
+## Examples 
+Examples are provided by the class {{gtClass:BlImageBackgroundExamples}}.
+
 "
 Class {
 	#name : #BlImageBackground,

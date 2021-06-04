@@ -1,5 +1,6 @@
 "
 I am a fallback host space that is chosen if there are no other available and supported hosts.
+
 "
 Class {
 	#name : #BlHeadlessHostSpace,

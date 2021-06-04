@@ -1,5 +1,6 @@
 "
 Is sent periodically during the pinch gesture.
+
 "
 Class {
 	#name : #BlGesturePinchEvent,

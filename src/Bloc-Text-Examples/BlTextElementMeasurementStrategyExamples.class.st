@@ -1,27 +1,28 @@
 "
-! Text measurement strategies
+# Text measurement strategies
 
-${class:BlTextElement}$ provides different text measurement strategies, each suitable for a specific use case. There is no perfect strategy, therefore understanding the differences between them is an important step in learning how to work with Text in Bloc.
+{{gtClass:BlTextElement}} provides different text measurement strategies, each suitable for a specific use case. There is no perfect strategy, therefore understanding the differences between them is an important step in learning how to work with Text in Bloc.
 
-!! Label measurement
+## Label measurement
 
-The default text measurement strategy is so called ==Label measurement==, ${method:BlTextElement>>#labelMeasurement}$. The height of the text element in this case is a sum of ascent and descent which is given by the font. It means that the height of the text is independent from the content. The width is given by the exact bounds of the element's text. ==Label measurement== is useful for displaying labels and short pieces of text. Please note, that since the width is precise and depends on the content, whitespace is not taken into account when computing the width of the text element.
-${example:BlTextElementMeasurementStrategyExamples>>#textElementWithLabelMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=100}$
+The default text measurement strategy is so called `Label measurement`, {{gtMethod:BlTextElement>>#labelMeasurement}}. The height of the text element in this case is a sum of ascent and descent which is given by the font. It means that the height of the text is independent from the content. The width is given by the exact bounds of the element's text. `Label measurement` is useful for displaying labels and short pieces of text. Please note, that since the width is precise and depends on the content, whitespace is not taken into account when computing the width of the text element.
+{{gtExample:BlTextElementMeasurementStrategyExamples>>#textElementWithLabelMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=100}}
 
-!! Editor measurement
+## Editor measurement
 
-A similar measurement strategy which is designed to be used in a text editor computes the width of the element using the ==#advance== property of a text paragraph. The height is computed as a sum of ascent and descent. ${method:BlTextElement>>#editorMeasurement}$
-${example:BlTextElementMeasurementStrategyExamples>>#textElementWithEditorMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=100}$
+A similar measurement strategy which is designed to be used in a text editor computes the width of the element using the `#advance` property of a text paragraph. The height is computed as a sum of ascent and descent. {{gtMethod:BlTextElement>>#editorMeasurement}}
+{{gtExample:BlTextElementMeasurementStrategyExamples>>#textElementWithEditorMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=100}}
 
-!! Precise measurement
+## Precise measurement
 
-However, sometimes we want to know the exact and precise text bounds. ${method:BlTextElement>>#tightMeasurement}$ does exactly that and clips off any white space surrounding the text. It may be useful for displaying a short piece of a text, usually a word centered within a larger element.
-${example:BlTextElementMeasurementStrategyExamples>>#textElementWithTightMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=75}$
+However, sometimes we want to know the exact and precise text bounds. {{gtMethod:BlTextElement>>#tightMeasurement}} does exactly that and clips off any white space surrounding the text. It may be useful for displaying a short piece of a text, usually a word centered within a larger element.
+{{gtExample:BlTextElementMeasurementStrategyExamples>>#textElementWithTightMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=75}}
 
-!! Conslusion
+## Conslusion
 
 Now let's compare all text measurement strategies:
-${example:BlTextElementMeasurementStrategyExamples>>#measurementDifference|noCode|previewShow=#gtLiveFor:|previewHeight=220}$
+{{gtExample:BlTextElementMeasurementStrategyExamples>>#measurementDifference|noCode|previewShow=#gtLiveFor:|previewHeight=220}}
+
 
 "
 Class {

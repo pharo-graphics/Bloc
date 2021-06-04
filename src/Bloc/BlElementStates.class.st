@@ -1,5 +1,6 @@
 "
-!Current element states
+# Current element states
+
 "
 Class {
 	#name : #BlElementStates,

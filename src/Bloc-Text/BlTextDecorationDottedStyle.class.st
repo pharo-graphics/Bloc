@@ -1,6 +1,7 @@
 "
-!Dotted style
-${example:BlTextDecorationStyleExamples>>#dotted|codeExpanded=false|previewExpanded=true|previewShow=#gtPreviewFor:|previewHeight=50}$
+# Dotted style
+{{gtExample:BlTextDecorationStyleExamples>>#dotted|codeExpanded=false|previewExpanded=true|previewShow=#gtPreviewFor:|previewHeight=50}}
+
 "
 Class {
 	#name : #BlTextDecorationDottedStyle,

@@ -1,5 +1,6 @@
 "
 I am used to record space events coming from the host window
+
 "
 Class {
 	#name : #BlSpaceEventRecorder,

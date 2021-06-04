@@ -1,5 +1,6 @@
 "
 I contain examples of a collection rope
+
 "
 Class {
 	#name : #BlCollectionRopeExamples,

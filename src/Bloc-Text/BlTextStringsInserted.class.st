@@ -1,5 +1,6 @@
 "
 I am sent by BlText when a collection of strings (or one string) is inserted at some indices
+
 "
 Class {
 	#name : #BlTextStringsInserted,

@@ -1,5 +1,6 @@
 "
 I am a relative transformation origin which is attached to the top left of an element.
+
 "
 Class {
 	#name : #BlAffineTransformationTopLeftOrigin,

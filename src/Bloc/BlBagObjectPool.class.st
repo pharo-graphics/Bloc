@@ -1,5 +1,6 @@
 "
 I am a dynamic object pool that grows to acomodate a lot of objects
+
 "
 Class {
 	#name : #BlBagObjectPool,

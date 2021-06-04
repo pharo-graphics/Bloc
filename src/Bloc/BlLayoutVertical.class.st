@@ -1,5 +1,6 @@
 "
 I am a concrete vertical orientation
+
 "
 Class {
 	#name : #BlLayoutVertical,

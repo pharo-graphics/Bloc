@@ -1,10 +1,11 @@
 "
-I am a holder that uses an ${class:OrderedCollection}$ to store children of bloc elements.
+I am a holder that uses an {{gtClass:OrderedCollection}} to store children of bloc elements.
 
-Internally I maintain one single ${class:OrderedCollection}$ instance. When children are added or removed I add or remove them from the wrapped collection. 
+Internally I maintain one single {{gtClass:OrderedCollection}} instance. When children are added or removed I add or remove them from the wrapped collection. 
 
-!!Examples
-Examples are provided by the class ${class:BlChildrenOrderedCollectionExamples}$
+## Examples
+Examples are provided by the class {{gtClass:BlChildrenOrderedCollectionExamples}}
+
 "
 Class {
 	#name : #BlChildrenOrderedCollection,

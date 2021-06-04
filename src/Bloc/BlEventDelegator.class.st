@@ -1,7 +1,8 @@
 "
-I delegate all events of type ==eventClass== or ones that inherit from it to the event target.
+I delegate all events of type `eventClass` or ones that inherit from it to the event target.
 
 I hold a strong reference to the event target
+
 "
 Class {
 	#name : #BlEventDelegator,

@@ -3,7 +3,8 @@ I am used to equalize the size of multiple target element with the size of the s
 
 I force Bloc to perform two layout passes, the first one to compute the size of the souce elements and then the second pass that applies the size to target elements.
 
-Use me with caution then and only then when there is no other solution, and you *have* to to equalize the size
+Use me with caution then and only then when there is no other solution, and you  to to equalize the size
+
 "
 Class {
 	#name : #BlEqualizer,

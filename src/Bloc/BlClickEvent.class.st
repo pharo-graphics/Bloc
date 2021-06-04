@@ -6,6 +6,7 @@ The order of fired events:
  - Mouse Down
  - Mouse Up
  - Click
+
 "
 Class {
 	#name : #BlClickEvent,

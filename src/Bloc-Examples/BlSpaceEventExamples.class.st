@@ -1,5 +1,6 @@
 "
 I contain examples of space related events
+
 "
 Class {
 	#name : #BlSpaceEventExamples,

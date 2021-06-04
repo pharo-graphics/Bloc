@@ -7,13 +7,14 @@ This event should be used for implementing actions when a space is closed.
 
 Example:
 
-[[[
+```
 space := BlSpace new.
 space
 	addEventHandlerOn: BlSpaceClosedEvent
 	do: [ self inform: 'Space closed' ].
 space close
-]]]
+```
+
 "
 Class {
 	#name : #BlSpaceClosedEvent,

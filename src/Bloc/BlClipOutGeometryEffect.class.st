@@ -1,5 +1,6 @@
 "
 TODO needs some work to use it in dropdown to reveal the same toggle
+
 "
 Class {
 	#name : #BlClipOutGeometryEffect,

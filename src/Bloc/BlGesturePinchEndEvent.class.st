@@ -1,5 +1,6 @@
 "
 Is sent right after the end of a pinch gesture
+
 "
 Class {
 	#name : #BlGesturePinchEndEvent,

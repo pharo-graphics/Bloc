@@ -1,5 +1,6 @@
 "
 Is sent after a host space is shown
+
 "
 Class {
 	#name : #BlParallelUniverseHostSpaceShownSignal,

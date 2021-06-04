@@ -1,5 +1,6 @@
 "
 I am sent by BlText when some pieces of text defined by index intervals are deleted.
+
 "
 Class {
 	#name : #BlTextsDeleted,

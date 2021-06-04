@@ -1,6 +1,7 @@
 "
 I am an abstract class for all Bloc animations. 
-See my subclasses for futher documentation and examples: ${class:BlBaseAnimation|show=gtSubclassesFor:|expanded=true}$
+See my subclasses for futher documentation and examples: {{gtClass:BlBaseAnimation|show=gtSubclassesFor:|expanded=true}}
+
 "
 Class {
 	#name : #BlBaseAnimation,

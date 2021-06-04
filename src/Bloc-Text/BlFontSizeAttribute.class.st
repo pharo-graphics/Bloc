@@ -14,6 +14,7 @@ Internal Representation and Key Implementation Points.
 
     Instance Variables
 	size		<Number> 
+
 "
 Class {
 	#name : #BlFontSizeAttribute,

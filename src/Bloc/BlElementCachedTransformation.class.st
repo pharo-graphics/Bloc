@@ -1,9 +1,10 @@
 "
-!Abstract cached element's transformation
+# Abstract cached element's transformation
 I define an API of the cached element's transformation.
 
-A cached transformation is defined as a tuple ==(transformation, matrix)==, where ==transformation== is a composite element independent  definition of a transformation and ==matrix== is a concrete computed transformation ${class:BlMatrix}$ which may depend on element's bounds.
-Hence the separation between ${class:BlElementTransformation}$ and ${class:BlElementCachedTransformation}$
+A cached transformation is defined as a tuple `(transformation, matrix)`, where `transformation` is a composite element independent  definition of a transformation and `matrix` is a concrete computed transformation {{gtClass:BlMatrix}} which may depend on element's bounds.
+Hence the separation between {{gtClass:BlElementTransformation}} and {{gtClass:BlElementCachedTransformation}}
+
 "
 Class {
 	#name : #BlElementCachedTransformation,

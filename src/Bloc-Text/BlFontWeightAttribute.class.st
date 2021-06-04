@@ -17,6 +17,7 @@ Internal Representation and Key Implementation Points.
 
     Instance Variables
 	weight		<Number> 
+
 "
 Class {
 	#name : #BlFontWeightAttribute,

@@ -4,16 +4,16 @@ BlTaskAtQueue provides a reasonably efficient mechanism to scheduled tasks to be
 The queue executes tasks within a single pharo process at #userSchedulingPriority, so tasks should be kept as short as possible, typically queueing the task up at a more appropriate place, e.g. one of the TaskIt background queues or within the UI process.
 
 
-!!Public API and Key Messages
+## Public API and Key Messages
 
 - start : 	Start the reader process 
 - stop : 		Stop the reader process
 - schedule:at: 	Schedule the supplied valuable to be executed at the specified time
 
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	executorProcess:		<Process>
 	queue:						<SharedPriorityUniqueQueue>
@@ -21,10 +21,11 @@ The queue executes tasks within a single pharo process at #userSchedulingPriorit
 	processTime: 			<DateAndTime>
 
 
-!!!Implementation Points
+### Implementation Points
 
 - Assumes that there is only one reader of the queue.
-- processTime holds the current DateAndTime for the evaluation cycle.  Since ${class:name=BlTaskAtQueueTask}$s use the time to calculate their entry priority this significantly reduces the number of times that the VM is called to retrieve the time.
+- processTime holds the current DateAndTime for the evaluation cycle.  Since {{gtClass:name=BlTaskAtQueueTask}}s use the time to calculate their entry priority this significantly reduces the number of times that the VM is called to retrieve the time.
+
 "
 Class {
 	#name : #BlTaskAtQueue,

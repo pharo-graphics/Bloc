@@ -1,5 +1,6 @@
 "
 I am an interpolator where the rate of change is constant
+
 "
 Class {
 	#name : #BlLinearInterpolator,

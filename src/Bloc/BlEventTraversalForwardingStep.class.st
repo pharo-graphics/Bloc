@@ -1,5 +1,6 @@
 "
 The event is being manually forwarded to other dispatchers
+
 "
 Class {
 	#name : #BlEventTraversalForwardingStep,

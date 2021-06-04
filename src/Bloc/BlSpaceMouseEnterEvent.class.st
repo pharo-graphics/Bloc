@@ -1,5 +1,6 @@
 "
 Is sent to the space when mouse cursor enters the window
+
 "
 Class {
 	#name : #BlSpaceMouseEnterEvent,

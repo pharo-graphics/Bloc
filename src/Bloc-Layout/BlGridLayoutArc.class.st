@@ -9,6 +9,7 @@ Instance Variables
 	span:		<BlGridLayoutInterval>
 	valid:		<Boolean>
 	value:		<BlGridMutableInteger>
+
 "
 Class {
 	#name : #BlGridLayoutArc,

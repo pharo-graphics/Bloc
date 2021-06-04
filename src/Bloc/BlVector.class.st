@@ -1,6 +1,6 @@
 "
 I represent an abstract dimension-less vector.
-My subclasses implement API for concrete spaces (2D, 3D, etc). Users should not directly refer to my subclasses. Such classes are implementation classes.
+My subclasses implement API for concrete spaces (2D, 3D, etc).
 
 I define basic vector function such as:
 	- length
@@ -11,18 +11,16 @@ Instance creation examples:
 
 Create a 2D vector:
 
-```
 	BlVector x: 10 y: 20
 	or
 	(10, 20)
-```	
+	
 Create a 3D vector:
 
-```
 	BlVector x: 10 y: 20 z: 30
 	or
 	(10, 20, 30)
-```
+
 "
 Class {
 	#name : #BlVector,

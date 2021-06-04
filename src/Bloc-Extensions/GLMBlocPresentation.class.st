@@ -1,5 +1,6 @@
 "
 This presentation offers a means to embed a Bloc element. It makes sense only for the Morph  Renderer.
+
 "
 Class {
 	#name : #GLMBlocPresentation,

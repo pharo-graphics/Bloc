@@ -2,6 +2,7 @@
 I represent a frame phase.
 
 Each phase knows about its start time and send a corresponding event once the phase is completed.
+
 "
 Class {
 	#name : #BlSpaceFramePhase,

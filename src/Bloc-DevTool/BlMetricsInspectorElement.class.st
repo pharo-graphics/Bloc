@@ -1,6 +1,7 @@
 "
 I represent a single metrics element (margin or padding or border).
 I can contain sub metrics element
+
 "
 Class {
 	#name : #BlMetricsInspectorElement,
@@ -14,7 +15,7 @@ Class {
 		'labelElement',
 		'spacing'
 	],
-	#category : 'Bloc-DevTool-Metrics'
+	#category : #'Bloc-DevTool-Metrics'
 }
 
 { #category : #accessing }

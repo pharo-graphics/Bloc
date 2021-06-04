@@ -1,5 +1,6 @@
 "
 Host renderer is resposible for the overall rendering logic
+
 "
 Class {
 	#name : #BlHostRenderer,

@@ -1,5 +1,6 @@
 "
 I am an exporter of bloc elements to various output formats. See my subclasses for more info
+
 "
 Class {
 	#name : #BlExporter,

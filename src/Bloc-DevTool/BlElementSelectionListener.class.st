@@ -1,5 +1,6 @@
 "
-I am an event handler that is used for Halos element. For more information about me, see ${class:BlDevHalosEventListener}$.
+I am an event handler that is used for Halos element. For more information about me, see {{gtClass:BlDevHalosEventListener}}.
+
 "
 Class {
 	#name : #BlElementSelectionListener,

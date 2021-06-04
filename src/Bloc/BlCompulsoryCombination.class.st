@@ -15,6 +15,7 @@ BlCompulsoryCombination new
 	with: (BlSingleKeyCombination key: Key arrowLeft);
 	with: (BlSingleKeyCombination key: Key w);
 	yourself
+
 "
 Class {
 	#name : #BlCompulsoryCombination,

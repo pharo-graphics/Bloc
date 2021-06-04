@@ -1,33 +1,34 @@
 "
-Easiest way to create a paint background that just displays a color is by sending the message ${method:Color>>#asBlBackground}$ to the actual color.
-${example:BlPaintBackgroundExamples>>#grayColorBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+Easiest way to create a paint background that just displays a color is by sending the message {{gtMethod:Color>>#asBlBackground}} to the actual color.
+{{gtExample:BlPaintBackgroundExamples>>#grayColorBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
-Alternatively, one can call the factory method ${method:BlPaintBackground class>>#paint:}$ and pass it the desired paint.
-${example:BlPaintBackgroundExamples>>#grayColorBackgroundExplicitInstantiationWithPaint|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+Alternatively, one can call the factory method {{gtMethod:BlPaintBackground class>>#paint:}} and pass it the desired paint.
+{{gtExample:BlPaintBackgroundExamples>>#grayColorBackgroundExplicitInstantiationWithPaint|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
-We can also instantiate a ${class:BlPaintBackground}$ object and configure it.
-${example:BlPaintBackgroundExamples>>#grayColorBackgroundExplicitInitializationWithPaint|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+We can also instantiate a {{gtClass:BlPaintBackground}} object and configure it.
+{{gtExample:BlPaintBackgroundExamples>>#grayColorBackgroundExplicitInitializationWithPaint|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
 Instead of creating a paint object, we can also pass only the color as a parameter to the factory method: 
-${example:BlPaintBackgroundExamples>>#grayColorBackgroundExplicitInstantiationWithColor|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+{{gtExample:BlPaintBackgroundExamples>>#grayColorBackgroundExplicitInstantiationWithColor|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
 Paints do not have to be only be simple colors. We can also use gradients to specify a background. For example, below we create a background that displayes a gradient from red to blue.
-${example:BlPaintBackgroundExamples>>#linearGradientBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+{{gtExample:BlPaintBackgroundExamples>>#linearGradientBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
 We can also use a different kind of gradient, like a radial one.
-${example:BlPaintBackgroundExamples>>#radiusGradientBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+{{gtExample:BlPaintBackgroundExamples>>#radiusGradientBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
 One property suported by the paint background is opacity. This changes the transparency of the background.
-${example:BlPaintBackgroundExamples>>#grayColorWithLowOpacityBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+{{gtExample:BlPaintBackgroundExamples>>#grayColorWithLowOpacityBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
 Opacity also works when gradients are used in the background.
-${example:BlPaintBackgroundExamples>>#linearGradientBackgroundWithOpacity|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+{{gtExample:BlPaintBackgroundExamples>>#linearGradientBackgroundWithOpacity|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
 Setting then the opacity to 0 makes the background transparent.
-${example:BlPaintBackgroundExamples>>#grayColorWithZeroOpacityBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+{{gtExample:BlPaintBackgroundExamples>>#grayColorWithZeroOpacityBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
 
 We can also get a transparent background by setting the a transparent color as a background.
-${example:BlPaintBackgroundExamples>>#transparentColorBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}$
+{{gtExample:BlPaintBackgroundExamples>>#transparentColorBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
+
 "
 Class {
 	#name : #BlPaintBackgroundExamples,

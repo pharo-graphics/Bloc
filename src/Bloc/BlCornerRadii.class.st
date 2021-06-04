@@ -1,11 +1,10 @@
 "
 I define the shape of the corner of a rectangle geometry (BlRectangle).
-If corner radius is zero, the corner is square, not rounded. 
-The radius also causes the element's background to be rounded.
+If corner radius is zero, the corner is square, not rounded. The radius also causes the element's background to be rounded .
+
 Negative values are not allowed.
 
-In addition the fields are immutable once set, so if you use radius: 
-all the corners will be set once for all, else you can call each corner setter once.
+
 "
 Class {
 	#name : #BlCornerRadii,

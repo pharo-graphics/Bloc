@@ -1,5 +1,6 @@
 "
 I contain examples of how to use key combination
+
 "
 Class {
 	#name : #BlKeyCombinationExamples,

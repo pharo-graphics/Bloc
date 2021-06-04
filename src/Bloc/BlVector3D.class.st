@@ -6,6 +6,7 @@ https://en.wikipedia.org/wiki/Euclidean_vector
 Instance creation:
 
 	vector := (2, 3, 5)
+
 "
 Class {
 	#name : #BlVector3D,

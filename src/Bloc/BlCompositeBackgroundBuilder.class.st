@@ -1,5 +1,6 @@
 "
 I am a BlBackground builder.
+
 "
 Class {
 	#name : #BlCompositeBackgroundBuilder,

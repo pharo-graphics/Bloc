@@ -1,5 +1,6 @@
 "
 This presentation offers a means to embed a Sparta Canvas and draw on it. It makes sense only for the Morph  Renderer.
+
 "
 Class {
 	#name : #GLMSpartaPresentation,
