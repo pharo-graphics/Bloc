@@ -7,6 +7,13 @@ Class {
 	#category : #'Bloc-Space - Telemetry'
 }
 
+{ #category : #initialize }
+BlTelemetryLogger >> initialize [
+	super initialize.
+	
+	telemetryClass := BlMemoryTelemetry
+]
+
 { #category : #accessing }
 BlTelemetryLogger >> nextPut: aSignal [
 	(aSignal class == BlTelemetrySignal

@@ -28,7 +28,7 @@ BlTelemetryTask >> childrenOverhead [
 
 { #category : #accessing }
 BlTelemetryTask >> duration [
-	^ self endTime - self startTime - self childrenOverhead - (self gcEndTime - self gcStartTime)
+	^ self endTime - self startTime - self childrenOverhead
 ]
 
 { #category : #printing }
@@ -44,6 +44,11 @@ BlTelemetryTask >> endTime [
 { #category : #accessing }
 BlTelemetryTask >> endTime: anObject [
 	endTime := anObject
+]
+
+{ #category : #accessing }
+BlTelemetryTask >> gcDurationInMilliseconds [
+	^ (self gcEndTime - self gcStartTime)
 ]
 
 { #category : #accessing }
@@ -85,7 +90,7 @@ BlTelemetryTask >> name: anObject [
 
 { #category : #accessing }
 BlTelemetryTask >> overhead [
-	^ (self realEndTime - self realStartTime) - (self endTime - self startTime) + (self gcEndTime - self gcStartTime)
+	^ (self realEndTime - self realStartTime) - (self endTime - self startTime)
 ]
 
 { #category : #printing }
