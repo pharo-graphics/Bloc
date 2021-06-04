@@ -1,5 +1,6 @@
 "
-I provide examples for subclasses of ${class:BlChildrenSubset}$.
+I provide examples for subclasses of {{gtClass:BlChildrenSubset}}.
+
 "
 Class {
 	#name : #BlChildrenSubsetExamples,

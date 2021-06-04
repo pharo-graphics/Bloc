@@ -1,7 +1,8 @@
 "
 I represent a subset of children that are accounted (not ignored) by layout.
 
-${example:BlChildrenSubsetExamples>>#accountedByLayoutChildrenFromElement}$
+{{gtExample:BlChildrenSubsetExamples>>#accountedByLayoutChildrenFromElement}}
+
 
 "
 Class {

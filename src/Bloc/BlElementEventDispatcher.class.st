@@ -1,5 +1,6 @@
 "
 I am a special event dispatcher designed for high frequency events such as ""position in space changed"" or ""added to scene graph"" events
+
 "
 Class {
 	#name : #BlElementEventDispatcher,

@@ -1,5 +1,6 @@
 "
 I am a concrete right-to-left direction
+
 "
 Class {
 	#name : #BlLayoutRightToLeft,

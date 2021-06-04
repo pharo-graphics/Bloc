@@ -1,5 +1,6 @@
 "
 I let event dispatcher know which events are enabled and which are not
+
 "
 Class {
 	#name : #BlElementEventDispatcherActivatedEvents,

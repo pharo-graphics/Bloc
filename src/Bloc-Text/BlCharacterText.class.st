@@ -1,8 +1,9 @@
 "
-I am a special type of ${BlText}$ with a guarantee that every item is a character.
-${BlCharacterText} is designed to be polymorphic with ${WideString}$, e.g. I can be compared with it (""text = string"" and ""string = text"").
+I am a special type of {{gtClass:name=BlText}} with a guarantee that every item is a character.
+{{gtClass:name=BlCharacterText} is designed to be polymorphic with ${class:name=WideString}}, e.g. I can be compared with it (""text = string"" and ""string = text"").
 
 Similar to the String I can not modified (insertion or deletions). Therefore 
+
 "
 Class {
 	#name : #BlCharacterText,

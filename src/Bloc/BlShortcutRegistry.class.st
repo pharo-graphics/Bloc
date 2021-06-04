@@ -1,5 +1,6 @@
 "
-I am a shortcut registry and contain a collection of ===BlShortcut===
+I am a shortcut registry and contain a collection of `=BlShortcut`=
+
 "
 Class {
 	#name : #BlShortcutRegistry,

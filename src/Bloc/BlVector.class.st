@@ -20,6 +20,7 @@ Create a 3D vector:
 	BlVector x: 10 y: 20 z: 30
 	or
 	(10, 20, 30)
+
 "
 Class {
 	#name : #BlVector,

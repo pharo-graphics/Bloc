@@ -6,6 +6,7 @@ Purposes/real world use cases:
  - selecting
  - submitting
  - option menu: in touchpads using 2 fingers
+
 "
 Class {
 	#name : #BlGestureTapEvent,

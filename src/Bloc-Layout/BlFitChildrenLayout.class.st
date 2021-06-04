@@ -2,6 +2,7 @@
 I am a special layout that uses measured positions of children to determine parent's extent. This will only work if my sub-layouts assign positions during the measurement step. Graph layouts is a good example.
 
 I should be considered to be a parent of the graph or visualisation layouts
+
 "
 Class {
 	#name : #BlFitChildrenLayout,

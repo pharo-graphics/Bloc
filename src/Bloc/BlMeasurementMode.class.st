@@ -9,6 +9,7 @@ Generally I represent an internal class which in most cases should not used dire
 My main methods are
  - measurement: aResizing with: aNumber to determine which measurement spec should be used to measure children based on their resizing property and possible size provided by parent. It uses double dispatch (BlMeasurementMode <-> BlLayoutResizing)
  - sizeFor: aNumber. find out the final value for the size of element based on provided possible size with single dispatching to my subclasses
+
 "
 Class {
 	#name : #BlMeasurementMode,

@@ -1,5 +1,6 @@
 "
 I am a special mocked key combination with predefined matching behaviour based on settable booleans
+
 "
 Class {
 	#name : #BlMockedKeyCombination,
@@ -7,7 +8,7 @@ Class {
 	#instVars : [
 		'shouldMatch'
 	],
-	#category : 'Bloc-Tests-KeyBinding'
+	#category : #'Bloc-Tests-KeyBinding'
 }
 
 { #category : #visiting }

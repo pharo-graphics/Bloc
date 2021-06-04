@@ -1,8 +1,9 @@
 "
 Bloc's root announcement class. I have many subclasses representing concrete event types:
-[[[
+```
 BlEvent allSubclasses
-]]]
+```
+
 "
 Class {
 	#name : #BlEvent,

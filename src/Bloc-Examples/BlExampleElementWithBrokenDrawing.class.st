@@ -1,5 +1,6 @@
 "
 I am an element with a broken drawing method that throws Error (ZeroDivide)
+
 "
 Class {
 	#name : #BlExampleElementWithBrokenDrawing,

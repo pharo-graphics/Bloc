@@ -1,3 +1,7 @@
+"
+This class contains tests
+
+"
 Class {
 	#name : #BlSpaceTest,
 	#superclass : #TestCase,

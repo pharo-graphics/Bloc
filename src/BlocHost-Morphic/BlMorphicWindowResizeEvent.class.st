@@ -1,5 +1,6 @@
 "
 I am fired when host window changed its size
+
 "
 Class {
 	#name : #BlMorphicWindowResizeEvent,
@@ -8,7 +9,7 @@ Class {
 		'width',
 		'height'
 	],
-	#category : 'BlocHost-Morphic-Events'
+	#category : #'BlocHost-Morphic-Events'
 }
 
 { #category : #accessing }

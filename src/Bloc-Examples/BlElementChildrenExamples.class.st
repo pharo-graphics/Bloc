@@ -1,7 +1,7 @@
 "
-! Bloc children composition
+# Bloc children composition
 
-Each visual element in ==Bloc== is composed out of other elements using a composition design pattern.
+Each visual element in `Bloc` is composed out of other elements using a composition design pattern.
 
 
 "

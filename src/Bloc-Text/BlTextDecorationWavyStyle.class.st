@@ -1,6 +1,7 @@
 "
-!Wavy style
-${example:BlTextDecorationStyleExamples>>#wavy|codeExpanded=false|previewExpanded=true|previewShow=#gtPreviewFor:|previewHeight=50}$
+# Wavy style
+{{gtExample:BlTextDecorationStyleExamples>>#wavy|codeExpanded=false|previewExpanded=true|previewShow=#gtPreviewFor:|previewHeight=50}}
+
 "
 Class {
 	#name : #BlTextDecorationWavyStyle,

@@ -1,5 +1,6 @@
 "
 I am a space that closes itself after a given amount of frames
+
 "
 Class {
 	#name : #BlTestAutoClosingSpace,
@@ -8,7 +9,7 @@ Class {
 		'frames',
 		'frameCounter'
 	],
-	#category : 'Bloc-Tests-Examples'
+	#category : #'Bloc-Tests-Examples'
 }
 
 { #category : #accessing }

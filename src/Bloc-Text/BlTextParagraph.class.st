@@ -27,6 +27,7 @@ Internal Representation and Key Implementation Points.
 	end:		<Number>
 	autoRelease:		<Boolean>
 	selection: 	<Interval>
+
 "
 Class {
 	#name : #BlTextParagraph,

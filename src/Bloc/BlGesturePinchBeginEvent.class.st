@@ -1,5 +1,6 @@
 "
 Is sent right before the begin of a pinch gesture
+
 "
 Class {
 	#name : #BlGesturePinchBeginEvent,

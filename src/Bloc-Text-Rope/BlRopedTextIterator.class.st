@@ -1,5 +1,6 @@
 "
 I am a specific RopedText iterator
+
 "
 Class {
 	#name : #BlRopedTextIterator,

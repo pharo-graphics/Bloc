@@ -18,6 +18,7 @@ Internal Representation and Key Implementation Points.
 
 
     Implementation Points
+
 "
 Class {
 	#name : #SharedPriorityQueueTestEntry,

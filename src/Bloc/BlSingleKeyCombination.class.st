@@ -1,7 +1,7 @@
 "
 I represent a key combination that consists of one distinct key.
 
-I am play a role of a leaf in ===BlKeyCombination=== composition tree.
+I am play a role of a leaf in `=BlKeyCombination`= composition tree.
 
 Public API and Key Messages
 
@@ -26,6 +26,7 @@ Internal Representation and Key Implementation Points.
 	#matches: returns true if key is pressed, which does not enforce the fact that there should be only one pressed key at a time
 	
 	#match: return 1 if I match any pressed key and 0 otherwise
+
 "
 Class {
 	#name : #BlSingleKeyCombination,

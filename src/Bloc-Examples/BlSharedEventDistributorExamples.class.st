@@ -1,5 +1,6 @@
 "
-I exemplify ${class:BlSharedEventDistributor}$.
+I exemplify {{gtClass:BlSharedEventDistributor}}.
+
 "
 Class {
 	#name : #BlSharedEventDistributorExamples,

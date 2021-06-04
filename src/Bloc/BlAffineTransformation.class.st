@@ -3,6 +3,7 @@ In geometry, an affine transformation, affine map or an affinity (from the Latin
 Examples of affine transformations include translation, scaling, homothety, similarity transformation, reflection, rotation, shear mapping, and compositions of them in any combination and sequence.
 
 https://en.wikipedia.org/wiki/Affine_transformation
+
 "
 Class {
 	#name : #BlAffineTransformation,

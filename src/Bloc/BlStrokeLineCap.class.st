@@ -9,7 +9,8 @@ Possible types are:
  - square: BlStrokeLineSquareCap
 
 Evaluate to see a visual preview:
-=== BlStrokeLineCap new inspect ===
+`= BlStrokeLineCap new inspect `=
+
 "
 Class {
 	#name : #BlStrokeLineCap,

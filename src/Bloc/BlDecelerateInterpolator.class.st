@@ -7,6 +7,7 @@ My formula is:
 	f(x) = 1 - (1 - x)^n, where n = 2* factor
 
 I meant to be immutable, therefore factor can be only set using factory method #factor: on my class side
+
 "
 Class {
 	#name : #BlDecelerateInterpolator,

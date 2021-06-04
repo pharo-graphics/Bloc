@@ -2,7 +2,7 @@
 I am an event handler registry used by dispatchers in order to manage event handlers.
 
 Example:
-[[[
+```
 | registry |
 ""one can use announcer based registry""
 registry := BlHandlerAnnouncerRegistry new.
@@ -14,7 +14,8 @@ registry add: (BlEventHandler on: BlMouseUpEvent do: [ self inform: 'Mouse up' ]
 registry dispatchEvent: BlClickEvent new.
 registry dispatchEvent: BlMouseDownEvent new.
 registry dispatchEvent: BlMouseUpEvent new.
-]]]
+```
+
 "
 Class {
 	#name : #BlHandlerRegistry,

@@ -7,6 +7,7 @@ BlBorder builder
 	paint: Color red;
 	width: 10;
 	build
+
 "
 Class {
 	#name : #BlBorder,

@@ -1,5 +1,6 @@
 "
 I am an empty selection
+
 "
 Class {
 	#name : #BlEmptySelection,

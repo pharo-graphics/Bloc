@@ -15,9 +15,9 @@ Public API and Key Messages
 - ropeFor: 		Answer a BlRopedText on the supplied file.
 
 
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	binaryStream: 		<ZnBufferedReadStream> The underlying stream for the receiver's file.
 	bufferSize: 			<Integer> See implementation notes
@@ -30,19 +30,20 @@ Public API and Key Messages
 	strict: 				<Boolean> If true, an exception will be raised when decoding the file (UTF-8).  If false, the character stream will be interpreted as ascii (null-encoding).
 
 
-!!!Implementation Points
+### Implementation Points
 
-!!!!Buffer Efficiency
+#### Buffer Efficiency
 
 Currently characters are read from the stream using #next:, creating a new buffer object each time the file is read.  Performance can be improved by re-using a single buffer and reading in to it (thus bufferedSize).
 
-!!!!size 
+#### size 
 
 The #size method currently returns an estimate of the actual size is not known.  This can cause problems if a user attempts to copy the entire contents using `text size` as the end position.
 
 Probably size should be reified and a StringSize object used to indicate the end of the string.  However it isn't clear how comparisons with numbers should be performed, and no exceptions have actually occurred, so this has been deferred until an actual case can be analysed.
 
 Once that has been done, #size should be modified to raise an exception if the actual size isn't known.  #approximateSize can be used to get an idea of the receiver's size.
+
 "
 Class {
 	#name : #BlRopeableCollectionFile,

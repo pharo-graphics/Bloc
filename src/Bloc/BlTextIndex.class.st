@@ -3,6 +3,7 @@ BlTextIndex is an abstract class that reifies the index in to a BlRopedText.
 
 See BlTextIndexEOS.
 
+
 "
 Class {
 	#name : #BlTextIndex,

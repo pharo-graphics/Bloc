@@ -1,5 +1,6 @@
 "
 I am an example of a custom bloc event
+
 "
 Class {
 	#name : #BlExampleCustomEvent,
@@ -7,7 +8,7 @@ Class {
 	#instVars : [
 		'payload'
 	],
-	#category : 'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #accessing }

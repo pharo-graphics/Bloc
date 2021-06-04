@@ -1,5 +1,6 @@
 "
 I exist to prevent opening of Morphic World when running with a headless vm and --interactive flag
+
 "
 Class {
 	#name : #BlNullWorldRenderer,

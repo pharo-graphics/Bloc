@@ -1,5 +1,6 @@
 "
-! Hello 2
+# Hello 2
+
 "
 Class {
 	#name : #BlExampleElementThatWantsCompositionLayer,

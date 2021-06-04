@@ -1,23 +1,24 @@
 "
-I am an abstract root class designed for accessing and iterating over the children of a ${class:BlElement}$. 
+I am an abstract root class designed for accessing and iterating over the children of a {{gtClass:BlElement}}. 
 
 I define a data structure independent API for iterating and accessing bloc elements. I assume an index-based way of accessing bloc elements. Subclasses can filter elements or have different orders to iterate over them.
 
-!!API
+## API
 
 Subclasses need to overide the following abstract methods to provide access to the actual bloc elements:
-- ${method:BlChildren>>#at:}$
-- ${method:BlChildren>>#do:}$
-- ${method:BlChildren>>#size}$
+- {{gtMethod:BlChildren>>#at:}}
+- {{gtMethod:BlChildren>>#do:}}
+- {{gtMethod:BlChildren>>#size}}
 
 Additionally, I provide an API for selecting only subsets of children, or iterating over them in a differen order, like:
-- ${method:BlChildren>>#accountedByLayout}$
-- ${method:BlChildren>>#ignoredByLayout}$
-- ${method:BlChildren>>#reversed}$
-- ${method:BlChildren>>#sortedByElevation}$
+- {{gtMethod:BlChildren>>#accountedByLayout}}
+- {{gtMethod:BlChildren>>#ignoredByLayout}}
+- {{gtMethod:BlChildren>>#reversed}}
+- {{gtMethod:BlChildren>>#sortedByElevation}}
 
 Important API methods: 
-- ${method:BlChildren>>#asArray}$: returns an array with all the elements.
+- {{gtMethod:BlChildren>>#asArray}}: returns an array with all the elements.
+
 "
 Class {
 	#name : #BlChildren,

@@ -1,5 +1,6 @@
 "
-! Hello 1
+# Hello 1
+
 "
 Class {
 	#name : #BlCompositionPainterExamples,

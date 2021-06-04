@@ -1,6 +1,7 @@
 "
-!Cached element transformation
-Builds upon the ${class:BlElementTransformation}$ to provide the matrix caching posibility.
+# Cached element transformation
+Builds upon the {{gtClass:BlElementTransformation}} to provide the matrix caching posibility.
+
 "
 Class {
 	#name : #BlElementCachedExplicitTransformation,

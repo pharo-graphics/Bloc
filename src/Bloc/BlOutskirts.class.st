@@ -1,5 +1,6 @@
 "
 I define the strategy to be used to draw the border (inside/outside/centered)
+
 "
 Class {
 	#name : #BlOutskirts,

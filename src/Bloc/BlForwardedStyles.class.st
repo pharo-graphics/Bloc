@@ -1,6 +1,7 @@
 "
-!Forwarded element styles
-Extends ${class:BlStyles}$ by adding an ability to customise ${method:BlForwardedStyles>>#targetObject}$ on which styles are applied.
+# Forwarded element styles
+Extends {{gtClass:BlStyles}} by adding an ability to customise {{gtMethod:BlForwardedStyles>>#targetObject}} on which styles are applied.
+
 "
 Class {
 	#name : #BlForwardedStyles,

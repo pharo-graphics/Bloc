@@ -1,6 +1,7 @@
 "
-!Deprecated
-Use ${class:BlShortcutWithAction}$ instead
+# Deprecated
+Use {{gtClass:BlShortcutWithAction}} instead
+
 "
 Class {
 	#name : #BlShortcut,

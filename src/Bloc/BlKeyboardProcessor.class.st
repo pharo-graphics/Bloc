@@ -1,6 +1,7 @@
 "
-! Keyboard event processor
-Is responsible for processing ${class:BlKeyboardEvent}$ which are sent by the ${class:TBlHostSpace}$ to the ${class:BlSpace}$. In addition, the ==keyboard event processor== generates additional events such as ${class:BlShortcutEvent}$ 
+# Keyboard event processor
+Is responsible for processing {{gtClass:BlKeyboardEvent}} which are sent by the {{gtClass:TBlHostSpace}} to the {{gtClass:BlSpace}}. In addition, the `keyboard event processor` generates additional events such as {{gtClass:BlShortcutEvent}} 
+
 "
 Class {
 	#name : #BlKeyboardProcessor,

@@ -1,7 +1,11 @@
+"
+This class contains tests
+
+"
 Class {
 	#name : #BlTransformationTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Core'
+	#category : #'Bloc-Tests-Core'
 }
 
 { #category : #'tx bounds tests' }

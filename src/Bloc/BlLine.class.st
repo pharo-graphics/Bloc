@@ -1,5 +1,6 @@
 "
 I define a geometry of a straight line
+
 "
 Class {
 	#name : #BlLine,

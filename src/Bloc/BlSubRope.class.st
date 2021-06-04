@@ -1,5 +1,6 @@
 "
 I a special type of rope used to represent a sub rope for the case when rebuilding the whole binary tree does not make since, so I just decorate an original rope limiting its access by using an offset and allowed length
+
 "
 Class {
 	#name : #BlSubRope,

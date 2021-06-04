@@ -1,7 +1,7 @@
 "
 I am a special element whose rendering can be customized.
 
-[[[
+```
 element := BlSpartaElement new.
 element rendering: [ :aCanvas :anElement |
 	aCanvas fill
@@ -9,7 +9,8 @@ element rendering: [ :aCanvas :anElement |
 		path: anElement bounds asRectangle;
 		draw ].
 element
-]]]
+```
+
 "
 Class {
 	#name : #BlSpartaElement,

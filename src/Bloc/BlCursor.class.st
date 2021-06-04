@@ -1,7 +1,8 @@
 "
 I represent the cursor used in the space.
 
-There are two general types of a cursor: ${class:BlNamedCursor}$ and ${class:BlStaticCursor}$
+There are two general types of a cursor: {{gtClass:BlNamedCursor}} and {{gtClass:BlStaticCursor}}
+
 "
 Class {
 	#name : #BlCursor,

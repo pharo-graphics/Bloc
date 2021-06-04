@@ -2,6 +2,7 @@
 I am a copy of class BlSpartaMozCanvasBuilder. This comment is copied from there, and might not be entirely accurate
 
 I build sparta canvas using Moz2D backend
+
 "
 Class {
 	#name : #BlSpartaSkiaCanvasBuilder,

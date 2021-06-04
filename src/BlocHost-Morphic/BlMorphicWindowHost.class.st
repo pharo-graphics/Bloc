@@ -1,5 +1,6 @@
 "
 I am a concrete implementation of a BlHost that allows users to open host bloc spaces within Moprhic windows
+
 "
 Class {
 	#name : #BlMorphicWindowHost,

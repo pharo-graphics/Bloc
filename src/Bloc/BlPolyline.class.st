@@ -8,6 +8,7 @@ BlPolyline vertices: {
 	180@150.
 	80@140
 }
+
 "
 Class {
 	#name : #BlPolyline,

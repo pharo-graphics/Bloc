@@ -1,5 +1,6 @@
 "
 I exemplify selection interval
+
 "
 Class {
 	#name : #BlSelectionExamples,

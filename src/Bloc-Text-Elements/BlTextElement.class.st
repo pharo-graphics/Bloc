@@ -1,10 +1,10 @@
 "
-! Text element
+# Text element
 
-""""I am independent from Sparta """"
+**I am independent from Sparta **
 
 I support multiple measurement strategies, see examples for more detailed explanation:
-${class:BlTextElementMeasurementStrategyExamples}$
+{{gtClass:BlTextElementMeasurementStrategyExamples}}
 
 
 "

@@ -1,7 +1,8 @@
 "
-! Element's identity transformation
+# Element's identity transformation
 Stateless transformation object that represents an identity transformation of an element.
 The best used as a unique instance
+
 "
 Class {
 	#name : #BlElementIdentityTransformation,

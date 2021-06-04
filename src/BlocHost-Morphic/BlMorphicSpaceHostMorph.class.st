@@ -1,5 +1,6 @@
 "
 I act as a space host for a Bloc space
+
 "
 Class {
 	#name : #BlMorphicSpaceHostMorph,

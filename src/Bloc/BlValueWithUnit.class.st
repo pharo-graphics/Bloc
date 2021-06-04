@@ -1,8 +1,9 @@
 "
-!Value with unit
+# Value with unit
 
-Represents a ==dimensioned quantity== or ==dimensioned number==, for example ==10pt== or ==30%==.
-The ${method:BlValueWithUnit>>#value|label=value}$ can be any object, but in most cases it is a number, the ${method:BlValueWithUnit>>#unit|label=unit}$ is an instance of a concrete subclass of ${class:BlUnit}$
+Represents a `dimensioned quantity` or `dimensioned number`, for example `10pt` or `30%`.
+The {{gtMethod:BlValueWithUnit>>#value|label=value}} can be any object, but in most cases it is a number, the {{gtMethod:BlValueWithUnit>>#unit|label=unit}} is an instance of a concrete subclass of {{gtClass:BlUnit}}
+
 "
 Class {
 	#name : #BlValueWithUnit,

@@ -1,10 +1,14 @@
+"
+This class contains tests
+
+"
 Class {
 	#name : #BlEventTestCase,
 	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Tests-Universe'
+	#category : #'Bloc-Tests-Universe'
 }
 
 { #category : #asserting }

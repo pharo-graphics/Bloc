@@ -1,46 +1,47 @@
 "
-! Welcome to Bloc
-I am the root class of all visual elements in Bloc and can be composed out of other elements that we will refer to as ==children==. 
-!! Visual properties
+# Welcome to Bloc
+I am the root class of all visual elements in Bloc and can be composed out of other elements that we will refer to as `children`. 
+## Visual properties
 Being a root class and a core element, I let users configure a few essential visual properties such as background, border, opacity, size and a few more. Let's go through each of them.
-!!! Background
-${class:BlBackground}$describes how an element should be filled, e.g. its background.
-${class:BlBackgroundExamples}$ gives a detailed insight in the world of bloc backgrounds.
-!!! Border
-${class:BlBorder}$ is a visual property that defines how the outline of the element should be rendered. It also influences ==stroked bounds== of the element.
-${class:BlBorderExamples}$ provides more detailed information about a border.
-!!! Opacity
+### Background
+{{gtClass:BlBackground}}describes how an element should be filled, e.g. its background.
+{{gtClass:BlBackgroundExamples}} gives a detailed insight in the world of bloc backgrounds.
+### Border
+{{gtClass:BlBorder}} is a visual property that defines how the outline of the element should be rendered. It also influences `stroked bounds` of the element.
+{{gtClass:BlBorderExamples}} provides more detailed information about a border.
+### Opacity
 Opacity defines how transparent an element is. It does not influence event propagation.
-${class:BlOpacityExamples}$ shows in details how opacity affects the element.
-!! Composition
+{{gtClass:BlOpacityExamples}} shows in details how opacity affects the element.
+## Composition
 To be in-line with Bloc design, we prefer composition over inheritance. Thus it is better to have tiny bloc elements - each with a small and simple API and clear responsibilities - that can later be composed into a more sophisticated graphical scene. In this paragraph we will learn the basic composition aspects and corresponding API.
 
-The composition relation between parent and children is 1:N meaning that an element can have at most one parent. Therefore by design it is only possible to add an element to just one other element. Trying to add an element that is already a child to some other element results in ${class:BlAlreadyAddedAsChildError}$ 
+The composition relation between parent and children is 1:N meaning that an element can have at most one parent. Therefore by design it is only possible to add an element to just one other element. Trying to add an element that is already a child to some other element results in {{gtClass:BlAlreadyAddedAsChildError}} 
 
 Bloc elements provide a set of methods to add and remove children.
-!!! Adding children
+### Adding children
 There are four ways to add some given element as a direct child to another element.
 
-The most commonly used way to add a child is to use ${method:BlElement>>#addChild:}$ which adds a given element as the last child in the collection of children.
-[[[
+The most commonly used way to add a child is to use {{gtMethod:BlElement>>#addChild:}} which adds a given element as the last child in the collection of children.
+```
 | parent child |
 parent := BlElement new size: 100@100; background: Color veryVeryLightGray.
 child := BlElement new size: 50@50; background: Color red lighter.
 parent addChild: child
-]]]
+```
 
-Users may also choose to add an element as the first child, for that purpose Bloc provides ${method:BlElement>>#addChildFirst:}$.
-!!Geometry and bounds
-Every element is responsible for drawing itself. At the same time, every element has a ${class:BlElementGeometry}$ that defines the bounds and the clipping. There are many types of geometry available:
-[[[
+Users may also choose to add an element as the first child, for that purpose Bloc provides {{gtMethod:BlElement>>#addChildFirst:}}.
+## Geometry and bounds
+Every element is responsible for drawing itself. At the same time, every element has a {{gtClass:BlElementGeometry}} that defines the bounds and the clipping. There are many types of geometry available:
+```
 BlElementGeometry allSubclasses
-]]]
+```
 
-See ${class:BlGeometryVisualAndLayoutBoundsExamples}$ for concrete details.
-!!Layout
-There are many built-in ${class:BlLayout}$ strategies available, or you can create your own.
-!!Tutorial
-You can learn Bloc following a memory game tutorial: ${icebergFile:path=feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar}$.
+See {{gtClass:BlGeometryVisualAndLayoutBoundsExamples}} for concrete details.
+## Layout
+There are many built-in {{gtClass:BlLayout}} strategies available, or you can create your own.
+## Tutorial
+You can learn Bloc following a memory game tutorial: [00-memory-game.pillar](fileLocator://gtResource/feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar).
+
 "
 Class {
 	#name : #BlElement,

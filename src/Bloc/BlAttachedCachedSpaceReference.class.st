@@ -1,6 +1,7 @@
 "
-! Attached cached space reference
+# Attached cached space reference
 For performance reasons elements cache a reference to the space so that there is no need all the time to go up the hierarchy of the elements until root to get access to the space.
+
 "
 Class {
 	#name : #BlAttachedCachedSpaceReference,

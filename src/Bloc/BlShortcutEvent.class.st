@@ -3,7 +3,7 @@ Is sent by Keyboard processor to currently focused element in order to allow it 
 
 Public API and Key Messages
 
-- buffer return a ===BlKeyboardBuffer=== that knows what keys are pressed at the moment.
+- buffer return a `=BlKeyboardBuffer`= that knows what keys are pressed at the moment.
  
 Internal Representation and Key Implementation Points.
 
@@ -12,7 +12,8 @@ Internal Representation and Key Implementation Points.
 
     Implementation Points
 
-I must be set to ===consumed=== if there was a matching shortcut.
+I must be set to `=consumed`= if there was a matching shortcut.
+
 "
 Class {
 	#name : #BlShortcutEvent,

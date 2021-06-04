@@ -9,6 +9,7 @@ I can play a role of a circle if both width and height are equal. In this case c
 In order to explicitely create an ellipse use extent:
 
 	BlEllipseGeometry extent: 50@30 ""create an ellipse with width 50 and height 30""
+
 "
 Class {
 	#name : #BlEllipseGeometry,
