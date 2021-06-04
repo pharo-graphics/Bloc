@@ -3,7 +3,7 @@
 
 A bound is a territorial limit, a boundary. In terms of a graphical element, it is a space in which the graphical element is rendered. For simplicity, bounds are rectangular areas. Bloc defines three different bounds (layout, geometry, and visual) that we will explain using the following example:
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#centeredOutskirts|expandedPreview}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#centeredOutskirts|previewExpanded}$
 
 ""Layout"" bounds are drawn with gray dashed rectangles in the figure above. They are of this size in this particula example, because each element defines its size explicitly using ==size:== method. Layout bounds are considered by layout algorithms to define mutual locations for all considered elements.
 
@@ -17,32 +17,32 @@ ${example:BlGeometryVisualAndLayoutBoundsExamples>>#rectanglePolygon}$
 
 The first figure above draws all strokes centered around the defined vertices. For that reason, the geometry bounds are in the middle. The following example draws strokes outside:
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#outsideOutskirts|expandedPreview}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#outsideOutskirts|previewExpanded}$
 
 In case of the rectangle, you can notice that its stroke is inside of the visual (blue, outside) and the geometry (red, inside) bounds. If the strokes are drawn inside, then visual and geometry bounds are equal:
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#insideOutskirts|expandedPreview}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#insideOutskirts|previewExpanded}$
 
 !! Clipping
 
 Geometry is used to define clipping. Consider the below an example in which the triangle is placed in the green parent. When clipping is ==false==, the triangle is seen in its entirety.
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#unclippedTriangle|expandedPreview=}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#unclippedTriangle|previewExpanded=}$
 
 When clipping is true, the triangle is cut.
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#clippedTriangle|expandedPreview=}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#clippedTriangle|previewExpanded=}$
 
 
 ! Debugging Bounds
 
 Being able to display those three bounds helps when elements are not visually aligned as expected. Consider the following example:
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#misalignedIcon|expandedPreview}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#misalignedIcon|previewExpanded}$
 
 The triangle (icon) and text are not vertically centered despide the fact that we have ==BlLinearLayout horizontal alignCenter== in the code. To understand why it happens, ==aTriangleElement debug: true== can be added to the code with the following result:
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#debuggingMisalignedIcon|expandedPreview}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#debuggingMisalignedIcon|previewExpanded}$
 
 As we can see the layout bounds (gray dashed rectangle) consider larger area then expected. Looking at the definition of the triangle polygon, we can spot that the polygon starts at ==0@3== instead of ==0@0==: 
 
@@ -54,11 +54,11 @@ ${example:BlGeometryVisualAndLayoutBoundsExamples>>#trianglePolygon}$
 
 The icon and text are aligned as expected:
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#debuggingAlignedIcon|expandedPreview}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#debuggingAlignedIcon|previewExpanded}$
 
 And we can disactivate the debug mode:
 
-${example:BlGeometryVisualAndLayoutBoundsExamples>>#alignedIcon|expandedPreview}$
+${example:BlGeometryVisualAndLayoutBoundsExamples>>#alignedIcon|previewExpanded}$
 
 The debugging mode is also possible to activate in the GT-Inspector's menu, next to the tabs.
 "
