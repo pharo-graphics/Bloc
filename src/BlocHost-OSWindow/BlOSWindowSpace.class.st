@@ -37,8 +37,9 @@ BlOSWindowSpace >> close [
 ]
 
 { #category : #'host space - cursor' }
-BlOSWindowSpace >> cursor: aCursor [
-	"self windowDo: [ :aWindow | aWindow setMouseCursor: aCursor ]"
+BlOSWindowSpace >> cursor: aBlCursor [
+
+	window setMouseCursor: aBlCursor asForm
 ]
 
 { #category : #'host space - geometry' }
