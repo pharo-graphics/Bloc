@@ -246,7 +246,6 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 		during: [ self basicMeasureParagraph: paragraph ].
 
 	"text layout is measured at this point"
-
 	aMeasuredBounds := measurement boundsOf: paragraph.
 	aMeasuredWidth := aMeasuredBounds width min: aMaxWidth.
 	aMeasuredHeight := aMeasuredBounds height min: aMaxHeight.

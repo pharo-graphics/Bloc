@@ -1,3 +1,6 @@
+"
+I calculate text extent using a BlSpartaCanvas that I receive on initialization.
+"
 Class {
 	#name : #BlSpartaCanvasTextMeasurer,
 	#superclass : #BlSpartaTextMeasurer,
@@ -8,8 +11,9 @@ Class {
 }
 
 { #category : #accessing }
-BlSpartaCanvasTextMeasurer >> canvas: anObject [
-	spartaCanvas := anObject
+BlSpartaCanvasTextMeasurer >> canvas: aSpartaCanvas [
+
+	spartaCanvas := aSpartaCanvas
 ]
 
 { #category : #accessing }

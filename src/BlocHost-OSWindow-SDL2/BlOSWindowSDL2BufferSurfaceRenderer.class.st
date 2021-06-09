@@ -13,16 +13,16 @@ Class {
 }
 
 { #category : #initialization }
-BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aSurface [
-	| textureExtent sdlSurface |
+BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBufferSurface [
 
-	textureExtent := aSurface physicalSize asPoint.
+	| textureExtent sdlSurface |
+	textureExtent := aBlHostRendererBufferSurface physicalSize asPoint.
 	
 	sdlSurface := SDL2
 		createRGBSurfaceForCairoWidth: textureExtent x
 		height: textureExtent y.
 
-	renderer := window backendWindow  renderer renderer.
+	renderer := window backendWindow renderer renderer.
 
 	texture := renderer
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888
@@ -30,20 +30,20 @@ BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aSurface [
 		width: textureExtent x
 		height: textureExtent y.
 
-	aSurface
+	aBlHostRendererBufferSurface
 		buffer: sdlSurface pixels;
 		stride: sdlSurface pitch;
 		extent: textureExtent
 ]
 
 { #category : #rendering }
-BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
-	"Render a given surface on a host space"
+BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aBlHostRendererBufferSurface damaged: aCollectionOfRectangles [
+	"Render a given surface on a host space. Collection of damaged rectangles is not taken into account."
 
 	texture
 		updateTextureRect: nil
-		pixels: aSurface buffer
-		pitch: aSurface stride.
+		pixels: aBlHostRendererBufferSurface buffer
+		pitch: aBlHostRendererBufferSurface stride.
 
 	renderer
 		clear;
@@ -53,10 +53,13 @@ BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aSurface damaged: aCollect
 
 { #category : #accessing }
 BlOSWindowSDL2BufferSurfaceRenderer >> window [
+	"Answer my OSWindow."
+
 	^ window
 ]
 
 { #category : #accessing }
-BlOSWindowSDL2BufferSurfaceRenderer >> window: anObject [
-	window := anObject
+BlOSWindowSDL2BufferSurfaceRenderer >> window: aOSWindow [
+
+	window := aOSWindow
 ]

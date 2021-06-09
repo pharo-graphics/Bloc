@@ -1,3 +1,7 @@
+"
+I calculate text extent using the BlSpartaCanvas provided by a BlSpartaSpaceRenderer.
+
+"
 Class {
 	#name : #BlSpartaSpaceTextMeasurer,
 	#superclass : #BlSpartaTextMeasurer,

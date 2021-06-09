@@ -29,8 +29,8 @@ BlOSWindowSDL2Renderer class >> new [
 
 { #category : #'host space - accessing' }
 BlOSWindowSDL2Renderer >> canvasExtent [
-	| width height extent |
 
+	| width height extent |
 	width := FFIExternalArray externalNewType: 'int' size: 1.
 	height := FFIExternalArray externalNewType: 'int' size: 1.
 
@@ -48,6 +48,7 @@ BlOSWindowSDL2Renderer >> canvasExtent [
 
 { #category : #deleting }
 BlOSWindowSDL2Renderer >> destroy [
+
 	renderer destroy.
 	super destroy.
 ]

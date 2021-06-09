@@ -1,3 +1,6 @@
+"
+My subclasses are responsible of measuring the bounds of a text paragraph.
+"
 Class {
 	#name : #BlHostTextMeasurer,
 	#superclass : #Object,

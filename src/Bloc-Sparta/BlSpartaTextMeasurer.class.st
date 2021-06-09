@@ -1,3 +1,8 @@
+"
+I know how to measure the bounds of a text paragraph in a SpartaCanvas.
+
+My subclasses need to implement #spartaCanvas template method to provide the (sub)instance of SpartaCanvas that will be used to measure.
+"
 Class {
 	#name : #BlSpartaTextMeasurer,
 	#superclass : #BlHostTextMeasurer,
@@ -11,7 +16,9 @@ Class {
 BlSpartaTextMeasurer >> createParagraphSpan [
 	<return: #BlTextParagraphSpan>
 
-	^ BlTextParagraphSpan new measurer: self
+	^ BlTextParagraphSpan new
+		  measurer: self;
+		  yourself
 ]
 
 { #category : #dispatch }
@@ -23,6 +30,7 @@ BlSpartaTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 BlSpartaTextMeasurer >> measureTextSpan: aBlSpan [
 	"Measure a given text span and return paragraph span with computed metrics"
 	<return: #BlTextParagraphSpan>
+
 	| aFontBuilder aFontAndStyleBuilder aFont aTextPainter theAttributes aTextRun aSpartaMetrics aParagraphSpan |
 
 	"we first collect font properties and text style from the attributes"

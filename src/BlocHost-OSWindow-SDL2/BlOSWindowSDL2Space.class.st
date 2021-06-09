@@ -7,6 +7,8 @@ Class {
 { #category : #initialization }
 BlOSWindowSDL2Space >> createBufferSurfaceRenderer [
 	<return: #BlHostSurfaceRenderer>
-	
-	^ BlOSWindowSDL2BufferSurfaceRenderer new window: window
+
+	^ BlOSWindowSDL2BufferSurfaceRenderer new
+		  window: window;
+		  yourself
 ]
