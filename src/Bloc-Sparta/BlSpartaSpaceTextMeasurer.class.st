@@ -14,8 +14,9 @@ BlSpartaSpaceTextMeasurer >> spaceRenderer [
 ]
 
 { #category : #accessing }
-BlSpartaSpaceTextMeasurer >> spaceRenderer: anObject [
-	spaceRenderer := anObject
+BlSpartaSpaceTextMeasurer >> spaceRenderer: aBlSpartaSpaceRenderer [
+
+	spaceRenderer := aBlSpartaSpaceRenderer
 ]
 
 { #category : #accessing }
