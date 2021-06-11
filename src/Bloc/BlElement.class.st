@@ -2706,6 +2706,16 @@ BlElement >> opacity: aNumber [
 	self invalidate
 ]
 
+{ #category : #convenience }
+BlElement >> openInNewSpace [
+	"Add self to a new BlSpace and show it. Answer such space."
+	
+	^ BlSpace new
+		  addChild: self;
+		  show;
+		  yourself
+]
+
 { #category : #'geometry bounds' }
 BlElement >> outsets [
 	^ self margin
