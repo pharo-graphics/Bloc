@@ -8,7 +8,6 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'next',
 		'previous',
 		'dispatcher'
 	],
@@ -57,29 +56,11 @@ BlEventDispatcherChain >> first [
 		ifFalse: [ self ]
 ]
 
-{ #category : #'as yet unclassified' }
-BlEventDispatcherChain >> gtInspectorDispatchersIn: aComposite [
-	<gtInspectorPresentationOrder: 80>
-
-	^ aComposite fastTable
-		title: 'Dispatchers';
-		display: [ self withAllPrevious reversed select: #hasDispatcher thenCollect: #dispatcher ];
-		column: 'Dispatcher' evaluated: #yourself;
-		column: 'Type' evaluated: #type
-]
-
 { #category : #'private - testing' }
 BlEventDispatcherChain >> hasDispatcher [
 	<return: #Boolean>
 	
 	^ dispatcher isNotNil
-]
-
-{ #category : #'private - testing' }
-BlEventDispatcherChain >> hasNext [
-	<return: #Boolean>
-	
-	^ next isNotNil
 ]
 
 { #category : #'private - testing' }
@@ -98,29 +79,8 @@ BlEventDispatcherChain >> initializeWith: aBlEventDispatcher [
 
 	dispatcher := aBlEventDispatcher.
 	
-	"explicitly log that new chain has no successor or predecessor"
-	previous := nil.
-	next := nil
-]
-
-{ #category : #'private - accessing' }
-BlEventDispatcherChain >> next [
-	<return: #BlEventDispatcherChain>
-	
-	self
-		assert: [ self hasNext ]
-		description: [ 'Can not access next element in a chain if it does not exist' ].
-	
-	^ next
-]
-
-{ #category : #'private - accessing' }
-BlEventDispatcherChain >> next: aBlEventDispatcherChain [
-	self
-		assert: [ self hasNext not ]
-		description: [ 'I am immutable' ].
-
-	next := aBlEventDispatcherChain
+	"explicitly log that new chain has no predecessor"
+	previous := nil
 ]
 
 { #category : #'private - accessing' }
@@ -144,19 +104,6 @@ BlEventDispatcherChain >> previous: aBlEventDispatcherChain [
 ]
 
 { #category : #'private - accessing' }
-BlEventDispatcherChain >> withAllNext [
-	<return: #SequenceableCollection of: #BlEventDispatcherChain>
-
-	^ Array streamContents: [ :aStream |
-		| aChain |
-		aChain := self.
-		aStream nextPut: aChain.
-		[ aChain hasNext ] whileTrue: [
-			aStream nextPut: aChain next.
-			aChain := aChain next ] ]
-]
-
-{ #category : #'private - accessing' }
 BlEventDispatcherChain >> withAllPrevious [
 	<return: #SequenceableCollection of: #BlEventDispatcherChain>
 
@@ -174,7 +121,6 @@ BlEventDispatcherChain >> withNext: aBlEventDispatcher [
 	| aNextChain |
 
 	aNextChain := self class with: aBlEventDispatcher.
-	self next: aNextChain.
 	aNextChain previous: self.
 
 	^ aNextChain

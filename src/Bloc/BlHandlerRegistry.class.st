@@ -80,15 +80,6 @@ BlHandlerRegistry >> do: aBlock [
 	self subclassResponsibility
 ]
 
-{ #category : #'as yet unclassified' }
-BlHandlerRegistry >> gtInspectorHandlersIn: aComposite [
-	<gtInspectorPresentationOrder: 1>
-
-	^ aComposite list
-		title: 'Handlers';
-		display: [ self handlers ]
-]
-
 { #category : #'api - accessing' }
 BlHandlerRegistry >> handlers [
 	"Return an immutable collection of all registered event handlers"
