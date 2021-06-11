@@ -152,8 +152,8 @@ BlParallelUniverse >> defaultEventListener [
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> defer: aValuable [
-	"#defer: can be used from any thread to execute a valuable in the GUI thread at the beginning of the next pulse.
-	You can use it to update the GUI states from any other thread"
+	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse.
+	It is useful to update the UI states."
 
 	(BlParallelUniverseDeferredActionAddedSignal new universeId: self id) emit.
 
@@ -328,9 +328,8 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> postpone: aValuable [
-	"#postpone: can be used from any thread to execute a valuable in the GUI thread
-	after the pulse is completed.
-	I am different from #defer: in that #defer: actios are evaluated before the pulse of the universe"
+	"Enqueue a valuable from any process to be executed in the UI process at the end of the next pulse.
+	The differene with #defer: is that deferred valuables are executed at the beginning of the pulse."
 
 	postponedActions nextPut: aValuable
 ]
