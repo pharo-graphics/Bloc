@@ -1764,16 +1764,21 @@ BlElement >> ignoreRequestLayoutDuring: aBlock [
 ]
 
 { #category : #processing }
-BlElement >> inUIProcessDo: aBlock [ 
+BlElement >> inUIProcessDo: aBlock [
 	"Run the supplied block in the UI process.
-	If the current process is the ui process, evaluate immediately, otherwise queue up for the next frame."
-	| uiProcess |
+	If the active process is already the UI process, evaluate immediately. 
+	Otherwise, queue up for the next frame."
 
-	self isAttachedToSceneGraph and: [ self space host uiProcessDo: 
-			[ :uiProc | uiProcess := uiProc ] ].
+	| uiProcess |
+	self isAttachedToSceneGraph ifTrue: [ 
+		self space host uiProcessDo: [ :uiProc | uiProcess := uiProc ] ].
+
 	uiProcess = Processor activeProcess
 		ifTrue: [ aBlock value ]
-		ifFalse: [ self enqueueTask: (BlTaskAction new action: aBlock) ]
+		ifFalse: [ 
+			self enqueueTask: (BlTaskAction new
+					 action: aBlock;
+					 yourself) ]
 ]
 
 { #category : #initialization }
@@ -3147,7 +3152,7 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 
 { #category : #'children add/remove' }
 BlElement >> replaceChild: aChildElement with: anotherElement as: aSymbol [
-	"Replace a given child relement with another element preserving the children order.
+	"Replace a given child element with another element preserving the children order.
 	Request layout and redraw an area occupied by anElement.
 	As result anElement sends BlElementRemovedEvent
 	anElement must not be nil.
