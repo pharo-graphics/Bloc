@@ -18,11 +18,6 @@ BlElementRemovedFromSceneGraphEvent class >> wantedIn: anObject [
 	^ anObject wantsRemovedFromSceneGraph
 ]
 
-{ #category : #visiting }
-BlElementRemovedFromSceneGraphEvent >> accept: aVisitor [
-	^ aVisitor visitElementRemovedFromSceneGraphEvent: self
-]
-
 { #category : #sending }
 BlElementRemovedFromSceneGraphEvent >> sendTo: anObject [
 	anObject elementRemovedFromSceneGraphEvent: self
