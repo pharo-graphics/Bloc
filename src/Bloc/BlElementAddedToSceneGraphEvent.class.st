@@ -21,11 +21,6 @@ BlElementAddedToSceneGraphEvent class >> wantedIn: anObject [
 	^ anObject wantsAddedToSceneGraph
 ]
 
-{ #category : #visiting }
-BlElementAddedToSceneGraphEvent >> accept: aVisitor [
-	^ aVisitor visitElementAddedToSceneGraphEvent: self
-]
-
 { #category : #sending }
 BlElementAddedToSceneGraphEvent >> sendTo: anObject [
 	anObject elementAddedToSceneGraphEvent: self
