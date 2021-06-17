@@ -6,6 +6,13 @@ OSWindow >> canvasExtent [
 ]
 
 { #category : #'*BlocHost-OSWindow' }
+OSWindow >> center [
+	"Tell backend to center window on screen."
+
+	^ self validHandle center
+]
+
+{ #category : #'*BlocHost-OSWindow' }
 OSWindow >> fullscreen [
 	^ self validHandle fullscreen
 ]

@@ -25,6 +25,11 @@ BlOSWindowSpace >> borderless: aBoolean [
 	window borderless: aBoolean
 ]
 
+{ #category : #'window - properties' }
+BlOSWindowSpace >> center [
+	window center
+]
+
 { #category : #'host space - displaying' }
 BlOSWindowSpace >> close [
 	

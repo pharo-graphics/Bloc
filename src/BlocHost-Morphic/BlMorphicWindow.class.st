@@ -30,6 +30,13 @@ BlMorphicWindow >> borderless: aBoolean [
 ]
 
 { #category : #accessing }
+BlMorphicWindow >> center [
+	"Center this window in #currentWorld. There is no effect before the window is open."
+
+	self position: self currentWorld extent - self extent // 2
+]
+
+{ #category : #accessing }
 BlMorphicWindow >> form: aForm [
 	spaceHostMorph form: aForm
 ]
