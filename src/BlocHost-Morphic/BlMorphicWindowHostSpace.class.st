@@ -33,6 +33,12 @@ BlMorphicWindowHostSpace >> borderless: aBoolean [
 	morphicWindow borderless: aBoolean
 ]
 
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> center [
+
+	morphicWindow center
+]
+
 { #category : #'host space - displaying' }
 BlMorphicWindowHostSpace >> close [
 	morphicWindow close

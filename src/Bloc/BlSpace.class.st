@@ -490,6 +490,13 @@ BlSpace >> canComputeProperties: anElement [
 	^ anElement hasParent and: [ anElement parent needsPropertiesComputation not ]
 ]
 
+{ #category : #'api - displaying' }
+BlSpace >> center [
+	"Tell host to change my position to be centered. Do nothing if host space is not present (e.g. not shown)."
+
+	self hostSpace ifNotNil: [ :hw | hw center ]
+]
+
 { #category : #'change - rendering' }
 BlSpace >> clearDirtyAreas [
 	"Clear all dirty areas.
