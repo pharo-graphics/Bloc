@@ -227,8 +227,8 @@ BlParallelUniverse >> initialize [
 { #category : #accessing }
 BlParallelUniverse >> isPulsing [
 	<return: #Boolean>
+
 	| areWePulsing |
-	
 	areWePulsing := false.
 	pulsingStateMutex critical: [ areWePulsing := isPulsing ].
 	^ areWePulsing
@@ -336,14 +336,12 @@ BlParallelUniverse >> postpone: aValuable [
 
 { #category : #pulse }
 BlParallelUniverse >> pulse [
-	self isPulsing
-		ifTrue: [ ^ self ].
+
+	self isPulsing ifTrue: [ ^ self ].
 
 	pulsingStateMutex critical: [ isPulsing := true ].
 
-	[
-		self pulseSynchronously
-	] ensure: [ self requestStopPulsation ]
+	[ self pulseSynchronously ] ensure: [ self requestStopPulsation ]
 ]
 
 { #category : #'private - spaces' }
@@ -400,14 +398,15 @@ BlParallelUniverse >> stopUniverse [
 
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunDeferredActions [
+
 	| nextInQueue |
+	(BlParallelUniverseTryToRunDeferredActionsSignal new universeId:
+		 self id) emit.
 
-	(BlParallelUniverseTryToRunDeferredActionsSignal new universeId: self id) emit.
-
-	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
-		whileTrue: [
-			(BlParallelUniverseRunDeferredActionSignal new universeId: self id) emit.
-			nextInQueue value ]
+	[ (nextInQueue := deferredActions nextOrNil) isNotNil ] whileTrue: [ 
+		(BlParallelUniverseRunDeferredActionSignal new universeId: self id)
+			emit.
+		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
 ]
 
 { #category : #'deferred message' }
@@ -415,7 +414,7 @@ BlParallelUniverse >> tryToRunPostponedActions [
 	| nextInQueue |
 	
 	[ (nextInQueue := postponedActions nextOrNil) isNotNil ]
-		whileTrue: [ nextInQueue value ]
+		whileTrue: [ [ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
 ]
 
 { #category : #'api - ui process' }
