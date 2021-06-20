@@ -10,6 +10,13 @@ Class {
 	#category : #'Bloc-Layouts-Model'
 }
 
+{ #category : #'api - transformation' }
+BlLayoutChildNodeWithTransformation >> boundsToParent: theBounds [
+	<return: #Point>
+
+	^ transformation transformBounds: theBounds
+]
+
 { #category : #accessing }
 BlLayoutChildNodeWithTransformation >> childNode: aBlLayoutChildNode [
 	childNode := aBlLayoutChildNode
@@ -48,9 +55,14 @@ BlLayoutChildNodeWithTransformation >> extentToParent: aPoint [
 { #category : #'api - geometry' }
 BlLayoutChildNodeWithTransformation >> layoutBounds [
 	<return: #BlBounds>
-
+	| aDelta |
+	
+	"a delta represents by how much the layout bounds should be moved to accomodate transformation"
+	aDelta := (self boundsToParent: (BlBounds origin: 0@0 extent: self privateMeasurement extent)) origin.
+	aDelta := aDelta - (self pointToParent: 0@0).
+	
 	^ BlBounds
-		origin: childNode position
+		origin: self privateMeasurement position - aDelta
 		extent: self privateMeasurement extent
 ]
 
