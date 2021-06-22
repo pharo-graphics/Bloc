@@ -116,6 +116,11 @@ BlElementCachedExplicitTransformation >> isIdentity [
 	^ self transformation isIdentity
 ]
 
+{ #category : #accessing }
+BlElementCachedExplicitTransformation >> isPureTranslation [
+	^ self transformation isPureTranslation
+]
+
 { #category : #'api - transformation' }
 BlElementCachedExplicitTransformation >> matrix [
 	<return: #BlMatrix>
