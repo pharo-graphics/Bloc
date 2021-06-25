@@ -250,8 +250,8 @@ BlLayoutCommonConstraints >> other [
 
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> padding [
-	"Return an immutable padding property,
-	margin can not be nil"
+	"Return an immutable padding property.
+	The padding can not be nil"
 	<return: #BlInsets>
 
 	^ padding
