@@ -88,8 +88,8 @@ BlSpaceFrame >> initializePhases [
 	self addPhases: { 
 		BlSpaceFrameIdlePhase new.
 		BlSpaceFrameHostValidationPhase new.
-		BlSpaceFrameEventPhase new.
 		BlSpaceFrameTaskPhase new.
+		BlSpaceFrameEventPhase new.
 		BlSpaceFrameStylePhase new.
 		BlSpaceFramePropertiesPhase new.
 		BlSpaceFrameDrawingValidationPhase new.
