@@ -474,24 +474,7 @@ BlParallelUniverse >> postpone: aValuable [
 	"#postpone: can be used from any thread to execute a valuable in the GUI thread
 	after the pulse is completed.
 	I am different from #defer: in that #defer: actios are evaluated before the pulse of the universe"
-	NonInteractiveTranscript stdout 
-		nextPutAll: '========== postpone =============';
-		nextPutAll: aValuable asString;
-		nextPutAll: '=================================';
-		cr.
 	
-	thisContext stack do: [ :each |
-		NonInteractiveTranscript stdout 
-			cr;
-			tab; 
-			nextPutAll: (
-				each asString 
-					copyReplaceAll: String cr 
-					with: String cr, 
-							String tab, 
-							String tab);
-			cr ].	
-
 	postponedActions nextPut: aValuable
 ]
 
