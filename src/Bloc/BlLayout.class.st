@@ -35,25 +35,25 @@ This is the first step when performing a layout of an element and consists in de
 
 Each element can decide how it wants to be measured (${method:BlElement>>#onMeasure:}$). By default, ${class:BlElement}$ delegates measuring to its layout. Layouts should override ${method:BlLayout>>#measure:with:}$ to implement the actual measuring. Normally, layouts follow a top-to-bottom approach: they measure the current element and then ask their children measure themselves.
 
-Each element has real bounds (${method:BlElement>>#bounds}$) and measured bounds (${method:BlElement>>#measuredBounds}$). The real bounds contain the actual position and extent of an element that users of that element should rely on. The measured bounds are used during layout to hold the new extent of an element. The measuring phase changes only the extent in the measured bounds. After the entire layout phase is completed the real bounds and measured bounds will have the same value. The measured bounds act like a temporary cache for the new bounds of an element. They were introduced to avoid changing the real extent of element while layout of children is still being performed. 
+Each element has real bounds (${method:BlElement>>#bounds}$) and measured bounds (${method:BlElement>>#measuredBounds}$). The real bounds contain the actual position and extent of an element that users of that element should rely on. The measured bounds are used during layout to hold the new extent of an element. The measuring phase changes only the extent in the measured bounds. After the entire layout phase is completed, the real bounds and measured bounds will have the same value. The measured bounds act like a temporary cache for the new bounds of an element. They were introduced to avoid changing the real extent of element while layout of children is still being performed. 
 
-(TODO: explain why position is sometime changed in the measured bounds)
+(TODO: explain why position is sometimes changed in the measured bounds)
 
 !!!Applying the layout
 
 !!!Commiting changes
 
-TODO
-	- Space starts the measurement process from the root element; after measurement it tells children to measure themselves, etc
+TODOs:
+	- Space starts the measurement process from the root element; after measurement, it tells children to measure themselves, etc.
 	- measurement; top to bottom though all the composition of elements.
-		- this step find the size of an element and sets measuredExtent (or position sometimes)
+		- this step finds the size of an element and sets measuredExtent (or position sometimes)
 	- space starts the layout step
-		- as we know the size of each child we compute the actual position for each child
+		- as we know, the size of each child we compute the actual position for each child
 		- changes the real extent to measured extent and the real position to the computed layout position
 	- Elements announce events for position and extent changed
 	
-	Without event handlers the layout process is going to happen only once.
-	For example when nodes change the position edges should be updated.
+	Without event handlers, the layout process is going to happen only once.
+	For example, when nodes change the position edges should be updated.
 	
 !!Layout events
 
@@ -67,14 +67,6 @@ There are many built-in layout strategies available:
 [[[
 BlLayout allSubclasses
 ]]]
-
-
-
-
-
-
-
-	
 
 "
 Class {
