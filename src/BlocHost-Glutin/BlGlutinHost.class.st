@@ -67,7 +67,8 @@ BlGlutinHost class >> isRunning [
 
 { #category : #'driver selection' }
 BlGlutinHost class >> isSupported [
-	^ Glutin isSupported
+	"Only works in headless vm"
+	^ Smalltalk os windowSystemName isNil or: [ Smalltalk os windowSystemName = 'null' ]
 ]
 
 { #category : #'driver selection' }
