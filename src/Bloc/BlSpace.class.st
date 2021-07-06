@@ -1171,7 +1171,21 @@ BlSpace >> host [
 
 { #category : #'host space - accessing' }
 BlSpace >> host: aHost [
-	host := aHost
+	"Change the host of this space. Asynchronous. If the space is opened, first destroy the host window and then open the space with a new host"
+	| aDetachedEventHandler |
+
+	aDetachedEventHandler := nil.
+
+	aDetachedEventHandler := BlEventHandler
+		on: BlSpaceDetachedEvent
+		do: [ :anEvent |
+			self removeEventHandler: aDetachedEventHandler.
+			host := aHost.
+			self universe attachSpace: self ].
+
+	self isOpened
+		ifTrue: [ self universe detachSpace: self ]
+		ifFalse: [ host := aHost ]
 ]
 
 { #category : #'host space - accessing' }
