@@ -94,7 +94,9 @@ BlCompulsoryCombination >> key: aKey [
 BlCompulsoryCombination >> match: aKeyboardBuffer [
 	<return: #Number>
 
-	^ self combinations sum: [ :aCombination | aCombination match: aKeyboardBuffer ]
+	^ self combinations
+		inject: 0
+		into: [ :aResult :aCombination | aResult + (aCombination match: aKeyboardBuffer) ]
 ]
 
 { #category : #'key matching' }
