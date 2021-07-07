@@ -21,7 +21,7 @@ BlBeaconLoggingTask class >> subtask: aBlTask [
 	<return: #BlBeaconLoggingTask>
 	^ self new
 		subtask: aBlTask;
-		callingMethod: thisContext sender sender outerMostContext method asRingDefinition
+		callingMethod: thisContext sender sender blocMethodDefinition
 ]
 
 { #category : #converting }
