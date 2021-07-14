@@ -31,7 +31,7 @@ BlBlocUIManager class >> initialize [
 BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
 	| isHeadlessVM isInteractiveMode |
 	
-	SystemVersion current major <= 8
+	SystemVersion current major <= 9
 		ifFalse: [ ^ false ].
 	
 	isHeadlessVM := Smalltalk os windowSystemName isNil or: [ Smalltalk os windowSystemName = 'null' ].
@@ -39,7 +39,7 @@ BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
 	"The --interactive parameter should be passed in order to select a graphical UI manager.
 	This parameter is passe automatically when double clicking on the Headless VM."
 	isInteractiveMode := CommandLineArguments new hasOption: 'interactive'.
-		
+
 	^ isHeadlessVM and: [ isInteractiveMode ]
 ]
 
@@ -82,7 +82,6 @@ BlBlocUIManager >> activate [
 	"Override the method from MorphicUIManager to register 'GtTranscript' instead of 'ThreadSafeTranscript'."
 	
 	World worldState worldRenderer: (AbstractWorldRenderer detectCorrectOneforWorld: World).
-	Cursor currentCursor: Cursor currentCursor.
 	
 	WorldMorph currentWorld ifNotNil: [:world | world restoreMorphicDisplay].
 	WorldMorph extraWorldList do: #restoreMorphicDisplay.
