@@ -19,8 +19,8 @@ BlZoomableLayout >> animationDuration [
 ]
 
 { #category : #accessing }
-BlZoomableLayout >> animationDuration: anObject [
-	animationDuration := anObject
+BlZoomableLayout >> animationDuration: aDuration [
+	animationDuration := aDuration
 ]
 
 { #category : #accessing }
@@ -29,8 +29,8 @@ BlZoomableLayout >> defaultScale [
 ]
 
 { #category : #accessing }
-BlZoomableLayout >> defaultScale: anObject [
-	defaultScale := anObject
+BlZoomableLayout >> defaultScale: aNumber [
+	defaultScale := aNumber
 ]
 
 { #category : #adding }
