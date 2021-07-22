@@ -168,6 +168,13 @@ BlSpaceEventListener >> spaceMovedEvent: anEvent [
 ]
 
 { #category : #'window handlers' }
+BlSpaceEventListener >> spaceRedrawRequestedEvent: anEvent [
+	self space
+		beDirtyArea;
+		requestNextPulse
+]
+
+{ #category : #'window handlers' }
 BlSpaceEventListener >> spaceResizedEvent: anEvent [
 	"Is sent after window size was changed"
 

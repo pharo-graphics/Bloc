@@ -453,6 +453,13 @@ BlGlutinHostSpace >> visitWindowMovedEvent: anEvent [
 
 { #category : #'event - visiting' }
 BlGlutinHostSpace >> visitWindowRedrawRequested: anEvent [
+	| aBlocEvent |
+
+	aBlocEvent := BlSpaceRedrawRequestedEvent new
+		timestamp: DateAndTime now;
+		yourself.
+
+	self enqueueEvent: aBlocEvent
 ]
 
 { #category : #'event - visiting' }
