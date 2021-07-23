@@ -11,6 +11,11 @@ BlockClosure >> asBlocResolvedElementsFrom: anElement [
 ]
 
 { #category : #'*Bloc' }
+BlockClosure >> blocDefiningMethod [
+	^ self asContext blocDefiningMethod
+]
+
+{ #category : #'*Bloc' }
 BlockClosure >> glamourValueWithArgs: anArray [ 
 	^ self valueWithPossibleArgs: anArray
 ]
