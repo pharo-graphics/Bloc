@@ -1,30 +1,30 @@
 Class {
-	#name : #BlElementHoveredState,
-	#superclass : #BlElementUniqueState,
-	#category : #'Bloc-Basic-State'
+	#name : 'BlElementHoveredState',
+	#superclass : 'BlElementUniqueState',
+	#category : 'Bloc-Basic-State'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlElementHoveredState >> optionalEventHandlerDo: aBlock [
 	aBlock value: BlElementHoveredStateEventHandler uniqueInstance
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlElementHoveredState >> optionalOnAddedTo: anElement [
 	anElement dispatchEvent: (BlElementHoveredEvent new element: anElement)
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlElementHoveredState >> optionalOnRemovedFrom: anElement [
 	anElement dispatchEvent: (BlElementUnhoveredEvent new element: anElement)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementHoveredState >> printOn: aStream [
 	aStream nextPutAll: 'hovered'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementHoveredState >> priority [
 	^ 10
 ]

@@ -4,22 +4,22 @@ Extends {{gtClass:BlStyles}} by adding an ability to customise {{gtMethod:BlForw
 
 "
 Class {
-	#name : #BlForwardedStyles,
-	#superclass : #BlStyles,
+	#name : 'BlForwardedStyles',
+	#superclass : 'BlStyles',
 	#instVars : [
 		'targetObject'
 	],
-	#category : #'Bloc-Basic-Style'
+	#category : 'Bloc-Basic-Style'
 }
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlForwardedStyles >> newStyleForState: aBlElementState [
 	^ BlElementForwardedStyle new
 		state: aBlElementState;
 		targetObject: self targetObject
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlForwardedStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ styles
 		detect: [ :eachStyle |
@@ -30,12 +30,12 @@ BlForwardedStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlo
 		ifNone: aNoneBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlForwardedStyles >> targetObject [
 	^ targetObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlForwardedStyles >> targetObject: anObject [
 	targetObject := anObject
 ]

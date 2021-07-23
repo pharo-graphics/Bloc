@@ -1,10 +1,10 @@
 Class {
-	#name : #BlTouchMoveEvent,
-	#superclass : #BlTouchEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlTouchMoveEvent',
+	#superclass : 'BlTouchEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlTouchMoveEvent >> sendTo: anObject [
 	anObject touchMoveEvent: self
 ]

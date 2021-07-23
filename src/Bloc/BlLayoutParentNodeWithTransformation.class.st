@@ -1,87 +1,87 @@
 Class {
-	#name : #BlLayoutParentNodeWithTransformation,
-	#superclass : #BlLayoutNode,
+	#name : 'BlLayoutParentNodeWithTransformation',
+	#superclass : 'BlLayoutNode',
 	#traits : 'TBlLayoutNode + TBlLayoutParentNode',
 	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutParentNode classTrait',
 	#instVars : [
 		'parentNode',
 		'transformation'
 	],
-	#category : #'Bloc-Layouts-Model'
+	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> children [
 	<return: #Collection of: #BlLayoutNode>
 
 	^ parentNode children
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> children: aBlLayoutNodeChildren [
 	parentNode children: aBlLayoutNodeChildren
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> constraints [
 	^ parentNode constraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> constraints: aBlLayoutConstraints [
 	parentNode constraints: aBlLayoutConstraints
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutParentNodeWithTransformation >> extent [
 	^ parentNode extent
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutParentNodeWithTransformation >> extent: aPoint [
 	parentNode extent: aPoint.
 	self transformation bounds: (BlBounds origin: self position extent: aPoint)
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 BlLayoutParentNodeWithTransformation >> extentSpec [
 	<return: #BlExtentMeasurementSpec>
 
 	^ parentNode extentSpec
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 BlLayoutParentNodeWithTransformation >> extentSpec: aBlExtentMeasurementSpec [
 	parentNode extentSpec: aBlExtentMeasurementSpec
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> parent [
 	^ parentNode parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> parentNode [
 	^ parentNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> parentNode: anObject [
 	parentNode := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> position [
 	^ parentNode position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> position: aPoint [
 	parentNode position: aPoint.
 	self transformation bounds: (BlBounds origin: aPoint extent: self extent)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> transformation [
 	<return: #BlElementTransformation>
 	self
@@ -91,7 +91,7 @@ BlLayoutParentNodeWithTransformation >> transformation [
 	^ transformation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> transformation: aBlElementTransformation [
 	self
 		assert: [ aBlElementTransformation notNil ]
@@ -101,12 +101,12 @@ BlLayoutParentNodeWithTransformation >> transformation: aBlElementTransformation
 		bounds: (BlBounds origin: self position extent: self extent)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithTransformation >> transformationDo: aBlock [
 	aBlock value: transformation
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlLayoutParentNodeWithTransformation >> withFilter: aSelectBlock [
 	^ BlLayoutParentNodeWithFilter new
 		parentNode: self;
@@ -114,7 +114,7 @@ BlLayoutParentNodeWithTransformation >> withFilter: aSelectBlock [
 		children: (self children select: aSelectBlock)
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlLayoutParentNodeWithTransformation >> withTransformation: aBlElementTransformation [
 	^ BlLayoutParentNodeWithTransformation new
 		parentNode: parentNode;

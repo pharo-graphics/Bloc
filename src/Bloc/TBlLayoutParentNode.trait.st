@@ -1,58 +1,58 @@
 Trait {
-	#name : #TBlLayoutParentNode,
-	#category : #'Bloc-Layouts-Model'
+	#name : 'TBlLayoutParentNode',
+	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBlLayoutParentNode >> children [
 	<return: #Collection of: #BlLayoutNode>
 
 	^ self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBlLayoutParentNode >> children: aBlLayoutNodeChildren [
 	self explicitRequirement
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 TBlLayoutParentNode >> childrenDo: aBlock [
 	self children do: aBlock
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 TBlLayoutParentNode >> extent [
 	^ self explicitRequirement
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 TBlLayoutParentNode >> extent: aPoint [
 	self explicitRequirement
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 TBlLayoutParentNode >> extentSpec [
 	<return: #BlExtentMeasurementSpec>
 
 	^ self explicitRequirement
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 TBlLayoutParentNode >> extentSpec: aBlExtentMeasurementSpec [
 	self explicitRequirement
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 TBlLayoutParentNode >> height [
 	^ self extent y
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 TBlLayoutParentNode >> heightSpec [
 	^ self extentSpec heightSpec
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 TBlLayoutParentNode >> layoutExtent [
 	self
 		deprecated: 'Use #extent instead.'
@@ -61,7 +61,7 @@ TBlLayoutParentNode >> layoutExtent [
 	^ self extent
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 TBlLayoutParentNode >> measuredExtent [
 	<return: #Point>
 
@@ -72,7 +72,7 @@ TBlLayoutParentNode >> measuredExtent [
 	^ self extent
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 TBlLayoutParentNode >> measuredExtent: aPoint [
 	self
 		deprecated: 'Please use extent: instead.'
@@ -83,27 +83,27 @@ TBlLayoutParentNode >> measuredExtent: aPoint [
 	self extent: aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBlLayoutParentNode >> parent [
 	^ self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBlLayoutParentNode >> position [
 	^ self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TBlLayoutParentNode >> position: aPoint [
 	^ self explicitRequirement
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 TBlLayoutParentNode >> width [
 	^ self extent x
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 TBlLayoutParentNode >> widthSpec [
 	^ self extentSpec widthSpec
 ]

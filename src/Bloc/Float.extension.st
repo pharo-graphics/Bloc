@@ -1,6 +1,6 @@
-Extension { #name : #Float }
+Extension { #name : 'Float' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Float >> ceilingTicks: aNumber [
 	"Round me to the tick closest to positive infinity on the scale [0...1] that has aNumber of ticks"
 	<return: #Float>
@@ -14,7 +14,7 @@ Float >> ceilingTicks: aNumber [
 	^ self truncated + (self sign * aFraction)
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Float >> floorTicks: aNumber [
 	"Round me to the tick closest to negative infinity on the scale [0...1] that has aNumber of ticks"
 	<return: #Float>
@@ -28,7 +28,7 @@ Float >> floorTicks: aNumber [
 	^ self truncated + (self sign * aFraction)
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Float >> roundTicks: aNumber [
 	"Round me to the closest tick on the scale [0...1] that has aNumber of ticks"
 	<return: #Float>

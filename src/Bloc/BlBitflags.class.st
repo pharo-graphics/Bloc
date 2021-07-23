@@ -1,13 +1,13 @@
 Class {
-	#name : #BlBitflags,
-	#superclass : #Object,
+	#name : 'BlBitflags',
+	#superclass : 'Object',
 	#instVars : [
 		'value'
 	],
-	#category : #'Bloc-DataStructure - Bitflags'
+	#category : 'Bloc-DataStructure - Bitflags'
 }
 
-{ #category : #'private - class code' }
+{ #category : 'private - class code' }
 BlBitflags class >> defineFlagAccesorFor: flagName [
 	"Define accessors as class methods"
 	| code |
@@ -21,7 +21,7 @@ BlBitflags class >> defineFlagAccesorFor: flagName [
 		classified: self generatedFlagsProtocolName.
 ]
 
-{ #category : #'private - instance code' }
+{ #category : 'private - instance code' }
 BlBitflags class >> defineFlagAddAccesorFor: flagName [
 	| code |
 	
@@ -34,7 +34,7 @@ BlBitflags class >> defineFlagAddAccesorFor: flagName [
 		classified: self generatedFlagsAddProtocolName
 ]
 
-{ #category : #'private - instance code' }
+{ #category : 'private - instance code' }
 BlBitflags class >> defineFlagClearAccesorFor: flagName [
 	| code |
 	
@@ -47,7 +47,7 @@ BlBitflags class >> defineFlagClearAccesorFor: flagName [
 		classified: self generatedFlagsClearProtocolName
 ]
 
-{ #category : #'private - instance code' }
+{ #category : 'private - instance code' }
 BlBitflags class >> defineFlagTestAccesorFor: flagName [
 	| code |
 	
@@ -60,7 +60,7 @@ BlBitflags class >> defineFlagTestAccesorFor: flagName [
 		classified: self generatedFlagsTestingProtocolName
 ]
 
-{ #category : #'flags declaration' }
+{ #category : 'flags declaration' }
 BlBitflags class >> flagsDecl [
 	"
 	self rebuildFlagsAccessors
@@ -76,7 +76,7 @@ BlBitflags class >> flagsDecl [
 	^ self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlBitflags class >> flagsDictionary [
 	| decl theCurrentDeclarations |
 	
@@ -107,19 +107,19 @@ BlBitflags class >> flagsDictionary [
 	^ decl
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBitflags class >> fromFlags: aBlInfiniteFlags [
 	^ self fromValue: aBlInfiniteFlags value
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBitflags class >> fromValue: aNumber [
 	^ self new
 		initializeWith: aNumber;
 		yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlBitflags class >> generateFlagName: aString [
 
 	^ String streamContents: [ :aStream |		
@@ -133,32 +133,32 @@ BlBitflags class >> generateFlagName: aString [
 					aStream nextPutAll: eachPart capitalized ] ]
 ]
 
-{ #category : #'private - instance code' }
+{ #category : 'private - instance code' }
 BlBitflags class >> generatedFlagsAddProtocolName [
 	^ 'flags - add'
 ]
 
-{ #category : #'private - instance code' }
+{ #category : 'private - instance code' }
 BlBitflags class >> generatedFlagsClearProtocolName [
 	^ 'flags - clear'
 ]
 
-{ #category : #'private - class code' }
+{ #category : 'private - class code' }
 BlBitflags class >> generatedFlagsProtocolName [
 	^ 'accessing - flags'
 ]
 
-{ #category : #'private - instance code' }
+{ #category : 'private - instance code' }
 BlBitflags class >> generatedFlagsTestingProtocolName [
 	^ 'flags - testing'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBitflags class >> initialize [
 	self initializeFlags
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBitflags class >> initializeFlags [
 
 	self flagsDictionary keysAndValuesDo: [ :eachName :eachValue | 
@@ -174,7 +174,7 @@ BlBitflags class >> initializeFlags [
 					value: flagValue ) ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlBitflags class >> rebuildFlagsAccessors [
 	self flagsDictionary keysDo: [ :each | 
 		self defineFlagAccesorFor: each.
@@ -183,7 +183,7 @@ BlBitflags class >> rebuildFlagsAccessors [
 		self defineFlagAddAccesorFor: each ]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 BlBitflags >> and: aFlagsOrNumber [
 	"Return new instance of infinite flags which is a result of bitwise and
 	with provided flags or a number"
@@ -192,7 +192,7 @@ BlBitflags >> and: aFlagsOrNumber [
 	^ self class fromValue: (self value bitAnd: (aFlagsOrNumber value))
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlBitflags >> asDictionary [
 
 	^ (self class classPool associations
@@ -200,17 +200,17 @@ BlBitflags >> asDictionary [
 			asDictionary
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BlBitflags >> clear [
 	value := 0
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlBitflags >> copy [
 	^ self class fromFlags: self
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlBitflags >> gtItemsFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -220,44 +220,44 @@ BlBitflags >> gtItemsFor: aView [
 		column: 'Value' item: [ :each | each value gtDisplayText ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBitflags >> has: aFlag [
 	^ (value bitAnd: aFlag) ~= 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBitflags >> hasNamed: aFlagName [
 	^ (value bitAnd: (self class classPool
 		at: aFlagName
 		ifAbsent: [ self error: 'Unknown flag: ', aFlagName asString ])) ~= 0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBitflags >> initialize [
 	super initialize.
 	
 	value := 0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBitflags >> initializeWith: aValue [
 	
 	value := aValue
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBitflags >> isEmpty [
 	<return: #Boolean>
 
 	^ self value isZero
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BlBitflags >> remove: aFlag [
 	value := value bitAnd: (aFlag bitInvert)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBitflags >> value [
 	^ value
 ]

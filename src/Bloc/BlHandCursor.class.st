@@ -1,5 +1,5 @@
 Class {
-	#name : #BlHandCursor,
-	#superclass : #BlNamedCursor,
-	#category : #'Bloc-Space - Cursor'
+	#name : 'BlHandCursor',
+	#superclass : 'BlNamedCursor',
+	#category : 'Bloc-Space - Cursor'
 }

@@ -3,8 +3,8 @@ I am a mediator between host space and host renderer
 
 "
 Class {
-	#name : #BlHostRendererSurface,
-	#superclass : #Object,
+	#name : 'BlHostRendererSurface',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -13,10 +13,10 @@ Class {
 		'shouldUpdateEveryFrame',
 		'updateActions'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererSurface class >> allSurfaces [
 	"Return a collection of all possible surfaces"
 	<return: #Collection of: #'BlHostRendererSurface class'>
@@ -24,7 +24,7 @@ BlHostRendererSurface class >> allSurfaces [
 	^ self allSubclasses
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRendererSurface class >> supportedBy: anObject [
 	"Return true if a given object supports this surface, false otherwise"
 	<return: #Boolean>
@@ -32,26 +32,26 @@ BlHostRendererSurface class >> supportedBy: anObject [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - updates' }
+{ #category : 'api - updates' }
 BlHostRendererSurface >> addUpdateAction: aValuable [
 	updateActions add: aValuable
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererSurface >> createSpaceRendererOn: anObject [
 	<return: #BlHostSpaceRenderer>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererSurface >> createSurfaceRendererOn: anObject [
 	<return: #BlHostSurfaceRenderer>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlHostRendererSurface >> extent [
 	"Return an actual extent of the underlying surface.
 	Note: #extent may be different from canvas or window extents"
@@ -60,7 +60,7 @@ BlHostRendererSurface >> extent [
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererSurface >> initialize [
 	super initialize.
 	
@@ -68,13 +68,13 @@ BlHostRendererSurface >> initialize [
 	updateActions := OrderedCollection new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererSurface >> initializeForHostSpace: aBlHostSpace [
 	physicalSize := aBlHostSpace physicalSize.
 	scaleFactor := aBlHostSpace scaleFactor
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlHostRendererSurface >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -84,12 +84,12 @@ BlHostRendererSurface >> logicalSize [
 	^ self physicalSize asLogical: self scaleFactor
 ]
 
-{ #category : #'api - updates' }
+{ #category : 'api - updates' }
 BlHostRendererSurface >> performUpdates [
 	updateActions do: [ :eachUpdateAction | eachUpdateAction value ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlHostRendererSurface >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -99,7 +99,7 @@ BlHostRendererSurface >> physicalSize [
 	^ physicalSize
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlHostRendererSurface >> scaleFactor [
 	"Return a scaling dpi factor from logical to physical coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
@@ -108,14 +108,14 @@ BlHostRendererSurface >> scaleFactor [
 	^ scaleFactor
 ]
 
-{ #category : #'api - updates' }
+{ #category : 'api - updates' }
 BlHostRendererSurface >> shouldUpdateEveryFrame [
 	<return: #Boolean>
 
 	^ shouldUpdateEveryFrame
 ]
 
-{ #category : #'api - updates' }
+{ #category : 'api - updates' }
 BlHostRendererSurface >> updateEveryFrame [
 	shouldUpdateEveryFrame := true
 ]

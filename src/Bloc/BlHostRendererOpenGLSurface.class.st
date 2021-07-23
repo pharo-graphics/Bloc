@@ -5,8 +5,8 @@ When used, rendering happens using OpenGL context and than can be displayed in a
 
 "
 Class {
-	#name : #BlHostRendererOpenGLSurface,
-	#superclass : #BlHostRendererSurface,
+	#name : 'BlHostRendererOpenGLSurface',
+	#superclass : 'BlHostRendererSurface',
 	#instVars : [
 		'context',
 		'extent',
@@ -15,15 +15,15 @@ Class {
 		'framebufferId',
 		'framebufferFormat'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface class >> priority [
 	^ 10
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRendererOpenGLSurface class >> supportedBy: anObject [
 	"Return true if a given object supports OpenGL surface, false otherwise"
 	<return: #Boolean>
@@ -31,76 +31,76 @@ BlHostRendererOpenGLSurface class >> supportedBy: anObject [
 	^ anObject supportsOpenGLSurface
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> context [
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> context: anObject [
 	context := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererOpenGLSurface >> createSpaceRendererOn: anObject [
 	<return: #BlHostSpaceRenderer>
 
 	^ anObject createOpenGLSpaceRenderer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererOpenGLSurface >> createSurfaceRendererOn: anObject [
 	<return: #BlHostSurfaceRenderer>
 
 	^ anObject createOpenGLSurfaceRenderer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> extent [
 	^ extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> extent: anObject [
 	extent := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> framebufferFormat [
 	^ framebufferFormat
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> framebufferFormat: anObject [
 	framebufferFormat := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> framebufferId [
 	^ framebufferId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> framebufferId: anObject [
 	framebufferId := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> sampleCount [
 	^ sampleCount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> sampleCount: anObject [
 	sampleCount := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> stencilBits [
 	^ stencilBits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererOpenGLSurface >> stencilBits: anObject [
 	stencilBits := anObject
 ]

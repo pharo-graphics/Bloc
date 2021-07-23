@@ -17,22 +17,22 @@ parent addChild: child.
 
 "
 Class {
-	#name : #BlElementAddedToParentEvent,
-	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Type-Element'
+	#name : 'BlElementAddedToParentEvent',
+	#superclass : 'BlElementEvent',
+	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementAddedToParentEvent class >> enableIn: anObject [
 	anObject enableAddedToParent
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementAddedToParentEvent class >> wantedIn: anObject [
 	^ anObject wantsAddedToParent
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementAddedToParentEvent >> sendTo: anObject [
 	anObject elementAddedToParentEvent: self
 ]

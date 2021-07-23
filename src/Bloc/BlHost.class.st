@@ -5,14 +5,14 @@ A Host can be compared to a driver that communicates with the native multimedia 
 
 "
 Class {
-	#name : #BlHost,
-	#superclass : #Object,
+	#name : 'BlHost',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Universe - Host'
+	#category : 'Bloc-Universe - Host'
 }
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> availableHostClasses [
 	"Return all available bloc host classes sorted by their priority"
 	<return: #Collection>
@@ -21,17 +21,17 @@ BlHost class >> availableHostClasses [
 		sort: [ :a :b | a priority < b priority ]
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost class >> isRunning [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> isSupported [
 	^ false
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> label [
 	"Return a host name that we can refer to. May be used for settings"
 	<return: #String>
@@ -39,7 +39,7 @@ BlHost class >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> pickHost [
 	"Find and instantiate a first supported host.
 	Return a special null one if there are no available hosts"
@@ -49,7 +49,7 @@ BlHost class >> pickHost [
 	^ Bloc preferableHostClass new
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> priority [
 	"Return host priority as positive number which influences host order
 	and selection of a default host.
@@ -59,17 +59,17 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost class >> start [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost class >> stop [
 	self subclassResponsibility
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> suitableHostClass [
 	"Find a default bloc host among all available.
 	Return a special null one if there are no available hosts"
@@ -81,24 +81,24 @@ BlHost class >> suitableHostClass [
 		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
 ]
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlHost class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : 'host space - accessing' }
 BlHost class >> universe [
 	<return: #BlParallelUniverse>
 
 	^ BlParallelUniverse forHost: self
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHost >> createHostSpaceFor: aSpace [
 	self subclassResponsibility
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHost >> destroyHostSpaceFor: aSpace [
 	"Destroys host space window of a given space.
 	Note: in most cases under 'destroy host space' we mean 'close host window' and unregister it"
@@ -106,7 +106,7 @@ BlHost >> destroyHostSpaceFor: aSpace [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
 	<return: #Boolean>
@@ -114,7 +114,7 @@ BlHost >> isRunning [
 	^ self class isRunning
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlHost >> isStillAvailable [
 	"Let's assume that a space is opened with me as a host.
 	I return true if I am still available host for the current system.
@@ -126,17 +126,17 @@ BlHost >> isStillAvailable [
 	^ true
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost >> start [
 	self class start
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost >> stop [
 	self class stop
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlHost >> supportsBufferSurface [
 	"Return true if this host can work with buffer surface, false otherwise"
 	<return: #Boolean>
@@ -144,7 +144,7 @@ BlHost >> supportsBufferSurface [
 	^ false
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlHost >> supportsFormSurface [
 	"Return true if this host can work with form surface, false otherwise"
 	<return: #Boolean>
@@ -152,7 +152,7 @@ BlHost >> supportsFormSurface [
 	^ false
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlHost >> supportsOpenGLSurface [
 	"Return true if this host can work with OpenGL surface, false otherwise"
 	<return: #Boolean>
@@ -160,12 +160,12 @@ BlHost >> supportsOpenGLSurface [
 	^ false
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlHost >> uiProcessDo: aBlock [
 	self class uiProcessDo: aBlock
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : 'host space - accessing' }
 BlHost >> universe [
 	<return: #BlParallelUniverse>
 	

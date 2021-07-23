@@ -1,15 +1,15 @@
 Class {
-	#name : #BlPercentUnit,
-	#superclass : #BlUnit,
-	#category : #'Bloc-Basic-Units'
+	#name : 'BlPercentUnit',
+	#superclass : 'BlUnit',
+	#category : 'Bloc-Basic-Units'
 }
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlPercentUnit >> printOn: aStream [
 	aStream nextPutAll: '%'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPercentUnit >> resolveLengthForValue: aCurrentValueOrBlock parent: aParentValueOrBlock global: aGlobalValueOrBlock [
 	<return: #Number>
 

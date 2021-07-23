@@ -1,15 +1,15 @@
 Class {
-	#name : #BlFocusOutEvent,
-	#superclass : #BlBaseFocusEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlFocusOutEvent',
+	#superclass : 'BlBaseFocusEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusOutEvent >> isFocusOut [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlFocusOutEvent >> sendTo: anObject [
 	anObject focusOutEvent: self
 ]

@@ -4,8 +4,8 @@ Builds upon the {{gtClass:BlElementTransformation}} to provide the matrix cachin
 
 "
 Class {
-	#name : #BlElementCachedExplicitTransformation,
-	#superclass : #BlElementCachedTransformation,
+	#name : 'BlElementCachedExplicitTransformation',
+	#superclass : 'BlElementCachedTransformation',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -13,31 +13,31 @@ Class {
 		'bounds',
 		'matrix'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTransformation [
 	^ self new initializeWith: aBlElementTransformation
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlElementCachedExplicitTransformation >> asElementTransformation [
 	^ self transformation
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> bounds [
 	^ bounds
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> bounds: aRectangle [
 	bounds := aRectangle.
 	self invalidateMatrix
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> ensureMatrix [
 	self hasMatrix
 		ifTrue: [ ^ self ].
@@ -45,7 +45,7 @@ BlElementCachedExplicitTransformation >> ensureMatrix [
 	matrix := self transformation asMatrix: bounds
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlElementCachedExplicitTransformation >> hasMatrix [
 	"Return true if any of 2D or 3D matrices exist, false otherwise.
 	Note: I am useful for fast exits"
@@ -54,14 +54,14 @@ BlElementCachedExplicitTransformation >> hasMatrix [
 	^ matrix isNotNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementCachedExplicitTransformation >> initialize [
 	super initialize.
 	
 	bounds := 0.0@0.0 extent: 0.0@0.0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformation [
 	self
 		assert: [ transformation isNil ]
@@ -70,7 +70,7 @@ BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformatio
 	transformation := aBlElementTransformation
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> invalidateMatrix [
 	"Matrix is computed out of affine transformation composition
 	which may contain transformations that depend on element's properties
@@ -80,7 +80,7 @@ BlElementCachedExplicitTransformation >> invalidateMatrix [
 	matrix := nil
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> inverseTransformBounds: aBounds [
 	"In-place transform given BlBounds according to my transformation.
 	(global to local transformation)"
@@ -89,7 +89,7 @@ BlElementCachedExplicitTransformation >> inverseTransformBounds: aBounds [
 	^ self matrix inverted transformBounds: aBounds
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> inverseTransformPoint: aPoint [
 	"Apply an inversed transformation on a given point and return a result.
 	Note: Throws BlSingularMatrixError if underlying matrix is singular"
@@ -101,27 +101,27 @@ BlElementCachedExplicitTransformation >> inverseTransformPoint: aPoint [
 	^ self matrix inverted transformPoint: aPoint
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> invert [
 	matrix := self matrix inverted
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> inverted [
 	^ self copy invert
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlElementCachedExplicitTransformation >> isIdentity [
 	^ self transformation isIdentity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCachedExplicitTransformation >> isPureTranslation [
 	^ self transformation isPureTranslation
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> matrix [
 	<return: #BlMatrix>
 
@@ -129,7 +129,7 @@ BlElementCachedExplicitTransformation >> matrix [
 	^ matrix
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> transformBounds: aBounds [
 	"In-place transform given BlBounds according to my transformation.
 	(local to global transformation)"
@@ -138,7 +138,7 @@ BlElementCachedExplicitTransformation >> transformBounds: aBounds [
 	^ self matrix transformBounds: aBounds
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> transformPoint: aPoint [
 	"Transform given 2D point according to my transformation and return a transformed result point.
 	(local to global transformation)"
@@ -147,7 +147,7 @@ BlElementCachedExplicitTransformation >> transformPoint: aPoint [
 	^ self matrix transformPoint: aPoint
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> transformation [
 	<return: #BlElementTransformation>
 

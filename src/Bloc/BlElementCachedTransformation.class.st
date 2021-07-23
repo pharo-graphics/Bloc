@@ -7,22 +7,22 @@ Hence the separation between {{gtClass:BlElementTransformation}} and {{gtClass:B
 
 "
 Class {
-	#name : #BlElementCachedTransformation,
-	#superclass : #Object,
-	#category : #'Bloc-Basic-Transformations'
+	#name : 'BlElementCachedTransformation',
+	#superclass : 'Object',
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlElementCachedTransformation >> asCachedTransformation [
 	^ self
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlElementCachedTransformation >> asElementTransformation [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> bounds: aRectangle [
 	"The actual transformation matrix may depends on the element bounds due to
 	potential non zero transformation origin.
@@ -31,7 +31,7 @@ BlElementCachedTransformation >> bounds: aRectangle [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> inverseTransformBounds: aBounds [
 	"In-place transform given BlBounds according to my transformation.
 	(global to local transformation)"
@@ -40,7 +40,7 @@ BlElementCachedTransformation >> inverseTransformBounds: aBounds [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> inverseTransformPoint: aPoint [
 	"Apply an inversed transformation on a given point and return a result.
 	Note: Throws BlSingularMatrixError if underlying matrix is singular"
@@ -49,21 +49,21 @@ BlElementCachedTransformation >> inverseTransformPoint: aPoint [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlElementCachedTransformation >> isIdentity [
 	<return: #Boolean>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> matrix [
 	<return: #BlMatrix>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> transformBounds: aBounds [
 	"In-place transform given BlBounds according to my transformation.
 	(local to global transformation)"
@@ -72,7 +72,7 @@ BlElementCachedTransformation >> transformBounds: aBounds [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> transformPoint: aPoint [
 	"Transform given 2D point according to my transformation and return a transformed result point.
 	(local to global transformation)"

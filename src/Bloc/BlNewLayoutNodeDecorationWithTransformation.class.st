@@ -1,21 +1,21 @@
 Class {
-	#name : #BlNewLayoutNodeDecorationWithTransformation,
-	#superclass : #BlNewLayoutNodeWrapperDecoration,
-	#type : #variable,
+	#name : 'BlNewLayoutNodeDecorationWithTransformation',
+	#superclass : 'BlNewLayoutNodeWrapperDecoration',
+	#type : 'variable',
 	#instVars : [
 		'transformation'
 	],
-	#category : #'Bloc-Layouts-Model-New'
+	#category : 'Bloc-Layouts-Model-New'
 }
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlNewLayoutNodeDecorationWithTransformation >> extentToParent: aPoint [
 	<return: #Point>
 
 	^ (self transformation transformBounds: (BlBounds origin: 0@0 extent: aPoint)) extent
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlNewLayoutNodeDecorationWithTransformation >> getExtentOf: aLayoutNode [
 	"Return the size of the node in the parent coordinate system"
 	<return: #Point>
@@ -23,33 +23,33 @@ BlNewLayoutNodeDecorationWithTransformation >> getExtentOf: aLayoutNode [
 	^ self extentToParent: (decoration getExtentOf: aLayoutNode)
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlNewLayoutNodeDecorationWithTransformation >> getPositionOf: aLayoutNode [
 	^ (decoration getPositionOf: aLayoutNode) + (self pointToParent: 0@0)
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlNewLayoutNodeDecorationWithTransformation >> measure: anExtentSpecOrBlock of: aLayoutNode [
 	decoration measure: anExtentSpecOrBlock of: aLayoutNode.
 
 	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: aLayoutNode privateMeasurement extent)
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlNewLayoutNodeDecorationWithTransformation >> pointToLocal: aPoint [
 	<return: #Point>
 
 	^ self transformation inverseTransformPoint: aPoint
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlNewLayoutNodeDecorationWithTransformation >> pointToParent: aPoint [
 	<return: #Point>
 
 	^ self transformation transformPoint: aPoint
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlNewLayoutNodeDecorationWithTransformation >> setMeasurement: aBlLayoutNodeMeasurement of: aLayoutNode [
 	decoration setMeasurement: aBlLayoutNodeMeasurement of: aLayoutNode.
 
@@ -60,12 +60,12 @@ BlNewLayoutNodeDecorationWithTransformation >> setMeasurement: aBlLayoutNodeMeas
 	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: aLayoutNode privateMeasurement extent)
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlNewLayoutNodeDecorationWithTransformation >> setPosition: aPoint of: aLayoutNode [
 	decoration setPosition: (aPoint - (self pointToParent: 0@0)) of: aLayoutNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNodeDecorationWithTransformation >> setTransformation: aBlElementTransformation of: aLayoutNode [
 	self
 		assert: [ aBlElementTransformation notNil ]
@@ -75,7 +75,7 @@ BlNewLayoutNodeDecorationWithTransformation >> setTransformation: aBlElementTran
 		bounds: (BlBounds origin: 0.0@0.0 extent: aLayoutNode privateMeasurement extent)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNodeDecorationWithTransformation >> transformation [
 	<return: #BlElementTransformation>
 	self
@@ -85,7 +85,7 @@ BlNewLayoutNodeDecorationWithTransformation >> transformation [
 	^ transformation
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlNewLayoutNodeDecorationWithTransformation >> transformationDo: aBlock [
 	aBlock value: transformation asElementTransformation
 ]

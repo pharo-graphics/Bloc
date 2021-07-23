@@ -9,27 +9,27 @@ In the following example, {{gtClass:BlMouseOverEvent}}, {{gtClass:BlMouseOutEven
 
 "
 Class {
-	#name : #BlSharedEventDistributor,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlSharedEventDistributor',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'elements',
 		'handledEvents',
 		'shouldHandle'
 	],
-	#category : #'Bloc-Events-Handler'
+	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributor class >> shareEvent: anEventClass [
 	^ self shareEvents: { anEventClass }
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributor class >> shareEvents: aCollectionOfEvents [
 	^ self new shareEvents: aCollectionOfEvents
 ]
 
-{ #category : #'private - coordinates' }
+{ #category : 'private - coordinates' }
 BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 	| anOldBounds anOldDiagonal aNewBounds aNewDiagonal aRatio aNewPosition |
 	
@@ -48,7 +48,7 @@ BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 	aNewEvent screenPosition: (anOldEvent screenPosition ifNil: [ 0@0 ]) + (aNewPosition - anOldEvent position)
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlSharedEventDistributor >> dispatch: anEvent on: anElement [
 	| aNewEvent |
 
@@ -64,17 +64,17 @@ BlSharedEventDistributor >> dispatch: anEvent on: anElement [
 		ensure: [ shouldHandle := true ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSharedEventDistributor >> elements [
 	^ elements asArray
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlSharedEventDistributor >> eventsToHandle [
 	^ handledEvents
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlSharedEventDistributor >> gtRegisteredElementsFor: aView [
 	<gtView>
 	elements ifNil: [ ^ aView empty ].
@@ -83,7 +83,7 @@ BlSharedEventDistributor >> gtRegisteredElementsFor: aView [
 		title: 'Registered Elements'
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlSharedEventDistributor >> handleEvent: anEvent [
 
 	shouldHandle
@@ -94,7 +94,7 @@ BlSharedEventDistributor >> handleEvent: anEvent [
 			ifFalse: [ self dispatch: anEvent on: eachElement ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSharedEventDistributor >> initialize [
 	super initialize.
 	elements := Set new.
@@ -102,19 +102,19 @@ BlSharedEventDistributor >> initialize [
 	shouldHandle := true
 ]
 
-{ #category : #'api - hooks' }
+{ #category : 'api - hooks' }
 BlSharedEventDistributor >> onInstalledIn: anObject [
 	elements add: anObject
 ]
 
-{ #category : #'api - hooks' }
+{ #category : 'api - hooks' }
 BlSharedEventDistributor >> onUninstalledIn: anObject [
 	elements
 		remove: anObject
 		ifAbsent: [ "ignore" ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSharedEventDistributor >> shareEvents: aCollectionOfEvents [
 	self 
 		assert: [ aCollectionOfEvents isCollection ] 
@@ -126,7 +126,7 @@ BlSharedEventDistributor >> shareEvents: aCollectionOfEvents [
 	handledEvents := aCollectionOfEvents
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlSharedEventDistributor >> wantsEvent: anEvent [
 	shouldHandle
 		ifFalse: [ ^ false ].

@@ -1,13 +1,13 @@
 Class {
-	#name : #BlElementVisibilityProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementVisibilityProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'visibility'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementVisibilityProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -18,24 +18,24 @@ BlElementVisibilityProperty >> = anObject [
 	^ visibility = anObject visibility
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementVisibilityProperty >> applyOnElement: anElement [
 	anElement visibility: self visibility
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementVisibilityProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ visibility hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementVisibilityProperty >> visibility [
 	^ visibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementVisibilityProperty >> visibility: anObject [
 	visibility := anObject
 ]

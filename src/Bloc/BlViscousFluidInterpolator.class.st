@@ -1,16 +1,16 @@
 Class {
-	#name : #BlViscousFluidInterpolator,
-	#superclass : #BlInterpolator,
+	#name : 'BlViscousFluidInterpolator',
+	#superclass : 'BlInterpolator',
 	#classVars : [
 		'FluidNormalize',
 		'FluidOffset',
 		'FluidScale',
 		'InvertedExponent'
 	],
-	#category : #'Bloc-Basic-Interpolators'
+	#category : 'Bloc-Basic-Interpolators'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlViscousFluidInterpolator class >> initialize [
 	super initialize.
 	
@@ -23,7 +23,7 @@ BlViscousFluidInterpolator class >> initialize [
 	FluidOffset := 1.0 - (FluidNormalize * (self viscousFluid: 1.0))
 ]
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlViscousFluidInterpolator class >> viscousFluid: aNumber [
 	| value |
 	value := aNumber * FluidScale.
@@ -35,7 +35,7 @@ BlViscousFluidInterpolator class >> viscousFluid: aNumber [
 	^ value
 ]
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlViscousFluidInterpolator >> interpolate: aNumber [
 	| interpolated |
 	

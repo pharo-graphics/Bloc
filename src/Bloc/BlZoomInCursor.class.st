@@ -1,5 +1,5 @@
 Class {
-	#name : #BlZoomInCursor,
-	#superclass : #BlNamedCursor,
-	#category : #'Bloc-Space - Cursor'
+	#name : 'BlZoomInCursor',
+	#superclass : 'BlNamedCursor',
+	#category : 'Bloc-Space - Cursor'
 }

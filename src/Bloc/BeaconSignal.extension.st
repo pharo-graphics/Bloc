@@ -1,6 +1,6 @@
-Extension { #name : #BeaconSignal }
+Extension { #name : 'BeaconSignal' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 BeaconSignal >> asDictionary [
 
 	^Dictionary new
@@ -10,7 +10,7 @@ BeaconSignal >> asDictionary [
 		yourself.
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 BeaconSignal >> basicProcessId: aString [
 	"Set the receiver's processId.
 	This is normally only used when loading saved instances from file"
@@ -18,7 +18,7 @@ BeaconSignal >> basicProcessId: aString [
 	processId := aString
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 BeaconSignal >> basicProperties: aDictionary [
 	"Set the receiver's properties.
 	This is normally only used when loading saved instances from file"
@@ -26,7 +26,7 @@ BeaconSignal >> basicProperties: aDictionary [
 	properties := aDictionary
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 BeaconSignal >> basicTimestamp: aTimestamp [
 	"Set the receivers timestamp.
 	This is normally only used when loading saved instances from file"
@@ -34,7 +34,7 @@ BeaconSignal >> basicTimestamp: aTimestamp [
 	timestamp := aTimestamp
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 BeaconSignal class >> fromSton: stonReader [
 
 	| signal |
@@ -45,7 +45,7 @@ BeaconSignal class >> fromSton: stonReader [
 	^signal
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 BeaconSignal class >> fromStonDictionary: aDictionary [
 
 	^self new
@@ -55,7 +55,7 @@ BeaconSignal class >> fromStonDictionary: aDictionary [
 			yourself
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 BeaconSignal >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |

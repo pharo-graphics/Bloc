@@ -1,5 +1,5 @@
 Class {
-	#name : #BlGrabbingCursor,
-	#superclass : #BlNamedCursor,
-	#category : #'Bloc-Space - Cursor'
+	#name : 'BlGrabbingCursor',
+	#superclass : 'BlNamedCursor',
+	#category : 'Bloc-Space - Cursor'
 }

@@ -1,14 +1,14 @@
 Class {
-	#name : #BlTouchProcessor,
-	#superclass : #BlBaseEventProcessor,
+	#name : 'BlTouchProcessor',
+	#superclass : 'BlBaseEventProcessor',
 	#instVars : [
 		'previousTouchDownEvent',
 		'pressedPointers'
 	],
-	#category : #'Bloc-Space - Events'
+	#category : 'Bloc-Space - Events'
 }
 
-{ #category : #'api - touch down' }
+{ #category : 'api - touch down' }
 BlTouchProcessor >> handleTouchDown: aTouchDownEvent [
 	| aTargetElement |
 
@@ -34,7 +34,7 @@ BlTouchProcessor >> handleTouchDown: aTouchDownEvent [
 	previousTouchDownEvent := aTouchDownEvent
 ]
 
-{ #category : #'api - touch move' }
+{ #category : 'api - touch move' }
 BlTouchProcessor >> handleTouchMove: aTouchEvent [
 	| aTargetElement |
 	
@@ -49,7 +49,7 @@ BlTouchProcessor >> handleTouchMove: aTouchEvent [
 	self processTouchMove: aTouchEvent
 ]
 
-{ #category : #'api - touch up' }
+{ #category : 'api - touch up' }
 BlTouchProcessor >> handleTouchUp: aTouchEvent [
 	| aTargetElement aPointerIndex |
 
@@ -66,7 +66,7 @@ BlTouchProcessor >> handleTouchUp: aTouchEvent [
 	self processTouchUp: aTouchEvent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTouchProcessor >> initialize [
 	super initialize.
 
@@ -74,12 +74,12 @@ BlTouchProcessor >> initialize [
 	pressedPointers := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchProcessor >> pressedPointers [
 	^ pressedPointers
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlTouchProcessor >> processPicking: aTouchEvent [
 	<return: #BlElement>
 	| aTargetElement |
@@ -90,7 +90,7 @@ BlTouchProcessor >> processPicking: aTouchEvent [
 	^ aTargetElement
 ]
 
-{ #category : #'api - touch move' }
+{ #category : 'api - touch move' }
 BlTouchProcessor >> processTouchMove: aTouchMoveEvent [
 	self fireEvent: aTouchMoveEvent.
 
@@ -98,7 +98,7 @@ BlTouchProcessor >> processTouchMove: aTouchMoveEvent [
 	self updateCursorFrom: aTouchMoveEvent target
 ]
 
-{ #category : #'api - touch up' }
+{ #category : 'api - touch up' }
 BlTouchProcessor >> processTouchUp: aTouchUpEvent [
 	
 	self fireEvent: aTouchUpEvent.
@@ -106,7 +106,7 @@ BlTouchProcessor >> processTouchUp: aTouchUpEvent [
 	self updateCursorFrom: aTouchUpEvent target
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlTouchProcessor >> updateCursorFrom: aTarget [
 	| t |
 	t := aTarget.

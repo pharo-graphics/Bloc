@@ -5,41 +5,41 @@ I simulate Desktop behaviour of most OS
 
 "
 Class {
-	#name : #BlVisualSelectionHandler,
-	#superclass : #BlSelectionHandler,
+	#name : 'BlVisualSelectionHandler',
+	#superclass : 'BlSelectionHandler',
 	#instVars : [
 		'selection'
 	],
-	#category : #'Bloc-Utilities - Selection'
+	#category : 'Bloc-Utilities - Selection'
 }
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlVisualSelectionHandler >> dragEndEvent: anEvent [
 	super dragEndEvent: anEvent.
 
 	container removeChild: selection
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlVisualSelectionHandler >> dragEvent: anEvent [
 	super dragEvent: anEvent.
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlVisualSelectionHandler >> dragStartEvent: anEvent [
 	super dragStartEvent: anEvent.
 
 	container addChild: selection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVisualSelectionHandler >> eventsToHandle [
 	^ super eventsToHandle, {
 		BlMouseDownEvent
 	}
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BlVisualSelectionHandler >> mouseDownEvent: anEvent [
 	| oldSelected |
 	
@@ -48,7 +48,7 @@ BlVisualSelectionHandler >> mouseDownEvent: anEvent [
 	oldSelected keysDo: [ :anElement | self handleDeselected: anElement ]
 ]
 
-{ #category : #installation }
+{ #category : 'installation' }
 BlVisualSelectionHandler >> onInstalledIn: anElement [
 	super onInstalledIn: anElement.
 
@@ -59,7 +59,7 @@ BlVisualSelectionHandler >> onInstalledIn: anElement [
 		yourself
 ]
 
-{ #category : #'selection - handling' }
+{ #category : 'selection - handling' }
 BlVisualSelectionHandler >> selectionChanged [
 	| aSelectionBounds |
 	super selectionChanged.

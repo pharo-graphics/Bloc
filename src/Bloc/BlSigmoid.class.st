@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSigmoid,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlSigmoid',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'from',
 		'to',
@@ -15,32 +15,32 @@ Class {
 		'HorizontalOrientation',
 		'VerticalOrientation'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlSigmoid class >> initialize [
 	AutomaticOrientation := #automatic.
 	VerticalOrientation := #vertical.
 	HorizontalOrientation := #horizontal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSigmoid >> beAutomatic [
 	self orientation: AutomaticOrientation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSigmoid >> beHorizontal [
 	self orientation: HorizontalOrientation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSigmoid >> beVertical [
 	self orientation: VerticalOrientation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSigmoid >> bendingPoint: aFloatNumber [
 	"aFloatNumber must be within interval [0...1]"
 	| aNewBendingPoint |
@@ -54,7 +54,7 @@ BlSigmoid >> bendingPoint: aFloatNumber [
 	self releaseCache
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSigmoid >> computeFromControlPoint [
 	"I compute the location of the from control point related to the start of the sigmoid based
 	on sharpness and bending point"
@@ -84,7 +84,7 @@ BlSigmoid >> computeFromControlPoint [
 		ifFalse: [ (0 @ ((to - from) y sign * aDistanceToControlPoint)) + from ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSigmoid >> computeToControlPoint [
 	"I compute the location of the to control point related to the start of the sigmoid based
 	on sharpness and bending point"
@@ -114,7 +114,7 @@ BlSigmoid >> computeToControlPoint [
 		ifFalse: [ (0 @ ((from - to) y sign * aDistanceToControlPoint)) + to ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSigmoid >> from: aFromPoint to: aToPoint [
 
 	(from = aFromPoint and: [ to = aToPoint ])
@@ -126,7 +126,7 @@ BlSigmoid >> from: aFromPoint to: aToPoint [
 	self updateControlPoints
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSigmoid >> initialize [
 	super initialize.
 	
@@ -139,29 +139,29 @@ BlSigmoid >> initialize [
 	orientation := AutomaticOrientation
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSigmoid >> isAutomatic [
 	^ orientation = AutomaticOrientation
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSigmoid >> isHorizontal [
 	^ orientation = HorizontalOrientation
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSigmoid >> isVertical [
 	^ orientation = VerticalOrientation
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlSigmoid >> matchExtent: aPoint [
 	"Resize geometry to exactly match provided extent as a Point"
 
 	extent := aPoint
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSigmoid >> orientation: anOrientation [
 	orientation = anOrientation
 		ifTrue: [ ^ self ].
@@ -171,7 +171,7 @@ BlSigmoid >> orientation: anOrientation [
 	self releaseCache
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSigmoid >> sharpness: aFloatNumber [
 	"aFloatNumber must be within interval [0...1]"
 	| aNewSharpness |
@@ -185,7 +185,7 @@ BlSigmoid >> sharpness: aFloatNumber [
 	self releaseCache
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSigmoid >> updateControlPoints [
 	fromControl := self computeFromControlPoint.
 	toControl := self computeToControlPoint.

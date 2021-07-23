@@ -6,33 +6,33 @@ In addition to general api to add and remove {{gtClass:BlElementProperty}}, {{gt
 
 "
 Class {
-	#name : #BlElementStyle,
-	#superclass : #Object,
+	#name : 'BlElementStyle',
+	#superclass : 'Object',
 	#traits : 'TBlElementProperties',
 	#classTraits : 'TBlElementProperties classTrait',
 	#instVars : [
 		'state',
 		'properties'
 	],
-	#category : #'Bloc-Basic-Style'
+	#category : 'Bloc-Basic-Style'
 }
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementStyle >> addProperties: aCollectionOfElementProperty [
 	self properties addProperties: aCollectionOfElementProperty
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementStyle >> addProperty: aBlElementProperty [
 	self properties addProperty: aBlElementProperty
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementStyle >> applyOnElement: anElement [
 	anElement properties addProperties: self properties
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementStyle >> asForwarded: aTargetObject [
 	^ BlElementForwardedStyle new
 		state: self state;
@@ -40,35 +40,35 @@ BlElementStyle >> asForwarded: aTargetObject [
 		targetObject: aTargetObject
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementStyle >> cleanUpOnElement: anElement [
 	anElement properties removeProperties: self properties
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementStyle >> hasProperties [
 	^ self properties isNotEmpty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementStyle >> initialize [
 	super initialize.
 	
 	properties := BlElementIntendedProperties new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementStyle >> isForwarded [
 	^ false
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlElementStyle >> postCopy [
 	state := state copy.
 	properties := properties copy
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementStyle >> printOn: aStream [
 	aStream
 		nextPutAll: 'when: ';
@@ -77,41 +77,41 @@ BlElementStyle >> printOn: aStream [
 		print: self properties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStyle >> priority [
 	^ self state priority
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStyle >> properties [
 	<return: #BlElementProperties>
 
 	^ properties
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementStyle >> properties: aBlElementProperties [
 	properties := aBlElementProperties
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementStyle >> removeProperties: aCollectionOfElementProperty [
 	self properties removeProperties: aCollectionOfElementProperty
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementStyle >> removeProperty: aBlElementProperty [
 	self properties removeProperty: aBlElementProperty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStyle >> state [
 	<return: #BrInteractionState>
 
 	^ state
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementStyle >> state: anInteractionState [
 	state := anInteractionState
 ]

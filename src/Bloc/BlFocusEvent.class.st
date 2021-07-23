@@ -1,15 +1,15 @@
 Class {
-	#name : #BlFocusEvent,
-	#superclass : #BlBaseFocusEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlFocusEvent',
+	#superclass : 'BlBaseFocusEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusEvent >> isFocus [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlFocusEvent >> sendTo: anObject [
 	anObject focusEvent: self
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : #BlKeyboardKeyTable,
-	#superclass : #Object,
-	#category : #'Bloc-Universe'
+	#name : 'BlKeyboardKeyTable',
+	#superclass : 'Object',
+	#category : 'Bloc-Universe'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlKeyboardKeyTable >> initialize: aMapDictionary with: aMapArray [
 	aMapArray pairsDo: [ :eachCode :eachName |
 		| aName |
@@ -18,13 +18,13 @@ BlKeyboardKeyTable >> initialize: aMapDictionary with: aMapArray [
 		aMapDictionary at: eachCode put: ((BlKeyboardKey perform: aName) setValue: eachCode) ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlKeyboardKeyTable >> initialize: aMapDictionary withKeys: aMapArray [
 	aMapArray pairsDo: [ :eachCode :eachKey |
 		aMapDictionary at: eachCode put: (eachKey copy setValue: eachCode) ]
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlKeyboardKeyTable >> keyFromVirtualCode: aScanCode [
 	<return: #BlKeyboardKey>
 

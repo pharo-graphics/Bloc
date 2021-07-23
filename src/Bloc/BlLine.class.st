@@ -3,23 +3,23 @@ I define a geometry of a straight line
 
 "
 Class {
-	#name : #BlLine,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlLine',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'from',
 		'to'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLine class >> from: aFromPoint to: aToPoint [
 	<return: #BlLine>
 	
 	^ self new from: aFromPoint to: aToPoint
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlLine >> containsPoint: aPoint in: anElement on: aSpartaCanvas [
 	"Note: I am a fallback method to determine if a point lies within a geometry path
 	when geometry is complex and it is mathematically difficult to compute manually"
@@ -33,7 +33,7 @@ BlLine >> containsPoint: aPoint in: anElement on: aSpartaCanvas [
 		containsPoint: aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLine >> from [
 	"Return start location of the line in owner element's local coordinate system"
 	<return: #Point>
@@ -41,12 +41,12 @@ BlLine >> from [
 	^ from
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLine >> from: aPoint [
 	self from: aPoint to: to
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLine >> from: aFromPoint to: aToPoint [
 
 	(from = aFromPoint and: [ to = aToPoint ])
@@ -56,12 +56,12 @@ BlLine >> from: aFromPoint to: aToPoint [
 	to := aToPoint
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlLine >> geometryBounds: aBounds [
 	^ (aBounds rectangle: (Rectangle encompassing: { self from . self to}))
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLine >> initialize [
 	super initialize.
 
@@ -69,7 +69,7 @@ BlLine >> initialize [
 	to := 0@0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLine >> intersectionWith: anotherSegment [
 	"Copied from LineSegment>>intersectionWith:"
 	| det deltaPt alpha beta pt1Dir pt2Dir |
@@ -89,12 +89,12 @@ BlLine >> intersectionWith: anotherSegment [
 	^from + (alpha * pt1Dir / (det@det))
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlLine >> matchExtent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLine >> to [
 	"Return end location of the line in owner element's local coordinate system"
 	<return: #Point>
@@ -102,7 +102,7 @@ BlLine >> to [
 	^ to
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLine >> to: aPoint [
 	self from: from to: aPoint
 ]

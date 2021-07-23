@@ -11,27 +11,27 @@ BlPolyline vertices: {
 
 "
 Class {
-	#name : #BlPolyline,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlPolyline',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'vertices'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlPolyline class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlPolyline >> asElement [
 	^ super asElement
 		background: Color transparent;
 		outskirts: BlOutskirts centered
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlPolyline >> containsPoint: aPoint in: anElement on: aSpartaCanvas [
 	"Note: I am a fallback method to determine if a point lies within a geometry path
 	when geometry is complex and it is mathematically difficult to compute manually"
@@ -45,7 +45,7 @@ BlPolyline >> containsPoint: aPoint in: anElement on: aSpartaCanvas [
 		containsPoint: aPoint
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlPolyline >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -56,19 +56,19 @@ BlPolyline >> geometryBounds: aBounds [
 		corner: self vertices max
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlPolyline >> matchExtent: anExtent [
 	extent := anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPolyline >> vertices [
 	<return: #SequenceableCollection of: #Point>
 
 	^ vertices
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPolyline >> vertices: aCollectionOfPoints [
 
 	vertices := aCollectionOfPoints.

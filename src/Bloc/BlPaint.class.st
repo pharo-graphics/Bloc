@@ -6,14 +6,14 @@ All paints are meant to be immutable
 
 "
 Class {
-	#name : #BlPaint,
-	#superclass : #Object,
+	#name : 'BlPaint',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Paint'
+	#category : 'Bloc-Paint'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlPaint class >> transparent [
 	"Return a completely transparent paint"
 	<return: #BlPaint>
@@ -21,17 +21,17 @@ BlPaint class >> transparent [
 	^ BlColorPaint transparent
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlPaint >> asBlBackground [
 	^ BlBackground paint: self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlPaint >> asBlPaint [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPaint >> isOpaque [
 	"Return true if I am opaque, false otherwise.
 	It is important to implement paint specific logic in subclasses.
@@ -41,7 +41,7 @@ BlPaint >> isOpaque [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPaint >> isTransparent [
 	"Return true if I am transparent, false otherwise.
 	It is important to implement paint specific logic in subclasses.
@@ -51,7 +51,7 @@ BlPaint >> isTransparent [
 	^ false
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlPaint >> matchExtent: anExtent [
 	self subclassResponsibility
 ]

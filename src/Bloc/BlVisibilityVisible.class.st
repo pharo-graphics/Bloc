@@ -4,12 +4,12 @@ Once set, element should be rendered and should participate in layout and take s
 
 "
 Class {
-	#name : #BlVisibilityVisible,
-	#superclass : #BlVisibility,
-	#category : #'Bloc-Basic-Properties'
+	#name : 'BlVisibilityVisible',
+	#superclass : 'BlVisibility',
+	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlVisibilityVisible >> isVisible [
 	^ true
 ]

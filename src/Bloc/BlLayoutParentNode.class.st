@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutParentNode,
-	#superclass : #BlLayoutNode,
+	#name : 'BlLayoutParentNode',
+	#superclass : 'BlLayoutNode',
 	#traits : 'TBlLayoutNode + TBlLayoutParentNode',
 	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutParentNode classTrait',
 	#instVars : [
@@ -10,10 +10,10 @@ Class {
 		'extent',
 		'position'
 	],
-	#category : #'Bloc-Layouts-Model'
+	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutParentNode class >> alreadyMeasured: aBlElement [
 	^ self new
 		constraints: aBlElement constraints;
@@ -35,7 +35,7 @@ BlLayoutParentNode class >> alreadyMeasured: aBlElement [
 				eachNode withElement: eachChild ])
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutParentNode class >> alreadyMeasuredWithoutTransformation: aBlElement [
 	^ self new
 		constraints: aBlElement constraints;
@@ -48,7 +48,7 @@ BlLayoutParentNode class >> alreadyMeasuredWithoutTransformation: aBlElement [
 						extent: eachChild measuredExtent)) withElement: eachChild ])
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutParentNode class >> getParentTransformation: anElement [
 	| aTransformation |
 
@@ -63,7 +63,7 @@ BlLayoutParentNode class >> getParentTransformation: anElement [
 	^ aTransformation
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutParentNode class >> getTransformation: anElement [
 	| aTransformation |
 
@@ -77,7 +77,7 @@ BlLayoutParentNode class >> getTransformation: anElement [
 	^ aTransformation
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutParentNode class >> toMeasure: aBlElement [
 	| anElementTransformation aParentNode |
 	
@@ -105,50 +105,50 @@ BlLayoutParentNode class >> toMeasure: aBlElement [
 	^ aParentNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> children [
 	<return: #Collection of: #BlLayoutNode>
 
 	^ children
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> children: aCollectionOfChildNodes [
 	children := aCollectionOfChildNodes as: BlLayoutNodeChildren.
 	children do: [ :eachChild | eachChild parent: self parent ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> constraints [
 	^ constraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> constraints: aBlLayoutConstraints [
 	constraints := aBlLayoutConstraints
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutParentNode >> extent [
 	^ extent
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutParentNode >> extent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 BlLayoutParentNode >> extentSpec [
 	^ extentSpec
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> extentSpec: anObject [
 	extentSpec := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLayoutParentNode >> initialize [
 	super initialize.
 	
@@ -157,26 +157,26 @@ BlLayoutParentNode >> initialize [
 	extent := 0.0@0.0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> parent [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> position: aPoint [
 	position := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNode >> transformationDo: aBlock [
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlLayoutParentNode >> withFilter: aSelectBlock [
 	^ BlLayoutParentNodeWithFilter new
 		parentNode: self;
@@ -184,7 +184,7 @@ BlLayoutParentNode >> withFilter: aSelectBlock [
 		children: (self children select: aSelectBlock)
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlLayoutParentNode >> withTransformation: aBlElementTransformation [
 	^ BlLayoutParentNodeWithTransformation new
 		parentNode: self;

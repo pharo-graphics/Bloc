@@ -7,8 +7,8 @@ Negative values are not allowed.
 
 "
 Class {
-	#name : #BlCornerRadii,
-	#superclass : #Object,
+	#name : 'BlCornerRadii',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -20,10 +20,10 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : #'Bloc-Basic-Support'
+	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlCornerRadii class >> cleanUp [
 	<script: 'self cleanUp'>
 	super cleanUp.
@@ -31,19 +31,19 @@ BlCornerRadii class >> cleanUp [
 	empty := nil
 ]
 
-{ #category : #'predefined instances' }
+{ #category : 'predefined instances' }
 BlCornerRadii class >> empty [
 	^ empty ifNil: [ empty := self radius: 0 ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCornerRadii class >> radius: aNumber [
 	^ self new
 		radius: aNumber;
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlCornerRadii >> = aBlCornerRadii [
 	self species == aBlCornerRadii species
 		ifFalse: [ ^ false ].
@@ -54,7 +54,7 @@ BlCornerRadii >> = aBlCornerRadii [
 				and: [ self topRight = aBlCornerRadii topRight ] ] ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlCornerRadii >> asArray [
 	<return: #Array of: #Number>
 	^ { 
@@ -65,12 +65,12 @@ BlCornerRadii >> asArray [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomLeft [
 	^ bottomLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomLeft: aNumber [
 	"Initialize bottom left corner radius with a given number.
 	It can be done only once"
@@ -82,12 +82,12 @@ BlCornerRadii >> bottomLeft: aNumber [
 	bottomLeft := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomRight [
 	^ bottomRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomRight: aNumber [
 	"Initialize bottom right corner radius with a given number.
 	It can be done only once"
@@ -99,12 +99,12 @@ BlCornerRadii >> bottomRight: aNumber [
 	bottomRight := aNumber
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlCornerRadii >> hash [
 	^ bottomLeft hash bitXor: (bottomRight hash bitXor: (topLeft hash bitXor: topLeft))
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlCornerRadii >> max [
 	"Return the biggest corner radius among top left, top right, bottom left and bottom right"
 	<return: #Number>
@@ -112,7 +112,7 @@ BlCornerRadii >> max [
 	^ topLeft max: (topRight max: (bottomLeft max: bottomRight))
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlCornerRadii >> min [
 	"Return the smallest corner radius among top left, top right, bottom left and bottom right"
 	<return: #Number>
@@ -120,17 +120,17 @@ BlCornerRadii >> min [
 	^ topLeft min: (topRight min: (bottomLeft min: bottomRight))
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlCornerRadii >> radius: aNumber [
 	topLeft := topRight := bottomLeft := bottomRight := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topLeft [
 	^ topLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topLeft: aNumber [
 	"Initialize top left corner radius with a given number.
 	It can be done only once"
@@ -142,12 +142,12 @@ BlCornerRadii >> topLeft: aNumber [
 	topLeft := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topRight [
 	^ topRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topRight: aNumber [
 	"Initialize top right corner radius with a given number.
 	It can be done only once"

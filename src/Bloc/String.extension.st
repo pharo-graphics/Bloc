@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 String >> asBlocElementId [
 	<return: #BlElementId>
 

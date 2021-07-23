@@ -1,11 +1,11 @@
 Class {
-	#name : #BlLayoutNodeChildren,
-	#superclass : #Array,
-	#type : #variable,
-	#category : #'Bloc-Layouts-Model'
+	#name : 'BlLayoutNodeChildren',
+	#superclass : 'Array',
+	#type : 'variable',
+	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutNodeChildren >> boundingBox [
 	<return: #Rectangle>
 	| aBoundingBox |
@@ -23,17 +23,17 @@ BlLayoutNodeChildren >> boundingBox [
 	^ aBoundingBox expanded asRectangle
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutNodeChildren >> extent [
 	^ self collect: [ :eachChild | eachChild extent ] as: Array
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutNodeChildren >> layoutBounds [
 	^ self collect: [ :eachChild | eachChild layoutBounds asRectangle ] as: Array
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutNodeChildren >> normalizePositions [
 	| theTopLeft |
 
@@ -46,17 +46,17 @@ BlLayoutNodeChildren >> normalizePositions [
 	self do: [ :eachNode | eachNode position: eachNode position - theTopLeft ]
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutNodeChildren >> roundPositions [	
 	self do: [ :eachNode | eachNode position: eachNode position rounded ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutNodeChildren >> withoutElement [
 	^ self collect: [ :eachNode | eachNode withoutElement ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutNodeChildren >> withoutTransformation [
 	^ self collect: [ :eachNode | eachNode withoutTransformation ]
 ]

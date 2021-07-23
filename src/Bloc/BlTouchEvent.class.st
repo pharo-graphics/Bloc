@@ -1,16 +1,16 @@
 Class {
-	#name : #BlTouchEvent,
-	#superclass : #BlUIEvent,
+	#name : 'BlTouchEvent',
+	#superclass : 'BlUIEvent',
 	#instVars : [
 		'pointerId',
 		'pointerIndex',
 		'delta',
 		'pressure'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchEvent >> delta [
 	"Return the distance moved in both x- and y-axis, given in space coordinates"
 	<return: #Point>
@@ -18,17 +18,17 @@ BlTouchEvent >> delta [
 	^ delta
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchEvent >> delta: aPoint [
 	delta := aPoint
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTouchEvent >> isTouch [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchEvent >> pointerId [
 	"Return the unique id of a finger"
 	<return: #Number>
@@ -36,12 +36,12 @@ BlTouchEvent >> pointerId [
 	^ pointerId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchEvent >> pointerId: aNumber [
 	pointerId := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchEvent >> pointerIndex [
 	"Return the ordered index of a pointer. Assume user touches the display
 	with two fingers, the first finger put on a display receives index '1'
@@ -51,12 +51,12 @@ BlTouchEvent >> pointerIndex [
 	^ pointerIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchEvent >> pointerIndex: aNumber [
 	pointerIndex := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchEvent >> pressure [
 	"Return the quantity of pressure applied, normalized (0...1)"
 	<return: #Number>
@@ -64,7 +64,7 @@ BlTouchEvent >> pressure [
 	^ pressure
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTouchEvent >> pressure: aNumber [
 	pressure := aNumber
 ]

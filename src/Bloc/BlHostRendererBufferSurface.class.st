@@ -5,22 +5,22 @@ When used, rendering happens in a pixel buffer and than can be displayed in a na
 
 "
 Class {
-	#name : #BlHostRendererBufferSurface,
-	#superclass : #BlHostRendererSurface,
+	#name : 'BlHostRendererBufferSurface',
+	#superclass : 'BlHostRendererSurface',
 	#instVars : [
 		'stride',
 		'buffer',
 		'extent'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererBufferSurface class >> priority [
 	^ 20
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRendererBufferSurface class >> supportedBy: anObject [
 	"Return true if a given object supports buffer surface, false otherwise"
 	<return: #Boolean>
@@ -28,31 +28,31 @@ BlHostRendererBufferSurface class >> supportedBy: anObject [
 	^ anObject supportsBufferSurface
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererBufferSurface >> buffer [
 	^ buffer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererBufferSurface >> buffer: aPixelBuffer [
 	buffer := aPixelBuffer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererBufferSurface >> createSpaceRendererOn: anObject [
 	<return: #BlHostSpaceRenderer>
 
 	^ anObject createBufferSpaceRenderer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererBufferSurface >> createSurfaceRendererOn: anObject [
 	<return: #BlHostSurfaceRenderer>
 	
 	^ anObject createBufferSurfaceRenderer
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlHostRendererBufferSurface >> extent [
 	"Return actual extent of the underlying surface.
 	Note: it may be different from canvas or window extents"
@@ -61,17 +61,17 @@ BlHostRendererBufferSurface >> extent [
 	^ extent
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlHostRendererBufferSurface >> extent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererBufferSurface >> stride [
 	^ stride
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererBufferSurface >> stride: aNumber [
 	stride := aNumber
 ]

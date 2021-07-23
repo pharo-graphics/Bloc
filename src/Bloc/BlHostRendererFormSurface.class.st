@@ -5,20 +5,20 @@ When used, rendering happens in a Form and than can be displayed in a morphic wi
 
 "
 Class {
-	#name : #BlHostRendererFormSurface,
-	#superclass : #BlHostRendererSurface,
+	#name : 'BlHostRendererFormSurface',
+	#superclass : 'BlHostRendererSurface',
 	#instVars : [
 		'externalForm'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererFormSurface class >> priority [
 	^ 30
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRendererFormSurface class >> supportedBy: anObject [
 	"Return true if a given object supports form surface, false otherwise"
 	<return: #Boolean>
@@ -26,21 +26,21 @@ BlHostRendererFormSurface class >> supportedBy: anObject [
 	^ anObject supportsFormSurface
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererFormSurface >> createSpaceRendererOn: anObject [
 	<return: #BlHostSpaceRenderer>
 
 	^ anObject createFormSpaceRenderer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRendererFormSurface >> createSurfaceRendererOn: anObject [
 	<return: #BlHostSurfaceRenderer>
 	
 	^ anObject createFormSurfaceRenderer
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlHostRendererFormSurface >> extent [
 	"Return actual extent of the underlying surface.
 	Note: it may be different from canvas or window extents"
@@ -49,22 +49,22 @@ BlHostRendererFormSurface >> extent [
 	^ externalForm extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererFormSurface >> form [
 	^ externalForm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererFormSurface >> form: aForm [
 	externalForm := aForm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererFormSurface >> pointer [
 	^ externalForm pointer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRendererFormSurface >> stride [
 	^ externalForm stride
 ]

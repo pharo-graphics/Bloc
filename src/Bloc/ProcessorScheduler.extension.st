@@ -1,6 +1,6 @@
-Extension { #name : #ProcessorScheduler }
+Extension { #name : 'ProcessorScheduler' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 ProcessorScheduler >> gtNextReadyProcess [
 	quiescentProcessLists reverseDo: [ :list |
 		list firstOrNil ifNotNil: [ :proc |

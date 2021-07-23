@@ -1,10 +1,10 @@
 Class {
-	#name : #BlDropShadowEffect,
-	#superclass : #BlGaussianShadowEffect,
-	#category : #'Bloc-Effect'
+	#name : 'BlDropShadowEffect',
+	#superclass : 'BlGaussianShadowEffect',
+	#category : 'Bloc-Effect'
 }
 
-{ #category : #deprecation }
+{ #category : 'deprecation' }
 BlDropShadowEffect class >> isDeprecated [
 	^ true
 ]

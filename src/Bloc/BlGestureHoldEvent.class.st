@@ -7,7 +7,7 @@ Purposes/real world use cases:
 
 "
 Class {
-	#name : #BlGestureHoldEvent,
-	#superclass : #BlGestureEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlGestureHoldEvent',
+	#superclass : 'BlGestureEvent',
+	#category : 'Bloc-Events'
 }

@@ -6,12 +6,12 @@ See BlStrokeLineJoin for other types
 
 "
 Class {
-	#name : #BlStrokeLineMiterJoin,
-	#superclass : #BlStrokeLineJoin,
-	#category : #'Bloc-Paint-Support'
+	#name : 'BlStrokeLineMiterJoin',
+	#superclass : 'BlStrokeLineJoin',
+	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineMiterJoin class >> joinName [
 	^ 'Miter'
 ]

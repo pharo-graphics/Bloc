@@ -1,15 +1,15 @@
 Class {
-	#name : #BlOutskirtsOutside,
-	#superclass : #BlOutskirts,
-	#category : #'Bloc-Basic-Border'
+	#name : 'BlOutskirtsOutside',
+	#superclass : 'BlOutskirts',
+	#category : 'Bloc-Basic-Border'
 }
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BlOutskirtsOutside >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	^ anElement geometry strokedBoundsOutside: aBlBounds of: anElement on: aCanvas
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlOutskirtsOutside >> wantsLayerOn: anElement [
 	"Return true if background and border should be rendered on a separate layer,
 	false otherwise"

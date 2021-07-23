@@ -1,10 +1,10 @@
 Class {
-	#name : #BlGestureRotationEndEvent,
-	#superclass : #BlGestureBaseRotationEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlGestureRotationEndEvent',
+	#superclass : 'BlGestureBaseRotationEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlGestureRotationEndEvent >> sendTo: anObject [
 	anObject gestureRotationEndEvent: self
 ]

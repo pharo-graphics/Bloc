@@ -1,28 +1,28 @@
 Class {
-	#name : #BlMultiPolyline,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlMultiPolyline',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'polylines'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMultiPolyline class >> polygons: aCollectionOfCollectionOfPoints [
 	^ self new polygons: aCollectionOfCollectionOfPoints
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMultiPolyline >> matchExtent: anExtent [
 	extent := anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiPolyline >> polylines [
 	^ polylines
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiPolyline >> polylines: aCollectionOfPolylines [
 	polylines := aCollectionOfPolylines.
 	

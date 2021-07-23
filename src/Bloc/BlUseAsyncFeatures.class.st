@@ -12,17 +12,17 @@ In the cases where the async should be disabled, {{gtMethod:BlUseAsyncFeatures c
 
 "
 Class {
-	#name : #BlUseAsyncFeatures,
-	#superclass : #DynamicVariable,
-	#category : #'Bloc-Space - Tasks'
+	#name : 'BlUseAsyncFeatures',
+	#superclass : 'DynamicVariable',
+	#category : 'Bloc-Space - Tasks'
 }
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BlUseAsyncFeatures class >> disableDuring: aBlock [
 	^ self value: false during: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUseAsyncFeatures class >> enabled [
 	"Answer true if using async operations (TaskIt) is enabled in a particular process.
 	The default is true."
@@ -32,24 +32,24 @@ BlUseAsyncFeatures class >> enabled [
 		ifNotNil: [ :value | value ]
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BlUseAsyncFeatures class >> ifDisabledDo: aSyncBlock [
 	^ self ifEnabledDo: [ "do nothing" ] otherwise: aSyncBlock
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BlUseAsyncFeatures class >> ifEnabledDo: anAsyncBlock [
 	^ self ifEnabledDo: anAsyncBlock otherwise: [ "do nothing" ]
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BlUseAsyncFeatures class >> ifEnabledDo: anAsyncBlock otherwise: aSyncBlock [
 	^ self enabled 
 		ifTrue: anAsyncBlock 
 		ifFalse: aSyncBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUseAsyncFeatures >> enabled [
 	"Answer if converting to TaskIt is enabled.
 	The default is true."

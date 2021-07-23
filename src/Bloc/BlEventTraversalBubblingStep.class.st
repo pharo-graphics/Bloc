@@ -5,12 +5,12 @@ This is known as bubbling, and occurs only if BlEvent>>#canBePropagated is true.
 
 "
 Class {
-	#name : #BlEventTraversalBubblingStep,
-	#superclass : #BlEventTraversalStep,
-	#category : #'Bloc-Events'
+	#name : 'BlEventTraversalBubblingStep',
+	#superclass : 'BlEventTraversalStep',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTraversalBubblingStep >> type [
 	<return: #String>
 	

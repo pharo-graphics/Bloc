@@ -6,8 +6,8 @@ BlEvent allSubclasses
 
 "
 Class {
-	#name : #BlEvent,
-	#superclass : #Announcement,
+	#name : 'BlEvent',
+	#superclass : 'Announcement',
 	#instVars : [
 		'target',
 		'source',
@@ -16,34 +16,34 @@ Class {
 		'canBePropagated',
 		'consumed'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlEvent class >> disableIn: anEventDispatcher [
 	anEventDispatcher disableGeneralEventType: self
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlEvent class >> enableIn: anEventDispatcher [
 	anEventDispatcher enableGeneralEventType: self
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 BlEvent class >> fireEvent: anEvent [
 	<return: #BlEvent>
 
 	^ self fireEvent: anEvent target: anEvent target
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 BlEvent class >> fireEvent: anEvent from: aTopEventTarget [
 	<return: #BlEvent>
 
 	^ self fireEvent: anEvent from: aTopEventTarget to: anEvent target
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 BlEvent class >> fireEvent: anEvent from: aTopEventTarget to: aTargetEventTarget [
 	<return: #BlEvent>
 	| theEvent aDispatcherChain |
@@ -60,7 +60,7 @@ BlEvent class >> fireEvent: anEvent from: aTopEventTarget to: aTargetEventTarget
 	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 BlEvent class >> fireEvent: anEvent target: anEventTarget [
 	<return: #BlEvent>
 	| theEvent aDispatcherChain |
@@ -77,7 +77,7 @@ BlEvent class >> fireEvent: anEvent target: anEventTarget [
 	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEvent class >> from: anEventTarget [
 	^ self new
 		target: anEventTarget;
@@ -85,14 +85,14 @@ BlEvent class >> from: anEventTarget [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEvent class >> target: anObject [
 	^ self new
 		target: anObject;
 		yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlEvent class >> targetToDictionaryForExport: anObject [
 	| aDictionary |
 
@@ -107,12 +107,12 @@ BlEvent class >> targetToDictionaryForExport: anObject [
 	^ aDictionary
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlEvent class >> wantedIn: anEventDispatcher [
 	^ anEventDispatcher wantsGeneralEventType: self
 ]
 
-{ #category : #'private - steps' }
+{ #category : 'private - steps' }
 BlEvent >> arrivedTarget: aTBlEventTarget [
 	self
 		assert: [ aTBlEventTarget isNotNil ]
@@ -121,7 +121,7 @@ BlEvent >> arrivedTarget: aTBlEventTarget [
 	currentTarget := aTBlEventTarget
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlEvent >> asDictionaryForExport [
 	^ OrderedDictionary new 
 		at: #event put: self class name;
@@ -134,7 +134,7 @@ BlEvent >> asDictionaryForExport [
 		yourself
 ]
 
-{ #category : #'private - steps' }
+{ #category : 'private - steps' }
 BlEvent >> bubblingTarget: aTBlEventTarget [
 	self
 		assert: [ aTBlEventTarget isNotNil ]
@@ -143,19 +143,19 @@ BlEvent >> bubblingTarget: aTBlEventTarget [
 	currentTarget := aTBlEventTarget
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> canBePropagated [
 	<return: #Boolean>
 
 	^ canBePropagated
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlEvent >> canBePropagated: anObject [
 	canBePropagated := anObject
 ]
 
-{ #category : #'private - steps' }
+{ #category : 'private - steps' }
 BlEvent >> capturingTarget: aTBlEventTarget [
 	self
 		assert: [ aTBlEventTarget isNotNil ]
@@ -164,12 +164,12 @@ BlEvent >> capturingTarget: aTBlEventTarget [
 	currentTarget := aTBlEventTarget
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> consumed: aBoolean [
 	consumed := aBoolean
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlEvent >> copyFrom: anEvent [
 	super copyFrom: anEvent.
 
@@ -177,7 +177,7 @@ BlEvent >> copyFrom: anEvent [
 	consumed := false
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlEvent >> currentTarget [
 	"Identifies the current target for the event, as the event traverses the scene graph.
 	It always refers to the element to which the event handler has been attached, as opposed to #target which identifies the element on which the event occurred."
@@ -186,17 +186,17 @@ BlEvent >> currentTarget [
 	^ currentTarget
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlEvent >> currentTarget: anEventTarget [
 	currentTarget := anEventTarget
 ]
 
-{ #category : #firing }
+{ #category : 'firing' }
 BlEvent >> fire [
 	BlEvent fireEvent: self
 ]
 
-{ #category : #'private - steps' }
+{ #category : 'private - steps' }
 BlEvent >> forwardingTarget: aTBlEventTarget [
 	self
 		assert: [ aTBlEventTarget isNotNil ]
@@ -205,14 +205,14 @@ BlEvent >> forwardingTarget: aTBlEventTarget [
 	currentTarget := aTBlEventTarget
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> hasSource [
 	<return: #Boolean>
 	
 	^ source isNotNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlEvent >> initialize [
 	super initialize.
 	
@@ -220,134 +220,134 @@ BlEvent >> initialize [
 	canBePropagated := true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isBaseDrag [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isBaseFocus [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isBlur [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isClick [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isConsumed [
 	<return: #Boolean>
 
 	^ consumed
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isDoubleClick [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isDrag [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isElementEvent [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isFocus [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isFocusIn [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isFocusOut [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isFocusTransfer [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isGesture [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isKeyboard [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isMouse [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isMouseDown [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isMouseEnter [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isMouseLeave [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isMouseMove [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isMouseUp [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isSpaceEvent [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isTextInput [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isTouch [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isUIEvent [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEvent >> isUniverseEvent [
 	^ false
 ]
 
-{ #category : #firing }
+{ #category : 'firing' }
 BlEvent >> newCopyFor: aTarget [
 	^ self class new
 		copyFrom: self;
@@ -355,17 +355,17 @@ BlEvent >> newCopyFor: aTarget [
 		yourself
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlEvent >> postCopy [
 	super postCopy
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlEvent >> sendTo: anObject [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEvent >> source [
 	"Return an event target that plays a role of a source of this event"
 
@@ -376,12 +376,12 @@ BlEvent >> source [
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEvent >> source: aBlEventTarget [	
 	source := aBlEventTarget
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlEvent >> target [
 	"Return a reference to the object that dispatched the event.
 	It is different from #currentTarget when the event handler is called during the bubbling or capturing phase of the event."
@@ -390,12 +390,12 @@ BlEvent >> target [
 	^ target
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlEvent >> target: aTBlEventTarget [
 	target := aTBlEventTarget
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlEvent >> timestamp [
 	"Returns the time at which the event was created."
 	<return: #DateAndTime>
@@ -403,7 +403,7 @@ BlEvent >> timestamp [
 	^ timestamp
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlEvent >> timestamp: aDateAndTime [
 
 	self

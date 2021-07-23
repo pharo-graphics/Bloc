@@ -8,8 +8,8 @@ BlBorder builder
 
 "
 Class {
-	#name : #BlBorderBuilder,
-	#superclass : #Object,
+	#name : 'BlBorderBuilder',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -22,10 +22,10 @@ Class {
 		'dashOffset',
 		'opacity'
 	],
-	#category : #'Bloc-Basic-Border'
+	#category : 'Bloc-Basic-Border'
 }
 
-{ #category : #builder }
+{ #category : 'builder' }
 BlBorderBuilder >> build [
 	^ BlBorder basicNew
 		initialize;
@@ -36,7 +36,7 @@ BlBorderBuilder >> build [
 		yourself
 ]
 
-{ #category : #builder }
+{ #category : 'builder' }
 BlBorderBuilder >> buildStyle [
 	^ BlStrokeStyle new
 		lineCap: self lineCap;
@@ -46,94 +46,94 @@ BlBorderBuilder >> buildStyle [
 		dashOffset: self dashOffset
 ]
 
-{ #category : #'api - line cap' }
+{ #category : 'api - line cap' }
 BlBorderBuilder >> capButt [
 	self lineCap: BlStrokeLineCap butt
 ]
 
-{ #category : #'api - line cap' }
+{ #category : 'api - line cap' }
 BlBorderBuilder >> capRound [
 	self lineCap: BlStrokeLineCap round
 ]
 
-{ #category : #'api - line cap' }
+{ #category : 'api - line cap' }
 BlBorderBuilder >> capSquare [
 	self lineCap: BlStrokeLineCap square
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> dashArray [
 	^ dashArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> dashArray: anObject [
 	dashArray := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> dashOffset [
 	^ dashOffset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> dashOffset: anObject [
 	dashOffset := anObject
 ]
 
-{ #category : #styles }
+{ #category : 'styles' }
 BlBorderBuilder >> dashed [
 	dashOffset := 0.
 	dashArray := #(6 4.2)
 ]
 
-{ #category : #styles }
+{ #category : 'styles' }
 BlBorderBuilder >> dashedSmall [
 	dashOffset := 0.
 	dashArray := #(3 2)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> defaultDashArray [
 	^ #()
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> defaultDashOffset [
 	^ 0.0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> defaultLineCap [
 	^ BlStrokeLineCap butt
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> defaultLineJoin [
 	^ BlStrokeLineJoin miter
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> defaultMiterLimit [
 	^ 4.0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> defaultOpacity [
 	^ 1.0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> defaultPaint [
 	^ BlPaint transparent 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> defaultWidth [
 	^ 1.0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBorderBuilder >> initialize [
 	super initialize.
 	
@@ -147,77 +147,77 @@ BlBorderBuilder >> initialize [
 	opacity := self defaultOpacity
 ]
 
-{ #category : #styles }
+{ #category : 'styles' }
 BlBorderBuilder >> joinRound [
 	self lineJoin: BlStrokeLineJoin round
 ]
 
-{ #category : #'api - line cap' }
+{ #category : 'api - line cap' }
 BlBorderBuilder >> lineCap [
 	<return: #BlStrokeLineCap>
 
 	^ lineCap
 ]
 
-{ #category : #'api - line cap' }
+{ #category : 'api - line cap' }
 BlBorderBuilder >> lineCap: aBlStrokeLineCap [
 	lineCap := aBlStrokeLineCap
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> lineJoin [
 	<return: #BlStrokeLineJoin>
 
 	^ lineJoin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> lineJoin: aBlStrokeLineJoin [
 	lineJoin := aBlStrokeLineJoin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> miterLimit [
 	^ miterLimit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> miterLimit: anObject [
 	miterLimit := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> opacity [
 	^ opacity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> opacity: anObject [
 	opacity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> paint [
 	^ paint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> paint: anObject [
 	paint := anObject
 ]
 
-{ #category : #styles }
+{ #category : 'styles' }
 BlBorderBuilder >> solid [
 	dashOffset := 0.0.
 	dashArray := #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> width [
 	^ width
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorderBuilder >> width: anObject [
 	width := anObject
 ]

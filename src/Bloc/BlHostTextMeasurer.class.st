@@ -1,15 +1,15 @@
 Class {
-	#name : #BlHostTextMeasurer,
-	#superclass : #Object,
-	#category : #'Bloc-Universe - Renderer'
+	#name : 'BlHostTextMeasurer',
+	#superclass : 'Object',
+	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlHostTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 	self subclassResponsibility
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlHostTextMeasurer >> measureTextSpan: aBlTextSpan [
 	self subclassResponsibility
 ]

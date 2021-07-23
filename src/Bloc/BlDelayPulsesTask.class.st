@@ -17,51 +17,51 @@ Public API and Key Messages
 
 "
 Class {
-	#name : #BlDelayPulsesTask,
-	#superclass : #BlTask,
+	#name : 'BlDelayPulsesTask',
+	#superclass : 'BlTask',
 	#instVars : [
 		'element',
 		'count',
 		'requeue'
 	],
-	#category : #'Bloc-Space - Tasks'
+	#category : 'Bloc-Space - Tasks'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDelayPulsesTask >> count [
 	^ count
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDelayPulsesTask >> count: anObject [
 	count := anObject
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlDelayPulsesTask >> dequeue [
 
 	self element dequeueTask: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDelayPulsesTask >> element [
 	<return: #BlElement>
 
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDelayPulsesTask >> element: aBlElement [
 	element := aBlElement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlDelayPulsesTask >> enqueue [
 
 	self element enqueueTask: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDelayPulsesTask >> initialize [
 	super initialize.
 	
@@ -69,24 +69,24 @@ BlDelayPulsesTask >> initialize [
 	requeue := false.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlDelayPulsesTask >> onEnqueuedInElement: aBlElement [
 	self element: aBlElement
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlDelayPulsesTask >> onRun [
 	"Override me to implement a custom action"
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlDelayPulsesTask >> requeueTaskAfterExecution [
 	"Answer a boolean indicating whether the receiver should be requeued after execution."
 
 	^ requeue
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlDelayPulsesTask >> run [
 
 	"If count is greater than 0, decrement and requeue"
@@ -98,7 +98,7 @@ BlDelayPulsesTask >> run [
 
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlDelayPulsesTask >> start [
 	self
 		assert: [ element isNotNil ]
@@ -111,7 +111,7 @@ BlDelayPulsesTask >> start [
 	self enqueue
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlDelayPulsesTask >> stop [
 	"Stop the task by dequeuing it"
 	self dequeue.

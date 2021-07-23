@@ -1,6 +1,6 @@
-Extension { #name : #Exception }
+Extension { #name : 'Exception' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Exception >> freezeOrWithoutContext [
 	"For classes that aren't resumable, just nil the signalContext, otherwise freeze it"
 

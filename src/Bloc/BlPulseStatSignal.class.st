@@ -32,8 +32,8 @@ If {{gtMethod:BlPulseStatSignal>>#min}} is consistently above about 5ms it sugge
 
 "
 Class {
-	#name : #BlPulseStatSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlPulseStatSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'l2',
 		'min',
@@ -44,10 +44,10 @@ Class {
 	#classVars : [
 		'CurrentSignal'
 	],
-	#category : #'Bloc-Universe'
+	#category : 'Bloc-Universe'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal class >> duration: aDuration delayForced: aBoolean [
 
 	| currentSignal |
@@ -60,7 +60,7 @@ BlPulseStatSignal class >> duration: aDuration delayForced: aBoolean [
 
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlPulseStatSignal class >> fromSton: stonReader [
 
 	| signal |
@@ -78,14 +78,14 @@ BlPulseStatSignal class >> fromSton: stonReader [
 	^signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal class >> sampleCount [
 	"Answer the number of pulse loops that are summarised in each entry"
 
 	^60
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> addSampleDuration: aDuraction delayForced: aBoolean [
 
 	| milliSeconds |
@@ -98,7 +98,7 @@ BlPulseStatSignal >> addSampleDuration: aDuraction delayForced: aBoolean [
 	aBoolean ifTrue: [ lowPriorityDelayCount := lowPriorityDelayCount + 1 ].
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 BlPulseStatSignal >> asDictionary [
 
 	^super asDictionary 
@@ -108,7 +108,7 @@ BlPulseStatSignal >> asDictionary [
 		yourself.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlPulseStatSignal >> initialize [ 
 
 	super initialize.
@@ -119,47 +119,47 @@ BlPulseStatSignal >> initialize [
 	sampleCount := 0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> l2 [
 	^ l2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> l2: anObject [
 	l2 := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> lowPriorityDelayCount [
 	^ lowPriorityDelayCount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> lowPriorityDelayCount: anObject [
 	lowPriorityDelayCount := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> max [
 	^ max
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> max: anObject [
 	max := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> min [
 	^ min
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> min: anObject [
 	min := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlPulseStatSignal >> printOneLineContentsOn: stream [
 
 	stream
@@ -175,12 +175,12 @@ BlPulseStatSignal >> printOneLineContentsOn: stream [
 		print: sampleCount.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> sampleCount [
 	^ sampleCount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPulseStatSignal >> sampleCount: anObject [
 	sampleCount := anObject
 ]

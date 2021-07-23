@@ -15,27 +15,27 @@ When the attachment state of an element is changed from `removed` to `attached` 
 
 "
 Class {
-	#name : #BlSpaceReference,
-	#superclass : #Object,
-	#category : #'Bloc-Space'
+	#name : 'BlSpaceReference',
+	#superclass : 'Object',
+	#category : 'Bloc-Space'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceReference >> isAttachedToSceneGraph [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceReference >> isDetachedFromSceneGraph [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceReference >> isNull [
 	^ false
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlSpaceReference >> spaceDo: aBlock [
 	"Evaluate a given block with a bloc space as an argument"
 	

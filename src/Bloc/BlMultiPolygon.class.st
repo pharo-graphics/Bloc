@@ -1,28 +1,28 @@
 Class {
-	#name : #BlMultiPolygon,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlMultiPolygon',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'polygons'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMultiPolygon class >> polygons: aCollectionOfCollectionOfPoints [
 	^ self new polygons: aCollectionOfCollectionOfPoints
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMultiPolygon >> matchExtent: anExtent [
 	extent := anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiPolygon >> polygons [
 	^ polygons
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiPolygon >> polygons: aCollectionOfPolygons [
 	polygons := aCollectionOfPolygons.
 	

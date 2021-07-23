@@ -5,36 +5,36 @@ Bloc components must not directly rely on system time or hardcode it in any plac
 
 "
 Class {
-	#name : #BlTime,
-	#superclass : #Object,
+	#name : 'BlTime',
+	#superclass : 'Object',
 	#instVars : [
 		'frozenTime',
 		'frozen'
 	],
-	#category : #'Bloc-Universe'
+	#category : 'Bloc-Universe'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTime class >> fastForwarded [
 	^ BlFastForwardedTime new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTime class >> real [
 	^ BlRealTime new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTime class >> simulated [
 	^ BlSimulatedTime new
 ]
 
-{ #category : #'private - time' }
+{ #category : 'private - time' }
 BlTime >> currentTime [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlTime >> every: aDuration during: aLoopDuration do: aDoBlock [
 	| aStartTime |
 	
@@ -46,7 +46,7 @@ BlTime >> every: aDuration during: aLoopDuration do: aDoBlock [
 		do: aDoBlock
 ]
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlTime >> every: aDuration times: aCountOfRepeats do: aDoBlock [
 	"Evaluate a aDoBlock a given amount of times waiting a provided amount of time between executions.
 	The first evaluation of a aDoBlock is instant.
@@ -60,7 +60,7 @@ BlTime >> every: aDuration times: aCountOfRepeats do: aDoBlock [
 		do: aDoBlock
 ]
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlTime >> every: aDuration while: aWhileBlock do: aDoBlock [
 	"Evaluate a aDoBlock while aWhileBlock evaluates to true waiting a given amount of time between executions.
 	The first evaluation of a aDoBlock is instant.
@@ -69,14 +69,14 @@ BlTime >> every: aDuration while: aWhileBlock do: aDoBlock [
 	self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTime >> initialize [
 	super initialize.
 	
 	frozen := false
 ]
 
-{ #category : #'api - time' }
+{ #category : 'api - time' }
 BlTime >> now [
 	"Return a 'current' date and time, it is not necessarily a real one"
 	<return: #DateAndTime>
@@ -86,12 +86,12 @@ BlTime >> now [
 		ifFalse: [ self currentTime ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTime >> printOn: aStream [
 	self now printOn: aStream
 ]
 
-{ #category : #'api - time' }
+{ #category : 'api - time' }
 BlTime >> synchronized: aBlock [
 	"Make this time instance synchronized among all users.
 	During evaluation of aBlock #now will return the same time, independent of
@@ -104,7 +104,7 @@ BlTime >> synchronized: aBlock [
 		frozenTime := nil ]
 ]
 
-{ #category : #'api - time' }
+{ #category : 'api - time' }
 BlTime >> wait: aDuration [
 	"Advance clock by waiting for a given amount of time"
 

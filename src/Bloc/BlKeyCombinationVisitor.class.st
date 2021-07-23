@@ -8,21 +8,21 @@ Example:
 
 "
 Class {
-	#name : #BlKeyCombinationVisitor,
-	#superclass : #Object,
+	#name : 'BlKeyCombinationVisitor',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Events-KeyBinding'
+	#category : 'Bloc-Events-KeyBinding'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationVisitor >> visitAlternative: aBlAlternativeCombination [
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationVisitor >> visitCompulsory: aBlCompulsoryCombination [
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationVisitor >> visitKey: aBlKeyCodeCombination [
 ]

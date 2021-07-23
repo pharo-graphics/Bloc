@@ -1,15 +1,15 @@
 Class {
-	#name : #BrStencilBuilder,
-	#superclass : #Object,
+	#name : 'BrStencilBuilder',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'executor'
 	],
-	#category : #'Bloc-Basic-Stencil'
+	#category : 'Bloc-Basic-Stencil'
 }
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BrStencilBuilder >> asElement [
 	"Build a corresponding stencil and ask it to create and return a new element"
 	<return: #BlElement>
@@ -17,21 +17,21 @@ BrStencilBuilder >> asElement [
 	^ self build asElement
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BrStencilBuilder >> asStencilBuilder [
 	<return: #BrStencilBuilder>
 
 	^ self
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BrStencilBuilder >> asStencilBuilder: aStencilBuilderClass [
 	<return: #BrStencilBuilder>
 
 	^ self
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 BrStencilBuilder >> build [
 	<return: #BrStencil>
 	| anExecutor aResult |
@@ -46,14 +46,14 @@ BrStencilBuilder >> build [
 	^ aResult
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStencilBuilder >> executor: aBrStencilExecutor [
 	self
 		assert: [ aBrStencilExecutor isNotNil ]
@@ -62,24 +62,24 @@ BrStencilBuilder >> executor: aBrStencilExecutor [
 	executor := aBrStencilExecutor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrStencilBuilder >> initialize [
 	super initialize.
 	
 	executor := BrStencilDefaultExecutor new stencil: self
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrStencilBuilder >> paramsOn: aStencilExecutor [
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrStencilBuilder >> reset [
 	"Is called after the #build to de-reference dynamic parameters passed
 	by the called of the build"
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrStencilBuilder >> storeOn: aStream [
 	aStream store: executor.
 	aStream space.

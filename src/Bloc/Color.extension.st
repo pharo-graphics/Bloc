@@ -1,11 +1,11 @@
-Extension { #name : #Color }
+Extension { #name : 'Color' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Color >> asBlBackground [
 	^ BlBackground paint: self
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Color >> asBlPaint [
 	^ BlColorPaint color: self
 ]

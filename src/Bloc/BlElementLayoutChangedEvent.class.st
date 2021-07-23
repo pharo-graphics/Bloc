@@ -13,22 +13,22 @@ element layout: BlBasicLayout new
 
 "
 Class {
-	#name : #BlElementLayoutChangedEvent,
-	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Type-Element'
+	#name : 'BlElementLayoutChangedEvent',
+	#superclass : 'BlElementEvent',
+	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementLayoutChangedEvent class >> enableIn: anObject [
 	anObject enableLayoutChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementLayoutChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsLayoutChanged
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementLayoutChangedEvent >> sendTo: anObject [
 	anObject elementLayoutChangedEvent: self
 ]

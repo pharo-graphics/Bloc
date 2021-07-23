@@ -1,6 +1,6 @@
-Extension { #name : #Cursor }
+Extension { #name : 'Cursor' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Cursor >> isSystemCursor [
 	^ true
 ]

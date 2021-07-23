@@ -46,8 +46,8 @@ Once that has been done, #size should be modified to raise an exception if the a
 
 "
 Class {
-	#name : #BlRopeableCollectionFile,
-	#superclass : #Object,
+	#name : 'BlRopeableCollectionFile',
+	#superclass : 'Object',
 	#instVars : [
 		'fileReference',
 		'strict',
@@ -59,17 +59,17 @@ Class {
 		'bufferedSize',
 		'haveSize'
 	],
-	#category : #'Bloc-DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile class >> defaultBufferSize [
 	"The default number of characters in the receiver's buffer"
 
 	^ 200000
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlRopeableCollectionFile >> = anObject [
 	"Compare the contents of the receiver to anObject.
 	Beware: this will be slow for large files"
@@ -79,7 +79,7 @@ BlRopeableCollectionFile >> = anObject [
 		ifNotNil: [ fileReference contents = anObject ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> approximateSize [ 
 	"Answer the receiver's size, if known.   If not use the file size, which will be either correct or an over-estimate"
 
@@ -90,7 +90,7 @@ BlRopeableCollectionFile >> approximateSize [
 			ifNotNil: [ fileReference size ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> at: anInteger [
 	"Answer the character at anInteger"
 
@@ -98,12 +98,12 @@ BlRopeableCollectionFile >> at: anInteger [
 	^ buffer at: (anInteger - bufferStart + 1) asInteger.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> bufferSize [
 	^ bufferSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> bufferSize: anInteger [
 
 	bufferSize := anInteger.
@@ -112,7 +112,7 @@ BlRopeableCollectionFile >> bufferSize: anInteger [
 	bufferedSize := 0.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRopeableCollectionFile >> characterStream [
 	"Answer a read stream with character decoding on the receiver's binary stream"
 
@@ -121,13 +121,13 @@ BlRopeableCollectionFile >> characterStream [
 		encoding: 'utf8'
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BlRopeableCollectionFile >> close [
 
 	binaryStream close
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlRopeableCollectionFile >> copyFrom: startIndex to: endIndex [
 	| length results receiverIndex bufferIndex resultIndex |
 
@@ -152,7 +152,7 @@ BlRopeableCollectionFile >> copyFrom: startIndex to: endIndex [
 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlRopeableCollectionFile >> copyToEndFrom: startIndex [
 	"Copy the receiver's contents from startIndex to the end.
 	This should be used instead of #copyFrom:to: since the receiver's length may not be known."
@@ -181,7 +181,7 @@ BlRopeableCollectionFile >> copyToEndFrom: startIndex [
 
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlRopeableCollectionFile >> do: aBlock [ 
 	| characterStream ch |
 
@@ -193,7 +193,7 @@ BlRopeableCollectionFile >> do: aBlock [
 		ch ifNotNil: [ aBlock value: ch ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRopeableCollectionFile >> ensureBuffered: anInteger [
 	"Ensure the character at anInteger is buffered"
 	| mapEntry characterStream rawBuffer |
@@ -222,12 +222,12 @@ BlRopeableCollectionFile >> ensureBuffered: anInteger [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> fileReference [
 	^ fileReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> fileReference: aFileReference [
 
 	binaryStream ifNotNil: [ binaryStream close ].
@@ -239,19 +239,19 @@ BlRopeableCollectionFile >> fileReference: aFileReference [
 						binaryStream: binaryStream)
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlRopeableCollectionFile >> hash [ 
 	"Use identity hash to quickly differentiate most objects"
 
 	^ self identityHash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> haveSize [
 	^ haveSize
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRopeableCollectionFile >> initialize [
 
 	super initialize.
@@ -265,7 +265,7 @@ BlRopeableCollectionFile >> initialize [
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRopeableCollectionFile >> loadNext: aNumber with: aReadStream [
 	"Answer the next aNumber characters using aReadstream.
 	If an encoding error occurs and strict is false, fall back to null encoding"
@@ -282,14 +282,14 @@ BlRopeableCollectionFile >> loadNext: aNumber with: aReadStream [
 				self loadNext: aNumber with: self nullEncodedStream ] ]
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlRopeableCollectionFile >> map [
 	"Only used for testing"
 
 	^ map
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRopeableCollectionFile >> mapEntryFor: anInteger [
 	"Answer the map entry with largest character offset less than or equal to anInteger"
 	| left right mid midVal |
@@ -326,7 +326,7 @@ BlRopeableCollectionFile >> mapEntryFor: anInteger [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRopeableCollectionFile >> nullEncodedStream [
 	"Answer a read stream with null (ascii) character decoding on the receiver's binary stream"
 
@@ -335,7 +335,7 @@ BlRopeableCollectionFile >> nullEncodedStream [
 		encoding: 'null'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> size [ 
 	"Answer the receiver's size.
 	If the entire file has not been scanned use the file size, which will be either correct or an over-estimate"
@@ -350,19 +350,19 @@ BlRopeableCollectionFile >> size [
 		ifFalse: [ BlTextIndexEOS new text: self ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRopeableCollectionFile >> species [ 
 	"Answer a class that can be used to create new in-memory ropes"
 
 	^ String
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> strict [
 	^ strict
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFile >> strict: anObject [
 	strict := anObject
 ]

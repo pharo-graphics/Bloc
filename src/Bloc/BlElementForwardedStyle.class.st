@@ -1,42 +1,42 @@
 Class {
-	#name : #BlElementForwardedStyle,
-	#superclass : #BlElementStyle,
+	#name : 'BlElementForwardedStyle',
+	#superclass : 'BlElementStyle',
 	#instVars : [
 		'targetObject'
 	],
-	#category : #'Bloc-Basic-Style'
+	#category : 'Bloc-Basic-Style'
 }
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementForwardedStyle >> applyOnElement: anElement [
 	(targetObject asBlocResolvedElementsFrom: anElement) asCollection
 		do: [ :eachTargetObject | eachTargetObject properties addProperties: self properties ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementForwardedStyle >> asForwarded: aTargetObject [
 	^ self targetObject == aTargetObject
 		ifTrue: [ self ]
 		ifFalse: [ super asForwarded: aTargetObject ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementForwardedStyle >> cleanUpOnElement: anElement [
 	(targetObject asBlocResolvedElementsFrom: anElement) asCollection
 		do: [ :eachTargetObject | eachTargetObject properties removeProperties: self properties ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementForwardedStyle >> isForwarded [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementForwardedStyle >> targetObject [
 	^ targetObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementForwardedStyle >> targetObject: anObjectOrBlock [
 	self
 		assert: [ anObjectOrBlock notNil ]

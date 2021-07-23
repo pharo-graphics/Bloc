@@ -5,25 +5,25 @@ Text containing elements should react on this event and select a corresponding p
 
 "
 Class {
-	#name : #BlElementSelectionAcquiredEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementSelectionAcquiredEvent',
+	#superclass : 'BlElementEvent',
 	#instVars : [
 		'bounds'
 	],
-	#category : #'Bloc-Events-Type-Element'
+	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementSelectionAcquiredEvent class >> enableIn: anObject [
 	anObject enableSelectionAcquired
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementSelectionAcquiredEvent class >> wantedIn: anObject [
 	^ anObject wantsSelectionAcquired
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementSelectionAcquiredEvent >> bounds [
 	"Return intersection between current selection rectangle and target's bounds.
 	Note: for performance reasons we reuse the same bounds object for all events of this type!
@@ -33,12 +33,12 @@ BlElementSelectionAcquiredEvent >> bounds [
 	^ bounds
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementSelectionAcquiredEvent >> bounds: aBlBounds [
 	bounds := aBlBounds
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementSelectionAcquiredEvent >> sendTo: anObject [
 	anObject elementSelectionAcquiredEvent: self
 ]

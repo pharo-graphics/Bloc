@@ -11,8 +11,8 @@ My components are named according to mathematical convention:
 
 "
 Class {
-	#name : #BlMatrix3D,
-	#superclass : #BlMatrix,
+	#name : 'BlMatrix3D',
+	#superclass : 'BlMatrix',
 	#instVars : [
 		'sx',
 		'shy0',
@@ -31,17 +31,17 @@ Class {
 		'z',
 		'w'
 	],
-	#category : #'Bloc-Basic-Math'
+	#category : 'Bloc-Basic-Math'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMatrix3D class >> flushToZero: aFloat [
 	^ (aFloat closeTo: 0.0)
 		ifTrue: [ 0.0 ]
 		ifFalse: [ aFloat ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMatrix3D class >> fromQuaternion: aQuaternion [
 	"Return a new 3D rotation matrix from a given rotation quaternion"
 	<return: #BlMatrix3D>
@@ -50,7 +50,7 @@ BlMatrix3D class >> fromQuaternion: aQuaternion [
 		quaternion: aQuaternion
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMatrix3D class >> rotation: aTheta axis: aVector [
 	"Create a 3D matrix representing a rotation about a given axis vector
 	by aTheta radians"
@@ -60,7 +60,7 @@ BlMatrix3D class >> rotation: aTheta axis: aVector [
 		rotation: aTheta axis: aVector
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMatrix3D >> asMatrixCollection [
 	^ Array2D
 		rows: 4
@@ -73,7 +73,7 @@ BlMatrix3D >> asMatrixCollection [
 		}
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMatrix3D >> initialize [
 	super initialize.
 
@@ -95,7 +95,7 @@ BlMatrix3D >> initialize [
 	w := 1.0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMatrix3D >> is2D [
 	"Return true if matrix is 2D, false otherwise"
 	<return: #Boolean>
@@ -103,7 +103,7 @@ BlMatrix3D >> is2D [
 	^ false
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix3D >> multiplyBy: aMatrix3D [
 	"Multiply me in-place by a given 3D Matrix"
 	| _sx _shx0 _shx1 _x _shy0 _sy _shy1 _y _shz0 _shz1 _sz _z _wx _wy _wz _w |
@@ -149,7 +149,7 @@ BlMatrix3D >> multiplyBy: aMatrix3D [
 	w := _w
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix3D >> perspective: aDepth [
 	"Apply perspective by aDepth which should be positive"
 	
@@ -163,7 +163,7 @@ BlMatrix3D >> perspective: aDepth [
 	wz := wz - (1.0 / aDepth * w)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlMatrix3D >> postScaleX: aX Y: aY Z: aZ [
 	"Apply the scale AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
@@ -186,7 +186,7 @@ BlMatrix3D >> postScaleX: aX Y: aY Z: aZ [
 	z := z * aZ
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlMatrix3D >> postTranslateX: aX Y: aY Z: aZ [
 	"Apply the translation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
@@ -209,7 +209,7 @@ BlMatrix3D >> postTranslateX: aX Y: aY Z: aZ [
 	z := z + (w * aZ)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlMatrix3D >> preScaleX: aX Y: aY Z: aZ [
 	"Apply the scaling BEFORE my existing transformation.
 	Any vector that is multiplied by the resulting matrix will first be scaled,
@@ -231,7 +231,7 @@ BlMatrix3D >> preScaleX: aX Y: aY Z: aZ [
 	wz := wz * aZ
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlMatrix3D >> preTranslateX: aX Y: aY Z: aZ [
 	"Apply the translation BEFORE my existing transformation.
 	Any vector that is multiplied by the resulting matrix will first be translated,
@@ -243,7 +243,7 @@ BlMatrix3D >> preTranslateX: aX Y: aY Z: aZ [
 	w := w + (aX * wx) + (aY * wy) + (aZ * wz)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMatrix3D >> quaternion: aQuaternion [
 	"Set me to be a rotation matrix defined by a given quaternion"
 	| normalized x2 y2 z2 xx xy xz yy yz zz _wx _wy _wz |
@@ -285,7 +285,7 @@ BlMatrix3D >> quaternion: aQuaternion [
 	w := 1.0.
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix3D >> rotateByRadians: aTheta around: aBlVector [
 	"Apply a rotation transformation by a given amount of radians around a provided axis vector"
 	| aRotationMatrix |
@@ -294,7 +294,7 @@ BlMatrix3D >> rotateByRadians: aTheta around: aBlVector [
 	self multiplyBy: aRotationMatrix
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlMatrix3D >> rotateX: aTheta [
 	"Rotate me around X-axis by aTheta degrees in radians"
 	| cosTheta sinTheta temp |
@@ -324,7 +324,7 @@ BlMatrix3D >> rotateX: aTheta [
 	wz := (sinTheta negated * temp) + (cosTheta * wz)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMatrix3D >> rotation: aTheta axis: aVector [
 	"Set me to be a 3D matrix representing a rotation about a given axis vector by aTheta radians"
 	| aNormalizedVector aX aY aZ cosTheta sinTheta sc sq |
@@ -368,52 +368,52 @@ BlMatrix3D >> rotation: aTheta axis: aVector [
 	w := 1.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> shx0 [
 	^ shx0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> shx1 [
 	^ shx1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> shy0 [
 	^ shy0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> shy1 [
 	^ shy1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> shz0 [
 	^ shz0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> shz1 [
 	^ shz1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> sx [
 	^ sx
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> sy [
 	^ sy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> sz [
 	^ sz
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix3D >> transformBounds: aBlBounds [
 	"In-place transform given BlBounds according to my transformation.
 	(local to global transformation)"
@@ -444,7 +444,7 @@ BlMatrix3D >> transformBounds: aBlBounds [
 		bottom: maxY
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix3D >> transformPoint2D: aPoint2D [
 	<return: #BlPoint2D>
 	| aX aY aW |
@@ -458,7 +458,7 @@ BlMatrix3D >> transformPoint2D: aPoint2D [
 		y: aY asFloat / aW
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix3D >> transformPoint3D: aPoint3D [
 	<return: #BlPoint3D>
 	| aX aY aZ aW |
@@ -474,7 +474,7 @@ BlMatrix3D >> transformPoint3D: aPoint3D [
 		z: aZ asFloat / aW
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix3D >> transformPoint4D: aPoint4D [
 	<return: #BlPoint4D>
 	| aX aY aZ aW |
@@ -491,7 +491,7 @@ BlMatrix3D >> transformPoint4D: aPoint4D [
 		w: aW
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix3D >> translateBy: aBlVector [
 	| aTranslate3D |
 	
@@ -503,37 +503,37 @@ BlMatrix3D >> translateBy: aBlVector [
 		Z: aTranslate3D z
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> w [
 	^ w
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> wx [
 	^ wx
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> wy [
 	^ wy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> wz [
 	^ wz
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> x [
 	^ x
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> y [
 	^ y
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrix3D >> z [
 	^ z
 ]

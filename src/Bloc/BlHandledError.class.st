@@ -3,62 +3,62 @@ I represent an error that bloc gracefully handled during some specific frame pha
 
 "
 Class {
-	#name : #BlHandledError,
-	#superclass : #Object,
+	#name : 'BlHandledError',
+	#superclass : 'Object',
 	#instVars : [
 		'error',
 		'errorHandler',
 		'framePhase',
 		'element'
 	],
-	#category : #'Bloc-Basic-Errors'
+	#category : 'Bloc-Basic-Errors'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> debug [
 	self error debug
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> element [
 	<return: #BlElement>
 
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> element: anElement [
 	element := anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> error [
 	^ error
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> error: anError [
 	error := anError
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> errorHandler [
 	^ errorHandler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> errorHandler: anObject [
 	errorHandler := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> framePhase [
 	<return: #BlSpaceFramePhase>
 
 	^ framePhase
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandledError >> framePhase: aSpaceFramePhase [
 	framePhase := aSpaceFramePhase
 ]

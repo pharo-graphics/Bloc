@@ -1,27 +1,27 @@
 Class {
-	#name : #BlClipOutInsetsEffect,
-	#superclass : #BlClipOutEffect,
+	#name : 'BlClipOutInsetsEffect',
+	#superclass : 'BlClipOutEffect',
 	#instVars : [
 		'insets'
 	],
-	#category : #'Bloc-Effect'
+	#category : 'Bloc-Effect'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlClipOutInsetsEffect >> initialize [
 	super initialize.
 	
 	insets := BlInsets empty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlClipOutInsetsEffect >> insets [
 	<return: #BlInsets>
 
 	^ insets
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlClipOutInsetsEffect >> insets: aBlInsets [
 	insets := aBlInsets
 ]

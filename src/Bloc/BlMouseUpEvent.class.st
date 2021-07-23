@@ -1,10 +1,10 @@
 Class {
-	#name : #BlMouseUpEvent,
-	#superclass : #BlMouseEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlMouseUpEvent',
+	#superclass : 'BlMouseEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseUpEvent class >> button: aMouseButton [
 	"Create a sample button up event for a given button for testing purposes"
 	<return: #BlMouseUpEvent>
@@ -16,7 +16,7 @@ BlMouseUpEvent class >> button: aMouseButton [
 		timestamp: DateAndTime now
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseUpEvent class >> middle [
 	"Create a sample middle button up event for testing purposes"
 	<return: #BlMouseUpEvent>
@@ -24,7 +24,7 @@ BlMouseUpEvent class >> middle [
 	^ self button: BlMouseButton middle
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseUpEvent class >> primary [
 	"Create a sample primary button up event for testing purposes"
 	<return: #BlMouseUpEvent>
@@ -32,7 +32,7 @@ BlMouseUpEvent class >> primary [
 	^ self button: BlMouseButton primary
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseUpEvent class >> secondary [
 	"Create a sample secondary button up event for testing purposes"
 	<return: #BlMouseUpEvent>
@@ -40,26 +40,26 @@ BlMouseUpEvent class >> secondary [
 	^ self button: BlMouseButton secondary
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseUpEvent >> asClickEvent [
 	^ BlClickEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseUpEvent >> asDoubleClickEvent [
 	^ BlDoubleClickEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseUpEvent >> isMouseUp [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseUpEvent >> sendTo: anObject [
 	anObject mouseUpEvent: self
 ]

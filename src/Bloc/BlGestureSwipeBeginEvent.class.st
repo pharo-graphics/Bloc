@@ -1,10 +1,10 @@
 Class {
-	#name : #BlGestureSwipeBeginEvent,
-	#superclass : #BlGestureBaseSwipeEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlGestureSwipeBeginEvent',
+	#superclass : 'BlGestureBaseSwipeEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlGestureSwipeBeginEvent >> sendTo: anObject [
 	anObject gestureSwipeBeginEvent: self
 ]

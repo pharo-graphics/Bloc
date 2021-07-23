@@ -4,38 +4,38 @@ I am very useful for chainable bounds transformations and may be transformed in-
 
 "
 Class {
-	#name : #BlBounds,
-	#superclass : #Object,
+	#name : 'BlBounds',
+	#superclass : 'Object',
 	#instVars : [
 		'left',
 		'top',
 		'right',
 		'bottom'
 	],
-	#category : #'Bloc-Basic-Bounds'
+	#category : 'Bloc-Basic-Bounds'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBounds class >> fromRectangle: aRectangle [
 	^ self new
 		rectangle: aRectangle;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom [
 	<return: #BlBounds>
 
 	^ self new left: aLeft top: aTop right: aRight bottom: aBottom
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBounds class >> origin: anOrigin corner: aCorner [
 
 	^ self new origin: anOrigin corner: aCorner
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBounds class >> origin: anOrigin extent: anExtent [	
 	<argument: #anExtent satisfies: #isBlocPositivePoint>
 
@@ -47,7 +47,7 @@ BlBounds class >> origin: anOrigin extent: anExtent [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlBounds >> = aRectangle [
 	"Answer true if the receiver's species, origin and corner match aRectangle's."
 
@@ -58,7 +58,7 @@ BlBounds >> = aRectangle [
 					and: [ left = aRectangle left ] ] ] ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlBounds >> asRectangle [
 	"Convert me to immutable Rectangle.
 	Note, that using left:right:top:bottom: is the fastest way to create
@@ -68,7 +68,7 @@ BlBounds >> asRectangle [
 	^ Rectangle left: left right: right top: top bottom: bottom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> atRandom [
 	"Return a random integer point within this bounds"
 	<return: #Point>
@@ -80,19 +80,19 @@ BlBounds >> atRandom [
 	^ (self topLeft + (aMaxWidth atRandom @ aMaxHeight atRandom)) asIntegerPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> bottom [
 	^ bottom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> bottom: aNumber [
 	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 
 	bottom := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> bottomCenter [
 	"Answer the point at the center of the receiver's bottom horizontal line."
 	<return: #Point>
@@ -100,7 +100,7 @@ BlBounds >> bottomCenter [
 	^ self center x @ self bottom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> bottomLeft [
 	"Answer the point at the left edge of the bottom horizontal line of the receiver."
 	<return: #Point>
@@ -108,7 +108,7 @@ BlBounds >> bottomLeft [
 	^ self origin x @ self corner y
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> bottomRight [
 	"Answer the point at the right edge of the bottom horizontal line of the receiver."
 	<return: #Point>
@@ -116,7 +116,7 @@ BlBounds >> bottomRight [
 	^ self corner
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBounds >> bounds: aBlBounds [
 	self
 		left: aBlBounds left
@@ -125,35 +125,35 @@ BlBounds >> bounds: aBlBounds [
 		bottom: aBlBounds bottom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> center [
 	<return: #Point>
 
 	^ ((left / 2.0) + (right / 2.0)) @ ((top / 2.0) + (bottom / 2.0))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> centerLeft [
 	<return: #Point>
 
 	^ self left @ self center y
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> centerRight [
 	<return: #Point>
 
 	^ self right @ self center y
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlBounds >> clamp: aPoint [
 	<return: #Point>
 
 	^ (aPoint min: self corner) max: self origin
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlBounds >> clockwiseEdges [
 	<return: #Collection of: #BlRay>
 
@@ -165,7 +165,7 @@ BlBounds >> clockwiseEdges [
 	}
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBounds >> closeTo: aBlBounds [
 	"Return true if I am close to the given bounds"
 	<return: #Boolean>
@@ -176,14 +176,14 @@ BlBounds >> closeTo: aBlBounds [
 				and: [ (self bottom closeTo: aBlBounds bottom) ] ] ]
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlBounds >> closestEdgeTo: aPoint [
 	<return: #BlRay>
 
 	^ self counterClockwiseEdges detectMin: [ :aRay | aRay distanceTo: aPoint ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBounds >> containedInRect: aRectangle [
 	"Answer whether a receiver is within a aRectangle"
 	<return: #Boolean>
@@ -200,7 +200,7 @@ BlBounds >> containedInRect: aRectangle [
 				aBottom >= bottom ] ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBounds >> containsPoint: aPoint [ 
 	"Answer whether aPoint is within the receiver."
 	<return: #Boolean>
@@ -208,7 +208,7 @@ BlBounds >> containsPoint: aPoint [
 	^ self origin <= aPoint and: [ aPoint < self corner ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBounds >> containsRect: aRectangle [
 	"Answer whether aRectangle is within the receiver"
 	<return: #Boolean>
@@ -225,12 +225,12 @@ BlBounds >> containsRect: aRectangle [
 				aBottom <= bottom ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> corner [
 	^ right @ bottom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> corners [
 	"Return an array of corner points in the clockwise order starting from top left"
 
@@ -242,7 +242,7 @@ BlBounds >> corners [
 
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlBounds >> counterClockwiseEdges [
 	<return: #Collection of: #BlRay>
 	
@@ -254,7 +254,7 @@ BlBounds >> counterClockwiseEdges [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> encompass [
 	| newLeft newTop newRight newBottom |
 	
@@ -269,7 +269,7 @@ BlBounds >> encompass [
 	bottom := newBottom
 ]
 
-{ #category : #'rectangle functions' }
+{ #category : 'rectangle functions' }
 BlBounds >> encompass: aPoint [ 
 	"Inplace encompass me so that I contain both the receiver and aPoint."
 	
@@ -280,7 +280,7 @@ BlBounds >> encompass: aPoint [
 		bottom: (bottom max: aPoint y)
 ]
 
-{ #category : #'rectangle functions' }
+{ #category : 'rectangle functions' }
 BlBounds >> expandBy: aDelta [ 
 	"Outset me by delta. Delta is a Rectangle, Point, or Number."
 
@@ -293,7 +293,7 @@ BlBounds >> expandBy: aDelta [
 				ifFalse: [ self expandByMargin: aDelta ] ] ]
 ]
 
-{ #category : #'rectangle functions' }
+{ #category : 'rectangle functions' }
 BlBounds >> expandByLeft: aLeft top: aTop right: aRight bottom: aBottom [
 	<argument: #aLeft satisfies: #isBlocFinite>
 	<argument: #aTop satisfies: #isBlocFinite>
@@ -306,7 +306,7 @@ BlBounds >> expandByLeft: aLeft top: aTop right: aRight bottom: aBottom [
 	bottom := bottom + aBottom
 ]
 
-{ #category : #'rectangle functions' }
+{ #category : 'rectangle functions' }
 BlBounds >> expandByMargin: aMargin [ 	
 	self
 		left: left - aMargin left
@@ -315,7 +315,7 @@ BlBounds >> expandByMargin: aMargin [
 		bottom: bottom + aMargin bottom
 ]
 
-{ #category : #'rectangle functions' }
+{ #category : 'rectangle functions' }
 BlBounds >> expandByNumber: aNumber [
 	<argument: #aNumber satisfies: #isBlocFinite>
 		
@@ -325,7 +325,7 @@ BlBounds >> expandByNumber: aNumber [
 	bottom := bottom + aNumber
 ]
 
-{ #category : #'rectangle functions' }
+{ #category : 'rectangle functions' }
 BlBounds >> expandByPoint: aPoint [
 	self
 		left: left - aPoint x
@@ -334,7 +334,7 @@ BlBounds >> expandByPoint: aPoint [
 		bottom: bottom + aPoint y
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> expanded [
 	"Transform me so that origin and corner are rounded to integers.
 	Rounding is done by upper value on origin and lower value on corner so that
@@ -346,13 +346,13 @@ BlBounds >> expanded [
 	bottom := bottom ceiling
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> extent [
 
 	^ (right - left) @ (bottom - top)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBounds >> extent: aPoint [
 	self
 		left: left
@@ -361,17 +361,17 @@ BlBounds >> extent: aPoint [
 		bottom: top + aPoint y
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBounds >> hasPositiveExtent [
 	^ right > left and: [ bottom > top ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> height [
 	^ bottom - top
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBounds >> initialize [
 	super initialize.
 	
@@ -381,7 +381,7 @@ BlBounds >> initialize [
 	bottom := 0.0
 ]
 
-{ #category : #'rectangle functions' }
+{ #category : 'rectangle functions' }
 BlBounds >> intersect: aRectangle ifNone: aBlock [
 	"Answer a Rectangle that is the area in which the receiver overlaps with 
 	aRectangle. 
@@ -408,7 +408,7 @@ BlBounds >> intersect: aRectangle ifNone: aBlock [
 		bottom: newBottom
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBounds >> intersects: aRectangle [ 
 	"Answer whether aRectangle intersects the receiver anywhere"
 	<return: #Boolean>
@@ -426,19 +426,19 @@ BlBounds >> intersects: aRectangle [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> left [
 	^ left
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> left: aNumber [
 	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 
 	left := aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBounds >> left: aLeft top: aTop corner: aCorner [	
 	self
 		left: aLeft
@@ -447,7 +447,7 @@ BlBounds >> left: aLeft top: aTop corner: aCorner [
 		bottom: aCorner y
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBounds >> left: aLeft top: aTop right: aRight bottom: aBottom [
 	<argument: #aLeft satisfies: #isBlocFiniteFloat>
 	<argument: #aTop satisfies: #isBlocFiniteFloat>
@@ -460,7 +460,7 @@ BlBounds >> left: aLeft top: aTop right: aRight bottom: aBottom [
 	bottom := aBottom
 ]
 
-{ #category : #'rectangle functions' }
+{ #category : 'rectangle functions' }
 BlBounds >> merge: aRectangle [ 
 	"Merge provided rectangle into me.
 	aRectangle must not be nil"
@@ -510,12 +510,12 @@ BlBounds >> merge: aRectangle [
 		bottom: maxY
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> origin [
 	^ left @ top
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBounds >> origin: anOrigin corner: aCorner [
 	self
 		left: anOrigin x
@@ -524,7 +524,7 @@ BlBounds >> origin: anOrigin corner: aCorner [
 		bottom: aCorner y
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBounds >> origin: anOrigin extent: anExtent [
 	self
 		left: anOrigin x
@@ -533,7 +533,7 @@ BlBounds >> origin: anOrigin extent: anExtent [
 		bottom: anOrigin y + anExtent y
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlBounds >> outsideNormalCloseTo: aPoint [
 	<return: #BlRay>
 	| anEdge aProjection aNormal |
@@ -545,14 +545,14 @@ BlBounds >> outsideNormalCloseTo: aPoint [
 	^ BlRay from: aProjection directed: aNormal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> position [
 	<return: #Point>
 
 	^ self origin
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlBounds >> printOn: aStream [ 
 	"Refer to the comment in Object|printOn:."
 
@@ -561,7 +561,7 @@ BlBounds >> printOn: aStream [
 	self corner printOn: aStream
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBounds >> rectangle: aRectangle [
 	self
 		left: aRectangle left
@@ -570,19 +570,19 @@ BlBounds >> rectangle: aRectangle [
 		bottom: aRectangle bottom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> right [
 	^ right
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> right: aNumber [
 	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 
 	right := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> rightCenter [
 	"Answer the point at the center of the receiver's right vertical line."
 	<return: #Point>
@@ -590,7 +590,7 @@ BlBounds >> rightCenter [
 	^ self right @ self center y
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 BlBounds >> scaleBy: aFactor [
 	
 	^ aFactor isPoint
@@ -600,7 +600,7 @@ BlBounds >> scaleBy: aFactor [
 			ifFalse: [ self scaleX: aFactor x Y: aFactor y ] ]
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 BlBounds >> scaleX: aX Y: aY [
 	<argument: #aX satisfies: #isBlocFinite>
 	<argument: #aY satisfies: #isBlocFinite>
@@ -611,7 +611,7 @@ BlBounds >> scaleX: aX Y: aY [
 	bottom := bottom * aY
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlBounds >> storeOn: aStream [ 
 	"printed form is good for storing too"
 	
@@ -620,19 +620,19 @@ BlBounds >> storeOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> top [
 	^ top
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> top: aNumber [
 	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 
 	top := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> topCenter [
 	"Answer the point at the center of the receiver's top horizontal line."
 	<return: #Point>
@@ -640,7 +640,7 @@ BlBounds >> topCenter [
 	^ self center x @ self top
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> topLeft [
 	"Answer the point at the top left corner of the receiver's top horizontal line"
 	<return: #Point>
@@ -648,7 +648,7 @@ BlBounds >> topLeft [
 	^ left @ top
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> topRight [
 	"Answer the point at the top right corner of the receiver's top horizontal line."
 	<return: #Point>
@@ -656,13 +656,13 @@ BlBounds >> topRight [
 	^ self corner x @ self origin y
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 BlBounds >> translateBy: aPoint [
 
 	self translateX: aPoint x Y: aPoint y
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 BlBounds >> translateX: aX Y: aY [
 	<argument: #aX satisfies: #isBlocFinite>
 	<argument: #aY satisfies: #isBlocFinite>
@@ -673,7 +673,7 @@ BlBounds >> translateX: aX Y: aY [
 	bottom := bottom + aY
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBounds >> width [
 	^ right - left
 ]

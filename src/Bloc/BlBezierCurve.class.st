@@ -3,20 +3,20 @@ I define a geometry of a bezier curve with N control points (of order N)
 
 "
 Class {
-	#name : #BlBezierCurve,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlBezierCurve',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'controlPoints'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBezierCurve class >> controlPoints: aCollection [
 	^ self new controlPoints: aCollection
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlBezierCurve >> containsPoint: aPoint in: anElement on: aSpartaCanvas [
 	"Note: I am a fallback method to determine if a point lies within a geometry path
 	when geometry is complex and it is mathematically difficult to compute manually"
@@ -30,39 +30,39 @@ BlBezierCurve >> containsPoint: aPoint in: anElement on: aSpartaCanvas [
 		containsPoint: aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBezierCurve >> controlPoints [
 	<return: #SequenceableCollection of: #Point>
 
 	^ controlPoints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBezierCurve >> controlPoints: aCollection [
 	controlPoints := aCollection.
 	self releaseCache
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlBezierCurve >> geometryBounds: aBounds [
 	^ (aBounds rectangle: (self controlPoints
 			ifEmpty: [ 0@0 extent: 0@0 ]
 			ifNotEmpty: [ :theControlPoints | Rectangle encompassing: theControlPoints ]))
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBezierCurve >> initialize [
 	super initialize.
 
 	controlPoints := #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBezierCurve >> matchExtent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBezierCurve >> order [
 	"Return an order of a bezier curve (how many control points it has)
 	(https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Specific_cases)"

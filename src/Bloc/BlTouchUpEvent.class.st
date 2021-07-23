@@ -1,10 +1,10 @@
 Class {
-	#name : #BlTouchUpEvent,
-	#superclass : #BlTouchEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlTouchUpEvent',
+	#superclass : 'BlTouchEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlTouchUpEvent >> sendTo: anObject [
 	anObject touchUpEvent: self
 ]

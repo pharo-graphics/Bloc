@@ -1,6 +1,6 @@
 Class {
-	#name : #BlStrokeStyle,
-	#superclass : #Object,
+	#name : 'BlStrokeStyle',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -10,10 +10,10 @@ Class {
 		'dashArray',
 		'dashOffset'
 	],
-	#category : #'Bloc-Paint-Support'
+	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlStrokeStyle class >> dashed [
 	<gtExample>
 	^ self new
@@ -24,7 +24,7 @@ BlStrokeStyle class >> dashed [
 		dashOffset: 0
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlStrokeStyle class >> default [
 	<gtExample>
 	^ self new
@@ -35,7 +35,7 @@ BlStrokeStyle class >> default [
 		dashOffset: 0
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlStrokeStyle >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -49,37 +49,37 @@ BlStrokeStyle >> = anObject [
 						and: [ lineCap = anObject lineCap and: [ lineJoin = anObject lineJoin ] ] ] ]
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlStrokeStyle >> copyWithLineCap: aLineCap [
 	^ self copy lineCap: aLineCap
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlStrokeStyle >> copyWithLineJoin: aLineJoin [
 	^ self copy lineJoin: aLineJoin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> dashArray [
 	^ dashArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> dashArray: anArray [
 	dashArray := anArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> dashOffset [
 	^ dashOffset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> dashOffset: aNumber [
 	dashOffset := aNumber
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlStrokeStyle >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
@@ -89,32 +89,32 @@ BlStrokeStyle >> hash [
 				bitXor: (dashOffset hash bitXor: (lineCap hash bitXor: lineJoin hash)))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> lineCap [
 	^ lineCap
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> lineCap: aBlStrokeLineCap [
 	lineCap := aBlStrokeLineCap
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> lineJoin [
 	^ lineJoin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> lineJoin: aBlStrokeLineJoin [
 	lineJoin := aBlStrokeLineJoin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> miterLimit [
 	^ miterLimit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeStyle >> miterLimit: aNumber [
 	miterLimit := aNumber
 ]

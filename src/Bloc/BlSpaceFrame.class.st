@@ -16,8 +16,8 @@ The list of default phases is initialized in {{gtMethod:BlSpaceFrame>>#initializ
 
 "
 Class {
-	#name : #BlSpaceFrame,
-	#superclass : #Object,
+	#name : 'BlSpaceFrame',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -25,10 +25,10 @@ Class {
 		'phases',
 		'currentPhaseLink'
 	],
-	#category : #'Bloc-Space - Frame'
+	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlSpaceFrame >> addPhase: aFramePhase [
 	self
 		assert: [ aFramePhase isNotNil ]
@@ -37,12 +37,12 @@ BlSpaceFrame >> addPhase: aFramePhase [
 	self phases add: aFramePhase
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlSpaceFrame >> addPhases: aCollectonOfPhases [
 	aCollectonOfPhases do: [ :aFramePhase | self addPhase: aFramePhase ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrame >> currentPhase [
 	<return: #BlSpaceFramePhase>
 
@@ -53,14 +53,14 @@ BlSpaceFrame >> currentPhase [
 	^ currentPhaseLink value
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceFrame >> hasNextPhase [
 	<return: #Boolean>
 
 	^ currentPhaseLink nextLink isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrame >> id [
 	"Return the frame id, which is a linearly increasing counter of frames"
 	<return: #Number>
@@ -68,12 +68,12 @@ BlSpaceFrame >> id [
 	^ id
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFrame >> incrementFrameId [
 	id := id + 1
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceFrame >> initialize [
 	super initialize.
 	
@@ -83,7 +83,7 @@ BlSpaceFrame >> initialize [
 	currentPhaseLink := phases firstLink
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceFrame >> initializePhases [
 	self addPhases: { 
 		BlSpaceFrameIdlePhase new.
@@ -97,14 +97,14 @@ BlSpaceFrame >> initializePhases [
 		BlSpaceFrameDrawingPhase new }
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceFrame >> isAtFirstPhase [
 	<return: #Boolean>
 	
 	^ currentPhaseLink == phases firstLink
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrame >> nextPhase [
 	"Return the next frame after the current one"
 	<return: #BlSpaceFramePhase>
@@ -112,7 +112,7 @@ BlSpaceFrame >> nextPhase [
 	^ self nextPhaseLink value
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFrame >> nextPhaseLink [
 	"Return the link with a next frame after the current one"
 	<return: #Link>
@@ -122,7 +122,7 @@ BlSpaceFrame >> nextPhaseLink [
 		ifFalse: [ phases firstLink ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrame >> phases [
 	"Return a collection of all phases"
 	<return: #Collection of: #BlSpaceFramePhase>
@@ -130,14 +130,14 @@ BlSpaceFrame >> phases [
 	^ phases
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceFrame >> runCurrentPhaseOn: aSpace [
 	aSpace telemetry
 		timeSync: self currentPhase name
 		during: [ self currentPhase runOn: aSpace ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceFrame >> runOn: aSpace [
 	self incrementFrameId.
 	self runCurrentPhaseOn: aSpace.
@@ -150,7 +150,7 @@ BlSpaceFrame >> runOn: aSpace [
 	self switchToNextPhase
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceFrame >> switchToNextPhase [
 	"Switch to the next phase"
 

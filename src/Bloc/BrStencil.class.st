@@ -35,35 +35,35 @@ anElement := aStencil create.
 
 "
 Class {
-	#name : #BrStencil,
-	#superclass : #Object,
+	#name : 'BrStencil',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Basic-Stencil'
+	#category : 'Bloc-Basic-Stencil'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrStencil class >> asStencil [
 	<return: #BrStencil>
 
 	^ self new
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrStencil >> asElement [
 	<return: #BlElement>
 
 	^ self create asElement
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BrStencil >> asStencil [
 	<return: #BrStencil>
 
 	^ self
 ]
 
-{ #category : #'api - instantiation' }
+{ #category : 'api - instantiation' }
 BrStencil >> create [
 	<return: #Object>
 

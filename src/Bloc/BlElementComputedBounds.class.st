@@ -3,43 +3,43 @@ I am a special type of element bounds with an ability to be in-place converted b
 
 "
 Class {
-	#name : #BlElementComputedBounds,
-	#superclass : #BlElementBounds,
+	#name : 'BlElementComputedBounds',
+	#superclass : 'BlElementBounds',
 	#instVars : [
 		'bounds'
 	],
-	#category : #'Bloc-Basic-Bounds'
+	#category : 'Bloc-Basic-Bounds'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementComputedBounds >> asRectangle [
 	<return: #Rectangle>
 	
 	 ^ self bounds asRectangle
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BlElementComputedBounds >> assertNotOriginal [
 	self
 		assert: [ self referenceElement bounds ~~ self ]
 		description: [ 'Can not modify original reference element bounds' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementComputedBounds >> bounds [
 	<return: #BlBounds>
 
 	^ bounds
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementComputedBounds >> bounds: aBlBounds [
 	<argument: #aBlBounds isKindOf: #BlBounds>
 
 	bounds := aBlBounds
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementComputedBounds >> center [
 	"Return a point representing a geometrical center of this bounds.
 	I am an optimised version that benefits by optimisations of underlying bounds object"
@@ -48,7 +48,7 @@ BlElementComputedBounds >> center [
 	^ self bounds center
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementComputedBounds >> extent [
 	"Return extent of current bounds"
 	<return: #Point>
@@ -56,7 +56,7 @@ BlElementComputedBounds >> extent [
 	^ self bounds extent
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementComputedBounds >> inChild: anElement [
 	<return: #BlElementBounds>
 
@@ -67,12 +67,12 @@ BlElementComputedBounds >> inChild: anElement [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementComputedBounds >> inLocal [
 	^ self
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementComputedBounds >> inParent [
 	self assertNotOriginal.
 	
@@ -87,7 +87,7 @@ BlElementComputedBounds >> inParent [
 	referenceElement := self referenceElement parent
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementComputedBounds >> inParent: anElement [
 	<return: #BlElementBounds>
 	| subParent |
@@ -104,7 +104,7 @@ BlElementComputedBounds >> inParent: anElement [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementComputedBounds >> inSpace [
 	self assertNotOriginal.
 	
@@ -119,7 +119,7 @@ BlElementComputedBounds >> inSpace [
 	referenceElement := self referenceElement topMostParent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementComputedBounds >> position [
 	"Return bounds position (an origin) as a Point"
 	<return: #Point>
@@ -127,7 +127,7 @@ BlElementComputedBounds >> position [
 	^ self bounds origin
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementComputedBounds >> transformed [
 	self assertNotOriginal.
 	

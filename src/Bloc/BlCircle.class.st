@@ -1,20 +1,20 @@
 Class {
-	#name : #BlCircle,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlCircle',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'radius',
 		'origin'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlCircle >> = anObject [
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlCircle >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -25,12 +25,12 @@ BlCircle >> geometryBounds: aBounds [
 		extent: (self radius * 2.0) asPoint
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlCircle >> hash [
 	^ self class hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlCircle >> initialize [
 	super initialize.
 	
@@ -38,7 +38,7 @@ BlCircle >> initialize [
 	origin := 0@0
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlCircle >> matchExtent: anExtent [
 	radius := anExtent min / 2.0.
 	origin := (anExtent - anExtent min asPoint) / 2.0.
@@ -46,12 +46,12 @@ BlCircle >> matchExtent: anExtent [
 	self extent: anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCircle >> origin [
 	^ origin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCircle >> radius [
 	^ radius
 ]

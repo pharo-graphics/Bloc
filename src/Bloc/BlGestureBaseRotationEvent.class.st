@@ -1,18 +1,18 @@
 Class {
-	#name : #BlGestureBaseRotationEvent,
-	#superclass : #BlGestureEvent,
+	#name : 'BlGestureBaseRotationEvent',
+	#superclass : 'BlGestureEvent',
 	#instVars : [
 		'angle'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGestureBaseRotationEvent >> angle [
 	^ angle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGestureBaseRotationEvent >> angle: anObject [
 	angle := anObject
 ]

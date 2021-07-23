@@ -1,10 +1,10 @@
 Class {
-	#name : #BlDropEvent,
-	#superclass : #BlBaseDragEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlDropEvent',
+	#superclass : 'BlBaseDragEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlDropEvent >> sendTo: anObject [
 	anObject dropEvent: self
 ]

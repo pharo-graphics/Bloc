@@ -1,24 +1,24 @@
 Class {
-	#name : #BlNewLayoutNodeDecorationWithElement,
-	#superclass : #BlNewLayoutNodeWrapperDecoration,
-	#type : #variable,
+	#name : 'BlNewLayoutNodeDecorationWithElement',
+	#superclass : 'BlNewLayoutNodeWrapperDecoration',
+	#type : 'variable',
 	#instVars : [
 		'element'
 	],
-	#category : #'Bloc-Layouts-Model-New'
+	#category : 'Bloc-Layouts-Model-New'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNodeDecorationWithElement >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNodeDecorationWithElement >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlNewLayoutNodeDecorationWithElement >> withElement: anElement [
 	^ BlNewLayoutNodeDecorationWithElement new
 		element: anElement;

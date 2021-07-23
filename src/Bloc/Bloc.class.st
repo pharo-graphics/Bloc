@@ -6,8 +6,8 @@ I allow users to:
 
 "
 Class {
-	#name : #Bloc,
-	#superclass : #Object,
+	#name : 'Bloc',
+	#superclass : 'Object',
 	#classVars : [
 		'AssertionsEnabled',
 		'DebugModeEnabled',
@@ -16,106 +16,106 @@ Class {
 		'PreferableHostClass',
 		'PreferableSpartaCanvasBuilder'
 	],
-	#category : #'Bloc-Settings'
+	#category : 'Bloc-Settings'
 }
 
-{ #category : #assertions }
+{ #category : 'assertions' }
 Bloc class >> assertionsEnabled [
 	^ AssertionsEnabled ifNil: [ true ]
 ]
 
-{ #category : #assertions }
+{ #category : 'assertions' }
 Bloc class >> assertionsEnabled: aBoolean [
 	AssertionsEnabled := aBoolean
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 Bloc class >> debugModeEnabled [
 	^ DebugModeEnabled ifNil: [ false ]
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 Bloc class >> debugModeEnabled: aBoolean [
 	DebugModeEnabled := aBoolean
 ]
 
-{ #category : #children }
+{ #category : 'children' }
 Bloc class >> defaultChildrenDataStructure [
 	^ BlChildrenArray
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 Bloc class >> defaultEventHandlerRegistry [
 	^ BlHandlerAnnouncerRegistry
 ]
 
-{ #category : #assertions }
+{ #category : 'assertions' }
 Bloc class >> disableAssertions [
 	self assertionsEnabled: false
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 Bloc class >> disableDebugMode [
 	self debugModeEnabled: false
 ]
 
-{ #category : #assertions }
+{ #category : 'assertions' }
 Bloc class >> enableAssertions [
 	self assertionsEnabled: true
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 Bloc class >> enableDebugMode [
 	self debugModeEnabled: true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 Bloc class >> hasSparta [
 	^ self environment includesKey: #BlSpartaRenderer
 ]
 
-{ #category : #children }
+{ #category : 'children' }
 Bloc class >> preferableChildrenDataStructure [
 	<return: #'BlChildrenCollection class'>
 
 	^ PreferableChildrenDataStructure ifNil: [ self defaultChildrenDataStructure ]
 ]
 
-{ #category : #children }
+{ #category : 'children' }
 Bloc class >> preferableChildrenDataStructure: anChildrenCollectionClass [
 	PreferableChildrenDataStructure := anChildrenCollectionClass
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 Bloc class >> preferableEventHandlerRegistry [
 	<return: #'BlHandlerRegistry class'>
 
 	^ PreferableEventHandlerRegistry ifNil: [ self defaultEventHandlerRegistry ]
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 Bloc class >> preferableEventHandlerRegistry: anEventHandlerRegistryClass [
 	PreferableEventHandlerRegistry := anEventHandlerRegistryClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Bloc class >> preferableHostClass [
 	^ PreferableHostClass ifNil: [ BlHost suitableHostClass ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Bloc class >> preferableHostClass: aHostClass [
 	
 	PreferableHostClass := aHostClass.
 	SettingBrowser allSubInstances do: [ :aSettingsBrowser | aSettingsBrowser treeChanged: Announcement new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Bloc class >> preferableSpartaCanvas [
 	^ PreferableSpartaCanvasBuilder ifNil: [ PreferableSpartaCanvasBuilder := (self environment at: #BlSpartaRenderer) defaultCanvasBuilder class ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Bloc class >> preferableSpartaCanvas: aBuilderClass [
 	PreferableSpartaCanvasBuilder := aBuilderClass.
 	
@@ -123,12 +123,12 @@ Bloc class >> preferableSpartaCanvas: aBuilderClass [
 	(self environment at: #BlSpartaRenderer) defaultCanvasBuilder: aBuilderClass new
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 Bloc class >> preferencesGroup [
 	^ 	#appearance
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 Bloc class >> preferencesOn: aBuilder [
 	<systemsettings>
 	(aBuilder group: #Bloc)

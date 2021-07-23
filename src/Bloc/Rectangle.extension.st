@@ -1,6 +1,6 @@
-Extension { #name : #Rectangle }
+Extension { #name : 'Rectangle' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Rectangle >> asBlocFloatRectangle [
 	^ self origin asFloatPoint corner: self corner asFloatPoint
 ]

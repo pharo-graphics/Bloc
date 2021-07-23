@@ -1,33 +1,33 @@
 Class {
-	#name : #BrStencilDefaultExecutor,
-	#superclass : #BrStencilExecutor,
+	#name : 'BrStencilDefaultExecutor',
+	#superclass : 'BrStencilExecutor',
 	#instVars : [
 		'stencil'
 	],
-	#category : #'Bloc-Basic-Stencil'
+	#category : 'Bloc-Basic-Stencil'
 }
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BrStencilDefaultExecutor >> execute [
 	<return: #BlElement>
 
 	^ self stencil buildDefault
 ]
 
-{ #category : #'api - arguments' }
+{ #category : 'api - arguments' }
 BrStencilDefaultExecutor >> push: anArgumentObject [
 ]
 
-{ #category : #'api - arguments' }
+{ #category : 'api - arguments' }
 BrStencilDefaultExecutor >> resetArguments [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStencilDefaultExecutor >> stencil [
 	^ stencil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStencilDefaultExecutor >> stencil: anObject [
 	stencil := anObject
 ]

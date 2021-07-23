@@ -18,28 +18,28 @@ registry dispatchEvent: BlMouseUpEvent new.
 
 "
 Class {
-	#name : #BlHandlerRegistry,
-	#superclass : #Object,
+	#name : 'BlHandlerRegistry',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Events-Dispatcher'
+	#category : 'Bloc-Events-Dispatcher'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandlerRegistry class >> availableRegistryClasses [
 	<return: #Collection of: #'BlHandlerRegistry class'>
 
 	^ self allSubclasses select: [ :aRegistryClass | aRegistryClass isSupported ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHandlerRegistry class >> isSupported [
 	<return: #Boolean>
 	
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandlerRegistry class >> label [
 	"Return a name of the registry, can be used for Settings frameworks"
 	<return: #String>
@@ -47,7 +47,7 @@ BlHandlerRegistry class >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlHandlerRegistry >> add: aHandler [
 	"Adds a given event handler to the registry.
 	aHandler must not be nil and must not be already registered"
@@ -55,7 +55,7 @@ BlHandlerRegistry >> add: aHandler [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 BlHandlerRegistry >> anySatisfy: aBlock [
 	"Evaluate aBlock with every registered event handler.
 	If aBlock returns true for any element return true.
@@ -66,21 +66,21 @@ BlHandlerRegistry >> anySatisfy: aBlock [
 	^ false
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlHandlerRegistry >> dispatchEvent: anEvent [
 	"Dispatch a given event to all registered handlers that are interested in it"
 
 	self subclassResponsibility
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 BlHandlerRegistry >> do: aBlock [
 	"Evaluate aBlock with each registered handler as the argument"
 
 	self subclassResponsibility
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlHandlerRegistry >> handlers [
 	"Return an immutable collection of all registered event handlers"
 	<return: #Array of: #BlBasicEventHandler>
@@ -88,7 +88,7 @@ BlHandlerRegistry >> handlers [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlHandlerRegistry >> hasHandler: anEventHandler [
 	"Return true if a given event handler is registered, false otherwise"
 	<return: #Boolean>
@@ -96,7 +96,7 @@ BlHandlerRegistry >> hasHandler: anEventHandler [
 	^ self anySatisfy: [ :each | each = anEventHandler ]
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlHandlerRegistry >> isEmpty [
 	"Return true if registry is empty (there are no handlers), false otherwise"
 	<return: #Boolean>
@@ -104,7 +104,7 @@ BlHandlerRegistry >> isEmpty [
 	^ self numberOfHandlers isZero
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 BlHandlerRegistry >> numberOfHandlers [
 	"Return amount of registered event handlers"
 	<return: #Number>
@@ -112,7 +112,7 @@ BlHandlerRegistry >> numberOfHandlers [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlHandlerRegistry >> remove: aHandler [
 	"Remove given event handler from my registry.
 	Provided handler must not be nil and must be registered"
@@ -120,7 +120,7 @@ BlHandlerRegistry >> remove: aHandler [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlHandlerRegistry >> removeAllSuchThat: aBlock [
 	"Remove all event handlers for which aBlock returns true.
 	Return a collection of removed handlers"

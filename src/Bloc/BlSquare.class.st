@@ -1,19 +1,19 @@
 Class {
-	#name : #BlSquare,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlSquare',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'length',
 		'origin'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlSquare >> containsPoint: aPoint in: aBlElement [
 	^ (self geometryBounds: BlBounds new) containsPoint: aPoint
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlSquare >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -24,12 +24,12 @@ BlSquare >> geometryBounds: aBounds [
 		extent: (self length * 2.0) asPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSquare >> length [
 	^ length
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlSquare >> matchExtent: anExtent [
 	length := anExtent min / 2.0.
 	origin := (anExtent - anExtent min asPoint) / 2.0.
@@ -37,7 +37,7 @@ BlSquare >> matchExtent: anExtent [
 	self extent: anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSquare >> origin [
 	^ origin
 ]

@@ -1,13 +1,13 @@
-Extension { #name : #UnixPlatform }
+Extension { #name : 'UnixPlatform' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 UnixPlatform >> blocKeyFor: aKeyValue in: aKeyTable [
 	<return: #BlKeyboardKey>
 
 	^ aKeyTable valueForUnixPlatform: aKeyValue
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 UnixPlatform >> primaryModifier [
 	^ BlAlternativeCombination new
 		key: BlKeyboardKey controlLeft;
@@ -15,7 +15,7 @@ UnixPlatform >> primaryModifier [
 		yourself
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 UnixPlatform >> secondaryModifier [
 	^ BlAlternativeCombination new
 		key: BlKeyboardKey altLeft;

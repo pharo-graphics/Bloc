@@ -1,6 +1,6 @@
-Extension { #name : #KMModifier }
+Extension { #name : 'KMModifier' }
 
-{ #category : #'*Bloc-KeyBinding' }
+{ #category : '*Bloc-KeyBinding' }
 KMModifier >> modifiers [ 
 	^ { self }
 ]

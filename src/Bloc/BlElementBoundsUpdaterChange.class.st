@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementBoundsUpdaterChange,
-	#superclass : #Object,
+	#name : 'BlElementBoundsUpdaterChange',
+	#superclass : 'Object',
 	#instVars : [
 		'element',
 		'previousPosition',
@@ -8,28 +8,28 @@ Class {
 		'previousExtent',
 		'newExtent'
 	],
-	#category : #'Bloc-Basic-Bounds'
+	#category : 'Bloc-Basic-Bounds'
 }
 
-{ #category : #'api - changes' }
+{ #category : 'api - changes' }
 BlElementBoundsUpdaterChange >> changeExtentFrom: aPreviousExtent to: aNewExtent [
 	previousExtent ifNil: [ previousExtent := aPreviousExtent ].
 	newExtent := aNewExtent
 ]
 
-{ #category : #'api - changes' }
+{ #category : 'api - changes' }
 BlElementBoundsUpdaterChange >> changePositionFrom: aPreviousPosition to: aNewPosition [
 	previousPosition ifNil: [ previousPosition := aPreviousPosition ].
 	newPosition := aNewPosition
 ]
 
-{ #category : #'api - changes' }
+{ #category : 'api - changes' }
 BlElementBoundsUpdaterChange >> commitLocalChanges [
 	self commitLocalExtentChange.
 	self commitLocalPositionChange
 ]
 
-{ #category : #'api - changes' }
+{ #category : 'api - changes' }
 BlElementBoundsUpdaterChange >> commitLocalExtentChange [
 	| aPreviousExtent |
 
@@ -46,7 +46,7 @@ BlElementBoundsUpdaterChange >> commitLocalExtentChange [
 		during: [ self element onExtentChanged ]
 ]
 
-{ #category : #'api - changes' }
+{ #category : 'api - changes' }
 BlElementBoundsUpdaterChange >> commitLocalPositionChange [
 	| aPreviousPosition |
 	newPosition
@@ -62,17 +62,17 @@ BlElementBoundsUpdaterChange >> commitLocalPositionChange [
 		during: [ self element onPositionChangedFrom: aPreviousPosition to: newPosition ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #'api - changes' }
+{ #category : 'api - changes' }
 BlElementBoundsUpdaterChange >> isPositionChanged [
 	| aPreviousPosition |
 
@@ -83,42 +83,42 @@ BlElementBoundsUpdaterChange >> isPositionChanged [
 	^ (newPosition closeTo: aPreviousPosition epsilon: BlElement epsilon) not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> newExtent [
 	^ newExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> newExtent: anObject [
 	newExtent := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> newPosition [
 	^ newPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> newPosition: anObject [
 	newPosition := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> previousExtent [
 	^ previousExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> previousExtent: anObject [
 	previousExtent := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> previousPosition [
 	^ previousPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsUpdaterChange >> previousPosition: anObject [
 	previousPosition := anObject
 ]

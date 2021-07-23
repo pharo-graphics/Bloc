@@ -1,5 +1,5 @@
 Class {
-	#name : #BlOverlayAboveEffect,
-	#superclass : #BlOverlayEffect,
-	#category : #'Bloc-Effect'
+	#name : 'BlOverlayAboveEffect',
+	#superclass : 'BlOverlayEffect',
+	#category : 'Bloc-Effect'
 }

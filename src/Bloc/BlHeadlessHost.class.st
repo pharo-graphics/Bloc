@@ -3,33 +3,33 @@ I am a fallback host that is chosen if there are no other available and supporte
 
 "
 Class {
-	#name : #BlHeadlessHost,
-	#superclass : #BlHost,
+	#name : 'BlHeadlessHost',
+	#superclass : 'BlHost',
 	#instVars : [
 		'isRunning'
 	],
 	#classVars : [
 		'PulseLoop'
 	],
-	#category : #'Bloc-Universe - Host Headless'
+	#category : 'Bloc-Universe - Host Headless'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlHeadlessHost class >> initialize [
 	PulseLoop := BlHostPulseLoop forHost: self
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHeadlessHost class >> isRunning [
 	^ PulseLoop isRunning
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHeadlessHost class >> label [
 	^ 'Headless'
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHeadlessHost class >> priority [
 	"Infinite priority means that I am selected only if there are no other available hosts"
 	<return: #Number>
@@ -37,24 +37,24 @@ BlHeadlessHost class >> priority [
 	^ Float infinity
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHeadlessHost class >> start [
 	PulseLoop start
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHeadlessHost class >> stop [
 	PulseLoop stop
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHeadlessHost class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 	
 	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHeadlessHost >> createHostSpaceFor: aSpace [	
 	| aHostSpace |
 	
@@ -67,7 +67,7 @@ BlHeadlessHost >> createHostSpaceFor: aSpace [
 	aSpace hostSpace: aHostSpace
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHeadlessHost >> destroyHostSpaceFor: aSpace [
 	aSpace hostSpace
 		close;
@@ -78,7 +78,7 @@ BlHeadlessHost >> destroyHostSpaceFor: aSpace [
 	aSpace detachHostSpace
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlHeadlessHost >> supportsBufferSurface [
 	<return: #Boolean>
 	

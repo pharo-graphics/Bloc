@@ -1,23 +1,23 @@
 Class {
-	#name : #BlNullTelemetry,
-	#superclass : #BlTelemetry,
+	#name : 'BlNullTelemetry',
+	#superclass : 'BlTelemetry',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Space - Telemetry'
+	#category : 'Bloc-Space - Telemetry'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNullTelemetry class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNullTelemetry class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlNullTelemetry >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -26,11 +26,11 @@ BlNullTelemetry >> = anObject [
 	^ self class = anObject class
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlNullTelemetry >> emit [
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlNullTelemetry >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 

@@ -14,40 +14,40 @@ A shortcut can be added or removed from the element by using {{gtMethod:BlElemen
 
 "
 Class {
-	#name : #BlBasicShortcut,
-	#superclass : #Object,
+	#name : 'BlBasicShortcut',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'combination',
 		'repeatable'
 	],
-	#category : #'Bloc-Events-KeyBinding'
+	#category : 'Bloc-Events-KeyBinding'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlBasicShortcut >> asShortcut [
 	<return: #BlBasicShortcut>
 	
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBasicShortcut >> combination [
 	^ combination
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBasicShortcut >> combination: anObject [
 	combination := anObject
 ]
 
-{ #category : #'api - combination' }
+{ #category : 'api - combination' }
 BlBasicShortcut >> combinationForMacOS [
 	^ self combination
 ]
 
-{ #category : #'api - combination' }
+{ #category : 'api - combination' }
 BlBasicShortcut >> combinationForPlatform [
 	OSPlatform current isMacOS
 		ifTrue: [ ^ self combinationForMacOS ].
@@ -61,34 +61,34 @@ BlBasicShortcut >> combinationForPlatform [
 	^ self combination
 ]
 
-{ #category : #'api - combination' }
+{ #category : 'api - combination' }
 BlBasicShortcut >> combinationForUnix [
 	^ self combination
 ]
 
-{ #category : #'api - combination' }
+{ #category : 'api - combination' }
 BlBasicShortcut >> combinationForWindows [
 	^ self combination
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBasicShortcut >> description [
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBasicShortcut >> initialize [
 	super initialize.
 	
 	repeatable := true
 ]
 
-{ #category : #'key matching' }
+{ #category : 'key matching' }
 BlBasicShortcut >> match: anEventBuffer [
 	^ self combinationForPlatform match: anEventBuffer
 ]
 
-{ #category : #'key matching' }
+{ #category : 'key matching' }
 BlBasicShortcut >> matches: anKeyboardBuffer [
 	| aCombinationInDNF |
 
@@ -96,22 +96,22 @@ BlBasicShortcut >> matches: anKeyboardBuffer [
 	^ aCombinationInDNF matches: anKeyboardBuffer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBasicShortcut >> name [
 	^ self subclassResponsibility
 ]
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 BlBasicShortcut >> performDueTo: aShortcutEvent [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBasicShortcut >> repeatable [
 	^ repeatable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBasicShortcut >> repeatable: aBoolean [
 	repeatable := aBoolean
 ]

@@ -3,17 +3,17 @@ I a special type of rope used to represent a sub rope for the case when rebuildi
 
 "
 Class {
-	#name : #BlSubRope,
-	#superclass : #BlRope,
+	#name : 'BlSubRope',
+	#superclass : 'BlRope',
 	#instVars : [
 		'rope',
 		'offset',
 		'length'
 	],
-	#category : #'Bloc-DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubRope class >> combineScoped: aLeftRope and: aRightRope [
 	^ self
 		rope: aLeftRope rope
@@ -21,14 +21,14 @@ BlSubRope class >> combineScoped: aLeftRope and: aRightRope [
 		length: aLeftRope size + aRightRope size
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubRope class >> rope: aRope offset: anOffset length: aLength [
 	^ self new
 		rope: aRope offset: anOffset length: aLength;
 		yourself
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlSubRope >> at: anIndex [
 	anIndex > length
 		ifTrue: [ self error: 'Sub rope index out of bounds: ', anIndex asString ].
@@ -36,7 +36,7 @@ BlSubRope >> at: anIndex [
 	^ rope at: offset + anIndex
 ]
 
-{ #category : #'rope - attributes' }
+{ #category : 'rope - attributes' }
 BlSubRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	"See BlRope>>#attributes:from:to: for the detailed explanation on start and end indices"
 	<return: #BlRope>
@@ -64,12 +64,12 @@ BlSubRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	^  (self from: 0 to: aStart) append: (anAttributeRope append: (self from: anEnd to: self size))
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlSubRope >> children [
 	^ { rope }
 ]
 
-{ #category : #'rope - attributes' }
+{ #category : 'rope - attributes' }
 BlSubRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	<return: #BlRope>
 	| anClearedRope |
@@ -81,13 +81,13 @@ BlSubRope >> clearAttributes: aStart to: anEnd if: aBlock [
 		ifFalse: [ anClearedRope from: offset to: offset + length ]
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlSubRope >> copyFrom: startIndex to: endIndex [
 
 	^ self from: startIndex-1 to: endIndex
 ]
 
-{ #category : #'rope - deleting' }
+{ #category : 'rope - deleting' }
 BlSubRope >> delete: aStart to: anEnd [
 	<return: #BlRope>
 	| afterDeletion |
@@ -106,14 +106,14 @@ BlSubRope >> delete: aStart to: anEnd [
 		to: offset + length - (anEnd - aStart)
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlSubRope >> depth [
 	<return: #Number>
 
 	^ rope depth
 ]
 
-{ #category : #'rope - enumeration' }
+{ #category : 'rope - enumeration' }
 BlSubRope >> empty [
 	"I delegate creation to the rope which I constrain"
 	<return: #BlRope>
@@ -121,14 +121,14 @@ BlSubRope >> empty [
 	^ self rope empty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSubRope >> end [
 	<return: #Number>
 
 	^ self start + self size
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlSubRope >> from: aStart to: anEnd [
 	<return: #BlRope>
 	self assertAccessFrom: aStart to: anEnd.
@@ -145,12 +145,12 @@ BlSubRope >> from: aStart to: anEnd [
 		length: anEnd - aStart
 ]
 
-{ #category : #'rope - enumeration' }
+{ #category : 'rope - enumeration' }
 BlSubRope >> from: aStart to: anEnd do: aBlock [
 	self rope from: aStart + offset to: anEnd + offset do: aBlock
 ]
 
-{ #category : #'rope - inserting' }
+{ #category : 'rope - inserting' }
 BlSubRope >> insertItems: aCollection at: anIndex [
 	<return: #BlRope>
 	| afterInsertion |
@@ -160,46 +160,46 @@ BlSubRope >> insertItems: aCollection at: anIndex [
 	^ afterInsertion from: offset to: offset + length + aCollection size
 ]
 
-{ #category : #'rope - testing' }
+{ #category : 'rope - testing' }
 BlSubRope >> isLeaf [
 	<return: #Boolean>
 
 	^ false
 ]
 
-{ #category : #'rope - testing' }
+{ #category : 'rope - testing' }
 BlSubRope >> isScoped [
 	<return: #Boolean>
 
 	^ true
 ]
 
-{ #category : #'rope - enumeration' }
+{ #category : 'rope - enumeration' }
 BlSubRope >> iterator: aStart to: anEnd [
 	^ BlSubRopeIterator rope: self from: aStart to: anEnd
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSubRope >> offset [
 	<return: #Number>
 
 	^ offset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSubRope >> readStream [ 
 
 	^ ReadStream on: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSubRope >> rope [
 	<return: #BlRope>
 
 	^ rope
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSubRope >> rope: aRope offset: anOffset length: aLength [
 
 	anOffset < 0
@@ -214,7 +214,7 @@ BlSubRope >> rope: aRope offset: anOffset length: aLength [
 	length := aLength
 ]
 
-{ #category : #'rope - replacing' }
+{ #category : 'rope - replacing' }
 BlSubRope >> simplified [
 	<return: #BlRope>
 
@@ -225,14 +225,14 @@ BlSubRope >> simplified [
 	^ self
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlSubRope >> size [
 	<return: #Number>
 
 	^ length
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSubRope >> start [
 	<return: #Number>
 	

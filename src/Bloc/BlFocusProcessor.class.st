@@ -1,13 +1,13 @@
 Class {
-	#name : #BlFocusProcessor,
-	#superclass : #BlBaseEventProcessor,
+	#name : 'BlFocusProcessor',
+	#superclass : 'BlBaseEventProcessor',
 	#instVars : [
 		'focusChain'
 	],
-	#category : #'Bloc-Space - Events'
+	#category : 'Bloc-Space - Events'
 }
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireBlurEvent: anElement [
 	"Create and send blur event that doesn't bubble, perform simple direct dispatch to the given target element"
 	self
@@ -15,7 +15,7 @@ BlFocusProcessor >> fireBlurEvent: anElement [
 		target: anElement
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireBlurEvent: anElement dueTo: aFocusReason [
 	"Create and send blur event that doesn't bubble, perform simple direct dispatch to the given target element"
 	self
@@ -23,7 +23,7 @@ BlFocusProcessor >> fireBlurEvent: anElement dueTo: aFocusReason [
 		target: anElement
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireFocusEvent: anElement [
 	"Send focus event that doesn't bubble, perform simple direct dispatch to the target"
 	
@@ -32,14 +32,14 @@ BlFocusProcessor >> fireFocusEvent: anElement [
 		target: anElement
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireFocusInEvent: anElement [
 	"Send focusIn event that should bubble"
 
 	self fireEvent: (self newFocusInEvent target: anElement)
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireFocusInEvent: anElement from: aTopEventTarget [
 	"Send focusIn event that should bubble"
 	
@@ -49,28 +49,28 @@ BlFocusProcessor >> fireFocusInEvent: anElement from: aTopEventTarget [
 	self fireEvent: (self newFocusInEvent target: anElement) from: aTopEventTarget
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireFocusOutEvent: anElement [
 	"Send focusOut event that should bubble"
 
 	self fireEvent: (self newFocusOutEvent target: anElement)
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireFocusOutEvent: anElement dueTo: aFocusReason [
 	"Send focusOut event that should bubble"
 
 	self fireEvent: (self newFocusOutEvent target: anElement; reason: aFocusReason)
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireFocusOutEvent: anElement from: aTopEventTarget dueTo: aFocusReason [
 	"Send focusOut event that should bubble"
 
 	self fireEvent: (self newFocusOutEvent target: anElement; reason: aFocusReason) from: aTopEventTarget
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlFocusProcessor >> fireFocusTransferEvent: anElement from: aPreviousFocusedElement [
 	"Send focus event that doesn't bubble, perform simple direct dispatch to the target"
 	self
@@ -80,22 +80,22 @@ BlFocusProcessor >> fireFocusTransferEvent: anElement from: aPreviousFocusedElem
 		target: anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusProcessor >> focusOwner [
 	^ self space focusOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusProcessor >> focusOwner: anElement [
 	self space focusOwner: anElement
 ]
 
-{ #category : #'focus - processing' }
+{ #category : 'focus - processing' }
 BlFocusProcessor >> handleMouseDown: anEvent [
 	"Clicking outside does not mean focus should be lost"
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusProcessor >> hasFocusOwner [
 	"Return true if there is an element holding focus, false otherwise.
 	When there are no elements interested in focus it is given to the root element.
@@ -105,7 +105,7 @@ BlFocusProcessor >> hasFocusOwner [
 	^ self focusOwner notNil
 ]
 
-{ #category : #'focus - requesting' }
+{ #category : 'focus - requesting' }
 BlFocusProcessor >> looseFor: anElement [
 	self
 		deprecated: 'Please use loseFor: instead.'
@@ -116,7 +116,7 @@ BlFocusProcessor >> looseFor: anElement [
 	self loseFor: anElement
 ]
 
-{ #category : #'focus - requesting' }
+{ #category : 'focus - requesting' }
 BlFocusProcessor >> loseFor: anElement [
 	self focusOwner ~= anElement
 		ifTrue: [ ^ self ].
@@ -126,7 +126,7 @@ BlFocusProcessor >> loseFor: anElement [
 	self focusOwner: nil
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusProcessor >> newBlurEvent [
 	"Create, initialize and return a blur event that should be sent to the element
 	that just lost its focus"
@@ -136,7 +136,7 @@ BlFocusProcessor >> newBlurEvent [
 		canBePropagated: false
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusProcessor >> newFocusEvent [
 	"Create, initialize and return a focus event that should be sent to the element
 	after it gets focus"
@@ -146,7 +146,7 @@ BlFocusProcessor >> newFocusEvent [
 		canBePropagated: false
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusProcessor >> newFocusInEvent [
 	"Create, initialize and return a focus-in event that should be sent
 	as a part of focus processing"
@@ -155,7 +155,7 @@ BlFocusProcessor >> newFocusInEvent [
 	^ BlFocusInEvent new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusProcessor >> newFocusOutEvent [
 	"Create, initialize and return a focus-out event that should be sent
 	as a part of blur processing"
@@ -164,7 +164,7 @@ BlFocusProcessor >> newFocusOutEvent [
 	^ BlFocusOutEvent new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusProcessor >> newFocusTransferEvent [
 	"Create, initialize and return a focus transfer event that should be sent to the element
 	before performing a focus transfer"
@@ -173,13 +173,13 @@ BlFocusProcessor >> newFocusTransferEvent [
 	^ BlFocusTransferEvent new
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BlFocusProcessor >> onSpaceClosed [
 	self focusOwner: nil.
 	focusChain := nil
 ]
 
-{ #category : #'focus - processing' }
+{ #category : 'focus - processing' }
 BlFocusProcessor >> processBlur: anElement [
 	self
 		assert: [ self hasFocusOwner ]
@@ -192,7 +192,7 @@ BlFocusProcessor >> processBlur: anElement [
 	self fireBlurEvent: anElement
 ]
 
-{ #category : #'focus - processing' }
+{ #category : 'focus - processing' }
 BlFocusProcessor >> processBlur: anElement dueToFocus: aNewFocusedElement dueTo: aFocusReason [
 	self
 		assert: [ self hasFocusOwner ]
@@ -214,7 +214,7 @@ BlFocusProcessor >> processBlur: anElement dueToFocus: aNewFocusedElement dueTo:
 	self fireBlurEvent: anElement dueTo: aFocusReason
 ]
 
-{ #category : #'focus - processing' }
+{ #category : 'focus - processing' }
 BlFocusProcessor >> processFocus: anElement [
 	self
 		assert: [ anElement isNotNil ]
@@ -233,7 +233,7 @@ BlFocusProcessor >> processFocus: anElement [
 	self fireFocusEvent: anElement
 ]
 
-{ #category : #'focus - processing' }
+{ #category : 'focus - processing' }
 BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 	self
 		assert: [ anElement isNotNil ]
@@ -264,19 +264,19 @@ BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 	self fireFocusEvent: anElement
 ]
 
-{ #category : #'focus - processing' }
+{ #category : 'focus - processing' }
 BlFocusProcessor >> processWindowFocusIn: anEvent [
 
 	self space grabFocus
 ]
 
-{ #category : #'focus - processing' }
+{ #category : 'focus - processing' }
 BlFocusProcessor >> processWindowFocusOut: anEvent [
 
 	self space ungrabFocus
 ]
 
-{ #category : #'focus - requesting' }
+{ #category : 'focus - requesting' }
 BlFocusProcessor >> requestFor: anElement dueTo: aFocusReason [
 	| aPreviousFocusOwner |
 	self

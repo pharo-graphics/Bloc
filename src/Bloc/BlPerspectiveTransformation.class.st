@@ -1,27 +1,27 @@
 Class {
-	#name : #BlPerspectiveTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlPerspectiveTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'depth'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlPerspectiveTransformation class >> depth: aNumber [
 	<return: #BlPerspectiveTransformation>
 
 	^ self new depth: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPerspectiveTransformation >> depth [
 	<return: #Number>
 
 	^ depth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPerspectiveTransformation >> depth: aNumber [
 	self
 		assert: [ aNumber > 0 ]
@@ -30,7 +30,7 @@ BlPerspectiveTransformation >> depth: aNumber [
 	depth := aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPerspectiveTransformation >> is2D [
 	"Return true if transformation happens in x-y plane, hence 2D"
 	<return: #Boolean>
@@ -38,7 +38,7 @@ BlPerspectiveTransformation >> is2D [
 	^ false
 ]
 
-{ #category : #'mathematical functions' }
+{ #category : 'mathematical functions' }
 BlPerspectiveTransformation >> multiplyOn: aBlMatrix [
 	aBlMatrix perspective: self depth
 ]

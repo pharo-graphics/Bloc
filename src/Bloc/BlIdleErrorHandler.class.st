@@ -1,15 +1,15 @@
 Class {
-	#name : #BlIdleErrorHandler,
-	#superclass : #BlSingleErrorHandler,
-	#category : #'Bloc-Basic-Errors'
+	#name : 'BlIdleErrorHandler',
+	#superclass : 'BlSingleErrorHandler',
+	#category : 'Bloc-Basic-Errors'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlIdleErrorHandler >> matches: aFramePhase [
 	^ aFramePhase isIdlePhase
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 BlIdleErrorHandler >> processError: aHandledError [
 	
 ]

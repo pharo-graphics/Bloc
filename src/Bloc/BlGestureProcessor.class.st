@@ -1,10 +1,10 @@
 Class {
-	#name : #BlGestureProcessor,
-	#superclass : #BlBaseEventProcessor,
-	#category : #'Bloc-Space - Events'
+	#name : 'BlGestureProcessor',
+	#superclass : 'BlBaseEventProcessor',
+	#category : 'Bloc-Space - Events'
 }
 
-{ #category : #'api - gestures' }
+{ #category : 'api - gestures' }
 BlGestureProcessor >> handleGesture: aGestureEvent [
 	| aTargetElement |
 
@@ -13,7 +13,7 @@ BlGestureProcessor >> handleGesture: aGestureEvent [
 	self processGesture: aGestureEvent
 ]
 
-{ #category : #'api - gestures' }
+{ #category : 'api - gestures' }
 BlGestureProcessor >> processGesture: aGestureEvent [
 	self fireEvent: aGestureEvent.
 
@@ -21,7 +21,7 @@ BlGestureProcessor >> processGesture: aGestureEvent [
 	self updateCursorFrom: aGestureEvent target
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlGestureProcessor >> processPicking: aTouchEvent [
 	<return: #BlElement>
 	| aTargetElement |
@@ -32,7 +32,7 @@ BlGestureProcessor >> processPicking: aTouchEvent [
 	^ aTargetElement
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlGestureProcessor >> updateCursorFrom: aTarget [
 	| t |
 	t := aTarget.

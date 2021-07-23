@@ -3,39 +3,39 @@ I am a special type of a polyline whose vertices are within [0...1]@[0...1]
 
 "
 Class {
-	#name : #BlNormalizedPolyline,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlNormalizedPolyline',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'vertices'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlNormalizedPolyline class >> vertices: aCollectionOfNormalizedPoints [
 	^ self new vertices: aCollectionOfNormalizedPoints
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlNormalizedPolyline >> initialize [
 	super initialize.
 	
 	vertices := #()
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlNormalizedPolyline >> matchExtent: aPoint [
 	"Resize geometry to exactly match provided extent as a Point"
 
 	extent := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNormalizedPolyline >> vertices [
 	^ vertices
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNormalizedPolyline >> vertices: anObject [
 	vertices := anObject
 ]

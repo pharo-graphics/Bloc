@@ -1,18 +1,18 @@
 Class {
-	#name : #BlMarkElementNeedsPaintSignal,
-	#superclass : #ContextStackSignal,
+	#name : 'BlMarkElementNeedsPaintSignal',
+	#superclass : 'ContextStackSignal',
 	#instVars : [
 		'element'
 	],
-	#category : #'Bloc-Space - Support'
+	#category : 'Bloc-Space - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMarkElementNeedsPaintSignal >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMarkElementNeedsPaintSignal >> element: anObject [
 	element := anObject
 ]

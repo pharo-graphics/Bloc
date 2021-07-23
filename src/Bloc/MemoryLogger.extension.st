@@ -1,6 +1,6 @@
-Extension { #name : #MemoryLogger }
+Extension { #name : 'MemoryLogger' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 MemoryLogger >> asDictionary [
 
 	^Dictionary new
@@ -9,7 +9,7 @@ MemoryLogger >> asDictionary [
 		yourself.
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 MemoryLogger >> basicRecordings: aCollection [
 	"Set the receiver's recordings.
 	This is normally only used when loading saved instances from file"
@@ -17,7 +17,7 @@ MemoryLogger >> basicRecordings: aCollection [
 	recordings := aCollection
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 MemoryLogger class >> fromSton: stonReader [
 
 	| logger |
@@ -31,7 +31,7 @@ MemoryLogger class >> fromSton: stonReader [
 	^logger
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 MemoryLogger class >> fromStonFile: aFileReference [
 
 	| logger |
@@ -43,7 +43,7 @@ MemoryLogger class >> fromStonFile: aFileReference [
 	^logger
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 MemoryLogger >> saveStonFile: aFileReference [
 	"Save the receiver to the supplied file name"
 
@@ -57,7 +57,7 @@ MemoryLogger >> saveStonFile: aFileReference [
 
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 MemoryLogger >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |

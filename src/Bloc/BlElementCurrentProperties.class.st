@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementCurrentProperties,
-	#superclass : #BlElementProperties,
+	#name : 'BlElementCurrentProperties',
+	#superclass : 'BlElementProperties',
 	#traits : 'TBlElementProperties',
 	#classTraits : 'TBlElementProperties classTrait',
 	#instVars : [
@@ -9,10 +9,10 @@ Class {
 		'isDirty',
 		'resolvedProperties'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementCurrentProperties >> addProperties: aCollectionOfElementProperties [
 	| anythingChanged |
 	
@@ -22,18 +22,18 @@ BlElementCurrentProperties >> addProperties: aCollectionOfElementProperties [
 		ifTrue: [ self onPropertiesChanged ]
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementCurrentProperties >> addProperty: aBlElementProperty [
 	(self basicAddProperty: aBlElementProperty)
 		ifTrue: [ self onPropertiesChanged ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementCurrentProperties >> asArray [
 	^ properties asArray
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementCurrentProperties >> basicAddProperty: aBlElementProperty [
 	"Return true if properties changed, false otherwise"
 	<return: #Boolean>
@@ -57,7 +57,7 @@ BlElementCurrentProperties >> basicAddProperty: aBlElementProperty [
 	^ true
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementCurrentProperties >> basicRemoveProperty: aBlElementProperty [
 	"We do not actually remove a property, we simply mark it as to be removed.
 	This will later give a property a chance to clean up the element"
@@ -72,23 +72,23 @@ BlElementCurrentProperties >> basicRemoveProperty: aBlElementProperty [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCurrentProperties >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCurrentProperties >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementCurrentProperties >> flushPropertiesToRemove [
 	properties := properties reject: [ :eachPropertyWithStatus | eachPropertyWithStatus isToBeRemoved ].
 	self maybeResolvedProperties flushPropertiesToRemove
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementCurrentProperties >> initialize [
 	super initialize.
 	
@@ -97,54 +97,54 @@ BlElementCurrentProperties >> initialize [
 	isDirty := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCurrentProperties >> markClean [
 	isDirty := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCurrentProperties >> markDirty [
 	isDirty := true.
 	resolvedProperties := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCurrentProperties >> maybeResolvedProperties [
 	^ resolvedProperties ifNil: [ BlElementUnresolvedProperties new ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementCurrentProperties >> needsPropertiesComputation [
 	<return: #Boolean>
 
 	^ resolvedProperties isNil
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementCurrentProperties >> onPropertiesChanged [
 	self element requestPropertiesComputation
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlElementCurrentProperties >> postCopy [
 	properties := properties copy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCurrentProperties >> properties [
 	<return: #Dictionary>
 
 	^ properties collect: [ :eachPropertyWithStatus |  eachPropertyWithStatus property ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementCurrentProperties >> propertiesWithoutStatusAsArray [
 	^ Array streamContents: [ :aStream |
 		properties valuesDo: [ :eachPropertyWithStatus |
 			aStream nextPut: eachPropertyWithStatus property ] ]
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementCurrentProperties >> removeProperties: aCollectionOfElementProperties [	
 	| anythingChanged |
 	
@@ -154,13 +154,13 @@ BlElementCurrentProperties >> removeProperties: aCollectionOfElementProperties [
 		ifTrue: [ self onPropertiesChanged ]
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementCurrentProperties >> removeProperty: aBlElementProperty [
 	(self basicRemoveProperty: aBlElementProperty)
 		ifTrue: [ self onPropertiesChanged ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCurrentProperties >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
 	| theResolvedPropertiesWithStatus |
 

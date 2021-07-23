@@ -1,25 +1,25 @@
 Class {
-	#name : #BlStaticCursor,
-	#superclass : #BlCursor,
+	#name : 'BlStaticCursor',
+	#superclass : 'BlCursor',
 	#instVars : [
 		'image'
 	],
-	#category : #'Bloc-Space - Cursor'
+	#category : 'Bloc-Space - Cursor'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlStaticCursor >> asForm [
 	^ self image
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStaticCursor >> image [
 	<return: #Form>
 
 	^ image
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStaticCursor >> image: aForm [
 	image := aForm
 ]

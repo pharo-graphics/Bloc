@@ -1,6 +1,6 @@
-Extension { #name : #StringSignal }
+Extension { #name : 'StringSignal' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 StringSignal >> asDictionary [ 
 
 	^ super asDictionary
@@ -8,7 +8,7 @@ StringSignal >> asDictionary [
 		yourself.
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 StringSignal class >> fromStonDictionary: aDictionary [
 
 	^(super fromStonDictionary: aDictionary)

@@ -3,17 +3,17 @@ A stadium is a geometric figure consisting of a rectangle with top and bottom le
 
 "
 Class {
-	#name : #BlStadium,
-	#superclass : #BlElementVectorGeometry,
-	#category : #'Bloc-Basic'
+	#name : 'BlStadium',
+	#superclass : 'BlElementVectorGeometry',
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlStadium >> matchExtent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlStadium >> radius [
 	"Compute the radius of the semicircles"
 	

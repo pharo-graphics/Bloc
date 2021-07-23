@@ -11,20 +11,20 @@ BlPolygon vertices: {
 
 "
 Class {
-	#name : #BlPolygon,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlPolygon',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'vertices'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlPolygon class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlPolygon >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -35,19 +35,19 @@ BlPolygon >> geometryBounds: aBounds [
 		corner: self vertices max
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlPolygon >> matchExtent: anExtent [
 	extent := anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPolygon >> vertices [
 	<return: #SequenceableCollection of: #Point>
 
 	^ vertices
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPolygon >> vertices: aCollectionOfPoints [
 	| theNewVertices |
 	theNewVertices := aCollectionOfPoints collect: [ :eachPoint | eachPoint asFloatPoint ].

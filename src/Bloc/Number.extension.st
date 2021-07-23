@@ -1,18 +1,18 @@
-Extension { #name : #Number }
+Extension { #name : 'Number' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> , aNumber [
 	<return: #BlVector>
 
 	^ BlVector2D x: self y: aNumber
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> asBlocVector [
 	^ BlVector x: self y: self
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> asScale3D [
 	"Return a 3D vector representing a scale factor"
 	<return: #BlVector3D>
@@ -20,7 +20,7 @@ Number >> asScale3D [
 	^ BlVector x: self y: self z: 1
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> asTranslate3D [
 	"Return a 3D vector representing a translation vector"
 	<return: #BlVector3D>
@@ -28,34 +28,34 @@ Number >> asTranslate3D [
 	^ BlVector x: self y: self z: 0
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> closeTo: num epsilon: anEpsilon [
 	"are these two numbers close?"
 
 	^ (self - num) abs <= anEpsilon
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> isBlocFinite [
 	^ self isInfinite not and: [ self isNaN not ]
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> isBlocFiniteFloat [
 	^ self isFloat and: [ self isInfinite not and: [ self isNaN not ] ]
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> isBlocPositive [
 	^ self >= 0.0
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> isBlocPositiveFloat [
 	^ self isFloat and: [ self >= 0.0 ]
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> scalarMultiplicate2D: aVector2D [
 	"Perform a scalar multiplication of a given 2D vector by me"
 	<return: #BlVector>
@@ -65,7 +65,7 @@ Number >> scalarMultiplicate2D: aVector2D [
 		y: aVector2D y * self
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> scalarMultiplicate3D: aVector3D [
 	"Perform a scalar multiplication of a given 3D vector by me"
 	<return: #BlVector>
@@ -76,7 +76,7 @@ Number >> scalarMultiplicate3D: aVector3D [
 		z: aVector3D z * self
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Number >> timesCollect: aBlock [
 	^ (1 to: self) collect: [ :anIndex | aBlock cull: anIndex ]
 ]

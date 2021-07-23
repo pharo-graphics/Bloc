@@ -1,64 +1,64 @@
 Class {
-	#name : #BrStencilValuableExecutor,
-	#superclass : #BrStencilExecutor,
+	#name : 'BrStencilValuableExecutor',
+	#superclass : 'BrStencilExecutor',
 	#instVars : [
 		'valuable',
 		'arguments'
 	],
-	#category : #'Bloc-Basic-Stencil'
+	#category : 'Bloc-Basic-Stencil'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BrStencilValuableExecutor class >> from: aValuable [
 	<return: #BrStencilValuableExecutor>
 
 	^ self new valuable: aValuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStencilValuableExecutor >> arguments [
 	<return: #Collection of: #Object>
 
 	^ arguments
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BrStencilValuableExecutor >> execute [
 	<return: #BlElement>
 
 	^ self valuable glamourValueWithArgs: self arguments
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BrStencilValuableExecutor >> initialize [
 	super initialize.
 	
 	arguments := LinkedList new
 ]
 
-{ #category : #'api - arguments' }
+{ #category : 'api - arguments' }
 BrStencilValuableExecutor >> push: anArgumentObject [
 	arguments add: anArgumentObject
 ]
 
-{ #category : #'api - arguments' }
+{ #category : 'api - arguments' }
 BrStencilValuableExecutor >> resetArguments [
 	arguments removeAll
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BrStencilValuableExecutor >> storeOn: aStream [
 	valuable isBlock
 		ifTrue: [ aStream nextPutAll: valuable asString ]
 		ifFalse: [ aStream nextPutAll: '[  ]' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStencilValuableExecutor >> valuable [
 	^ valuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BrStencilValuableExecutor >> valuable: anObject [
 	valuable := anObject
 ]

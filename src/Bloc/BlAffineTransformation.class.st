@@ -6,17 +6,17 @@ https://en.wikipedia.org/wiki/Affine_transformation
 
 "
 Class {
-	#name : #BlAffineTransformation,
-	#superclass : #Object,
+	#name : 'BlAffineTransformation',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'origin'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlAffineTransformation >> asMatrix [
 	<return: #BlMatrix>
 	| aMatrix |
@@ -29,19 +29,19 @@ BlAffineTransformation >> asMatrix [
 	^ aMatrix
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlAffineTransformation >> do: aBlock [
 	aBlock value: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlAffineTransformation >> initialize [
 	super initialize.
 	
 	origin := BlAffineTransformationCenterOrigin new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineTransformation >> is2D [
 	"Return true if transformation happens in x-y plane, hence 2D"
 	<return: #Boolean>
@@ -49,7 +49,7 @@ BlAffineTransformation >> is2D [
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineTransformation >> is3D [
 	"Return true if transformation happens in x-y-z plane, hence 3D"
 	<return: #Boolean>
@@ -57,7 +57,7 @@ BlAffineTransformation >> is3D [
 	^ self is2D not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineTransformation >> isIdentity [
 	"Return true if thiss transformation is identity"
 	<return: #Boolean>
@@ -65,7 +65,7 @@ BlAffineTransformation >> isIdentity [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineTransformation >> isTranslation [
 	"Return true if this transformation is translation"
 	<return: #Boolean>
@@ -73,12 +73,12 @@ BlAffineTransformation >> isTranslation [
 	^ false
 ]
 
-{ #category : #'mathematical functions' }
+{ #category : 'mathematical functions' }
 BlAffineTransformation >> multiplyOn: aBlMatrix [
 	self subclassResponsibility
 ]
 
-{ #category : #'mathematical functions' }
+{ #category : 'mathematical functions' }
 BlAffineTransformation >> multiplyOn: aBlMatrix in: aBlElement [
 	| anOriginPoint aVector |
 
@@ -90,14 +90,14 @@ BlAffineTransformation >> multiplyOn: aBlMatrix in: aBlElement [
 	aBlMatrix translateBy: aVector
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformation >> origin [
 	<return: #BlAffineTransformationOrigin>
 
 	^ origin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformation >> origin: aBlAffineTransformationOrigin [
 	origin := aBlAffineTransformationOrigin
 ]

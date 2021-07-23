@@ -4,25 +4,25 @@ Null space reference {{gtClass:BlSpaceReference}} is set when an element is `rem
 
 "
 Class {
-	#name : #BlNullSpaceReference,
-	#superclass : #BlSpaceReference,
+	#name : 'BlNullSpaceReference',
+	#superclass : 'BlSpaceReference',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Space'
+	#category : 'Bloc-Space'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlNullSpaceReference class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNullSpaceReference class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlNullSpaceReference >> isNull [
 	^ true
 ]

@@ -6,61 +6,61 @@ See BlTextIndexEOS.
 
 "
 Class {
-	#name : #BlTextIndex,
-	#superclass : #Magnitude,
-	#category : #'Bloc-DataStructure - Rope'
+	#name : 'BlTextIndex',
+	#superclass : 'Magnitude',
+	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextIndex >> < aNumber [ 
 
 	^ self index < aNumber
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextIndex >> = anObject [
 
 	^ self index = anObject
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlTextIndex >> adaptToInteger: anInteger andCompare: aSymbol [
 
 	^ anInteger perform: aSymbol with: self index
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlTextIndex >> adaptToNumber: aNumber andSend: aSymbol [
 
 	^ aNumber perform: aSymbol with: self index
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlTextIndex >> asInteger [ 
 
 	^ self index
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextIndex >> between: min and: max [ 
 
 	^ self index between: min and: max
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextIndex >> hash [ 
 
 	^ self index hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextIndex >> index [
 	"Answer the receiver's index as a Number"
 
 	self subclassResponsibility 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextIndex >> isNumber [
 	"Answer true so that an expression such as:
 	aSmallInteger = aBlCollectionRope size
@@ -69,19 +69,19 @@ BlTextIndex >> isNumber [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextIndex >> isTextIndex [
 
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextIndex >> isZero [
 
 	^ self index isZero
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextIndex >> max: aMagnitude [
 
 	^ self index > aMagnitude
@@ -89,7 +89,7 @@ BlTextIndex >> max: aMagnitude [
 		ifFalse: [^aMagnitude]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextIndex >> min: aMagnitude [ 
 
 	^ self index < aMagnitude

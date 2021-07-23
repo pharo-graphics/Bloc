@@ -3,20 +3,20 @@ I am a composite transformation that consists of other element transformations, 
 
 "
 Class {
-	#name : #BlElementCompositeTransformation,
-	#superclass : #BlElementDynamicTransformation,
+	#name : 'BlElementCompositeTransformation',
+	#superclass : 'BlElementDynamicTransformation',
 	#instVars : [
 		'transformations'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlElementCompositeTransformation >> add: anElementTransformation [
 	self transformations add: anElementTransformation
 ]
 
-{ #category : #computation }
+{ #category : 'computation' }
 BlElementCompositeTransformation >> computeMatrix: aBlMatrix in: aRectangle [
 	self transformations
 		"when composing transformations we should perform left multiplication.
@@ -24,14 +24,14 @@ BlElementCompositeTransformation >> computeMatrix: aBlMatrix in: aRectangle [
 		reverseDo: [ :anElementTransformation | anElementTransformation computeMatrix: aBlMatrix in: aRectangle ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementCompositeTransformation >> initialize [
 	super initialize.
 	
 	transformations := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementCompositeTransformation >> is2D [
 	"Return true if my current transformation is in 2D space, false otherwise"
 	<return: #Boolean>
@@ -39,14 +39,14 @@ BlElementCompositeTransformation >> is2D [
 	^ self transformations allSatisfy: #is2D
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementCompositeTransformation >> is3D [
 	<return: #Boolean>
 	
 	^ self transformations anySatisfy: #is3D
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementCompositeTransformation >> isIdentity [
 	"Return true if I represent an identity transformation, false otherwise"
 	<return: #Boolean>
@@ -54,7 +54,7 @@ BlElementCompositeTransformation >> isIdentity [
 	^ self transformations allSatisfy: #isIdentity
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementCompositeTransformation >> isPureTranslation [
 	"Return true if I represent an pure translation, false otherwise"
 	<return: #Boolean>
@@ -62,7 +62,7 @@ BlElementCompositeTransformation >> isPureTranslation [
 	^ self transformations allSatisfy: #isPureTranslation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCompositeTransformation >> transformations [
 	<return: #Collection of: #BlElementTransformation>
 

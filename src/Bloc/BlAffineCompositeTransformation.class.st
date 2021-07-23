@@ -1,71 +1,71 @@
 Class {
-	#name : #BlAffineCompositeTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlAffineCompositeTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'transformations'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlAffineCompositeTransformation >> addTransformation: aBlAffineTransformation [
 	"There can be only one transformation instance per type"
 
 	self transformations add: aBlAffineTransformation
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlAffineCompositeTransformation >> do: aBlock [
 	transformations do: [ :aTransfromation | aTransfromation do: aBlock ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineCompositeTransformation >> hasTransformations [
 	<return: #Boolean>
 
 	^ self transformations isNotEmpty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlAffineCompositeTransformation >> initialize [
 	super initialize.
 	
 	transformations := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineCompositeTransformation >> is2D [
 	^ self transformations allSatisfy: #is2D
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineCompositeTransformation >> isIdentity [
 	^ self hasTransformations not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineCompositeTransformation >> isTranslation [
 	<return: #Boolean>
 
 	^ self transformations allSatisfy: #isTranslation
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineCompositeTransformation >> multiplyOn: aBlMatrix [
 	self transformations do: [ :aTransformation | aTransformation multiplyOn: aBlMatrix ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAffineCompositeTransformation >> multiplyOn: aBlMatrix in: aBlElement [
 	self transformations do: [ :aTransformation | aTransformation multiplyOn: aBlMatrix in: aBlElement ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlAffineCompositeTransformation >> printOn: aStream [
 	aStream nextPutAll: 'Composition'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineCompositeTransformation >> transformations [
 	<return: #Collection of: #BlAffineTransformation>
 	

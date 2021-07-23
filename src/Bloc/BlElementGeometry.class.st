@@ -1,12 +1,12 @@
 Class {
-	#name : #BlElementGeometry,
-	#superclass : #Object,
+	#name : 'BlElementGeometry',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementGeometry >> asElement [
 	"Create an appropriate element with me as its geometry.
 	By default create an instance of the basic BlElement simply setting its
@@ -20,7 +20,7 @@ BlElementGeometry >> asElement [
 		geometry: self
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlElementGeometry >> containsPoint: aPoint in: aBlElement [
 	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
 	as as border during the testing process"
@@ -29,7 +29,7 @@ BlElementGeometry >> containsPoint: aPoint in: aBlElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlElementGeometry >> geometryBounds: aBounds of: aBlElement [
 	"Load my geometry bounds for a given element in a mutable rectangle.
 	@see #geometryBounds for more info"
@@ -38,29 +38,29 @@ BlElementGeometry >> geometryBounds: aBounds of: aBlElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"
 
 	self subclassResponsibility
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlElementGeometry >> releaseCache [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlElementGeometry >> releaseStrokedBoundsCache [
 	self subclassResponsibility
 ]
 
-{ #category : #serialization }
+{ #category : 'serialization' }
 BlElementGeometry >> storeOn: aStream [
 	aStream nextPutAll: self class name; space; nextPutAll: 'new'
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlElementGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
 	Dispatch through outskirts first"

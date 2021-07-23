@@ -1,6 +1,6 @@
-Extension { #name : #BlockClosure }
+Extension { #name : 'BlockClosure' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 BlockClosure >> asBlocResolvedElementsFrom: anElement [
 	self argumentCount isZero
 		ifTrue: [ ^ self value ].
@@ -8,4 +8,9 @@ BlockClosure >> asBlocResolvedElementsFrom: anElement [
 	^ Array streamContents: [ :aStream |
 		self value: [ :eachElement |
 			aStream nextPut: eachElement ] ]
+]
+
+{ #category : '*Bloc' }
+BlockClosure >> blocDefiningMethod [
+	^ self asContext blocDefiningMethod
 ]

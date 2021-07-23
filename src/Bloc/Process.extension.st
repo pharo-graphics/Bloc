@@ -1,6 +1,6 @@
-Extension { #name : #Process }
+Extension { #name : 'Process' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Process >> isBlocPulseLoopProcess [
 	"Verify if this process is representing a pulsing loop. A pusling loop is 
 	reponsible with running pluses in a universe. This does not mean that this 

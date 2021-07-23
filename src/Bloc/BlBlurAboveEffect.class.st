@@ -1,5 +1,5 @@
 Class {
-	#name : #BlBlurAboveEffect,
-	#superclass : #BlBlurEffect,
-	#category : #'Bloc-Effect'
+	#name : 'BlBlurAboveEffect',
+	#superclass : 'BlBlurEffect',
+	#category : 'Bloc-Effect'
 }

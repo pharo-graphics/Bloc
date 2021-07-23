@@ -12,24 +12,24 @@ element transform
 
 "
 Class {
-	#name : #BlTransformationBuilder,
-	#superclass : #Object,
+	#name : 'BlTransformationBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'transformation',
 		'origin',
 		'target'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTransformationBuilder class >> on: anObject [
 	<return: #BlTransformationBuilder>
 
 	^ self new target: anObject
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> apply [
 	"Replace element's transformation chain with our new one that we just have built"
 	| anElementTransformation |
@@ -38,12 +38,12 @@ BlTransformationBuilder >> apply [
 	target transformation: anElementTransformation
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> centerOrigin [
 	self origin: BlAffineTransformationCenterOrigin new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTransformationBuilder >> element [
 	self 
 		deprecated: 'Use target instead'
@@ -52,7 +52,7 @@ BlTransformationBuilder >> element [
 	^ self target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTransformationBuilder >> element: anObject [ 
 	self 
 		deprecated: 'Use target: instead'
@@ -61,17 +61,17 @@ BlTransformationBuilder >> element: anObject [
 	^ self target: anObject
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> flipX [
 	transformation addTransformation: (BlReflectionTransformation vertical origin: origin)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> flipY [
 	transformation addTransformation: (BlReflectionTransformation horizontal origin: origin)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> inherit [
 	"Append existing element's transformations to the new transformation list"
 	
@@ -79,7 +79,7 @@ BlTransformationBuilder >> inherit [
 		do: [ :aTransformation | transformation addTransformation: aTransformation ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTransformationBuilder >> initialize [
 	super initialize.
 	
@@ -87,18 +87,18 @@ BlTransformationBuilder >> initialize [
 	origin := BlAffineTransformationCenterOrigin new
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> matrix: aMatrix [
 	"Note: matrix transformation is not influenced by origin (it is always top left corner or 0@0)"
 	transformation addTransformation: ((BlMatrixTransformation matrix: aMatrix) origin: BlAffineTransformationTopLeftOrigin new)
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> normalizedOrigin: aPoint [
 	origin := BlAffineTransformationNormalizedPositionOrigin position: aPoint
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> origin: anAffineTransformationOrigin [
 	"Change transformation origin for all future transformations.
 	Note: I do not change origins of already exisiting transformations"
@@ -106,22 +106,22 @@ BlTransformationBuilder >> origin: anAffineTransformationOrigin [
 	origin := anAffineTransformationOrigin
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> rightCenterOrigin [
 	self origin: BlAffineTransformationRightCenterOrigin new
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> rotateBy: aDegreesAngle [
 	transformation addTransformation: (BlRotationTransformation new angle: aDegreesAngle; axis: BlVector zAxis; origin: origin)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> rotateBy: aDegreesAngle around: aVector [
 	transformation addTransformation: (BlRotationTransformation new angle: aDegreesAngle; axis: aVector; origin: origin)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> scaleBy: aVector [
 	| aScaleVector |
 	"Append a scaling transformation by a given vector"
@@ -133,7 +133,7 @@ BlTransformationBuilder >> scaleBy: aVector [
 	transformation addTransformation: ((BlScalingTransformation scale: aScaleVector) origin: origin)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> scaleTo: aVector [
 	"Replace all existing scaling transformation with a single one
 	that takes place of the very first scaling transformation.
@@ -151,22 +151,22 @@ BlTransformationBuilder >> scaleTo: aVector [
 	
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> shearBy: aCoefficientPoint [
 	transformation addTransformation: ((BlShearTransformation new coefficient: aCoefficientPoint) origin: origin)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> skewX: anAngleInDegrees [
 	transformation addTransformation: ((BlShearTransformation new angleX: anAngleInDegrees) origin: origin)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> skewY: anAngleInDegrees [
 	transformation addTransformation: ((BlShearTransformation new angleY: anAngleInDegrees) origin: origin)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTransformationBuilder >> target [
 	"Return a target object whose transformation we build"
 	<return: #Object>
@@ -174,17 +174,17 @@ BlTransformationBuilder >> target [
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTransformationBuilder >> target: anObject [
 	target := anObject
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> topLeftOrigin [
 	self origin: BlAffineTransformationTopLeftOrigin new
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> translateBy: aVector [
 	"Append a translation transformation by a given vector"
 	| aTranslationVector |

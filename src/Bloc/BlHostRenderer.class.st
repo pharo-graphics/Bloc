@@ -3,8 +3,8 @@ Host renderer is resposible for the overall rendering logic
 
 "
 Class {
-	#name : #BlHostRenderer,
-	#superclass : #Object,
+	#name : 'BlHostRenderer',
+	#superclass : 'Object',
 	#instVars : [
 		'session',
 		'surface',
@@ -12,17 +12,17 @@ Class {
 		'spaceRenderer',
 		'textMeasurer'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlHostRenderer class >> forHostSpace: aHostSpace [
 	^ self basicNew
 		initialize;
 		initializeForHostSpace: aHostSpace
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlHostRenderer >> finishedRender: aSpace [
 	"Perform neccessary actions after rendering is complete.
 	By default I clear dirty areas of a given space"
@@ -30,7 +30,7 @@ BlHostRenderer >> finishedRender: aSpace [
 	aSpace clearDirtyAreas
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRenderer >> hasResized: aHostSpace [
 	"Return true if host space resized since previous frame, otherwise false"
 	<return: #Boolean>
@@ -44,7 +44,7 @@ BlHostRenderer >> hasResized: aHostSpace [
 		or: [ aHostSpace scaleFactor ~= surface scaleFactor ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
 	Please note, that it I be called multiple times"
@@ -52,7 +52,7 @@ BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 	self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRenderer >> isRenderNeeded: aSpace [
 	"Return true if I need to render a given space.
 	By default I check if there are any dirty areas, if there are none - no need to render"
@@ -61,7 +61,7 @@ BlHostRenderer >> isRenderNeeded: aSpace [
 	^ aSpace dirtyAreas notEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRenderer >> isValid [
 	<return: #Boolean>
 
@@ -77,12 +77,12 @@ BlHostRenderer >> isValid [
 	^ true
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlHostRenderer >> measureTextParagraph: aBlTextParagraph [
 	textMeasurer measureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlHostRenderer >> render: aHostSpace [
 	"Render a given space according to its dirty areas.
 	Note: if there are no dirty areas nothing will happen, including window or canvas update"

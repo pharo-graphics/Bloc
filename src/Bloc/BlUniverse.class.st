@@ -13,8 +13,8 @@ universe start.
 
 "
 Class {
-	#name : #BlUniverse,
-	#superclass : #Object,
+	#name : 'BlUniverse',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -30,20 +30,20 @@ Class {
 		'Default',
 		'Session'
 	],
-	#category : #'Bloc-Universe'
+	#category : 'Bloc-Universe'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse class >> default [
 	^ Default ifNil: [ Default := self new ]
 ]
 
-{ #category : #'deferred message' }
+{ #category : 'deferred message' }
 BlUniverse class >> defer: aBlock [
 	self default defer: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse class >> reset [
 	Default ifNotNil: [
 		[
@@ -57,20 +57,20 @@ BlUniverse class >> reset [
 	Default := nil
 ]
 
-{ #category : #'pulse managing' }
+{ #category : 'pulse managing' }
 BlUniverse >> addPulseListener: anObject [
 	pulseListeners add: anObject.
 	announcer subscribe: BlPulseEvent send: #pulse to: anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlUniverse >> allSpacesDo: aBlock [
 	"Evaluate a block with every space managed by space manager as argument"
 
 	self spaceManager spaces do: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> animationManager [
 	self 
 		deprecated: 'Use BlElement>>#addAnimation:'
@@ -80,11 +80,11 @@ BlUniverse >> animationManager [
 	^ nil
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BlUniverse >> assertStopped [
 ]
 
-{ #category : #'window managing' }
+{ #category : 'window managing' }
 BlUniverse >> closeSpaceWindow: aSpace [
 
 	self
@@ -120,12 +120,12 @@ BlUniverse >> closeSpaceWindow: aSpace [
 		ifFalse: [ self stop ]
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BlUniverse >> defaultPulseLoop [
 	^ BlHostPulseLoop forHost: self
 ]
 
-{ #category : #'deferred actions' }
+{ #category : 'deferred actions' }
 BlUniverse >> defer: aValuable [
 	"#defer: can be used from any thread to execute a valuable in the GUI thread
 	You can use it to update the GUI states from any other thread.
@@ -136,7 +136,7 @@ BlUniverse >> defer: aValuable [
 		ifTrue: [ self requestNextPulse ]
 ]
 
-{ #category : #'pulse managing' }
+{ #category : 'pulse managing' }
 BlUniverse >> firePulse: aPulseEvent [
 	nextPulseRequested := false.
 	announcer announce: aPulseEvent.
@@ -144,12 +144,12 @@ BlUniverse >> firePulse: aPulseEvent [
 	self tryToRunDeferredActions.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> host [
 	^ host ifNil: [ BlHost pickHost ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> host: aBlHost [
 
 	self
@@ -163,7 +163,7 @@ BlUniverse >> host: aBlHost [
 	host := aBlHost
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BlUniverse >> initialize [
 	super initialize.
 	announcer := Announcer new.
@@ -174,7 +174,7 @@ BlUniverse >> initialize [
 	spaceManager := BlSpaceManager new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlUniverse >> isRunning [
 	"Return true if I am running, false otherwise"
 	<return: #Boolean>
@@ -182,27 +182,27 @@ BlUniverse >> isRunning [
 	^ pulseLoop isNotNil and: [ pulseLoop isRunning ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlUniverse >> isUIProcess [
 	^ self pulseLoop isRunningInTheSameProcess
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlUniverse >> isUIProcess: aProcess [
 	^ aProcess = self pulseLoop loopProcess
 ]
 
-{ #category : #'pulse managing' }
+{ #category : 'pulse managing' }
 BlUniverse >> mainLoopPriority [
 	^ 40
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> preferableHost [
 	^ host
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> preferableHost: aBlHost [
 
 	self
@@ -216,23 +216,23 @@ BlUniverse >> preferableHost: aBlHost [
 	host := aBlHost
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> pulseLoop [
 	<return: #BlHostPulseLoop>
 	^ pulseLoop
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> pulseLoop: anObject [
 	pulseLoop := anObject
 ]
 
-{ #category : #'pulse managing' }
+{ #category : 'pulse managing' }
 BlUniverse >> pulseRequested [
 	^ nextPulseRequested
 ]
 
-{ #category : #'pulse managing' }
+{ #category : 'pulse managing' }
 BlUniverse >> removePulseListener: anObject [
 	pulseListeners remove: anObject.
 	announcer unsubscribe: anObject.
@@ -240,7 +240,7 @@ BlUniverse >> removePulseListener: anObject [
 		ifTrue: [ self stop ]
 ]
 
-{ #category : #'pulse managing' }
+{ #category : 'pulse managing' }
 BlUniverse >> requestNextPulse [
 	"Request next universe pulse You may want to request next pulse if you develop bloc extention
 	and rely on BlPulseEvent to execute some action on universe/space pulse.
@@ -258,7 +258,7 @@ BlUniverse >> requestNextPulse [
 	nextPulseRequested := true
 ]
 
-{ #category : #'window managing' }
+{ #category : 'window managing' }
 BlUniverse >> showSpaceWindow: aSpace [
 	| shouldStartTheUniverse |
 	self
@@ -302,19 +302,19 @@ BlUniverse >> showSpaceWindow: aSpace [
 	self requestNextPulse.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> spaceManager [
 	^ spaceManager
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> start [
 	self pulseLoop start.
 	self allSpacesDo: [ :aSpace | aSpace host isRunning ifFalse: [ aSpace host start ] ].
 	self requestNextPulse
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlUniverse >> stop [
 
 	pulseListeners do: [ :each | each clear ].
@@ -324,7 +324,7 @@ BlUniverse >> stop [
 		ensure: [ self allSpacesDo: [ :aSpace | aSpace host isRunning ifTrue: [ aSpace host stop ] ] ]
 ]
 
-{ #category : #'pulse managing' }
+{ #category : 'pulse managing' }
 BlUniverse >> tryToRunDeferredActions [
 	| nextInQueue |
 	[ self pulseLoop timeIsUp not and: [ (nextInQueue := deferredActions nextOrNil) isNotNil ] ]
@@ -332,7 +332,7 @@ BlUniverse >> tryToRunDeferredActions [
 	deferredActions isEmpty ifFalse: [ self requestNextPulse ]
 ]
 
-{ #category : #'deferred actions' }
+{ #category : 'deferred actions' }
 BlUniverse >> undefer: aValuable [
 	"I remove previously deferred valuable from deferred actions queue if any
 	and return true if aValuable existed, false otherwise.

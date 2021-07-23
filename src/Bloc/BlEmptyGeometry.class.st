@@ -1,10 +1,10 @@
 Class {
-	#name : #BlEmptyGeometry,
-	#superclass : #BlElementGeometry,
-	#category : #'Bloc-Basic'
+	#name : 'BlEmptyGeometry',
+	#superclass : 'BlElementGeometry',
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlEmptyGeometry >> containsPoint: aPoint in: aBlElement [
 	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
 	as as border during the testing process"
@@ -13,7 +13,7 @@ BlEmptyGeometry >> containsPoint: aPoint in: aBlElement [
 	^ false
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlEmptyGeometry >> geometryBounds: aBlBounds of: aBlElement [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -26,20 +26,20 @@ BlEmptyGeometry >> geometryBounds: aBlBounds of: aBlElement [
 		bottom: aBlElement height
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlEmptyGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlEmptyGeometry >> releaseCache [
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlEmptyGeometry >> releaseStrokedBoundsCache [
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlEmptyGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
 	Dispatch through outskirts first"

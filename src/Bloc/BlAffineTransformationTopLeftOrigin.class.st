@@ -3,12 +3,12 @@ I am a relative transformation origin which is attached to the top left of an el
 
 "
 Class {
-	#name : #BlAffineTransformationTopLeftOrigin,
-	#superclass : #BlAffineTransformationOrigin,
-	#category : #'Bloc-Basic-Transformations'
+	#name : 'BlAffineTransformationTopLeftOrigin',
+	#superclass : 'BlAffineTransformationOrigin',
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationTopLeftOrigin >> originIn: anElement [
 	"@see Method comment BlAffineTransformationOrigin>>#originIn:"
 	<return: #Point or: #BlPoint3D>

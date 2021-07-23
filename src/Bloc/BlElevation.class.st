@@ -8,29 +8,29 @@ Note: Elevation is not influenced by transformation matrix!
 
 "
 Class {
-	#name : #BlElevation,
-	#superclass : #Object,
+	#name : 'BlElevation',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'elevation'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlElevation class >> elevation: aNumber [
 	^ self new elevation: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElevation >> elevation [
 	<return: #Number>
 
 	^ elevation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElevation >> elevation: aNumber [
 	self
 		assert: [ elevation isNil ]
@@ -39,7 +39,7 @@ BlElevation >> elevation: aNumber [
 	elevation := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElevation >> relatedTo: aNumber [
 	"Compute and return a resulting elevation related to the elevation represented as a number"
 	<return: #Number>

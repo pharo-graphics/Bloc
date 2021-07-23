@@ -1,20 +1,20 @@
 Class {
-	#name : #BlSpaceFrameIdlePhase,
-	#superclass : #BlSpaceFramePhase,
-	#category : #'Bloc-Space - Frame'
+	#name : 'BlSpaceFrameIdlePhase',
+	#superclass : 'BlSpaceFramePhase',
+	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceFrameIdlePhase >> isIdlePhase [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameIdlePhase >> name [
 	^ 'Idle'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameIdlePhase >> runOn: aSpace [
 	
 ]

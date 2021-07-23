@@ -3,16 +3,16 @@ The geometry is used to define the geometry to be drawn and the interaction area
 
 "
 Class {
-	#name : #BlElementVectorGeometry,
-	#superclass : #BlElementGeometry,
+	#name : 'BlElementVectorGeometry',
+	#superclass : 'BlElementGeometry',
 	#instVars : [
 		'extent',
 		'pathCache'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlElementVectorGeometry >> containsPoint: aPoint in: aBlElement [
 	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
 	as as border during the testing process"
@@ -24,7 +24,7 @@ BlElementVectorGeometry >> containsPoint: aPoint in: aBlElement [
 		on: Bloc preferableSpartaCanvas offscreen
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlElementVectorGeometry >> containsPoint: aPoint in: anElement on: aSpartaCanvas [
 	"Note: I am a fallback method to determine if a point lies within a geometry path
 	when geometry is complex and it is mathematically difficult to compute manually"
@@ -37,12 +37,12 @@ BlElementVectorGeometry >> containsPoint: aPoint in: anElement on: aSpartaCanvas
 		containsPoint: aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementVectorGeometry >> extent [
 	^ extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementVectorGeometry >> extent: aPoint [
 	"The argument has to be a Point of numbers (integer or float).
 	Do not try to provide a fraction as x or y of the point!
@@ -54,7 +54,7 @@ BlElementVectorGeometry >> extent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlElementVectorGeometry >> geometryBounds [
 	"Return my pure geometry bounds (fill bounds).
 	This property is different from #visualBounds in the sense that I don't take stroke into account.
@@ -64,7 +64,7 @@ BlElementVectorGeometry >> geometryBounds [
 	^ (self geometryBounds: BlBounds new) asRectangle
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlElementVectorGeometry >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -75,7 +75,7 @@ BlElementVectorGeometry >> geometryBounds: aBounds [
 		extent: self extent
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlElementVectorGeometry >> geometryBounds: aBounds of: aBlElement [
 	"Load my geometry bounds for a given element in a mutable rectangle.
 	@see #geometryBounds for more info"
@@ -84,7 +84,7 @@ BlElementVectorGeometry >> geometryBounds: aBounds of: aBlElement [
 	^ self geometryBounds: aBounds
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementVectorGeometry >> initialize [
 	super initialize.
 	
@@ -92,37 +92,37 @@ BlElementVectorGeometry >> initialize [
 	pathCache := BlPathCache on: self
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementVectorGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"
 
 	self matchExtent: anElement extent
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementVectorGeometry >> matchExtent: aPoint [
 	"Resize geometry to exactly match provided extent as a Point"
 
 	self subclassResponsibility
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlElementVectorGeometry >> postCopy [
 	pathCache := BlPathCache on: self.
 	self releaseCache
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlElementVectorGeometry >> releaseCache [
 	pathCache releaseCache
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlElementVectorGeometry >> releaseStrokedBoundsCache [
 	pathCache releaseStrokedBoundsCache
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlElementVectorGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
 	Dispatch through outskirts first"
@@ -131,7 +131,7 @@ BlElementVectorGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	^ aBlBounds rectangle: (pathCache strokedBounds: aBlBounds of: anElement on: aCanvas)
 ]
 
-{ #category : #'private - bounds' }
+{ #category : 'private - bounds' }
 BlElementVectorGeometry >> strokedBoundsCentered: aBlBounds of: anElement on: aCanvas [
 	| spartaPath strokeOptions strokedBounds |
 
@@ -145,7 +145,7 @@ BlElementVectorGeometry >> strokedBoundsCentered: aBlBounds of: anElement on: aC
 	^ aBlBounds rectangle: strokedBounds
 ]
 
-{ #category : #'private - bounds' }
+{ #category : 'private - bounds' }
 BlElementVectorGeometry >> strokedBoundsInside: aBlBounds of: anElement on: aCanvas [
 	"Stroked inside bounds property is equal to geometry bounds"
 	<return: #BlBounds>
@@ -153,7 +153,7 @@ BlElementVectorGeometry >> strokedBoundsInside: aBlBounds of: anElement on: aCan
 	^ self geometryBounds: aBlBounds
 ]
 
-{ #category : #'private - bounds' }
+{ #category : 'private - bounds' }
 BlElementVectorGeometry >> strokedBoundsOutside: aBlBounds of: anElement on: aCanvas [
 	| spartaPath strokeOptions strokedBounds |
 

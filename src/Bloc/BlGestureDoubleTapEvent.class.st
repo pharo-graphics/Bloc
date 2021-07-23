@@ -7,7 +7,7 @@ Purposes/real world use cases:
 
 "
 Class {
-	#name : #BlGestureDoubleTapEvent,
-	#superclass : #BlGestureEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlGestureDoubleTapEvent',
+	#superclass : 'BlGestureEvent',
+	#category : 'Bloc-Events'
 }

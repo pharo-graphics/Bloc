@@ -1,25 +1,25 @@
 Class {
-	#name : #BlGestureScrollEvent,
-	#superclass : #BlGestureBaseScrollEvent,
+	#name : 'BlGestureScrollEvent',
+	#superclass : 'BlGestureBaseScrollEvent',
 	#instVars : [
 		'vector'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlGestureScrollEvent >> sendTo: anObject [
 	anObject gestureScrollEvent: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGestureScrollEvent >> vector [
 	<return: #BlVector>
 
 	^ vector
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGestureScrollEvent >> vector: aBlVector [
 	vector := aBlVector
 ]

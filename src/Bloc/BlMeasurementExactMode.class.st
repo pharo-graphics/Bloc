@@ -4,17 +4,17 @@ For more information see class comment of BlMeasurementMode
 
 "
 Class {
-	#name : #BlMeasurementExactMode,
-	#superclass : #BlMeasurementMode,
-	#category : #'Bloc-Layouts-Support'
+	#name : 'BlMeasurementExactMode',
+	#superclass : 'BlMeasurementMode',
+	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementExactMode >> isExact [
 	^ true
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementExactMode >> measurement: aResizing with: aNumber [
 	<argument: #aNumber satisfies: #isFloat>
 	<return: #BlMeasurementSpec>
@@ -22,12 +22,12 @@ BlMeasurementExactMode >> measurement: aResizing with: aNumber [
 	^ aResizing measurementExactlyWith: aNumber
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMeasurementExactMode >> printOn: aStream [
 	aStream nextPutAll: 'Exact'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMeasurementExactMode >> printOn: aStream size: aNumber [
 
 	self printOn: aStream.	
@@ -35,7 +35,7 @@ BlMeasurementExactMode >> printOn: aStream size: aNumber [
 	aStream nextPutAll: aNumber asString
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementExactMode >> size: aNumber min: aMinSize max: aMaxSize [
 	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 	<argument: #aMinSize satisfies: #isBlocFiniteFloat>
@@ -45,7 +45,7 @@ BlMeasurementExactMode >> size: aNumber min: aMinSize max: aMaxSize [
 	^ BlMeasurementSpec exact: (aNumber min: aMaxSize max: aMinSize)
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementExactMode >> size: aNumber with: aSpecSize [
 	<argument: #aNumber satisfies: #isBlocFiniteFloat>
 	<return: #Number>

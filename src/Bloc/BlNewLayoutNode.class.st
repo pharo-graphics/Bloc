@@ -1,7 +1,7 @@
 Class {
-	#name : #BlNewLayoutNode,
-	#superclass : #Object,
-	#type : #variable,
+	#name : 'BlNewLayoutNode',
+	#superclass : 'Object',
+	#type : 'variable',
 	#traits : 'TBlNewLayoutNodeWithConstraints + TBlNewLayoutCompositeNode + TBlNewLayoutNode',
 	#classTraits : 'TBlNewLayoutNodeWithConstraints classTrait + TBlNewLayoutCompositeNode classTrait + TBlNewLayoutNode classTrait',
 	#instVars : [
@@ -14,43 +14,43 @@ Class {
 		'actions',
 		'extentSpec'
 	],
-	#category : #'Bloc-Layouts-Model-New'
+	#category : 'Bloc-Layouts-Model-New'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> children [
 	<return: #Collection of: #BlLayoutNode>
 
 	^ children
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> children: aCollectionOfChildNodes [
 	children := aCollectionOfChildNodes as: BlLayoutNodeChildren.
 	children do: [ :eachChild | eachChild parent: self parent ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> childrenDo: aBlock [
 	self children do: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> constraints [
 	^ constraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> constraints: aBlLayoutConstraints [
 	constraints := aBlLayoutConstraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> decoration [
 	^ decoration
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlNewLayoutNode >> extent [
 	"Return the size of the node in the parent coordinate system"
 	<return: #Point>
@@ -58,19 +58,19 @@ BlNewLayoutNode >> extent [
 	^ decoration getExtentOf: self
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 BlNewLayoutNode >> extentSpec [
 	<return: #BlExtentMeasurementSpec>
 
 	^ extentSpec
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 BlNewLayoutNode >> extentSpec: aBlExtentMeasurementSpec [
 	extentSpec := aBlExtentMeasurementSpec
 ]
 
-{ #category : #ui }
+{ #category : 'ui' }
 BlNewLayoutNode >> gtChildrenFor: aView [
 	<gtView>
 	
@@ -81,7 +81,7 @@ BlNewLayoutNode >> gtChildrenFor: aView [
 		view: #gtChildrenFor:
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlNewLayoutNode >> initialize [
 	super initialize.
 	
@@ -90,36 +90,36 @@ BlNewLayoutNode >> initialize [
 	userData := nil
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlNewLayoutNode >> layoutBounds [
 	<return: #BlBounds>
 
 	^ decoration getLayoutBoundsOf: self
 ]
 
-{ #category : #'api - measure' }
+{ #category : 'api - measure' }
 BlNewLayoutNode >> measure: anExtentSpecOrBlock [
 	decoration measure: anExtentSpecOrBlock of: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> measurement: aBlLayoutNodeMeasurement [
 	measurement := aBlLayoutNodeMeasurement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> parent [
 	<return: #BlLayoutParentNode>
 
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> parent: aBlLayoutParentNode [
 	parent := aBlLayoutParentNode
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlNewLayoutNode >> position [
 	"Return a position of the top left corner in the parent coordinate system"
 	<return: #Point>
@@ -127,14 +127,14 @@ BlNewLayoutNode >> position [
 	^ decoration getPositionOf: self
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlNewLayoutNode >> position: aPoint [
 	"Set position of the top left corner in the parent coordinate system"
 	
 	decoration setPosition: aPoint of: self
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlNewLayoutNode >> privateExtent [
 	"Return the size of the node in the parent coordinate system"
 	<return: #Point>
@@ -142,24 +142,24 @@ BlNewLayoutNode >> privateExtent [
 	^ measurement position
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlNewLayoutNode >> privateMeasure: anExtentSpecOrBlock [
 	measurement := measurement measure: self with: anExtentSpecOrBlock
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlNewLayoutNode >> privateMeasurement [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ measurement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlNewLayoutNode >> privateMeasurement: aBlLayoutNodeMeasurement [	
 	measurement := aBlLayoutNodeMeasurement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlNewLayoutNode >> privatePosition [
 	"Return a position of the top left corner in the parent coordinate system"
 	<return: #Point>
@@ -167,26 +167,26 @@ BlNewLayoutNode >> privatePosition [
 	^ measurement position
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlNewLayoutNode >> privatePosition: aPoint [
 	"Set position of the top left corner in the parent coordinate system"
 
 	measurement position: aPoint
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlNewLayoutNode >> transformationDo: aBlock [
 	decoration transformationDo: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNewLayoutNode >> userData [
 	<return: #Dictionary>
 	
 	^ userData ifNil: [ userData := Dictionary new ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlNewLayoutNode >> withElement: anElement [
 	decoration := self decoration withElement: anElement
 ]

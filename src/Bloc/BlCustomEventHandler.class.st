@@ -4,22 +4,22 @@ Then for each interesting event a user should implement a corresponding event ha
 
 "
 Class {
-	#name : #BlCustomEventHandler,
-	#superclass : #BlBasicEventHandler,
-	#category : #'Bloc-Events-Handler'
+	#name : 'BlCustomEventHandler',
+	#superclass : 'BlBasicEventHandler',
+	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlCustomEventHandler >> eventsToHandle [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlCustomEventHandler >> handleEvent: anEvent [
 	anEvent sendTo: self
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlCustomEventHandler >> wantsEvent: anEvent [
 	^ self eventsToHandle anySatisfy: [ :eachEventClass | anEvent isKindOf: eachEventClass ]
 ]

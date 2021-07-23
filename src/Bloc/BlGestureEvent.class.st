@@ -7,12 +7,12 @@ https://developer.mozilla.org/en-US/Apps/Fundamentals/User_input_methods/Touch_G
 
 "
 Class {
-	#name : #BlGestureEvent,
-	#superclass : #BlUIEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlGestureEvent',
+	#superclass : 'BlUIEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGestureEvent >> isGesture [
 	^ true
 ]

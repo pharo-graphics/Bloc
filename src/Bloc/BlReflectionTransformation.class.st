@@ -12,45 +12,45 @@ Example:
 
 "
 Class {
-	#name : #BlReflectionTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlReflectionTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'reflection'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlReflectionTransformation class >> horizontal [
 	^ self new reflection: (BlVector x: -1 y: 1)
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlReflectionTransformation class >> vertical [
 	^ self new reflection: (BlVector x: 1 y: -1)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlReflectionTransformation >> is2D [
 	<return: #Boolean>
 
 	^ true
 ]
 
-{ #category : #'mathematical functions' }
+{ #category : 'mathematical functions' }
 BlReflectionTransformation >> multiplyOn: aBlMatrix [
 
 	aBlMatrix reflectBy: self reflection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlReflectionTransformation >> reflection [
 	<return: #BlVector>
 
 	^ reflection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlReflectionTransformation >> reflection: aVector [
 	reflection := aVector asBlocVector
 ]

@@ -7,12 +7,12 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mouseout
 
 "
 Class {
-	#name : #BlMouseOutEvent,
-	#superclass : #BlMouseEvent,
-	#category : #'Bloc-Events'
+	#name : 'BlMouseOutEvent',
+	#superclass : 'BlMouseEvent',
+	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseOutEvent >> sendTo: anObject [
 	anObject mouseOutEvent: self
 ]

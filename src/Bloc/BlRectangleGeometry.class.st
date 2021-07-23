@@ -1,10 +1,10 @@
 Class {
-	#name : #BlRectangleGeometry,
-	#superclass : #BlElementGeometry,
-	#category : #'Bloc-Basic'
+	#name : 'BlRectangleGeometry',
+	#superclass : 'BlElementGeometry',
+	#category : 'Bloc-Basic'
 }
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlRectangleGeometry >> containsPoint: aPoint in: aBlElement [
 	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
 	as as border during the testing process"
@@ -17,7 +17,7 @@ BlRectangleGeometry >> containsPoint: aPoint in: aBlElement [
 		and: [ aPoint y < aBlElement height ]
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlRectangleGeometry >> geometryBounds: aBlBounds of: aBlElement [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -30,20 +30,20 @@ BlRectangleGeometry >> geometryBounds: aBlBounds of: aBlElement [
 		bottom: aBlElement height
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRectangleGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlRectangleGeometry >> releaseCache [
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlRectangleGeometry >> releaseStrokedBoundsCache [
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlRectangleGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
 	Dispatch through outskirts first"
@@ -52,7 +52,7 @@ BlRectangleGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
 	^ anElement outskirts strokedBounds: aBlBounds of: anElement on: aCanvas
 ]
 
-{ #category : #'private - bounds' }
+{ #category : 'private - bounds' }
 BlRectangleGeometry >> strokedBoundsCentered: aBlBounds of: aBlElement on: aCanvas [
 	<return: #BlBounds>
 	| aHalfWidth |
@@ -66,7 +66,7 @@ BlRectangleGeometry >> strokedBoundsCentered: aBlBounds of: aBlElement on: aCanv
 		bottom: aBlElement height + aHalfWidth
 ]
 
-{ #category : #'private - bounds' }
+{ #category : 'private - bounds' }
 BlRectangleGeometry >> strokedBoundsInside: aBlBounds of: aBlElement on: aCanvas [
 	"Stroked inside bounds property is equal to geometry bounds"
 	<return: #BlBounds>
@@ -78,7 +78,7 @@ BlRectangleGeometry >> strokedBoundsInside: aBlBounds of: aBlElement on: aCanvas
 		bottom: aBlElement height
 ]
 
-{ #category : #'private - bounds' }
+{ #category : 'private - bounds' }
 BlRectangleGeometry >> strokedBoundsOutside: aBlBounds of: aBlElement on: aCanvas [
 	<return: #BlBounds>
 	| aBorderWidth |
