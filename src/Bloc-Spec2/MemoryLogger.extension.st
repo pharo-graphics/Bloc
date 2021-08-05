@@ -1,21 +1,6 @@
 Extension { #name : #MemoryLogger }
 
 { #category : #'*Bloc-Spec2' }
-MemoryLogger >> inspectorGroupedRecordingsIn: aBuilder [
-	<inspectorPresentationOrder: 1 title: 'Grouped'>
-
-	^ aBuilder newTable
-		addColumn: (SpStringTableColumn
-			title: 'Class' evaluated: [ :each | each key ]);
-		addColumn: (SpStringTableColumn
-			title: 'Instances' evaluated: [ :each | each value size ]);
-"		send: [ :each | self select: [ :s | s class = each key ] ];"
-		items: (self recordings reverse groupedBy: [ :each | each class ]) associations;
-		yourself
-
-]
-
-{ #category : #'*Bloc-Spec2' }
 MemoryLogger >> inspectorRecordingsIn: aBuilder [
 	<inspectorPresentationOrder: 0 title: 'Recordings'>
 
