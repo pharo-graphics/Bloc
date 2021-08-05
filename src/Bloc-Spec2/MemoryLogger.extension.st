@@ -19,8 +19,8 @@ MemoryLogger >> inspectorGroupedRecordingsIn: aBuilder [
 MemoryLogger >> inspectorRecordingsIn: aBuilder [
 	<inspectorPresentationOrder: 0 title: 'Recordings'>
 
-	| table |
-	^ (table := aBuilder newTable)
+	| table refreshBlock |
+	table := aBuilder newTable
 		addColumn: (SpStringTableColumn
 			title: 'Timestamp'
 			evaluated: [ :each | each timestamp asString ]);
@@ -33,7 +33,6 @@ MemoryLogger >> inspectorRecordingsIn: aBuilder [
 		addColumn: (SpStringTableColumn
 			title: 'Contents'
 			evaluated: [ :each | String streamContents: [ :s | each printOneLineContentsOn: s ] ]);
-		items: self recordings reverse;
 		
 		contextMenu: (SpMenuPresenter new 
 			addItem: [ :item |
@@ -52,6 +51,12 @@ MemoryLogger >> inspectorRecordingsIn: aBuilder [
 						table refresh ] ];
 			yourself);
 		yourself.
+
+	refreshBlock := [ table items: self recordings reverse ].
+	refreshBlock value.
+	self announcer weak when: Announcement do: refreshBlock.
+
+	^ table
 
 "		dynamicActions: [ :t |
 			{
