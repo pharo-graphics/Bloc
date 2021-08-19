@@ -835,19 +835,24 @@ BlSpace >> doUpdateLayout [
 BlSpace >> doUpdateLayout: anElement context: aBlElementBoundsUpdater [
 	"Perform layout of a given element (e.g. root or glass)"
 
-	"first we measure.."
+	| currentExtent |
+	"First, we measure..."
+	currentExtent := self extent.
 	anElement measure: (BlExtentMeasurementSpec new
 		widthSpec: (anElement layout
-			measurementSpecFor: (BlMeasurementSpec new beExact: self width)
+			measurementSpecFor: (BlMeasurementSpec exact: currentExtent x)
 			usedSize:  0.0
 			resizer: BlLayoutResizer matchParent);
 		heightSpec: (anElement layout
-			measurementSpecFor: (BlMeasurementSpec new beExact: self height)
+			measurementSpecFor: (BlMeasurementSpec exact: currentExtent y)
 			usedSize:  0.0
 			resizer: BlLayoutResizer matchParent)).
 
-	"...then we layout in measured during previous step bounds"
-	anElement applyLayoutIn: anElement measuredBounds asRectangle context: aBlElementBoundsUpdater
+	"...then, we layout in measured during previous step bounds"
+	anElement
+		applyLayoutIn: anElement measuredBounds asRectangle
+		context: aBlElementBoundsUpdater
+
 ]
 
 { #category : #'change - layout' }
