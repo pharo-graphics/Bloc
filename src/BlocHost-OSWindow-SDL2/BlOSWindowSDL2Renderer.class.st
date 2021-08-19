@@ -5,7 +5,7 @@ Class {
 	#name : #BlOSWindowSDL2Renderer,
 	#superclass : #BlOSWindowRenderer,
 	#instVars : [
-		'renderer'
+		'sdlRenderer'
 	],
 	#pools : [
 		'SDL2Constants'
@@ -14,11 +14,10 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlOSWindowSDL2Renderer class >> for: aWindowHandle [
+BlOSWindowSDL2Renderer class >> for: aSDL2BackendWindow [
 
 	^ self basicNew
-		initialize;
-		initializeWindowHandle: aWindowHandle;
+		initializeWith: aSDL2BackendWindow;
 		yourself
 ]
 
@@ -30,34 +29,22 @@ BlOSWindowSDL2Renderer class >> new [
 { #category : #'host space - accessing' }
 BlOSWindowSDL2Renderer >> canvasExtent [
 
-	| width height extent |
-	width := FFIExternalArray externalNewType: 'int' size: 1.
-	height := FFIExternalArray externalNewType: 'int' size: 1.
-
-	backendWindow sdl2Window
-		osWindowHostGetRendererSize: backendWindow sdl2Window osWindowHostGetRenderer
-		width: width getHandle
-		height: height getHandle.
-	extent := (width at: 1) @ (height at: 1).
-
-	width free.
-	height free.
-	
-	^ extent
+	^ sdlRenderer outputExtent
 ]
 
 { #category : #deleting }
 BlOSWindowSDL2Renderer >> destroy [
 
-	renderer destroy.
+	sdlRenderer destroy.
 	super destroy.
 ]
 
 { #category : #initialization }
-BlOSWindowSDL2Renderer >> initializeWindowHandle: aWindowHandle [
+BlOSWindowSDL2Renderer >> initializeWith: aSDL2BackendWindow [
 
-	self backendWindow: aWindowHandle.
-	renderer := backendWindow sdl2Window createAcceleratedRenderer
+	self initialize.
+	self backendWindow: aSDL2BackendWindow.
+	sdlRenderer := aSDL2BackendWindow sdl2Window createAcceleratedRenderer
 ]
 
 { #category : #'updating screen' }
@@ -73,6 +60,7 @@ BlOSWindowSDL2Renderer >> present [
 ]
 
 { #category : #accessing }
-BlOSWindowSDL2Renderer >> renderer [
-	^ renderer
+BlOSWindowSDL2Renderer >> sdlRenderer [
+
+	^ sdlRenderer
 ]

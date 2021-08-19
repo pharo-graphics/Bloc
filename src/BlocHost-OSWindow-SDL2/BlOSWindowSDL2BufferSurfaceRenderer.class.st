@@ -3,8 +3,8 @@ Class {
 	#superclass : #BlHostSurfaceRenderer,
 	#instVars : [
 		'window',
-		'renderer',
-		'texture'
+		'texture',
+		'sdlRenderer'
 	],
 	#pools : [
 		'SDL2Constants'
@@ -22,9 +22,9 @@ BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBuff
 		createRGBSurfaceForCairoWidth: textureExtent x
 		height: textureExtent y.
 
-	renderer := window backendWindow renderer renderer.
+	sdlRenderer := window backendWindow renderer sdlRenderer.
 
-	texture := renderer
+	texture := sdlRenderer
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888
 		access: SDL_TEXTUREACCESS_STREAMING
 		width: textureExtent x
@@ -45,7 +45,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aBlHostRendererBufferSurfa
 		pixels: aBlHostRendererBufferSurface buffer
 		pitch: aBlHostRendererBufferSurface stride.
 
-	renderer
+	sdlRenderer
 		clear;
 		copy: texture;
 		present
