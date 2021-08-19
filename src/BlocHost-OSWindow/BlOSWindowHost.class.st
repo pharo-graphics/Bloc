@@ -29,39 +29,38 @@ BlOSWindowHost class >> new [
 
 { #category : #private }
 BlOSWindowHost >> createAttributesFor: aSpace [
+
 	| theAttributes |
-	theAttributes := OSWindowAttributes new.
-	theAttributes
+	theAttributes := OSWindowAttributes new
 		title: aSpace title;
 		extent: aSpace extent;
 		resizable: aSpace resizable;
 		borderless: aSpace borderless;
-		position: aSpace position;
-		preferableDriver: self preferableDriver;
-		visible: false. "There is a race before opening a window and setting the event handler."
+		visible: false; "There is a race before opening a window and setting the event handler."
+		yourself.
+
+	aSpace knowsPosition ifTrue: [ 
+		theAttributes position: aSpace position ].
+
 	^ theAttributes
 ]
 
 { #category : #private }
 BlOSWindowHost >> createHostSpace [
+
 	^ BlOSWindowSpace new
 ]
 
 { #category : #'host - api' }
 BlOSWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new oswindow host space for given bloc space"
-	| aHostSpace|
 
+	| aHostSpace|
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host!' ].
 	
 	aHostSpace := self createWindowSpaceFor: aSpace.
-
-	aHostSpace universe: self universe.
-	aHostSpace host: self.
-	aHostSpace space: aSpace.
-	aHostSpace withSpartaRenderer.
 
 	aSpace hostSpace: aHostSpace
 ]
@@ -69,22 +68,27 @@ BlOSWindowHost >> createHostSpaceFor: aSpace [
 { #category : #private }
 BlOSWindowHost >> createWindowSpaceFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
-	I do not create any strong or weak references to provided space"
+	I do not create any strong or weak references to provided space."
+
 	| aHostSpace theGLAttributes theWindowAttributes |
-	
-	theGLAttributes := OSWindowGLAttributes new.
-	theGLAttributes redSize: 8.
-	theGLAttributes greenSize: 8.
-	theGLAttributes blueSize: 8.
-	theGLAttributes stencilSize: 8.
+	theGLAttributes := OSWindowGLAttributes new
+		redSize: 8;
+		greenSize: 8;
+		blueSize: 8;
+		stencilSize: 8;
+		yourself.
 	
 	theWindowAttributes := self createAttributesFor: aSpace.
 	theWindowAttributes glAttributes: theGLAttributes.
 	
 	aHostSpace := self createHostSpace.
-
-	aHostSpace keyboardKeyTable: self keyboardKeyTable.
-	aHostSpace initializeWithAttributes: theWindowAttributes.
+	aHostSpace
+		keyboardKeyTable: self keyboardKeyTable;
+		initializeWithAttributes: theWindowAttributes;
+		universe: self universe;
+		host: self;
+		space: aSpace;
+		withSpartaRenderer.
 	
 	^ aHostSpace
 ]
@@ -93,29 +97,17 @@ BlOSWindowHost >> createWindowSpaceFor: aSpace [
 BlOSWindowHost >> destroyHostSpaceFor: aSpace [
 	"Closes OSWindow window and unrefer it from bloc space"
 	
-	aSpace hostSpace close.
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
 	aSpace detachHostSpace
 ]
 
 { #category : #initialization }
 BlOSWindowHost >> keyboardKeyTable [
-	^ self subclassResponsibility
-]
-
-{ #category : #'host - api' }
-BlOSWindowHost >> openMorphicWorld [
-	OSWorldRenderer openMorphicWorld
-]
-
-{ #category : #'host - events' }
-BlOSWindowHost >> pollEvents [
-	self subclassResponsibility
-]
-
-{ #category : #initialization }
-BlOSWindowHost >> preferableDriver [
-	<return: #OSWindowDriver>
-
 	^ self subclassResponsibility
 ]
 

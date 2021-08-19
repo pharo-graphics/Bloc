@@ -56,26 +56,12 @@ BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
 
 { #category : #private }
 BlOSWindowSDL2Host >> createHostSpace [
+
 	^ BlOSWindowSDL2Space new
 ]
 
 { #category : #initialization }
 BlOSWindowSDL2Host >> keyboardKeyTable [
+
 	^ BlOSWindowSDL2KeyboardKeyTable default
-]
-
-{ #category : #'host - events' }
-BlOSWindowSDL2Host >> pollEvents [
-	
-]
-
-{ #category : #initialization }
-BlOSWindowSDL2Host >> preferableDriver [
-	<return: #OSWindowDriver>
-	| aDriver |
-	
-	aDriver := OSSDL2Driver new.
-	OSSDL2Driver current: aDriver.
-
-	^ aDriver
 ]
