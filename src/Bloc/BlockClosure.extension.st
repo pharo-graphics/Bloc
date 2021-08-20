@@ -9,3 +9,8 @@ BlockClosure >> asBlocResolvedElementsFrom: anElement [
 		self value: [ :eachElement |
 			aStream nextPut: eachElement ] ]
 ]
+
+{ #category : #'*Bloc' }
+BlockClosure >> glamourValueWithArgs: anArray [ 
+	^ self valueWithPossibleArgs: anArray
+]
