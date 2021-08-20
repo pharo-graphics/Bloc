@@ -9,7 +9,8 @@ Class {
 	#instVars : [
 		'stride',
 		'buffer',
-		'extent'
+		'extent',
+		'strongReference'
 	],
 	#category : #'Bloc-Universe - Renderer'
 }
@@ -73,4 +74,10 @@ BlHostRendererBufferSurface >> stride [
 { #category : #accessing }
 BlHostRendererBufferSurface >> stride: aNumber [
 	stride := aNumber
+]
+
+{ #category : #accessing }
+BlHostRendererBufferSurface >> strongReference: anObject [
+
+	strongReference := anObject
 ]

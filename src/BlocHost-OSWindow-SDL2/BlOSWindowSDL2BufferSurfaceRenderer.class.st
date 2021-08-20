@@ -31,6 +31,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBuff
 		height: textureExtent y.
 
 	aBlHostRendererBufferSurface
+		strongReference: sdlSurface;
 		buffer: sdlSurface pixels;
 		stride: sdlSurface pitch;
 		extent: textureExtent
