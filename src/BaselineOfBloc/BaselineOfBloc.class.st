@@ -16,22 +16,20 @@ You can learn Bloc following a memory game tutorial: [00-memory-game.pillar](fil
 
 "
 Class {
-	#name : #BaselineOfBloc,
-	#superclass : #BaselineOf,
+	#name : 'BaselineOfBloc',
+	#superclass : 'BaselineOf',
 	#classVars : [
 		'PostLoaded'
 	],
-	#category : #BaselineOfBloc
+	#category : 'BaselineOfBloc'
 }
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BaselineOfBloc >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec postLoadDoIt: #'postLoadBloc:'.
-		spec 
-			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
+		spec 		
 			baseline: 'Fenster' with: [
 				spec repository: 'github://feenkcom/fenster:main/src' ];
 			baseline: 'Sparta' with: [
@@ -40,7 +38,7 @@ BaselineOfBloc >> baseline: spec [
 				spec repository: 'github://feenkcom/gtoolkit-glutin:main/src' ].
 		spec 
 			package: #Bloc with: [
-				spec requires: #('Beacon' 'Fenster' ). ];
+				spec requires: #('Fenster' ). ];
 			package: #'Bloc-Animation' with: [
 				spec requires: #(#Bloc ). ];
 			package: #'Bloc-Layout' with: [
@@ -52,7 +50,7 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-Text-Elements' with: [
 				spec requires: #(#Bloc #'Bloc-Text' #'Bloc-Text-Rope' ). ];
 			package: #'BlocHost-Mock' with: [
-				spec requires: #(#Bloc #Bloc ). ];
+				spec requires: #(#Bloc ). ];
 			package: #'BlocHost-Morphic' with: [
 				spec requires: #(#Bloc ). ];
 			package: #'Bloc-Tests' with: [
@@ -72,7 +70,7 @@ BaselineOfBloc >> baseline: spec [
 
 ]
 
-{ #category : #'post load' }
+{ #category : 'post load' }
 BaselineOfBloc >> postLoadBloc: spec [
 	(PostLoaded isNotNil and: [ PostLoaded ])
 		ifTrue: [ ^ self ].
@@ -81,7 +79,7 @@ BaselineOfBloc >> postLoadBloc: spec [
 	self postLoadMorphicHost: spec
 ]
 
-{ #category : #'post load' }
+{ #category : 'post load' }
 BaselineOfBloc >> postLoadMorphicHost: spec [
 
 	"This will select an appropriate UI manager"
