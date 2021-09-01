@@ -1,7 +1,7 @@
 Class {
 	#name : #BlRectangleGeometry,
 	#superclass : #BlElementGeometry,
-	#category : #'Bloc-Basic'
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #'geometry testing' }

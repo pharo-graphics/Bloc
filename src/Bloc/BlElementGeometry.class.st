@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Basic'
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #converting }

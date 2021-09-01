@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBezierCurve,
 	#superclass : #BlBezierCurveGeometry,
-	#category : #'Bloc-Basic-Deprecated'
+	#category : #'Bloc-Basic-Geometry-Deprecated'
 }
 
 { #category : #testing }

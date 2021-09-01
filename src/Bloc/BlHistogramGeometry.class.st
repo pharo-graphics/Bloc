@@ -19,7 +19,7 @@ Class {
 		'RightToLeft',
 		'TopToBottom'
 	],
-	#category : #'Bloc-Basic'
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #'class initialization' }

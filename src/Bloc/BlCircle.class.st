@@ -1,7 +1,7 @@
 Class {
 	#name : #BlCircle,
 	#superclass : #BlCircleGeometry,
-	#category : #'Bloc-Basic-Deprecated'
+	#category : #'Bloc-Basic-Geometry-Deprecated'
 }
 
 { #category : #testing }

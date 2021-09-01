@@ -1,7 +1,7 @@
 Class {
 	#name : #BlEllipse,
 	#superclass : #BlEllipseGeometry,
-	#category : #'Bloc-Basic-Deprecated'
+	#category : #'Bloc-Basic-Geometry-Deprecated'
 }
 
 { #category : #accessing }

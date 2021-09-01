@@ -16,7 +16,7 @@ Class {
 		'innerRadius',
 		'outerRadius'
 	],
-	#category : #'Bloc-Basic'
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #'private - geometry' }

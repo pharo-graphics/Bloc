@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSigmoid,
 	#superclass : #BlSigmoidGeometry,
-	#category : #'Bloc-Basic-Deprecated'
+	#category : #'Bloc-Basic-Geometry-Deprecated'
 }
 
 { #category : #testing }
