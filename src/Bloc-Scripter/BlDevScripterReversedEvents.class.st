@@ -37,11 +37,10 @@ BlDevScripterReversedEvents >> gtEventsFor: aView [
 		priority: 3;
 		items: [ self ];
 		column: 'Index'
-			item:
+			text:
 				[ :eachItem :eachIndex | (self reversedIndexFrom: eachIndex) asRopedText foreground: Color gray ]
 			width: 80;
 		column: 'Item'
-			item: [ :eachItem :eachIndex | eachItem ]
 			text: [ :eachItem | eachItem gtDisplayText ]
 ]
 

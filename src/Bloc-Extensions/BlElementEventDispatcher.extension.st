@@ -9,6 +9,6 @@ BlElementEventDispatcher >> gtEventsFor: aView [
 		items: [ (activatedElementEvents asDictionary associations
 				sorted: [ :a :b | a key < b key ])
 				, ((activatedGeneralEvents ifNil: [ #() ]) asArray collect: [ :each | each -> true ]) ];
-		column: 'Type' item: [ :each | each key ];
-		column: 'Enabled' item: [ :each | each value ]
+		column: 'Type' text: [ :each | each key ];
+		column: 'Enabled' text: [ :each | each value ]
 ]

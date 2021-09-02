@@ -8,7 +8,7 @@ BlCompositionPainterState >> gtCommandsFor: aView [
 		title: 'Commands';
 		priority: 3;
 		items: [ commands asArray reversed ];
-		column: 'Type' item: [ :eachCommand | eachCommand type ] width: 100;
+		column: 'Type' text: [ :eachCommand | eachCommand type ] width: 100;
 		column: 'By' do: [ :aColumn |
 			aColumn
 				stencil: [ :eachCommand |
@@ -17,5 +17,5 @@ BlCompositionPainterState >> gtCommandsFor: aView [
 						vFitContent;
 						aptitude: (BrGlamorousRegularEditorAptitude new glamorousCodeTinySize);
 						text: eachCommand commandString ] ];
-		column: 'Offset' item: [ :eachCommand | eachCommand offset ] width: 100
+		column: 'Offset' text: [ :eachCommand | eachCommand offset ] width: 100
 ]
