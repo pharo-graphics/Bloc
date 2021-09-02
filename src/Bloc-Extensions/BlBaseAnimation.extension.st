@@ -1,6 +1,6 @@
-Extension { #name : #BlBaseAnimation }
+Extension { #name : 'BlBaseAnimation' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlBaseAnimation >> gtInspectorPropertiesIn: aComposite [
 	<gtInspectorPresentationOrder: 1>
 

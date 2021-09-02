@@ -1,6 +1,6 @@
-Extension { #name : #BlTranslationTransformation }
+Extension { #name : 'BlTranslationTransformation' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTranslationTransformation >> gtInspectorVectorIn: aComposite [
 	<gtInspectorPresentationOrder: 2>
 	

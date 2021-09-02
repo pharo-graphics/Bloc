@@ -1,15 +1,15 @@
 Class {
-	#name : #BlDevScripterSecondaryClickStep,
-	#superclass : #BlDevScripterInteractionStep,
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#name : 'BlDevScripterSecondaryClickStep',
+	#superclass : 'BlDevScripterInteractionStep',
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterSecondaryClickStep >> defaultLabel [
 	^ 'Secondary Click'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterSecondaryClickStep >> playOn: aScripter [
 	self
 		setMousePosition: (BlSpace simulateSecondaryClickOn: (self target findTargetStartingInScripter: aScripter))

@@ -24,57 +24,57 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlDevScripterNullTarget,
-	#superclass : #BlDevScripterTarget,
+	#name : 'BlDevScripterNullTarget',
+	#superclass : 'BlDevScripterTarget',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlDevScripterNullTarget class >> cleanUp [
 	self resetUniqueInstance
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlDevScripterNullTarget class >> resetUniqueInstance [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterNullTarget class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterNullTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
 	AssertionFailure signal: 'Target is not defined'
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterNullTarget >> findTargetStartingInScripter: aScripter [
 	AssertionFailure signal: 'Target is not defined'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterNullTarget >> gtDisplayString [
 	^ ''
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterNullTarget >> identifier [
 	^ 'null'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterNullTarget >> printOn: aStream [
 	aStream nextPutAll: 'null'
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlDevScripterNullTarget >> updateUsing: aScripterEventTarget on: aStep [
 	aStep target: aScripterEventTarget
 	

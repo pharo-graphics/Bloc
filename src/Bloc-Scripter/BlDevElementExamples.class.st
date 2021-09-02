@@ -1,10 +1,10 @@
 Class {
-	#name : #BlDevElementExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Scripter-Examples'
+	#name : 'BlDevElementExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Scripter-Examples'
 }
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlDevElementExamples >> container [
 	<gtExample>
 	| anElement |
@@ -17,7 +17,7 @@ BlDevElementExamples >> container [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlDevElementExamples >> containerWithRectangle [
 	<gtExample>
 	| anElement |
@@ -27,13 +27,13 @@ BlDevElementExamples >> containerWithRectangle [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlDevElementExamples >> element [
 	<gtExample>
 	^ BlElement new
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlDevElementExamples >> rectangle [
 	<gtExample>
 	| anElement |

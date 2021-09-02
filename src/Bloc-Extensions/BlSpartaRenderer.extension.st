@@ -1,6 +1,6 @@
-Extension { #name : #BlSpartaRenderer }
+Extension { #name : 'BlSpartaRenderer' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlSpartaRenderer class >> gtInspectorAvailableBackendsIn: composite [
 	<gtInspectorPresentationOrder: 0> 
 	^ composite fastList

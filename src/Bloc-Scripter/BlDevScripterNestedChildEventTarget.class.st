@@ -1,13 +1,13 @@
 Class {
-	#name : #BlDevScripterNestedChildEventTarget,
-	#superclass : #BlDevScripterEventTarget,
+	#name : 'BlDevScripterNestedChildEventTarget',
+	#superclass : 'BlDevScripterEventTarget',
 	#instVars : [
 		'targets'
 	],
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterNestedChildEventTarget >> addTarget: aScripterEventTarget [
 	| theNewTargets |
 	self 
@@ -17,7 +17,7 @@ BlDevScripterNestedChildEventTarget >> addTarget: aScripterEventTarget [
 	self targets: theNewTargets
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterNestedChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 	| aChild |
@@ -28,7 +28,7 @@ BlDevScripterNestedChildEventTarget >> findTargetIn: anElement [
 	^ aChild
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlDevScripterNestedChildEventTarget >> gtTargetsFor: aView [
 	<gtView>
 	self targets ifNil: [ ^ aView empty ].
@@ -36,18 +36,18 @@ BlDevScripterNestedChildEventTarget >> gtTargetsFor: aView [
 		title: 'Targets'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterNestedChildEventTarget >> initialize [
 	super initialize.
 	targets := #().
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlDevScripterNestedChildEventTarget >> postCopy [
 	self targets: self targets copy
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterNestedChildEventTarget >> printOn: aStream [
 	self targets ifNil: [ ^ super printOn: aStream ].
 	aStream nextPutAll: 'Child: { '.
@@ -57,24 +57,24 @@ BlDevScripterNestedChildEventTarget >> printOn: aStream [
 	aStream nextPutAll: ' }'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterNestedChildEventTarget >> targetSequence: anArray [
 	self targets: (anArray 
 			collect: [ :eachTarget | BlDevScripterEventTarget targetInstanceFor: eachTarget ]
 			as: Array)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterNestedChildEventTarget >> targets [
 	^ targets
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterNestedChildEventTarget >> targets: anObject [
 	targets := anObject
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlDevScripterNestedChildEventTarget >> updateUsing: aScripterEventTarget on: aStep [
 	self addTarget: aScripterEventTarget.
 	aStep target: self.

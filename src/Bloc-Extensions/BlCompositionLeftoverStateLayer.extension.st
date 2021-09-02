@@ -1,6 +1,6 @@
-Extension { #name : #BlCompositionLeftoverStateLayer }
+Extension { #name : 'BlCompositionLeftoverStateLayer' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlCompositionLeftoverStateLayer >> gtStateCommandsFor: aView [
 	<gtView>
 	

@@ -1,6 +1,6 @@
-Extension { #name : #BlEventTraversalStep }
+Extension { #name : 'BlEventTraversalStep' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlEventTraversalStep >> gtInspectorTargetIn: composite [
 	<gtInspectorPresentationOrder: 11>
 	

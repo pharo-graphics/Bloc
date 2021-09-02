@@ -1,15 +1,15 @@
 Class {
-	#name : #BlDevScripterMouseMoveOverStep,
-	#superclass : #BlDevScripterInteractionStep,
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#name : 'BlDevScripterMouseMoveOverStep',
+	#superclass : 'BlDevScripterInteractionStep',
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterMouseMoveOverStep >> defaultLabel [
 	^ 'Mouse move over'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterMouseMoveOverStep >> playOn: aScripter [
 	| aTarget anOldPositon aNewPosition |
 	

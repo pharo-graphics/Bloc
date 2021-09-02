@@ -1,20 +1,20 @@
 Class {
-	#name : #BlDevScripterRootStep,
-	#superclass : #BlDevScripterMultipleActionStep,
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#name : 'BlDevScripterRootStep',
+	#superclass : 'BlDevScripterMultipleActionStep',
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterRootStep >> defaultLabel [
 	^ 'Root'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterRootStep >> isRootStep [
 	^ true
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 BlDevScripterRootStep >> startWithExecutor: anExecutor [
 	anExecutor executeRootStep: self
 ]

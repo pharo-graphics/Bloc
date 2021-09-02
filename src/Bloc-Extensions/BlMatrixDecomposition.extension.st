@@ -1,6 +1,6 @@
-Extension { #name : #BlMatrixDecomposition }
+Extension { #name : 'BlMatrixDecomposition' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlMatrixDecomposition >> gtInspectorCompositionIn: aComposite [
 	<gtInspectorPresentationOrder: 9>
 	
@@ -8,7 +8,7 @@ BlMatrixDecomposition >> gtInspectorCompositionIn: aComposite [
 		title: 'Recomposition'
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlMatrixDecomposition >> gtInspectorDecompositionIn: aComposite [
 	<gtInspectorPresentationOrder: 9>
 	

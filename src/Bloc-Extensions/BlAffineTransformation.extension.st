@@ -1,13 +1,13 @@
-Extension { #name : #BlAffineTransformation }
+Extension { #name : 'BlAffineTransformation' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlAffineTransformation >> gtInspectorMatrixIn: aComposite [
 	<gtInspectorPresentationOrder: 2>
 	
 	^ self asMatrix gtInspectorMatrixIn: aComposite
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlAffineTransformation >> gtInspectorPreviewIn: aComposite [
 	<gtInspectorPresentationOrder: 1>
 	

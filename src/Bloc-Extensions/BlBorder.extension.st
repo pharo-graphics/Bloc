@@ -1,6 +1,6 @@
-Extension { #name : #BlBorder }
+Extension { #name : 'BlBorder' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlBorder >> gtViewBorderFor: aView [
 	<gtView>
 	^ aView explicit

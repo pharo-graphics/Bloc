@@ -1,10 +1,10 @@
 Class {
-	#name : #GLMBlocPresentationExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Extensions-Examples'
+	#name : 'GLMBlocPresentationExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Extensions-Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 GLMBlocPresentationExamples >> populatingTheSelectionPortDirectly [
 	<gtExample>
 	| composite |
@@ -24,7 +24,7 @@ GLMBlocPresentationExamples >> populatingTheSelectionPortDirectly [
 	^ composite startOn: 42
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 GLMBlocPresentationExamples >> populatingTheSelectionPortViaEvent [
 	<gtExample>
 	| composite |

@@ -1,6 +1,6 @@
-Extension { #name : #BlStrokeLineCap }
+Extension { #name : 'BlStrokeLineCap' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStrokeLineCap >> gtInspectorOtherTypesIn: aComposite [
 	<gtInspectorPresentationOrder: 6>
 
@@ -9,14 +9,14 @@ BlStrokeLineCap >> gtInspectorOtherTypesIn: aComposite [
 		when: [ self class ~= BlStrokeLineCap ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStrokeLineCap >> gtInspectorTypesIn: aComposite [
 	<gtInspectorPresentationOrder: 5>
 	
 	^ self class gtInspectorTypesIn: aComposite
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStrokeLineCap class >> gtInspectorTypesIn: aComposite [
 	<gtInspectorPresentationOrder: 5>
 	^ aComposite fastList
@@ -26,7 +26,7 @@ BlStrokeLineCap class >> gtInspectorTypesIn: aComposite [
 		format: [ :each | each class capName ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStrokeLineCap >> gtPreviewFor: aView [
 	<gtView>
 	

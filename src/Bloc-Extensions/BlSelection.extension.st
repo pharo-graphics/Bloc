@@ -1,6 +1,6 @@
-Extension { #name : #BlSelection }
+Extension { #name : 'BlSelection' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlSelection >> gtTreeFor: aView [
 	<gtView>
 

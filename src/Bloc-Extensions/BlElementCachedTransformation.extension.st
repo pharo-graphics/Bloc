@@ -1,6 +1,6 @@
-Extension { #name : #BlElementCachedTransformation }
+Extension { #name : 'BlElementCachedTransformation' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementCachedTransformation >> gtMatrixFor: aView [
 	<gtView>
 	

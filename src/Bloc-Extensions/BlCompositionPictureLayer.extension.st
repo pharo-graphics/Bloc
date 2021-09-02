@@ -1,6 +1,6 @@
-Extension { #name : #BlCompositionPictureLayer }
+Extension { #name : 'BlCompositionPictureLayer' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlCompositionPictureLayer >> asElement [
 	<return: #BlElement>
 	| anElement |
@@ -25,14 +25,14 @@ BlCompositionPictureLayer >> asElement [
 	^ anElement
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlCompositionPictureLayer >> asForm [
 	^ self picture
 		ifNil: [ Form extent: 0@0 depth: 32 ]
 		ifNotNil: [ self picture asForm ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlCompositionPictureLayer >> gtExportAsSkpFor: anAction [
 	<gtAction>
 
@@ -47,7 +47,7 @@ BlCompositionPictureLayer >> gtExportAsSkpFor: anAction [
 					flush ] ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlCompositionPictureLayer >> gtMatrixFor: aView [
 	<gtView>
 	^ aView forward
@@ -57,7 +57,7 @@ BlCompositionPictureLayer >> gtMatrixFor: aView [
 		view: #gtMatrixFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlCompositionPictureLayer >> gtPictureFor: aView [
 	<gtView>
 	^ aView explicit

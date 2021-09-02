@@ -1,6 +1,6 @@
-Extension { #name : #BlVector }
+Extension { #name : 'BlVector' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlVector >> gtInspectorPreviewIn: aComposite [
 	<gtInspectorPresentationOrder: 1>
 	

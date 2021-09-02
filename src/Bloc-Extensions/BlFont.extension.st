@@ -1,6 +1,6 @@
-Extension { #name : #BlFont }
+Extension { #name : 'BlFont' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlFont >> gtInfoFor: aView [
 	<gtView>
 
@@ -15,7 +15,7 @@ BlFont >> gtInfoFor: aView [
 			priority: 7
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlFont >> gtPreviewFor: aView [
 	<gtView>
 	

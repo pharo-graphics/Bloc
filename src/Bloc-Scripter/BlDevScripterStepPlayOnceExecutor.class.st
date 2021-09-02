@@ -1,10 +1,10 @@
 Class {
-	#name : #BlDevScripterStepPlayOnceExecutor,
-	#superclass : #BlDevScripterStepExecutor,
-	#category : #'Bloc-Scripter-Scripter-Executors'
+	#name : 'BlDevScripterStepPlayOnceExecutor',
+	#superclass : 'BlDevScripterStepExecutor',
+	#category : 'Bloc-Scripter-Scripter-Executors'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BlDevScripterStepPlayOnceExecutor >> assertExecutableStep: aStep [
 	self 
 		assert: [ aStep wasExecuted not ]

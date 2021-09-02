@@ -1,6 +1,6 @@
-Extension { #name : #BlElementStates }
+Extension { #name : 'BlElementStates' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementStates >> gtStatesFor: aView [
 	<gtView>
 	

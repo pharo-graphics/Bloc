@@ -1,26 +1,26 @@
 Class {
-	#name : #GLMBlocMatrixElement,
-	#superclass : #BlElement,
+	#name : 'GLMBlocMatrixElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'gridElement',
 		'leftParentheses',
 		'rightParentheses'
 	],
-	#category : #'Bloc-Extensions-UI'
+	#category : 'Bloc-Extensions-UI'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GLMBlocMatrixElement >> asCellText: aString [
 
 	^ aString asRopedText fontName: 'STIXGeneral'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GLMBlocMatrixElement >> asParenthesesText: aString [
 	^ aString asRopedText thin
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GLMBlocMatrixElement >> asScalableElement: anElement [
 	^ BlElement new
 		addChild: anElement;
@@ -29,12 +29,12 @@ GLMBlocMatrixElement >> asScalableElement: anElement [
 			c horizontal exact: 20 ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GLMBlocMatrixElement >> defaultLayout [
 	^ BlLinearLayout horizontal
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GLMBlocMatrixElement >> initialize [
 	super initialize.
 	
@@ -53,7 +53,7 @@ GLMBlocMatrixElement >> initialize [
 	self addChildren: { self asScalableElement: leftParentheses . gridElement . self asScalableElement: rightParentheses }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMBlocMatrixElement >> matrix: aMatrix [
 	| theCellElements |
 
@@ -78,14 +78,14 @@ GLMBlocMatrixElement >> matrix: aMatrix [
 	gridElement addChildren: theCellElements
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GLMBlocMatrixElement >> newCellElement [
 
 	^ BlTextElement new
 		padding: (BlInsets all: 2)
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GLMBlocMatrixElement >> newGridElement [
 
 	^ BlElement new
@@ -95,13 +95,13 @@ GLMBlocMatrixElement >> newGridElement [
 			c vertical fitContent ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GLMBlocMatrixElement >> newParenthesesElement [
 	^ BlTextElement new
 		padding: (BlInsets left: 2 right: 2)
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 GLMBlocMatrixElement >> onLayout: aBounds context: aBlElementBoundsUpdater [
 	| leftScale rightScale |
 	super onLayout: aBounds context: aBlElementBoundsUpdater.

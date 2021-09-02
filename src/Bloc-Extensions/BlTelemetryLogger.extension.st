@@ -1,6 +1,6 @@
-Extension { #name : #BlTelemetryLogger }
+Extension { #name : 'BlTelemetryLogger' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTelemetryLogger >> gtFramesFor: aView [
 	<gtView>
 	

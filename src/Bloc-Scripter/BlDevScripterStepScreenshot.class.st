@@ -1,23 +1,23 @@
 Class {
-	#name : #BlDevScripterStepScreenshot,
-	#superclass : #BlDevScripterStepProperty,
+	#name : 'BlDevScripterStepScreenshot',
+	#superclass : 'BlDevScripterStepProperty',
 	#instVars : [
 		'form'
 	],
-	#category : #'Bloc-Scripter-Scripter-Properties'
+	#category : 'Bloc-Scripter-Scripter-Properties'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepScreenshot >> form [
 	^ form
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepScreenshot >> form: anObject [
 	form := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepScreenshot >> gtScreenshotFor: aView [
 	<gtView>
 	self form ifNil: [ ^ aView empty ].
@@ -26,7 +26,7 @@ BlDevScripterStepScreenshot >> gtScreenshotFor: aView [
 		stencil: [ self form asElement asScalableElement ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterStepScreenshot >> isScreenshot [
 	^ true
 ]

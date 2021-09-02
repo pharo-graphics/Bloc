@@ -1,6 +1,6 @@
-Extension { #name : #TBlLayoutChildNode }
+Extension { #name : 'TBlLayoutChildNode' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlLayoutChildNode >> gtMeasurementFor: aView [
 	<gtView>
 	

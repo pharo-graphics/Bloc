@@ -1,23 +1,23 @@
 Class {
-	#name : #BlDevScripterStepProperties,
-	#superclass : #Object,
+	#name : 'BlDevScripterStepProperties',
+	#superclass : 'Object',
 	#instVars : [
 		'properties'
 	],
-	#category : #'Bloc-Scripter-Scripter-Properties'
+	#category : 'Bloc-Scripter-Scripter-Properties'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlDevScripterStepProperties >> add: aProperty [
 	properties add: aProperty
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlDevScripterStepProperties >> addScreenshotForm: aForm [
 	self add: (BlDevScripterStepScreenshot new form: aForm)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepProperties >> gtScreenshotFor: aView [
 	<gtView>
 	self properties ifNil: [ ^ aView empty ].
@@ -27,18 +27,18 @@ BlDevScripterStepProperties >> gtScreenshotFor: aView [
 		ifNone: [ aView empty ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterStepProperties >> initialize [
 	super initialize.
 	properties := OrderedCollection new: 2.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepProperties >> properties [
 	^ properties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepProperties >> reference [
 	<return: #BlDevScripterReference>
 	^ self properties 
@@ -47,7 +47,7 @@ BlDevScripterStepProperties >> reference [
 		ifNone: [ BlDevScripterReference null ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepProperties >> reference: aBlDevScripterReference [
 	<return: #BlDevScripterReference>
 	self properties removeAllSuchThat: #isReference.

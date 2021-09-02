@@ -1,6 +1,6 @@
-Extension { #name : #BlStyles }
+Extension { #name : 'BlStyles' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStyles >> gtStylesFor: aView [
 	<gtView>
 	

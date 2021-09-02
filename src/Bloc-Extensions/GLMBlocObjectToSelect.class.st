@@ -3,31 +3,31 @@ I am an announcement that elements that are rendered by the Bloc presentation ca
 
 "
 Class {
-	#name : #GLMBlocObjectToSelect,
-	#superclass : #BlEvent,
+	#name : 'GLMBlocObjectToSelect',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'toSelect',
 		'fromElement'
 	],
-	#category : #'Bloc-Extensions'
+	#category : 'Bloc-Extensions'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMBlocObjectToSelect >> fromElement [
 	^ fromElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMBlocObjectToSelect >> fromElement: anObject [
 	fromElement := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMBlocObjectToSelect >> toSelect [
 	^ toSelect
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMBlocObjectToSelect >> toSelect: anObject [
 	toSelect := anObject
 ]

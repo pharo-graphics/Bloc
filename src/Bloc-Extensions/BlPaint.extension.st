@@ -1,6 +1,6 @@
-Extension { #name : #BlPaint }
+Extension { #name : 'BlPaint' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlPaint >> gtInspectorPreviewIn: aComposite [
 	<gtInspectorPresentationOrder: 5>
 

@@ -1,27 +1,27 @@
 Class {
-	#name : #BlDevScripterSelfEventTarget,
-	#superclass : #BlDevScripterEventTarget,
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#name : 'BlDevScripterSelfEventTarget',
+	#superclass : 'BlDevScripterEventTarget',
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterSelfEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
 	^ anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterSelfEventTarget >> identifier [
 	^ 'self'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterSelfEventTarget >> printOn: aStream [
 	aStream nextPutAll: 'self'
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlDevScripterSelfEventTarget >> updateUsing: aScripterEventTarget on: aStep [
 	aStep target: aScripterEventTarget
 	

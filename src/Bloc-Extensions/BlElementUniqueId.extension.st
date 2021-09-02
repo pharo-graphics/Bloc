@@ -1,6 +1,6 @@
-Extension { #name : #BlElementUniqueId }
+Extension { #name : 'BlElementUniqueId' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementUniqueId >> gtAllUniqueIdsFor: aView [
 	<gtView>
 
@@ -11,7 +11,7 @@ BlElementUniqueId >> gtAllUniqueIdsFor: aView [
 		view: #gtAllUniqueIdsFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementUniqueId class >> gtAllUniqueIdsFor: aView [
 	<gtView>
 
@@ -27,7 +27,7 @@ BlElementUniqueId class >> gtAllUniqueIdsFor: aView [
 		column: 'Description' text: [ :eachUniqueId | eachUniqueId description ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementUniqueId >> gtAllUsagesFor: aView [
 	<gtView>
 	
@@ -38,7 +38,7 @@ BlElementUniqueId >> gtAllUsagesFor: aView [
 		view: #gtAllUsagesFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementUniqueId class >> gtAllUsagesFor: aView [
 	<gtView>
 	
@@ -49,7 +49,7 @@ BlElementUniqueId class >> gtAllUsagesFor: aView [
 		view: #gtItemsFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementUniqueId class >> gtSimilarUniqueIdsFor: aView [
 	<gtView>
 
@@ -60,7 +60,7 @@ BlElementUniqueId class >> gtSimilarUniqueIdsFor: aView [
 		view: #gtAllUniqueIdsFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementUniqueId >> gtSimilarUniqueIdsFor: aView [
 	<gtView>
 
@@ -71,7 +71,7 @@ BlElementUniqueId >> gtSimilarUniqueIdsFor: aView [
 		view: #gtSimilarUniqueIdsFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementUniqueId >> gtUsagesFor: aView [
 	<gtView>
 	
@@ -82,7 +82,7 @@ BlElementUniqueId >> gtUsagesFor: aView [
 		view: #gtUsagesFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementUniqueId class >> gtUsagesFor: aView [
 	<gtView>
 	

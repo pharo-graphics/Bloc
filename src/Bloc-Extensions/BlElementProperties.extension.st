@@ -1,6 +1,6 @@
-Extension { #name : #BlElementProperties }
+Extension { #name : 'BlElementProperties' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElementProperties >> gtPropertiesFor: aView [
 	<gtView>
 	

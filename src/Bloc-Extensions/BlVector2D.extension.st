@@ -1,6 +1,6 @@
-Extension { #name : #BlVector2D }
+Extension { #name : 'BlVector2D' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlVector2D >> gtDegreeFor: aView [
 	<gtView>
 	^ aView explicit

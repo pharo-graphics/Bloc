@@ -1,6 +1,6 @@
-Extension { #name : #BlTextAttributesBuilder }
+Extension { #name : 'BlTextAttributesBuilder' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTextAttributesBuilder >> gtInspectorPreviewIn: aComposite [
 	<gtInspectorPresentationOrder: -10>
 

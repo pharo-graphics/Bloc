@@ -3,12 +3,12 @@ I render Sparta presentation that should be able to be used within morphic
 
 "
 Class {
-	#name : #GLMMorphicSpartaRenderer,
-	#superclass : #GLMMorphicInstallablePresentationRenderer,
-	#category : #'Bloc-Extensions-Renderers'
+	#name : 'GLMMorphicSpartaRenderer',
+	#superclass : 'GLMMorphicInstallablePresentationRenderer',
+	#category : 'Bloc-Extensions-Renderers'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMMorphicSpartaRenderer >> morphFrom: aSpartaPresentation [
 	| canvas |
 	

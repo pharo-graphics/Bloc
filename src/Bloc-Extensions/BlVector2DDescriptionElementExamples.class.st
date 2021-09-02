@@ -3,12 +3,12 @@ I exemplify {{gtClass:BlVector2DDescriptionElement}}.
 
 "
 Class {
-	#name : #BlVector2DDescriptionElementExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Extensions-Vector'
+	#name : 'BlVector2DDescriptionElementExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Extensions-Vector'
 }
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> basicVectorDescriptionElement [
 	<gtExample>
 	| anElement |
@@ -17,7 +17,7 @@ BlVector2DDescriptionElementExamples >> basicVectorDescriptionElement [
 	^ anElement
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vector0degrees [
 	<gtExample>
 	| aVector |
@@ -26,7 +26,7 @@ BlVector2DDescriptionElementExamples >> vector0degrees [
 	^ aVector
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vector135degrees [
 	<gtExample>
 	| aVector |
@@ -35,7 +35,7 @@ BlVector2DDescriptionElementExamples >> vector135degrees [
 	^ aVector
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vector180degrees [
 	<gtExample>
 	| aVector |
@@ -44,7 +44,7 @@ BlVector2DDescriptionElementExamples >> vector180degrees [
 	^ aVector
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vector225degrees [
 	<gtExample>
 	| aVector |
@@ -53,7 +53,7 @@ BlVector2DDescriptionElementExamples >> vector225degrees [
 	^ aVector
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vector270degrees [
 	<gtExample>
 	| aVector |
@@ -62,7 +62,7 @@ BlVector2DDescriptionElementExamples >> vector270degrees [
 	^ aVector
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vector315degrees [
 	<gtExample>
 	| aVector |
@@ -71,7 +71,7 @@ BlVector2DDescriptionElementExamples >> vector315degrees [
 	^ aVector 
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vector45degrees [
 	<gtExample>
 	| aVector |
@@ -80,7 +80,7 @@ BlVector2DDescriptionElementExamples >> vector45degrees [
 	^ aVector
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vector90degrees [
 	<gtExample>
 	| aVector |
@@ -89,7 +89,7 @@ BlVector2DDescriptionElementExamples >> vector90degrees [
 	^ aVector
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_0degrees [
 	<gtExample>
 	| anElement aVector |
@@ -99,7 +99,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_0degrees [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_135degrees [
 	<gtExample>
 	| anElement aVector |
@@ -109,7 +109,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_135degrees [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_180degrees [
 	<gtExample>
 	| anElement aVector |
@@ -119,7 +119,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_180degrees [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_225degrees [
 	<gtExample>
 	| anElement aVector |
@@ -129,7 +129,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_225degrees [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_270degrees [
 	<gtExample>
 	| anElement aVector |
@@ -139,7 +139,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_270degrees [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_315degrees [
 	<gtExample>
 	| anElement aVector |
@@ -149,7 +149,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_315degrees [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_45degrees [
 	<gtExample>
 	| anElement aVector |
@@ -159,7 +159,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_45degrees [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_90degrees [
 	<gtExample>
 	| anElement aVector |
@@ -169,7 +169,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_90degrees [
 	^ anElement
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlVector2DDescriptionElementExamples >> vectorDescriptionElement_ZeroLength [
 	<gtExample>
 	| anElement aVector |
@@ -179,7 +179,7 @@ BlVector2DDescriptionElementExamples >> vectorDescriptionElement_ZeroLength [
 	^ anElement
 ]
 
-{ #category : #'examples - vector' }
+{ #category : 'examples - vector' }
 BlVector2DDescriptionElementExamples >> vectorZeroLength [
 	<gtExample>
 	| aVector |

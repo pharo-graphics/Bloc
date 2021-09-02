@@ -1,22 +1,22 @@
 Class {
-	#name : #GLMMorphicInstallablePresentationRenderer,
-	#superclass : #GLMMorphicWidgetRenderer,
-	#category : #'Bloc-Extensions-Renderers'
+	#name : 'GLMMorphicInstallablePresentationRenderer',
+	#superclass : 'GLMMorphicWidgetRenderer',
+	#category : 'Bloc-Extensions-Renderers'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMMorphicInstallablePresentationRenderer >> morphFrom: anInstallablePresentation [
 	^ self subclassResponsibility
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMMorphicInstallablePresentationRenderer >> render: anInstallablePresentation [
 	^ anInstallablePresentation isAvailable
 		ifTrue: [ self morphFrom: anInstallablePresentation ]
 		ifFalse: [ self unavailableFrom: anInstallablePresentation ]
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMMorphicInstallablePresentationRenderer >> unavailableFrom: aPresentation [
 	^ Morph new
 ]

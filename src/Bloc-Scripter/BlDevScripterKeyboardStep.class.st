@@ -1,20 +1,20 @@
 Class {
-	#name : #BlDevScripterKeyboardStep,
-	#superclass : #BlDevScripterStep,
+	#name : 'BlDevScripterKeyboardStep',
+	#superclass : 'BlDevScripterStep',
 	#instVars : [
 		'key'
 	],
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterKeyboardStep >> key [
 	<return: #BlKeyboardKey>
 
 	^ key
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterKeyboardStep >> key: aBlKeyboardKey [
 	key := aBlKeyboardKey
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #BlLayoutGraphIterator }
+Extension { #name : 'BlLayoutGraphIterator' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlLayoutGraphIterator >> gtItemsFor: aView [
 	<gtView>
 	

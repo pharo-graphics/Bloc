@@ -1,10 +1,10 @@
 Class {
-	#name : #BlDevScripterStepExecutorEventsExportOnFailActivity,
-	#superclass : #BlDevScripterStepExecutorStepActivity,
-	#category : #'Bloc-Scripter-Scripter-Executors'
+	#name : 'BlDevScripterStepExecutorEventsExportOnFailActivity',
+	#superclass : 'BlDevScripterStepExecutorStepActivity',
+	#category : 'Bloc-Scripter-Scripter-Executors'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 BlDevScripterStepExecutorEventsExportOnFailActivity >> dumpEvents: aCollectionOfEvents in: aFileReference [
 	aFileReference writeStreamDo: [ :aStream |
 		| theExportedEvents |
@@ -16,7 +16,7 @@ BlDevScripterStepExecutorEventsExportOnFailActivity >> dumpEvents: aCollectionOf
 				nextPutAll: (STONJSON toStringPretty: theExportedEvents) ]
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 BlDevScripterStepExecutorEventsExportOnFailActivity >> executePostPlayOnStep: aStep executor: anExecutor [
 	aStep state = BlDevScripterStepState success
 		ifTrue: [ ^ self ].

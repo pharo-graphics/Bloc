@@ -1,10 +1,10 @@
 Class {
-	#name : #GLMBlocMondrianPresentationExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Extensions-Examples'
+	#name : 'GLMBlocMondrianPresentationExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Extensions-Examples'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 GLMBlocMondrianPresentationExamples >> propagatingSelectionOnClick [
 	<gtExample>
 	| composite |
@@ -22,7 +22,7 @@ GLMBlocMondrianPresentationExamples >> propagatingSelectionOnClick [
 	^ composite startOn: 42
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 GLMBlocMondrianPresentationExamples >> simple [
 	<gtExample>
 	| composite |

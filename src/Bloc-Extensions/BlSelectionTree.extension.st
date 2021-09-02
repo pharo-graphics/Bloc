@@ -1,6 +1,6 @@
-Extension { #name : #BlSelectionTree }
+Extension { #name : 'BlSelectionTree' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlSelectionTree >> gtInspectorSelectionGraphIn: aComposite [
 	<gtInspectorPresentationOrder: 1> 
 	
@@ -8,7 +8,7 @@ BlSelectionTree >> gtInspectorSelectionGraphIn: aComposite [
 		ifTrue: [ self root gtInspectorSelectionGraphIn: aComposite ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlSelectionTree >> gtInspectorSelectionListIn: aComposite [
 	<gtInspectorPresentationOrder: 0> 
 	
@@ -17,7 +17,7 @@ BlSelectionTree >> gtInspectorSelectionListIn: aComposite [
 		display: [ Array streamContents: [ :aStream | self do: [ :aSelection | aStream nextPut: aSelection ] ] ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlSelectionTree >> gtTreeFor: aView [
 	<gtView>
 	

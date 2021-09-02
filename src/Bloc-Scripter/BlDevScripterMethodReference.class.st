@@ -1,28 +1,28 @@
 Class {
-	#name : #BlDevScripterMethodReference,
-	#superclass : #BlDevScripterReference,
+	#name : 'BlDevScripterMethodReference',
+	#superclass : 'BlDevScripterReference',
 	#instVars : [
 		'definition'
 	],
-	#category : #'Bloc-Scripter-Scripter-Properties'
+	#category : 'Bloc-Scripter-Scripter-Properties'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterMethodReference >> definition [
 	^ definition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterMethodReference >> definition: anObject [
 	definition := anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlDevScripterMethodReference >> definitionDo: aBlock [
 	aBlock value: self definition
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlDevScripterMethodReference >> gtReferenceFor: aView [
 	<gtView>
 	self definition ifNil: [ ^ aView empty ].

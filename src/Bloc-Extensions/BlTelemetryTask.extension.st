@@ -1,12 +1,12 @@
-Extension { #name : #BlTelemetryTask }
+Extension { #name : 'BlTelemetryTask' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTelemetryTask >> gtBarElements [
 	^ (self gtBarElementsWithGlobalWeight: 1.0 local: 1.0) asScrollableElement
 		margin: (BlInsets all: 10)
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTelemetryTask >> gtBarElementsWithGlobalWeight: aWeight local: aLocalWeight [
 	| taskElements aBarColor |
 	
@@ -77,7 +77,7 @@ BlTelemetryTask >> gtBarElementsWithGlobalWeight: aWeight local: aLocalWeight [
 		yourself
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTelemetryTask >> gtMapFor: aView [
 	<gtView>
 
@@ -87,7 +87,7 @@ BlTelemetryTask >> gtMapFor: aView [
 		stencil: [ self gtBarElements ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTelemetryTask >> gtNestedTree [
 	^ self tasks
 		ifEmpty: [
@@ -103,7 +103,7 @@ BlTelemetryTask >> gtNestedTree [
 				nodes: (theTasks collect: [ :eachTask | eachTask gtNestedTree ] as: Array) ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTelemetryTask >> gtTreeFor: aView [
 	<gtView>
 	

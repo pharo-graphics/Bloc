@@ -1,6 +1,6 @@
-Extension { #name : #BlChildrenSubset }
+Extension { #name : 'BlChildrenSubset' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlChildrenSubset >> gtInspectorSetTreeIn: aComposite [
 	<gtInspectorPresentationOrder: 3>
 	
@@ -12,7 +12,7 @@ BlChildrenSubset >> gtInspectorSetTreeIn: aComposite [
 		when: [ self hasSuperset ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlChildrenSubset >> gtInspectorSupersetChildrenIn: aComposite [
 	<gtInspectorPresentationOrder: 2>
 

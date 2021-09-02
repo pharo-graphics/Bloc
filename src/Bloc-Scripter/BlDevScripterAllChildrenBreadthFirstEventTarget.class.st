@@ -1,10 +1,10 @@
 Class {
-	#name : #BlDevScripterAllChildrenBreadthFirstEventTarget,
-	#superclass : #BlDevScripterEventTarget,
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#name : 'BlDevScripterAllChildrenBreadthFirstEventTarget',
+	#superclass : 'BlDevScripterEventTarget',
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterAllChildrenBreadthFirstEventTarget >> findTargetIn: anElement [
 	<return: #Collection of: #BlElement>
 
@@ -12,7 +12,7 @@ BlDevScripterAllChildrenBreadthFirstEventTarget >> findTargetIn: anElement [
 		anElement allChildrenBreadthFirstDo: [ :eachElement | aStream nextPut: eachElement ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterAllChildrenBreadthFirstEventTarget >> printOn: aStream [
 	aStream 
 		nextPutAll: 'allChildrenBreadthFirst'

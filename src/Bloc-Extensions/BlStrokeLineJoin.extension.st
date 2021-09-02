@@ -1,6 +1,6 @@
-Extension { #name : #BlStrokeLineJoin }
+Extension { #name : 'BlStrokeLineJoin' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStrokeLineJoin >> gtInspectorOtherTypesIn: aComposite [
 	<gtInspectorPresentationOrder: 6>
 	
@@ -9,14 +9,14 @@ BlStrokeLineJoin >> gtInspectorOtherTypesIn: aComposite [
 		when: [ self class ~= BlStrokeLineJoin ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStrokeLineJoin >> gtInspectorTypesIn: aComposite [
 	<gtInspectorPresentationOrder: 5>
 	
 	^ self class gtInspectorTypesIn: aComposite
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStrokeLineJoin class >> gtInspectorTypesIn: aComposite [
 	<gtInspectorPresentationOrder: 5>
 	^ aComposite fastList
@@ -26,7 +26,7 @@ BlStrokeLineJoin class >> gtInspectorTypesIn: aComposite [
 		format: [ :each | each class joinName ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlStrokeLineJoin >> gtPreviewFor: aView [
 	<gtView>
 	

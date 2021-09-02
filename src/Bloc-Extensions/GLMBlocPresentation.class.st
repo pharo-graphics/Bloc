@@ -3,18 +3,18 @@ This presentation offers a means to embed a Bloc element. It makes sense only fo
 
 "
 Class {
-	#name : #GLMBlocPresentation,
-	#superclass : #GLMPresentation,
+	#name : 'GLMBlocPresentation',
+	#superclass : 'GLMPresentation',
 	#traits : 'TGLMBlocPresentation',
 	#classTraits : 'TGLMBlocPresentation classTrait',
 	#instVars : [
 		'elementBuilder',
 		'element'
 	],
-	#category : #'Bloc-Extensions-Presentations'
+	#category : 'Bloc-Extensions-Presentations'
 }
 
-{ #category : #requirements }
+{ #category : 'requirements' }
 GLMBlocPresentation >> element [
 	^ element ifNil: [ 
 		element := elementBuilder glamourValue: 
@@ -23,23 +23,23 @@ GLMBlocPresentation >> element [
 		element when: GLMBlocObjectToSelect do: [:signal | self selection: signal toSelect ] ]
 ]
 
-{ #category : #requirements }
+{ #category : 'requirements' }
 GLMBlocPresentation >> element: aBlock [
 	elementBuilder := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GLMBlocPresentation >> initialize [
 	super initialize.
 	elementBuilder := [ :thisPresentation :theDisplayValue | theDisplayValue asElement ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GLMBlocPresentation >> isAvailable [
 	^ true
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMBlocPresentation >> renderGlamorouslyOn: aRenderer [ 
 	self registerAnnouncements.
 	^ aRenderer renderBlocPresentation: self

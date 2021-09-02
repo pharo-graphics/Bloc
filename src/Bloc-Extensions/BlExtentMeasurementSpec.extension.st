@@ -1,6 +1,6 @@
-Extension { #name : #BlExtentMeasurementSpec }
+Extension { #name : 'BlExtentMeasurementSpec' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlExtentMeasurementSpec >> gtInspectorSpecIn: composite [
 	<gtInspectorPresentationOrder: 0>
 

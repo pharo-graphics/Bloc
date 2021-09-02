@@ -3,16 +3,16 @@ I wrap a morphic host space window and listen for SystemWindow close events in o
 
 "
 Class {
-	#name : #GLMMorphicBlocWrapperMorph,
-	#superclass : #Morph,
+	#name : 'GLMMorphicBlocWrapperMorph',
+	#superclass : 'Morph',
 	#instVars : [
 		'space',
 		'currentWindow'
 	],
-	#category : #'Bloc-Extensions-UI'
+	#category : 'Bloc-Extensions-UI'
 }
 
-{ #category : #api }
+{ #category : 'api' }
 GLMMorphicBlocWrapperMorph >> announceDeleted [
     super announceDeleted.
 
@@ -28,14 +28,14 @@ GLMMorphicBlocWrapperMorph >> announceDeleted [
    self closeSpace
 ]
 
-{ #category : #announcements }
+{ #category : 'announcements' }
 GLMMorphicBlocWrapperMorph >> announceOpened [
 	super announceOpened.
 
 	self onAddedToWindow
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 GLMMorphicBlocWrapperMorph >> closeSpace [
 	self space
 		ifNil: [ ^ self ].
@@ -44,40 +44,40 @@ GLMMorphicBlocWrapperMorph >> closeSpace [
 		ifTrue: [ self space close ]
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 GLMMorphicBlocWrapperMorph >> finalize [
 	self closeSpace.
 	space at: 1 put: nil.
 	currentWindow := nil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GLMMorphicBlocWrapperMorph >> initialize [
 	super initialize.
 	
 	space := WeakArray new: 1
 ]
 
-{ #category : #announcements }
+{ #category : 'announcements' }
 GLMMorphicBlocWrapperMorph >> intoWorld: aWorld [
 	super intoWorld: aWorld.
 
 	self showSpace
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 GLMMorphicBlocWrapperMorph >> onAddedToWindow [
 	currentWindow := self window.
 	currentWindow announcer when: WindowClosed send: #onWindowClosed to: self
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 GLMMorphicBlocWrapperMorph >> onWindowClosed [
 
 	self closeSpace
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 GLMMorphicBlocWrapperMorph >> showSpace [
 	self space
 		ifNil: [ ^ self ].
@@ -88,14 +88,14 @@ GLMMorphicBlocWrapperMorph >> showSpace [
 	self space show
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMMorphicBlocWrapperMorph >> space [
 	<return: #BlSpace or: nil>
 
 	^ space at: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMMorphicBlocWrapperMorph >> space: aBlSpace [
 	space at: 1 put: aBlSpace
 ]

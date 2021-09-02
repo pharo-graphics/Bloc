@@ -1,12 +1,12 @@
-Extension { #name : #BlInterpolator }
+Extension { #name : 'BlInterpolator' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlInterpolator class >> gtInspectorPreviewInSparta: composite [
 	<gtInspectorPresentationOrder: 0>
 	self default gtInspectorPreviewInSparta: composite
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlInterpolator >> gtInspectorPreviewInSparta: composite [
 	<gtInspectorPresentationOrder: 0>
 	composite morph

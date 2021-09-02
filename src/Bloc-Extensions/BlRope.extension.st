@@ -1,6 +1,6 @@
-Extension { #name : #BlRope }
+Extension { #name : 'BlRope' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlRope >> gtInspectorChildrenIn: composite [
 	<gtInspectorPresentationOrder: 10>
 	composite table
@@ -11,7 +11,7 @@ BlRope >> gtInspectorChildrenIn: composite [
 		column: 'Description' evaluated: [ :each | GTObjectPrinter asTruncatedTextFrom: each ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlRope >> gtInspectorTreeIn: composite [
 	<gtInspectorPresentationOrder: 10>
 	^ composite blocMondrian
@@ -19,12 +19,12 @@ BlRope >> gtInspectorTreeIn: composite [
 		painting: [ :mondrian :x :presentation | self paintTreeWith: mondrian ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlRope >> gtLiveFor: aView [
 	^ self gtTreeFor: aView
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlRope >> gtTreeFor: aView [
 	<gtView>
 	
@@ -33,7 +33,7 @@ BlRope >> gtTreeFor: aView [
 		painting: [ :aMondrian | self paintTreeWith: aMondrian ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlRope >> paintTreeWith: view [
 	view nodes
 		shape: [ :each | 

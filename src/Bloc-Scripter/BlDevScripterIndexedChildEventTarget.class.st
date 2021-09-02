@@ -1,24 +1,24 @@
 Class {
-	#name : #BlDevScripterIndexedChildEventTarget,
-	#superclass : #BlDevScripterEventTarget,
+	#name : 'BlDevScripterIndexedChildEventTarget',
+	#superclass : 'BlDevScripterEventTarget',
 	#instVars : [
 		'index'
 	],
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterIndexedChildEventTarget class >> matchesWithInput: anObject [
 	<return: #Boolean>
 	^ anObject isInteger
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlDevScripterIndexedChildEventTarget class >> newFromInput: anObject [
 	^ self new index: anObject
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterIndexedChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
@@ -33,22 +33,22 @@ BlDevScripterIndexedChildEventTarget >> findTargetIn: anElement [
 	^ anElement children at: self index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterIndexedChildEventTarget >> identifier [
 	^ self index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterIndexedChildEventTarget >> index [
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterIndexedChildEventTarget >> index: anObject [
 	index := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterIndexedChildEventTarget >> printOn: aStream [
 	self index ifNil: [ ^ super printOn: aStream ].
 	aStream 

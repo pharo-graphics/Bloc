@@ -1,6 +1,6 @@
-Extension { #name : #BlTextParagraphSegment }
+Extension { #name : 'BlTextParagraphSegment' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTextParagraphSegment >> gtInspectorMetricsIn: aComposite [
 	<gtInspectorPresentationOrder: 2>
 

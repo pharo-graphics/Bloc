@@ -1,12 +1,12 @@
 Class {
-	#name : #GLMBlocTextPresentation,
-	#superclass : #GLMTextualPresentation,
+	#name : 'GLMBlocTextPresentation',
+	#superclass : 'GLMTextualPresentation',
 	#traits : 'TGLMBlocPresentation',
 	#classTraits : 'TGLMBlocPresentation classTrait',
-	#category : #'Bloc-Extensions-Presentations'
+	#category : 'Bloc-Extensions-Presentations'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMBlocTextPresentation >> element [
 	| element |
 	
@@ -19,29 +19,29 @@ GLMBlocTextPresentation >> element [
 	^ element
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GLMBlocTextPresentation >> initialize [
 	super initialize.
 
 	self format: #yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GLMBlocTextPresentation >> isAvailable [
 	^ self class environment hasClassNamed: #BrTextEditor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GLMBlocTextPresentation >> newEditorElement [
 	^ (self class environment classNamed: #BrEditorElement) new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GLMBlocTextPresentation >> newEditorModel [
 	^ (self class environment classNamed: #BrTextEditor) new
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMBlocTextPresentation >> renderGlamorouslyOn: aRenderer [ 
 	self registerAnnouncements.
 	^ aRenderer renderBlocTextPresentation: self

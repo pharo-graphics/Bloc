@@ -1,13 +1,13 @@
-Extension { #name : #BlMatrix }
+Extension { #name : 'BlMatrix' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlMatrix >> gtInspectorDecompositionIn: aComposite [
 	<gtInspectorPresentationOrder: 2>
 	
 	^ self decomposition gtInspectorDecompositionIn: aComposite
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlMatrix >> gtInspectorMatrixIn: aComposite [
 	<gtInspectorPresentationOrder: 1>
 	
@@ -16,7 +16,7 @@ BlMatrix >> gtInspectorMatrixIn: aComposite [
 		display: [ GLMBlocMatrixElement new matrix: self asMatrixCollection ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlMatrix >> gtInspectorRecompositionIn: aComposite [
 	<gtInspectorPresentationOrder: 3>
 	

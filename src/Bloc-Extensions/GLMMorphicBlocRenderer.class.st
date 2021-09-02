@@ -3,12 +3,12 @@ I render bloc presentation that should be able to be used within morphic
 
 "
 Class {
-	#name : #GLMMorphicBlocRenderer,
-	#superclass : #GLMMorphicInstallablePresentationRenderer,
-	#category : #'Bloc-Extensions-Renderers'
+	#name : 'GLMMorphicBlocRenderer',
+	#superclass : 'GLMMorphicInstallablePresentationRenderer',
+	#category : 'Bloc-Extensions-Renderers'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMMorphicBlocRenderer >> morphFrom: aBlocPresentation [
 	| container element   |
 

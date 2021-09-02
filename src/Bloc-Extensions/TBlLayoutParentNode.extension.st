@@ -1,6 +1,6 @@
-Extension { #name : #TBlLayoutParentNode }
+Extension { #name : 'TBlLayoutParentNode' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlLayoutParentNode >> gtChildrenFor: aView [
 	<gtView>
 	
@@ -11,7 +11,7 @@ TBlLayoutParentNode >> gtChildrenFor: aView [
 		view: #gtChildrenFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlLayoutParentNode >> gtExtentsFor: aView [
 	<gtView>
 
@@ -27,7 +27,7 @@ TBlLayoutParentNode >> gtExtentsFor: aView [
 				aStream cr; tab; nextPut: $} ]) asRopedText glamorousCodeFont ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlLayoutParentNode >> gtMeasuredBoundsFor: aView [
 	<gtView>
 
@@ -43,7 +43,7 @@ TBlLayoutParentNode >> gtMeasuredBoundsFor: aView [
 				aStream cr; tab; nextPut: $} ]) asRopedText glamorousCodeFont ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlLayoutParentNode >> gtPreviewFor: aView [
 	<gtView>
 

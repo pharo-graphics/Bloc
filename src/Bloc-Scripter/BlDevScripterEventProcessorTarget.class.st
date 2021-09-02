@@ -1,15 +1,15 @@
 Class {
-	#name : #BlDevScripterEventProcessorTarget,
-	#superclass : #BlDevScripterTarget,
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#name : 'BlDevScripterEventProcessorTarget',
+	#superclass : 'BlDevScripterTarget',
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterEventProcessorTarget class >> isAbstract [
 	^ self name = #BlDevScripterEventProcessorTarget
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterEventProcessorTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 	self 
@@ -19,12 +19,12 @@ BlDevScripterEventProcessorTarget >> findTargetIn: anElement [
 	^ self findTargetStartingInSpace: anElement space
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterEventProcessorTarget >> findTargetStartingInScripter: aScripter [
 	^ self findTargetStartingInSpace: aScripter space
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterEventProcessorTarget >> findTargetStartingInSpace: aSpace [
 	^ self subclassResponsibility
 ]

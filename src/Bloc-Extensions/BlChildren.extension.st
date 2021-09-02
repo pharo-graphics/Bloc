@@ -1,6 +1,6 @@
-Extension { #name : #BlChildren }
+Extension { #name : 'BlChildren' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlChildren >> gtInspectorChildrenIn: aComposite [
 	<gtInspectorPresentationOrder: 1>
 

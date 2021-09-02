@@ -1,6 +1,6 @@
-Extension { #name : #BlTextFontAndStyleBuilder }
+Extension { #name : 'BlTextFontAndStyleBuilder' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTextFontAndStyleBuilder >> gtInfoFor: aView [
 	<gtView>
 	| aNotSetText |

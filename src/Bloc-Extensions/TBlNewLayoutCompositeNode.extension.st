@@ -1,6 +1,6 @@
-Extension { #name : #TBlNewLayoutCompositeNode }
+Extension { #name : 'TBlNewLayoutCompositeNode' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlNewLayoutCompositeNode >> gtExtentsFor: aView [
 	<gtView>
 
@@ -16,7 +16,7 @@ TBlNewLayoutCompositeNode >> gtExtentsFor: aView [
 				aStream cr; tab; nextPut: $} ]) asRopedText glamorousCodeFont ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlNewLayoutCompositeNode >> gtMeasuredBoundsFor: aView [
 	<gtView>
 
@@ -32,7 +32,7 @@ TBlNewLayoutCompositeNode >> gtMeasuredBoundsFor: aView [
 				aStream cr; tab; nextPut: $} ]) asRopedText glamorousCodeFont ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlNewLayoutCompositeNode >> gtPreviewFor: aView [
 	<gtView>
 

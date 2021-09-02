@@ -1,6 +1,6 @@
-Extension { #name : #BlLayoutChildNodeWithEdges }
+Extension { #name : 'BlLayoutChildNodeWithEdges' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlLayoutChildNodeWithEdges >> gtConnectedEdgesFor: aView [
 	<gtView>
 	
@@ -10,7 +10,7 @@ BlLayoutChildNodeWithEdges >> gtConnectedEdgesFor: aView [
 		items: [ self connectedEdges ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlLayoutChildNodeWithEdges >> gtIncomingEdgesFor: aView [
 	<gtView>
 	
@@ -21,7 +21,7 @@ BlLayoutChildNodeWithEdges >> gtIncomingEdgesFor: aView [
 		view: #gtItemsFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlLayoutChildNodeWithEdges >> gtOutgoingEdgesFor: aView [
 	<gtView>
 	

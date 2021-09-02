@@ -9,15 +9,15 @@ Here you can see how to configure a fire and check a click event on a child elem
 
 "
 Class {
-	#name : #BlDevScripterCheckFiredEventsStep,
-	#superclass : #BlDevScripterCheckStep,
+	#name : 'BlDevScripterCheckFiredEventsStep',
+	#superclass : 'BlDevScripterCheckStep',
 	#instVars : [
 		'events'
 	],
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BlDevScripterCheckFiredEventsStep >> assertEventClass: anEventClass withTarget: aBlElement on: aScripter [ 
 	| theInterestingEvents |
 	theInterestingEvents := aScripter events select: [ :eachEvent | 
@@ -25,24 +25,24 @@ BlDevScripterCheckFiredEventsStep >> assertEventClass: anEventClass withTarget: 
 	self assert: theInterestingEvents size isZero not.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCheckFiredEventsStep >> defaultLabel [
 	^ 'Click Check'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCheckFiredEventsStep >> event: aClass [ 
 	self events: { aClass }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCheckFiredEventsStep >> events [
 	<return: #Collection of: #BlEvent>
 
 	^ events
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCheckFiredEventsStep >> events: aCollection [
 	<return: #Collection of: #BlEvent>
 	self 
@@ -51,7 +51,7 @@ BlDevScripterCheckFiredEventsStep >> events: aCollection [
 	events := aCollection
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterCheckFiredEventsStep >> playOn: aScripter [
 	| anElement |
 

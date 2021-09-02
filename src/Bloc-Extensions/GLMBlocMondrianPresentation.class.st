@@ -1,6 +1,6 @@
 Class {
-	#name : #GLMBlocMondrianPresentation,
-	#superclass : #GLMPresentation,
+	#name : 'GLMBlocMondrianPresentation',
+	#superclass : 'GLMPresentation',
 	#traits : 'TGLMBlocPresentation',
 	#classTraits : 'TGLMBlocPresentation classTrait',
 	#instVars : [
@@ -10,15 +10,15 @@ Class {
 		'shouldInstallClicksOnEdges',
 		'createdElement'
 	],
-	#category : #'Bloc-Extensions-Presentations'
+	#category : 'Bloc-Extensions-Presentations'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GLMBlocMondrianPresentation >> createDefaultView [
 	^ (self class environment classNamed: #GtMondrian) new
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> defaultActions [
 	self act: [ :aBlocPresentation | aBlocPresentation element zoomToActualSize ]
 			icon: (Smalltalk ui icons iconNamed: #checkBoxPressed)
@@ -37,7 +37,7 @@ GLMBlocMondrianPresentation >> defaultActions [
 			entitled: 'Inspect'
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> element [
 	<return: #BlElement>
 	| view |
@@ -72,7 +72,7 @@ GLMBlocMondrianPresentation >> element [
 	^ createdElement := view asPannableElement
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> initialize [
 	super initialize.
 	paintingBlock := [ :aGtMondrian :theDisplayValue | ].
@@ -82,43 +82,43 @@ GLMBlocMondrianPresentation >> initialize [
 	self defaultActions
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> initializeView: aBlock [
 	viewInitializer := aBlock
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GLMBlocMondrianPresentation >> isAvailable [
 	^ self class environment hasClassNamed: #GtMondrian
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> painting: aBlock [
 	paintingBlock := aBlock
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> renderGlamorouslyOn: aRenderer [ 
 	self registerAnnouncements.
 	^ aRenderer renderBlocMondrianPresentation: self
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> withEdgeClicks [
 	shouldInstallClicksOnEdges := true
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> withNodeClicks [
 	shouldInstallClicksOnNodes := true
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> withoutEdgeClicks [
 	shouldInstallClicksOnEdges := false
 ]
 
-{ #category : #scripting }
+{ #category : 'scripting' }
 GLMBlocMondrianPresentation >> withoutNodeClicks [
 	shouldInstallClicksOnNodes := false
 ]

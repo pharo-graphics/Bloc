@@ -1,6 +1,6 @@
-Extension { #name : #BlTextParagraphSpan }
+Extension { #name : 'BlTextParagraphSpan' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlTextParagraphSpan >> gtPositionsAtIndicesFor: aView [
 	<gtView>
 	

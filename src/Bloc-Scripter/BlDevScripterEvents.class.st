@@ -1,10 +1,10 @@
 Class {
-	#name : #BlDevScripterEvents,
-	#superclass : #BlDevScripterCollection,
-	#category : #'Bloc-Scripter-Scripter-Utilities'
+	#name : 'BlDevScripterEvents',
+	#superclass : 'BlDevScripterCollection',
+	#category : 'Bloc-Scripter-Scripter-Utilities'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlDevScripterEvents >> add: anEvent [
 	self 
 		assert: [ anEvent isNotNil ]
@@ -14,27 +14,27 @@ BlDevScripterEvents >> add: anEvent [
 		ifFalse: [ self collection add: anEvent ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlDevScripterEvents >> asArray [
 	^ self collection asArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterEvents >> at: anIndex [
 	^ self collection at: anIndex
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlDevScripterEvents >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	^ self collection detect: aBlock ifFound: foundBlock ifNone: exceptionBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlDevScripterEvents >> do: aBlock [
 	self collection do: aBlock
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlDevScripterEvents >> gtEventsFor: aView [
 	<gtView>
 	self collection ifNil: [ ^ aView empty ].
@@ -43,15 +43,13 @@ BlDevScripterEvents >> gtEventsFor: aView [
 		priority: 3;
 		items: [ self ];
 		column: 'Index'
-			item:
-				[ :eachItem :eachIndex | eachIndex asRopedText foreground: Color gray ]
+			text: [ :eachItem :eachIndex | eachIndex asRopedText foreground: Color gray ]
 			width: 80;
 		column: 'Item'
-			item: [ :eachItem :eachIndex | eachItem ]
 			text: [ :eachItem | eachItem gtDisplayText ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlDevScripterEvents >> gtReveresedEventsFor: aView [
 	<gtView>
 	self collection ifNil: [ ^ aView empty ].
@@ -60,12 +58,12 @@ BlDevScripterEvents >> gtReveresedEventsFor: aView [
 		priority: 4
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlDevScripterEvents >> reversed [
 	^ BlDevScripterReversedEvents new collection: self collection.
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlDevScripterEvents >> select: aBlock [ 
 	^ self collection select: aBlock 
 ]

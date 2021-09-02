@@ -1,6 +1,6 @@
-Extension { #name : #BlElement }
+Extension { #name : 'BlElement' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorChildrenIn: composite [
 	<gtInspectorPresentationOrder: 80>
 	
@@ -17,7 +17,7 @@ BlElement >> gtInspectorChildrenIn: composite [
 		when: [ self children notNil and:[ self hasChildren ] ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorEventsIn: aComposite context: aGTContext [
 	<gtInspectorPresentationOrder: 40>
 	| recordedAnnouncements anEventFilter |
@@ -47,7 +47,7 @@ BlElement >> gtInspectorEventsIn: aComposite context: aGTContext [
 			entitled: 'Reset'
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorLiveIn: composite [
 	<gtInspectorPresentationOrder: 5>
 	
@@ -71,7 +71,7 @@ BlElement >> gtInspectorLiveIn: composite [
 		when: [ self topMostParent == self and: [ self isAttachedToSceneGraph not ] ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorMeasurementChainIn: aComposite [
 	<gtInspectorPresentationOrder: 90>
 	| withAllParents |
@@ -100,7 +100,7 @@ BlElement >> gtInspectorMeasurementChainIn: aComposite [
 		column: 'Element' evaluated: [ :each | (each at: #element) gtDisplayString ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorMetricsIn: composite [
 	<gtInspectorPresentationOrder: 100>  
 	
@@ -112,7 +112,7 @@ BlElement >> gtInspectorMetricsIn: composite [
 				for: self ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorOpenInSpace [
 	<gtInspectorAction>
 	^ GLMGenericAction new
@@ -122,7 +122,7 @@ BlElement >> gtInspectorOpenInSpace [
 		condition: [ self hasParent not ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorPreviewIn: composite [
 	<gtInspectorPresentationOrder: 15>
 	| morphPresentation |
@@ -152,7 +152,7 @@ BlElement >> gtInspectorPreviewIn: composite [
 	^ morphPresentation
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorResizersIn: aComposite [
 	<gtInspectorPresentationOrder: 90>
 	| withAllParents |
@@ -171,7 +171,7 @@ BlElement >> gtInspectorResizersIn: aComposite [
 		column: 'Element' evaluated: [ :each | each gtDisplayString ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorShortcutsIn: composite [
 	<gtInspectorPresentationOrder: 90>
 	composite fastTable 
@@ -182,14 +182,14 @@ BlElement >> gtInspectorShortcutsIn: composite [
 		when: [ self shortcuts notEmpty ]
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorUserDataIn: composite [
 	<gtInspectorPresentationOrder: 20>  
 	^ (self userData gtInspectorItemsIn: composite) 
 		title: 'User data'
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtPropertiesFor: aView [
 	<gtView>
 
@@ -200,7 +200,7 @@ BlElement >> gtPropertiesFor: aView [
 		view: #gtPropertiesFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtStatesFor: aView [
 	<gtView>
 
@@ -211,7 +211,7 @@ BlElement >> gtStatesFor: aView [
 		view: #gtStatesFor:
 ]
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlElement >> gtStylesFor: aView [
 	<gtView>
 

@@ -1,6 +1,6 @@
-Extension { #name : #BlMouseWheelEvent }
+Extension { #name : 'BlMouseWheelEvent' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlMouseWheelEvent >> gtVectorFor: aView [
 	<gtView>
 	self vector ifNil: [ ^ aView empty ].

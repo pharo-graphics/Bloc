@@ -1,5 +1,5 @@
 Class {
-	#name : #GLMMorphicBlocMondrianRenderer,
-	#superclass : #GLMMorphicBlocRenderer,
-	#category : #'Bloc-Extensions-Renderers'
+	#name : 'GLMMorphicBlocMondrianRenderer',
+	#superclass : 'GLMMorphicBlocRenderer',
+	#category : 'Bloc-Extensions-Renderers'
 }

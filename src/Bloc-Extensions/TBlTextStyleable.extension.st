@@ -1,6 +1,6 @@
-Extension { #name : #TBlTextStyleable }
+Extension { #name : 'TBlTextStyleable' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 TBlTextStyleable >> gtInspectorTextAttributesIn: aComposite [
 	<gtInspectorPresentationOrder: 20>
 

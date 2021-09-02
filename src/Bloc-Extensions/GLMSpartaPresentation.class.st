@@ -3,8 +3,8 @@ This presentation offers a means to embed a Sparta Canvas and draw on it. It mak
 
 "
 Class {
-	#name : #GLMSpartaPresentation,
-	#superclass : #GLMPresentation,
+	#name : 'GLMSpartaPresentation',
+	#superclass : 'GLMPresentation',
 	#traits : 'TGLMBlocPresentation',
 	#classTraits : 'TGLMBlocPresentation classTrait',
 	#instVars : [
@@ -12,44 +12,44 @@ Class {
 		'canvasBlock',
 		'drawBlock'
 	],
-	#category : #'Bloc-Extensions-Presentations'
+	#category : 'Bloc-Extensions-Presentations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMSpartaPresentation >> canvas [
 	^ canvasBlock glamourValue: 
 		(self asGlamorousMultiValue, 
 		self displayValue asGlamorousMultiValue)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMSpartaPresentation >> canvas: aBlock [
 	canvasBlock := aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMSpartaPresentation >> draw: aBlock [
 	drawBlock := aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMSpartaPresentation >> drawBlock [
 	^ drawBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMSpartaPresentation >> extent [
 	^ extentBlock glamourValue: 
 			(self asGlamorousMultiValue, 
 			self displayValue asGlamorousMultiValue)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GLMSpartaPresentation >> extent: aBlock [
 	extentBlock := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GLMSpartaPresentation >> initialize [
 	super initialize.
 	
@@ -58,12 +58,12 @@ GLMSpartaPresentation >> initialize [
 	drawBlock := [ :aCanvas | ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GLMSpartaPresentation >> isAvailable [
 	^ true
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 GLMSpartaPresentation >> renderGlamorouslyOn: aRenderer [ 
 	self registerAnnouncements.
 	^ aRenderer renderSpartaPresentation: self

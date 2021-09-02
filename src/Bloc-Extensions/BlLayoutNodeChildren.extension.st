@@ -1,6 +1,6 @@
-Extension { #name : #BlLayoutNodeChildren }
+Extension { #name : 'BlLayoutNodeChildren' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlLayoutNodeChildren >> gtChildrenFor: aView [
 	<gtView>
 	

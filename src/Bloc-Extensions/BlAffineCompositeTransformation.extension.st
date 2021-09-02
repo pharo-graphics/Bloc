@@ -1,6 +1,6 @@
-Extension { #name : #BlAffineCompositeTransformation }
+Extension { #name : 'BlAffineCompositeTransformation' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlAffineCompositeTransformation >> gtInspectorTransformationsIn: composite [
 	<gtInspectorPresentationOrder: 20>
 		

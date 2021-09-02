@@ -1,18 +1,18 @@
 Class {
-	#name : #BlDevScripterActionStep,
-	#superclass : #BlDevScripterTargetedStep,
+	#name : 'BlDevScripterActionStep',
+	#superclass : 'BlDevScripterTargetedStep',
 	#instVars : [
 		'block'
 	],
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterActionStep >> action: anOneArgBlock [
 	self block: anOneArgBlock
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BlDevScripterActionStep >> assertBlock: anOneArgBlock [
 	self 
 		assert: [ anOneArgBlock isNotNil ] 
@@ -22,23 +22,23 @@ BlDevScripterActionStep >> assertBlock: anOneArgBlock [
 		description: [ 'Block must receive less then 4 arguments' ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterActionStep >> block [
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterActionStep >> block: anOneArgBlock [
 	self assertBlock: anOneArgBlock.
 	block := anOneArgBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterActionStep >> defaultLabel [
 	^ 'Action'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterActionStep >> playOn: aScripter [
 	| aTarget |
 	self assertBlock: self block.
@@ -46,7 +46,7 @@ BlDevScripterActionStep >> playOn: aScripter [
 	self block cull: aTarget cull: aScripter userData cull: aScripter.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterActionStep >> pulse [
 	self label: 'Pulse space'.
 	self onSpace.

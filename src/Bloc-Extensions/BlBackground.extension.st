@@ -1,6 +1,6 @@
-Extension { #name : #BlBackground }
+Extension { #name : 'BlBackground' }
 
-{ #category : #'*Bloc-Extensions' }
+{ #category : '*Bloc-Extensions' }
 BlBackground >> gtViewBackgroundFor: aView [
 	<gtView>
 	^ aView explicit
