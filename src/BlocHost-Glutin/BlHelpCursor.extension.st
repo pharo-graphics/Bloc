@@ -1,6 +1,6 @@
-Extension { #name : #BlHelpCursor }
+Extension { #name : 'BlHelpCursor' }
 
-{ #category : #'*BlocHost-Glutin' }
+{ #category : '*BlocHost-Glutin' }
 BlHelpCursor >> asGlutinCursor [
 	^ GlutinCursorIcon Help
 ]

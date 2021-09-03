@@ -1,6 +1,6 @@
 Class {
-	#name : #BlGlutinHostSpace,
-	#superclass : #Object,
+	#name : 'BlGlutinHostSpace',
+	#superclass : 'Object',
 	#traits : 'TBlHostSpace + TGlutinEventVisitor + TBlSpaceProperties',
 	#classTraits : 'TBlHostSpace classTrait + TGlutinEventVisitor classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
@@ -14,39 +14,39 @@ Class {
 	#classVars : [
 		'ZoomFactor'
 	],
-	#category : #'BlocHost-Glutin-Host'
+	#category : 'BlocHost-Glutin-Host'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlGlutinHostSpace class >> initialize [
 	ZoomFactor := 1.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGlutinHostSpace class >> zoomFactor [
 	^ ZoomFactor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGlutinHostSpace class >> zoomFactor: aNumber [
 	ZoomFactor := aNumber.
 	
 	self allSubInstancesDo: [ :eachHostSpace | eachHostSpace zoomFactorChanged ]
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : 'host space - displaying' }
 BlGlutinHostSpace >> close [
 	window close
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlGlutinHostSpace >> computeWindowScaleFactor: aScaleFactor [
 	<return: #Number>
 
 	^ aScaleFactor * self class zoomFactor
 ]
 
-{ #category : #'event - handling' }
+{ #category : 'event - handling' }
 BlGlutinHostSpace >> convertButton: aGlutinButton [
 	<return: #BlMouseButton>
 
@@ -62,14 +62,14 @@ BlGlutinHostSpace >> convertButton: aGlutinButton [
 	^ BlMouseButton code: aGlutinButton button_code
 ]
 
-{ #category : #'event - handling' }
+{ #category : 'event - handling' }
 BlGlutinHostSpace >> convertKeyFromEvent: anEvent [
 	<return: #BlKeyboardKey>
 
 	^ self keyboardKeyTable keyFromVirtualCode: anEvent virtual_keycode
 ]
 
-{ #category : #'event - handling' }
+{ #category : 'event - handling' }
 BlGlutinHostSpace >> convertKeyModifiers: theGlutinModifiers [
 	<return: #BlKeyModifiers>
 
@@ -80,21 +80,21 @@ BlGlutinHostSpace >> convertKeyModifiers: theGlutinModifiers [
 		cmd: theGlutinModifiers logo
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGlutinHostSpace >> createOpenGLSurfaceRenderer [
 	<return: #BlHostSurfaceRenderer>
 
 	^ BlGlutinOpenGLSurfaceRenderer new window: self window
 ]
 
-{ #category : #'host space - cursor' }
+{ #category : 'host space - cursor' }
 BlGlutinHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
 
 	window cursor: aCursor asGlutinCursor
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlGlutinHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -102,14 +102,14 @@ BlGlutinHostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #'host space - events' }
+{ #category : 'host space - events' }
 BlGlutinHostSpace >> enqueueEvent: aBlEvent [
 	"I put events in a queue to be processed later"
 
 	self eventFetcher enqueueEvent: aBlEvent
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : 'host space - accessing' }
 BlGlutinHostSpace >> eventFetcher [
 	"Return event fetcher used to enqueue events that should be
 	processed in the beginning of every frame"
@@ -118,19 +118,19 @@ BlGlutinHostSpace >> eventFetcher [
 	^ eventFetcher
 ]
 
-{ #category : #'host space - events' }
+{ #category : 'host space - events' }
 BlGlutinHostSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
 	
 	self eventFetcher fetchedEventsDo: aBlock
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : 'host space - accessing' }
 BlGlutinHostSpace >> id [
 	^ window id
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGlutinHostSpace >> initialize [
 	super initialize.
 
@@ -140,12 +140,12 @@ BlGlutinHostSpace >> initialize [
 	modifiers := BlKeyModifiers new
 ]
 
-{ #category : #'event - handling' }
+{ #category : 'event - handling' }
 BlGlutinHostSpace >> keyboardKeyTable [
 	^ BlGlutinKeyboardKeyTable default
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlGlutinHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -155,14 +155,14 @@ BlGlutinHostSpace >> logicalSize [
 	^ self physicalSize asLogical: self scaleFactor
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : 'host space - rendering' }
 BlGlutinHostSpace >> makeCurrent [
 	"When displaying visual content on the screen very often a window framebuffer must be marked as a current"
 	
 	window makeCurrent
 ]
 
-{ #category : #'host space - testing' }
+{ #category : 'host space - testing' }
 BlGlutinHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 	<return: #Boolean>
@@ -170,7 +170,7 @@ BlGlutinHostSpace >> needsRebuild [
 	^ window isValid not
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlGlutinHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -182,7 +182,7 @@ BlGlutinHostSpace >> physicalSize [
 	^ FensterPhysicalSize width: anExtent x height: anExtent y
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlGlutinHostSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
@@ -190,7 +190,7 @@ BlGlutinHostSpace >> position [
 	^ window position
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlGlutinHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen coordinates"
 	
@@ -198,14 +198,14 @@ BlGlutinHostSpace >> position: aPoint [
 
 ]
 
-{ #category : #'host space - rendering' }
+{ #category : 'host space - rendering' }
 BlGlutinHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
 	Glutin critical: [ self renderer render: self ]
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlGlutinHostSpace >> scaleFactor [
 	"Return a scaling dpi factor from logical to physical coordinates.
 	On high dpi (retina) displays scaling factor is > 1"
@@ -214,7 +214,7 @@ BlGlutinHostSpace >> scaleFactor [
 	^ scaleFactor ifNil: [ scaleFactor := self computeWindowScaleFactor: window scaleFactor ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlGlutinHostSpace >> scaleFactorChangedTo: aScaleFactor physicalSize: aFensterPhysicalSize [
 	| aBlocEvent |
 
@@ -236,12 +236,12 @@ BlGlutinHostSpace >> scaleFactorChangedTo: aScaleFactor physicalSize: aFensterPh
 	self universe ifNotNil: [ :aUniverse | aUniverse pulse ]
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : 'host space - displaying' }
 BlGlutinHostSpace >> show [
 	"Window appears when created, show is redundant"
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlGlutinHostSpace >> title [
 	"Return window's title as a string"
 	<return: #String>
@@ -249,14 +249,14 @@ BlGlutinHostSpace >> title [
 	^ window title
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlGlutinHostSpace >> title: aString [
 	"Change window's title"
 
 	window title: aString
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitCharacterReceivedEvent: anEvent [
 	| aBlocEvent |
 
@@ -268,7 +268,7 @@ BlGlutinHostSpace >> visitCharacterReceivedEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitCursorEnteredEvent: anEvent [
 	| aBlocEvent |
 
@@ -279,7 +279,7 @@ BlGlutinHostSpace >> visitCursorEnteredEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitCursorLeftEvent: anEvent [
 	| aBlocEvent |
 
@@ -290,7 +290,7 @@ BlGlutinHostSpace >> visitCursorLeftEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 	| aBlocEvent aNewCursorPosition aDelta |
 
@@ -311,7 +311,7 @@ BlGlutinHostSpace >> visitCursorMovedEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 	| aBlocEvent aKeyboardKey aState |
 
@@ -337,7 +337,7 @@ BlGlutinHostSpace >> visitKeyboardInputEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitMainEventsCleared: anEvent [
 	"| aBlocEvent |	
 
@@ -348,12 +348,12 @@ BlGlutinHostSpace >> visitMainEventsCleared: anEvent [
 	self enqueueEvent: aBlocEvent"
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitModifiersChanged: anEvent [
 	modifiers := self convertKeyModifiers: anEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitMouseInputEvent: anEvent [
 	| aState aBlocEvent |
 
@@ -376,16 +376,20 @@ BlGlutinHostSpace >> visitMouseInputEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
-	| aBlocEvent aDelta aScrollDistance |
+	| aBlocEvent aDelta aDeltaPoint aScrollDistance |
 		
 	aDelta := anEvent delta.
 	
+	aDeltaPoint := modifiers isShift
+		ifTrue: [ aDelta y @ aDelta x ]
+		ifFalse: [ aDelta x @ aDelta y ].
+	
 	aScrollDistance := aDelta type = GlutinEventMouseScrollDeltaType PixelDelta
-		ifTrue: [ (aDelta x @ aDelta y) / self scaleFactor ]
+		ifTrue: [ aDeltaPoint / self scaleFactor ]
 		ifFalse: [ aDelta type = GlutinEventMouseScrollDeltaType LineDelta
-			ifTrue: [ (aDelta x @ aDelta y) * (GlutinLibrary mouseWheelScrollSpeed) ]
+			ifTrue: [ aDeltaPoint * (GlutinLibrary mouseWheelScrollSpeed) ]
 			ifFalse: [ 0@0 ] ].
 
 	aScrollDistance isZero
@@ -402,11 +406,11 @@ BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitTouchEvent: anEvent [
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitUserEvent: anEvent [
 	| aBlocEvent |	
 
@@ -417,7 +421,7 @@ BlGlutinHostSpace >> visitUserEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitWindowCloseRequest: anEvent [
 	| aBlocEvent |
 
@@ -428,11 +432,11 @@ BlGlutinHostSpace >> visitWindowCloseRequest: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitWindowDestroyed: anEvent [
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitWindowFocusedEvent: anEvent [
 	| aBlocEvent |
 
@@ -447,11 +451,11 @@ BlGlutinHostSpace >> visitWindowFocusedEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitWindowMovedEvent: anEvent [
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitWindowRedrawRequested: anEvent [
 	| aBlocEvent |
 
@@ -462,7 +466,7 @@ BlGlutinHostSpace >> visitWindowRedrawRequested: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 	| aBlocEvent |
 	window resize: anEvent width @ anEvent height.
@@ -475,7 +479,7 @@ BlGlutinHostSpace >> visitWindowResizedEvent: anEvent [
 	self enqueueEvent: aBlocEvent
 ]
 
-{ #category : #'event - visiting' }
+{ #category : 'event - visiting' }
 BlGlutinHostSpace >> visitWindowScaleFactorChangedEvent: anEvent [
 	window resize: anEvent width @ anEvent height.
 
@@ -484,24 +488,24 @@ BlGlutinHostSpace >> visitWindowScaleFactorChangedEvent: anEvent [
 		physicalSize: (FensterPhysicalSize width: anEvent width height: anEvent height)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGlutinHostSpace >> window [
 	<return: #GlutinWindowedContext>
 
 	^ window
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGlutinHostSpace >> window: aGlutinWindowedContext [
 	window := aGlutinWindowedContext
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlGlutinHostSpace >> windowExtent: anExtent [
 	window innerExtent: ((FensterLogicalSize width: anExtent x height: anExtent y) asPhysical: self scaleFactor) asPoint
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlGlutinHostSpace >> zoomFactorChanged [
 	self
 		scaleFactorChangedTo: window scaleFactor

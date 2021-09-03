@@ -1,10 +1,10 @@
 Class {
-	#name : #BlGlutinWindowEventsSensor,
-	#superclass : #GlutinWindowEventsSensor,
-	#category : #'BlocHost-Glutin-Host'
+	#name : 'BlGlutinWindowEventsSensor',
+	#superclass : 'GlutinWindowEventsSensor',
+	#category : 'BlocHost-Glutin-Host'
 }
 
-{ #category : #'event - handling' }
+{ #category : 'event - handling' }
 BlGlutinWindowEventsSensor >> processCommonEvent: aGlutinCommonEvent forWindow: aGlutinWindow [
 
 	self
@@ -16,7 +16,7 @@ BlGlutinWindowEventsSensor >> processCommonEvent: aGlutinCommonEvent forWindow: 
 		do: [ :aHostSpace | aGlutinCommonEvent accept: aHostSpace ]
 ]
 
-{ #category : #'event - handling' }
+{ #category : 'event - handling' }
 BlGlutinWindowEventsSensor >> processDeviceEvent: aGlutinDeviceEvent forWindow: aGlutinWindow [
 
 	self
@@ -28,7 +28,7 @@ BlGlutinWindowEventsSensor >> processDeviceEvent: aGlutinDeviceEvent forWindow: 
 		do: [ :aHostSpace | aGlutinDeviceEvent accept: aHostSpace ]
 ]
 
-{ #category : #'event - handling' }
+{ #category : 'event - handling' }
 BlGlutinWindowEventsSensor >> processWindowEvent: aGlutinWindowEvent forWindow: aWindow [
 
 	self

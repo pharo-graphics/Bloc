@@ -1,6 +1,6 @@
-Extension { #name : #BlContextMenuCursor }
+Extension { #name : 'BlContextMenuCursor' }
 
-{ #category : #'*BlocHost-Glutin' }
+{ #category : '*BlocHost-Glutin' }
 BlContextMenuCursor >> asGlutinCursor [
 	^ GlutinCursorIcon ContextMenu
 ]
