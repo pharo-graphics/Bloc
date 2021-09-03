@@ -3300,6 +3300,19 @@ BlElement >> resetChildrenArray [
 	children := Bloc preferableChildrenDataStructure new
 ]
 
+{ #category : #'api - children enumeration' }
+BlElement >> selectChildrenWithId: aBlElementId [
+
+	| targetId |
+	targetId := aBlElementId asBlocElementId.
+
+	^ Array streamContents: [ :stream |
+		self allChildrenBreadthFirstDo: [ :aChild |
+			aChild id = targetId ifTrue: [
+				stream nextPut: aChild ] ] ]
+
+]
+
 { #category : #'event handling' }
 BlElement >> shouldChildrenHandleMouseEvents [
 	"Return true if my children are allowed to handle mouse events.
