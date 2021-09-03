@@ -1,16 +1,16 @@
 Class {
-	#name : #BlGlutinKeyboardKeyTable,
-	#superclass : #BlKeyboardKeyTable,
+	#name : 'BlGlutinKeyboardKeyTable',
+	#superclass : 'BlKeyboardKeyTable',
 	#instVars : [
 		'virtualKeyTable'
 	],
 	#classInstVars : [
 		'default'
 	],
-	#category : #'BlocHost-Glutin-Host'
+	#category : 'BlocHost-Glutin-Host'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlGlutinKeyboardKeyTable class >> cleanUp [
 	<script: 'self cleanUp'>
 	super cleanUp.
@@ -18,19 +18,19 @@ BlGlutinKeyboardKeyTable class >> cleanUp [
 	default := nil
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlGlutinKeyboardKeyTable class >> default [
 	^ default ifNil: [ default := self new ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGlutinKeyboardKeyTable >> initialize [
 	super initialize.
 
 	self initializeVirtualKeyTable
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGlutinKeyboardKeyTable >> initializeVirtualKeyTable [
 	self
 		initialize: (virtualKeyTable := Dictionary new)
@@ -164,7 +164,7 @@ BlGlutinKeyboardKeyTable >> initializeVirtualKeyTable [
 		)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGlutinKeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
 	<return: #BlKeyboardKey>
 

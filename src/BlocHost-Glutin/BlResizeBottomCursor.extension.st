@@ -1,6 +1,6 @@
-Extension { #name : #BlResizeBottomCursor }
+Extension { #name : 'BlResizeBottomCursor' }
 
-{ #category : #'*BlocHost-Glutin' }
+{ #category : '*BlocHost-Glutin' }
 BlResizeBottomCursor >> asGlutinCursor [
 	^ GlutinCursorIcon NsResize
 ]

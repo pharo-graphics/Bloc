@@ -1,10 +1,10 @@
 Class {
-	#name : #BlGlutinOpenGLSurfaceRenderer,
-	#superclass : #BlGlutinSurfaceRenderer,
-	#category : #'BlocHost-Glutin-Renderer'
+	#name : 'BlGlutinOpenGLSurfaceRenderer',
+	#superclass : 'BlGlutinSurfaceRenderer',
+	#category : 'BlocHost-Glutin-Renderer'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGlutinOpenGLSurfaceRenderer >> initializeForSurface: aSurface [
 	| aPixelFormat |
 	self
@@ -22,7 +22,7 @@ BlGlutinOpenGLSurfaceRenderer >> initializeForSurface: aSurface [
 		extent: aSurface physicalSize asPoint
 ]
 
-{ #category : #'host space - drawing' }
+{ #category : 'host space - drawing' }
 BlGlutinOpenGLSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 	self swapBuffers
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #BlCellCursor }
+Extension { #name : 'BlCellCursor' }
 
-{ #category : #'*BlocHost-Glutin' }
+{ #category : '*BlocHost-Glutin' }
 BlCellCursor >> asGlutinCursor [
 	^ GlutinCursorIcon Cell
 ]

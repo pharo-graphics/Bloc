@@ -1,6 +1,6 @@
 Class {
-	#name : #BlGlutinHost,
-	#superclass : #BlHost,
+	#name : 'BlGlutinHost',
+	#superclass : 'BlHost',
 	#classVars : [
 		'EventsSensor',
 		'HostSpaceRegistry',
@@ -11,30 +11,30 @@ Class {
 	#classInstVars : [
 		'hdpiRenderer'
 	],
-	#category : #'BlocHost-Glutin-Host'
+	#category : 'BlocHost-Glutin-Host'
 }
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlGlutinHost class >> forceResumeOfUIProcess: aProcess [
 	PulseLoop forceStartOfUIProcess: aProcess
 ]
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlGlutinHost class >> forceStartNewUIProcess [
 	PulseLoop forceStartNewUIProcess
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGlutinHost class >> hdpiRenderer [
 	^ hdpiRenderer ifNil: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGlutinHost class >> hdpiRenderer: aBoolean [
 	hdpiRenderer := aBoolean
 ]
 
-{ #category : #'private - windows' }
+{ #category : 'private - windows' }
 BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
 	| aHost |
 	
@@ -46,7 +46,7 @@ BlGlutinHost class >> hostForWindow: aWindow do: aBlock [
 	aHost ifNotNil: aBlock
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlGlutinHost class >> initialize [
 	PulseLoop := BlHostPulseLoop forHost: self.
 	EventsSensor := BlGlutinWindowEventsSensor new.
@@ -58,19 +58,19 @@ BlGlutinHost class >> initialize [
 	HostSpaceRegistryMutex := Mutex new
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlGlutinHost class >> isRunning [
 	<return: #Boolean>
 
 	^ PulseLoop isRunning
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlGlutinHost class >> isSupported [
 	^ Glutin isSupported
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlGlutinHost class >> label [
 	"Return a host name that we can refer to. May be used for settings"
 	<return: #String>
@@ -78,7 +78,7 @@ BlGlutinHost class >> label [
 	^ 'Glutin'
 ]
 
-{ #category : #preferences }
+{ #category : 'preferences' }
 BlGlutinHost class >> preferencesOn: aBuilder [
 	<systemsettings>
 			
@@ -91,7 +91,7 @@ BlGlutinHost class >> preferencesOn: aBuilder [
 		default: [ true ]
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlGlutinHost class >> priority [
 	"Return host priority as positive number which influences host order
 	and selection of a default host.
@@ -101,12 +101,12 @@ BlGlutinHost class >> priority [
 	^ 1
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlGlutinHost class >> spaceRegistry [
 	^ HostSpaceRegistry ifNil: [ HostSpaceRegistry := WeakValueDictionary new ]
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlGlutinHost class >> start [
 	PulseLoop start.
 
@@ -116,7 +116,7 @@ BlGlutinHost class >> start [
 	GlutinEventFetcher install
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlGlutinHost class >> stop [
 	GlutinEventFetcher default
 		removeEventHandler: UserInterruptEventHandler;
@@ -124,12 +124,12 @@ BlGlutinHost class >> stop [
 	PulseLoop stop
 ]
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlGlutinHost class >> uiProcessDo: aBlock [
 	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlGlutinHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new oswindow host space for given bloc space"
 	| aHostSpace |
@@ -143,7 +143,7 @@ BlGlutinHost >> createHostSpaceFor: aSpace [
 	aSpace hostSpace: aHostSpace
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlGlutinHost >> createWindowSpaceFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
 	I do not create any strong or weak references to provided space"
@@ -175,7 +175,7 @@ BlGlutinHost >> createWindowSpaceFor: aSpace [
 	^ aHostSpace
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlGlutinHost >> destroyHostSpaceFor: aSpace [
 	"Destroys host space window of a given space.
 	Note: in most cases under 'destroy host space' we mean 'close host window' and unregister it"
@@ -191,12 +191,12 @@ BlGlutinHost >> destroyHostSpaceFor: aSpace [
 	aSpace detachHostSpace
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlGlutinHost >> destroyWindowSpaceFor: aSpace [
 	self unregisterHostSpace: aSpace hostSpace
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlGlutinHost >> isStillAvailable [
 	"Let's assume that a space is opened with me as a host.
 	I return true if I am still available host for the current system.
@@ -208,17 +208,17 @@ BlGlutinHost >> isStillAvailable [
 	^ self class isSupported
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 BlGlutinHost >> registerHostSpace: aHostSpace [
 	HostSpaceRegistryMutex critical: [ self spaceRegistry at: aHostSpace window id put: aHostSpace ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlGlutinHost >> spaceRegistry [
 	^ self class spaceRegistry
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlGlutinHost >> supportsOpenGLSurface [
 	"Return true if this host can work with OpenGL surface, false otherwise"
 	<return: #Boolean>
@@ -226,7 +226,7 @@ BlGlutinHost >> supportsOpenGLSurface [
 	^ true
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 BlGlutinHost >> unregisterHostSpace: aHostSpace [
 	HostSpaceRegistryMutex critical: [ self spaceRegistry
 		removeKey: aHostSpace window id

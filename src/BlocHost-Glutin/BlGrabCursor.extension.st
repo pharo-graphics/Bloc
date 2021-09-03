@@ -1,6 +1,6 @@
-Extension { #name : #BlGrabCursor }
+Extension { #name : 'BlGrabCursor' }
 
-{ #category : #'*BlocHost-Glutin' }
+{ #category : '*BlocHost-Glutin' }
 BlGrabCursor >> asGlutinCursor [
 	^ GlutinCursorIcon Grab
 ]

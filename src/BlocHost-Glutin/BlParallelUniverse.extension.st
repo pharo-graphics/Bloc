@@ -1,6 +1,6 @@
-Extension { #name : #BlParallelUniverse }
+Extension { #name : 'BlParallelUniverse' }
 
-{ #category : #'*BlocHost-Glutin' }
+{ #category : '*BlocHost-Glutin' }
 BlParallelUniverse class >> glutin [
 	<blocHost>
 

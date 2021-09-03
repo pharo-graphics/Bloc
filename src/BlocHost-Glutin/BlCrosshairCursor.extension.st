@@ -1,6 +1,6 @@
-Extension { #name : #BlCrosshairCursor }
+Extension { #name : 'BlCrosshairCursor' }
 
-{ #category : #'*BlocHost-Glutin' }
+{ #category : '*BlocHost-Glutin' }
 BlCrosshairCursor >> asGlutinCursor [
 	^ GlutinCursorIcon Crosshair
 ]
