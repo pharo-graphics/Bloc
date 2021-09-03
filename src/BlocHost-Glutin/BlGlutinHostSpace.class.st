@@ -384,7 +384,7 @@ BlGlutinHostSpace >> visitMouseWheelEvent: anEvent [
 	
 	aDeltaPoint := modifiers isShift
 		ifTrue: [ aDelta y @ aDelta x ]
-		ifFalse: [ aDelta x @ aDelta y ].
+		ifFalse: [ aDelta x negated @ aDelta y ].
 	
 	aScrollDistance := aDelta type = GlutinEventMouseScrollDeltaType PixelDelta
 		ifTrue: [ aDeltaPoint / self scaleFactor ]
