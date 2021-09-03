@@ -48,30 +48,6 @@ BlElement >> gtInspectorEventsIn: aComposite context: aGTContext [
 ]
 
 { #category : '*Bloc-Extensions' }
-BlElement >> gtInspectorLiveIn: composite [
-	<gtInspectorPresentationOrder: 5>
-	
-	^ composite bloc
-		title: 'Live' translated;
-		element: [ 
-			self class environment at: #GtPhlowObjectToSelect ifPresent: [ :anEventClass |
-				self addEventHandlerOn: anEventClass do: [ :anEvent | 
-					self fireEvent: (GLMBlocObjectToSelect new 
-						toSelect: anEvent object; 
-						fromElement: anEvent sourceElement) ] ].
-				
-			self class environment at: #GtPhlowObjectToSpawn ifPresent: [ :anEventClass |
-				self addEventHandlerOn: anEventClass do: [ :anEvent | 
-					self fireEvent: (GLMBlocObjectToSelect new 
-						toSelect: anEvent object; 
-						fromElement: anEvent sourceElement) ] ].
-			self ];
-		act: [ :pres | self space root background: (Color fromHexString: '162425') ] entitled: 'Dark background';
-		act: [ :pres | self space root background: (Color white) ] entitled: 'White background';
-		when: [ self topMostParent == self and: [ self isAttachedToSceneGraph not ] ]
-]
-
-{ #category : '*Bloc-Extensions' }
 BlElement >> gtInspectorMeasurementChainIn: aComposite [
 	<gtInspectorPresentationOrder: 90>
 	| withAllParents |
