@@ -1,13 +1,13 @@
 Class {
-	#name : #BlTextNonPrintableCharacterPrinter,
-	#superclass : #Object,
+	#name : 'BlTextNonPrintableCharacterPrinter',
+	#superclass : 'Object',
 	#classVars : [
 		'CharacterMap'
 	],
-	#category : #'Bloc-Text-Text-Support'
+	#category : 'Bloc-Text-Text-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextNonPrintableCharacterPrinter class >> characterMap [
 
 	^ CharacterMap ifNil: [ CharacterMap := { 
@@ -17,14 +17,14 @@ BlTextNonPrintableCharacterPrinter class >> characterMap [
 		Character nel -> '<CRLF>' } asDictionary ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextNonPrintableCharacterPrinter class >> print: aString [
 
 	^ String streamContents: [ :stream |
 		self print: aString on: stream ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextNonPrintableCharacterPrinter class >> print: aString on: aStream [
 
 	aString do: [ :ch |

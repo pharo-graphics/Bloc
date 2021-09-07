@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFontWeight,
-	#superclass : #SharedPool,
+	#name : 'BlFontWeight',
+	#superclass : 'SharedPool',
 	#instVars : [
 		'name',
 		'value'
@@ -19,35 +19,35 @@ Class {
 		'Thin',
 		'Weights'
 	],
-	#category : #'Bloc-Text-Font'
+	#category : 'Bloc-Text-Font'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> black [
 	^ Black
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> bold [
 	^ Bold
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> extraBlack [
 	^ ExtraBlack
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> extraBold [
 	^ ExtraBold
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> extraLight [
 	^ ExtraLight
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlFontWeight class >> fromNumber: aNumber [
 	<return: #BlFontWeight>
 	Weights
@@ -60,7 +60,7 @@ BlFontWeight class >> fromNumber: aNumber [
 		ifAbsent: [ self weight: aNumber name: #custom ]
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlFontWeight class >> initialize [
 	Invisible := self weight: 0 name: #invisible.
 	Thin := self weight: 100 name: #thin.
@@ -75,44 +75,44 @@ BlFontWeight class >> initialize [
 	ExtraBlack := self weight: 1000 name: #extraBlack.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> invisible [
 	^ Invisible
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> light [
 	^ Light
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> medium [
 	^ Medium
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> normal [
 	^ Normal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> semiBold [
 	^ SemiBold
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight class >> thin [
 	^ Thin
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontWeight class >> weight: aWeightValue name: aWeightName [
 	^ self new
 		value: aWeightValue;
 		name: aWeightName
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlFontWeight >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -123,26 +123,26 @@ BlFontWeight >> = anObject [
 	^ value = anObject value
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlFontWeight >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ value hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight >> name [
 	<return: #Symbol>
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight >> name: aSymbol [
 	name := aSymbol
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlFontWeight >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -155,14 +155,14 @@ BlFontWeight >> printOn: aStream [
 		print: name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight >> value [
 	<return: #Number>
 
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeight >> value: aNumber [
 	value := aNumber
 ]

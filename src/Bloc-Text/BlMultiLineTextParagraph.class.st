@@ -1,14 +1,14 @@
 Class {
-	#name : #BlMultiLineTextParagraph,
-	#superclass : #BlTextParagraph,
+	#name : 'BlMultiLineTextParagraph',
+	#superclass : 'BlTextParagraph',
 	#instVars : [
 		'lines',
 		'offset'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #'paragraph - measuring' }
+{ #category : 'paragraph - measuring' }
 BlMultiLineTextParagraph >> basicMeasureOn: aSpanMeasurer [
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 	| anIterator aMeasurer |
@@ -37,30 +37,30 @@ BlMultiLineTextParagraph >> basicMeasureOn: aSpanMeasurer [
 	end := lines last to
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMultiLineTextParagraph >> defaultMeasurer [
 	^ BlMultiLineTextParagraphMeasurer new
 		offset: self offset
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMultiLineTextParagraph >> initialize [
 	super initialize.
 	
 	offset := 0@0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiLineTextParagraph >> lines [
 	^ lines
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiLineTextParagraph >> offset [
 	^ offset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiLineTextParagraph >> offset: anObject [
 	offset := anObject
 ]

@@ -1,13 +1,13 @@
 Class {
-	#name : #BlGenerationText,
-	#superclass : #BlWrappedText,
+	#name : 'BlGenerationText',
+	#superclass : 'BlWrappedText',
 	#instVars : [
 		'previousGeneration'
 	],
-	#category : #'Bloc-Text-Text'
+	#category : 'Bloc-Text-Text'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGenerationText class >> fromText: aBrText [
 	^ self basicNew
 		initialize;
@@ -15,7 +15,7 @@ BlGenerationText class >> fromText: aBrText [
 		with: aBrText generation
 ]
 
-{ #category : #'text - copying' }
+{ #category : 'text - copying' }
 BlGenerationText >> generation [
 	"Return an object that uniquely represents this generation of text"
 	<return: #Object>
@@ -23,19 +23,19 @@ BlGenerationText >> generation [
 	^ self text generation
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGenerationText >> initialize: aBrText with: aPreviousGeneration [
 
 	previousGeneration := aPreviousGeneration.
 	text := aBrText
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGenerationText >> isNextGenerationOf: aBlText [
 	^ self previousGeneration == aBlText generation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGenerationText >> previousGeneration [
 	<return: #Object>
 

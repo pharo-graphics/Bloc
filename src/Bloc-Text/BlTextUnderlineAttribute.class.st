@@ -9,17 +9,17 @@ See {{gtClass:BlTextUnderlineAttributeExamples}} for examples
 
 "
 Class {
-	#name : #BlTextUnderlineAttribute,
-	#superclass : #BlTextDecorationAttribute,
-	#category : #'Bloc-Text-Text-Attributes'
+	#name : 'BlTextUnderlineAttribute',
+	#superclass : 'BlTextDecorationAttribute',
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextUnderlineAttribute class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextUnderlineAttribute >> initialize [
 	super initialize.
 	

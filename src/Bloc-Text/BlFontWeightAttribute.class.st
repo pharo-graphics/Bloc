@@ -20,93 +20,93 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlFontWeightAttribute,
-	#superclass : #BlTextAttribute,
+	#name : 'BlFontWeightAttribute',
+	#superclass : 'BlTextAttribute',
 	#instVars : [
 		'weight'
 	],
-	#category : #'Bloc-Text-Text-Attributes'
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontWeightAttribute class >> black [
 	^ self new
 		weight: LogicalFont weightBlack;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontWeightAttribute class >> bold [
 	^ self new
 		weight: LogicalFont weightBold;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontWeightAttribute class >> light [
 	^ self new
 		weight: LogicalFont weightLight;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontWeightAttribute class >> medium [
 	^ self new
 		weight: LogicalFont weightMedium;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontWeightAttribute class >> normal [
 	^ self new
 		weight: LogicalFont weightRegular;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontWeightAttribute class >> thin [
 	^ self new
 		weight: LogicalFont weightThin;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontWeightAttribute class >> weight: aNumber [
 	^ self new
 		weight: aNumber;
 		yourself
 ]
 
-{ #category : #'text style' }
+{ #category : 'text style' }
 BlFontWeightAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
 	aBlTextStyleBuilder fontWeight: self weight
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlFontWeightAttribute >> equals: anAnotherAttribute [
 	^ self weight = anAnotherAttribute weight
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlFontWeightAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self weight hash
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlFontWeightAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'font-weight: ';
 		nextPutAll: self weight asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeightAttribute >> weight [
 	^ weight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontWeightAttribute >> weight: aNumber [
 	weight := aNumber
 ]

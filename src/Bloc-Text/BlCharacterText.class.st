@@ -6,12 +6,12 @@ Similar to the String I can not modified (insertion or deletions). Therefore
 
 "
 Class {
-	#name : #BlCharacterText,
-	#superclass : #BlWrappedText,
-	#category : #'Bloc-Text-Text'
+	#name : 'BlCharacterText',
+	#superclass : 'BlWrappedText',
+	#category : 'Bloc-Text-Text'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlCharacterText >> = anObject [
 	| myIterator |
 	self == anObject
@@ -39,7 +39,7 @@ BlCharacterText >> = anObject [
 	^ true
 ]
 
-{ #category : #'text - converting' }
+{ #category : 'text - converting' }
 BlCharacterText >> asString [
 	"I return an original String representaion of this text.
 	It is guaranteed that the size of the resulting string is the same
@@ -50,7 +50,7 @@ BlCharacterText >> asString [
 		self do: [ :aCharacter | aStream nextPut: aCharacter ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCharacterText >> at: anIndex [
 	"Return a character at a given index"
 	<return: #Character>
@@ -58,7 +58,7 @@ BlCharacterText >> at: anIndex [
 	^ (super at: anIndex) asCharacter
 ]
 
-{ #category : #'string - compatibility' }
+{ #category : 'string - compatibility' }
 BlCharacterText >> basicAt: anIndex [
 	"Return an integer representation of the character at a given index"
 	<return: #Integer>
@@ -66,7 +66,7 @@ BlCharacterText >> basicAt: anIndex [
 	^ (self at: anIndex) asInteger
 ]
 
-{ #category : #'text - copying' }
+{ #category : 'text - copying' }
 BlCharacterText >> copyFrom: aStartIndex to: anEndIndex [
 	"For performance reasons I do not return a copy of the text because I am immutable. This speeds up parser by an order of magnitude.
 	
@@ -79,26 +79,26 @@ BlCharacterText >> copyFrom: aStartIndex to: anEndIndex [
 	^ (self from: aStartIndex to: anEndIndex) characters
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BlCharacterText >> deleteAll: aCollectionOfIntervals [
 	self shouldNotImplement
 ]
 
-{ #category : #'text - enumeration' }
+{ #category : 'text - enumeration' }
 BlCharacterText >> do: aBlock [
 	"Evaluate aBlock with every character as argument"
 	
 	self text do: [ :eachItem | aBlock value: eachItem asCharacter ]
 ]
 
-{ #category : #'text - enumeration' }
+{ #category : 'text - enumeration' }
 BlCharacterText >> from: aFromIndex to: aToIndex do: aBlock [
 	"Evaluate aBlock with every character as argument within interval [aFromIndex, aToIndex]"
 	
 	self text from: aFromIndex to: aToIndex do: [ :eachItem | aBlock value: eachItem asCharacter ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlCharacterText >> hash [
 	| hash low |
 	hash := self class hash bitAnd: 16rFFFFFFF.
@@ -110,34 +110,34 @@ BlCharacterText >> hash [
 	^ hash
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BlCharacterText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	self shouldNotImplement
 ]
 
-{ #category : #'text - modifications' }
+{ #category : 'text - modifications' }
 BlCharacterText >> insertText: aString at: anIndex [
 	self shouldNotImplement
 ]
 
-{ #category : #'string - compatibility' }
+{ #category : 'string - compatibility' }
 BlCharacterText >> isByteString [
 	^ false
 ]
 
-{ #category : #'string - compatibility' }
+{ #category : 'string - compatibility' }
 BlCharacterText >> isString [
 	^ true
 ]
 
-{ #category : #'string - compatibility' }
+{ #category : 'string - compatibility' }
 BlCharacterText >> trimBoth [
 	"Trim separators from both sides of the receiving string."
 	
 	^ self trimmer bothSeparators trimmed
 ]
 
-{ #category : #'string - compatibility' }
+{ #category : 'string - compatibility' }
 BlCharacterText >> withoutTrailingNewlines [
 	"Return a copy of the receiver with any combination of cr/lf characters at the end removed"
 	<return: #BlCharacterText>

@@ -1,6 +1,6 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*Bloc-Text' }
+{ #category : '*Bloc-Text' }
 Object >> isTextIndex [
 
 	^ false

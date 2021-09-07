@@ -4,15 +4,15 @@ I am data structure independent and rely only on BrText's public API
 
 "
 Class {
-	#name : #BlSpan,
-	#superclass : #BlWrappedText,
+	#name : 'BlSpan',
+	#superclass : 'BlWrappedText',
 	#instVars : [
 		'attributes'
 	],
-	#category : #'Bloc-Text-Text'
+	#category : 'Bloc-Text-Text'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpan class >> text: aBrText attributes: theAttributes [
 	^ self basicNew
 		initialize;
@@ -20,7 +20,7 @@ BlSpan class >> text: aBrText attributes: theAttributes [
 		yourself
 ]
 
-{ #category : #'span - accessing' }
+{ #category : 'span - accessing' }
 BlSpan >> attributes [
 	"Return a set of attributes applied on this span"
 	<return: #Set of: #BlTextAttribute>
@@ -28,7 +28,7 @@ BlSpan >> attributes [
 	^ attributes
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpan >> text: aBrText attributes: theAttributes [
 	text := aBrText.
 	attributes := theAttributes

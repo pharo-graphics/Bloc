@@ -1,15 +1,15 @@
 Class {
-	#name : #BlFontNormalAttribute,
-	#superclass : #BlFontEmphasisAttribute,
-	#category : #'Bloc-Text-Text-Attributes'
+	#name : 'BlFontNormalAttribute',
+	#superclass : 'BlFontEmphasisAttribute',
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : #'text style' }
+{ #category : 'text style' }
 BlFontNormalAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
 	aBlTextStyleBuilder slantNormal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontNormalAttribute >> emphasisName [
 	<return: #String>
 	

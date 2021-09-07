@@ -1,37 +1,37 @@
 Class {
-	#name : #BlTextHighlightAttribute,
-	#superclass : #BlTextAttribute,
+	#name : 'BlTextHighlightAttribute',
+	#superclass : 'BlTextAttribute',
 	#instVars : [
 		'paint'
 	],
-	#category : #'Bloc-Text-Text-Attributes'
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextHighlightAttribute class >> paint: aPaint [
 	^ self new
 		paint: aPaint;
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextHighlightAttribute >> equals: anAnotherAttribute [
 	^ self paint = anAnotherAttribute paint
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextHighlightAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self paint hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextHighlightAttribute >> paint [
 	^ paint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextHighlightAttribute >> paint: aPaint [
 	self
 		assert: [ paint isNil ]
@@ -40,7 +40,7 @@ BlTextHighlightAttribute >> paint: aPaint [
 	paint := aPaint
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextHighlightAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'text-highlight: ';

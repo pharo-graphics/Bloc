@@ -5,8 +5,8 @@ Useful for testing the paragraph behaviour
 
 "
 Class {
-	#name : #BlMockedTextMeasurer,
-	#superclass : #BlHostTextMeasurer,
+	#name : 'BlMockedTextMeasurer',
+	#superclass : 'BlHostTextMeasurer',
 	#instVars : [
 		'ascent',
 		'descent',
@@ -19,17 +19,17 @@ Class {
 		'textRunEnd',
 		'textOffset'
 	],
-	#category : #'Bloc-Text-Text-Mocked'
+	#category : 'Bloc-Text-Text-Mocked'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> ascent [
 	<return: #Number>
 
 	^ ascent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> ascent: aNumber [
 
 	self
@@ -39,19 +39,19 @@ BlMockedTextMeasurer >> ascent: aNumber [
 	ascent := aNumber
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMockedTextMeasurer >> createParagraphSpan [
 	^ BlMockedTextParagraphSpan new measurer: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> descent [
 	<return: #Number>
 
 	^ descent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> descent: aNumber [
 	self
 		assert: [ aNumber >= 0 ]
@@ -60,29 +60,29 @@ BlMockedTextMeasurer >> descent: aNumber [
 	descent := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> glyphWidth [
 	<return: #Number>
 
 	^ glyphWidth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> glyphWidth: aNumber [
 	glyphWidth := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> height [
 	^ height
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> height: aNumber [
 	height := aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMockedTextMeasurer >> initialize [
 	super initialize.
 
@@ -93,12 +93,12 @@ BlMockedTextMeasurer >> initialize [
 	textOffset := 0
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlMockedTextMeasurer >> measureTextParagraph: aBrTextParagraph [
 	aBrTextParagraph measureOn: self
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlMockedTextMeasurer >> measureTextSpan: aBlSpan [
 	<return: #BlTextParagraphSpan>
 	| aTextRun aParagraphSpan |
@@ -123,22 +123,22 @@ BlMockedTextMeasurer >> measureTextSpan: aBlSpan [
 	^ aParagraphSpan
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 BlMockedTextMeasurer >> measuredHeight [
 	^ measuredHeight
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 BlMockedTextMeasurer >> measuredWidth [
 	^ measuredWidth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> textOffset [
 	^ textOffset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMockedTextMeasurer >> textOffset: aNumber [
 	textOffset := aNumber
 ]

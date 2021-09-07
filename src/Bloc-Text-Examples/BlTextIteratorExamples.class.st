@@ -1,10 +1,10 @@
 Class {
-	#name : #BlTextIteratorExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Text-Examples-Model'
+	#name : 'BlTextIteratorExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Text-Examples-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextIteratorExamples >> attributed_end [
 	<gtExample>
 	| aText anIterator |
@@ -18,7 +18,7 @@ BlTextIteratorExamples >> attributed_end [
 	^ anIterator
 ]
 
-{ #category : #'examples - attributed end' }
+{ #category : 'examples - attributed end' }
 BlTextIteratorExamples >> attributed_end_next_attributed_end_at_1 [
 	<gtExample>
 	| anIterator aStart anEnd theAdornmentAttributes|
@@ -40,7 +40,7 @@ BlTextIteratorExamples >> attributed_end_next_attributed_end_at_1 [
 	^ anIterator
 ]
 
-{ #category : #'examples - span any' }
+{ #category : 'examples - span any' }
 BlTextIteratorExamples >> attributed_end_next_span_any_at_1 [
 	<gtExample>
 	| anIterator aStart anEnd hasAnyAttribute |
@@ -62,7 +62,7 @@ BlTextIteratorExamples >> attributed_end_next_span_any_at_1 [
 	^ anIterator
 ]
 
-{ #category : #'examples - span any' }
+{ #category : 'examples - span any' }
 BlTextIteratorExamples >> attributed_end_next_span_any_at_10 [
 	<gtExample>
 	| anIterator aStart anEnd hasAnyAttribute |
@@ -84,7 +84,7 @@ BlTextIteratorExamples >> attributed_end_next_span_any_at_10 [
 	^ anIterator
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextIteratorExamples >> attributed_middle [
 	<gtExample>
 	| aText anIterator |
@@ -98,7 +98,7 @@ BlTextIteratorExamples >> attributed_middle [
 	^ anIterator
 ]
 
-{ #category : #'examples - attributed end' }
+{ #category : 'examples - attributed end' }
 BlTextIteratorExamples >> attributed_middle_next_attributed_end_at_1 [
 	<gtExample>
 	| anIterator aStart anEnd theAdornmentAttributes|
@@ -120,7 +120,7 @@ BlTextIteratorExamples >> attributed_middle_next_attributed_end_at_1 [
 	^ anIterator
 ]
 
-{ #category : #'examples - attributed end' }
+{ #category : 'examples - attributed end' }
 BlTextIteratorExamples >> attributed_middle_next_attributed_end_at_10 [
 	<gtExample>
 	| anIterator aStart anEnd theAdornmentAttributes|
@@ -142,7 +142,7 @@ BlTextIteratorExamples >> attributed_middle_next_attributed_end_at_10 [
 	^ anIterator
 ]
 
-{ #category : #'examples - span any' }
+{ #category : 'examples - span any' }
 BlTextIteratorExamples >> attributed_middle_next_span_any_at_1 [
 	<gtExample>
 	| anIterator aStart anEnd hasAnyAttribute |
@@ -164,7 +164,7 @@ BlTextIteratorExamples >> attributed_middle_next_span_any_at_1 [
 	^ anIterator
 ]
 
-{ #category : #'examples - span any' }
+{ #category : 'examples - span any' }
 BlTextIteratorExamples >> attributed_middle_next_span_any_at_10 [
 	<gtExample>
 	| anIterator aStart anEnd hasAnyAttribute |
@@ -186,7 +186,7 @@ BlTextIteratorExamples >> attributed_middle_next_span_any_at_10 [
 	^ anIterator
 ]
 
-{ #category : #'examples - span any' }
+{ #category : 'examples - span any' }
 BlTextIteratorExamples >> attributed_middle_next_span_any_at_5 [
 	<gtExample>
 	| anIterator aStart anEnd hasAnyAttribute |
@@ -208,7 +208,7 @@ BlTextIteratorExamples >> attributed_middle_next_span_any_at_5 [
 	^ anIterator
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextIteratorExamples >> attributed_start [
 	<gtExample>
 	| aText anIterator |
@@ -222,7 +222,7 @@ BlTextIteratorExamples >> attributed_start [
 	^ anIterator
 ]
 
-{ #category : #'examples - attributed end' }
+{ #category : 'examples - attributed end' }
 BlTextIteratorExamples >> attributed_start_next_attributed_end_at_1 [
 	<gtExample>
 	| anIterator aStart anEnd theAdornmentAttributes|
@@ -244,7 +244,7 @@ BlTextIteratorExamples >> attributed_start_next_attributed_end_at_1 [
 	^ anIterator
 ]
 
-{ #category : #'examples - attributed end' }
+{ #category : 'examples - attributed end' }
 BlTextIteratorExamples >> attributed_start_next_attributed_end_at_5 [
 	<gtExample>
 	| anIterator aStart anEnd theAdornmentAttributes|
@@ -266,7 +266,7 @@ BlTextIteratorExamples >> attributed_start_next_attributed_end_at_5 [
 	^ anIterator
 ]
 
-{ #category : #'examples - span any' }
+{ #category : 'examples - span any' }
 BlTextIteratorExamples >> attributed_start_next_span_any_at_1 [
 	<gtExample>
 	| anIterator aStart anEnd hasAnyAttribute |
@@ -288,7 +288,7 @@ BlTextIteratorExamples >> attributed_start_next_span_any_at_1 [
 	^ anIterator
 ]
 
-{ #category : #'examples - span any' }
+{ #category : 'examples - span any' }
 BlTextIteratorExamples >> attributed_start_next_span_any_at_5 [
 	<gtExample>
 	| anIterator aStart anEnd hasAnyAttribute |
@@ -310,7 +310,7 @@ BlTextIteratorExamples >> attributed_start_next_span_any_at_5 [
 	^ anIterator
 ]
 
-{ #category : #'examples - attribute indices' }
+{ #category : 'examples - attribute indices' }
 BlTextIteratorExamples >> findAttribute_beginning [
 	<gtExample>
 	| attribute text interval |
@@ -329,7 +329,7 @@ BlTextIteratorExamples >> findAttribute_beginning [
 	^ text
 ]
 
-{ #category : #'examples - attribute indices' }
+{ #category : 'examples - attribute indices' }
 BlTextIteratorExamples >> findAttribute_beginning_subtext_equal [
 	<gtExample>
 	| attribute text subText interval |
@@ -350,7 +350,7 @@ BlTextIteratorExamples >> findAttribute_beginning_subtext_equal [
 	^ subText
 ]
 
-{ #category : #'examples - attribute indices' }
+{ #category : 'examples - attribute indices' }
 BlTextIteratorExamples >> findAttribute_beginning_subtext_larger [
 	<gtExample>
 	| attribute text subText interval |
@@ -371,7 +371,7 @@ BlTextIteratorExamples >> findAttribute_beginning_subtext_larger [
 	^ subText
 ]
 
-{ #category : #'examples - attribute indices' }
+{ #category : 'examples - attribute indices' }
 BlTextIteratorExamples >> findAttribute_beginning_subtext_shifted [
 	<gtExample>
 	| attribute text subText interval |
@@ -392,7 +392,7 @@ BlTextIteratorExamples >> findAttribute_beginning_subtext_shifted [
 	^ subText
 ]
 
-{ #category : #'examples - attribute indices' }
+{ #category : 'examples - attribute indices' }
 BlTextIteratorExamples >> findAttribute_beginning_subtext_smaller [
 	<gtExample>
 	| attribute text subText interval |
@@ -413,7 +413,7 @@ BlTextIteratorExamples >> findAttribute_beginning_subtext_smaller [
 	^ subText
 ]
 
-{ #category : #'examples - attribute indices' }
+{ #category : 'examples - attribute indices' }
 BlTextIteratorExamples >> findAttribute_end [
 	<gtExample>
 	| attribute text interval |
@@ -432,7 +432,7 @@ BlTextIteratorExamples >> findAttribute_end [
 	^ text
 ]
 
-{ #category : #'examples - attribute indices' }
+{ #category : 'examples - attribute indices' }
 BlTextIteratorExamples >> findAttribute_middle [
 	<gtExample>
 	| attribute text interval |
@@ -451,7 +451,7 @@ BlTextIteratorExamples >> findAttribute_middle [
 	^ text
 ]
 
-{ #category : #'examples - attribute indices' }
+{ #category : 'examples - attribute indices' }
 BlTextIteratorExamples >> findAttribute_none [
 	<gtExample>
 	| attribute text interval |
@@ -468,7 +468,7 @@ BlTextIteratorExamples >> findAttribute_none [
 	^ text
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextIteratorExamples >> simple [
 	<gtExample>
 	| anIterator |
@@ -479,7 +479,7 @@ BlTextIteratorExamples >> simple [
 	^ anIterator
 ]
 
-{ #category : #'examples - attributed end' }
+{ #category : 'examples - attributed end' }
 BlTextIteratorExamples >> simple_next_attributed_end_at_0 [
 	<gtExample>
 	| anIterator aStart anEnd theAdornmentAttributes|
@@ -501,7 +501,7 @@ BlTextIteratorExamples >> simple_next_attributed_end_at_0 [
 	^ anIterator
 ]
 
-{ #category : #'examples - span any' }
+{ #category : 'examples - span any' }
 BlTextIteratorExamples >> simple_next_span_any_at_0 [
 	<gtExample>
 	| anIterator aStart anEnd hasAnyAttribute |

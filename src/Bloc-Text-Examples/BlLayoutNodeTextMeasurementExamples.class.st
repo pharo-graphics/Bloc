@@ -1,24 +1,24 @@
 Class {
-	#name : #BlLayoutNodeTextMeasurementExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Text-Examples-Measurement'
+	#name : 'BlLayoutNodeTextMeasurementExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Text-Examples-Measurement'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutNodeTextMeasurementExamples >> baseline [
 	<gtExample>
 
 	^ BlTextParagraphAscentLooseBaseline new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutNodeTextMeasurementExamples >> boundsMeasurement [
 	<gtExample>
 
 	^ BlTextElementLabelMeasurementStrategy new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutNodeTextMeasurementExamples >> layoutChildNode [
 	<gtExample>
 
@@ -28,7 +28,7 @@ BlLayoutNodeTextMeasurementExamples >> layoutChildNode [
 		fitContent
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutNodeTextMeasurementExamples >> layoutNodeMeasurement [
 	<gtExample>
 
@@ -39,7 +39,7 @@ BlLayoutNodeTextMeasurementExamples >> layoutNodeMeasurement [
 		boundsMeasurement: self boundsMeasurement
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlLayoutNodeTextMeasurementExamples >> measureLayoutChildNode [
 	<gtExample>
 	| aLayoutNode |
@@ -50,7 +50,7 @@ BlLayoutNodeTextMeasurementExamples >> measureLayoutChildNode [
 	^ aLayoutNode
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutNodeTextMeasurementExamples >> mockedMeasurer [
 	<gtExample>
 
@@ -61,7 +61,7 @@ BlLayoutNodeTextMeasurementExamples >> mockedMeasurer [
 		height: 15
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutNodeTextMeasurementExamples >> text [
 	<gtExample>
 

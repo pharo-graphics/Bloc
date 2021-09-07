@@ -1,15 +1,15 @@
 Class {
-	#name : #BlFontObliqueAttribute,
-	#superclass : #BlFontEmphasisAttribute,
-	#category : #'Bloc-Text-Text-Attributes'
+	#name : 'BlFontObliqueAttribute',
+	#superclass : 'BlFontEmphasisAttribute',
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : #'text style' }
+{ #category : 'text style' }
 BlFontObliqueAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
 	aBlTextStyleBuilder slantOblique
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontObliqueAttribute >> emphasisName [
 	<return: #String>
 	

@@ -5,29 +5,29 @@ Width of the line is not a plain sum of width of all spans. The difference comes
 
 "
 Class {
-	#name : #BlTextParagraphLine,
-	#superclass : #BlTextParagraphSegment,
+	#name : 'BlTextParagraphLine',
+	#superclass : 'BlTextParagraphSegment',
 	#instVars : [
 		'spans'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextParagraphLine class >> rope: aRope spans: aSpansCollection [
 	^ self new
 		rope: aRope spans: aSpansCollection;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextParagraphLine class >> spans: aSpansCollection [
 	^ self new
 		spans: aSpansCollection;
 		yourself
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlTextParagraphLine >> addSpan: aBrTextParagraphSpan [
 	spans add: aBrTextParagraphSpan.
 	aBrTextParagraphSpan paragraph: self paragraph.
@@ -37,7 +37,7 @@ BlTextParagraphLine >> addSpan: aBrTextParagraphSpan [
 		ifFalse: [ self spanAdded: spans last after: (spans at: spans size - 1) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphLine >> baseline: aPoint [
 
 	self moveSpansBy: self baseline negated.
@@ -45,35 +45,35 @@ BlTextParagraphLine >> baseline: aPoint [
 	self moveSpansBy: self baseline
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 BlTextParagraphLine >> finalize [
 
 	spans do: #finalize.
 	spans := OrderedCollection new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphLine >> initialize [
 	super initialize.
 	
 	spans := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextParagraphLine >> isEmpty [
 	<return: #Boolean>
 	
 	^ self spans isEmpty
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlTextParagraphLine >> moveSpansBy: aPoint [
 	"Move baseline of all spans by a given delta as a point"
 
 	self spans do: [ :aSpan | aSpan baseline: aSpan baseline + aPoint ]
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlTextParagraphLine >> normalize: aScale [
 	"Normalize this segment to have rounded measurements.
 	I don't change the baseline"
@@ -86,7 +86,7 @@ BlTextParagraphLine >> normalize: aScale [
 	self recomputeLineLayout
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlTextParagraphLine >> recomputeLineLayout [
 
 	self spans
@@ -97,7 +97,7 @@ BlTextParagraphLine >> recomputeLineLayout [
 		[ :index | self spanAdded: (self spans at: index) after: (self spans at: index - 1) ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlTextParagraphLine >> spanAdded: aSpan [
 	
 	self
@@ -119,7 +119,7 @@ BlTextParagraphLine >> spanAdded: aSpan [
 	aSpan baseline: self baseline
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 	aLastSpan isVertical
 		ifTrue: [ aPreviousSpan isVertical
@@ -130,7 +130,7 @@ BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 			ifFalse: [ self spanAddedHorizontal: aLastSpan afterHorizontal: aPreviousSpan ] ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterHorizontal: aPreviousSpan [
 	| previousBottom newBottom |
 
@@ -150,22 +150,22 @@ BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterHorizontal: aPrevious
 	to := aLastSpan to
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterVertical: aPreviousSpan [
 	self shouldBeImplemented
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlTextParagraphLine >> spanAddedVertical: aLastSpan afterHorizontal: aPreviousSpan [
 	self shouldBeImplemented
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlTextParagraphLine >> spanAddedVertical: aLastSpan afterVertical: aPreviousSpan [
 	self shouldBeImplemented
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphLine >> spans [
 	<return: #SequenceableCollection of: #BlTextParagraphSpan>
 

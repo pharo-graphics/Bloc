@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMultiLineTextParagraphMeasurer,
-	#superclass : #BlTextParagraphMeasurer,
+	#name : 'BlMultiLineTextParagraphMeasurer',
+	#superclass : 'BlTextParagraphMeasurer',
 	#instVars : [
 		'lines',
 		'offset',
@@ -8,24 +8,24 @@ Class {
 		'accumulatedWidth',
 		'accumulatedHeight'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiLineTextParagraphMeasurer >> accumulatedHeight [
 	<return: #Number>
 
 	^ accumulatedHeight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiLineTextParagraphMeasurer >> accumulatedWidth [
 	<return: #Number>
 
 	^ accumulatedWidth
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMultiLineTextParagraphMeasurer >> initialize [
 	super initialize.
 		
@@ -35,22 +35,22 @@ BlMultiLineTextParagraphMeasurer >> initialize [
 	previousLineAccumulatedHeight := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiLineTextParagraphMeasurer >> lines [
 	^ lines
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiLineTextParagraphMeasurer >> offset [
 	^ offset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMultiLineTextParagraphMeasurer >> offset: anObject [
 	offset := anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlMultiLineTextParagraphMeasurer >> pushSpan: aParagraphSpan [
 	self lines last isEmpty
 		"if the last line is empty we add a new span there anyway"

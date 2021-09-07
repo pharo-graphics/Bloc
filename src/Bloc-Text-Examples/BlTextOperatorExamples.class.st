@@ -1,10 +1,10 @@
 Class {
-	#name : #BlTextOperatorExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Text-Examples-Model'
+	#name : 'BlTextOperatorExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Text-Examples-Model'
 }
 
-{ #category : #'finder - case insensitive substring' }
+{ #category : 'finder - case insensitive substring' }
 BlTextOperatorExamples >> findCaseInsensitiveSubStringInTheMiddle [
 	<gtExample>
 	| aText anIndex |
@@ -18,7 +18,7 @@ BlTextOperatorExamples >> findCaseInsensitiveSubStringInTheMiddle [
 	^ aText
 ]
 
-{ #category : #'finder - character' }
+{ #category : 'finder - character' }
 BlTextOperatorExamples >> findGCharacterInAMiddle [
 	<gtExample>
 	| aText anIndex |
@@ -32,7 +32,7 @@ BlTextOperatorExamples >> findGCharacterInAMiddle [
 	^ aText
 ]
 
-{ #category : #'finder - character' }
+{ #category : 'finder - character' }
 BlTextOperatorExamples >> findGCharacterInAMiddleReversed [
 	<gtExample>
 	| aText anIndex |
@@ -48,7 +48,7 @@ BlTextOperatorExamples >> findGCharacterInAMiddleReversed [
 	^ aText
 ]
 
-{ #category : #'finder - substring' }
+{ #category : 'finder - substring' }
 BlTextOperatorExamples >> findIngSubStringInTheMiddle [
 	<gtExample>
 	| aText anIndex |
@@ -62,7 +62,7 @@ BlTextOperatorExamples >> findIngSubStringInTheMiddle [
 	^ aText
 ]
 
-{ #category : #'finder - substring' }
+{ #category : 'finder - substring' }
 BlTextOperatorExamples >> findIngSubStringInTheMiddleReversed [
 	<gtExample>
 	| aText anIndex |
@@ -78,7 +78,7 @@ BlTextOperatorExamples >> findIngSubStringInTheMiddleReversed [
 	^ aText
 ]
 
-{ #category : #'finder - character' }
+{ #category : 'finder - character' }
 BlTextOperatorExamples >> findLCharacterAtTheBeginning [
 	<gtExample>
 	| aText anIndex |
@@ -92,7 +92,7 @@ BlTextOperatorExamples >> findLCharacterAtTheBeginning [
 	^ aText
 ]
 
-{ #category : #'finder - character' }
+{ #category : 'finder - character' }
 BlTextOperatorExamples >> findLCharacterAtTheBeginningReversed [
 	<gtExample>
 	| aText anIndex |
@@ -108,7 +108,7 @@ BlTextOperatorExamples >> findLCharacterAtTheBeginningReversed [
 	^ aText
 ]
 
-{ #category : #'finder - substring' }
+{ #category : 'finder - substring' }
 BlTextOperatorExamples >> findLookSubStringInTheBeginning [
 	<gtExample>
 	| aText anIndex |
@@ -122,7 +122,7 @@ BlTextOperatorExamples >> findLookSubStringInTheBeginning [
 	^ aText
 ]
 
-{ #category : #'finder - substring' }
+{ #category : 'finder - substring' }
 BlTextOperatorExamples >> findLookSubStringInTheBeginningReversed [
 	<gtExample>
 	| aText anIndex |
@@ -138,7 +138,7 @@ BlTextOperatorExamples >> findLookSubStringInTheBeginningReversed [
 	^ aText
 ]
 
-{ #category : #'finder - substring' }
+{ #category : 'finder - substring' }
 BlTextOperatorExamples >> findNoSubString [
 	<gtExample>
 	| aText anIndex |
@@ -150,7 +150,7 @@ BlTextOperatorExamples >> findNoSubString [
 	^ aText
 ]
 
-{ #category : #'finder - substring' }
+{ #category : 'finder - substring' }
 BlTextOperatorExamples >> findNoSubStringReversed [
 	<gtExample>
 	| aText anIndex |
@@ -164,7 +164,7 @@ BlTextOperatorExamples >> findNoSubStringReversed [
 	^ aText
 ]
 
-{ #category : #'finder - character' }
+{ #category : 'finder - character' }
 BlTextOperatorExamples >> findNothing [
 	<gtExample>
 	| aText anIndex |
@@ -176,7 +176,7 @@ BlTextOperatorExamples >> findNothing [
 	^ aText
 ]
 
-{ #category : #'finder - character' }
+{ #category : 'finder - character' }
 BlTextOperatorExamples >> findRCharacterAtTheEnd [
 	<gtExample>
 	| aText anIndex |
@@ -190,7 +190,7 @@ BlTextOperatorExamples >> findRCharacterAtTheEnd [
 	^ aText
 ]
 
-{ #category : #'finder - character' }
+{ #category : 'finder - character' }
 BlTextOperatorExamples >> findRCharacterAtTheEndReversed [
 	<gtExample>
 	| aText anIndex |
@@ -206,7 +206,7 @@ BlTextOperatorExamples >> findRCharacterAtTheEndReversed [
 	^ aText
 ]
 
-{ #category : #'finder - substring' }
+{ #category : 'finder - substring' }
 BlTextOperatorExamples >> findRingSubStringInTheEnd [
 	<gtExample>
 	| aText anIndex |
@@ -220,7 +220,7 @@ BlTextOperatorExamples >> findRingSubStringInTheEnd [
 	^ aText
 ]
 
-{ #category : #'finder - substring' }
+{ #category : 'finder - substring' }
 BlTextOperatorExamples >> findRingSubStringInTheEndReversed [
 	<gtExample>
 	| aText anIndex |
@@ -236,7 +236,7 @@ BlTextOperatorExamples >> findRingSubStringInTheEndReversed [
 	^ aText
 ]
 
-{ #category : #'finder - characters' }
+{ #category : 'finder - characters' }
 BlTextOperatorExamples >> findxXCharactersAtTheBeginning [
 	<gtExample>
 	| aText anIndex |
@@ -250,7 +250,7 @@ BlTextOperatorExamples >> findxXCharactersAtTheBeginning [
 	^ aText
 ]
 
-{ #category : #'trimmer - line breaks' }
+{ #category : 'trimmer - line breaks' }
 BlTextOperatorExamples >> lineBreaks [
 	<gtExample>
 	| aString |
@@ -260,7 +260,7 @@ BlTextOperatorExamples >> lineBreaks [
 	^ aString
 ]
 
-{ #category : #trimmer }
+{ #category : 'trimmer' }
 BlTextOperatorExamples >> separators [
 	<gtExample>
 	| aString |
@@ -270,31 +270,31 @@ BlTextOperatorExamples >> separators [
 	^ aString
 ]
 
-{ #category : #'trimmer - line breaks' }
+{ #category : 'trimmer - line breaks' }
 BlTextOperatorExamples >> stringWithLineBreaksInTheMiddle [
 	<gtExample>
 	^ 'the first text', self lineBreaks, 'the second text'
 ]
 
-{ #category : #'trimmer - line breaks' }
+{ #category : 'trimmer - line breaks' }
 BlTextOperatorExamples >> stringWithLineBreaksOnBothSidesAndInTheMiddle [
 	<gtExample>
 	^ self lineBreaks, self stringWithLineBreaksInTheMiddle, self lineBreaks
 ]
 
-{ #category : #trimmer }
+{ #category : 'trimmer' }
 BlTextOperatorExamples >> stringWithSeparatorsInTheMiddle [
 	<gtExample>
 	^ 'the first text', self separators, 'the second text'
 ]
 
-{ #category : #trimmer }
+{ #category : 'trimmer' }
 BlTextOperatorExamples >> stringWithSeparatorsOnBothSidesAndInTheMiddle [
 	<gtExample>
 	^ self separators, self stringWithSeparatorsInTheMiddle, self separators
 ]
 
-{ #category : #'trimmer - line breaks' }
+{ #category : 'trimmer - line breaks' }
 BlTextOperatorExamples >> trimBothTextWithLineBreakssOnBothSidesAndInTheMiddle [
 	<gtExample>
 	| aText |
@@ -306,7 +306,7 @@ BlTextOperatorExamples >> trimBothTextWithLineBreakssOnBothSidesAndInTheMiddle [
 	^ aText
 ]
 
-{ #category : #trimmer }
+{ #category : 'trimmer' }
 BlTextOperatorExamples >> trimBothTextWithSeparatorsOnBothSidesAndInTheMiddle [
 	<gtExample>
 	| aText |
@@ -318,7 +318,7 @@ BlTextOperatorExamples >> trimBothTextWithSeparatorsOnBothSidesAndInTheMiddle [
 	^ aText
 ]
 
-{ #category : #trimmer }
+{ #category : 'trimmer' }
 BlTextOperatorExamples >> trimEmptyText [
 	<gtExample>
 	| aText |
@@ -330,7 +330,7 @@ BlTextOperatorExamples >> trimEmptyText [
 	^ aText
 ]
 
-{ #category : #trimmer }
+{ #category : 'trimmer' }
 BlTextOperatorExamples >> trimLeftTextWithSeparatorsOnBothSidesAndInTheMiddle [
 	<gtExample>
 	| aText |
@@ -342,7 +342,7 @@ BlTextOperatorExamples >> trimLeftTextWithSeparatorsOnBothSidesAndInTheMiddle [
 	^ aText
 ]
 
-{ #category : #trimmer }
+{ #category : 'trimmer' }
 BlTextOperatorExamples >> trimOnlySeparatorsText [
 	<gtExample>
 	| aText |
@@ -354,7 +354,7 @@ BlTextOperatorExamples >> trimOnlySeparatorsText [
 	^ aText
 ]
 
-{ #category : #trimmer }
+{ #category : 'trimmer' }
 BlTextOperatorExamples >> trimRightTextWithSeparatorsOnBothSidesAndInTheMiddle [
 	<gtExample>
 	| aText |

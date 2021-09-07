@@ -1,6 +1,6 @@
-Extension { #name : #OCExtraBindingScope }
+Extension { #name : 'OCExtraBindingScope' }
 
-{ #category : #'*Bloc-Text' }
+{ #category : '*Bloc-Text' }
 OCExtraBindingScope >> allTemps [
 	^ #()
 ]

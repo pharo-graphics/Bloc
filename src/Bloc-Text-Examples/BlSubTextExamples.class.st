@@ -1,24 +1,24 @@
 Class {
-	#name : #BlSubTextExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Text-Examples-Model'
+	#name : 'BlSubTextExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Text-Examples-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubTextExamples >> emptyText [
 	<gtExample>
 
 	^ '' asRopedText
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubTextExamples >> helloWorldText [
 	<gtExample>
 
 	^ 'HelloWorld' asRopedText
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubTextExamples >> helloWorld_from_0_to_0 [
 	<gtExample>
 	| aSubText anError |
@@ -34,7 +34,7 @@ BlSubTextExamples >> helloWorld_from_0_to_0 [
 	^ anError
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubTextExamples >> helloWorld_from_1_to_0 [
 	<gtExample>
 	| aSubText |
@@ -51,7 +51,7 @@ BlSubTextExamples >> helloWorld_from_1_to_0 [
 	^ aSubText
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubTextExamples >> helloWorld_from_2_to_1 [
 	<gtExample>
 	| aSubText |
@@ -67,7 +67,7 @@ BlSubTextExamples >> helloWorld_from_2_to_1 [
 	^ aSubText
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubTextExamples >> insert_in_helloWorld_from_1_to_0_at_0 [
 	<gtExample>
 	| aSubText |
@@ -86,7 +86,7 @@ BlSubTextExamples >> insert_in_helloWorld_from_1_to_0_at_0 [
 	^ aSubText
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSubTextExamples >> insert_in_helloWorld_from_1_to_0_at_1 [
 	<gtExample>
 	| aSubText anError |

@@ -6,15 +6,15 @@ The main entrance point is
 
 "
 Class {
-	#name : #BlTextStyler,
-	#superclass : #Object,
+	#name : 'BlTextStyler',
+	#superclass : 'Object',
 	#instVars : [
 		'text'
 	],
-	#category : #'Bloc-Text-Text-Styler'
+	#category : 'Bloc-Text-Text-Styler'
 }
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlTextStyler >> gtStylesFor: aView [
 	<gtView>
 	
@@ -29,14 +29,14 @@ BlTextStyler >> gtStylesFor: aView [
 		expandAll
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlTextStyler >> privateStyle: aText [ 
 	<return: #BlText>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - styling' }
+{ #category : 'api - styling' }
 BlTextStyler >> style: aBlText [
 	<return: #BlText>
 
@@ -49,7 +49,7 @@ BlTextStyler >> style: aBlText [
 			aStyledText text ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextStyler >> stylers [
 	"In case of a composite styler, return children stylers"
 	<return: #Collection of: #BlTextStyler>

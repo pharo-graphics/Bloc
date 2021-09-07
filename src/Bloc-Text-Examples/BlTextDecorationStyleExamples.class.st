@@ -1,10 +1,10 @@
 Class {
-	#name : #BlTextDecorationStyleExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Text-Examples-Model'
+	#name : 'BlTextDecorationStyleExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Text-Examples-Model'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlTextDecorationStyleExamples >> dashed [
 	<gtExample>
 	| aStyle |
@@ -23,7 +23,7 @@ BlTextDecorationStyleExamples >> dashed [
 	^ aStyle
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlTextDecorationStyleExamples >> dotted [
 	<gtExample>
 	| aStyle |
@@ -42,7 +42,7 @@ BlTextDecorationStyleExamples >> dotted [
 	^ aStyle
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlTextDecorationStyleExamples >> double [
 	<gtExample>
 	| aStyle |
@@ -61,7 +61,7 @@ BlTextDecorationStyleExamples >> double [
 	^ aStyle
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlTextDecorationStyleExamples >> solid [
 	<gtExample>
 	| aStyle |
@@ -80,7 +80,7 @@ BlTextDecorationStyleExamples >> solid [
 	^ aStyle
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlTextDecorationStyleExamples >> wavy [
 	<gtExample>
 	| aStyle |

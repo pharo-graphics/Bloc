@@ -1,15 +1,15 @@
 Class {
-	#name : #BlTextAttributeAdded,
-	#superclass : #Announcement,
+	#name : 'BlTextAttributeAdded',
+	#superclass : 'Announcement',
 	#instVars : [
 		'attribute',
 		'fromIndex',
 		'toIndex'
 	],
-	#category : #'Bloc-Text-Text-Events'
+	#category : 'Bloc-Text-Text-Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextAttributeAdded class >> attribute: aTextAttribute from: aFromIndex to: aToIndex [
 	^ self new
 		attribute: aTextAttribute;
@@ -17,32 +17,32 @@ BlTextAttributeAdded class >> attribute: aTextAttribute from: aFromIndex to: aTo
 		toIndex: aToIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributeAdded >> attribute [
 	^ attribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributeAdded >> attribute: anObject [
 	attribute := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributeAdded >> fromIndex [
 	^ fromIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributeAdded >> fromIndex: anObject [
 	fromIndex := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributeAdded >> toIndex [
 	^ toIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributeAdded >> toIndex: anObject [
 	toIndex := anObject
 ]

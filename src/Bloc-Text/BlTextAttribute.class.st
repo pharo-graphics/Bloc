@@ -1,15 +1,15 @@
 Class {
-	#name : #BlTextAttribute,
-	#superclass : #Object,
+	#name : 'BlTextAttribute',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'isOverwritableByStyler'
 	],
-	#category : #'Bloc-Text-Text-Attributes'
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextAttribute >> = anObject [
 	"Return true if I am equal to a given object"
 	<return: #Boolean>
@@ -22,28 +22,28 @@ BlTextAttribute >> = anObject [
 	^ self equals: anObject
 ]
 
-{ #category : #'text style' }
+{ #category : 'text style' }
 BlTextAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
 ]
 
-{ #category : #style }
+{ #category : 'style' }
 BlTextAttribute >> beNotOverwritableByStyler [
 	isOverwritableByStyler := false
 ]
 
-{ #category : #style }
+{ #category : 'style' }
 BlTextAttribute >> beOverwritableByStyler [
 	isOverwritableByStyler := true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextAttribute >> equals: anAnotherAttribute [
 	<return: #Boolean>
 
 	^ self type == anAnotherAttribute type
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextAttribute >> hash [
 	"Compute and return a hash code.
 	Two objects for which equals: returns true must have the same hash"
@@ -52,14 +52,14 @@ BlTextAttribute >> hash [
 	^ self type identityHash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextAttribute >> initialize [
 	super initialize.
 	
 	isOverwritableByStyler := true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextAttribute >> isAdornment [
 	"Return true if attribute influences text structure, for examples if it replaces one or more characters
 	with any amount of other arbitrary items, false otherwise"
@@ -68,7 +68,7 @@ BlTextAttribute >> isAdornment [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextAttribute >> isEventHandler [
 	"Return true if attribute is designed to handle UI events such as mouse,
 	false otherwise"
@@ -77,7 +77,7 @@ BlTextAttribute >> isEventHandler [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextAttribute >> isOverwritableByStyler [
 	"Return true if attribute is overwritable by stylers, false otherwise.
 	By default all attributes are treated as style ones"
@@ -86,7 +86,7 @@ BlTextAttribute >> isOverwritableByStyler [
 	^ isOverwritableByStyler
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextAttribute >> isParagraphAttribute [
 	"Return true if I am a special paragraph attribute, false otherwise"
 	<return: #Boolean>
@@ -94,7 +94,7 @@ BlTextAttribute >> isParagraphAttribute [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextAttribute >> isStyle [
 	"Return true if attribute represents a text or font style attribute that only changes how text looks,
 	for example foreground, background, weight, emphasis etc.
@@ -104,14 +104,14 @@ BlTextAttribute >> isStyle [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextAttribute >> mayHaveExternalReferences [
 	"Answer if this attribute can have references to some external objects like AST nodes or computation results"
 
 	^ false
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextAttribute >> storeOn: aStream [
 	aStream
 		nextPutAll: self class name;
@@ -121,7 +121,7 @@ BlTextAttribute >> storeOn: aStream [
 		ifFalse: [ aStream nextPutAll: ' ', #beNotOverwritableByStyler asString ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextAttribute >> type [
 	"Return an object that is used to compare attribute by type
 	The rule is the following: attributes of the same type must overwrite each other."

@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Text-Examples' }
+Package { #name : 'Bloc-Text-Examples' }

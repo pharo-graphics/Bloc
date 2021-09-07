@@ -1,39 +1,39 @@
 Class {
-	#name : #BlSingleLineTextParagraphMeasurer,
-	#superclass : #BlTextParagraphMeasurer,
+	#name : 'BlSingleLineTextParagraphMeasurer',
+	#superclass : 'BlTextParagraphMeasurer',
 	#instVars : [
 		'line'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSingleLineTextParagraphMeasurer >> accumulatedHeight [
 	<return: #Number>
 
 	^ self line height
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSingleLineTextParagraphMeasurer >> accumulatedWidth [
 	<return: #Number>
 
 	^ self line width
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSingleLineTextParagraphMeasurer >> initialize [
 	super initialize.
 		
 	line := BlTextParagraphLine new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSingleLineTextParagraphMeasurer >> line [
 	^ line
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlSingleLineTextParagraphMeasurer >> pushSpan: aParagraphSpan [
 	self line addSpan: aParagraphSpan.
 

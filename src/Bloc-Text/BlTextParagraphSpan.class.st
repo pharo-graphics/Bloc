@@ -10,8 +10,8 @@ A span consists of 3 essential parts:
 
 "
 Class {
-	#name : #BlTextParagraphSpan,
-	#superclass : #BlTextParagraphSegment,
+	#name : 'BlTextParagraphSpan',
+	#superclass : 'BlTextParagraphSegment',
 	#instVars : [
 		'textRun',
 		'span',
@@ -20,17 +20,17 @@ Class {
 		'strikethroughSize',
 		'isVertical'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSpan >> advance [
 	<return: #Number>
 
 	^ advance
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 
 	width := aSpanMeasurer measuredWidth.
@@ -49,7 +49,7 @@ BlTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 	baseline := 0@0
 ]
 
-{ #category : #'accessing - span' }
+{ #category : 'accessing - span' }
 BlTextParagraphSpan >> attributes [
 	"Return a set of attributes applied on this span"
 	<return: #Set of: #BlTextAttribute>
@@ -57,14 +57,14 @@ BlTextParagraphSpan >> attributes [
 	^ span attributes
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 BlTextParagraphSpan >> finalize [
 
 	textRun ifNotNil: [ :aTextRun | aTextRun release ].
 	textRun := nil
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlTextParagraphSpan >> indexAtPosition: aPoint [
 	"I return a cursor index at a given position as a Point provided in local coordinates of this span"
 	<return: #Number>
@@ -133,14 +133,14 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 			self from + spanIndex - 1 ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphSpan >> initialize [
 	super initialize.
 	
 	isVertical := false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextParagraphSpan >> isSplitted [
 	"Return true if span I measure is splitted right after me. This may happen
 	if a single span does not fit in a line and we have to push next paragraph span
@@ -150,27 +150,27 @@ BlTextParagraphSpan >> isSplitted [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextParagraphSpan >> isVertical [
 	^ isVertical
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSpan >> measurer [
 	^ measurer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphSpan >> measurer: aSpanMeasurer [
 	measurer := aSpanMeasurer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSpan >> metrics [
 	^ super metrics, { 'Advance' -> self advance }
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlTextParagraphSpan >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
 	| newLeft newTop |
@@ -187,14 +187,14 @@ BlTextParagraphSpan >> normalize: aScale [
 	advance := advance ceilingTicks: aScale
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSpan >> paragraph: aTextParagraph [
 	super paragraph: aTextParagraph.
 
 	self attributes do: [ :eachAttribute | eachAttribute applyOnTextParagraph: aTextParagraph from: self from to: self to ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlTextParagraphSpan >> positionAt: anIndex [
 	<return: #Point>
 	| aSpanIndex aSubSpan aMeasuredSpan aMeasurer aPositionY aPositionX |
@@ -220,14 +220,14 @@ BlTextParagraphSpan >> positionAt: anIndex [
 	^ (aPositionX + aMeasuredSpan advance) @ aPositionY
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextParagraphSpan >> printOn: aStream [
 	span
 		ifNil: [ aStream nextPutAll: '(not yet initialized)' ]
 		ifNotNil: [ aStream print: span ]
 ]
 
-{ #category : #'accessing - span' }
+{ #category : 'accessing - span' }
 BlTextParagraphSpan >> span [
 	"Return an underlying text span that I represent"
 	<return: #BlSpan>
@@ -235,21 +235,21 @@ BlTextParagraphSpan >> span [
 	^ span
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphSpan >> span: aBrSpan [
 	"Assign an attributed text span with corresponding start and end indices which I measure"
 	
 	span := aBrSpan
 ]
 
-{ #category : #'accessing - span' }
+{ #category : 'accessing - span' }
 BlTextParagraphSpan >> spanEnd [
 	<return: #Number>
 
 	^ span size
 ]
 
-{ #category : #'accessing - span' }
+{ #category : 'accessing - span' }
 BlTextParagraphSpan >> spanLength [
 	<return: #Number>
 
@@ -258,24 +258,24 @@ BlTextParagraphSpan >> spanLength [
 		ifFalse: [ self spanEnd - self spanStart + 1 ]
 ]
 
-{ #category : #'accessing - span' }
+{ #category : 'accessing - span' }
 BlTextParagraphSpan >> spanStart [
 	<return: #Number>
 
 	^ 1 min: span size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSpan >> strikethroughOffset [
 	^ strikethroughOffset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSpan >> strikethroughSize [
 	^ strikethroughSize
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphSpan >> text: aBrText from: aGlobalTextStart to: aGlobalTextEnd [
 	"Assign the paragraph's text with provided indices so that we could always determine which part of it I measure"
 
@@ -283,12 +283,12 @@ BlTextParagraphSpan >> text: aBrText from: aGlobalTextStart to: aGlobalTextEnd [
 	to := aGlobalTextEnd
 ]
 
-{ #category : #'accessing - text run' }
+{ #category : 'accessing - text run' }
 BlTextParagraphSpan >> textRun [	
 	^ textRun
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphSpan >> textRun: aTextRun [
 	"Assign a backend specific text run (collection of glyphs) with corresponding
 	start and end indices which represents an unstyled piece of text"
@@ -296,7 +296,7 @@ BlTextParagraphSpan >> textRun: aTextRun [
 	textRun := aTextRun.
 ]
 
-{ #category : #'accessing - text run' }
+{ #category : 'accessing - text run' }
 BlTextParagraphSpan >> textRunEnd [
 	"Return an index of a last measured glyph in a text run that should be rendered"
 	<return: #Number>
@@ -304,7 +304,7 @@ BlTextParagraphSpan >> textRunEnd [
 	^ textRun size
 ]
 
-{ #category : #'accessing - text run' }
+{ #category : 'accessing - text run' }
 BlTextParagraphSpan >> textRunLength [
 	"Return how many glyphs I represent of a text run according
 	to text run start and end indices. It is guaranteed that during
@@ -318,7 +318,7 @@ BlTextParagraphSpan >> textRunLength [
 		ifFalse: [ self textRunEnd - self textRunStart + 1 ]
 ]
 
-{ #category : #'accessing - text run' }
+{ #category : 'accessing - text run' }
 BlTextParagraphSpan >> textRunStart [
 	"Return an index of a first measured glyph in a text run that should be rendered"
 	<return: #Number>

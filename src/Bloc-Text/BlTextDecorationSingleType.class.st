@@ -1,38 +1,38 @@
 Class {
-	#name : #BlTextDecorationSingleType,
-	#superclass : #BlTextDecorationType,
+	#name : 'BlTextDecorationSingleType',
+	#superclass : 'BlTextDecorationType',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Text-Text-Decoration'
+	#category : 'Bloc-Text-Text-Decoration'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlTextDecorationSingleType class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationSingleType class >> constructor [
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextDecorationSingleType class >> isAbstract [
 	^ self = BlTextDecorationSingleType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationSingleType class >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationSingleType class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextDecorationSingleType >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -41,7 +41,7 @@ BlTextDecorationSingleType >> = anObject [
 	^ self class = anObject class
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlTextDecorationSingleType >> gtPreviewFor: aView [
 	<gtView>
 
@@ -57,19 +57,19 @@ BlTextDecorationSingleType >> gtPreviewFor: aView [
 				decorationDo: [ :aTextDecorationAttribute | aTextDecorationAttribute decoration type: self ] ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextDecorationSingleType >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ self class hash
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextDecorationSingleType >> printOn: aStream [
 	aStream nextPutAll: self class label
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextDecorationSingleType >> storeOn: aStream [
 	aStream
 		nextPutAll: BlTextDecorationType name;
@@ -77,12 +77,12 @@ BlTextDecorationSingleType >> storeOn: aStream [
 		nextPutAll: self class constructor
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlTextDecorationSingleType >> typesDo: aBlock [
 	aBlock value: self
 ]
 
-{ #category : #'logical operations' }
+{ #category : 'logical operations' }
 BlTextDecorationSingleType >> | anOtherDecorationType [
 	^ BlTextDecorationCompositeType new
 		addType: self;

@@ -3,12 +3,35 @@ I contain examples of more complicated pieces of text to exemplify the rope stru
 
 "
 Class {
-	#name : #BlRopedTextExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Text-Examples-Model'
+	#name : 'BlRopedTextExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Text-Examples-Model'
 }
 
-{ #category : #'example - insert' }
+{ #category : 'accessing' }
+BlRopedTextExamples >> allAttributesSuchThat [
+	<gtExample>
+	| aText theAttributes |
+	
+	aText := 'Hello World' asRopedText.
+	aText
+		attribute: (BlTextForegroundAttribute color: Color red)
+		from: 1
+		to: 5.
+	aText
+		attribute: (BlTextForegroundAttribute color: Color blue)
+		from: 6
+		to: 11.
+		
+	theAttributes := aText attributesAndIndicesSuchThat: [ :each | true ].
+	self assert: theAttributes size equals: 2.
+	self assert: theAttributes first value equals: (1 to: 5).
+	self assert: theAttributes second value equals: (6 to: 11).
+	
+	^ theAttributes
+]
+
+{ #category : 'example - insert' }
 BlRopedTextExamples >> append_empty_text [
 	<gtExample>
 	| aText wasAnnounced |
@@ -26,7 +49,7 @@ BlRopedTextExamples >> append_empty_text [
 	^ aText
 ]
 
-{ #category : #'example - insert' }
+{ #category : 'example - insert' }
 BlRopedTextExamples >> insert_empty_strings [
 	<gtExample>
 	| aText insertedStrings |
@@ -46,7 +69,7 @@ BlRopedTextExamples >> insert_empty_strings [
 	^ aText
 ]
 
-{ #category : #'examples - next span' }
+{ #category : 'examples - next span' }
 BlRopedTextExamples >> nextSpanFontColorOnHelloWorldWithColor [
 	<gtExample>
 	| aText anIterator aSpan |
@@ -78,7 +101,7 @@ BlRopedTextExamples >> nextSpanFontColorOnHelloWorldWithColor [
 	^ aText
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlRopedTextExamples >> textForeground [
 	<gtExample>
 	| text |
@@ -103,7 +126,7 @@ BlRopedTextExamples >> textForeground [
 	^ text
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlRopedTextExamples >> textWithAttributes [
 	<gtExample>
 	| text |
@@ -124,7 +147,7 @@ BlRopedTextExamples >> textWithAttributes [
 
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlRopedTextExamples >> textWithCr [
 	<gtExample>
 	| text |

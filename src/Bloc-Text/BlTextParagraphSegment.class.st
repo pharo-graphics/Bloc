@@ -3,8 +3,8 @@ I an already measured abstract paragraph segment.
 
 "
 Class {
-	#name : #BlTextParagraphSegment,
-	#superclass : #Object,
+	#name : 'BlTextParagraphSegment',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -20,71 +20,71 @@ Class {
 		'advance',
 		'paragraph'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> advance [
 	<return: #Number>
 
 	^ advance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> ascent [
 	<return: #Number>
 
 	^ ascent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> baseline [
 	<return: #Point>
 
 	^ baseline
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> baseline: aPoint [
 	baseline := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> bounds [
 	<return: #Rectangle>
 
 	^ self origin extent: self extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> descent [
 	<return: #Number>
 
 	^ descent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> extent [
 	<return: #Point>
 
 	^ self width @ self height
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> from [
 	<return: #Number>
 
 	^ from
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> height [
 	<return: #Number>
 
 	^ height
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphSegment >> initialize [
 	super initialize.
 
@@ -100,14 +100,14 @@ BlTextParagraphSegment >> initialize [
 	descent := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> left [
 	<return: #Number>
 	
 	^ left
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> metrics [
 	"Return a dictionary with segment metrics"
 	<return: #Dictionary>
@@ -123,27 +123,27 @@ BlTextParagraphSegment >> metrics [
 	} asOrderedDictionary
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlTextParagraphSegment >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> origin [
 	<return: #Point>
 
 	^ left @ top
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> paragraph [
 	<return: #BlTextParagraph>
 
 	^ paragraph
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> paragraph: aTextParagraph [
 
 	self
@@ -153,28 +153,28 @@ BlTextParagraphSegment >> paragraph: aTextParagraph [
 	paragraph := aTextParagraph
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> right [
 	<return: #Number>
 	
 	^ left + width
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> to [
 	<return: #Number>
 
 	^ to
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> top [
 	<return: #Number>
 	
 	^ top
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphSegment >> width [
 	<return: #Number>
 

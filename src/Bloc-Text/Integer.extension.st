@@ -1,6 +1,6 @@
-Extension { #name : #Integer }
+Extension { #name : 'Integer' }
 
-{ #category : #'*Bloc-Text' }
+{ #category : '*Bloc-Text' }
 Integer >> isTextIndex [
 
 	^ true

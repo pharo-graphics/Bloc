@@ -4,30 +4,30 @@ I offer API compatible with {{gtClass:ReadStream}}.
 
 "
 Class {
-	#name : #BlTextReadStream,
-	#superclass : #Object,
+	#name : 'BlTextReadStream',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'iterator'
 	],
-	#category : #'Bloc-Text-Text'
+	#category : 'Bloc-Text-Text'
 }
 
-{ #category : #'stream - testing' }
+{ #category : 'stream - testing' }
 BlTextReadStream >> atEnd [
 	"Return false if there is a next text item (character) after a current position"
 	<return: #Boolean>
 	^ self iterator hasNext not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextReadStream >> iterator [
 	<return: #BlTextIterator>
 	^ iterator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextReadStream >> iterator: aBlTextIterator [
 	self 
 		assert: [ aBlTextIterator isNotNil ] 
@@ -35,14 +35,14 @@ BlTextReadStream >> iterator: aBlTextIterator [
 	iterator := aBlTextIterator
 ]
 
-{ #category : #'stream - enumeration' }
+{ #category : 'stream - enumeration' }
 BlTextReadStream >> next [
 	"Return an item (character) at current position and move one to the right"
 	<return: #Character or: #Object>
 	^ self iterator next
 ]
 
-{ #category : #'stream - enumeration' }
+{ #category : 'stream - enumeration' }
 BlTextReadStream >> next: anAmount [
 	"Return a text and move one to the right"
 	<return: #BlRope>
@@ -54,7 +54,7 @@ BlTextReadStream >> next: anAmount [
 	^ aText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextReadStream >> nextLine [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first carriage return character"
@@ -62,7 +62,7 @@ BlTextReadStream >> nextLine [
 	^ self iterator nextLine
 ]
 
-{ #category : #'stream - enumeration' }
+{ #category : 'stream - enumeration' }
 BlTextReadStream >> peek [
 	"Return an item (character) at current position.
 	If the receiver is at the end, answer nil."
@@ -72,14 +72,14 @@ BlTextReadStream >> peek [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #'stream - accessing' }
+{ #category : 'stream - accessing' }
 BlTextReadStream >> position [
 	"Return current iterator position within a text"
 	<return: #Number>
 	^ self iterator position
 ]
 
-{ #category : #'stream - accessing' }
+{ #category : 'stream - accessing' }
 BlTextReadStream >> position: aNumber [
 	"Set current iterator position within a text"
 	| aDiff |

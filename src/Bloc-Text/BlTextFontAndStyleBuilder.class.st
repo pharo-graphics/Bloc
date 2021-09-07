@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTextFontAndStyleBuilder,
-	#superclass : #Object,
+	#name : 'BlTextFontAndStyleBuilder',
+	#superclass : 'Object',
 	#traits : 'TBlFontDescriptor + TBlFont',
 	#classTraits : 'TBlFontDescriptor classTrait + TBlFont classTrait',
 	#instVars : [
@@ -9,39 +9,39 @@ Class {
 		'defaultFontSize',
 		'defaultFontFamilyName'
 	],
-	#category : #'Bloc-Text-Text-Support'
+	#category : 'Bloc-Text-Text-Support'
 }
 
-{ #category : #'text - style' }
+{ #category : 'text - style' }
 BlTextFontAndStyleBuilder >> color [
 	<return: #Color>
 
 	^ color
 ]
 
-{ #category : #'text - style' }
+{ #category : 'text - style' }
 BlTextFontAndStyleBuilder >> color: aColor [
 	color := aColor
 ]
 
-{ #category : #'text - style' }
+{ #category : 'text - style' }
 BlTextFontAndStyleBuilder >> decoration [
 	<return: #BlTextDecoration>
 
 	^ decoration
 ]
 
-{ #category : #'text - style' }
+{ #category : 'text - style' }
 BlTextFontAndStyleBuilder >> decoration: aBlTextDecoration [
 	decoration := aBlTextDecoration
 ]
 
-{ #category : #'font - name' }
+{ #category : 'font - name' }
 BlTextFontAndStyleBuilder >> defaultFamilyName: aString [
 	defaultFontFamilyName := aString
 ]
 
-{ #category : #'font - size' }
+{ #category : 'font - size' }
 BlTextFontAndStyleBuilder >> defaultFontSizePt: aNumber [
 	self
 		assert: [ aNumber isNumber ]
@@ -50,7 +50,7 @@ BlTextFontAndStyleBuilder >> defaultFontSizePt: aNumber [
 	defaultFontSize := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextFontAndStyleBuilder >> font [
 	| aFont |
 	
@@ -70,66 +70,66 @@ BlTextFontAndStyleBuilder >> font [
 	^ aFont
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextFontAndStyleBuilder >> fontPropertiesTarget [
 	<return: #TBlFont>
 
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextFontAndStyleBuilder >> hasCustomColor [
 	^ color notNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextFontAndStyleBuilder >> hasCustomDecoration [
 	^ decoration notNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextFontAndStyleBuilder >> hasCustomFamilyName [
 	^ fontFamilyName notNil or: [ defaultFontFamilyName notNil ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextFontAndStyleBuilder >> hasCustomFontSize [
 	^ fontSize notNil or: [ defaultFontSize notNil ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextFontAndStyleBuilder >> hasCustomFontSlant [
 	^ fontSlant notNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextFontAndStyleBuilder >> hasCustomFontStretch [
 	^ fontStretch notNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextFontAndStyleBuilder >> hasCustomFontStyle [
 	^ self hasCustomFontSlant or: [ self hasCustomFontStretch or: [ self hasCustomFontWeight ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextFontAndStyleBuilder >> hasCustomFontWeight [
 	^ fontWeight notNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextFontAndStyleBuilder >> initialize [
 	super initialize
 ]
 
-{ #category : #'font - name' }
+{ #category : 'font - name' }
 BlTextFontAndStyleBuilder >> resolvedFontFamilyName [
 	<return: #String>
 	
 	^ self familyName ifNil: [ defaultFontFamilyName ]
 ]
 
-{ #category : #'font - size' }
+{ #category : 'font - size' }
 BlTextFontAndStyleBuilder >> resolvedFontSize [	
 	<return: #BlValueWithUnit>
 

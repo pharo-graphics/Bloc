@@ -1,42 +1,42 @@
 Class {
-	#name : #BlFontFamilyAttribute,
-	#superclass : #BlTextAttribute,
+	#name : 'BlFontFamilyAttribute',
+	#superclass : 'BlTextAttribute',
 	#instVars : [
 		'name'
 	],
-	#category : #'Bloc-Text-Text-Attributes'
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontFamilyAttribute class >> named: aString [
 	^ self new
 		name: aString;
 		yourself
 ]
 
-{ #category : #'text style' }
+{ #category : 'text style' }
 BlFontFamilyAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
 	aBlTextStyleBuilder familyName: self name
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlFontFamilyAttribute >> equals: anAnotherAttribute [
 	^ self name = anAnotherAttribute name
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlFontFamilyAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self name hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontFamilyAttribute >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontFamilyAttribute >> name: aString [	
 	self
 		assert: [ name isNil ]
@@ -45,14 +45,14 @@ BlFontFamilyAttribute >> name: aString [
 	name := aString
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlFontFamilyAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'font-family: ';
 		nextPutAll: self name printString
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlFontFamilyAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	

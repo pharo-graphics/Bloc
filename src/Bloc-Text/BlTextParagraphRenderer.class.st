@@ -10,12 +10,12 @@ Public API and Key Messages
 
 "
 Class {
-	#name : #BlTextParagraphRenderer,
-	#superclass : #Object,
-	#category : #'Bloc-Text-Text-Paragraph'
+	#name : 'BlTextParagraphRenderer',
+	#superclass : 'Object',
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlTextParagraphRenderer >> render: aBrTextParagraph on: aCanvas [
 	"Render a given text paragraph on a provided canvas.
 	aBrTextParagraph must not be nil.
@@ -24,7 +24,7 @@ BlTextParagraphRenderer >> render: aBrTextParagraph on: aCanvas [
 	self subclassResponsibility
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlTextParagraphRenderer >> renderSelection: aBrTextParagraph on: aCanvas [
 	"Render a selection of a given text paragraph on a provided canvas.
 	aBrTextParagraph must not be nil.

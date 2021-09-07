@@ -1,15 +1,15 @@
 Class {
-	#name : #BlPositionFinder,
-	#superclass : #BlTextOperator,
+	#name : 'BlPositionFinder',
+	#superclass : 'BlTextOperator',
 	#instVars : [
 		'startIndex',
 		'patterns',
 		'stepLength'
 	],
-	#category : #'Bloc-Text-Text-Operator'
+	#category : 'Bloc-Text-Text-Operator'
 }
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> caseInsensitiveSubstring: aString [
 	| aLowerCaseString |
 	self
@@ -22,7 +22,7 @@ BlPositionFinder >> caseInsensitiveSubstring: aString [
 			to: ((aPosition + aString size - 1) min: aText size)) asString asLowercase ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> caseSensitiveSubstring: aString [
 	self
 		assert: [ aString notNil ] 
@@ -34,7 +34,7 @@ BlPositionFinder >> caseSensitiveSubstring: aString [
 			to: ((aPosition + aString size - 1) min: aText size)) asString ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> character: aCharacter [
 	self
 		assert: [ aCharacter notNil ] 
@@ -43,7 +43,7 @@ BlPositionFinder >> character: aCharacter [
 		aCharacter = (aText at: aPosition) ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> characters: aString [
 	self
 		assert: [ aString notNil ] 
@@ -53,7 +53,7 @@ BlPositionFinder >> characters: aString [
 			eachCharacter = (aText at: aPosition) ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlPositionFinder >> initialize [
 	super initialize.
 	patterns := OrderedCollection new.
@@ -61,13 +61,13 @@ BlPositionFinder >> initialize [
 	stepLength := 1.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlPositionFinder >> isCurrentIndexInsideOfText: aCurrentIndex [
 	<return: #Boolean>
 	^ aCurrentIndex > 0 and: [ aCurrentIndex <= self text size ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> pattern: anOneArgBlock [
 	self
 		assert: [ anOneArgBlock notNil ] 
@@ -75,12 +75,12 @@ BlPositionFinder >> pattern: anOneArgBlock [
 	patterns add: anOneArgBlock
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> reversed [
 	self stepBy: stepLength negated
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BlPositionFinder >> search [
 	<return: #Integer>
 	| aCurrentIndex |
@@ -97,7 +97,7 @@ BlPositionFinder >> search [
 	^ 0
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BlPositionFinder >> searchClosest [
 	<return: #Integer>
 	| aStartIndex aForwardLocation aBackwardLocation |
@@ -125,12 +125,12 @@ BlPositionFinder >> searchClosest [
 		ifFalse: [ aBackwardLocation ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> startAtEnd [
 	self startAtPosition: self text size.
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> startAtPosition: anInteger [
 	self 
 		assert: [ anInteger notNil ] 
@@ -145,7 +145,7 @@ BlPositionFinder >> startAtPosition: anInteger [
 	startIndex := anInteger
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> stepBy: anInteger [
 	self 
 		assert: [ anInteger notNil ] 
@@ -159,7 +159,7 @@ BlPositionFinder >> stepBy: anInteger [
 	stepLength := anInteger.
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlPositionFinder >> substring: aString [
 	self
 		assert: [ aString notNil ] 

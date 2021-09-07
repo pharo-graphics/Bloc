@@ -1,30 +1,30 @@
 Class {
-	#name : #BlSingleLineTextParagraph,
-	#superclass : #BlTextParagraph,
+	#name : 'BlSingleLineTextParagraph',
+	#superclass : 'BlTextParagraph',
 	#instVars : [
 		'line'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> advance [
 	^ self line advance
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> ascent [
 	<return: #Number>
 
 	^ self line ascent
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BlSingleLineTextParagraph >> baselineChanged [
 	self line baseline: self baseline
 ]
 
-{ #category : #'paragraph - measuring' }
+{ #category : 'paragraph - measuring' }
 BlSingleLineTextParagraph >> basicMeasureOn: aSpanMeasurer [
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 	| anIterator aMeasurer |
@@ -53,46 +53,46 @@ BlSingleLineTextParagraph >> basicMeasureOn: aSpanMeasurer [
 	end := line to
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> bounds [
 	^ self line bounds
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSingleLineTextParagraph >> defaultMeasurer [
 	^ BlSingleLineTextParagraphMeasurer new
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> descent [
 	<return: #Number>
 
 	^ self line descent
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 BlSingleLineTextParagraph >> finalize [
 
 	line ifNotNil: #finalize.
 	line := nil
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> height [
 	^ self line height
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSingleLineTextParagraph >> isEmpty [
 	^ self line isEmpty
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> left [
 	^ self line left
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSingleLineTextParagraph >> line [
 	"Return a line behind this paragraph"
 	<return: #BlTextParagraphLine>
@@ -100,17 +100,17 @@ BlSingleLineTextParagraph >> line [
 	^ line
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> looseBounds [
 	^ 0 @ 0 extent: self line advance @ (self ascent abs + self descent)
 ]
 
-{ #category : #'paragraph - measuring' }
+{ #category : 'paragraph - measuring' }
 BlSingleLineTextParagraph >> normalize: aScale [
 	self line normalize: aScale
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSingleLineTextParagraph >> reset [
 	super reset.
 	
@@ -119,7 +119,7 @@ BlSingleLineTextParagraph >> reset [
 	line paragraph: self
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> spanAtIndex: anIndex [
 	<return: #BlTextParagraphSpan>
 
@@ -153,7 +153,7 @@ BlSingleLineTextParagraph >> spanAtIndex: anIndex [
 		ifNone: [ self error: 'Span for character at index ', anIndex asString, ' does not exist' ]
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Find a paragraph span that contains a given point given in a paragraph coordinates
 	and evaluate a found block if such span was found or evaluate an exception block
@@ -176,17 +176,17 @@ BlSingleLineTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: an
 		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> tightBounds [
 	^ self line bounds translateBy: self baseline
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> top [
 	^ self line top
 ]
 
-{ #category : #'paragraph - geometry' }
+{ #category : 'paragraph - geometry' }
 BlSingleLineTextParagraph >> width [
 	^ self line width
 ]

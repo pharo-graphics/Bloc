@@ -5,21 +5,21 @@ My responsibility is to measure a given span according to provided properties
 
 "
 Class {
-	#name : #BlTextParagraphSpanMeasurer,
-	#superclass : #Object,
+	#name : 'BlTextParagraphSpanMeasurer',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextParagraphSpanMeasurer >> createParagraphSpan [
 	<return: #BlTextParagraphSpan>
 
 	^ BlTextParagraphSpan new measurer: self
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlTextParagraphSpanMeasurer >> measureSpan: aBlSpan [
 	"Measure a given text span and return paragraph span with computed metrics"
 	<return: #BlTextParagraphSpan>
@@ -27,7 +27,7 @@ BlTextParagraphSpanMeasurer >> measureSpan: aBlSpan [
 	self subclassResponsibility
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlTextParagraphSpanMeasurer >> measureSpan: aBlSpan on: aCanvas [
 	"Measure a given text span and return paragraph span with computed metrics"
 	<return: #BlTextParagraphSpan>
