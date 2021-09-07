@@ -136,6 +136,57 @@ BlText >> attributes: anAttributesCollection from: aStart to: anEnd [
 ]
 
 { #category : #'text - attributes' }
+BlText >> attributesAndIndicesDo: aBlock [
+	self
+		attributesAndIndicesSuchThat: [ :eachAttribute | true ]
+		do: aBlock
+]
+
+{ #category : #'text - attributes' }
+BlText >> attributesAndIndicesSuchThat: aFilterBlock [
+
+	^ Array streamContents: [ :aStream | 
+		  self
+			  attributesAndIndicesSuchThat: aFilterBlock
+			  do: [ :aStart :anEnd :anAttribute | 
+				  aStream nextPut: anAttribute -> (aStart to: anEnd) ] ]
+]
+
+{ #category : #'text - attributes' }
+BlText >> attributesAndIndicesSuchThat: aFilterBlock do: anIterationBlock [
+	| anIterator theAttributes |
+
+	anIterator := self iterator.
+	theAttributes := OrderedDictionary new.
+
+	[ anIterator hasNext ] whileTrue: [
+		anIterator attributes
+			select: aFilterBlock
+			thenDo: [ :eachAttribute |
+				theAttributes
+					at: eachAttribute
+					ifPresent: [ :aCollectionOfIntervals |
+						(aCollectionOfIntervals last last = anIterator position)
+							ifTrue: [ aCollectionOfIntervals last at: 2 put: anIterator position + 1 ]
+							ifFalse: [ aCollectionOfIntervals add: (OrderedCollection
+								with: anIterator position + 1
+								with: anIterator position + 1) ] ]
+					ifAbsentPut: [
+						OrderedCollection with:
+							(OrderedCollection
+								with: anIterator position + 1
+								with: anIterator position + 1) ] ].
+		anIterator next ].
+
+	theAttributes keysAndValuesDo: [ :eachAttribute :aCollectionOfIntervals |
+		aCollectionOfIntervals do: [ :eachInterval |
+			anIterationBlock
+				value: eachInterval first
+				value: eachInterval last
+				value: eachAttribute ] ]
+]
+
+{ #category : #'text - attributes' }
 BlText >> attributesAt: anIndex [
 	"Return a collection of text attributes without duplicates at a given text index"
 	<return: #Collection of: #BlTextAttribute>
@@ -163,7 +214,7 @@ BlText >> attributesDo: aBlock [
 			| hasNext |
 			hasNext := anIterator hasNext.
 			anIterator hasNext
-				ifTrue: [  anIterator next ].
+				ifTrue: [ anIterator next ].
 			hasNext ]
 ]
 
