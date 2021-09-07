@@ -335,39 +335,28 @@ BlText >> equals: anObject [
 ]
 
 { #category : #'text - attributes' }
-BlText >> findAllAttributesSuchThat: aComparisonBlock indicesDo: aBlock [	
-	| iterator  |
-	iterator := self iterator.
-	[ iterator hasNext ] whileTrue: [ 
-	iterator
-		nextAttributedEnd: aComparisonBlock
-		indicesDo: [ :_ :__ :theEndedAttributes |			
-			theEndedAttributes do: [ :eachAttribute |
-				self
-					findAttribute: eachAttribute
-					indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd value: eachAttribute ] ] ] ].
-]
-
-{ #category : #'text - attributes' }
 BlText >> findAttribute: aBlTextAttribute indicesDo: aBlock [	
-	^ self iterator
-		nextAttributeStartAndEnd: aBlTextAttribute
-		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
+	self
+		attributesAndIndicesSuchThat: [ :eachAttribute | eachAttribute == aBlTextAttribute ]
+		do: [ :aStart :anEnd :anAttribute | aBlock value: aStart value: anEnd ]
 ]
 
 { #category : #'text - attributes' }
-BlText >> findAttributeSuchThat: aComparisonBlock indicesDo: aBlock [	
-	^ self iterator
-		nextAttributeStartAndEndSuchThat: aComparisonBlock
-		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
+BlText >> findAttributeSuchThat: aComparisonBlock indicesDo: aBlock [
+	self
+		attributesAndIndicesSuchThat: aComparisonBlock
+		do: [ :aStart :anEnd :anAttribute | aBlock value: aStart value: anEnd ]
 ]
 
 { #category : #'text - attributes' }
 BlText >> findAttributes: aCollectionOfBlTextAttribute indicesDo: aBlock [
-	aCollectionOfBlTextAttribute do: [ :eachAttribute |
-		self iterator
-			nextAttributeStartAndEnd: eachAttribute
-			indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ] ]
+	| attributesSet |
+	
+	attributesSet := aCollectionOfBlTextAttribute asSet.
+	
+	self
+		attributesAndIndicesSuchThat: [ :eachAttribute | attributesSet includes: eachAttribute ]
+		do: [ :aStart :anEnd :eachAttribute | aBlock cull: aStart cull: anEnd cull: eachAttribute ]
 ]
 
 { #category : #'text - enumeration' }

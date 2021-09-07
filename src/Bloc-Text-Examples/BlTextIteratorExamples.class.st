@@ -320,9 +320,9 @@ BlTextIteratorExamples >> findAttribute_beginning [
 		attributes: { attribute }
 		from: 1 to: 5.
 
-	interval := text
+	text
 		findAttribute: attribute
-		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+		indicesDo: [ :aStart :anEnd | interval := aStart to: anEnd ].
 
 	self assert: interval equals: (1 to: 5).
 	
@@ -341,9 +341,9 @@ BlTextIteratorExamples >> findAttribute_beginning_subtext_equal [
 		
 	subText := text from: 1 to: 5.
 
-	interval := subText
+	subText
 		findAttribute: attribute
-		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+		indicesDo: [ :aStart :anEnd | interval := aStart to: anEnd ].
 
 	self assert: interval equals: (1 to: 5).
 	
@@ -362,9 +362,9 @@ BlTextIteratorExamples >> findAttribute_beginning_subtext_larger [
 
 	subText := text from: 1 to: 7.
 
-	interval := subText
+	subText
 		findAttribute: attribute
-		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+		indicesDo: [ :aStart :anEnd | interval := aStart to: anEnd ].
 
 	self assert: interval equals: (1 to: 5).
 	
@@ -383,9 +383,9 @@ BlTextIteratorExamples >> findAttribute_beginning_subtext_shifted [
 
 	subText := text from: 3 to: 7.
 
-	interval := subText
+	subText
 		findAttribute: attribute
-		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+		indicesDo: [ :aStart :anEnd | interval := aStart to: anEnd ].
 
 	self assert: interval equals: (1 to: 3).
 	
@@ -404,9 +404,9 @@ BlTextIteratorExamples >> findAttribute_beginning_subtext_smaller [
 		
 	subText := text from: 1 to: 2.
 
-	interval := subText
+	subText
 		findAttribute: attribute
-		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+		indicesDo: [ :aStart :anEnd | interval := aStart to: anEnd ].
 
 	self assert: interval equals: (1 to: 2).
 	
@@ -423,9 +423,9 @@ BlTextIteratorExamples >> findAttribute_end [
 		attributes: { attribute }
 		from: 6 to: 10.
 
-	interval := text
+	text
 		findAttribute: attribute
-		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+		indicesDo: [ :aStart :anEnd | interval := aStart to: anEnd ].
 
 	self assert: interval equals: (6 to: 10).
 	
@@ -442,9 +442,9 @@ BlTextIteratorExamples >> findAttribute_middle [
 		attributes: { attribute }
 		from: 3 to: 7.
 
-	interval := text
+	text
 		findAttribute: attribute
-		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+		indicesDo: [ :aStart :anEnd | interval := aStart to: anEnd ].
 
 	self assert: interval equals: (3 to: 7).
 	
@@ -459,9 +459,9 @@ BlTextIteratorExamples >> findAttribute_none [
 
 	text := 'HelloWorld' asRopedText.
 
-	interval := text
+	text
 		findAttribute: attribute
-		indicesDo: [ :aStart :anEnd | aStart to: anEnd ].
+		indicesDo: [ :aStart :anEnd | interval := aStart to: anEnd ].
 
 	self assert: interval isNil.
 	
