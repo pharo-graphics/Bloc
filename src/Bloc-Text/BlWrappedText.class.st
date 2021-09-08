@@ -53,6 +53,11 @@ BlWrappedText >> attributes: anAttributesCollection from: aStart to: anEnd [
 ]
 
 { #category : #'text - attributes' }
+BlWrappedText >> attributesFinder [
+	^ text attributesFinder
+]
+
+{ #category : #'text - attributes' }
 BlWrappedText >> clearAttributes: aStart to: anEnd if: aBlock [
 	self text clearAttributes: aStart to: anEnd if: aBlock
 ]
