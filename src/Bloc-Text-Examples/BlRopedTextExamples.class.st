@@ -28,7 +28,7 @@ BlRopedTextExamples >> allAttributesSuchThat [
 	self assert: theAttributes first value equals: (1 to: 5).
 	self assert: theAttributes second value equals: (6 to: 11).
 	
-	^ theAttributes
+	^ aText
 ]
 
 { #category : 'example - insert' }

@@ -1,6 +1,6 @@
-Extension { #name : #TextEmphasis }
+Extension { #name : 'TextEmphasis' }
 
-{ #category : #'*Bloc-Text-Rope' }
+{ #category : '*Bloc-Text-Rope' }
 TextEmphasis >> applyToBlText: aBlText [
 	"Apply the receiver to the supplied BlText"
 

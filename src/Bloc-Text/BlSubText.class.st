@@ -131,6 +131,11 @@ BlSubText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [
 ]
 
 { #category : 'text - attributes' }
+BlSubText >> attributesFinder [
+	^ BlTextAttributesDynamicFinder new initializeForText: self
+]
+
+{ #category : 'text - attributes' }
 BlSubText >> clearAttributes: aBlock [
 	text
 		clearAttributes: start

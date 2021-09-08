@@ -28,6 +28,13 @@ BlSpan >> attributes [
 	^ attributes
 ]
 
+{ #category : 'text - attributes' }
+BlSpan >> attributesFinder [
+	^ BlTextAttributesExplicitFinder new
+		initializeForAttributes: attributes
+		interval: ((1 min: self size) to: self size)
+]
+
 { #category : 'initialization' }
 BlSpan >> text: aBrText attributes: theAttributes [
 	text := aBrText.

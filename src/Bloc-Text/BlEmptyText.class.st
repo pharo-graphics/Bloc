@@ -23,6 +23,11 @@ BlEmptyText class >> uniqueInstance [
 BlEmptyText >> attributes: anAttributesCollection [
 ]
 
+{ #category : 'text - attributes' }
+BlEmptyText >> attributesFinder [
+	^ BlTextAttributesIgnoringFinder new
+]
+
 { #category : 'text - copying' }
 BlEmptyText >> copyFrom: aStartIndex to: anEndIndex [
 	"Create a copy of this text within a given indices interval.
