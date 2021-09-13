@@ -5,33 +5,31 @@ Text >> asRopedText [
 	"Answer a RopedText with most of the attributes of the receiver.
 	This is really ssssllllooowwww"
 
-	| attributeStart lastAttributes attributes removedAttributes ropedText |
+	| startIndexByAttribute aRopedText |
+	startIndexByAttribute := Dictionary new.
+	aRopedText := self asString asRopedText.
 
-	attributeStart := Dictionary new.
-	ropedText := self asString asRopedText.
-	lastAttributes := IdentitySet new.
+	runs withIndexDo: [ :attributes :index |
+		| attributesThatEnd |
 
-	1 to: self size do: [ :i |
-		attributes := runs at: i.
-		"Handle attributes that are no longer active"
-		removedAttributes := lastAttributes difference: attributes asIdentitySet.
-		removedAttributes do: [ :attr |
-			attr applyToBlText: (ropedText
-				from: (attributeStart at: attr) 
-				to: i-1).
-				attributeStart remove: attr ].
+		"Apply ending attributes"
+		attributesThatEnd := startIndexByAttribute keys copyWithoutAll: attributes.
+		attributesThatEnd do: [ :eachAttribute |
+			eachAttribute applyToBlText: (aRopedText
+				from: (startIndexByAttribute at: eachAttribute) 
+				to: index - 1).
+			startIndexByAttribute removeKey: eachAttribute ].
 
-		"Add new attributes"
-		attributes do: [ :attr |
-			(lastAttributes includes: attr) ifFalse: [ 
-				lastAttributes add: attr.
-				attributeStart at: attr put: i ] ] ].
+		"Remember starting attributes"
+		attributes do: [ :eachAttribute |
+			(startIndexByAttribute includesKey: eachAttribute) ifFalse: [
+				startIndexByAttribute at: eachAttribute put: index ] ] ].
 
-		"Add any attributes remaining"
-	attributeStart keysAndValuesDo: [ :attr :start |
-		attr applyToBlText: (ropedText
+	"Apply any remaining attribute"
+	startIndexByAttribute keysAndValuesDo: [ :eachAttribute :start |
+		eachAttribute applyToBlText: (aRopedText
 			from: start 
 			to: self size) ].
 
-	^ropedText
+	^ aRopedText
 ]
