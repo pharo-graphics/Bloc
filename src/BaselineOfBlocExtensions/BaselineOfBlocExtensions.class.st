@@ -9,9 +9,9 @@ BaselineOfBlocExtensions >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec 
-			baseline: 'NewBloc' with: [
-				spec repository: 'github://pharo-graphics/Bloc/src' ].
+			baseline: 'Bloc' with: [
+				spec repository: 'github://feenkcom/Bloc/src' ].
 
 		spec package: #'Bloc-Extensions' with: [
-				spec requires: #('NewBloc'). ] ]
+				spec requires: #('Bloc'). ] ]
 ]
