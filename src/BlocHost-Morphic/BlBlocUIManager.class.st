@@ -77,22 +77,6 @@ BlBlocUIManager >> abort: aStringOrText title: aString [
 		default: [ true ]
 ]
 
-{ #category : #private }
-BlBlocUIManager >> activate [ 	
-	"Override the method from MorphicUIManager to register 'GtTranscript' instead of 'ThreadSafeTranscript'."
-	
-	World worldState worldRenderer: (AbstractWorldRenderer detectCorrectOneforWorld: World).
-	
-	WorldMorph currentWorld ifNotNil: [:world | world restoreMorphicDisplay].
-	WorldMorph extraWorldList do: #restoreMorphicDisplay.
-	
-	activeTranscript 
-		ifNil: [ #GtTranscript asClass installDefault ]		
-		ifNotNil: [ Transcript := activeTranscript ].
-	
-	SystemProgressMorph enable.
-]
-
 { #category : #services }
 BlBlocUIManager >> alert: aStringOrText title: aString configure: aBlock [
 	^ BlBlocUIManagerNotification
