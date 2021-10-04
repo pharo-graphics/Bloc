@@ -1,5 +1,5 @@
 "
-I am responsible for error handling that occur in the ${class:BlElement}$
+I am responsible for error handling that occur in the {{gtClass:BlElement}}
 
 
 "

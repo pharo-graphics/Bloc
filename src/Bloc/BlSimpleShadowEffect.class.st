@@ -1,5 +1,6 @@
 "
 I am very simple shadow effect. I just render a plain flat colored geometry of an element on which I am applied with an offset.
+
 "
 Class {
 	#name : #BlSimpleShadowEffect,

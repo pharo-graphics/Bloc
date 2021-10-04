@@ -1,5 +1,6 @@
 "
 I am a special iterator used to iterate over sub-rope
+
 "
 Class {
 	#name : #BlSubRopeIterator,
@@ -48,6 +49,13 @@ BlSubRopeIterator >> peer [
 { #category : #'iterator - accessing' }
 BlSubRopeIterator >> position [
 	^ subIterator position - rope offset
+]
+
+{ #category : #copying }
+BlSubRopeIterator >> postCopy [
+	super postCopy.
+
+	subIterator := subIterator copy
 ]
 
 { #category : #'iterator - enumeration' }

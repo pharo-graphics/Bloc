@@ -1,13 +1,13 @@
 "
-! Keyboard key
+# Keyboard key
 
-I represent a named keyboard key such as ==arrowLeft== or ==A==.
+I represent a named keyboard key such as `arrowLeft` or `A`.
 
-!! Code generation
+## Code generation
 
 Instance creation methods for the english alphabet are generated using the following script
 
-[[[
+```
 			
 ($A to: $Z) do: [ :c | BlKeyboardKey class compile: c asString uncapitalized, '
 	<return: #', BlKeyboardKey name, '>
@@ -41,7 +41,8 @@ Instance creation methods for the english alphabet are generated using the follo
 	<return: #', BlKeyboardKey name, '>
 	^ self named: #', n asString classified: 'keys - symbols' ].
 
-]]]
+```
+
 "
 Class {
 	#name : #BlKeyboardKey,

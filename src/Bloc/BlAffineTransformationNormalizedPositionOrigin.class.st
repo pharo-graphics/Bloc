@@ -1,5 +1,6 @@
 "
 I allow users to provide a fixed normalized location (top left is 0@0 and bottom right is 1@1, negative and larger values are allowed) that should be used as transformation origin
+
 "
 Class {
 	#name : #BlAffineTransformationNormalizedPositionOrigin,

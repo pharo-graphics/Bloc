@@ -1,5 +1,6 @@
 "
 I am a special iterator used to iterate over concatenation rope
+
 "
 Class {
 	#name : #BlConcatenationRopeIterator,
@@ -186,6 +187,13 @@ BlConcatenationRopeIterator >> position [
 	<return: #Number>
 
 	^ position
+]
+
+{ #category : #copying }
+BlConcatenationRopeIterator >> postCopy [
+	super postCopy.
+
+	currentIterator := currentIterator copy
 ]
 
 { #category : #'iterator - enumeration' }

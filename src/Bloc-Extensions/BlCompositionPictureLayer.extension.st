@@ -33,6 +33,21 @@ BlCompositionPictureLayer >> asForm [
 ]
 
 { #category : #'*Bloc-Extensions' }
+BlCompositionPictureLayer >> gtExportAsSkpFor: anAction [
+	<gtAction>
+
+	^ anAction button
+		tooltip: 'Export as .skp';
+		icon: BrGlamorousVectorIcons clipboard;
+		label: 'Export';
+		action: [ :button |
+			self picture ifNotNil: [ :aPicture |
+				(self class name, '-', self identityHash asString, '.skp') asFileReference binaryWriteStream
+					nextPutAll: aPicture asByteArray;
+					flush ] ]
+]
+
+{ #category : #'*Bloc-Extensions' }
 BlCompositionPictureLayer >> gtMatrixFor: aView [
 	<gtView>
 	^ aView forward

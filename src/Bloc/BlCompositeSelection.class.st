@@ -1,5 +1,6 @@
 "
 I am a composite text selection consisting of multiple independent non-overlapping monotone text selections
+
 "
 Class {
 	#name : #BlCompositeSelection,
@@ -58,6 +59,17 @@ BlCompositeSelection >> containsIndex: anIndex [
 	<return: #Boolean>
 	
 	^ selections containsIndex: anIndex
+]
+
+{ #category : #copying }
+BlCompositeSelection >> copyFrom: aStartIndex to: anEndIndex [
+	| aNewSelection |
+	
+	aNewSelection := self class new.
+	self do: [ :eachMonotoneSelection |
+		aNewSelection select: (eachMonotoneSelection copyFrom: aStartIndex to: anEndIndex) ].
+	
+	^ aNewSelection
 ]
 
 { #category : #'api - selection' }

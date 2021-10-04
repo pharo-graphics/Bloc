@@ -114,7 +114,15 @@ BlElement >> paintClippedChildrenOn: aCompositorPainter offset: anOffset [
 BlElement >> paintMeAndChildrenOn: aCompositorPainter offset: anOffset [
 	"anOffsetPoint should satisfies #isSpartaScalarPoint"
 
-	self paintOn: aCompositorPainter offset: anOffset.
+	self errorHandler
+		with: self
+		do: [ self paintOn: aCompositorPainter offset: anOffset. ]
+		failed: [ :anError |
+			aCompositorPainter canvas fill
+				paint: Color lightGray;
+				path: self boundsInLocal;
+				draw ].
+
 	self
 		paintClippedChildrenOn: aCompositorPainter
 		offset: anOffset

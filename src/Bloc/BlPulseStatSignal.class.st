@@ -1,33 +1,34 @@
 "
-${class:BlPulseStatSignal}$ records some basic statistics about the Bloc main loop and is emitted each time a pulse is fired.  See  ${class:BlHostPulseLoop}$ for more details and  ${method:name=BlHostPulseLoop>>#wait}$ for a description of milliSecs.
-${method:BlPulseStatSignal>>#sampleCount}$ is the number of pulses fired in this sample.
+{{gtClass:BlPulseStatSignal}} records some basic statistics about the Bloc main loop and is emitted each time a pulse is fired.  See  {{gtClass:BlHostPulseLoop}} for more details and  {{gtMethod:name=BlHostPulseLoop>>#wait}} for a description of milliSecs.
+{{gtMethod:BlPulseStatSignal>>#sampleCount}} is the number of pulses fired in this sample.
 
-${method:BlPulseStatSignal>>#l2}$ is the number of times milliSecs <= 2.
+{{gtMethod:BlPulseStatSignal>>#l2}} is the number of times milliSecs <= 2.
 
-${method:BlPulseStatSignal>>#min}$ is the minimum value of millliSecs in the sample set.
+{{gtMethod:BlPulseStatSignal>>#min}} is the minimum value of millliSecs in the sample set.
 
-${method:BlPulseStatSignal>>#max}$ is the maximum value of milliSecs in the sample set.
-${method:BlPulseStatSignal>>#lowPriorityDelayCount}$ is the number of times a minimum delay of half the normal period is forced (to give low priority processes CPU time).
+{{gtMethod:BlPulseStatSignal>>#max}} is the maximum value of milliSecs in the sample set.
+{{gtMethod:BlPulseStatSignal>>#lowPriorityDelayCount}} is the number of times a minimum delay of half the normal period is forced (to give low priority processes CPU time).
 
-!!!Using BlPulseStatSignal
+### Using BlPulseStatSignal
 
-${method:BlHostPulseLoop>>#wait}$ calls ${method:name=BlPulseStatSignal class>>#duration:delayForced:}$ each time it waits.  A signal is then emitted every sampleCount times.
+{{gtMethod:BlHostPulseLoop>>#wait}} calls {{gtMethod:name=BlPulseStatSignal class>>#duration:delayForced:}} each time it waits.  A signal is then emitted every sampleCount times.
 
-Normally the signals are caputred using ${class:name=CircularMemoryLogger}$ or ${class:name=MemoryLogger}$.
+Normally the signals are caputred using {{gtClass:name=CircularMemoryLogger}} or {{gtClass:name=MemoryLogger}}.
 
-If ${method:BlPulseStatSignal>>#lowPriorityDelayCount}$ is consistently 3 or less it suggests that low priority processes are not being starved of CPU time.
+If {{gtMethod:BlPulseStatSignal>>#lowPriorityDelayCount}} is consistently 3 or less it suggests that low priority processes are not being starved of CPU time.
 
-If ${method:BlPulseStatSignal>>#min}$ is consistently above about 5ms it suggests that the Bloc Main Loop is not stressed.  Conversely, min having values less than 0 consistently suggests that the system is not keeping up with the display requirements (low priority processes will still get some CPU time, but will be quite sluggish).
+If {{gtMethod:BlPulseStatSignal>>#min}} is consistently above about 5ms it suggests that the Bloc Main Loop is not stressed.  Conversely, min having values less than 0 consistently suggests that the system is not keeping up with the display requirements (low priority processes will still get some CPU time, but will be quite sluggish).
 
 
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 	l2:						<Integer>
 	lowPriorityDelayCount:		<Integer>
 	max:					<Integer>
 	min:		<Integer>
 	sampleCount:		<Integer>
+
 
 "
 Class {

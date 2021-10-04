@@ -1,6 +1,8 @@
 "
-I represent element properties that can be propagated from the parent element to the children.
-For example font size is by default inherited by the children.
+# Element properties
+That can be propagated from the parent element to the children.
+For example font size is by default inherited by the children
+
 "
 Class {
 	#name : #BlElementProperties,

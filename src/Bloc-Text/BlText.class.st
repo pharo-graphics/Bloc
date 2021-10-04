@@ -1,5 +1,5 @@
 "
-! Text model
+# Text model
 
 I am a data structure independent text abstraction.
 
@@ -7,21 +7,22 @@ I define a public API of the text model. User must only talk with me using provi
 
 I only store string and corresponding attributes. I don't know anything about text layout or paragraphs. I should be used together with BrTextParagraph in order to be measured, layered out and rendered. 
 
-Once a piece of string is converted ${BlText}$ users must not make any assumption on the internat structure of that string inside of the text. For example I replace all occurrences of ==CrLf== with a special marker that is exactly one item instead of two characters (==Cr== and ==Lf==)
+Once a piece of string is converted {{gtClass:name=BlText}} users must not make any assumption on the internat structure of that string inside of the text. For example I replace all occurrences of `CrLf` with a special marker that is exactly one item instead of two characters (`Cr` and `Lf`)
 
 I provide a fluent text styling api:
 
-[[[
+```
 | text |
 text := 'Hello world' asRopedText.
 (text from: 1 to: 5) foreground: Color blue.
 (text from: 7 to: 11) foreground: Color red.
 text	
-]]]
+```
 
-!! Attributes
+## Attributes
 
-- ${class:BlTextUnderlineAttribute}$
+- {{gtClass:BlTextUnderlineAttribute}}
+
 "
 Class {
 	#name : #BlText,
@@ -91,17 +92,11 @@ BlText >> asArray [
 { #category : #'text - converting' }
 BlText >> asString [
 	"I return an original String representaion of this text.
-	There is no guarantee that the size of the resulting string is the same
-	as of this text"
+	It is guaranteed that the size of the resulting string is the same as of this text"
 	<return: #String>
-	| nel |
 
-	nel := Character nel.
 	^ String streamContents: [ :aStream |
-		self do: [ :aCharacter |
-			aCharacter == nel
-				ifTrue: [ aStream nextPutAll: String crlf ]
-				ifFalse: [ aStream nextPut: aCharacter ] ] ]
+		self do: [ :aCharacter | aStream nextPut: aCharacter ] ]
 ]
 
 { #category : #'text - accessing' }
@@ -141,6 +136,18 @@ BlText >> attributes: anAttributesCollection from: aStart to: anEnd [
 ]
 
 { #category : #'text - attributes' }
+BlText >> attributesAndIndicesDo: aBlock [
+	self attributesFinder
+		attributesAndIndicesDo: aBlock
+]
+
+{ #category : #'text - attributes' }
+BlText >> attributesAndIndicesSuchThat: aFilterBlock [
+	^ self attributesFinder
+		attributesAndIndicesSuchThat: aFilterBlock
+]
+
+{ #category : #'text - attributes' }
 BlText >> attributesAt: anIndex [
 	"Return a collection of text attributes without duplicates at a given text index"
 	<return: #Collection of: #BlTextAttribute>
@@ -168,8 +175,13 @@ BlText >> attributesDo: aBlock [
 			| hasNext |
 			hasNext := anIterator hasNext.
 			anIterator hasNext
-				ifTrue: [  anIterator next ].
+				ifTrue: [ anIterator next ].
 			hasNext ]
+]
+
+{ #category : #'text - attributes' }
+BlText >> attributesFinder [
+	^ self subclassResponsibility
 ]
 
 { #category : #'text - copying' }
@@ -192,11 +204,6 @@ BlText >> clearAttributes: aStart to: anEnd if: aBlock [
 { #category : #'text - attributes' }
 BlText >> clearAttributesOfClass: aBlTextAttributeClass [
 	self clearAttributes: [ :eachAttribute | eachAttribute isKindOf: aBlTextAttributeClass ]
-]
-
-{ #category : #'text - attributes' }
-BlText >> clearAttributesOfType: aBlTextAttributeType [
-	self clearAttributes: [ :eachAttribute | ]
 ]
 
 { #category : #'text - enumeration' }
@@ -295,24 +302,24 @@ BlText >> equals: anObject [
 
 { #category : #'text - attributes' }
 BlText >> findAttribute: aBlTextAttribute indicesDo: aBlock [	
-	^ self iterator
-		nextAttributeStartAndEnd: aBlTextAttribute
-		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
-]
-
-{ #category : #'text - attributes' }
-BlText >> findAttributeSuchThat: aComparisonBlock indicesDo: aBlock [	
-	^ self iterator
-		nextAttributeStartAndEndSuchThat: aComparisonBlock
-		indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ]
+	self attributesFinder
+		findAttribute: aBlTextAttribute
+		indicesDo: aBlock
 ]
 
 { #category : #'text - attributes' }
 BlText >> findAttributes: aCollectionOfBlTextAttribute indicesDo: aBlock [
-	aCollectionOfBlTextAttribute do: [ :eachAttribute |
-		self iterator
-			nextAttributeStartAndEnd: eachAttribute
-			indicesDo: [ :aStart :anEnd | aBlock value: aStart value: anEnd ] ]
+	self attributesFinder
+		findAttributes: aCollectionOfBlTextAttribute
+		indicesDo: aBlock
+]
+
+{ #category : #'text - attributes' }
+BlText >> findAttributesSuchThat: aFilterBlock indicesDo: anIterationBlock [
+
+	self attributesFinder
+		findAttributesSuchThat: aFilterBlock
+		indicesDo: anIterationBlock
 ]
 
 { #category : #'text - enumeration' }
@@ -367,13 +374,19 @@ BlText >> generation [
 ]
 
 { #category : #'text - attributes' }
+BlText >> hasAttribute: aBlTextAttribute [
+	<return: #Boolean>
+
+	^ self attributesFinder
+		hasAttribute: aBlTextAttribute
+]
+
+{ #category : #'text - attributes' }
 BlText >> hasAttributeSuchThat: aComparisonBlock [
 	<return: #Boolean>
-	self
-		findAttributeSuchThat: aComparisonBlock
-		indicesDo: [ :aStart :anEnd | ^ true ].
-		
-	^ false
+
+	^ self attributesFinder
+		hasAttributeSuchThat: aComparisonBlock
 ]
 
 { #category : #'text - testing' }

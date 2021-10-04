@@ -1,5 +1,6 @@
 "
 I am a collection of basic most simple examples that show most important Bloc features
+
 "
 Class {
 	#name : #BlBasicExamples,

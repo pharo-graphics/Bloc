@@ -1,7 +1,8 @@
 "
-! Bounds matcher
+# Bounds matcher
 
-I allow users to quickly check if child bounds given by ==childStart== and ==childEnd== match parent bounds given by ==parentStart== and ==parentEnd== according to configured constraints.
+I allow users to quickly check if child bounds given by `childStart` and `childEnd` match parent bounds given by `parentStart` and `parentEnd` according to configured constraints.
+
 "
 Class {
 	#name : #BlBoundsMatcher,

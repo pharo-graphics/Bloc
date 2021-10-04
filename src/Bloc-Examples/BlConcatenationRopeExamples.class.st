@@ -1,5 +1,6 @@
 "
 I contain examples of a concatenation rope
+
 "
 Class {
 	#name : #BlConcatenationRopeExamples,

@@ -14,6 +14,7 @@ Internal Representation and Key Implementation Points.
 
     Instance Variables
 	paint:		<Object> can be a Color, Pattern, Gradient. Basically anything that is knows how to convert itself to canvas specific paint
+
 "
 Class {
 	#name : #BlTextForegroundAttribute,
@@ -25,10 +26,15 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlTextForegroundAttribute class >> paint: aPaint [
+BlTextForegroundAttribute class >> color: aColor [
 	^ self new
-		paint: aPaint;
+		paint: aColor;
 		yourself
+]
+
+{ #category : #'instance creation' }
+BlTextForegroundAttribute class >> paint: aPaint [
+	^ self color: aPaint
 ]
 
 { #category : #comparing }
@@ -53,6 +59,10 @@ BlTextForegroundAttribute >> paint: aPaint [
 	self
 		assert: [ paint isNil ]
 		description: [ 'I am immutable and can not be modified' ].
+		
+	self
+		assert: [ aPaint isColor ]
+		description: [ 'Foreground must be a color' ].
 
 	paint := aPaint
 ]

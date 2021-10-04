@@ -1,6 +1,17 @@
 Extension { #name : #BlElementUniqueId }
 
 { #category : #'*Bloc-Extensions' }
+BlElementUniqueId >> gtAllUniqueIdsFor: aView [
+	<gtView>
+
+	^ aView forward
+		title: 'All Unique Ids';
+		priority: 4;
+		object: [ self class ];
+		view: #gtAllUniqueIdsFor:
+]
+
+{ #category : #'*Bloc-Extensions' }
 BlElementUniqueId class >> gtAllUniqueIdsFor: aView [
 	<gtView>
 
@@ -17,14 +28,14 @@ BlElementUniqueId class >> gtAllUniqueIdsFor: aView [
 ]
 
 { #category : #'*Bloc-Extensions' }
-BlElementUniqueId >> gtAllUniqueIdsFor: aView [
+BlElementUniqueId >> gtAllUsagesFor: aView [
 	<gtView>
-
+	
 	^ aView forward
-		title: 'All Unique Ids';
-		priority: 4;
+		title: 'All Usages';
+		priority: 2;
 		object: [ self class ];
-		view: #gtAllUniqueIdsFor:
+		view: #gtAllUsagesFor:
 ]
 
 { #category : #'*Bloc-Extensions' }
@@ -36,17 +47,6 @@ BlElementUniqueId class >> gtAllUsagesFor: aView [
 		priority: 0.2;
 		object: [ self gtReferences ];
 		view: #gtItemsFor:
-]
-
-{ #category : #'*Bloc-Extensions' }
-BlElementUniqueId >> gtAllUsagesFor: aView [
-	<gtView>
-	
-	^ aView forward
-		title: 'All Usages';
-		priority: 2;
-		object: [ self class ];
-		view: #gtAllUsagesFor:
 ]
 
 { #category : #'*Bloc-Extensions' }
@@ -72,17 +72,6 @@ BlElementUniqueId >> gtSimilarUniqueIdsFor: aView [
 ]
 
 { #category : #'*Bloc-Extensions' }
-BlElementUniqueId class >> gtUsagesFor: aView [
-	<gtView>
-	
-	^ aView forward
-		title: 'Usages';
-		priority: 0.1;
-		object: [ self gtReferences & (#gtExample gtPragmas not) ];
-		view: #gtItemsFor:
-]
-
-{ #category : #'*Bloc-Extensions' }
 BlElementUniqueId >> gtUsagesFor: aView [
 	<gtView>
 	
@@ -91,4 +80,15 @@ BlElementUniqueId >> gtUsagesFor: aView [
 		priority: 1;
 		object: [ self class ];
 		view: #gtUsagesFor:
+]
+
+{ #category : #'*Bloc-Extensions' }
+BlElementUniqueId class >> gtUsagesFor: aView [
+	<gtView>
+	
+	^ aView forward
+		title: 'Usages';
+		priority: 0.1;
+		object: [ self gtReferences & (#gtExample gtPragmas not) ];
+		view: #gtItemsFor:
 ]

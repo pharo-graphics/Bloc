@@ -1,5 +1,6 @@
 "
 I am sent when a universe started a host
+
 "
 Class {
 	#name : #BlParallelUniverseHostStartedSignal,

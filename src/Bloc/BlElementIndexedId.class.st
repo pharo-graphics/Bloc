@@ -47,6 +47,11 @@ BlElementIndexedId >> index: aNumber [
 	index := aNumber
 ]
 
+{ #category : #testing }
+BlElementIndexedId >> isIndexed [
+	^ true
+]
+
 { #category : #accessing }
 BlElementIndexedId >> prefixId [
 	<return: #BlElementId>

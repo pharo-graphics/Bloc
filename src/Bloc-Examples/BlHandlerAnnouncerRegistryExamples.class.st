@@ -1,5 +1,6 @@
 "
 I contain examples of event handler registry with Announcer as its backend
+
 "
 Class {
 	#name : #BlHandlerAnnouncerRegistryExamples,

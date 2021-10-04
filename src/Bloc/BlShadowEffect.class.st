@@ -1,5 +1,6 @@
 "
 I represent an abstract shadow effect applied on an element.
+
 "
 Class {
 	#name : #BlShadowEffect,

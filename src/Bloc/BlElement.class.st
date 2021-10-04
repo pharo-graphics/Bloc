@@ -1,46 +1,47 @@
 "
-! Welcome to Bloc
-I am the root class of all visual elements in Bloc and can be composed out of other elements that we will refer to as ==children==. 
-!! Visual properties
+# Welcome to Bloc
+I am the root class of all visual elements in Bloc and can be composed out of other elements that we will refer to as `children`. 
+## Visual properties
 Being a root class and a core element, I let users configure a few essential visual properties such as background, border, opacity, size and a few more. Let's go through each of them.
-!!! Background
-${class:BlBackground}$describes how an element should be filled, e.g. its background.
-${class:BlBackgroundExamples}$ gives a detailed insight in the world of bloc backgrounds.
-!!! Border
-${class:BlBorder}$ is a visual property that defines how the outline of the element should be rendered. It also influences ==stroked bounds== of the element.
-${class:BlBorderExamples}$ provides more detailed information about a border.
-!!! Opacity
+### Background
+{{gtClass:BlBackground}}describes how an element should be filled, e.g. its background.
+{{gtClass:BlBackgroundExamples}} gives a detailed insight in the world of bloc backgrounds.
+### Border
+{{gtClass:BlBorder}} is a visual property that defines how the outline of the element should be rendered. It also influences `stroked bounds` of the element.
+{{gtClass:BlBorderExamples}} provides more detailed information about a border.
+### Opacity
 Opacity defines how transparent an element is. It does not influence event propagation.
-${class:BlOpacityExamples}$ shows in details how opacity affects the element.
-!! Composition
+{{gtClass:BlOpacityExamples}} shows in details how opacity affects the element.
+## Composition
 To be in-line with Bloc design, we prefer composition over inheritance. Thus it is better to have tiny bloc elements - each with a small and simple API and clear responsibilities - that can later be composed into a more sophisticated graphical scene. In this paragraph we will learn the basic composition aspects and corresponding API.
 
-The composition relation between parent and children is 1:N meaning that an element can have at most one parent. Therefore by design it is only possible to add an element to just one other element. Trying to add an element that is already a child to some other element results in ${class:BlAlreadyAddedAsChildError}$ 
+The composition relation between parent and children is 1:N meaning that an element can have at most one parent. Therefore by design it is only possible to add an element to just one other element. Trying to add an element that is already a child to some other element results in {{gtClass:BlAlreadyAddedAsChildError}} 
 
 Bloc elements provide a set of methods to add and remove children.
-!!! Adding children
+### Adding children
 There are four ways to add some given element as a direct child to another element.
 
-The most commonly used way to add a child is to use ${method:BlElement>>#addChild:}$ which adds a given element as the last child in the collection of children.
-[[[
+The most commonly used way to add a child is to use {{gtMethod:BlElement>>#addChild:}} which adds a given element as the last child in the collection of children.
+```
 | parent child |
 parent := BlElement new size: 100@100; background: Color veryVeryLightGray.
 child := BlElement new size: 50@50; background: Color red lighter.
 parent addChild: child
-]]]
+```
 
-Users may also choose to add an element as the first child, for that purpose Bloc provides ${method:BlElement>>#addChildFirst:}$.
-!!Geometry and bounds
-Every element is responsible for drawing itself. At the same time, every element has a ${class:BlElementGeometry}$ that defines the bounds and the clipping. There are many types of geometry available:
-[[[
+Users may also choose to add an element as the first child, for that purpose Bloc provides {{gtMethod:BlElement>>#addChildFirst:}}.
+## Geometry and bounds
+Every element is responsible for drawing itself. At the same time, every element has a {{gtClass:BlElementGeometry}} that defines the bounds and the clipping. There are many types of geometry available:
+```
 BlElementGeometry allSubclasses
-]]]
+```
 
-See ${class:BlGeometryVisualAndLayoutBoundsExamples}$ for concrete details.
-!!Layout
-There are many built-in ${class:BlLayout}$ strategies available, or you can create your own.
-!!Tutorial
-You can learn Bloc following a memory game tutorial: ${icebergFile:path=feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar}$.
+See {{gtClass:BlGeometryVisualAndLayoutBoundsExamples}} for concrete details.
+## Layout
+There are many built-in {{gtClass:BlLayout}} strategies available, or you can create your own.
+## Tutorial
+You can learn Bloc following a memory game tutorial: [00-memory-game.pillar](fileLocator://gtResource/feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar).
+
 "
 Class {
 	#name : #BlElement,
@@ -716,6 +717,18 @@ BlElement >> childWithId: aBlElementId [
 ]
 
 { #category : #'children accessing' }
+BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock [
+	"Find (deeply) the first child element with a given id and evaluate a ifFoundBlock if such
+	child exists and return the result of the evaluation. Return nil otherwise."
+	<return: #Object or: nil>
+
+	^ self
+		childWithId: aBlElementId
+		ifFound: ifFoundBlock
+		ifNone: [ nil ]
+]
+
+{ #category : #'children accessing' }
 BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
 	| targetId |
@@ -736,6 +749,35 @@ BlElement >> children [
 	<return: #BlChildrenCollection>
 
 	^ children
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> childrenAt: aPoint do: aBlock [
+	"Evaluate a given Block with my directs children under a given point provided
+	in *my* local coordinates sorted in the order they are displayed (children reversed + elevation based).
+	Return true if aBlock was evaluated, false otherwise"
+	<return: #Boolean>
+	| isPointInsideMe anyChildFound |
+
+	isPointInsideMe := self containsPoint: aPoint.
+	
+	"if point is not inside of me and I clip children, it literally
+	means that there neither me nor my children are visible at a given point"
+	(isPointInsideMe not and: [ self clipChildren ])
+		ifTrue: [ ^ false ].
+
+	anyChildFound := false.
+	
+	self children sortedByElevation reversed do: [ :eachChildElement |
+		| aPointInChildCoordinates |
+		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
+
+		(eachChildElement containsPoint: aPointInChildCoordinates)
+			ifTrue: [
+				aBlock value: eachChildElement.
+				anyChildFound := true ] ].
+
+	^ anyChildFound
 ]
 
 { #category : #'geometry bounds convertion' }
@@ -1346,6 +1388,10 @@ BlElement >> findMouseEventTargetAt: aPoint [
 	I may return nil if no such child is found and if I can not be event target either"
 	<return: #BlElement or: nil>
 	| doWantEvent |
+	
+	"fast exit if I am not visible, since it implies that 
+	neither I receive mouse events nor my (clipped or unclipped) children"
+	self isVisible ifFalse: [ ^ nil ].
 	
 	doWantEvent := self wantsMouseEventAt: aPoint.
 
@@ -2438,7 +2484,7 @@ BlElement >> needsPropertiesComputation [
 
 { #category : #'api - style' }
 BlElement >> needsStyle [
-	^ self style needsStyle
+	^ self styles needsStyle
 ]
 
 { #category : #'event management accessing' }
@@ -3288,7 +3334,7 @@ BlElement >> requestPropertiesComputation [
 
 { #category : #'api - style' }
 BlElement >> requestStyle [
-	self style markDirty.
+	self styles markDirty.
 
 	self isAttachedToSceneGraph
 		ifTrue: [ self space requestStyle: self ]
@@ -3407,6 +3453,19 @@ BlElement >> states [
 
 { #category : #'api - style' }
 BlElement >> style [
+	self
+		deprecated: 'Please use #styles instead'
+		transformWith: '`@receiver style' -> '`@receiver styles'.
+
+	^ self styles
+]
+
+{ #category : #'api - style' }
+BlElement >> styles [
+	"Return current element styles.
+	See ${class:BlStyles}$ to learn more about styles"
+	<return: #BlElementStyles>
+
 	^ self userData
 		at: #blocStyles
 		ifAbsentPut: [ BlElementStyles new element: self ]

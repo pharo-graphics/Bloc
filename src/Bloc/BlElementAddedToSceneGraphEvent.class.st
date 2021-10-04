@@ -1,5 +1,6 @@
 "
 I inform that an element was attached to a scene. I can be added to any Bloc element.
+
 "
 Class {
 	#name : #BlElementAddedToSceneGraphEvent,
@@ -18,11 +19,6 @@ BlElementAddedToSceneGraphEvent class >> enableIn: anObject [
 { #category : #'api - enable / disable' }
 BlElementAddedToSceneGraphEvent class >> wantedIn: anObject [
 	^ anObject wantsAddedToSceneGraph
-]
-
-{ #category : #visiting }
-BlElementAddedToSceneGraphEvent >> accept: aVisitor [
-	^ aVisitor visitElementAddedToSceneGraphEvent: self
 ]
 
 { #category : #sending }

@@ -1,10 +1,10 @@
 "
-I check whether particular ${class:BlEvent}$ events were fired on a ${class:BlElement}$ target.
+I check whether particular {{gtClass:BlEvent}} events were fired on a {{gtClass:BlElement}} target.
 
-!! Example
+## Example
 
 Here you can see how to configure a fire and check a click event on a child element:
-${example:BlDevScripterExamples>>#clickCheck|previewExpanded=true|previewHeight=400}$
+{{gtExample:BlDevScripterExamples>>#clickCheck|previewExpanded=true|previewHeight=400}}
 
 
 "

@@ -3,8 +3,9 @@ I provide a solution for handling the opening of the debugger that supports both
 
 I assume there is only one UI Process either in Bloc or Morphic. If the error happened in either one of these processes, I restart the correct one. If both Bloc and Morphic have two distinct UI processes I will not work correctly.
 
-Normally I should only be used when running Bloc natively. When running Bloc using inside the Morphic UI process the a ${class:MorphicUIManager}$ can be used instead.
+Normally I should only be used when running Bloc natively. When running Bloc using inside the Morphic UI process the a {{gtClass:MorphicUIManager}} can be used instead.
 However for now I can also be used to handle just the case of the Morhic UI process. Later I should be simplified to take into account only the Bloc UI process.
+
 "
 Class {
 	#name : #BlBlocUIManager,
@@ -30,7 +31,7 @@ BlBlocUIManager class >> initialize [
 BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
 	| isHeadlessVM isInteractiveMode |
 	
-	SystemVersion current major <= 8
+	SystemVersion current major <= 9
 		ifFalse: [ ^ false ].
 	
 	isHeadlessVM := Smalltalk os windowSystemName isNil or: [ Smalltalk os windowSystemName = 'null' ].
@@ -38,7 +39,7 @@ BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
 	"The --interactive parameter should be passed in order to select a graphical UI manager.
 	This parameter is passe automatically when double clicking on the Headless VM."
 	isInteractiveMode := CommandLineArguments new hasOption: 'interactive'.
-		
+
 	^ isHeadlessVM and: [ isInteractiveMode ]
 ]
 

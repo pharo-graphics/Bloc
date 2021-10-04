@@ -5,6 +5,7 @@ For example, scale(1, 1) would leave an element unchanged, while scale(2, 2) wou
 
 Corresponds to SVG scale() function
 https://drafts.csswg.org/css-transforms/#valdef-transform-scale
+
 "
 Class {
 	#name : #BlScalingTransformation,

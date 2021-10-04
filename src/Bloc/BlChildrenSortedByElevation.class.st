@@ -1,7 +1,7 @@
 "
 I sort a collection of children by elevation in ascending order.
 
-${example:BlChildrenSubsetExamples>>#sortedByElevationFromElement}$
+{{gtExample:BlChildrenSubsetExamples>>#sortedByElevationFromElement}}
 
 
 "

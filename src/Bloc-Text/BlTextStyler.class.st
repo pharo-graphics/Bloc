@@ -1,43 +1,18 @@
 "
-I am responsible for applying text attributes on ${class:BlText}$ based on some logic, for example it can be code syntax highlighting.
+I am responsible for applying text attributes on {{gtClass:BlText}} based on some logic, for example it can be code syntax highlighting.
 
 I am independent from the text editor.
 The main entrance point is 
+
 "
 Class {
 	#name : #BlTextStyler,
 	#superclass : #Object,
-	#traits : 'TBlEventTarget',
-	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
-		'text',
-		'stylingEnabled',
-		'eventDispatcher'
+		'text'
 	],
 	#category : #'Bloc-Text-Text-Styler'
 }
-
-{ #category : #'event management accessing' }
-BlTextStyler >> eventDispatcher [
-	"Return an object responsible for event dispatching"
-	<return: #BlDirectEventDispatcher>
-
-	^ eventDispatcher
-]
-
-{ #category : #styling }
-BlTextStyler >> fireStyledEventForText: aStyledText andAfterAction: aBlock [
-	"This method must be called from a Bloc UI process only."
-	self fireEvent: (BlTextStyledEvent new text: aStyledText; afterAction: aBlock)
-]
-
-{ #category : #initialization }
-BlTextStyler >> initialize [
-	super initialize.
-	
-	stylingEnabled := true.
-	eventDispatcher := BlDirectEventDispatcher on: self.
-]
 
 { #category : #private }
 BlTextStyler >> privateStyle: aText [ 
@@ -46,16 +21,17 @@ BlTextStyler >> privateStyle: aText [
 	^ self subclassResponsibility
 ]
 
-{ #category : #styling }
+{ #category : #'api - styling' }
 BlTextStyler >> style: aBlText [
-	| anUnstyledText aStyledText |
 	<return: #BlText>
-	stylingEnabled
-		ifFalse: [ ^ aBlText ].
-		
-	anUnstyledText := aBlText unstyle.
-	aStyledText := self privateStyle: anUnstyledText characters.
-	^ aStyledText text
+
+	^ BlTextStylerTelemetry
+		rootTimeSync: [ Processor activeProcess name, '  ', self class name, ': ', (aBlText first: (20 min: aBlText size)) asString ]
+		during: [
+			| anUnstyledText aStyledText |
+			anUnstyledText := aBlText unstyle.
+			aStyledText := self privateStyle: anUnstyledText characters.
+			aStyledText text ]
 ]
 
 { #category : #accessing }
@@ -64,14 +40,4 @@ BlTextStyler >> stylers [
 	<return: #Collection of: #BlTextStyler>
 
 	^ #()
-]
-
-{ #category : #private }
-BlTextStyler >> stylingEnabled [
-	^ stylingEnabled
-]
-
-{ #category : #private }
-BlTextStyler >> stylingEnabled: aBoolean [
-	stylingEnabled := aBoolean
 ]

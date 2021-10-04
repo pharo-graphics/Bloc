@@ -1,10 +1,11 @@
 "
-! Histogram
+# Histogram
 
 I represent a class of historgram-like geometry.
-${example:BlHistogramExamples>>#default|codeExpanded=false|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=100}$
+{{gtExample:BlHistogramExamples>>#default|codeExpanded=false|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=100}}
 
-See ${class:BlHistogramExamples}$ for more examples
+See {{gtClass:BlHistogramExamples}} for more examples
+
 "
 Class {
 	#name : #BlHistogramGeometry,

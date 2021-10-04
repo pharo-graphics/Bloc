@@ -2,6 +2,7 @@
 I represent a text selection defined as interval [from...to].
 
 Monotone selection can not be empty
+
 "
 Class {
 	#name : #BlMonotoneSelection,
@@ -117,6 +118,19 @@ BlMonotoneSelection >> containsIndex: anIndex [
 	
 	^ anIndex > self from
 		and: [ anIndex <= self to ]
+]
+
+{ #category : #copying }
+BlMonotoneSelection >> copyFrom: aStartIndex to: anEndIndex [
+	aStartIndex <= self to
+		ifTrue: [ ^ BlMonotoneSelection from: aStartIndex to: aStartIndex ].
+
+	anEndIndex >= self from
+		ifTrue: [ ^ BlMonotoneSelection from: anEndIndex to: anEndIndex ].
+
+	^ BlSelection
+		from: (aStartIndex max: self from)
+		to: (anEndIndex min: self to)
 ]
 
 { #category : #enumerating }

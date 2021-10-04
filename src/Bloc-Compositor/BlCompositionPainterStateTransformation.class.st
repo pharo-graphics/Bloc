@@ -39,6 +39,14 @@ BlCompositionPainterStateTransformation >> multiplyOn: aBlMatrix2D [
 ]
 
 { #category : #hook }
+BlCompositionPainterStateTransformation >> popOn: aCanvas [
+	aCanvas transform
+		translateBy: offset;
+		multiplyBy: matrix;
+		pop
+]
+
+{ #category : #hook }
 BlCompositionPainterStateTransformation >> pushOn: aCanvas [
 	aCanvas transform
 		translateBy: offset;

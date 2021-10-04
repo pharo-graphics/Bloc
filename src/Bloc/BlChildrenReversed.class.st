@@ -1,7 +1,8 @@
 "
 I reverse an underlying collection of children.
 
-${example:BlChildrenSubsetExamples>>#reversedChildrenFromElement}$
+{{gtExample:BlChildrenSubsetExamples>>#reversedChildrenFromElement}}
+
 
 "
 Class {

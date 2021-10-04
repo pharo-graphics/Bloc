@@ -1,5 +1,6 @@
 "
 I am a special type of text that delegates most operations to the underlying text that is wrapped by me
+
 "
 Class {
 	#name : #BlWrappedText,
@@ -49,6 +50,11 @@ BlWrappedText >> attributes: anAttributesCollection from: aStart to: anEnd [
 	"Apply given attributes on the text from aStart to anEnd"
 
 	self text attributes: anAttributesCollection from: aStart to: anEnd
+]
+
+{ #category : #'text - attributes' }
+BlWrappedText >> attributesFinder [
+	^ text attributesFinder
 ]
 
 { #category : #'text - attributes' }

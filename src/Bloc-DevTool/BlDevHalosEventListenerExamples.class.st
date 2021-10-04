@@ -1,5 +1,6 @@
 "
-I exemplify ${class:BlDevHalosEventListener}$.
+I exemplify {{gtClass:BlDevHalosEventListener}}.
+
 "
 Class {
 	#name : #BlDevHalosEventListenerExamples,

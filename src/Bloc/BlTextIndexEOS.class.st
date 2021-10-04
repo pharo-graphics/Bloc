@@ -8,16 +8,17 @@ BlTextIndexEOS looks enough like an Integer that it can be used in place of abso
 BlTextIndexEOS defers actual calculation of the index as long as possible, i.e. until some comparison is made (#<, #<=, #=, #>=, #>, #between:and:, etc.).  Arithmetic operations result in a new instance of BlTextEOS with the appropriate offset, see #+ and #-.
 
 
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	approximateSize:		<Integer> The estimated size of the receiver's text until it is known.
 	offset:					<Integer> An offset from the end of the string
 	text:						<BlText> The indexed text.
 
 
-!!!Implementation Points
+### Implementation Points
+
 "
 Class {
 	#name : #BlTextIndexEOS,

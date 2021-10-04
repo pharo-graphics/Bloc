@@ -1,11 +1,35 @@
 "
 I contain examples of more complicated pieces of text to exemplify the rope structure.
+
 "
 Class {
 	#name : #BlRopedTextExamples,
 	#superclass : #Object,
 	#category : #'Bloc-Text-Examples-Model'
 }
+
+{ #category : #accessing }
+BlRopedTextExamples >> allAttributesSuchThat [
+	<gtExample>
+	| aText theAttributes |
+	
+	aText := 'Hello World' asRopedText.
+	aText
+		attribute: (BlTextForegroundAttribute color: Color red)
+		from: 1
+		to: 5.
+	aText
+		attribute: (BlTextForegroundAttribute color: Color blue)
+		from: 6
+		to: 11.
+		
+	theAttributes := aText attributesAndIndicesSuchThat: [ :each | true ].
+	self assert: theAttributes size equals: 2.
+	self assert: theAttributes first value equals: (1 to: 5).
+	self assert: theAttributes second value equals: (6 to: 11).
+	
+	^ aText
+]
 
 { #category : #'example - insert' }
 BlRopedTextExamples >> append_empty_text [

@@ -1,5 +1,6 @@
 "
 I record events in a collection
+
 "
 Class {
 	#name : #BlMemoryEventRecorder,

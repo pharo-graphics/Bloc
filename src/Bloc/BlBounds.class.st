@@ -1,6 +1,7 @@
 "
 I am a mutable implementation of Rectangle which stores coordinates as Numbers and not Points.
 I am very useful for chainable bounds transformations and may be transformed in-place by BlMatrix2D and BlMatrix3D
+
 "
 Class {
 	#name : #BlBounds,

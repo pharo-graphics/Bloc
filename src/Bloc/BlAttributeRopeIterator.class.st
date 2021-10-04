@@ -1,5 +1,6 @@
 "
 I am a special iterator used to iterate over attribute rope
+
 "
 Class {
 	#name : #BlAttributeRopeIterator,
@@ -60,6 +61,13 @@ BlAttributeRopeIterator >> peer [
 { #category : #'iterator - accessing' }
 BlAttributeRopeIterator >> position [
 	^ subIterator position
+]
+
+{ #category : #copying }
+BlAttributeRopeIterator >> postCopy [
+	super postCopy.
+
+	subIterator := subIterator copy
 ]
 
 { #category : #'iterator - enumeration' }

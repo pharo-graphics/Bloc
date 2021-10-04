@@ -1,9 +1,10 @@
 "
 I contain examples of rope iterators
+
 "
 Class {
 	#name : #BlRopeIteratorExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #Object,
 	#category : #'Bloc-Examples-Rope'
 }
 
@@ -247,9 +248,9 @@ BlRopeIteratorExamples >> next_line_CrLf_at_0 [
 	anIterator nextLineIndicesDo: [ :aStart :anEnd :anEndDelimiter |
 		self assert: aStart equals: 0.
 		self assert: anEnd equals: 0.
-		self assert: anEndDelimiter equals: 1 ].
+		self assert: anEndDelimiter equals: 2 ].
 
-	self assert: anIterator position equals: 1.
+	self assert: anIterator position equals: 2.
 	
 	^ anIterator
 ]

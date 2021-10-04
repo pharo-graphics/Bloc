@@ -1,6 +1,7 @@
 "
-!Cached element transformation
-Builds upon the ${class:BlElementTransformation}$ to provide the matrix caching posibility.
+# Cached element transformation
+Builds upon the {{gtClass:BlElementTransformation}} to provide the matrix caching posibility.
+
 "
 Class {
 	#name : #BlElementCachedExplicitTransformation,
@@ -113,6 +114,11 @@ BlElementCachedExplicitTransformation >> inverted [
 { #category : #'api - testing' }
 BlElementCachedExplicitTransformation >> isIdentity [
 	^ self transformation isIdentity
+]
+
+{ #category : #accessing }
+BlElementCachedExplicitTransformation >> isPureTranslation [
+	^ self transformation isPureTranslation
 ]
 
 { #category : #'api - transformation' }

@@ -1,5 +1,6 @@
 "
 I represent a text selection defined as interval [from...to]
+
 "
 Class {
 	#name : #BlSelection,
@@ -73,6 +74,11 @@ BlSelection >> containsIndex: anIndex [
 	I am conceptually same as (self indices includes: anIndex)"
 	<return: #Boolean>
 
+	^ self subclassResponsibility
+]
+
+{ #category : #copying }
+BlSelection >> copyFrom: aStartIndex to: anEndIndex [
 	^ self subclassResponsibility
 ]
 

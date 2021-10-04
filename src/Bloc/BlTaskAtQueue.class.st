@@ -4,16 +4,16 @@ BlTaskAtQueue provides a reasonably efficient mechanism to scheduled tasks to be
 The queue executes tasks within a single pharo process at #userSchedulingPriority, so tasks should be kept as short as possible, typically queueing the task up at a more appropriate place, e.g. one of the TaskIt background queues or within the UI process.
 
 
-!!Public API and Key Messages
+## Public API and Key Messages
 
 - start : 	Start the reader process 
 - stop : 		Stop the reader process
 - schedule:at: 	Schedule the supplied valuable to be executed at the specified time
 
  
-!!Internal Representation and Key Implementation Points.
+## Internal Representation and Key Implementation Points.
 
-!!!Instance Variables
+### Instance Variables
 
 	executorProcess:		<Process>
 	queue:						<SharedPriorityUniqueQueue>
@@ -21,10 +21,11 @@ The queue executes tasks within a single pharo process at #userSchedulingPriorit
 	processTime: 			<DateAndTime>
 
 
-!!!Implementation Points
+### Implementation Points
 
 - Assumes that there is only one reader of the queue.
-- processTime holds the current DateAndTime for the evaluation cycle.  Since ${class:name=BlTaskAtQueueTask}$s use the time to calculate their entry priority this significantly reduces the number of times that the VM is called to retrieve the time.
+- processTime holds the current DateAndTime for the evaluation cycle.  Since {{gtClass:name=BlTaskAtQueueTask}}s use the time to calculate their entry priority this significantly reduces the number of times that the VM is called to retrieve the time.
+
 "
 Class {
 	#name : #BlTaskAtQueue,
@@ -92,8 +93,9 @@ BlTaskAtQueue >> forceProcess [
 BlTaskAtQueue >> forkExecutorProcess [
 
 	self
-		assert: executorProcess isNil 
-		description: 'Only one executor process is allowed'.
+		assert: [ executorProcess isNil ]
+		description: [ 'Only one executor process is allowed' ].
+
 	executorProcess := [ self queueReaderLoop ]
 		forkAt: Processor userSchedulingPriority 
 		named: 'BlTaskAtQueue Executor'.
@@ -120,7 +122,6 @@ BlTaskAtQueue >> next [
 
 { #category : #private }
 BlTaskAtQueue >> processNextEntry [
-
 	| entry timeRemaining |
 
 	scheduleSemaphore waitTimeoutMSecs: nextTimeDelay asMilliSeconds .
@@ -130,19 +131,21 @@ BlTaskAtQueue >> processNextEntry [
 		timeRemaining := entry scheduledTime - processTime.
 		timeRemaining < cutoffDuration ] ] whileTrue: [ 
 		entry := queue next.
-		[ entry value ]
+		[ [ entry value ]
 			on: Error 
-			do: [ :ex | BlTaskAtErrorSignal new 
-								exception: ex;
-								task: entry;
-								message: 'Entry execution exception - continuing';
-								emit ].
+			do: [ :ex |				
+				BlTaskAtErrorSignal new 
+					exception: ex;
+					task: entry;
+					message: 'Entry execution exception - continuing';
+					emit ] ]
+			on: Exception
+			fork: [ :anException | anException pass ].
 		processTime := clock now ].
 	entry := queue peek.
 	nextTimeDelay := entry 
 		ifNil: [ 1 hour ]
-		ifNotNil: [ entry scheduledTime - clock now ].
-
+		ifNotNil: [ entry scheduledTime - clock now ]
 ]
 
 { #category : #accessing }
@@ -164,13 +167,21 @@ BlTaskAtQueue >> processTime: aDateAndTime [
 { #category : #private }
 BlTaskAtQueue >> queueReaderLoop [
 
-	[ [ self processNextEntry ]
-		on: Error 
-		do: [ :ex | BlTaskAtErrorSignal new 
-								exception: ex;
-								message: 'Reader loop exception - restarting';
-								emit.
-					(Delay forSeconds: 5) wait. ] ] repeat.
+	[
+		[
+			[ self processNextEntry ]
+				on: Error 
+				do: [ :anError |
+					BlTaskAtErrorSignal new 
+						exception: anError;
+						message: 'Reader loop error - restarting';
+						emit.
+					(Delay forSeconds: 5) wait ]
+		]
+		on: Exception
+		fork: [ :anException | anException pass ]
+
+	] repeat
 ]
 
 { #category : #operations }

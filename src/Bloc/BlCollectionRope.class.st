@@ -1,6 +1,7 @@
 "
 I am a special rope that is able to hold arbitrary items in a collection data structure.
 My recommended maximum length (size) is defined in BrRope class>>#combineLength
+
 "
 Class {
 	#name : #BlCollectionRope,
@@ -334,12 +335,6 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 	^ self class
 		concatenate: (self class collectionRope collection: leftArray)
 		and: (self class collectionRope collection: rightArray)
-]
-
-{ #category : #'text - converting' }
-BlCollectionRope >> normalized [ 
-
-	^ self class collection: (BlStringNormalizer new process: collection)
 ]
 
 { #category : #accessing }

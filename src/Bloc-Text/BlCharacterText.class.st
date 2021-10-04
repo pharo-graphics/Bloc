@@ -1,8 +1,9 @@
 "
-I am a special type of ${BlText}$ with a guarantee that every item is a character.
-${BlCharacterText} is designed to be polymorphic with ${WideString}$, e.g. I can be compared with it (""text = string"" and ""string = text"").
+I am a special type of {{gtClass:name=BlText}} with a guarantee that every item is a character.
+{{gtClass:name=BlCharacterText} is designed to be polymorphic with ${class:name=WideString}}, e.g. I can be compared with it (""text = string"" and ""string = text"").
 
 Similar to the String I can not modified (insertion or deletions). Therefore 
+
 "
 Class {
 	#name : #BlCharacterText,
@@ -41,18 +42,12 @@ BlCharacterText >> = anObject [
 { #category : #'text - converting' }
 BlCharacterText >> asString [
 	"I return an original String representaion of this text.
-	There is no guarantee that the size of the resulting string is the same
+	It is guaranteed that the size of the resulting string is the same
 	as of this text"
 	<return: #String>
-	| nel lf |
 
-	nel := Character nel.
-	lf := Character lf.
 	^ String streamContents: [ :aStream |
-		self do: [ :aCharacter |
-			aCharacter == nel
-				ifTrue: [ aStream nextPut: lf ]
-				ifFalse: [ aStream nextPut: aCharacter ] ] ]
+		self do: [ :aCharacter | aStream nextPut: aCharacter ] ]
 ]
 
 { #category : #accessing }

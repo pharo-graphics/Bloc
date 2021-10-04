@@ -9,6 +9,7 @@ element transform
 	translateBy: (BlVector x: 100 y: 100 z: 0);
 	scaleBy: (BlVector x: 2 y: 0.5 z: 1);
 	apply
+
 "
 Class {
 	#name : #BlTransformationBuilder,

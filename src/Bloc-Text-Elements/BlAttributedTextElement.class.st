@@ -1,7 +1,7 @@
 Class {
 	#name : #BlAttributedTextElement,
 	#superclass : #BlTextElement,
-	#traits : 'TBlTextStyleable',
+	#traits : 'TBlTextStyleable - {#defaultFontSize:}',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'attributesBuilder'

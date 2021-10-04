@@ -1,5 +1,6 @@
 "
-!Element property
+# Element property
+
 "
 Class {
 	#name : #BlElementProperty,

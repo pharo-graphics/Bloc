@@ -9,6 +9,7 @@ Example:
 
 	BlReflectionTransformation horizontal - creates a reflection in Y axis
 	BlReflectionTransformation vertical - creates a reflection in X axis
+
 "
 Class {
 	#name : #BlReflectionTransformation,

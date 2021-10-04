@@ -1,5 +1,6 @@
 "
 I a special type of rope used to represent a sub rope for the case when rebuilding the whole binary tree does not make since, so I just decorate an original rope limiting its access by using an offset and allowed length
+
 "
 Class {
 	#name : #BlSubRope,
@@ -176,12 +177,6 @@ BlSubRope >> isScoped [
 { #category : #'rope - enumeration' }
 BlSubRope >> iterator: aStart to: anEnd [
 	^ BlSubRopeIterator rope: self from: aStart to: anEnd
-]
-
-{ #category : #'text - converting' }
-BlSubRope >> normalized [ 
-
-	^ (self rope copyFrom: offset to: offset + length) normalized
 ]
 
 { #category : #accessing }

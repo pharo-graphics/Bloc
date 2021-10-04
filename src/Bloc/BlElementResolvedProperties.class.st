@@ -18,6 +18,13 @@ BlElementResolvedProperties >> flushPropertiesToRemove [
 	properties := properties reject: [ :eachPropertyWithStatus | eachPropertyWithStatus isToBeRemoved ]
 ]
 
+{ #category : #initialization }
+BlElementResolvedProperties >> initialize [
+	super initialize.
+	
+	properties := Dictionary new
+]
+
 { #category : #accessing }
 BlElementResolvedProperties >> mergedWithProperties: aBlElementResolvedProperties [
 	| theProperties |
@@ -25,6 +32,21 @@ BlElementResolvedProperties >> mergedWithProperties: aBlElementResolvedPropertie
 	theProperties := self propertiesToPropagateToChildren properties copy
 		addAll: aBlElementResolvedProperties properties;
 		yourself.
+
+	^ BlElementResolvedProperties new properties: theProperties
+]
+
+{ #category : #accessing }
+BlElementResolvedProperties >> mergedWithPropertiesWithStatus: aBlElementResolvedProperties [
+	| theProperties |
+
+	theProperties := Dictionary new.
+	self propertiesToPropagateToChildren properties associationsDo: [ :eachAssociation |
+		theProperties
+			at: eachAssociation key
+			put: (BlElementPropertyWithStatus new property: eachAssociation value property) ].
+
+	theProperties addAll: aBlElementResolvedProperties properties.
 
 	^ BlElementResolvedProperties new properties: theProperties
 ]
@@ -44,6 +66,11 @@ BlElementResolvedProperties >> properties [
 { #category : #private }
 BlElementResolvedProperties >> properties: aDictionaryOfProperties [
 	properties := aDictionaryOfProperties
+]
+
+{ #category : #private }
+BlElementResolvedProperties >> propertiesAsArray [
+	^ properties values
 ]
 
 { #category : #accessing }

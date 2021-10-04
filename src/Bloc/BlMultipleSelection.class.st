@@ -1,5 +1,6 @@
 "
 I am just a collection of independent text selections that may overlap.
+
 "
 Class {
 	#name : #BlMultipleSelection,
@@ -50,6 +51,19 @@ BlMultipleSelection >> containsIndex: anIndex [
 	
 	^ selections anySatisfy: [ :eachSelection | 
 		eachSelection contains: anIndex ]
+]
+
+{ #category : #copying }
+BlMultipleSelection >> copyFrom: aStartIndex to: anEndIndex [
+	| newSelectionsSet newSelection |
+	
+	newSelectionsSet := selections
+		collect: [ :eachSelection | eachSelection copyFrom: aStartIndex to: anEndIndex ]
+		as: Set.
+		
+	newSelection := self class new.
+	newSelectionsSet do: [ :eachSelection | newSelection add: eachSelection ].
+	^ newSelection
 ]
 
 { #category : #'api - enumerating' }

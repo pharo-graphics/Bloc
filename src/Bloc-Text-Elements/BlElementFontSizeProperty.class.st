@@ -30,13 +30,20 @@ BlElementFontSizeProperty >> = anObject [
 
 { #category : #'api - property' }
 BlElementFontSizeProperty >> applyOnElement: anElement [
-	(anElement respondsTo: #fontSize:)
-		ifTrue: [ anElement fontSize: self fontSize value ]
+	(anElement respondsTo: #defaultFontSize:)
+		ifTrue: [
+			anElement defaultFontSize: self fontSize value ]
 ]
 
 { #category : #testing }
 BlElementFontSizeProperty >> canPropagateToChildren [
 	^ true
+]
+
+{ #category : #'api - property' }
+BlElementFontSizeProperty >> cleanUpOnElement: anElement [
+	(anElement respondsTo: #defaultFontSize:)
+		ifTrue: [ anElement defaultFontSize: BlFont defaultFontSize ]
 ]
 
 { #category : #accessing }

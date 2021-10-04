@@ -1,5 +1,6 @@
 "
 I am a special type of rope that plays a role of a node in a binary tree and contains left and right branch
+
 "
 Class {
 	#name : #BlConcatenationRope,
@@ -254,15 +255,6 @@ BlConcatenationRope >> left: aLeftRope right: aRightRope [
 	left := aLeftRope.
 	right := aRightRope.
 	length := left size + right size
-]
-
-{ #category : #'text - converting' }
-BlConcatenationRope >> normalized [
-	<return: #BlRope>
-
-	^ self class
-		concatenate: left normalized
-		and: right normalized
 ]
 
 { #category : #accessing }

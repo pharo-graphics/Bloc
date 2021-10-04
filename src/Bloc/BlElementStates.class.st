@@ -1,5 +1,6 @@
 "
-!Current element states
+# Current element states
+
 "
 Class {
 	#name : #BlElementStates,
@@ -77,6 +78,11 @@ BlElementStates >> inheritedStates: aSetOfStates [
 	self onStatesChanged
 ]
 
+{ #category : #accessing }
+BlElementStates >> inheritedStatesCopy [
+	^ inheritedStates copy
+]
+
 { #category : #initialization }
 BlElementStates >> initialize [
 	super initialize.
@@ -97,6 +103,11 @@ BlElementStates >> isEnabled [
 	^ self isDisabled not
 ]
 
+{ #category : #accessing }
+BlElementStates >> localStatesCopy [
+	^ localStates copy
+]
+
 { #category : #private }
 BlElementStates >> onStatesChanged [
 
@@ -104,6 +115,11 @@ BlElementStates >> onStatesChanged [
 	announcer
 		ifNil: [ ^ self ].
 	announcer announce: #statesChanged
+]
+
+{ #category : #private }
+BlElementStates >> privateLocalStates [
+	^ localStates
 ]
 
 { #category : #adding }
@@ -134,6 +150,15 @@ BlElementStates >> removeStatesSuchThat: aBlock [
 
 	self element requestStyle.
 	self onStatesChanged
+]
+
+{ #category : #accessing }
+BlElementStates >> stateLike: aBlElementState ifFound: aFoundBlock ifNone: aNoneBlock [
+	^ (localStates
+		like: aBlElementState
+		ifAbsent: [ nil ])
+			ifNil: aNoneBlock
+			ifNotNil: aFoundBlock
 ]
 
 { #category : #accessing }

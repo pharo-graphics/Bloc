@@ -1,5 +1,6 @@
 "
 The coordinate is measured from the left side of the outer bounds
+
 "
 Class {
 	#name : #BlHorizontalCoordinateLeftAlignment,

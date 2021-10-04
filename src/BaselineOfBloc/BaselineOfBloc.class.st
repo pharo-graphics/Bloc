@@ -1,17 +1,18 @@
 "
-!Bloc
+# Bloc
 
-Bloc is a graphical framework that is drawing agnostic. The concrete drawing is achieved through the binding to the Sparta canvas. See ${class:BaselineOfSparta}$ for more details.
+Bloc is a graphical framework that is drawing agnostic. The concrete drawing is achieved through the binding to the Sparta canvas. See {{gtClass:BaselineOfSparta}} for more details.
 
-The central concept is ${class:BlElement}$.
+The central concept is {{gtClass:BlElement}}.
 
-!!Organization
+## Organization
 
-The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray: ${class:BaselineOfBloc|show=#gtPackagesMapFor:|expanded=true}$
+The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray: {{gtClass:BaselineOfBloc|show=#gtPackagesMapFor:|expanded=true}}
 
-!!Tutorial
+## Tutorial
 
-You can learn Bloc following a memory game tutorial: ${icebergFile:path=feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar}$.
+You can learn Bloc following a memory game tutorial: [00-memory-game.pillar](fileLocator://gtResource/feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar).
+
 
 "
 Class {

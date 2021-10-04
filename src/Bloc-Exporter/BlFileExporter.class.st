@@ -1,6 +1,7 @@
 "
 I export bloc element to a file.
 See my subclasses for different output formats
+
 "
 Class {
 	#name : #BlFileExporter,
@@ -8,15 +9,12 @@ Class {
 	#instVars : [
 		'fileName'
 	],
-	#category : 'Bloc-Exporter'
+	#category : #'Bloc-Exporter'
 }
 
 { #category : #private }
 BlFileExporter >> askFileName [
-	^ UIManager default 
-		chooseForSaveFileReference: 'Save Element as ', self extension asUppercase 
-		extensions: { self extension } 
-		path: Smalltalk imageDirectory / (self element class name, '-', self element hash asString,'.' , self extension)
+	^ Smalltalk imageDirectory / (self element class name, '-', self element hash asString,'.' , self extension)
 ]
 
 { #category : #'api - exporting' }

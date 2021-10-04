@@ -3,7 +3,8 @@ I represent a path of elements to the actual focused element.
 
 Even if  ""parent <-> child"" connection between elements is lost due to removing we still have all the necessary information to send FocusOut events.
 
-I am used by ${class:BlFocusProcessor}$ to properly send events
+I am used by {{gtClass:BlFocusProcessor}} to properly send events
+
 "
 Class {
 	#name : #BlFocusChain,

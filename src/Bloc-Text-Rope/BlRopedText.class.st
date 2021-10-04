@@ -3,12 +3,14 @@ I am a concrete implementation of a text model backed up by a persistent rope da
 
 See BrText for more information.
 See BrRope to learn more about rope
+
 "
 Class {
 	#name : #BlRopedText,
 	#superclass : #BlText,
 	#instVars : [
-		'rope'
+		'rope',
+		'attributesFinder'
 	],
 	#category : #'Bloc-Text-Rope-Text'
 }
@@ -39,7 +41,7 @@ BlRopedText class >> string: aString [
 	"Take the supplied string like object, convert it to a normalised string and answer as roped text"
 	<return: #BlRopedText>
 
-	^ self rope: (BlCollectionRope collection: (BlStringNormalizer new process: aString))
+	^ self rope: (BlCollectionRope collection: aString)
 ]
 
 { #category : #'text - converting' }
@@ -60,6 +62,9 @@ BlRopedText >> attributes: anAttributesCollection [
 	| aNewRope |
 	
 	aNewRope := rope attributes: anAttributesCollection.
+	aNewRope == rope
+		ifTrue: [ ^ self ].
+
 	self rope: aNewRope.
 
 	anAttributesCollection do: [ :eachAttribute |
@@ -78,7 +83,10 @@ BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex 
 		assert: [ self isNotEmpty or: [ aFromIndex = 1 and: [ aToIndex isZero ] ] ]
 		description: [ 'If I am empty then start must be 1 and end must be zero' ].
 	
-	aNewRope := rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: aToIndex.
+	aNewRope := rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: aToIndex.	
+	aNewRope == rope
+		ifTrue: [ ^ self ].
+	
 	self rope: aNewRope.
 	
 	anAttributesCollection do: [ :eachAttribute |
@@ -86,18 +94,27 @@ BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex 
 ]
 
 { #category : #'text - attributes' }
+BlRopedText >> attributesFinder [
+	^ attributesFinder ifNil: [ attributesFinder := BlTextAttributesCachingFinder new initializeForText: self ]
+]
+
+{ #category : #'text - attributes' }
 BlRopedText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
-	"aFromIndex should be lower or equal than aToIndex."
-	| aPreviousRope |
+	| aNewRope |
+	self
+		assert: [ aFromIndex <= aToIndex ]
+		description: [ 'Start must not exceed end' ].
 
 	self
 		assert: [ aFromIndex > 0 or: [ aFromIndex = 0 and: [ aToIndex = 0 ] ] ]
 		description: [ 'Start and end must be positive or both zero' ].
 	
-	aPreviousRope := rope.
-	self rope: (rope clearAttributes: ((aFromIndex - 1) max: 0) to: aToIndex if: aBlock).
-	aPreviousRope == rope
-		ifFalse: [ self notifyAttributesRemovedFrom: aFromIndex to: aToIndex ]
+	aNewRope := rope clearAttributes: ((aFromIndex - 1) max: 0) to: aToIndex if: aBlock.
+	aNewRope == rope
+		ifTrue: [ ^ self ].
+	
+	self rope: aNewRope.
+	self notifyAttributesRemovedFrom: aFromIndex to: aToIndex
 ]
 
 { #category : #'text - copying' }
@@ -191,13 +208,15 @@ BlRopedText >> generation [
 
 { #category : #initialization }
 BlRopedText >> initialize [
-	super initialize
+	super initialize.
+	
+	attributesFinder := nil
 ]
 
 { #category : #initialization }
 BlRopedText >> initializeWith: aRope [
-
-	rope := aRope
+	rope := aRope.
+	attributesFinder := nil
 ]
 
 { #category : #'text - modifications' }
@@ -231,13 +250,10 @@ BlRopedText >> insertItems: aCollectionOfCollectionsOfItems atAll: aCollectionOf
 
 { #category : #'text - modifications' }
 BlRopedText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
-	| theProcessedStrings |
-	
-	theProcessedStrings := aCollectionOfStrings collect: [ :eachString | BlStringNormalizer new process: eachString ].
 	self
-		notifyStringsInserted: (theProcessedStrings collect: [ :eachProcessedString | (self class items: eachProcessedString) characters asString ])
+		notifyStringsInserted: aCollectionOfStrings
 		atAll: (self
-			insertItems: theProcessedStrings
+			insertItems: aCollectionOfStrings
 			atAll: aCollectionOfIndices)
 		requested: aCollectionOfIndices
 ]
@@ -283,20 +299,14 @@ BlRopedText >> iterator: aFromIndex to: aToIndex [
 	^ BlRopedTextIterator text: self from: aFromIndex to: aToIndex
 ]
 
-{ #category : #'text - converting' }
-BlRopedText >> normalized [
-	
-	^ self class rope: rope normalized
-]
-
 { #category : #accessing }
 BlRopedText >> rope [
 	^ rope
 ]
 
 { #category : #accessing }
-BlRopedText >> rope: aBrRope [
-	rope := aBrRope
+BlRopedText >> rope: aBlRope [
+	self initializeWith: aBlRope
 ]
 
 { #category : #'text - accessing' }

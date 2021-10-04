@@ -1,5 +1,6 @@
 "
 I am an empty selection
+
 "
 Class {
 	#name : #BlEmptySelection,
@@ -29,6 +30,11 @@ BlEmptySelection >> containsIndex: anIndex [
 	<return: #Boolean>
 	
 	^ false
+]
+
+{ #category : #copying }
+BlEmptySelection >> copyFrom: aStartIndex to: anEndIndex [
+	^ self copy
 ]
 
 { #category : #'api - enumerating' }

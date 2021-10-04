@@ -1,7 +1,8 @@
 "
-! Custom id
+# Custom id
 
 Is intended to be subclassed for custom object-oriented ids
+
 "
 Class {
 	#name : #BlElementUniqueId,
@@ -15,6 +16,11 @@ Class {
 { #category : #converting }
 BlElementUniqueId class >> asBlocElementId [
 	^ self uniqueInstance
+]
+
+{ #category : #converting }
+BlElementUniqueId class >> asSymbol [
+	^ self uniqueInstance asSymbol
 ]
 
 { #category : #accessing }

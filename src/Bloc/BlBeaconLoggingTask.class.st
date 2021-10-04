@@ -1,7 +1,8 @@
 "
-I use ${class:Beacon}$ to log when a ${class:BlTask}$ is scheduled and executed..
-I emit ${class:BlBeaconTaskSignal}$.
-I should be instantiated using ${method:BlBeaconLoggingTask class>>#subtask:}$.
+I use {{gtClass:Beacon}} to log when a {{gtClass:BlTask}} is scheduled and executed..
+I emit {{gtClass:BlBeaconTaskSignal}}.
+I should be instantiated using {{gtMethod:BlBeaconLoggingTask class>>#subtask:}}.
+
 
 "
 Class {
@@ -20,7 +21,7 @@ BlBeaconLoggingTask class >> subtask: aBlTask [
 	<return: #BlBeaconLoggingTask>
 	^ self new
 		subtask: aBlTask;
-		callingMethod: thisContext sender sender method asRingDefinition
+		callingMethod: thisContext sender sender blocMethodDefinition
 ]
 
 { #category : #converting }

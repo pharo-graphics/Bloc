@@ -1,11 +1,12 @@
 "
-! Underline
+# Underline
 I represent a text underline attribute.
-I am used together with ${class:BlText}$ and ${class:TBlTextStyleable}$ to style text.
+I am used together with {{gtClass:BlText}} and {{gtClass:TBlTextStyleable}} to style text.
 
 https://en.wikipedia.org/wiki/Underline
 
-See ${class:BlTextUnderlineAttributeExamples}$ for examples
+See {{gtClass:BlTextUnderlineAttributeExamples}} for examples
+
 "
 Class {
 	#name : #BlTextUnderlineAttribute,

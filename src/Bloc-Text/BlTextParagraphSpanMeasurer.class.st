@@ -2,6 +2,7 @@
 I define a backend independent API of a span measurer.
 
 My responsibility is to measure a given span according to provided properties
+
 "
 Class {
 	#name : #BlTextParagraphSpanMeasurer,

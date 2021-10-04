@@ -1,13 +1,14 @@
 "
-I am a  ${class:BlUniverse}$ space manager.
+I am a  {{gtClass:BlUniverse}} space manager.
 
-I contain Bloc ${class:BlSpace|label=spaces}$ which can be added or removed. I am also responsible for sending pulses (tick) messages to my ${class:BlSpace|label=spaces}$.
+I contain Bloc {{gtClass:BlSpace|label=spaces}} which can be added or removed. I am also responsible for sending pulses (tick) messages to my {{gtClass:BlSpace|label=spaces}}.
 
-I am used by ${class:BlUniverse}$ so that it can support multiple ${class:BlSpace|label=spaces}$.
+I am used by {{gtClass:BlUniverse}} so that it can support multiple {{gtClass:BlSpace|label=spaces}}.
 Here are some of my core operations:
-- ${method:BlSpaceManager>>#addSpace:}$
-- ${method:BlSpaceManager>>#removeSpace:}$
-- ${method:BlSpaceManager>>#pulse}$ - send a pulse message to all spaces
+- {{gtMethod:BlSpaceManager>>#addSpace:}}
+- {{gtMethod:BlSpaceManager>>#removeSpace:}}
+- {{gtMethod:BlSpaceManager>>#pulse}} - send a pulse message to all spaces
+
 "
 Class {
 	#name : #BlSpaceManager,

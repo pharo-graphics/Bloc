@@ -8,7 +8,8 @@ Visibility is independent from opacity, which is just a visual property.
 Invisible (gone or hidden) elements don't receive event, while transparent (opacity = 0) do receive.
 
 If you want to make element transparent and preserve ability to handle events set opacity to zero:
-==element opacity: 0==
+`element opacity: 0`
+
 "
 Class {
 	#name : #BlVisibility,
