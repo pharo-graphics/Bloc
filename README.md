@@ -1,7 +1,7 @@
 # Bloc 
 
-[![License](https://img.shields.io/github/license/pharo-graphics/Bloc.svg?style=flat-square)](license)
-![Complete Test](https://github.com/pharo-graphics/Bloc/workflows/Complete%20Test/badge.svg)
+[![License](https://img.shields.io/github/license/pharo-graphics/Bloc.svg)](./LICENSE)
+[![Complete Test](https://github.com/pharo-graphics/Bloc/actions/workflows/test.yml/badge.svg)](https://github.com/pharo-graphics/Bloc/actions/workflows/test.yml)
 
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
