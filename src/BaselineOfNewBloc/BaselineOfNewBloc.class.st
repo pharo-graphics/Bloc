@@ -28,25 +28,29 @@ BaselineOfNewBloc >> baseline: spec [
 					with: [ spec repository: 'github://pharo-graphics/Bloc/src' ];
 				baseline: 'BlocOSWindow'
 					with: [ spec repository: 'github://pharo-graphics/Bloc/src' ].
-			spec
-				group: 'default'
-				with: #(BlocSparta BlocMorphic BlocLayout BlocOSWindow) ].
 
-	spec
-		for: #'pharo9.x'
-		do: [
 			spec 
 				package: #'Bloc-Spec2';
 				package: #'Bloc-PharoExtensions';
-				package: #'Bloc-Spec2-Tests' with: [ spec requires: #('Bloc-Spec2' ) ].
+				package: #'Bloc-Spec2-Tests' with: [
+					spec requires: #('Bloc-Spec2') ];
 
-			spec
-				package: #'BlocHost-Mock' with: [ spec requires: #(#'BlocLayout'). ];
-				package: #'Bloc-Exporter' with: [ spec requires: #(#'BlocLayout' #'BlocSparta') ];
+				package: #'BlocHost-Mock' with: [
+					spec requires: #(#'BlocLayout') ];
+				package: #'Bloc-Exporter' with: [
+					spec requires: #(#'BlocLayout' #'BlocSparta') ];
+
+				package: #'Bloc-DevTool' with: [
+					spec requires: #(#'BlocLayout') ];
 				package: #'Bloc-Scripter' with: [
-					spec requires: #(#'BlocLayout' #'Bloc-Exporter' #'BlocHost-Mock') ].
+					spec requires: #(#'BlocLayout' #'Bloc-Exporter' #'BlocHost-Mock') ];
 
-			spec
-				group: 'default'
-				with: #(#'Bloc-Scripter' 'Bloc-Spec2-Tests' BlocSparta BlocMorphic BlocLayout BlocOSWindow) ].
+				package: #'Bloc-Examples' with: [
+					spec requires: #(#'Bloc-DevTool') ]";
+				package: #'Bloc-Compositor-Examples' with: [
+					spec requires: #(#'Bloc-Examples') ];
+				package: #'Bloc-Text-Examples' with: [
+					spec requires: #(#'Bloc-Examples') ]"
+
+			].
 ]
