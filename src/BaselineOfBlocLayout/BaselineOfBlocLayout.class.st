@@ -23,8 +23,9 @@ BaselineOfBlocLayout >> baseline: spec [
 			"Layout depends also on compositor see https://github.com/pharo-graphics/Bloc/issues/87"
 			
 			package: #'Bloc-Layout-Tests' with: [
-				spec requires: #('Bloc-Layout')];
+				spec requires: #('Bloc-Layout')]
 			
-			package: #'Bloc-Layout-Examples' with: [
-				spec requires: #('Bloc-Layout'). ]. ].
+			"package: #'Bloc-Layout-Examples' with: [
+				spec requires: #('Bloc-Layout') ]."
+		].
 ]
