@@ -43,10 +43,10 @@ BaselineOfNewBloc >> baseline: spec [
 				package: #'Bloc-DevTool' with: [
 					spec requires: #(#'BlocLayout') ];
 				package: #'Bloc-Scripter' with: [
-					spec requires: #(#'BlocLayout' #'Bloc-Exporter' #'BlocHost-Mock') ];
+					spec requires: #(#'BlocLayout' #'Bloc-Exporter' #'BlocHost-Mock') ]";
 
 				package: #'Bloc-Examples' with: [
-					spec requires: #(#'Bloc-DevTool') ]";
+					spec requires: #(#'Bloc-DevTool') ];
 				package: #'Bloc-Compositor-Examples' with: [
 					spec requires: #(#'Bloc-Examples') ];
 				package: #'Bloc-Text-Examples' with: [
