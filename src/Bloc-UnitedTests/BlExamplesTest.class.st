@@ -16,7 +16,7 @@ Class {
 BlExamplesTest class >> testSelectors [
 
 	^ self methods
-		  select: [ :each | each hasPragmaNamed: #gtExample ]
+		  select: [ :each | (each hasPragmaNamed: #gtExample) and: [ each selector isUnary ] ]
 		  thenCollect: [ :each | each selector ]
 ]
 

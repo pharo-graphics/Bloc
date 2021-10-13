@@ -36,3 +36,9 @@ BlExamplesMock >> exampleSkip [
 	
 	self error
 ]
+
+{ #category : #examples }
+BlExamplesMock >> exampleWithArgument: arg [
+	<gtExample>
+	
+]
