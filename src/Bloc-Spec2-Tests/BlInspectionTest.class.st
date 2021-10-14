@@ -18,7 +18,7 @@ BlInspectionTest >> assertCanSelectPageNamed: aString [
 { #category : #running }
 BlInspectionTest >> setUp [
 
-	| triangle inspectorWindow millerList |
+	| triangle inspectorWindow |
 	super setUp.
 
 	triangle := BlElement new
@@ -28,15 +28,14 @@ BlInspectionTest >> setUp [
 			yourself.
 
 	inspectorWindow := triangle inspect.
-	millerList := inspectorWindow presenters first millerList.
-	objectInspector := millerList pages first.
+	objectInspector := inspectorWindow presenter firstPage.
 
 ]
 
 { #category : #running }
 BlInspectionTest >> tearDown [
 
-	objectInspector window close.
+	objectInspector withWindowDo: [ :w | w close ].
 
 	super tearDown
 ]
