@@ -15,8 +15,8 @@ BlFontFamilyAttribute class >> named: aString [
 ]
 
 { #category : #'text style' }
-BlFontFamilyAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder familyName: self name
+BlFontFamilyAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+	aBlTextFontAndStyleBuilder familyName: self name
 ]
 
 { #category : #comparing }

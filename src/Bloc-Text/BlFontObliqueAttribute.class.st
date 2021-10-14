@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #'text style' }
-BlFontObliqueAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder slantOblique
+BlFontObliqueAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+	aBlTextFontAndStyleBuilder slantOblique
 ]
 
 { #category : #accessing }

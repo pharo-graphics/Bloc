@@ -33,8 +33,8 @@ BlFontSizeAttribute class >> size: aNumber [
 ]
 
 { #category : #'text style' }
-BlFontSizeAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder fontSize: self size
+BlFontSizeAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+	aBlTextFontAndStyleBuilder fontSize: self size
 ]
 
 { #category : #comparing }

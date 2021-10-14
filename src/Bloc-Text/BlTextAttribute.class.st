@@ -23,7 +23,7 @@ BlTextAttribute >> = anObject [
 ]
 
 { #category : #'text style' }
-BlTextAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
+BlTextAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
 ]
 
 { #category : #style }

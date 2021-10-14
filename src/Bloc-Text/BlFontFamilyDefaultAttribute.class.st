@@ -15,8 +15,8 @@ BlFontFamilyDefaultAttribute class >> named: aString [
 ]
 
 { #category : #'text style' }
-BlFontFamilyDefaultAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder defaultFamilyName: self name
+BlFontFamilyDefaultAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+	aBlTextFontAndStyleBuilder defaultFamilyName: self name
 ]
 
 { #category : #comparing }

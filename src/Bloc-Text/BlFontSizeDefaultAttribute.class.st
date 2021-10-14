@@ -15,8 +15,8 @@ BlFontSizeDefaultAttribute class >> size: aNumber [
 ]
 
 { #category : #'text style' }
-BlFontSizeDefaultAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder defaultFontSizePt: self size value
+BlFontSizeDefaultAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+	aBlTextFontAndStyleBuilder defaultFontSizePt: self size value
 ]
 
 { #category : #comparing }

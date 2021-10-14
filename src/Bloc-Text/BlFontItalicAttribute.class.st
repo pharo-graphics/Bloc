@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #'text style' }
-BlFontItalicAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder slantItalic
+BlFontItalicAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+	aBlTextFontAndStyleBuilder slantItalic
 ]
 
 { #category : #accessing }
