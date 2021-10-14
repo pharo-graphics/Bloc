@@ -6,9 +6,10 @@ SmalltalkCISpec {
       #platforms : [ #pharo ]
     }
   ],
-  #testing: {
-    #include : {
-     #packages : [ 'Bloc.*' ]
-    }
-  }
+	#testing : {
+		#packages : [ 'Bloc.*' ],
+		#coverage : {
+			#packages : [ 'Bloc.*' ]
+		}
+	}
 }
