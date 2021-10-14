@@ -1,8 +1,9 @@
 Extension { #name : #BlTextForegroundAttribute }
 
 { #category : #'*Bloc-Sparta' }
-BlTextForegroundAttribute >> applyOnFontAndStyleBuilder: aBlTextStyleBuilder [
-	aBlTextStyleBuilder color: self paint
+BlTextForegroundAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+
+	aBlTextFontAndStyleBuilder color: self paint
 ]
 
 { #category : #'*Bloc-Sparta' }
