@@ -26,11 +26,6 @@ BlDevScripterStep >> getMousePositionIn: aScripter [
 		ifFalse: [ 0.0@0.0 ]
 ]
 
-{ #category : #printing }
-BlDevScripterStep >> gtDisplayOn: aStream [
-	aStream nextPutAll: self label
-]
-
 { #category : #'gt-extension' }
 BlDevScripterStep >> gtReferenceFor: aView [
 	<gtView>
@@ -98,6 +93,11 @@ BlDevScripterStep >> playOn: aScripter [
 { #category : #actions }
 BlDevScripterStep >> playOnExecutor: anExecutor [ 
 	self playOn: anExecutor scripter
+]
+
+{ #category : #printing }
+BlDevScripterStep >> printOn: aStream [
+	aStream nextPutAll: self label
 ]
 
 { #category : #'accessing - properties' }

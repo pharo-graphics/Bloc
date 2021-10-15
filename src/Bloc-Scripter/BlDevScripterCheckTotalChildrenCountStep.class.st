@@ -13,8 +13,8 @@ BlDevScripterCheckTotalChildrenCountStep >> defaultLabel [
 ]
 
 { #category : #printing }
-BlDevScripterCheckTotalChildrenCountStep >> gtDisplayOn: aStream [
-	super gtDisplayOn: aStream.
+BlDevScripterCheckTotalChildrenCountStep >> printOn: aStream [
+	super printOn: aStream.
 	aStream
 		nextPutAll: ': ';
 		nextPutAll: self totalChildrenCount asString
