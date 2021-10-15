@@ -59,11 +59,6 @@ BlDevScripterNullTarget >> findTargetStartingInScripter: aScripter [
 	AssertionFailure signal: 'Target is not defined'
 ]
 
-{ #category : #printing }
-BlDevScripterNullTarget >> gtDisplayString [
-	^ ''
-]
-
 { #category : #accessing }
 BlDevScripterNullTarget >> identifier [
 	^ 'null'
