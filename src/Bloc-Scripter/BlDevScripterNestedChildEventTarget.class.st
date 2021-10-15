@@ -28,14 +28,6 @@ BlDevScripterNestedChildEventTarget >> findTargetIn: anElement [
 	^ aChild
 ]
 
-{ #category : #'gt-extension' }
-BlDevScripterNestedChildEventTarget >> gtTargetsFor: aView [
-	<gtView>
-	self targets ifNil: [ ^ aView empty ].
-	^ (self targets gtItemsFor: aView)
-		title: 'Targets'
-]
-
 { #category : #initialization }
 BlDevScripterNestedChildEventTarget >> initialize [
 	super initialize.

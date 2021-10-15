@@ -21,10 +21,3 @@ BlDevScripterMethodReference >> definition: anObject [
 BlDevScripterMethodReference >> definitionDo: aBlock [
 	aBlock value: self definition
 ]
-
-{ #category : #'gt-extension' }
-BlDevScripterMethodReference >> gtReferenceFor: aView [
-	<gtView>
-	self definition ifNil: [ ^ aView empty ].
-	^ self definition gtSourceFor: aView
-]

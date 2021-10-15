@@ -39,14 +39,6 @@ BlDevScripterUserData >> at: aSymbol put: aValue [
 	dictionary at: aSymbol put: aValue
 ]
 
-{ #category : #'gt-extension' }
-BlDevScripterUserData >> gtUserDataFor: aView [
-	<gtView>
-	dictionary ifNil: [ ^ aView empty ].
-	^ (dictionary gtItemsFor: aView)
-		title: 'User Data'
-]
-
 { #category : #testing }
 BlDevScripterUserData >> includesKey: aKey [ 
 	^ dictionary includesKey: aKey

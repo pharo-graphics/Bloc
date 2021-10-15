@@ -17,16 +17,6 @@ BlDevScripterStepProperties >> addScreenshotForm: aForm [
 	self add: (BlDevScripterStepScreenshot new form: aForm)
 ]
 
-{ #category : #accessing }
-BlDevScripterStepProperties >> gtScreenshotFor: aView [
-	<gtView>
-	self properties ifNil: [ ^ aView empty ].
-	^ self properties 
-		detect: [ :eachProperty | eachProperty isScreenshot ]
-		ifFound: [ :aScreenshot | aScreenshot gtScreenshotFor: aView ]
-		ifNone: [ aView empty ]
-]
-
 { #category : #initialization }
 BlDevScripterStepProperties >> initialize [
 	super initialize.

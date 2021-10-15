@@ -26,21 +26,6 @@ BlDevScripterStep >> getMousePositionIn: aScripter [
 		ifFalse: [ 0.0@0.0 ]
 ]
 
-{ #category : #'gt-extension' }
-BlDevScripterStep >> gtReferenceFor: aView [
-	<gtView>
-	self reference ifNil: [ ^ aView empty ].
-	^ (self reference gtReferenceFor: aView)
-		priority: 5
-]
-
-{ #category : #accessing }
-BlDevScripterStep >> gtScreenshotFor: aView [
-	<gtView>
-	self properties ifNil: [ ^ aView empty ].
-	^ self properties gtScreenshotFor: aView
-]
-
 { #category : #'accessing - state' }
 BlDevScripterStep >> haltHere [
 	state := BlDevScripterStepState haltHere
