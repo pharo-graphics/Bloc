@@ -7,7 +7,10 @@ Class {
 { #category : #running }
 BlTestOfExamplesTest >> examplesTestResult [
 
-	^ BlExamplesMock suite run
+	| suite |
+	suite := BlExamplesMock suite.
+	suite tests do: [ :each | each enableRunning ].
+	^ suite run
 ]
 
 { #category : #tests }

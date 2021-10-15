@@ -6,8 +6,17 @@ See my references.
 Class {
 	#name : #BlExamplesMock,
 	#superclass : #BlExamplesTest,
+	#instVars : [
+		'enabled'
+	],
 	#category : #'Bloc-UnitedTests-Examples'
 }
+
+{ #category : #accessing }
+BlExamplesMock >> enableRunning [
+
+	enabled := true
+]
 
 { #category : #examples }
 BlExamplesMock >> exampleError [
@@ -41,4 +50,17 @@ BlExamplesMock >> exampleSkip [
 BlExamplesMock >> exampleWithArgument: arg [
 	<gtExample>
 	
+]
+
+{ #category : #initialization }
+BlExamplesMock >> initialize [
+
+	super initialize.
+	enabled := false
+]
+
+{ #category : #private }
+BlExamplesMock >> performTest [
+
+	enabled ifTrue: [ super performTest ]
 ]
