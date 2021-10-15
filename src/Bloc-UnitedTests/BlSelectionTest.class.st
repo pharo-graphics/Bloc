@@ -40,7 +40,6 @@ BlSelectionTest >> testCompositeSelectFrom0To1 [
 	self assert: aCompositeSelection to equals: 1.
 	self assert: aCompositeSelection displayString equals: '[0,1]'.
 	self assert: aCompositeSelection printString equals: '[0,1]'.
-	self assert: aCompositeSelection gtDisplayString equals: '[0,1]'.
 	self assert: aCompositeSelection isNotEmpty.
 	self assert: aCompositeSelection isEmpty not.
 
@@ -62,7 +61,6 @@ BlSelectionTest >> testCompositeSelectFrom1To1 [
 	self assert: aCompositeSelection isEmpty.
 	self assert: aCompositeSelection displayString equals: ''.
 	self assert: aCompositeSelection printString equals: ''.
-	self assert: aCompositeSelection gtDisplayString equals: ''.
 
 	self assert: aCompositeSelection allSelections equals: {  }.
 
@@ -81,7 +79,6 @@ BlSelectionTest >> testCompositeSelectFrom1To3 [
 	self assert: aCompositeSelection to equals: 3.
 	self assert: aCompositeSelection displayString equals: '[1,3]'.
 	self assert: aCompositeSelection printString equals: '[1,3]'.
-	self assert: aCompositeSelection gtDisplayString equals: '[1,3]'.
 	self assert: aCompositeSelection isNotEmpty.
 	self assert: aCompositeSelection isEmpty not.
 
@@ -105,7 +102,6 @@ BlSelectionTest >> testCompositeSelectFrom1To3And2To6 [
 	self assert: aCompositeSelection to equals: 6.
 	self assert: aCompositeSelection displayString equals: '[1,6]'.
 	self assert: aCompositeSelection printString equals: '[1,6]'.
-	self assert: aCompositeSelection gtDisplayString equals: '[1,6]'.
 	self assert: aCompositeSelection isNotEmpty.
 	self assert: aCompositeSelection isEmpty not.
 
@@ -129,7 +125,6 @@ BlSelectionTest >> testCompositeSelectFrom1To3And4To6 [
 	self assert: aCompositeSelection to equals: 6.
 	self assert: aCompositeSelection displayString equals: '[1,3][4,6]'.
 	self assert: aCompositeSelection printString equals: '[1,3][4,6]'.
-	self assert: aCompositeSelection gtDisplayString equals: '[1,3][4,6]'.
 	self assert: aCompositeSelection isNotEmpty.
 	self assert: aCompositeSelection isEmpty not.
 
@@ -153,7 +148,6 @@ BlSelectionTest >> testCompositeSelectFrom1To3And5To6 [
 	self assert: aCompositeSelection to equals: 6.
 	self assert: aCompositeSelection displayString equals: '[1,3][5,6]'.
 	self assert: aCompositeSelection printString equals: '[1,3][5,6]'.
-	self assert: aCompositeSelection gtDisplayString equals: '[1,3][5,6]'.
 	self assert: aCompositeSelection isNotEmpty.
 	self assert: aCompositeSelection isEmpty not.
 
@@ -177,7 +171,6 @@ BlSelectionTest >> testCompositeSelectFrom1To4And4To6 [
 	self assert: aCompositeSelection to equals: 6.
 	self assert: aCompositeSelection displayString equals: '[1,6]'.
 	self assert: aCompositeSelection printString equals: '[1,6]'.
-	self assert: aCompositeSelection gtDisplayString equals: '[1,6]'.
 	self assert: aCompositeSelection isNotEmpty.
 	self assert: aCompositeSelection isEmpty not.
 
@@ -201,7 +194,6 @@ BlSelectionTest >> testCompositeSelectFrom5To6And1To3 [
 	self assert: aCompositeSelection to equals: 6.
 	self assert: aCompositeSelection displayString equals: '[1,3][5,6]'.
 	self assert: aCompositeSelection printString equals: '[1,3][5,6]'.
-	self assert: aCompositeSelection gtDisplayString equals: '[1,3][5,6]'.
 	self assert: aCompositeSelection isNotEmpty.
 	self assert: aCompositeSelection isEmpty not.
 
@@ -375,7 +367,6 @@ BlSelectionTest >> testMonotoneSelectFrom1To1 [
 
 	self assert: aMonotoneSelection displayString equals: '[1,1]'.
 	self assert: aMonotoneSelection printString equals: '[1,1]'.
-	self assert: aMonotoneSelection gtDisplayString equals: '[1,1]'.
 	self assert: aMonotoneSelection isEmpty.
 
 	self
@@ -396,7 +387,6 @@ BlSelectionTest >> testMonotoneSelectFrom1To3 [
 	self assert: aMonotoneSelection to equals: 3.
 	self assert: aMonotoneSelection displayString equals: '[1,3]'.
 	self assert: aMonotoneSelection printString equals: '[1,3]'.
-	self assert: aMonotoneSelection gtDisplayString equals: '[1,3]'.
 	self assert: aMonotoneSelection isNotEmpty.
 	self assert: aMonotoneSelection isEmpty not.
 
@@ -418,7 +408,6 @@ BlSelectionTest >> testMonotoneSelectFrom1To4 [
 	self assert: aMonotoneSelection to equals: 4.
 	self assert: aMonotoneSelection displayString equals: '[1,4]'.
 	self assert: aMonotoneSelection printString equals: '[1,4]'.
-	self assert: aMonotoneSelection gtDisplayString equals: '[1,4]'.
 	self assert: aMonotoneSelection isNotEmpty.
 	self assert: aMonotoneSelection isEmpty not.
 
@@ -440,7 +429,6 @@ BlSelectionTest >> testMonotoneSelectFrom3To4 [
 	self assert: aMonotoneSelection to equals: 4.
 	self assert: aMonotoneSelection displayString equals: '[3,4]'.
 	self assert: aMonotoneSelection printString equals: '[3,4]'.
-	self assert: aMonotoneSelection gtDisplayString equals: '[3,4]'.
 	self assert: aMonotoneSelection isNotEmpty.
 	self assert: aMonotoneSelection isEmpty not.
 
@@ -462,7 +450,6 @@ BlSelectionTest >> testMonotoneSelectFrom4To6 [
 	self assert: aMonotoneSelection to equals: 6.
 	self assert: aMonotoneSelection displayString equals: '[4,6]'.
 	self assert: aMonotoneSelection printString equals: '[4,6]'.
-	self assert: aMonotoneSelection gtDisplayString equals: '[4,6]'.
 	self assert: aMonotoneSelection isNotEmpty.
 	self deny: aMonotoneSelection isEmpty.
 
