@@ -7,9 +7,6 @@ SmalltalkCISpec {
     }
   ],
 	#testing : {
-		#packages : [ 'Bloc.*' ],
-		#coverage : {
-			#packages : [ 'Bloc.*' ]
-		}
+		#packages : [ 'Bloc.*' ]
 	}
 }
