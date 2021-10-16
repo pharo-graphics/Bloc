@@ -4,12 +4,8 @@ I define a geometry of a straight line
 "
 Class {
 	#name : #BlLine,
-	#superclass : #BlElementVectorGeometry,
-	#instVars : [
-		'from',
-		'to'
-	],
-	#category : #'Bloc-Basic'
+	#superclass : #BlLineGeometry,
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #testing }
