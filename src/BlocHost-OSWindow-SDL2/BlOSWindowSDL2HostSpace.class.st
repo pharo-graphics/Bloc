@@ -1,11 +1,11 @@
 Class {
-	#name : #BlOSWindowSDL2Space,
-	#superclass : #BlOSWindowSpace,
+	#name : #BlOSWindowSDL2HostSpace,
+	#superclass : #BlOSWindowHostSpace,
 	#category : #'BlocHost-OSWindow-SDL2'
 }
 
 { #category : #initialization }
-BlOSWindowSDL2Space >> createBufferSurfaceRenderer [
+BlOSWindowSDL2HostSpace >> createBufferSurfaceRenderer [
 	<return: #BlHostSurfaceRenderer>
 
 	^ BlOSWindowSDL2BufferSurfaceRenderer new

@@ -427,7 +427,7 @@ BlOSWindowEventHandler >> visitWindowResizeEvent: anEvent [
 
 { #category : #'api - accessing' }
 BlOSWindowEventHandler >> window [
-	<return: #BlOSWindowSpace>
+	<return: #BlOSWindowHostSpace>
 
 	^ window
 ]

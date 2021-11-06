@@ -48,7 +48,7 @@ BlOSWindowHost >> createAttributesFor: aSpace [
 { #category : #private }
 BlOSWindowHost >> createHostSpace [
 
-	^ BlOSWindowSpace new
+	^ BlOSWindowHostSpace new
 ]
 
 { #category : #'host - api' }

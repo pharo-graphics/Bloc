@@ -57,7 +57,7 @@ BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
 { #category : #private }
 BlOSWindowSDL2Host >> createHostSpace [
 
-	^ BlOSWindowSDL2Space new
+	^ BlOSWindowSDL2HostSpace new
 ]
 
 { #category : #initialization }
