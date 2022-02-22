@@ -14,6 +14,15 @@ BlCircleGeometry >> = anObject [
 	^ self class = anObject class
 ]
 
+{ #category : #'geometry testing' }
+BlCircleGeometry >> containsPoint: aPoint in: aBlElement [
+
+	| centerX centerY |
+	centerX := origin x + radius.
+	centerY := origin y + radius.
+	^ ((aPoint x - centerX) squared + (aPoint y - centerY) squared) < radius squared
+]
+
 { #category : #'geometry bounds' }
 BlCircleGeometry >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.
