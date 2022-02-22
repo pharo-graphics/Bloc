@@ -1,7 +1,7 @@
 "
-I am an event processor.
+I am a mouse event processor.
 I convert basic events to more complex events.
-For example, i generate events like click, dbl click, drag&drop, ... from mouse down, mouse up, and mouse move events.
+For example, I generate events such as click, double-click or drag&drop, from more basic events such as mouse-down, mouse-up, and mouse-move.
 
 Mouse actions are blocked during drag
 
