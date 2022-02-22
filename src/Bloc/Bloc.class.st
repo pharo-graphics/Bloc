@@ -190,7 +190,7 @@ Bloc class >> preferencesOn: aBuilder [
 			(aBuilder setting: #hasSparta)
 				target: self;
 				order: 7;
-				label: 'Force HasSparta = false';
+				label: 'Bloc hasSparta = true (when available)';
 				description: 'Browse senders of "Bloc hasSparta" to understand the impact.'.
 		]
 ]
