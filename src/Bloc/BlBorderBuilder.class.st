@@ -46,17 +46,17 @@ BlBorderBuilder >> buildStyle [
 		dashOffset: self dashOffset
 ]
 
-{ #category : #'api - line cap' }
+{ #category : #styles }
 BlBorderBuilder >> capButt [
 	self lineCap: BlStrokeLineCap butt
 ]
 
-{ #category : #'api - line cap' }
+{ #category : #styles }
 BlBorderBuilder >> capRound [
 	self lineCap: BlStrokeLineCap round
 ]
 
-{ #category : #'api - line cap' }
+{ #category : #styles }
 BlBorderBuilder >> capSquare [
 	self lineCap: BlStrokeLineCap square
 ]
@@ -148,18 +148,28 @@ BlBorderBuilder >> initialize [
 ]
 
 { #category : #styles }
+BlBorderBuilder >> joinBevel [
+	self lineJoin: BlStrokeLineJoin bevel
+]
+
+{ #category : #styles }
+BlBorderBuilder >> joinMiter [
+	self lineJoin: BlStrokeLineJoin miter
+]
+
+{ #category : #styles }
 BlBorderBuilder >> joinRound [
 	self lineJoin: BlStrokeLineJoin round
 ]
 
-{ #category : #'api - line cap' }
+{ #category : #accessing }
 BlBorderBuilder >> lineCap [
 	<return: #BlStrokeLineCap>
 
 	^ lineCap
 ]
 
-{ #category : #'api - line cap' }
+{ #category : #accessing }
 BlBorderBuilder >> lineCap: aBlStrokeLineCap [
 	lineCap := aBlStrokeLineCap
 ]
