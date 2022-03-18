@@ -39,6 +39,17 @@ BlElevation >> elevation: aNumber [
 	elevation := aNumber
 ]
 
+{ #category : #printing }
+BlElevation >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		print: elevation;
+		nextPut: $)
+
+]
+
 { #category : #accessing }
 BlElevation >> relatedTo: aNumber [
 	"Compute and return a resulting elevation related to the elevation represented as a number"
