@@ -12,6 +12,7 @@ Class {
 
 { #category : #private }
 BlTaskQueue >> critical: aBlock [
+
 	^ lock critical: aBlock
 ]
 
@@ -25,7 +26,7 @@ BlTaskQueue >> dequeue: aBlTask [
 		description: [ 'Task must not be nil' ].
 
 	tasks ifNotNil:
-		[ lock critical: 
+		[ self critical: 
 			[ (tasks includes: aBlTask) ifTrue: 
 				[ tasks remove: aBlTask.
 				aBlTask setNew ] ] ].
@@ -45,7 +46,7 @@ BlTaskQueue >> enqueue: aBlTask [
 		assert: [ aBlTask isNew ]
 		description: [ 'Tasks cannot be submitted twice' ].
 
-	lock critical: [
+	self critical: [
 		tasks ifNil: [ tasks := self newTasks ].
 		taskExists := tasks includes: aBlTask.
 		taskExists ifFalse:
@@ -66,7 +67,7 @@ BlTaskQueue >> enqueueAll: aCollectionOfBlTask [
 		assert: [ aCollectionOfBlTask isNotNil ]
 		description: [ 'Tasks must not be nil' ].
 
-	lock critical: [
+	self critical: [
 		tasks ifNil: [ tasks := self newTasks ].
 		taskExists := tasks includesAny: aCollectionOfBlTask.
 		taskExists ifFalse:
@@ -95,7 +96,7 @@ BlTaskQueue >> flush [
 	| theTasks |
 
 	"While assignments without message sends are atomic, so the sequence can't be interrupted, it's possible that a process switch would clear the tasks while another process is within the lock, so take the lock out here."
-	lock critical: [
+	self critical: [
 		theTasks := tasks.
 		tasks := nil ].
 
@@ -114,7 +115,7 @@ BlTaskQueue >> initialize [
 BlTaskQueue >> isEmpty [
 	<return: #Boolean>
 
-	^ lock critical: [ tasks isNil or: [ tasks isEmpty ] ]
+	^ self critical: [ tasks isNil or: [ tasks isEmpty ] ]
 ]
 
 { #category : #private }
@@ -152,7 +153,7 @@ BlTaskQueue >> requeue: aBlTask [
 BlTaskQueue >> runOn: aSpace [
 	| theTasks |
 	
-	lock critical: [
+	self critical: [
 		"We store reference to tasks Array because it is possible
 		that a random task is removed while enumerating a collection.
 		This switch can be made atomic without the lock, but is here since the tasks shouldn't be updated while another process has the lock."
@@ -182,7 +183,7 @@ BlTaskQueue >> tasks [
 
 	tasks ifNil: [ ^ #() ].
 	"tasks are an OrderedCollection (or nil), thus converting to anArray is guaranteed to answer a copy"
-	^ lock critical: 
+	^ self critical: 
 		[ tasks 
 			ifNil: [ #() ]
 			ifNotNil: [ tasks asArray ] ].
