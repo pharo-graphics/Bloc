@@ -51,7 +51,10 @@ BlChildrenSubset >> at: anIndex [
 
 { #category : #'children - enumerating' }
 BlChildrenSubset >> do: aBlock [
-	subsetArray do: aBlock
+	"Evaluate a Block on all subset items. Uses Array>>to:do: as optimization."
+
+	1 to: subsetArray size do: [ :index |
+		aBlock value: (subsetArray at: index) ]
 ]
 
 { #category : #testing }
