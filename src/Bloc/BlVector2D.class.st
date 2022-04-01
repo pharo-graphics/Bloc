@@ -41,13 +41,6 @@ BlVector2D >> + anotherVector [
 	^ anotherVector add2D: self
 ]
 
-{ #category : #converting }
-BlVector2D >> , aNumber [
-	<return: #BlVector>
-
-	^ BlVector3D x: self x y: self y z: aNumber
-]
-
 { #category : #arithmetic }
 BlVector2D >> - anotherVector [
 	"Perform a subtraction of a given vector from me and return a resulting vector"
@@ -123,17 +116,15 @@ BlVector2D >> asPoint [
 { #category : #converting }
 BlVector2D >> asScale3D [
 	"Return a 3D vector representing a scale factor"
-	<return: #BlVector3D>
-	
-	^ (self , 1)
+
+	^ BlVector3D x: self x y: self y z: 1
 ]
 
 { #category : #converting }
 BlVector2D >> asTranslate3D [
 	"Return a 3D vector representing a translation vector"
-	<return: #BlVector3D>
 
-	^ (self , 0)
+	^ BlVector3D x: self x y: self y z: 0
 ]
 
 { #category : #comparing }
