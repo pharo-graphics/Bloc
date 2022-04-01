@@ -1,14 +1,6 @@
 Extension { #name : #Number }
 
 { #category : #'*Bloc' }
-Number >> , aNumber [
-	"Returns a Vector"
-	<return: #BlVector>
-
-	^ BlVector2D x: self y: aNumber
-]
-
-{ #category : #'*Bloc' }
 Number >> asBlocVector [
 	"Return a 2D vector of the receiver by using the receiver as the two dimensions."
 	
