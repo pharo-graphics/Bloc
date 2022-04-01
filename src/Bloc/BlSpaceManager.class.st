@@ -59,6 +59,17 @@ BlSpaceManager >> initialize [
 	spaces := #()
 ]
 
+{ #category : #printing }
+BlSpaceManager >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		print: spaces size;
+		nextPut: $)
+
+]
+
 { #category : #pulse }
 BlSpaceManager >> pulse [
 	spaces do: [ :aSpace | aSpace pulse ]
