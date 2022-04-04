@@ -24,7 +24,7 @@ BlOSWindowSDL2Host class >> isSupported [
 
 { #category : #'driver selection' }
 BlOSWindowSDL2Host class >> label [
-	^ 'OSWindow - SDL2'
+	^ 'SDL2'
 ]
 
 { #category : #'driver selection' }
