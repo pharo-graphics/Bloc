@@ -38,109 +38,120 @@ BlMorphicKeyboardKeyTable >> initialize [
 { #category : #'map - macos' }
 BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 
+	self flag: 'adapted to make Album working'.
+	self flag: 'KeyboardKey should be used instead of BlKeyboardKey which brings nothing'.
+	self flag: 'BlMorphicKeyboardKeyTable should be deprecated (see BlMorphicEventHandler>>convertKeyFromEvent:)...'.
 	self
 		initialize: (macosVirtualKeyTable := Dictionary new)
-		with: #(
+		withKeys: {
 			"special"
-			16r24 Return
-			16r30 Tab
-			16r31 Space
-			16r33 Delete
-			16r75 Backspace
-			16r35 Escape
-			16r39 CapsLock
-			
+			65293 . BlKeyboardKey return.
+			65289 . BlKeyboardKey tab.
+			32 . 	BlKeyboardKey space.
+			65535 . BlKeyboardKey delete.
+			65288 . BlKeyboardKey backspace.
+			65307 . BlKeyboardKey escape.
+			65509 . BlKeyboardKey capsLock.
+		
 			"modifiers"
-			16r38 ShiftLeft
-			16r3C ShiftRight
-			16r3A AltLeft
-			16r3D AltRight
-			16r3B ControlLeft
-			16r3E ControlRight
-			16r37 MetaLeft
-			16r36 MetaRight	
-			16r3F Function
-
+			65505 . BlKeyboardKey shiftLeft.
+			65506 . BlKeyboardKey shiftRight.
+			65513 . BlKeyboardKey altLeft.
+			65514 . BlKeyboardKey altRight.
+			65507 . BlKeyboardKey controlLeft.
+			65508 . BlKeyboardKey controlRight.
+			65515 . BlKeyboardKey metaLeft.
+			65516 . BlKeyboardKey metaRight.
+			
 			"sound"
-			16r48 VolumeUp
-			16r49 VolumeDown
-			16r4A Mute
+			1073741952 . BlKeyboardKey volumeUp.
+			1073741953 . BlKeyboardKey volumeDown.
+			1073741951 . BlKeyboardKey mute.
+			"16r048 . BlKeyboardKey pause".
 			
 			"functions"
-			16r7A F1
-			16r78 F2
-			16r63 F3
-			16r76 F4
-			16r60 F5
-			16r61 F6
-			16r62 F7
-			16r64 F8
-			16r65 F9
-			16r67 F10
-			16r6D F11
-			16r6F F12
+			1073741882 . BlKeyboardKey F1.
+			1073741883 . BlKeyboardKey F2.
+			1073741884 . BlKeyboardKey F3.
+			1073741885 . BlKeyboardKey F4.
+			1073741886 . BlKeyboardKey F5.
+			1073741887 . BlKeyboardKey F6.
+			1073741888 . BlKeyboardKey F7.
+			1073741889 . BlKeyboardKey F8.
+			1073741890 . BlKeyboardKey F9.
+			1073741891 . BlKeyboardKey F10.
+			1073741892 . BlKeyboardKey F11.
+			1073741893 . BlKeyboardKey F12.
+			
+			"navigation"
+			"16r075 . BlKeyboardKey help.
+			16r046 . BlKeyboardKey printScreen.
+			16r047 . BlKeyboardKey scrollLock.
+			16r049 . BlKeyboardKey insert."
+			65360 . BlKeyboardKey home.
+			65365 . BlKeyboardKey pageUp.
+			65367 . BlKeyboardKey end.
+			65366 . BlKeyboardKey pageDown.
+			65361 . BlKeyboardKey arrowLeft.
+			65363 . BlKeyboardKey arrowRight.
+			65364 . BlKeyboardKey arrowDown.
+			65362 . BlKeyboardKey arrowUp.
+			
+			"letters"
+			65 . BlKeyboardKey a.
+			66 . BlKeyboardKey b.
+			67 . BlKeyboardKey c.
+			68 . BlKeyboardKey d.
+			69 . BlKeyboardKey e.
+			70 . BlKeyboardKey f.
+			71 . BlKeyboardKey g.
+			72 . BlKeyboardKey h.
+			73 . BlKeyboardKey i.
+			74 . BlKeyboardKey j.
+			75 . BlKeyboardKey k.
+			76 . BlKeyboardKey l.
+			77 . BlKeyboardKey m.
+			78 . BlKeyboardKey n.
+			79 . BlKeyboardKey o.
+			80 . BlKeyboardKey p.
+			81 . BlKeyboardKey q.
+			82 . BlKeyboardKey r.
+			83 . BlKeyboardKey s.
+			84 . BlKeyboardKey t.
+			85 . BlKeyboardKey u.
+			86 . BlKeyboardKey v.
+			87 . BlKeyboardKey w.
+			88 . BlKeyboardKey x.
+			89 . BlKeyboardKey y.
+			90 . BlKeyboardKey z.
 
-			16r72 Help
-			16r73 Home
-			16r74 PageUp
-			16r77 End
-			16r79 PageDown
-			16r7B ArrowLeft
-			16r7C ArrowRight
-			16r7D ArrowDown
-			16r7E ArrowUp
-			16r00 A
-			16r0B B
-			16r08 C
-			16r02 D
-			16r0E E
-			16r03 F
-			16r05 G
-			16r04 H
-			16r22 I
-			16r26 J
-			16r28 K
-			16r25 L
-			16r2E M
-			16r2D N
-			16r1F O
-			16r23 P
-			16r0C Q
-			16r0F R
-			16r01 S
-			16r11 T
-			16r20 U
-			16r09 V
-			16r0D W
-			16r07 X
-			16r10 Y
-			16r06 Z
-
-			16r1D Zero
-			16r12 One
-			16r13 Two
-			16r14 Three
-			16r15 Four
-			16r17 Five
-			16r16 Six
-			16r1A Seven
-			16r1C Eight
-			16r19 Nine
+			"digits"
+			48 . BlKeyboardKey zero.
+			49 . BlKeyboardKey one.
+			50 . BlKeyboardKey two.
+			51 . BlKeyboardKey three.
+			52 . BlKeyboardKey four.
+			53 . BlKeyboardKey five.
+			54 . BlKeyboardKey six.
+			55 . BlKeyboardKey seven.
+			56 . BlKeyboardKey eight.
+			57 . BlKeyboardKey nine.
 
 			"symbols"
-			16r1B Minus
-			16r18 Equal
-			16r21 LeftBracket
-			16r1E RightBracket
-			16r27 Quote
-			16r29 Semicolon
-			16r2A Backslash
-			16r2B Comma
-			16r2C Slash
-			16r2F Period
-			16r32 Grave
+			45 . BlKeyboardKey minus.
+			61 . BlKeyboardKey equal.
+			91 . BlKeyboardKey leftBracket.
+			93 . BlKeyboardKey rightBracket.
+			39 . BlKeyboardKey quote. "=Apostrophe"
+			59 . BlKeyboardKey semicolon.
+			92 . BlKeyboardKey backslash.
+			"16r032 . BlKeyboardKey nonUsHash."
+			44 . BlKeyboardKey comma.
+			47 . BlKeyboardKey slash.
+			46 . BlKeyboardKey period.
+			96 . BlKeyboardKey grave.
 			
-			16r41 KeypadDecimal
+			"16r41 KeypadDecimal
 			16r43 KeypadMultiply
 			16r45 KeypadPlus
 			16r47 KeypadClear
@@ -157,8 +168,8 @@ BlMorphicKeyboardKeyTable >> initializeMacOSVirtualKeyTable [
 			16r58 Keypad6
 			16r59 Keypad7
 			16r5B Keypad8
-			16r5C Keypad9
-		)
+			16r5C Keypad9"
+		}
 ]
 
 { #category : #'map - unix' }

@@ -39,20 +39,19 @@ BlMorphicEventHandler >> convertButtonFromMouseButtonEvent: aMorphicEvent [
 
 { #category : #converting }
 BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
+
 	<return: #BlKeyboardKey>
 	| aKeyValue aKey |
-	
-	aKeyValue := aMorphicEvent keyValue.
+	self flag: 'use of the morphicEvent key instead of #keyValue'.
+	aKeyValue := aMorphicEvent key value.
+	self flag: 'Host stuffs should be used instead (indirectly BlOSWindowSDL2KeyboardKeyTable)'.
 	aKey := BlMorphicKeyboardKeyTable default keyFromVirtualCode: aKeyValue.
-	
 	"on unix platorms, pressed shift changes the keycode"
-	OSPlatform current isUnix
-		ifTrue: [	
-			(aKey isShift not and: [ aMorphicEvent shiftPressed ])
-				ifTrue: [
-					{
-						BlKeyboardKey tab -> BlKeyboardKey return.
-					} asDictionary at: aKey ifAbsent: [ aKey ] ] ].
+	OSPlatform current isUnix ifTrue: [ 
+		(aKey isShift not and: [ aMorphicEvent shiftPressed ]) ifTrue: [ 
+			{ (BlKeyboardKey tab -> BlKeyboardKey return) } asDictionary
+				at: aKey
+				ifAbsent: [ aKey ] ] ].
 
 	^ aKey
 ]
@@ -105,7 +104,9 @@ BlMorphicEventHandler >> enqueue: aBlEvent [
 	self isClosed
 		ifTrue: [ ^ self ].
 
-	self window hostSpace enqueueEvent: aBlEvent
+	self window hostSpace enqueueEvent: aBlEvent.
+	self flag: 'ugly code to force the space to dequeue the event '.
+	self window hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
 ]
 
 { #category : #converting }
@@ -217,10 +218,9 @@ BlMorphicEventHandler >> handleDropMorph: anEvent [
 { #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 	| aBlEvent aKey theModifiers |
-	
+
 	(self isScrollEvent: aMorphicEvent)
 		ifTrue: [ ^ self ].
-
 	aKey := self convertKeyFromEvent: aMorphicEvent.
 	"Ugly mouse hack: F12 (106) toggles a global variable to tell the mouse handler
 	to scroll horizontally."
@@ -228,10 +228,11 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		[ self toggleHorizontalScrolling.
 		^self ].
 
+	self flag: 'No need to consider a special case for delete and backspace'.
 	"we ignore `delete` keydown event because it is not distinguishable from backspace.
 	we create keydown event in keystroke:"
-	(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
-		ifTrue: [ ^ self ].
+	"(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
+		ifTrue: [^ self handleDeleteOrBackspaceDown: aMorphicEvent]."
 	
 	"we ignore already pressed keys"
 	(self hasPressedKey: aKey)
@@ -253,16 +254,17 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 { #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 	| aBlEvent aKey theModifiers |
-	
+
 	(self isScrollEvent: aMorphicEvent)
 		ifTrue: [ ^ self ].
 
 	aKey := self convertKeyFromEvent: aMorphicEvent.
 	
+	self flag: 'No need to consider a special case for delete and backspace'.
 	"we can not differentiate between delete and backspace. However, we previously
 	logged which exact key was pressed, so now we can nicely send a corresponding keyup event"
-	(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
-		ifTrue: [ ^ self handleDeleteOrBackspaceUp: aMorphicEvent ].
+	"(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
+		ifTrue: [ ^ self handleDeleteOrBackspaceUp: aMorphicEvent ]."
 	
 	theModifiers := self convertKeyModifiersFromEvent: aMorphicEvent.
 
@@ -281,23 +283,25 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 
 { #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
-	| aBlEvent |
 
-	(aMorphicEvent shiftPressed and: [ aMorphicEvent controlKeyPressed ])
-		ifTrue: [
-			aMorphicEvent keyCharacter = Character arrowLeft
-				ifTrue: [ ^ self handleScrollLeft: aMorphicEvent ].
-			aMorphicEvent keyCharacter = Character arrowRight
-				ifTrue: [ ^ self handleScrollRight: aMorphicEvent ] ].
-			
-	(aMorphicEvent keyCharacter = Character delete
+	| aBlEvent |
+	(aMorphicEvent shiftPressed and: [ aMorphicEvent controlKeyPressed ]) 
+		ifTrue: [ 
+			aMorphicEvent keyCharacter = Character arrowLeft ifTrue: [ 
+				^ self handleScrollLeft: aMorphicEvent ].
+			aMorphicEvent keyCharacter = Character arrowRight ifTrue: [ 
+				^ self handleScrollRight: aMorphicEvent ] ].
+
+	self flag: 'keystrokeEvent is not created for delete and backspace; no need to handle them '.
+	"(aMorphicEvent keyCharacter = Character delete
 		or: [ aMorphicEvent keyCharacter = Character backspace ])
-			ifTrue: [ ^ self handleDeleteOrBackspaceDown: aMorphicEvent ].
-	
+			ifTrue: [ ^ self handleDeleteOrBackspaceDown: aMorphicEvent ]."
+
 	aBlEvent := BlTextInputEvent new
-		text: aMorphicEvent keyCharacter asString;
-		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: DateAndTime now.
+		            text: aMorphicEvent keyCharacter asString;
+		            modifiers:
+			            (self convertKeyModifiersFromEvent: aMorphicEvent);
+		            timestamp: DateAndTime now.
 
 	self enqueue: aBlEvent
 ]
