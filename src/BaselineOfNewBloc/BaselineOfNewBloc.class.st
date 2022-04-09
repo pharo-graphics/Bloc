@@ -60,7 +60,7 @@ BaselineOfNewBloc >> baseline: spec [
 			"Sparta"
 			spec 
 				baseline: 'Sparta' with: [
-					spec repository: 'github://pharo-graphics/Sparta:releasing/src' ].
+					spec repository: 'github://pharo-graphics/Sparta:v0.9.0/src' ].
 			spec
 				package: #'Bloc-Compositor' with: [
 					spec requires: #('Bloc' 'Sparta') ];
