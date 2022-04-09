@@ -23,7 +23,7 @@ BaselineOfNewBloc >> baseline: spec [
 			"Core"
 			spec 
 				baseline: 'Fenster' with: [
-					spec repository: 'github://pharo-graphics/fenster/src' ];
+					spec repository: 'github://pharo-graphics/fenster:v0.9.0/src' ];
 				package: #Bloc with: [
 					spec requires: #(#Fenster) ];
 				package: #'BlocHost-Mock' with: [
@@ -60,7 +60,7 @@ BaselineOfNewBloc >> baseline: spec [
 			"Sparta"
 			spec 
 				baseline: 'Sparta' with: [
-					spec repository: 'github://pharo-graphics/Sparta/src' ].
+					spec repository: 'github://pharo-graphics/Sparta:releasing/src' ].
 			spec
 				package: #'Bloc-Compositor' with: [
 					spec requires: #('Bloc' 'Sparta') ];
