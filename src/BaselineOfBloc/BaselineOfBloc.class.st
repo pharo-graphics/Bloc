@@ -20,10 +20,13 @@ BaselineOfBloc >> baseline: spec [
 		for: #common
 		do: [
 
+			"Fenster"
+			spec
+				package: 'Fenster';
+				package: 'Fenster-Tests' with: [ spec requires: #(Fenster) ].
+
 			"Core"
 			spec 
-				baseline: 'Fenster' with: [
-					spec repository: 'github://pharo-graphics/fenster:dev-1.0/src' ];
 				package: #Bloc with: [
 					spec requires: #(#Fenster) ];
 				package: #'BlocHost-Mock' with: [
