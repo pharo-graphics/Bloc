@@ -38,111 +38,111 @@ BlOSWindowSDL2KeyboardKeyTable >> initializeVirtualKeyTable [
 		initialize: (virtualKeyTable := Dictionary new)
 		withKeys: {
 			"special"
-			13 . BlKeyboardKey return.
-			9 . BlKeyboardKey tab.
-			32 . BlKeyboardKey space.
-			127 . BlKeyboardKey delete.
-			8 . BlKeyboardKey backspace.
-			27 . BlKeyboardKey escape.
-			1073741881 . BlKeyboardKey capsLock.
+			13 . KeyboardKey enter.
+			9 . KeyboardKey tab.
+			32 . KeyboardKey space.
+			127 . KeyboardKey delete.
+			8 . KeyboardKey backspace.
+			27 . KeyboardKey escape.
+			1073741881 . KeyboardKey capsLock.
 		
 			"modifiers"
-			1073742049 . BlKeyboardKey shiftLeft.
-			1073742053 . BlKeyboardKey shiftRight.
-			1073742050 . BlKeyboardKey altLeft.
-			1073742054 . BlKeyboardKey altRight.
-			1073742048 . BlKeyboardKey controlLeft.
-			1073742052 . BlKeyboardKey controlRight.
-			1073742051 . BlKeyboardKey metaLeft.
-			1073742055 . BlKeyboardKey metaRight.
+			1073742049 . KeyboardKey shiftLeft.
+			1073742053 . KeyboardKey shiftRight.
+			1073742050 . KeyboardKey altLeft.
+			1073742054 . KeyboardKey altRight.
+			1073742048 . KeyboardKey controlLeft.
+			1073742052 . KeyboardKey controlRight.
+			1073742051 . KeyboardKey metaLeft.
+			1073742055 . KeyboardKey metaRight.
 			
 			"sound"
-			1073741952 . BlKeyboardKey volumeUp.
-			1073741953 . BlKeyboardKey volumeDown.
-			1073741951 . BlKeyboardKey mute.
-			"16r048 . BlKeyboardKey pause".
+			"1073741952 . KeyboardKey volumeUp.
+			1073741953 . KeyboardKey volumeDown.
+			1073741951 . KeyboardKey mute."
+			"16r048 . KeyboardKey pause".
 			
 			"functions"
-			1073741882 . BlKeyboardKey F1.
-			1073741883 . BlKeyboardKey F2.
-			1073741884 . BlKeyboardKey F3.
-			1073741885 . BlKeyboardKey F4.
-			1073741886 . BlKeyboardKey F5.
-			1073741887 . BlKeyboardKey F6.
-			1073741888 . BlKeyboardKey F7.
-			1073741889 . BlKeyboardKey F8.
-			1073741890 . BlKeyboardKey F9.
-			1073741891 . BlKeyboardKey F10.
-			1073741892 . BlKeyboardKey F11.
-			1073741893 . BlKeyboardKey F12.
+			1073741882 . KeyboardKey F1.
+			1073741883 . KeyboardKey F2.
+			1073741884 . KeyboardKey F3.
+			1073741885 . KeyboardKey F4.
+			1073741886 . KeyboardKey F5.
+			1073741887 . KeyboardKey F6.
+			1073741888 . KeyboardKey F7.
+			1073741889 . KeyboardKey F8.
+			1073741890 . KeyboardKey F9.
+			1073741891 . KeyboardKey F10.
+			1073741892 . KeyboardKey F11.
+			1073741893 . KeyboardKey F12.
 			
 			"navigation"
-			"16r075 . BlKeyboardKey help.
-			16r046 . BlKeyboardKey printScreen.
-			16r047 . BlKeyboardKey scrollLock.
-			16r049 . BlKeyboardKey insert."
-			1073741898 . BlKeyboardKey home.
-			1073741899 . BlKeyboardKey pageUp.
-			1073741901 . BlKeyboardKey end.
-			1073741902 . BlKeyboardKey pageDown.
-			1073741904 . BlKeyboardKey arrowLeft.
-			1073741903 . BlKeyboardKey arrowRight.
-			1073741905 . BlKeyboardKey arrowDown.
-			1073741906 . BlKeyboardKey arrowUp.
+			"16r075 . KeyboardKey help.
+			16r046 . KeyboardKey printScreen.
+			16r047 . KeyboardKey scrollLock.
+			16r049 . KeyboardKey insert."
+			1073741898 . KeyboardKey home.
+			1073741899 . KeyboardKey pageUp.
+			1073741901 . KeyboardKey end.
+			1073741902 . KeyboardKey pageDown.
+			1073741904 . KeyboardKey left.
+			1073741903 . KeyboardKey right.
+			1073741905 . KeyboardKey down.
+			1073741906 . KeyboardKey up.
 			
 			"letters"
-			97 . BlKeyboardKey a.
-			98 . BlKeyboardKey b.
-			99 . BlKeyboardKey c.
-			100 . BlKeyboardKey d.
-			101 . BlKeyboardKey e.
-			102 . BlKeyboardKey f.
-			103 . BlKeyboardKey g.
-			104 . BlKeyboardKey h.
-			105 . BlKeyboardKey i.
-			106 . BlKeyboardKey j.
-			107 . BlKeyboardKey k.
-			108 . BlKeyboardKey l.
-			109 . BlKeyboardKey m.
-			110 . BlKeyboardKey n.
-			111 . BlKeyboardKey o.
-			112 . BlKeyboardKey p.
-			113 . BlKeyboardKey q.
-			114 . BlKeyboardKey r.
-			115 . BlKeyboardKey s.
-			116 . BlKeyboardKey t.
-			117 . BlKeyboardKey u.
-			118 . BlKeyboardKey v.
-			119 . BlKeyboardKey w.
-			120 . BlKeyboardKey x.
-			121 . BlKeyboardKey y.
-			122 . BlKeyboardKey z.
+			97 . KeyboardKey A.
+			98 . KeyboardKey B.
+			99 . KeyboardKey C.
+			100 . KeyboardKey D.
+			101 . KeyboardKey E.
+			102 . KeyboardKey F.
+			103 . KeyboardKey G.
+			104 . KeyboardKey H.
+			105 . KeyboardKey I.
+			106 . KeyboardKey J.
+			107 . KeyboardKey K.
+			108 . KeyboardKey L.
+			109 . KeyboardKey M.
+			110 . KeyboardKey N.
+			111 . KeyboardKey O.
+			112 . KeyboardKey P.
+			113 . KeyboardKey Q.
+			114 . KeyboardKey R.
+			115 . KeyboardKey S.
+			116 . KeyboardKey T.
+			117 . KeyboardKey U.
+			118 . KeyboardKey V.
+			119 . KeyboardKey W.
+			120 . KeyboardKey X.
+			121 . KeyboardKey Y.
+			122 . KeyboardKey Z.
 
 			"digits"
-			48 . BlKeyboardKey zero.
-			49 . BlKeyboardKey one.
-			50 . BlKeyboardKey two.
-			51 . BlKeyboardKey three.
-			52 . BlKeyboardKey four.
-			53 . BlKeyboardKey five.
-			54 . BlKeyboardKey six.
-			55 . BlKeyboardKey seven.
-			56 . BlKeyboardKey eight.
-			57 . BlKeyboardKey nine.
+			48 . KeyboardKey zero.
+			49 . KeyboardKey one.
+			50 . KeyboardKey two.
+			51 . KeyboardKey three.
+			52 . KeyboardKey four.
+			53 . KeyboardKey five.
+			54 . KeyboardKey six.
+			55 . KeyboardKey seven.
+			56 . KeyboardKey eight.
+			57 . KeyboardKey nine.
 
 			"symbols"
-			45 . BlKeyboardKey minus.
-			61 . BlKeyboardKey equal.
-			91 . BlKeyboardKey leftBracket.
-			93 . BlKeyboardKey rightBracket.
-			39 . BlKeyboardKey quote. "=Apostrophe"
-			59 . BlKeyboardKey semicolon.
-			92 . BlKeyboardKey backslash.
-			"16r032 . BlKeyboardKey nonUsHash."
-			44 . BlKeyboardKey comma.
-			47 . BlKeyboardKey slash.
-			46 . BlKeyboardKey period.
-			96 . BlKeyboardKey grave.
+			45 . KeyboardKey minus.
+			61 . KeyboardKey equal.
+			91 . KeyboardKey bracketLeft.
+			93 . KeyboardKey bracketRight.
+			39 . KeyboardKey quote. "=Apostrophe"
+			59 . KeyboardKey semicolon.
+			92 . KeyboardKey backslash.
+			"16r032 . KeyboardKey nonUsHash."
+			44 . KeyboardKey comma.
+			47 . KeyboardKey slash.
+			46 . KeyboardKey period.
+			96 . KeyboardKey grave.
 			
 			"16r41 KeypadDecimal
 			16r43 KeypadMultiply
@@ -167,9 +167,9 @@ BlOSWindowSDL2KeyboardKeyTable >> initializeVirtualKeyTable [
 
 { #category : #'api - converting' }
 BlOSWindowSDL2KeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
-	<return: #BlKeyboardKey>
+	<return: #KeyboardKey>
 
 	^ virtualKeyTable
 		at: aVirtualCode
-		ifAbsent: [ BlKeyboardKey unknown: aVirtualCode ]
+		ifAbsent: [ KeyboardKey new withValue: aVirtualCode ]
 ]

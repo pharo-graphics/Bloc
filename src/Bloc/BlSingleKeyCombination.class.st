@@ -77,7 +77,7 @@ BlSingleKeyCombination >> includes: aKey [
 
 { #category : #accessing }
 BlSingleKeyCombination >> key [
-	<return: #BlKeyboardKey>
+	<return: #KeyboardKey>
 
 	^ key
 ]

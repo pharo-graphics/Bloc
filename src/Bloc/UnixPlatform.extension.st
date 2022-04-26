@@ -3,6 +3,7 @@ Extension { #name : #UnixPlatform }
 { #category : #'*Bloc' }
 UnixPlatform >> blocKeyFor: aKeyValue in: aKeyTable [
 	<return: #BlKeyboardKey>
+	self deprecated: 'No more specific system keyboard management in bloc'.
 
 	^ aKeyTable valueForUnixPlatform: aKeyValue
 ]
@@ -10,15 +11,15 @@ UnixPlatform >> blocKeyFor: aKeyValue in: aKeyTable [
 { #category : #'*Bloc' }
 UnixPlatform >> primaryModifier [
 	^ BlAlternativeCombination new
-		key: BlKeyboardKey controlLeft;
-		key: BlKeyboardKey controlRight;
+		key: KeyboardKey controlLeft;
+		key: KeyboardKey controlRight;
 		yourself
 ]
 
 { #category : #'*Bloc' }
 UnixPlatform >> secondaryModifier [
 	^ BlAlternativeCombination new
-		key: BlKeyboardKey altLeft;
-		key: BlKeyboardKey altRight;
+		key: KeyboardKey altLeft;
+		key: KeyboardKey altRight;
 		yourself
 ]

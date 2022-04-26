@@ -28,14 +28,14 @@ BlKeyCombinationTest >> testKeyCodeCombination [
 	self setUp.
 	flag := false.
 	
-	buffer pressed: true key: BlKeyboardKey controlLeft.
-	buffer pressed: false key: BlKeyboardKey controlRight.
-	buffer pressed: true key: BlKeyboardKey altLeft.
-	buffer pressed: false key: BlKeyboardKey altRight.
-	buffer pressed: true key: BlKeyboardKey c.
+	buffer pressed: true key: KeyboardKey controlLeft.
+	buffer pressed: false key: KeyboardKey controlRight.
+	buffer pressed: true key: KeyboardKey altLeft.
+	buffer pressed: false key: KeyboardKey altRight.
+	buffer pressed: true key: KeyboardKey C.
 				
 	shortcut := BlShortcutWithAction new
-		combination: (BlKeyCombination builder alt; control; key: BlKeyboardKey c; build);
+		combination: (BlKeyCombination builder alt; control; key: KeyboardKey C; build);
 		action: [ flag := true ].
 
 	handler shortcutRegistry add: shortcut.
@@ -51,14 +51,14 @@ BlKeyCombinationTest >> testNoMatchKeyCodeCombination [
 	self setUp.
 	flag := false.
 	
-	buffer pressed: false key: BlKeyboardKey controlLeft.
-	buffer pressed: false key: BlKeyboardKey controlRight.
-	buffer pressed: true key: BlKeyboardKey altLeft.
-	buffer pressed: false key: BlKeyboardKey altRight.
-	buffer pressed: true key: BlKeyboardKey c.
+	buffer pressed: false key: KeyboardKey controlLeft.
+	buffer pressed: false key: KeyboardKey controlRight.
+	buffer pressed: true key: KeyboardKey altLeft.
+	buffer pressed: false key: KeyboardKey altRight.
+	buffer pressed: true key: KeyboardKey C.
 				
 	shortcut := BlShortcutWithAction new
-		combination: (BlKeyCombination builder alt; control; key: BlKeyboardKey c; build);
+		combination: (BlKeyCombination builder alt; control; key: KeyboardKey C; build);
 		action: [ flag := true ].
 
 	handler shortcutRegistry add: shortcut.
