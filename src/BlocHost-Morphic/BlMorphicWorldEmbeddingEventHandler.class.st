@@ -23,15 +23,15 @@ BlMorphicWorldEmbeddingEventHandler class >> initialize [
 	"
 	KeyCharacterMapping := Dictionary new.
 	
-	(($a to: $z) flatCollect: [ :c | { c asSymbol . c } ]),
+	(($A to: $Z) flatCollect: [ :c | { c asSymbol . c } ]),
 	{
 	#backspace . Character backspace.
 	#tab . Character tab.
 	#home . Character home.
-	#arrowLeft . Character arrowLeft.
-	#arrowUp . Character arrowUp.
-	#arrowRight . Character arrowRight.
-	#arrowDown . Character arrowDown.
+	#left . Character arrowLeft.
+	#up . Character arrowUp.
+	#right . Character arrowRight.
+	#down . Character arrowDown.
 	#end . Character end.
 	#pageUp . Character pageUp.
 	#pageDown . Character pageDown.
@@ -50,7 +50,7 @@ BlMorphicWorldEmbeddingEventHandler class >> initialize [
 	#slash . $/.
 	#backslash . $\.
 	#minus . $-.
-	#return . Character cr.
+	#enter . Character cr.
 	#period . $..
 	} pairsDo: [ :key :val | KeyCharacterMapping at: (KeyboardKey perform: key) put: val ]
 ]
