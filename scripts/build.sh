@@ -17,7 +17,7 @@ esac
 REPO_DIR="$(dirname "$SCRIPTS_DIR")"
 
 # Get a fresh image and load code
-curl https://get.pharo.org/64/100+vmLatest | bash
+curl https://get.pharo.org/64/110+vm | bash
 ./pharo Pharo.image eval --save "EpMonitor current disable"
-./pharo Pharo.image metacello install "tonel://$REPO_DIR/src" BaselineOfNewBloc
+./pharo Pharo.image metacello install "tonel://$REPO_DIR/src" BaselineOfBloc
 ./pharo Pharo.image eval --save "EpMonitor current enable"
