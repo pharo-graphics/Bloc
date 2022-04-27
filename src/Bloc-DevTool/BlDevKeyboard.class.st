@@ -83,7 +83,7 @@ BlDevKeyboard >> initializeFirstRow [
 	
 	self addButton: (self wideKey: 'tab' span: 1.45) key: KeyboardKey tab.
 	
-	theKeys := #(q w e r t y u i o p) collect: [ :each | KeyboardKey perform: each ].
+	theKeys := #(Q W E R T Y U I O P) collect: [ :each | KeyboardKey perform: each ].
 	theKeys do: [ :eachKey | self addButton: (self simpleKey: eachKey name) key: eachKey ].
 	
 	self addButton: (self simpleKey: '[') key: KeyboardKey bracketLeft.
@@ -106,7 +106,7 @@ BlDevKeyboard >> initializeSecondRow [
 	
 	self addButton: (self wideKey: 'capslock' span: 1.8) key: KeyboardKey capsLock.
 
-	theKeys := #(a s d f g h j k l) collect: [ :each | KeyboardKey perform: each ].
+	theKeys := #(A S D F G H J K L) collect: [ :each | KeyboardKey perform: each ].
 	theKeys do: [ :eachKey | self addButton: (self simpleKey: eachKey name) key: eachKey ].
 	
 	self addButton: (self simpleKey: ';') key: KeyboardKey semicolon.
@@ -120,7 +120,7 @@ BlDevKeyboard >> initializeThirdRow [
 	
 	self addButton: (self wideKey: 'shift' span: 2.42) key: KeyboardKey shiftLeft.
 	
-	theKeys := #(z x c v b n m) collect: [ :each | KeyboardKey perform: each ].
+	theKeys := #(Z X C V B N M) collect: [ :each | KeyboardKey perform: each ].
 	theKeys do: [ :eachKey | self addButton: (self simpleKey: eachKey name) key: eachKey ].
 	
 	self addButton: (self simpleKey: ',') key: KeyboardKey comma.
