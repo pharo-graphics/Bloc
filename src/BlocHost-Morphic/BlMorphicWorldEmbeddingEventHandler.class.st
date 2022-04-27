@@ -52,7 +52,7 @@ BlMorphicWorldEmbeddingEventHandler class >> initialize [
 	#minus . $-.
 	#return . Character cr.
 	#period . $..
-	} pairsDo: [ :key :val | KeyCharacterMapping at: (BlKeyboardKey perform: key) put: val ]
+	} pairsDo: [ :key :val | KeyCharacterMapping at: (KeyboardKey perform: key) put: val ]
 ]
 
 { #category : #converting }

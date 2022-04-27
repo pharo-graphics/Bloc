@@ -31,14 +31,14 @@ BlCompulsoryCombinationTest >> testKey [
 
 	self assert: combination combinations isEmpty.
 	
-	combination key: BlKeyboardKey a.
-	self assert: (combination combinations asArray collect: #key) equals: { BlKeyboardKey a }.
+	combination key: KeyboardKey A.
+	self assert: (combination combinations asArray collect: #key) equals: { KeyboardKey A }.
 	
-	combination key: BlKeyboardKey b.
-	self assert: (combination combinations asArray collect: #key) equals: { BlKeyboardKey a. BlKeyboardKey b }.
+	combination key: KeyboardKey B.
+	self assert: (combination combinations asArray collect: #key) equals: { KeyboardKey A. KeyboardKey B }.
 	
-	combination key: BlKeyboardKey c.
-	self assert: (combination combinations asArray collect: #key) equals: { BlKeyboardKey a. BlKeyboardKey b. BlKeyboardKey c }
+	combination key: KeyboardKey C.
+	self assert: (combination combinations asArray collect: #key) equals: { KeyboardKey A. KeyboardKey B. KeyboardKey C }
 ]
 
 { #category : #tests }
@@ -47,19 +47,19 @@ BlCompulsoryCombinationTest >> testMatch [
 	<noTest>
 	self setUp.
 	
-	buffer pressed: false key: BlKeyboardKey a.
-	buffer pressed: true key: BlKeyboardKey b.
-	buffer pressed: true key: BlKeyboardKey c.
+	buffer pressed: false key: KeyboardKey A.
+	buffer pressed: true key: KeyboardKey B.
+	buffer pressed: true key: KeyboardKey C.
 	
 	self assert: (combination match: buffer) equals: 0.
 
-	combination key: BlKeyboardKey c.
+	combination key: KeyboardKey C.
 	self assert: (combination match: buffer) equals: 0.
 	
-	combination key: BlKeyboardKey b.
+	combination key: KeyboardKey B.
 	self assert: (combination match: buffer) equals: 0.
 	
-	combination key: BlKeyboardKey a.
+	combination key: KeyboardKey A.
 	self assert: (combination match: buffer) equals: 0.
 ]
 
@@ -68,18 +68,18 @@ BlCompulsoryCombinationTest >> testMatches [
 	<gtExample>
 	self setUp.
 
-	buffer pressed: true key: BlKeyboardKey a.
-	buffer pressed: false key: BlKeyboardKey b.
-	buffer pressed: true key: BlKeyboardKey c.
+	buffer pressed: true key: KeyboardKey A.
+	buffer pressed: false key: KeyboardKey B.
+	buffer pressed: true key: KeyboardKey C.
 	
 	self assert: (combination matches: buffer) not.
 	
-	combination key: BlKeyboardKey a.
+	combination key: KeyboardKey A.
 	self assert: (combination matches: buffer) not.
 	
-	combination key: BlKeyboardKey c.
+	combination key: KeyboardKey C.
 	self assert: (combination matches: buffer).
 	
-	combination key: BlKeyboardKey b.
+	combination key: KeyboardKey B.
 	self assert: (combination matches: buffer) not
 ]

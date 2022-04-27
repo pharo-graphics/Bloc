@@ -40,16 +40,13 @@ BlMorphicEventHandler >> convertButtonFromMouseButtonEvent: aMorphicEvent [
 { #category : #converting }
 BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 
-	<return: #BlKeyboardKey>
+	<return: #KeyboardKey>
 	| aKeyValue aKey |
-	self flag: 'use of the morphicEvent key instead of #keyValue'.
-	aKeyValue := aMorphicEvent key value.
-	self flag: 'Host stuffs should be used instead (indirectly BlOSWindowSDL2KeyboardKeyTable)'.
-	aKey := BlMorphicKeyboardKeyTable default keyFromVirtualCode: aKeyValue.
+	aKey := aMorphicEvent key.
 	"on unix platorms, pressed shift changes the keycode"
 	OSPlatform current isUnix ifTrue: [ 
 		(aKey isShift not and: [ aMorphicEvent shiftPressed ]) ifTrue: [ 
-			{ (BlKeyboardKey tab -> BlKeyboardKey return) } asDictionary
+			{ (KeyboardKey tab -> KeyboardKey enter) } asDictionary
 				at: aKey
 				ifAbsent: [ aKey ] ] ].
 
@@ -119,12 +116,12 @@ BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 	| aBlEvent |
 	
 	aBlEvent := BlKeyDownEvent new
-		key: BlKeyboardKey backspace;
+		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 		timestamp: self time now.
 
-	self registerPressedKey: BlKeyboardKey backspace.
+	self registerPressedKey: KeyboardKey backspace.
 	self enqueue: aBlEvent
 ]
 
@@ -133,12 +130,12 @@ BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
 	| aBlEvent |
 
 	aBlEvent := BlKeyUpEvent new
-		key: BlKeyboardKey backspace;
+		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 		timestamp: self time now.
 
-	self unregisterPressedKey: BlKeyboardKey backspace.
+	self unregisterPressedKey: KeyboardKey backspace.
 	self enqueue: aBlEvent
 ]
 
@@ -147,12 +144,12 @@ BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 	| aBlEvent |
 
 	aBlEvent := BlKeyDownEvent new
-		key: BlKeyboardKey delete;
+		key: KeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 		timestamp: self time now.
 
-	self registerPressedKey: BlKeyboardKey delete.
+	self registerPressedKey: KeyboardKey delete.
 
 	self enqueue: aBlEvent
 ]
@@ -161,10 +158,10 @@ BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 BlMorphicEventHandler >> handleDeleteOrBackspaceDown: aMorphicEvent [
 
 	"we only allow either delete or backspace key"
-	(self hasPressedKey: BlKeyboardKey backspace)
+	(self hasPressedKey: KeyboardKey backspace)
 		ifTrue: [ ^ self ].
 		
-	(self hasPressedKey: BlKeyboardKey delete)
+	(self hasPressedKey: KeyboardKey delete)
 		ifTrue: [ ^ self ].
 	
 	aMorphicEvent keyCharacter = Character delete
@@ -177,10 +174,10 @@ BlMorphicEventHandler >> handleDeleteOrBackspaceDown: aMorphicEvent [
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleDeleteOrBackspaceUp: aMorphicEvent [
 
-	(self hasPressedKey: BlKeyboardKey delete)
+	(self hasPressedKey: KeyboardKey delete)
 		ifTrue: [ ^ self handleDeleteUp: aMorphicEvent ].
 
-	(self hasPressedKey: BlKeyboardKey backspace)
+	(self hasPressedKey: KeyboardKey backspace)
 		ifTrue: [ ^ self handleBackspaceUp: aMorphicEvent ]
 ]
 
@@ -189,12 +186,12 @@ BlMorphicEventHandler >> handleDeleteUp: aMorphicEvent [
 	| aBlEvent |
 
 	aBlEvent := BlKeyUpEvent new
-		key: BlKeyboardKey delete;
+		key: KeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 		timestamp: self time now.
 	
-	self unregisterPressedKey: BlKeyboardKey delete.
+	self unregisterPressedKey: KeyboardKey delete.
 	self enqueue: aBlEvent
 ]
 

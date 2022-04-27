@@ -322,6 +322,11 @@ BlKeyboardKey class >> i [
 	^ self named: #I
 ]
 
+{ #category : #testing }
+BlKeyboardKey class >> isDeprecated [ 
+	^ true
+]
+
 { #category : #'keys - letters' }
 BlKeyboardKey class >> j [
 	<return: #BlKeyboardKey>
