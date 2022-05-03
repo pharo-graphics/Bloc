@@ -11,11 +11,11 @@ It retrofits a part of the development made at https://github.com/feenkcom/bloc.
 
 ## Installation
 
-The following script installs Bloc in [Pharo 9 or 10](https://pharo.org/download):
+The following script installs Bloc in [Pharo 11](https://pharo.org/download):
 
 ```smalltalk
 Metacello new
-        baseline: 'NewBloc';
+        baseline: 'Bloc';
         repository: 'github://pharo-graphics/Bloc/src';
         load.
 ```
