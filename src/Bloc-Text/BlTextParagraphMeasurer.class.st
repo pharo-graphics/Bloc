@@ -12,7 +12,8 @@ Class {
 	#instVars : [
 		'maxHeight',
 		'maxWidth',
-		'textPosition'
+		'textPosition',
+		'line'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -20,15 +21,15 @@ Class {
 { #category : #accessing }
 BlTextParagraphMeasurer >> accumulatedHeight [
 	<return: #Number>
-	
-	^ self subclassResponsibility
+
+	^ self line height
 ]
 
 { #category : #accessing }
 BlTextParagraphMeasurer >> accumulatedWidth [
 	<return: #Number>
-	
-	^ self subclassResponsibility
+
+	^ self line width
 ]
 
 { #category : #'geometry - accessing' }
@@ -56,7 +57,13 @@ BlTextParagraphMeasurer >> initialize [
 	
 	maxWidth := Float infinity.
 	maxHeight := Float infinity.
-	textPosition := 0
+	textPosition := 0.
+	line := BlTextParagraphLine new
+]
+
+{ #category : #accessing }
+BlTextParagraphMeasurer >> line [
+	^ line
 ]
 
 { #category : #'paragraph - properties' }
@@ -110,8 +117,11 @@ BlTextParagraphMeasurer >> pushPosition: aNumber [
 ]
 
 { #category : #adding }
-BlTextParagraphMeasurer >> pushSpan: aSpan [
-	self subclassResponsibility
+BlTextParagraphMeasurer >> pushSpan: aParagraphSpan [
+	self line addSpan: aParagraphSpan.
+
+	"and move text position"
+	self pushPosition: aParagraphSpan spanLength - 1
 ]
 
 { #category : #'text - accessing' }

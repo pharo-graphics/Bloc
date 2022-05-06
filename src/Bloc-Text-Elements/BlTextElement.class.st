@@ -116,9 +116,8 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 { #category : #'private - paragraph' }
 BlTextElement >> createTextParagraph [
 	"Create a text paragraph used to measure and render text"
-	<return: #BlTextParagraph>
 
-	^ BlSingleLineTextParagraph new
+	^ BlTextParagraph new
 ]
 
 { #category : #'api - font size' }

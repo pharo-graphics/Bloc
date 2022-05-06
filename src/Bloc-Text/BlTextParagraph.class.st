@@ -45,17 +45,22 @@ Class {
 		'session',
 		'scale',
 		'selection',
-		'highlights'
+		'highlights',
+		'line'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
 { #category : #'paragraph - geometry' }
+BlTextParagraph >> advance [
+	^ self line advance
+]
+
+{ #category : #'paragraph - geometry' }
 BlTextParagraph >> ascent [
 	"Return an ascent of the first line in a paragraph"
-	<return: #Number>
-
-	^ self subclassResponsibility
+	
+	^ self line ascent
 ]
 
 { #category : #accessing }
@@ -75,11 +80,37 @@ BlTextParagraph >> baseline: aTextParagraphBaseline [
 { #category : #private }
 BlTextParagraph >> baselineChanged [
 	"Is sent when baseline needs to be recomputed"
-	self subclassResponsibility
+
+	self line baseline: self baseline
 ]
 
 { #category : #'paragraph - measuring' }
-BlTextParagraph >> basicMeasureOn: aBlHostTextMeasurer [
+BlTextParagraph >> basicMeasureOn: aSpanMeasurer [
+	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
+	| anIterator aMeasurer |
+
+	aMeasurer := self createMeasurer.
+	aMeasurer line paragraph: self.
+
+	(self text isEmpty) ifTrue: [ 
+		aMeasurer
+			measureSpan: (BlSpan text: self text empty attributes: #())
+			of: self
+			with: aSpanMeasurer ].
+
+	anIterator := text iterator.
+	[ anIterator hasNext and: [ line isEmpty or: [ aMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
+		"If we pass #hasNext check we will definitely move to the next span,
+		so can do the same with position"
+		aMeasurer movePosition: anIterator position + 1.
+		aMeasurer
+			measureSpan: anIterator nextSpan
+			of: self
+			with: aSpanMeasurer ].
+
+	"measurer creates a line with baseline set to 0@0"
+	line := aMeasurer line.
+	end := line to
 ]
 
 { #category : #'paragraph - geometry' }
@@ -92,7 +123,8 @@ BlTextParagraph >> bottom [
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> bounds [
-	^ self subclassResponsibility
+	
+	^ self line bounds
 ]
 
 { #category : #accessing }
@@ -115,7 +147,8 @@ BlTextParagraph >> createMeasurer [
 
 { #category : #initialization }
 BlTextParagraph >> defaultMeasurer [
-	^ self subclassResponsibility
+
+	^ BlTextParagraphMeasurer new
 ]
 
 { #category : #initialization }
@@ -126,9 +159,8 @@ BlTextParagraph >> defaultTabWidth [
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> descent [
 	"Return an descent of the last line in a paragraph"
-	<return: #Number>
 
-	^ self subclassResponsibility
+	^ self line descent
 ]
 
 { #category : #'paragraph - rendering' }
@@ -154,7 +186,8 @@ BlTextParagraph >> extent [
 { #category : #finalization }
 BlTextParagraph >> finalize [
 
-	self subclassResponsibility
+	line ifNotNil: #finalize.
+	line := nil
 ]
 
 { #category : #testing }
@@ -179,9 +212,8 @@ BlTextParagraph >> height [
 	Note: height may be greater than maxHeight. This may happen
 	if maxHeight is smaller than height of a single line or word or character.
 	We want to guarantee that at least something is displayed and measured."
-	<return: #Number>
 
-	^ self subclassResponsibility
+	^ self line height
 ]
 
 { #category : #'api - highlighting' }
@@ -230,9 +262,8 @@ BlTextParagraph >> initialize [
 BlTextParagraph >> isEmpty [
 	"Return true if I don't have any spans, false otherwise.
 	After measurement process there must be at least one (empty) span!"
-	<return: #Boolean>
 
-	^ self subclassResponsibility
+	^ self line isEmpty
 ]
 
 { #category : #testing }
@@ -257,9 +288,20 @@ BlTextParagraph >> isWhitespace: aCharacter [
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> left [
 	"Return a visual left coordinate of the text (left-most rendered pixel)"
-	<return: #Number>
 
-	^ self subclassResponsibility
+	^ self line left
+]
+
+{ #category : #accessing }
+BlTextParagraph >> line [
+	"Return a line behind this paragraph"
+
+	^ line
+]
+
+{ #category : #'paragraph - geometry' }
+BlTextParagraph >> looseBounds [
+	^ 0 @ 0 extent: self line advance @ (self ascent abs + self descent)
 ]
 
 { #category : #'paragraph - geometry' }
@@ -311,7 +353,7 @@ BlTextParagraph >> measuredEnd [
 
 { #category : #'paragraph - measuring' }
 BlTextParagraph >> normalize: aScale [
-	self subclassResponsibility
+	self line normalize: aScale
 ]
 
 { #category : #'paragraph - geometry' }
@@ -321,15 +363,6 @@ BlTextParagraph >> positionAt: anIndex [
 
 	aParagraphSpan := self spanAtIndex: anIndex.
 	^ aParagraphSpan positionAt: anIndex
-]
-
-{ #category : #'paragraph - rendering' }
-BlTextParagraph >> renderOn: aCanvas [ 
-	self 
-		deprecated: 'Use drawOn: instead'
-		on: 	'18 November 2017' 
-		in: 'Pharo-6.0-60520-'.
-	^ self drawOn: aCanvas 
 ]
 
 { #category : #initialization }
@@ -346,7 +379,11 @@ BlTextParagraph >> reset [
 	highlights := nil.
 	containerExtent := 0@0.
 	baseline := BlTextParagraphAscentLooseBaseline uniqueInstance.
-	scale := 1
+	scale := 1.
+	
+	line := BlTextParagraphLine new.
+	line baseline: self baseline.
+	line paragraph: self
 ]
 
 { #category : #'paragraph - geometry' }
@@ -403,8 +440,35 @@ BlTextParagraph >> skipWhitespaceIn: aString after: aStart [
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtIndex: anIndex [
 	<return: #BlTextParagraphSpan>
+
+	self
+		assert: [ self line isEmpty not ]
+		description: [ 'There must be at least one span!' ].
+		
+	self
+		assert: [ self text isNotEmpty or: [ anIndex isZero ] ]
+		description: [ 'If text is empty index must be zero' ].
+		
+	self
+		assert: [ self text isEmpty or: [ anIndex between: 0 and: self text size ] ]
+		description: [ 'anIndex must be within text bounds (0 is allowed)' ].
 	
-	^ self subclassResponsibility
+	anIndex isZero
+		ifTrue: [ ^ self line spans first ].
+		
+	anIndex = self text size
+		ifTrue: [ ^ self line spans last ].
+
+	^ self line spans
+		findBinary: [ :aParagraphSpan |
+			(anIndex between: aParagraphSpan from and: aParagraphSpan to )
+				ifTrue: [ 0 ]
+				ifFalse: [ | spanCenter |
+					spanCenter := aParagraphSpan from + ((aParagraphSpan to - aParagraphSpan from) // 2).
+					anIndex < spanCenter
+						ifTrue: [ -1 ]
+						ifFalse: [ 1 ] ] ]
+		ifNone: [ self error: 'Span for character at index ', anIndex asString, ' does not exist' ]
 ]
 
 { #category : #'paragraph - geometry' }
@@ -421,10 +485,23 @@ BlTextParagraph >> spanAtPoint: aPoint [
 BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Find a paragraph span that contains a given point given in a paragraph coordinates
 	and evaluate a found block if such span was found or evaluate an exception block
-	with the closed span to a point"
+	with the closest span to a point"
 	<return: #BlTextParagraphSpan>
-	
-	^ self subclassResponsibility
+
+	^ self line spans
+		findBinary: [ :aParagraphSpan |
+			| originX cornerX |
+			originX := aParagraphSpan baseline x.
+			cornerX := originX + aParagraphSpan advance.
+			(aPoint x between: originX and: cornerX )
+				ifTrue: [ 0 ]
+				ifFalse: [ | spanCenter |
+					spanCenter := originX + ((cornerX - originX) / 2.0).
+					aPoint x < spanCenter
+						ifTrue: [ -1 ]
+						ifFalse: [ 1 ] ] ]
+		do: [ :aParagraphSpan | aFoundBlock cull: aParagraphSpan ]
+		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
 ]
 
 { #category : #'paragraph - accessing' }
@@ -464,11 +541,15 @@ BlTextParagraph >> text: aBrText [
 ]
 
 { #category : #'paragraph - geometry' }
+BlTextParagraph >> tightBounds [
+	^ self line bounds translateBy: self baseline
+]
+
+{ #category : #'paragraph - geometry' }
 BlTextParagraph >> top [
 	"Return a visual top coordinate of the text (top-most rendered pixel)"
-	<return: #Number>
 
-	^ self subclassResponsibility
+	^ self line top
 ]
 
 { #category : #testing }
@@ -482,7 +563,6 @@ BlTextParagraph >> width [
 	Note: width may be greater than maxWidth. This may happen
 	if maxWidth is smaller than width of a single line or word or character.
 	We want to guarantee that at least something is displayed and measured."
-	<return: #Number>
 
-	^ self subclassResponsibility
+	^ self line width
 ]

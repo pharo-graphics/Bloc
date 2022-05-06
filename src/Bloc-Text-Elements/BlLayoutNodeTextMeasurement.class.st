@@ -71,7 +71,7 @@ BlLayoutNodeTextMeasurement >> computeMaxWidth: anExtentMeasurementSpec for: aLa
 
 { #category : #measure }
 BlLayoutNodeTextMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
-	<return: #BlLayoutNodeMeasurement>
+
 	| anExtentMeasurementSpec aWidthSpec aHeightSpec aMaxWidth aMaxHeight aPadding aParagraph aMeasuredBounds aMeasuredWidth aMeasuredHeight aMeasuredExtent |
 	
 	anExtentMeasurementSpec := anExtentSpecOrBlock value.
@@ -82,7 +82,7 @@ BlLayoutNodeTextMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlo
 	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec for: aLayoutChildNode.
 	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec for: aLayoutChildNode.
 
-	aParagraph := BlSingleLineTextParagraph new
+	aParagraph := BlTextParagraph new
 		baseline: self baseline;
 		text: self text;
 		maxWidth: aMaxWidth;
