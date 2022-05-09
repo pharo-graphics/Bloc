@@ -42,7 +42,10 @@ Class {
 
 { #category : #'instance creation' }
 BlTextAttributesStyler class >> on: aBlText [
-	^ self new text: aBlText
+
+	^ self new
+		  text: aBlText;
+		  yourself
 ]
 
 { #category : #accessing }

@@ -41,5 +41,6 @@ BlTextInputBuffer >> textInputEventsDo: aBlock [
 	inputs do: [ :eachAssoc |
 		aBlock value: (BlTextInputEvent new
 			text: eachAssoc key;
-			modifiers: eachAssoc value) ]
+			modifiers: eachAssoc value;
+			yourself) ]
 ]

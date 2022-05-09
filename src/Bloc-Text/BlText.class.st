@@ -324,7 +324,10 @@ BlText >> findAttributesSuchThat: aFilterBlock indicesDo: anIterationBlock [
 
 { #category : #'text - enumeration' }
 BlText >> finder [
-	^ BlPositionFinder new text: self
+
+	^ BlPositionFinder new
+		  text: self;
+		  yourself
 ]
 
 { #category : #'text - accessing' }
@@ -590,9 +593,10 @@ BlText >> readStream [
 { #category : #'text - copying' }
 BlText >> readonly [
 	"Return a readonly version of this text"
-	<return: #BlReadonlyText>
 
-	^ BlReadonlyText text: self
+	^ BlReadonlyText
+		  text: self;
+		  yourself
 ]
 
 { #category : #'text - attributes' }
@@ -676,9 +680,10 @@ BlText >> third [
 
 { #category : #'text - modifications' }
 BlText >> trimmer [
-	<return: #BlTextTrimmer>
 
-	^ BlTextTrimmer new text: self
+	^ BlTextTrimmer new
+		  text: self;
+		  yourself
 ]
 
 { #category : #'text - attributes' }

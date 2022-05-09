@@ -100,10 +100,7 @@ BlTextParagraphLine >> recomputeLineLayout [
 
 { #category : #hooks }
 BlTextParagraphLine >> spanAdded: aSpan [
-	
-	self
-		assert: [ aSpan == spans first ]
-		description: [ 'I can only be sent with the first span as argument' ].
+	"React to a span added. Note: aSpan must be the first span."
 
 	left := aSpan left.
 	top := aSpan top.

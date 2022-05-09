@@ -36,7 +36,8 @@ BlTextIndexEOS >> + aNumber [
 
 	^ self class new 
 		text: text;
-		offset: offset + aNumber
+		offset: offset + aNumber;
+		yourself
 ]
 
 { #category : #arithmetic }
@@ -44,7 +45,8 @@ BlTextIndexEOS >> - aNumber [
 
 	^ self class new 
 		text: text;
-		offset: offset - aNumber
+		offset: offset - aNumber;
+		yourself
 ]
 
 { #category : #arithmetic }

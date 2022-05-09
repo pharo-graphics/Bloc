@@ -1,5 +1,5 @@
 "
-I am a composite text selection consisting of multiple independent non-overlapping monotone text selections
+I am a composite text selection consisting of multiple independent non-overlapping monotone text selections.
 
 "
 Class {

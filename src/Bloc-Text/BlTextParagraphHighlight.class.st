@@ -1,3 +1,8 @@
+"
+I am a highlight on a composite text selection, which consists of multiple independent non-overlapping monotone text selections.
+
+My main collaborator is a `BlCompositeSelection`.
+"
 Class {
 	#name : #BlTextParagraphHighlight,
 	#superclass : #Object,
@@ -10,6 +15,7 @@ Class {
 
 { #category : #'api - highlighting' }
 BlTextParagraphHighlight >> highlight: aPaint from: aFromIndex to: aToIndex [
+
 	paint := aPaint.
 	selection select: aFromIndex to: aToIndex
 ]
@@ -24,10 +30,12 @@ BlTextParagraphHighlight >> initialize [
 
 { #category : #accessing }
 BlTextParagraphHighlight >> paint [
+
 	^ paint
 ]
 
 { #category : #accessing }
 BlTextParagraphHighlight >> selection [
+
 	^ selection
 ]

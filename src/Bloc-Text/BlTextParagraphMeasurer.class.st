@@ -1,14 +1,10 @@
 "
 I am text paragraph measurer. I keep track of available width, height, current measuring position.
 
-Additionally, depending on a paragraph type I may collect lines or spans. This behaviour should be inplemented in my paragraph sepecific subclass.
-
 "
 Class {
 	#name : #BlTextParagraphMeasurer,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'maxHeight',
 		'maxWidth',
@@ -20,35 +16,33 @@ Class {
 
 { #category : #accessing }
 BlTextParagraphMeasurer >> accumulatedHeight [
-	<return: #Number>
 
-	^ self line height
+	^ line height
 ]
 
 { #category : #accessing }
 BlTextParagraphMeasurer >> accumulatedWidth [
-	<return: #Number>
 
-	^ self line width
+	^ line width
 ]
 
 { #category : #'geometry - accessing' }
 BlTextParagraphMeasurer >> availableHeight [
+
 	^ maxHeight - self accumulatedHeight
 ]
 
 { #category : #'geometry - accessing' }
 BlTextParagraphMeasurer >> availableWidth [
+
 	^ maxWidth - self accumulatedWidth
 ]
 
 { #category : #'measurement - testing' }
 BlTextParagraphMeasurer >> hasAvailableSpace [
 	"Return true if I have space available for more spans, false otherwise"
-	<return: #Boolean>
 
-	^ self availableWidth > 0
-		and: [ self availableHeight > 0 ]
+	^ self availableWidth > 0 and: [ self availableHeight > 0 ]
 ]
 
 { #category : #initialization }
@@ -63,33 +57,38 @@ BlTextParagraphMeasurer >> initialize [
 
 { #category : #accessing }
 BlTextParagraphMeasurer >> line [
+
 	^ line
 ]
 
 { #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxHeight [
+
 	^ maxHeight
 ]
 
 { #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxHeight: aNumber [
+
 	maxHeight := aNumber
 ]
 
 { #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxWidth [
+
 	^ maxWidth
 ]
 
 { #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxWidth: aNumber [
+
 	maxWidth := aNumber
 ]
 
 { #category : #measurement }
 BlTextParagraphMeasurer >> measureSpan: aBlSpan of: aTextParagraph with: aBlHostTextMeasurer [
-	| aParagraphSpan |
 
+	| aParagraphSpan |
 	aParagraphSpan := aBlHostTextMeasurer measureTextSpan: aBlSpan.
 	aParagraphSpan span: aBlSpan.
 
@@ -103,22 +102,26 @@ BlTextParagraphMeasurer >> measureSpan: aBlSpan of: aTextParagraph with: aBlHost
 
 { #category : #accessing }
 BlTextParagraphMeasurer >> movePosition: aNumber [
+
 	textPosition := aNumber
 ]
 
 { #category : #'text - accessing' }
 BlTextParagraphMeasurer >> position [
+
 	^ textPosition
 ]
 
 { #category : #accessing }
 BlTextParagraphMeasurer >> pushPosition: aNumber [
+
 	textPosition := textPosition + aNumber
 ]
 
 { #category : #adding }
 BlTextParagraphMeasurer >> pushSpan: aParagraphSpan [
-	self line addSpan: aParagraphSpan.
+
+	line addSpan: aParagraphSpan.
 
 	"and move text position"
 	self pushPosition: aParagraphSpan spanLength - 1
@@ -126,15 +129,12 @@ BlTextParagraphMeasurer >> pushSpan: aParagraphSpan [
 
 { #category : #'text - accessing' }
 BlTextParagraphMeasurer >> textPosition [
+
 	^ textPosition
 ]
 
 { #category : #'text - accessing' }
-BlTextParagraphMeasurer >> textSize [
-	^ self text size
-]
-
-{ #category : #'text - accessing' }
 BlTextParagraphMeasurer >> textStart [
+
 	^ self textPosition
 ]
