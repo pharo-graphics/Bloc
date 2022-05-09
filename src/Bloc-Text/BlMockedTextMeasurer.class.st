@@ -94,8 +94,9 @@ BlMockedTextMeasurer >> initialize [
 ]
 
 { #category : #dispatch }
-BlMockedTextMeasurer >> measureTextParagraph: aBrTextParagraph [
-	aBrTextParagraph measureOn: self
+BlMockedTextMeasurer >> measureTextParagraph: aBlTextParagraph [
+
+	aBlTextParagraph measureOn: self
 ]
 
 { #category : #measurement }

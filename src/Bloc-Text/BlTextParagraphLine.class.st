@@ -28,9 +28,10 @@ BlTextParagraphLine class >> spans: aSpansCollection [
 ]
 
 { #category : #adding }
-BlTextParagraphLine >> addSpan: aBrTextParagraphSpan [
-	spans add: aBrTextParagraphSpan.
-	aBrTextParagraphSpan paragraph: self paragraph.
+BlTextParagraphLine >> addSpan: aBlTextParagraphSpan [
+
+	spans add: aBlTextParagraphSpan.
+	aBlTextParagraphSpan paragraph: self paragraph.
 
 	spans size = 1
 		ifTrue: [ self spanAdded: spans first ]

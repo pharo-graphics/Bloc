@@ -39,8 +39,11 @@ BlTextElement class >> initialize [
 ]
 
 { #category : #'instance creation' }
-BlTextElement class >> text: aBrText [
-	^ self new text: aBrText
+BlTextElement class >> text: aBlText [
+
+	^ self new
+		  text: aBlText;
+		  yourself
 ]
 
 { #category : #'private - paragraph' }

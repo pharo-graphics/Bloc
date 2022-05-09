@@ -22,12 +22,12 @@ BlWrappedText class >> new [
 ]
 
 { #category : #'instance creation' }
-BlWrappedText class >> text: aBrText [
+BlWrappedText class >> text: aBlText [
 	<return: #BlWrappedText>
 
 	^ self basicNew
 		initialize;
-		text: aBrText
+		text: aBlText
 ]
 
 { #category : #accessing }
@@ -148,12 +148,12 @@ BlWrappedText >> text [
 ]
 
 { #category : #accessing }
-BlWrappedText >> text: aBrText [
+BlWrappedText >> text: aBlText [
 	self
 		assert: [ text isNil ]
 		description: [ 'Can not change text once it is set. Create a new instance instead' ].
 		
-	text := aBrText
+	text := aBlText
 ]
 
 { #category : #'text - attributes' }

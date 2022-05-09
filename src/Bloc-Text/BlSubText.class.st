@@ -18,38 +18,38 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlSubText class >> empty: aBrText [
+BlSubText class >> empty: aBlText [
 	"Returns a sub-text that is backed up by an empty text"
 	<return: #BlSubText>
 	
-	aBrText isEmpty 
-		ifFalse: [ self error: 'Underlying text must be empty to create empty sub-text' ].
+	aBlText isEmpty ifFalse: [
+		self error: 'Underlying text must be empty to create empty sub-text' ].
 		
 	^ self
-		text: aBrText
+		text: aBlText
 		from: 1
 		to: 0
 ]
 
 { #category : #'instance creation' }
-BlSubText class >> text: aBrText [
+BlSubText class >> text: aBlText [
 	self
-		assert: [ (aBrText isKindOf: self) not ]
+		assert: [ (aBlText isKindOf: self) not ]
 		description: [ 'Can not create sub text of a subtext' ].
 
 	^ self new
-		text: aBrText from: 1 to: aBrText size;
+		text: aBlText from: 1 to: aBlText size;
 		yourself
 ]
 
 { #category : #'instance creation' }
-BlSubText class >> text: aBrText from: aStartIndex to: anEndIndex [
+BlSubText class >> text: aBlText from: aStartIndex to: anEndIndex [
 	self
-		assert: [ (aBrText isKindOf: self) not ]
+		assert: [ (aBlText isKindOf: self) not ]
 		description: [ 'Can not create sub text of a subtext' ].
 
 	^ self new
-		text: aBrText from: aStartIndex to: anEndIndex;
+		text: aBlText from: aStartIndex to: anEndIndex;
 		yourself
 ]
 
@@ -341,9 +341,9 @@ BlSubText >> text [
 ]
 
 { #category : #initialization }
-BlSubText >> text: aBrText from: aStartIndex to: anEndIndex [
+BlSubText >> text: aBlText from: aStartIndex to: anEndIndex [
 
-	text := aBrText.
+	text := aBlText.
 	start := aStartIndex.
 	end := anEndIndex.
 	
