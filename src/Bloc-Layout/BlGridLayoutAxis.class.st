@@ -295,7 +295,7 @@ BlGridLayoutAxis >> createArcs [
 	sMins := self topologicalSort: mins.
 	sMaxs := self topologicalSort: maxs.
 	
-	^ BlVector x: sMins y: sMaxs
+	^ sMins, sMaxs
 ]
 
 { #category : #'computing group bounds' }
