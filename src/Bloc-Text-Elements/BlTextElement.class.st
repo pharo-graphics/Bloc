@@ -15,10 +15,10 @@ Class {
 		'text',
 		'paragraph',
 		'selection',
-		'baseline',
 		'measurement',
 		'measurer',
-		'defaultFontSize'
+		'defaultFontSize',
+		'baselineMeasurer'
 	],
 	#classVars : [
 		'DefaultText',
@@ -59,13 +59,39 @@ BlTextElement >> acquireParagraph [
 
 { #category : #accessing }
 BlTextElement >> baseline [
+
+	self
+		deprecated: 'Please use baselineMeasurer instead.'
+		transformWith:
+			'`@receiver baseline'
+				-> '`@receiver baselineMeasurer'.
 	
-	^ baseline
+	^ self baselineMeasurer
 ]
 
 { #category : #accessing }
-BlTextElement >> baseline: aTextParagraphBaseline [
-	baseline := aTextParagraphBaseline.
+BlTextElement >> baseline: aBlTextParagraphBaselineMeasurer [
+
+	self
+		deprecated: 'Please use baselineMeasurer: instead.'
+		transformWith:
+			'`@receiver baseline: `@statements1'
+				-> '`@receiver baselineMeasurer: `@statements1'.
+
+	self baselineMeasurer: aBlTextParagraphBaselineMeasurer.
+
+]
+
+{ #category : #accessing }
+BlTextElement >> baselineMeasurer [
+	
+	^ baselineMeasurer
+]
+
+{ #category : #accessing }
+BlTextElement >> baselineMeasurer: aBlTextParagraphBaselineMeasurer [
+
+	baselineMeasurer := aBlTextParagraphBaselineMeasurer.
 	self textChanged
 ]
 
@@ -159,8 +185,10 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 
 { #category : #'api - text' }
 BlTextElement >> editorMeasurement [
-	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
-	self baseline: BlTextParagraphAscentLooseBaseline uniqueInstance
+
+	self measurement:
+		BlTextElementEditorMeasurementStrategy uniqueInstance.
+	self baselineMeasurer: BlAscentLooseBaselineMeasurer uniqueInstance
 ]
 
 { #category : #geometry }
@@ -192,8 +220,10 @@ BlTextElement >> initialize [
 
 { #category : #'api - text' }
 BlTextElement >> labelMeasurement [
-	self measurement: BlTextElementLabelMeasurementStrategy uniqueInstance.
-	self baseline: BlTextParagraphAscentTightBaseline uniqueInstance
+
+	self measurement:
+		BlTextElementLabelMeasurementStrategy uniqueInstance.
+	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
 ]
 
 { #category : #layout }
@@ -225,14 +255,15 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 
 { #category : #layout }
 BlTextElement >> measureParagraph: anExtentMeasurementSpec [
+
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
-	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
 
+	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
 	aWidthSpec := anExtentMeasurementSpec widthSpec.
 	aHeightSpec := anExtentMeasurementSpec heightSpec.
 	aPadding := self constraints padding.
-	
+
 	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
 	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
 
@@ -243,14 +274,14 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 		ifNotNil: [ paragraph reset ].
 
 	paragraph
-		baseline: self baseline;
+		baseline: self baselineMeasurer;
 		text: self text;
 		maxWidth: aMaxWidth;
 		maxHeight: aMaxHeight;
 		scale: self globalScale.
 
 	self telemetry
-		timeSync: [ 'Paragraph measureOn: ', self class name ]
+		timeSync: [ 'Paragraph measureOn: ' , self class name ]
 		during: [ self basicMeasureParagraph: paragraph ].
 
 	"text layout is measured at this point"
@@ -259,20 +290,20 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 	aMeasuredHeight := aMeasuredBounds height min: aMaxHeight.
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
-	aWidthSpec isExact ifTrue: [ 
-		aMeasuredWidth := aWidthSpec size ].
-	aHeightSpec isExact ifTrue: [ 
-		aMeasuredHeight := aHeightSpec size ].
+	aWidthSpec isExact ifTrue: [ aMeasuredWidth := aWidthSpec size ].
+	aHeightSpec isExact ifTrue: [ aMeasuredHeight := aHeightSpec size ].
 
 	"Take minimal width and height into account"
-	aMeasuredWidth := aMeasuredWidth max: self constraints minWidth - aPadding width.
-	aMeasuredHeight := aMeasuredHeight max: self constraints minHeight - aPadding height.
+	aMeasuredWidth := aMeasuredWidth max:
+		self constraints minWidth - aPadding width.
+	aMeasuredHeight := aMeasuredHeight max:
+		self constraints minHeight - aPadding height.
 	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
 	"Take padding into account"
 	aMeasuredExtent := aMeasuredExtent + (aPadding width @ aPadding height).
 
 	"Finally set measured extent"
-	self measuredExtent: aMeasuredExtent.
+	self measuredExtent: aMeasuredExtent
 ]
 
 { #category : #accessing }
@@ -501,6 +532,8 @@ BlTextElement >> textDo: aBlock [
 
 { #category : #'api - text' }
 BlTextElement >> tightMeasurement [
-	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
-	self baseline: BlTextParagraphBoundsBaseline uniqueInstance
+
+	self measurement:
+		BlTextElementTightMeasurementStrategy uniqueInstance.
+	self baselineMeasurer: BlBoundsBaselineMeasurer uniqueInstance
 ]

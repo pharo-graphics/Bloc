@@ -371,7 +371,7 @@ BlTextParagraph >> reset [
 	selection := nil.
 	highlights := nil.
 	containerExtent := 0@0.
-	baseline := BlTextParagraphAscentLooseBaseline uniqueInstance.
+	baseline := BlAscentLooseBaselineMeasurer uniqueInstance.
 	scale := 1.
 	
 	line := BlTextParagraphLine new.

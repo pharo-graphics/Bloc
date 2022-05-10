@@ -12,7 +12,7 @@ Class {
 
 { #category : #accessing }
 BlLayoutNodeTextMeasurement >> baseline [
-	<return: #BlTextParagraphBaseline>
+	<return: #BlTextParagraphBaselineMeasurer>
 
 	^ baseline
 ]

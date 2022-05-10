@@ -6,7 +6,7 @@ The baseline is the line upon which most letters ""sit"" and below which descend
 
 "
 Class {
-	#name : #BlTextParagraphBaseline,
+	#name : #BlTextParagraphBaselineMeasurer,
 	#superclass : #Object,
 	#classInstVars : [
 		'uniqueInstance'
@@ -15,19 +15,19 @@ Class {
 }
 
 { #category : #cleanup }
-BlTextParagraphBaseline class >> cleanUp [
+BlTextParagraphBaselineMeasurer class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
 { #category : #accessing }
-BlTextParagraphBaseline class >> uniqueInstance [
+BlTextParagraphBaselineMeasurer class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
 { #category : #baseline }
-BlTextParagraphBaseline >> computedBaseline: aTextParagraph [
+BlTextParagraphBaselineMeasurer >> computedBaseline: aTextParagraph [
 	<return: #Point>
 	
 	^ self subclassResponsibility

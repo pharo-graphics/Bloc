@@ -1,17 +1,11 @@
-"
-I am a baseline which is computed based on ascent property of the paragraph
-
-
-"
 Class {
 	#name : #BlTextParagraphAscentLooseBaseline,
-	#superclass : #BlTextParagraphBaseline,
-	#category : #'Bloc-Text-Text-Paragraph'
+	#superclass : #BlAscentLooseBaselineMeasurer,
+	#category : #'Bloc-Text-Text-Paragraph-Deprecated'
 }
 
-{ #category : #baseline }
-BlTextParagraphAscentLooseBaseline >> computedBaseline: aTextParagraph [
-	<return: #Point>
+{ #category : #testing }
+BlTextParagraphAscentLooseBaseline class >> isDeprecated [
 
-	^ 0 @ aTextParagraph ascent abs
+	^ true
 ]
