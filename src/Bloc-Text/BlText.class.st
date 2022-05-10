@@ -592,11 +592,10 @@ BlText >> readStream [
 
 { #category : #'text - copying' }
 BlText >> readonly [
+
 	"Return a readonly version of this text"
 
-	^ BlReadonlyText
-		  text: self;
-		  yourself
+	^ BlReadonlyText text: self
 ]
 
 { #category : #'text - attributes' }
