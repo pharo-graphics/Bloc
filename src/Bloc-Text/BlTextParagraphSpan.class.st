@@ -25,7 +25,6 @@ Class {
 
 { #category : #accessing }
 BlTextParagraphSpan >> advance [
-	<return: #Number>
 
 	^ advance
 ]
@@ -67,9 +66,8 @@ BlTextParagraphSpan >> finalize [
 { #category : #geometry }
 BlTextParagraphSpan >> indexAtPosition: aPoint [
 	"I return a cursor index at a given position as a Point provided in local coordinates of this span"
-	<return: #Number>
-	| aWidth aMeasurer |
 
+	| aWidth aMeasurer |
 	aWidth := aPoint x max: 0.
 	aMeasurer := self measurer.
 
@@ -145,36 +143,39 @@ BlTextParagraphSpan >> isSplitted [
 	"Return true if span I measure is splitted right after me. This may happen
 	if a single span does not fit in a line and we have to push next paragraph span
 	on the next paragraph line"
-	<return: #Boolean>
 	
 	^ false
 ]
 
 { #category : #testing }
 BlTextParagraphSpan >> isVertical [
+
 	^ isVertical
 ]
 
 { #category : #accessing }
 BlTextParagraphSpan >> measurer [
+
 	^ measurer
 ]
 
 { #category : #initialization }
 BlTextParagraphSpan >> measurer: aSpanMeasurer [
+
 	measurer := aSpanMeasurer
 ]
 
 { #category : #accessing }
 BlTextParagraphSpan >> metrics [
+
 	^ super metrics, { 'Advance' -> self advance }
 ]
 
 { #category : #measurement }
 BlTextParagraphSpan >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
-	| newLeft newTop |
 
+	| newLeft newTop |
 	newLeft := left floorTicks: aScale.
 	newTop := top floorTicks: aScale.
 
@@ -189,14 +190,19 @@ BlTextParagraphSpan >> normalize: aScale [
 
 { #category : #accessing }
 BlTextParagraphSpan >> paragraph: aTextParagraph [
+
 	super paragraph: aTextParagraph.
 
-	self attributes do: [ :eachAttribute | eachAttribute applyOnTextParagraph: aTextParagraph from: self from to: self to ]
+	self attributes do: [ :eachAttribute | 
+		eachAttribute
+			applyOnTextParagraph: aTextParagraph
+			from: self from
+			to: self to ]
 ]
 
 { #category : #geometry }
 BlTextParagraphSpan >> positionAt: anIndex [
-	<return: #Point>
+
 	| aSpanIndex aSubSpan aMeasuredSpan aMeasurer aPositionY aPositionX |
 
 	aPositionY := self baseline y.
@@ -222,6 +228,7 @@ BlTextParagraphSpan >> positionAt: anIndex [
 
 { #category : #printing }
 BlTextParagraphSpan >> printOn: aStream [
+
 	span
 		ifNil: [ aStream nextPutAll: '(not yet initialized)' ]
 		ifNotNil: [ aStream print: span ]
@@ -230,28 +237,25 @@ BlTextParagraphSpan >> printOn: aStream [
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> span [
 	"Return an underlying text span that I represent"
-	<return: #BlSpan>
 
 	^ span
 ]
 
 { #category : #initialization }
-BlTextParagraphSpan >> span: aBrSpan [
+BlTextParagraphSpan >> span: aBlSpan [
 	"Assign an attributed text span with corresponding start and end indices which I measure"
 	
-	span := aBrSpan
+	span := aBlSpan
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanEnd [
-	<return: #Number>
 
 	^ span size
 ]
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanLength [
-	<return: #Number>
 
 	^ (self spanStart isZero and: [ self spanEnd isZero ])
 		ifTrue: [ 0 ]
@@ -260,18 +264,19 @@ BlTextParagraphSpan >> spanLength [
 
 { #category : #'accessing - span' }
 BlTextParagraphSpan >> spanStart [
-	<return: #Number>
 
 	^ 1 min: span size
 ]
 
 { #category : #accessing }
 BlTextParagraphSpan >> strikethroughOffset [
+
 	^ strikethroughOffset
 ]
 
 { #category : #accessing }
 BlTextParagraphSpan >> strikethroughSize [
+
 	^ strikethroughSize
 ]
 
@@ -284,7 +289,8 @@ BlTextParagraphSpan >> text: aBlText from: aGlobalTextStart to: aGlobalTextEnd [
 ]
 
 { #category : #'accessing - text run' }
-BlTextParagraphSpan >> textRun [	
+BlTextParagraphSpan >> textRun [
+
 	^ textRun
 ]
 

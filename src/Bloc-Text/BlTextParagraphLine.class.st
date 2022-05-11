@@ -62,7 +62,6 @@ BlTextParagraphLine >> initialize [
 
 { #category : #testing }
 BlTextParagraphLine >> isEmpty [
-	<return: #Boolean>
 	
 	^ self spans isEmpty
 ]

@@ -14,6 +14,14 @@ Class {
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
+{ #category : #'instance creation' }
+BlTextParagraphMeasurer class >> newFor: aBlTextParagraph [
+
+	^ self basicNew
+		initializeWith: aBlTextParagraph;
+		yourself
+]
+
 { #category : #accessing }
 BlTextParagraphMeasurer >> accumulatedHeight [
 
@@ -46,13 +54,18 @@ BlTextParagraphMeasurer >> hasAvailableSpace [
 ]
 
 { #category : #initialization }
-BlTextParagraphMeasurer >> initialize [
-	super initialize.
+BlTextParagraphMeasurer >> initializeWith: aBlTextParagraph [ 
+
+	self initialize.
 	
-	maxWidth := Float infinity.
-	maxHeight := Float infinity.
+	maxWidth := aBlTextParagraph maxWidth.
+	maxHeight := aBlTextParagraph maxHeight.
+
 	textPosition := 0.
-	line := BlTextParagraphLine new
+
+	line := BlTextParagraphLine new.
+	line paragraph: aBlTextParagraph.
+
 ]
 
 { #category : #accessing }
@@ -68,21 +81,9 @@ BlTextParagraphMeasurer >> maxHeight [
 ]
 
 { #category : #'paragraph - properties' }
-BlTextParagraphMeasurer >> maxHeight: aNumber [
-
-	maxHeight := aNumber
-]
-
-{ #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxWidth [
 
 	^ maxWidth
-]
-
-{ #category : #'paragraph - properties' }
-BlTextParagraphMeasurer >> maxWidth: aNumber [
-
-	maxWidth := aNumber
 ]
 
 { #category : #measurement }

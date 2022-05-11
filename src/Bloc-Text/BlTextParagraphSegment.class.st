@@ -25,21 +25,18 @@ Class {
 
 { #category : #accessing }
 BlTextParagraphSegment >> advance [
-	<return: #Number>
 
 	^ advance
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> ascent [
-	<return: #Number>
 
 	^ ascent
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> baseline [
-	<return: #Point>
 
 	^ baseline
 ]
@@ -51,21 +48,18 @@ BlTextParagraphSegment >> baseline: aPoint [
 
 { #category : #accessing }
 BlTextParagraphSegment >> bounds [
-	<return: #Rectangle>
 
 	^ self origin extent: self extent
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> descent [
-	<return: #Number>
 
 	^ descent
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> extent [
-	<return: #Point>
 
 	^ self width @ self height
 ]
@@ -79,7 +73,6 @@ BlTextParagraphSegment >> from [
 
 { #category : #accessing }
 BlTextParagraphSegment >> height [
-	<return: #Number>
 
 	^ height
 ]
@@ -102,7 +95,6 @@ BlTextParagraphSegment >> initialize [
 
 { #category : #accessing }
 BlTextParagraphSegment >> left [
-	<return: #Number>
 	
 	^ left
 ]
@@ -110,7 +102,6 @@ BlTextParagraphSegment >> left [
 { #category : #accessing }
 BlTextParagraphSegment >> metrics [
 	"Return a dictionary with segment metrics"
-	<return: #Dictionary>
 	
 	^ {
 		'Ascent' -> self ascent.
@@ -131,7 +122,6 @@ BlTextParagraphSegment >> normalize: aScale [
 
 { #category : #accessing }
 BlTextParagraphSegment >> origin [
-	<return: #Point>
 
 	^ left @ top
 ]
@@ -144,14 +134,13 @@ BlTextParagraphSegment >> paragraph [
 ]
 
 { #category : #accessing }
-BlTextParagraphSegment >> paragraph: aTextParagraph [
+BlTextParagraphSegment >> paragraph: aBlTextParagraph [
 
-	paragraph := aTextParagraph
+	paragraph := aBlTextParagraph
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> right [
-	<return: #Number>
 	
 	^ left + width
 ]
@@ -165,14 +154,12 @@ BlTextParagraphSegment >> to [
 
 { #category : #accessing }
 BlTextParagraphSegment >> top [
-	<return: #Number>
 	
 	^ top
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> width [
-	<return: #Number>
 
 	^ width
 ]

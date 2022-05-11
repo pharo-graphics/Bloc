@@ -90,11 +90,7 @@ BlTextParagraph >> basicMeasureOn: aSpanMeasurer [
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 
 	| anIterator aMeasurer |
-	aMeasurer := BlTextParagraphMeasurer new
-		  maxWidth: maxWidth;
-		  maxHeight: maxHeight;
-		  yourself.
-	aMeasurer line paragraph: self.
+	aMeasurer := BlTextParagraphMeasurer newFor: self.
 
 	(self text isEmpty) ifTrue: [
 		aMeasurer
@@ -357,6 +353,18 @@ BlTextParagraph >> positionAt: anIndex [
 	^ aParagraphSpan positionAt: anIndex
 ]
 
+{ #category : #printing }
+BlTextParagraph >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		print: text;
+		nextPut: $)
+
+]
+
 { #category : #initialization }
 BlTextParagraph >> reset [
 
@@ -438,10 +446,10 @@ BlTextParagraph >> spanAtIndex: anIndex [
 	<return: #BlTextParagraphSpan>
 
 	anIndex isZero
-		ifTrue: [ ^ self line spans first ].
+		ifTrue: [ ^ line spans first ].
 		
 	anIndex = self text size
-		ifTrue: [ ^ self line spans last ].
+		ifTrue: [ ^ line spans last ].
 
 	^ line spans
 		findBinary: [ :aParagraphSpan |
