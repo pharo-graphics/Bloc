@@ -17,8 +17,7 @@ Class {
 		'span',
 		'measurer',
 		'strikethroughOffset',
-		'strikethroughSize',
-		'isVertical'
+		'strikethroughSize'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -131,13 +130,6 @@ BlTextParagraphSpan >> indexAtPosition: aPoint [
 			self from + spanIndex - 1 ]
 ]
 
-{ #category : #initialization }
-BlTextParagraphSpan >> initialize [
-	super initialize.
-	
-	isVertical := false
-]
-
 { #category : #testing }
 BlTextParagraphSpan >> isSplitted [
 	"Return true if span I measure is splitted right after me. This may happen
@@ -150,7 +142,7 @@ BlTextParagraphSpan >> isSplitted [
 { #category : #testing }
 BlTextParagraphSpan >> isVertical [
 
-	^ isVertical
+	^ false
 ]
 
 { #category : #accessing }

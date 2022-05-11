@@ -2,32 +2,25 @@ Extension { #name : #BlTextParagraphSpan }
 
 { #category : #'*Bloc-Sparta' }
 BlTextParagraphSpan >> applySpartaMetrics: aSpMetrics [
+
 	| aFontMetrics aTextMetrics |
+	baseline := 0@0.
 
+	"Set font metrics (which are independendent from the particular string)"
 	aFontMetrics := aSpMetrics fontMetrics.
-	aTextMetrics := aSpMetrics textMetrics.
-
-	isVertical := false.
-
 	ascent := aFontMetrics ascent.
 	descent := aFontMetrics descent.
-
 	strikethroughOffset := aFontMetrics strikeoutOffset.
 	strikethroughSize := aFontMetrics strikeoutSize.
 
+	"Set text metrics (which are particular to a string)"
+	aTextMetrics := aSpMetrics textMetrics.
 	left :=  aTextMetrics left.
-	top := isVertical
-		ifTrue: [ aTextMetrics left ]
-		ifFalse: [ aTextMetrics top ].
-	width := isVertical
-		ifTrue: [ aTextMetrics height ]
-		ifFalse: [ aTextMetrics width ].
-	height := isVertical
-		ifTrue: [ aTextMetrics width ]
-		ifFalse: [ aTextMetrics height ].
-	
+	top := aTextMetrics top.
+	width := aTextMetrics width.
+	height := aTextMetrics height.
 	advance := aTextMetrics advance.
-	baseline := 0@0
+
 ]
 
 { #category : #'*Bloc-Sparta' }
