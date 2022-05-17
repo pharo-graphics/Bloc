@@ -268,13 +268,12 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
 
 	paragraph
-		"Create a new text layout"
-		ifNil: [ paragraph := self acquireParagraph ]
-		"or reuse existing"
+		ifNil: [ "or reuse existing" paragraph := self acquireParagraph ]
 		ifNotNil: [ paragraph reset ].
+	"Create a new text layout"
 
 	paragraph
-		baseline: self baselineMeasurer;
+		baselineMeasurer: self baselineMeasurer;
 		text: self text;
 		maxWidth: aMaxWidth;
 		maxHeight: aMaxHeight;
@@ -295,12 +294,13 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 
 	"Take minimal width and height into account"
 	aMeasuredWidth := aMeasuredWidth max:
-		self constraints minWidth - aPadding width.
+		                  self constraints minWidth - aPadding width.
 	aMeasuredHeight := aMeasuredHeight max:
-		self constraints minHeight - aPadding height.
+		                   self constraints minHeight - aPadding height.
 	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
 	"Take padding into account"
-	aMeasuredExtent := aMeasuredExtent + (aPadding width @ aPadding height).
+	aMeasuredExtent := aMeasuredExtent
+	                   + (aPadding width @ aPadding height).
 
 	"Finally set measured extent"
 	self measuredExtent: aMeasuredExtent

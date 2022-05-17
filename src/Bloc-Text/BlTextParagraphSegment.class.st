@@ -43,6 +43,7 @@ BlTextParagraphSegment >> baseline [
 
 { #category : #accessing }
 BlTextParagraphSegment >> baseline: aPoint [
+
 	baseline := aPoint
 ]
 

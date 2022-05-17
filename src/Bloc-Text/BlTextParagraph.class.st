@@ -35,7 +35,6 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'baseline',
 		'maxHeight',
 		'maxWidth',
 		'end',
@@ -46,7 +45,8 @@ Class {
 		'scale',
 		'selection',
 		'highlights',
-		'line'
+		'line',
+		'baselineMeasurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -68,21 +68,34 @@ BlTextParagraph >> ascent [
 BlTextParagraph >> baseline [
 	<return: #Point>
 
-	^ baseline computedBaseline: self
+	^ baselineMeasurer computedBaseline: self
 ]
 
 { #category : #'api - instantiation' }
-BlTextParagraph >> baseline: aTextParagraphBaseline [
+BlTextParagraph >> baseline: aBlTextParagraphBaselineMeasurer [
 
-	baseline := aTextParagraphBaseline.
-	self baselineChanged
+	self
+		deprecated: 'Please use baselineMeasurer: instead.'
+		transformWith:
+			'`@receiver baseline: `@statements1'
+				-> '`@receiver baselineMeasurer: `@statements1'.
+
+	self baselineMeasurer: aBlTextParagraphBaselineMeasurer.
+
 ]
 
 { #category : #private }
 BlTextParagraph >> baselineChanged [
-	"Is sent when baseline needs to be recomputed"
+	"I should be sent when baseline needs to be recomputed"
 
 	line baseline: self baseline
+]
+
+{ #category : #'api - instantiation' }
+BlTextParagraph >> baselineMeasurer: aBlTextParagraphBaselineMeasurer [
+
+	baselineMeasurer := aBlTextParagraphBaselineMeasurer.
+	self baselineChanged
 ]
 
 { #category : #'paragraph - measuring' }
@@ -92,7 +105,7 @@ BlTextParagraph >> basicMeasureOn: aSpanMeasurer [
 	| anIterator aMeasurer |
 	aMeasurer := BlTextParagraphMeasurer newFor: self.
 
-	(self text isEmpty) ifTrue: [
+	self text isEmpty ifTrue: [
 		aMeasurer
 			measureSpan: (BlSpan text: self text empty attributes: #())
 			of: self
@@ -379,7 +392,7 @@ BlTextParagraph >> reset [
 	selection := nil.
 	highlights := nil.
 	containerExtent := 0@0.
-	baseline := BlAscentLooseBaselineMeasurer uniqueInstance.
+	baselineMeasurer := BlAscentLooseBaselineMeasurer uniqueInstance.
 	scale := 1.
 	
 	line := BlTextParagraphLine new.
