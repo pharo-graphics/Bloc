@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTextIteratorExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Text-Examples-Model'
 }
 

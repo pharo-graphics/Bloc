@@ -1,6 +1,6 @@
 Class {
 	#name : #BlSubTextExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Text-Examples-Model'
 }
 

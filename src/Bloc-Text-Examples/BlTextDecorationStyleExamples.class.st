@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTextDecorationStyleExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Text-Examples-Model'
 }
 

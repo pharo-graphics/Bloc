@@ -13,7 +13,7 @@ In addition to the simple API an underline attribute can be customized and then 
 "
 Class {
 	#name : #BlTextUnderlineAttributeExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Text-Examples-Model'
 }
 

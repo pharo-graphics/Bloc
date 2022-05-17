@@ -27,7 +27,7 @@ Now let's compare all text measurement strategies:
 "
 Class {
 	#name : #BlTextElementMeasurementStrategyExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Text-Examples-Measurement'
 }
 
@@ -54,20 +54,21 @@ BlTextElementMeasurementStrategyExamples >> measurementDifference [
 
 { #category : #example }
 BlTextElementMeasurementStrategyExamples >> textElementWithEditorMeasurement [
+
 	<gtExample>
 	| textElement |
 	textElement := BlTextElementExamples new textElement.
-	textElement
-		border: (BlBorder paint: (Color red darker alpha: 0.6) width: 1).
+	textElement border:
+		(BlBorder paint: (Color red darker alpha: 0.6) width: 1).
 	textElement text
 		background: (Color red alpha: 0.4);
 		attribute: (BlTextUnderlineAttribute new color: Color red).
-		
+
 	textElement editorMeasurement.
-	
+
 	self
-		assert: textElement baseline
-		equals: BlTextParagraphAscentLooseBaseline uniqueInstance.
+		assert: textElement baselineMeasurer
+		equals: BlAscentLooseBaselineMeasurer uniqueInstance.
 	self
 		assert: textElement measurement
 		equals: BlTextElementEditorMeasurementStrategy uniqueInstance.
@@ -76,20 +77,21 @@ BlTextElementMeasurementStrategyExamples >> textElementWithEditorMeasurement [
 
 { #category : #example }
 BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
+
 	<gtExample>
 	| textElement |
 	textElement := BlTextElementExamples new textElement.
-	textElement
-		border: (BlBorder paint: (Color red darker alpha: 0.6) width: 1).
+	textElement border:
+		(BlBorder paint: (Color red darker alpha: 0.6) width: 1).
 	textElement text
 		background: (Color red alpha: 0.4);
 		attribute: (BlTextUnderlineAttribute new color: Color red).
-		
+
 	textElement labelMeasurement.
-	
+
 	self
-		assert: textElement baseline
-		equals: BlTextParagraphAscentTightBaseline uniqueInstance.
+		assert: textElement baselineMeasurer
+		equals: BlAscentTightBaselineMeasurer uniqueInstance.
 	self
 		assert: textElement measurement
 		equals: BlTextElementLabelMeasurementStrategy uniqueInstance.
@@ -98,20 +100,21 @@ BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
 
 { #category : #example }
 BlTextElementMeasurementStrategyExamples >> textElementWithTightMeasurement [
+
 	<gtExample>
 	| textElement |
 	textElement := BlTextElementExamples new textElement.
-	textElement
-		border: (BlBorder paint: (Color blue darker alpha: 0.6) width: 1).
+	textElement border:
+		(BlBorder paint: (Color blue darker alpha: 0.6) width: 1).
 	textElement text
 		background: (Color blue alpha: 0.4);
 		attribute: (BlTextUnderlineAttribute new color: Color blue).
-		
+
 	textElement tightMeasurement.
-	
+
 	self
-		assert: textElement baseline
-		equals: BlTextParagraphBoundsBaseline uniqueInstance.
+		assert: textElement baselineMeasurer
+		equals: BlBoundsBaselineMeasurer uniqueInstance.
 	self
 		assert: textElement measurement
 		equals: BlTextElementTightMeasurementStrategy uniqueInstance.
