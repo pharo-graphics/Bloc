@@ -118,17 +118,7 @@ BlTextParagraphLine >> spanAdded: aSpan [
 
 { #category : #hooks }
 BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
-	aLastSpan isVertical
-		ifTrue: [ aPreviousSpan isVertical
-			ifTrue: [ self spanAddedVertical: aLastSpan afterVertical: aPreviousSpan ]
-			ifFalse: [ self spanAddedVertical: aLastSpan afterHorizontal: aPreviousSpan ] ]
-		ifFalse: [ aPreviousSpan isVertical
-			ifTrue: [ self spanAddedHorizontal: aLastSpan afterVertical: aPreviousSpan ]
-			ifFalse: [ self spanAddedHorizontal: aLastSpan afterHorizontal: aPreviousSpan ] ]
-]
 
-{ #category : #hooks }
-BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterHorizontal: aPreviousSpan [
 	| previousBottom newBottom |
 
 	aLastSpan baseline: aPreviousSpan baseline + (aPreviousSpan advance @ 0).
@@ -145,21 +135,6 @@ BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterHorizontal: aPrevious
 	descent := descent max: aLastSpan descent.
 
 	to := aLastSpan to
-]
-
-{ #category : #hooks }
-BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterVertical: aPreviousSpan [
-	self shouldBeImplemented
-]
-
-{ #category : #hooks }
-BlTextParagraphLine >> spanAddedVertical: aLastSpan afterHorizontal: aPreviousSpan [
-	self shouldBeImplemented
-]
-
-{ #category : #hooks }
-BlTextParagraphLine >> spanAddedVertical: aLastSpan afterVertical: aPreviousSpan [
-	self shouldBeImplemented
 ]
 
 { #category : #accessing }

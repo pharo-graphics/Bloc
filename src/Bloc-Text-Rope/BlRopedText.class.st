@@ -59,16 +59,18 @@ BlRopedText >> at: anIndex [
 
 { #category : #'text - attributes' }
 BlRopedText >> attributes: anAttributesCollection [
+
 	| aNewRope |
-	
 	aNewRope := rope attributes: anAttributesCollection.
-	aNewRope == rope
-		ifTrue: [ ^ self ].
+	aNewRope == rope ifTrue: [ ^ self ].
 
 	self rope: aNewRope.
 
-	anAttributesCollection do: [ :eachAttribute |
-		self notifyAttributeAdded: eachAttribute from: (1 min: aNewRope size) to: aNewRope size ]
+	anAttributesCollection do: [ :eachAttribute | 
+		self
+			notifyAttributeAdded: eachAttribute
+			from: (1 min: aNewRope size)
+			to: aNewRope size ]
 ]
 
 { #category : #'text - attributes' }
