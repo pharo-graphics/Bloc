@@ -32,3 +32,8 @@ BlElementNoId >> asSymbol [
 BlElementNoId >> hash [
 	^ self class hash
 ]
+
+{ #category : #testing }
+BlElementNoId >> isNoId [
+	^ true
+]

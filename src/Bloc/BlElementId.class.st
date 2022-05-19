@@ -54,6 +54,11 @@ BlElementId >> isIndexed [
 	^ false
 ]
 
+{ #category : #testing }
+BlElementId >> isNoId [
+	^ false
+]
+
 { #category : #printing }
 BlElementId >> printOn: aStream [
 	self class isAbstract

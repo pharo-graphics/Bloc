@@ -2981,7 +2981,11 @@ BlElement >> printOn: aStream [
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: ' @ ';
-		store: self identityHash;
+		store: self identityHash.
+		
+	self id isNoId ifTrue: [ ^self ].
+
+	aStream
 		space;
 		nextPut: $(;
 		print: self id;
