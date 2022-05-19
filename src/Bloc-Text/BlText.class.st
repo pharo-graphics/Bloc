@@ -570,7 +570,12 @@ BlText >> postCopy [
 { #category : #'text - printing' }
 BlText >> printOn: aStream [
 
-	BlTextNonPrintableCharacterPrinter print: self on: aStream
+	super printOn: aStream.
+
+	aStream nextPut: $(.
+	BlTextNonPrintableCharacterPrinter print: self on: aStream.
+	aStream nextPut: $).
+
 ]
 
 { #category : #'text - printing' }
