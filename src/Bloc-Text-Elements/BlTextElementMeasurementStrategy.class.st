@@ -19,9 +19,9 @@ BlTextElementMeasurementStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #measuring }
 BlTextElementMeasurementStrategy >> boundsOf: aParagraph [
-	<return: #BlBounds>
+	"Answer an instance of BlBounds corresponding to aParagraph."
 
 	^ self subclassResponsibility
 ]
