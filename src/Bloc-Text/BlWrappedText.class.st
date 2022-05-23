@@ -106,7 +106,6 @@ BlWrappedText >> generation [
 
 { #category : #'text - testing' }
 BlWrappedText >> isEmpty [
-	<return: #Boolean>
 	
 	^ self text isEmpty
 ]
@@ -129,7 +128,6 @@ BlWrappedText >> iterator: aStartIndex to: anEndIndex [
 
 { #category : #'text - accessing' }
 BlWrappedText >> size [
-	<return: #Number>
 
 	^ self text size
 ]
@@ -142,7 +140,6 @@ BlWrappedText >> suspendAnnouncementsWhile: aBlock [
 
 { #category : #accessing }
 BlWrappedText >> text [
-	<return: #BlText>
 
 	^ text
 ]

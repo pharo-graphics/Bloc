@@ -23,8 +23,7 @@ BlSpan class >> text: aBlText attributes: theAttributes [
 
 { #category : #'span - accessing' }
 BlSpan >> attributes [
-	"Return a set of attributes applied on this span"
-	<return: #Set of: #BlTextAttribute>
+	"Return a collection of attributes that apply on this span"
 
 	^ attributes
 ]

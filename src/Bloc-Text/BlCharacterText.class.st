@@ -44,7 +44,6 @@ BlCharacterText >> asString [
 	"I return an original String representaion of this text.
 	It is guaranteed that the size of the resulting string is the same
 	as of this text"
-	<return: #String>
 
 	^ String streamContents: [ :aStream |
 		self do: [ :aCharacter | aStream nextPut: aCharacter ] ]

@@ -454,7 +454,6 @@ BlTextElement >> selection [
 
 { #category : #layout }
 BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
-	<return: #Boolean>
 
 	paragraph
 		ifNil: [ ^ true ].
@@ -484,9 +483,8 @@ BlTextElement >> supportsBaseline [
 { #category : #accessing }
 BlTextElement >> text [
 	"Return the text I currently represent.
-	Note, that I work with immutable text (BrText), so if you want to change or style text
+	Note, that I work with immutable text (BlText), so if you want to change or style text
 	you have to set manually sending #text: message with new styled text model"
-	<return: #BlText>
 	
 	^ text
 ]
@@ -496,14 +494,6 @@ BlTextElement >> text: aBlText [
 	"Change a text I represent.
 	Note, that aTextModel should be an instance of BrText.
 	aTextModel must not be nil"
-
-	self
-		assert: [ aBlText isNotNil ]
-		description: [ 'A text must not be nil' ].
-		
-	self
-		assert: [ aBlText isKindOf: BlText ]
-		description: [ 'A text must be an instance of Text' ].
 
 	text = aBlText
 		ifTrue: [ ^ self ].
