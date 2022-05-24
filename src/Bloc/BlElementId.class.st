@@ -49,6 +49,12 @@ BlElementId >> indexed: anIndex [
 		index: anIndex
 ]
 
+{ #category : #converting }
+BlElementId >> isBlocElementId [
+
+	^ true
+]
+
 { #category : #testing }
 BlElementId >> isIndexed [
 	^ false

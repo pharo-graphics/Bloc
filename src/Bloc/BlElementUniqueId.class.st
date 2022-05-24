@@ -48,6 +48,7 @@ BlElementUniqueId class >> uniqueInstance [
 
 { #category : #comparing }
 BlElementUniqueId >> = anObject [
+
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
