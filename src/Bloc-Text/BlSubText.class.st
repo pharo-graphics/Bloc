@@ -191,15 +191,6 @@ BlSubText >> end [
 	^ end
 ]
 
-{ #category : #accessing }
-BlSubText >> end: anIndex [ 
-	self 
-		deprecated: 'Use start:end: instead'
-		on: 	'7 August 2017' 
-		in: 'Pharo-7.0-0-SNAPSHOT'.
-	^ self start: start end: anIndex 
-]
-
 { #category : #'text - accessing' }
 BlSubText >> from: aStart to: anEnd [
 	self assertInvariant.
@@ -303,15 +294,6 @@ BlSubText >> start [
 	<return: #Number>
 
 	^ start
-]
-
-{ #category : #accessing }
-BlSubText >> start: anIndex [
-	self 
-		deprecated: 'Use start:end: instead'
-		on: 	'7 August 2017' 
-		in: 'Pharo-7.0-0-SNAPSHOT'.
-	^ self start: anIndex end: end 
 ]
 
 { #category : #initialization }
