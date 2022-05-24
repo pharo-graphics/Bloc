@@ -52,7 +52,7 @@ BlSubText class >> text: aBlText from: aStartIndex to: anEndIndex [
 BlSubText >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
+	(anotherObject = self class)
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject start = self start
@@ -68,10 +68,6 @@ BlSubText >> assertInvariant [
 { #category : #asserting }
 BlSubText >> assertStart: aStartIndex end: anEndIndex [
 
-	self
-		assert: [ text isNotNil ]
-		description: [ 'Text must not be nil' ].
-		
 	aStartIndex isZero
 		ifTrue: [ BlTextOutOfBoundsError signal: ('Start index ({1}) must not be zero' format: { aStartIndex }) ].
 

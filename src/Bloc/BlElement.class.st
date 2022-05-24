@@ -2146,22 +2146,11 @@ BlElement >> localBoundsToGlobal: aBounds [
 BlElement >> localBoundsToMine: aBlBounds fromChild: anElement [
 	"In-place transform provided bounds from coordinate system of a given descendant element
 	to my local coordinates and return a result"
-	<return: #BlBounds>
+
 	| aParentElement |
-	
-	self
-		assert: [ aBlBounds isKindOf: BlBounds ]
-		description: [ 'Bounds should be {1} but was {2}' format: { BlBounds . aBlBounds class } ].
-	
-	anElement == self
-		ifTrue: [ ^ aBlBounds ].
+	anElement == self ifTrue: [ ^ aBlBounds ].
 		
-	self
-		assert: [ anElement hasParent: self ]
-		description: [ 'A child element must be my descentant (be in my children composition tree)' ].
-	
 	aParentElement := anElement.
-	
 	[
 		aParentElement localBoundsToParent: aBlBounds.
 		aParentElement := aParentElement parent

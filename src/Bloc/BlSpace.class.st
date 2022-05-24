@@ -1392,10 +1392,7 @@ BlSpace >> loseFocusFor: anElement [
 
 { #category : #'change - rendering' }
 BlSpace >> makeDirty: aBlBounds [
-
-	self
-		assert: [ aBlBounds isKindOf: BlBounds ]
-		description: [ 'Only BlBounds can be used as dirty area' ].
+	"Add the provided BlBounds to the the dirty area"
 
 	aBlBounds expanded.
 	self dirtyAreas

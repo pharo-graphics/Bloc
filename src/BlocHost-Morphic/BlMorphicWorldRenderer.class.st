@@ -14,7 +14,8 @@ Class {
 
 { #category : #accessing }
 BlMorphicWorldRenderer class >> isApplicableFor: aWorld [
-	^ aWorld isKindOf: BlMorphicWorldMorph
+
+	^ aWorld class = BlMorphicWorldMorph
 ]
 
 { #category : #accessing }
