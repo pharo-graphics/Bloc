@@ -27,7 +27,7 @@ BlMouseNamedButton class >> uniqueInstance [
 BlMouseNamedButton >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	^ anotherObject isKindOf: self class
+	^ anotherObject class = self class
 ]
 
 { #category : #comparing }

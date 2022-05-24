@@ -39,7 +39,7 @@ BlExtentMeasurementSpec class >> unspecified [
 BlExtentMeasurementSpec >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
+	(anotherObject class = self class)
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject widthSpec = widthSpec

@@ -49,15 +49,14 @@ BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 ]
 
 { #category : #'api - event managing' }
-BlSharedEventDistributor >> dispatch: anEvent on: anElement [
+BlSharedEventDistributor >> dispatch: aBlEvent on: anElement [
 	| aNewEvent |
 
-	shouldHandle
-		ifFalse: [ ^ self ].
+	shouldHandle ifFalse: [ ^ self ].
 	
-	aNewEvent := anEvent newCopyFor: anElement.
-	(anEvent isKindOf: BlUIEvent) ifTrue: [
-		self adjustPosition: aNewEvent from: anEvent ].
+	aNewEvent := aBlEvent newCopyFor: anElement.
+	aBlEvent isUIEvent ifTrue: [
+		self adjustPosition: aNewEvent from: aBlEvent ].
 
 	shouldHandle := false.
 	[ anElement dispatchEvent: aNewEvent ]
