@@ -183,6 +183,13 @@ BlRopedText >> empty [
 	^ self class string: ''
 ]
 
+{ #category : #'text - converting' }
+BlRopedText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+	"Encode my rope on a ByteStream using the provided Zinc encoder."
+
+	rope encodeOn: aWriteStream with: aZnCharacterEncoder
+]
+
 { #category : #'text - enumeration' }
 BlRopedText >> from: aFromIndex to: aToIndex do: aBlock [
 

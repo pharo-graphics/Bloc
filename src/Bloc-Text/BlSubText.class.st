@@ -180,6 +180,13 @@ BlSubText >> empty [
 	^ self text empty
 ]
 
+{ #category : #'text - converting' }
+BlSubText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+
+	self do: [ :each | 
+		aZnCharacterEncoder nextPut: each toStream: aWriteStream ]
+]
+
 { #category : #accessing }
 BlSubText >> end [
 	<return: #Number>

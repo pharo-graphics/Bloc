@@ -58,7 +58,9 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Text-Rope' with: [
 					spec requires: #('Bloc' 'Bloc-Text') ];
 				package: #'Bloc-Text-Elements' with: [
-					spec requires: #('Bloc' 'Bloc-Text') ].
+					spec requires: #('Bloc' 'Bloc-Text') ];
+				package: #'Bloc-Text-Rope-Tests' with: [
+					spec requires: #('Bloc-Text-Rope') ].
 
 			"Sparta"
 			spec 

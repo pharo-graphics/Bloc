@@ -267,6 +267,13 @@ BlText >> empty [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'text - converting' }
+BlText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+	"Encode myself on a ByteString stream using the provided Zinc encoder."
+	
+	self subclassResponsibility 
+]
+
 { #category : #'text - notifying' }
 BlText >> ensureAnnouncer [
 	announcer ifNil: [ announcer := BlTextAnnouncer new ]
