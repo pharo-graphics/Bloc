@@ -15,6 +15,21 @@ BlRopedTextTest >> helloWorldWithAttributes [
 ]
 
 { #category : #tests }
+BlRopedTextTest >> testDuplicatedAttributes [
+
+	| text attributes |
+	text := (BlRopedText string: 'asd')
+		attributes:{
+			BlTextForegroundAttribute paint: Color green. 
+			BlTextForegroundAttribute paint: Color blue };
+		yourself.
+
+	attributes := text iterator attributes.
+	self assert: attributes size equals: 1.
+	self assert: attributes first paint equals: Color blue.
+]
+
+{ #category : #tests }
 BlRopedTextTest >> testUTF8RopedText [
 
 	| utf8Array |
