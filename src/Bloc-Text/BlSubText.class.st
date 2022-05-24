@@ -33,9 +33,7 @@ BlSubText class >> empty: aBlText [
 
 { #category : #'instance creation' }
 BlSubText class >> text: aBlText [
-	self
-		assert: [ (aBlText isKindOf: self) not ]
-		description: [ 'Can not create sub text of a subtext' ].
+	"Answer a new instance from aBlText. The argument should not be a BlSubText"
 
 	^ self new
 		text: aBlText from: 1 to: aBlText size;
@@ -44,9 +42,6 @@ BlSubText class >> text: aBlText [
 
 { #category : #'instance creation' }
 BlSubText class >> text: aBlText from: aStartIndex to: anEndIndex [
-	self
-		assert: [ (aBlText isKindOf: self) not ]
-		description: [ 'Can not create sub text of a subtext' ].
 
 	^ self new
 		text: aBlText from: aStartIndex to: anEndIndex;

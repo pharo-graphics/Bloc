@@ -15,6 +15,7 @@ Class {
 
 { #category : #'instance creation' }
 BlSubRope class >> combineScoped: aLeftRope and: aRightRope [
+
 	^ self
 		rope: aLeftRope rope
 		offset: aLeftRope offset
@@ -23,6 +24,7 @@ BlSubRope class >> combineScoped: aLeftRope and: aRightRope [
 
 { #category : #'instance creation' }
 BlSubRope class >> rope: aRope offset: anOffset length: aLength [
+
 	^ self new
 		rope: aRope offset: anOffset length: aLength;
 		yourself

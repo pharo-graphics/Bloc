@@ -14,28 +14,24 @@ Class {
 
 { #category : #'instance creation' }
 BlCollectionRope class >> collection: aCollection [
-	^ self new collection: aCollection
+
+	^ self new
+		  collection: aCollection;
+		  yourself
 ]
 
 { #category : #'instance creation' }
-BlCollectionRope class >> from: aLeftRope and: aRightRope [
-	| aNewSpecies |
+BlCollectionRope class >> from: leftCollectionRope and: rightCollectionRope [
 
-	self
-		assert: [ aLeftRope species = self collectionRope ]
-		description: [ 'Can only merge two collection ropes' ].
-	
-	self
-		assert: [ aRightRope species = self collectionRope ]
-		description: [ 'Can only merge two collection ropes' ].
-	
-	aNewSpecies := aLeftRope collection species = aRightRope collection species
-		ifTrue: [ aLeftRope collection species ]
-		ifFalse: [ Array ].
+	| aNewSpecies |
+	aNewSpecies :=
+		leftCollectionRope collection species =  rightCollectionRope collection species
+			ifTrue: [ leftCollectionRope collection species ]
+			ifFalse: [ Array ].
 	
 	^ self collection: (aNewSpecies streamContents: [ :aStream |
-		aLeftRope do: [ :eachItem | aStream nextPut: eachItem ].
-		aRightRope do: [ :eachItem | aStream nextPut: eachItem ] ])
+		leftCollectionRope do: [ :eachItem | aStream nextPut: eachItem ].
+		rightCollectionRope do: [ :eachItem | aStream nextPut: eachItem ] ])
 ]
 
 { #category : #'rope - accessing' }

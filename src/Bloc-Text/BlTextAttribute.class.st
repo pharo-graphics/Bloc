@@ -111,6 +111,14 @@ BlTextAttribute >> mayHaveExternalReferences [
 	^ false
 ]
 
+{ #category : #comparing }
+BlTextAttribute >> ropeAttributeType [
+	"Return an object that is used to compare attribute by type
+	The rule is the following: attributes of the same type must overwrite each other."
+	
+	^ self type
+]
+
 { #category : #printing }
 BlTextAttribute >> storeOn: aStream [
 	aStream

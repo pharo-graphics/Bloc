@@ -93,7 +93,6 @@ BlText >> asArray [
 BlText >> asString [
 	"I return an original String representaion of this text.
 	It is guaranteed that the size of the resulting string is the same as of this text"
-	<return: #String>
 
 	^ String streamContents: [ :aStream |
 		self do: [ :aCharacter | aStream nextPut: aCharacter ] ]
@@ -348,16 +347,7 @@ BlText >> from: aStart to: anEnd [
 	"Create and return a subtext of this text form aStart to anEnd.
 	Note: All modifications that are happening to the subtext automatically
 	applied on this original text"
-	<return: #BlSubText>
 	
-	self
-		assert: [ aStart <= (anEnd + 1) ]
-		description: [ 'Start must not exceed end' ].
-		
-	self
-		assert: [ self isNotEmpty or: [ aStart = 1 and: [ anEnd isZero ] ] ]
-		description: [ 'If I am empty then start must be 1 and end must be zero' ].
-
 	^ BlSubText text: self from: aStart to: anEnd
 ]
 
