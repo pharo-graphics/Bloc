@@ -74,3 +74,19 @@ BlSubTextTest >> testInsertOutOfBoundsSignalsError [
 	self assert: aSubText size equals: 0.
 
 ]
+
+{ #category : #tests }
+BlSubTextTest >> testUtf8Encoded [
+
+	| aNumber aString aRopedText |
+	aNumber := 7.
+	aString := 'Hello World'.
+	aRopedText := (BlRopedText string: aString)
+		foreground: Color red; "Just to add complexity"
+		yourself.
+
+	self
+		assert: (aRopedText first: aNumber) utf8Encoded
+		equals: (aString first: aNumber) utf8Encoded
+
+]

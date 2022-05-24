@@ -35,6 +35,13 @@ BlSpan >> attributesFinder [
 		interval: ((1 min: self size) to: self size)
 ]
 
+{ #category : #'text - converting' }
+BlSpan >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+	"Encode myself on a ByteString stream using the provided Zinc encoder."
+	
+	text encodeOn: aWriteStream with: aZnCharacterEncoder
+]
+
 { #category : #initialization }
 BlSpan >> text: aBlText attributes: theAttributes [
 
