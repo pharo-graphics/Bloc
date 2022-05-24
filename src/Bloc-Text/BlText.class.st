@@ -715,6 +715,16 @@ BlText >> unsubscribe: anObject [
 	self announcerDo: [ :anAnnouncer | anAnnouncer unsubscribe: anObject ]
 ]
 
+{ #category : #'text - converting' }
+BlText >> utf8Encoded [
+	"Answer a ByteArray encoding the receiver using UTF-8."
+
+	^ ByteArray new: (self size + 2) * 4 streamContents: [ :stream |
+		self
+			encodeOn: stream
+			with: ZnUTF8Encoder default ]
+]
+
 { #category : #'text - notifying' }
 BlText >> when: anAnnouncementClass do: aValuable [
 	self ensureAnnouncer.
