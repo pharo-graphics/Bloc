@@ -24,6 +24,14 @@ BlHostRendererSurface class >> allSurfaces [
 	^ self allSubclasses
 ]
 
+{ #category : #'instance creation' }
+BlHostRendererSurface class >> newForHostSpace: aBlHostSpace [
+
+	^ self new
+		  initializeForHostSpace: aBlHostSpace;
+		  yourself
+]
+
 { #category : #testing }
 BlHostRendererSurface class >> supportedBy: anObject [
 	"Return true if a given object supports this surface, false otherwise"
@@ -45,8 +53,7 @@ BlHostRendererSurface >> createSpaceRendererOn: anObject [
 ]
 
 { #category : #initialization }
-BlHostRendererSurface >> createSurfaceRendererOn: anObject [
-	<return: #BlHostSurfaceRenderer>
+BlHostRendererSurface >> createSurfaceRendererOn: aBlHostSpace [
 
 	^ self subclassResponsibility
 ]
@@ -82,6 +89,22 @@ BlHostRendererSurface >> logicalSize [
 	<return: #FensterLogicalSize>
 
 	^ self physicalSize asLogical: self scaleFactor
+]
+
+{ #category : #initialization }
+BlHostRendererSurface >> newSpaceRendererOn: aBlHostSpace [
+
+	^ (self createSpaceRendererOn: aBlHostSpace)
+		initializeForSurface: self;
+		yourself
+]
+
+{ #category : #initialization }
+BlHostRendererSurface >> newSurfaceRendererOn: aBlHostSpace [
+
+	^ (self createSurfaceRendererOn: aBlHostSpace)
+		initializeForSurface: self;
+		yourself
 ]
 
 { #category : #'api - updates' }
