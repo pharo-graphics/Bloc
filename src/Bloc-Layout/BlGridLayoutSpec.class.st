@@ -204,15 +204,10 @@ BlGridLayoutSpec >> hash [
 ]
 
 { #category : #initialization }
-BlGridLayoutSpec >> setAlignment: anAlignment span: aSpan startDefined: isStartDefined weight: aWeight [
-
-	"Debugging internal implementation"
-	self
-		assert: [ aSpan isKindOf: BlGridLayoutInterval ]
-		description: [ 'Span must be a special type of Interval' ].
+BlGridLayoutSpec >> setAlignment: anAlignment span: aBlGridLayoutInterval startDefined: isStartDefined weight: aWeight [
 
 	alignment := anAlignment.
-	span := aSpan.
+	span := aBlGridLayoutInterval.
 	startDefined := isStartDefined.
 	weight := aWeight
 ]
