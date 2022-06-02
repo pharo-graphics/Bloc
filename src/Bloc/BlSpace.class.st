@@ -1423,10 +1423,16 @@ BlSpace >> maximized [
 ]
 
 { #category : #pulse }
-BlSpace >> measureTextParagraph: aBlTextParagraph ifNotAvailable: aBlock [
+BlSpace >> measureTextParagraph: aBlTextParagraph [
+
 	self
-		hostSpaceDo: [ :aHostSpace | aHostSpace measureTextParagraph: aBlTextParagraph ]
-		ifAbsent: aBlock
+		hostSpaceDo: [ :aHostSpace | 
+			aHostSpace renderer isValid ifTrue: [
+				^ aHostSpace renderer measureTextParagraph: aBlTextParagraph ] ]
+		ifAbsent: [ ].
+
+	"TODO"
+	host offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
 { #category : #'api - displaying' }

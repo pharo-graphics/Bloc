@@ -161,11 +161,6 @@ TBlHostSpace >> maximized [
 	^ self explicitRequirement
 ]
 
-{ #category : #'host space - rendering' }
-TBlHostSpace >> measureTextParagraph: aBlTextParagraph [
-	self renderer measureTextParagraph: aBlTextParagraph
-]
-
 { #category : #'host space - displaying' }
 TBlHostSpace >> minimize [
 
