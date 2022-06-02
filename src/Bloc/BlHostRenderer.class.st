@@ -63,7 +63,6 @@ BlHostRenderer >> isRenderNeeded: aSpace [
 
 { #category : #testing }
 BlHostRenderer >> isValid [
-	<return: #Boolean>
 
 	session == Smalltalk session
 		ifFalse: [ ^ false ].
@@ -79,6 +78,7 @@ BlHostRenderer >> isValid [
 
 { #category : #rendering }
 BlHostRenderer >> measureTextParagraph: aBlTextParagraph [
+
 	textMeasurer measureTextParagraph: aBlTextParagraph
 ]
 

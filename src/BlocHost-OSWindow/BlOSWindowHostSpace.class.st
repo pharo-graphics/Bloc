@@ -115,7 +115,9 @@ BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
 		description: [ 'Window must be nil or invalid' ].
 
 	window := OSWindow createWithAttributes: initialAttributes.
-	window eventHandler: ((BlOSWindowEventHandler window: self) keyboardKeyTable: keyboardKeyTable).
+	window 
+		eventHandler: ((BlOSWindowEventHandler window: self)
+		keyboardKeyTable: keyboardKeyTable).
 	window startTextInput.
 	window newBlocRenderer.
 	
@@ -252,6 +254,6 @@ BlOSWindowHostSpace >> title: aString [
 BlOSWindowHostSpace >> windowExtent: newExtent [
 	"Change window size to a newExtent"
 
-	self logicalSize width @ self logicalSize height ~= newExtent
+	self logicalSize asPoint ~= newExtent
 		ifTrue: [ window extent: newExtent ]
 ]

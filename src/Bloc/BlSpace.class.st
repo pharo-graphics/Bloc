@@ -1172,8 +1172,8 @@ BlSpace >> host [
 { #category : #'host space - accessing' }
 BlSpace >> host: aHost [
 	"Change the host of this space. Asynchronous. If the space is opened, first destroy the host window and then open the space with a new host"
-	| aDetachedEventHandler |
 
+	| aDetachedEventHandler |
 	aDetachedEventHandler := nil.
 
 	aDetachedEventHandler := BlEventHandler
@@ -1198,10 +1198,6 @@ BlSpace >> hostSpace: aHostSpace [
 	"Assign a host space window that will be a source of UI events
 	and will provide a rendering surface on which I will be rendered.
 	aHostSpace must not be nil"
-
-	self
-		assert: [ aHostSpace isNotNil ]
-		description: [ 'Host space must not be nil!' ].
 
 	hostSpace := aHostSpace.
 	self hostSpaceChanged.

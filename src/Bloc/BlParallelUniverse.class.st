@@ -412,20 +412,12 @@ BlParallelUniverse >> openSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
-
 	aSpace isOpened
 		ifTrue: [ ^ self ].
 
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host space!' ].
-
-	self
-		assert: [ aSpace host isNotNil ]
-		description: [ 'Space must have a host' ].
 
 	"First of all we need to add space to the space manager"
 	spaceManager addSpace: aSpace.
@@ -447,10 +439,6 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 		universeId: self id;
 		spaceId: aSpace id) emit.
 
-	self
-		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host!' ].
-		
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
 	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).

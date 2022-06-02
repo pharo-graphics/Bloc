@@ -26,7 +26,11 @@ Class {
 
 { #category : #'instance creation' }
 BlHostPulseLoop class >> forHost: aHostClass [
-	^ self basicNew initialize hostClass: aHostClass
+
+	^ self basicNew
+		  initialize;
+		  hostClass: aHostClass;
+		  yourself
 ]
 
 { #category : #'instance creation' }
