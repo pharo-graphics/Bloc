@@ -52,7 +52,7 @@ BlSubText class >> text: aBlText from: aStartIndex to: anEndIndex [
 BlSubText >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject = self class)
+	(anotherObject class = self class)
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject start = self start
