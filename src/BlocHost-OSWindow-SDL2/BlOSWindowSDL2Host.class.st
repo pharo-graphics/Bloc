@@ -37,6 +37,12 @@ BlOSWindowSDL2Host class >> priority [
 	^ 400
 ]
 
+{ #category : #accessing }
+BlOSWindowSDL2Host class >> pulsePeriod: aDuration [
+
+	PulseLoop pulsePeriod: aDuration
+]
+
 { #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> start [
 	PulseLoop start
