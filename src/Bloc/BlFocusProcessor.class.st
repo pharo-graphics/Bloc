@@ -279,9 +279,6 @@ BlFocusProcessor >> processWindowFocusOut: anEvent [
 { #category : #'focus - requesting' }
 BlFocusProcessor >> requestFor: anElement dueTo: aFocusReason [
 	| aPreviousFocusOwner |
-	self
-		assert: [ anElement isNotNil ]
-		description: [ 'Focus requester must not be nil!' ].
 
 	self focusOwner = anElement
 		ifTrue: [ ^ self ].

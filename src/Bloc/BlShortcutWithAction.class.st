@@ -34,9 +34,6 @@ BlShortcutWithAction >> action [
 { #category : #accessing }
 BlShortcutWithAction >> action: aBlockClosure [
 	"An action should be a block closure in a form [ :aShortcutEvent :aShortcut | ]"
-	self
-		assert: [ aBlockClosure isNotNil ]
-		description: [ 'Action must not be nil' ].
 
 	action := aBlockClosure
 ]

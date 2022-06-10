@@ -163,11 +163,7 @@ BlLayoutCommonConstraints >> margin [
 
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> margin: aBlMargin [
-	"Change element's margin to a BlMargin
-	aBlMargin must not be nil"
-	self
-		assert: [ aBlMargin isNotNil ]
-		description: [ 'Margin must not be nil' ].
+	"Change element's margin to aBlMargin"
 	
 	margin := aBlMargin
 ]
@@ -260,11 +256,7 @@ BlLayoutCommonConstraints >> padding [
 
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> padding: aBlPadding [
-	"Change element's margin to a BlMargin
-	aBlPadding must not be nil"
-	self
-		assert: [ aBlPadding isNotNil ]
-		description: [ 'Padding must not be nil' ].
+	"Change element's padding."
 	
 	padding := aBlPadding
 ]

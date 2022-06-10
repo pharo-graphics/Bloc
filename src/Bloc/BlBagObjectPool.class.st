@@ -38,7 +38,6 @@ BlBagObjectPool class >> new: anInteger [
 BlBagObjectPool >> acquire [
 	"Returns an object from the pool if there is one,
 	or nil otherwise"
-	<return: #Object or: nil>
 
 	^ poolSize > 0
 		ifTrue: [ 
@@ -51,6 +50,7 @@ BlBagObjectPool >> acquire [
 
 { #category : #initialization }
 BlBagObjectPool >> initialize [
+
 	super initialize.
 
 	poolSize := 0.
@@ -60,26 +60,21 @@ BlBagObjectPool >> initialize [
 { #category : #testing }
 BlBagObjectPool >> isInPool: anObject [
 	"Return true of anObject is currently in the pool,
-	false otherwise.
-	anObject must not be nil"
-	<return: #Boolean>
-	self assert: anObject isNotNil.
+	false otherwise."
 	
 	^ pool includes: anObject
 ]
 
 { #category : #initialization }
 BlBagObjectPool >> maxPoolSize: aNumber [
+
 	maxPoolSize := aNumber
 ]
 
 { #category : #pool }
 BlBagObjectPool >> release: anObject [
 	"Adds anObject to the pool and return true if successfully added,
-	false otherwise.
-	anObject must not be nil"
-	<return: #Boolean>
-	self assert: anObject isNotNil.
+	false otherwise."
 
 	(self isInPool: anObject)
 		ifTrue: [ self error: anObject asString, ' is already in the pool!' ].

@@ -30,9 +30,6 @@ Class {
 
 { #category : #adding }
 BlSpaceFrame >> addPhase: aFramePhase [
-	self
-		assert: [ aFramePhase isNotNil ]
-		description: [ 'Frame phase must not be nil' ].
 
 	self phases add: aFramePhase
 ]
@@ -44,11 +41,6 @@ BlSpaceFrame >> addPhases: aCollectonOfPhases [
 
 { #category : #accessing }
 BlSpaceFrame >> currentPhase [
-	<return: #BlSpaceFramePhase>
-
-	self
-		assert: [ currentPhaseLink isNotNil ]
-		description: [ 'Current phase must not be nil' ].
 
 	^ currentPhaseLink value
 ]

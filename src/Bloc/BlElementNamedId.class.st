@@ -39,9 +39,5 @@ BlElementNamedId >> identifier: aSymbol [
 	identifier
 		ifNotNil: [ (BlImmutableObjectChangeError object: self) signal ].
 
-	self
-		assert: [ aSymbol notNil ]
-		description: [ 'Identifier must not be nil' ].
-	
 	identifier := aSymbol
 ]

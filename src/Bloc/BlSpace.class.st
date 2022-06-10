@@ -1196,8 +1196,7 @@ BlSpace >> hostSpace [
 { #category : #'host space - accessing' }
 BlSpace >> hostSpace: aHostSpace [
 	"Assign a host space window that will be a source of UI events
-	and will provide a rendering surface on which I will be rendered.
-	aHostSpace must not be nil"
+	and will provide a rendering surface on which I will be rendered."
 
 	hostSpace := aHostSpace.
 	self hostSpaceChanged.
@@ -1644,10 +1643,6 @@ BlSpace >> root: anElement [
 	anElement must not be nil.
 	anElement must not be added to any scene graph"
 	
-	self
-		assert: [ anElement isNotNil ]
-		description: [ 'anElement must not be nil' ].
-
 	self
 		assert: [ anElement space isNil ]
 		description: [ 'New root must not be already have a space assigned!' ].

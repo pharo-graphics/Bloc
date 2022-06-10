@@ -82,9 +82,7 @@ BlElement >> addAnimation: aBlBaseAnimation [
 
 { #category : #'children add/remove' }
 BlElement >> addChild: anElement [
-	"Add anElement as my last direct child and request layout update.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil"
+	"Add anElement as my last direct child and request layout update."
 
 	self addChild: anElement at: self childrenCount + 1
 ]
@@ -92,11 +90,12 @@ BlElement >> addChild: anElement [
 { #category : #'children add/remove' }
 BlElement >> addChild: anElement after: anotherElement [
 	"Add anElement as my direct child right after anotherElement.
-	Throws an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil"
-	| anotherElementIndex |
 
+	Signal an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
+
+	Precondition: anElement must not be a direct child of any other element."
+
+	| anotherElementIndex |
 	anotherElementIndex := self childIndexOf: anotherElement.
 	anotherElementIndex isZero
 		ifTrue: [
@@ -129,9 +128,10 @@ BlElement >> addChild: anElement as: aBlElementId [
 { #category : #'children add/remove' }
 BlElement >> addChild: anElement at: anIndex [
 	"Add anElement at an index moving other children to the right.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil
-	anIndex must be greater or equal to 1 and less or equal than amount of existing children + 1"
+
+	Preconditions:
+		- anElement must not be a direct child of any other element!
+		- anIndex must be greater or equal to 1 and less or equal than amount of existing children + 1"
 
 	anElement hasParent
 		ifTrue: [ (BlAlreadyAddedAsChildError element: anElement) signal ].	
@@ -190,11 +190,12 @@ BlElement >> addChild: anElement at: anIndex as: aContainerName [
 { #category : #'children add/remove' }
 BlElement >> addChild: anElement before: anotherElement [
 	"Add anElement as my direct child right before anotherElement.
-	Throws an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil"
-	| anotherElementIndex |
 
+	Signal an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
+
+	Precondition: anElement must not have a parent."
+
+	| anotherElementIndex |
 	anotherElementIndex := self childIndexOf: anotherElement.
 	anotherElementIndex isZero
 		ifTrue: [
@@ -228,9 +229,7 @@ BlElement >> addChild: anElement in: aContainerName as: aChildContainerName [
 
 { #category : #'children add/remove' }
 BlElement >> addChildFirst: anElement [
-	"Add anElement as my first direct child and request layout update.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil"
+	"Add anElement as my first direct child and request layout update."
 
 	self addChild: anElement at: 1
 ]
@@ -248,12 +247,12 @@ BlElement >> addChildFirst: anElement as: aContainerName [
 BlElement >> addChildren: aListOfElements [
 	"Add elements from aListOfElements as my rearmost(last) direct children and
 	request layout update.
-	aListOfElements must not be nil.
-	all elements from aListOfElements must not be added to any other element
+
+	Precondition: 
+		all elements from aListOfElements must not be added to any other element
+
 	@see BlElement>>#addChild: for more documentation"
-	self
-		assert: [ aListOfElements isNotNil ]
-		description: [ 'List of elements to add must not be nil' ].
+
 	self
 		assert: [ aListOfElements allSatisfy: [ :anElement | anElement parent isNil ] ]
 		description: [ 'All elements must not have parent' ].
@@ -449,16 +448,17 @@ BlElement >> attachChild: anElement [
 
 { #category : #'children add/remove' }
 BlElement >> attachChild: anElement at: anIndex [
-	"Attaches an element making it my direct child. Attaching an element assigns me as the parent
+	"Attach an element making it my direct child. Attaching an element assigns me as the parent
 	and puts an element in the list of children so that it can be retrieved by `children at:`.
    I am intended to be lightweight and make no assumptions about whether the parent or child should be redrawn.
 	Proper use includes also making any appropriate #requestLayout or #changed message sends.
    I should only be used for elements which were detached from me as their previous parent.
-	anElement must not be nil.
-	anElement must not be my direct child.
-	anIndex must be within my childrens' array"
-	self assert: anElement isNotNil.
-	self assert: anElement parent isNil.
+
+	Preconditions:
+	- anElement must not be my direct child.
+	- anIndex must be within my childrens' array"
+
+	self assert: anElement hasParent not.
 	self assert: anIndex > 0.
 	self assert: anIndex <= (self children size + 1).
 
@@ -929,8 +929,6 @@ BlElement >> constraintsDo: aBlock [
 	Note: After evaluation I request a layout update!
 	aBlock must not be nil.
 	aBlock must accept exactly one argument"
-	self assert: aBlock isNotNil.
-	self assert: aBlock argumentCount = 1.
 	
 	aBlock value: self constraints.
 	self requestLayout
@@ -1092,7 +1090,6 @@ BlElement >> detachChild: anElement [
 	I don't clean focus in order to be able to preserve it in case child is attached back.
 	anElement must not be nil.
 	anElement must be my direct child"
-	self assert: anElement isNotNil.
 	self assert: anElement parent == self.
 
 	anElement parent: nil.
@@ -2102,8 +2099,6 @@ BlElement >> layoutDo: aBlock [
 	Nite: After evaluation I request a layout update.
 	aBlock must not be nil.
 	aBlock must accept exactly one argument"
-	self assert: aBlock isNotNil.
-	self assert: aBlock argumentCount = 1.
 
 	aBlock value: self layout.
 	self requestLayout
@@ -2721,12 +2716,8 @@ BlElement >> opacity: aNumber [
 	so if aNumber is -1 opacity will be 0 and the same way if opacity
 	is requested to be 2 it will infact become 1.
 	aNumber must not be nil"
+
 	| aNewOpacity |
-
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Opacity can not be nil' ].
-
 	aNewOpacity := (aNumber asFloat max: 0.0) min: 1.0.
 	
 	"If opacity is very close to zero, element actually should be completely
@@ -3043,7 +3034,6 @@ BlElement >> removeChild: anElement [
 	As result anElement sends BlElementRemovedEvent
 	anElement must not be nil.
 	anElement must be my direct child"
-	self assert: [ anElement notNil ].
 	self assert: [ anElement parent == self ].
 	
 	self onChildToBeRemoved: anElement.
@@ -3202,16 +3192,12 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 { #category : #'children add/remove' }
 BlElement >> replaceChild: aChildElement with: anotherElement as: aSymbol [
 	"Replace a given child element with another element preserving the children order.
-	Request layout and redraw an area occupied by anElement.
-	As result anElement sends BlElementRemovedEvent
-	anElement must not be nil.
-	anElement must be my direct child"
-	| aChildIndex |
+	Request layout and redraw an area occupied by aChildElement.
+	As result aChildElement sends BlElementRemovedEvent.
+	aChildElement must be my direct child."
 
-	self assert: aChildElement isNotNil.
+	| aChildIndex |
 	self assert: aChildElement parent == self.
-	self assert: anotherElement isNotNil.
-	self assert: aSymbol isNotNil.
 	
 	aChildIndex := self childIndexOf: aChildElement.
 	self removeChildAt: aChildIndex.

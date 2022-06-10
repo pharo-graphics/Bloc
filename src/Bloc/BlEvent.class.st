@@ -114,9 +114,6 @@ BlEvent class >> wantedIn: anEventDispatcher [
 
 { #category : #'private - steps' }
 BlEvent >> arrivedTarget: aTBlEventTarget [
-	self
-		assert: [ aTBlEventTarget isNotNil ]
-		description: [ 'Target must not be nil' ].
 
 	currentTarget := aTBlEventTarget
 ]
@@ -136,9 +133,6 @@ BlEvent >> asDictionaryForExport [
 
 { #category : #'private - steps' }
 BlEvent >> bubblingTarget: aTBlEventTarget [
-	self
-		assert: [ aTBlEventTarget isNotNil ]
-		description: [ 'Target must not be nil' ].
 
 	currentTarget := aTBlEventTarget
 ]
@@ -157,9 +151,6 @@ BlEvent >> canBePropagated: anObject [
 
 { #category : #'private - steps' }
 BlEvent >> capturingTarget: aTBlEventTarget [
-	self
-		assert: [ aTBlEventTarget isNotNil ]
-		description: [ 'Target must not be nil' ].
 
 	currentTarget := aTBlEventTarget
 ]
@@ -198,9 +189,6 @@ BlEvent >> fire [
 
 { #category : #'private - steps' }
 BlEvent >> forwardingTarget: aTBlEventTarget [
-	self
-		assert: [ aTBlEventTarget isNotNil ]
-		description: [ 'Target must not be nil' ].
 
 	currentTarget := aTBlEventTarget
 ]

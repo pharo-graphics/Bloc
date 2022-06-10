@@ -94,9 +94,6 @@ BlCompositionPictureLayer >> picture [
 
 { #category : #accessing }
 BlCompositionPictureLayer >> picture: anObject [
-	self
-		assert: [ anObject isNotNil ]
-		description: [ 'Picture must not be nil' ].
 		
 	picture := anObject.
 	isSimple := picture isSimple

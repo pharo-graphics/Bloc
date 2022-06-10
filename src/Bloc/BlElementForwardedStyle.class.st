@@ -38,9 +38,6 @@ BlElementForwardedStyle >> targetObject [
 
 { #category : #accessing }
 BlElementForwardedStyle >> targetObject: anObjectOrBlock [
-	self
-		assert: [ anObjectOrBlock notNil ]
-		description: [ 'Target object must not be nil' ].
 
 	targetObject := anObjectOrBlock
 ]

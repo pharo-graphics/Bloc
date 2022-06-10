@@ -97,20 +97,11 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 	"Synchronously attach a given space to the Universe assuming that the message is sent from within the UI process
 	of this universe and the space was previously detached from another universe."
 
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
-
-	aSpace isOpened
-		ifTrue: [ ^ self ].
+	aSpace isOpened ifTrue: [ ^ self ].
 
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host space!' ].
-
-	self
-		assert: [ aSpace host isNotNil ]
-		description: [ 'Space must have a host' ].
 
 	"First of all we need to add space to the space manager"
 	spaceManager addSpace: aSpace.
@@ -134,7 +125,7 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 
 	self
 		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host!' ].
+		description: [ 'Space must have a host space!' ].
 
 	(BlParallelUniverseSpaceRootAssignedSignal new
 		universeId: self id;
@@ -154,12 +145,9 @@ BlParallelUniverse >> closeSpace: aSpace [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> closeSpaceSynchronously: aSpace [
+
 	| aHost |
 	
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
-
 	"If space is not even opened we should do nothing"
 	aSpace isOpened
 		ifFalse: [ ^ self ].
@@ -254,11 +242,8 @@ BlParallelUniverse >> detachSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 	"Detaches a given space from this universe without closing that space."
+
 	| aHost |
-	
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
 
 	"If space is not even opened we should do nothing"
 	aSpace isOpened

@@ -54,10 +54,7 @@ BlArrayObjectPool >> initialize [
 { #category : #testing }
 BlArrayObjectPool >> isInPool: anObject [
 	"Return true of anObject is currently in the pool,
-	false otherwise.
-	anObject must not be nil"
-	<return: #Boolean>
-	self assert: anObject isNotNil.
+	false otherwise."
 	
 	1 to: poolSize do: [ :i |
 		(pool at: i) == anObject
@@ -68,20 +65,16 @@ BlArrayObjectPool >> isInPool: anObject [
 { #category : #pool }
 BlArrayObjectPool >> release: anObject [
 	"Adds anObject to the pool and return true if successfully added,
-	false otherwise.
-	anObject must not be nil"
-	<return: #Boolean>
-	self assert: anObject isNotNil.
+	false otherwise."
 
-	(self isInPool: anObject)
-		ifTrue: [ self error: anObject asString, ' is already in the pool!' ].
+	(self isInPool: anObject) ifTrue: [
+		self error: anObject asString, ' is already in the pool!' ].
 
 	^ (poolSize < pool size)
 		ifTrue: [ 
 			pool at: poolSize + 1 put: anObject.
 			poolSize := poolSize + 1.
-			true
-		]
+			true ]
 		ifFalse: [ false ]
 ]
 
