@@ -19,13 +19,12 @@ Class {
 }
 
 { #category : #factory }
-BlRoundedRectangleGeometry class >> cornerRadii: theBlCornerRadii [
+BlRoundedRectangleGeometry class >> cornerRadii: aBlCornerRadii [
 	"Create a rounded rectangle with given corner radii"
-	<return: #BlRoundedRectangleGeometry>
 
 	^ self basicNew
-		initialize;
-		initializeWith: theBlCornerRadii
+		initializeWith: aBlCornerRadii;
+		yourself
 ]
 
 { #category : #factory }
@@ -40,22 +39,23 @@ BlRoundedRectangleGeometry class >> cornerRadius: aNumber [
 		description: [ 'Corner radius must be non-negative!' ].
 
 	^ self basicNew
-		initialize;
-		initializeWith: (BlCornerRadii radius: aNumber)
+		initializeWith: (BlCornerRadii radius: aNumber);
+		yourself
 ]
 
 { #category : #factory }
 BlRoundedRectangleGeometry class >> new [
+
 	^ self basicNew
-		initialize;
-		initializeWith: BlCornerRadii empty
+		  initializeWith: BlCornerRadii empty;
+		  yourself
 ]
 
 { #category : #'geometry testing' }
 BlRoundedRectangleGeometry >> containsPoint: aPoint in: aBlElement [
-	"check if aPoint is in the basic rectangle"
+	"Answer whether aPoint is in the rounded rectangle."
+
 	| w h isBottomSide isRightSide center radius maxRadius |
-	
 	w := self extent x.
 	h := self extent y.
 	maxRadius := self cornerRadii max.
@@ -95,17 +95,11 @@ BlRoundedRectangleGeometry >> cornerRadii [
 ]
 
 { #category : #initialization }
-BlRoundedRectangleGeometry >> initializeWith: theCornerRadii [
+BlRoundedRectangleGeometry >> initializeWith: aCornerRadii [
 
-	self
-		assert: [ cornerRadii isNil ]
-		description: [ 'I am immutable, please create a new rectangle instead' ].
-		
-	self
-		assert: [ theCornerRadii isNotNil ]
-		description: [ 'Corner radius must not be nil' ].
-
-	cornerRadii := theCornerRadii
+	self initialize.
+	
+	cornerRadii := aCornerRadii
 ]
 
 { #category : #geometry }
