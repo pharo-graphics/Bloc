@@ -95,6 +95,9 @@ BlTransformationBuilder >> matrix: aMatrix [
 
 { #category : #origin }
 BlTransformationBuilder >> normalizedOrigin: aPoint [
+	"Set a normalized position, where top-left is 0@0 and bottom-right is 1@1.
+	Negative and greater-than-one values are allowed."
+
 	origin := BlAffineTransformationNormalizedPositionOrigin position: aPoint
 ]
 
