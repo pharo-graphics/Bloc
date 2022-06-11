@@ -370,6 +370,18 @@ BlTextElement >> paragraph [
 	^ paragraph
 ]
 
+{ #category : #accessing }
+BlTextElement >> rawParagraph [
+
+	self
+		deprecated: 'Please use paragraph instead.'
+		transformWith:
+			'`@receiver rawParagraph'
+				-> '`@receiver paragraph'.
+	
+	^ self paragraph
+]
+
 { #category : #'private - paragraph' }
 BlTextElement >> releaseParagraph [
 	| aParagraph |
