@@ -514,6 +514,15 @@ BlSpace >> close [
 	(BlParallelUniverse forHost: self host class) closeSpace: self
 ]
 
+{ #category : #testing }
+BlSpace >> containsPoint: aPoint element: aBlElement geometry: aBlGeometry [
+
+	^ host
+		  containsPoint: aPoint
+		  element: aBlElement
+		  geometry: aBlGeometry
+]
+
 { #category : #'cursor managing' }
 BlSpace >> currentCursor [
 	^ currentCursor 
