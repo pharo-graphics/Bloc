@@ -366,18 +366,6 @@ BlTextElement >> onSessionChanged: aNewSession [
 
 { #category : #'private - paragraph' }
 BlTextElement >> paragraph [
-	<return: #BlTextParagraph>
-
-	self
-		assert: [ self rawParagraph isNotNil ]
-		description: [ 'Can not access paragraph if it is nil' ].
-
-	^ self rawParagraph
-]
-
-{ #category : #'private - paragraph' }
-BlTextElement >> rawParagraph [
-	<return: #BlTextParagraph>
 
 	^ paragraph
 ]
