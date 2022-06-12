@@ -12,7 +12,7 @@ BlElementVectorGeometry >> containsPoint: aPoint in: aBlElement [
 
 	^ aBlElement isAttachedToSceneGraph
 		ifTrue: [
-			aBlElement space containsPoint: aPoint in: aBlElement ]
+			aBlElement space containsPoint: aPoint element: aBlElement geometry: self ]
 		ifFalse: [
 			self
 				containsPoint: aPoint
