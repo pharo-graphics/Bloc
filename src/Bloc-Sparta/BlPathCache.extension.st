@@ -9,3 +9,12 @@ BlPathCache >> pathOnSpartaCanvas: aCanvas [
 		canvasIdentity := aCanvas identity.
 		geometryPath := self geometry buildPathOnSpartaCanvas: aCanvas ]
 ]
+
+{ #category : #'*Bloc-Sparta' }
+BlPathCache >> strokedBounds: aBlBounds of: anElement on: aCanvas [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+	<return: #BlBounds>
+
+	^ strokedBounds ifNil: [ strokedBounds := anElement outskirts strokedBounds: BlBounds new of: anElement on: aCanvas ]
+]

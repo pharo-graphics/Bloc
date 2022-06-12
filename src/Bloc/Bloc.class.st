@@ -11,7 +11,6 @@ Class {
 	#classVars : [
 		'AssertionsEnabled',
 		'DebugModeEnabled',
-		'HasSparta',
 		'PreferableChildrenDataStructure',
 		'PreferableEventHandlerRegistry',
 		'PreferableHostClass',
@@ -73,13 +72,7 @@ Bloc class >> enableDebugMode [
 { #category : #testing }
 Bloc class >> hasSparta [
 
-	^ HasSparta ifNil: [ self environment includesKey: #BlSpartaRenderer ]
-]
-
-{ #category : #testing }
-Bloc class >> hasSparta: aBoolean [
-
-	HasSparta := aBoolean
+	^ self environment includesKey: #BlSpartaRenderer
 ]
 
 { #category : #children }
@@ -186,11 +179,5 @@ Bloc class >> preferencesOn: aBuilder [
 				label: 'Debug Mode';
 				description: 'Set enabled to turn extensive debugging mode on or disable to turn it off';
 				default: [ false ].
-
-			(aBuilder setting: #hasSparta)
-				target: self;
-				order: 7;
-				label: 'Bloc hasSparta = true (when available)';
-				description: 'Browse senders of "Bloc hasSparta" to understand the impact.'.
 		]
 ]

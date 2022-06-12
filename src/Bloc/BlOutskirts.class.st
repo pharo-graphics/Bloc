@@ -50,11 +50,6 @@ BlOutskirts >> hash [
 	^ self class hash
 ]
 
-{ #category : #'visual bounds' }
-BlOutskirts >> strokedBounds: aBlBounds of: anElement on: aCanvas [
-	^ self subclassResponsibility
-]
-
 { #category : #testing }
 BlOutskirts >> wantsLayerOn: anElement [
 	"Return true if background and border should be rendered on a separate layer,

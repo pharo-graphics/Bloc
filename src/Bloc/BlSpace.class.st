@@ -514,7 +514,7 @@ BlSpace >> close [
 	(BlParallelUniverse forHost: self host class) closeSpace: self
 ]
 
-{ #category : #testing }
+{ #category : #'host dependent - ToDo' }
 BlSpace >> containsPoint: aPoint element: aBlElement geometry: aBlGeometry [
 
 	^ host
@@ -1430,7 +1430,7 @@ BlSpace >> maximized [
 	^ false
 ]
 
-{ #category : #pulse }
+{ #category : #'host dependent - ToDo' }
 BlSpace >> measureTextParagraph: aBlTextParagraph [
 
 	self
@@ -1439,7 +1439,6 @@ BlSpace >> measureTextParagraph: aBlTextParagraph [
 				^ aHostSpace renderer measureTextParagraph: aBlTextParagraph ] ]
 		ifAbsent: [ ].
 
-	"TODO"
 	host offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
@@ -1798,6 +1797,12 @@ BlSpace >> universe [
 { #category : #'cursor managing' }
 BlSpace >> updateCursor: aBlCursor [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
+]
+
+{ #category : #'host dependent - ToDo' }
+BlSpace >> visualBoundsOf: aBlElement [
+
+	^ host visualBoundsOf: aBlElement
 ]
 
 { #category : #'window - properties' }

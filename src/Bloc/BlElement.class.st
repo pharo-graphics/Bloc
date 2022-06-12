@@ -3617,26 +3617,10 @@ BlElement >> visualBounds [
 	By default, visual bounds of `inside` outskits equal to geometry bounds since border
 	is never rendered outside of the element's geometry.
 	Note: When there is no sparta canvas available, return geometry bounds"
-	
-	^ Bloc hasSparta
-		ifTrue: [ self visualBoundsOn: (Bloc preferableSpartaCanvas offscreen) ]
-		ifFalse: [ self geometryBounds ]
-]
 
-{ #category : #'geometry bounds' }
-BlElement >> visualBounds: aBlBounds on: aCanvas [
-	^ self geometry strokedBounds: aBlBounds of: self on: aCanvas
-]
-
-{ #category : #'geometry bounds' }
-BlElement >> visualBoundsOn: aCanvas [
-	"Return my visual bounds as a Rectangle.
-	Visual bounds only take border and geometry into account.
-	If a border is of inner type, then visual bounds are the same
-	as geometry bounds, otherwise visual bounds are larger than geometry ones"
-	<return: #Rectangle>
-	
-	^ (self visualBounds: BlBounds new on: aCanvas) asRectangle
+	^ self isAttachedToSceneGraph
+		  ifTrue: [ self space visualBoundsOf: self ]
+		  ifFalse: [ self geometryBounds ]
 ]
 
 { #category : #'event handling' }

@@ -26,3 +26,8 @@ BlOutskirtsInside >> drawBorder: aBlBorder onSpartaCanvas: aCanvas of: anElement
 		in: [ :aPainter | aBlBorder style applyOn: aPainter ];
 		draw
 ]
+
+{ #category : #'*Bloc-Sparta' }
+BlOutskirtsInside >> strokedBounds: aBlBounds of: anElement on: aCanvas [
+	^ anElement geometry strokedBoundsInside: aBlBounds of: anElement on: aCanvas
+]

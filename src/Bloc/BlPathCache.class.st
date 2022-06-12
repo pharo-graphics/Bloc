@@ -67,12 +67,3 @@ BlPathCache >> releaseStrokedBoundsCache [
 
 	strokedBounds := nil
 ]
-
-{ #category : #geometry }
-BlPathCache >> strokedBounds: aBlBounds of: anElement on: aCanvas [
-	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
-	Dispatch through outskirts first"
-	<return: #BlBounds>
-
-	^ strokedBounds ifNil: [ strokedBounds := anElement outskirts strokedBounds: BlBounds new of: anElement on: aCanvas ]
-]

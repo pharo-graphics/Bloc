@@ -4,11 +4,6 @@ Class {
 	#category : #'Bloc-Basic-Border'
 }
 
-{ #category : #'visual bounds' }
-BlOutskirtsOutside >> strokedBounds: aBlBounds of: anElement on: aCanvas [
-	^ anElement geometry strokedBoundsOutside: aBlBounds of: anElement on: aCanvas
-]
-
 { #category : #testing }
 BlOutskirtsOutside >> wantsLayerOn: anElement [
 	"Return true if background and border should be rendered on a separate layer,
