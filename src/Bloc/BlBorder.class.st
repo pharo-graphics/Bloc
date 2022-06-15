@@ -137,11 +137,9 @@ BlBorder >> hash [
 
 { #category : #testing }
 BlBorder >> isTransparent [
-	"Return true if I am is transparent and should not be rendered,
-	false otherwise"
-	<return: #Boolean>
+	"Answer whether I should not be rendered,"
 
-	^ width isZero
+	^ width isZero or: [ opacity isZero or: [ paint isTransparent ] ]
 ]
 
 { #category : #testing }
@@ -198,6 +196,9 @@ BlBorder >> printOn: aStream [
 	aStream
 		nextPutAll: ' width: ';
 		print: width.
+	aStream
+		nextPutAll: ' opacity: ';
+		print: opacity.
 	aStream
 		nextPutAll: ' paint: ';
 		print: paint
