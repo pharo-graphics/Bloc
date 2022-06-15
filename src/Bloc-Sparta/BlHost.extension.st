@@ -8,7 +8,7 @@ BlHost >> containsPoint: aPoint element: aBlElement geometry: aBlGeometry [
 	^ aBlGeometry
 		  containsPoint: aPoint
 		  in: aBlElement
-		  on: Bloc preferableSpartaCanvas offscreen
+		  onSpartaCanvas: Bloc preferableSpartaCanvas offscreen
 ]
 
 { #category : #'*Bloc-Sparta' }
