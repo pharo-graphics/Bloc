@@ -1,8 +1,9 @@
 "
-I am the Bloc main loop.
-I indicate to the Universe that is time to synchronize the state of the elements. 
+I represent the main loop of a host class, that sends it #pulse regularly.
 
-A pulse is fired every 16ms (if possible) to obtain 60 frames per second (fps) maximum.  This may be delayed if there are background processes wanting to run (to ensure that background calculation of UI elements can complete).  See ${method:name=BlPulseLoop>>#wait} for details of how the loop time is regulated.
+My loop follows the next rules:
+- The #pulsePeriod duration is the minimum amount of time between two subsequent sends of #pulse.
+- If a pulse took more time than #pulsePeriod, then the next pulse may either send the next #pulse immediately, or do a small wait before if another process with lower priority is suspended (and may be starving).
 
 The opened spaces listen the pulse to be synchronized and to update their state when it is needed.
 
@@ -10,16 +11,13 @@ The opened spaces listen the pulse to be synchronized and to update their state 
 Class {
 	#name : #BlHostPulseLoop,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'hostClass',
-		'pulseStartTime',
-		'lastElpasedTime',
-		'waitingDelay',
 		'loopProcess',
-		'pulsePeriod',
-		'session'
+		'pulsePeriodMS',
+		'waitingDelay',
+		'msToWaitForBackgroundProcess',
+		'latestPulseMS'
 	],
 	#category : #'Bloc-Universe - Host'
 }
@@ -35,41 +33,20 @@ BlHostPulseLoop class >> forHost: aHostClass [
 
 { #category : #'instance creation' }
 BlHostPulseLoop class >> new [
-	self error: 'Use #forUniverse: instead'
+
+	self error: 'Use #forHost: instead'
 ]
 
 { #category : #accessing }
 BlHostPulseLoop class >> processId [
+
 	^ 'Bloc Main Loop'
-]
-
-{ #category : #'loop process' }
-BlHostPulseLoop >> createLoopProcess [
-	^ self createLoopTask newProcess
-		priority: 40;
-		name: self processId;
-		yourself
-]
-
-{ #category : #'loop process' }
-BlHostPulseLoop >> createLoopTask [
-	^ [ [ self firePulse.
-	loopProcess == Processor activeProcess ] whileTrue ]
 ]
 
 { #category : #period }
 BlHostPulseLoop >> defaultPulsePeriod [
+
 	^ 15 milliSeconds
-]
-
-{ #category : #'loop process' }
-BlHostPulseLoop >> firePulse [
-	pulseStartTime := DateAndTime now.
-
-	(BlParallelUniverse forHost: hostClass) pulse.
-
-	self wait.
-	Processor yield
 ]
 
 { #category : #'as yet unclassified' }
@@ -82,7 +59,7 @@ BlHostPulseLoop >> forceStartNewUIProcess [
 	the actual process, and after calling me my sender terminates or suspends 
 	the process my usage should be safe."
 	
-	loopProcess := self createLoopProcess.
+	loopProcess := self newLoopProcess.
 	loopProcess resume.
 ]
 
@@ -96,105 +73,130 @@ BlHostPulseLoop >> forceStartOfUIProcess: aProces [
 
 { #category : #accessing }
 BlHostPulseLoop >> hostClass [
+
 	^ hostClass
 ]
 
 { #category : #accessing }
 BlHostPulseLoop >> hostClass: aHostClass [
+
 	hostClass := aHostClass
 ]
 
 { #category : #initialization }
 BlHostPulseLoop >> initialize [
+
 	super initialize.
 
-	lastElpasedTime := 0.
-	pulseStartTime := DateAndTime now.
+	self pulsePeriod: self defaultPulsePeriod.
+
+	"This initializes the internal Semaphore, but the milliseconds
+	to wait are set after each pulse."
+	waitingDelay := Delay forMilliseconds: 0.
 ]
 
 { #category : #testing }
 BlHostPulseLoop >> isRunning [
+
 	^ loopProcess isNotNil and: [ loopProcess isTerminated not ]
 ]
 
 { #category : #testing }
 BlHostPulseLoop >> isRunningInTheSameProcess [
+
 	^ Processor activeProcess effectiveProcess == loopProcess
 ]
 
 { #category : #accessing }
-BlHostPulseLoop >> lastElpasedTime [
-	^ lastElpasedTime
-]
-
-{ #category : #accessing }
 BlHostPulseLoop >> loopProcess [
+
 	^ loopProcess
 ]
 
 { #category : #'loop process' }
+BlHostPulseLoop >> newLoopBlock [
+
+	^ [ [ latestPulseMS := Time millisecondClockValue.
+
+			(BlParallelUniverse forHost: hostClass) pulse.
+
+			self waitUntilNextPulse 
+		
+		] doWhileTrue: [ loopProcess == Processor activeProcess ] ]
+]
+
+{ #category : #'loop process' }
+BlHostPulseLoop >> newLoopProcess [
+
+	^ self newLoopBlock newProcess
+		priority: 40;
+		name: self processId;
+		yourself
+]
+
+{ #category : #'loop process' }
 BlHostPulseLoop >> processId [
+
 	^ self class processId
 ]
 
 { #category : #period }
 BlHostPulseLoop >> pulsePeriod [
-	^ pulsePeriod ifNil: [ pulsePeriod := self defaultPulsePeriod ]
+
+	^ pulsePeriodMS milliSeconds
 ]
 
 { #category : #period }
-BlHostPulseLoop >> pulsePeriod: aTime [
-	^ pulsePeriod := aTime
+BlHostPulseLoop >> pulsePeriod: aDuration [
+
+	pulsePeriodMS := aDuration asMilliSeconds.
+	msToWaitForBackgroundProcess := (pulsePeriodMS // 2) min: 1.
 ]
 
 { #category : #lifecycle }
 BlHostPulseLoop >> start [
-	self isRunning
-		ifTrue: [ ^ self ].
 
-	loopProcess := self createLoopProcess.
+	self isRunning ifTrue: [ ^ self ].
+
+	loopProcess := self newLoopProcess.
 	loopProcess resume
 ]
 
 { #category : #lifecycle }
 BlHostPulseLoop >> stop [
-	| currentProcess |
-	
-	self isRunning
-		ifFalse: [ ^ self ].
-	
-	self
-		assert: [ loopProcess isNotNil ]
-		description: [ 'Loop process must exist!' ].
 
+	| currentProcess |
+
+	self isRunning ifFalse: [ ^ self ].
+	
 	currentProcess := loopProcess.
 	loopProcess := nil.
 	currentProcess terminate
 ]
 
 { #category : #period }
-BlHostPulseLoop >> timeIsUp [
-	^ DateAndTime now - pulseStartTime > self pulsePeriod
-]
-
-{ #category : #period }
-BlHostPulseLoop >> wait [
+BlHostPulseLoop >> waitUntilNextPulse [
 	"Wait the appropriate amount of time for the next pulse"
-	| milliSecs forceDelay maxWait |
 
-	"milliSecs is the amount of time to wait for the next pulse.
-	Since a pulse can take longer than #pulsePeriod (16ms) milliSecs may be negative here
+	| msToWait shouldForceDelay minWaitMS |
+	"msToWait is the amount of time to wait for the next pulse.
+	Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
 	(meaning that we shouldn't wait for the next pulse)"
-	milliSecs := (self pulsePeriod - (DateAndTime now - pulseStartTime)).
-	"But also ensure that background processes get some execution time.
-	If the nextReadyProcess has a priority of 11 it is the idle process and we don't need to wait"
-	forceDelay := Processor gtNextReadyProcess priority > 11.
-	maxWait := forceDelay
-			ifTrue: [ self pulsePeriod // 2 ]
-			ifFalse: [ 0 milliSeconds ].
-	BlPulseStatSignal duration: milliSecs delayForced: forceDelay.
-	milliSecs := milliSecs min: self pulsePeriod max: maxWait.
-	milliSecs isZero ifFalse: [ milliSecs wait ].
+	msToWait := pulsePeriodMS - (Time millisecondClockValue - latestPulseMS).
 
-	lastElpasedTime := DateAndTime now
+	"But also ensure that background processes get some execution time.
+	If the nextReadyProcess has more priority than the IDLE process"
+	shouldForceDelay :=
+		Processor nextReadyProcess priority > Processor lowestPriority.
+	minWaitMS :=
+		shouldForceDelay
+			ifTrue: [ msToWaitForBackgroundProcess ]
+			ifFalse: [ 0 ].
+
+	BlPulseStatSignal milliseconds: msToWait delayForced: shouldForceDelay.
+
+	msToWait := msToWait min: pulsePeriodMS max: minWaitMS.
+
+	msToWait = 0 ifFalse: [ waitingDelay setDelay: msToWait; wait ]
+
 ]

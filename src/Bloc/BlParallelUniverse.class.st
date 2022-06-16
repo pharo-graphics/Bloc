@@ -27,13 +27,14 @@ Class {
 
 { #category : #accessing }
 BlParallelUniverse class >> all [
-	"Return a collection of all parallel universes"
+	"Return a collection with all the registered instances"
 	
 	^ Universes
 ]
 
 { #category : #'instance creation' }
 BlParallelUniverse class >> existsForHost: aHostClass [
+
 	^ UniversesMutex critical: [
 		Universes
 			detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
@@ -43,13 +44,13 @@ BlParallelUniverse class >> existsForHost: aHostClass [
 
 { #category : #'instance creation' }
 BlParallelUniverse class >> forHost: aHostClass [
+
 	^ UniversesMutex critical: [
 		Universes
 			detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
-			ifFound: #yourself
 			ifNone: [
 				| aUniverse |
-				aUniverse := self new hostClass: aHostClass.
+				aUniverse := self new hostClass: aHostClass; yourself.
 				Universes := Universes copyWith: aUniverse.
 				aUniverse ] ]
 ]
@@ -59,14 +60,6 @@ BlParallelUniverse class >> initialize [
 	Universes := #().
 	UniversesMutex := Mutex new.
 	UniqueIdGenerator := BlUniqueIdGenerator new
-]
-
-{ #category : #accessing }
-BlParallelUniverse class >> universeWithId: aUniverseId do: aBlock [
-	^ self allSubInstances
-		detect: [ :eachUniverse | eachUniverse id = aUniverseId ]
-		ifFound: aBlock
-		ifNone: [ nil ]
 ]
 
 { #category : #'api - spaces' }
@@ -314,6 +307,7 @@ BlParallelUniverse >> hasSpaces [
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> hasUIProcess [
+
 	self uiProcessDo: [ :aUIProcess | ^ true ].
 	^ false
 ]
@@ -337,10 +331,10 @@ BlParallelUniverse >> id [
 
 { #category : #initialization }
 BlParallelUniverse >> initialize [
+
 	super initialize.
 
 	id := UniqueIdGenerator generateUniqueId.
-
 	spaceManager := BlSpaceManager new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
@@ -354,7 +348,6 @@ BlParallelUniverse >> initialize [
 
 { #category : #accessing }
 BlParallelUniverse >> isPulsing [
-	<return: #Boolean>
 
 	| areWePulsing |
 	areWePulsing := false.
@@ -472,18 +465,20 @@ BlParallelUniverse >> pulseSynchronously [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> requestStopPulsation [
+
 	pulsingStateMutex critical: [ 
 		self uiProcessDo: [ :currentUIProcess | 
 			"Only mark the universe as not pulsing in case the request comes from the current
 			UI process or from a process that was not the Bloc UI process previously. This avoids 
 			reseting the pulsing status when the debugger terminates a previously suspended UI process."
-			(currentUIProcess == Processor activeProcess or: [ 
-				Processor activeProcess isBlocPulseLoopProcess not ]) ifTrue: [ 
-					self markAsNotPulsing ] ] ]
+			(Processor activeProcess == currentUIProcess or: [
+			Processor activeProcess name ~= BlHostPulseLoop processId ])
+				ifTrue: [ self markAsNotPulsing ] ] ]
 ]
 
 { #category : #'api - lifecycle' }
 BlParallelUniverse >> snapshot: save andQuit: quit [
+
 	self postpone: [ Smalltalk snapshot: save andQuit: quit ]
 ]
 
@@ -517,24 +512,29 @@ BlParallelUniverse >> stopUniverse [
 BlParallelUniverse >> tryToRunDeferredActions [
 
 	| nextInQueue |
-	(BlParallelUniverseTryToRunDeferredActionsSignal new universeId:
-		 self id) emit.
+	(BlParallelUniverseTryToRunDeferredActionsSignal new
+		universeId: self id;
+		yourself) emit.
 
 	[ (nextInQueue := deferredActions nextOrNil) isNotNil ] whileTrue: [ 
-		(BlParallelUniverseRunDeferredActionSignal new universeId: self id)
-			emit.
+
+		(BlParallelUniverseRunDeferredActionSignal new
+			universeId: self id;
+			yourself) emit.
+
 		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
 ]
 
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunPostponedActions [
+
 	| nextInQueue |
-	
-	[ (nextInQueue := postponedActions nextOrNil) isNotNil ]
-		whileTrue: [ [ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
+	[ (nextInQueue := postponedActions nextOrNil) isNotNil ] whileTrue: [ 
+		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
 ]
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> uiProcessDo: aBlock [
+
 	self hostClass uiProcessDo: aBlock
 ]

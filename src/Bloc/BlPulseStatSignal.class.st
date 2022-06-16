@@ -47,19 +47,6 @@ Class {
 	#category : #'Bloc-Universe'
 }
 
-{ #category : #accessing }
-BlPulseStatSignal class >> duration: aDuration delayForced: aBoolean [
-
-	| currentSignal |
-	
-	currentSignal := CurrentSignal ifNil: [ CurrentSignal := self new ].
-	currentSignal addSampleDuration: aDuration delayForced: aBoolean.
-	currentSignal sampleCount < self sampleCount ifTrue: [ ^self ].
-	currentSignal emit.
-	CurrentSignal := nil.
-
-]
-
 { #category : #'instance creation' }
 BlPulseStatSignal class >> fromSton: stonReader [
 
@@ -79,6 +66,18 @@ BlPulseStatSignal class >> fromSton: stonReader [
 ]
 
 { #category : #accessing }
+BlPulseStatSignal class >> milliseconds: aNumberOfMilliseconds delayForced: aBoolean [
+
+	| currentSignal |
+	currentSignal := CurrentSignal ifNil: [ CurrentSignal := self new ].
+	currentSignal addSampleMilliseconds: aNumberOfMilliseconds delayForced: aBoolean.
+	currentSignal sampleCount < self sampleCount ifTrue: [ ^self ].
+	currentSignal emit.
+	CurrentSignal := nil.
+
+]
+
+{ #category : #accessing }
 BlPulseStatSignal class >> sampleCount [
 	"Answer the number of pulse loops that are summarised in each entry"
 
@@ -86,11 +85,10 @@ BlPulseStatSignal class >> sampleCount [
 ]
 
 { #category : #accessing }
-BlPulseStatSignal >> addSampleDuration: aDuraction delayForced: aBoolean [
+BlPulseStatSignal >> addSampleMilliseconds: aNumberOfMilliseconds delayForced: aBoolean [
 
 	| milliSeconds |
-
-	milliSeconds := aDuraction asMilliSeconds.
+	milliSeconds := aNumberOfMilliseconds.
 	sampleCount := sampleCount + 1.
 	milliSeconds <= 2 ifTrue: [ l2 := l2 + 1 ].
 	min := min min: milliSeconds.
