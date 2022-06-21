@@ -551,12 +551,12 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 	
 		aNonEmptyCollectionOfStrings
 			ifEmpty: [ ^ self ].
-		
+	
 		anAnnouncer
 			announce: (BlTextStringsInserted new
 				strings: aNonEmptyCollectionOfStrings;
-				requestedIndices: aNonEmptyCollectionOfFinalIndices;
-				finalIndices: aNonEmptyCollectionOfRequestedIndices) ]
+				requestedIndices: aNonEmptyCollectionOfRequestedIndices;
+				finalIndices: aNonEmptyCollectionOfFinalIndices) ]
 ]
 
 { #category : #copying }
