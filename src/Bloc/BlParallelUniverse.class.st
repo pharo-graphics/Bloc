@@ -14,7 +14,6 @@ Class {
 		'eventDispatcher',
 		'hostClass',
 		'spaceManager',
-		'pulsingStateMutex',
 		'isPulsing'
 	],
 	#classVars : [
@@ -339,7 +338,6 @@ BlParallelUniverse >> initialize [
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
 	postponedActions := WaitfreeQueue new.
-	pulsingStateMutex := Mutex new.
 	isPulsing := false.
 
 	eventDispatcher := self defaultEventDispatcher.
@@ -349,10 +347,7 @@ BlParallelUniverse >> initialize [
 { #category : #accessing }
 BlParallelUniverse >> isPulsing [
 
-	| areWePulsing |
-	areWePulsing := false.
-	pulsingStateMutex critical: [ areWePulsing := isPulsing ].
-	^ areWePulsing
+	^ isPulsing
 ]
 
 { #category : #'private - spaces' }
@@ -447,9 +442,9 @@ BlParallelUniverse >> postpone: aValuable [
 { #category : #pulse }
 BlParallelUniverse >> pulse [
 
-	self isPulsing ifTrue: [ ^ self ].
+	isPulsing ifTrue: [ ^ self ].
 
-	pulsingStateMutex critical: [ isPulsing := true ].
+	isPulsing := true.
 
 	[ self pulseSynchronously ] ensure: [ self requestStopPulsation ]
 ]
@@ -466,14 +461,13 @@ BlParallelUniverse >> pulseSynchronously [
 { #category : #'private - spaces' }
 BlParallelUniverse >> requestStopPulsation [
 
-	pulsingStateMutex critical: [ 
 		self uiProcessDo: [ :currentUIProcess | 
 			"Only mark the universe as not pulsing in case the request comes from the current
 			UI process or from a process that was not the Bloc UI process previously. This avoids 
 			reseting the pulsing status when the debugger terminates a previously suspended UI process."
 			(Processor activeProcess == currentUIProcess or: [
 			Processor activeProcess name ~= BlHostPulseLoop processId ])
-				ifTrue: [ self markAsNotPulsing ] ] ]
+				ifTrue: [ self markAsNotPulsing ] ]
 ]
 
 { #category : #'api - lifecycle' }
