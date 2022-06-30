@@ -95,8 +95,8 @@ BlTextParagraphMeasurer >> measureSpan: aBlSpan of: aTextParagraph with: aBlHost
 
 	aParagraphSpan
 		text: aTextParagraph text
-		from: self textStart
-		to: ((self textStart + aBlSpan size - 1) max: 0).
+		from: textPosition
+		to: ((textPosition + aBlSpan size - 1) max: 0).
 
 	self pushSpan: aParagraphSpan
 ]
@@ -126,16 +126,4 @@ BlTextParagraphMeasurer >> pushSpan: aParagraphSpan [
 
 	"and move text position"
 	self pushPosition: aParagraphSpan spanLength - 1
-]
-
-{ #category : #'text - accessing' }
-BlTextParagraphMeasurer >> textPosition [
-
-	^ textPosition
-]
-
-{ #category : #'text - accessing' }
-BlTextParagraphMeasurer >> textStart [
-
-	^ self textPosition
 ]
