@@ -57,6 +57,11 @@ BlPositionFinder >> isCurrentIndexInsideOfText: aCurrentIndex [
 	^ aCurrentIndex > 0 and: [ aCurrentIndex <= self text size ]
 ]
 
+{ #category : #'api - processing' }
+BlPositionFinder >> nextIndexFrom: aCurrentIndex [
+		^ aCurrentIndex + stepLength
+]
+
 { #category : #'api - configuration' }
 BlPositionFinder >> pattern: anOneArgBlock [
 
@@ -80,7 +85,7 @@ BlPositionFinder >> search [
 				ifTrue: [ 
 					"A desired position was found"
 					^ aCurrentIndex ] ].
-		aCurrentIndex := aCurrentIndex + stepLength ].
+		aCurrentIndex := self nextIndexFrom: aCurrentIndex ].
 	"No pattern was satisfied"
 	^ 0
 ]
