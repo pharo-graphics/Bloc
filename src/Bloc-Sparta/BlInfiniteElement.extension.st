@@ -2,7 +2,7 @@ Extension { #name : #BlInfiniteElement }
 
 { #category : #'*Bloc-Sparta' }
 BlInfiniteElement >> drawMeAndChildrenOnSpartaCanvas: aCanvas [
-	" draw the decorate (over children)"
+	" draw then decorate (over children)"
 	super drawMeAndChildrenOnSpartaCanvas: aCanvas.
 	self itemDecorationsDo: [ :d | 
 		d drawOnSpartaCanvasOver: aCanvas in: self ]
