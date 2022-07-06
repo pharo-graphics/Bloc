@@ -58,18 +58,15 @@ BlIntervalCollector >> search [
 ]
 
 { #category : #'api - processing' }
-BlIntervalCollector >> searchAll [
-
+BlIntervalCollector >> searchAll: aSubstring [
+	self substring: aSubstring.
 	^ Array streamContents: [ :stream | 
 		  | idx |
 		  [ (idx := self search) > 0 ] whileTrue: [ 
-			  | nextIdx storedIdx |
-			  nextIdx := finder nextIndexFrom: idx.
-			  storedIdx := nextIdx = 0
-				               ifTrue: [ finder text size ]
-				               ifFalse: [ nextIdx ].
-			  stream nextPut: (Array with: idx with: storedIdx).
-			  finder startAtPosition: nextIdx ] ]
+			  | nextIdx |
+			  nextIdx := (idx + aSubstring size -1) min: finder text size.
+			  finder startAtPosition: nextIdx + 1.
+			  stream nextPut: (Interval from: idx to: nextIdx) ] ]
 ]
 
 { #category : #'api - configuration' }
@@ -93,4 +90,9 @@ BlIntervalCollector >> stepBy: anInteger [
 BlIntervalCollector >> substring: aString [
 
 	finder substring: aString
+]
+
+{ #category : #accessing }
+BlIntervalCollector >> text: aBlText [
+	finder text: aBlText
 ]

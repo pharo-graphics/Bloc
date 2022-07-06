@@ -1,3 +1,10 @@
+"
+I find a position in a text according to my configuration.
+AS an example, I can be used to find the position of a substring within a text.
+
+** warning ** not tested, not found any use and the semantic is not clear.
+Tests are mandatory for this kind of toolkit class
+"
 Class {
 	#name : #BlPositionFinder,
 	#superclass : #BlTextOperator,
@@ -83,10 +90,12 @@ BlPositionFinder >> search [
 		patterns do: [ :eachPattern | 
 			(eachPattern value: self text value: aCurrentIndex)
 				ifTrue: [ 
+					startIndex := self nextIndexFrom: aCurrentIndex.
 					"A desired position was found"
 					^ aCurrentIndex ] ].
 		aCurrentIndex := self nextIndexFrom: aCurrentIndex ].
 	"No pattern was satisfied"
+	startIndex := self text size + 1.
 	^ 0
 ]
 
@@ -131,6 +140,11 @@ BlPositionFinder >> startAtPosition: anInteger [
 		description: [ 'Starting search position ', anInteger asString, 
 			' is out of text bounds' ].
 	startIndex := anInteger
+]
+
+{ #category : #accessing }
+BlPositionFinder >> startPosition [
+	^ startIndex 
 ]
 
 { #category : #'api - configuration' }

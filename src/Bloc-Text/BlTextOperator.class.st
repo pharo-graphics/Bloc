@@ -12,10 +12,10 @@ Class {
 { #category : #accessing }
 BlTextOperator >> text [
 	<return: #BlText>
-	^ text
+	^ text ifNil: [ text := '' asRopedText ]
 ]
 
 { #category : #accessing }
 BlTextOperator >> text: aBlText [
-	text := aBlText
+	text := aBlText asRopedText 
 ]
