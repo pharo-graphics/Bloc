@@ -51,6 +51,16 @@ Class {
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
+{ #category : #accessing }
+BlTextParagraph class >> selectionColor [
+
+	^ Color
+		  r: 0.9530791788856305
+		  g: 0.8084066471163245
+		  b: 0.1906158357771261
+		  alpha: 1.0
+]
+
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> advance [
 

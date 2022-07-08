@@ -59,7 +59,7 @@ BlIntervalCollector >> search [
 
 { #category : #'api - processing' }
 BlIntervalCollector >> searchAll: aSubstring [
-	self substring: aSubstring.
+	self substring: aSubstring asString.
 	^ Array streamContents: [ :stream | 
 		  | idx |
 		  [ (idx := self search) > 0 ] whileTrue: [ 

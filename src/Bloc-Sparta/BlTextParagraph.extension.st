@@ -90,7 +90,7 @@ BlTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas padding: aBlInsets [
 			ifFalse: [ (aSelectionStartPosition x @ 0) corner: (aSelectionEndPosition x @ self containerExtent y) ].
 
 		aCanvas fill
-			paint: ((Color r: 105 g: 171 b: 253 range: 255) alpha: 0.35);
+			paint: (self class selectionColor);
 			path: aSelectionBounds;
 			draw ]
 ]
