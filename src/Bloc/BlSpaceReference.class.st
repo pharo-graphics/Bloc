@@ -35,9 +35,43 @@ BlSpaceReference >> isNull [
 	^ false
 ]
 
+{ #category : #'text input' }
+BlSpaceReference >> isTextInputActive [
+	"Check whether or not Unicode text input events are enabled"
+	self spaceDo: [:sp | ^sp isTextInputActive].
+	^ false
+]
+
 { #category : #enumerating }
 BlSpaceReference >> spaceDo: aBlock [
 	"Evaluate a given block with a bloc space as an argument"
 	
 	
+]
+
+{ #category : #'text input' }
+BlSpaceReference >> startTextInput [
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+	self spaceDo: [ :sp | sp startTextInput ]
+
+]
+
+{ #category : #'text input' }
+BlSpaceReference >> startTextInputAtRectangle: aRectangle [
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+	self spaceDo: [ :sp | sp startTextInputAtRectangle: aRectangle ]
+
+]
+
+{ #category : #'text input' }
+BlSpaceReference >> stopTextInput [
+	"Stop receiving any text input events"
+	self spaceDo: [ :sp | sp stopTextInput ]
+
 ]

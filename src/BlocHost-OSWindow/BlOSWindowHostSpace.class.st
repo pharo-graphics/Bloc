@@ -118,10 +118,16 @@ BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
 	window 
 		eventHandler: ((BlOSWindowEventHandler window: self)
 		keyboardKeyTable: keyboardKeyTable).
-	window startTextInput.
 	window newBlocRenderer.
-	
+	self startTextInput.
+
 	(BlOSWindowCreatedSignal new window: window) emit
+]
+
+{ #category : #'window - text input' }
+BlOSWindowHostSpace >> isTextInputActive [
+	"Check whether or not Unicode text input events are enabled"
+	^ window isTextInputActive
 ]
 
 { #category : #testing }
@@ -233,6 +239,31 @@ BlOSWindowHostSpace >> resizable: aBoolean [
 { #category : #'host space - displaying' }
 BlOSWindowHostSpace >> show [
 	window show
+]
+
+{ #category : #'window - text input' }
+BlOSWindowHostSpace >> startTextInput [
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+	window startTextInput
+]
+
+{ #category : #'window - text input' }
+BlOSWindowHostSpace >> startTextInputAtRectangle: aRectangle [
+
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+	window startTextInputAtRectangle: aRectangle
+]
+
+{ #category : #'window - text input' }
+BlOSWindowHostSpace >> stopTextInput [
+	"Stop receiving any text input events"
+	window stopTextInput
 ]
 
 { #category : #'window - properties' }
