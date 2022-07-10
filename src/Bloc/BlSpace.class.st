@@ -1348,6 +1348,13 @@ BlSpace >> isOpened [
 		and: [ (BlParallelUniverse forHost: self host class) hasSpace: self ]
 ]
 
+{ #category : #'host space - text input' }
+BlSpace >> isTextInputActive [
+	"Check whether or not Unicode text input events are enabled"
+
+	^ self hostSpaceDo: [:hs | hs isTextInputActive] ifAbsent: [ false ]
+]
+
 { #category : #testing }
 BlSpace >> isVisible [
 	^ self hasHostSpace
@@ -1709,6 +1716,34 @@ BlSpace >> show [
 BlSpace >> showSpace: aSpace [
 	"I show a given space either inside of me or let it open by default"
 	aSpace show
+]
+
+{ #category : #'host space - text input' }
+BlSpace >> startTextInput [
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+
+	self hostSpaceDo: [:hs | hs startTextInput]
+]
+
+{ #category : #'host space - text input' }
+BlSpace >> startTextInputAtRectangle: aRectangle [
+
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+
+	self hostSpaceDo: [:hs | hs startTextInputAtRectangle: aRectangle]
+]
+
+{ #category : #'host space - text input' }
+BlSpace >> stopTextInput [
+	"Stop receiving any text input events"
+
+	self hostSpaceDo: [:hs | hs stopTextInput]
 ]
 
 { #category : #'api - tasks' }
