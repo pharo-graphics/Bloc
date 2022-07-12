@@ -59,14 +59,35 @@ BlIntervalCollector >> search [
 
 { #category : #'api - processing' }
 BlIntervalCollector >> searchAll: aSubstring [
-	self substring: aSubstring asString.
+	self substring: aSubstring.
 	^ Array streamContents: [ :stream | 
 		  | idx |
 		  [ (idx := self search) > 0 ] whileTrue: [ 
 			  | nextIdx |
-			  nextIdx := (idx + aSubstring size -1) min: finder text size.
-			  finder startAtPosition: nextIdx + 1.
-			  stream nextPut: (Interval from: idx to: nextIdx) ] ]
+			  nextIdx := idx + aSubstring size - 1 min: finder text size.
+			  stream nextPut: (Interval from: idx to: nextIdx).
+			  nextIdx < finder text size ifTrue: [ 
+				  finder startAtPosition: nextIdx + 1 ] ] ]
+]
+
+{ #category : #'api - processing' }
+BlIntervalCollector >> searchAll: aSubstring excluding: anInterval [
+
+	self pattern: [ :aText :aPosition | 
+		(anInterval intersection:
+			 (aPosition to: aPosition + aSubstring size - 1)) isEmpty and: [ 
+			aSubstring = (aText
+				 from: aPosition
+				 to: (aPosition + aSubstring size - 1 min: aText size)) asString ] ].
+
+	^ Array streamContents: [ :stream | 
+		  | idx |
+		  [ (idx := self search) > 0 ] whileTrue: [ 
+			  | nextIdx |
+			  nextIdx := idx + aSubstring size - 1 min: finder text size.
+			  stream nextPut: (Interval from: idx to: nextIdx).
+			  nextIdx < finder text size ifTrue: [ 
+				  finder startAtPosition: nextIdx + 1 ] ] ]
 ]
 
 { #category : #'api - configuration' }
