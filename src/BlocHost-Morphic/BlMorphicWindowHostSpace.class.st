@@ -94,6 +94,12 @@ BlMorphicWindowHostSpace >> initialize [
 	isFullSize := false
 ]
 
+{ #category : #'text input' }
+BlMorphicWindowHostSpace >> isTextInputActive [
+	"Check whether or not Unicode text input events are enabled"
+	^ morphicWindow isTextInputActive
+]
+
 { #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
@@ -155,6 +161,31 @@ BlMorphicWindowHostSpace >> show [
 	anExtent := morphicWindow extent.
 	morphicWindow openInWorld.
 	morphicWindow extent: anExtent
+]
+
+{ #category : #'text input' }
+BlMorphicWindowHostSpace >> startTextInput [
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+	morphicWindow  startTextInput
+]
+
+{ #category : #'text input' }
+BlMorphicWindowHostSpace >> startTextInputAtRectangle: aRectangle [
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+	morphicWindow  requestTextEditingAt: aRectangle
+]
+
+{ #category : #'text input' }
+BlMorphicWindowHostSpace >> stopTextInput [
+	"Stop receiving any text input events"
+	morphicWindow requestStopTextEditing 
+
 ]
 
 { #category : #'window - properties' }

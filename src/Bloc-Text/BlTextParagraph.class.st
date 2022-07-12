@@ -116,6 +116,7 @@ BlTextParagraph >> basicMeasureOn: aSpanMeasurer [
 	aMeasurer := BlTextParagraphMeasurer newFor: self.
 
 	self text isEmpty ifTrue: [
+		self flag: #todo. "It shouldn't send a BlSpan but a BlParagraphSpan... also, it lets tthe measurer with position = -1"  
 		aMeasurer
 			measureSpan: (BlSpan text: self text empty attributes: #())
 			of: self

@@ -6,7 +6,6 @@ Class {
 
 { #category : #baseline }
 BlAscentTightBaselineMeasurer >> computedBaseline: aTextParagraph [
-	<return: #Point>
 
 	^ aTextParagraph left negated @ aTextParagraph ascent abs
 ]

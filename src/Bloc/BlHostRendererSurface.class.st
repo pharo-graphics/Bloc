@@ -125,8 +125,7 @@ BlHostRendererSurface >> physicalSize [
 { #category : #geometry }
 BlHostRendererSurface >> scaleFactor [
 	"Return a scaling dpi factor from logical to physical coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Number>
+	On high DPI displays (e.g. Retina), scaling factor is > 1"
 	
 	^ scaleFactor
 ]

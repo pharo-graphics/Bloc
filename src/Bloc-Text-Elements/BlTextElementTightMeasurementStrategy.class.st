@@ -10,7 +10,7 @@ BlTextElementTightMeasurementStrategy >> boundsOf: aParagraph [
 	| aMeasuredWidth aMeasuredHeight |
 
 	aMeasuredWidth := aParagraph width.
-	aMeasuredHeight := (aParagraph height).
+	aMeasuredHeight :=aParagraph height.
 
 	^ BlBounds origin: aParagraph left @ 0.0 extent: aMeasuredWidth @ aMeasuredHeight
 ]
