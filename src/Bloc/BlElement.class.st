@@ -2025,6 +2025,13 @@ BlElement >> isRoot [
 	^ self isAttachedToSceneGraph and: [ self space root = self ]
 ]
 
+{ #category : #'text input' }
+BlElement >> isTextInputActive [
+
+	"Check whether or not Unicode text input events are enabled"
+	^ spaceReference isTextInputActive
+]
+
 { #category : #testing }
 BlElement >> isTranslucent [
 	"Return true if I am semi-transparent (opacity is 0 < opacity < 1)"
@@ -3423,11 +3430,62 @@ BlElement >> spaceDo: aBlock [
 	self space ifNotNil: aBlock
 ]
 
+{ #category : #'text input' }
+BlElement >> startTextInput [
+
+	"Used by a morph to request text edition capabilities.
+	The rendering backend can use this information to, for example, open the IME (input-method-editor). This version or requestTextEditingAt: **must** be sent before any text input event can be received.
+	Typically, when an editor get the focus. requestTextEditingAt: manages the IME (input-method-editor) opening position.
+	
+	Use it in pair with requestStopTextEditing
+	
+	propagate the request to the space."
+	spaceReference startTextInput
+]
+
+{ #category : #'text input' }
+BlElement >> startTextInputAtRectangle: aRectangle [
+
+	"Used by a morph to request text edition capabilities.
+	The rendering backend can use this information to, for example, open the IME (input-method-editor). The rectangle indicates the position where the IME menu could be shown.
+	
+	This version or requestTextEditing **must** be sent before any text input event can be received.
+	Typically, when an editor get the focus. This version with a rectangle as argument can be sent whenever the input cursor position change to ensure the right positionnig of the IME.
+	
+	
+	Use it in pair with requestStopTextEditing
+	
+	propagate the request to the space."
+	spaceReference startTextInputAtRectangle: aRectangle
+]
+
 { #category : #'api - style' }
 BlElement >> states [
 	^ self userData
 		at: #blocStates
 		ifAbsentPut: [ BlElementStates new element: self ]
+]
+
+{ #category : #'text input' }
+BlElement >> stopTextEditing [
+
+	"Used to request stop text edition capabilities.
+	The rendering backend can use this, for example, close the IME (input-method-editor).
+	Use it in pair with requestTextEditingAt:
+	
+	propagate the request to the space."
+	spaceReference stopTextInput
+]
+
+{ #category : #'text input' }
+BlElement >> stopTextInput [
+
+	"Used to request stop text edition capabilities.
+	The rendering backend can use this, for example, close the IME (input-method-editor).
+	Use it in pair with requestTextEditingAt:
+	
+	propagate the request to the space."
+	spaceReference stopTextInput
 ]
 
 { #category : #'api - style' }
