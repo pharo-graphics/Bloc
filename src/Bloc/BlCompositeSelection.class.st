@@ -104,6 +104,36 @@ BlCompositeSelection >> hash [
 	^ self class hash bitXor: self selections hash
 ]
 
+{ #category : #'api - testing' }
+BlCompositeSelection >> ifEmpty: aBlock [
+	"Evaluate the given block with the receiver as argument, answering its value
+    unless the receiver is empty, in which case answer the receiver."
+
+	^ self isEmpty
+		ifTrue: [ aBlock value ]
+		ifFalse: [ self ]
+]
+
+{ #category : #'api - testing' }
+BlCompositeSelection >> ifEmpty: emptyBlock ifNotEmpty: notEmptyBlock [
+	"Evaluate emptyBlock if I'm empty, notEmptyBlock otherwise"
+	"If the notEmptyBlock has an argument, eval with the receiver as its argument"
+
+	^ self isEmpty
+		ifTrue: [ emptyBlock value ]
+		ifFalse: [ notEmptyBlock cull: self ]
+]
+
+{ #category : #'api - testing' }
+BlCompositeSelection >> ifNotEmpty: aBlock [
+	"Evaluate the given block with the receiver as argument, answering its value
+    unless the receiver is empty, in which case answer the receiver."
+
+	^ self isEmpty
+		ifTrue: [ self ]
+		ifFalse: [ aBlock cull: self ]
+]
+
 { #category : #initialization }
 BlCompositeSelection >> initialize [
 	super initialize.
@@ -159,7 +189,7 @@ BlCompositeSelection >> select: aSelection [
 BlCompositeSelection >> select: aFromIndex to: aToIndex [
 	"Add a new monotone selection merging it with existing ones within provided indices"
 	
-	self add: (BlSelection from: aFromIndex to: aToIndex)
+	self add: (BlSelection from: (aFromIndex max: 0) to: aToIndex)
 ]
 
 { #category : #accessing }

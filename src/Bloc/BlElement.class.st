@@ -3423,11 +3423,23 @@ BlElement >> spaceDo: aBlock [
 	self space ifNotNil: aBlock
 ]
 
+{ #category : #'text input' }
+BlElement >> startTextInput [
+]
+
+{ #category : #'text input' }
+BlElement >> startTextInputAtRectangle: aRectangle [
+]
+
 { #category : #'api - style' }
 BlElement >> states [
 	^ self userData
 		at: #blocStates
 		ifAbsentPut: [ BlElementStates new element: self ]
+]
+
+{ #category : #'text input' }
+BlElement >> stopTextInput [
 ]
 
 { #category : #'api - style' }

@@ -425,7 +425,6 @@ BlTextElement >> select: aFromIndex to: aToIndex [
 BlTextElement >> selectNone [
 	self selection isEmpty
 		ifTrue: [ ^ self ].
-
 	self selection removeAll.
 	self invalidate
 ]

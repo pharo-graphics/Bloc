@@ -64,33 +64,42 @@ BlTextParagraph >> drawOnSpartaCanvas: aCanvas [
 
 { #category : #'*Bloc-Sparta' }
 BlTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas padding: aBlInsets [
+
+	self
+		drawselection: self selection
+		onSpartaCanvas: aCanvas
+		padding: aBlInsets
+		color: self class selectionColor
+]
+
+{ #category : #'*Bloc-Sparta' }
+BlTextParagraph >> drawselection: aSelection onSpartaCanvas: aCanvas padding: aBlInsets color: aColor [
 	
-	(self selection isNil or: [ self selection isEmpty ])
+	(aSelection isNil or: [ aSelection isEmpty ])
 		ifTrue: [ ^ self ].
+		
+	aSelection do: [ :s |
+		| aStart anEnd startSpan endSpan startPosition endPosition bnds |
+		aStart := s from min: self text size max: 0.
+		anEnd := s to min: self text size.
+		
+		startSpan := self spanAtIndex: aStart.
+		endSpan := self spanAtIndex: anEnd.
 
-	self selection do: [ :aSelection |
-		| aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition aSelectionBounds |
-
-		aStart := aSelection from min: self text size.
-		anEnd := aSelection to min: self text size.
-
-		aSelectionStartSpan := self spanAtIndex: aStart.
-		aSelectionEndSpan := self spanAtIndex: anEnd.
-
-		aSelectionStartPosition := aStart isZero
+		startPosition := aStart isZero
 			ifTrue: [ 0@0 ]
-			ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (aBlInsets left @ 0) ].
-		aSelectionEndPosition := anEnd = self text size
-			ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (aBlInsets width @ 0) ]
-			ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (aBlInsets left @ 0) ].
+			ifFalse: [ (startSpan positionAt: aStart) + (aBlInsets left @ 0) ].
+		endPosition := anEnd = self text size
+			ifTrue: [ (endSpan positionAt: anEnd) + (aBlInsets width @ 0) ]
+			ifFalse: [ (endSpan positionAt: anEnd) + (aBlInsets left @ 0) ].
 
-		aSelectionBounds := (aSelection to > self text size)
+		bnds := (aSelection to > self text size)
 			"containerExtent includes padding"
-			ifTrue: [ (aSelectionStartPosition x @ 0) corner: self containerExtent ]
-			ifFalse: [ (aSelectionStartPosition x @ 0) corner: (aSelectionEndPosition x @ self containerExtent y) ].
+			ifTrue: [ (startPosition x @ 0) corner: self containerExtent ]
+			ifFalse: [ (startPosition x @ 0) corner: (endPosition x @ self containerExtent y) ].
 
 		aCanvas fill
-			paint: (self class selectionColor);
-			path: aSelectionBounds;
-			draw ]
+			paint: aColor;
+			path: bnds;
+			draw ] 
 ]
