@@ -382,6 +382,13 @@ BlTextElement >> rawParagraph [
 	^ self paragraph
 ]
 
+{ #category : #'private - pool' }
+BlTextElement >> recycledFrom: aStencilBuilder [
+
+	self removeFromParent.
+	self selectNone
+]
+
 { #category : #'private - paragraph' }
 BlTextElement >> releaseParagraph [
 	| aParagraph |
