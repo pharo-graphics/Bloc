@@ -24,37 +24,14 @@ BlTextParagraph >> createSpartaTextPainter: aBlSpan on: aSpartaCanvas [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlTextParagraph >> drawHighlightsOnSpartaCanvas: aCanvas padding: aBlInsets [
-	
-	(self highlights isNil or: [ self highlights isEmpty ])
-		ifTrue: [ ^ self ].
+BlTextParagraph >> drawHighlightsOnSpartaCanvas: aCanvas [
 
-	self highlights do: [ :eachHighlight |
-		eachHighlight selection do: [ :aSelection |
-			| aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition aSelectionBounds |
+	(self highlights isNil or: [ self highlights isEmpty ]) ifTrue: [ ^ self ].
 
-			aStart := aSelection from min: self text size.
-			anEnd := aSelection to min: self text size.
-
-			aSelectionStartSpan := self spanAtIndex: aStart.
-			aSelectionEndSpan := self spanAtIndex: anEnd.
-
-			aSelectionStartPosition := aStart isZero
-				ifTrue: [ 0@0 ]
-				ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (aBlInsets left @ 0) ].
-			aSelectionEndPosition := anEnd = self text size
-				ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (aBlInsets width @ 0) ]
-				ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (aBlInsets left @ 0) ].
-
-			aSelectionBounds := (aSelection to > self text size)
-				"containerExtent includes padding"
-				ifTrue: [ (aSelectionStartPosition x @ 0) corner: self containerExtent ]
-				ifFalse: [ (aSelectionStartPosition x @ 0) corner: (aSelectionEndPosition x @ self containerExtent y) ].
-
-			aCanvas fill
-				paint: eachHighlight paint;
-				path: aSelectionBounds;
-				draw ] ]
+	self highlights do: [ :eachHighlight | 
+		| rectangles |
+		rectangles := self selectionRectanglesFrom: eachHighlight selection.
+		self fillRectanglesBackground: rectangles onSpartaCanvas: aCanvas with: eachHighlight paint ]
 ]
 
 { #category : #'*Bloc-Sparta' }
@@ -63,43 +40,30 @@ BlTextParagraph >> drawOnSpartaCanvas: aCanvas [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas padding: aBlInsets [
+BlTextParagraph >> drawSelection: aSelection onSpartaCanvas: aCanvas color: aColor [
 
-	self
-		drawselection: self selection
-		onSpartaCanvas: aCanvas
-		padding: aBlInsets
-		color: self class selectionColor
+	| rectangles |
+	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ self ].
+	rectangles := self selectionRectanglesFrom: aSelection.
+	rectangles do: [ :rect | 
+		aCanvas fill
+			paint: aColor;
+			path: rect;
+			draw ]
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlTextParagraph >> drawselection: aSelection onSpartaCanvas: aCanvas padding: aBlInsets color: aColor [
-	
-	(aSelection isNil or: [ aSelection isEmpty ])
-		ifTrue: [ ^ self ].
-		
-	aSelection do: [ :s |
-		| aStart anEnd startSpan endSpan startPosition endPosition bnds |
-		aStart := s from min: self text size max: 0.
-		anEnd := s to min: self text size.
-		
-		startSpan := self spanAtIndex: aStart.
-		endSpan := self spanAtIndex: anEnd.
+BlTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas [ 
 
-		startPosition := aStart isZero
-			ifTrue: [ 0@0 ]
-			ifFalse: [ (startSpan positionAt: aStart) + (aBlInsets left @ 0) ].
-		endPosition := anEnd = self text size
-			ifTrue: [ (endSpan positionAt: anEnd) + (aBlInsets width @ 0) ]
-			ifFalse: [ (endSpan positionAt: anEnd) + (aBlInsets left @ 0) ].
+	self drawSelection: self selection onSpartaCanvas: aCanvas  color: self class selectionColor 
+]
 
-		bnds := (aSelection to > self text size)
-			"containerExtent includes padding"
-			ifTrue: [ (startPosition x @ 0) corner: self containerExtent ]
-			ifFalse: [ (startPosition x @ 0) corner: (endPosition x @ self containerExtent y) ].
+{ #category : #'*Bloc-Sparta' }
+BlTextParagraph >> fillRectanglesBackground: anArrayOfrectangles onSpartaCanvas: aCanvas with: aPaint [
 
-		aCanvas fill
-			paint: aColor;
-			path: bnds;
-			draw ] 
+	anArrayOfrectangles do: [ :rect | 
+			aCanvas fill
+				paint: aPaint;
+				path: rect;
+				draw ]
 ]

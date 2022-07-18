@@ -46,7 +46,8 @@ Class {
 		'selection',
 		'highlights',
 		'line',
-		'baselineMeasurer'
+		'baselineMeasurer',
+		'padding'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -148,6 +149,21 @@ BlTextParagraph >> bottom [
 BlTextParagraph >> bounds [
 	
 	^ line bounds
+]
+
+{ #category : #'paragraph - geometry' }
+BlTextParagraph >> characterBoundsAtIndex: aLocalIndex [
+
+	| startSpan startPos originIdx endPos endSpan cornerIdx |
+	originIdx := (aLocalIndex - 1 max: 0) min: self text size.
+	startSpan := self spanAtIndex: originIdx.
+	startPos := startSpan positionAt: originIdx. 
+
+	cornerIdx := originIdx + 1 min: self text size.
+	endSpan := self spanAtIndex: cornerIdx.
+	endPos := endSpan positionAt: cornerIdx. 
+	^ startPos x @ 0 corner: endPos x @ self containerExtent y.
+
 ]
 
 { #category : #accessing }
@@ -368,6 +384,18 @@ BlTextParagraph >> normalize: aScale [
 	line normalize: aScale
 ]
 
+{ #category : #accessing }
+BlTextParagraph >> padding [
+
+	^ padding
+]
+
+{ #category : #accessing }
+BlTextParagraph >> padding: aBlInsets [
+
+	padding := aBlInsets
+]
+
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> positionAt: anIndex [
 	"Answer a Point with the position of the character at anIndex."
@@ -442,6 +470,34 @@ BlTextParagraph >> selection [
 BlTextParagraph >> selection: aBlTextSelection [
 
 	selection := aBlTextSelection
+]
+
+{ #category : #private }
+BlTextParagraph >> selectionRectanglesFrom: aSelection [
+
+	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ #(  ) ].
+
+	^ Array streamContents: [ :stream | 
+		  aSelection do: [ :currSelection | 
+			  | aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition |
+			  aStart := currSelection from min: self text size.
+			  anEnd := currSelection to min: self text size.
+
+			  aSelectionStartSpan := self spanAtIndex: aStart.
+			  aSelectionEndSpan := self spanAtIndex: anEnd.
+
+			  aSelectionStartPosition := aStart isZero
+				                             ifTrue: [ 0 @ 0 ]
+				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (self padding left @ 0) ].
+
+			  aSelectionEndPosition := anEnd = self text size
+				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (self padding width @ 0) ]
+				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (self padding left @ 0) ].
+
+			  "containerExtent includes padding"
+			  stream nextPut: (currSelection to > self text size
+					   ifTrue: [ aSelectionStartPosition x @ 0 corner: self containerExtent ]
+					   ifFalse: [ aSelectionStartPosition x @ 0 corner: aSelectionEndPosition x @ self containerExtent y ]) ] ]
 ]
 
 { #category : #accessing }

@@ -458,6 +458,14 @@ BlTextElement >> selection [
 	^ selection
 ]
 
+{ #category : #'private - paragraph' }
+BlTextElement >> setupParagraphBeforeDrawing [
+
+	paragraph containerExtent: self extent.
+	paragraph selection: self selection.
+	paragraph padding: self padding.
+]
+
 { #category : #layout }
 BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 
