@@ -555,8 +555,8 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 		anAnnouncer
 			announce: (BlTextStringsInserted new
 				strings: aNonEmptyCollectionOfStrings;
-				requestedIndices: aNonEmptyCollectionOfFinalIndices;
-				finalIndices: aNonEmptyCollectionOfRequestedIndices) ]
+				requestedIndices: aNonEmptyCollectionOfFinalIndices ;
+				finalIndices: aNonEmptyCollectionOfFinalIndices) ]
 ]
 
 { #category : #copying }
