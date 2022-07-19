@@ -22,12 +22,6 @@ Class {
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #accessing }
-BlTextParagraphSpan >> advance [
-
-	^ advance
-]
-
 { #category : #initialization }
 BlTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 
@@ -155,12 +149,6 @@ BlTextParagraphSpan >> measurer [
 BlTextParagraphSpan >> measurer: aSpanMeasurer [
 
 	measurer := aSpanMeasurer
-]
-
-{ #category : #accessing }
-BlTextParagraphSpan >> metrics [
-
-	^ super metrics, { 'Advance' -> self advance }
 ]
 
 { #category : #measurement }

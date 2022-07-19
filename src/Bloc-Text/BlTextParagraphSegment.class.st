@@ -8,17 +8,17 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
+		'paragraph',
 		'left',
 		'top',
 		'width',
 		'height',
+		'advance',
 		'ascent',
 		'descent',
 		'baseline',
 		'from',
-		'to',
-		'advance',
-		'paragraph'
+		'to'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -111,7 +111,8 @@ BlTextParagraphSegment >> metrics [
 		'Top' -> self top.
 		'Height' -> self height.
 		'Width' -> self width.
-		'Baseline' -> self baseline
+		'Baseline' -> self baseline.
+		'Advance' -> self advance
 	} asOrderedDictionary
 ]
 
