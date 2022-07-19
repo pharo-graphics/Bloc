@@ -11,11 +11,9 @@ A span consists of 3 essential parts:
 "
 Class {
 	#name : #BlTextParagraphSpan,
-	#superclass : #BlTextParagraphSegment,
+	#superclass : #BlTextParagraphLeaf,
 	#instVars : [
 		'textRun',
-		'span',
-		'measurer',
 		'strikethroughOffset',
 		'strikethroughSize'
 	],
@@ -41,114 +39,11 @@ BlTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 	baseline := 0@0
 ]
 
-{ #category : #'accessing - span' }
-BlTextParagraphSpan >> attributes [
-	"Return a set of attributes applied on this span"
-	<return: #Set of: #BlTextAttribute>
-
-	^ span attributes
-]
-
 { #category : #finalization }
 BlTextParagraphSpan >> finalize [
 
 	textRun ifNotNil: [ :aTextRun | aTextRun release ].
 	textRun := nil
-]
-
-{ #category : #geometry }
-BlTextParagraphSpan >> indexAtPosition: aPoint [
-	"I return a cursor index at a given position as a Point provided in local coordinates of this span"
-
-	| aWidth aMeasurer |
-	aWidth := aPoint x max: 0.
-	aMeasurer := self measurer.
-
-	(aWidth <= 0)
-		ifTrue: [ ^ (self from - 1) max: 0 ].
-	(aWidth >= self advance)
-		ifTrue: [ ^ self to ].
-
-	^ (self spanStart to: self spanEnd)
-		findBinary: [ :anIndex |
-			| aSubSpan aParagraph |
-			
-			aSubSpan := BlSpan
-				text: (span text from: (1 min: anIndex) to: anIndex)
-				attributes: self span attributes.
-			
-			aParagraph := aMeasurer measureTextSpan: aSubSpan.
-			
-			(aWidth closeTo: aParagraph advance epsilon: 0.1)
-				ifTrue: [ 0 ]
-				ifFalse: [ (aWidth - aParagraph advance) sign ] ]
-		"exact match"
-		do: [ :anIndex | self from + anIndex - 1 ]
-
-		"need to measure a bit more"
-		ifNone: [ :a :b |
-			| leftIndex rightIndex leftWidth leftSpanIndex rightWidth rightSpanIndex spanIndex |
-			leftIndex := a ifNil: [ self spanStart - 1 ].
-			rightIndex := b ifNil: [ self spanEnd + 1 ].
-			
-			leftIndex < self spanStart
-				ifTrue: [
-					leftWidth := 0.
-					leftSpanIndex := (self spanStart - 1) max: 0 ]
-				ifFalse: [
-					| aSubSpan aParagraph |
-					aSubSpan := BlSpan
-						text: (span text from: (1 min: leftIndex) to: leftIndex)
-						attributes: self span attributes.
-					aParagraph := aMeasurer measureTextSpan: aSubSpan.
-					leftWidth := aParagraph advance.
-					leftSpanIndex := leftIndex ].
-
-			rightIndex > self spanEnd
-				ifTrue: [
-					rightWidth := self advance.
-					rightSpanIndex := self spanEnd ]
-				ifFalse: [
-					| aSubSpan aParagraph |
-					aSubSpan := BlSpan
-						text: (span text from: (1 min: rightIndex) to: rightIndex)
-						attributes: self span attributes.
-					aParagraph := aMeasurer measureTextSpan: aSubSpan.
-					rightWidth := aParagraph advance.
-					rightSpanIndex := rightIndex ].
-
-			spanIndex := aWidth <= (leftWidth + ((rightWidth - leftWidth) / 2.0))
-				ifTrue: [ leftSpanIndex ]
-				ifFalse: [ rightSpanIndex ].
-
-			self from + spanIndex - 1 ]
-]
-
-{ #category : #testing }
-BlTextParagraphSpan >> isSplitted [
-	"Return true if span I measure is splitted right after me. This may happen
-	if a single span does not fit in a line and we have to push next paragraph span
-	on the next paragraph line"
-	
-	^ false
-]
-
-{ #category : #testing }
-BlTextParagraphSpan >> isVertical [
-
-	^ false
-]
-
-{ #category : #accessing }
-BlTextParagraphSpan >> measurer [
-
-	^ measurer
-]
-
-{ #category : #initialization }
-BlTextParagraphSpan >> measurer: aSpanMeasurer [
-
-	measurer := aSpanMeasurer
 ]
 
 { #category : #measurement }
@@ -180,74 +75,6 @@ BlTextParagraphSpan >> paragraph: aTextParagraph [
 			to: self to ]
 ]
 
-{ #category : #geometry }
-BlTextParagraphSpan >> positionAt: anIndex [
-
-	| aSpanIndex aSubSpan aMeasuredSpan aMeasurer aPositionY aPositionX |
-
-	aPositionY := self baseline y.
-	aPositionX := self baseline x.
-
-	(anIndex = (self from - 1))
-		ifTrue: [ ^ aPositionX @ aPositionY ].
-	(anIndex = self to)
-		ifTrue: [ ^ (aPositionX + self advance) @ aPositionY ].
-
-	aSpanIndex := anIndex - self from + 1.
-
-	aMeasurer := self measurer.
-
-	aSubSpan := BlSpan
-		text: (span text from: (1 min: aSpanIndex) to: aSpanIndex)
-		attributes: self span attributes.
-
-	aMeasuredSpan := aMeasurer measureTextSpan: aSubSpan.
-	
-	^ (aPositionX + aMeasuredSpan advance) @ aPositionY
-]
-
-{ #category : #printing }
-BlTextParagraphSpan >> printOn: aStream [
-
-	span
-		ifNil: [ aStream nextPutAll: '(not yet initialized)' ]
-		ifNotNil: [ aStream print: span ]
-]
-
-{ #category : #'accessing - span' }
-BlTextParagraphSpan >> span [
-	"Return an underlying text span that I represent"
-
-	^ span
-]
-
-{ #category : #initialization }
-BlTextParagraphSpan >> span: aBlSpan [
-	"Assign an attributed text span with corresponding start and end indices which I measure"
-	
-	span := aBlSpan
-]
-
-{ #category : #'accessing - span' }
-BlTextParagraphSpan >> spanEnd [
-
-	^ span size
-]
-
-{ #category : #'accessing - span' }
-BlTextParagraphSpan >> spanLength [
-
-	^ (self spanStart isZero and: [ self spanEnd isZero ])
-		ifTrue: [ 0 ]
-		ifFalse: [ self spanEnd - self spanStart + 1 ]
-]
-
-{ #category : #'accessing - span' }
-BlTextParagraphSpan >> spanStart [
-
-	^ 1 min: span size
-]
-
 { #category : #accessing }
 BlTextParagraphSpan >> strikethroughOffset [
 
@@ -258,14 +85,6 @@ BlTextParagraphSpan >> strikethroughOffset [
 BlTextParagraphSpan >> strikethroughSize [
 
 	^ strikethroughSize
-]
-
-{ #category : #initialization }
-BlTextParagraphSpan >> text: aBlText from: aGlobalTextStart to: aGlobalTextEnd [
-	"Assign the paragraph's text with provided indices so that we could always determine which part of it I measure"
-
-	from := aGlobalTextStart.
-	to := aGlobalTextEnd
 ]
 
 { #category : #'accessing - text run' }
