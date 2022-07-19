@@ -243,24 +243,15 @@ BlTextParagraph >> height [
 ]
 
 { #category : #'api - highlighting' }
-BlTextParagraph >> highlight: aHighlightAttribute from: aFromIndex to: aToIndex [
+BlTextParagraph >> highlights [
 
-	highlights
-		ifNil: [ highlights := IdentityDictionary new ].
-
-	(highlights
-		at: aHighlightAttribute
-		ifAbsentPut: [ BlTextParagraphHighlight new ])
-			highlight: aHighlightAttribute paint
-			from: ((aFromIndex - 1) max: 0)
-			to: aToIndex
+	^ highlights 
 ]
 
-{ #category : #'api - instantiation' }
-BlTextParagraph >> highlights [
-	<return: #Collection of: #BlTextParagraphHighlight>
+{ #category : #'api - highlighting' }
+BlTextParagraph >> highlights: aListOfParagraphHightlights [
 
-	^ highlights
+	highlights :=  aListOfParagraphHightlights
 ]
 
 { #category : #'paragraph - geometry' }

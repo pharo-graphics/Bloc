@@ -18,7 +18,8 @@ Class {
 		'measurement',
 		'measurer',
 		'defaultFontSize',
-		'baselineMeasurer'
+		'baselineMeasurer',
+		'highlights'
 	],
 	#classVars : [
 		'DefaultText',
@@ -189,6 +190,18 @@ BlTextElement >> editorMeasurement [
 	self measurement:
 		BlTextElementEditorMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlAscentLooseBaselineMeasurer uniqueInstance
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlightWith: aParagraphHighlight [ 
+
+	self highlights add: aParagraphHighlight
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlights [
+
+	^ highlights ifNil: [ highlights := OrderedCollection new ]
 ]
 
 { #category : #geometry }
@@ -409,6 +422,13 @@ BlTextElement >> resetDefaultFontSize [
 	defaultFontSize := nil
 ]
 
+{ #category : #'api - highlighting' }
+BlTextElement >> resetHighlights [
+
+	highlights := nil.
+	self invalidate
+]
+
 { #category : #geometry }
 BlTextElement >> screenPositionAt: aTextIndex [
 	<return: #Point>
@@ -464,6 +484,8 @@ BlTextElement >> setupParagraphBeforeDrawing [
 	paragraph containerExtent: self extent.
 	paragraph selection: self selection.
 	paragraph padding: self padding.
+	" highligh is lazy, do not use the accessor"
+	paragraph highlights: highlights 
 ]
 
 { #category : #layout }

@@ -9,10 +9,6 @@ BlTextAttribute >> applyOnSpartaTextPainter: aTextPainter [
 ]
 
 { #category : #'*Bloc-Sparta' }
-BlTextAttribute >> applyOnTextParagraph: aTextParagraph from: aStartIndex to: aToIndex [
-]
-
-{ #category : #'*Bloc-Sparta' }
 BlTextAttribute >> drawAboveOnSpartaCanvas: aSpartaCanvas with: aSpartaSpan [
 	"Attribute may add additional visual effects"
 ]

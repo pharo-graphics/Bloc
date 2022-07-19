@@ -64,18 +64,6 @@ BlTextParagraphSpan >> normalize: aScale [
 ]
 
 { #category : #accessing }
-BlTextParagraphSpan >> paragraph: aTextParagraph [
-
-	super paragraph: aTextParagraph.
-
-	self attributes do: [ :eachAttribute | 
-		eachAttribute
-			applyOnTextParagraph: aTextParagraph
-			from: self from
-			to: self to ]
-]
-
-{ #category : #accessing }
 BlTextParagraphSpan >> strikethroughOffset [
 
 	^ strikethroughOffset

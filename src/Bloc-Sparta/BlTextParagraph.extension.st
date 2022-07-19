@@ -26,7 +26,7 @@ BlTextParagraph >> createSpartaTextPainter: aBlSpan on: aSpartaCanvas [
 { #category : #'*Bloc-Sparta' }
 BlTextParagraph >> drawHighlightsOnSpartaCanvas: aCanvas [
 
-	(self highlights isNil or: [ self highlights isEmpty ]) ifTrue: [ ^ self ].
+	highlights ifNil: [ ^ self ].
 
 	self highlights do: [ :eachHighlight | 
 		| rectangles |
