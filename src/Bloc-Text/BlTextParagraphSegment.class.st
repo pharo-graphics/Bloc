@@ -1,5 +1,7 @@
 "
-I an already measured abstract paragraph segment.
+I an already measured abstract paragraph segment. I'm a composite to design lines (`BlTextParagraphLine`) and lines elements (`BlTextParagraphLeaf`). spans are canvas specific.
+
+
 
 "
 Class {

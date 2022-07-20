@@ -1,3 +1,7 @@
+"
+I represent a single measured span within `BlTextParagraph`.
+Depending on the type of a paragraph (single or multi line) I can be either a direct child of `BlTextParagraph` or be contained inside of `BlTextParagraphLine`.
+"
 Class {
 	#name : #BlTextParagraphLeaf,
 	#superclass : #BlTextParagraphSegment,
