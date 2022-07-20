@@ -19,7 +19,7 @@ Class {
 		'measurer',
 		'defaultFontSize',
 		'baselineMeasurer',
-		'highlights'
+		'highlightsMap'
 	],
 	#classVars : [
 		'DefaultText',
@@ -161,6 +161,12 @@ BlTextElement >> defaultFontSize: aNumber [
 	self textChanged
 ]
 
+{ #category : #'api - highlighting' }
+BlTextElement >> defaultHighlightCategory [
+
+	^ #default
+]
+
 { #category : #initialization }
 BlTextElement >> defaultMeasurer [
 	^ BlTextElementHostMeasurer new
@@ -193,15 +199,31 @@ BlTextElement >> editorMeasurement [
 ]
 
 { #category : #'api - highlighting' }
+BlTextElement >> highlightCategory: aHighlightCategorySymbol with: aParagraphHighlight [ 
+
+	| l |
+	l := self highlightsMap at: aHighlightCategorySymbol ifAbsentPut: [OrderedCollection new].
+	l add: aParagraphHighlight
+]
+
+{ #category : #'api - highlighting' }
 BlTextElement >> highlightWith: aParagraphHighlight [ 
 
-	self highlights add: aParagraphHighlight
+	self highlightCategory: self defaultHighlightCategory with: aParagraphHighlight. 
+
 ]
 
 { #category : #'api - highlighting' }
 BlTextElement >> highlights [
 
-	^ highlights ifNil: [ highlights := OrderedCollection new ]
+	^ highlightsMap ifNotNil: [ :map | 
+		  Array streamContents: [ :stream | map valuesDo: [ :v | stream nextPutAll: v ] ] ]
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlightsMap [
+
+	^ highlightsMap ifNil: [ highlightsMap := IdentityDictionary new ]
 ]
 
 { #category : #geometry }
@@ -423,9 +445,17 @@ BlTextElement >> resetDefaultFontSize [
 ]
 
 { #category : #'api - highlighting' }
-BlTextElement >> resetHighlights [
+BlTextElement >> resetHighlightsMap [
 
-	highlights := nil.
+	highlightsMap := nil.
+	self invalidate
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> resetHighlightsOfCategory: aHighlightCategorySymbol [
+
+	highlightsMap ifNil: [ ^self ].
+	highlightsMap removeKey: aHighlightCategorySymbol ifAbsent: [^self].
 	self invalidate
 ]
 
@@ -485,7 +515,7 @@ BlTextElement >> setupParagraphBeforeDrawing [
 	paragraph selection: self selection.
 	paragraph padding: self padding.
 	" highligh is lazy, do not use the accessor"
-	paragraph highlights: highlights 
+	paragraph highlights: self highlights
 ]
 
 { #category : #layout }
