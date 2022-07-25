@@ -514,7 +514,7 @@ BlTextParagraph >> skipWhitespaceIn: aString after: aStart [
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtIndex: anIndex [
-	<return: #BlTextParagraphSpan>
+	<return: #BlTextParagraphLeaf>
 
 	anIndex isZero
 		ifTrue: [ ^ line spans first ].
@@ -536,7 +536,7 @@ BlTextParagraph >> spanAtIndex: anIndex [
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtPoint: aPoint [
-	<return: #BlTextParagraphSpan>
+	<return: #BlTextParagraphLeaf>
 	
 	^ self
 		spanAtPoint: aPoint
@@ -549,7 +549,7 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 	"Find a paragraph span that contains a given point given in a paragraph coordinates
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closest span to a point"
-	<return: #BlTextParagraphSpan>
+	<return: #BlTextParagraphLeaf>
 
 	^ line spans
 		findBinary: [ :aParagraphSpan |

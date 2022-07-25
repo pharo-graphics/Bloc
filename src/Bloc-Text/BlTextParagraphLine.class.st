@@ -139,7 +139,7 @@ BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 
 { #category : #accessing }
 BlTextParagraphLine >> spans [
-	<return: #SequenceableCollection of: #BlTextParagraphSpan>
+	<return: #SequenceableCollection of: #BlTextParagraphLeaf>
 
 	^ spans
 ]

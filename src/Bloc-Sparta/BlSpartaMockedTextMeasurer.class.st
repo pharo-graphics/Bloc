@@ -5,7 +5,7 @@ Useful for testing the paragraph behaviour
 
 "
 Class {
-	#name : #BlMockedTextMeasurer,
+	#name : #BlSpartaMockedTextMeasurer,
 	#superclass : #BlHostTextMeasurer,
 	#instVars : [
 		'ascent',
@@ -14,23 +14,20 @@ Class {
 		'height',
 		'measuredWidth',
 		'measuredHeight',
-		'textRun',
-		'textRunStart',
-		'textRunEnd',
 		'textOffset'
 	],
-	#category : #'Bloc-Text-Text-Mocked'
+	#category : #'Bloc-Sparta-Mocked'
 }
 
 { #category : #accessing }
-BlMockedTextMeasurer >> ascent [
+BlSpartaMockedTextMeasurer >> ascent [
 	<return: #Number>
 
 	^ ascent
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> ascent: aNumber [
+BlSpartaMockedTextMeasurer >> ascent: aNumber [
 
 	self
 		assert: [ aNumber <= 0 ]
@@ -40,19 +37,19 @@ BlMockedTextMeasurer >> ascent: aNumber [
 ]
 
 { #category : #'instance creation' }
-BlMockedTextMeasurer >> createParagraphSpan [
+BlSpartaMockedTextMeasurer >> createParagraphSpan [
 	^ BlMockedTextParagraphSpan new measurer: self
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> descent [
+BlSpartaMockedTextMeasurer >> descent [
 	<return: #Number>
 
 	^ descent
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> descent: aNumber [
+BlSpartaMockedTextMeasurer >> descent: aNumber [
 	self
 		assert: [ aNumber >= 0 ]
 		description: [ 'Descent must be positive' ].
@@ -61,29 +58,29 @@ BlMockedTextMeasurer >> descent: aNumber [
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> glyphWidth [
+BlSpartaMockedTextMeasurer >> glyphWidth [
 	<return: #Number>
 
 	^ glyphWidth
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> glyphWidth: aNumber [
+BlSpartaMockedTextMeasurer >> glyphWidth: aNumber [
 	glyphWidth := aNumber
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> height [
+BlSpartaMockedTextMeasurer >> height [
 	^ height
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> height: aNumber [
+BlSpartaMockedTextMeasurer >> height: aNumber [
 	height := aNumber
 ]
 
 { #category : #initialization }
-BlMockedTextMeasurer >> initialize [
+BlSpartaMockedTextMeasurer >> initialize [
 	super initialize.
 
 	ascent := -11.
@@ -93,15 +90,9 @@ BlMockedTextMeasurer >> initialize [
 	textOffset := 0
 ]
 
-{ #category : #dispatch }
-BlMockedTextMeasurer >> measureTextParagraph: aBlTextParagraph [
-
-	aBlTextParagraph measureOn: self
-]
-
 { #category : #measurement }
-BlMockedTextMeasurer >> measureTextSpan: aBlSpan [
-	<return: #BlTextParagraphSpan>
+BlSpartaMockedTextMeasurer >> measureTextSpan: aBlSpan [
+	<return: #BlSpartaTextParagraphSpan>
 	| aTextRun aParagraphSpan |
 
 	aParagraphSpan := self createParagraphSpan.
@@ -125,21 +116,21 @@ BlMockedTextMeasurer >> measureTextSpan: aBlSpan [
 ]
 
 { #category : #metrics }
-BlMockedTextMeasurer >> measuredHeight [
+BlSpartaMockedTextMeasurer >> measuredHeight [
 	^ measuredHeight
 ]
 
 { #category : #metrics }
-BlMockedTextMeasurer >> measuredWidth [
+BlSpartaMockedTextMeasurer >> measuredWidth [
 	^ measuredWidth
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> textOffset [
+BlSpartaMockedTextMeasurer >> textOffset [
 	^ textOffset
 ]
 
 { #category : #accessing }
-BlMockedTextMeasurer >> textOffset: aNumber [
+BlSpartaMockedTextMeasurer >> textOffset: aNumber [
 	textOffset := aNumber
 ]

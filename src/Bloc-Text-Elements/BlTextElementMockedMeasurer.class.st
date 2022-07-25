@@ -51,7 +51,7 @@ BlTextElementMockedMeasurer >> glyphWidth: aNumber [
 BlTextElementMockedMeasurer >> initialize [
 	super initialize.
 	
-	measurer := BlMockedTextMeasurer new.
+	measurer := BlSpartaMockedTextMeasurer new.
 	measurer ascent: -10.
 	measurer descent: 5.
 	measurer glyphWidth: 10.

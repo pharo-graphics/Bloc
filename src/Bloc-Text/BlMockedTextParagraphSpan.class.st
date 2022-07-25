@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMockedTextParagraphSpan,
-	#superclass : #BlTextParagraphSpan,
+	#superclass : #BlSpartaTextParagraphSpan,
 	#category : #'Bloc-Text-Text-Mocked'
 }
 

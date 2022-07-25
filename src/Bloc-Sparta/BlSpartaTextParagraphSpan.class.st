@@ -6,18 +6,18 @@ A span consists of 3 essential parts:
 
 "
 Class {
-	#name : #BlTextParagraphSpan,
+	#name : #BlSpartaTextParagraphSpan,
 	#superclass : #BlTextParagraphLeaf,
 	#instVars : [
 		'textRun',
 		'strikethroughOffset',
 		'strikethroughSize'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : #'Bloc-Sparta-Text'
 }
 
 { #category : #initialization }
-BlTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
+BlSpartaTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 
 	width := aSpanMeasurer measuredWidth.
 	height := aSpanMeasurer measuredHeight.
@@ -36,14 +36,14 @@ BlTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 ]
 
 { #category : #finalization }
-BlTextParagraphSpan >> finalize [
+BlSpartaTextParagraphSpan >> finalize [
 
 	textRun ifNotNil: [ :aTextRun | aTextRun release ].
 	textRun := nil
 ]
 
 { #category : #measurement }
-BlTextParagraphSpan >> normalize: aScale [
+BlSpartaTextParagraphSpan >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
 
 	| newLeft newTop |
@@ -60,25 +60,25 @@ BlTextParagraphSpan >> normalize: aScale [
 ]
 
 { #category : #accessing }
-BlTextParagraphSpan >> strikethroughOffset [
+BlSpartaTextParagraphSpan >> strikethroughOffset [
 
 	^ strikethroughOffset
 ]
 
 { #category : #accessing }
-BlTextParagraphSpan >> strikethroughSize [
+BlSpartaTextParagraphSpan >> strikethroughSize [
 
 	^ strikethroughSize
 ]
 
 { #category : #'accessing - text run' }
-BlTextParagraphSpan >> textRun [
+BlSpartaTextParagraphSpan >> textRun [
 
 	^ textRun
 ]
 
 { #category : #initialization }
-BlTextParagraphSpan >> textRun: aTextRun [
+BlSpartaTextParagraphSpan >> textRun: aTextRun [
 	"Assign a backend specific text run (collection of glyphs) with corresponding
 	start and end indices which represents an unstyled piece of text"
 	
@@ -86,7 +86,7 @@ BlTextParagraphSpan >> textRun: aTextRun [
 ]
 
 { #category : #'accessing - text run' }
-BlTextParagraphSpan >> textRunEnd [
+BlSpartaTextParagraphSpan >> textRunEnd [
 	"Return an index of a last measured glyph in a text run that should be rendered"
 	<return: #Number>
 	
@@ -94,7 +94,7 @@ BlTextParagraphSpan >> textRunEnd [
 ]
 
 { #category : #'accessing - text run' }
-BlTextParagraphSpan >> textRunLength [
+BlSpartaTextParagraphSpan >> textRunLength [
 	"Return how many glyphs I represent of a text run according
 	to text run start and end indices. It is guaranteed that during
 	rendering only this amount of glyphs will be rendered.
@@ -108,7 +108,7 @@ BlTextParagraphSpan >> textRunLength [
 ]
 
 { #category : #'accessing - text run' }
-BlTextParagraphSpan >> textRunStart [
+BlSpartaTextParagraphSpan >> textRunStart [
 	"Return an index of a first measured glyph in a text run that should be rendered"
 	<return: #Number>
 	
