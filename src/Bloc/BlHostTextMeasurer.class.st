@@ -31,3 +31,8 @@ BlHostTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 BlHostTextMeasurer >> measureTextSpan: aBlTextSpan [
 	self subclassResponsibility
 ]
+
+{ #category : #'paragraph span instance creation' }
+BlHostTextMeasurer >> newParagraphSpan [ 
+	^ self subclassResponsibility 
+]

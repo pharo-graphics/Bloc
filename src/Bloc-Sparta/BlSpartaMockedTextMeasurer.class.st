@@ -126,6 +126,11 @@ BlSpartaMockedTextMeasurer >> measuredWidth [
 	^ measuredWidth
 ]
 
+{ #category : #'paragraph span instance creation' }
+BlSpartaMockedTextMeasurer >> newParagraphSpan [
+	^ BlSpartaMockedTextParagraphSpan new 
+]
+
 { #category : #accessing }
 BlSpartaMockedTextMeasurer >> textOffset [
 	^ textOffset

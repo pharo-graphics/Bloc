@@ -54,3 +54,8 @@ BlSpartaTextMeasurer >> measureTextSpan: aBlSpan [
 
 	^ paragraphSpan
 ]
+
+{ #category : #'paragraph span instance creation' }
+BlSpartaTextMeasurer >> newParagraphSpan [
+	^ BlSpartaTextParagraphSpan new
+]
