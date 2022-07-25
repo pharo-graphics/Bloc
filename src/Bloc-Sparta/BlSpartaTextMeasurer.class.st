@@ -12,24 +12,24 @@ Class {
 	#category : #'Bloc-Sparta-Text'
 }
 
-{ #category : #dispatch }
+{ #category : #accessing }
 BlSpartaTextMeasurer >> createParagraphSpan [
-	<return: #BlTextParagraphSpan>
+	<return: #BlSpartaTextParagraphSpan>
 
-	^ BlTextParagraphSpan new
+	^ BlSpartaTextParagraphSpan new
 		  measurer: self;
 		  yourself
 ]
 
-{ #category : #dispatch }
+{ #category : #measurement }
 BlSpartaTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 	aBlTextParagraph measureOn: self
 ]
 
-{ #category : #dispatch }
+{ #category : #measurement }
 BlSpartaTextMeasurer >> measureTextSpan: aBlSpan [
 	"Measure a given text span and return paragraph span with computed metrics"
-	<return: #BlTextParagraphSpan>
+	<return: #BlSpartaTextParagraphSpan>
 
 	| aFontBuilder aFontAndStyleBuilder aFont aTextPainter theAttributes aTextRun aSpartaMetrics aParagraphSpan |
 

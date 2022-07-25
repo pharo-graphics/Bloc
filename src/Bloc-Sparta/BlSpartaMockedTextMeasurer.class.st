@@ -91,6 +91,12 @@ BlSpartaMockedTextMeasurer >> initialize [
 ]
 
 { #category : #measurement }
+BlSpartaMockedTextMeasurer >> measureTextParagraph: aBlTextParagraph [
+
+	aBlTextParagraph measureOn: self
+]
+
+{ #category : #measurement }
 BlSpartaMockedTextMeasurer >> measureTextSpan: aBlSpan [
 	<return: #BlSpartaTextParagraphSpan>
 	| aTextRun aParagraphSpan |

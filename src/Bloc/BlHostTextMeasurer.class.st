@@ -13,12 +13,12 @@ Class {
 	#category : #'Bloc-Universe - Renderer'
 }
 
-{ #category : #dispatch }
+{ #category : #measurement }
 BlHostTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 	self subclassResponsibility
 ]
 
-{ #category : #dispatch }
+{ #category : #measurement }
 BlHostTextMeasurer >> measureTextSpan: aBlTextSpan [
 	self subclassResponsibility
 ]
