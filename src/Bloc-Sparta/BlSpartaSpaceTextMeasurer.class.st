@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessing }
+BlSpartaSpaceTextMeasurer >> canvas [
+	^ self spaceRenderer spartaCanvas
+]
+
+{ #category : #accessing }
 BlSpartaSpaceTextMeasurer >> spaceRenderer [
 	^ spaceRenderer
 ]
@@ -17,9 +22,4 @@ BlSpartaSpaceTextMeasurer >> spaceRenderer [
 BlSpartaSpaceTextMeasurer >> spaceRenderer: aBlSpartaSpaceRenderer [
 
 	spaceRenderer := aBlSpartaSpaceRenderer
-]
-
-{ #category : #accessing }
-BlSpartaSpaceTextMeasurer >> spartaCanvas [
-	^ self spaceRenderer spartaCanvas
 ]

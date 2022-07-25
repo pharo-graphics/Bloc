@@ -36,11 +36,6 @@ BlSpartaMockedTextMeasurer >> ascent: aNumber [
 	ascent := aNumber
 ]
 
-{ #category : #'instance creation' }
-BlSpartaMockedTextMeasurer >> createParagraphSpan [
-	^ BlSpartaMockedTextParagraphSpan new measurer: self
-]
-
 { #category : #accessing }
 BlSpartaMockedTextMeasurer >> descent [
 	<return: #Number>
