@@ -18,7 +18,7 @@ Class {
 	#instVars : [
 		'renderingStrategy'
 	],
-	#category : #'Bloc-Sparta'
+	#category : #'Bloc-Sparta-canvas'
 }
 
 { #category : #drawing }

@@ -4,7 +4,7 @@ I build sparta canvas using Moz2D backend
 Class {
 	#name : #BlSpartaMozCanvasBuilder,
 	#superclass : #BlSpartaCanvasBuilder,
-	#category : 'Bloc-Sparta'
+	#category : #'Bloc-Sparta-canvas'
 }
 
 { #category : #'api - instance creation' }

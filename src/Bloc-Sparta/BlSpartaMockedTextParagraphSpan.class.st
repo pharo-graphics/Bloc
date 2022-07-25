@@ -1,7 +1,16 @@
-Extension { #name : #BlMockedTextParagraphSpan }
+Class {
+	#name : #BlSpartaMockedTextParagraphSpan,
+	#superclass : #BlSpartaTextParagraphSpan,
+	#category : #'Bloc-Sparta-Mocked'
+}
 
-{ #category : #'*Bloc-Sparta' }
-BlMockedTextParagraphSpan >> drawOnSpartaCanvas: aSpartaCanvas [
+{ #category : #accessing }
+BlSpartaMockedTextParagraphSpan >> advance: aNumber [
+	advance := aNumber
+]
+
+{ #category : #drawing }
+BlSpartaMockedTextParagraphSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 	| theAttributes aTextPainter aFontBuilder aCharacterWidth aCharacterHeight |
 	self spanLength isZero
 		ifTrue: [ ^ self ].
@@ -75,4 +84,9 @@ BlMockedTextParagraphSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 	theAttributes
 		do:
 			[ :anAttribute | anAttribute drawAboveOnSpartaCanvas: aSpartaCanvas with: self ]
+]
+
+{ #category : #accessing }
+BlSpartaMockedTextParagraphSpan >> left: aNumber [
+	left := aNumber
 ]

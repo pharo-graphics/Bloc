@@ -4,7 +4,7 @@ I construct a sparta canvas
 Class {
 	#name : #BlSpartaCanvasBuilder,
 	#superclass : #Object,
-	#category : 'Bloc-Sparta'
+	#category : #'Bloc-Sparta-canvas'
 }
 
 { #category : #'api - instance creation' }

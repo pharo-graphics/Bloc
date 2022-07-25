@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpartaWebrenderCanvasBuilder,
 	#superclass : #BlSpartaCanvasBuilder,
-	#category : #'Bloc-Sparta'
+	#category : #'Bloc-Sparta-canvas'
 }
 
 { #category : #accessing }
