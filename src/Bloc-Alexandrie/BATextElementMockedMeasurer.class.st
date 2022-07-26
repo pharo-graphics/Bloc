@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'measurer'
 	],
-	#category : #'Bloc-Sparta-Mocked'
+	#category : #'Bloc-Alexandrie-Mocked'
 }
 
 { #category : #'font - metrics' }
