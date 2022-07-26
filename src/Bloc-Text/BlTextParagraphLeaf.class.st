@@ -103,8 +103,7 @@ BlTextParagraphLeaf >> measurer: aSpanMeasurer [
 { #category : #measurement }
 BlTextParagraphLeaf >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
-	self flag: 'Do we need this ?'.
-	self subclassResponsibility
+
 ]
 
 { #category : #geometry }

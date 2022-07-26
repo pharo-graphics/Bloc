@@ -1,54 +1,54 @@
 Class {
-	#name : #BlTextElementMockedMeasurer,
+	#name : #BlSpartaTextElementMockedMeasurer,
 	#superclass : #BlTextElementMeasurer,
 	#instVars : [
 		'measurer'
 	],
-	#category : #'Bloc-Text-Elements'
+	#category : #'Bloc-Sparta-Mocked'
 }
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> ascent [
+BlSpartaTextElementMockedMeasurer >> ascent [
 	^ measurer ascent
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> ascent: aNumber [
+BlSpartaTextElementMockedMeasurer >> ascent: aNumber [
 	measurer ascent: aNumber
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> descent [
+BlSpartaTextElementMockedMeasurer >> descent [
 	^ measurer descent
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> descent: aNumber [
+BlSpartaTextElementMockedMeasurer >> descent: aNumber [
 	measurer descent: aNumber
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> glyphHeight [
+BlSpartaTextElementMockedMeasurer >> glyphHeight [
 	^ measurer height
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> glyphHeight: aNumber [
+BlSpartaTextElementMockedMeasurer >> glyphHeight: aNumber [
 	measurer height: aNumber
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> glyphWidth [
+BlSpartaTextElementMockedMeasurer >> glyphWidth [
 	^ measurer glyphWidth
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> glyphWidth: aNumber [
+BlSpartaTextElementMockedMeasurer >> glyphWidth: aNumber [
 	measurer glyphWidth: aNumber
 ]
 
 { #category : #initialization }
-BlTextElementMockedMeasurer >> initialize [
+BlSpartaTextElementMockedMeasurer >> initialize [
 	super initialize.
 	
 	measurer := BlSpartaMockedTextMeasurer new.
@@ -59,16 +59,16 @@ BlTextElementMockedMeasurer >> initialize [
 ]
 
 { #category : #initialization }
-BlTextElementMockedMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
+BlSpartaTextElementMockedMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
 	measurer measureTextParagraph: aBlTextParagraph
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> textOffset [
+BlSpartaTextElementMockedMeasurer >> textOffset [
 	^ measurer textOffset
 ]
 
 { #category : #'font - metrics' }
-BlTextElementMockedMeasurer >> textOffset: aNumber [
+BlSpartaTextElementMockedMeasurer >> textOffset: aNumber [
 	measurer textOffset: aNumber
 ]

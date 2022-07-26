@@ -9,9 +9,9 @@ Class {
 	#name : #BlSpartaTextParagraphSpan,
 	#superclass : #BlTextParagraphLeaf,
 	#instVars : [
-		'textRun',
 		'strikethroughOffset',
-		'strikethroughSize'
+		'strikethroughSize',
+		'textRun'
 	],
 	#category : #'Bloc-Sparta-Text'
 }
@@ -121,12 +121,10 @@ BlSpartaTextParagraphSpan >> textRun [
 	^ textRun
 ]
 
-{ #category : #initialization }
+{ #category : #'accessing - text run' }
 BlSpartaTextParagraphSpan >> textRun: aTextRun [
-	"Assign a backend specific text run (collection of glyphs) with corresponding
-	start and end indices which represents an unstyled piece of text"
-	
-	textRun := aTextRun.
+
+	textRun := aTextRun
 ]
 
 { #category : #'accessing - text run' }

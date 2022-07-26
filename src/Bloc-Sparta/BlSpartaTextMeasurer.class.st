@@ -49,9 +49,9 @@ BlSpartaTextMeasurer >> measureTextSpan: aBlSpan [
 
 	textRun := textPainter textRunWithMetrics: spartaMetrics.
 	paragraphSpan := self createParagraphSpan.
-	paragraphSpan applySpartaMetrics: spartaMetrics.
+	paragraphSpan span: aBlSpan.
 	paragraphSpan textRun: textRun.
-
+	paragraphSpan applySpartaMetrics: spartaMetrics.
 	^ paragraphSpan
 ]
 
