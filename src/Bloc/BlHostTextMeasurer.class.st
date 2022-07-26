@@ -10,17 +10,8 @@ Used mainly
 Class {
 	#name : #BlHostTextMeasurer,
 	#superclass : #Object,
-	#instVars : [
-		'aeCanvas'
-	],
 	#category : #'Bloc-Universe - Renderer'
 }
-
-{ #category : #accessing }
-BlHostTextMeasurer >> canvas [
-
-	^ aeCanvas
-]
 
 { #category : #measurement }
 BlHostTextMeasurer >> createParagraphSpan [
