@@ -22,9 +22,11 @@ BlSpartaMockedTextParagraphSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 		anAttribute drawBelowOnSpartaCanvas: aSpartaCanvas with: self.
 		anAttribute applyOnSpartaFontBuilder: aFontBuilder.
 		anAttribute applyOnSpartaTextPainter: aTextPainter ].
+	
 	aTextPainter font: aFontBuilder build.
 	aCharacterWidth := (self width / self textRunLength) asFloat.
 	aCharacterHeight := self height.
+	
 	self textRunStart to: self textRunEnd do: [ :anIndex | 
 		| theMetrics theBounds aMeasuredWidth aMeasuredHeight aHeightScale eachBaseline theFixedBounds |
 		eachBaseline := (self baseline + (anIndex - 1 * (aCharacterWidth @ 0))) x @ 0.
@@ -56,17 +58,17 @@ BlSpartaMockedTextParagraphSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 					string: (anIndex + measurer textOffset - 1) asString;
 					font:
 						(aSpartaCanvas font
-							size: aCharacterHeight * 0.22;
+							size: aCharacterHeight * 0.32;
 							build);
-					baseline: (eachBaseline x - 2) @ (self height - 1);
+					baseline: (eachBaseline x + 1) @ (self height - 1);
 					paint: Color gray;
 					draw ].
 		aSpartaCanvas text
 			string: (anIndex + measurer textOffset) asString;
 			font: (aSpartaCanvas font
-					 size: aCharacterHeight * 0.22;
+					 size: aCharacterHeight * 0.32;
 					 build);
-			baseline: eachBaseline x + aCharacterWidth - 2 @ (self height - 1);
+			baseline: eachBaseline x + aCharacterWidth + 1 @ (self height - 1);
 			paint: Color gray;
 			draw ].
 
