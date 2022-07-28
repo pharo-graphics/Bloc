@@ -203,7 +203,8 @@ BlTextElement >> highlightCategory: aHighlightCategorySymbol with: aParagraphHig
 
 	| l |
 	l := self highlightsMap at: aHighlightCategorySymbol ifAbsentPut: [OrderedCollection new].
-	l add: aParagraphHighlight
+	l add: aParagraphHighlight.
+	self invalidate
 ]
 
 { #category : #'api - highlighting' }
