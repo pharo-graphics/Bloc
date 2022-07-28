@@ -111,6 +111,7 @@ BlSpartaMockedTextMeasurer >> measureTextSpan: aBlSpan [
 		description: [ 'Height must be positive' ].
 
 	aParagraphSpan applyFixedMetrics: self.
+	aParagraphSpan span: aBlSpan.
 	aParagraphSpan textRun: aTextRun.
 
 	^ aParagraphSpan
