@@ -91,8 +91,6 @@ BlTextParagraphMeasurer >> measureSpan: aBlSpan of: aTextParagraph with: aBlHost
 
 	| aParagraphSpan |
 	aParagraphSpan := aBlHostTextMeasurer measureTextSpan: aBlSpan.
-	aParagraphSpan span: aBlSpan.
-
 	aParagraphSpan
 		text: aTextParagraph text
 		from: textPosition

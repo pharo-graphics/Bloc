@@ -19,10 +19,10 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 
 	" Draw each character one by one"
 	self span asString withIndexDo: [ :c :index | 
-		| buffer metrics bounds measuredWidth heightScale measuredHeight eachBaseline fixedBounds |
+		| buffer bounds measuredWidth heightScale measuredHeight eachBaseline fixedBounds |
 		eachBaseline := (self baseline + (index - 1 * (characterWidth @ 0))) x @ 0.
 		buffer := c asString utf8Encoded.
-		metrics := self getTextMetricsFor: buffer withBuilder: fontAndStyleBuilder canvas: aeCanvas.
+		self updateMetricsFor: buffer builder: fontAndStyleBuilder canvas: aeCanvas.
 		bounds := metrics at: #bounds.
 		measuredWidth := bounds width.
 		measuredWidth isZero ifTrue: [ measuredWidth := characterWidth ].

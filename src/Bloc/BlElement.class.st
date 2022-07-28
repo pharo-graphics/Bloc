@@ -1961,6 +1961,13 @@ BlElement >> isDetachedFromSceneGraph [
 	^ spaceReference isDetachedFromSceneGraph
 ]
 
+{ #category : #'children accessing' }
+BlElement >> isFirstChild [
+	"return true if the receiver is the first child of its parent"
+	self hasParent ifFalse: [ ^ self error: 'Must have a parent' ].
+	^ (self parent childIndexOf: self) == 1
+]
+
 { #category : #'focus testing' }
 BlElement >> isFocusable [
 	"Return true if I am able to take focus, false otherwise"

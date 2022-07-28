@@ -7,6 +7,7 @@ Class {
 	#name : #BlSpan,
 	#superclass : #BlWrappedText,
 	#instVars : [
+		'prevAdvance',
 		'attributes'
 	],
 	#category : #'Bloc-Text-Text'
@@ -40,6 +41,12 @@ BlSpan >> encodeOn: aWriteStream with: aZnCharacterEncoder [
 	"Encode myself on a ByteString stream using the provided Zinc encoder."
 	
 	text encodeOn: aWriteStream with: aZnCharacterEncoder
+]
+
+{ #category : #testing }
+BlSpan >> isTabulation [
+	text ifEmpty: [ ^false ].
+	^ text first == Character tab
 ]
 
 { #category : #initialization }
