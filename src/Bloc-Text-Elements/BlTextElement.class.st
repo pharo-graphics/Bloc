@@ -342,6 +342,14 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 	self measuredExtent: aMeasuredExtent
 ]
 
+{ #category : #layout }
+BlTextElement >> measuredWidthFromStart [
+	
+	self previousSiblingDo: [ :s | ^ s measuredWidthFromStart + s measuredWidth  ].
+	^  0
+	
+]
+
 { #category : #accessing }
 BlTextElement >> measurement [
 	<return: #BlTextElementMeasurementStrategy>
@@ -380,17 +388,18 @@ BlTextElement >> onAddedToSceneGraph [
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 
-	text ifNil: [ self error: 'Text model must not be nil!' ].
-
-	(self shouldMeasure: anExtentMeasurementSpec)
+	(text isEmpty not and: [ text first = Character tab ])
 		ifTrue: [ 
-			self telemetry
-				timeSync: [ 'Measure paragraph: ', self class name ]
-				during: [ self measureParagraph: anExtentMeasurementSpec ] ].
-	
-	self telemetry
-		timeSync: [ 'Measure children: ', self class name ]
-		during: [ self measureChildren: anExtentMeasurementSpec ]
+			| tabParagraph tabSpec w tabW |
+			tabParagraph := self createTextParagraph.
+			tabParagraph text: text.
+			self basicMeasureParagraph: tabParagraph.
+			w := self measuredWidthFromStart.
+			tabW := tabParagraph advance - (w\\tabParagraph advance).
+			tabSpec := (anExtentMeasurementSpec widthSpec beExact: tabW) @ anExtentMeasurementSpec heightSpec.
+			self measureParagraph: tabSpec ]
+		ifFalse: [ (self shouldMeasure: anExtentMeasurementSpec) ifTrue: [ self measureParagraph: anExtentMeasurementSpec ] ].
+	self measureChildren: anExtentMeasurementSpec
 ]
 
 { #category : #'hooks - session' }
