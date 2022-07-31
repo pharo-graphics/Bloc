@@ -22,8 +22,7 @@ Class {
 		'highlightsMap'
 	],
 	#classVars : [
-		'DefaultText',
-		'ParagraphPool'
+		'DefaultText'
 	],
 	#category : #'Bloc-Text-Elements'
 }
@@ -34,8 +33,7 @@ BlTextElement class >> cleanUp [
 ]
 
 { #category : #'class initialization' }
-BlTextElement class >> initialize [
-	ParagraphPool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000).
+BlTextElement class >> initialize [ 
 	DefaultText := 'Text' asRopedText readonly
 ]
 
@@ -45,17 +43,6 @@ BlTextElement class >> text: aBlText [
 	^ self new
 		  text: aBlText;
 		  yourself
-]
-
-{ #category : #'private - paragraph' }
-BlTextElement >> acquireParagraph [
-	| aParagraph |
-	
-	aParagraph := ParagraphPool acquire
-		ifNil: [ self createTextParagraph ].
-	aParagraph reset.
-
-	^ aParagraph
 ]
 
 { #category : #accessing }
@@ -254,6 +241,11 @@ BlTextElement >> initialize [
 	"self debug: true"
 ]
 
+{ #category : #layout }
+BlTextElement >> isTabulation [ 
+	^ text isNotEmpty and: [ text first = Character tab ]
+]
+
 { #category : #'api - text' }
 BlTextElement >> labelMeasurement [
 
@@ -304,10 +296,9 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
 
 	paragraph
-		ifNil: [ "or reuse existing" paragraph := self acquireParagraph ]
+		ifNil: [ paragraph := self createTextParagraph ]
 		ifNotNil: [ paragraph reset ].
 	"Create a new text layout"
-
 	paragraph
 		baselineMeasurer: self baselineMeasurer;
 		text: self text;
@@ -399,7 +390,7 @@ BlTextElement >> onAddedToSceneGraph [
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 
-	(text isEmpty not and: [ text first = Character tab ])
+	self isTabulation
 		ifTrue: [ 
 			| tabParagraph tabSpec w tabW |
 			tabParagraph := self createTextParagraph.
@@ -409,7 +400,9 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 			tabW := tabParagraph advance - (w\\tabParagraph advance).
 			tabSpec := (anExtentMeasurementSpec widthSpec beExact: tabW) @ anExtentMeasurementSpec heightSpec.
 			self measureParagraph: tabSpec ]
-		ifFalse: [ (self shouldMeasure: anExtentMeasurementSpec) ifTrue: [ self measureParagraph: anExtentMeasurementSpec ] ].
+		ifFalse: [ (self shouldMeasure: anExtentMeasurementSpec) 
+			ifTrue: [ self measureParagraph: anExtentMeasurementSpec ] ].
+		
 	self measureChildren: anExtentMeasurementSpec
 ]
 
@@ -447,16 +440,6 @@ BlTextElement >> recycledFrom: aStencilBuilder [
 
 { #category : #'private - paragraph' }
 BlTextElement >> releaseParagraph [
-	| aParagraph |
-	
-	paragraph
-		ifNil: [ ^ self ].
-
-	aParagraph := paragraph.
-
-	aParagraph reset.
-	ParagraphPool release: aParagraph.
-	
 	paragraph := nil
 ]
 

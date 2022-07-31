@@ -39,7 +39,6 @@ Class {
 		'maxWidth',
 		'end',
 		'text',
-		'tabWidth',
 		'containerExtent',
 		'session',
 		'scale',
@@ -273,7 +272,6 @@ BlTextParagraph >> indexAtPosition: aPoint [
 BlTextParagraph >> initialize [
 
 	super initialize.
-
 	self reset
 ]
 
@@ -414,7 +412,6 @@ BlTextParagraph >> reset [
 	self finalize.
 
 	text := BlText empty.
-	tabWidth := self defaultTabWidth.
 	maxHeight := Float infinity.
 	maxWidth := Float infinity.
 	session := nil.
@@ -565,18 +562,6 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 						ifFalse: [ 1 ] ] ]
 		do: [ :aParagraphSpan | aFoundBlock cull: aParagraphSpan ]
 		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
-]
-
-{ #category : #'paragraph - accessing' }
-BlTextParagraph >> tabWidth [
-
-	^ tabWidth
-]
-
-{ #category : #'api - instantiation' }
-BlTextParagraph >> tabWidth: anInteger [
-
-	tabWidth := anInteger
 ]
 
 { #category : #'paragraph - accessing' }
