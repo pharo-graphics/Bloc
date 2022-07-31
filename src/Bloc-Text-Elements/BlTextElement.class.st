@@ -343,9 +343,20 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 ]
 
 { #category : #layout }
-BlTextElement >> measuredWidthFromStart [
+BlTextElement >> measuredMaxLineHeight [
 	
-	self previousSiblingDo: [ :s | ^ s measuredWidthFromStart + s measuredWidth  ].
+	| h |
+	h := self height.
+	self previousSiblingDo: [ :s | h := h max: s measuredBounds height ].
+	self nextSiblingDo: [ :s | h := h max: s measuredBounds height ].
+	^  h
+	
+]
+
+{ #category : #layout }
+BlTextElement >> measuredWidthFromLineStart [
+	
+	self previousSiblingDo: [ :s | ^ s measuredWidthFromLineStart + s measuredWidth  ].
 	^  0
 	
 ]
@@ -394,7 +405,7 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 			tabParagraph := self createTextParagraph.
 			tabParagraph text: text.
 			self basicMeasureParagraph: tabParagraph.
-			w := self measuredWidthFromStart.
+			w := self measuredWidthFromLineStart.
 			tabW := tabParagraph advance - (w\\tabParagraph advance).
 			tabSpec := (anExtentMeasurementSpec widthSpec beExact: tabW) @ anExtentMeasurementSpec heightSpec.
 			self measureParagraph: tabSpec ]
