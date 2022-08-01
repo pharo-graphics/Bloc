@@ -67,7 +67,7 @@ BlTextParagraph class >> selectionColor [
 
 { #category : #accessing }
 BlTextParagraph class >> selectionMatchParent [
-	^ SelectionMatchParent ifNil: [ SelectionMatchParent := true ]
+	^ SelectionMatchParent ifNil: [ SelectionMatchParent := false ]
 ]
 
 { #category : #accessing }
@@ -136,7 +136,7 @@ BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
 		so can do the same with position"
 		paragraphMeasurer movePosition: anIterator position + 1.
 		paragraphMeasurer measureSpan: anIterator nextSpan ].
-
+	
 	"measurer creates a line with baseline set to 0@0"
 	line := paragraphMeasurer line.
 	end := line to
