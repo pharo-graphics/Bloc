@@ -1414,6 +1414,13 @@ BlElement >> findMouseEventTargetAt: aPoint [
 ]
 
 { #category : #'children accessing' }
+BlElement >> firstChild [
+	"return true if the receiver is the first child of its parent"
+	self hasChildren ifFalse: [ ^ self error: 'Must have at least one child' ].
+	^ self children first
+]
+
+{ #category : #'children accessing' }
 BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBlock [
 	"Find the first common parent of a receiver and a given element.
 	Evaluate aFoundBlock with that parent if there is one and aNoneBlock otherwise"
@@ -1965,7 +1972,7 @@ BlElement >> isDetachedFromSceneGraph [
 BlElement >> isFirstChild [
 	"return true if the receiver is the first child of its parent"
 	self hasParent ifFalse: [ ^ self error: 'Must have a parent' ].
-	^ (self parent childIndexOf: self) == 1
+	^ (self parent childIndexOf: self) = 1
 ]
 
 { #category : #'focus testing' }
@@ -1986,6 +1993,13 @@ BlElement >> isFocused [
 	<return: #Boolean>
 
 	^ self focused
+]
+
+{ #category : #'children accessing' }
+BlElement >> isLastChild [
+	"return true if the receiver is the first child of its parent"
+	self hasParent ifFalse: [ ^ self error: 'Must have a parent' ].
+	^ (self parent childIndexOf: self) = self children size
 ]
 
 { #category : #layout }

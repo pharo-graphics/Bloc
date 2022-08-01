@@ -180,6 +180,11 @@ BlTextElement >> editorMeasurement [
 	self baselineMeasurer: BlAscentLooseBaselineMeasurer uniqueInstance
 ]
 
+{ #category : #'selection - management' }
+BlTextElement >> hasSelection [
+	^ self selection isNotEmpty
+]
+
 { #category : #'api - highlighting' }
 BlTextElement >> highlightCategory: aHighlightCategorySymbol with: aParagraphHighlight [ 
 
@@ -510,7 +515,9 @@ BlTextElement >> selection [
 { #category : #'private - paragraph' }
 BlTextElement >> setupParagraphBeforeDrawing [
 
-	paragraph containerExtent: self extent.
+	paragraph containerExtent: (self isLastChild
+			 ifTrue: [ self parent extent x @ self extent y ]
+			 ifFalse: [ self extent ]).
 	paragraph selection: self selection.
 	paragraph padding: self padding.
 	" highligh is lazy, do not use the accessor"

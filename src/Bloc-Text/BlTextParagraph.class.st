@@ -49,6 +49,9 @@ Class {
 		'padding',
 		'paragraphMeasurer'
 	],
+	#classVars : [
+		'SelectionMatchParent'
+	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
@@ -60,6 +63,16 @@ BlTextParagraph class >> selectionColor [
 		  g: 0.8084066471163245
 		  b: 0.1906158357771261
 		  alpha: 1.0
+]
+
+{ #category : #accessing }
+BlTextParagraph class >> selectionMatchParent [
+	^ SelectionMatchParent ifNil: [ SelectionMatchParent := true ]
+]
+
+{ #category : #accessing }
+BlTextParagraph class >> selectionMatchParent: aBoolean [
+	SelectionMatchParent := aBoolean
 ]
 
 { #category : #'paragraph - geometry' }
@@ -492,7 +505,7 @@ BlTextParagraph >> selectionRectanglesFrom: aSelection [
 				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (self padding left @ 0) ].
 
 			  "containerExtent includes padding"
-			  stream nextPut: (currSelection to > self text size
+			  stream nextPut: ((currSelection to > self text size  and: [ self class selectionMatchParent ])
 					   ifTrue: [ aSelectionStartPosition x @ 0 corner: self containerExtent ]
 					   ifFalse: [ aSelectionStartPosition x @ 0 corner: aSelectionEndPosition x @ self containerExtent y ]) ] ]
 ]
