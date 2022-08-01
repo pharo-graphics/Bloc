@@ -47,7 +47,6 @@ Class {
 		'line',
 		'baselineMeasurer',
 		'padding',
-		'segmentPiece',
 		'paragraphMeasurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
@@ -456,18 +455,6 @@ BlTextParagraph >> scale [
 BlTextParagraph >> scale: aNumber [
 
 	scale := aNumber
-]
-
-{ #category : #accessing }
-BlTextParagraph >> segmentPiece [
-
-	^ segmentPiece
-]
-
-{ #category : #accessing }
-BlTextParagraph >> segmentPiece: aSegmentPiece [
-
-	segmentPiece := aSegmentPiece
 ]
 
 { #category : #'paragraph - accessing' }
