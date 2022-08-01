@@ -129,7 +129,7 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 BlTextElement >> createTextParagraph [
 	"Create a text paragraph used to measure and render text"
 
-	^ BlTextParagraph new
+	^ BlTextParagraph new 
 ]
 
 { #category : #'api - font size' }
@@ -556,13 +556,8 @@ BlTextElement >> text [
 
 { #category : #accessing }
 BlTextElement >> text: aBlText [
-	"Change a text I represent.
-	Note, that aTextModel should be an instance of BrText.
-	aTextModel must not be nil"
-
-	text = aBlText
-		ifTrue: [ ^ self ].
-
+	"Change a text I represent"
+	text = aBlText ifTrue: [ ^ self ].
 	text := aBlText.
 	defaultFontSize ifNotNil: [ :aDefaultFontSize | text defaultFontSize: aDefaultFontSize ].
 	self textChanged
@@ -588,7 +583,6 @@ BlTextElement >> textDo: aBlock [
 { #category : #'api - text' }
 BlTextElement >> tightMeasurement [
 
-	self measurement:
-		BlTextElementTightMeasurementStrategy uniqueInstance.
+	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlBoundsBaselineMeasurer uniqueInstance
 ]

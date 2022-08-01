@@ -16,8 +16,8 @@ Class {
 }
 
 { #category : #measurement }
-BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer [
-	^ self new hostTextMeasurer: aHostSpanMeasurer
+BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer emptySpan: anEmptySpan [
+	^ self new hostTextMeasurer: aHostSpanMeasurer emptySpan: anEmptySpan
 ]
 
 { #category : #accessing }
@@ -49,6 +49,15 @@ BlTextParagraphMeasurer >> emptySpan [
 	^ BlSpan text: BlText empty attributes: #().
 ]
 
+{ #category : #finalization }
+BlTextParagraphMeasurer >> finalize [
+
+	super finalize.
+	hostTextMeasurer := nil.
+	line finalize.
+	line := nil
+]
+
 { #category : #'measurement - testing' }
 BlTextParagraphMeasurer >> hasAvailableSpace [
 	"Return true if I have space available for more spans, false otherwise"
@@ -57,10 +66,10 @@ BlTextParagraphMeasurer >> hasAvailableSpace [
 ]
 
 { #category : #measurement }
-BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer [
+BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer emptySpan: anEmptySpan [
 
 	hostTextMeasurer := aBlHostTextMeasurer.
-	self measureSpan: self emptySpan.
+	self measureSpan: anEmptySpan.
 ]
 
 { #category : #initialization }
@@ -140,4 +149,11 @@ BlTextParagraphMeasurer >> pushSpan: aParagraphSpan [
 
 	"and move text position"
 	self pushPosition: aParagraphSpan spanLength - 1
+]
+
+{ #category : #initialization }
+BlTextParagraphMeasurer >> reset [
+
+	textPosition := 0.
+	line reset
 ]

@@ -46,7 +46,9 @@ Class {
 		'highlights',
 		'line',
 		'baselineMeasurer',
-		'padding'
+		'padding',
+		'segmentPiece',
+		'paragraphMeasurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -113,20 +115,18 @@ BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
 
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 
-	| anIterator aMeasurer |
-	aMeasurer := BlTextParagraphMeasurer hostTextMeasurer: aHostSpanMeasurer.
-	aMeasurer maxWidth: self maxWidth.
-	aMeasurer maxHeight: self maxHeight.
+	| anIterator |
+	self ensureParagraphMeasurerOn: aHostSpanMeasurer. 
 
 	anIterator := text iterator.
-	[ anIterator hasNext and: [ line isEmpty or: [ aMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
+	[ anIterator hasNext and: [ line isEmpty or: [ paragraphMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
 		"If we pass #hasNext check we will definitely move to the next span,
 		so can do the same with position"
-		aMeasurer movePosition: anIterator position + 1.
-		aMeasurer measureSpan: anIterator nextSpan ].
+		paragraphMeasurer movePosition: anIterator position + 1.
+		paragraphMeasurer measureSpan: anIterator nextSpan ].
 
 	"measurer creates a line with baseline set to 0@0"
-	line := aMeasurer line.
+	line := paragraphMeasurer line.
 	end := line to
 ]
 
@@ -194,6 +194,21 @@ BlTextParagraph >> drawOn: aCanvas [
 	aCanvas drawTextParagraph: self
 ]
 
+{ #category : #'paragraph - measuring' }
+BlTextParagraph >> emptySpan [
+	^ BlSpan text: BlText empty attributes: #().
+]
+
+{ #category : #'paragraph - measuring' }
+BlTextParagraph >> ensureParagraphMeasurerOn: aHostSpanMeasurer [
+
+	paragraphMeasurer
+		ifNil: [ paragraphMeasurer := self newParagraphMeasurerOn: aHostSpanMeasurer ]
+		ifNotNil: [ paragraphMeasurer reset; hostTextMeasurer: aHostSpanMeasurer emptySpan: self emptySpan ].
+	paragraphMeasurer maxWidth: self maxWidth.
+	paragraphMeasurer maxHeight: self maxHeight
+]
+
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> extent [
 	"Return measured extent of the paragraph.
@@ -251,7 +266,6 @@ BlTextParagraph >> indexAtPosition: aPoint [
 
 	| aParagraphSpan aPointInSpan |
 
-	line spans ifNil: [ ^ 0 ].
 	aParagraphSpan := self
 		spanAtPoint: aPoint
 		ifFound: #yourself
@@ -362,6 +376,12 @@ BlTextParagraph >> measuredEnd [
 ]
 
 { #category : #'paragraph - measuring' }
+BlTextParagraph >> newParagraphMeasurerOn: aHostSpanMeasurer [
+
+	^ BlTextParagraphMeasurer hostTextMeasurer: aHostSpanMeasurer emptySpan: self emptySpan
+]
+
+{ #category : #'paragraph - measuring' }
 BlTextParagraph >> normalize: aScale [
 
 	line normalize: aScale
@@ -436,6 +456,18 @@ BlTextParagraph >> scale [
 BlTextParagraph >> scale: aNumber [
 
 	scale := aNumber
+]
+
+{ #category : #accessing }
+BlTextParagraph >> segmentPiece [
+
+	^ segmentPiece
+]
+
+{ #category : #accessing }
+BlTextParagraph >> segmentPiece: aSegmentPiece [
+
+	segmentPiece := aSegmentPiece
 ]
 
 { #category : #'paragraph - accessing' }

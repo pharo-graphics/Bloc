@@ -32,7 +32,7 @@ BlTextParagraphLine >> baseline: aPoint [
 BlTextParagraphLine >> finalize [
 
 	spans do: #finalize.
-	spans := OrderedCollection new
+	spans reset
 ]
 
 { #category : #initialization }
@@ -75,6 +75,13 @@ BlTextParagraphLine >> recomputeLineLayout [
 		self
 			spanAdded: (self spans at: index)
 			after: (self spans at: index - 1) ]
+]
+
+{ #category : #finalization }
+BlTextParagraphLine >> reset [
+
+	self finalize
+
 ]
 
 { #category : #hooks }
