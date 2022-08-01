@@ -148,7 +148,7 @@ BlTextParagraph >> characterBoundsAtIndex: aLocalIndex [
 	| startSpan startPos originIdx endPos endSpan cornerIdx |
 	originIdx := (aLocalIndex - 1 max: 0) min: self text size.
 	startSpan := self spanAtIndex: originIdx.
-	startPos := startSpan positionAt: originIdx. 
+   startPos := startSpan positionAt: originIdx.
 
 	cornerIdx := originIdx + 1 min: self text size.
 	endSpan := self spanAtIndex: cornerIdx.
