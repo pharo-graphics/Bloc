@@ -1,7 +1,7 @@
 "
-I represent a paragraph line and consist of spans.
+I represent a list of consecutive spans of a BlTextParagraph.
 
-Width of the line is not a plain sum of width of all spans. The difference comes from the fact that because of Kerning advance of a piece of text is less than visual width of the same text.
+My width is not a plain sum of width of all spans. The difference comes from the fact that because of Kerning advance of a piece of text is less than visual width of the same text.
 
 "
 Class {
@@ -15,10 +15,7 @@ Class {
 
 { #category : #adding }
 BlTextParagraphLine >> addSpan: aBlTextParagraphLeaf [
-	self ensureSpans.
 	spans add: aBlTextParagraphLeaf.
-	"aBlTextParagraphLeaf paragraph: self paragraph."
-
 	spans size = 1
 		ifTrue: [ self spanAdded: spans first ]
 		ifFalse: [ self spanAdded: spans last after: (spans at: spans size - 1) ]
@@ -26,29 +23,28 @@ BlTextParagraphLine >> addSpan: aBlTextParagraphLeaf [
 
 { #category : #accessing }
 BlTextParagraphLine >> baseline: aPoint [
-	spans ifNil: [ ^self ].
 	self moveSpansBy: self baseline negated.
 	super baseline: aPoint.
 	self moveSpansBy: self baseline
 ]
 
-{ #category : #initialization }
-BlTextParagraphLine >> ensureSpans [
-	spans ifNil: [spans := OrderedCollection new ]
-]
-
 { #category : #finalization }
 BlTextParagraphLine >> finalize [
 
-	spans ifNil: [ ^self ].
 	spans do: #finalize.
+	spans := OrderedCollection new
+]
+
+{ #category : #initialization }
+BlTextParagraphLine >> initialize [
+	super initialize.
 	spans := OrderedCollection new
 ]
 
 { #category : #testing }
 BlTextParagraphLine >> isEmpty [
 	
-	^ spans isNil or: [self spans isEmpty]
+	^ self spans isEmpty
 ]
 
 { #category : #private }
@@ -64,18 +60,14 @@ BlTextParagraphLine >> normalize: aScale [
 	"Normalize this segment to have rounded measurements.
 	I don't change the baseline"
 
-	spans ifNil: [ ^ self ].
 	spans ifEmpty: [ ^ self ].
-
 	spans do: [ :aSpan | aSpan normalize: aScale ].
-
 	self recomputeLineLayout
 ]
 
 { #category : #measurement }
 BlTextParagraphLine >> recomputeLineLayout [
 
-	spans ifNil: [ ^ self ].
 	self spans ifEmpty: [ ^ self ].
 
 	self spanAdded: self spans first.
