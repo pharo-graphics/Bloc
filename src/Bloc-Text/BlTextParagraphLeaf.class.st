@@ -7,7 +7,7 @@ Class {
 	#superclass : #BlTextParagraphSegment,
 	#instVars : [
 		'span',
-		'measurer'
+		'hostMeasurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -18,6 +18,18 @@ BlTextParagraphLeaf >> attributes [
 	<return: #Set of: #BlTextAttribute>
 
 	^ span attributes
+]
+
+{ #category : #accessing }
+BlTextParagraphLeaf >> from: aGlobalTextStart to: aGlobalTextEnd [
+	"Assign provided indices so that we could always determine which part of text I measure"
+	from := aGlobalTextStart.
+	to := aGlobalTextEnd
+]
+
+{ #category : #initialization }
+BlTextParagraphLeaf >> hostMeasurer: ahostSpanMeasurer [
+	hostMeasurer := ahostSpanMeasurer
 ]
 
 { #category : #accessing }
@@ -38,7 +50,7 @@ BlTextParagraphLeaf >> indexAtPosition: aPoint [
 				              text: (span text from: (1 min: anIndex) to: anIndex)
 				              attributes: self attributes.
 
-			  aParagraph := self measurer measureTextSpan: aSubSpan.
+			  aParagraph := hostMeasurer measureTextSpan: aSubSpan.
 
 			  (aWidth closeTo: aParagraph advance epsilon: 0.1)
 				  ifTrue: [ 0 ]
@@ -60,7 +72,7 @@ BlTextParagraphLeaf >> indexAtPosition: aPoint [
 						              text:
 						              (span text from: (1 min: leftIndex) to: leftIndex)
 						              attributes: self attributes.
-					  aParagraph := self measurer measureTextSpan: aSubSpan.
+					  aParagraph := hostMeasurer measureTextSpan: aSubSpan.
 					  leftWidth := aParagraph advance.
 					  leftSpanIndex := leftIndex ].
 
@@ -76,7 +88,7 @@ BlTextParagraphLeaf >> indexAtPosition: aPoint [
 							               from: (1 min: rightIndex)
 							               to: rightIndex)
 						              attributes: self attributes.
-					  aParagraph := self measurer measureTextSpan: aSubSpan.
+					  aParagraph := hostMeasurer measureTextSpan: aSubSpan.
 					  rightWidth := aParagraph advance.
 					  rightSpanIndex := rightIndex ].
 
@@ -86,18 +98,6 @@ BlTextParagraphLeaf >> indexAtPosition: aPoint [
 				               ifFalse: [ rightSpanIndex ].
 
 			  self from + spanIndex - 1 ]
-]
-
-{ #category : #accessing }
-BlTextParagraphLeaf >> measurer [
-
-	^ measurer
-]
-
-{ #category : #initialization }
-BlTextParagraphLeaf >> measurer: aSpanMeasurer [
-
-	measurer := aSpanMeasurer
 ]
 
 { #category : #measurement }
@@ -123,7 +123,7 @@ BlTextParagraphLeaf >> positionAt: anIndex [
 		            (span text from: (1 min: aSpanIndex) to: aSpanIndex)
 		            attributes: self span attributes.
 
-	aMeasuredSpan := self measurer measureTextSpan: aSubSpan.
+	aMeasuredSpan := hostMeasurer measureTextSpan: aSubSpan.
 
 	^ aPositionX + aMeasuredSpan advance @ aPositionY
 ]
@@ -168,13 +168,4 @@ BlTextParagraphLeaf >> spanLength [
 BlTextParagraphLeaf >> spanStart [
 
 	^ 1 min: span size
-]
-
-{ #category : #accessing }
-BlTextParagraphLeaf >> text: aGlobalText from: aGlobalTextStart to: aGlobalTextEnd [
-	"Assign the paragraph's text with provided indices so that we could always determine which part of it I measure"
-
-	paragraph := aGlobalText.
-	from := aGlobalTextStart.
-	to := aGlobalTextEnd
 ]

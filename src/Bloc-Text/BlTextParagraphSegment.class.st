@@ -10,7 +10,8 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'paragraph',
+		'from',
+		'to',
 		'left',
 		'top',
 		'width',
@@ -18,9 +19,7 @@ Class {
 		'advance',
 		'ascent',
 		'descent',
-		'baseline',
-		'from',
-		'to'
+		'baseline'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -84,6 +83,9 @@ BlTextParagraphSegment >> height [
 BlTextParagraphSegment >> initialize [
 	super initialize.
 
+	from := 0.
+	to := 0.
+
 	left := 0.
 	top := 0.
 	width := 0.
@@ -128,19 +130,6 @@ BlTextParagraphSegment >> normalize: aScale [
 BlTextParagraphSegment >> origin [
 
 	^ left @ top
-]
-
-{ #category : #accessing }
-BlTextParagraphSegment >> paragraph [
-	<return: #BlTextParagraph>
-
-	^ paragraph
-]
-
-{ #category : #accessing }
-BlTextParagraphSegment >> paragraph: aBlTextParagraph [
-
-	paragraph := aBlTextParagraph
 ]
 
 { #category : #accessing }

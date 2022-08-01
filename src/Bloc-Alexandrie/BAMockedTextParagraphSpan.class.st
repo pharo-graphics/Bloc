@@ -63,14 +63,14 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 		aeCanvas restoreContextAfter: [ 
 			| idxScaledFont idxBuffer idxGlyphsArray |
 			aeCanvas setSourceColor: Color gray.
-			idxBuffer := (index + measurer textOffset - 1) asString.
+			idxBuffer := (index + hostMeasurer textOffset - 1) asString.
 			idxScaledFont := aeCanvas scaledFontFor: freeTypeFont scaleBy: characterHeight * 0.32.
 			idxGlyphsArray := idxScaledFont glyphArrayFor: idxBuffer length: idxBuffer size.
 			index = 1 ifTrue: [ 
 				aeCanvas restoreContextAfter: [ 
 					aeCanvas pathTranslate: eachBaseline x + 1 @ (self height - 1).
 					aeCanvas drawText: idxGlyphsArray font: idxScaledFont ] ].
-			idxBuffer := (index + measurer textOffset) asString.
+			idxBuffer := (index + hostMeasurer textOffset) asString.
 			idxGlyphsArray := idxScaledFont glyphArrayFor: idxBuffer length: idxBuffer size.
 			aeCanvas restoreContextAfter: [ 
 				aeCanvas pathTranslate: eachBaseline x + characterWidth + 1 @ (self height - 1).

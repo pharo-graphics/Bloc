@@ -18,7 +18,7 @@ BlHostTextMeasurer >> createParagraphSpan [
 	<return: #BlSpartaTextParagraphSpan>
 
 	^ self newParagraphSpan 
-		  measurer: self;
+		  hostMeasurer: self;
 		  yourself
 ]
 

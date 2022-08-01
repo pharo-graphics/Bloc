@@ -13,25 +13,11 @@ Class {
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #'instance creation' }
-BlTextParagraphLine class >> rope: aRope spans: aSpansCollection [
-	^ self new
-		rope: aRope spans: aSpansCollection;
-		yourself
-]
-
-{ #category : #'instance creation' }
-BlTextParagraphLine class >> spans: aSpansCollection [
-	^ self new
-		spans: aSpansCollection;
-		yourself
-]
-
 { #category : #adding }
-BlTextParagraphLine >> addSpan: aBlTextParagraphSpan [
-
-	spans add: aBlTextParagraphSpan.
-	aBlTextParagraphSpan paragraph: self paragraph.
+BlTextParagraphLine >> addSpan: aBlTextParagraphLeaf [
+	self ensureSpans.
+	spans add: aBlTextParagraphLeaf.
+	"aBlTextParagraphLeaf paragraph: self paragraph."
 
 	spans size = 1
 		ifTrue: [ self spanAdded: spans first ]
@@ -40,30 +26,29 @@ BlTextParagraphLine >> addSpan: aBlTextParagraphSpan [
 
 { #category : #accessing }
 BlTextParagraphLine >> baseline: aPoint [
-
+	spans ifNil: [ ^self ].
 	self moveSpansBy: self baseline negated.
 	super baseline: aPoint.
 	self moveSpansBy: self baseline
 ]
 
+{ #category : #initialization }
+BlTextParagraphLine >> ensureSpans [
+	spans ifNil: [spans := OrderedCollection new ]
+]
+
 { #category : #finalization }
 BlTextParagraphLine >> finalize [
 
+	spans ifNil: [ ^self ].
 	spans do: #finalize.
-	spans := OrderedCollection new
-]
-
-{ #category : #initialization }
-BlTextParagraphLine >> initialize [
-	super initialize.
-	
 	spans := OrderedCollection new
 ]
 
 { #category : #testing }
 BlTextParagraphLine >> isEmpty [
 	
-	^ self spans isEmpty
+	^ spans isNil or: [self spans isEmpty]
 ]
 
 { #category : #private }
@@ -75,26 +60,29 @@ BlTextParagraphLine >> moveSpansBy: aPoint [
 
 { #category : #measurement }
 BlTextParagraphLine >> normalize: aScale [
+
 	"Normalize this segment to have rounded measurements.
 	I don't change the baseline"
 
-	spans
-		ifEmpty: [ ^ self ].
-		
+	spans ifNil: [ ^ self ].
+	spans ifEmpty: [ ^ self ].
+
 	spans do: [ :aSpan | aSpan normalize: aScale ].
-	
+
 	self recomputeLineLayout
 ]
 
 { #category : #measurement }
 BlTextParagraphLine >> recomputeLineLayout [
 
-	self spans
-		ifEmpty: [ ^ self ].
+	spans ifNil: [ ^ self ].
+	self spans ifEmpty: [ ^ self ].
 
-	self spanAdded: self spans first.	
-	2 to: self spans size do:
-		[ :index | self spanAdded: (self spans at: index) after: (self spans at: index - 1) ]
+	self spanAdded: self spans first.
+	2 to: self spans size do: [ :index | 
+		self
+			spanAdded: (self spans at: index)
+			after: (self spans at: index - 1) ]
 ]
 
 { #category : #hooks }
@@ -141,5 +129,5 @@ BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 BlTextParagraphLine >> spans [
 	<return: #SequenceableCollection of: #BlTextParagraphLeaf>
 
-	^ spans
+	^ spans 
 ]

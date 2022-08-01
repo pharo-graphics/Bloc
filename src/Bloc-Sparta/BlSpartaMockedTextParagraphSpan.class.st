@@ -55,7 +55,7 @@ BlSpartaMockedTextParagraphSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 			during: [ aTextPainter draw ].
 		anIndex = 1
 			ifTrue: [ aSpartaCanvas text
-					string: (anIndex + measurer textOffset - 1) asString;
+					string: (anIndex + hostMeasurer textOffset - 1) asString;
 					font:
 						(aSpartaCanvas font
 							size: aCharacterHeight * 0.32;
@@ -64,7 +64,7 @@ BlSpartaMockedTextParagraphSpan >> drawOnSpartaCanvas: aSpartaCanvas [
 					paint: Color gray;
 					draw ].
 		aSpartaCanvas text
-			string: (anIndex + measurer textOffset) asString;
+			string: (anIndex + hostMeasurer textOffset) asString;
 			font: (aSpartaCanvas font
 					 size: aCharacterHeight * 0.32;
 					 build);

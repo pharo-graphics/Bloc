@@ -109,28 +109,21 @@ BlTextParagraph >> baselineMeasurer: aBlTextParagraphBaselineMeasurer [
 ]
 
 { #category : #'paragraph - measuring' }
-BlTextParagraph >> basicMeasureOn: aSpanMeasurer [
+BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
+
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 
 	| anIterator aMeasurer |
-	aMeasurer := BlTextParagraphMeasurer newFor: self.
-
-	self text isEmpty ifTrue: [
-		self flag: #todo. "It shouldn't send a BlSpan but a BlParagraphSpan... also, it lets the measurer with position = -1"  
-		aMeasurer
-			measureSpan: (BlSpan text: self text empty attributes: #())
-			of: self
-			with: aSpanMeasurer ].
+	aMeasurer := BlTextParagraphMeasurer hostTextMeasurer: aHostSpanMeasurer.
+	aMeasurer maxWidth: self maxWidth.
+	aMeasurer maxHeight: self maxHeight.
 
 	anIterator := text iterator.
 	[ anIterator hasNext and: [ line isEmpty or: [ aMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
 		"If we pass #hasNext check we will definitely move to the next span,
 		so can do the same with position"
 		aMeasurer movePosition: anIterator position + 1.
-		aMeasurer
-			measureSpan: anIterator nextSpan
-			of: self
-			with: aSpanMeasurer ].
+		aMeasurer measureSpan: anIterator nextSpan ].
 
 	"measurer creates a line with baseline set to 0@0"
 	line := aMeasurer line.
@@ -258,6 +251,7 @@ BlTextParagraph >> indexAtPosition: aPoint [
 
 	| aParagraphSpan aPointInSpan |
 
+	line spans ifNil: [ ^ 0 ].
 	aParagraphSpan := self
 		spanAtPoint: aPoint
 		ifFound: #yourself
@@ -422,11 +416,7 @@ BlTextParagraph >> reset [
 	baselineMeasurer := BlAscentLooseBaselineMeasurer uniqueInstance.
 	scale := 1.
 	
-	line := BlTextParagraphLine new.
-	line
-		baseline: self baseline;
-		paragraph: self.
-
+	line := BlTextParagraphLine new
 ]
 
 { #category : #'paragraph - geometry' }
@@ -547,6 +537,7 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closest span to a point"
 	<return: #BlTextParagraphLeaf>
+
 
 	^ line spans
 		findBinary: [ :aParagraphSpan |

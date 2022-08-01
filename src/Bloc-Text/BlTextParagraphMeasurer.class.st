@@ -9,17 +9,15 @@ Class {
 		'maxHeight',
 		'maxWidth',
 		'textPosition',
-		'line'
+		'line',
+		'hostTextMeasurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #'instance creation' }
-BlTextParagraphMeasurer class >> newFor: aBlTextParagraph [
-
-	^ self basicNew
-		initializeWith: aBlTextParagraph;
-		yourself
+{ #category : #measurement }
+BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer [
+	^ self new hostTextMeasurer: aHostSpanMeasurer
 ]
 
 { #category : #accessing }
@@ -46,6 +44,11 @@ BlTextParagraphMeasurer >> availableWidth [
 	^ maxWidth - self accumulatedWidth
 ]
 
+{ #category : #measurement }
+BlTextParagraphMeasurer >> emptySpan [
+	^ BlSpan text: BlText empty attributes: #().
+]
+
 { #category : #'measurement - testing' }
 BlTextParagraphMeasurer >> hasAvailableSpace [
 	"Return true if I have space available for more spans, false otherwise"
@@ -53,19 +56,22 @@ BlTextParagraphMeasurer >> hasAvailableSpace [
 	^ self availableWidth > 0 and: [ self availableHeight > 0 ]
 ]
 
-{ #category : #initialization }
-BlTextParagraphMeasurer >> initializeWith: aBlTextParagraph [ 
+{ #category : #measurement }
+BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer [
 
-	self initialize.
-	
-	maxWidth := aBlTextParagraph maxWidth.
-	maxHeight := aBlTextParagraph maxHeight.
+	hostTextMeasurer := aBlHostTextMeasurer.
+	self measureSpan: self emptySpan.
+]
+
+{ #category : #initialization }
+BlTextParagraphMeasurer >> initialize [
+
+	maxWidth := Float infinity.
+	maxHeight := Float infinity.
 
 	textPosition := 0.
 
-	line := BlTextParagraphLine new.
-	line paragraph: aBlTextParagraph.
-
+	line := BlTextParagraphLine new
 ]
 
 { #category : #accessing }
@@ -81,18 +87,28 @@ BlTextParagraphMeasurer >> maxHeight [
 ]
 
 { #category : #'paragraph - properties' }
+BlTextParagraphMeasurer >> maxHeight: aFloat [
+
+	maxHeight := aFloat
+]
+
+{ #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxWidth [
 
 	^ maxWidth
 ]
 
+{ #category : #'paragraph - properties' }
+BlTextParagraphMeasurer >> maxWidth: aFloat [
+	maxWidth := aFloat
+]
+
 { #category : #measurement }
-BlTextParagraphMeasurer >> measureSpan: aBlSpan of: aTextParagraph with: aBlHostTextMeasurer [
+BlTextParagraphMeasurer >> measureSpan: aBlSpan [
 
 	| aParagraphSpan |
-	aParagraphSpan := aBlHostTextMeasurer measureTextSpan: aBlSpan.
+	aParagraphSpan := hostTextMeasurer measureTextSpan: aBlSpan.
 	aParagraphSpan
-		text: aTextParagraph text
 		from: textPosition
 		to: ((textPosition + aBlSpan size - 1) max: 0).
 
