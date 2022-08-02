@@ -2845,6 +2845,15 @@ BlElement >> parentBoundsToLocal: aBounds [
 	^ aBounds
 ]
 
+{ #category : #'children accessing' }
+BlElement >> parentDo: aBlock [
+	"Evaluate a block with my direct parent as an argument 
+	If I don't have a parent - does nothing"
+	
+	self hasParent ifFalse: [ ^ self ].
+	^ aBlock value: self parent
+]
+
 { #category : #'geometry position convertion' }
 BlElement >> parentPointToLocal: aPoint [
 	"Transform a given point from parent to my local coordinates"
