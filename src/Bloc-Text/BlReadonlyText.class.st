@@ -6,17 +6,17 @@ Class {
 
 { #category : #'text - modifications' }
 BlReadonlyText >> deleteAll: aCollectionOfIntervals [
-	"Read only text can not be modified"
+	self shouldNotImplement
 ]
 
 { #category : #'text - modifications' }
 BlReadonlyText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
-	"Read only text can not be modified"
+	self shouldNotImplement
 ]
 
 { #category : #'text - modifications' }
 BlReadonlyText >> insertText: aString at: anIndex [
-	"Read only text can not be modified"
+	self shouldNotImplement
 ]
 
 { #category : #'text - copying' }

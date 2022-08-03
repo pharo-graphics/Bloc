@@ -118,7 +118,7 @@ BlHeadlessHostSpace >> logicalSize [
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 	<return: #FensterLogicalSize>
 
-	^ 0@0 asLogicalSize
+	^( 0@0) asLogicalSize
 ]
 
 { #category : #'host space - displaying' }

@@ -511,19 +511,18 @@ BlText >> notifyAttributesRemovedFrom: aFromIndex to: aToIndex [
 
 { #category : #'text - notifying' }
 BlText >> notifyDeletedAll: theDeletedIntervals requested: theRequestedIntervals texts: theDeletedTexts [
-	theDeletedIntervals
-		ifEmpty: [ ^ self ].
-		
-	theRequestedIntervals
-		ifEmpty: [ ^ self ].
-		
-	theDeletedTexts
-		ifEmpty: [ ^ self ].
 
-	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextsDeleted new
-		texts: theDeletedTexts;
-		requestedIntervals: theRequestedIntervals;
-		finalIntervals: theDeletedIntervals) ]
+	theDeletedIntervals ifEmpty: [ ^ self ].
+
+	theRequestedIntervals ifEmpty: [ ^ self ].
+
+	theDeletedTexts ifEmpty: [ ^ self ].
+
+	self announcerDo: [ :anAnnouncer | 
+		anAnnouncer announce: (BlTextsDeleted new
+				 texts: theDeletedTexts;
+				 requestedIntervals: theRequestedIntervals;
+				 finalIntervals: theDeletedIntervals) ]
 ]
 
 { #category : #'text - notifying' }

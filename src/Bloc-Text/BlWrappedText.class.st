@@ -89,7 +89,14 @@ BlWrappedText >> empty [
 	^ self text empty
 ]
 
-{ #category : #'instance creation' }
+{ #category : #'text - converting' }
+BlWrappedText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+	"Encode myself on a ByteString stream using the provided Zinc encoder."
+	
+	text encodeOn: aWriteStream with: aZnCharacterEncoder
+]
+
+{ #category : #'text - enumeration' }
 BlWrappedText >> from: aFromIndex to: aToIndex do: aBlock [
 	"Evaluate aBlock with every character as argument within interval [aFromIndex, aToIndex]"
 	

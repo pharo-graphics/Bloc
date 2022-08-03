@@ -5,9 +5,8 @@ I am data structure independent and rely only on BrText's public API
 "
 Class {
 	#name : #BlSpan,
-	#superclass : #BlWrappedText,
+	#superclass : #BlReadonlyText,
 	#instVars : [
-		'prevAdvance',
 		'attributes'
 	],
 	#category : #'Bloc-Text-Text'
@@ -34,13 +33,6 @@ BlSpan >> attributesFinder [
 	^ BlTextAttributesExplicitFinder new
 		initializeForAttributes: attributes
 		interval: ((1 min: self size) to: self size)
-]
-
-{ #category : #'text - converting' }
-BlSpan >> encodeOn: aWriteStream with: aZnCharacterEncoder [
-	"Encode myself on a ByteString stream using the provided Zinc encoder."
-	
-	text encodeOn: aWriteStream with: aZnCharacterEncoder
 ]
 
 { #category : #testing }

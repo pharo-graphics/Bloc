@@ -1,6 +1,6 @@
 Class {
 	#name : #BlGenerationText,
-	#superclass : #BlWrappedText,
+	#superclass : #BlReadonlyText,
 	#instVars : [
 		'previousGeneration'
 	],

@@ -7,7 +7,7 @@ Similar to the String I can not modified (insertion or deletions). Therefore
 "
 Class {
 	#name : #BlCharacterText,
-	#superclass : #BlWrappedText,
+	#superclass : #BlReadonlyText,
 	#category : #'Bloc-Text-Text'
 }
 
@@ -39,16 +39,6 @@ BlCharacterText >> = anObject [
 	^ true
 ]
 
-{ #category : #'text - converting' }
-BlCharacterText >> asString [
-	"I return an original String representaion of this text.
-	It is guaranteed that the size of the resulting string is the same
-	as of this text"
-
-	^ String streamContents: [ :aStream |
-		self do: [ :aCharacter | aStream nextPut: aCharacter ] ]
-]
-
 { #category : #accessing }
 BlCharacterText >> at: anIndex [
 	"Return a character at a given index"
@@ -57,7 +47,7 @@ BlCharacterText >> at: anIndex [
 	^ (super at: anIndex) asCharacter
 ]
 
-{ #category : #'string - compatibility' }
+{ #category : #accessing }
 BlCharacterText >> basicAt: anIndex [
 	"Return an integer representation of the character at a given index"
 	<return: #Integer>
@@ -76,11 +66,6 @@ BlCharacterText >> copyFrom: aStartIndex to: anEndIndex [
 		ifTrue: [ ^ self empty ].
 
 	^ (self from: aStartIndex to: anEndIndex) characters
-]
-
-{ #category : #'text - modifications' }
-BlCharacterText >> deleteAll: aCollectionOfIntervals [
-	self shouldNotImplement
 ]
 
 { #category : #'text - enumeration' }
@@ -107,16 +92,6 @@ BlCharacterText >> hash [
 		low := hash bitAnd: 16383.
 		hash := (16r260D * low + ((16r260D * (hash // 16384) + (16r0065 * low) bitAnd: 16383) * 16384)) bitAnd: 16r0FFFFFFF ].
 	^ hash
-]
-
-{ #category : #'text - modifications' }
-BlCharacterText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
-	self shouldNotImplement
-]
-
-{ #category : #'text - modifications' }
-BlCharacterText >> insertText: aString at: anIndex [
-	self shouldNotImplement
 ]
 
 { #category : #'string - compatibility' }
