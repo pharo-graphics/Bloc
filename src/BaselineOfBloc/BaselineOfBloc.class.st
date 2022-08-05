@@ -62,8 +62,8 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Text-Rope-Tests' with: [
 					spec requires: #('Bloc-Text-Rope') ].
 
-			"Sparta"
-			spec 
+			"Sparta canvas"
+			spec
 				baseline: 'Sparta' with: [
 					spec repository: 'github://pharo-graphics/Sparta:dev-1.0/src' ].
 			spec
@@ -71,6 +71,14 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #('Bloc' 'Sparta') ];
 				package: #'Bloc-Sparta' with: [
 					spec requires: #('Sparta' 'Bloc' 'Bloc-Text' 'Bloc-Compositor') ].
+
+			"Alexandrie canvas"
+			spec
+				baseline: 'Alexandrie' with: [
+					spec repository: 'github://pharo-graphics/Alexandrie:master/src' ].
+			spec
+				package: #'Bloc-Alexandrie' with: [
+					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ].
 
 			"Layout"
 			spec 
