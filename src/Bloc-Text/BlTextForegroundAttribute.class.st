@@ -37,6 +37,12 @@ BlTextForegroundAttribute class >> paint: aPaint [
 	^ self color: aPaint
 ]
 
+{ #category : #'text style' }
+BlTextForegroundAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+
+	aBlTextFontAndStyleBuilder color: self paint
+]
+
 { #category : #comparing }
 BlTextForegroundAttribute >> equals: anAnotherAttribute [
 	^ self paint = anAnotherAttribute paint
