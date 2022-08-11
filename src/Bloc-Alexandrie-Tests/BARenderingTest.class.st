@@ -16,7 +16,7 @@ BARenderingTest class >> exportAllFilesUsingAeCanvas [
 			space.
 		self exportFileNamed: each with: aSpace root aeAsForm ].
 	
-	self inform: ('Exported files using AeCanvas')
+	self inform: 'Exported files using AeCanvas'
 
 ]
 
@@ -58,8 +58,8 @@ BARenderingTest >> fileNameFor: aSymbol [
 BARenderingTest >> filesystemResourcesDirectory [
 
 	| repo |
-	repo := IceRepository registry detect: [ :each | each name asLowercase = 'alexandrie' ].
-	^ repo location / 'tests' 
+	repo := IceRepository registry detect: [ :each | each name asLowercase = 'bloc' ].
+	^ (repo location / 'tests') ensureCreateDirectory; yourself
 ]
 
 { #category : #tests }
@@ -94,5 +94,5 @@ BARenderingTest >> testAllFixtures [
 		mismatchingResults do: [ :each | each inspect ].
 "
 
-	self assertEmpty: mismatchingResults
+	self assert: mismatchingResults size equals: 0
 ]
