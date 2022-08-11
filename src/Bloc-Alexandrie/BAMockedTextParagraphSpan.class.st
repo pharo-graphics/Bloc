@@ -1,7 +1,7 @@
 Class {
 	#name : #BAMockedTextParagraphSpan,
 	#superclass : #BATextParagraphLeaf,
-	#category : #'Bloc-Alexandrie-Mocked'
+	#category : #'Bloc-Alexandrie-Text-Mocked'
 }
 
 { #category : #drawing }

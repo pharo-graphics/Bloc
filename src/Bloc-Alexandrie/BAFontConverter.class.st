@@ -9,7 +9,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Alexandrie'
+	#category : #'Bloc-Alexandrie-Fonts'
 }
 
 { #category : #accessing }
