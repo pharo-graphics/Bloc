@@ -738,7 +738,7 @@ BlSpaceFixture >> buildTransformTranslate [
 BlSpaceFixture >> buildVariantsOf: aBlElementGeometry [
 
 	| outskirts positionGenerator addElementBlock |
-	builder spaceExtent: 150@180.
+	builder spaceExtent: 150@220.
 
 	outskirts := { BlOutskirts inside. BlOutskirts centered. BlOutskirts outside }.
 	positionGenerator := self 
@@ -782,6 +782,28 @@ BlSpaceFixture >> buildVariantsOf: aBlElementGeometry [
 			value: Color transparent
 			value: builder nextColor translucent
 			value: eachOutskirt ].
+
+	"Transformations"
+	{	[ :t |
+			t scaleBy: 0.8.
+			"rotation at bottom-left:"
+			t normalizedOrigin: 0 @ 1.
+			t skewY: 10.
+			t rotateBy: 5 ].
+		[ :t |
+			"rotation beyond top-right:"
+			t normalizedOrigin: 0.5 @ -0.5.
+			t rotateBy: -45.
+			t scaleBy: 1.25. ].
+		[ :t |
+			t translateBy: 5 asPoint.
+			t skewX: 10 ] 
+	} do: [ :each |
+		(addElementBlock
+			value: builder nextColor translucent
+			value: builder nextColor
+			value: BlOutskirts inside)
+				transformDo: each ].
 
 ]
 
