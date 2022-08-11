@@ -527,15 +527,25 @@ BlSpaceFixture >> buildTextAttributes [
 	    yourself.
 	
 	builder
-		addText: ((self ropedTextFor: 'Les') fontSize: 40; black; foreground: Color blue; yourself)
-		 to: container.
+		addText: ((self ropedTextFor: 'Les')
+			fontSize: 40;
+			fontName: self monospacedFontFamilyName;
+			foreground: Color blue;
+			yourself)
+		to: container.
 
 	builder
-		addText: ((self ropedTextFor: 'élèves') fontSize: 30; underline; yourself)
+		addText: ((self ropedTextFor: 'élèves')
+			fontSize: 30;
+			underline;
+			yourself)
 		to: container.
 		
 	builder
-		addText: ((self ropedTextFor: 'français') fontSize: 25; italic; background: Color yellow; yourself)
+		addText: ((self ropedTextFor: 'français')
+			fontSize: 25;
+			background: Color yellow;
+			yourself)
 		to: container.
 ]
 
@@ -998,11 +1008,23 @@ BlSpaceFixture >> initialize [
 ]
 
 { #category : #private }
+BlSpaceFixture >> monospacedFontFamilyName [
+		
+	^ 'Source Code Pro'
+]
+
+{ #category : #private }
 BlSpaceFixture >> ropedTextFor: aString [
 
 	^ aString asRopedText
-		  fontName: 'DejaVu Sans';
+		  fontName: self sansFontFamilyName;
 		  yourself
+]
+
+{ #category : #private }
+BlSpaceFixture >> sansFontFamilyName [
+
+	^ 'Source Sans Pro'
 ]
 
 { #category : #accessing }
