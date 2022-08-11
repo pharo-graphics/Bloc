@@ -118,7 +118,7 @@ BlPixelComparison >> inspectionActualVsExpectedDiff: aBuilder [
 { #category : #spec }
 BlPixelComparison >> inspectionMagnification [
 
-	^ 3
+	^ 2
 ]
 
 { #category : #testing }
