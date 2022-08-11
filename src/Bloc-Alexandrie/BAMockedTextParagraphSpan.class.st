@@ -7,11 +7,14 @@ Class {
 { #category : #drawing }
 BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 
-	| freeTypeFont characterWidth characterHeight |
+	| characterWidth characterHeight aBlFont aFace |
 	self spanLength isZero ifTrue: [ ^ self ].
 
-	freeTypeFont := fontAndStyleBuilder font asLogicalFont asFreetypeFont.
-	cairoScaledFont := aeCanvas scaledFontFor: freeTypeFont.
+	aBlFont := fontAndStyleBuilder font.
+	aFace := aBlFont asAeFTFace.
+	cairoScaledFont := aeCanvas
+		scaledFontForFace: aFace
+		size: aBlFont fontSize value.
 
 	"Get glyphs for the text"
 	characterWidth := (self width / self spanLength) asFloat.
@@ -64,7 +67,9 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 			| idxScaledFont idxBuffer idxGlyphsArray |
 			aeCanvas setSourceColor: Color gray.
 			idxBuffer := (index + hostMeasurer textOffset - 1) asString.
-			idxScaledFont := aeCanvas scaledFontFor: freeTypeFont scaleBy: characterHeight * 0.32.
+			idxScaledFont := aeCanvas
+				scaledFontForFace: aFace
+				size: characterHeight * 0.32.
 			idxGlyphsArray := idxScaledFont glyphArrayFor: idxBuffer length: idxBuffer size.
 			index = 1 ifTrue: [ 
 				aeCanvas restoreContextAfter: [ 
