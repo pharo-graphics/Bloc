@@ -805,7 +805,28 @@ BlSpaceFixture >> buildVariantsOfAll: aBlElementGeometryCollection [
 { #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfEllipse [
 
-	self buildVariantsOf: BlEllipseGeometry new
+	| positionGenerator |
+	builder spaceExtent: 170@70.
+
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: 10 asPoint
+		by: 50
+		columns: 3.
+	
+	{
+		50 @ 30.
+		30 @ 50.
+		50 @ 50.
+	} do: [ :each |
+		builder addToRoot
+			geometry: BlEllipseGeometry new;
+			border: (BlBorder paint: builder nextColor translucent width: 10);
+			background: builder nextColor translucent;
+			relocate: positionGenerator next;
+			size: each;
+			outskirts: BlOutskirts outside;
+			yourself ].
+
 ]
 
 { #category : #fixtures }

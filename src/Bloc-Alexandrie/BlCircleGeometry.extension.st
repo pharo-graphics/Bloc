@@ -9,9 +9,7 @@ BlCircleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		hasCaps: false
 		block: [ :cairoContext | 
 			cairoContext
-				primArcCenterX: self origin x + self radius
-				centerY: self origin y + self radius
-				radius: self radius
-				startAngle: 0.0
-				endAngle: Float twoPi ]
+				circleCenterX: self origin x
+				y: self origin y
+				radius: self radius ]
 ]
