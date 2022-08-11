@@ -22,7 +22,7 @@ BlTriangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 { #category : #'*Bloc-Alexandrie' }
 BlTriangleGeometry >> aeContainsPoint: aPoint in: aBlElement [
 
-	^ AeOffscreen instance
+	^ BAOffscreen instance
 		  is: aPoint
 		  inFillOfVertices: self computeVertices
 ]

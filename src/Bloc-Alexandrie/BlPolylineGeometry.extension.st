@@ -17,7 +17,7 @@ BlPolylineGeometry >> aeContainsPoint: aPoint in: aBlElement [
 	"Answer whether aPoint is contained by a this geometry."
 
 	self flag: #todo. "This is wrong"
-	^ AeOffscreen instance
+	^ BAOffscreen instance
 		  is: aPoint
 		  inFillOfVertices: self vertices
 ]

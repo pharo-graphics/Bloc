@@ -93,7 +93,7 @@ BAOSWindowSDL2Host >> keyboardKeyTable [
 { #category : #'host - api' }
 BAOSWindowSDL2Host >> offscreenMeasureTextParagraph: aBlTextParagraph [
 
-	AeOffscreen instance measureTextParagraph: aBlTextParagraph
+	BAOffscreen instance measureTextParagraph: aBlTextParagraph
 ]
 
 { #category : #'host - api' }

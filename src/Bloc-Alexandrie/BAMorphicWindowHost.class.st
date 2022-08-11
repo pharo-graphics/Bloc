@@ -37,7 +37,7 @@ BAMorphicWindowHost >> createHostSpaceFor: aSpace [
 { #category : #'host - api' }
 BAMorphicWindowHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 
-	AeOffscreen instance measureTextParagraph: aBlTextParagraph
+	BAOffscreen instance measureTextParagraph: aBlTextParagraph
 ]
 
 { #category : #'host - api' }
