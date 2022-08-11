@@ -8,8 +8,6 @@ BlRectangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		hasJoins: true
 		hasCaps: false
 		block: [ :cairoContext |
-			| aRectangle |
-			aRectangle := aBlElement boundsInLocal.
-			cairoContext rectangle: aRectangle ]
+			cairoContext rectangleTo: aBlElement extent ]
 
 ]

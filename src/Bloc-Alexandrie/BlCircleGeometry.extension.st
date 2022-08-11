@@ -8,8 +8,5 @@ BlCircleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		hasJoins: false
 		hasCaps: false
 		block: [ :cairoContext | 
-			cairoContext
-				circleCenterX: self origin x
-				y: self origin y
-				radius: self radius ]
+			cairoContext circleRadius: self radius ]
 ]

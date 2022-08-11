@@ -9,7 +9,7 @@ BlRoundedRectangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		hasCaps: false
 		block: [ :cairoContext |
 			cairoContext
-				roundedRectangle: self geometryBounds
+				roundedRectangleTo: self extent
 				radii: cornerRadii asArray ]
 
 ]
