@@ -778,27 +778,22 @@ BlSpaceFixture >> buildVariantsOf: aBlElementGeometry [
 { #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfAll: aBlElementGeometryCollection [
 
-	| positionGenerator addElementBlock |
+	| positionGenerator |
 	builder spaceExtent: 150@210.
 
 	positionGenerator := self 
 		gridPositionGeneratorStartingAt: 10 asPoint
 		by: 40
 		columns: 3.
-	addElementBlock := [ :backgroundColor :borderColor :aBlElementGeometry |
+	
+	aBlElementGeometryCollection do: [ :each |
 		builder addToRoot
-			geometry: aBlElementGeometry;
-			border: (BlBorder paint: borderColor width: 2);
-			background: backgroundColor;
+			geometry: each;
+			border: (BlBorder paint: builder nextColor width: 2);
+			background: builder nextColor;
 			relocate: positionGenerator next;
 			size: 30 asPoint;
 			yourself ].
-	
-	aBlElementGeometryCollection do: [ :each |
-		addElementBlock
-			value: builder nextColor
-			value: builder nextColor
-			value: each ].
 
 ]
 
