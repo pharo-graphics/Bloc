@@ -550,6 +550,28 @@ BlSpaceFixture >> buildTextAttributes [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildTextEmoji [
+
+	| emojiString |
+	self flag: #todo. "TODO don't touch global manager"
+	"This ensures the emoji font in repo's tests directory is loaded."
+	AeFontManager globalInstance scanDirectory: AeFilesytemResources fontsDirectory.
+	
+	builder spaceExtent: 200 @ 80.
+
+	emojiString := WideString streamContents: [ :stream |
+		#(16r1F44D 16r1f642 16r1F525 ) do: [ :each |
+			stream nextPut: (Unicode value: each) ]].
+
+	builder
+		addTextToRoot: (emojiString asRopedText
+			fontName: self emojiFontFamilyName;
+			fontSize: 50;
+			yourself)
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildTextMeasurements [
 
 	| container |
@@ -975,6 +997,12 @@ BlSpaceFixture >> diagonalPositionGeneratorStartingAt: aPoint by: by [
 		index := 0.
 		[ 	g yield: aPoint + index asPoint.
 			index := index + by ] repeat ]
+]
+
+{ #category : #private }
+BlSpaceFixture >> emojiFontFamilyName [
+	
+	^ 'Noto Color Emoji'
 ]
 
 { #category : #private }
