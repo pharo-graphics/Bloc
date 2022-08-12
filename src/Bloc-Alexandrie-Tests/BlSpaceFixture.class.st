@@ -555,7 +555,8 @@ BlSpaceFixture >> buildTextEmoji [
 	| emojiString |
 	self flag: #todo. "TODO don't touch global manager"
 	"This ensures the emoji font in repo's tests directory is loaded."
-	AeFontManager globalInstance scanDirectory: AeFilesytemResources fontsDirectory.
+	(AeFontManager globalInstance includesFamilyName: self emojiFontFamilyName) ifFalse: [
+		AeFontManager globalInstance scanDirectory: AeFilesytemResources fontsDirectory ].
 	
 	builder spaceExtent: 200 @ 80.
 
@@ -1002,7 +1003,7 @@ BlSpaceFixture >> diagonalPositionGeneratorStartingAt: aPoint by: by [
 { #category : #private }
 BlSpaceFixture >> emojiFontFamilyName [
 	
-	^ 'Noto Color Emoji'
+	^ 'Noto Emoji'
 ]
 
 { #category : #private }
