@@ -5,7 +5,26 @@ Class {
 }
 
 { #category : #exporting }
-BARenderingTest class >> exportAllFilesUsingAeCanvas [
+BARenderingTest class >> clearExports [
+	<script>
+
+	self new filesystemResourcesDirectory deleteAllChildren
+]
+
+{ #category : #exporting }
+BARenderingTest class >> export: aSymbol form: aForm [ 
+
+	| aFileName aPCRenderingTest |
+	aPCRenderingTest := self new.
+	aFileName := aPCRenderingTest fileNameFor: aSymbol.
+	aFileName asFileReference ensureDelete.
+
+	aForm writePNGFileNamed: aFileName
+]
+
+{ #category : #exporting }
+BARenderingTest class >> exportAll [
+	"Export each fixture space to disk, to be used as the expected result in the test."
 	<script>
 
 	BlSpaceFixture allFixtureSelectors do: [ :each |
@@ -14,37 +33,28 @@ BARenderingTest class >> exportAllFilesUsingAeCanvas [
 			host: BAOSWindowSDL2Host new; 
 			perform: each;
 			space.
-		self exportFileNamed: each with: aSpace root aeAsForm ].
+		self export: each form: aSpace root aeAsForm ].
 	
 	self inform: 'Exported files using AeCanvas'
 
 ]
 
-{ #category : #exporting }
-BARenderingTest class >> exportAllFilesUsingCurrentSpartaCanvas [
-	<script>
-
-	BlSpaceFixture allFixtureSelectors do: [ :each |
-		| aSpace |
-		aSpace := BlSpaceFixture new
-			host: BlOSWindowSDL2Host new; 
-			perform: each;
-			space.
-		self exportFileNamed: each with: aSpace root asSpartaForm ].
-	
-	self inform: ('Exported files using Sparta ', Bloc preferableSpartaCanvas label)
+{ #category : #tests }
+BARenderingTest >> alexandrieFormFor: aSymbol [
+		
+	| aSpace |
+	aSpace := BlSpaceFixture new
+		host: BAOSWindowSDL2Host new; 
+		perform: aSymbol;
+		space.
+	^ aSpace root aeAsForm
 
 ]
 
-{ #category : #exporting }
-BARenderingTest class >> exportFileNamed: aSymbol with: aForm [ 
+{ #category : #tests }
+BARenderingTest >> expectedFormFor: aSymbol [
 
-	| aFileName aPCRenderingTest |
-	aPCRenderingTest := self new.
-	aFileName := aPCRenderingTest fileNameFor: aSymbol.
-	aFileName asFileReference ensureDelete.
-
-	aForm writePNGFileNamed: aFileName
+	^ Form fromFileNamed: (self fileNameFor: aSymbol)
 ]
 
 { #category : #tests }
@@ -64,19 +74,10 @@ BARenderingTest >> filesystemResourcesDirectory [
 
 { #category : #tests }
 BARenderingTest >> pixelComparisonFor: aSymbol [
-	
-	| aSpace expectedForm actualForm |
-	expectedForm := Form fromFileNamed: (self fileNameFor: aSymbol).
-
-	aSpace := BlSpaceFixture new
-		host: BAOSWindowSDL2Host new; 
-		perform: aSymbol;
-		space.
-	actualForm := aSpace root aeAsForm.
 
 	^ BlPixelComparison
-		expectedForm: expectedForm
-		actualForm: actualForm
+		expectedForm: (self expectedFormFor: aSymbol)
+		actualForm: (self alexandrieFormFor: aSymbol)
 		label: aSymbol
 ]
 
@@ -89,9 +90,9 @@ BARenderingTest >> testAllFixtures [
 
 	mismatchingResults := results reject: [ :each | each isMatch ].
 
-"	DEBUG WITH:
+"	INSPECT MISMATCHES WITH:
 
-		mismatchingResults do: [ :each | each inspect ].
+		mismatchingResults inspect
 "
 
 	self assert: mismatchingResults size equals: 0
