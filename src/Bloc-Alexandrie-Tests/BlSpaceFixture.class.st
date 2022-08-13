@@ -219,6 +219,36 @@ BlSpaceFixture >> buildImagesAndTransformations [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildLinearLayoutWithPaddingAndMargin [
+
+	| container |
+	container :=
+	  builder addToRoot
+	    layout: (BlLinearLayout vertical cellSpacing: 5);
+	    padding: (BlInsets all: 10);
+	    constraintsDo: [ :c |
+	      c horizontal exact: 80.
+	      c vertical matchParent ];
+	    yourself.
+
+	(builder addTo: container)
+		background: Color orange;
+	    constraintsDo: [ :c |
+	      c horizontal matchParent.
+			c vertical exact: 20 ];
+		yourself.
+
+	(builder addTo: container)
+		background: Color blue;
+	   constraintsDo: [ :c |
+	      c horizontal matchParent.
+			c vertical exact: 10 ];
+		margin: (BlInsets horizontal: 10);
+		yourself.
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildOpacities [
 
 	| size fillColor borderColor |
