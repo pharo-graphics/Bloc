@@ -1,4 +1,5 @@
 SmalltalkCISpec {
+  #preLoading: 'scripts/ciPreLoading.st',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Bloc',
