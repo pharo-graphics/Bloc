@@ -51,6 +51,12 @@ BlInsets class >> empty [
 ]
 
 { #category : #'instance creation' }
+BlInsets class >> horizontal: aNumber [
+
+	^ self left: aNumber right: aNumber
+]
+
+{ #category : #'instance creation' }
 BlInsets class >> left: l [
 	^ self 
 		top: 0
@@ -129,6 +135,12 @@ BlInsets class >> top: t right: r bottom: b left: l [
 		right: r
 		bottom: b
 		left: l
+]
+
+{ #category : #'instance creation' }
+BlInsets class >> vertical: aNumber [
+
+	^ self top: aNumber bottom: aNumber
 ]
 
 { #category : #converting }
