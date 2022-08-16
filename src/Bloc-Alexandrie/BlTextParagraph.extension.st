@@ -37,7 +37,7 @@ BlTextParagraph >> aeFillRectanglesBackground: anArrayOfrectangles on: aeCanvas 
 	"TODO: refactor the following is the only Alexandrie-specific code"
 
 	aeCanvas restoreContextAfter: [ 
-		aeCanvas setBackgroundWith: [ aeCanvas setSourceColor: aColor ] alpha: 1.0.
+		aeCanvas setBackgroundWith: [ aeCanvas setSourceColor: aColor ].
 
 		aeCanvas setBorderOff.
 

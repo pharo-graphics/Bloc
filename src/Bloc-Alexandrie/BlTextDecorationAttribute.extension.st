@@ -18,8 +18,7 @@ BlTextDecorationAttribute >> aeDrawAboveOn: aeCanvas span: aBASpan [
 			 ].
 		
 		aeCanvas
-			setBackgroundWith: [ aeCanvas setSourceColor: self color ] 
-				alpha: 1.0;
+			setBackgroundWith: [ aeCanvas setSourceColor: self color ];
 			setBorderOff.
 		"ToDo: set line joins?"
 

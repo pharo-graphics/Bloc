@@ -6,9 +6,8 @@ BlTextBackgroundAttribute >> aeDrawBelowOn: aeCanvas span: aBASpan [
 
 	aeCanvas restoreContextAfter: [ 
 
-		aeCanvas
-			setBackgroundWith: [ aeCanvas setSourceColor: paint ]
-				alpha: 1.0.
+		aeCanvas setBackgroundWith: [
+			aeCanvas setSourceColor: paint ].
 
 		aeCanvas setBorderOff.
 		"ToDo: set line joins?"

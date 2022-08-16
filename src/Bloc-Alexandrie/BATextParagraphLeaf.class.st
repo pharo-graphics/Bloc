@@ -33,7 +33,7 @@ BATextParagraphLeaf >> updateMetricsFor: utf8EncodedString builder: aBlTextFontA
 
 	"Return a font metrics dictionary from an abstract font"
 
-	| buffer fontExtents aBlFont |
+	| buffer aBlFont |
 	fontAndStyleBuilder := aBlTextFontAndStyleBuilder.
 	aBlFont := fontAndStyleBuilder font.
 	cairoScaledFont := aeCanvas
@@ -44,10 +44,8 @@ BATextParagraphLeaf >> updateMetricsFor: utf8EncodedString builder: aBlTextFontA
 	buffer := utf8EncodedString.
 	cairoGlyphsArray := cairoScaledFont glyphArrayFor: buffer length: buffer size.
 
-	fontExtents := aeCanvas fontExtentsOf: cairoScaledFont.
-
-	metrics at: #ascent put: fontExtents ascent negated.
-	metrics at: #descent put: fontExtents descent.
+	metrics at: #ascent put: cairoScaledFont extents ascent negated.
+	metrics at: #descent put: cairoScaledFont extents descent.
 
 	"Get text metrics"
 	"See SpartaTextMetrics>>#cairoInitializeFrom:"
