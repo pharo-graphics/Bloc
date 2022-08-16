@@ -3,13 +3,9 @@ Extension { #name : #BlPolygonGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlPolygonGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas
-		setPathKey: self
-		hasJoins: true "probably"
-		hasCaps: false
-		block: [ :cairoContext | 
-			self vertices do: [ :each | cairoContext lineTo: each ].
-			cairoContext primClosePath ]
+	aeCanvas drawClosedPathWith: [ :cairoContext | 
+		self vertices do: [ :each | cairoContext lineTo: each ].
+		cairoContext primClosePath ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }

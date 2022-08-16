@@ -41,11 +41,8 @@ BlTextParagraph >> aeFillRectanglesBackground: anArrayOfrectangles on: aeCanvas 
 
 		aeCanvas setBorderOff.
 
-		aeCanvas
-			setPathKey: self
-			hasJoins: true
-			hasCaps: false
-			block: [ :cairoContext | anArrayOfrectangles do: [ :each | cairoContext rectangle: each ] ].
+		aeCanvas drawClosedPathWith: [ :cairoContext |
+			anArrayOfrectangles do: [ :each | cairoContext rectangle: each ] ].
 
 		aeCanvas drawFigure ]
 ]

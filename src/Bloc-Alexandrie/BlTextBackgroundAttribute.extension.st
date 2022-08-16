@@ -13,14 +13,10 @@ BlTextBackgroundAttribute >> aeDrawBelowOn: aeCanvas span: aBASpan [
 		aeCanvas setBorderOff.
 		"ToDo: set line joins?"
 
-		aeCanvas
-			setPathKey: self
-			hasJoins: true
-			hasCaps: false
-			block: [ :cairoContext |
-				| aRectangle |
-				aRectangle := aBASpan bounds "translateBy: aBASpan baselinePoint".
-				cairoContext rectangle: aRectangle ].
+		aeCanvas drawClosedPathWith: [ :cairoContext |
+			| aRectangle |
+			aRectangle := aBASpan bounds "translateBy: aBASpan baselinePoint".
+			cairoContext rectangle: aRectangle ].
 
 		aeCanvas drawFigure.
 		

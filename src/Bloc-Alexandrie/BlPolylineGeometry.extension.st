@@ -3,12 +3,8 @@ Extension { #name : #BlPolylineGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlPolylineGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas
-		setPathKey: self
-		hasJoins: true "probably"
-		hasCaps: true
-		block: [ :cairoContext |
-			self vertices do: [ :each | cairoContext lineTo: each ] ]
+	aeCanvas drawOpenPathWith: [ :cairoContext |
+		self vertices do: [ :each | cairoContext lineTo: each ] ]
 
 ]
 

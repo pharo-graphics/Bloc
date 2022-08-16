@@ -23,16 +23,12 @@ BlTextDecorationAttribute >> aeDrawAboveOn: aeCanvas span: aBASpan [
 			setBorderOff.
 		"ToDo: set line joins?"
 
-		aeCanvas
-			setPathKey: self
-			hasJoins: true
-			hasCaps: false
-			block: [ :cairoContext |
-				cairoContext
-					primRectangleX: fromX
-					y: fromY
-					width: toX
-					height: toY ].
+		aeCanvas drawClosedPathWith: [ :cairoContext |
+			cairoContext
+				primRectangleX: fromX
+				y: fromY
+				width: toX
+				height: toY ].
 
 		aeCanvas drawFigure.
 		

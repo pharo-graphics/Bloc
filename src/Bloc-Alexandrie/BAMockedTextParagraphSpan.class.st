@@ -46,11 +46,8 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 			aeCanvas setBorderBlock: [ 
 				aeCanvas setSourceColor: Color veryVeryLightGray lighter.
 				aeCanvas setBorderWidth: 1.0 ].
-			aeCanvas
-				setPathKey: self
-				hasJoins: true
-				hasCaps: false
-				block: [ :cairoContext | cairoContext rectangle: fixedBounds ].
+			aeCanvas drawClosedPathWith: [ :cairoContext |
+				cairoContext rectangle: fixedBounds ].
 			aeCanvas drawFigure ].
 
 		"Draw the current character"
