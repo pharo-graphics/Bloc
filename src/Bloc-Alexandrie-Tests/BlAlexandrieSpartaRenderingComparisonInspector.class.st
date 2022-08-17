@@ -1,11 +1,11 @@
 Class {
-	#name : #BlAlexandrieSpartaRenderingComparisonTest,
+	#name : #BlAlexandrieSpartaRenderingComparisonInspector,
 	#superclass : #Object,
 	#category : #'Bloc-Alexandrie-Tests-Base'
 }
 
 { #category : #tests }
-BlAlexandrieSpartaRenderingComparisonTest >> alexandrieFormFor: aSymbol [
+BlAlexandrieSpartaRenderingComparisonInspector >> alexandrieFormFor: aSymbol [
 		
 	| aSpace |
 	aSpace := BlSpaceFixture new
@@ -17,7 +17,7 @@ BlAlexandrieSpartaRenderingComparisonTest >> alexandrieFormFor: aSymbol [
 ]
 
 { #category : #tests }
-BlAlexandrieSpartaRenderingComparisonTest >> allComparisons [
+BlAlexandrieSpartaRenderingComparisonInspector >> allComparisons [
 	<script: 'self new allComparisons inspect'>
 
 	^ BlSpaceFixture allFixtureSelectors
@@ -26,7 +26,7 @@ BlAlexandrieSpartaRenderingComparisonTest >> allComparisons [
 ]
 
 { #category : #tests }
-BlAlexandrieSpartaRenderingComparisonTest >> pixelComparisonFor: aSymbol [
+BlAlexandrieSpartaRenderingComparisonInspector >> pixelComparisonFor: aSymbol [
 	
 	^ AePixelComparison
 		expectedForm: (self spartaFormFor: aSymbol)
@@ -35,7 +35,7 @@ BlAlexandrieSpartaRenderingComparisonTest >> pixelComparisonFor: aSymbol [
 ]
 
 { #category : #tests }
-BlAlexandrieSpartaRenderingComparisonTest >> spartaFormFor: aSymbol [
+BlAlexandrieSpartaRenderingComparisonInspector >> spartaFormFor: aSymbol [
 		
 	| aSpace |
 	aSpace := BlSpaceFixture new
