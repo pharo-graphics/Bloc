@@ -28,7 +28,7 @@ BlAlexandrieSpartaRenderingComparisonTest >> allComparisons [
 { #category : #tests }
 BlAlexandrieSpartaRenderingComparisonTest >> pixelComparisonFor: aSymbol [
 	
-	^ BlPixelComparison
+	^ AePixelComparison
 		expectedForm: (self spartaFormFor: aSymbol)
 		actualForm: (self alexandrieFormFor: aSymbol)
 		label: aSymbol
