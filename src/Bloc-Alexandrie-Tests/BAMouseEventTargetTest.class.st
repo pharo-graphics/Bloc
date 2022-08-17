@@ -26,7 +26,7 @@ BAMouseEventTargetTest >> assertNoMouseEventTargetAt: aPoint [
 BAMouseEventTargetTest >> newSpaceFixture [
 
 	^ BlSpaceFixture new
-		host: BAMorphicWindowHost new;
+		host: BAOSWindowSDL2Host new;
 		yourself
 ]
 
@@ -76,7 +76,7 @@ BAMouseEventTargetTest >> testOverlappingRectangles [
 
 	space := self newSpaceFixture buildOverlappingRectangles; space.
 	
-	"No element theer, only background."
+	"No element there, only background."
 	self
 		assertNoMouseEventTargetAt: 9 asPoint. 
 
