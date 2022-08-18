@@ -828,7 +828,8 @@ BlElement >> clipChildren: aBoolean [
 	self clipChildren = aBoolean
 		ifTrue: [ ^ self ].
 
-	visuals := visuals clipChildren: aBoolean
+	visuals := visuals clipChildren: aBoolean.
+	self invalidateChildren.
 ]
 
 { #category : #accessing }
@@ -1922,6 +1923,12 @@ BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 						ifTrue: [ self parent invalidate ] ] ]
 		ifFalse: [ self hasParent
 				ifTrue: [ self parent invalidate ] ]
+]
+
+{ #category : #'api - look' }
+BlElement >> invalidateChildren [
+
+	self childrenDo: [ :each | each invalidate ]
 ]
 
 { #category : #'change reporting' }
