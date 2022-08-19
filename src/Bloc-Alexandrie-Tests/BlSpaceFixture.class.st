@@ -917,6 +917,28 @@ BlSpaceFixture >> buildVariantsOfAll: aBlElementGeometryCollection [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfAnnulusSector [
+
+	self buildVariantsOf: 
+		(BlAnnulusSectorGeometry new
+			startAngle: 225;
+			endAngle: 360;
+			innerRadius: 0.3;
+			outerRadius: 0.9)
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfCircleSector [
+
+	self buildVariantsOf: 
+		(BlAnnulusSectorGeometry new
+			startAngle: 225;
+			endAngle: 360;
+			innerRadius: 0.0;
+			outerRadius: 0.9)
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfEllipse [
 
 	| positionGenerator |
