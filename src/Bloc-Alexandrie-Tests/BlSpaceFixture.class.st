@@ -145,6 +145,41 @@ BlSpaceFixture >> buildElevation [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildEmptyGeometry [
+	"Note green never shows, but blue only when clipping in OFF."
+
+	| a b c d e f |
+	"Clipping ON"
+	a := builder addToRoot
+		relocate: 0 asPoint;
+		size: 50 asPoint;
+		background: Color red.
+	b := (builder addTo: a)
+		geometry: BlEmptyGeometry new;
+		clipChildren: true;
+		size: 40 asPoint;
+		background: Color green.
+	c := (builder addTo: b)
+		size: 30 asPoint;
+		background: Color blue.
+
+	"Same pattern, but NO clipping"
+	d := builder addToRoot
+		relocate: 50 asPoint;
+		size: 50 asPoint;
+		background: Color red.
+	e := (builder addTo: d)
+		clipChildren: false;
+		geometry: BlEmptyGeometry new;
+		size: 40 asPoint;
+		background: Color green.
+	f := (builder addTo: e)
+		size: 30 asPoint;
+		background: Color blue.
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildGradients [
 
 	| aLinearGradient aRadialGradient anExtent |
