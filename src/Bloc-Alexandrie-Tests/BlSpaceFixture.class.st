@@ -144,6 +144,42 @@ BlSpaceFixture >> buildElevation [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildGradients [
+
+	| aLinearGradient aRadialGradient anExtent |
+
+	"Bug? start and stop only give the direction (in Sparta)"
+	aLinearGradient := BlLinearGradientPaint new
+			start: 0@10;
+			end: 10@0;
+			stops: {
+				0.2 -> (Color black alpha: 0.7).
+				0.8 -> (Color orange alpha: 0.9) };
+			yourself.
+
+	aRadialGradient := BlRadialGradientPaint new
+			center: 30 asPoint;
+			radius: 20;
+			stops: {
+				0.0 -> Color yellow.
+				0.4 -> Color white.
+				0.7 -> Color blue.
+				0.9 -> Color transparent.
+				1.0 -> (Color green alpha: 0.2) };
+			yourself.
+
+	anExtent := 100 asPoint.
+	builder addToRoot
+		size: anExtent;
+		background: aLinearGradient.
+	builder addToRoot
+		size: anExtent;
+		background: aRadialGradient.
+	builder spaceExtent: anExtent.
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildImagesAndTransformations [
 	
 	| outskirts positionGenerator addElementBlock |
