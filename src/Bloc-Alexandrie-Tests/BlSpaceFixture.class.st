@@ -10,8 +10,9 @@ Class {
 { #category : #accessing }
 BlSpaceFixture class >> allFixtureSelectors [
 
-	^ self allSelectors select: [ :each | 
-		  (each beginsWith: #build) and: each isUnary ]
+	^ (self allSelectors
+		select: [ :each | (each beginsWith: #build) and: each isUnary ])
+		asSortedCollection
 ]
 
 { #category : #fixtures }
