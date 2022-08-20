@@ -970,6 +970,27 @@ BlSpaceFixture >> buildVariantsOfAnnulusSector [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfBezier2CPs [
+
+	self buildVariantsOfLinelikeGeometry:
+		(BlBezierCurveGeometry controlPoints: {5 @ 0. 35 @ 40})
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfBezier3CPs [
+
+	self buildVariantsOfLinelikeGeometry:
+		(BlBezierCurveGeometry controlPoints: { 5@0. 20@35. 35@40 })
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfBezier4CPs [
+
+	self buildVariantsOfLinelikeGeometry:
+		(BlBezierCurveGeometry controlPoints: { 5@0. 15@30. 25@10. 35@40 })
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfCircleSector [
 
 	self buildVariantsOf: 
@@ -1010,6 +1031,13 @@ BlSpaceFixture >> buildVariantsOfEllipse [
 { #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfLine [
 
+	self buildVariantsOfLinelikeGeometry:
+		(BlLineGeometry from: 5 @ 0 to: 35 @ 40)
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfLinelikeGeometry: aGeometry [
+
 	{	[ :t |
 			t topLeftOrigin.
 			t scaleBy: 2 ].
@@ -1030,7 +1058,7 @@ BlSpaceFixture >> buildVariantsOfLine [
 			t skewX: 10 ] 
 	} do: [ :each |
 		builder addToRoot
-			geometry: (BlLineGeometry from: 5@0 to: 35@40);
+			geometry: aGeometry;
 			outskirts: BlOutskirts centered;
 			border: (BlBorder paint: builder nextColor width: 10);
 			relocate: 10 asPoint;
