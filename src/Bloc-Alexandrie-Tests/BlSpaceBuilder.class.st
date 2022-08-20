@@ -1,3 +1,6 @@
+"
+My purpose is making easier to create BlSpaces with elements.
+"
 Class {
 	#name : #BlSpaceBuilder,
 	#superclass : #Object,

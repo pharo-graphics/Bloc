@@ -1,45 +1,51 @@
 Class {
-	#name : #BARenderingTest,
+	#name : #BAHitTest,
 	#superclass : #AePixelMatchTest,
 	#category : #'Bloc-Alexandrie-Tests-Base'
 }
 
 { #category : #tests }
-BARenderingTest >> actualFormFor: aSymbol [
-		
-	| aSpace |
-	aSpace := BlSpaceFixture new
-		host: BAOSWindowSDL2Host new; 
-		perform: aSymbol;
-		space.
-	^ aSpace root aeAsForm
+BAHitTest >> actualFormFor: aSymbol [
 
+	^ self hitFormFor: aSymbol host: BAOSWindowSDL2Host new
 ]
 
 { #category : #exporting }
-BARenderingTest >> allFormSelectors [
+BAHitTest >> allFormSelectors [
 
 	^ BlSpaceFixture allFixtureSelectors
 ]
 
 { #category : #convenience }
-BARenderingTest >> deleteAllExports [
+BAHitTest >> deleteAllExports [
 	<script: 'self new deleteAllExports' >
 
 	super deleteAllExports
 ]
 
 { #category : #tests }
-BARenderingTest >> expectedFormsDirectory [
+BAHitTest >> expectedFormsDirectory [
 
 	| repo |
 	repo := IceRepository registry detect: [ :each | each name asLowercase = 'bloc' ].
-	^ repo location / 'tests'
+	^ repo location / 'tests' / 'hit'
 ]
 
 { #category : #convenience }
-BARenderingTest >> exportAll [
+BAHitTest >> exportAll [
 	<script: 'self new exportAll' >
 
 	super exportAll
+]
+
+{ #category : #tests }
+BAHitTest >> hitFormFor: aSymbol host: aHost [
+		
+	| aSpace |
+	aSpace := BlSpaceFixture new
+		host: aHost;
+		perform: aSymbol;
+		space.
+
+	^ BAHitFormFactory newFormFor: aSpace
 ]

@@ -1,3 +1,10 @@
+"
+I contain Bloc fixtures.
+
+My methods with unary selectors that start with `build` add elements to a BlSpace.
+
+
+"
 Class {
 	#name : #BlSpaceFixture,
 	#superclass : #Object,
@@ -998,6 +1005,37 @@ BlSpaceFixture >> buildVariantsOfEllipse [
 			outskirts: BlOutskirts outside;
 			yourself ].
 
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfLine [
+
+	{	[ :t |
+			t topLeftOrigin.
+			t scaleBy: 2 ].
+		[ :t |
+			t translateBy: 0@100.
+			t scaleBy: 0.4.
+			"rotation at bottom-left:"
+			t normalizedOrigin: 0@1.
+			t skewY: 10.
+			t rotateBy: 5 ].
+		[ :t |
+			"rotation beyond top-right:"
+			t normalizedOrigin: 0.5 @ -0.1.
+			t rotateBy: -45.
+			t scaleBy: 1.25. ].
+		[ :t |
+			t translateBy: 15 asPoint.
+			t skewX: 10 ] 
+	} do: [ :each |
+		builder addToRoot
+			geometry: (BlLineGeometry from: 5@0 to: 35@40);
+			outskirts: BlOutskirts centered;
+			border: (BlBorder paint: builder nextColor width: 10);
+			relocate: 10 asPoint;
+			transformDo: each;
+			yourself ].
 ]
 
 { #category : #fixtures }
