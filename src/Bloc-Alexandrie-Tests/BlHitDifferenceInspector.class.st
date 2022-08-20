@@ -1,3 +1,8 @@
+"
+I'm a tool to visually inspect any hit testing differences between Alexandrie and Sparta.
+
+Note: Use should select Sparta Cairo in the Bloc section of System settings.
+"
 Class {
 	#name : #BlHitDifferenceInspector,
 	#superclass : #Object,
@@ -37,7 +42,8 @@ BlHitDifferenceInspector >> hitFormFor: aSymbol space: aSpace [
 	' - ' trace.
 	aSpace host class label trace.
 	': ' trace.
-	duration traceCr.
+	duration asMilliSeconds trace.
+	'ms' traceCr.
 
 	^ aForm
 ]

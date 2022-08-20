@@ -1,3 +1,8 @@
+"
+I'm a tool to visually inspect any rendering differences between Alexandrie and Sparta.
+
+Note: Use should select Sparta Cairo in the Bloc section of System settings.
+"
 Class {
 	#name : #BlRenderDifferenceInspector,
 	#superclass : #Object,
