@@ -7,12 +7,14 @@ BlAnnulusSectorGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		self innerRadius = 0.0
 			ifTrue: [ 
 				cairoContext
-					circleSectorFrom: self startAngle degreesToRadians
+					circleSectorCenter: self center
+					from: self startAngle degreesToRadians
 					to: self endAngle degreesToRadians
 					radius: self absoluteOuterRadius ]
 			ifFalse: [ 
 				cairoContext
-					annulusSectorFrom: self startAngle degreesToRadians
+					annulusSectorCenter: self center
+					from: self startAngle degreesToRadians
 					to: self endAngle degreesToRadians
 					innerRadius: self absoluteInnerRadius
 					outerRadius: self absoluteOuterRadius
@@ -25,23 +27,20 @@ BlAnnulusSectorGeometry >> aeContainsPoint: aPoint in: aBlElement [
 
 	Adapted from RSPieSlice>>#preciseIncludesPoint:"
 
-	| i e invertedPoint d n a b |
-	aPoint traceCr.
+	| p d n a b |
 	
-	i := self absoluteInnerRadius.
-	e := self absoluteOuterRadius.
-	invertedPoint := aPoint - self center.
-	d := invertedPoint distanceTo: 0@0.
-	(d between: i and: e)
+	"Check if distance is between right interval"
+	p := aPoint - self center.
+	d := p distanceTo: 0.0@0.0.
+	(d between: self absoluteInnerRadius and: self absoluteOuterRadius)
 		ifFalse: [ ^ false ].
 
-	n := invertedPoint angle radiansToDegrees.
-	a := self startAngle.
-	b := self endAngle.
-	n := (360 + (n % 360)) % 360.
-	a := (3600000 + a) % 360.
-	b := (3600000 + b) % 360.
+	"Check the angle"
+	n := p angle radiansToDegrees % 360.
+	a := self startAngle % 360.
+	b := self endAngle % 360.
+
 	^ a < b
 		ifTrue: [ n between: a and: b ]
-		ifFalse: [ a <= n | (n <= b) ]
+		ifFalse: [ a <= n or: [ n <= b ] ]
 ]
