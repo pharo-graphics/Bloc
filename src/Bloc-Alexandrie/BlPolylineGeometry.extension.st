@@ -10,10 +10,12 @@ BlPolylineGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 { #category : #'*Bloc-Alexandrie' }
 BlPolylineGeometry >> aeContainsPoint: aPoint in: aBlElement [
-	"Answer whether aPoint is contained by a this geometry."
+	"Answer whether aPoint is contained by this geometry.
+	
+	Based on RSPolyline>>#basicIncludesPoint:"
 
-	self flag: #todo. "This is wrong"
-	^ BAOffscreen instance
-		  is: aPoint
-		  inFillOfVertices: self vertices
+	vertices overlappingPairsDo: [ :a :b | 
+		(aPoint onLineFrom: a to: b within: aBlElement border width / 2) 
+			ifTrue: [ ^ true ] ].
+	^ false
 ]
