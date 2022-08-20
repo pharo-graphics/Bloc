@@ -12,7 +12,5 @@ BlPolygonGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 BlPolygonGeometry >> aeContainsPoint: aPoint in: aBlElement [
 	"Answer whether aPoint is contained by a this geometry."
 
-	^ BAOffscreen instance
-		  is: aPoint
-		  inFillOfVertices: self vertices
+	^ BAPolygonHitTester doPolygonBy: self vertices include: aPoint
 ]

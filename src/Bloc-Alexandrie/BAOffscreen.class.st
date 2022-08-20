@@ -41,19 +41,6 @@ BAOffscreen >> ensureReady [
 ]
 
 { #category : #api }
-BAOffscreen >> is: aPoint inFillOfVertices: vertices [
-
-	self ensureReady.
-
-	vertices readStreamDo: [ :aStream |
-		cairoContext moveTo: aStream next.
-		[ aStream atEnd ] whileFalse: [ 
-			cairoContext lineTo: aStream next	] ].
-
-	^ cairoContext primInFillX: aPoint x y: aPoint y
-]
-
-{ #category : #api }
 BAOffscreen >> measureTextParagraph: aBlTextParagraph [
 
 	self ensureReady.
