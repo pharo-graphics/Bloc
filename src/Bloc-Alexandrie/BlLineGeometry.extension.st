@@ -5,8 +5,7 @@ BlLineGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas drawOpenPathWith: [ :cairoContext |
 		cairoContext
-			moveTo: from;
-			lineTo: to ]
+			lineFrom: from to: to ]
 
 ]
 

@@ -18,19 +18,21 @@ BlBezierCurveGeometry class >> controlPoints: aCollection [
 
 { #category : #accessing }
 BlBezierCurveGeometry >> controlPoints [
-	<return: #SequenceableCollection of: #Point>
 
 	^ controlPoints
 ]
 
 { #category : #accessing }
 BlBezierCurveGeometry >> controlPoints: aCollection [
+	"The collection can have between 2 and 4 points."
+
 	controlPoints := aCollection.
 	self releaseCache
 ]
 
 { #category : #'geometry bounds' }
 BlBezierCurveGeometry >> geometryBounds: aBounds [
+
 	^ (aBounds rectangle: (self controlPoints
 			ifEmpty: [ 0@0 extent: 0@0 ]
 			ifNotEmpty: [ :theControlPoints | Rectangle encompassing: theControlPoints ]))
