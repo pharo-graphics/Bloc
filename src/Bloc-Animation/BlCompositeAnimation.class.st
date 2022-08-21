@@ -19,6 +19,15 @@ BlCompositeAnimation class >> with: aCollectionOfAnimations [
 ]
 
 { #category : #'instance creation' }
+BlCompositeAnimation class >> with: anAnimation with: anotherAnimation [
+
+	^ self new
+		add: anAnimation;
+		add: anotherAnimation;
+		yourself
+]
+
+{ #category : #'instance creation' }
 BlCompositeAnimation class >> withAll: aCollectionOfAnimations [
 
 	^ self new
