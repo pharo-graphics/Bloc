@@ -9,9 +9,21 @@ Class {
 
 { #category : #'instance creation' }
 BlCompositeAnimation class >> with: aCollectionOfAnimations [
-	<return: #BlCompositeAnimation>
+
+	self 
+		deprecated: 'Please use #withAll: instead' 
+		transformWith: '`@receiver with:'
+						  -> '`@receiver withAll:'.
 
 	^ self new addAll: aCollectionOfAnimations
+]
+
+{ #category : #'instance creation' }
+BlCompositeAnimation class >> withAll: aCollectionOfAnimations [
+
+	^ self new
+		  addAll: aCollectionOfAnimations;
+		  yourself
 ]
 
 { #category : #adding }
