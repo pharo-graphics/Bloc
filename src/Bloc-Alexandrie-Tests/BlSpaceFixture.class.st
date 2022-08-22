@@ -970,6 +970,86 @@ BlSpaceFixture >> buildVariantsOfAnnulusSector [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfAnnulusSectorAngles [
+
+	| positionGenerator addElementBlock addAnnulusVariationsForAnglesBlock pixelSize numberOfColumns |
+	pixelSize := 20.
+	numberOfColumns := "20" 5.
+	builder spaceExtent: ((pixelSize*numberOfColumns) @ (pixelSize*3)) + 10 asPoint "margin".
+
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: 5 asPoint
+		by: pixelSize
+		columns: numberOfColumns.
+
+	addElementBlock := [ :anAngle :anotherAngle :innerRadius :outerRadius |
+		builder addToRoot
+			geometry: (BlAnnulusSectorGeometry new
+				startAngle: anAngle;
+				endAngle: anotherAngle;
+				innerRadius: innerRadius;
+				outerRadius: outerRadius);
+			relocate: positionGenerator next;
+			background: Color black;
+			size: pixelSize asPoint;
+			yourself ].
+
+	addAnnulusVariationsForAnglesBlock := [ :anAngle :anotherAngle |
+"		addElementBlock
+			value: anAngle
+			value: anotherAngle
+			value: 0.0
+			value: 1.0."
+		addElementBlock
+			value: anAngle
+			value: anotherAngle
+			value: 0.75
+			value: 1.0.
+"		addElementBlock
+			value: anAngle
+			value: anotherAngle
+			value: 0.0
+			value: 0.75.
+		addElementBlock
+			value: anAngle
+			value: anotherAngle
+			value: 0.3
+			value: 0.7" ].
+
+	#(
+		0   270
+		0   60
+		270 45
+	) pairsDo: [ :anAngle :anotherAngle |
+		addAnnulusVariationsForAnglesBlock
+			value: anAngle
+			value: anotherAngle.
+		addAnnulusVariationsForAnglesBlock
+			value: anAngle + 45
+			value: anotherAngle + 45.
+		addAnnulusVariationsForAnglesBlock
+			value: anAngle + 90
+			value: anotherAngle + 90.
+		addAnnulusVariationsForAnglesBlock
+			value: anotherAngle
+			value: anAngle.
+		addAnnulusVariationsForAnglesBlock
+			value: anotherAngle + 45
+			value: anAngle + 45 ]
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfAnnulusSectorStartGreaterThanEnd [
+
+	self buildVariantsOf: 
+		(BlAnnulusSectorGeometry new
+			startAngle: 180;
+			endAngle: 90;
+			innerRadius: 0.4;
+			outerRadius: 1.0)
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfBezier2CPs [
 
 	self buildVariantsOfLinelikeGeometry:
@@ -999,6 +1079,62 @@ BlSpaceFixture >> buildVariantsOfCircleSector [
 			endAngle: 360;
 			innerRadius: 0.0;
 			outerRadius: 0.9)
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfCircleSectorAngles [
+
+	| positionGenerator addElementBlock addAnnulusVariationsForAnglesBlock pixelSize numberOfColumns angles |
+	pixelSize := 20.
+	numberOfColumns := 5.
+	angles := #(
+		0   270
+		0   45
+		270 540 "540 % 360 = 180"
+	).
+	builder spaceExtent: ((pixelSize*numberOfColumns) @ (pixelSize * angles size)) 
+		+ 10 asPoint "margin".
+
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: 5 asPoint
+		by: pixelSize
+		columns: numberOfColumns.
+
+	addElementBlock := [ :anAngle :anotherAngle :innerRadius :outerRadius |
+		builder addToRoot
+			geometry: (BlAnnulusSectorGeometry new
+				startAngle: anAngle;
+				endAngle: anotherAngle;
+				innerRadius: innerRadius;
+				outerRadius: outerRadius);
+			relocate: positionGenerator next;
+			background: Color black;
+			size: pixelSize asPoint;
+			yourself ].
+
+	addAnnulusVariationsForAnglesBlock := [ :anAngle :anotherAngle |
+		addElementBlock
+			value: anAngle
+			value: anotherAngle
+			value: 0.0
+			value: 1.0 ].
+
+	angles pairsDo: [ :anAngle :anotherAngle |
+		addAnnulusVariationsForAnglesBlock
+			value: anAngle
+			value: anotherAngle.
+		addAnnulusVariationsForAnglesBlock
+			value: anAngle + 45
+			value: anotherAngle + 45.
+		addAnnulusVariationsForAnglesBlock
+			value: anAngle + 90
+			value: anotherAngle + 90.
+		addAnnulusVariationsForAnglesBlock
+			value: anotherAngle
+			value: anAngle.
+		addAnnulusVariationsForAnglesBlock
+			value: anotherAngle + 45
+			value: anAngle + 45 ]
 ]
 
 { #category : #fixtures }
