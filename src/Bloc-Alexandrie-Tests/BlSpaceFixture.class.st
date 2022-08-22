@@ -1336,7 +1336,7 @@ BlSpaceFixture >> ensureEmojiFontFace [
 	"This ensures the emoji font in repo's tests directory is loaded."
 	(AeFontManager globalInstance includesFamilyName: self emojiFontFamilyName) ifFalse: [
 		AeNotoColorEmojiDownloadedFont new ensureDownloaded.
-		AeFontManager globalInstance scanDirectory: AeFilesytemResources fontsDirectory ].
+		AeFontManager globalInstance scanDirectory: AeFilesystemResources fontsDirectory ].
 	
 
 ]
