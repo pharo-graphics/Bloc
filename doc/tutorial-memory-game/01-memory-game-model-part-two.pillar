@@ -1,12 +1,0 @@
-! Implementing Card Model Part Two
-
-!! Game Logic
-
-Next, we need ${method:Game>>#chooseCard:}$, a method that is called when a user selects a card. This method is actually the most complex method of the model and implements the main logic of the game. First, the method makes sure that the chosen card is not already selected. This could happen if a player by chance click on a card more than once. Next, the card is flipped by sending it the message ${method:Card>>#flip}$. 
-Finally, depending on the actual state of the game, the step is complete and the selected cards are either removed or flipped back: ${changes:changes/08-game-logic.ombu}$
-Let's play with the  ${method:Game>>#chooseCard:}$ method. By executing the following script, we obtain a random card flipped (face side visible): [[[height=550| aGame |aGame := Game numbers.aGame chooseCard: aGame availableCards atRandom.]]]By executing the following snippet, we will obtain a game state where two first cards are flipped:[[[| aGame |aGame := Game numbers.aGame chooseCard: aGame availableCards first.aGame chooseCard: aGame availableCards second.]]]And finally, by executing the following snippet, we will obtain a game state where the first two cards are flipped back (back-side) and third card is flipped (face side is visible):[[[| aGame |aGame := Game numbers.aGame chooseCard: aGame availableCards first.aGame chooseCard: aGame availableCards second.aGame chooseCard: aGame availableCards third.]]]
-
-!! Ready 
-
-Next, we will implement a Bloc widget: ${inputFile:02-memory-game-ui.pillar}$. 
-
