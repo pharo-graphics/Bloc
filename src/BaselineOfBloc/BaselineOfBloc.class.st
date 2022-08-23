@@ -65,7 +65,7 @@ BaselineOfBloc >> baseline: spec [
 			"Sparta canvas"
 			spec
 				baseline: 'Sparta' with: [
-					spec repository: 'github://pharo-graphics/Sparta:master/src' ].
+					spec repository: 'github://pharo-graphics/Sparta:v0.9.1/src' ].
 			spec
 				package: #'Bloc-Compositor' with: [
 					spec requires: #('Bloc' 'Sparta') ];
@@ -75,7 +75,7 @@ BaselineOfBloc >> baseline: spec [
 			"Alexandrie canvas"
 			spec
 				baseline: 'Alexandrie' with: [
-					spec repository: 'github://pharo-graphics/Alexandrie:master/src' ].
+					spec repository: 'github://pharo-graphics/Alexandrie:v1.0.0/src' ].
 			spec
 				package: #'Bloc-Alexandrie' with: [
 					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
