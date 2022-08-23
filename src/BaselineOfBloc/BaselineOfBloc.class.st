@@ -65,7 +65,7 @@ BaselineOfBloc >> baseline: spec [
 			"Sparta canvas"
 			spec
 				baseline: 'Sparta' with: [
-					spec repository: 'github://pharo-graphics/Sparta:dev-1.0/src' ].
+					spec repository: 'github://pharo-graphics/Sparta:master/src' ].
 			spec
 				package: #'Bloc-Compositor' with: [
 					spec requires: #('Bloc' 'Sparta') ];
