@@ -19,10 +19,10 @@ BlMouseOtherButton class >> code: aNumber [
 
 { #category : #comparing }
 BlMouseOtherButton >> = anotherObject [
-	self == anotherObject
-		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
-		ifFalse: [ ^ false ].
+
+	self == anotherObject ifTrue: [ ^ true ].
+	anotherObject class = self class ifFalse: [ ^ false ].
+
 	^ anotherObject code = self code
 ]
 

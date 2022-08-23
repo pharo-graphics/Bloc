@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 BlDevScripterKeyboardStep >> key [
-	<return: #BlKeyboardKey>
+	<return: #KeyboardKey>
 
 	^ key
 ]

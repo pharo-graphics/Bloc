@@ -456,8 +456,8 @@ BlBounds >> left: aLeft top: aTop right: aRight bottom: aBottom [
 
 { #category : #'rectangle functions' }
 BlBounds >> merge: aRectangle [ 
-	"Merge provided rectangle into me.
-	aRectangle must not be nil"
+	"Merge provided rectangle into me."
+
 	| useRcvr aLeft aTop aRight aBottom minX maxX minY maxY |
 
 	useRcvr := true.

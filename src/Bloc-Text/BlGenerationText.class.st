@@ -1,6 +1,6 @@
 Class {
 	#name : #BlGenerationText,
-	#superclass : #BlWrappedText,
+	#superclass : #BlReadonlyText,
 	#instVars : [
 		'previousGeneration'
 	],
@@ -8,11 +8,13 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlGenerationText class >> fromText: aBrText [
+BlGenerationText class >> fromText: aBlText [
+
 	^ self basicNew
 		initialize;
-		initialize: aBrText copy
-		with: aBrText generation
+		initialize: aBlText copy
+			with: aBlText generation;
+		yourself
 ]
 
 { #category : #'text - copying' }
@@ -24,10 +26,10 @@ BlGenerationText >> generation [
 ]
 
 { #category : #initialization }
-BlGenerationText >> initialize: aBrText with: aPreviousGeneration [
+BlGenerationText >> initialize: aBlText with: aPreviousGeneration [
 
 	previousGeneration := aPreviousGeneration.
-	text := aBrText
+	text := aBlText
 ]
 
 { #category : #testing }

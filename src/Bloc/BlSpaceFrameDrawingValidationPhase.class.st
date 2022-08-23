@@ -11,6 +11,7 @@ BlSpaceFrameDrawingValidationPhase >> name [
 
 { #category : #actions }
 BlSpaceFrameDrawingValidationPhase >> runOn: aSpace [
+
 	aSpace hasHostSpace
 		ifFalse: [ ^ self ].
 

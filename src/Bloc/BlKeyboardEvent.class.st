@@ -23,7 +23,7 @@ BlKeyboardEvent >> isKeyboard [
 
 { #category : #'key - accessing' }
 BlKeyboardEvent >> key [
-	<return: #BlKeyboardKey>
+	<return: #KeyboardKey>
 
 	^ key
 ]

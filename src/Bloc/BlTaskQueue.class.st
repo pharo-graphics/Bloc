@@ -21,10 +21,6 @@ BlTaskQueue >> dequeue: aBlTask [
 	"Remove the task from the queue.
 	If complete, mark the task as new so it may be reused."
 
-	self
-		assert: [ aBlTask isNotNil ]
-		description: [ 'Task must not be nil' ].
-
 	tasks ifNotNil:
 		[ self critical: 
 			[ (tasks includes: aBlTask) ifTrue: 
@@ -34,11 +30,8 @@ BlTaskQueue >> dequeue: aBlTask [
 
 { #category : #'api - enqueue' }
 BlTaskQueue >> enqueue: aBlTask [
-	| taskExists |
 
-	self
-		assert: [ aBlTask isNotNil ]
-		description: [ 'Task must not be nil' ].
+	| taskExists |
 
 	"Tasks must be new.
 	Tasks that are already complete could also be allowed, but requiring new tasks means that any state in the task should have also been reset"
@@ -61,11 +54,8 @@ BlTaskQueue >> enqueue: aBlTask [
 
 { #category : #'api - enqueue' }
 BlTaskQueue >> enqueueAll: aCollectionOfBlTask [
-	| taskExists |
 
-	self
-		assert: [ aCollectionOfBlTask isNotNil ]
-		description: [ 'Tasks must not be nil' ].
+	| taskExists |
 
 	self critical: [
 		tasks ifNil: [ tasks := self newTasks ].
@@ -82,9 +72,7 @@ BlTaskQueue >> enqueueAll: aCollectionOfBlTask [
 
 { #category : #'api - enqueue' }
 BlTaskQueue >> enqueueFrom: aBlTaskQueue [
-	self
-		assert: [ aBlTaskQueue isNotNil ]
-		description: [ 'Queue to transfer must not be nil' ].
+	"Transfer a queue."
 
 	aBlTaskQueue critical: [
 		self enqueueAll: aBlTaskQueue tasks.

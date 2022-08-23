@@ -18,38 +18,33 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlSubText class >> empty: aBrText [
+BlSubText class >> empty: aBlText [
 	"Returns a sub-text that is backed up by an empty text"
 	<return: #BlSubText>
 	
-	aBrText isEmpty 
-		ifFalse: [ self error: 'Underlying text must be empty to create empty sub-text' ].
+	aBlText isEmpty ifFalse: [
+		self error: 'Underlying text must be empty to create empty sub-text' ].
 		
 	^ self
-		text: aBrText
+		text: aBlText
 		from: 1
 		to: 0
 ]
 
 { #category : #'instance creation' }
-BlSubText class >> text: aBrText [
-	self
-		assert: [ (aBrText isKindOf: self) not ]
-		description: [ 'Can not create sub text of a subtext' ].
+BlSubText class >> text: aBlText [
+	"Answer a new instance from aBlText. The argument should not be a BlSubText"
 
 	^ self new
-		text: aBrText from: 1 to: aBrText size;
+		text: aBlText from: 1 to: aBlText size;
 		yourself
 ]
 
 { #category : #'instance creation' }
-BlSubText class >> text: aBrText from: aStartIndex to: anEndIndex [
-	self
-		assert: [ (aBrText isKindOf: self) not ]
-		description: [ 'Can not create sub text of a subtext' ].
+BlSubText class >> text: aBlText from: aStartIndex to: anEndIndex [
 
 	^ self new
-		text: aBrText from: aStartIndex to: anEndIndex;
+		text: aBlText from: aStartIndex to: anEndIndex;
 		yourself
 ]
 
@@ -57,7 +52,7 @@ BlSubText class >> text: aBrText from: aStartIndex to: anEndIndex [
 BlSubText >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
+	(anotherObject class = self class)
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject start = self start
@@ -73,10 +68,6 @@ BlSubText >> assertInvariant [
 { #category : #asserting }
 BlSubText >> assertStart: aStartIndex end: anEndIndex [
 
-	self
-		assert: [ text isNotNil ]
-		description: [ 'Text must not be nil' ].
-		
 	aStartIndex isZero
 		ifTrue: [ BlTextOutOfBoundsError signal: ('Start index ({1}) must not be zero' format: { aStartIndex }) ].
 
@@ -189,20 +180,18 @@ BlSubText >> empty [
 	^ self text empty
 ]
 
+{ #category : #'text - converting' }
+BlSubText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+
+	self do: [ :each | 
+		aZnCharacterEncoder nextPut: each toStream: aWriteStream ]
+]
+
 { #category : #accessing }
 BlSubText >> end [
 	<return: #Number>
 
 	^ end
-]
-
-{ #category : #accessing }
-BlSubText >> end: anIndex [ 
-	self 
-		deprecated: 'Use start:end: instead'
-		on: 	'7 August 2017' 
-		in: 'Pharo-7.0-0-SNAPSHOT'.
-	^ self start: start end: anIndex 
 ]
 
 { #category : #'text - accessing' }
@@ -310,15 +299,6 @@ BlSubText >> start [
 	^ start
 ]
 
-{ #category : #accessing }
-BlSubText >> start: anIndex [
-	self 
-		deprecated: 'Use start:end: instead'
-		on: 	'7 August 2017' 
-		in: 'Pharo-7.0-0-SNAPSHOT'.
-	^ self start: anIndex end: end 
-]
-
 { #category : #initialization }
 BlSubText >> start: aStartIndex end: anEndIndex [
 	self assertStart: aStartIndex end: anEndIndex.
@@ -341,9 +321,9 @@ BlSubText >> text [
 ]
 
 { #category : #initialization }
-BlSubText >> text: aBrText from: aStartIndex to: anEndIndex [
+BlSubText >> text: aBlText from: aStartIndex to: anEndIndex [
 
-	text := aBrText.
+	text := aBlText.
 	start := aStartIndex.
 	end := anEndIndex.
 	

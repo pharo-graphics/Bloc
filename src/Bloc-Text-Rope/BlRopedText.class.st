@@ -59,16 +59,18 @@ BlRopedText >> at: anIndex [
 
 { #category : #'text - attributes' }
 BlRopedText >> attributes: anAttributesCollection [
+
 	| aNewRope |
-	
 	aNewRope := rope attributes: anAttributesCollection.
-	aNewRope == rope
-		ifTrue: [ ^ self ].
+	aNewRope == rope ifTrue: [ ^ self ].
 
 	self rope: aNewRope.
 
-	anAttributesCollection do: [ :eachAttribute |
-		self notifyAttributeAdded: eachAttribute from: (1 min: aNewRope size) to: aNewRope size ]
+	anAttributesCollection do: [ :eachAttribute | 
+		self
+			notifyAttributeAdded: eachAttribute
+			from: (1 min: aNewRope size)
+			to: aNewRope size ]
 ]
 
 { #category : #'text - attributes' }
@@ -181,6 +183,13 @@ BlRopedText >> empty [
 	^ self class string: ''
 ]
 
+{ #category : #'text - converting' }
+BlRopedText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+	"Encode my rope on a ByteStream using the provided Zinc encoder."
+
+	rope encodeOn: aWriteStream with: aZnCharacterEncoder
+]
+
 { #category : #'text - enumeration' }
 BlRopedText >> from: aFromIndex to: aToIndex do: aBlock [
 
@@ -278,7 +287,6 @@ BlRopedText >> isEmpty [
 { #category : #'text - enumeration' }
 BlRopedText >> iterator [
 	"Return an iterator pointing to the first text item (character)"
-	<return: #BlTextIterator>
 
 	^ BlRopedTextIterator text: self
 ]

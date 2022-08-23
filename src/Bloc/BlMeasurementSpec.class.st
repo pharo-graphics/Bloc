@@ -38,9 +38,10 @@ BlMeasurementSpec class >> unspecified: aNumber [
 
 { #category : #comparing }
 BlMeasurementSpec >> = anotherObject [
+
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
+	anotherObject class = self class
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject size = size

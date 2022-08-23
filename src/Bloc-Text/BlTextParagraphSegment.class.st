@@ -1,5 +1,7 @@
 "
-I an already measured abstract paragraph segment.
+I an already measured abstract paragraph segment. I'm a composite to design lines (`BlTextParagraphLine`) and lines elements (`BlTextParagraphLeaf`). spans are canvas specific.
+
+
 
 "
 Class {
@@ -8,64 +10,58 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
+		'from',
+		'to',
 		'left',
 		'top',
 		'width',
 		'height',
+		'advance',
 		'ascent',
 		'descent',
-		'baseline',
-		'from',
-		'to',
-		'advance',
-		'paragraph'
+		'baseline'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
 { #category : #accessing }
 BlTextParagraphSegment >> advance [
-	<return: #Number>
 
 	^ advance
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> ascent [
-	<return: #Number>
 
 	^ ascent
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> baseline [
-	<return: #Point>
 
 	^ baseline
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> baseline: aPoint [
+
 	baseline := aPoint
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> bounds [
-	<return: #Rectangle>
 
 	^ self origin extent: self extent
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> descent [
-	<return: #Number>
 
 	^ descent
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> extent [
-	<return: #Point>
 
 	^ self width @ self height
 ]
@@ -79,7 +75,6 @@ BlTextParagraphSegment >> from [
 
 { #category : #accessing }
 BlTextParagraphSegment >> height [
-	<return: #Number>
 
 	^ height
 ]
@@ -87,6 +82,9 @@ BlTextParagraphSegment >> height [
 { #category : #initialization }
 BlTextParagraphSegment >> initialize [
 	super initialize.
+
+	from := 0.
+	to := 0.
 
 	left := 0.
 	top := 0.
@@ -102,7 +100,6 @@ BlTextParagraphSegment >> initialize [
 
 { #category : #accessing }
 BlTextParagraphSegment >> left [
-	<return: #Number>
 	
 	^ left
 ]
@@ -110,7 +107,6 @@ BlTextParagraphSegment >> left [
 { #category : #accessing }
 BlTextParagraphSegment >> metrics [
 	"Return a dictionary with segment metrics"
-	<return: #Dictionary>
 	
 	^ {
 		'Ascent' -> self ascent.
@@ -119,7 +115,8 @@ BlTextParagraphSegment >> metrics [
 		'Top' -> self top.
 		'Height' -> self height.
 		'Width' -> self width.
-		'Baseline' -> self baseline
+		'Baseline' -> self baseline.
+		'Advance' -> self advance
 	} asOrderedDictionary
 ]
 
@@ -131,27 +128,12 @@ BlTextParagraphSegment >> normalize: aScale [
 
 { #category : #accessing }
 BlTextParagraphSegment >> origin [
-	<return: #Point>
 
 	^ left @ top
 ]
 
 { #category : #accessing }
-BlTextParagraphSegment >> paragraph [
-	<return: #BlTextParagraph>
-
-	^ paragraph
-]
-
-{ #category : #accessing }
-BlTextParagraphSegment >> paragraph: aTextParagraph [
-
-	paragraph := aTextParagraph
-]
-
-{ #category : #accessing }
 BlTextParagraphSegment >> right [
-	<return: #Number>
 	
 	^ left + width
 ]
@@ -165,14 +147,12 @@ BlTextParagraphSegment >> to [
 
 { #category : #accessing }
 BlTextParagraphSegment >> top [
-	<return: #Number>
 	
 	^ top
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> width [
-	<return: #Number>
 
 	^ width
 ]

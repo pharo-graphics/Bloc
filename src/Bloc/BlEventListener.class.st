@@ -253,7 +253,7 @@ BlEventListener >> wantsEvent: anEvent [
 	anEvent isElementEvent
 		ifTrue: [ ^ false ].
 
-	^ (anEvent isKindOf: BlUIEvent) or: [ anEvent isKindOf: BlSpaceEvent ]
+	^ anEvent isUIEvent or: [ anEvent isSpaceEvent ]
 ]
 
 { #category : #'other handlers' }

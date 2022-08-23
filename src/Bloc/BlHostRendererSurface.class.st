@@ -24,6 +24,14 @@ BlHostRendererSurface class >> allSurfaces [
 	^ self allSubclasses
 ]
 
+{ #category : #'instance creation' }
+BlHostRendererSurface class >> newForHostSpace: aBlHostSpace [
+
+	^ self new
+		  initializeForHostSpace: aBlHostSpace;
+		  yourself
+]
+
 { #category : #testing }
 BlHostRendererSurface class >> supportedBy: anObject [
 	"Return true if a given object supports this surface, false otherwise"
@@ -45,8 +53,7 @@ BlHostRendererSurface >> createSpaceRendererOn: anObject [
 ]
 
 { #category : #initialization }
-BlHostRendererSurface >> createSurfaceRendererOn: anObject [
-	<return: #BlHostSurfaceRenderer>
+BlHostRendererSurface >> createSurfaceRendererOn: aBlHostSpace [
 
 	^ self subclassResponsibility
 ]
@@ -84,6 +91,22 @@ BlHostRendererSurface >> logicalSize [
 	^ self physicalSize asLogical: self scaleFactor
 ]
 
+{ #category : #initialization }
+BlHostRendererSurface >> newSpaceRendererOn: aBlHostSpace [
+
+	^ (self createSpaceRendererOn: aBlHostSpace)
+		initializeForSurface: self;
+		yourself
+]
+
+{ #category : #initialization }
+BlHostRendererSurface >> newSurfaceRendererOn: aBlHostSpace [
+
+	^ (self createSurfaceRendererOn: aBlHostSpace)
+		initializeForSurface: self;
+		yourself
+]
+
 { #category : #'api - updates' }
 BlHostRendererSurface >> performUpdates [
 	updateActions do: [ :eachUpdateAction | eachUpdateAction value ]
@@ -102,8 +125,7 @@ BlHostRendererSurface >> physicalSize [
 { #category : #geometry }
 BlHostRendererSurface >> scaleFactor [
 	"Return a scaling dpi factor from logical to physical coordinates.
-	On high dpi (retina) displays scaling factor is > 1"
-	<return: #Number>
+	On high DPI displays (e.g. Retina), scaling factor is > 1"
 	
 	^ scaleFactor
 ]

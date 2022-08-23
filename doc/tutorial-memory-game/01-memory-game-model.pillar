@@ -1,35 +1,0 @@
-! Implementing Card Model
-
-Let us start with the card model, ${class:Card}$, as an object holding a symbol to be displayed, a state representing whether or not the card is flipped, and an ${class:Announcer}$ to emit state changes: ${changes:changes/01-card-class.ombu}$
-
-After creating the ${class:Card}$ class we add an ${method:Card>>#initialize}$ method to set the card as not flipped, together with several accessors: ${changes:changes/02-card-basic-methods.ombu}$
-You should then be able to initialize a card with a symbol:[[[| aCard | aCard := Card new.aCard symbol: 7.]]]
-
-!! Card Actions
-
-Next we need two API methods, to flip a card (${method:Card>>#flip}$), and to make it disappear (${method:Card>>#disappear}$) when it is no longer needed in the game: ${changes:changes/03-card-actions.ombu}$
-Looking at the ${method:Card>>#flip|expanded=true}$ method, the flip action will not work yet as the ${method:Card>>#notifyFlipped}$ method is missing. To test the ${method:Card>>#flip}$ method, you can try the following snippet receiving an exception:[[[| aCard | aCard := Card new.aCard symbol: $A.aCard flip.]]]
-
-!! Card Notifications
-
-Card actions should notify about card state changes. They announce events of type ${class:CardFlipped}$ and ${class:CardDisappeared}$, as follows in the ${method:Card>>#notifyFlipped}$ and ${method: Card>>#notifyDisappear}$ methods. Graphical elements will have to register to these announcements as we will see later: ${changes:changes/04-card-notifications}$
-At this moment, we are able to initialize a card and flip card sides:[[[| aCard | aCard := Card new.aCard symbol: $A.aCard flip.]]]
-
-! Implementing Game Model
-
-The game model, ${class:Game}$, keeps track of all the available cards and all the cards currently selected by a player: ${changes:changes/05-game-class.ombu}$
-
-
-After creating the ${class:Game}$ class we add an ${method:Game>>#initialize}$ method to set the card as not flipped, together with several accessors: ${changes:changes/06-game-basic-methods.ombu}$
-
-At this moment we have a basic game object that cannot be initialized yet: [[[Game new.]]]
-!! Game Initialization
-
-To initialize the game with cards, we add an ${method:Game>>#initializeForSymbols:}$ method. This method creates a list of cards from a list of characters and shuffles it. We also add an assertion in this method to verify that a caller provides enough characters: ${changes:changes/07-game-initialization.ombu}$
-We can now try to initialize a game with capital letters:[[[| aGame |aGame := Game new.aGame initializeForSymbols: 'ABCDEFGH'.]]]Observing the ${class:Game}$ object above is definitely handy, but still cumbersome as we do not see the state of each card. We can improve it by overriding the ${method:Object>>#printOn:}$ method and adding a ${class:GtInspector}$ extension: ${changes:changes/06-model-extensions}$By executing the same snippet again, you will notice that the inspected result is easier to understand: [[[| aGame |aGame := Game new.aGame initializeForSymbols: 'ABCDEFGH'.]]]To simplify ${class:Game}$ initialization we define couple of instance creation methods: ${changes:changes/07-game-instantiations.ombu}$
-We can then use those instance-creation methods in snippets like this: [[[Game emoji.]]]Or with Chinese symbols:[[[Game chinese.]]]Or with numbers: [[[Game numbers.
-]]]
-!! Ready 
-
-Next, we will implement the game logic: ${inputFile:01-memory-game-model-part-two.pillar}$. 
-

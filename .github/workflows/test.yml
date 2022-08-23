@@ -1,6 +1,11 @@
 name: Tests
 
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1"   # Run every Monday at 08:00
 
 jobs:
   test:
@@ -8,13 +13,15 @@ jobs:
       # Default value means that a failure in one OS cancels all 
       fail-fast: false
       matrix:
-        smalltalk: [ Pharo64-9.0, Pharo64-10 ]
-        os: [ windows-latest ] # macos-latest, ubuntu-latest
+        smalltalk: [ Pharo64-11 ]
+        os: [ ubuntu-latest ] # macos-latest, windows-latest
         ston: [ .ci.ston ]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Setup smalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:

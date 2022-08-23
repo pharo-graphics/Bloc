@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'weight'
 	],
-	#category : 'Bloc-Layout-Linear'
+	#category : #'Bloc-Layout-Linear'
 }
 
 { #category : #alignment }
@@ -41,12 +41,8 @@ BlLinearLayoutConstraints >> weight [
 { #category : #weight }
 BlLinearLayoutConstraints >> weight: aNumber [
 	"Set new weight value that defines how much space an element takes within parent's available space.
-	aNumber must not be nil
 	aNumber must be non negative
 	aNumber must not be infinite"
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Weight can not be nil' ].
 		
 	self
 		assert: [ aNumber >= 0 ]

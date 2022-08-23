@@ -34,7 +34,7 @@ Class {
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> a [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey a)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey A)
 ]
 
 { #category : #'keys - modifiers' }
@@ -42,8 +42,8 @@ BlKeyCombinationBuilder >> alt [
 	| alt |
 
 	alt := BlAlternativeCombination new
-		key: BlKeyboardKey altLeft;
-		key: BlKeyboardKey altRight;
+		key: KeyboardKey altLeft;
+		key: KeyboardKey altRight;
 		yourself.
 
 	combination
@@ -52,33 +52,33 @@ BlKeyCombinationBuilder >> alt [
 
 { #category : #'keys - navigation' }
 BlKeyCombinationBuilder >> arrowDown [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey arrowDown)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey down)
 ]
 
 { #category : #'keys - navigation' }
 BlKeyCombinationBuilder >> arrowLeft [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey arrowLeft)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey left)
 ]
 
 { #category : #'keys - navigation' }
 BlKeyCombinationBuilder >> arrowRight [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey arrowRight)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey right)
 ]
 
 { #category : #'keys - navigation' }
 BlKeyCombinationBuilder >> arrowUp [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey arrowUp)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey up)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> b [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey b)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey B)
 ]
 
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> backspace [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey backspace)
+		with: (BlSingleKeyCombination new key: KeyboardKey backspace)
 ]
 
 { #category : #builder }
@@ -88,7 +88,7 @@ BlKeyCombinationBuilder >> build [
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> c [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey c)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey C)
 ]
 
 { #category : #builder }
@@ -101,8 +101,8 @@ BlKeyCombinationBuilder >> control [
 	| control |
 
 	control := BlAlternativeCombination new
-		key: BlKeyboardKey controlLeft;
-		key: BlKeyboardKey controlRight;
+		key: KeyboardKey controlLeft;
+		key: KeyboardKey controlRight;
 		yourself.
 
 	combination
@@ -111,13 +111,13 @@ BlKeyCombinationBuilder >> control [
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> d [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey d)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey D)
 ]
 
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> delete [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey delete)
+		with: (BlSingleKeyCombination new key: KeyboardKey delete)
 ]
 
 { #category : #builder }
@@ -127,46 +127,46 @@ BlKeyCombinationBuilder >> dnf [
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> e [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey e)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey E)
 ]
 
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> end [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey end)
+		with: (BlSingleKeyCombination new key: KeyboardKey end)
 ]
 
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> equal [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey equal)
+		with: (BlSingleKeyCombination new key: KeyboardKey equal)
 ]
 
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> escape [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey escape)
+		with: (BlSingleKeyCombination new key: KeyboardKey escape)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> f [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey f)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey F)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> g [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey g)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey G)
 ]
 
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> home [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey home)
+		with: (BlSingleKeyCombination new key: KeyboardKey home)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> i [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey i)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey I)
 ]
 
 { #category : #initialization }
@@ -186,12 +186,12 @@ BlKeyCombinationBuilder >> key: aKey [
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> l [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey l)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey L)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> m [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey m)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey M)
 ]
 
 { #category : #'keys - modifiers' }
@@ -199,8 +199,10 @@ BlKeyCombinationBuilder >> meta [
 	| meta |
 
 	meta := BlAlternativeCombination new
-		key: BlKeyboardKey metaLeft;
-		key: BlKeyboardKey metaRight;
+		key: KeyboardKey metaLeft;
+		key: KeyboardKey metaRight;
+		key: KeyboardKey superLeft;
+		key: KeyboardKey superRight;
 		yourself.
 
 	combination
@@ -210,17 +212,17 @@ BlKeyCombinationBuilder >> meta [
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> minus [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey minus)
+		with: (BlSingleKeyCombination new key: KeyboardKey minus)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> n [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey n)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey N)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> p [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey p)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey P)
 ]
 
 { #category : #'keys - modifiers' }
@@ -235,18 +237,18 @@ BlKeyCombinationBuilder >> primary [
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> r [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey r)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey R)
 ]
 
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> return [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey return)
+		with: (BlSingleKeyCombination new key: KeyboardKey enter)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> s [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey s)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey S)
 ]
 
 { #category : #'keys - modifiers' }
@@ -264,8 +266,8 @@ BlKeyCombinationBuilder >> shift [
 	| shift |
 
 	shift := BlAlternativeCombination new
-		key: BlKeyboardKey shiftLeft;
-		key: BlKeyboardKey shiftRight;
+		key: KeyboardKey shiftLeft;
+		key: KeyboardKey shiftRight;
 		yourself.
 		
 	combination
@@ -275,18 +277,18 @@ BlKeyCombinationBuilder >> shift [
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> space [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey space)
+		with: (BlSingleKeyCombination new key: KeyboardKey space)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> t [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey t)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey T)
 ]
 
 { #category : #'keys - special' }
 BlKeyCombinationBuilder >> tab [
 	combination
-		with: (BlSingleKeyCombination new key: BlKeyboardKey tab)
+		with: (BlSingleKeyCombination new key: KeyboardKey tab)
 ]
 
 { #category : #private }
@@ -301,20 +303,20 @@ BlKeyCombinationBuilder >> toNormalForm: aKeyCombination [
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> v [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey v)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey V)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> w [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey w)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey W)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> x [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey x)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey X)
 ]
 
 { #category : #'keys - letters' }
 BlKeyCombinationBuilder >> z [
-	combination with: (BlSingleKeyCombination new key: BlKeyboardKey z)
+	combination with: (BlSingleKeyCombination new key: KeyboardKey Z)
 ]

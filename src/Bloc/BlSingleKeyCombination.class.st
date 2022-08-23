@@ -77,16 +77,13 @@ BlSingleKeyCombination >> includes: aKey [
 
 { #category : #accessing }
 BlSingleKeyCombination >> key [
-	<return: #BlKeyboardKey>
+	<return: #KeyboardKey>
 
 	^ key
 ]
 
 { #category : #accessing }
 BlSingleKeyCombination >> key: aKey [
-	self
-		assert: [ aKey isNotNil ]
-		description: [ 'Key must not be nil' ].
 
 	key := aKey
 ]

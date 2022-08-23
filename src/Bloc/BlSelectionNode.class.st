@@ -236,9 +236,6 @@ BlSelectionNode >> left [
 
 { #category : #accessing }
 BlSelectionNode >> left: aTextSelectionNode [
-	self
-		assert: [ aTextSelectionNode isNotNil ]
-		description: [ 'aTextSelectionNode must not be nil' ].
 	
 	left := aTextSelectionNode
 ]
@@ -320,10 +317,6 @@ BlSelectionNode >> removeRight [
 BlSelectionNode >> replaceInParent: aTextSelectionNode [
 	"Replace me in a parent with a given node"
 	
-	self
-		assert: [ aTextSelectionNode isNotNil ]
-		description: [ 'aTextSelectionNode must not be nil!' ].
-	
 	(self hasParent and: [ self parent isRoot not ])
 		ifTrue: [			
 			(self parent hasLeft and: [ self parent left == self ])
@@ -362,9 +355,6 @@ BlSelectionNode >> right [
 
 { #category : #accessing }
 BlSelectionNode >> right: aTextSelectionNode [
-	self
-		assert: [ aTextSelectionNode isNotNil ]
-		description: [ 'aTextSelectionNode must not be nil' ].
 	
 	right := aTextSelectionNode
 ]

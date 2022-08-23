@@ -14,7 +14,6 @@ Class {
 		'eventDispatcher',
 		'hostClass',
 		'spaceManager',
-		'pulsingStateMutex',
 		'isPulsing'
 	],
 	#classVars : [
@@ -27,13 +26,14 @@ Class {
 
 { #category : #accessing }
 BlParallelUniverse class >> all [
-	"Return a collection of all parallel universes"
+	"Return a collection with all the registered instances"
 	
 	^ Universes
 ]
 
 { #category : #'instance creation' }
 BlParallelUniverse class >> existsForHost: aHostClass [
+
 	^ UniversesMutex critical: [
 		Universes
 			detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
@@ -43,13 +43,13 @@ BlParallelUniverse class >> existsForHost: aHostClass [
 
 { #category : #'instance creation' }
 BlParallelUniverse class >> forHost: aHostClass [
+
 	^ UniversesMutex critical: [
 		Universes
 			detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
-			ifFound: #yourself
 			ifNone: [
 				| aUniverse |
-				aUniverse := self new hostClass: aHostClass.
+				aUniverse := self new hostClass: aHostClass; yourself.
 				Universes := Universes copyWith: aUniverse.
 				aUniverse ] ]
 ]
@@ -59,14 +59,6 @@ BlParallelUniverse class >> initialize [
 	Universes := #().
 	UniversesMutex := Mutex new.
 	UniqueIdGenerator := BlUniqueIdGenerator new
-]
-
-{ #category : #accessing }
-BlParallelUniverse class >> universeWithId: aUniverseId do: aBlock [
-	^ self allSubInstances
-		detect: [ :eachUniverse | eachUniverse id = aUniverseId ]
-		ifFound: aBlock
-		ifNone: [ nil ]
 ]
 
 { #category : #'api - spaces' }
@@ -97,20 +89,11 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 	"Synchronously attach a given space to the Universe assuming that the message is sent from within the UI process
 	of this universe and the space was previously detached from another universe."
 
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
-
-	aSpace isOpened
-		ifTrue: [ ^ self ].
+	aSpace isOpened ifTrue: [ ^ self ].
 
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host space!' ].
-
-	self
-		assert: [ aSpace host isNotNil ]
-		description: [ 'Space must have a host' ].
 
 	"First of all we need to add space to the space manager"
 	spaceManager addSpace: aSpace.
@@ -134,7 +117,7 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 
 	self
 		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host!' ].
+		description: [ 'Space must have a host space!' ].
 
 	(BlParallelUniverseSpaceRootAssignedSignal new
 		universeId: self id;
@@ -154,12 +137,9 @@ BlParallelUniverse >> closeSpace: aSpace [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> closeSpaceSynchronously: aSpace [
+
 	| aHost |
 	
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
-
 	"If space is not even opened we should do nothing"
 	aSpace isOpened
 		ifFalse: [ ^ self ].
@@ -254,11 +234,8 @@ BlParallelUniverse >> detachSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 	"Detaches a given space from this universe without closing that space."
+
 	| aHost |
-	
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
 
 	"If space is not even opened we should do nothing"
 	aSpace isOpened
@@ -329,6 +306,7 @@ BlParallelUniverse >> hasSpaces [
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> hasUIProcess [
+
 	self uiProcessDo: [ :aUIProcess | ^ true ].
 	^ false
 ]
@@ -352,15 +330,14 @@ BlParallelUniverse >> id [
 
 { #category : #initialization }
 BlParallelUniverse >> initialize [
+
 	super initialize.
 
 	id := UniqueIdGenerator generateUniqueId.
-
 	spaceManager := BlSpaceManager new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
 	postponedActions := WaitfreeQueue new.
-	pulsingStateMutex := Mutex new.
 	isPulsing := false.
 
 	eventDispatcher := self defaultEventDispatcher.
@@ -369,12 +346,8 @@ BlParallelUniverse >> initialize [
 
 { #category : #accessing }
 BlParallelUniverse >> isPulsing [
-	<return: #Boolean>
 
-	| areWePulsing |
-	areWePulsing := false.
-	pulsingStateMutex critical: [ areWePulsing := isPulsing ].
-	^ areWePulsing
+	^ isPulsing
 ]
 
 { #category : #'private - spaces' }
@@ -412,20 +385,12 @@ BlParallelUniverse >> openSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
-	self
-		assert: [ aSpace isNotNil ]
-		description: [ 'Space must not be nil' ].
-
 	aSpace isOpened
 		ifTrue: [ ^ self ].
 
 	self
 		assert: [ aSpace hasHostSpace not ]
 		description: [ 'Space must not have a host space!' ].
-
-	self
-		assert: [ aSpace host isNotNil ]
-		description: [ 'Space must have a host' ].
 
 	"First of all we need to add space to the space manager"
 	spaceManager addSpace: aSpace.
@@ -447,10 +412,6 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 		universeId: self id;
 		spaceId: aSpace id) emit.
 
-	self
-		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host!' ].
-		
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
 	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).
@@ -481,9 +442,9 @@ BlParallelUniverse >> postpone: aValuable [
 { #category : #pulse }
 BlParallelUniverse >> pulse [
 
-	self isPulsing ifTrue: [ ^ self ].
+	isPulsing ifTrue: [ ^ self ].
 
-	pulsingStateMutex critical: [ isPulsing := true ].
+	isPulsing := true.
 
 	[ self pulseSynchronously ] ensure: [ self requestStopPulsation ]
 ]
@@ -499,18 +460,19 @@ BlParallelUniverse >> pulseSynchronously [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> requestStopPulsation [
-	pulsingStateMutex critical: [ 
+
 		self uiProcessDo: [ :currentUIProcess | 
 			"Only mark the universe as not pulsing in case the request comes from the current
 			UI process or from a process that was not the Bloc UI process previously. This avoids 
 			reseting the pulsing status when the debugger terminates a previously suspended UI process."
-			(currentUIProcess == Processor activeProcess or: [ 
-				Processor activeProcess isBlocPulseLoopProcess not ]) ifTrue: [ 
-					self markAsNotPulsing ] ] ]
+			(Processor activeProcess == currentUIProcess or: [
+			Processor activeProcess name ~= BlHostPulseLoop processId ])
+				ifTrue: [ self markAsNotPulsing ] ]
 ]
 
 { #category : #'api - lifecycle' }
 BlParallelUniverse >> snapshot: save andQuit: quit [
+
 	self postpone: [ Smalltalk snapshot: save andQuit: quit ]
 ]
 
@@ -544,24 +506,29 @@ BlParallelUniverse >> stopUniverse [
 BlParallelUniverse >> tryToRunDeferredActions [
 
 	| nextInQueue |
-	(BlParallelUniverseTryToRunDeferredActionsSignal new universeId:
-		 self id) emit.
+	(BlParallelUniverseTryToRunDeferredActionsSignal new
+		universeId: self id;
+		yourself) emit.
 
 	[ (nextInQueue := deferredActions nextOrNil) isNotNil ] whileTrue: [ 
-		(BlParallelUniverseRunDeferredActionSignal new universeId: self id)
-			emit.
+
+		(BlParallelUniverseRunDeferredActionSignal new
+			universeId: self id;
+			yourself) emit.
+
 		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
 ]
 
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunPostponedActions [
+
 	| nextInQueue |
-	
-	[ (nextInQueue := postponedActions nextOrNil) isNotNil ]
-		whileTrue: [ [ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
+	[ (nextInQueue := postponedActions nextOrNil) isNotNil ] whileTrue: [ 
+		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
 ]
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> uiProcessDo: aBlock [
+
 	self hostClass uiProcessDo: aBlock
 ]

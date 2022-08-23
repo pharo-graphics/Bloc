@@ -156,9 +156,6 @@ BlLayoutChildNodeWithTransformation >> transformation [
 
 { #category : #accessing }
 BlLayoutChildNodeWithTransformation >> transformation: aBlElementTransformation [
-	self
-		assert: [ aBlElementTransformation notNil ]
-		description: [ 'Transformation must not be nil' ].
 
 	transformation := aBlElementTransformation asCachedTransformation
 		bounds: (BlBounds origin: 0.0@0.0 extent: self privateMeasurement extent)

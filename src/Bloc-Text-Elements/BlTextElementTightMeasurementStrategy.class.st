@@ -4,13 +4,13 @@ Class {
 	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #measuring }
 BlTextElementTightMeasurementStrategy >> boundsOf: aParagraph [
-	<return: #BlBounds>
+
 	| aMeasuredWidth aMeasuredHeight |
 
 	aMeasuredWidth := aParagraph width.
-	aMeasuredHeight := (aParagraph height).
+	aMeasuredHeight :=aParagraph height.
 
 	^ BlBounds origin: aParagraph left @ 0.0 extent: aMeasuredWidth @ aMeasuredHeight
 ]

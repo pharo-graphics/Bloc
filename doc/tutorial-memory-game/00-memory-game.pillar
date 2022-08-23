@@ -1,4 +1,0 @@
-! Memory Game!! IntroductionIn this tutorial we will build a memory game. In a memory game players need to find pairs of similar cards. In each round a player turns over two cards at a time. If the two cards show the same symbol they are removed and the player gets a point. If not, they are both flipped.The following figure shows the game after the first selection of two cards. Faced-down cards are represented with a cross and turned cards with their number: +file://memoryExample0.png+The following figure shows the same game after a few rounds. While this game can be played by multiple players, in this tutorial we will build a game with just one player: +file://memoryExample1.png+
-
-First, we will implement the game model: ${inputFile:01-memory-game-model.pillar}$
-

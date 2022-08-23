@@ -1,7 +1,7 @@
 "
-I represent a paragraph line and consist of spans.
+I represent a list of consecutive spans of a BlTextParagraph.
 
-Width of the line is not a plain sum of width of all spans. The difference comes from the fact that because of Kerning advance of a piece of text is less than visual width of the same text.
+My width is not a plain sum of width of all spans. The difference comes from the fact that because of Kerning advance of a piece of text is less than visual width of the same text.
 
 "
 Class {
@@ -13,25 +13,9 @@ Class {
 	#category : #'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : #'instance creation' }
-BlTextParagraphLine class >> rope: aRope spans: aSpansCollection [
-	^ self new
-		rope: aRope spans: aSpansCollection;
-		yourself
-]
-
-{ #category : #'instance creation' }
-BlTextParagraphLine class >> spans: aSpansCollection [
-	^ self new
-		spans: aSpansCollection;
-		yourself
-]
-
 { #category : #adding }
-BlTextParagraphLine >> addSpan: aBrTextParagraphSpan [
-	spans add: aBrTextParagraphSpan.
-	aBrTextParagraphSpan paragraph: self paragraph.
-
+BlTextParagraphLine >> addSpan: aBlTextParagraphLeaf [
+	spans add: aBlTextParagraphLeaf.
 	spans size = 1
 		ifTrue: [ self spanAdded: spans first ]
 		ifFalse: [ self spanAdded: spans last after: (spans at: spans size - 1) ]
@@ -39,7 +23,6 @@ BlTextParagraphLine >> addSpan: aBrTextParagraphSpan [
 
 { #category : #accessing }
 BlTextParagraphLine >> baseline: aPoint [
-
 	self moveSpansBy: self baseline negated.
 	super baseline: aPoint.
 	self moveSpansBy: self baseline
@@ -49,19 +32,17 @@ BlTextParagraphLine >> baseline: aPoint [
 BlTextParagraphLine >> finalize [
 
 	spans do: #finalize.
-	spans := OrderedCollection new
+	spans reset
 ]
 
 { #category : #initialization }
 BlTextParagraphLine >> initialize [
 	super initialize.
-	
 	spans := OrderedCollection new
 ]
 
 { #category : #testing }
 BlTextParagraphLine >> isEmpty [
-	<return: #Boolean>
 	
 	^ self spans isEmpty
 ]
@@ -75,34 +56,37 @@ BlTextParagraphLine >> moveSpansBy: aPoint [
 
 { #category : #measurement }
 BlTextParagraphLine >> normalize: aScale [
+
 	"Normalize this segment to have rounded measurements.
 	I don't change the baseline"
 
-	spans
-		ifEmpty: [ ^ self ].
-		
+	spans ifEmpty: [ ^ self ].
 	spans do: [ :aSpan | aSpan normalize: aScale ].
-	
 	self recomputeLineLayout
 ]
 
 { #category : #measurement }
 BlTextParagraphLine >> recomputeLineLayout [
 
-	self spans
-		ifEmpty: [ ^ self ].
+	self spans ifEmpty: [ ^ self ].
 
-	self spanAdded: self spans first.	
-	2 to: self spans size do:
-		[ :index | self spanAdded: (self spans at: index) after: (self spans at: index - 1) ]
+	self spanAdded: self spans first.
+	2 to: self spans size do: [ :index | 
+		self
+			spanAdded: (self spans at: index)
+			after: (self spans at: index - 1) ]
+]
+
+{ #category : #finalization }
+BlTextParagraphLine >> reset [
+
+	self finalize
+
 ]
 
 { #category : #hooks }
 BlTextParagraphLine >> spanAdded: aSpan [
-	
-	self
-		assert: [ aSpan == spans first ]
-		description: [ 'I can only be sent with the first span as argument' ].
+	"React to a span added. Note: aSpan must be the first span."
 
 	left := aSpan left.
 	top := aSpan top.
@@ -121,17 +105,7 @@ BlTextParagraphLine >> spanAdded: aSpan [
 
 { #category : #hooks }
 BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
-	aLastSpan isVertical
-		ifTrue: [ aPreviousSpan isVertical
-			ifTrue: [ self spanAddedVertical: aLastSpan afterVertical: aPreviousSpan ]
-			ifFalse: [ self spanAddedVertical: aLastSpan afterHorizontal: aPreviousSpan ] ]
-		ifFalse: [ aPreviousSpan isVertical
-			ifTrue: [ self spanAddedHorizontal: aLastSpan afterVertical: aPreviousSpan ]
-			ifFalse: [ self spanAddedHorizontal: aLastSpan afterHorizontal: aPreviousSpan ] ]
-]
 
-{ #category : #hooks }
-BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterHorizontal: aPreviousSpan [
 	| previousBottom newBottom |
 
 	aLastSpan baseline: aPreviousSpan baseline + (aPreviousSpan advance @ 0).
@@ -150,24 +124,9 @@ BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterHorizontal: aPrevious
 	to := aLastSpan to
 ]
 
-{ #category : #hooks }
-BlTextParagraphLine >> spanAddedHorizontal: aLastSpan afterVertical: aPreviousSpan [
-	self shouldBeImplemented
-]
-
-{ #category : #hooks }
-BlTextParagraphLine >> spanAddedVertical: aLastSpan afterHorizontal: aPreviousSpan [
-	self shouldBeImplemented
-]
-
-{ #category : #hooks }
-BlTextParagraphLine >> spanAddedVertical: aLastSpan afterVertical: aPreviousSpan [
-	self shouldBeImplemented
-]
-
 { #category : #accessing }
 BlTextParagraphLine >> spans [
-	<return: #SequenceableCollection of: #BlTextParagraphSpan>
+	<return: #SequenceableCollection of: #BlTextParagraphLeaf>
 
-	^ spans
+	^ spans 
 ]

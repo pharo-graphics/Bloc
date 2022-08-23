@@ -19,6 +19,7 @@ BlElementNoId class >> uniqueInstance [
 
 { #category : #comparing }
 BlElementNoId >> = anObject [
+
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
@@ -31,4 +32,9 @@ BlElementNoId >> asSymbol [
 { #category : #comparing }
 BlElementNoId >> hash [
 	^ self class hash
+]
+
+{ #category : #testing }
+BlElementNoId >> isNoId [
+	^ true
 ]

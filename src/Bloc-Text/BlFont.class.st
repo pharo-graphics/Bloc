@@ -8,7 +8,7 @@ Class {
 
 { #category : #defaults }
 BlFont class >> defaultFamilyName [
-	^ 'Helvetica Neue'
+	^ 'Source Sans Pro'
 ]
 
 { #category : #defaults }

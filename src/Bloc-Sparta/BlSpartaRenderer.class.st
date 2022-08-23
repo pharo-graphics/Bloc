@@ -121,16 +121,17 @@ BlSpartaRenderer >> initializeForHostSpace: aBlHostSpace [
 	aBlHostSpace makeCurrent.
 	
 	"create a new surface of a specific type for a given host space"
-	surface := (self class pickSurfaceClassFor: aBlHostSpace) new.
-	surface initializeForHostSpace: aBlHostSpace.
+	surface := (self class pickSurfaceClassFor: aBlHostSpace)
+		newForHostSpace: aBlHostSpace.
 
 	"creates surfaceRenderer and allocate / initialize a surface"
-	surfaceRenderer := surface createSurfaceRendererOn: aBlHostSpace.
-	surfaceRenderer initializeForSurface: surface.
+	surfaceRenderer := surface newSurfaceRendererOn: aBlHostSpace.
 
 	"creates spaceRenderer from the allocated surface"
-	spaceRenderer := surface createSpaceRendererOn: self.
-	spaceRenderer initializeForSurface: surface.
+	spaceRenderer := surface newSpaceRendererOn: self.
 
-	textMeasurer := BlSpartaSpaceTextMeasurer new spaceRenderer: spaceRenderer; yourself
+	textMeasurer := BlSpartaSpaceTextMeasurer new
+		spaceRenderer: spaceRenderer;
+		yourself
+
 ]

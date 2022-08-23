@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTextElementMeasurementExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Text-Examples-Measurement'
 }
 

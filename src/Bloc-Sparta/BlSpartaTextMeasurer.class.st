@@ -12,60 +12,50 @@ Class {
 	#category : #'Bloc-Sparta-Text'
 }
 
-{ #category : #dispatch }
-BlSpartaTextMeasurer >> createParagraphSpan [
-	<return: #BlTextParagraphSpan>
-
-	^ BlTextParagraphSpan new
-		  measurer: self;
-		  yourself
+{ #category : #accessing }
+BlSpartaTextMeasurer >> canvas [
+	^ self subclassResponsibility  
 ]
 
-{ #category : #dispatch }
+{ #category : #measurement }
 BlSpartaTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 	aBlTextParagraph measureOn: self
 ]
 
-{ #category : #dispatch }
+{ #category : #measurement }
 BlSpartaTextMeasurer >> measureTextSpan: aBlSpan [
 	"Measure a given text span and return paragraph span with computed metrics"
-	<return: #BlTextParagraphSpan>
+	<return: #BlSpartaTextParagraphSpan>
 
-	| aFontBuilder aFontAndStyleBuilder aFont aTextPainter theAttributes aTextRun aSpartaMetrics aParagraphSpan |
+	| fontBuilder fontAndStyleBuilder freeTypeFont textPainter attributes textRun spartaMetrics paragraphSpan |
 
 	"we first collect font properties and text style from the attributes"
-	aFontAndStyleBuilder := BlTextFontAndStyleBuilder new.
-	
-	theAttributes := aBlSpan attributes.
-	theAttributes do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: aFontAndStyleBuilder ].
+	fontAndStyleBuilder := BlTextFontAndStyleBuilder new.
+	attributes := aBlSpan attributes.
+	attributes do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: fontAndStyleBuilder ].
 
 	"build an abstract font and resolve not yet resolved properties"
-	aFont := aFontAndStyleBuilder font.
+	freeTypeFont := fontAndStyleBuilder font.
+	textPainter := self canvas text.
+	fontBuilder := self canvas font.
 
-	aTextPainter := self spartaCanvas text.
-	aFontBuilder := self spartaCanvas font.
+	freeTypeFont applyOnSpartaFontBuilder: fontBuilder.
+	fontAndStyleBuilder applyOnSpartaTextPainter: textPainter.
 
-	aFont applyOnSpartaFontBuilder: aFontBuilder.
-	aFontAndStyleBuilder applyOnSpartaTextPainter: aTextPainter.
+	textPainter font: fontBuilder build.
+	textPainter string: (String streamContents: [ :aStream | aBlSpan do: [ :anItem | anItem textRunOn: aStream ] ]).
 
-	aTextPainter font: aFontBuilder build.
-	aTextPainter string: (String streamContents: [ :aStream | aBlSpan do: [ :anItem | anItem textRunOn: aStream ] ]).
+	spartaMetrics := textPainter metrics.
 
-	aSpartaMetrics := aTextPainter metrics.
-
-	aTextRun := aTextPainter textRunWithMetrics: aSpartaMetrics.
-	self
-		assert: [ aTextRun isNull not ]
-		description: [ 'Created text run must not be nullptr' ].
-
-	aParagraphSpan := self createParagraphSpan.
-	aParagraphSpan applySpartaMetrics: aSpartaMetrics.
-	aParagraphSpan textRun: aTextRun.
-
-	^ aParagraphSpan
+	textRun := textPainter textRunWithMetrics: spartaMetrics.
+	paragraphSpan := self createParagraphSpan.
+	paragraphSpan span: aBlSpan.
+	paragraphSpan textRun: textRun.
+	paragraphSpan applySpartaMetrics: spartaMetrics.
+	^ paragraphSpan
 ]
 
-{ #category : #accessing }
-BlSpartaTextMeasurer >> spartaCanvas [
-	^ self subclassResponsibility
+{ #category : #'paragraph span instance creation' }
+BlSpartaTextMeasurer >> newParagraphSpan [
+	^ BlSpartaTextParagraphSpan new
 ]

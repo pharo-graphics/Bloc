@@ -14,6 +14,21 @@ Class {
 	#category : #'Bloc-Text-Text-Styler'
 }
 
+{ #category : #'hooks - text modifications' }
+BlTextStyler >> onTextStyled: aTextStyledEvent editor: aTextEditor [
+
+	(aTextStyledEvent text isNextGenerationOf: aTextEditor text)
+		ifTrue: [ 
+			aTextEditor text rope: aTextStyledEvent text text rope.
+			aTextStyledEvent afterAction value: aTextEditor text.
+			aTextEditor notifyTextStyled.
+			aTextEditor processCursorAttributes.
+			aTextEditor updater
+				all;
+				update ]
+		ifFalse: [ aTextEditor styleTextAndAfterDo: aTextStyledEvent afterAction ]
+]
+
 { #category : #private }
 BlTextStyler >> privateStyle: aText [ 
 	<return: #BlText>

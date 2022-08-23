@@ -22,10 +22,6 @@ BlSingleErrorHandler >> error [
 { #category : #accessing }
 BlSingleErrorHandler >> error: aHandledError [
 	
-	self
-		assert: [ aHandledError isNotNil ]
-		description: [ 'Error must not be nil' ].
-
 	error := aHandledError
 ]
 

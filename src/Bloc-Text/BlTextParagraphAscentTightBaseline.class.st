@@ -1,12 +1,11 @@
 Class {
 	#name : #BlTextParagraphAscentTightBaseline,
-	#superclass : #BlTextParagraphBaseline,
-	#category : #'Bloc-Text-Text-Paragraph'
+	#superclass : #BlAscentTightBaselineMeasurer,
+	#category : #'Bloc-Text-Text-Paragraph-Deprecated'
 }
 
-{ #category : #baseline }
-BlTextParagraphAscentTightBaseline >> computedBaseline: aTextParagraph [
-	<return: #Point>
+{ #category : #testing }
+BlTextParagraphAscentTightBaseline class >> isDeprecated [
 
-	^ aTextParagraph left negated @ aTextParagraph ascent abs
+	^ true
 ]

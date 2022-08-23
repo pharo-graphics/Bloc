@@ -64,11 +64,6 @@ TBlTextStyleable >> foreground: aBlPaint [
 	self attributesBuilder attribute: (BlTextForegroundAttribute paint: aBlPaint)
 ]
 
-{ #category : #'api - text style' }
-TBlTextStyleable >> highlight: aPaint [
-	self attributesBuilder attribute: (BlTextHighlightAttribute paint: aPaint)
-]
-
 { #category : #'api - text orientation' }
 TBlTextStyleable >> horizontal [
 	

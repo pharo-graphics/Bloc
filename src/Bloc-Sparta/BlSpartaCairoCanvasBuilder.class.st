@@ -4,7 +4,7 @@ I build sparta canvas using Cairo backend
 Class {
 	#name : #BlSpartaCairoCanvasBuilder,
 	#superclass : #BlSpartaCanvasBuilder,
-	#category : 'Bloc-Sparta'
+	#category : #'Bloc-Sparta-canvas'
 }
 
 { #category : #'api - instance creation' }

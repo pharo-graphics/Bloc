@@ -15,54 +15,66 @@ Class {
 		'text',
 		'paragraph',
 		'selection',
-		'baseline',
 		'measurement',
 		'measurer',
-		'defaultFontSize'
+		'defaultFontSize',
+		'baselineMeasurer',
+		'highlightsMap'
 	],
 	#classVars : [
-		'DefaultText',
-		'ParagraphPool'
+		'DefaultText'
 	],
 	#category : #'Bloc-Text-Elements'
 }
 
 { #category : #'class initialization' }
-BlTextElement class >> cleanUp [
-	self initialize
-]
-
-{ #category : #'class initialization' }
-BlTextElement class >> initialize [
-	ParagraphPool := BlSynchronizedObjectPool pool: (BlBagObjectPool new: 1000).
+BlTextElement class >> initialize [ 
 	DefaultText := 'Text' asRopedText readonly
 ]
 
 { #category : #'instance creation' }
-BlTextElement class >> text: aBrText [
-	^ self new text: aBrText
-]
+BlTextElement class >> text: aBlText [
 
-{ #category : #'private - paragraph' }
-BlTextElement >> acquireParagraph [
-	| aParagraph |
-	
-	aParagraph := ParagraphPool acquire
-		ifNil: [ self createTextParagraph ].
-	aParagraph reset.
-
-	^ aParagraph
+	^ self new
+		  text: aBlText;
+		  yourself
 ]
 
 { #category : #accessing }
 BlTextElement >> baseline [
+
+	self
+		deprecated: 'Please use baselineMeasurer instead.'
+		transformWith:
+			'`@receiver baseline'
+				-> '`@receiver baselineMeasurer'.
 	
-	^ baseline
+	^ self baselineMeasurer
 ]
 
 { #category : #accessing }
-BlTextElement >> baseline: aTextParagraphBaseline [
-	baseline := aTextParagraphBaseline.
+BlTextElement >> baseline: aBlTextParagraphBaselineMeasurer [
+
+	self
+		deprecated: 'Please use baselineMeasurer: instead.'
+		transformWith:
+			'`@receiver baseline: `@statements1'
+				-> '`@receiver baselineMeasurer: `@statements1'.
+
+	self baselineMeasurer: aBlTextParagraphBaselineMeasurer.
+
+]
+
+{ #category : #accessing }
+BlTextElement >> baselineMeasurer [
+	
+	^ baselineMeasurer
+]
+
+{ #category : #accessing }
+BlTextElement >> baselineMeasurer: aBlTextParagraphBaselineMeasurer [
+
+	baselineMeasurer := aBlTextParagraphBaselineMeasurer.
 	self textChanged
 ]
 
@@ -116,9 +128,8 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 { #category : #'private - paragraph' }
 BlTextElement >> createTextParagraph [
 	"Create a text paragraph used to measure and render text"
-	<return: #BlTextParagraph>
 
-	^ BlSingleLineTextParagraph new
+	^ BlTextParagraph new 
 ]
 
 { #category : #'api - font size' }
@@ -130,6 +141,12 @@ BlTextElement >> defaultFontSize: aNumber [
 	
 	self text defaultFontSize: aNumber.
 	self textChanged
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> defaultHighlightCategory [
+
+	^ #default
 ]
 
 { #category : #initialization }
@@ -157,8 +174,44 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 
 { #category : #'api - text' }
 BlTextElement >> editorMeasurement [
-	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
-	self baseline: BlTextParagraphAscentLooseBaseline uniqueInstance
+
+	self measurement:
+		BlTextElementEditorMeasurementStrategy uniqueInstance.
+	self baselineMeasurer: BlAscentLooseBaselineMeasurer uniqueInstance
+]
+
+{ #category : #'selection - management' }
+BlTextElement >> hasSelection [
+	^ self selection isNotEmpty
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlightCategory: aHighlightCategorySymbol with: aParagraphHighlight [ 
+
+	| l |
+	l := self highlightsMap at: aHighlightCategorySymbol ifAbsentPut: [OrderedCollection new].
+	l add: aParagraphHighlight.
+	self invalidate
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlightWith: aParagraphHighlight [ 
+
+	self highlightCategory: self defaultHighlightCategory with: aParagraphHighlight. 
+
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlights [
+
+	^ highlightsMap ifNotNil: [ :map | 
+		  Array streamContents: [ :stream | map valuesDo: [ :v | stream nextPutAll: v ] ] ]
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlightsMap [
+
+	^ highlightsMap ifNil: [ highlightsMap := IdentityDictionary new ]
 ]
 
 { #category : #geometry }
@@ -188,10 +241,17 @@ BlTextElement >> initialize [
 	"self debug: true"
 ]
 
+{ #category : #layout }
+BlTextElement >> isTabulation [ 
+	^ text isNotEmpty and: [ text first = Character tab ]
+]
+
 { #category : #'api - text' }
 BlTextElement >> labelMeasurement [
-	self measurement: BlTextElementLabelMeasurementStrategy uniqueInstance.
-	self baseline: BlTextParagraphAscentTightBaseline uniqueInstance
+
+	self measurement:
+		BlTextElementLabelMeasurementStrategy uniqueInstance.
+	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
 ]
 
 { #category : #layout }
@@ -223,32 +283,31 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 
 { #category : #layout }
 BlTextElement >> measureParagraph: anExtentMeasurementSpec [
+
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
-	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
 
+	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
 	aWidthSpec := anExtentMeasurementSpec widthSpec.
 	aHeightSpec := anExtentMeasurementSpec heightSpec.
 	aPadding := self constraints padding.
-	
+
 	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
 	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
 
 	paragraph
-		"Create a new text layout"
-		ifNil: [ paragraph := self acquireParagraph ]
-		"or reuse existing"
+		ifNil: [ paragraph := self createTextParagraph ]
 		ifNotNil: [ paragraph reset ].
-
+	"Create a new text layout"
 	paragraph
-		baseline: self baseline;
+		baselineMeasurer: self baselineMeasurer;
 		text: self text;
 		maxWidth: aMaxWidth;
 		maxHeight: aMaxHeight;
 		scale: self globalScale.
 
 	self telemetry
-		timeSync: [ 'Paragraph measureOn: ', self class name ]
+		timeSync: [ 'Paragraph measureOn: ' , self class name ]
 		during: [ self basicMeasureParagraph: paragraph ].
 
 	"text layout is measured at this point"
@@ -257,20 +316,40 @@ BlTextElement >> measureParagraph: anExtentMeasurementSpec [
 	aMeasuredHeight := aMeasuredBounds height min: aMaxHeight.
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
-	aWidthSpec isExact ifTrue: [ 
-		aMeasuredWidth := aWidthSpec size ].
-	aHeightSpec isExact ifTrue: [ 
-		aMeasuredHeight := aHeightSpec size ].
+	aWidthSpec isExact ifTrue: [ aMeasuredWidth := aWidthSpec size ].
+	aHeightSpec isExact ifTrue: [ aMeasuredHeight := aHeightSpec size ].
 
 	"Take minimal width and height into account"
-	aMeasuredWidth := aMeasuredWidth max: self constraints minWidth - aPadding width.
-	aMeasuredHeight := aMeasuredHeight max: self constraints minHeight - aPadding height.
+	aMeasuredWidth := aMeasuredWidth max:
+		                  self constraints minWidth - aPadding width.
+	aMeasuredHeight := aMeasuredHeight max:
+		                   self constraints minHeight - aPadding height.
 	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
 	"Take padding into account"
-	aMeasuredExtent := aMeasuredExtent + (aPadding width @ aPadding height).
+	aMeasuredExtent := aMeasuredExtent
+	                   + (aPadding width @ aPadding height).
 
 	"Finally set measured extent"
-	self measuredExtent: aMeasuredExtent.
+	self measuredExtent: aMeasuredExtent
+]
+
+{ #category : #layout }
+BlTextElement >> measuredMaxLineHeight [
+	
+	| h |
+	h := self height.
+	self previousSiblingDo: [ :s | h := h max: s measuredBounds height ].
+	self nextSiblingDo: [ :s | h := h max: s measuredBounds height ].
+	^  h
+	
+]
+
+{ #category : #layout }
+BlTextElement >> measuredWidthFromLineStart [
+	
+	self previousSiblingDo: [ :s | ^ s measuredWidthFromLineStart + s measuredWidth  ].
+	^  0
+	
 ]
 
 { #category : #accessing }
@@ -311,17 +390,20 @@ BlTextElement >> onAddedToSceneGraph [
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 
-	text ifNil: [ self error: 'Text model must not be nil!' ].
-
-	(self shouldMeasure: anExtentMeasurementSpec)
+	self isTabulation
 		ifTrue: [ 
-			self telemetry
-				timeSync: [ 'Measure paragraph: ', self class name ]
-				during: [ self measureParagraph: anExtentMeasurementSpec ] ].
-	
-	self telemetry
-		timeSync: [ 'Measure children: ', self class name ]
-		during: [ self measureChildren: anExtentMeasurementSpec ]
+			| tabParagraph tabSpec w tabW |
+			tabParagraph := self createTextParagraph.
+			tabParagraph text: text.
+			self basicMeasureParagraph: tabParagraph.
+			w := self measuredWidthFromLineStart.
+			tabW := tabParagraph advance - (w\\tabParagraph advance).
+			tabSpec := (anExtentMeasurementSpec widthSpec beExact: tabW) @ anExtentMeasurementSpec heightSpec.
+			self measureParagraph: tabSpec ]
+		ifFalse: [ (self shouldMeasure: anExtentMeasurementSpec) 
+			ifTrue: [ self measureParagraph: anExtentMeasurementSpec ] ].
+		
+	self measureChildren: anExtentMeasurementSpec
 ]
 
 { #category : #'hooks - session' }
@@ -333,40 +415,52 @@ BlTextElement >> onSessionChanged: aNewSession [
 
 { #category : #'private - paragraph' }
 BlTextElement >> paragraph [
-	<return: #BlTextParagraph>
-
-	self
-		assert: [ self rawParagraph isNotNil ]
-		description: [ 'Can not access paragraph if it is nil' ].
-
-	^ self rawParagraph
-]
-
-{ #category : #'private - paragraph' }
-BlTextElement >> rawParagraph [
-	<return: #BlTextParagraph>
 
 	^ paragraph
 ]
 
+{ #category : #accessing }
+BlTextElement >> rawParagraph [
+
+	self
+		deprecated: 'Please use paragraph instead.'
+		transformWith:
+			'`@receiver rawParagraph'
+				-> '`@receiver paragraph'.
+	
+	^ self paragraph
+]
+
+{ #category : #'private - pool' }
+BlTextElement >> recycledFrom: aStencilBuilder [
+
+	self removeFromParent.
+	self selectNone
+]
+
 { #category : #'private - paragraph' }
 BlTextElement >> releaseParagraph [
-	| aParagraph |
-	
-	paragraph
-		ifNil: [ ^ self ].
-
-	aParagraph := paragraph.
-
-	aParagraph reset.
-	ParagraphPool release: aParagraph.
-	
 	paragraph := nil
 ]
 
 { #category : #'api - font size' }
 BlTextElement >> resetDefaultFontSize [
 	defaultFontSize := nil
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> resetHighlightsMap [
+
+	highlightsMap := nil.
+	self invalidate
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> resetHighlightsOfCategory: aHighlightCategorySymbol [
+
+	highlightsMap ifNil: [ ^self ].
+	highlightsMap removeKey: aHighlightCategorySymbol ifAbsent: [^self].
+	self invalidate
 ]
 
 { #category : #geometry }
@@ -392,7 +486,6 @@ BlTextElement >> select: aFromIndex to: aToIndex [
 BlTextElement >> selectNone [
 	self selection isEmpty
 		ifTrue: [ ^ self ].
-
 	self selection removeAll.
 	self invalidate
 ]
@@ -419,9 +512,20 @@ BlTextElement >> selection [
 	^ selection
 ]
 
+{ #category : #'private - paragraph' }
+BlTextElement >> setupParagraphBeforeDrawing [
+
+	paragraph containerExtent: (self isLastChild
+			 ifTrue: [ self parent extent x @ self extent y ]
+			 ifFalse: [ self extent ]).
+	paragraph selection: self selection.
+	paragraph padding: self padding.
+	" highligh is lazy, do not use the accessor"
+	paragraph highlights: self highlights
+]
+
 { #category : #layout }
 BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
-	<return: #Boolean>
 
 	paragraph
 		ifNil: [ ^ true ].
@@ -451,30 +555,16 @@ BlTextElement >> supportsBaseline [
 { #category : #accessing }
 BlTextElement >> text [
 	"Return the text I currently represent.
-	Note, that I work with immutable text (BrText), so if you want to change or style text
+	Note, that I work with immutable text (BlText), so if you want to change or style text
 	you have to set manually sending #text: message with new styled text model"
-	<return: #BlText>
 	
 	^ text
 ]
 
 { #category : #accessing }
 BlTextElement >> text: aBlText [
-	"Change a text I represent.
-	Note, that aTextModel should be an instance of BrText.
-	aTextModel must not be nil"
-
-	self
-		assert: [ aBlText isNotNil ]
-		description: [ 'A text must not be nil' ].
-		
-	self
-		assert: [ aBlText isKindOf: BlText ]
-		description: [ 'A text must be an instance of Text' ].
-
-	text = aBlText
-		ifTrue: [ ^ self ].
-
+	"Change a text I represent"
+	text = aBlText ifTrue: [ ^ self ].
 	text := aBlText.
 	defaultFontSize ifNotNil: [ :aDefaultFontSize | text defaultFontSize: aDefaultFontSize ].
 	self textChanged
@@ -499,6 +589,7 @@ BlTextElement >> textDo: aBlock [
 
 { #category : #'api - text' }
 BlTextElement >> tightMeasurement [
+
 	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
-	self baseline: BlTextParagraphBoundsBaseline uniqueInstance
+	self baselineMeasurer: BlBoundsBaselineMeasurer uniqueInstance
 ]

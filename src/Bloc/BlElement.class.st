@@ -82,9 +82,7 @@ BlElement >> addAnimation: aBlBaseAnimation [
 
 { #category : #'children add/remove' }
 BlElement >> addChild: anElement [
-	"Add anElement as my last direct child and request layout update.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil"
+	"Add anElement as my last direct child and request layout update."
 
 	self addChild: anElement at: self childrenCount + 1
 ]
@@ -92,11 +90,12 @@ BlElement >> addChild: anElement [
 { #category : #'children add/remove' }
 BlElement >> addChild: anElement after: anotherElement [
 	"Add anElement as my direct child right after anotherElement.
-	Throws an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil"
-	| anotherElementIndex |
 
+	Signal an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
+
+	Precondition: anElement must not be a direct child of any other element."
+
+	| anotherElementIndex |
 	anotherElementIndex := self childIndexOf: anotherElement.
 	anotherElementIndex isZero
 		ifTrue: [
@@ -129,9 +128,10 @@ BlElement >> addChild: anElement as: aBlElementId [
 { #category : #'children add/remove' }
 BlElement >> addChild: anElement at: anIndex [
 	"Add anElement at an index moving other children to the right.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil
-	anIndex must be greater or equal to 1 and less or equal than amount of existing children + 1"
+
+	Preconditions:
+		- anElement must not be a direct child of any other element!
+		- anIndex must be greater or equal to 1 and less or equal than amount of existing children + 1"
 
 	anElement hasParent
 		ifTrue: [ (BlAlreadyAddedAsChildError element: anElement) signal ].	
@@ -190,11 +190,12 @@ BlElement >> addChild: anElement at: anIndex as: aContainerName [
 { #category : #'children add/remove' }
 BlElement >> addChild: anElement before: anotherElement [
 	"Add anElement as my direct child right before anotherElement.
-	Throws an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil"
-	| anotherElementIndex |
 
+	Signal an ${class:BlChildDoesNotExistError}$ if anotherElement is not my direct child.
+
+	Precondition: anElement must not have a parent."
+
+	| anotherElementIndex |
 	anotherElementIndex := self childIndexOf: anotherElement.
 	anotherElementIndex isZero
 		ifTrue: [
@@ -228,9 +229,7 @@ BlElement >> addChild: anElement in: aContainerName as: aChildContainerName [
 
 { #category : #'children add/remove' }
 BlElement >> addChildFirst: anElement [
-	"Add anElement as my first direct child and request layout update.
-	anElement must not be a direct child of any other element!
-	anElement must not be nil"
+	"Add anElement as my first direct child and request layout update."
 
 	self addChild: anElement at: 1
 ]
@@ -248,12 +247,12 @@ BlElement >> addChildFirst: anElement as: aContainerName [
 BlElement >> addChildren: aListOfElements [
 	"Add elements from aListOfElements as my rearmost(last) direct children and
 	request layout update.
-	aListOfElements must not be nil.
-	all elements from aListOfElements must not be added to any other element
+
+	Precondition: 
+		all elements from aListOfElements must not be added to any other element
+
 	@see BlElement>>#addChild: for more documentation"
-	self
-		assert: [ aListOfElements isNotNil ]
-		description: [ 'List of elements to add must not be nil' ].
+
 	self
 		assert: [ aListOfElements allSatisfy: [ :anElement | anElement parent isNil ] ]
 		description: [ 'All elements must not have parent' ].
@@ -449,16 +448,17 @@ BlElement >> attachChild: anElement [
 
 { #category : #'children add/remove' }
 BlElement >> attachChild: anElement at: anIndex [
-	"Attaches an element making it my direct child. Attaching an element assigns me as the parent
+	"Attach an element making it my direct child. Attaching an element assigns me as the parent
 	and puts an element in the list of children so that it can be retrieved by `children at:`.
    I am intended to be lightweight and make no assumptions about whether the parent or child should be redrawn.
 	Proper use includes also making any appropriate #requestLayout or #changed message sends.
    I should only be used for elements which were detached from me as their previous parent.
-	anElement must not be nil.
-	anElement must not be my direct child.
-	anIndex must be within my childrens' array"
-	self assert: anElement isNotNil.
-	self assert: anElement parent isNil.
+
+	Preconditions:
+	- anElement must not be my direct child.
+	- anIndex must be within my childrens' array"
+
+	self assert: anElement hasParent not.
 	self assert: anIndex > 0.
 	self assert: anIndex <= (self children size + 1).
 
@@ -828,7 +828,8 @@ BlElement >> clipChildren: aBoolean [
 	self clipChildren = aBoolean
 		ifTrue: [ ^ self ].
 
-	visuals := visuals clipChildren: aBoolean
+	visuals := visuals clipChildren: aBoolean.
+	self invalidateChildren.
 ]
 
 { #category : #accessing }
@@ -929,8 +930,6 @@ BlElement >> constraintsDo: aBlock [
 	Note: After evaluation I request a layout update!
 	aBlock must not be nil.
 	aBlock must accept exactly one argument"
-	self assert: aBlock isNotNil.
-	self assert: aBlock argumentCount = 1.
 	
 	aBlock value: self constraints.
 	self requestLayout
@@ -1092,7 +1091,6 @@ BlElement >> detachChild: anElement [
 	I don't clean focus in order to be able to preserve it in case child is attached back.
 	anElement must not be nil.
 	anElement must be my direct child"
-	self assert: anElement isNotNil.
 	self assert: anElement parent == self.
 
 	anElement parent: nil.
@@ -1414,6 +1412,13 @@ BlElement >> findMouseEventTargetAt: aPoint [
 	^ (doWantEvent and: [ self shouldHandleMouseEvents ])
 		ifTrue: [ self ]
 		ifFalse: [ nil ]
+]
+
+{ #category : #'children accessing' }
+BlElement >> firstChild [
+	"return true if the receiver is the first child of its parent"
+	self hasChildren ifFalse: [ ^ self error: 'Must have at least one child' ].
+	^ self children first
 ]
 
 { #category : #'children accessing' }
@@ -1920,6 +1925,12 @@ BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 				ifTrue: [ self parent invalidate ] ]
 ]
 
+{ #category : #'api - look' }
+BlElement >> invalidateChildren [
+
+	self childrenDo: [ :each | each invalidate ]
+]
+
 { #category : #'change reporting' }
 BlElement >> invalidationBounds [
 	<return: #Rectangle>
@@ -1964,6 +1975,13 @@ BlElement >> isDetachedFromSceneGraph [
 	^ spaceReference isDetachedFromSceneGraph
 ]
 
+{ #category : #'children accessing' }
+BlElement >> isFirstChild [
+	"return true if the receiver is the first child of its parent"
+	self hasParent ifFalse: [ ^ self error: 'Must have a parent' ].
+	^ (self parent childIndexOf: self) = 1
+]
+
 { #category : #'focus testing' }
 BlElement >> isFocusable [
 	"Return true if I am able to take focus, false otherwise"
@@ -1982,6 +2000,13 @@ BlElement >> isFocused [
 	<return: #Boolean>
 
 	^ self focused
+]
+
+{ #category : #'children accessing' }
+BlElement >> isLastChild [
+	"return true if the receiver is the first child of its parent"
+	self hasParent ifFalse: [ ^ self error: 'Must have a parent' ].
+	^ (self parent childIndexOf: self) = self children size
 ]
 
 { #category : #layout }
@@ -2102,8 +2127,6 @@ BlElement >> layoutDo: aBlock [
 	Nite: After evaluation I request a layout update.
 	aBlock must not be nil.
 	aBlock must accept exactly one argument"
-	self assert: aBlock isNotNil.
-	self assert: aBlock argumentCount = 1.
 
 	aBlock value: self layout.
 	self requestLayout
@@ -2146,22 +2169,11 @@ BlElement >> localBoundsToGlobal: aBounds [
 BlElement >> localBoundsToMine: aBlBounds fromChild: anElement [
 	"In-place transform provided bounds from coordinate system of a given descendant element
 	to my local coordinates and return a result"
-	<return: #BlBounds>
+
 	| aParentElement |
-	
-	self
-		assert: [ aBlBounds isKindOf: BlBounds ]
-		description: [ 'Bounds should be {1} but was {2}' format: { BlBounds . aBlBounds class } ].
-	
-	anElement == self
-		ifTrue: [ ^ aBlBounds ].
+	anElement == self ifTrue: [ ^ aBlBounds ].
 		
-	self
-		assert: [ anElement hasParent: self ]
-		description: [ 'A child element must be my descentant (be in my children composition tree)' ].
-	
 	aParentElement := anElement.
-	
 	[
 		aParentElement localBoundsToParent: aBlBounds.
 		aParentElement := aParentElement parent
@@ -2732,12 +2744,8 @@ BlElement >> opacity: aNumber [
 	so if aNumber is -1 opacity will be 0 and the same way if opacity
 	is requested to be 2 it will infact become 1.
 	aNumber must not be nil"
+
 	| aNewOpacity |
-
-	self
-		assert: [ aNumber isNotNil ]
-		description: [ 'Opacity can not be nil' ].
-
 	aNewOpacity := (aNumber asFloat max: 0.0) min: 1.0.
 	
 	"If opacity is very close to zero, element actually should be completely
@@ -2842,6 +2850,15 @@ BlElement >> parentBoundsToLocal: aBounds [
 	transformation inverseTransformBounds: aBounds.
 	
 	^ aBounds
+]
+
+{ #category : #'children accessing' }
+BlElement >> parentDo: aBlock [
+	"Evaluate a block with my direct parent as an argument 
+	If I don't have a parent - does nothing"
+	
+	self hasParent ifFalse: [ ^ self ].
+	^ aBlock value: self parent
 ]
 
 { #category : #'geometry position convertion' }
@@ -2981,7 +2998,11 @@ BlElement >> printOn: aStream [
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: ' @ ';
-		store: self identityHash;
+		store: self identityHash.
+		
+	self id isNoId ifTrue: [ ^self ].
+
+	aStream
 		space;
 		nextPut: $(;
 		print: self id;
@@ -3050,7 +3071,6 @@ BlElement >> removeChild: anElement [
 	As result anElement sends BlElementRemovedEvent
 	anElement must not be nil.
 	anElement must be my direct child"
-	self assert: [ anElement notNil ].
 	self assert: [ anElement parent == self ].
 	
 	self onChildToBeRemoved: anElement.
@@ -3209,16 +3229,12 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 { #category : #'children add/remove' }
 BlElement >> replaceChild: aChildElement with: anotherElement as: aSymbol [
 	"Replace a given child element with another element preserving the children order.
-	Request layout and redraw an area occupied by anElement.
-	As result anElement sends BlElementRemovedEvent
-	anElement must not be nil.
-	anElement must be my direct child"
-	| aChildIndex |
+	Request layout and redraw an area occupied by aChildElement.
+	As result aChildElement sends BlElementRemovedEvent.
+	aChildElement must be my direct child."
 
-	self assert: aChildElement isNotNil.
+	| aChildIndex |
 	self assert: aChildElement parent == self.
-	self assert: anotherElement isNotNil.
-	self assert: aSymbol isNotNil.
 	
 	aChildIndex := self childIndexOf: aChildElement.
 	self removeChildAt: aChildIndex.
@@ -3444,11 +3460,23 @@ BlElement >> spaceDo: aBlock [
 	self space ifNotNil: aBlock
 ]
 
+{ #category : #'text input' }
+BlElement >> startTextInput [
+]
+
+{ #category : #'text input' }
+BlElement >> startTextInputAtRectangle: aRectangle [
+]
+
 { #category : #'api - style' }
 BlElement >> states [
 	^ self userData
 		at: #blocStates
 		ifAbsentPut: [ BlElementStates new element: self ]
+]
+
+{ #category : #'text input' }
+BlElement >> stopTextInput [
 ]
 
 { #category : #'api - style' }
@@ -3638,26 +3666,10 @@ BlElement >> visualBounds [
 	By default, visual bounds of `inside` outskits equal to geometry bounds since border
 	is never rendered outside of the element's geometry.
 	Note: When there is no sparta canvas available, return geometry bounds"
-	
-	^ Bloc hasSparta
-		ifTrue: [ self visualBoundsOn: (Bloc preferableSpartaCanvas offscreen) ]
-		ifFalse: [ self geometryBounds ]
-]
 
-{ #category : #'geometry bounds' }
-BlElement >> visualBounds: aBlBounds on: aCanvas [
-	^ self geometry strokedBounds: aBlBounds of: self on: aCanvas
-]
-
-{ #category : #'geometry bounds' }
-BlElement >> visualBoundsOn: aCanvas [
-	"Return my visual bounds as a Rectangle.
-	Visual bounds only take border and geometry into account.
-	If a border is of inner type, then visual bounds are the same
-	as geometry bounds, otherwise visual bounds are larger than geometry ones"
-	<return: #Rectangle>
-	
-	^ (self visualBounds: BlBounds new on: aCanvas) asRectangle
+	^ self isAttachedToSceneGraph
+		  ifTrue: [ self space visualBoundsOf: self ]
+		  ifFalse: [ self geometryBounds ]
 ]
 
 { #category : #'event handling' }

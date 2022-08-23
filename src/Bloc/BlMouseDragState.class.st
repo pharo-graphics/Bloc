@@ -9,9 +9,10 @@ Class {
 
 { #category : #comparing }
 BlMouseDragState >> = anotherObject [
+
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
+	anotherObject class = self class
 		ifFalse: [ ^ false ].
 	^ anotherObject button = self button
 ]

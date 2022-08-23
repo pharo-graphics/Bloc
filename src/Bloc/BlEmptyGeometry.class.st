@@ -38,16 +38,3 @@ BlEmptyGeometry >> releaseCache [
 { #category : #'api - cache' }
 BlEmptyGeometry >> releaseStrokedBoundsCache [
 ]
-
-{ #category : #'api - bounds' }
-BlEmptyGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
-	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
-	Dispatch through outskirts first"
-	<return: #BlBounds>
-	
-	^ aBlBounds
-		left: 0
-		top: 0
-		right: anElement width
-		bottom: anElement height
-]

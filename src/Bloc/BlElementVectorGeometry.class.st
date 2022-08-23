@@ -11,18 +11,6 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
-{ #category : #'geometry testing' }
-BlElementVectorGeometry >> containsPoint: aPoint in: aBlElement [
-	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
-	as as border during the testing process"
-	<return: #Boolean>
-
-	^ self
-		containsPoint: aPoint
-		in: aBlElement
-		on: Bloc preferableSpartaCanvas offscreen
-]
-
 { #category : #accessing }
 BlElementVectorGeometry >> extent [
 	^ extent
@@ -103,49 +91,4 @@ BlElementVectorGeometry >> releaseCache [
 { #category : #'api - cache' }
 BlElementVectorGeometry >> releaseStrokedBoundsCache [
 	pathCache releaseStrokedBoundsCache
-]
-
-{ #category : #'api - bounds' }
-BlElementVectorGeometry >> strokedBounds: aBlBounds of: anElement on: aCanvas [
-	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
-	Dispatch through outskirts first"
-	<return: #BlBounds>
-
-	^ aBlBounds rectangle: (pathCache strokedBounds: aBlBounds of: anElement on: aCanvas)
-]
-
-{ #category : #'private - bounds' }
-BlElementVectorGeometry >> strokedBoundsCentered: aBlBounds of: anElement on: aCanvas [
-	| spartaPath strokeOptions strokedBounds |
-
-	spartaPath := anElement geometry pathOnSpartaCanvas: aCanvas of: anElement.
-	strokeOptions := aCanvas stroke
-		width: (anElement border width max: 1);
-		in: [ :aPainter | anElement border style applyOn: aPainter ];
-		strokeOptions.
-
-	strokedBounds := spartaPath strokedBoundsOn: aCanvas with: strokeOptions.
-	^ aBlBounds rectangle: strokedBounds
-]
-
-{ #category : #'private - bounds' }
-BlElementVectorGeometry >> strokedBoundsInside: aBlBounds of: anElement on: aCanvas [
-	"Stroked inside bounds property is equal to geometry bounds"
-	<return: #BlBounds>
-
-	^ self geometryBounds: aBlBounds
-]
-
-{ #category : #'private - bounds' }
-BlElementVectorGeometry >> strokedBoundsOutside: aBlBounds of: anElement on: aCanvas [
-	| spartaPath strokeOptions strokedBounds |
-
-	spartaPath := anElement geometry pathOnSpartaCanvas: aCanvas of: anElement.
-	strokeOptions := aCanvas stroke
-		in: [ :aPainter | anElement border style applyOn: aPainter ];
-		width: ((anElement border width * 2.0) max: 1);
-		strokeOptions.
-
-	strokedBounds := spartaPath strokedBoundsOn: aCanvas with: strokeOptions.
-	^ aBlBounds rectangle: strokedBounds
 ]

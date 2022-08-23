@@ -93,7 +93,6 @@ BlText >> asArray [
 BlText >> asString [
 	"I return an original String representaion of this text.
 	It is guaranteed that the size of the resulting string is the same as of this text"
-	<return: #String>
 
 	^ String streamContents: [ :aStream |
 		self do: [ :aCharacter | aStream nextPut: aCharacter ] ]
@@ -145,6 +144,11 @@ BlText >> attributesAndIndicesDo: aBlock [
 BlText >> attributesAndIndicesSuchThat: aFilterBlock [
 	^ self attributesFinder
 		attributesAndIndicesSuchThat: aFilterBlock
+]
+
+{ #category : #'text - attributes' }
+BlText >> attributesAndIndicesSuchThat: aFilterBlock do: aBinaryBlock [
+	(self attributesAndIndicesSuchThat: aFilterBlock) do: [ :assoc | aBinaryBlock value: assoc key value: assoc value ].
 ]
 
 { #category : #'text - attributes' }
@@ -268,6 +272,13 @@ BlText >> empty [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'text - converting' }
+BlText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+	"Encode myself on a ByteString stream using the provided Zinc encoder."
+	
+	self subclassResponsibility 
+]
+
 { #category : #'text - notifying' }
 BlText >> ensureAnnouncer [
 	announcer ifNil: [ announcer := BlTextAnnouncer new ]
@@ -324,7 +335,10 @@ BlText >> findAttributesSuchThat: aFilterBlock indicesDo: anIterationBlock [
 
 { #category : #'text - enumeration' }
 BlText >> finder [
-	^ BlPositionFinder new text: self
+
+	^ BlPositionFinder new
+		  text: self;
+		  yourself
 ]
 
 { #category : #'text - accessing' }
@@ -345,16 +359,7 @@ BlText >> from: aStart to: anEnd [
 	"Create and return a subtext of this text form aStart to anEnd.
 	Note: All modifications that are happening to the subtext automatically
 	applied on this original text"
-	<return: #BlSubText>
 	
-	self
-		assert: [ aStart <= (anEnd + 1) ]
-		description: [ 'Start must not exceed end' ].
-		
-	self
-		assert: [ self isNotEmpty or: [ aStart = 1 and: [ anEnd isZero ] ] ]
-		description: [ 'If I am empty then start must be 1 and end must be zero' ].
-
 	^ BlSubText text: self from: aStart to: anEnd
 ]
 
@@ -506,19 +511,18 @@ BlText >> notifyAttributesRemovedFrom: aFromIndex to: aToIndex [
 
 { #category : #'text - notifying' }
 BlText >> notifyDeletedAll: theDeletedIntervals requested: theRequestedIntervals texts: theDeletedTexts [
-	theDeletedIntervals
-		ifEmpty: [ ^ self ].
-		
-	theRequestedIntervals
-		ifEmpty: [ ^ self ].
-		
-	theDeletedTexts
-		ifEmpty: [ ^ self ].
 
-	self announcerDo: [ :anAnnouncer | anAnnouncer announce: (BlTextsDeleted new
-		texts: theDeletedTexts;
-		requestedIntervals: theRequestedIntervals;
-		finalIntervals: theDeletedIntervals) ]
+	theDeletedIntervals ifEmpty: [ ^ self ].
+
+	theRequestedIntervals ifEmpty: [ ^ self ].
+
+	theDeletedTexts ifEmpty: [ ^ self ].
+
+	self announcerDo: [ :anAnnouncer | 
+		anAnnouncer announce: (BlTextsDeleted new
+				 texts: theDeletedTexts;
+				 requestedIntervals: theRequestedIntervals;
+				 finalIntervals: theDeletedIntervals) ]
 ]
 
 { #category : #'text - notifying' }
@@ -555,7 +559,7 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 		anAnnouncer
 			announce: (BlTextStringsInserted new
 				strings: aNonEmptyCollectionOfStrings;
-				requestedIndices: aNonEmptyCollectionOfRequestedIndices;
+				requestedIndices: aNonEmptyCollectionOfFinalIndices ;
 				finalIndices: aNonEmptyCollectionOfFinalIndices) ]
 ]
 
@@ -567,7 +571,12 @@ BlText >> postCopy [
 { #category : #'text - printing' }
 BlText >> printOn: aStream [
 
-	BlTextNonPrintableCharacterPrinter print: self on: aStream
+	super printOn: aStream.
+
+	aStream nextPut: $(.
+	BlTextNonPrintableCharacterPrinter print: self on: aStream.
+	aStream nextPut: $).
+
 ]
 
 { #category : #'text - printing' }
@@ -589,8 +598,8 @@ BlText >> readStream [
 
 { #category : #'text - copying' }
 BlText >> readonly [
+
 	"Return a readonly version of this text"
-	<return: #BlReadonlyText>
 
 	^ BlReadonlyText text: self
 ]
@@ -676,9 +685,10 @@ BlText >> third [
 
 { #category : #'text - modifications' }
 BlText >> trimmer [
-	<return: #BlTextTrimmer>
 
-	^ BlTextTrimmer new text: self
+	^ BlTextTrimmer new
+		  text: self;
+		  yourself
 ]
 
 { #category : #'text - attributes' }
@@ -707,6 +717,16 @@ BlText >> unstyled [
 BlText >> unsubscribe: anObject [
 	"Unsubscribe all subscriptions of anObject from the receiver"
 	self announcerDo: [ :anAnnouncer | anAnnouncer unsubscribe: anObject ]
+]
+
+{ #category : #'text - converting' }
+BlText >> utf8Encoded [
+	"Answer a ByteArray encoding the receiver using UTF-8."
+
+	^ ByteArray new: (self size + 2) * 4 streamContents: [ :stream |
+		self
+			encodeOn: stream
+			with: ZnUTF8Encoder default ]
 ]
 
 { #category : #'text - notifying' }

@@ -1,7 +1,8 @@
 SmalltalkCISpec {
+  #preLoading: 'scripts/ciPreLoading.st',
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'NewBloc',
+      #baseline : 'Bloc',
       #directory : 'src',
       #platforms : [ #pharo ]
     }

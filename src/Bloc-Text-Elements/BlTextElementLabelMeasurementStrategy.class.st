@@ -4,9 +4,9 @@ Class {
 	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #measuring }
 BlTextElementLabelMeasurementStrategy >> boundsOf: aParagraph [
-	<return: #BlBounds>
+
 	| aMeasuredWidth aMeasuredHeight |
 
 	aMeasuredWidth := aParagraph width.

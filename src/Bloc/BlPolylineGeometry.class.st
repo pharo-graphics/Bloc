@@ -30,20 +30,6 @@ BlPolylineGeometry >> asElement [
 		outskirts: BlOutskirts centered
 ]
 
-{ #category : #'geometry testing' }
-BlPolylineGeometry >> containsPoint: aPoint in: anElement on: aSpartaCanvas [
-	"Note: I am a fallback method to determine if a point lies within a geometry path
-	when geometry is complex and it is mathematically difficult to compute manually"
-	<return: #Boolean>
-	| aPath |
-
-	aPath := pathCache pathOnSpartaCanvas: aSpartaCanvas.
-	^ aSpartaCanvas stroke
-		path: aPath;
-		width: anElement border width;
-		containsPoint: aPoint
-]
-
 { #category : #'geometry bounds' }
 BlPolylineGeometry >> geometryBounds: aBounds [
 	"Load my bounds in mutable rectangle.

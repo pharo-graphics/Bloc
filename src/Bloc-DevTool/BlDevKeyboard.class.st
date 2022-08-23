@@ -39,18 +39,18 @@ BlDevKeyboard >> initialize [
 { #category : #initialization }
 BlDevKeyboard >> initializeBottomRow [
 	
-	self addButton: (self simpleSmallKey: 'fn') key: BlKeyboardKey function.
-	self addButton: (self simpleSmallKey: 'control') key: BlKeyboardKey controlLeft.
-	self addButton: (self simpleSmallKey: 'option') key: BlKeyboardKey altLeft.
-	self addButton: (self wideSmallKey: 'command' span: 1.2) key: BlKeyboardKey metaLeft.
-	self addButton: (self wideSmallKey: '' span: 4.5) key: BlKeyboardKey space.
-	self addButton: (self wideSmallKey: 'command' span: 1.2) key: BlKeyboardKey metaRight.
-	self addButton: (self simpleSmallKey: 'option') key: BlKeyboardKey altRight.
+	self addButton: (self simpleSmallKey: 'fn') key: KeyboardKey function.
+	self addButton: (self simpleSmallKey: 'control') key: KeyboardKey controlLeft.
+	self addButton: (self simpleSmallKey: 'option') key: KeyboardKey altLeft.
+	self addButton: (self wideSmallKey: 'command' span: 1.2) key: KeyboardKey superLeft.
+	self addButton: (self wideSmallKey: '' span: 4.5) key: KeyboardKey space.
+	self addButton: (self wideSmallKey: 'command' span: 1.2) key: KeyboardKey superRight.
+	self addButton: (self simpleSmallKey: 'option') key: KeyboardKey altRight.
 	
-	self addButton: (self simpleSmallKey: 'left') key: BlKeyboardKey arrowLeft.
-	self addButton: (self simpleSmallKey: 'up') key: BlKeyboardKey arrowUp.
-	self addButton: (self simpleSmallKey: 'right') key: BlKeyboardKey arrowRight.
-	self addButton: (self simpleSmallKey: 'down') key: BlKeyboardKey arrowDown.
+	self addButton: (self simpleSmallKey: 'left') key: KeyboardKey left.
+	self addButton: (self simpleSmallKey: 'up') key: KeyboardKey up.
+	self addButton: (self simpleSmallKey: 'right') key: KeyboardKey right.
+	self addButton: (self simpleSmallKey: 'down') key: KeyboardKey down.
 ]
 
 { #category : #initialization }
@@ -81,14 +81,14 @@ BlDevKeyboard >> initializeEventListeners [
 BlDevKeyboard >> initializeFirstRow [
 	| theKeys |
 	
-	self addButton: (self wideKey: 'tab' span: 1.45) key: BlKeyboardKey tab.
+	self addButton: (self wideKey: 'tab' span: 1.45) key: KeyboardKey tab.
 	
-	theKeys := #(q w e r t y u i o p) collect: [ :each | BlKeyboardKey perform: each ].
+	theKeys := #(Q W E R T Y U I O P) collect: [ :each | KeyboardKey perform: each ].
 	theKeys do: [ :eachKey | self addButton: (self simpleKey: eachKey name) key: eachKey ].
 	
-	self addButton: (self simpleKey: '[') key: BlKeyboardKey leftBracket.
-	self addButton: (self simpleKey: ']') key: BlKeyboardKey rightBracket.
-	self addButton: (self simpleKey: '\') key: BlKeyboardKey backslash.
+	self addButton: (self simpleKey: '[') key: KeyboardKey bracketLeft.
+	self addButton: (self simpleKey: ']') key: KeyboardKey bracketRight.
+	self addButton: (self simpleKey: '\') key: KeyboardKey backslash.
 ]
 
 { #category : #initialization }
@@ -104,44 +104,44 @@ BlDevKeyboard >> initializeKeys [
 BlDevKeyboard >> initializeSecondRow [
 	| theKeys |
 	
-	self addButton: (self wideKey: 'capslock' span: 1.8) key: BlKeyboardKey capsLock.
+	self addButton: (self wideKey: 'capslock' span: 1.8) key: KeyboardKey capsLock.
 
-	theKeys := #(a s d f g h j k l) collect: [ :each | BlKeyboardKey perform: each ].
+	theKeys := #(A S D F G H J K L) collect: [ :each | KeyboardKey perform: each ].
 	theKeys do: [ :eachKey | self addButton: (self simpleKey: eachKey name) key: eachKey ].
 	
-	self addButton: (self simpleKey: ';') key: BlKeyboardKey semicolon.
-	self addButton: (self simpleKey: '''') key: BlKeyboardKey quote.
-	self addButton: (self wideKey: 'return' span: 1.8) key: BlKeyboardKey return.
+	self addButton: (self simpleKey: ';') key: KeyboardKey semicolon.
+	self addButton: (self simpleKey: '''') key: KeyboardKey quote.
+	self addButton: (self wideKey: 'return' span: 1.8) key: KeyboardKey enter.
 ]
 
 { #category : #initialization }
 BlDevKeyboard >> initializeThirdRow [
 	| theKeys |
 	
-	self addButton: (self wideKey: 'shift' span: 2.42) key: BlKeyboardKey shiftLeft.
+	self addButton: (self wideKey: 'shift' span: 2.42) key: KeyboardKey shiftLeft.
 	
-	theKeys := #(z x c v b n m) collect: [ :each | BlKeyboardKey perform: each ].
+	theKeys := #(Z X C V B N M) collect: [ :each | KeyboardKey perform: each ].
 	theKeys do: [ :eachKey | self addButton: (self simpleKey: eachKey name) key: eachKey ].
 	
-	self addButton: (self simpleKey: ',') key: BlKeyboardKey comma.
-	self addButton: (self simpleKey: '.') key: BlKeyboardKey period.
-	self addButton: (self simpleKey: '/') key: BlKeyboardKey slash.
+	self addButton: (self simpleKey: ',') key: KeyboardKey comma.
+	self addButton: (self simpleKey: '.') key: KeyboardKey period.
+	self addButton: (self simpleKey: '/') key: KeyboardKey slash.
 	
-	self addButton: (self wideKey: 'shift' span: 2.42) key: BlKeyboardKey shiftRight.
+	self addButton: (self wideKey: 'shift' span: 2.42) key: KeyboardKey shiftRight.
 ]
 
 { #category : #initialization }
 BlDevKeyboard >> initializeTopRow [
 	| theKeys |
 	
-	self addButton: (self simpleKey: '`') key: BlKeyboardKey grave.
+	self addButton: (self simpleKey: '`') key: KeyboardKey grave.
 	
-	theKeys := #(one two three four five six seven eight nine zero) collect: [ :each | BlKeyboardKey perform: each ].
+	theKeys := #(one two three four five six seven eight nine zero) collect: [ :each | KeyboardKey perform: each ].
 	theKeys do: [ :eachKey | self addButton: (self simpleKey: eachKey name) key: eachKey ].
 	
-	self addButton: (self simpleKey: '-') key: BlKeyboardKey minus.
-	self addButton: (self simpleKey: '=') key: BlKeyboardKey equal.
-	self addButton: (self wideKey: 'delete' span: 1.45) key: BlKeyboardKey backspace.
+	self addButton: (self simpleKey: '-') key: KeyboardKey minus.
+	self addButton: (self simpleKey: '=') key: KeyboardKey equal.
+	self addButton: (self wideKey: 'delete' span: 1.45) key: KeyboardKey backspace.
 ]
 
 { #category : #geometry }

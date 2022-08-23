@@ -5,7 +5,7 @@ I am data structure independent and rely only on BrText's public API
 "
 Class {
 	#name : #BlSpan,
-	#superclass : #BlWrappedText,
+	#superclass : #BlReadonlyText,
 	#instVars : [
 		'attributes'
 	],
@@ -13,17 +13,17 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlSpan class >> text: aBrText attributes: theAttributes [
+BlSpan class >> text: aBlText attributes: theAttributes [
+
 	^ self basicNew
 		initialize;
-		text: aBrText attributes: theAttributes;
+		text: aBlText attributes: theAttributes;
 		yourself
 ]
 
 { #category : #'span - accessing' }
 BlSpan >> attributes [
-	"Return a set of attributes applied on this span"
-	<return: #Set of: #BlTextAttribute>
+	"Return a collection of attributes that apply on this span"
 
 	^ attributes
 ]
@@ -35,8 +35,15 @@ BlSpan >> attributesFinder [
 		interval: ((1 min: self size) to: self size)
 ]
 
+{ #category : #testing }
+BlSpan >> isTabulation [
+	text ifEmpty: [ ^false ].
+	^ text first == Character tab
+]
+
 { #category : #initialization }
-BlSpan >> text: aBrText attributes: theAttributes [
-	text := aBrText.
+BlSpan >> text: aBlText attributes: theAttributes [
+
+	text := aBlText.
 	attributes := theAttributes
 ]

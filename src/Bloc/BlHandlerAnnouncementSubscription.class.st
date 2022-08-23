@@ -11,7 +11,7 @@ Class {
 BlHandlerAnnouncementSubscription >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
+	(anotherObject class = self class)
 		ifFalse: [ ^ false ].
 	^ anotherObject subscriber = self subscriber
 ]

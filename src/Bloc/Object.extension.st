@@ -7,3 +7,17 @@ Object >> entryIdentifier [
 
 	^nil
 ]
+
+{ #category : #'*Bloc' }
+Object >> isBlocElementId [
+
+	^ false
+]
+
+{ #category : #'*Bloc' }
+Object >> ropeAttributeType [
+	"Return an object that is used to compare attribute by type
+	The rule is the following: attributes of the same type must overwrite each other."
+	
+	^ self
+]

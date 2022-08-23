@@ -12,11 +12,8 @@ Class {
 BlElementIndexedId >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
-	self == anObject
-		ifTrue: [ ^ true ].
-	
-	(anObject isKindOf: BlElementId)
-		ifFalse: [ ^ false ].
+	self == anObject ifTrue: [ ^ true ].
+	anObject isBlocElementId ifFalse: [ ^ false ].
 	
 	"if anObject is of the same class it is faster to directly compare index and prefixId"
 	self class = anObject class

@@ -131,10 +131,10 @@ BlKeyModifiers >> isPrimaryModifier [
 	
 	aPrimaryModifier := OSPlatform current primaryModifier.
 
-	(self isCmd and: [ (aPrimaryModifier includes: BlKeyboardKey metaLeft) or: [ (aPrimaryModifier includes: BlKeyboardKey metaRight) ] ])
+	(self isCmd and: [ (aPrimaryModifier includes: KeyboardKey metaLeft) or: [ (aPrimaryModifier includes: KeyboardKey metaRight) or: [(aPrimaryModifier includes: KeyboardKey superLeft) or: [ (aPrimaryModifier includes: KeyboardKey superRight)]] ]])
 		ifTrue: [ ^ true ].
 		
-	(self isCtrl and: [ (aPrimaryModifier includes: BlKeyboardKey controlLeft) or: [ (aPrimaryModifier includes: BlKeyboardKey controlRight) ] ])
+	(self isCtrl and: [ (aPrimaryModifier includes: KeyboardKey controlLeft) or: [ (aPrimaryModifier includes: KeyboardKey controlRight) ] ])
 		ifTrue: [ ^ true ].
 
 	^ false

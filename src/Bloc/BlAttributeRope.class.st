@@ -15,10 +15,12 @@ Class {
 
 { #category : #initialization }
 BlAttributeRope class >> attributes: anAttributeCollection rope: aRope [
+
 	| aMergedCollection aMergedRope |
 	
 	aMergedCollection := aRope isAttributed
-		ifTrue: [ self mergeAttributes: aRope attributes and: anAttributeCollection ]
+		ifTrue: [ aRope attributes
+			copyWithMergedAttributesWith: anAttributeCollection ]
 		ifFalse: [ anAttributeCollection ].
 		
 	aMergedRope := aRope isAttributed
@@ -32,56 +34,10 @@ BlAttributeRope class >> attributes: anAttributeCollection rope: aRope [
 
 { #category : #utilities }
 BlAttributeRope class >> combineAttributed: aLeftAttributeRope and: aRightAttributeRope [
-	<return: #BlRope>
 
 	^ self
 		attributes: aLeftAttributeRope attributes
 		rope: (self concatenate: aLeftAttributeRope rope and: aRightAttributeRope rope)
-]
-
-{ #category : #utilities }
-BlAttributeRope class >> mergeAttributes: aCollectionOfAttributes and: anotherCollectionOfAttributes [
-	"Merge two collection of attributes letting anotherCollectionOfAttributes to override
-	attributes from aCollectionOfAttributes based on its type"
-	<return: #Collection of: #Object>
-	| anOrderedDictionary |
-	
-	((aCollectionOfAttributes isKindOf: HashedCollection) or: [ anotherCollectionOfAttributes isKindOf: HashedCollection ])
-		ifTrue: [ self notify: 'Hashed collection is unordered, so the order of attributes will be ignored!' ].
-	
-	anOrderedDictionary := OrderedDictionary new.
-
-	aCollectionOfAttributes do: [ :each | anOrderedDictionary at: (self typeOf: each) put: each ].
-	anotherCollectionOfAttributes do: [ :each | anOrderedDictionary at: (self typeOf: each) put: each ].
-
-	^ anOrderedDictionary values
-]
-
-{ #category : #utilities }
-BlAttributeRope class >> removeDuplicates: aCollection [
-	"Remove duplicates from a given collection preserving the original order"
-	<return: #Collection of: #Object>
-	| anOrderedDictionary |
-	
-	(aCollection isKindOf: HashedCollection)
-		ifTrue: [ self notify: 'Hashed collection is unordered, so the order of attributes will be ignored!' ].
-	
-	anOrderedDictionary := OrderedDictionary new.
-	aCollection do: [ :each | anOrderedDictionary at: (self typeOf: each) put: each ].
-	^ anOrderedDictionary values
-]
-
-{ #category : #utilities }
-BlAttributeRope class >> typeOf: anObject [
-	| anAttributeClass |
-	
-	anAttributeClass := self environment
-		at: #BlTextAttribute
-		ifAbsent: [ ^ anObject ].
-		
-	^ (anObject class == anAttributeClass or: [ anObject class inheritsFrom: anAttributeClass ])
-		ifTrue: [ anObject type ]
-		ifFalse: [ anObject ]
 ]
 
 { #category : #'rope - accessing' }
@@ -98,6 +54,7 @@ BlAttributeRope >> attributes [
 
 { #category : #'rope - attributes' }
 BlAttributeRope >> attributes: anAttributesCollection from: aStart to: anEnd [
+
 	| anAttributeRope |
 	self assertAccessFrom: aStart to: anEnd.
 
@@ -105,7 +62,8 @@ BlAttributeRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 		ifEmpty: [ ^ self ].
 	
 	anAttributeRope := (self rope from: aStart to: anEnd)
-		attributes: (self class mergeAttributes: self attributes and: anAttributesCollection)
+		attributes: (self attributes
+			copyWithMergedAttributesWith: anAttributesCollection)
 		from: 0
 		to: (anEnd - aStart).
 
@@ -122,16 +80,15 @@ BlAttributeRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 			concatenate: (self from: 0 to: aStart)
 			and: anAttributeRope ].
 
-	^ (self from: 0 to: aStart) append: (anAttributeRope append: (self from: anEnd to: self size))
+	^ (self from: 0 to: aStart)
+		append: (anAttributeRope
+			append: (self from: anEnd to: self size))
 ]
 
 { #category : #initialization }
 BlAttributeRope >> attributes: theAttributes rope: aRope [
 
-	(theAttributes isKindOf: HashedCollection)
-		ifTrue: [ self notify: 'Hashed collection is unordered, so the order of attributes will be ignored!' ].
-
-	attributes := self class removeDuplicates: theAttributes.
+	attributes := theAttributes copyWithoutDuplicatedRopeAttributes.
 	rope := aRope
 ]
 

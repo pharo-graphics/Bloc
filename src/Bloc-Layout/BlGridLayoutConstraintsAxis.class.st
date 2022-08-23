@@ -33,7 +33,6 @@ BlGridLayoutConstraintsAxis >> span: aNumber [
 	which may result in overlapping with neighbor rows or columns.
 	aNumber must be greater or equal to 0
 	aNumber must not be nil"
-	self assert: aNumber isNotNil.
 	self assert: aNumber >= 0.
 
 	self specSpan: (BlGridLayoutInterval min: self spec span min max: self spec span min + aNumber)
@@ -57,13 +56,9 @@ BlGridLayoutConstraintsAxis >> specAlignment: anAlignment [
 ]
 
 { #category : #private }
-BlGridLayoutConstraintsAxis >> specSpan: aSpan [
-	"aSpan is an instance of BlGridlLayoutInterval and must not be nil"
-	self
-		assert: aSpan isNotNil
-		description: [ 'Span must not be nil' ].
+BlGridLayoutConstraintsAxis >> specSpan: aBlGridlLayoutInterval [
 
-	spec := spec copyWithSpan: aSpan
+	spec := spec copyWithSpan: aBlGridlLayoutInterval
 ]
 
 { #category : #accessing }

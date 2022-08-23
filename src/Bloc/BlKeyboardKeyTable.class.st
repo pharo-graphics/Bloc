@@ -21,7 +21,7 @@ BlKeyboardKeyTable >> initialize: aMapDictionary with: aMapArray [
 { #category : #initialization }
 BlKeyboardKeyTable >> initialize: aMapDictionary withKeys: aMapArray [
 	aMapArray pairsDo: [ :eachCode :eachKey |
-		aMapDictionary at: eachCode put: (eachKey copy setValue: eachCode) ]
+		aMapDictionary at: eachCode put: (eachKey copy) ]
 ]
 
 { #category : #'api - converting' }

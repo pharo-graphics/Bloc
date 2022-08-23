@@ -1,102 +1,124 @@
 "
-# Bloc
+This Baseline contains the code for Bloc that may be included in the future in Pharo. 
+It retrofits a part of the development made at http://github.com/feenkcom/bloc.
+This version will focus on core features and stability.
+We are currently identifying the core we want for Pharo.
 
-Bloc is a graphical framework that is drawing agnostic. The concrete drawing is achieved through the binding to the Sparta canvas. See {{gtClass:BaselineOfSparta}} for more details.
-
-The central concept is {{gtClass:BlElement}}.
-
-## Organization
-
-The packages of Bloc are organized as follows. The visualization also shows the depended projects in gray: {{gtClass:BaselineOfBloc|show=#gtPackagesMapFor:|expanded=true}}
-
-## Tutorial
-
-You can learn Bloc following a memory game tutorial: [00-memory-game.pillar](fileLocator://gtResource/feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar).
-
+See BaselineOfBloc for more information about Bloc in general.
 
 "
 Class {
 	#name : #BaselineOfBloc,
 	#superclass : #BaselineOf,
-	#classVars : [
-		'PostLoaded'
-	],
 	#category : #BaselineOfBloc
 }
 
 { #category : #baseline }
 BaselineOfBloc >> baseline: spec [
 	<baseline>
-	spec for: #'common' do: [
-		spec postLoadDoIt: #'postLoadBloc:'.
+	spec
+		for: #common
+		do: [
 
-		spec 
-			baseline: 'Beacon' with: [
-				spec repository: 'github://feenkcom/pharo-beacon/repository' ];
-			baseline: 'Fenster' with: [
-				spec repository: 'github://feenkcom/fenster/src' ];
-			baseline: 'Sparta' with: [
-				spec repository: 'github://feenkcom/Sparta/src' ];
-			baseline: 'Glutin' with: [
-				spec repository: 'github://feenkcom/gtoolkit-glutin/src' ].
-		
-		spec 
-			package: #Bloc with: [
-				spec requires: #(#Beacon Fenster) ];
-			package: #'Bloc-Animation' with: [
-				spec requires: #(#Bloc) ];
-			package: #'Bloc-Layout' with: [ "animation is required by animated layouts"
-				spec requires: #(#Bloc #'Bloc-Animation') ];
-			package: #'Bloc-Text' with: [
-				spec requires: #('Bloc'). ];
-			package: #'Bloc-Text-Rope' with: [
-				spec requires: #('Bloc' 'Bloc-Text') ];
-			package: #'Bloc-Text-Elements' with: [
-				spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Text-Rope'). ];
-			package: #'BlocHost-Mock' with: [
-				spec requires: #(#Bloc). ];
-			package: #'BlocHost-Morphic' with: [
-				spec requires: #(#'Bloc') ];
-			package: #'Bloc-Tests' with: [
-				spec requires: #(#Bloc 'BlocHost-Mock' ). ].
-			
-		spec 
-			package: #'BlocHost-Mock' with: [
-				spec requires: #(#Bloc). ];
-			package: #'BlocHost-Glutin' with: [
-				spec requires: #(#Bloc #Fenster #Glutin) ].
-		
-		"Compositor"
-		spec
-			package: #'Bloc-Compositor' with: [
-				spec requires: #(#Bloc 'Sparta'). ].
-			
-		spec
-			package: #'Bloc-Sparta' with: [
-				spec requires: #('Sparta' 'Bloc' 'Bloc-Text' 'Bloc-Text-Elements' 'Bloc-Compositor'). ];
-			package: #'Bloc-Exporter' with: [
-				spec requires: #(#Bloc 'Bloc-Sparta' ). ].
+			"Fenster"
+			spec
+				package: 'Fenster';
+				package: 'Fenster-Tests' with: [ spec requires: #(Fenster) ].
 
-		spec
-			package: #'Bloc-DevTool' with: [
-				spec requires: #(#Bloc #'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope'). ];
-			package: #'Bloc-Scripter' with: [
-				spec requires: #(#Bloc #'Bloc-Layout' #'Bloc-Exporter' #'BlocHost-Mock'). ] ].
-]
+			"Core"
+			spec 
+				package: #Bloc with: [
+					spec requires: #(#Fenster) ];
+				package: #'BlocHost-Mock' with: [
+					spec requires: #(#Bloc) ];
+				package: #'Bloc-Tests' with: [
+					spec requires: #(#Bloc 'BlocHost-Mock' ). ].
 
-{ #category : #'post load' }
-BaselineOfBloc >> postLoadBloc: spec [
-	(PostLoaded isNotNil and: [ PostLoaded ])
-		ifTrue: [ ^ self ].
-		
-	PostLoaded := true.
-	self postLoadMorphicHost: spec
-]
+			"Animation"
+			spec 
+				package: #'Bloc-Animation' with: [
+					spec requires: #('Bloc') ].
 
-{ #category : #'post load' }
-BaselineOfBloc >> postLoadMorphicHost: spec [
+			"Morphic host"
+			spec 
+				package: #'BlocHost-Morphic' with: [
+					spec requires: #('Bloc' 'Fenster') ] .
 
-	"This will select an appropriate UI manager"
-	SystemVersion current major < 8
-		ifTrue: [ UIManager default: UIManager forCurrentSystemConfiguration ]
+			"OSWindow host"
+			spec
+				package: #'BlocHost-OSWindow' with: [
+					spec requires: #('Bloc' 'Fenster'). ];
+				package: #'BlocHost-OSWindow-SDL2' with: [
+					spec requires: #('BlocHost-OSWindow'). ].
+
+			"Text"
+			spec 
+				package: #'Bloc-Text' with: [
+					spec requires: #('Bloc'). ];
+				package: #'Bloc-Text-Rope' with: [
+					spec requires: #('Bloc' 'Bloc-Text') ];
+				package: #'Bloc-Text-Elements' with: [
+					spec requires: #('Bloc' 'Bloc-Text') ];
+				package: #'Bloc-Text-Rope-Tests' with: [
+					spec requires: #('Bloc-Text-Rope') ].
+
+			"Sparta canvas"
+			spec
+				baseline: 'Sparta' with: [
+					spec repository: 'github://pharo-graphics/Sparta:master/src' ].
+			spec
+				package: #'Bloc-Compositor' with: [
+					spec requires: #('Bloc' 'Sparta') ];
+				package: #'Bloc-Sparta' with: [
+					spec requires: #('Sparta' 'Bloc' 'Bloc-Text' 'Bloc-Compositor') ].
+
+			"Alexandrie canvas"
+			spec
+				baseline: 'Alexandrie' with: [
+					spec repository: 'github://pharo-graphics/Alexandrie:master/src' ].
+			spec
+				package: #'Bloc-Alexandrie' with: [
+					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
+				package: #'Bloc-Alexandrie-Tests' with: [
+					spec requires: #('Bloc-Alexandrie') ].
+
+			"Layout"
+			spec 
+				package: #'Bloc-Layout' with: [
+					spec requires: #('Bloc') ];
+				package: #'Bloc-LayoutZoomable' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-Animation') ];
+				"Layout depends also on compositor. See https://github.com/pharo-graphics/Bloc/issues/87"
+				package: #'Bloc-Layout-Tests' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-Text') ].
+				"package: #'Bloc-Layout-Examples' with: [
+					spec requires: #('Bloc-Layout') ]."
+
+			"Calypso & Spec2 Extensions"
+			spec 
+				package: #'Bloc-Spec2';
+				package: #'Bloc-PharoExtensions';
+				package: #'Bloc-Spec2-Tests' with: [
+					spec requires: #('Bloc-Spec2') ].
+				
+			"Extra"
+			spec 
+				package: #'Bloc-UnitedTests' with: [
+					spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Animation') ];
+				package: #'Bloc-Exporter' with: [
+					spec requires: #('Sparta') ];
+				package: #'Bloc-DevTool' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-UnitedTests') ];
+				package: #'Bloc-Scripter' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-Exporter' 'BlocHost-Mock' 'Bloc-UnitedTests') ]"
+
+			spec
+				package: #'Bloc-Examples' with: [
+					spec requires: #(#'Bloc-DevTool') ];
+				package: #'Bloc-Compositor-Examples' with: [
+					spec requires: #(#'Bloc-Examples') ];
+				package: #'Bloc-Text-Examples' with: [
+					spec requires: #(#'Bloc-Examples') ]"
+
+			].
 ]

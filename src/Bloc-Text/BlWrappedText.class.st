@@ -22,12 +22,12 @@ BlWrappedText class >> new [
 ]
 
 { #category : #'instance creation' }
-BlWrappedText class >> text: aBrText [
+BlWrappedText class >> text: aBlText [
 	<return: #BlWrappedText>
 
 	^ self basicNew
 		initialize;
-		text: aBrText
+		text: aBlText
 ]
 
 { #category : #accessing }
@@ -89,7 +89,14 @@ BlWrappedText >> empty [
 	^ self text empty
 ]
 
-{ #category : #'instance creation' }
+{ #category : #'text - converting' }
+BlWrappedText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+	"Encode myself on a ByteString stream using the provided Zinc encoder."
+	
+	text encodeOn: aWriteStream with: aZnCharacterEncoder
+]
+
+{ #category : #'text - enumeration' }
 BlWrappedText >> from: aFromIndex to: aToIndex do: aBlock [
 	"Evaluate aBlock with every character as argument within interval [aFromIndex, aToIndex]"
 	
@@ -106,7 +113,6 @@ BlWrappedText >> generation [
 
 { #category : #'text - testing' }
 BlWrappedText >> isEmpty [
-	<return: #Boolean>
 	
 	^ self text isEmpty
 ]
@@ -129,7 +135,6 @@ BlWrappedText >> iterator: aStartIndex to: anEndIndex [
 
 { #category : #'text - accessing' }
 BlWrappedText >> size [
-	<return: #Number>
 
 	^ self text size
 ]
@@ -142,18 +147,17 @@ BlWrappedText >> suspendAnnouncementsWhile: aBlock [
 
 { #category : #accessing }
 BlWrappedText >> text [
-	<return: #BlText>
 
 	^ text
 ]
 
 { #category : #accessing }
-BlWrappedText >> text: aBrText [
+BlWrappedText >> text: aBlText [
 	self
 		assert: [ text isNil ]
 		description: [ 'Can not change text once it is set. Create a new instance instead' ].
 		
-	text := aBrText
+	text := aBlText
 ]
 
 { #category : #'text - attributes' }

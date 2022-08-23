@@ -40,17 +40,3 @@ BlEllipseGeometry >> containsPoint: aPoint in: aBlElement [
 BlEllipseGeometry >> matchExtent: anExtent [
 	self extent: anExtent
 ]
-
-{ #category : #'visual bounds' }
-BlEllipseGeometry >> strokedBoundsCentered: aBlBounds of: aBlElement on: aCanvas [ 
-	<return: #BlBounds>
-
-	^ (self geometryBounds: aBlBounds) expandBy: aBlElement border width / 2.0
-]
-
-{ #category : #'visual bounds' }
-BlEllipseGeometry >> strokedBoundsOutside: aBlBounds of: aBlElement on: aCanvas [ 
-	<return: #BlBounds>
-
-	^ (self geometryBounds: aBlBounds) expandBy: aBlElement border width
-]

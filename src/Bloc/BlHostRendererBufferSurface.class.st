@@ -48,7 +48,7 @@ BlHostRendererBufferSurface >> createSpaceRendererOn: anObject [
 { #category : #initialization }
 BlHostRendererBufferSurface >> createSurfaceRendererOn: anObject [
 	<return: #BlHostSurfaceRenderer>
-	
+
 	^ anObject createBufferSurfaceRenderer
 ]
 

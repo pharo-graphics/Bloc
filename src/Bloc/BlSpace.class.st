@@ -514,6 +514,15 @@ BlSpace >> close [
 	(BlParallelUniverse forHost: self host class) closeSpace: self
 ]
 
+{ #category : #'host dependent - ToDo' }
+BlSpace >> containsPoint: aPoint element: aBlElement geometry: aBlGeometry [
+
+	^ host
+		  containsPoint: aPoint
+		  element: aBlElement
+		  geometry: aBlGeometry
+]
+
 { #category : #'cursor managing' }
 BlSpace >> currentCursor [
 	^ currentCursor 
@@ -1172,8 +1181,8 @@ BlSpace >> host [
 { #category : #'host space - accessing' }
 BlSpace >> host: aHost [
 	"Change the host of this space. Asynchronous. If the space is opened, first destroy the host window and then open the space with a new host"
-	| aDetachedEventHandler |
 
+	| aDetachedEventHandler |
 	aDetachedEventHandler := nil.
 
 	aDetachedEventHandler := BlEventHandler
@@ -1196,12 +1205,7 @@ BlSpace >> hostSpace [
 { #category : #'host space - accessing' }
 BlSpace >> hostSpace: aHostSpace [
 	"Assign a host space window that will be a source of UI events
-	and will provide a rendering surface on which I will be rendered.
-	aHostSpace must not be nil"
-
-	self
-		assert: [ aHostSpace isNotNil ]
-		description: [ 'Host space must not be nil!' ].
+	and will provide a rendering surface on which I will be rendered."
 
 	hostSpace := aHostSpace.
 	self hostSpaceChanged.
@@ -1344,6 +1348,13 @@ BlSpace >> isOpened [
 		and: [ (BlParallelUniverse forHost: self host class) hasSpace: self ]
 ]
 
+{ #category : #'host space - text input' }
+BlSpace >> isTextInputActive [
+	"Check whether or not Unicode text input events are enabled"
+
+	^ self hostSpaceDo: [:hs | hs isTextInputActive] ifAbsent: [ false ]
+]
+
 { #category : #testing }
 BlSpace >> isVisible [
 	^ self hasHostSpace
@@ -1392,10 +1403,7 @@ BlSpace >> loseFocusFor: anElement [
 
 { #category : #'change - rendering' }
 BlSpace >> makeDirty: aBlBounds [
-
-	self
-		assert: [ aBlBounds isKindOf: BlBounds ]
-		description: [ 'Only BlBounds can be used as dirty area' ].
+	"Add the provided BlBounds to the the dirty area"
 
 	aBlBounds expanded.
 	self dirtyAreas
@@ -1429,11 +1437,16 @@ BlSpace >> maximized [
 	^ false
 ]
 
-{ #category : #pulse }
-BlSpace >> measureTextParagraph: aBlTextParagraph ifNotAvailable: aBlock [
+{ #category : #'host dependent - ToDo' }
+BlSpace >> measureTextParagraph: aBlTextParagraph [
+
 	self
-		hostSpaceDo: [ :aHostSpace | aHostSpace measureTextParagraph: aBlTextParagraph ]
-		ifAbsent: aBlock
+		hostSpaceDo: [ :aHostSpace | 
+			aHostSpace renderer isValid ifTrue: [
+				^ aHostSpace renderer measureTextParagraph: aBlTextParagraph ] ]
+		ifAbsent: [ ].
+
+	host offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
 { #category : #'api - displaying' }
@@ -1646,10 +1659,6 @@ BlSpace >> root: anElement [
 	anElement must not be added to any scene graph"
 	
 	self
-		assert: [ anElement isNotNil ]
-		description: [ 'anElement must not be nil' ].
-
-	self
 		assert: [ anElement space isNil ]
 		description: [ 'New root must not be already have a space assigned!' ].
 
@@ -1707,6 +1716,34 @@ BlSpace >> show [
 BlSpace >> showSpace: aSpace [
 	"I show a given space either inside of me or let it open by default"
 	aSpace show
+]
+
+{ #category : #'host space - text input' }
+BlSpace >> startTextInput [
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+
+	self hostSpaceDo: [:hs | hs startTextInput]
+]
+
+{ #category : #'host space - text input' }
+BlSpace >> startTextInputAtRectangle: aRectangle [
+
+	"Start accepting Unicode text input events.
+	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
+	Please use me in pair with stopTextInput.
+	On some platforms I may activate the screen keyboard."
+
+	self hostSpaceDo: [:hs | hs startTextInputAtRectangle: aRectangle]
+]
+
+{ #category : #'host space - text input' }
+BlSpace >> stopTextInput [
+	"Stop receiving any text input events"
+
+	self hostSpaceDo: [:hs | hs stopTextInput]
 ]
 
 { #category : #'api - tasks' }
@@ -1795,6 +1832,12 @@ BlSpace >> universe [
 { #category : #'cursor managing' }
 BlSpace >> updateCursor: aBlCursor [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
+]
+
+{ #category : #'host dependent - ToDo' }
+BlSpace >> visualBoundsOf: aBlElement [
+
+	^ host visualBoundsOf: aBlElement
 ]
 
 { #category : #'window - properties' }

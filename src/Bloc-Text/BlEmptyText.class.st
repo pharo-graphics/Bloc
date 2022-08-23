@@ -19,13 +19,31 @@ BlEmptyText class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #'text - accessing' }
+BlEmptyText >> at: anIndex [
+	"Return an item at a given index"
+	<return: #Object>
+	
+	^ self errorSubscriptBounds: anIndex 
+]
+
 { #category : #'text - attributes' }
 BlEmptyText >> attributes: anAttributesCollection [
 ]
 
 { #category : #'text - attributes' }
+BlEmptyText >> attributes: anAttributesCollection from: aStart to: anEnd [
+	"Apply given attributes on the text from aStart to anEnd"
+]
+
+{ #category : #'text - attributes' }
 BlEmptyText >> attributesFinder [
 	^ BlTextAttributesIgnoringFinder new
+]
+
+{ #category : #'text - attributes' }
+BlEmptyText >> clearAttributes: aStart to: anEnd if: aBlock [
+
 ]
 
 { #category : #'text - copying' }
@@ -56,8 +74,23 @@ BlEmptyText >> empty [
 	^ self
 ]
 
+{ #category : #'text - converting' }
+BlEmptyText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
+	"Encode myself on a ByteString stream using the provided Zinc encoder."
+	
+
+]
+
 { #category : #'text - enumeration' }
 BlEmptyText >> from: aFromIndex to: aToIndex do: aBlock [
+]
+
+{ #category : #'text - copying' }
+BlEmptyText >> generation [
+	"Return an object that uniquely represents this generation of text"
+	<return: #Object>
+
+	^ self 
 ]
 
 { #category : #'text - modifications' }

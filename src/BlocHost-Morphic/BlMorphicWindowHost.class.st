@@ -33,10 +33,10 @@ BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 
 	self
 		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Space must not have a host!' ].
+		description: [ 'Space must not have a host space!' ].
 
 	aWindow := self createMorphicWindowFor: aSpace.
-	aHostSpace := BlMorphicWindowHostSpace new morphicWindow: aWindow.
+	aHostSpace := BlMorphicWindowHostSpace new morphicWindow: aWindow; yourself.
 	aHostSpace host: self.
 	aHostSpace universe: self universe.
 	aHostSpace space: aSpace.

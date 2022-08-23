@@ -11,13 +11,17 @@ It retrofits a part of the development made at https://github.com/feenkcom/bloc.
 
 ## Installation
 
-The following script installs Bloc in [Pharo 9 or 10](https://pharo.org/download):
+The following script installs Bloc in [Pharo 11](https://pharo.org/download):
 
 ```smalltalk
-Metacello new
-        baseline: 'NewBloc';
-        repository: 'github://pharo-graphics/Bloc/src';
-        load.
+[ Metacello new
+	baseline: 'Bloc';
+	repository: 'github://pharo-graphics/Bloc:master/src';
+	onConflictUseIncoming;
+	ignoreImage;
+	load ]
+		on: MCMergeOrLoadWarning
+		do: [ :warning | warning load ]
 ```
 
 Alternatively, you can do it by terminal (MacOS, linux... and should work as well in Windows with MINGW64). 
