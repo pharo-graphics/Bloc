@@ -555,7 +555,7 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 	
 		aNonEmptyCollectionOfStrings
 			ifEmpty: [ ^ self ].
-		
+	
 		anAnnouncer
 			announce: (BlTextStringsInserted new
 				strings: aNonEmptyCollectionOfStrings;
