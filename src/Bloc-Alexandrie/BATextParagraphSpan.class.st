@@ -33,8 +33,12 @@ BATextParagraphSpan >> updateMetricsWithBuilder: aBlTextFontAndStyleBuilder [
 
 	"build an abstract font and resolve not yet resolved properties"
 
+	| utf8Encoded |
+	utf8Encoded := self span isTabulation
+		               ifTrue: [ ' ' utf8Encoded ]
+		               ifFalse: [ self span utf8Encoded ].
 	self
-		updateMetricsFor: self span utf8Encoded
+		updateMetricsFor: utf8Encoded
 		builder: aBlTextFontAndStyleBuilder
 		canvas: hostMeasurer canvas.
 	ascent := metrics at: #ascent.
@@ -43,6 +47,5 @@ BATextParagraphSpan >> updateMetricsWithBuilder: aBlTextFontAndStyleBuilder [
 	left := metrics at: #left.
 	top := metrics at: #top.
 	width := metrics at: #width.
-	height := metrics at: #height.
-	
+	height := metrics at: #height
 ]
