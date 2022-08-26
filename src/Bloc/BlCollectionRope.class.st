@@ -196,6 +196,7 @@ BlCollectionRope >> from: aStart to: anEnd do: aBlock [
 { #category : #'rope - inserting' }
 BlCollectionRope >> insertItems: aCollection at: anIndex [
 	| anInsertionRope |
+
 	self assertIndexForInsert: anIndex.
 
 	"new collection is smaller than combine length, let's merge them"
