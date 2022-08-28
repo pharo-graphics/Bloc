@@ -3,10 +3,9 @@ Extension { #name : #BlTextElement }
 { #category : #'*Bloc-Alexandrie' }
 BlTextElement >> aeDrawBeneathOn: aeCanvas [
 
-	"Draw highlight attributes"
-	paragraph aeDrawHighlightsOn: aeCanvas.
-	"Draw selection, if any"
-	paragraph aeDrawSelectionOn: aeCanvas.
+	"Draw highlight attributes and selection"
+	paragraph aeDrawBeneathOn: aeCanvas
+
 ]
 
 { #category : #'*Bloc-Alexandrie' }

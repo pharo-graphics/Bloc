@@ -31,7 +31,7 @@ BlTextParagraphLine >> baseline: aPoint [
 { #category : #finalization }
 BlTextParagraphLine >> finalize [
 
-	spans do: #finalize.
+	spans ifNotNil: [ spans do: #finalize ].
 	spans reset
 ]
 
@@ -126,7 +126,7 @@ BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 
 { #category : #accessing }
 BlTextParagraphLine >> spans [
-	<return: #SequenceableCollection of: #BlTextParagraphLeaf>
+	<return: #SequenceableCollection of: #BlTextParagraphSegmentLeaf>
 
 	^ spans 
 ]

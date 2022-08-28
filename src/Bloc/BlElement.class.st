@@ -2398,9 +2398,7 @@ BlElement >> measureSafely: anExtentMeasurementSpec [
 	self privatePreviousMeasurementSpec: anExtentMeasurementSpec.
 
 	"Perform measuring algorithm"
-	self telemetry
-		timeSync: [ 'Measure ', self class name ]
-		during: [ self onMeasure: anExtentMeasurementSpec ]
+	self onMeasure: anExtentMeasurementSpec
 ]
 
 { #category : #'private - layout' }

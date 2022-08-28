@@ -7,7 +7,7 @@ A span consists of 3 essential parts:
 "
 Class {
 	#name : #BlSpartaTextParagraphSpan,
-	#superclass : #BlTextParagraphLeaf,
+	#superclass : #BlTextParagraphSegmentLeaf,
 	#instVars : [
 		'strikethroughOffset',
 		'strikethroughSize',

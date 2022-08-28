@@ -1,11 +1,20 @@
 Extension { #name : #BlTextParagraph }
 
 { #category : #'*Bloc-Alexandrie' }
+BlTextParagraph >> aeDrawBeneathOn: aeCanvas [
+
+	"Draw highlight attributes"
+	self aeDrawHighlightsOn: aeCanvas.
+	"Draw selection, if any"
+	self aeDrawSelectionOn: aeCanvas.
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlTextParagraph >> aeDrawHighlightsOn: aeCanvas [
 
 	highlights ifNil: [ ^ self ].
 
-	self highlights do: [ :eachHighlight | 
+	highlights do: [ :eachHighlight | 
 		| rectangles |
 		rectangles := self selectionRectanglesFrom: eachHighlight selection.
 		self aeFillRectanglesBackground: rectangles on: aeCanvas with: eachHighlight paint ]
@@ -13,13 +22,13 @@ BlTextParagraph >> aeDrawHighlightsOn: aeCanvas [
 
 { #category : #'*Bloc-Alexandrie' }
 BlTextParagraph >> aeDrawOn: aCanvas [	
-	self line aeDrawOn: aCanvas
+	line aeDrawOn: aCanvas
 ]
 
 { #category : #'*Bloc-Alexandrie' }
 BlTextParagraph >> aeDrawSelectionOn: aeCanvas [
 
-	self aeDrawselection: self selection on: aeCanvas color: self class selectionColor
+	self aeDrawselection: selection on: aeCanvas color: self class selectionColor
 ]
 
 { #category : #'*Bloc-Alexandrie' }

@@ -28,7 +28,7 @@ BlTextParagraph >> drawHighlightsOnSpartaCanvas: aCanvas [
 
 	highlights ifNil: [ ^ self ].
 
-	self highlights do: [ :eachHighlight | 
+	highlights do: [ :eachHighlight | 
 		| rectangles |
 		rectangles := self selectionRectanglesFrom: eachHighlight selection.
 		self fillRectanglesBackground: rectangles onSpartaCanvas: aCanvas with: eachHighlight paint ]
@@ -36,7 +36,7 @@ BlTextParagraph >> drawHighlightsOnSpartaCanvas: aCanvas [
 
 { #category : #'*Bloc-Sparta' }
 BlTextParagraph >> drawOnSpartaCanvas: aCanvas [	
-	self line drawOnSpartaCanvas: aCanvas
+	line drawOnSpartaCanvas: aCanvas
 ]
 
 { #category : #'*Bloc-Sparta' }
@@ -55,7 +55,7 @@ BlTextParagraph >> drawSelection: aSelection onSpartaCanvas: aCanvas color: aCol
 { #category : #'*Bloc-Sparta' }
 BlTextParagraph >> drawSelectionOnSpartaCanvas: aCanvas [ 
 
-	self drawSelection: self selection onSpartaCanvas: aCanvas  color: self class selectionColor 
+	self drawSelection: selection onSpartaCanvas: aCanvas  color: self class selectionColor 
 ]
 
 { #category : #'*Bloc-Sparta' }

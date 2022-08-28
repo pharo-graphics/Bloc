@@ -53,19 +53,6 @@ BlTextElement >> baseline [
 ]
 
 { #category : #accessing }
-BlTextElement >> baseline: aBlTextParagraphBaselineMeasurer [
-
-	self
-		deprecated: 'Please use baselineMeasurer: instead.'
-		transformWith:
-			'`@receiver baseline: `@statements1'
-				-> '`@receiver baselineMeasurer: `@statements1'.
-
-	self baselineMeasurer: aBlTextParagraphBaselineMeasurer.
-
-]
-
-{ #category : #accessing }
 BlTextElement >> baselineMeasurer [
 	
 	^ baselineMeasurer
@@ -229,7 +216,6 @@ BlTextElement >> initialize [
 
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
-	paragraph := nil.
 	measurer := self defaultMeasurer.
 
 	self constraintsDo: [ :c | 
@@ -282,58 +268,6 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 ]
 
 { #category : #layout }
-BlTextElement >> measureParagraph: anExtentMeasurementSpec [
-
-	"If I am executed it means that measurement specification changed.
-	We have to recreate a text layout with new parameters"
-
-	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
-	aWidthSpec := anExtentMeasurementSpec widthSpec.
-	aHeightSpec := anExtentMeasurementSpec heightSpec.
-	aPadding := self constraints padding.
-
-	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
-	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
-
-	paragraph
-		ifNil: [ paragraph := self createTextParagraph ]
-		ifNotNil: [ paragraph reset ].
-	"Create a new text layout"
-	paragraph
-		baselineMeasurer: self baselineMeasurer;
-		text: self text;
-		maxWidth: aMaxWidth;
-		maxHeight: aMaxHeight;
-		scale: self globalScale.
-
-	self telemetry
-		timeSync: [ 'Paragraph measureOn: ' , self class name ]
-		during: [ self basicMeasureParagraph: paragraph ].
-
-	"text layout is measured at this point"
-	aMeasuredBounds := measurement boundsOf: paragraph.
-	aMeasuredWidth := aMeasuredBounds width min: aMaxWidth.
-	aMeasuredHeight := aMeasuredBounds height min: aMaxHeight.
-
-	"If measurement spec is exact I must ignore size measured by textLayout"
-	aWidthSpec isExact ifTrue: [ aMeasuredWidth := aWidthSpec size ].
-	aHeightSpec isExact ifTrue: [ aMeasuredHeight := aHeightSpec size ].
-
-	"Take minimal width and height into account"
-	aMeasuredWidth := aMeasuredWidth max:
-		                  self constraints minWidth - aPadding width.
-	aMeasuredHeight := aMeasuredHeight max:
-		                   self constraints minHeight - aPadding height.
-	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
-	"Take padding into account"
-	aMeasuredExtent := aMeasuredExtent
-	                   + (aPadding width @ aPadding height).
-
-	"Finally set measured extent"
-	self measuredExtent: aMeasuredExtent
-]
-
-{ #category : #layout }
 BlTextElement >> measuredMaxLineHeight [
 	
 	| h |
@@ -347,7 +281,7 @@ BlTextElement >> measuredMaxLineHeight [
 { #category : #layout }
 BlTextElement >> measuredWidthFromLineStart [
 	
-	self previousSiblingDo: [ :s | ^ s measuredWidthFromLineStart + s measuredWidth  ].
+	self previousSiblingDo: [ :s | ^ s measuredWidthFromLineStart + s measuredWidth ].
 	^  0
 	
 ]
@@ -399,11 +333,61 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 			w := self measuredWidthFromLineStart.
 			tabW := tabParagraph advance - (w\\tabParagraph advance).
 			tabSpec := (anExtentMeasurementSpec widthSpec beExact: tabW) @ anExtentMeasurementSpec heightSpec.
-			self measureParagraph: tabSpec ]
-		ifFalse: [ (self shouldMeasure: anExtentMeasurementSpec) 
-			ifTrue: [ self measureParagraph: anExtentMeasurementSpec ] ].
+			self onParagraphMeasure: tabSpec.
+			self measureChildren: tabSpec]
+		ifFalse: [  self onParagraphMeasure: anExtentMeasurementSpec.
+			self measureChildren: anExtentMeasurementSpec ].
 		
-	self measureChildren: anExtentMeasurementSpec
+	
+]
+
+{ #category : #layout }
+BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
+
+	"If I am executed it means that measurement specification changed.
+	We have to recreate a text layout with new parameters"
+
+	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
+	aWidthSpec := anExtentMeasurementSpec widthSpec.
+	aHeightSpec := anExtentMeasurementSpec heightSpec.
+	aPadding := self constraints padding.
+
+	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
+	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
+
+	paragraph := self createTextParagraph.
+	
+	"Create a new text layout"
+	paragraph
+		text: self text;
+		baselineMeasurer: self baselineMeasurer;
+		maxWidth: aMaxWidth;
+		maxHeight: aMaxHeight;
+		scale: self globalScale.
+
+	self basicMeasureParagraph: paragraph.
+
+	"text layout is measured at this point"
+	aMeasuredBounds := measurement boundsOf: paragraph.
+	aMeasuredWidth := aMeasuredBounds width min: aMaxWidth.
+	aMeasuredHeight := aMeasuredBounds height min: aMaxHeight.
+
+	"If measurement spec is exact I must ignore size measured by textLayout"
+	aWidthSpec isExact ifTrue: [ aMeasuredWidth := aWidthSpec size ].
+	aHeightSpec isExact ifTrue: [ aMeasuredHeight := aHeightSpec size ].
+
+	"Take minimal width and height into account"
+	aMeasuredWidth := aMeasuredWidth max:
+		                  self constraints minWidth - aPadding width.
+	aMeasuredHeight := aMeasuredHeight max:
+		                   self constraints minHeight - aPadding height.
+	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
+	"Take padding into account"
+	aMeasuredExtent := aMeasuredExtent
+	                   + (aPadding width @ aPadding height).
+
+	"Finally set measured extent"
+	self measuredExtent: aMeasuredExtent
 ]
 
 { #category : #'hooks - session' }
@@ -522,27 +506,6 @@ BlTextElement >> setupParagraphBeforeDrawing [
 	paragraph padding: self padding.
 	" highligh is lazy, do not use the accessor"
 	paragraph highlights: self highlights
-]
-
-{ #category : #layout }
-BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
-
-	paragraph
-		ifNil: [ ^ true ].
-		
-	paragraph isEmpty
-		ifTrue: [ ^ true ].
-
-	(self privatePreviousMeasurementSpec = anExtentMeasurementSpec)
-		ifFalse: [ ^ true ].
-
-	paragraph maxWidth = (self computeMaxWidth: anExtentMeasurementSpec)
-		ifFalse: [ ^ true ].
-
-	paragraph maxHeight = (self computeMaxHeight: anExtentMeasurementSpec)
-		ifFalse: [ ^ true ].
-
-	^ false
 ]
 
 { #category : #layout }

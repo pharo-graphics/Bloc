@@ -37,7 +37,8 @@ BlSpan >> attributesFinder [
 
 { #category : #testing }
 BlSpan >> isTabulation [
-	text ifEmpty: [ ^false ].
+
+	text ifEmpty: [ ^ false ].
 	^ text first == Character tab
 ]
 

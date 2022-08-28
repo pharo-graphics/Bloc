@@ -1,12 +1,11 @@
 Class {
 	#name : #BATextParagraphLeaf,
-	#superclass : #BlTextParagraphLeaf,
+	#superclass : #BlTextParagraphSegmentLeaf,
 	#instVars : [
 		'metrics',
 		'cairoScaledFont',
 		'cairoGlyphsArray',
-		'fontAndStyleBuilder',
-		'lineAdvance'
+		'fontAndStyleBuilder'
 	],
 	#category : #'Bloc-Alexandrie-Text'
 }
@@ -62,5 +61,5 @@ BATextParagraphLeaf >> updateMetricsFor: utf8EncodedString builder: aBlTextFontA
 		metrics at: #height put: aTextExtents height.
 		metrics
 			at: #bounds
-			put: (aTextExtents bearingX @ aTextExtents bearingY extent: aTextExtents width @ aTextExtents height) ]
+			put: (aTextExtents bearingX @ aTextExtents bearingY extent: (metrics at: #width) @ aTextExtents height) ]
 ]

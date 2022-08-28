@@ -3,7 +3,7 @@ I represent a single measured span within `BlTextParagraph`.
 Depending on the type of a paragraph (single or multi line) I can be either a direct child of `BlTextParagraph` or be contained inside of `BlTextParagraphLine`.
 "
 Class {
-	#name : #BlTextParagraphLeaf,
+	#name : #BlTextParagraphSegmentLeaf,
 	#superclass : #BlTextParagraphSegment,
 	#instVars : [
 		'span',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #'accessing - span' }
-BlTextParagraphLeaf >> attributes [
+BlTextParagraphSegmentLeaf >> attributes [
 	"Return a set of attributes applied on this span"
 	<return: #Set of: #BlTextAttribute>
 
@@ -21,19 +21,19 @@ BlTextParagraphLeaf >> attributes [
 ]
 
 { #category : #accessing }
-BlTextParagraphLeaf >> from: aGlobalTextStart to: aGlobalTextEnd [
+BlTextParagraphSegmentLeaf >> from: aGlobalTextStart to: aGlobalTextEnd [
 	"Assign provided indices so that we could always determine which part of text I measure"
 	from := aGlobalTextStart.
 	to := aGlobalTextEnd
 ]
 
 { #category : #initialization }
-BlTextParagraphLeaf >> hostMeasurer: ahostSpanMeasurer [
+BlTextParagraphSegmentLeaf >> hostMeasurer: ahostSpanMeasurer [
 	hostMeasurer := ahostSpanMeasurer
 ]
 
 { #category : #accessing }
-BlTextParagraphLeaf >> indexAtPosition: aPoint [
+BlTextParagraphSegmentLeaf >> indexAtPosition: aPoint [
 
 	"I return a cursor index at a given position as a Point provided in local coordinates of this span"
 
@@ -101,13 +101,13 @@ BlTextParagraphLeaf >> indexAtPosition: aPoint [
 ]
 
 { #category : #measurement }
-BlTextParagraphLeaf >> normalize: aScale [
+BlTextParagraphSegmentLeaf >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
 
 ]
 
 { #category : #geometry }
-BlTextParagraphLeaf >> positionAt: anIndex [
+BlTextParagraphSegmentLeaf >> positionAt: anIndex [
 
 	| aSpanIndex aSubSpan aMeasuredSpan aPositionY aPositionX |
 	aPositionY := self baseline y.
@@ -129,7 +129,7 @@ BlTextParagraphLeaf >> positionAt: anIndex [
 ]
 
 { #category : #printing }
-BlTextParagraphLeaf >> printOn: aStream [
+BlTextParagraphSegmentLeaf >> printOn: aStream [
 
 	super printOn: aStream.
 	aStream
@@ -140,24 +140,24 @@ BlTextParagraphLeaf >> printOn: aStream [
 ]
 
 { #category : #accessing }
-BlTextParagraphLeaf >> span [
+BlTextParagraphSegmentLeaf >> span [
 
 	^ span
 ]
 
 { #category : #accessing }
-BlTextParagraphLeaf >> span: aBlSpan [
+BlTextParagraphSegmentLeaf >> span: aBlSpan [
 	span := aBlSpan
 ]
 
 { #category : #'accessing - span' }
-BlTextParagraphLeaf >> spanEnd [
+BlTextParagraphSegmentLeaf >> spanEnd [
 
 	^ span size
 ]
 
 { #category : #'accessing - span' }
-BlTextParagraphLeaf >> spanLength [
+BlTextParagraphSegmentLeaf >> spanLength [
 
 	^ (self spanStart isZero and: [ self spanEnd isZero ])
 		ifTrue: [ 0 ]
@@ -165,7 +165,7 @@ BlTextParagraphLeaf >> spanLength [
 ]
 
 { #category : #'accessing - span' }
-BlTextParagraphLeaf >> spanStart [
+BlTextParagraphSegmentLeaf >> spanStart [
 
 	^ 1 min: span size
 ]

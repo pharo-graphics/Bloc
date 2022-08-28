@@ -35,19 +35,18 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
+		'text',
+		'line',
 		'maxHeight',
 		'maxWidth',
 		'end',
-		'text',
 		'containerExtent',
 		'session',
 		'scale',
 		'selection',
 		'highlights',
-		'line',
 		'baselineMeasurer',
-		'padding',
-		'paragraphMeasurer'
+		'padding'
 	],
 	#classVars : [
 		'SelectionMatchParent'
@@ -90,8 +89,9 @@ BlTextParagraph >> ascent [
 
 { #category : #accessing }
 BlTextParagraph >> baseline [
-	<return: #Point>
 
+	<return: #Point>
+	baselineMeasurer ifNil: [ ^ 0 @ 0 ].
 	^ baselineMeasurer computedBaseline: self
 ]
 
@@ -108,7 +108,7 @@ BlTextParagraph >> baseline: aBlTextParagraphBaselineMeasurer [
 
 ]
 
-{ #category : #private }
+{ #category : #'paragraph - geometry' }
 BlTextParagraph >> baselineChanged [
 	"I should be sent when baseline needs to be recomputed"
 
@@ -127,8 +127,8 @@ BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
 
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 
-	| anIterator |
-	self ensureParagraphMeasurerOn: aHostSpanMeasurer. 
+	| anIterator  paragraphMeasurer |
+	paragraphMeasurer := self newParagraphMeasurerOn: aHostSpanMeasurer.
 
 	anIterator := text iterator.
 	[ anIterator hasNext and: [ line isEmpty or: [ paragraphMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
@@ -159,33 +159,21 @@ BlTextParagraph >> bounds [
 BlTextParagraph >> characterBoundsAtIndex: aLocalIndex [
 
 	| startSpan startPos originIdx endPos endSpan cornerIdx |
-	originIdx := (aLocalIndex - 1 max: 0) min: self text size.
+	originIdx := (aLocalIndex - 1 max: 0) min: text size.
 	startSpan := self spanAtIndex: originIdx.
    startPos := startSpan positionAt: originIdx.
 
-	cornerIdx := originIdx + 1 min: self text size.
+	cornerIdx := originIdx + 1 min: text size.
 	endSpan := self spanAtIndex: cornerIdx.
 	endPos := endSpan positionAt: cornerIdx. 
-	^ startPos x @ 0 corner: endPos x @ self containerExtent y.
+	^ startPos x @ 0 corner: endPos x @ containerExtent y.
 
-]
-
-{ #category : #accessing }
-BlTextParagraph >> containerExtent [
-
-	^ containerExtent
 ]
 
 { #category : #'api - instantiation' }
 BlTextParagraph >> containerExtent: aPoint [
 
 	containerExtent := aPoint
-]
-
-{ #category : #initialization }
-BlTextParagraph >> defaultTabWidth [
-
-	^ 3
 ]
 
 { #category : #'paragraph - geometry' }
@@ -211,16 +199,6 @@ BlTextParagraph >> emptySpan [
 	^ BlSpan text: BlText empty attributes: #().
 ]
 
-{ #category : #'paragraph - measuring' }
-BlTextParagraph >> ensureParagraphMeasurerOn: aHostSpanMeasurer [
-
-	paragraphMeasurer
-		ifNil: [ paragraphMeasurer := self newParagraphMeasurerOn: aHostSpanMeasurer ]
-		ifNotNil: [ paragraphMeasurer reset; hostTextMeasurer: aHostSpanMeasurer emptySpan: self emptySpan ].
-	paragraphMeasurer maxWidth: self maxWidth.
-	paragraphMeasurer maxHeight: self maxHeight
-]
-
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> extent [
 	"Return measured extent of the paragraph.
@@ -232,23 +210,9 @@ BlTextParagraph >> extent [
 { #category : #finalization }
 BlTextParagraph >> finalize [
 
+	super finalize.
 	line ifNotNil: #finalize.
 	line := nil
-
-]
-
-{ #category : #testing }
-BlTextParagraph >> hasHeightLimit [
-	"Return true if the height of the paragraph is limited, false otherwise"
-	
-	^ self maxHeight isInfinite not
-]
-
-{ #category : #testing }
-BlTextParagraph >> hasWidthLimit [
-	"Return true if the width of the paragraph is limited, false otherwise"
-	
-	^ self maxWidth isInfinite not
 ]
 
 { #category : #'paragraph - geometry' }
@@ -261,13 +225,7 @@ BlTextParagraph >> height [
 	^ line height
 ]
 
-{ #category : #'api - highlighting' }
-BlTextParagraph >> highlights [
-
-	^ highlights 
-]
-
-{ #category : #'api - highlighting' }
+{ #category : #'api - instantiation' }
 BlTextParagraph >> highlights: aListOfParagraphHightlights [
 
 	highlights :=  aListOfParagraphHightlights
@@ -292,32 +250,7 @@ BlTextParagraph >> indexAtPosition: aPoint [
 BlTextParagraph >> initialize [
 
 	super initialize.
-	self reset
-]
-
-{ #category : #testing }
-BlTextParagraph >> isEmpty [
-	"Return true if I don't have any spans, false otherwise.
-	After measurement process there must be at least one (empty) span!"
-
-	^ line isEmpty
-]
-
-{ #category : #testing }
-BlTextParagraph >> isNotEmpty [
-	"Return true if I have at least one (even empty) span, false otherwise.
-	After measurement process there must be at least one (empty) span!"
-
-	^ self isEmpty not
-]
-
-{ #category : #testing }
-BlTextParagraph >> isWhitespace: aCharacter [
-	"Return true if aCharacter is a whitespace and
-	therefore needs to be skipped if appears on a new line AFTER line break.
-	Before sending me make sure that you don't skip characters from the start of a paragraph"
-
-	^ aCharacter = Character space
+	line := BlTextParagraphLine new
 ]
 
 { #category : #'paragraph - geometry' }
@@ -327,35 +260,10 @@ BlTextParagraph >> left [
 	^ line left
 ]
 
-{ #category : #accessing }
-BlTextParagraph >> line [
-	"Return a line behind this paragraph"
-
-	^ line
-]
-
-{ #category : #'paragraph - geometry' }
-BlTextParagraph >> looseBounds [
-
-	^ 0 @ 0 extent: self line advance @ (self ascent abs + self descent)
-]
-
-{ #category : #'paragraph - geometry' }
-BlTextParagraph >> maxHeight [
-
-	^ maxHeight
-]
-
 { #category : #'api - instantiation' }
 BlTextParagraph >> maxHeight: aNumber [
 
 	maxHeight := aNumber
-]
-
-{ #category : #'paragraph - geometry' }
-BlTextParagraph >> maxWidth [
-
-	^ maxWidth
 ]
 
 { #category : #'api - instantiation' }
@@ -379,30 +287,20 @@ BlTextParagraph >> measureOn: aBlHostTextMeasurer [
 
 ]
 
-{ #category : #'paragraph - geometry' }
-BlTextParagraph >> measuredEnd [
-	"Return a text index of the last measured character.
-	Must be equal to the last character of the last span."
-	
-	^ end
-]
-
 { #category : #'paragraph - measuring' }
 BlTextParagraph >> newParagraphMeasurerOn: aHostSpanMeasurer [
 
-	^ BlTextParagraphMeasurer hostTextMeasurer: aHostSpanMeasurer emptySpan: self emptySpan
+	^ BlTextParagraphMeasurer
+		  hostTextMeasurer: aHostSpanMeasurer
+		  emptySpan: self emptySpan
+		  maxWidth: maxWidth
+		  maxHeight: maxHeight
 ]
 
 { #category : #'paragraph - measuring' }
 BlTextParagraph >> normalize: aScale [
 
 	line normalize: aScale
-]
-
-{ #category : #accessing }
-BlTextParagraph >> padding [
-
-	^ padding
 ]
 
 { #category : #accessing }
@@ -432,25 +330,6 @@ BlTextParagraph >> printOn: aStream [
 
 ]
 
-{ #category : #initialization }
-BlTextParagraph >> reset [
-
-	self finalize.
-
-	text := BlText empty.
-	maxHeight := Float infinity.
-	maxWidth := Float infinity.
-	session := nil.
-	end := 0.
-	selection := nil.
-	highlights := nil.
-	containerExtent := 0@0.
-	baselineMeasurer := BlAscentLooseBaselineMeasurer uniqueInstance.
-	scale := 1.
-	
-	line := BlTextParagraphLine new
-]
-
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> right [
 	"Return a visual right coordinate of the text (right-most rendered pixel)"
@@ -459,21 +338,9 @@ BlTextParagraph >> right [
 ]
 
 { #category : #accessing }
-BlTextParagraph >> scale [
-
-	^ scale
-]
-
-{ #category : #accessing }
 BlTextParagraph >> scale: aNumber [
 
 	scale := aNumber
-]
-
-{ #category : #'paragraph - accessing' }
-BlTextParagraph >> selection [
-
-	^ selection
 ]
 
 { #category : #'api - instantiation' }
@@ -482,7 +349,7 @@ BlTextParagraph >> selection: aBlTextSelection [
 	selection := aBlTextSelection
 ]
 
-{ #category : #private }
+{ #category : #'paragraph - geometry' }
 BlTextParagraph >> selectionRectanglesFrom: aSelection [
 
 	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ #(  ) ].
@@ -490,24 +357,24 @@ BlTextParagraph >> selectionRectanglesFrom: aSelection [
 	^ Array streamContents: [ :stream | 
 		  aSelection do: [ :currSelection | 
 			  | aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition |
-			  aStart := currSelection from min: self text size.
-			  anEnd := currSelection to min: self text size.
+			  aStart := currSelection from min: text size.
+			  anEnd := currSelection to min: text size.
 
 			  aSelectionStartSpan := self spanAtIndex: aStart.
 			  aSelectionEndSpan := self spanAtIndex: anEnd.
 
 			  aSelectionStartPosition := aStart isZero
 				                             ifTrue: [ 0 @ 0 ]
-				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (self padding left @ 0) ].
+				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (padding left @ 0) ].
 
-			  aSelectionEndPosition := anEnd = self text size
-				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (self padding width @ 0) ]
-				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (self padding left @ 0) ].
+			  aSelectionEndPosition := anEnd = text size
+				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (padding width @ 0) ]
+				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (padding left @ 0) ].
 
 			  "containerExtent includes padding"
-			  stream nextPut: ((currSelection to > self text size  and: [ self class selectionMatchParent ])
-					   ifTrue: [ aSelectionStartPosition x @ 0 corner: self containerExtent ]
-					   ifFalse: [ aSelectionStartPosition x @ 0 corner: aSelectionEndPosition x @ self containerExtent y ]) ] ]
+			  stream nextPut: ((currSelection to > text size  and: [ self class selectionMatchParent ])
+					   ifTrue: [ aSelectionStartPosition x @ 0 corner: containerExtent ]
+					   ifFalse: [ aSelectionStartPosition x @ 0 corner: aSelectionEndPosition x @ containerExtent y ]) ] ]
 ]
 
 { #category : #accessing }
@@ -516,29 +383,14 @@ BlTextParagraph >> session [
 	^ session
 ]
 
-{ #category : #testing }
-BlTextParagraph >> skipWhitespaceIn: aString after: aStart [
-	"Return an index of the first non-whitespace character in aString after aStart index"
-
-	| anIndex aChar |
-	anIndex := aStart.
-	aChar := aString at: anIndex.
-	[ anIndex < aString size
-		and: [ self isWhitespace: aChar ] ]
-			whileTrue: [ 
-				anIndex := anIndex + 1.
-				aChar := aString at: anIndex ].
-	^ anIndex
-]
-
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtIndex: anIndex [
-	<return: #BlTextParagraphLeaf>
+	<return: #BlTextParagraphSegmentLeaf>
 
 	anIndex isZero
 		ifTrue: [ ^ line spans first ].
 		
-	anIndex = self text size
+	anIndex = text size
 		ifTrue: [ ^ line spans last ].
 
 	^ line spans
@@ -555,7 +407,7 @@ BlTextParagraph >> spanAtIndex: anIndex [
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> spanAtPoint: aPoint [
-	<return: #BlTextParagraphLeaf>
+	<return: #BlTextParagraphSegmentLeaf>
 	
 	^ self
 		spanAtPoint: aPoint
@@ -568,7 +420,7 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 	"Find a paragraph span that contains a given point given in a paragraph coordinates
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closest span to a point"
-	<return: #BlTextParagraphLeaf>
+	<return: #BlTextParagraphSegmentLeaf>
 
 
 	^ line spans
@@ -587,13 +439,6 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
 ]
 
-{ #category : #'paragraph - accessing' }
-BlTextParagraph >> text [
-	"Return the text I am assigned to"
-
-	^ text
-]
-
 { #category : #'api - instantiation' }
 BlTextParagraph >> text: aBlText [
 	"Construct me with a given text.
@@ -602,16 +447,10 @@ BlTextParagraph >> text: aBlText [
 	For that send me #measureOn: message with canvas as an argument"
 
 	self
-		assert: [ text = BlText empty ]
+		assert: [ text isNil ]
 		description: [ 'I am immutable! You should create a new instance or #reset me' ].
 
 	text := aBlText
-]
-
-{ #category : #'paragraph - geometry' }
-BlTextParagraph >> tightBounds [
-
-	^ line bounds translateBy: self baseline
 ]
 
 { #category : #'paragraph - geometry' }
