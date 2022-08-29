@@ -35,7 +35,7 @@ BATextParagraphSpan >> updateMetricsWithBuilder: aBlTextFontAndStyleBuilder [
 
 	| utf8Encoded |
 	utf8Encoded := self span isTabulation
-		               ifTrue: [ ' ' utf8Encoded ]
+		               ifTrue: [ '' utf8Encoded  ]
 		               ifFalse: [ self span utf8Encoded ].
 	self
 		updateMetricsFor: utf8Encoded

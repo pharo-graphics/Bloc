@@ -19,7 +19,9 @@ Class {
 		'measurer',
 		'defaultFontSize',
 		'baselineMeasurer',
-		'highlightsMap'
+		'highlightsMap',
+		'measuredMaxLogicalLineHeight',
+		'measuredLeftFromLogicalLineStart'
 	],
 	#classVars : [
 		'DefaultText'
@@ -268,22 +270,27 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 ]
 
 { #category : #layout }
-BlTextElement >> measuredMaxLineHeight [
-	
-	| h |
-	h := self height.
-	self previousSiblingDo: [ :s | h := h max: s measuredBounds height ].
-	self nextSiblingDo: [ :s | h := h max: s measuredBounds height ].
-	^  h
-	
+BlTextElement >> measuredLeftFromLogicalLineStart [
+	"computed and set during layout"
+	^ measuredLeftFromLogicalLineStart
 ]
 
 { #category : #layout }
-BlTextElement >> measuredWidthFromLineStart [
-	
-	self previousSiblingDo: [ :s | ^ s measuredWidthFromLineStart + s measuredWidth ].
-	^  0
-	
+BlTextElement >> measuredLeftFromLogicalLineStart: aNumber [
+	"computed and set during layout"
+	measuredLeftFromLogicalLineStart := aNumber
+]
+
+{ #category : #layout }
+BlTextElement >> measuredMaxLogicalLineHeight [
+	"computed and set during layout"
+	^ measuredMaxLogicalLineHeight
+]
+
+{ #category : #layout }
+BlTextElement >> measuredMaxLogicalLineHeight: aNumber [
+	"computed and set during layout"
+	measuredMaxLogicalLineHeight := aNumber
 ]
 
 { #category : #accessing }
@@ -323,22 +330,8 @@ BlTextElement >> onAddedToSceneGraph [
 
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
-
-	self isTabulation
-		ifTrue: [ 
-			| tabParagraph tabSpec w tabW |
-			tabParagraph := self createTextParagraph.
-			tabParagraph text: text.
-			self basicMeasureParagraph: tabParagraph.
-			w := self measuredWidthFromLineStart.
-			tabW := tabParagraph advance - (w\\tabParagraph advance).
-			tabSpec := (anExtentMeasurementSpec widthSpec beExact: tabW) @ anExtentMeasurementSpec heightSpec.
-			self onParagraphMeasure: tabSpec.
-			self measureChildren: tabSpec]
-		ifFalse: [  self onParagraphMeasure: anExtentMeasurementSpec.
-			self measureChildren: anExtentMeasurementSpec ].
-		
-	
+	self onParagraphMeasure: anExtentMeasurementSpec.
+	self measureChildren: anExtentMeasurementSpec
 ]
 
 { #category : #layout }
@@ -356,7 +349,7 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
 
 	paragraph := self createTextParagraph.
-	
+
 	"Create a new text layout"
 	paragraph
 		text: self text;
@@ -366,6 +359,11 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 		scale: self globalScale.
 
 	self basicMeasureParagraph: paragraph.
+	
+	self isTabulation ifTrue: [ 
+		| w |
+		w := self measuredLeftFromLogicalLineStart.
+		aWidthSpec beExact: paragraph advance - (w \\ paragraph advance) ].
 
 	"text layout is measured at this point"
 	aMeasuredBounds := measurement boundsOf: paragraph.
@@ -377,14 +375,11 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 	aHeightSpec isExact ifTrue: [ aMeasuredHeight := aHeightSpec size ].
 
 	"Take minimal width and height into account"
-	aMeasuredWidth := aMeasuredWidth max:
-		                  self constraints minWidth - aPadding width.
-	aMeasuredHeight := aMeasuredHeight max:
-		                   self constraints minHeight - aPadding height.
+	aMeasuredWidth := aMeasuredWidth max: self constraints minWidth - aPadding width.
+	aMeasuredHeight := aMeasuredHeight max: self constraints minHeight - aPadding height.
 	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
 	"Take padding into account"
-	aMeasuredExtent := aMeasuredExtent
-	                   + (aPadding width @ aPadding height).
+	aMeasuredExtent := aMeasuredExtent + (aPadding width @ aPadding height).
 
 	"Finally set measured extent"
 	self measuredExtent: aMeasuredExtent
