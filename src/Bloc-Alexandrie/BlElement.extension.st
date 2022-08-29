@@ -83,7 +83,7 @@ BlElement >> aeDrawOnlyMeOn: aeCanvas [
 
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeFullDrawOn: aCanvas [
-	flags clearNeedsPaint.
+	"flags clearNeedsPaint."
 	
 	"We do not draw transparent elements at all"
 	self isTransparent
