@@ -24,7 +24,7 @@ BlElement >> aeDrawChildrenOn: aeCanvas [
 
 	aeCanvas prepareToDrawChildrenWithClipping: self clipChildren.
 	self children sortedByElevation do: [ :each |
-		each aeDrawOn: aeCanvas ].
+		each aeFullDrawOn: aeCanvas ].
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -79,4 +79,19 @@ BlElement >> aeDrawOnlyMeOn: aeCanvas [
 
 	aeCanvas drawFigure.
 
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aeFullDrawOn: aCanvas [
+	flags clearNeedsPaint.
+	
+	"We do not draw transparent elements at all"
+	self isTransparent
+		ifTrue: [ ^ self ].
+
+	"invisible elements are not rendered too"
+	self isVisible
+		ifFalse: [ ^ self ].
+
+	self aeDrawOn: aCanvas
 ]

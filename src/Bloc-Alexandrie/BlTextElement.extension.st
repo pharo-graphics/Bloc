@@ -11,7 +11,8 @@ BlTextElement >> aeDrawBeneathOn: aeCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlTextElement >> aeDrawOnlyMeOn: aeCanvas [
 
-	paragraph ifNil: [^self].
+	super aeDrawOnlyMeOn: aeCanvas.
+	paragraph ifNil: [ ^ self ].
 	self setupParagraphBeforeDrawing.
 	self aeDrawBeneathOn: aeCanvas.
 
