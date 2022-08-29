@@ -243,6 +243,11 @@ BlTextElement >> labelMeasurement [
 ]
 
 { #category : #layout }
+BlTextElement >> manageTabulationOnWidthSpec: aWidthSpec [
+	" nothing to do here, done on AlbTextElement for now"
+]
+
+{ #category : #layout }
 BlTextElement >> measureChildren: anExtentMeasurementSpec [	
 	self layout measuredChildren: self do: [ :aChild |
 		| aWidthResizer aHeightResizer aWidthSpec aHeightSpec  |
@@ -359,11 +364,7 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 		scale: self globalScale.
 
 	self basicMeasureParagraph: paragraph.
-	
-	self isTabulation ifTrue: [ 
-		| w |
-		w := self measuredLeftFromLogicalLineStart.
-		aWidthSpec beExact: paragraph advance - (w \\ paragraph advance) ].
+	self manageTabulationOnWidthSpec: aWidthSpec.
 
 	"text layout is measured at this point"
 	aMeasuredBounds := measurement boundsOf: paragraph.
