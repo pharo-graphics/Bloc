@@ -21,7 +21,8 @@ Class {
 		'baselineMeasurer',
 		'highlightsMap',
 		'measuredMaxLogicalLineHeight',
-		'measuredLeftFromLogicalLineStart'
+		'offsetFromSegmentStart',
+		'fillSize'
 	],
 	#classVars : [
 		'DefaultText'
@@ -243,11 +244,6 @@ BlTextElement >> labelMeasurement [
 ]
 
 { #category : #layout }
-BlTextElement >> manageTabulationOnWidthSpec: aWidthSpec [
-	" nothing to do here, done on AlbTextElement for now"
-]
-
-{ #category : #layout }
 BlTextElement >> measureChildren: anExtentMeasurementSpec [	
 	self layout measuredChildren: self do: [ :aChild |
 		| aWidthResizer aHeightResizer aWidthSpec aHeightSpec  |
@@ -272,18 +268,6 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 		aChild measure: aWidthSpec @ aHeightSpec ].
 	
 	self layout measureIgnored: self with: anExtentMeasurementSpec
-]
-
-{ #category : #layout }
-BlTextElement >> measuredLeftFromLogicalLineStart [
-	"computed and set during layout"
-	^ measuredLeftFromLogicalLineStart
-]
-
-{ #category : #layout }
-BlTextElement >> measuredLeftFromLogicalLineStart: aNumber [
-	"computed and set during layout"
-	measuredLeftFromLogicalLineStart := aNumber
 ]
 
 { #category : #layout }
@@ -322,6 +306,18 @@ BlTextElement >> measurer: anObject [
 	self textChanged
 ]
 
+{ #category : #layout }
+BlTextElement >> offsetFromSegmentStart [
+	"computed and set during layout"
+	^ offsetFromSegmentStart
+]
+
+{ #category : #layout }
+BlTextElement >> offsetFromSegmentStart: aNumber [
+	"computed and set during layout"
+	offsetFromSegmentStart := aNumber
+]
+
 { #category : #'hooks - session' }
 BlTextElement >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.
@@ -335,6 +331,7 @@ BlTextElement >> onAddedToSceneGraph [
 
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
+	fillSize := nil.
 	self onParagraphMeasure: anExtentMeasurementSpec.
 	self measureChildren: anExtentMeasurementSpec
 ]
@@ -364,7 +361,7 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 		scale: self globalScale.
 
 	self basicMeasureParagraph: paragraph.
-	self manageTabulationOnWidthSpec: aWidthSpec.
+	self onTabulationMeasure: anExtentMeasurementSpec.
 
 	"text layout is measured at this point"
 	aMeasuredBounds := measurement boundsOf: paragraph.
@@ -391,6 +388,11 @@ BlTextElement >> onSessionChanged: aNewSession [
 	super onSessionChanged: aNewSession.
 	
 	self textChanged
+]
+
+{ #category : #layout }
+BlTextElement >> onTabulationMeasure: anExtentMeasurementSpec [
+	" nothing to do here, done on AlbTextElement for now"
 ]
 
 { #category : #'private - paragraph' }
@@ -495,9 +497,12 @@ BlTextElement >> selection [
 { #category : #'private - paragraph' }
 BlTextElement >> setupParagraphBeforeDrawing [
 
-	paragraph containerExtent: (self isLastChild
-			 ifTrue: [ self parent extent x @ self extent y ]
-			 ifFalse: [ self extent ]).
+	"Push all which are needed for drawing "
+
+	"fillSize is for tabulation at end of line. see #onParagraphMeasure: "
+	paragraph containerExtent: (fillSize
+			 ifNil: [ self extent ]
+			 ifNotNil: [ (fillSize max: self extent x) @ self extent y ]).
 	paragraph selection: self selection.
 	paragraph padding: self padding.
 	" highligh is lazy, do not use the accessor"
