@@ -20,8 +20,6 @@ Class {
 		'defaultFontSize',
 		'baselineMeasurer',
 		'highlightsMap',
-		'measuredMaxLogicalLineHeight',
-		'offsetFromSegmentStart',
 		'fillSize',
 		'tabOffset'
 	],
@@ -308,18 +306,6 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 	self layout measureIgnored: self with: anExtentMeasurementSpec
 ]
 
-{ #category : #layout }
-BlTextElement >> measuredMaxLogicalLineHeight [
-	"computed and set during layout"
-	^ measuredMaxLogicalLineHeight
-]
-
-{ #category : #layout }
-BlTextElement >> measuredMaxLogicalLineHeight: aNumber [
-	"computed and set during layout"
-	measuredMaxLogicalLineHeight := aNumber
-]
-
 { #category : #accessing }
 BlTextElement >> measurement [
 	<return: #BlTextElementMeasurementStrategy>
@@ -347,13 +333,7 @@ BlTextElement >> measurer: anObject [
 { #category : #layout }
 BlTextElement >> offsetFromSegmentStart [
 	"computed and set during layout"
-	^ offsetFromSegmentStart
-]
-
-{ #category : #layout }
-BlTextElement >> offsetFromSegmentStart: aNumber [
-	"computed and set during layout"
-	offsetFromSegmentStart := aNumber
+	^ self textFlow offsetFromSegmentStart
 ]
 
 { #category : #'hooks - session' }
@@ -369,7 +349,7 @@ BlTextElement >> onAddedToSceneGraph [
 
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
-	fillSize := nil.
+	fillSize := 0.
 	self onParagraphMeasure: anExtentMeasurementSpec.
 	self measureChildren: anExtentMeasurementSpec
 ]
@@ -434,7 +414,9 @@ BlTextElement >> onTabulationMeasure: anExtentMeasurementSpec [
 	self isTabulation ifFalse: [ ^ self ].
 	"record the fill size for the selection to work even a tab is at the end of line"
 	fillSize := anExtentMeasurementSpec widthSpec size.
+	"compute and record the offset used to draw the selection on a tab"
 	tabOffset := self offsetFromSegmentStart \\ paragraph advance.
+	"set the widthSpec to correctly measure a tab according to the tab-stop"
 	anExtentMeasurementSpec widthSpec beExact: paragraph advance - tabOffset
 ]
 
@@ -561,7 +543,7 @@ BlTextElement >> selectionRectanglesFrom: aSelection [
 				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (self padding left - tabOffset @ 0) ].
 
 			  "containerExtent includes padding"
-			  stream nextPut: ((currSelection to > text size and: [ self class selectionMatchParent ])
+			  stream nextPut: (currSelection to > text size
 					   ifTrue: [ aSelectionStartPosition x @ 0 corner: extentToUse ]
 					   ifFalse: [ aSelectionStartPosition x @ 0 corner: aSelectionEndPosition x @ extentToUse y ]) ] ]
 ]
@@ -606,6 +588,11 @@ BlTextElement >> textDo: aBlock [
 	"Perform a given block with my current text model as an argument and invalidate text"
 	aBlock value: self text.
 	self textChanged
+]
+
+{ #category : #layout }
+BlTextElement >> textFlow [
+	^ self constraints albumTextFlow.
 ]
 
 { #category : #'api - text' }
