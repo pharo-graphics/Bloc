@@ -26,7 +26,8 @@ Class {
 		'tabOffset'
 	],
 	#classVars : [
-		'DefaultText'
+		'DefaultText',
+		'SelectionMatchParent'
 	],
 	#category : #'Bloc-Text-Elements'
 }
@@ -34,6 +35,26 @@ Class {
 { #category : #'class initialization' }
 BlTextElement class >> initialize [ 
 	DefaultText := 'Text' asRopedText readonly
+]
+
+{ #category : #accessing }
+BlTextElement class >> selectionColor [
+
+	^ Color
+		  r: 0.9530791788856305
+		  g: 0.8084066471163245
+		  b: 0.1906158357771261
+		  alpha: 1.0
+]
+
+{ #category : #accessing }
+BlTextElement class >> selectionMatchParent [
+	^ SelectionMatchParent ifNil: [ SelectionMatchParent := false ] 
+]
+
+{ #category : #accessing }
+BlTextElement class >> selectionMatchParent: aBoolean [
+	SelectionMatchParent := aBoolean
 ]
 
 { #category : #'instance creation' }
@@ -79,6 +100,21 @@ BlTextElement >> baselineOffset [
 { #category : #layout }
 BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
 	measurer measureTextParagraph: aBlTextParagraph of: self
+]
+
+{ #category : #'paragraph - geometry' }
+BlTextElement >> characterBoundsAtIndex: aLocalIndex [
+
+	| startSpan startPos originIdx endPos endSpan cornerIdx extentToUse |
+	extentToUse := fillSize ifNil: [ self extent ] ifNotNil: [ (fillSize max: self extent x) @ self extent y ].
+	originIdx := (aLocalIndex - 1 max: 0) min: text size.
+	startSpan := paragraph spanAtIndex: originIdx.
+	startPos := startSpan positionAt: originIdx.
+
+	cornerIdx := originIdx + 1 min: text size.
+	endSpan := paragraph spanAtIndex: cornerIdx.
+	endPos := endSpan positionAt: cornerIdx.
+	^ startPos x @ 0 corner: endPos x @ extentToUse y
 ]
 
 { #category : #layout }
@@ -168,7 +204,7 @@ BlTextElement >> editorMeasurement [
 
 	self measurement:
 		BlTextElementEditorMeasurementStrategy uniqueInstance.
-	self baselineMeasurer: BlAscentLooseBaselineMeasurer uniqueInstance
+	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
 ]
 
 { #category : #'selection - management' }
@@ -496,20 +532,33 @@ BlTextElement >> selection [
 	^ selection
 ]
 
-{ #category : #'private - paragraph' }
-BlTextElement >> setupParagraphBeforeDrawing [
+{ #category : #geometry }
+BlTextElement >> selectionRectanglesFrom: aSelection [
 
-	"Push all which are needed for drawing "
+	| extentToUse |
+	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ #(  ) ].
+	extentToUse := fillSize ifNil: [ self extent ] ifNotNil: [ (fillSize max: self extent x) @ self extent y ].
+	^ Array streamContents: [ :stream | 
+		  aSelection do: [ :currSelection | 
+			  | aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition |
+			  aStart := currSelection from min: text size.
+			  anEnd := currSelection to min: text size.
 
-	"fillSize is for tabulation at end of line. see #onParagraphMeasure: "
-	paragraph containerExtent: (fillSize
-			 ifNil: [ self extent ]
-			 ifNotNil: [ (fillSize max: self extent x) @ self extent y ]).
-	paragraph selection: self selection.
-	paragraph padding: self padding.
-	" highligh is lazy, do not use the accessor"
-	paragraph highlights: self highlights.
-	paragraph tabOffset: tabOffset
+			  aSelectionStartSpan := paragraph spanAtIndex: aStart.
+			  aSelectionEndSpan := paragraph spanAtIndex: anEnd.
+
+			  aSelectionStartPosition := aStart isZero
+				                             ifTrue: [ 0 @ 0 ]
+				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (self padding left @ 0) ].
+
+			  aSelectionEndPosition := anEnd = text size
+				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (self padding width - tabOffset @ 0) ]
+				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (self padding left - tabOffset @ 0) ].
+
+			  "containerExtent includes padding"
+			  stream nextPut: ((currSelection to > text size and: [ self class selectionMatchParent ])
+					   ifTrue: [ aSelectionStartPosition x @ 0 corner: extentToUse ]
+					   ifFalse: [ aSelectionStartPosition x @ 0 corner: aSelectionEndPosition x @ extentToUse y ]) ] ]
 ]
 
 { #category : #layout }

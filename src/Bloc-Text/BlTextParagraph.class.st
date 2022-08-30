@@ -40,40 +40,12 @@ Class {
 		'maxHeight',
 		'maxWidth',
 		'end',
-		'containerExtent',
 		'session',
 		'scale',
-		'selection',
-		'highlights',
-		'baselineMeasurer',
-		'padding',
-		'tabOffset'
-	],
-	#classVars : [
-		'SelectionMatchParent'
+		'baselineMeasurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
-
-{ #category : #accessing }
-BlTextParagraph class >> selectionColor [
-
-	^ Color
-		  r: 0.9530791788856305
-		  g: 0.8084066471163245
-		  b: 0.1906158357771261
-		  alpha: 1.0
-]
-
-{ #category : #accessing }
-BlTextParagraph class >> selectionMatchParent [
-	^ SelectionMatchParent ifNil: [ SelectionMatchParent := false ]
-]
-
-{ #category : #accessing }
-BlTextParagraph class >> selectionMatchParent: aBoolean [
-	SelectionMatchParent := aBoolean
-]
 
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> advance [
@@ -157,27 +129,6 @@ BlTextParagraph >> bounds [
 ]
 
 { #category : #'paragraph - geometry' }
-BlTextParagraph >> characterBoundsAtIndex: aLocalIndex [
-
-	| startSpan startPos originIdx endPos endSpan cornerIdx |
-	originIdx := (aLocalIndex - 1 max: 0) min: text size.
-	startSpan := self spanAtIndex: originIdx.
-   startPos := startSpan positionAt: originIdx.
-
-	cornerIdx := originIdx + 1 min: text size.
-	endSpan := self spanAtIndex: cornerIdx.
-	endPos := endSpan positionAt: cornerIdx. 
-	^ startPos x @ 0 corner: endPos x @ containerExtent y.
-
-]
-
-{ #category : #'api - instantiation' }
-BlTextParagraph >> containerExtent: aPoint [
-
-	containerExtent := aPoint
-]
-
-{ #category : #'paragraph - geometry' }
 BlTextParagraph >> descent [
 	"Return an descent of the last line in a paragraph"
 
@@ -224,12 +175,6 @@ BlTextParagraph >> height [
 	We want to guarantee that at least something is displayed and measured."
 
 	^ line height
-]
-
-{ #category : #'api - instantiation' }
-BlTextParagraph >> highlights: aListOfParagraphHightlights [
-
-	highlights :=  aListOfParagraphHightlights
 ]
 
 { #category : #'paragraph - geometry' }
@@ -304,12 +249,6 @@ BlTextParagraph >> normalize: aScale [
 	line normalize: aScale
 ]
 
-{ #category : #accessing }
-BlTextParagraph >> padding: aBlInsets [
-
-	padding := aBlInsets
-]
-
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> positionAt: anIndex [
 	"Answer a Point with the position of the character at anIndex."
@@ -342,40 +281,6 @@ BlTextParagraph >> right [
 BlTextParagraph >> scale: aNumber [
 
 	scale := aNumber
-]
-
-{ #category : #'api - instantiation' }
-BlTextParagraph >> selection: aBlTextSelection [
-
-	selection := aBlTextSelection
-]
-
-{ #category : #'paragraph - geometry' }
-BlTextParagraph >> selectionRectanglesFrom: aSelection [
-
-	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ #(  ) ].
-
-	^ Array streamContents: [ :stream | 
-		  aSelection do: [ :currSelection | 
-			  | aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition |
-			  aStart := currSelection from min: text size.
-			  anEnd := currSelection to min: text size.
-
-			  aSelectionStartSpan := self spanAtIndex: aStart.
-			  aSelectionEndSpan := self spanAtIndex: anEnd.
-
-			  aSelectionStartPosition := aStart isZero
-				                             ifTrue: [ 0 @ 0 ]
-				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (padding left @ 0) ].
-
-			  aSelectionEndPosition := anEnd = text size
-				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + ((padding width - tabOffset) @ 0) ]
-				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + ((padding left - tabOffset) @ 0) ].
-
-			  "containerExtent includes padding"
-			  stream nextPut: ((currSelection to > text size  and: [ self class selectionMatchParent ])
-					   ifTrue: [ aSelectionStartPosition x @ 0 corner: containerExtent ]
-					   ifFalse: [ aSelectionStartPosition x @ 0 corner: aSelectionEndPosition x @ containerExtent y ]) ] ]
 ]
 
 { #category : #accessing }
@@ -438,11 +343,6 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 						ifFalse: [ 1 ] ] ]
 		do: [ :aParagraphSpan | aFoundBlock cull: aParagraphSpan ]
 		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
-]
-
-{ #category : #'paragraph - measuring' }
-BlTextParagraph >> tabOffset: aNumber [
-	tabOffset := aNumber
 ]
 
 { #category : #'api - instantiation' }
