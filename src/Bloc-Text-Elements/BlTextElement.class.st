@@ -430,7 +430,12 @@ BlTextElement >> onSessionChanged: aNewSession [
 
 { #category : #layout }
 BlTextElement >> onTabulationMeasure: anExtentMeasurementSpec [
-	" nothing to do here, done on AlbTextElement for now"
+
+	self isTabulation ifFalse: [ ^ self ].
+	"record the fill size for the selection to work even a tab is at the end of line"
+	fillSize := anExtentMeasurementSpec widthSpec size.
+	tabOffset := self offsetFromSegmentStart \\ paragraph advance.
+	anExtentMeasurementSpec widthSpec beExact: paragraph advance - tabOffset
 ]
 
 { #category : #'private - paragraph' }
