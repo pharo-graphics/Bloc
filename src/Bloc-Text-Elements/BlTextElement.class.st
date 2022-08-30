@@ -22,7 +22,8 @@ Class {
 		'highlightsMap',
 		'measuredMaxLogicalLineHeight',
 		'offsetFromSegmentStart',
-		'fillSize'
+		'fillSize',
+		'tabOffset'
 	],
 	#classVars : [
 		'DefaultText'
@@ -217,6 +218,7 @@ BlTextElement >> initialize [
 
 	self tightMeasurement.
 
+	tabOffset := 0.
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
 	measurer := self defaultMeasurer.
@@ -506,7 +508,8 @@ BlTextElement >> setupParagraphBeforeDrawing [
 	paragraph selection: self selection.
 	paragraph padding: self padding.
 	" highligh is lazy, do not use the accessor"
-	paragraph highlights: self highlights
+	paragraph highlights: self highlights.
+	paragraph tabOffset: tabOffset
 ]
 
 { #category : #layout }

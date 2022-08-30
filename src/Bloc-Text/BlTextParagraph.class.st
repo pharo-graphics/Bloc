@@ -46,7 +46,8 @@ Class {
 		'selection',
 		'highlights',
 		'baselineMeasurer',
-		'padding'
+		'padding',
+		'tabOffset'
 	],
 	#classVars : [
 		'SelectionMatchParent'
@@ -368,8 +369,8 @@ BlTextParagraph >> selectionRectanglesFrom: aSelection [
 				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (padding left @ 0) ].
 
 			  aSelectionEndPosition := anEnd = text size
-				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (padding width @ 0) ]
-				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (padding left @ 0) ].
+				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + ((padding width - tabOffset) @ 0) ]
+				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + ((padding left - tabOffset) @ 0) ].
 
 			  "containerExtent includes padding"
 			  stream nextPut: ((currSelection to > text size  and: [ self class selectionMatchParent ])
@@ -437,6 +438,11 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 						ifFalse: [ 1 ] ] ]
 		do: [ :aParagraphSpan | aFoundBlock cull: aParagraphSpan ]
 		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
+]
+
+{ #category : #'paragraph - measuring' }
+BlTextParagraph >> tabOffset: aNumber [
+	tabOffset := aNumber
 ]
 
 { #category : #'api - instantiation' }
