@@ -23,9 +23,7 @@ BlTextElement >> aeDrawOnlyMeOn: aeCanvas [
 
 	paragraph ifNil: [ ^ self ].
 	self aeDrawBeneathOn: aeCanvas.
-
 	super aeDrawOnlyMeOn: aeCanvas.
-
 	aeCanvas restoreContextAfter: [ 
 		aeCanvas pathTranslate: self padding topLeft.
 		"Draw text with attributes"
