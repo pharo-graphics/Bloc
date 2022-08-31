@@ -306,6 +306,14 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 	self layout measureIgnored: self with: anExtentMeasurementSpec
 ]
 
+{ #category : #layout }
+BlTextElement >> measuredExtent: anExtentPoint [
+
+	super measuredExtent: (self isTabulation
+			 ifTrue: [ self tunedTabulationExtentFrom: anExtentPoint ]
+			 ifFalse: [ anExtentPoint ])
+]
+
 { #category : #accessing }
 BlTextElement >> measurement [
 	<return: #BlTextElementMeasurementStrategy>
@@ -332,7 +340,7 @@ BlTextElement >> measurer: anObject [
 
 { #category : #layout }
 BlTextElement >> offsetFromSegmentStart [
-	"computed and set during layout"
+	"computed and set during layout by AlbLineFlowLayout>>measure: with: "
 	^ self textFlow offsetFromSegmentStart
 ]
 
@@ -349,9 +357,17 @@ BlTextElement >> onAddedToSceneGraph [
 
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
+
+	"Do the measuring job"
+
+	"fillSize is used to ensure that the selection works with tabulation. 
+	In case of a tabulation, it is computed in #tunedTabulationExtentFrom:"
+
 	fillSize := 0.
+
 	self onParagraphMeasure: anExtentMeasurementSpec.
-	self measureChildren: anExtentMeasurementSpec
+	self measureChildren: anExtentMeasurementSpec.
+	self onPostMeasure: anExtentMeasurementSpec
 ]
 
 { #category : #layout }
@@ -360,7 +376,7 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
 
-	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
+	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding |
 	aWidthSpec := anExtentMeasurementSpec widthSpec.
 	aHeightSpec := anExtentMeasurementSpec heightSpec.
 	aPadding := self constraints padding.
@@ -379,26 +395,35 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 		scale: self globalScale.
 
 	self basicMeasureParagraph: paragraph.
-	self onTabulationMeasure: anExtentMeasurementSpec.
+	"Pay attention that #onPostMeasure: must be send after #onParagraphMeasure:"
+]
 
-	"text layout is measured at this point"
-	aMeasuredBounds := measurement boundsOf: paragraph.
-	aMeasuredWidth := aMeasuredBounds width min: aMaxWidth.
-	aMeasuredHeight := aMeasuredBounds height min: aMaxHeight.
+{ #category : #layout }
+BlTextElement >> onPostMeasure: anExtentMeasurementSpec [
+
+	"If I am executed it means that measurement specification changed.
+	We have to recreate a text layout with new parameters"
+
+	| measuredWidth measuredHeight maxWidth maxHeight widthSpec heightSpec padding |
+	"text layout is measured at this point, complete with TextElement aspects"
+	maxWidth := self computeMaxWidth: anExtentMeasurementSpec.
+	maxHeight := self computeMaxHeight: anExtentMeasurementSpec.
+	widthSpec := anExtentMeasurementSpec widthSpec.
+	heightSpec := anExtentMeasurementSpec heightSpec.
+	padding := self constraints padding.
+	(measurement boundsOf: paragraph) in: [ :bnds | 
+		measuredWidth := bnds width min: maxWidth.
+		measuredHeight := bnds height min: maxHeight ].
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
-	aWidthSpec isExact ifTrue: [ aMeasuredWidth := aWidthSpec size ].
-	aHeightSpec isExact ifTrue: [ aMeasuredHeight := aHeightSpec size ].
+	widthSpec isExact ifTrue: [ measuredWidth := widthSpec size ].
+	heightSpec isExact ifTrue: [ measuredHeight := heightSpec size ].
 
 	"Take minimal width and height into account"
-	aMeasuredWidth := aMeasuredWidth max: self constraints minWidth - aPadding width.
-	aMeasuredHeight := aMeasuredHeight max: self constraints minHeight - aPadding height.
-	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
-	"Take padding into account"
-	aMeasuredExtent := aMeasuredExtent + (aPadding width @ aPadding height).
-
-	"Finally set measured extent"
-	self measuredExtent: aMeasuredExtent
+	measuredWidth := measuredWidth max: self constraints minWidth - padding width.
+	measuredHeight := measuredHeight max: self constraints minHeight - padding height.
+	"Take padding into account to finally set measured extent"
+	self measuredExtent: measuredWidth @ measuredHeight + (padding width @ padding height)
 ]
 
 { #category : #'hooks - session' }
@@ -406,18 +431,6 @@ BlTextElement >> onSessionChanged: aNewSession [
 	super onSessionChanged: aNewSession.
 	
 	self textChanged
-]
-
-{ #category : #layout }
-BlTextElement >> onTabulationMeasure: anExtentMeasurementSpec [
-
-	self isTabulation ifFalse: [ ^ self ].
-	"record the fill size for the selection to work even a tab is at the end of line"
-	fillSize := anExtentMeasurementSpec widthSpec size.
-	"compute and record the offset used to draw the selection on a tab"
-	tabOffset := self offsetFromSegmentStart \\ paragraph advance.
-	"set the widthSpec to correctly measure a tab according to the tab-stop"
-	anExtentMeasurementSpec widthSpec beExact: paragraph advance - tabOffset
 ]
 
 { #category : #'private - paragraph' }
@@ -436,13 +449,6 @@ BlTextElement >> rawParagraph [
 				-> '`@receiver paragraph'.
 	
 	^ self paragraph
-]
-
-{ #category : #'private - pool' }
-BlTextElement >> recycledFrom: aStencilBuilder [
-
-	self removeFromParent.
-	self selectNone
 ]
 
 { #category : #'private - paragraph' }
@@ -524,7 +530,7 @@ BlTextElement >> selectionRectanglesFrom: aSelection [
 
 	| extentToUse |
 	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ #(  ) ].
-	extentToUse := fillSize ifNil: [ self extent ] ifNotNil: [ (fillSize max: self extent x) @ self extent y ].
+	extentToUse :=  (fillSize max: self extent x) @ self extent y.
 	^ Array streamContents: [ :stream | 
 		  aSelection do: [ :currSelection | 
 			  | aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition |
@@ -600,4 +606,17 @@ BlTextElement >> tightMeasurement [
 
 	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlBoundsBaselineMeasurer uniqueInstance
+]
+
+{ #category : #layout }
+BlTextElement >> tunedTabulationExtentFrom: anExtentPoint [
+
+	"Computed the size of a tabulation according to the tab-stop size."
+	
+	"record the fill size for the selection to work in case of #shouldFillLine answers true"
+	fillSize := anExtentPoint x.
+	"compute and record the offset used to draw the selection on a tab"
+	tabOffset := self offsetFromSegmentStart \\ paragraph advance.
+	"adapt the extent to correctly measure a tab according to the tab-stop"
+	^ paragraph advance - tabOffset @ anExtentPoint y
 ]
