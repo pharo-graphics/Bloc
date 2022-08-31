@@ -366,8 +366,9 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 	fillSize := 0.
 
 	self onParagraphMeasure: anExtentMeasurementSpec.
+	self onPostMeasure: anExtentMeasurementSpec.
 	self measureChildren: anExtentMeasurementSpec.
-	self onPostMeasure: anExtentMeasurementSpec
+
 ]
 
 { #category : #layout }
