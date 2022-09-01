@@ -52,7 +52,7 @@ BlSubText class >> text: aBlText from: aStartIndex to: anEndIndex [
 BlSubText >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
-	(anotherObject class = self class)
+	(anotherObject class == self class)
 		ifFalse: [ ^ false ].
 	
 	^ anotherObject start = self start
@@ -116,6 +116,15 @@ BlSubText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [
 		attributes: anAttributesCollection
 		from: start + aFromIndex - 1
 		to: start + aToIndex - 1
+]
+
+{ #category : #'text - attributes' }
+BlSubText >> attributesAt: anIndex [
+	"Return a collection of text attributes without duplicates at a given text index"
+
+	<return: #Collection of: #BlTextAttribute>
+	
+	^ self text attributesAt: anIndex + start - 1
 ]
 
 { #category : #'text - attributes' }
