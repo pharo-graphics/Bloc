@@ -6,8 +6,6 @@ Builds upon the {{gtClass:BlElementTransformation}} to provide the matrix cachin
 Class {
 	#name : #BlElementCachedExplicitTransformation,
 	#superclass : #BlElementCachedTransformation,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'transformation',
 		'bounds',
@@ -18,7 +16,10 @@ Class {
 
 { #category : #'instance creation' }
 BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTransformation [
-	^ self new initializeWith: aBlElementTransformation
+
+	^ self new
+		  initializeWith: aBlElementTransformation;
+		  yourself
 ]
 
 { #category : #'api - converting' }
@@ -49,7 +50,6 @@ BlElementCachedExplicitTransformation >> ensureMatrix [
 BlElementCachedExplicitTransformation >> hasMatrix [
 	"Return true if any of 2D or 3D matrices exist, false otherwise.
 	Note: I am useful for fast exits"
-	<return: #Boolean>
 
 	^ matrix isNotNil
 ]
@@ -63,9 +63,6 @@ BlElementCachedExplicitTransformation >> initialize [
 
 { #category : #initialization }
 BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformation [
-	self
-		assert: [ transformation isNil ]
-		description: [ 'Transfomation can not be changed once set' ].
 
 	transformation := aBlElementTransformation
 ]
@@ -93,16 +90,13 @@ BlElementCachedExplicitTransformation >> inverseTransformBounds: aBounds [
 BlElementCachedExplicitTransformation >> inverseTransformPoint: aPoint [
 	"Apply an inversed transformation on a given point and return a result.
 	Note: Throws BlSingularMatrixError if underlying matrix is singular"
-	<return: #Point>
-
-	aPoint isPoint
-		ifFalse: [ self error: 'Only points can be transformed!' ].
 
 	^ self matrix inverted transformPoint: aPoint
 ]
 
 { #category : #'private - accessing' }
 BlElementCachedExplicitTransformation >> invert [
+
 	matrix := self matrix inverted
 ]
 
@@ -123,7 +117,6 @@ BlElementCachedExplicitTransformation >> isPureTranslation [
 
 { #category : #'api - transformation' }
 BlElementCachedExplicitTransformation >> matrix [
-	<return: #BlMatrix>
 
 	self ensureMatrix.
 	^ matrix
@@ -149,7 +142,6 @@ BlElementCachedExplicitTransformation >> transformPoint: aPoint [
 
 { #category : #'private - accessing' }
 BlElementCachedExplicitTransformation >> transformation [
-	<return: #BlElementTransformation>
 
 	^ transformation
 ]
