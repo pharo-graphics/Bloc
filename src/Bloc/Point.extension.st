@@ -17,7 +17,6 @@ Point >> asBlocVector [
 { #category : #'*Bloc' }
 Point >> asScale3D [
 	"Return a 3D vector representing a scale factor"
-	<return: #BlVector3D>
 
 	^ BlVector x: self x y: self y z: 1
 ]
@@ -25,7 +24,6 @@ Point >> asScale3D [
 { #category : #'*Bloc' }
 Point >> asTranslate3D [
 	"Return a 3D vector representing a translation vector"
-	<return: #BlVector3D>
 
 	^ BlVector x: self x y: self y z: 0
 ]

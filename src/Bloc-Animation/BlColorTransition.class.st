@@ -5,9 +5,9 @@ Class {
 }
 
 { #category : #'api - interpolation' }
-BlColorTransition class >> interpolate: aFromColor to: aToColor at: aDelta [
-	| r g b a delta |
+BlColorTransition >> interpolate: aFromColor to: aToColor at: aDelta [
 
+	| r g b a delta |
 	delta := aDelta min: 1 max: 0.
 
 	r := (aToColor red - aFromColor red) * delta + aFromColor red.
@@ -20,5 +20,6 @@ BlColorTransition class >> interpolate: aFromColor to: aToColor at: aDelta [
 
 { #category : #pulse }
 BlColorTransition >> valueForStep: aDelta [
-	^ self class interpolate: from to: to at: aDelta
+
+	^ self interpolate: from to: to at: aDelta
 ]

@@ -10,7 +10,6 @@ Number >> asBlocVector [
 { #category : #'*Bloc' }
 Number >> asScale3D [
 	"Return a 3D vector representing a scale factor"
-	<return: #BlVector3D>
 
 	^ BlVector x: self y: self z: 1
 ]
@@ -18,7 +17,6 @@ Number >> asScale3D [
 { #category : #'*Bloc' }
 Number >> asTranslate3D [
 	"Return a 3D vector representing a translation vector"
-	<return: #BlVector3D>
 
 	^ BlVector x: self y: self z: 0
 ]

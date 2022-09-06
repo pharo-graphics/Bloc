@@ -10,8 +10,6 @@ Class {
 
 { #category : #math }
 BlAffineTransformationCenterOrigin >> originIn: anElement [
-	"@see Method comment BlAffineTransformationOrigin>>#originIn:"
-	<return: #Point or: #BlPoint3D>
 
 	^ anElement extent / 2.0
 ]

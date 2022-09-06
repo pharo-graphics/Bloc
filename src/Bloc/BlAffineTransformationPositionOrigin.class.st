@@ -13,25 +13,26 @@ Class {
 
 { #category : #'instance creation' }
 BlAffineTransformationPositionOrigin class >> position: aPoint [
-	^ self new position: aPoint
+
+	^ self new
+		  position: aPoint;
+		  yourself
 ]
 
 { #category : #math }
 BlAffineTransformationPositionOrigin >> originIn: anElement [
-	"@see Method comment BlAffineTransformationOrigin>>#originIn:"
-	<return: #Point or: #BlPoint3D>
 
-	^ self position
+	^ position
 ]
 
 { #category : #accessing }
 BlAffineTransformationPositionOrigin >> position [
-	<return: #Point or: #BlPoint3D>
 
 	^ position
 ]
 
 { #category : #accessing }
 BlAffineTransformationPositionOrigin >> position: aPoint [
+
 	position := aPoint
 ]

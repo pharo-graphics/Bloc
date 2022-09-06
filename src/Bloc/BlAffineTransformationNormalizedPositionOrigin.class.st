@@ -13,26 +13,28 @@ Class {
 
 { #category : #'instance creation' }
 BlAffineTransformationNormalizedPositionOrigin class >> position: aPoint [
-	^ self new position: aPoint
+
+	^ self new
+		  position: aPoint;
+		  yourself
 ]
 
 { #category : #math }
 BlAffineTransformationNormalizedPositionOrigin >> originIn: anElement [
 	"Return a point describing an origin of a transformation within a given element.
 	Origin can be either a 2D or 3D points and should be given in local coordinates of the element"
-	<return: #Point or: #BlPoint3D>
 
 	^ position * anElement extent
 ]
 
 { #category : #accessing }
 BlAffineTransformationNormalizedPositionOrigin >> position [
-	<return: #Point or: #BlPoint3D>
 
 	^ position
 ]
 
 { #category : #accessing }
 BlAffineTransformationNormalizedPositionOrigin >> position: aPoint [
+
 	position := aPoint
 ]

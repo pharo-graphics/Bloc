@@ -13,34 +13,40 @@ Class {
 
 { #category : #'instance creation' }
 BlMatrixTransformation class >> matrix: aBlMatrix [
-	^ self new matrix: aBlMatrix
+
+	^ self new
+		  matrix: aBlMatrix;
+		  yourself
 ]
 
 { #category : #initialization }
 BlMatrixTransformation >> initialize [
+
 	super initialize.
-	
+
 	matrix := BlMatrix2D new
 ]
 
 { #category : #testing }
 BlMatrixTransformation >> is2D [
-	^ self matrix is2D
+
+	^ matrix is2D
 ]
 
 { #category : #accessing }
 BlMatrixTransformation >> matrix [
-	<return: #BlMatrix>
 
 	^ matrix
 ]
 
 { #category : #accessing }
 BlMatrixTransformation >> matrix: aBlMatrix [
+
 	matrix := aBlMatrix
 ]
 
 { #category : #'mathematical functions' }
 BlMatrixTransformation >> multiplyOn: aBlMatrix [
-	aBlMatrix multiplyBy: self matrix
+
+	aBlMatrix multiplyBy: matrix
 ]

@@ -1060,8 +1060,7 @@ BlElement >> defaultOutskirts [
 
 { #category : #initialization }
 BlElement >> defaultTransformation [
-	"Return an instance of BlTransformation that plays a role of my default transformation"
-	<return: #BlElementTransformation>
+	"Return an instance of `BlElementTransformation` that plays a role of my default transformation."
 
 	^ BlElementIdentityTransformation uniqueInstance
 ]
@@ -3573,14 +3572,16 @@ BlElement >> transformation [
 
 { #category : #transformations }
 BlElement >> transformation: anElementTransformation [
+
 	transformation := anElementTransformation asCachedTransformation
-		bounds: self bounds inLocal asRectangle.
+		                  boundingRectangle: self bounds inLocal asRectangle;
+		                  yourself.
 
-	self constraints shouldAccountTransformation
-		ifTrue: [ self requestParentLayout ].
+	self constraints shouldAccountTransformation ifTrue: [ 
+		self requestParentLayout ].
 
-	self layout isInfluencedByTransformation
-		ifTrue: [ self requestLayout ].
+	self layout isInfluencedByTransformation ifTrue: [ 
+		self requestLayout ].
 
 	self boundsCache invalidateBoundsInSpace.
 	self invalidate.
@@ -3611,10 +3612,11 @@ BlElement >> updateGeometry [
 
 { #category : #transformations }
 BlElement >> updateTransformationBounds [
+
 	"Update the bounds of the cached transformation in order to recompute its matrix
 	since transformation origin depends on the element's bounds"
 
-	transformation bounds: self bounds inLocal asRectangle
+	transformation boundingRectangle: self bounds inLocal asRectangle
 ]
 
 { #category : #accessing }

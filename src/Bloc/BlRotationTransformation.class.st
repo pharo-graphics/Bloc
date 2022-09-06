@@ -17,33 +17,33 @@ Class {
 
 { #category : #accessing }
 BlRotationTransformation >> angle [
+
 	^ angle
 ]
 
 { #category : #accessing }
-BlRotationTransformation >> angle: aNumber [
-	"Set a rotation angle in degrees"
+BlRotationTransformation >> angle: aNumberOfDegrees [
+	"Set a rotation angle in degrees (not radians)"
 
-	angle := aNumber
+	angle := aNumberOfDegrees
 ]
 
 { #category : #converting }
 BlRotationTransformation >> asQuaternion [
-	<return: #BlQuaternion>
 
 	^ BlQuaternion x: self axis x y: self axis y z: self axis z angle: self angle
 ]
 
 { #category : #accessing }
 BlRotationTransformation >> axis [
-	<return: #BlVector>
 	
 	^ axis
 ]
 
 { #category : #accessing }
-BlRotationTransformation >> axis: aVector [
-	axis := aVector
+BlRotationTransformation >> axis: aBlVector [
+
+	axis := aBlVector
 ]
 
 { #category : #initialization }
@@ -58,24 +58,24 @@ BlRotationTransformation >> initialize [
 BlRotationTransformation >> is2D [
 	"Return true if I represent a rotation in 2D space, false otherwise.
 	By definition a rotation is in 2D when rotation axis is z-Axis (it has no x or y components)"
-	<return: #Boolean>
 
-	^ self axis = BlVector zAxis
+	^ axis = BlVector zAxis
 ]
 
 { #category : #'mathematical functions' }
 BlRotationTransformation >> multiplyOn: aBlMatrix [
 
 	aBlMatrix
-		rotateByDegrees: self angle
-		around: self axis
+		rotateByDegrees: angle
+		around: axis
 ]
 
 { #category : #printing }
 BlRotationTransformation >> printOn: aStream [
+
 	aStream
 		nextPutAll: 'Rotation by ';
-		nextPutAll: self angle asString;
+		nextPutAll: angle asString;
 		nextPutAll: ' degrees around axis ';
-		nextPutAll: self axis asString
+		nextPutAll: axis asString
 ]

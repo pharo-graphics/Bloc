@@ -4,6 +4,7 @@ Extension { #name : #BlElementCachedExplicitTransformation }
 BlElementCachedExplicitTransformation >> aeApplyTo: aeCanvas [
 
 	self ensureMatrix.
+
 	aeCanvas pathTransform:
 		(AeCairoMatrix
 			 x: matrix x

@@ -20,19 +20,24 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
-{ #category : #factory }
+{ #category : #'instance creation' }
 BlReflectionTransformation class >> horizontal [
-	^ self new reflection: (BlVector x: -1 y: 1)
+
+	^ self new
+		  reflection: (BlVector x: -1 y: 1);
+		  yourself
 ]
 
-{ #category : #factory }
+{ #category : #'instance creation' }
 BlReflectionTransformation class >> vertical [
-	^ self new reflection: (BlVector x: 1 y: -1)
+
+	^ self new
+		  reflection: (BlVector x: 1 y: -1);
+		  yourself
 ]
 
 { #category : #testing }
 BlReflectionTransformation >> is2D [
-	<return: #Boolean>
 
 	^ true
 ]
@@ -40,17 +45,17 @@ BlReflectionTransformation >> is2D [
 { #category : #'mathematical functions' }
 BlReflectionTransformation >> multiplyOn: aBlMatrix [
 
-	aBlMatrix reflectBy: self reflection
+	aBlMatrix reflectBy: reflection
 ]
 
 { #category : #accessing }
 BlReflectionTransformation >> reflection [
-	<return: #BlVector>
 
 	^ reflection
 ]
 
 { #category : #accessing }
-BlReflectionTransformation >> reflection: aVector [
-	reflection := aVector asBlocVector
+BlReflectionTransformation >> reflection: aBlVectorOrConvertible [
+
+	reflection := aBlVectorOrConvertible asBlocVector
 ]

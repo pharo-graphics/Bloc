@@ -18,44 +18,47 @@ Class {
 
 { #category : #'instance creation' }
 BlScalingTransformation class >> scale: aVector [
-	^ self new scale: aVector
+
+	^ self new
+		  scale: aVector;
+		  yourself
 ]
 
 { #category : #initialization }
 BlScalingTransformation >> initialize [
+
 	super initialize.
-	
+
 	scale := BlVector one
 ]
 
 { #category : #testing }
 BlScalingTransformation >> is2D [
-	<return: #Boolean>
 
-	^ self scale z closeTo: 1
+	^ scale z closeTo: 1.0
 ]
 
 { #category : #'mathematical functions' }
 BlScalingTransformation >> multiplyOn: aBlMatrix [
-	aBlMatrix scaleBy: self scale
+
+	aBlMatrix scaleBy: scale
 ]
 
 { #category : #printing }
 BlScalingTransformation >> printOn: aStream [
-	aStream
-		nextPutAll: 'Scaling by '.
-		
-	self scale printOn: aStream
+
+	aStream nextPutAll: 'Scaling by '.
+	scale printOn: aStream
 ]
 
 { #category : #accessing }
 BlScalingTransformation >> scale [
-	<return: #BlVector>
 
 	^ scale
 ]
 
 { #category : #accessing }
-BlScalingTransformation >> scale: aVector [
-	scale := aVector asScale3D
+BlScalingTransformation >> scale: aBlVector3DOrConvertible [
+
+	scale := aBlVector3DOrConvertible asScale3D
 ]

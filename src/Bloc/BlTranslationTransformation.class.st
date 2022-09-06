@@ -15,33 +15,37 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlTranslationTransformation class >> translation: aVector [
-	^ self new translation: aVector
+BlTranslationTransformation class >> translation: aBlVector [
+
+	^ self new
+		  translation: aBlVector;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlTranslationTransformation class >> x: aX y: aY z: aZ [
+
 	^ self new
-		translation: (BlVector x: aX y: aY z: aZ)
+		  translation: (BlVector x: aX y: aY z: aZ);
+		  yourself
 ]
 
 { #category : #initialization }
 BlTranslationTransformation >> initialize [
+
 	super initialize.
-	
+
 	translation := BlVector zero
 ]
 
 { #category : #testing }
 BlTranslationTransformation >> is2D [
-	<return: #Boolean>
 
-	^ self translation z isZero
+	^ translation z isZero
 ]
 
 { #category : #testing }
 BlTranslationTransformation >> isTranslation [
-	<return: #Boolean>
 
 	^ true
 ]
@@ -49,25 +53,25 @@ BlTranslationTransformation >> isTranslation [
 { #category : #'mathematical functions' }
 BlTranslationTransformation >> multiplyOn: aBlMatrix [
 
-	aBlMatrix translateBy: self translation
+	aBlMatrix translateBy: translation
 ]
 
 { #category : #printing }
 BlTranslationTransformation >> printOn: aStream [
-	aStream
-		nextPutAll: 'Translation by '.
-		
-	self translation printOn: aStream
+
+	aStream nextPutAll: 'Translation by '.
+
+	translation printOn: aStream
 ]
 
 { #category : #accessing }
 BlTranslationTransformation >> translation [
-	<return: #BlVector>
 
 	^ translation
 ]
 
 { #category : #accessing }
 BlTranslationTransformation >> translation: aVector [
+
 	translation := aVector asTranslate3D
 ]

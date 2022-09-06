@@ -73,9 +73,11 @@ BlLayoutChildNodeWithTransformation >> matrix: aBlMatrix [
 
 { #category : #'api - measure' }
 BlLayoutChildNodeWithTransformation >> measure: anExtentSpecOrBlock [
+
 	childNode measure: anExtentSpecOrBlock.
 
-	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: self privateMeasurement extent)
+	self transformation boundingRectangle:
+		(Rectangle origin: 0.0 @ 0.0 extent: self privateMeasurement extent)
 ]
 
 { #category : #accessing }
@@ -146,10 +148,6 @@ BlLayoutChildNodeWithTransformation >> pushAction: aBlLayoutNodeElementAction [
 
 { #category : #accessing }
 BlLayoutChildNodeWithTransformation >> transformation [
-	<return: #BlElementTransformation>
-	self
-		assert: [ transformation notNil ]
-		description: [ 'Transformation should be set before accessing it' ].
 
 	^ transformation
 ]
@@ -158,11 +156,16 @@ BlLayoutChildNodeWithTransformation >> transformation [
 BlLayoutChildNodeWithTransformation >> transformation: aBlElementTransformation [
 
 	transformation := aBlElementTransformation asCachedTransformation
-		bounds: (BlBounds origin: 0.0@0.0 extent: self privateMeasurement extent)
+		                  boundingRectangle:
+			                  (Rectangle
+				                   origin: 0.0 @ 0.0
+				                   extent: self privateMeasurement extent);
+		                  yourself
 ]
 
 { #category : #accessing }
 BlLayoutChildNodeWithTransformation >> transformationDo: aBlock [
+
 	aBlock value: transformation asElementTransformation
 ]
 
@@ -189,6 +192,7 @@ BlLayoutChildNodeWithTransformation >> withElement: aBlElement [
 
 { #category : #converting }
 BlLayoutChildNodeWithTransformation >> withTransformation: aBlElementTransformation [
+
 	self transformation: aBlElementTransformation
 ]
 

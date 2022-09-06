@@ -4,6 +4,6 @@ Extension { #name : #BlElementCachedExplicitTransformation }
 BlElementCachedExplicitTransformation >> spartaMultiplyWith: aSpartaMatrix [
 	"Multiple a given sparta matrix by my transformation only if I am not identity"
 
-	self transformation isIdentity
+	elementTransformation isIdentity
 		ifFalse: [ aSpartaMatrix multiplyBy: self matrix ]
 ]
