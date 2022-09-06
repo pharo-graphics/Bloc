@@ -33,6 +33,12 @@ BlElementLocalTransformation >> affineTransformation [
 	^ affineTransformation
 ]
 
+{ #category : #enumerating }
+BlElementLocalTransformation >> affineTransformationsDo: aBlockClosure [ 
+
+	affineTransformation do: aBlockClosure
+]
+
 { #category : #computation }
 BlElementLocalTransformation >> computeMatrix: aBlMatrix in: aRectangle [
 

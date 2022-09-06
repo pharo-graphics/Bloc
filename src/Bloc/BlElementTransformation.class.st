@@ -23,6 +23,13 @@ BlElementTransformation class >> scale: aBlVector [
 	^ BlElementLocalTransformation newWith: aScaleTransformation
 ]
 
+{ #category : #enumerating }
+BlElementTransformation >> affineTransformationsDo: aBlockClosure [
+	"Evaluate the block with associated instances of `BlAffineTransformation`."
+
+	self subclassResponsibility
+]
+
 { #category : #converting }
 BlElementTransformation >> asCachedTransformation [
 

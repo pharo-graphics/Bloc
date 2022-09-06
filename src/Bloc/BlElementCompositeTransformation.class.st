@@ -17,6 +17,13 @@ BlElementCompositeTransformation >> add: aBlElementTransformation [
 	elementTransformations add: aBlElementTransformation
 ]
 
+{ #category : #enumerating }
+BlElementCompositeTransformation >> affineTransformationsDo: aBlockClosure [ 
+
+	elementTransformations do: [ :each |
+		each affineTransformationsDo: aBlockClosure ]
+]
+
 { #category : #computation }
 BlElementCompositeTransformation >> computeMatrix: aBlMatrix in: aRectangle [
 

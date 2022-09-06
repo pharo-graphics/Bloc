@@ -65,9 +65,8 @@ BlTransformationBuilder >> flipY [
 BlTransformationBuilder >> inherit [
 	"Append existing element's transformations to the new transformation list"
 
-	target transformation asElementTransformation affineTransformation 
-		do: [ :aTransformation | 
-			affineCompositeTransformation addTransformation: aTransformation ]
+	target transformation asElementTransformation affineTransformationsDo: [ :each | 
+			affineCompositeTransformation addTransformation: each ]
 ]
 
 { #category : #initialization }

@@ -24,6 +24,11 @@ BlElementIdentityTransformation class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #enumerating }
+BlElementIdentityTransformation >> affineTransformationsDo: aBlockClosure [ 
+	"Do nothing"
+]
+
 { #category : #converting }
 BlElementIdentityTransformation >> asCachedTransformation [
 
