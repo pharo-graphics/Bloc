@@ -16,8 +16,8 @@ Class {
 }
 
 { #category : #measurement }
-BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer emptySpan: anEmptySpan maxWidth: aWidth maxHeight: aHeight [
-	^ self new hostTextMeasurer: aHostSpanMeasurer emptySpan: anEmptySpan maxWidth: aWidth maxHeight: aHeight
+BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer maxWidth: aWidth maxHeight: aHeight [
+	^ self new hostTextMeasurer: aHostSpanMeasurer maxWidth: aWidth maxHeight: aHeight
 ]
 
 { #category : #accessing }
@@ -61,12 +61,11 @@ BlTextParagraphMeasurer >> hasAvailableSpace [
 ]
 
 { #category : #measurement }
-BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer emptySpan: anEmptySpan maxWidth: aWidth maxHeight: aHeight [
+BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer maxWidth: aWidth maxHeight: aHeight [
 
 	hostTextMeasurer := aBlHostTextMeasurer.
 	self maxWidth: aWidth.
-	self maxHeight: aHeight.
-	self measureSpan: anEmptySpan.
+	self maxHeight: aHeight
 ]
 
 { #category : #initialization }

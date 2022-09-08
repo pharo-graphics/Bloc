@@ -100,16 +100,21 @@ BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
 
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 
-	| anIterator  paragraphMeasurer |
+	| anIterator paragraphMeasurer |
 	paragraphMeasurer := self newParagraphMeasurerOn: aHostSpanMeasurer.
+	
+	"line must have at leat one span even with empty text"
+	text isEmpty ifTrue: [ paragraphMeasurer measureSpan: self emptySpan ].
 
 	anIterator := text iterator.
-	[ anIterator hasNext and: [ line isEmpty or: [ paragraphMeasurer hasAvailableSpace ] ] ] whileTrue: [ 
-		"If we pass #hasNext check we will definitely move to the next span,
+	[ 
+	anIterator hasNext and: [ 
+		line isEmpty or: [ paragraphMeasurer hasAvailableSpace ] ] ] 
+		whileTrue: [ "If we pass #hasNext check we will definitely move to the next span,
 		so can do the same with position"
-		paragraphMeasurer movePosition: anIterator position + 1.
-		paragraphMeasurer measureSpan: anIterator nextSpan ].
-	
+			paragraphMeasurer movePosition: anIterator position + 1.
+			paragraphMeasurer measureSpan: anIterator nextSpan ].
+
 	"measurer creates a line with baseline set to 0@0"
 	line := paragraphMeasurer line.
 	end := line to
@@ -238,7 +243,6 @@ BlTextParagraph >> newParagraphMeasurerOn: aHostSpanMeasurer [
 
 	^ BlTextParagraphMeasurer
 		  hostTextMeasurer: aHostSpanMeasurer
-		  emptySpan: self emptySpan
 		  maxWidth: maxWidth
 		  maxHeight: maxHeight
 ]

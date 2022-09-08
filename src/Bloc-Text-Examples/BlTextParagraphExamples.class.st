@@ -722,12 +722,7 @@ BlTextParagraphExamples >> newParagraph [
 	<gtExample>
 	| aParagraph |
 
-	aParagraph := BlTextParagraph new.
-
-	self assert: aParagraph containerExtent equals: 0@0.
-	self assert: aParagraph hasWidthLimit not.
-	self assert: aParagraph hasHeightLimit not.
-	
+	aParagraph := BlTextParagraph new.	
 	^ aParagraph
 ]
 
