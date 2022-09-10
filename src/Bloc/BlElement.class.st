@@ -1454,12 +1454,12 @@ BlElement >> focusability: aFocusability [
 ]
 
 { #category : #'focus accessing' }
-BlElement >> focusables: anOrderedCollection along: aBlFocusSearchDirection [
+BlElement >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection [
 	"Add focusable elements that are descendants of this element (possibly including me) to anOrderedCollection
 	depending on my focusability strategy"
 
 	self focusability
-		focusables: anOrderedCollection
+		focusables: aBlFocusFinderCandidates
 		along: aBlFocusSearchDirection
 		of: self
 ]
