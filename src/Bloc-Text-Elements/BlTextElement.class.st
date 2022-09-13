@@ -529,9 +529,11 @@ BlTextElement >> selection [
 { #category : #geometry }
 BlTextElement >> selectionRectanglesFrom: aSelection [
 
-	| extentToUse |
+	| extentToUse origin cornerY |
 	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ #(  ) ].
-	extentToUse :=  (fillSize max: self extent x) @ self extent y.
+	origin := self textFlow assignedLine origin.
+	cornerY := origin y + self textFlow assignedLine height.
+	extentToUse :=  (fillSize max: self extent x) @ cornerY.
 	^ Array streamContents: [ :stream | 
 		  aSelection do: [ :currSelection | 
 			  | aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition |
@@ -542,17 +544,17 @@ BlTextElement >> selectionRectanglesFrom: aSelection [
 			  aSelectionEndSpan := paragraph spanAtIndex: anEnd.
 
 			  aSelectionStartPosition := aStart isZero
-				                             ifTrue: [ 0 @ 0 ]
-				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (self padding left @ 0) ].
+				                             ifTrue: [ 0 @ origin y ]
+				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (self padding left @ origin y) ].
 
 			  aSelectionEndPosition := anEnd = text size
-				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (self padding width - tabOffset @ 0) ]
-				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (self padding left - tabOffset @ 0) ].
+				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (self padding width - tabOffset @ cornerY) ]
+				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (self padding left - tabOffset @ cornerY) ].
 
 			  "containerExtent includes padding"
 			  stream nextPut: (currSelection to > text size
-					   ifTrue: [ aSelectionStartPosition x @ 0 corner: extentToUse ]
-					   ifFalse: [ aSelectionStartPosition x @ 0 corner: aSelectionEndPosition x @ extentToUse y ]) ] ]
+					   ifTrue: [ aSelectionStartPosition x @ origin y corner: extentToUse ]
+					   ifFalse: [ aSelectionStartPosition x @ origin y corner: aSelectionEndPosition x @ extentToUse y ]) ] ]
 ]
 
 { #category : #layout }

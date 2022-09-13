@@ -4,9 +4,7 @@ Extension { #name : #BlTextElement }
 BlTextElement >> aeDrawBeneathOn: aeCanvas [
 
 	"Draw highlight attributes"
-	self aeDrawHighlightsOn: aeCanvas.
-	"Draw selection, if any"
-	self aeDrawSelectionOn: aeCanvas.
+	self aeDrawHighlightsOn: aeCanvas
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -16,6 +14,16 @@ BlTextElement >> aeDrawHighlightsOn: aeCanvas [
 		| rectangles |
 		rectangles := self selectionRectanglesFrom: eachHighlight selection.
 		self aeFillRectanglesBackground: rectangles on: aeCanvas with: eachHighlight paint ]
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlTextElement >> aeDrawOn: aeCanvas [
+
+	paragraph ifNotNil: [ 
+		aeCanvas restoreContextAfter: [ 
+			aeCanvas pathTranslate: self position x @ 0.
+			self aeDrawSelectionOn: aeCanvas ] ].
+	super aeDrawOn: aeCanvas
 ]
 
 { #category : #'*Bloc-Alexandrie' }

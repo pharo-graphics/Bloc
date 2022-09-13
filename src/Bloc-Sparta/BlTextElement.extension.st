@@ -3,8 +3,7 @@ Extension { #name : #BlTextElement }
 { #category : #'*Bloc-Sparta' }
 BlTextElement >> drawBeneathOnSpartaCanvas: aCanvas [
 
-	self drawHighlightsOnSpartaCanvas: aCanvas.
-	self drawSelectionOnSpartaCanvas: aCanvas
+	self drawHighlightsOnSpartaCanvas: aCanvas
 ]
 
 { #category : #'*Bloc-Sparta' }
@@ -55,4 +54,34 @@ BlTextElement >> fillRectanglesBackground: anArrayOfrectangles onSpartaCanvas: a
 				paint: aPaint;
 				path: rect;
 				draw ]
+]
+
+{ #category : #'*Bloc-Sparta' }
+BlTextElement >> fullDrawOnSpartaCanvas: aCanvas [
+
+	flags clearNeedsPaint.
+
+	"We do not draw transparent elements at all"
+	self isTransparent ifTrue: [ ^ self ].
+
+	"invisible elements are not rendered too"
+	self isVisible ifFalse: [ ^ self ].
+
+	aCanvas layer
+		alpha: self opacity;
+		when: [ self isTranslucent ] during: [ 
+			aCanvas transform
+				by: self transformation matrix
+				translated: self position x @ 0
+				during: [ :aTransformedCanvas | 
+					self errorHandler
+						with: self
+						do: [ 
+							self drawSelectionOnSpartaCanvas: aCanvas.
+							aCanvas transform
+								by: [ :aTransform | 
+									aTransform translateBy: 0 @ self position y ]
+								during: [ self drawMeWithEffectsOnCanvas: aCanvas ] ]
+						failed: [ :anError | 
+							self drawError: anError onSpartaCanvas: aCanvas ] ] ]
 ]
