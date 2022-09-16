@@ -371,6 +371,33 @@ BlTextIterator >> nextSpanAny: aBlock indicesDo: anIndicesBlock [
 ]
 
 { #category : #'iterator - enumeration' }
+BlTextIterator >> nextSpanIndicesDo: anIndicesBlock [
+	| startPosition endPosition |
+self flag: 'Useful???'.
+	self hasNext
+		ifFalse: [ self error: 'reached end of rope' ].
+
+	startPosition := self position + 1.
+	endPosition := startPosition.
+
+	[ self hasNext ] whileTrue: [ self nextSpan ].
+
+	endPosition := self position.
+	
+	self
+		assert: [ startPosition <= endPosition ]
+		description: [ 'Start must not exceed end' ].
+		
+	self
+		assert: [ startPosition > 0 or: [ startPosition = 0 and: [ endPosition = 0 ] ] ]
+		description: [ 'Start and end must be positive or both zero' ].
+	
+	^ anIndicesBlock
+		value: startPosition
+		value: endPosition
+]
+
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextWhitespace [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first non-whitespace character without including it"
