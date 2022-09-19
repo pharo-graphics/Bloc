@@ -527,6 +527,12 @@ BlTextElement >> selection [
 ]
 
 { #category : #geometry }
+BlTextElement >> selectionRectangles [
+
+	^ self selectionRectanglesFrom: selection
+]
+
+{ #category : #geometry }
 BlTextElement >> selectionRectanglesFrom: aSelection [
 
 	| extentToUse origin cornerY |

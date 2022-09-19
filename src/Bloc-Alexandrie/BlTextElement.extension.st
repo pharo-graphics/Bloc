@@ -19,10 +19,10 @@ BlTextElement >> aeDrawHighlightsOn: aeCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlTextElement >> aeDrawOn: aeCanvas [
 
-	paragraph ifNotNil: [ 
+	"paragraph ifNotNil: [ 
 		aeCanvas restoreContextAfter: [ 
 			aeCanvas pathTranslate: self position x @ 0.
-			self aeDrawSelectionOn: aeCanvas ] ].
+			self aeDrawSelectionOn: aeCanvas ] ]."
 	super aeDrawOn: aeCanvas
 ]
 
@@ -41,7 +41,7 @@ BlTextElement >> aeDrawOnlyMeOn: aeCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlTextElement >> aeDrawSelectionOn: aeCanvas [
 
-	self aeDrawselection: selection on: aeCanvas color: self class selectionColor
+	"self aeDrawselection: selection on: aeCanvas color: self class selectionColor"
 ]
 
 { #category : #'*Bloc-Alexandrie' }
