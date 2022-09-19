@@ -220,6 +220,15 @@ BlTextElement >> highlightCategory: aHighlightCategorySymbol with: aParagraphHig
 ]
 
 { #category : #'api - highlighting' }
+BlTextElement >> highlightRectanglesOfCategory: aCategory [
+
+	^ Array streamContents: [ :stream | 
+		  (self highlightsOfCategory: aCategory) do: [ :eachHighlight | 
+			  stream nextPutAll:
+				  (self selectionRectanglesFrom: eachHighlight selection) ] ]
+]
+
+{ #category : #'api - highlighting' }
 BlTextElement >> highlightWith: aParagraphHighlight [ 
 
 	self highlightCategory: self defaultHighlightCategory with: aParagraphHighlight. 
@@ -237,6 +246,14 @@ BlTextElement >> highlights [
 BlTextElement >> highlightsMap [
 
 	^ highlightsMap ifNil: [ highlightsMap := IdentityDictionary new ]
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlightsOfCategory: aCategory [
+
+	^ highlightsMap
+		  ifNotNil: [ :map | map at: aCategory ifAbsent: [ #(  ) ] ]
+		  ifNil: [ #(  ) ]
 ]
 
 { #category : #geometry }
