@@ -495,6 +495,24 @@ BlTextElement >> resetHighlightsOfCategory: aHighlightCategorySymbol [
 ]
 
 { #category : #geometry }
+BlTextElement >> screenCornerAt: aTextIndex [
+
+	<return: #Point>
+	| aScreenPosition |
+	aScreenPosition := self paragraph positionAt: aTextIndex.
+	^ aScreenPosition x - self padding right @ (self height - self padding height)
+]
+
+{ #category : #geometry }
+BlTextElement >> screenOriginAt: aTextIndex [
+
+	<return: #Point>
+	| aScreenPosition |
+	aScreenPosition := self paragraph positionAt: (aTextIndex max: 0).
+	^ aScreenPosition x + self padding left @ self padding height
+]
+
+{ #category : #geometry }
 BlTextElement >> screenPositionAt: aTextIndex [
 	<return: #Point>
 	| aScreenPosition |
