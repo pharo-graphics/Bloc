@@ -457,11 +457,6 @@ BlTextElement >> paragraph [
 	^ paragraph
 ]
 
-{ #category : #'as yet unclassified' }
-BlTextElement >> positionInEditor [
-	^ self constraints albumTextFlow positionInEditor
-]
-
 { #category : #accessing }
 BlTextElement >> rawParagraph [
 
