@@ -2245,6 +2245,23 @@ BlElement >> localPointToGlobal: aPoint [
 		ifFalse: [ pt ]
 ]
 
+{ #category : #'geometry bounds convertion' }
+BlElement >> localPointToMine: aPoint fromChild: anElement [
+	"compute a point from provided point from coordinate system of a given descendant element
+	to my local coordinates"
+
+	| aParentElement pt |
+	anElement == self ifTrue: [ ^ aPoint ].
+	pt := aPoint.
+	aParentElement := anElement.
+	[
+		pt := aParentElement localPointToParent: pt.
+		aParentElement := aParentElement parent
+	] doWhileFalse: [ aParentElement == self ].
+			
+	^ pt
+]
+
 { #category : #'geometry position convertion' }
 BlElement >> localPointToParent: aPoint [
 	"Transform a given point from my local coordinates to local coordinates of my parent.
