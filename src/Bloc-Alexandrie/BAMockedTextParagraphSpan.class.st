@@ -40,7 +40,9 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 
 		"Draw the border around the character"
 		aeCanvas restoreContextAfter: [ 
-			aeCanvas setBackgroundOff.
+			"aeCanvas setBackgroundOff."
+			Color random asBlPaint aeApplyTo: aeCanvas opacity: 0.4.
+
 			" setOutskirtsInside otherwise the cursor is hidden"
 			aeCanvas setOutskirtsInside.
 			aeCanvas setBorderBlock: [ 
