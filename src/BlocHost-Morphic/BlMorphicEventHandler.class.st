@@ -419,6 +419,22 @@ BlMorphicEventHandler >> handleScrollRight: anEvent [
 		self enqueue: aBlEvent ]
 ]
 
+{ #category : #'events - keyboard' }
+BlMorphicEventHandler >> handleTextInputEvent: aTextInputEvent [
+
+	| aBlEvent |
+	aBlEvent := BlTextInputEvent new
+		            text: aTextInputEvent text asString;
+		            modifiers: (BlKeyModifiers
+				             shift: false
+				             ctrl: false
+				             alt: false
+				             cmd: false);
+		            timestamp: DateAndTime now.
+
+	self enqueue: aBlEvent
+]
+
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowClosed: aMorphicEvent [
 	| aBlEvent |
