@@ -1,32 +1,38 @@
 "
-I am responsible for applying text attributes on {{gtClass:BlText}} based on some logic, for example it can be code syntax highlighting.
+I am an Abstract class responsible for applying text attributes on `BlText` based on some logic, for example it can be code syntax highlighting.
+The styling is runned by the launcher I provide.
+My launcher performs the styling in a background process or through a enqueued task.
 
-I am independent from the text editor.
-The main entrance point is 
+
+The main entrance point used by the launcher is style:
+Subclasses of me can create formatted, coloured, and styled copies of Text that is given to them.
+
 
 "
 Class {
 	#name : #BlTextStyler,
 	#superclass : #Object,
 	#instVars : [
-		'text'
+		'text',
+		'launcher'
 	],
 	#category : #'Bloc-Text-Text-Styler'
 }
 
-{ #category : #'hooks - text modifications' }
-BlTextStyler >> onTextStyled: aTextStyledEvent editor: aTextEditor [
+{ #category : #initialization }
+BlTextStyler >> defaultStylerLauncher [
+	^ BlTextStylerLauncher new
+]
 
-	(aTextStyledEvent text isNextGenerationOf: aTextEditor text)
-		ifTrue: [ 
-			aTextEditor text rope: aTextStyledEvent text text rope.
-			aTextStyledEvent afterAction value: aTextEditor text.
-			aTextEditor notifyTextStyled.
-			aTextEditor processCursorAttributes.
-			aTextEditor updater
-				all;
-				update ]
-		ifFalse: [ aTextEditor styleTextAndAfterDo: aTextStyledEvent afterAction ]
+{ #category : #initialization }
+BlTextStyler >> initialize [
+	super initialize.
+	launcher := self defaultStylerLauncher
+]
+
+{ #category : #accessing }
+BlTextStyler >> launcher [
+	^ launcher 
 ]
 
 { #category : #private }
@@ -38,21 +44,10 @@ BlTextStyler >> privateStyle: aText [
 
 { #category : #'api - styling' }
 BlTextStyler >> style: aBlText [
+
 	<return: #BlText>
-
-	^ BlTextStylerTelemetry
-		rootTimeSync: [ Processor activeProcess name, '  ', self class name, ': ', (aBlText first: (20 min: aBlText size)) asString ]
-		during: [
-			| anUnstyledText aStyledText |
-			anUnstyledText := aBlText unstyle.
-			aStyledText := self privateStyle: anUnstyledText characters.
-			aStyledText text ]
-]
-
-{ #category : #accessing }
-BlTextStyler >> stylers [
-	"In case of a composite styler, return children stylers"
-	<return: #Collection of: #BlTextStyler>
-
-	^ #()
+	| anUnstyledText aStyledText |
+	anUnstyledText := aBlText unstyle.
+	aStyledText := self privateStyle: anUnstyledText characters.
+	^ aStyledText text
 ]
