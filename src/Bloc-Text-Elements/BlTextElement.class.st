@@ -176,7 +176,7 @@ BlTextElement >> defaultHighlightCategory [
 
 { #category : #initialization }
 BlTextElement >> defaultMeasurer [
-	^ BlTextElementHostMeasurer new
+	^ BlTextElementHostMeasurer uniqueInstance 
 ]
 
 { #category : #initialization }
