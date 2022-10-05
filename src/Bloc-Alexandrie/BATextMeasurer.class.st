@@ -24,17 +24,15 @@ BATextMeasurer >> measureTextSpan: aBlSpan [
 
 	"Measure a given text span and return paragraph span with computed metrics"
 
-	| fontAndStyleBuilder attributes paragraphSpan |
+	| fontAndStyleBuilder attributes |
 	"Collect font properties and text style from the attributes"
 	fontAndStyleBuilder := BlTextFontAndStyleBuilder new.
 	attributes := aBlSpan attributes.
-	attributes do: [ :eachAttribute | 
-		eachAttribute applyOnFontAndStyleBuilder: fontAndStyleBuilder ].
-
-	paragraphSpan := self createParagraphSpan.
-	paragraphSpan span: aBlSpan.
-	paragraphSpan updateMetricsWithBuilder: fontAndStyleBuilder.
-	^ paragraphSpan
+	attributes do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: fontAndStyleBuilder ].
+	^ self createParagraphSpan
+		  span: aBlSpan fontAndStyleBuilder: fontAndStyleBuilder;
+		  updateMetrics;
+		  yourself
 ]
 
 { #category : #'paragraph span instance creation' }

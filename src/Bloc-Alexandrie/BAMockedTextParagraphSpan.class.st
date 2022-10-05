@@ -22,14 +22,16 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 
 	" Draw each character one by one"
 	self span asString withIndexDo: [ :c :index | 
-		| buffer bounds measuredWidth heightScale measuredHeight eachBaseline fixedBounds |
-		eachBaseline := (self baseline + (index - 1 * (characterWidth @ 0))) x @ 0.
+		| metrics buffer bounds measuredWidth heightScale measuredHeight eachBaseline fixedBounds |
+		eachBaseline := (self baseline + ((index - 1) * (characterWidth @ 0))) x @ 0.
 		buffer := c asString utf8Encoded.
-		self updateMetricsFor: buffer builder: fontAndStyleBuilder canvas: aeCanvas.
-		bounds := metrics at: #bounds.
+		"Get glyphs for the text"
+		cairoGlyphsArray := cairoScaledFont glyphArrayFor: buffer length: buffer size.
+		metrics := aeCanvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
+		bounds := metrics bearingX @ metrics bearingY extent: metrics width @ metrics height.
 		measuredWidth := bounds width.
 		measuredWidth isZero ifTrue: [ measuredWidth := characterWidth ].
-		measuredHeight := (metrics at: #ascent) abs + (metrics at: #descent).
+		measuredHeight := metrics ascent abs + metrics descent.
 		measuredHeight isZero ifTrue: [ measuredHeight := characterHeight ].
 		heightScale := characterHeight * 0.8 / measuredHeight.
 		fixedBounds := eachBaseline extent: characterWidth @ characterHeight.
@@ -57,7 +59,7 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 			aeCanvas pathTranslate: eachBaseline.
 			aeCanvas pathScale: heightScale asPoint.
 			aeCanvas pathTranslate:
-				bounds origin x negated @ (metrics at: #ascent) abs + (characterWidth / heightScale - bounds width / 2.0 @ 0).
+				bounds origin x negated @ metrics ascent abs + (characterWidth / heightScale - bounds width / 2.0 @ 0).
 			self attributes do: [ :anAttribute | anAttribute aeDrawBelowOn: aeCanvas span: self ].
 			aeCanvas drawText: cairoGlyphsArray font: cairoScaledFont ].
 
@@ -97,9 +99,4 @@ BAMockedTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
 	advance := width.
 	
 	baseline := 0@0
-]
-
-{ #category : #accessing }
-BAMockedTextParagraphSpan >> fontAndStyleBuilder: aBlTextFontAndStyleBuilder [
-	fontAndStyleBuilder := aBlTextFontAndStyleBuilder 
 ]

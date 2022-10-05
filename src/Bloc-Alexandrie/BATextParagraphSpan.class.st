@@ -29,23 +29,34 @@ BATextParagraphSpan >> aeDrawOn: aeCanvas [
 ]
 
 { #category : #building }
-BATextParagraphSpan >> updateMetricsWithBuilder: aBlTextFontAndStyleBuilder [
+BATextParagraphSpan >> updateMetrics [
 
 	"build an abstract font and resolve not yet resolved properties"
 
-	| utf8Encoded |
+	| utf8Encoded metrics canvas font |
+
+	canvas := hostMeasurer canvas.
+
 	utf8Encoded := self span isTabulation
-		               ifTrue: [ '' utf8Encoded  ]
+		               ifTrue: [ '' utf8Encoded ]
 		               ifFalse: [ self span utf8Encoded ].
-	self
-		updateMetricsFor: utf8Encoded
-		builder: aBlTextFontAndStyleBuilder
-		canvas: hostMeasurer canvas.
-	ascent := metrics at: #ascent.
-	descent := metrics at: #descent.
-	advance := metrics at: #advance.
-	left := metrics at: #left.
-	top := metrics at: #top.
-	width := metrics at: #width.
-	height := metrics at: #height
+
+	font := fontAndStyleBuilder font.
+	cairoScaledFont := canvas scaledFontForFace: font asAeFTFace size: font fontSize value.
+	cairoGlyphsArray := cairoScaledFont glyphArrayFor: utf8Encoded length: utf8Encoded size.
+	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
+
+	baseline := 0 @ 0.
+	ascent := metrics ascent.
+	descent := metrics descent.
+	left := metrics bearingX.
+	top := metrics bearingY.
+	height := metrics height.
+	self span isTabulation
+		ifTrue: [ 
+			advance := self tabStopWidth.
+			width := self tabStopWidth ]
+		ifFalse: [ 
+			advance := metrics advanceX.
+			width := metrics width ]
 ]
