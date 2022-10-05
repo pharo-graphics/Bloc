@@ -3,7 +3,7 @@ Extension { #name : #BlTextElement }
 { #category : #'*Bloc-Sparta' }
 BlTextElement >> drawBeneathOnSpartaCanvas: aCanvas [
 
-	self drawHighlightsOnSpartaCanvas: aCanvas
+	"self drawHighlightsOnSpartaCanvas: aCanvas"
 ]
 
 { #category : #'*Bloc-Sparta' }
@@ -20,9 +20,10 @@ BlTextElement >> drawHighlightsOnSpartaCanvas: aCanvas [
 BlTextElement >> drawOnSpartaCanvas: aCanvas [
 
 	paragraph ifNil: [ ^ self ].
-	self drawBeneathOnSpartaCanvas: aCanvas.
+	
 
 	super drawOnSpartaCanvas: aCanvas.
+	self drawBeneathOnSpartaCanvas: aCanvas.
 
 	aCanvas transform by: [ :t | t translateBy: self padding topLeft ] during: [ paragraph drawOnSpartaCanvas: aCanvas ]
 ]
@@ -77,6 +78,7 @@ BlTextElement >> fullDrawOnSpartaCanvas: aCanvas [
 					self errorHandler
 						with: self
 						do: [ 
+							self drawHighlightsOnSpartaCanvas: aCanvas.
 							self drawSelectionOnSpartaCanvas: aCanvas.
 							aCanvas transform
 								by: [ :aTransform | 

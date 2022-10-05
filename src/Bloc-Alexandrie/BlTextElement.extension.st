@@ -13,16 +13,16 @@ BlTextElement >> aeDrawHighlightsOn: aeCanvas [
 	self highlights do: [ :eachHighlight |  
 		| rectangles |
 		rectangles := self selectionRectanglesFrom: eachHighlight selection.
-		self aeFillRectanglesBackground: rectangles on: aeCanvas with: eachHighlight paint ]
+		self aeDrawRectangles: rectangles on: aeCanvas with: eachHighlight paint ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
 BlTextElement >> aeDrawOn: aeCanvas [
 
-	"paragraph ifNotNil: [ 
-		aeCanvas restoreContextAfter: [ 
-			aeCanvas pathTranslate: self position x @ 0.
-			self aeDrawSelectionOn: aeCanvas ] ]."
+	aeCanvas restoreContextAfter: [  
+		aeCanvas pathTranslate: self position x @ 0.
+		"self aeDrawSelectionOn: aeCanvas."
+		self aeDrawBeneathOn: aeCanvas].
 	super aeDrawOn: aeCanvas
 ]
 
@@ -30,12 +30,31 @@ BlTextElement >> aeDrawOn: aeCanvas [
 BlTextElement >> aeDrawOnlyMeOn: aeCanvas [
 
 	paragraph ifNil: [ ^ self ].
-	self aeDrawBeneathOn: aeCanvas.
 	super aeDrawOnlyMeOn: aeCanvas.
 	aeCanvas restoreContextAfter: [ 
 		aeCanvas pathTranslate: self padding topLeft.
 		"Draw text with attributes"
 		paragraph aeDrawOn: aeCanvas ]
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlTextElement >> aeDrawRectangles: anArrayOfrectangles on: aeCanvas with: aColor [
+
+	"TODO: refactor the following is the only Alexandrie-specific code"
+
+	aeCanvas restoreContextAfter: [ 
+		aeCanvas setBackgroundWith: [ aeCanvas setSourceColor: aColor twiceLighter twiceLighter].
+
+		aeCanvas setOutskirtsOutside.
+		aeCanvas setBorderBlock: [ 
+			aeCanvas setSourceColor: aColor twiceDarker.
+			aeCanvas setLineJoinBlock: [ aeCanvas setJoinRound ].
+			aeCanvas setBorderWidth: 1 ].
+
+		aeCanvas drawClosedPathWith: [ :cairoContext |
+			anArrayOfrectangles do: [ :each | cairoContext rectangle: each ] ].
+
+		aeCanvas drawFigure ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -50,21 +69,5 @@ BlTextElement >> aeDrawselection: aSelection on: aeCanvas color: aColor [
 	| rectangles |
 	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ self ].
 	rectangles := self selectionRectanglesFrom: aSelection.
-	self aeFillRectanglesBackground: rectangles on: aeCanvas with: aColor
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlTextElement >> aeFillRectanglesBackground: anArrayOfrectangles on: aeCanvas with: aColor [
-
-	"TODO: refactor the following is the only Alexandrie-specific code"
-
-	aeCanvas restoreContextAfter: [ 
-		aeCanvas setBackgroundWith: [ aeCanvas setSourceColor: aColor ].
-
-		aeCanvas setBorderOff.
-
-		aeCanvas drawClosedPathWith: [ :cairoContext |
-			anArrayOfrectangles do: [ :each | cairoContext rectangle: each ] ].
-
-		aeCanvas drawFigure ]
+	self aeDrawRectangles: rectangles on: aeCanvas with: aColor
 ]
