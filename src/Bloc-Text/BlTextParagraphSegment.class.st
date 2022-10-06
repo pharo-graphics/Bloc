@@ -104,22 +104,6 @@ BlTextParagraphSegment >> left [
 	^ left
 ]
 
-{ #category : #accessing }
-BlTextParagraphSegment >> metrics [
-	"Return a dictionary with segment metrics"
-	
-	^ {
-		'Ascent' -> self ascent.
-		'Descent' -> self descent.
-		'Left' -> self left.
-		'Top' -> self top.
-		'Height' -> self height.
-		'Width' -> self width.
-		'Baseline' -> self baseline.
-		'Advance' -> self advance
-	} asOrderedDictionary
-]
-
 { #category : #measurement }
 BlTextParagraphSegment >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
