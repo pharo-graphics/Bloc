@@ -90,15 +90,10 @@ BAMockedTextMeasurer >> measureTextSpan: aBlSpan [
 
 	"Measure a given text span and return paragraph span with my fixed metrics"
 
-	| fontAndStyleBuilder paragraphSpan |
 	measuredWidth := aBlSpan size * self glyphWidth.
 	measuredHeight := self height * aBlSpan size isZero not asBit.
 
-	fontAndStyleBuilder := BlTextFontAndStyleBuilder new.
-	paragraphSpan := self createParagraphSpan.
-	paragraphSpan span: aBlSpan fontAndStyleBuilder: fontAndStyleBuilder.
-	paragraphSpan applyFixedMetrics: self.
-	^ paragraphSpan
+	^ self createParagraphSpan setupFromHostTextMeasurer: self forSpan: aBlSpan
 ]
 
 { #category : #metrics }

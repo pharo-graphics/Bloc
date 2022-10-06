@@ -86,13 +86,13 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 ]
 
 { #category : #building }
-BAMockedTextParagraphSpan >> applyFixedMetrics: aSpanMeasurer [
+BAMockedTextParagraphSpan >> measureWith: aBATextMeasurer [
 
-	width := aSpanMeasurer measuredWidth.
-	height := aSpanMeasurer measuredHeight.
+	width := aBATextMeasurer measuredWidth.
+	height := aBATextMeasurer measuredHeight.
 	
-	ascent := aSpanMeasurer ascent.
-	descent := aSpanMeasurer descent.
+	ascent := aBATextMeasurer ascent.
+	descent := aBATextMeasurer descent.
 
 	left := 0.
 	top := 0.

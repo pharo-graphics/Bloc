@@ -29,17 +29,17 @@ BATextParagraphSpan >> aeDrawOn: aeCanvas [
 ]
 
 { #category : #building }
-BATextParagraphSpan >> updateMetrics [
+BATextParagraphSpan >> measureWith: aBATextMeasurer [
 
 	"build an abstract font and resolve not yet resolved properties"
 
-	| utf8Encoded metrics canvas font |
-
+	| utf8Encoded metrics canvas font usedSpan |
 	canvas := hostMeasurer canvas.
 
-	utf8Encoded := self span isTabulation
-		               ifTrue: [ '' utf8Encoded ]
-		               ifFalse: [ self span utf8Encoded ].
+	usedSpan := self span isTabulation
+		            ifTrue: [ '' ]
+		            ifFalse: [ self span ].
+	utf8Encoded := usedSpan utf8Encoded.
 
 	font := fontAndStyleBuilder font.
 	cairoScaledFont := canvas scaledFontForFace: font asAeFTFace size: font fontSize value.

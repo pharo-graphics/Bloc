@@ -32,6 +32,11 @@ BATextParagraphLeaf >> fontAndStyleBuilder: aBlTextFontAndStyleBuilder [
 	fontAndStyleBuilder := aBlTextFontAndStyleBuilder 
 ]
 
+{ #category : #building }
+BATextParagraphLeaf >> measureWith: aBATextMeasurer [
+	^ self subclassResponsibility 
+]
+
 { #category : #measurement }
 BATextParagraphLeaf >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
@@ -40,9 +45,14 @@ BATextParagraphLeaf >> normalize: aScale [
 ]
 
 { #category : #building }
-BATextParagraphLeaf >> span: aBlSpan fontAndStyleBuilder: aBlTextFontAndStyleBuilder [
+BATextParagraphLeaf >> setupFromHostTextMeasurer: aBATextMeasurer forSpan: aBlSpan [
+
+	self fontAndStyleBuilder: BlTextFontAndStyleBuilder new.
 	self span: aBlSpan.
-	self fontAndStyleBuilder: aBlTextFontAndStyleBuilder	
+
+	"Collect font properties and text style from the attributes"
+	self span attributes do: [ :eachAttribute | eachAttribute applyOnFontAndStyleBuilder: fontAndStyleBuilder ].
+	self measureWith: aBATextMeasurer
 ]
 
 { #category : #accessing }
