@@ -1718,6 +1718,12 @@ BlSpace >> showSpace: aSpace [
 	aSpace show
 ]
 
+{ #category : #accessing }
+BlSpace >> space [
+
+	^ self
+]
+
 { #category : #'host space - text input' }
 BlSpace >> startTextInput [
 	"Start accepting Unicode text input events.

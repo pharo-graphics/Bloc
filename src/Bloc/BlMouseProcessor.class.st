@@ -27,7 +27,7 @@ Class {
 { #category : #accessing }
 BlMouseProcessor class >> dblClickDelay [
 	<return: #Duration>
-	^ 300 milliSeconds
+	^ 500 milliSeconds
 ]
 
 { #category : #'event testing' }
@@ -337,18 +337,15 @@ BlMouseProcessor >> isDragging [
 
 { #category : #private }
 BlMouseProcessor >> isMouseEventValid: anEvent [
-	anEvent
-		ifNil: [ ^ false ].
-	
-	(({ anEvent target . anEvent currentTarget . anEvent source } reject: [ :eachElement | eachElement isNil ])
-		anySatisfy: [ :eachTargetElement |
-			| eachTargetSpace |
-			eachTargetSpace := (eachTargetElement class = BlSpace)
-				ifTrue: [ eachTargetElement ]
-				ifFalse: [ eachTargetElement space ].
-			eachTargetSpace ~~ self space ])
-				ifTrue: [ ^ false ].
-	
+
+	anEvent ifNil: [ ^ false ].
+	(({ 
+		  anEvent target.
+		  anEvent currentTarget.
+		  anEvent source } reject: [ :eachElement | eachElement isNil ]) 
+		 anySatisfy: [ :eachTargetElement | 
+		 eachTargetElement space ~~ self space ]) ifTrue: [ ^ false ].
+
 	^ true
 ]
 
