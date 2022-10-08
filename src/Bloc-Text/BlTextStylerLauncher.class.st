@@ -25,11 +25,10 @@ BlTextStylerLauncher >> doStyleInElement: anElement [
 
 	| aStyledText |
 	aStyledText := anElement styler style: anElement textSnapshot nextGeneration.
-
+	
+	
 	"Dispatch the event in the UI thread"
-	anElement enqueueTask: (BlTaskAction new action: [ anElement textStyled: aStyledText ]).
-
-	^ aStyledText
+	anElement enqueueTask: (BlTaskAction new action: [ anElement styler announceTextStyled: aStyledText ])
 ]
 
 { #category : #private }

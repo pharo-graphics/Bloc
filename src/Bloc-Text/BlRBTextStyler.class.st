@@ -790,8 +790,11 @@ BlRBTextStyler >> attributesFor: aSymbol [
 ]
 
 { #category : #accessing }
-BlRBTextStyler >> classOrMetaClass: aBehavior [ 
-	classOrMetaClass := aBehavior
+BlRBTextStyler >> classOrMetaClass: aBehavior [
+
+	classOrMetaClass = aBehavior ifTrue: [ ^ self ].
+	classOrMetaClass := aBehavior.
+	self announceStateChanged
 ]
 
 { #category : #private }
@@ -818,6 +821,13 @@ BlRBTextStyler >> currentOpenedParenthesisStyleName [
 	^ (#leftParenthesis asString , parentheseLevel asString) asSymbol
 ]
 
+{ #category : #initialization }
+BlRBTextStyler >> installOn: aTarget [
+
+	self ensureAnnouncer.
+	self when: BlStylerStateChanged send: #stylerStateChanged to: aTarget
+]
+
 { #category : #accessing }
 BlRBTextStyler >> isForWorkspace [
 	^ isForWorkspace ifNil: [ workspace notNil ]
@@ -825,7 +835,10 @@ BlRBTextStyler >> isForWorkspace [
 
 { #category : #accessing }
 BlRBTextStyler >> isForWorkspace: aBoolean [
-	isForWorkspace := aBoolean
+
+	isForWorkspace = aBoolean ifTrue: [ ^self ].
+	isForWorkspace := aBoolean.
+	self announceStateChanged
 ]
 
 { #category : #formatting }
@@ -870,26 +883,9 @@ BlRBTextStyler >> methodOrBlockTempStyleFor: aTemporaryNode [
 ]
 
 { #category : #private }
-BlRBTextStyler >> parse: aText isMethod: isMethod [
-	|root aString |
-	
-	aString := aText asString.
-	
-	isMethod 
-		ifTrue: [
-			[root := RBParser parseFaultyMethod: aString.
-			root methodNode methodClass: classOrMetaClass.
-			^root] 
-				on: Error 
-				do: [^RBParser parseFaultyExpression: aString ]]
-		ifFalse:[ ^RBParser parseFaultyExpression: aString ].
-]
-
-{ #category : #private }
 BlRBTextStyler >> privateStyle: aText [
 
 	| ast |
-	aText ifEmpty: [ ^ self ].
 	ast := classOrMetaClass compiler
 		source: aText asString;
 		noPattern: self isForWorkspace ;
@@ -1220,6 +1216,9 @@ BlRBTextStyler >> workspace [
 ]
 
 { #category : #accessing }
-BlRBTextStyler >> workspace: aWorkspace [ 
-	workspace := aWorkspace
+BlRBTextStyler >> workspace: aWorkspace [
+
+	workspace = aWorkspace ifTrue: [ ^ self ].
+	workspace := aWorkspace.
+	self announceStateChanged
 ]
