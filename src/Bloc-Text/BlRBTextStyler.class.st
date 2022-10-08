@@ -997,15 +997,13 @@ BlRBTextStyler >> parse: aText isMethod: isMethod [
 BlRBTextStyler >> privateStyle: aText [
 
 	| ast |
-	ast := self parse: aText isMethod: self isForWorkspace not.
-	ast methodNode compilationContext: (CompilationContext new
-			 class: (classOrMetaClass ifNil: [ UndefinedObject ]);
-			 requestor: workspace).
-	"Requestor already has support for obtaining the bindings. 
-	Adding both the requestor and the bindings creates two scopes
-	that are used for looking up variables."
-	"bindings: (workspace ifNil: [ Dictionary new ]);"
-	ast doSemanticAnalysis.
+	aText ifEmpty: [ ^ self ].
+	ast := classOrMetaClass compiler
+		source: aText asString;
+		noPattern: self isForWorkspace ;
+		options:  #(+ optionParseErrors + optionSkipSemanticWarnings);
+		requestor: workspace;
+		parse.				
 	self style: aText ast: ast.
 	^ aText
 ]
