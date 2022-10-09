@@ -821,13 +821,6 @@ BlRBTextStyler >> currentOpenedParenthesisStyleName [
 	^ (#leftParenthesis asString , parentheseLevel asString) asSymbol
 ]
 
-{ #category : #initialization }
-BlRBTextStyler >> installOn: aTarget [
-
-	self ensureAnnouncer.
-	self when: BlStylerStateChanged send: #stylerStateChanged to: aTarget
-]
-
 { #category : #accessing }
 BlRBTextStyler >> isForWorkspace [
 	^ isForWorkspace ifNil: [ workspace notNil ]

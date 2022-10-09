@@ -6,39 +6,54 @@ I launch text styling process either by scheduling a process (if the element is 
 Class {
 	#name : #BlTextStylerLauncher,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'monitor',
 		'isStylingRequested',
 		'backgroundProcess'
 	],
+	#classVars : [
+		'MinTextSizeForStylingInBackground'
+	],
 	#category : #'Bloc-Text-Text-Styler'
 }
 
-{ #category : #private }
-BlTextStylerLauncher >> doStyleInElement: anElement [
+{ #category : #accessing }
+BlTextStylerLauncher class >> minTextSizeForStylingInBackground [
+	^ MinTextSizeForStylingInBackground ifNil: [ MinTextSizeForStylingInBackground := 4000 ]
+]
 
-	"Style a given text in a provided element and evaluate a Block with the styled text
-	once completed. 
-	Return styled text"
+{ #category : #accessing }
+BlTextStylerLauncher class >> minTextSizeForStylingInBackground: anInteger [
+	MinTextSizeForStylingInBackground := anInteger
+]
 
-	| aStyledText |
-	aStyledText := anElement styler style: anElement textSnapshot nextGeneration.
-	
-	
-	"Dispatch the event in the UI thread"
-	anElement enqueueTask: (BlTaskAction new action: [ anElement styler announceTextStyled: aStyledText ])
+{ #category : #accessing }
+BlTextStylerLauncher class >> settingsOn: aBuilder [
+	<systemsettings>
+	(aBuilder setting: #minTextSizeForStylingInBackground)
+		target: self;
+		parent: #Bloc;
+		default: 4000;
+		description: 'Set the minimum text size imposed to allow background styling';
+		label: 'Min text size for background styling'
 ]
 
 { #category : #private }
-BlTextStylerLauncher >> enqueueStyleTextInElement: anElement [ 
+BlTextStylerLauncher >> doStyleText: aText withStyler: aStyler [
+
+	"Style a given text with the provided styler"
+
+	aStyler style: aText
+]
+
+{ #category : #private }
+BlTextStylerLauncher >> enqueueStyleText: aText withStyler: aStyler inElement: anElement [ 
 
 	monitor critical: [ 
 		isStylingRequested ifTrue: [ ^ self ].
 		isStylingRequested := true.
 		anElement enqueueTask: (BlTaskAction new action: [ 
-				 self doStyleInElement: anElement.
+				 self doStyleText: aText withStyler: aStyler.
 				 isStylingRequested := false ]) ]
 ]
 
@@ -50,24 +65,33 @@ BlTextStylerLauncher >> initialize [
 	isStylingRequested := false
 ]
 
+{ #category : #accessing }
+BlTextStylerLauncher >> minTextSizeForStylingInBackground [
+
+	^ self class minTextSizeForStylingInBackground
+]
+
 { #category : #private }
-BlTextStylerLauncher >> scheduleStyleTextInElement: anElement [
+BlTextStylerLauncher >> scheduleStyleText: aText withStyler: aStyler inElement: anElement [
 
 	self terminateBackgroundStylingProcess.
-	backgroundProcess := [ self doStyleInElement: anElement ]
+	backgroundProcess := [ self doStyleText: aText withStyler: aStyler]
 		                     forkAt: Processor userBackgroundPriority
 		                     named: 'Text Styler Task'
 ]
 
 { #category : #'public - styling' }
-BlTextStylerLauncher >> styleTextInElement: anElement [ 
+BlTextStylerLauncher >> styleText: aText withStyler: aStyler inElement: anElement [
 
-	" Take care to only schedule (with a fork) only if the editor is actually on the scene, otherwise, enqueue an editor task"
+	" Take care to schedule (with a fork) only if the editor is actually on the scene, otherwise, enqueue an editor task"
 
 	monitor critical: [ 
 		anElement isAttachedToSceneGraph
-			ifTrue: [ self scheduleStyleTextInElement: anElement ]
-			ifFalse: [ self enqueueStyleTextInElement: anElement ] ]
+			ifTrue: [ 
+				aText size > self minTextSizeForStylingInBackground
+					ifTrue: [ self scheduleStyleText: aText withStyler: aStyler inElement: anElement ]
+					ifFalse: [ self doStyleText: aText withStyler: aStyler ] ]
+			ifFalse: [ self enqueueStyleText: aText withStyler: aStyler inElement: anElement ] ]
 ]
 
 { #category : #private }
