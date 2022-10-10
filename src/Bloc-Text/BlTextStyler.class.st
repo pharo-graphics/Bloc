@@ -96,7 +96,7 @@ BlTextStyler >> style: aBlText [
 	| anUnstyledText aStyledText |
 	anUnstyledText := aBlText unstyle.
 	aStyledText := self privateStyle: anUnstyledText characters.
-		
+
 	self  announceTextStyled: aStyledText text.
 	^ aStyledText text
 ]

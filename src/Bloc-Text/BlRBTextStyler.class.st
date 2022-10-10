@@ -11,7 +11,8 @@ Class {
 		'bracketLevel',
 		'classOrMetaClass',
 		'isForWorkspace',
-		'workspace'
+		'workspace',
+		'fontName'
 	],
 	#classInstVars : [
 		'styleTable',
@@ -822,6 +823,20 @@ BlRBTextStyler >> currentOpenedParenthesisStyleName [
 ]
 
 { #category : #accessing }
+BlRBTextStyler >> fontName [
+
+	^ fontName
+]
+
+{ #category : #accessing }
+BlRBTextStyler >> fontName: aFontName [
+
+	fontName = aFontName ifTrue: [ ^ self ].
+	fontName := aFontName.
+	self announceStateChanged
+]
+
+{ #category : #accessing }
 BlRBTextStyler >> isForWorkspace [
 	^ isForWorkspace ifNil: [ workspace notNil ]
 ]
@@ -886,6 +901,7 @@ BlRBTextStyler >> privateStyle: aText [
 		requestor: workspace;
 		parse.				
 	self style: aText ast: ast.
+	fontName ifNotNil: [ aText fontName: fontName ].
 	^ aText
 ]
 
