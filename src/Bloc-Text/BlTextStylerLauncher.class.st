@@ -9,6 +9,7 @@ Class {
 	#instVars : [
 		'monitor',
 		'isStylingRequested',
+		'text',
 		'backgroundProcess'
 	],
 	#classVars : [
@@ -50,7 +51,8 @@ BlTextStylerLauncher >> doStyleText: aText withStyler: aStyler [
 BlTextStylerLauncher >> enqueueStyleText: aText withStyler: aStyler inElement: anElement [ 
 
 	monitor critical: [ 
-		isStylingRequested ifTrue: [ ^ self ].
+		(aText = text and: [ isStylingRequested ]) ifTrue: [ ^ self ].
+		text := aText.
 		isStylingRequested := true.
 		anElement enqueueTask: (BlTaskAction new action: [ 
 				 self doStyleText: aText withStyler: aStyler.
