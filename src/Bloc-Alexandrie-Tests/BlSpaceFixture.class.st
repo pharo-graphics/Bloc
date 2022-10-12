@@ -662,8 +662,6 @@ BlSpaceFixture >> buildTextAttributes [
 BlSpaceFixture >> buildTextEmoji [
 
 	| emojiString |
-	self ensureEmojiFontFace.
-
 	builder spaceExtent: 200 @ 80.
 
 	emojiString := WideString streamContents: [ :stream |
@@ -1327,18 +1325,6 @@ BlSpaceFixture >> diagonalPositionGeneratorStartingAt: aPoint by: by [
 BlSpaceFixture >> emojiFontFamilyName [
 
 	^ AeNotoColorEmojiDownloadedFont new familyName
-]
-
-{ #category : #private }
-BlSpaceFixture >> ensureEmojiFontFace [
-
-	self flag: #todo. "TODO shouldn't touch global manager"
-	"This ensures the emoji font in repo's tests directory is loaded."
-	(AeFontManager globalInstance includesFamilyName: self emojiFontFamilyName) ifFalse: [
-		AeNotoColorEmojiDownloadedFont new ensureDownloaded.
-		AeFontManager globalInstance scanDirectory: AeFilesystemResources fontsDirectory ].
-	
-
 ]
 
 { #category : #private }
