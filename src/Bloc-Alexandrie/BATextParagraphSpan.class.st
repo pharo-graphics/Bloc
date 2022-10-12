@@ -33,7 +33,7 @@ BATextParagraphSpan >> measureWith: aBATextMeasurer [
 
 	"build an abstract font and resolve not yet resolved properties"
 
-	| metrics canvas font usedSpan |
+	| metrics canvas font usedSpan fontSize face |
 	canvas := hostMeasurer canvas.
 
 	usedSpan := self span isTabulation
@@ -41,10 +41,17 @@ BATextParagraphSpan >> measureWith: aBATextMeasurer [
 		            ifFalse: [ self span ].
 
 	font := fontAndStyleBuilder font.
-	cairoScaledFont := canvas scaledFontForFace: font asAeFTFace size: font fontSize value.
-	cairoGlyphsArray := cairoScaledFont glyphArrayFor: usedSpan.
-	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
+	fontSize := font fontSize value.
+	face := font asAeFTFace.
+	cairoScaledFont := canvas scaledFontForFace: face size: fontSize.
 
+	"Without Harfbuzz:"
+	cairoGlyphsArray := cairoScaledFont glyphArrayFor: usedSpan.
+
+	"With Harfbuzz:"
+	"cairoGlyphsArray := AeHbBuffer defaultCairoGlyphArrayFor: usedSpan face: face size: fontSize."
+
+	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
 	baseline := 0 @ 0.
 	ascent := metrics ascent.
 	descent := metrics descent.
