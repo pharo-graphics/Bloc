@@ -33,17 +33,16 @@ BATextParagraphSpan >> measureWith: aBATextMeasurer [
 
 	"build an abstract font and resolve not yet resolved properties"
 
-	| utf8Encoded metrics canvas font usedSpan |
+	| metrics canvas font usedSpan |
 	canvas := hostMeasurer canvas.
 
 	usedSpan := self span isTabulation
 		            ifTrue: [ '' ]
 		            ifFalse: [ self span ].
-	utf8Encoded := usedSpan utf8Encoded.
 
 	font := fontAndStyleBuilder font.
 	cairoScaledFont := canvas scaledFontForFace: font asAeFTFace size: font fontSize value.
-	cairoGlyphsArray := cairoScaledFont glyphArrayFor: utf8Encoded length: utf8Encoded size.
+	cairoGlyphsArray := cairoScaledFont glyphArrayFor: usedSpan.
 	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
 
 	baseline := 0 @ 0.

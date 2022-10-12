@@ -22,11 +22,10 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 
 	" Draw each character one by one"
 	self span asString withIndexDo: [ :c :index | 
-		| metrics buffer bounds measuredWidth heightScale measuredHeight eachBaseline fixedBounds |
+		| metrics bounds measuredWidth heightScale measuredHeight eachBaseline fixedBounds |
 		eachBaseline := (self baseline + ((index - 1) * (characterWidth @ 0))) x @ 0.
-		buffer := c asString utf8Encoded.
 		"Get glyphs for the text"
-		cairoGlyphsArray := cairoScaledFont glyphArrayFor: buffer length: buffer size.
+		cairoGlyphsArray := cairoScaledFont glyphArrayFor: c asString.
 		metrics := aeCanvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
 		bounds := metrics bearingX @ metrics bearingY extent: metrics width @ metrics height.
 		measuredWidth := bounds width.
@@ -35,7 +34,6 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 		measuredHeight isZero ifTrue: [ measuredHeight := characterHeight ].
 		heightScale := characterHeight * 0.8 / measuredHeight.
 		fixedBounds := eachBaseline extent: characterWidth @ characterHeight.
-		cairoGlyphsArray := cairoScaledFont glyphArrayFor: buffer length: buffer size.
 		aeCanvas setSourceColor: (fontAndStyleBuilder hasCustomColor
 				 ifTrue: [ fontAndStyleBuilder color ]
 				 ifFalse: [ Color black ]).
@@ -65,19 +63,17 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 
 		"Draw the textOffset "
 		aeCanvas restoreContextAfter: [ 
-			| idxScaledFont idxBuffer idxGlyphsArray |
+			| idxScaledFont idxGlyphsArray |
 			aeCanvas setSourceColor: Color gray.
-			idxBuffer := (index + hostMeasurer textOffset - 1) asString.
 			idxScaledFont := aeCanvas
 				scaledFontForFace: aFace
 				size: characterHeight * 0.32.
-			idxGlyphsArray := idxScaledFont glyphArrayFor: idxBuffer length: idxBuffer size.
+			idxGlyphsArray := idxScaledFont glyphArrayFor: (index + hostMeasurer textOffset - 1) asString.
 			index = 1 ifTrue: [ 
 				aeCanvas restoreContextAfter: [ 
 					aeCanvas pathTranslate: eachBaseline x + 1 @ (self height - 1).
 					aeCanvas drawText: idxGlyphsArray font: idxScaledFont ] ].
-			idxBuffer := (index + hostMeasurer textOffset) asString.
-			idxGlyphsArray := idxScaledFont glyphArrayFor: idxBuffer length: idxBuffer size.
+			idxGlyphsArray := idxScaledFont glyphArrayFor: (index + hostMeasurer textOffset) asString.
 			aeCanvas restoreContextAfter: [ 
 				aeCanvas pathTranslate: eachBaseline x + characterWidth + 1 @ (self height - 1).
 				aeCanvas drawText: idxGlyphsArray font: idxScaledFont ] ] ].
