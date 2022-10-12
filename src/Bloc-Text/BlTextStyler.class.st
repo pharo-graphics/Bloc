@@ -20,10 +20,11 @@ Clients may subscribe to `BlStylerTextStyled` and `BlStylerStateChanged` with #w
 Class {
 	#name : #BlTextStyler,
 	#superclass : #Object,
+	#traits : 'TBlAnnounceable',
+	#classTraits : 'TBlAnnounceable classTrait',
 	#instVars : [
 		'text',
-		'launcher',
-		'announcer'
+		'launcher'
 	],
 	#category : #'Bloc-Text-Text-Styler'
 }
@@ -42,22 +43,9 @@ BlTextStyler >> announceTextStyled: aBlText [
 		anAnnouncer announce: (BlStylerTextStyled textStyled: aBlText)]
 ]
 
-{ #category : #notifying }
-BlTextStyler >> announcerDo: aBlockClosure [
-
-	"Evaluate a given block closure with an announcer as an argument if it is initialized"
-
-	announcer ifNotNil: aBlockClosure
-]
-
 { #category : #initialization }
 BlTextStyler >> defaultStylerLauncher [
 	^ BlTextStylerLauncher new
-]
-
-{ #category : #notifying }
-BlTextStyler >> ensureAnnouncer [
-	announcer ifNil: [ announcer := Announcer new ]
 ]
 
 { #category : #initialization }
@@ -79,7 +67,7 @@ BlTextStyler >> launcher [
 
 { #category : #copying }
 BlTextStyler >> postCopy [
-	announcer := nil
+	self resetAnnouncer
 ]
 
 { #category : #private }
@@ -99,16 +87,4 @@ BlTextStyler >> style: aBlText [
 
 	self  announceTextStyled: aStyledText text.
 	^ aStyledText text
-]
-
-{ #category : #'event management' }
-BlTextStyler >> when: anAnnouncementClass do: aValuable [
-	self ensureAnnouncer.
-	announcer when: anAnnouncementClass do: aValuable
-]
-
-{ #category : #'event management' }
-BlTextStyler >> when: anAnnouncementClass send: aSelector to: anObject [
-	self ensureAnnouncer.
-	announcer weak when: anAnnouncementClass send: aSelector to: anObject
 ]
