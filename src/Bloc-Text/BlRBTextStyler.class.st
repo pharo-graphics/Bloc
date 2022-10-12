@@ -1112,14 +1112,12 @@ aMethodNode comments do: [ :comment|
 ]
 
 { #category : #'visiting rb nodes' }
-BlRBTextStyler >> visitNode: aNode [ 
-	aNode comments do: [ :comment|
-		self 
-			addStyle: #comment
-			from: comment start
-			to: comment stop ].
+BlRBTextStyler >> visitNode: aNode [
 
-	^aNode acceptVisitor: self
+	aNode comments ifNotNil: [ 
+		aNode comments do: [ :comment | self addStyle: #comment from: comment start to: comment stop ] ].
+
+	^ aNode acceptVisitor: self
 ]
 
 { #category : #'visiting rb nodes' }

@@ -48,14 +48,15 @@ BlTextStylerLauncher >> doStyleText: aText withStyler: aStyler [
 ]
 
 { #category : #private }
-BlTextStylerLauncher >> enqueueStyleText: aText withStyler: aStyler inElement: anElement [ 
+BlTextStylerLauncher >> enqueueStyleText: aText withStyler: aStyler inElement: anElement [
 
 	monitor critical: [ 
+		aText ifEmpty: [ ^ self ].
 		(aText = text and: [ isStylingRequested ]) ifTrue: [ ^ self ].
 		text := aText.
 		isStylingRequested := true.
 		anElement enqueueTask: (BlTaskAction new action: [ 
-				 self doStyleText: aText withStyler: aStyler.
+				 self styleText: aText withStyler: aStyler inElement: anElement.
 				 isStylingRequested := false ]) ]
 ]
 
@@ -78,7 +79,7 @@ BlTextStylerLauncher >> scheduleStyleText: aText withStyler: aStyler inElement: 
 
 	self terminateBackgroundStylingProcess.
 	backgroundProcess := [ self doStyleText: aText withStyler: aStyler]
-		                     forkAt: Processor userBackgroundPriority
+		                     forkAt: Processor systemBackgroundPriority
 		                     named: 'Text Styler Task'
 ]
 
