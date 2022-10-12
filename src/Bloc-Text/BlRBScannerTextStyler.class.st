@@ -372,23 +372,22 @@ BlRBScannerTextStyler >> privateStyle: aText [
 ]
 
 { #category : #visiting }
-BlRBScannerTextStyler >> styleCloseOpenToken: aToken [
+BlRBScannerTextStyler >> styleCloseOpen: aSymbol token: aToken [
 
-	| v selector |
-	v := aToken value asSymbol.
-	v = #'[' ifTrue: [ 
+	| selector |
+	aSymbol = #'[' ifTrue: [ 
 		selector := #blockStart.
 		selector := selector , bracketLevel asString.
 		bracketLevel := bracketLevel + 1 ].
-	v = #']' ifTrue: [ 
+	aSymbol = #']' ifTrue: [ 
 		selector := #blockEnd.
 		bracketLevel := bracketLevel - 1.
 		selector := selector , bracketLevel asString ].
-	v = #'(' ifTrue: [ 
+	aSymbol = #'(' ifTrue: [ 
 		selector := #leftParenthesis.
 		selector := selector , parentheseLevel asString.
 		parentheseLevel := parentheseLevel + 1 ].
-	v = #')' ifTrue: [ 
+	aSymbol = #')' ifTrue: [ 
 		selector := 'rightParenthesis'.
 		parentheseLevel := parentheseLevel - 1.
 		selector := selector , parentheseLevel asString ].
@@ -462,7 +461,7 @@ BlRBScannerTextStyler >> visitKeywordToken: aToken [
 BlRBScannerTextStyler >> visitLiteralArrayToken: aToken [
 
 	self visitToken: aToken.
-	self addStyle: #literalArray forToken: aToken
+	^ self styleCloseOpen: #'(' token: aToken
 ]
 
 { #category : #visiting }
@@ -516,10 +515,10 @@ BlRBScannerTextStyler >> visitSpecialCharacterToken: aToken [
 	| v |
 	self visitToken: aToken.
 	v := aToken value asSymbol.
-	(#( #'(' #')' #'[' #']' ) includes: v) ifTrue: [ ^ self styleCloseOpenToken: aToken ].
+	(#( #'(' #')' #'[' #']' ) includes: v) ifTrue: [ ^ self styleCloseOpen: v token: aToken ].
 	(self hasAttributesFor: aToken value asSymbol)
 		ifTrue: [ self addStyle: aToken value asSymbol forToken: aToken ]
-		ifFalse: [ self addStyle: #default forToken: aToken ]
+		ifFalse: [ self addStyle: #literalArray forToken: aToken ]
 ]
 
 { #category : #visiting }
