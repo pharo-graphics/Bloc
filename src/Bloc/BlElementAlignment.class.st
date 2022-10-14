@@ -67,6 +67,11 @@ BlElementAlignment class >> left [
 ]
 
 { #category : #factory }
+BlElementAlignment class >> middle [
+	^ middle
+]
+
+{ #category : #factory }
 BlElementAlignment class >> null [
 	^ null
 ]
