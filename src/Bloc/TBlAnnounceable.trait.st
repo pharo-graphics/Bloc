@@ -5,9 +5,6 @@ I'm an utility Trait for objects that own an Announcer.
 "
 Trait {
 	#name : #TBlAnnounceable,
-	#instVars : [
-		'announcer'
-	],
 	#category : #'Bloc-Basic-Support'
 }
 
@@ -21,40 +18,40 @@ TBlAnnounceable >> announce: anAnnouncement [
 TBlAnnounceable >> announcerDo: aBlockClosure [
 
 	"Evaluate a given block closure with an announcer as an argument if it is initialized"
-
-	announcer ifNotNil: aBlockClosure
+	self privateAnnouncer ifNil: [ ^self ].
+	aBlockClosure value: self privateAnnouncer
 ]
 
 { #category : #'private - accessing' }
 TBlAnnounceable >> ensureAnnouncer [
-	announcer ifNil: [ announcer := Announcer new ]
+
+	self explicitRequirement 
 ]
 
 { #category : #'private - accessing' }
 TBlAnnounceable >> privateAnnouncer [
-	^ announcer
-]
 
-{ #category : #initialization }
-TBlAnnounceable >> resetAnnouncer [
-
-	announcer := nil
+	^ self explicitRequirement
 ]
 
 { #category : #'event management' }
 TBlAnnounceable >> unsubscribe: anObject [
+
 	"Unsubscribe all subscriptions of anObject from the receiver"
+
 	self announcerDo: [ :anAnnouncer | anAnnouncer unsubscribe: anObject ]
 ]
 
 { #category : #'event management' }
 TBlAnnounceable >> when: anAnnouncementClass do: aValuable [
+
 	self ensureAnnouncer.
-	announcer when: anAnnouncementClass do: aValuable
+	self privateAnnouncer when: anAnnouncementClass do: aValuable
 ]
 
 { #category : #'event management' }
 TBlAnnounceable >> when: anAnnouncementClass send: aSelector to: anObject [
+
 	self ensureAnnouncer.
-	announcer weak when: anAnnouncementClass send: aSelector to: anObject
+	self privateAnnouncer weak when: anAnnouncementClass send: aSelector to: anObject
 ]

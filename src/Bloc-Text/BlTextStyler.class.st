@@ -20,11 +20,12 @@ Clients may subscribe to `BlStylerTextStyled` and `BlStylerStateChanged` with #w
 Class {
 	#name : #BlTextStyler,
 	#superclass : #Object,
-	#traits : 'TBlAnnounceable',
-	#classTraits : 'TBlAnnounceable classTrait',
+	#traits : 'TBlAnnouncerProvider',
+	#classTraits : 'TBlAnnouncerProvider classTrait',
 	#instVars : [
 		'text',
-		'launcher'
+		'launcher',
+		'originalText'
 	],
 	#category : #'Bloc-Text-Text-Styler'
 }
@@ -39,7 +40,8 @@ BlTextStyler >> announceStateChanged [
 { #category : #accessing }
 BlTextStyler >> announceTextStyled: aBlText [
 
-	self announce: (BlStylerTextStyled styledText: aBlText)
+	self announce: (BlStylerTextStyled styledText: aBlText).
+	originalText := nil
 ]
 
 { #category : #initialization }
@@ -53,10 +55,11 @@ BlTextStyler >> initialize [
 	launcher := self defaultStylerLauncher
 ]
 
-{ #category : #'api - styling' }
+{ #category : #'api - text style' }
 BlTextStyler >> launchStyle: aBlText in: anElement [
 
-	launcher styleText: aBlText withStyler: self inElement: anElement
+	originalText := aBlText.
+	^ self launcher styleText: aBlText nextGeneration withStyler: self inElement: anElement
 ]
 
 { #category : #accessing }
@@ -83,7 +86,7 @@ BlTextStyler >> style: aBlText [
 	| anUnstyledText aStyledText |
 	anUnstyledText := aBlText unstyle.
 	aStyledText := self privateStyle: anUnstyledText characters.
-
-	self  announceTextStyled: aStyledText text.
+	(originalText notNil and: [ aStyledText text isNextGenerationOf: originalText ]) ifTrue: [ 
+		self announceTextStyled: aStyledText text ].
 	^ aStyledText text
 ]
