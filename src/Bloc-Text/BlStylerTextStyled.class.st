@@ -2,25 +2,25 @@ Class {
 	#name : #BlStylerTextStyled,
 	#superclass : #Announcement,
 	#instVars : [
-		'textStyled'
+		'styledText'
 	],
 	#category : #'Bloc-Text-Text-Styler'
 }
 
 { #category : #'text - styling' }
-BlStylerTextStyled class >> textStyled: aBlText [
+BlStylerTextStyled class >> styledText: aBlText [
 
-	^ self new textStyled: aBlText
+	^ self new styledText: aBlText
 ]
 
 { #category : #accessing }
-BlStylerTextStyled >> textStyled [
+BlStylerTextStyled >> styledText [
 
-	^ textStyled
+	^ styledText
 ]
 
 { #category : #accessing }
-BlStylerTextStyled >> textStyled: aBlText [
+BlStylerTextStyled >> styledText: aBlText [
 
-	textStyled := aBlText
+	styledText := aBlText
 ]

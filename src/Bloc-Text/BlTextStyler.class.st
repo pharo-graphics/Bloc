@@ -39,8 +39,7 @@ BlTextStyler >> announceStateChanged [
 { #category : #accessing }
 BlTextStyler >> announceTextStyled: aBlText [
 
-	self announcerDo: [ :anAnnouncer | 
-		anAnnouncer announce: (BlStylerTextStyled textStyled: aBlText)]
+	self announce: (BlStylerTextStyled styledText: aBlText)
 ]
 
 { #category : #initialization }
