@@ -1,19 +1,19 @@
 Class {
-	#name : #FensterWrongScaleFactor,
-	#superclass : #FensterError,
+	#name : #BlWrongScaleFactor,
+	#superclass : #Error,
 	#instVars : [
 		'scaleFactor'
 	],
-	#category : #'Fenster-Errors'
+	#category : #'Bloc-Display-Errors'
 }
 
 { #category : #'instance creation' }
-FensterWrongScaleFactor class >> scaleFactor: aNumber [
+BlWrongScaleFactor class >> scaleFactor: aNumber [
 	^ self new scaleFactor: aNumber
 ]
 
 { #category : #accessing }
-FensterWrongScaleFactor >> description [
+BlWrongScaleFactor >> description [
 
 	^ 'Wrong scale factor',  (scaleFactor
 		ifNotNil: [ ' ({1})' format: { scaleFactor } ]
@@ -21,6 +21,6 @@ FensterWrongScaleFactor >> description [
 ]
 
 { #category : #accessing }
-FensterWrongScaleFactor >> scaleFactor: aNumber [
+BlWrongScaleFactor >> scaleFactor: aNumber [
 	scaleFactor := aNumber
 ]

@@ -7,28 +7,31 @@ There are two types of position:
 	* physical position - defined in physical pixels
 "
 Class {
-	#name : #FensterPosition,
+	#name : #BlDisplayPosition,
 	#superclass : #Object,
 	#instVars : [
 		'x',
 		'y'
 	],
-	#category : #'Fenster-Geometry'
+	#category : #'Bloc-Display-Geometry'
 }
 
 { #category : #'instance creation' }
-FensterPosition class >> fromPoint: aPoint [
+BlDisplayPosition class >> fromPoint: aPoint [
+
 	^ self x: aPoint x y: aPoint y
 ]
 
 { #category : #'instance creation' }
-FensterPosition class >> x: aX y: aY [
-	^ self new initializeX: aX Y: aY
+BlDisplayPosition class >> x: aX y: aY [
+
+	^ self new
+		  initializeX: aX Y: aY;
+		  yourself
 ]
 
 { #category : #'api - arithmetic' }
-FensterPosition >> + aGtFensterPosition [
-	<return: #FensterPosition>
+BlDisplayPosition >> + aGtFensterPosition [
 
 	^ self class
 		x: self x + aGtFensterPosition x
@@ -36,8 +39,7 @@ FensterPosition >> + aGtFensterPosition [
 ]
 
 { #category : #'api - arithmetic' }
-FensterPosition >> - aGtFensterPosition [
-	<return: #FensterPosition>
+BlDisplayPosition >> - aGtFensterPosition [
 
 	^ self class
 		x: self x - aGtFensterPosition x
@@ -45,7 +47,7 @@ FensterPosition >> - aGtFensterPosition [
 ]
 
 { #category : #comparing }
-FensterPosition >> = anObject [
+BlDisplayPosition >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
 	self == anObject
@@ -56,56 +58,55 @@ FensterPosition >> = anObject [
 ]
 
 { #category : #'api - converting' }
-FensterPosition >> asLogical: aScaleFactor [
-	<return: #FensterLogicalPosition>
+BlDisplayPosition >> asLogical: aScaleFactor [
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'api - converting' }
-FensterPosition >> asPhysical: aScaleFactor [
-	<return: #FensterPhysicalPosition>
+BlDisplayPosition >> asPhysical: aScaleFactor [
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'api - converting' }
-FensterPosition >> asPoint [
-	<return: #Point>
+BlDisplayPosition >> asPoint [
 
 	^ self x @ self y
 ]
 
 { #category : #comparing }
-FensterPosition >> hash [
+BlDisplayPosition >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ y hash bitXor: x hash
 ]
 
 { #category : #initialization }
-FensterPosition >> initialize [
+BlDisplayPosition >> initialize [
+
 	super initialize.
-	
+
 	x := 0.
 	y := 0
 ]
 
 { #category : #initialization }
-FensterPosition >> initializeX: aX Y: aY [
+BlDisplayPosition >> initializeX: aX Y: aY [
+
 	x := aX.
 	y := aY
 ]
 
 { #category : #testing }
-FensterPosition >> isZero [
-	<return: #Boolean>
+BlDisplayPosition >> isZero [
 	
 	^ self x isZero or: [ self y isZero ]
 ]
 
 { #category : #printing }
-FensterPosition >> printOn: aStream [
+BlDisplayPosition >> printOn: aStream [
+
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: ' { x: ';
@@ -116,22 +117,19 @@ FensterPosition >> printOn: aStream [
 ]
 
 { #category : #'truncation and round off' }
-FensterPosition >> rounded [
-	^ self class
-		x: self x floor
-		y: self y floor
+BlDisplayPosition >> rounded [
+
+	^ self class x: self x floor y: self y floor
 ]
 
 { #category : #accessing }
-FensterPosition >> x [
-	<return: #Number>
+BlDisplayPosition >> x [
 
 	^ x
 ]
 
 { #category : #accessing }
-FensterPosition >> y [
-	<return: #Number>
+BlDisplayPosition >> y [
 
 	^ y
 ]

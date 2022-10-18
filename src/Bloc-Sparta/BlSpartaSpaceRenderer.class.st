@@ -34,7 +34,6 @@ BlSpartaSpaceRenderer >> isValid [
 
 { #category : #accessing }
 BlSpartaSpaceRenderer >> physicalSize [
-	<return: #FensterPhysicalSize>
 
 	^ physicalSize
 ]

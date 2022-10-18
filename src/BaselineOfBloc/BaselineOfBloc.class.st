@@ -20,15 +20,15 @@ BaselineOfBloc >> baseline: spec [
 		for: #common
 		do: [
 
-			"Fenster"
+			"Bloc-Display"
 			spec
-				package: 'Fenster';
-				package: 'Fenster-Tests' with: [ spec requires: #(Fenster) ].
+				package: 'Bloc-Display';
+				package: 'Bloc-Display-Tests' with: [ spec requires: #('Bloc-Display') ].
 
 			"Core"
 			spec 
 				package: #Bloc with: [
-					spec requires: #(#Fenster) ];
+					spec requires: #('Bloc-Display') ];
 				package: #'BlocHost-Mock' with: [
 					spec requires: #(#Bloc) ];
 				package: #'Bloc-Tests' with: [
@@ -42,12 +42,12 @@ BaselineOfBloc >> baseline: spec [
 			"Morphic host"
 			spec 
 				package: #'BlocHost-Morphic' with: [
-					spec requires: #('Bloc' 'Fenster') ] .
+					spec requires: #('Bloc') ] .
 
 			"OSWindow host"
 			spec
 				package: #'BlocHost-OSWindow' with: [
-					spec requires: #('Bloc' 'Fenster'). ];
+					spec requires: #('Bloc'). ];
 				package: #'BlocHost-OSWindow-SDL2' with: [
 					spec requires: #('BlocHost-OSWindow'). ].
 

@@ -1,25 +1,29 @@
 Class {
-	#name : #FensterSize,
+	#name : #BlDisplaySize,
 	#superclass : #Object,
 	#instVars : [
 		'width',
 		'height'
 	],
-	#category : #'Fenster-Geometry'
+	#category : #'Bloc-Display-Geometry'
 }
 
 { #category : #'instance creation' }
-FensterSize class >> fromPoint: aPoint [
+BlDisplaySize class >> fromPoint: aPoint [
+
 	^ self width: aPoint x height: aPoint y
 ]
 
 { #category : #'instance creation' }
-FensterSize class >> width: aWidth height: aHeight [
-	^ self new initializeWidth: aWidth height: aHeight
+BlDisplaySize class >> width: aWidth height: aHeight [
+
+	^ self new
+		  initializeWidth: aWidth height: aHeight;
+		  yourself
 ]
 
 { #category : #comparing }
-FensterSize >> = anObject [
+BlDisplaySize >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
 	self == anObject
@@ -30,63 +34,61 @@ FensterSize >> = anObject [
 ]
 
 { #category : #'api - converting' }
-FensterSize >> asLogical: aScaleFactor [
-	<return: #FensterLogicalSize>
+BlDisplaySize >> asLogical: aScaleFactor [
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'api - converting' }
-FensterSize >> asPhysical: aScaleFactor [
-	<return: #FensterPhysicalSize>
+BlDisplaySize >> asPhysical: aScaleFactor [
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'api - converting' }
-FensterSize >> asPoint [
-	<return: #Point>
+BlDisplaySize >> asPoint [
 
 	^ self width @ self height
 ]
 
 { #category : #comparing }
-FensterSize >> hash [
+BlDisplaySize >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ height hash bitXor: width hash
 ]
 
 { #category : #accessing }
-FensterSize >> height [
-	<return: #Number>
+BlDisplaySize >> height [
 
 	^ height
 ]
 
 { #category : #initialization }
-FensterSize >> initialize [
+BlDisplaySize >> initialize [
+
 	super initialize.
-	
+
 	width := 0.
 	height := 0
 ]
 
 { #category : #initialization }
-FensterSize >> initializeWidth: aWidth height: aHeight [
+BlDisplaySize >> initializeWidth: aWidth height: aHeight [
+
 	width := aWidth.
 	height := aHeight
 ]
 
 { #category : #testing }
-FensterSize >> isZero [
-	<return: #Boolean>
+BlDisplaySize >> isZero [
 	
 	^ self width isZero or: [ self height isZero ]
 ]
 
 { #category : #printing }
-FensterSize >> printOn: aStream [
+BlDisplaySize >> printOn: aStream [
+
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: ' { width: ';
@@ -97,8 +99,7 @@ FensterSize >> printOn: aStream [
 ]
 
 { #category : #accessing }
-FensterSize >> width [
-	<return: #Number>
+BlDisplaySize >> width [
 
 	^ width
 ]
