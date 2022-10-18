@@ -452,6 +452,13 @@ BlText >> insertText: aString at: anIndex [
 	^ self subclassResponsibility
 ]
 
+{ #category : #copying }
+BlText >> internalRepresentation [
+
+	" gives direct acces to how the text is privately represented - to be used with caution for optimization purpose"
+	^ self subclassResponsibility 
+]
+
 { #category : #'text - testing' }
 BlText >> isEmpty [
 	"Return true if this text is empty, false otherwise.
@@ -666,6 +673,13 @@ BlText >> suspendAnnouncementsWhile: aBlock [
 	announcer
 		ifNil: aBlock
 		ifNotNil: [ :anAnnouncer | anAnnouncer suspendAllWhile: aBlock ]
+]
+
+{ #category : #copying }
+BlText >> takeInternalRepresentationOf: anotherText [
+
+	" To be used with caution because the receiver and the argument text must have the same internal representation"
+	self subclassResponsibility 
 ]
 
 { #category : #'text - accessing' }

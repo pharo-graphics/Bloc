@@ -277,6 +277,12 @@ BlRopedText >> insertText: aBlText at: anIndex [
 		requested: { anIndex }
 ]
 
+{ #category : #copying }
+BlRopedText >> internalRepresentation [
+
+	^ self rope
+]
+
 { #category : #'text - testing' }
 BlRopedText >> isEmpty [
 	<return: #Boolean>
@@ -387,6 +393,13 @@ BlRopedText >> storeOn: aStream [
 			aStream cr; nextPut: $} ].
 		aStream nextPut: $)
 	]
+]
+
+{ #category : #copying }
+BlRopedText >> takeInternalRepresentationOf: anotherText [
+
+" To be used with caution because the receiver and the argument text must have the same internal representation - another text must be a kind of roped text "
+	self rope: anotherText internalRepresentation
 ]
 
 { #category : #'text - attributes' }

@@ -111,6 +111,13 @@ BlWrappedText >> generation [
 	^ self text generation
 ]
 
+{ #category : #copying }
+BlWrappedText >> internalRepresentation [
+
+	^ self text internalRepresentation
+
+]
+
 { #category : #'text - testing' }
 BlWrappedText >> isEmpty [
 	
@@ -143,6 +150,12 @@ BlWrappedText >> size [
 BlWrappedText >> suspendAnnouncementsWhile: aBlock [
 	super suspendAnnouncementsWhile: [
 		self text suspendAnnouncementsWhile: aBlock ]
+]
+
+{ #category : #copying }
+BlWrappedText >> takeInternalRepresentationOf: anotherText [
+
+	self text takeInternalRepresentationOf: anotherText
 ]
 
 { #category : #accessing }

@@ -24,8 +24,7 @@ Class {
 	#classTraits : 'TBlAnnouncerProvider classTrait',
 	#instVars : [
 		'text',
-		'launcher',
-		'originalText'
+		'launcher'
 	],
 	#category : #'Bloc-Text-Text-Styler'
 }
@@ -40,8 +39,7 @@ BlTextStyler >> announceStateChanged [
 { #category : #accessing }
 BlTextStyler >> announceTextStyled: aBlText [
 
-	self announce: (BlStylerTextStyled styledText: aBlText).
-	originalText := nil
+	self announce: (BlStylerTextStyled styledText: aBlText)
 ]
 
 { #category : #initialization }
@@ -58,8 +56,7 @@ BlTextStyler >> initialize [
 { #category : #'api - text style' }
 BlTextStyler >> launchStyle: aBlText in: anElement [
 
-	originalText := aBlText.
-	^ self launcher styleText: aBlText nextGeneration withStyler: self inElement: anElement
+	^ self launcher styleText: aBlText withStyler: self inElement: anElement
 ]
 
 { #category : #accessing }
@@ -79,14 +76,14 @@ BlTextStyler >> privateStyle: aText [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - styling' }
+{ #category : #styling }
 BlTextStyler >> style: aBlText [
 
 	<return: #BlText>
 	| anUnstyledText aStyledText |
-	anUnstyledText := aBlText unstyle.
-	aStyledText := self privateStyle: anUnstyledText characters.
-	(originalText notNil and: [ aStyledText text isNextGenerationOf: originalText ]) ifTrue: [ 
-		self announceTextStyled: aStyledText text ].
-	^ aStyledText text
+	" it is important style a copy because of the BlText announcer. In the copied BlText, the announcer will not be initialize and no announcement will be sent "
+	anUnstyledText := aBlText copy unstyle.
+	aStyledText := self privateStyle: anUnstyledText.
+	self announceTextStyled: aStyledText.
+	^ aStyledText
 ]
