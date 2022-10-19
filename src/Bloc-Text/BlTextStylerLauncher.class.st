@@ -57,13 +57,19 @@ BlTextStylerLauncher >> doStyleText: aText withStyler: aStyler [
 BlTextStylerLauncher >> enqueueStyleText: aText withStyler: aStyler inElement: anElement [
 
 	monitor critical: [ 
+		| todo |
 		aText ifEmpty: [ ^ self ].
 		(aText = text and: [ isStylingRequested ]) ifTrue: [ ^ self ].
 		text := aText.
 		isStylingRequested := true.
-		backgroundProcess := self newProcessForStyling: aText withStyler: aStyler.
+		todo := aText size > self minTextSizeForStylingInBackground
+			ifTrue: [ 
+				backgroundProcess := self newProcessForStyling: aText withStyler: aStyler.
+				[ self backgroundProcess ifNotNil: [ :bp | bp resume ] ] ]
+			ifFalse: [ [ self doStyleText: aText withStyler: aStyler ] ].
+
 		anElement enqueueTask: (BlTaskAction new action: [ 
-				 self backgroundProcess ifNotNil: [ :bp | bp resume ].
+				 todo value.
 				 isStylingRequested := false ]) ]
 ]
 

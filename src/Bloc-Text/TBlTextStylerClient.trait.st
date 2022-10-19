@@ -65,6 +65,7 @@ TBlTextStylerClient >> stylerDo: aBlock [
 
 { #category : #'api - styler accessing' }
 TBlTextStylerClient >> terminateStyler [
+
 	self stylerDo: [ :st | st launcher terminateBackgroundStylingProcess ]
 ]
 
