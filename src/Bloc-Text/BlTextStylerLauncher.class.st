@@ -75,7 +75,7 @@ BlTextStylerLauncher >> minTextSizeForStylingInBackground [
 ]
 
 { #category : #private }
-BlTextStylerLauncher >> scheduleStyleText: aText withStyler: aStyler inElement: anElement [
+BlTextStylerLauncher >> scheduleStyleText: aText withStyler: aStyler [ 
 
 	self terminateBackgroundStylingProcess.
 	backgroundProcess := [ self doStyleText: aText withStyler: aStyler]
@@ -89,12 +89,18 @@ BlTextStylerLauncher >> styleText: aText withStyler: aStyler inElement: anElemen
 	" Take care to schedule (with a fork) only if the editor is actually on the scene, otherwise, enqueue an editor task"
 
 	monitor critical: [ 
-		anElement isAttachedToSceneGraph
-			ifTrue: [ 
+		anElement
+			ifNotNil: [ 
+				anElement isAttachedToSceneGraph
+					ifTrue: [ 
+						aText size > self minTextSizeForStylingInBackground
+							ifTrue: [ self scheduleStyleText: aText withStyler: aStyler ]
+							ifFalse: [ self doStyleText: aText withStyler: aStyler ] ]
+					ifFalse: [ self enqueueStyleText: aText withStyler: aStyler inElement: anElement ] ]
+			ifNil: [ 
 				aText size > self minTextSizeForStylingInBackground
-					ifTrue: [ self scheduleStyleText: aText withStyler: aStyler inElement: anElement ]
-					ifFalse: [ self doStyleText: aText withStyler: aStyler ] ]
-			ifFalse: [ self enqueueStyleText: aText withStyler: aStyler inElement: anElement ] ]
+					ifTrue: [ self scheduleStyleText: aText withStyler: aStyler ]
+					ifFalse: [ self doStyleText: aText withStyler: aStyler ] ] ]
 ]
 
 { #category : #private }
