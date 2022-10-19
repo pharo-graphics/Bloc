@@ -39,6 +39,12 @@ BlTextStylerLauncher class >> settingsOn: aBuilder [
 		label: 'Min text size for background styling'
 ]
 
+{ #category : #accessing }
+BlTextStylerLauncher >> backgroundProcess [ 
+
+	^ backgroundProcess 
+]
+
 { #category : #private }
 BlTextStylerLauncher >> doStyleText: aText withStyler: aStyler [
 
@@ -55,8 +61,9 @@ BlTextStylerLauncher >> enqueueStyleText: aText withStyler: aStyler inElement: a
 		(aText = text and: [ isStylingRequested ]) ifTrue: [ ^ self ].
 		text := aText.
 		isStylingRequested := true.
+		backgroundProcess := self newProcessForStyling: aText withStyler: aStyler.
 		anElement enqueueTask: (BlTaskAction new action: [ 
-				 self styleText: aText withStyler: aStyler inElement: anElement.
+				 self backgroundProcess ifNotNil: [ :bp | bp resume ].
 				 isStylingRequested := false ]) ]
 ]
 
@@ -75,12 +82,21 @@ BlTextStylerLauncher >> minTextSizeForStylingInBackground [
 ]
 
 { #category : #private }
+BlTextStylerLauncher >> newProcessForStyling: aText withStyler: aStyler [
+
+	| process |
+	process := [ self doStyleText: aText withStyler: aStyler] newProcess.
+	process priority: Processor userBackgroundPriority.
+	process name: 'Text Styler Task'.
+	^ process
+]
+
+{ #category : #private }
 BlTextStylerLauncher >> scheduleStyleText: aText withStyler: aStyler [ 
 
 	self terminateBackgroundStylingProcess.
-	backgroundProcess := [ self doStyleText: aText withStyler: aStyler]
-		                     forkAt: Processor systemBackgroundPriority
-		                     named: 'Text Styler Task'
+	backgroundProcess := self newProcessForStyling: aText withStyler: aStyler.
+	backgroundProcess resume
 ]
 
 { #category : #'public - styling' }

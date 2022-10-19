@@ -24,6 +24,14 @@ TBlTextStylerClient >> launchStyle: aBlText in: anElement [
 	self styler launchStyle: aBlText in: anElement
 ]
 
+{ #category : #'api - styler accessing' }
+TBlTextStylerClient >> releaseStyler [
+
+	self stylerDo: [ :st | 
+		self terminateStyler.
+		self styler unsubscribe: self ]
+]
+
 { #category : #'api - styler hook' }
 TBlTextStylerClient >> requestTextStyle [
 
@@ -40,7 +48,7 @@ TBlTextStylerClient >> styler [
 TBlTextStylerClient >> styler: aStyler [
 
 	styler = aStyler ifTrue: [ ^ self ].
-	self styler ifNotNil: [ self styler unsubscribe: self ].
+	self releaseStyler.
 	styler := aStyler.
 	self styler ifNotNil: [ 
 		self styler when: BlStylerTextStyled send: #whenTextStyled: to: self.
@@ -53,6 +61,11 @@ TBlTextStylerClient >> styler: aStyler [
 TBlTextStylerClient >> stylerDo: aBlock [
 
 	styler ifNotNil: aBlock
+]
+
+{ #category : #'api - styler accessing' }
+TBlTextStylerClient >> terminateStyler [
+	self stylerDo: [ :st | st launcher terminateBackgroundStylingProcess ]
 ]
 
 { #category : #'api - styler hook' }
