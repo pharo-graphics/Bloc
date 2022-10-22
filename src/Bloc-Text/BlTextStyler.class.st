@@ -29,14 +29,14 @@ Class {
 	#category : #'Bloc-Text-Text-Styler'
 }
 
-{ #category : #accessing }
+{ #category : #'api - text style' }
 BlTextStyler >> announceStateChanged [
 
 	self announcerDo: [ :anAnnouncer | 
 		anAnnouncer announce: BlStylerStateChanged ]
 ]
 
-{ #category : #accessing }
+{ #category : #'api - text style' }
 BlTextStyler >> announceTextStyled: aBlText [
 
 	self announce: (BlStylerTextStyled styledText: aBlText)
@@ -47,10 +47,15 @@ BlTextStyler >> defaultStylerLauncher [
 	^ BlTextStylerLauncher new
 ]
 
+{ #category : #accessing }
+BlTextStyler >> fontName: aFontName [
+]
+
 { #category : #initialization }
 BlTextStyler >> initialize [
 	super initialize.
-	launcher := self defaultStylerLauncher
+	launcher := self defaultStylerLauncher.
+	self when: BlStylerTextStyleRequested send: #whenTextStyleRequested: to: self.
 ]
 
 { #category : #'api - text style' }
@@ -86,4 +91,14 @@ BlTextStyler >> style: aBlText [
 	aStyledText := self privateStyle: anUnstyledText.
 	self announceTextStyled: aStyledText.
 	^ aStyledText
+]
+
+{ #category : #'api - text style' }
+BlTextStyler >> whenTextStyleRequested: aBlStylerTextStyleRequested [
+
+	" a client request text styling "
+	^ self launcher
+		  styleText: aBlStylerTextStyleRequested unstyledText
+		  withStyler: self
+		  inElement: aBlStylerTextStyleRequested referentElement
 ]
