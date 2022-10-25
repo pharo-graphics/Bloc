@@ -103,6 +103,7 @@ BlMorphicEventHandler >> enqueue: aBlEvent [
 
 	self window hostSpace enqueueEvent: aBlEvent.
 	self flag: 'ugly code to force the space to dequeue the event '.
+	self window ifNil: [ ^ self ].
 	self window hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
 ]
 

@@ -891,17 +891,83 @@ BlRBTextStyler >> methodOrBlockTempStyleFor: aTemporaryNode [
 ]
 
 { #category : #private }
+BlRBTextStyler >> parse: aText isMethod: isMethod [
+	|root aString |
+	
+	aString := aText asString.
+	
+	isMethod 
+		ifTrue: [
+			[root := RBParser parseFaultyMethod: aString.
+			root methodNode methodClass: classOrMetaClass.
+			^root] 
+				on: Error 
+				do: [^RBParser parseFaultyExpression: aString ]]
+		ifFalse:[ ^RBParser parseFaultyExpression: aString ].
+]
+
+{ #category : #private }
 BlRBTextStyler >> privateStyle: aText [
 
 	| ast |
-	ast := classOrMetaClass compiler
-		source: aText asString;
-		noPattern: self isForWorkspace ;
-		options:  #(+ optionParseErrors + optionSkipSemanticWarnings);
-		requestor: workspace;
-		parse.				
+	ast := self parse: aText isMethod: self isForWorkspace not.
+	ast methodNode compilationContext: (CompilationContext new
+			 class: (classOrMetaClass ifNil: [ UndefinedObject ]);
+			 requestor: workspace).
+	"Requestor already has support for obtaining the bindings. 
+				Adding both the requestor and the bindings creates two scopes
+				that are used for looking up variables."
+	"bindings: (workspace ifNil: [ Dictionary new ]);"
+	ast doSemanticAnalysis.
+
+	fontName ifNotNil: [ aText fontName: fontName ].
+	self style: aText ast: ast.
+	^ aText
+]
+
+{ #category : #private }
+BlRBTextStyler >> privateStyle_my: aText [
+
+	| ast compiler |
+	compiler := self isForWorkspace
+		            ifTrue: [ 
+			            OpalCompiler new
+				            context: thisContext;
+				            yourself ]
+		            ifFalse: [ classOrMetaClass compiler ].
+	ast := compiler
+		       source: aText asString;
+		       noPattern: self isForWorkspace;
+		       options:
+			       #( + optionParseErrors + optionSkipSemanticWarnings );
+		       requestor: workspace;
+		       bindings: (workspace
+				        ifNotNil: [ workspace bindings ]
+				        ifNil: [ SystemDictionary new ]);
+		       parse.
+	ast class traceCr.
 	self style: aText ast: ast.
 	fontName ifNotNil: [ aText fontName: fontName ].
+	^ aText
+]
+
+{ #category : #private }
+BlRBTextStyler >> privateStyle_orig: aText [
+
+	| ast |
+	ast := self parse: aText isMethod: self isForWorkspace not.
+	ast methodNode compilationContext: (CompilationContext new
+			 class: (classOrMetaClass ifNil: [ UndefinedObject ]);
+			 requestor: workspace).
+	"Requestor already has support for obtaining the bindings. 
+				Adding both the requestor and the bindings creates two scopes
+				that are used for looking up variables."
+	"bindings: (workspace ifNil: [ Dictionary new ]);"
+	ast class traceCr.
+	ast doSemanticAnalysis.
+
+	fontName ifNotNil: [ aText fontName: fontName ].
+	self style: aText ast: ast.
 	^ aText
 ]
 
@@ -1103,7 +1169,7 @@ aMethodNode comments do: [ :comment|
 			self 
 				addStyle: #patternKeyword
 				from: position
-				to: position + keyword size - 1 ] ].
+				to: ((position + keyword size - 1) min: text size) ] ].
 	
 	aMethodNode pragmas
 		do: [ :each | self visitNode: each ].
