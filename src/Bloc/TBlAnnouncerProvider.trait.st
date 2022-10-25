@@ -1,7 +1,10 @@
+"
+I provide an announcer with necessary methods 
+"
 Trait {
 	#name : #TBlAnnouncerProvider,
 	#instVars : [
-		'announcer'
+		'privateAnnouncer'
 	],
 	#traits : 'TBlAnnounceable',
 	#classTraits : 'TBlAnnounceable classTrait',
@@ -11,17 +14,17 @@ Trait {
 { #category : #'private - accessing' }
 TBlAnnouncerProvider >> ensureAnnouncer [
 
-	announcer ifNil: [ announcer := Announcer new ]
+	privateAnnouncer ifNil: [ privateAnnouncer := Announcer new ]
 ]
 
 { #category : #'private - accessing' }
 TBlAnnouncerProvider >> privateAnnouncer [
 
-	^ announcer
+	^ privateAnnouncer
 ]
 
 { #category : #'private - accessing' }
 TBlAnnouncerProvider >> resetAnnouncer [
 
-	announcer := nil 
+	privateAnnouncer := nil 
 ]

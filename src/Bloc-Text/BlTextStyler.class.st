@@ -55,7 +55,7 @@ BlTextStyler >> fontName: aFontName [
 BlTextStyler >> initialize [
 	super initialize.
 	launcher := self defaultStylerLauncher.
-	self announcerWhen: BlStylerTextStyleRequested send: #whenTextStyleRequested: to: self.
+	self whenAnnouncement: BlStylerTextStyleRequested send: #whenTextStyleRequested: to: self.
 ]
 
 { #category : #'api - text style' }

@@ -22,20 +22,6 @@ TBlAnnounceable >> announcerDo: aBlockClosure [
 	aBlockClosure value: self privateAnnouncer
 ]
 
-{ #category : #'event management' }
-TBlAnnounceable >> announcerWhen: anAnnouncementClass do: aValuable [
-
-	self ensureAnnouncer.
-	self privateAnnouncer when: anAnnouncementClass do: aValuable
-]
-
-{ #category : #'event management' }
-TBlAnnounceable >> announcerWhen: anAnnouncementClass send: aSelector to: anObject [
-
-	self ensureAnnouncer.
-	self privateAnnouncer weak when: anAnnouncementClass send: aSelector to: anObject
-]
-
 { #category : #'private - accessing' }
 TBlAnnounceable >> ensureAnnouncer [
 
@@ -54,4 +40,18 @@ TBlAnnounceable >> unsubscribe: anObject [
 	"Unsubscribe all subscriptions of anObject from the receiver"
 
 	self announcerDo: [ :anAnnouncer | anAnnouncer unsubscribe: anObject ]
+]
+
+{ #category : #'event management' }
+TBlAnnounceable >> whenAnnouncement: anAnnouncementClass do: aValuable [
+
+	self ensureAnnouncer.
+	self privateAnnouncer when: anAnnouncementClass do: aValuable
+]
+
+{ #category : #'event management' }
+TBlAnnounceable >> whenAnnouncement: anAnnouncementClass send: aSelector to: anObject [
+
+	self ensureAnnouncer.
+	self privateAnnouncer weak when: anAnnouncementClass send: aSelector to: anObject
 ]
