@@ -25,7 +25,7 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 		| metrics bounds measuredWidth heightScale measuredHeight eachBaseline fixedBounds |
 		eachBaseline := (self baseline + ((index - 1) * (characterWidth @ 0))) x @ 0.
 		"Get glyphs for the text"
-		cairoGlyphsArray := cairoScaledFont glyphArrayFor: c asString.
+		cairoGlyphsArray := cairoScaledFont glyphArrayForString: c asString.
 		metrics := aeCanvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
 		bounds := metrics bearingX @ metrics bearingY extent: metrics width @ metrics height.
 		measuredWidth := bounds width.
@@ -68,12 +68,12 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 			idxScaledFont := aeCanvas
 				scaledFontForFace: aFace
 				size: characterHeight * 0.32.
-			idxGlyphsArray := idxScaledFont glyphArrayFor: (index + hostMeasurer textOffset - 1) asString.
+			idxGlyphsArray := idxScaledFont glyphArrayForString: (index + hostMeasurer textOffset - 1) asString.
 			index = 1 ifTrue: [ 
 				aeCanvas restoreContextAfter: [ 
 					aeCanvas pathTranslate: eachBaseline x + 1 @ (self height - 1).
 					aeCanvas drawText: idxGlyphsArray font: idxScaledFont ] ].
-			idxGlyphsArray := idxScaledFont glyphArrayFor: (index + hostMeasurer textOffset) asString.
+			idxGlyphsArray := idxScaledFont glyphArrayForString: (index + hostMeasurer textOffset) asString.
 			aeCanvas restoreContextAfter: [ 
 				aeCanvas pathTranslate: eachBaseline x + characterWidth + 1 @ (self height - 1).
 				aeCanvas drawText: idxGlyphsArray font: idxScaledFont ] ] ].

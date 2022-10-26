@@ -46,7 +46,7 @@ BATextParagraphSpan >> measureWith: aBATextMeasurer [
 	cairoScaledFont := canvas scaledFontForFace: face size: fontSize.
 
 	"Without Harfbuzz:"
-	cairoGlyphsArray := cairoScaledFont glyphArrayFor: usedSpan.
+	cairoGlyphsArray := cairoScaledFont glyphArrayForString: usedSpan.
 
 	"With Harfbuzz:"
 	"cairoGlyphsArray := AeHbBuffer defaultCairoGlyphArrayFor: usedSpan face: face size: fontSize."
