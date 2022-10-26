@@ -951,7 +951,6 @@ BlRBTextStyler >> privateStyle_my: aText [
 				        ifNotNil: [ workspace bindings ]
 				        ifNil: [ SystemDictionary new ]);
 		       parse.
-	ast class traceCr.
 	self style: aText ast: ast.
 	fontName ifNotNil: [ aText fontName: fontName ].
 	^ aText
@@ -969,7 +968,6 @@ BlRBTextStyler >> privateStyle_orig: aText [
 				Adding both the requestor and the bindings creates two scopes
 				that are used for looking up variables."
 	"bindings: (workspace ifNil: [ Dictionary new ]);"
-	ast class traceCr.
 	ast doSemanticAnalysis.
 
 	fontName ifNotNil: [ aText fontName: fontName ].
@@ -1178,7 +1176,6 @@ BlRBTextStyler >> visitMethodNode: aMethodNode [
 					to: (position + keyword size - 1 min: text size) ] ].
 
 	aMethodNode pragmas do: [ :each | self visitNode: each ].
-	aMethodNode body class traceCr.
 	self visitNode: aMethodNode body
 ]
 
