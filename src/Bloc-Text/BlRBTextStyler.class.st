@@ -909,19 +909,25 @@ BlRBTextStyler >> parse: aText isMethod: isMethod [
 { #category : #private }
 BlRBTextStyler >> privateStyle: aText [
 
-	| ast |
-	ast := self parse: aText isMethod: self isForWorkspace not.
-	ast methodNode compilationContext: (CompilationContext new
-			 class: (classOrMetaClass ifNil: [ UndefinedObject ]);
-			 requestor: workspace).
-	"Requestor already has support for obtaining the bindings. 
-				Adding both the requestor and the bindings creates two scopes
-				that are used for looking up variables."
-	"bindings: (workspace ifNil: [ Dictionary new ]);"
-	ast doSemanticAnalysis.
-
-	fontName ifNotNil: [ aText fontName: fontName ].
+	| ast compiler |
+	compiler := self isForWorkspace
+		            ifTrue: [ 
+			            OpalCompiler new
+				            context: thisContext;
+				            yourself ]
+		            ifFalse: [ classOrMetaClass compiler ].
+	ast := compiler
+		       source: aText asString;
+		       noPattern: self isForWorkspace;
+		       options:
+			       #( + optionParseErrors + optionSkipSemanticWarnings );
+		       requestor: workspace;
+		       bindings: (workspace
+				        ifNotNil: [ workspace bindings ]
+				        ifNil: [ SystemDictionary new ]);
+		       parse.
 	self style: aText ast: ast.
+	fontName ifNotNil: [ aText fontName: fontName ].
 	^ aText
 ]
 
@@ -1154,26 +1160,25 @@ BlRBTextStyler >> visitMessageNode: aMessageNode [
 ]
 
 { #category : #'visiting rb nodes' }
-BlRBTextStyler >> visitMethodNode: aMethodNode [ 
-aMethodNode comments do: [ :comment|
-		self 
-			addStyle: #comment
-			from: comment start
-			to: comment stop ].
-	aMethodNode arguments do: [ :argument|
-		self 
-			addStyle: #patternArg
-			forNode: argument ].
+BlRBTextStyler >> visitMethodNode: aMethodNode [
+
+	aMethodNode isDoIt ifTrue: [ ^ self visitNode: aMethodNode body ].
+
+	aMethodNode comments do: [ :comment | 
+		self addStyle: #comment from: comment start to: comment stop ].
+	aMethodNode arguments do: [ :argument | 
+		self addStyle: #patternArg forNode: argument ].
 	(aMethodNode selectorParts includes: #faulty) ifFalse: [ 
-		aMethodNode selectorParts with: aMethodNode keywordsPositions do:  [ :keyword :position |
-			self 
-				addStyle: #patternKeyword
-				from: position
-				to: ((position + keyword size - 1) min: text size) ] ].
-	
-	aMethodNode pragmas
-		do: [ :each | self visitNode: each ].
-		
+		aMethodNode selectorParts
+			with: aMethodNode keywordsPositions
+			do: [ :keyword :position | 
+				self
+					addStyle: #patternKeyword
+					from: position
+					to: (position + keyword size - 1 min: text size) ] ].
+
+	aMethodNode pragmas do: [ :each | self visitNode: each ].
+	aMethodNode body class traceCr.
 	self visitNode: aMethodNode body
 ]
 
