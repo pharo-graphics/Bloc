@@ -2,7 +2,7 @@ Extension { #name : #BlSpace }
 
 { #category : #'*Bloc-Spec2' }
 BlSpace >> inspectionPreview: aBuilder [
-	<inspectorPresentationOrder: 1 title: 'Preview'>
+	"<inspectorPresentationOrder: 1 title: 'Preview'>"
 
 	^ self root inspectionPreview: aBuilder
 ]

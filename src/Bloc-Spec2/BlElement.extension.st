@@ -8,7 +8,7 @@ BlElement >> asPreviewMorph [
 
 { #category : #'*Bloc-Spec2' }
 BlElement >> inspectionPreview: aBuilder [
-	<inspectorPresentationOrder: 1 title: 'Preview'>
+	"<inspectorPresentationOrder: 1 title: 'Preview'>"
 
 	^ aBuilder newMorph
 		morph: self asPreviewMorph;
