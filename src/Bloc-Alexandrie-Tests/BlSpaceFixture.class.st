@@ -23,6 +23,36 @@ BlSpaceFixture class >> allFixtureSelectors [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildClippingMany [
+
+	| newElementBlock elementSize |
+	elementSize := 200 asPoint.
+
+	newElementBlock := [ :parentElement :depth |
+		| anElement |
+		anElement :=
+			(builder addTo: parentElement)
+				geometry: BlCircleGeometry new;
+				size: elementSize;
+				transformDo: [ :t | t topLeftOrigin; scaleBy: 0.5 ];
+				border: (BlBorder paint: Color black width: 5);
+				background: (depth odd
+					ifTrue: [ Color green muchDarker ]
+					ifFalse: [ Color red muchDarker ]);
+				clipChildren: depth odd;
+				yourself.
+			
+			depth > 0 ifTrue: [
+				(newElementBlock value: anElement value: depth-1).
+				(newElementBlock value: anElement value: depth-1) relocate: elementSize/2 ].
+			
+			anElement ].
+	
+	newElementBlock value: builder space root value: 4.
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildClippingOutskirts [
 
 	| outskirts width positionGenerator addElementsBlock |
