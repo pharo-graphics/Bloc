@@ -183,10 +183,10 @@ BlSpaceFixture >> buildElevation [
 
 { #category : #fixtures }
 BlSpaceFixture >> buildEmptyGeometry [
-	"Note green never shows, but blue only when clipping in OFF."
+	"Note: green rectangle never shows, and blue only when clipping is OFF."
 
 	| a b c d e f |
-	"Clipping ON"
+	"1st: Clipping ON"
 	a := builder addToRoot
 		relocate: 0 asPoint;
 		size: 50 asPoint;
@@ -200,7 +200,7 @@ BlSpaceFixture >> buildEmptyGeometry [
 		size: 30 asPoint;
 		background: Color blue.
 
-	"Same pattern, but NO clipping"
+	"2nd: Same pattern, but clipping OFF."
 	d := builder addToRoot
 		relocate: 50 asPoint;
 		size: 50 asPoint;
