@@ -20,9 +20,6 @@ BlElement >> aeDrawChildrenOn: aeCanvas [
 	Notes:
 	- Receiver assumes that position and transformations are already applied on the canvas."
 	
-	self children isEmpty ifTrue: [ ^self ].
-
-	aeCanvas prepareToDrawChildrenWithClipping: self clipChildren.
 	self children sortedByElevation do: [ :each |
 		each aeFullDrawOn: aeCanvas ].
 ]
@@ -76,6 +73,9 @@ BlElement >> aeDrawOnlyMeOn: aeCanvas [
 				aeCanvas setBorderWidth: myBorder width ] ].
 
 	self geometry aeApplyTo: aeCanvas element: self.
+
+	aeCanvas shouldClipAfterDrawingFigure:
+		(self hasChildren and: [ self clipChildren ]).
 
 	aeCanvas drawFigure.
 
