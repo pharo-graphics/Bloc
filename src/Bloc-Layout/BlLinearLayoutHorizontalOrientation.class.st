@@ -31,6 +31,12 @@ BlLinearLayoutHorizontalOrientation >> extentSpecBreadth: breadthSpec lengthSpec
 		heightSpec: breadthSpec
 ]
 
+{ #category : #factory }
+BlLinearLayoutHorizontalOrientation >> inverted [
+
+	^ BlLinearLayoutVerticalOrientation new
+]
+
 { #category : #testing }
 BlLinearLayoutHorizontalOrientation >> isHorizontal [
 	^ true

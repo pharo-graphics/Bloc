@@ -33,6 +33,12 @@ BlLayoutDirection class >> rightToLeft [
 	^ rightToLeft
 ]
 
+{ #category : #accessing }
+BlLayoutDirection >> inverted [
+
+	^ self subclassResponsibility 
+]
+
 { #category : #testing }
 BlLayoutDirection >> isLeftToRight [
 	^ self subclassResponsibility
