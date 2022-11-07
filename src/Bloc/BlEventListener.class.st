@@ -165,6 +165,10 @@ BlEventListener >> mouseUpEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
+BlEventListener >> mouseUpSomewhereEvent: anEvent [
+]
+
+{ #category : #'mouse handlers' }
 BlEventListener >> mouseWheelEvent: anEvent [
 ]
 

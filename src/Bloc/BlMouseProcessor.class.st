@@ -502,22 +502,23 @@ BlMouseProcessor >> processMouseScroll: aMouseScrollEvent [
 
 { #category : #'mouse up' }
 BlMouseProcessor >> processMouseUp: aMouseUpEvent [
-	
+
 	self fireEvent: aMouseUpEvent.
-	
+
 	self updateCursorFrom: aMouseUpEvent target.
 
-	(self canBeClickEvent: aMouseUpEvent) ifTrue: [
-		
-		(self canBeDblClickEvent: aMouseUpEvent)
-			ifTrue: [ 
-				lastClickEvent := nil.
-				self fireEvent: aMouseUpEvent asDoubleClickEvent ]
-			ifFalse:[
-				| aClickEvent |
-				aClickEvent := aMouseUpEvent asClickEvent.
-				self fireEvent: aClickEvent.
-				lastClickEvent := aClickEvent copy ] ]
+	(self canBeClickEvent: aMouseUpEvent)
+		ifTrue: [ 
+			(self canBeDblClickEvent: aMouseUpEvent)
+				ifTrue: [ 
+					lastClickEvent := nil.
+					self fireEvent: aMouseUpEvent asDoubleClickEvent ]
+				ifFalse: [ 
+					| aClickEvent |
+					aClickEvent := aMouseUpEvent asClickEvent.
+					self fireEvent: aClickEvent.
+					lastClickEvent := aClickEvent copy ] ]
+		ifFalse: [ self fireEvent: previousMouseDownEvent asMouseUpSomewhere ]
 ]
 
 { #category : #'event processing' }
