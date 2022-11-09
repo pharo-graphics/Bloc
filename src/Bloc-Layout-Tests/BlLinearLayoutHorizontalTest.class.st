@@ -277,3 +277,90 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayout [
 	self assert: element layout isHorizontal.
 	^ element
 ]
+
+{ #category : #tests }
+BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayoutWithCellSpacing [
+	| element child1 child2 |
+	element := BlElement new layout: BlLinearLayout horizontal.
+	self assert: element layout class equals: BlLinearLayout.
+	self assert: element layout isHorizontal.
+	element constraintsDo: [ :c | c horizontal fitContent ].
+	child1 := BlElement new width: 0.
+	child2 := BlElement new width: 0.
+	element addChild: child1.
+	element addChild: child2.
+	element forceLayout.
+	self assert: element width equals: 0.
+	element layout: (BlLinearLayout horizontal cellSpacing: 5).
+	element forceLayout.
+	self assert: element width equals: 15.
+	self assert: child1 position x equals: 5.
+	self assert: child2 position x equals: 10.
+
+]
+
+{ #category : #tests }
+BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacingChangingDirection [
+	| element child1 child2 |
+	element := BlElement new layout: BlLinearLayout vertical.
+	self assert: element layout class equals: BlLinearLayout.
+	self assert: element layout isVertical.
+	element constraintsDo: [ :c | c vertical fitContent. c horizontal fitContent].
+	child1 := BlElement new height: 0; width: 0.
+	child2 := BlElement new height: 0; width: 0.
+	element addChild: child1.
+	element addChild: child2.
+	element forceLayout.
+	self assert: element height equals: 0.
+	self assert: element width equals: 0.
+	element layout: (BlLinearLayout vertical cellSpacing: 5).
+	element forceLayout.
+	self assert: element height equals: 15.
+	self assert: child1 position y equals: 5.
+	self assert: child2 position y equals: 10.
+
+	element layout: (BlLinearLayout horizontal cellSpacing: 5).
+	element forceLayout.
+	self assert: element width equals: 15.
+	self assert: child1 position x equals: 5.
+	self assert: child2 position x equals: 10.
+
+	element layout: (BlLinearLayout vertical cellSpacing: 5).
+	element forceLayout.
+	self assert: element height equals: 15.
+	self assert: child1 position y equals: 5.
+	self assert: child2 position y equals: 10.
+
+	element layout: (BlLinearLayout horizontal cellSpacing: 5).
+	element forceLayout.
+	self assert: element width equals: 15.
+	self assert: child1 position x equals: 5.
+	self assert: child2 position x equals: 10.
+
+
+
+
+
+
+]
+
+{ #category : #tests }
+BlLinearLayoutHorizontalTest >> testParentWithLinearVerticalLayoutWithCellSpacing [
+	| element child1 child2 |
+	element := BlElement new layout: BlLinearLayout vertical.
+	self assert: element layout class equals: BlLinearLayout.
+	self assert: element layout isVertical.
+	element constraintsDo: [ :c | c vertical fitContent ].
+	child1 := BlElement new height: 0.
+	child2 := BlElement new height: 0.
+	element addChild: child1.
+	element addChild: child2.
+	element forceLayout.
+	self assert: element height equals: 0.
+	element layout: (BlLinearLayout vertical cellSpacing: 5).
+	element forceLayout.
+	self assert: element height equals: 15.
+	self assert: child1 position y equals: 5.
+	self assert: child2 position y equals: 10.
+
+]

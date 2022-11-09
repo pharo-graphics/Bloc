@@ -878,7 +878,6 @@ BlLinearLayoutUsageTest >> testTwoChildrenOnOppositeSidesWithSpan [
 
 { #category : #tests }
 BlLinearLayoutUsageTest >> twoChildrenMatchParentInFitContent [
-	<gtExample>
 	| parent child child2 |
 	parent := BlElement new.
 	parent layout: BlLinearLayout vertical.
