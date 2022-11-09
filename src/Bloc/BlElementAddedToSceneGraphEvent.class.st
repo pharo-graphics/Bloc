@@ -12,6 +12,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementAddedToSceneGraphEvent class >> disableIn: anObject [
+	anObject disableAddedToSceneGraph
+]
+
+{ #category : #'api - enable / disable' }
 BlElementAddedToSceneGraphEvent class >> enableIn: anObject [
 	anObject enableAddedToSceneGraph
 ]

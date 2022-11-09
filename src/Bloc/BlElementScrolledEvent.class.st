@@ -15,6 +15,11 @@ BlElementScrolledEvent class >> delta: aPoint [
 ]
 
 { #category : #'api - enable / disable' }
+BlElementScrolledEvent class >> disableIn: anObject [
+	anObject disableScrolledEvent
+]
+
+{ #category : #'api - enable / disable' }
 BlElementScrolledEvent class >> enableIn: anObject [
 	anObject enableScrolledEvent
 ]

@@ -19,6 +19,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementBorderChangedEvent class >> disableIn: anObject [
+	anObject disableBorderChanged
+]
+
+{ #category : #'api - enable / disable' }
 BlElementBorderChangedEvent class >> enableIn: anObject [
 	anObject enableBorderChanged
 ]

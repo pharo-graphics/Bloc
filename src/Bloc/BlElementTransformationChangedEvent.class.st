@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementTransformationChangedEvent class >> disableIn: anEventDispatcher [
+	anEventDispatcher disableTransformationChanged
+]
+
+{ #category : #'api - enable / disable' }
 BlElementTransformationChangedEvent class >> enableIn: anEventDispatcher [
 	anEventDispatcher enableTransformationChanged
 ]

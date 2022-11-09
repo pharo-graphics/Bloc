@@ -26,9 +26,39 @@ BlElementEventDispatcher >> addEventHandler: aHandler [
 	aHandler onInstalledIn: self owner
 ]
 
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableAddedToParent [
+	activatedElementEvents clearAddedToParent
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableAddedToSceneGraph [
+	activatedElementEvents clearAddedToSceneGraph
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableAddedToSuperParent [
+	activatedElementEvents clearAddedToSuperParent
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableBackgroundChanged [
+	activatedElementEvents clearBackgroundChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableBorderChanged [
+	activatedElementEvents clearBorderChanged
+]
+
 { #category : #'api - enable / disable' }
 BlElementEventDispatcher >> disableEventType: anEventClass [
 	anEventClass disableIn: self
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableExtentChanged [
+	activatedElementEvents clearExtentChanged
 ]
 
 { #category : #'api - general events' }
@@ -38,6 +68,56 @@ BlElementEventDispatcher >> disableGeneralEventType: anEventClass [
 	activatedGeneralEvents remove: anEventClass ifAbsent: [  ].
 	activatedGeneralEvents
 		ifEmpty: [ activatedGeneralEvents := nil ]
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableLayoutChanged [
+	activatedElementEvents clearLayoutChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disablePositionChanged [
+	activatedElementEvents clearPositionChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disablePositionInSpaceChanged [
+	activatedElementEvents clearPositionInSpaceChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableRemovedFromParent [
+	activatedElementEvents clearRemovedFromParent
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableRemovedFromSceneGraph [
+	activatedElementEvents clearRemovedFromSceneGraph
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableScrolledEvent [
+	activatedElementEvents clearScrolledEvent
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableSelectionAcquired [
+	activatedElementEvents clearSelectionAcquired
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableSelectionLost [
+	activatedElementEvents clearSelectionLost
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableTransformationChanged [
+	activatedElementEvents clearTransformationChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableTransformationInSpaceChanged [
+	activatedElementEvents clearTransformationInSpaceChanged
 ]
 
 { #category : #'api - event managing' }

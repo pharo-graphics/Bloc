@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementPositionInSpaceChangedEvent class >> disableIn: anObject [
+	anObject disablePositionInSpaceChanged
+]
+
+{ #category : #'api - enable / disable' }
 BlElementPositionInSpaceChangedEvent class >> enableIn: anObject [
 	anObject enablePositionInSpaceChanged
 ]

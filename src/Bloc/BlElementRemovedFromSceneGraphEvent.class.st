@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementRemovedFromSceneGraphEvent class >> disableIn: anObject [
+	anObject disableRemovedFromSceneGraph
+]
+
+{ #category : #'api - enable / disable' }
 BlElementRemovedFromSceneGraphEvent class >> enableIn: anObject [
 	anObject enableRemovedFromSceneGraph
 ]

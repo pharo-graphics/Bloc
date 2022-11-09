@@ -19,6 +19,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementLayoutChangedEvent class >> disableIn: anObject [
+	anObject disableLayoutChanged
+]
+
+{ #category : #'api - enable / disable' }
 BlElementLayoutChangedEvent class >> enableIn: anObject [
 	anObject enableLayoutChanged
 ]

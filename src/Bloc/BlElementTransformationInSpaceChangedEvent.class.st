@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementTransformationInSpaceChangedEvent class >> disableIn: anEventDispatcher [
+
+	anEventDispatcher disableTransformationInSpaceChanged
+]
+
+{ #category : #'api - enable / disable' }
 BlElementTransformationInSpaceChangedEvent class >> enableIn: anEventDispatcher [
 	anEventDispatcher enableTransformationInSpaceChanged
 ]

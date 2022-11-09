@@ -24,6 +24,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementRemovedFromParentEvent class >> disableIn: anObject [
+	anObject disableRemovedFromParent
+]
+
+{ #category : #'api - enable / disable' }
 BlElementRemovedFromParentEvent class >> enableIn: anObject [
 	anObject enableRemovedFromParent
 ]
