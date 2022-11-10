@@ -133,6 +133,14 @@ BlMouseEvent >> asMouseOverEvent [
 		yourself
 ]
 
+{ #category : #converting }
+BlMouseEvent >> asMouseUpSomewhere [
+
+	^ BlMouseUpSomewhereEvent new
+		copyFrom: self;
+		yourself
+]
+
 { #category : #accessing }
 BlMouseEvent >> button [
 	<return: #BlMouseButton>
