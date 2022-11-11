@@ -27,7 +27,7 @@ Class {
 { #category : #accessing }
 BlMouseProcessor class >> dblClickDelay [
 	<return: #Duration>
-	^ 500 milliSeconds
+	^ 600 milliSeconds
 ]
 
 { #category : #'event testing' }
@@ -40,13 +40,11 @@ BlMouseProcessor >> canBeClickEvent: aMouseUpEvent [
 { #category : #'event testing' }
 BlMouseProcessor >> canBeDblClickEvent: aMouseUpEvent [
 
-	self flag: 'aMouseUpEvent target = lastClickEvent target is in fact needed, however, it breaks the Phlow list'.
+	self flag: 'testing aMouseUpEvent target = lastClickEvent target is in fact needed, however, it breaks the Phlow list'.
 	self flag: 'https://github.com/feenkcom/gtoolkit/issues/708'.
 
-	^ (self canBeClickEvent: aMouseUpEvent) 
-		and: [ lastClickEvent isNotNil
-			and: [ true"aMouseUpEvent target = lastClickEvent target "
-				and: [ aMouseUpEvent timestamp - lastClickEvent timestamp < self dblClickDelay ] ] ]
+	^ lastClickEvent isNotNil
+				and: [ aMouseUpEvent timestamp - lastClickEvent timestamp < self dblClickDelay ]
 ]
 
 { #category : #'event testing' }
@@ -518,7 +516,7 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 					aClickEvent := aMouseUpEvent asClickEvent.
 					self fireEvent: aClickEvent.
 					lastClickEvent := aClickEvent copy ] ]
-		ifFalse: [ self fireEvent: previousMouseDownEvent asMouseUpSomewhere ]
+		ifFalse: [ self fireEvent: (previousMouseDownEvent asClickCandidateEvent mouseUpEvent: aMouseUpEvent)]
 ]
 
 { #category : #'event processing' }

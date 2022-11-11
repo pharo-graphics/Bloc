@@ -48,6 +48,14 @@ BlMouseEvent >> anyButtonPressed [
 ]
 
 { #category : #converting }
+BlMouseEvent >> asClickCandidateEvent [
+
+	^ BlClickCandidateEvent new
+		copyFrom: self;
+		yourself
+]
+
+{ #category : #converting }
 BlMouseEvent >> asDictionaryForExport [
 	^ super asDictionaryForExport
 		at: #position put: position printString;
@@ -129,14 +137,6 @@ BlMouseEvent >> asMouseOutEvent [
 { #category : #testing }
 BlMouseEvent >> asMouseOverEvent [
 	^ BlMouseOverEvent new
-		copyFrom: self;
-		yourself
-]
-
-{ #category : #converting }
-BlMouseEvent >> asMouseUpSomewhere [
-
-	^ BlMouseUpSomewhereEvent new
 		copyFrom: self;
 		yourself
 ]
