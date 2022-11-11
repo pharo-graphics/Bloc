@@ -11,7 +11,7 @@ BlTriangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 			moveTo: thePoints first;
 			lineTo: thePoints second;
 			lineTo: thePoints third;
-			primClosePath ]
+			closePath ]
 
 ]
 
