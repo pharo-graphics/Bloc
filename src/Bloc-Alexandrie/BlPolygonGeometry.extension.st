@@ -5,7 +5,7 @@ BlPolygonGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas drawClosedPathWith: [ :cairoContext | 
 		self vertices do: [ :each | cairoContext lineTo: each ].
-		cairoContext primClosePath ]
+		cairoContext closePath ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }

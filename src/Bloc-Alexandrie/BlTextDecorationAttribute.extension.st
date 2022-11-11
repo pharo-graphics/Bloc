@@ -24,7 +24,7 @@ BlTextDecorationAttribute >> aeDrawAboveOn: aeCanvas span: aBASpan [
 
 		aeCanvas drawClosedPathWith: [ :cairoContext |
 			cairoContext
-				primRectangleX: fromX
+				rectangleX: fromX
 				y: fromY
 				width: toX
 				height: toY ].
