@@ -11,7 +11,7 @@ Class {
 { #category : #'instance creation' }
 BlLinearGradientPaint class >> direction: aPoint [
 	"Create a linear gradient in a given direction"
-	<return: #BlLinearGradientPaint>
+
 	| aDirection aStart anEnd aDelta |
 	
 	aDirection := aPoint asPoint.
@@ -26,27 +26,28 @@ BlLinearGradientPaint class >> direction: aPoint [
 	^ self new
 		start: aStart - aDelta;
 		end: anEnd - aDelta;
-		matchExtent: 1.0 asPoint
+		matchExtent: 1.0 asPoint;
+		yourself
 ]
 
 { #category : #'instance creation' }
 BlLinearGradientPaint class >> horizontal [
 	"Create a horizontal linear gradient"
-	<return: #BlLinearGradientPaint>
 
 	^ self new
 		start: 0@0;
-		end: 1@0
+		end: 1@0;
+		yourself
 ]
 
 { #category : #'instance creation' }
 BlLinearGradientPaint class >> vertical [
 	"Create a vertical linear gradient"
-	<return: #BlLinearGradientPaint>
 
 	^ self new
 		start: 0@0;
-		end: 0@1
+		end: 0@1;
+		yourself
 ]
 
 { #category : #accessing }
