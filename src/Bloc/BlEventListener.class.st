@@ -9,6 +9,10 @@ BlEventListener >> blurEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
+BlEventListener >> clickCandidateEvent: anEvent [
+]
+
+{ #category : #'mouse handlers' }
 BlEventListener >> clickEvent: anEvent [
 	"The click event is fired when a pointing device button (usually a mouse's primary button) is pressed and released on a single element."
 ]
@@ -162,10 +166,6 @@ BlEventListener >> mouseOverEvent: anEvent [
 
 { #category : #'mouse handlers' }
 BlEventListener >> mouseUpEvent: anEvent [
-]
-
-{ #category : #'mouse handlers' }
-BlEventListener >> mouseUpSomewhereEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }

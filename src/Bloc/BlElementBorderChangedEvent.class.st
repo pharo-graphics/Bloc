@@ -35,5 +35,6 @@ BlElementBorderChangedEvent class >> wantedIn: anObject [
 
 { #category : #sending }
 BlElementBorderChangedEvent >> sendTo: anObject [
+
 	anObject elementBorderChangedEvent: self
 ]

@@ -24,5 +24,5 @@ BlClickCandidateEvent >> mouseUpEvent: aMouseUpEvent [
 
 { #category : #sending }
 BlClickCandidateEvent >> sendTo: anObject [
-	anObject mouseUpSomewhereEvent: self
+	anObject clickCandidateEvent: self
 ]

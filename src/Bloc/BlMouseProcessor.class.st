@@ -516,7 +516,9 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 					aClickEvent := aMouseUpEvent asClickEvent.
 					self fireEvent: aClickEvent.
 					lastClickEvent := aClickEvent copy ] ]
-		ifFalse: [ self fireEvent: (previousMouseDownEvent asClickCandidateEvent mouseUpEvent: aMouseUpEvent)]
+		ifFalse: [ 
+			previousMouseDownEvent ifNotNil: [ 
+				self fireEvent:	(previousMouseDownEvent asClickCandidateEvent mouseUpEvent: aMouseUpEvent) ] ]
 ]
 
 { #category : #'event processing' }
