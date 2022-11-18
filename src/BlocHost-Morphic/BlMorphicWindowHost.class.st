@@ -14,7 +14,8 @@ BlMorphicWindowHost class >> isSupported [
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> label [
-	^ 'Morphic'
+
+	^ 'Morphic Sparta'
 ]
 
 { #category : #'driver selection' }

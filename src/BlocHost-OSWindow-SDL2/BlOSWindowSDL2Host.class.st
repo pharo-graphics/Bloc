@@ -24,7 +24,8 @@ BlOSWindowSDL2Host class >> isSupported [
 
 { #category : #'driver selection' }
 BlOSWindowSDL2Host class >> label [
-	^ 'SDL2'
+
+	^ 'SDL2 Sparta'
 ]
 
 { #category : #'driver selection' }
