@@ -43,7 +43,7 @@ BlVisibility class >> hidden [
 
 { #category : #visibilities }
 BlVisibility class >> visible [
-	^ visible ifNil: [ BlVisibilityVisible new ]
+	^ visible ifNil: [ visible := BlVisibilityVisible new ]
 ]
 
 { #category : #comparing }
