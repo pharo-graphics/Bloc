@@ -1111,7 +1111,7 @@ BlElement >> detachCompositionLayer [
 ]
 
 { #category : #'children add/remove' }
-BlElement >> detachFromParentWhile: aBlock [
+BlElement >> detachFromParentPreservingElevationWhile: aBlock [
 	"Detach myself from a parent while evaluating a given block.
 	I attach myself at the same position as before.
 	Directly evaluate a block if I don't have a parent"
@@ -1125,6 +1125,20 @@ BlElement >> detachFromParentWhile: aBlock [
 			aChildIndex := aParentElement childIndexOf: self.
 			aParentElement detachChild: self.
 			[ aBlock value ] ensure: [ aParentElement attachChild: self at: aChildIndex ] ]
+]
+
+{ #category : #'children add/remove' }
+BlElement >> detachFromParentWhile: aBlock [
+	"Detach myself from a parent while evaluating a given block.
+	Directly evaluate a block if I don't have a parent"
+	
+	self hasParent
+		ifFalse: [ aBlock value ]
+		ifTrue: [
+			| aParentElement |			
+			aParentElement := self parent.
+			aParentElement detachChild: self.
+			[ aBlock value ] ensure: [ aParentElement attachChild: self] ]
 ]
 
 { #category : #'api - space' }
