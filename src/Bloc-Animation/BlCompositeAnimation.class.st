@@ -37,31 +37,28 @@ BlCompositeAnimation class >> withAll: aCollectionOfAnimations [
 
 { #category : #adding }
 BlCompositeAnimation >> add: anAnimation [
+
 	anAnimation parent: self.
-	anAnimation time: self time.
+	anAnimation time: time.
 
 	animations add: anAnimation
 ]
 
 { #category : #adding }
 BlCompositeAnimation >> addAll: theAnimations [
+
 	theAnimations do: [ :anAnimation | self add: anAnimation ]
 ]
 
 { #category : #'api - accessing' }
 BlCompositeAnimation >> animations [
-	<return: #Collection of: #BlBaseAnimation>
 
 	^ animations
 ]
 
-{ #category : #'api - running' }
-BlCompositeAnimation >> doStep [
-	self subclassResponsibility
-]
-
 { #category : #initialization }
 BlCompositeAnimation >> initialize [
+
 	super initialize.
 
 	animations := OrderedCollection new
@@ -69,6 +66,7 @@ BlCompositeAnimation >> initialize [
 
 { #category : #'api - running' }
 BlCompositeAnimation >> stop [
+
 	super stop.
 
 	self stopChildren
@@ -76,6 +74,7 @@ BlCompositeAnimation >> stop [
 
 { #category : #'api - running' }
 BlCompositeAnimation >> stopChildren [
+
 	animations
 		select: [ :anAnimation | anAnimation isRunning ]
 		thenDo: [ :anAnimation | anAnimation stop ]
@@ -83,7 +82,8 @@ BlCompositeAnimation >> stopChildren [
 
 { #category : #accessing }
 BlCompositeAnimation >> time: aBlTime [
+
 	super time: aBlTime.
-	
-	self animations do: [ :anAnimation | anAnimation time: aBlTime ]
+
+	animations do: [ :anAnimation | anAnimation time: aBlTime ]
 ]

@@ -1,14 +1,21 @@
+"
+I compose a non-empty collection of animations that run in sequence.
+
+My loop consists on a loop of each of my children's loop. 
+Note: An infinite child animation would make that no subsequent animations are run.
+"
 Class {
 	#name : #BlSequentialAnimation,
 	#superclass : #BlCompositeAnimation,
 	#instVars : [
 		'currentIndex'
 	],
-	#category : 'Bloc-Animation-Basic'
+	#category : #'Bloc-Animation-Basic'
 }
 
 { #category : #'api - running' }
 BlSequentialAnimation >> doStep [
+
 	| shouldStartNext aCurrentAnimation |
 
 	(currentIndex > animations size)
@@ -17,7 +24,8 @@ BlSequentialAnimation >> doStep [
 	(currentIndex isZero and: [ animations isEmpty ])
 		ifTrue: [ ^ self ].
 
-	shouldStartNext := currentIndex isZero or: [ (animations at: currentIndex) isRunning not ].
+	shouldStartNext := currentIndex isZero or: [
+		(animations at: currentIndex) isRunning not ].
 	
 	shouldStartNext ifTrue: [ 
 		currentIndex := currentIndex + 1.
@@ -28,32 +36,32 @@ BlSequentialAnimation >> doStep [
 
 	aCurrentAnimation := animations at: currentIndex.
 	aCurrentAnimation run.
-
-	aCurrentAnimation isRunning
-		ifFalse: [ self doStep ]
 ]
 
 { #category : #'api - accessing' }
 BlSequentialAnimation >> duration [
 	"Return animation duration. Duration can not necessarily be set manually, in case
 	of composite animations it is computed on-fly based on durations of their sub-animations"
-	<return: #Duration>
 
-	^ self animations
-		ifEmpty: [ 0 seconds ]
-		ifNotEmpty: [ :theAnimations | theAnimations sum: [ :anAnimation | (anAnimation duration + anAnimation delay) * anAnimation loops ] ]
+	^ animations
+		  ifEmpty: [ 0 seconds ]
+		  ifNotEmpty: [ :theAnimations | 
+			  theAnimations sum: [ :anAnimation | 
+				  anAnimation duration + anAnimation delay * anAnimation loops ] ]
 ]
 
 { #category : #'private - running' }
 BlSequentialAnimation >> initStart [
+
 	super initStart.
 
 	currentIndex := 0.
-	self animations do: [ :anAnimation |	anAnimation reset ]
+	animations do: [ :anAnimation | anAnimation reset ]
 ]
 
 { #category : #initialization }
 BlSequentialAnimation >> initialize [
+
 	super initialize.
 
 	currentIndex := 0

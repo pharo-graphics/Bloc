@@ -1,35 +1,19 @@
 "
-BlTasks are the entities submitted to BlElements for execution during a pulse.
+I represent a task submitted to `BlElement` for execution during a pulse.
 
-Tasks may only be submitted to a queue once.  To help identify duplicate submission, tasks now have a state, one of: 
+Tasks may only be submitted to a queue once.  To help identify duplicate submission, tasks have a state, one of: 
 
 - `#new` 					A new task 
-- `#queued`				The task has been submitted to a queue
-- `#pendingExecution` 	The task has been removed from the queue and is awaiting execution, see {{gtMethod:BlTaskQueue>>#runOn:}}.
+- `#queued`					The task has been submitted to a queue
+- `#pendingExecution` 	The task has been removed from the queue and is awaiting execution, see `BlTaskQueue>>#runOn:`.
 - `#executing` 			The task is currently being executed.
 - `#complete`				The task has completed execution.
 
-The state must be #new when the task is submitted, otherwise an error will be raised.  This moves the discovery of duplicate task submission back from the time the task is executed in the queue to the time it is submitted.
+The state must be `#new` when the task is submitted, otherwise an error will be raised.  This moves the discovery of duplicate task submission back from the time the task is executed in the queue to the time it is submitted.
 
+## History
 
-Public API and Key Messages
-
-- message one   
-- message two 
-- (for bonus points) how to create instances.
-
-   One simple example is simply gorgeous.
- 
-## Internal Representation and Key Implementation Points.
-
-### Instance Variables
-	id:			<Object>
-	state:		<Symbol>
-
-
-### Implementation Points
-
-The task state was introduced after duplicate tasks were being found during the execution of {{gtClass:BlDelayedTask}}.  The resubmission of the task during execution would result in an duplicate task execution.  Our assumption is that the task has been resubmitted externally between the time it was removed from the queue pending execution and the actual execution.  Adding the state will remove / reduce this window where the task can be submitted externally, causing the exception to be raised at the time of submission, rather than during execution.
+The task state was introduced after duplicate tasks were being found during the execution of `BlDelayedTask`.  The resubmission of the task during execution would result in an duplicate task execution.  Our assumption is that the task has been resubmitted externally between the time it was removed from the queue pending execution and the actual execution.  Adding the state will remove / reduce this window where the task can be submitted externally, causing the exception to be raised at the time of submission, rather than during execution.
 
 "
 Class {

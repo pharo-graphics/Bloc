@@ -22,10 +22,10 @@ BlNumberTransition >> by: aNumber [
 ]
 
 { #category : #pulse }
-BlNumberTransition >> valueForStep: aDelta [
+BlNumberTransition >> valueForStep: aNumber [
 
 	| aValue |
-	aValue := (to - from) * aDelta + from.
+	aValue := (to - from) * aNumber + from.
 	^ by
 		ifNil: [ aValue ]
 		ifNotNil: [ (aValue / by) floor * by ]

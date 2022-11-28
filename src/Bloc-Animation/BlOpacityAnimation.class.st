@@ -13,9 +13,9 @@ Class {
 }
 
 { #category : #pulse }
-BlOpacityAnimation >> applyValue: aValue [
+BlOpacityAnimation >> applyValue: anOpacity [
 
-	self target opacity: aValue
+	self target opacity: anOpacity
 ]
 
 { #category : #pulse }
@@ -33,7 +33,7 @@ BlOpacityAnimation >> opacity: aNumber [
 ]
 
 { #category : #pulse }
-BlOpacityAnimation >> valueForStep: aDelta [
+BlOpacityAnimation >> valueForStep: aNumber [
 
-	^ ((to - from ) * aDelta) + from
+	^ ((to - from ) * aNumber) + from
 ]

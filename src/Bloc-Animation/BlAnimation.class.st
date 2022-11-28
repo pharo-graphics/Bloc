@@ -9,57 +9,57 @@ Class {
 }
 
 { #category : #pulse }
-BlAnimation >> applyValue: aValue [
-	
-]
+BlAnimation >> applyValue: anObject [
+	"Change this animation to be at the point indicated by the argument. The argument is an object already interpolated."
 
-{ #category : #'delta computing' }
-BlAnimation >> computeDelta: aProgress [
-	^ easing interpolate: aProgress
+	self subclassResponsibility
 ]
 
 { #category : #pulse }
 BlAnimation >> doStep [
-	self applyValue: (self valueForStep: (self computeDelta: progress))
+
+	self applyValue: (self valueForStep: (easing interpolate: progress))
 ]
 
 { #category : #accessing }
 BlAnimation >> duration [
-	"Return animation duration. Duration can not necessarily be set manually, in case
-	of composite animations it is computed on-fly based on durations of their sub-animations"
-	<return: #Duration>
 
 	^ duration
 ]
 
 { #category : #'api - configuration' }
 BlAnimation >> duration: aDuration [
-	self
-		assert: [ aDuration > 0 seconds ]
-		description: [ 'Duration must be positive' ].
+	"Establish the duration of this animation. Duration must be positive."
 
-	duration := aDuration asDuration
+	duration := aDuration
 ]
 
 { #category : #accessing }
 BlAnimation >> easing [
+	"Answer the easing strategy that applies to the progress on each step."
+	
 	^ easing
 ]
 
 { #category : #accessing }
-BlAnimation >> easing: anObject [
-	easing := anObject
+BlAnimation >> easing: aBlEasing [
+	"Establish the easing strategy that applies to the progress."
+
+	easing := aBlEasing
 ]
 
 { #category : #initialization }
 BlAnimation >> initialize [
+
 	super initialize.
-	
-	duration := 1 second.	"configurable"
+
+	duration := 1 second.
 	easing := BlEasing linear
 ]
 
 { #category : #pulse }
-BlAnimation >> valueForStep: aDelta [
+BlAnimation >> valueForStep: aNumber [
+	"Answer an Object that corresponds to aNumber, which belongs to the [0,1] closed interval that ALREADY HAS the easing function applied."
 	
+	^ self subclassResponsibility
 ]
