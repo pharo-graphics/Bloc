@@ -2,8 +2,7 @@ Class {
 	#name : #BlNumberTransition,
 	#superclass : #BlTransition,
 	#instVars : [
-		'by',
-		'previousValue'
+		'by'
 	],
 	#category : #'Bloc-Animation-Animation'
 }

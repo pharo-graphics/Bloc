@@ -1,5 +1,5 @@
 "
-I am an animation responsible for changing #opacity parameter of the target element during specified period of time.
+I gradually change the opacity of a `BlElement` from its initial value until a specified opacity (see my accessing protocol).
 
 "
 Class {

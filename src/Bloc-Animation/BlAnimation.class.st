@@ -5,7 +5,7 @@ Class {
 		'duration',
 		'easing'
 	],
-	#category : 'Bloc-Animation-Basic'
+	#category : #'Bloc-Animation-Basic'
 }
 
 { #category : #pulse }
