@@ -56,22 +56,13 @@ BlElement >> aeDrawOnlyMeOn: aeCanvas [
 	- Pre-condition: position and transformations are already applied on the canvas.
 	- Post-condition: position and transformations are maintanined intact."
 	
-	| myBackground myBorder |
+	| myBackground |
 	myBackground := self background.
 	myBackground isTransparent
 		ifTrue: [ aeCanvas setBackgroundOff ]
 		ifFalse: [ myBackground aeApplyTo: aeCanvas ].
 
-	myBorder := self border.
-	myBorder isTransparent
-		ifTrue: [ aeCanvas setBorderOff ]
-		ifFalse: [
-			self outskirts aeApplyTo: aeCanvas.
-			aeCanvas setBorderBlock: [
-				myBorder paint aeApplyTo: aeCanvas.
-				myBorder style aeApplyTo: aeCanvas.
-				aeCanvas setBorderWidth: myBorder width ] ].
-
+	self border aeApplyTo: aeCanvas element: self.
 	self geometry aeApplyTo: aeCanvas element: self.
 
 	aeCanvas shouldClipAfterDrawingFigure:
