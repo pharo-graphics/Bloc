@@ -1196,30 +1196,35 @@ BlAnimationExamples >> blueAt: anIndex [
 { #category : #examples }
 BlAnimationExamples >> bouncingText [
 	"Click on letters to start animation!"
-	| letters container animation clickHandler |
 	<gtExample>
 
-	letters := 'bloc beta0.1' collect: [ :aCharacter | self textElement: aCharacter ] as: Array.
-	letters withIndexDo: [  :aTextElement :anIndex |
+	| letters container animation clickHandler |
+	letters := 'bloc beta0.1'
+		           collect: [ :aCharacter | self textElement: aCharacter ]
+		           as: Array.
+	letters withIndexDo: [ :aTextElement :anIndex |
 		"change text color according to index in color spectrum"
-		aTextElement text: (aTextElement text foreground: (self colorAt: (anIndex / letters size) asFloat)) ].
+		aTextElement text:
+			(aTextElement text foreground:
+				 (self colorAt: (anIndex / letters size) asFloat)) ].
 
-	animation := BlParallelAnimation with: (letters withIndexCollect: [ :aChild :anIndex |
-		| jiggle |
-		jiggle := self jiggleAnimation.
-		jiggle delay: 20 milliSeconds * (anIndex - 1).
-		jiggle target: aChild.
-		jiggle ]).
+	animation := BlParallelAnimation withAll:
+		             (letters withIndexCollect: [ :aChild :anIndex | 
+			              | jiggle |
+			              jiggle := self jiggleAnimation.
+			              jiggle delay: 20 milliSeconds * (anIndex - 1).
+			              jiggle target: aChild.
+			              jiggle ]).
 
 	container := self textContainer.
 	container addChildren: letters.
-	
+
 	clickHandler := nil.
 	clickHandler := BlEventHandler
-		on: BlClickEvent
-		do: [
-			container removeEventHandler: clickHandler.
-			container addAnimation: animation ].
+		                on: BlClickEvent
+		                do: [ 
+			                container removeEventHandler: clickHandler.
+			                container addAnimation: animation ].
 	container addEventHandler: clickHandler.
 
 	^ self frameContainer addChild: container
@@ -1299,7 +1304,7 @@ BlAnimationExamples >> infiniteAnimation [
 	aBaseAnimation beInfinite.
 
 	self assert: aBaseAnimation loops equals: Float infinity.
-	self assert: aBaseAnimation repeats equals: 0.
+	self assert: aBaseAnimation loopCount equals: 0.
 	self assert: aBaseAnimation progress equals: 0.
 	self assert: aBaseAnimation delay equals: 0 seconds.
 	self assert: aBaseAnimation duration equals: 1 seconds.
