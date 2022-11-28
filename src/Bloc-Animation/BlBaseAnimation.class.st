@@ -1,44 +1,28 @@
 "
-I represent the most general concept of `BlElement` animation.
+I represent the most general concept of `BlElement` animation. Instances of my concrete subclasses are Bloc element animations.
 
-The most basic properties of an animation are:
-- `loops`: the number of loops to execute an animation, with progress from 0 to 1, or `Float infinite` for an endless animation.
-- `delay`: how much time to pospone actual start progressing the animation after it is added.
-- `duration`: how much time the animation will last after start+delay.
+These are some basic properties of an animation:
+- `loops`: The number of loops to execute an animation, or `Float infinite` for an endless animation.
+- `delay`: How much time to pospone the ""actual start"" after it is added.
+- `duration`: How much time will last the animation after its ""actual start"" (`start` time + `delay`).
 
 
-## Lifecycle
+## Execution
 
-An instance of any of my concrete subclasses is an animation.
-An animation can be added to an element via 
-`BlElement >> #addAnimation:`. From that moment, such element
-is considered the animation's `#target`. 
+An animation can be added to an element via `BlElement>>#addAnimation:`. From that moment, such element is considered the `target` of the animation. When added to an element that **is attached** to a space, the animation will be directly enqueued into it. 
+If the element was **not attached** to a space, the animation will stay stopped until the element attachs, and the enqueued tasks transfered to the space.
 
-An animation is a `BlTask` that, when added to an element, it may
-be directly enqueued into a `BlSpace`'s task queue, if the element
-is attached to a space. In the case the element is not 
-attached to a space, the animation is kept in the ""internal""
-element task queue until the element attached, and the enqueued
-tasks transferred to the space.
+To understand the execution model, it's important to note that an animation is a `BlTask`.
+When a task is added to a space, a pulse is requested. At some point, the space host's universe should pulse, and all enqueued tasks be executed. Each pulse makes progress each enqueued animation by executing `#doStep`. Animations will be re-enqueued in the space's task queue unless the animation is finished.
 
-When a task is added to a space, a pulse is requested. At some
-point, the space host's universe should pulse, and all enqueued
-tasks be executed. Each pulse makes progress each enqueued animation
-by executing `#doStep`. Animations will be re-enqueued in the
-space's task queue unless the animation is finished.
-
-An animation can finish either because last loop is done, or
-because `#stop` was sent. The instance can be reused in the
-same or different target element after sending `#reset`.
+An animation can finish either because last loop is done, or because `#stop` was sent. The instance cant be reused as happens with any `BlTask`.
 
 
 ## Composition
 
-Animations may be composed (see `BlCompositeAnimation`). This
-relationship is represented in the `#parent` property.
-Only a root animation can be added to an element via `addAnimation:`.
-Such element will beconsidered, in that case, the target of all
-its sub-animations, too.
+Animations may be composed (see `BlCompositeAnimation`). This relationship is represented in the `#parent` property.
+Only a root animation can be added to an element via `BlElement>>#addAnimation:`.
+Such element will be considered, in that case, the target of all its sub-animations, too.
 
 "
 Class {
