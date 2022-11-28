@@ -20,7 +20,10 @@ Class {
 
 { #category : #'instance creation' }
 BlElevation class >> elevation: aNumber [
-	^ self new elevation: aNumber
+
+	^ self new
+		  elevation: aNumber;
+		  yourself
 ]
 
 { #category : #accessing }

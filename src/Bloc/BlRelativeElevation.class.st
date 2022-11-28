@@ -22,7 +22,6 @@ BlRelativeElevation class >> cleanUp [
 
 { #category : #'instance creation' }
 BlRelativeElevation class >> zero [
-	<return: #BlGlobalElevation>
 
 	^ zero ifNil: [ zero := self elevation: 0 ]
 ]

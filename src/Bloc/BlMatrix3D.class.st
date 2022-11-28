@@ -36,28 +36,29 @@ Class {
 
 { #category : #'instance creation' }
 BlMatrix3D class >> flushToZero: aFloat [
+
 	^ (aFloat closeTo: 0.0)
-		ifTrue: [ 0.0 ]
-		ifFalse: [ aFloat ]
+		  ifTrue: [ 0.0 ]
+		  ifFalse: [ aFloat ]
 ]
 
 { #category : #'instance creation' }
 BlMatrix3D class >> fromQuaternion: aQuaternion [
 	"Return a new 3D rotation matrix from a given rotation quaternion"
-	<return: #BlMatrix3D>
 
 	^ self new
-		quaternion: aQuaternion
+		  quaternion: aQuaternion;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMatrix3D class >> rotation: aTheta axis: aVector [
 	"Create a 3D matrix representing a rotation about a given axis vector
 	by aTheta radians"
-	<return: #BlMatrix3D>
-	
+
 	^ self new
-		rotation: aTheta axis: aVector
+		  rotation: aTheta axis: aVector;
+		  yourself
 ]
 
 { #category : #converting }
@@ -98,7 +99,6 @@ BlMatrix3D >> initialize [
 { #category : #testing }
 BlMatrix3D >> is2D [
 	"Return true if matrix is 2D, false otherwise"
-	<return: #Boolean>
 	
 	^ false
 ]

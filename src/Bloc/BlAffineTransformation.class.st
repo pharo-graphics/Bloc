@@ -78,14 +78,12 @@ BlAffineTransformation >> multiplyOn: aBlMatrix [
 { #category : #'mathematical functions' }
 BlAffineTransformation >> multiplyOn: aBlMatrix in: aBlElement [
 
-	| anOriginPoint aVector |
-
-	anOriginPoint := self origin originIn: aBlElement.
-	aVector := anOriginPoint asBlocVector.
+	| aBlVector |
+	aBlVector := (self origin originIn: aBlElement) asBlocVector.
 	
-	aBlMatrix translateBy: aVector negated.
+	aBlMatrix translateBy: aBlVector negated.
 	self multiplyOn: aBlMatrix.
-	aBlMatrix translateBy: aVector
+	aBlMatrix translateBy: aBlVector
 ]
 
 { #category : #accessing }
