@@ -73,6 +73,17 @@ BlBaseAnimation >> canHaveNextLoop [
 	^ self isInfinite or: [ loopCount < loops ]
 ]
 
+{ #category : #'api - time' }
+BlBaseAnimation >> computedElapsedTime [
+	"Return elapsed time (a duration) since actual animation start of the current loop including delay"
+	<return: #Duration>
+	self
+		assert: [ self isStarted ]
+		description: [ 'Animation is not yet started, I don''t know the elapsed time' ].
+
+	^ (self time now - self delayedStartTime) min: self duration
+]
+
 { #category : #'api - accessing' }
 BlBaseAnimation >> delay [
 	"Return a delay duration which should be waited before animation actually starts"
@@ -365,6 +376,12 @@ BlBaseAnimation >> start [
 
 	isRunning ifTrue: [
 		self error: 'Animation can not be start multiple times without stop' ].
+
+	self initStart
+]
+
+{ #category : #'api - running' }
+BlBaseAnimation >> startNextLoop [
 
 	self initStart
 ]
