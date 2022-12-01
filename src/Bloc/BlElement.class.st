@@ -2015,6 +2015,22 @@ BlElement >> isFocused [
 	^ self focused
 ]
 
+{ #category : #testing }
+BlElement >> isFullyVisibleInSpace [
+	"Return true if I am in fully visible in the area of a space (window), false otherwise.
+	Note, that this visibility is computed only based on bounds. 
+	It may happend that I am not visible because of another element."
+	<return: #Boolean>
+
+	| myBounds intersection |
+	self assert: self isAttachedToSceneGraph.
+	self assert: self isVisible.
+
+	myBounds := self bounds asRectangle.
+	intersection := self bounds inSpace bounds intersect: (0@0 extent: self space extent) ifNone: [ ^ false ].
+	^ intersection asRectangle = myBounds
+]
+
 { #category : #'children accessing' }
 BlElement >> isLastChild [
 	"return true if the receiver is the first child of its parent"
