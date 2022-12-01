@@ -73,17 +73,6 @@ BlBaseAnimation >> canHaveNextLoop [
 	^ self isInfinite or: [ loopCount < loops ]
 ]
 
-{ #category : #'api - time' }
-BlBaseAnimation >> computedElapsedTime [
-	"Return elapsed time (a duration) since actual animation start of the current loop including delay"
-	<return: #Duration>
-	self
-		assert: [ self isStarted ]
-		description: [ 'Animation is not yet started, I don''t know the elapsed time' ].
-
-	^ (self time now - self delayedStartTime) min: self duration
-]
-
 { #category : #'api - accessing' }
 BlBaseAnimation >> delay [
 	"Return a delay duration which should be waited before animation actually starts"
@@ -380,12 +369,6 @@ BlBaseAnimation >> start [
 	self initStart
 ]
 
-{ #category : #'api - running' }
-BlBaseAnimation >> startNextLoop [
-
-	self initStart
-]
-
 { #category : #'api - time' }
 BlBaseAnimation >> startTime [
 	"Return a ´DateAndTime´ at which the current animation loop was started.
@@ -396,36 +379,28 @@ BlBaseAnimation >> startTime [
 
 { #category : #'api - running' }
 BlBaseAnimation >> step [
-	
-	self shouldStartNextLoop
-		ifTrue: [ self startNextLoop ].
+
+	| actualElapsedTime |
+
+	self shouldStartNextLoop ifTrue: [ self initStart ].
+
+	actualElapsedTime := time now - self delayedStartTime.
 
 	"Time did not come for me to run because of delay"	
-	self time now < self delayedStartTime
-		ifTrue: [ ^ self ].
+	actualElapsedTime negative ifTrue: [ ^ self ].
 
-	elapsedTime := self computedElapsedTime.
-
-	self
-		assert: [ self duration isZero not ]
-		description: [ 'Duration must not be zero' ].
-	progress := (elapsedTime / self duration) asFloat.
-	self
-		assert: [ progress between: 0 and: 1 ]
-		description: [ 'Progress must be within interval [0..1]' ].
-
-	progress <= 1.0
-		"Animation is not over yet, execute an actual animation step"
+	actualElapsedTime >= self duration
 		ifTrue: [
-			self doStep.
-			self onStep ].
+			elapsedTime := self duration.
+			progress := 1.0 ]
+		ifFalse: [
+			elapsedTime := actualElapsedTime.
+			progress := (elapsedTime / self duration) asFloat ].
 
-	progress >= 1
-		ifTrue: [ self onLoopDone ].
-		
-	(self shouldStartNextLoop
-		and: [ self time now > self nextLoopStartTime ])
-			ifTrue: [ self step ]
+	self doStep.
+	self onStep.
+
+	progress = 1.0 ifTrue: [ self onLoopDone ]
 ]
 
 { #category : #'api - running' }
