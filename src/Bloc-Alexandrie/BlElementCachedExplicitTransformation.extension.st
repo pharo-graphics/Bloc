@@ -7,7 +7,7 @@ BlElementCachedExplicitTransformation >> aeApplyTo: aeCanvas [
 
 	aeCanvas pathTransform:
 		(AeCairoMatrix
-			 x: matrix x
+			 newX: matrix x
 			 y: matrix y
 			 sx: matrix sx
 			 sy: matrix sy
