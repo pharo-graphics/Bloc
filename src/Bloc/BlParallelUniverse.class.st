@@ -166,7 +166,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 		ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
 
 	"Notify root element that it is no longer in scene graph"
-	aSpace root dispatchRemovedFromSceneGraph.
+	aSpace dispatchRemovedFromSceneGraph.
 
 	"Raise an event indicating that the space is no longer attached to a universe"
 	aSpace dispatchEvent: (BlSpaceDetachedEvent new space: aSpace).
@@ -417,13 +417,13 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).
 
 	"Notify root element that it is now visible to the user"
-	aSpace root space: aSpace.
+	aSpace becomeVisible.
 	
 	(BlParallelUniverseSpaceRootAssignedSignal new
 		universeId: self id;
 		spaceId: aSpace id) emit.
 	
-	aSpace root dispatchAddedToSceneGraph.
+	aSpace dispatchAddedToSceneGraph.
 	
 	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
 		universeId: self id;

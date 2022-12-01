@@ -15,7 +15,7 @@ BlDevHalosEventListenerExamples >> activatedHalos [
 	aContainer := self containerWithRectangle.
 	aSpace := self putInSpace: aContainer.
 	aSpace withHalos.
-	thePriorElements := aSpace root children asArray.
+	thePriorElements := aSpace children asArray.
 	
 	"we never know if an element was already layered out"
 	aContainer topMostParent forceLayout.
@@ -24,7 +24,7 @@ BlDevHalosEventListenerExamples >> activatedHalos [
 	anEvent modifiers alt: true; shift: true.
 	BlSpace simulateEvent: anEvent on: (aContainer childAt: 1).
 	
-	theNewElements := aSpace root children asArray.
+	theNewElements := aSpace children asArray.
 	"self assert: theNewElements size equals: thePriorElements size + 1."
 	^ aSpace
 ]
@@ -94,7 +94,7 @@ BlDevHalosEventListenerExamples >> putInSpace: aBlElement [
 		assert: [ aBlElement isNotNil ]
 		description: [ 'Element must be non-nil' ].
 	aSpace := self newSpace.
-	aSpace root addChild: aBlElement.
+	aSpace addChild: aBlElement.
 	^ aSpace
 ]
 

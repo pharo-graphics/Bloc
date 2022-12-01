@@ -17,7 +17,7 @@ BlRenderDifferenceInspector >> alexandrieFormFor: aSymbol [
 		host: BAOSWindowSDL2Host new; 
 		perform: aSymbol;
 		space.
-	^ [aSpace root aeAsForm
+	^ [aSpace aeAsForm
 ] onErrorDo: [ Form extent: 10 asPoint depth: 32 ]
 ]
 

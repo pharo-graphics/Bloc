@@ -63,14 +63,14 @@ BlCompositionPainter class >> repaintSpace: aSpace [
 										ifTrue: [ BlCompositionPainter repaintCompositedElement: eachElement ]
 										ifFalse: [ "eachElement markSkippedPaint" ] ] ] ] ].
 
-	aRootLayer := aSpace root hasCompositionLayer
-		ifTrue: [ aSpace root compositionLayer ]
+	aRootLayer := aSpace hasCompositionLayer
+		ifTrue: [ aSpace compositionLayer ]
 		ifFalse: [
 			aSpace telemetry
 				timeSync: 'Repaint root'
-				during: [ BlCompositionPainter repaintCompositedElement: aSpace root ]  ].
+				during: [ BlCompositionPainter repaintCompositedElement: aSpace ]  ].
 	
-	aSpace root withAllChildrenBreadthFirstDo: [ :eachChild | eachChild markDoesNotNeedPaint ].
+	aSpace withAllChildrenBreadthFirstDo: [ :eachChild | eachChild markDoesNotNeedPaint ].
 	aRootLayer computeNeedsComposition.
 	^ aRootLayer
 ]

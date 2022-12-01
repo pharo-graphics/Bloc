@@ -12,7 +12,7 @@ BARenderTest >> actualFormFor: aSymbol [
 		host: BAOSWindowSDL2Host new; 
 		perform: aSymbol;
 		space.
-	^ aSpace root aeAsForm
+	^ aSpace aeAsForm
 
 ]
 

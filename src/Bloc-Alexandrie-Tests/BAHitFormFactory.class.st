@@ -11,8 +11,7 @@ Class {
 BAHitFormFactory class >> newFormFor: aSpace [
 
 	| allElements colors colorByElement aForm |
-	allElements := aSpace root withAllChildrenBreadthFirst.
-
+	allElements := aSpace withAllChildrenBreadthFirst.
 
 	colors := { Color white }, (Color wheel: allElements size - 1).
 	colorByElement := IdentityDictionary newFromKeys: allElements andValues: colors.
@@ -22,8 +21,7 @@ BAHitFormFactory class >> newFormFor: aSpace [
 		1 to: aSpace height do: [ :y |
 			| eachPosition hittedElementOrNil hittedColor |
 			eachPosition := x@y.
-			hittedElementOrNil := aSpace root
-				findMouseEventTargetAt: eachPosition.
+			hittedElementOrNil := aSpace findMouseEventTargetAt: eachPosition.
 			hittedColor := colorByElement
 				at: hittedElementOrNil
 				ifAbsent: [ Color black ].

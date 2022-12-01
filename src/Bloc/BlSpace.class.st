@@ -470,6 +470,13 @@ BlSpace >> beDirtyArea [
 		from: self root
 ]
 
+{ #category : #'api - displaying' }
+BlSpace >> becomeVisible [
+	"Notify root element that it is now visible to the user"
+	self root space: self
+
+]
+
 { #category : #'window - properties' }
 BlSpace >> borderless [
 	^ self
@@ -498,6 +505,12 @@ BlSpace >> center [
 	self hostSpace ifNotNil: [ :hw | hw center ]
 ]
 
+{ #category : #'children - accessing' }
+BlSpace >> children [
+
+	^ self root children
+]
+
 { #category : #'change - rendering' }
 BlSpace >> clearDirtyAreas [
 	"Clear all dirty areas.
@@ -512,6 +525,14 @@ BlSpace >> close [
 	"Delegate closing work to the Universe"
 	
 	(BlParallelUniverse forHost: self host class) closeSpace: self
+]
+
+{ #category : #'api - painting' }
+BlSpace >> compositionLayer [
+	"Return my composition layer if I have one or nil otherwise"
+	<return: #BlCompositionLayer or: nil>
+
+	^ self root compositionLayer
 ]
 
 { #category : #'host dependent - ToDo' }
@@ -609,6 +630,23 @@ BlSpace >> dirtyAreas [
 	<return: #SequenceableCollection of: #BlBounds>
 
 	^ dirtyAreas
+]
+
+{ #category : #'children dispatching' }
+BlSpace >> dispatchAddedToSceneGraph [
+	"Sent after any of my parents or I was added to scene graph.
+	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
+
+	self root dispatchAddedToSceneGraph
+
+]
+
+{ #category : #'children dispatching' }
+BlSpace >> dispatchRemovedFromSceneGraph [
+	"Sent after root was removed from scene graph.
+	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
+
+	self root dispatchRemovedFromSceneGraph
 ]
 
 { #category : #pulse }
@@ -1335,6 +1373,13 @@ BlSpace >> invalidRect: aBlBounds from: anElement [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ]
 ]
 
+{ #category : #'change reporting' }
+BlSpace >> invalidationBounds [
+	<return: #Rectangle>
+
+	^ self root invalidationBounds
+]
+
 { #category : #testing }
 BlSpace >> isFocused [
 	^ self focused
@@ -1893,4 +1938,17 @@ BlSpace >> windowScale [
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace scaleFactor ]
 		ifAbsent: [ 1.0 asPoint ]
+]
+
+{ #category : #'api - children enumeration' }
+BlSpace >> withAllChildrenBreadthFirst [
+	<return: #Collection of: #BlElement>
+	
+	^ self root withAllChildrenBreadthFirst
+]
+
+{ #category : #'api - children enumeration' }
+BlSpace >> withAllChildrenBreadthFirstDo: aBlock [ 
+	
+	^ self root withAllChildrenBreadthFirstDo: aBlock 
 ]

@@ -31,7 +31,7 @@ BASpaceRenderer >> initializeForSurface: aBlHostRendererSurface and: aeCairoSurf
 BASpaceRenderer >> renderSpace: aBlSpace [
 	"Render a space and return a collection of damaged rectangles"
 
-	aeCanvas fullDraw: aBlSpace root.
+	aeCanvas fullDraw: aBlSpace.
 
 	^ #()
 ]
