@@ -536,7 +536,7 @@ BlMouseProcessor >> processPicking: aMouseEvent [
 			                   lastOverTarget containsGlobalPoint:
 				                   aMouseEvent position ] ])
 		                  ifTrue: [ lastOverTarget findMouseEventTargetAt: aMouseEvent position ]
-		                  ifFalse: [ self space root findMouseEventTargetAt: aMouseEvent position ].
+		                  ifFalse: [ self space findMouseEventTargetAt: aMouseEvent position ].
 	"we have to ensure that aTarget is not nil"
 	aTargetElement ifNil: [ aTargetElement := self space root ].
 	^ aTargetElement

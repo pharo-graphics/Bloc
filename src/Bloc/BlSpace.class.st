@@ -1011,6 +1011,16 @@ BlSpace >> extractUnstyled: aSetOfElements [
 		suchThat: [ :eachParent | eachParent needsStyle ]
 ]
 
+{ #category : #'event handling' }
+BlSpace >> findMouseEventTargetAt: aPoint [
+	"Return the deepest child element among all my children or myself that may be a target for mouse event at provided location.
+	The coordinate point is given in space coordinates.
+	I may return nil if no such child is found and if I can not be event target either"
+	<return: #BlElement or: nil>
+	
+	^ self root findMouseEventTargetAt: aPoint
+]
+
 { #category : #'focus managing' }
 BlSpace >> focusOwner [
 	<return: #BlElement>
