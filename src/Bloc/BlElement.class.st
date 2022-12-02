@@ -2024,7 +2024,6 @@ BlElement >> isFullyVisibleInSpace [
 
 	| myBounds intersection |
 	self assert: self isAttachedToSceneGraph.
-	self assert: self isVisible.
 
 	myBounds := self bounds asRectangle.
 	intersection := self bounds inSpace bounds intersect: (0@0 extent: self space extent) ifNone: [ ^ false ].
