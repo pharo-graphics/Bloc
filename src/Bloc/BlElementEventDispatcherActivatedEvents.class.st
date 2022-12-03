@@ -13,6 +13,7 @@ Class {
 		'BorderChanged',
 		'ExtentChanged',
 		'LayoutChanged',
+		'LayoutComputed',
 		'PositionChanged',
 		'PositionInSpaceChanged',
 		'RemovedFromParent',
@@ -66,6 +67,12 @@ BlElementEventDispatcherActivatedEvents class >> ExtentChanged [
 BlElementEventDispatcherActivatedEvents class >> LayoutChanged [
 	"This method was automatically generated"
 	^ LayoutChanged value
+]
+
+{ #category : #'accessing - flags' }
+BlElementEventDispatcherActivatedEvents class >> LayoutComputed [
+	"This method was automatically generated"
+	^ LayoutComputed value
 ]
 
 { #category : #'accessing - flags' }
@@ -136,6 +143,7 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 		#BorderChanged.
 		#ExtentChanged.
 		#LayoutChanged.
+		#LayoutComputed.
 		#PositionChanged.
 		#PositionInSpaceChanged.
 		#RemovedFromParent.
@@ -146,6 +154,8 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 		#TransformationChanged.
 		#TransformationInSpaceChanged.
 	}
+
+
 ]
 
 { #category : #initialization }
@@ -196,6 +206,12 @@ BlElementEventDispatcherActivatedEvents >> addExtentChanged [
 BlElementEventDispatcherActivatedEvents >> addLayoutChanged [
 	"This method was automatically generated"
 	value := value | LayoutChanged value
+]
+
+{ #category : #'flags - add' }
+BlElementEventDispatcherActivatedEvents >> addLayoutComputed [
+	"This method was automatically generated"
+	value := value | LayoutComputed value
 ]
 
 { #category : #'flags - add' }
@@ -295,6 +311,12 @@ BlElementEventDispatcherActivatedEvents >> clearLayoutChanged [
 ]
 
 { #category : #'flags - clear' }
+BlElementEventDispatcherActivatedEvents >> clearLayoutComputed [
+	"This method was automatically generated"
+	value := value & (LayoutComputed value bitInvert)
+]
+
+{ #category : #'flags - clear' }
 BlElementEventDispatcherActivatedEvents >> clearPositionChanged [
 	"This method was automatically generated"
 	value := value & (PositionChanged value bitInvert)
@@ -388,6 +410,12 @@ BlElementEventDispatcherActivatedEvents >> hasExtentChanged [
 BlElementEventDispatcherActivatedEvents >> hasLayoutChanged [
 	"This method was automatically generated"
 	^ (value & LayoutChanged value) ~= 0
+]
+
+{ #category : #'flags - testing' }
+BlElementEventDispatcherActivatedEvents >> hasLayoutComputed [
+	"This method was automatically generated"
+	^ (value & LayoutComputed value) ~= 0
 ]
 
 { #category : #'flags - testing' }

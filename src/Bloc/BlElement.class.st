@@ -2686,6 +2686,8 @@ BlElement >> onLayoutDone [
 	"Is sent after layout is completely computed.
 	All layout changes done within this hook will be performed during the next frame.
 	Note: I am sent before the drawing process"
+	
+	self eventDispatcher dispatchLayoutComputed
 ]
 
 { #category : #layout }
@@ -3739,6 +3741,18 @@ BlElement >> wantsSeparateCompositingLayer [
 				ifTrue: [ ^ false ] ].
 
 	^ true
+]
+
+{ #category : #'geometry hooks' }
+BlElement >> whenLayoutedDo: aBlock [
+
+	self when: BlElementLayoutComputedEvent do: [ :event | aBlock cull: event ].
+]
+
+{ #category : #'geometry hooks' }
+BlElement >> whenLayoutedDoOnce: aBlock [
+
+	self when: BlElementLayoutComputedEvent doOnce: [ :event | aBlock cull: event ].
 ]
 
 { #category : #'api - bounds' }
