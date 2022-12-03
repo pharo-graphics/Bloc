@@ -129,15 +129,21 @@ BlHostPulseLoop >> newLoopBlock [
 BlHostPulseLoop >> newLoopProcess [
 
 	^ self newLoopBlock newProcess
-		priority: 40;
-		name: self processId;
-		yourself
+		  priority: self processPriority;
+		  name: self processId;
+		  yourself
 ]
 
 { #category : #'loop process' }
 BlHostPulseLoop >> processId [
 
 	^ self class processId
+]
+
+{ #category : #'loop process' }
+BlHostPulseLoop >> processPriority [
+
+	^ 40
 ]
 
 { #category : #period }
