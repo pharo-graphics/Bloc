@@ -9,7 +9,7 @@ BlSpace >> aeAsForm [
 { #category : #'*Bloc-Alexandrie' }
 BlSpace >> aeDrawOn: aeCanvas [
 
-	self root aeDrawOn: aeCanvas
+	self root aeFullDrawOn: aeCanvas
 ]
 
 { #category : #'*Bloc-Alexandrie' }

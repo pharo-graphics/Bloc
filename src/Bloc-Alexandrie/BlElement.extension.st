@@ -78,6 +78,9 @@ BlElement >> aeDrawOnlyMeOn: aeCanvas [
 
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeFullDrawOn: aCanvas [
+	"Main entry point to draw myself and my children on an Alexandrie canvas."
+
+	self flag: #todo. "Why is this commented?"
 	"flags clearNeedsPaint."
 	
 	"We do not draw transparent elements at all"
