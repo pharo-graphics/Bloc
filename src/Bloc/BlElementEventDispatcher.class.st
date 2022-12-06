@@ -56,6 +56,15 @@ BlElementEventDispatcher >> disableEventType: anEventClass [
 	anEventClass disableIn: self
 ]
 
+{ #category : #'api - enable / disable' }
+BlElementEventDispatcher >> disableEventType: anEventClass while: aBlock [
+
+	self disableEventType: anEventClass.
+	aBlock ensure: [ 
+		self enableEventType: anEventClass ]
+
+]
+
 { #category : #'api - element events' }
 BlElementEventDispatcher >> disableExtentChanged [
 	activatedElementEvents clearExtentChanged
