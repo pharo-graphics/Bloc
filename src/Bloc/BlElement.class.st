@@ -1161,6 +1161,13 @@ BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNo
 	^ ifNoneBlock value
 ]
 
+{ #category : #'event handling' }
+BlElement >> disableEventType: anEventClass while: aBlock [
+
+	self eventDispatcher disableEventType: anEventClass while: aBlock
+	
+]
+
 { #category : #'children dispatching' }
 BlElement >> dispatchAddedToParent [
 	"Sent after I was added to another element as direct child.
