@@ -34,8 +34,12 @@ BlElement >> aeDrawOn: aeCanvas [
 		aeCanvas pathTranslate: self position.
 		self transformation aeApplyTo: aeCanvas.
 
+		self effect aeDrawBefore: self on: aeCanvas.
 		self aeDrawOnlyMeOn: aeCanvas.
-		self aeDrawChildrenOn: aeCanvas ]
+		self aeDrawChildrenOn: aeCanvas.
+		self effect aeDrawAfter: self on: aeCanvas.
+		
+		]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
