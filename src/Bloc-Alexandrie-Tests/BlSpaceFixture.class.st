@@ -579,6 +579,160 @@ BlSpaceFixture >> buildOverlappingTriangles [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildSimpleShadowsByCircleSector [
+
+	self buildVariantsOfCircleSectorAngles.
+
+	builder space root allChildrenDepthFirstDo: [ :each |
+		each effect:
+			(BlSimpleShadowEffect
+				color: Color green
+				offset: -2 @ 3 ) ] 
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildSimpleShadowsByGeometry [
+
+	| positionGenerator addElementBlock cellSize numberOfColumns shadowSize elementSize geometryBlocks |
+	shadowSize := 2.
+	elementSize := 12.
+	cellSize := elementSize * 1.75.
+	numberOfColumns := 4.
+	geometryBlocks := {	[ BlRectangleGeometry new ].
+		[ BlCircleGeometry new ].
+		[ BlTriangleGeometry new ].
+		[ BlTriangleGeometry new beTop; yourself ].
+		[ BlRoundedRectangleGeometry cornerRadius: 3 ].
+		[ BlPolygonGeometry vertices: { 0 asPoint. 0@elementSize. elementSize @ 0 } ].
+	}.
+	"Establish the extent of the canvas based on parameters"
+	builder spaceExtent:
+		((cellSize * numberOfColumns) @
+		 (cellSize * geometryBlocks size)).
+
+	"Raw grid layout"
+	positionGenerator := self
+		gridPositionGeneratorStartingAt: 5 asPoint
+		by: cellSize
+		columns: numberOfColumns.
+
+	"Reusable block to add each element"
+	addElementBlock := [ :aGeometry :backgroundAlpha :shadowAlpha :shadowOffset |
+		builder addToRoot
+			geometry: aGeometry;
+			relocate: positionGenerator next;
+			size: elementSize asPoint;
+			background: (Color blue alpha: backgroundAlpha);
+			effect: (BlSimpleShadowEffect
+				color: (Color orange alpha: shadowAlpha)
+				offset: shadowOffset);
+			yourself ].
+
+	"Add variants of each geometry"
+	geometryBlocks do: [ :eachBlock |
+
+		"Both opaque, background and shadow"
+		addElementBlock
+			value: eachBlock value
+			value: 1.0
+			value: 1.0
+			value: shadowSize @ shadowSize.
+
+		"Translucent shadow"
+		addElementBlock
+			value: eachBlock value
+			value: 1.0
+			value: 0.6
+			value: shadowSize negated @ shadowSize.
+
+		"Both translucent"
+		addElementBlock
+			value: eachBlock value
+			value: 0.6
+			value: 0.6
+			value: shadowSize @ shadowSize negated.
+
+		"Translucent background and opaque shadow (a strange case)"
+		addElementBlock
+			value: eachBlock value
+			value: 0.6
+			value: 1.0
+			value: 0 @ shadowSize.
+
+		]
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildSimpleShadowsByOutskirt [
+
+	| outskirts borderWidth scale positionGenerator addElementBlock |
+	outskirts := { BlOutskirts inside. BlOutskirts centered. BlOutskirts outside }.
+	borderWidth := 9.
+	scale := 0.3.
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: -14 asPoint
+		by: 32
+		columns: 3.
+
+	addElementBlock := [ :eachOutskirt :backgroundColor |
+		builder addHexagonalPolygon
+			relocate: positionGenerator next;
+			background: backgroundColor;
+			border: (BlBorder paint: builder nextColor width: borderWidth);
+			outskirts: eachOutskirt;
+			transformDo: [ :t | t scaleBy: scale ];
+			effect:
+				(BlSimpleShadowEffect
+					color: Color black
+					offset: 2 * borderWidth asPoint);
+			yourself ].
+	
+	"Opaques"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: builder nextColor ].
+
+	"Translucents"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: builder nextColor translucent ].
+
+	"Transparents"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: Color transparent ].
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildSimpleShadowsByStrokeStyle [
+
+	self buildStrokeStyles.
+
+	builder space root allChildrenDepthFirstDo: [ :each |
+		each effect:
+			(BlSimpleShadowEffect
+				color: Color orange
+				offset: 0 @ -2) ]
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildSimpleShadowsByTextTransformations [
+
+	self buildTextTransformations.
+	
+	builder space root allChildrenDepthFirstDo: [ :each |
+		each effect:
+			(BlSimpleShadowEffect
+				color: Color orange
+				offset: 1 @ 1 ) ]
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildStrokeStyles [
 
 	| positionGenerator width |
