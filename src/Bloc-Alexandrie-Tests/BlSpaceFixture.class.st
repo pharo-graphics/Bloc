@@ -1274,7 +1274,7 @@ BlSpaceFixture >> buildVariantsOfCircleSectorAngles [
 		0   45
 		270 540 "540 % 360 = 180"
 	).
-	builder spaceExtent: ((pixelSize*numberOfColumns) @ (pixelSize * angles size)) 
+	builder spaceExtent: ((pixelSize*numberOfColumns) @ (pixelSize * (angles size / 2))) 
 		+ 10 asPoint "margin".
 
 	positionGenerator := self 
