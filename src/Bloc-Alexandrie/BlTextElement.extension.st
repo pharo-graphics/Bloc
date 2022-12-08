@@ -8,6 +8,17 @@ BlTextElement >> aeDrawBeneathOn: aeCanvas [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlTextElement >> aeDrawGeometryOn: aeCanvas [
+
+	paragraph ifNil: [ ^ self ].
+	super aeDrawGeometryOn: aeCanvas.
+	aeCanvas restoreContextAfter: [ 
+		aeCanvas pathTranslate: self padding topLeft.
+		"Draw text with attributes"
+		paragraph aeDrawOn: aeCanvas ]
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlTextElement >> aeDrawHighlightsOn: aeCanvas [
 	highlightsMap ifNil: [ ^self ].
 	self highlights do: [ :eachHighlight |  
@@ -24,17 +35,6 @@ BlTextElement >> aeDrawOn: aeCanvas [
 		"self aeDrawSelectionOn: aeCanvas."
 		self aeDrawBeneathOn: aeCanvas].
 	super aeDrawOn: aeCanvas
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlTextElement >> aeDrawOnlyMeOn: aeCanvas [
-
-	paragraph ifNil: [ ^ self ].
-	super aeDrawOnlyMeOn: aeCanvas.
-	aeCanvas restoreContextAfter: [ 
-		aeCanvas pathTranslate: self padding topLeft.
-		"Draw text with attributes"
-		paragraph aeDrawOn: aeCanvas ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }

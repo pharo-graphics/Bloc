@@ -25,34 +25,19 @@ BlElement >> aeDrawChildrenOn: aeCanvas [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlElement >> aeDrawOn: aeCanvas [
+BlElement >> aeDrawEffectAboveGeometryOn: aeCanvas [
 
-	self aeDrawOn: aeCanvas with: [
-
-		"My position is applied before my transformation matrix,
-		which may have an additional translation."
-		aeCanvas pathTranslate: self position.
-		self transformation aeApplyTo: aeCanvas.
-
-		self effect aeDrawBefore: self on: aeCanvas.
-		self aeDrawOnlyMeOn: aeCanvas.
-		self aeDrawChildrenOn: aeCanvas.
-		self effect aeDrawAfter: self on: aeCanvas.
-		
-		]
+	self effect aeDrawAbove: self on: aeCanvas
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
+BlElement >> aeDrawEffectBelowGeometryOn: aeCanvas [
 
-	self opacity = 1.0
-		ifTrue: [ aeCanvas restoreContextAfter: aBlockClosure ]
-		ifFalse: [ aeCanvas paintGroupWith: aBlockClosure alpha: self opacity ]
-
+	self effect aeDrawBelow: self on: aeCanvas
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlElement >> aeDrawOnlyMeOn: aeCanvas [
+BlElement >> aeDrawGeometryOn: aeCanvas [
 	"Draw my geometry with the corresponding background and border.
 
 	Notes:
@@ -73,6 +58,34 @@ BlElement >> aeDrawOnlyMeOn: aeCanvas [
 		(self hasChildren and: [ self clipChildren ]).
 
 	aeCanvas drawFigure.
+
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aeDrawOn: aeCanvas [
+
+	self aeDrawOn: aeCanvas with: [
+
+		"My position is applied before my transformation matrix,
+		which may have an additional translation."
+		aeCanvas pathTranslate: self position.
+		self transformation aeApplyTo: aeCanvas.
+
+		self aeDrawEffectBelowGeometryOn: aeCanvas.
+		self aeDrawGeometryOn: aeCanvas.
+		self aeDrawEffectAboveGeometryOn: aeCanvas.
+
+		self aeDrawChildrenOn: aeCanvas.
+		
+		]
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
+
+	self opacity = 1.0
+		ifTrue: [ aeCanvas restoreContextAfter: aBlockClosure ]
+		ifFalse: [ aeCanvas paintGroupWith: aBlockClosure alpha: self opacity ]
 
 ]
 
