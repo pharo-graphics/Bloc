@@ -17,8 +17,7 @@ BASpaceRenderer >> aeCanvas [
 BASpaceRenderer >> initializeForSurface: aBlHostRendererSurface and: aeCairoSurface [
 
 	aeCairoSurface deviceScale: aBlHostRendererSurface scaleFactor asPoint.
-
-	aeCanvas := 	AeCanvas newFor: aeCairoSurface.
+	aeCanvas := AeCanvas newFor: aeCairoSurface.
 
 	"On High DPI displays, high quality is not visible enough, and often 
 	much larger surface areas are painted."
