@@ -54,10 +54,7 @@ BlElement >> aeDrawGeometryOn: aeCanvas [
 	self border aeApplyTo: aeCanvas element: self.
 	self geometry aeApplyTo: aeCanvas element: self.
 
-	aeCanvas shouldClipAfterDrawingFigure:
-		(self hasChildren and: [ self clipChildren ]).
-
-	aeCanvas drawFigure.
+	aeCanvas drawFigureAndPrepareToClip: (self hasChildren and: [ self clipChildren ]).
 
 ]
 
