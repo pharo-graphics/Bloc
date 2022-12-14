@@ -35,7 +35,7 @@ BARenderTest class >> inspectAll [
 BARenderTest >> actualForm [
 		
 	| aSpace |
-	aSpace := BlSpaceFixture new
+	aSpace := self formBehavior
 		host: BAOSWindowSDL2Host new; 
 		perform: formSelector;
 		space.
@@ -54,5 +54,5 @@ BARenderTest >> expectedFormsDirectory [
 { #category : #tests }
 BARenderTest >> formBehavior [
 
-	^ BlSpaceFixture
+	^ BlSpaceFixture new
 ]

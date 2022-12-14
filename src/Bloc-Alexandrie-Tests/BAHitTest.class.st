@@ -48,14 +48,14 @@ BAHitTest >> expectedFormsDirectory [
 { #category : #tests }
 BAHitTest >> formBehavior [
 
-	^ BlSpaceFixture
+	^ BlSpaceFixture new
 ]
 
 { #category : #tests }
 BAHitTest >> hitFormFor: aSymbol host: aHost [
 		
 	| aSpace |
-	aSpace := BlSpaceFixture new
+	aSpace := self formBehavior
 		host: aHost;
 		perform: aSymbol;
 		space.
