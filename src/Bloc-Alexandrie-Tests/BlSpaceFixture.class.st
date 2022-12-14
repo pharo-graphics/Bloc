@@ -493,7 +493,7 @@ BlSpaceFixture >> buildOutskirtsOfPolygons [
 	width := 7.
 	scale := 0.5.
 	positionGenerator := self 
-		gridPositionGeneratorStartingAt: 0 asPoint
+		gridPositionGeneratorStartingAt: 9 @ 14
 		by: 20
 		columns: 3.
 
@@ -503,7 +503,7 @@ BlSpaceFixture >> buildOutskirtsOfPolygons [
 				relocate: positionGenerator next;
 				border: (BlBorder paint: builder nextColor width: width);
 				outskirts: eachOutskirt;
-				transformDo: [ :t | t scaleBy: scale ];
+				transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
 				yourself ].
 
 	"Translucents"
@@ -513,7 +513,7 @@ BlSpaceFixture >> buildOutskirtsOfPolygons [
 				background: builder nextColor translucent;
 				border: (BlBorder paint: builder nextColor width: width);
 				outskirts: eachOutskirt;
-				transformDo: [ :t | t scaleBy: scale ];
+				transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
 				yourself ].
 
 	"Transparents"
@@ -523,7 +523,7 @@ BlSpaceFixture >> buildOutskirtsOfPolygons [
 				background: Color transparent;
 				border: (BlBorder paint: builder nextColor width: width);
 				outskirts: eachOutskirt;
-				transformDo: [ :t | t scaleBy: scale ];
+				transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
 				yourself ].
 
 ]
@@ -671,7 +671,7 @@ BlSpaceFixture >> buildSimpleShadowsByOutskirt [
 	borderWidth := 9.
 	scale := 0.3.
 	positionGenerator := self 
-		gridPositionGeneratorStartingAt: -14 asPoint
+		gridPositionGeneratorStartingAt: 3 asPoint
 		by: 32
 		columns: 3.
 
@@ -681,7 +681,7 @@ BlSpaceFixture >> buildSimpleShadowsByOutskirt [
 			background: backgroundColor;
 			border: (BlBorder paint: builder nextColor width: borderWidth);
 			outskirts: eachOutskirt;
-			transformDo: [ :t | t scaleBy: scale ];
+			transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
 			effect:
 				(BlSimpleShadowEffect
 					color: Color black
