@@ -24,6 +24,13 @@ BARenderTest class >> exportAll [
 	super exportAll
 ]
 
+{ #category : #convenience }
+BARenderTest class >> inspectAll [
+	<script: 'self inspectAll' >
+
+	super inspectAll
+]
+
 { #category : #tests }
 BARenderTest >> actualForm [
 		

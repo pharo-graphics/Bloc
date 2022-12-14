@@ -24,6 +24,13 @@ BAHitTest class >> exportAll [
 	super exportAll
 ]
 
+{ #category : #convenience }
+BAHitTest class >> inspectAll [
+	<script: 'self inspectAll' >
+
+	super inspectAll
+]
+
 { #category : #tests }
 BAHitTest >> actualForm [
 
