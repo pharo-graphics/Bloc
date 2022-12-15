@@ -56,13 +56,24 @@ BlCornerRadii >> = aBlCornerRadii [
 
 { #category : #converting }
 BlCornerRadii >> asArray [
-	<return: #Array of: #Number>
+
 	^ { 
 		topLeft.
 		topRight.
 		bottomRight.
 		bottomLeft
 	}
+]
+
+{ #category : #converting }
+BlCornerRadii >> asArrayExpandedBy: aNumber [ 
+	"Answer myself converted to Array, expand by aNumber (or reduced if negative)."
+
+	^ self asArray collect: [ :each | 
+		each > 0.0
+			ifFalse: [ 0.0 ]
+			ifTrue: [ (each + aNumber) max: 0.0 ] ]
+
 ]
 
 { #category : #accessing }

@@ -79,10 +79,15 @@ BlElement >> aeDrawOn: aeCanvas [
 
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
+	"Evaluate a block closure taking account my opacity.
+	The element opacity affects border and background, effects, and 
+	recursively to children elements.
+	When I have opaque opacity (1.0) I take the fastest branch, restoring
+	the Cairo caontext afterwards."
 
-	self opacity = 1.0
-		ifTrue: [ aeCanvas restoreContextAfter: aBlockClosure ]
-		ifFalse: [ aeCanvas paintGroupWith: aBlockClosure alpha: self opacity ]
+	self opacity < 1.0
+		ifTrue: [ aeCanvas paintGroupWith: aBlockClosure alpha: self opacity ]
+		ifFalse: [ aeCanvas restoreContextAfter: aBlockClosure ]
 
 ]
 
