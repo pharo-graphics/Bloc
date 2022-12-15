@@ -1490,6 +1490,19 @@ BlSpaceFixture >> buildVariantsOfRoundedRectangle [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfRoundedRectangleAndOutskirts [
+
+	self buildVariantsOf:
+		(BlRoundedRectangleGeometry cornerRadii:
+			(BlCornerRadii new
+				topLeft: 0;
+				topRight: 5;
+				bottomLeft: 10;
+				bottomRight: 15;
+				yourself))
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfSquare [
 
 	self buildVariantsOf: BlSquareGeometry new
