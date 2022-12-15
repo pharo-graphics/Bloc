@@ -1,7 +1,7 @@
 Extension { #name : #BlOutskirtsCentered }
 
 { #category : #'*Bloc-Alexandrie' }
-BlOutskirtsCentered >> aeApplyTo: aeCanvas [ 
+BlOutskirtsCentered >> aeApplyTo: aeCanvas element: aBlElement border: aBlBorder [
 
-	aeCanvas setOutskirtsCentered
+	aBlBorder aeApplyWithCenteredBorderTo: aeCanvas element: aBlElement
 ]

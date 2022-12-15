@@ -51,8 +51,8 @@ BlElement >> aeDrawGeometryOn: aeCanvas [
 		ifTrue: [ aeCanvas setBackgroundOff ]
 		ifFalse: [ myBackground aeApplyTo: aeCanvas ].
 
+	"Border also sets the outskirts and geometry paths"
 	self border aeApplyTo: aeCanvas element: self.
-	self geometry aeApplyTo: aeCanvas element: self.
 
 	aeCanvas drawFigureAndPrepareToClip: (self hasChildren and: [ self clipChildren ]).
 
