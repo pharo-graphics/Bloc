@@ -22,25 +22,24 @@ BlRoundedRectangleGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlEl
 			| halfBorderWidth |
 			halfBorderWidth := borderWidth / 2.0.
 			cairoContext
-				roundedRectangle: (halfBorderWidth asPoint extent: extent - borderWidth)
+				roundedRectangleOrigin: halfBorderWidth asPoint
+				extent: extent - halfBorderWidth
 				radii: (cornerRadii asArrayExpandedBy: halfBorderWidth negated) ]
 
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlRoundedRectangleGeometry >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement borderWidth: borderWidth [ 
+BlRoundedRectangleGeometry >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement borderWidth: borderWidth [
 
-	| halfBorderWidth |
-	halfBorderWidth := borderWidth/2.0.
 
 	aeCanvas
-		drawClosedCurvedPathWith: [ :cairoContext |
+		drawClosedCurvedPathWith: [ :cairoContext | 
+			cairoContext roundedRectangleTo: extent radii: cornerRadii asArray ]
+		borderPathWith: [ :cairoContext | 
+			| halfBorderWidth |
+			halfBorderWidth := borderWidth / 2.0.
 			cairoContext
-				roundedRectangleTo: extent
-				radii: cornerRadii asArray ]
-		borderPathWith: [ :cairoContext |
-			cairoContext
-				roundedRectangle: (halfBorderWidth negated asPoint extent: extent + borderWidth)
+				roundedRectangleOrigin: halfBorderWidth negated asPoint
+				extent: extent + halfBorderWidth
 				radii: (cornerRadii asArrayExpandedBy: halfBorderWidth) ]
-
 ]
