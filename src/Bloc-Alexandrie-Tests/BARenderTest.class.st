@@ -11,13 +11,6 @@ BARenderTest class >> allFormSelectors [
 ]
 
 { #category : #convenience }
-BARenderTest class >> deleteAllExports [
-	<script: 'self deleteAllExports' >
-
-	super deleteAllExports
-]
-
-{ #category : #convenience }
 BARenderTest class >> exportAll [
 	<script: 'self exportAll' >
 
@@ -29,6 +22,13 @@ BARenderTest class >> inspectAll [
 	<script: 'self inspectAll' >
 
 	super inspectAll
+]
+
+{ #category : #convenience }
+BARenderTest class >> inspectMismatches [
+	<script: 'self inspectMismatches' >
+
+	super inspectMismatches
 ]
 
 { #category : #tests }
