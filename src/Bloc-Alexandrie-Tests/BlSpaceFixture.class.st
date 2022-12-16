@@ -1046,7 +1046,7 @@ BlSpaceFixture >> buildTransformTranslate [
 ]
 
 { #category : #fixtures }
-BlSpaceFixture >> buildVariantsOf: aBlElementGeometry [
+BlSpaceFixture >> buildVariantsOf: aGeometryFactoryBlock [
 
 	| outskirts positionGenerator addElementBlock |
 	builder spaceExtent: 150@220.
@@ -1058,7 +1058,7 @@ BlSpaceFixture >> buildVariantsOf: aBlElementGeometry [
 		columns: 3.
 	addElementBlock := [ :backgroundColor :borderColor :aBlOutskirt |
 		builder addToRoot
-			geometry: aBlElementGeometry;
+			geometry: aGeometryFactoryBlock value;
 			border: (BlBorder paint: borderColor width: 5);
 			background: backgroundColor;
 			outskirts: aBlOutskirt;
@@ -1144,11 +1144,11 @@ BlSpaceFixture >> buildVariantsOfAll: aBlElementGeometryCollection [
 BlSpaceFixture >> buildVariantsOfAnnulusSector [
 
 	self buildVariantsOf: 
-		(BlAnnulusSectorGeometry new
+		[BlAnnulusSectorGeometry new
 			startAngle: 225;
 			endAngle: 360;
 			innerRadius: 0.3;
-			outerRadius: 0.9)
+			outerRadius: 0.9]
 ]
 
 { #category : #fixtures }
@@ -1224,11 +1224,11 @@ BlSpaceFixture >> buildVariantsOfAnnulusSectorAngles [
 BlSpaceFixture >> buildVariantsOfAnnulusSectorStartGreaterThanEnd [
 
 	self buildVariantsOf: 
-		(BlAnnulusSectorGeometry new
+		[BlAnnulusSectorGeometry new
 			startAngle: 180;
 			endAngle: 90;
 			innerRadius: 0.4;
-			outerRadius: 1.0)
+			outerRadius: 1.0]
 ]
 
 { #category : #fixtures }
@@ -1256,11 +1256,11 @@ BlSpaceFixture >> buildVariantsOfBezier4CPs [
 BlSpaceFixture >> buildVariantsOfCircleSector [
 
 	self buildVariantsOf: 
-		(BlAnnulusSectorGeometry new
+		[BlAnnulusSectorGeometry new
 			startAngle: 225;
 			endAngle: 360;
 			innerRadius: 0.0;
-			outerRadius: 0.9)
+			outerRadius: 0.9]
 ]
 
 { #category : #fixtures }
@@ -1387,19 +1387,19 @@ BlSpaceFixture >> buildVariantsOfLinelikeGeometry: aGeometry [
 { #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfPolygon [
 
-	self buildVariantsOf: (BlPolygonGeometry vertices: self hexagonVertices)
+	self buildVariantsOf: [BlPolygonGeometry vertices: self hexagonVertices]
 ]
 
 { #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfPolyline [
 
-	self buildVariantsOf: (BlPolylineGeometry vertices: self hexagonVertices)
+	self buildVariantsOf: [BlPolylineGeometry vertices: self hexagonVertices]
 ]
 
 { #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfRectangle [
 
-	self buildVariantsOf: BlRectangleGeometry new
+	self buildVariantsOf: [BlRectangleGeometry new]
 ]
 
 { #category : #fixtures }
@@ -1493,19 +1493,47 @@ BlSpaceFixture >> buildVariantsOfRoundedRectangle [
 BlSpaceFixture >> buildVariantsOfRoundedRectangleAndOutskirts [
 
 	self buildVariantsOf:
-		(BlRoundedRectangleGeometry cornerRadii:
+		[BlRoundedRectangleGeometry cornerRadii:
 			(BlCornerRadii new
 				topLeft: 0;
 				topRight: 5;
 				bottomLeft: 10;
 				bottomRight: 15;
-				yourself))
+				yourself)]
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfRoundedRectangleCentered [
+
+	self buildVariantsOfRoundedRectangle.
+	
+	builder space root allChildrenDepthFirstDo: [ :each |
+		each size: each size + (3 @ -3). "To check not transposed"
+		each outskirts: BlOutskirts centered ]
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfRoundedRectangleInside [
+
+	self buildVariantsOfRoundedRectangle.
+	
+	builder space root allChildrenDepthFirstDo: [ :each |
+		each outskirts: BlOutskirts inside ]
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfRoundedRectangleOutside [
+
+	self buildVariantsOfRoundedRectangle.
+	
+	builder space root allChildrenDepthFirstDo: [ :each |
+		each outskirts: BlOutskirts outside ]
 ]
 
 { #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfSquare [
 
-	self buildVariantsOf: BlSquareGeometry new
+	self buildVariantsOf: [BlSquareGeometry new]
 ]
 
 { #category : #private }
