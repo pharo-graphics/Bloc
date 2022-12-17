@@ -80,6 +80,76 @@ TBlAlignable >> horizontalAlignment: aBlElementAlignment [
 	self explicitRequirement
 ]
 
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignBottomCenter [
+
+	^ self verticalAlignment = BlElementAlignment vertical end and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal center ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignBottomLeft [
+
+	^ self verticalAlignment = BlElementAlignment vertical end and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal start ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignBottomRight [
+
+	^ self verticalAlignment = BlElementAlignment vertical end and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal end ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignCenter [
+
+	^ self verticalAlignment = BlElementAlignment vertical center and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal center ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignCenterLeft [
+
+	^ self verticalAlignment = BlElementAlignment vertical center and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal start ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignCenterRight [
+
+	^ self verticalAlignment = BlElementAlignment vertical center and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal end ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignNone [
+
+	^ self verticalAlignment = BlElementAlignment vertical null and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal null ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignTopCenter [
+
+	^ self verticalAlignment = BlElementAlignment vertical start and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal center ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignTopLeft [
+
+	^ self verticalAlignment = BlElementAlignment vertical start and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal start ]
+]
+
+{ #category : #'api - alignment' }
+TBlAlignable >> isAlignTopRight [
+
+	^ self verticalAlignment = BlElementAlignment vertical start and: [ 
+		  self horizontalAlignment = BlElementAlignment horizontal end ]
+]
+
 { #category : #accessing }
 TBlAlignable >> verticalAlignment [
 	<return: #BlElementAlignment>
