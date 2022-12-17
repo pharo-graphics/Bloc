@@ -4,5 +4,5 @@ Extension { #name : #BlElementVectorGeometry }
 BlElementVectorGeometry >> aeContainsPoint: aPoint in: aBlElement [
 	"Answer whether aPoint is contained by a this geometry."
 
-	^ self subclassResponsibility
+	^ self notYetImplemented
 ]
