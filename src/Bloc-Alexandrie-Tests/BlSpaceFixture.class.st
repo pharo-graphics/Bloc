@@ -1503,34 +1503,6 @@ BlSpaceFixture >> buildVariantsOfRoundedRectangleAndOutskirts [
 ]
 
 { #category : #fixtures }
-BlSpaceFixture >> buildVariantsOfRoundedRectangleCentered [
-
-	self buildVariantsOfRoundedRectangle.
-	
-	builder space root allChildrenDepthFirstDo: [ :each |
-		each size: each size + (3 @ -3). "To check not transposed"
-		each outskirts: BlOutskirts centered ]
-]
-
-{ #category : #fixtures }
-BlSpaceFixture >> buildVariantsOfRoundedRectangleInside [
-
-	self buildVariantsOfRoundedRectangle.
-	
-	builder space root allChildrenDepthFirstDo: [ :each |
-		each outskirts: BlOutskirts inside ]
-]
-
-{ #category : #fixtures }
-BlSpaceFixture >> buildVariantsOfRoundedRectangleOutside [
-
-	self buildVariantsOfRoundedRectangle.
-	
-	builder space root allChildrenDepthFirstDo: [ :each |
-		each outskirts: BlOutskirts outside ]
-]
-
-{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfSquare [
 
 	self buildVariantsOf: [BlSquareGeometry new]
