@@ -31,11 +31,13 @@ BlBezierCurveGeometry >> controlPoints: aCollection [
 ]
 
 { #category : #'geometry bounds' }
-BlBezierCurveGeometry >> geometryBounds: aBounds [
+BlBezierCurveGeometry >> geometryBounds: aBlBounds [
 
-	^ (aBounds rectangle: (self controlPoints
-			ifEmpty: [ 0@0 extent: 0@0 ]
-			ifNotEmpty: [ :theControlPoints | Rectangle encompassing: theControlPoints ]))
+	^ aBlBounds rectangle:
+		(self controlPoints
+			ifEmpty: [ 0 @ 0 extent: 0 @ 0 ]
+			ifNotEmpty: [ :theControlPoints | 
+				Rectangle encompassing: theControlPoints ])
 ]
 
 { #category : #testing }

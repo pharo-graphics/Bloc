@@ -24,12 +24,11 @@ BlPolygonGeometry class >> vertices: aCollection [
 ]
 
 { #category : #'geometry bounds' }
-BlPolygonGeometry >> geometryBounds: aBounds [
+BlPolygonGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 
-	^ aBounds
+	^ aBlBounds
 		origin: self vertices min
 		corner: self vertices max
 ]
@@ -53,7 +52,6 @@ BlPolygonGeometry >> matchExtent: anExtent [
 
 { #category : #accessing }
 BlPolygonGeometry >> vertices [
-	<return: #SequenceableCollection of: #Point>
 
 	^ vertices
 ]

@@ -31,12 +31,11 @@ BlPolylineGeometry >> asElement [
 ]
 
 { #category : #'geometry bounds' }
-BlPolylineGeometry >> geometryBounds: aBounds [
+BlPolylineGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 
-	^ aBounds
+	^ aBlBounds
 		origin: self vertices min
 		corner: self vertices max
 ]

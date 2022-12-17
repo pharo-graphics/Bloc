@@ -48,7 +48,7 @@ BlBorder >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement [
 	aBlElement geometry
 		aeApplyWithInsideBorderTo: aeCanvas
 		element: aBlElement
-		borderWidth: self width
+		borderWidth: width
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -58,5 +58,5 @@ BlBorder >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement [
 	aBlElement geometry
 		aeApplyWithOutsideBorderTo: aeCanvas
 		element: aBlElement
-		borderWidth: self width
+		borderWidth: width
 ]

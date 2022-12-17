@@ -24,12 +24,11 @@ BlCircleGeometry >> containsPoint: aPoint in: aBlElement [
 ]
 
 { #category : #'geometry bounds' }
-BlCircleGeometry >> geometryBounds: aBounds [
+BlCircleGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 
-	^ aBounds
+	^ aBlBounds
 		origin: self origin
 		extent: (self radius * 2.0) asPoint
 ]

@@ -42,8 +42,12 @@ BlLineGeometry >> from: aFromPoint to: aToPoint [
 ]
 
 { #category : #geometry }
-BlLineGeometry >> geometryBounds: aBounds [
-	^ (aBounds rectangle: (Rectangle encompassing: { self from . self to}))
+BlLineGeometry >> geometryBounds: aBlBounds [
+
+	^ aBlBounds rectangle: 
+		(Rectangle encompassing: { 
+			self from.
+			self to })
 ]
 
 { #category : #testing }
