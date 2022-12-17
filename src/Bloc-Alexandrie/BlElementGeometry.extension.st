@@ -13,7 +13,6 @@ BlElementGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement bor
 	
 	The general implementation ignores the outskirt (at this point), specifying to the canvas only the background path. The canvas knows how to use such path to draw the border with inside outskirts, but it should be slower than specifying a border path, if possible by each concrete geometry (my subclasses)."
 
-	self aeApplyTo: aeCanvas element: aBlElement
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -22,5 +21,4 @@ BlElementGeometry >> aeApplyWithOutsideBorderTo: anAeCanvas element: aBlElement 
 	
 	The general implementation ignores the outskirt (at this point), specifying to the canvas only the background path. The canvas knows how to use such path to draw the border with outside outskirts, but it should be slower than specifying a border path, if possible by each concrete geometry (my subclasses)."
 
-	self aeApplyTo: anAeCanvas element: aBlElement
 ]

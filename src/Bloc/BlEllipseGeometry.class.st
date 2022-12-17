@@ -36,6 +36,18 @@ BlEllipseGeometry >> containsPoint: aPoint in: aBlElement [
 	^ ((normalized x squared / xRadius squared) + (normalized y squared / yRadius squared)) <= 1
 ]
 
+{ #category : #testing }
+BlEllipseGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlEllipseGeometry >> hasJoins [
+
+	^ false
+]
+
 { #category : #geometry }
 BlEllipseGeometry >> matchExtent: anExtent [
 	self extent: anExtent

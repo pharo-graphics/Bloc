@@ -3,7 +3,7 @@ Extension { #name : #BlEllipseGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlEllipseGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas drawClosedCurvedPathWith: [ :cairoContext | 
+	aeCanvas pathFactory: [ :cairoContext | 
 		| rect |
 		rect := self geometryBounds.
 		cairoContext

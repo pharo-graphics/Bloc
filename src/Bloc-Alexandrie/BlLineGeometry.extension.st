@@ -3,10 +3,8 @@ Extension { #name : #BlLineGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlLineGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas drawOpenPathWith: [ :cairoContext |
-		cairoContext
-			lineFrom: from to: to ]
-
+	aeCanvas pathFactory: [ :cairoContext | 
+		cairoContext lineFrom: from to: to ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }

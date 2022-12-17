@@ -3,8 +3,9 @@ Extension { #name : #BlPolylineGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlPolylineGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas drawOpenPathWith: [ :cairoContext |
-		self vertices do: [ :each | cairoContext lineTo: each ] ]
+	aeCanvas pathFactory: [ :cairoContext |
+		"Cairo treats first lineTo: as a moveTo:"
+		vertices do: [ :each | cairoContext lineTo: each ] ]
 
 ]
 

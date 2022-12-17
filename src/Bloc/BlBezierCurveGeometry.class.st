@@ -38,6 +38,18 @@ BlBezierCurveGeometry >> geometryBounds: aBounds [
 			ifNotEmpty: [ :theControlPoints | Rectangle encompassing: theControlPoints ]))
 ]
 
+{ #category : #testing }
+BlBezierCurveGeometry >> hasCaps [
+
+	^ true
+]
+
+{ #category : #testing }
+BlBezierCurveGeometry >> hasJoins [
+
+	^ false
+]
+
 { #category : #initialization }
 BlBezierCurveGeometry >> initialize [
 	super initialize.

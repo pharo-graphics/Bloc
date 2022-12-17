@@ -3,7 +3,7 @@ Extension { #name : #BlBezierCurveGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlBezierCurveGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas drawOpenPathWith: [ :cairoContext |
+	aeCanvas pathFactory: [ :cairoContext |
 		self aeDrawAccordingToControlPointsOn: cairoContext ]
 
 ]

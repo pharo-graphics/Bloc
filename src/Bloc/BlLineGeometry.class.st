@@ -46,6 +46,18 @@ BlLineGeometry >> geometryBounds: aBounds [
 	^ (aBounds rectangle: (Rectangle encompassing: { self from . self to}))
 ]
 
+{ #category : #testing }
+BlLineGeometry >> hasCaps [
+
+	^ true
+]
+
+{ #category : #testing }
+BlLineGeometry >> hasJoins [
+
+	^ false
+]
+
 { #category : #initialization }
 BlLineGeometry >> initialize [
 	super initialize.

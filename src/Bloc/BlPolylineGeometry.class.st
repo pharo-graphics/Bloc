@@ -41,6 +41,18 @@ BlPolylineGeometry >> geometryBounds: aBounds [
 		corner: self vertices max
 ]
 
+{ #category : #testing }
+BlPolylineGeometry >> hasCaps [
+
+	^ true
+]
+
+{ #category : #testing }
+BlPolylineGeometry >> hasJoins [
+
+	^ vertices size > 2
+]
+
 { #category : #geometry }
 BlPolylineGeometry >> matchExtent: anExtent [
 	extent := anExtent

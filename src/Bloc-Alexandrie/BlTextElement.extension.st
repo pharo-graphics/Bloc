@@ -43,16 +43,18 @@ BlTextElement >> aeDrawRectangles: anArrayOfrectangles on: aeCanvas with: aColor
 	"TODO: refactor the following is the only Alexandrie-specific code"
 
 	aeCanvas restoreContextAfter: [ 
-		aeCanvas setBackgroundWith: [ aeCanvas setSourceColor: aColor twiceLighter twiceLighter].
+
+		aeCanvas pathFactory: [ :cairoContext |
+			anArrayOfrectangles do: [ :each | cairoContext rectangle: each ] ].
+
+		aeCanvas setBackgroundWith: [
+			aeCanvas setSourceColor: aColor twiceLighter twiceLighter ].
 
 		aeCanvas setOutskirtsOutside.
 		aeCanvas setBorderBlock: [ 
 			aeCanvas setSourceColor: aColor twiceDarker.
-			aeCanvas setLineJoinBlock: [ aeCanvas setJoinRound ].
+			aeCanvas setJoinRound.
 			aeCanvas setBorderWidth: 1 ].
-
-		aeCanvas drawClosedPathWith: [ :cairoContext |
-			anArrayOfrectangles do: [ :each | cairoContext rectangle: each ] ].
 
 		aeCanvas drawFigure ]
 ]

@@ -41,15 +41,14 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 		"Draw the border around the character"
 		aeCanvas restoreContextAfter: [ 
 			"aeCanvas setBackgroundOff."
-			Color random asBlPaint aeApplyTo: aeCanvas opacity: 0.4.
-
 			" setOutskirtsInside otherwise the cursor is hidden"
+			aeCanvas pathFactory: [ :cairoContext |
+				cairoContext rectangle: fixedBounds ].
+			Color random asBlPaint aeApplyTo: aeCanvas opacity: 0.4.
 			aeCanvas setOutskirtsInside.
 			aeCanvas setBorderBlock: [ 
 				aeCanvas setSourceColor: Color veryVeryLightGray lighter.
 				aeCanvas setBorderWidth: 1.0 ].
-			aeCanvas drawClosedPathWith: [ :cairoContext |
-				cairoContext rectangle: fixedBounds ].
 			aeCanvas drawFigure ].
 
 		"Draw the current character"

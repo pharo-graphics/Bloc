@@ -110,7 +110,7 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-DevTool' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-UnitedTests') ];
 				package: #'Bloc-Scripter' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Exporter' 'BlocHost-Mock' 'Bloc-UnitedTests') ]"
+					spec requires: #('Bloc-Layout' 'Bloc-Exporter' 'BlocHost-Mock' 'Bloc-UnitedTests') ].
 
 			spec
 				package: #'Bloc-Examples' with: [
@@ -118,7 +118,7 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Compositor-Examples' with: [
 					spec requires: #(#'Bloc-Examples') ];
 				package: #'Bloc-Text-Examples' with: [
-					spec requires: #(#'Bloc-Examples') ]"
+					spec requires: #(#'Bloc-Examples') ]
 
 			].
 ]

@@ -48,6 +48,18 @@ BlAnnulusSectorGeometry >> endAngle: anAngleInDegrees [
 	self releaseCache
 ]
 
+{ #category : #testing }
+BlAnnulusSectorGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlAnnulusSectorGeometry >> hasJoins [
+
+	^ true
+]
+
 { #category : #initialization }
 BlAnnulusSectorGeometry >> initialize [
 	super initialize.

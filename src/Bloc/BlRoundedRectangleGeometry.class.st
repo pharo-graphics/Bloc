@@ -94,6 +94,18 @@ BlRoundedRectangleGeometry >> cornerRadii [
 	^ cornerRadii
 ]
 
+{ #category : #testing }
+BlRoundedRectangleGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlRoundedRectangleGeometry >> hasJoins [
+
+	^ false
+]
+
 { #category : #initialization }
 BlRoundedRectangleGeometry >> initializeWith: aCornerRadii [
 

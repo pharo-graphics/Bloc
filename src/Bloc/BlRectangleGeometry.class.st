@@ -30,6 +30,18 @@ BlRectangleGeometry >> geometryBounds: aBlBounds of: aBlElement [
 		bottom: aBlElement height
 ]
 
+{ #category : #testing }
+BlRectangleGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlRectangleGeometry >> hasJoins [
+
+	^ true
+]
+
 { #category : #geometry }
 BlRectangleGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"

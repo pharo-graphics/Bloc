@@ -121,6 +121,18 @@ BlTriangleGeometry >> computeVertices [
 								ifFalse: [ self error: ('Triangle has unsupported orientation ({1})' format: { orientation }) ] ] ] ]
 ]
 
+{ #category : #testing }
+BlTriangleGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlTriangleGeometry >> hasJoins [
+
+	^ true
+]
+
 { #category : #initialization }
 BlTriangleGeometry >> initialize [
 	super initialize.

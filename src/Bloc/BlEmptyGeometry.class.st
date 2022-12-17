@@ -26,6 +26,18 @@ BlEmptyGeometry >> geometryBounds: aBlBounds of: aBlElement [
 		bottom: aBlElement height
 ]
 
+{ #category : #testing }
+BlEmptyGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlEmptyGeometry >> hasJoins [
+
+	^ false
+]
+
 { #category : #geometry }
 BlEmptyGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"

@@ -3,7 +3,7 @@ Extension { #name : #BlTriangleGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlTriangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas drawClosedPathWith: [ :cairoContext |
+	aeCanvas pathFactory: [ :cairoContext |
 		| thePoints |
 		thePoints := self computeVertices.
 

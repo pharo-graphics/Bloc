@@ -3,7 +3,7 @@ Extension { #name : #BlAnnulusSectorGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlAnnulusSectorGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas drawClosedPathWith: [ :cairoContext | 
+	aeCanvas pathFactory: [ :cairoContext | 
 		self innerRadius = 0.0
 			ifTrue: [ 
 				cairoContext

@@ -14,20 +14,19 @@ BlTextDecorationAttribute >> aeDrawAboveOn: aeCanvas span: aBASpan [
 				toY := 2 + self thickness ].
 			
 			eachType = BlTextDecorationType lineThrough ifTrue: [				
-				self notYetImplemented ].
-			 ].
+				self notYetImplemented ] ].
 		
-		aeCanvas
-			setBackgroundWith: [ aeCanvas setSourceColor: self color ];
-			setBorderOff.
-		"ToDo: set line joins?"
-
-		aeCanvas drawClosedPathWith: [ :cairoContext |
+		aeCanvas pathFactory: [ :cairoContext |
 			cairoContext
 				rectangleX: fromX
 				y: fromY
 				width: toX
 				height: toY ].
+
+		aeCanvas
+			setBackgroundWith: [ aeCanvas setSourceColor: self color ];
+			setBorderOff.
+		"ToDo: set line joins?"
 
 		aeCanvas drawFigure.
 		

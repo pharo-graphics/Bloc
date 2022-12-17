@@ -46,12 +46,14 @@ BlElement >> aeDrawGeometryOn: aeCanvas [
 	- Post-condition: position and transformations are maintanined intact."
 	
 	| myBackground |
+	self geometry aeApplyTo: aeCanvas element: self.
+
 	myBackground := self background.
 	myBackground isTransparent
 		ifTrue: [ aeCanvas setBackgroundOff ]
 		ifFalse: [ myBackground aeApplyTo: aeCanvas ].
 
-	"Border also sets the outskirts and geometry paths"
+	"Border may set stroke options, outskirts and geometry's border path"
 	self border aeApplyTo: aeCanvas element: self.
 
 	aeCanvas drawFigureAndPrepareToClip: (self hasChildren and: [ self clipChildren ]).

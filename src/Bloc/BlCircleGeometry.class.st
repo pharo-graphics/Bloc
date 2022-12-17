@@ -34,6 +34,18 @@ BlCircleGeometry >> geometryBounds: aBounds [
 		extent: (self radius * 2.0) asPoint
 ]
 
+{ #category : #testing }
+BlCircleGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlCircleGeometry >> hasJoins [
+
+	^ false
+]
+
 { #category : #comparing }
 BlCircleGeometry >> hash [
 	^ self class hash

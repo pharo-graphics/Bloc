@@ -34,6 +34,18 @@ BlPolygonGeometry >> geometryBounds: aBounds [
 		corner: self vertices max
 ]
 
+{ #category : #testing }
+BlPolygonGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlPolygonGeometry >> hasJoins [
+
+	^ true
+]
+
 { #category : #geometry }
 BlPolygonGeometry >> matchExtent: anExtent [
 	extent := anExtent

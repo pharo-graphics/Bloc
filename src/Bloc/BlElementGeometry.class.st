@@ -38,6 +38,18 @@ BlElementGeometry >> geometryBounds: aBounds of: aBlElement [
 	^ self subclassResponsibility
 ]
 
+{ #category : #testing }
+BlElementGeometry >> hasCaps [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+BlElementGeometry >> hasJoins [
+
+	^ self subclassResponsibility
+]
+
 { #category : #geometry }
 BlElementGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"

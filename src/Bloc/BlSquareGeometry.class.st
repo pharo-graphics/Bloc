@@ -24,6 +24,18 @@ BlSquareGeometry >> geometryBounds: aBounds [
 		extent: (self length * 2.0) asPoint
 ]
 
+{ #category : #testing }
+BlSquareGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlSquareGeometry >> hasJoins [
+
+	^ true
+]
+
 { #category : #accessing }
 BlSquareGeometry >> length [
 	^ length
