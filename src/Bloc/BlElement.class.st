@@ -562,6 +562,24 @@ BlElement >> beInSingleCompositionLayer [
 	visuals := visuals compositingMode: BlCompositingSingleLayerMode uniqueInstance
 ]
 
+{ #category : #accessing }
+BlElement >> beOutskirtsCentered [
+
+	self outskirts: BlOutskirts centered
+]
+
+{ #category : #accessing }
+BlElement >> beOutskirtsInside [
+
+	self outskirts: BlOutskirts inside
+]
+
+{ #category : #accessing }
+BlElement >> beOutskirtsOutside [
+
+	self outskirts: BlOutskirts outside
+]
+
 { #category : #'api - look' }
 BlElement >> border [
 	<return: #BlBorder>
