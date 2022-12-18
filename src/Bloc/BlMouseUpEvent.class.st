@@ -41,13 +41,6 @@ BlMouseUpEvent class >> secondary [
 ]
 
 { #category : #converting }
-BlMouseUpEvent >> asClickEvent [
-	^ BlClickEvent new
-		copyFrom: self;
-		yourself
-]
-
-{ #category : #converting }
 BlMouseUpEvent >> asDoubleClickEvent [
 	^ BlDoubleClickEvent new
 		copyFrom: self;

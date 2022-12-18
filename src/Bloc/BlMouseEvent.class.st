@@ -56,6 +56,13 @@ BlMouseEvent >> asClickCandidateEvent [
 ]
 
 { #category : #converting }
+BlMouseEvent >> asClickEvent [
+	^ BlClickEvent new
+		copyFrom: self;
+		yourself
+]
+
+{ #category : #converting }
 BlMouseEvent >> asDictionaryForExport [
 	^ super asDictionaryForExport
 		at: #position put: position printString;
