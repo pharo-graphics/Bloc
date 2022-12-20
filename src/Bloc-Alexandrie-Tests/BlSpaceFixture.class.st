@@ -217,6 +217,153 @@ BlSpaceFixture >> buildEmptyGeometry [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildGaussianShadowsByCircleSector [
+
+	self buildVariantsOfCircleSectorAngles.
+
+	builder space root allChildrenDepthFirstDo: [ :each |
+		each effect:
+			(BlGaussianShadowEffect
+					color: Color green
+					width: 2.5
+					offset: -2 @ 3) ] 
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildGaussianShadowsByGeometry [
+
+	| positionGenerator addElementBlock cellSize numberOfColumns shadowSize elementSize geometryBlocks |
+	shadowSize := 2.
+	elementSize := 12.
+	cellSize := elementSize * 1.75.
+	numberOfColumns := 4.
+	geometryBlocks := {
+		[ BlRectangleGeometry new ].
+		[ BlCircleGeometry new ].
+		[ BlTriangleGeometry new ].
+		[ BlTriangleGeometry new beTop; yourself ].
+		[ BlRoundedRectangleGeometry cornerRadius: 3 ].
+		[ BlPolygonGeometry vertices: { 0 asPoint. 0@elementSize. elementSize @ 0 } ].
+	}.
+	"Establish the extent of the canvas based on parameters"
+	builder spaceExtent:
+		((cellSize * numberOfColumns) @
+		 (cellSize * geometryBlocks size)).
+
+	"Raw grid layout"
+	positionGenerator := self
+		gridPositionGeneratorStartingAt: 5 asPoint
+		by: cellSize
+		columns: numberOfColumns.
+
+	"Reusable block to add each element"
+	addElementBlock := [ :aGeometry :backgroundAlpha :shadowAlpha :shadowOffset |
+		builder addToRoot
+			geometry: aGeometry;
+			relocate: positionGenerator next;
+			size: elementSize asPoint;
+			background: (Color blue alpha: backgroundAlpha);
+			effect: (BlGaussianShadowEffect
+					color: (Color orange alpha: shadowAlpha)
+					width: 2
+					offset: shadowOffset);
+			yourself ].
+
+	"Add variants of each geometry"
+	geometryBlocks do: [ :eachBlock |
+
+		"Both opaque, background and shadow"
+		addElementBlock
+			value: eachBlock value
+			value: 1.0
+			value: 1.0
+			value: shadowSize @ shadowSize.
+
+		"Translucent shadow"
+		addElementBlock
+			value: eachBlock value
+			value: 1.0
+			value: 0.6
+			value: shadowSize negated @ shadowSize.
+
+		"Both translucent"
+		addElementBlock
+			value: eachBlock value
+			value: 0.6
+			value: 0.6
+			value: shadowSize @ shadowSize negated.
+
+		"Translucent background and opaque shadow (a strange case)"
+		addElementBlock
+			value: eachBlock value
+			value: 0.6
+			value: 1.0
+			value: 0 @ shadowSize.
+
+		]
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildGaussianShadowsByOutskirt [
+
+	| outskirts borderWidth scale positionGenerator addElementBlock |
+	outskirts := { BlOutskirts inside. BlOutskirts centered. BlOutskirts outside }.
+	borderWidth := 9.
+	scale := 0.3.
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: 3 asPoint
+		by: 32
+		columns: 3.
+
+	addElementBlock := [ :eachOutskirt :backgroundColor |
+		builder addHexagonalPolygon
+			relocate: positionGenerator next;
+			background: backgroundColor;
+			border: (BlBorder paint: builder nextColor width: borderWidth);
+			outskirts: eachOutskirt;
+			transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
+			effect:
+				(BlGaussianShadowEffect
+					color: Color purple
+					width: borderWidth / 2
+					offset: 2 * borderWidth asPoint);
+			yourself ].
+	
+	"Opaques"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: builder nextColor ].
+
+	"Translucents"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: builder nextColor translucent ].
+
+	"Transparents"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: Color transparent ].
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildGaussianShadowsByTextTransformations [
+
+	self buildTextTransformations.
+	
+	builder space root allChildrenDepthFirstDo: [ :each |
+		each effect:
+			(BlGaussianShadowEffect
+				color: Color orange
+				width: 1
+				offset: 0@0 ) ]
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildGradients [
 
 	| aLinearGradient aRadialGradient anExtent |
