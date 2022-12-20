@@ -13,7 +13,7 @@ Class {
 	#category : #BaselineOfBloc
 }
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfBloc >> baseline: spec [
 	<baseline>
 	spec
@@ -37,7 +37,9 @@ BaselineOfBloc >> baseline: spec [
 			"Animation"
 			spec 
 				package: #'Bloc-Animation' with: [
-					spec requires: #('Bloc') ].
+					spec requires: #('Bloc') ];
+				package: #'Bloc-Animation-Tests' with: [
+					spec requires: #('Bloc-Animation') ].
 
 			"Morphic host"
 			spec 
@@ -52,7 +54,7 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #('BlocHost-OSWindow'). ].
 
 			"Text"
-			spec 
+			spec
 				package: #'Bloc-Text' with: [
 					spec requires: #('Bloc'). ];
 				package: #'Bloc-Text-Rope' with: [
@@ -60,7 +62,9 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Text-Elements' with: [
 					spec requires: #('Bloc' 'Bloc-Text') ];
 				package: #'Bloc-Text-Rope-Tests' with: [
-					spec requires: #('Bloc-Text-Rope') ].
+					spec requires: #('Bloc-Text-Rope') ];
+				package: #'Bloc-Text-Tests' with: [
+					spec requires: #('Bloc-Text') ].
 
 			"Sparta canvas"
 			spec
@@ -87,12 +91,8 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Layout' with: [
 					spec requires: #('Bloc') ];
 				package: #'Bloc-LayoutZoomable' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Animation') ];
+					spec requires: #('Bloc-Layout' 'Bloc-Animation') ].
 				"Layout depends also on compositor. See https://github.com/pharo-graphics/Bloc/issues/87"
-				package: #'Bloc-Layout-Tests' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Text') ].
-				"package: #'Bloc-Layout-Examples' with: [
-					spec requires: #('Bloc-Layout') ]."
 
 			"Calypso & Spec2 Extensions"
 			spec 
@@ -118,7 +118,13 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Compositor-Examples' with: [
 					spec requires: #(#'Bloc-Examples') ];
 				package: #'Bloc-Text-Examples' with: [
-					spec requires: #(#'Bloc-Examples') ]
+					spec requires: #(#'Bloc-Examples') ];
+				package: #'Bloc-Layout-Tests' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ];
+				package: #'Bloc-Layout-Examples' with: [
+					spec requires: #('Bloc-Layout') ];
+				package: #'Bloc-Doc' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-Text-Elements') ].
 
 			].
 ]
