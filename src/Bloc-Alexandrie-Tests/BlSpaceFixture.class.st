@@ -845,7 +845,17 @@ BlSpaceFixture >> buildTextAttributes [
 { #category : #fixtures }
 BlSpaceFixture >> buildTextEmoji [
 
-	| emojiString |
+	| emojiFont emojiString |
+	self flag: #todo.
+	emojiFont := AeNotoColorEmojiDownloadedFont new.
+	(AeFontManager globalInstance
+		includesFamilyName: emojiFont familyName) ifFalse: [
+			"Baseline ensured to download it, but after reopening
+			the image, we may require a new scan."
+			AeFontManager resetGlobalInstance.
+			AeFontManager globalInstance
+				scanDirectory: AeFilesystemResources fontsDirectory ].
+
 	builder spaceExtent: 200 @ 80.
 
 	emojiString := WideString streamContents: [ :stream |
@@ -854,9 +864,10 @@ BlSpaceFixture >> buildTextEmoji [
 
 	builder
 		addTextToRoot: (emojiString asRopedText
-			fontName: self emojiFontFamilyName;
+			fontName: emojiFont familyName;
 			fontSize: 50;
-			yourself)
+			yourself).
+
 
 ]
 
@@ -1516,12 +1527,6 @@ BlSpaceFixture >> diagonalPositionGeneratorStartingAt: aPoint by: by [
 		index := 0.
 		[ 	g yield: aPoint + index asPoint.
 			index := index + by ] repeat ]
-]
-
-{ #category : #private }
-BlSpaceFixture >> emojiFontFamilyName [
-
-	^ AeNotoColorEmojiDownloadedFont new familyName
 ]
 
 { #category : #private }
