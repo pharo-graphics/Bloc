@@ -200,9 +200,8 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 { #category : #'api - text' }
 BlTextElement >> editorMeasurement [
 
-	self measurement:
-		BlTextElementEditorMeasurementStrategy uniqueInstance.
-	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
+	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
+	self baselineMeasurer: BlAscentLooseBaselineMeasurer uniqueInstance
 ]
 
 { #category : #'selection - management' }
@@ -291,8 +290,7 @@ BlTextElement >> isTabulation [
 { #category : #'api - text' }
 BlTextElement >> labelMeasurement [
 
-	self measurement:
-		BlTextElementLabelMeasurementStrategy uniqueInstance.
+	self measurement: BlTextElementLabelMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
 ]
 
