@@ -219,13 +219,11 @@ BlSpaceFixture >> buildEmptyGeometry [
 { #category : #fixtures }
 BlSpaceFixture >> buildGaussianShadowsByCircleSector [
 
-	self buildVariantsOfCircleSectorAngles.
-
-	builder space root allChildrenDepthFirstDo: [ :each |
+	self buildVariantsOfCircleSectorAnglesCustomizedWith: [ :each |
 		each effect:
 			(BlGaussianShadowEffect
 					color: Color green
-					width: 2.5
+					width: 4.5
 					offset: -2 @ 3) ] 
 ]
 
@@ -265,7 +263,7 @@ BlSpaceFixture >> buildGaussianShadowsByGeometry [
 			background: (Color blue alpha: backgroundAlpha);
 			effect: (BlGaussianShadowEffect
 					color: (Color orange alpha: shadowAlpha)
-					width: 2
+					width: 4
 					offset: shadowOffset);
 			yourself ].
 
@@ -307,59 +305,34 @@ BlSpaceFixture >> buildGaussianShadowsByGeometry [
 { #category : #fixtures }
 BlSpaceFixture >> buildGaussianShadowsByOutskirt [
 
-	| outskirts borderWidth scale positionGenerator addElementBlock |
-	outskirts := { BlOutskirts inside. BlOutskirts centered. BlOutskirts outside }.
-	borderWidth := 9.
-	scale := 0.3.
-	positionGenerator := self 
-		gridPositionGeneratorStartingAt: 3 asPoint
-		by: 32
-		columns: 3.
-
-	addElementBlock := [ :eachOutskirt :backgroundColor |
-		builder addHexagonalPolygon
-			relocate: positionGenerator next;
-			background: backgroundColor;
-			border: (BlBorder paint: builder nextColor width: borderWidth);
-			outskirts: eachOutskirt;
-			transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
-			effect:
+	self buildVariantsOfOutskirtCustomizedWith: [ :anElement |
+		anElement effect:
 				(BlGaussianShadowEffect
-					color: Color purple
-					width: borderWidth / 2
-					offset: 2 * borderWidth asPoint);
-			yourself ].
-	
-	"Opaques"
-	outskirts do: [ :eachOutskirt |
-		addElementBlock
-			value: eachOutskirt
-			value: builder nextColor ].
+					color: Color blue
+					width: 10
+					offset: 18) ].
 
-	"Translucents"
-	outskirts do: [ :eachOutskirt |
-		addElementBlock
-			value: eachOutskirt
-			value: builder nextColor translucent ].
+]
 
-	"Transparents"
-	outskirts do: [ :eachOutskirt |
-		addElementBlock
-			value: eachOutskirt
-			value: Color transparent ].
+{ #category : #fixtures }
+BlSpaceFixture >> buildGaussianShadowsByStrokeStyle [
 
+	self buildStrokeStyleCustomizedWith: [ :each |
+		each effect:
+			(BlGaussianShadowEffect
+				color: Color orange
+				width: 4
+				offset: 0 @ -4) ]
 ]
 
 { #category : #fixtures }
 BlSpaceFixture >> buildGaussianShadowsByTextTransformations [
 
-	self buildTextTransformations.
-	
-	builder space root allChildrenDepthFirstDo: [ :each |
+	self buildTextTransformationsCustomizedWith: [ :each |
 		each effect:
 			(BlGaussianShadowEffect
-				color: Color orange
-				width: 1
+				color: Color orange darker
+				width: 3
 				offset: 0@0 ) ]
 ]
 
@@ -728,9 +701,7 @@ BlSpaceFixture >> buildOverlappingTriangles [
 { #category : #fixtures }
 BlSpaceFixture >> buildSimpleShadowsByCircleSector [
 
-	self buildVariantsOfCircleSectorAngles.
-
-	builder space root allChildrenDepthFirstDo: [ :each |
+	self buildVariantsOfCircleSectorAnglesCustomizedWith: [ :each |
 		each effect:
 			(BlSimpleShadowEffect
 				color: Color green
@@ -813,54 +784,18 @@ BlSpaceFixture >> buildSimpleShadowsByGeometry [
 { #category : #fixtures }
 BlSpaceFixture >> buildSimpleShadowsByOutskirt [
 
-	| outskirts borderWidth scale positionGenerator addElementBlock |
-	outskirts := { BlOutskirts inside. BlOutskirts centered. BlOutskirts outside }.
-	borderWidth := 9.
-	scale := 0.3.
-	positionGenerator := self 
-		gridPositionGeneratorStartingAt: 3 asPoint
-		by: 32
-		columns: 3.
-
-	addElementBlock := [ :eachOutskirt :backgroundColor |
-		builder addHexagonalPolygon
-			relocate: positionGenerator next;
-			background: backgroundColor;
-			border: (BlBorder paint: builder nextColor width: borderWidth);
-			outskirts: eachOutskirt;
-			transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
-			effect:
+	self buildVariantsOfOutskirtCustomizedWith: [ :anElement |
+		anElement effect:
 				(BlSimpleShadowEffect
 					color: Color black
-					offset: 2 * borderWidth asPoint);
-			yourself ].
-	
-	"Opaques"
-	outskirts do: [ :eachOutskirt |
-		addElementBlock
-			value: eachOutskirt
-			value: builder nextColor ].
-
-	"Translucents"
-	outskirts do: [ :eachOutskirt |
-		addElementBlock
-			value: eachOutskirt
-			value: builder nextColor translucent ].
-
-	"Transparents"
-	outskirts do: [ :eachOutskirt |
-		addElementBlock
-			value: eachOutskirt
-			value: Color transparent ].
+					offset: 18) ].
 
 ]
 
 { #category : #fixtures }
 BlSpaceFixture >> buildSimpleShadowsByStrokeStyle [
 
-	self buildStrokeStyles.
-
-	builder space root allChildrenDepthFirstDo: [ :each |
+	self buildStrokeStyleCustomizedWith: [ :each |
 		each effect:
 			(BlSimpleShadowEffect
 				color: Color orange
@@ -870,13 +805,19 @@ BlSpaceFixture >> buildSimpleShadowsByStrokeStyle [
 { #category : #fixtures }
 BlSpaceFixture >> buildSimpleShadowsByTextTransformations [
 
-	self buildTextTransformations.
-	
-	builder space root allChildrenDepthFirstDo: [ :each |
+	self buildTextTransformationsCustomizedWith: [ :each |
 		each effect:
 			(BlSimpleShadowEffect
 				color: Color orange
 				offset: 1 @ 1 ) ]
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildStrokeStyleCustomizedWith: aBlock [
+
+	self buildStrokeStyles.
+
+	builder space root allChildrenDepthFirstDo: aBlock
 ]
 
 { #category : #fixtures }
@@ -1118,6 +1059,14 @@ BlSpaceFixture >> buildTextTransformations [
 			t translateBy: 15 asPoint.
 			t skewX: 45 ].
 
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildTextTransformationsCustomizedWith: aBlock [
+
+	self buildTextTransformations.
+	
+	builder space root allChildrenDepthFirstDo: aBlock
 ]
 
 { #category : #fixtures }
@@ -1478,6 +1427,14 @@ BlSpaceFixture >> buildVariantsOfCircleSectorAngles [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfCircleSectorAnglesCustomizedWith: aBlock [
+
+	self buildVariantsOfCircleSectorAngles.
+
+	builder space root allChildrenDepthFirstDo: aBlock
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfEllipse [
 
 	| positionGenerator |
@@ -1540,6 +1497,48 @@ BlSpaceFixture >> buildVariantsOfLinelikeGeometry: aGeometry [
 			relocate: 10 asPoint;
 			transformDo: each;
 			yourself ].
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfOutskirtCustomizedWith: aBlock [
+
+	| outskirts borderWidth scale positionGenerator addElementBlock |
+	outskirts := { BlOutskirts inside. BlOutskirts centered. BlOutskirts outside }.
+	borderWidth := 9.
+	scale := 0.3.
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: 3 asPoint
+		by: 32
+		columns: 3.
+
+	addElementBlock := [ :eachOutskirt :backgroundColor |
+		builder addHexagonalPolygon
+			relocate: positionGenerator next;
+			background: backgroundColor;
+			border: (BlBorder paint: builder nextColor width: borderWidth);
+			outskirts: eachOutskirt;
+			transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
+			in: aBlock;
+			yourself ].
+	
+	"Opaques"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: builder nextColor ].
+
+	"Translucents"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: builder nextColor translucent ].
+
+	"Transparents"
+	outskirts do: [ :eachOutskirt |
+		addElementBlock
+			value: eachOutskirt
+			value: Color transparent ].
+
 ]
 
 { #category : #fixtures }
