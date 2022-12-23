@@ -27,7 +27,7 @@ BlInspectionTest >> setUp [
 			background: Color red;
 			yourself.
 
-	inspectorWindow := triangle inspect.
+	inspectorWindow := triangle inspector.
 	objectInspector := inspectorWindow presenter firstPage.
 
 ]
@@ -44,7 +44,6 @@ BlInspectionTest >> tearDown [
 BlInspectionTest >> testBlElement [
 
 	self
-		assertCanSelectPageNamed: 'Preview';
 		assertCanSelectPageNamed: 'Tree';
 		assertCanSelectPageNamed: 'User Data';
 		assertCanSelectPageNamed: 'Resizers';
@@ -54,7 +53,6 @@ BlInspectionTest >> testBlElement [
 { #category : #tests }
 BlInspectionTest >> testBlSpace [
 
-	self assertCanSelectPageNamed: 'Preview'.
 	self assertCanSelectPageNamed: 'Tree'.
 
 ]
