@@ -8,9 +8,6 @@ SmalltalkCISpec {
     }
   ],
 	#testing : {
-		#include : {
-			#packages : [ 'Bloc.*' ]
-		},
 		#exclude : {
 			#packages : [ 'Bloc-Examples.*', 'Bloc-Layout-Examples.*' ]
 		}
