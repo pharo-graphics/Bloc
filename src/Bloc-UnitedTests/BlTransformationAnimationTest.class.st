@@ -18,7 +18,7 @@ BlTransformationAnimationTest >> assertNotStartedAnimation: animation [
 	self assert: animation isStarted not.
 	self assert: animation isRunning not.
 	self assert: animation progress equals: 0.0.
-	self assert: animation repeats equals: 0
+	self assert: animation loopCount equals: 0
 ]
 
 { #category : #tests }
