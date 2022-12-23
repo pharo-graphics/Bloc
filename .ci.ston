@@ -9,7 +9,7 @@ SmalltalkCISpec {
   ],
 	#testing : {
 		#exclude : {
-			#packages : [ 'Bloc-Examples.*', 'Bloc-Layout-Examples.*' ]
+			#packages : [ 'Bloc-Examples.*', 'Bloc-Layout-Examples.*', 'Bloc-Text-Examples.*' ]
 		}
 	}
 }
