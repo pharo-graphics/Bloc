@@ -23,6 +23,42 @@ BlSpaceFixture class >> allFixtureSelectors [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildCapRoundDashedBorderOnClosedGeometry [
+	"Related to https://github.com/pharo-graphics/Bloc/issues/200"
+
+	| outskirts radius borderWidth dashes lineCaps |
+	radius := 14.
+	borderWidth := 6.
+	dashes := { 0. (Float twoPi * radius)/9 }.
+
+	builder spaceExtent: 130 @ 130.
+	builder space root layout: BlFlowLayout horizontal.
+
+	outskirts := {
+		BlOutskirts centered.
+		BlOutskirts inside.
+		BlOutskirts outside }.
+	lineCaps := {
+		BlStrokeLineCap round.
+		BlStrokeLineCap square.
+		BlStrokeLineCap butt. }.
+
+	lineCaps do: [ :eachLineCap |
+		outskirts do: [ :eachOutskirt |
+			builder addCircle
+				outskirts: eachOutskirt;
+				margin: (BlInsets top: 12 left: 12);
+				size: (radius*2) asPoint;
+				border: (BlBorder builder
+					paint: Color black;
+					width: borderWidth;
+					dashArray: dashes;
+					lineCap: eachLineCap;
+					build) ] ]
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildClippingMany [
 
 	| newElementBlock elementSize |
