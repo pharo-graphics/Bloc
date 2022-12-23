@@ -8,9 +8,11 @@ SmalltalkCISpec {
     }
   ],
 	#testing : {
-		#packages : [ 'Bloc.*' ],
+		#include : {
+			#packages : [ 'Bloc.*' ]
+		},
 		#exclude : {
-			#packages : [ 'Bloc-Examples', 'Bloc-Layout-Examples' ]
+			#packages : [ 'Bloc-Examples.*', 'Bloc-Layout-Examples.*' ]
 		}
 	}
 }
