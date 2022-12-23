@@ -131,6 +131,62 @@ BlSpaceFixture >> buildClippingWithoutBorders [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildDashesInsideAndOutsideBuggyForPolygon [
+	"Register this undesired rendering in some geometries with dashed border and outside or inside outskirts"
+
+	| outskirts |
+	builder spaceExtent: 150@50.
+	builder space root layout: BlFlowLayout horizontal.
+
+	outskirts := {
+		BlOutskirts centered. "This is the only well rendered"
+		BlOutskirts inside.
+		BlOutskirts outside }.
+
+	outskirts do: [ :eachOutskirt |
+		builder addHexagonalPolygon
+			outskirts: eachOutskirt;
+			margin: (BlInsets all: 7);
+			size: 35 asPoint;
+			transformDo: [ :t |
+				t topLeftOrigin; scaleBy: 0.5 ];
+			border: (BlBorder builder
+				paint: Color black;
+				width: 10;
+				dashArray: #(10 20);
+				capSquare;
+				build) ]
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildDashesInsideAndOutsideOkayForCircle [
+	"Geometries that establish a `AeCanvas>>#borderPathFactory:` in the canvas work well."
+
+	| outskirts |
+	builder spaceExtent: 130@50.
+	builder space root layout: BlFlowLayout horizontal.
+
+	outskirts := {
+		BlOutskirts centered.
+		BlOutskirts inside.
+		BlOutskirts outside }.
+
+	outskirts do: [ :eachOutskirt |
+		builder addCircle
+			outskirts: eachOutskirt;
+			margin: (BlInsets top: 10 left: 10);
+			size: 30 asPoint;
+			border: (BlBorder builder
+				paint: Color black;
+				width: 5;
+				dashArray: #(5 10);
+				capSquare;
+				build) ]
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildElevation [
 
 	| elementA elementB elementC childD childE childF |

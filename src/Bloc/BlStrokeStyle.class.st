@@ -89,6 +89,12 @@ BlStrokeStyle >> hash [
 				bitXor: (dashOffset hash bitXor: (lineCap hash bitXor: lineJoin hash)))
 ]
 
+{ #category : #testing }
+BlStrokeStyle >> isDashed [
+
+	^ dashArray notEmpty
+]
+
 { #category : #accessing }
 BlStrokeStyle >> lineCap [
 	^ lineCap
