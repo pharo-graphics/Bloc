@@ -23,6 +23,42 @@ BlSpaceFixture class >> allFixtureSelectors [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildCapRoundDashedBorderOnClosedGeometry [
+	"Related to https://github.com/pharo-graphics/Bloc/issues/200"
+
+	| outskirts radius borderWidth dashes lineCaps |
+	radius := 14.
+	borderWidth := 6.
+	dashes := { 0. (Float twoPi * radius)/9 }.
+
+	builder spaceExtent: 130 @ 130.
+	builder space root layout: BlFlowLayout horizontal.
+
+	outskirts := {
+		BlOutskirts centered.
+		BlOutskirts inside.
+		BlOutskirts outside }.
+	lineCaps := {
+		BlStrokeLineCap round.
+		BlStrokeLineCap square.
+		BlStrokeLineCap butt. }.
+
+	lineCaps do: [ :eachLineCap |
+		outskirts do: [ :eachOutskirt |
+			builder addCircle
+				outskirts: eachOutskirt;
+				margin: (BlInsets top: 12 left: 12);
+				size: (radius*2) asPoint;
+				border: (BlBorder builder
+					paint: Color black;
+					width: borderWidth;
+					dashArray: dashes;
+					lineCap: eachLineCap;
+					build) ] ]
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildClippingMany [
 
 	| newElementBlock elementSize |
@@ -127,6 +163,62 @@ BlSpaceFixture >> buildClippingWithoutBorders [
 		relocate: 5 asPoint;
 		size: 10 asPoint;
 		yourself
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildDashesInsideAndOutsideBuggyForPolygon [
+	"Register this undesired rendering in some geometries with dashed border and outside or inside outskirts"
+
+	| outskirts |
+	builder spaceExtent: 150@50.
+	builder space root layout: BlFlowLayout horizontal.
+
+	outskirts := {
+		BlOutskirts centered. "This is the only well rendered"
+		BlOutskirts inside.
+		BlOutskirts outside }.
+
+	outskirts do: [ :eachOutskirt |
+		builder addHexagonalPolygon
+			outskirts: eachOutskirt;
+			margin: (BlInsets all: 7);
+			size: 35 asPoint;
+			transformDo: [ :t |
+				t topLeftOrigin; scaleBy: 0.5 ];
+			border: (BlBorder builder
+				paint: Color black;
+				width: 10;
+				dashArray: #(10 20);
+				capSquare;
+				build) ]
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildDashesInsideAndOutsideOkayForCircle [
+	"Geometries that establish a `AeCanvas>>#borderPathFactory:` in the canvas work well."
+
+	| outskirts |
+	builder spaceExtent: 130@50.
+	builder space root layout: BlFlowLayout horizontal.
+
+	outskirts := {
+		BlOutskirts centered.
+		BlOutskirts inside.
+		BlOutskirts outside }.
+
+	outskirts do: [ :eachOutskirt |
+		builder addCircle
+			outskirts: eachOutskirt;
+			margin: (BlInsets top: 10 left: 10);
+			size: 30 asPoint;
+			border: (BlBorder builder
+				paint: Color black;
+				width: 5;
+				dashArray: #(5 10);
+				capSquare;
+				build) ]
 
 ]
 

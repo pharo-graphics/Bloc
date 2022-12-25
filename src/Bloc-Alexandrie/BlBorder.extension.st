@@ -29,7 +29,7 @@ BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 				aeApplyTo: aeCanvas
 				style: style ].
 
-		aBlElement geometry hasCaps ifTrue: [
+		(aBlElement geometry hasCaps or: [ style isDashed ]) ifTrue: [
 			style lineCap aeApplyTo: aeCanvas ].
 
 		aeCanvas setBorderWidth: width ]
