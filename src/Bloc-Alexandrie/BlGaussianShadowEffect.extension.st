@@ -17,8 +17,8 @@ BlGaussianShadowEffect >> aeDrawBelow: aBlElement on: aeCanvas [
 	alphaSurface flush.
 
 	AeCairoA8FastGaussianBlurFilter new
-		applyOn: alphaSurface
-		radius: width.
+		surface: alphaSurface;
+		applyRadius: width.
 	
 	aeCanvas privateAeCairoContext
 		sourceColorRGBA: color;
