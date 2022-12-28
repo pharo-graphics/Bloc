@@ -11,12 +11,6 @@ BAMorphicWindowHost class >> label [
 ]
 
 { #category : #'host - api' }
-BAMorphicWindowHost >> containsPoint: aPoint element: aBlElement geometry: aBlGeometry [
-
-	^ aBlGeometry aeContainsPoint: aPoint in: aBlElement
-]
-
-{ #category : #'host - api' }
 BAMorphicWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
 

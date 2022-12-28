@@ -8,7 +8,6 @@ Class {
 BlRectangleGeometry >> containsPoint: aPoint in: aBlElement [
 	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
 	as as border during the testing process"
-	<return: #Boolean>
 	
 	(aPoint x < 0 and: [ aPoint y < 0 ])
 		ifTrue: [ ^ false ].

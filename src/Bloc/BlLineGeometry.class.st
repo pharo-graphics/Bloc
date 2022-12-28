@@ -18,6 +18,16 @@ BlLineGeometry class >> from: aFromPoint to: aToPoint [
 	^ self new from: aFromPoint to: aToPoint
 ]
 
+{ #category : #'geometry testing' }
+BlLineGeometry >> containsPoint: aPoint in: aBlElement [
+	"Answer whether aPoint is contained by this geometry"
+
+	^ aPoint
+		onLineFrom: from
+		to: to
+		within: aBlElement border width / 2
+]
+
 { #category : #accessing }
 BlLineGeometry >> from [
 	"Return start location of the line in owner element's local coordinate system"

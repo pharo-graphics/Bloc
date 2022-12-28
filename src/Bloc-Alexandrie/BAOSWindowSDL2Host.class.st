@@ -61,12 +61,6 @@ BAOSWindowSDL2Host class >> uiProcessDo: aBlock [
 	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
-{ #category : #'host - api' }
-BAOSWindowSDL2Host >> containsPoint: aPoint element: aBlElement geometry: aBlGeometry [
-
-	^ aBlGeometry aeContainsPoint: aPoint in: aBlElement
-]
-
 { #category : #private }
 BAOSWindowSDL2Host >> createHostSpace [
 

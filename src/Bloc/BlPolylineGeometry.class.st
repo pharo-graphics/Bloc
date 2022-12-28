@@ -30,6 +30,18 @@ BlPolylineGeometry >> asElement [
 		outskirts: BlOutskirts centered
 ]
 
+{ #category : #'geometry testing' }
+BlPolylineGeometry >> containsPoint: aPoint in: aBlElement [
+	"Answer whether aPoint is contained by this geometry.
+	
+	Based on RSPolyline>>#basicIncludesPoint:"
+
+	vertices overlappingPairsDo: [ :a :b | 
+		(aPoint onLineFrom: a to: b within: aBlElement border width / 2) 
+			ifTrue: [ ^ true ] ].
+	^ false
+]
+
 { #category : #'geometry bounds' }
 BlPolylineGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.

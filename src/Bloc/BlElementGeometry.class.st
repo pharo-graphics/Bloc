@@ -22,9 +22,7 @@ BlElementGeometry >> asElement [
 
 { #category : #'geometry testing' }
 BlElementGeometry >> containsPoint: aPoint in: aBlElement [
-	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
-	as as border during the testing process"
-	<return: #Boolean>
+	"Answer whether aPoint is contained by a this geometry."
 	
 	^ self subclassResponsibility
 ]

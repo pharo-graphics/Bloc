@@ -535,15 +535,6 @@ BlSpace >> compositionLayer [
 	^ self root compositionLayer
 ]
 
-{ #category : #'host dependent - ToDo' }
-BlSpace >> containsPoint: aPoint element: aBlElement geometry: aBlGeometry [
-
-	^ host
-		  containsPoint: aPoint
-		  element: aBlElement
-		  geometry: aBlGeometry
-]
-
 { #category : #'cursor managing' }
 BlSpace >> currentCursor [
 	^ currentCursor 

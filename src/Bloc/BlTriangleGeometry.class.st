@@ -121,6 +121,12 @@ BlTriangleGeometry >> computeVertices [
 								ifFalse: [ self error: ('Triangle has unsupported orientation ({1})' format: { orientation }) ] ] ] ]
 ]
 
+{ #category : #'geometry testing' }
+BlTriangleGeometry >> containsPoint: aPoint in: aBlElement [
+
+	^ BlPolygonHitTester doPolygonBy: self computeVertices include: aPoint
+]
+
 { #category : #testing }
 BlTriangleGeometry >> hasCaps [
 
