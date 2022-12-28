@@ -19,13 +19,3 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	(BlSpartaCanvasTextMeasurer new canvas: Bloc preferableSpartaCanvas offscreen)
 		measureTextParagraph: aBlTextParagraph
 ]
-
-{ #category : #'*Bloc-Sparta' }
-BlHost >> visualBoundsOf: aBlElement [
-
-	self flag: #todo. "This is a feature expected from any BlHost but creates a dependency to Sparta."
-
-	^ Bloc hasSparta
-		ifTrue: [ aBlElement visualBoundsOn: (Bloc preferableSpartaCanvas offscreen) ]
-		ifFalse: [ aBlElement geometryBounds ]
-]

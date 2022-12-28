@@ -39,9 +39,3 @@ BAMorphicWindowHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 
 	BAOffscreen instance measureTextParagraph: aBlTextParagraph
 ]
-
-{ #category : #'host - api' }
-BAMorphicWindowHost >> visualBoundsOf: aBlElement [
-
-	^ aBlElement geometryBounds
-]

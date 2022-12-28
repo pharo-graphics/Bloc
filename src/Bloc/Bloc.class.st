@@ -69,12 +69,6 @@ Bloc class >> enableDebugMode [
 	self debugModeEnabled: true
 ]
 
-{ #category : #testing }
-Bloc class >> hasSparta [
-
-	^ self environment includesKey: #BlSpartaRenderer
-]
-
 { #category : #children }
 Bloc class >> preferableChildrenDataStructure [
 	<return: #'BlChildrenCollection class'>

@@ -9,8 +9,3 @@ BlOutskirts >> drawBackground: aBackgroundBlock border: aBorderBlock of: anEleme
 BlOutskirts >> drawBorder: aBlBorder onSpartaCanvas: aCanvas of: anElement [
 	self subclassResponsibility
 ]
-
-{ #category : #'*Bloc-Sparta' }
-BlOutskirts >> strokedBounds: aBlBounds of: anElement on: aCanvas [
-	^ self subclassResponsibility
-]

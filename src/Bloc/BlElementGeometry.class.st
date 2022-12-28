@@ -71,3 +71,12 @@ BlElementGeometry >> releaseStrokedBoundsCache [
 BlElementGeometry >> storeOn: aStream [
 	aStream nextPutAll: self class name; space; nextPutAll: 'new'
 ]
+
+{ #category : #'visual bounds' }
+BlElementGeometry >> strokedBounds: aBlBounds of: anElement [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+	<return: #BlBounds>
+	
+	^ self subclassResponsibility
+]

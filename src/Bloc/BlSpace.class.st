@@ -1895,12 +1895,6 @@ BlSpace >> updateCursor: aBlCursor [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
 ]
 
-{ #category : #'host dependent - ToDo' }
-BlSpace >> visualBoundsOf: aBlElement [
-
-	^ host visualBoundsOf: aBlElement
-]
-
 { #category : #'window - properties' }
 BlSpace >> width [
 	<return: #Number>

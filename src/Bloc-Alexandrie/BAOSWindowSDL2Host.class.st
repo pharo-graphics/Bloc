@@ -95,9 +95,3 @@ BAOSWindowSDL2Host >> offscreenMeasureTextParagraph: aBlTextParagraph [
 
 	BAOffscreen instance measureTextParagraph: aBlTextParagraph
 ]
-
-{ #category : #'host - api' }
-BAOSWindowSDL2Host >> visualBoundsOf: aBlElement [
-
-	^ aBlElement geometryBounds
-]

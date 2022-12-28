@@ -50,3 +50,15 @@ BlEmptyGeometry >> releaseCache [
 { #category : #'api - cache' }
 BlEmptyGeometry >> releaseStrokedBoundsCache [
 ]
+
+{ #category : #'visual bounds' }
+BlEmptyGeometry >> strokedBounds: aBlBounds of: anElement [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+	
+	^ aBlBounds
+		left: 0
+		top: 0
+		right: anElement width
+		bottom: anElement height
+]
