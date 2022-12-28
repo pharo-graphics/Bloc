@@ -126,6 +126,13 @@ BlHost >> isStillAvailable [
 	^ true
 ]
 
+{ #category : #'paragraph - measuring' }
+BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [ 
+	"Update the received paragraph with it's measurement."
+
+	self subclassResponsibility
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> start [
 	self class start
