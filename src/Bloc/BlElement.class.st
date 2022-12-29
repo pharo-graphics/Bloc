@@ -850,14 +850,14 @@ BlElement >> clipChildren: aBoolean [
 	self invalidateChildren.
 ]
 
-{ #category : #accessing }
+{ #category : #'api - compositing' }
 BlElement >> compositingMode [
 	<return: #BlCompositingMode>
 
 	^ visuals compositingMode
 ]
 
-{ #category : #accessing }
+{ #category : #'api - compositing' }
 BlElement >> compositionDepth [
 
 	| aDepth |
@@ -1751,7 +1751,7 @@ BlElement >> hasChildren [
 	^ self children isEmpty not
 ]
 
-{ #category : #testing }
+{ #category : #'api - compositing' }
 BlElement >> hasCompositionLayer [
 
 	^ self compositionLayer isNotNil and: [ self compositionLayer isValid ]
