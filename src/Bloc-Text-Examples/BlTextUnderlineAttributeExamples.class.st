@@ -20,7 +20,10 @@ Class {
 { #category : #attribute }
 BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
 	<gtExample>
-	| anAttribute aCanvas aSpan aLine |
+
+	self error: 'TODO: migrate from Sparta'.
+
+"	| anAttribute aCanvas aSpan aLine |
 
 	anAttribute := self underlineAttribute.
 	aSpan := BlMockedTextParagraphSpan new
@@ -34,7 +37,7 @@ BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
 	self assert: (aLine containsPoint: 21@12 on: aCanvas).
 	self assert: (aLine containsPoint: 50@12 on: aCanvas).
 
-	^ aLine
+	^ aLine"
 ]
 
 { #category : #accessing }

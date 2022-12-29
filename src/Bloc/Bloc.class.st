@@ -105,19 +105,6 @@ Bloc class >> preferableHostClass: aHostClass [
 	SettingBrowser allSubInstances do: [ :aSettingsBrowser | aSettingsBrowser treeChanged: Announcement new ]
 ]
 
-{ #category : #accessing }
-Bloc class >> preferableSpartaCanvas [
-	^ PreferableSpartaCanvasBuilder ifNil: [ PreferableSpartaCanvasBuilder := (self environment at: #BlSpartaRenderer) defaultCanvasBuilder class ]
-]
-
-{ #category : #accessing }
-Bloc class >> preferableSpartaCanvas: aBuilderClass [
-	PreferableSpartaCanvasBuilder := aBuilderClass.
-	
-	"change preferable universe host according to new setting"
-	(self environment at: #BlSpartaRenderer) defaultCanvasBuilder: aBuilderClass new
-]
-
 { #category : #settings }
 Bloc class >> preferencesGroup [
 	^ 	#appearance
@@ -138,14 +125,6 @@ Bloc class >> preferencesOn: aBuilder [
 				domainValues: { 'Automatic' -> nil } , (BlHost availableHostClasses collect: [ :aHostClass | aHostClass label -> aHostClass ]);
 				description: 'Choose which host to be used for opening spaces'.
 
-			(aBuilder pickOne: #preferableSpartaCanvas)
-				target: self;
-				order: 2;
-				precondition: [ self environment includesKey: #BlSpartaRenderer ];
-				label: 'Preferable Sparta renderering backend' ;
-				domainValues: ((self environment at: #BlSpartaRenderer) availableCanvasBuilderClasses collect: [ :aBuilderClass | aBuilderClass label -> aBuilderClass ]);
-				description: 'Choose which graphical library should be used to render bloc spaces'.
-				
 			(aBuilder pickOne: #preferableEventHandlerRegistry)
 				target: self;
 				order: 3;
