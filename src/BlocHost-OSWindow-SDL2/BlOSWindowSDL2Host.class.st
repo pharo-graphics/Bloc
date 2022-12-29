@@ -72,7 +72,7 @@ BlOSWindowSDL2Host >> createHostSpaceFor: aSpace [
 
 	| aHostSpace|
 	aHostSpace := self createWindowSpaceFor: aSpace.
-	aHostSpace renderer: BlHostRenderer defaultClass new.
+	aHostSpace renderer: BlHostRenderer preferableClass new.
 
 	aSpace hostSpace: aHostSpace
 ]

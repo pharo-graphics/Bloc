@@ -13,27 +13,59 @@ Class {
 		'textMeasurer'
 	],
 	#classInstVars : [
-		'defaultClass'
+		'preferableClass'
 	],
 	#category : #'Bloc-Universe - Renderer'
 }
 
-{ #category : #'instance creation' }
-BlHostRenderer class >> defaultClass [
+{ #category : #settings }
+BlHostRenderer class >> availableClasses [
 
-	^ defaultClass
+	^ self allSubclasses
 ]
 
-{ #category : #'instance creation' }
-BlHostRenderer class >> defaultClass: aBlHostRendererSubclass [
+{ #category : #accessing }
+BlHostRenderer class >> label [
+	"Answer a human readable title to identify the class."
 
-	defaultClass := aBlHostRendererSubclass
+	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
-BlHostRenderer class >> initialize [
+{ #category : #'host - api' }
+BlHostRenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
+	"Update the received paragraph with its measurement."
 
-	defaultClass := self allSubclasses anyOne
+	^ self subclassResponsibility
+]
+
+{ #category : #settings }
+BlHostRenderer class >> preferableClass [
+
+	^ preferableClass ifNil: [
+		self availableClasses ifNotEmpty: [ :ac |
+			preferableClass := ac anyOne ] ]
+]
+
+{ #category : #settings }
+BlHostRenderer class >> preferableClass: aBlHostRenderer [
+
+	preferableClass := aBlHostRenderer
+]
+
+{ #category : #settings }
+BlHostRenderer class >> settingsOn: aBuilder [
+	<systemsettings>
+	
+	(aBuilder pickOne: #preferableClass)
+		parent: Bloc groupSymbolForBloc;
+		target: self;
+		order: 2;
+		label: 'Preferable renderer';
+		domainValues:
+			(self availableClasses collect: [ :aHostRendererClass |
+				aHostRendererClass label -> aHostRendererClass ]);
+		description: 'Choose an option to render and measure text.'.
+
 ]
 
 { #category : #rendering }

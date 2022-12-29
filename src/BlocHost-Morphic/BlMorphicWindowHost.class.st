@@ -37,7 +37,7 @@ BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 		host: self;
 		universe: self universe;
 		space: aSpace;
-		renderer: BlHostRenderer defaultClass new;
+		renderer: BlHostRenderer preferableClass new;
 		yourself.
 
 	aSpace hostSpace: aHostSpace

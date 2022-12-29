@@ -127,7 +127,7 @@ BlHost >> isStillAvailable [
 BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [ 
 	"Update the received paragraph with its measurement."
 
-	BlHostRenderer defaultClass offscreenMeasureTextParagraph: aBlTextParagraph
+	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
 { #category : #'api - lifecycle' }

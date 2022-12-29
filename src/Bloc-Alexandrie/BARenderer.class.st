@@ -9,6 +9,12 @@ Class {
 	#category : #'Bloc-Alexandrie-Renderer'
 }
 
+{ #category : #accessing }
+BARenderer class >> label [
+
+	^ 'Alexandrie'
+]
+
 { #category : #'host - api' }
 BARenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
 

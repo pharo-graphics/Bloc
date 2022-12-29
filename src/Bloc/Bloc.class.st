@@ -69,6 +69,18 @@ Bloc class >> enableDebugMode [
 	self debugModeEnabled: true
 ]
 
+{ #category : #settings }
+Bloc class >> groupSymbolForAppearance [
+
+	^ 	#appearance
+]
+
+{ #category : #settings }
+Bloc class >> groupSymbolForBloc [
+
+	^ 	#Bloc
+]
+
 { #category : #children }
 Bloc class >> preferableChildrenDataStructure [
 	<return: #'BlChildrenCollection class'>
@@ -106,17 +118,12 @@ Bloc class >> preferableHostClass: aHostClass [
 ]
 
 { #category : #settings }
-Bloc class >> preferencesGroup [
-	^ 	#appearance
-]
-
-{ #category : #settings }
 Bloc class >> preferencesOn: aBuilder [
 	<systemsettings>
-	(aBuilder group: #Bloc)
+	(aBuilder group: self groupSymbolForBloc)
 		label: 'Bloc';
 		description: 'Bloc settings';
-		parent: self preferencesGroup;
+		parent: self groupSymbolForAppearance;
 		with: [
 			(aBuilder pickOne: #preferableHostClass)
 				target: self;
