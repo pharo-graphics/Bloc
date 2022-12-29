@@ -52,5 +52,6 @@ BlMorphicSteppingHost class >> uiProcessDo: aBlock [
 
 { #category : #'host - testing' }
 BlMorphicSteppingHost >> supportsFormSurface [
+
 	^ true
 ]

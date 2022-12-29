@@ -13,24 +13,25 @@ Class {
 
 { #category : #initialization }
 BlMockedHost class >> initialize [
+
 	isRunning := false
 ]
 
 { #category : #'api - lifecycle' }
 BlMockedHost class >> isRunning [
-	"Return true if host is initialized and running"
-	<return: #Boolean>
 
 	^ isRunning
 ]
 
 { #category : #'api - lifecycle' }
 BlMockedHost class >> start [
+
 	isRunning := true
 ]
 
 { #category : #'api - lifecycle' }
 BlMockedHost class >> stop [
+
 	isRunning := false
 ]
 

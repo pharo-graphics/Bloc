@@ -2,93 +2,83 @@
 I am a host that opens spaces as OSWindow SDL2 windows.
 "
 Class {
-	#name : #BAOSWindowSDL2Host,
+	#name : #BlOSWindowSDL2Host,
 	#superclass : #BlOSWindowHost,
 	#classVars : [
 		'PulseLoop'
 	],
-	#category : #'Bloc-Alexandrie-Renderer'
+	#category : #'BlocHost-OSWindow-SDL2'
 }
 
 { #category : #'class initialization' }
-BAOSWindowSDL2Host class >> initialize [
+BlOSWindowSDL2Host class >> initialize [
 	PulseLoop := BlHostPulseLoop forHost: self
 ]
 
 { #category : #'api - lifecycle' }
-BAOSWindowSDL2Host class >> isRunning [
+BlOSWindowSDL2Host class >> isRunning [
 	^ PulseLoop isRunning
 ]
 
 { #category : #'driver selection' }
-BAOSWindowSDL2Host class >> isSupported [
+BlOSWindowSDL2Host class >> isSupported [
 	^ true
 ]
 
 { #category : #'driver selection' }
-BAOSWindowSDL2Host class >> label [
+BlOSWindowSDL2Host class >> label [
 
-	^ 'SDL2 Alexandrie'
+	^ 'SDL2'
 ]
 
 { #category : #'driver selection' }
-BAOSWindowSDL2Host class >> priority [
-	"Return host priority as positive number which influences host order
-	and selection of a default host.
-	Lower value - more likely host becomes a default"
-	<return: #Number>
+BlOSWindowSDL2Host class >> priority [
 	
-	^ 401
+	^ 10
 ]
 
 { #category : #'api - lifecycle' }
-BAOSWindowSDL2Host class >> pulsePeriod: aDuration [
+BlOSWindowSDL2Host class >> pulsePeriod: aDuration [
 
 	PulseLoop pulsePeriod: aDuration
 ]
 
 { #category : #'api - lifecycle' }
-BAOSWindowSDL2Host class >> start [
+BlOSWindowSDL2Host class >> start [
 	PulseLoop start
 ]
 
 { #category : #'api - lifecycle' }
-BAOSWindowSDL2Host class >> stop [
+BlOSWindowSDL2Host class >> stop [
 	PulseLoop stop
 ]
 
 { #category : #'api - ui process' }
-BAOSWindowSDL2Host class >> uiProcessDo: aBlock [
+BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 	
 	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
 { #category : #private }
-BAOSWindowSDL2Host >> createHostSpace [
+BlOSWindowSDL2Host >> createHostSpace [
 
 	^ BlOSWindowSDL2HostSpace new
 ]
 
 { #category : #'host - api' }
-BAOSWindowSDL2Host >> createHostSpaceFor: aSpace [
+BlOSWindowSDL2Host >> createHostSpaceFor: aSpace [
 	"Create and assign a new host space for given bloc space"
 
 	| aHostSpace|
 	aHostSpace := self createWindowSpaceFor: aSpace.
-	aHostSpace renderer: BARenderer new.
+	aHostSpace renderer: BlHostRenderer defaultClass new.
 
 	aSpace hostSpace: aHostSpace
 ]
 
 { #category : #initialization }
-BAOSWindowSDL2Host >> keyboardKeyTable [
+BlOSWindowSDL2Host >> keyboardKeyTable [
 
 	^ BlOSWindowSDL2KeyboardKeyTable default
-]
-
-{ #category : #'host - api' }
-BAOSWindowSDL2Host >> offscreenMeasureTextParagraph: aBlTextParagraph [
-
-	BAOffscreen instance measureTextParagraph: aBlTextParagraph
 ]

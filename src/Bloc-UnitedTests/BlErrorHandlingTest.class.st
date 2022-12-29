@@ -60,7 +60,7 @@ BlErrorHandlingTest >> sceneWith: aFaultyElement [
 			aRightChild }.
 
 	aSpace := BlSpace new.
-	aSpace host: BAMorphicWindowHost new.
+	aSpace host: BlMorphicWindowHost new.
 	aSpace addChild: aContainer.
 	aSpace show.
 	aSpace pulse.

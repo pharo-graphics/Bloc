@@ -9,6 +9,12 @@ Class {
 	#category : #'Bloc-Alexandrie-Renderer'
 }
 
+{ #category : #'host - api' }
+BARenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
+
+	BAOffscreen instance measureTextParagraph: aBlTextParagraph
+]
+
 { #category : #initialization }
 BARenderer >> createBufferSpaceRenderer [
 
@@ -25,6 +31,8 @@ BARenderer >> createFormSpaceRenderer [
 BARenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
 	Please note, that it I be called multiple times"
+
+	self initialize.
 
 	session := Smalltalk session.
 	

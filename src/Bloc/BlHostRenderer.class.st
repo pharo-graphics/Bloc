@@ -12,14 +12,28 @@ Class {
 		'spaceRenderer',
 		'textMeasurer'
 	],
+	#classInstVars : [
+		'defaultClass'
+	],
 	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #'instance creation' }
-BlHostRenderer class >> forHostSpace: aHostSpace [
-	^ self basicNew
-		initialize;
-		initializeForHostSpace: aHostSpace
+BlHostRenderer class >> defaultClass [
+
+	^ defaultClass
+]
+
+{ #category : #'instance creation' }
+BlHostRenderer class >> defaultClass: aBlHostRendererSubclass [
+
+	defaultClass := aBlHostRendererSubclass
+]
+
+{ #category : #initialization }
+BlHostRenderer class >> initialize [
+
+	defaultClass := self allSubclasses anyOne
 ]
 
 { #category : #rendering }

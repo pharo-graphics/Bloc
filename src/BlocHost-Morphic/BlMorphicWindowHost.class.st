@@ -2,33 +2,31 @@
 I am a host that opens spaces as windows in the Morphic World.
 "
 Class {
-	#name : #BAMorphicWindowHost,
+	#name : #BlMorphicWindowHost,
 	#superclass : #BlMorphicSteppingHost,
-	#category : #'Bloc-Alexandrie-Renderer'
+	#category : #'BlocHost-Morphic-Host - Window'
 }
 
 { #category : #'driver selection' }
-BAMorphicWindowHost class >> isSupported [
+BlMorphicWindowHost class >> isSupported [
 
 	^ true
 ]
 
 { #category : #'driver selection' }
-BAMorphicWindowHost class >> label [
+BlMorphicWindowHost class >> label [
 
-	^ 'Morphic Alexandrie'
+	^ 'Morphic'
 ]
 
 { #category : #'driver selection' }
-BAMorphicWindowHost class >> priority [
-	"I am a default host, hence return zero.
-	Morphic host is the most stable and will work on any machine"
+BlMorphicWindowHost class >> priority [
 
 	^ 20
 ]
 
 { #category : #'host - api' }
-BAMorphicWindowHost >> createHostSpaceFor: aSpace [
+BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
 
 	| aWindow aHostSpace|
@@ -39,14 +37,14 @@ BAMorphicWindowHost >> createHostSpaceFor: aSpace [
 		host: self;
 		universe: self universe;
 		space: aSpace;
-		renderer: BARenderer new;
+		renderer: BlHostRenderer defaultClass new;
 		yourself.
 
 	aSpace hostSpace: aHostSpace
 ]
 
 { #category : #private }
-BAMorphicWindowHost >> createMorphicWindowFor: aSpace [
+BlMorphicWindowHost >> createMorphicWindowFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
 	I do not create any strong or weak references to provided space"
 
@@ -60,7 +58,7 @@ BAMorphicWindowHost >> createMorphicWindowFor: aSpace [
 ]
 
 { #category : #'host - api' }
-BAMorphicWindowHost >> destroyHostSpaceFor: aSpace [
+BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 
 	aSpace hostSpace
 		close;
@@ -72,13 +70,7 @@ BAMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 ]
 
 { #category : #testing }
-BAMorphicWindowHost >> isStillAvailable [
+BlMorphicWindowHost >> isStillAvailable [
 
 	^ self class isSupported
-]
-
-{ #category : #'host - api' }
-BAMorphicWindowHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
-
-	BAOffscreen instance measureTextParagraph: aBlTextParagraph
 ]

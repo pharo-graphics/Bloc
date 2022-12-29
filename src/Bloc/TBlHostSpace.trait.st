@@ -122,7 +122,8 @@ TBlHostSpace >> host: aBlHost [
 
 { #category : #initialization }
 TBlHostSpace >> initializeRenderer [
-	self renderer initializeForHostSpace: self
+
+	renderer initializeForHostSpace: self
 ]
 
 { #category : #'host space - testing' }
@@ -197,10 +198,15 @@ TBlHostSpace >> render: aSpace [
 
 { #category : #'host space - accessing' }
 TBlHostSpace >> renderer [
-	"Return host renderer used to render spaces"
-	<return: #BlHostRenderer>
+	"Return the host renderer used to render the elements of my spaces."
 
 	^ renderer
+]
+
+{ #category : #'host space - accessing' }
+TBlHostSpace >> renderer: aBlHostRenderer [
+
+	renderer := aBlHostRenderer
 ]
 
 { #category : #'host space - rendering' }
