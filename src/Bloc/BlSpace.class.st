@@ -1886,18 +1886,6 @@ BlSpace >> updateCursor: aBlCursor [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
 ]
 
-{ #category : #initialization }
-BlSpace >> useMorphicHost [
-	
-	self host: BlMorphicWindowHost new
-]
-
-{ #category : #initialization }
-BlSpace >> useSDL2Host [
-	
-	self host: BlOSWindowSDL2Host new
-]
-
 { #category : #'window - properties' }
 BlSpace >> width [
 	<return: #Number>
