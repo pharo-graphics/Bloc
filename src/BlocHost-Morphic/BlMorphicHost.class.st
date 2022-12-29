@@ -59,7 +59,7 @@ BlMorphicHost class >> isSupported [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : #printing }
 BlMorphicHost class >> label [
 
 	^ 'Morphic - Embedded'

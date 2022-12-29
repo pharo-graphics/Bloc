@@ -9,17 +9,11 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
+	#classVars : [
+		'PreferableHostClass'
+	],
 	#category : #'Bloc-Universe - Host'
 }
-
-{ #category : #'driver selection' }
-BlHost class >> availableHostClasses [
-	"Return all available bloc host classes sorted by their priority"
-	<return: #Collection>
-
-	^ (self allSubclasses select: [ :aHostClass | aHostClass isSupported ])
-		sort: [ :a :b | a priority < b priority ]
-]
 
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
@@ -28,24 +22,46 @@ BlHost class >> isRunning [
 
 { #category : #'driver selection' }
 BlHost class >> isSupported [
+
 	^ false
 ]
 
 { #category : #'driver selection' }
 BlHost class >> label [
-	"Return a host name that we can refer to. May be used for settings"
+	"Return a human readable title to identify myself."
 
 	^ self subclassResponsibility
 ]
 
 { #category : #'driver selection' }
 BlHost class >> pickHost [
-	"Find and instantiate a first supported host.
-	Return a special null one if there are no available hosts"
-	<return: #BlHost>
+	"Answer a new instance of the preferable host."
 	
-	"If setting is not set dispatches to back to me returning #defaultHostClass"
-	^ Bloc preferableHostClass new
+	^ self preferableHostClass new
+]
+
+{ #category : #settings }
+BlHost class >> preferableHostClass [
+
+	^ PreferableHostClass ifNil: [
+		PreferableHostClass := self prioritaryHostClass ]
+]
+
+{ #category : #settings }
+BlHost class >> preferableHostClass: aHostClass [
+	
+	PreferableHostClass := aHostClass
+
+]
+
+{ #category : #'driver selection' }
+BlHost class >> prioritaryHostClass [
+	"Answer either the supported host with the lowest priority, or
+	`BlHeadlessHost` if there isn't any supported host."
+
+	^ self supportedHostClasses
+		ifEmpty: [ BlHeadlessHost ]
+		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
 ]
 
 { #category : #'driver selection' }
@@ -55,6 +71,21 @@ BlHost class >> priority [
 	A lower value is more likely to become the default host."
 	
 	^ self subclassResponsibility
+]
+
+{ #category : #settings }
+BlHost class >> settingsOn: aBuilder [
+	<systemsettings>
+
+	(aBuilder pickOne: #preferableHostClass)
+		parent: Bloc groupSymbolForBloc;
+		target: self;
+		order: 1;
+		label: 'Preferable host';
+		domainValues: (self supportedHostClasses
+			collect: [ :aHostClass | aHostClass label -> aHostClass ]);
+		description: 'Choose the option that spaces will use to open, unless they have a particular host.'.
+
 ]
 
 { #category : #'api - lifecycle' }
@@ -70,14 +101,12 @@ BlHost class >> stop [
 ]
 
 { #category : #'driver selection' }
-BlHost class >> suitableHostClass [
-	"Find my most suitable subclass, as a default candidate.
-	Return `BlHeadlessHost` if there are no available hosts."
+BlHost class >> supportedHostClasses [
+	"Return all supported Bloc host classes, sorted by their priority (less priority first)."
 
-	^ self availableHostClasses
-		"There are no availbale hosts, return a null one"
-		ifEmpty: [ BlHeadlessHost ]
-		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
+	^ (self allSubclasses
+			select: [ :aHostClass | aHostClass isSupported ])
+			sort: [ :a :b | a priority < b priority ]
 ]
 
 { #category : #'api - ui process' }

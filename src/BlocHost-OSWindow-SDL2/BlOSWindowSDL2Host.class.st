@@ -25,7 +25,7 @@ BlOSWindowSDL2Host class >> isSupported [
 	^ true
 ]
 
-{ #category : #'driver selection' }
+{ #category : #printing }
 BlOSWindowSDL2Host class >> label [
 
 	^ 'SDL2'

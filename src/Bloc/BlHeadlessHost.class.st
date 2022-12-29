@@ -26,7 +26,7 @@ BlHeadlessHost class >> isRunning [
 	^ PulseLoop isRunning
 ]
 
-{ #category : #'driver selection' }
+{ #category : #printing }
 BlHeadlessHost class >> label [
 
 	^ 'Headless'

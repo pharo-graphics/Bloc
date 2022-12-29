@@ -12,9 +12,7 @@ Class {
 		'AssertionsEnabled',
 		'DebugModeEnabled',
 		'PreferableChildrenDataStructure',
-		'PreferableEventHandlerRegistry',
-		'PreferableHostClass',
-		'PreferableSpartaCanvasBuilder'
+		'PreferableEventHandlerRegistry'
 	],
 	#category : #'Bloc-Settings'
 }
@@ -81,40 +79,36 @@ Bloc class >> groupSymbolForBloc [
 	^ 	#Bloc
 ]
 
+{ #category : #settings }
+Bloc class >> hackyRefreshAllSettingBrowsers [
+
+	SettingBrowser allSubInstances do: [ :aSettingsBrowser | aSettingsBrowser treeChanged: Announcement new ]
+]
+
 { #category : #children }
 Bloc class >> preferableChildrenDataStructure [
-	<return: #'BlChildrenCollection class'>
+	"Answer a `BlChildrenCollection class`."
 
 	^ PreferableChildrenDataStructure ifNil: [ self defaultChildrenDataStructure ]
 ]
 
 { #category : #children }
 Bloc class >> preferableChildrenDataStructure: anChildrenCollectionClass [
+
 	PreferableChildrenDataStructure := anChildrenCollectionClass
 ]
 
 { #category : #'event handling' }
 Bloc class >> preferableEventHandlerRegistry [
-	<return: #'BlHandlerRegistry class'>
+	"Answer a `BlHandlerRegistry class`"
 
 	^ PreferableEventHandlerRegistry ifNil: [ self defaultEventHandlerRegistry ]
 ]
 
 { #category : #'event handling' }
 Bloc class >> preferableEventHandlerRegistry: anEventHandlerRegistryClass [
+
 	PreferableEventHandlerRegistry := anEventHandlerRegistryClass
-]
-
-{ #category : #accessing }
-Bloc class >> preferableHostClass [
-	^ PreferableHostClass ifNil: [ BlHost suitableHostClass ]
-]
-
-{ #category : #accessing }
-Bloc class >> preferableHostClass: aHostClass [
-	
-	PreferableHostClass := aHostClass.
-	SettingBrowser allSubInstances do: [ :aSettingsBrowser | aSettingsBrowser treeChanged: Announcement new ]
 ]
 
 { #category : #settings }
@@ -125,13 +119,6 @@ Bloc class >> preferencesOn: aBuilder [
 		description: 'Bloc settings';
 		parent: self groupSymbolForAppearance;
 		with: [
-			(aBuilder pickOne: #preferableHostClass)
-				target: self;
-				order: 1;
-				label: 'Preferable host';
-				domainValues: { 'Automatic' -> nil } , (BlHost availableHostClasses collect: [ :aHostClass | aHostClass label -> aHostClass ]);
-				description: 'Choose which host to be used for opening spaces'.
-
 			(aBuilder pickOne: #preferableEventHandlerRegistry)
 				target: self;
 				order: 3;

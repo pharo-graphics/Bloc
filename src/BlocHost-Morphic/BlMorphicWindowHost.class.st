@@ -13,7 +13,7 @@ BlMorphicWindowHost class >> isSupported [
 	^ true
 ]
 
-{ #category : #'driver selection' }
+{ #category : #printing }
 BlMorphicWindowHost class >> label [
 
 	^ 'Morphic'
