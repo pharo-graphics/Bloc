@@ -51,20 +51,6 @@ BlOSWindowHost >> createHostSpace [
 	^ BlOSWindowHostSpace new
 ]
 
-{ #category : #'host - api' }
-BlOSWindowHost >> createHostSpaceFor: aSpace [
-	"Create and assign a new oswindow host space for given bloc space"
-
-	| aHostSpace|
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Space must not have a host!' ].
-	
-	aHostSpace := self createWindowSpaceFor: aSpace.
-
-	aSpace hostSpace: aHostSpace
-]
-
 { #category : #private }
 BlOSWindowHost >> createWindowSpaceFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
@@ -87,8 +73,7 @@ BlOSWindowHost >> createWindowSpaceFor: aSpace [
 		initializeWithAttributes: theWindowAttributes;
 		universe: self universe;
 		host: self;
-		space: aSpace;
-		withSpartaRenderer.
+		space: aSpace.
 	
 	^ aHostSpace
 ]
