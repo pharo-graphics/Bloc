@@ -5,9 +5,3 @@ BlSpace >> showNotification: aNotification [
 
 	self root showNotification: aNotification
 ]
-
-{ #category : #'*BlocHost-Morphic' }
-BlSpace >> useSpartaMorphicWindowHost [
-	
-	self host: BlMorphicWindowHost new
-]
