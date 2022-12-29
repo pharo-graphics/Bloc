@@ -1949,7 +1949,8 @@ BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 	"Invalidate due to relocation by a given offset"
 
 	self wantsSeparateCompositingLayer
-		ifTrue: [ self hasCompositionLayer
+		ifTrue: [
+			self hasCompositionLayer
 				ifTrue: [
 					| aLayer |
 					aLayer := self compositionLayer.
@@ -1958,7 +1959,8 @@ BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
 				ifFalse: [ self hasParent
 						ifTrue: [ self parent invalidate ] ] ]
-		ifFalse: [ self hasParent
+		ifFalse: [
+			self hasParent
 				ifTrue: [ self parent invalidate ] ]
 ]
 
@@ -3752,14 +3754,12 @@ BlElement >> wantsMouseEventAt: aPoint [
 
 { #category : #'api - compositing' }
 BlElement >> wantsSeparateCompositingLayer [
-	<return: #Boolean>
 
-	(self compositingMode wantsCompositionLayer or:  [ self effect wantsCompositionLayer ])
-		ifFalse: [ ^ false ].
+	(self compositingMode wantsCompositionLayer or: [ 
+		 self effect wantsCompositionLayer ]) ifFalse: [ ^ false ].
 
-	self allParentsDo: [ :eachParent |
-			eachParent compositingMode wantsBufferedLayer
-				ifTrue: [ ^ false ] ].
+	self allParentsDo: [ :eachParent | 
+		eachParent compositingMode wantsBufferedLayer ifTrue: [ ^ false ] ].
 
 	^ true
 ]
