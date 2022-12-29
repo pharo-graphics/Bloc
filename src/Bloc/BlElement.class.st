@@ -857,6 +857,15 @@ BlElement >> compositingMode [
 	^ visuals compositingMode
 ]
 
+{ #category : #accessing }
+BlElement >> compositionDepth [
+
+	| aDepth |
+	aDepth := 1.
+	self allParentsDo: [ :eachParent | aDepth := aDepth + 1 ].
+	^ aDepth
+]
+
 { #category : #'api - painting' }
 BlElement >> compositionLayer [
 	"Return my composition layer if I have one or nil otherwise"
@@ -1740,6 +1749,12 @@ BlElement >> hasChildren [
 	<return: #Boolean>
 	
 	^ self children isEmpty not
+]
+
+{ #category : #testing }
+BlElement >> hasCompositionLayer [
+
+	^ self compositionLayer isNotNil and: [ self compositionLayer isValid ]
 ]
 
 { #category : #'focus testing' }
