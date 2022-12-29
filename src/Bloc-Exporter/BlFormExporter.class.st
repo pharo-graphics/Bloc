@@ -15,12 +15,13 @@ Class {
 
 { #category : #'instance creation' }
 BlFormExporter >> createCanvas: anExtent [
-	^ Bloc preferableSpartaCanvas extent: anExtent
+
+	^ AeCanvas extent: anExtent
 ]
 
 { #category : #'api - exporting' }
 BlFormExporter >> export [
-	<return: #Form>
+	"Answer a Form"
 
 	^ self doExport: [ :aCanvas | aCanvas asForm ]
 ]

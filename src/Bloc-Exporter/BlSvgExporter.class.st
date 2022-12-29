@@ -20,15 +20,21 @@ Class {
 
 { #category : #'instance creation' }
 BlSvgExporter >> createCanvas: anExtent [
-	^ Bloc preferableSpartaCanvas svg: self fileName extent: anExtent
+
+	| aSurface |
+	aSurface := AeCairoSVGSurface
+		            extent: anExtent
+		            fileName: self fileName pathString.
+
+	^ AeCanvas newFor: aSurface
 ]
 
 { #category : #'api - exporting' }
 BlSvgExporter >> export [
-	<return: #FileReference>
+	"Answer a file reference to the exported SVG."
 
 	^ self doExport: [ :aCanvas |
-		aCanvas flush.
+		aCanvas flush; finish.
 		self fileName asFileReference ]
 ]
 
