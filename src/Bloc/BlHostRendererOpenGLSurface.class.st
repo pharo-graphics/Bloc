@@ -15,20 +15,19 @@ Class {
 		'framebufferId',
 		'framebufferFormat'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : #'Bloc-Universe - Renderer - NU'
 }
+
+{ #category : #testing }
+BlHostRendererOpenGLSurface class >> isSupportedBy: anObject [
+	"Return whether a given object supports OpenGL surface."
+
+	^ anObject supportsOpenGLSurface
+]
 
 { #category : #accessing }
 BlHostRendererOpenGLSurface class >> priority [
 	^ 10
-]
-
-{ #category : #testing }
-BlHostRendererOpenGLSurface class >> supportedBy: anObject [
-	"Return true if a given object supports OpenGL surface, false otherwise"
-	<return: #Boolean>
-
-	^ anObject supportsOpenGLSurface
 ]
 
 { #category : #accessing }
