@@ -95,10 +95,12 @@ BaselineOfBloc >> baseline: spec [
 			spec 
 				package: #'Bloc-UnitedTests' with: [
 					spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Animation') ];
+				package: #'Bloc-Exporter' with: [
+					spec requires: #('Bloc-Alexandrie') ];
 				package: #'Bloc-DevTool' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-UnitedTests') ];
 				package: #'Bloc-Scripter' with: [
-					spec requires: #('Bloc-Layout' 'BlocHost-Mock' 'Bloc-UnitedTests') ].
+					spec requires: #('Bloc-Layout' 'Bloc-Exporter' 'BlocHost-Mock' 'Bloc-UnitedTests') ].
 
 			spec
 				package: #'Bloc-Examples' with: [
