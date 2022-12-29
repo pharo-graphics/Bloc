@@ -11,8 +11,7 @@ Class {
 	#classVars : [
 		'AssertionsEnabled',
 		'DebugModeEnabled',
-		'PreferableChildrenDataStructure',
-		'PreferableEventHandlerRegistry'
+		'PreferableChildrenDataStructure'
 	],
 	#category : #'Bloc-Settings'
 }
@@ -40,11 +39,6 @@ Bloc class >> debugModeEnabled: aBoolean [
 { #category : #children }
 Bloc class >> defaultChildrenDataStructure [
 	^ BlChildrenArray
-]
-
-{ #category : #'event handling' }
-Bloc class >> defaultEventHandlerRegistry [
-	^ BlHandlerAnnouncerRegistry
 ]
 
 { #category : #assertions }
@@ -98,19 +92,6 @@ Bloc class >> preferableChildrenDataStructure: anChildrenCollectionClass [
 	PreferableChildrenDataStructure := anChildrenCollectionClass
 ]
 
-{ #category : #'event handling' }
-Bloc class >> preferableEventHandlerRegistry [
-	"Answer a `BlHandlerRegistry class`"
-
-	^ PreferableEventHandlerRegistry ifNil: [ self defaultEventHandlerRegistry ]
-]
-
-{ #category : #'event handling' }
-Bloc class >> preferableEventHandlerRegistry: anEventHandlerRegistryClass [
-
-	PreferableEventHandlerRegistry := anEventHandlerRegistryClass
-]
-
 { #category : #settings }
 Bloc class >> preferencesOn: aBuilder [
 	<systemsettings>
@@ -119,13 +100,6 @@ Bloc class >> preferencesOn: aBuilder [
 		description: 'Bloc settings';
 		parent: self groupSymbolForAppearance;
 		with: [
-			(aBuilder pickOne: #preferableEventHandlerRegistry)
-				target: self;
-				order: 3;
-				label: 'Preferable event handler registry backend' ;
-				domainValues: ((BlHandlerRegistry availableRegistryClasses collect: [ :aClass | aClass label -> aClass ]) sort: [ :a :b | a key < b key ]);
-				description: 'Choose which data structure should be used for event handler registry'.
-				
 			(aBuilder pickOne: #preferableChildrenDataStructure)
 				target: self;
 				order: 4;

@@ -9,14 +9,19 @@ Class {
 
 { #category : #testing }
 BlHandlerAnnouncerRegistry class >> isSupported [
-	<return: #Boolean>
 	
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 BlHandlerAnnouncerRegistry class >> label [
 	^ 'Announcer'
+]
+
+{ #category : #testing }
+BlHandlerAnnouncerRegistry class >> priority [
+
+	^ 1
 ]
 
 { #category : #'api - adding / removing' }

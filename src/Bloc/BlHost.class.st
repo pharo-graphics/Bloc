@@ -102,7 +102,7 @@ BlHost class >> stop [
 
 { #category : #'driver selection' }
 BlHost class >> supportedHostClasses [
-	"Return all supported Bloc host classes, sorted by their priority (less priority first)."
+	"Return all supported Bloc host classes, sorted by priority (lowest first)."
 
 	^ (self allSubclasses
 			select: [ :aHostClass | aHostClass isSupported ])
