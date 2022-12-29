@@ -1,3 +1,6 @@
+"
+I am a host that opens spaces as windows in the Morphic World.
+"
 Class {
 	#name : #BAMorphicWindowHost,
 	#superclass : #BlMorphicSteppingHost,

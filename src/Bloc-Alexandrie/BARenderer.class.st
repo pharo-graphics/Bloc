@@ -1,3 +1,8 @@
+"
+I am a host-renderer to draw a space's elements on an `AeCanvas`.
+
+Both buffer and form host-spaces are supported.
+"
 Class {
 	#name : #BARenderer,
 	#superclass : #BlHostRenderer,

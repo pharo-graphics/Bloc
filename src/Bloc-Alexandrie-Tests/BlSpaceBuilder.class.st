@@ -137,7 +137,7 @@ BlSpaceBuilder >> initialize [
 	
 	space := BlSpace new.
 	spaceExtent := 100 asPoint.
-	host := BlMorphicWindowHost new.
+	host := BAMorphicWindowHost new.
 
 	random := Random seed: 7.
 	alphabetGenerator := Generator on: [ :generator |

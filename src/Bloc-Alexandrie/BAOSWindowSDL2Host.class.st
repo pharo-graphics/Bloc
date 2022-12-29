@@ -1,3 +1,6 @@
+"
+I am a host that opens spaces as OSWindow SDL2 windows.
+"
 Class {
 	#name : #BAOSWindowSDL2Host,
 	#superclass : #BlOSWindowHost,
