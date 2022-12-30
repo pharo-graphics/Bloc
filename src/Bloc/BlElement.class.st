@@ -1356,8 +1356,8 @@ BlElement >> effectBounds [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> effectBounds: aSpartaRectangle [
-	^ self effect effectBounds: aSpartaRectangle of: self
+BlElement >> effectBounds: aBlBounds [
+	^ self effect effectBounds: aBlBounds of: self
 ]
 
 { #category : #'api - look' }
@@ -1619,11 +1619,11 @@ BlElement >> geometryBoundsInSpace [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> geometryBoundsInSpace: aSpartaRectangle [
+BlElement >> geometryBoundsInSpace: aBlBounds [
 	
-	self geometryBounds: aSpartaRectangle.
-	self localBoundsToGlobal: aSpartaRectangle.
-	^ aSpartaRectangle
+	self geometryBounds: aBlBounds.
+	self localBoundsToGlobal: aBlBounds.
+	^ aBlBounds
 ]
 
 { #category : #'geometry bounds convertion' }
@@ -1922,11 +1922,11 @@ BlElement >> insets [
 ]
 
 { #category : #'change reporting' }
-BlElement >> invalidRect: aSpartaRectangle [
+BlElement >> invalidRect: aBlBounds [
 	"Invalidate a dirty rectangle of the display.
-	aSpartaRectangle must be given in my own coordinates"
+	The bounds must be given in my own coordinates."
 
-	self invalidRect: aSpartaRectangle from: self
+	self invalidRect: aBlBounds from: self
 ]
 
 { #category : #'change reporting' }
@@ -3684,9 +3684,9 @@ BlElement >> transformedBounds [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> transformedBounds: aSpartaRectangle [
+BlElement >> transformedBounds: aBlBounds [
 
-	^ transformation transformBounds: (self boundsInLocal: aSpartaRectangle)
+	^ transformation transformBounds: (self boundsInLocal: aBlBounds)
 ]
 
 { #category : #'change reporting' }

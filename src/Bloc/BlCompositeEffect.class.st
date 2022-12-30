@@ -19,18 +19,6 @@ BlCompositeEffect >> addAll: aCollection [
 	effects addAll: aCollection
 ]
 
-{ #category : #'as yet unclassified' }
-BlCompositeEffect >> applyEffectOnSpartaCanvas: aSpartaCanvas for: anElement around: aBlock [
-	self applyBeforeOnSpartaCanvas: aSpartaCanvas for: anElement.
-	effects
-		do: [ :e | 
-			e
-				applyEffectOnSpartaCanvas: aSpartaCanvas
-				for: anElement
-				around: aBlock ].
-	self applyAfterOnSpartaCanvas: aSpartaCanvas for: anElement
-]
-
 { #category : #initialization }
 BlCompositeEffect >> initialize [
 	super initialize.
