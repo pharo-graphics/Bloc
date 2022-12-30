@@ -54,15 +54,15 @@ BlTextElementMeasurementStrategyExamples >> measurementDifference [
 
 { #category : #example }
 BlTextElementMeasurementStrategyExamples >> textElementWithEditorMeasurement [
-
 	<gtExample>
+
 	| textElement |
 	textElement := BlTextElementExamples new textElement.
 	textElement border:
 		(BlBorder paint: (Color red darker alpha: 0.6) width: 1).
 	textElement text
 		background: (Color red alpha: 0.4);
-		attribute: (BlTextUnderlineAttribute new color: Color red).
+		underline.
 
 	textElement editorMeasurement.
 
@@ -72,20 +72,21 @@ BlTextElementMeasurementStrategyExamples >> textElementWithEditorMeasurement [
 	self
 		assert: textElement measurement
 		equals: BlTextElementEditorMeasurementStrategy uniqueInstance.
+
 	^ textElement
 ]
 
 { #category : #example }
 BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
-
 	<gtExample>
+
 	| textElement |
 	textElement := BlTextElementExamples new textElement.
 	textElement border:
 		(BlBorder paint: (Color red darker alpha: 0.6) width: 1).
 	textElement text
 		background: (Color red alpha: 0.4);
-		attribute: (BlTextUnderlineAttribute new color: Color red).
+		underline.
 
 	textElement labelMeasurement.
 
@@ -95,20 +96,21 @@ BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
 	self
 		assert: textElement measurement
 		equals: BlTextElementLabelMeasurementStrategy uniqueInstance.
+
 	^ textElement
 ]
 
 { #category : #example }
 BlTextElementMeasurementStrategyExamples >> textElementWithTightMeasurement [
-
 	<gtExample>
+
 	| textElement |
 	textElement := BlTextElementExamples new textElement.
 	textElement border:
 		(BlBorder paint: (Color blue darker alpha: 0.6) width: 1).
 	textElement text
 		background: (Color blue alpha: 0.4);
-		attribute: (BlTextUnderlineAttribute new color: Color blue).
+		underline.
 
 	textElement tightMeasurement.
 
@@ -118,5 +120,6 @@ BlTextElementMeasurementStrategyExamples >> textElementWithTightMeasurement [
 	self
 		assert: textElement measurement
 		equals: BlTextElementTightMeasurementStrategy uniqueInstance.
+
 	^ textElement
 ]
