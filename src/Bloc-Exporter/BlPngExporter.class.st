@@ -20,12 +20,13 @@ Class {
 
 { #category : #'instance creation' }
 BlPngExporter >> createCanvas: anExtent [
-	^ Bloc preferableSpartaCanvas extent: anExtent
+
+	^ AeCanvas extent: anExtent
 ]
 
 { #category : #'api - exporting' }
 BlPngExporter >> export [
-	<return: #FileReference>
+	"Answer a file reference to the exported PNG."
 
 	^ self doExport: [ :aCanvas |
 		| aForm |

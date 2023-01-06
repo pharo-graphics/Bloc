@@ -8,10 +8,3 @@ BlPolygonGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		vertices do: [ :each | cairoContext lineTo: each ].
 		cairoContext closePath ]
 ]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlPolygonGeometry >> aeContainsPoint: aPoint in: aBlElement [
-	"Answer whether aPoint is contained by a this geometry."
-
-	^ BAPolygonHitTester doPolygonBy: self vertices include: aPoint
-]

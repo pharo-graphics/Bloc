@@ -7,13 +7,13 @@ See: https://wrfranklin.org/Research/Short_Notes/pnpoly.html
 
 "
 Class {
-	#name : #BAPolygonHitTester,
+	#name : #BlPolygonHitTester,
 	#superclass : #Object,
-	#category : #'Bloc-Alexandrie-Utility'
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #testing }
-BAPolygonHitTester class >> doPolygonBy: vertices include: aPoint [
+BlPolygonHitTester class >> doPolygonBy: vertices include: aPoint [
 
 	| inside testX testY i j size |
 	inside := false.

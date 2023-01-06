@@ -66,16 +66,6 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Text-Tests' with: [
 					spec requires: #('Bloc-Text') ].
 
-			"Sparta canvas"
-			spec
-				baseline: 'Sparta' with: [
-					spec repository: 'github://pharo-graphics/Sparta:dev-1.0/src' ].
-			spec
-				package: #'Bloc-Compositor' with: [
-					spec requires: #('Bloc' 'Sparta') ];
-				package: #'Bloc-Sparta' with: [
-					spec requires: #('Sparta' 'Bloc' 'Bloc-Text' 'Bloc-Compositor') ].
-
 			"Alexandrie canvas"
 			spec
 				baseline: 'Alexandrie' with: [
@@ -106,7 +96,7 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-UnitedTests' with: [
 					spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Animation') ];
 				package: #'Bloc-Exporter' with: [
-					spec requires: #('Sparta') ];
+					spec requires: #('Bloc-Alexandrie') ];
 				package: #'Bloc-DevTool' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-UnitedTests') ];
 				package: #'Bloc-Scripter' with: [
@@ -115,8 +105,6 @@ BaselineOfBloc >> baseline: spec [
 			spec
 				package: #'Bloc-Examples' with: [
 					spec requires: #(#'Bloc-DevTool') ];
-				package: #'Bloc-Compositor-Examples' with: [
-					spec requires: #(#'Bloc-Examples') ];
 				package: #'Bloc-Text-Examples' with: [
 					spec requires: #(#'Bloc-Examples') ];
 				package: #'Bloc-Layout-Tests' with: [

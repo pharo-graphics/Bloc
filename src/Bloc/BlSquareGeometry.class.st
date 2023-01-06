@@ -10,6 +10,7 @@ Class {
 
 { #category : #'geometry testing' }
 BlSquareGeometry >> containsPoint: aPoint in: aBlElement [
+
 	^ (self geometryBounds: BlBounds new) containsPoint: aPoint
 ]
 

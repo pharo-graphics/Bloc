@@ -24,16 +24,16 @@ Class {
 
 { #category : #'instance creation' }
 BlJpgExporter >> createCanvas: anExtent [
-	^ Bloc preferableSpartaCanvas extent: anExtent
+
+	^ AeCanvas extent: anExtent
 ]
 
 { #category : #'api - exporting' }
 BlJpgExporter >> export [
-	<return: #FileReference>
+	"Answer a file reference to the exported JPG."
 
 	^ self doExport: [ :aCanvas |
 		| aForm |
-		
 		aForm := aCanvas asForm.
 	
 		self fileName asFileReference ensureDelete.
@@ -62,27 +62,25 @@ BlJpgExporter >> initialize [
 
 { #category : #accessing }
 BlJpgExporter >> isProgressive [
-	<return: #Boolean>
 
 	^ isProgressive
 ]
 
 { #category : #accessing }
 BlJpgExporter >> isProgressive: aBoolean [
+
 	isProgressive := aBoolean
 ]
 
 { #category : #accessing }
 BlJpgExporter >> quality [
+
 	^ quality
 ]
 
 { #category : #accessing }
 BlJpgExporter >> quality: aNumber [
-	
-	self
-		assert: [ aNumber between: 0 and: 100 ]
-		description: [ 'Quality must be between 0 and 100' ].
+	"Quality must be between 0 and 100"
 	
 	quality := aNumber
 ]

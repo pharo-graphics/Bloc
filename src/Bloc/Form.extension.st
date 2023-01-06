@@ -17,8 +17,3 @@ Form >> asElement [
 Form >> asForm [
 	^ self
 ]
-
-{ #category : #'*Bloc' }
-Form >> isSystemCursor [
-	^ false
-]

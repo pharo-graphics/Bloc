@@ -15,7 +15,6 @@ Class {
 
 { #category : #measurement }
 BlHostTextMeasurer >> createParagraphSpan [
-	<return: #BlSpartaTextParagraphSpan>
 
 	^ self newParagraphSpan 
 		  hostMeasurer: self;

@@ -20,15 +20,21 @@ Class {
 
 { #category : #'instance creation' }
 BlPdfExporter >> createCanvas: anExtent [
-	^ Bloc preferableSpartaCanvas pdf: self fileName extent: anExtent
+
+	| aSurface |
+	aSurface := AeCairoPDFSurface
+		            extent: anExtent
+		            fileName: self fileName pathString.
+
+	^ AeCanvas newFor: aSurface
 ]
 
 { #category : #'api - exporting' }
 BlPdfExporter >> export [
-	<return: #FileReference>
+	"Answer a file reference to the exported PDF."
 
 	^ self doExport: [ :aCanvas |
-		aCanvas flush.
+		aCanvas flush; finish.
 		self fileName asFileReference ]
 ]
 

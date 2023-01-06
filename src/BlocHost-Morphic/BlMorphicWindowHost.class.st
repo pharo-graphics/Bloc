@@ -1,5 +1,5 @@
 "
-I am a concrete implementation of a BlHost that allows users to open host bloc spaces within Moprhic windows
+I am a host that opens spaces as windows in the Morphic World.
 "
 Class {
 	#name : #BlMorphicWindowHost,
@@ -9,20 +9,18 @@ Class {
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
+
 	^ true
 ]
 
-{ #category : #'driver selection' }
+{ #category : #printing }
 BlMorphicWindowHost class >> label [
 
-	^ 'Morphic Sparta'
+	^ 'Morphic'
 ]
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> priority [
-	"I am a default host, hence return zero.
-	Morphic host is the most stable and will work on any machine"
-	<return: #Number>
 
 	^ 20
 ]
@@ -30,18 +28,17 @@ BlMorphicWindowHost class >> priority [
 { #category : #'host - api' }
 BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
+
 	| aWindow aHostSpace|
-
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Space must not have a host space!' ].
-
 	aWindow := self createMorphicWindowFor: aSpace.
-	aHostSpace := BlMorphicWindowHostSpace new morphicWindow: aWindow; yourself.
-	aHostSpace host: self.
-	aHostSpace universe: self universe.
-	aHostSpace space: aSpace.
-	aHostSpace withSpartaRenderer.
+
+	aHostSpace := BlMorphicWindowHostSpace new
+		morphicWindow: aWindow;
+		host: self;
+		universe: self universe;
+		space: aSpace;
+		renderer: BlHostRenderer preferableClass new;
+		yourself.
 
 	aSpace hostSpace: aHostSpace
 ]
@@ -50,24 +47,19 @@ BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 BlMorphicWindowHost >> createMorphicWindowFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
 	I do not create any strong or weak references to provided space"
-	| aWindow |
 
-	aWindow := BlMorphicWindow new.
-	aWindow spaceExtent: aSpace extent.
-	aWindow borderless: aSpace borderless.
-	aWindow fullsize: aSpace fullsize.
-	aWindow title: aSpace title.
+	^ BlMorphicWindow new
+		spaceExtent: aSpace extent;
+		borderless: aSpace borderless;
+		fullsize: aSpace fullsize;
+		title: aSpace title;
+		yourself
 
-	^ aWindow
 ]
 
 { #category : #'host - api' }
 BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 
-	self
-		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host!' ].
-	
 	aSpace hostSpace
 		close;
 		detachSpace;
@@ -77,7 +69,8 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 	aSpace detachHostSpace
 ]
 
-{ #category : #'host - testing' }
+{ #category : #testing }
 BlMorphicWindowHost >> isStillAvailable [
+
 	^ self class isSupported
 ]

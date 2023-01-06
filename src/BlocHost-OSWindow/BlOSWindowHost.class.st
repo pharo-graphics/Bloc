@@ -11,22 +11,6 @@ Class {
 	#category : #'BlocHost-OSWindow-Host'
 }
 
-{ #category : #'instance creation' }
-BlOSWindowHost class >> default [
-	"Pick a specific OSWindow backend from available ones"
-	<return: #BlOSWindowHost>
-
-	^ BlOSWindowHost suitableHostClass new
-]
-
-{ #category : #'instance creation' }
-BlOSWindowHost class >> new [
-	self = BlOSWindowHost
-		ifTrue: [ self error: 'Please use #default instead to pick up a suitable backend' ].
-
-	^ self basicNew initialize
-]
-
 { #category : #private }
 BlOSWindowHost >> createAttributesFor: aSpace [
 
@@ -51,20 +35,6 @@ BlOSWindowHost >> createHostSpace [
 	^ BlOSWindowHostSpace new
 ]
 
-{ #category : #'host - api' }
-BlOSWindowHost >> createHostSpaceFor: aSpace [
-	"Create and assign a new oswindow host space for given bloc space"
-
-	| aHostSpace|
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Space must not have a host!' ].
-	
-	aHostSpace := self createWindowSpaceFor: aSpace.
-
-	aSpace hostSpace: aHostSpace
-]
-
 { #category : #private }
 BlOSWindowHost >> createWindowSpaceFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
@@ -87,8 +57,7 @@ BlOSWindowHost >> createWindowSpaceFor: aSpace [
 		initializeWithAttributes: theWindowAttributes;
 		universe: self universe;
 		host: self;
-		space: aSpace;
-		withSpartaRenderer.
+		space: aSpace.
 	
 	^ aHostSpace
 ]
@@ -114,7 +83,6 @@ BlOSWindowHost >> keyboardKeyTable [
 { #category : #'host - testing' }
 BlOSWindowHost >> supportsBufferSurface [
 	"Return true if this host can work with buffer surface, false otherwise"
-	<return: #Boolean>
 	
 	^ true
 ]

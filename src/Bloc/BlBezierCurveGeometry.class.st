@@ -16,6 +16,24 @@ BlBezierCurveGeometry class >> controlPoints: aCollection [
 	^ self new controlPoints: aCollection
 ]
 
+{ #category : #'geometry testing' }
+BlBezierCurveGeometry >> containsPoint: aPoint in: aBlElement [
+	"Answer whether aPoint is contained by this geometry.
+
+	Adapted from RSBezier>>#basicIncludesPoint:"
+
+	| lines ir |
+	ir := aBlElement border width / 2.
+	lines := self asPolylineVertices. "TODO: cache"
+
+	^ (1 to: lines size - 1) anySatisfy: [ :i |
+			aPoint 
+				onLineFrom: (lines at: i)
+				to: (lines at: i + 1)
+				within: ir ]
+
+]
+
 { #category : #accessing }
 BlBezierCurveGeometry >> controlPoints [
 

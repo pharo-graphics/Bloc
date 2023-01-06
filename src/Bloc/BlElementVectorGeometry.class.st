@@ -91,3 +91,35 @@ BlElementVectorGeometry >> releaseCache [
 BlElementVectorGeometry >> releaseStrokedBoundsCache [
 	pathCache releaseStrokedBoundsCache
 ]
+
+{ #category : #'visual bounds' }
+BlElementVectorGeometry >> strokedBounds: aBlBounds of: anElement [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+
+	^ aBlBounds rectangle:
+		  (pathCache strokedBounds: aBlBounds of: anElement)
+]
+
+{ #category : #'visual bounds' }
+BlElementVectorGeometry >> strokedBoundsCentered: aBlBounds of: aBlElement [
+	"Answer my bounds as if the border with centered outskirts.
+	Particular geometries may answer a more precise answer."
+
+	^ (self geometryBounds: aBlBounds) expandBy: aBlElement border width / 2.0
+]
+
+{ #category : #'visual bounds' }
+BlElementVectorGeometry >> strokedBoundsInside: aBlBounds of: anElement [
+	"Stroked inside bounds property is equal to geometry bounds"
+
+	^ self geometryBounds: aBlBounds
+]
+
+{ #category : #'visual bounds' }
+BlElementVectorGeometry >> strokedBoundsOutside: aBlBounds of: aBlElement [
+	"Answer my bounds as if the border outside. 
+	Particular geometries may answer a more precise answer."
+
+	^ (self geometryBounds: aBlBounds) expandBy: aBlElement border width
+]

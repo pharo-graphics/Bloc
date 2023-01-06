@@ -23,6 +23,13 @@ BlPolygonGeometry class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
+{ #category : #'geometry testing' }
+BlPolygonGeometry >> containsPoint: aPoint in: aBlElement [
+	"Answer whether aPoint is contained by a this geometry."
+
+	^ BlPolygonHitTester doPolygonBy: self vertices include: aPoint
+]
+
 { #category : #'geometry bounds' }
 BlPolygonGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.

@@ -34,7 +34,7 @@ BAHitTest class >> inspectMismatches [
 { #category : #tests }
 BAHitTest >> actualForm [
 
-	^ self hitFormFor: formSelector host: BAOSWindowSDL2Host new
+	^ self hitFormFor: formSelector host: BlOSWindowSDL2Host new
 ]
 
 { #category : #tests }

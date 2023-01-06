@@ -70,12 +70,14 @@ BlDirectEventDispatcher >> addShortcut: aBlShortcut [
 
 { #category : #initialization }
 BlDirectEventDispatcher >> defaultFilterRegistry [
-	^ Bloc preferableEventHandlerRegistry new
+
+	^ BlHandlerRegistry preferableHandlerRegistryClass new
 ]
 
 { #category : #initialization }
 BlDirectEventDispatcher >> defaultHandlerRegistry [
-	^ Bloc preferableEventHandlerRegistry new
+
+	^ BlHandlerRegistry preferableHandlerRegistryClass new
 ]
 
 { #category : #'api - event managing' }

@@ -14,13 +14,13 @@ Class {
 
 { #category : #private }
 BlFileExporter >> askFileName [
+
 	^ Smalltalk imageDirectory / (self element class name, '-', self element hash asString,'.' , self extension)
 ]
 
 { #category : #'api - exporting' }
 BlFileExporter >> extension [
-	"Return a default file extension to be used during export"
-	<return: #String>
+	"Return a String representing default file extension to be used during export"
 	
 	^ self subclassResponsibility
 ]

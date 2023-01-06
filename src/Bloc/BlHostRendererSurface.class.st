@@ -13,7 +13,7 @@ Class {
 		'shouldUpdateEveryFrame',
 		'updateActions'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : #'Bloc-Universe - Renderer - NU'
 }
 
 { #category : #accessing }
@@ -24,6 +24,13 @@ BlHostRendererSurface class >> allSurfaces [
 	^ self allSubclasses
 ]
 
+{ #category : #testing }
+BlHostRendererSurface class >> isSupportedBy: anObject [
+	"Return whether a given object supports this surface."
+	
+	^ self subclassResponsibility
+]
+
 { #category : #'instance creation' }
 BlHostRendererSurface class >> newForHostSpace: aBlHostSpace [
 
@@ -32,10 +39,8 @@ BlHostRendererSurface class >> newForHostSpace: aBlHostSpace [
 		  yourself
 ]
 
-{ #category : #testing }
-BlHostRendererSurface class >> supportedBy: anObject [
-	"Return true if a given object supports this surface, false otherwise"
-	<return: #Boolean>
+{ #category : #accessing }
+BlHostRendererSurface class >> priority [
 	
 	^ self subclassResponsibility
 ]

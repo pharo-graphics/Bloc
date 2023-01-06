@@ -850,11 +850,20 @@ BlElement >> clipChildren: aBoolean [
 	self invalidateChildren.
 ]
 
-{ #category : #accessing }
+{ #category : #'api - compositing' }
 BlElement >> compositingMode [
 	<return: #BlCompositingMode>
 
 	^ visuals compositingMode
+]
+
+{ #category : #'api - compositing' }
+BlElement >> compositionDepth [
+
+	| aDepth |
+	aDepth := 1.
+	self allParentsDo: [ :eachParent | aDepth := aDepth + 1 ].
+	^ aDepth
 ]
 
 { #category : #'api - painting' }
@@ -1347,8 +1356,8 @@ BlElement >> effectBounds [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> effectBounds: aSpartaRectangle [
-	^ self effect effectBounds: aSpartaRectangle of: self
+BlElement >> effectBounds: aBlBounds [
+	^ self effect effectBounds: aBlBounds of: self
 ]
 
 { #category : #'api - look' }
@@ -1610,11 +1619,11 @@ BlElement >> geometryBoundsInSpace [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> geometryBoundsInSpace: aSpartaRectangle [
+BlElement >> geometryBoundsInSpace: aBlBounds [
 	
-	self geometryBounds: aSpartaRectangle.
-	self localBoundsToGlobal: aSpartaRectangle.
-	^ aSpartaRectangle
+	self geometryBounds: aBlBounds.
+	self localBoundsToGlobal: aBlBounds.
+	^ aBlBounds
 ]
 
 { #category : #'geometry bounds convertion' }
@@ -1740,6 +1749,12 @@ BlElement >> hasChildren [
 	<return: #Boolean>
 	
 	^ self children isEmpty not
+]
+
+{ #category : #'api - compositing' }
+BlElement >> hasCompositionLayer [
+
+	^ self compositionLayer isNotNil and: [ self compositionLayer isValid ]
 ]
 
 { #category : #'focus testing' }
@@ -1907,11 +1922,11 @@ BlElement >> insets [
 ]
 
 { #category : #'change reporting' }
-BlElement >> invalidRect: aSpartaRectangle [
+BlElement >> invalidRect: aBlBounds [
 	"Invalidate a dirty rectangle of the display.
-	aSpartaRectangle must be given in my own coordinates"
+	The bounds must be given in my own coordinates."
 
-	self invalidRect: aSpartaRectangle from: self
+	self invalidRect: aBlBounds from: self
 ]
 
 { #category : #'change reporting' }
@@ -1949,7 +1964,8 @@ BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 	"Invalidate due to relocation by a given offset"
 
 	self wantsSeparateCompositingLayer
-		ifTrue: [ self hasCompositionLayer
+		ifTrue: [
+			self hasCompositionLayer
 				ifTrue: [
 					| aLayer |
 					aLayer := self compositionLayer.
@@ -1958,7 +1974,8 @@ BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
 				ifFalse: [ self hasParent
 						ifTrue: [ self parent invalidate ] ] ]
-		ifFalse: [ self hasParent
+		ifFalse: [
+			self hasParent
 				ifTrue: [ self parent invalidate ] ]
 ]
 
@@ -3667,9 +3684,9 @@ BlElement >> transformedBounds [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> transformedBounds: aSpartaRectangle [
+BlElement >> transformedBounds: aBlBounds [
 
-	^ transformation transformBounds: (self boundsInLocal: aSpartaRectangle)
+	^ transformation transformBounds: (self boundsInLocal: aBlBounds)
 ]
 
 { #category : #'change reporting' }
@@ -3736,12 +3753,9 @@ BlElement >> visibility: aVisibility [
 BlElement >> visualBounds [
 	"Visual bounds represent a high precision area of rendered geometry, including border.
 	By default, visual bounds of `inside` outskits equal to geometry bounds since border
-	is never rendered outside of the element's geometry.
-	Note: When there is no sparta canvas available, return geometry bounds"
+	is never rendered outside of the element's geometry."
 
-	^ self isAttachedToSceneGraph
-		  ifTrue: [ self space visualBoundsOf: self ]
-		  ifFalse: [ self geometryBounds ]
+	^ (self geometry strokedBounds: BlBounds new of: self) asRectangle
 ]
 
 { #category : #'event handling' }
@@ -3755,14 +3769,12 @@ BlElement >> wantsMouseEventAt: aPoint [
 
 { #category : #'api - compositing' }
 BlElement >> wantsSeparateCompositingLayer [
-	<return: #Boolean>
 
-	(self compositingMode wantsCompositionLayer or:  [ self effect wantsCompositionLayer ])
-		ifFalse: [ ^ false ].
+	(self compositingMode wantsCompositionLayer or: [ 
+		 self effect wantsCompositionLayer ]) ifFalse: [ ^ false ].
 
-	self allParentsDo: [ :eachParent |
-			eachParent compositingMode wantsBufferedLayer
-				ifTrue: [ ^ false ] ].
+	self allParentsDo: [ :eachParent | 
+		eachParent compositingMode wantsBufferedLayer ifTrue: [ ^ false ] ].
 
 	^ true
 ]

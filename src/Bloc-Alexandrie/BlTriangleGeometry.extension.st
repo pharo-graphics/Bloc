@@ -14,9 +14,3 @@ BlTriangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 			closePath ]
 
 ]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlTriangleGeometry >> aeContainsPoint: aPoint in: aBlElement [
-
-	^ BAPolygonHitTester doPolygonBy: self computeVertices include: aPoint
-]

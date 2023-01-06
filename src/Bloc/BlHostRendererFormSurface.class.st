@@ -10,20 +10,19 @@ Class {
 	#instVars : [
 		'externalForm'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : #'Bloc-Universe - Renderer - NU'
 }
+
+{ #category : #testing }
+BlHostRendererFormSurface class >> isSupportedBy: anObject [
+	"Return whether a given object supports Form surface."
+
+	^ anObject supportsFormSurface
+]
 
 { #category : #accessing }
 BlHostRendererFormSurface class >> priority [
 	^ 30
-]
-
-{ #category : #testing }
-BlHostRendererFormSurface class >> supportedBy: anObject [
-	"Return true if a given object supports form surface, false otherwise"
-	<return: #Boolean>
-
-	^ anObject supportsFormSurface
 ]
 
 { #category : #initialization }

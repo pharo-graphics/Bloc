@@ -67,3 +67,13 @@ BlPathCache >> releaseStrokedBoundsCache [
 
 	strokedBounds := nil
 ]
+
+{ #category : #'visual bounds' }
+BlPathCache >> strokedBounds: aBlBounds of: anElement [
+	"Return stroked bounds of a geometry if it would be stroked according to element's outskirts."
+
+	^ strokedBounds ifNil: [ 
+		  strokedBounds := anElement outskirts
+			                   strokedBounds: BlBounds new
+			                   of: anElement ]
+]

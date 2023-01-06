@@ -12,20 +12,19 @@ Class {
 		'extent',
 		'strongReference'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : #'Bloc-Universe - Renderer - NU'
 }
+
+{ #category : #testing }
+BlHostRendererBufferSurface class >> isSupportedBy: anObject [
+	"Return whether a given object supports buffer surface."
+
+	^ anObject supportsBufferSurface
+]
 
 { #category : #accessing }
 BlHostRendererBufferSurface class >> priority [
 	^ 20
-]
-
-{ #category : #testing }
-BlHostRendererBufferSurface class >> supportedBy: anObject [
-	"Return true if a given object supports buffer surface, false otherwise"
-	<return: #Boolean>
-
-	^ anObject supportsBufferSurface
 ]
 
 { #category : #accessing }

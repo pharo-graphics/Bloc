@@ -433,7 +433,7 @@ BlSpaceFixture >> buildGradients [
 
 	| aLinearGradient aRadialGradient anExtent |
 
-	"Bug? start and stop only give the direction (in Sparta)"
+	"Bug? start and stop only give the direction."
 	aLinearGradient := BlLinearGradientPaint new
 			start: 0@10;
 			end: 10@0;

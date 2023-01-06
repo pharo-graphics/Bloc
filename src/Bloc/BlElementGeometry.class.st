@@ -22,9 +22,7 @@ BlElementGeometry >> asElement [
 
 { #category : #'geometry testing' }
 BlElementGeometry >> containsPoint: aPoint in: aBlElement [
-	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
-	as as border during the testing process"
-	<return: #Boolean>
+	"Answer whether aPoint is contained by a this geometry."
 	
 	^ self subclassResponsibility
 ]
@@ -70,4 +68,13 @@ BlElementGeometry >> releaseStrokedBoundsCache [
 { #category : #serialization }
 BlElementGeometry >> storeOn: aStream [
 	aStream nextPutAll: self class name; space; nextPutAll: 'new'
+]
+
+{ #category : #'visual bounds' }
+BlElementGeometry >> strokedBounds: aBlBounds of: anElement [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+	<return: #BlBounds>
+	
+	^ self subclassResponsibility
 ]

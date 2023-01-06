@@ -9,14 +9,20 @@ Class {
 
 { #category : #testing }
 BlHandlerArrayRegistry class >> isSupported [
-	<return: #Boolean>
 	
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 BlHandlerArrayRegistry class >> label [
+
 	^ 'Custom (Array)'
+]
+
+{ #category : #accessing }
+BlHandlerArrayRegistry class >> priority [
+
+	^ 2
 ]
 
 { #category : #'api - adding / removing' }

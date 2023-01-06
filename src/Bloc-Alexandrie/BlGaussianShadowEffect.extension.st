@@ -3,12 +3,13 @@ Extension { #name : #BlGaussianShadowEffect }
 { #category : #'*Bloc-Alexandrie' }
 BlGaussianShadowEffect >> aeDrawBelow: aBlElement on: aeCanvas [
 
-	| alphaSurface alphaCanvas shadowSpace |
+	| alphaSurface alphaCanvas shadowSpace visualBounds |
 	shadowSpace := self extraShadowSpace.
+	visualBounds := aBlElement visualBounds.
 	alphaSurface := aeCanvas privateAeCairoContext surface
 		newSimilarImageFormat: AeCairoSurfaceFormat CAIRO_FORMAT_A8
-		width: (aBlElement visualBounds width + (shadowSpace * 2))
-		height: (aBlElement visualBounds height + (shadowSpace * 2)).
+		width: (visualBounds width + (shadowSpace * 2))
+		height: (visualBounds height + (shadowSpace * 2)).
 	alphaSurface status ensureIsSuccess.
 
 	alphaCanvas := AeCanvas newFor: alphaSurface.

@@ -1,10 +1,8 @@
 "
 # Text element
 
-**I am independent from Sparta **
-
-I support multiple measurement strategies, see examples for more detailed explanation:
-{{gtClass:BlTextElementMeasurementStrategyExamples}}
+I support multiple measurement strategies. See examples for more detailed explanation on:
+`BlTextElementMeasurementStrategyExamples`.
 
 
 "

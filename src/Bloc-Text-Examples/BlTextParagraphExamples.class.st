@@ -814,7 +814,8 @@ BlTextParagraphExamples >> realMeasuredHelloWorld [
 BlTextParagraphExamples >> realMeasurer [
 	<gtExample>
 
-	^ BlSpartaCanvasTextMeasurer new canvas: Bloc preferableSpartaCanvas offscreen
+	self error: 'TODO: migrate from Sparta'
+	"^ BlSpartaCanvasTextMeasurer new canvas: Bloc preferableSpartaCanvas offscreen"
 ]
 
 { #category : #'geometry - empty' }
