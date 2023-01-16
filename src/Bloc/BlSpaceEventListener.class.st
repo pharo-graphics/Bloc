@@ -159,6 +159,7 @@ BlSpaceEventListener >> spaceMouseEnterEvent: anEvent [
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceMouseLeaveEvent: anEvent [
+
 	self mouseProcessor handleMouseLeft: anEvent
 ]
 

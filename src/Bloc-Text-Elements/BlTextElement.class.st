@@ -288,7 +288,7 @@ BlTextElement >> isTabulation [
 { #category : #'api - text' }
 BlTextElement >> labelMeasurement [
 
-	self measurement: BlTextElementLabelMeasurementStrategy uniqueInstance.
+	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
 ]
 
