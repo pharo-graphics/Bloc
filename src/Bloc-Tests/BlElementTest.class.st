@@ -46,6 +46,24 @@ BlElementTest >> tearDown [
 	space := nil
 ]
 
+{ #category : #test }
+BlElementTest >> testChildWithIdIfNone [
+
+	| blElement blChild |
+	blElement := BlElement new.
+
+	"Test with nil key (simulate an malfunction)"
+	self assert: (blElement childWithId: nil ifNone: [ true ]).
+
+	"Test with no-existing child key"
+	self assert: (blElement childWithId: #aChild ifNone: [ true ]).
+
+	"Test with existing child key"
+	blChild := BlElement new id: #aChild.
+	blElement addChild: blChild.
+	self assert: (blElement childWithId: #aChild ifNone: [ true ]) equals: blChild.
+]
+
 { #category : #default }
 BlElementTest >> testDefault [
 	| element |
