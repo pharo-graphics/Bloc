@@ -55,7 +55,7 @@ BlSharedEventDistributor >> dispatch: aBlEvent on: anElement [
 	shouldHandle ifFalse: [ ^ self ].
 	
 	aNewEvent := aBlEvent newCopyFor: anElement.
-	aBlEvent isUIEvent ifTrue: [
+	aBlEvent isMouse ifTrue: [
 		self adjustPosition: aNewEvent from: aBlEvent ].
 
 	shouldHandle := false.
