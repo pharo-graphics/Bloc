@@ -46,6 +46,102 @@ BlElementTest >> tearDown [
 	space := nil
 ]
 
+{ #category : #test }
+BlElementTest >> testChildWithId [
+
+	| blElement blChild error |
+	blElement := self element.
+
+	"Test with nil key (simulate an malfunction)"
+	error := nil.
+	[blElement childWithId: nil] onErrorDo: [ :e | error := e ].
+	self assert: error notNil.
+
+	"Test with no-existing child key"
+	error := nil.
+	[blElement childWithId: #aChild] onErrorDo: [ :e | error := e ].
+	self assert: error notNil.
+
+	"Test with existing child key"
+	blChild := BlElement new id: #aChild.
+	blElement addChild: blChild.
+	self assert: (blElement childWithId: #aChild) equals: blChild.
+]
+
+{ #category : #test }
+BlElementTest >> testChildWithIdIfFound [
+
+	| blElement blChild result |
+	blElement := self element.
+
+	"Test with nil key (simulate an malfunction)"
+	result := blElement childWithId: nil ifFound: [ :e | true ].
+	self assert: result isNil.
+	result := blElement childWithId: nil ifFound: [ true ]. "cull version"
+	self assert: result isNil.
+
+	"Test with no-existing child key"
+	result := blElement childWithId: #aChild ifFound: [ :e | true ].
+	self assert: result isNil.
+	result := blElement childWithId: #aChild ifFound: [ true ]. "cull version"
+	self assert: result isNil.
+
+	"Test with existing child key"
+	blChild := BlElement new id: #aChild.
+	blElement addChild: blChild.
+	result := blElement childWithId: #aChild ifFound: [ :e | e ].
+	self assert: result equals: blChild.
+
+	result := blElement childWithId: #aChild ifFound: [ true ]. "cull version"
+	self assert: result.	
+]
+
+{ #category : #test }
+BlElementTest >> testChildWithIdIfFoundIfNone [
+
+	| blElement blChild result |
+	blElement := self element.
+
+	"Test with nil key (simulate an malfunction)"
+	result := blElement childWithId: nil ifFound: [ :e | true ] ifNone:[ false ].
+	self assert: result not.
+	result := blElement childWithId: nil ifFound: [ true ] ifNone:[ false ]. "cull version"
+	self assert: result not.
+
+	"Test with no-existing child key"
+	result := blElement childWithId: #aChild ifFound: [ :e | true ] ifNone:[ false ].
+	self assert: result not.
+	result := blElement childWithId: #aChild ifFound: [ true ] ifNone:[ false ]. "cull version"
+	self assert: result not.
+
+	"Test with existing child key"
+	blChild := BlElement new id: #aChild.
+	blElement addChild: blChild.
+	result := blElement childWithId: #aChild ifFound: [ :e | e ] ifNone:[ false ].
+	self assert: result equals: blChild.
+
+	result := blElement childWithId: #aChild ifFound: [ true ] ifNone:[ false ]. "cull version"
+	self assert: result.	
+]
+
+{ #category : #test }
+BlElementTest >> testChildWithIdIfNone [
+
+	| blElement blChild |
+	blElement := self element.
+
+	"Test with nil key (simulate an malfunction)"
+	self assert: (blElement childWithId: nil ifNone: [ true ]).
+
+	"Test with no-existing child key"
+	self assert: (blElement childWithId: #aChild ifNone: [ true ]).
+
+	"Test with existing child key"
+	blChild := BlElement new id: #aChild.
+	blElement addChild: blChild.
+	self assert: (blElement childWithId: #aChild ifNone: [ true ]) equals: blChild.
+]
+
 { #category : #default }
 BlElementTest >> testDefault [
 	| element |
