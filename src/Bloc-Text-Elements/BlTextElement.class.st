@@ -101,8 +101,11 @@ BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
 { #category : #'paragraph - geometry' }
 BlTextElement >> characterBoundsAtIndex: aLocalIndex [
 
-	| startSpan startPos originIdx endPos endSpan cornerIdx extentToUse |
-	extentToUse := fillSize ifNil: [ self extent ] ifNotNil: [ (fillSize max: self extent x) @ self extent y ].
+	| startSpan startPos originIdx endPos endSpan cornerIdx extentToUse line cornerY origin |
+	line := self textFlow assignedLine.
+	origin := line origin.
+	cornerY := origin y + self textFlow assignedLine height.
+	extentToUse :=  (fillSize max: self extent x) @ cornerY.
 	originIdx := (aLocalIndex - 1 max: 0) min: text size.
 	startSpan := paragraph spanAtIndex: originIdx.
 	startPos := startSpan positionAt: originIdx.
@@ -110,7 +113,21 @@ BlTextElement >> characterBoundsAtIndex: aLocalIndex [
 	cornerIdx := originIdx + 1 min: text size.
 	endSpan := paragraph spanAtIndex: cornerIdx.
 	endPos := endSpan positionAt: cornerIdx.
-	^ startPos x @ 0 corner: endPos x @ extentToUse y
+	^ startPos x @ origin y corner: endPos x @ extentToUse y
+]
+
+{ #category : #'paragraph - geometry' }
+BlTextElement >> characterWidthAtIndex: aLocalIndex [
+
+	| startSpan startPos originIdx endPos endSpan cornerIdx  |
+	originIdx := (aLocalIndex - 1 max: 0) min: text size.
+	startSpan := paragraph spanAtIndex: originIdx.
+	startPos := startSpan positionAt: originIdx.
+
+	cornerIdx := originIdx + 1 min: text size.
+	endSpan := paragraph spanAtIndex: cornerIdx.
+	endPos := endSpan positionAt: cornerIdx.
+	^ endPos x - startPos x 
 ]
 
 { #category : #layout }
