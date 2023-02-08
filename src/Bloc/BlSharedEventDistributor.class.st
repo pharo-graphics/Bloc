@@ -12,6 +12,7 @@ Class {
 	#name : #BlSharedEventDistributor,
 	#superclass : #BlBasicEventHandler,
 	#instVars : [
+		'adjustMousePosition',
 		'elements',
 		'handledEvents',
 		'shouldHandle'
@@ -29,12 +30,19 @@ BlSharedEventDistributor class >> shareEvents: aCollectionOfEvents [
 	^ self new shareEvents: aCollectionOfEvents
 ]
 
+{ #category : #accessing }
+BlSharedEventDistributor >> adjustMousePosition: aBoolean [
+
+	adjustMousePosition := aBoolean
+]
+
 { #category : #'private - coordinates' }
 BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 	| anOldBounds anOldDiagonal aNewBounds aNewDiagonal aRatio aNewPosition |
 	
 	(anOldEvent currentTarget isKindOf: BlElement)
 		ifFalse: [ ^ self ].
+	adjustMousePosition ifFalse: [ ^self ].
 	
 	anOldBounds := anOldEvent currentTarget boundsInSpace.
 	anOldDiagonal := anOldBounds topLeft - anOldBounds bottomRight.
@@ -89,7 +97,8 @@ BlSharedEventDistributor >> initialize [
 	super initialize.
 	elements := Set new.
 	handledEvents := #().
-	shouldHandle := true
+	shouldHandle := true.
+	adjustMousePosition := true
 ]
 
 { #category : #'api - hooks' }
@@ -121,5 +130,5 @@ BlSharedEventDistributor >> wantsEvent: anEvent [
 	shouldHandle
 		ifFalse: [ ^ false ].
 
-	^ handledEvents includes: anEvent class
+	^ handledEvents anySatisfy: [ :cls | anEvent isKindOf: cls ]
 ]
