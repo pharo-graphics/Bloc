@@ -232,38 +232,6 @@ BlElementChildrenTest >> testAllParentsToDo [
 ]
 
 { #category : #tests }
-BlElementChildrenTest >> testAllParentsUpToDo [
-
-	<gtExample>
-	| aContainer res |
-	aContainer := self hierarchyChildren.
-	res := OrderedCollection new.
-
-	(aContainer childNamed: #shape_10)
-		allParentsTo: (aContainer childNamed: #shape_5)
-		do: [ :parent | res add: parent ].
-	self assert: res asArray equals: {
-	(aContainer childNamed: #shape_10).
-			(aContainer childNamed: #shape_9).
-			(aContainer childNamed: #shape_8).
-			(aContainer childNamed: #shape_7).
-			(aContainer childNamed: #shape_6).
-			(aContainer childNamed: #shape_5) }.
-
-	res := OrderedCollection new.
-	(aContainer childNamed: #shape_5)
-		allParentsTo: (aContainer childNamed: #shape_10)
-		do: [ :parent | res add: parent ].
-	self assert: res asArray equals: {
-	(aContainer childNamed: #shape_5).
-			(aContainer childNamed: #shape_4).
-			(aContainer childNamed: #shape_3).
-			(aContainer childNamed: #shape_2).
-			(aContainer childNamed: #shape_1).
-			aContainer }
-]
-
-{ #category : #tests }
 BlElementChildrenTest >> testChildAt [
 
 	<gtExample>
