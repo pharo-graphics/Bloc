@@ -697,6 +697,9 @@ BlElement >> childIndexOf: anElement [
 { #category : #'children accessing' }
 BlElement >> childNamed: aChildName [
 	<return: #BlElement>
+	self
+		deprecated: 'Use #childWithId: instead.'
+		transformWith: '`@receiver childNamed:' -> '`@receiver childWithId:'.
 
 	self
 		childNamed: aChildName
@@ -707,6 +710,9 @@ BlElement >> childNamed: aChildName [
 { #category : #'children accessing' }
 BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
 	<return: #Object>
+	self
+		deprecated: 'Use #childWithId:ifFound: instead.'
+		transformWith: '`@receiver childNamed:ifFound:' -> '`@receiver childWithId:ifFound:'.
 
 	^ self
 		childNamed: aContainerName
@@ -717,6 +723,9 @@ BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
 { #category : #'children accessing' }
 BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
+	self
+		deprecated: 'Use #childWithId:ifFound:ifNone: instead.'
+		transformWith: '`@receiver childNamed:ifFound:ifNone:' -> '`@receiver childWithId:ifFound:ifNone:'.
 
 	^ self
 		childWithId: aContainerName
