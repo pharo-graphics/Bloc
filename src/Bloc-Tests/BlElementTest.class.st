@@ -203,6 +203,16 @@ BlElementTest >> testHasFocusable [
 	self assert: child hasFocusable
 ]
 
+{ #category : #test }
+BlElementTest >> testId [
+
+	| element |
+	element := BlElement new.
+	element id: #anId.
+	
+	self assert: element id equals: #anId.
+]
+
 { #category : #'focus testing' }
 BlElementTest >> testIsFocusable [
 	| element |

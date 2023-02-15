@@ -987,12 +987,20 @@ BlElement >> constraintsDo: aBlock [
 BlElement >> containerName [
 	<return: #Symbol or: nil>
 
+	self
+		deprecated: 'Use #id instead.'
+		transformWith: '`@receiver containerName' -> '`@receiver id'.
+
 	^ self id asSymbol
 ]
 
 { #category : #accessing }
 BlElement >> containerName: aSymbol [
 	"Give this element a container name (a Symbol) which can be used to find an element by its name"
+
+	self
+		deprecated: 'Use #id: instead.'
+		transformWith: '`@receiver containerName:' -> '`@receiver id:'.
 
 	self id: aSymbol
 ]
@@ -1201,6 +1209,8 @@ BlElement >> detachSpace [
 { #category : #'children accessing' }
 BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
+
+	self deprecated:''.
 
 	self childrenDo: [ :aChild |
 		aChild containerName ifNotNil: [ :aName |
