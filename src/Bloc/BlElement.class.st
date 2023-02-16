@@ -2087,7 +2087,7 @@ BlElement >> isFullyVisibleInSpace [
 BlElement >> isLastChild [
 	"return true if the receiver is the first child of its parent"
 	self hasParent ifFalse: [ ^ self error: 'Must have a parent' ].
-	^ (self parent childIndexOf: self) = self children size
+	^ (self parent childIndexOf: self) = self parent children size
 ]
 
 { #category : #layout }
