@@ -13,6 +13,6 @@ BABufferSpaceRenderer >> initializeForSurface: aBlHostRendererBufferSurface [
 					newForData: aBlHostRendererBufferSurface buffer
 					extent: aBlHostRendererBufferSurface extent
 					stride: aBlHostRendererBufferSurface stride
-					format: AeCairoSurfaceFormat CAIRO_FORMAT_ARGB32)
+					format: AeCairoSurfaceFormat argb32)
 
 ]

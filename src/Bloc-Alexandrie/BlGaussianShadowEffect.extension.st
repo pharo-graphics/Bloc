@@ -7,7 +7,7 @@ BlGaussianShadowEffect >> aeDrawBelow: aBlElement on: aeCanvas [
 	shadowSpace := self extraShadowSpace.
 	visualBounds := aBlElement visualBounds.
 	alphaSurface := aeCanvas privateAeCairoContext surface
-		newSimilarImageFormat: AeCairoSurfaceFormat CAIRO_FORMAT_A8
+		newSimilarImageFormat: AeCairoSurfaceFormat a8
 		width: (visualBounds width + (shadowSpace * 2))
 		height: (visualBounds height + (shadowSpace * 2)).
 	alphaSurface status ensureIsSuccess.
