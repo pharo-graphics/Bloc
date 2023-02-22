@@ -59,6 +59,39 @@ BlSpaceFixture >> buildCapRoundDashedBorderOnClosedGeometry [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildClippingAbsolutelyTransparentElement [
+	"Add 3 elements, where only the last one should be clipped by it's transparent parent.
+	The output should be a blue rectangle surrounded by orange."
+
+	| parent child grandChild |
+	"Far enough extent"
+	builder spaceExtent: 25 asPoint.
+
+	parent := builder addToRoot
+		background: BlBackground transparent;
+		relocate: 5 asPoint;
+		size: 10 asPoint;
+		clipChildren: false;
+		yourself.
+
+	child := (builder addTo: parent)
+		background: BlBackground transparent;
+		relocate: 5 asPoint;
+		size: 10 asPoint;
+		clipChildren: true;
+		yourself.
+	
+	grandChild := (builder addTo: child)
+		background: Color blue;
+		relocate: 5 asPoint;
+		size: 50 asPoint;
+		yourself.
+	
+	builder space root background: Color orange
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildClippingMany [
 
 	| newElementBlock elementSize |
