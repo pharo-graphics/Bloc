@@ -5,7 +5,9 @@ MemoryLogger >> inspectorRecordingsIn: aBuilder [
 	<inspectorPresentationOrder: 0 title: 'Recordings'>
 
 	| table refreshBlock |
-	table := aBuilder newTable
+	table := aBuilder newTable.
+
+	table
 		addColumn: (SpStringTableColumn
 			title: 'Timestamp'
 			evaluated: [ :each | each timestamp asString ]);
@@ -17,16 +19,10 @@ MemoryLogger >> inspectorRecordingsIn: aBuilder [
 			evaluated: [ :each | each name ]);
 		addColumn: (SpStringTableColumn
 			title: 'Contents'
-			evaluated: [ :each | String streamContents: [ :s | each printOneLineContentsOn: s ] ]);
-		
+			evaluated: [ :each | String streamContents: [ :s | each printOneLineContentsOn: s ] ]).
+
+	table
 		contextMenu: (SpMenuPresenter new 
-			addItem: [ :item |
-				item
-					name: 'Remove';
-					icon: (self iconNamed: #glamorousRemove);
-					action: [
-						recordings := self recordings \ table selectedItem.
-						table refresh ] ];
 			addItem: [ :item |
 				item
 					name: 'Remove all';
@@ -34,23 +30,11 @@ MemoryLogger >> inspectorRecordingsIn: aBuilder [
 					action: [
 						self reset.
 						table refresh ] ];
-			yourself);
-		yourself.
+			yourself).
 
 	refreshBlock := [ table items: self recordings reverse ].
 	refreshBlock value.
 	self announcer weak when: Announcement do: refreshBlock.
 
 	^ table
-
-"		dynamicActions: [ :t |
-			{
-				GLMGenericAction new
-					action: [ t unregisterFromAllAnnouncements. t pane updateToolbar  ];
-					icon: GLMUIThemeExtraIcons glamorousRedCircle;
-					title: 'Stop' .
-				GLMGenericAction new
-					action: [ t pane update ];
-					icon: GLMUIThemeExtraIcons glamorousGreenCircle;
-					title: 'Play' }]" 
 ]
