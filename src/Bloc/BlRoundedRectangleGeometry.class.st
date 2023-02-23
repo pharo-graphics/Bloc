@@ -13,7 +13,8 @@ Class {
 	#name : #BlRoundedRectangleGeometry,
 	#superclass : #BlElementVectorGeometry,
 	#instVars : [
-		'cornerRadii'
+		'cornerRadii',
+		'center'
 	],
 	#category : #'Bloc-Basic-Geometry'
 }
@@ -89,7 +90,6 @@ BlRoundedRectangleGeometry >> containsPoint: aPoint in: aBlElement [
 
 { #category : #accessing }
 BlRoundedRectangleGeometry >> cornerRadii [
-	<return: #BlCornerRadii>
 
 	^ cornerRadii
 ]
@@ -116,5 +116,16 @@ BlRoundedRectangleGeometry >> initializeWith: aCornerRadii [
 
 { #category : #geometry }
 BlRoundedRectangleGeometry >> matchExtent: aPoint [
-	extent := aPoint
+
+	extent := aPoint.
+	center := aPoint / 2.0.
+]
+
+{ #category : #private }
+BlRoundedRectangleGeometry >> nonOverlappingCornersForBorderWidth: aNumber [
+	"Answer either current cornerRadii or a copy of it, that would work with any of the possible outskirts, and considering the current extent."
+
+	^ cornerRadii
+		  asNonOverlappingCornerRadiiToFitWidth: extent x - aNumber
+		  height: extent y - aNumber
 ]
