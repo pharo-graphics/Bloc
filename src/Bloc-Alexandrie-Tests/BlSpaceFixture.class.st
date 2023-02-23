@@ -1780,7 +1780,7 @@ BlSpaceFixture >> buildVariantsOfRoundedRectangleAndOutskirts [
 				topLeft: 0;
 				topRight: 5;
 				bottomLeft: 10;
-				bottomRight: 15;
+				bottomRight: 25;
 				yourself)]
 ]
 
