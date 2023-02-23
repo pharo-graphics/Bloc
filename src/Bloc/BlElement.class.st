@@ -997,13 +997,14 @@ BlElement >> containsGlobalPoint: aPoint [
 
 { #category : #'geometry testing' }
 BlElement >> containsPoint: aPoint [
-	"Return true if a given point provided in local coordinates is inside of my geometry, false otherwise"
-	<return: #Boolean>
+	"Return true if a given point provided in local coordinates is inside of my geometry, false otherwise."
 
 	(self geometryBounds containsPoint: aPoint)
 		ifFalse: [ ^ false ].
 
-	^ self geometry containsPoint: aPoint in: self
+	^ self geometry
+		containsPoint: aPoint
+		alreadyInGeometryBoundsOf: self
 ]
 
 { #category : #copying }

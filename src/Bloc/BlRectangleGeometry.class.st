@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'geometry testing' }
-BlRectangleGeometry >> containsPoint: aPoint in: aBlElement [
+BlRectangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
 	as as border during the testing process"
 	

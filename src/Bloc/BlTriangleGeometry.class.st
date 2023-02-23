@@ -122,7 +122,7 @@ BlTriangleGeometry >> computeVertices [
 ]
 
 { #category : #'geometry testing' }
-BlTriangleGeometry >> containsPoint: aPoint in: aBlElement [
+BlTriangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
 	^ BlPolygonHitTester doPolygonBy: self computeVertices include: aPoint
 ]

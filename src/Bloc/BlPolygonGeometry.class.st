@@ -24,8 +24,8 @@ BlPolygonGeometry class >> vertices: aCollection [
 ]
 
 { #category : #'geometry testing' }
-BlPolygonGeometry >> containsPoint: aPoint in: aBlElement [
-	"Answer whether aPoint is contained by a this geometry."
+BlPolygonGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+	"Answer whether aPoint is contained by this geometry."
 
 	^ BlPolygonHitTester doPolygonBy: self vertices include: aPoint
 ]

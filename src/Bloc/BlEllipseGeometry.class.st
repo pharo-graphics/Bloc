@@ -17,7 +17,7 @@ Class {
 }
 
 { #category : #'geometry testing' }
-BlEllipseGeometry >> containsPoint: aPoint in: aBlElement [
+BlEllipseGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	| w h x y center xRadius yRadius normalized |
 	
 	w := self extent x.

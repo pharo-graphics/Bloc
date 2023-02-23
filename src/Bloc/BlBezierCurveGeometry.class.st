@@ -17,7 +17,7 @@ BlBezierCurveGeometry class >> controlPoints: aCollection [
 ]
 
 { #category : #'geometry testing' }
-BlBezierCurveGeometry >> containsPoint: aPoint in: aBlElement [
+BlBezierCurveGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.
 
 	Adapted from RSBezier>>#basicIncludesPoint:"
