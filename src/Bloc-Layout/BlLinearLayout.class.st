@@ -1,15 +1,16 @@
 Class {
 	#name : #BlLinearLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable + TBlDirectionalLayout',
-	#classTraits : 'TBlAlignable classTrait + TBlDirectionalLayout classTrait',
+	#traits : 'TBlAlignable',
+	#classTraits : 'TBlAlignable classTrait',
 	#instVars : [
 		'weightSum',
 		'verticalAlignment',
 		'horizontalAlignment',
 		'orientation',
 		'shouldUseLargestChild',
-		'cellSpacing'
+		'cellSpacing',
+		'direction'
 	],
 	#category : #'Bloc-Layout-Linear'
 }
@@ -124,6 +125,18 @@ BlLinearLayout >> defaultWeightSum [
 	^ 0
 ]
 
+{ #category : #'api - direction' }
+BlLinearLayout >> direction [
+
+	^ direction ifNil: [ self defaultDirection ]
+]
+
+{ #category : #'api - direction' }
+BlLinearLayout >> direction: aBlLayoutDirection [
+
+	direction := aBlLayoutDirection
+]
+
 { #category : #comparing }
 BlLinearLayout >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
@@ -179,6 +192,12 @@ BlLinearLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpda
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
+{ #category : #'api - direction' }
+BlLinearLayout >> leftToRight [
+
+	self direction: BlLayoutDirection leftToRight
+]
+
 { #category : #measure }
 BlLinearLayout >> measure: anElement with: anExtentSpec [
 	| aMeasurer |
@@ -206,8 +225,16 @@ BlLinearLayout >> orientation [
 
 { #category : #accessing }
 BlLinearLayout >> orientation: anOrientation [
+
+	anOrientation layout: self.
 	orientation := anOrientation.
-	anOrientation layout: self
+
+]
+
+{ #category : #'api - direction' }
+BlLinearLayout >> rightToLeft [
+
+	self direction: BlLayoutDirection rightToLeft
 ]
 
 { #category : #testing }
