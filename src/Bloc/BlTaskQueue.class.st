@@ -101,7 +101,6 @@ BlTaskQueue >> initialize [
 
 { #category : #'api - accessing' }
 BlTaskQueue >> isEmpty [
-	<return: #Boolean>
 
 	^ self critical: [ tasks isNil or: [ tasks isEmpty ] ]
 ]
@@ -117,11 +116,10 @@ BlTaskQueue >> newTasks [
 BlTaskQueue >> printOn: aStream [
 
 	super printOn: aStream.
-	tasks ifNotNil: 
-		[ aStream
-			nextPut: $(;
-			print: tasks size;
-			nextPut: $) ]
+	aStream
+		nextPut: $(;
+		print: self size;
+		nextPut: $)
 ]
 
 { #category : #private }
@@ -163,6 +161,14 @@ BlTaskQueue >> runOn: aSpace [
 			ifFalse:
 				[ aTask setComplete ] ] ].
 
+]
+
+{ #category : #accessing }
+BlTaskQueue >> size [
+
+	^ tasks
+		ifNil: [ 0 ]
+		ifNotNil: [ tasks size ]
 ]
 
 { #category : #'api - accessing' }
