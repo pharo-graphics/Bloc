@@ -2573,6 +2573,7 @@ BlElement >> mouseCursor [
 
 { #category : #accessing }
 BlElement >> mouseCursor: aCursor [
+
 	visuals := visuals mouseCursor: aCursor
 ]
 

@@ -1,16 +1,16 @@
 Class {
 	#name : #BlLinearLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable',
-	#classTraits : 'TBlAlignable classTrait',
+	#traits : 'TBlAlignable + TObservable',
+	#classTraits : 'TBlAlignable classTrait + TObservable classTrait',
 	#instVars : [
-		'weightSum',
-		'verticalAlignment',
-		'horizontalAlignment',
-		'orientation',
-		'shouldUseLargestChild',
-		'cellSpacing',
-		'direction'
+		'#weightSum',
+		'#verticalAlignment',
+		'#horizontalAlignment',
+		'#orientation => ObservableSlot',
+		'#shouldUseLargestChild',
+		'#cellSpacing',
+		'#direction => ObservableSlot'
 	],
 	#category : #'Bloc-Layout-Linear'
 }
@@ -165,15 +165,17 @@ BlLinearLayout >> horizontalAlignment: anAlignment [
 
 { #category : #initialization }
 BlLinearLayout >> initialize [
+
+	self class initializeSlots: self.
 	super initialize.
-	
+
 	weightSum := self defaultWeightSum.
 	shouldUseLargestChild := false.
 	cellSpacing := 0.0.
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
-	
-	self orientation: self defaultOrientation.
+
+	self orientation: self defaultOrientation
 ]
 
 { #category : #testing }
@@ -266,6 +268,30 @@ BlLinearLayout >> weightSum [
 { #category : #accessing }
 BlLinearLayout >> weightSum: aNumber [
 	weightSum := aNumber asFloat
+]
+
+{ #category : #'slot change hook' }
+BlLinearLayout >> whenDirectionChangedDo: aBlock [
+
+	"Inform when lineMode property has changed.
+	 `aBlock` has three optional arguments:
+	 - new value
+	 - old value
+	 - the announcement triggering this action"
+
+	self property: #direction whenChangedDo: aBlock
+]
+
+{ #category : #'slot change hook' }
+BlLinearLayout >> whenOrientationChangedDo: aBlock [
+
+	"Inform when lineMode property has changed.
+	 `aBlock` has three optional arguments:
+	 - new value
+	 - old value
+	 - the announcement triggering this action"
+
+	self property: #orientation whenChangedDo: aBlock
 ]
 
 { #category : #'api - configuration' }
