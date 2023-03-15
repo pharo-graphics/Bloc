@@ -25,12 +25,12 @@ Create a 3D vector:
 Class {
 	#name : #BlVector,
 	#superclass : #Object,
-	#classInstVars : [
-		'zAxis',
-		'xAxis',
-		'yAxis',
-		'zero',
-		'one'
+	#classVars : [
+		'One',
+		'XAxis',
+		'YAxis',
+		'ZAxis',
+		'Zero'
 	],
 	#category : #'Bloc-Basic-Math'
 }
@@ -39,11 +39,11 @@ Class {
 BlVector class >> cleanUp [
 	super cleanUp.
 	
-	xAxis := nil.
-	yAxis := nil.
-	zAxis := nil.
-	zero := nil.
-	one := nil
+	XAxis := nil.
+	YAxis := nil.
+	ZAxis := nil.
+	Zero := nil.
+	One := nil
 ]
 
 { #category : #'instance creation' }
@@ -51,7 +51,7 @@ BlVector class >> one [
 	"Return a vector with all components being ones."
 	<return: #BlVector>
 	
-	^ one ifNil: [ one := self x: 1 y: 1 z: 1 ]
+	^ One ifNil: [ One := self x: 1 y: 1 z: 1 ]
 ]
 
 { #category : #'instance creation' }
@@ -71,7 +71,7 @@ BlVector class >> xAxis [
 	"Return a vector that corresponds to x-axis"
 	<return: #BlVector>
 	
-	^ xAxis ifNil: [ xAxis := self x: 1 y: 0 z: 0 ]
+	^ XAxis ifNil: [ XAxis := self x: 1 y: 0 z: 0 ]
 ]
 
 { #category : #'instance creation' }
@@ -79,7 +79,7 @@ BlVector class >> yAxis [
 	"Return a vector that corresponds to y-axis"
 	<return: #BlVector>
 	
-	^ yAxis ifNil: [ yAxis := self x: 0 y: 1 z: 0 ]
+	^ YAxis ifNil: [ YAxis := self x: 0 y: 1 z: 0 ]
 ]
 
 { #category : #'instance creation' }
@@ -87,7 +87,7 @@ BlVector class >> zAxis [
 	"Return a vector that corresponds to z-axis"
 	<return: #BlVector>
 	
-	^ zAxis ifNil: [ zAxis := self x: 0 y: 0 z: 1 ]
+	^ ZAxis ifNil: [ ZAxis := self x: 0 y: 0 z: 1 ]
 ]
 
 { #category : #'instance creation' }
@@ -95,7 +95,7 @@ BlVector class >> zero [
 	"Return a vector of zero length."
 	<return: #BlVector>
 	
-	^ zero ifNil: [ zero := self x: 0 y: 0 z: 0 ]
+	^ Zero ifNil: [ Zero := self x: 0 y: 0 z: 0 ]
 ]
 
 { #category : #arithmetic }

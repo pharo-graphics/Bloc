@@ -65,6 +65,22 @@ BlVectorTest >> testSign [
 ]
 
 { #category : #tests }
+BlVectorTest >> testSingleton [
+
+	| singletonSelectors |
+	singletonSelectors := #(xAxis yAxis zAxis zero one).
+	
+	singletonSelectors do: [ :each |
+		self
+			assert: (BlVector perform: each)
+			identicalTo: (BlVector2D perform: each).
+		self
+			assert: (BlVector perform: each)
+			identicalTo: (BlVector3D perform: each) ]
+	
+]
+
+{ #category : #tests }
 BlVectorTest >> testVector0degrees [
 	<gtExample>
 	| aVector |
