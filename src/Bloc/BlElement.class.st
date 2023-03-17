@@ -1094,6 +1094,12 @@ BlElement >> defaultLayout [
 ]
 
 { #category : #initialization }
+BlElement >> defaultLayoutCommonConstraints [
+
+	^ BlLayoutCommonConstraints new
+]
+
+{ #category : #initialization }
 BlElement >> defaultOutskirts [
 	^ BlOutskirts inside
 ]
@@ -1900,7 +1906,7 @@ BlElement >> inUIProcessDo: aBlock [
 { #category : #initialization }
 BlElement >> initialize [
 	super initialize.
-	
+
 	spaceReference := BlNullSpaceReference uniqueInstance.
 	visuals := BlDefaultVisuals uniqueInstance.
 
@@ -1909,7 +1915,7 @@ BlElement >> initialize [
 	measuredBounds := BlElementLocalBounds new referenceElement: self.
 
 	eventDispatcher := BlElementEventDispatcher on: self.
-	constraints := BlLayoutCommonConstraints new.
+	constraints := self defaultLayoutCommonConstraints.
 	self resetChildrenArray.
 
 	transformation := self defaultTransformation asCachedTransformation.
