@@ -608,6 +608,13 @@ BlElement >> bounds [
 	^ bounds
 ]
 
+{ #category : #accessing }
+BlElement >> bounds: aBounds [
+
+	self relocate: aBounds position.
+	self size: aBounds extent
+]
+
 { #category : #'private - accessing' }
 BlElement >> boundsCache [
 	^ boundsCache
