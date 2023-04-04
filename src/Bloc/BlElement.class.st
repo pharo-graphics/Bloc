@@ -2996,13 +2996,24 @@ BlElement >> position [
 	^ self bounds position
 ]
 
-{ #category : #'geometry position' }
-BlElement >> position: aPoint [ 
-	self 
-		deprecated: 'Use relocate: instead'
-		on: 	'1 October 2017' 
-		in: 'Pharo-7.0-alpha.build.132.sha.4ea2f39a9f43185d31b844be5ad33b677f43bf17'.
-	^ self relocate: aPoint 
+{ #category : #'api - bounds' }
+BlElement >> position: aPoint [
+	"Request position change in parent coordinates that will happen on the next frame or next layout pass triggered by #forceLayout.
+
+	Note: I do not invalidate drawing bounds nor change actual position.
+	I only register an update request and ask my parent (if there is one) to recompute
+	layout. Do nothing if previous #relocate request was performed with the same coordinates.
+	Note: We can not guarantee that new element's position will be equal to requested one,
+	since it depends on the applied layout.
+	Raises `BlElementPositionChangedEvent` and `BlElementPositionInSpaceChangedEvent`
+	aPoint must not be nil"
+
+	self measuredBounds position = aPoint
+		ifTrue: [ ^ self ].
+
+	self constraints position: aPoint.
+	self measuredBounds position: aPoint.
+	self requestParentLayout
 ]
 
 { #category : #accessing }
@@ -3160,22 +3171,11 @@ BlElement >> properties [
 
 { #category : #'api - bounds' }
 BlElement >> relocate: aPoint [
-	"Request position change in parent coordinates that will happen on the next frame or next layout pass triggered by #forceLayout.
-
-	Note: I do not invalidate drawing bounds nor change actual position.
-	I only register an update request and ask my parent (if there is one) to recompute
-	layout. Do nothing if previous #relocate request was performed with the same coordinates.
-	Note: We can not guarantee that new element's position will be equal to requested one,
-	since it depends on the applied layout.
-	Raises `BlElementPositionChangedEvent` and `BlElementPositionInSpaceChangedEvent`
-	aPoint must not be nil"
-
-	self measuredBounds position = aPoint
-		ifTrue: [ ^ self ].
-
-	self constraints position: aPoint.
-	self measuredBounds position: aPoint.
-	self requestParentLayout
+	
+	self 
+		deprecated:  'Use position:' 
+		transformWith: '`@receiver relocate: `@point' -> '`@receiver position: `@point'.
+	self position: aPoint
 ]
 
 { #category : #'children add/remove' }

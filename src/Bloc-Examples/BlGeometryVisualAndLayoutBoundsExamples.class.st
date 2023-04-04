@@ -160,12 +160,13 @@ BlGeometryVisualAndLayoutBoundsExamples >> emptyIconElement [
 
 { #category : #bounds }
 BlGeometryVisualAndLayoutBoundsExamples >> fullyVisibleTriangle [
+
 	<gtExample>
 	<label: 'Fully visible triangle polygon that exceeds layout bounds'>
 	| aContainer |
 	aContainer := self clippedTriangle.
 	aContainer clipChildren: false.
-	aContainer relocate: 30@30.
+	aContainer position: 30 @ 30.
 	^ aContainer
 ]
 
@@ -386,23 +387,29 @@ BlGeometryVisualAndLayoutBoundsExamples >> trianglePolygon [
 
 { #category : #bounds }
 BlGeometryVisualAndLayoutBoundsExamples >> unclippedTriangle [
+
 	<gtExample>
 	<label: 'Clipped triangle polygon with layount bounds'>
 	| aContainer aPolygonElement |
 	aContainer := BlElement new.
-	aContainer size: 8@11.
-	aContainer relocate: 50@50.
+	aContainer size: 8 @ 11.
+	aContainer position: 50 @ 50.
 	aContainer clipChildren: false.
 	aContainer transformDo: [ :t |
-	    t origin: BlAffineTransformationTopLeftOrigin new.
-	    t scaleBy: 10 ].
+		t origin: BlAffineTransformationTopLeftOrigin new.
+		t scaleBy: 10 ].
 	aContainer outskirts: BlOutskirts centered.
-	aContainer border: (BlBorder paint: (Color green alpha: 0.4) width: 0.2).
+	aContainer border:
+		(BlBorder paint: (Color green alpha: 0.4) width: 0.2).
 
 	aPolygonElement := BlElement new.
-	aPolygonElement size: 8@11.
-	aPolygonElement geometry: (BlPolygon vertices: { 0@0 . 8@5.5. 0@11 }).
-	aPolygonElement border: (BlBorder paint: (Color gray alpha: 0.4) width: 2).
+	aPolygonElement size: 8 @ 11.
+	aPolygonElement geometry: (BlPolygon vertices: {
+				 (0 @ 0).
+				 (8 @ 5.5).
+				 (0 @ 11) }).
+	aPolygonElement border:
+		(BlBorder paint: (Color gray alpha: 0.4) width: 2).
 	aPolygonElement outskirts: BlOutskirts centered.
 
 	aContainer addChild: aPolygonElement.

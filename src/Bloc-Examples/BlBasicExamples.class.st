@@ -113,12 +113,12 @@ BlBasicExamples >> bottomBorder [
 
 { #category : #'examples - buttons' }
 BlBasicExamples >> buttons [
+
 	<gtExample>
-	
 	^ self container
-		addChild: (self coloredButton relocate: 100@100);
-		addChild: (self fabButton relocate: 300@88);
-		yourself
+		  addChild: (self coloredButton position: 100 @ 100);
+		  addChild: (self fabButton position: 300 @ 88);
+		  yourself
 ]
 
 { #category : #'examples - shape' }
@@ -134,25 +134,36 @@ BlBasicExamples >> circle [
 
 { #category : #'examples - buttons' }
 BlBasicExamples >> coloredButton [
+
 	<gtExample>
 	| button labelText label |
-	
 	button := BlElement new
-		background: (Color r: 63 g: 81 b: 181 range: 255);
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
-		relocate: 100@100;
-		padding: (BlInsets top: 8 right: 16 bottom: 8 left: 16);
-		layout: BlLinearLayout horizontal;
-		effect: (BlGaussianShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2);
-		constraintsDo: [ :c |
-			c horizontal fitContent.
-			c vertical fitContent ].
+		          background: (Color
+				           r: 63
+				           g: 81
+				           b: 181
+				           range: 255);
+		          geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
+		          position: 100 @ 100;
+		          padding: (BlInsets
+				           top: 8
+				           right: 16
+				           bottom: 8
+				           left: 16);
+		          layout: BlLinearLayout horizontal;
+		          effect: (BlGaussianShadowEffect
+				           color: (Color black alpha: 0.3)
+				           width: 1
+				           offset: 0 @ 2);
+		          constraintsDo: [ :c |
+			          c horizontal fitContent.
+			          c vertical fitContent ].
 
 	labelText := 'Button' asRopedText
-		foreground: Color white;
-		fontSize: 16;
-		fontName: 'Helvetica';
-		thin.
+		             foreground: Color white;
+		             fontSize: 16;
+		             fontName: 'Helvetica';
+		             thin.
 
 	label := BlTextElement new.
 	label text: labelText.
@@ -175,41 +186,48 @@ BlBasicExamples >> container [
 
 { #category : #'examples - border' }
 BlBasicExamples >> elementWithAllBorders [
+
 	<gtExample>
-	
 	^ self container
-		layout: BlFrameLayout new;
-		size: 300@150;
-		relocate: 50@50;
-		addChild: (self leftBorder background: Color green darker);
-		addChild: (self rightBorder background: Color yellow darker);
-		addChild: (self topBorder background: Color blue);
-		addChild: (self bottomBorder background: Color red)
+		  layout: BlFrameLayout new;
+		  size: 300 @ 150;
+		  position: 50 @ 50;
+		  addChild: (self leftBorder background: Color green darker);
+		  addChild: (self rightBorder background: Color yellow darker);
+		  addChild: (self topBorder background: Color blue);
+		  addChild: (self bottomBorder background: Color red)
 ]
 
 { #category : #'examples - border' }
 BlBasicExamples >> elementWithEllipticBorders [
-	<gtExample>
 
+	<gtExample>
 	^ self container
-		layout: BlFrameLayout new;
-		size: 300@150;
-		relocate: 50@50;
-		addChild: (self leftBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
-		addChild: (self rightBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
-		addChild: (self topBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
-		addChild: (self bottomBorder background: (Color gray alpha: 0.3); geometry: BlEllipseGeometry new);
-		addChild: self borderTextElement
+		  layout: BlFrameLayout new;
+		  size: 300 @ 150;
+		  position: 50 @ 50;
+		  addChild: (self leftBorder
+				   background: (Color gray alpha: 0.3);
+				   geometry: BlEllipseGeometry new);
+		  addChild: (self rightBorder
+				   background: (Color gray alpha: 0.3);
+				   geometry: BlEllipseGeometry new);
+		  addChild: (self topBorder
+				   background: (Color gray alpha: 0.3);
+				   geometry: BlEllipseGeometry new);
+		  addChild: (self bottomBorder
+				   background: (Color gray alpha: 0.3);
+				   geometry: BlEllipseGeometry new);
+		  addChild: self borderTextElement
 ]
 
 { #category : #'examples - shadow' }
 BlBasicExamples >> elementsWithShadow [
+
 	<gtExample>
-	
-	^ self container
-		addChildren: {
-			self rectangleWithShadow relocate: 50@100.
-			self ellipseWithShadow relocate: 500 @ 100 }
+	^ self container addChildren: {
+			  (self rectangleWithShadow position: 50 @ 100).
+			  (self ellipseWithShadow position: 500 @ 100) }
 ]
 
 { #category : #'examples - shape' }
@@ -224,36 +242,52 @@ BlBasicExamples >> ellipse [
 
 { #category : #'examples - shadow' }
 BlBasicExamples >> ellipseWithShadow [
+
 	<gtExample>
-	
 	^ BlElement new
-		geometry: BlEllipseGeometry new;
-		size: 300@150;
-		relocate: 50@50;
-		border: (BlBorder paint: Color black width: 2);
-		background: Color red;
-		effect: self shadowEffect;
-		yourself.
+		  geometry: BlEllipseGeometry new;
+		  size: 300 @ 150;
+		  position: 50 @ 50;
+		  border: (BlBorder paint: Color black width: 2);
+		  background: Color red;
+		  effect: self shadowEffect;
+		  yourself
 ]
 
 { #category : #'examples - buttons' }
 BlBasicExamples >> fabButton [
+
 	<gtExample>
 	| button icon |
-
 	button := BlElement new
-		background: (Color r: 255 g: 64 b: 129 range: 255);
-		geometry: BlEllipseGeometry new;
-		relocate: 100@100;
-		size: 56@56;
-		layout: BlFrameLayout new;
-		effect: (BlGaussianShadowEffect color: (Color black alpha: 0.3) width: 1 offset: 0@2).
+		          background: (Color
+				           r: 255
+				           g: 64
+				           b: 129
+				           range: 255);
+		          geometry: BlEllipseGeometry new;
+		          position: 100 @ 100;
+		          size: 56 @ 56;
+		          layout: BlFrameLayout new;
+		          effect: (BlGaussianShadowEffect
+				           color: (Color black alpha: 0.3)
+				           width: 1
+				           offset: 0 @ 2).
 
 	icon := (BlPolygon vertices: ({
-			36@0. 48@0 . 48@36 . 84@36.
-			84@48 . 48@48 . 48@84 . 36@84.
-			36@48 . 0@48 . 0@36. 36@36
-		} collect: [ :aPoint | aPoint / 6.0])) asElement.
+			          (36 @ 0).
+			          (48 @ 0).
+			          (48 @ 36).
+			          (84 @ 36).
+			          (84 @ 48).
+			          (48 @ 48).
+			          (48 @ 84).
+			          (36 @ 84).
+			          (36 @ 48).
+			          (0 @ 48).
+			          (0 @ 36).
+			          (36 @ 36) } collect: [ :aPoint | aPoint / 6.0 ]))
+		        asElement.
 
 	icon background: Color white.
 	icon border: BlBorder empty.
@@ -328,39 +362,40 @@ BlBasicExamples >> rectangle [
 
 { #category : #'examples - background' }
 BlBasicExamples >> rectangleWithImage [
-	<gtExample>
 
+	<gtExample>
 	^ BlElement new
-		size: 400@200;
-		relocate: 100 @ 100;
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
-		background: BlBackgroundExamples new buildBackgroundWithImagesAndColor;
-		yourself
+		  size: 400 @ 200;
+		  position: 100 @ 100;
+		  geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
+		  background:
+			  BlBackgroundExamples new buildBackgroundWithImagesAndColor;
+		  yourself
 ]
 
 { #category : #'examples - background' }
 BlBasicExamples >> rectangleWithLinearGradient [
-	<gtExample>
 
+	<gtExample>
 	^ BlElement new
-		size: 300@200;
-		relocate: 100 @ 100;
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 40);
-		background: self linearGradient;
-		yourself
+		  size: 300 @ 200;
+		  position: 100 @ 100;
+		  geometry: (BlRoundedRectangleGeometry cornerRadius: 40);
+		  background: self linearGradient;
+		  yourself
 ]
 
 { #category : #'examples - shadow' }
 BlBasicExamples >> rectangleWithShadow [
+
 	<gtExample>
-	
 	^ BlElement new
-		size: 300@150;
-		relocate: 50@50;
-		border: (BlBorder paint: Color black width: 2);
-		background: Color red;
-		effect: self shadowEffect;
-		yourself.
+		  size: 300 @ 150;
+		  position: 50 @ 50;
+		  border: (BlBorder paint: Color black width: 2);
+		  background: Color red;
+		  effect: self shadowEffect;
+		  yourself
 ]
 
 { #category : #'examples - border' }
@@ -393,17 +428,15 @@ BlBasicExamples >> shadowEffect [
 
 { #category : #'examples - composition' }
 BlBasicExamples >> shapes [
+
 	<gtExample>
-	
-	^ self container
-		addChildren: { 
-			self circle relocate: 250 @ 200.
-			self ellipse relocate: 10 @ 20.
-			self polygon relocate: 220 @ 0.
-			self rectangle relocate: 10 @ 190.
-			self roundedRectangle relocate: 430 @ 50.
-			self square relocate: 400 @ 200.
-		}
+	^ self container addChildren: {
+			  (self circle position: 250 @ 200).
+			  (self ellipse position: 10 @ 20).
+			  (self polygon position: 220 @ 0).
+			  (self rectangle position: 10 @ 190).
+			  (self roundedRectangle position: 430 @ 50).
+			  (self square position: 400 @ 200) }
 ]
 
 { #category : #'examples - shape' }
