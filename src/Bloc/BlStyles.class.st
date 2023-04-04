@@ -34,81 +34,104 @@ Class {
 
 { #category : #'adding / removing' }
 BlStyles >> addStyle: aStyle [
+
 	self
 		styleForStyle: aStyle
-		ifFound: [ :anExistingStyle | anExistingStyle addProperties: aStyle properties ]
+		ifFound: [ :anExistingStyle |
+			anExistingStyle addProperties: aStyle properties ]
 		ifNone: [ self basicAddStyle: aStyle copy ]
 ]
 
 { #category : #'adding / removing' }
 BlStyles >> addStyles: aCollectionOfStyles [
+
 	aCollectionOfStyles do: [ :eachStyle | self addStyle: eachStyle ]
 ]
 
 { #category : #converting }
 BlStyles >> asForwarded: aTargetObject [
+
 	^ BlForwardedStyles new
-		styles: (self styles collect: [ :eachStyle | eachStyle asForwarded: aTargetObject ]);
-		targetObject: aTargetObject
+		  styles: 
+			(self styles collect: [ :eachStyle |
+				eachStyle asForwarded: aTargetObject ]);
+		  targetObject: aTargetObject;
+		  yourself
 ]
 
 { #category : #'private - adding' }
 BlStyles >> basicAddStyle: aStyle [
+
 	styles add: aStyle
 ]
 
 { #category : #'private - adding' }
 BlStyles >> basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle [
+
 	anExistingStyle removeProperties: aStyleToRemove properties
 ]
 
 { #category : #'private - adding' }
 BlStyles >> basicRemovePropertiesOrStyleOf: aStyleToRemove fromStyle: anExistingStyle [
-	self basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle.
-	
-	anExistingStyle hasProperties
-		ifFalse: [ self basicRemoveStyle: anExistingStyle ]
+
+	self
+		basicRemovePropertiesOf: aStyleToRemove
+		fromStyle: anExistingStyle.
+
+	anExistingStyle hasProperties ifFalse: [
+		self basicRemoveStyle: anExistingStyle ]
 ]
 
 { #category : #'private - adding' }
 BlStyles >> basicRemoveStyle: aStyle [
+
 	styles remove: aStyle ifAbsent: [  ]
 ]
 
 { #category : #initialization }
 BlStyles >> createStylesCollection [
+
 	^ OrderedCollection new: 10
 ]
 
 { #category : #'api - styles' }
 BlStyles >> for: aTargetObject [
+
 	^ BlForwardedStyles new
-		styles: self styles;
-		targetObject: aTargetObject
+		  styles: self styles;
+		  targetObject: aTargetObject;
+		  yourself
 ]
 
 { #category : #initialization }
 BlStyles >> initialize [
+
 	super initialize.
-	
+
 	styles := self createStylesCollection
 ]
 
 { #category : #private }
 BlStyles >> matchingStyles: theStates [
+
 	^ styles select: [ :aStyle | aStyle state matches: theStates ]
 ]
 
 { #category : #'adding / removing' }
-BlStyles >> removeStyle: aStyle [			
+BlStyles >> removeStyle: aStyle [
+
 	self
 		styleForStyle: aStyle
-		ifFound: [ :anExistingStyle | self basicRemovePropertiesOrStyleOf: aStyle fromStyle: anExistingStyle ]
-		ifNone: [ ]
+		ifFound: [ :anExistingStyle |
+			self
+				basicRemovePropertiesOrStyleOf: aStyle
+				fromStyle: anExistingStyle ]
+		ifNone: [  ]
 ]
 
 { #category : #'adding / removing' }
 BlStyles >> removeStyles: aCollectionOfStyles [
+
 	aCollectionOfStyles do: [ :eachStyle | self removeStyle: eachStyle ]
 ]
 
@@ -133,6 +156,7 @@ BlStyles >> styleForStyle: aStyle ifFound: aFoundBlock ifNone: aNoneBlock [
 
 { #category : #private }
 BlStyles >> styles [
+
 	^ styles
 ]
 

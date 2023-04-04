@@ -12,7 +12,9 @@ TBlElementStyles >> basicAddStyle: aStyle [
 { #category : #'private - adding' }
 TBlElementStyles >> newStyleForState: aBlElementState [
 
-	^ BlElementStyle new state: aBlElementState
+	^ BlElementStyle new
+		  state: aBlElementState;
+		  yourself
 ]
 
 { #category : #'private - adding' }
