@@ -5,9 +5,6 @@ I inform that an element was attached to a scene. I can be added to any Bloc ele
 Class {
 	#name : #BlElementAddedToSceneGraphEvent,
 	#superclass : #BlElementEvent,
-	#instVars : [
-		'element'
-	],
 	#category : #'Bloc-Events-Type-Element'
 }
 
