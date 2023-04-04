@@ -1,6 +1,7 @@
 "
 # Forwarded element styles
-Extends {{gtClass:BlStyles}} by adding an ability to customise {{gtMethod:BlForwardedStyles>>#targetObject}} on which styles are applied.
+
+Extends `BlStyles` by adding an ability to customise `BlForwardedStyles>>#targetObject` on which styles are applied.
 
 "
 Class {
@@ -14,17 +15,19 @@ Class {
 
 { #category : #'private - adding' }
 BlForwardedStyles >> newStyleForState: aBlElementState [
+
 	^ BlElementForwardedStyle new
-		state: aBlElementState;
-		targetObject: self targetObject
+		  state: aBlElementState;
+		  targetObject: targetObject
 ]
 
 { #category : #'private - adding' }
 BlForwardedStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
+
 	^ styles
 		detect: [ :eachStyle |
 			eachStyle isForwarded
-				and: [ eachStyle targetObject = self targetObject
+				and: [ eachStyle targetObject = targetObject
 					and: [ eachStyle state = aState ] ] ]
 		ifFound: aFoundBlock
 		ifNone: aNoneBlock
@@ -32,10 +35,12 @@ BlForwardedStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlo
 
 { #category : #accessing }
 BlForwardedStyles >> targetObject [
+
 	^ targetObject
 ]
 
 { #category : #accessing }
 BlForwardedStyles >> targetObject: anObject [
+
 	targetObject := anObject
 ]
