@@ -23,21 +23,6 @@ BlSpaceEventListener >> focusProcessor [
 	^ self space focusProcessor
 ]
 
-{ #category : #accessing }
-BlSpaceEventListener >> gestureProcessor [
-	^ self space gestureProcessor
-]
-
-{ #category : #'gesture handlers' }
-BlSpaceEventListener >> gestureScrollEvent: anEvent [
-	self gestureProcessor handleGesture: anEvent
-]
-
-{ #category : #'event handling' }
-BlSpaceEventListener >> handleEvent: anEvent [
-	super handleEvent: anEvent
-]
-
 { #category : #'other handlers' }
 BlSpaceEventListener >> inputMethodEvent: anEvent [
 ]
@@ -75,7 +60,6 @@ BlSpaceEventListener >> mouseMoveEvent: anEvent [
 
 { #category : #accessing }
 BlSpaceEventListener >> mouseProcessor [
-	<return: #BlMouseProcessor>
 
 	^ self space mouseProcessor
 ]
@@ -90,18 +74,14 @@ BlSpaceEventListener >> mouseWheelEvent: anEvent [
 	self mouseProcessor processMouseScroll: anEvent
 ]
 
-{ #category : #'other handlers' }
-BlSpaceEventListener >> rotateEvent: anEvent [
-]
-
 { #category : #accessing }
 BlSpaceEventListener >> space [
 	^ space
 ]
 
 { #category : #accessing }
-BlSpaceEventListener >> space: anObject [
-	space := anObject
+BlSpaceEventListener >> space: aBlSpace [
+	space := aBlSpace
 ]
 
 { #category : #'window handlers' }
@@ -194,35 +174,7 @@ BlSpaceEventListener >> spaceWakeUpEvent: anEvent [
 	self space requestNextPulse
 ]
 
-{ #category : #'other handlers' }
-BlSpaceEventListener >> swipeEvent: anEvent [
-]
-
 { #category : #'keyboard handlers' }
 BlSpaceEventListener >> textInputEvent: anEvent [
 	self keyboardProcessor processTextInput: anEvent
-]
-
-{ #category : #'touch handlers' }
-BlSpaceEventListener >> touchDownEvent: anEvent [
-	self touchProcessor handleTouchDown: anEvent
-]
-
-{ #category : #'touch handlers' }
-BlSpaceEventListener >> touchMoveEvent: anEvent [
-	self touchProcessor handleTouchMove: anEvent
-]
-
-{ #category : #accessing }
-BlSpaceEventListener >> touchProcessor [
-	^ self space touchProcessor
-]
-
-{ #category : #'touch handlers' }
-BlSpaceEventListener >> touchUpEvent: anEvent [
-	self touchProcessor handleTouchUp: anEvent
-]
-
-{ #category : #'other handlers' }
-BlSpaceEventListener >> zoomEvent: anEvent [
 ]
