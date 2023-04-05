@@ -17,7 +17,6 @@ BlBorderTest >> originClassName [
 { #category : #tests }
 BlBorderTest >> testChangeOpacityError [
 
-	<gtExample>
 	| aBorder anError |
 	aBorder := self testColorGrayBorder.
 
@@ -33,7 +32,6 @@ BlBorderTest >> testChangeOpacityError [
 { #category : #tests }
 BlBorderTest >> testChangePaintError [
 
-	<gtExample>
 	| aBorder anError |
 	aBorder := self testColorGrayBorder.
 
@@ -49,7 +47,6 @@ BlBorderTest >> testChangePaintError [
 { #category : #tests }
 BlBorderTest >> testChangeStyleError [
 
-	<gtExample>
 	| aBorder anError |
 	aBorder := self testColorGrayBorder.
 
@@ -65,7 +62,6 @@ BlBorderTest >> testChangeStyleError [
 { #category : #tests }
 BlBorderTest >> testChangeWidthError [
 
-	<gtExample>
 	| aBorder anError |
 	aBorder := self testColorGrayBorder.
 
@@ -81,7 +77,6 @@ BlBorderTest >> testChangeWidthError [
 { #category : #'test seed' }
 BlBorderTest >> testColorGrayBorder [
 
-	<gtExample>
 	| aBorder |
 	aBorder := BlBorder paint: Color gray.
 
@@ -104,7 +99,6 @@ BlBorderTest >> testColorGrayBorder [
 { #category : #tests }
 BlBorderTest >> testColorGrayBorderWithExplicitWidth [
 
-	<gtExample>
 	| aBorder |
 	aBorder := BlBorder paint: Color gray width: 10.
 
@@ -127,7 +121,6 @@ BlBorderTest >> testColorGrayBorderWithExplicitWidth [
 { #category : #tests }
 BlBorderTest >> testCopyWithOpacity [
 
-	<gtExample>
 	| anOldBorder aBorder |
 	anOldBorder := self testColorGrayBorder.
 	aBorder := anOldBorder copyWithOpacity: 0.5.
@@ -151,7 +144,6 @@ BlBorderTest >> testCopyWithOpacity [
 { #category : #tests }
 BlBorderTest >> testCopyWithPaint [
 
-	<gtExample>
 	| anOldBorder aBorder |
 	anOldBorder := self testColorGrayBorder.
 	aBorder := anOldBorder copyWithPaint: Color blue.
@@ -175,7 +167,6 @@ BlBorderTest >> testCopyWithPaint [
 { #category : #tests }
 BlBorderTest >> testCopyWithStyle [
 
-	<gtExample>
 	| anOldBorder aBorder |
 	anOldBorder := self testColorGrayBorder.
 	aBorder := anOldBorder copyWithStyle: BlStrokeStyle dashed.
@@ -199,7 +190,6 @@ BlBorderTest >> testCopyWithStyle [
 { #category : #tests }
 BlBorderTest >> testCopyWithWidth [
 
-	<gtExample>
 	| anOldBorder aBorder |
 	anOldBorder := self testColorGrayBorder.
 	aBorder := anOldBorder copyWithWidth: 10.

@@ -10,7 +10,7 @@ Class {
 
 { #category : #'tests seed' }
 BlOpacityTest >> colorfulElement [
-	<gtExample>
+
 	| anElement |
 	anElement := BlElement new.
 	anElement size: 100 @ 75.
@@ -39,7 +39,7 @@ BlOpacityTest >> originClassName [
 
 { #category : #tests }
 BlOpacityTest >> testDefaultOpacity [
-	<gtExample>
+
 	| anElement |
 	anElement := self colorfulElement.
 	self assert: anElement opacity equals: 1.
@@ -51,7 +51,7 @@ BlOpacityTest >> testDefaultOpacity [
 
 { #category : #tests }
 BlOpacityTest >> testMakeOpaque [
-	<gtExample>
+
 	| anElement |
 	anElement := self colorfulElement.
 	anElement opacity: 1.
@@ -64,7 +64,7 @@ BlOpacityTest >> testMakeOpaque [
 
 { #category : #tests }
 BlOpacityTest >> testMakeTranslucent [
-	<gtExample>
+
 	| anElement |
 	anElement := self colorfulElement.
 	anElement opacity: 0.5.
@@ -77,7 +77,7 @@ BlOpacityTest >> testMakeTranslucent [
 
 { #category : #tests }
 BlOpacityTest >> testMakeTransparent [
-	<gtExample>
+
 	| anElement |
 	anElement := self colorfulElement.
 	anElement opacity: 0.
