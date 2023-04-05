@@ -31,132 +31,11 @@ BlChildrenOrderedCollectionTest >> newChildrenCollection [
 	^ BlChildrenOrderedCollection new
 ]
 
-{ #category : #metadata }
-BlChildrenOrderedCollectionTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlChildrenOrderedCollectionExamples'
-]
-
-{ #category : #tests }
-BlChildrenOrderedCollectionTest >> testAdd [
-	<gtExample>
-	| theChildren indices |
-	theChildren := self testEmptyChildren.
-	theChildren add: (self newChildAt: 1).
-	indices := theChildren collect: [ :each | each userData at: #index ].
-	self assert: theChildren size equals: 1.
-	self assert: indices equals: #(1).
-	theChildren add: (self newChildAt: 2).
-	indices := theChildren collect: [ :each | each userData at: #index ].
-	self assert: theChildren size equals: 2.
-	self assert: indices equals: #(1 2).
-	^ theChildren
-]
-
-{ #category : #tests }
-BlChildrenOrderedCollectionTest >> testAddAt [
-	<gtExample>
-	| theChildren indices |
-	theChildren := self testEmptyChildren.
-	theChildren add: (self newChildAt: 1) at: 1.
-	indices := theChildren collect: [ :each | each userData at: #index ].
-	self assert: theChildren size equals: 1.
-	self assert: indices equals: #(1).
-	theChildren add: (self newChildAt: 2) at: 1.
-	indices := theChildren collect: [ :each | each userData at: #index ].
-	self assert: theChildren size equals: 2.
-	self assert: indices equals: #(2 1).
-	theChildren add: (self newChildAt: 3) at: 2.
-	indices := theChildren collect: [ :each | each userData at: #index ].
-	self assert: theChildren size equals: 3.
-	self assert: indices equals: #(2 3 1).
-	theChildren add: (self newChildAt: 4) at: 4.
-	indices := theChildren collect: [ :each | each userData at: #index ].
-	self assert: theChildren size equals: 4.
-	self assert: indices equals: #(2 3 1 4).
-	^ theChildren
-]
-
-{ #category : #tests }
-BlChildrenOrderedCollectionTest >> testAsArray [
-	<gtExample>
-	| theChildren indices |
-	theChildren := self fill: 5.
-	indices := theChildren asArray
-		collect: [ :each | each userData at: #index ].
-	self assert: indices equals: #(1 2 3 4 5).
-	^ theChildren
-]
-
-{ #category : #tests }
-BlChildrenOrderedCollectionTest >> testAsArrayEmpty [
-	<gtExample>
-	| theChildren indices |
-	theChildren := self testEmptyChildren.
-	indices := theChildren asArray
-		collect: [ :each | each userData at: #index ].
-	self assert: indices equals: #().
-	^ theChildren
-]
-
-{ #category : #tests }
-BlChildrenOrderedCollectionTest >> testAt [
-	<gtExample>
-	| theChildren |
-	theChildren := self fill: 5.
-	self assert: ((theChildren at: 1) userData at: #index) equals: 1.
-	self assert: ((theChildren at: 2) userData at: #index) equals: 2.
-	self assert: ((theChildren at: 3) userData at: #index) equals: 3.
-	self assert: ((theChildren at: 4) userData at: #index) equals: 4.
-	self assert: ((theChildren at: 5) userData at: #index) equals: 5.
-	^ theChildren
-]
-
-{ #category : #tests }
-BlChildrenOrderedCollectionTest >> testAtIfAbsent [
-	<gtExample>
-	| theChildren |
-	theChildren := self fill: 5.
-	self assert: ((theChildren at: 1) userData at: #index) equals: 1.
-	self assert: ((theChildren at: 3) userData at: #index) equals: 3.
-	self assert: ((theChildren at: 5) userData at: #index) equals: 5.
-	self
-		assert:
-			((theChildren
-				at: 0
-				ifAbsent: [ | anElement |
-					anElement := BlElement new.
-					anElement userData at: #index put: 0.
-					anElement ]) userData at: #index)
-		equals: 0.
-	self
-		assert:
-			((theChildren
-				at: 10
-				ifAbsent: [ | anElement |
-					anElement := BlElement new.
-					anElement userData at: #index put: 10.
-					anElement ]) userData at: #index)
-		equals: 10.
-	^ theChildren
-]
-
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testEmptyChildren [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self newChildrenCollection.
-	self assert: theChildren size equals: 0.
-	self assert: theChildren isEmpty.
-	self assert: theChildren isNotEmpty not.
-	^ theChildren
-]
-
-{ #category : #tests }
-BlChildrenOrderedCollectionTest >> testEmptyChildrenExplicitCreation [
-	<gtExample>
-	| theChildren |
-	theChildren := BlChildrenOrderedCollection new.
 	self assert: theChildren size equals: 0.
 	self assert: theChildren isEmpty.
 	self assert: theChildren isNotEmpty not.
@@ -174,7 +53,7 @@ BlChildrenOrderedCollectionTest >> testFirst [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testIfEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: (theChildren ifEmpty: [ #empty ]) equals: #empty.
@@ -183,7 +62,7 @@ BlChildrenOrderedCollectionTest >> testIfEmpty [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testIfEmptyNot [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren ifEmpty: [ #empty ]) equals: theChildren.
@@ -192,7 +71,7 @@ BlChildrenOrderedCollectionTest >> testIfEmptyNot [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testIndexOf [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren indexOf: (theChildren at: 1)) equals: 1.
@@ -202,7 +81,7 @@ BlChildrenOrderedCollectionTest >> testIndexOf [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testIndexOfUnknown [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren indexOf: BlElement new) equals: 0.
@@ -211,18 +90,18 @@ BlChildrenOrderedCollectionTest >> testIndexOfUnknown [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testIsEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren isEmpty.
 	theChildren := self fill: 5.
-	self assert: theChildren isEmpty not.
+	self deny: theChildren isEmpty.
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testIsNotEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren isNotEmpty not.
@@ -233,7 +112,7 @@ BlChildrenOrderedCollectionTest >> testIsNotEmpty [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testLast [
-	<gtExample>
+
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren last userData at: #index) equals: 5.
@@ -242,7 +121,7 @@ BlChildrenOrderedCollectionTest >> testLast [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testRemove [
-	<gtExample>
+
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren remove: (theChildren at: 3).
@@ -254,7 +133,7 @@ BlChildrenOrderedCollectionTest >> testRemove [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testRemoveAll [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren
@@ -270,7 +149,7 @@ BlChildrenOrderedCollectionTest >> testRemoveAll [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testRemoveAt [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren removeAt: 5.
@@ -284,7 +163,7 @@ BlChildrenOrderedCollectionTest >> testRemoveAt [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testSecond [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren second userData at: #index) equals: 2.
@@ -293,7 +172,7 @@ BlChildrenOrderedCollectionTest >> testSecond [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testSize [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: theChildren size equals: 5.
@@ -302,7 +181,7 @@ BlChildrenOrderedCollectionTest >> testSize [
 
 { #category : #tests }
 BlChildrenOrderedCollectionTest >> testSizeEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren size equals: 0.

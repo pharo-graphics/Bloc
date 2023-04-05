@@ -31,15 +31,9 @@ BlChildrenLinkedListTest >> newChildrenCollection [
 	^ BlChildrenLinkedList new
 ]
 
-{ #category : #metadata }
-BlChildrenLinkedListTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlChildrenLinkedListExamples'
-]
-
 { #category : #tests }
 BlChildrenLinkedListTest >> testAdd [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self testEmptyChildren.
 	theChildren add: (self newChildAt: 1).
@@ -55,7 +49,7 @@ BlChildrenLinkedListTest >> testAdd [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testAddAt [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self testEmptyChildren.
 	theChildren add: (self newChildAt: 1) at: 1.
@@ -79,7 +73,7 @@ BlChildrenLinkedListTest >> testAddAt [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testAsArray [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	indices := theChildren asArray
@@ -90,7 +84,7 @@ BlChildrenLinkedListTest >> testAsArray [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testAsArrayEmpty [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self testEmptyChildren.
 	indices := theChildren asArray
@@ -101,7 +95,7 @@ BlChildrenLinkedListTest >> testAsArrayEmpty [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testAt [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: ((theChildren at: 1) userData at: #index) equals: 1.
@@ -114,7 +108,7 @@ BlChildrenLinkedListTest >> testAt [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testAtIfAbsent [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: ((theChildren at: 1) userData at: #index) equals: 1.
@@ -143,7 +137,7 @@ BlChildrenLinkedListTest >> testAtIfAbsent [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testEmptyChildren [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self newChildrenCollection.
 	self assert: theChildren size equals: 0.
@@ -154,7 +148,7 @@ BlChildrenLinkedListTest >> testEmptyChildren [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testEmptyChildrenExplicitCreation [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := BlChildrenLinkedList new.
 	self assert: theChildren size equals: 0.
@@ -165,7 +159,7 @@ BlChildrenLinkedListTest >> testEmptyChildrenExplicitCreation [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testFirst [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren first userData at: #index) equals: 1.
@@ -174,7 +168,7 @@ BlChildrenLinkedListTest >> testFirst [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testIfEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: (theChildren ifEmpty: [ #empty ]) equals: #empty.
@@ -183,7 +177,7 @@ BlChildrenLinkedListTest >> testIfEmpty [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testIfEmptyNot [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren ifEmpty: [ #empty ]) equals: theChildren.
@@ -192,7 +186,7 @@ BlChildrenLinkedListTest >> testIfEmptyNot [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testIndexOf [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren indexOf: (theChildren at: 1)) equals: 1.
@@ -202,7 +196,7 @@ BlChildrenLinkedListTest >> testIndexOf [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testIndexOfUnknown [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren indexOf: BlElement new) equals: 0.
@@ -211,18 +205,18 @@ BlChildrenLinkedListTest >> testIndexOfUnknown [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testIsEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren isEmpty.
 	theChildren := self fill: 5.
-	self assert: theChildren isEmpty not.
+	self deny: theChildren isEmpty.
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testIsNotEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren isNotEmpty not.
@@ -233,7 +227,7 @@ BlChildrenLinkedListTest >> testIsNotEmpty [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testLast [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren last userData at: #index) equals: 5.
@@ -242,7 +236,7 @@ BlChildrenLinkedListTest >> testLast [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testRemove [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren remove: (theChildren at: 3).
@@ -254,7 +248,7 @@ BlChildrenLinkedListTest >> testRemove [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testRemoveAll [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren
@@ -270,7 +264,7 @@ BlChildrenLinkedListTest >> testRemoveAll [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testRemoveAt [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren removeAt: 5.
@@ -284,7 +278,7 @@ BlChildrenLinkedListTest >> testRemoveAt [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testSecond [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren second userData at: #index) equals: 2.
@@ -293,7 +287,7 @@ BlChildrenLinkedListTest >> testSecond [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testSize [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: theChildren size equals: 5.
@@ -302,7 +296,7 @@ BlChildrenLinkedListTest >> testSize [
 
 { #category : #tests }
 BlChildrenLinkedListTest >> testSizeEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren size equals: 0.

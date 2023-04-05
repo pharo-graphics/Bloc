@@ -60,7 +60,7 @@ BlChildrenSubsetTest >> sortedByElevation [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testAccountedByLayout [
-	<gtExample>
+	
 	| childrenArray childrenIterator |
 	childrenArray := self childrenArrayWith5Elements.
 	childrenIterator := childrenArray accountedByLayout.
@@ -80,7 +80,7 @@ BlChildrenSubsetTest >> testAccountedByLayout [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testAccountedByLayoutAndIgnoredByLayout [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorIgnoredByLayout |
 	childrenIterator := self ignoredByLayout.
 	childrenIteratorIgnoredByLayout := childrenIterator accountedByLayout.
@@ -93,7 +93,7 @@ BlChildrenSubsetTest >> testAccountedByLayoutAndIgnoredByLayout [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testAccountedByLayoutAndReversed [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorReversed |
 	childrenIterator := self accountedByLayout.
 	childrenIteratorReversed := childrenIterator reversed.
@@ -115,7 +115,7 @@ BlChildrenSubsetTest >> testAccountedByLayoutAndReversed [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testAccountedByLayoutChildrenFromElement [
-	<gtExample>
+	
 	| element accountedByLayoutChildren |
 	element := self elementWithChildren.
 	accountedByLayoutChildren := element children accountedByLayout.
@@ -125,7 +125,7 @@ BlChildrenSubsetTest >> testAccountedByLayoutChildrenFromElement [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testAccountedByLayoutTwice [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorAccountedByLayout |
 	childrenIterator := self accountedByLayout.
 	childrenIteratorAccountedByLayout := childrenIterator
@@ -136,7 +136,7 @@ BlChildrenSubsetTest >> testAccountedByLayoutTwice [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testChildrenArrayWith5Elements [
-	<gtExample>
+	
 	| childrenArray zIndex |
 	childrenArray := BlChildrenArray new.
 	1 to: 5 do:
@@ -156,7 +156,7 @@ BlChildrenSubsetTest >> testChildrenArrayWith5Elements [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testChildrenWithMultipleCombinedSubsets [
-	<gtExample>
+	
 	| element children |
 	element := self elementWithChildren.
 	children := element children accountedByLayout reversed
@@ -173,7 +173,7 @@ BlChildrenSubsetTest >> testChildrenWithMultipleCombinedSubsets [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testElementWithChildren [
-	<gtExample>
+	
 	| element |
 	element := BlElement new.
 	self childrenArrayWith5Elements
@@ -184,7 +184,7 @@ BlChildrenSubsetTest >> testElementWithChildren [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testIgnoredByLayout [
-	<gtExample>
+	
 	| childrenArray childrenIterator |
 	childrenArray := self childrenArrayWith5Elements.
 	childrenIterator := childrenArray ignoredByLayout.
@@ -202,7 +202,7 @@ BlChildrenSubsetTest >> testIgnoredByLayout [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testIgnoredByLayoutAndAcountedByLayout [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorAcountedByLayout |
 	childrenIterator := self ignoredByLayout.
 	childrenIteratorAcountedByLayout := childrenIterator
@@ -216,7 +216,7 @@ BlChildrenSubsetTest >> testIgnoredByLayoutAndAcountedByLayout [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testIgnoredByLayoutAndReverse [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorReversed |
 	childrenIterator := self ignoredByLayout.
 	childrenIteratorReversed := childrenIterator reversed.
@@ -235,7 +235,7 @@ BlChildrenSubsetTest >> testIgnoredByLayoutAndReverse [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testIgnoredByLayoutExplicitCreation [
-	<gtExample>
+	
 	| childrenArray childrenIterator |
 	childrenArray := self childrenArrayWith5Elements.
 	childrenIterator := BlChildrenIgnoredByLayout on: childrenArray.
@@ -253,7 +253,7 @@ BlChildrenSubsetTest >> testIgnoredByLayoutExplicitCreation [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testIgnoredByLayoutFromElement [
-	<gtExample>
+	
 	| element ignoredByLayoutChildren |
 	element := self elementWithChildren.
 	ignoredByLayoutChildren := element children ignoredByLayout.
@@ -263,17 +263,17 @@ BlChildrenSubsetTest >> testIgnoredByLayoutFromElement [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testIgnoredByLayoutTwice [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorIgnoredByLayout |
 	childrenIterator := self ignoredByLayout.
 	childrenIteratorIgnoredByLayout := childrenIterator ignoredByLayout.
-	self assert: childrenIteratorIgnoredByLayout == childrenIterator.
+	self assert: childrenIteratorIgnoredByLayout identicalTo: childrenIterator.
 	^ childrenIteratorIgnoredByLayout
 ]
 
 { #category : #tests }
 BlChildrenSubsetTest >> testReversed [
-	<gtExample>
+	
 	| childrenArray childrenIterator |
 	childrenArray := self childrenArrayWith5Elements.
 	childrenIterator := childrenArray reversed.
@@ -288,7 +288,7 @@ BlChildrenSubsetTest >> testReversed [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testReversedAndAcountedByLayout [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorAcountedByLayout |
 	childrenIterator := self reversed.
 	childrenIteratorAcountedByLayout := childrenIterator
@@ -317,7 +317,7 @@ BlChildrenSubsetTest >> testReversedAndAcountedByLayout [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testReversedAndIgnoredByLayout [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorIgnoredByLayout |
 	childrenIterator := self reversed.
 	childrenIteratorIgnoredByLayout := childrenIterator ignoredByLayout.
@@ -341,7 +341,7 @@ BlChildrenSubsetTest >> testReversedAndIgnoredByLayout [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testReversedChildrenFromElement [
-	<gtExample>
+	
 	| element reversedChildren |
 	element := self elementWithChildren.
 	reversedChildren := element children reversed.
@@ -351,7 +351,7 @@ BlChildrenSubsetTest >> testReversedChildrenFromElement [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testReversedTwice [
-	<gtExample>
+	
 	| childrenIterator |
 	childrenIterator := self reversed reversed.
 	self assert: childrenIterator size equals: 5.
@@ -365,7 +365,7 @@ BlChildrenSubsetTest >> testReversedTwice [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testSortedByElevation [
-	<gtExample>
+	
 	| childrenArray childrenIterator expectedOrder |
 	childrenArray := self childrenArrayWith5Elements.
 	childrenIterator := childrenArray sortedByElevation.
@@ -381,7 +381,7 @@ BlChildrenSubsetTest >> testSortedByElevation [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testSortedByElevationAndAcountedByLayout [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorAcountedByLayout |
 	childrenIterator := self sortedByElevation.
 	childrenIteratorAcountedByLayout := childrenIterator
@@ -404,7 +404,7 @@ BlChildrenSubsetTest >> testSortedByElevationAndAcountedByLayout [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testSortedByElevationAndIgnoredByLayout [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorIgnoredByLayout |
 	childrenIterator := self sortedByElevation.
 	childrenIteratorIgnoredByLayout := childrenIterator ignoredByLayout.
@@ -423,7 +423,7 @@ BlChildrenSubsetTest >> testSortedByElevationAndIgnoredByLayout [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testSortedByElevationAndReversed [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorReversed expectedOrder |
 	childrenIterator := self sortedByElevation.
 	childrenIteratorReversed := childrenIterator reversed.
@@ -441,7 +441,7 @@ BlChildrenSubsetTest >> testSortedByElevationAndReversed [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testSortedByElevationFromElement [
-	<gtExample>
+	
 	| element sortedByElevationChildren |
 	element := self elementWithChildren.
 	sortedByElevationChildren := element children sortedByElevation.
@@ -451,11 +451,11 @@ BlChildrenSubsetTest >> testSortedByElevationFromElement [
 
 { #category : #tests }
 BlChildrenSubsetTest >> testSortedByElevationTwice [
-	<gtExample>
+	
 	| childrenIterator childrenIteratorSortedByElevation |
 	childrenIterator := self sortedByElevation.
 	childrenIteratorSortedByElevation := childrenIterator
 		sortedByElevation.
-	self assert: childrenIteratorSortedByElevation == childrenIterator.
+	self assert: childrenIteratorSortedByElevation identicalTo: childrenIterator.
 	^ childrenIteratorSortedByElevation
 ]
