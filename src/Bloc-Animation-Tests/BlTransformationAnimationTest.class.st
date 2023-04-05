@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlTransfo
 Class {
 	#name : #BlTransformationAnimationTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Animation'
+	#category : #'Bloc-Animation-Tests'
 }
 
 { #category : #tests }
@@ -13,7 +13,7 @@ BlTransformationAnimationTest >> animationElement [
 	^ self testAnimationElement
 ]
 
-{ #category : #fixture }
+{ #category : #helpers }
 BlTransformationAnimationTest >> assertNotStartedAnimation: animation [
 	self assert: animation isStarted not.
 	self assert: animation isRunning not.
@@ -47,15 +47,9 @@ BlTransformationAnimationTest >> linearTranslationAnimationWithDurationAndEasing
 	^ self testLinearTranslationAnimationWithDurationAndEasing
 ]
 
-{ #category : #metadata }
-BlTransformationAnimationTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlTransformationAnimationExamples'
-]
-
 { #category : #tests }
 BlTransformationAnimationTest >> testAnimationElement [
-	<gtExample>
+	
 	^ BlElement new
 		size: 50 @ 50;
 		background: Color veryLightGray;
@@ -64,7 +58,7 @@ BlTransformationAnimationTest >> testAnimationElement [
 
 { #category : #tests }
 BlTransformationAnimationTest >> testContainerElement [
-	<gtExample>
+	
 	^ BlElement new
 		size: 350 @ 350;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 5);
@@ -73,22 +67,22 @@ BlTransformationAnimationTest >> testContainerElement [
 
 { #category : #tests }
 BlTransformationAnimationTest >> testContainerWithOneElement [
-	<gtExample>
+
 	| container element |
 	container := self containerElement.
 	element := self animationElement.
-	element relocate: 5 @ 5.
+	element position: 5 @ 5.
 	container addChild: element.
 	^ container
 ]
 
-{ #category : #tests }
+{ #category : #'smoke tests' }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimation [
-	<gtExample>
+
 	| container element animation |
 	animation := self linearTranslationAnimation.
 	element := self animationElement.
-	element relocate: 5 @ 5.
+	element position: 5 @ 5.
 	container := self containerElement.
 	container addChild: element.
 	element addAnimation: animation.
@@ -97,7 +91,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimation [
 
 { #category : #tests }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDelayAndLoop [
-	<gtExample>
+
 	| container animation |
 	animation := self linearTranslationAnimationWithDelayAndLoop.
 	container := self containerWithOneElement.
@@ -107,7 +101,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDe
 
 { #category : #tests }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDurationAndEasing [
-	<gtExample>
+	
 	| container animation |
 	animation := self linearTranslationAnimationWithDurationAndEasing.
 	container := self containerWithOneElement.
@@ -117,7 +111,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDu
 
 { #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimation [
-	<gtExample>
+
 	| animation |
 	animation := BlTransformAnimation new.
 	animation transform
@@ -133,7 +127,7 @@ BlTransformationAnimationTest >> testLinearTranslationAnimation [
 
 { #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimationWithDelayAndLoop [
-	<gtExample>
+	
 	| animation |
 	animation := BlTransformAnimation new.
 	animation transform
@@ -152,7 +146,7 @@ BlTransformationAnimationTest >> testLinearTranslationAnimationWithDelayAndLoop 
 
 { #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimationWithDurationAndEasing [
-	<gtExample>
+
 	| animation |
 	animation := BlTransformAnimation new.
 	animation transform
