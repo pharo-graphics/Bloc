@@ -73,12 +73,6 @@ Bloc class >> groupSymbolForBloc [
 	^ 	#Bloc
 ]
 
-{ #category : #settings }
-Bloc class >> hackyRefreshAllSettingBrowsers [
-
-	SettingBrowser allSubInstances do: [ :aSettingsBrowser | aSettingsBrowser treeChanged: Announcement new ]
-]
-
 { #category : #children }
 Bloc class >> preferableChildrenDataStructure [
 	"Answer a `BlChildrenCollection class`."
