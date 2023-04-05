@@ -71,8 +71,9 @@ BlBasicExamples class >> shapes [
 { #category : #'examples - border' }
 BlBasicExamples >> borderRopedText [
 	<gtExample>
-	| aText |
 	
+	
+	| aText |
 	aText := 'Text with border' asRopedText.
 	aText fontSize: 30.
 	aText foreground: Color gray.

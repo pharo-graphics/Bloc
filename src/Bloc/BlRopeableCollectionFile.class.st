@@ -233,10 +233,10 @@ BlRopeableCollectionFile >> fileReference: aFileReference [
 	binaryStream ifNotNil: [ binaryStream close ].
 	fileReference := aFileReference asFileReference.
 	binaryStream := fileReference binaryReadStream.
-	WeakRegistry default 
+	WeakRegistry default
 		add: self
-		executor: (BlRopeableCollectionFileFinalizer new
-						binaryStream: binaryStream)
+		finalizer:
+		(BlRopeableCollectionFileFinalizer new binaryStream: binaryStream)
 ]
 
 { #category : #comparing }
