@@ -31,12 +31,6 @@ BlChildrenArrayTest >> newChildrenCollection [
 	^ BlChildrenArray new
 ]
 
-{ #category : #metadata }
-BlChildrenArrayTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlChildrenArrayExamples'
-]
-
 { #category : #tests }
 BlChildrenArrayTest >> testAdd [
 	<gtExample>

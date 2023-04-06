@@ -15,7 +15,7 @@ BlChildrenRopeTest >> newChildrenCollection [
 	^ BlChildrenRope new
 ]
 
-{ #category : #metadata }
+{ #category : #'as yet unclassified' }
 BlChildrenRopeTest >> originClassName [
 	"This test was generated from..."
 	^ 'BlChildrenRopeExamples'

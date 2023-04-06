@@ -26,12 +26,6 @@ TBlChildrenTest >> newChildrenCollection [
 	^ self explicitRequirement
 ]
 
-{ #category : #metadata }
-TBlChildrenTest >> originClassName [
-	"This test was generated from..."
-	^ 'TBlChildrenExample'
-]
-
 { #category : #tests }
 TBlChildrenTest >> testAdd [
 	<gtExample>
@@ -74,7 +68,7 @@ TBlChildrenTest >> testAddAt [
 
 { #category : #tests }
 TBlChildrenTest >> testAsArray [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	indices := theChildren asArray
@@ -85,7 +79,7 @@ TBlChildrenTest >> testAsArray [
 
 { #category : #tests }
 TBlChildrenTest >> testAsArrayEmpty [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self testEmptyChildren.
 	indices := theChildren asArray
@@ -96,7 +90,7 @@ TBlChildrenTest >> testAsArrayEmpty [
 
 { #category : #tests }
 TBlChildrenTest >> testAt [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: ((theChildren at: 1) userData at: #index) equals: 1.
@@ -109,7 +103,7 @@ TBlChildrenTest >> testAt [
 
 { #category : #tests }
 TBlChildrenTest >> testAtIfAbsent [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: ((theChildren at: 1) userData at: #index) equals: 1.
@@ -138,7 +132,7 @@ TBlChildrenTest >> testAtIfAbsent [
 
 { #category : #tests }
 TBlChildrenTest >> testEmptyChildren [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self newChildrenCollection.
 	self assert: theChildren size equals: 0.
@@ -149,7 +143,7 @@ TBlChildrenTest >> testEmptyChildren [
 
 { #category : #tests }
 TBlChildrenTest >> testFirst [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren first userData at: #index) equals: 1.
@@ -158,7 +152,7 @@ TBlChildrenTest >> testFirst [
 
 { #category : #tests }
 TBlChildrenTest >> testIfEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: (theChildren ifEmpty: [ #empty ]) equals: #empty.
@@ -167,7 +161,7 @@ TBlChildrenTest >> testIfEmpty [
 
 { #category : #tests }
 TBlChildrenTest >> testIfEmptyNot [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren ifEmpty: [ #empty ]) equals: theChildren.
@@ -176,7 +170,7 @@ TBlChildrenTest >> testIfEmptyNot [
 
 { #category : #tests }
 TBlChildrenTest >> testIndexOf [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren indexOf: (theChildren at: 1)) equals: 1.
@@ -186,7 +180,7 @@ TBlChildrenTest >> testIndexOf [
 
 { #category : #tests }
 TBlChildrenTest >> testIndexOfUnknown [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren indexOf: BlElement new) equals: 0.
@@ -195,18 +189,18 @@ TBlChildrenTest >> testIndexOfUnknown [
 
 { #category : #tests }
 TBlChildrenTest >> testIsEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren isEmpty.
 	theChildren := self fill: 5.
-	self assert: theChildren isEmpty not.
+	self deny: theChildren isEmpty.
 	^ theChildren
 ]
 
 { #category : #tests }
 TBlChildrenTest >> testIsNotEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren isNotEmpty not.
@@ -217,7 +211,7 @@ TBlChildrenTest >> testIsNotEmpty [
 
 { #category : #tests }
 TBlChildrenTest >> testLast [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren last userData at: #index) equals: 5.
@@ -226,7 +220,7 @@ TBlChildrenTest >> testLast [
 
 { #category : #tests }
 TBlChildrenTest >> testRemove [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren remove: (theChildren at: 3).
@@ -238,7 +232,7 @@ TBlChildrenTest >> testRemove [
 
 { #category : #tests }
 TBlChildrenTest >> testRemoveAll [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren
@@ -254,7 +248,7 @@ TBlChildrenTest >> testRemoveAll [
 
 { #category : #tests }
 TBlChildrenTest >> testRemoveAt [
-	<gtExample>
+	
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren removeAt: 5.
@@ -268,7 +262,7 @@ TBlChildrenTest >> testRemoveAt [
 
 { #category : #tests }
 TBlChildrenTest >> testSecond [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren second userData at: #index) equals: 2.
@@ -277,7 +271,7 @@ TBlChildrenTest >> testSecond [
 
 { #category : #tests }
 TBlChildrenTest >> testSize [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: theChildren size equals: 5.
@@ -286,7 +280,7 @@ TBlChildrenTest >> testSize [
 
 { #category : #tests }
 TBlChildrenTest >> testSizeEmpty [
-	<gtExample>
+	
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren size equals: 0.
