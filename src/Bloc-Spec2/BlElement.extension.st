@@ -3,12 +3,13 @@ Extension { #name : #BlElement }
 { #category : #'*Bloc-Spec2' }
 BlElement >> asPreviewMorph [
 
-	^ self asSpartaForm asMorph
+	self flag: #todo. "Dependency to Bloc-Alexandrie."
+	^ self aeAsForm asMorph
 ]
 
 { #category : #'*Bloc-Spec2' }
 BlElement >> inspectionPreview: aBuilder [
-	"<inspectorPresentationOrder: 1 title: 'Preview'>"
+	<inspectorPresentationOrder: 1 title: 'Preview'>
 
 	^ aBuilder newMorph
 		morph: self asPreviewMorph;
