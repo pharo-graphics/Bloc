@@ -31,12 +31,6 @@ BlOpacityTest >> colorfulElement [
 	^ anElement
 ]
 
-{ #category : #metadata }
-BlOpacityTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlOpacityExamples'
-]
-
 { #category : #tests }
 BlOpacityTest >> testDefaultOpacity [
 

@@ -10,19 +10,19 @@ Class {
 
 { #category : #tests }
 BlElementChildrenTest >> hierarchyChildren [
-
-	<gtExample>
+	<sampleInstance>
+	
 	| aContainer current |
 	aContainer := BlElement new
 		              size: 400 @ 400;
 		              background: Color veryVeryLightGray;
 		              labeled: 'Container'.
 	current := aContainer.
-	1 to: 10 do: [ :i | 
+	1 to: 10 do: [ :i |
 		| son |
 		son := BlElement new
 			       size: 10 - i * 40 asPoint;
-			       relocate: 10 asPoint;
+			       position: 10 asPoint;
 			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
 			       labeled: 'shape_' , i asString.
 		current addChild: son.
@@ -33,50 +33,45 @@ BlElementChildrenTest >> hierarchyChildren [
 
 { #category : #tests }
 BlElementChildrenTest >> multipleChildren [
-
-	<gtExample>
+	<sampleInstance>
+	
 	| aContainer |
 	aContainer := BlElement new
 		              size: 400 @ 400;
 		              background: Color veryVeryLightGray;
 		              labeled: 'Container'.
 
-	1 to: 10 do: [ :i | 
+	1 to: 10 do: [ :i |
 		| son |
 		son := BlElement new
 			       size: 10 - i * 40 asPoint;
-			       relocate: 10 asPoint;
+			       position: 10 asPoint;
 			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
 			       labeled: 'shape_' , i asString.
-		aContainer addChild: son].
+		aContainer addChild: son ].
 
 	^ aContainer
 ]
 
-{ #category : #metadata }
-BlElementChildrenTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlElementChildrenExamples'
-]
-
 { #category : #tests }
 BlElementChildrenTest >> overlappingChildren [
-	<gtExample>
+	<sampleInstance>
+	
 	| aContainer aRedChild aBlueChild |
 	aContainer := BlElement new
-		size: 400 @ 400;
-		background: Color veryVeryLightGray;
-		labeled: 'Container'.
+		              size: 400 @ 400;
+		              background: Color veryVeryLightGray;
+		              labeled: 'Container'.
 	aRedChild := BlElement new
-		size: 300 @ 150;
-		relocate: 50 @ 125;
-		background: (Color red alpha: 0.5);
-		labeled: 'Red'.
+		             size: 300 @ 150;
+		             position: 50 @ 125;
+		             background: (Color red alpha: 0.5);
+		             labeled: 'Red'.
 	aBlueChild := BlElement new
-		size: 150 @ 300;
-		relocate: 125 @ 50;
-		background: (Color blue alpha: 0.5);
-		labeled: 'Blue'.
+		              size: 150 @ 300;
+		              position: 125 @ 50;
+		              background: (Color blue alpha: 0.5);
+		              labeled: 'Blue'.
 	aContainer addChild: aRedChild as: #red.
 	aContainer addChild: aBlueChild as: #blue.
 	aContainer forceLayout.
@@ -85,7 +80,7 @@ BlElementChildrenTest >> overlappingChildren [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt100200 [
-	<gtExample>
+	
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 100 @ 200.
@@ -95,7 +90,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt100200 [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt200100 [
-	<gtExample>
+	
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 200 @ 100.
@@ -105,7 +100,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt200100 [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt200200 [
-	<gtExample>
+	
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 200 @ 200.
@@ -119,7 +114,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt200200 [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt5050 [
-	<gtExample>
+	
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 50 @ 50.
@@ -129,7 +124,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt5050 [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt600600 [
-	<gtExample>
+	
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 600 @ 600.
@@ -139,8 +134,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt600600 [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllParentsDetectifFoundifNone1 [
-
-	<gtExample>
+	
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -162,8 +156,7 @@ BlElementChildrenTest >> testAllParentsDetectifFoundifNone1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllParentsDetectifFoundifNone2 [
-
-	<gtExample>
+	
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -176,8 +169,7 @@ BlElementChildrenTest >> testAllParentsDetectifFoundifNone2 [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllParentsDo [
-
-	<gtExample>
+	
 	| aContainer aChild res |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -203,8 +195,7 @@ BlElementChildrenTest >> testAllParentsDo [
 
 { #category : #tests }
 BlElementChildrenTest >> testAllParentsToDo [
-
-	<gtExample>
+	
 	| aContainer res |
 	aContainer := self hierarchyChildren.
 	res := OrderedCollection new.
@@ -233,8 +224,7 @@ BlElementChildrenTest >> testAllParentsToDo [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildAt [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self multipleChildren.
 	self assert: (aContainer childAt: 1) id identifier equals: #shape_1.
@@ -252,7 +242,6 @@ BlElementChildrenTest >> testChildAt [
 { #category : #tests }
 BlElementChildrenTest >> testChildIndexOf [
 
-	<gtExample>
 	| aContainer aNonChild |
 	aContainer := self multipleChildren.
 	aNonChild := BlElement new.
@@ -264,8 +253,7 @@ BlElementChildrenTest >> testChildIndexOf [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildNamed1 [
-
-	<gtExample>
+	
 	| aContainer aChild |
 	aContainer := self multipleChildren.
 	aChild := aContainer childNamed: #shape_1.
@@ -288,8 +276,7 @@ BlElementChildrenTest >> testChildNamed1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildNamed2 [
-
-	<gtExample>
+	
 	| aContainer aChild1 aChild2 |
 	aContainer := self hierarchyChildren.
 	aChild1 := aContainer childNamed: #shape_1.
@@ -314,8 +301,7 @@ BlElementChildrenTest >> testChildNamed2 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildNamedIfFound1 [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self multipleChildren.
 	aContainer childNamed: #shape_1 ifFound: [ self assert: true ].
@@ -326,8 +312,7 @@ BlElementChildrenTest >> testChildNamedIfFound1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildNamedIfFound2 [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer childNamed: #shape_1 ifFound: [ self assert: true ].
@@ -338,8 +323,7 @@ BlElementChildrenTest >> testChildNamedIfFound2 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildNamedIfFoundIfNone1 [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self multipleChildren.
 	aContainer childNamed: #shape_1 ifFound: [ self assert: true ] ifNone: [ self assert: false ].
@@ -350,8 +334,7 @@ BlElementChildrenTest >> testChildNamedIfFoundIfNone1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildNamedIfFoundIfNone2 [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
@@ -373,9 +356,34 @@ BlElementChildrenTest >> testChildNamedIfFoundIfNone2 [
 ]
 
 { #category : #tests }
-BlElementChildrenTest >> testChildWithId1 [
+BlElementChildrenTest >> testChildWithId [
+	
+	| aContainer aChild1 aChild2 |
+	aContainer := self hierarchyChildren.
+	aChild1 := aContainer childNamed: (BlElementId named: #shape_1).
+	self assert: aChild1 parent equals: aContainer.
+	self assert: aChild1 id identifier equals: #shape_1.
 
-	<gtExample>
+	aChild2 := aContainer childNamed: (BlElementId named: #shape_2).
+	self assert: aChild2 parent equals: aChild1.
+	self assert: aChild2 id identifier equals: #shape_2.
+
+	aChild1 := aContainer childWithId: (BlElementId named: #shape_5).
+	self assert: aChild1 id identifier equals: #shape_5.
+
+	aChild2 := aContainer childWithId: (BlElementId named: #shape_6).
+	self assert: aChild2 parent equals: aChild1.
+	self assert: aChild2 id identifier equals: #shape_6.
+
+	[ 
+	aContainer childWithId: (BlElementId named: #idontexist).
+	self assert: false ] onErrorDo: [ :err | self assert: true ]
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> testChildWithId1 [
+	<sampleInstance>
+	
 	| aContainer aChild |
 	aContainer := self multipleChildren.
 	aChild := aContainer childWithId: (BlElementId named: #shape_1).
@@ -397,8 +405,8 @@ BlElementChildrenTest >> testChildWithId1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildWithId2 [
-
-	<gtExample>
+	<sampleInstance>
+	
 	| aContainer aChild1 aChild2 |
 	aContainer := self hierarchyChildren.
 	aChild1 := aContainer childNamed: (BlElementId named: #shape_1).
@@ -423,8 +431,7 @@ BlElementChildrenTest >> testChildWithId2 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildWithIdIfFound1 [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self multipleChildren.
 	aContainer childWithId: (BlElementId named: #shape_1) ifFound: [ self assert: true ].
@@ -435,8 +442,7 @@ BlElementChildrenTest >> testChildWithIdIfFound1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildWithIdIfFound2 [
-
-	<gtExample>
+		
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
@@ -455,8 +461,7 @@ BlElementChildrenTest >> testChildWithIdIfFound2 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildWithIdIfFoundifNone1 [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self multipleChildren.
 	aContainer
@@ -475,8 +480,7 @@ BlElementChildrenTest >> testChildWithIdIfFoundifNone1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildWithIdIfFoundifNone2 [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
@@ -500,7 +504,6 @@ BlElementChildrenTest >> testChildWithIdIfFoundifNone2 [
 { #category : #tests }
 BlElementChildrenTest >> testChildWithIdifNone1 [
 
-	<gtExample>
 	| aContainer |
 	aContainer := self multipleChildren.
 	aContainer
@@ -519,8 +522,7 @@ BlElementChildrenTest >> testChildWithIdifNone1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildWithIdifNone2 [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
@@ -539,8 +541,7 @@ BlElementChildrenTest >> testChildWithIdifNone2 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildren1 [
-
-	<gtExample>
+	
 	| aContainer allChildren |
 	aContainer := self multipleChildren.
 	allChildren := aContainer children.
@@ -561,8 +562,7 @@ BlElementChildrenTest >> testChildren1 [
 
 { #category : #tests }
 BlElementChildrenTest >> testChildren2 [
-
-	<gtExample>
+	
 	| aContainer allChildren |
 	aContainer := self hierarchyChildren.
 	allChildren := aContainer children.
@@ -577,7 +577,7 @@ BlElementChildrenTest >> testChildren2 [
 { #category : #tests }
 BlElementChildrenTest >> testChildrenCount1 [
 
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self multipleChildren.
 	self assert: aContainer childrenCount equals: 10
@@ -594,8 +594,7 @@ BlElementChildrenTest >> testChildrenCount2 [
 
 { #category : #tests }
 BlElementChildrenTest >> testDirectChildNamedifFoundifNone [
-
-	<gtExample>
+	
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
@@ -615,7 +614,6 @@ BlElementChildrenTest >> testDirectChildNamedifFoundifNone [
 { #category : #tests }
 BlElementChildrenTest >> testFirstChild [
 
-	<gtExample>
 	| aContainer anElementWithNoChild |
 	aContainer := self multipleChildren.
 	
@@ -630,7 +628,6 @@ BlElementChildrenTest >> testFirstChild [
 { #category : #tests }
 BlElementChildrenTest >> testFirstCommonParentifFoundifNone [
 
-	<gtExample>
 	| aContainer aChild1 aChild2 |
 	aContainer := self hierarchyChildren.
 
@@ -672,7 +669,6 @@ BlElementChildrenTest >> testFirstCommonParentifFoundifNone [
 { #category : #tests }
 BlElementChildrenTest >> testIsFirstChild [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self multipleChildren.
 	aChild := aContainer childNamed: #shape_1.
@@ -696,7 +692,6 @@ BlElementChildrenTest >> testIsFirstChild [
 { #category : #tests }
 BlElementChildrenTest >> testIsLastChild [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self multipleChildren.
 	aChild := aContainer childNamed: #shape_1.
@@ -720,7 +715,6 @@ BlElementChildrenTest >> testIsLastChild [
 { #category : #tests }
 BlElementChildrenTest >> testNextSiblingDo [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self multipleChildren.
 	aChild := aContainer childNamed: #shape_1.
@@ -736,7 +730,6 @@ BlElementChildrenTest >> testNextSiblingDo [
 { #category : #tests }
 BlElementChildrenTest >> testNextSiblingSuchThatdo [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self multipleChildren.
 	aChild := aContainer childNamed: #shape_1.
@@ -752,9 +745,7 @@ BlElementChildrenTest >> testNextSiblingSuchThatdo [
 ]
 
 { #category : #tests }
-BlElementChildrenTest >> testOwner [
-
-	<gtExample>
+BlElementChildrenTest >> testOwner [ 
 	| aContainer |
 	aContainer := self multipleChildren.
 	self assert: (aContainer childNamed: #shape_1) owner equals: aContainer.
@@ -766,7 +757,6 @@ BlElementChildrenTest >> testOwner [
 { #category : #tests }
 BlElementChildrenTest >> testParentDo [
 
-	<gtExample>
 	| aContainer aChild res |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -785,7 +775,6 @@ BlElementChildrenTest >> testParentDo [
 { #category : #tests }
 BlElementChildrenTest >> testPreviousSiblingDo [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self multipleChildren.
 	aChild := aContainer childNamed: #shape_1.
@@ -801,7 +790,6 @@ BlElementChildrenTest >> testPreviousSiblingDo [
 { #category : #tests }
 BlElementChildrenTest >> testPreviousSiblingSuchThatdo [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self multipleChildren.
 	aChild := aContainer childNamed: #shape_1.
@@ -827,7 +815,6 @@ BlElementChildrenTest >> testPreviousSiblingSuchThatdo [
 { #category : #tests }
 BlElementChildrenTest >> testTopMostParent [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -837,7 +824,6 @@ BlElementChildrenTest >> testTopMostParent [
 { #category : #tests }
 BlElementChildrenTest >> testTopMostParentSuchThatifFoundifNone [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -855,7 +841,6 @@ aContainer
 { #category : #tests }
 BlElementChildrenTest >> testWithAllParents [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -876,7 +861,6 @@ BlElementChildrenTest >> testWithAllParents [
 { #category : #tests }
 BlElementChildrenTest >> testWithAllParentsDetectifFoundifNone [
 
-	<gtExample>
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -902,7 +886,6 @@ BlElementChildrenTest >> testWithAllParentsDetectifFoundifNone [
 { #category : #tests }
 BlElementChildrenTest >> testWithAllParentsDo [
 
-	<gtExample>
 	| aContainer aChild res |
 	aContainer := self hierarchyChildren.
 	aChild := aContainer childNamed: #shape_10.
@@ -930,7 +913,6 @@ BlElementChildrenTest >> testWithAllParentsDo [
 { #category : #tests }
 BlElementChildrenTest >> testWithAllParentsUpToDo [
 
-	<gtExample>
 	| aContainer res |
 	aContainer := self hierarchyChildren.
 	res := OrderedCollection new.
@@ -961,7 +943,6 @@ BlElementChildrenTest >> testWithAllParentsUpToDo [
 { #category : #tests }
 BlElementChildrenTest >> testWithAllParentsUpTodetectifFoundIfNone [
 
-	<gtExample>
 	| aContainer res |
 	aContainer := self hierarchyChildren.
 

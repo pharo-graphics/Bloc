@@ -8,15 +8,9 @@ Class {
 	#category : #'Bloc-UnitedTests'
 }
 
-{ #category : #metadata }
-BlElementLayoutBoundaryTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlElementLayoutBoundaryExamples'
-]
-
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
-	<gtExample>
+	
 	| aSpace |
 	aSpace := self testSpaceWithExactLayoutBoundary.
 	self assert: aSpace isLayoutRequested.
@@ -39,7 +33,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
-	<gtExample>
+	
 	| aSpace |
 	aSpace := self testExactLayoutBoundary01Pulse.
 	(aSpace root childNamed: #child) requestLayout.
@@ -65,7 +59,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
-	<gtExample>
+	
 	| aSpace aContainer aLayoutBoundary aChild |
 	aSpace := BlSpace new.
 	aSpace extent: 500 @ 400.
