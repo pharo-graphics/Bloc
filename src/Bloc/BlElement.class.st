@@ -611,7 +611,7 @@ BlElement >> bounds [
 { #category : #accessing }
 BlElement >> bounds: aBounds [
 
-	self relocate: aBounds position.
+	self position: aBounds position.
 	self size: aBounds extent
 ]
 
@@ -2011,13 +2011,6 @@ BlElement >> invalidateChildren [
 	self childrenDo: [ :each | each invalidate ]
 ]
 
-{ #category : #'change reporting' }
-BlElement >> invalidationBounds [
-	<return: #Rectangle>
-
-	^ boundsCache invalidationBounds
-]
-
 { #category : #'geometry bounds' }
 BlElement >> invalidationBounds: aBounds [
 	"I compute and load damaged area in my local coordinates that would be invalidated
@@ -3018,6 +3011,7 @@ BlElement >> position: aPoint [
 
 { #category : #accessing }
 BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdater [
+
 	"I do the hard work of changing my position and extent.
 	This action must be very optimized in the sense of invalidation.
 	For example if element becomes smaller in both axis (horizontal and vertical)
@@ -3027,34 +3021,34 @@ BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdat
 	position changes, instead I send invalidate with my effect bounds in parent coordinates
 	to my parent. It allows developers to implement drawing cache"
 	
-	"aPosition should satisfy #isBlocFiniteFloatPoint"
-	"anExtent should satisfy #isBlocFiniteFloatPoint and #isBlocPositivePoint"
-	
-	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition | 
+	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition |
+
 	aPreviousPosition := self position.
 	aPreviousExtent := self extent.
+	isPositionChanged := (aPreviousPosition
+		                      closeTo: aPosition
+		                      epsilon: self class epsilon) not.
+	isExtentChanged := (aPreviousExtent
+		                    closeTo: anExtent
+		                    epsilon: self class epsilon) not.
 
-	isPositionChanged := (aPreviousPosition closeTo: aPosition epsilon: self class epsilon) not.
-	isExtentChanged := (aPreviousExtent closeTo: anExtent epsilon: self class epsilon) not.
-
-	"nothing changed, return"
-	(isPositionChanged or: [ isExtentChanged ])
-		ifFalse: [ ^ self ].
-
+	(isPositionChanged or: [ isExtentChanged ]) ifFalse: [ ^ self ].
+	
 	isPositionChanged ifTrue: [
-		"change my position"
 		self bounds position: aPosition.
-		aBlElementBoundsUpdater changePositionFrom: aPreviousPosition to: aPosition of: self.
-
-		"position changed without extent => invalidate cached space bounds.
-		Note, that if extent changes we invalidate bounds cache anyway"
+		aBlElementBoundsUpdater
+			changePositionFrom: aPreviousPosition
+			to: aPosition
+			of: self.
 		isExtentChanged ifFalse: [ boundsCache invalidateBoundsInSpace ] ].
 
-	isExtentChanged ifTrue: [ 
-		"change my extent"
-		self bounds extent: anExtent.
-		aBlElementBoundsUpdater changeExtentFrom: aPreviousExtent to: anExtent of: self.
-		boundsCache invalidateBoundsInLocal ]
+	isExtentChanged ifFalse: [ ^ self ].
+	self bounds extent: anExtent.
+	aBlElementBoundsUpdater
+		changeExtentFrom: aPreviousExtent
+		to: anExtent
+		of: self.
+	boundsCache invalidateBoundsInLocal
 ]
 
 { #category : #'geometry position' }

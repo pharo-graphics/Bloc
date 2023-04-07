@@ -27,7 +27,8 @@ BlElementSelectionListener >> elementExtentChangedEvent: anEvent [
 { #category : #'element handlers' }
 BlElementSelectionListener >> elementPositionChangedEvent: anEvent [
 
-	self selection relocate: anEvent target positionInSpace - self selection padding topLeft
+	self selection position:
+		anEvent target positionInSpace - self selection padding topLeft
 ]
 
 { #category : #'element handlers' }

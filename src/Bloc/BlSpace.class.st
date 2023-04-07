@@ -1354,13 +1354,6 @@ BlSpace >> invalidRect: aBlBounds from: anElement [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ]
 ]
 
-{ #category : #'change reporting' }
-BlSpace >> invalidationBounds [
-	<return: #Rectangle>
-
-	^ self root invalidationBounds
-]
-
 { #category : #testing }
 BlSpace >> isFocused [
 	^ self focused

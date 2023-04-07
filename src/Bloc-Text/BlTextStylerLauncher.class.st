@@ -20,7 +20,7 @@ Class {
 
 { #category : #accessing }
 BlTextStylerLauncher class >> minTextSizeForStylingInBackground [
-	^ MinTextSizeForStylingInBackground ifNil: [ MinTextSizeForStylingInBackground := 4000 ]
+	^ MinTextSizeForStylingInBackground ifNil: [ MinTextSizeForStylingInBackground := 16000 ]
 ]
 
 { #category : #accessing }
