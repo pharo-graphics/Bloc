@@ -1,39 +1,11 @@
-"
-Easiest way to create a image background is by sending the message {{gtMethod:Form>>#asBlBackground}} to a {{gtClass:Form}} object.
-{{gtExample:BlImageBackgroundExamples>>#blueImageWithPositiveExtentBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
-
-Alternatively, one can call the factory method {{gtMethod:BlImageBackground class>>#image:}} and pass it the desired form object
-{{gtExample:BlImageBackgroundExamples>>#blueImageBackgroundExplicitInstantiation|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
-
-We can also instantiate a {{gtClass:BlImageBackground}} object and configure it.
-{{gtExample:BlImageBackgroundExamples>>#blueImageBackgroundExplicitInitialization|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
-
-Icons can be used as a background as they are forms.
-{{gtExample:BlImageBackgroundExamples>>#iconImageBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
-
-Apart from icons, any other form can be used as a background.
-{{gtExample:BlImageBackgroundExamples>>#pharoLogoImageBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
-
-
-One property suported by the image background is opacity. This changes the transparency of the background.
-{{gtExample:BlImageBackgroundExamples>>#imageWithOpacityBackground|previewExpanded|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
-
-Setting then the opacity to 0 makes the background transparent.
-{{gtExample:BlImageBackgroundExamples>>#imageWithZeroOpacityBackground|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
-
-We can also get a transparent background by using an empty form as a background.
-{{gtExample:BlImageBackgroundExamples>>#emptyImageBackground|previewHeight=200|previewShow=#gtViewBackgroundFor:}}
-
-
-"
 Class {
-	#name : #BlImageBackgroundExamples,
-	#superclass : #BlBackgroundExamples,
+	#name : #BlImageBackgroundTest,
+	#superclass : #BlBackgroundTest,
 	#category : #'Bloc-Examples-DocumentationExamples'
 }
 
 { #category : #'background - image' }
-BlImageBackgroundExamples >> blueImageBackgroundExplicitInitialization [
+BlImageBackgroundTest >> blueImageBackgroundExplicitInitialization [
 	<gtExample>
 	| aBackground |
 	
@@ -51,7 +23,7 @@ BlImageBackgroundExamples >> blueImageBackgroundExplicitInitialization [
 ]
 
 { #category : #'background - image' }
-BlImageBackgroundExamples >> blueImageBackgroundExplicitInstantiation [
+BlImageBackgroundTest >> blueImageBackgroundExplicitInstantiation [
 	<gtExample>
 	| aBackground |
 	
@@ -68,7 +40,7 @@ BlImageBackgroundExamples >> blueImageBackgroundExplicitInstantiation [
 ]
 
 { #category : #'background - image' }
-BlImageBackgroundExamples >> blueImageWithPositiveExtentBackground [
+BlImageBackgroundTest >> blueImageWithPositiveExtentBackground [
 	<gtExample>
 	| aBackground |
 	
@@ -85,7 +57,7 @@ BlImageBackgroundExamples >> blueImageWithPositiveExtentBackground [
 ]
 
 { #category : #'background - image' }
-BlImageBackgroundExamples >> emptyImageBackground [
+BlImageBackgroundTest >> emptyImageBackground [
 	<gtExample>
 	| aBackground |
 	
@@ -100,7 +72,7 @@ BlImageBackgroundExamples >> emptyImageBackground [
 ]
 
 { #category : #'background - image' }
-BlImageBackgroundExamples >> emptyImageWithPositiveExtentBackground [
+BlImageBackgroundTest >> emptyImageWithPositiveExtentBackground [
 	<gtExample>
 	| aBackground |
 	
@@ -115,7 +87,7 @@ BlImageBackgroundExamples >> emptyImageWithPositiveExtentBackground [
 ]
 
 { #category : #'background - icon' }
-BlImageBackgroundExamples >> iconImageBackground [
+BlImageBackgroundTest >> iconImageBackground [
 	<gtExample>
 	| aBackground |
 	
@@ -130,7 +102,7 @@ BlImageBackgroundExamples >> iconImageBackground [
 ]
 
 { #category : #'background - icon' }
-BlImageBackgroundExamples >> imageWithOpacityBackground [
+BlImageBackgroundTest >> imageWithOpacityBackground [
 	<gtExample>
 	| aBackground |
 	
@@ -146,7 +118,7 @@ BlImageBackgroundExamples >> imageWithOpacityBackground [
 ]
 
 { #category : #'background - icon' }
-BlImageBackgroundExamples >> imageWithZeroOpacityBackground [
+BlImageBackgroundTest >> imageWithZeroOpacityBackground [
 	<gtExample>
 	| aBackground |
 	
@@ -162,7 +134,7 @@ BlImageBackgroundExamples >> imageWithZeroOpacityBackground [
 ]
 
 { #category : #'background - icon' }
-BlImageBackgroundExamples >> pharoLogoImageBackground [
+BlImageBackgroundTest >> pharoLogoImageBackground [
 	<gtExample>
 	| aBackground |
 	
