@@ -3,7 +3,7 @@ I contain useful helper methods that simplify creation of examples
 "
 Trait {
 	#name : #TBlExample,
-	#category : 'Bloc-Examples'
+	#category : #'Bloc-Examples-Traits'
 }
 
 { #category : #opening }

@@ -226,10 +226,9 @@ BlElementSelection >> show [
 
 { #category : #'showing / hiding' }
 BlElementSelection >> showOn: anElement [
-
 	"we don't want to add selection to the root element"
-	anElement isRoot
-		ifTrue: [ ^ self ].
+
+	anElement isRoot ifTrue: [ ^ self ].
 
 	self
 		assert: [ client isNil ]
@@ -242,7 +241,7 @@ BlElementSelection >> showOn: anElement [
 	client := anElement.
 	client addEventHandler: clientListener.
 	client space root addChild: self.
-	
-	self relocate: self selectionPosition.
-	self size: self selectionExtent.
+
+	self position: self selectionPosition.
+	self size: self selectionExtent
 ]
