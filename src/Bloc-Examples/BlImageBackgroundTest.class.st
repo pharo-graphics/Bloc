@@ -5,21 +5,6 @@ Class {
 }
 
 { #category : #'background - image' }
-BlImageBackgroundTest >> emptyImageWithPositiveExtentBackground [
-	<sampleInstance>
-	| aBackground |
-	
-	aBackground := (Form extent: 50@50) asBlBackground.
-
-	self assert: (aBackground isKindOf: BlImageBackground).	
-	self assert: aBackground opacity equals: 1.0.
-	self assert: aBackground isTransparent not.
-	self assert: aBackground image bits equals: (Form extent: 50@50) bits.
-
-	^ aBackground
-]
-
-{ #category : #'background - image' }
 BlImageBackgroundTest >> testBlueImageBackgroundExplicitInitialization [
 	<sampleInstance>
 	| aBackground |
@@ -83,6 +68,21 @@ BlImageBackgroundTest >> testEmptyImageBackground [
 	self assert: aBackground opacity equals: 1.0.
 	self assert: aBackground isTransparent.
 	self assert: aBackground image bits equals: (Form extent: 0@0) bits.
+
+	^ aBackground
+]
+
+{ #category : #'background - image' }
+BlImageBackgroundTest >> testEmptyImageWithPositiveExtentBackground [
+	<sampleInstance>
+	| aBackground |
+	
+	aBackground := (Form extent: 50@50) asBlBackground.
+
+	self assert: (aBackground isKindOf: BlImageBackground).	
+	self assert: aBackground opacity equals: 1.0.
+	self assert: aBackground isTransparent not.
+	self assert: aBackground image bits equals: (Form extent: 50@50) bits.
 
 	^ aBackground
 ]
