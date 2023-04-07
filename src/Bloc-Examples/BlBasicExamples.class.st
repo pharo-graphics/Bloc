@@ -370,7 +370,7 @@ BlBasicExamples >> rectangleWithImage [
 		  position: 100 @ 100;
 		  geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
 		  background:
-			  BlBackgroundExamples new testBuildBackgroundWithImagesAndColor;
+			  BlBackgroundTest new testBuildBackgroundWithImagesAndColor;
 		  yourself
 ]
 
