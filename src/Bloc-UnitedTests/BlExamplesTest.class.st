@@ -14,9 +14,12 @@ Class {
 
 { #category : #tests }
 BlExamplesTest class >> testSelectors [
-
+	| pragmas |
+	pragmas := #(#sampleInstance #gtExample).
 	^ self methods
-		  select: [ :each | (each hasPragmaNamed: #gtExample) and: [ each selector isUnary ] ]
+		  select: [ :eachM | 
+				(pragmas anySatisfy: [ :s | (eachM hasPragmaNamed: s)]) 
+					and: [ eachM selector isUnary ] ]
 		  thenCollect: [ :each | each selector ]
 ]
 
