@@ -1,6 +1,6 @@
 Class {
 	#name : #BlBackgroundTest,
-	#superclass : #BlExamplesTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Examples-DocumentationExamples'
 }
 
