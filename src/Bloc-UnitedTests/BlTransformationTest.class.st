@@ -10,24 +10,17 @@ Class {
 
 { #category : #'test seeds' }
 BlTransformationTest >> element [
-	<gtExample>
+
 	^ BlElement new
-		background: Color blue;
-		size: self extent;
-		relocate: self position;
-		"to compute extent and position"
-		forceLayout
+		  background: Color blue;
+		  size: self extent;
+		  position: self position;
+		  "to compute extent and position"forceLayout
 ]
 
 { #category : #hooks }
 BlTransformationTest >> extent [
 	^ 100 @ 100
-]
-
-{ #category : #metadata }
-BlTransformationTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlTransformationExamples'
 ]
 
 { #category : #hooks }
@@ -37,44 +30,48 @@ BlTransformationTest >> position [
 
 { #category : #tests }
 BlTransformationTest >> testElTxBoundsWithScale [
-	| g n |
 
+	| g n |
 	n := BlElement new
-		size: 100 @ 100;
-		relocate: 10 @ 10;
-		yourself.
+		     size: 100 @ 100;
+		     position: 10 @ 10;
+		     yourself.
 
 	g := BlElement new
-		size: 200 @ 200;
-		relocate: 10 @ 10;
-		addChild: n;
-		yourself.
+		     size: 200 @ 200;
+		     position: 10 @ 10;
+		     addChild: n;
+		     yourself.
 
 	n transform
-		scaleBy: 2@2;
+		scaleBy: 2 @ 2;
 		apply.
 	g transform
-		scaleBy: 2@2;
+		scaleBy: 2 @ 2;
 		apply.
 
 	g forceLayout.
 
-	self assert: g position equals: (10 @ 10).
-	self assert: n position equals: (10 @ 10).
+	self assert: g position equals: 10 @ 10.
+	self assert: n position equals: 10 @ 10.
 	self assert: g positionInSpace equals: (90 @ 90) negated.
-	self assert: n positionInSpace equals: (170 @ 170) negated. 
-	self assert: n transformedBounds equals: ((50@50) negated extent: (200@200)).
-	self assert: g transformedBounds equals: ((100@100) negated extent: (400@400)).
+	self assert: n positionInSpace equals: (170 @ 170) negated.
+	self
+		assert: n transformedBounds
+		equals: ((50 @ 50) negated extent: 200 @ 200).
+	self
+		assert: g transformedBounds
+		equals: ((100 @ 100) negated extent: 400 @ 400)
 ]
 
 { #category : #tests }
 BlTransformationTest >> testInheritFromIdentity [
-	| n |
 
+	| n |
 	n := BlElement new
-		size: 100 @ 100;
-		relocate: 10 @ 10;
-		yourself.
+		     size: 100 @ 100;
+		     position: 10 @ 10;
+		     yourself.
 
 	n transform
 		inherit;
@@ -83,18 +80,19 @@ BlTransformationTest >> testInheritFromIdentity [
 
 	n forceLayout.
 	self assert: n position equals: 10 @ 10.
-	self assert: n positionInSpace equals: (40 @ 40) negated. 
-	self assert: n transformedBounds equals: ((50 @ 50) negated corner: 150 @ 150).
-
+	self assert: n positionInSpace equals: (40 @ 40) negated.
+	self
+		assert: n transformedBounds
+		equals: ((50 @ 50) negated corner: 150 @ 150)
 ]
 
 { #category : #tests }
 BlTransformationTest >> testReflection [
-	<gtExample>
+	
 	| element |
 	self skip.
 	"opacity tests should be revisited comparing float was never a good idea."
-	element := BlBasicExamples new rectangleWithImage.
+	element := BlBasicTest new testRectangleWithImage.
 	element relocate: self position.
 	element transform
 		flipX;
@@ -106,7 +104,7 @@ BlTransformationTest >> testReflection [
 
 { #category : #tests }
 BlTransformationTest >> testRotate [
-	<gtExample>
+	
 	| element expectedOrigin expectedExtent |
 	element := self element.
 	element transform
@@ -131,7 +129,7 @@ BlTransformationTest >> testRotate [
 
 { #category : #tests }
 BlTransformationTest >> testScale [
-	<gtExample>
+	
 	| element expectedOrigin expectedExtent |
 	element := self element.
 	element transform
@@ -154,61 +152,61 @@ BlTransformationTest >> testScale [
 
 { #category : #tests }
 BlTransformationTest >> testScaleBy [
-	| n |
 
+	| n |
 	n := BlElement new
-		size: 100 @ 100;
-		relocate: 10 @ 10;
-		yourself.
+		     size: 100 @ 100;
+		     position: 10 @ 10;
+		     yourself.
 
 	n transform
-		scaleBy: (2 @ 2);
+		scaleBy: 2 @ 2;
 		apply.
 
 	n forceLayout.
-	self assert: n position equals: (10 @ 10).
-	self assert: n positionInSpace equals: (40 @ 40) negated. 
-	self assert: n transformedBounds equals: ((50 @ 50) negated corner: (150@150)).
-	
+	self assert: n position equals: 10 @ 10.
+	self assert: n positionInSpace equals: (40 @ 40) negated.
+	self
+		assert: n transformedBounds
+		equals: ((50 @ 50) negated corner: 150 @ 150).
+
 	n transform
 		inherit;
-		scaleBy: (0.5 @ 0.5);
+		scaleBy: 0.5 @ 0.5;
 		apply.
 	n forceLayout.
-	self assert: n transformedBounds equals: ((0@0) corner: (100@100)).
-	
-
+	self assert: n transformedBounds equals: (0 @ 0 corner: 100 @ 100)
 ]
 
 { #category : #tests }
 BlTransformationTest >> testScaleTo [
+
 	| n |
-
 	n := BlElement new
-		size: 100 @ 100;
-		relocate: 10 @ 10;
-		yourself.
+		     size: 100 @ 100;
+		     position: 10 @ 10;
+		     yourself.
 
 	n transform
-		scaleBy: (2 @ 2);
+		scaleBy: 2 @ 2;
 		apply.
 	n forceLayout.
-	self assert: n position equals: (10 @ 10).
-	self assert: n positionInSpace equals: (40 @ 40) negated. 
-	self assert: n transformedBounds equals: ((50 @ 50) negated corner: (150@150)).
-	
-	n transform
-		scaleBy: (0.5 @ 0.5);
-		apply.
-	n forceLayout.
-	self assert: n transformedBounds equals: ((25@25) corner: (75@75)).
-	
+	self assert: n position equals: 10 @ 10.
+	self assert: n positionInSpace equals: (40 @ 40) negated.
+	self
+		assert: n transformedBounds
+		equals: ((50 @ 50) negated corner: 150 @ 150).
 
+	n transform
+		scaleBy: 0.5 @ 0.5;
+		apply.
+	n forceLayout.
+	self assert: n transformedBounds equals: (25 @ 25 corner: 75 @ 75)
 ]
 
 { #category : #tests }
 BlTransformationTest >> testTranslate [
-	<gtExample>
+
 	| element expectedOrigin expectedExtent |
 	element := self element.
 	element transform
@@ -231,27 +229,27 @@ BlTransformationTest >> testTranslate [
 
 { #category : #tests }
 BlTransformationTest >> testTranslateTo [
+
 	| n |
-
 	n := BlElement new
-		size: 100 @ 100;
-		relocate: 10 @ 10;
-		yourself.
+		     size: 100 @ 100;
+		     position: 10 @ 10;
+		     yourself.
 
 	n transform
-		translateBy: (10 @ 10);
+		translateBy: 10 @ 10;
 		apply.
-		
+
 	n forceLayout.
-	self assert: n position equals: (10 @ 10).
-	self assert: n positionInSpace equals: (20 @ 20). 
-	self assert: n transformedBounds equals: ((10@10) corner: (110@110)).
-	
+	self assert: n position equals: 10 @ 10.
+	self assert: n positionInSpace equals: 20 @ 20.
+	self assert: n transformedBounds equals: (10 @ 10 corner: 110 @ 110).
+
 	n transform
-		translateBy: (30 @ 30);
+		translateBy: 30 @ 30;
 		apply.
 	n forceLayout.
-	self assert: n position equals: (10 @ 10).
-	self assert: n positionInSpace equals: (40 @ 40). 
-	self assert: n transformedBounds equals: ((30@30) corner: (130@130))
+	self assert: n position equals: 10 @ 10.
+	self assert: n positionInSpace equals: 40 @ 40.
+	self assert: n transformedBounds equals: (30 @ 30 corner: 130 @ 130)
 ]

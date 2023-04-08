@@ -1,30 +1,13 @@
-"
-# Backgrounds
-
-The class {{gtClass:BlBackground}} defines the background of a Bloc element. As this is an abstract class, the actual concrete types of backgrounds are defined by its subclasses. 
-
-There are four main types of backgrounds:
-- {{gtClass:BlPaintBackground}}: color background defined using a {{gtClass:BlPaint}} object;
-- {{gtClass:BlImageBackground}}: image background defined using a {{gtClass:Form}} object;
-- {{gtClass:BlTransparentBackground}}: a special case of a transparent background;
-- {{gtClass:BlCompositeBackground}}: a background that provided the ability to compose multiple other {{gtClass:BlBackground}} objects.
-
-## Paint Backgrounds
-The simplest of the available backgrounds is the paint background. A paint can be either a simple color or a type of gradient.
-
-
-"
 Class {
-	#name : #BlBackgroundExamples,
+	#name : #BlBackgroundTest,
 	#superclass : #BlExamplesTest,
-	#category : #'Bloc-Examples-Documentation examples'
+	#category : #'Bloc-Examples-DocumentationExamples'
 }
 
 { #category : #'background - builder' }
-BlBackgroundExamples >> buildBackgroundWithImagesAndColor [
-	<gtExample>
-	| aBackground aBuilder |
-	
+BlBackgroundTest >> testBuildBackgroundWithImagesAndColor [
+
+	| aBackground aBuilder |	
 	aBuilder := BlBackground builder.
 	aBuilder image
 		form: PolymorphSystemSettings pharoLogoForm;
@@ -53,12 +36,10 @@ BlBackgroundExamples >> buildBackgroundWithImagesAndColor [
 ]
 
 { #category : #'background - transparent' }
-BlBackgroundExamples >> transparentBackground [
-	<gtExample>
-	| aBackground |
-	
-	aBackground := BlTransparentBackground new.
+BlBackgroundTest >> testTransparentBackground [
 
+	| aBackground |
+	aBackground := BlTransparentBackground new.
 	self assert: aBackground isTransparent.
 	self assert: aBackground opacity equals: 1.0.
 
