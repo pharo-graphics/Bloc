@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementLayoutBoundaryTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#category : #'Bloc-UnitedTests-Layout'
 }
 
 { #category : #tests }
