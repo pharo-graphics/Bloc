@@ -12,14 +12,17 @@ Class {
 
 { #category : #fixture }
 BlChildrenArrayTest >> fill: aNumber [
+
 	| childrenArray |
 	childrenArray := self testEmptyChildren.
-	1 to: aNumber do: [ :anIndex | childrenArray add: (self newChildAt: anIndex) ].
+	1 to: aNumber do: [ :anIndex |
+	childrenArray add: (self newChildAt: anIndex) ].
 	^ childrenArray
 ]
 
 { #category : #fixture }
 BlChildrenArrayTest >> newChildAt: anIndex [
+
 	| anElement |
 	anElement := BlElement new.
 	anElement userData at: #index put: anIndex.
@@ -28,74 +31,81 @@ BlChildrenArrayTest >> newChildAt: anIndex [
 
 { #category : #fixture }
 BlChildrenArrayTest >> newChildrenCollection [
+
+	<sampleInstance>
 	^ BlChildrenArray new
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testAdd [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren indices |
 	theChildren := self testEmptyChildren.
 	theChildren add: (self newChildAt: 1).
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 1.
-	self assert: indices equals: #(1).
+	self assert: indices equals: #( 1 ).
 	theChildren add: (self newChildAt: 2).
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 2.
-	self assert: indices equals: #(1 2).
+	self assert: indices equals: #( 1 2 ).
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testAddAt [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren indices |
 	theChildren := self testEmptyChildren.
 	theChildren add: (self newChildAt: 1) at: 1.
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 1.
-	self assert: indices equals: #(1).
+	self assert: indices equals: #( 1 ).
 	theChildren add: (self newChildAt: 2) at: 1.
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 2.
-	self assert: indices equals: #(2 1).
+	self assert: indices equals: #( 2 1 ).
 	theChildren add: (self newChildAt: 3) at: 2.
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 3.
-	self assert: indices equals: #(2 3 1).
+	self assert: indices equals: #( 2 3 1 ).
 	theChildren add: (self newChildAt: 4) at: 4.
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 4.
-	self assert: indices equals: #(2 3 1 4).
+	self assert: indices equals: #( 2 3 1 4 ).
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testAsArray [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren indices |
 	theChildren := self fill: 5.
-	indices := theChildren asArray
-		collect: [ :each | each userData at: #index ].
-	self assert: indices equals: #(1 2 3 4 5).
+	indices := theChildren asArray collect: [ :each |
+		           each userData at: #index ].
+	self assert: indices equals: #( 1 2 3 4 5 ).
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testAsArrayEmpty [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren indices |
 	theChildren := self testEmptyChildren.
-	indices := theChildren asArray
-		collect: [ :each | each userData at: #index ].
-	self assert: indices equals: #().
+	indices := theChildren asArray collect: [ :each |
+		           each userData at: #index ].
+	self assert: indices equals: #(  ).
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testAt [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: ((theChildren at: 1) userData at: #index) equals: 1.
@@ -108,36 +118,34 @@ BlChildrenArrayTest >> testAt [
 
 { #category : #tests }
 BlChildrenArrayTest >> testAtIfAbsent [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: ((theChildren at: 1) userData at: #index) equals: 1.
 	self assert: ((theChildren at: 3) userData at: #index) equals: 3.
 	self assert: ((theChildren at: 5) userData at: #index) equals: 5.
 	self
-		assert:
-			((theChildren
-				at: 0
-				ifAbsent: [ | anElement |
-					anElement := BlElement new.
-					anElement userData at: #index put: 0.
-					anElement ]) userData at: #index)
+		assert: ((theChildren at: 0 ifAbsent: [
+				  | anElement |
+				  anElement := BlElement new.
+				  anElement userData at: #index put: 0.
+				  anElement ]) userData at: #index)
 		equals: 0.
 	self
-		assert:
-			((theChildren
-				at: 10
-				ifAbsent: [ | anElement |
-					anElement := BlElement new.
-					anElement userData at: #index put: 10.
-					anElement ]) userData at: #index)
+		assert: ((theChildren at: 10 ifAbsent: [
+				  | anElement |
+				  anElement := BlElement new.
+				  anElement userData at: #index put: 10.
+				  anElement ]) userData at: #index)
 		equals: 10.
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testEmptyChildren [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self newChildrenCollection.
 	self assert: theChildren size equals: 0.
@@ -148,7 +156,8 @@ BlChildrenArrayTest >> testEmptyChildren [
 
 { #category : #tests }
 BlChildrenArrayTest >> testEmptyChildrenExplicitCreation [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := BlChildrenArray new.
 	self assert: theChildren size equals: 0.
@@ -159,13 +168,13 @@ BlChildrenArrayTest >> testEmptyChildrenExplicitCreation [
 
 { #category : #tests }
 BlChildrenArrayTest >> testEmptyChildrenFactoryMethodCreation [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
-	theChildren := BlChildrenArray
-		from:
-			{BlElement new.
-			BlElement new.
-			BlElement new}.
+	theChildren := BlChildrenArray from: {
+			               BlElement new.
+			               BlElement new.
+			               BlElement new }.
 	self assert: theChildren size equals: 3.
 	self assert: theChildren isNotEmpty.
 	^ theChildren
@@ -173,7 +182,8 @@ BlChildrenArrayTest >> testEmptyChildrenFactoryMethodCreation [
 
 { #category : #tests }
 BlChildrenArrayTest >> testFirst [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren first userData at: #index) equals: 1.
@@ -182,7 +192,8 @@ BlChildrenArrayTest >> testFirst [
 
 { #category : #tests }
 BlChildrenArrayTest >> testIfEmpty [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: (theChildren ifEmpty: [ #empty ]) equals: #empty.
@@ -191,7 +202,8 @@ BlChildrenArrayTest >> testIfEmpty [
 
 { #category : #tests }
 BlChildrenArrayTest >> testIfEmptyNot [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren ifEmpty: [ #empty ]) equals: theChildren.
@@ -200,7 +212,8 @@ BlChildrenArrayTest >> testIfEmptyNot [
 
 { #category : #tests }
 BlChildrenArrayTest >> testIndexOf [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren indexOf: (theChildren at: 1)) equals: 1.
@@ -210,7 +223,8 @@ BlChildrenArrayTest >> testIndexOf [
 
 { #category : #tests }
 BlChildrenArrayTest >> testIndexOfUnknown [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren indexOf: BlElement new) equals: 0.
@@ -219,7 +233,8 @@ BlChildrenArrayTest >> testIndexOfUnknown [
 
 { #category : #tests }
 BlChildrenArrayTest >> testIsEmpty [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren isEmpty.
@@ -230,7 +245,8 @@ BlChildrenArrayTest >> testIsEmpty [
 
 { #category : #tests }
 BlChildrenArrayTest >> testIsNotEmpty [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren isNotEmpty not.
@@ -241,7 +257,8 @@ BlChildrenArrayTest >> testIsNotEmpty [
 
 { #category : #tests }
 BlChildrenArrayTest >> testLast [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren last userData at: #index) equals: 5.
@@ -250,35 +267,37 @@ BlChildrenArrayTest >> testLast [
 
 { #category : #tests }
 BlChildrenArrayTest >> testRemove [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren remove: (theChildren at: 3).
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 4.
-	self assert: indices equals: #(1 2 4 5).
+	self assert: indices equals: #( 1 2 4 5 ).
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testRemoveAll [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren indices |
 	theChildren := self fill: 5.
-	theChildren
-		removeAll:
-			{(theChildren at: 5).
+	theChildren removeAll: {
+			(theChildren at: 5).
 			(theChildren at: 3).
-			(theChildren at: 1)}.
+			(theChildren at: 1) }.
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 2.
-	self assert: indices equals: #(2 4).
+	self assert: indices equals: #( 2 4 ).
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testRemoveAt [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren indices |
 	theChildren := self fill: 5.
 	theChildren removeAt: 5.
@@ -286,13 +305,14 @@ BlChildrenArrayTest >> testRemoveAt [
 	theChildren removeAt: 1.
 	indices := theChildren collect: [ :each | each userData at: #index ].
 	self assert: theChildren size equals: 2.
-	self assert: indices equals: #(2 4).
+	self assert: indices equals: #( 2 4 ).
 	^ theChildren
 ]
 
 { #category : #tests }
 BlChildrenArrayTest >> testSecond [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: (theChildren second userData at: #index) equals: 2.
@@ -301,7 +321,8 @@ BlChildrenArrayTest >> testSecond [
 
 { #category : #tests }
 BlChildrenArrayTest >> testSize [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 5.
 	self assert: theChildren size equals: 5.
@@ -310,7 +331,8 @@ BlChildrenArrayTest >> testSize [
 
 { #category : #tests }
 BlChildrenArrayTest >> testSizeEmpty [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := self fill: 0.
 	self assert: theChildren size equals: 0.
