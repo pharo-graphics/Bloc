@@ -10,6 +10,7 @@ Class {
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
+	<sampleInstance>
 	
 	| aSpace |
 	aSpace := self testSpaceWithExactLayoutBoundary.
@@ -33,7 +34,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
-	
+	<sampleInstance>
 	| aSpace |
 	aSpace := self testExactLayoutBoundary01Pulse.
 	(aSpace root childNamed: #child) requestLayout.
@@ -59,7 +60,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
-	
+	<sampleInstance>
 	| aSpace aContainer aLayoutBoundary aChild |
 	aSpace := BlSpace new.
 	aSpace extent: 500 @ 400.

@@ -8,31 +8,27 @@ Class {
 	#category : #'Bloc-UnitedTests-Geometry'
 }
 
-{ #category : #metadata }
-BlHistogramGeometryTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlHistogramGeometryExamples'
-]
-
 { #category : #tests }
 BlHistogramGeometryTest >> testBottomToTop [
-	<gtExample>
+
+	<sampleInstance>
 	| aHistogram |
 	aHistogram := BlHistogramGeometry new
-		beBottomToTop;
-		values: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
+		              beBottomToTop;
+		              values: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
 	^ aHistogram
 ]
 
 { #category : #tests }
 BlHistogramGeometryTest >> testDefault [
-	<gtExample>
+
+	<sampleInstance>
 	| aHistogram |
 	aHistogram := BlHistogramGeometry new.
 	self assert: aHistogram extent equals: 150 @ 100.
 	self
 		assert: aHistogram values
-		equals: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
+		equals: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
 	self assert: aHistogram isBottomToTop.
 	self assert: aHistogram isTopToBottom not.
 	self assert: aHistogram isRightToLeft not.
@@ -45,30 +41,33 @@ BlHistogramGeometryTest >> testDefault [
 
 { #category : #tests }
 BlHistogramGeometryTest >> testLeftToRight [
-	<gtExample>
+
+	<sampleInstance>
 	| aHistogram |
 	aHistogram := BlHistogramGeometry new
-		beLeftToRight;
-		values: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
+		              beLeftToRight;
+		              values: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
 	^ aHistogram
 ]
 
 { #category : #tests }
 BlHistogramGeometryTest >> testRightToLeft [
-	<gtExample>
+
+	<sampleInstance>
 	| aHistogram |
 	aHistogram := BlHistogramGeometry new
-		beRightToLeft;
-		values: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
+		              beRightToLeft;
+		              values: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
 	^ aHistogram
 ]
 
 { #category : #tests }
 BlHistogramGeometryTest >> testTopToBottom [
-	<gtExample>
+
+	<sampleInstance>
 	| aHistogram |
 	aHistogram := BlHistogramGeometry new
-		beTopToBottom;
-		values: #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
+		              beTopToBottom;
+		              values: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
 	^ aHistogram
 ]

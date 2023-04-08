@@ -72,9 +72,8 @@ BlErrorHandlingTest >> sceneWith: aFaultyElement [
 
 { #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawing [
-	<gtExample>
-	<noTest>
-
+	<sampleInstance>
+	
 	| aFaultyElement theErrors aSceneElement |
 	self skip.
 	
@@ -97,8 +96,7 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawing [
 
 { #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
-	<gtExample>
-	<noTest>
+	<sampleInstance>
 
 	| aFaultyElement theErrors aSceneElement |
 	self skip.
@@ -130,8 +128,7 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 
 { #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenOnLayout [
-	<gtExample>
-	<noTest>
+	<sampleInstance>
 
 	| aSceneElement aFaultyElement theErrors |
 	self skip.

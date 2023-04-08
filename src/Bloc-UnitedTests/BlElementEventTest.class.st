@@ -29,13 +29,6 @@ BlElementEventTest >> container [
 				   build)
 ]
 
-{ #category : #metadata }
-BlElementEventTest >> originClassName [
-	"This test was generated from..."
-
-	^ 'BlElementEventExamples'
-]
-
 { #category : #'test seed' }
 BlElementEventTest >> parent [
 

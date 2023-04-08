@@ -8,15 +8,10 @@ Class {
 	#category : #'Bloc-UnitedTests-Geometry'
 }
 
-{ #category : #metadata }
-BlEllipseGeometryTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlEllipseGeometryExamples'
-]
-
 { #category : #tests }
 BlEllipseGeometryTest >> testDefault [
-	<gtExample>
+	<sampleInstance>
+	
 	| anEllipse |
 	anEllipse := BlEllipseGeometry new.
 	self assert: anEllipse extent equals: 150 @ 100.
