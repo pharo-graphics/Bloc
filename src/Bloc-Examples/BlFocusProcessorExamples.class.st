@@ -885,60 +885,60 @@ BlFocusProcessorExamples >> scripterElement [
 	
 	^ self elementWithFocusHandler
 		size: 600@400;
-		relocate: 50@50;
+		position: 50@50;
 		border: (BlBorder paint: Color gray width: 1);
 		background: Color white;
 		containerName: #parent;
-		addChild: (BlTextElement new text: ('#parent' asRopedText light fontSize: 11); relocate: 8@5);
+		addChild: (BlTextElement new text: ('#parent' asRopedText light fontSize: 11); position: 8@5);
 		addChildren: { 
 			self elementWithFocusHandler
 				containerName: #'container-1';
 				size: 240@320;
-				relocate: 40@40;
+				position: 40@40;
 				border: (BlBorder paint: Color gray width: 1);
 				background: (Color gray alpha: 0.1);
-				addChild: (BlTextElement new text: ('#''container-1''' asRopedText light fontSize: 11); relocate: 8@5);
+				addChild: (BlTextElement new text: ('#''container-1''' asRopedText light fontSize: 11); position: 8@5);
 				addChildren: { 
 					self elementWithFocusHandler
 						containerName: #'child-1';
 						size: 200@130;
-						relocate: 20@20;
+						position: 20@20;
 						background: (Color gray alpha: 0.3);
 						border: (BlBorder paint: Color lightGray width: 1);
-						addChild: (BlTextElement new text: ('#''child-1''' asRopedText light fontSize: 11); relocate: 8@5).
+						addChild: (BlTextElement new text: ('#''child-1''' asRopedText light fontSize: 11); position: 8@5).
 						
 					self elementWithFocusHandler
 						containerName: #'child-2';
 						size: 200@130;
-						relocate: 20@170;
+						position: 20@170;
 						background: (Color gray alpha: 0.3);
 						border: (BlBorder paint: Color lightGray width: 1);
-						addChild: (BlTextElement new text: ('#''child-2''' asRopedText light fontSize: 11); relocate: 8@5)
+						addChild: (BlTextElement new text: ('#''child-2''' asRopedText light fontSize: 11); position: 8@5)
 				}.
 				
 			self elementWithFocusHandler
 				containerName: #'container-2';
 				size: 240@320;
-				relocate: 320@40;
+				position: 320@40;
 				border: (BlBorder paint: Color gray width: 1);
 				background: (Color gray alpha: 0.1);
-				addChild: (BlTextElement new text: ('#''container-2''' asRopedText light fontSize: 11); relocate: 8@5);
+				addChild: (BlTextElement new text: ('#''container-2''' asRopedText light fontSize: 11); position: 8@5);
 				addChildren: { 
 					self elementWithFocusHandler
 						containerName: #'child-3';
 						size: 200@130;
-						relocate: 20@20;
+						position: 20@20;
 						background: (Color gray alpha: 0.3);
 						border: (BlBorder paint: Color lightGray width: 1);
-						addChild: (BlTextElement new text: ('#''child-3''' asRopedText light fontSize: 11); relocate: 8@5).
+						addChild: (BlTextElement new text: ('#''child-3''' asRopedText light fontSize: 11); position: 8@5).
 						
 					self elementWithFocusHandler
 						containerName: #'child-4';
 						size: 200@130;
-						relocate: 20@170;
+						position: 20@170;
 						background: (Color gray alpha: 0.3);
 						border: (BlBorder paint: Color lightGray width: 1);
-						addChild: (BlTextElement new text: ('#''child-4''' asRopedText light fontSize: 11); relocate: 8@5)
+						addChild: (BlTextElement new text: ('#''child-4''' asRopedText light fontSize: 11); position: 8@5)
 				}.
 		}
 ]
