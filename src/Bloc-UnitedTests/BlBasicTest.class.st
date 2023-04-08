@@ -7,13 +7,13 @@ Class {
 	#superclass : #TestCase,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
-	#category : #'Bloc-Examples-Basic'
+	#category : #'Bloc-UnitedTests-Basic'
 }
 
 { #category : #tests }
 BlBasicTest >> testBorderRopedText [
 
-	<gtExample>
+	<sampleInstance>
 	| aText |
 	aText := 'Text with border' asRopedText.
 	aText fontSize: 30.
