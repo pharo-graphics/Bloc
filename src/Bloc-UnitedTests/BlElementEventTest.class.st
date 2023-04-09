@@ -188,12 +188,12 @@ BlElementEventTest >> testPositionChanged [
 		addEventHandlerOn: BlElementPositionChangedEvent
 		do: [ positionChanged := positionChanged + 1 ].
 
-	child relocate: child position + (20 @ 20).
+	child position: child position + (20 @ 20).
 	child forceLayout.
 	self assert: positionChanged equals: 1.
 
 	"relocating child to the same position should not trigger an event"
-	child relocate: child position.
+	child position: child position.
 	child forceLayout.
 	self assert: positionChanged equals: 1.
 
@@ -217,7 +217,7 @@ BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEve
 		do: [ positionChanged := positionChanged + 1 ].
 
 
-	child relocate: child position.
+	child position: child position.
 	child forceLayout.
 	self assert: positionChanged equals: 0.
 

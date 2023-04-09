@@ -296,7 +296,7 @@ BlElementBoundsExamplesMigrated >> child [
 	
 	^ BlElement new
 		size: self childExtent;
-		relocate: self childPosition;
+		position: self childPosition;
 		background: Color red
 ]
 
@@ -316,7 +316,7 @@ BlElementBoundsExamplesMigrated >> parent [
 	
 	^ BlElement new
 		size: self parentExtent;
-		relocate: self parentPosition;
+		position: self parentPosition;
 		background: (Color gray alpha: 0.3)
 ]
 

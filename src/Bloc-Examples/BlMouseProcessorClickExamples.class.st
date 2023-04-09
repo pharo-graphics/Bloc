@@ -103,5 +103,5 @@ BlMouseProcessorClickExamples >> scripterElement [
 	
 	^ BlExampleEventsCountingElement new
 		size: 100@75;
-		relocate: 50@50
+		position: 50@50
 ]
