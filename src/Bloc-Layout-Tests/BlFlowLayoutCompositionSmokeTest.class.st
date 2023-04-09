@@ -40,7 +40,7 @@ BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
 	el := BlElement new
 		layout: BlFlowLayout new horizontal;
 		size: 166@300;
-		relocate: 200 @ 100;
+		position: 200 @ 100;
 		background: Color veryLightGray;
 		border: (BlBorder paint: Color lightGray width: 8);
 		padding: (BlInsets all: 8);
@@ -99,7 +99,7 @@ BlFlowLayoutCompositionSmokeTest class >> exampleText [
 			c horizontal exact: 600.
 			c vertical fitContent.
 			c padding: (BlInsets all: 10) ];
-		relocate: 100 @ 50;
+		position: 100 @ 50;
 		background: Color veryVeryLightGray;
 		border: (BlBorder paint: Color lightGray width: 8);
 		addChildren: theWords;
@@ -193,7 +193,7 @@ BlFlowLayoutCompositionSmokeTest >> floatingCells [
 	<sampleInstance>
 	^ self container
 		  size: 560 @ 400;
-		  relocate: 100 @ 50;
+		  position: 100 @ 50;
 		  addChildren: (2 timesCollect: [ self grayCell ]);
 		  addChild: self floatRedCell;
 		  addChildren: (30 timesCollect: [ self redCell ]);
