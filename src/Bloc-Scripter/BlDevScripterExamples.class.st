@@ -4,7 +4,7 @@ I exemplify {{gtClass:BlDevScripter}}.
 "
 Class {
 	#name : #BlDevScripterExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#instVars : [
 		'elementExamples'
 	],

@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTextOperatorExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Text-Examples-Model'
 }
 

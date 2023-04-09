@@ -1,35 +1,8 @@
 "
-I'm a TestCase that adapts the GT-style examples as SUnit.
-
-These are the rules for test in subclasses:
-- Any instance-side method with <gtExample> pragma is considered a test method.
-- Additionally, if a <gtExample> method has a <noTest> pragma, it's skipped.
-
+Do not use this class we will remove it.
 "
 Class {
 	#name : #BlExamplesTest,
-	#superclass : #TestCase,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-UnitedTests-Examples'
 }
-
-{ #category : #tests }
-BlExamplesTest class >> testSelectors [
-	| pragmas |
-	pragmas := #(#sampleInstance #gtExample).
-	^ self methods
-		  select: [ :eachM | 
-				(pragmas anySatisfy: [ :s | (eachM hasPragmaNamed: s)]) 
-					and: [ eachM selector isUnary ] ]
-		  thenCollect: [ :each | each selector ]
-]
-
-{ #category : #private }
-BlExamplesTest >> performTest [ 
-
-	| testMethod |
-	testMethod := self class methodNamed: testSelector asSymbol.
-	(testMethod hasPragmaNamed: #noTest)
-		ifTrue: [ self skip ].
-
-	^ super performTest
-]

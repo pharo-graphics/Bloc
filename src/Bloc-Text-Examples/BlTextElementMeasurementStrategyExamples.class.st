@@ -27,7 +27,7 @@ Now let's compare all text measurement strategies:
 "
 Class {
 	#name : #BlTextElementMeasurementStrategyExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Text-Examples-Measurement'
 }
 

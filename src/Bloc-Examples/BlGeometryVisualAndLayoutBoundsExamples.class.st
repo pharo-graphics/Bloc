@@ -65,7 +65,7 @@ The debugging mode is also possible to activate in the GT-Inspector's menu, next
 "
 Class {
 	#name : #BlGeometryVisualAndLayoutBoundsExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
 	#category : #'Bloc-Examples-Basic'

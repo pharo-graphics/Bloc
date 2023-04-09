@@ -4,7 +4,7 @@ I contain examples of more complicated pieces of text to exemplify the rope stru
 "
 Class {
 	#name : #BlRopedTextExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Text-Examples-Model'
 }
 

@@ -3,7 +3,7 @@ I exemplify how Bloc handles errors in different parts of the BlElement such as 
 "
 Class {
 	#name : #BlErrorHandlingExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Errors'
 }
 

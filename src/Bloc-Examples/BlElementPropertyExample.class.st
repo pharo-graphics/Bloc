@@ -26,105 +26,107 @@ Click on the buttons to the left from the rectangular element to see what happen
 
 "
 Class {
-	#name : #BlElementPropertyExplanation,
-	#superclass : #Object,
-	#category : #'Bloc-Docs-Element'
+	#name : #BlElementPropertyExample,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Examples-Documentation'
 }
 
 { #category : #properties }
-BlElementPropertyExplanation >> backgroundProperty [
-	<gtExample>
+BlElementPropertyExample >> backgroundProperty [
 
+	<sampleInstance>
 	^ BlElementBackgroundProperty new background: (Color gray alpha: 0.2)
 ]
 
 { #category : #properties }
-BlElementPropertyExplanation >> borderProperty [
-	<gtExample>
+BlElementPropertyExample >> borderProperty [
 
-	^ BlElementBorderProperty new border: (BlBorder paint: Color veryLightGray width: 2)
+	<sampleInstance>
+	^ BlElementBorderProperty new border:
+		  (BlBorder paint: Color veryLightGray width: 2)
 ]
 
 { #category : #examples }
-BlElementPropertyExplanation >> elementWithMultipleProperties [
-	<gtExample>
+BlElementPropertyExample >> elementWithMultipleProperties [
+
+	<sampleInstance>
 	| anElement |
-	
 	anElement := BlElement new.
-	anElement properties
-		addProperties: { 
+	anElement properties addProperties: {
 			self widthProperty.
 			self heightProperty.
 			self geometryProperty.
 			self backgroundProperty.
-			self borderProperty
-		}.
+			self borderProperty }.
 
 	^ anElement
 ]
 
 { #category : #properties }
-BlElementPropertyExplanation >> geometryProperty [
-	<gtExample>
+BlElementPropertyExample >> geometryProperty [
 
-	^ BlElementGeometryProperty new geometry: (BlRoundedRectangleGeometry cornerRadius: 4)
+	<sampleInstance>
+	^ BlElementGeometryProperty new geometry:
+		  (BlRoundedRectangleGeometry cornerRadius: 4)
 ]
 
 { #category : #properties }
-BlElementPropertyExplanation >> heightProperty [
-	<gtExample>
+BlElementPropertyExample >> heightProperty [
 
+	<sampleInstance>
 	^ BlElementLayoutVerticalResizerProperty new exact: 100
 ]
 
 { #category : #examples }
-BlElementPropertyExplanation >> propertyCleanUp [
-	<gtExample>
-	| backgroundProperty |
-	
-	backgroundProperty := self backgroundProperty.
-	
-	^ BlElement new
-		layout: (BlLinearLayout horizontal cellSpacing: 10);
-		constraintsDo: [ :c |
-			c horizontal fitContent.
-			c vertical matchParent ];
-		addChildren: { 
-			BlElement new
-				layout: (BlLinearLayout vertical cellSpacing: 10);
-				constraintsDo: [ :c |
-					c horizontal fitContent.
-					c vertical matchParent ];
-				addChildren: { 
-					BlTextElement new
-						text: 'Add background property' asRopedText;
-						border: (BlBorder paint: Color veryLightGray width: 1);
-						padding: (BlInsets all: 5);
-						labelMeasurement;
-						geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-						when: BlClickEvent do: [ :anEvent | (anEvent currentTarget parent parent childWithId: #targetElement) properties
-							addProperty: backgroundProperty ].
+BlElementPropertyExample >> propertyCleanUp [
 
-					BlTextElement new
-						text: 'Remove background property' asRopedText;
-						border: (BlBorder paint: Color veryLightGray width: 1);
-						padding: (BlInsets all: 5);
-						labelMeasurement;
-						geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
-						when: BlClickEvent do: [ :anEvent | (anEvent currentTarget parent parent childWithId: #targetElement) properties
-							removeProperty: backgroundProperty ]
-				
-				}.
-			
-			BlElement new
-				id: #targetElement;
-				size: 200@100;
-				border: (BlBorder paint: Color veryLightGray width: 2) }
+	<sampleInstance>
+	| backgroundProperty |
+	backgroundProperty := self backgroundProperty.
+
+	^ BlElement new
+		  layout: (BlLinearLayout horizontal cellSpacing: 10);
+		  constraintsDo: [ :c |
+			  c horizontal fitContent.
+			  c vertical matchParent ];
+		  addChildren: {
+				  (BlElement new
+					   layout: (BlLinearLayout vertical cellSpacing: 10);
+					   constraintsDo: [ :c |
+						   c horizontal fitContent.
+						   c vertical matchParent ];
+					   addChildren: {
+							   (BlTextElement new
+								    text: 'Add background property' asRopedText;
+								    border: (BlBorder paint: Color veryLightGray width: 1);
+								    padding: (BlInsets all: 5);
+								    labelMeasurement;
+								    geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+								    when: BlClickEvent do: [ :anEvent |
+									    (anEvent currentTarget parent parent childWithId:
+											     #targetElement) properties addProperty:
+											    backgroundProperty ]).
+
+							   (BlTextElement new
+								    text: 'Remove background property' asRopedText;
+								    border: (BlBorder paint: Color veryLightGray width: 1);
+								    padding: (BlInsets all: 5);
+								    labelMeasurement;
+								    geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
+								    when: BlClickEvent do: [ :anEvent |
+									    (anEvent currentTarget parent parent childWithId:
+											     #targetElement) properties removeProperty:
+											    backgroundProperty ]) }).
+
+				  (BlElement new
+					   id: #targetElement;
+					   size: 200 @ 100;
+					   border: (BlBorder paint: Color veryLightGray width: 2)) }
 ]
 
 { #category : #properties }
-BlElementPropertyExplanation >> widthProperty [
-	<gtExample>
+BlElementPropertyExample >> widthProperty [
 
+	<sampleInstance>
 	^ BlElementLayoutHorizontalResizerProperty new exact: 200
 ]

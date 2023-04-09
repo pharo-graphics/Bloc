@@ -1,6 +1,6 @@
 Class {
 	#name : #BlWrapAroundChildrenLayoutExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Layout-Examples-Fit'
 }
 

@@ -6,7 +6,7 @@ DOES NOT WORK
 "
 Class {
 	#name : #BlAnimationExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
 	#category : #'Bloc-Examples-Animation'
