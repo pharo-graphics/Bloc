@@ -10,7 +10,7 @@ Class {
 
 { #category : #'examples - attributes' }
 BlAttributeRopeExamples >> attributes_empty_0_to_0 [
-	<gtExample>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	
 	aRope := self small_empty.

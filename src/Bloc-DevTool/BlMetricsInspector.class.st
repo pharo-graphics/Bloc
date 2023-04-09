@@ -84,8 +84,8 @@ BlMetricsInspector >> newMetric [
 
 { #category : #updating }
 BlMetricsInspector >> updateMetrics: anElement [
+
 	| geometryBounds |
-	
 	geometryBounds := anElement geometryBounds.	
 	marginMetric insets: anElement margin.
 	paddingMetric insets: anElement padding.

@@ -31,7 +31,7 @@ BlDevCrossover >> initialize [
 	crossover preventMeAndChildrenMouseEvents.
 	crossover constraintsDo: [ :c |
 		c ignoreByLayout.
-		c infinite holder startIgnoring.
+		"c infinite holder startIgnoring."
 		c horizontal matchParent.
 		c vertical matchParent ].
 

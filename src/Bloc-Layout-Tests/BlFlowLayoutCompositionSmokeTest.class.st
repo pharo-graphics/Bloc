@@ -3,7 +3,7 @@ Pay attention no assertion... smoke tests.
 "
 Class {
 	#name : #BlFlowLayoutCompositionSmokeTest,
-	#superclass : #TestCase,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Layout-Tests'
 }
 

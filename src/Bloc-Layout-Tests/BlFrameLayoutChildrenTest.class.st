@@ -8,12 +8,6 @@ Class {
 	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : #metadata }
-BlFrameLayoutChildrenTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlFrameLayoutChildrenExamples'
-]
-
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
 	<gtExample>
