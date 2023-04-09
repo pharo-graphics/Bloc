@@ -20,12 +20,6 @@ BlSelectionTest >> monotoneSelection [
 	^ BlMonotoneSelection
 ]
 
-{ #category : #metadata }
-BlSelectionTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlSelectionExamples'
-]
-
 { #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom0To1 [
 

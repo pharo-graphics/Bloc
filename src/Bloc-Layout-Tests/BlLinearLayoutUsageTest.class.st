@@ -57,7 +57,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthLTR [
 	el := BlElement new
 		layout: BlLinearLayout horizontal;
 		size: 450 @ 150;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		padding: (BlInsets all: 10);
 		background: Color blue;
 		addChildren:
@@ -92,7 +92,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthRTL [
 	el := BlElement new
 		layout: BlLinearLayout horizontal rightToLeft;
 		size: 450 @ 150;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		padding: (BlInsets all: 10);
 		background: Color blue;
 		addChildren:
@@ -124,7 +124,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListLTR [
 	el := BlElement new
 		layout: BlLinearLayout horizontal;
 		size: 300 @ 80;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren:
 			{e1.
@@ -155,7 +155,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListRTL [
 	el := BlElement new
 		layout: BlLinearLayout horizontal rightToLeft;
 		size: 300 @ 80;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color veryVeryLightGray;
 		addChildren:
 			{e1.
@@ -180,7 +180,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomLTR [
 	el := BlElement new
 		layout: BlLinearLayout horizontal;
 		size: 300 @ 80;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren:
 			{e1.
@@ -205,7 +205,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomRTL [
 	el := BlElement new
 		layout: BlLinearLayout horizontal rightToLeft;
 		size: 300 @ 80;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren:
 			{e1.
@@ -239,7 +239,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightLTR [
 	el := BlElement new
 		layout: BlLinearLayout horizontal;
 		size: 300 @ 80;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren:
 			{e1.
@@ -273,7 +273,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightRTL [
 	el := BlElement new
 		layout: BlLinearLayout horizontal rightToLeft;
 		size: 300 @ 80;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren:
 			{e1.
@@ -303,7 +303,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightLRT [
 	el := BlElement new
 		layout: BlLinearLayout vertical;
 		size: 200 @ 300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren:
 			{e1.
@@ -333,7 +333,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightRTL [
 	el := BlElement new
 		layout: BlLinearLayout vertical rightToLeft;
 		size: 200 @ 300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren:
 			{e1.
@@ -367,7 +367,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalList [
 	el := BlElement new
 		layout: BlLinearLayout vertical;
 		size: 80 @ 300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		padding: (BlInsets all: 10);
 		background: Color blue;
 		addChildren:
@@ -396,7 +396,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalListFixedHeight [
 	el := BlElement new
 		layout: BlLinearLayout vertical;
 		size: 80 @ 300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		padding: (BlInsets all: 10);
 		background: Color blue;
 		addChildren:

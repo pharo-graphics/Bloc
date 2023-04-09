@@ -24,12 +24,12 @@ BlEventExamples >> childConsumesEventWithHandler [
 	clicks := OrderedCollection new.
 	
 	parent := self redElement.
-	parent position: 100@100.
+	parent relocate: 100@100.
 	parent size: 100@100.
 	parent addEventHandlerOn: BlClickEvent do: [ :anEvent | anEvent consumed: true. clicks add: Color red ].
 	
 	child := self blueElement.
-	child position: 10@10.
+	child relocate: 10@10.
 	child size: 50@50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent | anEvent consumed: true. clicks add: Color blue ].
 	
@@ -49,12 +49,12 @@ BlEventExamples >> childDoesNotConsumeEventWithHandler [
 	clicks := OrderedCollection new.
 	
 	parent := self redElement.
-	parent position: 100@100.
+	parent relocate: 100@100.
 	parent size: 100@100.
 	parent addEventHandlerOn: BlClickEvent do: [ :anEvent | anEvent consumed: true. clicks add: Color red ].
 	
 	child := self blueElement.
-	child position: 10@10.
+	child relocate: 10@10.
 	child size: 50@50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent | anEvent consumed: false. clicks add: Color blue ].
 	
@@ -122,12 +122,12 @@ BlEventExamples >> parentWithEventFilter [
 	clicks := OrderedCollection new.
 	
 	parent := self redElement.
-	parent position: 100@100.
+	parent relocate: 100@100.
 	parent size: 100@100.
 	parent addEventFilterOn: BlClickEvent do: [ :anEvent | anEvent consumed: true. clicks add: Color red ].
 	
 	child := self blueElement.
-	child position: 10@10.
+	child relocate: 10@10.
 	child size: 50@50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent | anEvent consumed: true. clicks add: Color blue ].
 	
@@ -154,7 +154,7 @@ BlEventExamples >> simulateClick [
 	
 	element := self blueElement.
 	element size: 100@100.
-	element position: 0@0.
+	element relocate: 0@0.
 	
 	mouseDown := mouseUp := click := 0.
 	
@@ -317,7 +317,7 @@ BlEventExamples >> simulateClickOnTransformedAndRelocated [
 
 	element := self simulateClick.
 	element size: 10@10.
-	element position: 500@300.
+	element relocate: 500@300.
 	element transform
 		scaleBy: 15@15;
 		translateBy: (300@0) negated;
@@ -387,7 +387,7 @@ BlEventExamples >> simulateClickOutside [
 	
 	element := self blueElement.
 	element size: 100@100.
-	element position: 100@100.
+	element relocate: 100@100.
 	
 	mouseDown := mouseUp := click := 0.
 	
@@ -412,7 +412,7 @@ BlEventExamples >> simulateMouseMoveInside [
 	
 	element := self blueElement.
 	element size: 100@100.
-	element position: 100@100.
+	element relocate: 100@100.
 	
 	mouseMove := mouseEnter := 0.
 	
@@ -434,7 +434,7 @@ BlEventExamples >> simulateMouseMoveOutside [
 	
 	element := self blueElement.
 	element size: 100@100.
-	element position: 100@100.
+	element relocate: 100@100.
 	
 	mouseLeave := mouseMove := mouseEnter := 0.
 	

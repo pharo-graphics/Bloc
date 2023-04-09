@@ -101,7 +101,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_element_2 [
 	^ BlElement new
 		id: #parent_2;
 		size: self bounds_in_space_element_extent;
-		position: 50@50;
+		relocate: 50@50;
 		border: (BlBorder paint: (Color red alpha: 0.2) width: 2)
 ]
 

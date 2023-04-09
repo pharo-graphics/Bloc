@@ -69,21 +69,21 @@ BlSpaceFixture >> buildClippingAbsolutelyTransparentElement [
 
 	parent := builder addToRoot
 		background: BlBackground transparent;
-		position: 5 asPoint;
+		relocate: 5 asPoint;
 		size: 10 asPoint;
 		clipChildren: false;
 		yourself.
 
 	child := (builder addTo: parent)
 		background: BlBackground transparent;
-		position: 5 asPoint;
+		relocate: 5 asPoint;
 		size: 10 asPoint;
 		clipChildren: true;
 		yourself.
 	
 	grandChild := (builder addTo: child)
 		background: Color blue;
-		position: 5 asPoint;
+		relocate: 5 asPoint;
 		size: 50 asPoint;
 		yourself.
 	
@@ -113,7 +113,7 @@ BlSpaceFixture >> buildClippingMany [
 			
 			depth > 0 ifTrue: [
 				(newElementBlock value: anElement value: depth-1).
-				(newElementBlock value: anElement value: depth-1) position: elementSize/2 ].
+				(newElementBlock value: anElement value: depth-1) relocate: elementSize/2 ].
 			
 			anElement ].
 	
@@ -137,17 +137,17 @@ BlSpaceFixture >> buildClippingOutskirts [
 			background: aColor;
 			border: (BlBorder paint: builder nextColor width: width);
 			outskirts: anOutskirt;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: 35 asPoint;
 			yourself.
 		child := (builder addTo: element)
 			size: 20 asPoint;
-			position: -2 asPoint;
+			relocate: -2 asPoint;
 			border: (BlBorder paint: Color yellow width: 1);
 			yourself.
 		(builder addTo: child)
 			size: 20 asPoint;
-			position: 10 asPoint;
+			relocate: 10 asPoint;
 			geometry: BlCircleGeometry new;
 			border: (BlBorder paint: Color red width: 1);
 			yourself ].
@@ -179,21 +179,21 @@ BlSpaceFixture >> buildClippingWithoutBorders [
 
 	elementA := builder addToRoot
 		geometry: BlRectangleGeometry new;
-		position: 10 asPoint;
+		relocate: 10 asPoint;
 		size: 10 asPoint;
 		clipChildren: false;
 		yourself.
 
 	elementB := (builder addTo: elementA)
 		geometry: BlRectangleGeometry new;
-		position: 5 asPoint;
+		relocate: 5 asPoint;
 		size: 10 asPoint;
 		clipChildren: true;
 		yourself.
 		
 	elementC := (builder addTo: elementB)
 		geometry: BlRectangleGeometry new;
-		position: 5 asPoint;
+		relocate: 5 asPoint;
 		size: 10 asPoint;
 		yourself
 
@@ -263,20 +263,20 @@ BlSpaceFixture >> buildElevation [
 	"A and children are on top"
 	elementA := builder addCircle
 		elevation: (BlRelativeElevation elevation: 101);
-		position: 10@10;
+		relocate: 10@10;
 		clipChildren: false;
 		yourself.
 
 	"B is below A"
 	elementB := builder addCircle
 		elevation: (BlGlobalElevation elevation: 90);
-		position: 25@10;
+		relocate: 25@10;
 		yourself.
 
 	"C is below A"
 	elementC := builder addCircle
 		elevation: (BlGlobalElevation elevation: 100);
-		position: 50@10;
+		relocate: 50@10;
 		yourself.
 
 
@@ -285,7 +285,7 @@ BlSpaceFixture >> buildElevation [
 	be 101+5 => D would overlap E"
 	childD := (builder addTo: elementA)
 		elevation: (BlRelativeElevation elevation: 5);
-		position: 10 @ 10;
+		relocate: 10 @ 10;
 		size: 30 asPoint;
 		yourself.
 
@@ -293,14 +293,14 @@ BlSpaceFixture >> buildElevation [
 	elements than siblings"
 	childE := (builder addTo: elementA)
 		elevation: (BlGlobalElevation elevation: 102);
-		position: 20 @ 20;
+		relocate: 20 @ 20;
 		size: 30 asPoint;
 		yourself.
 
 	"F goes below all siblings"
 	childF := (builder addTo: elementA)
 		elevation: (BlRelativeElevation elevation: -10);
-		position: 30 @ 30;
+		relocate: 30 @ 30;
 		size: 30 asPoint;
 		yourself.
 
@@ -313,7 +313,7 @@ BlSpaceFixture >> buildEmptyGeometry [
 	| a b c d e f |
 	"1st: Clipping ON"
 	a := builder addToRoot
-		position: 0 asPoint;
+		relocate: 0 asPoint;
 		size: 50 asPoint;
 		background: Color red.
 	b := (builder addTo: a)
@@ -327,7 +327,7 @@ BlSpaceFixture >> buildEmptyGeometry [
 
 	"2nd: Same pattern, but clipping OFF."
 	d := builder addToRoot
-		position: 50 asPoint;
+		relocate: 50 asPoint;
 		size: 50 asPoint;
 		background: Color red.
 	e := (builder addTo: d)
@@ -383,7 +383,7 @@ BlSpaceFixture >> buildGaussianShadowsByGeometry [
 	addElementBlock := [ :aGeometry :backgroundAlpha :shadowAlpha :shadowOffset |
 		builder addToRoot
 			geometry: aGeometry;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: elementSize asPoint;
 			background: (Color blue alpha: backgroundAlpha);
 			effect: (BlGaussianShadowEffect
@@ -513,7 +513,7 @@ BlSpaceFixture >> buildImagesAndTransformations [
 		aForm := Smalltalk ui icons iconNamed: #warning.
 		builder addCircle
 			background: aForm;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: aForm extent;
 			yourself ].
 
@@ -613,14 +613,14 @@ BlSpaceFixture >> buildOpacities [
 	builder addToRoot
 		background: ((BlPaintBackground paint: fillColor asBlPaint) opacity: 0.75; yourself);
 		opacity: 0.5;
-		position: 10 @ 10;
+		relocate: 10 @ 10;
 		size: size;
 		yourself.
 
 	builder addToRoot
 		background: ((BlPaintBackground paint: fillColor) opacity: 0.5; yourself);
 		opacity: 0.75;
-		position: 40 @ 10;
+		relocate: 40 @ 10;
 		size: size;
 		yourself.
 
@@ -631,7 +631,7 @@ BlSpaceFixture >> buildOpacities [
 			width: 10;
 			opacity: 0.5;
 			build);
-		position: 10 @ 40;
+		relocate: 10 @ 40;
 		size: size;
 		yourself.
 
@@ -642,7 +642,7 @@ BlSpaceFixture >> buildOpacities [
 			width: 10;
 			opacity: 0.75;
 			build);
-		position: 40 @ 40;
+		relocate: 40 @ 40;
 		size: size;
 		yourself.
 
@@ -662,7 +662,7 @@ BlSpaceFixture >> buildOutskirtsAndOpaqueBorders [
 			background: backgroundColor;
 			border: (BlBorder paint: borderColor width: 5);
 			outskirts: aBlOutskirt;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: 35 asPoint;
 			yourself ].
 		
@@ -703,7 +703,7 @@ BlSpaceFixture >> buildOutskirtsAndTranslucentBorders [
 			background: backgroundColor;
 			border: (BlBorder paint: borderColor width: 5);
 			outskirts: aBlOutskirt;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: 35 asPoint;
 			yourself ].
 		
@@ -745,7 +745,7 @@ BlSpaceFixture >> buildOutskirtsOfPolygons [
 	"Opaques"
 	outskirts do: [ :eachOutskirt |
 			builder addHexagonalPolygon
-				position: positionGenerator next;
+				relocate: positionGenerator next;
 				border: (BlBorder paint: builder nextColor width: width);
 				outskirts: eachOutskirt;
 				transformDo: [ :t | t topLeftOrigin; scaleBy: scale ];
@@ -754,7 +754,7 @@ BlSpaceFixture >> buildOutskirtsOfPolygons [
 	"Translucents"
 	outskirts do: [ :eachOutskirt |
 			builder addHexagonalPolygon
-				position: positionGenerator next;
+				relocate: positionGenerator next;
 				background: builder nextColor translucent;
 				border: (BlBorder paint: builder nextColor width: width);
 				outskirts: eachOutskirt;
@@ -764,7 +764,7 @@ BlSpaceFixture >> buildOutskirtsOfPolygons [
 	"Transparents"
 	outskirts do: [ :eachOutskirt |
 			builder addHexagonalPolygon
-				position: positionGenerator next;
+				relocate: positionGenerator next;
 				background: Color transparent;
 				border: (BlBorder paint: builder nextColor width: width);
 				outskirts: eachOutskirt;
@@ -779,12 +779,12 @@ BlSpaceFixture >> buildOverlappingCircles [
 	| elementA elementB |
 
 	elementA := builder addCircle
-		position: 10 asPoint;
+		relocate: 10 asPoint;
 		size: 10 asPoint;
 		yourself.
 
 	elementB := builder addCircle
-		position: 15 asPoint;
+		relocate: 15 asPoint;
 		size: 10 asPoint;
 		yourself.
 
@@ -795,11 +795,11 @@ BlSpaceFixture >> buildOverlappingRectangles [
 	"Note: This code assumes that default geometry is a rectangle."
 
 	builder addToRoot
-		position: 10 asPoint;
+		relocate: 10 asPoint;
 		size: 10 asPoint.
 
 	builder addToRoot
-		position: 15 asPoint;
+		relocate: 15 asPoint;
 		size: 10 asPoint.
 
 ]
@@ -811,13 +811,13 @@ BlSpaceFixture >> buildOverlappingTriangles [
 
 	elementA := builder addToRoot
 		geometry: BlTriangleGeometry new;
-		position: 10 asPoint;
+		relocate: 10 asPoint;
 		size: 10 asPoint;
 		yourself.
 
 	elementB := builder addToRoot
 		geometry: BlTriangleGeometry new;
-		position: 15 asPoint;
+		relocate: 15 asPoint;
 		size: 10 asPoint;
 		yourself
 
@@ -863,7 +863,7 @@ BlSpaceFixture >> buildSimpleShadowsByGeometry [
 	addElementBlock := [ :aGeometry :backgroundAlpha :shadowAlpha :shadowOffset |
 		builder addToRoot
 			geometry: aGeometry;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: elementSize asPoint;
 			background: (Color blue alpha: backgroundAlpha);
 			effect: (BlSimpleShadowEffect
@@ -955,7 +955,7 @@ BlSpaceFixture >> buildStrokeStyles [
 		by: 14.
 
 	builder addPolyline
-		position: positionGenerator next;
+		relocate: positionGenerator next;
 		border: (BlBorder builder
 			width: width;
 			capButt;
@@ -964,7 +964,7 @@ BlSpaceFixture >> buildStrokeStyles [
 			build).
 
 	builder addPolyline
-		position: positionGenerator next;
+		relocate: positionGenerator next;
 		border: (BlBorder builder
 			width: width;
 			capSquare;
@@ -973,7 +973,7 @@ BlSpaceFixture >> buildStrokeStyles [
 			build).
 
 	builder addPolyline
-		position: positionGenerator next;
+		relocate: positionGenerator next;
 		border: (BlBorder builder
 			width: width;
 			capRound;
@@ -983,7 +983,7 @@ BlSpaceFixture >> buildStrokeStyles [
 			build).
 
 	builder addPolyline
-		position: positionGenerator next;
+		relocate: positionGenerator next;
 		border: (BlBorder builder
 			dashArray: #(0 5);
 			capRound;
@@ -993,7 +993,7 @@ BlSpaceFixture >> buildStrokeStyles [
 			build).
 
 	builder addPolyline
-		position: positionGenerator next;
+		relocate: positionGenerator next;
 		border: (BlBorder builder
 			dashArray: #(3 5);
 			dashOffset: 5;
@@ -1004,7 +1004,7 @@ BlSpaceFixture >> buildStrokeStyles [
 			build).
 
 	builder addPolyline
-		position: positionGenerator next;
+		relocate: positionGenerator next;
 		border: (BlBorder builder
 			paint: builder nextColor;
 			capSquare;
@@ -1179,7 +1179,7 @@ BlSpaceFixture >> buildTextTransformations [
 			t scaleBy: 2. ].
 
 	(builder addTextToRoot: (self ropedTextFor: 'Hello!'))
-		position: 50 asPoint;
+		relocate: 50 asPoint;
 		transformDo: [ :t |
 			t translateBy: 15 asPoint.
 			t skewX: 45 ].
@@ -1201,14 +1201,14 @@ BlSpaceFixture >> buildTransformRotate [
 
 	elementA := builder addToRoot
 		geometry: BlTriangleGeometry new;
-		position: 0 asPoint;
+		relocate: 0 asPoint;
 		size: 25 asPoint;
 		transformDo: [ :t | t rotateBy: -135 ];
 		yourself.
 
 	elementB := builder addToRoot
 		geometry: BlRectangleGeometry new;
-		position: 20 asPoint;
+		relocate: 20 asPoint;
 		size: 20 asPoint;
 		transformDo: [ :t | t rotateBy: 45 ];
 		yourself.
@@ -1216,7 +1216,7 @@ BlSpaceFixture >> buildTransformRotate [
 	elementC := (builder addTo: elementB)
 		geometry: BlRectangleGeometry new;
 		transformDo: [ :t | t rotateBy: 180 ];
-		position: 5 asPoint;
+		relocate: 5 asPoint;
 		size: 10 asPoint;
 		yourself
 ]
@@ -1229,7 +1229,7 @@ BlSpaceFixture >> buildTransformScale [
 	"Center is at 10@10"
 	elementA := builder addToRoot
 		geometry: BlCircleGeometry new;
-		position: 0 asPoint;
+		relocate: 0 asPoint;
 		size: 20 asPoint;
 		transformDo: [ :t | t scaleBy: 1/2 ];
 		yourself.
@@ -1237,7 +1237,7 @@ BlSpaceFixture >> buildTransformScale [
 	"Center is 25@25 (10/2 + 20)"
 	elementB := builder addToRoot
 		geometry: BlCircleGeometry new;
-		position: 20 asPoint;
+		relocate: 20 asPoint;
 		size: 10 asPoint;
 		transformDo: [ :t | t scaleBy: 2 ];
 		yourself.
@@ -1245,7 +1245,7 @@ BlSpaceFixture >> buildTransformScale [
 	"C is in the center of it's parent, as they have the same size."
 	elementC := (builder addTo: elementB)
 		geometry: BlCircleGeometry new;
-		position: 0 asPoint;
+		relocate: 0 asPoint;
 		size: 10 asPoint;
 		transformDo: [ :t | t scaleBy: 0.5 ];
 		yourself
@@ -1294,7 +1294,7 @@ BlSpaceFixture >> buildVariantsOf: aGeometryFactoryBlock [
 			border: (BlBorder paint: borderColor width: 5);
 			background: backgroundColor;
 			outskirts: aBlOutskirt;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: 35 asPoint;
 			yourself ].
 	
@@ -1366,7 +1366,7 @@ BlSpaceFixture >> buildVariantsOfAll: aBlElementGeometryCollection [
 			geometry: each;
 			border: (BlBorder paint: builder nextColor width: 2);
 			background: builder nextColor;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: 30 asPoint;
 			yourself ].
 
@@ -1403,7 +1403,7 @@ BlSpaceFixture >> buildVariantsOfAnnulusSectorAngles [
 				endAngle: anotherAngle;
 				innerRadius: innerRadius;
 				outerRadius: outerRadius);
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			background: Color black;
 			size: pixelSize asPoint;
 			yourself ].
@@ -1521,7 +1521,7 @@ BlSpaceFixture >> buildVariantsOfCircleSectorAngles [
 				endAngle: anotherAngle;
 				innerRadius: innerRadius;
 				outerRadius: outerRadius);
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			background: Color black;
 			size: pixelSize asPoint;
 			yourself ].
@@ -1579,7 +1579,7 @@ BlSpaceFixture >> buildVariantsOfEllipse [
 			geometry: BlEllipseGeometry new;
 			border: (BlBorder paint: builder nextColor translucent width: 10);
 			background: builder nextColor translucent;
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			size: each;
 			outskirts: BlOutskirts outside;
 			yourself ].
@@ -1619,7 +1619,7 @@ BlSpaceFixture >> buildVariantsOfLinelikeGeometry: aGeometry [
 			geometry: aGeometry;
 			outskirts: BlOutskirts centered;
 			border: (BlBorder paint: builder nextColor width: 10);
-			position: 10 asPoint;
+			relocate: 10 asPoint;
 			transformDo: each;
 			yourself ].
 ]
@@ -1638,7 +1638,7 @@ BlSpaceFixture >> buildVariantsOfOutskirtCustomizedWith: aBlock [
 
 	addElementBlock := [ :eachOutskirt :backgroundColor |
 		builder addHexagonalPolygon
-			position: positionGenerator next;
+			relocate: positionGenerator next;
 			background: backgroundColor;
 			border: (BlBorder paint: builder nextColor width: borderWidth);
 			outskirts: eachOutskirt;

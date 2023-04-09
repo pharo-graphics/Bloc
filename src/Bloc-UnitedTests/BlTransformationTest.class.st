@@ -93,7 +93,7 @@ BlTransformationTest >> testReflection [
 	self skip.
 	"opacity tests should be revisited comparing float was never a good idea."
 	element := BlBasicTest new testRectangleWithImage.
-	element position: self position.
+	element relocate: self position.
 	element transform
 		flipX;
 		flipY;

@@ -68,6 +68,6 @@ BlVisualSelectionHandler >> selectionChanged [
 	aSelectionBounds := container globalBoundsToLocal: aSelectionBounds.
 
 	selection
-		position: aSelectionBounds origin;
+		relocate: aSelectionBounds origin;
 		size: aSelectionBounds extent
 ]

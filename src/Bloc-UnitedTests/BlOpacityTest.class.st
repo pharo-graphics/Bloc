@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlOpacity
 Class {
 	#name : #BlOpacityTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#category : #'Bloc-UnitedTests-Basic'
 }
 
 { #category : #'tests seed' }

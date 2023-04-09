@@ -180,10 +180,10 @@ BlGeometryTest >> testElTxBounds [
 
 	g forceLayout.
 
-	self assert: g position = (10 @ 10).
-	self assert: n position = (10 @ 10).
-	self assert: g positionInSpace = (10 @ 10).
-	self assert: n positionInSpace = (20 @ 20).
-	self assert: n transformedBounds = (0 @ 0 corner: 100 @ 100).
-	self assert: g transformedBounds = (0 @ 0 corner: 100 @ 100)
+	self assert: g position equals: (10 @ 10).
+	self assert: n position equals: (10 @ 10).
+	self assert: g positionInSpace equals: (10 @ 10).
+	self assert: n positionInSpace equals: (20 @ 20).
+	self assert: n transformedBounds equals: (0 @ 0 corner: 100 @ 100).
+	self assert: g transformedBounds equals: (0 @ 0 corner: 100 @ 100)
 ]

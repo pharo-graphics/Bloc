@@ -42,7 +42,7 @@ BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
 		size: 300@300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 };
 		yourself.
@@ -78,7 +78,7 @@ BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
 		size: 300@300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 };
 		yourself.
@@ -119,7 +119,7 @@ BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
 		size: 300@300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 };
 		yourself.
@@ -142,7 +142,7 @@ BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 	el := BlElement new
 		layout: BlGridLayout horizontal;
 		size: 400@400;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.
@@ -169,7 +169,7 @@ BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 	el := BlElement new
 		layout: (BlGridLayout horizontal cellSpacing: 20);
 		size: 400@200;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.
@@ -206,7 +206,7 @@ BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
 		size: 300@300;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 };
 		yourself.
@@ -282,7 +282,7 @@ BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 	el := BlElement new
 		layout: (BlGridLayout new columnCount: 2);
 		size: 400@400;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3. e4 };
 		yourself.
@@ -310,7 +310,7 @@ BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 		constraintsDo: [ :c |
 			c horizontal exact: 400.
 			c vertical exact: 400 ];
-		position: 0 @ 0;
+		relocate: 0 @ 0;
 		background: Color blue;
 		addChildren: children;
 		yourself.
@@ -333,7 +333,7 @@ BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 	el := BlElement new
 		layout: BlGridLayout vertical;
 		size: 400@400;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.
@@ -360,7 +360,7 @@ BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 	el := BlElement new
 		layout: (BlGridLayout vertical cellSpacing: 20);
 		size: 200@400;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2 };
 		yourself.

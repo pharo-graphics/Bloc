@@ -67,7 +67,7 @@ BlFrameLayoutCompositionTest >> testExample [
 	container := self container
 		layout: BlFrameLayout new;
 		size: 350 @ 350;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		addChildren:
 			{yellow.
 			green.
@@ -96,7 +96,7 @@ BlFrameLayoutCompositionTest >> testExampleReverseOrder [
 	container := self container
 		layout: BlFrameLayout new;
 		size: 350 @ 350;
-		position: 200 @ 100;
+		relocate: 200 @ 100;
 		addChildren:
 			{red.
 			green.

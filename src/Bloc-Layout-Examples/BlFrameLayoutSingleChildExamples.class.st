@@ -1014,7 +1014,7 @@ BlFrameLayoutSingleChildExamples >> relocateChildLargerWithPadding [
 	child := self childElementWithVisualProperties.
 	child size: 200@100.
 	"relocate more than padding"
-	child position: 50@75.
+	child relocate: 50@75.
 
 	parent := self parentWithFrameLayoutAndFixedSize.
 	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).
@@ -1039,7 +1039,7 @@ BlFrameLayoutSingleChildExamples >> relocateChildSmallWithPadding [
 	child := self childElementWithVisualProperties.
 	child size: 200@100.
 	"relocate less than padding"
-	child position: 10@5.
+	child relocate: 10@5.
 
 	parent := self parentWithFrameLayoutAndFixedSize.
 	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).
@@ -1063,7 +1063,7 @@ BlFrameLayoutSingleChildExamples >> relocateChildToZeroWithPadding [
 
 	child := self childElementWithVisualProperties.
 	child size: 200@100.
-	child position: 0@0.
+	child relocate: 0@0.
 
 	parent := self parentWithFrameLayoutAndFixedSize.
 	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).
@@ -1090,7 +1090,7 @@ BlFrameLayoutSingleChildExamples >> relocateChildWithoutAlignmentLargerWithPaddi
 		c frame vertical alignNone ].
 	child size: 200@100.
 	"relocate more than padding"
-	child position: 50@75.
+	child relocate: 50@75.
 
 	parent := self parentWithFrameLayoutAndFixedSize.
 	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).
@@ -1118,7 +1118,7 @@ BlFrameLayoutSingleChildExamples >> relocateChildWithoutAlignmentSmallWithPaddin
 		c frame vertical alignNone ].
 	child size: 200@100.
 	"relocate less than padding"
-	child position: 10@5.
+	child relocate: 10@5.
 
 	parent := self parentWithFrameLayoutAndFixedSize.
 	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).
@@ -1145,7 +1145,7 @@ BlFrameLayoutSingleChildExamples >> relocateChildWithoutAlignmentToZeroWithPaddi
 		c frame horizontal alignNone.
 		c frame vertical alignNone ].
 	child size: 200@100.
-	child position: 0@0.
+	child relocate: 0@0.
 
 	parent := self parentWithFrameLayoutAndFixedSize.
 	parent padding: (BlInsets top: 50 left: 25 bottom: 10 right: 15).

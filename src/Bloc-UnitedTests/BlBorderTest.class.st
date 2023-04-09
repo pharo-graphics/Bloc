@@ -5,18 +5,13 @@ I have been automatically converted and probably manually tweaked from BlBorderE
 Class {
 	#name : #BlBorderTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#category : #'Bloc-UnitedTests-Basic'
 }
-
-{ #category : #metadata }
-BlBorderTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlBorderExamples'
-]
 
 { #category : #tests }
 BlBorderTest >> testChangeOpacityError [
 
+	<sampleInstance>
 	| aBorder anError |
 	aBorder := self testColorGrayBorder.
 
@@ -32,6 +27,7 @@ BlBorderTest >> testChangeOpacityError [
 { #category : #tests }
 BlBorderTest >> testChangePaintError [
 
+	<sampleInstance>
 	| aBorder anError |
 	aBorder := self testColorGrayBorder.
 
@@ -46,7 +42,8 @@ BlBorderTest >> testChangePaintError [
 
 { #category : #tests }
 BlBorderTest >> testChangeStyleError [
-
+	
+	<sampleInstance>
 	| aBorder anError |
 	aBorder := self testColorGrayBorder.
 
@@ -62,6 +59,7 @@ BlBorderTest >> testChangeStyleError [
 { #category : #tests }
 BlBorderTest >> testChangeWidthError [
 
+	<sampleInstance>
 	| aBorder anError |
 	aBorder := self testColorGrayBorder.
 
@@ -77,6 +75,7 @@ BlBorderTest >> testChangeWidthError [
 { #category : #'test seed' }
 BlBorderTest >> testColorGrayBorder [
 
+	<sampleInstance>
 	| aBorder |
 	aBorder := BlBorder paint: Color gray.
 
@@ -99,6 +98,7 @@ BlBorderTest >> testColorGrayBorder [
 { #category : #tests }
 BlBorderTest >> testColorGrayBorderWithExplicitWidth [
 
+	<sampleInstance>
 	| aBorder |
 	aBorder := BlBorder paint: Color gray width: 10.
 
@@ -121,6 +121,7 @@ BlBorderTest >> testColorGrayBorderWithExplicitWidth [
 { #category : #tests }
 BlBorderTest >> testCopyWithOpacity [
 
+	<sampleInstance>
 	| anOldBorder aBorder |
 	anOldBorder := self testColorGrayBorder.
 	aBorder := anOldBorder copyWithOpacity: 0.5.
@@ -144,6 +145,7 @@ BlBorderTest >> testCopyWithOpacity [
 { #category : #tests }
 BlBorderTest >> testCopyWithPaint [
 
+	<sampleInstance>
 	| anOldBorder aBorder |
 	anOldBorder := self testColorGrayBorder.
 	aBorder := anOldBorder copyWithPaint: Color blue.
@@ -167,6 +169,7 @@ BlBorderTest >> testCopyWithPaint [
 { #category : #tests }
 BlBorderTest >> testCopyWithStyle [
 
+	<sampleInstance>
 	| anOldBorder aBorder |
 	anOldBorder := self testColorGrayBorder.
 	aBorder := anOldBorder copyWithStyle: BlStrokeStyle dashed.
@@ -190,6 +193,7 @@ BlBorderTest >> testCopyWithStyle [
 { #category : #tests }
 BlBorderTest >> testCopyWithWidth [
 
+	<sampleInstance>
 	| anOldBorder aBorder |
 	anOldBorder := self testColorGrayBorder.
 	aBorder := anOldBorder copyWithWidth: 10.

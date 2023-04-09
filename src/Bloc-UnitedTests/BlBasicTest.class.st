@@ -5,27 +5,20 @@ I have been automatically converted and probably manually tweaked from BlBasicEx
 Class {
 	#name : #BlBasicTest,
 	#superclass : #TestCase,
-	#traits : 'TBlExample',
-	#classTraits : 'TBlExample classTrait',
-	#category : #'Bloc-Examples-Basic'
+	#category : #'Bloc-UnitedTests-Basic'
 }
 
 { #category : #tests }
 BlBasicTest >> testBorderRopedText [
-
-	<gtExample>
-	| aText |
-	aText := 'Text with border' asRopedText.
-	aText fontSize: 30.
-	aText foreground: Color gray.
-	aText thin.
-
-	self assert: aText rope attributes equals: {
-			(BlFontSizeAttribute size: 30).
-			(BlTextForegroundAttribute paint: Color gray).
-			BlFontWeightAttribute thin }.
-
-	^ aText
+<sampleInstance>	
+| aText |
+aText := 'Text with border' asRopedText.
+aText fontSize: 30.
+aText foreground: Color gray.
+aText thin.
+self assert: aText rope attributes equals: { (BlFontSizeAttribute size: 30).
+(BlTextForegroundAttribute paint: Color gray). BlFontWeightAttribute thin }.
+^ aText
 ]
 
 { #category : #tests }

@@ -24,9 +24,9 @@ BlWrapAroundChildrenLayoutExamples >> containerScaledWithNodes [
 
 	aContainer := self container.
 	aContainer transformDo: [ :t | t scaleBy: 0.5 ].
-	aContainer addChild: (aChildA := self node position: 150@50).
-	aContainer addChild: (aChildB := self node position: 50@150).
-	aContainer addChild: (aChildC := self node position: 250@250).
+	aContainer addChild: (aChildA := self node relocate: 150@50).
+	aContainer addChild: (aChildB := self node relocate: 50@150).
+	aContainer addChild: (aChildC := self node relocate: 250@250).
 
 	aContainer forceLayout.
 	self assert: aContainer bounds asRectangle equals: ((30@30) negated extent: 260@260).
@@ -43,9 +43,9 @@ BlWrapAroundChildrenLayoutExamples >> containerWithNodes [
 	| aContainer aChildA aChildB aChildC |
 
 	aContainer := self container.
-	aContainer addChild: (aChildA := self node position: 150@50).
-	aContainer addChild: (aChildB := self node position: 50@150).
-	aContainer addChild: (aChildC := self node position: 250@250).
+	aContainer addChild: (aChildA := self node relocate: 150@50).
+	aContainer addChild: (aChildB := self node relocate: 50@150).
+	aContainer addChild: (aChildC := self node relocate: 250@250).
 
 	aContainer forceLayout.
 	self assert: aContainer bounds asRectangle equals: (30@30 extent: 260@260).

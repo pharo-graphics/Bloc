@@ -132,7 +132,7 @@ BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	element := self element.
 	element background: Color blue.
 	element size: 100@100.
-	element position: 0@0.
+	element relocate: 0@0.
 	element forceLayout.
 	
 	anUpdater := BlElementBoundsUpdater new.

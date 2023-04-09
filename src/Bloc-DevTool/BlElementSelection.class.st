@@ -72,7 +72,7 @@ BlElementSelection >> hasInformation [
 BlElementSelection >> hideInfo [
 
 	self padding: BlInsets empty.
-	self position: self selectionPosition.
+	self relocate: self selectionPosition.
 	self size: self selectionExtent.
 	
 	self effect: BlNullEffect new.
