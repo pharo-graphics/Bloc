@@ -5,8 +5,6 @@ I have been automatically converted and probably manually tweaked from BlBasicEx
 Class {
 	#name : #BlBasicTest,
 	#superclass : #TestCase,
-	#traits : 'TBlExample',
-	#classTraits : 'TBlExample classTrait',
 	#category : #'Bloc-UnitedTests-Basic'
 }
 
