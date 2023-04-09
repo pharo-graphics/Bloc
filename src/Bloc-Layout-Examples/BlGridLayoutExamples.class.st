@@ -1,6 +1,6 @@
 Class {
 	#name : #BlGridLayoutExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#traits : 'TBlLayoutExamplesSetup',
 	#classTraits : 'TBlLayoutExamplesSetup classTrait',
 	#category : #'Bloc-Layout-Examples-Grid'

@@ -1,6 +1,6 @@
 Class {
 	#name : #BlTaskAtQueueExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#traits : 'TAssertable',
 	#classTraits : 'TAssertable classTrait',
 	#category : #'Bloc-Examples-Tasks'

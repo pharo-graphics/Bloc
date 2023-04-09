@@ -4,7 +4,7 @@ I contain examples of space related events
 "
 Class {
 	#name : #BlSpaceEventExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Event'
 }
 

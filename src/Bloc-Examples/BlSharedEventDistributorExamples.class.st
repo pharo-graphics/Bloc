@@ -4,7 +4,7 @@ I exemplify {{gtClass:BlSharedEventDistributor}}.
 "
 Class {
 	#name : #BlSharedEventDistributorExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-EventHandling'
 }
 

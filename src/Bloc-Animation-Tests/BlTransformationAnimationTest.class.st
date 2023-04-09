@@ -28,28 +28,32 @@ BlTransformationAnimationTest >> containerElement [
 
 { #category : #tests }
 BlTransformationAnimationTest >> containerWithOneElement [
+	<sampleInstance>	
 	^ self testContainerWithOneElement
 ]
 
 { #category : #tests }
 BlTransformationAnimationTest >> linearTranslationAnimation [
+	<sampleInstance>	
 	^ self testLinearTranslationAnimation
 ]
 
 { #category : #tests }
 BlTransformationAnimationTest >> linearTranslationAnimationWithDelayAndLoop [
+	<sampleInstance>
 	^ self testLinearTranslationAnimationWithDelayAndLoop
 	
 ]
 
 { #category : #tests }
 BlTransformationAnimationTest >> linearTranslationAnimationWithDurationAndEasing [
+	<sampleInstance>
 	^ self testLinearTranslationAnimationWithDurationAndEasing
 ]
 
 { #category : #tests }
 BlTransformationAnimationTest >> testAnimationElement [
-	
+	<sampleInstance>
 	^ BlElement new
 		size: 50 @ 50;
 		background: Color veryLightGray;
@@ -58,7 +62,7 @@ BlTransformationAnimationTest >> testAnimationElement [
 
 { #category : #tests }
 BlTransformationAnimationTest >> testContainerElement [
-	
+	<sampleInstance>
 	^ BlElement new
 		size: 350 @ 350;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 5);
@@ -67,7 +71,7 @@ BlTransformationAnimationTest >> testContainerElement [
 
 { #category : #tests }
 BlTransformationAnimationTest >> testContainerWithOneElement [
-
+	<sampleInstance>
 	| container element |
 	container := self containerElement.
 	element := self animationElement.
@@ -78,7 +82,7 @@ BlTransformationAnimationTest >> testContainerWithOneElement [
 
 { #category : #'smoke tests' }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimation [
-
+	<sampleInstance>
 	| container element animation |
 	animation := self linearTranslationAnimation.
 	element := self animationElement.
@@ -91,7 +95,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimation [
 
 { #category : #tests }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDelayAndLoop [
-
+	<sampleInstance>
 	| container animation |
 	animation := self linearTranslationAnimationWithDelayAndLoop.
 	container := self containerWithOneElement.
@@ -101,7 +105,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDe
 
 { #category : #tests }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDurationAndEasing [
-	
+	<sampleInstance>
 	| container animation |
 	animation := self linearTranslationAnimationWithDurationAndEasing.
 	container := self containerWithOneElement.
@@ -111,7 +115,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDu
 
 { #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimation [
-
+	<sampleInstance>
 	| animation |
 	animation := BlTransformAnimation new.
 	animation transform
@@ -127,7 +131,7 @@ BlTransformationAnimationTest >> testLinearTranslationAnimation [
 
 { #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimationWithDelayAndLoop [
-	
+	<sampleInstance>
 	| animation |
 	animation := BlTransformAnimation new.
 	animation transform
@@ -146,7 +150,7 @@ BlTransformationAnimationTest >> testLinearTranslationAnimationWithDelayAndLoop 
 
 { #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimationWithDurationAndEasing [
-
+	<sampleInstance>
 	| animation |
 	animation := BlTransformAnimation new.
 	animation transform

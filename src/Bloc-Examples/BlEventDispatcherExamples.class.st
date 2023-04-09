@@ -4,7 +4,7 @@ I am a collection of event dispatcher examples
 "
 Class {
 	#name : #BlEventDispatcherExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-EventHandling'
 }
 

@@ -5,7 +5,7 @@ This is a very important use case for complex UIs that involve vertical lists
 "
 Class {
 	#name : #BlFitContentVerticallyInHorizontalLayoutsExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Layout-Examples-Fit'
 }
 

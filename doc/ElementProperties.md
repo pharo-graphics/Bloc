@@ -1,4 +1,3 @@
-"
 ## Element property
 
 When dealing with properties of a visual element we often find ourselves in a situation when some properties should be propagated to children or should be resolved in a local context (pt units), in a context of the direct parent (em units) or even in a global context of the whole scene graph (rem units). In some othercases, properties can be added, removed or changed multiple times per frame. Ideally, we would like to actually modify element's state at most once per frame. `BlElementProperty` helps us to do exactly that.
@@ -34,49 +33,4 @@ As an example let's take a  BlElementBackgroundProperty which implements both me
 `BlElementPropertyExamples>>#backgroundProperty`
 Click on the buttons to the left from the rectangular element to see what happens when the background property is added and then removed from an element: once executed `BlElementPropertyExplanation>>#propertyCleanUp`.
  
-"
-Class {
-	#name : #BlElementProperty,
-	#superclass : #Object,
-	#category : #'Bloc-Basic-Properties'
-}
 
-{ #category : #'api - property' }
-BlElementProperty >> applyOnElement: anElement [
-]
-
-{ #category : #testing }
-BlElementProperty >> canPropagateToChildren [
-	^ false
-]
-
-{ #category : #'api - property' }
-BlElementProperty >> cleanUpOnElement: anElement [
-]
-
-{ #category : #private }
-BlElementProperty >> maybeApplyOnElement: anElement [
-	"Private method to be polymorphic with a property with status"
-
-	self applyOnElement: anElement
-]
-
-{ #category : #private }
-BlElementProperty >> maybeCleanUpOnElement: anElement [
-	"Private method to be polymorphic with a property with status"
-]
-
-{ #category : #'api - property' }
-BlElementProperty >> property [
-	^ self
-]
-
-{ #category : #'api - property' }
-BlElementProperty >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
-	^ self
-]
-
-{ #category : #'api - property' }
-BlElementProperty >> type [
-	^ self class
-]

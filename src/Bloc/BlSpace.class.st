@@ -764,10 +764,10 @@ BlSpace >> doComputePropertiesOf: aCollectionOfElements [
 BlSpace >> doLayout [
 	| layoutCounter maxLayoutCount |
 
-	self
+	"self
 		assert: [ self isLayoutRequested ]
 		description: [ 'Root element must request layout in order to update it' ].
-
+	"
 	[
 		layoutCounter := 0.
 		maxLayoutCount := 100.

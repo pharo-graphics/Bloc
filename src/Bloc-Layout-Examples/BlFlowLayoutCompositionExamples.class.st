@@ -3,7 +3,7 @@ I contain examples of a flow layout
 "
 Class {
 	#name : #BlFlowLayoutCompositionExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Layout-Examples-FlowMigrated'
 }
 

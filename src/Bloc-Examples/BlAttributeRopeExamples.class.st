@@ -4,7 +4,7 @@ I contain examples of an attribute rope
 "
 Class {
 	#name : #BlAttributeRopeExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Rope'
 }
 

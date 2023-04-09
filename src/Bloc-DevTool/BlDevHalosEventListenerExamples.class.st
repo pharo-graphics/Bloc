@@ -4,7 +4,7 @@ I exemplify {{gtClass:BlDevHalosEventListener}}.
 "
 Class {
 	#name : #BlDevHalosEventListenerExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-DevTool-Examples'
 }
 

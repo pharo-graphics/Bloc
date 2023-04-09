@@ -28,14 +28,14 @@ In the example below, notice how parent container receives mouse out event when 
 
 "
 Class {
-	#name : #BlMouseOverOutAndEnterLeaveEventExplanation,
-	#superclass : #Object,
-	#category : #'Bloc-Docs-Events'
+	#name : #BlMouseOverOutAndEnterLeaveEventExample,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Examples-Documentation'
 }
 
-{ #category : #'examples - events' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> basicMouseEnterAndLeave [
-	<gtExample>
+{ #category : #'test - events' }
+BlMouseOverOutAndEnterLeaveEventExample >> basicMouseEnterAndLeave [
+	<sampleInstance>
 	| aContainer |
 	
 	aContainer := self elementWithoutChildren.
@@ -51,9 +51,9 @@ BlMouseOverOutAndEnterLeaveEventExplanation >> basicMouseEnterAndLeave [
 	^ aContainer
 ]
 
-{ #category : #'examples - events' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> basicMouseOverAndOut [
-	<gtExample>
+{ #category : #'test - events' }
+BlMouseOverOutAndEnterLeaveEventExample >> basicMouseOverAndOut [
+	<sampleInstance>
 	| aContainer |
 	
 	aContainer := self elementWithoutChildren.
@@ -70,23 +70,23 @@ BlMouseOverOutAndEnterLeaveEventExplanation >> basicMouseOverAndOut [
 ]
 
 { #category : #'examples - element' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> elementWithChildren [
-	<gtExample>
+BlMouseOverOutAndEnterLeaveEventExample >> elementWithChildren [
+
+	<sampleInstance>
 	| aContainer aChildA aChildB |
-	
 	aContainer := self elementWithoutChildren.
-		
+
 	aChildA := BlElement new
-		background: Color white;
-		effect: self shadow;
-		relocate: 30@50;
-		size: 100@100.
-		
+		           background: Color white;
+		           effect: self shadow;
+		           position: 30 @ 50;
+		           size: 100 @ 100.
+
 	aChildB := BlElement new
-		background: Color white;
-		effect: self shadow;
-		relocate: 170@50;
-		size: 100@100.
+		           background: Color white;
+		           effect: self shadow;
+		           position: 170 @ 50;
+		           size: 100 @ 100.
 
 	aContainer addChild: aChildA as: #left.
 	aContainer addChild: aChildB as: #right.
@@ -95,29 +95,29 @@ BlMouseOverOutAndEnterLeaveEventExplanation >> elementWithChildren [
 ]
 
 { #category : #'examples - element' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> elementWithoutChildren [
-	<gtExample>
+BlMouseOverOutAndEnterLeaveEventExample >> elementWithoutChildren [
+
+	<sampleInstance>
 	| aContainer |
-	
 	aContainer := BlElement new
-		background: Color white;
-		effect: self shadow;
-		relocate: 50@50;
-		size: 300@200.
+		              background: Color white;
+		              effect: self shadow;
+		              position: 50 @ 50;
+		              size: 300 @ 200.
 
 	^ aContainer
 ]
 
 { #category : #private }
-BlMouseOverOutAndEnterLeaveEventExplanation >> markElement: anElement [
+BlMouseOverOutAndEnterLeaveEventExample >> markElement: anElement [
 	anElement
 		background: Color veryVeryLightGray;
 		border: (BlBorder paint: Color red width: 2)
 ]
 
-{ #category : #'examples - events' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> mouseEnterAndLeaveConsumed [
-	<gtExample>
+{ #category : #'test - events' }
+BlMouseOverOutAndEnterLeaveEventExample >> mouseEnterAndLeaveConsumed [
+	<sampleInstance>
 	| anElement aMouseEnterHandler aMouseLeaveHandler |
 	
 	aMouseEnterHandler := BlEventHandler
@@ -143,9 +143,9 @@ BlMouseOverOutAndEnterLeaveEventExplanation >> mouseEnterAndLeaveConsumed [
 	^ anElement
 ]
 
-{ #category : #'examples - events' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> mouseEnterAndLeaveNotConsumed [
-	<gtExample>
+{ #category : #'test - events' }
+BlMouseOverOutAndEnterLeaveEventExample >> mouseEnterAndLeaveNotConsumed [
+	<sampleInstance>
 	| anElement aMouseEnterHandler aMouseLeaveHandler |
 	
 	aMouseEnterHandler := BlEventHandler
@@ -165,9 +165,9 @@ BlMouseOverOutAndEnterLeaveEventExplanation >> mouseEnterAndLeaveNotConsumed [
 	^ anElement
 ]
 
-{ #category : #'examples - events' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> mouseOverAndOutConsumed [
-	<gtExample>
+{ #category : #'test - events' }
+BlMouseOverOutAndEnterLeaveEventExample >> mouseOverAndOutConsumed [
+	<sampleInstance>
 	| anElement aMouseOverHandler aMouseOutHandler |
 	
 	aMouseOverHandler := BlEventHandler
@@ -193,9 +193,9 @@ BlMouseOverOutAndEnterLeaveEventExplanation >> mouseOverAndOutConsumed [
 	^ anElement
 ]
 
-{ #category : #'examples - events' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> mouseOverAndOutNotConsumed [
-	<gtExample>
+{ #category : #'test - events' }
+BlMouseOverOutAndEnterLeaveEventExample >> mouseOverAndOutNotConsumed [
+	<sampleInstance>
 	| anElement aMouseOverHandler aMouseOutHandler |
 	
 	aMouseOverHandler := BlEventHandler
@@ -219,9 +219,9 @@ BlMouseOverOutAndEnterLeaveEventExplanation >> mouseOverAndOutNotConsumed [
 	^ anElement
 ]
 
-{ #category : #'examples - events' }
-BlMouseOverOutAndEnterLeaveEventExplanation >> quickComparison [
-	<gtExample>
+{ #category : #'test - events' }
+BlMouseOverOutAndEnterLeaveEventExample >> quickComparison [
+	<sampleInstance>
 	| aContainer |
 	
 	aContainer := BlElement new
@@ -244,16 +244,17 @@ BlMouseOverOutAndEnterLeaveEventExplanation >> quickComparison [
 			self mouseEnterAndLeaveConsumed margin: (BlInsets left: 20 right: 20).
 			self mouseOverAndOutConsumed margin: (BlInsets left: 20 right: 20) }.
 			
-	^ aContainer asScalableElement
+	^ aContainer
 ]
 
 { #category : #private }
-BlMouseOverOutAndEnterLeaveEventExplanation >> shadow [
+BlMouseOverOutAndEnterLeaveEventExample >> shadow [
+	<sampleInstance>
 	^ BlGaussianShadowEffect color: (Color black alpha: 0.5) width: 7 offset: 2@2
 ]
 
 { #category : #private }
-BlMouseOverOutAndEnterLeaveEventExplanation >> unmarkElement: anElement [
+BlMouseOverOutAndEnterLeaveEventExample >> unmarkElement: anElement [
 	anElement
 		background: Color white;
 		border: BlBorder empty

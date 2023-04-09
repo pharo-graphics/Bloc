@@ -4,7 +4,7 @@ I contain examples of how to use key combination
 "
 Class {
 	#name : #BlKeyCombinationExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-KeyBinding'
 }
 

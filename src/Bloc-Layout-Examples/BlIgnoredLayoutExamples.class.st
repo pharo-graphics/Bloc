@@ -1,6 +1,6 @@
 Class {
 	#name : #BlIgnoredLayoutExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Layout-Examples-Ignored'
 }
 

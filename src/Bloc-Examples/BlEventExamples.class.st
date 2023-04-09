@@ -4,7 +4,7 @@ I contain examples various aspects of event dispatching and handling mechanism s
 "
 Class {
 	#name : #BlEventExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Event'
 }
 

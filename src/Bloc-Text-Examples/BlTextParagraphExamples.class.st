@@ -4,7 +4,7 @@ I contain examples of a text paragraph
 "
 Class {
 	#name : #BlTextParagraphExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Text-Examples-Measurement'
 }
 

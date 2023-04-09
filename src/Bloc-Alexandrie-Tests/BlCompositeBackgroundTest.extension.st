@@ -8,7 +8,7 @@ BlCompositeBackgroundTest >> testAeApplyTo [
 	
 	backgroundList := OrderedCollection with: (BlBackground paint: Color blue).
 	background := BlCompositeBackground withAll: backgroundList.
-	blElement := (BlElement new) background: background.
+	blElement := BlElement new background: background.
 	space root addChild: blElement.
 	
 	space aeAsForm. "check no errors"
