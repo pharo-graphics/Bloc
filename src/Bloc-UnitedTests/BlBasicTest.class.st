@@ -12,8 +12,8 @@ Class {
 
 { #category : #tests }
 BlBasicTest >> testBorderRopedText [
-
 	<sampleInstance>
+	
 	| aText |
 	aText := 'Text with border' asRopedText.
 	aText fontSize: 30.
