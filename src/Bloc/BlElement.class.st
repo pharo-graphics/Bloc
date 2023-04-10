@@ -3158,9 +3158,13 @@ BlElement >> privateRequestingLayout: aBoolean [
 
 { #category : #'api - properties' }
 BlElement >> properties [
+
 	^ self userData
 		at: #blocProperties
-		ifAbsentPut: [ BlElementCurrentProperties new element: self ]
+		ifAbsentPut: [
+			BlElementCurrentProperties new
+				element: self;
+				yourself ]
 ]
 
 { #category : #'api - bounds' }
