@@ -31,7 +31,7 @@ BlKeyCombinationExamples >> compulsoryCombination [
 
 { #category : #examples }
 BlKeyCombinationExamples >> keyLogger [
-	<gtExample>
+	<sampleInstance>
 
 	^ BlElement new
 		size: 200@200;
@@ -75,10 +75,6 @@ BlKeyCombinationExamples >> leftShift [
 
 { #category : #examples }
 BlKeyCombinationExamples >> meta: aKeyAlternative left: aLeftMeta right: aRightMeta [
-	<gtExample>
-	<dependsOn: #alternativeCombination>
-	<dependsOn: #leftMeta>
-	<dependsOn: #rightMeta>
 	
 	^ aKeyAlternative
 		key: aLeftMeta;
@@ -102,10 +98,6 @@ BlKeyCombinationExamples >> rightShift [
 
 { #category : #examples }
 BlKeyCombinationExamples >> shift: aShiftAlternative arrowLeft: anArrowLeft and: aCompulsoryCombination [
-	<gtExample>
-	<dependsOn: #shift:left:right:>
-	<dependsOn: #arrowLeft>
-	<dependsOn: #compulsoryCombination>
 	
 	^ aCompulsoryCombination
 		with: aShiftAlternative;
@@ -115,10 +107,6 @@ BlKeyCombinationExamples >> shift: aShiftAlternative arrowLeft: anArrowLeft and:
 
 { #category : #examples }
 BlKeyCombinationExamples >> shift: aKeyAlternative left: aLeftShift right: aRightShift [
-	<gtExample>
-	<dependsOn: #alternativeCombination>
-	<dependsOn: #leftShift>
-	<dependsOn: #rightShift>
 	
 	^ aKeyAlternative
 		key: aLeftShift;

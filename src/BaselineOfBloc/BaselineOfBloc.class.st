@@ -110,9 +110,7 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Layout-Tests' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ];
 				package: #'Bloc-Layout-Examples' with: [
-					spec requires: #('Bloc-Layout') ];
-				package: #'Bloc-Docs' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Text-Elements') ].
+					spec requires: #('Bloc-Layout') ].
 
 			].
 ]

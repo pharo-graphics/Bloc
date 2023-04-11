@@ -23,7 +23,7 @@ BlSpaceExamplesMigrated >> animatedElement [
 	^ BlElement new
 		background: Color blue;
 		size: 150@150;
-		relocate: 100@100;
+		position: 100@100;
 		addAnimation: self infiniteAnimation
 ]
 
