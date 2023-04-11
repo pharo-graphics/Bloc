@@ -413,22 +413,6 @@ BlBlocUIManager >> multiLineRequest: queryString initialAnswer: defaultAnswer an
 			answerHeight}
 ]
 
-{ #category : #events }
-BlBlocUIManager >> onPrimitiveError: aString [ 
-	| message |
-
-	message := String
-				streamContents: [:s | 
-					| context |
-					s nextPutAll: '*** System error handling failed ***'.
-					s cr; nextPutAll: aString.
-					context := thisContext sender sender.
-					20
-						timesRepeat: [context == nil
-								ifFalse: [s cr; print: (context := context sender)]]].
-	Smalltalk tools emergencyDebugger askForEmergencyEvaluatorOrExitWithText: message.
-]
-
 { #category : #services }
 BlBlocUIManager >> proceed: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
