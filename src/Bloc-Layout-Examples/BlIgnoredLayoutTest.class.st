@@ -1,13 +1,12 @@
 Class {
-	#name : #BlIgnoredLayoutExamples,
-	#superclass : #BlExampleTest,
+	#name : #BlIgnoredLayoutTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Layout-Examples-Ignored'
 }
 
 { #category : #'examples - alignment' }
-BlIgnoredLayoutExamples >> alignment_is_stable [
-	"https://github.com/feenkcom/gtoolkit/issues/1236"
-	<gtExample>
+BlIgnoredLayoutTest >> testAlignmentIsStable [
+	<sampleInstance>
 	| aContainer aChild |
 	
 	aChild := BlElement new

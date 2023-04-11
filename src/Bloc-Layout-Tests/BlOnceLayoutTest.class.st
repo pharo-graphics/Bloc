@@ -8,15 +8,9 @@ Class {
 	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : #metadata }
-BlOnceLayoutTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlOnceLayoutExamples'
-]
-
 { #category : #tests }
 BlOnceLayoutTest >> testOnceLinearLayoutExact [
-	<gtExample>
+	<sampleInstance>
 	| aContainer aChildA aChildB aChildC |
 	aContainer := self parentWithFixedSize.
 	aContainer
@@ -69,7 +63,7 @@ BlOnceLayoutTest >> testOnceLinearLayoutExact [
 
 { #category : #tests }
 BlOnceLayoutTest >> testOnceLinearLayoutMatchParent [
-	<gtExample>
+	<sampleInstance>
 	| aContainer aChildA aChildB aChildC |
 	aContainer := self parentWithFixedSize.
 	aContainer

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBackgroundTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-DocumentationExamples'
+	#category : #'Bloc-Examples-Background'
 }
 
 { #category : #'background - builder' }

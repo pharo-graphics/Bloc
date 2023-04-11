@@ -960,7 +960,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 	child := self testChildElementWithVisualProperties.
 	child size: 200 @ 100.
 	"relocate more than padding"
-	child relocate: 50 @ 75.
+	child position: 50 @ 75.
 	parent := self testParentWithFrameLayoutAndFixedSize.
 	parent
 		padding:
@@ -985,7 +985,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 	child := self testChildElementWithVisualProperties.
 	child size: 200 @ 100.
 	"relocate less than padding"
-	child relocate: 10 @ 5.
+	child position: 10 @ 5.
 	parent := self testParentWithFrameLayoutAndFixedSize.
 	parent
 		padding:
@@ -1009,7 +1009,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child size: 200 @ 100.
-	child relocate: 0 @ 0.
+	child position: 0 @ 0.
 	parent := self testParentWithFrameLayoutAndFixedSize.
 	parent
 		padding:
@@ -1038,7 +1038,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPaddi
 			c frame vertical alignNone ].
 	child size: 200 @ 100.
 	"relocate more than padding"
-	child relocate: 50 @ 75.
+	child position: 50 @ 75.
 	parent := self testParentWithFrameLayoutAndFixedSize.
 	parent
 		padding:
@@ -1067,7 +1067,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPaddin
 			c frame vertical alignNone ].
 	child size: 200 @ 100.
 	"relocate less than padding"
-	child relocate: 10 @ 5.
+	child position: 10 @ 5.
 	parent := self testParentWithFrameLayoutAndFixedSize.
 	parent
 		padding:
@@ -1095,7 +1095,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentToZeroWithPaddi
 			c frame horizontal alignNone.
 			c frame vertical alignNone ].
 	child size: 200 @ 100.
-	child relocate: 0 @ 0.
+	child position: 0 @ 0.
 	parent := self testParentWithFrameLayoutAndFixedSize.
 	parent
 		padding:

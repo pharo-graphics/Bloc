@@ -49,7 +49,8 @@ BlRootLayoutTest >> childExactWidth: aNumber [
 
 { #category : #tests }
 BlRootLayoutTest >> parentWithFixedSize [
-	<gtExample>
+	<sampleInstance>
+	
 	| element |
 	element :=  BlElement new
 		border: (BlBorder builder dashed; paint: Color red; width: 3; build);
@@ -68,7 +69,7 @@ BlRootLayoutTest >> parentWithFixedSize [
 
 { #category : #tests }
 BlRootLayoutTest >> testChildElementMatchingParent [
-	<gtExample>
+	<sampleInstance>
 	| element |
 	element := self testChildElementWithVisualProperties.
 	element constraintsDo: [ :c | 
@@ -96,5 +97,25 @@ BlRootLayoutTest >> testChildElementWithVisualProperties [
 	self assert: element border paint equals: (Color blue alpha: 0.5) asBlPaint.
 	self assert: element background equals: (Color cyan alpha: 0.2) asBlBackground.
 		
+	^ element
+]
+
+{ #category : #tests }
+BlRootLayoutTest >> testParentWithFixedSize [
+	<sampleInstance>
+	
+	| element |
+	element :=  BlElement new
+		border: (BlBorder builder dashed; paint: Color red; width: 3; build);
+		size: 400@300;
+		yourself.
+		
+	self assert: element position equals: 0@0.
+	self assert: element extent equals: 0@0.
+	self assert: element constraints horizontal resizer size equals: 400.
+	self assert: element constraints vertical resizer size equals: 300.
+	self assert: element border width equals: 3.
+	self assert: element border paint equals: Color red asBlPaint.
+	
 	^ element
 ]
