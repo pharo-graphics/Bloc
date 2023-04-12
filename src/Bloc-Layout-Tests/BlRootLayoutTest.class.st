@@ -86,7 +86,7 @@ BlRootLayoutTest >> testChildElementMatchingParent [
 
 { #category : #tests }
 BlRootLayoutTest >> testChildElementWithVisualProperties [
-	<gtExample>
+	<sampleInstance>
 	| element |
 	element :=  BlElement new
 		background: (Color cyan alpha: 0.2);

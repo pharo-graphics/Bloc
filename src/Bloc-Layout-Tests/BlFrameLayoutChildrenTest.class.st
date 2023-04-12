@@ -10,7 +10,7 @@ Class {
 
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
-	<gtExample>
+	<sampleInstance>
 	| element |
 	element := self testChildElementWithVisualProperties.
 	element
@@ -25,7 +25,7 @@ BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
 
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
-	<gtExample>
+	<sampleInstance>
 	| element |
 	element := self parentWithFixedSize.
 	element layout: BlFrameLayout new.
@@ -35,7 +35,7 @@ BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
 
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize300per250 [
-	<gtExample>
+	<sampleInstance>
 	| element |
 	element := BlElement new
 		layout: BlFrameLayout new;
