@@ -3,13 +3,13 @@ I have been automatically converted and probably manually tweaked from BlFitCont
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlFitContentVerticallyInHorizontalLayoutsTest,
+	#name : #BlFitContentVerticallyInHorizontalLayoutTest,
 	#superclass : #TestCase,
 	#category : #'Bloc-Layout-Tests'
 }
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> blue [
+BlFitContentVerticallyInHorizontalLayoutTest >> blue [
 
 	<sampleInstance>
 	^ self box
@@ -20,38 +20,38 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> blue [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> blueHeight [
+BlFitContentVerticallyInHorizontalLayoutTest >> blueHeight [
 
 	^ 100
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> blueMargin [
+BlFitContentVerticallyInHorizontalLayoutTest >> blueMargin [
 
 	^ BlInsets right: self boxMargin
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> blueWidth [
+BlFitContentVerticallyInHorizontalLayoutTest >> blueWidth [
 
 	^ 75
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> box [
+BlFitContentVerticallyInHorizontalLayoutTest >> box [
 
 	<sampleInstance>
 	^ BlElement new
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> boxMargin [
+BlFitContentVerticallyInHorizontalLayoutTest >> boxMargin [
 
 	^ 15
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> container [
+BlFitContentVerticallyInHorizontalLayoutTest >> container [
 
 	<sampleInstance>
 	^ BlElement new
@@ -63,13 +63,13 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> container [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> containerPadding [
+BlFitContentVerticallyInHorizontalLayoutTest >> containerPadding [
 
 	^ 25
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> flow [
+BlFitContentVerticallyInHorizontalLayoutTest >> flow [
 
 	<sampleInstance>
 	^ self container
@@ -78,7 +78,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> flow [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> green [
+BlFitContentVerticallyInHorizontalLayoutTest >> green [
 
 	<sampleInstance>
 	^ self box
@@ -90,25 +90,25 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> green [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> greenHeight [
+BlFitContentVerticallyInHorizontalLayoutTest >> greenHeight [
 
 	^ 80
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> greenMargin [
+BlFitContentVerticallyInHorizontalLayoutTest >> greenMargin [
 
 	^ BlInsets top: self boxMargin
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> greenWidth [
+BlFitContentVerticallyInHorizontalLayoutTest >> greenWidth [
 
 	^ 150
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> grid [
+BlFitContentVerticallyInHorizontalLayoutTest >> grid [
 
 	<sampleInstance>
 	^ self container
@@ -117,7 +117,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> grid [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> layoutLabel: aString [
+BlFitContentVerticallyInHorizontalLayoutTest >> layoutLabel: aString [
 
 	^ BlTextElement new
 		  text: (aString asRopedText thin fontSize: 10);
@@ -128,7 +128,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> layoutLabel: aString [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> list [
+BlFitContentVerticallyInHorizontalLayoutTest >> list [
 
 	<sampleInstance>
 	^ self container
@@ -137,14 +137,14 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> list [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> oneColumnExtentDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnExtentDepth: aNumber [
 
 	^ (self oneColumnWidthDepth: aNumber)
 	  @ (self oneColumnHeightDepth: aNumber)
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> oneColumnHeight [
+BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnHeight [
 
 	^ {
 		  (self redHeight + self redMargin height).
@@ -153,13 +153,13 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> oneColumnHeight [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> oneColumnHeightDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnHeightDepth: aNumber [
 
 	^ self oneColumnHeight + (self containerPadding * 2 * aNumber)
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> oneColumnWidth [
+BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnWidth [
 
 	^ {
 		  (self redWidth + self redMargin width).
@@ -168,13 +168,13 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> oneColumnWidth [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> oneColumnWidthDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnWidthDepth: aNumber [
 
 	^ self oneColumnWidth + (self containerPadding * 2 * aNumber)
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> red [
+BlFitContentVerticallyInHorizontalLayoutTest >> red [
 
 	<sampleInstance>
 	^ self box
@@ -185,13 +185,13 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> red [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> redHeight [
+BlFitContentVerticallyInHorizontalLayoutTest >> redHeight [
 
 	^ 75
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> redMargin [
+BlFitContentVerticallyInHorizontalLayoutTest >> redMargin [
 
 	^ BlInsets
 		  top: 0
@@ -201,13 +201,13 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> redMargin [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> redWidth [
+BlFitContentVerticallyInHorizontalLayoutTest >> redWidth [
 
 	^ 100
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlow [
+BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlow [
 
 	<sampleInstance>
 	| flow |
@@ -225,7 +225,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlow [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlowGridGrid [
+BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowGridGrid [
 
 	<sampleInstance>
 	| flow firstGrid secondGrid |
@@ -251,7 +251,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlowGridGrid [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlowList [
+BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowList [
 
 	<sampleInstance>
 	| flow list |
@@ -276,7 +276,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlowList [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlowListGrid [
+BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListGrid [
 
 	<sampleInstance>
 	| flow list grid |
@@ -302,7 +302,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlowListGrid [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlowListList [
+BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListList [
 
 	<sampleInstance>
 	| flow firstList secondList |
@@ -328,7 +328,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testOneColumnFlowListList [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testThreeColumnFlowGridGrid [
+BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowGridGrid [
 
 	<sampleInstance>
 	| flow firstGrid secondGrid |
@@ -358,7 +358,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testThreeColumnFlowGridGrid [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testThreeColumnFlowListGrid [
+BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListGrid [
 
 	<sampleInstance>
 	| flow list grid |
@@ -384,7 +384,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testThreeColumnFlowListGrid [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testThreeColumnFlowListList [
+BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListList [
 
 	<sampleInstance>
 	| flow firstList secondList |
@@ -414,7 +414,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testThreeColumnFlowListList [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlow [
+BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlow [
 
 	<sampleInstance>
 	| flow |
@@ -432,7 +432,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlow [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowFlowFlow [
+BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowFlow [
 
 	<sampleInstance>
 	| firstFlow secondFlow thirdFlow |
@@ -458,7 +458,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowFlowFlow [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowFlowList [
+BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 
 	<sampleInstance>
 	| firstFlow secondFlow list |
@@ -484,7 +484,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowFlowList [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowGridGrid [
+BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridGrid [
 
 	<sampleInstance>
 	| flow firstGrid secondGrid |
@@ -510,7 +510,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowGridGrid [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowGridList [
+BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 
 	<sampleInstance>
 	| flow grid list |
@@ -536,7 +536,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowGridList [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowList [
+BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 
 	<sampleInstance>
 	| flow list |
@@ -558,7 +558,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowList [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowListGrid [
+BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListGrid [
 
 	<sampleInstance>
 	| flow list grid |
@@ -584,7 +584,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowListGrid [
 ]
 
 { #category : #tests }
-BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowListList [
+BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListList [
 
 	<sampleInstance>
 	| flow firstList secondList |
@@ -610,14 +610,14 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> testTwoColumnFlowListList [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> threeColumnExtentDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnExtentDepth: aNumber [
 
 	^ (self threeColumnWidthDepth: aNumber)
 	  @ (self threeColumnHeightDepth: aNumber)
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> threeColumnHeight [
+BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnHeight [
 
 	^ {
 		  (self redHeight + self redMargin height).
@@ -626,13 +626,13 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> threeColumnHeight [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> threeColumnHeightDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnHeightDepth: aNumber [
 
 	^ self threeColumnHeight + (self containerPadding * 2 * aNumber)
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> threeColumnWidth [
+BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnWidth [
 
 	^ {
 		  (self redWidth + self redMargin width).
@@ -641,20 +641,20 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> threeColumnWidth [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> threeColumnWidthDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnWidthDepth: aNumber [
 
 	^ self threeColumnWidth + (self containerPadding * 2 * aNumber)
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> twoColumnExtentDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnExtentDepth: aNumber [
 
 	^ (self twoColumnWidthDepth: aNumber)
 	  @ (self twoColumnHeightDepth: aNumber)
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> twoColumnHeight [
+BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnHeight [
 
 	^ {
 		  (self redHeight + self redMargin height).
@@ -663,13 +663,13 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> twoColumnHeight [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> twoColumnHeightDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnHeightDepth: aNumber [
 
 	^ self twoColumnHeight + (self containerPadding * 2 * aNumber)
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> twoColumnWidth [
+BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnWidth [
 
 	^ {
 		  (self redWidth + self redMargin width + self blueWidth
@@ -678,7 +678,7 @@ BlFitContentVerticallyInHorizontalLayoutsTest >> twoColumnWidth [
 ]
 
 { #category : #fixture }
-BlFitContentVerticallyInHorizontalLayoutsTest >> twoColumnWidthDepth: aNumber [
+BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnWidthDepth: aNumber [
 
 	^ self twoColumnWidth + (self containerPadding * 2 * aNumber)
 ]
