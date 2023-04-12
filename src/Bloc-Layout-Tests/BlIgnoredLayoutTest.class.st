@@ -1,7 +1,7 @@
 Class {
 	#name : #BlIgnoredLayoutTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Layout-Examples-Ignored'
+	#category : #'Bloc-Layout-Tests'
 }
 
 { #category : #'examples - alignment' }
