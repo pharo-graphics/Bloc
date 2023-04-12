@@ -95,7 +95,7 @@ BlSpaceExamplesMigrated >> firstPulse [
 
 { #category : #'examples - icon' }
 BlSpaceExamplesMigrated >> iconElement [
-	<gtExample>
+	<sampleInstance>
 	^ BlElement new
 		size: 16@16;
 		background: (Color green alpha: 0.5);
@@ -104,7 +104,7 @@ BlSpaceExamplesMigrated >> iconElement [
 
 { #category : #'examples - icon' }
 BlSpaceExamplesMigrated >> iconStencil [
-	<gtExample>
+	<sampleInstance>
 	| aStencil |
 	aStencil := BlSpaceIconDummyStencil new.
 	aStencil block: [ self iconElement ].
@@ -113,7 +113,7 @@ BlSpaceExamplesMigrated >> iconStencil [
 
 { #category : #'private - instance creation' }
 BlSpaceExamplesMigrated >> infiniteAnimation [
-	<gtExample>
+	<sampleInstance>
 	| anAnimation |
 
 	anAnimation := BlSequentialAnimation new.
@@ -122,20 +122,6 @@ BlSpaceExamplesMigrated >> infiniteAnimation [
 	anAnimation beInfinite.
 	
 	^ anAnimation
-]
-
-{ #category : #'examples - time' }
-BlSpaceExamplesMigrated >> spaceWithSlownDownTime [
-	<gtExample>
-	| aTime aSpace |
-
-	aTime := BlFastForwardedTime new.
-	aTime speed: 0.2.
-
-	aSpace := BlSpace new.
-	aSpace time: aTime.
-
-	^ aSpace
 ]
 
 { #category : #'examples - time' }

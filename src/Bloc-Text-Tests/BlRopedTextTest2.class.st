@@ -1,18 +1,18 @@
 "
-I contain examples of more complicated pieces of text to exemplify the rope structure.
-
+I have been automatically converted and probably manually tweaked from BlRopedTextExamples. Pay attention there is an important design decision in such tests. First to let GT people execute them, the tests and helpers are tagged with <gtExample> do not remove them, let also the <label:...>.
+	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlRopedTextExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Text-Examples-Model'
+	#name : #BlRopedTextTest2,
+	#superclass : #TestCase,
+	#category : #'Bloc-Text-Tests'
 }
 
-{ #category : #accessing }
-BlRopedTextExamples >> allAttributesSuchThat [
-	<gtExample>
+{ #category : #tests }
+BlRopedTextTest2 >> testAllAttributesSuchThat [
+
+	<sampleInstance>
 	| aText theAttributes |
-	
 	aText := 'Hello World' asRopedText.
 	aText
 		attribute: (BlTextForegroundAttribute color: Color red)
@@ -22,26 +22,28 @@ BlRopedTextExamples >> allAttributesSuchThat [
 		attribute: (BlTextForegroundAttribute color: Color blue)
 		from: 6
 		to: 11.
-		
+
 	theAttributes := aText attributesAndIndicesSuchThat: [ :each | true ].
 	self assert: theAttributes size equals: 2.
 	self assert: theAttributes first value equals: (1 to: 5).
 	self assert: theAttributes second value equals: (6 to: 11).
-	
+
 	^ aText
 ]
 
-{ #category : #'example - insert' }
-BlRopedTextExamples >> append_empty_text [
-	<gtExample>
-	| aText wasAnnounced |
-	
-	aText := 'Hello' asRopedText.
-	
-	wasAnnounced := 0.
-	aText when: BlTextStringsInserted do: [ wasAnnounced := wasAnnounced + 1 ].
+{ #category : #tests }
+BlRopedTextTest2 >> testAppendEmptyText [
 
-	aText, '' asRopedText.
+	<sampleInstance>
+	| aText wasAnnounced |
+	aText := 'Hello' asRopedText.
+
+	wasAnnounced := 0.
+	aText
+		when: BlTextStringsInserted
+		do: [ wasAnnounced := wasAnnounced + 1 ].
+
+	aText , '' asRopedText.
 
 	self assert: aText asString equals: 'Hello'.
 	self assert: wasAnnounced equals: 0.
@@ -49,19 +51,19 @@ BlRopedTextExamples >> append_empty_text [
 	^ aText
 ]
 
-{ #category : #'example - insert' }
-BlRopedTextExamples >> insert_empty_strings [
-	<gtExample>
-	| aText insertedStrings |
-	
-	aText := 'Hello' asRopedText.
-	
-	insertedStrings := #().
-	aText when: BlTextStringsInserted do: [ :anAnnouncement |
-		insertedStrings := anAnnouncement strings.
-	].
+{ #category : #tests }
+BlRopedTextTest2 >> testInsertEmptyStrings [
 
-	aText insertStrings: { '' . 'World' } atAll: { 1 . 5 }.
+	<sampleInstance>
+	| aText insertedStrings |
+	aText := 'Hello' asRopedText.
+
+	insertedStrings := #(  ).
+	aText
+		when: BlTextStringsInserted
+		do: [ :anAnnouncement | insertedStrings := anAnnouncement strings ].
+
+	aText insertStrings: { ''. 'World' } atAll: { 1. 5 }.
 
 	self assert: aText asString equals: 'HelloWorld'.
 	self assert: insertedStrings equals: { 'World' }.
@@ -69,30 +71,33 @@ BlRopedTextExamples >> insert_empty_strings [
 	^ aText
 ]
 
-{ #category : #'examples - next span' }
-BlRopedTextExamples >> nextSpanFontColorOnHelloWorldWithColor [
-	<gtExample>
-	| aText anIterator aSpan |
+{ #category : #tests }
+BlRopedTextTest2 >> testNextSpanFontColorOnHelloWorldWithColor [
 
+	<sampleInstance>
+	| aText anIterator aSpan |
 	aText := 'Hello World' asRopedText.
 	(aText from: 1 to: 5) foreground: Color red.
 	(aText from: 7 to: 11) foreground: Color blue.
 
 	anIterator := aText iterator.
-	
-	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+
+	aSpan := anIterator nextSpan: [ :eachAttribute |
+		         eachAttribute isKindOf: BlTextForegroundAttribute ].
 	self assert: aSpan start equals: 1.
 	self assert: aSpan end equals: 5.
 	self assert: anIterator hasNext.
 	self assert: aSpan asString equals: 'Hello'.
-	
-	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+
+	aSpan := anIterator nextSpan: [ :eachAttribute |
+		         eachAttribute isKindOf: BlTextForegroundAttribute ].
 	self assert: aSpan start equals: 6.
 	self assert: aSpan end equals: 6.
 	self assert: anIterator hasNext.
 	self assert: aSpan asString equals: ' '.
-	
-	aSpan := anIterator nextSpan: [ :eachAttribute| eachAttribute isKindOf: BlTextForegroundAttribute ].
+
+	aSpan := anIterator nextSpan: [ :eachAttribute |
+		         eachAttribute isKindOf: BlTextForegroundAttribute ].
 	self assert: aSpan start equals: 7.
 	self assert: aSpan end equals: 11.
 	self assert: anIterator hasNext not.
@@ -101,36 +106,40 @@ BlRopedTextExamples >> nextSpanFontColorOnHelloWorldWithColor [
 	^ aText
 ]
 
-{ #category : #examples }
-BlRopedTextExamples >> textForeground [
-	<gtExample>
-	| text |
+{ #category : #tests }
+BlRopedTextTest2 >> testTextForeground [
 
+	<sampleInstance>
+	| text |
 	"space between `Hello` and `world` is not attributed"
 	text := 'Hello world' asRopedText.
 	(text from: 1 to: 5) foreground: Color blue.
 	(text from: 7 to: 11) foreground: Color red.
 
 	self assert: text rope isConcatenation.
-	
+
 	self assert: text rope left size equals: 5.
 	self assert: (text rope left isKindOf: BlAttributeRope).
-	self assert: text rope left attributes asArray equals: { BlTextForegroundAttribute paint: Color blue }.
+	self
+		assert: text rope left attributes asArray
+		equals: { (BlTextForegroundAttribute paint: Color blue) }.
 
 	self assert: text rope right isConcatenation.
 
 	self assert: text rope right right size equals: 5.
 	self assert: (text rope right right isKindOf: BlAttributeRope).
-	self assert: text rope right right attributes asArray equals: { BlTextForegroundAttribute paint: Color red }.
+	self
+		assert: text rope right right attributes asArray
+		equals: { (BlTextForegroundAttribute paint: Color red) }.
 
 	^ text
 ]
 
-{ #category : #examples }
-BlRopedTextExamples >> textWithAttributes [
-	<gtExample>
+{ #category : #tests }
+BlRopedTextTest2 >> testTextWithAttributes [
+
+	<sampleInstance>
 	| text |
-	
 	text := 'The moldable editor' asRopedText.
 	text insertString: String cr at: text size.
 	text insertString: 'can be adapted ' at: text size.
@@ -140,19 +149,17 @@ BlRopedTextExamples >> textWithAttributes [
 		monospace;
 		foreground: Color blue.
 
-	(text from: 43 to: 49)
-		monospace.
+	(text from: 43 to: 49) monospace.
 
 	^ text
-
 ]
 
-{ #category : #examples }
-BlRopedTextExamples >> textWithCr [
-	<gtExample>
-	| text |
+{ #category : #tests }
+BlRopedTextTest2 >> testTextWithCr [
 
-	text := ('Hello', String crlf, String tab, 'World') asRopedText.
+	<sampleInstance>
+	| text |
+	text := ('Hello' , String crlf , String tab , 'World') asRopedText.
 
 	^ text
 ]

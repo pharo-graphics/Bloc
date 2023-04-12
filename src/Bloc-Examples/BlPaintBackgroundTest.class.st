@@ -109,7 +109,7 @@ BlPaintBackgroundTest >> testLinearGradientBackground [
 
 { #category : #'background - gradient' }
 BlPaintBackgroundTest >> testLinearGradientBackgroundWithOpacity [
-	<gtExample>
+	<sampleInstance>
 	| aBackground |
 
 	aBackground := BlPaintBackground new
