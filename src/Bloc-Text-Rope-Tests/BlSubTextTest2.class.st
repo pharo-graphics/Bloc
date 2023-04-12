@@ -11,14 +11,14 @@ Class {
 { #category : #tests }
 BlSubTextTest2 >> testEmptyText [
 
-	<gtExample>
+	<sampleInstance>
 	^ '' asRopedText
 ]
 
 { #category : #tests }
 BlSubTextTest2 >> testHelloWorldFrom0To0 [
 
-	<gtExample>
+	<sampleInstance>
 	| aSubText anError |
 	"not allowed"
 	[ aSubText := self testHelloWorldText from: 0 to: 0 ]
@@ -34,7 +34,7 @@ BlSubTextTest2 >> testHelloWorldFrom0To0 [
 { #category : #tests }
 BlSubTextTest2 >> testHelloWorldFrom1To0 [
 
-	<gtExample>
+	<sampleInstance>
 	| aSubText |
 	"cursor index: 0"
 	aSubText := self testHelloWorldText from: 1 to: 0.
@@ -51,7 +51,7 @@ BlSubTextTest2 >> testHelloWorldFrom1To0 [
 { #category : #tests }
 BlSubTextTest2 >> testHelloWorldFrom2To1 [
 
-	<gtExample>
+	<sampleInstance>
 	| aSubText |
 	aSubText := self testHelloWorldText from: 2 to: 1.
 
@@ -67,14 +67,14 @@ BlSubTextTest2 >> testHelloWorldFrom2To1 [
 { #category : #tests }
 BlSubTextTest2 >> testHelloWorldText [
 
-	<gtExample>
+	<sampleInstance>
 	^ 'HelloWorld' asRopedText
 ]
 
 { #category : #tests }
 BlSubTextTest2 >> testInsertInHelloWorldFrom1To0At0 [
 
-	<gtExample>
+	<sampleInstance>
 	| aSubText |
 	aSubText := self testHelloWorldFrom1To0.
 	aSubText insertString: '0' at: 0.
@@ -93,7 +93,7 @@ BlSubTextTest2 >> testInsertInHelloWorldFrom1To0At0 [
 { #category : #tests }
 BlSubTextTest2 >> testInsertInHelloWorldFrom1To0At1 [
 
-	<gtExample>
+	<sampleInstance>
 	| aSubText anError |
 	aSubText := self testHelloWorldFrom1To0.
 

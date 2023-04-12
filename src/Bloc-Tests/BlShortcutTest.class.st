@@ -16,7 +16,7 @@ BlShortcutTest >> setUp [
 
 { #category : #tests }
 BlShortcutTest >> testMatches [
-	<gtExample>
+	<sampleInstance>
 	self setUp.
 
 	shortcut combination: (BlMockedKeyCombination new shouldMatch: false).

@@ -24,7 +24,7 @@ BlKeyCombinationTest >> setUp [
 { #category : #tests }
 BlKeyCombinationTest >> testKeyCodeCombination [
 	| shortcut flag |
-	<gtExample>
+	<sampleInstance>
 	self setUp.
 	flag := false.
 	
@@ -47,7 +47,7 @@ BlKeyCombinationTest >> testKeyCodeCombination [
 { #category : #tests }
 BlKeyCombinationTest >> testNoMatchKeyCodeCombination [
 	| shortcut flag |
-	<gtExample>
+	<sampleInstance>
 	self setUp.
 	flag := false.
 	

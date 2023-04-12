@@ -15,7 +15,7 @@ Class {
 
 { #category : #'instance creation' }
 BlStrokeStyle class >> dashed [
-	<gtExample>
+	<sampleInstance>
 	^ self new
 		lineCap: BlStrokeLineCap butt;
 		lineJoin: BlStrokeLineJoin miter;
@@ -26,7 +26,7 @@ BlStrokeStyle class >> dashed [
 
 { #category : #'instance creation' }
 BlStrokeStyle class >> default [
-	<gtExample>
+	<sampleInstance>
 	^ self new
 		lineCap: BlStrokeLineCap butt;
 		lineJoin: BlStrokeLineJoin miter;

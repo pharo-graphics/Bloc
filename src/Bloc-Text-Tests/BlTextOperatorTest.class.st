@@ -11,7 +11,7 @@ Class {
 { #category : #tests }
 BlTextOperatorTest >> testFindCaseInsensitiveSubStringInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for "STRING" substring' asRopedText.
 	anIndex := aText finder
@@ -26,7 +26,7 @@ BlTextOperatorTest >> testFindCaseInsensitiveSubStringInTheMiddle [
 { #category : #tests }
 BlTextOperatorTest >> testFindGCharacterInAMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for G character' asRopedText.
 	anIndex := aText finder
@@ -41,7 +41,7 @@ BlTextOperatorTest >> testFindGCharacterInAMiddle [
 { #category : #tests }
 BlTextOperatorTest >> testFindGCharacterInAMiddleReversed [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for G character' asRopedText.
 	anIndex := aText finder
@@ -58,7 +58,7 @@ BlTextOperatorTest >> testFindGCharacterInAMiddleReversed [
 { #category : #tests }
 BlTextOperatorTest >> testFindIngSubStringInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for "ing" substring' asRopedText.
 	anIndex := aText finder
@@ -73,7 +73,7 @@ BlTextOperatorTest >> testFindIngSubStringInTheMiddle [
 { #category : #tests }
 BlTextOperatorTest >> testFindIngSubStringInTheMiddleReversed [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for "ing" substring' asRopedText.
 	anIndex := aText finder
@@ -90,7 +90,7 @@ BlTextOperatorTest >> testFindIngSubStringInTheMiddleReversed [
 { #category : #tests }
 BlTextOperatorTest >> testFindLCharacterAtTheBeginning [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for L character' asRopedText.
 	anIndex := aText finder
@@ -105,7 +105,7 @@ BlTextOperatorTest >> testFindLCharacterAtTheBeginning [
 { #category : #tests }
 BlTextOperatorTest >> testFindLCharacterAtTheBeginningReversed [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for l character' asRopedText.
 	anIndex := aText finder
@@ -122,7 +122,7 @@ BlTextOperatorTest >> testFindLCharacterAtTheBeginningReversed [
 { #category : #tests }
 BlTextOperatorTest >> testFindLookSubStringInTheBeginning [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for "ling" substring' asRopedText.
 	anIndex := aText finder
@@ -137,7 +137,7 @@ BlTextOperatorTest >> testFindLookSubStringInTheBeginning [
 { #category : #tests }
 BlTextOperatorTest >> testFindLookSubStringInTheBeginningReversed [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for "ling" substring' asRopedText.
 	anIndex := aText finder
@@ -154,7 +154,7 @@ BlTextOperatorTest >> testFindLookSubStringInTheBeginningReversed [
 { #category : #tests }
 BlTextOperatorTest >> testFindNoSubString [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for not existing substring' asRopedText.
 	anIndex := aText finder
@@ -167,7 +167,7 @@ BlTextOperatorTest >> testFindNoSubString [
 { #category : #tests }
 BlTextOperatorTest >> testFindNoSubStringReversed [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for not existing substring' asRopedText.
 	anIndex := aText finder
@@ -182,7 +182,7 @@ BlTextOperatorTest >> testFindNoSubStringReversed [
 { #category : #tests }
 BlTextOperatorTest >> testFindNothing [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for not included character' asRopedText.
 	anIndex := aText finder
@@ -195,7 +195,7 @@ BlTextOperatorTest >> testFindNothing [
 { #category : #tests }
 BlTextOperatorTest >> testFindRCharacterAtTheEnd [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for r characteR' asRopedText.
 	anIndex := aText finder
@@ -210,7 +210,7 @@ BlTextOperatorTest >> testFindRCharacterAtTheEnd [
 { #category : #tests }
 BlTextOperatorTest >> testFindRCharacterAtTheEndReversed [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for r characteR' asRopedText.
 	anIndex := aText finder
@@ -227,7 +227,7 @@ BlTextOperatorTest >> testFindRCharacterAtTheEndReversed [
 { #category : #tests }
 BlTextOperatorTest >> testFindRingSubStringInTheEnd [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for "Ring" substring' asRopedText.
 	anIndex := aText finder
@@ -242,7 +242,7 @@ BlTextOperatorTest >> testFindRingSubStringInTheEnd [
 { #category : #tests }
 BlTextOperatorTest >> testFindRingSubStringInTheEndReversed [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for "Ring" substring' asRopedText.
 	anIndex := aText finder
@@ -259,7 +259,7 @@ BlTextOperatorTest >> testFindRingSubStringInTheEndReversed [
 { #category : #tests }
 BlTextOperatorTest >> testFindxXCharactersAtTheBeginning [
 
-	<gtExample>
+	<sampleInstance>
 	| aText anIndex |
 	aText := 'Looking for X character' asRopedText.
 	anIndex := aText finder
@@ -274,7 +274,7 @@ BlTextOperatorTest >> testFindxXCharactersAtTheBeginning [
 { #category : #tests }
 BlTextOperatorTest >> testLineBreaks [
 
-	<gtExample>
+	<sampleInstance>
 	| aString |
 	aString := String cr.
 	self assert: (aString allSatisfy: #isLineBreak).
@@ -285,7 +285,7 @@ BlTextOperatorTest >> testLineBreaks [
 { #category : #tests }
 BlTextOperatorTest >> testSeparators [
 
-	<gtExample>
+	<sampleInstance>
 	| aString |
 	aString := String space , String tab , String cr.
 	self assert: (aString allSatisfy: #isSeparator).
@@ -296,14 +296,14 @@ BlTextOperatorTest >> testSeparators [
 { #category : #tests }
 BlTextOperatorTest >> testStringWithLineBreaksInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	^ 'the first text' , self testLineBreaks , 'the second text'
 ]
 
 { #category : #tests }
 BlTextOperatorTest >> testStringWithLineBreaksOnBothSidesAndInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	^ self testLineBreaks , self testStringWithLineBreaksInTheMiddle
 	  , self testLineBreaks
 ]
@@ -311,14 +311,14 @@ BlTextOperatorTest >> testStringWithLineBreaksOnBothSidesAndInTheMiddle [
 { #category : #tests }
 BlTextOperatorTest >> testStringWithSeparatorsInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	^ 'the first text' , self testSeparators , 'the second text'
 ]
 
 { #category : #tests }
 BlTextOperatorTest >> testStringWithSeparatorsOnBothSidesAndInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	^ self testSeparators , self testStringWithSeparatorsInTheMiddle
 	  , self testSeparators
 ]
@@ -326,9 +326,10 @@ BlTextOperatorTest >> testStringWithSeparatorsOnBothSidesAndInTheMiddle [
 { #category : #tests }
 BlTextOperatorTest >> testTrimBothTextWithLineBreakssOnBothSidesAndInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	| aText |
-	aText := self testStringWithLineBreaksOnBothSidesAndInTheMiddle asRopedText.
+	aText := self testStringWithLineBreaksOnBothSidesAndInTheMiddle
+		         asRopedText.
 	aText trimmer
 		bothLineBreaks;
 		trim.
@@ -342,9 +343,10 @@ BlTextOperatorTest >> testTrimBothTextWithLineBreakssOnBothSidesAndInTheMiddle [
 { #category : #tests }
 BlTextOperatorTest >> testTrimBothTextWithSeparatorsOnBothSidesAndInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	| aText |
-	aText := self testStringWithSeparatorsOnBothSidesAndInTheMiddle asRopedText.
+	aText := self testStringWithSeparatorsOnBothSidesAndInTheMiddle
+		         asRopedText.
 	aText trimmer
 		bothSeparators;
 		trim.
@@ -358,7 +360,7 @@ BlTextOperatorTest >> testTrimBothTextWithSeparatorsOnBothSidesAndInTheMiddle [
 { #category : #tests }
 BlTextOperatorTest >> testTrimEmptyText [
 
-	<gtExample>
+	<sampleInstance>
 	| aText |
 	aText := '' asRopedText.
 	aText trimmer
@@ -371,7 +373,7 @@ BlTextOperatorTest >> testTrimEmptyText [
 { #category : #tests }
 BlTextOperatorTest >> testTrimLeftTextWithSeparatorsOnBothSidesAndInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	| aText |
 	aText := self testStringWithSeparatorsOnBothSidesAndInTheMiddle
 		         asRopedText.
@@ -388,7 +390,7 @@ BlTextOperatorTest >> testTrimLeftTextWithSeparatorsOnBothSidesAndInTheMiddle [
 { #category : #tests }
 BlTextOperatorTest >> testTrimOnlySeparatorsText [
 
-	<gtExample>
+	<sampleInstance>
 	| aText |
 	aText := self testSeparators asRopedText.
 	aText trimmer
@@ -401,7 +403,7 @@ BlTextOperatorTest >> testTrimOnlySeparatorsText [
 { #category : #tests }
 BlTextOperatorTest >> testTrimRightTextWithSeparatorsOnBothSidesAndInTheMiddle [
 
-	<gtExample>
+	<sampleInstance>
 	| aText |
 	aText := self testStringWithSeparatorsOnBothSidesAndInTheMiddle
 		         asRopedText.
