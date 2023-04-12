@@ -1,14 +1,18 @@
+"
+I have been automatically converted and probably manually tweaked from BlTextDecorationStyleExamples. Pay attention there is an important design decision in such tests. First to let GT people execute them, the tests and helpers are tagged with <gtExample> do not remove them, let also the <label:...>.
+	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
+"
 Class {
-	#name : #BlTextDecorationStyleExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Text-Examples-Model'
+	#name : #BlTextDecorationStyleTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Text-Tests'
 }
 
-{ #category : #examples }
-BlTextDecorationStyleExamples >> dashed [
-	<gtExample>
+{ #category : #tests }
+BlTextDecorationStyleTest >> testDashed [
+
+	<sampleInstance>
 	| aStyle |
-	
 	aStyle := BlTextDecorationStyle dashed.
 
 	self assert: aStyle class equals: BlTextDecorationDashedStyle.
@@ -23,11 +27,11 @@ BlTextDecorationStyleExamples >> dashed [
 	^ aStyle
 ]
 
-{ #category : #examples }
-BlTextDecorationStyleExamples >> dotted [
-	<gtExample>
+{ #category : #tests }
+BlTextDecorationStyleTest >> testDotted [
+
+	<sampleInstance>
 	| aStyle |
-	
 	aStyle := BlTextDecorationStyle dotted.
 
 	self assert: aStyle class equals: BlTextDecorationDottedStyle.
@@ -42,11 +46,11 @@ BlTextDecorationStyleExamples >> dotted [
 	^ aStyle
 ]
 
-{ #category : #examples }
-BlTextDecorationStyleExamples >> double [
-	<gtExample>
+{ #category : #tests }
+BlTextDecorationStyleTest >> testDouble [
+
+	<sampleInstance>
 	| aStyle |
-	
 	aStyle := BlTextDecorationStyle double.
 
 	self assert: aStyle class equals: BlTextDecorationDoubleStyle.
@@ -61,11 +65,11 @@ BlTextDecorationStyleExamples >> double [
 	^ aStyle
 ]
 
-{ #category : #examples }
-BlTextDecorationStyleExamples >> solid [
-	<gtExample>
+{ #category : #tests }
+BlTextDecorationStyleTest >> testSolid [
+
+	<sampleInstance>
 	| aStyle |
-	
 	aStyle := BlTextDecorationStyle solid.
 
 	self assert: aStyle class equals: BlTextDecorationSolidStyle.
@@ -80,11 +84,11 @@ BlTextDecorationStyleExamples >> solid [
 	^ aStyle
 ]
 
-{ #category : #examples }
-BlTextDecorationStyleExamples >> wavy [
-	<gtExample>
+{ #category : #tests }
+BlTextDecorationStyleTest >> testWavy [
+
+	<sampleInstance>
 	| aStyle |
-	
 	aStyle := BlTextDecorationStyle wavy.
 
 	self assert: aStyle class equals: BlTextDecorationWavyStyle.
