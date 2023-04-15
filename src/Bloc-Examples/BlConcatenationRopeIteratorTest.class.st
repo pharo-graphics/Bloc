@@ -1023,7 +1023,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt1 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_0.
+	anIterator := self testSmallNextAt0.
 
 	anItem := anIterator previous.
 
@@ -1045,7 +1045,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt10 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_9.
+	anIterator := self testSmallNextAt9.
 
 	anItem := anIterator previous.
 
@@ -1067,7 +1067,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt2 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_1.
+	anIterator := self testSmallNextAt1.
 
 	anItem := anIterator previous.
 
@@ -1089,7 +1089,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt3 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_2.
+	anIterator := self testSmallNextAt2.
 
 	anItem := anIterator previous.
 
@@ -1111,7 +1111,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt4 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_3.
+	anIterator := self testSmallNextAt3.
 
 	anItem := anIterator previous.
 
@@ -1133,7 +1133,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt5 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_4.
+	anIterator := self testSmallNextAt4.
 
 	anItem := anIterator previous.
 
@@ -1155,7 +1155,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt6 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_5.
+	anIterator := self testSmallNextAt5.
 
 	anItem := anIterator previous.
 
@@ -1177,7 +1177,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt7 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_6.
+	anIterator := self testSmallNextAt6.
 
 	anItem := anIterator previous.
 
@@ -1199,7 +1199,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt8 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_7.
+	anIterator := self testSmallNextAt7.
 
 	anItem := anIterator previous.
 
@@ -1221,7 +1221,7 @@ BlConcatenationRopeIteratorTest >> testSmallPreviousAt9 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_8.
+	anIterator := self testSmallNextAt8.
 
 	anItem := anIterator previous.
 
@@ -1503,7 +1503,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt0 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 0.
 
 	self assert: aSubIterator rope == anIterator rope left rope.
@@ -1519,7 +1519,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt1 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 1.
 
 	self assert: aSubIterator rope == anIterator rope left rope.
@@ -1535,7 +1535,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt10 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 10.
 
 	self assert: aSubIterator rope == anIterator rope right right rope.
@@ -1551,7 +1551,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt11 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 11.
 
 	self assert: aSubIterator rope == anIterator rope right right rope.
@@ -1567,7 +1567,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt12 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 12.
 
 	self assert: aSubIterator rope == anIterator rope right right rope.
@@ -1583,7 +1583,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt13 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 13.
 
 	self assert: aSubIterator rope == anIterator rope right right rope.
@@ -1599,7 +1599,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt14 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 14.
 
 	self assert: aSubIterator rope == anIterator rope right right rope.
@@ -1615,7 +1615,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt15 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 15.
 
 	self assert: aSubIterator rope == anIterator rope right right rope.
@@ -1631,7 +1631,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt2 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 2.
 
 	self assert: aSubIterator rope == anIterator rope left rope.
@@ -1647,7 +1647,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt3 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 3.
 
 	self assert: aSubIterator rope == anIterator rope left rope.
@@ -1663,7 +1663,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt4 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 4.
 
 	self assert: aSubIterator rope == anIterator rope left rope.
@@ -1679,7 +1679,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt5 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 5.
 
 	self assert: aSubIterator rope == anIterator rope right left.
@@ -1695,7 +1695,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt6 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 6.
 
 	self assert: aSubIterator rope == anIterator rope right left.
@@ -1711,7 +1711,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt7 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 7.
 
 	self assert: aSubIterator rope == anIterator rope right left.
@@ -1727,7 +1727,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt8 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 8.
 
 	self assert: aSubIterator rope == anIterator rope right left.
@@ -1743,7 +1743,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeForwardIteratorAt9 [
 
 	<gtExample>
 	| anIterator aSubIterator |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 	aSubIterator := anIterator forwardIteratorAt: 9.
 
 	self assert: aSubIterator rope == anIterator rope right left.
@@ -1759,7 +1759,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeNextSpanAt0 [
 
 	<gtExample>
 	| anIterator aSpan |
-	anIterator := self small_tree.
+	anIterator := self testSmallTree.
 
 	aSpan := anIterator nextSpan.
 
@@ -1775,7 +1775,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeNextSpanAt10 [
 
 	<gtExample>
 	| anIterator aSpan |
-	anIterator := self small_tree_nextSpan_at_5.
+	anIterator := self testSmallTreeNextSpanAt5.
 
 	aSpan := anIterator nextSpan.
 
@@ -1790,7 +1790,7 @@ BlConcatenationRopeIteratorTest >> testSmallTreeNextSpanAt5 [
 
 	<gtExample>
 	| anIterator aSpan |
-	anIterator := self small_tree_nextSpan_at_0.
+	anIterator := self testSmallTreeNextSpanAt0.
 
 	aSpan := anIterator nextSpan.
 
