@@ -1,7 +1,7 @@
 Class {
 	#name : #BlPaintBackgroundTest,
 	#superclass : #BlBackgroundTest,
-	#category : #'Bloc-Examples-Background'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #'background - color' }

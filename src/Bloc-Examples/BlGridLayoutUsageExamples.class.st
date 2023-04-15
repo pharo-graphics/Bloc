@@ -5,13 +5,13 @@ I show how different resizing strategies work and how to build advanced layouts 
 
 "
 Class {
-	#name : #BlGridLayoutUsageExample,
+	#name : #BlGridLayoutUsageExamples,
 	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Documentation'
 }
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleDistributed2x2Grid [
+BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 
 	<sampleInstance>
 	| e1 e2 e3 e4 el |
@@ -54,7 +54,7 @@ BlGridLayoutUsageExample >> exampleDistributed2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleDistributedWithSpan2x2Grid [
+BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 
 	<sampleInstance>
 	| e1 e2 e3 el |
@@ -93,7 +93,7 @@ BlGridLayoutUsageExample >> exampleDistributedWithSpan2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleDistributedWithWeight2x2Grid [
+BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 
 	<sampleInstance>
 	| e1 e2 e3 e4 el |
@@ -138,7 +138,7 @@ BlGridLayoutUsageExample >> exampleDistributedWithWeight2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleHorizontal2x1Grid [
+BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 
 	<sampleInstance>
 	| e1 e2 el |
@@ -163,7 +163,7 @@ BlGridLayoutUsageExample >> exampleHorizontal2x1Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleHorizontalSpacing2x1Grid [
+BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 
 	<sampleInstance>
 	| e1 e2 el |
@@ -192,7 +192,7 @@ BlGridLayoutUsageExample >> exampleHorizontalSpacing2x1Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleInCellAlignment2x2Grid [
+BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 
 	<sampleInstance>
 	| e1 e2 e3 el |
@@ -232,7 +232,7 @@ BlGridLayoutUsageExample >> exampleInCellAlignment2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleNautilusGrid [
+BlGridLayoutUsageExamples >> exampleNautilusGrid [
 
 	<sampleInstance>
 	| e1 e2 e3 e4 e5 el |
@@ -284,7 +284,7 @@ BlGridLayoutUsageExample >> exampleNautilusGrid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleSimple2x2Grid [
+BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 
 	<sampleInstance>
 	| e1 e2 e3 e4 el |
@@ -319,7 +319,7 @@ BlGridLayoutUsageExample >> exampleSimple2x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleSpacing9x9Grid [
+BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 
 	<sampleInstance>
 	| children el dim |
@@ -350,7 +350,7 @@ BlGridLayoutUsageExample >> exampleSpacing9x9Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleVertical1x2Grid [
+BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 
 	<sampleInstance>
 	| e1 e2 el |
@@ -375,7 +375,7 @@ BlGridLayoutUsageExample >> exampleVertical1x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> exampleVerticalSpacing1x2Grid [
+BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 
 	<sampleInstance>
 	| e1 e2 el |
@@ -404,7 +404,7 @@ BlGridLayoutUsageExample >> exampleVerticalSpacing1x2Grid [
 ]
 
 { #category : #examples }
-BlGridLayoutUsageExample >> verticalSpan [
+BlGridLayoutUsageExamples >> verticalSpan [
 
 	<sampleInstance>
 	| grid child1 child2 child3 |
