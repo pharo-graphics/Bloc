@@ -14,10 +14,6 @@ BlEventTest >> simulateClickOnOverlapped [
 	Since element above does not consume click events, one below should succesfully
 	handle mouse down/up and click events"
 
-	"<gtExample>"
-
-	"<- fails becaus we need 'elevation based' event handling (Bloc-Compositor)"
-
 	| container blue red mouseDown mouseUp click |
 	container := self testGrayElement.
 	container size: 300 @ 300.
