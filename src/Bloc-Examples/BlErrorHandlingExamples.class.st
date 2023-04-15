@@ -58,7 +58,7 @@ BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawingAndOnLayout [
 { #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenOnLayout [
 	<gtExample>
-	<noTest>
+
 	| aSceneElement aFaultyElement  theErrors |
 
 	aFaultyElement := BlExampleElementWithBrokenOnLayout new.
