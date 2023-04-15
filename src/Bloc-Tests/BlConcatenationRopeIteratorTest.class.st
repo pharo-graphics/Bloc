@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlConcate
 Class {
 	#name : #BlConcatenationRopeIteratorTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #metadata }
