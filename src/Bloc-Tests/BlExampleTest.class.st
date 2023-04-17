@@ -9,7 +9,7 @@ These are the rules for test in subclasses:
 Class {
 	#name : #BlExampleTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Examples'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #tests }
