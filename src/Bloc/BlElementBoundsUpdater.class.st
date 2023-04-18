@@ -46,6 +46,24 @@ BlElementBoundsUpdater >> commitChanges [
 						during: [ eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild | eachChild onPositionInSpaceChanged ] ] ]  ] ]
 ]
 
+{ #category : #testing }
+BlElementBoundsUpdater >> hasChanges [ 
+
+	^ changes notEmpty
+]
+
+{ #category : #testing }
+BlElementBoundsUpdater >> hasExtentChanges [ 
+
+	^ changes anySatisfy: [ :c | c isExtentChanged ]
+]
+
+{ #category : #testing }
+BlElementBoundsUpdater >> hasPositionChanges [ 
+
+	^ changes anySatisfy: [ :c | c isPositionChanged ]
+]
+
 { #category : #initialization }
 BlElementBoundsUpdater >> initialize [
 	super initialize.

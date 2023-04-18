@@ -73,6 +73,17 @@ BlElementBoundsUpdaterChange >> element: anObject [
 ]
 
 { #category : #'api - changes' }
+BlElementBoundsUpdaterChange >> isExtentChanged [
+	| aPreviousExtent |
+
+	newExtent
+		ifNil: [ ^ false ].
+		
+	aPreviousExtent := previousExtent ifNil: [ 0@0 ].
+	^ (newExtent closeTo: aPreviousExtent epsilon: BlElement epsilon) not
+]
+
+{ #category : #'api - changes' }
 BlElementBoundsUpdaterChange >> isPositionChanged [
 	| aPreviousPosition |
 
