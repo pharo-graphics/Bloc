@@ -23,6 +23,62 @@ BlSpaceFixture class >> allFixtureSelectors [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> _buildTinyGeometries [
+	"It produces random rendering"
+
+	| geometryBlocks outskirts positionGenerator sizes addElementBlock |
+	builder spaceExtent: 256 @ 25.
+
+	geometryBlocks := {
+		[ BlRectangleGeometry new ].
+		[ BlCircleGeometry new ].
+		[ BlTriangleGeometry new ].
+		[ BlRoundedRectangleGeometry cornerRadius: 0 ].
+		[ BlRoundedRectangleGeometry cornerRadius: 4 ].
+	}.
+	sizes := {
+		0 asPoint. 1 asPoint.
+		1@0. 0@1 }.
+	outskirts := {
+		BlOutskirts centered.
+		BlOutskirts inside.
+		BlOutskirts outside }.
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: 3 asPoint
+		by: 4
+		columns: 63.
+
+	"Reusable block to add each element"
+	addElementBlock := [ :aGeometry :aBorder :anOutskirt |
+		sizes do: [ :eachSize |
+			builder addToRoot
+				background: Color black;
+				position: positionGenerator next;
+				size: eachSize;
+				geometry: aGeometry;
+				border: aBorder;
+				yourself ] ].
+
+	"Add variants of each geometry"
+	geometryBlocks do: [ :eachBlock |
+		addElementBlock
+			value: eachBlock value
+			value: BlBorder empty
+			value: BlOutskirts centered.
+		outskirts do: [ :eachOutskirt |
+			addElementBlock
+				value: eachBlock value
+				value: (BlBorder paint: Color cyan width: 1)
+				value: eachOutskirt ].
+		outskirts do: [ :eachOutskirt |
+			addElementBlock
+				value: eachBlock value
+				value: (BlBorder paint: Color green width: 2)
+				value: eachOutskirt ] ]
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildCapRoundDashedBorderOnClosedGeometry [
 	"Related to https://github.com/pharo-graphics/Bloc/issues/200"
 
@@ -1192,63 +1248,6 @@ BlSpaceFixture >> buildTextTransformationsCustomizedWith: aBlock [
 	self buildTextTransformations.
 	
 	builder space root allChildrenDepthFirstDo: aBlock
-]
-
-{ #category : #fixtures }
-BlSpaceFixture >> buildTinyGeometries [
-
-	| geometryBlocks outskirts positionGenerator sizes addElementBlock |
-	builder spaceExtent: 256 @ 25.
-
-	geometryBlocks := {
-		[ BlRectangleGeometry new ].
-		[ BlCircleGeometry new ].
-		[ BlTriangleGeometry new ].
-		[ BlRoundedRectangleGeometry cornerRadius: 0 ].
-		[ BlRoundedRectangleGeometry cornerRadius: 4 ].
-	}.
-	sizes := {
-		0 asPoint. 0.5 asPoint. 1 asPoint.
-		0@0.5. 0.5@0.
-		1@0. 0@1.
-		0.5@1. 1@0.5 }.
-	outskirts := {
-		BlOutskirts centered.
-		BlOutskirts inside.
-		BlOutskirts outside }.
-	positionGenerator := self 
-		gridPositionGeneratorStartingAt: 3 asPoint
-		by: 4
-		columns: 63.
-
-	"Reusable block to add each element"
-	addElementBlock := [ :aGeometry :aBorder :anOutskirt |
-		sizes do: [ :eachSize |
-			builder addToRoot
-				background: Color black;
-				position: positionGenerator next;
-				size: eachSize;
-				geometry: aGeometry;
-				border: aBorder;
-				yourself ] ].
-
-	"Add variants of each geometry"
-	geometryBlocks do: [ :eachBlock |
-		addElementBlock
-			value: eachBlock value
-			value: BlBorder empty
-			value: BlOutskirts centered.
-		outskirts do: [ :eachOutskirt |
-			addElementBlock
-				value: eachBlock value
-				value: (BlBorder paint: Color cyan width: 1)
-				value: eachOutskirt ].
-		outskirts do: [ :eachOutskirt |
-			addElementBlock
-				value: eachBlock value
-				value: (BlBorder paint: Color green width: 2)
-				value: eachOutskirt ] ]
-
 ]
 
 { #category : #fixtures }
