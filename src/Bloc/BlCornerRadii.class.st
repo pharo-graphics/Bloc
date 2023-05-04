@@ -72,6 +72,8 @@ BlCornerRadii >> asNonOverlappingCornerRadiiToFitWidth: aWidth height: aHeight [
 	See: https://w3c.github.io/csswg-drafts/css-backgrounds-3/#corner-overlap"
 
 	| aFactor |
+	(aWidth isZero or: [ aHeight isZero ]) ifTrue: [ ^ self class empty ].
+
 	aFactor := self maxOverlappingFactorForWidth: aWidth height: aHeight.
 
 	^ aFactor > 1.0
