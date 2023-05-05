@@ -132,6 +132,6 @@ BlRoundedRectangleGeometry >> nonOverlappingCornersForBorderWidth: aNumber [
 	"Answer either current cornerRadii or a copy of it, that would work with any of the possible outskirts, and considering the current extent."
 
 	^ cornerRadii
-		  asNonOverlappingCornerRadiiToFitWidth: extent x - aNumber
-		  height: extent y - aNumber
+		  asNonOverlappingCornerRadiiToFitWidth: ((extent x - aNumber) max: 0.0)
+		  height: ((extent y - aNumber) max: 0.0)
 ]
