@@ -34,6 +34,9 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Tests' with: [
 					spec requires: #(#Bloc 'BlocHost-Mock' ). ].
 
+			"Pull and slide"
+			spec package: #'Bloc-PullAndSlide'.
+			
 			"Animation"
 			spec 
 				package: #'Bloc-Animation' with: [
