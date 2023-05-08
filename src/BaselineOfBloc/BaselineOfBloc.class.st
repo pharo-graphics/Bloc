@@ -36,6 +36,8 @@ BaselineOfBloc >> baseline: spec [
 
 			"Pull and slide"
 			spec package: #'Bloc-PullAndSlide'.
+			"Focus finder"
+			spec package: #'Bloc-FocusFinder'.
 			
 			"Animation"
 			spec 
