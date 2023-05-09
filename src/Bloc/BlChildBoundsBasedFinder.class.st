@@ -18,31 +18,30 @@ Class {
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> acceptableConstraints [
+
 	^ acceptableConstraints
 ]
 
 { #category : #accessing }
-BlChildBoundsBasedFinder >> acceptableConstraints: anObject [
-	acceptableConstraints := anObject
+BlChildBoundsBasedFinder >> acceptableConstraints: aBlBoundsMatcherConstraints [
+
+	acceptableConstraints := aBlBoundsMatcherConstraints
 ]
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> childAt: anIndex [
-	<return: #BlElement>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> childEndOf: anElement [
-	<return: #Number>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> childStartOf: anElement [
-	<return: #Number>
 	
 	^ self subclassResponsibility
 ]
@@ -58,8 +57,8 @@ BlChildBoundsBasedFinder >> detect [
 
 { #category : #'api - finder' }
 BlChildBoundsBasedFinder >> detectIfFound: aFoundBlock ifNone: aNoneBlock [
+
 	| aMatcher anAcceptableMatch aStep |
-	
 	aMatcher := BlBoundsMatcher new
 		parentStart: self parentStart;
 		parentEnd: self parentEnd.
@@ -97,44 +96,48 @@ BlChildBoundsBasedFinder >> detectIfFound: aFoundBlock ifNone: aNoneBlock [
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> fromIndex [
+
 	^ fromIndex
 ]
 
 { #category : #accessing }
-BlChildBoundsBasedFinder >> fromIndex: anObject [
-	fromIndex := anObject
+BlChildBoundsBasedFinder >> fromIndex: anInteger [
+
+	fromIndex := anInteger
 ]
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> parentEnd [
-	<return: #Number>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> parentStart [
-	<return: #Number>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> preferredConstraints [
+
 	^ preferredConstraints
 ]
 
 { #category : #accessing }
-BlChildBoundsBasedFinder >> preferredConstraints: anObject [
-	preferredConstraints := anObject
+BlChildBoundsBasedFinder >> preferredConstraints: aBlBoundsMatcherConstraints [
+
+	preferredConstraints := aBlBoundsMatcherConstraints
 ]
 
 { #category : #accessing }
 BlChildBoundsBasedFinder >> toIndex [
+
 	^ toIndex
 ]
 
 { #category : #accessing }
-BlChildBoundsBasedFinder >> toIndex: anObject [
-	toIndex := anObject
+BlChildBoundsBasedFinder >> toIndex: anInteger [
+
+	toIndex := anInteger
 ]

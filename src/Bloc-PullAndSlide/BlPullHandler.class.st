@@ -61,22 +61,24 @@ BlPullHandler >> allowOutOfBounds [
 
 { #category : #'api - pull handler' }
 BlPullHandler >> beFree [
+
 	direction := Any
 ]
 
 { #category : #'api - pull handler' }
 BlPullHandler >> beHorizontal [
+
 	direction := Horizontal
 ]
 
 { #category : #'api - pull handler' }
 BlPullHandler >> beVertical [
+
 	direction := Vertical
 ]
 
 { #category : #'private - pulling' }
 BlPullHandler >> computePullDelta: aDragDelta [
-	<return: #Number>
 	
 	direction = Any
 		ifTrue: [ ^ aDragDelta ].
@@ -111,25 +113,25 @@ BlPullHandler >> dragEvent: anEvent [
 	dragStartGlobalPosition ifNil: [
 		dragStartGlobalPosition := anEvent position ].
 
-	aCurrentPosition := pullTarget globalPointToParentChildren:
-		                    anEvent position.
-	aStartPosition := pullTarget globalPointToParentChildren:
-		                  dragStartGlobalPosition.
+	aCurrentPosition :=
+		pullTarget globalPointToParentChildren: anEvent position.
+	aStartPosition :=
+		pullTarget globalPointToParentChildren: dragStartGlobalPosition.
 
 	dragDelta := aCurrentPosition - aStartPosition.
-
 	dragDelta := (self computePullDelta: dragDelta) rounded.
-	aNewPosition := (originalPosition ifNil: [
-		                 originalPosition := pullTarget constraints position ])
-	                + dragDelta.
+
+	originalPosition ifNil: [
+		originalPosition := pullTarget constraints position ].
+
+	aNewPosition := originalPosition + dragDelta.
 	aPreviousPosition := pullTarget constraints position.
 	allowedOutOfBounds ifFalse: [
 		| aMaxPosition |
 		aMaxPosition := pullTarget hasParent
-			                ifTrue: [
-			                pullTarget parent extent
-			                - anEvent currentTarget extent ]
-			                ifFalse: [ 0 @ 0 ].
+			ifTrue: [
+				pullTarget parent extent - anEvent currentTarget extent ]
+			ifFalse: [ 0 @ 0 ].
 		aNewPosition := aNewPosition min: aMaxPosition max: 0 @ 0 ].
 
 	newX := relocateX
@@ -180,12 +182,15 @@ BlPullHandler >> initialize [
 ]
 
 { #category : #'event handling' }
-BlPullHandler >> onPulled: aPulledElement from: aPreviousPosition to: aNewPosition  by: aDragDelta starting: anOriginalPosition [
-	aPulledElement dispatchEvent: (BlPullEvent new
-		initialPosition: anOriginalPosition;
-		oldPosition: aPreviousPosition;
-		newPosition: aNewPosition;
-		delta: aDragDelta)
+BlPullHandler >> onPulled: aPulledElement from: aPreviousPosition to: aNewPosition by: aDragDelta starting: anOriginalPosition [
+
+	aPulledElement dispatchEvent:
+		(BlPullEvent new
+			initialPosition: anOriginalPosition;
+			oldPosition: aPreviousPosition;
+			newPosition: aNewPosition;
+			delta: aDragDelta;
+			yourself)
 ]
 
 { #category : #accessing }
