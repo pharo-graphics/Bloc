@@ -101,15 +101,23 @@ Bloc class >> preferencesOn: aBuilder [
 				domainValues: { BlChildrenArray . BlChildrenRope . BlChildrenLinkedList };
 				description: 'Choose which data structure should be used to store element''s children'.
 
-			(aBuilder setting: #assertionsEnabled)
+			(aBuilder range: #scrollingVelocity)
 				order: 5;
+				target: OBlInfiniteMouseScrollListener;
+				label: 'Scrolling velocity';
+				description: 'A positive integer used as a multiplier to increase mousewheel scrolling velocity ';
+				range: (1 to: 200 by: 1);
+				default: 20.
+				
+			(aBuilder setting: #assertionsEnabled)
+				order: 6;
 				target: self;
 				label: 'Assertions';
 				description: 'Set enabled to turn assertions on or disable to turn them off';
 				default: [ true ].
 				
 			(aBuilder setting: #debugModeEnabled)
-				order: 6;
+				order: 7;
 				target: self;
 				label: 'Debug Mode';
 				description: 'Set enabled to turn extensive debugging mode on or disable to turn it off';
