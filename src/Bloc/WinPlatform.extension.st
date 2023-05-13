@@ -9,6 +9,12 @@ WinPlatform >> blocKeyFor: aKeyValue in: aKeyTable [
 ]
 
 { #category : #'*Bloc' }
+WinPlatform >> defaultScrollingVelocity [
+
+	^ 100
+]
+
+{ #category : #'*Bloc' }
 WinPlatform >> primaryModifier [
 	^ BlAlternativeCombination new
 		key: KeyboardKey controlLeft;
