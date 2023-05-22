@@ -1,56 +1,44 @@
+"
+I represent an intermediate pulling step, that begun with a `BlPullStartEvent` and will finish with a `BlPullEndEvent`.
+
+I know the initial position (in space) where the pull started, and the current position where the pull dragging is located.
+"
 Class {
 	#name : #BlPullEvent,
 	#superclass : #BlEvent,
 	#instVars : [
-		'initialPosition',
-		'oldPosition',
-		'newPosition',
-		'delta'
+		'initialDragPosition',
+		'currentDragPosition'
 	],
 	#category : #'Bloc-PullAndSlide-Events'
 }
 
 { #category : #accessing }
-BlPullEvent >> absoluteDelta [
-	^ self newPosition - self initialPosition
+BlPullEvent >> currentPosition [
+
+	^ currentDragPosition
 ]
 
 { #category : #accessing }
-BlPullEvent >> delta [
-	^ delta
+BlPullEvent >> currentPosition: aPoint [
+
+	currentDragPosition := aPoint
 ]
 
 { #category : #accessing }
-BlPullEvent >> delta: anObject [
-	delta := anObject
+BlPullEvent >> deltaFromInitialPosition [
+
+	^ currentDragPosition - initialDragPosition
 ]
 
 { #category : #accessing }
 BlPullEvent >> initialPosition [
-	^ initialPosition
+
+	^ initialDragPosition
 ]
 
 { #category : #accessing }
-BlPullEvent >> initialPosition: anObject [
-	initialPosition := anObject
-]
+BlPullEvent >> initialPosition: aPoint [
 
-{ #category : #accessing }
-BlPullEvent >> newPosition [
-	^ newPosition
-]
-
-{ #category : #accessing }
-BlPullEvent >> newPosition: anObject [
-	newPosition := anObject
-]
-
-{ #category : #accessing }
-BlPullEvent >> oldPosition [
-	^ oldPosition
-]
-
-{ #category : #accessing }
-BlPullEvent >> oldPosition: anObject [
-	oldPosition := anObject
+	initialDragPosition := aPoint
 ]
