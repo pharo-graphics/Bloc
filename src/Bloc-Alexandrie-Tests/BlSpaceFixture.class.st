@@ -256,6 +256,27 @@ BlSpaceFixture >> buildClippingWithoutBorders [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildCompositeEffect [
+
+	| element compositeEffect |
+	builder spaceExtent: 45 @ 60.
+
+	element := builder addToRoot
+		background: Color black translucent;
+		position: 10 @ 15;
+		size: 20@30;
+		yourself.
+
+	compositeEffect := BlCompositeEffect effects: {
+		BlGaussianShadowEffect color: Color red width: 3 offset: 7 @ 11.
+		BlGaussianShadowEffect color: Color green width: 7 offset: -5 @ 7.
+		BlGaussianShadowEffect color: Color blue width: 11 offset: 7 @ -5 }.
+
+	element effect: compositeEffect.
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildDashesInsideAndOutsideBuggyForPolygon [
 	"Register this undesired rendering in some geometries with dashed border and outside or inside outskirts"
 
