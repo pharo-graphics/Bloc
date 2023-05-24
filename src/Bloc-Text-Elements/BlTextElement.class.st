@@ -610,6 +610,26 @@ BlTextElement >> selectionRectanglesFrom: aSelection [
 					   ifFalse: [ aSelectionStartPosition x @ origin y corner: aSelectionEndPosition x @ extentToUse y ]) ] ]
 ]
 
+{ #category : #asserting }
+BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
+
+	<return: #Boolean>
+	paragraph ifNil: [ ^ true ].
+
+	paragraph isEmpty ifTrue: [ ^ true ].
+
+	self privatePreviousMeasurementSpec = anExtentMeasurementSpec 
+		ifFalse: [ ^ true ].
+
+	paragraph maxWidth = (self computeMaxWidth: anExtentMeasurementSpec) 
+		ifFalse: [ ^ true ].
+
+	paragraph maxHeight = (self computeMaxHeight: anExtentMeasurementSpec) 
+		ifFalse: [ ^ true ].
+
+	^ false
+]
+
 { #category : #layout }
 BlTextElement >> supportsBaseline [
 	<return: #Boolean>

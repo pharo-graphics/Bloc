@@ -204,6 +204,11 @@ BlTextParagraph >> initialize [
 	line := BlTextParagraphLine new
 ]
 
+{ #category : #testing }
+BlTextParagraph >> isEmpty [
+	^ self line isEmpty
+]
+
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> left [
 	"Return a visual left coordinate of the text (left-most rendered pixel)"
@@ -211,10 +216,28 @@ BlTextParagraph >> left [
 	^ line left
 ]
 
+{ #category : #accessing }
+BlTextParagraph >> line [
+
+	^ line
+]
+
+{ #category : #'api - instantiation' }
+BlTextParagraph >> maxHeight [
+
+	^ maxHeight
+]
+
 { #category : #'api - instantiation' }
 BlTextParagraph >> maxHeight: aNumber [
 
 	maxHeight := aNumber
+]
+
+{ #category : #'api - instantiation' }
+BlTextParagraph >> maxWidth [
+
+	^ maxWidth
 ]
 
 { #category : #'api - instantiation' }
