@@ -79,6 +79,8 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Alexandrie' with: [
 					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
 				package: #'Bloc-Alexandrie-Tests' with: [
+					spec requires: #('Bloc-Alexandrie') ];
+				package: #'Bloc-Text-Alexandrie-Examples' with: [
 					spec requires: #('Bloc-Alexandrie') ].
 
 			"Layout"
