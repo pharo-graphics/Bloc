@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTextElementExamples,
 	#superclass : #Object,
-	#category : #'Bloc-Text-Examples-Elements'
+	#category : #'Bloc-Text-Examples-element'
 }
 
 { #category : #example }
