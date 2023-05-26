@@ -51,23 +51,20 @@ BlProportionalLayout class >> constraints [
 { #category : #measure }
 BlProportionalLayout >> boundsForChild: aChild in: parentBounds [
 
-	| allowedBounds childBounds horizontalFractions verticalFractions |
-	allowedBounds := aChild margin inset: parentBounds.
+	| allowedBounds horizontalFractions verticalFractions |
 	horizontalFractions := aChild constraints proportional horizontal.
 	verticalFractions := aChild constraints proportional vertical.
 
-	childBounds :=
-		BlBounds
-			left: allowedBounds left +
-				(allowedBounds width * horizontalFractions leftFraction) rounded
-			top: allowedBounds top +
-				(allowedBounds height * verticalFractions topFraction) rounded
-			right: allowedBounds right -
-				(allowedBounds width * (1.0 - horizontalFractions rightFraction)) rounded
-			bottom: allowedBounds bottom -
-				(allowedBounds height * (1.0 - verticalFractions bottomFraction)) rounded.
+	allowedBounds := BlBounds fromRectangle: (aChild margin inset: parentBounds).
+	allowedBounds
+		shrinkByLeft: (allowedBounds width * horizontalFractions leftFraction)
+		top: (allowedBounds height * verticalFractions topFraction)
+		right: (allowedBounds width * (1.0 - horizontalFractions rightFraction))
+		bottom: (allowedBounds height * (1.0 - verticalFractions bottomFraction)).
 
-	^ childBounds
+	allowedBounds expanded. "It updates itself!"
+
+	^ allowedBounds
 ]
 
 { #category : #measure }

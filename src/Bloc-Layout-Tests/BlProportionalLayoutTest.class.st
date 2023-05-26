@@ -64,13 +64,13 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 	self
 		assert: aChild bounds inParent topLeft "=aChild position"
 		equals:
-			(containerPadding left + childMargin left + (childMaxWidth * childFractions left)) rounded @
-			(containerPadding top + childMargin top + (childMaxHeight * childFractions top)) rounded.
+			(containerPadding left + childMargin left + (childMaxWidth * childFractions left)) floor @
+			(containerPadding top + childMargin top + (childMaxHeight * childFractions top)) floor.
 	self
 		assert: aChild bounds inParent bottomRight
 		equals:
-			(containerExtent x - containerPadding right - childMargin right - (childMaxWidth * (1 - childFractions right))) rounded @
-			(containerExtent y - containerPadding bottom - childMargin bottom - (childMaxHeight * (1 - childFractions bottom))) rounded
+			(containerExtent x - containerPadding right - childMargin right - (childMaxWidth * (1 - childFractions right))) ceiling @
+			(containerExtent y - containerPadding bottom - childMargin bottom - (childMaxHeight * (1 - childFractions bottom))) ceiling
 ]
 
 { #category : #tests }

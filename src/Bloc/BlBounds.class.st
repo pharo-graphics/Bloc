@@ -613,6 +613,15 @@ BlBounds >> scaleX: aX Y: aY [
 	bottom := bottom * aY
 ]
 
+{ #category : #'rectangle functions' }
+BlBounds >> shrinkByLeft: aLeft top: aTop right: aRight bottom: aBottom [
+	
+	left := left + aLeft.
+	top := top + aTop.
+	right := right - aRight.
+	bottom := bottom - aBottom
+]
+
 { #category : #printing }
 BlBounds >> storeOn: aStream [ 
 	"printed form is good for storing too"
