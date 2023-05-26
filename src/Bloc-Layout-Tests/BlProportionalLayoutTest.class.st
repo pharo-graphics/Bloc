@@ -27,8 +27,17 @@ BlProportionalLayoutTest >> testDefaultConstraints [
 	self assert: aChild position equals: 5@5.
 	self assert: aChild extent equals: 200@100.
 	self
-		assert: aChild constraints proportional fractions
-		equals: ((0.0@0.0) corner: (1.0@1.0))
+		assert: aChild constraints proportional horizontal leftFraction
+		equals: 0.0.
+	self
+		assert: aChild constraints proportional vertical topFraction
+		equals: 0.0.
+	self
+		assert: aChild constraints proportional horizontal rightFraction
+		equals: 1.0.
+	self
+		assert: aChild constraints proportional vertical bottomFraction
+		equals: 1.0
 ]
 
 { #category : #tests }
@@ -39,14 +48,21 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 	containerPadding := BlInsets top: 3 left: 5 bottom: 7 right: 11.
 	childMargin := BlInsets top: 13 left: 17 bottom: 19 right: 23.
 	childFractions := BlInsets top: 0.1 left: 0.2 bottom: 0.8 right: 0.9.
-	childMaxWidth := containerExtent x - containerPadding left - containerPadding right - childMargin left - childMargin right.
-	childMaxHeight := containerExtent y - containerPadding top - containerPadding bottom - childMargin top - childMargin bottom.
 
 	aChild := BlElement new
 		id: #child;
 		constraintsDo: [ :c |
-			c proportional fractions: childFractions.
-			c margin: childMargin ];
+
+			c margin: childMargin.
+
+			c proportional horizontal
+				leftFraction: childFractions left;
+				rightFraction: childFractions right.
+
+			c proportional vertical
+				topFraction: childFractions top;
+				bottomFraction: childFractions bottom ];
+
 		yourself.
 
 	aContainer := BlElement new
@@ -61,11 +77,16 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 	aContainer forceLayout.
 
 	self assert: aContainer extent equals: containerExtent.
+
+	childMaxWidth := containerExtent x - containerPadding left - containerPadding right - childMargin left - childMargin right.
+	childMaxHeight := containerExtent y - containerPadding top - containerPadding bottom - childMargin top - childMargin bottom.
+
 	self
 		assert: aChild bounds inParent topLeft "=aChild position"
 		equals:
 			(containerPadding left + childMargin left + (childMaxWidth * childFractions left)) floor @
 			(containerPadding top + childMargin top + (childMaxHeight * childFractions top)) floor.
+
 	self
 		assert: aChild bounds inParent bottomRight
 		equals:
