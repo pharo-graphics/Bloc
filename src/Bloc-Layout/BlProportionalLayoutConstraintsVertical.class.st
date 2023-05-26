@@ -1,3 +1,6 @@
+"
+I represent the vertical constraints of a `BlProportionalLayout`.
+"
 Class {
 	#name : #BlProportionalLayoutConstraintsVertical,
 	#superclass : #BlLayoutConstraintsAxis,

@@ -1,3 +1,6 @@
+"
+I represent the constraints of a `BlProportionalLayout`.
+"
 Class {
 	#name : #BlProportionalLayoutConstraints,
 	#superclass : #BlLayoutConstraints,
