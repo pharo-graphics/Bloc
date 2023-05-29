@@ -5,8 +5,8 @@ Class {
 	#name : #BlProportionalLayoutConstraintsHorizontal,
 	#superclass : #BlLayoutConstraintsAxis,
 	#instVars : [
-		'leftFraction',
-		'rightFraction'
+		'left',
+		'right'
 	],
 	#category : #'Bloc-Layout-Proportional'
 }
@@ -16,30 +16,30 @@ BlProportionalLayoutConstraintsHorizontal >> initialize [
 
 	super initialize.
 	
-	leftFraction := 0.0.
-	rightFraction := 1.0
+	left := 0.0.
+	right := 1.0
 ]
 
 { #category : #accessing }
-BlProportionalLayoutConstraintsHorizontal >> leftFraction [
+BlProportionalLayoutConstraintsHorizontal >> left [
 
-	^ leftFraction
+	^ left
 ]
 
 { #category : #accessing }
-BlProportionalLayoutConstraintsHorizontal >> leftFraction: aNumber [
+BlProportionalLayoutConstraintsHorizontal >> left: aNumber [
 
-	leftFraction := aNumber
+	left := aNumber
 ]
 
 { #category : #accessing }
-BlProportionalLayoutConstraintsHorizontal >> rightFraction [
+BlProportionalLayoutConstraintsHorizontal >> right [
 
-	^ rightFraction
+	^ right
 ]
 
 { #category : #accessing }
-BlProportionalLayoutConstraintsHorizontal >> rightFraction: aNumber [
+BlProportionalLayoutConstraintsHorizontal >> right: aNumber [
 
-	rightFraction := aNumber
+	right := aNumber
 ]

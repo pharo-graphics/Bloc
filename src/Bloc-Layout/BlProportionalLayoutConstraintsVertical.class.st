@@ -5,22 +5,22 @@ Class {
 	#name : #BlProportionalLayoutConstraintsVertical,
 	#superclass : #BlLayoutConstraintsAxis,
 	#instVars : [
-		'topFraction',
-		'bottomFraction'
+		'top',
+		'bottom'
 	],
 	#category : #'Bloc-Layout-Proportional'
 }
 
 { #category : #accessing }
-BlProportionalLayoutConstraintsVertical >> bottomFraction [
+BlProportionalLayoutConstraintsVertical >> bottom [
 
-	^ bottomFraction
+	^ bottom
 ]
 
 { #category : #accessing }
-BlProportionalLayoutConstraintsVertical >> bottomFraction: aNumber [
+BlProportionalLayoutConstraintsVertical >> bottom: aNumber [
 
-	bottomFraction := aNumber
+	bottom := aNumber
 ]
 
 { #category : #initialization }
@@ -28,18 +28,18 @@ BlProportionalLayoutConstraintsVertical >> initialize [
 
 	super initialize.
 	
-	topFraction := 0.0.
-	bottomFraction := 1.0
+	top := 0.0.
+	bottom := 1.0
 ]
 
 { #category : #accessing }
-BlProportionalLayoutConstraintsVertical >> topFraction [
+BlProportionalLayoutConstraintsVertical >> top [
 
-	^ topFraction
+	^ top
 ]
 
 { #category : #accessing }
-BlProportionalLayoutConstraintsVertical >> topFraction: aNumber [
+BlProportionalLayoutConstraintsVertical >> top: aNumber [
 
-	topFraction := aNumber
+	top := aNumber
 ]

@@ -27,16 +27,16 @@ BlProportionalLayoutTest >> testDefaultConstraints [
 	self assert: aChild position equals: 5@5.
 	self assert: aChild extent equals: 200@100.
 	self
-		assert: aChild constraints proportional horizontal leftFraction
+		assert: aChild constraints proportional horizontal left
 		equals: 0.0.
 	self
-		assert: aChild constraints proportional vertical topFraction
+		assert: aChild constraints proportional vertical top
 		equals: 0.0.
 	self
-		assert: aChild constraints proportional horizontal rightFraction
+		assert: aChild constraints proportional horizontal right
 		equals: 1.0.
 	self
-		assert: aChild constraints proportional vertical bottomFraction
+		assert: aChild constraints proportional vertical bottom
 		equals: 1.0
 ]
 
@@ -56,12 +56,12 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 			c margin: childMargin.
 
 			c proportional horizontal
-				leftFraction: childFractions left;
-				rightFraction: childFractions right.
+				left: childFractions left;
+				right: childFractions right.
 
 			c proportional vertical
-				topFraction: childFractions top;
-				bottomFraction: childFractions bottom ];
+				top: childFractions top;
+				bottom: childFractions bottom ];
 
 		yourself.
 
@@ -102,11 +102,11 @@ BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 		id: #child;
 		constraintsDo: [ :c |
 			c proportional horizontal
-				leftFraction: 0.1;
-				rightFraction: 0.9.
+				left: 0.1;
+				right: 0.9.
 			c proportional vertical
-				topFraction: 0.2;
-				bottomFraction: 0.8 ];
+				top: 0.2;
+				bottom: 0.8 ];
 			yourself.
 
 	aContainer := BlElement new
@@ -130,13 +130,13 @@ BlProportionalLayoutTest >> testMultipleChildren [
 	childA := BlElement new
 		id: #childA;
 		constraintsDo: [ :c |
-			c proportional horizontal rightFraction: 0.5 ];
+			c proportional horizontal right: 0.5 ];
 		yourself.
 
 	childB := BlElement new
 		id: #childB;
 		constraintsDo: [ :c |
-			c proportional horizontal leftFraction: 0.5 ];
+			c proportional horizontal left: 0.5 ];
 		yourself.
 
 	aContainer := BlElement new

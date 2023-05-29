@@ -51,20 +51,18 @@ BlProportionalLayout class >> constraints [
 { #category : #measure }
 BlProportionalLayout >> boundsForChild: aChild in: parentBounds [
 
-	| allowedBounds horizontalFractions verticalFractions |
-	horizontalFractions := aChild constraints proportional horizontal.
-	verticalFractions := aChild constraints proportional vertical.
+	| result horizontalProportions verticalProportions |
+	horizontalProportions := aChild constraints proportional horizontal.
+	verticalProportions := aChild constraints proportional vertical.
 
-	allowedBounds := BlBounds fromRectangle: (aChild margin inset: parentBounds).
-	allowedBounds
-		shrinkByLeft: (allowedBounds width * horizontalFractions leftFraction)
-		top: (allowedBounds height * verticalFractions topFraction)
-		right: (allowedBounds width * (1.0 - horizontalFractions rightFraction))
-		bottom: (allowedBounds height * (1.0 - verticalFractions bottomFraction)).
-
-	allowedBounds expanded. "It updates itself!"
-
-	^ allowedBounds
+	result := BlBounds fromRectangle: (aChild margin inset: parentBounds).
+	result
+		shrinkByLeft: result width * horizontalProportions left
+		top: result height * verticalProportions top
+		right: result width * (1.0 - horizontalProportions right)
+		bottom: result height * (1.0 - verticalProportions bottom).
+	result expanded. "Ensure integer values"
+	^ result
 ]
 
 { #category : #measure }
