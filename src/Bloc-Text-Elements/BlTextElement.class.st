@@ -306,6 +306,13 @@ BlTextElement >> isTabulation [
 BlTextElement >> labelMeasurement [
 
 	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
+
+	self flag: 'To be reviewed'.
+	"For the record: int the Bloc original version, BlTextElementLabelMeasurementStrategy is used. 
+	Changed to BlTextElementEditorMeasurementStrategy to make multiline ToLabel working correctly.
+	This will maybe be changed back to BlTextElementLabelMeasurementStrategy later
+	"
+
 	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
 ]
 
