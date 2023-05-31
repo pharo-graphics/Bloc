@@ -185,13 +185,6 @@ BlHost >> supportsFormSurface [
 	^ false
 ]
 
-{ #category : #'host - testing' }
-BlHost >> supportsOpenGLSurface [
-	"Return true if this host can work with OpenGL surface, false otherwise"
-	
-	^ false
-]
-
 { #category : #enumerating }
 BlHost >> uiProcessDo: aBlock [
 
