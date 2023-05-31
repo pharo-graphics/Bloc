@@ -79,11 +79,9 @@ BlHostRenderer >> finishedRender: aSpace [
 { #category : #testing }
 BlHostRenderer >> hasResized: aHostSpace [
 	"Return true if host space resized since previous frame, otherwise false"
-	<return: #Boolean>
 	
-	"we are not yet initialized"
-	self isValid
-		ifFalse: [ ^ true ].
+	"check if not initialized"
+	self isValid ifFalse: [ ^ true ].
 	
 	"check if the size changed"
 	^ aHostSpace physicalSize ~= surface physicalSize
@@ -102,7 +100,6 @@ BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 BlHostRenderer >> isRenderNeeded: aSpace [
 	"Return true if I need to render a given space.
 	By default I check if there are any dirty areas, if there are none - no need to render"
-	<return: #Boolean>
 
 	^ aSpace dirtyAreas notEmpty
 ]
@@ -131,9 +128,10 @@ BlHostRenderer >> measureTextParagraph: aBlTextParagraph [
 { #category : #rendering }
 BlHostRenderer >> render: aHostSpace [
 	"Render a given space according to its dirty areas.
-	Note: if there are no dirty areas nothing will happen, including window or canvas update"
+	Note: if there are no dirty areas nothing will happen, including window
+	or canvas update."
+
 	| aSpace shouldUpdateEveryFrame isRenderNeeded |
-	
 	aSpace := aHostSpace space.
 	shouldUpdateEveryFrame := surface shouldUpdateEveryFrame.
 	isRenderNeeded := self isRenderNeeded: aSpace.

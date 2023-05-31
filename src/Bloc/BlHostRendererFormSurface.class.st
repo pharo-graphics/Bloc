@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'externalForm'
 	],
-	#category : #'Bloc-Universe - Renderer - NU'
+	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #testing }
@@ -22,48 +22,48 @@ BlHostRendererFormSurface class >> isSupportedBy: anObject [
 
 { #category : #accessing }
 BlHostRendererFormSurface class >> priority [
+
 	^ 30
 ]
 
 { #category : #initialization }
 BlHostRendererFormSurface >> createSpaceRendererOn: anObject [
-	<return: #BlHostSpaceRenderer>
 
 	^ anObject createFormSpaceRenderer
 ]
 
 { #category : #initialization }
 BlHostRendererFormSurface >> createSurfaceRendererOn: anObject [
-	<return: #BlHostSurfaceRenderer>
 	
 	^ anObject createFormSurfaceRenderer
 ]
 
 { #category : #geometry }
 BlHostRendererFormSurface >> extent [
-	"Return actual extent of the underlying surface.
-	Note: it may be different from canvas or window extents"
-	<return: #Point>
 	
 	^ externalForm extent
 ]
 
 { #category : #accessing }
 BlHostRendererFormSurface >> form [
+
 	^ externalForm
 ]
 
 { #category : #accessing }
 BlHostRendererFormSurface >> form: aForm [
+
 	externalForm := aForm
 ]
 
 { #category : #accessing }
 BlHostRendererFormSurface >> pointer [
+
 	^ externalForm pointer
 ]
 
 { #category : #accessing }
 BlHostRendererFormSurface >> stride [
+
 	^ externalForm stride
 ]
