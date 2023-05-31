@@ -5,24 +5,14 @@ I am a mediator between host space and host renderer
 Class {
 	#name : #BlHostRendererSurface,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'physicalSize',
 		'scaleFactor',
 		'shouldUpdateEveryFrame',
 		'updateActions'
 	],
-	#category : #'Bloc-Universe - Renderer - NU'
+	#category : #'Bloc-Universe - Renderer'
 }
-
-{ #category : #accessing }
-BlHostRendererSurface class >> allSurfaces [
-	"Return a collection of all possible surfaces"
-	<return: #Collection of: #'BlHostRendererSurface class'>
-
-	^ self allSubclasses
-]
 
 { #category : #testing }
 BlHostRendererSurface class >> isSupportedBy: anObject [

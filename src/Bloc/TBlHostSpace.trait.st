@@ -35,13 +35,6 @@ TBlHostSpace >> createFormSurfaceRenderer [
 	^ self explicitRequirement
 ]
 
-{ #category : #initialization }
-TBlHostSpace >> createOpenGLSurfaceRenderer [
-	<return: #BlHostSurfaceRenderer>
-
-	^ self explicitRequirement
-]
-
 { #category : #'host space - cursor' }
 TBlHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
@@ -273,14 +266,6 @@ TBlHostSpace >> supportsFormSurface [
 	<return: #Boolean>
 	
 	^ self host supportsFormSurface
-]
-
-{ #category : #'host space - testing' }
-TBlHostSpace >> supportsOpenGLSurface [
-	"Return true if this host space can work with OpenGL surface, false otherwise"
-	<return: #Boolean>
-	
-	^ self host supportsOpenGLSurface
 ]
 
 { #category : #'host space - displaying' }
