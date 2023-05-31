@@ -31,7 +31,7 @@ TBlHostSpace >> createBufferSurfaceRenderer [
 
 { #category : #initialization }
 TBlHostSpace >> createFormSurfaceRenderer [
-	<return: #BlHostSurfaceRenderer>
+	"Answer a new `BlHostSurfaceRenderer`."
 	
 	^ self explicitRequirement
 ]
