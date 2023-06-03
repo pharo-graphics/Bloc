@@ -93,9 +93,12 @@ BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
 	self
 		assert: textElement baselineMeasurer
 		equals: BlAscentTightBaselineMeasurer uniqueInstance.
+
+	"This assertion is counter-intuitive, but has a reason.
+	See: https://github.com/pharo-graphics/Bloc/issues/263"
 	self
 		assert: textElement measurement
-		equals: BlTextElementLabelMeasurementStrategy uniqueInstance.
+		equals: BlTextElementEditorMeasurementStrategy uniqueInstance.
 
 	^ textElement
 ]

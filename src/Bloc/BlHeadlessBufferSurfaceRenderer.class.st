@@ -6,8 +6,8 @@ Class {
 
 { #category : #initialization }
 BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
+
 	| aForm thePixels anExtent |
-	
 	anExtent := aSurface physicalSize asPoint.
 	
 	aForm := Form extent: anExtent depth: 32.

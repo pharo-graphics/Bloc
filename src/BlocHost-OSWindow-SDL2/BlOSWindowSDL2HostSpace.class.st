@@ -12,3 +12,9 @@ BlOSWindowSDL2HostSpace >> createBufferSurfaceRenderer [
 		  window: window;
 		  yourself
 ]
+
+{ #category : #initialization }
+BlOSWindowSDL2HostSpace >> newBlHostRendererSurface [
+
+	^ BlHostRendererBufferSurface newForHostSpace: self
+]
