@@ -82,6 +82,7 @@ BlSpace class >> doStyle: anElement [
 BlSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	| theStatesToInherit allNewStates newInheritedStates |
 
+	anElement states ifNil: [ ^ self ].
 	anElement states inheritedStates: aCollectionOfStates.
 	allNewStates := anElement states allStates.
 	
