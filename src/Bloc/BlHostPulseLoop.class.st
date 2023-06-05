@@ -49,7 +49,7 @@ BlHostPulseLoop >> defaultPulsePeriod [
 	^ 15 milliSeconds
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #debug }
 BlHostPulseLoop >> forceStartNewUIProcess [
 	"I should only be used by the logic for opening the debugger.
 	
@@ -63,7 +63,7 @@ BlHostPulseLoop >> forceStartNewUIProcess [
 	loopProcess resume.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #debug }
 BlHostPulseLoop >> forceStartOfUIProcess: aProces [
 	"I should only be used by the logic for closing the debugger."
 	
