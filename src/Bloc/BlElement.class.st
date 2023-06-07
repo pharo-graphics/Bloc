@@ -1892,6 +1892,16 @@ BlElement >> ignoreRequestLayoutDuring: aBlock [
 			ifFalse: [ flags clearShouldIgnoreLayoutRequests ] ]
 ]
 
+{ #category : #'api - space' }
+BlElement >> inSpace [
+	"Add self to a new BlSpace. Answer such space."
+	| sp |
+	sp := OBlSpace new.
+	sp root addChild: self.
+	^ sp
+
+]
+
 { #category : #processing }
 BlElement >> inUIProcessDo: aBlock [
 	"Run the supplied block in the UI process.
@@ -2874,6 +2884,16 @@ BlElement >> openInNewSpace [
 		  addChild: self;
 		  show;
 		  yourself
+]
+
+{ #category : #convenience }
+BlElement >> openInSpace [
+	"Add self to a new BlSpace and show it. Answer such space."
+	| sp |
+	sp := self inSpace.
+	sp show.
+	^ sp
+
 ]
 
 { #category : #'geometry bounds' }
