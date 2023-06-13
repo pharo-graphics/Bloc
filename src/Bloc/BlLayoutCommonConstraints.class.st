@@ -273,6 +273,12 @@ BlLayoutCommonConstraints >> position: aPoint [
 	position := aPoint
 ]
 
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> proportional [
+
+	^ self at: BlProportionalLayout
+]
+
 { #category : #testing }
 BlLayoutCommonConstraints >> shouldAccountTransformation [
 	<return: #Boolean>
