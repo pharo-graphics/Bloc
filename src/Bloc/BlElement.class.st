@@ -1585,6 +1585,7 @@ BlElement >> forceLayout [
 	Note: because layout measurement may depend on other element it is mandatory to compute
 	layout going down from the top most parent, otherwise layout will not be valid"
 
+	self requestLayout.
 	self topMostParent computeLayout
 ]
 
