@@ -888,7 +888,6 @@ BlElement >> compositionDepth [
 { #category : #'api - painting' }
 BlElement >> compositionLayer [
 	"Return my composition layer if I have one or nil otherwise"
-	<return: #BlCompositionLayer or: nil>
 	
 	^ self userData
 		at: #compositionLayer
@@ -1157,10 +1156,9 @@ BlElement >> detachChild: anElement [
 BlElement >> detachCompositionLayer [
 	"Detach my composition layer if any"
 
-	self compositionLayer
-		ifNotNil: [ :aLayer |
-			aLayer removeFromParent.
-			self compositionLayer: nil ]
+	self compositionLayer ifNotNil: [ :aLayer |
+		aLayer removeFromParent.
+		self compositionLayer: nil ]
 ]
 
 { #category : #'children add/remove' }
@@ -2000,20 +1998,12 @@ BlElement >> invalidate [
 BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 	"Invalidate due to relocation by a given offset"
 
-	self wantsSeparateCompositingLayer
-		ifTrue: [
-			self hasCompositionLayer
-				ifTrue: [
-					| aLayer |
-					aLayer := self compositionLayer.
-					aLayer offset: aLayer offset + aNewPosition - aPreviousPosition.
-					self isAttachedToSceneGraph
-						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
-				ifFalse: [ self hasParent
-						ifTrue: [ self parent invalidate ] ] ]
-		ifFalse: [
-			self hasParent
-				ifTrue: [ self parent invalidate ] ]
+	(self wantsSeparateCompositingLayer and: [
+		self hasCompositionLayer and: [
+			self isAttachedToSceneGraph ] ]) ifTrue: [
+				self space markNeedsCompositionPaint: self from: self ].
+
+	self hasParent ifTrue: [ self parent invalidate ]
 ]
 
 { #category : #'api - look' }
@@ -2022,13 +2012,18 @@ BlElement >> invalidateChildren [
 	self childrenDo: [ :each | each invalidate ]
 ]
 
+{ #category : #accessing }
+BlElement >> invalidationBounds [
+
+	^ boundsCache invalidationBounds
+]
+
 { #category : #'geometry bounds' }
 BlElement >> invalidationBounds: aBounds [
-	"I compute and load damaged area in my local coordinates that would be invalidated
-	if #invalidate would be sent to me"
-	<return: #BlBounds>
-	| anInvalidationBounds |
+	"Compute the bounds of self, including my children recursively, in my local
+	coordinates that would be invalidated if #invalidate would be sent to me."
 
+	| anInvalidationBounds |
 	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
 
 	self clipChildren ifFalse: [ 
@@ -2451,6 +2446,7 @@ BlElement >> margin: aBlInsets [
 
 { #category : #'api - painting' }
 BlElement >> markDoesNotNeedPaint [
+
 	flags clearNeedsPaint
 ]
 
@@ -2458,24 +2454,24 @@ BlElement >> markDoesNotNeedPaint [
 BlElement >> markNeedsPaintFrom: anElement [
 	"Make me as dirty and request renderer to re-paint me.
 	anElement is the element from which the re-painting request originates"
+
 	flags addNeedsPaint.
-	
+
 	self wantsSeparateCompositingLayer
 		ifTrue: [
-			self isAttachedToSceneGraph
-				ifTrue: [
-					self hasCompositionLayer
-						ifTrue: [ self space markNeedsPaint: self from: anElement ]
-						ifFalse: [
-							self hasParent
-								ifTrue: [ self parent markNeedsPaintFrom: anElement ]
-								ifFalse: [ self space markNeedsPaint: self from: anElement ]	] ] ]
+			self isAttachedToSceneGraph ifTrue: [
+				self hasCompositionLayer
+					ifTrue: [ self space markNeedsPaint: self from: anElement ]
+					ifFalse: [
+						self hasParent
+							ifTrue: [ self parent markNeedsPaintFrom: anElement ]
+							ifFalse: [ self space markNeedsPaint: self from: anElement ] ] ] ]
 		ifFalse: [ 
 			self hasParent
 				ifTrue: [ self parent markNeedsPaintFrom: anElement ]
 				ifFalse: [
-					self isAttachedToSceneGraph
-						ifTrue: [ self space markNeedsPaint: self from: anElement ] ] ]
+					self isAttachedToSceneGraph ifTrue: [
+						self space markNeedsPaint: self from: anElement ] ] ]
 ]
 
 { #category : #layout }
@@ -2597,7 +2593,6 @@ BlElement >> mouseCursor: aCursor [
 { #category : #'api - painting' }
 BlElement >> needsPaint [
 	"Return true if I am marked as dirty and am waiting to be re-painted"
-	<return: #Boolean>
 
 	^ flags hasNeedsPaint
 ]

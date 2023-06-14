@@ -97,16 +97,51 @@ BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
 BlElement >> aeFullDrawOn: aCanvas [
 	"Main entry point to draw myself and my children on an Alexandrie canvas."
 
-	self flag: #todo. "Why is this commented?"
-	"flags clearNeedsPaint."
+	(self isTransparent or: [ self isVisible not ]) ifTrue: [
+		^ self markDoesNotNeedPaint ].
+
+	self wantsSeparateCompositingLayer
+		ifFalse: [ self aeDrawOn: aCanvas ]
+		ifTrue: [ self ensureLayerAndDrawOn: aCanvas ].
 	
-	"We do not draw transparent elements at all"
-	self isTransparent
-		ifTrue: [ ^ self ].
+	self markDoesNotNeedPaint
+]
 
-	"invisible elements are not rendered too"
-	self isVisible
-		ifFalse: [ ^ self ].
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> ensureLayerAndDrawOn: aCanvas [
 
-	self aeDrawOn: aCanvas
+	| layer |
+	"Ensure we have the layer ready"
+	(self hasCompositionLayer not or: [ self needsPaint ])
+		ifFalse: [ layer := self compositionLayer ]
+		ifTrue: [
+			| layerSurface layerCanvas theBounds layerOffset |
+			theBounds := self invalidationBounds.
+			layerOffset := theBounds origin.
+			layerSurface := AeCairoImageSurface extent: theBounds extent.
+			layerCanvas := AeCanvas newFor: layerSurface.
+			layerCanvas pathTranslate: layerOffset negated.
+			self
+				aeDrawEffectBelowGeometryOn: layerCanvas;
+				aeDrawGeometryOn: layerCanvas;
+				aeDrawEffectAboveGeometryOn: layerCanvas;
+				aeDrawChildrenOn: layerCanvas.
+			layerCanvas flush.
+			layer :=
+				BACompositionLayer new
+					surface: layerSurface;
+					offset: layerOffset;
+					yourself.
+			self compositionLayer: layer ].
+
+	"Paint the layer on the canvas"
+	self aeDrawOn: aCanvas with: [
+		aCanvas pathTranslate: self position.
+		self transformation aeApplyTo: aCanvas.
+
+		aCanvas privateAeCairoContext
+			sourceSurface: layer surface
+				x: layer offset x
+				y: layer offset y;
+			paint ]
 ]
