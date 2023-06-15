@@ -580,6 +580,13 @@ BlElement >> beOutskirtsOutside [
 	self outskirts: BlOutskirts outside
 ]
 
+{ #category : #'api - compositing' }
+BlElement >> beWithoutCompositionLayer [
+	"Make me and my children be rendered without compositing layer"
+
+	visuals := visuals compositingMode: BlCompositingWithoutLayerMode uniqueInstance
+]
+
 { #category : #'api - look' }
 BlElement >> border [
 	<return: #BlBorder>
