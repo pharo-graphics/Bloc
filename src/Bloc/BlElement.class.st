@@ -552,14 +552,14 @@ BlElement >> baselineOffset [
 BlElement >> beInSeparateCompositionLayer [
 	"Make me that I want to be rendered in a separate compositing layer"
 
-	visuals := visuals compositingMode: BlCompositingSeparateLayerMode uniqueInstance
+	self compositingMode: BlCompositingSeparateLayerMode uniqueInstance
 ]
 
 { #category : #'api - compositing' }
 BlElement >> beInSingleCompositionLayer [
 	"Make me and my children be rendered in a single compositing layer"
 
-	visuals := visuals compositingMode: BlCompositingSingleLayerMode uniqueInstance
+	self compositingMode: BlCompositingSingleLayerMode uniqueInstance
 ]
 
 { #category : #accessing }
@@ -584,7 +584,7 @@ BlElement >> beOutskirtsOutside [
 BlElement >> beWithoutCompositionLayer [
 	"Make me and my children be rendered without compositing layer"
 
-	visuals := visuals compositingMode: BlCompositingWithoutLayerMode uniqueInstance
+	self compositingMode: BlCompositingWithoutLayerMode uniqueInstance
 ]
 
 { #category : #'api - look' }
@@ -881,6 +881,17 @@ BlElement >> compositingMode [
 	<return: #BlCompositingMode>
 
 	^ visuals compositingMode
+]
+
+{ #category : #'api - compositing' }
+BlElement >> compositingMode: aBlCompositingMode [
+	"Establish the compositing mode, and invalidate myself except if it's not a change."
+
+	visuals compositingMode = aBlCompositingMode ifTrue: [ 
+		^ self ].
+
+	visuals := visuals compositingMode: aBlCompositingMode.
+	self invalidate.
 ]
 
 { #category : #'api - compositing' }
