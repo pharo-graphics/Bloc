@@ -129,6 +129,20 @@ BlElement >> aeDrawOnCompositionLayerCleanBefore: shouldClean [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlElement >> aeEnsureCompositionLayer [
+	"Ensure the compositionLayer is ready"
+
+	self hasCompositionLayer
+		ifTrue: [
+			self needsPaint ifTrue: [
+				self aeUpdateCompositionLayer ] ]
+		ifFalse: [
+			"First time, and after re-opening image."
+			self aeCreateCompositionLayer ]
+
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeFullDrawOn: aCanvas [
 	"Main entry point to draw myself and my children on an Alexandrie canvas."
 
@@ -136,10 +150,30 @@ BlElement >> aeFullDrawOn: aCanvas [
 		^ self markDoesNotNeedPaint ].
 
 	self wantsSeparateCompositingLayer
-		ifFalse: [ self aeDrawOn: aCanvas ]
-		ifTrue: [ self ensureLayerAndDrawOn: aCanvas ].
+		ifTrue: [
+			self
+				aeEnsureCompositionLayer;
+				aePaintCompositionLayerOn: aCanvas ]
+		ifFalse: [ self aeDrawOn: aCanvas ].
 	
 	self markDoesNotNeedPaint
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aePaintCompositionLayerOn: aCanvas [
+	"Paint the composition layer on the canvas, assuming it is valid."
+
+	| layer |
+	layer := self compositionLayer.
+	self aeDrawOn: aCanvas with: [
+		aCanvas pathTranslate: self position.
+		self transformation aeApplyTo: aCanvas.
+
+		aCanvas privateAeCairoContext
+			sourceSurface: layer surface
+				x: layer offset x
+				y: layer offset y;
+			paint ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -159,29 +193,4 @@ BlElement >> aeUpdateCompositionLayer [
 
 	self trace.
 	'-> layer updated' traceCr
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlElement >> ensureLayerAndDrawOn: aCanvas [
-
-	| layer |
-	"Ensure layer is ready"
-	self hasCompositionLayer
-		ifFalse: [
-			self aeCreateCompositionLayer ]
-		ifTrue: [
-			self needsPaint ifTrue: [
-				self aeUpdateCompositionLayer ] ].
-
-	"Paint the layer on the canvas"
-	layer := self compositionLayer.
-	self aeDrawOn: aCanvas with: [
-		aCanvas pathTranslate: self position.
-		self transformation aeApplyTo: aCanvas.
-
-		aCanvas privateAeCairoContext
-			sourceSurface: layer surface
-				x: layer offset x
-				y: layer offset y;
-			paint ]
 ]
