@@ -14,6 +14,23 @@ BlElement >> aeAsForm [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlElement >> aeCreateCompositionLayer [
+
+	| theBounds |
+	theBounds := self invalidationBounds.
+ 	self compositionLayer: 
+		(BACompositionLayer new
+			surface: (AeCairoImageSurface extent: theBounds extent);
+			offset: theBounds origin;
+			yourself).
+
+	self aeDrawOnCompositionLayerCleanBefore: false.
+	
+	self trace.
+	'-> layer created' traceCr
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawChildrenOn: aeCanvas [
 	"Draw my children.
 	
@@ -94,6 +111,24 @@ BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlElement >> aeDrawOnCompositionLayerCleanBefore: shouldClean [
+	"We assume the layer exists and isValid, and it's surface is clean."
+
+	| layer layerCanvas |
+	layer := self compositionLayer.
+	layerCanvas := AeCanvas newFor: layer surface.
+	layerCanvas pathTranslate: layer offset negated.
+	shouldClean ifTrue: [
+		layerCanvas clearTransparent ].
+	self
+		aeDrawEffectBelowGeometryOn: layerCanvas;
+		aeDrawGeometryOn: layerCanvas;
+		aeDrawEffectAboveGeometryOn: layerCanvas;
+		aeDrawChildrenOn: layerCanvas.
+	layerCanvas flush
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeFullDrawOn: aCanvas [
 	"Main entry point to draw myself and my children on an Alexandrie canvas."
 
@@ -108,33 +143,38 @@ BlElement >> aeFullDrawOn: aCanvas [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlElement >> aeUpdateCompositionLayer [
+	"We assume the layer exists and isValid, but needs refresh."
+
+	| layer theBounds |
+	layer := self compositionLayer.
+	theBounds := self invalidationBounds.
+
+	"In fact it only updates if extents match"	
+	layer surface extent = theBounds extent ifFalse: [ 
+		^ self aeCreateCompositionLayer ].
+	
+	layer offset: theBounds origin.
+	self aeDrawOnCompositionLayerCleanBefore: true.
+
+	self trace.
+	'-> layer updated' traceCr
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> ensureLayerAndDrawOn: aCanvas [
 
 	| layer |
-	"Ensure we have the layer ready"
-	(self hasCompositionLayer not or: [ self needsPaint ])
-		ifFalse: [ layer := self compositionLayer ]
+	"Ensure layer is ready"
+	self hasCompositionLayer
+		ifFalse: [
+			self aeCreateCompositionLayer ]
 		ifTrue: [
-			| layerSurface layerCanvas theBounds layerOffset |
-			theBounds := self invalidationBounds.
-			layerOffset := theBounds origin.
-			layerSurface := AeCairoImageSurface extent: theBounds extent.
-			layerCanvas := AeCanvas newFor: layerSurface.
-			layerCanvas pathTranslate: layerOffset negated.
-			self
-				aeDrawEffectBelowGeometryOn: layerCanvas;
-				aeDrawGeometryOn: layerCanvas;
-				aeDrawEffectAboveGeometryOn: layerCanvas;
-				aeDrawChildrenOn: layerCanvas.
-			layerCanvas flush.
-			layer :=
-				BACompositionLayer new
-					surface: layerSurface;
-					offset: layerOffset;
-					yourself.
-			self compositionLayer: layer ].
+			self needsPaint ifTrue: [
+				self aeUpdateCompositionLayer ] ].
 
 	"Paint the layer on the canvas"
+	layer := self compositionLayer.
 	self aeDrawOn: aCanvas with: [
 		aCanvas pathTranslate: self position.
 		self transformation aeApplyTo: aCanvas.
