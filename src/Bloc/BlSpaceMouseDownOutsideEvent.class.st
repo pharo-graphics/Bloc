@@ -2,19 +2,20 @@ Class {
 	#name : #BlSpaceMouseDownOutsideEvent,
 	#superclass : #BlSpaceEvent,
 	#instVars : [
-		'event'
+		'originalEvent'
 	],
 	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #accessing }
-BlSpaceMouseDownOutsideEvent >> event [
+BlSpaceMouseDownOutsideEvent >> originalEvent [
 
-	^ event
+	^ originalEvent
 ]
 
 { #category : #accessing }
-BlSpaceMouseDownOutsideEvent >> event: aBlEvent [
+BlSpaceMouseDownOutsideEvent >> originalEvent: aBlEvent [
 
-	event := aBlEvent
+	aBlEvent consumed: true.
+	originalEvent := aBlEvent
 ]
