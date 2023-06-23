@@ -1763,6 +1763,15 @@ BlElement >> globalScale [
 ]
 
 { #category : #'children testing' }
+BlElement >> hasAnyInParentChain: aCollection [
+	"Return true if any one in the given collection in my parent chain (including myself) "
+	<return: #Boolean>
+
+	
+	^ aCollection anySatisfy: [ :e | self hasInParentChain: e ]
+]
+
+{ #category : #'children testing' }
 BlElement >> hasChild: anElement [
 	<return: #Boolean>
 	
@@ -1801,6 +1810,14 @@ BlElement >> hasFocusable [
 
 	^ self isFocusable or: [
 		self children anySatisfy: [ :anElement | anElement hasFocusable ] ]
+]
+
+{ #category : #'children testing' }
+BlElement >> hasInParentChain: anElement [
+	"Return true if I have a given element in my parent chain, or if I am anElement "
+	<return: #Boolean>
+
+	^ anElement = self or: [ self hasParent: anElement ]
 ]
 
 { #category : #'event management accessing' }

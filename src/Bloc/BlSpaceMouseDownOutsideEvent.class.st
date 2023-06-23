@@ -19,3 +19,9 @@ BlSpaceMouseDownOutsideEvent >> originalEvent: aBlEvent [
 	aBlEvent consumed: true.
 	originalEvent := aBlEvent
 ]
+
+{ #category : #sending }
+BlSpaceMouseDownOutsideEvent >> sendTo: anObject [
+
+	anObject mouseDownOutsideEvent: self
+]
