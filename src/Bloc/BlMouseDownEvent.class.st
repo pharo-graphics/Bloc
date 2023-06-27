@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMouseDownEvent,
-	#superclass : #BlMouseEvent,
+	#superclass : #BlMousePickEvent,
 	#category : #'Bloc-Events'
 }
 
@@ -38,6 +38,12 @@ BlMouseDownEvent class >> secondary [
 	<return: #BlMouseDownEvent>
 	
 	^ self button: BlMouseButton secondary
+]
+
+{ #category : #converting }
+BlMouseDownEvent >> asMouseOutsideEvent [
+
+	^ BlMouseDownOutsideEvent new originalEvent: self; yourself
 ]
 
 { #category : #testing }

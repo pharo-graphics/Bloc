@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMouseUpEvent,
-	#superclass : #BlMouseEvent,
+	#superclass : #BlMousePickEvent,
 	#category : #'Bloc-Events'
 }
 
@@ -45,6 +45,12 @@ BlMouseUpEvent >> asDoubleClickEvent [
 	^ BlDoubleClickEvent new
 		copyFrom: self;
 		yourself
+]
+
+{ #category : #converting }
+BlMouseUpEvent >> asMouseOutsideEvent [
+
+	^ BlMouseUpOutsideEvent new originalEvent: self; yourself
 ]
 
 { #category : #testing }
