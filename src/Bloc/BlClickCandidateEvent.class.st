@@ -19,6 +19,7 @@ BlClickCandidateEvent >> mouseUpEvent [
 { #category : #accessing }
 BlClickCandidateEvent >> mouseUpEvent: aMouseUpEvent [
 
+	aMouseUpEvent consumed: true.
 	mouseUpEvent := aMouseUpEvent
 ]
 
