@@ -170,6 +170,12 @@ BlMouseEvent >> delta: aPoint [
 	delta := aPoint
 ]
 
+{ #category : #processing }
+BlMouseEvent >> findTargetInSpace: aSpace [
+
+	^ (aSpace findMouseEventTargetAt: self position) ifNil: [ aSpace layerHolder ]
+]
+
 { #category : #testing }
 BlMouseEvent >> isMouse [
 	^ true
