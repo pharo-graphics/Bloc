@@ -51,7 +51,7 @@ BlMouseProcessorClickExamples >> mouseDown [
 		
 		aStep check 
 			label: 'Check previous mouse down event';
-			value: [ :aMouseProcessor | aMouseProcessor previousMouseDownEvent target ] equals: [ aScripter element ];
+			value: [ :aMouseProcessor | aMouseProcessor lastMouseDownEvent target ] equals: [ aScripter element ];
 			onMouseProcessor.
 
 		aStep check 

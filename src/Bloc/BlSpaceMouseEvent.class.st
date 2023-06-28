@@ -20,7 +20,7 @@ BlSpaceMouseEvent >> originalEvent: aBlEvent [
 	originalEvent := aBlEvent
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #sending }
 BlSpaceMouseEvent >> sendTo: anObject [
 
 	anObject spaceMouseEvent: self

@@ -360,6 +360,13 @@ BlMouseProcessor >> lastClickEvent [
 ]
 
 { #category : #accessing }
+BlMouseProcessor >> lastMouseDownEvent [
+	<return: #BlElement or: nil>
+
+	^ previousMouseDownEvent
+]
+
+{ #category : #accessing }
 BlMouseProcessor >> lastOverTarget [
 	<return: #BlElement>
 
@@ -404,13 +411,6 @@ BlMouseProcessor >> pressedButtons [
 	<return: #Collection of: #BlMouseButton>
 
 	^ pressedButtons
-]
-
-{ #category : #accessing }
-BlMouseProcessor >> previousMouseDownEvent [
-	<return: #BlElement or: nil>
-
-	^ previousMouseDownEvent
 ]
 
 { #category : #'mouse drag' }
