@@ -318,6 +318,14 @@ BlElement >> allChildrenDepthFirstDo: aBlock [
 ]
 
 { #category : #'children accessing' }
+BlElement >> allParents [
+	"Return a collection of all parents starting with my parent and ending with the top most parent"
+
+	^ Array streamContents: [ :aStream |
+		self allParentsDo: [ :eachParent | aStream nextPut: eachParent ] ]
+]
+
+{ #category : #'children accessing' }
 BlElement >> allParentsDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	self allParentsDo: [ :aParent | 
 		(aBlock value: aParent)
@@ -333,6 +341,15 @@ BlElement >> allParentsDo: aBlock [
 	
 	self hasParent ifFalse: [ ^ self ].
 	self parent withAllParentsDo: aBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> allParentsReverseDo: aBlock [
+	"Evaluate a block with my every parent as an argument starting from my top most parent up to my direct parent (excluding myself).
+	If no parent, then ignore."
+	
+	self hasParent ifFalse: [ ^ self ].
+	self parent withAllParentsReverseDo: aBlock
 ]
 
 { #category : #'children accessing' }
@@ -2044,7 +2061,7 @@ BlElement >> invalidationBounds: aBounds [
 	| anInvalidationBounds |
 	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
 
-	self clipChildren ifFalse: [ 
+	(self clipChildren and: [ self hasChildren ]) ifFalse: [ 
 		| aChildBounds |
 		aChildBounds := BlBounds new.
 		self children do: [ :anElement |
@@ -2053,6 +2070,13 @@ BlElement >> invalidationBounds: aBounds [
 			anInvalidationBounds merge: aChildBounds ] ].
 
 	^ anInvalidationBounds
+]
+
+{ #category : #accessing }
+BlElement >> invalidationBoundsInSpace [
+
+	^ self localBoundsToGlobal: (BlBounds fromRectangle: self invalidationBounds)
+
 ]
 
 { #category : #'api - space' }
@@ -2477,19 +2501,19 @@ BlElement >> markNeedsPaintFrom: anElement [
 
 	self wantsSeparateCompositingLayer
 		ifTrue: [
-			self isAttachedToSceneGraph ifTrue: [
-				self hasCompositionLayer
-					ifTrue: [ self space markNeedsPaint: self from: anElement ]
-					ifFalse: [
-						self hasParent
-							ifTrue: [ self parent markNeedsPaintFrom: anElement ]
-							ifFalse: [ self space markNeedsPaint: self from: anElement ] ] ] ]
+			self isAttachedToSceneGraph ifFalse: [ ^self ].
+			self wantsSeparateCompositingLayer
+				ifTrue: [ self space markNeedsPaint: self from: anElement ]
+				ifFalse: [
+					self hasParent
+						ifTrue: [ self parent markNeedsPaintFrom: anElement ]
+						ifFalse: [ self space markNeedsPaint: self from: anElement ] ] ]
 		ifFalse: [ 
 			self hasParent
 				ifTrue: [ self parent markNeedsPaintFrom: anElement ]
 				ifFalse: [
-					self isAttachedToSceneGraph ifTrue: [
-						self space markNeedsPaint: self from: anElement ] ] ]
+					self isAttachedToSceneGraph ifFalse: [ ^self ].
+					self space markNeedsPaint: self from: anElement ] ]
 ]
 
 { #category : #layout }
@@ -4001,6 +4025,14 @@ BlElement >> withAllParentsDo: aBlock [
 	
 	aBlock value: self.
 	self allParentsDo: aBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> withAllParentsReverseDo: aBlock [
+	"Evaluate a block with me and all my parents as an argument starting from top most parent, up to me."
+	
+	self allParentsDo: aBlock.
+	aBlock value: self
 ]
 
 { #category : #'children accessing' }

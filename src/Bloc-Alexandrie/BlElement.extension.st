@@ -14,31 +14,32 @@ BlElement >> aeAsForm [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlElement >> aeCreateCompositionLayer [
+BlElement >> aeCompositionLayersSortedByElevationDo: aBlock [
 
-	| theBounds |
-	theBounds := self invalidationBounds.
- 	self compositionLayer: 
-		(BACompositionLayer new
-			surface: (AeCairoImageSurface extent: theBounds extent);
-			offset: theBounds origin;
-			yourself).
+	(self isTransparent or: [ self isVisible not ])
+		ifTrue: [ ^ self ].
 
-	self aeDrawOnCompositionLayerCleanBefore: false.
-	
-	self trace.
-	'-> layer created' traceCr
+	self wantsSeparateCompositingLayer ifTrue: [
+		self hasCompositionLayer ifFalse: [
+			self compositionLayer:
+				(BAAxisAlignedCompositionLayer newFor: self) ].
+		aBlock value: self compositionLayer ].
+
+	self flag: #todo. "extract to allow overriding, exactly as aeDrawChildrenOn:"
+	self children sortedByElevation do: [ :each |
+		(each aeCompositionLayersSortedByElevationDo: aBlock) ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawChildrenOn: aeCanvas [
-	"Draw my children.
+	"Draw my children that belong to same composition layer.
 	
 	Notes:
 	- Receiver assumes that position and transformations are already applied on the canvas."
 	
 	self children sortedByElevation do: [ :each |
-		each aeFullDrawOn: aeCanvas ].
+		each wantsSeparateCompositingLayer ifFalse: [
+			each aeDrawInSameLayerOn: aeCanvas ] ].
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -78,6 +79,24 @@ BlElement >> aeDrawGeometryOn: aeCanvas [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlElement >> aeDrawIgnoringOpacityAndTransformationOn: aeCanvas [
+
+	self aeDrawEffectBelowGeometryOn: aeCanvas.
+	self aeDrawGeometryOn: aeCanvas.
+	self aeDrawEffectAboveGeometryOn: aeCanvas.
+	self aeDrawChildrenOn: aeCanvas.
+
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aeDrawInSameLayerOn: aCanvas [
+
+	(self isTransparent not and: [ self isVisible ])
+		ifTrue: [ self aeDrawOn: aCanvas ].
+	self markDoesNotNeedPaint
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas [
 
 	self aeDrawOn: aeCanvas with: [
@@ -87,13 +106,7 @@ BlElement >> aeDrawOn: aeCanvas [
 		aeCanvas pathTranslate: self position.
 		self transformation aeApplyTo: aeCanvas.
 
-		self aeDrawEffectBelowGeometryOn: aeCanvas.
-		self aeDrawGeometryOn: aeCanvas.
-		self aeDrawEffectAboveGeometryOn: aeCanvas.
-
-		self aeDrawChildrenOn: aeCanvas.
-		
-		]
+		self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -111,86 +124,11 @@ BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlElement >> aeDrawOnCompositionLayerCleanBefore: shouldClean [
-	"We assume the layer exists and isValid, and it's surface is clean."
-
-	| layer layerCanvas |
-	layer := self compositionLayer.
-	layerCanvas := AeCanvas newFor: layer surface.
-	layerCanvas pathTranslate: layer offset negated.
-	shouldClean ifTrue: [
-		layerCanvas clearTransparent ].
-	self
-		aeDrawEffectBelowGeometryOn: layerCanvas;
-		aeDrawGeometryOn: layerCanvas;
-		aeDrawEffectAboveGeometryOn: layerCanvas;
-		aeDrawChildrenOn: layerCanvas.
-	layerCanvas flush
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlElement >> aeEnsureCompositionLayer [
-	"Ensure the compositionLayer is ready"
-
-	self hasCompositionLayer
-		ifTrue: [
-			self needsPaint ifTrue: [
-				self aeUpdateCompositionLayer ] ]
-		ifFalse: [
-			"First time, and after re-opening image."
-			self aeCreateCompositionLayer ]
-
-]
-
-{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeFullDrawOn: aCanvas [
 	"Main entry point to draw myself and my children on an Alexandrie canvas."
 
-	(self isTransparent or: [ self isVisible not ]) ifTrue: [
-		^ self markDoesNotNeedPaint ].
+	self aeDrawInSameLayerOn: aCanvas.
 
-	self wantsSeparateCompositingLayer
-		ifTrue: [
-			self
-				aeEnsureCompositionLayer;
-				aePaintCompositionLayerOn: aCanvas ]
-		ifFalse: [ self aeDrawOn: aCanvas ].
-	
-	self markDoesNotNeedPaint
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlElement >> aePaintCompositionLayerOn: aCanvas [
-	"Paint the composition layer on the canvas, assuming it is valid."
-
-	| layer |
-	layer := self compositionLayer.
-	self aeDrawOn: aCanvas with: [
-		aCanvas pathTranslate: self position.
-		self transformation aeApplyTo: aCanvas.
-
-		aCanvas privateAeCairoContext
-			sourceSurface: layer surface
-				x: layer offset x
-				y: layer offset y;
-			paint ]
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlElement >> aeUpdateCompositionLayer [
-	"We assume the layer exists and isValid, but needs refresh."
-
-	| layer theBounds |
-	layer := self compositionLayer.
-	theBounds := self invalidationBounds.
-
-	"In fact it only updates if extents match"	
-	layer surface extent = theBounds extent ifFalse: [ 
-		^ self aeCreateCompositionLayer ].
-	
-	layer offset: theBounds origin.
-	self aeDrawOnCompositionLayerCleanBefore: true.
-
-	self trace.
-	'-> layer updated' traceCr
+	self aeCompositionLayersSortedByElevationDo: [ :each |
+		each paintOn: aCanvas ].
 ]
