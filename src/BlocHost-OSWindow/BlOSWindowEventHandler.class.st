@@ -135,17 +135,17 @@ BlOSWindowEventHandler >> visitMainEventsCleared: anEvent [
 
 { #category : #'visiting - mouse' }
 BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
-	| aBlocEvent |
+	| aBlocEvent button |
 
 	"we handle touch events separately, therefore ignore `touch` based mouse events"
 	"anEvent isTouch
 		ifTrue: [ ^ self ]."
-
-	aBlocEvent := BlMouseDownEvent new
+	button := self convertButton: anEvent button.
+	aBlocEvent := button mouseDownEventClass new
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		delta: anEvent delta;
-		button: (self convertButton: anEvent button);
+		button: button;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: self time now.
 
@@ -154,17 +154,17 @@ BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
 
 { #category : #'visiting - mouse' }
 BlOSWindowEventHandler >> visitMouseButtonReleaseEvent: anEvent [
-	| aBlocEvent |
+	| aBlocEvent button |
 	
 	"we handle touch events separately, therefore ignore `touch` based mouse events"
 	"anEvent isTouch
 		ifTrue: [ ^ self ]."
-
-	aBlocEvent := BlMouseUpEvent new
+	button := self convertButton: anEvent button.
+	aBlocEvent := button mouseUpEventClass new
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		delta: anEvent delta;
-		button: (self convertButton: anEvent button);
+		button: button;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: self time now.
 		

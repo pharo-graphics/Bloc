@@ -308,12 +308,13 @@ BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
 BlMorphicEventHandler >> handleMouseDown: anEvent [
 
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
-		| aBlEvent |
-		aBlEvent := BlMouseDownEvent new
+		| aBlEvent button |
+		button := self convertButtonFromMouseButtonEvent: aMorphicEvent.
+		aBlEvent := button mouseDownEventClass new
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			button: (self convertButtonFromMouseButtonEvent: aMorphicEvent);
+			button: button;
 			timestamp: DateAndTime now;
 			yourself.
 		self enqueue: aBlEvent ].
@@ -356,12 +357,13 @@ BlMorphicEventHandler >> handleMouseUp: anEvent [
 		ifNil: [ ^ self ].
 	
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
-		| aBlEvent |
-		aBlEvent := BlMouseUpEvent new
+		| aBlEvent button |
+		button := self convertButtonFromMouseButtonEvent: aMorphicEvent.
+		aBlEvent := button mouseUpEventClass new
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			button: (self convertButtonFromMouseButtonEvent: aMorphicEvent);
+			button: button;
 			timestamp: DateAndTime now;
 			yourself.
 		self enqueue: aBlEvent ].

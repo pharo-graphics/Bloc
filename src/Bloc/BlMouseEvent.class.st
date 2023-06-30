@@ -57,7 +57,7 @@ BlMouseEvent >> asClickCandidateEvent [
 
 { #category : #converting }
 BlMouseEvent >> asClickEvent [
-	^ BlClickEvent new
+	^ self button clickEventClass new
 		copyFrom: self;
 		yourself
 ]
@@ -174,6 +174,12 @@ BlMouseEvent >> delta: aPoint [
 BlMouseEvent >> findTargetInSpace: aSpace [
 
 	^ (aSpace findMouseEventTargetAt: self position) ifNil: [ aSpace layerHolder ]
+]
+
+{ #category : #'action dispatching' }
+BlMouseEvent >> ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock [
+
+	^ self button ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock
 ]
 
 { #category : #testing }
