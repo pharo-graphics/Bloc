@@ -48,14 +48,6 @@ BlMouseEvent >> anyButtonPressed [
 ]
 
 { #category : #converting }
-BlMouseEvent >> asClickCandidateEvent [
-
-	^ BlClickCandidateEvent new
-		copyFrom: self;
-		yourself
-]
-
-{ #category : #converting }
 BlMouseEvent >> asClickEvent [
 	^ self button clickEventClass new
 		copyFrom: self;
