@@ -1302,6 +1302,16 @@ BlElement >> dispatchLayoutDone [
 	self children do: [ :aChildElement | aChildElement dispatchLayoutDone ]
 ]
 
+{ #category : #layout }
+BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
+	"
+	I am triggered by the space as soon as a mouse down or up occurs.
+	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
+
+	self dispatchEvent: aMouseOutsideEvent.
+	self children do: [ :aChildElement | aChildElement dispatchMousePickedOutside: aMouseOutsideEvent ]
+]
+
 { #category : #'children dispatching' }
 BlElement >> dispatchRemovedFromParent: aParentElement [
 	"Sent after I was removed from my parent and is not longer its direct child.

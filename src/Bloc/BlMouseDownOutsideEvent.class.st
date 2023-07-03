@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMouseDownOutsideEvent,
-	#superclass : #BlMouseOutsideEvent,
-	#category : #'Bloc-Events-Type-Space'
+	#superclass : #BlMousePickOutsideEvent,
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #sending }
