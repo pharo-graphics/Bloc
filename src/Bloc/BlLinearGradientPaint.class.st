@@ -62,30 +62,28 @@ BlLinearGradientPaint >> end: aPoint [
 
 { #category : #geometry }
 BlLinearGradientPaint >> matchExtent: anExtent [
-	| aDirection aStart anEnd aDelta aScaleX aScaleY |
-	
-	anExtent isZero
-		ifTrue: [ ^ self ].
+	"See: https://stackoverflow.com/questions/38821631/cagradientlayer-diagonal-gradient/43176174"
+
+	| aDirection dx dy width height ux uy coef endPoint center |
+	anExtent isZero ifTrue: [ ^ self ].
 		
-	aDirection :=  (self end - self start) isZero
-		ifTrue: [ 1@0 ]
+	aDirection := (self end - self start) isZero
+		ifTrue: [ 1.0 @ 0.0 ]
 		ifFalse: [ (self end - self start) normalized ].
 
-	aStart := 0@0.
-	anEnd := aStart + (anExtent * aDirection).
-	
-	aScaleX := (anEnd x isZero
-		ifTrue: [ 1.0 ]
-		ifFalse: [ anExtent x / anEnd x ]) abs.
-	aScaleY := (anEnd y isZero
-		ifTrue: [ 1.0 ]
-		ifFalse: [ anExtent y / anEnd y ]) abs.
-	anEnd := anEnd * (aScaleX @ aScaleY).
-	
-	aDelta := anEnd min: aStart.
+	dx := aDirection x.
+	dy := aDirection y.
+	width := anExtent x.
+	height := anExtent y.
+	center := anExtent / 2.
 
-	self start: aStart - aDelta.
-	self end: anEnd - aDelta
+	ux := dx * width / height.
+	uy := dy * height / width.
+	coef := ((dx * ux) + (dy * uy)) / ((ux * ux) + (uy * uy)).
+	endPoint := (coef * ux) @ (coef * uy).
+
+	self start: center * (1.0 asPoint - endPoint).
+	self end: center * (1.0 asPoint + endPoint)
 ]
 
 { #category : #accessing }
