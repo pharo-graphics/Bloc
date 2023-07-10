@@ -1,4 +1,4 @@
-# Bloc 
+# Bloc  
 
 [![License](https://img.shields.io/github/license/pharo-graphics/Bloc.svg)](./LICENSE)
 [![Tests](https://github.com/pharo-graphics/Bloc/actions/workflows/test.yml/badge.svg)](https://github.com/pharo-graphics/Bloc/actions/workflows/test.yml)
