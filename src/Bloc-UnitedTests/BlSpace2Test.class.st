@@ -55,7 +55,7 @@ BlSpace2Test >> spaceWithSlownDownTime [
 	| aTime aSpace |
 	aTime := BlFastForwardedTime new.
 	aTime speed: 0.2.
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace time: aTime.
 	^ aSpace
 ]
@@ -97,7 +97,7 @@ BlSpace2Test >> testEmptySpace [
 
 	<sampleInstance>
 	| aSpace |
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self deny: aSpace root hasChildren.
 	self assert: aSpace dirtyAreas isEmpty.

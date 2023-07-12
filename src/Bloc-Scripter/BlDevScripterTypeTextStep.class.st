@@ -23,7 +23,7 @@ BlDevScripterTypeTextStep >> playOn: aScripter [
 	anInputEvent := BlTextInputEvent new
 		text: self text.
 
-	BlSpace
+	BlOSpace
 		simulateEvent: anInputEvent
 		on: aTarget.
 

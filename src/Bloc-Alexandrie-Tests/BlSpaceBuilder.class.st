@@ -135,7 +135,7 @@ BlSpaceBuilder >> initialize [
 
 	super initialize.
 	
-	space := BlSpace new.
+	space := BlOSpace new.
 	spaceExtent := 100 asPoint.
 	host := BlOSWindowSDL2Host new.
 

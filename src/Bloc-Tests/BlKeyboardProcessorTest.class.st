@@ -12,7 +12,7 @@ Class {
 BlKeyboardProcessorTest >> setUp [
 	super setUp.
 	
-	space := BlSpace new.
+	space := BlOSpace new.
 	processor := BlKeyboardProcessor new.
 	processor space: space
 ]

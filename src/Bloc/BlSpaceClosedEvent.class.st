@@ -32,7 +32,7 @@ BlSpaceClosedEvent >> sendTo: anObject [
 
 { #category : #accessing }
 BlSpaceClosedEvent >> space [
-	<return: #BlSpace>
+	<return: #BlOSpace>
 
 	^ space
 ]

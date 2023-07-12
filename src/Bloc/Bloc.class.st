@@ -103,7 +103,7 @@ Bloc class >> preferencesOn: aBuilder [
 
 			(aBuilder range: #scrollingVelocity)
 				order: 5; 
-				target: OBlInfiniteMouseScrollListener;
+				target: BlInfiniteMouseScrollListener;
 				label: 'Scrolling velocity';
 				description: 'A positive integer used as a multiplier to increase mousewheel scrolling velocity ';
 				range: (1 to: 200 by: 1);

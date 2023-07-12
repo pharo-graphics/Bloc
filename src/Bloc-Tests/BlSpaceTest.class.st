@@ -17,7 +17,7 @@ BlSpaceTest >> dirtyAreas [
 BlSpaceTest >> setUp [
 	super setUp.
 	
-	space := BlSpace new.
+	space := BlOSpace new.
 	host := BlMockedHost new.
 
 	space host: host.

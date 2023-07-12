@@ -438,6 +438,18 @@ BlElement >> asElement [
 	^ self 
 ]
 
+{ #category : #converting }
+BlElement >> asScrollableElement [
+	| scrollable |
+	self removeFromParent.
+	scrollable := self newScrollableParent.
+	scrollable constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+	scrollable addChild: self.
+	^ scrollable
+]
+
 { #category : #'children add/remove' }
 BlElement >> attachChild: anElement [
 	"Attaches previously detached element as my last direct child.
@@ -503,11 +515,13 @@ BlElement >> attachSpace [
 	self needsPaint
 		ifTrue: [ self markNeedsPaintFrom: self ].
 
-	self needsStyle
-		ifTrue: [ self requestStyle ].
+	"Style and properties computation are not used and will be removed"
+	
+	"self needsStyle
+		ifTrue: [ self requestStyle ]."
 
-	self needsPropertiesComputation
-		ifTrue: [ self requestPropertiesComputation ]
+	"self needsPropertiesComputation
+		ifTrue: [ self requestPropertiesComputation ]"
 ]
 
 { #category : #'api - look' }
@@ -1924,7 +1938,7 @@ BlElement >> ignoreRequestLayoutDuring: aBlock [
 BlElement >> inSpace [
 	"Add self to a new BlSpace. Answer such space."
 	| sp |
-	sp := OBlSpace new.
+	sp := BlSpace new.
 	sp root addChild: self.
 	^ sp
 
@@ -2641,6 +2655,12 @@ BlElement >> needsStyle [
 	^ self styles needsStyle
 ]
 
+{ #category : #converting }
+BlElement >> newScrollableParent [
+
+	^ BlScrollableElement new
+]
+
 { #category : #'event management accessing' }
 BlElement >> nextEventTarget [
 	"Return next event target that should be contained in dispatch chain.
@@ -2908,10 +2928,22 @@ BlElement >> opacity: aNumber [
 BlElement >> openInNewSpace [
 	"Add self to a new BlSpace and show it. Answer such space."
 	
-	^ BlSpace new
+	^ BlOSpace new
 		  addChild: self;
 		  show;
 		  yourself
+]
+
+{ #category : #convenience }
+BlElement >> openInOBlSpace [
+	"Add self to a new BlSpace and show it. Answer such space."
+	
+	self 
+		deprecated:  'Use #openInSpace instead' 
+		transformWith: '`@receiver openInOBlSpace' -> '`@receiver openInSpace'.
+	
+	^ self openInSpace
+
 ]
 
 { #category : #convenience }
@@ -3588,7 +3620,7 @@ BlElement >> size: aPoint [
 BlElement >> space [
 	"Return space to which I belong. Direct reference boosts performance.
 	Each element has a reference to the current space which is set on demand."
-	<return: #BlSpace or: nil>
+	<return: #BlOSpace or: nil>
 	
 	spaceReference spaceDo: [ :aSpace | ^ aSpace ].
 	
@@ -3629,9 +3661,13 @@ BlElement >> startTextInputAtRectangle: aRectangle [
 
 { #category : #'api - style' }
 BlElement >> states [
-	^ self userData
+
+	"Style and properties computation are not used and will be removed"
+	^ nil
+
+	"^ self userData
 		at: #blocStates
-		ifAbsentPut: [ BlElementStates new element: self ]
+		ifAbsentPut: [ BlElementStates new element: self ]"
 ]
 
 { #category : #'text input' }
@@ -3652,10 +3688,12 @@ BlElement >> styles [
 	"Return current element styles.
 	See ${class:BlStyles}$ to learn more about styles"
 	<return: #BlElementStyles>
-
-	^ self userData
+	
+	"Style and properties computation are not used and will be removed"
+	^ nil
+	"^ self userData
 		at: #blocStyles
-		ifAbsentPut: [ BlElementStyles new element: self ]
+		ifAbsentPut: [ BlElementStyles new element: self ]"
 ]
 
 { #category : #layout }
