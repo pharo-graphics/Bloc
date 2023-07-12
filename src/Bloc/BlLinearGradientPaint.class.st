@@ -3,8 +3,7 @@ Class {
 	#superclass : #BlGradientPaint,
 	#instVars : [
 		'start',
-		'end',
-		'scalePoint'
+		'end'
 	],
 	#category : #'Bloc-Paint'
 }
@@ -70,9 +69,10 @@ BlLinearGradientPaint >> matchExtent: anExtent [
 	
 	d := self end - self start.
 	d := d isZero
-		ifTrue: [ anExtent x @ 0.0 ]
+		ifTrue: [ 1.0 @ 0.0 ]
 		ifFalse: [ d normalized ].
 	aspectRatio := anExtent x / anExtent y.
+
 	u := (d x * aspectRatio) @ (d y / aspectRatio).
 	coef := (d dotProduct: u) / (u dotProduct: u).
 	endPoint := u * coef.
