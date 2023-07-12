@@ -3,7 +3,8 @@ Class {
 	#superclass : #BlGradientPaint,
 	#instVars : [
 		'start',
-		'end'
+		'end',
+		'scalePoint'
 	],
 	#category : #'Bloc-Paint'
 }
@@ -64,24 +65,19 @@ BlLinearGradientPaint >> end: aPoint [
 BlLinearGradientPaint >> matchExtent: anExtent [
 	"See: https://stackoverflow.com/questions/38821631/cagradientlayer-diagonal-gradient/43176174"
 
-	| aDirection dx dy width height ux uy coef endPoint center |
+	| d coef endPoint aspectRatio u center |
 	anExtent isZero ifTrue: [ ^ self ].
-		
-	aDirection := (self end - self start) isZero
-		ifTrue: [ 1.0 @ 0.0 ]
-		ifFalse: [ (self end - self start) normalized ].
+	
+	d := self end - self start.
+	d := d isZero
+		ifTrue: [ anExtent x @ 0.0 ]
+		ifFalse: [ d normalized ].
+	aspectRatio := anExtent x / anExtent y.
+	u := (d x * aspectRatio) @ (d y / aspectRatio).
+	coef := (d dotProduct: u) / (u dotProduct: u).
+	endPoint := u * coef.
 
-	dx := aDirection x.
-	dy := aDirection y.
-	width := anExtent x.
-	height := anExtent y.
 	center := anExtent / 2.
-
-	ux := dx * width / height.
-	uy := dy * height / width.
-	coef := ((dx * ux) + (dy * uy)) / ((ux * ux) + (uy * uy)).
-	endPoint := (coef * ux) @ (coef * uy).
-
 	self start: center * (1.0 asPoint - endPoint).
 	self end: center * (1.0 asPoint + endPoint)
 ]
