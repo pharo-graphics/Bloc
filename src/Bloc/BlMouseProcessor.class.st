@@ -207,6 +207,26 @@ BlMouseProcessor >> fireAsMouseOverEvent: aMouseEvent [
 	self fireEvent: aMouseEvent asMouseOverEvent 
 ]
 
+{ #category : #'mouse up' }
+BlMouseProcessor >> fireClickAvortedEventFrom: aMouseUpEvent [
+	"Click avorted is useful to let the mouse down target decide if it can be a click or not "
+
+	lastMouseDownEvent target fireEvent: (BlClickAvortedEvent new
+			 copyFrom: lastMouseDownEvent;
+			 upTarget: aMouseUpEvent target;
+			 processor: self;
+			 yourself)
+]
+
+{ #category : #'mouse up' }
+BlMouseProcessor >> fireClickEventFrom: aMouseEvent [
+
+	| aClickEvent |
+	aClickEvent := aMouseEvent asClickEvent.
+	self fireEvent: aClickEvent.
+	lastClickEvent := aClickEvent copy
+]
+
 { #category : #'event firing' }
 BlMouseProcessor >> fireEvent: anEvent [
 
@@ -567,11 +587,8 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 		ifTrue: [
 			(self canBeDblClickEvent: aMouseUpEvent)
 				ifTrue: [ self fireEvent: aMouseUpEvent asDoubleClickEvent ]
-				ifFalse: [
-					| aClickEvent |
-					aClickEvent := aMouseUpEvent asClickEvent.
-					self fireEvent: aClickEvent.
-					lastClickEvent := aClickEvent copy ] ]
+				ifFalse: [ self fireClickEventFrom: aMouseUpEvent ] ]
+		ifFalse: [ self fireClickAvortedEventFrom: aMouseUpEvent ]
 ]
 
 { #category : #accessing }
