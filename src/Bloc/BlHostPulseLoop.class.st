@@ -15,7 +15,6 @@ Class {
 		'hostClass',
 		'loopProcess',
 		'pulsePeriodMS',
-		'waitingDelay',
 		'msToWaitForBackgroundProcess',
 		'latestPulseMS'
 	],
@@ -88,11 +87,7 @@ BlHostPulseLoop >> initialize [
 
 	super initialize.
 
-	self pulsePeriod: self defaultPulsePeriod.
-
-	"This initializes the internal Semaphore, but the milliseconds
-	to wait are set after each pulse."
-	waitingDelay := Delay forMilliseconds: 0.
+	self pulsePeriod: self defaultPulsePeriod
 ]
 
 { #category : #testing }
@@ -203,6 +198,6 @@ BlHostPulseLoop >> waitUntilNextPulse [
 
 	msToWait := msToWait min: pulsePeriodMS max: minWaitMS.
 
-	msToWait = 0 ifFalse: [ waitingDelay setDelay: msToWait; wait ]
+	msToWait = 0 ifFalse: [ (Delay forMilliseconds: msToWait) wait ]
 
 ]
