@@ -3,12 +3,12 @@ I am a space that closes itself after a given amount of frames
 "
 Class {
 	#name : #BlTestAutoClosingSpace,
-	#superclass : #BlSpace,
+	#superclass : #BlOSpace,
 	#instVars : [
 		'frames',
 		'frameCounter'
 	],
-	#category : 'Bloc-Tests-Examples'
+	#category : #'Bloc-Tests-Examples'
 }
 
 { #category : #accessing }

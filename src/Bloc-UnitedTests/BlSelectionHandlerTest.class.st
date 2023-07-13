@@ -15,7 +15,7 @@ BlSelectionHandlerTest class >> grid [
 	
 	element := self new testContainerWithOneGridAndVisualHandler.
 	
-	space := BlSpace new.
+	space := BlOSpace new.
 	space extent: 800@600.
 	space root addChild: element.
 	space show
@@ -28,7 +28,7 @@ BlSelectionHandlerTest class >> gridRow [
 	
 	element := self new testContainerWithThreeGridsAndVisualHandler.
 	
-	space := BlSpace new.
+	space := BlOSpace new.
 	space extent: 955@600.
 	space root addChild: element.
 	space show

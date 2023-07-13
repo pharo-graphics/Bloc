@@ -478,7 +478,7 @@ BlParallelUniverse >> snapshot: save andQuit: quit [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> spaces [
-	<return: #Collection of: #BlSpace>
+	<return: #Collection of: #BlOSpace>
 
 	^ spaceManager spaces
 ]

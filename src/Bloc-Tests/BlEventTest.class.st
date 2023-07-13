@@ -39,7 +39,7 @@ BlEventTest >> simulateClickOnOverlapped [
 	blue addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
 	blue addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlSpace simulateClickOn: blue.
+	BlOSpace simulateClickOn: blue.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -78,7 +78,7 @@ BlEventTest >> testChildConsumesEventWithHandler [
 
 	parent addChild: child.
 
-	BlSpace simulateClickOn: child.
+	BlOSpace simulateClickOn: child.
 	self assert: clicks equals: { Color blue } asOrderedCollection.
 
 	^ parent
@@ -107,7 +107,7 @@ BlEventTest >> testChildDoesNotConsumeEventWithHandler [
 
 	parent addChild: child.
 
-	BlSpace simulateClickOn: child.
+	BlOSpace simulateClickOn: child.
 	self assert: clicks equals: {
 			Color blue.
 			Color red } asOrderedCollection.
@@ -185,7 +185,7 @@ BlEventTest >> testParentWithEventFilter [
 
 	parent addChild: child.
 
-	BlSpace simulateClickOn: child.
+	BlOSpace simulateClickOn: child.
 	self assert: clicks equals: { Color red } asOrderedCollection.
 
 	^ parent
@@ -217,7 +217,7 @@ BlEventTest >> testSimulateClick [
 		do: [ mouseUp := mouseUp + 1 ].
 	element addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlSpace simulateClickOn: element.
+	BlOSpace simulateClickOn: element.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -250,7 +250,7 @@ BlEventTest >> testSimulateClickOnChildInDisabledParent [
 	red addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
 	red addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlSpace simulateClickOn: red.
+	BlOSpace simulateClickOn: red.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -297,7 +297,7 @@ BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 		addEventHandlerOn: BlClickEvent
 		do: [ parentClick := parentClick + 1 ].
 
-	BlSpace simulateClickOn: red.
+	BlOSpace simulateClickOn: red.
 
 	self assert: childMouseDown equals: 0.
 	self assert: childMouseUp equals: 0.
@@ -334,7 +334,7 @@ BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 	red addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
 	red addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlSpace simulateClickOn: red.
+	BlOSpace simulateClickOn: red.
 
 	self assert: mouseDown equals: 0.
 	self assert: mouseUp equals: 0.
@@ -368,7 +368,7 @@ BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 		do: [ mouseUp := mouseUp + 1 ].
 	element addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlSpace simulateClickOn: element.
+	BlOSpace simulateClickOn: element.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -412,7 +412,7 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 	blue addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
 	blue addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlSpace simulateClickOn: blue.
+	BlOSpace simulateClickOn: blue.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -440,7 +440,7 @@ BlEventTest >> testSimulateClickOutside [
 		do: [ mouseUp := mouseUp + 1 ].
 	element addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlSpace simulateClickOutside: element.
+	BlOSpace simulateClickOutside: element.
 
 	self assert: mouseDown equals: 0.
 	self assert: mouseUp equals: 0.
@@ -468,7 +468,7 @@ BlEventTest >> testSimulateMouseMoveInside [
 		addEventHandlerOn: BlMouseEnterEvent
 		do: [ mouseEnter := mouseEnter + 1 ].
 
-	BlSpace simulateMouseMoveInside: element.
+	BlOSpace simulateMouseMoveInside: element.
 
 	self assert: mouseMove equals: 1.
 	self assert: mouseEnter equals: 1.
@@ -497,7 +497,7 @@ BlEventTest >> testSimulateMouseMoveOutside [
 		addEventHandlerOn: BlMouseLeaveEvent
 		do: [ mouseLeave := mouseLeave + 1 ].
 
-	BlSpace simulateMouseMoveOutside: element.
+	BlOSpace simulateMouseMoveOutside: element.
 
 	self assert: mouseMove equals: 0.
 	self assert: mouseEnter equals: 0.

@@ -47,7 +47,7 @@ BlAnimationExamples class >> ballsAnim [
 				alp }.
 		els add: el ].
 
-	space := BlSpace new.
+	space := BlOSpace new.
 	space root addChildren: els.
 	space show.
 
@@ -88,7 +88,7 @@ BlAnimationExamples class >> sequential [
 		           position: 100 @ 100.
 	element addAnimation: sequential.
 
-	space := BlSpace new.
+	space := BlOSpace new.
 	space root addChild: element.
 	space show
 ]

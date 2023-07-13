@@ -132,6 +132,11 @@ BlLayoutCommonConstraints >> ignoredByLayout [
 	^ ignoredByLayout
 ]
 
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> infinite [
+	^ self at: BlInfiniteLayout
+]
+
 { #category : #initialization }
 BlLayoutCommonConstraints >> initialize [
 	super initialize.

@@ -17,7 +17,7 @@ BlBlocUIManagerNotificationBasicHandler >> elementDoOrSpaceDo: aBlock [
 	context := thisContext.
 	[ context notNil ]
 		whileTrue: [ ((context receiver isKindOf: BlElement)
-				or: [ context receiver isKindOf: BlSpace ])
+				or: [ context receiver isKindOf: BlOSpace ])
 				ifTrue: [ ^ aBlock value: context receiver ].
 			context := context sender ]
 ]

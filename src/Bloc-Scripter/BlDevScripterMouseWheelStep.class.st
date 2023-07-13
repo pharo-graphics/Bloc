@@ -46,7 +46,7 @@ BlDevScripterMouseWheelStep >> playOn: aScripter [
 	aTarget := self target findTargetStartingInScripter: aScripter.
 	
 	self
-		setMousePosition: (BlSpace simulateMouseWheelOn: aTarget by: self vector)
+		setMousePosition: (BlOSpace simulateMouseWheelOn: aTarget by: self vector)
 		in: aScripter.
 
 	aScripter pulse

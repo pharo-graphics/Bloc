@@ -62,7 +62,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
 	<sampleInstance>
 	| aSpace aContainer aLayoutBoundary aChild |
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace extent: 500 @ 400.
 	aContainer := BlElement new size: 400 @ 300.
 	aLayoutBoundary := BlElement new size: 300 @ 200.

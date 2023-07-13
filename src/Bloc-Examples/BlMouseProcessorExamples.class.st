@@ -58,7 +58,7 @@ BlMouseProcessorExamples >> mouseProcessor [
 	| aMouseProcessor aSpace |
 	<gtExample>
 	
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aMouseProcessor := BlMouseProcessor space: aSpace.
 	
 	self assert: aMouseProcessor space equals: aSpace.

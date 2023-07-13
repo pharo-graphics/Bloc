@@ -29,7 +29,7 @@ BlSpaceEventExamples >> ignoreSpaceEventsAfterCloseRequest [
 BlSpaceEventExamples >> space [
 	<gtExample>
 	
-	^ BlSpace new host: BlHeadlessHost new
+	^ BlOSpace new host: BlHeadlessHost new
 ]
 
 { #category : #'show / close' }
