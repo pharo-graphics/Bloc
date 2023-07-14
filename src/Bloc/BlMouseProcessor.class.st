@@ -24,6 +24,13 @@ BlMouseProcessor class >> dblClickDelay [
 ]
 
 { #category : #'event testing' }
+BlMouseProcessor >> canBeClickAvortedEvent: aMouseUpEvent [
+
+	^ lastMouseDownEvent isNotNil and: [
+		  aMouseUpEvent target ~= lastMouseDownEvent target ]
+]
+
+{ #category : #'event testing' }
 BlMouseProcessor >> canBeClickEvent: aMouseUpEvent [
 
 	^ dndInProgress not and: [
@@ -588,7 +595,9 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 			(self canBeDblClickEvent: aMouseUpEvent)
 				ifTrue: [ self fireEvent: aMouseUpEvent asDoubleClickEvent ]
 				ifFalse: [ self fireClickEventFrom: aMouseUpEvent ] ]
-		ifFalse: [ self fireClickAvortedEventFrom: aMouseUpEvent ]
+		ifFalse: [
+			(self canBeClickAvortedEvent: aMouseUpEvent) ifTrue: [
+				self fireClickAvortedEventFrom: aMouseUpEvent ] ]
 ]
 
 { #category : #accessing }
