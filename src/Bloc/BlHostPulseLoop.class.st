@@ -179,22 +179,14 @@ BlHostPulseLoop >> stop [
 BlHostPulseLoop >> waitUntilNextPulse [
 	"Wait the appropriate amount of time for the next pulse"
 
-	| msToWait shouldForceDelay minWaitMS |
+	| msToWait minWaitMS |
 	"msToWait is the amount of time to wait for the next pulse.
 	Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
 	(meaning that we shouldn't wait for the next pulse)"
 	msToWait := pulsePeriodMS - (Time millisecondClockValue - latestPulseMS).
 
-	"But also ensure that background processes get some execution time.
-	If the nextReadyProcess has more priority than the IDLE process"
-	shouldForceDelay :=
-		Processor nextReadyProcess priority > Processor lowestPriority.
-	minWaitMS :=
-		shouldForceDelay
-			ifTrue: [ msToWaitForBackgroundProcess ]
-			ifFalse: [ 0 ].
-
-	BlPulseStatSignal milliseconds: msToWait delayForced: shouldForceDelay.
+	minWaitMS := 0.
+	BlPulseStatSignal milliseconds: msToWait delayForced: false.
 
 	msToWait := msToWait min: pulsePeriodMS max: minWaitMS.
 
