@@ -579,7 +579,7 @@ BlSpaceFixture >> buildImagesAndTransformations [
 	
 	| outskirts positionGenerator addElementBlock |
 
-	builder spaceExtent: 120@350.
+	builder spaceExtent: 120@250.
 
 	outskirts := { BlOutskirts inside. BlOutskirts centered. BlOutskirts outside }.
 	positionGenerator := self 
