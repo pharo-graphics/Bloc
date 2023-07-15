@@ -31,7 +31,7 @@ BARenderTest class >> inspectMismatches [
 	super inspectMismatches
 ]
 
-{ #category : #tests }
+{ #category : #hooks }
 BARenderTest >> actualForm [
 		
 	| aSpace |
@@ -40,7 +40,6 @@ BARenderTest >> actualForm [
 		perform: formSelector;
 		space.
 	^ aSpace aeAsForm
-
 ]
 
 { #category : #tests }
