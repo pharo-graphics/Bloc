@@ -23,7 +23,7 @@ BlDevScripterExamples >> basicScripter [
 
 { #category : #'examples - click check' }
 BlDevScripterExamples >> clickCheck [
-	<gtExample>
+<gtExample>
 	| anElement aScript |
 	anElement := BlDevElementExamples new containerWithRectangle.
 	aScript := self basicScripter element: anElement.

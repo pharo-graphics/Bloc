@@ -1322,8 +1322,13 @@ BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
 	I am triggered by the space as soon as a mouse down or up occurs.
 	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
 
-	self dispatchEvent: aMouseOutsideEvent.
-	self children do: [ :aChildElement | aChildElement dispatchMousePickedOutside: aMouseOutsideEvent ]
+	| evt |
+	aMouseOutsideEvent originalEvent target = self ifTrue: [ ^ self ].
+	evt := aMouseOutsideEvent copy.
+	self dispatchEvent: evt.
+	evt isConsumed ifTrue: [ ^ self ].
+	self children do: [ :aChildElement |
+		aChildElement dispatchMousePickedOutside: evt ]
 ]
 
 { #category : #'children dispatching' }

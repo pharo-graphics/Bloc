@@ -1337,6 +1337,12 @@ BlSpace >> hasOwner [
 	^ false
 ]
 
+{ #category : #testing }
+BlSpace >> hasParent: anElement [
+
+	^ false
+]
+
 { #category : #'window - properties' }
 BlSpace >> height [
 	<return: #Number>
@@ -1766,19 +1772,13 @@ BlSpace >> processMouseOutsideFrom: anEvent pickedIn: aPickedElement [
 	mouse up/down outside the popup window.
 	I send a mouse up/down outside event to element outside aPickedElement "
 
-	| evt filter |
-	
-	" add a filter to stop the dispatch at le pickedElement level so that pickedElement 
-	and its children do not receive the mouse outside event "
-	filter := BlEventHandler on: BlMousePickOutsideEvent do: [  ]. 
-	aPickedElement addEventFilter: filter.
-	
+	| evt |
 	" clone and initialize the original mouse up/down event "
 	evt := anEvent clone.
 	evt target: aPickedElement.
-	evt currentTarget: aPickedElement.
 	" dispatch the mouse outside event to all alements of the scene graph "
-	self layerHolder dispatchMousePickedOutside: evt asMouseOutsideEvent
+	self layerHolder childrenDo: [ :aChildElement |
+		aChildElement dispatchMousePickedOutside: evt asMouseOutsideEvent ]
 ]
 
 { #category : #pulse }

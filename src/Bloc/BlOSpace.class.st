@@ -88,43 +88,6 @@ BlOSpace class >> initialize [
 ]
 
 { #category : #'debug - simulation' }
-BlOSpace class >> locationInside: anElement [
-	"Return a random space location outside of element bounds"	
-	| theBounds aPosition |
-	
-	anElement topMostParent forceLayout.
-	theBounds := anElement bounds inSpace bounds.
-	aPosition := theBounds atRandom.
-		
-	self
-		assert: [ theBounds containsPoint: aPosition ]
-		description: [ 'Point({1}) must be inside of the bounds({2})' format: { aPosition . theBounds } ].
-		
-	^ aPosition
-]
-
-{ #category : #'debug - simulation' }
-BlOSpace class >> locationOutside: anElement [
-	"Return a random space location outside of element bounds"	
-	| theBounds aPosition |
-	
-	anElement topMostParent forceLayout.
-	theBounds := anElement bounds inSpace bounds.
-	aPosition := {
-		theBounds topRight - (theBounds width asInteger atRandom @ 100 atRandom).
-		theBounds topRight + (100 atRandom @ theBounds height asInteger atRandom).
-		theBounds bottomLeft + (theBounds width asInteger atRandom @ 100 atRandom).
-		theBounds bottomLeft - (100 atRandom @ theBounds height asInteger atRandom).
-	}	atRandom.
-		
-	self
-		assert: [ (theBounds containsPoint: aPosition) not ]
-		description: [ 'Point must be outside of the bounds' ].
-		
-	^ aPosition
-]
-
-{ #category : #'debug - simulation' }
 BlOSpace class >> simulateClickOn: anElement [
 	"Simulate a click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
