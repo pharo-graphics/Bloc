@@ -25,6 +25,12 @@ BlMousePickOutsideEvent class >> wantedIn: anEventDispatcher [
 	^ anEventDispatcher wantsMousePickedOutside
 ]
 
+{ #category : #converting }
+BlMousePickOutsideEvent >> asMouseOutsideEvent [
+
+	^ self 
+]
+
 { #category : #accessing }
 BlMousePickOutsideEvent >> originalEvent [
 

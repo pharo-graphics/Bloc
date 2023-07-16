@@ -93,11 +93,11 @@ BlMouseProcessor >> fillTargetHierarchy: aTarget [
 
 { #category : #'mouse picking' }
 BlMouseProcessor >> findMouseTargetFromEvent: aMouseEvent [
-
 	" return the element at event position "
+
 	self checkLastOverTarget.
 	" double dispatch because the finding differs according to the mouse event type "
-	^ aMouseEvent findTargetInSpace: self space.
+	^ aMouseEvent findTargetInSpace: self space
 ]
 
 { #category : #'event firing' }
@@ -595,7 +595,7 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 			(self canBeDblClickEvent: aMouseUpEvent)
 				ifTrue: [ self fireEvent: aMouseUpEvent asDoubleClickEvent ]
 				ifFalse: [ self fireClickEventFrom: aMouseUpEvent ] ]
-		ifFalse: [
+		ifFalse: [ 
 			(self canBeClickAvortedEvent: aMouseUpEvent) ifTrue: [
 				self fireClickAvortedEventFrom: aMouseUpEvent ] ]
 ]
