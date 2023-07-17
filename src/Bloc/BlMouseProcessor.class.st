@@ -220,7 +220,7 @@ BlMouseProcessor >> fireClickAvortedEventFrom: aMouseUpEvent [
 
 	lastMouseDownEvent target fireEvent: (BlClickAvortedEvent new
 			 copyFrom: lastMouseDownEvent;
-			 upTarget: aMouseUpEvent target;
+			 upEvent: aMouseUpEvent;
 			 processor: self;
 			 yourself)
 ]
