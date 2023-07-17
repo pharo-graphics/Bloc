@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlMouseEvent,
 	#instVars : [
 		'processor',
-		'upTarget'
+		'upEvent'
 	],
 	#category : #'Bloc-Events'
 }
@@ -26,13 +26,13 @@ BlClickAvortedEvent >> sendTo: anObject [
 ]
 
 { #category : #accessing }
-BlClickAvortedEvent >> upTarget [
+BlClickAvortedEvent >> upEvent [
 
-	^ upTarget
+	^ upEvent
 ]
 
 { #category : #accessing }
-BlClickAvortedEvent >> upTarget: anElement [
+BlClickAvortedEvent >> upEvent: anElement [
 
-	upTarget := anElement
+	upEvent := anElement
 ]
