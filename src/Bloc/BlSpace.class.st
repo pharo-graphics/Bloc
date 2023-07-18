@@ -240,7 +240,7 @@ BlSpace class >> simulateDragOn: anElement byAll: aSequenceOfBlVectors [
 	performing mouse down, mouse move, and mouse up events."
 
 	| aPosition aDelta |
-	anElement topMostParent forceLayout.
+	anElement forceLayout.
 	aPosition := anElement bounds inSpace center.
 
 	self
