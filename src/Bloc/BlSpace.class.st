@@ -57,10 +57,6 @@ Class {
 		'elementsNeedingStyle',
 		'elementsNeedingPropertiesComputation',
 		'iconStencil',
-		'contextMenuLayer',
-		'popupLayer',
-		'layerHolder',
-		'overlayLayer',
 		'rootElement'
 	],
 	#classVars : [
