@@ -13,5 +13,5 @@ BlMousePickEvent >> asMouseOutsideEvent [
 { #category : #processing }
 BlMousePickEvent >> findTargetInSpace: aSpace [
 
-	^ (aSpace findMousePickTargetFromEvent: self) ifNil: [ aSpace layerHolder ]
+	^ (aSpace findMousePickTargetFromEvent: self) ifNil: [ aSpace root ]
 ]

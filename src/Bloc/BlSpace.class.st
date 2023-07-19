@@ -59,9 +59,9 @@ Class {
 		'iconStencil',
 		'contextMenuLayer',
 		'popupLayer',
-		'rootLayer',
 		'layerHolder',
-		'overlayLayer'
+		'overlayLayer',
+		'rootElement'
 	],
 	#classVars : [
 		'UniqueIdGenerator'
@@ -467,13 +467,13 @@ BlSpace class >> spaceWithId: aSpaceId do: aBlock [
 { #category : #drawing }
 BlSpace >> aeAsForm [
 
-	^ self layerHolder aeAsForm
+	^ self root aeAsForm
 ]
 
 { #category : #drawing }
 BlSpace >> aeDrawOn: aeCanvas [
 
-	self layerHolder aeFullDrawOn: aeCanvas
+	self root aeFullDrawOn: aeCanvas
 
 ]
 
@@ -489,14 +489,14 @@ BlSpace >> beDirtyArea [
 
 	self
 		invalidRect:
-		(BlBounds origin: 0.0 @ 0.0 extent: self layerHolder extent)
-		from: self layerHolder
+		(BlBounds origin: 0.0 @ 0.0 extent: self root extent)
+		from: self root
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> becomeVisible [
 	"Notify root element that it is now visible to the user"
-	self layerHolder space: self
+	self root space: self
 
 ]
 
@@ -537,7 +537,7 @@ BlSpace >> center [
 { #category : #'children - accessing' }
 BlSpace >> children [
 
-	^ self layerHolder children
+	^ self root children
 ]
 
 { #category : #'change - rendering' }
@@ -557,20 +557,12 @@ BlSpace >> close [
 	(BlParallelUniverse forHost: self host class) closeSpace: self
 ]
 
-{ #category : #'NOT-USED-composition layer' }
+{ #category : #'composition layer' }
 BlSpace >> compositionLayer [
 	"Return my composition layer if I have one or nil otherwise"
 	<return: #BlCompositionLayer or: nil>
 
-	^ self layerHolder compositionLayer
-]
-
-{ #category : #accessing }
-BlSpace >> contextMenuLayer [
-	"Return my current root element.
-	root can not be nil"
-	
-	^ contextMenuLayer
+	^ self root compositionLayer
 ]
 
 { #category : #'cursor managing' }
@@ -585,26 +577,6 @@ BlSpace >> currentCursor: aCursor [
 	currentCursor := aCursor.
 	currentCursor ifNil: [ ^ self updateCursor: BlCursor default ].
 	currentCursor activateOn: self
-]
-
-{ #category : #initialization }
-BlSpace >> defaultContextMenuElevation [
-
-	^ 50
-]
-
-{ #category : #initialization }
-BlSpace >> defaultContextMenuLayer [
-
-	^ BlElement new
-		  background: Color transparent;
-		  constraintsDo: [ :c | 
-			  c horizontal matchParent.
-			  c vertical matchParent ];
-		  elevation:
-			  (BlRelativeElevation elevation: self defaultContextMenuElevation);
-		  labeled: 'Context menu layer';
-		  yourself
 ]
 
 { #category : #initialization }
@@ -628,55 +600,6 @@ BlSpace >> defaultExtent [
 ]
 
 { #category : #initialization }
-BlSpace >> defaultLayerHolder [
-
-	^ BlElement new
-		  layout: BlFrameLayout new;
-		  labeled: 'Top';
-		  yourself
-]
-
-{ #category : #initialization }
-BlSpace >> defaultOverlayElevation [
-
-	^ 40
-]
-
-{ #category : #initialization }
-BlSpace >> defaultOverlayLayer [
-
-	^ BlElement new
-		  background: Color transparent;
-		  constraintsDo: [ :c | 
-			  c horizontal matchParent.
-			  c vertical matchParent ];
-		  elevation:
-			  (BlRelativeElevation elevation: self defaultOverlayElevation);
-		  labeled: 'Overlay layer';
-		  yourself
-]
-
-{ #category : #initialization }
-BlSpace >> defaultPopupElevation [
-
-	^ 100
-]
-
-{ #category : #initialization }
-BlSpace >> defaultPopupLayer [
-
-	^ BlElement new
-		  background: Color transparent;
-		  constraintsDo: [ :c | 
-			  c horizontal matchParent.
-			  c vertical matchParent ];
-		  elevation:
-			  (BlRelativeElevation elevation: self defaultPopupElevation);
-		  labeled: 'Popup layer';
-		  yourself
-]
-
-{ #category : #initialization }
 BlSpace >> defaultRoot [
 
 	^ BlElement new
@@ -684,8 +607,7 @@ BlSpace >> defaultRoot [
 		  constraintsDo: [ :c | 
 			  c horizontal matchParent.
 			  c vertical matchParent ];
-		  elevation:
-			  (BlRelativeElevation elevation: self defaultRootElevation);
+		  elevation: (BlRelativeElevation elevation: self defaultRootElevation);
 		  labeled: self defaultRootLabel;
 		  yourself
 ]
@@ -747,7 +669,7 @@ BlSpace >> dispatchAddedToSceneGraph [
 	"Sent after any of my parents or I was added to scene graph.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
-	self layerHolder dispatchAddedToSceneGraph
+	self root dispatchAddedToSceneGraph
 
 ]
 
@@ -756,7 +678,7 @@ BlSpace >> dispatchRemovedFromSceneGraph [
 	"Sent after topFrame was removed from scene graph.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
-	self layerHolder dispatchRemovedFromSceneGraph
+	self root dispatchRemovedFromSceneGraph
 ]
 
 { #category : #pulse }
@@ -791,8 +713,8 @@ BlSpace >> doComputeProperties [
 	
 	self elementsNeedingPropertiesComputation removeAll.
 	
-	((theElementToProcess includes: self layerHolder) or: [ self layerHolder needsPropertiesComputation ])
-		ifTrue: [ self doComputePropertiesFromRoot: self layerHolder ]
+	((theElementToProcess includes: self root) or: [ self root needsPropertiesComputation ])
+		ifTrue: [ self doComputePropertiesFromRoot: self root ]
 		ifFalse: [ self doComputePropertiesOf: theElementToProcess ]
 ]
 
@@ -866,10 +788,10 @@ BlSpace >> doComputePropertiesOf: aCollectionOfElements [
 	| theGlobalResolvedProperties |
 
 	self
-		assert: [ (aCollectionOfElements includes: self layerHolder) not ]
+		assert: [ (aCollectionOfElements includes: self root) not ]
 		description: [ 'Must not include root' ].
 
-	theGlobalResolvedProperties := self layerHolder properties maybeResolvedProperties propertiesToPropagateToChildren.
+	theGlobalResolvedProperties := self root properties maybeResolvedProperties propertiesToPropagateToChildren.
 	aCollectionOfElements do: [ :eachElement |
 		"it is possible that properties manipulate the graphical scene,
 		therefore we have to check it here again"
@@ -899,7 +821,7 @@ BlSpace >> doLayout [
 			layoutCounter = 50 ifTrue: [
 				'Warning: Layout was performed 50 times per frame!' traceCr ] ].
 
-	self layerHolder dispatchLayoutDone
+	self root dispatchLayoutDone
 
 	"I prevent infinite spawn of debuggers" ]
 		on: Error
@@ -984,8 +906,8 @@ BlSpace >> doUpdateLayout [
 	elementsToLayout do: [ :eachElement |
 		self doUpdateLayoutBoundary: eachElement context: aBlElementBoundsUpdater ].
 	
-	self layerHolder isLayoutRequested
-		ifTrue: [ self doUpdateLayout: self layerHolder context: aBlElementBoundsUpdater ].
+	self root isLayoutRequested
+		ifTrue: [ self doUpdateLayout: self root context: aBlElementBoundsUpdater ].
 		
 	aBlElementBoundsUpdater commitChanges
 ]
@@ -1188,7 +1110,7 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 
 	<return: #BlElement or: nil>
 	| layers |
-	layers := self layerHolder children sortedByElevation reversed.
+	layers := self root children sortedByElevation reversed.
 	layers do: [ :layer |
 		(layer findMouseEventTargetAt: anEvent position) ifNotNil: [ :found |
 			" test the layer because if the result is the layer then it means that no element has been found "
@@ -1197,8 +1119,8 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 				self processMouseOutsideFrom: anEvent pickedIn: found.
 				^ found ] ] ].
 	" no element found at all: all elements receive a outside event"
-	self layerHolder dispatchMousePickedOutside: anEvent asMouseOutsideEvent.
-	^ self layerHolder
+	self root dispatchMousePickedOutside: anEvent asMouseOutsideEvent.
+	^ self root
 ]
 
 { #category : #'focus managing' }
@@ -1247,7 +1169,7 @@ BlSpace >> frame [
 { #category : #drawing }
 BlSpace >> fullDrawOn: anCanvas [
 
-	anCanvas fullDraw: self layerHolder
+	anCanvas fullDraw: self root
 ]
 
 { #category : #'window - properties' }
@@ -1298,7 +1220,7 @@ BlSpace >> grabFocus [
 	self focused: true
 ]
 
-{ #category : #'NOT-USED-composition layer' }
+{ #category : #'composition layer' }
 BlSpace >> hasCompositionLayer [
 
 	"^ self layerHolder hasCompositionLayer"
@@ -1498,11 +1420,7 @@ BlSpace >> initialize [
 	frame := BlSpaceFrame new.
 	telemetry := BlNullTelemetry uniqueInstance.
 
-	layerHolder := self defaultLayerHolder.
-	overlayLayer := self defaultOverlayLayer.
-	popupLayer := self defaultPopupLayer.
-	contextMenuLayer := self defaultContextMenuLayer.
-	rootLayer := self defaultRoot.
+	rootElement := self defaultRoot.
 
 	self extent: self defaultExtent.
 
@@ -1515,11 +1433,7 @@ BlSpace >> initialize [
 
 	self updateCursor: BlCursor default.
 
-	self layerHolder space: self.
-	self layerHolder addChild: self root.
-	self layerHolder addChild: self overlayLayer.
-	self layerHolder addChild: self contextMenuLayer.
-	self layerHolder addChild: self popupLayer
+	self root space: self
 
 ]
 
@@ -1533,14 +1447,14 @@ BlSpace >> initializeFocus [
 BlSpace >> inspectionPreview: aBuilder [
 	"<inspectorPresentationOrder: 1 title: 'Preview'>"
 
-	^ self layerHolder inspectionPreview: aBuilder
+	^ self root inspectionPreview: aBuilder
 ]
 
 { #category : #'-- extensions-spec2 --' }
 BlSpace >> inspectionTree: aBuilder [
 	<inspectorPresentationOrder: 2 title: 'Tree'>
 
-	^ self layerHolder inspectionTree: aBuilder
+	^ self root inspectionTree: aBuilder
 ]
 
 { #category : #'change - rendering' }
@@ -1562,7 +1476,7 @@ BlSpace >> isLayoutRequested [
 	"Indicates whether or not root element's layout needs to be updated next frame"
 	<return: #Boolean>
 	
-	^ self layerHolder isLayoutRequested or: [ self elementsNeedingLayout isNotEmpty ]
+	^ self root isLayoutRequested or: [ self elementsNeedingLayout isNotEmpty ]
 ]
 
 { #category : #testing }
@@ -1609,14 +1523,6 @@ BlSpace >> knowsPosition [
 	<return: #Boolean>
 
 	^ position notNil
-]
-
-{ #category : #accessing }
-BlSpace >> layerHolder [
-	"Return my current root element.
-	root can not be nil"
-	
-	^ layerHolder
 ]
 
 { #category : #'focus managing' }
@@ -1702,7 +1608,7 @@ BlSpace >> needsPropertiesComputation [
 	<return: #Boolean>
 	
 	^ self elementsNeedingPropertiesComputation isNotEmpty
-		or: [ self layerHolder needsPropertiesComputation ]
+		or: [ self root needsPropertiesComputation ]
 ]
 
 { #category : #'NOT-USED-change - properties' }
@@ -1740,23 +1646,7 @@ BlSpace >> onSessionChanged: aNewSession [
 	self beDirtyArea.
 	self requestNextPulse.
 	
-	self layerHolder onSessionChanged: aNewSession
-]
-
-{ #category : #accessing }
-BlSpace >> overlayLayer [
-	"Return my current root element.
-	root can not be nil"
-	
-	^ overlayLayer
-]
-
-{ #category : #accessing }
-BlSpace >> popupLayer [
-	"Return my current root element.
-	root can not be nil"
-	
-	^ popupLayer
+	self root onSessionChanged: aNewSession
 ]
 
 { #category : #'window - properties' }
@@ -1798,7 +1688,7 @@ BlSpace >> processMouseOutsideFrom: anEvent pickedIn: aPickedElement [
 	evt := anEvent clone.
 	evt target: aPickedElement.
 	" dispatch the mouse outside event to all alements of the scene graph "
-	self layerHolder childrenDo: [ :aChildElement |
+	self root childrenDo: [ :aChildElement |
 		aChildElement dispatchMousePickedOutside: evt asMouseOutsideEvent ]
 ]
 
@@ -1895,7 +1785,7 @@ BlSpace >> root [
 	"Return my current root element.
 	root can not be nil"
 	
-	^ rootLayer
+	^ rootElement
 ]
 
 { #category : #accessing }
@@ -1916,7 +1806,7 @@ BlSpace >> root: anElement [
 		space: self;
 		size: self extent.
 
-	rootLayer := anElement
+	rootElement := anElement
 ]
 
 { #category : #accessing }
@@ -1944,7 +1834,7 @@ BlSpace >> setExtent: anExtent [
 	"Actually change space and root extent to a given one"
 
 	extent := anExtent.
-	self layerHolder requestLayout
+	self root requestLayout
 ]
 
 { #category : #'private - accessing' }
@@ -2084,7 +1974,7 @@ BlSpace >> updateCursor: aBlCursor [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
 ]
 
-{ #category : #'NOT-USED-composition layer' }
+{ #category : #'composition layer' }
 BlSpace >> wantsSeparateCompositingLayer [
 
 	"^ self layerHolder wantsSeparateCompositingLayer"
@@ -2134,16 +2024,16 @@ BlSpace >> windowScale [
 BlSpace >> withAllChildrenBreadthFirst [
 	<return: #Collection of: #BlElement>
 	
-	^ self layerHolder withAllChildrenBreadthFirst
+	^ self root withAllChildrenBreadthFirst
 ]
 
 { #category : #'api - children enumeration' }
 BlSpace >> withAllChildrenBreadthFirstDo: aBlock [ 
 	
-	^ self layerHolder withAllChildrenBreadthFirstDo: aBlock 
+	^ self root withAllChildrenBreadthFirstDo: aBlock 
 ]
 
-{ #category : #'-- extensions-bloc-dev-tool --' }
+{ #category : #'bloc-dev-tool' }
 BlSpace >> withHalos [
 	self root addEventFilter: BlDevHalosEventListener new
 ]

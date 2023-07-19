@@ -165,7 +165,7 @@ BlMouseEvent >> delta: aPoint [
 { #category : #processing }
 BlMouseEvent >> findTargetInSpace: aSpace [
 
-	^ (aSpace findMouseEventTargetAt: self position) ifNil: [ aSpace layerHolder ]
+	^ (aSpace findMouseEventTargetAt: self position) ifNil: [ aSpace root ]
 ]
 
 { #category : #'action dispatching' }
