@@ -604,13 +604,14 @@ BlMouseProcessor >> processPicking: aMouseEvent [
 
 	"if the last over target contains the point we can start picking from it"
 
-	aTargetElement := (aMouseEvent isMouseMove and: [
+"	aTargetElement := (aMouseEvent isMouseMove and: [
 		                   lastOverTarget isNotNil and: [
 			                   lastOverTarget containsGlobalPoint: aMouseEvent position ] ])
 		                  ifTrue: [ aMouseEvent findTargetFrom: lastOverTarget ]
-		                  ifFalse: [ " double dispatch because the finding differs according to the mouse event type "
+		                  ifFalse: [ "" double dispatch because the finding differs according to the mouse event type ""
 			                  aMouseEvent findTargetFrom: self space ].
-
+"
+	aTargetElement := aMouseEvent findTargetFrom: self space. 
 
 	"we have to ensure that aTarget is not nil"
 	aTargetElement ifNil: [ aTargetElement := self space root ].
