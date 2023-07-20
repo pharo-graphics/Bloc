@@ -1322,13 +1322,13 @@ BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
 	I am triggered by the space as soon as a mouse down or up occurs.
 	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
 
-	| evt |
-	aMouseOutsideEvent originalEvent target = self ifTrue: [ ^ self ].
-	evt := aMouseOutsideEvent copy.
-	self dispatchEvent: evt.
-	evt isConsumed ifTrue: [ ^ self ].
+	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
 	self children do: [ :aChildElement |
-		aChildElement dispatchMousePickedOutside: evt ]
+		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone].
+	" does my bounds contains the event position, if so, the picked point is inside myself "
+	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position) ifTrue: [ ^ self ].
+	self dispatchEvent: aMouseOutsideEvent.
+
 ]
 
 { #category : #'children dispatching' }

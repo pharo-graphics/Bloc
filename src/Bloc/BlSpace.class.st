@@ -1105,13 +1105,15 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 	I may return nil if no such child is found and if I can not be event target either"
 
 	<return: #BlElement or: nil>
+
 	(self findMouseEventTargetAt: anEvent position) ifNotNil: [
 		:found | " test found because if the result is the root then it means that no element has been found "
 		found ~~ self root ifTrue: [ " ok, dispatch outside event through all the space elements "
-			self processMouseOutsideFrom: anEvent pickedIn: found.
+			" dispatch the mouse outside event to all alements of the scene graph "
+			self dispatchMousePickedOutside: (anEvent newCopyFor: found) asMouseOutsideEvent.
 			^ found ] ].
 	" no element found at all: all elements receive a outside event"
-	self dispatchMousePickedOutside: anEvent asMouseOutsideEvent.
+	self dispatchMousePickedOutside: anEvent clone asMouseOutsideEvent.
 	^ nil
 ]
 
@@ -1667,20 +1669,6 @@ BlSpace >> printOn: aStream [
 		<< '(';
 		print: title;
 		<< ')'
-]
-
-{ #category : #'event handling' }
-BlSpace >> processMouseOutsideFrom: anEvent pickedIn: aPickedElement [
-	" As an example, I'm used, to manage popup closing in case of a 
-	mouse up/down outside the popup window.
-	I send a mouse up/down outside event to element outside aPickedElement "
-
-	| evt |
-	" clone and initialize the original mouse up/down event "
-	evt := anEvent clone.
-	evt target: aPickedElement.
-	" dispatch the mouse outside event to all alements of the scene graph "
-	self dispatchMousePickedOutside: evt asMouseOutsideEvent
 ]
 
 { #category : #pulse }
