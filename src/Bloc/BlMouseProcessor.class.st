@@ -91,15 +91,6 @@ BlMouseProcessor >> fillTargetHierarchy: aTarget [
 		aTarget allParentsDo: [ :aParentElement | aStream nextPut: aParentElement  ] ]
 ]
 
-{ #category : #'mouse picking' }
-BlMouseProcessor >> findMouseTargetFromEvent: aMouseEvent [
-	" return the element at event position "
-
-	self checkLastOverTarget.
-	" double dispatch because the finding differs according to the mouse event type "
-	^ aMouseEvent findTargetInSpace: self space
-]
-
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsDragEndEvent: anEvent [
 
@@ -281,7 +272,7 @@ BlMouseProcessor >> handleLastMouseMove [
 
 	| target |
 	lastMouseMoveEvent ifNil: [ ^ self ].
-	target := self findMouseTargetFromEvent: lastMouseMoveEvent.	
+	target := self processPicking: lastMouseMoveEvent.	
 	lastMouseMoveEvent target: target.
 	lastMouseMoveEvent button: (pressedButtons ifEmpty: [ nil ] ifNotEmpty: [ pressedButtons anyOne ]).
 	self processMouseMove: lastMouseMoveEvent.
@@ -294,7 +285,8 @@ BlMouseProcessor >> handleMouseDown: aMouseDownEvent [
 	"First we need to register a pressed button"
 	self pressedButtons add: aMouseDownEvent button.
 
-	aTargetElement := self findMouseTargetFromEvent: aMouseDownEvent.
+	aTargetElement := self processPicking: aMouseDownEvent.
+
 	aMouseDownEvent target: aTargetElement.
 
 	self fireEvent: aMouseDownEvent.
@@ -339,7 +331,7 @@ BlMouseProcessor >> handleMouseMove: aMouseMoveEvent [
 	| aTargetElement shouldTryDragStart |
 	"picking and mouse move"
 	
-	aTargetElement := self findMouseTargetFromEvent: aMouseMoveEvent.
+	aTargetElement := self processPicking: aMouseMoveEvent.
 	self
 		assert: [ aTargetElement isAttachedToSceneGraph ]
 		description: [ 'Target element must be attached to the scene graph' ].
@@ -377,7 +369,7 @@ BlMouseProcessor >> handleMouseUp: aMouseUpEvent [
 	self pressedButtons remove: aMouseUpEvent button.
 	
 	"Note that the element that receives mouseup can be different from the element that received mousedown (lastMouseDownEvent)"
-	aTargetElement := self findMouseTargetFromEvent: aMouseUpEvent.
+	aTargetElement := self processPicking: aMouseUpEvent.
 	aMouseUpEvent target: aTargetElement.
 
 	"depending on whether drag and drop is in process handle mouse up either
@@ -477,7 +469,7 @@ BlMouseProcessor >> postProcess: aMouseEvent [
 BlMouseProcessor >> preProcess: aMouseEvent [
 	| aTarget |
 	
-	aTarget := self findMouseTargetFromEvent: aMouseEvent.
+	aTarget := self processPicking: aMouseEvent.
 
 	aMouseEvent target: aTarget.
 
@@ -535,8 +527,8 @@ BlMouseProcessor >> processMouseEnterLeaveEvent: aMouseEvent [
 
 	| newLeavedTargets newEnteredTargets currentEnteredTargets |
 	"mouse is moved over the same element, no need to process enter/leave events"
-	lastOverTarget = aMouseEvent target ifTrue: [ ^ self ].
 
+	lastOverTarget = aMouseEvent target ifTrue: [ ^ self ].
 	currentEnteredTargets := self fillTargetHierarchy: aMouseEvent target.
 
 	"fire mouseout to the previous overed target"
@@ -555,6 +547,7 @@ BlMouseProcessor >> processMouseEnterLeaveEvent: aMouseEvent [
 	"fire enter events"
 	newEnteredTargets := currentEnteredTargets reject: [ :anElement |
 		                     lastEnteredTargets includes: anElement ].
+
 	self fireAsEnterEvent: aMouseEvent targets: newEnteredTargets.
 
 	lastOverTarget := aMouseEvent target.
@@ -598,6 +591,30 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 		ifFalse: [ 
 			(self canBeClickAvortedEvent: aMouseUpEvent) ifTrue: [
 				self fireClickAvortedEventFrom: aMouseUpEvent ] ]
+]
+
+{ #category : #'mouse picking' }
+BlMouseProcessor >> processPicking: aMouseEvent [
+	" return the element at event position "
+
+	| aTargetElement |
+	(lastOverTarget isNotNil and: [
+		 lastOverTarget isAttachedToSceneGraph not ]) ifTrue: [
+		lastOverTarget := nil ].
+
+	"if the last over target contains the point we can start picking from it"
+
+	aTargetElement := (aMouseEvent isMouseMove and: [
+		                   lastOverTarget isNotNil and: [
+			                   lastOverTarget containsGlobalPoint: aMouseEvent position ] ])
+		                  ifTrue: [ aMouseEvent findTargetFrom: lastOverTarget ]
+		                  ifFalse: [ " double dispatch because the finding differs according to the mouse event type "
+			                  aMouseEvent findTargetFrom: self space ].
+
+
+	"we have to ensure that aTarget is not nil"
+	aTargetElement ifNil: [ aTargetElement := self space root ].
+	^ aTargetElement
 ]
 
 { #category : #accessing }

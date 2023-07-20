@@ -113,7 +113,7 @@ BlSpaceBuilder >> buildSpace [
 		extent: spaceExtent.
 
 	self flag: #todo. "Hacky way to prepare stuff without showing the space:"
-	space layerHolder
+	space root
 		size: spaceExtent;
 		forceLayout.
 ]
