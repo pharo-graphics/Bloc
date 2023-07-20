@@ -621,7 +621,7 @@ BlSpace >> defaultRootElevation [
 
 { #category : #initialization }
 BlSpace >> defaultRootLabel [
-	^ 'Root element'
+	^ 'Space root'
 ]
 
 { #category : #initialization }
@@ -667,6 +667,12 @@ BlSpace >> dispatchAddedToSceneGraph [
 
 	self root dispatchAddedToSceneGraph
 
+]
+
+{ #category : #'event handling' }
+BlSpace >> dispatchMousePickedOutside: aMouseOutsideEvent [
+
+	self root dispatchMousePickedOutside: aMouseOutsideEvent
 ]
 
 { #category : #'children dispatching' }
@@ -1084,17 +1090,12 @@ BlSpace >> extractUnstyled: aSetOfElements [
 { #category : #'event handling' }
 BlSpace >> findMouseEventTargetAt: aPoint [
 
-	"Return the deepest child element among all my children or myself that may be a target for mouse event at provided location.
+	"Return the deepest child element starting from root that may be a target for mouse event at provided location.
 	The coordinate point is given in space coordinates.
 	I may return nil if no such child is found and if I can not be event target either"
 
 	<return: #BlElement or: nil>
-	self children sortedByElevation reversed do: [ :eachChild | 
-		| found |
-		found := eachChild findMouseEventTargetAt: aPoint.
-		(found notNil and: [ found ~~ eachChild ]) ifTrue: [
-			^ found ] ].
-	^ nil
+	^ self root findMouseEventTargetAt: aPoint
 ]
 
 { #category : #'event handling' }
@@ -1104,14 +1105,14 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 	I may return nil if no such child is found and if I can not be event target either"
 
 	<return: #BlElement or: nil>
-	(self root findMouseEventTargetAt: anEvent position) ifNotNil: [
-		:found | " test the layer because if the result is the layer then it means that no element has been found "
+	(self findMouseEventTargetAt: anEvent position) ifNotNil: [
+		:found | " test found because if the result is the root then it means that no element has been found "
 		found ~~ self root ifTrue: [ " ok, dispatch outside event through all the space elements "
 			self processMouseOutsideFrom: anEvent pickedIn: found.
 			^ found ] ].
 	" no element found at all: all elements receive a outside event"
-	self root dispatchMousePickedOutside: anEvent asMouseOutsideEvent.
-	^ self root
+	self dispatchMousePickedOutside: anEvent asMouseOutsideEvent.
+	^ nil
 ]
 
 { #category : #'focus managing' }
@@ -1679,7 +1680,7 @@ BlSpace >> processMouseOutsideFrom: anEvent pickedIn: aPickedElement [
 	evt := anEvent clone.
 	evt target: aPickedElement.
 	" dispatch the mouse outside event to all alements of the scene graph "
-	self root dispatchMousePickedOutside: evt asMouseOutsideEvent
+	self dispatchMousePickedOutside: evt asMouseOutsideEvent
 ]
 
 { #category : #pulse }
