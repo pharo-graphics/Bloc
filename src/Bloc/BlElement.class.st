@@ -699,6 +699,22 @@ BlElement >> changed [
 	self error: 'Never use me, instead invalidate only what is needed'
 ]
 
+{ #category : #'-- extension toplo --' }
+BlElement >> checkSkinInitialization [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+	self launchSkinInitialization.
+	self childrenDo: [ :child | child checkSkinInitialization ]
+]
+
+{ #category : #'-- extension toplo --' }
+BlElement >> checkSkinInstallation [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+	self launchSkinInstallation.
+	self childrenDo: [ :child | child checkSkinInstallation ]
+]
+
 { #category : #'children accessing' }
 BlElement >> childAt: anIndex [
 	<return: #BlElement>
@@ -2242,6 +2258,20 @@ BlElement >> labeled: aString [
 	self containerName: aString asSymbol
 ]
 
+{ #category : #'-- extension toplo --' }
+BlElement >> launchSkinInitialization [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+
+]
+
+{ #category : #'-- extension toplo --' }
+BlElement >> launchSkinInstallation [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+
+]
+
 { #category : #'api - layout' }
 BlElement >> layout [
 	<return: #BlLayout>
@@ -3239,6 +3269,13 @@ BlElement >> privateRequestingLayout: aBoolean [
 	aBoolean
 		ifTrue: [ flags addNeedsLayout ]
 		ifFalse: [ flags clearNeedsLayout ]
+]
+
+{ #category : #'-- extension toplo --' }
+BlElement >> privateSkin [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+	^ nil
 ]
 
 { #category : #'api - properties' }

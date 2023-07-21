@@ -60,14 +60,20 @@ BlSpaceFrame >> initialize [
 
 { #category : #initialization }
 BlSpaceFrame >> initializePhases [
+
+	self flag: 'BlSpaceFrameSkinInstallationPhase and BlSpaceFrameSkinInitializationPhase are toplo related. We will find a way to make it cleaner'. 
+
 	self addPhases: { 
 		BlSpaceFrameIdlePhase new.
 		BlSpaceFrameHostValidationPhase new.
 		BlSpaceFrameTaskPhase new.
 		BlSpaceFrameEventPhase new.
-		BlSpaceFrameDrawingValidationPhase new.
 		BlSpaceFrameLayoutPhase new.
-		BlSpaceFrameDrawingPhase new }
+		BlSpaceFrameDrawingValidationPhase new.
+		BlSpaceFrameDrawingPhase new.
+				
+		BlSpaceFrameSkinInstallationPhase new.
+		BlSpaceFrameSkinInitializationPhase new }
 ]
 
 { #category : #private }
