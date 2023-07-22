@@ -379,16 +379,11 @@ BlMouseProcessor >> handleMouseUp: aMouseUpEvent [
 		ifFalse: [ self processMouseUp: aMouseUpEvent ]
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #initialization }
 BlMouseProcessor >> initialize [
-	super initialize.
-	lastEnteredTargets := #().
-	dragStartMask := 0.
-	dndInProgress := false.
 
-	"a set of currently pressed mouse buttons button"
-	pressedButtons := Set new.
-	dragState := BlMouseDragState new
+	super initialize.
+	self reset
 ]
 
 { #category : #testing }
@@ -448,16 +443,8 @@ BlMouseProcessor >> lastOverTarget [
 
 { #category : #'initialize-release' }
 BlMouseProcessor >> onSpaceClosed [
-
-	lastEnteredTargets := #(  ).
-	lastOverTarget := nil.
-	lastClickEvent := nil.
-	currentDragTarget := nil.
-	lastMouseTarget := nil.
-	dndInProgress := nil.
-	dragStartMask := 0.
-	pressedButtons := Set new.
-	lastMouseDownEvent := nil
+	
+	self reset
 ]
 
 { #category : #'event processing' }
@@ -616,6 +603,20 @@ BlMouseProcessor >> processPicking: aMouseEvent [
 	"we have to ensure that aTarget is not nil"
 	aTargetElement ifNil: [ aTargetElement := self space root ].
 	^ aTargetElement
+]
+
+{ #category : #'initialize-release' }
+BlMouseProcessor >> reset [
+
+	lastEnteredTargets := #().
+	lastOverTarget := nil.
+	lastClickEvent := nil.
+	currentDragTarget := nil.
+	lastMouseTarget := nil.
+	dndInProgress := false.
+	dragStartMask := 0.
+	pressedButtons := Set new.
+	dragState := BlMouseDragState new
 ]
 
 { #category : #accessing }
