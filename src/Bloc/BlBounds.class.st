@@ -461,53 +461,24 @@ BlBounds >> left: aLeft top: aTop right: aRight bottom: aBottom [
 ]
 
 { #category : #'rectangle functions' }
-BlBounds >> merge: aRectangle [ 
+BlBounds >> merge: aRectangle [
 	"Merge provided rectangle into me."
 
-	| useRcvr aLeft aTop aRight aBottom minX maxX minY maxY |
-
-	useRcvr := true.
-
-	aLeft := aRectangle left.
-	aTop := aRectangle top.
-	aRight := aRectangle right.
-	aBottom := aRectangle bottom.
-
-	minX := aLeft < left
-		ifTrue: 
-			[ useRcvr := false.
-			aLeft ]
-		ifFalse: [ left ].
-	maxX := aRight > right
-		ifTrue: 
-			[ useRcvr := false.
-			aRight ]
-		ifFalse: [ right ].
-	minY := aTop < top
-		ifTrue: 
-			[ useRcvr := false.
-			aTop ]
-		ifFalse: [ top ].
-	maxY := aBottom > bottom
-		ifTrue: 
-			[ useRcvr := false.
-			aBottom ]
-		ifFalse: [ bottom ].
-	
-	"no need to merge do nothing"
-	useRcvr 
-		ifTrue: [ ^ self ].
-	
-	left := minX.
-	top := minY.
-	right := maxX.
-	bottom := maxY.
-	
 	self
-		left: minX
-		top: minY
-		right: maxX
-		bottom: maxY
+		mergeLeft: aRectangle left
+		top: aRectangle top
+		right: aRectangle right
+		bottom: aRectangle bottom
+]
+
+{ #category : #'rectangle functions' }
+BlBounds >> mergeLeft: aLeft top: aTop right: aRight bottom: aBottom [
+	"Merge provided rectangle into me."
+
+	aLeft < left ifTrue: [ left := aLeft ].
+	aRight > right ifTrue: [ right := aRight ].
+	aTop < top ifTrue: [ top := aTop ].
+	aBottom > bottom ifTrue: [ bottom := aBottom ]
 ]
 
 { #category : #accessing }
