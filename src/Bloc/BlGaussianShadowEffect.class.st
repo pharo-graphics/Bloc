@@ -78,7 +78,7 @@ BlGaussianShadowEffect >> extraShadowSpace [
 	"Compute extra space that should be freed for shadow around element.
 	I depend on the width, and it is recommended to be 3 times of sigma (width) used for gaussian blur"
 	
-	^ self width * 3.0
+	^ self width * 1.5
 ]
 
 { #category : #initialization }
