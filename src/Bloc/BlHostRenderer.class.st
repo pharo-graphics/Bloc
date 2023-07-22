@@ -73,7 +73,7 @@ BlHostRenderer >> finishedRender: aSpace [
 	"Perform neccessary actions after rendering is complete.
 	By default I clear dirty areas of a given space"
 
-	aSpace clearDirtyAreas
+	aSpace clearDirtyElements
 ]
 
 { #category : #testing }
@@ -94,14 +94,6 @@ BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 	Please note, that it I be called multiple times"
 	
 	self subclassResponsibility
-]
-
-{ #category : #testing }
-BlHostRenderer >> isRenderNeeded: aSpace [
-	"Return true if I need to render a given space.
-	By default I check if there are any dirty areas, if there are none - no need to render"
-
-	^ aSpace dirtyAreas notEmpty
 ]
 
 { #category : #testing }
@@ -134,7 +126,7 @@ BlHostRenderer >> render: aHostSpace [
 	| aSpace shouldUpdateEveryFrame isRenderNeeded |
 	aSpace := aHostSpace space.
 	shouldUpdateEveryFrame := surface shouldUpdateEveryFrame.
-	isRenderNeeded := self isRenderNeeded: aSpace.
+	isRenderNeeded := aSpace hasDirtyElements.
 
 	(shouldUpdateEveryFrame or: [ isRenderNeeded ])
 		ifFalse: [ ^ self ].

@@ -24,7 +24,6 @@ Class {
 		'root',
 		'resizable',
 		'borderless',
-		'dirtyAreas',
 		'eventDispatcher',
 		'eventListener',
 		'eventRecorder',
@@ -44,7 +43,6 @@ Class {
 		'tasks',
 		'time',
 		'frame',
-		'gestureProcessor',
 		'elementsNeedingPaint',
 		'elementsNeedingLayout',
 		'telemetry',
@@ -463,13 +461,6 @@ BlSpace >> asReference [
 	^ reference ifNil: [ reference := BlAttachedCachedSpaceReference forSpace: self ]
 ]
 
-{ #category : #'change - rendering' }
-BlSpace >> beDirtyArea [
-	self
-		invalidRect: (BlBounds origin: 0.0 @ 0.0 extent: self root extent)
-		from: self root
-]
-
 { #category : #'api - displaying' }
 BlSpace >> becomeVisible [
 	"Notify root element that it is now visible to the user"
@@ -512,12 +503,10 @@ BlSpace >> children [
 ]
 
 { #category : #'change - rendering' }
-BlSpace >> clearDirtyAreas [
-	"Clear all dirty areas.
-	Default implementation simply removes all areas from the collection"
+BlSpace >> clearDirtyElements [
+	"Clear dirty elements collectio, which means there are no pending graphic operations."
 
-	self dirtyAreas removeAll.
-	self elementsNeedingPaint removeAll
+	elementsNeedingPaint removeAll
 ]
 
 { #category : #'api - displaying' }
@@ -614,13 +603,6 @@ BlSpace >> detachHostSpace [
 	"Detach my current host space if I have one"
 
 	hostSpace := nil
-]
-
-{ #category : #accessing }
-BlSpace >> dirtyAreas [
-	<return: #SequenceableCollection of: #BlBounds>
-
-	^ dirtyAreas
 ]
 
 { #category : #'children dispatching' }
@@ -922,6 +904,7 @@ BlSpace >> elementsNeedingLayout [
 
 { #category : #'change - rendering' }
 BlSpace >> elementsNeedingPaint [
+
 	^ elementsNeedingPaint
 ]
 
@@ -1146,13 +1129,10 @@ BlSpace >> grabFocus [
 	self focused: true
 ]
 
-{ #category : #testing }
-BlSpace >> hasDirtyAreas [
-	"Return true if space has dirty areas and therefore needs to be rendered,
-	false otherwise"
-	<return: #Boolean>
-	
-	^ self dirtyAreas isNotEmpty
+{ #category : #'change - rendering' }
+BlSpace >> hasDirtyElements [
+
+	^ elementsNeedingPaint notEmpty
 ]
 
 { #category : #'focus managing' }
@@ -1248,7 +1228,7 @@ BlSpace >> hostSpaceChanged [
 	"When host space changed we might want to adapt sizes"
 	self windowExtent: self windowExtent.
 	"host space changed => renderer changed, we want to redraw the whole space"
-	self beDirtyArea
+	self invalidateAll
 ]
 
 { #category : #'host space - accessing' }
@@ -1305,7 +1285,6 @@ BlSpace >> initialize [
 	host := BlHost pickHost.
 	nextPulseRequested := true.
 	session := Smalltalk session.
-	dirtyAreas := OrderedCollection new.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
 	elementsNeedingStyle := Set new.
@@ -1349,10 +1328,20 @@ BlSpace >> initializeFocus [
 
 { #category : #'change - rendering' }
 BlSpace >> invalidRect: aBlBounds from: anElement [
-	self makeDirty: aBlBounds.
-	self requestNextPulse.
-	
-	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ]
+
+	self flag: #todo. "aBlBounds is ignored. Rename selector!"
+	elementsNeedingPaint add: anElement.
+	self requestHostSpaceRedraw.
+	self requestNextPulse
+]
+
+{ #category : #'change - rendering' }
+BlSpace >> invalidateAll [
+
+	self markNeedsPaint: self root from: self root.
+	self root allChildrenBreadthFirstDo: [ :each |
+		each wantsSeparateCompositingLayer ifTrue: [ 
+			self markNeedsPaint: each from: each ] ]
 ]
 
 { #category : #testing }
@@ -1432,27 +1421,17 @@ BlSpace >> loseFocusFor: anElement [
 ]
 
 { #category : #'change - rendering' }
-BlSpace >> makeDirty: aBlBounds [
-	"Add the provided BlBounds to the the dirty area"
-
-	aBlBounds expanded.
-	self dirtyAreas
-		ifEmpty: [ self dirtyAreas add: aBlBounds copy ]
-		ifNotEmpty: [ :aCollection | aCollection first merge: aBlBounds ].
-]
-
-{ #category : #'change - rendering' }
 BlSpace >> markNeedsCompositionPaint: anElement from: aSourceElement [
-	self beDirtyArea.
-	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ].
-	self requestNextPulse
+	
+	self flag: #todo.
+	self markNeedsPaint: anElement from: aSourceElement
 ]
 
 { #category : #'change - rendering' }
 BlSpace >> markNeedsPaint: anElement from: aSourceElement [
-	self beDirtyArea.
-	self elementsNeedingPaint add: anElement.
-	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ].
+
+	elementsNeedingPaint add: anElement.
+	self requestHostSpaceRedraw.
 	self requestNextPulse
 ]
 
@@ -1541,8 +1520,9 @@ BlSpace >> needsStyleComputation: anElement [
 
 { #category : #pulse }
 BlSpace >> onSessionChanged: aNewSession [
+
 	session := aNewSession.
-	self beDirtyArea.
+	self invalidateAll.
 	self requestNextPulse.
 	
 	self root onSessionChanged: aNewSession
@@ -1621,7 +1601,7 @@ BlSpace >> render [
 		hostSpaceDo: [ :aHostSpace | aHostSpace render: self ]
 		"if there is no host we should clear dirty areas, otherwise
 		it may lead to memory leaks"
-		ifAbsent: [ self clearDirtyAreas ]
+		ifAbsent: [ self clearDirtyElements ]
 ]
 
 { #category : #'focus managing' }
@@ -1631,6 +1611,12 @@ BlSpace >> requestFocusFor: anElement dueTo: aFocusReason [
 		description: [ 'anElement must be attached to the scenegraph owned by this space' ].
 		
 	self focusProcessor requestFor: anElement dueTo: aFocusReason
+]
+
+{ #category : #'change - rendering' }
+BlSpace >> requestHostSpaceRedraw [
+
+	self hostSpaceDo: [ :aHostSpace | aHostSpace requestRedraw ]
 ]
 
 { #category : #'change - layout' }

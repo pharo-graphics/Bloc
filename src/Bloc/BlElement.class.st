@@ -2004,9 +2004,8 @@ BlElement >> invalidRect: aBlBounds from: anElement [
 	"Translate dirty reports from an Element.
 	A rectangle is given in my own coordinates"
 
-	"we are guarding owerselves from unnecessary computations of rectangle transformation"
-	self isAttachedToSceneGraph
-		ifFalse: [ ^ self ].
+	"avoid unnecessary computations of rectangle transformation"
+	self isAttachedToSceneGraph ifFalse: [ ^ self ].
 
 	"transform provided rectangle to my parent's coordinates before I pass it further"
 	self localBoundsToParent: aBlBounds.
@@ -2036,7 +2035,7 @@ BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 	(self wantsSeparateCompositingLayer and: [
 		self hasCompositionLayer and: [
 			self isAttachedToSceneGraph ] ]) ifTrue: [
-				self space markNeedsCompositionPaint: self from: self ].
+				^ self space markNeedsCompositionPaint: self from: self ].
 
 	self hasParent ifTrue: [ self parent invalidate ]
 ]
@@ -2508,7 +2507,7 @@ BlElement >> markNeedsPaintFrom: anElement [
 					self hasParent
 						ifTrue: [ self parent markNeedsPaintFrom: anElement ]
 						ifFalse: [ self space markNeedsPaint: self from: anElement ] ] ]
-		ifFalse: [ 
+		ifFalse: [
 			self hasParent
 				ifTrue: [ self parent markNeedsPaintFrom: anElement ]
 				ifFalse: [
