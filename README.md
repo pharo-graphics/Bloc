@@ -6,8 +6,10 @@
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
 :warning:
-This repository contains the code for Bloc that may be included in the future in Pharo.
+This repository contains the code for Bloc that will included in the future in Pharo.
 It retrofits a part of the development made at https://github.com/feenkcom/bloc. This version will focus on core features and stability. We are currently identifying the core we want for Pharo.
+
+You can join the mailing-list lse-openbloc@inria.fr from http://sympa.inria.fr.
 
 ## Installation
 
