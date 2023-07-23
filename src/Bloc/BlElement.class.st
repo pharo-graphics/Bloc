@@ -3592,6 +3592,8 @@ BlElement >> requestStyle [
 
 { #category : #'geometry bounds' }
 BlElement >> requestedHeight [
+	" return the exact height. Use it only if you know what your are doing. 
+	see BlElement>>requestedSize comment"
 
 	^ self constraints requestedHeightIn: self
 ]
@@ -3599,11 +3601,20 @@ BlElement >> requestedHeight [
 { #category : #'geometry bounds' }
 BlElement >> requestedSize [ 
 
+	"Normally, one shoud wait for the layouting to measure myself exactly.
+	But, in case my size (or my height or my width) is set with an #exact: send, it is possible
+	to get the exact size|height|width. 
+	So requestSize|height|width will works correctly only in this particular case.
+	The behavior in others cases may be impredictable or may raise an error.
+	"
+
 	^ self constraints requestedSizeIn: self
 ]
 
 { #category : #'geometry bounds' }
 BlElement >> requestedWidth [ 
+	" return the exact width. Use it only if you know what your are doing. 
+	see BlElement>>requestedSize comment"
 
 	^ self constraints requestedWidthIn: self
 ]
