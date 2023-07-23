@@ -57,3 +57,15 @@ BlLayoutMatchParentResizer >> measurementUnspecifiedWith: aNumber [
 BlLayoutMatchParentResizer >> printOn: aStream [
 	aStream nextPutAll: 'Match parent'
 ]
+
+{ #category : #accessing }
+BlLayoutMatchParentResizer >> requestedHeightIn: anElement [
+
+	^ anElement parent requestedHeightIn: anElement
+]
+
+{ #category : #accessing }
+BlLayoutMatchParentResizer >> requestedWidthIn: anElement [
+
+	^ anElement parent requestedWidthIn: anElement
+]

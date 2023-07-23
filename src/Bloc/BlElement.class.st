@@ -3590,6 +3590,24 @@ BlElement >> requestStyle [
 		ifFalse: [  ].
 ]
 
+{ #category : #'geometry bounds' }
+BlElement >> requestedHeight [
+
+	^ self constraints requestedHeightIn: self
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> requestedSize [ 
+
+	^ self constraints requestedSizeIn: self
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> requestedWidth [ 
+
+	^ self constraints requestedWidthIn: self
+]
+
 { #category : #initialization }
 BlElement >> resetChildrenArray [
 	children := Bloc preferableChildrenDataStructure new

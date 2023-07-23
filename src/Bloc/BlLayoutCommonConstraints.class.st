@@ -284,6 +284,24 @@ BlLayoutCommonConstraints >> proportional [
 	^ self at: BlProportionalLayout
 ]
 
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> requestedHeightIn: anElement [
+
+	^ self vertical requestedHeightIn: anElement 
+]
+
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> requestedSizeIn: anElement [
+
+	^ (self requestedWidthIn: anElement) @ (self requestedHeightIn: anElement)
+]
+
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> requestedWidthIn: anElement [
+
+	^ self horizontal requestedWidthIn: anElement 
+]
+
 { #category : #testing }
 BlLayoutCommonConstraints >> shouldAccountTransformation [
 	<return: #Boolean>

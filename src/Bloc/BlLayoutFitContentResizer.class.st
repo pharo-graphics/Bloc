@@ -57,3 +57,21 @@ BlLayoutFitContentResizer >> measurementUnspecifiedWith: aNumber [
 BlLayoutFitContentResizer >> printOn: aStream [
 	aStream nextPutAll: 'Fit content'
 ]
+
+{ #category : #accessing }
+BlLayoutFitContentResizer >> requestedHeightIn: anElement [
+
+	| h |
+	h := 0.
+	anElement childrenDo: [ :child | h := h + child requestedWidth ].
+	^ h
+]
+
+{ #category : #accessing }
+BlLayoutFitContentResizer >> requestedWidthIn: anElement [
+
+	| w |
+	w := 0.
+	anElement childrenDo: [ :child | w := w + child requestedWidth ].
+	^ w
+]

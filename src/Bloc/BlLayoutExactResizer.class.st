@@ -108,6 +108,18 @@ BlLayoutExactResizer >> printOn: aStream [
 ]
 
 { #category : #accessing }
+BlLayoutExactResizer >> requestedHeightIn: anElement [
+
+	^ self size
+]
+
+{ #category : #accessing }
+BlLayoutExactResizer >> requestedWidthIn: anElement [
+
+	^ self size
+]
+
+{ #category : #accessing }
 BlLayoutExactResizer >> size [
 	^ size
 ]
