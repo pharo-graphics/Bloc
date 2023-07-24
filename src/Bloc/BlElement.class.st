@@ -1634,6 +1634,14 @@ BlElement >> forceLayout [
 	self topMostParent computeLayout
 ]
 
+{ #category : #'layout utilities' }
+BlElement >> forceLocalLayout [
+	"Use me with care only if you know what you are doing. See #forceLayout comment to understand the context and why I can be problematic."
+
+	self requestLayout.
+	self computeLayout
+]
+
 { #category : #'api - look' }
 BlElement >> geometry [
 	"Return my geometry used to clip/fill/stroke me and to clip my children during rendering.

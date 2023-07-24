@@ -493,24 +493,6 @@ BlTextElement >> releaseParagraph [
 	paragraph := nil
 ]
 
-{ #category : #'geometry bounds' }
-BlTextElement >> requestedHeight [
-
-	Error signal: 'unappropriate use. my size must be computed by the layout measurement'
-]
-
-{ #category : #'geometry bounds' }
-BlTextElement >> requestedSize [ 
-
-	Error signal: 'unappropriate use. my size must be computed by the layout measurement'
-]
-
-{ #category : #'geometry bounds' }
-BlTextElement >> requestedWidth [
-
-	Error signal: 'unappropriate use. my size must be computed by the layout measurement'
-]
-
 { #category : #'api - font size' }
 BlTextElement >> resetDefaultFontSize [
 	defaultFontSize := nil

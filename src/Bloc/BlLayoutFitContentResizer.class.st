@@ -62,6 +62,7 @@ BlLayoutFitContentResizer >> printOn: aStream [
 BlLayoutFitContentResizer >> requestedHeightIn: anElement [
 
 	| h |
+	anElement hasChildren ifFalse: [ ^ anElement width ].
 	h := 0.
 	anElement childrenDo: [ :child | h := h + child requestedWidth ].
 	^ h
@@ -71,6 +72,7 @@ BlLayoutFitContentResizer >> requestedHeightIn: anElement [
 BlLayoutFitContentResizer >> requestedWidthIn: anElement [
 
 	| w |
+	anElement hasChildren ifFalse: [ ^ anElement width ].
 	w := 0.
 	anElement childrenDo: [ :child | w := w + child requestedWidth ].
 	^ w
