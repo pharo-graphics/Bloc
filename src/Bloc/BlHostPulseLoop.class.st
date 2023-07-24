@@ -16,7 +16,8 @@ Class {
 		'loopProcess',
 		'pulsePeriodMS',
 		'msToWaitForBackgroundProcess',
-		'latestPulseMS'
+		'pulseStartMS',
+		'pulseDurationMS'
 	],
 	#category : #'Bloc-Universe - Host'
 }
@@ -111,9 +112,12 @@ BlHostPulseLoop >> loopProcess [
 { #category : #'loop process' }
 BlHostPulseLoop >> newLoopBlock [
 
-	^ [ [ latestPulseMS := Time millisecondClockValue.
+	^ [ [
+			pulseStartMS := Time millisecondClockValue.
 
 			(BlParallelUniverse forHost: hostClass) pulse.
+
+			pulseDurationMS := Time millisecondClockValue - pulseStartMS.
 
 			self waitUntilNextPulse 
 		
@@ -179,17 +183,15 @@ BlHostPulseLoop >> stop [
 BlHostPulseLoop >> waitUntilNextPulse [
 	"Wait the appropriate amount of time for the next pulse"
 
-	| msToWait minWaitMS |
-	"msToWait is the amount of time to wait for the next pulse.
-	Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
+	| msToWait |
+	"Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
 	(meaning that we shouldn't wait for the next pulse)"
-	msToWait := pulsePeriodMS - (Time millisecondClockValue - latestPulseMS).
 
-	minWaitMS := 0.
-	BlPulseStatSignal milliseconds: msToWait delayForced: false.
-
-	msToWait := msToWait min: pulsePeriodMS max: minWaitMS.
-
-	msToWait = 0 ifFalse: [ (Delay forMilliseconds: msToWait) wait ]
-
+	"No need to wait"	
+	pulseDurationMS >= pulsePeriodMS ifTrue: [
+		"Processor yield. maybe?" ^ self ].
+	
+	"Need to wait"
+	msToWait := pulsePeriodMS - pulseDurationMS.
+	(Delay forMilliseconds: msToWait) wait
 ]
