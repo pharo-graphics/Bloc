@@ -19,16 +19,12 @@ BARenderTest class >> exportAll [
 
 { #category : #convenience }
 BARenderTest class >> inspectAll [
-	<script: 'self inspectAll' >
-
-	super inspectAll
+	<script: 'super inspectAll'>
 ]
 
 { #category : #convenience }
 BARenderTest class >> inspectMismatches [
-	<script: 'self inspectMismatches' >
-
-	super inspectMismatches
+	<script: 'super inspectMismatches' >
 ]
 
 { #category : #hooks }
