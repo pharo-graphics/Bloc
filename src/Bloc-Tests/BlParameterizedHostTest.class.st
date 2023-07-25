@@ -8,6 +8,20 @@ Class {
 	#category : #'Bloc-Tests'
 }
 
+{ #category : #private }
+BlParameterizedHostTest class >> isAbstract [
+
+	^ self == BlParameterizedHostTest
+]
+
+{ #category : #'building suites' }
+BlParameterizedHostTest class >> testParameters [
+
+	^ ParametrizedTestMatrix new
+		forSelector: #hostClass
+		addOptions: BlHost supportedHostClasses
+]
+
 { #category : #accessing }
 BlParameterizedHostTest >> hostClass [
 
