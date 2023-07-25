@@ -1,6 +1,6 @@
 Class {
 	#name : #BlScrollBarTest,
-	#superclass : #BlParameterizedTest,
+	#superclass : #BlParameterizedHostTest,
 	#instVars : [
 		'space',
 		'largeElement',
