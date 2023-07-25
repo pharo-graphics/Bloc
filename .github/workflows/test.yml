@@ -32,3 +32,9 @@ jobs:
         timeout-minutes: 10
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload fuel files
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: Upload fuel files as artifacts
+          path: "*.fuel"
