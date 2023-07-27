@@ -455,6 +455,18 @@ BlElement >> asElement [
 	^ self 
 ]
 
+{ #category : #converting }
+BlElement >> asScrollableElement [
+	| scrollable |
+	self removeFromParent.
+	scrollable := self newScrollableParent.
+	scrollable constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+	scrollable addChild: self.
+	^ scrollable
+]
+
 { #category : #'children add/remove' }
 BlElement >> attachChild: anElement [
 	"Attaches previously detached element as my last direct child.
@@ -520,11 +532,13 @@ BlElement >> attachSpace [
 	self needsPaint
 		ifTrue: [ self markNeedsPaintFrom: self ].
 
-	self needsStyle
-		ifTrue: [ self requestStyle ].
+	"Style and properties computation are not used and will be removed"
+	
+	"self needsStyle
+		ifTrue: [ self requestStyle ]."
 
-	self needsPropertiesComputation
-		ifTrue: [ self requestPropertiesComputation ]
+	"self needsPropertiesComputation
+		ifTrue: [ self requestPropertiesComputation ]"
 ]
 
 { #category : #'api - look' }
@@ -707,6 +721,22 @@ BlElement >> boundsInWindow [
 { #category : #updating }
 BlElement >> changed [
 	self error: 'Never use me, instead invalidate only what is needed'
+]
+
+{ #category : #'-- extension toplo --' }
+BlElement >> checkSkinInitialization [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+	self launchSkinInitialization.
+	self childrenDo: [ :child | child checkSkinInitialization ]
+]
+
+{ #category : #'-- extension toplo --' }
+BlElement >> checkSkinInstallation [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+	self launchSkinInstallation.
+	self childrenDo: [ :child | child checkSkinInstallation ]
 ]
 
 { #category : #'children accessing' }
@@ -1335,6 +1365,21 @@ BlElement >> dispatchLayoutDone [
 	self children do: [ :aChildElement | aChildElement dispatchLayoutDone ]
 ]
 
+{ #category : #layout }
+BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
+	"
+	I am triggered by the space as soon as a mouse down or up occurs.
+	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
+
+	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
+	self children do: [ :aChildElement |
+		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone].
+	" does my bounds contains the event position, if so, the picked point is inside myself "
+	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position) ifTrue: [ ^ self ].
+	self dispatchEvent: aMouseOutsideEvent.
+
+]
+
 { #category : #'children dispatching' }
 BlElement >> dispatchRemovedFromParent: aParentElement [
 	"Sent after I was removed from my parent and is not longer its direct child.
@@ -1622,6 +1667,14 @@ BlElement >> forceLayout [
 	self topMostParent computeLayout
 ]
 
+{ #category : #'layout utilities' }
+BlElement >> forceLocalLayout [
+	"Use me with care only if you know what you are doing. See #forceLayout comment to understand the context and why I can be problematic."
+
+	self requestLayout.
+	self computeLayout
+]
+
 { #category : #'api - look' }
 BlElement >> geometry [
 	"Return my geometry used to clip/fill/stroke me and to clip my children during rendering.
@@ -1796,6 +1849,15 @@ BlElement >> globalScale [
 ]
 
 { #category : #'children testing' }
+BlElement >> hasAnyInParentChain: aCollection [
+	"Return true if any one in the given collection in my parent chain (including myself) "
+	<return: #Boolean>
+
+	
+	^ aCollection anySatisfy: [ :e | self hasInParentChain: e ]
+]
+
+{ #category : #'children testing' }
 BlElement >> hasChild: anElement [
 	<return: #Boolean>
 	
@@ -1834,6 +1896,14 @@ BlElement >> hasFocusable [
 
 	^ self isFocusable or: [
 		self children anySatisfy: [ :anElement | anElement hasFocusable ] ]
+]
+
+{ #category : #'children testing' }
+BlElement >> hasInParentChain: anElement [
+	"Return true if I have a given element in my parent chain, or if I am anElement "
+	<return: #Boolean>
+
+	^ anElement = self or: [ self hasParent: anElement ]
 ]
 
 { #category : #'event management accessing' }
@@ -1930,7 +2000,7 @@ BlElement >> ignoreRequestLayoutDuring: aBlock [
 BlElement >> inSpace [
 	"Add self to a new BlSpace. Answer such space."
 	| sp |
-	sp := OBlSpace new.
+	sp := BlSpace new.
 	sp root addChild: self.
 	^ sp
 
@@ -2230,6 +2300,20 @@ BlElement >> isVisibleInSpace [
 { #category : #accessing }
 BlElement >> labeled: aString [
 	self containerName: aString asSymbol
+]
+
+{ #category : #'-- extension toplo --' }
+BlElement >> launchSkinInitialization [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+
+]
+
+{ #category : #'-- extension toplo --' }
+BlElement >> launchSkinInstallation [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+
 ]
 
 { #category : #'api - layout' }
@@ -2650,6 +2734,12 @@ BlElement >> needsStyle [
 	^ self styles needsStyle
 ]
 
+{ #category : #converting }
+BlElement >> newScrollableParent [
+
+	^ BlScrollableElement new
+]
+
 { #category : #'event management accessing' }
 BlElement >> nextEventTarget [
 	"Return next event target that should be contained in dispatch chain.
@@ -2917,10 +3007,22 @@ BlElement >> opacity: aNumber [
 BlElement >> openInNewSpace [
 	"Add self to a new BlSpace and show it. Answer such space."
 	
-	^ BlSpace new
+	^ BlOSpace new
 		  addChild: self;
 		  show;
 		  yourself
+]
+
+{ #category : #convenience }
+BlElement >> openInOBlSpace [
+	"Add self to a new BlSpace and show it. Answer such space."
+	
+	self 
+		deprecated:  'Use #openInSpace instead' 
+		transformWith: '`@receiver openInOBlSpace' -> '`@receiver openInSpace'.
+	
+	^ self openInSpace
+
 ]
 
 { #category : #convenience }
@@ -3211,6 +3313,13 @@ BlElement >> privateRequestingLayout: aBoolean [
 	aBoolean
 		ifTrue: [ flags addNeedsLayout ]
 		ifFalse: [ flags clearNeedsLayout ]
+]
+
+{ #category : #'-- extension toplo --' }
+BlElement >> privateSkin [
+
+	self flag: 'Toplo related. We will find a way to remove it from here'.
+	^ nil
 ]
 
 { #category : #'api - properties' }
@@ -3525,6 +3634,35 @@ BlElement >> requestStyle [
 		ifFalse: [  ].
 ]
 
+{ #category : #'geometry bounds' }
+BlElement >> requestedHeight [
+	" return the exact height. Use it only if you know what your are doing. 
+	see BlElement>>requestedSize comment"
+
+	^ self constraints requestedHeightIn: self
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> requestedSize [ 
+
+	"Normally, one shoud wait for the layouting to measure myself exactly.
+	But, in case my size (or my height or my width) is set with an #exact: send, it is possible
+	to get the exact size|height|width. 
+	So requestSize|height|width will works correctly only in this particular case.
+	The behavior in others cases may be impredictable or may raise an error.
+	"
+
+	^ self constraints requestedSizeIn: self
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> requestedWidth [ 
+	" return the exact width. Use it only if you know what your are doing. 
+	see BlElement>>requestedSize comment"
+
+	^ self constraints requestedWidthIn: self
+]
+
 { #category : #initialization }
 BlElement >> resetChildrenArray [
 	children := Bloc preferableChildrenDataStructure new
@@ -3597,7 +3735,7 @@ BlElement >> size: aPoint [
 BlElement >> space [
 	"Return space to which I belong. Direct reference boosts performance.
 	Each element has a reference to the current space which is set on demand."
-	<return: #BlSpace or: nil>
+	<return: #BlOSpace or: nil>
 	
 	spaceReference spaceDo: [ :aSpace | ^ aSpace ].
 	
@@ -3638,9 +3776,13 @@ BlElement >> startTextInputAtRectangle: aRectangle [
 
 { #category : #'api - style' }
 BlElement >> states [
-	^ self userData
+
+	"Style and properties computation are not used and will be removed"
+	^ nil
+
+	"^ self userData
 		at: #blocStates
-		ifAbsentPut: [ BlElementStates new element: self ]
+		ifAbsentPut: [ BlElementStates new element: self ]"
 ]
 
 { #category : #'text input' }
@@ -3661,10 +3803,12 @@ BlElement >> styles [
 	"Return current element styles.
 	See ${class:BlStyles}$ to learn more about styles"
 	<return: #BlElementStyles>
-
-	^ self userData
+	
+	"Style and properties computation are not used and will be removed"
+	^ nil
+	"^ self userData
 		at: #blocStyles
-		ifAbsentPut: [ BlElementStyles new element: self ]
+		ifAbsentPut: [ BlElementStyles new element: self ]"
 ]
 
 { #category : #layout }

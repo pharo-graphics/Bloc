@@ -11,7 +11,7 @@ BlDevScripterDoubleClickStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterDoubleClickStep >> playOn: aScripter [
-	BlSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).
-	BlSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).
+	BlOSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).
+	BlOSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).
 	aScripter pulse
 ]

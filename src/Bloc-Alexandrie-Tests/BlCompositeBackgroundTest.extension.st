@@ -4,7 +4,7 @@ Extension { #name : #BlCompositeBackgroundTest }
 BlCompositeBackgroundTest >> testAeApplyTo [
 
 	| space background blElement backgroundList |
-	space := BlSpace new.
+	space := BlOSpace new.
 	
 	backgroundList := OrderedCollection with: (BlBackground paint: Color blue).
 	background := BlCompositeBackground withAll: backgroundList.

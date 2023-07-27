@@ -36,6 +36,11 @@ TBlElementProperties >> effect: aBlEffect [
 ]
 
 { #category : #'api - properties font' }
+TBlElementProperties >> fontSize: aBlElementPropertyLength [
+	self addProperty: (BlElementFontSizeProperty new fontSize: aBlElementPropertyLength)
+]
+
+{ #category : #'api - properties font' }
 TBlElementProperties >> fontSizeEm: aNumber [
 	self fontSize: (BlValueWithUnit em: aNumber)
 ]
@@ -65,6 +70,26 @@ TBlElementProperties >> gone [
 	self visibility: BlVisibility gone
 ]
 
+{ #category : #'api - properties layout' }
+TBlElementProperties >> hExact: aWidth [
+	self addProperty: (BlElementLayoutHorizontalResizerProperty new exact: aWidth)
+]
+
+{ #category : #'api - properties layout' }
+TBlElementProperties >> hFitContent [
+	self addProperty: (BlElementLayoutHorizontalResizerProperty new fitContent)
+]
+
+{ #category : #'api - properties layout' }
+TBlElementProperties >> hFitContentLimited [
+	self addProperty: (BlElementLayoutHorizontalResizerProperty new fitContentLimited)
+]
+
+{ #category : #'api - properties layout' }
+TBlElementProperties >> hMatchParent [
+	self addProperty: (BlElementLayoutHorizontalResizerProperty new matchParent)
+]
+
 { #category : #'api - properties' }
 TBlElementProperties >> hidden [
 	self visibility: BlVisibility hidden
@@ -88,6 +113,26 @@ TBlElementProperties >> padding: aBlInsets [
 { #category : #'api - properties' }
 TBlElementProperties >> scaleBy: aNumber [
 	self addProperty: (BlElementTransformationScaleProperty new scaleFactor: aNumber)
+]
+
+{ #category : #'api - properties layout' }
+TBlElementProperties >> vExact: aHeight [
+	self addProperty: (BlElementLayoutVerticalResizerProperty new exact: aHeight)
+]
+
+{ #category : #'api - properties layout' }
+TBlElementProperties >> vFitContent [
+	self addProperty: (BlElementLayoutVerticalResizerProperty new fitContent)
+]
+
+{ #category : #'api - properties layout' }
+TBlElementProperties >> vFitContentLimited [
+	self addProperty: (BlElementLayoutVerticalResizerProperty new fitContentLimited)
+]
+
+{ #category : #'api - properties layout' }
+TBlElementProperties >> vMatchParent [
+	self addProperty: (BlElementLayoutVerticalResizerProperty new matchParent)
 ]
 
 { #category : #'api - properties' }

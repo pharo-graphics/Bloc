@@ -62,7 +62,7 @@ SpBlSpaceInMorphPresenter >> initializePresenters [
 				yourself);
 		yourself.
 
-	space := BlSpace new
+	space := BlOSpace new
 		host: (BlMorphicHost new
 			containerMorph: morphPresenter morph;
 			yourself);

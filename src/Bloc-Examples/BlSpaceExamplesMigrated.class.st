@@ -55,7 +55,7 @@ BlSpaceExamplesMigrated >> emptySpace [
 	<gtExample>
 	| aSpace |
 	
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self assert: aSpace root hasChildren not.
 	self deny: aSpace hasDirtyElements.

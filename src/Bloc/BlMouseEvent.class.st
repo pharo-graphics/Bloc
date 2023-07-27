@@ -48,16 +48,8 @@ BlMouseEvent >> anyButtonPressed [
 ]
 
 { #category : #converting }
-BlMouseEvent >> asClickCandidateEvent [
-
-	^ BlClickCandidateEvent new
-		copyFrom: self;
-		yourself
-]
-
-{ #category : #converting }
 BlMouseEvent >> asClickEvent [
-	^ BlClickEvent new
+	^ self button clickEventClass new
 		copyFrom: self;
 		yourself
 ]
@@ -168,6 +160,18 @@ BlMouseEvent >> delta [
 { #category : #accessing }
 BlMouseEvent >> delta: aPoint [
 	delta := aPoint
+]
+
+{ #category : #processing }
+BlMouseEvent >> findTargetFrom: aSpaceOrElement [
+
+	^ (aSpaceOrElement findMouseEventTargetAt: self position) ifNil: [ aSpaceOrElement space root ]
+]
+
+{ #category : #'action dispatching' }
+BlMouseEvent >> ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock [
+
+	^ self button ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock
 ]
 
 { #category : #testing }

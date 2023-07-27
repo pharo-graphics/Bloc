@@ -103,6 +103,35 @@ BlMatrix3D >> is2D [
 	^ false
 ]
 
+{ #category : #testing }
+BlMatrix3D >> isIdentity [
+
+	"scale"
+	(sx = 1.0 and: [
+	 sy = 1.0 and: [
+	 sz = 1.0 ]]) ifFalse: [ ^ false ].
+	
+	"translate"
+	(x = 0.0 and: [
+	 y = 0.0 and: [
+	 z = 0.0 ]]) ifFalse: [ ^ false ].
+	
+	"shear"
+	(shx0 = 0.0 and: [
+	 shx1 = 0.0 and: [
+	 shy0 = 0.0 and: [
+	 shy1 = 0.0 and: [
+	 shz0 = 0.0 and: [
+	 shz1 = 0.0 ]]]]]) ifFalse: [ ^ false ].
+
+	(w  = 1.0 and: [
+	 wx = 0.0 and: [
+	 wy = 0.0 and: [
+	 wz = 0.0 ]]]) ifFalse: [ ^ false ].
+
+	^ true
+]
+
 { #category : #'matrix - transformations' }
 BlMatrix3D >> multiplyBy: aMatrix3D [
 	"Multiply me in-place by a given 3D Matrix"

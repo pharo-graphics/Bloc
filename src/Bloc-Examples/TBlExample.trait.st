@@ -10,7 +10,7 @@ Trait {
 TBlExample classSide >> openInWindow: anElement named: aTitleString extent: aPoint [
 	"Open a given element in a window of a provided extent and specified title"
 	| aSpace |
-	aSpace := BlSpace new
+	aSpace := BlOSpace new
 		extent: aPoint;
 		title: aTitleString.
 	

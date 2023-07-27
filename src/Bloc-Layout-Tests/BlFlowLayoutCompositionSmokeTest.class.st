@@ -112,7 +112,7 @@ BlFlowLayoutCompositionSmokeTest class >> floatingCells [
 	| aSpace |
 	<script: 'self floatingCells'>
 
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace root addChild: self new floatingCells.
 	aSpace root addEventHandler:
 			(BlEventHandler

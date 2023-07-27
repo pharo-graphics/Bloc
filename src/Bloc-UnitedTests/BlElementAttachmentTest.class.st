@@ -12,7 +12,7 @@ Class {
 BlElementAttachmentTest >> testAddToSpace [
 	<sampleInstance>
 	| aSpace aContainer aChild addedToScene removedFromScene |
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aChild := BlElement new.
 	aContainer := BlElement new.
 	aContainer addChild: aChild.

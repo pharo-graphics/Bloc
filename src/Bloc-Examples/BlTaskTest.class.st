@@ -14,7 +14,7 @@ BlTaskTest >> testAddElementWithTaskToSpace [
 	
 	| anElement aSpace aTask |
 	anElement := self testAddTaskToTheElementWithoutSpace.
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace root addChild: anElement.
 	"task were moved to the space"
 	self assert: anElement taskQueue tasks isEmpty.

@@ -87,10 +87,17 @@ BaselineOfBloc >> baseline: spec [
 			spec 
 				package: #'Bloc-Layout' with: [
 					spec requires: #('Bloc') ];
+				package: #'Bloc-Layout-Resizer' with: [
+					spec requires: #('Bloc-Layout' ) ];
 				package: #'Bloc-LayoutZoomable' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-Animation') ].
 				"Layout depends also on compositor. See https://github.com/pharo-graphics/Bloc/issues/87"
 
+			"Infinite"
+			spec 
+				package: #'Bloc-Infinite' with: [
+					spec requires: #('Bloc') ].
+			
 			"Calypso & Spec2 Extensions"
 			spec 
 				package: #'Bloc-Spec2';
@@ -114,8 +121,14 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #(#'Bloc-DevTool') ];
 				package: #'Bloc-Text-Examples' with: [
 					spec requires: #(#'Bloc-Examples') ];
+				package: #'Bloc-Infinite-Tests' with: [
+					spec requires: #('Bloc-Infinite') ];
 				package: #'Bloc-Layout-Tests' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ].
+
+			spec
+				package: #'Bloc-Theme' with: [
+					spec requires: #(#'Bloc') ]
 
 			].
 ]

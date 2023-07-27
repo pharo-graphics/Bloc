@@ -7,3 +7,27 @@ Class {
 	#superclass : #BlMouseNamedButton,
 	#category : #'Bloc-Events'
 }
+
+{ #category : #'event creation' }
+BlMouseSecondaryButton >> clickEventClass [
+
+	^ BlSecondaryClickEvent 
+]
+
+{ #category : #'action dispatching' }
+BlMouseSecondaryButton >> ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock [
+
+	^ aSecBlock value
+]
+
+{ #category : #'event creation' }
+BlMouseSecondaryButton >> mouseDownEventClass [
+
+	^ BlSecondaryMouseDownEvent 
+]
+
+{ #category : #'event creation' }
+BlMouseSecondaryButton >> mouseUpEventClass [
+
+	^ BlSecondaryMouseUpEvent 
+]

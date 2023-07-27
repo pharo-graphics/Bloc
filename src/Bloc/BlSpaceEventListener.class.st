@@ -44,6 +44,7 @@ BlSpaceEventListener >> keyboardProcessor [
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseDownEvent: anEvent [
+
 	self mouseProcessor handleMouseDown: anEvent.
 	self focusProcessor handleMouseDown: anEvent
 ]
@@ -66,11 +67,13 @@ BlSpaceEventListener >> mouseProcessor [
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseUpEvent: anEvent [
+
 	self mouseProcessor handleMouseUp: anEvent
 ]
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseWheelEvent: anEvent [
+
 	self mouseProcessor processMouseScroll: anEvent
 ]
 

@@ -4,7 +4,6 @@ Extension { #name : #BlColorPaint }
 BlColorPaint >> aeApplyTo: aeCanvas [
 	
 	aeCanvas setSourceColor: self color
-
 ]
 
 { #category : #'*Bloc-Alexandrie' }

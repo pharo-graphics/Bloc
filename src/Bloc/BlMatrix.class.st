@@ -60,6 +60,12 @@ BlMatrix >> is2D [
 	^ self subclassResponsibility
 ]
 
+{ #category : #testing }
+BlMatrix >> isIdentity [
+	
+	^ self subclassResponsibility
+]
+
 { #category : #'matrix - transformations' }
 BlMatrix >> multiplyBy: aMatrix [
 	"Perform a right multiplication by a given matrix"

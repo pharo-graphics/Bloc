@@ -1,8 +1,8 @@
 Class {
 	#name : #BlClickEventExamples,
 	#superclass : #Object,
-	#traits : 'TBlDevScripterExamples',
-	#classTraits : 'TBlDevScripterExamples classTrait',
+	#traits : 'TBlDevScripterExamples + TAssertable',
+	#classTraits : 'TBlDevScripterExamples classTrait + TAssertable classTrait',
 	#category : #'Bloc-Examples-Event'
 }
 

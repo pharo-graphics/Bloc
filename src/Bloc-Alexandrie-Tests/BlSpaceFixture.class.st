@@ -575,11 +575,51 @@ BlSpaceFixture >> buildGradients [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildGradientsInBorder [
+
+	| aLinearGradient aRadialGradient extent borderWidth |
+	extent := 20 @ 30.
+	borderWidth := extent x // 3.
+
+	aLinearGradient := BlLinearGradientPaint new
+			start: 0@0;
+			end: 0 @ extent y;
+			stops: {
+				0.0 -> Color blue.
+				0.3 -> Color yellow.
+				1.0 -> Color transparent };
+			yourself.
+	builder addToRoot
+		beOutskirtsCentered;
+		position: extent // 5;
+		size: extent;
+		background: (Color orange alpha: 0.75);
+		border: (BlBorder paint: aLinearGradient width: borderWidth).
+
+	aRadialGradient := BlRadialGradientPaint new
+			center: extent;
+			radius: extent x;
+			stops: {
+				0.0 -> Color blue.
+				0.3 -> Color yellow.
+				1.0 -> Color transparent };
+			yourself.
+	builder addToRoot
+		beOutskirtsCentered;
+		position: extent * 0.75;
+		size: extent;
+		background: (Color green alpha: 0.75);
+		border: (BlBorder paint: aRadialGradient width: borderWidth).
+
+	builder spaceExtent: extent * 2
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildImagesAndTransformations [
 	
 	| outskirts positionGenerator addElementBlock |
 
-	builder spaceExtent: 120@350.
+	builder spaceExtent: 120@250.
 
 	outskirts := { BlOutskirts inside. BlOutskirts centered. BlOutskirts outside }.
 	positionGenerator := self 
