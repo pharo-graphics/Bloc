@@ -23,6 +23,12 @@ BlCursor class >> default [
 ]
 
 { #category : #'instance creation' }
+BlCursor class >> hand [
+
+	^ BlHandCursor new
+]
+
+{ #category : #'instance creation' }
 BlCursor class >> overEditableText [ 
 	^ BlTextCursor new
 ]
