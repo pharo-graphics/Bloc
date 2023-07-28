@@ -22,7 +22,7 @@ BlDevScripterCheckFiredEventsStep >> assertEventClass: anEventClass withTarget: 
 	| theInterestingEvents |
 	theInterestingEvents := aScripter events select: [ :eachEvent | 
 		eachEvent class = anEventClass and: [ eachEvent target = aBlElement ] ].
-	self assert: theInterestingEvents size isZero not.
+	self assert: theInterestingEvents notEmpty.
 ]
 
 { #category : #accessing }
