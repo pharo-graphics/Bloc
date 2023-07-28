@@ -13,24 +13,43 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlGaussianShadowEffect class >> color: aColor offset: anOffset width: aNumber [ 
+
+	^ self color: aColor width: aNumber offset: anOffset
+]
+
+{ #category : #'instance creation' }
 BlGaussianShadowEffect class >> color: aColor width: aNumber offset: anOffset [
+
 	^ self basicNew
-		initializeColor: aColor
-		width: aNumber
-		offset: anOffset
+		  initializeColor: aColor width: aNumber offset: anOffset;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlGaussianShadowEffect class >> default [
+
+	self
+		deprecated: 'Use #new instead'
+		transformWith: '`@receiver default' -> '`@receiver new'.
+	
 	^ self
 		color: (Color black alpha: 0.3)
 		width: 15
 		offset: 10@20
 ]
 
+{ #category : #'instance creation' }
+BlGaussianShadowEffect class >> new [
+
+	^ self
+		color: Color black
+		width: 10
+		offset: 0@0
+]
+
 { #category : #copying }
 BlGaussianShadowEffect >> copyWithColor: aColor [
-	<return: #BlShadowEffect>
 
 	^ self class
 		color: aColor
@@ -40,7 +59,6 @@ BlGaussianShadowEffect >> copyWithColor: aColor [
 
 { #category : #copying }
 BlGaussianShadowEffect >> copyWithOffset: aPoint [
-	<return: #BlShadowEffect>
 
 	^ self class
 		color: self color
@@ -50,27 +68,11 @@ BlGaussianShadowEffect >> copyWithOffset: aPoint [
 
 { #category : #copying }
 BlGaussianShadowEffect >> copyWithWidth: aNumber [
-	<return: #BlShadowEffect>
 
 	^ self class
 		color: self color
 		width: aNumber
 		offset: self offset
-]
-
-{ #category : #initialization }
-BlGaussianShadowEffect >> defaultColor [
-	^ Color black
-]
-
-{ #category : #initialization }
-BlGaussianShadowEffect >> defaultOffset [
-	^ 0@0
-]
-
-{ #category : #initialization }
-BlGaussianShadowEffect >> defaultWidth [
-	^ 10
 ]
 
 { #category : #geometry }
@@ -82,28 +84,9 @@ BlGaussianShadowEffect >> extraShadowSpace [
 ]
 
 { #category : #initialization }
-BlGaussianShadowEffect >> initialize [
-	super initialize.
-
-	self
-		initializeColor: self defaultColor
-		width: self defaultWidth
-		offset: self defaultOffset
-]
-
-{ #category : #initialization }
 BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
-	self
-		assert: [ color isNil ]
-		description: [ 'Can not change a color! Shadow is immutable' ].
-		
-	self
-		assert: [ width isNil ]
-		description: [ 'Can not change a width! Shadow is immutable' ].
-		
-	self
-		assert: [ offset isNil ]
-		description: [ 'Can not change an offset! Shadow is immutable' ].
+
+	self initialize.
 
 	color := aColor.
 	width := aWidth.
@@ -112,12 +95,12 @@ BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 
 { #category : #testing }
 BlGaussianShadowEffect >> wantsCompositionLayer [
+
 	^ true
 ]
 
 { #category : #accessing }
 BlGaussianShadowEffect >> width [
-	<return: #Number>
 
 	^ width
 ]

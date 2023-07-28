@@ -527,7 +527,6 @@ BlSpace >> children [
 ]
 
 { #category : #'change - rendering' }
-
 BlSpace >> clearDirtyElements [
 	"Clear dirty elements collection, which means there are no pending graphic operations."
 
