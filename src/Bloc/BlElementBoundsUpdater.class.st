@@ -39,7 +39,7 @@ BlElementBoundsUpdater >> commitChanges [
 					select: [ :eachAssociation | eachAssociation value isPositionChanged ]
 					thenCollect: [ :eachAssociation | eachAssociation key ].
 
-				theRoots := BlOSpace extractRoots: theElements.
+				theRoots := BlSpace extractRoots: theElements.
 				theRoots do: [ :eachRootElement |
 					eachRootElement telemetry
 						timeSync: [ 'onPositionInSpaceChanged ', eachRootElement class name ]
