@@ -1,12 +1,10 @@
 "
-I check whether particular {{gtClass:BlEvent}} events were fired on a {{gtClass:BlElement}} target.
+I check whether particular `BlEvent` events were fired on a `BlElement` target.
 
 ## Example
 
 Here you can see how to configure a fire and check a click event on a child element:
-{{gtExample:BlDevScripterExamples>>#clickCheck|previewExpanded=true|previewHeight=400}}
-
-
+`BlDevScripterExamples>>#clickCheck`
 "
 Class {
 	#name : #BlDevScripterCheckFiredEventsStep,
@@ -21,8 +19,9 @@ Class {
 BlDevScripterCheckFiredEventsStep >> assertEventClass: anEventClass withTarget: aBlElement on: aScripter [ 
 	| theInterestingEvents |
 	theInterestingEvents := aScripter events select: [ :eachEvent | 
-		eachEvent class = anEventClass and: [ eachEvent target = aBlElement ] ].
-	self assert: theInterestingEvents notEmpty.
+		(eachEvent isKindOf: anEventClass) and: [
+			eachEvent target = aBlElement ] ].
+	self assert: theInterestingEvents notEmpty
 ]
 
 { #category : #accessing }
