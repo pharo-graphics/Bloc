@@ -21,6 +21,6 @@ BlSpaceFrameDrawingValidationPhase >> runOn: aSpace [
 	aSpace hostSpace hasResized
 		ifFalse: [ ^ self ].
 
-	aSpace beDirtyArea.
+	aSpace invalidateAll.
 	aSpace hostSpace initializeRenderer
 ]

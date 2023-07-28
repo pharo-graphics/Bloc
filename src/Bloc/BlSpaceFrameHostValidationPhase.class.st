@@ -32,12 +32,13 @@ BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 
 { #category : #actions }
 BlSpaceFrameHostValidationPhase >> validateHostSpace: aSpace [
-	aSpace hostSpace needsRebuild
-		ifFalse: [ ^ self ].
-		
-	aSpace beDirtyArea.
 
-	aSpace host destroyHostSpaceFor: aSpace.
-	aSpace host createHostSpaceFor: aSpace.
+	aSpace hostSpace needsRebuild ifFalse: [ ^ self ].
+		
+	aSpace invalidateAll.
+
+	aSpace host
+		destroyHostSpaceFor: aSpace;
+		createHostSpaceFor: aSpace.
 	aSpace hostSpace show
 ]

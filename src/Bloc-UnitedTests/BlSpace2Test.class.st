@@ -100,7 +100,7 @@ BlSpace2Test >> testEmptySpace [
 	aSpace := BlOSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self deny: aSpace root hasChildren.
-	self assert: aSpace dirtyAreas isEmpty.
+	self deny: aSpace hasDirtyElements.
 	self assert: aSpace extent equals: aSpace defaultExtent.
 	self assert: aSpace height equals: aSpace defaultExtent y.
 	self assert: aSpace width equals: aSpace defaultExtent x.
@@ -110,7 +110,7 @@ BlSpace2Test >> testEmptySpace [
 	self deny: aSpace fullscreen.
 	self deny: aSpace focused.
 	self deny: aSpace hasHostSpace.
-	self deny: aSpace hasDirtyAreas.
+	self deny: aSpace hasDirtyElements.
 	self deny: aSpace hasLayoutError.
 	self assert: aSpace isLayoutRequested.
 	self deny: aSpace isVisible.
@@ -128,7 +128,7 @@ BlSpace2Test >> testFirstPulse [
 	aSpace := self testEmptySpace.
 	aSpace pulse.
 
-	self assert: aSpace dirtyAreas isEmpty.
+	self deny: aSpace hasDirtyElements.
 	self assert: aSpace root position equals: 0 @ 0.
 	self assert: aSpace root extent equals: aSpace extent.
 
