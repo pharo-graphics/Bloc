@@ -1,5 +1,5 @@
 Class {
-	#name : #BlGaussianEffectAnimation,
+	#name : #BlGaussianEffectOpacityAnimation,
 	#superclass : #BlAnimation,
 	#instVars : [
 		'to',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #pulse }
-BlGaussianEffectAnimation >> applyValue: anOpacity [
+BlGaussianEffectOpacityAnimation >> applyValue: anOpacity [
 
 	self target effect: (BlGaussianShadowEffect
 			 color: (self color alpha: anOpacity)
@@ -20,48 +20,48 @@ BlGaussianEffectAnimation >> applyValue: anOpacity [
 ]
 
 { #category : #accessing }
-BlGaussianEffectAnimation >> color [
+BlGaussianEffectOpacityAnimation >> color [
 	"Set desired opacity of an element at the end of animation"
 
 	^ color ifNil: [ color := Color gray ]
 ]
 
 { #category : #accessing }
-BlGaussianEffectAnimation >> color: aColor [
+BlGaussianEffectOpacityAnimation >> color: aColor [
 	"Set desired opacity of an element at the end of animation"
 
 	color := aColor
 ]
 
 { #category : #'private - running' }
-BlGaussianEffectAnimation >> initStart [
+BlGaussianEffectOpacityAnimation >> initStart [
 
 	super initStart.
 	from := self target opacity
 ]
 
 { #category : #accessing }
-BlGaussianEffectAnimation >> opacity: aNumber [
+BlGaussianEffectOpacityAnimation >> opacity: aNumber [
 	"Set desired opacity of an element at the end of animation"
 
 	to := aNumber
 ]
 
 { #category : #pulse }
-BlGaussianEffectAnimation >> valueForStep: aNumber [
+BlGaussianEffectOpacityAnimation >> valueForStep: aNumber [
 
 	^ ((to - from ) * aNumber) + from
 ]
 
 { #category : #accessing }
-BlGaussianEffectAnimation >> width [
+BlGaussianEffectOpacityAnimation >> width [
 	"Set desired opacity "
 
 	^ width 
 ]
 
 { #category : #accessing }
-BlGaussianEffectAnimation >> width: aNumber [
+BlGaussianEffectOpacityAnimation >> width: aNumber [
 
 	width := aNumber
 ]
