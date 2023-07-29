@@ -66,19 +66,23 @@ Class {
 
 { #category : #'private - change' }
 BlSpace class >> extractRoots: aSetOfElements [
-	| theElementsToCheck theElementsToProcess |
+	| roots |
+	" feenk version 2022-02-01 that eliminate recursion from allParentsDo: "
 	
-	theElementsToCheck := aSetOfElements as: Stack.
-	theElementsToProcess := Set new.
-	
-	[ theElementsToCheck isEmpty ] whileFalse: [
-		| eachElement |
-		
-		eachElement := theElementsToCheck pop.
-		(theElementsToCheck anySatisfy: [ :eachPotentialParent | eachElement hasParent: eachPotentialParent ])
-			ifFalse: [ theElementsToProcess add: eachElement ] ].
-
-	^ theElementsToProcess
+	roots := IdentitySet withAll: aSetOfElements.
+	aSetOfElements
+		do:
+			[ :each | 
+			| current |
+			current := each parent.
+			[ current isNil ]
+				whileFalse:
+					[ (roots includes: current)
+						ifTrue:
+							[ roots remove: each ifAbsent: [  ].
+							current := nil ]
+						ifFalse: [ current := current parent ] ] ].
+	^ roots
 ]
 
 { #category : #'class initialization' }
@@ -1930,7 +1934,6 @@ BlSpace >> updateCursor: aBlCursor [
 { #category : #'composition layer' }
 BlSpace >> wantsSeparateCompositingLayer [
 
-	"^ self layerHolder wantsSeparateCompositingLayer"
 	^ false
 ]
 

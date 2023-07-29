@@ -26,7 +26,7 @@ BlElementBoundsUpdater >> changePositionFrom: aPreviousPosition to: aNewPosition
 { #category : #'change reporting' }
 BlElementBoundsUpdater >> commitChanges [
 
-	| theAssociations theElements |
+	| theAssociations theElements theRoots |
 	changes associations ifEmpty: [ ^ self ].
 	theAssociations := changes associations sorted: [ :a :b | a key compositionDepth > b key compositionDepth ].
 	theAssociations do: [ :eachAssociation | eachAssociation value commitLocalChanges ].
@@ -34,16 +34,18 @@ BlElementBoundsUpdater >> commitChanges [
 							select: [ :eachAssociation | eachAssociation value isPositionChanged ]
 		               thenCollect: [ :eachAssociation | eachAssociation key ].
 	theElements ifEmpty: [ ^ self ].
+	
+	"<---"
 	self flag: 'Workarroud: avoiding #extractRoots: use speed-up position updates a lot'.
-	"<---"
-	theElements do: [ :eachRootElement |
-		eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild |	eachChild onPositionInSpaceChanged ] ].
-	self flag: 'Original version:'
+	"theElements do: [ :eachRootElement |
+		eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild |	eachChild onPositionInSpaceChanged ] ]."
 	"--->"
+	self flag: 'Original version'.
 	"<---"
-	"theRoots := BlSpace extractRoots: theElements.
+	self flag: ' It sounds better with #extractRoots: from feenk '.
+	theRoots := BlSpace extractRoots: theElements.
 	theRoots do: [ :eachRootElement |
-		eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild | eachChild onPositionInSpaceChanged ] ]"
+		eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild | eachChild onPositionInSpaceChanged ] ]
 	"--->"
 
 ]

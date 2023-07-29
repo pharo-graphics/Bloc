@@ -18,6 +18,12 @@ BlSpaceFrame >> addPhase: aFramePhase [
 ]
 
 { #category : #adding }
+BlSpaceFrame >> addPhase: aPhase before: otherPhase [
+
+	self phases add: aPhase before: otherPhase
+]
+
+{ #category : #adding }
 BlSpaceFrame >> addPhases: aCollectonOfPhases [
 	aCollectonOfPhases do: [ :aFramePhase | self addPhase: aFramePhase ]
 ]
@@ -26,6 +32,12 @@ BlSpaceFrame >> addPhases: aCollectonOfPhases [
 BlSpaceFrame >> currentPhase [
 
 	^ currentPhaseLink value
+]
+
+{ #category : #enumerating }
+BlSpaceFrame >> detectPhase: aBlock [
+
+	^ self phases detect: aBlock
 ]
 
 { #category : #testing }

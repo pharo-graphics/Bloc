@@ -962,14 +962,7 @@ BlElement >> computeLayout [
 	[ self isLayoutRequested
 		and: [ relayoutCounter < maxRelayoutCount ] ]
 		whileTrue: [
-			| widthSpec heightSpec maxExtent |
-			
-			"BlSpace doStyle: self.
-			BlSpace new
-				doComputeProperties: self
-				withParentProperties: BlElementPropagatableProperties new
-				withGlobalProperties: BlElementPropagatableProperties new."
-			
+			| widthSpec heightSpec maxExtent |			
 			maxExtent := self isAttachedToSceneGraph
 				ifTrue: [ self space extent ]
 				ifFalse: [ 800.0 @ 600.0 ].

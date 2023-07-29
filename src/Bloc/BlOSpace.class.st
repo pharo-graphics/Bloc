@@ -6,7 +6,6 @@ It should be removed as soon as we convert all the examples as tests and move ev
 Class {
 	#name : #BlOSpace,
 	#superclass : #BlSpace,
-	#classTraits : 'TBlEventTarget classTrait + TBlSpaceProperties classTrait + TBlDebug classTrait',
 	#category : #'Bloc-Space'
 }
 
@@ -56,28 +55,6 @@ BlOSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 			withInheritedStates: childSpecificStatesToInherit ].
 
 	theStatesToInherit do: [ :eachState | eachState finishedPropagateFrom: anElement ]
-]
-
-{ #category : #'private - change' }
-BlOSpace class >> extractRoots: aSetOfElements [
-	| theElementsToCheck theElementsToProcess |
-	
-	theElementsToCheck := aSetOfElements as: Stack.
-	theElementsToProcess := Set new.
-	
-	[ theElementsToCheck isEmpty ] whileFalse: [
-		| eachElement |
-		
-		eachElement := theElementsToCheck pop.
-		(theElementsToCheck anySatisfy: [ :eachPotentialParent | eachElement hasParent: eachPotentialParent ])
-			ifFalse: [ theElementsToProcess add: eachElement ] ].
-
-	^ theElementsToProcess
-]
-
-{ #category : #'class initialization' }
-BlOSpace class >> initialize [
-	UniqueIdGenerator := BlUniqueIdGenerator new
 ]
 
 { #category : #'debug - simulation' }
@@ -353,14 +330,6 @@ BlOSpace class >> simulateSecondaryClickOn: anElement [
 		on: anElement.
 		
 	^ aPosition
-]
-
-{ #category : #'class initialization' }
-BlOSpace class >> spaceWithId: aSpaceId do: aBlock [
-	^ self allSubInstances
-		detect: [ :eachSpace | eachSpace id = aSpaceId ]
-		ifFound: aBlock
-		ifNone: [ nil ]
 ]
 
 { #category : #'api - adding children' }
