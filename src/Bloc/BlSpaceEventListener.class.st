@@ -154,7 +154,7 @@ BlSpaceEventListener >> spaceMovedEvent: anEvent [
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceRedrawRequestedEvent: anEvent [
 	self space
-		beDirtyArea;
+		invalidateAll;
 		requestNextPulse
 ]
 
@@ -168,7 +168,7 @@ BlSpaceEventListener >> spaceResizedEvent: anEvent [
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceScaleFactorChangedEvent: anEvent [
 	self space
-		beDirtyArea;
+		invalidateAll;
 		requestNextPulse
 ]
 

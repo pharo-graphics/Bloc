@@ -47,6 +47,12 @@ BlMouseMoveEvent class >> secondary [
 ]
 
 { #category : #testing }
+BlMouseMoveEvent >> canFindTargetFrom: anElement [
+
+	^ anElement notNil and: [anElement containsGlobalPoint: self position]
+]
+
+{ #category : #testing }
 BlMouseMoveEvent >> isMouseMove [
 	^ true
 ]

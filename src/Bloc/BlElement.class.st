@@ -318,6 +318,14 @@ BlElement >> allChildrenDepthFirstDo: aBlock [
 ]
 
 { #category : #'children accessing' }
+BlElement >> allParents [
+	"Return a collection of all parents starting with my parent and ending with the top most parent"
+
+	^ Array streamContents: [ :aStream |
+		self allParentsDo: [ :eachParent | aStream nextPut: eachParent ] ]
+]
+
+{ #category : #'children accessing' }
 BlElement >> allParentsDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	self allParentsDo: [ :aParent | 
 		(aBlock value: aParent)
@@ -333,6 +341,15 @@ BlElement >> allParentsDo: aBlock [
 	
 	self hasParent ifFalse: [ ^ self ].
 	self parent withAllParentsDo: aBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> allParentsReverseDo: aBlock [
+	"Evaluate a block with my every parent as an argument starting from my top most parent up to my direct parent (excluding myself).
+	If no parent, then ignore."
+	
+	self hasParent ifFalse: [ ^ self ].
+	self parent withAllParentsReverseDo: aBlock
 ]
 
 { #category : #'children accessing' }
@@ -566,14 +583,14 @@ BlElement >> baselineOffset [
 BlElement >> beInSeparateCompositionLayer [
 	"Make me that I want to be rendered in a separate compositing layer"
 
-	visuals := visuals compositingMode: BlCompositingSeparateLayerMode uniqueInstance
+	self compositingMode: BlCompositingSeparateLayerMode uniqueInstance
 ]
 
 { #category : #'api - compositing' }
 BlElement >> beInSingleCompositionLayer [
 	"Make me and my children be rendered in a single compositing layer"
 
-	visuals := visuals compositingMode: BlCompositingSingleLayerMode uniqueInstance
+	self compositingMode: BlCompositingSingleLayerMode uniqueInstance
 ]
 
 { #category : #accessing }
@@ -592,6 +609,13 @@ BlElement >> beOutskirtsInside [
 BlElement >> beOutskirtsOutside [
 
 	self outskirts: BlOutskirts outside
+]
+
+{ #category : #'api - compositing' }
+BlElement >> beWithoutCompositionLayer [
+	"Make me and my children be rendered without compositing layer"
+
+	self compositingMode: BlCompositingWithoutLayerMode uniqueInstance
 ]
 
 { #category : #'api - look' }
@@ -907,6 +931,17 @@ BlElement >> compositingMode [
 ]
 
 { #category : #'api - compositing' }
+BlElement >> compositingMode: aBlCompositingMode [
+	"Establish the compositing mode, and invalidate myself except if it's not a change."
+
+	visuals compositingMode = aBlCompositingMode ifTrue: [ 
+		^ self ].
+
+	visuals := visuals compositingMode: aBlCompositingMode.
+	self invalidate.
+]
+
+{ #category : #'api - compositing' }
 BlElement >> compositionDepth [
 
 	| aDepth |
@@ -918,7 +953,6 @@ BlElement >> compositionDepth [
 { #category : #'api - painting' }
 BlElement >> compositionLayer [
 	"Return my composition layer if I have one or nil otherwise"
-	<return: #BlCompositionLayer or: nil>
 	
 	^ self userData
 		at: #compositionLayer
@@ -1187,10 +1221,9 @@ BlElement >> detachChild: anElement [
 BlElement >> detachCompositionLayer [
 	"Detach my composition layer if any"
 
-	self compositionLayer
-		ifNotNil: [ :aLayer |
-			aLayer removeFromParent.
-			self compositionLayer: nil ]
+	self compositionLayer ifNotNil: [ :aLayer |
+		aLayer removeFromParent.
+		self compositionLayer: nil ]
 ]
 
 { #category : #'children add/remove' }
@@ -2041,9 +2074,8 @@ BlElement >> invalidRect: aBlBounds from: anElement [
 	"Translate dirty reports from an Element.
 	A rectangle is given in my own coordinates"
 
-	"we are guarding owerselves from unnecessary computations of rectangle transformation"
-	self isAttachedToSceneGraph
-		ifFalse: [ ^ self ].
+	"avoid unnecessary computations of rectangle transformation"
+	self isAttachedToSceneGraph ifFalse: [ ^ self ].
 
 	"transform provided rectangle to my parent's coordinates before I pass it further"
 	self localBoundsToParent: aBlBounds.
@@ -2070,20 +2102,12 @@ BlElement >> invalidate [
 BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 	"Invalidate due to relocation by a given offset"
 
-	self wantsSeparateCompositingLayer
-		ifTrue: [
-			self hasCompositionLayer
-				ifTrue: [
-					| aLayer |
-					aLayer := self compositionLayer.
-					aLayer offset: aLayer offset + aNewPosition - aPreviousPosition.
-					self isAttachedToSceneGraph
-						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
-				ifFalse: [ self hasParent
-						ifTrue: [ self parent invalidate ] ] ]
-		ifFalse: [
-			self hasParent
-				ifTrue: [ self parent invalidate ] ]
+	(self wantsSeparateCompositingLayer and: [
+		self hasCompositionLayer and: [
+			self isAttachedToSceneGraph ] ]) ifTrue: [
+				^ self space markNeedsCompositionPaint: self from: self ].
+
+	self hasParent ifTrue: [ self parent invalidate ]
 ]
 
 { #category : #'api - look' }
@@ -2092,16 +2116,21 @@ BlElement >> invalidateChildren [
 	self childrenDo: [ :each | each invalidate ]
 ]
 
+{ #category : #accessing }
+BlElement >> invalidationBounds [
+
+	^ boundsCache invalidationBounds
+]
+
 { #category : #'geometry bounds' }
 BlElement >> invalidationBounds: aBounds [
-	"I compute and load damaged area in my local coordinates that would be invalidated
-	if #invalidate would be sent to me"
-	<return: #BlBounds>
-	| anInvalidationBounds |
+	"Compute the bounds of self, including my children recursively, in my local
+	coordinates that would be invalidated if #invalidate would be sent to me."
 
+	| anInvalidationBounds |
 	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
 
-	self clipChildren ifFalse: [ 
+	(self clipChildren and: [ self hasChildren ]) ifFalse: [ 
 		| aChildBounds |
 		aChildBounds := BlBounds new.
 		self children do: [ :anElement |
@@ -2110,6 +2139,13 @@ BlElement >> invalidationBounds: aBounds [
 			anInvalidationBounds merge: aChildBounds ] ].
 
 	^ anInvalidationBounds
+]
+
+{ #category : #accessing }
+BlElement >> invalidationBoundsInSpace [
+
+	^ self localBoundsToGlobal: (BlBounds fromRectangle: self invalidationBounds)
+
 ]
 
 { #category : #'api - space' }
@@ -2535,6 +2571,7 @@ BlElement >> margin: aBlInsets [
 
 { #category : #'api - painting' }
 BlElement >> markDoesNotNeedPaint [
+
 	flags clearNeedsPaint
 ]
 
@@ -2542,24 +2579,24 @@ BlElement >> markDoesNotNeedPaint [
 BlElement >> markNeedsPaintFrom: anElement [
 	"Make me as dirty and request renderer to re-paint me.
 	anElement is the element from which the re-painting request originates"
+
 	flags addNeedsPaint.
-	
+
 	self wantsSeparateCompositingLayer
 		ifTrue: [
-			self isAttachedToSceneGraph
-				ifTrue: [
-					self hasCompositionLayer
-						ifTrue: [ self space markNeedsPaint: self from: anElement ]
-						ifFalse: [
-							self hasParent
-								ifTrue: [ self parent markNeedsPaintFrom: anElement ]
-								ifFalse: [ self space markNeedsPaint: self from: anElement ]	] ] ]
-		ifFalse: [ 
+			self isAttachedToSceneGraph ifFalse: [ ^self ].
+			self wantsSeparateCompositingLayer
+				ifTrue: [ self space markNeedsPaint: self from: anElement ]
+				ifFalse: [
+					self hasParent
+						ifTrue: [ self parent markNeedsPaintFrom: anElement ]
+						ifFalse: [ self space markNeedsPaint: self from: anElement ] ] ]
+		ifFalse: [
 			self hasParent
 				ifTrue: [ self parent markNeedsPaintFrom: anElement ]
 				ifFalse: [
-					self isAttachedToSceneGraph
-						ifTrue: [ self space markNeedsPaint: self from: anElement ] ] ]
+					self isAttachedToSceneGraph ifFalse: [ ^self ].
+					self space markNeedsPaint: self from: anElement ] ]
 ]
 
 { #category : #layout }
@@ -2681,7 +2718,6 @@ BlElement >> mouseCursor: aCursor [
 { #category : #'api - painting' }
 BlElement >> needsPaint [
 	"Return true if I am marked as dirty and am waiting to be re-painted"
-	<return: #Boolean>
 
 	^ flags hasNeedsPaint
 ]
@@ -4132,6 +4168,14 @@ BlElement >> withAllParentsDo: aBlock [
 	
 	aBlock value: self.
 	self allParentsDo: aBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> withAllParentsReverseDo: aBlock [
+	"Evaluate a block with me and all my parents as an argument starting from top most parent, up to me."
+	
+	self allParentsDo: aBlock.
+	aBlock value: self
 ]
 
 { #category : #'children accessing' }

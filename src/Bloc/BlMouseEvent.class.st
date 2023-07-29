@@ -152,6 +152,12 @@ BlMouseEvent >> button: aBlMouseButton [
 	button := aBlMouseButton
 ]
 
+{ #category : #testing }
+BlMouseEvent >> canFindTargetFrom: anElement [
+
+	^ false
+]
+
 { #category : #accessing }
 BlMouseEvent >> delta [
 	^ delta

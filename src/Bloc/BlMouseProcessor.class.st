@@ -61,7 +61,8 @@ BlMouseProcessor >> canStartDrag: aMouseMoveEvent [
 { #category : #'event processing' }
 BlMouseProcessor >> checkLastOverTarget [
 
-	(lastOverTarget isNotNil and: [lastOverTarget isAttachedToSceneGraph not]) ifFalse: [ ^ self ].
+	lastOverTarget ifNil: [ ^ self ].
+	lastOverTarget isAttachedToSceneGraph ifTrue: [ ^ self ].
 	lastOverTarget := nil
 ]
 
@@ -477,23 +478,19 @@ BlMouseProcessor >> pressedButtons [
 { #category : #'mouse drag' }
 BlMouseProcessor >> processDragEnd: aMouseUpEvent [
 
-	self
-		assert: [ self isDragging ]
-		description: [ 'Can not process mouse up event as drag end if I am not in dragging state' ].
-		
+	self assert: [ self isDragging ] description: [
+		'Can not process mouse up event as drag end if I am not in dragging state' ].
 	self
 		assert: [ currentDragTarget isNotNil ]
 		description: [ 'When we drag something it can not be nil' ].
 
-	aMouseUpEvent primaryButtonPressed
-		ifTrue: [ 
-			self fireAsDragEndEvent: aMouseUpEvent.
-			self fireAsDropEvent: aMouseUpEvent.
-						
-			currentDragTarget := nil.
-			dndInProgress := false.
-			lastOverTarget := nil.
-			dragStartMask := 0 ]
+	aMouseUpEvent primaryButtonPressed ifFalse: [ ^ self ].
+	self fireAsDragEndEvent: aMouseUpEvent.
+	self fireAsDropEvent: aMouseUpEvent.
+	currentDragTarget := nil.
+	dndInProgress := false.
+	lastOverTarget := nil.
+	dragStartMask := 0
 ]
 
 { #category : #'mouse drag' }
@@ -585,24 +582,16 @@ BlMouseProcessor >> processPicking: aMouseEvent [
 	" return the element at event position "
 
 	| aTargetElement |
-	(lastOverTarget isNotNil and: [
-		 lastOverTarget isAttachedToSceneGraph not ]) ifTrue: [
-		lastOverTarget := nil ].
+	" check if the last overtarget is still valid "
+	self checkLastOverTarget.
 
-	"if the last over target contains the point we can start picking from it"
-
-"	aTargetElement := (aMouseEvent isMouseMove and: [
-		                   lastOverTarget isNotNil and: [
-			                   lastOverTarget containsGlobalPoint: aMouseEvent position ] ])
+	"if the last over target contains the point we can start picking from it (speed-up picking a lot)"
+	aTargetElement := (aMouseEvent canFindTargetFrom: lastOverTarget)
 		                  ifTrue: [ aMouseEvent findTargetFrom: lastOverTarget ]
-		                  ifFalse: [ "" double dispatch because the finding differs according to the mouse event type ""
-			                  aMouseEvent findTargetFrom: self space ].
-"
-	aTargetElement := aMouseEvent findTargetFrom: self space. 
+		                  ifFalse: [ aMouseEvent findTargetFrom: self space ].
 
 	"we have to ensure that aTarget is not nil"
-	aTargetElement ifNil: [ aTargetElement := self space root ].
-	^ aTargetElement
+	^ aTargetElement ifNil: [ aTargetElement := self space root ]
 ]
 
 { #category : #'initialize-release' }
