@@ -843,7 +843,7 @@ BlElement >> childrenAt: aPoint do: aBlock [
 
 	anyChildFound := false.
 	
-	self children sortedByElevation reversed do: [ :eachChildElement |
+	self children sortedByElevationReversed do: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 
@@ -1539,7 +1539,7 @@ BlElement >> findMouseEventTargetAt: aPoint [
 	(self clipChildren and: [ doWantEvent not ])
 		ifTrue: [ ^ nil ].
 
-	self children sortedByElevation reversed
+	self children sortedByElevationReversed
 		do: [ :eachChild |
 			(eachChild findMouseEventTargetAt: aPoint)
 				ifNotNil: [ :aTargetElement | ^ aTargetElement ] ].
@@ -4029,7 +4029,7 @@ BlElement >> withAllChildrenAt: aPoint do: aBlock [
 
 	anyChildFound := false.
 	
-	self children sortedByElevation reversed do: [ :eachChildElement |
+	self children sortedByElevationReversed do: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 		
@@ -4091,7 +4091,7 @@ BlElement >> withAllLeafChildrenAt: aPoint do: aBlock [
 		
 	anyChildFound := false.
 	
-	self children sortedByElevation reversed do: [ :eachChildElement |
+	self children sortedByElevationReversed do: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 		

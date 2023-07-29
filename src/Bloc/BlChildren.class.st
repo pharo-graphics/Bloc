@@ -349,6 +349,13 @@ BlChildren >> sortedByElevation [
 ]
 
 { #category : #'children - subsets' }
+BlChildren >> sortedByElevationReversed [
+	<return: #BlChildren>
+
+	^ BlChildrenSortedByElevationReversed on: self
+]
+
+{ #category : #'children - subsets' }
 BlChildren >> sortedByPerimeter [
 	<return: #BlChildren>
 
