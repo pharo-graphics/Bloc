@@ -11,14 +11,14 @@ BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 	"The pattern allows us to establish a sampling filter that's not fancy,
 	and would make it blurry (note the draw already has antialiasing)."
 	pattern := AeCairoSurfacePattern surface: surface.
-	pattern filter: AeCairoSamplingFilter CAIRO_FILTER_FAST.
+	pattern filter: AeCairoSamplingFilter fast.
 
 	"offset := element invalidationBounds origin."
 	self drawOn: (AeCanvas newFor: surface).
 	
-"	Time primMillisecondClock trace.
+	Time primMillisecondClock trace.
 	' CREATE ' trace.
-	element id traceCr."
+	element id traceCr.
 ]
 
 { #category : #'*Bloc-Alexandrie' }
