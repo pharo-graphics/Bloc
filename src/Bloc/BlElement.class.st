@@ -4130,7 +4130,7 @@ BlElement >> withAllParentsDo: aBlock [
 BlElement >> withAllParentsReverseDo: aBlock [
 	"Evaluate a block with me and all my parents as an argument starting from top most parent, up to me."
 	
-	self allParentsDo: aBlock.
+	self allParentsReverseDo: aBlock.
 	aBlock value: self
 ]
 

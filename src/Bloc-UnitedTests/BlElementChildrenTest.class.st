@@ -10,13 +10,14 @@ Class {
 
 { #category : #tests }
 BlElementChildrenTest >> hierarchyChildren [
-
 	<sampleInstance>
+
 	| aContainer current |
 	aContainer := BlElement new
 		              size: 400 @ 400;
 		              background: Color veryVeryLightGray;
-		              labeled: 'Container'.
+		              labeled: 'Container';
+		              yourself.
 	current := aContainer.
 	1 to: 10 do: [ :i |
 		| son |
@@ -24,7 +25,8 @@ BlElementChildrenTest >> hierarchyChildren [
 			       size: 10 - i * 40 asPoint;
 			       position: 10 asPoint;
 			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
-			       labeled: 'shape_' , i asString.
+			       labeled: 'shape_' , i asString;
+			       yourself.
 		current addChild: son.
 		current := son ].
 
@@ -189,6 +191,30 @@ BlElementChildrenTest >> testAllParentsDo [
 	res := OrderedCollection new.
 	aContainer allParentsDo: [ :parent | res add: parent ].
 	self assert: res asArray equals: {  }
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> testAllParentsReversedDo [
+
+	| aContainer aChild all |
+	aContainer := self hierarchyChildren.
+	aChild := aContainer childNamed: #shape_10.
+	all := Array streamContents: [ :stream |
+		aChild allParentsReverseDo: [ :each |
+			stream nextPut: each ] ].
+	self
+		assert: all
+		equals: {
+			aContainer.
+			(aContainer childNamed: #shape_1).
+			(aContainer childNamed: #shape_2).
+			(aContainer childNamed: #shape_3).
+			(aContainer childNamed: #shape_4).
+			(aContainer childNamed: #shape_5).
+			(aContainer childNamed: #shape_6).
+			(aContainer childNamed: #shape_7).
+			(aContainer childNamed: #shape_8).
+			(aContainer childNamed: #shape_9) }
 ]
 
 { #category : #tests }
@@ -947,6 +973,31 @@ BlElementChildrenTest >> testWithAllParentsDo [
 	res := OrderedCollection new.
 	aContainer withAllParentsDo: [ :parent | res add: parent ].
 	self assert: res asArray equals: { aContainer }
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> testWithAllParentsReversedDo [
+
+	| aContainer aChild all |
+	aContainer := self hierarchyChildren.
+	aChild := aContainer childNamed: #shape_10.
+	all := Array streamContents: [ :stream |
+		aChild withAllParentsReverseDo: [ :each |
+			stream nextPut: each ] ].
+	self
+		assert: all
+		equals: {
+			aContainer.
+			(aContainer childNamed: #shape_1).
+			(aContainer childNamed: #shape_2).
+			(aContainer childNamed: #shape_3).
+			(aContainer childNamed: #shape_4).
+			(aContainer childNamed: #shape_5).
+			(aContainer childNamed: #shape_6).
+			(aContainer childNamed: #shape_7).
+			(aContainer childNamed: #shape_8).
+			(aContainer childNamed: #shape_9).
+			(aContainer childNamed: #shape_10) }
 ]
 
 { #category : #tests }
