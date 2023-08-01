@@ -96,14 +96,20 @@ BAAxisAlignedCompositionLayer >> paintOn: aCanvas [
 	self ensureReadyToPaintOn: aCanvas.
 
 	aCanvas restoreContextAfter: [
-
-		element allParentsReverseDo: [ :each |
+		"Apply clip in parent chain."
+		element withAllParentsReverseDo: [ :each |
 			aCanvas pathTranslate: each position.
-			(each clipChildren and: [ each hasChildren ]) ifTrue: [
-				each geometry aeApplyTo: aCanvas element: each.
-				aCanvas preparePathAndClip ] ].
+			each transformation aeApplyTo: aCanvas.
+			each == element ifFalse: [
+				(each clipChildren and: [ each hasChildren ]) ifTrue: [
+					each geometry aeApplyTo: aCanvas element: each.
+					aCanvas preparePathAndClip ] ] ].
+
+		"The layer has a global position"
+		aCanvas privateAeCairoContext setIdentityMatrix.
 		aCanvas pathTranslate: element invalidationBoundsInSpace origin.
 
+		"Paint the layer"
 		aCanvas privateAeCairoContext
 			source: pattern;
 			paintWithAlpha: element opacity ]
