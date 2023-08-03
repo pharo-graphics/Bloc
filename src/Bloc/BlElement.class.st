@@ -1428,7 +1428,9 @@ BlElement >> effect: aBlEffect [
 	anEffect must not be nil but an instance of subclasses of BlEffect."
 
 	visuals := visuals effect: aBlEffect.
-	self invalidate
+
+	self boundsCache invalidateBoundsInLocal.
+	self invalidate.
 ]
 
 { #category : #'geometry bounds' }
