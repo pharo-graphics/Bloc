@@ -8,26 +8,18 @@ Class {
 }
 
 { #category : #accessing }
-BlElementPositionChangeTest >> element [
+BlElementPositionChangeTest >> newElementTree [
 
-	<sampleInstance>
-	^ BlElement new
-]
-
-{ #category : #accessing }
-BlElementPositionChangeTest >> elementTree [
-
-	<sampleInstance>
 	| parent child subChild |
-	parent := self element.
+	parent := BlElement new.
 	parent size: 200 @ 200.
 	parent background: Color blue.
 
-	child := self element.
+	child := BlElement new.
 	child size: 150 @ 150.
 	child background: Color red.
 
-	subChild := self element.
+	subChild := BlElement new.
 	subChild size: 100 @ 100.
 	subChild background: Color green.
 
@@ -40,13 +32,12 @@ BlElementPositionChangeTest >> elementTree [
 { #category : #tests }
 BlElementPositionChangeTest >> testParentPositionChanged [
 
-	<sampleInstance>
 	| parent parentPositionChangedListener parentPositionInSpaceChangedListener parentPositionChanged parentPositionInSpaceChanged child childPositionChangedListener childPositionInSpaceChangedListener childPositionChanged childPositionInSpaceChanged subChild subChildPositionChangedListener subChildPositionInSpaceChangedListener subChildPositionChanged subChildPositionInSpaceChanged anUpdater |
 	parentPositionChanged := parentPositionInSpaceChanged := 0.
 	childPositionChanged := childPositionInSpaceChanged := 0.
 	subChildPositionChanged := subChildPositionInSpaceChanged := 0.
 
-	parent := self elementTree.
+	parent := self newElementTree.
 	parent forceLayout.
 
 	child := parent children first.
@@ -140,9 +131,8 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 { #category : #tests }
 BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 
-	<sampleInstance>
 	| element anUpdater |
-	element := self element.
+	element := BlElement new.
 	element background: Color blue.
 	element size: 100 @ 100.
 	element position: 0 @ 0.
@@ -185,9 +175,8 @@ BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 { #category : #tests }
 BlElementPositionChangeTest >> testPositionChangeLoop [
 
-	<sampleInstance>
 	| element positionChanged positionChangedListener positionInSpaceChanged positionInSpaceChangedListener anUpdater |
-	element := self element.
+	element := BlElement new.
 	positionChanged := 0.
 	positionInSpaceChanged := 0.
 
