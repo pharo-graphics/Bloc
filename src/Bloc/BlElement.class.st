@@ -339,8 +339,13 @@ BlElement >> allParentsDo: aBlock [
 	up to the top most parent (excluding myself).
 	If I don't have a parent - does nothing"
 	
-	self hasParent ifFalse: [ ^ self ].
-	self parent withAllParentsDo: aBlock
+	| current |
+	current := self.
+	
+	[ current := current parent  ] 
+		whileNotNil: [ aBlock value: current ].
+	
+	^ self
 ]
 
 { #category : #'children accessing' }

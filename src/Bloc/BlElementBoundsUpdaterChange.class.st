@@ -6,7 +6,8 @@ Class {
 		'previousPosition',
 		'newPosition',
 		'previousExtent',
-		'newExtent'
+		'newExtent',
+		'compositionDepth'
 	],
 	#category : #'Bloc-Basic-Bounds'
 }
@@ -56,6 +57,12 @@ BlElementBoundsUpdaterChange >> commitLocalPositionChange [
 		ifTrue: [ ^ self ].
 	
 	self element onPositionChangedFrom: aPreviousPosition to: newPosition
+]
+
+{ #category : #'api - compositing' }
+BlElementBoundsUpdaterChange >> compositionDepth [
+	
+	^ compositionDepth ifNil: [ compositionDepth := element compositionDepth ]
 ]
 
 { #category : #accessing }

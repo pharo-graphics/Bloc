@@ -27,8 +27,10 @@ BlElementBoundsUpdater >> changePositionFrom: aPreviousPosition to: aNewPosition
 BlElementBoundsUpdater >> commitChanges [
 
 	| theAssociations theElements theRoots |
+	
 	changes associations ifEmpty: [ ^ self ].
-	theAssociations := changes associations sorted: [ :a :b | a key compositionDepth > b key compositionDepth ].
+		
+	theAssociations := changes associations sorted: [ :a :b | a value compositionDepth > b value compositionDepth ].
 	theAssociations do: [ :eachAssociation | eachAssociation value commitLocalChanges ].
 	theElements := theAssociations 
 							select: [ :eachAssociation | eachAssociation value isPositionChanged ]
