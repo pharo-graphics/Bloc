@@ -140,17 +140,6 @@ BlTextParagraph >> descent [
 	^ line descent
 ]
 
-{ #category : #'paragraph - rendering' }
-BlTextParagraph >> drawOn: aCanvas [
-	"Render myself on a given canvas.
-	Note: I double dispatch through aCanvas to support multiple completely different canvasses"
-
-	session == Smalltalk session
-		ifFalse: [ ^ self ].
-
-	aCanvas drawTextParagraph: self
-]
-
 { #category : #'paragraph - measuring' }
 BlTextParagraph >> emptySpan [
 	^ BlSpan text: BlText empty attributes: #().
