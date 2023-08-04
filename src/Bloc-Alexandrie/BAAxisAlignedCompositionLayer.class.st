@@ -1,12 +1,19 @@
 "
-I'm a `BlElement` composition layer, that cache rasterization when the element's compositingMode requires it, i.e. when the element responds true to wantsSeparateCompositingLayer.
+I'm a `BlElement` composition layer, that caches an element's rasterization.
 
+Basically, when an element has to draw itself on a canvas and responds true to `wantsSeparateCompositingLayer`, then it's drawn in a new Cairo surface, and then ""painted"" into the host space canvas. Next pulse with drawing phase needed, if the element wasn't invalidated, the Cairo surface will be painted again into the host space canvas without need to redraw again.
+
+There are two strategies for doing it:
+
+* `beInSingleCompositionLayer`, that caches itself and all recursive children in a single surface (it doesn't matter if any of the children have one of these options)
+* `beInSeparateCompositionLayer`, that is similar to previous option but any children can be cached separately.
+
+Note: Element effect's have wantsCompositionLayer on their API, which the element queries to decide if it has a composition layer. For example, BlGaussianShadowEffect answers true.
 "
 Class {
 	#name : #BAAxisAlignedCompositionLayer,
 	#superclass : #Object,
 	#instVars : [
-		'offset',
 		'surface',
 		'element',
 		'pattern'
