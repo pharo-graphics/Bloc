@@ -410,29 +410,23 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 { #category : #layout }
 BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 
-	"If I am executed it means that measurement specification changed.
-	We have to recreate a text layout with new parameters"
+	"If I am executed, it means that measurement specification changed.
+	We have to recreate a text paragraph with new parameters"
 
-	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding |
-	aWidthSpec := anExtentMeasurementSpec widthSpec.
-	aHeightSpec := anExtentMeasurementSpec heightSpec.
-	aPadding := self constraints padding.
-
+	| aMaxWidth aMaxHeight |
 	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
 	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
 
-	paragraph := self createTextParagraph.
-
-	"Create a new text layout"
-	paragraph
+	paragraph := self newTextParagraph
 		text: self text;
 		baselineMeasurer: self baselineMeasurer;
 		maxWidth: aMaxWidth;
 		maxHeight: aMaxHeight;
-		scale: self globalScale.
+		scale: self globalScale;
+		yourself.
 
 	self basicMeasureParagraph: paragraph.
-	"Pay attention that #onPostMeasure: must be send after #onParagraphMeasure:"
+	"Pay attention that #onPostMeasure: must be sent after #onParagraphMeasure:"
 ]
 
 { #category : #layout }
