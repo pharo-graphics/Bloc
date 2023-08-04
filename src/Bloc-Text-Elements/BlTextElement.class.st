@@ -310,26 +310,28 @@ BlTextElement >> labelMeasurement [
 ]
 
 { #category : #layout }
-BlTextElement >> measureChildren: anExtentMeasurementSpec [	
+BlTextElement >> measureChildren: anExtentMeasurementSpec [
+
 	self layout measuredChildren: self do: [ :aChild |
-		| aWidthResizer aHeightResizer aWidthSpec aHeightSpec  |
+		| aWidthResizer aHeightResizer aWidthSpec aHeightSpec |
 		
 		aWidthResizer := aChild constraints horizontal resizer.
-		aHeightResizer := aChild constraints vertical resizer.
-		
-		aWidthResizer isMatchParent
-			ifTrue: [ aWidthSpec := BlMeasurementSpec exact: self measuredWidth ]
-			ifFalse: [ aWidthSpec := self layout
-				measurementSpecFor: anExtentMeasurementSpec widthSpec
-				usedSize: 0.0
-				resizer: aWidthResizer ].
+		aWidthSpec := aWidthResizer isMatchParent
+			ifTrue: [ BlMeasurementSpec exact: self measuredWidth ]
+			ifFalse: [
+				self layout
+					measurementSpecFor: anExtentMeasurementSpec widthSpec
+					usedSize: 0.0
+					resizer: aWidthResizer ].
 
-		aHeightResizer isMatchParent
-			ifTrue: [ aHeightSpec := BlMeasurementSpec exact: self measuredHeight ]
-			ifFalse: [ aHeightSpec := self layout
-				measurementSpecFor: anExtentMeasurementSpec heightSpec
-				usedSize: 0.0
-				resizer: aHeightResizer ].
+		aHeightResizer := aChild constraints vertical resizer.
+		aHeightSpec := aHeightResizer isMatchParent
+			ifTrue: [ BlMeasurementSpec exact: self measuredHeight ]
+			ifFalse: [
+				self layout
+					measurementSpecFor: anExtentMeasurementSpec heightSpec
+					usedSize: 0.0
+					resizer: aHeightResizer ].
 	
 		aChild measure: aWidthSpec @ aHeightSpec ].
 	
@@ -435,26 +437,29 @@ BlTextElement >> onPostMeasure: anExtentMeasurementSpec [
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
 
-	| measuredWidth measuredHeight maxWidth maxHeight widthSpec heightSpec padding |
-	"text layout is measured at this point, complete with TextElement aspects"
-	maxWidth := self computeMaxWidth: anExtentMeasurementSpec.
-	maxHeight := self computeMaxHeight: anExtentMeasurementSpec.
+	| measuredWidth measuredHeight maxWidth maxHeight widthSpec heightSpec padding paragraphBounds |
 	widthSpec := anExtentMeasurementSpec widthSpec.
 	heightSpec := anExtentMeasurementSpec heightSpec.
-	padding := self constraints padding.
-	(measurement boundsOf: paragraph) in: [ :bnds | 
-		measuredWidth := bnds width min: maxWidth.
-		measuredHeight := bnds height min: maxHeight ].
+	paragraphBounds := measurement boundsOf: paragraph.
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
-	widthSpec isExact ifTrue: [ measuredWidth := widthSpec size ].
-	heightSpec isExact ifTrue: [ measuredHeight := heightSpec size ].
+	widthSpec isExact
+		ifTrue: [ measuredWidth := widthSpec size ]
+		ifFalse: [
+			maxWidth := self computeMaxWidth: anExtentMeasurementSpec.
+			measuredWidth := paragraphBounds width min: maxWidth ].
+	heightSpec isExact
+		ifTrue: [ measuredHeight := heightSpec size ]
+		ifFalse: [
+			maxHeight := self computeMaxHeight: anExtentMeasurementSpec.
+			measuredHeight := paragraphBounds height min: maxHeight ].
 
 	"Take minimal width and height into account"
+	padding := self constraints padding.
 	measuredWidth := measuredWidth max: self constraints minWidth - padding width.
 	measuredHeight := measuredHeight max: self constraints minHeight - padding height.
 	"Take padding into account to finally set measured extent"
-	self measuredExtent: measuredWidth @ measuredHeight + (padding width @ padding height)
+	self measuredExtent: (measuredWidth + padding width) @ (measuredHeight + padding height)
 ]
 
 { #category : #'hooks - session' }
