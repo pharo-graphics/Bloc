@@ -165,13 +165,6 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 	^ aMaxWidth
 ]
 
-{ #category : #'private - paragraph' }
-BlTextElement >> createTextParagraph [
-	"Create a text paragraph used to measure and render text"
-
-	^ BlTextParagraph new 
-]
-
 { #category : #'api - font size' }
 BlTextElement >> defaultFontSize: aNumber [	
 	defaultFontSize = aNumber
@@ -373,6 +366,13 @@ BlTextElement >> measurer [
 BlTextElement >> measurer: anObject [
 	measurer := anObject.
 	self textChanged
+]
+
+{ #category : #'private - paragraph' }
+BlTextElement >> newTextParagraph [
+	"Create a text paragraph used to measure and render text"
+
+	^ BlTextParagraph new 
 ]
 
 { #category : #layout }
