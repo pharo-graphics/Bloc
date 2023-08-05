@@ -29,7 +29,7 @@ BATextParagraphSpan >> aeDrawOn: aeCanvas [
 ]
 
 { #category : #building }
-BATextParagraphSpan >> measureWith: aBATextMeasurer [
+BATextParagraphSpan >> measure [
 
 	"build an abstract font and resolve not yet resolved properties"
 

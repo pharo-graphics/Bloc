@@ -17,7 +17,12 @@ Class {
 
 { #category : #measurement }
 BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer maxWidth: aWidth maxHeight: aHeight [
-	^ self new hostTextMeasurer: aHostSpanMeasurer maxWidth: aWidth maxHeight: aHeight
+
+	^ self new
+		  hostTextMeasurer: aHostSpanMeasurer
+		  maxWidth: aWidth
+		  maxHeight: aHeight;
+		  yourself
 ]
 
 { #category : #accessing }

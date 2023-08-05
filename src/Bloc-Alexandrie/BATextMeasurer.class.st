@@ -21,9 +21,9 @@ BATextMeasurer >> measureTextParagraph: aBlTextParagraph [
 
 { #category : #measurement }
 BATextMeasurer >> measureTextSpan: aBlSpan [
-
 	"Measure a given text span and return paragraph span with computed metrics"
-	^ self createParagraphSpan setupFromHostTextMeasurer: self forSpan: aBlSpan
+
+	^ self newParagraphSpanFor: aBlSpan
 ]
 
 { #category : #'paragraph span instance creation' }

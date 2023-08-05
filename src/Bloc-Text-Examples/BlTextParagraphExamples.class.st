@@ -701,8 +701,8 @@ BlTextParagraphExamples >> measuredHelloWorld [
 { #category : #'instance creation' }
 BlTextParagraphExamples >> measurer [
 	<gtExample>
+
 	| aMeasurer |
-	
 	aMeasurer := BAMockedTextMeasurer new
 		ascent: self ascent;
 		descent: self descent;
