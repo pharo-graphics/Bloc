@@ -416,6 +416,7 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 	We have to recreate a text paragraph with new parameters"
 
 	| aMaxWidth aMaxHeight |
+
 	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
 	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
 

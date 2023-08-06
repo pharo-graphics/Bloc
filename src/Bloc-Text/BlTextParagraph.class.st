@@ -32,8 +32,6 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #BlTextParagraph,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'text',
 		'line',
@@ -97,7 +95,6 @@ BlTextParagraph >> baselineMeasurer: aBlTextParagraphBaselineMeasurer [
 
 { #category : #'paragraph - measuring' }
 BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
-
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 
 	| anIterator paragraphMeasurer |
@@ -107,13 +104,14 @@ BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
 	text isEmpty ifTrue: [ paragraphMeasurer measureSpan: self emptySpan ].
 
 	anIterator := text iterator.
-	[ 
-	anIterator hasNext and: [ 
-		line isEmpty or: [ paragraphMeasurer hasAvailableSpace ] ] ] 
-		whileTrue: [ "If we pass #hasNext check we will definitely move to the next span,
-		so can do the same with position"
-			paragraphMeasurer movePosition: anIterator position + 1.
-			paragraphMeasurer measureSpan: anIterator nextSpan ].
+	[	anIterator hasNext and: [
+		line isEmpty or: [
+		paragraphMeasurer hasAvailableSpace ] ] ] whileTrue: [
+			"If we pass #hasNext check we will definitely move to the next span,
+			so can do the same with position"
+			paragraphMeasurer
+				movePosition: anIterator position + 1;
+				measureSpan: anIterator nextSpan ].
 
 	"measurer creates a line with baseline set to 0@0"
 	line := paragraphMeasurer line.
@@ -195,6 +193,7 @@ BlTextParagraph >> initialize [
 
 { #category : #testing }
 BlTextParagraph >> isEmpty [
+
 	^ self line isEmpty
 ]
 
@@ -343,7 +342,6 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closest span to a point"
 	<return: #BlTextParagraphSegmentLeaf>
-
 
 	^ line spans
 		findBinary: [ :aParagraphSpan |
