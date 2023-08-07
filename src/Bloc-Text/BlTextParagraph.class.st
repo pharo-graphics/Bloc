@@ -39,7 +39,6 @@ Class {
 		'maxWidth',
 		'end',
 		'session',
-		'scale',
 		'baselineMeasurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
@@ -290,12 +289,6 @@ BlTextParagraph >> right [
 	"Return a visual right coordinate of the text (right-most rendered pixel)"
 
 	^ self left + self width
-]
-
-{ #category : #accessing }
-BlTextParagraph >> scale: aNumber [
-
-	scale := aNumber
 ]
 
 { #category : #accessing }

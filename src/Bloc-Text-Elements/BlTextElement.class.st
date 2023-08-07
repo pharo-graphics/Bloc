@@ -425,7 +425,6 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 		baselineMeasurer: self baselineMeasurer;
 		maxWidth: aMaxWidth;
 		maxHeight: aMaxHeight;
-		scale: self globalScale;
 		yourself.
 
 	self basicMeasureParagraph: paragraph.
