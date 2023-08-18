@@ -559,6 +559,12 @@ BlInfiniteLinearLayout >> isLayoutRTL [
 	^ self direction isRightToLeft
 ]
 
+{ #category : #testing }
+BlInfiniteLinearLayout >> isOrientable [
+
+	^ true
+]
+
 { #category : #'private - children' }
 BlInfiniteLinearLayout >> lastReferenceChildIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	<return: #BlElement or: nil>

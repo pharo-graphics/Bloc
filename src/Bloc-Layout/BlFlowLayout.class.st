@@ -85,6 +85,12 @@ BlFlowLayout >> initialize [
 	self orientation: self defaultOrientation
 ]
 
+{ #category : #testing }
+BlFlowLayout >> isOrientable [
+
+	^ true
+]
+
 { #category : #layout }
 BlFlowLayout >> layout: anElement in: newBounds context: aBlElementBoundsUpdateContext [
 	measurer layout: anElement in: newBounds context: aBlElementBoundsUpdateContext.
