@@ -21,15 +21,19 @@ BlRowNumberDecoration >> aeDraw: anItemElement overOn: aeCanvas in: anInfiniteEl
 
 	| holder index cairoScaledFont cairoGlyphsArray fontExtents h |
 	super aeDraw: anItemElement overOn: aeCanvas in: anInfiniteElement.
-	aeCanvas restoreContextAfter: [ 
+	aeCanvas restoreContextAfter: [
 		holder := anInfiniteElement childHolderOf: anItemElement.
 		index := holder layoutPosition.
 		cairoScaledFont := self aeCairoScaledFontOn: aeCanvas.
-		fontExtents := cairoScaledFont extents.
-		h := self numberVerticalHeightIn: anItemElement fontHeight: fontExtents height.
-		aeCanvas pathTranslate: 4 @ (anItemElement bounds inParent top +  fontExtents ascent + h).
+		fontExtents := cairoScaledFont fontExtents.
+		h := self
+			     numberVerticalHeightIn: anItemElement
+			     fontHeight: fontExtents height.
+		aeCanvas pathTranslate:
+			4 @ (anItemElement bounds inParent top + fontExtents ascent + h).
 		aeCanvas setSourceColor: Color gray darker.
-		cairoGlyphsArray := cairoScaledFont glyphArrayForString: index asString.
+		cairoGlyphsArray := cairoScaledFont glyphArrayForString:
+			                    index asString.
 		aeCanvas drawText: cairoGlyphsArray font: cairoScaledFont ]
 ]
 
@@ -60,17 +64,23 @@ BlRowNumberDecoration >> aeDrawBeneathOn: aeCanvas in: anInfiniteElement [
 
 { #category : #'as yet unclassified' }
 BlRowNumberDecoration >> aeMeasureActualWidthFor: aNumber on: aeCanvas in: anInfiniteElement [
-
 	"Draw the background beneath "
 
 	| holder cairoScaledFont fontExtents cairoGlyphsArray |
-	anInfiniteElement hasChildren ifFalse: [ ^self ].
-	holder := anInfiniteElement childHolderOf: anInfiniteElement children last.
+	anInfiniteElement hasChildren ifFalse: [ ^ self ].
+	holder := anInfiniteElement childHolderOf:
+		          anInfiniteElement children last.
 	cairoScaledFont := self aeCairoScaledFontOn: aeCanvas.
-	fontExtents := cairoScaledFont extents.
-	cairoGlyphsArray := cairoScaledFont glyphArrayForString: aNumber asString.
-	aeCanvas textExtentsFor: cairoGlyphsArray scaledFont: cairoScaledFont do: [ :aTextExtents | 
-		self onActualWidthChangeWith: aTextExtents width + 10 do: [ anInfiniteElement requestLayout ] ]
+	fontExtents := cairoScaledFont fontExtents.
+	cairoGlyphsArray := cairoScaledFont glyphArrayForString:
+		                    aNumber asString.
+	aeCanvas
+		textExtentsFor: cairoGlyphsArray
+		scaledFont: cairoScaledFont
+		do: [ :aTextExtents |
+			self
+				onActualWidthChangeWith: aTextExtents width + 10
+				do: [ anInfiniteElement requestLayout ] ]
 ]
 
 { #category : #'as yet unclassified' }
