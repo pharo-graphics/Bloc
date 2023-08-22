@@ -68,10 +68,22 @@ BlBackground >> defaultOpacity [
 ]
 
 { #category : #testing }
+BlBackground >> isColorBackground [
+
+	^ self isPaintBackground and: [ self paint isColorPaint  ]
+]
+
+{ #category : #testing }
 BlBackground >> isOpaque [
 	"Return true if the whole background is opaque"
 	<return: #Boolean>
 	
+	^ false
+]
+
+{ #category : #testing }
+BlBackground >> isPaintBackground [
+
 	^ false
 ]
 
@@ -112,4 +124,10 @@ BlBackground >> opacity: aNumber [
 		ifTrue: [ ^ self ].
 
 	opacity := aNumber
+]
+
+{ #category : #accessing }
+BlBackground >> paint [
+
+	^ nil
 ]

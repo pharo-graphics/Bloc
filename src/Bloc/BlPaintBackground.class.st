@@ -43,6 +43,12 @@ BlPaintBackground >> isOpaque [
 ]
 
 { #category : #testing }
+BlPaintBackground >> isPaintBackground [ 
+
+	^ true
+]
+
+{ #category : #testing }
 BlPaintBackground >> isTransparent [
 	"Paint background is transparent then and only then when paint is transparent or opacity is close to 0"
 	<return: #Boolean>

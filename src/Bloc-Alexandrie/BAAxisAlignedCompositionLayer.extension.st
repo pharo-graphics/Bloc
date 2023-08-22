@@ -16,9 +16,9 @@ BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 	"offset := element invalidationBounds origin."
 	self drawOn: (AeCanvas newFor: surface).
 	
-	Time primMillisecondClock trace.
+	"Time primMillisecondClock trace.
 	' CREATE ' trace.
-	element id traceCr.
+	element id traceCr."
 ]
 
 { #category : #'*Bloc-Alexandrie' }

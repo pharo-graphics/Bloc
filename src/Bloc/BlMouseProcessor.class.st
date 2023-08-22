@@ -584,10 +584,11 @@ BlMouseProcessor >> processPicking: aMouseEvent [
 	self checkLastOverTarget.
 
 	"if the last over target contains the point we can start picking from it (speed-up picking a lot)"
-	aTargetElement := (aMouseEvent canFindTargetFrom: lastOverTarget)
+	"aTargetElement := (aMouseEvent canFindTargetFrom: lastOverTarget)
 		                  ifTrue: [ aMouseEvent findTargetFrom: lastOverTarget ]
-		                  ifFalse: [ aMouseEvent findTargetFrom: self space ].
-
+		                  ifFalse: [ aMouseEvent findTargetFrom: self space ]."
+	self flag: 'always pick element starting from space because of menu'.
+	aTargetElement := aMouseEvent findTargetFrom: self space.
 	"we have to ensure that aTarget is not nil"
 	^ aTargetElement ifNil: [ aTargetElement := self space root ]
 ]
