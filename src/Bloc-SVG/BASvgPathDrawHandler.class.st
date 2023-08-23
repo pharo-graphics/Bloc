@@ -45,98 +45,11 @@ BASvgPathDrawHandler >> cubicBezierVia: p1 and: p2 to: aPoint [
 ]
 
 { #category : #API }
-BASvgPathDrawHandler >> ellipticalArcRotation2: radii xAxisRotation: xAxisRotation largeArcFlag: lFlag sweepFlag: swFlag to: toPoint [
-	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataEllipticalArcCommands
-	Based on Athens-SVG-PathConverter"
-
-	| rx ry x1 y1 x2 y2 dx2 dy2 phi cosAngle sinAngle arx ary coeff cx1 cy1 ux uy vx vy sign xPrime1 yPrime1 radical startAngle sweepAngle cx cy aPoint aCenter lambda |
-	aPoint := "currentPosition" 0 asPoint.
-	
-	rx := radii x.
-	ry := radii y.
-		
-	x1 := aPoint x.
-	y1 := aPoint y.
-	x2 := toPoint x.
-	y2 := toPoint y.
-	dx2 := (x1 - x2) / 2.
-	dy2 := (y1 - y2) / 2.
-	phi := (xAxisRotation \\ 360) degreesToRadians.
-	cosAngle := phi cos.
-	sinAngle := phi sin.
-	xPrime1 := cosAngle * dx2 + (sinAngle * dy2).
-	yPrime1 := cosAngle * dy2 - (sinAngle * dx2).
-
-	"Ensure radii are positive"
-	arx := rx abs.
-	ary := ry abs.
-
-	"Ensure radii are large enough"
-	lambda := (x1 squared / arx squared) + (y1 squared / ary squared).
-	lambda > 1 ifTrue: [
-		arx := arx * lambda sqrt.
-		ary := ary * lambda sqrt].
-
-	"Step 2: Compute (cx1, cy1) "
-	radical := (arx squared * ary squared - (arx squared * yPrime1 squared)
-				- (ary squared * xPrime1 squared))
-					/ (arx squared * yPrime1 squared + (ary squared * xPrime1 squared)).
-	radical "abs" <= 1e-4 ifTrue: [radical := 0.0].
-
-	coeff := radical sqrt.
-	swFlag == lFlag ifTrue: [coeff := coeff negated].
-	cx1 := coeff * arx * yPrime1 / ary.
-	cy1 := (coeff * ary * xPrime1 / arx) negated.
-
-	"Step 3: Compute (cx, cy)"
-	cx := cosAngle * cx1 - (sinAngle * cy1) + ((x1 + x2) / 2).
-	cy := sinAngle * cx1 + (cosAngle * cy1) + ((y1 + y2) / 2).		
-	aCenter := currentPosition + (cx@cy).
-
-	"Step 4: Compute startAngle and sweepAngle"
-	ux := (xPrime1 - cx1) / arx.
-	uy := (yPrime1 - cy1) / ary.
-	vx := (xPrime1 negated - cx1) / arx.
-	vy := (yPrime1 negated - cy1) / ary.
-	sign := ux * vy - (uy * vx) < 0 ifTrue: [-1] ifFalse: [1].
-	startAngle := ((ux / (ux squared + uy squared) sqrt) arcCos * uy sign)
-				radiansToDegrees \\ 360.
-	sweepAngle := (((ux * vx + (uy * vy))
-				/ ((ux squared + uy squared) * (vx squared + vy squared)) abs sqrt) asFloat
-				arcCos * sign)
-				radiansToDegrees \\ 360.
-	(sweepAngle abs < 180 and: [lFlag])
-		ifTrue: 
-			[sweepAngle < 0
-				ifTrue: [sweepAngle := 360 + sweepAngle]
-				ifFalse: [sweepAngle := sweepAngle - 360]].
-	swFlag
-		ifTrue: [sweepAngle < 0 ifTrue: [sweepAngle := sweepAngle + 360]]
-		ifFalse: [sweepAngle > 0 ifTrue: [sweepAngle := sweepAngle - 360]].
-	
-	cairoContext 
-		saveState;
-
-		translateBy: currentPosition negated;
-		rotateByRadians: phi;
-		translateBy: currentPosition;
-
-		scaleBy: radii;
-		arcCenter: aCenter / radii
- 			radius: 1.0
-			startAngle: startAngle degreesToRadians
-			sweep: sweepAngle degreesToRadians;
-		restoreState.
-
-	currentPosition := self toAbsolute: toPoint
-]
-
-{ #category : #API }
 BASvgPathDrawHandler >> ellipticalArcRotation: radiiPoint xAxisRotation: xAxisRotationInDegrees largeArcFlag: isLargeArc sweepFlag: isSweep to: toPosition [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataEllipticalArcCommands
 	Based on Athens-SVG-PathConverter"
 
-	| x1 y1 x2 y2 dx2 dy2 rx ry coeff cx1 cy1 ux uy vx vy sign xPrime1 yPrime1 radical startAngle sweepAngle cx cy absoluteToPosition aCenter uySign |
+	| x1 y1 x2 y2 dx2 dy2 rx ry coeff cx1 cy1 ux uy vx vy sign xPrime1 yPrime1 radical startAngle sweepAngle cx cy absoluteToPosition aCenter uySign phi cosAngle sinAngle |
 
 	absoluteToPosition := self toAbsolute: toPosition.
 
@@ -148,8 +61,12 @@ BASvgPathDrawHandler >> ellipticalArcRotation: radiiPoint xAxisRotation: xAxisRo
 	y2 := absoluteToPosition y.
 	dx2 := (x1 - x2) / 2.0.
 	dy2 := (y1 - y2) / 2.0.
-	xPrime1 := dx2.
-	yPrime1 := dy2.
+
+	phi := (xAxisRotationInDegrees \\ 360) degreesToRadians.
+	cosAngle := phi cos.
+	sinAngle := phi sin.
+	xPrime1 := cosAngle * dx2 + (sinAngle * dy2).
+	yPrime1 := cosAngle * dy2 - (sinAngle * dx2).
 
 	"Step 2: Compute (cx1, cy1) "
 	radical :=
@@ -168,8 +85,8 @@ BASvgPathDrawHandler >> ellipticalArcRotation: radiiPoint xAxisRotation: xAxisRo
 	cy1 := (coeff * xPrime1) negated.
 
 	"Step 3: Compute (cx, cy)"
-	cx := cx1 + ((x1 + x2) / 2.0).
-	cy := cy1 + ((y1 + y2) / 2.0).
+	cx := cosAngle * cx1 - (sinAngle * cy1) + ((x1 + x2) / 2.0).
+	cy := sinAngle * cx1 + (cosAngle * cy1) + ((y1 + y2) / 2.0).
 	aCenter := cx @ cy.
 		
 	"Step 4: Compute startAngle and sweepAngle"
@@ -177,7 +94,7 @@ BASvgPathDrawHandler >> ellipticalArcRotation: radiiPoint xAxisRotation: xAxisRo
 	uy := (yPrime1 - cy1) / ry.
 	vx := (xPrime1 negated - cx1) / rx.
 	vy := (yPrime1 negated - cy1) / ry.
-	sign := ux * vy - (uy * vx) <= 0
+	sign := ux * vy - (uy * vx) <= 0.0
 		ifTrue: [ -1 ]
 		ifFalse: [ 1 ].
 	uySign := uy = 0
@@ -198,17 +115,24 @@ BASvgPathDrawHandler >> ellipticalArcRotation: radiiPoint xAxisRotation: xAxisRo
 		ifTrue: [ sweepAngle < 0 ifTrue: [ sweepAngle := sweepAngle + 360 ]]
 		ifFalse: [ sweepAngle > 0 ifTrue: [ sweepAngle := sweepAngle - 360 ]].
 
-	cairoContext 
-		saveState;
-		translateBy: aCenter - radiiPoint;
-		scaleBy: radiiPoint;
-		arcCenter: 1.0 asPoint
- 			radius: 1.0
-			startAngle: startAngle degreesToRadians
-			sweep: sweepAngle degreesToRadians;
-		restoreState.
+	cairoContext restoreStateAfter: [
+		"Rotate around center"
+		cairoContext
+			translateBy: aCenter;
+			rotateByRadians: phi;
+			translateBy: aCenter negated.
 
-"	cairoContext moveTo: absoluteToPosition."
+		"Inspired on: https://www.cairographics.org/cookbook/ellipses/"
+		cairoContext
+			translateBy: aCenter - radiiPoint;
+			scaleBy: radiiPoint.
+
+		cairoContext
+			arcCenter: 1.0 @ 1.0
+	 			radius: 1.0
+				startAngle: startAngle degreesToRadians
+				sweep: sweepAngle degreesToRadians ].
+
 	currentPosition := absoluteToPosition
 ]
 
