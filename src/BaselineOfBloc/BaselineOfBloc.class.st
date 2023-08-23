@@ -128,7 +128,18 @@ BaselineOfBloc >> baseline: spec [
 
 			spec
 				package: #'Bloc-Theme' with: [
-					spec requires: #(#'Bloc') ]
+					spec requires: #(#'Bloc') ].
+
+			"SVG"
+			spec
+				baseline: 'XMLParser' with: [
+					spec
+						repository: 'github://pharo-contributions/XML-XMLParser';
+						loads: #(Core) ];
+				package: #'BlocPac-SVG' with: [
+					spec requires: #(#'Bloc' #'XMLParser') ];
+				package: #'BlocPac-SVG-Tests' with: [
+					spec requires: #(#'BlocPac-SVG') ]
 
 			].
 ]
