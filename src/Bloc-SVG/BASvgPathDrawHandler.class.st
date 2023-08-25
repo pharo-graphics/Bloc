@@ -23,7 +23,7 @@ BASvgPathDrawHandler >> closePath [
 	
 	cairoContext closePath.
 	
-	currentPosition := "cairoContext currentPointInUserSpace" nil.
+	currentPosition := cairoContext currentPointInUserSpace.
 	lastControlPoint := nil
 ]
 
