@@ -688,7 +688,6 @@ BlSvgFactory >> svgFrom: node [
 
 	| rootElement |
 	rootElement := self gFrom: node.
-	rootElement clipChildren: false.
 
 	self positionFrom: node on: rootElement.
 	self extentFrom: node on: rootElement.
