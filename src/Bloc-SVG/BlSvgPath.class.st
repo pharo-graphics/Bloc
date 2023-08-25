@@ -15,10 +15,8 @@ Class {
 	#name : #BlSvgPath,
 	#superclass : #BlElementVectorGeometry,
 	#instVars : [
-		'position',
-		'viewbox',
 		'fillRule',
-		'svgPathString'
+		'pathString'
 	],
 	#classVars : [
 		'EvenOdd',
@@ -34,10 +32,18 @@ BlSvgPath class >> initialize [
 	Winding := #winding
 ]
 
+{ #category : #'instance creation' }
+BlSvgPath class >> pathString: aString [
+	
+	^ self new
+		pathString: aString;
+		yourself
+]
+
 { #category : #'geometry testing' }
 BlSvgPath >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	
-	self flag: #todo. "Use cairo isIn:?"
+	self flag: #todo. "refine! should have a boolean flag to deknow if it's filled?"
 	
 	^ true
 ]
@@ -47,20 +53,19 @@ BlSvgPath >> initialize [
 
 	super initialize.
 
-	svgPathString := ''.
 	self useWindingFillRule
 ]
 
 { #category : #accessing }
 BlSvgPath >> matchExtent: anExtent [
-
-	extent := anExtent
+	"Ignored"
 ]
 
-{ #category : #initialization }
-BlSvgPath >> svgPathString: aString [
+{ #category : #'instance creation' }
+BlSvgPath >> pathString: aString [
 
-	svgPathString := aString
+	pathString := aString.
+	self releaseCache
 ]
 
 { #category : #accessing }

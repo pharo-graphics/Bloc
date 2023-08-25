@@ -373,10 +373,7 @@ BlSvgFactory >> paintFrom: aString on: aBlElement [
 BlSvgFactory >> pathFrom: node [
 
 	| path |
-	path := (BlSvgPath new
-		         svgPathString: (node attributeAt: 'd')
-		         "viewbox: (self viewboxFor: node)";
-		         yourself) asElement.
+	path := (BlSvgPath pathString: (node attributeAt: 'd')) asElement.
 
 	self allPropertiesFrom: node attributes on: path.
 

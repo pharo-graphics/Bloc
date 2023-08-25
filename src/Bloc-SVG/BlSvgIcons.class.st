@@ -24,9 +24,7 @@ BlSvgIcons class >> arrowExpandAllSrc [
 { #category : #arrow }
 BlSvgIcons class >> arrowExpandAllSvg [
 
-	^ BlSvgPath new
-		  svgPathString: self arrowExpandAllSrc;
-		  yourself
+	^ BlSvgPath pathString: self arrowExpandAllSrc
 ]
 
 { #category : #close }
@@ -43,9 +41,7 @@ BlSvgIcons class >> closeCircleSrc [
 { #category : #close }
 BlSvgIcons class >> closeCircleSvg [
 
-	^ BlSvgPath new
-		  svgPathString: self closeCircleSrc;
-		  yourself
+	^ BlSvgPath pathString: self closeCircleSrc
 ]
 
 { #category : #accessing }
@@ -78,9 +74,7 @@ BlSvgIcons class >> rotateLeftSrc [
 { #category : #rotate }
 BlSvgIcons class >> rotateLeftSvg [
 
-	^ BlSvgPath new
-		  svgPathString: self rotateLeftSrc;
-		  yourself
+	^ BlSvgPath pathString: self rotateLeftSrc
 ]
 
 { #category : #settings }
@@ -98,7 +92,5 @@ BlSvgIcons class >> settingsSrc [
 { #category : #settings }
 BlSvgIcons class >> settingsSvg [
 
-	^ BlSvgPath new
-		  svgPathString: self settingsSrc;
-		  yourself
+	^ BlSvgPath pathString: self settingsSrc
 ]

@@ -24,10 +24,7 @@ BlSpaceFixture >> buildSVGStrokes [
 		'M100,200 C100,100 250,100 250,200 S400,300 400,200')
 		do: [ :each |
 			| aGeometry anElement |
-			aGeometry :=
-				BlSvgPath new
-					svgPathString: each;
-					yourself.
+			aGeometry := BlSvgPath pathString: each.
 			anElement := aGeometry asElement
 				background: Color transparent;
 				border: (BlBorder paint: builder nextColor width: 4);

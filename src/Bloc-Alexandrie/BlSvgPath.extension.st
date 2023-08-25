@@ -8,8 +8,9 @@ BlSvgPath >> aeApplyTo: aeCanvas element: aBlElement [
 			ifTrue: [ cairoContext useFillRuleWinding ]
 			ifFalse: [ cairoContext useFillRuleEvenOdd ].
 
+		self flag: #todo. "Don't parse again each time"
 		(BlSvgPathParser
-			on: svgPathString readStream
+			on: pathString readStream
 			handler: (BASvgPathDrawHandler on: cairoContext))
 			readUpToEnd ]
 ]
