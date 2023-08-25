@@ -6,7 +6,7 @@ For now, use 'Cairo' as the preferable host for Bloc to display these examples p
 Class {
 	#name : #BlSvgExamples,
 	#superclass : #Object,
-	#category : #'Bloc-SVG-Examples'
+	#category : #'Bloc-SVG-Tests-Examples'
 }
 
 { #category : #'svg - converter' }

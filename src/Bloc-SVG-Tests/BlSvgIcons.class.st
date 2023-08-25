@@ -6,7 +6,7 @@ See class side
 Class {
 	#name : #BlSvgIcons,
 	#superclass : #Object,
-	#category : #'Bloc-SVG-Examples'
+	#category : #'Bloc-SVG-Tests-Examples'
 }
 
 { #category : #arrow }
