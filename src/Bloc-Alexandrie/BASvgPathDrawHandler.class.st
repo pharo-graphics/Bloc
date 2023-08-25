@@ -7,7 +7,7 @@ Class {
 		'currentPosition',
 		'isAbsolute'
 	],
-	#category : #'Bloc-SVG-Geometry'
+	#category : #'Bloc-Alexandrie-SVG'
 }
 
 { #category : #'instance creation' }
