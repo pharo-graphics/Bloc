@@ -12,6 +12,17 @@ XMLElement >> attributeAt: aName ifPresent: aBlock [
 ]
 
 { #category : #'*Bloc-SVG' }
+XMLElement >> attributeAt: aName ifPresent: aBlock ifAbsent: absentBlock [
+	"returns the value of the attribute whose full name matches aName or the
+	value of aBlock if there isn't any"
+	| aValue |
+	aValue := self attributeNodes
+		attributeValueAt: aName
+		ifAbsent: [ ^ absentBlock value ].
+	^ aBlock cull: aValue
+]
+
+{ #category : #'*Bloc-SVG' }
 XMLElement >> inheriteAttributes [
 	self isRoot ifTrue: [ ^ self ].
 	

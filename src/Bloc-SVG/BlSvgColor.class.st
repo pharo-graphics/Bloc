@@ -287,12 +287,16 @@ BlSvgColor class >> forestgreen [
 
 { #category : #'instance creation' }
 BlSvgColor class >> fromHexString: aColorHex [
-	|stream|
-	stream := WriteStream on:''.
-	aColorHex size = 3 ifTrue:[ aColorHex do: [:character | 2 timesRepeat: [stream nextPut:character] ]]
-							ifFalse:[ stream nextPutAll: aColorHex ].
-	
-	^super fromHexString: stream contents.
+
+	| stream |
+	stream := WriteStream on: ''.
+	aColorHex size = 3
+		ifTrue: [
+			aColorHex do: [ :character |
+				2 timesRepeat: [ stream nextPut: character ] ] ]
+		ifFalse: [ stream nextPutAll: aColorHex ].
+
+	^ super fromHexString: stream contents
 ]
 
 { #category : #'instance creation' }

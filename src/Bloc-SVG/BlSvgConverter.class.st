@@ -43,27 +43,31 @@ BlSvgConverter class >> convertFromURL: anUrl [
 
 { #category : #converting }
 BlSvgConverter >> convertXMLDocument: doc [
+
 	| root |
 	root := doc nodes elements.
-	((root size > 1) or: [ root first name ~= 'svg'])  ifTrue: [ self error: 'A root svg element expected' ].
-	
-	self factory reset.
-	^self factory svgFrom: (root first).
+	(root size > 1 or: [ root first name ~= 'svg' ]) ifTrue: [
+		self error: 'A root svg element expected' ].
 
+	self factory reset.
+	^ self factory svgFrom: root first
 ]
 
 { #category : #accessing }
 BlSvgConverter >> factory [
-	factory ifNil: [ factory:= self factoryByDefault ].
+
+	factory ifNil: [ factory := self factoryByDefault ].
 	^ factory
 ]
 
 { #category : #accessing }
 BlSvgConverter >> factory: anObject [
+
 	factory := anObject
 ]
 
 { #category : #initialization }
 BlSvgConverter >> factoryByDefault [
-	^BlSvgFactory new
+
+	^ BlSvgFactory new
 ]

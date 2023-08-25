@@ -27,11 +27,6 @@ Class {
 	#category : #'Bloc-SVG-Geometry'
 }
 
-{ #category : #'instance creation' }
-BlSvgPath class >> build: aBlock [
-	^ self new build: aBlock
-]
-
 { #category : #'class initialization' }
 BlSvgPath class >> initialize [
 
