@@ -80,7 +80,7 @@ BlScrollBarTest >> setUp [
 		background: Color green;
 		addChild: scrollPane.
 	space extent: 100 asPoint.
-	space show.
+"	space show."
 	self waitTestingSpaces
 ]
 
