@@ -372,12 +372,18 @@ BlSvgFactory >> paintFrom: aString on: aBlElement [
 { #category : #path }
 BlSvgFactory >> pathFrom: node [
 
-	| path |
-	path := (BlSvgPath pathString: (node attributeAt: 'd')) asElement.
+	| pathString pathElement |
+	pathString := node attributeAt: 'd'.
+	pathElement := BlElement new
+		geometry: (BlSvgPath pathString: pathString);
+		beOutskirtsCentered;
+		background: Color black;
+		border: (BlBorder paint: Color gray width: 2);
+		yourself.
 
-	self allPropertiesFrom: node attributes on: path.
+	self allPropertiesFrom: node attributes on: pathElement.
 
-	^ path
+	^ pathElement
 ]
 
 { #category : #'gradients & patterns' }
