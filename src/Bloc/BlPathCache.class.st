@@ -6,11 +6,8 @@ Geometry path is created with the help of backend-specific path builder by BlGeo
 Class {
 	#name : #BlPathCache,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'session',
-		'canvasIdentity',
 		'geometry',
 		'geometryPath',
 		'strokedBounds'
@@ -20,27 +17,23 @@ Class {
 
 { #category : #'instance creation' }
 BlPathCache class >> on: aGeometry [
-	^ self new geometry: aGeometry
-]
 
-{ #category : #'session management' }
-BlPathCache >> checkIdentity: aCanvas [
-	canvasIdentity = aCanvas identity
-		ifFalse: [ self releaseCache ]
+	^ self new
+		  geometry: aGeometry;
+		  yourself
 ]
 
 { #category : #'session management' }
 BlPathCache >> checkSession [
-	session == Smalltalk session
-		ifFalse: [
-			session := Smalltalk session.
-			self releaseCache ]
+
+	session == Smalltalk session ifTrue: [ ^ self ].
+	session := Smalltalk session.
+	self releaseCache
 ]
 
 { #category : #accessing }
 BlPathCache >> geometry [
-	"Return a geometry whose path I cache"
-	<return: #BlElementVectorGeometry>
+	"Return a `BlElementVectorGeometry` whose path I cache."
 
 	^ geometry
 ]
@@ -53,27 +46,38 @@ BlPathCache >> geometry: aBlGeometry [
 ]
 
 { #category : #accessing }
+BlPathCache >> geometryPath [
+
+	^ geometryPath
+]
+
+{ #category : #accessing }
+BlPathCache >> geometryPath: anObject [
+
+	geometryPath := nil
+]
+
+{ #category : #'session management' }
 BlPathCache >> releaseCache [
 	"Release path caches requiring their fresh creation"
 
-	geometryPath ifNotNil: #release.
 	geometryPath := nil.
 	self releaseStrokedBoundsCache
 ]
 
-{ #category : #accessing }
+{ #category : #'session management' }
 BlPathCache >> releaseStrokedBoundsCache [
 	"Release stroked bounds to force its recomputation"
 
 	strokedBounds := nil
 ]
 
-{ #category : #'visual bounds' }
+{ #category : #accessing }
 BlPathCache >> strokedBounds: aBlBounds of: anElement [
 	"Return stroked bounds of a geometry if it would be stroked according to element's outskirts."
 
-	^ strokedBounds ifNil: [ 
-		  strokedBounds := anElement outskirts
-			                   strokedBounds: BlBounds new
-			                   of: anElement ]
+	^ strokedBounds ifNil: [
+		strokedBounds := anElement outskirts
+			strokedBounds: BlBounds new
+			of: anElement ]
 ]
