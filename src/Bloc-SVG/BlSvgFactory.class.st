@@ -133,12 +133,28 @@ BlSvgFactory >> ellipsePositionFrom: node [
 
 { #category : #groups }
 BlSvgFactory >> extentFrom: node on: aBlElement [
-	|width height|
-	width:= aBlElement width.
-	height:= aBlElement height.
-	node attributeAt:'width' ifPresent:[width := (node attributeAt:'width') asNumber].
-	node attributeAt:'height' ifPresent:[height := (node attributeAt:'height') asNumber].
-	aBlElement size: width@height
+
+	self flag: #todo. "Implement %"
+
+	node
+		attributeAt: 'width'
+		ifPresent: [
+			| width |
+			width := node attributeAt: 'width'.
+			width trim last = $% ifTrue: [ self notYetImplemented ].
+			aBlElement constraints horizontal exact: width asNumber ]
+		ifAbsent: [
+			aBlElement constraints horizontal matchParent "100%" ].
+
+	node
+		attributeAt: 'height'
+		ifPresent: [
+			| height |
+			height := node attributeAt: 'height'.
+			height trim last = $% ifTrue: [ self notYetImplemented ].
+			aBlElement constraints vertical exact: height asNumber ]
+		ifAbsent: [
+			aBlElement constraints vertical matchParent "100%" ]
 ]
 
 { #category : #properties }
@@ -688,14 +704,32 @@ BlSvgFactory >> useFrom: node [
 
 { #category : #groups }
 BlSvgFactory >> viewBoxFrom: node on: aBlElement [
-	|array|
-	node attributeAt:'viewBox' ifPresent:[
-		array := ((node attributeAt:'viewBox') substrings:{Character space. $,}) collect: [ :valueString | valueString asNumber ].
+
+	| array updateTransformationBlock |
+	node attributeAt: 'viewBox' ifPresent: [
+		array := ((node attributeAt: 'viewBox') substrings: ' ,')
+			collect: [ :valueString | valueString asNumber ].
+
+		updateTransformationBlock := [
+			| offset scale |
+			offset := array first negated @ array second negated.
+			scale := (aBlElement width / array third)
+					@ (aBlElement height / array fourth).
+
+			#updateTransformationBlock traceCr.
+			scale traceCr.
+
+			aBlElement transformDo: [ :t |
+				t translateBy: offset.
+				t topLeftOrigin; scaleBy: scale ] ].
 		
-		aBlElement forceLayout.
-		aBlElement transformDo: [ :t |
-			t translateBy: array first negated @ (array second negated).
-			t scaleBy: (array third)/(aBlElement width) @ (array last)/(aBlElement height)] ]
+		aBlElement
+			whenLayoutedDoOnce: updateTransformationBlock.
+		aBlElement
+			addEventHandlerOn: BlElementExtentChangedEvent
+			do: [ :evt |
+				updateTransformationBlock value ].
+		"aBlElement forceLayout" ]
 ]
 
 { #category : #private }
