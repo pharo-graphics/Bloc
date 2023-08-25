@@ -17,7 +17,7 @@ BlSvgExamplesTest >> exampleSelectors [
 { #category : #tests }
 BlSvgExamplesTest >> exampleSelectorsWithErrors [
 	
-	^ #(pathTiger pathTree transformations)
+	^ #( pathTree transformations)
 ]
 
 { #category : #tests }
