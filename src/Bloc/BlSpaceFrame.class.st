@@ -76,11 +76,11 @@ BlSpaceFrame >> initializePhases [
 	self addPhases: { 
 		BlSpaceFrameIdlePhase new.
 		BlSpaceFrameHostValidationPhase new.
-		BlSpaceFrameTaskPhase new.
-		BlSpaceFrameEventPhase new.
-		BlSpaceFrameLayoutPhase new.
+		BlSpaceFrameTaskPhase new. " animation as an example "
+		BlSpaceFrameEventPhase new. " generate BlMouse events from host mouse event as an example "
+		BlSpaceFrameLayoutPhase new. " layouting all elements that requested layout "
 		BlSpaceFrameDrawingValidationPhase new.
-		BlSpaceFrameDrawingPhase new }
+		BlSpaceFrameDrawingPhase new " drawing invalidate elements  "}
 ]
 
 { #category : #private }
