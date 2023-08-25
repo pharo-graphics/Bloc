@@ -139,7 +139,9 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-SVG' with: [
 					spec requires: #(#'Bloc' #'XMLParser') ];
 				package: #'Bloc-SVG-Tests' with: [
-					spec requires: #(#'Bloc-SVG') ]
+					spec requires: #(#'Bloc-SVG') ];
+				package: #'Bloc-Alexandrie-SVG' with: [
+					spec requires: #(#'Bloc-Alexandrie' #'Bloc-SVG') ].
 
-			].
+			]
 ]
