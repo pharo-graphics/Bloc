@@ -719,6 +719,19 @@ BlElementChildrenTest >> testFirstCommonParentifFoundifNone [
 ]
 
 { #category : #tests }
+BlElementChildrenTest >> testHasChildren [
+
+	| aContainer |
+	self deny: (BlElement new) hasChildren.
+	
+	aContainer := self multipleChildren.
+	self assert: aContainer hasChildren.
+	
+	aContainer := self hierarchyChildren.
+	self assert: aContainer hasChildren.
+]
+
+{ #category : #tests }
 BlElementChildrenTest >> testIsFirstChild [
 
 	| aContainer aChild |
