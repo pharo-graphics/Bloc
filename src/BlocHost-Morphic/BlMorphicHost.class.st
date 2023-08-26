@@ -35,7 +35,7 @@ BlMorphicHost class >> example [
 	aHost := BlMorphicHost new.
 	aHost containerMorph: aMorph.
 
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace host: aHost.
 	aSpace show.
 

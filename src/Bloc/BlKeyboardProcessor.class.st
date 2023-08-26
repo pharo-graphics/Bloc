@@ -127,6 +127,7 @@ BlKeyboardProcessor >> processKeyDown: anEvent [
 	aShortcutEvent := BlShortcutEvent new.
 	aShortcutEvent buffer: self buffer.
 	aShortcutEvent target: aTarget.
+	aShortcutEvent modifiers: anEvent modifiers.
 
 	self telemetry
 		timeSync: [ 'Fire shortcut event ' ]

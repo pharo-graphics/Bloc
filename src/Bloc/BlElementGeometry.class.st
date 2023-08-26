@@ -21,8 +21,9 @@ BlElementGeometry >> asElement [
 ]
 
 { #category : #'geometry testing' }
-BlElementGeometry >> containsPoint: aPoint in: aBlElement [
-	"Answer whether aPoint is contained by a this geometry."
+BlElementGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+	"Answer whether aPoint is contained by this geometry.
+	Assume aPoint is already inside the geometry bounds rectangle."
 	
 	^ self subclassResponsibility
 ]

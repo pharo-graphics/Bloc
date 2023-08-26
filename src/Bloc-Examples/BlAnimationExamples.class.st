@@ -6,7 +6,7 @@ DOES NOT WORK
 "
 Class {
 	#name : #BlAnimationExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#traits : 'TBlExample',
 	#classTraits : 'TBlExample classTrait',
 	#category : #'Bloc-Examples-Animation'
@@ -14,33 +14,40 @@ Class {
 
 { #category : #examples }
 BlAnimationExamples class >> ballsAnim [
+
 	<script: 'self ballsAnim'>
-	|space els anims|
+	| space els anims |
 	anims := OrderedCollection new.
 	els := OrderedCollection new.
 
-	(1 to:100) do: [:i| |el tr alp ii| 
+	(1 to: 100) do: [ :i |
+		| el tr alp ii |
 		ii := i % 25.
-		el := (BlEllipseGeometry new extent: 30@30) asElement 
-		background: (Color white alpha: 0);
-		relocate: (ii*15)@10.
-			
-		tr := BlTransformAnimation new
-			target: el;
-			transformDo: [ :aBuilder | aBuilder translateBy: (ii*15) @(500 -(30*((i/25)ceiling) )) ];
-			delay: 80 milliSeconds * i;
-			duration: 500 milliSeconds;
-			easing: BlEasing bounceOut.
-			
-		alp := BlColorTransition new
-					from: (Color white alpha: 0);
-					to: Color random;
-					delay: 80 milliSeconds * i;
-					duration: 100 milliSeconds;
-					onStepDo: [ :c | el background: c].
-		anims addAll: {tr.alp}.els add: el ].
+		el := (BlEllipseGeometry new extent: 30 @ 30) asElement
+			      background: (Color white alpha: 0);
+			      position: ii * 15 @ 10.
 
-	space := BlSpace new.
+		tr := BlTransformAnimation new
+			      target: el;
+			      transformDo: [ :aBuilder |
+				      aBuilder translateBy:
+						      ii * 15 @ (500 - (30 * (i / 25) ceiling)) ];
+			      delay: 80 milliSeconds * i;
+			      duration: 500 milliSeconds;
+			      easing: BlEasing bounceOut.
+
+		alp := BlColorTransition new
+			       from: (Color white alpha: 0);
+			       to: Color random;
+			       delay: 80 milliSeconds * i;
+			       duration: 100 milliSeconds;
+			       onStepDo: [ :c | el background: c ].
+		anims addAll: {
+				tr.
+				alp }.
+		els add: el ].
+
+	space := BlOSpace new.
 	space root addChildren: els.
 	space show.
 
@@ -60,39 +67,44 @@ BlAnimationExamples class >> bouncingText [
 
 { #category : #examples }
 BlAnimationExamples class >> sequential [
+
 	<script: 'self sequential'>
 	| space element translation scale sequential |
-	
 	translation := (BlTransformAnimation translate: 300 @ 300)
-		easing: BlEasing bounceOut;
-		duration: 2 seconds.
+		               easing: BlEasing bounceOut;
+		               duration: 2 seconds.
 
 	scale := (BlTransformAnimation scale: 2 @ 2)
-		easing: BlEasing bounceOut;
-		duration: 2 seconds.
+		         easing: BlEasing bounceOut;
+		         duration: 2 seconds.
 
-	sequential := BlSequentialAnimation new addAll: { translation. scale }.
-	
+	sequential := BlSequentialAnimation new addAll: {
+			              translation.
+			              scale }.
+
 	element := BlElement new
-		background: Color blue;
-		size: 100 @ 100;
-		relocate: 100 @ 100.	
+		           background: Color blue;
+		           size: 100 @ 100;
+		           position: 100 @ 100.
 	element addAnimation: sequential.
-	
-	space := BlSpace new.
+
+	space := BlOSpace new.
 	space root addChild: element.
 	space show
 ]
 
 { #category : #'examples - sequential animation' }
 BlAnimationExamples >> _1_1_sequential_addFirstChild [
-	<gtExample>
+	<sampleInstance>
+	
 	| aSequentialAnimation |
 
 	aSequentialAnimation := self sequentialAnimationWithDelayAndTwoLoops.
 	aSequentialAnimation add: (BlAnimation new duration: self firstSequentialDuration; loops: self firstSequentialLoops).
 	
-	self assert: aSequentialAnimation duration equals: self firstSequentialDuration * self firstSequentialLoops.
+	self 
+		assert: aSequentialAnimation duration 
+		equals: self firstSequentialDuration * self firstSequentialLoops.
 	
 	^ aSequentialAnimation
 ]
@@ -1373,8 +1385,24 @@ BlAnimationExamples >> secondSequentialLoops [
 ]
 
 { #category : #'examples - sequential animation' }
+BlAnimationExamples >> sequentialAddFirstChild [
+	<sampleInstance>
+	
+	| aSequentialAnimation |
+
+	aSequentialAnimation := self sequentialAnimationWithDelayAndTwoLoops.
+	aSequentialAnimation add: (BlAnimation new duration: self firstSequentialDuration; loops: self firstSequentialLoops).
+	
+	self 
+		assert: aSequentialAnimation duration 
+		equals: self firstSequentialDuration * self firstSequentialLoops.
+	
+	^ aSequentialAnimation
+]
+
+{ #category : #'examples - sequential animation' }
 BlAnimationExamples >> sequentialAnimation [
-	<gtExample>
+	<sampleInstance>
 	| aSequentialAnimation |
 
 	aSequentialAnimation := BlSequentialAnimation new.
@@ -1383,7 +1411,7 @@ BlAnimationExamples >> sequentialAnimation [
 	self assert: aSequentialAnimation duration equals: 0 seconds.
 	self assert: aSequentialAnimation delay equals: 0 seconds.
 	self assert: aSequentialAnimation loops equals: 1.
-	self assert: aSequentialAnimation repeats equals: 0.
+	"self assert: aSequentialAnimation repeats equals: 0. repeats is undefined so comment it for now"
 	self assert: aSequentialAnimation progress equals: 0.
 	self assert: aSequentialAnimation isStarted not.
 	self assert: aSequentialAnimation isRunning not.
@@ -1426,7 +1454,7 @@ BlAnimationExamples >> sequentialAnimationWithDelayAndTwoLoops [
 	self assert: aSequentialAnimation duration equals: 0 seconds.
 	self assert: aSequentialAnimation delay equals: self exampleDelay.
 	self assert: aSequentialAnimation loops equals: 2.
-	self assert: aSequentialAnimation repeats equals: 0.
+	"self assert: aSequentialAnimation repeats equals: 0. repeats is undefined so comment it for now"
 	self assert: aSequentialAnimation progress equals: 0.
 	self assert: aSequentialAnimation isStarted not.
 	self assert: aSequentialAnimation isRunning not.

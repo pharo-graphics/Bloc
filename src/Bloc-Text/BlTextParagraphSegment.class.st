@@ -7,8 +7,6 @@ I an already measured abstract paragraph segment. I'm a composite to design line
 Class {
 	#name : #BlTextParagraphSegment,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'from',
 		'to',
@@ -63,12 +61,11 @@ BlTextParagraphSegment >> descent [
 { #category : #accessing }
 BlTextParagraphSegment >> extent [
 
-	^ self width @ self height
+	^ width @ height
 ]
 
 { #category : #accessing }
 BlTextParagraphSegment >> from [
-	<return: #Number>
 
 	^ from
 ]
@@ -124,7 +121,6 @@ BlTextParagraphSegment >> right [
 
 { #category : #accessing }
 BlTextParagraphSegment >> to [
-	<return: #Number>
 
 	^ to
 ]

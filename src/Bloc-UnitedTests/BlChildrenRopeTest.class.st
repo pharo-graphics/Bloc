@@ -12,18 +12,21 @@ Class {
 
 { #category : #fixture }
 BlChildrenRopeTest >> newChildrenCollection [
+
 	^ BlChildrenRope new
 ]
 
-{ #category : #metadata }
+{ #category : #'as yet unclassified' }
 BlChildrenRopeTest >> originClassName [
 	"This test was generated from..."
+
 	^ 'BlChildrenRopeExamples'
 ]
 
 { #category : #tests }
 BlChildrenRopeTest >> testEmptyChildrenExplicitCreation [
-	<gtExample>
+
+	<sampleInstance>
 	| theChildren |
 	theChildren := BlChildrenRope new.
 	self assert: theChildren size equals: 0.

@@ -126,6 +126,12 @@ BlMorphicWindowHostSpace >> needsRebuild [
 	^ false
 ]
 
+{ #category : #initialization }
+BlMorphicWindowHostSpace >> newBlHostRendererSurface [
+
+	^ BlHostRendererFormSurface newForHostSpace: self
+]
+
 { #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.

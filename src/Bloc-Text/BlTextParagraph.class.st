@@ -32,8 +32,6 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #BlTextParagraph,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'text',
 		'line',
@@ -41,7 +39,6 @@ Class {
 		'maxWidth',
 		'end',
 		'session',
-		'scale',
 		'baselineMeasurer'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
@@ -97,7 +94,6 @@ BlTextParagraph >> baselineMeasurer: aBlTextParagraphBaselineMeasurer [
 
 { #category : #'paragraph - measuring' }
 BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
-
 	"Measure and create lines with text spans from provided text based on attributes and layout properties (maximum width / height)"
 
 	| anIterator paragraphMeasurer |
@@ -107,13 +103,14 @@ BlTextParagraph >> basicMeasureOn: aHostSpanMeasurer [
 	text isEmpty ifTrue: [ paragraphMeasurer measureSpan: self emptySpan ].
 
 	anIterator := text iterator.
-	[ 
-	anIterator hasNext and: [ 
-		line isEmpty or: [ paragraphMeasurer hasAvailableSpace ] ] ] 
-		whileTrue: [ "If we pass #hasNext check we will definitely move to the next span,
-		so can do the same with position"
-			paragraphMeasurer movePosition: anIterator position + 1.
-			paragraphMeasurer measureSpan: anIterator nextSpan ].
+	[	anIterator hasNext and: [
+		line isEmpty or: [
+		paragraphMeasurer hasAvailableSpace ] ] ] whileTrue: [
+			"If we pass #hasNext check we will definitely move to the next span,
+			so can do the same with position"
+			paragraphMeasurer
+				movePosition: anIterator position + 1;
+				measureSpan: anIterator nextSpan ].
 
 	"measurer creates a line with baseline set to 0@0"
 	line := paragraphMeasurer line.
@@ -138,17 +135,6 @@ BlTextParagraph >> descent [
 	"Return an descent of the last line in a paragraph"
 
 	^ line descent
-]
-
-{ #category : #'paragraph - rendering' }
-BlTextParagraph >> drawOn: aCanvas [
-	"Render myself on a given canvas.
-	Note: I double dispatch through aCanvas to support multiple completely different canvasses"
-
-	session == Smalltalk session
-		ifFalse: [ ^ self ].
-
-	aCanvas drawTextParagraph: self
 ]
 
 { #category : #'paragraph - measuring' }
@@ -204,6 +190,12 @@ BlTextParagraph >> initialize [
 	line := BlTextParagraphLine new
 ]
 
+{ #category : #testing }
+BlTextParagraph >> isEmpty [
+
+	^ self line isEmpty
+]
+
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> left [
 	"Return a visual left coordinate of the text (left-most rendered pixel)"
@@ -211,10 +203,28 @@ BlTextParagraph >> left [
 	^ line left
 ]
 
+{ #category : #accessing }
+BlTextParagraph >> line [
+
+	^ line
+]
+
+{ #category : #'api - instantiation' }
+BlTextParagraph >> maxHeight [
+
+	^ maxHeight
+]
+
 { #category : #'api - instantiation' }
 BlTextParagraph >> maxHeight: aNumber [
 
 	maxHeight := aNumber
+]
+
+{ #category : #'api - instantiation' }
+BlTextParagraph >> maxWidth [
+
+	^ maxWidth
 ]
 
 { #category : #'api - instantiation' }
@@ -282,12 +292,6 @@ BlTextParagraph >> right [
 ]
 
 { #category : #accessing }
-BlTextParagraph >> scale: aNumber [
-
-	scale := aNumber
-]
-
-{ #category : #accessing }
 BlTextParagraph >> session [
 
 	^ session
@@ -331,7 +335,6 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 	and evaluate a found block if such span was found or evaluate an exception block
 	with the closest span to a point"
 	<return: #BlTextParagraphSegmentLeaf>
-
 
 	^ line spans
 		findBinary: [ :aParagraphSpan |

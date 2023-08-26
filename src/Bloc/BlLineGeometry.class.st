@@ -19,7 +19,7 @@ BlLineGeometry class >> from: aFromPoint to: aToPoint [
 ]
 
 { #category : #'geometry testing' }
-BlLineGeometry >> containsPoint: aPoint in: aBlElement [
+BlLineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry"
 
 	^ aPoint

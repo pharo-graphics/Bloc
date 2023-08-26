@@ -1,6 +1,6 @@
 Class {
 	#name : #BlSubRopeExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Rope'
 }
 

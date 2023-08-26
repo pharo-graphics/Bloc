@@ -4,7 +4,7 @@ I contain examples of space related events
 "
 Class {
 	#name : #BlSpaceEventExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Event'
 }
 
@@ -29,7 +29,7 @@ BlSpaceEventExamples >> ignoreSpaceEventsAfterCloseRequest [
 BlSpaceEventExamples >> space [
 	<gtExample>
 	
-	^ BlSpace new host: BlHeadlessHost new
+	^ BlOSpace new host: BlHeadlessHost new
 ]
 
 { #category : #'show / close' }

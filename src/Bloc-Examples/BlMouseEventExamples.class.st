@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMouseEventExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Event'
 }
 
@@ -103,100 +103,97 @@ BlMouseEventExamples >> parent [
 
 { #category : #'examples - find event target' }
 BlMouseEventExamples >> parentWithClip [
+
 	<gtExample>
 	| gray red blue |
-	
 	blue := self grandChild.
-	blue relocate: 100@50.
-	
+	blue position: 100 @ 50.
+
 	red := self child.
-	red relocate: 100@100.
+	red position: 100 @ 100.
 	red addChild: blue.
-	
+
 	gray := self parent.
 	gray clipChildren: true.
 	gray addChild: red.
 	gray forceLayout.
 
 	"on gray outside red and blue"
-	self assert: (gray findMouseEventTargetAt: 50@50) equals: gray.
-	
+	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
+
 	"on red inside gray but outside blue"
-	self assert: (gray findMouseEventTargetAt: 150@150) equals: red.
-	
+	self assert: (gray findMouseEventTargetAt: 150 @ 150) equals: red.
+
 	"on red outside blue and gray"
-	self assert: (gray findMouseEventTargetAt: 200@300) equals: nil.
-	
+	self assert: (gray findMouseEventTargetAt: 200 @ 300) equals: nil.
+
 	"on blue inside red and gray"
-	self assert: (gray findMouseEventTargetAt: 250@200) equals: blue.
-	
+	self assert: (gray findMouseEventTargetAt: 250 @ 200) equals: blue.
+
 	"on blue inside red but outside gray"
-	self assert: (gray findMouseEventTargetAt: 350@200) equals: nil.
-	
+	self assert: (gray findMouseEventTargetAt: 350 @ 200) equals: nil.
+
 	"on blue outside red and gray"
-	self assert: (gray findMouseEventTargetAt: 550@200) equals: nil.
-	
+	self assert: (gray findMouseEventTargetAt: 550 @ 200) equals: nil.
+
 	"outside of all"
-	self assert: (gray findMouseEventTargetAt: 700@500) equals: nil.
+	self assert: (gray findMouseEventTargetAt: 700 @ 500) equals: nil.
 
 	^ gray
-	
 ]
 
 { #category : #'examples - find event target' }
 BlMouseEventExamples >> parentWithoutClipChildWithClip [
+
 	<gtExample>
 	| gray red blue |
-
 	blue := self grandChild.
-	blue relocate: 100@50.
-	
+	blue position: 100 @ 50.
+
 	red := self child.
-	red relocate: 100@100.
+	red position: 100 @ 100.
 	red addChild: blue.
-	
+
 	gray := self parent.
 	gray clipChildren: false.
 	gray addChild: red.
 	gray forceLayout.
 
 	"on gray outside red and blue"
-	self assert: (gray findMouseEventTargetAt: 50@50) equals: gray.
-	
+	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
+
 	"on red inside gray but outside blue"
-	self assert: (gray findMouseEventTargetAt: 150@150) equals: red.
-	
+	self assert: (gray findMouseEventTargetAt: 150 @ 150) equals: red.
+
 	"on red outside blue and gray"
-	self assert: (gray findMouseEventTargetAt: 200@300) equals: red.
-	
+	self assert: (gray findMouseEventTargetAt: 200 @ 300) equals: red.
+
 	"on blue inside red and gray"
-	self assert: (gray findMouseEventTargetAt: 250@200) equals: blue.
-	
+	self assert: (gray findMouseEventTargetAt: 250 @ 200) equals: blue.
+
 	"on blue inside red but outside gray"
-	self assert: (gray findMouseEventTargetAt: 350@200) equals: blue.
-	
+	self assert: (gray findMouseEventTargetAt: 350 @ 200) equals: blue.
+
 	"on blue outside red and gray"
-	self assert: (gray findMouseEventTargetAt: 550@200) equals: nil.
-	
+	self assert: (gray findMouseEventTargetAt: 550 @ 200) equals: nil.
+
 	"outside of all"
-	self assert: (gray findMouseEventTargetAt: 700@500) equals: nil.
+	self assert: (gray findMouseEventTargetAt: 700 @ 500) equals: nil.
 
 	^ gray
-	
-	
 ]
 
 { #category : #'examples - find event target' }
 BlMouseEventExamples >> parentWithoutClipChildWithoutClip [
+
 	<gtExample>
 	| gray red blue |
-
 	blue := self grandChild.
-	blue relocate: 100@50.
+	blue position: 100 @ 50.
 
 	red := self child.
 	red clipChildren: false.
-	red relocate: 100@100.
+	red position: 100 @ 100.
 	red addChild: blue.
 
 	gray := self parent.
@@ -205,29 +202,27 @@ BlMouseEventExamples >> parentWithoutClipChildWithoutClip [
 	gray forceLayout.
 
 	"on gray outside red and blue"
-	self assert: (gray findMouseEventTargetAt: 50@50) equals: gray.
-	
+	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
+
 	"on red inside gray but outside blue"
-	self assert: (gray findMouseEventTargetAt: 150@150) equals: red.
-	
+	self assert: (gray findMouseEventTargetAt: 150 @ 150) equals: red.
+
 	"on red outside blue and gray"
-	self assert: (gray findMouseEventTargetAt: 200@300) equals: red.
-	
+	self assert: (gray findMouseEventTargetAt: 200 @ 300) equals: red.
+
 	"on blue inside red and gray"
-	self assert: (gray findMouseEventTargetAt: 250@200) equals: blue.
-	
+	self assert: (gray findMouseEventTargetAt: 250 @ 200) equals: blue.
+
 	"on blue inside red but outside gray"
-	self assert: (gray findMouseEventTargetAt: 350@200) equals: blue.
-	
+	self assert: (gray findMouseEventTargetAt: 350 @ 200) equals: blue.
+
 	"on blue outside red and gray"
-	self assert: (gray findMouseEventTargetAt: 550@200) equals: blue.
-	
+	self assert: (gray findMouseEventTargetAt: 550 @ 200) equals: blue.
+
 	"outside of all"
-	self assert: (gray findMouseEventTargetAt: 700@500) equals: nil.
+	self assert: (gray findMouseEventTargetAt: 700 @ 500) equals: nil.
 
 	^ gray
-	
-	
 ]
 
 { #category : #private }

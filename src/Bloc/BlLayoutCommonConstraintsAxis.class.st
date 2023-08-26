@@ -40,6 +40,18 @@ BlLayoutCommonConstraintsAxis >> matchParent [
 ]
 
 { #category : #accessing }
+BlLayoutCommonConstraintsAxis >> requestedHeightIn: anElement [
+
+	^ self resizer requestedHeightIn: anElement
+]
+
+{ #category : #accessing }
+BlLayoutCommonConstraintsAxis >> requestedWidthIn: anElement [
+
+	^ self resizer requestedWidthIn: anElement
+]
+
+{ #category : #accessing }
 BlLayoutCommonConstraintsAxis >> resizer [
 	<return: #BlLayoutResizer>
 

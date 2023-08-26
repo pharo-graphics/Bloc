@@ -9,8 +9,8 @@ Class {
 
 { #category : #initialization }
 BlMorphicFormSurfaceRenderer >> initializeForSurface: aSurface [
-	| anExternalForm |
 
+	| anExternalForm |
 	anExternalForm := BlExternalForm
 		extent: aSurface physicalSize asPoint
 		depth: 32.
@@ -30,12 +30,12 @@ BlMorphicFormSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRe
 
 { #category : #accessing }
 BlMorphicFormSurfaceRenderer >> spaceHostMorph [
-	<return: #BlMorphicSpaceHostMorph>
 
 	^ spaceHostMorph
 ]
 
 { #category : #accessing }
-BlMorphicFormSurfaceRenderer >> spaceHostMorph: aMorph [
-	spaceHostMorph := aMorph
+BlMorphicFormSurfaceRenderer >> spaceHostMorph: aBlMorphicSpaceHostMorph [
+
+	spaceHostMorph := aBlMorphicSpaceHostMorph
 ]

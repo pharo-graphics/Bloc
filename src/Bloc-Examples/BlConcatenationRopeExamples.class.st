@@ -1,10 +1,6 @@
-"
-I contain examples of a concatenation rope
-
-"
 Class {
 	#name : #BlConcatenationRopeExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Rope'
 }
 

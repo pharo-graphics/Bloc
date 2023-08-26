@@ -31,7 +31,7 @@ BlPolylineGeometry >> asElement [
 ]
 
 { #category : #'geometry testing' }
-BlPolylineGeometry >> containsPoint: aPoint in: aBlElement [
+BlPolylineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.
 	
 	Based on RSPolyline>>#basicIncludesPoint:"

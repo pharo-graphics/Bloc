@@ -5,18 +5,12 @@ I have been automatically converted and probably manually tweaked from BlBoundsM
 Class {
 	#name : #BlBoundsMatcherTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#category : #'Bloc-UnitedTests-Bounds'
 }
-
-{ #category : #metadata }
-BlBoundsMatcherTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlBoundsMatcherExamples'
-]
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartEqualParentStartWhenEquals [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartEqualParentStart.
@@ -29,7 +23,7 @@ BlBoundsMatcherTest >> testChildStartEqualParentStartWhenEquals [
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartEqualParentStartWhenGreater [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartEqualParentStart.
@@ -42,7 +36,7 @@ BlBoundsMatcherTest >> testChildStartEqualParentStartWhenGreater [
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartEqualParentStartWhenLess [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartEqualParentStart.
@@ -55,7 +49,7 @@ BlBoundsMatcherTest >> testChildStartEqualParentStartWhenLess [
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenEquals [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartGreaterThanParentStart.
@@ -68,7 +62,7 @@ BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenEquals [
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenGreater [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartGreaterThanParentStart.
@@ -81,7 +75,7 @@ BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenGreater [
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenLess [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartGreaterThanParentStart.
@@ -94,7 +88,7 @@ BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenLess [
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenEquals [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartLessThanParentStart.
@@ -107,7 +101,7 @@ BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenEquals [
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenGreater [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartLessThanParentStart.
@@ -120,7 +114,7 @@ BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenGreater [
 
 { #category : #tests }
 BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenLess [
-	<gtExample>
+	<sampleInstance>
 	| aMatcher |
 	aMatcher := BlBoundsMatcher new
 		constraints: BlBoundsMatcherConstraints new addChildStartLessThanParentStart.

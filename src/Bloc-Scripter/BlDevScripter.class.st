@@ -69,7 +69,7 @@ BlDevScripter >> continue [
 
 { #category : #initialization }
 BlDevScripter >> defaultSpace [
-	^ BlSpace new
+	^ BlOSpace new
 		title: 'Scripter';
 		extent: 800 @ 600;
 		host: BlMockedHost new.
@@ -181,7 +181,7 @@ BlDevScripter >> showSpace [
 
 { #category : #'accessing - space' }
 BlDevScripter >> space [
-	<return: #BlSpace>
+	<return: #BlOSpace>
 	^ space
 ]
 
@@ -195,7 +195,7 @@ BlDevScripter >> spaceWithElement [
 	"Return ${class:BlSpace}$ and ensure that the ==element== is its child
 	Useful when someone wants to display the resulting space (window) with the element.
 	It cannot be used during the script execution."
-	<return: #BlSpace>
+	<return: #BlOSpace>
 	self element space = self space ifFalse: [ 
 		self space addChild: self elementWithoutParent ].
 	^ self space

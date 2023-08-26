@@ -19,7 +19,17 @@ BlSimpleShadowEffect class >> color: aColor offset: anOffset [
 { #category : #'instance creation' }
 BlSimpleShadowEffect class >> default [
 
+	self
+		deprecated: 'Use #new instead'
+		transformWith: '`@receiver default' -> '`@receiver new'.
+
 	^ self color: (Color black alpha: 0.3) offset: 10 @ 10
+]
+
+{ #category : #'instance creation' }
+BlSimpleShadowEffect class >> new [
+
+	^ self color: Color black offset: 0@0
 ]
 
 { #category : #copying }
@@ -50,6 +60,7 @@ BlSimpleShadowEffect >> extraShadowSpace [
 BlSimpleShadowEffect >> initializeColor: aColor offset: aPoint [
 
 	self initialize.
+
 	color := aColor.
 	offset := aPoint asPoint
 ]

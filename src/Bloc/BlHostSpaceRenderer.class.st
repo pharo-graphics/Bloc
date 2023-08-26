@@ -13,8 +13,7 @@ BlHostSpaceRenderer >> initializeForSurface: aSurface [
 
 { #category : #rendering }
 BlHostSpaceRenderer >> renderSpace: aSpace [
-	"Render a space and return a collection of damaged rectangles"
-	<return: #Collection of: #Rectangle>
+	"Render a space and return a collection of damaged rectangles."
 	
 	^ self subclassResponsibility
 ]

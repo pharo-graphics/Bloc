@@ -23,21 +23,6 @@ BlSpaceEventListener >> focusProcessor [
 	^ self space focusProcessor
 ]
 
-{ #category : #accessing }
-BlSpaceEventListener >> gestureProcessor [
-	^ self space gestureProcessor
-]
-
-{ #category : #'gesture handlers' }
-BlSpaceEventListener >> gestureScrollEvent: anEvent [
-	self gestureProcessor handleGesture: anEvent
-]
-
-{ #category : #'event handling' }
-BlSpaceEventListener >> handleEvent: anEvent [
-	super handleEvent: anEvent
-]
-
 { #category : #'other handlers' }
 BlSpaceEventListener >> inputMethodEvent: anEvent [
 ]
@@ -59,6 +44,7 @@ BlSpaceEventListener >> keyboardProcessor [
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseDownEvent: anEvent [
+
 	self mouseProcessor handleMouseDown: anEvent.
 	self focusProcessor handleMouseDown: anEvent
 ]
@@ -75,23 +61,20 @@ BlSpaceEventListener >> mouseMoveEvent: anEvent [
 
 { #category : #accessing }
 BlSpaceEventListener >> mouseProcessor [
-	<return: #BlMouseProcessor>
 
 	^ self space mouseProcessor
 ]
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseUpEvent: anEvent [
+
 	self mouseProcessor handleMouseUp: anEvent
 ]
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseWheelEvent: anEvent [
-	self mouseProcessor processMouseScroll: anEvent
-]
 
-{ #category : #'other handlers' }
-BlSpaceEventListener >> rotateEvent: anEvent [
+	self mouseProcessor processMouseScroll: anEvent
 ]
 
 { #category : #accessing }
@@ -100,8 +83,8 @@ BlSpaceEventListener >> space [
 ]
 
 { #category : #accessing }
-BlSpaceEventListener >> space: anObject [
-	space := anObject
+BlSpaceEventListener >> space: aBlSpace [
+	space := aBlSpace
 ]
 
 { #category : #'window handlers' }
@@ -171,7 +154,7 @@ BlSpaceEventListener >> spaceMovedEvent: anEvent [
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceRedrawRequestedEvent: anEvent [
 	self space
-		beDirtyArea;
+		invalidateAll;
 		requestNextPulse
 ]
 
@@ -185,7 +168,7 @@ BlSpaceEventListener >> spaceResizedEvent: anEvent [
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceScaleFactorChangedEvent: anEvent [
 	self space
-		beDirtyArea;
+		invalidateAll;
 		requestNextPulse
 ]
 
@@ -194,35 +177,7 @@ BlSpaceEventListener >> spaceWakeUpEvent: anEvent [
 	self space requestNextPulse
 ]
 
-{ #category : #'other handlers' }
-BlSpaceEventListener >> swipeEvent: anEvent [
-]
-
 { #category : #'keyboard handlers' }
 BlSpaceEventListener >> textInputEvent: anEvent [
 	self keyboardProcessor processTextInput: anEvent
-]
-
-{ #category : #'touch handlers' }
-BlSpaceEventListener >> touchDownEvent: anEvent [
-	self touchProcessor handleTouchDown: anEvent
-]
-
-{ #category : #'touch handlers' }
-BlSpaceEventListener >> touchMoveEvent: anEvent [
-	self touchProcessor handleTouchMove: anEvent
-]
-
-{ #category : #accessing }
-BlSpaceEventListener >> touchProcessor [
-	^ self space touchProcessor
-]
-
-{ #category : #'touch handlers' }
-BlSpaceEventListener >> touchUpEvent: anEvent [
-	self touchProcessor handleTouchUp: anEvent
-]
-
-{ #category : #'other handlers' }
-BlSpaceEventListener >> zoomEvent: anEvent [
 ]

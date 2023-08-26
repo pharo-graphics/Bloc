@@ -34,6 +34,11 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Tests' with: [
 					spec requires: #(#Bloc 'BlocHost-Mock' ). ].
 
+			"Pull and slide"
+			spec package: #'Bloc-PullAndSlide'.
+			"Focus finder"
+			spec package: #'Bloc-FocusFinder'.
+			
 			"Animation"
 			spec 
 				package: #'Bloc-Animation' with: [
@@ -74,16 +79,25 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Alexandrie' with: [
 					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
 				package: #'Bloc-Alexandrie-Tests' with: [
+					spec requires: #('Bloc-Alexandrie') ];
+				package: #'Bloc-Text-Alexandrie-Examples' with: [
 					spec requires: #('Bloc-Alexandrie') ].
 
 			"Layout"
 			spec 
 				package: #'Bloc-Layout' with: [
 					spec requires: #('Bloc') ];
+				package: #'Bloc-Layout-Resizer' with: [
+					spec requires: #('Bloc-Layout' ) ];
 				package: #'Bloc-LayoutZoomable' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-Animation') ].
 				"Layout depends also on compositor. See https://github.com/pharo-graphics/Bloc/issues/87"
 
+			"Infinite"
+			spec 
+				package: #'Bloc-Infinite' with: [
+					spec requires: #('Bloc') ].
+			
 			"Calypso & Spec2 Extensions"
 			spec 
 				package: #'Bloc-Spec2';
@@ -107,12 +121,14 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #(#'Bloc-DevTool') ];
 				package: #'Bloc-Text-Examples' with: [
 					spec requires: #(#'Bloc-Examples') ];
+				package: #'Bloc-Infinite-Tests' with: [
+					spec requires: #('Bloc-Infinite') ];
 				package: #'Bloc-Layout-Tests' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ];
-				package: #'Bloc-Layout-Examples' with: [
-					spec requires: #('Bloc-Layout') ];
-				package: #'Bloc-Docs' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Text-Elements') ].
+					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ].
+
+			spec
+				package: #'Bloc-Theme' with: [
+					spec requires: #(#'Bloc') ]
 
 			].
 ]

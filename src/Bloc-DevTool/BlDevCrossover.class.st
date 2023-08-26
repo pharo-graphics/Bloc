@@ -31,7 +31,7 @@ BlDevCrossover >> initialize [
 	crossover preventMeAndChildrenMouseEvents.
 	crossover constraintsDo: [ :c |
 		c ignoreByLayout.
-		c infinite holder startIgnoring.
+		"c infinite holder startIgnoring."
 		c horizontal matchParent.
 		c vertical matchParent ].
 
@@ -71,8 +71,8 @@ BlDevCrossover >> initialize [
 
 { #category : #'api - hooks' }
 BlDevCrossover >> mouseMoveEvent: anEvent [
-	verticalLine relocate: anEvent localPosition x @ 0.
-	horizontalLine relocate: 0 @ anEvent localPosition y.
+	verticalLine position: anEvent localPosition x @ 0.
+	horizontalLine position: 0 @ anEvent localPosition y.
 
 	topRightContainer constraintsDo: [ :c |
 		c frame horizontal weight: 1 - (anEvent localPosition x / (crossover width max: 1)).

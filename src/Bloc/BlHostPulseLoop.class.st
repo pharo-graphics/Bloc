@@ -15,9 +15,9 @@ Class {
 		'hostClass',
 		'loopProcess',
 		'pulsePeriodMS',
-		'waitingDelay',
 		'msToWaitForBackgroundProcess',
-		'latestPulseMS'
+		'pulseStartMS',
+		'pulseDurationMS'
 	],
 	#category : #'Bloc-Universe - Host'
 }
@@ -49,7 +49,7 @@ BlHostPulseLoop >> defaultPulsePeriod [
 	^ 15 milliSeconds
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #debug }
 BlHostPulseLoop >> forceStartNewUIProcess [
 	"I should only be used by the logic for opening the debugger.
 	
@@ -63,7 +63,7 @@ BlHostPulseLoop >> forceStartNewUIProcess [
 	loopProcess resume.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #debug }
 BlHostPulseLoop >> forceStartOfUIProcess: aProces [
 	"I should only be used by the logic for closing the debugger."
 	
@@ -88,11 +88,7 @@ BlHostPulseLoop >> initialize [
 
 	super initialize.
 
-	self pulsePeriod: self defaultPulsePeriod.
-
-	"This initializes the internal Semaphore, but the milliseconds
-	to wait are set after each pulse."
-	waitingDelay := Delay forMilliseconds: 0.
+	self pulsePeriod: self defaultPulsePeriod
 ]
 
 { #category : #testing }
@@ -116,9 +112,12 @@ BlHostPulseLoop >> loopProcess [
 { #category : #'loop process' }
 BlHostPulseLoop >> newLoopBlock [
 
-	^ [ [ latestPulseMS := Time millisecondClockValue.
+	^ [ [
+			pulseStartMS := Time millisecondClockValue.
 
 			(BlParallelUniverse forHost: hostClass) pulse.
+
+			pulseDurationMS := Time millisecondClockValue - pulseStartMS.
 
 			self waitUntilNextPulse 
 		
@@ -184,25 +183,15 @@ BlHostPulseLoop >> stop [
 BlHostPulseLoop >> waitUntilNextPulse [
 	"Wait the appropriate amount of time for the next pulse"
 
-	| msToWait shouldForceDelay minWaitMS |
-	"msToWait is the amount of time to wait for the next pulse.
-	Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
+	| msToWait |
+	"Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
 	(meaning that we shouldn't wait for the next pulse)"
-	msToWait := pulsePeriodMS - (Time millisecondClockValue - latestPulseMS).
 
-	"But also ensure that background processes get some execution time.
-	If the nextReadyProcess has more priority than the IDLE process"
-	shouldForceDelay :=
-		Processor nextReadyProcess priority > Processor lowestPriority.
-	minWaitMS :=
-		shouldForceDelay
-			ifTrue: [ msToWaitForBackgroundProcess ]
-			ifFalse: [ 0 ].
-
-	BlPulseStatSignal milliseconds: msToWait delayForced: shouldForceDelay.
-
-	msToWait := msToWait min: pulsePeriodMS max: minWaitMS.
-
-	msToWait = 0 ifFalse: [ waitingDelay setDelay: msToWait; wait ]
-
+	"No need to wait"	
+	pulseDurationMS >= pulsePeriodMS ifTrue: [
+		"Processor yield. maybe?" ^ self ].
+	
+	"Need to wait"
+	msToWait := pulsePeriodMS - pulseDurationMS.
+	(Delay forMilliseconds: msToWait) wait
 ]

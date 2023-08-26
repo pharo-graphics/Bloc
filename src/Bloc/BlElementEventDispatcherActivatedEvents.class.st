@@ -14,6 +14,7 @@ Class {
 		'ExtentChanged',
 		'LayoutChanged',
 		'LayoutComputed',
+		'MousePickedOutside',
 		'PositionChanged',
 		'PositionInSpaceChanged',
 		'RemovedFromParent',
@@ -73,6 +74,12 @@ BlElementEventDispatcherActivatedEvents class >> LayoutChanged [
 BlElementEventDispatcherActivatedEvents class >> LayoutComputed [
 	"This method was automatically generated"
 	^ LayoutComputed value
+]
+
+{ #category : #'accessing - flags' }
+BlElementEventDispatcherActivatedEvents class >> MousePickedOutside [
+	"This method was automatically generated"
+	^ MousePickedOutside value 
 ]
 
 { #category : #'accessing - flags' }
@@ -153,6 +160,7 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 		#SelectionLost.
 		#TransformationChanged.
 		#TransformationInSpaceChanged.
+		#MousePickedOutside.
 	}
 
 
@@ -212,6 +220,12 @@ BlElementEventDispatcherActivatedEvents >> addLayoutChanged [
 BlElementEventDispatcherActivatedEvents >> addLayoutComputed [
 	"This method was automatically generated"
 	value := value | LayoutComputed value
+]
+
+{ #category : #'flags - add' }
+BlElementEventDispatcherActivatedEvents >> addMousePickedOutside [
+	"This method was automatically generated"
+	value := value | MousePickedOutside value
 ]
 
 { #category : #'flags - add' }
@@ -317,6 +331,12 @@ BlElementEventDispatcherActivatedEvents >> clearLayoutComputed [
 ]
 
 { #category : #'flags - clear' }
+BlElementEventDispatcherActivatedEvents >> clearMousePickedOutside [
+	"This method was automatically generated"
+	value := value & (MousePickedOutside value bitInvert)
+]
+
+{ #category : #'flags - clear' }
 BlElementEventDispatcherActivatedEvents >> clearPositionChanged [
 	"This method was automatically generated"
 	value := value & (PositionChanged value bitInvert)
@@ -416,6 +436,12 @@ BlElementEventDispatcherActivatedEvents >> hasLayoutChanged [
 BlElementEventDispatcherActivatedEvents >> hasLayoutComputed [
 	"This method was automatically generated"
 	^ (value & LayoutComputed value) ~= 0
+]
+
+{ #category : #'flags - testing' }
+BlElementEventDispatcherActivatedEvents >> hasMousePickedOutside [
+	"This method was automatically generated"
+	^ (value & MousePickedOutside value) ~= 0
 ]
 
 { #category : #'flags - testing' }

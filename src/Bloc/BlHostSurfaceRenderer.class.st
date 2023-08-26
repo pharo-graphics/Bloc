@@ -6,6 +6,7 @@ Class {
 
 { #category : #initialization }
 BlHostSurfaceRenderer >> initializeForSurface: aSurface [
+
 	self subclassResponsibility
 ]
 

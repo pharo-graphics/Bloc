@@ -14,29 +14,30 @@ Class {
 
 { #category : #'adding / removing' }
 BlElementCurrentProperties >> addProperties: aCollectionOfElementProperties [
+
 	| anythingChanged |
-	
 	anythingChanged := false.
-	aCollectionOfElementProperties do: [ :eachProperty | anythingChanged := anythingChanged or: (self basicAddProperty: eachProperty) ].
-	anythingChanged
-		ifTrue: [ self onPropertiesChanged ]
+	aCollectionOfElementProperties do: [ :eachProperty |
+		anythingChanged := anythingChanged or: (self basicAddProperty: eachProperty) ].
+	anythingChanged ifTrue: [ self onPropertiesChanged ]
 ]
 
 { #category : #'adding / removing' }
 BlElementCurrentProperties >> addProperty: aBlElementProperty [
+
 	(self basicAddProperty: aBlElementProperty)
 		ifTrue: [ self onPropertiesChanged ]
 ]
 
 { #category : #converting }
 BlElementCurrentProperties >> asArray [
+
 	^ properties asArray
 ]
 
 { #category : #private }
 BlElementCurrentProperties >> basicAddProperty: aBlElementProperty [
-	"Return true if properties changed, false otherwise"
-	<return: #Boolean>
+	"Return true if properties changed, false otherwise."
 
 	properties
 		at: aBlElementProperty type
@@ -48,11 +49,15 @@ BlElementCurrentProperties >> basicAddProperty: aBlElementProperty [
 					anExistingPropertyWithStatus clearJustAdded.
 					false ]
 				ifFalse: [
-					anExistingPropertyWithStatus property: aBlElementProperty.
-					anExistingPropertyWithStatus clearApplied.
-					anExistingPropertyWithStatus addJustAdded.
+					anExistingPropertyWithStatus
+						property: aBlElementProperty;
+						clearApplied;
+						addJustAdded.
 					true ] ]
-		ifAbsentPut: [ (BlElementPropertyWithStatus new property: aBlElementProperty) addJustAdded ].
+		ifAbsentPut: [
+			(BlElementPropertyWithStatus new
+				property: aBlElementProperty;
+				yourself) addJustAdded ].
 
 	^ true
 ]
@@ -61,7 +66,6 @@ BlElementCurrentProperties >> basicAddProperty: aBlElementProperty [
 BlElementCurrentProperties >> basicRemoveProperty: aBlElementProperty [
 	"We do not actually remove a property, we simply mark it as to be removed.
 	This will later give a property a chance to clean up the element"
-	<return: #Boolean>
 
 	properties
 		at: aBlElementProperty type
@@ -74,24 +78,28 @@ BlElementCurrentProperties >> basicRemoveProperty: aBlElementProperty [
 
 { #category : #accessing }
 BlElementCurrentProperties >> element [
+
 	^ element
 ]
 
 { #category : #accessing }
-BlElementCurrentProperties >> element: anObject [
-	element := anObject
+BlElementCurrentProperties >> element: aBlElement [
+
+	element := aBlElement
 ]
 
 { #category : #'adding / removing' }
 BlElementCurrentProperties >> flushPropertiesToRemove [
-	properties := properties reject: [ :eachPropertyWithStatus | eachPropertyWithStatus isToBeRemoved ].
+
+	properties := properties reject: [ :eachPropertyWithStatus |
+		eachPropertyWithStatus isToBeRemoved ].
 	self maybeResolvedProperties flushPropertiesToRemove
 ]
 
 { #category : #initialization }
 BlElementCurrentProperties >> initialize [
+
 	super initialize.
-	
 	properties := Dictionary new.
 	resolvedProperties := BlElementResolvedProperties new.
 	isDirty := false
@@ -99,42 +107,47 @@ BlElementCurrentProperties >> initialize [
 
 { #category : #accessing }
 BlElementCurrentProperties >> markClean [
+
 	isDirty := false
 ]
 
 { #category : #accessing }
 BlElementCurrentProperties >> markDirty [
+
 	isDirty := true.
 	resolvedProperties := nil
 ]
 
 { #category : #accessing }
 BlElementCurrentProperties >> maybeResolvedProperties [
+
 	^ resolvedProperties ifNil: [ BlElementUnresolvedProperties new ]
 ]
 
 { #category : #testing }
 BlElementCurrentProperties >> needsPropertiesComputation [
-	<return: #Boolean>
 
 	^ resolvedProperties isNil
 ]
 
 { #category : #private }
 BlElementCurrentProperties >> onPropertiesChanged [
+
 	self element requestPropertiesComputation
 ]
 
 { #category : #copying }
 BlElementCurrentProperties >> postCopy [
+
 	properties := properties copy
 ]
 
 { #category : #accessing }
 BlElementCurrentProperties >> properties [
-	<return: #Dictionary>
+	"Answer a `Dictionary` with the properties"
 
-	^ properties collect: [ :eachPropertyWithStatus |  eachPropertyWithStatus property ]
+	^ properties collect: [ :eachPropertyWithStatus |
+		  eachPropertyWithStatus property ]
 ]
 
 { #category : #converting }

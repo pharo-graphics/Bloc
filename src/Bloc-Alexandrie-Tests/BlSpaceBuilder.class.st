@@ -112,7 +112,7 @@ BlSpaceBuilder >> buildSpace [
 		host: host;
 		extent: spaceExtent.
 
-	"Hacky way to prepare stuff without showing the space:"
+	self flag: #todo. "Hacky way to prepare stuff without showing the space:"
 	space root
 		size: spaceExtent;
 		forceLayout.
@@ -135,9 +135,9 @@ BlSpaceBuilder >> initialize [
 
 	super initialize.
 	
-	space := BlSpace new.
+	space := BlOSpace new.
 	spaceExtent := 100 asPoint.
-	host := BlMorphicWindowHost new.
+	host := BlOSWindowSDL2Host new.
 
 	random := Random seed: 7.
 	alphabetGenerator := Generator on: [ :generator |

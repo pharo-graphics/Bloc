@@ -71,7 +71,7 @@ BlCollectionRopeIteratorExamples >> nextLineIndicesWithCrlf_18 [
 
 { #category : #'examples - next line' }
 BlCollectionRopeIteratorExamples >> nextLineWithCr_0 [
-	<gtExample>
+	<sampleInstance>
 	| anIterator aNextLine |
 	
 	anIterator := (BlCollectionRope collection: ('Line 1', String cr, 'Line 2', String cr, String cr, 'Line 4')) iterator.

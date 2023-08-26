@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMouseDownEvent,
-	#superclass : #BlMouseEvent,
+	#superclass : #BlMousePickEvent,
 	#category : #'Bloc-Events'
 }
 
@@ -9,7 +9,7 @@ BlMouseDownEvent class >> button: aMouseButton [
 	"Create a sample button down event for a given button for testing purposes"
 	<return: #BlMouseDownEvent>
 
-	^ self new
+	^ aMouseButton mouseDownEventClass new
 		button: aMouseButton;
 		position: 0@0;
 		screenPosition: 0@0;
@@ -38,6 +38,12 @@ BlMouseDownEvent class >> secondary [
 	<return: #BlMouseDownEvent>
 	
 	^ self button: BlMouseButton secondary
+]
+
+{ #category : #converting }
+BlMouseDownEvent >> asMouseOutsideEvent [
+
+	^ BlMouseDownOutsideEvent new originalEvent: self; canBePropagated: false; yourself
 ]
 
 { #category : #testing }

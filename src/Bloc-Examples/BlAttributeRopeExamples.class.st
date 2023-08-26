@@ -4,13 +4,13 @@ I contain examples of an attribute rope
 "
 Class {
 	#name : #BlAttributeRopeExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - attributes' }
 BlAttributeRopeExamples >> attributes_empty_0_to_0 [
-	<gtExample>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	
 	aRope := self small_empty.

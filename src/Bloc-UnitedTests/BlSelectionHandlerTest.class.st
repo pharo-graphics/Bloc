@@ -15,7 +15,7 @@ BlSelectionHandlerTest class >> grid [
 	
 	element := self new testContainerWithOneGridAndVisualHandler.
 	
-	space := BlSpace new.
+	space := BlOSpace new.
 	space extent: 800@600.
 	space root addChild: element.
 	space show
@@ -28,7 +28,7 @@ BlSelectionHandlerTest class >> gridRow [
 	
 	element := self new testContainerWithThreeGridsAndVisualHandler.
 	
-	space := BlSpace new.
+	space := BlOSpace new.
 	space extent: 955@600.
 	space root addChild: element.
 	space show
@@ -43,7 +43,6 @@ BlSelectionHandlerTest >> originClassName [
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testCell [
 
-	<gtExample>
 	^ BlElement new
 		  size: 75 @ 75;
 		  background: Color random paler;
@@ -60,7 +59,6 @@ BlSelectionHandlerTest >> testCell [
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainer [
 
-	<gtExample>
 	^ BlElement new
 		  constraintsDo: [ :c | 
 			  c horizontal matchParent.
@@ -71,35 +69,30 @@ BlSelectionHandlerTest >> testContainer [
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithOneGrid [
 
-	<gtExample>
 	^ self testContainer addChild: self testGridWith11Cells
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithOneGridAndVisualHandler [
 
-	<gtExample>
 	^ self testContainerWithOneGrid addEventHandler: self testVisualHandler
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithThreeGrids [
 
-	<gtExample>
 	^ self testContainer addChild: self testThreeGrids
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithThreeGridsAndVisualHandler [
 
-	<gtExample>
 	^ self testContainerWithThreeGrids addEventHandler: self testVisualHandler
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testGrid [
 
-	<gtExample>
 	^ BlElement new
 		  background: Color veryVeryLightGray;
 		  constraintsDo: [ :c | 
@@ -115,7 +108,6 @@ BlSelectionHandlerTest >> testGrid [
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testGridWith11Cells [
 
-	<gtExample>
 	^ self testGrid
 		  addChildren: ((1 to: 11) collect: [ :i | self testCell ]);
 		  yourself
@@ -124,7 +116,6 @@ BlSelectionHandlerTest >> testGridWith11Cells [
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testThreeGrids [
 
-	<gtExample>
 	^ self testContainer
 		  layout: BlGridLayout horizontal;
 		  layoutDo: [ :l | l cellSpacing: 10 ];
@@ -137,6 +128,5 @@ BlSelectionHandlerTest >> testThreeGrids [
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testVisualHandler [
 
-	<gtExample>
 	^ BlVisualSelectionHandler new
 ]

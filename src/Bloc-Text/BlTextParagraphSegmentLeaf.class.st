@@ -7,7 +7,8 @@ Class {
 	#superclass : #BlTextParagraphSegment,
 	#instVars : [
 		'span',
-		'hostMeasurer'
+		'hostMeasurer',
+		'fontAndStyleBuilder'
 	],
 	#category : #'Bloc-Text-Text-Paragraph'
 }
@@ -15,7 +16,6 @@ Class {
 { #category : #'accessing - span' }
 BlTextParagraphSegmentLeaf >> attributes [
 	"Return a set of attributes applied on this span"
-	<return: #Set of: #BlTextAttribute>
 
 	^ span attributes
 ]
@@ -23,19 +23,20 @@ BlTextParagraphSegmentLeaf >> attributes [
 { #category : #accessing }
 BlTextParagraphSegmentLeaf >> from: aGlobalTextStart to: aGlobalTextEnd [
 	"Assign provided indices so that we could always determine which part of text I measure"
+
 	from := aGlobalTextStart.
 	to := aGlobalTextEnd
 ]
 
 { #category : #initialization }
-BlTextParagraphSegmentLeaf >> hostMeasurer: ahostSpanMeasurer [
-	hostMeasurer := ahostSpanMeasurer
+BlTextParagraphSegmentLeaf >> hostMeasurer: aHostMeasurer [
+
+	hostMeasurer := aHostMeasurer
 ]
 
 { #category : #accessing }
 BlTextParagraphSegmentLeaf >> indexAtPosition: aPoint [
-
-	"I return a cursor index at a given position as a Point provided in local coordinates of this span"
+	"Return a cursor index at a given position as a Point provided in local coordinates of this span"
 
 	| aWidth |
 	aWidth := aPoint x max: 0.
@@ -100,6 +101,13 @@ BlTextParagraphSegmentLeaf >> indexAtPosition: aPoint [
 			  self from + spanIndex - 1 ]
 ]
 
+{ #category : #building }
+BlTextParagraphSegmentLeaf >> measure [
+	"Calculate span measurement using hostTextMeasurer."
+
+	^ self subclassResponsibility
+]
+
 { #category : #measurement }
 BlTextParagraphSegmentLeaf >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
@@ -147,7 +155,14 @@ BlTextParagraphSegmentLeaf >> span [
 
 { #category : #accessing }
 BlTextParagraphSegmentLeaf >> span: aBlSpan [
-	span := aBlSpan
+
+	span := aBlSpan.
+	
+	"Collect font properties and text style from span attributes"
+	fontAndStyleBuilder := BlTextFontAndStyleBuilder new.
+	self span attributes do: [ :eachAttribute |
+		eachAttribute applyOnFontAndStyleBuilder: fontAndStyleBuilder ].
+
 ]
 
 { #category : #'accessing - span' }

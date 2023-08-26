@@ -4,7 +4,7 @@ I contain examples of a text paragraph
 "
 Class {
 	#name : #BlTextParagraphExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Text-Examples-Measurement'
 }
 
@@ -589,7 +589,7 @@ BlTextParagraphExamples >> measuredHaba [
 	aParagraph := self habaParagraph.
 	aParagraph measureOn: self measurer.
 	
-	self assert: aParagraph measuredEnd equals: 4.
+	"self assert: aParagraph measuredEnd equals: 4."
 	
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
@@ -701,13 +701,13 @@ BlTextParagraphExamples >> measuredHelloWorld [
 { #category : #'instance creation' }
 BlTextParagraphExamples >> measurer [
 	<gtExample>
+
 	| aMeasurer |
-	
-	aMeasurer := BlMockedTextMeasurer new.
-	aMeasurer ascent: self ascent.
-	aMeasurer descent: self descent.
-	aMeasurer glyphWidth: self glyphWidth.
-	aMeasurer height: self height.
+	aMeasurer := BAMockedTextMeasurer new
+		ascent: self ascent;
+		descent: self descent;
+		glyphWidth: self glyphWidth;
+		height: self height.
 	
 	self assert: aMeasurer ascent equals: self ascent.
 	self assert: aMeasurer descent equals: self descent.

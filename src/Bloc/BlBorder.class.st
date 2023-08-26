@@ -182,8 +182,7 @@ BlBorder >> paint [
 { #category : #accessing }
 BlBorder >> paint: aBlPaint [
 
-	paint isNotNil
-		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
+	paint ifNotNil: [ (BlImmutableObjectChangeError object: self) signal ].
 
 	paint := aBlPaint asBlPaint
 ]

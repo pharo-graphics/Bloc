@@ -318,6 +318,14 @@ BlElement >> allChildrenDepthFirstDo: aBlock [
 ]
 
 { #category : #'children accessing' }
+BlElement >> allParents [
+	"Return a collection of all parents starting with my parent and ending with the top most parent"
+
+	^ Array streamContents: [ :aStream |
+		self allParentsDo: [ :eachParent | aStream nextPut: eachParent ] ]
+]
+
+{ #category : #'children accessing' }
 BlElement >> allParentsDetect: aBlock ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	self allParentsDo: [ :aParent | 
 		(aBlock value: aParent)
@@ -331,8 +339,22 @@ BlElement >> allParentsDo: aBlock [
 	up to the top most parent (excluding myself).
 	If I don't have a parent - does nothing"
 	
+	| current |
+	current := self.
+	
+	[ current := current parent  ] 
+		whileNotNil: [ aBlock value: current ].
+	
+	^ self
+]
+
+{ #category : #'children accessing' }
+BlElement >> allParentsReverseDo: aBlock [
+	"Evaluate a block with my every parent as an argument starting from my top most parent up to my direct parent (excluding myself).
+	If no parent, then ignore."
+	
 	self hasParent ifFalse: [ ^ self ].
-	self parent withAllParentsDo: aBlock
+	self parent withAllParentsReverseDo: aBlock
 ]
 
 { #category : #'children accessing' }
@@ -438,6 +460,18 @@ BlElement >> asElement [
 	^ self 
 ]
 
+{ #category : #converting }
+BlElement >> asScrollableElement [
+	| scrollable |
+	self removeFromParent.
+	scrollable := self newScrollableParent.
+	scrollable constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ].
+	scrollable addChild: self.
+	^ scrollable
+]
+
 { #category : #'children add/remove' }
 BlElement >> attachChild: anElement [
 	"Attaches previously detached element as my last direct child.
@@ -503,11 +537,13 @@ BlElement >> attachSpace [
 	self needsPaint
 		ifTrue: [ self markNeedsPaintFrom: self ].
 
-	self needsStyle
-		ifTrue: [ self requestStyle ].
+	"Style and properties computation are not used and will be removed"
+	
+	"self needsStyle
+		ifTrue: [ self requestStyle ]."
 
-	self needsPropertiesComputation
-		ifTrue: [ self requestPropertiesComputation ]
+	"self needsPropertiesComputation
+		ifTrue: [ self requestPropertiesComputation ]"
 ]
 
 { #category : #'api - look' }
@@ -552,14 +588,14 @@ BlElement >> baselineOffset [
 BlElement >> beInSeparateCompositionLayer [
 	"Make me that I want to be rendered in a separate compositing layer"
 
-	visuals := visuals compositingMode: BlCompositingSeparateLayerMode uniqueInstance
+	self compositingMode: BlCompositingSeparateLayerMode uniqueInstance
 ]
 
 { #category : #'api - compositing' }
 BlElement >> beInSingleCompositionLayer [
 	"Make me and my children be rendered in a single compositing layer"
 
-	visuals := visuals compositingMode: BlCompositingSingleLayerMode uniqueInstance
+	self compositingMode: BlCompositingSingleLayerMode uniqueInstance
 ]
 
 { #category : #accessing }
@@ -578,6 +614,13 @@ BlElement >> beOutskirtsInside [
 BlElement >> beOutskirtsOutside [
 
 	self outskirts: BlOutskirts outside
+]
+
+{ #category : #'api - compositing' }
+BlElement >> beWithoutCompositionLayer [
+	"Make me and my children be rendered without compositing layer"
+
+	self compositingMode: BlCompositingWithoutLayerMode uniqueInstance
 ]
 
 { #category : #'api - look' }
@@ -606,6 +649,13 @@ BlElement >> bounds [
 	<return: #BlElementBounds>
 
 	^ bounds
+]
+
+{ #category : #accessing }
+BlElement >> bounds: aBounds [
+
+	self position: aBounds position.
+	self size: aBounds extent
 ]
 
 { #category : #'private - accessing' }
@@ -807,7 +857,7 @@ BlElement >> childrenAt: aPoint do: aBlock [
 
 	anyChildFound := false.
 	
-	self children sortedByElevation reversed do: [ :eachChildElement |
+	self children sortedByElevationReversed do: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 
@@ -879,6 +929,17 @@ BlElement >> compositingMode [
 ]
 
 { #category : #'api - compositing' }
+BlElement >> compositingMode: aBlCompositingMode [
+	"Establish the compositing mode, and invalidate myself except if it's not a change."
+
+	visuals compositingMode = aBlCompositingMode ifTrue: [ 
+		^ self ].
+
+	visuals := visuals compositingMode: aBlCompositingMode.
+	self invalidate.
+]
+
+{ #category : #'api - compositing' }
 BlElement >> compositionDepth [
 
 	| aDepth |
@@ -890,7 +951,6 @@ BlElement >> compositionDepth [
 { #category : #'api - painting' }
 BlElement >> compositionLayer [
 	"Return my composition layer if I have one or nil otherwise"
-	<return: #BlCompositionLayer or: nil>
 	
 	^ self userData
 		at: #compositionLayer
@@ -916,14 +976,7 @@ BlElement >> computeLayout [
 	[ self isLayoutRequested
 		and: [ relayoutCounter < maxRelayoutCount ] ]
 		whileTrue: [
-			| widthSpec heightSpec maxExtent |
-			
-			BlSpace doStyle: self.
-			BlSpace new
-				doComputeProperties: self
-				withParentProperties: BlElementPropagatableProperties new
-				withGlobalProperties: BlElementPropagatableProperties new.
-			
+			| widthSpec heightSpec maxExtent |			
 			maxExtent := self isAttachedToSceneGraph
 				ifTrue: [ self space extent ]
 				ifFalse: [ 800.0 @ 600.0 ].
@@ -1014,13 +1067,14 @@ BlElement >> containsGlobalPoint: aPoint [
 
 { #category : #'geometry testing' }
 BlElement >> containsPoint: aPoint [
-	"Return true if a given point provided in local coordinates is inside of my geometry, false otherwise"
-	<return: #Boolean>
+	"Return true if a given point provided in local coordinates is inside of my geometry, false otherwise."
 
 	(self geometryBounds containsPoint: aPoint)
 		ifFalse: [ ^ false ].
 
-	^ self geometry containsPoint: aPoint in: self
+	^ self geometry
+		containsPoint: aPoint
+		alreadyInGeometryBoundsOf: self
 ]
 
 { #category : #copying }
@@ -1110,6 +1164,12 @@ BlElement >> defaultLayout [
 ]
 
 { #category : #initialization }
+BlElement >> defaultLayoutCommonConstraints [
+
+	^ BlLayoutCommonConstraints new
+]
+
+{ #category : #initialization }
 BlElement >> defaultOutskirts [
 	^ BlOutskirts inside
 ]
@@ -1160,10 +1220,9 @@ BlElement >> detachChild: anElement [
 BlElement >> detachCompositionLayer [
 	"Detach my composition layer if any"
 
-	self compositionLayer
-		ifNotNil: [ :aLayer |
-			aLayer removeFromParent.
-			self compositionLayer: nil ]
+	self compositionLayer ifNotNil: [ :aLayer |
+		aLayer removeFromParent.
+		self compositionLayer: nil ]
 ]
 
 { #category : #'children add/remove' }
@@ -1307,6 +1366,21 @@ BlElement >> dispatchLayoutDone [
 	self children do: [ :aChildElement | aChildElement dispatchLayoutDone ]
 ]
 
+{ #category : #layout }
+BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
+	"
+	I am triggered by the space as soon as a mouse down or up occurs.
+	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
+
+	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
+	self children do: [ :aChildElement |
+		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone].
+	" does my bounds contains the event position, if so, the picked point is inside myself "
+	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position) ifTrue: [ ^ self ].
+	self dispatchEvent: aMouseOutsideEvent.
+
+]
+
 { #category : #'children dispatching' }
 BlElement >> dispatchRemovedFromParent: aParentElement [
 	"Sent after I was removed from my parent and is not longer its direct child.
@@ -1378,7 +1452,9 @@ BlElement >> effect: aBlEffect [
 	anEffect must not be nil but an instance of subclasses of BlEffect."
 
 	visuals := visuals effect: aBlEffect.
-	self invalidate
+
+	self boundsCache invalidateBoundsInLocal.
+	self invalidate.
 ]
 
 { #category : #'geometry bounds' }
@@ -1482,7 +1558,7 @@ BlElement >> findMouseEventTargetAt: aPoint [
 	(self clipChildren and: [ doWantEvent not ])
 		ifTrue: [ ^ nil ].
 
-	self children sortedByElevation reversed
+	self children sortedByElevationReversed
 		do: [ :eachChild |
 			(eachChild findMouseEventTargetAt: aPoint)
 				ifNotNil: [ :aTargetElement | ^ aTargetElement ] ].
@@ -1590,7 +1666,16 @@ BlElement >> forceLayout [
 	Note: because layout measurement may depend on other element it is mandatory to compute
 	layout going down from the top most parent, otherwise layout will not be valid"
 
+	self requestLayout.
 	self topMostParent computeLayout
+]
+
+{ #category : #'layout utilities' }
+BlElement >> forceLocalLayout [
+	"Use me with care only if you know what you are doing. See #forceLayout comment to understand the context and why I can be problematic."
+
+	self requestLayout.
+	self computeLayout
 ]
 
 { #category : #'api - look' }
@@ -1767,6 +1852,15 @@ BlElement >> globalScale [
 ]
 
 { #category : #'children testing' }
+BlElement >> hasAnyInParentChain: aCollection [
+	"Return true if any one in the given collection in my parent chain (including myself) "
+	<return: #Boolean>
+
+	
+	^ aCollection anySatisfy: [ :e | self hasInParentChain: e ]
+]
+
+{ #category : #'children testing' }
 BlElement >> hasChild: anElement [
 	<return: #Boolean>
 	
@@ -1805,6 +1899,14 @@ BlElement >> hasFocusable [
 
 	^ self isFocusable or: [
 		self children anySatisfy: [ :anElement | anElement hasFocusable ] ]
+]
+
+{ #category : #'children testing' }
+BlElement >> hasInParentChain: anElement [
+	"Return true if I have a given element in my parent chain, or if I am anElement "
+	<return: #Boolean>
+
+	^ anElement = self or: [ self hasParent: anElement ]
 ]
 
 { #category : #'event management accessing' }
@@ -1897,6 +1999,16 @@ BlElement >> ignoreRequestLayoutDuring: aBlock [
 			ifFalse: [ flags clearShouldIgnoreLayoutRequests ] ]
 ]
 
+{ #category : #'api - space' }
+BlElement >> inSpace [
+	"Add self to a new BlSpace. Answer such space."
+	| sp |
+	sp := BlSpace new.
+	sp root addChild: self.
+	^ sp
+
+]
+
 { #category : #processing }
 BlElement >> inUIProcessDo: aBlock [
 	"Run the supplied block in the UI process.
@@ -1918,7 +2030,7 @@ BlElement >> inUIProcessDo: aBlock [
 { #category : #initialization }
 BlElement >> initialize [
 	super initialize.
-	
+
 	spaceReference := BlNullSpaceReference uniqueInstance.
 	visuals := BlDefaultVisuals uniqueInstance.
 
@@ -1927,7 +2039,7 @@ BlElement >> initialize [
 	measuredBounds := BlElementLocalBounds new referenceElement: self.
 
 	eventDispatcher := BlElementEventDispatcher on: self.
-	constraints := BlLayoutCommonConstraints new.
+	constraints := self defaultLayoutCommonConstraints.
 	self resetChildrenArray.
 
 	transformation := self defaultTransformation asCachedTransformation.
@@ -1965,9 +2077,8 @@ BlElement >> invalidRect: aBlBounds from: anElement [
 	"Translate dirty reports from an Element.
 	A rectangle is given in my own coordinates"
 
-	"we are guarding owerselves from unnecessary computations of rectangle transformation"
-	self isAttachedToSceneGraph
-		ifFalse: [ ^ self ].
+	"avoid unnecessary computations of rectangle transformation"
+	self isAttachedToSceneGraph ifFalse: [ ^ self ].
 
 	"transform provided rectangle to my parent's coordinates before I pass it further"
 	self localBoundsToParent: aBlBounds.
@@ -1994,20 +2105,12 @@ BlElement >> invalidate [
 BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
 	"Invalidate due to relocation by a given offset"
 
-	self wantsSeparateCompositingLayer
-		ifTrue: [
-			self hasCompositionLayer
-				ifTrue: [
-					| aLayer |
-					aLayer := self compositionLayer.
-					aLayer offset: aLayer offset + aNewPosition - aPreviousPosition.
-					self isAttachedToSceneGraph
-						ifTrue: [ self space markNeedsCompositionPaint: self from: self ]  ]
-				ifFalse: [ self hasParent
-						ifTrue: [ self parent invalidate ] ] ]
-		ifFalse: [
-			self hasParent
-				ifTrue: [ self parent invalidate ] ]
+	(self wantsSeparateCompositingLayer and: [
+		self hasCompositionLayer and: [
+			self isAttachedToSceneGraph ] ]) ifTrue: [
+				^ self space markNeedsCompositionPaint: self from: self ].
+
+	self hasParent ifTrue: [ self parent invalidate ]
 ]
 
 { #category : #'api - look' }
@@ -2016,23 +2119,21 @@ BlElement >> invalidateChildren [
 	self childrenDo: [ :each | each invalidate ]
 ]
 
-{ #category : #'change reporting' }
+{ #category : #accessing }
 BlElement >> invalidationBounds [
-	<return: #Rectangle>
 
 	^ boundsCache invalidationBounds
 ]
 
 { #category : #'geometry bounds' }
 BlElement >> invalidationBounds: aBounds [
-	"I compute and load damaged area in my local coordinates that would be invalidated
-	if #invalidate would be sent to me"
-	<return: #BlBounds>
-	| anInvalidationBounds |
+	"Compute the bounds of self, including my children recursively, in my local
+	coordinates that would be invalidated if #invalidate would be sent to me."
 
+	| anInvalidationBounds |
 	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
 
-	self clipChildren ifFalse: [ 
+	(self clipChildren and: [ self hasChildren ]) ifFalse: [ 
 		| aChildBounds |
 		aChildBounds := BlBounds new.
 		self children do: [ :anElement |
@@ -2041,6 +2142,13 @@ BlElement >> invalidationBounds: aBounds [
 			anInvalidationBounds merge: aChildBounds ] ].
 
 	^ anInvalidationBounds
+]
+
+{ #category : #accessing }
+BlElement >> invalidationBoundsInSpace [
+
+	^ self localBoundsToGlobal: (BlBounds fromRectangle: self invalidationBounds)
+
 ]
 
 { #category : #'api - space' }
@@ -2106,7 +2214,7 @@ BlElement >> isFullyVisibleInSpace [
 BlElement >> isLastChild [
 	"return true if the receiver is the first child of its parent"
 	self hasParent ifFalse: [ ^ self error: 'Must have a parent' ].
-	^ (self parent childIndexOf: self) = self children size
+	^ (self parent childIndexOf: self) = self parent children size
 ]
 
 { #category : #layout }
@@ -2452,6 +2560,7 @@ BlElement >> margin: aBlInsets [
 
 { #category : #'api - painting' }
 BlElement >> markDoesNotNeedPaint [
+
 	flags clearNeedsPaint
 ]
 
@@ -2459,24 +2568,24 @@ BlElement >> markDoesNotNeedPaint [
 BlElement >> markNeedsPaintFrom: anElement [
 	"Make me as dirty and request renderer to re-paint me.
 	anElement is the element from which the re-painting request originates"
+
 	flags addNeedsPaint.
-	
+
 	self wantsSeparateCompositingLayer
 		ifTrue: [
-			self isAttachedToSceneGraph
-				ifTrue: [
-					self hasCompositionLayer
-						ifTrue: [ self space markNeedsPaint: self from: anElement ]
-						ifFalse: [
-							self hasParent
-								ifTrue: [ self parent markNeedsPaintFrom: anElement ]
-								ifFalse: [ self space markNeedsPaint: self from: anElement ]	] ] ]
-		ifFalse: [ 
+			self isAttachedToSceneGraph ifFalse: [ ^self ].
+			self wantsSeparateCompositingLayer
+				ifTrue: [ self space markNeedsPaint: self from: anElement ]
+				ifFalse: [
+					self hasParent
+						ifTrue: [ self parent markNeedsPaintFrom: anElement ]
+						ifFalse: [ self space markNeedsPaint: self from: anElement ] ] ]
+		ifFalse: [
 			self hasParent
 				ifTrue: [ self parent markNeedsPaintFrom: anElement ]
 				ifFalse: [
-					self isAttachedToSceneGraph
-						ifTrue: [ self space markNeedsPaint: self from: anElement ] ] ]
+					self isAttachedToSceneGraph ifFalse: [ ^self ].
+					self space markNeedsPaint: self from: anElement ] ]
 ]
 
 { #category : #layout }
@@ -2591,13 +2700,13 @@ BlElement >> mouseCursor [
 
 { #category : #accessing }
 BlElement >> mouseCursor: aCursor [
+
 	visuals := visuals mouseCursor: aCursor
 ]
 
 { #category : #'api - painting' }
 BlElement >> needsPaint [
 	"Return true if I am marked as dirty and am waiting to be re-painted"
-	<return: #Boolean>
 
 	^ flags hasNeedsPaint
 ]
@@ -2612,6 +2721,12 @@ BlElement >> needsPropertiesComputation [
 { #category : #'api - style' }
 BlElement >> needsStyle [
 	^ self styles needsStyle
+]
+
+{ #category : #converting }
+BlElement >> newScrollableParent [
+
+	^ BlScrollableElement new
 ]
 
 { #category : #'event management accessing' }
@@ -2881,10 +2996,32 @@ BlElement >> opacity: aNumber [
 BlElement >> openInNewSpace [
 	"Add self to a new BlSpace and show it. Answer such space."
 	
-	^ BlSpace new
+	^ BlOSpace new
 		  addChild: self;
 		  show;
 		  yourself
+]
+
+{ #category : #convenience }
+BlElement >> openInOBlSpace [
+	"Add self to a new BlSpace and show it. Answer such space."
+	
+	self 
+		deprecated:  'Use #openInSpace instead' 
+		transformWith: '`@receiver openInOBlSpace' -> '`@receiver openInSpace'.
+	
+	^ self openInSpace
+
+]
+
+{ #category : #convenience }
+BlElement >> openInSpace [
+	"Add self to a new BlSpace and show it. Answer such space."
+	| sp |
+	sp := self inSpace.
+	sp show.
+	^ sp
+
 ]
 
 { #category : #'geometry bounds' }
@@ -3000,17 +3137,29 @@ BlElement >> position [
 	^ self bounds position
 ]
 
-{ #category : #'geometry position' }
-BlElement >> position: aPoint [ 
-	self 
-		deprecated: 'Use relocate: instead'
-		on: 	'1 October 2017' 
-		in: 'Pharo-7.0-alpha.build.132.sha.4ea2f39a9f43185d31b844be5ad33b677f43bf17'.
-	^ self relocate: aPoint 
+{ #category : #'api - bounds' }
+BlElement >> position: aPoint [
+	"Request position change in parent coordinates that will happen on the next frame or next layout pass triggered by #forceLayout.
+
+	Note: I do not invalidate drawing bounds nor change actual position.
+	I only register an update request and ask my parent (if there is one) to recompute
+	layout. Do nothing if previous #relocate request was performed with the same coordinates.
+	Note: We can not guarantee that new element's position will be equal to requested one,
+	since it depends on the applied layout.
+	Raises `BlElementPositionChangedEvent` and `BlElementPositionInSpaceChangedEvent`
+	aPoint must not be nil"
+
+	self measuredBounds position = aPoint
+		ifTrue: [ ^ self ].
+
+	self constraints position: aPoint.
+	self measuredBounds position: aPoint.
+	self requestParentLayout
 ]
 
 { #category : #accessing }
 BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdater [
+
 	"I do the hard work of changing my position and extent.
 	This action must be very optimized in the sense of invalidation.
 	For example if element becomes smaller in both axis (horizontal and vertical)
@@ -3020,34 +3169,34 @@ BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdat
 	position changes, instead I send invalidate with my effect bounds in parent coordinates
 	to my parent. It allows developers to implement drawing cache"
 	
-	"aPosition should satisfy #isBlocFiniteFloatPoint"
-	"anExtent should satisfy #isBlocFiniteFloatPoint and #isBlocPositivePoint"
-	
-	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition | 
+	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition |
+
 	aPreviousPosition := self position.
 	aPreviousExtent := self extent.
+	isPositionChanged := (aPreviousPosition
+		                      closeTo: aPosition
+		                      epsilon: self class epsilon) not.
+	isExtentChanged := (aPreviousExtent
+		                    closeTo: anExtent
+		                    epsilon: self class epsilon) not.
 
-	isPositionChanged := (aPreviousPosition closeTo: aPosition epsilon: self class epsilon) not.
-	isExtentChanged := (aPreviousExtent closeTo: anExtent epsilon: self class epsilon) not.
-
-	"nothing changed, return"
-	(isPositionChanged or: [ isExtentChanged ])
-		ifFalse: [ ^ self ].
-
+	(isPositionChanged or: [ isExtentChanged ]) ifFalse: [ ^ self ].
+	
 	isPositionChanged ifTrue: [
-		"change my position"
 		self bounds position: aPosition.
-		aBlElementBoundsUpdater changePositionFrom: aPreviousPosition to: aPosition of: self.
-
-		"position changed without extent => invalidate cached space bounds.
-		Note, that if extent changes we invalidate bounds cache anyway"
+		aBlElementBoundsUpdater
+			changePositionFrom: aPreviousPosition
+			to: aPosition
+			of: self.
 		isExtentChanged ifFalse: [ boundsCache invalidateBoundsInSpace ] ].
 
-	isExtentChanged ifTrue: [ 
-		"change my extent"
-		self bounds extent: anExtent.
-		aBlElementBoundsUpdater changeExtentFrom: aPreviousExtent to: anExtent of: self.
-		boundsCache invalidateBoundsInLocal ]
+	isExtentChanged ifFalse: [ ^ self ].
+	self bounds extent: anExtent.
+	aBlElementBoundsUpdater
+		changeExtentFrom: aPreviousExtent
+		to: anExtent
+		of: self.
+	boundsCache invalidateBoundsInLocal
 ]
 
 { #category : #'geometry position' }
@@ -3157,29 +3306,22 @@ BlElement >> privateRequestingLayout: aBoolean [
 
 { #category : #'api - properties' }
 BlElement >> properties [
+
 	^ self userData
 		at: #blocProperties
-		ifAbsentPut: [ BlElementCurrentProperties new element: self ]
+		ifAbsentPut: [
+			BlElementCurrentProperties new
+				element: self;
+				yourself ]
 ]
 
 { #category : #'api - bounds' }
 BlElement >> relocate: aPoint [
-	"Request position change in parent coordinates that will happen on the next frame or next layout pass triggered by #forceLayout.
-
-	Note: I do not invalidate drawing bounds nor change actual position.
-	I only register an update request and ask my parent (if there is one) to recompute
-	layout. Do nothing if previous #relocate request was performed with the same coordinates.
-	Note: We can not guarantee that new element's position will be equal to requested one,
-	since it depends on the applied layout.
-	Raises `BlElementPositionChangedEvent` and `BlElementPositionInSpaceChangedEvent`
-	aPoint must not be nil"
-
-	self measuredBounds position = aPoint
-		ifTrue: [ ^ self ].
-
-	self constraints position: aPoint.
-	self measuredBounds position: aPoint.
-	self requestParentLayout
+	
+	self 
+		deprecated:  'Use position:' 
+		transformWith: '`@receiver relocate: `@point' -> '`@receiver position: `@point'.
+	self position: aPoint
 ]
 
 { #category : #'children add/remove' }
@@ -3474,6 +3616,35 @@ BlElement >> requestStyle [
 		ifFalse: [  ].
 ]
 
+{ #category : #'geometry bounds' }
+BlElement >> requestedHeight [
+	" return the exact height. Use it only if you know what your are doing. 
+	see BlElement>>requestedSize comment"
+
+	^ self constraints requestedHeightIn: self
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> requestedSize [ 
+
+	"Normally, one shoud wait for the layouting to measure myself exactly.
+	But, in case my size (or my height or my width) is set with an #exact: send, it is possible
+	to get the exact size|height|width. 
+	So requestSize|height|width will works correctly only in this particular case.
+	The behavior in others cases may be impredictable or may raise an error.
+	"
+
+	^ self constraints requestedSizeIn: self
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> requestedWidth [ 
+	" return the exact width. Use it only if you know what your are doing. 
+	see BlElement>>requestedSize comment"
+
+	^ self constraints requestedWidthIn: self
+]
+
 { #category : #initialization }
 BlElement >> resetChildrenArray [
 	children := Bloc preferableChildrenDataStructure new
@@ -3546,7 +3717,7 @@ BlElement >> size: aPoint [
 BlElement >> space [
 	"Return space to which I belong. Direct reference boosts performance.
 	Each element has a reference to the current space which is set on demand."
-	<return: #BlSpace or: nil>
+	<return: #BlOSpace or: nil>
 	
 	spaceReference spaceDo: [ :aSpace | ^ aSpace ].
 	
@@ -3587,9 +3758,13 @@ BlElement >> startTextInputAtRectangle: aRectangle [
 
 { #category : #'api - style' }
 BlElement >> states [
-	^ self userData
+
+	"Style and properties computation are not used and will be removed"
+	^ nil
+
+	"^ self userData
 		at: #blocStates
-		ifAbsentPut: [ BlElementStates new element: self ]
+		ifAbsentPut: [ BlElementStates new element: self ]"
 ]
 
 { #category : #'text input' }
@@ -3610,10 +3785,12 @@ BlElement >> styles [
 	"Return current element styles.
 	See ${class:BlStyles}$ to learn more about styles"
 	<return: #BlElementStyles>
-
-	^ self userData
+	
+	"Style and properties computation are not used and will be removed"
+	^ nil
+	"^ self userData
 		at: #blocStyles
-		ifAbsentPut: [ BlElementStyles new element: self ]
+		ifAbsentPut: [ BlElementStyles new element: self ]"
 ]
 
 { #category : #layout }
@@ -3871,7 +4048,7 @@ BlElement >> withAllChildrenAt: aPoint do: aBlock [
 
 	anyChildFound := false.
 	
-	self children sortedByElevation reversed do: [ :eachChildElement |
+	self children sortedByElevationReversed do: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 		
@@ -3933,7 +4110,7 @@ BlElement >> withAllLeafChildrenAt: aPoint do: aBlock [
 		
 	anyChildFound := false.
 	
-	self children sortedByElevation reversed do: [ :eachChildElement |
+	self children sortedByElevationReversed do: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 		
@@ -3973,6 +4150,14 @@ BlElement >> withAllParentsDo: aBlock [
 	
 	aBlock value: self.
 	self allParentsDo: aBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> withAllParentsReverseDo: aBlock [
+	"Evaluate a block with me and all my parents as an argument starting from top most parent, up to me."
+	
+	self allParentsReverseDo: aBlock.
+	aBlock value: self
 ]
 
 { #category : #'children accessing' }

@@ -4,7 +4,7 @@ I exemplify {{gtClass:BlDevScripter}}.
 "
 Class {
 	#name : #BlDevScripterExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#instVars : [
 		'elementExamples'
 	],
@@ -24,6 +24,7 @@ BlDevScripterExamples >> basicScripter [
 { #category : #'examples - click check' }
 BlDevScripterExamples >> clickCheck [
 	<gtExample>
+
 	| anElement aScript |
 	anElement := BlDevElementExamples new containerWithRectangle.
 	aScript := self basicScripter element: anElement.

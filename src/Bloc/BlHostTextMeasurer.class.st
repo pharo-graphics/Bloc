@@ -14,24 +14,29 @@ Class {
 }
 
 { #category : #measurement }
-BlHostTextMeasurer >> createParagraphSpan [
-
-	^ self newParagraphSpan 
-		  hostMeasurer: self;
-		  yourself
-]
-
-{ #category : #measurement }
 BlHostTextMeasurer >> measureTextParagraph: aBlTextParagraph [
+
 	self subclassResponsibility
 ]
 
 { #category : #measurement }
 BlHostTextMeasurer >> measureTextSpan: aBlTextSpan [
+
 	self subclassResponsibility
 ]
 
 { #category : #'paragraph span instance creation' }
-BlHostTextMeasurer >> newParagraphSpan [ 
-	^ self subclassResponsibility 
+BlHostTextMeasurer >> newParagraphSpan [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #measurement }
+BlHostTextMeasurer >> newParagraphSpanFor: aBlSpan [
+
+	^ self newParagraphSpan
+		  hostMeasurer: self;
+		  span: aBlSpan;
+		  measure;
+		  yourself
 ]

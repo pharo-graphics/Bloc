@@ -12,7 +12,7 @@ Class {
 		'extent',
 		'strongReference'
 	],
-	#category : #'Bloc-Universe - Renderer - NU'
+	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #testing }
@@ -24,54 +24,55 @@ BlHostRendererBufferSurface class >> isSupportedBy: anObject [
 
 { #category : #accessing }
 BlHostRendererBufferSurface class >> priority [
+
 	^ 20
 ]
 
 { #category : #accessing }
 BlHostRendererBufferSurface >> buffer [
+
 	^ buffer
 ]
 
 { #category : #accessing }
 BlHostRendererBufferSurface >> buffer: aPixelBuffer [
+
 	buffer := aPixelBuffer
 ]
 
 { #category : #initialization }
 BlHostRendererBufferSurface >> createSpaceRendererOn: anObject [
-	<return: #BlHostSpaceRenderer>
 
 	^ anObject createBufferSpaceRenderer
 ]
 
 { #category : #initialization }
 BlHostRendererBufferSurface >> createSurfaceRendererOn: anObject [
-	<return: #BlHostSurfaceRenderer>
 
 	^ anObject createBufferSurfaceRenderer
 ]
 
 { #category : #geometry }
 BlHostRendererBufferSurface >> extent [
-	"Return actual extent of the underlying surface.
-	Note: it may be different from canvas or window extents"
-	<return: #Point>
 	
 	^ extent
 ]
 
 { #category : #geometry }
 BlHostRendererBufferSurface >> extent: aPoint [
+
 	extent := aPoint
 ]
 
 { #category : #accessing }
 BlHostRendererBufferSurface >> stride [
+
 	^ stride
 ]
 
 { #category : #accessing }
 BlHostRendererBufferSurface >> stride: aNumber [
+
 	stride := aNumber
 ]
 

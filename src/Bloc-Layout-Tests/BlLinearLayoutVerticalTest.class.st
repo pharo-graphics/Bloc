@@ -4,28 +4,22 @@ I have been automatically converted and probably manually tweaked from BlLinearL
 "
 Class {
 	#name : #BlLinearLayoutVerticalTest,
-	#superclass : #BlRootLayoutTest,
+	#superclass : #BlLinearLayoutTest,
 	#category : #'Bloc-Layout-Tests'
 }
-
-{ #category : #metadata }
-BlLinearLayoutVerticalTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlLinearLayoutVerticalExamples'
-]
 
 { #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
-	<gtExample>
+	<sampleInstance>
 	| parent childA |
 	childA := self testChildElementMatchingParent.
 	parent := self testParentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 400.
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
-	parent addChildren: {childA}.
+	parent addChildren: { childA }.
 	parent forceLayout.
 	self assert: childA extent equals: 360 @ 560.
 	self assert: childA position equals: 20 @ 20.
@@ -38,7 +32,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
-	<gtExample>
+	<sampleInstance>
 	| parent childA childB |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -46,10 +40,9 @@ BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	parent constraints horizontal exact: 600.
 	parent constraints vertical exact: 400.
 	parent constraints padding: (BlInsets all: 20).
-	parent
-		addChildren:
-			{childA.
-			childB}.
+	parent addChildren: {
+			childA.
+			childB }.
 	parent forceLayout.
 	self assert: childA extent equals: 560 @ 180.
 	self assert: childA position equals: 20 @ 20.
@@ -64,17 +57,16 @@ BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	"Parent resizes to fit children"
 
-	<gtExample>
+	<sampleInstance>
 	| parent childA childB |
 	childA := self childExact: 200 @ 100.
 	childB := self childExact: 100 @ 200.
 	parent := self testParentWithLinearHorizontalLayout.
 	parent constraints horizontal fitContent.
 	parent constraints vertical fitContent.
-	parent
-		addChildren:
-			{childA.
-			childB}.
+	parent addChildren: {
+			childA.
+			childB }.
 	parent forceLayout.
 	self assert: childA extent equals: 200 @ 100.
 	self assert: childA position equals: 0 @ 0.
@@ -89,7 +81,7 @@ BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
-	<gtExample>
+	<sampleInstance>
 	| parent childA childB childC |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -97,11 +89,10 @@ BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 	parent := self testParentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 200.
 	parent constraints vertical exact: 600.
-	parent
-		addChildren:
-			{childA.
+	parent addChildren: {
+			childA.
 			childB.
-			childC}.
+			childC }.
 	parent forceLayout.
 	self assert: childA extent equals: 200 @ 200.
 	self assert: childA position equals: 0 @ 0.
@@ -118,7 +109,7 @@ BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	"All children are distributed equally within parent's bounds"
 
-	<gtExample>
+	<sampleInstance>
 	| parent childA childB |
 	childA := self childExact: 200 @ 300.
 	childB := self childExactHeight: 200.
@@ -126,10 +117,9 @@ BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	parent := self testParentWithLinearHorizontalLayout.
 	parent constraints horizontal fitContent.
 	parent constraints vertical fitContent.
-	parent
-		addChildren:
-			{childA.
-			childB}.
+	parent addChildren: {
+			childA.
+			childB }.
 	parent forceLayout.
 	self assert: childA extent equals: 200 @ 300.
 	self assert: childA position equals: 0 @ 0.
@@ -144,20 +134,18 @@ BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 	"All children are distributed equally within parent's bounds"
 
-	<gtExample>
+	<sampleInstance>
 	| parent childA |
 	childA := self childExact: 20 @ 20.
-	childA
-		margin:
-			(BlInsets
-				top: 15
-				right: 0
-				bottom: 0
-				left: 10).
+	childA margin: (BlInsets
+			 top: 15
+			 right: 0
+			 bottom: 0
+			 left: 10).
 	parent := self testParentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 50.
 	parent constraints vertical exact: 50.
-	parent addChildren: {childA}.
+	parent addChildren: { childA }.
 	parent forceLayout.
 	self assert: childA extent equals: 20 @ 20.
 	self assert: childA position equals: 10 @ 15.
@@ -168,7 +156,8 @@ BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 
 { #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParentLTR [
-	<gtExample>
+
+	<sampleInstance>
 	| parent childA childB childC |
 	childA := self childExact: 100 @ 100.
 	childB := self childExact: 200 @ 100.
@@ -179,11 +168,10 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 	parent := self testParentWithLinearHorizontalLayout.
 	parent constraints horizontal exact: 500.
 	parent constraints vertical exact: 600.
-	parent
-		addChildren:
-			{childA.
+	parent addChildren: {
+			childA.
 			childB.
-			childC}.
+			childC }.
 	parent forceLayout.
 	self assert: childA extent equals: 100 @ 100.
 	self assert: childA position equals: 0 @ 0.
@@ -198,7 +186,8 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 
 { #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParentRTL [
-	<gtExample>
+
+	<sampleInstance>
 	| parent childA childB childC |
 	childA := self childExact: 100 @ 100.
 	childB := self childExact: 200 @ 100.
@@ -210,11 +199,10 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 	parent layout rightToLeft.
 	parent constraints horizontal exact: 500.
 	parent constraints vertical exact: 600.
-	parent
-		addChildren:
-			{childA.
+	parent addChildren: {
+			childA.
 			childB.
-			childC}.
+			childC }.
 	parent forceLayout.
 	self assert: childA extent equals: 100 @ 100.
 	self assert: childA position equals: 400 @ 0.
@@ -229,28 +217,28 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 
 { #category : #tests }
 BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
-	<gtExample>
+
+	<sampleInstance>
 	| aContainer aRed aBlue |
 	aContainer := BlElement new
-		layout: (BlLinearLayout vertical cellSpacing: 20);
-		padding: (BlInsets left: 10 right: 10);
-		size: 400 @ 500.
+		              layout: (BlLinearLayout vertical cellSpacing: 20);
+		              padding: (BlInsets left: 10 right: 10);
+		              size: 400 @ 500.
 	aRed := BlElement new
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical matchParent ];
-		border: (BlBorder paint: Color red darker width: 1);
-		background: (Color red alpha: 0.3).
+		        constraintsDo: [ :c |
+			        c horizontal matchParent.
+			        c vertical matchParent ];
+		        border: (BlBorder paint: Color red darker width: 1);
+		        background: (Color red alpha: 0.3).
 	aBlue := BlElement new
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical matchParent ];
-		border: (BlBorder paint: Color blue darker width: 1);
-		background: (Color blue alpha: 0.3).
-	aContainer
-		addChildren:
-			{aRed.
-			aBlue}.
+		         constraintsDo: [ :c |
+			         c horizontal matchParent.
+			         c vertical matchParent ];
+		         border: (BlBorder paint: Color blue darker width: 1);
+		         background: (Color blue alpha: 0.3).
+	aContainer addChildren: {
+			aRed.
+			aBlue }.
 	aContainer forceLayout.
 	self assert: aContainer extent equals: 400 @ 500.
 	self assert: aRed position equals: 10 @ 20.
@@ -270,16 +258,16 @@ BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 
 { #category : #tests }
 BlLinearLayoutVerticalTest >> testParentWithLinearHorizontalLayout [
-	<gtExample>
+
+	<sampleInstance>
 	| element |
 	element := BlElement new
-		border:
-			(BlBorder builder
-				dashed;
-				paint: Color red;
-				width: 3;
-				build);
-		layout: BlLinearLayout vertical.
+		           border: (BlBorder builder
+				            dashed;
+				            paint: Color red;
+				            width: 3;
+				            build);
+		           layout: BlLinearLayout vertical.
 	self assert: element layout class equals: BlLinearLayout.
 	self assert: element layout isVertical.
 	^ element

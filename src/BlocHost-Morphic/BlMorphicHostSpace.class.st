@@ -95,7 +95,7 @@ BlMorphicHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #'instance creation' }
+{ #category : #initialization }
 BlMorphicHostSpace >> newBlHostRendererSurface [
 	
 	^ BlHostRendererFormSurface newForHostSpace: self

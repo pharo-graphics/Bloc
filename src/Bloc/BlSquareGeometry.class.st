@@ -9,9 +9,9 @@ Class {
 }
 
 { #category : #'geometry testing' }
-BlSquareGeometry >> containsPoint: aPoint in: aBlElement [
+BlSquareGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
-	^ (self geometryBounds: BlBounds new) containsPoint: aPoint
+	^ true
 ]
 
 { #category : #'geometry bounds' }

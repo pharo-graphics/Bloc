@@ -23,7 +23,7 @@ BlSpaceExamplesMigrated >> animatedElement [
 	^ BlElement new
 		background: Color blue;
 		size: 150@150;
-		relocate: 100@100;
+		position: 100@100;
 		addAnimation: self infiniteAnimation
 ]
 
@@ -55,10 +55,10 @@ BlSpaceExamplesMigrated >> emptySpace [
 	<gtExample>
 	| aSpace |
 	
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self assert: aSpace root hasChildren not.
-	self assert: aSpace dirtyAreas isEmpty.
+	self deny: aSpace hasDirtyElements.
 	self assert: aSpace extent equals: aSpace defaultExtent.
 	self assert: aSpace height equals: aSpace defaultExtent y.
 	self assert: aSpace width equals: aSpace defaultExtent x.
@@ -68,7 +68,7 @@ BlSpaceExamplesMigrated >> emptySpace [
 	self assert: aSpace fullscreen not.
 	self assert: aSpace focused not.
 	self assert: aSpace hasHostSpace not.
-	self assert: aSpace hasDirtyAreas not.
+	self deny: aSpace hasDirtyElements.
 	self assert: aSpace hasLayoutError not.
 	self assert: aSpace isLayoutRequested.
 	self assert: aSpace isVisible not.
@@ -86,7 +86,7 @@ BlSpaceExamplesMigrated >> firstPulse [
 	aSpace := self emptySpace.
 	aSpace pulse.
 	
-	self assert: aSpace dirtyAreas isEmpty.
+	self deny: aSpace hasDirtyElements.
 	self assert: aSpace root position equals: 0@0.
 	self assert: aSpace root extent equals: aSpace extent.
 
@@ -95,7 +95,7 @@ BlSpaceExamplesMigrated >> firstPulse [
 
 { #category : #'examples - icon' }
 BlSpaceExamplesMigrated >> iconElement [
-	<gtExample>
+	<sampleInstance>
 	^ BlElement new
 		size: 16@16;
 		background: (Color green alpha: 0.5);
@@ -104,7 +104,7 @@ BlSpaceExamplesMigrated >> iconElement [
 
 { #category : #'examples - icon' }
 BlSpaceExamplesMigrated >> iconStencil [
-	<gtExample>
+	<sampleInstance>
 	| aStencil |
 	aStencil := BlSpaceIconDummyStencil new.
 	aStencil block: [ self iconElement ].
@@ -113,7 +113,7 @@ BlSpaceExamplesMigrated >> iconStencil [
 
 { #category : #'private - instance creation' }
 BlSpaceExamplesMigrated >> infiniteAnimation [
-	<gtExample>
+	<sampleInstance>
 	| anAnimation |
 
 	anAnimation := BlSequentialAnimation new.
@@ -122,20 +122,6 @@ BlSpaceExamplesMigrated >> infiniteAnimation [
 	anAnimation beInfinite.
 	
 	^ anAnimation
-]
-
-{ #category : #'examples - time' }
-BlSpaceExamplesMigrated >> spaceWithSlownDownTime [
-	<gtExample>
-	| aTime aSpace |
-
-	aTime := BlFastForwardedTime new.
-	aTime speed: 0.2.
-
-	aSpace := BlSpace new.
-	aSpace time: aTime.
-
-	^ aSpace
 ]
 
 { #category : #'examples - time' }

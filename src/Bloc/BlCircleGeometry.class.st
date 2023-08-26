@@ -15,7 +15,7 @@ BlCircleGeometry >> = anObject [
 ]
 
 { #category : #'geometry testing' }
-BlCircleGeometry >> containsPoint: aPoint in: aBlElement [
+BlCircleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
 	| centerX centerY |
 	centerX := origin x + radius.

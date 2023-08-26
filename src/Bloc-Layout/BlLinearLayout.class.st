@@ -1,15 +1,16 @@
 Class {
 	#name : #BlLinearLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable + TBlDirectionalLayout',
-	#classTraits : 'TBlAlignable classTrait + TBlDirectionalLayout classTrait',
+	#traits : 'TBlAlignable',
+	#classTraits : 'TBlAlignable classTrait',
 	#instVars : [
 		'weightSum',
 		'verticalAlignment',
 		'horizontalAlignment',
 		'orientation',
 		'shouldUseLargestChild',
-		'cellSpacing'
+		'cellSpacing',
+		'direction'
 	],
 	#category : #'Bloc-Layout-Linear'
 }
@@ -124,6 +125,18 @@ BlLinearLayout >> defaultWeightSum [
 	^ 0
 ]
 
+{ #category : #'api - direction' }
+BlLinearLayout >> direction [
+
+	^ direction ifNil: [ self defaultDirection ]
+]
+
+{ #category : #'api - direction' }
+BlLinearLayout >> direction: aBlLayoutDirection [
+
+	direction := aBlLayoutDirection
+]
+
 { #category : #comparing }
 BlLinearLayout >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
@@ -152,20 +165,27 @@ BlLinearLayout >> horizontalAlignment: anAlignment [
 
 { #category : #initialization }
 BlLinearLayout >> initialize [
+
 	super initialize.
-	
+
 	weightSum := self defaultWeightSum.
 	shouldUseLargestChild := false.
 	cellSpacing := 0.0.
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
-	
-	self orientation: self defaultOrientation.
+
+	self orientation: self defaultOrientation
 ]
 
 { #category : #testing }
 BlLinearLayout >> isHorizontal [
 	^ self orientation isHorizontal
+]
+
+{ #category : #testing }
+BlLinearLayout >> isOrientable [
+
+	^ true
 ]
 
 { #category : #testing }
@@ -177,6 +197,12 @@ BlLinearLayout >> isVertical [
 BlLinearLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	self orientation layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext.
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
+]
+
+{ #category : #'api - direction' }
+BlLinearLayout >> leftToRight [
+
+	self direction: BlLayoutDirection leftToRight
 ]
 
 { #category : #measure }
@@ -206,8 +232,16 @@ BlLinearLayout >> orientation [
 
 { #category : #accessing }
 BlLinearLayout >> orientation: anOrientation [
+
+	anOrientation layout: self.
 	orientation := anOrientation.
-	anOrientation layout: self
+
+]
+
+{ #category : #'api - direction' }
+BlLinearLayout >> rightToLeft [
+
+	self direction: BlLayoutDirection rightToLeft
 ]
 
 { #category : #testing }

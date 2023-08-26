@@ -14,7 +14,7 @@ BlMorphicWorldEmbeddingElement class >> open [
 	<script: 'self open'>
 	| aSpace |
 	
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace title: 'Morph World'.
 	aSpace extent: 1280@800.
 	aSpace root: self new.
@@ -26,7 +26,7 @@ BlMorphicWorldEmbeddingElement class >> openMain [
 	<script: 'self open'>
 	| aSpace |
 	
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace title: 'Morph World'.
 	aSpace extent: 1280@800.
 	aSpace root: self new beMain.

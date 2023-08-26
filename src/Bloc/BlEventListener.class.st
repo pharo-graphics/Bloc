@@ -9,7 +9,8 @@ BlEventListener >> blurEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlEventListener >> clickCandidateEvent: anEvent [
+BlEventListener >> clickAvortedEvent: anEvent [
+	"a mouse down followed by a mouse up but in different a target"
 ]
 
 { #category : #'mouse handlers' }
@@ -70,58 +71,6 @@ BlEventListener >> focusOutEvent: anEvent [
 BlEventListener >> focusTransferEvent: anEvent [
 ]
 
-{ #category : #'gesture handlers' }
-BlEventListener >> gesturePinchBeginEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gesturePinchEndEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gesturePinchEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureRotationBeginEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureRotationEndEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureRotationEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureScrollBeginEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureScrollEndEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureScrollEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureSwipeAbortEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureSwipeBeginEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureSwipeEndEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> gestureSwipeEvent: anEvent [
-]
-
 { #category : #'event handling' }
 BlEventListener >> handleEvent: anEvent [
 	anEvent sendTo: self
@@ -170,10 +119,6 @@ BlEventListener >> mouseUpEvent: anEvent [
 
 { #category : #'mouse handlers' }
 BlEventListener >> mouseWheelEvent: anEvent [
-]
-
-{ #category : #'other handlers' }
-BlEventListener >> rotateEvent: anEvent [
 ]
 
 { #category : #'keyboard handlers' }
@@ -227,28 +172,8 @@ BlEventListener >> spaceResizedEvent: anEvent [
 	"Is sent after window size was changed"
 ]
 
-{ #category : #'other handlers' }
-BlEventListener >> swipeEvent: anEvent [
-]
-
 { #category : #'keyboard handlers' }
 BlEventListener >> textInputEvent: anEvent [
-]
-
-{ #category : #'touch handlers' }
-BlEventListener >> touchDownEvent: anEvent [
-]
-
-{ #category : #'gesture handlers' }
-BlEventListener >> touchLongPressEvent: anEvent [
-]
-
-{ #category : #'touch handlers' }
-BlEventListener >> touchMoveEvent: anEvent [
-]
-
-{ #category : #'touch handlers' }
-BlEventListener >> touchUpEvent: anEvent [
 ]
 
 { #category : #'api - event managing' }
@@ -258,8 +183,4 @@ BlEventListener >> wantsEvent: anEvent [
 		ifTrue: [ ^ false ].
 
 	^ anEvent isUIEvent or: [ anEvent isSpaceEvent ]
-]
-
-{ #category : #'other handlers' }
-BlEventListener >> zoomEvent: anEvent [
 ]

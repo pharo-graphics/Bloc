@@ -38,7 +38,7 @@ BlAnnulusSectorGeometry >> center [
 ]
 
 { #category : #'geometry testing' }
-BlAnnulusSectorGeometry >> containsPoint: aPoint in: aBlElement [
+BlAnnulusSectorGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.
 
 	Adapted from RSPieSlice>>#preciseIncludesPoint:"

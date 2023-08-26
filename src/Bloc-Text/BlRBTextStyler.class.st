@@ -1102,6 +1102,11 @@ BlRBTextStyler >> visitCascadeNode: aCascadeNode [
 ]
 
 { #category : #visiting }
+BlRBTextStyler >> visitEnglobingErrorNode: anEnglobingErrorNode [
+	anEnglobingErrorNode contents do: [ :each | self visitNode: each ]
+]
+
+{ #category : #visiting }
 BlRBTextStyler >> visitGlobalNode: aSelfNode [
 	^ self visitVariableNode: aSelfNode
 ]

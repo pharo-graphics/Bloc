@@ -8,19 +8,14 @@ Class {
 	#category : #'Bloc-UnitedTests-Geometry'
 }
 
-{ #category : #metadata }
-BlAnnulusSectorGeometryTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlAnnulusSectorExamples'
-]
-
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testAnnulus [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		startAngle: 0;
-		endAngle: 360.
+		           startAngle: 0;
+		           endAngle: 360.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 0.
 	self assert: aSector endAngle equals: 360.
@@ -35,13 +30,14 @@ BlAnnulusSectorGeometryTest >> testAnnulus [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testAnnulusSectorBottomLeft [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		startAngle: 90;
-		endAngle: 180;
-		innerRadius: 0.5;
-		outerRadius: 1.0.
+		           startAngle: 90;
+		           endAngle: 180;
+		           innerRadius: 0.5;
+		           outerRadius: 1.0.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 90.
 	self assert: aSector endAngle equals: 180.
@@ -56,13 +52,14 @@ BlAnnulusSectorGeometryTest >> testAnnulusSectorBottomLeft [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testAnnulusSectorBottomRight [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		startAngle: 0;
-		endAngle: 90;
-		innerRadius: 0.5;
-		outerRadius: 1.0.
+		           startAngle: 0;
+		           endAngle: 90;
+		           innerRadius: 0.5;
+		           outerRadius: 1.0.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 0.
 	self assert: aSector endAngle equals: 90.
@@ -77,13 +74,14 @@ BlAnnulusSectorGeometryTest >> testAnnulusSectorBottomRight [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testAnnulusSectorTopLeft [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		startAngle: 180;
-		endAngle: 270;
-		innerRadius: 0.5;
-		outerRadius: 1.0.
+		           startAngle: 180;
+		           endAngle: 270;
+		           innerRadius: 0.5;
+		           outerRadius: 1.0.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 180.
 	self assert: aSector endAngle equals: 270.
@@ -98,13 +96,14 @@ BlAnnulusSectorGeometryTest >> testAnnulusSectorTopLeft [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testAnnulusSectorTopRight [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		startAngle: 270;
-		endAngle: 360;
-		innerRadius: 0.5;
-		outerRadius: 1.0.
+		           startAngle: 270;
+		           endAngle: 360;
+		           innerRadius: 0.5;
+		           outerRadius: 1.0.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 270.
 	self assert: aSector endAngle equals: 360.
@@ -119,12 +118,13 @@ BlAnnulusSectorGeometryTest >> testAnnulusSectorTopRight [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testCircle [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		startAngle: 0;
-		endAngle: 360;
-		innerRadius: 0.
+		           startAngle: 0;
+		           endAngle: 360;
+		           innerRadius: 0.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 0.
 	self assert: aSector endAngle equals: 360.
@@ -139,12 +139,13 @@ BlAnnulusSectorGeometryTest >> testCircle [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testCircleSector [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		startAngle: 0;
-		endAngle: 270;
-		innerRadius: 0.
+		           startAngle: 0;
+		           endAngle: 270;
+		           innerRadius: 0.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 0.
 	self assert: aSector endAngle equals: 270.
@@ -159,7 +160,8 @@ BlAnnulusSectorGeometryTest >> testCircleSector [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testDefault [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new.
 	self assert: aSector extent equals: 150 @ 100.
@@ -176,11 +178,12 @@ BlAnnulusSectorGeometryTest >> testDefault [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testOuterRadiusSmallerThanInner [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		innerRadius: 1.0;
-		outerRadius: 0.5.
+		           innerRadius: 1.0;
+		           outerRadius: 0.5.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 0.
 	self assert: aSector endAngle equals: 270.
@@ -195,12 +198,13 @@ BlAnnulusSectorGeometryTest >> testOuterRadiusSmallerThanInner [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testPacman [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		startAngle: 45;
-		endAngle: 315;
-		innerRadius: 0.
+		           startAngle: 45;
+		           endAngle: 315;
+		           innerRadius: 0.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 45.
 	self assert: aSector endAngle equals: 315.
@@ -215,11 +219,12 @@ BlAnnulusSectorGeometryTest >> testPacman [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testRadiiOutsideOfValidInterval [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		innerRadius: -10;
-		outerRadius: 20.
+		           innerRadius: -10;
+		           outerRadius: 20.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 0.
 	self assert: aSector endAngle equals: 270.
@@ -234,11 +239,12 @@ BlAnnulusSectorGeometryTest >> testRadiiOutsideOfValidInterval [
 
 { #category : #tests }
 BlAnnulusSectorGeometryTest >> testSameRadii [
-	<gtExample>
+
+	<sampleInstance>
 	| aSector |
 	aSector := BlAnnulusSectorGeometry new
-		innerRadius: 0.5;
-		outerRadius: 0.5.
+		           innerRadius: 0.5;
+		           outerRadius: 0.5.
 	self assert: aSector extent equals: 150 @ 100.
 	self assert: aSector startAngle equals: 0.
 	self assert: aSector endAngle equals: 270.

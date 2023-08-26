@@ -3,7 +3,7 @@ I exemplify how Bloc handles errors in different parts of the BlElement such as 
 "
 Class {
 	#name : #BlErrorHandlingExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#category : #'Bloc-Examples-Errors'
 }
 
@@ -58,7 +58,7 @@ BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawingAndOnLayout [
 { #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenOnLayout [
 	<gtExample>
-	<noTest>
+
 	| aSceneElement aFaultyElement  theErrors |
 
 	aFaultyElement := BlExampleElementWithBrokenOnLayout new.
@@ -114,7 +114,7 @@ BlErrorHandlingExamples >> sceneWith: aFaultyElement [
 
 	aContainer addChildren: { aLeftChild . aRightChild }.
 	
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace host: BlMorphicWindowHost new.
 	aSpace addChild: aContainer.
 	aSpace show.

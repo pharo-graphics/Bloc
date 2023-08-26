@@ -19,16 +19,12 @@ BAHitTest class >> exportAll [
 
 { #category : #convenience }
 BAHitTest class >> inspectAll [
-	<script: 'self inspectAll' >
-
-	super inspectAll
+	<script: 'super inspectAll'>
 ]
 
 { #category : #convenience }
 BAHitTest class >> inspectMismatches [
-	<script: 'self inspectMismatches' >
-
-	super inspectMismatches
+	<script: 'super inspectMismatches' >
 ]
 
 { #category : #tests }

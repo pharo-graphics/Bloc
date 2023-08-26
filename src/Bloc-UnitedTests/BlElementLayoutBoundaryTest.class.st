@@ -5,18 +5,13 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementLayoutBoundaryTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#category : #'Bloc-UnitedTests-Layout'
 }
-
-{ #category : #metadata }
-BlElementLayoutBoundaryTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlElementLayoutBoundaryExamples'
-]
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
-	<gtExample>
+	<sampleInstance>
+	
 	| aSpace |
 	aSpace := self testSpaceWithExactLayoutBoundary.
 	self assert: aSpace isLayoutRequested.
@@ -39,7 +34,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
-	<gtExample>
+	<sampleInstance>
 	| aSpace |
 	aSpace := self testExactLayoutBoundary01Pulse.
 	(aSpace root childNamed: #child) requestLayout.
@@ -65,9 +60,9 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
-	<gtExample>
+	<sampleInstance>
 	| aSpace aContainer aLayoutBoundary aChild |
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace extent: 500 @ 400.
 	aContainer := BlElement new size: 400 @ 300.
 	aLayoutBoundary := BlElement new size: 300 @ 200.

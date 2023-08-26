@@ -90,6 +90,11 @@ BlElementEventDispatcher >> disableLayoutComputed [
 ]
 
 { #category : #'api - element events' }
+BlElementEventDispatcher >> disableMousePickedOutside [
+	activatedElementEvents clearMousePickedOutside
+]
+
+{ #category : #'api - element events' }
 BlElementEventDispatcher >> disablePositionChanged [
 	activatedElementEvents clearPositionChanged
 ]
@@ -290,6 +295,11 @@ BlElementEventDispatcher >> enableLayoutComputed [
 ]
 
 { #category : #'api - element events' }
+BlElementEventDispatcher >> enableMousePickedOutside [
+	activatedElementEvents addMousePickedOutside
+]
+
+{ #category : #'api - element events' }
 BlElementEventDispatcher >> enablePositionChanged [
 	activatedElementEvents addPositionChanged
 ]
@@ -400,6 +410,11 @@ BlElementEventDispatcher >> wantsLayoutChanged [
 { #category : #'api - element events' }
 BlElementEventDispatcher >> wantsLayoutComputed [
 	^ activatedElementEvents hasLayoutComputed
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> wantsMousePickedOutside [
+	^ activatedElementEvents hasMousePickedOutside
 ]
 
 { #category : #'api - element events' }

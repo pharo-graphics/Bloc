@@ -19,19 +19,15 @@ BARenderTest class >> exportAll [
 
 { #category : #convenience }
 BARenderTest class >> inspectAll [
-	<script: 'self inspectAll' >
-
-	super inspectAll
+	<script: 'super inspectAll'>
 ]
 
 { #category : #convenience }
 BARenderTest class >> inspectMismatches [
-	<script: 'self inspectMismatches' >
-
-	super inspectMismatches
+	<script: 'super inspectMismatches' >
 ]
 
-{ #category : #tests }
+{ #category : #hooks }
 BARenderTest >> actualForm [
 		
 	| aSpace |
@@ -40,7 +36,6 @@ BARenderTest >> actualForm [
 		perform: formSelector;
 		space.
 	^ aSpace aeAsForm
-
 ]
 
 { #category : #tests }

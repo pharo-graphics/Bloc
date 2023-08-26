@@ -13,7 +13,7 @@ jobs:
       # Default value means that a failure in one OS cancels all 
       fail-fast: false
       matrix:
-        smalltalk: [ Pharo64-11 ]
+        smalltalk: [ Pharo64-11 ] # Pharo64-12
         os: [ ubuntu-latest, macos-latest, windows-latest ]
         ston: [ .ci.ston ]
     runs-on: ${{ matrix.os }}
@@ -32,3 +32,12 @@ jobs:
         timeout-minutes: 10
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: Logs
+          path: |
+            *.fuel
+            PharoDebug.log
+          retention-days: 3

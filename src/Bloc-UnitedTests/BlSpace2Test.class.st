@@ -6,20 +6,20 @@ Class {
 
 { #category : #'test seed' }
 BlSpace2Test >> animatedElement [
-	<gtExample>
-	
+
+	<sampleInstance>
 	^ BlElement new
-		background: Color blue;
-		size: 150 @ 150;
-		relocate: 100 @ 100;
-		addAnimation: self infiniteAnimation;
-		yourself
+		  background: Color blue;
+		  size: 150 @ 150;
+		  position: 100 @ 100;
+		  addAnimation: self infiniteAnimation;
+		  yourself
 ]
 
 { #category : #'test seed' }
 BlSpace2Test >> iconElement [
-	<gtExample>
-	
+
+	<sampleInstance>
 	^ BlElement new
 		  size: 16 @ 16;
 		  background: (Color green alpha: 0.5);
@@ -28,8 +28,8 @@ BlSpace2Test >> iconElement [
 
 { #category : #'test seed' }
 BlSpace2Test >> iconStencil [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| aStencil |
 	aStencil := BlSpaceIconDummyStencil2 new.
 	aStencil block: [ self iconElement ].
@@ -38,8 +38,8 @@ BlSpace2Test >> iconStencil [
 
 { #category : #'test seed' }
 BlSpace2Test >> infiniteAnimation [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| anAnimation |
 	anAnimation := BlSequentialAnimation new.
 	anAnimation add: (BlTransformAnimation scale: 2) absolute.
@@ -50,20 +50,20 @@ BlSpace2Test >> infiniteAnimation [
 
 { #category : #'test seed' }
 BlSpace2Test >> spaceWithSlownDownTime [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| aTime aSpace |
 	aTime := BlFastForwardedTime new.
 	aTime speed: 0.2.
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aSpace time: aTime.
 	^ aSpace
 ]
 
 { #category : #'test seed' }
 BlSpace2Test >> spaceWithSlownDownTimeAndAnimatedElement [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| aSpace |
 	aSpace := self spaceWithSlownDownTime.
 	aSpace root addChild: self animatedElement.
@@ -72,8 +72,8 @@ BlSpace2Test >> spaceWithSlownDownTimeAndAnimatedElement [
 
 { #category : #tests }
 BlSpace2Test >> testChangeIcon [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| aSpace aCollection |
 	aSpace := self testEmptySpace.
 	aCollection := OrderedCollection new.
@@ -94,13 +94,13 @@ BlSpace2Test >> testChangeIcon [
 
 { #category : #tests }
 BlSpace2Test >> testEmptySpace [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| aSpace |
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self deny: aSpace root hasChildren.
-	self assert: aSpace dirtyAreas isEmpty.
+	self deny: aSpace hasDirtyElements.
 	self assert: aSpace extent equals: aSpace defaultExtent.
 	self assert: aSpace height equals: aSpace defaultExtent y.
 	self assert: aSpace width equals: aSpace defaultExtent x.
@@ -110,7 +110,7 @@ BlSpace2Test >> testEmptySpace [
 	self deny: aSpace fullscreen.
 	self deny: aSpace focused.
 	self deny: aSpace hasHostSpace.
-	self deny: aSpace hasDirtyAreas.
+	self deny: aSpace hasDirtyElements.
 	self deny: aSpace hasLayoutError.
 	self assert: aSpace isLayoutRequested.
 	self deny: aSpace isVisible.
@@ -122,13 +122,13 @@ BlSpace2Test >> testEmptySpace [
 
 { #category : #tests }
 BlSpace2Test >> testFirstPulse [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| aSpace |
 	aSpace := self testEmptySpace.
 	aSpace pulse.
 
-	self assert: aSpace dirtyAreas isEmpty.
+	self deny: aSpace hasDirtyElements.
 	self assert: aSpace root position equals: 0 @ 0.
 	self assert: aSpace root extent equals: aSpace extent.
 

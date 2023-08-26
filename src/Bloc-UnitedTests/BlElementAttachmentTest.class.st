@@ -5,20 +5,14 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementAttachmentTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#category : #'Bloc-UnitedTests-Children'
 }
-
-{ #category : #metadata }
-BlElementAttachmentTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlElementAttachmentExamples'
-]
 
 { #category : #tests }
 BlElementAttachmentTest >> testAddToSpace [
-	<gtExample>
+	<sampleInstance>
 	| aSpace aContainer aChild addedToScene removedFromScene |
-	aSpace := BlSpace new.
+	aSpace := BlOSpace new.
 	aChild := BlElement new.
 	aContainer := BlElement new.
 	aContainer addChild: aChild.
@@ -52,7 +46,7 @@ BlElementAttachmentTest >> testAddToSpace [
 
 { #category : #tests }
 BlElementAttachmentTest >> testDetachAndAttachChild [
-	<gtExample>
+	<sampleInstance>
 	| aContainer aChild addedToScene removedFromScene |
 	aContainer := self testAddToSpace.
 	aChild := aContainer children first.
@@ -89,7 +83,7 @@ BlElementAttachmentTest >> testDetachAndAttachChild [
 
 { #category : #tests }
 BlElementAttachmentTest >> testDetachAndRemoveChild [
-	<gtExample>
+	<sampleInstance>
 	| aContainer aChild addedToScene removedFromScene |
 	aContainer := self testAddToSpace.
 	aChild := aContainer children first.
@@ -126,7 +120,7 @@ BlElementAttachmentTest >> testDetachAndRemoveChild [
 
 { #category : #tests }
 BlElementAttachmentTest >> testDetachAndRemoveContainer [
-	<gtExample>
+	<sampleInstance>
 	| aRoot aContainer aChild addedToScene removedFromScene |
 	aContainer := self testAddToSpace.
 	aChild := aContainer children first.
@@ -172,7 +166,7 @@ BlElementAttachmentTest >> testDetachAndRemoveContainer [
 
 { #category : #tests }
 BlElementAttachmentTest >> testDetachRequestFocusAndAttachChild [
-	<gtExample>
+	<sampleInstance>
 	| aContainer aChild focusEvents |
 	aContainer := self testAddToSpace.
 	aChild := aContainer children first.

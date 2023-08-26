@@ -8,15 +8,10 @@ Class {
 	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : #metadata }
-BlFrameLayoutNodeTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlFrameLayoutNodeExamples'
-]
-
 { #category : #tests }
 BlFrameLayoutNodeTest >> testEmptyParentAtMost [
-	<gtExample>
+
+	<sampleInstance>
 	| aLayout aParentNode |
 	aParentNode := BlLayoutParentNode new.
 	aParentNode constraints: BlLayoutCommonConstraints new.
@@ -29,7 +24,8 @@ BlFrameLayoutNodeTest >> testEmptyParentAtMost [
 
 { #category : #tests }
 BlFrameLayoutNodeTest >> testEmptyParentExact [
-	<gtExample>
+
+	<sampleInstance>
 	| aLayout aParentNode |
 	aParentNode := BlLayoutParentNode new.
 	aParentNode constraints: BlLayoutCommonConstraints new.
@@ -42,16 +38,18 @@ BlFrameLayoutNodeTest >> testEmptyParentExact [
 
 { #category : #tests }
 BlFrameLayoutNodeTest >> testOneChildMatchParentExact [
-	<gtExample>
+
+	<sampleInstance>
 	| aLayout aParentNode aChildNode |
 	aChildNode := BlLayoutChildNode new
-		constraints: BlLayoutCommonConstraints new;
-		measurement: BlLayoutNodeResizerMeasurement new;
-		matchParent.
+		              constraints: BlLayoutCommonConstraints new;
+		              measurement: BlLayoutNodeResizerMeasurement new;
+		              matchParent.
 	aParentNode := BlLayoutParentNode new
-		constraints: BlLayoutCommonConstraints new;
-		extentSpec: (BlExtentMeasurementSpec exact: 200 @ 100);
-		children: {aChildNode}.
+		               constraints: BlLayoutCommonConstraints new;
+		               extentSpec:
+			               (BlExtentMeasurementSpec exact: 200 @ 100);
+		               children: { aChildNode }.
 	aLayout := BlFrameLayout new.
 	aLayout measure: aParentNode.
 	self assert: aParentNode extent equals: 200.0 @ 100.0.
@@ -65,17 +63,22 @@ BlFrameLayoutNodeTest >> testOneChildMatchParentExact [
 
 { #category : #tests }
 BlFrameLayoutNodeTest >> testOneChildMatchParentFitContent [
-	<gtExample>
+
+	<sampleInstance>
 	| aLayout aParentNode aChildNode |
 	aChildNode := BlLayoutChildNode new
-		constraints: BlLayoutCommonConstraints new;
-		measurement: BlLayoutNodeResizerMeasurement new;
-		hMatchParent;
-		vExact: 50.
+		              constraints: BlLayoutCommonConstraints new;
+		              measurement: BlLayoutNodeResizerMeasurement new;
+		              hMatchParent;
+		              vExact: 50.
 	aParentNode := BlLayoutParentNode new
-		constraints: (BlLayoutCommonConstraints new padding: (BlInsets all: 15));
-		extentSpec: (BlMeasurementSpec exact: 200) @ BlMeasurementSpec unspecified;
-		children: {aChildNode}.
+		               constraints:
+			               (BlLayoutCommonConstraints new padding:
+					                (BlInsets all: 15));
+		               extentSpec:
+			               (BlMeasurementSpec exact: 200)
+			               @ BlMeasurementSpec unspecified;
+		               children: { aChildNode }.
 	aLayout := BlFrameLayout new.
 	aLayout measure: aParentNode.
 	self assert: aParentNode extent equals: 200.0 @ 80.0.
@@ -89,16 +92,18 @@ BlFrameLayoutNodeTest >> testOneChildMatchParentFitContent [
 
 { #category : #tests }
 BlFrameLayoutNodeTest >> testOneChildMatchParentMatrixExact [
-	<gtExample>
+
+	<sampleInstance>
 	| aLayout aParentNode aChildNode |
 	aChildNode := (BlLayoutChildNode new
-		constraints: BlLayoutCommonConstraints new;
-		measurement: BlLayoutNodeResizerMeasurement new;
-		matchParent) withMatrix: (BlMatrix2D scale: 2 @ 2).
+		               constraints: BlLayoutCommonConstraints new;
+		               measurement: BlLayoutNodeResizerMeasurement new;
+		               matchParent) withMatrix: (BlMatrix2D scale: 2 @ 2).
 	aParentNode := BlLayoutParentNode new
-		constraints: BlLayoutCommonConstraints new;
-		extentSpec: (BlExtentMeasurementSpec exact: 200 @ 100);
-		children: {aChildNode}.
+		               constraints: BlLayoutCommonConstraints new;
+		               extentSpec:
+			               (BlExtentMeasurementSpec exact: 200 @ 100);
+		               children: { aChildNode }.
 	aLayout := BlFrameLayout new.
 	aLayout measure: aParentNode.
 	self assert: aParentNode extent equals: 200.0 @ 100.0.
@@ -112,7 +117,8 @@ BlFrameLayoutNodeTest >> testOneChildMatchParentMatrixExact [
 
 { #category : #tests }
 BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixDownscacleAlignTopRightParentExact [
-	<gtExample>
+
+	<sampleInstance>
 	| aLayout aParentNode aChildNode aChildConstraints |
 	aChildConstraints := BlLayoutCommonConstraints new.
 	aChildConstraints frame horizontal
@@ -122,13 +128,14 @@ BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixDownscacleAlignTopRightPar
 		weight: 0.5;
 		alignTop.
 	aChildNode := (BlLayoutChildNode new
-		constraints: aChildConstraints;
-		measurement: BlLayoutNodeResizerMeasurement new;
-		matchParent) withMatrix: (BlMatrix2D scale: 0.5).
+		               constraints: aChildConstraints;
+		               measurement: BlLayoutNodeResizerMeasurement new;
+		               matchParent) withMatrix: (BlMatrix2D scale: 0.5).
 	aParentNode := BlLayoutParentNode new
-		constraints: BlLayoutCommonConstraints new;
-		extentSpec: (BlExtentMeasurementSpec exact: 200 @ 100);
-		children: {aChildNode}.
+		               constraints: BlLayoutCommonConstraints new;
+		               extentSpec:
+			               (BlExtentMeasurementSpec exact: 200 @ 100);
+		               children: { aChildNode }.
 	aLayout := BlFrameLayout new.
 	aLayout measure: aParentNode.
 	self assert: aParentNode extent equals: 200.0 @ 100.0.
@@ -142,7 +149,8 @@ BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixDownscacleAlignTopRightPar
 
 { #category : #tests }
 BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixUpscaleAlignTopRightParentExact [
-	<gtExample>
+
+	<sampleInstance>
 	| aLayout aParentNode aChildNode aChildConstraints |
 	aChildConstraints := BlLayoutCommonConstraints new.
 	aChildConstraints frame horizontal
@@ -152,13 +160,14 @@ BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixUpscaleAlignTopRightParent
 		weight: 0.5;
 		alignTop.
 	aChildNode := (BlLayoutChildNode new
-		constraints: aChildConstraints;
-		measurement: BlLayoutNodeResizerMeasurement new;
-		matchParent) withMatrix: (BlMatrix2D scale: 2).
+		               constraints: aChildConstraints;
+		               measurement: BlLayoutNodeResizerMeasurement new;
+		               matchParent) withMatrix: (BlMatrix2D scale: 2).
 	aParentNode := BlLayoutParentNode new
-		constraints: BlLayoutCommonConstraints new;
-		extentSpec: (BlExtentMeasurementSpec exact: 200 @ 100);
-		children: {aChildNode}.
+		               constraints: BlLayoutCommonConstraints new;
+		               extentSpec:
+			               (BlExtentMeasurementSpec exact: 200 @ 100);
+		               children: { aChildNode }.
 	aLayout := BlFrameLayout new.
 	aLayout measure: aParentNode.
 	self assert: aParentNode extent equals: 200.0 @ 100.0.
@@ -172,19 +181,21 @@ BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixUpscaleAlignTopRightParent
 
 { #category : #tests }
 BlFrameLayoutNodeTest >> testOneChildMatchWeightParentExact [
-	<gtExample>
+
+	<sampleInstance>
 	| aLayout aParentNode aChildNode aChildConstraints |
 	aChildConstraints := BlLayoutCommonConstraints new.
 	aChildConstraints frame horizontal weight: 0.5.
 	aChildConstraints frame vertical weight: 0.5.
 	aChildNode := BlLayoutChildNode new
-		constraints: aChildConstraints;
-		measurement: BlLayoutNodeResizerMeasurement new;
-		matchParent.
+		              constraints: aChildConstraints;
+		              measurement: BlLayoutNodeResizerMeasurement new;
+		              matchParent.
 	aParentNode := BlLayoutParentNode new
-		constraints: BlLayoutCommonConstraints new;
-		extentSpec: (BlExtentMeasurementSpec exact: 200 @ 100);
-		children: {aChildNode}.
+		               constraints: BlLayoutCommonConstraints new;
+		               extentSpec:
+			               (BlExtentMeasurementSpec exact: 200 @ 100);
+		               children: { aChildNode }.
 	aLayout := BlFrameLayout new.
 	aLayout measure: aParentNode.
 	self assert: aParentNode extent equals: 200.0 @ 100.0.

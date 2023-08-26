@@ -73,12 +73,6 @@ Bloc class >> groupSymbolForBloc [
 	^ 	#Bloc
 ]
 
-{ #category : #settings }
-Bloc class >> hackyRefreshAllSettingBrowsers [
-
-	SettingBrowser allSubInstances do: [ :aSettingsBrowser | aSettingsBrowser treeChanged: Announcement new ]
-]
-
 { #category : #children }
 Bloc class >> preferableChildrenDataStructure [
 	"Answer a `BlChildrenCollection class`."
@@ -107,15 +101,23 @@ Bloc class >> preferencesOn: aBuilder [
 				domainValues: { BlChildrenArray . BlChildrenRope . BlChildrenLinkedList };
 				description: 'Choose which data structure should be used to store element''s children'.
 
+			(aBuilder range: #scrollingVelocity)
+				order: 5; 
+				target: BlInfiniteMouseScrollListener;
+				label: 'Scrolling velocity';
+				description: 'A positive integer used as a multiplier to increase mousewheel scrolling velocity ';
+				range: (1 to: 200 by: 1);
+				default: OSPlatform current defaultScrollingVelocity.
+				
 			(aBuilder setting: #assertionsEnabled)
-				order: 5;
+				order: 6;
 				target: self;
 				label: 'Assertions';
 				description: 'Set enabled to turn assertions on or disable to turn them off';
 				default: [ true ].
 				
 			(aBuilder setting: #debugModeEnabled)
-				order: 6;
+				order: 7;
 				target: self;
 				label: 'Debug Mode';
 				description: 'Set enabled to turn extensive debugging mode on or disable to turn it off';

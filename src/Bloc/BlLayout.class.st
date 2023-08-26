@@ -162,6 +162,13 @@ BlLayout >> isInfluencedByTransformation [
 	^ false
 ]
 
+{ #category : #testing }
+BlLayout >> isOrientable [
+
+	" can be vertical/horizontal ? "
+	^ false
+]
+
 { #category : #enumeration }
 BlLayout >> layeredChildren: anElement do: aBlock [
 	"Evaluate a given block with all children of anElement

@@ -39,8 +39,10 @@ BlLayoutParentNodeWithTransformation >> extent [
 
 { #category : #'api - geometry' }
 BlLayoutParentNodeWithTransformation >> extent: aPoint [
+
 	parentNode extent: aPoint.
-	self transformation bounds: (BlBounds origin: self position extent: aPoint)
+	self transformation boundingRectangle:
+		(BlBounds origin: self position extent: aPoint)
 ]
 
 { #category : #'api - extent spec' }
@@ -77,8 +79,10 @@ BlLayoutParentNodeWithTransformation >> position [
 
 { #category : #accessing }
 BlLayoutParentNodeWithTransformation >> position: aPoint [
+
 	parentNode position: aPoint.
-	self transformation bounds: (BlBounds origin: aPoint extent: self extent)
+	self transformation boundingRectangle:
+		(BlBounds origin: aPoint extent: self extent)
 ]
 
 { #category : #accessing }
@@ -95,7 +99,10 @@ BlLayoutParentNodeWithTransformation >> transformation [
 BlLayoutParentNodeWithTransformation >> transformation: aBlElementTransformation [
 
 	transformation := aBlElementTransformation asCachedTransformation
-		bounds: (BlBounds origin: self position extent: self extent)
+		                  boundingRectangle:
+		                  (BlBounds
+			                   origin: self position
+			                   extent: self extent)
 ]
 
 { #category : #accessing }

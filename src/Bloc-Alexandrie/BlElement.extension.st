@@ -3,25 +3,45 @@ Extension { #name : #BlElement }
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
-	| aCanvas |
-	self isLayoutRequested
-		ifTrue: [ self forceLayout ].
+	| invalidationBounds |
+	self isLayoutRequested ifTrue: [ self forceLayout ].
 
-	aCanvas := AeCanvas extent: self extent.
-	aCanvas fullDraw: self.
-	^ aCanvas asForm
+	"We want to consider our border, effect, as well as children's."
+	invalidationBounds := self invalidationBounds: BlBounds new.
 
+	^ (AeCanvas extent: invalidationBounds extent)
+			pathTranslate: invalidationBounds origin negated;
+			fullDraw: self;
+			asForm
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aeCompositionLayersSortedByElevationDo: aBlock [
+
+	(self isTransparent or: [ self isVisible not ])
+		ifTrue: [ ^ self ].
+
+	self wantsSeparateCompositingLayer ifTrue: [
+		self hasCompositionLayer ifFalse: [
+			self compositionLayer:
+				(BAAxisAlignedCompositionLayer newFor: self) ].
+		aBlock value: self compositionLayer ].
+
+	self flag: #todo. "extract to allow overriding, exactly as aeDrawChildrenOn:"
+	self children sortedByElevation do: [ :each |
+		(each aeCompositionLayersSortedByElevationDo: aBlock) ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawChildrenOn: aeCanvas [
-	"Draw my children.
+	"Draw my children that belong to same composition layer.
 	
 	Notes:
 	- Receiver assumes that position and transformations are already applied on the canvas."
 	
 	self children sortedByElevation do: [ :each |
-		each aeFullDrawOn: aeCanvas ].
+		each wantsSeparateCompositingLayer ifFalse: [
+			each aeDrawInSameLayerOn: aeCanvas ] ].
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -61,6 +81,24 @@ BlElement >> aeDrawGeometryOn: aeCanvas [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlElement >> aeDrawIgnoringOpacityAndTransformationOn: aeCanvas [
+
+	self aeDrawEffectBelowGeometryOn: aeCanvas.
+	self aeDrawGeometryOn: aeCanvas.
+	self aeDrawEffectAboveGeometryOn: aeCanvas.
+	self aeDrawChildrenOn: aeCanvas.
+
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aeDrawInSameLayerOn: aCanvas [
+
+	(self isTransparent not and: [ self isVisible ])
+		ifTrue: [ self aeDrawOn: aCanvas ].
+	self markDoesNotNeedPaint
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas [
 
 	self aeDrawOn: aeCanvas with: [
@@ -70,13 +108,7 @@ BlElement >> aeDrawOn: aeCanvas [
 		aeCanvas pathTranslate: self position.
 		self transformation aeApplyTo: aeCanvas.
 
-		self aeDrawEffectBelowGeometryOn: aeCanvas.
-		self aeDrawGeometryOn: aeCanvas.
-		self aeDrawEffectAboveGeometryOn: aeCanvas.
-
-		self aeDrawChildrenOn: aeCanvas.
-		
-		]
+		self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -97,16 +129,8 @@ BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
 BlElement >> aeFullDrawOn: aCanvas [
 	"Main entry point to draw myself and my children on an Alexandrie canvas."
 
-	self flag: #todo. "Why is this commented?"
-	"flags clearNeedsPaint."
-	
-	"We do not draw transparent elements at all"
-	self isTransparent
-		ifTrue: [ ^ self ].
+	self aeDrawInSameLayerOn: aCanvas.
 
-	"invisible elements are not rendered too"
-	self isVisible
-		ifFalse: [ ^ self ].
-
-	self aeDrawOn: aCanvas
+	self aeCompositionLayersSortedByElevationDo: [ :each |
+		each paintOn: aCanvas ].
 ]

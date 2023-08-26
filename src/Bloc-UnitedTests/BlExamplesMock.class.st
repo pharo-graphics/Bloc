@@ -5,7 +5,7 @@ See my references.
 "
 Class {
 	#name : #BlExamplesMock,
-	#superclass : #BlExamplesTest,
+	#superclass : #BlExampleTest,
 	#instVars : [
 		'enabled'
 	],
@@ -20,27 +20,27 @@ BlExamplesMock >> enableRunning [
 
 { #category : #examples }
 BlExamplesMock >> exampleError [
-	<gtExample>
+	<sampleInstance>
 
 	self error
 ]
 
 { #category : #examples }
 BlExamplesMock >> exampleFail [
-	<gtExample>
+	<sampleInstance>
 
 	self fail
 ]
 
 { #category : #examples }
 BlExamplesMock >> examplePass [
-	<gtExample>
+	<sampleInstance>
 
 ]
 
 { #category : #examples }
 BlExamplesMock >> exampleSkip [
-	<gtExample>
+	<sampleInstance>
 	<noTest>
 	
 	self error

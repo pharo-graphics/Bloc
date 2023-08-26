@@ -6,7 +6,8 @@ Class {
 		'previousPosition',
 		'newPosition',
 		'previousExtent',
-		'newExtent'
+		'newExtent',
+		'compositionDepth'
 	],
 	#category : #'Bloc-Basic-Bounds'
 }
@@ -41,9 +42,7 @@ BlElementBoundsUpdaterChange >> commitLocalExtentChange [
 	(newExtent closeTo: aPreviousExtent epsilon: BlElement epsilon)
 		ifTrue: [ ^ self ].
 	
-	self element telemetry
-		timeSync: [ 'onExtentChanged ',self element class name ]
-		during: [ self element onExtentChanged ]
+	self element onExtentChanged
 ]
 
 { #category : #'api - changes' }
@@ -57,9 +56,13 @@ BlElementBoundsUpdaterChange >> commitLocalPositionChange [
 	(newPosition closeTo: aPreviousPosition epsilon: BlElement epsilon)
 		ifTrue: [ ^ self ].
 	
-	self element telemetry
-		timeSync: [ 'onPositionChanged ',self element class name ]
-		during: [ self element onPositionChangedFrom: aPreviousPosition to: newPosition ]
+	self element onPositionChangedFrom: aPreviousPosition to: newPosition
+]
+
+{ #category : #'api - compositing' }
+BlElementBoundsUpdaterChange >> compositionDepth [
+	
+	^ compositionDepth ifNil: [ compositionDepth := element compositionDepth ]
 ]
 
 { #category : #accessing }
@@ -70,6 +73,17 @@ BlElementBoundsUpdaterChange >> element [
 { #category : #accessing }
 BlElementBoundsUpdaterChange >> element: anObject [
 	element := anObject
+]
+
+{ #category : #'api - changes' }
+BlElementBoundsUpdaterChange >> isExtentChanged [
+	| aPreviousExtent |
+
+	newExtent
+		ifNil: [ ^ false ].
+		
+	aPreviousExtent := previousExtent ifNil: [ 0@0 ].
+	^ (newExtent closeTo: aPreviousExtent epsilon: BlElement epsilon) not
 ]
 
 { #category : #'api - changes' }

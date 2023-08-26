@@ -25,25 +25,49 @@ BlElementBoundsUpdater >> changePositionFrom: aPreviousPosition to: aNewPosition
 
 { #category : #'change reporting' }
 BlElementBoundsUpdater >> commitChanges [
+
 	| theAssociations theElements theRoots |
 	
-	theAssociations := (changes associations sorted: [ :a :b | a key compositionDepth > b key compositionDepth ]).
+	changes associations ifEmpty: [ ^ self ].
+		
+	theAssociations := changes associations sorted: [ :a :b | a value compositionDepth > b value compositionDepth ].
+	theAssociations do: [ :eachAssociation | eachAssociation value commitLocalChanges ].
+	theElements := theAssociations 
+							select: [ :eachAssociation | eachAssociation value isPositionChanged ]
+		               thenCollect: [ :eachAssociation | eachAssociation key ].
+	theElements ifEmpty: [ ^ self ].
 	
-	theAssociations ifNotEmpty: [
-		theAssociations first key telemetry
-			timeSync: [ 'commitChanges' ]
-			during: [ 
-				theAssociations do: [ :eachAssociation | eachAssociation value commitLocalChanges ].
-				
-				theElements := theAssociations
-					select: [ :eachAssociation | eachAssociation value isPositionChanged ]
-					thenCollect: [ :eachAssociation | eachAssociation key ].
+	"<---"
+	self flag: 'Workarroud: avoiding #extractRoots: use speed-up position updates a lot'.
+	"theElements do: [ :eachRootElement |
+		eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild |	eachChild onPositionInSpaceChanged ] ]."
+	"--->"
+	self flag: 'Original version'.
+	"<---"
+	self flag: ' It sounds better with #extractRoots: from feenk '.
+	theRoots := BlSpace extractRoots: theElements.
+	theRoots do: [ :eachRootElement |
+		eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild | eachChild onPositionInSpaceChanged ] ]
+	"--->"
 
-				theRoots := BlSpace extractRoots: theElements.
-				theRoots do: [ :eachRootElement |
-					eachRootElement telemetry
-						timeSync: [ 'onPositionInSpaceChanged ', eachRootElement class name ]
-						during: [ eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild | eachChild onPositionInSpaceChanged ] ] ]  ] ]
+]
+
+{ #category : #testing }
+BlElementBoundsUpdater >> hasChanges [ 
+
+	^ changes notEmpty
+]
+
+{ #category : #testing }
+BlElementBoundsUpdater >> hasExtentChanges [ 
+
+	^ changes anySatisfy: [ :c | c isExtentChanged ]
+]
+
+{ #category : #testing }
+BlElementBoundsUpdater >> hasPositionChanges [ 
+
+	^ changes anySatisfy: [ :c | c isPositionChanged ]
 ]
 
 { #category : #initialization }
