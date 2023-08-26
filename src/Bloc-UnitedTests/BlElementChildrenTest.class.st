@@ -529,8 +529,8 @@ BlElementChildrenTest >> testChildrenCount2 [
 	self assert: aContainer childrenCount equals: 1
 ]
 
-{ #category : #tests }
-BlElementChildrenTest >> testDirectChildNamedifFoundifNone [
+{ #category : #'children - accessing' }
+BlElementChildrenTest >> testDirectChildWithIdifFoundifNone [
 
 	| aContainer |
 	aContainer := self hierarchyChildren.
