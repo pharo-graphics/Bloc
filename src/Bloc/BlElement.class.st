@@ -211,7 +211,7 @@ BlElement >> addChild: anElement in: aContainerName [
 	"Add a given element to a named container that must already exist"
 
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement addChild: anElement. ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]
@@ -222,7 +222,7 @@ BlElement >> addChild: anElement in: aContainerName as: aChildContainerName [
 	and mark the added child as container too"
 
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement addChild: anElement as: aChildContainerName ]
 		ifNone: [ self error: 'Container named #', aContainerName asString, ' does not exist' ]
 ]
@@ -275,7 +275,7 @@ BlElement >> addChildren: aListOfElements in: aContainerName [
 	"Add given elements to a named container that must already exist"
 
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement addChildren: aListOfElements. ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]
@@ -747,12 +747,10 @@ BlElement >> childIndexOf: anElement [
 { #category : #'children accessing' }
 BlElement >> childNamed: aChildName [
 	<return: #BlElement>
-	self
-		deprecated: 'Use #childWithId: instead.'
-		transformWith: '`@receiver childNamed:' -> '`@receiver childWithId:'.
+	self deprecated: 'Use #childWithId: instead. Cannot use auto rewriting because of very used method, @receiver childNamed: -> @receiver childWithId:'.
 
 	self
-		childNamed: aChildName
+		childWithId: aChildName
 		ifFound: [ :anElement | ^ anElement ]
 		ifNone: [ self error: 'Children container named ', aChildName asString, ' does not exist' ]
 ]
@@ -761,11 +759,10 @@ BlElement >> childNamed: aChildName [
 BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
 	<return: #Object>
 	self
-		deprecated: 'Use #childWithId:ifFound: instead.'
-		transformWith: '`@receiver childNamed:ifFound:' -> '`@receiver childWithId:ifFound:'.
+		deprecated: 'Use #childWithId:ifFound: instead. Cannot use auto rewriting because of very used method, `@receiver childNamed:ifFound: -> `@receiver childWithId:ifFound:'.
 
 	^ self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: ifFoundBlock
 		ifNone: [  ]
 ]
@@ -774,8 +771,7 @@ BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
 BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
 	self
-		deprecated: 'Use #childWithId:ifFound:ifNone: instead.'
-		transformWith: '`@receiver childNamed:ifFound:ifNone:' -> '`@receiver childWithId:ifFound:ifNone:'.
+		deprecated: 'Use #childWithId:ifFound:ifNone: instead. Cannot use auto rewriting because of very used method, `@receiver childNamed:ifFound:ifNone: -> `@receiver childWithId:ifFound:ifNone:'.
 
 	^ self
 		childWithId: aContainerName
@@ -1040,7 +1036,7 @@ BlElement >> constraintsDo: aBlock [
 BlElement >> containerName [
 	<return: #Symbol or: nil>
 
-	self deprecated: 'Use #id instead. Cannot propose a rewriting because #id is a method that has lots and lots of calls'.
+	self deprecated: 'Use #id instead. Cannot use auto rewriting because of very used method'.
 	
 	^ self id asSymbol
 ]
@@ -1049,7 +1045,7 @@ BlElement >> containerName [
 BlElement >> containerName: aSymbol [
 	"Give this element a container name (a Symbol) which can be used to find an element by its name"
 
-	self deprecated: 'Use #id: instead. Cannot propose a rewriting because #id: is a method that has lots and lots of calls'.
+	self deprecated: 'Use #id: instead. Cannot use auto rewriting because of very used method'.
 
 	self id: aSymbol
 ]
@@ -1266,8 +1262,7 @@ BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNo
 	<return: #Object>
 
 	self
-		deprecated: 'Use #childWithId:ifFound: instead.'
-		transformWith: '`@receiver childNamed:ifFound:' -> '`@receiver childWithId:ifFound:'.
+		deprecated: 'Use #childWithId:ifFound: instead. `@receiver childNamed:ifFound: -> `@receiver childWithId:ifFound:'.
 
 	self childrenDo: [ :aChild |
 		aChild id asSymbol ifNotNil: [ :aName |
@@ -3345,8 +3340,9 @@ BlElement >> removeChild: anElement [
 
 { #category : #'children add/remove' }
 BlElement >> removeChild: anElement in: aContainerName [
+
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement removeChild: anElement ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]
@@ -3378,8 +3374,20 @@ BlElement >> removeChildAt: anIndex [
 
 { #category : #'children add/remove' }
 BlElement >> removeChildNamed: aContainerName [
+
+	self deprecated: 'Use #removeChildWithId: instead.'.
+
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
+		ifFound: [ :aContainerElement | aContainerElement removeFromParent ]
+		ifNone: [ "do nothing, no need to raise an exception" ]
+]
+
+{ #category : #'children add/remove' }
+BlElement >> removeChildWithId: aStringOrSymbol [
+
+	self
+		childWithId: aStringOrSymbol
 		ifFound: [ :aContainerElement | aContainerElement removeFromParent ]
 		ifNone: [ "do nothing, no need to raise an exception" ]
 ]
@@ -3433,8 +3441,9 @@ BlElement >> removeChildren: aListOfElements [
 
 { #category : #'children add/remove' }
 BlElement >> removeChildrenIn: aContainerName [
+
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement removeChildren ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]

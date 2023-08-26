@@ -273,6 +273,13 @@ BlElementTest >> testIsFocused [
 	self assert: element isFocused
 ]
 
+{ #category : #'children - add/remove' }
+BlElementTest >> testRemoveChildWithId [
+
+	| element |
+	element := self element.
+]
+
 { #category : #'focus requesting' }
 BlElementTest >> testRequestFocus [
 

@@ -140,7 +140,7 @@ BlFocusProcessorExamples >> loseFocus_01_give_focus_to_child_1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'child-1' ];
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childWithId: #'child-1' ];
 			onFocusProcessor.
 	].
 	
@@ -250,7 +250,7 @@ BlFocusProcessorExamples >> loseFocus_02_remove_child_1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'container-1' ];
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childWithId: #'container-1' ];
 			onFocusProcessor ].
 	
 	^ aScripter syncContinue
@@ -358,7 +358,7 @@ BlFocusProcessorExamples >> loseFocus_03_add_back_child_1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'child-1' ];
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childWithId: #'child-1' ];
 			onFocusProcessor ].
 	
 	^ aScripter syncContinue
@@ -456,7 +456,7 @@ BlFocusProcessorExamples >> requestFocus_02_container_1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'container-1' ];
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childWithId: #'container-1' ];
 			onFocusProcessor.
 	].
 	
@@ -535,7 +535,7 @@ BlFocusProcessorExamples >> requestFocus_03_container_2 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'container-2' ];
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childWithId: #'container-2' ];
 			onFocusProcessor.
 	].
 	
@@ -634,7 +634,7 @@ BlFocusProcessorExamples >> requestFocus_04_child_1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'child-1' ];
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childWithId: #'child-1' ];
 			onFocusProcessor.
 	].
 	
@@ -753,7 +753,7 @@ BlFocusProcessorExamples >> requestFocus_05_child_4 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'child-4' ];
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childWithId: #'child-4' ];
 			onFocusProcessor.
 	].
 	
@@ -872,7 +872,7 @@ BlFocusProcessorExamples >> requestFocus_06_container_1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childNamed: #'container-1' ];
+			value: [ :aFocusProcessor | aFocusProcessor focusOwner ] equals: [ aScripter element childWithId: #'container-1' ];
 			onFocusProcessor.
 	].
 	
