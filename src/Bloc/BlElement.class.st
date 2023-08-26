@@ -176,14 +176,14 @@ BlElement >> addChild: anElement at: anIndex as: aContainerName [
 	self
 		assert: [ (self children
 			detect: [ :aChild |
-				aChild containerName
+				aChild id asSymbol
 					ifNotNil: [ :aName | aName = aContainerName ]
 					ifNil: [ false ] ]
 			ifFound: [ true ]
 			ifNone: [ false ]) not ]
 		description: [ 'Child named #', aContainerName asString, ' already exists' ].
 	
-	anElement containerName: aContainerName.
+	anElement id: aContainerName.
 	self addChild: anElement at: anIndex
 ]
 
@@ -235,11 +235,11 @@ BlElement >> addChildFirst: anElement [
 ]
 
 { #category : #'children add/remove' }
-BlElement >> addChildFirst: anElement as: aContainerName [
+BlElement >> addChildFirst: anElement as: aContainerId [
 	"Add a given element as my first child and make it a named container, so that
 	we could add children in that container"
 
-	anElement containerName: aContainerName.
+	anElement id: aContainerId.
 	self addChildFirst: anElement
 ]
 
@@ -1040,10 +1040,8 @@ BlElement >> constraintsDo: aBlock [
 BlElement >> containerName [
 	<return: #Symbol or: nil>
 
-	self
-		deprecated: 'Use #id instead.'
-		transformWith: '`@receiver containerName' -> '`@receiver id'.
-
+	self deprecated: 'Use #id instead. Cannot propose a rewriting because #id is a method that has lots and lots of calls'.
+	
 	^ self id asSymbol
 ]
 
@@ -1051,9 +1049,7 @@ BlElement >> containerName [
 BlElement >> containerName: aSymbol [
 	"Give this element a container name (a Symbol) which can be used to find an element by its name"
 
-	self
-		deprecated: 'Use #id: instead.'
-		transformWith: '`@receiver containerName:' -> '`@receiver id:'.
+	self deprecated: 'Use #id: instead. Cannot propose a rewriting because #id: is a method that has lots and lots of calls'.
 
 	self id: aSymbol
 ]
@@ -1269,10 +1265,12 @@ BlElement >> detachSpace [
 BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
 
-	self deprecated:''.
+	self
+		deprecated: 'Use #childWithId:ifFound: instead.'
+		transformWith: '`@receiver childNamed:ifFound:' -> '`@receiver childWithId:ifFound:'.
 
 	self childrenDo: [ :aChild |
-		aChild containerName ifNotNil: [ :aName |
+		aChild id asSymbol ifNotNil: [ :aName |
 			(aName = aContainerName)
 				ifTrue: [ ^ ifFoundBlock cull: aChild ] ] ].
 	^ ifNoneBlock value
@@ -2302,7 +2300,7 @@ BlElement >> isVisibleInSpace [
 
 { #category : #accessing }
 BlElement >> labeled: aString [
-	self containerName: aString asSymbol
+	self id: aString asSymbol
 ]
 
 { #category : #'api - layout' }
@@ -3480,7 +3478,7 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 	aChildIndex := self childIndexOf: aChildElement.
 	self removeChildAt: aChildIndex.
 	
-	aChildElement containerName
+	aChildElement id asSymbol
 		ifNotNil: [ :aName | self addChild: anotherElement at: aChildIndex as: aName ]
 		ifNil: [ self addChild: anotherElement at: aChildIndex ]
 ]

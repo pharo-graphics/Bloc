@@ -888,11 +888,11 @@ BlFocusProcessorExamples >> scripterElement [
 		position: 50@50;
 		border: (BlBorder paint: Color gray width: 1);
 		background: Color white;
-		containerName: #parent;
+		id: #parent;
 		addChild: (BlTextElement new text: ('#parent' asRopedText light fontSize: 11); position: 8@5);
 		addChildren: { 
 			self elementWithFocusHandler
-				containerName: #'container-1';
+				id: #'container-1';
 				size: 240@320;
 				position: 40@40;
 				border: (BlBorder paint: Color gray width: 1);
@@ -900,7 +900,7 @@ BlFocusProcessorExamples >> scripterElement [
 				addChild: (BlTextElement new text: ('#''container-1''' asRopedText light fontSize: 11); position: 8@5);
 				addChildren: { 
 					self elementWithFocusHandler
-						containerName: #'child-1';
+						id: #'child-1';
 						size: 200@130;
 						position: 20@20;
 						background: (Color gray alpha: 0.3);
@@ -908,7 +908,7 @@ BlFocusProcessorExamples >> scripterElement [
 						addChild: (BlTextElement new text: ('#''child-1''' asRopedText light fontSize: 11); position: 8@5).
 						
 					self elementWithFocusHandler
-						containerName: #'child-2';
+						id: #'child-2';
 						size: 200@130;
 						position: 20@170;
 						background: (Color gray alpha: 0.3);
@@ -917,7 +917,7 @@ BlFocusProcessorExamples >> scripterElement [
 				}.
 				
 			self elementWithFocusHandler
-				containerName: #'container-2';
+				id: #'container-2';
 				size: 240@320;
 				position: 320@40;
 				border: (BlBorder paint: Color gray width: 1);
@@ -925,7 +925,7 @@ BlFocusProcessorExamples >> scripterElement [
 				addChild: (BlTextElement new text: ('#''container-2''' asRopedText light fontSize: 11); position: 8@5);
 				addChildren: { 
 					self elementWithFocusHandler
-						containerName: #'child-3';
+						id: #'child-3';
 						size: 200@130;
 						position: 20@20;
 						background: (Color gray alpha: 0.3);
@@ -933,7 +933,7 @@ BlFocusProcessorExamples >> scripterElement [
 						addChild: (BlTextElement new text: ('#''child-3''' asRopedText light fontSize: 11); position: 8@5).
 						
 					self elementWithFocusHandler
-						containerName: #'child-4';
+						id: #'child-4';
 						size: 200@130;
 						position: 20@170;
 						background: (Color gray alpha: 0.3);
