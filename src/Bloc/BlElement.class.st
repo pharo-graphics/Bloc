@@ -1896,7 +1896,7 @@ BlElement >> hasChildren [
 	false otherwise"
 	<return: #Boolean>
 	
-	^ self childrenCount > 0
+	^ self children notEmpty
 ]
 
 { #category : #'api - compositing' }
