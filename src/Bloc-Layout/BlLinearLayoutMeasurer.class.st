@@ -23,7 +23,9 @@ Class {
 		'alternativeMaxBreadth',
 		'measuredLength',
 		'useSpaceDistribution',
-		'layout'
+		'layout',
+		'interSpacing',
+		'frontAlignmentSpacing'
 	],
 	#category : #'Bloc-Layout-Linear-Utilities'
 }
@@ -43,6 +45,11 @@ BlLinearLayoutMeasurer >> cellSpacing [
 	^ cellSpacing
 ]
 
+{ #category : #'accessing - properties' }
+BlLinearLayoutMeasurer >> frontAlignmentSpacing [
+	^ frontAlignmentSpacing
+]
+
 { #category : #initialization }
 BlLinearLayoutMeasurer >> initialize [
 	super initialize.
@@ -50,6 +57,7 @@ BlLinearLayoutMeasurer >> initialize [
 	useLargestChild := false.
 	isBaselineAligned := false.
 	cellSpacing := 0.0.
+	interSpacing := 0.0.
 
 	totalLength := 0.0.
 	totalWeight := 0.0.
@@ -72,6 +80,8 @@ BlLinearLayoutMeasurer >> initializeWith: aParentElement layout: aLinearLayout e
 	layout := aLinearLayout.
 	useLargestChild := layout shouldUseLargestChild.
 	cellSpacing := layout cellSpacing.
+	interSpacing := layout interspace.
+	frontAlignmentSpacing := layout frontAlignmentSpacing.
 
 	extentSpec := anExtentSpec.
 	breadthSpec := orientation breadthSpec: anExtentSpec.
@@ -79,6 +89,12 @@ BlLinearLayoutMeasurer >> initializeWith: aParentElement layout: aLinearLayout e
 
 	nodes := aParentElement children accountedByLayout
 		collect: [ :aChildElement | BlLinearLayoutNode new initializeWith: aChildElement orientation: orientation ]
+]
+
+{ #category : #accessing }
+BlLinearLayoutMeasurer >> interspace [
+
+	^ interSpacing
 ]
 
 { #category : #'accessing - properties' }
@@ -233,12 +249,16 @@ BlLinearLayoutMeasurer >> postMeasure [
 BlLinearLayoutMeasurer >> preMeasure [
 
 	"See how wide/tall everyone is. Also remember max breadth."
+	totalLength := self frontAlignmentSpacing.
+	self nodes size > 1 ifTrue: [ 
+		totalLength := totalLength + ((self nodes size - 1) * self interspace) ].
+	
 	self nodes do: [ :aNode |
 		| matchBreadthLocally childBreadth shouldUseExcessSpace |
 	
 		aNode hasSpaceBefore
 			ifTrue: [ totalLength := totalLength + self cellSpacing ].
-		
+			
 		totalWeight := totalWeight + aNode weight.
 		
 		"we must store the result because it may temporary change during measurement"
