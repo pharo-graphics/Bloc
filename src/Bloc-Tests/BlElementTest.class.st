@@ -47,7 +47,7 @@ BlElementTest >> tearDown [
 	space := nil
 ]
 
-{ #category : #test }
+{ #category : #'children - accessing' }
 BlElementTest >> testChildWithId [
 
 	| blElement blChild error |
@@ -64,12 +64,12 @@ BlElementTest >> testChildWithId [
 	self assert: error notNil.
 
 	"Test with existing child key"
-	blChild := BlElement new id: #aChild.
+	blChild := BlElement id: #aChild.
 	blElement addChild: blChild.
 	self assert: (blElement childWithId: #aChild) equals: blChild
 ]
 
-{ #category : #test }
+{ #category : #'children - accessing' }
 BlElementTest >> testChildWithIdIfFound [
 
 	| blElement blChild result |
@@ -88,7 +88,7 @@ BlElementTest >> testChildWithIdIfFound [
 	self assert: result isNil.
 
 	"Test with existing child key"
-	blChild := BlElement new id: #aChild.
+	blChild := BlElement id: #aChild.
 	blElement addChild: blChild.
 	result := blElement childWithId: #aChild ifFound: [ :e | e ].
 	self assert: result equals: blChild.
@@ -97,7 +97,7 @@ BlElementTest >> testChildWithIdIfFound [
 	self assert: result
 ]
 
-{ #category : #test }
+{ #category : #'children - accessing' }
 BlElementTest >> testChildWithIdIfFoundIfNone [
 
 	| blElement blChild result |
@@ -128,7 +128,7 @@ BlElementTest >> testChildWithIdIfFoundIfNone [
 	self assert: result not.
 
 	"Test with existing child key"
-	blChild := BlElement new id: #aChild.
+	blChild := BlElement id: #aChild.
 	blElement addChild: blChild.
 	result := blElement
 		          childWithId: #aChild
@@ -143,7 +143,7 @@ BlElementTest >> testChildWithIdIfFoundIfNone [
 	self assert: result
 ]
 
-{ #category : #test }
+{ #category : #'children - accessing' }
 BlElementTest >> testChildWithIdIfNone [
 
 	| blElement blChild |
@@ -156,7 +156,7 @@ BlElementTest >> testChildWithIdIfNone [
 	self assert: (blElement childWithId: #aChild ifNone: [ true ]).
 
 	"Test with existing child key"
-	blChild := BlElement new id: #aChild.
+	blChild := BlElement id: #aChild.
 	blElement addChild: blChild.
 	self
 		assert: (blElement childWithId: #aChild ifNone: [ true ])
@@ -224,6 +224,25 @@ BlElementTest >> testHasFocusable [
 	self assert: child hasFocusable
 ]
 
+{ #category : #test }
+BlElementTest >> testId [
+
+	| element |
+	element := BlElement new.
+	element id: #anId.
+	
+	self assert: element id equals: #anId.
+]
+
+{ #category : #test }
+BlElementTest >> testIdConstructor [
+
+	| element |
+	element := BlElement id: #anId.
+	
+	self assert: element id equals: #anId.
+]
+
 { #category : #'focus testing' }
 BlElementTest >> testIsFocusable [
 
@@ -261,6 +280,33 @@ BlElementTest >> testIsFocused [
 
 	element focused: true.
 	self assert: element isFocused
+]
+
+{ #category : #printing }
+BlElementTest >> testPrintOn [
+
+	| element hash |
+	element := self element.
+	hash := element identityHash.
+	
+	self assert: element printString equals: ('BlElement @ ', hash printString)
+]
+
+{ #category : #'children - add/remove' }
+BlElementTest >> testRemoveChildWithId [
+
+	| element child |
+	element := self element.
+	child := BlElement id: #child1.
+	element addChild: child.	
+	self assert: element childrenCount equals: 1.
+	
+	element removeChildWithId: #child2.
+	self assert: element childrenCount equals: 1.
+	
+	element removeChildWithId: #child1.
+	self assert: element childrenCount equals: 0.
+
 ]
 
 { #category : #'focus requesting' }
@@ -341,6 +387,28 @@ BlElementTest >> testRequestFocus [
 	self assert: childEvents size equals: 1.
 	self assert: childEvents first isFocus.
 	self assert: childEvents first target == child
+]
+
+{ #category : #'children - enumerating' }
+BlElementTest >> testSelectChildrenWithId [
+
+	| element child list child2 |
+	element := self element.
+	list := element selectChildrenWithId: #child1.
+	self assert: list isEmpty.
+	
+	child := BlElement id: #child1.
+	element addChild: child.
+	list := element selectChildrenWithId: #child1.
+	self assert: list size equals: 1.
+	self assert: list first identicalTo: child.
+	
+	child2 := BlElement id: #child1.
+	element addChild: child2.
+	list := element selectChildrenWithId: #child1.
+	self assert: list size equals: 2.
+	self assert: list first identicalTo: child.
+	self assert: list second identicalTo: child2.
 ]
 
 { #category : #initialization }

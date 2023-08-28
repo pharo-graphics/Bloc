@@ -73,6 +73,12 @@ BlElement class >> epsilon [
 	^ 0.01
 ]
 
+{ #category : #'instance creation' }
+BlElement class >> id: aStringOrSymbol [
+
+	^ self new id: aStringOrSymbol
+]
+
 { #category : #'api - animations' }
 BlElement >> addAnimation: aBlBaseAnimation [
  
@@ -176,14 +182,14 @@ BlElement >> addChild: anElement at: anIndex as: aContainerName [
 	self
 		assert: [ (self children
 			detect: [ :aChild |
-				aChild containerName
+				aChild id
 					ifNotNil: [ :aName | aName = aContainerName ]
 					ifNil: [ false ] ]
 			ifFound: [ true ]
 			ifNone: [ false ]) not ]
 		description: [ 'Child named #', aContainerName asString, ' already exists' ].
 	
-	anElement containerName: aContainerName.
+	anElement id: aContainerName.
 	self addChild: anElement at: anIndex
 ]
 
@@ -211,7 +217,7 @@ BlElement >> addChild: anElement in: aContainerName [
 	"Add a given element to a named container that must already exist"
 
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement addChild: anElement. ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]
@@ -222,7 +228,7 @@ BlElement >> addChild: anElement in: aContainerName as: aChildContainerName [
 	and mark the added child as container too"
 
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement addChild: anElement as: aChildContainerName ]
 		ifNone: [ self error: 'Container named #', aContainerName asString, ' does not exist' ]
 ]
@@ -235,11 +241,11 @@ BlElement >> addChildFirst: anElement [
 ]
 
 { #category : #'children add/remove' }
-BlElement >> addChildFirst: anElement as: aContainerName [
+BlElement >> addChildFirst: anElement as: aContainerId [
 	"Add a given element as my first child and make it a named container, so that
 	we could add children in that container"
 
-	anElement containerName: aContainerName.
+	anElement id: aContainerId.
 	self addChildFirst: anElement
 ]
 
@@ -275,7 +281,7 @@ BlElement >> addChildren: aListOfElements in: aContainerName [
 	"Add given elements to a named container that must already exist"
 
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement addChildren: aListOfElements. ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]
@@ -747,26 +753,34 @@ BlElement >> childIndexOf: anElement [
 { #category : #'children accessing' }
 BlElement >> childNamed: aChildName [
 	<return: #BlElement>
+	
+	self 
+		deprecated:  'Use childWithId: instead' 
+		transformWith: '`@receiver childNamed: `@statements1' -> '`@receiver childWithId: `@statements1'.
 
-	self
-		childNamed: aChildName
-		ifFound: [ :anElement | ^ anElement ]
-		ifNone: [ self error: 'Children container named ', aChildName asString, ' does not exist' ]
+	^ self childWithId: aChildName
 ]
 
 { #category : #'children accessing' }
 BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
-	<return: #Object>
+	<return: #BlElement>
+	
+	self 
+		deprecated:  'Use childWithId:ifFound: instead' 
+		transformWith: '`@receiver childNamed: `@statements1 ifFound: `@statements2' -> '`@receiver childWithId: `@statements1 ifFound: `@statements2'.
 
 	^ self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: ifFoundBlock
-		ifNone: [  ]
 ]
 
 { #category : #'children accessing' }
 BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
-	<return: #Object>
+	<return: #BlElement>
+	
+	self 
+		deprecated:  'Use childWithId:ifFound:ifNone: instead' 
+		transformWith: '`@receiver childNamed: `@statements1 ifFound: `@statements2 ifNone: `@statements3' -> '`@receiver childWithId: `@statements1 ifFound: `@statements2 ifNone: `@statements3'.
 
 	^ self
 		childWithId: aContainerName
@@ -788,7 +802,7 @@ BlElement >> childWithId: aBlElementId [
 BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock [
 	"Find (deeply) the first child element with a given id and evaluate a ifFoundBlock if such
 	child exists and return the result of the evaluation. Return nil otherwise."
-	<return: #Object or: nil>
+	<return: #BlElement>
 
 	^ self
 		childWithId: aBlElementId
@@ -797,11 +811,11 @@ BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock [
 ]
 
 { #category : #'children accessing' }
-BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock ifNone: ifNoneBlock [
-	<return: #Object>
+BlElement >> childWithId: aStringOrSymbol ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	<return: #BlElement>
 	| targetId |
 	
-	targetId := aBlElementId asBlocElementId.
+	targetId := aStringOrSymbol.
 
 	self allChildrenBreadthFirstDo: [ :aChild |
 		aChild id = targetId
@@ -814,7 +828,7 @@ BlElement >> childWithId: aBlElementId ifFound: ifFoundBlock ifNone: ifNoneBlock
 BlElement >> childWithId: aBlElementId ifNone: ifNoneBlock [
 	"Find (deeply) the first child element with a given id and evaluate a ifNoneBlock if such
 	child does not exists and return the result of the evaluation. Return nil otherwise."
-	<return: #Object or: nil>
+	<return: #BlElement>
 
 	^ self
 		childWithId: aBlElementId
@@ -1031,12 +1045,16 @@ BlElement >> constraintsDo: aBlock [
 BlElement >> containerName [
 	<return: #Symbol or: nil>
 
-	^ self id asSymbol
+	self deprecated: 'Use #id instead. Cannot use auto rewriting because of very used method, see https://github.com/pharo-graphics/Bloc/issues/207'.
+	
+	^ self id
 ]
 
 { #category : #accessing }
 BlElement >> containerName: aSymbol [
 	"Give this element a container name (a Symbol) which can be used to find an element by its name"
+
+	self deprecated: 'Use #id: instead. Cannot use auto rewriting because of very used method, see https://github.com/pharo-graphics/Bloc/issues/207'.
 
 	self id: aSymbol
 ]
@@ -1251,10 +1269,21 @@ BlElement >> detachSpace [
 { #category : #'children accessing' }
 BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
+		
+	self 
+		deprecated:  'Use directChildNamed:ifFound:ifNone: instead' 
+		transformWith: '`@receiver directChildNamed: `@statements1 ifFound: `@statements2 ifNone: `@statements3' -> '`@receiver directChildWithId: `@statements1 ifFound: `@statements2 ifNone: `@statements3'.
+
+	^ self directChildWithId: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> directChildWithId: aStringOrSymbol ifFound: ifFoundBlock ifNone: ifNoneBlock [
+	<return: #Object>
 
 	self childrenDo: [ :aChild |
-		aChild containerName ifNotNil: [ :aName |
-			(aName = aContainerName)
+		aChild id ifNotNil: [ :id |
+			(id = aStringOrSymbol)
 				ifTrue: [ ^ ifFoundBlock cull: aChild ] ] ].
 	^ ifNoneBlock value
 ]
@@ -1446,6 +1475,19 @@ BlElement >> effectBounds [
 { #category : #'geometry bounds' }
 BlElement >> effectBounds: aBlBounds [
 	^ self effect effectBounds: aBlBounds of: self
+]
+
+{ #category : #'private - accessing' }
+BlElement >> elementId [
+
+	<return: #BlElementId>
+	^ self userData at: #elementId ifAbsent: [ BlElementId noId ]
+]
+
+{ #category : #'private - accessing' }
+BlElement >> elementId: aBlElementId [
+
+	self userData at: #elementId put: aBlElementId
 ]
 
 { #category : #'api - look' }
@@ -1854,7 +1896,7 @@ BlElement >> hasChildren [
 	false otherwise"
 	<return: #Boolean>
 	
-	^ self children isEmpty not
+	^ self children notEmpty
 ]
 
 { #category : #'api - compositing' }
@@ -1952,20 +1994,16 @@ BlElement >> height: aNumber [
 { #category : #accessing }
 BlElement >> id [
 	"Return an id of this element if it was defined"
-	<return: #BlElementId>
-	
-	^ self userData
-		at: #elementId
-		ifAbsent: [ BlElementId noId ]
+
+	<return: #Symbol>
+	^ self elementId asSymbol
 ]
 
 { #category : #accessing }
-BlElement >> id: aBlElementId [
+BlElement >> id: aStringOrSymbol [
 	"Give this element an id which can be used to query this element"
 	
-	self userData
-		at: #elementId
-		put: aBlElementId asBlocElementId
+	self elementId: aStringOrSymbol asBlocElementId
 ]
 
 { #category : #layout }
@@ -2283,7 +2321,7 @@ BlElement >> isVisibleInSpace [
 
 { #category : #accessing }
 BlElement >> labeled: aString [
-	self containerName: aString asSymbol
+	self id: aString asSymbol
 ]
 
 { #category : #'api - layout' }
@@ -3247,7 +3285,7 @@ BlElement >> printOn: aStream [
 		nextPutAll: ' @ ';
 		store: self identityHash.
 		
-	self id isNoId ifTrue: [ ^self ].
+	self elementId isNoId ifTrue: [ ^self ].
 
 	aStream
 		space;
@@ -3328,8 +3366,9 @@ BlElement >> removeChild: anElement [
 
 { #category : #'children add/remove' }
 BlElement >> removeChild: anElement in: aContainerName [
+
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement removeChild: anElement ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]
@@ -3361,8 +3400,19 @@ BlElement >> removeChildAt: anIndex [
 
 { #category : #'children add/remove' }
 BlElement >> removeChildNamed: aContainerName [
+
+	self 
+		deprecated:  'Use removeChildWithId: instead' 
+		transformWith: '`@receiver removeChildNamed: `@statements1' -> '`@receiver removeChildWithId: `@statements1'.
+
+	self removeChildWithId: aContainerName
+]
+
+{ #category : #'children add/remove' }
+BlElement >> removeChildWithId: aStringOrSymbol [
+
 	self
-		childNamed: aContainerName
+		childWithId: aStringOrSymbol
 		ifFound: [ :aContainerElement | aContainerElement removeFromParent ]
 		ifNone: [ "do nothing, no need to raise an exception" ]
 ]
@@ -3416,8 +3466,9 @@ BlElement >> removeChildren: aListOfElements [
 
 { #category : #'children add/remove' }
 BlElement >> removeChildrenIn: aContainerName [
+
 	self
-		childNamed: aContainerName
+		childWithId: aContainerName
 		ifFound: [ :aContainerElement | aContainerElement removeChildren ]
 		ifNone: [ self error: 'Container named ', aContainerName asString, ' is not found!' ]
 ]
@@ -3461,7 +3512,7 @@ BlElement >> replaceChild: aChildElement with: anotherElement [
 	aChildIndex := self childIndexOf: aChildElement.
 	self removeChildAt: aChildIndex.
 	
-	aChildElement containerName
+	aChildElement id
 		ifNotNil: [ :aName | self addChild: anotherElement at: aChildIndex as: aName ]
 		ifNil: [ self addChild: anotherElement at: aChildIndex ]
 ]
@@ -3632,16 +3683,14 @@ BlElement >> resetChildrenArray [
 ]
 
 { #category : #'api - children enumeration' }
-BlElement >> selectChildrenWithId: aBlElementId [
+BlElement >> selectChildrenWithId: aStringOrSymbol [
 
 	| targetId |
-	targetId := aBlElementId asBlocElementId.
+	targetId := aStringOrSymbol.
 
 	^ Array streamContents: [ :stream |
-		self allChildrenBreadthFirstDo: [ :aChild |
-			aChild id = targetId ifTrue: [
-				stream nextPut: aChild ] ] ]
-
+		  self allChildrenBreadthFirstDo: [ :aChild |
+			  aChild id = targetId ifTrue: [ stream nextPut: aChild ] ] ]
 ]
 
 { #category : #'event handling' }
