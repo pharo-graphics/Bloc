@@ -22,10 +22,8 @@ Class {
 		'weightedMaxBreadth',
 		'alternativeMaxBreadth',
 		'measuredLength',
-		'useSpaceDistribution',
 		'layout',
-		'interSpacing',
-		'frontAlignmentSpacing'
+		'interSpacing'
 	],
 	#category : #'Bloc-Layout-Linear-Utilities'
 }
@@ -43,11 +41,6 @@ BlLinearLayoutMeasurer >> breadthSpec [
 { #category : #'accessing - properties' }
 BlLinearLayoutMeasurer >> cellSpacing [
 	^ cellSpacing
-]
-
-{ #category : #'accessing - properties' }
-BlLinearLayoutMeasurer >> frontAlignmentSpacing [
-	^ frontAlignmentSpacing
 ]
 
 { #category : #initialization }
@@ -81,7 +74,6 @@ BlLinearLayoutMeasurer >> initializeWith: aParentElement layout: aLinearLayout e
 	useLargestChild := layout shouldUseLargestChild.
 	cellSpacing := layout cellSpacing.
 	interSpacing := layout interspace.
-	frontAlignmentSpacing := layout frontAlignmentSpacing.
 
 	extentSpec := anExtentSpec.
 	breadthSpec := orientation breadthSpec: anExtentSpec.
@@ -249,7 +241,7 @@ BlLinearLayoutMeasurer >> postMeasure [
 BlLinearLayoutMeasurer >> preMeasure [
 
 	"See how wide/tall everyone is. Also remember max breadth."
-	totalLength := self frontAlignmentSpacing.
+	totalLength := 0.0.
 	self nodes size > 1 ifTrue: [ 
 		totalLength := totalLength + ((self nodes size - 1) * self interspace) ].
 	

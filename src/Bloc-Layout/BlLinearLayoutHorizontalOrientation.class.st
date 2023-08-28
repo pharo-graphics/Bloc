@@ -44,7 +44,7 @@ BlLinearLayoutHorizontalOrientation >> isHorizontal [
 
 { #category : #layout }
 BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
-	|top right bottom left majorBounds elementInnerBounds theLayeredChildren round |
+	|top right bottom left majorBounds elementInnerBounds theLayeredChildren turn xGap |
 	"Layout subnodes vertically in column one by one
 	based on previousely measured extent"
 
@@ -73,13 +73,14 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context:
 	left := majorBounds left.
 	top := majorBounds top.
 	
-	round := 1.
-	
+	turn := 1.
+	xGap := 0.0.
+
 	self layout direction
 		with: theLayeredChildren
 		inject: left @ top
 		into: [ :origin :child |
-			| childBounds childMarginBounds childConstraints interSpacing alignmentGap x |
+			| childBounds tunedBounds childMarginBounds childConstraints interSpacing x |
 			childConstraints := child constraints linear.
 			childBounds := origin + (child outsets topLeft max: 0.0@0.0) extent: child measuredExtent.
 			childMarginBounds := origin extent: child measuredExtent + (child outsets extent max: 0.0@0.0).  
@@ -98,25 +99,21 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context:
 			
 			childBounds := childBounds translateBy: (self layout cellSpacing @ 0.0).
 			
-			interSpacing := round = 1
+			interSpacing := turn = 1
 				ifTrue: [ 0.0 ]
 				ifFalse: [ self layout interspace ].
 			interSpacing > 0.0 ifTrue: [ childBounds := childBounds translateBy: interSpacing @ 0.0].
 			
-			alignmentGap := 0.0.
-			(round = 2 and: [ self layout frontAlignmentSpacing > 0.0 ]) 
-				ifTrue: [ (childBounds left < self layout frontAlignmentSpacing) 
-					ifTrue: [ 
-						alignmentGap := self layout frontAlignmentSpacing - childBounds left.
-						childBounds := childBounds translateBy: alignmentGap @ 0.0] ].
-			
+			" give layout subclass a chance to adapt a particular child position "
+			tunedBounds := self tunedChildBounds: childBounds of: child in: anElement turn: turn context: aBlElementBoundsUpdateContext.
+			xGap := tunedBounds left - childBounds left.
 			"telling each subnode what bounds to use for layouting process.
 			Because measuring process does not modify actual extent
 			we need to use a measured one"
-			child applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext.
+			child applyLayoutIn: tunedBounds context: aBlElementBoundsUpdateContext.
 			"translating origin horizontally right for next subnode"
-			x := origin x + child measuredWidth + (child outsets width max: 0.0) + self layout cellSpacing + interSpacing + alignmentGap.
-			round := round + 1.
+			x := origin x + child measuredWidth + (child outsets width max: 0.0) + self layout cellSpacing + interSpacing + xGap.
+			turn := turn + 1.
 			x @ origin y ]
 ]
 

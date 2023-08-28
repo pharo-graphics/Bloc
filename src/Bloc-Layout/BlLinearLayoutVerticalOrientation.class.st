@@ -67,9 +67,9 @@ BlLinearLayoutVerticalOrientation >> layout: anElement in: aRectangle context: a
 		majorBounds := majorBounds translateBy: translation ].
 
 	right := majorBounds right.
-	bottom := majorBounds bottom + self layout frontAlignmentSpacing.
+	bottom := majorBounds bottom.
 	left := majorBounds left.
-	top := majorBounds top + self layout frontAlignmentSpacing.
+	top := majorBounds top.
 
 	firstRound := true.
 

@@ -11,7 +11,6 @@ Class {
 		'shouldUseLargestChild',
 		'cellSpacing',
 		'direction',
-		'frontAlignmentSpacing',
 		'interspace'
 	],
 	#category : #'Bloc-Layout-Linear'
@@ -123,18 +122,6 @@ BlLinearLayout >> direction: aBlLayoutDirection [
 ]
 
 { #category : #accessing }
-BlLinearLayout >> frontAlignmentSpacing [
-
-	^ frontAlignmentSpacing
-]
-
-{ #category : #accessing }
-BlLinearLayout >> frontAlignmentSpacing: aNumber [
-
-	frontAlignmentSpacing := aNumber asFloat 
-]
-
-{ #category : #accessing }
 BlLinearLayout >> horizontalAlignment [
 	^ horizontalAlignment
 ]
@@ -153,7 +140,6 @@ BlLinearLayout >> initialize [
 	shouldUseLargestChild := false.
 	cellSpacing := 0.0.
 	interspace := 0.0.
-	frontAlignmentSpacing := 0.0.
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
 
