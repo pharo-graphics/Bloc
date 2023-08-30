@@ -10,7 +10,8 @@ Class {
 		'orientation',
 		'shouldUseLargestChild',
 		'cellSpacing',
-		'direction'
+		'direction',
+		'interspace'
 	],
 	#category : #'Bloc-Layout-Linear'
 }
@@ -28,23 +29,6 @@ BlLinearLayout class >> horizontal [
 { #category : #factory }
 BlLinearLayout class >> vertical [
 	^ self new beVertical
-]
-
-{ #category : #comparing }
-BlLinearLayout >> = anObject [
-	"Answer whether the receiver and anObject represent the same object."
-
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
-	^ weightSum = anObject weightSum
-		and: [ verticalAlignment = anObject verticalAlignment
-				and: [ shouldUseLargestChild = anObject shouldUseLargestChild
-						and: [ orientation = anObject orientation
-								and: [ horizontalAlignment = anObject horizontalAlignment
-										and: [ direction = anObject direction
-												and: [ cellSpacing = anObject cellSpacing ] ] ] ] ] ]
 ]
 
 { #category : #'api - alignment' }
@@ -137,22 +121,6 @@ BlLinearLayout >> direction: aBlLayoutDirection [
 	direction := aBlLayoutDirection
 ]
 
-{ #category : #comparing }
-BlLinearLayout >> hash [
-	"Answer an integer value that is related to the identity of the receiver."
-
-	^ weightSum hash
-		bitXor:
-			(verticalAlignment hash
-				bitXor:
-					(shouldUseLargestChild hash
-						bitXor:
-							(orientation hash
-								bitXor:
-									(horizontalAlignment hash
-										bitXor: (direction hash bitXor: cellSpacing hash)))))
-]
-
 { #category : #accessing }
 BlLinearLayout >> horizontalAlignment [
 	^ horizontalAlignment
@@ -171,10 +139,23 @@ BlLinearLayout >> initialize [
 	weightSum := self defaultWeightSum.
 	shouldUseLargestChild := false.
 	cellSpacing := 0.0.
+	interspace := 0.0.
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
 
 	self orientation: self defaultOrientation
+]
+
+{ #category : #accessing }
+BlLinearLayout >> interspace [
+	
+	^ interspace
+]
+
+{ #category : #accessing }
+BlLinearLayout >> interspace: aNumber [	
+	
+	interspace := aNumber asFloat
 ]
 
 { #category : #testing }
@@ -211,8 +192,8 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 	"I measure a new extent of myself and my children"
 	
 	aMeasurer := self orientation isHorizontal
-		ifTrue: [ BlLinearLayoutHorizontalMeasurer new ]
-		ifFalse: [ BlLinearLayoutVerticalMeasurer new ].
+		ifTrue: [ self newHorizontalMeasurer ]
+		ifFalse: [ self newVerticalMeasurer ].
 		
 	aMeasurer
 		initializeWith: anElement
@@ -223,6 +204,18 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 	aMeasurer measureOn: anElement.
 	
 	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
+]
+
+{ #category : #measure }
+BlLinearLayout >> newHorizontalMeasurer [ 
+
+	^ BlLinearLayoutHorizontalMeasurer new 
+]
+
+{ #category : #measure }
+BlLinearLayout >> newVerticalMeasurer [ 
+
+	^ BlLinearLayoutVerticalMeasurer new 
 ]
 
 { #category : #accessing }

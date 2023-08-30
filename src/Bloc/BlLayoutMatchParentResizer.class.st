@@ -69,5 +69,5 @@ BlLayoutMatchParentResizer >> requestedHeightIn: anElement [
 BlLayoutMatchParentResizer >> requestedWidthIn: anElement [
 
 	anElement parent ifNil: [^ anElement width].
-	^ anElement parent requestedWidthIn: anElement
+	^ anElement parent requestedWidth
 ]
