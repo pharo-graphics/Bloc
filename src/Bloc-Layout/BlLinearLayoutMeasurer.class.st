@@ -241,7 +241,6 @@ BlLinearLayoutMeasurer >> postMeasure [
 BlLinearLayoutMeasurer >> preMeasure [
 
 	"See how wide/tall everyone is. Also remember max breadth."
-	totalLength := 0.0.
 	self nodes size > 1 ifTrue: [ 
 		totalLength := totalLength + ((self nodes size - 1) * self interspace) ].
 	

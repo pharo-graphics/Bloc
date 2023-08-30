@@ -139,9 +139,3 @@ BlLinearLayoutOrientation >> paddingBreadth: anElement [
 BlLinearLayoutOrientation >> paddingLength: anElement [
 	^ self subclassResponsibility
 ]
-
-{ #category : #layout }
-BlLinearLayoutOrientation >> tunedChildBounds: childBounds of: aChild in: anElement turn: anInteger context: aBlElementBoundsUpdateContext [	
-
-	^ childBounds
-]
