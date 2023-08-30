@@ -44,22 +44,24 @@ BlLinearLayoutHorizontalOrientation >> isHorizontal [
 
 { #category : #layout }
 BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
-
-	| top right bottom left majorBounds elementInnerBounds theLayeredChildren turn |
-	"Layout subnodes horizontally in line one by one
+	|top right bottom left majorBounds elementInnerBounds theLayeredChildren turn |
+	"Layout subnodes vertically in column one by one
 	based on previousely measured extent"
+
 	top := anElement insets top.
-	left := anElement insets left.
+	left := anElement insets left. 
 	right := left.
 	bottom := top.
 
 	theLayeredChildren := anElement children accountedByLayout.
 
-	self layout direction with: theLayeredChildren do: [ :child |
-		right := right + child measuredWidth + (child outsets width max: 0.0).
-		bottom := bottom max: child measuredHeight + (child outsets height max: 0.0) ].
-
-	majorBounds := left @ top corner: right @ bottom.
+	self layout direction
+		with: theLayeredChildren
+		do: [ :child |
+			right := right + child measuredWidth + (child outsets width max: 0.0).
+			bottom := bottom max: child measuredHeight + (child outsets height max: 0.0) ].
+	
+	majorBounds := (left@top corner: right@bottom).
 	elementInnerBounds := anElement padding inset: anElement boundsInLocal.
 	majorBounds = elementInnerBounds ifFalse: [
 		| translation |
@@ -70,42 +72,42 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context:
 	bottom := majorBounds bottom.
 	left := majorBounds left.
 	top := majorBounds top.
-
+	
 	turn := 1.
-	self layout direction with: theLayeredChildren inject: left @ top into: [ :origin :child |
-		| childBounds  childMarginBounds childConstraints interSpacing  x |
-		childConstraints := child constraints linear.
-		childBounds := origin + (child outsets topLeft max: 0.0 @ 0.0) extent: child measuredExtent.
-		childMarginBounds := origin extent: child measuredExtent + (child outsets extent max: 0.0 @ 0.0).
+	self layout direction
+		with: theLayeredChildren
+		inject: left @ top
+		into: [ :origin :child |
+			| childBounds childMarginBounds childConstraints interspacing |
+			childConstraints := child constraints linear.
+			childBounds := origin + (child outsets topLeft max: 0.0@0.0) extent: child measuredExtent.
+			childMarginBounds := origin extent: child measuredExtent + (child outsets extent max: 0.0@0.0).  
 
-		self layout verticalAlignment ifNotNull: [
-			| translation allowedBounds |
-			allowedBounds := childMarginBounds origin extent: child measuredWidth @ elementInnerBounds height.
-			translation := self layout verticalAlignment translationOf: childMarginBounds in: allowedBounds.
-			childBounds := childBounds translateBy: translation ].
+			self layout verticalAlignment ifNotNull: [ 
+				| translation allowedBounds |
+				allowedBounds := childMarginBounds origin extent: child measuredWidth @ elementInnerBounds height.
+				translation := self layout verticalAlignment translationOf: childMarginBounds in: allowedBounds.
+				childBounds := childBounds translateBy: translation ].
 
-		self layout verticalAlignment ifNull: [
-			| translation allowedBounds |
-			allowedBounds := childMarginBounds origin extent: child measuredWidth @ elementInnerBounds height.
-			translation := childConstraints vertical alignment translationOf: childMarginBounds in: allowedBounds.
-			childBounds := childBounds translateBy: translation ].
-
-		childBounds := childBounds translateBy: self layout cellSpacing @ 0.0.
-
-		interSpacing := turn = 1
+			self layout verticalAlignment ifNull: [ 
+				| translation allowedBounds |
+				allowedBounds := childMarginBounds origin extent: child measuredWidth @ elementInnerBounds height.
+				translation := childConstraints vertical alignment translationOf: childMarginBounds in: allowedBounds.
+				childBounds := childBounds translateBy: translation ].
+			
+			childBounds := childBounds translateBy: (self layout cellSpacing @ 0.0).
+			interspacing := turn = 1
 			                ifTrue: [ 0.0 ]
 			                ifFalse: [ self layout interspace ].
-		interSpacing > 0.0 ifTrue: [ childBounds := childBounds translateBy: interSpacing @ 0.0 ].
-
-		"telling each subnode what bounds to use for layouting process.
+			interspacing > 0.0 ifTrue: [ childBounds := childBounds translateBy: interspacing @ 0.0 ].
+			
+			"telling each subnode what bounds to use for layouting process.
 			Because measuring process does not modify actual extent
 			we need to use a measured one"
-		child applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext.
-		
-		"translating origin horizontally right for next subnode"
-		x := origin x + child measuredWidth + (child outsets width max: 0.0) + self layout cellSpacing + interSpacing.
-		turn := turn + 1.
-		x @ origin y ]
+			child applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext.
+			"translating origin horizontally right for next subnode"
+			turn := turn + 1.
+			(origin x + child measuredWidth + (child outsets width max: 0.0) + self layout cellSpacing) @ origin y ]
 ]
 
 { #category : #orientation }
