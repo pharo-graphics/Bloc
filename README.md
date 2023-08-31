@@ -18,13 +18,15 @@ The following script installs Bloc in [Pharo 11](https://pharo.org/download):
 ```smalltalk
 [ Metacello new
 	baseline: 'Bloc';
-	repository: 'github://pharo-graphics/Bloc:v2.0.0-alpha/src';
+	repository: 'github://pharo-graphics/Bloc:dev-1.0/src';
 	onConflictUseIncoming;
 	ignoreImage;
 	load ]
 		on: MCMergeOrLoadWarning
 		do: [ :warning | warning load ]
 ```
+
+You can replace `dev-1.0` by `v2.0.0-alpha` to load such released version.
 
 Alternatively, you can do it by terminal (MacOS, linux... and should work as well in Windows with MINGW64). 
 Create a directory and execute `<this_repo>/scripts/build.sh`, which first downloads the Pharo image and VM and then loads the project.
