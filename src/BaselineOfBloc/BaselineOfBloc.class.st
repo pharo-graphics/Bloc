@@ -74,7 +74,7 @@ BaselineOfBloc >> baseline: spec [
 			"Alexandrie canvas"
 			spec
 				baseline: 'Alexandrie' with: [
-					spec repository: 'github://pharo-graphics/Alexandrie:master/src' ].
+					spec repository: 'github://pharo-graphics/Alexandrie:v2.0.0-alpha/src' ].
 			spec
 				package: #'Bloc-Alexandrie' with: [
 					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
@@ -134,7 +134,7 @@ BaselineOfBloc >> baseline: spec [
 			spec
 				baseline: 'XMLParser' with: [
 					spec
-						repository: 'github://pharo-contributions/XML-XMLParser';
+						repository: 'github://pharo-contributions/XML-XMLParser:4f9cb10b07f7f7757a08898dbc8c46b86f342168';
 						loads: #(Core) ];
 				package: #'Bloc-SVG' with: [
 					spec requires: #(#'Bloc' #'XMLParser') ];
