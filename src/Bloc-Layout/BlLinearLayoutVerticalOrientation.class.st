@@ -44,7 +44,7 @@ BlLinearLayoutVerticalOrientation >> isVertical [
 
 { #category : #layout }
 BlLinearLayoutVerticalOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
-	|top right bottom left majorBounds elementInnerBounds turn |
+	|top right bottom left majorBounds elementInnerBounds turn theLayeredChildren |
 	"Layout subnodes vertically in column one by one
 	based on previously measured extent"
 	
@@ -53,7 +53,11 @@ BlLinearLayoutVerticalOrientation >> layout: anElement in: aRectangle context: a
 	right := left.
 	bottom := top.
 
-	anElement children accountedByLayout do: [ :child | 
+	theLayeredChildren := anElement children accountedByLayout.
+
+	self layout direction
+		with: theLayeredChildren
+		do: [ :child | 
 		right := right max: child measuredWidth + (child outsets width max: 0.0).
 		bottom := bottom + child measuredHeight + (child outsets height max: 0.0) ].
 	
@@ -61,7 +65,7 @@ BlLinearLayoutVerticalOrientation >> layout: anElement in: aRectangle context: a
 	elementInnerBounds := anElement padding inset: anElement boundsInLocal.
 	majorBounds = elementInnerBounds ifFalse: [
 		| translation |
-		translation := self layout verticalAlignment translationOf: majorBounds in: elementInnerBounds.
+		translation := (self layout verticalAlignment directed: self layout direction) translationOf: majorBounds in: elementInnerBounds.
 		majorBounds := majorBounds translateBy: translation ].
 
 	right := majorBounds right.
@@ -70,7 +74,8 @@ BlLinearLayoutVerticalOrientation >> layout: anElement in: aRectangle context: a
 	top := majorBounds top.
 
 	turn := 1.
-	anElement children accountedByLayout
+	self layout direction
+		with: anElement children accountedByLayout
 		inject: left @ top
 		into: [ :origin :child |
 			| childBounds childMarginBounds childConstraints interspacing |
