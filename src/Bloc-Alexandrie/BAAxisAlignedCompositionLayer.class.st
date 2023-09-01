@@ -29,7 +29,7 @@ BAAxisAlignedCompositionLayer class >> newFor: aBlElement [
 		yourself
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : #drawing }
 BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 
 	| scale |
@@ -50,7 +50,7 @@ BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 	element id traceCr."
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : #drawing }
 BAAxisAlignedCompositionLayer >> drawOn: layerCanvas [
 	"We assume the layer exists and isValid, and it's surface is clean."
 
@@ -143,7 +143,7 @@ BAAxisAlignedCompositionLayer >> removeFromParent [
 
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : #drawing }
 BAAxisAlignedCompositionLayer >> updateSurfaceToBePaintedOn: aCanvas [
 	"We assume the layer exists and isValid, but needs refresh."
 
