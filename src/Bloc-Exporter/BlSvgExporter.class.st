@@ -8,9 +8,11 @@ element background: Color red.
 element geometry: BlEllipseGeometry new.
 element size: 400@200.
 
-(BlExporter svg element: element; fileName: 'test.svg'; export) inspect
+(BlExporter svg
+	element: element;
+	target: 'test.svg' asFileReference;
+	export) inspect
 ```
-
 "
 Class {
 	#name : #BlSvgExporter,
@@ -24,7 +26,7 @@ BlSvgExporter >> createCanvas: anExtent [
 	| aSurface |
 	aSurface := AeCairoSVGSurface
 		            extent: anExtent
-		            fileName: self fileName pathString.
+		            to: self target.
 
 	^ AeCanvas newFor: aSurface
 ]
@@ -35,7 +37,7 @@ BlSvgExporter >> export [
 
 	^ self doExport: [ :aCanvas |
 		aCanvas flush; finish.
-		self fileName asFileReference ]
+		self target ]
 ]
 
 { #category : #'api - exporting' }

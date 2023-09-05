@@ -8,7 +8,10 @@ element background: Color red.
 element geometry: BlEllipseGeometry new.
 element size: 400@200.
 
-(BlExporter pdf element: element; fileName: 'test.pdf'; export) inspect
+(BlExporter png
+	element: element;
+	target: 'test.png' asFileReference;
+	export) inspect
 ```
 
 "
@@ -24,7 +27,7 @@ BlPdfExporter >> createCanvas: anExtent [
 	| aSurface |
 	aSurface := AeCairoPDFSurface
 		            extent: anExtent
-		            fileName: self fileName pathString.
+		            to: self target.
 
 	^ AeCanvas newFor: aSurface
 ]
@@ -35,10 +38,11 @@ BlPdfExporter >> export [
 
 	^ self doExport: [ :aCanvas |
 		aCanvas flush; finish.
-		self fileName asFileReference ]
+		self target ]
 ]
 
 { #category : #'api - exporting' }
 BlPdfExporter >> extension [
+
 	^ 'pdf'
 ]

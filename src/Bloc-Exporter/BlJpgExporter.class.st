@@ -8,7 +8,10 @@ element background: Color red.
 element geometry: BlEllipseGeometry new.
 element size: 400@200.
 
-(BlExporter jpg element: element; fileName: 'test.jpg'; export) inspect
+(BlExporter jpg
+	element: element;
+	target: 'test.jpg' asFileReference;
+	export) inspect
 ```
 
 "
@@ -36,18 +39,19 @@ BlJpgExporter >> export [
 		| aForm |
 		aForm := aCanvas asForm.
 	
-		self fileName asFileReference ensureDelete.
+		self target ensureDelete.
 		PluginBasedJPEGReadWriter
 			putForm: aForm
 			quality: self quality
 			progressiveJPEG: self isProgressive
-			onFileNamed: self fileName.
+			onFileNamed: self target.
 		
-		self fileName asFileReference ]
+		self target ]
 ]
 
 { #category : #'api - exporting' }
 BlJpgExporter >> extension [
+
 	^ 'jpg'
 ]
 

@@ -8,7 +8,10 @@ element background: Color red.
 element geometry: BlEllipseGeometry new.
 element size: 400@200.
 
-(BlExporter png element: element; fileName: 'test.png'; export) inspect
+(BlExporter png
+	element: element;
+	target: 'test.png' asFileReference;
+	export) inspect
 ```
 
 "
@@ -32,13 +35,14 @@ BlPngExporter >> export [
 		| aForm |
 		aForm := aCanvas asForm.
 		
-		self fileName asFileReference ensureDelete.
-		PNGReadWriter putForm: aForm onFileNamed: self fileName.
+		self target ensureDelete.
+		PNGReadWriter putForm: aForm onFileNamed: self target.
 		
-		self fileName asFileReference ]
+		self target ]
 ]
 
 { #category : #'api - exporting' }
 BlPngExporter >> extension [
+
 	^ 'png'
 ]
