@@ -83,17 +83,10 @@ BlExporter >> doExport: aFinalizingBlock [
 	
 	aCanvas := self createCanvas: (aBoundsInParent extent * self scale max: 1@1).
 
-self flag: #todo. "Migrate to Alexandrie:"
-"	aCanvas fill
-		path: aCanvas bounds;
-		paint: self background;
-		draw.
-"
-
-
 	aCanvas
+		clear: self background;
 		pathScale: self scale asPoint;
-		pathTranslate: (aBoundsInParent origin) negated.
+		pathTranslate: aBoundsInParent origin negated.
 	anElement aeFullDrawOn: aCanvas.
 	
 	^ aFinalizingBlock cull: aCanvas
