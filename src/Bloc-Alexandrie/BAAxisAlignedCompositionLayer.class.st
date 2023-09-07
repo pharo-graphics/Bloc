@@ -42,12 +42,7 @@ BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 	pattern := AeCairoSurfacePattern surface: surface.
 	pattern filter: AeCairoSamplingFilter fast.
 
-	"offset := element invalidationBounds origin."
-	self drawOn: (AeCanvas newFor: surface).
-	
-	"Time primMillisecondClock trace.
-	' CREATE ' trace.
-	element id traceCr."
+	self drawOn: (AeCanvas newFor: surface)
 ]
 
 { #category : #drawing }
@@ -63,9 +58,7 @@ BAAxisAlignedCompositionLayer >> drawOn: layerCanvas [
 
 	layerCanvas flush.
 
-	element markDoesNotNeedPaint.
-
-"	surface asFormA8  inspect."
+	element markDoesNotNeedPaint
 ]
 
 { #category : #accessing }
@@ -153,13 +146,7 @@ BAAxisAlignedCompositionLayer >> updateSurfaceToBePaintedOn: aCanvas [
 		* aCanvas privateAeCairoSurface deviceScale) ifFalse: [
 			^ self createSurfaceToBePaintedOn: aCanvas ].
 	
-	"offset := element invalidationBounds origin."
 	layerCanvas := AeCanvas newFor: surface.
 	layerCanvas clearTransparent.
-	self drawOn: layerCanvas.
-
-"	Time primMillisecondClock trace.
-	' UPDATE ' trace.
-	element id traceCr.
-"
+	self drawOn: layerCanvas
 ]
