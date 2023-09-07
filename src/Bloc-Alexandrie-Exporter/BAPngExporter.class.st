@@ -16,19 +16,19 @@ element size: 400@200.
 
 "
 Class {
-	#name : #BlPngExporter,
-	#superclass : #BlFileExporter,
-	#category : #'Bloc-Exporter'
+	#name : #BAPngExporter,
+	#superclass : #BAFileExporter,
+	#category : #'Bloc-Alexandrie-Exporter'
 }
 
 { #category : #accessing }
-BlPngExporter >> extension [
+BAPngExporter >> extension [
 
 	^ 'png'
 ]
 
 { #category : #private }
-BlPngExporter >> finishExport: aCanvas [
+BAPngExporter >> finishExport: aCanvas [
 	"Answer a file reference to the exported PNG."
 
 	self target ensureDelete.
@@ -39,7 +39,7 @@ BlPngExporter >> finishExport: aCanvas [
 ]
 
 { #category : #private }
-BlPngExporter >> newCanvas: anExtent [
+BAPngExporter >> newCanvas: anExtent [
 
 	^ AeCanvas extent: anExtent
 ]

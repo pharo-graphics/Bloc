@@ -82,6 +82,10 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #('Bloc-Alexandrie') ];
 				package: #'Bloc-Text-Alexandrie-Examples' with: [
 					spec requires: #('Bloc-Alexandrie') ].
+			"Exporters depend on Alexandrie"
+			spec 
+				package: #'Bloc-Alexandrie-Exporter' with: [
+					spec requires: #('Bloc-Alexandrie') ].
 
 			"Layout"
 			spec 
@@ -98,25 +102,19 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Infinite' with: [
 					spec requires: #('Bloc') ].
 			
-			"Calypso & Spec2 Extensions"
+			"Development tools, examples and tests"
 			spec 
 				package: #'Bloc-Spec2';
 				package: #'Bloc-PharoExtensions';
 				package: #'Bloc-Spec2-Tests' with: [
 					spec requires: #('Bloc-Spec2') ].
-				
-			"Extra"
 			spec 
 				package: #'Bloc-UnitedTests' with: [
 					spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Animation') ];
-				package: #'Bloc-Exporter' with: [
-					spec requires: #('Bloc-Alexandrie') ];
 				package: #'Bloc-DevTool' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-UnitedTests') ];
 				package: #'Bloc-Scripter' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Exporter' 'BlocHost-Mock' 'Bloc-UnitedTests') ].
-
-			spec
+					spec requires: #('Bloc-Layout' 'BlocHost-Mock' 'Bloc-UnitedTests') ];
 				package: #'Bloc-Examples' with: [
 					spec requires: #(#'Bloc-DevTool') ];
 				package: #'Bloc-Text-Examples' with: [

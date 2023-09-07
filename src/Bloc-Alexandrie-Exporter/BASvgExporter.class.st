@@ -15,19 +15,19 @@ element size: 400@200.
 ```
 "
 Class {
-	#name : #BlSvgExporter,
-	#superclass : #BlFileExporter,
-	#category : #'Bloc-Exporter'
+	#name : #BASvgExporter,
+	#superclass : #BAFileExporter,
+	#category : #'Bloc-Alexandrie-Exporter'
 }
 
 { #category : #accessing }
-BlSvgExporter >> extension [
+BASvgExporter >> extension [
 
 	^ 'svg'
 ]
 
 { #category : #private }
-BlSvgExporter >> finishExport: aCanvas [
+BASvgExporter >> finishExport: aCanvas [
 	"Answer a file reference to the exported SVG."
 
 	aCanvas
@@ -37,7 +37,7 @@ BlSvgExporter >> finishExport: aCanvas [
 ]
 
 { #category : #private }
-BlSvgExporter >> newCanvas: anExtent [
+BASvgExporter >> newCanvas: anExtent [
 
 	| aSurface |
 	aSurface := AeCairoSVGSurface

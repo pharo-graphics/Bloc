@@ -16,19 +16,19 @@ element size: 400@200.
 
 "
 Class {
-	#name : #BlPdfExporter,
-	#superclass : #BlFileExporter,
-	#category : #'Bloc-Exporter'
+	#name : #BAPdfExporter,
+	#superclass : #BAFileExporter,
+	#category : #'Bloc-Alexandrie-Exporter'
 }
 
 { #category : #accessing }
-BlPdfExporter >> extension [
+BAPdfExporter >> extension [
 
 	^ 'pdf'
 ]
 
 { #category : #private }
-BlPdfExporter >> finishExport: aCanvas [
+BAPdfExporter >> finishExport: aCanvas [
 	"Answer a file reference to the exported PDF."
 
 	aCanvas
@@ -38,7 +38,7 @@ BlPdfExporter >> finishExport: aCanvas [
 ]
 
 { #category : #private }
-BlPdfExporter >> newCanvas: anExtent [
+BAPdfExporter >> newCanvas: anExtent [
 
 	| aSurface |
 	aSurface := AeCairoPDFSurface

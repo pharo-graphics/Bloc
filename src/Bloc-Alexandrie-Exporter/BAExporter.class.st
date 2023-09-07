@@ -2,55 +2,55 @@
 I am an exporter of Bloc elements to certain output format, that each of my subclasses define.
 "
 Class {
-	#name : #BlExporter,
+	#name : #BAExporter,
 	#superclass : #Object,
 	#instVars : [
 		'element',
 		'scale',
 		'background'
 	],
-	#category : #'Bloc-Exporter'
+	#category : #'Bloc-Alexandrie-Exporter'
 }
 
 { #category : #'instance creation' }
-BlExporter class >> form [
-	^ BlFormExporter new
+BAExporter class >> form [
+	^ BAFormExporter new
 ]
 
 { #category : #'instance creation' }
-BlExporter class >> jpg [
-	^ BlJpgExporter new
+BAExporter class >> jpg [
+	^ BAJpgExporter new
 ]
 
 { #category : #'instance creation' }
-BlExporter class >> pdf [
-	^ BlPdfExporter new
+BAExporter class >> pdf [
+	^ BAPdfExporter new
 ]
 
 { #category : #'instance creation' }
-BlExporter class >> png [
-	^ BlPngExporter new
+BAExporter class >> png [
+	^ BAPngExporter new
 ]
 
 { #category : #'instance creation' }
-BlExporter class >> svg [
-	^ BlSvgExporter new
+BAExporter class >> svg [
+	^ BASvgExporter new
 ]
 
 { #category : #accessing }
-BlExporter >> background [
+BAExporter >> background [
 
 	^ background
 ]
 
 { #category : #'api - configuration' }
-BlExporter >> background: aColorOrPaint [
+BAExporter >> background: aColorOrPaint [
 
 	background := aColorOrPaint
 ]
 
 { #category : #private }
-BlExporter >> computeBounds [
+BAExporter >> computeBounds [
 
 	| anElement aBoundsInLocal aBoundsInParent |
 	anElement := self element.
@@ -65,21 +65,21 @@ BlExporter >> computeBounds [
 ]
 
 { #category : #accessing }
-BlExporter >> element [
+BAExporter >> element [
 	"Return an element to be exported"
 	
 	^ element
 ]
 
 { #category : #'api - configuration' }
-BlExporter >> element: aBlElement [
+BAExporter >> element: aBlElement [
 	"Specify an element to be exorted"
 	
 	element := aBlElement
 ]
 
 { #category : #'api - exporting' }
-BlExporter >> export [
+BAExporter >> export [
 	
 	| aCanvas aBounds |
 	element forceLayout.
@@ -98,14 +98,14 @@ BlExporter >> export [
 ]
 
 { #category : #'api - exporting' }
-BlExporter >> finishExport: aeCanvas [
+BAExporter >> finishExport: aeCanvas [
 	"Do finish the canvas and return the export result."
 
 	self subclassResponsibility
 ]
 
 { #category : #initialization }
-BlExporter >> initialize [
+BAExporter >> initialize [
 	super initialize.
 	
 	scale := 1.0.
@@ -113,20 +113,20 @@ BlExporter >> initialize [
 ]
 
 { #category : #'instance creation' }
-BlExporter >> newCanvas: anExtent [
+BAExporter >> newCanvas: anExtent [
 	"Create a suitable canvas of a given size used for the export"
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
-BlExporter >> scale [
+BAExporter >> scale [
 
 	^ scale
 ]
 
 { #category : #'api - configuration' }
-BlExporter >> scale: aNumber [
+BAExporter >> scale: aNumber [
 	"Scale horizontally and vertically by aNumber. Scale must be positive."
 
 	scale := aNumber

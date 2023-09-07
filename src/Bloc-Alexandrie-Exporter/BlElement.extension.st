@@ -1,46 +1,46 @@
 Extension { #name : #BlElement }
 
-{ #category : #'*Bloc-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsForm [
 	"Export the receiver's image as a Form. Answer a `Form`."
 
-	^ BlExporter form
+	^ BAExporter form
 		  element: self;
 		  export
 ]
 
-{ #category : #'*Bloc-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsJPEG [
 	"Export the receiver's image as a JPEG. Answer the target (a `FileReference`)."
 
-	^ BlExporter jpg
+	^ BAExporter jpg
 		  element: self;
 		  export
 ]
 
-{ #category : #'*Bloc-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsPDF [
 	"Export the receiver as a vector PDF. Answer the target (a `FileReference`)"
 
-	^ BlExporter pdf
+	^ BAExporter pdf
 		  element: self;
 		  export
 ]
 
-{ #category : #'*Bloc-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsPNG [
 	"Export the receiver's image as a PNG. Answer the target (a `FileReference`)"
 
-	^ BlExporter png
+	^ BAExporter png
 		  element: self;
 		  export
 ]
 
-{ #category : #'*Bloc-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsSVG [
 	"Export the receiver as a SVG. Answer the target (a `FileReference`)"
 
-	^ BlExporter svg
+	^ BAExporter svg
 		  element: self;
 		  export
 ]
