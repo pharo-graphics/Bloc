@@ -32,6 +32,13 @@ BlHostRenderer class >> label [
 ]
 
 { #category : #'host - api' }
+BlHostRenderer class >> newFormFrom: aBlElement [
+	"Answer a `Form` with the received element rendered on it."
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'host - api' }
 BlHostRenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	"Update the received paragraph with its measurement."
 

@@ -3,8 +3,7 @@ Extension { #name : #BlElement }
 { #category : #'*Bloc-Spec2' }
 BlElement >> asPreviewMorph [
 
-	self flag: #todo. "Dependency to Bloc-Alexandrie."
-	^ self aeAsForm asMorph
+	^ self asForm asMorph
 ]
 
 { #category : #'*Bloc-Spec2' }

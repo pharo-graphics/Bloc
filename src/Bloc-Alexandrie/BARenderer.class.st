@@ -16,6 +16,12 @@ BARenderer class >> label [
 ]
 
 { #category : #'host - api' }
+BARenderer class >> newFormFrom: aBlElement [
+
+	^ aBlElement aeAsForm
+]
+
+{ #category : #'host - api' }
 BARenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
 
 	BAOffscreen instance measureTextParagraph: aBlTextParagraph

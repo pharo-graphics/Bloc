@@ -467,6 +467,12 @@ BlElement >> asElement [
 ]
 
 { #category : #converting }
+BlElement >> asForm [
+
+	^ BlHostRenderer preferableClass newFormFrom: self
+]
+
+{ #category : #converting }
 BlElement >> asScrollableElement [
 	| scrollable |
 	self removeFromParent.
