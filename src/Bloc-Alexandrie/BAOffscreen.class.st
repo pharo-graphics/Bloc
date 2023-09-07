@@ -7,7 +7,6 @@ Class {
 	#name : #BAOffscreen,
 	#superclass : #Object,
 	#instVars : [
-		'session',
 		'aeCanvas',
 		'textMeasurer'
 	],
@@ -40,8 +39,7 @@ BAOffscreen >> canvas [
 { #category : #api }
 BAOffscreen >> ensureReady [
 
-	session == Smalltalk session ifTrue: [ ^ self ].
-	session := Smalltalk session.
+	(aeCanvas notNil and: [ aeCanvas isValid ]) ifTrue: [ ^ self ].
 
 	aeCanvas := AeCanvas extent: 1 asPoint.
 
