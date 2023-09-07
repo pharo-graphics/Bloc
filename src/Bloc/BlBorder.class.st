@@ -78,6 +78,12 @@ BlBorder >> = anObject [
 				and: [ style = anObject style and: [ width = anObject width ] ] ]
 ]
 
+{ #category : #converting }
+BlBorder >> asBlBorder [
+
+	^ self
+]
+
 { #category : #copy }
 BlBorder >> copyWithOpacity: aNumber [
 
