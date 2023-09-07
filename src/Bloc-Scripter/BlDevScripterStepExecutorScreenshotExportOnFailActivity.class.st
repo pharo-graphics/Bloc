@@ -18,8 +18,6 @@ BlDevScripterStepExecutorScreenshotExportOnFailActivity >> executePostPlayOnStep
 		aDirectory ensureCreateDirectory.
 		aScreenshotName := aFileName, '.png'.
 
-		BlExporter png
-			fileName: aDirectory / aScreenshotName;
-			element: anExecutor scripter space root;
-			export ]
+		anExecutor scripter space root
+			writePngTo: aDirectory / aScreenshotName ]
 ]
