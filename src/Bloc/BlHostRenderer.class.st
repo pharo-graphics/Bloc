@@ -75,6 +75,13 @@ BlHostRenderer class >> settingsOn: aBuilder [
 
 ]
 
+{ #category : #'host - api' }
+BlHostRenderer class >> write: aBlElement asPngTo: aFileReference [
+	"Draw the element into a PNG at the specified location."
+
+	self subclassResponsibility
+]
+
 { #category : #rendering }
 BlHostRenderer >> finishedRender: aSpace [
 	"Perform neccessary actions after rendering is complete.

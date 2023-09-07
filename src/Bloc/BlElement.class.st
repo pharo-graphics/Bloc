@@ -4219,6 +4219,13 @@ BlElement >> withAllParentsUpTo: aParentElement do: aBlock [
 		aBlock value: eachParent ]
 ]
 
+{ #category : #converting }
+BlElement >> writePngTo: aFileReference [
+	"Draw me into a PNG at the specified location."
+
+	BlHostRenderer preferableClass write: self asPngTo: aFileReference
+]
+
 { #category : #accessing }
 BlElement >> zIndex: aNumber [
 	self elevation: (BlRelativeElevation elevation: aNumber)

@@ -27,6 +27,16 @@ BARenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	BAOffscreen instance measureTextParagraph: aBlTextParagraph
 ]
 
+{ #category : #'host - api' }
+BARenderer class >> write: aBlElement asPngTo: aFileReference [
+	"Draw the element into a PNG at the specified location."
+
+	BAExporter png
+			target: aFileReference;
+			element: aBlElement;
+			export
+]
+
 { #category : #initialization }
 BARenderer >> createBufferSpaceRenderer [
 
