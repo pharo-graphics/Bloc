@@ -32,11 +32,9 @@ BlPngExporter >> export [
 	"Answer a file reference to the exported PNG."
 
 	^ self doExport: [ :aCanvas |
-		| aForm |
-		aForm := aCanvas asForm.
-		
+
 		self target ensureDelete.
-		PNGReadWriter putForm: aForm onFileNamed: self target.
+		aCanvas writePngTo: self target.
 		
 		self target ]
 ]
