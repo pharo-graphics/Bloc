@@ -25,38 +25,30 @@ Class {
 	#category : #'Bloc-Exporter'
 }
 
-{ #category : #'instance creation' }
-BlJpgExporter >> createCanvas: anExtent [
-
-	^ AeCanvas extent: anExtent
-]
-
-{ #category : #'api - exporting' }
-BlJpgExporter >> export [
-	"Answer a file reference to the exported JPG."
-
-	^ self doExport: [ :aCanvas |
-		| aForm |
-		aForm := aCanvas asForm.
-	
-		self target ensureDelete.
-		PluginBasedJPEGReadWriter
-			putForm: aForm
-			quality: self quality
-			progressiveJPEG: self isProgressive
-			onFileNamed: self target.
-		
-		self target ]
-]
-
-{ #category : #'api - exporting' }
+{ #category : #accessing }
 BlJpgExporter >> extension [
 
 	^ 'jpg'
 ]
 
+{ #category : #private }
+BlJpgExporter >> finishExport: aCanvas [
+	"Answer a file reference to the exported JPG."
+
+	self target ensureDelete.
+
+	PluginBasedJPEGReadWriter
+		putForm: aCanvas asForm
+		quality: self quality
+		progressiveJPEG: self isProgressive
+		onFileNamed: self target.
+	
+	^ self target
+]
+
 { #category : #initialization }
 BlJpgExporter >> initialize [
+
 	super initialize.
 
 	isProgressive := true.
@@ -74,6 +66,12 @@ BlJpgExporter >> isProgressive [
 BlJpgExporter >> isProgressive: aBoolean [
 
 	isProgressive := aBoolean
+]
+
+{ #category : #private }
+BlJpgExporter >> newCanvas: anExtent [
+
+	^ AeCanvas extent: anExtent
 ]
 
 { #category : #accessing }

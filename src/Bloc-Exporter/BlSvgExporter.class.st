@@ -20,8 +20,24 @@ Class {
 	#category : #'Bloc-Exporter'
 }
 
-{ #category : #'instance creation' }
-BlSvgExporter >> createCanvas: anExtent [
+{ #category : #accessing }
+BlSvgExporter >> extension [
+
+	^ 'svg'
+]
+
+{ #category : #private }
+BlSvgExporter >> finishExport: aCanvas [
+	"Answer a file reference to the exported SVG."
+
+	aCanvas
+		flush;
+		finish.
+	^ self target
+]
+
+{ #category : #private }
+BlSvgExporter >> newCanvas: anExtent [
 
 	| aSurface |
 	aSurface := AeCairoSVGSurface
@@ -29,18 +45,4 @@ BlSvgExporter >> createCanvas: anExtent [
 		            to: self target.
 
 	^ AeCanvas newFor: aSurface
-]
-
-{ #category : #'api - exporting' }
-BlSvgExporter >> export [
-	"Answer a file reference to the exported SVG."
-
-	^ self doExport: [ :aCanvas |
-		aCanvas flush; finish.
-		self target ]
-]
-
-{ #category : #'api - exporting' }
-BlSvgExporter >> extension [
-	^ 'svg'
 ]

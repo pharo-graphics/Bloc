@@ -21,8 +21,24 @@ Class {
 	#category : #'Bloc-Exporter'
 }
 
-{ #category : #'instance creation' }
-BlPdfExporter >> createCanvas: anExtent [
+{ #category : #accessing }
+BlPdfExporter >> extension [
+
+	^ 'pdf'
+]
+
+{ #category : #private }
+BlPdfExporter >> finishExport: aCanvas [
+	"Answer a file reference to the exported PDF."
+
+	aCanvas
+		flush;
+		finish.
+	^ self target
+]
+
+{ #category : #private }
+BlPdfExporter >> newCanvas: anExtent [
 
 	| aSurface |
 	aSurface := AeCairoPDFSurface
@@ -30,19 +46,4 @@ BlPdfExporter >> createCanvas: anExtent [
 		            to: self target.
 
 	^ AeCanvas newFor: aSurface
-]
-
-{ #category : #'api - exporting' }
-BlPdfExporter >> export [
-	"Answer a file reference to the exported PDF."
-
-	^ self doExport: [ :aCanvas |
-		aCanvas flush; finish.
-		self target ]
-]
-
-{ #category : #'api - exporting' }
-BlPdfExporter >> extension [
-
-	^ 'pdf'
 ]

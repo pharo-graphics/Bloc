@@ -19,14 +19,14 @@ BlFileExporter >> defaultTarget [
 		(self element class name, '-', self element hash asString, '.' , self extension)
 ]
 
-{ #category : #'api - exporting' }
+{ #category : #accessing }
 BlFileExporter >> extension [
 	"Return a String representing default file extension to be used during export"
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - configuration' }
+{ #category : #accessing }
 BlFileExporter >> fileName: aFileReference [
 
 	self
@@ -37,13 +37,19 @@ BlFileExporter >> fileName: aFileReference [
 	self target: aFileReference
 ]
 
+{ #category : #private }
+BlFileExporter >> finishExport: aeCanvas [
+
+	^ target
+]
+
 { #category : #accessing }
 BlFileExporter >> target [
 
 	^ target ifNil: [ target := self defaultTarget ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : #accessing }
 BlFileExporter >> target: aFileReference [
 
 	target := aFileReference

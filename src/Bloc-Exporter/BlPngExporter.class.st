@@ -21,26 +21,25 @@ Class {
 	#category : #'Bloc-Exporter'
 }
 
-{ #category : #'instance creation' }
-BlPngExporter >> createCanvas: anExtent [
-
-	^ AeCanvas extent: anExtent
-]
-
-{ #category : #'api - exporting' }
-BlPngExporter >> export [
-	"Answer a file reference to the exported PNG."
-
-	^ self doExport: [ :aCanvas |
-
-		self target ensureDelete.
-		aCanvas writePngTo: self target.
-		
-		self target ]
-]
-
-{ #category : #'api - exporting' }
+{ #category : #accessing }
 BlPngExporter >> extension [
 
 	^ 'png'
+]
+
+{ #category : #private }
+BlPngExporter >> finishExport: aCanvas [
+	"Answer a file reference to the exported PNG."
+
+	self target ensureDelete.
+
+	aCanvas writePngTo: self target.
+
+	^ self target
+]
+
+{ #category : #private }
+BlPngExporter >> newCanvas: anExtent [
+
+	^ AeCanvas extent: anExtent
 ]

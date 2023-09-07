@@ -13,15 +13,14 @@ Class {
 	#category : #'Bloc-Exporter'
 }
 
-{ #category : #'instance creation' }
-BlFormExporter >> createCanvas: anExtent [
+{ #category : #private }
+BlFormExporter >> finishExport: aeCanvas [
 
-	^ AeCanvas extent: anExtent
+	^ aeCanvas asForm
 ]
 
-{ #category : #'api - exporting' }
-BlFormExporter >> export [
-	"Answer a Form"
+{ #category : #private }
+BlFormExporter >> newCanvas: anExtent [
 
-	^ self doExport: [ :aCanvas | aCanvas asForm ]
+	^ AeCanvas extent: anExtent
 ]

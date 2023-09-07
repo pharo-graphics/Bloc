@@ -1,6 +1,5 @@
 "
-I am an exporter of bloc elements to various output formats. See my subclasses for more info
-
+I am an exporter of Bloc elements to certain output format, that each of my subclasses define.
 "
 Class {
 	#name : #BlExporter,
@@ -65,33 +64,6 @@ BlExporter >> computeBounds [
 	^ aBoundsInParent
 ]
 
-{ #category : #'instance creation' }
-BlExporter >> createCanvas: anExtent [
-	"Create a suitable canvas of a given size used for the export"
-	
-	^ self subclassResponsibility
-]
-
-{ #category : #private }
-BlExporter >> doExport: aFinalizingBlock [
-
-	| aCanvas aBoundsInParent anElement |
-	anElement := self element.
-	anElement forceLayout.
-
-	aBoundsInParent := self computeBounds.
-	
-	aCanvas := self createCanvas: (aBoundsInParent extent * self scale max: 1@1).
-
-	aCanvas
-		clear: self background;
-		pathScale: self scale asPoint;
-		pathTranslate: aBoundsInParent origin negated.
-	anElement aeFullDrawOn: aCanvas.
-	
-	^ aFinalizingBlock cull: aCanvas
-]
-
 { #category : #accessing }
 BlExporter >> element [
 	"Return an element to be exported"
@@ -109,6 +81,26 @@ BlExporter >> element: aBlElement [
 { #category : #'api - exporting' }
 BlExporter >> export [
 	
+	| aCanvas aBounds |
+	element forceLayout.
+
+	aBounds := self computeBounds.
+	
+	aCanvas := self newCanvas: (aBounds extent * scale).
+
+	aCanvas
+		clear: self background;
+		pathScale: scale asPoint;
+		pathTranslate: aBounds origin negated.
+	element aeFullDrawOn: aCanvas.
+	
+	^ self finishExport: aCanvas
+]
+
+{ #category : #'api - exporting' }
+BlExporter >> finishExport: aeCanvas [
+	"Do finish the canvas and return the export result."
+
 	self subclassResponsibility
 ]
 
@@ -116,20 +108,26 @@ BlExporter >> export [
 BlExporter >> initialize [
 	super initialize.
 	
-	scale := 1.
+	scale := 1.0.
 	background := Color transparent
+]
+
+{ #category : #'instance creation' }
+BlExporter >> newCanvas: anExtent [
+	"Create a suitable canvas of a given size used for the export"
+	
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 BlExporter >> scale [
-	<return: #Number>
 
 	^ scale
 ]
 
 { #category : #'api - configuration' }
-BlExporter >> scaled: aNumber [
-	"Scale by aNumber. Scale must be positive."
+BlExporter >> scale: aNumber [
+	"Scale horizontally and vertically by aNumber. Scale must be positive."
 
 	scale := aNumber
 ]
