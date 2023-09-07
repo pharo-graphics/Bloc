@@ -41,7 +41,6 @@ BlImageBackground >> image: aForm [
 BlImageBackground >> isTransparent [
 	"Unfortunately there is no fast way to detect if a Form is completely transparent,
 	the only check we can afford to do is to see whether the extent of the form is positive"
-	<return: #Boolean>
 
 	^ (self opacity closeTo: 0) or: [ self image extent min = 0 ]
 ]
