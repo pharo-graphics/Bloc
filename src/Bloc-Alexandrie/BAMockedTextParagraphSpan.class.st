@@ -44,7 +44,7 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 			" setOutskirtsInside otherwise the cursor is hidden"
 			aeCanvas pathFactory: [ :cairoContext |
 				cairoContext rectangle: fixedBounds ].
-			Color random asBlPaint aeApplyTo: aeCanvas opacity: 0.4.
+			Color random asBlPaint aeApplyAsBackgroundTo: aeCanvas opacity: 0.4.
 			aeCanvas setOutskirtsInside.
 			aeCanvas setBorderBlock: [ 
 				aeCanvas setSourceColor: Color veryVeryLightGray lighter.

@@ -3,5 +3,5 @@ Extension { #name : #BlPaintBackground }
 { #category : #'*Bloc-Alexandrie' }
 BlPaintBackground >> aeApplyTo: aeCanvas [
 
-	self paint aeApplyTo: aeCanvas opacity: self opacity
+	self paint aeApplyAsBackgroundTo: aeCanvas opacity: self opacity
 ]
