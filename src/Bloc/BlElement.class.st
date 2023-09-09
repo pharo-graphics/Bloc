@@ -648,9 +648,11 @@ BlElement >> border: aBlBorder [
 	
 	<event: #BlElementBorderChangedEvent>
 
-	self border = aBlBorder
+	| newBorder |
+	newBorder := aBlBorder asBlBorder.
+	self border = newBorder
 		ifTrue: [ ^ self ].
-	visuals := visuals border: aBlBorder.
+	visuals := visuals border: newBorder.
 	self geometry releaseStrokedBoundsCache.
 	self eventDispatcher dispatchBorderChanged.
 	self invalidate
