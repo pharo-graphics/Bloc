@@ -52,16 +52,15 @@ BAExporter >> background: aColorOrPaint [
 { #category : #private }
 BAExporter >> computeBounds [
 
-	| anElement aBoundsInLocal aBoundsInParent |
-	anElement := self element.
+	| aBounds |
+	aBounds := BlBounds new.
+	element effectBounds: aBounds.
+	aBounds
+		merge: element boundsInLocal;
+		merge: element visualBounds.
+	element localBoundsToParent: aBounds.
 	
-	aBoundsInLocal := (anElement effectBounds: BlBounds new)
-		merge: anElement boundsInLocal;
-		merge: anElement visualBounds.
-
-	aBoundsInParent := anElement localBoundsToParent: aBoundsInLocal copy.
-	
-	^ aBoundsInParent
+	^ aBounds
 ]
 
 { #category : #accessing }
