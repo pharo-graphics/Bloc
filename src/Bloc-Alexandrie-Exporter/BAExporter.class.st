@@ -49,20 +49,6 @@ BAExporter >> background: aColorOrPaint [
 	background := aColorOrPaint
 ]
 
-{ #category : #private }
-BAExporter >> computeBounds [
-
-	| aBounds |
-	aBounds := BlBounds new.
-	element effectBounds: aBounds.
-	aBounds
-		merge: element boundsInLocal;
-		merge: element visualBounds.
-	element localBoundsToParent: aBounds.
-	
-	^ aBounds
-]
-
 { #category : #accessing }
 BAExporter >> element [
 	"Return an element to be exported"
@@ -83,7 +69,7 @@ BAExporter >> export [
 	| aCanvas aBounds |
 	element forceLayout.
 
-	aBounds := self computeBounds.
+	aBounds := element invalidationBoundsInSpace.
 	
 	aCanvas := self newCanvas: (aBounds extent * scale).
 
