@@ -40,8 +40,7 @@ BlElement >> aeDrawChildrenOn: aeCanvas [
 	- Receiver assumes that position and transformations are already applied on the canvas."
 	
 	self children sortedByElevation do: [ :each |
-		each wantsSeparateCompositingLayer ifFalse: [
-			each aeDrawInSameLayerOn: aeCanvas ] ].
+		each aeDrawInSameLayerOn: aeCanvas ].
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -93,8 +92,11 @@ BlElement >> aeDrawIgnoringOpacityAndTransformationOn: aeCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawInSameLayerOn: aCanvas [
 
-	(self isTransparent not and: [ self isVisible ])
+	(self isTransparent not and: [
+	self isVisible and: [
+	self wantsSeparateCompositingLayer not ] ])
 		ifTrue: [ self aeDrawOn: aCanvas ].
+
 	self markDoesNotNeedPaint
 ]
 
