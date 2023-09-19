@@ -15,7 +15,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	<sampleInstance>
 	| parent childA |
 	childA := self testChildElementMatchingParent.
-	parent := self testParentWithLinearHorizontalLayout.
+	parent := self testParentWithLinearVerticalLayout.
 	parent constraints horizontal exact: 400.
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
@@ -36,7 +36,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	| parent childA childB |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
-	parent := self testParentWithLinearHorizontalLayout.
+	parent := self testParentWithLinearVerticalLayout.
 	parent constraints horizontal exact: 600.
 	parent constraints vertical exact: 400.
 	parent constraints padding: (BlInsets all: 20).
@@ -61,7 +61,7 @@ BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	| parent childA childB |
 	childA := self childExact: 200 @ 100.
 	childB := self childExact: 100 @ 200.
-	parent := self testParentWithLinearHorizontalLayout.
+	parent := self testParentWithLinearVerticalLayout.
 	parent constraints horizontal fitContent.
 	parent constraints vertical fitContent.
 	parent addChildren: {
@@ -86,7 +86,7 @@ BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
 	childC := self testChildElementMatchingParent.
-	parent := self testParentWithLinearHorizontalLayout.
+	parent := self testParentWithLinearVerticalLayout.
 	parent constraints horizontal exact: 200.
 	parent constraints vertical exact: 600.
 	parent addChildren: {
@@ -114,7 +114,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	childA := self childExact: 200 @ 300.
 	childB := self childExactHeight: 200.
 	childB constraints horizontal matchParent.
-	parent := self testParentWithLinearHorizontalLayout.
+	parent := self testParentWithLinearVerticalLayout.
 	parent constraints horizontal fitContent.
 	parent constraints vertical fitContent.
 	parent addChildren: {
@@ -142,7 +142,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 			 right: 0
 			 bottom: 0
 			 left: 10).
-	parent := self testParentWithLinearHorizontalLayout.
+	parent := self testParentWithLinearVerticalLayout.
 	parent constraints horizontal exact: 50.
 	parent constraints vertical exact: 50.
 	parent addChildren: { childA }.
@@ -165,7 +165,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 	childA constraints linear horizontal alignLeft.
 	childB constraints linear horizontal alignCenter.
 	childC constraints linear horizontal alignRight.
-	parent := self testParentWithLinearHorizontalLayout.
+	parent := self testParentWithLinearVerticalLayout.
 	parent constraints horizontal exact: 500.
 	parent constraints vertical exact: 600.
 	parent addChildren: {
@@ -195,7 +195,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 	childA constraints linear horizontal alignLeft.
 	childB constraints linear horizontal alignCenter.
 	childC constraints linear horizontal alignRight.
-	parent := self testParentWithLinearHorizontalLayout.
+	parent := self testParentWithLinearVerticalLayout.
 	parent layout rightToLeft.
 	parent constraints horizontal exact: 500.
 	parent constraints vertical exact: 600.
@@ -205,11 +205,11 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 			childC }.
 	parent forceLayout.
 	self assert: childA extent equals: 100 @ 100.
-	self assert: childA position equals: 400 @ 0.
+	self assert: childA position equals: 400 @ 200.
 	self assert: childB extent equals: 200 @ 100.
 	self assert: childB position equals: 150 @ 100.
 	self assert: childC extent equals: 50 @ 100.
-	self assert: childC position equals: 0 @ 200.
+	self assert: childC position equals: 0 @ 0.
 	self assert: parent extent equals: 500 @ 600.
 	self assert: parent position equals: 0 @ 0.
 	^ parent
@@ -257,7 +257,7 @@ BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 ]
 
 { #category : #tests }
-BlLinearLayoutVerticalTest >> testParentWithLinearHorizontalLayout [
+BlLinearLayoutVerticalTest >> testParentWithLinearVerticalLayout [
 
 	<sampleInstance>
 	| element |
