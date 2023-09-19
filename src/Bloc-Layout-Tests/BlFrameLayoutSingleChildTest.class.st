@@ -166,17 +166,16 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxWidthOneChildMatchExactParent 
 
 	<sampleInstance>
 	| child aParent |
-	self skip.
-	self flag: #tofix.
-	"This is the same code in Examples but I have no idea how to execute there to be sure that the test is passing as example."
-	child := self testChildElementWithVisualProperties.
+	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
 	aParent constraintsDo: [ :c | c maxWidth: 200 ].
 	aParent addChild: child.
 	aParent forceLayout.
 	self assert: child position equals: 0 @ 0.
+	" since child is matchParent"
 	self assert: child extent equals: 200 @ 300.
 	self assert: aParent position equals: 0 @ 0.
+	" width is 200 according to c maxWidth: 200 "
 	self assert: aParent extent equals: 200 @ 300.
 	^ aParent
 ]
