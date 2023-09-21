@@ -22,7 +22,7 @@ BlGaussianShadowEffect >> aeDrawBelow: aBlElement on: aeCanvas [
 		applyRadius: width.
 	
 	aeCanvas privateAeCairoContext
-		sourceColorRGBA: color;
+		sourceColor: color;
 		maskSurface: alphaSurface
 			x: offset x - shadowSpace
 			y: offset y - shadowSpace.
