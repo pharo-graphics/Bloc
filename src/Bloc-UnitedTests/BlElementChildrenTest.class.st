@@ -43,6 +43,39 @@ BlElementChildrenTest >> multipleChildren [
 		              background: Color veryVeryLightGray;
 		              labeled: 'Container'.
 
+	self multipleChildrenIn: aContainer depth: 1.
+
+	^ aContainer
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> multipleChildrenDepth2 [
+
+	<sampleInstance>
+	^ self multipleChildrenDepth: 2
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> multipleChildrenDepth3 [
+
+	<sampleInstance>
+	^ self multipleChildrenDepth: 3
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> multipleChildrenDepth: aDepth [
+
+	| aContainer |
+	aContainer := self multipleChildren.
+	aContainer childrenDo: [ :child | self multipleChildrenIn: child depth: aDepth - 1].
+	^ aContainer
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
+
+	<sampleInstance>
+	aDepth = 0 ifTrue: [ ^ self ].
 	1 to: 10 do: [ :i |
 		| son |
 		son := BlElement new
@@ -50,7 +83,8 @@ BlElementChildrenTest >> multipleChildren [
 			       position: 10 asPoint;
 			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
 			       labeled: 'shape_' , i asString.
-		aContainer addChild: son ].
+		aContainer addChild: son.
+		self multipleChildrenIn: son depth: aDepth - 1 ].
 
 	^ aContainer
 ]
@@ -78,6 +112,35 @@ BlElementChildrenTest >> overlappingChildren [
 	aContainer addChild: aBlueChild as: #blue.
 	aContainer forceLayout.
 	^ aContainer
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> testAllChildrenBreadthFirstWithDepthDo [
+
+	| aContainer allChildren founds all |
+	aContainer := self multipleChildrenDepth3.
+	allChildren := aContainer children.
+	self assert: allChildren size equals: 10.
+	self assert:
+		(allChildren allSatisfy: [ :each | each parent = aContainer ]).
+	self
+		assert: allChildren first
+		equals: (aContainer childWithId: #shape_1).
+	self
+		assert: allChildren last
+		equals: (aContainer childWithId: #shape_10).
+		
+	founds := Dictionary new.
+	aContainer allChildrenBreadthFirstWithDepthDo: [ :child :depth |
+		founds at: depth ifAbsentPut: [ OrderedCollection new ].
+		(founds at: depth) add: child ].
+	self assert: (founds at: 1) size equals: 10.
+	self assert: (founds at: 2) size equals: 100.
+	self assert: (founds at: 3) size equals: 1000.
+	all := OrderedCollection new.
+	founds valuesDo: [ :c | all addAll: c ].
+	self assert: all asSet size equals: 1110.
+	
 ]
 
 { #category : #tests }
@@ -775,6 +838,30 @@ BlElementChildrenTest >> testPreviousSiblingSuchThatdo [
 		previousSiblingSuchThat: [ :next | next id = #shape_8 ]
 		do: [ :next |
 		self assert: next equals: (aContainer childWithId: #shape_8) ]
+]
+
+{ #category : #tests }
+BlElementChildrenTest >> testSiblingsDo [
+
+	| aContainer aChild found |
+	aContainer := self multipleChildren.
+	aChild := aContainer children first.
+	found := OrderedCollection new.
+	aChild siblingsDo: [ :next | found add: next ].
+	self assert: found size equals: aContainer children size - 1.
+	self assert: (found includes: aChild) not.
+	aChild := aContainer childWithId: #shape_5.
+	found := OrderedCollection new.
+	aChild siblingsDo: [ :next | found add: next ].
+	self assert: found size equals: aContainer children size - 1.
+	self assert: (found includes: aChild) not.
+	aChild := aContainer children last.
+	found := OrderedCollection new.
+	aChild siblingsDo: [ :next | found add: next ].
+	self assert: found size equals: aContainer children size - 1.
+	self assert: (found includes: aChild) not.
+	
+
 ]
 
 { #category : #tests }

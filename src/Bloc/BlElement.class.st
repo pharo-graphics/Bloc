@@ -309,12 +309,31 @@ BlElement >> allChildrenBreadthFirstDo: aBlock [
 ]
 
 { #category : #'api - children enumeration' }
+BlElement >> allChildrenBreadthFirstDo: elementAndDepthBlock withDepth: aDepth [
+
+	" same as allChildrenBreadthFirstDo: except that 
+	aDepth supplies the second argument to the block"
+	
+	self childrenDo: [:child | elementAndDepthBlock value: child value: aDepth].
+	self childrenDo: [ :each | each allChildrenBreadthFirstDo: elementAndDepthBlock withDepth: aDepth + 1]
+]
+
+{ #category : #'api - children enumeration' }
 BlElement >> allChildrenBreadthFirstSelect: aBlock [ 
 	| selectedChildren |
 	selectedChildren := OrderedCollection new.
 	self allChildrenBreadthFirstDo: [:each | 
 		(aBlock value: each) ifTrue: [ selectedChildren add: each ] ].
 	^ selectedChildren
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> allChildrenBreadthFirstWithDepthDo: elementAndDepthBlock [
+
+	" same as allChildrenBreadthFirstDo: except that 
+	the children depth supplies the second argument to the block"
+	
+	self allChildrenBreadthFirstDo: elementAndDepthBlock withDepth: 1
 ]
 
 { #category : #'api - children enumeration' }
@@ -3727,6 +3746,15 @@ BlElement >> showSpace: aSpace [
 			self isAttachedToSceneGraph
 				ifTrue: [ self space showSpace: aSpace ]
 				ifFalse: [ aSpace show ] ]
+]
+
+{ #category : #'children accessing' }
+BlElement >> siblingsDo: aBlock [
+	" Evaluate aBlock with all my siblings "
+
+	self hasParent ifFalse: [ ^ self ].
+	self parent childrenDo: [ :child |
+		child ~= self ifTrue: [ aBlock value: child ] ]
 ]
 
 { #category : #'api - bounds' }
