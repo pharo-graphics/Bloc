@@ -12,7 +12,7 @@ BAHitTest class >> allFormSelectors [
 
 { #category : #convenience }
 BAHitTest class >> exportAll [
-	<script: 'self exportAll' >
+	<script: 'super exportAll' >
 
 	super exportAll
 ]
@@ -20,11 +20,15 @@ BAHitTest class >> exportAll [
 { #category : #convenience }
 BAHitTest class >> inspectAll [
 	<script: 'super inspectAll'>
+	
+	super inspectAll
 ]
 
 { #category : #convenience }
 BAHitTest class >> inspectMismatches [
-	<script: 'super inspectMismatches' >
+	<script: 'super inspectMismatches'>
+	
+	super inspectMismatches
 ]
 
 { #category : #tests }
