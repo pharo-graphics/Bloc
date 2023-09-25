@@ -77,5 +77,14 @@ BlProportionalLayout >> layout: anElement in: aRectangle context: aBlElementBoun
 			applyLayoutIn: (self
 				boundsForChild: eachChild
 				in: parentBounds)
-			context: aBlElementBoundsUpdater ]
+			context: aBlElementBoundsUpdater ].
+		
+	self layoutIgnored: anElement context: aBlElementBoundsUpdater
+]
+
+{ #category : #measure }
+BlProportionalLayout >> measure: anElement with: anExtentSpec [
+	super measure: anElement with: anExtentSpec.
+	
+	self measureIgnored: anElement with: anExtentSpec
 ]

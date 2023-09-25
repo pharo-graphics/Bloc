@@ -124,6 +124,34 @@ BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 ]
 
 { #category : #tests }
+BlProportionalLayoutTest >> testIgnoreByLayoutChild [
+
+	| aContainer aChild |
+	aChild := BlElement new
+		id: #child;
+		size: 10 @ 20;
+		margin: (BlInsets all: 2); "This is taken into account"
+		constraintsDo: [ :c |
+			c ignoreByLayout.
+			c ignored horizontal alignLeft.
+			c ignored vertical alignBottom ];
+		yourself.
+
+	aContainer := BlElement new
+		id: #container;
+		size: 200 @ 100;
+		padding: (BlInsets all: 5); "This won't be taken into account"
+		layout: BlProportionalLayout new;
+		addChild: aChild;
+		yourself.
+	
+	aContainer forceLayout.
+
+	self assert: aChild position equals: 2 @ 78.
+	self assert: aChild extent equals: 10 @ 20
+]
+
+{ #category : #tests }
 BlProportionalLayoutTest >> testMultipleChildren [
 
 	| aContainer childA childB |
