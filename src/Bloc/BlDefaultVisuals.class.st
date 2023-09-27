@@ -136,9 +136,10 @@ BlDefaultVisuals >> elevation [
 { #category : #accessing }
 BlDefaultVisuals >> elevation: aBlElevation [
 	"Change the elevation and return new visuals to be used instead of the previous one (not necessarily a new instance)"
-	<return: #BlElementVisuals>
 
-	^ BlCustomVisuals new elevation: aBlElevation
+	^ BlCustomVisuals new
+		  elevation: aBlElevation;
+		  yourself
 ]
 
 { #category : #accessing }

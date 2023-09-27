@@ -7,29 +7,12 @@ Note: Relative elevation can be negative!
 Class {
 	#name : #BlRelativeElevation,
 	#superclass : #BlElevation,
-	#classInstVars : [
-		'zero'
-	],
 	#category : #'Bloc-Basic-Properties'
 }
-
-{ #category : #cleanup }
-BlRelativeElevation class >> cleanUp [
-	super cleanUp.
-	
-	zero := nil
-]
-
-{ #category : #'instance creation' }
-BlRelativeElevation class >> zero [
-
-	^ zero ifNil: [ zero := self elevation: 0 ]
-]
 
 { #category : #accessing }
 BlRelativeElevation >> relatedTo: aNumber [
 	"Resulting elevation is a sum of a given and my relative one"
-	<return: #Number>
 
-	^ aNumber + self elevation
+	^ aNumber + elevation
 ]
