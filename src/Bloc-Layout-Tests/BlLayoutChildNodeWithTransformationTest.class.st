@@ -34,16 +34,14 @@ BlLayoutChildNodeWithTransformationTest >> testNodeWithScale [
 
 { #category : #tests }
 BlLayoutChildNodeWithTransformationTest >> testScaleTransformation [
-
 	<sampleInstance>
+
 	| aScaleTransformation aTransformation |
 	aScaleTransformation := BlScalingTransformation new
-		                        origin:
-			                        BlAffineTransformationCenterOrigin new;
+		                        origin: BlAffineTransformationCenterOrigin defaultInstance;
 		                        scale: (BlVector x: 2 y: 2).
 
-	aTransformation := BlElementLocalTransformation newWith:
-		                   aScaleTransformation.
+	aTransformation := BlElementLocalTransformation newWith: aScaleTransformation.
 
 	^ aTransformation
 ]

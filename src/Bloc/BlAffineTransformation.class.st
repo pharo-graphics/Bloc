@@ -36,9 +36,10 @@ BlAffineTransformation >> do: aBlock [
 
 { #category : #initialization }
 BlAffineTransformation >> initialize [
+
 	super initialize.
 	
-	origin := BlAffineTransformationCenterOrigin new
+	origin := BlAffineTransformationCenterOrigin defaultInstance
 ]
 
 { #category : #testing }
@@ -88,7 +89,6 @@ BlAffineTransformation >> multiplyOn: aBlMatrix in: aBlElement [
 
 { #category : #accessing }
 BlAffineTransformation >> origin [
-	<return: #BlAffineTransformationOrigin>
 
 	^ origin
 ]

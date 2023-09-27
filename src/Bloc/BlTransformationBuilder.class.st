@@ -24,9 +24,10 @@ Class {
 
 { #category : #'instance creation' }
 BlTransformationBuilder class >> on: anObject [
-	<return: #BlTransformationBuilder>
 
-	^ self new target: anObject
+	^ self new
+		  target: anObject;
+		  yourself
 ]
 
 { #category : #transformations }
@@ -40,7 +41,7 @@ BlTransformationBuilder >> apply [
 { #category : #origin }
 BlTransformationBuilder >> centerOrigin [
 
-	self origin: BlAffineTransformationCenterOrigin new
+	self origin: BlAffineTransformationCenterOrigin defaultInstance
 ]
 
 { #category : #transformations }
@@ -75,7 +76,7 @@ BlTransformationBuilder >> initialize [
 	super initialize.
 
 	affineCompositeTransformation := BlAffineCompositeTransformation new.
-	origin := BlAffineTransformationCenterOrigin new
+	origin := BlAffineTransformationCenterOrigin defaultInstance
 ]
 
 { #category : #transformations }

@@ -16,7 +16,7 @@ BlElementTransformation class >> scale: aBlVector [
 	| aScaleTransformation |
 	
 	aScaleTransformation := BlScalingTransformation new
-		origin: BlAffineTransformationCenterOrigin new;
+		origin: BlAffineTransformationCenterOrigin defaultInstance;
 		scale: aBlVector;
 		yourself.
 	
