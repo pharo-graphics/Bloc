@@ -3,16 +3,15 @@ Extension { #name : #BlElement }
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
-	| invalidationBounds |
+	| invalidationBounds aCanvas |
 	self isLayoutRequested ifTrue: [ self forceLayout ].
 
 	"We want to consider our border, effect, as well as children's."
 	invalidationBounds := self invalidationBounds: BlBounds new.
-
-	^ (AeCanvas extent: invalidationBounds extent)
-			pathTranslate: invalidationBounds origin negated;
-			fullDraw: self;
-			asForm
+	aCanvas := AeCanvas extent: invalidationBounds extent.
+	aCanvas pathTranslate: invalidationBounds origin negated.
+	self aeFullDrawOn: aCanvas.
+	^ aCanvas asForm
 ]
 
 { #category : #'*Bloc-Alexandrie' }

@@ -463,19 +463,6 @@ BlSpace class >> spaceWithId: aSpaceId do: aBlock [
 		ifNone: [ nil ]
 ]
 
-{ #category : #drawing }
-BlSpace >> aeAsForm [
-
-	^ self root aeAsForm
-]
-
-{ #category : #drawing }
-BlSpace >> aeDrawOn: aeCanvas [
-
-	self root aeFullDrawOn: aeCanvas
-
-]
-
 { #category : #accessing }
 BlSpace >> asReference [
 	<return: #BlSpaceReference>
@@ -1142,12 +1129,6 @@ BlSpace >> frame [
 	<return: #BlSpaceFrame>
 
 	^ frame
-]
-
-{ #category : #drawing }
-BlSpace >> fullDrawOn: anCanvas [
-
-	anCanvas fullDraw: self root
 ]
 
 { #category : #'window - properties' }
