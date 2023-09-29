@@ -1988,8 +1988,3 @@ BlSpace >> withAllChildrenBreadthFirstDo: aBlock [
 	
 	^ self root withAllChildrenBreadthFirstDo: aBlock 
 ]
-
-{ #category : #'bloc-dev-tool' }
-BlSpace >> withHalos [
-	self root addEventFilter: BlDevHalosEventListener new
-]
