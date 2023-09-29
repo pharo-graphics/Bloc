@@ -10,9 +10,9 @@ BlAlternativeCombinationExamples >> combinationWithA [
 	| aCombination |
 	
 	aCombination := self emptyCombination.
-	aCombination key: BlKeyboardKey a.
+	aCombination key: KeyboardKey A.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { BlKeyboardKey a }.
+	self assert: (aCombination combinations asArray collect: #key) equals: { KeyboardKey A }.
 	self assert: aCombination printString equals: '(A)'.
 	
 	^ aCombination
@@ -24,9 +24,9 @@ BlAlternativeCombinationExamples >> combinationWithAB [
 	| aCombination |
 	
 	aCombination := self combinationWithA.
-	aCombination key: BlKeyboardKey b.
+	aCombination key: KeyboardKey B.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { BlKeyboardKey a. BlKeyboardKey b }.
+	self assert: (aCombination combinations asArray collect: #key) equals: { KeyboardKey A. KeyboardKey B }.
 	self assert: aCombination printString equals: '(A | B)'.
 	
 	^ aCombination
@@ -38,9 +38,9 @@ BlAlternativeCombinationExamples >> combinationWithABC [
 	| aCombination |
 	
 	aCombination := self combinationWithAB.	
-	aCombination key: BlKeyboardKey c.
+	aCombination key: KeyboardKey C.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { BlKeyboardKey a. BlKeyboardKey b. BlKeyboardKey c }.
+	self assert: (aCombination combinations asArray collect: #key) equals: { KeyboardKey A. KeyboardKey B. KeyboardKey C }.
 	self assert: aCombination printString equals: '(A | B | C)'.
 	
 	^ aCombination
@@ -62,79 +62,79 @@ BlAlternativeCombinationExamples >> emptyCombination [
 
 { #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> matchCombinationWithA [
+
 	<gtExample>
 	| aCombination aBuffer |
-	
 	aCombination := self combinationWithA.
-	
+
 	aBuffer := BlMockedKeyboardBuffer new.
-	aBuffer pressed: true key: BlKeyboardKey a.
-	aBuffer pressed: false key: BlKeyboardKey b.
-	aBuffer pressed: false key: BlKeyboardKey c.
-	
+	aBuffer pressed: true key: KeyboardKey A.
+	aBuffer pressed: false key: KeyboardKey B.
+	aBuffer pressed: false key: KeyboardKey C.
+
 	self assert: (aCombination match: aBuffer) equals: 1.
-	
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> matchCombinationWithAB [
+
 	<gtExample>
 	| aCombination aBuffer |
-	
 	aCombination := self combinationWithAB.
-	
+
 	aBuffer := BlMockedKeyboardBuffer new.
-	aBuffer pressed: false key: BlKeyboardKey a.
-	aBuffer pressed: true key: BlKeyboardKey b.
-	aBuffer pressed: false key: BlKeyboardKey c.
-	
+	aBuffer pressed: false key: KeyboardKey A.
+	aBuffer pressed: true key: KeyboardKey B.
+	aBuffer pressed: false key: KeyboardKey C.
+
 	"it should be precise match"
 	self assert: (aCombination match: aBuffer) equals: 1.
-	
+
 	aBuffer := BlMockedKeyboardBuffer new.
-	aBuffer pressed: true key: BlKeyboardKey a.
-	aBuffer pressed: false key: BlKeyboardKey b.
-	aBuffer pressed: false key: BlKeyboardKey c.
-	
+	aBuffer pressed: true key: KeyboardKey A.
+	aBuffer pressed: false key: KeyboardKey B.
+	aBuffer pressed: false key: KeyboardKey C.
+
 	"it should be precise match"
 	self assert: (aCombination match: aBuffer) equals: 1.
-	
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> noMatchCombinationWithA [
+
 	<gtExample>
 	| aCombination aBuffer |
-	
 	aCombination := self combinationWithA.
-	
+
 	aBuffer := BlMockedKeyboardBuffer new.
-	aBuffer pressed: false key: BlKeyboardKey a.
-	aBuffer pressed: true key: BlKeyboardKey b.
-	aBuffer pressed: false key: BlKeyboardKey c.
-	
+	aBuffer pressed: false key: KeyboardKey A.
+	aBuffer pressed: true key: KeyboardKey B.
+	aBuffer pressed: false key: KeyboardKey C.
+
 	self assert: (aCombination match: aBuffer) equals: 0.
-	
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> noMatchCombinationWithAB [
+
 	<gtExample>
 	| aCombination aBuffer |
-	
 	aCombination := self combinationWithAB.
-	
+
 	aBuffer := BlMockedKeyboardBuffer new.
-	aBuffer pressed: true key: BlKeyboardKey a.
-	aBuffer pressed: true key: BlKeyboardKey b.
-	aBuffer pressed: false key: BlKeyboardKey c.
-	
+	aBuffer pressed: true key: KeyboardKey A.
+	aBuffer pressed: true key: KeyboardKey B.
+	aBuffer pressed: false key: KeyboardKey C.
+
 	"it should be precise match"
 	self assert: (aCombination match: aBuffer) equals: 0.
-	
+
 	^ aCombination
 ]
 
