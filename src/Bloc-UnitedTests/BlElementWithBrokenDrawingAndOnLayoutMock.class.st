@@ -8,8 +8,9 @@ Class {
 }
 
 { #category : #drawing }
-BlElementWithBrokenDrawingAndOnLayoutMock >> drawOnSpartaCanvas: aCanvas [
-	1/0
+BlElementWithBrokenDrawingAndOnLayoutMock >> aeDrawOn: aCanvas [
+
+	1 / 0
 ]
 
 { #category : #layout }
