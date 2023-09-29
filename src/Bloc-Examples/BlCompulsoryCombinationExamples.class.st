@@ -6,43 +6,54 @@ Class {
 
 { #category : #'examples - combination' }
 BlCompulsoryCombinationExamples >> combinationWithA [
+
 	<gtExample>
 	| aCombination |
-	
 	aCombination := self emptyCombination.
-	aCombination key: BlKeyboardKey a.
+	aCombination key: KeyboardKey A.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { BlKeyboardKey a }.
+	self
+		assert: (aCombination combinations asArray collect: #key)
+		equals: { KeyboardKey A }.
 	self assert: aCombination printString equals: '(A)'.
-	
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
 BlCompulsoryCombinationExamples >> combinationWithAB [
+
 	<gtExample>
 	| aCombination |
-	
 	aCombination := self combinationWithA.
-	aCombination key: BlKeyboardKey b.
+	aCombination key: KeyboardKey B.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { BlKeyboardKey a. BlKeyboardKey b }.
+	self
+		assert: (aCombination combinations asArray collect: #key)
+		equals: {
+				KeyboardKey A.
+				KeyboardKey B }.
 	self assert: aCombination printString equals: '(A & B)'.
-	
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
 BlCompulsoryCombinationExamples >> combinationWithABC [
+
 	<gtExample>
 	| aCombination |
-	
-	aCombination := self combinationWithAB.	
-	aCombination key: BlKeyboardKey c.
+	aCombination := self combinationWithAB.
+	aCombination key: KeyboardKey C.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { BlKeyboardKey a. BlKeyboardKey b. BlKeyboardKey c }.
+	self
+		assert: (aCombination combinations asArray collect: #key)
+		equals: {
+				KeyboardKey A.
+				KeyboardKey B.
+				KeyboardKey C }.
 	self assert: aCombination printString equals: '(A & B & C)'.
-	
+
 	^ aCombination
 ]
 
