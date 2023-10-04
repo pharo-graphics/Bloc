@@ -2620,7 +2620,7 @@ BlElement >> markNeedsPaintFrom: anElement [
 	self wantsSeparateCompositingLayer
 		ifTrue: [
 			self isAttachedToSceneGraph ifFalse: [ ^self ].
-			self wantsSeparateCompositingLayer
+			self hasCompositionLayer
 				ifTrue: [ self space markNeedsPaint: self from: anElement ]
 				ifFalse: [
 					self hasParent
