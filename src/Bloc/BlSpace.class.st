@@ -1417,7 +1417,10 @@ BlSpace >> invalidRect: aBlBounds from: anElement [
 { #category : #'change - rendering' }
 BlSpace >> invalidateAll [
 
+	"Always mark root"
 	self markNeedsPaint: self root from: self root.
+
+	"Also recursively any child in a layer"
 	self root allChildrenBreadthFirstDo: [ :each |
 		each wantsSeparateCompositingLayer ifTrue: [ 
 			self markNeedsPaint: each from: each ] ]

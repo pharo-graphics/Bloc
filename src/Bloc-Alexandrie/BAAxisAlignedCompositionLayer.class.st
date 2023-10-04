@@ -32,9 +32,10 @@ BAAxisAlignedCompositionLayer class >> newFor: aBlElement [
 { #category : #drawing }
 BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 
-	| scale |
-	scale := aCanvas privateAeCairoSurface deviceScale.
-	surface := AeCairoImageSurface extent: element invalidationBoundsInSpace extent * scale.
+	| scale layerCanvas |
+	scale := aCanvas deviceScale.
+	surface := AeCairoImageSurface extent:
+		element invalidationBoundsInSpace extent * scale.
 	surface deviceScale: scale.
 
 	"The pattern allows us to establish a sampling filter that's not fancy,
@@ -42,23 +43,9 @@ BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 	pattern := AeCairoSurfacePattern surface: surface.
 	pattern filter: AeCairoSamplingFilter fast.
 
-	self drawOn: (AeCanvas newFor: surface)
-]
-
-{ #category : #drawing }
-BAAxisAlignedCompositionLayer >> drawOn: layerCanvas [
-	"We assume the layer exists and isValid, and it's surface is clean."
-
-	layerCanvas pathTranslate: element invalidationBoundsInSpace origin negated.
-	element withAllParentsReverseDo: [ :each |
-		layerCanvas pathTranslate: each position.
-		each transformation aeApplyTo: layerCanvas ].
-
-	element aeDrawIgnoringOpacityAndTransformationOn: layerCanvas.
-
-	layerCanvas flush.
-
-	element markDoesNotNeedPaint
+	layerCanvas := AeCanvas newFor: surface.
+	element aeDrawAsSeparatedLayerOn: layerCanvas.
+	layerCanvas flush
 ]
 
 { #category : #accessing }
@@ -97,22 +84,15 @@ BAAxisAlignedCompositionLayer >> paintOn: aCanvas [
 
 	aCanvas restoreContextAfter: [
 		"Apply clip in parent chain."
-		element withAllParentsReverseDo: [ :each |
-			aCanvas pathTranslate: each position.
-			each transformation aeApplyTo: aCanvas.
-			each == element ifFalse: [
-				(each clipChildren and: [ each hasChildren ]) ifTrue: [
-					each geometry aeApplyTo: aCanvas element: each.
-					aCanvas preparePathAndClip ] ] ].
+		element aeApplyClippingWithAllParentsOn: aCanvas.
 
 		"The layer has a global position"
-		aCanvas privateAeCairoContext setIdentityMatrix.
-		aCanvas pathTranslate: element invalidationBoundsInSpace origin.
+		aCanvas
+			setIdentityMatrix;
+			pathTranslate: element invalidationBoundsInSpace origin.
 
 		"Paint the layer"
-		aCanvas privateAeCairoContext
-			source: pattern;
-			paintWithAlpha: element opacity ]
+		aCanvas paint: pattern alpha: element opacity ]
 ]
 
 { #category : #printing }
@@ -138,15 +118,15 @@ BAAxisAlignedCompositionLayer >> removeFromParent [
 
 { #category : #drawing }
 BAAxisAlignedCompositionLayer >> updateSurfaceToBePaintedOn: aCanvas [
-	"We assume the layer exists and isValid, but needs refresh."
+	"We assume the layer exists and isValid, but needs to refresh its pixels."
 
 	| layerCanvas |
 	"In fact it only updates if extents match"	
-	surface extent = (element invalidationBoundsInSpace extent
-		* aCanvas privateAeCairoSurface deviceScale) ifFalse: [
-			^ self createSurfaceToBePaintedOn: aCanvas ].
+	surface extent = (element invalidationBoundsInSpace extent * aCanvas deviceScale) asIntegerPoint
+		ifFalse: [ ^ self createSurfaceToBePaintedOn: aCanvas ].
 	
 	layerCanvas := AeCanvas newFor: surface.
-	layerCanvas clearTransparent.
-	self drawOn: layerCanvas
+	layerCanvas clearTransparent. "We need to clean it up"
+	element aeDrawAsSeparatedLayerOn: layerCanvas.
+	layerCanvas flush
 ]

@@ -1,6 +1,19 @@
 Extension { #name : #BlElement }
 
 { #category : #'*Bloc-Alexandrie' }
+BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
+	"Apply clipping in the whole parent chain"
+
+	self withAllParentsReverseDo: [ :each |
+		aCanvas pathTranslate: each position.
+		each transformation aeApplyTo: aCanvas.
+		each == self ifFalse: [
+			(each clipChildren and: [ each hasChildren ]) ifTrue: [
+				each geometry aeApplyTo: aCanvas element: each.
+				aCanvas preparePathAndClip ] ] ]
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
 	| invalidationBounds aCanvas |
@@ -29,6 +42,18 @@ BlElement >> aeCompositionLayersSortedByElevationDo: aBlock [
 	self flag: #todo. "extract to allow overriding, exactly as aeDrawChildrenOn:"
 	self children sortedByElevation do: [ :each |
 		(each aeCompositionLayersSortedByElevationDo: aBlock) ]
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aeDrawAsSeparatedLayerOn: layerCanvas [
+	"We assume the layer exists and isValid, and it's surface is clean."
+
+	layerCanvas pathTranslate: self invalidationBoundsInSpace origin negated.
+	self withAllParentsReverseDo: [ :each |
+		layerCanvas pathTranslate: each position.
+		each transformation aeApplyTo: layerCanvas ].
+
+	self aeDrawIgnoringOpacityAndTransformationOn: layerCanvas
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -86,6 +111,7 @@ BlElement >> aeDrawIgnoringOpacityAndTransformationOn: aeCanvas [
 	self aeDrawEffectAboveGeometryOn: aeCanvas.
 	self aeDrawChildrenOn: aeCanvas.
 
+	self markDoesNotNeedPaint
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -94,9 +120,7 @@ BlElement >> aeDrawInSameLayerOn: aCanvas [
 	(self isTransparent not and: [
 	self isVisible and: [
 	self wantsSeparateCompositingLayer not ] ])
-		ifTrue: [ self aeDrawOn: aCanvas ].
-
-	self markDoesNotNeedPaint
+		ifTrue: [ self aeDrawOn: aCanvas ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -118,7 +142,7 @@ BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
 	The element opacity affects border and background, effects, and 
 	recursively to children elements.
 	When I have opaque opacity (1.0) I take the fastest branch, restoring
-	the Cairo caontext afterwards."
+	the Cairo context afterwards."
 
 	self opacity < 1.0
 		ifTrue: [ aeCanvas paintGroupWith: aBlockClosure alpha: self opacity ]
@@ -132,6 +156,5 @@ BlElement >> aeFullDrawOn: aCanvas [
 
 	self aeDrawInSameLayerOn: aCanvas.
 
-	self aeCompositionLayersSortedByElevationDo: [ :each |
-		each paintOn: aCanvas ].
+	self aeCompositionLayersSortedByElevationDo: [ :each | each paintOn: aCanvas ]
 ]
