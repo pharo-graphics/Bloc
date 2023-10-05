@@ -844,43 +844,54 @@ BlSpace >> doUpdateFocus [
 
 { #category : #'change - layout' }
 BlSpace >> doUpdateLayout [
+
 	| elementsToLayout aBlElementBoundsUpdater |
-	
+
 	self elementsNeedingLayout copy do: [ :eachElement |
-		eachElement privatePreviousMeasurementSpec
-			ifNil: [
-				self elementsNeedingLayout remove: eachElement.
-				eachElement requestLayout ] ].
+		eachElement privatePreviousMeasurementSpec ifNil: [
+			self elementsNeedingLayout remove: eachElement.
+			eachElement requestLayout ] ].
 	
-	elementsToLayout := self elementsNeedingLayout reject: [ :eachElement |
-		| shouldIgnore |
-		
-		shouldIgnore := false.
-		
-		self elementsNeedingLayout do: [ :eachPotentialParent |
-			(eachElement hasParent: eachPotentialParent)
-				ifTrue: [
-					eachElement
-						allParentsTo: eachPotentialParent
-						do: [ :eachParent | eachParent privateRequestingLayout: true ].
-					shouldIgnore := true ] ].
-		
-		shouldIgnore ].
+	elementsToLayout :=
+		self elementsNeedingLayout reject: [ :eachElement |
+			| shouldIgnore |
+			shouldIgnore := false.
+			
+			self elementsNeedingLayout do: [ :eachPotentialParent |
+				(eachElement hasParent: eachPotentialParent)
+					ifTrue: [
+						eachElement
+							allParentsTo: eachPotentialParent
+							do: [ :eachParent |
+								eachParent privateRequestingLayout: true ].
+						shouldIgnore := true ] ].
+
+			shouldIgnore ].
 	
-	"we should clear the elements needing layout before we compute layout to support multiple layout passes"
+	"we should clear the elements needing layout before we compute layout
+	to support multiple layout passes"
 	self elementsNeedingLayout removeAll.
 	
-	elementsToLayout := elementsToLayout
-		collect: [ :eachElement | eachElement -> eachElement compositionDepth ] as: Array.
-	elementsToLayout := (elementsToLayout sort: [ :a :b | a value > b value ]) collect: [ :each | each key ].
+	elementsToLayout :=
+		elementsToLayout
+			collect: [ :eachElement | eachElement -> eachElement compositionDepth ]
+			as: Array.
+	elementsToLayout :=
+		(elementsToLayout
+			sort: [ :a :b | a value > b value ])
+			collect: [ :each | each key ].
 
 	aBlElementBoundsUpdater := BlElementBoundsUpdater new.
 
 	elementsToLayout do: [ :eachElement |
-		self doUpdateLayoutBoundary: eachElement context: aBlElementBoundsUpdater ].
+		self
+			doUpdateLayoutBoundary: eachElement
+			context: aBlElementBoundsUpdater ].
 	
-	self root isLayoutRequested
-		ifTrue: [ self doUpdateLayout: self root context: aBlElementBoundsUpdater ].
+	self root isLayoutRequested ifTrue: [
+		self
+			doUpdateLayout: self root
+			context: aBlElementBoundsUpdater ].
 		
 	aBlElementBoundsUpdater commitChanges
 ]
