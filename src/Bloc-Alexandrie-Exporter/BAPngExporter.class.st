@@ -8,7 +8,7 @@ element background: Color red.
 element geometry: BlEllipseGeometry new.
 element size: 400@200.
 
-(BlExporter png
+(BAExporter png
 	element: element;
 	target: 'test.png' asFileReference;
 	export) inspect

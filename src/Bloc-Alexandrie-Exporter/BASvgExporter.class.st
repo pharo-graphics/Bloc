@@ -8,7 +8,7 @@ element background: Color red.
 element geometry: BlEllipseGeometry new.
 element size: 400@200.
 
-(BlExporter svg
+(BAExporter svg
 	element: element;
 	target: 'test.svg' asFileReference;
 	export) inspect
