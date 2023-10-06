@@ -539,6 +539,45 @@ BlSpaceFixture >> buildGaussianShadowsByTextTransformations [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildGeometriesAsElement [
+
+	| geometries container |
+	builder spaceExtent: ((12@12) * (3@4)) + (3@3).
+
+	container :=
+	  builder addToRoot
+	    layout: (BlGridLayout horizontal
+			columnCount: 3;
+			cellSpacing: 2;
+			yourself);
+	    constraintsDo: [ :c |
+			c margin: (BlInsets top: 3 left: 3).
+	      c horizontal matchParent.
+	      c vertical matchParent ];
+	    yourself.
+
+	geometries := {
+		BlEmptyGeometry new.
+		BlPolygonGeometry vertices: { 0@0. 10@0. 10@10. 0@10 }.
+		BlPolylineGeometry vertices: { 0@0. 10@0. 10@10. 0@10 }.
+		BlLineGeometry from: 0@0 to: 10@10.
+		BlBezierCurveGeometry controlPoints: { 0@0. 10@10 }.
+		BlEllipseGeometry new.
+		BlCircleGeometry new.
+		BlTriangleGeometry new.
+		BlSquareGeometry new.
+		BlRectangleGeometry new.
+		BlRoundedRectangleGeometry cornerRadius: 3.
+		BlAnnulusSectorGeometry new }.
+
+	geometries do: [ :each |
+		| anElement |
+		anElement := each asElement.
+		anElement size: 10@10.
+		container addChild: anElement ]
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildGradients [
 
 	| aLinearGradient aRadialGradient anExtent |

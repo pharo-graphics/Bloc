@@ -11,8 +11,17 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #converting }
+BlElementVectorGeometry >> asElement [
+
+	^ super asElement
+		size: self extent;
+		yourself
+]
+
 { #category : #accessing }
 BlElementVectorGeometry >> extent [
+
 	^ extent
 ]
 

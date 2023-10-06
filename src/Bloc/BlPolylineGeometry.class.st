@@ -23,13 +23,6 @@ BlPolylineGeometry class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
-{ #category : #converting }
-BlPolylineGeometry >> asElement [
-	^ super asElement
-		background: Color transparent;
-		outskirts: BlOutskirts centered
-]
-
 { #category : #'geometry testing' }
 BlPolylineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.

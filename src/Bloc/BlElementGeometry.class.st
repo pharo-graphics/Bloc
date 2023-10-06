@@ -8,16 +8,24 @@ Class {
 
 { #category : #converting }
 BlElementGeometry >> asElement [
-	"Create an appropriate element with me as its geometry.
-	By default create an instance of the basic BlElement simply setting its
-	geometry to me. Subclasses may be converted to more specific elements"
-	<return: #BlElement>
+	"Answer an element with me as its geometry, with appropriate default values."
 
-	^ BlElement new
-		size: self extent;
-		background: (Color gray alpha: 0.4);
-		border: (BlBorder builder paint: Color gray; width: 2; build);
-		geometry: self
+	| anElement |
+	anElement := BlElement new
+		geometry: self;
+		border: (BlBorder paint: Color gray width: 2);
+		yourself.
+
+	self hasCaps
+		ifTrue: [
+			anElement
+				background: Color transparent;
+				outskirts: BlOutskirts centered ]
+		ifFalse: [
+			anElement
+				background: (Color gray alpha: 0.4) ].
+
+	^ anElement
 ]
 
 { #category : #'geometry testing' }
@@ -39,12 +47,14 @@ BlElementGeometry >> geometryBounds: aBounds of: aBlElement [
 
 { #category : #testing }
 BlElementGeometry >> hasCaps [
+	"Answer whether my path has caps, i.e. if I include an open line."
 
 	^ self subclassResponsibility
 ]
 
 { #category : #testing }
 BlElementGeometry >> hasJoins [
+	"Answer whether I have joins, i.e. my path presents edges between a segment and another."
 
 	^ self subclassResponsibility
 ]
