@@ -7,10 +7,23 @@ Class {
 	#superclass : #BlElementEffect,
 	#instVars : [
 		'color',
-		'offset'
+		'offset',
+		'isInset'
 	],
 	#category : #'Bloc-Effect'
 }
+
+{ #category : #accessing }
+BlShadowEffect >> beInset [
+	
+	isInset := true
+]
+
+{ #category : #accessing }
+BlShadowEffect >> beOutset [
+	
+	isInset := false
+]
 
 { #category : #accessing }
 BlShadowEffect >> color [
@@ -28,6 +41,20 @@ BlShadowEffect >> computeBounds: aBlBounds [
 BlShadowEffect >> extraShadowSpace [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+BlShadowEffect >> initialize [
+
+	super initialize.
+	
+	isInset := false
+]
+
+{ #category : #accessing }
+BlShadowEffect >> isInset: aBoolean [
+	
+	^ isInset
 ]
 
 { #category : #accessing }
