@@ -61,6 +61,30 @@ BlMatrix3D class >> rotation: aTheta axis: aVector [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlMatrix3D >> = anObject [
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	
+	self sx = anObject sx ifFalse:[ ^ false ].
+	self shy0 = anObject shy0 ifFalse:[ ^ false ].
+	self shz0 = anObject shz0 ifFalse:[ ^ false ].
+	self wx = anObject wx ifFalse:[ ^ false ].
+	self shx0 = anObject shx0 ifFalse:[ ^ false ].
+	self shz1 = anObject shz1 ifFalse:[ ^ false ].
+	self wy = anObject wy ifFalse:[ ^ false ].
+	self shx1 = anObject shx1 ifFalse:[ ^ false ].
+	self shy1 = anObject shy1 ifFalse:[ ^ false ].
+	self sz = anObject sz ifFalse:[ ^ false ].
+	self wz = anObject wz ifFalse:[ ^ false ].
+	self x = anObject x ifFalse:[ ^ false ].
+	self y = anObject y ifFalse:[ ^ false ].
+	self z = anObject z ifFalse:[ ^ false ].
+	self w = anObject w ifFalse:[ ^ false ].
+
+	^true
+]
+
 { #category : #converting }
 BlMatrix3D >> asMatrixCollection [
 	^ Array2D
