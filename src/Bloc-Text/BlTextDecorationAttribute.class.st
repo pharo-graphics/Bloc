@@ -83,6 +83,14 @@ BlTextDecorationAttribute >> paint: aColor [
 	self color: aColor
 ]
 
+{ #category : #printing }
+BlTextDecorationAttribute >> printOn: aStream [
+
+	aStream
+		nextPutAll: 'decoration: ';
+		print: self decoration
+]
+
 { #category : #'api - decoration' }
 BlTextDecorationAttribute >> solid [
 	decoration solid
