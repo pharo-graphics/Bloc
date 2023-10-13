@@ -101,6 +101,12 @@ BlSpaceFrame >> phases [
 	^ phases
 ]
 
+{ #category : #removing }
+BlSpaceFrame >> removePhase: aFramePhase [
+
+	self phases remove: aFramePhase ifAbsent: [ Error signal: 'Phase not found']
+]
+
 { #category : #running }
 BlSpaceFrame >> runCurrentPhaseOn: aSpace [
 
