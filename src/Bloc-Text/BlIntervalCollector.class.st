@@ -3,61 +3,63 @@ I use a position finder (a `BlPositionFinder`) to search for all intervals satis
 
 "
 Class {
-	#name : #BlIntervalCollector,
-	#superclass : #BlTextOperator,
+	#name : 'BlIntervalCollector',
+	#superclass : 'BlTextOperator',
 	#instVars : [
 		'finder'
 	],
-	#category : #'Bloc-Text-Text-Operator'
+	#category : 'Bloc-Text-Text-Operator',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Operator'
 }
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> caseInsensitiveSubstring: aString [
 	finder caseInsensitiveSubstring: aString
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> caseSensitiveSubstring: aString [
 
 	finder caseSensitiveSubstring: aString
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> character: aCharacter [
 
 	finder character: aCharacter
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> characters: aString [
 
 	finder characters: aString
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollector >> initialize [
 	super initialize.
 	finder := BlPositionFinder new
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> pattern: anOneArgBlock [
 
 	finder pattern: anOneArgBlock
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> reversed [
 	finder reversed
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BlIntervalCollector >> search [
 
 	^ finder search
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BlIntervalCollector >> searchAll: aSubstring [
 	self substring: aSubstring.
 	^ Array streamContents: [ :stream | 
@@ -70,7 +72,7 @@ BlIntervalCollector >> searchAll: aSubstring [
 				  finder startAtPosition: nextIdx + 1 ] ] ]
 ]
 
-{ #category : #'api - processing' }
+{ #category : 'api - processing' }
 BlIntervalCollector >> searchAll: aSubstring excluding: anInterval [
 
 	self pattern: [ :aText :aPosition | 
@@ -90,30 +92,30 @@ BlIntervalCollector >> searchAll: aSubstring excluding: anInterval [
 				  finder startAtPosition: nextIdx + 1 ] ] ]
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> startAtEnd [
 	finder startAtEnd
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> startAtPosition: anInteger [
 
 	finder startAtPosition: anInteger
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> stepBy: anInteger [
 	
 	finder stepBy: anInteger
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlIntervalCollector >> substring: aString [
 
 	finder substring: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlIntervalCollector >> text: aBlText [
 	finder text: aBlText
 ]

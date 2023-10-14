@@ -1,15 +1,17 @@
 Class {
-	#name : #BlTextDecorationUnderlineType,
-	#superclass : #BlTextDecorationSingleType,
-	#category : #'Bloc-Text-Text-Decoration'
+	#name : 'BlTextDecorationUnderlineType',
+	#superclass : 'BlTextDecorationSingleType',
+	#category : 'Bloc-Text-Text-Decoration',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Decoration'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationUnderlineType class >> constructor [
 	^ #underline
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationUnderlineType class >> label [
 	^ 'Underline'
 ]

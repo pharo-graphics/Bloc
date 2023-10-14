@@ -2,8 +2,8 @@
 I'm the one who visits node to coloring the code
 "
 Class {
-	#name : #BlRBTextStyler,
-	#superclass : #BlTextStyler,
+	#name : 'BlRBTextStyler',
+	#superclass : 'BlTextStyler',
 	#traits : 'TRBProgramNodeVisitor',
 	#classTraits : 'TRBProgramNodeVisitor classTrait',
 	#instVars : [
@@ -18,10 +18,12 @@ Class {
 		'styleTable',
 		'textAttributes'
 	],
-	#category : #'Bloc-Text-Text-Styler'
+	#category : 'Bloc-Text-Text-Styler',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Styler'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler class >> attributeArrayForColor: aColorOrNil emphasis: anEmphasisArray [
 	"Return a collection of text or font attributes for given color (or nil)
 	and array of requested emphasis styles (#bold, #italic, #oblique or #normal)"
@@ -33,7 +35,7 @@ BlRBTextStyler class >> attributeArrayForColor: aColorOrNil emphasis: anEmphasis
 		anEmphasisArray do: [ :anEmphasis | aStream nextPut: (self emphasisAttribute: anEmphasis) ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler class >> attributesFor: aSymbol [
 	"Return a collection of text or font attributes for a given style name"
 	
@@ -45,7 +47,7 @@ BlRBTextStyler class >> attributesFor: aSymbol [
 		ifAbsent: [ #() ]
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BlRBTextStyler class >> blueStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -176,7 +178,7 @@ BlRBTextStyler class >> blueStyleTable [
 			(module 								(green muchDarker) bold))
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlRBTextStyler class >> cleanUp [
 	super cleanUp.
 
@@ -184,7 +186,7 @@ BlRBTextStyler class >> cleanUp [
 	textAttributes := nil.
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BlRBTextStyler class >> darkStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -323,7 +325,7 @@ BlRBTextStyler class >> darkStyleTable [
 			(module 											'B4DD6E' bold))
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BlRBTextStyler class >> defaultStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to use the editor text color.
 	Multiple emphases can be specified using an array e.g. #(bold italic).
@@ -332,7 +334,7 @@ BlRBTextStyler class >> defaultStyleTable [
 	^ self blueStyleTable
 ]
 
-{ #category : #attributes }
+{ #category : 'attributes' }
 BlRBTextStyler class >> emphasisAttribute: anEmphasisAsSymbol [
 	"Create and return a text emphasis attribute for a given emphasis.
 	anEmphasisAsSymbol can be either #bold #italic #oblique or #normal"
@@ -356,7 +358,7 @@ BlRBTextStyler class >> emphasisAttribute: anEmphasisAsSymbol [
 	self error: 'Unknown emphasis: ', anEmphasisAsSymbol asString
 ]
 
-{ #category : #attributes }
+{ #category : 'attributes' }
 BlRBTextStyler class >> foregroundAttribute: aPaint [
 	"Create and return a text foreground attribute for a given paint.
 	aPaint can be a color, gradient or any other object that represents a paint
@@ -366,7 +368,7 @@ BlRBTextStyler class >> foregroundAttribute: aPaint [
 	^ BlTextForegroundAttribute paint: aPaint
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRBTextStyler class >> initialTextAttributes [
 	| theAttributes |
 
@@ -388,14 +390,14 @@ BlRBTextStyler class >> initialTextAttributes [
 	^ theAttributes
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRBTextStyler class >> initialize [
 	"self initialize"
 	styleTable := nil.
 	textAttributes := nil.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler class >> styleTable [
 	"Return a style table used by default by all stylers"
 	<return: #Array>
@@ -403,7 +405,7 @@ BlRBTextStyler class >> styleTable [
 	^ styleTable ifNil: [ styleTable := self defaultStyleTable ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler class >> styleTable: anArray [ 
 	"Set a style table that should be used by default by text stylers"
 
@@ -411,7 +413,7 @@ BlRBTextStyler class >> styleTable: anArray [
 	textAttributes := nil
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BlRBTextStyler class >> tangoStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -550,7 +552,7 @@ BlRBTextStyler class >> tangoStyleTable [
 			(module 								(green muchDarker) bold))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler class >> textAttributes [
 	"Return a dictionary of text attributes as assocciations of style name and an array of attributes"
 	<return: #Dictionary>
@@ -558,7 +560,7 @@ BlRBTextStyler class >> textAttributes [
 	^ textAttributes ifNil: [ textAttributes := self initialTextAttributes ]
 ]
 
-{ #category : #'style tables' }
+{ #category : 'style tables' }
 BlRBTextStyler class >> vintageStyleTable [
 	"color can be a valid argument to Color class>>colorFrom: , or nil to
 	use the editor text color.
@@ -697,7 +699,7 @@ BlRBTextStyler class >> vintageStyleTable [
 			(module 								(cyan muchDarker) bold))
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 BlRBTextStyler >> addAttributes: attributes forNode: anRBNode [
 	
 	"RB bug?"
@@ -710,7 +712,7 @@ BlRBTextStyler >> addAttributes: attributes forNode: anRBNode [
 		to: anRBNode stop
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 BlRBTextStyler >> addAttributes: attributes from: start to: stop [
 	text isEmpty
 		ifTrue: [ ^ self ].
@@ -721,7 +723,7 @@ BlRBTextStyler >> addAttributes: attributes from: start to: stop [
 		to: stop
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlRBTextStyler >> addAttributesFrom: attributeRuns satisfying: aTestBlock to: aText [
 
 	attributeRuns withStartStopAndValueDo: [:start :stop :attributes | 
@@ -736,7 +738,7 @@ BlRBTextStyler >> addAttributesFrom: attributeRuns satisfying: aTestBlock to: aT
 	^ aText
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 BlRBTextStyler >> addStyle: styleSymbol attribute: additionalAttribute forNode: anRBNode [
 
 	self 
@@ -745,7 +747,7 @@ BlRBTextStyler >> addStyle: styleSymbol attribute: additionalAttribute forNode: 
 		forNode: anRBNode.
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 BlRBTextStyler >> addStyle: styleSymbol attribute: additionalAttribute from: start to: end [
 
 	self
@@ -754,7 +756,7 @@ BlRBTextStyler >> addStyle: styleSymbol attribute: additionalAttribute from: sta
 		to: end
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 BlRBTextStyler >> addStyle: styleSymbol attributes: additionalAttributes forNode: anRBNode [
 
 	self 
@@ -762,7 +764,7 @@ BlRBTextStyler >> addStyle: styleSymbol attributes: additionalAttributes forNode
 		forNode: anRBNode
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 BlRBTextStyler >> addStyle: styleSymbol forNode: anRBNode [
 	"Style a piece of text that represents a given node for a provided style name"
 
@@ -771,7 +773,7 @@ BlRBTextStyler >> addStyle: styleSymbol forNode: anRBNode [
 		forNode: anRBNode
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 BlRBTextStyler >> addStyle: aStyleSymbol from: aStart to: anEnd [
 	"Style a piece of text from aStart to anEnd for a provided style name"
 
@@ -781,7 +783,7 @@ BlRBTextStyler >> addStyle: aStyleSymbol from: aStart to: anEnd [
 		to: anEnd
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> attributesFor: aSymbol [
 	"Return a collection of text attributes for a given name"
 	<return: #Array>
@@ -789,7 +791,7 @@ BlRBTextStyler >> attributesFor: aSymbol [
 	^ self class attributesFor: aSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler >> classOrMetaClass: aBehavior [
 
 	classOrMetaClass = aBehavior ifTrue: [ ^ self ].
@@ -797,37 +799,37 @@ BlRBTextStyler >> classOrMetaClass: aBehavior [
 	self announceStateChanged
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> currentClosedBracketStyleName [
 	bracketLevel isZero ifTrue: [ ^ #blockEnd ].
 	^ (#blockEnd asString , bracketLevel asString) asSymbol
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> currentClosedParenthesisStyleName [
 	parentheseLevel isZero ifTrue: [ ^ #rightParenthesis ].
 	^ (#rightParenthesis asString , parentheseLevel asString) asSymbol
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> currentOpenedBracketStyleName [
 	bracketLevel isZero ifTrue: [ ^ #blockStart ].
 	^ (#blockStart asString , bracketLevel asString) asSymbol
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> currentOpenedParenthesisStyleName [
 	parentheseLevel isZero ifTrue: [ ^ #leftParenthesis ].
 	^ (#leftParenthesis asString , parentheseLevel asString) asSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler >> fontName [
 
 	^ fontName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler >> fontName: aFontName [
 
 	fontName = aFontName ifTrue: [ ^ self ].
@@ -835,12 +837,12 @@ BlRBTextStyler >> fontName: aFontName [
 	self announceStateChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler >> isForWorkspace [
 	^ isForWorkspace ifNil: [ workspace notNil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler >> isForWorkspace: aBoolean [
 
 	isForWorkspace = aBoolean ifTrue: [ ^self ].
@@ -848,7 +850,7 @@ BlRBTextStyler >> isForWorkspace: aBoolean [
 	self announceStateChanged
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 BlRBTextStyler >> literalStyleSymbol: aValue [
 	aValue isSymbol
 		ifTrue: [ ^ #symbol ].
@@ -867,21 +869,21 @@ BlRBTextStyler >> literalStyleSymbol: aValue [
 	^ #default
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> methodOrBlockArgStyleFor: anArgumentNode [
 	^ anArgumentNode isDefinedByBlock
 		ifTrue: [ #blockArg ]
 		ifFalse: [ #methodArg ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> methodOrBlockTempDeclStyleFor: aSequenceNode [
 	^ aSequenceNode scope isBlockScope
 		ifTrue: [ #blockPatternTempVar ]
 		ifFalse: [ #patternTempVar ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> methodOrBlockTempStyleFor: aTemporaryNode [
 
 	^ aTemporaryNode isDefinedByBlock
@@ -889,7 +891,7 @@ BlRBTextStyler >> methodOrBlockTempStyleFor: aTemporaryNode [
 		  ifFalse: [ #tempVar ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> parse: aText isMethod: isMethod [
 	|root aString |
 	
@@ -905,21 +907,21 @@ BlRBTextStyler >> parse: aText isMethod: isMethod [
 		ifFalse:[ ^RBParser parseFaultyExpression: aString ].
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> privateStyle: aText [
 
 	| ast compiler |
 	compiler := self isForWorkspace
-		            ifTrue: [ 
+		            ifTrue: [
 			            OpalCompiler new
 				            context: thisContext;
 				            yourself ]
 		            ifFalse: [ classOrMetaClass compiler ].
 	ast := compiler
 		       source: aText asString;
-		       noPattern: self isForWorkspace;
+		       isScripting: self isForWorkspace;
 		       options:
-			       #( + optionParseErrors + optionSkipSemanticWarnings );
+			       #( #+ optionParseErrors #+ optionSkipSemanticWarnings );
 		       requestor: workspace;
 		       bindings: (workspace
 				        ifNotNil: [ workspace bindings ]
@@ -930,7 +932,7 @@ BlRBTextStyler >> privateStyle: aText [
 	^ aText
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> privateStyle_my: aText [
 
 	| ast compiler |
@@ -955,7 +957,7 @@ BlRBTextStyler >> privateStyle_my: aText [
 	^ aText
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> privateStyle_orig: aText [
 
 	| ast |
@@ -974,7 +976,7 @@ BlRBTextStyler >> privateStyle_orig: aText [
 	^ aText
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> resolveStyleFor: aVariableNode [
 
 	aVariableNode binding isUndeclaredVariable ifTrue: [ 
@@ -991,7 +993,7 @@ BlRBTextStyler >> resolveStyleFor: aVariableNode [
 	^ #invalid
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> resolveTextLinkFor: aVariableNode [
 
 	aVariableNode binding isGlobalVariable
@@ -1000,7 +1002,7 @@ BlRBTextStyler >> resolveTextLinkFor: aVariableNode [
 	^ BlTextVariableLink variableName: aVariableNode name
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> style: aText ast: ast [
 	text := aText.
 	text attributes: (self attributesFor: #default).
@@ -1010,14 +1012,14 @@ BlRBTextStyler >> style: aText ast: ast [
 		text := nil ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> styleCloseBracket: aBlockNode [
 	bracketLevel := bracketLevel - 1.
 	(aBlockNode right isZero or: [  aBlockNode value isNil ]) ifTrue:[^ self].
 	self addStyle: self currentClosedBracketStyleName from: aBlockNode right to: aBlockNode right
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> styleCloseParenthese: aMessageNode [
 	aMessageNode parentheses
 		ifNotEmpty: [ 
@@ -1029,7 +1031,7 @@ BlRBTextStyler >> styleCloseParenthese: aMessageNode [
 					self addStyle: self currentClosedParenthesisStyleName from: pos to: pos ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> styleOpenBracket: aBlockNode [
 	| style |
 	style := aBlockNode isFaulty
@@ -1039,7 +1041,7 @@ BlRBTextStyler >> styleOpenBracket: aBlockNode [
 	bracketLevel := bracketLevel + 1
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> styleOpenParenthese: aMessageNode [
 	aMessageNode parentheses
 		ifNotEmpty: [ 
@@ -1051,7 +1053,7 @@ BlRBTextStyler >> styleOpenParenthese: aMessageNode [
 					parentheseLevel := parentheseLevel + 1 ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRBTextStyler >> styleTempBars: aSequenceNode [
 	| tempBarAttribute |
 	tempBarAttribute := aSequenceNode scope isMethodScope
@@ -1063,20 +1065,20 @@ BlRBTextStyler >> styleTempBars: aSequenceNode [
 		ifNotNil: [ :pos | self addStyle: tempBarAttribute from: pos to: pos ]
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitArgumentNode: anArgumentNode [
 	| blockOrMethodArgStyle |
 	blockOrMethodArgStyle := self methodOrBlockArgStyleFor: anArgumentNode.
 	self addStyle: blockOrMethodArgStyle forNode: anArgumentNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitArrayNode: anArrayNode [ 
 
 	anArrayNode children do: [:each | self visitNode: each]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitAssignmentNode: anAssignmentNode [
 	self visitNode: anAssignmentNode variable.
 	self visitNode: anAssignmentNode value.
@@ -1084,7 +1086,7 @@ BlRBTextStyler >> visitAssignmentNode: anAssignmentNode [
 		ifFalse: [ self addStyle: #invalid forNode: anAssignmentNode ]
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitBlockNode: aBlockNode [
 	aBlockNode comments do: [ :comment | self addStyle: #comment from: comment start to: comment stop ].
 	aBlockNode arguments do: [ :argument | self addStyle: #blockPatternArg forNode: argument ].
@@ -1095,28 +1097,28 @@ BlRBTextStyler >> visitBlockNode: aBlockNode [
 	self styleCloseBracket: aBlockNode
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitCascadeNode: aCascadeNode [
 	aCascadeNode messages do: [ :each | self visitNode: each ].
 	aCascadeNode semicolons do: [ :pos | self addStyle: #cascadeSeparator from: pos to: pos ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitEnglobingErrorNode: anEnglobingErrorNode [
 	anEnglobingErrorNode contents do: [ :each | self visitNode: each ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitGlobalNode: aSelfNode [
 	^ self visitVariableNode: aSelfNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitInstanceVariableNode: aSelfNode [
 	^ self visitVariableNode: aSelfNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitLiteralArrayNode: aRBLiteralArrayNode [
 	"in a (valid) byte array all elements are of the same type, style the whole contents
 at once, but for ordinary literal arrays, style every node"
@@ -1126,7 +1128,7 @@ at once, but for ordinary literal arrays, style every node"
 		ifFalse: [ aRBLiteralArrayNode contents do: [ :each | self visitNode: each ] ]
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitLiteralNode: aLiteralNode [
 	| value |
 	value := aLiteralNode value.
@@ -1136,7 +1138,7 @@ BlRBTextStyler >> visitLiteralNode: aLiteralNode [
 		forNode: aLiteralNode
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitMessageNode: aMessageNode [
 	| style link |
 	style := #keyword.
@@ -1161,7 +1163,7 @@ BlRBTextStyler >> visitMessageNode: aMessageNode [
 	self styleCloseParenthese: aMessageNode
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitMethodNode: aMethodNode [
 
 	aMethodNode isDoIt ifTrue: [ ^ self visitNode: aMethodNode body ].
@@ -1183,7 +1185,7 @@ BlRBTextStyler >> visitMethodNode: aMethodNode [
 	self visitNode: aMethodNode body
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitNode: aNode [
 
 	aNode comments ifNotNil: [ 
@@ -1192,27 +1194,27 @@ BlRBTextStyler >> visitNode: aNode [
 	^ aNode acceptVisitor: self
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitParseErrorNode: anErrorNode [
 	self 
 		addStyle: #invalid
 		forNode: anErrorNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitPatternBlockNode: aRBPatternBlockNode [ 
 	self visitArgumentNodes: aRBPatternBlockNode arguments.
 	self visitNode: aRBPatternBlockNode body
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitPatternWrapperBlockNode: aRBPatternWrapperBlockNode [ 
 	self visitNode: aRBPatternWrapperBlockNode wrappedNode.
 	self visitArgumentNodes: aRBPatternWrapperBlockNode arguments.
 	self visitNode: aRBPatternWrapperBlockNode body
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitPragmaNode: aPragmaNode [
 	aPragmaNode selectorParts with: aPragmaNode keywordsPositions do: [ :keyword : position|
 	self 
@@ -1224,7 +1226,7 @@ BlRBTextStyler >> visitPragmaNode: aPragmaNode [
 	aPragmaNode arguments do: [ :each | self visitNode: each ]
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitReturnNode: aReturnNode [ 
 	self 
 		addStyle: #return
@@ -1234,14 +1236,14 @@ BlRBTextStyler >> visitReturnNode: aReturnNode [
 	self visitNode: aReturnNode value
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitSelfNode: aSelfNode [
 	self 
 		addStyle: #self
 		forNode: aSelfNode
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitSequenceNode: aSequenceNode [
 	| patternTempStyle |
 	patternTempStyle := self methodOrBlockTempDeclStyleFor: aSequenceNode.
@@ -1252,34 +1254,34 @@ BlRBTextStyler >> visitSequenceNode: aSequenceNode [
 	aSequenceNode periods do: [ :pos | self addStyle: #statementSeparator from: pos to: pos ]
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitSuperNode: aSuperNode [
 	self 
 		addStyle: #super
 		forNode: aSuperNode
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitTemporaryNode: aTemporaryNode [
 	| methodOrBlockTempStyle |
 	methodOrBlockTempStyle := self methodOrBlockTempStyleFor: aTemporaryNode.
 	self addStyle: methodOrBlockTempStyle forNode: aTemporaryNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlRBTextStyler >> visitTemporaryNodes: aNodeCollection [ 
 	"This is triggered when defining the temporaries between the pipes"
 	^self visitArgumentNodes: aNodeCollection
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitThisContextNode: aThisContextNode [
 	self 
 		addStyle: #thisContext
 		forNode: aThisContextNode
 ]
 
-{ #category : #'visiting rb nodes' }
+{ #category : 'visiting rb nodes' }
 BlRBTextStyler >> visitVariableNode: aVariableNode [
 	self 
 		addStyle: (self resolveStyleFor: aVariableNode) 
@@ -1289,12 +1291,12 @@ BlRBTextStyler >> visitVariableNode: aVariableNode [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler >> workspace [
 	^ workspace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRBTextStyler >> workspace: aWorkspace [
 
 	workspace = aWorkspace ifTrue: [ ^ self ].

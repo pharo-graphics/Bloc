@@ -17,50 +17,52 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlTextForegroundAttribute,
-	#superclass : #BlTextAttribute,
+	#name : 'BlTextForegroundAttribute',
+	#superclass : 'BlTextAttribute',
 	#instVars : [
 		'paint'
 	],
-	#category : #'Bloc-Text-Text-Attributes'
+	#category : 'Bloc-Text-Text-Attributes',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Attributes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextForegroundAttribute class >> color: aColor [
 	^ self new
 		paint: aColor;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTextForegroundAttribute class >> paint: aPaint [
 	^ self color: aPaint
 ]
 
-{ #category : #'text style' }
+{ #category : 'text style' }
 BlTextForegroundAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
 
 	aBlTextFontAndStyleBuilder color: self paint
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextForegroundAttribute >> equals: anAnotherAttribute [
 	^ self paint = anAnotherAttribute paint
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextForegroundAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self paint hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextForegroundAttribute >> paint [
 	^ paint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextForegroundAttribute >> paint: aPaint [
 	self
 		assert: [ paint isNil ]
@@ -73,14 +75,14 @@ BlTextForegroundAttribute >> paint: aPaint [
 	paint := aPaint
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextForegroundAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'text-foreground: ';
 		nextPutAll: self paint printString
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextForegroundAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	

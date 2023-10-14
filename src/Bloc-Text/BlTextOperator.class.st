@@ -1,21 +1,23 @@
 Class {
-	#name : #BlTextOperator,
-	#superclass : #Object,
+	#name : 'BlTextOperator',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'text'
 	],
-	#category : #'Bloc-Text-Text-Operator'
+	#category : 'Bloc-Text-Text-Operator',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Operator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextOperator >> text [
 	<return: #BlText>
 	^ text ifNil: [ text := '' asRopedText ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextOperator >> text: aBlText [
 	text := aBlText asRopedText 
 ]

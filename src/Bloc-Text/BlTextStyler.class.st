@@ -18,70 +18,72 @@ Clients may subscribe to `BlStylerTextStyled` and `BlStylerStateChanged` with #w
 
 "
 Class {
-	#name : #BlTextStyler,
-	#superclass : #Object,
+	#name : 'BlTextStyler',
+	#superclass : 'Object',
 	#traits : 'TBlAnnouncerProvider',
 	#classTraits : 'TBlAnnouncerProvider classTrait',
 	#instVars : [
 		'text',
 		'launcher'
 	],
-	#category : #'Bloc-Text-Text-Styler'
+	#category : 'Bloc-Text-Text-Styler',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Styler'
 }
 
-{ #category : #'api - text style' }
+{ #category : 'api - text style' }
 BlTextStyler >> announceStateChanged [
 
 	self announcerDo: [ :anAnnouncer | 
 		anAnnouncer announce: BlStylerStateChanged ]
 ]
 
-{ #category : #'api - text style' }
+{ #category : 'api - text style' }
 BlTextStyler >> announceTextStyled: aBlText [
 
 	self announce: (BlStylerTextStyled styledText: aBlText)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextStyler >> defaultStylerLauncher [
 	^ BlTextStylerLauncher new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextStyler >> fontName: aFontName [
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextStyler >> initialize [
 	super initialize.
 	launcher := self defaultStylerLauncher.
 	self whenAnnouncement: BlStylerTextStyleRequested send: #whenTextStyleRequested: to: self.
 ]
 
-{ #category : #'api - text style' }
+{ #category : 'api - text style' }
 BlTextStyler >> launchStyle: aBlText in: anElement [
 
 	^ self launcher styleText: aBlText withStyler: self inElement: anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextStyler >> launcher [
 	^ launcher 
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlTextStyler >> postCopy [
 	self resetAnnouncer
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlTextStyler >> privateStyle: aText [ 
 	<return: #BlText>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #styling }
+{ #category : 'styling' }
 BlTextStyler >> style: aBlText [
 
 	<return: #BlText>
@@ -93,7 +95,7 @@ BlTextStyler >> style: aBlText [
 	^ aStyledText
 ]
 
-{ #category : #'api - text style' }
+{ #category : 'api - text style' }
 BlTextStyler >> whenTextStyleRequested: aBlStylerTextStyleRequested [
 
 	" a client request text styling "

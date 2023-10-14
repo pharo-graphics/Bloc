@@ -4,17 +4,19 @@
 
 "
 Class {
-	#name : #BlTextDecorationSolidStyle,
-	#superclass : #BlTextDecorationStyle,
-	#category : #'Bloc-Text-Text-Decoration'
+	#name : 'BlTextDecorationSolidStyle',
+	#superclass : 'BlTextDecorationStyle',
+	#category : 'Bloc-Text-Text-Decoration',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Decoration'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationSolidStyle class >> constructor [
 	^ #solid
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationSolidStyle class >> label [
 	^ 'Solid'
 ]

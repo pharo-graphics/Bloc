@@ -1,15 +1,17 @@
 Class {
-	#name : #BlFontItalicAttribute,
-	#superclass : #BlFontEmphasisAttribute,
-	#category : #'Bloc-Text-Text-Attributes'
+	#name : 'BlFontItalicAttribute',
+	#superclass : 'BlFontEmphasisAttribute',
+	#category : 'Bloc-Text-Text-Attributes',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Attributes'
 }
 
-{ #category : #'text style' }
+{ #category : 'text style' }
 BlFontItalicAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
 	aBlTextFontAndStyleBuilder slantItalic
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontItalicAttribute >> emphasisName [
 	<return: #String>
 	

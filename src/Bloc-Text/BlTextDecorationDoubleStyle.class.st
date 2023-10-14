@@ -4,17 +4,19 @@
 
 "
 Class {
-	#name : #BlTextDecorationDoubleStyle,
-	#superclass : #BlTextDecorationStyle,
-	#category : #'Bloc-Text-Text-Decoration'
+	#name : 'BlTextDecorationDoubleStyle',
+	#superclass : 'BlTextDecorationStyle',
+	#category : 'Bloc-Text-Text-Decoration',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Decoration'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationDoubleStyle class >> constructor [
 	^ #double
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationDoubleStyle class >> label [
 	^ 'Double'
 ]
