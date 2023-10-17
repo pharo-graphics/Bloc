@@ -9,22 +9,25 @@ TBlLayoutResizable >> exact: aPoint [
 
 	| aSize |
 	aSize := aPoint asPoint.
-	self hExact: aSize x.
-	self vExact: aSize y
+	self resizableConstraintsDo: [ :c |
+		c horizontal exact: aSize x.
+		c vertical exact: aSize y ]
 ]
 
 { #category : 't  - layout resizeable' }
 TBlLayoutResizable >> fitContent [
 
-	self hFitContent.
-	self vFitContent
+	self resizableConstraintsDo: [ :c |
+		c horizontal fitContent.
+		c vertical fitContent ]
 ]
 
 { #category : 't  - layout resizeable' }
 TBlLayoutResizable >> fitContentLimited [
 
-	self hFitContentLimited.
-	self vFitContentLimited
+	self resizableConstraintsDo: [ :c |
+		c horizontal fitContentLimited.
+		c vertical fitContentLimited ]
 ]
 
 { #category : 't  - layout resizeable' }
@@ -55,8 +58,9 @@ TBlLayoutResizable >> hMatchParent [
 { #category : 't  - layout resizeable' }
 TBlLayoutResizable >> matchParent [
 
-	self hMatchParent.
-	self vMatchParent
+	self resizableConstraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent ]
 ]
 
 { #category : 't  - layout resizeable' }
