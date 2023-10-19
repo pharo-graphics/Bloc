@@ -5,22 +5,24 @@ This event is used by the debugger to stop the UI process so it should be used w
 
 "
 Class {
-	#name : #BlSpaceDestroyedEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceDestroyedEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'space'
 	],
-	#category : #'Bloc-Events-Type-Space'
+	#category : 'Bloc-Events-Type-Space',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceDestroyedEvent >> space [
 	<return: #BlOSpace>
 
 	^ space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceDestroyedEvent >> space: aSpace [
 	space := aSpace
 ]

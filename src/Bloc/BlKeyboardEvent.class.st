@@ -1,14 +1,16 @@
 Class {
-	#name : #BlKeyboardEvent,
-	#superclass : #BlUIEvent,
+	#name : 'BlKeyboardEvent',
+	#superclass : 'BlUIEvent',
 	#instVars : [
 		'scanCode',
 		'key'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events',
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlKeyboardEvent >> asDictionaryForExport [
 	^ super asDictionaryForExport
 		at: #scanCode put: scanCode printString;
@@ -16,24 +18,24 @@ BlKeyboardEvent >> asDictionaryForExport [
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlKeyboardEvent >> isKeyboard [
 	^ true
 ]
 
-{ #category : #'key - accessing' }
+{ #category : 'key - accessing' }
 BlKeyboardEvent >> key [
 	<return: #KeyboardKey>
 
 	^ key
 ]
 
-{ #category : #'key - accessing' }
+{ #category : 'key - accessing' }
 BlKeyboardEvent >> key: aBlKeyboardKey [
 	key := aBlKeyboardKey
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlKeyboardEvent >> printOn: aStream [
 	aStream 
 		nextPutAll: self class name;
@@ -47,7 +49,7 @@ BlKeyboardEvent >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #'key - accessing' }
+{ #category : 'key - accessing' }
 BlKeyboardEvent >> scanCode [
 	"A scancode (or scan code) is the data that most computer keyboards send to a computer to report which keys have been pressed.
 	A number, or sequence of numbers, is assigned to each key on the keyboard.
@@ -57,7 +59,7 @@ BlKeyboardEvent >> scanCode [
 	^ scanCode
 ]
 
-{ #category : #'key - accessing' }
+{ #category : 'key - accessing' }
 BlKeyboardEvent >> scanCode: aNumber [
 	scanCode := aNumber
 ]

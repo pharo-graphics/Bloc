@@ -1,24 +1,26 @@
 Class {
-	#name : #BlMeasurementSpec,
-	#superclass : #Object,
+	#name : 'BlMeasurementSpec',
+	#superclass : 'Object',
 	#instVars : [
 		'size',
 		'mode'
 	],
-	#category : #'Bloc-Layouts-Support'
+	#category : 'Bloc-Layouts-Support',
+	#package : 'Bloc',
+	#tag : 'Layouts-Support'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMeasurementSpec class >> atMost: aNumber [
 	^ self new beAtMost: aNumber
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMeasurementSpec class >> exact: aNumber [
 	^ self new beExact: aNumber
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMeasurementSpec class >> size: aSize mode: aMode [
 	^ self new
 		size: aSize;
@@ -26,17 +28,17 @@ BlMeasurementSpec class >> size: aSize mode: aMode [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMeasurementSpec class >> unspecified [
 	^ self unspecified: 0.0
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMeasurementSpec class >> unspecified: aNumber [
 	^ self new beUnspecified: aNumber
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMeasurementSpec >> = anotherObject [
 
 	self == anotherObject
@@ -48,92 +50,92 @@ BlMeasurementSpec >> = anotherObject [
 		and: [ anotherObject mode = mode ]
 ]
 
-{ #category : #composition }
+{ #category : 'composition' }
 BlMeasurementSpec >> @ heightMeasurementSpec [
 	^ BlExtentMeasurementSpec new
 		widthSpec: self;
 		heightSpec: heightMeasurementSpec
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMeasurementSpec >> beAtMost: aNumber [
 	self
 		size: aNumber;
 		mode: BlMeasurementMode atMost
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMeasurementSpec >> beExact: aNumber [
 	self
 		size: aNumber;
 		mode: BlMeasurementMode exact
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMeasurementSpec >> beUnspecified [
 	self beUnspecified: 0
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMeasurementSpec >> beUnspecified: aNumber [
 	self
 		size: aNumber;
 		mode: BlMeasurementMode unspecified
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMeasurementSpec >> hash [
 	^ size hash bitXor: mode hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementSpec >> isAtMost [
 	^ self mode isAtMost
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementSpec >> isExact [
 	^ self mode isExact
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementSpec >> isUnspecified [
 	^ self mode isUnspecified
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementSpec >> min: aMinSize max: aMaxSize [
 	^ self mode size: self size min: aMinSize max: aMaxSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMeasurementSpec >> mode [
 	^ mode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMeasurementSpec >> mode: aMeasurementSpec [
 	mode := aMeasurementSpec
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMeasurementSpec >> printOn: aStream [
 	self mode printOn: aStream size: self size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMeasurementSpec >> size [
 	^ size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMeasurementSpec >> size: aNumber [
 	"aNumber should satisfy: #isBlocPositiveFloat"
 
 	size := aNumber
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementSpec >> sizeFor: aNumber [
 	"aNumber should satisfy: #isBlocFiniteFloat"
 

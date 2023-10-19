@@ -1,11 +1,13 @@
 Class {
-	#name : #BlActionHandler,
-	#superclass : #Object,
+	#name : 'BlActionHandler',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Events-Handler'
+	#category : 'Bloc-Events-Handler',
+	#package : 'Bloc',
+	#tag : 'Events-Handler'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlActionHandler >> actionPerformed [
 ]

@@ -18,27 +18,29 @@ parent removeChild: child
 
 "
 Class {
-	#name : #BlElementRemovedFromParentEvent,
-	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Type-Element'
+	#name : 'BlElementRemovedFromParentEvent',
+	#superclass : 'BlElementEvent',
+	#category : 'Bloc-Events-Type-Element',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementRemovedFromParentEvent class >> disableIn: anObject [
 	anObject disableRemovedFromParent
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementRemovedFromParentEvent class >> enableIn: anObject [
 	anObject enableRemovedFromParent
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementRemovedFromParentEvent class >> wantedIn: anObject [
 	^ anObject wantsRemovedFromParent
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementRemovedFromParentEvent >> sendTo: anObject [
 	anObject elementRemovedFromParentEvent: self
 ]

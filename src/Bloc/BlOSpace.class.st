@@ -4,12 +4,14 @@ It should be removed as soon as we convert all the examples as tests and move ev
 
 "
 Class {
-	#name : #BlOSpace,
-	#superclass : #BlSpace,
-	#category : #'Bloc-Space'
+	#name : 'BlOSpace',
+	#superclass : 'BlSpace',
+	#category : 'Bloc-Space',
+	#package : 'Bloc',
+	#tag : 'Space'
 }
 
-{ #category : #'change - style' }
+{ #category : 'change - style' }
 BlOSpace class >> doStyle: anElement [
 	| theInheritedStates childSpecificStatesToInherit |
 			
@@ -28,7 +30,7 @@ BlOSpace class >> doStyle: anElement [
 	theInheritedStates do: [ :eachState | eachState finishedPropagateFrom: anElement ]
 ]
 
-{ #category : #'change - style' }
+{ #category : 'change - style' }
 BlOSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	| theStatesToInherit allNewStates newInheritedStates |
 
@@ -57,7 +59,7 @@ BlOSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	theStatesToInherit do: [ :eachState | eachState finishedPropagateFrom: anElement ]
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateClickOn: anElement [
 	"Simulate a click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
@@ -78,7 +80,7 @@ BlOSpace class >> simulateClickOn: anElement [
 	^ aPosition
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateClickOutside: anElement [
 	"Simulate a click event in outside of a given element by
 	performing mouse down and mouse up events in a sequence"
@@ -93,7 +95,7 @@ BlOSpace class >> simulateClickOutside: anElement [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateDoubleClickOn: anElement [
 	"Simulate a double click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
@@ -113,7 +115,7 @@ BlOSpace class >> simulateDoubleClickOn: anElement [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateDragOn: anElement by: aBlVector [
 	"Simulate a click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
@@ -134,7 +136,7 @@ BlOSpace class >> simulateDragOn: anElement by: aBlVector [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateEvent: anEvent on: anElement [
 	"I simulate a given low level space UI event such as MouseUp/MouseDown or keyboard.
 	If you would like to simulate a higher level event you could directly fire or dispatch them
@@ -147,7 +149,7 @@ BlOSpace class >> simulateEvent: anEvent on: anElement [
 	self simulateEvents: { anEvent } on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 	"I simulate a given sequence of low level space UI events such as MouseUp/MouseDown or keyboard.
 	If you would like to simulate a higher level event you could directly fire or dispatch them
@@ -181,7 +183,7 @@ BlOSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 	
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateKeyDownOn: anElement key: aBlKeyboardKey [
 	"Simulate a key down event"
 
@@ -190,7 +192,7 @@ BlOSpace class >> simulateKeyDownOn: anElement key: aBlKeyboardKey [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateKeyUpOn: anElement key: aBlKeyboardKey [
 	"Simulate a key up event"
 
@@ -199,7 +201,7 @@ BlOSpace class >> simulateKeyUpOn: anElement key: aBlKeyboardKey [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseDownOn: anElement [
 	"Simulate a mouse down event in the middle of a given element"
 	| aPosition |
@@ -213,7 +215,7 @@ BlOSpace class >> simulateMouseDownOn: anElement [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseDownOn: anElement at: aPoint [
 	"Simulate a mouse down event at a given location in the space of the element"
 
@@ -222,7 +224,7 @@ BlOSpace class >> simulateMouseDownOn: anElement at: aPoint [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseMoveInside: anElement [
 	"Simulate a mouse move event at a random location within element's bounds"
 	| aPosition |
@@ -234,7 +236,7 @@ BlOSpace class >> simulateMouseMoveInside: anElement [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseMoveOn: anElement at: aPoint [
 	"Simulate a mouse move event at a given location in the space of the element"
 	
@@ -243,7 +245,7 @@ BlOSpace class >> simulateMouseMoveOn: anElement at: aPoint [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint [
 	"Simulate a mouse move event at a given location in the space of the element"
 	
@@ -254,7 +256,7 @@ BlOSpace class >> simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseMoveOutside: anElement [
 	"Simulate a mouse move event at a random location outside of element's bounds"
 	| aPosition |
@@ -266,7 +268,7 @@ BlOSpace class >> simulateMouseMoveOutside: anElement [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseUpOn: anElement [
 	"Simulate a mouse up event in the middle of a given element"
 	| aPosition |
@@ -280,7 +282,7 @@ BlOSpace class >> simulateMouseUpOn: anElement [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseUpOn: anElement at: aPoint [
 	"Simulate a mouse up event at a given location in the space of the element"
 
@@ -289,7 +291,7 @@ BlOSpace class >> simulateMouseUpOn: anElement at: aPoint [
 		on: anElement
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateMouseWheelOn: anElement by: aBlVector [
 	"Simulate a mouse wheel event in the middle of a given element"
 	| aPosition aBlocEvent |
@@ -311,7 +313,7 @@ BlOSpace class >> simulateMouseWheelOn: anElement by: aBlVector [
 	^ aPosition
 ]
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlOSpace class >> simulateSecondaryClickOn: anElement [
 	"Simulate a secondary click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
@@ -332,20 +334,20 @@ BlOSpace class >> simulateSecondaryClickOn: anElement [
 	^ aPosition
 ]
 
-{ #category : #'api - adding children' }
+{ #category : 'api - adding children' }
 BlOSpace >> addChild: anElement [
 	"Add a given element as a direct child to the space root"
 	
 	self root addChild: anElement
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlOSpace >> children [
 
 	^ self root children
 ]
 
-{ #category : #'focus managing' }
+{ #category : 'focus managing' }
 BlOSpace >> looseFocusFor: anElement [
 			
 	self
@@ -357,7 +359,7 @@ BlOSpace >> looseFocusFor: anElement [
 	self loseFocusFor: anElement
 ]
 
-{ #category : #'api - adding children' }
+{ #category : 'api - adding children' }
 BlOSpace >> removeChild: anElement [
 	"Remove a given element from the space root"
 	

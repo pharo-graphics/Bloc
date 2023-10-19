@@ -8,15 +8,17 @@ https://drafts.csswg.org/css-transforms/#valdef-transform-scale
 
 "
 Class {
-	#name : #BlScalingTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlScalingTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'scale'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlScalingTransformation class >> scale: aVector [
 
 	^ self new
@@ -24,7 +26,7 @@ BlScalingTransformation class >> scale: aVector [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlScalingTransformation >> initialize [
 
 	super initialize.
@@ -32,32 +34,32 @@ BlScalingTransformation >> initialize [
 	scale := BlVector one
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlScalingTransformation >> is2D [
 
 	^ scale z closeTo: 1.0
 ]
 
-{ #category : #'mathematical functions' }
+{ #category : 'mathematical functions' }
 BlScalingTransformation >> multiplyOn: aBlMatrix [
 
 	aBlMatrix scaleBy: scale
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlScalingTransformation >> printOn: aStream [
 
 	aStream nextPutAll: 'Scaling by '.
 	scale printOn: aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlScalingTransformation >> scale [
 
 	^ scale
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlScalingTransformation >> scale: aBlVector3DOrConvertible [
 
 	scale := aBlVector3DOrConvertible asScale3D
