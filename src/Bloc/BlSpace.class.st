@@ -1095,10 +1095,10 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 		:found | " test found because if the result is the root then it means that no element has been found "
 		found ~~ self root ifTrue: [ " ok, dispatch outside event through all the space elements "
 			" dispatch the mouse outside event to all alements of the scene graph "
-			self dispatchMousePickedOutside: (anEvent newCopyFor: found) asMouseOutsideEvent.
+			self dispatchMousePickedOutside: ((anEvent newCopyFor: found) asMouseOutsideEvent lastMouseDownEvent: self mouseProcessor lastMouseDownEvent; yourself).
 			^ found ] ].
 	" no element found at all: all elements receive a outside event"
-	self dispatchMousePickedOutside: anEvent clone asMouseOutsideEvent.
+	self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent  lastMouseDownEvent: self mouseProcessor lastMouseDownEvent; yourself).
 	^ nil
 ]
 

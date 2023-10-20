@@ -128,6 +128,17 @@ BlDirectEventDispatcher >> handlersDo: aBlock [
 	handlers ifNotNil: [ :aRegistry | aRegistry handlers do: aBlock ]
 ]
 
+{ #category : 'api - accessing' }
+BlDirectEventDispatcher >> hasEventFilterSuchThat: aBlock [
+	<return: #Boolean>
+
+	self filtersDo: [ :eachfilter |
+		(aBlock value: eachfilter)
+			ifTrue: [ ^ true ] ].
+		
+	^ false
+]
+
 { #category : 'api - testing' }
 BlDirectEventDispatcher >> hasFilter: anEventHandler [
 	^ filters

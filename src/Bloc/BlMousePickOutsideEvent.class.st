@@ -2,7 +2,8 @@ Class {
 	#name : 'BlMousePickOutsideEvent',
 	#superclass : 'BlElementEvent',
 	#instVars : [
-		'originalEvent'
+		'originalEvent',
+		'lastMouseDownEvent'
 	],
 	#category : 'Bloc-Events-Type-Element',
 	#package : 'Bloc',
@@ -31,6 +32,18 @@ BlMousePickOutsideEvent class >> wantedIn: anEventDispatcher [
 BlMousePickOutsideEvent >> asMouseOutsideEvent [
 
 	^ self 
+]
+
+{ #category : 'accessing' }
+BlMousePickOutsideEvent >> lastMouseDownEvent [
+
+	^ lastMouseDownEvent
+]
+
+{ #category : 'accessing' }
+BlMousePickOutsideEvent >> lastMouseDownEvent: aBlEvent [
+
+	lastMouseDownEvent := aBlEvent
 ]
 
 { #category : 'accessing' }

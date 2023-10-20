@@ -419,6 +419,12 @@ BlElement >> allowMouseEvents [
 	flags addShouldHandleMouseEvents.
 ]
 
+{ #category : 'event handling' }
+BlElement >> allowMousePickOutsideEvent [
+
+	self userData at: #shouldHandleMousePickOutsideEvent put: true
+]
+
 { #category : 'layout' }
 BlElement >> applyLayoutIn: aBlBounds [
 	
@@ -1412,12 +1418,16 @@ BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
 	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
 
 	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
+	aMouseOutsideEvent lastMouseDownEvent ifNotNil: [ :downEvent |
+		downEvent target = self ifTrue: [ ^ self ] ].
 	self children do: [ :aChildElement |
-		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone].
+		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone ].
+	" Am I allowed to manage mouse pick outside ?"
+	self shouldHandleMousePickOutsideEvent ifFalse: [ ^ self ].
 	" does my bounds contains the event position, if so, the picked point is inside myself "
-	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position) ifTrue: [ ^ self ].
-	self dispatchEvent: aMouseOutsideEvent.
-
+	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position)
+		ifTrue: [ ^ self ].
+	self dispatchEvent: aMouseOutsideEvent
 ]
 
 { #category : 'children dispatching' }
@@ -3279,6 +3289,12 @@ BlElement >> preventMouseEvents [
 	flags clearShouldHandleMouseEvents.
 ]
 
+{ #category : 'event handling' }
+BlElement >> preventMousePickOutsideEvent [
+
+	self userData at: #shouldHandleMousePickOutsideEvent put: false
+]
+
 { #category : 'children accessing' }
 BlElement >> previousSiblingDo: aBlock [
 	"Evaluate aBlock with the previous child in my parent before me if there is one"
@@ -3738,6 +3754,12 @@ BlElement >> shouldHandleMouseEvents [
 	<return: #Boolean>
 
 	^ flags hasShouldHandleMouseEvents
+]
+
+{ #category : 'event handling' }
+BlElement >> shouldHandleMousePickOutsideEvent [
+
+	^ self userData at: #shouldHandleMousePickOutsideEvent ifAbsentPut: [ false ]
 ]
 
 { #category : 'api - opening' }
