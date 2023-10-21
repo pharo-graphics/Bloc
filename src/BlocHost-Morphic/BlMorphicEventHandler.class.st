@@ -422,6 +422,11 @@ BlMorphicEventHandler >> handleScrollRight: anEvent [
 		self enqueue: aBlEvent ]
 ]
 
+{ #category : #'event handling' }
+BlMorphicEventHandler >> handleTextEditionEvent: anEvent [
+
+]
+
 { #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleTextInputEvent: aTextInputEvent [
 
