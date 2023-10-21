@@ -6,6 +6,8 @@ BlRadialGradientPaint >> aeApplyTo: aeCanvas [
 
 	aeCanvas
 		setSourceRadialPatternStops: stops
-		center: center
-		radius: radius
+		innerCenter: center
+		innerRadius: 0.0
+		outerCenter: center
+		outerRadius: radius
 ]
