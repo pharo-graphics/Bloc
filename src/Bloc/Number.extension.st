@@ -1,34 +1,34 @@
-Extension { #name : 'Number' }
+Extension { #name : #Number }
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Number >> asBlocVector [
 	"Return a 2D vector of the receiver by using the receiver as the two dimensions."
 	
 	^ BlVector x: self y: self
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Number >> asScale3D [
 	"Return a 3D vector representing a scale factor"
 
 	^ BlVector x: self y: self z: 1
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Number >> asTranslate3D [
 	"Return a 3D vector representing a translation vector"
 
 	^ BlVector x: self y: self z: 0
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Number >> closeTo: num epsilon: anEpsilon [
 	"are these two numbers close?"
 
 	^ (self - num) abs <= anEpsilon
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Number >> scalarMultiplicate2D: aVector2D [
 	"Perform a scalar multiplication of a given 2D vector by me"
 	<return: #BlVector>
@@ -38,7 +38,7 @@ Number >> scalarMultiplicate2D: aVector2D [
 		y: aVector2D y * self
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Number >> scalarMultiplicate3D: aVector3D [
 	"Return a new vector by performing a scalar multiplication of a given 3D vector by me."
 	<return: #BlVector>
@@ -49,7 +49,7 @@ Number >> scalarMultiplicate3D: aVector3D [
 		z: aVector3D z * self
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Number >> timesCollect: aBlock [
 	^ (1 to: self) collect: [ :anIndex | aBlock cull: anIndex ]
 ]

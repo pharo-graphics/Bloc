@@ -16,15 +16,13 @@ The list of default phases is initialized in {{gtMethod:BlSpaceFrame>>#initializ
 
 "
 Class {
-	#name : 'BlOSpaceFrame',
-	#superclass : 'BlSpaceFrame',
+	#name : #BlOSpaceFrame,
+	#superclass : #BlSpaceFrame,
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Space - Frame',
-	#package : 'Bloc',
-	#tag : 'Space - Frame'
+	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlOSpaceFrame >> initializePhases [
 	self addPhases: { 
 		BlSpaceFrameIdlePhase new.

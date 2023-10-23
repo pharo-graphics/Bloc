@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlPerspectiveTransformation',
-	#superclass : 'BlAffineTransformation',
+	#name : #BlPerspectiveTransformation,
+	#superclass : #BlAffineTransformation,
 	#instVars : [
 		'depth'
 	],
-	#category : 'Bloc-Basic-Transformations',
-	#package : 'Bloc',
-	#tag : 'Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlPerspectiveTransformation class >> depth: aNumber [
 
 	^ self new
@@ -17,25 +15,25 @@ BlPerspectiveTransformation class >> depth: aNumber [
 		  yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPerspectiveTransformation >> depth [
 
 	^ depth
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPerspectiveTransformation >> depth: aPositiveNumber [
 
 	depth := aPositiveNumber
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlPerspectiveTransformation >> is2D [
 	
 	^ false
 ]
 
-{ #category : 'mathematical functions' }
+{ #category : #'mathematical functions' }
 BlPerspectiveTransformation >> multiplyOn: aBlMatrix [
 
 	aBlMatrix perspective: depth

@@ -1,36 +1,34 @@
 Class {
-	#name : 'BlSpaceDragCancelEvent',
-	#superclass : 'BlSpaceEvent',
+	#name : #BlSpaceDragCancelEvent,
+	#superclass : #BlSpaceEvent,
 	#instVars : [
 		'delegate',
 		'position'
 	],
-	#category : 'Bloc-Events-Type-Space',
-	#package : 'Bloc',
-	#tag : 'Events-Type-Space'
+	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceDragCancelEvent >> delegate [
 	^ delegate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceDragCancelEvent >> delegate: anObject [
 	delegate := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceDragCancelEvent >> position [
 	^ position
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceDragCancelEvent >> position: anObject [
 	position := anObject
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlSpaceDragCancelEvent >> sendTo: anObject [
 	anObject spaceDragCancelEvent: self
 ]

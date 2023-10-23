@@ -6,14 +6,12 @@ See BlStrokeLineCap for other types
 
 "
 Class {
-	#name : 'BlStrokeLineButtCap',
-	#superclass : 'BlStrokeLineCap',
-	#category : 'Bloc-Paint-Support',
-	#package : 'Bloc',
-	#tag : 'Paint-Support'
+	#name : #BlStrokeLineButtCap,
+	#superclass : #BlStrokeLineCap,
+	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlStrokeLineButtCap class >> capName [
 	^ 'Butt'
 ]
