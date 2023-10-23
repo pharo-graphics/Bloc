@@ -62,7 +62,7 @@ Class {
 	#classVars : [
 		'UniqueIdGenerator'
 	],
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space'
 }
 
 { #category : #'private - change' }
@@ -323,7 +323,7 @@ BlSpace class >> simulateKeyDownOn: anElement key: aBlKeyboardKey [
 	"Simulate a key down event"
 
 	self
-		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; yourself }
 		on: anElement
 ]
 
@@ -332,7 +332,7 @@ BlSpace class >> simulateKeyUpOn: anElement key: aBlKeyboardKey [
 	"Simulate a key up event"
 
 	self
-		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; yourself }
 		on: anElement
 ]
 
