@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Events-Handler'
+	#category : 'Bloc-Events-Handler'
 }
 
 { #category : #accessing }

@@ -5,7 +5,7 @@ Class {
 		'size',
 		'mode'
 	],
-	#category : #'Bloc-Layouts-Support'
+	#category : 'Bloc-Layouts-Support'
 }
 
 { #category : #'instance creation' }

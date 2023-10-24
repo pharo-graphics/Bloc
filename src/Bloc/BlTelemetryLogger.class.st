@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'telemetryClass'
 	],
-	#category : #'Bloc-Space - Telemetry'
+	#category : 'Bloc-Space - Telemetry'
 }
 
 { #category : #initialize }

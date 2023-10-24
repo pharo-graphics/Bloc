@@ -1,15 +1,17 @@
 Class {
-	#name : #BlTextDecorationLineThroughType,
-	#superclass : #BlTextDecorationSingleType,
-	#category : #'Bloc-Text-Text-Decoration'
+	#name : 'BlTextDecorationLineThroughType',
+	#superclass : 'BlTextDecorationSingleType',
+	#category : 'Bloc-Text-Text-Decoration',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Decoration'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationLineThroughType class >> constructor [
 	^ #lineThrough
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecorationLineThroughType class >> label [
 	^ 'Line through'
 ]

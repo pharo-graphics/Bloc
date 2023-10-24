@@ -5,7 +5,7 @@ Class {
 		'processor',
 		'upEvent'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }
 
 { #category : #accessing }

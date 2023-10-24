@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'selection'
 	],
-	#category : #'Bloc-Utilities - Selection'
+	#category : 'Bloc-Utilities - Selection'
 }
 
 { #category : #'dnd handlers' }

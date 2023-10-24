@@ -22,7 +22,7 @@ Class {
 		'round',
 		'square'
 	],
-	#category : #'Bloc-Paint-Support'
+	#category : 'Bloc-Paint-Support'
 }
 
 { #category : #'predefined instances' }

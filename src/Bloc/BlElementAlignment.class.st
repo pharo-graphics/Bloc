@@ -26,7 +26,7 @@ Class {
 		'start',
 		'vertical'
 	],
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
 
 { #category : #factory }

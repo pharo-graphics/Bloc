@@ -42,7 +42,7 @@ Class {
 	#classVars : [
 		'Default'
 	],
-	#category : #'Bloc-DataStructure - Priority Queue'
+	#category : 'Bloc-DataStructure - Priority Queue'
 }
 
 { #category : #accessing }

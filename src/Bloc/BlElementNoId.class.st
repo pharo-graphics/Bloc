@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Basic-Support'
+	#category : 'Bloc-Basic-Support'
 }
 
 { #category : #accessing }

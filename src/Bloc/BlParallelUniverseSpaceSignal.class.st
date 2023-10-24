@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'spaceId'
 	],
-	#category : #'Bloc-Universe - Parallel'
+	#category : 'Bloc-Universe - Parallel'
 }
 
 { #category : #testing }

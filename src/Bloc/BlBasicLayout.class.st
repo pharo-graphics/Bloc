@@ -8,7 +8,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Layouts-Basic'
+	#category : 'Bloc-Layouts-Basic'
 }
 
 { #category : #accessing }

@@ -8,7 +8,7 @@ Class {
 		'phases',
 		'currentPhaseLink'
 	],
-	#category : #'Bloc-Space - Frame'
+	#category : 'Bloc-Space - Frame'
 }
 
 { #category : #adding }
@@ -99,6 +99,12 @@ BlSpaceFrame >> phases [
 	<return: #Collection of: #BlSpaceFramePhase>
 
 	^ phases
+]
+
+{ #category : #removing }
+BlSpaceFrame >> removePhase: aFramePhase [
+
+	self phases remove: aFramePhase ifAbsent: [ Error signal: 'Phase not found']
 ]
 
 { #category : #running }

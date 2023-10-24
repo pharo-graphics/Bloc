@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'changes'
 	],
-	#category : #'Bloc-Basic-Bounds'
+	#category : 'Bloc-Basic-Bounds'
 }
 
 { #category : #'api - changes' }

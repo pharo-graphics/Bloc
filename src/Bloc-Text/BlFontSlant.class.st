@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFontSlant,
-	#superclass : #SharedPool,
+	#name : 'BlFontSlant',
+	#superclass : 'SharedPool',
 	#instVars : [
 		'name',
 		'value'
@@ -11,10 +11,12 @@ Class {
 		'Oblique',
 		'Slants'
 	],
-	#category : #'Bloc-Text-Font'
+	#category : 'Bloc-Text-Font',
+	#package : 'Bloc-Text',
+	#tag : 'Font'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontSlant class >> fromNumber: aNumber [
 	<return: #BlFontSlant>
 	Slants
@@ -25,36 +27,36 @@ BlFontSlant class >> fromNumber: aNumber [
 	^ Slants at: aNumber ifAbsent: [ self slant: aNumber name: #custom ]
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlFontSlant class >> initialize [
 	Normal := self slant: 0 name: #normal.
 	Italic := self slant: 1 name: #italic.
 	Oblique := self slant: 2 name: #oblique
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontSlant class >> italic [
 	^ Italic
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontSlant class >> normal [
 	^ Normal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontSlant class >> oblique [
 	^ Oblique
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFontSlant class >> slant: aSlantValue name: aSlantName [
 	^ self new
 		value: aSlantValue;
 		name: aSlantName
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlFontSlant >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -65,26 +67,26 @@ BlFontSlant >> = anObject [
 	^ value = anObject value
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlFontSlant >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ value hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontSlant >> name [
 	<return: #Symbol>
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontSlant >> name: aSymbol [
 	name := aSymbol
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlFontSlant >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -97,14 +99,14 @@ BlFontSlant >> printOn: aStream [
 		print: name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontSlant >> value [
 	<return: #Number>
 
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFontSlant >> value: aNumber [
 	value := aNumber
 ]

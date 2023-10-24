@@ -9,7 +9,7 @@ Class {
 		'Inside',
 		'Outside'
 	],
-	#category : #'Bloc-Basic-Border'
+	#category : 'Bloc-Basic-Border'
 }
 
 { #category : #'predefined instances' }

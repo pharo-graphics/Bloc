@@ -1,7 +1,7 @@
 Class {
 	#name : #BlNullEffect,
 	#superclass : #BlElementEffect,
-	#category : #'Bloc-Effect'
+	#category : 'Bloc-Effect'
 }
 
 { #category : #testing }

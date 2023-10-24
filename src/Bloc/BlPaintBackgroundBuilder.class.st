@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'paint'
 	],
-	#category : #'Bloc-Basic-Background'
+	#category : 'Bloc-Basic-Background'
 }
 
 { #category : #building }

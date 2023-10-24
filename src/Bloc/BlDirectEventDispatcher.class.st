@@ -18,7 +18,7 @@ Class {
 		'handlers',
 		'shortcutHandler'
 	],
-	#category : #'Bloc-Events-Dispatcher'
+	#category : 'Bloc-Events-Dispatcher'
 }
 
 { #category : #'instance creation' }
@@ -124,6 +124,17 @@ BlDirectEventDispatcher >> handlersDo: aBlock [
 	"Evaulate a given block with every event handler as an argument"
 
 	handlers ifNotNil: [ :aRegistry | aRegistry handlers do: aBlock ]
+]
+
+{ #category : #'api - accessing' }
+BlDirectEventDispatcher >> hasEventFilterSuchThat: aBlock [
+	<return: #Boolean>
+
+	self filtersDo: [ :eachfilter |
+		(aBlock value: eachfilter)
+			ifTrue: [ ^ true ] ].
+		
+	^ false
 ]
 
 { #category : #'api - testing' }

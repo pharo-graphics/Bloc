@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'targetObject'
 	],
-	#category : #'Bloc-Basic-Style'
+	#category : 'Bloc-Basic-Style'
 }
 
 { #category : #actions }

@@ -12,7 +12,7 @@ After that space sents an actual BlSpaceClosedEvent that indicates that windows 
 Class {
 	#name : #BlSpaceCloseRequest,
 	#superclass : #BlSpaceEvent,
-	#category : #'Bloc-Events-Type-Space'
+	#category : 'Bloc-Events-Type-Space'
 }
 
 { #category : #testing }

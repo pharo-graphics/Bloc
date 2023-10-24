@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlTelemetry,
-	#category : #'Bloc-Space - Telemetry'
+	#category : 'Bloc-Space - Telemetry'
 }
 
 { #category : #'instance creation' }

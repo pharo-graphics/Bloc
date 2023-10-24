@@ -6,27 +6,29 @@ The baseline is the line upon which most letters ""sit"" and below which descend
 
 "
 Class {
-	#name : #BlTextParagraphBaselineMeasurer,
-	#superclass : #Object,
+	#name : 'BlTextParagraphBaselineMeasurer',
+	#superclass : 'Object',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Paragraph'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlTextParagraphBaselineMeasurer class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphBaselineMeasurer class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BlTextParagraphBaselineMeasurer >> computedBaseline: aTextParagraph [
 	<return: #Point>
 	

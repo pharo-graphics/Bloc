@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'width'
 	],
-	#category : #'Bloc-Effect'
+	#category : 'Bloc-Effect'
 }
 
 { #category : #'instance creation' }

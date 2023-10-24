@@ -17,7 +17,7 @@ When the attachment state of an element is changed from `removed` to `attached` 
 Class {
 	#name : #BlSpaceReference,
 	#superclass : #Object,
-	#category : #'Bloc-Space'
+	#category : 'Bloc-Space'
 }
 
 { #category : #testing }

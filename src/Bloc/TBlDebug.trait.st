@@ -8,7 +8,7 @@ I contain useful debug utility methods that can be enabled / disabled with:
 "
 Trait {
 	#name : #TBlDebug,
-	#category : #'Bloc-Utilities - Debugging'
+	#category : 'Bloc-Utilities - Debugging'
 }
 
 { #category : #'debug - asserting' }

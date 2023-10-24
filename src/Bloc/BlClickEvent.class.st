@@ -11,7 +11,7 @@ The order of fired events:
 Class {
 	#name : #BlClickEvent,
 	#superclass : #BlMouseEvent,
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }
 
 { #category : #testing }

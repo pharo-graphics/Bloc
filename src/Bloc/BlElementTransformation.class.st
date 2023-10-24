@@ -7,7 +7,7 @@ For optimization purposes I use 2D matrix if 3D transformation was not requested
 Class {
 	#name : #BlElementTransformation,
 	#superclass : #Object,
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
 { #category : #'instance creation' }

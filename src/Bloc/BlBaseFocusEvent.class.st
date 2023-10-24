@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'reason'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }
 
 { #category : #converting }

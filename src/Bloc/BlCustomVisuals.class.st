@@ -30,7 +30,7 @@ Class {
 		'focused',
 		'mouseCursor'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
 { #category : #accessing }

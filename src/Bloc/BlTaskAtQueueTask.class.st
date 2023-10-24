@@ -20,7 +20,7 @@ Class {
 		'scheduledTime',
 		'queue'
 	],
-	#category : #'Bloc-DataStructure - Priority Queue'
+	#category : 'Bloc-DataStructure - Priority Queue'
 }
 
 { #category : #'instance creation' }

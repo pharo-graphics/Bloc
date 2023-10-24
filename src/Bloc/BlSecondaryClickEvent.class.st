@@ -1,5 +1,5 @@
 Class {
 	#name : #BlSecondaryClickEvent,
 	#superclass : #BlClickEvent,
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }

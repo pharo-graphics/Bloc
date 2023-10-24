@@ -18,7 +18,7 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'Bloc-Basic-Interpolators'
+	#category : 'Bloc-Basic-Interpolators'
 }
 
 { #category : #cleanup }

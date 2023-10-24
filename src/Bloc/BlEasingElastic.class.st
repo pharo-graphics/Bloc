@@ -1,7 +1,7 @@
 Class {
 	#name : #BlEasingElastic,
 	#superclass : #BlEasing,
-	#category : #'Bloc-Basic-Interpolators'
+	#category : 'Bloc-Basic-Interpolators'
 }
 
 { #category : #interpolation }

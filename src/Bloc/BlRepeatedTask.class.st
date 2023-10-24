@@ -14,7 +14,7 @@ Class {
 		'previousRunTime',
 		'isRunning'
 	],
-	#category : #'Bloc-Space - Tasks'
+	#category : 'Bloc-Space - Tasks'
 }
 
 { #category : #accessing }

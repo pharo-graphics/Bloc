@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceFrameUnknownPhase,
 	#superclass : #BlSpaceFramePhase,
-	#category : #'Bloc-Space - Frame'
+	#category : 'Bloc-Space - Frame'
 }
 
 { #category : #accessing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceRedrawRequestedEvent,
 	#superclass : #BlSpaceEvent,
-	#category : #'Bloc-Events-Type-Space'
+	#category : 'Bloc-Events-Type-Space'
 }
 
 { #category : #accessing }

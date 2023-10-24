@@ -1,24 +1,26 @@
 Class {
-	#name : #BlFont,
-	#superclass : #Object,
+	#name : 'BlFont',
+	#superclass : 'Object',
 	#traits : 'TBlFontDescriptor + TBlFont',
 	#classTraits : 'TBlFontDescriptor classTrait + TBlFont classTrait',
-	#category : #'Bloc-Text-Font'
+	#category : 'Bloc-Text-Font',
+	#package : 'Bloc-Text',
+	#tag : 'Font'
 }
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 BlFont class >> defaultFamilyName [
 	^ 'Source Sans Pro'
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 BlFont class >> defaultFontSize [
 	"14pt"
 
 	^ 14
 ]
 
-{ #category : #performing }
+{ #category : 'performing' }
 BlFont >> applyOnText: aBlText [
 	aBlText
 		fontName: self familyName;
@@ -27,14 +29,14 @@ BlFont >> applyOnText: aBlText [
 		perform: self fontSlant name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFont >> fontPropertiesTarget [
 	<return: #TBlFont>
 
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFont >> initialize [
 	super initialize.
 	

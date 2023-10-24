@@ -56,7 +56,8 @@ Class {
 		'elementsNeedingStyle',
 		'elementsNeedingPropertiesComputation',
 		'iconStencil',
-		'rootElement'
+		'rootElement',
+		'userData'
 	],
 	#classVars : [
 		'UniqueIdGenerator'
@@ -322,7 +323,7 @@ BlSpace class >> simulateKeyDownOn: anElement key: aBlKeyboardKey [
 	"Simulate a key down event"
 
 	self
-		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; yourself }
 		on: anElement
 ]
 
@@ -331,7 +332,7 @@ BlSpace class >> simulateKeyUpOn: anElement key: aBlKeyboardKey [
 	"Simulate a key up event"
 
 	self
-		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; yourself }
 		on: anElement
 ]
 
@@ -1092,10 +1093,10 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 		:found | " test found because if the result is the root then it means that no element has been found "
 		found ~~ self root ifTrue: [ " ok, dispatch outside event through all the space elements "
 			" dispatch the mouse outside event to all alements of the scene graph "
-			self dispatchMousePickedOutside: (anEvent newCopyFor: found) asMouseOutsideEvent.
+			self dispatchMousePickedOutside: ((anEvent newCopyFor: found) asMouseOutsideEvent lastMouseDownEvent: self mouseProcessor lastMouseDownEvent; yourself).
 			^ found ] ].
 	" no element found at all: all elements receive a outside event"
-	self dispatchMousePickedOutside: anEvent clone asMouseOutsideEvent.
+	self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent  lastMouseDownEvent: self mouseProcessor lastMouseDownEvent; yourself).
 	^ nil
 ]
 
@@ -1924,6 +1925,14 @@ BlSpace >> universe [
 BlSpace >> updateCursor: aBlCursor [
 
 	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
+]
+
+{ #category : #accessing }
+BlSpace >> userData [
+	"Returns a Dictionary that holds application dependent and temporary objects.
+	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
+
+	^ userData ifNil: [ userData := IdentityDictionary new ]
 ]
 
 { #category : #'composition layer' }

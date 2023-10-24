@@ -19,7 +19,7 @@ Class {
 		'target',
 		'affineCompositeTransformation'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
 { #category : #'instance creation' }

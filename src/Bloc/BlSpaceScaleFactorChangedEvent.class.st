@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'scaleFactor'
 	],
-	#category : #'Bloc-Events-Type-Space'
+	#category : 'Bloc-Events-Type-Space'
 }
 
 { #category : #accessing }

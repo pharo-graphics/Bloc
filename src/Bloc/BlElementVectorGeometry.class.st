@@ -8,7 +8,7 @@ Class {
 		'extent',
 		'pathCache'
 	],
-	#category : #'Bloc-Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry'
 }
 
 { #category : #converting }

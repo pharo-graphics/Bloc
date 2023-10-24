@@ -8,7 +8,7 @@ I sort a collection of children by elevation in ascending order.
 Class {
 	#name : #BlChildrenSortedByElevation,
 	#superclass : #BlChildrenSubset,
-	#category : #'Bloc-Basic-Children'
+	#category : 'Bloc-Basic-Children'
 }
 
 { #category : #accessing }

@@ -12,7 +12,7 @@ Class {
 		'extent',
 		'strongReference'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : 'Bloc-Universe - Renderer'
 }
 
 { #category : #testing }

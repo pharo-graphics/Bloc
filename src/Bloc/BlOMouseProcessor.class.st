@@ -21,7 +21,7 @@ Class {
 		'dragState',
 		'previousMouseDownEvent'
 	],
-	#category : #'Bloc-Space - Events'
+	#category : 'Bloc-Space - Events'
 }
 
 { #category : #accessing }

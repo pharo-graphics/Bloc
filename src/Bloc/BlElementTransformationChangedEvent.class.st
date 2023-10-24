@@ -7,7 +7,7 @@ Note: transformation may change even if an element has no parent
 Class {
 	#name : #BlElementTransformationChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Type-Element'
+	#category : 'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }

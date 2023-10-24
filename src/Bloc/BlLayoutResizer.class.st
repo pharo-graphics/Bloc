@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Layouts-Support'
+	#category : 'Bloc-Layouts-Support'
 }
 
 { #category : #'instance creation' }

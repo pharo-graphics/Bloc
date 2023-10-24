@@ -29,7 +29,7 @@ Class {
 		'combination',
 		'converter'
 	],
-	#category : #'Bloc-Events-KeyBinding'
+	#category : 'Bloc-Events-KeyBinding'
 }
 
 { #category : #'keys - letters' }

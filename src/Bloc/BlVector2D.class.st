@@ -22,7 +22,7 @@ Class {
 		'x',
 		'y'
 	],
-	#category : #'Bloc-Basic-Math'
+	#category : 'Bloc-Basic-Math'
 }
 
 { #category : #arithmetic }

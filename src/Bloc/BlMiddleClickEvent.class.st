@@ -1,5 +1,5 @@
 Class {
 	#name : #BlMiddleClickEvent,
 	#superclass : #BlClickEvent,
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }

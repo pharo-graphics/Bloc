@@ -65,7 +65,7 @@ Class {
 		'visuals',
 		'flags'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
 { #category : #'instance creation' }
@@ -415,6 +415,12 @@ BlElement >> allowMouseEvents [
 	It does not influence the ability of the children to handle events, hence I am a local property"
 
 	flags addShouldHandleMouseEvents.
+]
+
+{ #category : #'event handling' }
+BlElement >> allowMousePickOutsideEvent [
+
+	self userData at: #shouldHandleMousePickOutsideEvent put: true
 ]
 
 { #category : #layout }
@@ -1410,12 +1416,16 @@ BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
 	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
 
 	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
+	aMouseOutsideEvent lastMouseDownEvent ifNotNil: [ :downEvent |
+		downEvent target = self ifTrue: [ ^ self ] ].
 	self children do: [ :aChildElement |
-		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone].
+		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone ].
+	" Am I allowed to manage mouse pick outside ?"
+	self shouldHandleMousePickOutsideEvent ifFalse: [ ^ self ].
 	" does my bounds contains the event position, if so, the picked point is inside myself "
-	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position) ifTrue: [ ^ self ].
-	self dispatchEvent: aMouseOutsideEvent.
-
+	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position)
+		ifTrue: [ ^ self ].
+	self dispatchEvent: aMouseOutsideEvent
 ]
 
 { #category : #'children dispatching' }
@@ -3277,6 +3287,12 @@ BlElement >> preventMouseEvents [
 	flags clearShouldHandleMouseEvents.
 ]
 
+{ #category : #'event handling' }
+BlElement >> preventMousePickOutsideEvent [
+
+	self userData at: #shouldHandleMousePickOutsideEvent put: false
+]
+
 { #category : #'children accessing' }
 BlElement >> previousSiblingDo: aBlock [
 	"Evaluate aBlock with the previous child in my parent before me if there is one"
@@ -3738,6 +3754,12 @@ BlElement >> shouldHandleMouseEvents [
 	^ flags hasShouldHandleMouseEvents
 ]
 
+{ #category : #'event handling' }
+BlElement >> shouldHandleMousePickOutsideEvent [
+
+	^ self userData at: #shouldHandleMousePickOutsideEvent ifAbsentPut: [ false ]
+]
+
 { #category : #'api - opening' }
 BlElement >> showSpace: aSpace [
 	self hasParent
@@ -3986,7 +4008,6 @@ BlElement >> updateTransformationBounds [
 BlElement >> userData [
 	"Returns a Dictionary that holds application dependent and temporary objects.
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
-	<return: #Dictionary>
 
 	^ userData ifNil: [ userData := IdentityDictionary new ]
 ]

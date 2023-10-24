@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'visibility'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
 { #category : #comparing }

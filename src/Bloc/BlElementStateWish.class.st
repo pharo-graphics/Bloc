@@ -1,5 +1,5 @@
 Class {
 	#name : #BlElementStateWish,
 	#superclass : #BlEvent,
-	#category : #'Bloc-Basic-State'
+	#category : 'Bloc-Basic-State'
 }

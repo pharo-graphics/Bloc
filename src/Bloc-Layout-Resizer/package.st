@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Layout-Resizer' }
+Package { #name : 'Bloc-Layout-Resizer' }

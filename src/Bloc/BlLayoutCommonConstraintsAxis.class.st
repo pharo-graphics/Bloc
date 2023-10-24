@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'resizer'
 	],
-	#category : #'Bloc-Layouts-Basic'
+	#category : 'Bloc-Layouts-Basic'
 }
 
 { #category : #resizing }

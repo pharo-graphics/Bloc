@@ -12,7 +12,7 @@ Class {
 		'value',
 		'unit'
 	],
-	#category : #'Bloc-Basic-Units'
+	#category : 'Bloc-Basic-Units'
 }
 
 { #category : #'instance creation' }

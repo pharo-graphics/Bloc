@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : #'Bloc-Basic-Errors'
+	#category : 'Bloc-Basic-Errors'
 }
 
 { #category : #'instance creation' }

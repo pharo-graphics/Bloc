@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'host'
 	],
-	#category : #'Bloc-Universe - Parallel'
+	#category : 'Bloc-Universe - Parallel'
 }
 
 { #category : #accessing }

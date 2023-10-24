@@ -9,7 +9,7 @@ Class {
 		'ShouldIgnoreLayoutRequests',
 		'WaitingLayout'
 	],
-	#category : #'Bloc-Basic-Support'
+	#category : 'Bloc-Basic-Support'
 }
 
 { #category : #'accessing - flags' }
