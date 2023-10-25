@@ -20,7 +20,7 @@ BlElement >> aeAsForm [
 	self isLayoutRequested ifTrue: [ self forceLayout ].
 
 	"We want to consider our border, effect, as well as children's."
-	invalidationBounds := self invalidationBounds: BlBounds new.
+	invalidationBounds := self invalidationBoundsInSpace.
 	aCanvas := AeCanvas extent: invalidationBounds extent.
 	aCanvas pathTranslate: invalidationBounds origin negated.
 	self aeFullDrawOn: aCanvas.

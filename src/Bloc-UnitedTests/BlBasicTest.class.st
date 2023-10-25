@@ -9,6 +9,28 @@ Class {
 }
 
 { #category : #tests }
+BlBasicTest >> testAsForm [
+
+	| anElement |
+	anElement := BlElement new
+		size: 30@40;
+		background: Color green;
+		yourself.
+
+	self assert: anElement asForm extent equals: 30@40.
+
+	anElement position: 10@20.
+	self assert: anElement asForm extent equals: 30@40.
+
+	anElement transformDo: [ :t | t scaleBy: 2@3 ].
+	self assert: anElement asForm extent equals: 60@120.
+
+	self
+		assert: (anElement asForm colorAt: 0@0)
+		equals: Color green
+]
+
+{ #category : #tests }
 BlBasicTest >> testBorderRopedText [
 <sampleInstance>	
 | aText |
