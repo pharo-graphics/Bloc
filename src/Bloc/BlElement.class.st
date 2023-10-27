@@ -1418,8 +1418,6 @@ BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
 	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
 
 	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
-	aMouseOutsideEvent lastMouseDownEvent ifNotNil: [ :downEvent |
-		downEvent target = self ifTrue: [ ^ self ] ].
 	self children do: [ :aChildElement |
 		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone ].
 	" Am I allowed to manage mouse pick outside ?"

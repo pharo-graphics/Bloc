@@ -76,6 +76,8 @@ BlLayoutFitContentResizer >> requestedWidthIn: anElement [
 	| w |
 	anElement hasChildren ifFalse: [ ^ anElement width ].
 	w := 0.
-	anElement childrenDo: [ :child | w := w + child requestedWidth ].
+	anElement childrenDo: [ :child | (child constraints horizontal resizer isMatchParent) 
+		ifTrue: [ w := w + child measuredWidth ]
+		ifFalse: [w := w + child requestedWidth ]].
 	^ w
 ]
