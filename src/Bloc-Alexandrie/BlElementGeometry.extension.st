@@ -1,6 +1,6 @@
-Extension { #name : #BlElementGeometry }
+Extension { #name : 'BlElementGeometry' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlElementGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 	"Set up the path of my background. Afterwards, the canvas may use the same path draw the border, either if outskirts are centered, or if I don't provide an explicit setup for my border path. 
 	
@@ -9,7 +9,7 @@ BlElementGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlElementGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement borderWidth: aWidth [
 	"Set up the path of my border with inside outskirts.
 
@@ -21,7 +21,7 @@ BlElementGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement bor
 
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlElementGeometry >> aeApplyWithOutsideBorderTo: anAeCanvas element: aBlElement borderWidth: aWidth [
 	"Set up the path of my border with outside outskirts. 
 

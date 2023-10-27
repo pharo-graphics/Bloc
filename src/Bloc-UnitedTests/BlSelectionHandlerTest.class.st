@@ -3,12 +3,14 @@ I have been automatically converted and probably manually tweaked from BlSelecti
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlSelectionHandlerTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Selection'
+	#name : 'BlSelectionHandlerTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Selection',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Selection'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSelectionHandlerTest class >> grid [
 	<script: 'self grid'>
 	| space element |
@@ -21,7 +23,7 @@ BlSelectionHandlerTest class >> grid [
 	space show
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSelectionHandlerTest class >> gridRow [
 	<script: 'self gridRow'>
 	| space element |
@@ -34,13 +36,13 @@ BlSelectionHandlerTest class >> gridRow [
 	space show
 ]
 
-{ #category : #metadata }
+{ #category : 'metadata' }
 BlSelectionHandlerTest >> originClassName [
 	"This test was generated from..."
 	^ 'BlSelectionHandlerExamples'
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testCell [
 
 	^ BlElement new
@@ -56,7 +58,7 @@ BlSelectionHandlerTest >> testCell [
 		  do: [ :anEvent | anEvent currentTarget border: BlBorder empty ]
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testContainer [
 
 	^ BlElement new
@@ -66,31 +68,31 @@ BlSelectionHandlerTest >> testContainer [
 		  background: Color white
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithOneGrid [
 
 	^ self testContainer addChild: self testGridWith11Cells
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithOneGridAndVisualHandler [
 
 	^ self testContainerWithOneGrid addEventHandler: self testVisualHandler
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithThreeGrids [
 
 	^ self testContainer addChild: self testThreeGrids
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithThreeGridsAndVisualHandler [
 
 	^ self testContainerWithThreeGrids addEventHandler: self testVisualHandler
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testGrid [
 
 	^ BlElement new
@@ -105,7 +107,7 @@ BlSelectionHandlerTest >> testGrid [
 				  rowCount: 5 ]
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testGridWith11Cells [
 
 	^ self testGrid
@@ -113,7 +115,7 @@ BlSelectionHandlerTest >> testGridWith11Cells [
 		  yourself
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testThreeGrids [
 
 	^ self testContainer
@@ -125,7 +127,7 @@ BlSelectionHandlerTest >> testThreeGrids [
 				  self testGridWith11Cells }
 ]
 
-{ #category : #'smoke tests' }
+{ #category : 'smoke tests' }
 BlSelectionHandlerTest >> testVisualHandler [
 
 	^ BlVisualSelectionHandler new

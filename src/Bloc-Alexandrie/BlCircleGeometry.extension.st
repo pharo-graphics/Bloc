@@ -1,13 +1,13 @@
-Extension { #name : #BlCircleGeometry }
+Extension { #name : 'BlCircleGeometry' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlCircleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas pathFactory: [ :cairoContext | 
 		cairoContext circleRadius: radius ]
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlCircleGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement borderWidth: aWidth [
 
 	aeCanvas borderPathFactory: [ :cairoContext |
@@ -17,7 +17,7 @@ BlCircleGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement bord
 			radius: radius - (aWidth / 2.0) ]
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlCircleGeometry >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement borderWidth: aWidth [ 
 
 	aeCanvas borderPathFactory: [ :cairoContext |

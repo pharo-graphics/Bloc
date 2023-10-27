@@ -3,14 +3,16 @@ I have been automatically converted and probably manually tweaked from BlChildre
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlChildrenArrayTest,
-	#superclass : #TestCase,
+	#name : 'BlChildrenArrayTest',
+	#superclass : 'TestCase',
 	#traits : 'TBlChildrenTest',
 	#classTraits : 'TBlChildrenTest classTrait',
-	#category : #'Bloc-UnitedTests-Children'
+	#category : 'Bloc-UnitedTests-Children',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Children'
 }
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlChildrenArrayTest >> fill: aNumber [
 
 	| childrenArray |
@@ -20,7 +22,7 @@ BlChildrenArrayTest >> fill: aNumber [
 	^ childrenArray
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlChildrenArrayTest >> newChildAt: anIndex [
 
 	| anElement |
@@ -29,14 +31,14 @@ BlChildrenArrayTest >> newChildAt: anIndex [
 	^ anElement
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlChildrenArrayTest >> newChildrenCollection [
 
 	<sampleInstance>
 	^ BlChildrenArray new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testAdd [
 
 	<sampleInstance>
@@ -53,7 +55,7 @@ BlChildrenArrayTest >> testAdd [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testAddAt [
 
 	<sampleInstance>
@@ -78,7 +80,7 @@ BlChildrenArrayTest >> testAddAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testAsArray [
 
 	<sampleInstance>
@@ -90,7 +92,7 @@ BlChildrenArrayTest >> testAsArray [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testAsArrayEmpty [
 
 	<sampleInstance>
@@ -102,7 +104,7 @@ BlChildrenArrayTest >> testAsArrayEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testAt [
 
 	<sampleInstance>
@@ -116,7 +118,7 @@ BlChildrenArrayTest >> testAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testAtIfAbsent [
 
 	<sampleInstance>
@@ -142,7 +144,7 @@ BlChildrenArrayTest >> testAtIfAbsent [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testEmptyChildren [
 
 	<sampleInstance>
@@ -154,7 +156,7 @@ BlChildrenArrayTest >> testEmptyChildren [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testEmptyChildrenExplicitCreation [
 
 	<sampleInstance>
@@ -166,7 +168,7 @@ BlChildrenArrayTest >> testEmptyChildrenExplicitCreation [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testEmptyChildrenFactoryMethodCreation [
 
 	<sampleInstance>
@@ -180,7 +182,7 @@ BlChildrenArrayTest >> testEmptyChildrenFactoryMethodCreation [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testFirst [
 
 	<sampleInstance>
@@ -190,7 +192,7 @@ BlChildrenArrayTest >> testFirst [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testIfEmpty [
 
 	<sampleInstance>
@@ -200,7 +202,7 @@ BlChildrenArrayTest >> testIfEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testIfEmptyNot [
 
 	<sampleInstance>
@@ -210,7 +212,7 @@ BlChildrenArrayTest >> testIfEmptyNot [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testIndexOf [
 
 	<sampleInstance>
@@ -221,7 +223,7 @@ BlChildrenArrayTest >> testIndexOf [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testIndexOfUnknown [
 
 	<sampleInstance>
@@ -231,7 +233,7 @@ BlChildrenArrayTest >> testIndexOfUnknown [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testIsEmpty [
 
 	<sampleInstance>
@@ -243,7 +245,7 @@ BlChildrenArrayTest >> testIsEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testIsNotEmpty [
 
 	<sampleInstance>
@@ -255,7 +257,7 @@ BlChildrenArrayTest >> testIsNotEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testLast [
 
 	<sampleInstance>
@@ -265,7 +267,7 @@ BlChildrenArrayTest >> testLast [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testRemove [
 
 	<sampleInstance>
@@ -278,7 +280,7 @@ BlChildrenArrayTest >> testRemove [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testRemoveAll [
 
 	<sampleInstance>
@@ -294,7 +296,7 @@ BlChildrenArrayTest >> testRemoveAll [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testRemoveAt [
 
 	<sampleInstance>
@@ -309,7 +311,7 @@ BlChildrenArrayTest >> testRemoveAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testSecond [
 
 	<sampleInstance>
@@ -319,7 +321,7 @@ BlChildrenArrayTest >> testSecond [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testSize [
 
 	<sampleInstance>
@@ -329,7 +331,7 @@ BlChildrenArrayTest >> testSize [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenArrayTest >> testSizeEmpty [
 
 	<sampleInstance>

@@ -325,7 +325,7 @@ BlSpace class >> simulateKeyDownOn: anElement key: aBlKeyboardKey [
 	"Simulate a key down event"
 
 	self
-		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; yourself }
 		on: anElement
 ]
 
@@ -334,7 +334,7 @@ BlSpace class >> simulateKeyUpOn: anElement key: aBlKeyboardKey [
 	"Simulate a key up event"
 
 	self
-		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; scanCode: aBlKeyboardKey valueOrZero }
+		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; yourself }
 		on: anElement
 ]
 

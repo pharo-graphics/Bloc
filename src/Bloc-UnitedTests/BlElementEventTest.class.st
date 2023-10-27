@@ -3,12 +3,14 @@ I have been automatically converted and probably manually tweaked from BlElement
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlElementEventTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Event'
+	#name : 'BlElementEventTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Event',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Event'
 }
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlElementEventTest >> child [
 
 	<sampleInstance>
@@ -17,7 +19,7 @@ BlElementEventTest >> child [
 		  background: Color red
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlElementEventTest >> container [
 
 	<sampleInstance>
@@ -29,7 +31,7 @@ BlElementEventTest >> container [
 				   build)
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlElementEventTest >> parent [
 
 	<sampleInstance>
@@ -38,7 +40,7 @@ BlElementEventTest >> parent [
 		  background: (Color gray alpha: 0.3)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testAddedToParent [
 
 	<sampleInstance>
@@ -62,7 +64,7 @@ BlElementEventTest >> testAddedToParent [
 	^ container
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testBackgroundChanged [
 
 	<sampleInstance>
@@ -80,7 +82,7 @@ BlElementEventTest >> testBackgroundChanged [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testBorderChanged [
 
 	<sampleInstance>
@@ -101,7 +103,7 @@ BlElementEventTest >> testBorderChanged [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testExtentChanged [
 
 	<sampleInstance>
@@ -128,7 +130,7 @@ BlElementEventTest >> testExtentChanged [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent [
 
 	<sampleInstance>
@@ -148,7 +150,7 @@ BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent 
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testLayoutChanged [
 
 	<sampleInstance>
@@ -166,7 +168,7 @@ BlElementEventTest >> testLayoutChanged [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testPositionChanged [
 
 	<sampleInstance>
@@ -194,7 +196,7 @@ BlElementEventTest >> testPositionChanged [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEvent [
 
 	<sampleInstance>
@@ -218,7 +220,7 @@ BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEve
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementEventTest >> testRemovedFromParent [
 
 	<sampleInstance>

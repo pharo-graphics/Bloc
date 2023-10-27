@@ -1,53 +1,55 @@
 Class {
-	#name : #BATextElementMockedMeasurer,
-	#superclass : #BlTextElementMeasurer,
+	#name : 'BATextElementMockedMeasurer',
+	#superclass : 'BlTextElementMeasurer',
 	#instVars : [
 		'measurer'
 	],
-	#category : #'Bloc-Alexandrie-Text-Mocked'
+	#category : 'Bloc-Alexandrie-Text-Mocked',
+	#package : 'Bloc-Alexandrie',
+	#tag : 'Text-Mocked'
 }
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> ascent [
 	^ measurer ascent
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> ascent: aNumber [
 	measurer ascent: aNumber
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> descent [
 	^ measurer descent
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> descent: aNumber [
 	measurer descent: aNumber
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> glyphHeight [
 	^ measurer height
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> glyphHeight: aNumber [
 	measurer height: aNumber
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> glyphWidth [
 	^ measurer glyphWidth
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> glyphWidth: aNumber [
 	measurer glyphWidth: aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BATextElementMockedMeasurer >> initialize [
 
 	super initialize.
@@ -59,18 +61,18 @@ BATextElementMockedMeasurer >> initialize [
 	measurer height: 15
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BATextElementMockedMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
 
 	measurer measureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> textOffset [
 	^ measurer textOffset
 ]
 
-{ #category : #'font - metrics' }
+{ #category : 'font - metrics' }
 BATextElementMockedMeasurer >> textOffset: aNumber [
 	measurer textOffset: aNumber
 ]

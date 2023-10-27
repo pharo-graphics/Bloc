@@ -1,10 +1,12 @@
 Class {
-	#name : #BlTestOfExamplesTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Examples'
+	#name : 'BlTestOfExamplesTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Examples',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Examples'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 BlTestOfExamplesTest >> examplesTestResult [
 
 	| suite |
@@ -13,7 +15,7 @@ BlTestOfExamplesTest >> examplesTestResult [
 	^ suite run
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTestOfExamplesTest >> testAllExamplesAreConsideredTests [
 
 	self
@@ -22,7 +24,7 @@ BlTestOfExamplesTest >> testAllExamplesAreConsideredTests [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTestOfExamplesTest >> testErrors [
 
 	self
@@ -31,7 +33,7 @@ BlTestOfExamplesTest >> testErrors [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTestOfExamplesTest >> testFail [
 
 	self
@@ -40,7 +42,7 @@ BlTestOfExamplesTest >> testFail [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTestOfExamplesTest >> testPass [
 
 	self
@@ -49,7 +51,7 @@ BlTestOfExamplesTest >> testPass [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTestOfExamplesTest >> testSkip [
 
 	self

@@ -1,6 +1,6 @@
-Extension { #name : #BlBezierCurveGeometry }
+Extension { #name : 'BlBezierCurveGeometry' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlBezierCurveGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas pathFactory: [ :cairoContext |
@@ -8,7 +8,7 @@ BlBezierCurveGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlBezierCurveGeometry >> aeDrawAccordingToControlPointsOn: cairoContext [
 	"Based on RSAthensRenderer>>#buildBezierPath:"
 
@@ -36,7 +36,7 @@ BlBezierCurveGeometry >> aeDrawAccordingToControlPointsOn: cairoContext [
 	self notYetImplemented
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlBezierCurveGeometry >> asPolylineVertices [
 
 	| c b a via1 via2 start end |

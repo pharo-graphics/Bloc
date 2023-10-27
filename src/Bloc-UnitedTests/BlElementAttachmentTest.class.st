@@ -3,12 +3,14 @@ I have been automatically converted and probably manually tweaked from BlElement
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlElementAttachmentTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Children'
+	#name : 'BlElementAttachmentTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Children',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Children'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementAttachmentTest >> testAddToSpace [
 	<sampleInstance>
 	| aSpace aContainer aChild addedToScene removedFromScene |
@@ -44,7 +46,7 @@ BlElementAttachmentTest >> testAddToSpace [
 	^ aContainer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementAttachmentTest >> testDetachAndAttachChild [
 	<sampleInstance>
 	| aContainer aChild addedToScene removedFromScene |
@@ -81,7 +83,7 @@ BlElementAttachmentTest >> testDetachAndAttachChild [
 	^ aContainer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementAttachmentTest >> testDetachAndRemoveChild [
 	<sampleInstance>
 	| aContainer aChild addedToScene removedFromScene |
@@ -118,7 +120,7 @@ BlElementAttachmentTest >> testDetachAndRemoveChild [
 	^ aContainer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementAttachmentTest >> testDetachAndRemoveContainer [
 	<sampleInstance>
 	| aRoot aContainer aChild addedToScene removedFromScene |
@@ -164,7 +166,7 @@ BlElementAttachmentTest >> testDetachAndRemoveContainer [
 	^ aContainer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementAttachmentTest >> testDetachRequestFocusAndAttachChild [
 	<sampleInstance>
 	| aContainer aChild focusEvents |

@@ -1,6 +1,6 @@
-Extension { #name : #BlTextBackgroundAttribute }
+Extension { #name : 'BlTextBackgroundAttribute' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextBackgroundAttribute >> aeDrawBelowOn: aeCanvas span: aBASpan [
 	"Render a rectangle under text span"
 

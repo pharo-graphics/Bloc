@@ -1,25 +1,27 @@
 Class {
-	#name : #BASpaceTextMeasurer,
-	#superclass : #BATextMeasurer,
+	#name : 'BASpaceTextMeasurer',
+	#superclass : 'BATextMeasurer',
 	#instVars : [
 		'spaceRenderer'
 	],
-	#category : #'Bloc-Alexandrie-Text'
+	#category : 'Bloc-Alexandrie-Text',
+	#package : 'Bloc-Alexandrie',
+	#tag : 'Text'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BASpaceTextMeasurer >> canvas [
 
 	^ self spaceRenderer aeCanvas
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BASpaceTextMeasurer >> spaceRenderer [
 
 	^ spaceRenderer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BASpaceTextMeasurer >> spaceRenderer: aBASpaceRenderer [
 
 	spaceRenderer := aBASpaceRenderer
