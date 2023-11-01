@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlMultiPolygon',
-	#superclass : 'BlMultiPolygonGeometry',
-	#category : 'Bloc-Basic-Geometry-Deprecated',
-	#package : 'Bloc',
-	#tag : 'Basic-Geometry-Deprecated'
+	#name : #BlMultiPolygon,
+	#superclass : #BlMultiPolygonGeometry,
+	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMultiPolygon class >> isDeprecated [
 	^ true
 ]

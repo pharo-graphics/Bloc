@@ -1,6 +1,6 @@
-Extension { #name : 'UnixPlatform' }
+Extension { #name : #UnixPlatform }
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 UnixPlatform >> primaryModifier [
 	^ BlAlternativeCombination new
 		key: KeyboardKey controlLeft;
@@ -8,7 +8,7 @@ UnixPlatform >> primaryModifier [
 		yourself
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 UnixPlatform >> secondaryModifier [
 	^ BlAlternativeCombination new
 		key: KeyboardKey altLeft;

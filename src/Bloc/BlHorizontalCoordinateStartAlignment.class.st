@@ -1,19 +1,17 @@
 Class {
-	#name : 'BlHorizontalCoordinateStartAlignment',
-	#superclass : 'BlHorizontalCoordinateAlignment',
-	#category : 'Bloc-Layouts-Alignment',
-	#package : 'Bloc',
-	#tag : 'Layouts-Alignment'
+	#name : #BlHorizontalCoordinateStartAlignment,
+	#superclass : #BlHorizontalCoordinateAlignment,
+	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlHorizontalCoordinateStartAlignment >> leftToRight [
 	^ BlHorizontalCoordinateLeftAlignment new
 		coordinate: coordinate;
 		relativeAlignment: relativeAlignment leftToRight
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlHorizontalCoordinateStartAlignment >> rightToLeft [
 	^ BlHorizontalCoordinateRightAlignment new
 		coordinate: coordinate;
