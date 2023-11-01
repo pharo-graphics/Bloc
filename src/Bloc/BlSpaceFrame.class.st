@@ -80,8 +80,8 @@ BlSpaceFrame >> initializePhases [
 		BlSpaceFrameHostValidationPhase new.
 		BlSpaceFrameTaskPhase new. " animation as an example "
 		BlSpaceFrameEventPhase new. " generate BlMouse events from host mouse event as an example "
-		BlSpaceFrameLayoutPhase new. " layouting all elements that requested layout "
 		BlSpaceFrameDrawingValidationPhase new.
+		BlSpaceFrameLayoutPhase new. " layouting all elements that requested layout "
 		BlSpaceFrameDrawingPhase new " drawing invalidate elements  "}
 ]
 
