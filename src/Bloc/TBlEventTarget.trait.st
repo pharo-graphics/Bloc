@@ -186,6 +186,7 @@ TBlEventTarget >> when: anEventClass do: aBlock [
 
 { #category : #'event management' }
 TBlEventTarget >> when: anEventClass doOnce: aBlock [
+	"Install an event handler just for one execution. After that the event handler is called, remove it"
 	| anEventHandler |
 	
 	anEventHandler := nil.
