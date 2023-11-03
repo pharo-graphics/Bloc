@@ -40,8 +40,6 @@ BlDemoTransmissionPresenter >> connectMethodsPresenter [
 	methods
 		transmitTo: code  
 		transform: [ :aMethod | aMethod ifNotNil: [ aMethod sourceCode ] ifNil: [ '' ] ].
-	SystemAnnouncer uniqueInstance weak when: MethodModified do: [ :evt |
-    evt traceCr ]
 ]
 
 { #category : #initialization }
@@ -124,7 +122,8 @@ BlDemoTransmissionPresenter >> initializeMethodsPresenter [
 	methods := self newList.
 	methods
 		display: [ :method | method selector ];
-		sortingBlock: [ :a :b | a selector < b selector ]
+		sortingBlock: [ :a :b | a selector < b selector ];
+		whenSelectedDo: [ :i | methods inspect ]
 ]
 
 { #category : #initialization }
