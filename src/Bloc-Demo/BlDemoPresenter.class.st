@@ -27,6 +27,17 @@ BlDemoPresenter >> defaultLayout [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+BlDemoPresenter >> drawOnCanva: anElement [
+
+	| root |
+	root := self canva space root.
+	root removeChildren.
+	(anElement isKindOf: BlElement)
+		ifTrue: [ root addChild: anElement ]
+		ifFalse: [ ]
+]
+
 { #category : #TOREMOVE }
 BlDemoPresenter >> initialExtent [
 

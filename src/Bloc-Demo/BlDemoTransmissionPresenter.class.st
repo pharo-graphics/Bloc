@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #accessing }
+BlDemoTransmissionPresenter >> classes [ 
+	^ classes
+]
+
+{ #category : #accessing }
 BlDemoTransmissionPresenter >> code [ 
 	^ code
 ]
@@ -100,12 +105,23 @@ BlDemoTransmissionPresenter >> defaultLayout [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+BlDemoTransmissionPresenter >> executeCode [
+
+	| class method res |
+	class := self classes selectedItem.
+	method := self methods selectedItem.
+	res := class new perform: method selector asSymbol.
+	self owner drawOnCanva: res
+]
+
 { #category : #initialization }
 BlDemoTransmissionPresenter >> initializeClassesPresenter [
 
 	classes := self newList.
-	classes items: BlExampleTest allSubclasses ;
-		display: [ :class | class name];
+	classes
+		items: self itemsClasses;
+		display: [ :class | class name ];
 		displayIcon: [ :aClass | self iconNamed: aClass systemIconName ];
 		sortingBlock: [ :a :b | a name < b name ]
 ]
@@ -123,7 +139,7 @@ BlDemoTransmissionPresenter >> initializeMethodsPresenter [
 	methods
 		display: [ :method | method selector ];
 		sortingBlock: [ :a :b | a selector < b selector ];
-		whenSelectedDo: [ :i | methods inspect ]
+		whenSelectedDo: [ :i | self executeCode ]
 ]
 
 { #category : #initialization }
@@ -141,6 +157,12 @@ BlDemoTransmissionPresenter >> initializeProtocolsPresenter [
 	protocols
 		display: [ :aPair | aPair value name ];
 		sortingBlock: [ :a :b | a value name < b value name ]
+]
+
+{ #category : #'as yet unclassified' }
+BlDemoTransmissionPresenter >> itemsClasses [
+
+	^ BlExampleTest allSubclasses  
 ]
 
 { #category : #accessing }
