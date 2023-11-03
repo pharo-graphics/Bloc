@@ -3,7 +3,8 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'transmissionPresenter',
-		'canva'
+		'canva',
+		'errorMessage'
 	],
 	#category : #'Bloc-Demo'
 }
@@ -33,9 +34,28 @@ BlDemoPresenter >> drawOnCanva: anElement [
 	| root |
 	root := self canva space root.
 	root removeChildren.
-	(anElement isKindOf: BlElement)
-		ifTrue: [ root addChild: anElement ]
-		ifFalse: [ ]
+	root addChild: ((anElement isKindOf: BlElement)
+		ifTrue: [ anElement ]
+		ifFalse: [ self errorMessage ])
+]
+
+{ #category : #accessing }
+BlDemoPresenter >> errorMessage [
+
+	^ errorMessage ifNil: [
+		  BlElement new
+			  background: Color lightRed;
+			  layout: BlFrameLayout new;
+			  constraintsDo: [ :c |
+				  c vertical matchParent.
+				  c horizontal matchParent ];
+			  addChild: (BlTextElement new
+					   text:
+						   'This method does not return any element for you to see'
+							   asRopedText;
+					   constraintsDo: [ :c |
+						   c frame vertical alignCenter.
+						   c frame horizontal alignCenter ]) ]
 ]
 
 { #category : #TOREMOVE }
