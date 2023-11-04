@@ -13,8 +13,8 @@ element layout: BlBasicLayout new
 
 "
 Class {
-	#name : #BlElementLayoutChangedEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementLayoutChangedEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

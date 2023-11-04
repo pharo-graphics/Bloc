@@ -1,6 +1,6 @@
 Class {
-	#name : #BlClickAvortedEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlClickAvortedEvent',
+	#superclass : 'BlMouseEvent',
 	#instVars : [
 		'processor',
 		'upEvent'

@@ -21,8 +21,8 @@ Example:
 
 "
 Class {
-	#name : #BlKeyCombinationBuilder,
-	#superclass : #Object,
+	#name : 'BlKeyCombinationBuilder',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

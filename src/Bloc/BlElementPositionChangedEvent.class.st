@@ -5,8 +5,8 @@ Note: position may change even if an element has no parent
 
 "
 Class {
-	#name : #BlElementPositionChangedEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementPositionChangedEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

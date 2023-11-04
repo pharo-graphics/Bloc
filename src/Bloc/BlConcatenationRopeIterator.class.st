@@ -3,8 +3,8 @@ I am a special iterator used to iterate over concatenation rope
 
 "
 Class {
-	#name : #BlConcatenationRopeIterator,
-	#superclass : #BlRopeIterator,
+	#name : 'BlConcatenationRopeIterator',
+	#superclass : 'BlRopeIterator',
 	#instVars : [
 		'position',
 		'currentIterator'

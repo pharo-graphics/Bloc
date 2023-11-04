@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMousePickOutsideEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlMousePickOutsideEvent',
+	#superclass : 'BlElementEvent',
 	#instVars : [
 		'originalEvent',
 		'lastMouseDownEvent'

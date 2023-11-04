@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementCurrentProperties,
-	#superclass : #BlElementProperties,
+	#name : 'BlElementCurrentProperties',
+	#superclass : 'BlElementProperties',
 	#traits : 'TBlElementProperties',
 	#classTraits : 'TBlElementProperties classTrait',
 	#instVars : [

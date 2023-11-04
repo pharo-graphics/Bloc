@@ -13,8 +13,8 @@ Evaluate to see a visual preview:
 
 "
 Class {
-	#name : #BlStrokeLineJoin,
-	#superclass : #Object,
+	#name : 'BlStrokeLineJoin',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [

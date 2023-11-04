@@ -7,8 +7,8 @@ See: https://wrfranklin.org/Research/Short_Notes/pnpoly.html
 
 "
 Class {
-	#name : #BlPolygonHitTester,
-	#superclass : #Object,
+	#name : 'BlPolygonHitTester',
+	#superclass : 'Object',
 	#category : 'Bloc-Basic-Geometry'
 }
 

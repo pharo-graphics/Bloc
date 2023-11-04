@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementUniqueState,
-	#superclass : #BlElementState,
+	#name : 'BlElementUniqueState',
+	#superclass : 'BlElementState',
 	#classInstVars : [
 		'uniqueInstance'
 	],

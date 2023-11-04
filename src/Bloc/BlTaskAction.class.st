@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTaskAction,
-	#superclass : #BlTask,
+	#name : 'BlTaskAction',
+	#superclass : 'BlTask',
 	#instVars : [
 		'action'
 	],

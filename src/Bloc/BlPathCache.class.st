@@ -4,8 +4,8 @@ Geometry path is created with the help of backend-specific path builder by BlGeo
 
 "
 Class {
-	#name : #BlPathCache,
-	#superclass : #Object,
+	#name : 'BlPathCache',
+	#superclass : 'Object',
 	#instVars : [
 		'session',
 		'geometry',

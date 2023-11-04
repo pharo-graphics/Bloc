@@ -18,8 +18,8 @@ registry dispatchEvent: BlMouseUpEvent new.
 
 "
 Class {
-	#name : #BlHandlerRegistry,
-	#superclass : #Object,
+	#name : 'BlHandlerRegistry',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classVars : [

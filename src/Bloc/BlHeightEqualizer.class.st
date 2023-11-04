@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHeightEqualizer,
-	#superclass : #BlEqualizer,
+	#name : 'BlHeightEqualizer',
+	#superclass : 'BlEqualizer',
 	#instVars : [
 		'heightBlock'
 	],

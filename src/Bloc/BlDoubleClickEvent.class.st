@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDoubleClickEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlDoubleClickEvent',
+	#superclass : 'BlMouseEvent',
 	#category : 'Bloc-Events'
 }
 

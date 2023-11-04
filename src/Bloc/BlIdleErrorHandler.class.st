@@ -1,6 +1,6 @@
 Class {
-	#name : #BlIdleErrorHandler,
-	#superclass : #BlSingleErrorHandler,
+	#name : 'BlIdleErrorHandler',
+	#superclass : 'BlSingleErrorHandler',
 	#category : 'Bloc-Basic-Errors'
 }
 

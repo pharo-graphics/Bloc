@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementNoId,
-	#superclass : #BlElementId,
+	#name : 'BlElementNoId',
+	#superclass : 'BlElementId',
 	#classInstVars : [
 		'uniqueInstance'
 	],

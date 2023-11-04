@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHorizontalCoordinateStartAlignment,
-	#superclass : #BlHorizontalCoordinateAlignment,
+	#name : 'BlHorizontalCoordinateStartAlignment',
+	#superclass : 'BlHorizontalCoordinateAlignment',
 	#category : 'Bloc-Layouts-Alignment'
 }
 

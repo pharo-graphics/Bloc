@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementLayoutHorizontalResizerProperty,
-	#superclass : #BlElementLayoutResizerProperty,
+	#name : 'BlElementLayoutHorizontalResizerProperty',
+	#superclass : 'BlElementLayoutResizerProperty',
 	#category : 'Bloc-Basic-Properties'
 }
 

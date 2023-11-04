@@ -1,6 +1,6 @@
 Class {
-	#name : #BlKeyboardEvent,
-	#superclass : #BlUIEvent,
+	#name : 'BlKeyboardEvent',
+	#superclass : 'BlUIEvent',
 	#instVars : [
 		'scanCode',
 		'key'

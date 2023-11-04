@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementLayoutComputedEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementLayoutComputedEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementEffectProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementEffectProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'effect'
 	],

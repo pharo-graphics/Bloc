@@ -28,8 +28,8 @@ The queue executes tasks within a single pharo process at #userSchedulingPriorit
 
 "
 Class {
-	#name : #BlTaskAtQueue,
-	#superclass : #Object,
+	#name : 'BlTaskAtQueue',
+	#superclass : 'Object',
 	#instVars : [
 		'queue',
 		'scheduleSemaphore',

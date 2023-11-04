@@ -3,8 +3,8 @@ Ignore me :)
 
 "
 Class {
-	#name : #BlIgnoredLayout,
-	#superclass : #BlLayout,
+	#name : 'BlIgnoredLayout',
+	#superclass : 'BlLayout',
 	#category : 'Bloc-Layouts-Basic'
 }
 

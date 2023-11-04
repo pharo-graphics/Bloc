@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDelayedPulsesTaskAction,
-	#superclass : #BlDelayPulsesTask,
+	#name : 'BlDelayedPulsesTaskAction',
+	#superclass : 'BlDelayPulsesTask',
 	#instVars : [
 		'action'
 	],

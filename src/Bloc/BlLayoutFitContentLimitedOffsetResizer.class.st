@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutFitContentLimitedOffsetResizer,
-	#superclass : #BlLayoutFitContentLimitedResizer,
+	#name : 'BlLayoutFitContentLimitedOffsetResizer',
+	#superclass : 'BlLayoutFitContentLimitedResizer',
 	#instVars : [
 		'offset'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlCompositeEffect,
-	#superclass : #BlElementEffect,
+	#name : 'BlCompositeEffect',
+	#superclass : 'BlElementEffect',
 	#instVars : [
 		'effects'
 	],

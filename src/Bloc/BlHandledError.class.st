@@ -3,8 +3,8 @@ I represent an error that bloc gracefully handled during some specific frame pha
 
 "
 Class {
-	#name : #BlHandledError,
-	#superclass : #Object,
+	#name : 'BlHandledError',
+	#superclass : 'Object',
 	#instVars : [
 		'error',
 		'errorHandler',

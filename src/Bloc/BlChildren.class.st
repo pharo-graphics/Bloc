@@ -21,8 +21,8 @@ Important API methods:
 
 "
 Class {
-	#name : #BlChildren,
-	#superclass : #Collection,
+	#name : 'BlChildren',
+	#superclass : 'Collection',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Basic-Children'

@@ -6,8 +6,8 @@ The reference element always corresponds to the element which was used to comput
 
 "
 Class {
-	#name : #BlElementBounds,
-	#superclass : #Object,
+	#name : 'BlElementBounds',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

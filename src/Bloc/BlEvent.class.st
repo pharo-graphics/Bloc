@@ -6,8 +6,8 @@ BlEvent allSubclasses
 
 "
 Class {
-	#name : #BlEvent,
-	#superclass : #Announcement,
+	#name : 'BlEvent',
+	#superclass : 'Announcement',
 	#instVars : [
 		'target',
 		'source',

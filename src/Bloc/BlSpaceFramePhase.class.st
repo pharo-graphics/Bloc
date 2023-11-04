@@ -5,8 +5,8 @@ Each phase knows about its start time and send a corresponding event once the ph
 
 "
 Class {
-	#name : #BlSpaceFramePhase,
-	#superclass : #Object,
+	#name : 'BlSpaceFramePhase',
+	#superclass : 'Object',
 	#category : 'Bloc-Space - Frame'
 }
 

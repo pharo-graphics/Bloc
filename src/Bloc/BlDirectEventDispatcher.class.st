@@ -10,8 +10,8 @@ BlDirectEventDispatcher on: BlElement new
 
 "
 Class {
-	#name : #BlDirectEventDispatcher,
-	#superclass : #BlEventDispatcher,
+	#name : 'BlDirectEventDispatcher',
+	#superclass : 'BlEventDispatcher',
 	#instVars : [
 		'owner',
 		'filters',

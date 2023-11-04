@@ -17,8 +17,8 @@ The task state was introduced after duplicate tasks were being found during the 
 
 "
 Class {
-	#name : #BlTask,
-	#superclass : #Object,
+	#name : 'BlTask',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

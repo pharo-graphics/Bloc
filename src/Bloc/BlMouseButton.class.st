@@ -5,8 +5,8 @@ I am used by BlMouseEvent
 
 "
 Class {
-	#name : #BlMouseButton,
-	#superclass : #Object,
+	#name : 'BlMouseButton',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Events'

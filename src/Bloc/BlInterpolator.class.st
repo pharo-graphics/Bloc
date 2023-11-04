@@ -11,8 +11,8 @@ Example
 
 "
 Class {
-	#name : #BlInterpolator,
-	#superclass : #Object,
+	#name : 'BlInterpolator',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [

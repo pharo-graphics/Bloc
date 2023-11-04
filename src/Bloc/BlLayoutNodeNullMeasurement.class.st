@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutNodeNullMeasurement,
-	#superclass : #BlLayoutNodeMeasurement,
+	#name : 'BlLayoutNodeNullMeasurement',
+	#superclass : 'BlLayoutNodeMeasurement',
 	#category : 'Bloc-Layouts-Model'
 }
 

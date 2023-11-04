@@ -1,6 +1,6 @@
 Class {
-	#name : #BlStaticCursor,
-	#superclass : #BlCursor,
+	#name : 'BlStaticCursor',
+	#superclass : 'BlCursor',
 	#instVars : [
 		'image'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlVerticesFromRectanglesOperator,
-	#superclass : #Object,
+	#name : 'BlVerticesFromRectanglesOperator',
+	#superclass : 'Object',
 	#category : 'Bloc-Basic-Geometry'
 }
 

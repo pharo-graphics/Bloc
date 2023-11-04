@@ -5,8 +5,8 @@ When used, rendering happens in a Form and than can be displayed in a morphic wi
 
 "
 Class {
-	#name : #BlHostRendererFormSurface,
-	#superclass : #BlHostRendererSurface,
+	#name : 'BlHostRendererFormSurface',
+	#superclass : 'BlHostRendererSurface',
 	#instVars : [
 		'externalForm'
 	],

@@ -3,8 +3,8 @@ I am a parallel Universe. There can exist multiple parallel universes
 
 "
 Class {
-	#name : #BlParallelUniverse,
-	#superclass : #Object,
+	#name : 'BlParallelUniverse',
+	#superclass : 'Object',
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [

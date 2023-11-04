@@ -8,8 +8,8 @@ point3D := 5 @ 10 @ 20. "" x = 5; y = 10; z = 20""
 
 "
 Class {
-	#name : #BlPoint3D,
-	#superclass : #BlPoint,
+	#name : 'BlPoint3D',
+	#superclass : 'BlPoint',
 	#instVars : [
 		'x',
 		'y',

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHistogram,
-	#superclass : #BlHistogramGeometry,
+	#name : 'BlHistogram',
+	#superclass : 'BlHistogramGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

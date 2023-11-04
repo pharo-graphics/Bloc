@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementSelectedStateWish,
-	#superclass : #BlElementStateWish,
+	#name : 'BlElementSelectedStateWish',
+	#superclass : 'BlElementStateWish',
 	#instVars : [
 		'selected'
 	],

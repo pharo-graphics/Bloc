@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSynchronizedObjectPool,
-	#superclass : #BlObjectPool,
+	#name : 'BlSynchronizedObjectPool',
+	#superclass : 'BlObjectPool',
 	#instVars : [
 		'pool',
 		'monitor'

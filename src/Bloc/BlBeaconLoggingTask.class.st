@@ -6,8 +6,8 @@ I should be instantiated using {{gtMethod:BlBeaconLoggingTask class>>#subtask:}}
 
 "
 Class {
-	#name : #BlBeaconLoggingTask,
-	#superclass : #BlTask,
+	#name : 'BlBeaconLoggingTask',
+	#superclass : 'BlTask',
 	#instVars : [
 		'name',
 		'subtask',

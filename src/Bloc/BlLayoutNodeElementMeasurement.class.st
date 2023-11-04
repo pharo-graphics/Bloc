@@ -3,8 +3,8 @@ Let's the layout know that the node should be measurement during the first pass 
 
 "
 Class {
-	#name : #BlLayoutNodeElementMeasurement,
-	#superclass : #BlLayoutNodeMeasurement,
+	#name : 'BlLayoutNodeElementMeasurement',
+	#superclass : 'BlLayoutNodeMeasurement',
 	#instVars : [
 		'element'
 	],

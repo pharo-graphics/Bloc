@@ -3,8 +3,8 @@ I describe which phase the event flow is currently being evaluated.
 
 "
 Class {
-	#name : #BlEventTraversalStep,
-	#superclass : #Object,
+	#name : 'BlEventTraversalStep',
+	#superclass : 'Object',
 	#instVars : [
 		'target'
 	],

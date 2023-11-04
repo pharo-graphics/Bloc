@@ -5,8 +5,8 @@ I hold a strong reference to the event target
 
 "
 Class {
-	#name : #BlEventDelegator,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlEventDelegator',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'eventClass',
 		'eventTarget'

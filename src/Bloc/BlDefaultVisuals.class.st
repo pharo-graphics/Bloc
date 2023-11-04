@@ -45,8 +45,8 @@ The result could have been achieved by having an instance variable and a classVa
 	
 "
 Class {
-	#name : #BlDefaultVisuals,
-	#superclass : #BlElementVisuals,
+	#name : 'BlDefaultVisuals',
+	#superclass : 'BlElementVisuals',
 	#classInstVars : [
 		'uniqueInstance'
 	],

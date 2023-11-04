@@ -1,6 +1,6 @@
 Class {
-	#name : #BlIgnoredLayoutConstraintsVertical,
-	#superclass : #BlLayoutConstraintsAxis,
+	#name : 'BlIgnoredLayoutConstraintsVertical',
+	#superclass : 'BlLayoutConstraintsAxis',
 	#instVars : [
 		'alignment',
 		'weight'

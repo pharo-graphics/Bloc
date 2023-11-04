@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementMarginProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementMarginProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'margin'
 	],

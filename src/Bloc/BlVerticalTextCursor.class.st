@@ -1,5 +1,5 @@
 Class {
-	#name : #BlVerticalTextCursor,
-	#superclass : #BlNamedCursor,
+	#name : 'BlVerticalTextCursor',
+	#superclass : 'BlNamedCursor',
 	#category : 'Bloc-Space - Cursor'
 }

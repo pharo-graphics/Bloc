@@ -12,8 +12,8 @@ Example:
 
 "
 Class {
-	#name : #BlReflectionTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlReflectionTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'reflection'
 	],

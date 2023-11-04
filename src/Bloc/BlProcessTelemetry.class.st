@@ -1,6 +1,6 @@
 Class {
-	#name : #BlProcessTelemetry,
-	#superclass : #ProcessLocalVariable,
+	#name : 'BlProcessTelemetry',
+	#superclass : 'ProcessLocalVariable',
 	#traits : 'TBlTelemetry',
 	#classTraits : 'TBlTelemetry classTrait',
 	#classInstVars : [

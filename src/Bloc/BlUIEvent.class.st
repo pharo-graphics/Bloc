@@ -1,6 +1,6 @@
 Class {
-	#name : #BlUIEvent,
-	#superclass : #BlEvent,
+	#name : 'BlUIEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'modifiers'
 	],

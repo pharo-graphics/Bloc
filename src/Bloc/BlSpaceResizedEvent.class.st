@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceResizedEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceResizedEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'extent'
 	],

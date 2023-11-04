@@ -6,8 +6,8 @@ All paints are meant to be immutable
 
 "
 Class {
-	#name : #BlPaint,
-	#superclass : #Object,
+	#name : 'BlPaint',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Paint'

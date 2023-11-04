@@ -9,8 +9,8 @@ Instance creation:
 
 "
 Class {
-	#name : #BlVector3D,
-	#superclass : #BlVector,
+	#name : 'BlVector3D',
+	#superclass : 'BlVector',
 	#instVars : [
 		'x',
 		'y',

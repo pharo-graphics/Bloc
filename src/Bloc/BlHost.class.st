@@ -5,8 +5,8 @@ A Host can be compared to a driver that communicates with the native multimedia 
 
 "
 Class {
-	#name : #BlHost,
-	#superclass : #Object,
+	#name : 'BlHost',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classVars : [

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFocusEvent,
-	#superclass : #BlBaseFocusEvent,
+	#name : 'BlFocusEvent',
+	#superclass : 'BlBaseFocusEvent',
 	#category : 'Bloc-Events'
 }
 

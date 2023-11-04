@@ -8,8 +8,8 @@ Examples are provided by the class {{gtClass:BlChildrenLinkedListExamples}}
 
 "
 Class {
-	#name : #BlChildrenLinkedList,
-	#superclass : #BlChildrenCollection,
+	#name : 'BlChildrenLinkedList',
+	#superclass : 'BlChildrenCollection',
 	#instVars : [
 		'list'
 	],

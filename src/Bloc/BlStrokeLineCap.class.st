@@ -13,8 +13,8 @@ Evaluate to see a visual preview:
 
 "
 Class {
-	#name : #BlStrokeLineCap,
-	#superclass : #Object,
+	#name : 'BlStrokeLineCap',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [

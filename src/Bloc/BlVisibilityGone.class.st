@@ -4,8 +4,8 @@ Once set, element should not be rendered and should not participate in layout (s
 
 "
 Class {
-	#name : #BlVisibilityGone,
-	#superclass : #BlVisibility,
+	#name : 'BlVisibilityGone',
+	#superclass : 'BlVisibility',
 	#category : 'Bloc-Basic-Properties'
 }
 

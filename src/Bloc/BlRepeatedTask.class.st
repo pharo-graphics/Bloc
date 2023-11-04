@@ -5,8 +5,8 @@ See the {{gtMethod:name=BlRepeatedTask>>#run}} method.
 
 "
 Class {
-	#name : #BlRepeatedTask,
-	#superclass : #BlTask,
+	#name : 'BlRepeatedTask',
+	#superclass : 'BlTask',
 	#instVars : [
 		'delay',
 		'element',

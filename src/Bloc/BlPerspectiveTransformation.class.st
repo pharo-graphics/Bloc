@@ -1,6 +1,6 @@
 Class {
-	#name : #BlPerspectiveTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlPerspectiveTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'depth'
 	],

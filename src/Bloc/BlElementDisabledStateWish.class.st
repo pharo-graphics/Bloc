@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementDisabledStateWish,
-	#superclass : #BlElementStateWish,
+	#name : 'BlElementDisabledStateWish',
+	#superclass : 'BlElementStateWish',
 	#instVars : [
 		'enabled'
 	],

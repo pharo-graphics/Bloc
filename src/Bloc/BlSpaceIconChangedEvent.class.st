@@ -3,8 +3,8 @@ I am fired by {{gtMethod:BlSpace>>#icon:}} when {{gtMethod:BlSpace>>#icon}} is c
 
 "
 Class {
-	#name : #BlSpaceIconChangedEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceIconChangedEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'iconStencil'
 	],

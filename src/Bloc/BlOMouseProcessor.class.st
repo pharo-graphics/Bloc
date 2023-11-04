@@ -7,8 +7,8 @@ Mouse actions are blocked during drag
 
 "
 Class {
-	#name : #BlOMouseProcessor,
-	#superclass : #BlBaseEventProcessor,
+	#name : 'BlOMouseProcessor',
+	#superclass : 'BlBaseEventProcessor',
 	#instVars : [
 		'lastEnteredTargets',
 		'lastOverTarget',

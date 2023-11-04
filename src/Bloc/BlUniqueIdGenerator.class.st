@@ -1,6 +1,6 @@
 Class {
-	#name : #BlUniqueIdGenerator,
-	#superclass : #Object,
+	#name : 'BlUniqueIdGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'mutex',
 		'nextUniqueId'

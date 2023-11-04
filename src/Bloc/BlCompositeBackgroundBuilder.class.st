@@ -3,8 +3,8 @@ I am a BlBackground builder.
 
 "
 Class {
-	#name : #BlCompositeBackgroundBuilder,
-	#superclass : #BlBackgroundBuilder,
+	#name : 'BlCompositeBackgroundBuilder',
+	#superclass : 'BlBackgroundBuilder',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMouseDragState,
-	#superclass : #Object,
+	#name : 'BlMouseDragState',
+	#superclass : 'Object',
 	#instVars : [
 		'button'
 	],

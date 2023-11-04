@@ -4,8 +4,8 @@ My recommended maximum length (size) is defined in BrRope class>>#combineLength
 
 "
 Class {
-	#name : #BlCollectionRope,
-	#superclass : #BlRope,
+	#name : 'BlCollectionRope',
+	#superclass : 'BlRope',
 	#instVars : [
 		'collection'
 	],

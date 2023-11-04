@@ -9,8 +9,8 @@ Examples are provided by the class {{gtClass:BlChildrenArrayExamples}}
 
 "
 Class {
-	#name : #BlChildrenArray,
-	#superclass : #BlChildrenCollection,
+	#name : 'BlChildrenArray',
+	#superclass : 'BlChildrenCollection',
 	#instVars : [
 		'array'
 	],

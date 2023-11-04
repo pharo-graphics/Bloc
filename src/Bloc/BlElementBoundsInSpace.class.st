@@ -3,8 +3,8 @@ I represent bounds in space
 
 "
 Class {
-	#name : #BlElementBoundsInSpace,
-	#superclass : #BlElementComputedBounds,
+	#name : 'BlElementBoundsInSpace',
+	#superclass : 'BlElementComputedBounds',
 	#category : 'Bloc-Basic-Bounds'
 }
 

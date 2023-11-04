@@ -1,5 +1,5 @@
 Class {
-	#name : #BlSpaceMinimizedEvent,
-	#superclass : #BlSpaceResizedEvent,
+	#name : 'BlSpaceMinimizedEvent',
+	#superclass : 'BlSpaceResizedEvent',
 	#category : 'Bloc-Events-Type-Space'
 }

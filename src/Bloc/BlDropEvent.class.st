@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDropEvent,
-	#superclass : #BlBaseDragEvent,
+	#name : 'BlDropEvent',
+	#superclass : 'BlBaseDragEvent',
 	#category : 'Bloc-Events'
 }
 

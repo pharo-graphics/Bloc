@@ -3,8 +3,8 @@ I am a root class of all mouse buttons with a name, e.g. ""primary"", ""secondar
 
 "
 Class {
-	#name : #BlMouseNamedButton,
-	#superclass : #BlMouseButton,
+	#name : 'BlMouseNamedButton',
+	#superclass : 'BlMouseButton',
 	#classInstVars : [
 		'uniqueInstance'
 	],

@@ -5,8 +5,8 @@ Color paint is transparent then and only then when underlying color's alpha chan
 
 "
 Class {
-	#name : #BlColorPaint,
-	#superclass : #BlPaint,
+	#name : 'BlColorPaint',
+	#superclass : 'BlPaint',
 	#instVars : [
 		'color'
 	],

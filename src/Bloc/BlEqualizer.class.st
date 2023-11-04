@@ -7,8 +7,8 @@ Use me with caution then and only then when there is no other solution, and you 
 
 "
 Class {
-	#name : #BlEqualizer,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BlEqualizer',
+	#superclass : 'BlCustomEventHandler',
 	#instVars : [
 		'sourceElements',
 		'targetElements'

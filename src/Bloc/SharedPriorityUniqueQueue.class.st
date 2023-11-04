@@ -26,8 +26,8 @@ Some care is taken to ensure that the queue is not corrupted by some other proce
 
 "
 Class {
-	#name : #SharedPriorityUniqueQueue,
-	#superclass : #SharedQueue,
+	#name : 'SharedPriorityUniqueQueue',
+	#superclass : 'SharedQueue',
 	#category : 'Bloc-DataStructure - Priority Queue'
 }
 

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlCircle,
-	#superclass : #BlCircleGeometry,
+	#name : 'BlCircle',
+	#superclass : 'BlCircleGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

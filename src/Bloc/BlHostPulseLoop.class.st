@@ -9,8 +9,8 @@ The opened spaces listen the pulse to be synchronized and to update their state 
 
 "
 Class {
-	#name : #BlHostPulseLoop,
-	#superclass : #Object,
+	#name : 'BlHostPulseLoop',
+	#superclass : 'Object',
 	#instVars : [
 		'hostClass',
 		'loopProcess',

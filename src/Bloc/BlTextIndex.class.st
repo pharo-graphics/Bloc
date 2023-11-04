@@ -6,8 +6,8 @@ See BlTextIndexEOS.
 
 "
 Class {
-	#name : #BlTextIndex,
-	#superclass : #Magnitude,
+	#name : 'BlTextIndex',
+	#superclass : 'Magnitude',
 	#category : 'Bloc-DataStructure - Rope'
 }
 

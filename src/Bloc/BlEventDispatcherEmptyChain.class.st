@@ -4,8 +4,8 @@ Basically, I implement a null object pattern and used as next or previous elemen
 
 "
 Class {
-	#name : #BlEventDispatcherEmptyChain,
-	#superclass : #BlEventDispatcherChain,
+	#name : 'BlEventDispatcherEmptyChain',
+	#superclass : 'BlEventDispatcherChain',
 	#classInstVars : [
 		'uniqueInstance'
 	],

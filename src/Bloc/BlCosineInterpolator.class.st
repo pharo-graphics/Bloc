@@ -5,8 +5,8 @@ I am a cosinus interpolator defined by the following function:
 
 "
 Class {
-	#name : #BlCosineInterpolator,
-	#superclass : #BlInterpolator,
+	#name : 'BlCosineInterpolator',
+	#superclass : 'BlInterpolator',
 	#instVars : [
 		'range'
 	],

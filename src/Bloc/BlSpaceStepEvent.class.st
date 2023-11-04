@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceStepEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceStepEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'start',
 		'end'

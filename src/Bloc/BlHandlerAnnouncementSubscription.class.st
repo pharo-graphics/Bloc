@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHandlerAnnouncementSubscription,
-	#superclass : #Object,
+	#name : 'BlHandlerAnnouncementSubscription',
+	#superclass : 'Object',
 	#instVars : [
 		'subscriber'
 	],

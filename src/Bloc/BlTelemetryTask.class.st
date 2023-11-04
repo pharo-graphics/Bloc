@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTelemetryTask,
-	#superclass : #Object,
+	#name : 'BlTelemetryTask',
+	#superclass : 'Object',
 	#instVars : [
 		'startTime',
 		'endTime',

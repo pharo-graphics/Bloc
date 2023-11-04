@@ -7,8 +7,8 @@ Examples are provided by the class {{gtClass:BlPaintBackgroundExamples}}.
 
 "
 Class {
-	#name : #BlPaintBackground,
-	#superclass : #BlBackground,
+	#name : 'BlPaintBackground',
+	#superclass : 'BlBackground',
 	#instVars : [
 		'paint'
 	],

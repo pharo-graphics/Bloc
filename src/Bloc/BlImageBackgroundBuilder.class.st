@@ -1,6 +1,6 @@
 Class {
-	#name : #BlImageBackgroundBuilder,
-	#superclass : #BlBackgroundBuilder,
+	#name : 'BlImageBackgroundBuilder',
+	#superclass : 'BlBackgroundBuilder',
 	#instVars : [
 		'form'
 	],

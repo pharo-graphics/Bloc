@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementNegationState,
-	#superclass : #BlElementState,
+	#name : 'BlElementNegationState',
+	#superclass : 'BlElementState',
 	#instVars : [
 		'state'
 	],

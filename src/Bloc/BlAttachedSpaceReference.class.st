@@ -4,8 +4,8 @@ Attached space reference {{gtClass:BlSpaceReference}} is set when an element is 
 
 "
 Class {
-	#name : #BlAttachedSpaceReference,
-	#superclass : #BlSpaceReference,
+	#name : 'BlAttachedSpaceReference',
+	#superclass : 'BlSpaceReference',
 	#classInstVars : [
 		'uniqueInstance'
 	],

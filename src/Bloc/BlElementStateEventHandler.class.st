@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementStateEventHandler,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BlElementStateEventHandler',
+	#superclass : 'BlCustomEventHandler',
 	#classInstVars : [
 		'uniqueInstance'
 	],

@@ -3,8 +3,8 @@ I am a mediator between host space and host renderer
 
 "
 Class {
-	#name : #BlHostRendererSurface,
-	#superclass : #Object,
+	#name : 'BlHostRendererSurface',
+	#superclass : 'Object',
 	#instVars : [
 		'physicalSize',
 		'scaleFactor',

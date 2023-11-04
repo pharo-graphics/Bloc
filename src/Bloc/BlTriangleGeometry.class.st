@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTriangleGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlTriangleGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'orientation'
 	],

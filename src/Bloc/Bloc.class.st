@@ -6,8 +6,8 @@ I allow users to:
 
 "
 Class {
-	#name : #Bloc,
-	#superclass : #Object,
+	#name : 'Bloc',
+	#superclass : 'Object',
 	#classVars : [
 		'AssertionsEnabled',
 		'DebugModeEnabled',

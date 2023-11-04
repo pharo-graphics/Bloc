@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutGraphIterator,
-	#superclass : #Object,
+	#name : 'BlLayoutGraphIterator',
+	#superclass : 'Object',
 	#instVars : [
 		'layoutNode'
 	],

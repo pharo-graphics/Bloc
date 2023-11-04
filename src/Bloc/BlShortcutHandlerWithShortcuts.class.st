@@ -1,6 +1,6 @@
 Class {
-	#name : #BlShortcutHandlerWithShortcuts,
-	#superclass : #BlShortcutHandler,
+	#name : 'BlShortcutHandlerWithShortcuts',
+	#superclass : 'BlShortcutHandler',
 	#instVars : [
 		'shortcutRegistry'
 	],

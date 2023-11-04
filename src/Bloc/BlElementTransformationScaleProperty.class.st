@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementTransformationScaleProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementTransformationScaleProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'scaleFactor'
 	],

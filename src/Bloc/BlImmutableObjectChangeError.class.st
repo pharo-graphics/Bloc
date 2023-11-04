@@ -1,6 +1,6 @@
 Class {
-	#name : #BlImmutableObjectChangeError,
-	#superclass : #Error,
+	#name : 'BlImmutableObjectChangeError',
+	#superclass : 'Error',
 	#instVars : [
 		'object'
 	],

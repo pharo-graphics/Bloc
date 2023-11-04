@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementBoundsInChild,
-	#superclass : #BlElementComputedBounds,
+	#name : 'BlElementBoundsInChild',
+	#superclass : 'BlElementComputedBounds',
 	#instVars : [
 		'originalElement'
 	],

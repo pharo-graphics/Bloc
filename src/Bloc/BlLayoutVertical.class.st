@@ -3,8 +3,8 @@ I am a concrete vertical orientation
 
 "
 Class {
-	#name : #BlLayoutVertical,
-	#superclass : #BlLayoutOrientation,
+	#name : 'BlLayoutVertical',
+	#superclass : 'BlLayoutOrientation',
 	#category : 'Bloc-Layouts-Support'
 }
 

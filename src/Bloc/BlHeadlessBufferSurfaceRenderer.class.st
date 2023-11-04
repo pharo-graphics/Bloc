@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHeadlessBufferSurfaceRenderer,
-	#superclass : #BlHostSurfaceRenderer,
+	#name : 'BlHeadlessBufferSurfaceRenderer',
+	#superclass : 'BlHostSurfaceRenderer',
 	#category : 'Bloc-Universe - Host Headless'
 }
 

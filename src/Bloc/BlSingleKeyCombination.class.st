@@ -29,8 +29,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlSingleKeyCombination,
-	#superclass : #BlKeyCombination,
+	#name : 'BlSingleKeyCombination',
+	#superclass : 'BlKeyCombination',
 	#instVars : [
 		'key'
 	],

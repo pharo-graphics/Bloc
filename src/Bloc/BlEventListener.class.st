@@ -1,6 +1,6 @@
 Class {
-	#name : #BlEventListener,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlEventListener',
+	#superclass : 'BlBasicEventHandler',
 	#category : 'Bloc-Events-Handler'
 }
 

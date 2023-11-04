@@ -6,8 +6,8 @@ It is prefereable to refer my unique instance, since I am stateless
 
 "
 Class {
-	#name : #BlTransparentPaint,
-	#superclass : #BlColorPaint,
+	#name : 'BlTransparentPaint',
+	#superclass : 'BlColorPaint',
 	#classInstVars : [
 		'uniqueInstance'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutResizer,
-	#superclass : #Object,
+	#name : 'BlLayoutResizer',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Layouts-Support'

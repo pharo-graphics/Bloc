@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutCommonConstraintsAxis,
-	#superclass : #BlLayoutConstraintsAxis,
+	#name : 'BlLayoutCommonConstraintsAxis',
+	#superclass : 'BlLayoutConstraintsAxis',
 	#instVars : [
 		'resizer'
 	],

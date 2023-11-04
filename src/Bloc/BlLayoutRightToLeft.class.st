@@ -3,8 +3,8 @@ I am a concrete right-to-left direction
 
 "
 Class {
-	#name : #BlLayoutRightToLeft,
-	#superclass : #BlLayoutDirection,
+	#name : 'BlLayoutRightToLeft',
+	#superclass : 'BlLayoutDirection',
 	#category : 'Bloc-Layouts-Support'
 }
 

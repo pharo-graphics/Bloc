@@ -9,8 +9,8 @@ See `=BlLayoutConstraintsAxis`= to learn more about axis-dependent constraints
 
 "
 Class {
-	#name : #BlLayoutConstraints,
-	#superclass : #Object,
+	#name : 'BlLayoutConstraints',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

@@ -3,8 +3,8 @@ I am signalled when user tries to add an {{gtClass:BlElement}}, that is already 
 
 "
 Class {
-	#name : #BlAlreadyAddedAsChildError,
-	#superclass : #Error,
+	#name : 'BlAlreadyAddedAsChildError',
+	#superclass : 'Error',
 	#instVars : [
 		'element'
 	],

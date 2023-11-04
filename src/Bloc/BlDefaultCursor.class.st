@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDefaultCursor,
-	#superclass : #BlNamedCursor,
+	#name : 'BlDefaultCursor',
+	#superclass : 'BlNamedCursor',
 	#category : 'Bloc-Space - Cursor'
 }
 

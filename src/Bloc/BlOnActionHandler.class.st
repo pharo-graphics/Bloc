@@ -1,6 +1,6 @@
 Class {
-	#name : #BlOnActionHandler,
-	#superclass : #BlActionHandler,
+	#name : 'BlOnActionHandler',
+	#superclass : 'BlActionHandler',
 	#instVars : [
 		'action'
 	],

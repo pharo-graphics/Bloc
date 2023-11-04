@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutNodeResizerMeasurement,
-	#superclass : #BlLayoutNodeMeasurement,
+	#name : 'BlLayoutNodeResizerMeasurement',
+	#superclass : 'BlLayoutNodeMeasurement',
 	#category : 'Bloc-Layouts-Model'
 }
 

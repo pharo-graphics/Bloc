@@ -13,8 +13,8 @@ Both insertions and deletion have logarithmic complexity O(logN) where N is curr
 
 "
 Class {
-	#name : #BlSelectionTree,
-	#superclass : #Object,
+	#name : 'BlSelectionTree',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

@@ -4,8 +4,8 @@ This may be useful for complex elements that rarely change, for example visualis
 
 "
 Class {
-	#name : #BlCompositingSingleLayerMode,
-	#superclass : #BlCompositingWithLayerMode,
+	#name : 'BlCompositingSingleLayerMode',
+	#superclass : 'BlCompositingWithLayerMode',
 	#category : 'Bloc-Basic-Support'
 }
 

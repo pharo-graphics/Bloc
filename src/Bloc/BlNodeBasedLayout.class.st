@@ -1,6 +1,6 @@
 Class {
-	#name : #BlNodeBasedLayout,
-	#superclass : #BlLayout,
+	#name : 'BlNodeBasedLayout',
+	#superclass : 'BlLayout',
 	#category : 'Bloc-Layouts-Basic'
 }
 

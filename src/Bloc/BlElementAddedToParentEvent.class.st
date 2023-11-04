@@ -17,8 +17,8 @@ parent addChild: child.
 
 "
 Class {
-	#name : #BlElementAddedToParentEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementAddedToParentEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

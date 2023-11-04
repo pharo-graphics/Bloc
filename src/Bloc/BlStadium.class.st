@@ -1,6 +1,6 @@
 Class {
-	#name : #BlStadium,
-	#superclass : #BlStadiumGeometry,
+	#name : 'BlStadium',
+	#superclass : 'BlStadiumGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

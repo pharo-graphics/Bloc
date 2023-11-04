@@ -6,8 +6,8 @@ I can influence the bounds of my owner (used to clip my owner).
 
 "
 Class {
-	#name : #BlElementEffect,
-	#superclass : #Object,
+	#name : 'BlElementEffect',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Effect'

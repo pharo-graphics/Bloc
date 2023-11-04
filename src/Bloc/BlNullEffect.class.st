@@ -1,6 +1,6 @@
 Class {
-	#name : #BlNullEffect,
-	#superclass : #BlElementEffect,
+	#name : 'BlNullEffect',
+	#superclass : 'BlElementEffect',
 	#category : 'Bloc-Effect'
 }
 

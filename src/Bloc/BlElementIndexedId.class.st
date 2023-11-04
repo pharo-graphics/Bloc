@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementIndexedId,
-	#superclass : #BlElementId,
+	#name : 'BlElementIndexedId',
+	#superclass : 'BlElementId',
 	#instVars : [
 		'prefixId',
 		'index'

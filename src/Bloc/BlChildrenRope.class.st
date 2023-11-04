@@ -8,8 +8,8 @@ Examples are provided by the class {{gtClass:BlChildrenRopeExamples}}
 
 "
 Class {
-	#name : #BlChildrenRope,
-	#superclass : #BlChildrenCollection,
+	#name : 'BlChildrenRope',
+	#superclass : 'BlChildrenCollection',
 	#instVars : [
 		'rope'
 	],

@@ -1,5 +1,5 @@
 Class {
-	#name : #BlMiddleMouseUpEvent,
-	#superclass : #BlMouseUpEvent,
+	#name : 'BlMiddleMouseUpEvent',
+	#superclass : 'BlMouseUpEvent',
 	#category : 'Bloc-Events'
 }

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceTaskQueue,
-	#superclass : #BlTaskQueue,
+	#name : 'BlSpaceTaskQueue',
+	#superclass : 'BlTaskQueue',
 	#instVars : [
 		'space'
 	],

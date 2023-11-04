@@ -17,8 +17,8 @@ See the class comment of `BlStyles` to learn the details of how styles are remov
 
 "
 Class {
-	#name : #BlElementStyles,
-	#superclass : #BlStyles,
+	#name : 'BlElementStyles',
+	#superclass : 'BlStyles',
 	#instVars : [
 		'previousAppliedStyles',
 		'isDirty',

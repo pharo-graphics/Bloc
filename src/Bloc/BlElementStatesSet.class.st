@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementStatesSet,
-	#superclass : #PluggableSet,
+	#name : 'BlElementStatesSet',
+	#superclass : 'PluggableSet',
 	#category : 'Bloc-Basic-State'
 }
 

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlRepeatedTaskAction,
-	#superclass : #BlRepeatedTask,
+	#name : 'BlRepeatedTaskAction',
+	#superclass : 'BlRepeatedTask',
 	#instVars : [
 		'action'
 	],

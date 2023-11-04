@@ -11,8 +11,8 @@ In order to explicitely create an ellipse use extent:
 	BlEllipseGeometry extent: 50@30 ""create an ellipse with width 50 and height 30""
 "
 Class {
-	#name : #BlEllipseGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlEllipseGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#category : 'Bloc-Basic-Geometry'
 }
 

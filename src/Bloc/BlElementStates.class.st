@@ -3,8 +3,8 @@
 
 "
 Class {
-	#name : #BlElementStates,
-	#superclass : #Object,
+	#name : 'BlElementStates',
+	#superclass : 'Object',
 	#instVars : [
 		'announcer',
 		'element',

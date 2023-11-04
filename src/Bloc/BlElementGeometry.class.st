@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementGeometry,
-	#superclass : #Object,
+	#name : 'BlElementGeometry',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Basic-Geometry'

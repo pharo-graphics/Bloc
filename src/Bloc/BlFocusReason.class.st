@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFocusReason,
-	#superclass : #Object,
+	#name : 'BlFocusReason',
+	#superclass : 'Object',
 	#classInstVars : [
 		'uniqueInstance'
 	],

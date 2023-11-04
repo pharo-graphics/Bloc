@@ -16,8 +16,8 @@ both element and allowed bounds should be in element's parent coordinate system
 
 "
 Class {
-	#name : #BlElementAlignment,
-	#superclass : #Object,
+	#name : 'BlElementAlignment',
+	#superclass : 'Object',
 	#classInstVars : [
 		'end',
 		'horizontal',

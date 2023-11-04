@@ -1,6 +1,6 @@
 Class {
-	#name : #BlShearTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlShearTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'coefficient'
 	],

@@ -3,8 +3,8 @@ I am sent by a windowing system when a scaling factor of the window changes
 
 "
 Class {
-	#name : #BlSpaceScaleFactorChangedEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceScaleFactorChangedEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'scaleFactor'
 	],

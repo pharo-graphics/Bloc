@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTelemetrySignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlTelemetrySignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'task',
 		'telemetry'

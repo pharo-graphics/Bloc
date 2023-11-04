@@ -11,8 +11,8 @@ I am a time with an ability to manipulate its speed, make it run faster or go sl
 
 "
 Class {
-	#name : #BlFastForwardedTime,
-	#superclass : #BlTime,
+	#name : 'BlFastForwardedTime',
+	#superclass : 'BlTime',
 	#instVars : [
 		'speed',
 		'previousRealTime',

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlKeyModifiers,
-	#superclass : #Object,
+	#name : 'BlKeyModifiers',
+	#superclass : 'Object',
 	#instVars : [
 		'hashKey'
 	],

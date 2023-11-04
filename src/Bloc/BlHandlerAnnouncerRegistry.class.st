@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHandlerAnnouncerRegistry,
-	#superclass : #BlHandlerRegistry,
+	#name : 'BlHandlerAnnouncerRegistry',
+	#superclass : 'BlHandlerRegistry',
 	#instVars : [
 		'announcer'
 	],

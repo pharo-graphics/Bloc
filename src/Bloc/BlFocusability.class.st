@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFocusability,
-	#superclass : #Object,
+	#name : 'BlFocusability',
+	#superclass : 'Object',
 	#classInstVars : [
 		'after',
 		'before',

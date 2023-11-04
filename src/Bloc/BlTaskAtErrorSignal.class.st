@@ -15,8 +15,8 @@ BlTaskAtErrorSignal is used when BlTaskAtQueue encounters an error during execut
 
 "
 Class {
-	#name : #BlTaskAtErrorSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlTaskAtErrorSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'exception',
 		'message',

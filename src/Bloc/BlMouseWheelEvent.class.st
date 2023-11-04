@@ -11,8 +11,8 @@ I use {{gtClass:BlVector2D}}, indicating the user scroll direction and length.
 
 "
 Class {
-	#name : #BlMouseWheelEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlMouseWheelEvent',
+	#superclass : 'BlMouseEvent',
 	#instVars : [
 		'vector',
 		'isTouch'

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementBorderProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementBorderProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'border'
 	],

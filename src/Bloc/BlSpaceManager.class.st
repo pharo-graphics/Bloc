@@ -11,8 +11,8 @@ Here are some of my core operations:
 
 "
 Class {
-	#name : #BlSpaceManager,
-	#superclass : #Object,
+	#name : 'BlSpaceManager',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

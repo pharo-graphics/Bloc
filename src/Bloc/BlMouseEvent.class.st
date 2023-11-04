@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMouseEvent,
-	#superclass : #BlUIEvent,
+	#name : 'BlMouseEvent',
+	#superclass : 'BlUIEvent',
 	#instVars : [
 		'position',
 		'screenPosition',

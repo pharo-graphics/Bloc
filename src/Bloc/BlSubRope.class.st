@@ -3,8 +3,8 @@ I a special type of rope used to represent a sub rope for the case when rebuildi
 
 "
 Class {
-	#name : #BlSubRope,
-	#superclass : #BlRope,
+	#name : 'BlSubRope',
+	#superclass : 'BlRope',
 	#instVars : [
 		'rope',
 		'offset',

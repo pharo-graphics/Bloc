@@ -1,6 +1,6 @@
 Class {
-	#name : #BlVerticalAlignment,
-	#superclass : #BlElementAlignment,
+	#name : 'BlVerticalAlignment',
+	#superclass : 'BlElementAlignment',
 	#classInstVars : [
 		'bottom',
 		'center',

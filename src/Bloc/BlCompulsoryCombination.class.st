@@ -18,8 +18,8 @@ BlCompulsoryCombination new
 
 "
 Class {
-	#name : #BlCompulsoryCombination,
-	#superclass : #BlKeyCombination,
+	#name : 'BlCompulsoryCombination',
+	#superclass : 'BlKeyCombination',
 	#instVars : [
 		'combinations'
 	],

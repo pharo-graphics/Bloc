@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementPropagatableProperties,
-	#superclass : #BlElementResolvedProperties,
+	#name : 'BlElementPropagatableProperties',
+	#superclass : 'BlElementResolvedProperties',
 	#category : 'Bloc-Basic-Properties'
 }
 

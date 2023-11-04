@@ -3,8 +3,8 @@ I am sent when a universe started a host
 
 "
 Class {
-	#name : #BlParallelUniverseHostStartedSignal,
-	#superclass : #BlParallelUniverseSpaceSignal,
+	#name : 'BlParallelUniverseHostStartedSignal',
+	#superclass : 'BlParallelUniverseSpaceSignal',
 	#instVars : [
 		'host',
 		'isRunning'

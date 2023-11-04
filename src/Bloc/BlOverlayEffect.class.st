@@ -1,6 +1,6 @@
 Class {
-	#name : #BlOverlayEffect,
-	#superclass : #BlElementEffect,
+	#name : 'BlOverlayEffect',
+	#superclass : 'BlElementEffect',
 	#instVars : [
 		'paint'
 	],

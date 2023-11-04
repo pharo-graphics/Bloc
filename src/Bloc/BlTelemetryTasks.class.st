@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTelemetryTasks,
-	#superclass : #LinkedList,
+	#name : 'BlTelemetryTasks',
+	#superclass : 'LinkedList',
 	#category : 'Bloc-Space - Telemetry'
 }
 

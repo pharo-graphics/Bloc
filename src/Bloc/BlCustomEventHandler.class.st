@@ -4,8 +4,8 @@ Then for each interesting event a user should implement a corresponding event ha
 
 "
 Class {
-	#name : #BlCustomEventHandler,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlCustomEventHandler',
+	#superclass : 'BlBasicEventHandler',
 	#category : 'Bloc-Events-Handler'
 }
 

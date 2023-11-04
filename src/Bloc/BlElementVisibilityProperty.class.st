@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementVisibilityProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementVisibilityProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'visibility'
 	],

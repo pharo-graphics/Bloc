@@ -3,8 +3,8 @@ I record events in a collection
 
 "
 Class {
-	#name : #BlMemoryEventRecorder,
-	#superclass : #BlSpaceEventRecorder,
+	#name : 'BlMemoryEventRecorder',
+	#superclass : 'BlSpaceEventRecorder',
 	#instVars : [
 		'events',
 		'time',

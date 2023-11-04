@@ -5,8 +5,8 @@ To not completely break the UI thread we should catch the error and prevent the 
 
 "
 Class {
-	#name : #BlDrawingErrorHandler,
-	#superclass : #BlSingleErrorHandler,
+	#name : 'BlDrawingErrorHandler',
+	#superclass : 'BlSingleErrorHandler',
 	#category : 'Bloc-Basic-Errors'
 }
 

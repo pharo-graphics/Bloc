@@ -1,6 +1,6 @@
 Class {
-	#name : #BlClipOutInsetsEffect,
-	#superclass : #BlClipOutEffect,
+	#name : 'BlClipOutInsetsEffect',
+	#superclass : 'BlClipOutEffect',
 	#instVars : [
 		'insets'
 	],

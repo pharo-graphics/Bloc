@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutErrorHandler,
-	#superclass : #BlSingleErrorHandler,
+	#name : 'BlLayoutErrorHandler',
+	#superclass : 'BlSingleErrorHandler',
 	#category : 'Bloc-Basic-Errors'
 }
 

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementState,
-	#superclass : #Object,
+	#name : 'BlElementState',
+	#superclass : 'Object',
 	#classVars : [
 		'UserPriority'
 	],

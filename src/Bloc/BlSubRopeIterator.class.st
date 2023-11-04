@@ -3,8 +3,8 @@ I am a special iterator used to iterate over sub-rope
 
 "
 Class {
-	#name : #BlSubRopeIterator,
-	#superclass : #BlRopeIterator,
+	#name : 'BlSubRopeIterator',
+	#superclass : 'BlRopeIterator',
 	#instVars : [
 		'subIterator'
 	],

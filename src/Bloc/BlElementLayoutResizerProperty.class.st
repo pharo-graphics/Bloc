@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementLayoutResizerProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementLayoutResizerProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'resizer'
 	],

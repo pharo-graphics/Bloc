@@ -1,6 +1,6 @@
 Class {
-	#name : #BlParallelUniverseSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlParallelUniverseSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'universeId'
 	],

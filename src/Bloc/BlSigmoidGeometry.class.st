@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSigmoidGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlSigmoidGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'from',
 		'to',

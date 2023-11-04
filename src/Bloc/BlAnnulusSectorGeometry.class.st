@@ -5,8 +5,8 @@ See: https://en.wikipedia.org/wiki/Annulus_(mathematics)
 
 "
 Class {
-	#name : #BlAnnulusSectorGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlAnnulusSectorGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'startAngle',
 		'endAngle',

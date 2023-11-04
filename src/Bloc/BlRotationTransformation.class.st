@@ -6,8 +6,8 @@ https://drafts.csswg.org/css-transforms/#valdef-transform-rotate
 
 "
 Class {
-	#name : #BlRotationTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlRotationTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'angle',
 		'axis'

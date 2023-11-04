@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBottomAlignment,
-	#superclass : #BlVerticalAlignment,
+	#name : 'BlBottomAlignment',
+	#superclass : 'BlVerticalAlignment',
 	#category : 'Bloc-Layouts-Alignment'
 }
 

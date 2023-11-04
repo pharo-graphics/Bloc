@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutMatchParentResizer,
-	#superclass : #BlLayoutResizer,
+	#name : 'BlLayoutMatchParentResizer',
+	#superclass : 'BlLayoutResizer',
 	#classInstVars : [
 		'uniqueInstance'
 	],

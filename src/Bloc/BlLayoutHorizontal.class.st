@@ -3,8 +3,8 @@ I am a concrete horizontal orientation
 
 "
 Class {
-	#name : #BlLayoutHorizontal,
-	#superclass : #BlLayoutOrientation,
+	#name : 'BlLayoutHorizontal',
+	#superclass : 'BlLayoutOrientation',
 	#category : 'Bloc-Layouts-Support'
 }
 

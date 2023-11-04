@@ -16,8 +16,8 @@ Behaves as SDL_WINDOWEVENT_SHOWN
 
 "
 Class {
-	#name : #BlSpaceShownEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceShownEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'space'
 	],

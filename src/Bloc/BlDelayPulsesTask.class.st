@@ -17,8 +17,8 @@ Public API and Key Messages
 
 "
 Class {
-	#name : #BlDelayPulsesTask,
-	#superclass : #BlTask,
+	#name : 'BlDelayPulsesTask',
+	#superclass : 'BlTask',
 	#instVars : [
 		'element',
 		'count',

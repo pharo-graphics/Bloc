@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementBoundsUpdater,
-	#superclass : #Object,
+	#name : 'BlElementBoundsUpdater',
+	#superclass : 'Object',
 	#instVars : [
 		'changes'
 	],

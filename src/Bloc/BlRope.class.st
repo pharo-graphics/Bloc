@@ -12,8 +12,8 @@ https://en.wikipedia.org/wiki/Rope_(data_structure)
 
 "
 Class {
-	#name : #BlRope,
-	#superclass : #Object,
+	#name : 'BlRope',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-DataStructure - Rope'

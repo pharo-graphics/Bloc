@@ -5,8 +5,8 @@ I simulate Desktop behaviour of most OS
 
 "
 Class {
-	#name : #BlVisualSelectionHandler,
-	#superclass : #BlSelectionHandler,
+	#name : 'BlVisualSelectionHandler',
+	#superclass : 'BlSelectionHandler',
 	#instVars : [
 		'selection'
 	],

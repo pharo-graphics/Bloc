@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementDynamicProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementDynamicProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'applyAction',
 		'cleanAction'

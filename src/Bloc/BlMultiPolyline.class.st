@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMultiPolyline,
-	#superclass : #BlMultiPolylineGeometry,
+	#name : 'BlMultiPolyline',
+	#superclass : 'BlMultiPolylineGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

@@ -3,8 +3,8 @@ I define a geometry of a bezier curve with N control points (of order N)
 
 "
 Class {
-	#name : #BlBezierCurveGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlBezierCurveGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'controlPoints'
 	],

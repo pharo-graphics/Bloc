@@ -3,8 +3,8 @@ I represent a text selection defined as interval [from...to]
 
 "
 Class {
-	#name : #BlSelection,
-	#superclass : #Object,
+	#name : 'BlSelection',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [

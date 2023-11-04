@@ -6,8 +6,8 @@ I am a part of `=BlDirectEventDispatcher`=
 
 "
 Class {
-	#name : #BlShortcutHandler,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlShortcutHandler',
+	#superclass : 'BlBasicEventHandler',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Events-Handler'

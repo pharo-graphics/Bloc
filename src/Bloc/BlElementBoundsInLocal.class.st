@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementBoundsInLocal,
-	#superclass : #BlElementComputedBounds,
+	#name : 'BlElementBoundsInLocal',
+	#superclass : 'BlElementComputedBounds',
 	#category : 'Bloc-Basic-Bounds'
 }
 

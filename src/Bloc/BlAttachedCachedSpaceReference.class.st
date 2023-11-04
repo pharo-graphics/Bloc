@@ -4,8 +4,8 @@ For performance reasons elements cache a reference to the space so that there is
 
 "
 Class {
-	#name : #BlAttachedCachedSpaceReference,
-	#superclass : #BlAttachedSpaceReference,
+	#name : 'BlAttachedCachedSpaceReference',
+	#superclass : 'BlAttachedSpaceReference',
 	#instVars : [
 		'space'
 	],

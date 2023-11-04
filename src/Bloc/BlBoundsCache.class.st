@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBoundsCache,
-	#superclass : #Object,
+	#name : 'BlBoundsCache',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

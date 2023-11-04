@@ -3,8 +3,8 @@ Is sent when a universe performed a deferred action
 
 "
 Class {
-	#name : #BlParallelUniverseRunDeferredActionSignal,
-	#superclass : #BlParallelUniverseSignal,
+	#name : 'BlParallelUniverseRunDeferredActionSignal',
+	#superclass : 'BlParallelUniverseSignal',
 	#category : 'Bloc-Universe - Parallel'
 }
 

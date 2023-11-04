@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutParentNodeWithEdges,
-	#superclass : #BlLayoutNode,
+	#name : 'BlLayoutParentNodeWithEdges',
+	#superclass : 'BlLayoutNode',
 	#traits : 'TBlLayoutNode + TBlLayoutParentNode',
 	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutParentNode classTrait',
 	#instVars : [

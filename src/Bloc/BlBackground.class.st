@@ -17,8 +17,8 @@ See `BlBackgroundBuilder` for the related examples.
 
 "
 Class {
-	#name : #BlBackground,
-	#superclass : #Object,
+	#name : 'BlBackground',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

@@ -4,8 +4,8 @@ Is responsible for processing {{gtClass:BlKeyboardEvent}} which are sent by the 
 
 "
 Class {
-	#name : #BlKeyboardProcessor,
-	#superclass : #BlBaseEventProcessor,
+	#name : 'BlKeyboardProcessor',
+	#superclass : 'BlBaseEventProcessor',
 	#instVars : [
 		'buffer',
 		'textInputBuffer',

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementHoveredStateEventHandler,
-	#superclass : #BlElementStateEventHandler,
+	#name : 'BlElementHoveredStateEventHandler',
+	#superclass : 'BlElementStateEventHandler',
 	#category : 'Bloc-Basic-State'
 }
 

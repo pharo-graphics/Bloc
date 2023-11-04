@@ -6,8 +6,8 @@ I do not have any logic and can only used as orientation flag. Layouts that have
 
 "
 Class {
-	#name : #BlLayoutOrientation,
-	#superclass : #Object,
+	#name : 'BlLayoutOrientation',
+	#superclass : 'Object',
 	#classVars : [
 		'horizontal',
 		'vertical'

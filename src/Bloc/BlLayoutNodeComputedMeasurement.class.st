@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutNodeComputedMeasurement,
-	#superclass : #BlLayoutNodeMeasurement,
+	#name : 'BlLayoutNodeComputedMeasurement',
+	#superclass : 'BlLayoutNodeMeasurement',
 	#instVars : [
 		'position',
 		'extent'

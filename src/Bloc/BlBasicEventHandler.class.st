@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBasicEventHandler,
-	#superclass : #Object,
+	#name : 'BlBasicEventHandler',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Events-Handler'

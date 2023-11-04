@@ -3,8 +3,8 @@ I am a special type of rope that plays a role of a node in a binary tree and con
 
 "
 Class {
-	#name : #BlConcatenationRope,
-	#superclass : #BlRope,
+	#name : 'BlConcatenationRope',
+	#superclass : 'BlRope',
 	#instVars : [
 		'left',
 		'right',

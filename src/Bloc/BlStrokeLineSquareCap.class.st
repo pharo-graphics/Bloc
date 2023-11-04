@@ -5,8 +5,8 @@ See BlStrokeLineCap for other types
 
 "
 Class {
-	#name : #BlStrokeLineSquareCap,
-	#superclass : #BlStrokeLineCap,
+	#name : 'BlStrokeLineSquareCap',
+	#superclass : 'BlStrokeLineCap',
 	#category : 'Bloc-Paint-Support'
 }
 

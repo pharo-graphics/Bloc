@@ -20,8 +20,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlTaskExecutionSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlTaskExecutionSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'task',
 		'action'

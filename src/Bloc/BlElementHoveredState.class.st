@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementHoveredState,
-	#superclass : #BlElementUniqueState,
+	#name : 'BlElementHoveredState',
+	#superclass : 'BlElementUniqueState',
 	#category : 'Bloc-Basic-State'
 }
 

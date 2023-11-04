@@ -1,6 +1,6 @@
 Class {
-	#name : #BlCompositeAlignment,
-	#superclass : #BlElementAlignment,
+	#name : 'BlCompositeAlignment',
+	#superclass : 'BlElementAlignment',
 	#instVars : [
 		'vertical',
 		'horizontal',

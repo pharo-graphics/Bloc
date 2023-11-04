@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementLayoutProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementLayoutProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'layout'
 	],

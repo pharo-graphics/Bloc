@@ -5,8 +5,8 @@ I am used by Layouts
 
 "
 Class {
-	#name : #BlExtentMeasurementSpec,
-	#superclass : #Object,
+	#name : 'BlExtentMeasurementSpec',
+	#superclass : 'Object',
 	#instVars : [
 		'widthSpec',
 		'heightSpec'

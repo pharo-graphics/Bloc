@@ -6,8 +6,8 @@ I reverse an underlying collection of children.
 
 "
 Class {
-	#name : #BlChildrenReversed,
-	#superclass : #BlChildrenSubset,
+	#name : 'BlChildrenReversed',
+	#superclass : 'BlChildrenSubset',
 	#category : 'Bloc-Basic-Children'
 }
 

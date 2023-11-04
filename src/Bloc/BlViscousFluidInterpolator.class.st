@@ -1,6 +1,6 @@
 Class {
-	#name : #BlViscousFluidInterpolator,
-	#superclass : #BlInterpolator,
+	#name : 'BlViscousFluidInterpolator',
+	#superclass : 'BlInterpolator',
 	#classVars : [
 		'FluidNormalize',
 		'FluidOffset',

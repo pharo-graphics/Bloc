@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementFlags,
-	#superclass : #BlBitflags,
+	#name : 'BlElementFlags',
+	#superclass : 'BlBitflags',
 	#classVars : [
 		'NeedsLayout',
 		'NeedsPaint',

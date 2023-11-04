@@ -12,8 +12,8 @@ If you want to make element transparent and preserve ability to handle events se
 
 "
 Class {
-	#name : #BlVisibility,
-	#superclass : #Object,
+	#name : 'BlVisibility',
+	#superclass : 'Object',
 	#classInstVars : [
 		'gone',
 		'hidden',

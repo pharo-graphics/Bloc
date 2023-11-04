@@ -1,5 +1,5 @@
 Class {
-	#name : #BlContextMenuCursor,
-	#superclass : #BlNamedCursor,
+	#name : 'BlContextMenuCursor',
+	#superclass : 'BlNamedCursor',
 	#category : 'Bloc-Space - Cursor'
 }

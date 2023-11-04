@@ -4,8 +4,8 @@ The use of gaussian shadow is quite expensive in terms of rendering. Therefore I
 
 "
 Class {
-	#name : #BlGaussianShadowEffect,
-	#superclass : #BlShadowEffect,
+	#name : 'BlGaussianShadowEffect',
+	#superclass : 'BlShadowEffect',
 	#instVars : [
 		'width'
 	],

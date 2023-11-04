@@ -1,6 +1,6 @@
 Class {
-	#name : #BlEasingBounceOut,
-	#superclass : #BlEasingBaseBounce,
+	#name : 'BlEasingBounceOut',
+	#superclass : 'BlEasingBaseBounce',
 	#category : 'Bloc-Basic-Interpolators'
 }
 

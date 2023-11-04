@@ -1,6 +1,6 @@
 Class {
-	#name : #BlStartAlignment,
-	#superclass : #BlRelativeAlignment,
+	#name : 'BlStartAlignment',
+	#superclass : 'BlRelativeAlignment',
 	#category : 'Bloc-Layouts-Alignment'
 }
 

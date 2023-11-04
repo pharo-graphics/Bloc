@@ -5,8 +5,8 @@ https://drafts.csswg.org/css-transforms/#interpolation-of-2d-matrices
 
 "
 Class {
-	#name : #BlMatrixDecomposition2D,
-	#superclass : #BlMatrixDecomposition,
+	#name : 'BlMatrixDecomposition2D',
+	#superclass : 'BlMatrixDecomposition',
 	#instVars : [
 		'translation',
 		'scale',

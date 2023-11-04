@@ -4,8 +4,8 @@ I composite `BlAffineTransformation` objects.
 There can be only one transformation instance per type.
 "
 Class {
-	#name : #BlAffineCompositeTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlAffineCompositeTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'transformations'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementPaddingProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementPaddingProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'padding'
 	],

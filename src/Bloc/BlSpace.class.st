@@ -18,8 +18,8 @@ A common use case is to quit the application when some particular space is close
 
 "
 Class {
-	#name : #BlSpace,
-	#superclass : #Object,
+	#name : 'BlSpace',
+	#superclass : 'Object',
 	#traits : 'TBlEventTarget + TBlSpaceProperties + TBlDebug',
 	#classTraits : 'TBlEventTarget classTrait + TBlSpaceProperties classTrait + TBlDebug classTrait',
 	#instVars : [

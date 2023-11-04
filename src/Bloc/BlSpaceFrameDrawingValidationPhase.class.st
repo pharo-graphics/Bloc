@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceFrameDrawingValidationPhase,
-	#superclass : #BlSpaceFramePhase,
+	#name : 'BlSpaceFrameDrawingValidationPhase',
+	#superclass : 'BlSpaceFramePhase',
 	#category : 'Bloc-Space - Frame'
 }
 

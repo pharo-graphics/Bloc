@@ -3,8 +3,8 @@ The event is being manually forwarded to other dispatchers
 
 "
 Class {
-	#name : #BlEventTraversalForwardingStep,
-	#superclass : #BlEventTraversalStep,
+	#name : 'BlEventTraversalForwardingStep',
+	#superclass : 'BlEventTraversalStep',
 	#category : 'Bloc-Events'
 }
 

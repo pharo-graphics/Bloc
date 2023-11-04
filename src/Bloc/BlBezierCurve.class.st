@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBezierCurve,
-	#superclass : #BlBezierCurveGeometry,
+	#name : 'BlBezierCurve',
+	#superclass : 'BlBezierCurveGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

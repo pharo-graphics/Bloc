@@ -3,8 +3,8 @@ I am used to record space events coming from the host window
 
 "
 Class {
-	#name : #BlSpaceEventRecorder,
-	#superclass : #Object,
+	#name : 'BlSpaceEventRecorder',
+	#superclass : 'Object',
 	#category : 'Bloc-Space - Events'
 }
 

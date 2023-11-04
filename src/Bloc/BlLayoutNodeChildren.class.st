@@ -1,7 +1,7 @@
 Class {
-	#name : #BlLayoutNodeChildren,
-	#superclass : #Array,
-	#type : #variable,
+	#name : 'BlLayoutNodeChildren',
+	#superclass : 'Array',
+	#type : 'variable',
 	#category : 'Bloc-Layouts-Model'
 }
 

@@ -4,8 +4,8 @@ I am able to add attributes to any type of rope by decorating it with attribute 
 
 "
 Class {
-	#name : #BlAttributeRope,
-	#superclass : #BlRope,
+	#name : 'BlAttributeRope',
+	#superclass : 'BlRope',
 	#instVars : [
 		'attributes',
 		'rope'

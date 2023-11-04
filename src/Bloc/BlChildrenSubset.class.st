@@ -20,8 +20,8 @@ To preserve the composition of iterators I hold a reference to the initial {{gtC
 
 "
 Class {
-	#name : #BlChildrenSubset,
-	#superclass : #BlChildren,
+	#name : 'BlChildrenSubset',
+	#superclass : 'BlChildren',
 	#instVars : [
 		'subsetArray',
 		'supersetChildren'

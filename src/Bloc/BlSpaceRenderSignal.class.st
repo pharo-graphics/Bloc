@@ -20,8 +20,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlSpaceRenderSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlSpaceRenderSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'space',
 		'action'

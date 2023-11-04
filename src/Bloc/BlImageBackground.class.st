@@ -8,8 +8,8 @@ Examples are provided by the class {{gtClass:BlImageBackgroundExamples}}.
 
 "
 Class {
-	#name : #BlImageBackground,
-	#superclass : #BlBackground,
+	#name : 'BlImageBackground',
+	#superclass : 'BlBackground',
 	#instVars : [
 		'image'
 	],

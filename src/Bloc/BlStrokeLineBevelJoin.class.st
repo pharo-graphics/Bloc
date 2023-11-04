@@ -5,8 +5,8 @@ See BlStrokeLineJoin for other types
 
 "
 Class {
-	#name : #BlStrokeLineBevelJoin,
-	#superclass : #BlStrokeLineJoin,
+	#name : 'BlStrokeLineBevelJoin',
+	#superclass : 'BlStrokeLineJoin',
 	#category : 'Bloc-Paint-Support'
 }
 

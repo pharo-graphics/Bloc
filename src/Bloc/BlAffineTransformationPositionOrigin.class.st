@@ -3,8 +3,8 @@ I allow users to provide a fixed location that should be used as transformation 
 
 "
 Class {
-	#name : #BlAffineTransformationPositionOrigin,
-	#superclass : #BlAffineTransformationOrigin,
+	#name : 'BlAffineTransformationPositionOrigin',
+	#superclass : 'BlAffineTransformationOrigin',
 	#instVars : [
 		'position'
 	],

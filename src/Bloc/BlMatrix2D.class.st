@@ -10,8 +10,8 @@ My components are named according to mathematical convention:
 
 "
 Class {
-	#name : #BlMatrix2D,
-	#superclass : #BlMatrix,
+	#name : 'BlMatrix2D',
+	#superclass : 'BlMatrix',
 	#instVars : [
 		'x',
 		'y',

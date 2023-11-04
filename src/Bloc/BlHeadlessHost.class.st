@@ -3,8 +3,8 @@ I am a fallback host that is chosen if there are no other available and supporte
 
 "
 Class {
-	#name : #BlHeadlessHost,
-	#superclass : #BlHost,
+	#name : 'BlHeadlessHost',
+	#superclass : 'BlHost',
 	#instVars : [
 		'isRunning'
 	],

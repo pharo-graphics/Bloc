@@ -3,8 +3,8 @@ I am a shortcut registry and contain a collection of `=BlShortcut`=
 
 "
 Class {
-	#name : #BlShortcutRegistry,
-	#superclass : #Collection,
+	#name : 'BlShortcutRegistry',
+	#superclass : 'Collection',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

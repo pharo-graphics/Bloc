@@ -24,8 +24,8 @@ Opacity example:
 
 "
 Class {
-	#name : #BlCompositeBackground,
-	#superclass : #BlBackground,
+	#name : 'BlCompositeBackground',
+	#superclass : 'BlBackground',
 	#instVars : [
 		'backgrounds'
 	],

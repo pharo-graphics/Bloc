@@ -5,8 +5,8 @@ This process starts with the Space, then Root, then the Element, and so on throu
 
 "
 Class {
-	#name : #BlEventTraversalCapturingStep,
-	#superclass : #BlEventTraversalStep,
+	#name : 'BlEventTraversalCapturingStep',
+	#superclass : 'BlEventTraversalStep',
 	#category : 'Bloc-Events'
 }
 

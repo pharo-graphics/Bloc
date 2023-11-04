@@ -3,8 +3,8 @@ Is signalled when someone requests a universe to open a space.
 
 "
 Class {
-	#name : #BlParallelUniverseOpenSpaceRequestSignal,
-	#superclass : #BlParallelUniverseSpaceSignal,
+	#name : 'BlParallelUniverseOpenSpaceRequestSignal',
+	#superclass : 'BlParallelUniverseSpaceSignal',
 	#instVars : [
 		'isRunning'
 	],

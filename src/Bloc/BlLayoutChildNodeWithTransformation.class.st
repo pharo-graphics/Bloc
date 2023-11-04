@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutChildNodeWithTransformation,
-	#superclass : #BlLayoutNode,
+	#name : 'BlLayoutChildNodeWithTransformation',
+	#superclass : 'BlLayoutNode',
 	#traits : 'TBlLayoutNode + TBlLayoutChildNode',
 	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutChildNode classTrait',
 	#instVars : [

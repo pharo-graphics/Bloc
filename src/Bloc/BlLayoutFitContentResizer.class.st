@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutFitContentResizer,
-	#superclass : #BlLayoutResizer,
+	#name : 'BlLayoutFitContentResizer',
+	#superclass : 'BlLayoutResizer',
 	#classInstVars : [
 		'uniqueInstance'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementGeometryProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementGeometryProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'geometry'
 	],

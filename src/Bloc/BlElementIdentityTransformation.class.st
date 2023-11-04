@@ -4,8 +4,8 @@ I'm an element's identity transformation: a stateless transformation object that
 I provide a singleton instance.
 "
 Class {
-	#name : #BlElementIdentityTransformation,
-	#superclass : #BlElementTransformation,
+	#name : 'BlElementIdentityTransformation',
+	#superclass : 'BlElementTransformation',
 	#classInstVars : [
 		'uniqueInstance'
 	],

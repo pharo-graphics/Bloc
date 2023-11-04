@@ -10,8 +10,8 @@ I meant to be immutable, therefore factor can be only set using factory method #
 
 "
 Class {
-	#name : #BlDecelerateInterpolator,
-	#superclass : #BlInterpolator,
+	#name : 'BlDecelerateInterpolator',
+	#superclass : 'BlInterpolator',
 	#instVars : [
 		'factor'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBaseEventProcessor,
-	#superclass : #Object,
+	#name : 'BlBaseEventProcessor',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

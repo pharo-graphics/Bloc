@@ -2,8 +2,8 @@
 The geometry is used to define the geometry to be drawn and the interaction area.
 "
 Class {
-	#name : #BlElementVectorGeometry,
-	#superclass : #BlElementGeometry,
+	#name : 'BlElementVectorGeometry',
+	#superclass : 'BlElementGeometry',
 	#instVars : [
 		'extent',
 		'pathCache'

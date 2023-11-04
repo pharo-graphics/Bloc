@@ -3,8 +3,8 @@ I am a special event dispatcher designed for high frequency events such as ""pos
 
 "
 Class {
-	#name : #BlElementEventDispatcher,
-	#superclass : #BlBubblingEventDispatcher,
+	#name : 'BlElementEventDispatcher',
+	#superclass : 'BlBubblingEventDispatcher',
 	#instVars : [
 		'activatedElementEvents',
 		'activatedGeneralEvents'

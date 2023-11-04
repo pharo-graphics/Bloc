@@ -9,8 +9,8 @@ I am a just a traditional real time.
 
 "
 Class {
-	#name : #BlRealTime,
-	#superclass : #BlTime,
+	#name : 'BlRealTime',
+	#superclass : 'BlTime',
 	#category : 'Bloc-Universe'
 }
 

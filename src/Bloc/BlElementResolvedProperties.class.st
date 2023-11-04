@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementResolvedProperties,
-	#superclass : #BlElementMaybeResolvedProperties,
+	#name : 'BlElementResolvedProperties',
+	#superclass : 'BlElementMaybeResolvedProperties',
 	#instVars : [
 		'properties'
 	],

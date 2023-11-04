@@ -1,6 +1,6 @@
 Class {
-	#name : #BlKeyUpEvent,
-	#superclass : #BlKeyboardEvent,
+	#name : 'BlKeyUpEvent',
+	#superclass : 'BlKeyboardEvent',
 	#category : 'Bloc-Events'
 }
 

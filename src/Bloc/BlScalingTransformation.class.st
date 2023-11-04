@@ -8,8 +8,8 @@ https://drafts.csswg.org/css-transforms/#valdef-transform-scale
 
 "
 Class {
-	#name : #BlScalingTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlScalingTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'scale'
 	],

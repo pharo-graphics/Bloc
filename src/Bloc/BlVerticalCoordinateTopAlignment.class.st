@@ -1,6 +1,6 @@
 Class {
-	#name : #BlVerticalCoordinateTopAlignment,
-	#superclass : #BlVerticalCoordinateAlignment,
+	#name : 'BlVerticalCoordinateTopAlignment',
+	#superclass : 'BlVerticalCoordinateAlignment',
 	#category : 'Bloc-Layouts-Alignment'
 }
 

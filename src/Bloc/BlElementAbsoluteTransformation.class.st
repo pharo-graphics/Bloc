@@ -3,8 +3,8 @@ I represent an absolute transformation defined only by transformation matrix
 
 "
 Class {
-	#name : #BlElementAbsoluteTransformation,
-	#superclass : #BlElementTransformation,
+	#name : 'BlElementAbsoluteTransformation',
+	#superclass : 'BlElementTransformation',
 	#instVars : [
 		'matrix'
 	],

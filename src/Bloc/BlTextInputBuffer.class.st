@@ -4,8 +4,8 @@ Collects all the text input events during a frame
 
 "
 Class {
-	#name : #BlTextInputBuffer,
-	#superclass : #Object,
+	#name : 'BlTextInputBuffer',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

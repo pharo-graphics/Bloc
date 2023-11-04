@@ -1,6 +1,6 @@
 Class {
-	#name : #BlIgnoredLayoutConstraints,
-	#superclass : #BlLayoutConstraints,
+	#name : 'BlIgnoredLayoutConstraints',
+	#superclass : 'BlLayoutConstraints',
 	#category : 'Bloc-Layouts-Basic'
 }
 

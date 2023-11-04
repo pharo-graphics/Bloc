@@ -1,6 +1,6 @@
 Class {
-	#name : #BlEasing,
-	#superclass : #BlInterpolator,
+	#name : 'BlEasing',
+	#superclass : 'BlInterpolator',
 	#category : 'Bloc-Basic-Interpolators'
 }
 

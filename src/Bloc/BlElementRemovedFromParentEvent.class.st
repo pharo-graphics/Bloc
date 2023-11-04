@@ -18,8 +18,8 @@ parent removeChild: child
 
 "
 Class {
-	#name : #BlElementRemovedFromParentEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementRemovedFromParentEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

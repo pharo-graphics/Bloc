@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMemoryTelemetry,
-	#superclass : #BlTelemetry,
+	#name : 'BlMemoryTelemetry',
+	#superclass : 'BlTelemetry',
 	#instVars : [
 		'tasks',
 		'tasksStack'

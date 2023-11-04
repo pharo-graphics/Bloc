@@ -3,8 +3,8 @@ TODO needs some work to use it in dropdown to reveal the same toggle
 
 "
 Class {
-	#name : #BlClipOutGeometryEffect,
-	#superclass : #BlClipOutEffect,
+	#name : 'BlClipOutGeometryEffect',
+	#superclass : 'BlClipOutEffect',
 	#instVars : [
 		'geometry',
 		'offset'

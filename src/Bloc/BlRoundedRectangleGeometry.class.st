@@ -10,8 +10,8 @@ In order to explicitely create a rectangle use extent:
 	BlRectangle extent: 50@30 ""create a rectangle with width 50 and height 30""
 "
 Class {
-	#name : #BlRoundedRectangleGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlRoundedRectangleGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'cornerRadii',
 		'center'

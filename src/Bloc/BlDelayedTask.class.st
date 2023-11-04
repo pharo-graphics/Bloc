@@ -19,8 +19,8 @@ The task state is currently not thread-safe, so the time between checking the ta
 
 "
 Class {
-	#name : #BlDelayedTask,
-	#superclass : #BlTask,
+	#name : 'BlDelayedTask',
+	#superclass : 'BlTask',
 	#instVars : [
 		'delay',
 		'element',

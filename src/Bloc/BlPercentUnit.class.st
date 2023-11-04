@@ -1,6 +1,6 @@
 Class {
-	#name : #BlPercentUnit,
-	#superclass : #BlUnit,
+	#name : 'BlPercentUnit',
+	#superclass : 'BlUnit',
 	#category : 'Bloc-Basic-Units'
 }
 

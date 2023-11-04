@@ -5,8 +5,8 @@ Is intended to be subclassed for custom object-oriented ids
 
 "
 Class {
-	#name : #BlElementUniqueId,
-	#superclass : #BlElementId,
+	#name : 'BlElementUniqueId',
+	#superclass : 'BlElementId',
 	#classInstVars : [
 		'uniqueInstance'
 	],

@@ -10,8 +10,8 @@ It can be simplified to
 
 "
 Class {
-	#name : #BlQuinticInterpolator,
-	#superclass : #BlInterpolator,
+	#name : 'BlQuinticInterpolator',
+	#superclass : 'BlInterpolator',
 	#category : 'Bloc-Basic-Interpolators'
 }
 

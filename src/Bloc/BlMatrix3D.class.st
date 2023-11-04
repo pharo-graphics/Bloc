@@ -11,8 +11,8 @@ My components are named according to mathematical convention:
 
 "
 Class {
-	#name : #BlMatrix3D,
-	#superclass : #BlMatrix,
+	#name : 'BlMatrix3D',
+	#superclass : 'BlMatrix',
 	#instVars : [
 		'sx',
 		'shy0',

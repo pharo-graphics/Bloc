@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceFrame,
-	#superclass : #Object,
+	#name : 'BlSpaceFrame',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

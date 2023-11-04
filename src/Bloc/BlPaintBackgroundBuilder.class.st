@@ -1,6 +1,6 @@
 Class {
-	#name : #BlPaintBackgroundBuilder,
-	#superclass : #BlBackgroundBuilder,
+	#name : 'BlPaintBackgroundBuilder',
+	#superclass : 'BlBackgroundBuilder',
 	#instVars : [
 		'paint'
 	],

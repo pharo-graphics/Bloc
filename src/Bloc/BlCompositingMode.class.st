@@ -1,6 +1,6 @@
 Class {
-	#name : #BlCompositingMode,
-	#superclass : #Object,
+	#name : 'BlCompositingMode',
+	#superclass : 'Object',
 	#classInstVars : [
 		'uniqueInstance'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementDisjunctionState,
-	#superclass : #BlElementCompositeState,
+	#name : 'BlElementDisjunctionState',
+	#superclass : 'BlElementCompositeState',
 	#category : 'Bloc-Basic-State'
 }
 

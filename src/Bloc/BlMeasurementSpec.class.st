@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMeasurementSpec,
-	#superclass : #Object,
+	#name : 'BlMeasurementSpec',
+	#superclass : 'Object',
 	#instVars : [
 		'size',
 		'mode'

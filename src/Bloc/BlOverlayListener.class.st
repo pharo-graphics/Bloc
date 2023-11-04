@@ -3,8 +3,8 @@ I am an event listener that overlay element adds to the reference element in ord
 
 "
 Class {
-	#name : #BlOverlayListener,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BlOverlayListener',
+	#superclass : 'BlCustomEventHandler',
 	#instVars : [
 		'overlayElement',
 		'attachmentsCount'

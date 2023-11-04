@@ -4,8 +4,8 @@ Extends `BlElementStyles` by adding an ability to customise `BlForwardedElementS
 
 "
 Class {
-	#name : #BlForwardedElementStyles,
-	#superclass : #BlElementStyles,
+	#name : 'BlForwardedElementStyles',
+	#superclass : 'BlElementStyles',
 	#instVars : [
 		'targetObject'
 	],

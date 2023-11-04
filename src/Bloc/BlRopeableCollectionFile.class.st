@@ -46,8 +46,8 @@ Once that has been done, #size should be modified to raise an exception if the a
 
 "
 Class {
-	#name : #BlRopeableCollectionFile,
-	#superclass : #Object,
+	#name : 'BlRopeableCollectionFile',
+	#superclass : 'Object',
 	#instVars : [
 		'fileReference',
 		'strict',

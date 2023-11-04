@@ -3,8 +3,8 @@ I inform that an element was attached to a scene. I can be added to any Bloc ele
 
 "
 Class {
-	#name : #BlElementAddedToSceneGraphEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementAddedToSceneGraphEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

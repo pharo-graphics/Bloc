@@ -3,8 +3,8 @@ I am a composite text selection consisting of multiple independent non-overlappi
 
 "
 Class {
-	#name : #BlCompositeSelection,
-	#superclass : #BlSelection,
+	#name : 'BlCompositeSelection',
+	#superclass : 'BlSelection',
 	#instVars : [
 		'selections'
 	],

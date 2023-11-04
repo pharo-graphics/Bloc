@@ -1,6 +1,6 @@
 Class {
-	#name : #BlUnit,
-	#superclass : #Object,
+	#name : 'BlUnit',
+	#superclass : 'Object',
 	#classInstVars : [
 		'uniqueInstance'
 	],

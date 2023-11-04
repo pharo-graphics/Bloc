@@ -3,8 +3,8 @@ Is sent when element's extent in local coordinates changes.
 
 "
 Class {
-	#name : #BlElementExtentChangedEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementExtentChangedEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

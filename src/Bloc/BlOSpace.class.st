@@ -4,8 +4,8 @@ It should be removed as soon as we convert all the examples as tests and move ev
 
 "
 Class {
-	#name : #BlOSpace,
-	#superclass : #BlSpace,
+	#name : 'BlOSpace',
+	#superclass : 'BlSpace',
 	#category : 'Bloc-Space'
 }
 

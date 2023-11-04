@@ -23,8 +23,8 @@ Create a 3D vector:
 
 "
 Class {
-	#name : #BlVector,
-	#superclass : #Object,
+	#name : 'BlVector',
+	#superclass : 'Object',
 	#classVars : [
 		'One',
 		'XAxis',

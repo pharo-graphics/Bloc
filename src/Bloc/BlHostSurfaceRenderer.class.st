@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHostSurfaceRenderer,
-	#superclass : #Object,
+	#name : 'BlHostSurfaceRenderer',
+	#superclass : 'Object',
 	#category : 'Bloc-Universe - Renderer'
 }
 

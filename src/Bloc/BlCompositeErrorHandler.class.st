@@ -1,6 +1,6 @@
 Class {
-	#name : #BlCompositeErrorHandler,
-	#superclass : #BlErrorHandler,
+	#name : 'BlCompositeErrorHandler',
+	#superclass : 'BlErrorHandler',
 	#instVars : [
 		'errors',
 		'errorHandlers'

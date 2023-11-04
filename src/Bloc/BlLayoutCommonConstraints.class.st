@@ -33,8 +33,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlLayoutCommonConstraints,
-	#superclass : #BlLayoutConstraints,
+	#name : 'BlLayoutCommonConstraints',
+	#superclass : 'BlLayoutConstraints',
 	#instVars : [
 		'constraints',
 		'position',

@@ -4,8 +4,8 @@ See BlLayoutAlignment for more info.
 
 "
 Class {
-	#name : #BlRightAlignment,
-	#superclass : #BlHorizontalAlignment,
+	#name : 'BlRightAlignment',
+	#superclass : 'BlHorizontalAlignment',
 	#category : 'Bloc-Layouts-Alignment'
 }
 

@@ -11,8 +11,8 @@ BlEventForwarder
 
 "
 Class {
-	#name : #BlEventForwarder,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlEventForwarder',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'eventTarget',
 		'eventHandler'

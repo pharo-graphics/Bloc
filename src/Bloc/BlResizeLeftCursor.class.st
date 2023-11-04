@@ -1,6 +1,6 @@
 Class {
-	#name : #BlResizeLeftCursor,
-	#superclass : #BlNamedCursor,
+	#name : 'BlResizeLeftCursor',
+	#superclass : 'BlNamedCursor',
 	#category : 'Bloc-Space - Cursor'
 }
 

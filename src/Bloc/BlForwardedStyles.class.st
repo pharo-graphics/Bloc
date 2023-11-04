@@ -5,8 +5,8 @@ Extends `BlStyles` by adding an ability to customise `BlForwardedStyles>>#target
 
 "
 Class {
-	#name : #BlForwardedStyles,
-	#superclass : #BlStyles,
+	#name : 'BlForwardedStyles',
+	#superclass : 'BlStyles',
 	#instVars : [
 		'targetObject'
 	],

@@ -6,8 +6,8 @@ I support forward and reverse directions of enumeration
 
 "
 Class {
-	#name : #BlRopeIterator,
-	#superclass : #Object,
+	#name : 'BlRopeIterator',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

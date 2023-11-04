@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementPropertyWithStatus,
-	#superclass : #Object,
+	#name : 'BlElementPropertyWithStatus',
+	#superclass : 'Object',
 	#instVars : [
 		'property',
 		'status'

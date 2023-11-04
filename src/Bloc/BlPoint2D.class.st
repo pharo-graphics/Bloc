@@ -1,6 +1,6 @@
 Class {
-	#name : #BlPoint2D,
-	#superclass : #BlPoint,
+	#name : 'BlPoint2D',
+	#superclass : 'BlPoint',
 	#instVars : [
 		'x',
 		'y'

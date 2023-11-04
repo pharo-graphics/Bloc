@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDelayedTaskAction,
-	#superclass : #BlDelayedTask,
+	#name : 'BlDelayedTaskAction',
+	#superclass : 'BlDelayedTask',
 	#instVars : [
 		'action'
 	],

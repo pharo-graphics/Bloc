@@ -1,6 +1,6 @@
 Class {
-	#name : #BlShortcutHandlerWithoutShortcuts,
-	#superclass : #BlShortcutHandler,
+	#name : 'BlShortcutHandlerWithoutShortcuts',
+	#superclass : 'BlShortcutHandler',
 	#classInstVars : [
 		'uniqueInstance'
 	],

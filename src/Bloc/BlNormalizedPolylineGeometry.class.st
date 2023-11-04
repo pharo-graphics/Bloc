@@ -3,8 +3,8 @@ I am a special type of a polyline whose vertices are within [0...1]@[0...1]
 
 "
 Class {
-	#name : #BlNormalizedPolylineGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlNormalizedPolylineGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'vertices'
 	],

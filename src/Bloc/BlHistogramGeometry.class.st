@@ -8,8 +8,8 @@ See {{gtClass:BlHistogramExamples}} for more examples
 
 "
 Class {
-	#name : #BlHistogramGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlHistogramGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'values',
 		'orientation'

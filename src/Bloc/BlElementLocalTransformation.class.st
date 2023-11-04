@@ -5,8 +5,8 @@ Transformation matrix is computed lazily up-on request for #matrix.
 
 "
 Class {
-	#name : #BlElementLocalTransformation,
-	#superclass : #BlElementDynamicTransformation,
+	#name : 'BlElementLocalTransformation',
+	#superclass : 'BlElementDynamicTransformation',
 	#instVars : [
 		'affineTransformation'
 	],

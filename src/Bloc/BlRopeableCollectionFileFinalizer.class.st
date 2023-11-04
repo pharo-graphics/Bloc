@@ -1,6 +1,6 @@
 Class {
-	#name : #BlRopeableCollectionFileFinalizer,
-	#superclass : #Object,
+	#name : 'BlRopeableCollectionFileFinalizer',
+	#superclass : 'Object',
 	#instVars : [
 		'binaryStream'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutNodeElementAction,
-	#superclass : #Object,
+	#name : 'BlLayoutNodeElementAction',
+	#superclass : 'Object',
 	#category : 'Bloc-Layouts-Model'
 }
 

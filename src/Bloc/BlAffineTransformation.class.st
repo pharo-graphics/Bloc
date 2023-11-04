@@ -6,8 +6,8 @@ https://en.wikipedia.org/wiki/Affine_transformation
 
 "
 Class {
-	#name : #BlAffineTransformation,
-	#superclass : #Object,
+	#name : 'BlAffineTransformation',
+	#superclass : 'Object',
 	#instVars : [
 		'origin'
 	],

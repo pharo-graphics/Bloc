@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementForwardedStyle,
-	#superclass : #BlElementStyle,
+	#name : 'BlElementForwardedStyle',
+	#superclass : 'BlElementStyle',
 	#instVars : [
 		'targetObject'
 	],

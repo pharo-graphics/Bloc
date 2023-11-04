@@ -1,6 +1,6 @@
 Class {
-	#name : #BlEllipse,
-	#superclass : #BlEllipseGeometry,
+	#name : 'BlEllipse',
+	#superclass : 'BlEllipseGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

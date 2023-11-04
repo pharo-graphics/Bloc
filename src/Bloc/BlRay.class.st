@@ -5,8 +5,8 @@ I consist of a starting `=#point`= and a direction `=#vector`=
 
 "
 Class {
-	#name : #BlRay,
-	#superclass : #Object,
+	#name : 'BlRay',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

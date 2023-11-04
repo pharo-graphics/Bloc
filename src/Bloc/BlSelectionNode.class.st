@@ -5,8 +5,8 @@ I am a binary node with `=selection`= playing a role of a key (lowest value) and
 
 "
 Class {
-	#name : #BlSelectionNode,
-	#superclass : #Object,
+	#name : 'BlSelectionNode',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

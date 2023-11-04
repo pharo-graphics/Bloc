@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementCompositeState,
-	#superclass : #BlElementState,
+	#name : 'BlElementCompositeState',
+	#superclass : 'BlElementState',
 	#instVars : [
 		'left',
 		'right'

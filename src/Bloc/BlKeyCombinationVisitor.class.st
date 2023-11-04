@@ -8,8 +8,8 @@ Example:
 
 "
 Class {
-	#name : #BlKeyCombinationVisitor,
-	#superclass : #Object,
+	#name : 'BlKeyCombinationVisitor',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Events-KeyBinding'

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHorizontalCoordinateAlignment,
-	#superclass : #BlHorizontalAlignment,
+	#name : 'BlHorizontalCoordinateAlignment',
+	#superclass : 'BlHorizontalAlignment',
 	#instVars : [
 		'coordinate',
 		'relativeAlignment'

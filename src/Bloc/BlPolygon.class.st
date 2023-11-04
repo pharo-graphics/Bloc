@@ -1,6 +1,6 @@
 Class {
-	#name : #BlPolygon,
-	#superclass : #BlPolygonGeometry,
+	#name : 'BlPolygon',
+	#superclass : 'BlPolygonGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

@@ -9,8 +9,8 @@ Hence the separation between my subclasses.
 
 "
 Class {
-	#name : #BlElementCachedTransformation,
-	#superclass : #Object,
+	#name : 'BlElementCachedTransformation',
+	#superclass : 'Object',
 	#category : 'Bloc-Basic-Transformations'
 }
 

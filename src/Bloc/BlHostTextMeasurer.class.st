@@ -8,8 +8,8 @@ Used mainly
 
 "
 Class {
-	#name : #BlHostTextMeasurer,
-	#superclass : #Object,
+	#name : 'BlHostTextMeasurer',
+	#superclass : 'Object',
 	#category : 'Bloc-Universe - Renderer'
 }
 

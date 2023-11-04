@@ -6,8 +6,8 @@ https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation#Using_quaternion_
 
 "
 Class {
-	#name : #BlQuaternion,
-	#superclass : #Object,
+	#name : 'BlQuaternion',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

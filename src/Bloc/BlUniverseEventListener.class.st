@@ -1,6 +1,6 @@
 Class {
-	#name : #BlUniverseEventListener,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlUniverseEventListener',
+	#superclass : 'BlBasicEventHandler',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

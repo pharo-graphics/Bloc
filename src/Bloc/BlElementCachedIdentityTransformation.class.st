@@ -2,8 +2,8 @@
 I cache a `BlElementIdentityTransformation` and provide a singleton instance.
 "
 Class {
-	#name : #BlElementCachedIdentityTransformation,
-	#superclass : #BlElementCachedTransformation,
+	#name : 'BlElementCachedIdentityTransformation',
+	#superclass : 'BlElementCachedTransformation',
 	#instVars : [
 		'identityMatrix'
 	],

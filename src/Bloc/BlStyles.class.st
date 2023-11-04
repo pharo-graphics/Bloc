@@ -22,8 +22,8 @@ A `BlElementStyle` can be removed from the styles with the help of `BlStyles>>#r
 
 "
 Class {
-	#name : #BlStyles,
-	#superclass : #Object,
+	#name : 'BlStyles',
+	#superclass : 'Object',
 	#traits : 'TBlElementCommonStyles + TBlElementStyles',
 	#classTraits : 'TBlElementCommonStyles classTrait + TBlElementStyles classTrait',
 	#instVars : [

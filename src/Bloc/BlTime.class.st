@@ -5,8 +5,8 @@ Bloc components must not directly rely on system time or hardcode it in any plac
 
 "
 Class {
-	#name : #BlTime,
-	#superclass : #Object,
+	#name : 'BlTime',
+	#superclass : 'Object',
 	#instVars : [
 		'frozenTime',
 		'frozen'

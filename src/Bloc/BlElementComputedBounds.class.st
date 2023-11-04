@@ -3,8 +3,8 @@ I am a special type of element bounds with an ability to be in-place converted b
 
 "
 Class {
-	#name : #BlElementComputedBounds,
-	#superclass : #BlElementBounds,
+	#name : 'BlElementComputedBounds',
+	#superclass : 'BlElementBounds',
 	#instVars : [
 		'bounds'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutGraphIncomingEdges,
-	#superclass : #BlLayoutGraphEdgesIterator,
+	#name : 'BlLayoutGraphIncomingEdges',
+	#superclass : 'BlLayoutGraphEdgesIterator',
 	#category : 'Bloc-Layouts-Model'
 }
 

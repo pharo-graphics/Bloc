@@ -4,8 +4,8 @@ It is recommended to refer my unique instance since I am stateless and my superc
 
 "
 Class {
-	#name : #BlTransparentBackground,
-	#superclass : #BlBackground,
+	#name : 'BlTransparentBackground',
+	#superclass : 'BlBackground',
 	#classInstVars : [
 		'uniqueInstance'
 	],

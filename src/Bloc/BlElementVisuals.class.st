@@ -3,8 +3,8 @@
 
 "
 Class {
-	#name : #BlElementVisuals,
-	#superclass : #Object,
+	#name : 'BlElementVisuals',
+	#superclass : 'Object',
 	#classVars : [
 		'DefaultBackground',
 		'DefaultBorder',

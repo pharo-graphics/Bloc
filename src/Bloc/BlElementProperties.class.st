@@ -5,8 +5,8 @@ For example font size is by default inherited by the children
 
 "
 Class {
-	#name : #BlElementProperties,
-	#superclass : #Object,
+	#name : 'BlElementProperties',
+	#superclass : 'Object',
 	#category : 'Bloc-Basic-Properties'
 }
 

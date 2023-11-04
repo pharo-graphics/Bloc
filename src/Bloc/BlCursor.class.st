@@ -5,8 +5,8 @@ There are two general types of a cursor: {{gtClass:BlNamedCursor}} and {{gtClass
 
 "
 Class {
-	#name : #BlCursor,
-	#superclass : #Object,
+	#name : 'BlCursor',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Space - Cursor'

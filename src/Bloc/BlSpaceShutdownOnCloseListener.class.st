@@ -16,8 +16,8 @@ space show
 
 "
 Class {
-	#name : #BlSpaceShutdownOnCloseListener,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlSpaceShutdownOnCloseListener',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'shouldSave'
 	],

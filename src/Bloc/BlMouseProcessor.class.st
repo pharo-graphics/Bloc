@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMouseProcessor,
-	#superclass : #BlBaseEventProcessor,
+	#name : 'BlMouseProcessor',
+	#superclass : 'BlBaseEventProcessor',
 	#instVars : [
 		'lastEnteredTargets',
 		'lastOverTarget',

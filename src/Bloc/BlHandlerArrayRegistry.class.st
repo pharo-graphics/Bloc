@@ -1,6 +1,6 @@
 Class {
-	#name : #BlHandlerArrayRegistry,
-	#superclass : #BlHandlerRegistry,
+	#name : 'BlHandlerArrayRegistry',
+	#superclass : 'BlHandlerRegistry',
 	#instVars : [
 		'handlers'
 	],

@@ -7,8 +7,8 @@ I provide several creation methods but usually four points are necessary to full
 
 "
 Class {
-	#name : #BlInsets,
-	#superclass : #Object,
+	#name : 'BlInsets',
+	#superclass : 'Object',
 	#instVars : [
 		'top',
 		'left',

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBaseFocusEvent,
-	#superclass : #BlUIEvent,
+	#name : 'BlBaseFocusEvent',
+	#superclass : 'BlUIEvent',
 	#instVars : [
 		'reason'
 	],

@@ -5,8 +5,8 @@ Note: transformation may change even if an element has no parent
 
 "
 Class {
-	#name : #BlElementTransformationChangedEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementTransformationChangedEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

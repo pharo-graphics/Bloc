@@ -4,8 +4,8 @@ Null space reference {{gtClass:BlSpaceReference}} is set when an element is `rem
 
 "
 Class {
-	#name : #BlNullSpaceReference,
-	#superclass : #BlSpaceReference,
+	#name : 'BlNullSpaceReference',
+	#superclass : 'BlSpaceReference',
 	#classInstVars : [
 		'uniqueInstance'
 	],

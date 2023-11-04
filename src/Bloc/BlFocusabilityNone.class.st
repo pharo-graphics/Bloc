@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFocusabilityNone,
-	#superclass : #BlFocusability,
+	#name : 'BlFocusabilityNone',
+	#superclass : 'BlFocusability',
 	#category : 'Bloc-Basic-Properties'
 }
 

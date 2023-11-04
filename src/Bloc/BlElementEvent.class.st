@@ -5,8 +5,8 @@ See `BlElementEventExamples` for related examples.
 
 "
 Class {
-	#name : #BlElementEvent,
-	#superclass : #BlEvent,
+	#name : 'BlElementEvent',
+	#superclass : 'BlEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

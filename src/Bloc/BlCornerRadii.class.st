@@ -7,8 +7,8 @@ Negative values are not allowed.
 
 "
 Class {
-	#name : #BlCornerRadii,
-	#superclass : #Object,
+	#name : 'BlCornerRadii',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

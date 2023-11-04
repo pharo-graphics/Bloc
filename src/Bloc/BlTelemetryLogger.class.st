@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTelemetryLogger,
-	#superclass : #MemoryLogger,
+	#name : 'BlTelemetryLogger',
+	#superclass : 'MemoryLogger',
 	#instVars : [
 		'telemetryClass'
 	],

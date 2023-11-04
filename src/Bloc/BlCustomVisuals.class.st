@@ -13,8 +13,8 @@ BlElement >> effect: anEffect
 ```
 "
 Class {
-	#name : #BlCustomVisuals,
-	#superclass : #BlElementVisuals,
+	#name : 'BlCustomVisuals',
+	#superclass : 'BlElementVisuals',
 	#instVars : [
 		'geometry',
 		'border',

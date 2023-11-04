@@ -1,6 +1,6 @@
 Class {
-	#name : #BlRectangleGeometry,
-	#superclass : #BlElementGeometry,
+	#name : 'BlRectangleGeometry',
+	#superclass : 'BlElementGeometry',
 	#category : 'Bloc-Basic-Geometry'
 }
 

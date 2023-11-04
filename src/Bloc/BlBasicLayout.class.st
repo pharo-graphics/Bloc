@@ -3,8 +3,8 @@ I am a very basic layout that supports very simple measurement and positions ele
 
 "
 Class {
-	#name : #BlBasicLayout,
-	#superclass : #BlLayout,
+	#name : 'BlBasicLayout',
+	#superclass : 'BlLayout',
 	#classInstVars : [
 		'uniqueInstance'
 	],

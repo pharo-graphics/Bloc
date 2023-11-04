@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutExactResizer,
-	#superclass : #BlLayoutResizer,
+	#name : 'BlLayoutExactResizer',
+	#superclass : 'BlLayoutResizer',
 	#instVars : [
 		'size'
 	],

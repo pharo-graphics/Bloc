@@ -79,8 +79,8 @@ BlLayout allSubclasses
 
 "
 Class {
-	#name : #BlLayout,
-	#superclass : #Object,
+	#name : 'BlLayout',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Layouts-Basic'

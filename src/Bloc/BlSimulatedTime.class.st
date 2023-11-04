@@ -11,8 +11,8 @@ I am a simulated time that must be progressed manually by setting `=#date:`= dir
 
 "
 Class {
-	#name : #BlSimulatedTime,
-	#superclass : #BlTime,
+	#name : 'BlSimulatedTime',
+	#superclass : 'BlTime',
 	#instVars : [
 		'date'
 	],

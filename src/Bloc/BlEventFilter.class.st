@@ -1,6 +1,6 @@
 Class {
-	#name : #BlEventFilter,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlEventFilter',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'eventClass'
 	],

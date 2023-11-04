@@ -4,8 +4,8 @@ I am very useful for chainable bounds transformations and may be transformed in-
 
 "
 Class {
-	#name : #BlBounds,
-	#superclass : #Object,
+	#name : 'BlBounds',
+	#superclass : 'Object',
 	#instVars : [
 		'left',
 		'top',

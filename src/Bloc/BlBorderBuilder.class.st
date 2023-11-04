@@ -8,8 +8,8 @@ BlBorder builder
 
 "
 Class {
-	#name : #BlBorderBuilder,
-	#superclass : #Object,
+	#name : 'BlBorderBuilder',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

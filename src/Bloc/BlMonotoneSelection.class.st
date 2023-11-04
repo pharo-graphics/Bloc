@@ -5,8 +5,8 @@ Monotone selection can not be empty
 
 "
 Class {
-	#name : #BlMonotoneSelection,
-	#superclass : #BlSelection,
+	#name : 'BlMonotoneSelection',
+	#superclass : 'BlSelection',
 	#instVars : [
 		'from',
 		'to'

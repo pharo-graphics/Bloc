@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSquare,
-	#superclass : #BlSquareGeometry,
+	#name : 'BlSquare',
+	#superclass : 'BlSquareGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMouseDownOutsideEvent,
-	#superclass : #BlMousePickOutsideEvent,
+	#name : 'BlMouseDownOutsideEvent',
+	#superclass : 'BlMousePickOutsideEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 

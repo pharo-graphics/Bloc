@@ -11,8 +11,8 @@ BlEventHandler
 
 "
 Class {
-	#name : #BlEventHandler,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlEventHandler',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'action',
 		'eventClass'

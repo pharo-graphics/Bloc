@@ -1,6 +1,6 @@
 Class {
-	#name : #BlWidthEqualizer,
-	#superclass : #BlEqualizer,
+	#name : 'BlWidthEqualizer',
+	#superclass : 'BlEqualizer',
 	#instVars : [
 		'widthBlock'
 	],

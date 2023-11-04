@@ -3,8 +3,8 @@ The event has arrived at the event's target. Event listeners registered for this
 
 "
 Class {
-	#name : #BlEventTraversalTargetStep,
-	#superclass : #BlEventTraversalStep,
+	#name : 'BlEventTraversalTargetStep',
+	#superclass : 'BlEventTraversalStep',
 	#category : 'Bloc-Events'
 }
 

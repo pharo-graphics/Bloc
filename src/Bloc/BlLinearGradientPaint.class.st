@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLinearGradientPaint,
-	#superclass : #BlGradientPaint,
+	#name : 'BlLinearGradientPaint',
+	#superclass : 'BlGradientPaint',
 	#instVars : [
 		'start',
 		'end'

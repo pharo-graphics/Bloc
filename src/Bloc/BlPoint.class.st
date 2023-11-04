@@ -1,6 +1,6 @@
 Class {
-	#name : #BlPoint,
-	#superclass : #Object,
+	#name : 'BlPoint',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#category : 'Bloc-Basic-Math'

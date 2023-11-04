@@ -1,6 +1,6 @@
 Class {
-	#name : #BlArrayObjectPool,
-	#superclass : #BlObjectPool,
+	#name : 'BlArrayObjectPool',
+	#superclass : 'BlObjectPool',
 	#instVars : [
 		'poolSize',
 		'pool'

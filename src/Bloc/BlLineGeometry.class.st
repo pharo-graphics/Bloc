@@ -2,8 +2,8 @@
 I define a geometry of a straight line
 "
 Class {
-	#name : #BlLineGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlLineGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'from',
 		'to'

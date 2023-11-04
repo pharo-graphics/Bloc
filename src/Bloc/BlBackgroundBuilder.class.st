@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBackgroundBuilder,
-	#superclass : #Object,
+	#name : 'BlBackgroundBuilder',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

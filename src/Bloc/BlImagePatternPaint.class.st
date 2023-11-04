@@ -1,6 +1,6 @@
 Class {
-	#name : #BlImagePatternPaint,
-	#superclass : #BlPaint,
+	#name : 'BlImagePatternPaint',
+	#superclass : 'BlPaint',
 	#instVars : [
 		'form'
 	],

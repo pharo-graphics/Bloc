@@ -21,8 +21,8 @@ BlTextIndexEOS defers actual calculation of the index as long as possible, i.e. 
 
 "
 Class {
-	#name : #BlTextIndexEOS,
-	#superclass : #BlTextIndex,
+	#name : 'BlTextIndexEOS',
+	#superclass : 'BlTextIndex',
 	#instVars : [
 		'text',
 		'offset',

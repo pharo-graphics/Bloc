@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFocusTransferEvent,
-	#superclass : #BlBaseFocusEvent,
+	#name : 'BlFocusTransferEvent',
+	#superclass : 'BlBaseFocusEvent',
 	#instVars : [
 		'transfer'
 	],

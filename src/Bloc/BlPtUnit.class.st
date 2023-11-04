@@ -1,6 +1,6 @@
 Class {
-	#name : #BlPtUnit,
-	#superclass : #BlUnit,
+	#name : 'BlPtUnit',
+	#superclass : 'BlUnit',
 	#category : 'Bloc-Basic-Units'
 }
 

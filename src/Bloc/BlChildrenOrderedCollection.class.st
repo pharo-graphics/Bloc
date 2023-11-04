@@ -8,8 +8,8 @@ Examples are provided by the class {{gtClass:BlChildrenOrderedCollectionExamples
 
 "
 Class {
-	#name : #BlChildrenOrderedCollection,
-	#superclass : #BlChildrenCollection,
+	#name : 'BlChildrenOrderedCollection',
+	#superclass : 'BlChildrenCollection',
 	#instVars : [
 		'collection'
 	],

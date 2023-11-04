@@ -5,8 +5,8 @@ I allow users to quickly check if child bounds given by `childStart` and `childE
 
 "
 Class {
-	#name : #BlBoundsMatcher,
-	#superclass : #Object,
+	#name : 'BlBoundsMatcher',
+	#superclass : 'Object',
 	#instVars : [
 		'constraints',
 		'parentStart',

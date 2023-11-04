@@ -1,6 +1,6 @@
 Class {
-	#name : #BlRadialGradientPaint,
-	#superclass : #BlGradientPaint,
+	#name : 'BlRadialGradientPaint',
+	#superclass : 'BlGradientPaint',
 	#instVars : [
 		'center',
 		'radius'

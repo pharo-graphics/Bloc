@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementUnresolvedProperties,
-	#superclass : #BlElementMaybeResolvedProperties,
+	#name : 'BlElementUnresolvedProperties',
+	#superclass : 'BlElementMaybeResolvedProperties',
 	#category : 'Bloc-Basic-Properties'
 }
 

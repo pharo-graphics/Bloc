@@ -16,8 +16,8 @@ I must be set to `=consumed`= if there was a matching shortcut.
 
 "
 Class {
-	#name : #BlShortcutEvent,
-	#superclass : #BlUIEvent,
+	#name : 'BlShortcutEvent',
+	#superclass : 'BlUIEvent',
 	#instVars : [
 		'buffer',
 		'isRepeated'

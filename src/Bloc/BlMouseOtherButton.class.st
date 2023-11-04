@@ -4,8 +4,8 @@ Nowadays there can be any number of mouse buttons, we have to support them
 
 "
 Class {
-	#name : #BlMouseOtherButton,
-	#superclass : #BlMouseButton,
+	#name : 'BlMouseOtherButton',
+	#superclass : 'BlMouseButton',
 	#instVars : [
 		'code'
 	],

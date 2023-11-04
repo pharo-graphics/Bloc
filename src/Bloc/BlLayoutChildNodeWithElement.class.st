@@ -4,8 +4,8 @@ Is used to keep track of the child node and its associated element
 
 "
 Class {
-	#name : #BlLayoutChildNodeWithElement,
-	#superclass : #BlLayoutNode,
+	#name : 'BlLayoutChildNodeWithElement',
+	#superclass : 'BlLayoutNode',
 	#traits : 'TBlLayoutNode + TBlLayoutChildNode',
 	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutChildNode classTrait',
 	#instVars : [

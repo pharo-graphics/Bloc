@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMousePickEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlMousePickEvent',
+	#superclass : 'BlMouseEvent',
 	#category : 'Bloc-Events'
 }
 

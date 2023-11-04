@@ -28,8 +28,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlVerticalCoordinateAlignment,
-	#superclass : #BlVerticalAlignment,
+	#name : 'BlVerticalCoordinateAlignment',
+	#superclass : 'BlVerticalAlignment',
 	#instVars : [
 		'coordinate',
 		'relativeAlignment'

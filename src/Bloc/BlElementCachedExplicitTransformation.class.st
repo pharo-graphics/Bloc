@@ -3,8 +3,8 @@ I cache a `BlElementTransformation`.
 
 "
 Class {
-	#name : #BlElementCachedExplicitTransformation,
-	#superclass : #BlElementCachedTransformation,
+	#name : 'BlElementCachedExplicitTransformation',
+	#superclass : 'BlElementCachedTransformation',
 	#instVars : [
 		'matrix',
 		'elementTransformation',

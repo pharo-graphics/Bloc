@@ -5,8 +5,8 @@ I usually represent a single character, but I can be composed of multiples code 
 
 "
 Class {
-	#name : #BlTextInputEvent,
-	#superclass : #BlUIEvent,
+	#name : 'BlTextInputEvent',
+	#superclass : 'BlUIEvent',
 	#instVars : [
 		'text'
 	],

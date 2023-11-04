@@ -9,8 +9,8 @@ The order of fired events:
 
 "
 Class {
-	#name : #BlClickEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlClickEvent',
+	#superclass : 'BlMouseEvent',
 	#category : 'Bloc-Events'
 }
 

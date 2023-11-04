@@ -1,6 +1,6 @@
 Class {
-	#name : #BlNullTelemetry,
-	#superclass : #BlTelemetry,
+	#name : 'BlNullTelemetry',
+	#superclass : 'BlTelemetry',
 	#classInstVars : [
 		'uniqueInstance'
 	],

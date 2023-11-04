@@ -4,8 +4,8 @@ Detached space reference {{gtClass:BlSpaceReference}} is set when an element is 
 
 "
 Class {
-	#name : #BlDetachedSpaceReference,
-	#superclass : #BlSpaceReference,
+	#name : 'BlDetachedSpaceReference',
+	#superclass : 'BlSpaceReference',
 	#classInstVars : [
 		'uniqueInstance'
 	],

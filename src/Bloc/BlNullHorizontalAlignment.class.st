@@ -1,6 +1,6 @@
 Class {
-	#name : #BlNullHorizontalAlignment,
-	#superclass : #BlNullAlignment,
+	#name : 'BlNullHorizontalAlignment',
+	#superclass : 'BlNullAlignment',
 	#classInstVars : [
 		'rightToLeft',
 		'leftToRight'

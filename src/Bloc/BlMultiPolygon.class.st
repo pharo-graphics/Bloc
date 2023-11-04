@@ -1,6 +1,6 @@
 Class {
-	#name : #BlMultiPolygon,
-	#superclass : #BlMultiPolygonGeometry,
+	#name : 'BlMultiPolygon',
+	#superclass : 'BlMultiPolygonGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 

@@ -3,8 +3,8 @@ Is sent after a host space was created and assigned to the space
 
 "
 Class {
-	#name : #BlParallelUniverseHostSpaceCreatedSignal,
-	#superclass : #BlParallelUniverseSpaceSignal,
+	#name : 'BlParallelUniverseHostSpaceCreatedSignal',
+	#superclass : 'BlParallelUniverseSpaceSignal',
 	#category : 'Bloc-Universe - Parallel'
 }
 

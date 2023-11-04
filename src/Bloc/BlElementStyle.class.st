@@ -8,8 +8,8 @@ Since `BlElementStyle` uses `TBlElementProperties`, it counds with API to add an
 
 "
 Class {
-	#name : #BlElementStyle,
-	#superclass : #Object,
+	#name : 'BlElementStyle',
+	#superclass : 'Object',
 	#traits : 'TBlElementProperties',
 	#classTraits : 'TBlElementProperties classTrait',
 	#instVars : [

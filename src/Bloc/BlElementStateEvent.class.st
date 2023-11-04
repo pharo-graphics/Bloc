@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementStateEvent,
-	#superclass : #BlEvent,
+	#name : 'BlElementStateEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'element'
 	],

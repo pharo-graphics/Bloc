@@ -3,8 +3,8 @@ I sort a collection of children by perimeter in ascending order.
 
 "
 Class {
-	#name : #BlChildrenSortedByPerimeter,
-	#superclass : #BlChildrenSubset,
+	#name : 'BlChildrenSortedByPerimeter',
+	#superclass : 'BlChildrenSubset',
 	#category : 'Bloc-Basic-Children'
 }
 

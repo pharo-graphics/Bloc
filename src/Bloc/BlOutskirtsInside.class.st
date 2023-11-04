@@ -1,6 +1,6 @@
 Class {
-	#name : #BlOutskirtsInside,
-	#superclass : #BlOutskirts,
+	#name : 'BlOutskirtsInside',
+	#superclass : 'BlOutskirts',
 	#category : 'Bloc-Basic-Border'
 }
 

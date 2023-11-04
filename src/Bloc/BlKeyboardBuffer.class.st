@@ -5,8 +5,8 @@ I allow `=BlKeyboardProcessor`= to sent key still pressed event every frame if t
 
 "
 Class {
-	#name : #BlKeyboardBuffer,
-	#superclass : #Object,
+	#name : 'BlKeyboardBuffer',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

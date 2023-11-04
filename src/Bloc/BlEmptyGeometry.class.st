@@ -1,6 +1,6 @@
 Class {
-	#name : #BlEmptyGeometry,
-	#superclass : #BlElementGeometry,
+	#name : 'BlEmptyGeometry',
+	#superclass : 'BlElementGeometry',
 	#category : 'Bloc-Basic-Geometry'
 }
 

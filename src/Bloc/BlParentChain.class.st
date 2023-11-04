@@ -1,6 +1,6 @@
 Class {
-	#name : #BlParentChain,
-	#superclass : #DoubleLinkedList,
+	#name : 'BlParentChain',
+	#superclass : 'DoubleLinkedList',
 	#category : 'Bloc-Space - Support'
 }
 

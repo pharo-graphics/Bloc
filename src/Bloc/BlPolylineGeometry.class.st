@@ -10,8 +10,8 @@ BlPolyline vertices: {
 }
 "
 Class {
-	#name : #BlPolylineGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlPolylineGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'vertices'
 	],

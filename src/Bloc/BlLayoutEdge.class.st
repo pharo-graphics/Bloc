@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutEdge,
-	#superclass : #Object,
+	#name : 'BlLayoutEdge',
+	#superclass : 'Object',
 	#instVars : [
 		'fromNode',
 		'toNode'

@@ -5,8 +5,8 @@ May be used to implement text selection or desktop like selection behaviour
 
 "
 Class {
-	#name : #BlSelectionHandler,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BlSelectionHandler',
+	#superclass : 'BlCustomEventHandler',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

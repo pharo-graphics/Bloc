@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceEventListener,
-	#superclass : #BlEventListener,
+	#name : 'BlSpaceEventListener',
+	#superclass : 'BlEventListener',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

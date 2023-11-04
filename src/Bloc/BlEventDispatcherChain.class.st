@@ -3,8 +3,8 @@ I am a chain of BlEventDispatchers
 
 "
 Class {
-	#name : #BlEventDispatcherChain,
-	#superclass : #Object,
+	#name : 'BlEventDispatcherChain',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

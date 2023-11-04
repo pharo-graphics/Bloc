@@ -17,8 +17,8 @@ space close
 
 "
 Class {
-	#name : #BlSpaceClosedEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceClosedEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'space'
 	],

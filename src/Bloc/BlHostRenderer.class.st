@@ -3,8 +3,8 @@ Host renderer is resposible for the overall rendering logic
 
 "
 Class {
-	#name : #BlHostRenderer,
-	#superclass : #Object,
+	#name : 'BlHostRenderer',
+	#superclass : 'Object',
 	#instVars : [
 		'session',
 		'surface',

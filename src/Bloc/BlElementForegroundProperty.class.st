@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementForegroundProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementForegroundProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'foreground'
 	],

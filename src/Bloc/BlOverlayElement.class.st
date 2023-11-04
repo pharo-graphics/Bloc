@@ -10,8 +10,8 @@ container addChild: overlay.
 
 "
 Class {
-	#name : #BlOverlayElement,
-	#superclass : #BlElement,
+	#name : 'BlOverlayElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'overlayListener',
 		'referenceElement'

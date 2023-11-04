@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBlurEffect,
-	#superclass : #BlElementEffect,
+	#name : 'BlBlurEffect',
+	#superclass : 'BlElementEffect',
 	#instVars : [
 		'radius'
 	],

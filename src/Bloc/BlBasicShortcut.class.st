@@ -14,8 +14,8 @@ A shortcut can be added or removed from the element by using {{gtMethod:BlElemen
 
 "
 Class {
-	#name : #BlBasicShortcut,
-	#superclass : #Object,
+	#name : 'BlBasicShortcut',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

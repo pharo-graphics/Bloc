@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementLocalBounds,
-	#superclass : #BlElementBounds,
+	#name : 'BlElementLocalBounds',
+	#superclass : 'BlElementBounds',
 	#instVars : [
 		'extent',
 		'position'

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFocusProcessor,
-	#superclass : #BlBaseEventProcessor,
+	#name : 'BlFocusProcessor',
+	#superclass : 'BlBaseEventProcessor',
 	#instVars : [
 		'focusChain'
 	],

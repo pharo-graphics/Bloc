@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBitflags,
-	#superclass : #Object,
+	#name : 'BlBitflags',
+	#superclass : 'Object',
 	#instVars : [
 		'value'
 	],

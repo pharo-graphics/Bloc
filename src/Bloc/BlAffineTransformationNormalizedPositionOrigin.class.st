@@ -3,8 +3,8 @@ I allow users to provide a fixed normalized location (top left is 0@0 and bottom
 
 "
 Class {
-	#name : #BlAffineTransformationNormalizedPositionOrigin,
-	#superclass : #BlAffineTransformationOrigin,
+	#name : 'BlAffineTransformationNormalizedPositionOrigin',
+	#superclass : 'BlAffineTransformationOrigin',
 	#instVars : [
 		'position'
 	],

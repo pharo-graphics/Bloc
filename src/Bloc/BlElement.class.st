@@ -44,8 +44,8 @@ You can learn Bloc following a memory game tutorial: [00-memory-game.pillar](fil
 
 "
 Class {
-	#name : #BlElement,
-	#superclass : #Object,
+	#name : 'BlElement',
+	#superclass : 'Object',
 	#traits : 'TBlTransformable + TBlEventTarget + TBlDebug',
 	#classTraits : 'TBlTransformable classTrait + TBlEventTarget classTrait + TBlDebug classTrait',
 	#instVars : [

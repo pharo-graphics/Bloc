@@ -5,8 +5,8 @@ This is known as bubbling, and occurs only if BlEvent>>#canBePropagated is true.
 
 "
 Class {
-	#name : #BlEventTraversalBubblingStep,
-	#superclass : #BlEventTraversalStep,
+	#name : 'BlEventTraversalBubblingStep',
+	#superclass : 'BlEventTraversalStep',
 	#category : 'Bloc-Events'
 }
 

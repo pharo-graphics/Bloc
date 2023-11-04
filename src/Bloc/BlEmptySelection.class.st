@@ -3,8 +3,8 @@ I am an empty selection
 
 "
 Class {
-	#name : #BlEmptySelection,
-	#superclass : #BlSelection,
+	#name : 'BlEmptySelection',
+	#superclass : 'BlSelection',
 	#category : 'Bloc-Utilities - Selection'
 }
 

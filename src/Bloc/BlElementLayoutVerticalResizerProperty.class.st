@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementLayoutVerticalResizerProperty,
-	#superclass : #BlElementLayoutResizerProperty,
+	#name : 'BlElementLayoutVerticalResizerProperty',
+	#superclass : 'BlElementLayoutResizerProperty',
 	#category : 'Bloc-Basic-Properties'
 }
 

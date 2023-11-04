@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceMovedEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceMovedEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'position'
 	],

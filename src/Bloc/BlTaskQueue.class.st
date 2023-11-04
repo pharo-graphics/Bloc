@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTaskQueue,
-	#superclass : #Object,
+	#name : 'BlTaskQueue',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

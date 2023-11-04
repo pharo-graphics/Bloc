@@ -1,6 +1,6 @@
 Class {
-	#name : #BlCompositingWithoutLayerMode,
-	#superclass : #BlCompositingMode,
+	#name : 'BlCompositingWithoutLayerMode',
+	#superclass : 'BlCompositingMode',
 	#category : 'Bloc-Basic-Support'
 }
 

@@ -6,8 +6,8 @@ The {{gtMethod:BlValueWithUnit>>#value|label=value}} can be any object, but in m
 
 "
 Class {
-	#name : #BlValueWithUnit,
-	#superclass : #Object,
+	#name : 'BlValueWithUnit',
+	#superclass : 'Object',
 	#instVars : [
 		'value',
 		'unit'

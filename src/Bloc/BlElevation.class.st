@@ -8,8 +8,8 @@ Note: Elevation is not influenced by transformation matrix!
 
 "
 Class {
-	#name : #BlElevation,
-	#superclass : #Object,
+	#name : 'BlElevation',
+	#superclass : 'Object',
 	#instVars : [
 		'elevation'
 	],

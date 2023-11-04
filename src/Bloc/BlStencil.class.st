@@ -35,8 +35,8 @@ anElement := aStencil create.
 
 "
 Class {
-	#name : #BlStencil,
-	#superclass : #Object,
+	#name : 'BlStencil',
+	#superclass : 'Object',
 	#category : 'Bloc-Stencil'
 }
 

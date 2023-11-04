@@ -6,8 +6,8 @@ I do not have any logic and can only used as direction flag. Layouts that have d
 
 "
 Class {
-	#name : #BlLayoutDirection,
-	#superclass : #Object,
+	#name : 'BlLayoutDirection',
+	#superclass : 'Object',
 	#classVars : [
 		'leftToRight',
 		'rightToLeft'

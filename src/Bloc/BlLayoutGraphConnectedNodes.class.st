@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutGraphConnectedNodes,
-	#superclass : #BlLayoutGraphIterator,
+	#name : 'BlLayoutGraphConnectedNodes',
+	#superclass : 'BlLayoutGraphIterator',
 	#instVars : [
 		'edges'
 	],

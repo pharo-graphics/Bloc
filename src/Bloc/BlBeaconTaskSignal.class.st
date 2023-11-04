@@ -5,8 +5,8 @@ I inform about scheduling and executing of  {{gtClass:BlTask}}.
 
 "
 Class {
-	#name : #BlBeaconTaskSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlBeaconTaskSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'task',
 		'callingMethod',

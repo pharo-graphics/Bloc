@@ -12,8 +12,8 @@ element transform
 
 "
 Class {
-	#name : #BlTransformationBuilder,
-	#superclass : #Object,
+	#name : 'BlTransformationBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'origin',
 		'target',

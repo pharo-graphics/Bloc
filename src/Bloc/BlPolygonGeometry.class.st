@@ -10,8 +10,8 @@ BlPolygon vertices: {
 }
 "
 Class {
-	#name : #BlPolygonGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlPolygonGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'vertices'
 	],

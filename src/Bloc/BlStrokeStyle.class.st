@@ -1,6 +1,6 @@
 Class {
-	#name : #BlStrokeStyle,
-	#superclass : #Object,
+	#name : 'BlStrokeStyle',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

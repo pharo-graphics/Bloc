@@ -3,8 +3,8 @@ I am a composite transformation that consists of other element transformations, 
 
 "
 Class {
-	#name : #BlElementCompositeTransformation,
-	#superclass : #BlElementDynamicTransformation,
+	#name : 'BlElementCompositeTransformation',
+	#superclass : 'BlElementDynamicTransformation',
 	#instVars : [
 		'elementTransformations'
 	],

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlChildrenSortedByElevationReversed,
-	#superclass : #BlChildrenSubset,
+	#name : 'BlChildrenSortedByElevationReversed',
+	#superclass : 'BlChildrenSubset',
 	#category : 'Bloc-Basic-Children'
 }
 

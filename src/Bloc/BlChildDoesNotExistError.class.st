@@ -1,6 +1,6 @@
 Class {
-	#name : #BlChildDoesNotExistError,
-	#superclass : #Error,
+	#name : 'BlChildDoesNotExistError',
+	#superclass : 'Error',
 	#instVars : [
 		'parent',
 		'child'

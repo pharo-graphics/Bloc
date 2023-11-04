@@ -5,8 +5,8 @@ Text containing elements should react on this event and select a corresponding p
 
 "
 Class {
-	#name : #BlElementSelectionAcquiredEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementSelectionAcquiredEvent',
+	#superclass : 'BlElementEvent',
 	#instVars : [
 		'bounds'
 	],

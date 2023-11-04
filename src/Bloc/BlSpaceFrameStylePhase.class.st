@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceFrameStylePhase,
-	#superclass : #BlSpaceFramePhase,
+	#name : 'BlSpaceFrameStylePhase',
+	#superclass : 'BlSpaceFramePhase',
 	#category : 'Bloc-Space - Frame'
 }
 

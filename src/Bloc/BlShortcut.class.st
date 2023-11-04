@@ -4,8 +4,8 @@ Use {{gtClass:BlShortcutWithAction}} instead
 
 "
 Class {
-	#name : #BlShortcut,
-	#superclass : #BlShortcutWithAction,
+	#name : 'BlShortcut',
+	#superclass : 'BlShortcutWithAction',
 	#category : 'Bloc-Events-KeyBinding'
 }
 

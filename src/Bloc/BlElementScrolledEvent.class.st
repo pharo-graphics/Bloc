@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementScrolledEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementScrolledEvent',
+	#superclass : 'BlElementEvent',
 	#instVars : [
 		'delta'
 	],

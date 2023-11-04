@@ -4,8 +4,8 @@ For more information see class comment of BlMeasurementMode
 
 "
 Class {
-	#name : #BlMeasurementAtMostMode,
-	#superclass : #BlMeasurementMode,
+	#name : 'BlMeasurementAtMostMode',
+	#superclass : 'BlMeasurementMode',
 	#category : 'Bloc-Layouts-Support'
 }
 

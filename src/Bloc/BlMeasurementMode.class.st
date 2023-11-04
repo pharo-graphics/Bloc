@@ -12,8 +12,8 @@ My main methods are
 
 "
 Class {
-	#name : #BlMeasurementMode,
-	#superclass : #Object,
+	#name : 'BlMeasurementMode',
+	#superclass : 'Object',
 	#classInstVars : [
 		'atMost',
 		'exact',

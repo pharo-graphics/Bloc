@@ -1,6 +1,6 @@
 Class {
-	#name : #BlKeyboardKeyTable,
-	#superclass : #Object,
+	#name : 'BlKeyboardKeyTable',
+	#superclass : 'Object',
 	#category : 'Bloc-Universe'
 }
 

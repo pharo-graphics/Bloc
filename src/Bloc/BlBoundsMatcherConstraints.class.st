@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBoundsMatcherConstraints,
-	#superclass : #BlBitflags,
+	#name : 'BlBoundsMatcherConstraints',
+	#superclass : 'BlBitflags',
 	#classVars : [
 		'ChildEndAndParentEnd',
 		'ChildEndAndParentStart',

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBaseDragEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlBaseDragEvent',
+	#superclass : 'BlMouseEvent',
 	#instVars : [
 		'gestureSource',
 		'gestureTarget',

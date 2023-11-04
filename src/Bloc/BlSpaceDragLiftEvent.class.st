@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSpaceDragLiftEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceDragLiftEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'delegate',
 		'position'

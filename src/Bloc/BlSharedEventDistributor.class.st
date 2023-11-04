@@ -9,8 +9,8 @@ In the following example, {{gtClass:BlMouseOverEvent}}, {{gtClass:BlMouseOutEven
 
 "
 Class {
-	#name : #BlSharedEventDistributor,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlSharedEventDistributor',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'adjustMousePosition',
 		'elements',

@@ -5,8 +5,8 @@ I help users to find a child element within its parent based on the bounds const
 
 "
 Class {
-	#name : #BlChildBoundsBasedFinder,
-	#superclass : #Object,
+	#name : 'BlChildBoundsBasedFinder',
+	#superclass : 'Object',
 	#instVars : [
 		'fromIndex',
 		'toIndex',

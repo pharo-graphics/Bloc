@@ -20,8 +20,8 @@ BlAlternativeCombination new
 
 "
 Class {
-	#name : #BlAlternativeCombination,
-	#superclass : #BlKeyCombination,
+	#name : 'BlAlternativeCombination',
+	#superclass : 'BlKeyCombination',
 	#instVars : [
 		'combinations'
 	],

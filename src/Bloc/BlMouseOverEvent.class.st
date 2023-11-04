@@ -9,8 +9,8 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mouseover
 
 "
 Class {
-	#name : #BlMouseOverEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlMouseOverEvent',
+	#superclass : 'BlMouseEvent',
 	#category : 'Bloc-Events'
 }
 

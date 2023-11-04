@@ -6,8 +6,8 @@ https://drafts.csswg.org/css-transforms/#valdef-transform-translate
 
 "
 Class {
-	#name : #BlTranslationTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlTranslationTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'translation'
 	],

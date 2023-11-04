@@ -11,8 +11,8 @@ BlTaskAtTask is the object added to the queue by BlTaskAtQueue.  It stores the v
 
 "
 Class {
-	#name : #BlTaskAtQueueTask,
-	#superclass : #Object,
+	#name : 'BlTaskAtQueueTask',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
