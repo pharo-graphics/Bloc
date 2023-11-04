@@ -1,6 +1,6 @@
-Extension { #name : #BlLayoutCommonConstraints }
+Extension { #name : 'BlLayoutCommonConstraints' }
 
-{ #category : #'*Bloc-LayoutZoomable' }
+{ #category : '*Bloc-LayoutZoomable' }
 BlLayoutCommonConstraints >> zoomable [
 	^ self at: BlZoomableLayout
 ]

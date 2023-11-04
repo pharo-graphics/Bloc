@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutChildNode,
-	#superclass : #BlLayoutNode,
+	#name : 'BlLayoutChildNode',
+	#superclass : 'BlLayoutNode',
 	#traits : 'TBlLayoutNode + TBlLayoutChildNode',
 	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutChildNode classTrait',
 	#instVars : [
@@ -11,25 +11,27 @@ Class {
 		'userData',
 		'actions'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#category : 'Bloc-Layouts-Model',
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> children [
 	^ #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> constraints [
 	^ constraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> constraints: aBlLayoutConstraints [
 	constraints := aBlLayoutConstraints
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutChildNode >> extent [
 	"Return the size of the node in the parent coordinate system"
 	<return: #Point>
@@ -37,7 +39,7 @@ BlLayoutChildNode >> extent [
 	^ measurement extent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLayoutChildNode >> initialize [
 	super initialize.
 	
@@ -47,7 +49,7 @@ BlLayoutChildNode >> initialize [
 	actions := Stack new
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutChildNode >> layoutBounds [
 	<return: #BlBounds>
 
@@ -56,27 +58,27 @@ BlLayoutChildNode >> layoutBounds [
 		extent: measurement extent
 ]
 
-{ #category : #'api - measure' }
+{ #category : 'api - measure' }
 BlLayoutChildNode >> measure: anExtentSpecOrBlock [
 	measurement := measurement measure: self with: anExtentSpecOrBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> measurement: aBlLayoutNodeMeasurement [
 	measurement := aBlLayoutNodeMeasurement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> parent [
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> parent: anObject [
 	parent := anObject
 ]
 
-{ #category : #'api - actions' }
+{ #category : 'api - actions' }
 BlLayoutChildNode >> popAction [
 	<return: #BlLayoutNodeElementAction or: #nil>
 
@@ -85,7 +87,7 @@ BlLayoutChildNode >> popAction [
 		ifNotEmpty: [ :theActions | theActions pop ]
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutChildNode >> position [
 	"Return a position of the top left corner in the parent coordinate system"
 	<return: #Point>
@@ -93,7 +95,7 @@ BlLayoutChildNode >> position [
 	^ measurement position
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutChildNode >> position: aPoint [
 	"Set position of the top left corner in the parent coordinate system"
 	<return: #Point>
@@ -101,7 +103,7 @@ BlLayoutChildNode >> position: aPoint [
 	measurement position: aPoint
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlLayoutChildNode >> printOn: aStream [
 	aStream
 		nextPutAll: 'Node position: ';
@@ -110,58 +112,58 @@ BlLayoutChildNode >> printOn: aStream [
 		print: measurement extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> privateMeasurement [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ measurement
 ]
 
-{ #category : #'api - actions' }
+{ #category : 'api - actions' }
 BlLayoutChildNode >> pushAction: aBlLayoutNodeElementAction [
 	actions push: aBlLayoutNodeElementAction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> transformationDo: aBlock [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNode >> userData [
 	<return: #Dictionary>
 	
 	^ userData ifNil: [ userData := Dictionary new ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNode >> withEdges: aCollectionOfLayoutEdges [
 	^ BlLayoutChildNodeWithEdges new
 		childNode: self;
 		connectedEdges: aCollectionOfLayoutEdges
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNode >> withElement: aBlElement [
 	^ BlLayoutChildNodeWithElement new
 		childNode: self;
 		element: aBlElement
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNode >> withMatrix: aBlMatrix [
 	^ BlLayoutChildNodeWithTransformation new
 		childNode: self;
 		matrix:  aBlMatrix
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNode >> withTransformation: aBlElementTransformation [
 	^ BlLayoutChildNodeWithTransformation new
 		childNode: self;
 		transformation:  aBlElementTransformation
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNode >> withoutElement [
 	"Return a layout node that does not know the element"
 	<return: #BlLayoutChildNode>
@@ -169,7 +171,7 @@ BlLayoutChildNode >> withoutElement [
 	^ self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNode >> withoutTransformation [
 	^ self
 ]

@@ -1,12 +1,12 @@
-Extension { #name : #BlElement }
+Extension { #name : 'BlElement' }
 
-{ #category : #'*Bloc-Spec2' }
+{ #category : '*Bloc-Spec2' }
 BlElement >> asPreviewMorph [
 
 	^ self asForm asMorph
 ]
 
-{ #category : #'*Bloc-Spec2' }
+{ #category : '*Bloc-Spec2' }
 BlElement >> inspectionPreview: aBuilder [
 	<inspectorPresentationOrder: 1 title: 'Preview'>
 
@@ -15,7 +15,7 @@ BlElement >> inspectionPreview: aBuilder [
 		yourself
 ]
 
-{ #category : #'*Bloc-Spec2' }
+{ #category : '*Bloc-Spec2' }
 BlElement >> inspectionResizers: aBuilder [
 	<inspectorPresentationOrder: 4 title: 'Resizers'>
 
@@ -36,14 +36,14 @@ BlElement >> inspectionResizers: aBuilder [
 		yourself
 ]
 
-{ #category : #'*Bloc-Spec2' }
+{ #category : '*Bloc-Spec2' }
 BlElement >> inspectionStates: aBuilder [
 	<inspectorPresentationOrder: 5 title: 'States'>
 
 	^ self states inspectionItems: aBuilder
 ]
 
-{ #category : #'*Bloc-Spec2' }
+{ #category : '*Bloc-Spec2' }
 BlElement >> inspectionTree: aBuilder [
 	<inspectorPresentationOrder: 2 title: 'Tree'>
 
@@ -55,7 +55,7 @@ BlElement >> inspectionTree: aBuilder [
 
 ]
 
-{ #category : #'*Bloc-Spec2' }
+{ #category : '*Bloc-Spec2' }
 BlElement >> inspectionUserData: aBuilder [
 	<inspectorPresentationOrder: 3 title: 'User Data'>
 

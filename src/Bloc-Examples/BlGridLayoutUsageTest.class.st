@@ -3,7 +3,8 @@ I have been automatically converted and probably manually tweaked from BlGridLay
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlGridLayoutUsageTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Examples'
+	#name : 'BlGridLayoutUsageTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Examples',
+	#package : 'Bloc-Examples'
 }

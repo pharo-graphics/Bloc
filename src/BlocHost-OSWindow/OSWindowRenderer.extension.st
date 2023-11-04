@@ -1,6 +1,6 @@
-Extension { #name : #OSWindowRenderer }
+Extension { #name : 'OSWindowRenderer' }
 
-{ #category : #'*BlocHost-OSWindow' }
+{ #category : '*BlocHost-OSWindow' }
 OSWindowRenderer >> canvasExtent [
 	^ self subclassResponsibility
 ]

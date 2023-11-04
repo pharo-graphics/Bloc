@@ -4,25 +4,27 @@ Detached space reference {{gtClass:BlSpaceReference}} is set when an element is 
 
 "
 Class {
-	#name : #BlDetachedSpaceReference,
-	#superclass : #BlSpaceReference,
+	#name : 'BlDetachedSpaceReference',
+	#superclass : 'BlSpaceReference',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Space'
+	#category : 'Bloc-Space',
+	#package : 'Bloc',
+	#tag : 'Space'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlDetachedSpaceReference class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDetachedSpaceReference class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDetachedSpaceReference >> isDetachedFromSceneGraph [
 	^ true
 ]

@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-PharoExtensions' }
+Package { #name : 'Bloc-PharoExtensions' }

@@ -2,18 +2,20 @@
 I am an Bloc OSWindow renderer which uses SDL2.
 "
 Class {
-	#name : #BlOSWindowSDL2Renderer,
-	#superclass : #BlOSWindowRenderer,
+	#name : 'BlOSWindowSDL2Renderer',
+	#superclass : 'BlOSWindowRenderer',
 	#instVars : [
 		'sdlRenderer'
 	],
 	#pools : [
 		'SDL2Constants'
 	],
-	#category : #'BlocHost-OSWindow-SDL2-Renderer'
+	#category : 'BlocHost-OSWindow-SDL2-Renderer',
+	#package : 'BlocHost-OSWindow-SDL2',
+	#tag : 'Renderer'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlOSWindowSDL2Renderer class >> for: aSDL2BackendWindow [
 
 	^ self basicNew
@@ -21,25 +23,25 @@ BlOSWindowSDL2Renderer class >> for: aSDL2BackendWindow [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlOSWindowSDL2Renderer class >> new [ 
 	self error: 'Use #for:'
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : 'host space - accessing' }
 BlOSWindowSDL2Renderer >> canvasExtent [
 
 	^ sdlRenderer outputExtent
 ]
 
-{ #category : #deleting }
+{ #category : 'deleting' }
 BlOSWindowSDL2Renderer >> destroy [
 
 	sdlRenderer destroy.
 	super destroy.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOSWindowSDL2Renderer >> initializeWith: aSDL2BackendWindow [
 
 	self initialize.
@@ -47,7 +49,7 @@ BlOSWindowSDL2Renderer >> initializeWith: aSDL2BackendWindow [
 	sdlRenderer := aSDL2BackendWindow sdl2Window createAcceleratedRenderer
 ]
 
-{ #category : #'updating screen' }
+{ #category : 'updating screen' }
 BlOSWindowSDL2Renderer >> present [
 	"SDL's rendering functions operate on a backbuffer; that is, calling a rendering function such as SDL_RenderDrawLine() does not directly put a line on the screen,
 	but rather updates the backbuffer. As such, you compose your entire scene and present the composed backbuffer to the screen as a complete picture.
@@ -59,7 +61,7 @@ BlOSWindowSDL2Renderer >> present [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOSWindowSDL2Renderer >> sdlRenderer [
 
 	^ sdlRenderer

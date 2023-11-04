@@ -2,12 +2,13 @@
 A SpBlSpaceInMorphPresenterTest is a test class for testing the behavior of SpBlSpaceInMorphPresenter
 "
 Class {
-	#name : #SpBlSpaceInMorphPresenterTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Spec2-Tests'
+	#name : 'SpBlSpaceInMorphPresenterTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Spec2-Tests',
+	#package : 'Bloc-Spec2-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SpBlSpaceInMorphPresenterTest >> testOpenExampleWithoutError [
 
 	| aPresenter |

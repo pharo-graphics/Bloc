@@ -1,6 +1,6 @@
-Extension { #name : #BlSvgPath }
+Extension { #name : 'BlSvgPath' }
 
-{ #category : #'*Bloc-Alexandrie-SVG' }
+{ #category : '*Bloc-Alexandrie-SVG' }
 BlSvgPath >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas pathFactory: [ :cairoContext |
@@ -15,14 +15,14 @@ BlSvgPath >> aeApplyTo: aeCanvas element: aBlElement [
 			readUpToEnd ]
 ]
 
-{ #category : #'*Bloc-Alexandrie-SVG' }
+{ #category : '*Bloc-Alexandrie-SVG' }
 BlSvgPath >> hasCaps [
 	"The purpose of answering false is optimization. For a simplified implementation, always set caps."
 
 	^ true
 ]
 
-{ #category : #'*Bloc-Alexandrie-SVG' }
+{ #category : '*Bloc-Alexandrie-SVG' }
 BlSvgPath >> hasJoins [
 	"The purpose of answering false is optimization. For a simplified implementation, always set joins."
 

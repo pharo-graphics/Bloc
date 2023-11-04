@@ -1,16 +1,17 @@
 Class {
-	#name : #BlOSWindowSDL2KeyboardKeyTable,
-	#superclass : #BlKeyboardKeyTable,
+	#name : 'BlOSWindowSDL2KeyboardKeyTable',
+	#superclass : 'BlKeyboardKeyTable',
 	#instVars : [
 		'virtualKeyTable'
 	],
 	#classInstVars : [
 		'default'
 	],
-	#category : #'BlocHost-OSWindow-SDL2'
+	#category : 'BlocHost-OSWindow-SDL2',
+	#package : 'BlocHost-OSWindow-SDL2'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlOSWindowSDL2KeyboardKeyTable class >> cleanUp [
 	<script: 'self cleanUp'>
 	super cleanUp.
@@ -18,19 +19,19 @@ BlOSWindowSDL2KeyboardKeyTable class >> cleanUp [
 	default := nil
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlOSWindowSDL2KeyboardKeyTable class >> default [
 	^ default ifNil: [ default := self new ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOSWindowSDL2KeyboardKeyTable >> initialize [
 	super initialize.
 
 	self initializeVirtualKeyTable
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOSWindowSDL2KeyboardKeyTable >> initializeVirtualKeyTable [
 	"See https://wiki.libsdl.org/SDLKeycodeLookup"
 
@@ -165,7 +166,7 @@ BlOSWindowSDL2KeyboardKeyTable >> initializeVirtualKeyTable [
 		}
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlOSWindowSDL2KeyboardKeyTable >> keyFromVirtualCode: aVirtualCode [
 	<return: #KeyboardKey>
 

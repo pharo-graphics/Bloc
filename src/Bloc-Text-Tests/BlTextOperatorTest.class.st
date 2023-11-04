@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlTextOpe
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlTextOperatorTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Text-Tests'
+	#name : 'BlTextOperatorTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Text-Tests',
+	#package : 'Bloc-Text-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindCaseInsensitiveSubStringInTheMiddle [
 
 	<sampleInstance>
@@ -23,7 +24,7 @@ BlTextOperatorTest >> testFindCaseInsensitiveSubStringInTheMiddle [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindGCharacterInAMiddle [
 
 	<sampleInstance>
@@ -38,7 +39,7 @@ BlTextOperatorTest >> testFindGCharacterInAMiddle [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindGCharacterInAMiddleReversed [
 
 	<sampleInstance>
@@ -55,7 +56,7 @@ BlTextOperatorTest >> testFindGCharacterInAMiddleReversed [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindIngSubStringInTheMiddle [
 
 	<sampleInstance>
@@ -70,7 +71,7 @@ BlTextOperatorTest >> testFindIngSubStringInTheMiddle [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindIngSubStringInTheMiddleReversed [
 
 	<sampleInstance>
@@ -87,7 +88,7 @@ BlTextOperatorTest >> testFindIngSubStringInTheMiddleReversed [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindLCharacterAtTheBeginning [
 
 	<sampleInstance>
@@ -102,7 +103,7 @@ BlTextOperatorTest >> testFindLCharacterAtTheBeginning [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindLCharacterAtTheBeginningReversed [
 
 	<sampleInstance>
@@ -119,7 +120,7 @@ BlTextOperatorTest >> testFindLCharacterAtTheBeginningReversed [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindLookSubStringInTheBeginning [
 
 	<sampleInstance>
@@ -134,7 +135,7 @@ BlTextOperatorTest >> testFindLookSubStringInTheBeginning [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindLookSubStringInTheBeginningReversed [
 
 	<sampleInstance>
@@ -151,7 +152,7 @@ BlTextOperatorTest >> testFindLookSubStringInTheBeginningReversed [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindNoSubString [
 
 	<sampleInstance>
@@ -164,7 +165,7 @@ BlTextOperatorTest >> testFindNoSubString [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindNoSubStringReversed [
 
 	<sampleInstance>
@@ -179,7 +180,7 @@ BlTextOperatorTest >> testFindNoSubStringReversed [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindNothing [
 
 	<sampleInstance>
@@ -192,7 +193,7 @@ BlTextOperatorTest >> testFindNothing [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindRCharacterAtTheEnd [
 
 	<sampleInstance>
@@ -207,7 +208,7 @@ BlTextOperatorTest >> testFindRCharacterAtTheEnd [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindRCharacterAtTheEndReversed [
 
 	<sampleInstance>
@@ -224,7 +225,7 @@ BlTextOperatorTest >> testFindRCharacterAtTheEndReversed [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindRingSubStringInTheEnd [
 
 	<sampleInstance>
@@ -239,7 +240,7 @@ BlTextOperatorTest >> testFindRingSubStringInTheEnd [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindRingSubStringInTheEndReversed [
 
 	<sampleInstance>
@@ -256,7 +257,7 @@ BlTextOperatorTest >> testFindRingSubStringInTheEndReversed [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testFindxXCharactersAtTheBeginning [
 
 	<sampleInstance>
@@ -271,7 +272,7 @@ BlTextOperatorTest >> testFindxXCharactersAtTheBeginning [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testLineBreaks [
 
 	<sampleInstance>
@@ -282,7 +283,7 @@ BlTextOperatorTest >> testLineBreaks [
 	^ aString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testSeparators [
 
 	<sampleInstance>
@@ -293,14 +294,14 @@ BlTextOperatorTest >> testSeparators [
 	^ aString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testStringWithLineBreaksInTheMiddle [
 
 	<sampleInstance>
 	^ 'the first text' , self testLineBreaks , 'the second text'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testStringWithLineBreaksOnBothSidesAndInTheMiddle [
 
 	<sampleInstance>
@@ -308,14 +309,14 @@ BlTextOperatorTest >> testStringWithLineBreaksOnBothSidesAndInTheMiddle [
 	  , self testLineBreaks
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testStringWithSeparatorsInTheMiddle [
 
 	<sampleInstance>
 	^ 'the first text' , self testSeparators , 'the second text'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testStringWithSeparatorsOnBothSidesAndInTheMiddle [
 
 	<sampleInstance>
@@ -323,7 +324,7 @@ BlTextOperatorTest >> testStringWithSeparatorsOnBothSidesAndInTheMiddle [
 	  , self testSeparators
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testTrimBothTextWithLineBreakssOnBothSidesAndInTheMiddle [
 
 	<sampleInstance>
@@ -340,7 +341,7 @@ BlTextOperatorTest >> testTrimBothTextWithLineBreakssOnBothSidesAndInTheMiddle [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testTrimBothTextWithSeparatorsOnBothSidesAndInTheMiddle [
 
 	<sampleInstance>
@@ -357,7 +358,7 @@ BlTextOperatorTest >> testTrimBothTextWithSeparatorsOnBothSidesAndInTheMiddle [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testTrimEmptyText [
 
 	<sampleInstance>
@@ -370,7 +371,7 @@ BlTextOperatorTest >> testTrimEmptyText [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testTrimLeftTextWithSeparatorsOnBothSidesAndInTheMiddle [
 
 	<sampleInstance>
@@ -387,7 +388,7 @@ BlTextOperatorTest >> testTrimLeftTextWithSeparatorsOnBothSidesAndInTheMiddle [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testTrimOnlySeparatorsText [
 
 	<sampleInstance>
@@ -400,7 +401,7 @@ BlTextOperatorTest >> testTrimOnlySeparatorsText [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextOperatorTest >> testTrimRightTextWithSeparatorsOnBothSidesAndInTheMiddle [
 
 	<sampleInstance>

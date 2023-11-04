@@ -3,12 +3,14 @@ I contain examples-tests of mouse processor
 
 "
 Class {
-	#name : #BlMouseProcessorExamples,
-	#superclass : #BlEventProcessorExamples,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseProcessorExamples',
+	#superclass : 'BlEventProcessorExamples',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'examples - sequence' }
+{ #category : 'examples - sequence' }
 BlMouseProcessorExamples >> click [
 	<gtExample>
 	| aMouseProcessor |
@@ -23,7 +25,7 @@ BlMouseProcessorExamples >> click [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> middleDown [
 	<gtExample>
 	| aMouseProcessor anEvent |
@@ -39,21 +41,21 @@ BlMouseProcessorExamples >> middleDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> middleMouseDownEvent [
 	<gtExample>
 
 	^ BlMouseDownEvent middle
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> middleMouseUpEvent [
 	<gtExample>
 
 	^ BlMouseUpEvent middle
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> mouseProcessor [
 	| aMouseProcessor aSpace |
 	<gtExample>
@@ -67,7 +69,7 @@ BlMouseProcessorExamples >> mouseProcessor [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> primaryDown [
 	<gtExample>
 	| aMouseProcessor anEvent |
@@ -83,7 +85,7 @@ BlMouseProcessorExamples >> primaryDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> primaryDownSecondaryDown [
 	<gtExample>
 	| aMouseProcessor anEvent |
@@ -100,7 +102,7 @@ BlMouseProcessorExamples >> primaryDownSecondaryDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> primaryDownSecondaryDownPrimaryUp [
 	<gtExample>
 	| aMouseProcessor anEvent |
@@ -116,7 +118,7 @@ BlMouseProcessorExamples >> primaryDownSecondaryDownPrimaryUp [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> primaryDownSecondaryDownPrimaryUpSecondaryUp [
 	<gtExample>
 	| aMouseProcessor anEvent |
@@ -131,21 +133,21 @@ BlMouseProcessorExamples >> primaryDownSecondaryDownPrimaryUpSecondaryUp [
 	^ aMouseProcessor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> primaryMouseDownEvent [
 	<gtExample>
 
 	^ BlMouseDownEvent primary
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> primaryMouseUpEvent [
 	<gtExample>
 
 	^ BlMouseUpEvent primary
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> secondaryDown [
 	<gtExample>
 	| aMouseProcessor anEvent |
@@ -161,14 +163,14 @@ BlMouseProcessorExamples >> secondaryDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> secondaryMouseDownEvent [
 	<gtExample>
 
 	^ BlMouseDownEvent secondary
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> secondaryMouseUpEvent [
 	<gtExample>
 

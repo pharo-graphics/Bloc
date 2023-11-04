@@ -4,8 +4,8 @@ I can contain sub metrics element
 
 "
 Class {
-	#name : #BlMetricsInspectorElement,
-	#superclass : #BlElement,
+	#name : 'BlMetricsInspectorElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'contentElement',
 		'topInsetElement',
@@ -15,10 +15,12 @@ Class {
 		'labelElement',
 		'spacing'
 	],
-	#category : #'Bloc-DevTool-Metrics'
+	#category : 'Bloc-DevTool-Metrics',
+	#package : 'Bloc-DevTool',
+	#tag : 'Metrics'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMetricsInspectorElement >> content: anElement [
 	contentElement := anElement.
 	contentElement constraintsDo: [ :c |
@@ -27,17 +29,17 @@ BlMetricsInspectorElement >> content: anElement [
 	self addChild: contentElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMetricsInspectorElement >> defaultLayout [
 	^ BlFrameLayout new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMetricsInspectorElement >> defaultSpacing [
 	^ (BlInsets top: 6 right: 8 bottom: 6 left: 8)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMetricsInspectorElement >> initialize [
 	super initialize.
 		
@@ -79,7 +81,7 @@ BlMetricsInspectorElement >> initialize [
 		leftInsetElement }
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMetricsInspectorElement >> insetTextFor: aNumber [
 
 	^ aNumber isZero
@@ -87,7 +89,7 @@ BlMetricsInspectorElement >> insetTextFor: aNumber [
 		ifFalse: [ BlRopedText string: aNumber asString ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMetricsInspectorElement >> insets: anInsets [
 
 	topInsetElement text: (self insetTextFor: anInsets top).
@@ -96,33 +98,33 @@ BlMetricsInspectorElement >> insets: anInsets [
 	leftInsetElement text: (self insetTextFor: anInsets left).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMetricsInspectorElement >> label: aString [
 
 	labelElement text: (self labelTextFor: aString).
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMetricsInspectorElement >> labelTextFor: aName [
 
 	^ BlRopedText string: aName asString
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMetricsInspectorElement >> newInsetElement [
 	^ BlTextElement new
 		text: (self insetTextFor: 0);
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMetricsInspectorElement >> newLabelElement [
 	^ BlTextElement new
 		text: (self labelTextFor: '');
 		yourself
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlMetricsInspectorElement >> onMeasure: anExtentMeasurementSpec [
 	| myExtent |
 	super onMeasure: anExtentMeasurementSpec.
@@ -144,12 +146,12 @@ BlMetricsInspectorElement >> onMeasure: anExtentMeasurementSpec [
 	self measuredExtent: myExtent.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMetricsInspectorElement >> spacing [
 	^ spacing
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMetricsInspectorElement >> spacing: aBlInsets [
 	spacing := aBlInsets.
 	

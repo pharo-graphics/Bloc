@@ -1,10 +1,12 @@
 Class {
-	#name : #BlCompulsoryCombinationExamples,
-	#superclass : #BlKeyCombinationExamples,
-	#category : #'Bloc-Examples-KeyBinding'
+	#name : 'BlCompulsoryCombinationExamples',
+	#superclass : 'BlKeyCombinationExamples',
+	#category : 'Bloc-Examples-KeyBinding',
+	#package : 'Bloc-Examples',
+	#tag : 'KeyBinding'
 }
 
-{ #category : #'examples - combination' }
+{ #category : 'examples - combination' }
 BlCompulsoryCombinationExamples >> combinationWithA [
 
 	<gtExample>
@@ -20,7 +22,7 @@ BlCompulsoryCombinationExamples >> combinationWithA [
 	^ aCombination
 ]
 
-{ #category : #'examples - combination' }
+{ #category : 'examples - combination' }
 BlCompulsoryCombinationExamples >> combinationWithAB [
 
 	<gtExample>
@@ -38,7 +40,7 @@ BlCompulsoryCombinationExamples >> combinationWithAB [
 	^ aCombination
 ]
 
-{ #category : #'examples - combination' }
+{ #category : 'examples - combination' }
 BlCompulsoryCombinationExamples >> combinationWithABC [
 
 	<gtExample>
@@ -57,7 +59,7 @@ BlCompulsoryCombinationExamples >> combinationWithABC [
 	^ aCombination
 ]
 
-{ #category : #'examples - combination' }
+{ #category : 'examples - combination' }
 BlCompulsoryCombinationExamples >> emptyCombination [
 	<gtExample>
 	| aCombination |
@@ -71,7 +73,7 @@ BlCompulsoryCombinationExamples >> emptyCombination [
 	^ aCombination
 ]
 
-{ #category : #'examples - store' }
+{ #category : 'examples - store' }
 BlCompulsoryCombinationExamples >> storeCombinationWithA [
 	<gtExample>
 	| aCombination aStoreString aRestoredCombination |
@@ -87,7 +89,7 @@ BlCompulsoryCombinationExamples >> storeCombinationWithA [
 	^ aStoreString
 ]
 
-{ #category : #'examples - store' }
+{ #category : 'examples - store' }
 BlCompulsoryCombinationExamples >> storeCombinationWithAB [
 	<gtExample>
 	| aCombination aStoreString aRestoredCombination |
@@ -103,7 +105,7 @@ BlCompulsoryCombinationExamples >> storeCombinationWithAB [
 	^ aStoreString
 ]
 
-{ #category : #'examples - store' }
+{ #category : 'examples - store' }
 BlCompulsoryCombinationExamples >> storeCombinationWithABC [
 	<gtExample>
 	| aCombination aStoreString aRestoredCombination |
@@ -119,7 +121,7 @@ BlCompulsoryCombinationExamples >> storeCombinationWithABC [
 	^ aStoreString
 ]
 
-{ #category : #'examples - store' }
+{ #category : 'examples - store' }
 BlCompulsoryCombinationExamples >> storeEmptyCombination [
 	<gtExample>
 	| aCombination aStoreString aRestoredCombination |

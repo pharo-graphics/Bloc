@@ -1,13 +1,13 @@
-Extension { #name : #Morph }
+Extension { #name : 'Morph' }
 
-{ #category : #'*BlocHost-Morphic' }
+{ #category : '*BlocHost-Morphic' }
 Morph >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
 	self owner ifNil: [ ^ false ].
 	^ self owner isTextInputActive
 ]
 
-{ #category : #'*BlocHost-Morphic' }
+{ #category : '*BlocHost-Morphic' }
 Morph >> startTextInput [
 
 	"Start accepting Unicode text input events.
@@ -19,7 +19,7 @@ Morph >> startTextInput [
 	self owner startTextInput
 ]
 
-{ #category : #'*BlocHost-Morphic' }
+{ #category : '*BlocHost-Morphic' }
 Morph >> startTextInputAtRectangle: aRectangle [
 
 	"Start accepting Unicode text input events.
@@ -31,7 +31,7 @@ Morph >> startTextInputAtRectangle: aRectangle [
 	self owner startTextInputAtRectangle: aRectangle
 ]
 
-{ #category : #'*BlocHost-Morphic' }
+{ #category : '*BlocHost-Morphic' }
 Morph >> stopTextInput [
 	"Stop receiving any text input events"
 

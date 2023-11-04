@@ -1,11 +1,11 @@
-Extension { #name : #OSWindowDriver }
+Extension { #name : 'OSWindowDriver' }
 
-{ #category : #'*BlocHost-OSWindow' }
+{ #category : '*BlocHost-OSWindow' }
 OSWindowDriver class >> current: aDriver [
 	Current := aDriver
 ]
 
-{ #category : #'*BlocHost-OSWindow' }
+{ #category : '*BlocHost-OSWindow' }
 OSWindowDriver class >> isRunning [
 	"Return true if oswindow driver exists, false otherwise"
 	<return: #Boolean>
@@ -13,7 +13,7 @@ OSWindowDriver class >> isRunning [
 	^ Current isNotNil and: [ Session == Smalltalk session ]
 ]
 
-{ #category : #'*BlocHost-OSWindow' }
+{ #category : '*BlocHost-OSWindow' }
 OSWindowDriver >> reset [
 	Current := nil
 ]

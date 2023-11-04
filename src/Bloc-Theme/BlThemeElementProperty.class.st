@@ -1,13 +1,14 @@
 Class {
-	#name : #BlThemeElementProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlThemeElementProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'theme'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlThemeElementProperty >> = anObject [
 	self == anObject
 		ifTrue: [ ^ true ].
@@ -16,27 +17,27 @@ BlThemeElementProperty >> = anObject [
 	^ theme = anObject theme
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlThemeElementProperty >> applyOnElement: anElement [
 	anElement userData at: #BlTheme put: theme.	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlThemeElementProperty >> canPropagateToChildren [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlThemeElementProperty >> hash [
 	^ theme hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlThemeElementProperty >> theme [
 	^ theme
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlThemeElementProperty >> theme: aTheme [
 	theme := aTheme
 ]

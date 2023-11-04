@@ -20,8 +20,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlTaskExecutionSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlTaskExecutionSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'task',
 		'action'
@@ -30,16 +30,18 @@ Class {
 		'Enabled',
 		'IgnoredTasks'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#category : 'Bloc-Space - Tasks',
+	#package : 'Bloc',
+	#tag : 'Space - Tasks'
 }
 
-{ #category : #filtering }
+{ #category : 'filtering' }
 BlTaskExecutionSignal class >> clearIgnored [
 
 	IgnoredTasks := nil
 ]
 
-{ #category : #filtering }
+{ #category : 'filtering' }
 BlTaskExecutionSignal class >> dontIgnoreClass: aBlTask [
 
 	IgnoredTasks ifNil: [ ^self ].
@@ -47,19 +49,19 @@ BlTaskExecutionSignal class >> dontIgnoreClass: aBlTask [
 		[ IgnoredTasks := IgnoredTasks copyWithout: aBlTask ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskExecutionSignal class >> enabled [ 
 
 	^Enabled ifNil: [ ^false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskExecutionSignal class >> enabled: aBoolean [
 
 	Enabled := aBoolean
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTaskExecutionSignal class >> endTask: aTask [
 
 	^self new 
@@ -68,7 +70,7 @@ BlTaskExecutionSignal class >> endTask: aTask [
 		emit
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTaskExecutionSignal class >> for: aTask block: aBlock [
 
 	self enabled ifFalse: [ ^aBlock value ].
@@ -79,7 +81,7 @@ BlTaskExecutionSignal class >> for: aTask block: aBlock [
 	self endTask: aTask.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTaskExecutionSignal class >> fromSton: stonReader [
 
 	| signal |
@@ -96,7 +98,7 @@ BlTaskExecutionSignal class >> fromSton: stonReader [
 	^signal
 ]
 
-{ #category : #filtering }
+{ #category : 'filtering' }
 BlTaskExecutionSignal class >> ignoreClass: aBlTask [
 
 	IgnoredTasks ifNil: [ IgnoredTasks := #() ].
@@ -104,14 +106,14 @@ BlTaskExecutionSignal class >> ignoreClass: aBlTask [
 		[ IgnoredTasks := IgnoredTasks copyWith: aBlTask ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskExecutionSignal class >> ignoreRepeatedTasks [
 
 	BlRepeatedTask withAllSubclasses do: [ :each |
 		self ignoreClass: each ].
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTaskExecutionSignal class >> startTask: aTask [
 
 	^self new 
@@ -120,17 +122,17 @@ BlTaskExecutionSignal class >> startTask: aTask [
 		emit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskExecutionSignal >> action [
 	^ action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskExecutionSignal >> action: anObject [
 	action := anObject
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 BlTaskExecutionSignal >> asDictionary [
 
 	| taskSton |
@@ -149,7 +151,7 @@ BlTaskExecutionSignal >> asDictionary [
 		yourself.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTaskExecutionSignal >> printOneLineContentsOn: stream [
 
 	stream
@@ -159,26 +161,26 @@ BlTaskExecutionSignal >> printOneLineContentsOn: stream [
 
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 BlTaskExecutionSignal >> stonOn: stonWriter [
 
 	stonWriter writeObject: self streamShortList: [ :array |
 		array add: self asDictionary ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskExecutionSignal >> target [
 	"Answer the object that is the target of this signal"
 
 	^task
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskExecutionSignal >> task [
 	^ task
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskExecutionSignal >> task: anObject [
 	task := anObject
 ]

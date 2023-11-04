@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFlowLayoutMeasurer,
-	#superclass : #Object,
+	#name : 'BlFlowLayoutMeasurer',
+	#superclass : 'Object',
 	#instVars : [
 		'layout',
 		'children',
@@ -12,17 +12,19 @@ Class {
 		'heightMode',
 		'checkCanFit'
 	],
-	#category : #'Bloc-Layout-Flow-Utilities'
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFlowLayoutMeasurer class >> for: aLayout [
 	^ self new
 		layout: aLayout;
 		yourself
 ]
 
-{ #category : #calculating }
+{ #category : 'calculating' }
 BlFlowLayoutMeasurer >> alignLine: aLine [
 	| totalWeight lastChild excessLength excessOffset |
 	aLine isEmpty
@@ -58,7 +60,7 @@ BlFlowLayoutMeasurer >> alignLine: aLine [
 		aChild startBreadth: origin y ]
 ]
 
-{ #category : #calculating }
+{ #category : 'calculating' }
 BlFlowLayoutMeasurer >> alignLines: theLines within: anExtent [
 	| lastLine excessBreadth excessOffset |
 	theLines
@@ -93,22 +95,22 @@ BlFlowLayoutMeasurer >> alignLines: theLines within: anExtent [
 		self alignLine: aLine ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> beHorizontal [
 	orientation := BlFlowLayoutHorizontal new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> beVertical [
 	orientation := BlFlowLayoutVertical new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> breadthMode [
 	^ self orientation breadthModeOf: self
 ]
 
-{ #category : #calculating }
+{ #category : 'calculating' }
 BlFlowLayoutMeasurer >> calculatePositions: theLines [
 	
 	"theLines inject: 0 into: [ :totalBreadth :aLine |
@@ -119,12 +121,12 @@ BlFlowLayoutMeasurer >> calculatePositions: theLines [
 		totalBreadth + aLine breadth ]"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> direction [
 	^ layout direction
 ]
 
-{ #category : #calculating }
+{ #category : 'calculating' }
 BlFlowLayoutMeasurer >> fillLines: theLines with: theChildren [
 	| currentLine floatingQueue lineLength availableSpace totalBreadth currentSpaceIndex currentSpace |
 	self flag: 'This is something horrible!!!!'.
@@ -195,12 +197,12 @@ BlFlowLayoutMeasurer >> fillLines: theLines with: theChildren [
 			ifTrue: [ floatingQueue add: aChild ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> heightMode [
 	^ heightMode
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutMeasurer >> initialize [
 	super initialize.
 	
@@ -208,17 +210,17 @@ BlFlowLayoutMeasurer >> initialize [
 	lines := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutMeasurer >> isCheckCanFit [
 	^ checkCanFit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> layout: aLayout [
 	layout := aLayout
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlFlowLayoutMeasurer >> layout: anElement in: newBounds context: aBlElementBoundsUpdateContext [
 	lines do: [ :aLine |
 		aLine children do: [ :aChild |
@@ -231,32 +233,32 @@ BlFlowLayoutMeasurer >> layout: anElement in: newBounds context: aBlElementBound
 			aChild element applyLayoutIn: (left @ top extent: width @ height) context: aBlElementBoundsUpdateContext ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> lengthMode [
 	^ self orientation lengthModeOf: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> maxBreadth [
 	^ self orientation maxBreadthOf: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> maxHeight [
 	^ maxHeight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> maxLength [
 	^ self orientation maxLengthOf: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> maxWidth [
 	^ maxWidth
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlFlowLayoutMeasurer >> measure: anElement with: anExtentSpec [
 	| lastLine contentLength contentBreadth parentLength parentBreadth totalContentWidth totalContentHeight |
 	
@@ -317,7 +319,7 @@ BlFlowLayoutMeasurer >> measure: anElement with: anExtentSpec [
 	anElement measuredExtent: (anExtentSpec sizeFor: totalContentWidth @ totalContentHeight)
 ]
 
-{ #category : #calculating }
+{ #category : 'calculating' }
 BlFlowLayoutMeasurer >> measureLine: aLine [
 	
 	aLine children do: [ :aChild |
@@ -327,12 +329,12 @@ BlFlowLayoutMeasurer >> measureLine: aLine [
 			aChild element measure: (BlExtentMeasurementSpec exact: aRequestedExtent) ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> orientation [
 	^ orientation
 ]
 
-{ #category : #calculating }
+{ #category : 'calculating' }
 BlFlowLayoutMeasurer >> size: aContentSize max: aMaxContentSize for: aMeasumentSpec [
 
 	aMeasumentSpec isUnspecified
@@ -347,7 +349,7 @@ BlFlowLayoutMeasurer >> size: aContentSize max: aMaxContentSize for: aMeasumentS
 	^ aContentSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutMeasurer >> widthMode [
 	^ widthMode
 ]

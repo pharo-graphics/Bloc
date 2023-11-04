@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Docs' }
+Package { #name : 'Bloc-Docs' }

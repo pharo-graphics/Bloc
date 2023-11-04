@@ -16,22 +16,23 @@ element size: 400@200.
 
 "
 Class {
-	#name : #BAJpgExporter,
-	#superclass : #BAFileExporter,
+	#name : 'BAJpgExporter',
+	#superclass : 'BAFileExporter',
 	#instVars : [
 		'isProgressive',
 		'quality'
 	],
-	#category : #'Bloc-Alexandrie-Exporter'
+	#category : 'Bloc-Alexandrie-Exporter',
+	#package : 'Bloc-Alexandrie-Exporter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAJpgExporter >> extension [
 
 	^ 'jpg'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BAJpgExporter >> finishExport: aCanvas [
 	"Answer a file reference to the exported JPG."
 
@@ -46,7 +47,7 @@ BAJpgExporter >> finishExport: aCanvas [
 	^ self target
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BAJpgExporter >> initialize [
 
 	super initialize.
@@ -56,31 +57,31 @@ BAJpgExporter >> initialize [
 	background := Color white
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAJpgExporter >> isProgressive [
 
 	^ isProgressive
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAJpgExporter >> isProgressive: aBoolean [
 
 	isProgressive := aBoolean
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BAJpgExporter >> newCanvas: anExtent [
 
 	^ AeCanvas extent: anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAJpgExporter >> quality [
 
 	^ quality
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAJpgExporter >> quality: aNumber [
 	"Quality must be between 0 and 100"
 	

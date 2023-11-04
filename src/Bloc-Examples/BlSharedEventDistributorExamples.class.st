@@ -3,12 +3,14 @@ I exemplify {{gtClass:BlSharedEventDistributor}}.
 
 "
 Class {
-	#name : #BlSharedEventDistributorExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Examples-EventHandling'
+	#name : 'BlSharedEventDistributorExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Examples-EventHandling',
+	#package : 'Bloc-Examples',
+	#tag : 'EventHandling'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> container [
 	<gtExample>
 	^ self element
@@ -22,13 +24,13 @@ BlSharedEventDistributorExamples >> container [
 		]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> element [
 	<gtExample>
 	^ BlElement new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> element100x100 [
 	<gtExample>
 	| aBackgroundColor aHighlightColor anElement |
@@ -44,7 +46,7 @@ BlSharedEventDistributorExamples >> element100x100 [
 		addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent | anElement background: aBackgroundColor ].
 ]
 
-{ #category : #'examples - sharing events' }
+{ #category : 'examples - sharing events' }
 BlSharedEventDistributorExamples >> example [
 	<gtExample>
 	| aHandler anElements aContainer |
@@ -56,7 +58,7 @@ BlSharedEventDistributorExamples >> example [
 	^ aContainer
 ]
 
-{ #category : #'examples - basic' }
+{ #category : 'examples - basic' }
 BlSharedEventDistributorExamples >> installOneElement [
 	<gtExample>
 	| aHandler anElement |
@@ -67,7 +69,7 @@ BlSharedEventDistributorExamples >> installOneElement [
 	^ aHandler
 ]
 
-{ #category : #'examples - basic' }
+{ #category : 'examples - basic' }
 BlSharedEventDistributorExamples >> installTwoElements [
 	<gtExample>
 	| aHandler anElement |
@@ -78,7 +80,7 @@ BlSharedEventDistributorExamples >> installTwoElements [
 	^ aHandler
 ]
 
-{ #category : #'examples - sharing events' }
+{ #category : 'examples - sharing events' }
 BlSharedEventDistributorExamples >> mouseEnterEventOneOutOfTwoElements [
 	<gtExample>
 	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo |
@@ -102,7 +104,7 @@ BlSharedEventDistributorExamples >> mouseEnterEventOneOutOfTwoElements [
 	^ aContainer
 ]
 
-{ #category : #'examples - sharing events' }
+{ #category : 'examples - sharing events' }
 BlSharedEventDistributorExamples >> mouseLeaveEventOneOutOfTwoElements [
 	<gtExample>
 
@@ -137,13 +139,13 @@ BlSharedEventDistributorExamples >> mouseLeaveEventOneOutOfTwoElements [
 	^ aContainer
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> randomColor [
 	<gtExample>
 	^ { Color green. Color yellow. Color red } atRandom
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> sharedEventDistributor [
 	<gtExample>
 	| aHandler |
@@ -152,7 +154,7 @@ BlSharedEventDistributorExamples >> sharedEventDistributor [
 	^ aHandler
 ]
 
-{ #category : #'examples - basic' }
+{ #category : 'examples - basic' }
 BlSharedEventDistributorExamples >> uninstallOneElement [
 	<gtExample>
 	| aHandler anElement |

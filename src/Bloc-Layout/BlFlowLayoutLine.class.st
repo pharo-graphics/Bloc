@@ -1,6 +1,6 @@
 Class {
-	#name : #BlFlowLayoutLine,
-	#superclass : #Object,
+	#name : 'BlFlowLayoutLine',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -12,17 +12,19 @@ Class {
 		'measurer',
 		'index'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFlowLayoutLine class >> for: aMeasurer [
 	^ self new
 		measurer: aMeasurer;
 		yourself
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlFlowLayoutLine >> addFloatFirst: aChild [
 	self
 		assert: [ aChild isFloating ]
@@ -33,7 +35,7 @@ BlFlowLayoutLine >> addFloatFirst: aChild [
 	length := length + aChild length + aChild spacingLength
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlFlowLayoutLine >> addFloatLast: aChild [
 	self
 		assert: [ aChild isFloating ]
@@ -44,7 +46,7 @@ BlFlowLayoutLine >> addFloatLast: aChild [
 	length := length + aChild length + aChild spacingLength
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlFlowLayoutLine >> addInlineFirst: aChild [
 	self
 		assert: [ aChild isInline ]
@@ -56,7 +58,7 @@ BlFlowLayoutLine >> addInlineFirst: aChild [
 	breadth := breadth max: aChild breadth + aChild spacingBreadth
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlFlowLayoutLine >> addInlineLast: aChild [
 	self
 		assert: [ aChild isInline ]
@@ -68,7 +70,7 @@ BlFlowLayoutLine >> addInlineLast: aChild [
 	breadth := breadth max: aChild breadth + aChild spacingBreadth
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlFlowLayoutLine >> addTo: theLines [
 	"I dispatch to concreate addFirst/addLast based on layout configuration"
 	(self orientation isVertical and: [ self direction isRightToLeft ])
@@ -77,42 +79,42 @@ BlFlowLayoutLine >> addTo: theLines [
 	index := theLines size
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFlowLayoutLine >> breadth [
 	^ breadth
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFlowLayoutLine >> breadth: aNumber [
 	breadth := aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutLine >> canFit: aChild [
 	^ self length + aChild length + aChild spacingLength <= measurer maxLength
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> children [
 	^ children
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> direction [
 	^ measurer direction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> index [
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> index: anIndex [
 	index := anIndex
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutLine >> initialize [
 	super initialize.
 	
@@ -126,57 +128,57 @@ BlFlowLayoutLine >> initialize [
 	measurer := nil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutLine >> isEmpty [
 	^ children isEmpty
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFlowLayoutLine >> length [
 	^ length
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFlowLayoutLine >> length: aNumber [
 	length := aNumber
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFlowLayoutLine >> lineX [
 	^ self orientation lineX: self
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFlowLayoutLine >> lineY [
 	^ self orientation lineY: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutLine >> measurer: aMeasurer [
 	measurer := aMeasurer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> orientation [
 	^ measurer orientation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> startBreadth [
 	^ startBreadth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> startBreadth: aNumber [
 	startBreadth := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> startLength [
 	^ startLength
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLine >> startLength: aNumber [
 	startLength := aNumber
 ]

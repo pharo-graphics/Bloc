@@ -26,12 +26,13 @@ Now let's compare all text measurement strategies:
 
 "
 Class {
-	#name : #BlTextElementMeasurementStrategyExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Text-Alexandrie-Examples'
+	#name : 'BlTextElementMeasurementStrategyExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Text-Alexandrie-Examples',
+	#package : 'Bloc-Text-Alexandrie-Examples'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BlTextElementMeasurementStrategyExamples >> measurementDifference [
 	<gtExample>
 	| ascentTextElement boundsTextElement editorTextElement containerElement |
@@ -52,7 +53,7 @@ BlTextElementMeasurementStrategyExamples >> measurementDifference [
 	^ containerElement
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 BlTextElementMeasurementStrategyExamples >> textElementWithEditorMeasurement [
 	<gtExample>
 
@@ -76,7 +77,7 @@ BlTextElementMeasurementStrategyExamples >> textElementWithEditorMeasurement [
 	^ textElement
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
 	<gtExample>
 
@@ -103,7 +104,7 @@ BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
 	^ textElement
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 BlTextElementMeasurementStrategyExamples >> textElementWithTightMeasurement [
 	<gtExample>
 

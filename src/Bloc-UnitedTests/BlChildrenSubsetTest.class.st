@@ -3,35 +3,37 @@ I have been automatically converted and probably manually tweaked from BlChildre
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlChildrenSubsetTest,
-	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Children'
+	#name : 'BlChildrenSubsetTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Children',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Children'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> accountedByLayout [
 	^ self testAccountedByLayout 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> childrenArrayWith5Elements [
 
 	^ self testChildrenArrayWith5Elements
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> elementWithChildren [
 	^ self testElementWithChildren
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> ignoredByLayout [
 	^ self testIgnoredByLayout 
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlChildrenSubsetTest >> newChildAt: anIndex [
 	| anElement |
 	anElement := BlElement new.
@@ -39,26 +41,26 @@ BlChildrenSubsetTest >> newChildAt: anIndex [
 	^ anElement
 ]
 
-{ #category : #metadata }
+{ #category : 'metadata' }
 BlChildrenSubsetTest >> originClassName [
 	"This test was generated from..."
 	^ 'BlChildrenSubsetExamples'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> reversed [
 	^ self testReversed
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> sortedByElevation [
 	^ self testSortedByElevation
 	
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testAccountedByLayout [
 	
 	| childrenArray childrenIterator |
@@ -78,7 +80,7 @@ BlChildrenSubsetTest >> testAccountedByLayout [
 	^ childrenIterator
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testAccountedByLayoutAndIgnoredByLayout [
 	
 	| childrenIterator childrenIteratorIgnoredByLayout |
@@ -91,7 +93,7 @@ BlChildrenSubsetTest >> testAccountedByLayoutAndIgnoredByLayout [
 	^ childrenIteratorIgnoredByLayout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testAccountedByLayoutAndReversed [
 	
 	| childrenIterator childrenIteratorReversed |
@@ -113,7 +115,7 @@ BlChildrenSubsetTest >> testAccountedByLayoutAndReversed [
 	^ childrenIteratorReversed
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testAccountedByLayoutChildrenFromElement [
 	
 	| element accountedByLayoutChildren |
@@ -123,7 +125,7 @@ BlChildrenSubsetTest >> testAccountedByLayoutChildrenFromElement [
 	^ accountedByLayoutChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testAccountedByLayoutTwice [
 	
 	| childrenIterator childrenIteratorAccountedByLayout |
@@ -134,7 +136,7 @@ BlChildrenSubsetTest >> testAccountedByLayoutTwice [
 	^ childrenIteratorAccountedByLayout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testChildrenArrayWith5Elements [
 	
 	| childrenArray zIndex |
@@ -154,7 +156,7 @@ BlChildrenSubsetTest >> testChildrenArrayWith5Elements [
 	^ childrenArray
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testChildrenWithMultipleCombinedSubsets [
 	
 	| element children |
@@ -171,7 +173,7 @@ BlChildrenSubsetTest >> testChildrenWithMultipleCombinedSubsets [
 	^ children
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testElementWithChildren [
 	
 	| element |
@@ -182,7 +184,7 @@ BlChildrenSubsetTest >> testElementWithChildren [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testIgnoredByLayout [
 	
 	| childrenArray childrenIterator |
@@ -200,7 +202,7 @@ BlChildrenSubsetTest >> testIgnoredByLayout [
 	^ childrenIterator
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testIgnoredByLayoutAndAcountedByLayout [
 	
 	| childrenIterator childrenIteratorAcountedByLayout |
@@ -214,7 +216,7 @@ BlChildrenSubsetTest >> testIgnoredByLayoutAndAcountedByLayout [
 	^ childrenIteratorAcountedByLayout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testIgnoredByLayoutAndReverse [
 	
 	| childrenIterator childrenIteratorReversed |
@@ -233,7 +235,7 @@ BlChildrenSubsetTest >> testIgnoredByLayoutAndReverse [
 	^ childrenIteratorReversed
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testIgnoredByLayoutExplicitCreation [
 	
 	| childrenArray childrenIterator |
@@ -251,7 +253,7 @@ BlChildrenSubsetTest >> testIgnoredByLayoutExplicitCreation [
 	^ childrenIterator
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testIgnoredByLayoutFromElement [
 	
 	| element ignoredByLayoutChildren |
@@ -261,7 +263,7 @@ BlChildrenSubsetTest >> testIgnoredByLayoutFromElement [
 	^ ignoredByLayoutChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testIgnoredByLayoutTwice [
 	
 	| childrenIterator childrenIteratorIgnoredByLayout |
@@ -271,7 +273,7 @@ BlChildrenSubsetTest >> testIgnoredByLayoutTwice [
 	^ childrenIteratorIgnoredByLayout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testReversed [
 	
 	| childrenArray childrenIterator |
@@ -286,7 +288,7 @@ BlChildrenSubsetTest >> testReversed [
 	^ childrenIterator
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testReversedAndAcountedByLayout [
 	
 	| childrenIterator childrenIteratorAcountedByLayout |
@@ -315,7 +317,7 @@ BlChildrenSubsetTest >> testReversedAndAcountedByLayout [
 	^ childrenIteratorAcountedByLayout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testReversedAndIgnoredByLayout [
 	
 	| childrenIterator childrenIteratorIgnoredByLayout |
@@ -339,7 +341,7 @@ BlChildrenSubsetTest >> testReversedAndIgnoredByLayout [
 	^ childrenIteratorIgnoredByLayout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testReversedChildrenFromElement [
 	
 	| element reversedChildren |
@@ -349,7 +351,7 @@ BlChildrenSubsetTest >> testReversedChildrenFromElement [
 	^ reversedChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testReversedTwice [
 	
 	| childrenIterator |
@@ -363,7 +365,7 @@ BlChildrenSubsetTest >> testReversedTwice [
 	^ childrenIterator
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testSortedByElevation [
 	
 	| childrenArray childrenIterator expectedOrder |
@@ -379,7 +381,7 @@ BlChildrenSubsetTest >> testSortedByElevation [
 	^ childrenIterator
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testSortedByElevationAndAcountedByLayout [
 	
 	| childrenIterator childrenIteratorAcountedByLayout |
@@ -402,7 +404,7 @@ BlChildrenSubsetTest >> testSortedByElevationAndAcountedByLayout [
 	^ childrenIteratorAcountedByLayout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testSortedByElevationAndIgnoredByLayout [
 	
 	| childrenIterator childrenIteratorIgnoredByLayout |
@@ -421,7 +423,7 @@ BlChildrenSubsetTest >> testSortedByElevationAndIgnoredByLayout [
 	^ childrenIteratorIgnoredByLayout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testSortedByElevationAndReversed [
 	
 	| childrenIterator childrenIteratorReversed expectedOrder |
@@ -439,7 +441,7 @@ BlChildrenSubsetTest >> testSortedByElevationAndReversed [
 	^ childrenIteratorReversed
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testSortedByElevationFromElement [
 	
 	| element sortedByElevationChildren |
@@ -449,7 +451,7 @@ BlChildrenSubsetTest >> testSortedByElevationFromElement [
 	^ sortedByElevationChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenSubsetTest >> testSortedByElevationTwice [
 	
 	| childrenIterator childrenIteratorSortedByElevation |

@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlLayoutC
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlLayoutChildNodeWithTransformationTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlLayoutChildNodeWithTransformationTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutChildNodeWithTransformationTest >> testNodeWithScale [
 
 	<sampleInstance>
@@ -32,7 +33,7 @@ BlLayoutChildNodeWithTransformationTest >> testNodeWithScale [
 	^ aChildNodeWithTransformation
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutChildNodeWithTransformationTest >> testScaleTransformation [
 	<sampleInstance>
 
@@ -46,7 +47,7 @@ BlLayoutChildNodeWithTransformationTest >> testScaleTransformation [
 	^ aTransformation
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutChildNodeWithTransformationTest >> testSetPositionNodeWithScale [
 
 	<sampleInstance>

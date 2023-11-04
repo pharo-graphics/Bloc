@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlRopedTe
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlRopedTextTest2,
-	#superclass : #TestCase,
-	#category : #'Bloc-Text-Tests'
+	#name : 'BlRopedTextTest2',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Text-Tests',
+	#package : 'Bloc-Text-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest2 >> testAllAttributesSuchThat [
 
 	<sampleInstance>
@@ -31,7 +32,7 @@ BlRopedTextTest2 >> testAllAttributesSuchThat [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest2 >> testAppendEmptyText [
 
 	<sampleInstance>
@@ -51,7 +52,7 @@ BlRopedTextTest2 >> testAppendEmptyText [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest2 >> testInsertEmptyStrings [
 
 	<sampleInstance>
@@ -71,7 +72,7 @@ BlRopedTextTest2 >> testInsertEmptyStrings [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest2 >> testNextSpanFontColorOnHelloWorldWithColor [
 
 	<sampleInstance>
@@ -106,7 +107,7 @@ BlRopedTextTest2 >> testNextSpanFontColorOnHelloWorldWithColor [
 	^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest2 >> testTextForeground [
 
 	<sampleInstance>
@@ -135,7 +136,7 @@ BlRopedTextTest2 >> testTextForeground [
 	^ text
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest2 >> testTextWithAttributes [
 
 	<sampleInstance>
@@ -154,7 +155,7 @@ BlRopedTextTest2 >> testTextWithAttributes [
 	^ text
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest2 >> testTextWithCr [
 
 	<sampleInstance>

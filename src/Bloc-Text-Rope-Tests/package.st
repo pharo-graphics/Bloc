@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Text-Rope-Tests' }
+Package { #name : 'Bloc-Text-Rope-Tests' }

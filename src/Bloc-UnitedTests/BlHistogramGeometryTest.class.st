@@ -3,12 +3,14 @@ I have been automatically converted and probably manually tweaked from BlHistogr
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlHistogramGeometryTest,
-	#superclass : #BlGeometryTest,
-	#category : 'Bloc-UnitedTests-Geometry'
+	#name : 'BlHistogramGeometryTest',
+	#superclass : 'BlGeometryTest',
+	#category : 'Bloc-UnitedTests-Geometry',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Geometry'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlHistogramGeometryTest >> testBottomToTop [
 
 	<sampleInstance>
@@ -19,7 +21,7 @@ BlHistogramGeometryTest >> testBottomToTop [
 	^ aHistogram
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlHistogramGeometryTest >> testDefault [
 
 	<sampleInstance>
@@ -39,7 +41,7 @@ BlHistogramGeometryTest >> testDefault [
 	^ aHistogram
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlHistogramGeometryTest >> testLeftToRight [
 
 	<sampleInstance>
@@ -50,7 +52,7 @@ BlHistogramGeometryTest >> testLeftToRight [
 	^ aHistogram
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlHistogramGeometryTest >> testRightToLeft [
 
 	<sampleInstance>
@@ -61,7 +63,7 @@ BlHistogramGeometryTest >> testRightToLeft [
 	^ aHistogram
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlHistogramGeometryTest >> testTopToBottom [
 
 	<sampleInstance>

@@ -1,15 +1,17 @@
 Class {
-	#name : #BlDevScripterKeyClickStep,
-	#superclass : #BlDevScripterKeyboardStep,
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#name : 'BlDevScripterKeyClickStep',
+	#superclass : 'BlDevScripterKeyboardStep',
+	#category : 'Bloc-Scripter-Scripter-Steps',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterKeyClickStep >> defaultLabel [
 	^ 'Key press'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterKeyClickStep >> playOn: aScripter [
 	BlSpace simulateKeyDownOn: aScripter element key: self key.
 	BlSpace simulateKeyUpOn: aScripter element key: self key.

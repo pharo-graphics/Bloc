@@ -3,14 +3,16 @@ I help to manage children (add / remove) and used as mediator between infinite e
 
 "
 Class {
-	#name : #BlInfiniteChildrenManager,
-	#superclass : #Object,
+	#name : 'BlInfiniteChildrenManager',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Infinite-Core'
+	#category : 'Bloc-Infinite-Core',
+	#package : 'Bloc-Infinite',
+	#tag : 'Core'
 }
 
-{ #category : #'children add/remove' }
+{ #category : 'children add/remove' }
 BlInfiniteChildrenManager >> addChild: aChildElement at: anIndex in: anInfiniteElement [
 
 	"Adds a child at an index.
@@ -25,7 +27,7 @@ BlInfiniteChildrenManager >> addChild: aChildElement at: anIndex in: anInfiniteE
 
 ]
 
-{ #category : #'children add/remove' }
+{ #category : 'children add/remove' }
 BlInfiniteChildrenManager >> attachChild: aChildElement at: anIndex in: anInfiniteElement [
 
 	"Attaches aChildElement to the infinite element"
@@ -43,7 +45,7 @@ BlInfiniteChildrenManager >> attachChild: aChildElement at: anIndex in: anInfini
 	anInfiniteElement attachChild: aChildElement at: anOffset
 ]
 
-{ #category : #'children add/remove' }
+{ #category : 'children add/remove' }
 BlInfiniteChildrenManager >> detachChildAt: anIndex in: anInfiniteElement [
 	"Detaches a child element at anIndex from infinite element"
 	| anElement anElementHolder |
@@ -61,7 +63,7 @@ BlInfiniteChildrenManager >> detachChildAt: anIndex in: anInfiniteElement [
 	anInfiniteElement detachChild: anElement
 ]
 
-{ #category : #'children add/remove' }
+{ #category : 'children add/remove' }
 BlInfiniteChildrenManager >> removeChild: aChildElement in: anInfiniteElement [
 	"Remove aChildElement from infinite element
 	and do not track it anymore (unhide and remove from bucket)"
@@ -74,7 +76,7 @@ BlInfiniteChildrenManager >> removeChild: aChildElement in: anInfiniteElement [
 	self removeChildAt: index in: anInfiniteElement 
 ]
 
-{ #category : #'children add/remove' }
+{ #category : 'children add/remove' }
 BlInfiniteChildrenManager >> removeChildAt: anIndex in: anInfiniteElement [
 
 	"Remove a child at anIndex from infinite element
@@ -89,7 +91,7 @@ BlInfiniteChildrenManager >> removeChildAt: anIndex in: anInfiniteElement [
 	anInfiniteElement removeChildAt: anIndex
 ]
 
-{ #category : #'children accessing' }
+{ #category : 'children accessing' }
 BlInfiniteChildrenManager >> unfilteredChildAt: anIndex in: anInfiniteElement [
 	"Return a child element by infinite element's offset.
 	I will not offset this index"
@@ -98,7 +100,7 @@ BlInfiniteChildrenManager >> unfilteredChildAt: anIndex in: anInfiniteElement [
 	^ anInfiniteElement childAt: anIndex
 ]
 
-{ #category : #'children accessing' }
+{ #category : 'children accessing' }
 BlInfiniteChildrenManager >> unfilteredChildrenCountIn: anInfiniteElement [
 	"Return the total number of children"
 	<return: #Number>
@@ -106,7 +108,7 @@ BlInfiniteChildrenManager >> unfilteredChildrenCountIn: anInfiniteElement [
 	^ anInfiniteElement childrenCount
 ]
 
-{ #category : #'children accessing' }
+{ #category : 'children accessing' }
 BlInfiniteChildrenManager >> unfilteredChildrenDo: aBlock in: anInfiniteElement [
 	"Do not remove children in a Block!"
 	| aChildCount |
@@ -115,7 +117,7 @@ BlInfiniteChildrenManager >> unfilteredChildrenDo: aBlock in: anInfiniteElement 
 		aBlock value: (self unfilteredChildAt: anIndex in: anInfiniteElement) ]
 ]
 
-{ #category : #'children accessing' }
+{ #category : 'children accessing' }
 BlInfiniteChildrenManager >> unfilteredChildrenReverseDo: aBlock in: anInfiniteElement [
 	"Do not remove children in a Block!"
 	| aChildCount |

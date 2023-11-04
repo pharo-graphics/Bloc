@@ -1,10 +1,12 @@
 Class {
-	#name : #BlMouseProcessorClickExamples,
-	#superclass : #BlMouseProcessorExamples,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseProcessorClickExamples',
+	#superclass : 'BlMouseProcessorExamples',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorClickExamples >> click [
 	<gtExample>
 	| aScripter |
@@ -39,7 +41,7 @@ BlMouseProcessorClickExamples >> click [
 	^ aScripter
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorClickExamples >> mouseDown [
 	<gtExample>
 	| aScripter |
@@ -67,7 +69,7 @@ BlMouseProcessorClickExamples >> mouseDown [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorClickExamples >> mouseEnter [
 	<gtExample>
 	| aScripter |
@@ -97,7 +99,7 @@ BlMouseProcessorClickExamples >> mouseEnter [
 	^ aScripter
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorClickExamples >> scripterElement [
 	<gtExample>
 	

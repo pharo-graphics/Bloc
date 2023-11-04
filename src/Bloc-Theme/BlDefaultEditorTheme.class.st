@@ -1,34 +1,35 @@
 Class {
-	#name : #BlDefaultEditorTheme,
-	#superclass : #BlTheme,
+	#name : 'BlDefaultEditorTheme',
+	#superclass : 'BlTheme',
 	#instVars : [
 		'borderColor',
 		'focusedBorderColor'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultEditorTheme >> borderColor [
 	^ borderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultEditorTheme >> borderColor: anObject [
 	borderColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultEditorTheme >> focusedBorderColor [
 	^ focusedBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultEditorTheme >> focusedBorderColor: anObject [
 	focusedBorderColor := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDefaultEditorTheme >> initialize [
 	super initialize.
 	borderColor := BlDefaultColors editorBorderColor.

@@ -2,18 +2,20 @@
 I act as a space host for a Bloc space
 "
 Class {
-	#name : #BlMorphicSpaceHostMorph,
-	#superclass : #Morph,
+	#name : 'BlMorphicSpaceHostMorph',
+	#superclass : 'Morph',
 	#instVars : [
 		'form',
 		'eventHandler',
 		'preventResize',
 		'hostSpace'
 	],
-	#category : #'BlocHost-Morphic-Host - Common'
+	#category : 'BlocHost-Morphic-Host - Common',
+	#package : 'BlocHost-Morphic',
+	#tag : 'Host - Common'
 }
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 	| spaceForm |
 	super drawOn: aCanvas.
@@ -26,7 +28,7 @@ BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 			aClippedCanvas drawImage: spaceForm at: self position ] ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMorphicSpaceHostMorph >> extent: aPoint [
 	
 	self extent = aPoint
@@ -45,42 +47,42 @@ BlMorphicSpaceHostMorph >> extent: aPoint [
 			sentTo: eventHandler ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicSpaceHostMorph >> form: aForm [
 	form := aForm.
 	self changed
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlMorphicSpaceHostMorph >> handleKeystroke: anEvent [
 	anEvent sentTo: eventHandler
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlMorphicSpaceHostMorph >> handlesKeyboard: evt [
 	^ true
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlMorphicSpaceHostMorph >> handlesTextInputEvent: evt [
 	"Do I want to receive text edition events?" 
 
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicSpaceHostMorph >> hostSpace [
 	^ hostSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicSpaceHostMorph >> hostSpace: aHostSpace [
 	
 	hostSpace := aHostSpace.	
 	self initializeAnnouncement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicSpaceHostMorph >> initialize [
 	super initialize.
 
@@ -97,7 +99,7 @@ BlMorphicSpaceHostMorph >> initialize [
 	self vResizing: #spaceFill
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicSpaceHostMorph >> initializeAnnouncement [
 	self
 		onAnnouncement: MorphOpened
@@ -125,7 +127,7 @@ BlMorphicSpaceHostMorph >> initializeAnnouncement [
 					sentTo: eventHandler ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMorphicSpaceHostMorph >> isInSpaceArea: anEvent [
 	"Return true if given morphic event is within space area, false otherwise"
 	<return: #Boolean>
@@ -133,23 +135,23 @@ BlMorphicSpaceHostMorph >> isInSpaceArea: anEvent [
 	^ self bounds containsPoint: anEvent position
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlMorphicSpaceHostMorph >> keyDown: anEvent [
 	anEvent sentTo: eventHandler
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlMorphicSpaceHostMorph >> keyUp: anEvent [
 	anEvent sentTo: eventHandler
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMorphicSpaceHostMorph >> pointToSpace: aPoint [
 
 	^ aPoint - self spacePosition
 ]
 
-{ #category : #'events-processing' }
+{ #category : 'events-processing' }
 BlMorphicSpaceHostMorph >> processEvent: anEvent using: defaultDispatcher [
 	
 	(self isInSpaceArea: anEvent)
@@ -163,7 +165,7 @@ BlMorphicSpaceHostMorph >> processEvent: anEvent using: defaultDispatcher [
 		ifFalse: [ anEvent wasHandled: true ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMorphicSpaceHostMorph >> resizeDuring: aBlock [
 	
 	preventResize
@@ -173,7 +175,7 @@ BlMorphicSpaceHostMorph >> resizeDuring: aBlock [
 	aBlock ensure: [ preventResize := false ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMorphicSpaceHostMorph >> spacePosition [
 	"Return position of space area"
 	<return: #Point>
@@ -181,19 +183,19 @@ BlMorphicSpaceHostMorph >> spacePosition [
 	^ self position
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMorphicSpaceHostMorph >> takesKeyboardFocus [
 	"Answer whether the receiver can normally take keyboard focus."
 
 	^ true
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlMorphicSpaceHostMorph >> textInput: aTextInputEvent [
 	aTextInputEvent sentTo: eventHandler
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMorphicSpaceHostMorph >> wantsKeyboardFocus [
 	"Answer whether the receiver would like keyboard focus
 	in the general case (mouse action normally)."

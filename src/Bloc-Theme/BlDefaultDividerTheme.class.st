@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDefaultDividerTheme,
-	#superclass : #BlTheme,
+	#name : 'BlDefaultDividerTheme',
+	#superclass : 'BlTheme',
 	#instVars : [
 		'disabledBackgroundColor',
 		'disabledBorderColor',
@@ -11,70 +11,71 @@ Class {
 		'hoveredBackgroundColor',
 		'pressedBackgroundColor'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> defaultBackgroundColor [
 	^ defaultBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> defaultBackgroundColor: anObject [
 	defaultBackgroundColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> defaultBorderColor [
 	^ defaultBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> defaultBorderColor: anObject [
 	defaultBorderColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> disabledBackgroundColor [
 	^ disabledBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> disabledBackgroundColor: anObject [
 	disabledBackgroundColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> disabledBorderColor [
 	^ disabledBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> disabledBorderColor: anObject [
 	disabledBorderColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> hoveredBackgroundColor [
 	^ hoveredBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> hoveredBackgroundColor: anObject [
 	hoveredBackgroundColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> hoveredBorderColor [
 	^ hoveredBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> hoveredBorderColor: anObject [
 	hoveredBorderColor := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDefaultDividerTheme >> initialize [
 	super initialize.
 	defaultBorderColor := BlDefaultColors defaultDividerBorderColor.
@@ -88,22 +89,22 @@ BlDefaultDividerTheme >> initialize [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> pressedBackgroundColor [
 	^ pressedBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> pressedBackgroundColor: aColor [
 	pressedBackgroundColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> pressedBorderColor [
 	^ pressedBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultDividerTheme >> pressedBorderColor: anObject [
 	pressedBorderColor := anObject
 ]

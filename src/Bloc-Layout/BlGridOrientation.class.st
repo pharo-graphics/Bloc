@@ -1,19 +1,21 @@
 Class {
-	#name : #BlGridOrientation,
-	#superclass : #Object,
+	#name : 'BlGridOrientation',
+	#superclass : 'Object',
 	#classVars : [
 		'HORIZONTAL',
 		'VERTICAL'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridOrientation class >> horizontal [
 	^ HORIZONTAL
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlGridOrientation class >> initialize [
 	super initialize.
 	
@@ -21,23 +23,23 @@ BlGridOrientation class >> initialize [
 	VERTICAL := BlGridVerticalOrientation new.
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridOrientation class >> vertical [
 	^ VERTICAL
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridOrientation >> = anObject [
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGridOrientation >> isHorizontal [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGridOrientation >> isVertical [
 	^ false
 ]

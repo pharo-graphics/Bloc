@@ -1,6 +1,6 @@
 Class {
-	#name : #BlOSWindowSDL2BufferSurfaceRenderer,
-	#superclass : #BlHostSurfaceRenderer,
+	#name : 'BlOSWindowSDL2BufferSurfaceRenderer',
+	#superclass : 'BlHostSurfaceRenderer',
 	#instVars : [
 		'window',
 		'texture',
@@ -9,10 +9,12 @@ Class {
 	#pools : [
 		'SDL2Constants'
 	],
-	#category : #'BlocHost-OSWindow-SDL2-Renderer'
+	#category : 'BlocHost-OSWindow-SDL2-Renderer',
+	#package : 'BlocHost-OSWindow-SDL2',
+	#tag : 'Renderer'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBufferSurface [
 
 	| textureExtent sdlSurface |
@@ -37,7 +39,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBuff
 		extent: textureExtent
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aBlHostRendererBufferSurface damaged: aCollectionOfRectangles [
 	"Render a given surface on a host space. Collection of damaged rectangles is not taken into account."
 
@@ -52,14 +54,14 @@ BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aBlHostRendererBufferSurfa
 		present
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOSWindowSDL2BufferSurfaceRenderer >> window [
 	"Answer my OSWindow."
 
 	^ window
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOSWindowSDL2BufferSurfaceRenderer >> window: aOSWindow [
 
 	window := aOSWindow

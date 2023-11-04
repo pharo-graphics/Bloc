@@ -1,15 +1,17 @@
 Class {
-	#name : #BlInfiniteDecoration,
-	#superclass : #Object,
+	#name : 'BlInfiniteDecoration',
+	#superclass : 'Object',
 	#instVars : [
 		'computedBounds',
 		'decorationInsets',
 		'priority'
 	],
-	#category : #'Bloc-Infinite-Core'
+	#category : 'Bloc-Infinite-Core',
+	#package : 'Bloc-Infinite',
+	#tag : 'Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlInfiniteDecoration >> aeDraw: anItemElement beneathOn: aCanvas in: anInfiniteElement [
 
 	"Draw any appropriate decorations into the Sparta Canvas supplied to the Infinite Element for its child element anItemElement. Any content drawn by this method will be drawn before the item elements are drawn, and will thus appear underneath them"
@@ -17,7 +19,7 @@ BlInfiniteDecoration >> aeDraw: anItemElement beneathOn: aCanvas in: anInfiniteE
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlInfiniteDecoration >> aeDraw: anItemElement overOn: aSpartaCanvas in: anInfiniteElement [
 
 	"Draw any appropriate decorations into the Sparta Canvas supplied to the Infinite Element for its child element anItemElement. Any content drawn by this method will be drawn after the item elements are drawn, and will thus appear over them"
@@ -25,7 +27,7 @@ BlInfiniteDecoration >> aeDraw: anItemElement overOn: aSpartaCanvas in: anInfini
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlInfiniteDecoration >> aeDrawBeneathOn: aCanvas in: anInfiniteElement [
 
 	"Draw any appropriate decorations into the Sparta Canvas supplied to the Infinite Element. Any content drawn by this method will be drawn before the item elements are drawn, and will thus appear underneath them"
@@ -35,7 +37,7 @@ BlInfiniteDecoration >> aeDrawBeneathOn: aCanvas in: anInfiniteElement [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlInfiniteDecoration >> aeDrawOverOn: aCanvas in: anInfiniteElement [
 
 	"Draw any appropriate decorations into the Sparta Canvas supplied to the Infinite Element. Any content drawn by this method will be drawn after the item elements are drawn, and will thus appear over them"
@@ -44,12 +46,12 @@ BlInfiniteDecoration >> aeDrawOverOn: aCanvas in: anInfiniteElement [
 
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteDecoration >> computedBounds [ 
 	^ computedBounds ifNil: [ Rectangle origin: 0 asPoint corner: 0 asPoint]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteDecoration >> decorationInsets [
 	"get the insets for the given item element. Be aware that only one side is used"
 	<return: #BlInsets>
@@ -57,7 +59,7 @@ BlInfiniteDecoration >> decorationInsets [
 	^ decorationInsets 
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteDecoration >> getDecorationsInsetsOfChildElement: anElement [
 	"get the insets for the given item element. Be aware that only one side is used"
 	<return: #BlInsets>
@@ -65,7 +67,7 @@ BlInfiniteDecoration >> getDecorationsInsetsOfChildElement: anElement [
 	^ decorationInsets := self requiredInsetsOfChildElement: anElement
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteDecoration >> getDecorationsInsetsOfChildElement: anElement in: anInfiniteElement [
 	"get the insets for the given item element. Be aware that only one side is used"
 	<return: #BlInsets>
@@ -73,13 +75,13 @@ BlInfiniteDecoration >> getDecorationsInsetsOfChildElement: anElement in: anInfi
 	^ decorationInsets := self requiredInsetsOfChildElement: anElement in: anInfiniteElement 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteDecoration >> initialize [ 
 	super initialize.
 	decorationInsets := BlInsets empty
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlInfiniteDecoration >> onLayoutDoneIn: anEditorElement remaining: remainingRectangle [
 
 	| insets rbnds |
@@ -99,23 +101,23 @@ BlInfiniteDecoration >> onLayoutDoneIn: anEditorElement remaining: remainingRect
 	^ remainingRectangle
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlInfiniteDecoration >> onScrollDoneIn: anEditorElement [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteDecoration >> priority [
 	^ priority ifNil: [ priority := 0 ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteDecoration >> priority: anInteger [
 	priority := anInteger
 	
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteDecoration >> requiredInsetsOfChildElement: anElement [ 
 	"get the insets for the given item element. Be aware that only one side is used"
 	<return: #BlInsets>
@@ -123,7 +125,7 @@ BlInfiniteDecoration >> requiredInsetsOfChildElement: anElement [
 	^ BlInsets empty
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteDecoration >> requiredInsetsOfChildElement: anElement in: anInfiniteElement [
 	"get the insets for the given item element. Be aware that only one side is used"
 	<return: #BlInsets>

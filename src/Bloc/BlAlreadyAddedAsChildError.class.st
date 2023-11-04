@@ -3,32 +3,34 @@ I am signalled when user tries to add an {{gtClass:BlElement}}, that is already 
 
 "
 Class {
-	#name : #BlAlreadyAddedAsChildError,
-	#superclass : #Error,
+	#name : 'BlAlreadyAddedAsChildError',
+	#superclass : 'Error',
 	#instVars : [
 		'element'
 	],
-	#category : 'Bloc-Basic-Errors'
+	#category : 'Bloc-Basic-Errors',
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlAlreadyAddedAsChildError class >> element: anElement [
 	^ self new element: anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAlreadyAddedAsChildError >> description [
 	^ 'Can not add child that is already added to another element!'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAlreadyAddedAsChildError >> element [
 	<return: #BlElement>
 
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAlreadyAddedAsChildError >> element: anElement [
 	element := anElement
 ]

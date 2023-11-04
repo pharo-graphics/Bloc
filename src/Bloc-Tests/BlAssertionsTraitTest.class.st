@@ -1,10 +1,11 @@
 Class {
-	#name : #BlAssertionsTraitTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#name : 'BlAssertionsTraitTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Tests',
+	#package : 'Bloc-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAssertionsTraitTest >> testAllAssertDescriptionUseDebugTrait [
 	| senders classes superclasses blocClasses |
 	self skip.
@@ -26,7 +27,7 @@ BlAssertionsTraitTest >> testAllAssertDescriptionUseDebugTrait [
 	self assert: blocClasses isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAssertionsTraitTest >> testAllAssertUseDebugTrait [
 	| senders classes superclasses blocClasses |
 	self skip.

@@ -1,15 +1,17 @@
 Class {
-	#name : #BlGridAlignBoundsMode,
-	#superclass : #BlGridAlignmentMode,
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#name : 'BlGridAlignBoundsMode',
+	#superclass : 'BlGridAlignmentMode',
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGridAlignBoundsMode >> isAlignBounds [
 	^ true
 ]
 
-{ #category : #'computing margins' }
+{ #category : 'computing margins' }
 BlGridAlignBoundsMode >> marginOf: anChildElement in: aGridLayout isHorizontal: isHorizontal isLeading: isLeading [
 	|axis margins spec index |
 

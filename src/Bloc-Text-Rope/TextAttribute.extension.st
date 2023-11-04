@@ -1,6 +1,6 @@
-Extension { #name : #TextAttribute }
+Extension { #name : 'TextAttribute' }
 
-{ #category : #'*Bloc-Text-Rope' }
+{ #category : '*Bloc-Text-Rope' }
 TextAttribute >> applyToBlText: aBlText [
 	"Default action is to do nothing.
 	Apply the receiver to the supplied BlText.

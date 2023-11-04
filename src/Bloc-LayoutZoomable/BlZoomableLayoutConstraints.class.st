@@ -1,14 +1,15 @@
 Class {
-	#name : #BlZoomableLayoutConstraints,
-	#superclass : #BlLayoutConstraints,
+	#name : 'BlZoomableLayoutConstraints',
+	#superclass : 'BlLayoutConstraints',
 	#instVars : [
 		'scaleFactor',
 		'isDirty'
 	],
-	#category : #'Bloc-LayoutZoomable'
+	#category : 'Bloc-LayoutZoomable',
+	#package : 'Bloc-LayoutZoomable'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlZoomableLayoutConstraints >> initialize [
 	super initialize.
 	
@@ -16,24 +17,24 @@ BlZoomableLayoutConstraints >> initialize [
 	isDirty := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlZoomableLayoutConstraints >> isDirty [
 	<return: #Boolean>
 
 	^ isDirty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlZoomableLayoutConstraints >> isDirty: aBoolean [
 	isDirty := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlZoomableLayoutConstraints >> scaleFactor [
 	^ scaleFactor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlZoomableLayoutConstraints >> scaleFactor: aNumber [
 	scaleFactor = aNumber
 		ifTrue: [ ^ self ].

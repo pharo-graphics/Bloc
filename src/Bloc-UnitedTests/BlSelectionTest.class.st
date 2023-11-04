@@ -3,24 +3,26 @@ I have been automatically converted and probably manually tweaked from BlSelecti
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlSelectionTest,
-	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Selection'
+	#name : 'BlSelectionTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Selection',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Selection'
 }
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSelectionTest >> compositeSelection [
 
 	^ BlCompositeSelection new
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSelectionTest >> monotoneSelection [
 
 	^ BlMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelectFrom0To1 [
 
 	| aCompositeSelection |
@@ -41,7 +43,7 @@ BlSelectionTest >> testCompositeSelectFrom0To1 [
 	^ aCompositeSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelectFrom1To1 [
 
 	| aCompositeSelection |
@@ -57,7 +59,7 @@ BlSelectionTest >> testCompositeSelectFrom1To1 [
 	^ aCompositeSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelectFrom1To3 [
 
 	| aCompositeSelection |
@@ -78,7 +80,7 @@ BlSelectionTest >> testCompositeSelectFrom1To3 [
 	^ aCompositeSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelectFrom1To3And2To6 [
 
 	| aCompositeSelection |
@@ -100,7 +102,7 @@ BlSelectionTest >> testCompositeSelectFrom1To3And2To6 [
 	^ aCompositeSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelectFrom1To3And4To6 [
 
 	| aCompositeSelection |
@@ -122,7 +124,7 @@ BlSelectionTest >> testCompositeSelectFrom1To3And4To6 [
 	^ aCompositeSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelectFrom1To3And5To6 [
 
 	| aCompositeSelection |
@@ -144,7 +146,7 @@ BlSelectionTest >> testCompositeSelectFrom1To3And5To6 [
 	^ aCompositeSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelectFrom1To4And4To6 [
 
 	| aCompositeSelection |
@@ -166,7 +168,7 @@ BlSelectionTest >> testCompositeSelectFrom1To4And4To6 [
 	^ aCompositeSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelectFrom5To6And1To3 [
 
 	| aCompositeSelection |
@@ -188,13 +190,13 @@ BlSelectionTest >> testCompositeSelectFrom5To6And1To3 [
 	^ aCompositeSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testCompositeSelection [
 
 	^ BlCompositeSelection new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneContainsIn1To1 [
 
 	| aMonotoneSelection |
@@ -207,7 +209,7 @@ BlSelectionTest >> testMonotoneContainsIn1To1 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneContainsIndexIn1To1 [
 
 	| aMonotoneSelection |
@@ -220,7 +222,7 @@ BlSelectionTest >> testMonotoneContainsIndexIn1To1 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneNeighbours1To1And3To4 [
 
 	| from1to1 from3to4 |
@@ -233,7 +235,7 @@ BlSelectionTest >> testMonotoneNeighbours1To1And3To4 [
 	^ from3to4 neighbours: from1to1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneNeighbours1To3And1To1 [
 
 	| from1to3 from1to1 |
@@ -246,7 +248,7 @@ BlSelectionTest >> testMonotoneNeighbours1To3And1To1 [
 	^ from1to3 neighbours: from1to1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneNeighbours1To3And3To4 [
 
 	| from1to3 from3to4 |
@@ -259,7 +261,7 @@ BlSelectionTest >> testMonotoneNeighbours1To3And3To4 [
 	^ from1to3 neighbours: from3to4
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneNeighbours1To3And4To6 [
 
 	| from1to3 from4to6 |
@@ -272,7 +274,7 @@ BlSelectionTest >> testMonotoneNeighbours1To3And4To6 [
 	^ from1to3 neighbours: from4to6
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneNeighbours1To4And4To6 [
 
 	| from1to4 from4to6 |
@@ -285,7 +287,7 @@ BlSelectionTest >> testMonotoneNeighbours1To4And4To6 [
 	^ from1to4 neighbours: from4to6
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneRangeIncludesIn1To1 [
 
 	| aMonotoneSelection |
@@ -298,7 +300,7 @@ BlSelectionTest >> testMonotoneRangeIncludesIn1To1 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneRangeIncludesIn1To3 [
 
 	| aMonotoneSelection |
@@ -313,7 +315,7 @@ BlSelectionTest >> testMonotoneRangeIncludesIn1To3 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneRangeIncludesIn4To6 [
 
 	| aMonotoneSelection |
@@ -331,7 +333,7 @@ BlSelectionTest >> testMonotoneRangeIncludesIn4To6 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneSelectFrom1To1 [
 
 	| aMonotoneSelection |
@@ -348,7 +350,7 @@ BlSelectionTest >> testMonotoneSelectFrom1To1 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneSelectFrom1To3 [
 
 	| aMonotoneSelection |
@@ -368,7 +370,7 @@ BlSelectionTest >> testMonotoneSelectFrom1To3 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneSelectFrom1To4 [
 
 	| aMonotoneSelection |
@@ -388,7 +390,7 @@ BlSelectionTest >> testMonotoneSelectFrom1To4 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneSelectFrom3To4 [
 
 	| aMonotoneSelection |
@@ -408,7 +410,7 @@ BlSelectionTest >> testMonotoneSelectFrom3To4 [
 	^ aMonotoneSelection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSelectionTest >> testMonotoneSelectFrom4To6 [
 
 	| aMonotoneSelection |

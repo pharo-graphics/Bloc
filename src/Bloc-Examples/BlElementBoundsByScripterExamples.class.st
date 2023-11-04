@@ -1,10 +1,12 @@
 Class {
-	#name : #BlElementBoundsByScripterExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Examples-Basic'
+	#name : 'BlElementBoundsByScripterExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Examples-Basic',
+	#package : 'Bloc-Examples',
+	#tag : 'Basic'
 }
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_0 [
 	<gtExample>
 	 | aScripter |
@@ -15,7 +17,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_0 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_1 [
 	<gtExample>
 	 | aScripter |
@@ -40,7 +42,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_2 [
 	<gtExample>
 	 | aScripter |
@@ -57,7 +59,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_2 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_3 [
 	<gtExample>
 	<noTest>
@@ -84,7 +86,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_3 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_element_1 [
 	<gtExample>
 
@@ -94,7 +96,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_element_1 [
 		border: (BlBorder paint: (Color blue alpha: 0.2) width: 2)
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_element_2 [
 
 	<gtExample>
@@ -105,14 +107,14 @@ BlElementBoundsByScripterExamples >> bounds_in_space_element_2 [
 		  border: (BlBorder paint: (Color red alpha: 0.2) width: 2)
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_element_bounds [
 	<gtExample>
 
 	^ 0@0 extent: 500@400
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_element_child [
 	<gtExample>
 	^ BlExampleEventsCountingElement new
@@ -123,7 +125,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_element_child [
 			c vertical matchParent ]
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_element_container [
 	<gtExample>
 
@@ -138,14 +140,14 @@ BlElementBoundsByScripterExamples >> bounds_in_space_element_container [
 		}
 ]
 
-{ #category : #'examples - bounds in space' }
+{ #category : 'examples - bounds in space' }
 BlElementBoundsByScripterExamples >> bounds_in_space_element_extent [
 	<gtExample>
 
 	^ 500@400
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlElementBoundsByScripterExamples >> scripter [
 	<gtExample>
 

@@ -1,17 +1,19 @@
 Class {
-	#name : #BlBlocUIManagerNotificationBasicHandler,
-	#superclass : #BlBlocUIManagerNotificationHandler,
-	#category : #'BlocHost-Morphic-Support'
+	#name : 'BlBlocUIManagerNotificationBasicHandler',
+	#superclass : 'BlBlocUIManagerNotificationHandler',
+	#category : 'BlocHost-Morphic-Support',
+	#package : 'BlocHost-Morphic',
+	#tag : 'Support'
 }
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlBlocUIManagerNotificationBasicHandler class >> priority [
 	<return: #Number>
 	"Higher number, higher priority"
 	^ 1
 ]
 
-{ #category : #'private - displaying' }
+{ #category : 'private - displaying' }
 BlBlocUIManagerNotificationBasicHandler >> elementDoOrSpaceDo: aBlock [
 
 	| context |

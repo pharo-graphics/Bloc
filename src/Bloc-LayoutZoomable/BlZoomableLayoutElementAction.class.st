@@ -1,30 +1,31 @@
 Class {
-	#name : #BlZoomableLayoutElementAction,
-	#superclass : #BlLayoutNodeElementAction,
+	#name : 'BlZoomableLayoutElementAction',
+	#superclass : 'BlLayoutNodeElementAction',
 	#instVars : [
 		'animationDuration'
 	],
-	#category : #'Bloc-LayoutZoomable'
+	#category : 'Bloc-LayoutZoomable',
+	#package : 'Bloc-LayoutZoomable'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlZoomableLayoutElementAction >> animationDuration [
 	^ animationDuration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlZoomableLayoutElementAction >> animationDuration: aDuration [
 	animationDuration := aDuration asDuration
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlZoomableLayoutElementAction >> initialize [
 	super initialize.
 
 	animationDuration := 0 milliSeconds
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BlZoomableLayoutElementAction >> measured: aChildNode element: anElement [
 	aChildNode constraints zoomable isDirty
 		ifTrue: [

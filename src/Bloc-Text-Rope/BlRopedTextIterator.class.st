@@ -3,17 +3,19 @@ I am a specific RopedText iterator
 
 "
 Class {
-	#name : #BlRopedTextIterator,
-	#superclass : #BlTextIterator,
+	#name : 'BlRopedTextIterator',
+	#superclass : 'BlTextIterator',
 	#instVars : [
 		'rope',
 		'iterator',
 		'text'
 	],
-	#category : #'Bloc-Text-Rope-Text'
+	#category : 'Bloc-Text-Rope-Text',
+	#package : 'Bloc-Text-Rope',
+	#tag : 'Text'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlRopedTextIterator class >> text: aRopedText [
 	
 	^ self new
@@ -21,7 +23,7 @@ BlRopedTextIterator class >> text: aRopedText [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlRopedTextIterator class >> text: aRopedText from: aStartIndex to: anEndIndex [
 	
 	^ self new
@@ -29,7 +31,7 @@ BlRopedTextIterator class >> text: aRopedText from: aStartIndex to: anEndIndex [
 		yourself
 ]
 
-{ #category : #'iterator - accessing' }
+{ #category : 'iterator - accessing' }
 BlRopedTextIterator >> attributes [
 	"Return a collection of rope attributes at a current position without duplicates"
 	<return: #Collection of: #BlTextAttribute>
@@ -37,7 +39,7 @@ BlRopedTextIterator >> attributes [
 	^ iterator attributes
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 
@@ -48,7 +50,7 @@ BlRopedTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anEx
 	^ iterator detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock
 ]
 
-{ #category : #'iterator - testing' }
+{ #category : 'iterator - testing' }
 BlRopedTextIterator >> hasNext [
 	"Return true if there is a next text item (character) after a current position"
 	<return: #Boolean>
@@ -56,7 +58,7 @@ BlRopedTextIterator >> hasNext [
 	^ iterator hasNext
 ]
 
-{ #category : #'iterator - testing' }
+{ #category : 'iterator - testing' }
 BlRopedTextIterator >> hasPrevious [
 	"Return true if there is a previous text item (character) before the current position"
 	<return: #Boolean>
@@ -64,7 +66,7 @@ BlRopedTextIterator >> hasPrevious [
 	^ iterator hasPrevious
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
 	<return: #Character or: #Object>
@@ -72,7 +74,7 @@ BlRopedTextIterator >> next [
 	^ iterator next
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> nextLine [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first carriage return character"
@@ -81,7 +83,7 @@ BlRopedTextIterator >> nextLine [
 	^ self nextLineIndicesDo: [ :aStart :anEnd | BlSubText text: text from: aStart to: anEnd ]
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
 		- start index of line in text coordinates
@@ -92,7 +94,7 @@ BlRopedTextIterator >> nextLineIndicesDo: anIndicesBlock [
 		anIndicesBlock cull: aStart + 1 cull: anEnd cull: aLineEndWithDelimiters ]
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> nextSegment: aBlock [
 	<return: #BlText>
 
@@ -101,7 +103,7 @@ BlRopedTextIterator >> nextSegment: aBlock [
 		indicesDo: [ :aStart :anEnd | BlSubText text: text from: ((aStart + 1) min: anEnd) to: anEnd ]
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 	"@see BlTextIterator>>#nextSegment:indicesDo:"
 	<return: #Object>
@@ -109,7 +111,7 @@ BlRopedTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 	^ iterator nextSegment: aBlock indicesDo: anIndicesBlock
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> nextSpan [
 	"Return a next homogeneous text span"
 	<return: #BlSpan>
@@ -122,7 +124,7 @@ BlRopedTextIterator >> nextSpan [
 		attributes: theAttributes
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> nextWhitespace [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first non-whitespace character without including it"
@@ -135,7 +137,7 @@ BlRopedTextIterator >> nextWhitespace [
 	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> nextWord [
 	"Return an instance of BlText which represents a piece of text from current position
 	until the first space character not including spaces"
@@ -148,7 +150,7 @@ BlRopedTextIterator >> nextWord [
 	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> peek [
 	"Return an item (character) at current position"
 	<return: #Character or: #Object>
@@ -156,7 +158,7 @@ BlRopedTextIterator >> peek [
 	^ iterator peek
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> peer [
 	"Return an item (character) before current position"
 	<return: #Character or: #Object>
@@ -164,7 +166,7 @@ BlRopedTextIterator >> peer [
 	^ iterator peer
 ]
 
-{ #category : #'iterator - accessing' }
+{ #category : 'iterator - accessing' }
 BlRopedTextIterator >> position [
 	"Return current iterator position within a text"
 	<return: #Number>
@@ -172,7 +174,7 @@ BlRopedTextIterator >> position [
 	^ iterator position
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> previous [
 	"Return an item (character) at current position and move one to the left"
 	<return: #Character or: #Object>
@@ -180,7 +182,7 @@ BlRopedTextIterator >> previous [
 	^ iterator previous
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
 	"@see BlTextIterator>>#previousSegment:indicesDo:"
 	<return: #Object>
@@ -188,14 +190,14 @@ BlRopedTextIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
 	^ iterator previousSegment: aBlock indicesDo: anIndicesBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopedTextIterator >> rope [
 	<return: #BlRope>
 
 	^ rope
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> selectAttributes: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver, only those elements for 
@@ -205,21 +207,21 @@ BlRopedTextIterator >> selectAttributes: aBlock [
 	^ iterator selectAttributes: aBlock
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopedTextIterator >> skip: aNumber [
 	"Move forward by aNumber characters"
 
  	iterator skip: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopedTextIterator >> text [
 	<return: #BlRopedText>
 
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopedTextIterator >> text: aBrRopedText from: aStartIndex to: anEndIndex [
 	rope := aBrRopedText rope.
 	text := aBrRopedText.

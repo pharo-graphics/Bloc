@@ -1,10 +1,11 @@
 Class {
-	#name : #BlSpanTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Text-Rope-Tests'
+	#name : 'BlSpanTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Text-Rope-Tests',
+	#package : 'Bloc-Text-Rope-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpanTest >> testUtf8Encoded [
 
 	| aString aSpan |

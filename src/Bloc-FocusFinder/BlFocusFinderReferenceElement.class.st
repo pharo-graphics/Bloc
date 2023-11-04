@@ -1,25 +1,27 @@
 Class {
-	#name : #BlFocusFinderReferenceElement,
-	#superclass : #BlFocusFinderReference,
+	#name : 'BlFocusFinderReferenceElement',
+	#superclass : 'BlFocusFinderReference',
 	#instVars : [
 		'element'
 	],
-	#category : #'Bloc-FocusFinder-Core'
+	#category : 'Bloc-FocusFinder-Core',
+	#package : 'Bloc-FocusFinder',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinderReferenceElement >> element [
 
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinderReferenceElement >> element: aBlElement [
 
 	element := aBlElement
 ]
 
-{ #category : #'api - focus' }
+{ #category : 'api - focus' }
 BlFocusFinderReferenceElement >> focusBoundsIn: anElement [
 	
 	^ (anElement
@@ -27,14 +29,14 @@ BlFocusFinderReferenceElement >> focusBoundsIn: anElement [
 		fromChild: self element) asRectangle
 ]
 
-{ #category : #'api - focus' }
+{ #category : 'api - focus' }
 BlFocusFinderReferenceElement >> focusElementIn: anElement [
 	"Return a 'current' focused element which should be used a reference"
 
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinderReferenceElement >> name [
 
 	^ 'element'

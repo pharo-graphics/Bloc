@@ -1,10 +1,12 @@
 Class {
-	#name : #BlFocusSearchDirectionAbsolute,
-	#superclass : #BlFocusSearchDirection,
-	#category : #'Bloc-FocusFinder-Directions'
+	#name : 'BlFocusSearchDirectionAbsolute',
+	#superclass : 'BlFocusSearchDirection',
+	#category : 'Bloc-FocusFinder-Directions',
+	#package : 'Bloc-FocusFinder',
+	#tag : 'Directions'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusSearchDirectionAbsolute >> beam: aFirstBlBounds beats: aSecondBlBounds in: aSourceBlBounds [
 	"Return true if first bounds are better then second bounds based on
 	wether they are in the beam of source bounds, false otherwise."
@@ -41,13 +43,13 @@ BlFocusSearchDirectionAbsolute >> beam: aFirstBlBounds beats: aSecondBlBounds in
 	^ aFirstDistance < aSecondDistance
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusSearchDirectionAbsolute >> beamsOverlap: aBlBounds and: anotherBlBounds [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusSearchDirectionAbsolute >> is: aDestinationBlBounds candidate: aSourceBlBounds [
 	"Return if destination bounds are located (at least partially) in direction
 	of a given source bounds depending on my direction type, false otherwise."
@@ -55,7 +57,7 @@ BlFocusSearchDirectionAbsolute >> is: aDestinationBlBounds candidate: aSourceBlB
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusSearchDirectionAbsolute >> is: aDestinationBlBounds inDirection: aSourceBlBounds [
 	"Return true if aDestinationBlBounds is located in direction of a provided source bounds
 	according to my destination type, false otherwise."
@@ -63,7 +65,7 @@ BlFocusSearchDirectionAbsolute >> is: aDestinationBlBounds inDirection: aSourceB
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusSearchDirectionAbsolute >> isBetterCandidate: aFirstBlBounds then: aSecondBlBounds in: aSourceBlBounds [
 	"Return true if first bounds is a better candidate then seconds bounds for focus search
 	in this direction from a source bounds, false otherwise."
@@ -134,14 +136,14 @@ BlFocusSearchDirectionAbsolute >> isBetterCandidate: aFirstBlBounds then: aSecon
 	 ^ nearest
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusSearchDirectionAbsolute >> isHorizontal [
 	"Return true if direction is horizontal, false otherwise."
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'geometry - major' }
+{ #category : 'geometry - major' }
 BlFocusSearchDirectionAbsolute >> majorAxisDistance: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the nearest edge of the destination bounds."
@@ -149,7 +151,7 @@ BlFocusSearchDirectionAbsolute >> majorAxisDistance: aDestinationBlBounds and: a
 	^ self subclassResponsibility
 ]
 
-{ #category : #'geometry - major' }
+{ #category : 'geometry - major' }
 BlFocusSearchDirectionAbsolute >> majorAxisDistanceNormalized: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the nearest edge of the destination bounds
@@ -158,7 +160,7 @@ BlFocusSearchDirectionAbsolute >> majorAxisDistanceNormalized: aDestinationBlBou
 	^ 0 max: (self majorAxisDistance: aDestinationBlBounds and: aSourceBlBounds)
 ]
 
-{ #category : #'geometry - major' }
+{ #category : 'geometry - major' }
 BlFocusSearchDirectionAbsolute >> majorAxisDistanceToFarEdge: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the far edge of the destination bounds"
@@ -166,7 +168,7 @@ BlFocusSearchDirectionAbsolute >> majorAxisDistanceToFarEdge: aDestinationBlBoun
 	^ self subclassResponsibility
 ]
 
-{ #category : #'geometry - major' }
+{ #category : 'geometry - major' }
 BlFocusSearchDirectionAbsolute >> majorAxisDistanceToFarEdgeNormalized: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a major axis depending on the type of direction
 	from the furthers source bounds' edge to the far edge of the destination bounds
@@ -176,7 +178,7 @@ BlFocusSearchDirectionAbsolute >> majorAxisDistanceToFarEdgeNormalized: aDestina
 	^ 1 max: (self majorAxisDistanceToFarEdge: aDestinationBlBounds and: aSourceBlBounds)
 ]
 
-{ #category : #'geometry - minor' }
+{ #category : 'geometry - minor' }
 BlFocusSearchDirectionAbsolute >> minorAxisDistance: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a minor axis depending on the type of direction
 	from source bounds to the nearest edge of the destination bounds."
@@ -184,7 +186,7 @@ BlFocusSearchDirectionAbsolute >> minorAxisDistance: aDestinationBlBounds and: a
 	^ self subclassResponsibility
 ]
 
-{ #category : #'geometry - minor' }
+{ #category : 'geometry - minor' }
 BlFocusSearchDirectionAbsolute >> minorAxisDistanceToNearEdge: aDestinationBlBounds and: aSourceBlBounds [
 	"Return the distance along a minor axis depending on the type of direction
 	from the furthers source bounds' edge to the neares edge of the destination bounds."
@@ -192,7 +194,7 @@ BlFocusSearchDirectionAbsolute >> minorAxisDistanceToNearEdge: aDestinationBlBou
 	^ self subclassResponsibility
 ]
 
-{ #category : #focus }
+{ #category : 'focus' }
 BlFocusSearchDirectionAbsolute >> nextFocus: aFocusedElement in: aCollectionOfElements within: aFocusRootElement from: aFocusedBounds finder: aFocusFinder [
 
 	| bestCandidateBounds tempBounds closestElement |
@@ -220,14 +222,14 @@ BlFocusSearchDirectionAbsolute >> nextFocus: aFocusedElement in: aCollectionOfEl
 	^ closestElement
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFocusSearchDirectionAbsolute >> offsetCandidateBounds: aCandidateBounds according: aFocusedBounds [
 	"Offsets a given candidate bounds according to provided focused bounds based on direction type"
 
 	self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFocusSearchDirectionAbsolute >> weightedDistance: aMajorAxisDistance and: aMinorAxisDistance [
 	"Compute and return a resulting weighted final distance according to
 	the distance along major and minor axes.

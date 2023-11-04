@@ -7,8 +7,8 @@ Mouse actions are blocked during drag
 
 "
 Class {
-	#name : #BlOMouseProcessor,
-	#superclass : #BlBaseEventProcessor,
+	#name : 'BlOMouseProcessor',
+	#superclass : 'BlBaseEventProcessor',
 	#instVars : [
 		'lastEnteredTargets',
 		'lastOverTarget',
@@ -21,23 +21,25 @@ Class {
 		'dragState',
 		'previousMouseDownEvent'
 	],
-	#category : 'Bloc-Space - Events'
+	#category : 'Bloc-Space - Events',
+	#package : 'Bloc',
+	#tag : 'Space - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOMouseProcessor class >> dblClickDelay [
 	<return: #Duration>
 	^ 600 milliSeconds
 ]
 
-{ #category : #'event testing' }
+{ #category : 'event testing' }
 BlOMouseProcessor >> canBeClickEvent: aMouseUpEvent [
 	^ dndInProgress not
 		and: [ (previousMouseDownEvent isNotNil and: [ previousMouseDownEvent primaryButtonPressed ])
 				and: [ aMouseUpEvent target = previousMouseDownEvent target ] ]
 ]
 
-{ #category : #'event testing' }
+{ #category : 'event testing' }
 BlOMouseProcessor >> canBeDblClickEvent: aMouseUpEvent [
 
 	self flag: 'testing aMouseUpEvent target = lastClickEvent target is in fact needed, however, it breaks the Phlow list'.
@@ -47,7 +49,7 @@ BlOMouseProcessor >> canBeDblClickEvent: aMouseUpEvent [
 				and: [ aMouseUpEvent timestamp - lastClickEvent timestamp < self dblClickDelay ]
 ]
 
-{ #category : #'event testing' }
+{ #category : 'event testing' }
 BlOMouseProcessor >> canStartDrag: aMouseMoveEvent [
 	<return: #Boolean>
 
@@ -57,26 +59,26 @@ BlOMouseProcessor >> canStartDrag: aMouseMoveEvent [
 				and: [ (aMouseMoveEvent position - previousMouseDownEvent position) r > self startDragThreshold ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOMouseProcessor >> dblClickDelay [
 	^ self class dblClickDelay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOMouseProcessor >> enteredTargets [
 	<return: #Collection of: #BlElement>
 
 	^ lastEnteredTargets
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlOMouseProcessor >> fillTargetHierarchy: aTarget [
 	^ Array streamContents: [ :aStream |
 		aStream nextPut: aTarget.
 		aTarget allParentsDo: [ :aParentElement | aStream nextPut: aParentElement  ] ]
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsDragEndEvent: anEvent [
 
 	self fireEvent:
@@ -88,7 +90,7 @@ BlOMouseProcessor >> fireAsDragEndEvent: anEvent [
 				yourself)
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 	aCollection
 		do: [ :t | 
@@ -102,7 +104,7 @@ BlOMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 				target: t ]
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsDragEvent: anEvent [
 	self	fireEvent:
 			(anEvent asDragEvent
@@ -113,7 +115,7 @@ BlOMouseProcessor >> fireAsDragEvent: anEvent [
 				yourself)
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 	aCollection
 		do:	[ :t | 
@@ -127,7 +129,7 @@ BlOMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 					target: t ]
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsDragStartEvent: anEvent [
 	^ self fireEvent:
 			(anEvent asDragStartEvent
@@ -137,7 +139,7 @@ BlOMouseProcessor >> fireAsDragStartEvent: anEvent [
 				yourself)
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsDropEvent: anEvent [
 	
 	self	fireEvent:
@@ -149,7 +151,7 @@ BlOMouseProcessor >> fireAsDropEvent: anEvent [
 				yourself)
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsEnterEvent: anEvent targets: aCollection [
 	aCollection
 		do:	[ :t | 
@@ -161,7 +163,7 @@ BlOMouseProcessor >> fireAsEnterEvent: anEvent targets: aCollection [
 					target: t ]
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsMouseLeaveEvent: anEvent targets: aCollection [
 	aCollection
 		do:	[ :t | 
@@ -173,23 +175,23 @@ BlOMouseProcessor >> fireAsMouseLeaveEvent: anEvent targets: aCollection [
 					target:t ]
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsMouseOutEvent: aMouseEvent [
 	self fireEvent: (aMouseEvent asMouseOutEvent target: lastOverTarget)
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsMouseOutEvent: aMouseEvent targets: aCollection [
 	aCollection do: [ :eachElement |
 		self fireEvent: (aMouseEvent asMouseOutEvent target: eachElement) ]
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlOMouseProcessor >> fireAsMouseOverEvent: aMouseEvent [
 	self fireEvent: aMouseEvent asMouseOverEvent 
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlOMouseProcessor >> generateEvents [
 	((lastEnteredTargets, { lastOverTarget }) reject: [ :eachElement | eachElement isNil or: [ eachElement space == self space ] ]) asSet
 		ifNotEmpty: [ :removedEnteredTargets |
@@ -214,7 +216,7 @@ BlOMouseProcessor >> generateEvents [
 		ifFalse: [ lastClickEvent := nil ]
 ]
 
-{ #category : #'mouse down' }
+{ #category : 'mouse down' }
 BlOMouseProcessor >> handleMouseDown: aMouseDownEvent [
 	| aTargetElement |
 
@@ -233,11 +235,11 @@ BlOMouseProcessor >> handleMouseDown: aMouseDownEvent [
 	previousMouseDownEvent := aMouseDownEvent
 ]
 
-{ #category : #'mouse entered / left' }
+{ #category : 'mouse entered / left' }
 BlOMouseProcessor >> handleMouseEntered: aSpaceMouseEnterEvent [
 ]
 
-{ #category : #'mouse entered / left' }
+{ #category : 'mouse entered / left' }
 BlOMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 	lastEnteredTargets do: [ :eachEnteredTarget |
 		| anEvent |
@@ -260,7 +262,7 @@ BlOMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 	lastOverTarget := nil
 ]
 
-{ #category : #'mouse move' }
+{ #category : 'mouse move' }
 BlOMouseProcessor >> handleMouseMove: aMouseMoveEvent [
 	| aTargetElement shouldTryDragStart |
 	"picking and mouse move"
@@ -291,7 +293,7 @@ BlOMouseProcessor >> handleMouseMove: aMouseMoveEvent [
 			ifFalse: [ self processMouseMove: aMouseMoveEvent ] ]
 ]
 
-{ #category : #'mouse up' }
+{ #category : 'mouse up' }
 BlOMouseProcessor >> handleMouseUp: aMouseUpEvent [
 	"DragEnd, Simple click and Dbl click"
 	| aTargetElement |
@@ -313,7 +315,7 @@ BlOMouseProcessor >> handleMouseUp: aMouseUpEvent [
 		ifFalse: [ self processMouseUp: aMouseUpEvent ]
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BlOMouseProcessor >> initialize [
 	super initialize.
 	lastEnteredTargets := #().
@@ -325,7 +327,7 @@ BlOMouseProcessor >> initialize [
 	dragState := BlMouseDragState new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlOMouseProcessor >> isDragging [
 	"Return true if drag and drop is in process, false otherwise"
 	<return: #Boolean>
@@ -333,7 +335,7 @@ BlOMouseProcessor >> isDragging [
 	^ dndInProgress
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlOMouseProcessor >> isMouseEventValid: anEvent [
 
 	anEvent ifNil: [ ^ false ].
@@ -347,33 +349,33 @@ BlOMouseProcessor >> isMouseEventValid: anEvent [
 	^ true
 ]
 
-{ #category : #'event testing' }
+{ #category : 'event testing' }
 BlOMouseProcessor >> isValidDragTarget: aEvent [
 	^ (aEvent target = self space root) not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOMouseProcessor >> lastClickEvent [
 	<return: #BlClickEvent or: nil>
 
 	^ lastClickEvent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOMouseProcessor >> lastMouseDownEvent [
 	<return: #BlElement or: nil>
 
 	^ previousMouseDownEvent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOMouseProcessor >> lastOverTarget [
 	<return: #BlElement>
 
 	^ lastOverTarget
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BlOMouseProcessor >> onSpaceClosed [
 	lastEnteredTargets := #().
 	lastOverTarget := nil.
@@ -386,12 +388,12 @@ BlOMouseProcessor >> onSpaceClosed [
 	previousMouseDownEvent := nil
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlOMouseProcessor >> postProcess: aMouseEvent [
 	
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlOMouseProcessor >> preProcess: aMouseEvent [
 	| aTarget |
 	
@@ -405,7 +407,7 @@ BlOMouseProcessor >> preProcess: aMouseEvent [
 	self updateCursorFrom: aTarget
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOMouseProcessor >> pressedButtons [
 	"Return a collection of currently pressed mouse buttons"
 	<return: #Collection of: #BlMouseButton>
@@ -413,7 +415,7 @@ BlOMouseProcessor >> pressedButtons [
 	^ pressedButtons
 ]
 
-{ #category : #'mouse drag' }
+{ #category : 'mouse drag' }
 BlOMouseProcessor >> processDragEnd: aMouseUpEvent [
 
 	self
@@ -435,7 +437,7 @@ BlOMouseProcessor >> processDragEnd: aMouseUpEvent [
 			dragStartMask := 0 ]
 ]
 
-{ #category : #'mouse drag' }
+{ #category : 'mouse drag' }
 BlOMouseProcessor >> processDragMove: aMouseMoveEvent [
 
 	"check drag"
@@ -448,7 +450,7 @@ BlOMouseProcessor >> processDragMove: aMouseMoveEvent [
 	lastOverTarget := aMouseMoveEvent target
 ]
 
-{ #category : #'mouse move' }
+{ #category : 'mouse move' }
 BlOMouseProcessor >> processMouseEnterLeaveEvent: aMouseEvent [
 	| newLeavedTargets newEnteredTargets currentEnteredTargets |
 
@@ -479,7 +481,7 @@ BlOMouseProcessor >> processMouseEnterLeaveEvent: aMouseEvent [
 	lastEnteredTargets := currentEnteredTargets
 ]
 
-{ #category : #'mouse move' }
+{ #category : 'mouse move' }
 BlOMouseProcessor >> processMouseMove: aMouseMoveEvent [
 	self processMouseEnterLeaveEvent: aMouseMoveEvent.
 
@@ -490,7 +492,7 @@ BlOMouseProcessor >> processMouseMove: aMouseMoveEvent [
 	
 ]
 
-{ #category : #'event handling entrypoint' }
+{ #category : 'event handling entrypoint' }
 BlOMouseProcessor >> processMouseScroll: aMouseScrollEvent [
 	"picking and mouse move"
 	self preProcess: aMouseScrollEvent.
@@ -498,7 +500,7 @@ BlOMouseProcessor >> processMouseScroll: aMouseScrollEvent [
 	self postProcess: aMouseScrollEvent
 ]
 
-{ #category : #'mouse up' }
+{ #category : 'mouse up' }
 BlOMouseProcessor >> processMouseUp: aMouseUpEvent [
 
 	self fireEvent: aMouseUpEvent.
@@ -518,7 +520,7 @@ BlOMouseProcessor >> processMouseUp: aMouseUpEvent [
 					lastClickEvent := aClickEvent copy ] ]
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlOMouseProcessor >> processPicking: aMouseEvent [
 
 	<return: #BlElement>
@@ -539,12 +541,12 @@ BlOMouseProcessor >> processPicking: aMouseEvent [
 	^ aTargetElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOMouseProcessor >> startDragThreshold [
 	^ 4
 ]
 
-{ #category : #'mouse drag' }
+{ #category : 'mouse drag' }
 BlOMouseProcessor >> subprocessDragEnterExitEvent: aMouseEvent [
 	| newEnteredTargets newExitedTargets currentEnteredTargets |
 
@@ -564,7 +566,7 @@ BlOMouseProcessor >> subprocessDragEnterExitEvent: aMouseEvent [
 	lastEnteredTargets := currentEnteredTargets
 ]
 
-{ #category : #'mouse drag' }
+{ #category : 'mouse drag' }
 BlOMouseProcessor >> tryDragStart: aMouseEvent [
 	"Try to start a drag and return true if drag actually started, otherwise false"
 	<return: #Boolean>
@@ -587,7 +589,7 @@ BlOMouseProcessor >> tryDragStart: aMouseEvent [
 	^ dndInProgress := aDragStartEvent isConsumed
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlOMouseProcessor >> updateCursorFrom: aTarget [
 	| t |
 	t := aTarget.
@@ -597,12 +599,12 @@ BlOMouseProcessor >> updateCursorFrom: aTarget [
 	self space currentCursor: t mouseCursor
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlOMouseProcessor >> updateDragView [
 
 ]
 
-{ #category : #'event processing' }
+{ #category : 'event processing' }
 BlOMouseProcessor >> updateFocusOwner: aNode [
 	
 ]

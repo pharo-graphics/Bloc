@@ -1,15 +1,17 @@
 Class {
-	#name : #BlSlideHandler,
-	#superclass : #BlEventListener,
+	#name : 'BlSlideHandler',
+	#superclass : 'BlEventListener',
 	#instVars : [
 		'originalPosition',
 		'dragStartPosition',
 		'targetElement'
 	],
-	#category : #'Bloc-PullAndSlide-Handlers'
+	#category : 'Bloc-PullAndSlide-Handlers',
+	#package : 'Bloc-PullAndSlide',
+	#tag : 'Handlers'
 }
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlSlideHandler >> dragEvent: anEvent [
 	| aStartPosition aCurrentPosition aDelta aTargetElement |
 	anEvent consumed: true.
@@ -31,7 +33,7 @@ BlSlideHandler >> dragEvent: anEvent [
 		aChild relocate: aChildStartPosition + aDelta ]
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlSlideHandler >> dragStartEvent: anEvent [
 	anEvent consumed: true.
 
@@ -42,12 +44,12 @@ BlSlideHandler >> dragStartEvent: anEvent [
 		do: [ :aChild | aChild userData at: #slideHandlerStartPosition put: aChild constraints position ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSlideHandler >> targetElement [
 	^ targetElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSlideHandler >> targetElement: anObject [
 	targetElement := anObject
 ]

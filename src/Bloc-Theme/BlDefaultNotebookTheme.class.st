@@ -1,39 +1,40 @@
 Class {
-	#name : #BlDefaultNotebookTheme,
-	#superclass : #BlTheme,
+	#name : 'BlDefaultNotebookTheme',
+	#superclass : 'BlTheme',
 	#instVars : [
 		'deselectedPageTitleBackgroundColor',
 		'selectedPageTitleBackgroundColor',
 		'backgroundColor'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultNotebookTheme >> backgroundColor [
 
 	^ backgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultNotebookTheme >> backgroundColor: aColor [
 
 	backgroundColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultNotebookTheme >> deselectedPageTitleBackgroundColor [
 
 	^ deselectedPageTitleBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultNotebookTheme >> deselectedPageTitleBackgroundColor: aColor [
 
 	deselectedPageTitleBackgroundColor := aColor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDefaultNotebookTheme >> initialize [
 
 	super initialize.
@@ -43,13 +44,13 @@ BlDefaultNotebookTheme >> initialize [
 	backgroundColor := BlDefaultColors neutralBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultNotebookTheme >> selectedPageTitleBackgroundColor [
 
 	^ selectedPageTitleBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultNotebookTheme >> selectedPageTitleBackgroundColor: aColor [
 
 	selectedPageTitleBackgroundColor := aColor

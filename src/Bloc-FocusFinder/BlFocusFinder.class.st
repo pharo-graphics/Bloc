@@ -5,8 +5,8 @@ I am responsible for finding the next focusable element in a given direction fro
 
 "
 Class {
-	#name : #BlFocusFinder,
-	#superclass : #Object,
+	#name : 'BlFocusFinder',
+	#superclass : 'Object',
 	#instVars : [
 		'direction',
 		'rootElement',
@@ -15,34 +15,36 @@ Class {
 		'focusedBounds',
 		'reference'
 	],
-	#category : #'Bloc-FocusFinder-Core'
+	#category : 'Bloc-FocusFinder-Core',
+	#package : 'Bloc-FocusFinder',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinder >> bestCandidateBounds [
 
 	^ bestCandidateBounds
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinder >> direction [
 
 	^ direction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinder >> direction: aBlFocusSearchDirection [
 
 	direction := aBlFocusSearchDirection
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlFocusFinder >> down [
 
 	self direction: BlFocusSearchDirectionDown new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFocusFinder >> initialize [
 
 	super initialize.
@@ -56,13 +58,13 @@ BlFocusFinder >> initialize [
 	reference := BlFocusFinderReferenceArea new bounds: (0@0 extent: 0@0)
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlFocusFinder >> left [
 
 	self direction: BlFocusSearchDirectionLeft new
 ]
 
-{ #category : #'api - finder' }
+{ #category : 'api - finder' }
 BlFocusFinder >> nextFocusDo: aBlock [
 	"Evaluate aBlock with the next element that should receive focus"
 	
@@ -71,7 +73,7 @@ BlFocusFinder >> nextFocusDo: aBlock [
 		ifNone: [  ]
 ]
 
-{ #category : #'api - finder' }
+{ #category : 'api - finder' }
 BlFocusFinder >> nextFocusDo: aBlock ifNone: anExceptionBlock [
 	"Evaluate aBlock with the next element that should receive focus"
 
@@ -92,25 +94,25 @@ BlFocusFinder >> nextFocusDo: aBlock ifNone: anExceptionBlock [
 			ifNil: anExceptionBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinder >> reference [
 
 	^ reference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinder >> reference: anObject [
 
 	reference := anObject
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlFocusFinder >> referenceArea: aRectangle [
 
 	self reference: (BlFocusFinderReferenceArea new bounds: aRectangle)
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlFocusFinder >> referenceElement: aBlElement [
 
 	self reference:
@@ -119,31 +121,31 @@ BlFocusFinder >> referenceElement: aBlElement [
 			yourself)
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlFocusFinder >> right [
 
 	self direction: BlFocusSearchDirectionRight new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinder >> root [
 
 	^ rootElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinder >> root: aBlElement [
 
 	rootElement := aBlElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusFinder >> temporaryBounds [
 
 	^ temporaryBounds
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlFocusFinder >> up [
 
 	self direction: BlFocusSearchDirectionUp new

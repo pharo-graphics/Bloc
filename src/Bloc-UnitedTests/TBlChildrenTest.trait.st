@@ -1,9 +1,11 @@
 Trait {
-	#name : #TBlChildrenTest,
-	#category : 'Bloc-UnitedTests-Children'
+	#name : 'TBlChildrenTest',
+	#category : 'Bloc-UnitedTests-Children',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Children'
 }
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 TBlChildrenTest >> fill: aNumber [
 
 	| childrenArray |
@@ -13,7 +15,7 @@ TBlChildrenTest >> fill: aNumber [
 	^ childrenArray
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 TBlChildrenTest >> newChildAt: anIndex [
 
 	| anElement |
@@ -22,14 +24,14 @@ TBlChildrenTest >> newChildAt: anIndex [
 	^ anElement
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 TBlChildrenTest >> newChildrenCollection [
 	"Instantiate the type of children collection under test"
 
 	^ self explicitRequirement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testAdd [
 
 	<sampleInstance>
@@ -46,7 +48,7 @@ TBlChildrenTest >> testAdd [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testAddAt [
 
 	<sampleInstance>
@@ -71,7 +73,7 @@ TBlChildrenTest >> testAddAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testAsArray [
 
 	| theChildren indices |
@@ -82,7 +84,7 @@ TBlChildrenTest >> testAsArray [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testAsArrayEmpty [
 
 	| theChildren indices |
@@ -93,7 +95,7 @@ TBlChildrenTest >> testAsArrayEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testAt [
 
 	| theChildren |
@@ -106,7 +108,7 @@ TBlChildrenTest >> testAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testAtIfAbsent [
 
 	| theChildren |
@@ -131,7 +133,7 @@ TBlChildrenTest >> testAtIfAbsent [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testEmptyChildren [
 
 	| theChildren |
@@ -142,7 +144,7 @@ TBlChildrenTest >> testEmptyChildren [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testFirst [
 
 	| theChildren |
@@ -151,7 +153,7 @@ TBlChildrenTest >> testFirst [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testIfEmpty [
 
 	| theChildren |
@@ -160,7 +162,7 @@ TBlChildrenTest >> testIfEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testIfEmptyNot [
 
 	| theChildren |
@@ -169,7 +171,7 @@ TBlChildrenTest >> testIfEmptyNot [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testIndexOf [
 
 	| theChildren |
@@ -179,7 +181,7 @@ TBlChildrenTest >> testIndexOf [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testIndexOfUnknown [
 
 	| theChildren |
@@ -188,7 +190,7 @@ TBlChildrenTest >> testIndexOfUnknown [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testIsEmpty [
 
 	| theChildren |
@@ -199,7 +201,7 @@ TBlChildrenTest >> testIsEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testIsNotEmpty [
 
 	| theChildren |
@@ -210,7 +212,7 @@ TBlChildrenTest >> testIsNotEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testLast [
 
 	| theChildren |
@@ -219,7 +221,7 @@ TBlChildrenTest >> testLast [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testRemove [
 
 	| theChildren indices |
@@ -231,7 +233,7 @@ TBlChildrenTest >> testRemove [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testRemoveAll [
 
 	| theChildren indices |
@@ -246,7 +248,7 @@ TBlChildrenTest >> testRemoveAll [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testRemoveAt [
 
 	| theChildren indices |
@@ -260,7 +262,7 @@ TBlChildrenTest >> testRemoveAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testSecond [
 
 	| theChildren |
@@ -269,7 +271,7 @@ TBlChildrenTest >> testSecond [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testSize [
 
 	| theChildren |
@@ -278,7 +280,7 @@ TBlChildrenTest >> testSize [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 TBlChildrenTest >> testSizeEmpty [
 
 	| theChildren |

@@ -1,15 +1,17 @@
 Class {
-	#name : #BlFlowLayoutInline,
-	#superclass : #BlFlowLayoutDisplay,
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#name : 'BlFlowLayoutInline',
+	#superclass : 'BlFlowLayoutDisplay',
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutInline >> isFloating [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutInline >> isInline [
 	^ true
 ]

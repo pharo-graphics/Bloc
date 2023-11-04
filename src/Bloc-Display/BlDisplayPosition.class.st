@@ -7,22 +7,24 @@ There are two types of position:
 	* physical position - defined in physical pixels
 "
 Class {
-	#name : #BlDisplayPosition,
-	#superclass : #Object,
+	#name : 'BlDisplayPosition',
+	#superclass : 'Object',
 	#instVars : [
 		'x',
 		'y'
 	],
-	#category : #'Bloc-Display-Geometry'
+	#category : 'Bloc-Display-Geometry',
+	#package : 'Bloc-Display',
+	#tag : 'Geometry'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlDisplayPosition class >> fromPoint: aPoint [
 
 	^ self x: aPoint x y: aPoint y
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlDisplayPosition class >> x: aX y: aY [
 
 	^ self new
@@ -30,7 +32,7 @@ BlDisplayPosition class >> x: aX y: aY [
 		  yourself
 ]
 
-{ #category : #'api - arithmetic' }
+{ #category : 'api - arithmetic' }
 BlDisplayPosition >> + aGtFensterPosition [
 
 	^ self class
@@ -38,7 +40,7 @@ BlDisplayPosition >> + aGtFensterPosition [
 		y: self y + aGtFensterPosition y
 ]
 
-{ #category : #'api - arithmetic' }
+{ #category : 'api - arithmetic' }
 BlDisplayPosition >> - aGtFensterPosition [
 
 	^ self class
@@ -46,7 +48,7 @@ BlDisplayPosition >> - aGtFensterPosition [
 		y: self y - aGtFensterPosition y
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlDisplayPosition >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -57,32 +59,32 @@ BlDisplayPosition >> = anObject [
 	^ x = anObject x and: [ y = anObject y ]
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlDisplayPosition >> asLogical: aScaleFactor [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlDisplayPosition >> asPhysical: aScaleFactor [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlDisplayPosition >> asPoint [
 
 	^ self x @ self y
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlDisplayPosition >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ y hash bitXor: x hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDisplayPosition >> initialize [
 
 	super initialize.
@@ -91,20 +93,20 @@ BlDisplayPosition >> initialize [
 	y := 0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDisplayPosition >> initializeX: aX Y: aY [
 
 	x := aX.
 	y := aY
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDisplayPosition >> isZero [
 	
 	^ self x isZero or: [ self y isZero ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDisplayPosition >> printOn: aStream [
 
 	aStream
@@ -116,19 +118,19 @@ BlDisplayPosition >> printOn: aStream [
 		nextPutAll: ' }'
 ]
 
-{ #category : #'truncation and round off' }
+{ #category : 'truncation and round off' }
 BlDisplayPosition >> rounded [
 
 	^ self class x: self x floor y: self y floor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDisplayPosition >> x [
 
 	^ x
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDisplayPosition >> y [
 
 	^ y

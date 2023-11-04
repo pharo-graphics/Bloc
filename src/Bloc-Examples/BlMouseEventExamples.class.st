@@ -1,10 +1,12 @@
 Class {
-	#name : #BlMouseEventExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseEventExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BlMouseEventExamples >> bottomLeftText: anEvent [
 
 	self
@@ -12,7 +14,7 @@ BlMouseEventExamples >> bottomLeftText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlMouseEventExamples >> bottomRightText: anEvent [
 
 	self
@@ -20,7 +22,7 @@ BlMouseEventExamples >> bottomRightText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlMouseEventExamples >> boundsOf: anElement [
 	| aRoot |
 
@@ -31,7 +33,7 @@ BlMouseEventExamples >> boundsOf: anElement [
 	^ anElement bounds inParent: aRoot
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseEventExamples >> box [
 	<gtExample>
 	
@@ -58,7 +60,7 @@ BlMouseEventExamples >> box [
 			when: BlElementPositionInSpaceChangedEvent do: [ :anEvent | self bottomRightText: anEvent ])
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseEventExamples >> child [
 	<gtExample>
 	
@@ -68,7 +70,7 @@ BlMouseEventExamples >> child [
 		size: 400@300
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseEventExamples >> grandChild [
 	<gtExample>
 	
@@ -78,7 +80,7 @@ BlMouseEventExamples >> grandChild [
 		size: 400@100
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseEventExamples >> label [
 	<gtExample>
 	
@@ -89,7 +91,7 @@ BlMouseEventExamples >> label [
 		constraintsDo: [ :c | c ignoreByLayout ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseEventExamples >> parent [
 	<gtExample>
 	
@@ -101,7 +103,7 @@ BlMouseEventExamples >> parent [
 		yourself
 ]
 
-{ #category : #'examples - find event target' }
+{ #category : 'examples - find event target' }
 BlMouseEventExamples >> parentWithClip [
 
 	<gtExample>
@@ -142,7 +144,7 @@ BlMouseEventExamples >> parentWithClip [
 	^ gray
 ]
 
-{ #category : #'examples - find event target' }
+{ #category : 'examples - find event target' }
 BlMouseEventExamples >> parentWithoutClipChildWithClip [
 
 	<gtExample>
@@ -183,7 +185,7 @@ BlMouseEventExamples >> parentWithoutClipChildWithClip [
 	^ gray
 ]
 
-{ #category : #'examples - find event target' }
+{ #category : 'examples - find event target' }
 BlMouseEventExamples >> parentWithoutClipChildWithoutClip [
 
 	<gtExample>
@@ -225,12 +227,12 @@ BlMouseEventExamples >> parentWithoutClipChildWithoutClip [
 	^ gray
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlMouseEventExamples >> pointToText: aPoint for: aTextElement [
 	aTextElement text: (aPoint asRopedText fontSize: 10; foreground: (aTextElement parent background paint color darker alpha: 1))
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlMouseEventExamples >> topLeftText: anEvent [
 
 	self
@@ -238,7 +240,7 @@ BlMouseEventExamples >> topLeftText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlMouseEventExamples >> topRightText: anEvent [
 
 	self

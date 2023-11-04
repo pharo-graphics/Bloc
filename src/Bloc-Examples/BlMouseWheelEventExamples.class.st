@@ -1,10 +1,12 @@
 Class {
-	#name : #BlMouseWheelEventExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseWheelEventExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'examples - mouse wheel events' }
+{ #category : 'examples - mouse wheel events' }
 BlMouseWheelEventExamples >> basicMouseWheelEvent [
 	<gtExample>
 	| anEvent |
@@ -13,7 +15,7 @@ BlMouseWheelEventExamples >> basicMouseWheelEvent [
 	^ anEvent
 ]
 
-{ #category : #'examples - elements' }
+{ #category : 'examples - elements' }
 BlMouseWheelEventExamples >> element [
 	<gtExample>
 	| anElement |
@@ -30,7 +32,7 @@ BlMouseWheelEventExamples >> element [
 	^ anElement
 ]
 
-{ #category : #'examples - mouse wheel events' }
+{ #category : 'examples - mouse wheel events' }
 BlMouseWheelEventExamples >> mouseWheelEventWithVector: aVector [
 	<gtExample>
 	| anEvent anElement |
@@ -45,31 +47,31 @@ BlMouseWheelEventExamples >> mouseWheelEventWithVector: aVector [
 	^ anEvent
 ]
 
-{ #category : #'examples - mouse wheel events' }
+{ #category : 'examples - mouse wheel events' }
 BlMouseWheelEventExamples >> mouseWheelEvent_0degrees [
 	<gtExample>
 	^ self mouseWheelEventWithVector: (BlVector x: 10 y: 0).
 ]
 
-{ #category : #'examples - mouse wheel events' }
+{ #category : 'examples - mouse wheel events' }
 BlMouseWheelEventExamples >> mouseWheelEvent_180degrees [
 	<gtExample>
 	^ self mouseWheelEventWithVector: (BlVector x: -10 y: 0).
 ]
 
-{ #category : #'examples - mouse wheel events' }
+{ #category : 'examples - mouse wheel events' }
 BlMouseWheelEventExamples >> mouseWheelEvent_270degrees [
 	<gtExample>
 	^ self mouseWheelEventWithVector: (BlVector x: 0 y: -10).
 ]
 
-{ #category : #'examples - mouse wheel events' }
+{ #category : 'examples - mouse wheel events' }
 BlMouseWheelEventExamples >> mouseWheelEvent_346degrees [
 	<gtExample>
 	^ self mouseWheelEventWithVector: (BlVector x: 4 y: -1).
 ]
 
-{ #category : #'examples - mouse wheel events' }
+{ #category : 'examples - mouse wheel events' }
 BlMouseWheelEventExamples >> mouseWheelEvent_45degrees [
 	<gtExample>
 	^ self mouseWheelEventWithVector: (BlVector x: 10 y: 10).

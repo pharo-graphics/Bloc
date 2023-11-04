@@ -3,12 +3,14 @@ I have been automatically converted and probably manually tweaked from BlOpacity
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlOpacityTest,
-	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Basic'
+	#name : 'BlOpacityTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Basic',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Basic'
 }
 
-{ #category : #'tests seed' }
+{ #category : 'tests seed' }
 BlOpacityTest >> colorfulElement [
 
 	| anElement |
@@ -31,7 +33,7 @@ BlOpacityTest >> colorfulElement [
 	^ anElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlOpacityTest >> testDefaultOpacity [
 
 	| anElement |
@@ -43,7 +45,7 @@ BlOpacityTest >> testDefaultOpacity [
 	^ anElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlOpacityTest >> testMakeOpaque [
 
 	| anElement |
@@ -56,7 +58,7 @@ BlOpacityTest >> testMakeOpaque [
 	^ anElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlOpacityTest >> testMakeTranslucent [
 
 	| anElement |
@@ -69,7 +71,7 @@ BlOpacityTest >> testMakeTranslucent [
 	^ anElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlOpacityTest >> testMakeTransparent [
 
 	| anElement |

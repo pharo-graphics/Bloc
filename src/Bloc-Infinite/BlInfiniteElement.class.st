@@ -13,8 +13,8 @@ My main collaborators are:
 
 "
 Class {
-	#name : #BlInfiniteElement,
-	#superclass : #BlElement,
+	#name : 'BlInfiniteElement',
+	#superclass : 'BlElement',
 	#traits : 'TBlScrollable',
 	#classTraits : 'TBlScrollable classTrait',
 	#instVars : [
@@ -46,10 +46,12 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : #'Bloc-Infinite-Core'
+	#category : 'Bloc-Infinite-Core',
+	#package : 'Bloc-Infinite',
+	#tag : 'Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlInfiniteElement >> aeDrawChildrenOn: aCanvas [
 	" draw then decorate eventually (between the background and the childrens)"
 	super aeDrawChildrenOn: aCanvas.
@@ -57,7 +59,7 @@ BlInfiniteElement >> aeDrawChildrenOn: aCanvas [
 		d aeDrawOverOn: aCanvas in: self ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlInfiniteElement >> aeDrawOn: aCanvas [
 	" draw then decorate eventually (between the background and the childrens)"
 	super aeDrawOn: aCanvas.
@@ -67,7 +69,7 @@ BlInfiniteElement >> aeDrawOn: aCanvas [
 
 ]
 
-{ #category : #'private - assertions' }
+{ #category : 'private - assertions' }
 BlInfiniteElement >> assertInLayoutOrScroll [
 	"Checks if InfiniteElement is in the middle of a layout or scroll
 	and throws an assertion error if it is not"
@@ -77,7 +79,7 @@ BlInfiniteElement >> assertInLayoutOrScroll [
 		description: [ 'InfiniteElement is not computing a layout or scrolling while it should' ].
 ]
 
-{ #category : #'private - assertions' }
+{ #category : 'private - assertions' }
 BlInfiniteElement >> assertNotInLayout [
 	"Checks if InfiniteElement is in the middle of a layout 
 	and throws an assertion error if it is"
@@ -90,7 +92,7 @@ BlInfiniteElement >> assertNotInLayout [
 		description: [ 'InfiniteElement is computing a layout or scrolling while it should not' ]
 ]
 
-{ #category : #'private - assertions' }
+{ #category : 'private - assertions' }
 BlInfiniteElement >> assertNotInLayoutOrScroll [
 	"Checks if InfiniteElement is in the middle of a layout or scroll
 	and throws an assertion error if it is"
@@ -107,14 +109,14 @@ BlInfiniteElement >> assertNotInLayoutOrScroll [
 		description: [ 'Can not change the structure of InfiniteElement during scrolling' ]
 ]
 
-{ #category : #'api - scrolling testing' }
+{ #category : 'api - scrolling testing' }
 BlInfiniteElement >> canScrollHorizontally [
 	"Return true if I can scroll the current contents horizontally, false otherwise"
 
 	^ self layout canScrollHorizontally
 ]
 
-{ #category : #'api - scrolling testing' }
+{ #category : 'api - scrolling testing' }
 BlInfiniteElement >> canScrollVertically [
 	"Return true if I can scroll the current contents vertically, false otherwise"
 	<return: #Boolean>
@@ -122,7 +124,7 @@ BlInfiniteElement >> canScrollVertically [
 	^ self layout canScrollVertically
 ]
 
-{ #category : #'private - positions' }
+{ #category : 'private - positions' }
 BlInfiniteElement >> changedHolderKeyOf: anElementHolder [
 	
 	<return: #Number>
@@ -132,7 +134,7 @@ BlInfiniteElement >> changedHolderKeyOf: anElementHolder [
 		ifFalse: [ anElementHolder position ]
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteElement >> childContainingItemElement: anElement [
 	"Traverses the ancestors of the given element and returns the item view that contains it and
 	also my direct child. Returned element can be used to get the ElementHolder by sending #childHolderOf:
@@ -150,7 +152,7 @@ BlInfiniteElement >> childContainingItemElement: anElement [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteElement >> childHolderContainingItemElement: anElement [
 	"Return the ElementHolder that contains the given element.
 	Return nil if the provided element is not a my descendant"
@@ -162,7 +164,7 @@ BlInfiniteElement >> childHolderContainingItemElement: anElement [
 		self childHolderOf: anItemElement ]
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteElement >> childHolderOf: aChildElement [
 	"Return an element holder assigned to my direct child.
 	aChildElement must be my direct child.
@@ -176,7 +178,7 @@ BlInfiniteElement >> childHolderOf: aChildElement [
 	^ self elementHolderOf: aChildElement
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteElement >> childLayoutPositionOf: anElement [
 	"Return the datasource position of the given child element as of the latest completed layout pass.
 	This position may not be equal to Item's datasource position if there are pending changes
@@ -187,12 +189,12 @@ BlInfiniteElement >> childLayoutPositionOf: anElement [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> childrenManager [
 	^ childrenManager
 ]
 
-{ #category : #'private - positions' }
+{ #category : 'private - positions' }
 BlInfiniteElement >> clearOldPositions [
 
 	childrenManager
@@ -205,7 +207,7 @@ BlInfiniteElement >> clearOldPositions [
 	recycler clearOldPositions
 ]
 
-{ #category : #'api - scrolling thumb' }
+{ #category : 'api - scrolling thumb' }
 BlInfiniteElement >> computeHorizontalScrollExtent [
 	"Compute the horizontal extent of the horizontal scrollbar's thumb within the horizontal range.
 	This value is used to compute the length of the thumb within the scrollbar's track.
@@ -218,7 +220,7 @@ BlInfiniteElement >> computeHorizontalScrollExtent [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'api - scrolling thumb' }
+{ #category : 'api - scrolling thumb' }
 BlInfiniteElement >> computeHorizontalScrollOffset [
 	"Compute the horizontal offset of the horizontal scrollbar's thumb within the horizontal range.
 	The offset is expressed in arbitrary units that must be the same as the units used by
@@ -230,7 +232,7 @@ BlInfiniteElement >> computeHorizontalScrollOffset [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'api - scrolling thumb' }
+{ #category : 'api - scrolling thumb' }
 BlInfiniteElement >> computeHorizontalScrollRange [
 	"Compute the horizontal range that the horizontal scrollbar represents.
 	The range is expressed in arbitrary units that must be the same as the units used by
@@ -242,7 +244,7 @@ BlInfiniteElement >> computeHorizontalScrollRange [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'api - scrolling thumb' }
+{ #category : 'api - scrolling thumb' }
 BlInfiniteElement >> computeVerticalScrollExtent [
 	"Compute the vertical extent of the vertical scrollbar's thumb within the vertical range.
 	This value is used to compute the length of the thumb within the scrollbar's track.
@@ -255,7 +257,7 @@ BlInfiniteElement >> computeVerticalScrollExtent [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'api - scrolling thumb' }
+{ #category : 'api - scrolling thumb' }
 BlInfiniteElement >> computeVerticalScrollOffset [
 	"Compute the vertical offset of the vertical scrollbar's thumb within the vertical range.
 	The offset is expressed in arbitrary units that must be the same as the units used by
@@ -267,7 +269,7 @@ BlInfiniteElement >> computeVerticalScrollOffset [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'api - scrolling thumb' }
+{ #category : 'api - scrolling thumb' }
 BlInfiniteElement >> computeVerticalScrollRange [
 	"Compute the vertical range that the vertical scrollbar represents.
 	The range is expressed in arbitrary units that must be the same as the units used by
@@ -279,7 +281,7 @@ BlInfiniteElement >> computeVerticalScrollRange [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlInfiniteElement >> consumePendingDataSourceCommands [
 	"I help to reflect data changes to the state.
 	DataSource changes during a scroll may trigger a crash because scroll assumes no data change but data actually changed.
@@ -308,12 +310,12 @@ BlInfiniteElement >> consumePendingDataSourceCommands [
 				ifTrue: [ self dispatchLayout ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> dataSource [
 	^ dataSource
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> dataSource: aDataSource [
 	dataSource
 		ifNotNil: [
@@ -325,16 +327,16 @@ BlInfiniteElement >> dataSource: aDataSource [
 	dataSource onAttached: self
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlInfiniteElement >> dataSource: aNewDataSource compatible: isCompatibleWithPrevious recycle: shouldRecycleElement [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> dataSourceManager [
 	^ dataSourceManager
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> dataSourcePositionOf: anElementHolder [
 	<return: #Number>
 	
@@ -347,7 +349,7 @@ BlInfiniteElement >> dataSourcePositionOf: anElementHolder [
 	^ dataSourceManager applyPendingCommandsOnPosition: anElementHolder position
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteElement >> decoratedBoundsWithMargins: anElement [
 	"Returns the bounds of the child element including its decoration and margins"
 	<return: #Rectangle>
@@ -359,7 +361,7 @@ BlInfiniteElement >> decoratedBoundsWithMargins: anElement [
 	^ anInsets expand: (aMargin expand: anElement bounds inParent asRectangle)
 ]
 
-{ #category : #'item decorations - accessing' }
+{ #category : 'item decorations - accessing' }
 BlInfiniteElement >> decorationsInsetsOfChildElement: anElement [
 
 	"Return decoration insets for the given element"
@@ -396,77 +398,77 @@ BlInfiniteElement >> decorationsInsetsOfChildElement: anElement [
         return insets;"
 ]
 
-{ #category : #'private - focus' }
+{ #category : 'private - focus' }
 BlInfiniteElement >> deepestFocusedChildIn: anElement [
 	self shouldBeImplemented
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultChildrenManager [
 	^ BlInfiniteChildrenManager new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultChildrenUpdateRunnable [
 	"Return class, actual instantiation happens in initialize"
 	^ BlInfiniteChildrenUpdateRunnable
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultDataSource [
 
 	^ BlInfiniteBasicDataSource new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultDataSourceManager [
 	^ BlInfiniteDataSourceManager new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultDataSourceObserver [
 	"Return class, actuall instantiation happens in initialize"
 	^ BlInfiniteElementDataSourceObserver
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultLayout [
 	^ BlInfiniteBasicLayout new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultLayoutCommonConstraints [
 
 	^ BlLayoutCommonConstraints new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultMouseScrollEventHandler [
 	^ BlInfiniteMouseScrollListener new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultOverScrollMode [
 	^ BlOverScrollMode never
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultRecycler [
 	^ BlInfiniteRecycler new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultScrollFlinger [
 	"Return class, actuall instantiation happens in initialize"
 	^ BlInfiniteScrollFlinger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> defaultState [
 	^ BlInfiniteState new
 ]
 
-{ #category : #'private - positions' }
+{ #category : 'private - positions' }
 BlInfiniteElement >> didChildPositionsRangeChange: anInterval [
 
 	<return: #Boolean>
@@ -474,7 +476,7 @@ BlInfiniteElement >> didChildPositionsRangeChange: anInterval [
 	^ self findMinMaxChildLayoutPositions ~= anInterval
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlInfiniteElement >> dispatchChildAttached: anElement [
 	"I am used by
 		- ChildrenManager's addChild:at:in:"
@@ -486,7 +488,7 @@ BlInfiniteElement >> dispatchChildAttached: anElement [
 	self notifyChildAttached: anElement
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlInfiniteElement >> dispatchChildDetached: anElement [
 	"I am used by
 		- ChildrenController's removeChildAt: and removeAllChildren
@@ -499,7 +501,7 @@ BlInfiniteElement >> dispatchChildDetached: anElement [
 	self notifyChildDetached: anElement
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> dispatchLayout [
 
 	self state isMeasuring: false.
@@ -516,7 +518,7 @@ BlInfiniteElement >> dispatchLayout [
 	self dispatchLayoutThirdStep
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> dispatchLayoutFirstStep [
 	"The first step of a layout where we
   		- process data source updates
@@ -541,7 +543,7 @@ BlInfiniteElement >> dispatchLayoutFirstStep [
 	self state beStepLayout
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> dispatchLayoutSecondStep [
 	"The second layout step where we do the actual layout of the element for the final state.
 	This step might be run multiple times if necessary (e.g. measure)."
@@ -565,7 +567,7 @@ BlInfiniteElement >> dispatchLayoutSecondStep [
 	self resumeRequestLayout: false
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> dispatchLayoutThirdStep [
 	"The final step of the layout where we save the information about elements for animations,
 	trigger animations and do any necessary cleanup."
@@ -591,7 +593,7 @@ BlInfiniteElement >> dispatchLayoutThirdStep [
 	self resetFocusInfo
 ]
 
-{ #category : #'api - scrolling notifying' }
+{ #category : 'api - scrolling notifying' }
 BlInfiniteElement >> dispatchOnScrolled: aPoint [
 
 	dispatchScrollCounter := dispatchScrollCounter + 1.
@@ -602,7 +604,7 @@ BlInfiniteElement >> dispatchOnScrolled: aPoint [
 	dispatchScrollCounter := dispatchScrollCounter - 1
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlInfiniteElement >> dispatchScrollStateChanged: aScrollState [
 
 	"Let the Layout go first; this allows it to bring any properties into
@@ -617,7 +619,7 @@ BlInfiniteElement >> dispatchScrollStateChanged: aScrollState [
 	self notifyScrollStateChanged: aScrollState
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> eatRequestLayout [
 
 	eatRequestLayoutCounter := eatRequestLayoutCounter + 1.
@@ -625,7 +627,7 @@ BlInfiniteElement >> eatRequestLayout [
 		ifTrue: [ layoutRequestEaten := false ]
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteElement >> elementHolderOf: anElement [
 	"Return an element holder assigned to anElement.
 	anElement should not be necessarily my direct child.
@@ -635,7 +637,7 @@ BlInfiniteElement >> elementHolderOf: anElement [
 	^ anElement constraints infinite holder
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlInfiniteElement >> elementRangeUpdate: aPositionStart itemCount: anItemCount [
 	"Rebind existing elements for the given range, or create new as needed"
 	| aPositionEnd |
@@ -655,7 +657,7 @@ BlInfiniteElement >> elementRangeUpdate: aPositionStart itemCount: anItemCount [
 			in: self
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteElement >> findElementHolderForDataSourcePosition: aPosition [
 
 	"Return the ViewHolder for the item in the given position of the data set"
@@ -675,12 +677,12 @@ BlInfiniteElement >> findElementHolderForDataSourcePosition: aPosition [
 	^ nil
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteElement >> findElementHolderForItemId: anId [
 	self shouldBeImplemented
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteElement >> findElementHolderForPosition: aPosition checkNew: shouldCheckNewPosition [
 
 	<return: #BlInfiniteHolder or: nil>
@@ -703,7 +705,7 @@ BlInfiniteElement >> findElementHolderForPosition: aPosition checkNew: shouldChe
 	^ nil
 ]
 
-{ #category : #'private - positions' }
+{ #category : 'private - positions' }
 BlInfiniteElement >> findMinMaxChildLayoutPositions [
 	<return: #Interval>
 	
@@ -726,7 +728,7 @@ BlInfiniteElement >> findMinMaxChildLayoutPositions [
 	^ minPositionPreLayout to: maxPositionPreLayout
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteElement >> fling: aVelocity [
 	| aVelocityX aVelocityY canScrollHorizontal canScrollVertical |
 	
@@ -758,7 +760,7 @@ BlInfiniteElement >> fling: aVelocity [
 	^ false
 ]
 
-{ #category : #'item decorations - accessing' }
+{ #category : 'item decorations - accessing' }
 BlInfiniteElement >> getDecorationsInsetsOfChildElement: anItemElement [
 
 	| insets |
@@ -768,7 +770,7 @@ BlInfiniteElement >> getDecorationsInsetsOfChildElement: anItemElement [
 	
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 BlInfiniteElement >> hasFixedSize [
 	"Return true if changes in datasource content cannot change the size of the InfiniteElement itself"
 	<return: #Boolean>
@@ -776,7 +778,7 @@ BlInfiniteElement >> hasFixedSize [
 	^ hasFixedSize
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 BlInfiniteElement >> hasFixedSize: aBoolean [
 	"InfiniteElement can perform several optimizations if it can know in advance that InfiniteElement's
 	size is not affected by the datasource contents. InfiniteElement can still change its size based
@@ -788,12 +790,12 @@ BlInfiniteElement >> hasFixedSize: aBoolean [
 	hasFixedSize := aBoolean
 ]
 
-{ #category : #'item decorations - testing' }
+{ #category : 'item decorations - testing' }
 BlInfiniteElement >> hasItemDecorations [
 	^ itemDecorations isNotEmpty
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlInfiniteElement >> hasUpdatedChild [
 	"Return true if any of existing elemnts holder needs to be updated"
 	<return: #Boolean>
@@ -807,7 +809,7 @@ BlInfiniteElement >> hasUpdatedChild [
 	^ false 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> initialize [
 	super initialize.
 	
@@ -839,12 +841,12 @@ BlInfiniteElement >> initialize [
 	self initializeEventHandlers
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> initializeChildrenManager [
 	childrenManager := self defaultChildrenManager
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> initializeDataSource [
 	dataSource := self defaultDataSource.
 	dataSourceObserver := self defaultDataSourceObserver on: self.
@@ -852,19 +854,19 @@ BlInfiniteElement >> initializeDataSource [
 	dataSourceManager := self defaultDataSourceManager
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> initializeEventHandlers [
 
 	self addEventHandler: self defaultMouseScrollEventHandler
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteElement >> initializeRecycler [
 
 	recycler := self defaultRecycler
 ]
 
-{ #category : #'private - invalidation' }
+{ #category : 'private - invalidation' }
 BlInfiniteElement >> invalidateItemDecorations [
 	"Invalidate all ItemDecorations.
 	If I have item decorations, a layout update will be requested"
@@ -877,7 +879,7 @@ BlInfiniteElement >> invalidateItemDecorations [
 	self requestLayout
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteElement >> isAttached [
 	"Return true if I am attached to window, false otherwise"
 	<return: #Boolean>
@@ -885,7 +887,7 @@ BlInfiniteElement >> isAttached [
 	^ self space isNotNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteElement >> isComputingLayout [
 	"Returns whether InfiniteElement is currently computing a layout.
 	If this method returns true, it means that InfiniteElement is in a lockdown state and any
@@ -896,13 +898,13 @@ BlInfiniteElement >> isComputingLayout [
 	^ layoutOrScrollCounter > 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteElement >> isDataSourceChangedAfterLayout [
 
 	^ dataSourceChangedAfterLayout
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteElement >> isFirstLayoutComplete [
 	"Return true if layout process is completed, false otherwise.
 	Set to true after onLayout: is done"
@@ -911,7 +913,7 @@ BlInfiniteElement >> isFirstLayoutComplete [
 	^ firstLayoutComplete
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteElement >> isLayoutFrozen [
 	"Returns true if layout and scroll are frozen, false otherwise"
 	<return: #Boolean>
@@ -919,25 +921,25 @@ BlInfiniteElement >> isLayoutFrozen [
 	^ layoutFrozen
 ]
 
-{ #category : #'item decorations - accessing' }
+{ #category : 'item decorations - accessing' }
 BlInfiniteElement >> itemDecorations [
 	^ itemDecorations
 ]
 
-{ #category : #'item decorations - accessing' }
+{ #category : 'item decorations - accessing' }
 BlInfiniteElement >> itemDecorationsDo: aBlock [
 
 	itemDecorations ifNotNil: [ (itemDecorations asSortedCollection: [ :a :b | a priority < b priority ]) do: aBlock ]
 ]
 
-{ #category : #'private - scrolling' }
+{ #category : 'private - scrolling' }
 BlInfiniteElement >> jumpToPositionForSmoothScroller: aPosition [
 
 	self layout scrollToPosition: aPosition.
 	self awakenScrollBars
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> layoutFrozen: aBoolean [
 	"Enable or disable layout and scroll.  After layoutFrozen is set to true,
 	Layout requests will be postponed until layoutFrozen is set to false.
@@ -959,24 +961,24 @@ BlInfiniteElement >> layoutFrozen: aBoolean [
 			self stopScroll ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> layoutPositionsRange [
 	"layouted children interval"
 	^ layoutPositionsRange 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> layoutPositionsRange: anInterval [
 	"layouted children interval"
 	layoutPositionsRange := anInterval
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> markDataSourceChangeDuringMeasure [
 	dataSourceChangeDuringMeasure := true
 ]
 
-{ #category : #'private - invalidation' }
+{ #category : 'private - invalidation' }
 BlInfiniteElement >> markItemDecorationsInsetsDirty [
 
 	childrenManager
@@ -985,17 +987,17 @@ BlInfiniteElement >> markItemDecorationsInsetsDirty [
 		in: self
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> markItemsAddedOrRemoved [
 	itemsAddedOrRemoved := true
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> markItemsChanged [
 	itemsChanged := true
 ]
 
-{ #category : #'private - invalidation' }
+{ #category : 'private - invalidation' }
 BlInfiniteElement >> markKnownElementsInvalid [
 
 	"Mark all known elements as invalid. Used in response to a, the whole world might have changed data change event"
@@ -1012,17 +1014,17 @@ BlInfiniteElement >> markKnownElementsInvalid [
 	self markItemDecorationsInsetsDirty
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> markLayoutRequestEaten [
 	layoutRequestEaten := true
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 BlInfiniteElement >> maxFlingVelocity [
 	^ 8000
 ]
 
-{ #category : #'view - configuration' }
+{ #category : 'view - configuration' }
 BlInfiniteElement >> maxHeight: aNumber [
 
 	"set maxHeight in constraints"
@@ -1031,40 +1033,40 @@ BlInfiniteElement >> maxHeight: aNumber [
 	self whenLayoutedDoOnce: [ self height: self measuredHeight ]
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 BlInfiniteElement >> minFlingVelocity [
 	^ 50
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BlInfiniteElement >> notifyChildAttached: anElement [
 	"Notify all event handlers that element is attached to InfiniteElement"
 
 	self dispatchEvent: (BlInfiniteElementAttachedEvent element: anElement)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BlInfiniteElement >> notifyChildDetached: anElement [
 	"Notify all event handlers that element is detached from InfiniteElement"
 
 	self fireEvent: (BlInfiniteElementDetachedEvent element: anElement)
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 BlInfiniteElement >> notifyScrollStateChanged: aScrollState [
 	"Notify all event handlers that scroll state of InfiniteElement has been changed"
 
 	self fireEvent: (BlInfiniteScrollChangedEvent scrollState: aScrollState)
 ]
 
-{ #category : #'api - scrolling notifying' }
+{ #category : 'api - scrolling notifying' }
 BlInfiniteElement >> notifyScrolled: aPoint [
 	"Notify all event handlers that InfiniteElemnet scrolled by a delta point"
 
 	self eventDispatcher dispatchScrolled: aPoint
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteElement >> offsetChildrenHorizontallyBy: aNumber [
 	self childrenDo: [ :anElement |
 		| previousPosition newPosition aBlBoundsUpdater |
@@ -1083,7 +1085,7 @@ BlInfiniteElement >> offsetChildrenHorizontallyBy: aNumber [
 			description: [ 'Position didn''t change as expected! It is super important for scrolling, since we assume that I DO offset children by a number regardless of anything' ] ]
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteElement >> offsetChildrenVerticallyBy: aNumber [
 	
 	self childrenDo: [ :anElement |
@@ -1103,7 +1105,7 @@ BlInfiniteElement >> offsetChildrenVerticallyBy: aNumber [
 			description: [ 'Position didn''t change as expected! It is super important for scrolling, since we assume that I DO offset children by a number regardless of anything' ] ]
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlInfiniteElement >> offsetPositionRecordsForInsert: aStartPosition itemCount: anItemCount [
 
 	childrenManager unfilteredChildrenDo: [ :anElement |
@@ -1117,7 +1119,7 @@ BlInfiniteElement >> offsetPositionRecordsForInsert: aStartPosition itemCount: a
 	self requestLayout
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlInfiniteElement >> offsetPositionRecordsForMove: aFromPosition to: aToPosition [
 
 	| aStart anEnd anInBetweenOffset |
@@ -1149,7 +1151,7 @@ BlInfiniteElement >> offsetPositionRecordsForMove: aFromPosition to: aToPosition
 		in: self
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: anItemCount applyToPreLayout: applyToPreLayout [
 
 	| aPositionEnd |
@@ -1176,7 +1178,7 @@ BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: a
 		in: self
 ]
 
-{ #category : #'hooks - children' }
+{ #category : 'hooks - children' }
 BlInfiniteElement >> onChildAttached: anElement [
 	"Sent when an item element is attached to this InfiniteElement.
 	My subclasses may want to perform extra bookkeeping or modifications of child elements
@@ -1184,7 +1186,7 @@ BlInfiniteElement >> onChildAttached: anElement [
 	the element and is a good time to perform these changes"
 ]
 
-{ #category : #'hooks - children' }
+{ #category : 'hooks - children' }
 BlInfiniteElement >> onChildDetached: anElement [
 	"I sent when an item element is detached from this InfiniteElement.
 	My subclasses may want to perform extra bookkeeping or modifications
@@ -1192,13 +1194,13 @@ BlInfiniteElement >> onChildDetached: anElement [
 	InfiniteLayout fully detaches the child element from the parent"
 ]
 
-{ #category : #'hooks - layout' }
+{ #category : 'hooks - layout' }
 BlInfiniteElement >> onEnterLayoutOrScroll [
 
 	layoutOrScrollCounter := layoutOrScrollCounter + 1
 ]
 
-{ #category : #'hooks - layout' }
+{ #category : 'hooks - layout' }
 BlInfiniteElement >> onExitLayoutOrScroll [
 	
 	layoutOrScrollCounter := layoutOrScrollCounter - 1.
@@ -1210,7 +1212,7 @@ BlInfiniteElement >> onExitLayoutOrScroll [
 			layoutOrScrollCounter := 0 ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	self dispatchLayout.
 	firstLayoutComplete := true.
@@ -1218,7 +1220,7 @@ BlInfiniteElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	self layout layoutIgnored: self context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : #'hooks - layout' }
+{ #category : 'hooks - layout' }
 BlInfiniteElement >> onLayoutDone [
 
 	"update decorations bounds after layout"
@@ -1229,7 +1231,7 @@ BlInfiniteElement >> onLayoutDone [
 	self itemDecorationsDo: [ :d | remainingBounds := d onLayoutDoneIn: self remaining: remainingBounds ]
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlInfiniteElement >> onMeasure: anExtentMeasurementSpec [
 	layout shouldAutoMeasure
 		ifTrue: [ self onMeasureAuto: anExtentMeasurementSpec ]
@@ -1238,7 +1240,7 @@ BlInfiniteElement >> onMeasure: anExtentMeasurementSpec [
 	self layout measureIgnored: self with: anExtentMeasurementSpec
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlInfiniteElement >> onMeasureAuto: anExtentMeasurementSpec [
 
 	| skipMeasure |
@@ -1259,7 +1261,7 @@ BlInfiniteElement >> onMeasureAuto: anExtentMeasurementSpec [
 	layout measureBasedOnChildren: anExtentMeasurementSpec
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlInfiniteElement >> onMeasureCustom: anExtentMeasurementSpec [
 		
 	hasFixedSize
@@ -1283,14 +1285,14 @@ BlInfiniteElement >> onMeasureCustom: anExtentMeasurementSpec [
 	self state isPreLayout: false
 ]
 
-{ #category : #'hooks - scrolling' }
+{ #category : 'hooks - scrolling' }
 BlInfiniteElement >> onScrollStateChanged: aScrollingState [
 	"Called when the scroll state of InfiniteElement changes.
 	Subclasses should use this method to respond to state changes instead of an explicit listener.
 	This method will always be invoked before firing events, but after the Layout responds to the scroll state change"
 ]
 
-{ #category : #'hooks - scrolling' }
+{ #category : 'hooks - scrolling' }
 BlInfiniteElement >> onScrolled: aPoint [
 
 	"Sent when the scroll position of this InfiniteElement changes. Subclasses should use
@@ -1301,17 +1303,17 @@ BlInfiniteElement >> onScrolled: aPoint [
 	"self itemDecorationsDo: [ :d | d onScrollDoneIn: self ]"
 ]
 
-{ #category : #'api - scrolling accessing' }
+{ #category : 'api - scrolling accessing' }
 BlInfiniteElement >> overScrollMode [
 	^ overScrollMode
 ]
 
-{ #category : #'api - scrolling accessing' }
+{ #category : 'api - scrolling accessing' }
 BlInfiniteElement >> overScrollMode: aBlOverScrollMode [
 	overScrollMode := aBlOverScrollMode
 ]
 
-{ #category : #'deferred actions' }
+{ #category : 'deferred actions' }
 BlInfiniteElement >> postChildrenUpdater [
 	"Post children update runnable to consume update operations"
 	
@@ -1322,17 +1324,17 @@ BlInfiniteElement >> postChildrenUpdater [
 	self enqueueTask: childrenUpdateRunnable
 ]
 
-{ #category : #'deferred actions' }
+{ #category : 'deferred actions' }
 BlInfiniteElement >> postSmoothScroller [
 	scrollFlinger postOnAnimation
 ]
 
-{ #category : #'accessing - properties' }
+{ #category : 'accessing - properties' }
 BlInfiniteElement >> prefetchingAllowed [
 	^ false
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlInfiniteElement >> processDataSourceCommands [
 
 	"Consumes data source commands and calculates which type of animations we want to run.
@@ -1347,11 +1349,11 @@ BlInfiniteElement >> processDataSourceCommands [
 	dataSourceManager consumeCommandsInOnePassIn: self
 ]
 
-{ #category : #'private - scrolling' }
+{ #category : 'private - scrolling' }
 BlInfiniteElement >> pullGlows: anEventPoint overscroll: anOverScrollPoint [
 ]
 
-{ #category : #'private - focus' }
+{ #category : 'private - focus' }
 BlInfiniteElement >> recoverFocusFromState [
 
 	| aFocusTarget |
@@ -1374,14 +1376,14 @@ BlInfiniteElement >> recoverFocusFromState [
 	"could not find element to give focus to"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> recycler [
 	<return: #BlInfiniteRecycler>
 
 	^ recycler
 ]
 
-{ #category : #'children - add/remove' }
+{ #category : 'children - add/remove' }
 BlInfiniteElement >> removeDetachedChild: anElement [
 	| anElementHolder |
 	
@@ -1396,12 +1398,12 @@ BlInfiniteElement >> removeDetachedChild: anElement [
 	super removeDetachedChild: anElement
 ]
 
-{ #category : #'children - add/remove' }
+{ #category : 'children - add/remove' }
 BlInfiniteElement >> repositionShadowingElements [
 	"self shouldBeImplemented"
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> requestLayout: anElement [
 	
 	"Layout may be requested by one of my children.
@@ -1417,7 +1419,7 @@ BlInfiniteElement >> requestLayout: anElement [
 		ifFalse: [ self markLayoutRequestEaten ]"
 ]
 
-{ #category : #'private - focus' }
+{ #category : 'private - focus' }
 BlInfiniteElement >> resetFocusInfo [
 	"Reset all stored focus information from my state"
 
@@ -1426,7 +1428,7 @@ BlInfiniteElement >> resetFocusInfo [
 	self state focusedSubChild: nil
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> resumeRequestLayout: shouldPerformLayout [
 	
 	eatRequestLayoutCounter < 1
@@ -1446,7 +1448,7 @@ BlInfiniteElement >> resumeRequestLayout: shouldPerformLayout [
 	eatRequestLayoutCounter := eatRequestLayoutCounter - 1
 ]
 
-{ #category : #'private - focus' }
+{ #category : 'private - focus' }
 BlInfiniteElement >> saveFocusInfo [
 	"I save information of currently focused element in the state.
 	In order to restore foces later we need to save item's position
@@ -1474,7 +1476,7 @@ BlInfiniteElement >> saveFocusInfo [
 			self state focusedSubChild: (self deepestFocusedChildIn: aFocusedElementHolder itemElement) ]
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteElement >> scrollBy: aPoint [ 
 	| canScrollHorizontal canScrollVertical |
 
@@ -1494,7 +1496,7 @@ BlInfiniteElement >> scrollBy: aPoint [
 			from: nil ]
 ]
 
-{ #category : #'private - scrolling' }
+{ #category : 'private - scrolling' }
 BlInfiniteElement >> scrollByInternal: aDeltaPoint from: anEventPoint [
 	<return: #Boolean>
 	| unconsumedX unconsumedY consumedX consumedY |
@@ -1527,12 +1529,12 @@ BlInfiniteElement >> scrollByInternal: aDeltaPoint from: anEventPoint [
 	^ consumedX isZero not or: [ consumedY isZero not ]
 ]
 
-{ #category : #'api - scrolling accessing' }
+{ #category : 'api - scrolling accessing' }
 BlInfiniteElement >> scrollFlinger [
 	^ scrollFlinger
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BlInfiniteElement >> scrollHorizontallyBy: aNumber [
 	"Scroll horizontally by aNumber and return the distance traveled.
 	The default implementation does nothing and returns 0."
@@ -1541,14 +1543,14 @@ BlInfiniteElement >> scrollHorizontallyBy: aNumber [
 	^ self layout scrollHorizontallyBy: aNumber
 ]
 
-{ #category : #'api - scrolling geometry' }
+{ #category : 'api - scrolling geometry' }
 BlInfiniteElement >> scrollPosition [
 	<return: #Point>
 	
 	^ 0@0
 ]
 
-{ #category : #'private - scrolling accessing' }
+{ #category : 'private - scrolling accessing' }
 BlInfiniteElement >> scrollState [
 	"Return the current scrolling state"
 	<return: #Symbol>
@@ -1556,7 +1558,7 @@ BlInfiniteElement >> scrollState [
 	^ scrollState
 ]
 
-{ #category : #'private - scrolling accessing' }
+{ #category : 'private - scrolling accessing' }
 BlInfiniteElement >> scrollState: aScrollState [
 	"Internal! Never set me directly"
 
@@ -1570,7 +1572,7 @@ BlInfiniteElement >> scrollState: aScrollState [
 	self dispatchScrollStateChanged: aScrollState
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteElement >> scrollToPosition: aPosition [
 	"Convenience method to scroll to a certain datasource position.
 	InfiniteElement does not implement scrolling logic, rather forwards the call to
@@ -1584,7 +1586,7 @@ BlInfiniteElement >> scrollToPosition: aPosition [
 	self awakenScrollBars
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteElement >> scrollToPosition: aPosition offset: anOffset [
 	"Scroll the InfiniteELement to make the datasource position visible with the given offset from resolved layout start.
 	For example, if layout is ===vertical=== and ===stackFromEnd=== is true,
@@ -1600,7 +1602,7 @@ BlInfiniteElement >> scrollToPosition: aPosition offset: anOffset [
 	self awakenScrollBars
 ]
 
-{ #category : #'api - scrolling' }
+{ #category : 'api - scrolling' }
 BlInfiniteElement >> scrollVerticallyBy: aNumber [
 	"Scroll vertically by aNumber and return the distance traveled.
 	The default implementation does nothing and returns 0."
@@ -1609,13 +1611,13 @@ BlInfiniteElement >> scrollVerticallyBy: aNumber [
 	^ self layout scrollVerticallyBy: aNumber
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteElement >> scrolledWhileFilling [
 
 	^ self layout scrolledWhileFilling
 ]
 
-{ #category : #'private - invalidation' }
+{ #category : 'private - invalidation' }
 BlInfiniteElement >> setDataSourceChangedAfterLayout [
 
 	"We already set that data source is changed"
@@ -1636,7 +1638,7 @@ BlInfiniteElement >> setDataSourceChangedAfterLayout [
 	self markKnownElementsInvalid
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteElement >> smoothScrollBy: aPoint [
 	"Animate a scroll by the given amount of pixels along either axis"
 	| dX dY |
@@ -1657,7 +1659,7 @@ BlInfiniteElement >> smoothScrollBy: aPoint [
 		ifFalse: [ scrollFlinger smoothScrollBy: dX @ dY ]
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteElement >> smoothScrollToPosition: aPosition [
 	"Starts a smooth scroll to a datasource position."
 	
@@ -1667,7 +1669,7 @@ BlInfiniteElement >> smoothScrollToPosition: aPosition [
 	self layout smoothScrollToPosition: aPosition
 ]
 
-{ #category : #'api - scrolling accessing' }
+{ #category : 'api - scrolling accessing' }
 BlInfiniteElement >> smoothScroller [
 	"Return currently used smooth scroller or nil if I am not in a smooth scrolling state"
 	<return: #BlSmoothScroller or: nil>
@@ -1675,12 +1677,12 @@ BlInfiniteElement >> smoothScroller [
 	^ self layout smoothScroller
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElement >> state [
 	^ state
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteElement >> stopScroll [
 	"Stop any current scroll in progress, such as one started by
 		- #smoothScrollBy:
@@ -1691,7 +1693,7 @@ BlInfiniteElement >> stopScroll [
 	self stopScrollersInternal
 ]
 
-{ #category : #'private - scrolling' }
+{ #category : 'private - scrolling' }
 BlInfiniteElement >> stopScrollersInternal [
 	"Similar to #stopScroll but does not set the state"
 
@@ -1699,7 +1701,7 @@ BlInfiniteElement >> stopScrollersInternal [
 	self layout stopSmoothScroller
 ]
 
-{ #category : #'accessing - decoration' }
+{ #category : 'accessing - decoration' }
 BlInfiniteElement >> withDecoration: aDecorationClass [
 
 	self itemDecorations
@@ -1709,13 +1711,13 @@ BlInfiniteElement >> withDecoration: aDecorationClass [
 			self invalidateItemDecorations ]
 ]
 
-{ #category : #'view - configuration' }
+{ #category : 'view - configuration' }
 BlInfiniteElement >> withRowNumbers [
 
 	self withDecoration: BlRowNumberDecoration
 ]
 
-{ #category : #'accessing - decoration' }
+{ #category : 'accessing - decoration' }
 BlInfiniteElement >> withoutDecoration: aDecorationClass [
 
 	itemDecorations := self itemDecorations reject: [ :d | 
@@ -1726,7 +1728,7 @@ BlInfiniteElement >> withoutDecoration: aDecorationClass [
 			                   ifFalse: [ false ] ]
 ]
 
-{ #category : #'view - configuration' }
+{ #category : 'view - configuration' }
 BlInfiniteElement >> withoutRowNumbers [
 
 	self withoutDecoration: BlRowNumberDecoration

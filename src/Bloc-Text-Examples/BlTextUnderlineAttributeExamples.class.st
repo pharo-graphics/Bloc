@@ -12,12 +12,14 @@ In addition to the simple API an underline attribute can be customized and then 
 
 "
 Class {
-	#name : #BlTextUnderlineAttributeExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Text-Examples-Model'
+	#name : 'BlTextUnderlineAttributeExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Text-Examples-Model',
+	#package : 'Bloc-Text-Examples',
+	#tag : 'Model'
 }
 
-{ #category : #attribute }
+{ #category : 'attribute' }
 BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
 	<gtExample>
 
@@ -40,14 +42,14 @@ BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
 	^ aLine"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextUnderlineAttributeExamples >> text [
 	<gtExample>
 
 	^ 'Hello' asRopedText fontSize: 75; foreground: Color veryDarkGray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextUnderlineAttributeExamples >> textWithUnderlineDo [
 	<gtExample>
 	^ self text
@@ -57,13 +59,13 @@ BlTextUnderlineAttributeExamples >> textWithUnderlineDo [
 				thickness: 6 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextUnderlineAttributeExamples >> textWithUnderline_1_to_5 [
 	<gtExample>
 	^ self text underlineColor: (Color red alpha: 0.5) thickness: 6
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_3 [
 	<gtExample>
 	| aText |
@@ -74,7 +76,7 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_3 [
 	^ aText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_4 [
 	<gtExample>
 	| aText |
@@ -85,7 +87,7 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_4 [
 	^ aText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_4 [
 	<gtExample>
 	| aText |
@@ -96,7 +98,7 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_4 [
 	^ aText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_5 [
 	<gtExample>
 	| aText |
@@ -107,7 +109,7 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_5 [
 	^ aText
 ]
 
-{ #category : #attribute }
+{ #category : 'attribute' }
 BlTextUnderlineAttributeExamples >> underlineAttribute [
 	<gtExample>
 	| anAttribute |

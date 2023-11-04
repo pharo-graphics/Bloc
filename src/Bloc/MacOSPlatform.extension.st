@@ -1,6 +1,6 @@
-Extension { #name : #MacOSPlatform }
+Extension { #name : 'MacOSPlatform' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 MacOSPlatform >> primaryModifier [
 	^ BlAlternativeCombination new
 		key: KeyboardKey metaLeft;
@@ -10,7 +10,7 @@ MacOSPlatform >> primaryModifier [
 		yourself
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 MacOSPlatform >> secondaryModifier [
 	^ BlAlternativeCombination new
 		key: KeyboardKey controlLeft;

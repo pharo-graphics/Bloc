@@ -2,18 +2,20 @@
 I am fired by morphic host window when it is closed or deleted from the World
 "
 Class {
-	#name : #BlMorphicWindowClosedEvent,
-	#superclass : #BlMorphicWindowEvent,
-	#category : 'BlocHost-Morphic-Events'
+	#name : 'BlMorphicWindowClosedEvent',
+	#superclass : 'BlMorphicWindowEvent',
+	#category : 'BlocHost-Morphic-Events',
+	#package : 'BlocHost-Morphic',
+	#tag : 'Events'
 }
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlMorphicWindowClosedEvent >> sentTo:anObject [
 	"Dispatch the receiver into anObject"
 	^anObject handleWindowClosed: self.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWindowClosedEvent >> type [
 	^ #windowClosed
 ]

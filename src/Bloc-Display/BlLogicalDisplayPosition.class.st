@@ -1,16 +1,18 @@
 Class {
-	#name : #BlLogicalDisplayPosition,
-	#superclass : #BlDisplayPosition,
-	#category : #'Bloc-Display-Geometry'
+	#name : 'BlLogicalDisplayPosition',
+	#superclass : 'BlDisplayPosition',
+	#category : 'Bloc-Display-Geometry',
+	#package : 'Bloc-Display',
+	#tag : 'Geometry'
 }
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlLogicalDisplayPosition >> asLogical: aScaleFactor [
 
 	^ self
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlLogicalDisplayPosition >> asPhysical: aScaleFactor [
 
 	| aX aY |

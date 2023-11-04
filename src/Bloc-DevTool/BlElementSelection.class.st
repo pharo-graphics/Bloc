@@ -3,8 +3,8 @@ I am a Halos element. For more information about me, see {{gtClass:BlDevHalosEve
 
 "
 Class {
-	#name : #BlElementSelection,
-	#superclass : #BlElement,
+	#name : 'BlElementSelection',
+	#superclass : 'BlElement',
 	#instVars : [
 		'client',
 		'clientListener',
@@ -17,22 +17,24 @@ Class {
 		'paddingElement',
 		'extentElement'
 	],
-	#category : #'Bloc-DevTool-Core'
+	#category : 'Bloc-DevTool-Core',
+	#package : 'Bloc-DevTool',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlElementSelection class >> on: anElement [
 	^ self new
 		showOn: anElement;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementSelection >> client [
 	^ client
 ]
 
-{ #category : #'showing / hiding' }
+{ #category : 'showing / hiding' }
 BlElementSelection >> close [
 	self
 		assert: [ client isNotNil ]
@@ -43,32 +45,32 @@ BlElementSelection >> close [
 	self removeFromParent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementSelection >> defaultBorder [
 	^ BlBorder paint: Color black width: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementSelection >> dragOffset [
 	^ dragOffset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementSelection >> dragOffset: aPoint [
 	dragOffset := aPoint
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementSelection >> extraPadding [
 	^ BlInsets all: 20
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementSelection >> hasInformation [
 	^ hasInformation
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementSelection >> hideInfo [
 
 	self padding: BlInsets empty.
@@ -83,7 +85,7 @@ BlElementSelection >> hideInfo [
 	hasInformation := false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementSelection >> initialize [
 	super initialize.
 
@@ -96,7 +98,7 @@ BlElementSelection >> initialize [
 	hasInformation := false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementSelection >> initializeActions [
 	| initialPosition initialSize |
 
@@ -137,12 +139,12 @@ BlElementSelection >> initializeActions [
 	self addChild: resizeButton
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementSelection >> initializeClientListener [
 	clientListener := BlElementSelectionListener on: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementSelection >> initializeHandlers [
 
 	self addEventHandler: (BlEventHandler
@@ -187,7 +189,7 @@ BlElementSelection >> initializeHandlers [
 				 self client position: aPosition ])
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlElementSelection >> onLayout: aBounds context: aBlElementBoundsUpdater [
 	super onLayout: aBounds context: aBlElementBoundsUpdater.
 
@@ -201,23 +203,23 @@ BlElementSelection >> onLayout: aBounds context: aBlElementBoundsUpdater [
 	resizeButton position: aBounds extent - (resizeButton width @ resizeButton height) extent: resizeButton extent context: aBlElementBoundsUpdater.
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementSelection >> selectionExtent [
 
 	^ (self padding expand: self client boundsInSpace) extent
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementSelection >> selectionPosition [
 
 	^ self client positionInSpace - self padding topLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementSelection >> show [
 ]
 
-{ #category : #'showing / hiding' }
+{ #category : 'showing / hiding' }
 BlElementSelection >> showOn: anElement [
 	"we don't want to add selection to the root element"
 

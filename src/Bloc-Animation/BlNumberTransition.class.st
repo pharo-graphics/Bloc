@@ -1,19 +1,21 @@
 Class {
-	#name : #BlNumberTransition,
-	#superclass : #BlTransition,
+	#name : 'BlNumberTransition',
+	#superclass : 'BlTransition',
 	#instVars : [
 		'by'
 	],
-	#category : #'Bloc-Animation-Animation'
+	#category : 'Bloc-Animation-Animation',
+	#package : 'Bloc-Animation',
+	#tag : 'Animation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNumberTransition >> by: aNumber [
 
 	by := aNumber
 ]
 
-{ #category : #pulse }
+{ #category : 'pulse' }
 BlNumberTransition >> valueForStep: aNumber [
 
 	| aValue |

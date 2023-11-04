@@ -1,20 +1,22 @@
 Class {
-	#name : #BlSpaceFrameTaskPhase,
-	#superclass : #BlSpaceFramePhase,
-	#category : 'Bloc-Space - Frame'
+	#name : 'BlSpaceFrameTaskPhase',
+	#superclass : 'BlSpaceFramePhase',
+	#category : 'Bloc-Space - Frame',
+	#package : 'Bloc',
+	#tag : 'Space - Frame'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceFrameTaskPhase >> isTaskPhase [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameTaskPhase >> name [
 	^ 'Tasks processing'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameTaskPhase >> runOn: aSpace [
 	"process animations and other runnable tasks"
 	aSpace

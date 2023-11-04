@@ -3,12 +3,14 @@ I exemplify {{gtClass:BlMetricsInspector}}.
 
 "
 Class {
-	#name : #BlMetricsInspectorExample,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-DevTool-Examples'
+	#name : 'BlMetricsInspectorExample',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-DevTool-Examples',
+	#package : 'Bloc-DevTool',
+	#tag : 'Examples'
 }
 
-{ #category : #'examples - inspector' }
+{ #category : 'examples - inspector' }
 BlMetricsInspectorExample >> elementWithMetrics [
 
 	<sampleInstance>
@@ -28,7 +30,7 @@ BlMetricsInspectorExample >> elementWithMetrics [
 		  border: (BlBorder paint: Color black width: 2)
 ]
 
-{ #category : #'examples - helpers' }
+{ #category : 'examples - helpers' }
 BlMetricsInspectorExample >> metricsPhlowView [
 	"<gtExample>"
 
@@ -41,7 +43,7 @@ BlMetricsInspectorExample >> metricsPhlowView [
 	^ aPhlow
 ]
 
-{ #category : #'examples - inspector' }
+{ #category : 'examples - inspector' }
 BlMetricsInspectorExample >> testBasicMetricsInspector [
 
 	<sampleInstance>
@@ -51,7 +53,7 @@ BlMetricsInspectorExample >> testBasicMetricsInspector [
 	^ anInspector
 ]
 
-{ #category : #'examples - inspector' }
+{ #category : 'examples - inspector' }
 BlMetricsInspectorExample >> testMetricsInspectorOnElementWithMetrics [
 
 	<sampleInstance>
@@ -75,7 +77,7 @@ BlMetricsInspectorExample >> testMetricsInspectorOnElementWithMetrics [
 	^ anInspector
 ]
 
-{ #category : #'examples - inspector' }
+{ #category : 'examples - inspector' }
 BlMetricsInspectorExample >> testMetricsInspectorOnUninitializedElement [
 
 	<sampleInstance>
@@ -93,7 +95,7 @@ BlMetricsInspectorExample >> testMetricsInspectorOnUninitializedElement [
 	^ anInspector
 ]
 
-{ #category : #'examples - helpers' }
+{ #category : 'examples - helpers' }
 BlMetricsInspectorExample >> title [
 
 	^ '<Phlow is not installed>'

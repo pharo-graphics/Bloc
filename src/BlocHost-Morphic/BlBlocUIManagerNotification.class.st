@@ -1,6 +1,6 @@
 Class {
-	#name : #BlBlocUIManagerNotification,
-	#superclass : #Notification,
+	#name : 'BlBlocUIManagerNotification',
+	#superclass : 'Notification',
 	#instVars : [
 		'request',
 		'arguments',
@@ -9,15 +9,17 @@ Class {
 	#classVars : [
 		'NotificationHandlers'
 	],
-	#category : #'BlocHost-Morphic-Support'
+	#category : 'BlocHost-Morphic-Support',
+	#package : 'BlocHost-Morphic',
+	#tag : 'Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBlocUIManagerNotification class >> notificationHandlers [
 	^ BlBlocUIManagerNotificationHandler notificationHandlers
 ]
 
-{ #category : #signaling }
+{ #category : 'signaling' }
 BlBlocUIManagerNotification class >> request: aSymbol with: anArray [
 	^ self new
 		request: aSymbol;
@@ -25,7 +27,7 @@ BlBlocUIManagerNotification class >> request: aSymbol with: anArray [
 		signal
 ]
 
-{ #category : #signaling }
+{ #category : 'signaling' }
 BlBlocUIManagerNotification class >> request: aSymbol with: anArray default: aBlock [
 	^ self new
 		request: aSymbol;
@@ -34,7 +36,7 @@ BlBlocUIManagerNotification class >> request: aSymbol with: anArray default: aBl
 		signal
 ]
 
-{ #category : #signaling }
+{ #category : 'signaling' }
 BlBlocUIManagerNotification class >> requestOrNil: aSymbol with: anArray [
 	^ self new
 		request: aSymbol;
@@ -43,29 +45,29 @@ BlBlocUIManagerNotification class >> requestOrNil: aSymbol with: anArray [
 		signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBlocUIManagerNotification >> arguments [
 	^ arguments
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBlocUIManagerNotification >> arguments: anArray [
 	arguments := anArray
 ]
 
-{ #category : #'exception handling' }
+{ #category : 'exception handling' }
 BlBlocUIManagerNotification >> defaultAction [
 	self isFromMorphic ifTrue: [ ^ self processInMorphic ].
 	self handlerDo: [ :aHandler | ^ aHandler show ].
 	^ self unhandledAction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBlocUIManagerNotification >> defaultBlock: aBlock [
 	defaultBlock := aBlock
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlBlocUIManagerNotification >> handlerDo: aBlock [
 	| aClass anInstance |
 	aClass := BlBlocUIManagerNotificationHandler preferredHandler.
@@ -74,7 +76,7 @@ BlBlocUIManagerNotification >> handlerDo: aBlock [
 	aBlock cull: anInstance.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBlocUIManagerNotification >> isFromMorphic [
 	| context worldMorphClass |
 	worldMorphClass := Smalltalk at: #WorldMorph.
@@ -88,7 +90,7 @@ BlBlocUIManagerNotification >> isFromMorphic [
 	^ false
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlBlocUIManagerNotification >> processInMorphic [
 	^ self
 		resume:
@@ -98,17 +100,17 @@ BlBlocUIManagerNotification >> processInMorphic [
 				arguments: self arguments)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBlocUIManagerNotification >> request [
 	^ request
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBlocUIManagerNotification >> request: aSymbol [
 	request := aSymbol
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlBlocUIManagerNotification >> unhandledAction [
 	^ defaultBlock isNil
 		ifTrue: [ self error: 'No handler for request: ' , self request ]

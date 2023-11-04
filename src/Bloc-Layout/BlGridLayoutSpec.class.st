@@ -27,8 +27,8 @@ Instance Variables
 
 "
 Class {
-	#name : #BlGridLayoutSpec,
-	#superclass : #Object,
+	#name : 'BlGridLayoutSpec',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -46,27 +46,29 @@ Class {
 	#classInstVars : [
 		'undefined'
 	],
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlGridLayoutSpec class >> cleanUp [
 	super cleanUp.
 	
 	undefined := nil
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlGridLayoutSpec class >> initialize [
 	DefaultWeight := 0
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGridLayoutSpec class >> new [
 	self error: 'Use one of the factory methods instead'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGridLayoutSpec class >> start: aStart [
 	<return: #BlGridLayoutSpec>
 
@@ -75,7 +77,7 @@ BlGridLayoutSpec class >> start: aStart [
 		size: 1
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGridLayoutSpec class >> start: aStart size: aSize [
 	<return: #BlGridLayoutSpec>
 
@@ -85,7 +87,7 @@ BlGridLayoutSpec class >> start: aStart size: aSize [
 		alignment: BlGridAlignment undefined
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGridLayoutSpec class >> start: aStart size: aSize alignment: anAlignment [
 	<return: #BlGridLayoutSpec>
 
@@ -96,7 +98,7 @@ BlGridLayoutSpec class >> start: aStart size: aSize alignment: anAlignment [
 		weight: DefaultWeight
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGridLayoutSpec class >> start: aStart size: aSize alignment: anAlignment weight: aWeight [
 	<return: #BlGridLayoutSpec>
 
@@ -107,14 +109,14 @@ BlGridLayoutSpec class >> start: aStart size: aSize alignment: anAlignment weigh
 		weight: aWeight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutSpec class >> undefined [
 	<return: #BlGridLayoutSpec>
 	
 	^ undefined ifNil: [ undefined := self start: UNDEFINED ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridLayoutSpec >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -125,7 +127,7 @@ BlGridLayoutSpec >> = anObject [
 	^ span = anObject span and: [ alignment = anObject alignment ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlGridLayoutSpec >> absoluteAlignment: isHorizontal [
 	<return: #BlGridAlignment>
 
@@ -140,14 +142,14 @@ BlGridLayoutSpec >> absoluteAlignment: isHorizontal [
 	^ BlGridAlignment fill
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutSpec >> alignment [
 	<return: #BlGridAlignment>
 
 	^ alignment
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlGridLayoutSpec >> copyWithAlignment: anAlignment [
 	<return: #BlGridLayoutSpec>
 
@@ -158,7 +160,7 @@ BlGridLayoutSpec >> copyWithAlignment: anAlignment [
 		weight: weight
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlGridLayoutSpec >> copyWithSpan: newSpan [
 	<return: #BlGridLayoutSpec>
 
@@ -169,7 +171,7 @@ BlGridLayoutSpec >> copyWithSpan: newSpan [
 		weight: weight
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlGridLayoutSpec >> copyWithWeight: newWeight [
 	<return: #BlGridLayoutSpec>
 
@@ -180,7 +182,7 @@ BlGridLayoutSpec >> copyWithWeight: newWeight [
 		weight: newWeight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutSpec >> flexibility [
 	<return: #BlGridFlexibility>
 
@@ -189,21 +191,21 @@ BlGridLayoutSpec >> flexibility [
 		ifFalse: [ BlGridLayoutBounds canStretch ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGridLayoutSpec >> hasWeight [
 	<return: #Boolean>
 
 	^ (self weight closeTo: 0.0) not
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridLayoutSpec >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ span hash bitXor: alignment hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGridLayoutSpec >> setAlignment: anAlignment span: aBlGridLayoutInterval startDefined: isStartDefined weight: aWeight [
 
 	alignment := anAlignment.
@@ -212,20 +214,20 @@ BlGridLayoutSpec >> setAlignment: anAlignment span: aBlGridLayoutInterval startD
 	weight := aWeight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutSpec >> span [
 	<return: #Interval>
 	^ span
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutSpec >> startDefined [
 	<return: #Boolean>
 
 	^ startDefined
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutSpec >> weight [
 	^ weight
 ]

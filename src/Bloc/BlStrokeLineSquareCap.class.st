@@ -5,12 +5,14 @@ See BlStrokeLineCap for other types
 
 "
 Class {
-	#name : #BlStrokeLineSquareCap,
-	#superclass : #BlStrokeLineCap,
-	#category : 'Bloc-Paint-Support'
+	#name : 'BlStrokeLineSquareCap',
+	#superclass : 'BlStrokeLineCap',
+	#category : 'Bloc-Paint-Support',
+	#package : 'Bloc',
+	#tag : 'Paint-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineSquareCap class >> capName [
 	^ 'Square'
 ]

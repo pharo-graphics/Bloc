@@ -1,19 +1,21 @@
 Class {
-	#name : #BlSpaceTest,
-	#superclass : #TestCase,
+	#name : 'BlSpaceTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'space',
 		'host'
 	],
-	#category : #'Bloc-Tests-Space'
+	#category : 'Bloc-Tests-Space',
+	#package : 'Bloc-Tests',
+	#tag : 'Space'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceTest >> dirtyAreas [
 	^ space dirtyAreas asArray collect: #asRectangle
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceTest >> setUp [
 	super setUp.
 	
@@ -24,7 +26,7 @@ BlSpaceTest >> setUp [
 	host createHostSpaceFor: space.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceTest >> tearDown [
 	super tearDown.
 
@@ -34,7 +36,7 @@ BlSpaceTest >> tearDown [
 	space := nil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpaceTest >> testEnqueueEvent [
 	self skip.
 	space pulse.
@@ -47,7 +49,7 @@ BlSpaceTest >> testEnqueueEvent [
 	self assert: space pulseRequested not
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpaceTest >> testInitialization [
 	self skip.
 	"Host space must not be nil"
@@ -60,7 +62,7 @@ BlSpaceTest >> testInitialization [
 	self assert: self dirtyAreas equals: { 0@0 extent: space extent }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpaceTest >> testRender [
 	self skip.
 	self assert: self dirtyAreas equals: { 0@0 extent: space extent }.

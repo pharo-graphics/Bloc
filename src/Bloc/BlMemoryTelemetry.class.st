@@ -1,14 +1,16 @@
 Class {
-	#name : #BlMemoryTelemetry,
-	#superclass : #BlTelemetry,
+	#name : 'BlMemoryTelemetry',
+	#superclass : 'BlTelemetry',
 	#instVars : [
 		'tasks',
 		'tasksStack'
 	],
-	#category : 'Bloc-Space - Telemetry'
+	#category : 'Bloc-Space - Telemetry',
+	#package : 'Bloc',
+	#tag : 'Space - Telemetry'
 }
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlMemoryTelemetry >> finishSync [
 	| anEndTime |
 
@@ -23,7 +25,7 @@ BlMemoryTelemetry >> finishSync [
 		gcEndTime: Smalltalk vm totalGCTime
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMemoryTelemetry >> initialize [
 	super initialize.
 	
@@ -31,7 +33,7 @@ BlMemoryTelemetry >> initialize [
 	tasksStack := Stack new
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlMemoryTelemetry >> reset [
 	[ tasksStack isNotEmpty ]
 		whileTrue: [ self finishSync ].
@@ -40,7 +42,7 @@ BlMemoryTelemetry >> reset [
 	tasksStack removeAll
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlMemoryTelemetry >> startSync: aNameBlock [
 	| aNewTask aRealStart aGcTime |
 	
@@ -61,7 +63,7 @@ BlMemoryTelemetry >> startSync: aNameBlock [
 	aNewTask gcStartTime: aGcTime
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlMemoryTelemetry >> tasks [
 	^ tasks
 ]

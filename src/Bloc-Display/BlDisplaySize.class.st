@@ -1,20 +1,22 @@
 Class {
-	#name : #BlDisplaySize,
-	#superclass : #Object,
+	#name : 'BlDisplaySize',
+	#superclass : 'Object',
 	#instVars : [
 		'width',
 		'height'
 	],
-	#category : #'Bloc-Display-Geometry'
+	#category : 'Bloc-Display-Geometry',
+	#package : 'Bloc-Display',
+	#tag : 'Geometry'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlDisplaySize class >> fromPoint: aPoint [
 
 	^ self width: aPoint x height: aPoint y
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlDisplaySize class >> width: aWidth height: aHeight [
 
 	^ self new
@@ -22,7 +24,7 @@ BlDisplaySize class >> width: aWidth height: aHeight [
 		  yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlDisplaySize >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -33,38 +35,38 @@ BlDisplaySize >> = anObject [
 	^ height = anObject height and: [ width = anObject width ]
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlDisplaySize >> asLogical: aScaleFactor [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlDisplaySize >> asPhysical: aScaleFactor [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlDisplaySize >> asPoint [
 
 	^ self width @ self height
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlDisplaySize >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ height hash bitXor: width hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDisplaySize >> height [
 
 	^ height
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDisplaySize >> initialize [
 
 	super initialize.
@@ -73,20 +75,20 @@ BlDisplaySize >> initialize [
 	height := 0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDisplaySize >> initializeWidth: aWidth height: aHeight [
 
 	width := aWidth.
 	height := aHeight
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDisplaySize >> isZero [
 	
 	^ self width isZero or: [ self height isZero ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDisplaySize >> printOn: aStream [
 
 	aStream
@@ -98,7 +100,7 @@ BlDisplaySize >> printOn: aStream [
 		nextPutAll: ' }'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDisplaySize >> width [
 
 	^ width

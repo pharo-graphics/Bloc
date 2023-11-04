@@ -1,10 +1,12 @@
 Class {
-	#name : #BlScrollableElementEventHandler,
-	#superclass : #BlEventListener,
-	#category : #'Bloc-Infinite-Scrollable-Core'
+	#name : 'BlScrollableElementEventHandler',
+	#superclass : 'BlEventListener',
+	#category : 'Bloc-Infinite-Scrollable-Core',
+	#package : 'Bloc-Infinite',
+	#tag : 'Scrollable-Core'
 }
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BlScrollableElementEventHandler >> mouseWheelEvent: anEvent [
 	| aScrollHappened |
 	

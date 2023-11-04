@@ -6,12 +6,14 @@ OSWindow is an abstraction of different windowing backends, for example SDL2 or 
 OSWindow host relies on native windows that already have their own event loop, therefore I do event fetching and rendering in the same UI thread
 "
 Class {
-	#name : #BlOSWindowHost,
-	#superclass : #BlHost,
-	#category : #'BlocHost-OSWindow-Host'
+	#name : 'BlOSWindowHost',
+	#superclass : 'BlHost',
+	#category : 'BlocHost-OSWindow-Host',
+	#package : 'BlocHost-OSWindow',
+	#tag : 'Host'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BlOSWindowHost >> createAttributesFor: aSpace [
 
 	| theAttributes |
@@ -29,13 +31,13 @@ BlOSWindowHost >> createAttributesFor: aSpace [
 	^ theAttributes
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlOSWindowHost >> createHostSpace [
 
 	^ BlOSWindowHostSpace new
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlOSWindowHost >> createWindowSpaceFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
 	I do not create any strong or weak references to provided space."
@@ -62,7 +64,7 @@ BlOSWindowHost >> createWindowSpaceFor: aSpace [
 	^ aHostSpace
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlOSWindowHost >> destroyHostSpaceFor: aSpace [
 	"Closes OSWindow window and unrefer it from bloc space"
 	
@@ -75,12 +77,12 @@ BlOSWindowHost >> destroyHostSpaceFor: aSpace [
 	aSpace detachHostSpace
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOSWindowHost >> keyboardKeyTable [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlOSWindowHost >> supportsBufferSurface [
 	"Return true if this host can work with buffer surface, false otherwise"
 	

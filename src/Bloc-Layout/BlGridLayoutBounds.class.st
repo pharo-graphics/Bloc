@@ -5,8 +5,8 @@ The general algorithm therefore is to create a Map (actually a PackedMap) from g
 
 "
 Class {
-	#name : #BlGridLayoutBounds,
-	#superclass : #Object,
+	#name : 'BlGridLayoutBounds',
+	#superclass : 'Object',
 	#instVars : [
 		'before',
 		'after',
@@ -15,34 +15,36 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutBounds class >> canStretch [
 	^ BlGridFlexibility canStretch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutBounds class >> inflexible [
 	^ BlGridFlexibility inflexible
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutBounds class >> maxSize [
 	^ 100000
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGridLayoutBounds >> canStretch [
 	^ flexibility = self class canStretch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutBounds >> includeBefore: newBefore after: newAfter [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutBounds >> includeElement: anElement spec: aSpec axis: anAxis size: size [
 	| alignment newBefore newAfter |
 	flexibility := flexibility and: aSpec flexibility.
@@ -58,19 +60,19 @@ BlGridLayoutBounds >> includeElement: anElement spec: aSpec axis: anAxis size: s
 	self includeBefore: newBefore after: newAfter
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGridLayoutBounds >> initialize [
 	super initialize.
 	
 	self reset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutBounds >> offset: anElement alignment: anAlignment size: size [
 	^ before - (anAlignment alignmentValue: anElement viewSize: size)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlGridLayoutBounds >> printOn: aStream [
 	aStream
 		nextPutAll: 'before: ';
@@ -83,14 +85,14 @@ BlGridLayoutBounds >> printOn: aStream [
 		nextPutAll: (self size: true) asString
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGridLayoutBounds >> reset [
 	before := UNDEFINED.
    after := UNDEFINED.
    flexibility := self class canStretch "we are flexible when empty"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutBounds >> size: min [
 	^ (min not and: [ self canStretch ])
 		ifTrue: [ self class maxSize ]

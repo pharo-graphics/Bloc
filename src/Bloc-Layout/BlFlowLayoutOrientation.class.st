@@ -1,85 +1,87 @@
 Class {
-	#name : #BlFlowLayoutOrientation,
-	#superclass : #Object,
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#name : 'BlFlowLayoutOrientation',
+	#superclass : 'Object',
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> breadthModeOf: aMeasurer [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> breadthOf: aChild [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> breadthOf: aChild set: aNumber [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> inlineX: aChild [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> inlineY: aChild [
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutOrientation >> isHorizontal [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutOrientation >> isVertical [
 	^ false
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> lengthModeOf: aMeasurer [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> lengthOf: aChild [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> lengthOf: aChild set: aNumber [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> lineX: aChild [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> lineY: aChild [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> maxBreadthOf: aMeasurer [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> maxLengthOf: aMeasurer [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> spacingBreadthOf: aChild [
 	^ self subclassResponsibility
 ]
 
-{ #category : #measuring }
+{ #category : 'measuring' }
 BlFlowLayoutOrientation >> spacingLengthOf: aChild [
 	^ self subclassResponsibility
 ]

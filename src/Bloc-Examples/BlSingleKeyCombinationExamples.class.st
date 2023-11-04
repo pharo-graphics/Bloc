@@ -1,10 +1,12 @@
 Class {
-	#name : #BlSingleKeyCombinationExamples,
-	#superclass : #BlKeyCombinationExamples,
-	#category : #'Bloc-Examples-KeyBinding'
+	#name : 'BlSingleKeyCombinationExamples',
+	#superclass : 'BlKeyCombinationExamples',
+	#category : 'Bloc-Examples-KeyBinding',
+	#package : 'Bloc-Examples',
+	#tag : 'KeyBinding'
 }
 
-{ #category : #'examples - combination' }
+{ #category : 'examples - combination' }
 BlSingleKeyCombinationExamples >> arrowLeftCombination [
 	<gtExample>
 	| aKeyCombination |
@@ -16,7 +18,7 @@ BlSingleKeyCombinationExamples >> arrowLeftCombination [
 	^ aKeyCombination
 ]
 
-{ #category : #'examples - store' }
+{ #category : 'examples - store' }
 BlSingleKeyCombinationExamples >> storeArrowLeftCombination [
 	<gtExample>
 	| aKeyCombination aStoreString aRestoredKeyCombination |

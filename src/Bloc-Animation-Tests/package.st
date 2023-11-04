@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Animation-Tests' }
+Package { #name : 'Bloc-Animation-Tests' }

@@ -1,19 +1,20 @@
 Class {
-	#name : #BlTextElementHostMeasurer,
-	#superclass : #BlTextElementMeasurer,
+	#name : 'BlTextElementHostMeasurer',
+	#superclass : 'BlTextElementMeasurer',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Text-Elements'
+	#category : 'Bloc-Text-Elements',
+	#package : 'Bloc-Text-Elements'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextElementHostMeasurer class >> uniqueInstance [
 
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextElementHostMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
 
 	aTextElement isAttachedToSceneGraph

@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Display' }
+Package { #name : 'Bloc-Display' }

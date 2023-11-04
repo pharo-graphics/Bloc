@@ -1,1 +1,1 @@
-Package { #name : #'BlocHost-Mock' }
+Package { #name : 'BlocHost-Mock' }

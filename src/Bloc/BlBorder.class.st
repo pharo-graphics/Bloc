@@ -10,8 +10,8 @@ BlBorder builder
 
 "
 Class {
-	#name : #BlBorder,
-	#superclass : #Object,
+	#name : 'BlBorder',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -23,32 +23,34 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : 'Bloc-Basic-Border'
+	#category : 'Bloc-Basic-Border',
+	#package : 'Bloc',
+	#tag : 'Basic-Border'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBorder class >> builder [
 	^ BlBorderBuilder new
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlBorder class >> cleanUp [
 	super cleanUp.
 	
 	empty := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder class >> empty [
 	^ empty ifNil: [ empty := self paint: BlPaint transparent width: 0 ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBorder class >> new [
 	self error: 'Use one of the builder methods'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBorder class >> paint: aPaint [
 
 	^ self builder
@@ -56,7 +58,7 @@ BlBorder class >> paint: aPaint [
 		build
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBorder class >> paint: aPaint width: aNumber [
 
 	^ self builder
@@ -65,7 +67,7 @@ BlBorder class >> paint: aPaint width: aNumber [
 		build
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlBorder >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -78,13 +80,13 @@ BlBorder >> = anObject [
 				and: [ style = anObject style and: [ width = anObject width ] ] ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlBorder >> asBlBorder [
 
 	^ self
 ]
 
-{ #category : #copy }
+{ #category : 'copy' }
 BlBorder >> copyWithOpacity: aNumber [
 
 	^ self class basicNew
@@ -96,7 +98,7 @@ BlBorder >> copyWithOpacity: aNumber [
 		yourself
 ]
 
-{ #category : #copy }
+{ #category : 'copy' }
 BlBorder >> copyWithPaint: aPaint [
 
 
@@ -109,7 +111,7 @@ BlBorder >> copyWithPaint: aPaint [
 		yourself
 ]
 
-{ #category : #copy }
+{ #category : 'copy' }
 BlBorder >> copyWithStyle: aStrokeStyle [
 
 	^ self class basicNew
@@ -121,7 +123,7 @@ BlBorder >> copyWithStyle: aStrokeStyle [
 		yourself
 ]
 
-{ #category : #copy }
+{ #category : 'copy' }
 BlBorder >> copyWithWidth: aWidth [
 
 	^ self class basicNew
@@ -133,7 +135,7 @@ BlBorder >> copyWithWidth: aWidth [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlBorder >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
@@ -141,14 +143,14 @@ BlBorder >> hash [
 		bitXor: (paint hash bitXor: (style hash bitXor: width hash))
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBorder >> isTransparent [
 	"Answer whether I should not be rendered,"
 
 	^ width isZero or: [ opacity isZero or: [ paint isTransparent ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBorder >> isVisible [
 	"Return true if I am visible and should be rendered, false otherwise.
 	Note: Non-zero border with transparent paint is still needs to be rendered,
@@ -158,14 +160,14 @@ BlBorder >> isVisible [
 	^ width isZero not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder >> opacity [
 	<return: #Number>
 
 	^ opacity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder >> opacity: aNumber [
 
 	self
@@ -178,14 +180,14 @@ BlBorder >> opacity: aNumber [
 	opacity := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder >> paint [
 	<return: #BlPaint>
 
 	^ paint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder >> paint: aBlPaint [
 
 	paint ifNotNil: [ (BlImmutableObjectChangeError object: self) signal ].
@@ -193,7 +195,7 @@ BlBorder >> paint: aBlPaint [
 	paint := aBlPaint asBlPaint
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlBorder >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -209,14 +211,14 @@ BlBorder >> printOn: aStream [
 		print: paint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder >> style [
 	<return: #BlStrokeStyle>
 
 	^ style
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder >> style: aBlStrokeStyle [
 
 	style isNotNil
@@ -225,14 +227,14 @@ BlBorder >> style: aBlStrokeStyle [
 	style := aBlStrokeStyle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder >> width [
 	<return: #Number>
 
 	^ width
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBorder >> width: aNumber [
 	self
 		assert: [ aNumber >= 0 ]

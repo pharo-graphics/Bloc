@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDefaultButtonTheme,
-	#superclass : #BlTheme,
+	#name : 'BlDefaultButtonTheme',
+	#superclass : 'BlTheme',
 	#instVars : [
 		'disabledBackgroundColor',
 		'disabledTextColor',
@@ -16,100 +16,101 @@ Class {
 		'hoveredBackgroundColor',
 		'pressedBackgroundColor'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> defaultBackgroundColor [
 	^ defaultBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> defaultBackgroundColor: anObject [
 	defaultBackgroundColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> defaultBorderColor [
 	^ defaultBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> defaultBorderColor: anObject [
 	defaultBorderColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> defaultTextColor [
 	^ defaultTextColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> defaultTextColor: anObject [
 	defaultTextColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> disabledBackgroundColor [
 	^ disabledBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> disabledBackgroundColor: anObject [
 	disabledBackgroundColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> disabledBorderColor [
 	^ disabledBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> disabledBorderColor: anObject [
 	disabledBorderColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> disabledTextColor [
 	^ disabledTextColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> disabledTextColor: anObject [
 	disabledTextColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> hoveredBackgroundColor [
 	^ hoveredBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> hoveredBackgroundColor: anObject [
 	hoveredBackgroundColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> hoveredBorderColor [
 	^ hoveredBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> hoveredBorderColor: anObject [
 	hoveredBorderColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> hoveredTextColor [
 	^ hoveredTextColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> hoveredTextColor: anObject [
 	hoveredTextColor := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDefaultButtonTheme >> initialize [
 	super initialize.
 	disabledBackgroundColor := BlDefaultColors disabledButtonBackgroundColor.
@@ -127,42 +128,42 @@ BlDefaultButtonTheme >> initialize [
 	textHighlightColor := BlDefaultColors textHighlightColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> pressedBackgroundColor [
 	^ pressedBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> pressedBackgroundColor: aColor [
 	pressedBackgroundColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> pressedBorderColor [
 	^ pressedBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> pressedBorderColor: anObject [
 	pressedBorderColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> pressedTextColor [
 	^ pressedTextColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> pressedTextColor: anObject [
 	pressedTextColor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> textHighlightColor [
 	^ textHighlightColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultButtonTheme >> textHighlightColor: anObject [
 	textHighlightColor := anObject
 ]

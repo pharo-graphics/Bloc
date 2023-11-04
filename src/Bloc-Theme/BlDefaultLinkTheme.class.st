@@ -1,34 +1,35 @@
 Class {
-	#name : #BlDefaultLinkTheme,
-	#superclass : #BlTheme,
+	#name : 'BlDefaultLinkTheme',
+	#superclass : 'BlTheme',
 	#instVars : [
 		'color',
 		'errorColor'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultLinkTheme >> color [
 	^ color
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultLinkTheme >> color: anObject [
 	color := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultLinkTheme >> errorColor [
 	^ errorColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultLinkTheme >> errorColor: anObject [
 	errorColor := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDefaultLinkTheme >> initialize [
 	super initialize.
 	color := BlDefaultColors linkColor.

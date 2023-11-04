@@ -1,23 +1,25 @@
 Class {
-	#name : #BlDevScripterStepScreenshot,
-	#superclass : #BlDevScripterStepProperty,
+	#name : 'BlDevScripterStepScreenshot',
+	#superclass : 'BlDevScripterStepProperty',
 	#instVars : [
 		'form'
 	],
-	#category : #'Bloc-Scripter-Scripter-Properties'
+	#category : 'Bloc-Scripter-Scripter-Properties',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Properties'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepScreenshot >> form [
 	^ form
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterStepScreenshot >> form: anObject [
 	form := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterStepScreenshot >> isScreenshot [
 	^ true
 ]

@@ -5,12 +5,14 @@ I show how different resizing strategies work and how to build advanced layouts 
 
 "
 Class {
-	#name : #BlGridLayoutUsageExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Examples-Documentation'
+	#name : 'BlGridLayoutUsageExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Examples-Documentation',
+	#package : 'Bloc-Examples',
+	#tag : 'Documentation'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 
 	<sampleInstance>
@@ -53,7 +55,7 @@ BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 
 	<sampleInstance>
@@ -92,7 +94,7 @@ BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 
 	<sampleInstance>
@@ -137,7 +139,7 @@ BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 
 	<sampleInstance>
@@ -162,7 +164,7 @@ BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 
 	<sampleInstance>
@@ -191,7 +193,7 @@ BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 
 	<sampleInstance>
@@ -231,7 +233,7 @@ BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleNautilusGrid [
 
 	<sampleInstance>
@@ -283,7 +285,7 @@ BlGridLayoutUsageExamples >> exampleNautilusGrid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 
 	<sampleInstance>
@@ -318,7 +320,7 @@ BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 
 	<sampleInstance>
@@ -349,7 +351,7 @@ BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 
 	<sampleInstance>
@@ -374,7 +376,7 @@ BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 
 	<sampleInstance>
@@ -403,7 +405,7 @@ BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlGridLayoutUsageExamples >> verticalSpan [
 
 	<sampleInstance>

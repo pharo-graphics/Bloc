@@ -1,6 +1,6 @@
-Extension { #name : #MemoryLogger }
+Extension { #name : 'MemoryLogger' }
 
-{ #category : #'*Bloc-Spec2' }
+{ #category : '*Bloc-Spec2' }
 MemoryLogger >> inspectorRecordingsIn: aBuilder [
 	<inspectorPresentationOrder: 0 title: 'Recordings'>
 

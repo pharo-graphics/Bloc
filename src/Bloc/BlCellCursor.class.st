@@ -1,5 +1,7 @@
 Class {
-	#name : #BlCellCursor,
-	#superclass : #BlNamedCursor,
-	#category : 'Bloc-Space - Cursor'
+	#name : 'BlCellCursor',
+	#superclass : 'BlNamedCursor',
+	#category : 'Bloc-Space - Cursor',
+	#package : 'Bloc',
+	#tag : 'Space - Cursor'
 }

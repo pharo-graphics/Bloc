@@ -48,8 +48,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlGridLayoutAxis,
-	#superclass : #Object,
+	#name : 'BlGridLayoutAxis',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -88,10 +88,12 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlGridLayoutAxis class >> initialize [
 	super initialize.
 	
@@ -100,7 +102,7 @@ BlGridLayoutAxis class >> initialize [
 	COMPLETE := 2.
 ]
 
-{ #category : #'computing arcs' }
+{ #category : 'computing arcs' }
 BlGridLayoutAxis >> addComponentSizesIn: theArcs links: links [
 	"arcs is collection of BlGridLayoutArc
 	links is BlGridPackedMap<Interval, BlMutableInteger>"
@@ -109,14 +111,14 @@ BlGridLayoutAxis >> addComponentSizesIn: theArcs links: links [
 		self includeIn: theArcs span: span size: size ignoreIfPresent: false ]
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlGridLayoutAxis >> applyLayoutWithin: size [
 
 	self parentConstraintsMin: size max: size.
 	self locations
 ]
 
-{ #category : #'computing arcs' }
+{ #category : 'computing arcs' }
 BlGridLayoutAxis >> arcs [
 
 	arcs
@@ -129,7 +131,7 @@ BlGridLayoutAxis >> arcs [
 	^ arcs
 ]
 
-{ #category : #'computing links' }
+{ #category : 'computing links' }
 BlGridLayoutAxis >> backwardLinks [
 	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
 	
@@ -143,7 +145,7 @@ BlGridLayoutAxis >> backwardLinks [
 	^ backwardLinks
 ]
 
-{ #category : #computing }
+{ #category : 'computing' }
 BlGridLayoutAxis >> calculateMaxIndex [
 	"return UNDEFINED when there are no children"
 	<return: #Number>
@@ -162,7 +164,7 @@ BlGridLayoutAxis >> calculateMaxIndex [
 		ifFalse: [ aResult ]
 ]
 
-{ #category : #'computing weights' }
+{ #category : 'computing weights' }
 BlGridLayoutAxis >> calculateTotalWeight [
 
 	^ self element children accountedByLayout
@@ -170,7 +172,7 @@ BlGridLayoutAxis >> calculateTotalWeight [
 		into: [ :totalWeight :child | totalWeight + (self specOf: child) weight asFloat ]
 ]
 
-{ #category : #'computing arcs' }
+{ #category : 'computing arcs' }
 BlGridLayoutAxis >> computeArcs [
 	"getting the links validates the values that are shared by the arc list"
 
@@ -178,7 +180,7 @@ BlGridLayoutAxis >> computeArcs [
 	self backwardLinks.
 ]
 
-{ #category : #'computing group bounds' }
+{ #category : 'computing group bounds' }
 BlGridLayoutAxis >> computeGroupBounds [
 
 	groupBounds valuesDo: [ :bounds | bounds reset ].
@@ -192,13 +194,13 @@ BlGridLayoutAxis >> computeGroupBounds [
 		(groupBounds at: index) includeElement: self element spec: spec axis: self size: size ]
 ]
 
-{ #category : #'computing weights' }
+{ #category : 'computing weights' }
 BlGridLayoutAxis >> computeHasWeights [
 	
 	^ self element children accountedByLayout anySatisfy: [ :child | (self specOf: child) weight isZero not ]
 ]
 
-{ #category : #'computing links' }
+{ #category : 'computing links' }
 BlGridLayoutAxis >> computeLinks: theLinks min: isMin [
 
 	theLinks valuesDo: [ :span | span reset ].
@@ -210,7 +212,7 @@ BlGridLayoutAxis >> computeLinks: theLinks min: isMin [
 		span value: (span value max: ( isMin ifTrue: [ size ] ifFalse: [ size negated ] ) ) ].
 ]
 
-{ #category : #'computing locations' }
+{ #category : 'computing locations' }
 BlGridLayoutAxis >> computeLocations: theLocations [
 
 	self hasWeights
@@ -228,7 +230,7 @@ BlGridLayoutAxis >> computeLocations: theLocations [
 		theLocations at: index put: (location - theLocations first) ]
 ]
 
-{ #category : #'computing margins' }
+{ #category : 'computing margins' }
 BlGridLayoutAxis >> computeMargins: isLeading [
 	| margins |
 	
@@ -247,14 +249,14 @@ BlGridLayoutAxis >> computeMargins: isLeading [
 		margins at: index put: margin ]
 ]
 
-{ #category : #computing }
+{ #category : 'computing' }
 BlGridLayoutAxis >> count [
 	<return: #Number>
 
 	^ definedCount max: self maxIndex
 ]
 
-{ #category : #computing }
+{ #category : 'computing' }
 BlGridLayoutAxis >> count: aNumber [
 	self assert: aNumber isNotNil.
 	"self
@@ -264,7 +266,7 @@ BlGridLayoutAxis >> count: aNumber [
 	definedCount := aNumber
 ]
 
-{ #category : #'computing arcs' }
+{ #category : 'computing arcs' }
 BlGridLayoutAxis >> createArcs [
 	| mins maxs n sMins sMaxs |
 	
@@ -298,7 +300,7 @@ BlGridLayoutAxis >> createArcs [
 	^ sMins, sMaxs
 ]
 
-{ #category : #'computing group bounds' }
+{ #category : 'computing group bounds' }
 BlGridLayoutAxis >> createGroupBounds [     
 	<return: #BlGridPackedMap key: #BlGridLayoutSpec value: #BlGridLayoutBounds>      
 	|assocs|
@@ -312,7 +314,7 @@ BlGridLayoutAxis >> createGroupBounds [
 	^ BlGridPackedMap fromAssociations: assocs
 ]
 
-{ #category : #'computing links' }
+{ #category : 'computing links' }
 BlGridLayoutAxis >> createLinks: isMin [
 	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
 	| theLinks |
@@ -328,37 +330,37 @@ BlGridLayoutAxis >> createLinks: isMin [
 	^ BlGridPackedMap fromAssociations: theLinks
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGridLayoutAxis >> defaultOrderPreserved [
 	^ true
 ]
 
-{ #category : #computing }
+{ #category : 'computing' }
 BlGridLayoutAxis >> definedCount [
 	^ definedCount
 ]
 
-{ #category : #'computing deltas' }
+{ #category : 'computing deltas' }
 BlGridLayoutAxis >> deltas [
 	^ deltas ifNil: [ 
 		deltas := Array new: self element children accountedByLayout size withAll: 0 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutAxis >> element [
 	self assert: element isNotNil.
 	
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutAxis >> element: anElement [
 	self assert: anElement isNotNil.
 	
 	element := anElement
 ]
 
-{ #category : #'computing links' }
+{ #category : 'computing links' }
 BlGridLayoutAxis >> forwardLinks [
 	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
 	
@@ -372,7 +374,7 @@ BlGridLayoutAxis >> forwardLinks [
 	^ forwardLinks
 ]
 
-{ #category : #'computing arcs' }
+{ #category : 'computing arcs' }
 BlGridLayoutAxis >> groupArcsByFirstVertex: theArcs [
 	"Group arcs by their first vertex, returning an array of arrays of Arcs.
 	This is linear in the number of arcs.
@@ -401,7 +403,7 @@ BlGridLayoutAxis >> groupArcsByFirstVertex: theArcs [
 	^ groups
 ]
 
-{ #category : #'computing group bounds' }
+{ #category : 'computing group bounds' }
 BlGridLayoutAxis >> groupBounds [
 	<return: #BlGridPackedMap key: #BlGridLayoutSpec value: #BlGridLayoutBounds>  
 	
@@ -415,7 +417,7 @@ BlGridLayoutAxis >> groupBounds [
 	^ groupBounds
 ]
 
-{ #category : #'computing weights' }
+{ #category : 'computing weights' }
 BlGridLayoutAxis >> hasWeights [
 
 	hasWeightsValid ifFalse: [ 
@@ -424,23 +426,23 @@ BlGridLayoutAxis >> hasWeights [
 	^ hasWeights
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutAxis >> horizontal [
 	^ isHorizontal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutAxis >> horizontal: anObject [
 	isHorizontal := anObject
 ]
 
-{ #category : #'computing arcs' }
+{ #category : 'computing arcs' }
 BlGridLayoutAxis >> includeIn: theArcs span: span size: size [
 
 	self includeIn: theArcs span: span size: size ignoreIfPresent: true
 ]
 
-{ #category : #'computing arcs' }
+{ #category : 'computing arcs' }
 BlGridLayoutAxis >> includeIn: theArcs span: aSpan size: aSize ignoreIfPresent: ignoreIfPresent [
 	"Remove self referential links.
 	These appear:
@@ -463,12 +465,12 @@ BlGridLayoutAxis >> includeIn: theArcs span: aSpan size: aSize ignoreIfPresent: 
 	theArcs add: (BlGridLayoutArc span: aSpan value: aSize )
 ]
 
-{ #category : #'computing locations' }
+{ #category : 'computing locations' }
 BlGridLayoutAxis >> initLocations: theLocations [
 	theLocations atAllPut: 0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGridLayoutAxis >> initialize [
 	super initialize.
 	
@@ -508,7 +510,7 @@ BlGridLayoutAxis >> initialize [
 	parentMax := BlGridMutableInteger value: SmallInteger minVal
 ]
 
-{ #category : #invalidate }
+{ #category : 'invalidate' }
 BlGridLayoutAxis >> invalidateStructure [
 	maxIndex := UNDEFINED.
 
@@ -535,7 +537,7 @@ BlGridLayoutAxis >> invalidateStructure [
 			ifFalse: [ child constraints grid vertical ] ]
 ]
 
-{ #category : #invalidate }
+{ #category : 'invalidate' }
 BlGridLayoutAxis >> invalidateValues [
 	groupBoundsValid := false.
 	forwardLinksValid := false.
@@ -548,22 +550,22 @@ BlGridLayoutAxis >> invalidateValues [
 	locationsValid := false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGridLayoutAxis >> isOrderPreserved [
 	^ orderPreserved
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutAxis >> layout [
 	^ layout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutAxis >> layout: aLayout [
 	layout := aLayout
 ]
 
-{ #category : #'computing margins' }
+{ #category : 'computing margins' }
 BlGridLayoutAxis >> leadingMargins [
 	
 	leadingMargins
@@ -576,7 +578,7 @@ BlGridLayoutAxis >> leadingMargins [
 	^ leadingMargins
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutAxis >> locations [
 	<return: #Array of: #Integer>
 
@@ -590,7 +592,7 @@ BlGridLayoutAxis >> locations [
 	^ locations
 ]
 
-{ #category : #computing }
+{ #category : 'computing' }
 BlGridLayoutAxis >> maxIndex [
 	<return: #Number>
 
@@ -599,7 +601,7 @@ BlGridLayoutAxis >> maxIndex [
 		ifFalse: [ maxIndex ]
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlGridLayoutAxis >> measure: aMeasurementSpec [
 	| mode size |
 	mode := aMeasurementSpec mode.
@@ -619,14 +621,14 @@ BlGridLayoutAxis >> measure: aMeasurementSpec [
 	^ 0
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlGridLayoutAxis >> measureMin: min max: max [
 
 	self parentConstraintsMin: min max: max.
 	^ self sizeLocations: self locations
 ]
 
-{ #category : #computing }
+{ #category : 'computing' }
 BlGridLayoutAxis >> orderPreserved: aBoolean [
 	self assert: aBoolean isNotNil.
 	
@@ -634,7 +636,7 @@ BlGridLayoutAxis >> orderPreserved: aBoolean [
 	self invalidateStructure
 ]
 
-{ #category : #'accessing spec' }
+{ #category : 'accessing spec' }
 BlGridLayoutAxis >> parentConstraintsMin: min max: max [
 
 	parentMin value: min.
@@ -642,7 +644,7 @@ BlGridLayoutAxis >> parentConstraintsMin: min max: max [
 	locationsValid := false
 ]
 
-{ #category : #'computing locations' }
+{ #category : 'computing locations' }
 BlGridLayoutAxis >> relaxLocations: theLocations arc: arc [
 	"locations is array of integers.
 	arc is BlGridLayoutArc"
@@ -665,7 +667,7 @@ BlGridLayoutAxis >> relaxLocations: theLocations arc: arc [
 		ifFalse: [ false ]
 ]
 
-{ #category : #'computing deltas' }
+{ #category : 'computing deltas' }
 BlGridLayoutAxis >> shareOutDelta: totalDelta totalWeight: totalWeight [
 	| mTotalDelta mTotalWeight |
 	mTotalDelta := totalDelta.
@@ -686,13 +688,13 @@ BlGridLayoutAxis >> shareOutDelta: totalDelta totalWeight: totalWeight [
 			mTotalWeight := mTotalWeight - weight ] ]
 ]
 
-{ #category : #'computing locations' }
+{ #category : 'computing locations' }
 BlGridLayoutAxis >> sizeLocations: theLocations [
 
 	^ theLocations at: self count + 1
 ]
 
-{ #category : #'computing inequalities' }
+{ #category : 'computing inequalities' }
 BlGridLayoutAxis >> solve: theArcs locations: theLocations [
 	"Bellman-Ford variant - modified to reduce typical running time from O(N^2) to O(N)
 	
@@ -716,7 +718,7 @@ BlGridLayoutAxis >> solve: theArcs locations: theLocations [
 	^ self solve: theArcs locations: theLocations modifyOnError: true
 ]
 
-{ #category : #'computing inequalities' }
+{ #category : 'computing inequalities' }
 BlGridLayoutAxis >> solve: theArcs locations: theLocations modifyOnError: modifyOnError [
 	"See ${method:BlGridLayoutAxis>>#solve:locations:}$ for more information"
 	| verticesCount originalCulprits |
@@ -770,7 +772,7 @@ BlGridLayoutAxis >> solve: theArcs locations: theLocations modifyOnError: modify
 	^ true
 ]
 
-{ #category : #'computing inequalities' }
+{ #category : 'computing inequalities' }
 BlGridLayoutAxis >> solveAndDistributeSpaceLocations: theLocations [
 	| deltaMax deltaMin totalWeight validDelta validSolution |
 
@@ -805,19 +807,19 @@ BlGridLayoutAxis >> solveAndDistributeSpaceLocations: theLocations [
 		self solveLocations: theLocations ]
 ]
 
-{ #category : #'computing inequalities' }
+{ #category : 'computing inequalities' }
 BlGridLayoutAxis >> solveLocations: theLocations [
 	^ self solve: self arcs locations: theLocations
 ]
 
-{ #category : #'accessing spec' }
+{ #category : 'accessing spec' }
 BlGridLayoutAxis >> specOf: anElement [
 	^ self horizontal
 		ifTrue: [ anElement constraints grid columnSpec ]
 		ifFalse: [ anElement constraints grid rowSpec ]
 ]
 
-{ #category : #'computing arcs' }
+{ #category : 'computing arcs' }
 BlGridLayoutAxis >> topologicalSort: theArcs [
 	| result cursor arcsByVertex visited walk |
 
@@ -853,7 +855,7 @@ BlGridLayoutAxis >> topologicalSort: theArcs [
 	^ result
 ]
 
-{ #category : #'computing margins' }
+{ #category : 'computing margins' }
 BlGridLayoutAxis >> trailingMargins [
 	
 	trailingMargins

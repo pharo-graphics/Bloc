@@ -1,15 +1,17 @@
 Class {
-	#name : #BlDevScripterMouseDownStep,
-	#superclass : #BlDevScripterMouseStep,
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#name : 'BlDevScripterMouseDownStep',
+	#superclass : 'BlDevScripterMouseStep',
+	#category : 'Bloc-Scripter-Scripter-Steps',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterMouseDownStep >> defaultLabel [
 	^ 'Mouse down'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterMouseDownStep >> playOn: aScripter [
 	BlSpace simulateMouseDownOn: aScripter element at: (self getMousePositionIn: aScripter).
 	aScripter pulse

@@ -1,20 +1,22 @@
 Class {
-	#name : #BlGridCanStretch,
-	#superclass : #BlGridFlexibility,
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#name : 'BlGridCanStretch',
+	#superclass : 'BlGridFlexibility',
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridCanStretch >> and: aFlexibility [
 	aFlexibility andCanStretch: self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridCanStretch >> andCanStretch: aFlexibility [
 	^ self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridCanStretch >> andInflexible: aFlexibility [
 	^ aFlexibility
 ]

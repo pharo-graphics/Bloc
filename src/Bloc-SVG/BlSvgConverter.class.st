@@ -12,36 +12,38 @@ Example of uses that return a converted BlElement:
     - BlSVGConverter convertFromURL: anUrl
 "
 Class {
-	#name : #BlSvgConverter,
-	#superclass : #Object,
+	#name : 'BlSvgConverter',
+	#superclass : 'Object',
 	#instVars : [
 		'factory'
 	],
-	#category : #'Bloc-SVG-Converter'
+	#category : 'Bloc-SVG-Converter',
+	#package : 'Bloc-SVG',
+	#tag : 'Converter'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSvgConverter class >> convertFromFile: aFileName [
 	| doc |
 	doc := XMLDOMParser parseFileNamed: aFileName.
 	^ self new convertXMLDocument: doc
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSvgConverter class >> convertFromString: aString [
 	| doc |
 	doc := XMLDOMParser parse: aString.
 	^ self new convertXMLDocument: doc
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSvgConverter class >> convertFromURL: anUrl [
 	| doc |
 	doc := XMLDOMParser parse: anUrl asZnUrl retrieveContents asString.
 	^ self new convertXMLDocument: doc
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlSvgConverter >> convertXMLDocument: doc [
 
 	| root |
@@ -53,20 +55,20 @@ BlSvgConverter >> convertXMLDocument: doc [
 	^ self factory svgFrom: root first
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSvgConverter >> factory [
 
 	factory ifNil: [ factory := self factoryByDefault ].
 	^ factory
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSvgConverter >> factory: anObject [
 
 	factory := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSvgConverter >> factoryByDefault [
 
 	^ BlSvgFactory new

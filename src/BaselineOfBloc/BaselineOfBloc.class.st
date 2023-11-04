@@ -8,12 +8,13 @@ See BaselineOfBloc for more information about Bloc in general.
 
 "
 Class {
-	#name : #BaselineOfBloc,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfBloc
+	#name : 'BaselineOfBloc',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfBloc',
+	#package : 'BaselineOfBloc'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBloc >> baseline: spec [
 	<baseline>
 	spec

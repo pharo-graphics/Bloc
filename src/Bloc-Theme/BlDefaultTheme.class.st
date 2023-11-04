@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDefaultTheme,
-	#superclass : #BlTheme,
+	#name : 'BlDefaultTheme',
+	#superclass : 'BlTheme',
 	#instVars : [
 		'link',
 		'status',
@@ -11,52 +11,53 @@ Class {
 		'divider',
 		'notebook'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> button [
 	^ button
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> button: anObject [
 	button := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> divider [
 
 	^ divider
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> divider: aDividerTheme [
 
 	divider := aDividerTheme
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> editor [
 	^ editor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> editor: anObject [
 	editor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> header [
 	^ header
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> header: anObject [
 	header := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDefaultTheme >> initialize [
 	super initialize.
 	link := BlDefaultLinkTheme new.
@@ -69,44 +70,44 @@ BlDefaultTheme >> initialize [
 	notebook := BlDefaultNotebookTheme new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> item [
 	^ item
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> item: anObject [
 	item := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> link [
 	^ link
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> link: anObject [
 	link := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> notebook [
 
 	^ notebook
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> notebook: anObject [
 
 	notebook := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> status [
 	^ status
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultTheme >> status: anObject [
 	status := anObject
 ]

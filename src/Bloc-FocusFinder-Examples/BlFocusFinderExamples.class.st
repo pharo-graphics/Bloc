@@ -1,10 +1,11 @@
 Class {
-	#name : #BlFocusFinderExamples,
-	#superclass : #BlExamplesTest,
-	#category : #'Bloc-FocusFinder-Examples'
+	#name : 'BlFocusFinderExamples',
+	#superclass : 'BlExamplesTest',
+	#category : 'Bloc-FocusFinder-Examples',
+	#package : 'Bloc-FocusFinder-Examples'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusFinderExamples >> cell [
 	<gtExample>
 	
@@ -18,7 +19,7 @@ BlFocusFinderExamples >> cell [
 			anEvent currentTarget requestFocus ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusFinderExamples >> container [
 	<gtExample>
 	| container children |
@@ -55,7 +56,7 @@ BlFocusFinderExamples >> container [
 	^ container
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderDownOnContainer [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -70,7 +71,7 @@ BlFocusFinderExamples >> focusFinderDownOnContainer [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 2' }
+{ #category : 'examples - segment 2' }
 BlFocusFinderExamples >> focusFinderDownOnSegment_2_at_190x30 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -93,7 +94,7 @@ BlFocusFinderExamples >> focusFinderDownOnSegment_2_at_190x30 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 2' }
+{ #category : 'examples - segment 2' }
 BlFocusFinderExamples >> focusFinderDownOnSegment_2_child_41 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -116,7 +117,7 @@ BlFocusFinderExamples >> focusFinderDownOnSegment_2_child_41 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 3' }
+{ #category : 'examples - segment 3' }
 BlFocusFinderExamples >> focusFinderDownOnSegment_3_at_285x50 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -139,7 +140,7 @@ BlFocusFinderExamples >> focusFinderDownOnSegment_3_at_285x50 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 3' }
+{ #category : 'examples - segment 3' }
 BlFocusFinderExamples >> focusFinderDownOnSegment_3_child_57 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -162,7 +163,7 @@ BlFocusFinderExamples >> focusFinderDownOnSegment_3_child_57 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderLeftOnContainer [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -177,7 +178,7 @@ BlFocusFinderExamples >> focusFinderLeftOnContainer [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderRightOnContainer [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -192,7 +193,7 @@ BlFocusFinderExamples >> focusFinderRightOnContainer [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnContainer [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -207,7 +208,7 @@ BlFocusFinderExamples >> focusFinderUpOnContainer [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnContainerFromBounds [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -222,7 +223,7 @@ BlFocusFinderExamples >> focusFinderUpOnContainerFromBounds [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_100x100 [
 	<gtExample>
 	| aContainer aFocusFinder aNextFocus |
@@ -244,7 +245,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_100x100 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_20x100 [
 	<gtExample>
 	| aContainer aFocusFinder aNextFocus |
@@ -266,7 +267,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_20x100 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_minus10x100 [
 	<gtExample>
 	| aContainer aFocusFinder aNextFocus |
@@ -288,7 +289,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_minus10x100 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 1' }
+{ #category : 'examples - segment 1' }
 BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_0x60 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -311,7 +312,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_0x60 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 1' }
+{ #category : 'examples - segment 1' }
 BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_minus10x60 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -334,7 +335,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_minus10x60 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusedElementAbove_90 [
 	<gtExample>
 	| aContainer |
@@ -355,7 +356,7 @@ BlFocusFinderExamples >> focusedElementAbove_90 [
 	^ aContainer
 ]
 
-{ #category : #'examples - segment 1' }
+{ #category : 'examples - segment 1' }
 BlFocusFinderExamples >> segmentWithCells [
 	<gtExample>
 	| container children |
@@ -381,7 +382,7 @@ BlFocusFinderExamples >> segmentWithCells [
 	^ container
 ]
 
-{ #category : #'examples - segment 2' }
+{ #category : 'examples - segment 2' }
 BlFocusFinderExamples >> segmentWithCells_2 [
 	<gtExample>
 	| container children |
@@ -407,7 +408,7 @@ BlFocusFinderExamples >> segmentWithCells_2 [
 	^ container
 ]
 
-{ #category : #'examples - segment 3' }
+{ #category : 'examples - segment 3' }
 BlFocusFinderExamples >> segmentWithCells_3 [
 	<gtExample>
 	| container children |
@@ -433,7 +434,7 @@ BlFocusFinderExamples >> segmentWithCells_3 [
 	^ container
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> segmentWithCells_4 [
 	<gtExample>
 	| container children |

@@ -1,10 +1,11 @@
 Class {
-	#name : #BlRopedTextTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Text-Rope-Tests'
+	#name : 'BlRopedTextTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Text-Rope-Tests',
+	#package : 'Bloc-Text-Rope-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest >> testDuplicatedAttributes [
 
 	| text attributes |
@@ -19,7 +20,7 @@ BlRopedTextTest >> testDuplicatedAttributes [
 	self assert: attributes first paint equals: Color blue.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopedTextTest >> testUtf8Encoded [
 
 	| aString aRopedText |

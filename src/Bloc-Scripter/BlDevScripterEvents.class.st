@@ -1,10 +1,12 @@
 Class {
-	#name : #BlDevScripterEvents,
-	#superclass : #BlDevScripterCollection,
-	#category : #'Bloc-Scripter-Scripter-Utilities'
+	#name : 'BlDevScripterEvents',
+	#superclass : 'BlDevScripterCollection',
+	#category : 'Bloc-Scripter-Scripter-Utilities',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Utilities'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlDevScripterEvents >> add: anEvent [
 	self 
 		assert: [ anEvent isNotNil ]
@@ -14,32 +16,32 @@ BlDevScripterEvents >> add: anEvent [
 		ifFalse: [ self collection add: anEvent ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlDevScripterEvents >> asArray [
 	^ self collection asArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterEvents >> at: anIndex [
 	^ self collection at: anIndex
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlDevScripterEvents >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	^ self collection detect: aBlock ifFound: foundBlock ifNone: exceptionBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlDevScripterEvents >> do: aBlock [
 	self collection do: aBlock
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlDevScripterEvents >> reversed [
 	^ BlDevScripterReversedEvents new collection: self collection.
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlDevScripterEvents >> select: aBlock [ 
 	^ self collection select: aBlock 
 ]

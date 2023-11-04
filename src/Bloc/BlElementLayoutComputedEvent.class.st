@@ -1,25 +1,27 @@
 Class {
-	#name : #BlElementLayoutComputedEvent,
-	#superclass : #BlElementEvent,
-	#category : 'Bloc-Events-Type-Element'
+	#name : 'BlElementLayoutComputedEvent',
+	#superclass : 'BlElementEvent',
+	#category : 'Bloc-Events-Type-Element',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementLayoutComputedEvent class >> disableIn: anObject [
 	anObject disableLayoutComputed
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementLayoutComputedEvent class >> enableIn: anObject [
 	anObject enableLayoutComputed
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementLayoutComputedEvent class >> wantedIn: anObject [
 	^ anObject wantsLayoutComputed
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementLayoutComputedEvent >> sendTo: anObject [
 	anObject elementLayoutComputedEvent: self
 ]

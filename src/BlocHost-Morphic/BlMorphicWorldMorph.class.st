@@ -1,20 +1,22 @@
 Class {
-	#name : #BlMorphicWorldMorph,
-	#superclass : #WorldMorph,
+	#name : 'BlMorphicWorldMorph',
+	#superclass : 'WorldMorph',
 	#instVars : [
 		'display',
 		'drawingCache',
 		'mySession'
 	],
-	#category : #'BlocHost-Morphic-World'
+	#category : 'BlocHost-Morphic-World',
+	#package : 'BlocHost-Morphic',
+	#tag : 'World'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWorldMorph class >> worldState: aWorldState [
 	^ self basicNew initializeWith: aWorldState
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlMorphicWorldMorph >> beMain [
 	InputEventFetcher deinstall.
 	
@@ -34,19 +36,19 @@ BlMorphicWorldMorph >> beMain [
 		MorphicUIManager classVarNamed: #UIProcess put: aProcess ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWorldMorph >> display [
 	<return: #Form>
 
 	^ display
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicWorldMorph >> displayExtent [
 	^ display extent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicWorldMorph >> displayExtent: aPoint [
 	display
 		setExtent: aPoint
@@ -55,7 +57,7 @@ BlMorphicWorldMorph >> displayExtent: aPoint [
 	self changed
 ]
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BlMorphicWorldMorph >> drawOnSpartaCanvas: aCanvas [	
 	self validateDrawingCache.
 	
@@ -90,12 +92,12 @@ BlMorphicWorldMorph >> drawOnSpartaCanvas: aCanvas [
 				draw ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWorldMorph >> drawingCache [
 	^ drawingCache ifNil: [ drawingCache := IdentityDictionary new ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicWorldMorph >> initializeMenubar [
 	| oldWorld oldActiveWorld |
 
@@ -112,7 +114,7 @@ BlMorphicWorldMorph >> initializeMenubar [
 				ActiveWorld := oldActiveWorld ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicWorldMorph >> initializeWith: aWorldState [
 	| aHand |
 	self initialize.
@@ -137,7 +139,7 @@ BlMorphicWorldMorph >> initializeWith: aWorldState [
 	self initializeMenubar
 ]
 
-{ #category : #'change reporting' }
+{ #category : 'change reporting' }
 BlMorphicWorldMorph >> invalidRect: damageRect from: aMorph [
 	| myChild |
 	super invalidRect: damageRect from: aMorph.
@@ -154,7 +156,7 @@ BlMorphicWorldMorph >> invalidRect: damageRect from: aMorph [
 		ifTrue: [ self drawingCache removeKey: myChild ifAbsent: [ ] ]
 ]
 
-{ #category : #recategorized }
+{ #category : 'recategorized' }
 BlMorphicWorldMorph >> layoutChanged [
 	super layoutChanged.
 	
@@ -162,7 +164,7 @@ BlMorphicWorldMorph >> layoutChanged [
 		ifTrue: [ worldState element requestLayout ]
 ]
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BlMorphicWorldMorph >> validateDrawingCache [
 	mySession == Smalltalk session 
 		ifFalse: [

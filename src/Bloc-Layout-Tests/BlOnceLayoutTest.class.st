@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlOnceLay
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlOnceLayoutTest,
-	#superclass : #BlRootLayoutTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlOnceLayoutTest',
+	#superclass : 'BlRootLayoutTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlOnceLayoutTest >> testOnceLinearLayoutExact [
 	<sampleInstance>
 	| aContainer aChildA aChildB aChildC |
@@ -61,7 +62,7 @@ BlOnceLayoutTest >> testOnceLinearLayoutExact [
 	^ aContainer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlOnceLayoutTest >> testOnceLinearLayoutMatchParent [
 	<sampleInstance>
 	| aContainer aChildA aChildB aChildC |

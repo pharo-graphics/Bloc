@@ -1,27 +1,28 @@
 Class {
-	#name : #ClyGtExampleScript,
-	#superclass : #ClyClassScript,
-	#category : #'Bloc-PharoExtensions'
+	#name : 'ClyGtExampleScript',
+	#superclass : 'ClyClassScript',
+	#category : 'Bloc-PharoExtensions',
+	#package : 'Bloc-PharoExtensions'
 }
 
-{ #category : #'script detection' }
+{ #category : 'script detection' }
 ClyGtExampleScript class >> canBeProvidedByMethod: aMethod [
 	"This method just checks that method in general can be used for this kind of script"
 
 	^  aMethod numArgs = 0
 ]
 
-{ #category : #'script detection' }
+{ #category : 'script detection' }
 ClyGtExampleScript class >> isImplementedByMethod: aMethod [
 	^ ((aMethod hasPragmaNamed: #gtExample) or: [ (aMethod hasPragmaNamed: #sampleInstance) ]) and: [ (aMethod isTestMethod) not ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ClyGtExampleScript >> description [
 	^ 'Run the gtExample'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ClyGtExampleScript >> executeOn: aClass [
 
 	| exampleResult |
@@ -34,7 +35,7 @@ ClyGtExampleScript >> executeOn: aClass [
 	^ exampleResult
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ClyGtExampleScript >> iconName [
 	^#smallDoItIcon
 ]

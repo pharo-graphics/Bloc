@@ -2,11 +2,13 @@
 I define examples of the public api of event handler registry. All concrete implementations should behave in the same way
 "
 Trait {
-	#name : #TBlHandlerRegistryExamples,
-	#category : 'Bloc-Examples-EventHandling'
+	#name : 'TBlHandlerRegistryExamples',
+	#category : 'Bloc-Examples-EventHandling',
+	#package : 'Bloc-Examples',
+	#tag : 'EventHandling'
 }
 
-{ #category : #'examples - add' }
+{ #category : 'examples - add' }
 TBlHandlerRegistryExamples >> addMouseDown [
 	<gtExample>
 	| aRegistry |
@@ -21,7 +23,7 @@ TBlHandlerRegistryExamples >> addMouseDown [
 	^ aRegistry
 ]
 
-{ #category : #'examples - add' }
+{ #category : 'examples - add' }
 TBlHandlerRegistryExamples >> addMouseDownAndMouseUp [
 	<gtExample>
 	| aRegistry |
@@ -34,7 +36,7 @@ TBlHandlerRegistryExamples >> addMouseDownAndMouseUp [
 	^ aRegistry
 ]
 
-{ #category : #'examples - add' }
+{ #category : 'examples - add' }
 TBlHandlerRegistryExamples >> addMouseDownTwice [
 	<gtExample>
 	| aRegistry |
@@ -47,7 +49,7 @@ TBlHandlerRegistryExamples >> addMouseDownTwice [
 	^ aRegistry
 ]
 
-{ #category : #'examples - add' }
+{ #category : 'examples - add' }
 TBlHandlerRegistryExamples >> addMouseDownTwiceAndMouseUp [
 	<gtExample>
 	| aRegistry |
@@ -60,14 +62,14 @@ TBlHandlerRegistryExamples >> addMouseDownTwiceAndMouseUp [
 	^ aRegistry
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 TBlHandlerRegistryExamples >> emptyRegistry [
 	<return: #BlHandlerRegistry>
 
 	^ self explicitRequirement
 ]
 
-{ #category : #'examples - remove' }
+{ #category : 'examples - remove' }
 TBlHandlerRegistryExamples >> removeAllMouseDownFromTwice [
 	<gtExample>
 	| aRegistry |
@@ -80,7 +82,7 @@ TBlHandlerRegistryExamples >> removeAllMouseDownFromTwice [
 	^ aRegistry
 ]
 
-{ #category : #'examples - remove' }
+{ #category : 'examples - remove' }
 TBlHandlerRegistryExamples >> removeAllMouseDownFromTwiceLeaveUp [
 	<gtExample>
 	| aRegistry |
@@ -93,7 +95,7 @@ TBlHandlerRegistryExamples >> removeAllMouseDownFromTwiceLeaveUp [
 	^ aRegistry
 ]
 
-{ #category : #'examples - remove' }
+{ #category : 'examples - remove' }
 TBlHandlerRegistryExamples >> removeMouseDownLeaveEmpty [
 	<gtExample>
 	| aRegistry |
@@ -106,7 +108,7 @@ TBlHandlerRegistryExamples >> removeMouseDownLeaveEmpty [
 	^ aRegistry
 ]
 
-{ #category : #'examples - remove' }
+{ #category : 'examples - remove' }
 TBlHandlerRegistryExamples >> removeMouseUpLeaveMouseDown [
 	<gtExample>
 	| aRegistry |

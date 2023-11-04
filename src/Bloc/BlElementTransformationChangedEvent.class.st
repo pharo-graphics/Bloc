@@ -5,27 +5,29 @@ Note: transformation may change even if an element has no parent
 
 "
 Class {
-	#name : #BlElementTransformationChangedEvent,
-	#superclass : #BlElementEvent,
-	#category : 'Bloc-Events-Type-Element'
+	#name : 'BlElementTransformationChangedEvent',
+	#superclass : 'BlElementEvent',
+	#category : 'Bloc-Events-Type-Element',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementTransformationChangedEvent class >> disableIn: anEventDispatcher [
 	anEventDispatcher disableTransformationChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementTransformationChangedEvent class >> enableIn: anEventDispatcher [
 	anEventDispatcher enableTransformationChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementTransformationChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsTransformationChanged
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementTransformationChangedEvent >> sendTo: anObject [
 	anObject elementTransformationChangedEvent: self
 ]

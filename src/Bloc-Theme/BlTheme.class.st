@@ -20,25 +20,26 @@ TODO add element extensions, theme, themeStrategy
 
 "
 Class {
-	#name : #BlTheme,
-	#superclass : #Object,
+	#name : 'BlTheme',
+	#superclass : 'Object',
 	#classInstVars : [
 		'default'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTheme class >> default [
 	^ default ifNil: [ default := BlDefaultTheme new ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTheme class >> default: aTheme [
 	default := aTheme
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTheme class >> resetDefault [
 	<script>
 	default := nil.

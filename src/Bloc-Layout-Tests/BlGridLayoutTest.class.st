@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlGridLay
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlGridLayoutTest,
-	#superclass : #BlRootLayoutTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlGridLayoutTest',
+	#superclass : 'BlRootLayoutTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutTest >> childExact: aPoint [
 
 	^ self testChildElementWithVisualProperties
@@ -18,7 +19,7 @@ BlGridLayoutTest >> childExact: aPoint [
 		  yourself
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutTest >> matchWidthFitHeight [
 
 	<sampleInstance>
@@ -27,7 +28,7 @@ BlGridLayoutTest >> matchWidthFitHeight [
 		  c vertical fitContent ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleCellFitContent [
 
 	<sampleInstance>
@@ -62,7 +63,7 @@ BlGridLayoutTest >> testExampleCellFitContent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleCellSpacingHorizontal1 [
 
 	<sampleInstance>
@@ -92,7 +93,7 @@ BlGridLayoutTest >> testExampleCellSpacingHorizontal1 [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleCellSpacingVertical1 [
 
 	<sampleInstance>
@@ -122,7 +123,7 @@ BlGridLayoutTest >> testExampleCellSpacingVertical1 [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillEmpty [
 
 	<sampleInstance>
@@ -140,7 +141,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillEmpty [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillFirstInFourElements [
 
 	<sampleInstance>
@@ -158,7 +159,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillFirstInFourElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillForthInFourElements [
 
 	<sampleInstance>
@@ -176,7 +177,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillForthInFourElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOneElement [
 
 	<sampleInstance>
@@ -194,7 +195,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOneElement [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty1 [
 
 	<sampleInstance>
@@ -214,7 +215,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty1 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty2 [
 
 	<sampleInstance>
@@ -234,7 +235,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty2 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty3 [
 
 	<sampleInstance>
@@ -251,7 +252,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty3 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty4 [
 
 	<sampleInstance>
@@ -267,7 +268,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty4 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements1 [
 
 	<sampleInstance>
@@ -287,7 +288,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements1 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements2 [
 
 	<sampleInstance>
@@ -307,7 +308,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements2 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements3 [
 
 	<sampleInstance>
@@ -323,7 +324,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements3 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillSecondInFourElements [
 
 	<sampleInstance>
@@ -341,7 +342,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillSecondInFourElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillThreeElements [
 
 	<sampleInstance>
@@ -359,7 +360,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillThreeElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoElements [
 
 	<sampleInstance>
@@ -377,7 +378,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements1 [
 
 	<sampleInstance>
@@ -395,7 +396,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements1 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements2 [
 
 	<sampleInstance>
@@ -413,7 +414,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements2 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements3 [
 
 	<sampleInstance>
@@ -431,7 +432,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements3 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleOneCellExactChildInExactParent [
 
 	<sampleInstance>
@@ -453,7 +454,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInExactParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleOneCellExactChildInFitParent [
 
 	<sampleInstance>
@@ -475,7 +476,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInFitParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleOneCellMatchChildInExactParent [
 
 	<sampleInstance>
@@ -497,7 +498,7 @@ BlGridLayoutTest >> testExampleOneCellMatchChildInExactParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleSpanDistributeOneColumn [
 
 	<sampleInstance>
@@ -541,7 +542,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneColumn [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleSpanDistributeOneRow [
 
 	<sampleInstance>
@@ -584,7 +585,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneRow [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testParentWithGridHorizontalLayout [
 
 	<sampleInstance>

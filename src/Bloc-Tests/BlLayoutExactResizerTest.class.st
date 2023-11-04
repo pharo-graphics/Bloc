@@ -1,27 +1,29 @@
 Class {
-	#name : #BlLayoutExactResizerTest,
-	#superclass : #TestCase,
+	#name : 'BlLayoutExactResizerTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'resizer'
 	],
-	#category : #'Bloc-Tests-Layouts-Support'
+	#category : 'Bloc-Tests-Layouts-Support',
+	#package : 'Bloc-Tests',
+	#tag : 'Layouts-Support'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLayoutExactResizerTest >> setUp [
 	super setUp.
 	
 	resizer := BlLayoutExactResizer new size: 100.0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLayoutExactResizerTest >> tearDown [
 	super tearDown.
 	
 	resizer := nil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutExactResizerTest >> testEquals [
 	
 	self
@@ -39,7 +41,7 @@ BlLayoutExactResizerTest >> testEquals [
 		assert: (BlLayoutExactResizer new size: 10.0) ~= (BlLayoutResizer fitContent).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutExactResizerTest >> testHash [
 
 	self
@@ -47,7 +49,7 @@ BlLayoutExactResizerTest >> testHash [
 		equals: (BlLayoutExactResizer new size: 10.0) hash.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutExactResizerTest >> testIfExact [
 	| isExact |
 	
@@ -57,12 +59,12 @@ BlLayoutExactResizerTest >> testIfExact [
 	self assert: isExact
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutExactResizerTest >> testIsExact [
 	self assert: resizer isExact
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutExactResizerTest >> testMeasurementAtMostWith [
 	"In case of exact resizer measurements are forced to be of exact size"
 	| expected measurement |
@@ -79,7 +81,7 @@ BlLayoutExactResizerTest >> testMeasurementAtMostWith [
 	self assert: measurement equals: expected.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutExactResizerTest >> testMeasurementExactlyWith [
 	"In case of exact resizer measurements are forced to be of exact size"
 	| expected measurement |
@@ -96,7 +98,7 @@ BlLayoutExactResizerTest >> testMeasurementExactlyWith [
 	self assert: measurement equals: expected.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutExactResizerTest >> testMeasurementUnspecifiedWith [
 	"In case of exact resizer measurements are forced to be of exact size"
 	| expected measurement |
@@ -113,7 +115,7 @@ BlLayoutExactResizerTest >> testMeasurementUnspecifiedWith [
 	self assert: measurement equals: expected.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLayoutExactResizerTest >> testSize [
 	| testResizer |
 	

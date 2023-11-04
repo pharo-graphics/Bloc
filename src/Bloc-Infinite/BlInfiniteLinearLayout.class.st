@@ -1,6 +1,6 @@
 Class {
-	#name : #BlInfiniteLinearLayout,
-	#superclass : #BlInfiniteLayout,
+	#name : 'BlInfiniteLinearLayout',
+	#superclass : 'BlInfiniteLayout',
 	#instVars : [
 		'layoutState',
 		'orientation',
@@ -13,51 +13,53 @@ Class {
 		'pendingScrollPositionOffset',
 		'anchorInfo'
 	],
-	#category : #'Bloc-Infinite-Layout-Linear'
+	#category : 'Bloc-Infinite-Layout-Linear',
+	#package : 'Bloc-Infinite',
+	#tag : 'Layout-Linear'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlInfiniteLinearLayout class >> horizontal [
 	^ self new beHorizontal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLinearLayout class >> invalidOffset [
 	^ Float negativeInfinity
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlInfiniteLinearLayout class >> vertical [
 	^ self new beVertical
 ]
 
-{ #category : #orientation }
+{ #category : 'orientation' }
 BlInfiniteLinearLayout >> beHorizontal [
 
 	self orientation: BlInfiniteHorizontalOrientation new
 ]
 
-{ #category : #orientation }
+{ #category : 'orientation' }
 BlInfiniteLinearLayout >> beVertical [
 
 	self orientation: BlInfiniteVerticalOrientation new
 ]
 
-{ #category : #'scrolling - testing' }
+{ #category : 'scrolling - testing' }
 BlInfiniteLinearLayout >> canScrollHorizontally [
 	"@see BlInfiniteLayout>>canScrollHorizontally"
 
 	^ orientation isHorizontal
 ]
 
-{ #category : #'scrolling - testing' }
+{ #category : 'scrolling - testing' }
 BlInfiniteLinearLayout >> canScrollVertically [
 	"@see BlInfiniteLayout>>canScrollVertically"
 
 	^ orientation isVertical
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteLinearLayout >> childAtPosition: aPosition [
 	"See `OBlInfiniteLayout>>#childAtPosition:`"
 	<return: #BlElement or: nil>
@@ -79,7 +81,7 @@ BlInfiniteLinearLayout >> childAtPosition: aPosition [
 	^ super childAtPosition: aPosition
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteLinearLayout >> childClosestToEnd [
 	"Return the child closes to end.
 	Sender should check if there is enough children"
@@ -89,7 +91,7 @@ BlInfiniteLinearLayout >> childClosestToEnd [
 		ifFalse: [ self childrenCount ])
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteLinearLayout >> childClosestToStart [
 	"Return the child closes to start.
 	Sender should check if there is enough children"
@@ -99,7 +101,7 @@ BlInfiniteLinearLayout >> childClosestToStart [
 		ifFalse: [ 1 ])
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> computeExtraLayoutSpace [
 	"I am a first step in layout algorithm; by checking children and other variables,
 	I find an anchor coordinate and an anchor item position"
@@ -152,25 +154,25 @@ BlInfiniteLinearLayout >> computeExtraLayoutSpace [
 	^ anExtraForStart @ anExtraForEnd
 ]
 
-{ #category : #'scrolling - thumb' }
+{ #category : 'scrolling - thumb' }
 BlInfiniteLinearLayout >> computeHorizontalScrollExtent [
 
 	^ self computeScrollExtent
 ]
 
-{ #category : #'scrolling - thumb' }
+{ #category : 'scrolling - thumb' }
 BlInfiniteLinearLayout >> computeHorizontalScrollOffset [
 
 	^ self computeScrollOffset
 ]
 
-{ #category : #'scrolling - thumb' }
+{ #category : 'scrolling - thumb' }
 BlInfiniteLinearLayout >> computeHorizontalScrollRange [
 
 	^ self computeScrollRange
 ]
 
-{ #category : #'private - scrolling' }
+{ #category : 'private - scrolling' }
 BlInfiniteLinearLayout >> computeScrollExtent [
 	
 	self hasChildren ifFalse: [ ^ 0 ].
@@ -178,7 +180,7 @@ BlInfiniteLinearLayout >> computeScrollExtent [
 	^ self newScrollbarHelper computeScrollExtent
 ]
 
-{ #category : #'private - scrolling' }
+{ #category : 'private - scrolling' }
 BlInfiniteLinearLayout >> computeScrollOffset [
 	
 	self hasChildren ifFalse: [ ^ 0 ].
@@ -186,7 +188,7 @@ BlInfiniteLinearLayout >> computeScrollOffset [
 	^ self newScrollbarHelper computeScrollOffset
 ]
 
-{ #category : #'private - scrolling' }
+{ #category : 'private - scrolling' }
 BlInfiniteLinearLayout >> computeScrollRange [
 	
 	self hasChildren ifFalse: [ ^ 0 ].
@@ -194,7 +196,7 @@ BlInfiniteLinearLayout >> computeScrollRange [
 	^ self newScrollbarHelper computeScrollRange
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteLinearLayout >> computeScrollVectorForPosition: aPosition [
 
 	| aFirstChildPos aDirection |
@@ -210,37 +212,37 @@ BlInfiniteLinearLayout >> computeScrollVectorForPosition: aPosition [
 		ifFalse: [ 0 @ aDirection ]
 ]
 
-{ #category : #'scrolling - thumb' }
+{ #category : 'scrolling - thumb' }
 BlInfiniteLinearLayout >> computeVerticalScrollExtent [
 
 	^ self computeScrollExtent
 ]
 
-{ #category : #'scrolling - thumb' }
+{ #category : 'scrolling - thumb' }
 BlInfiniteLinearLayout >> computeVerticalScrollOffset [
 
 	^ self computeScrollOffset
 ]
 
-{ #category : #'scrolling - thumb' }
+{ #category : 'scrolling - thumb' }
 BlInfiniteLinearLayout >> computeVerticalScrollRange [
 
 	^ self computeScrollRange
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> defaultAnchorInfo [
 
 	^ BlInfiniteLinearLayoutAnchorInfo new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> defaultAutoMeasure [
 
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> defaultLayoutState [
 	"Create an instance of layout state to track layout related information
 	furing measurement and layout passes"
@@ -248,37 +250,37 @@ BlInfiniteLinearLayout >> defaultLayoutState [
 	^ BlInfiniteLinearLayoutState new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> defaultOrientation [
 
 	^ BlInfiniteVerticalOrientation new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> defaultReverseLayout [
 
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> defaultSmoothScrollbarEnabled [
 
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> defaultSmoothScroller [
 
 	^ BlInfiniteLinearSmoothScroller new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> defaultStackFromEnd [
 
 	^ false
 ]
 
-{ #category : #'layout - geometry' }
+{ #category : 'layout - geometry' }
 BlInfiniteLinearLayout >> extraLayoutSpace [
 	"Return the amount of extra space that should be laid out by InfiniteLayout.
 	By default, I lay out 1 extra page of items while smooth scrolling and 0 otherwise.
@@ -295,7 +297,7 @@ BlInfiniteLinearLayout >> extraLayoutSpace [
 	^ 0
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> fillLayout: shouldStopOnFocusable [
 	<return: #Number>
 
@@ -336,7 +338,7 @@ BlInfiniteLinearLayout >> fillLayout: shouldStopOnFocusable [
 	^ aStart - layoutState availableSpace
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> fillLayoutChunkResult: aResult [
 
 	| aRemainingSpaceDelta |
@@ -347,7 +349,7 @@ BlInfiniteLinearLayout >> fillLayoutChunkResult: aResult [
 	^ aRemainingSpaceDelta
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> fillLayoutConsumeSpace: aResult [	
 	"Consume the available space if:
 		layoutChunk did not request to be ignored
@@ -366,7 +368,7 @@ BlInfiniteLinearLayout >> fillLayoutConsumeSpace: aResult [
 		ifFalse: [ 0 ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> fillLayoutResultScroll: aResult [
 	
 	layoutState hasScrollingOffset
@@ -379,7 +381,7 @@ BlInfiniteLinearLayout >> fillLayoutResultScroll: aResult [
 	self recycleChildren
 ]
 
-{ #category : #'private - children' }
+{ #category : 'private - children' }
 BlInfiniteLinearLayout >> firstReferenceChildIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	<return: #BlElement or: nil>
 
@@ -390,7 +392,7 @@ BlInfiniteLinearLayout >> firstReferenceChildIn: aBlInfiniteRecycler state: aBlI
 		state: aBlInfiniteState
 ]
 
-{ #category : #'private - children' }
+{ #category : 'private - children' }
 BlInfiniteLinearLayout >> firstVisibleChildClosestToEnd [
 	"Answer the visible child closest to end. Sender should check if it has enough children."
 	<return: #BlElement or: nil>
@@ -406,7 +408,7 @@ BlInfiniteLinearLayout >> firstVisibleChildClosestToEnd [
 				to: 1 ]
 ]
 
-{ #category : #'private - children' }
+{ #category : 'private - children' }
 BlInfiniteLinearLayout >> firstVisibleChildClosestToStart [
 	"Answer the visible child closest to start. Sender should check if it has enough children."
 	<return: #BlElement or: nil>
@@ -422,7 +424,7 @@ BlInfiniteLinearLayout >> firstVisibleChildClosestToStart [
 				to: self childrenCount ]
 ]
 
-{ #category : #'private - children' }
+{ #category : 'private - children' }
 BlInfiniteLinearLayout >> firstVisibleChildFrom: aFromIndex to: aToIndex [
 	"Returns the first child that is visible in the provided index range, i.e. either partially or
 	fully visible depending on the arguments provided. Completely invisible children are not acceptable by this method."
@@ -465,7 +467,7 @@ BlInfiniteLinearLayout >> firstVisibleChildFrom: aFromIndex to: aToIndex [
 				detect ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> fixLayoutEndGap: anOffset offsetChildren: canOffsetChildren [
 
 	| anEndOffset aGap aFixOffset |
@@ -494,7 +496,7 @@ BlInfiniteLinearLayout >> fixLayoutEndGap: anOffset offsetChildren: canOffsetChi
 	^ aFixOffset
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> fixLayoutStartGap: anOffset offsetChildren: canOffsetChildren [
 
 	| aStartOffset aGap aFixOffset |
@@ -522,19 +524,19 @@ BlInfiniteLinearLayout >> fixLayoutStartGap: anOffset offsetChildren: canOffsetC
 	^ aFixOffset
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayout >> hasPendingScrollPosition [
 	
 	^ pendingScrollPosition ~= NoPosition
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayout >> hasPendingScrollPositionOffset [
 	
 	^ pendingScrollPositionOffset ~= self class invalidOffset
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteLinearLayout >> initialize [
 
 	super initialize.
@@ -553,19 +555,19 @@ BlInfiniteLinearLayout >> initialize [
 	pendingScrollPositionOffset := self class invalidOffset
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayout >> isLayoutRTL [
 
 	^ self direction isRightToLeft
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayout >> isOrientable [
 
 	^ true
 ]
 
-{ #category : #'private - children' }
+{ #category : 'private - children' }
 BlInfiniteLinearLayout >> lastReferenceChildIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	<return: #BlElement or: nil>
 
@@ -576,7 +578,7 @@ BlInfiniteLinearLayout >> lastReferenceChildIn: aBlInfiniteRecycler state: aBlIn
 		state: aBlInfiniteState
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChildrenFill: anExtraSpace [
 	"fill towards start, stacking from bottom
 	fill towards end, stacking from top"
@@ -587,7 +589,7 @@ BlInfiniteLinearLayout >> layoutChildrenFill: anExtraSpace [
 		ifFalse: [ self layoutChildrenFillFromStart: anExtraSpace ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChildrenFillFromEnd: anExtraSpace [
 	<return: #Point>
 
@@ -622,7 +624,7 @@ BlInfiniteLinearLayout >> layoutChildrenFillFromEnd: anExtraSpace [
 	^ aStartOffset @ anEndOffset
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChildrenFillFromStart: anExtraSpace [
 	<return: #Point>
 
@@ -657,7 +659,7 @@ BlInfiniteLinearLayout >> layoutChildrenFillFromStart: anExtraSpace [
 	^ aStartOffset @ anEndOffset
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChildrenFixGaps: anOffsetSpace [
 	"changes may cause gaps on the UI, try to fix them."
 	<return: #Point>
@@ -693,7 +695,7 @@ BlInfiniteLinearLayout >> layoutChildrenFixGaps: anOffsetSpace [
 	^ aStartOffset @ anEndOffset
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	"layout algorithm:
   			1) by checking children and other variables, find an anchor coordinate and an anchor item position.
@@ -734,7 +736,7 @@ BlInfiniteLinearLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfini
 	self validateChildrenOrder
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChunkAdd [
 
 	<return: #BlElement>
@@ -778,7 +780,7 @@ BlInfiniteLinearLayout >> layoutChunkAdd [
 	^ anElement
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChunkContext: aBlElementBoundsUpdateContext [
 
 	| aResult anElement anElementBounds anInfiniteConstraints |
@@ -804,7 +806,7 @@ BlInfiniteLinearLayout >> layoutChunkContext: aBlElementBoundsUpdateContext [
 	^ aResult
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChunkMeasure: anElement result: aResult [
 	<return: #Rectangle>
 
@@ -816,7 +818,7 @@ BlInfiniteLinearLayout >> layoutChunkMeasure: anElement result: aResult [
 		ifFalse: [ self layoutChunkMeasureHorizontal: anElement result: aResult ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChunkMeasureHorizontal: anElement result: aResult [
 	<return: #Rectangle>
 
@@ -835,7 +837,7 @@ BlInfiniteLinearLayout >> layoutChunkMeasureHorizontal: anElement result: aResul
 	^ (aLeft @ aTop) corner: (aRight @ aBottom)
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutChunkMeasureVertical: anElement result: aResult [
 	<return: #Rectangle>
 
@@ -859,7 +861,7 @@ BlInfiniteLinearLayout >> layoutChunkMeasureVertical: anElement result: aResult 
 	^ (aLeft @ aTop) corner: (aRight @ aBottom)
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> layoutCompleted [
 
 	super layoutCompleted.
@@ -873,7 +875,7 @@ BlInfiniteLinearLayout >> layoutCompleted [
 	anchorInfo reset
 ]
 
-{ #category : #orientation }
+{ #category : 'orientation' }
 BlInfiniteLinearLayout >> mouseWheelEvent: anEvent [
 	"${method:BlInfiniteMouseScrollOrientationLimitedListener>>#mouseWheelEvent:}$
 	dispatches mouse wheel event processing to layouts. Layouts decides whether and how to scroll items."
@@ -881,7 +883,7 @@ BlInfiniteLinearLayout >> mouseWheelEvent: anEvent [
 	orientation mouseWheelEvent: anEvent
 ]
 
-{ #category : #'private - scrolling' }
+{ #category : 'private - scrolling' }
 BlInfiniteLinearLayout >> newScrollbarHelper [
 
 	^ BlInfiniteScrollbarHelper new
@@ -895,7 +897,7 @@ BlInfiniteLinearLayout >> newScrollbarHelper [
 		yourself
 ]
 
-{ #category : #'layout - notifying' }
+{ #category : 'layout - notifying' }
 BlInfiniteLinearLayout >> notifyAvailableSpaceChanged: aNumber [
 
 	self announcer announce:
@@ -904,7 +906,7 @@ BlInfiniteLinearLayout >> notifyAvailableSpaceChanged: aNumber [
 			yourself)
 ]
 
-{ #category : #'layout - notifying' }
+{ #category : 'layout - notifying' }
 BlInfiniteLinearLayout >> notifyChunkAdded: anElement [
 
 	self announcer announce:
@@ -913,19 +915,19 @@ BlInfiniteLinearLayout >> notifyChunkAdded: anElement [
 			yourself)
 ]
 
-{ #category : #'layout - hooks' }
+{ #category : 'layout - hooks' }
 BlInfiniteLinearLayout >> onAnchorReady: anAnchorInfo firstLayoutItemDirection: aBlInfiniteLinearLayoutItemDirection [
 	"Is called when Anchor position is decided.
 	Extending class can setup accordingly or even update anchor info if necessary."
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLinearLayout >> orientation [
 
 	^ orientation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLinearLayout >> orientation: anInfiniteLayoutOrientation [
 	"Sets the orientation of the layout. 
 	I will do my best to keep scroll position."
@@ -946,7 +948,7 @@ BlInfiniteLinearLayout >> orientation: anInfiniteLayoutOrientation [
 	self requestLayout
 ]
 
-{ #category : #'private - layout anchor' }
+{ #category : 'private - layout anchor' }
 BlInfiniteLinearLayout >> prepareAnchorInfo: anAnchorInfo recycler: aBlInfiniteRecycler state: aBlInfiniteState [
 	"I update anchor position and coordinate if this information is not valid"
 	| aFirstLayoutItemDirection |
@@ -970,7 +972,7 @@ BlInfiniteLinearLayout >> prepareAnchorInfo: anAnchorInfo recycler: aBlInfiniteR
 	self onAnchorReady: anAnchorInfo firstLayoutItemDirection: aFirstLayoutItemDirection
 ]
 
-{ #category : #'private - recycling' }
+{ #category : 'private - recycling' }
 BlInfiniteLinearLayout >> recycleChildren [
 	"Recycle children depending on current layout direction"
 		
@@ -983,7 +985,7 @@ BlInfiniteLinearLayout >> recycleChildren [
 		ifFalse: [ self recycleChildrenFromStart: layoutState scrollingOffset ]
 ]
 
-{ #category : #'private - recycling' }
+{ #category : 'private - recycling' }
 BlInfiniteLinearLayout >> recycleChildrenFromEnd: anOffset [
 	"Recycle elements that went out of bounds after scrolling towards the start of the layout.
 	Checks both layout position and visible position to guarantee that the element is not visible"
@@ -1023,7 +1025,7 @@ BlInfiniteLinearLayout >> recycleChildrenFromEnd: anOffset [
 					^ self recycleChildrenWithin: (aStart to: anIndex + 1) inversed ] ]
 ]
 
-{ #category : #'private - recycling' }
+{ #category : 'private - recycling' }
 BlInfiniteLinearLayout >> recycleChildrenFromStart: anOffset [
 	"Recycle elements that went out of bounds after scrolling towards the end of the layout.
 	Checks both layout position and visible position to guarantee that the element is not visible"
@@ -1062,7 +1064,7 @@ BlInfiniteLinearLayout >> recycleChildrenFromStart: anOffset [
 				ifTrue: [ ^ self recycleChildrenWithin: (anIndex - 1 to: aStart) inversed ] ]
 ]
 
-{ #category : #'private - recycling' }
+{ #category : 'private - recycling' }
 BlInfiniteLinearLayout >> recycleChildrenWithin: anInterval [
 	"Recycle all children within given interval"
 	
@@ -1070,7 +1072,7 @@ BlInfiniteLinearLayout >> recycleChildrenWithin: anInterval [
 		self removeAndRecycleChildAt: anIndex ]
 ]
 
-{ #category : #'private - children' }
+{ #category : 'private - children' }
 BlInfiniteLinearLayout >> referenceChildClosestToEndIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	"Among the children that are suitable to be considered as an anchor child,
 	return the one closest to the end of the layout"
@@ -1081,7 +1083,7 @@ BlInfiniteLinearLayout >> referenceChildClosestToEndIn: aBlInfiniteRecycler stat
 		ifFalse: [ self lastReferenceChildIn: aBlInfiniteRecycler state: aBlInfiniteState ]
 ]
 
-{ #category : #'private - children' }
+{ #category : 'private - children' }
 BlInfiniteLinearLayout >> referenceChildClosestToStartIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	"Among the children that are suitable to be considered as an anchor child,
 	return the one closest to the start of the layout"
@@ -1092,7 +1094,7 @@ BlInfiniteLinearLayout >> referenceChildClosestToStartIn: aBlInfiniteRecycler st
 		ifFalse: [ self firstReferenceChildIn: aBlInfiniteRecycler state: aBlInfiniteState ]
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlInfiniteLinearLayout >> referenceChildWithin: anIndexInterval between: aPositionInterval recycler: aBlInfiniteRecycler state: aBlInfiniteState [
 	"Return a child that is suitable to be considered as an anchor child.
 	Due to ambiguous data source updates or children being removed, some children's positions may be invalid.
@@ -1129,7 +1131,7 @@ BlInfiniteLinearLayout >> referenceChildWithin: anIndexInterval between: aPositi
 	^ anOutOfBoundsElement ifNil: [ anInvalidElement ]
 ]
 
-{ #category : #'private - computations' }
+{ #category : 'private - computations' }
 BlInfiniteLinearLayout >> resolveIsInfinite [
 	"Return true if we should add children infinitely until we run out of items in data source or hit maxHeight/ maxWidth"
 	<return: #Boolean>
@@ -1138,7 +1140,7 @@ BlInfiniteLinearLayout >> resolveIsInfinite [
 		and: [ self orientation end isZero ]
 ]
 
-{ #category : #'private - computations' }
+{ #category : 'private - computations' }
 BlInfiniteLinearLayout >> resolveShouldLayoutReverse [
 	"Calculates the element layout order. (e.g. from end to start or start to end)
 	RTL layout support is applied automatically.
@@ -1152,7 +1154,7 @@ BlInfiniteLinearLayout >> resolveShouldLayoutReverse [
 	^ shouldReverseLayout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLinearLayout >> reverseLayout: aBoolean [
 	"Used to reverse item traversal and layout order.
 	This behaves similar to the layout change for RTL elements. When set to true, first item is
@@ -1167,7 +1169,7 @@ BlInfiniteLinearLayout >> reverseLayout: aBoolean [
 	self requestLayout
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteLinearLayout >> scrollBy: aNumber [
 	<return: #Number>
 	| aLayoutDirection anAbsoluteDelta aConsumedSpace aScrolledDistance |
@@ -1201,7 +1203,7 @@ BlInfiniteLinearLayout >> scrollBy: aNumber [
 	^ aScrolledDistance
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteLinearLayout >> scrollHorizontallyBy: aNumber [
 	"@see BlInfiniteLayout>>#scrollHorizontallyBy:"
 	<return: #Number>
@@ -1212,7 +1214,7 @@ BlInfiniteLinearLayout >> scrollHorizontallyBy: aNumber [
 	^ self scrollBy: aNumber
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteLinearLayout >> scrollToPosition: aPositionInDataSource [
 	"Scroll the InfiniteELement to make the datasource position visible.
 	Note: scroll position change will not be reflected until the next layout cycle (space pulse)"
@@ -1223,7 +1225,7 @@ BlInfiniteLinearLayout >> scrollToPosition: aPositionInDataSource [
 	self requestLayout
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteLinearLayout >> scrollToPosition: aPositionInDataSource offset: anOffset [
 	"Scroll the InfiniteELement to make the datasource position visible with the given offset from resolved layout start.
 	For example, if layout is ===vertical=== and ===stackFromEnd=== is true,
@@ -1237,7 +1239,7 @@ BlInfiniteLinearLayout >> scrollToPosition: aPositionInDataSource offset: anOffs
 	self requestLayout
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteLinearLayout >> scrollVerticallyBy: aNumber [
 	"@see BlInfiniteLayout>>#scrollVerticallyBy:"
 	<return: #Number>
@@ -1248,13 +1250,13 @@ BlInfiniteLinearLayout >> scrollVerticallyBy: aNumber [
 	^ self scrollBy: aNumber
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteLinearLayout >> scrolledWhileFilling [
 
 	^ layoutState scrolledWhileFilling
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayout >> shouldMeasureTwice [
 
 	^ self heightSpec isExact not and: [
@@ -1262,7 +1264,7 @@ BlInfiniteLinearLayout >> shouldMeasureTwice [
 			self hasFlexibleChildInBothOrientations ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayout >> shouldReverseLayout [
 	"Return true if elements are laid out from the opposite direction of the layout,
 	false otherwise"
@@ -1270,14 +1272,14 @@ BlInfiniteLinearLayout >> shouldReverseLayout [
 	^ reverseLayout
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayout >> shouldStackFromEnd [
 	"Return if the list should fill its content starting from the bottom of the infinite element, false otherwise"
 
 	^ stackFromEnd
 ]
 
-{ #category : #scrolling }
+{ #category : 'scrolling' }
 BlInfiniteLinearLayout >> smoothScrollToPosition: aPosition [
 
 	| aSmoothScroller |
@@ -1286,7 +1288,7 @@ BlInfiniteLinearLayout >> smoothScrollToPosition: aPosition [
 	self startSmoothScroll: aSmoothScroller
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLinearLayout >> stackFromEnd: aBoolean [
 	"When stack from bottom is set to true, the list fills its content starting from the bottom of the infinite element"
 
@@ -1299,7 +1301,7 @@ BlInfiniteLinearLayout >> stackFromEnd: aBoolean [
 	self requestLayout
 ]
 
-{ #category : #'layout - anchor' }
+{ #category : 'layout - anchor' }
 BlInfiniteLinearLayout >> updateAnchor: anAnchorInfo fromChild: anElement [
 
 	| anElementSize aStartGap anEndGap |
@@ -1333,7 +1335,7 @@ BlInfiniteLinearLayout >> updateAnchor: anAnchorInfo fromChild: anElement [
 		ifFalse: [ self orientation decoratedStart: anElement ])
 ]
 
-{ #category : #'layout - anchor' }
+{ #category : 'layout - anchor' }
 BlInfiniteLinearLayout >> updateAnchor: anAnchorInfo fromReferenceChild: anElement [
 	
 	anAnchorInfo assignFromElement: anElement in: self.
@@ -1352,7 +1354,7 @@ BlInfiniteLinearLayout >> updateAnchor: anAnchorInfo fromReferenceChild: anEleme
 						ifFalse: [ self orientation startWithPadding ]) ] ]
 ]
 
-{ #category : #'private - layout anchor' }
+{ #category : 'private - layout anchor' }
 BlInfiniteLinearLayout >> updateAnchorFromChildren: anAnchorInfo recycler: aBlInfiniteRecycler state: aBlInfiniteState [
 	"Finds an anchor child from existing children.
 	Most of the time, this is the element closest to start or end that has a valid position (e.g. not removed).
@@ -1384,7 +1386,7 @@ BlInfiniteLinearLayout >> updateAnchorFromChildren: anAnchorInfo recycler: aBlIn
 	^ false
 ]
 
-{ #category : #'private - layout anchor' }
+{ #category : 'private - layout anchor' }
 BlInfiniteLinearLayout >> updateAnchorFromPendingData: anAnchorInfo state: aBlInfiniteState [
 	"If there is a pending scroll position, updates the anchor info from that data and returns true.
 	false otherwise"
@@ -1420,7 +1422,7 @@ BlInfiniteLinearLayout >> updateAnchorFromPendingData: anAnchorInfo state: aBlIn
 	^ true
 ]
 
-{ #category : #'private - layout anchor' }
+{ #category : 'private - layout anchor' }
 BlInfiniteLinearLayout >> updateAnchorFromPendingDataInvalidOffset: anAnchorInfo [
 
 	| anElement |
@@ -1437,7 +1439,7 @@ BlInfiniteLinearLayout >> updateAnchorFromPendingDataInvalidOffset: anAnchorInfo
 			anAnchorInfo assignCoordinateFromPaddingIn: self ]
 ]
 
-{ #category : #'private - layout anchor' }
+{ #category : 'private - layout anchor' }
 BlInfiniteLinearLayout >> updateAnchorInfo: anAnchorInfo recycler: aBlInfiniteRecycler state: aBlInfiniteState [
 
 	(self updateAnchorFromPendingData: anAnchorInfo state: aBlInfiniteState)
@@ -1452,7 +1454,7 @@ BlInfiniteLinearLayout >> updateAnchorInfo: anAnchorInfo recycler: aBlInfiniteRe
 		ifFalse: [ 1 ])
 ]
 
-{ #category : #'layout - state' }
+{ #category : 'layout - state' }
 BlInfiniteLinearLayout >> updateLayoutState: aLayoutDirection requiredSpace: aRequiredSpace canUseExistingSpace: canUseExistingSpace [
 	"I update a layout state during a scrolling process.
 	The goal is to recompute available space, scrolling offset and some other state properties"
@@ -1471,7 +1473,7 @@ BlInfiniteLinearLayout >> updateLayoutState: aLayoutDirection requiredSpace: aRe
 	layoutState scrollingOffset: aScrollingOffset
 ]
 
-{ #category : #'layout - state' }
+{ #category : 'layout - state' }
 BlInfiniteLinearLayout >> updateLayoutStateEnd [
 	"Return how much we can scroll without adding new children (independent of layout)"
 
@@ -1491,7 +1493,7 @@ BlInfiniteLinearLayout >> updateLayoutStateEnd [
 	^ (self orientation decoratedEnd: anElement) - self orientation endWithPadding
 ]
 
-{ #category : #'layout - state' }
+{ #category : 'layout - state' }
 BlInfiniteLinearLayout >> updateLayoutStateStart [
 	"Return how much we can scroll without adding new children (independent of layout)"
 
@@ -1510,7 +1512,7 @@ BlInfiniteLinearLayout >> updateLayoutStateStart [
 	^ self orientation startWithPadding - (self orientation decoratedStart: anElement)
 ]
 
-{ #category : #'layout - state' }
+{ #category : 'layout - state' }
 BlInfiniteLinearLayout >> updateLayoutStateToFillEnd: anAnchorInfo [
 
 	self
@@ -1518,7 +1520,7 @@ BlInfiniteLinearLayout >> updateLayoutStateToFillEnd: anAnchorInfo [
 		offset: anAnchorInfo coordinate
 ]
 
-{ #category : #'layout - state' }
+{ #category : 'layout - state' }
 BlInfiniteLinearLayout >> updateLayoutStateToFillEnd: aPosition offset: anOffset [
 
 	| anAvailableSpace aLimitedSpace |
@@ -1539,7 +1541,7 @@ BlInfiniteLinearLayout >> updateLayoutStateToFillEnd: aPosition offset: anOffset
 	layoutState clearScrollingOffset
 ]
 
-{ #category : #'layout - state' }
+{ #category : 'layout - state' }
 BlInfiniteLinearLayout >> updateLayoutStateToFillStart: anAnchorInfo [
 
 	self
@@ -1547,7 +1549,7 @@ BlInfiniteLinearLayout >> updateLayoutStateToFillStart: anAnchorInfo [
 		offset: anAnchorInfo coordinate
 ]
 
-{ #category : #'layout - state' }
+{ #category : 'layout - state' }
 BlInfiniteLinearLayout >> updateLayoutStateToFillStart: aPosition offset: anOffset [
 
 	| anAvailableSpace |
@@ -1564,7 +1566,7 @@ BlInfiniteLinearLayout >> updateLayoutStateToFillStart: aPosition offset: anOffs
 	layoutState clearScrollingOffset
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlInfiniteLinearLayout >> validateChildrenOrder [
 
 	"I am a class invariant"

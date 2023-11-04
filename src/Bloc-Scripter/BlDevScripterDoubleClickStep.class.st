@@ -1,15 +1,17 @@
 Class {
-	#name : #BlDevScripterDoubleClickStep,
-	#superclass : #BlDevScripterInteractionStep,
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#name : 'BlDevScripterDoubleClickStep',
+	#superclass : 'BlDevScripterInteractionStep',
+	#category : 'Bloc-Scripter-Scripter-Steps',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterDoubleClickStep >> defaultLabel [
 	^ 'Double Click'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterDoubleClickStep >> playOn: aScripter [
 	BlSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).
 	BlSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).

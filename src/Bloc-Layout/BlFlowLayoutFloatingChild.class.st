@@ -1,13 +1,15 @@
 Class {
-	#name : #BlFlowLayoutFloatingChild,
-	#superclass : #BlFlowLayoutChild,
+	#name : 'BlFlowLayoutFloatingChild',
+	#superclass : 'BlFlowLayoutChild',
 	#instVars : [
 		'lines'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlFlowLayoutFloatingChild >> addToLine: aLine [
 	
 	"Only add me to the first line"
@@ -18,24 +20,24 @@ BlFlowLayoutFloatingChild >> addToLine: aLine [
 	lines add: aLine
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlFlowLayoutFloatingChild >> excessBreadth [
 	^ self totalBreadth - (self lines inject: 0 into: [ :aTotalBreadth :aLine | aTotalBreadth + aLine breadth ] )
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutFloatingChild >> initialize [
 	super initialize.
 	
 	lines := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutFloatingChild >> lastLine [
 	^ lines last
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutFloatingChild >> lines [
 	^ lines
 ]

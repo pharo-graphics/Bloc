@@ -9,28 +9,30 @@ See `=BlLayoutConstraintsAxis`= to learn more about axis-dependent constraints
 
 "
 Class {
-	#name : #BlLayoutConstraints,
-	#superclass : #Object,
+	#name : 'BlLayoutConstraints',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'vertical',
 		'horizontal'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#category : 'Bloc-Layouts-Basic',
+	#package : 'Bloc',
+	#tag : 'Layouts-Basic'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLayoutConstraints >> defaultHorizontal [
 	^ BlLayoutConstraintsAxis new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLayoutConstraints >> defaultVertical [
 	^ BlLayoutConstraintsAxis new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutConstraints >> horizontal [
 	"Return horizontal-axis specific constraints.
 	horizontal constraints can not be nil"
@@ -39,7 +41,7 @@ BlLayoutConstraints >> horizontal [
 	^ horizontal
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLayoutConstraints >> initialize [
 	super initialize.
 	
@@ -47,7 +49,7 @@ BlLayoutConstraints >> initialize [
 	vertical := self defaultVertical
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutConstraints >> vertical [
 	"Return vertical-axis specific constraints.
 	vertical constraints can not be nil"

@@ -1,6 +1,6 @@
-Extension { #name : #Error }
+Extension { #name : 'Error' }
 
-{ #category : #'*Bloc-Scripter' }
+{ #category : '*Bloc-Scripter' }
 Error >> passWithScripter: aScripter [
 	BlDevScripterError new
 		scripter: aScripter;

@@ -1,39 +1,41 @@
 Class {
-	#name : #BlCompositeEffect,
-	#superclass : #BlElementEffect,
+	#name : 'BlCompositeEffect',
+	#superclass : 'BlElementEffect',
 	#instVars : [
 		'effects'
 	],
-	#category : 'Bloc-Effect'
+	#category : 'Bloc-Effect',
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlCompositeEffect class >> effects: aCollection [
 	^ self new
 		addAll: aCollection;
 		yourself
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlCompositeEffect >> addAll: aCollection [
 	effects addAll: aCollection
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlCompositeEffect >> computeBounds: aBlBounds [
 
 	effects do: [ :each | each computeBounds: aBlBounds ].
 	^ aBlBounds
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlCompositeEffect >> initialize [
 
 	super initialize.
 	effects := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlCompositeEffect >> wantsCompositionLayer [
 
 	^ effects anySatisfy: [ :each | each wantsCompositionLayer ]

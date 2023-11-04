@@ -1,6 +1,6 @@
-Extension { #name : #BlElementMaybeResolvedProperties }
+Extension { #name : 'BlElementMaybeResolvedProperties' }
 
-{ #category : #'*Bloc-Text-Elements' }
+{ #category : '*Bloc-Text-Elements' }
 BlElementMaybeResolvedProperties >> fontSize [
 	<return: #BlElementFontSizeProperty>
 

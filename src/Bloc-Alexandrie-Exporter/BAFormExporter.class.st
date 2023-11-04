@@ -8,18 +8,19 @@ I export an element as a Form.
 
 "
 Class {
-	#name : #BAFormExporter,
-	#superclass : #BAExporter,
-	#category : #'Bloc-Alexandrie-Exporter'
+	#name : 'BAFormExporter',
+	#superclass : 'BAExporter',
+	#category : 'Bloc-Alexandrie-Exporter',
+	#package : 'Bloc-Alexandrie-Exporter'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BAFormExporter >> finishExport: aeCanvas [
 
 	^ aeCanvas asForm
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BAFormExporter >> newCanvas: anExtent [
 
 	^ AeCanvas extent: anExtent

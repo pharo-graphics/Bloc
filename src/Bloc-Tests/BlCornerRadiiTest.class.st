@@ -1,10 +1,12 @@
 Class {
-	#name : #BlCornerRadiiTest,
-	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Support'
+	#name : 'BlCornerRadiiTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Tests-Basic-Support',
+	#package : 'Bloc-Tests',
+	#tag : 'Basic-Support'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlCornerRadiiTest >> testBottomLeft [
 	| cornerRadii |
 	
@@ -16,7 +18,7 @@ BlCornerRadiiTest >> testBottomLeft [
 	self assert: cornerRadii bottomLeft equals: 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlCornerRadiiTest >> testBottomRight [
 	| cornerRadii |
 	
@@ -28,7 +30,7 @@ BlCornerRadiiTest >> testBottomRight [
 	self assert: cornerRadii bottomRight equals: 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlCornerRadiiTest >> testEmpty [
 	| cornerRadii |
 	
@@ -41,7 +43,7 @@ BlCornerRadiiTest >> testEmpty [
 	self assert: cornerRadii topRight equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlCornerRadiiTest >> testMax [
 	| cornerRadii |
 	
@@ -57,7 +59,7 @@ BlCornerRadiiTest >> testMax [
 	self assert: cornerRadii max equals: 20.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlCornerRadiiTest >> testMin [
 	| cornerRadii |
 	
@@ -73,7 +75,7 @@ BlCornerRadiiTest >> testMin [
 	self assert: cornerRadii min equals: 20.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlCornerRadiiTest >> testRadius [
 	| cornerRadii |
 	
@@ -86,7 +88,7 @@ BlCornerRadiiTest >> testRadius [
 	self assert: cornerRadii topRight equals: 10.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlCornerRadiiTest >> testTopLeft [
 	| cornerRadii |
 	
@@ -98,7 +100,7 @@ BlCornerRadiiTest >> testTopLeft [
 	self assert: cornerRadii topLeft equals: 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlCornerRadiiTest >> testTopRight [
 	| cornerRadii |
 	

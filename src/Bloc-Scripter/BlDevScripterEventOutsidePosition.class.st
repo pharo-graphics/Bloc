@@ -24,12 +24,14 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlDevScripterEventOutsidePosition,
-	#superclass : #BlDevScripterEventPosition,
-	#category : #'Bloc-Scripter-Scripter-Event Positions'
+	#name : 'BlDevScripterEventOutsidePosition',
+	#superclass : 'BlDevScripterEventPosition',
+	#category : 'Bloc-Scripter-Scripter-Event Positions',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Event Positions'
 }
 
-{ #category : #'debug - simulation' }
+{ #category : 'debug - simulation' }
 BlDevScripterEventOutsidePosition >> locationOutside: anElement [
 	"Return a random space location outside of element bounds"	
 	| theBounds aPosition |
@@ -49,7 +51,7 @@ BlDevScripterEventOutsidePosition >> locationOutside: anElement [
 	^ aPosition
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 BlDevScripterEventOutsidePosition >> updateEventPosition: aBlEvent in: anElement [
 	| aPosition |
 	aPosition := self locationOutside: anElement.

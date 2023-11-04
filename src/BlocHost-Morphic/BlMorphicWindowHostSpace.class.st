@@ -3,8 +3,8 @@ I am a Bloc host space to control Morphic window.
 
 "
 Class {
-	#name : #BlMorphicWindowHostSpace,
-	#superclass : #Object,
+	#name : 'BlMorphicWindowHostSpace',
+	#superclass : 'Object',
 	#traits : 'TBlHostSpace + TBlSpaceProperties',
 	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
@@ -12,10 +12,12 @@ Class {
 		'isFullSize',
 		'isBorderless'
 	],
-	#category : #'BlocHost-Morphic-Host - Window'
+	#category : 'BlocHost-Morphic-Host - Window',
+	#package : 'BlocHost-Morphic',
+	#tag : 'Host - Window'
 }
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> borderless [
 	"Return true if underlying window is now borderless, false otherwise"
 	<return: #Boolean>
@@ -23,7 +25,7 @@ BlMorphicWindowHostSpace >> borderless [
 	^ isBorderless
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> borderless: aBoolean [
 	"Make host window borderless if true is given"
 
@@ -31,31 +33,31 @@ BlMorphicWindowHostSpace >> borderless: aBoolean [
 	morphicWindow borderless: aBoolean
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> center [
 
 	morphicWindow center
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : 'host space - displaying' }
 BlMorphicWindowHostSpace >> close [
 	morphicWindow close
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicWindowHostSpace >> createFormSurfaceRenderer [
 	<return: #BlHostSurfaceRenderer>
 	
 	^ BlMorphicFormSurfaceRenderer new spaceHostMorph: morphicWindow spaceHostMorph
 ]
 
-{ #category : #'host space - cursor' }
+{ #category : 'host space - cursor' }
 BlMorphicWindowHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
 	World currentHand showTemporaryCursor: aCursor asForm
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlMorphicWindowHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -63,7 +65,7 @@ BlMorphicWindowHostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> fullsize [
 	"Return true if an underlying window is in fullsize mode,
 	false otherwise.
@@ -74,7 +76,7 @@ BlMorphicWindowHostSpace >> fullsize [
 	^ isFullSize
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> fullsize: aBoolean [
 	"Switch underlying window to fullsize if true is given
 	and exit fullsize mode if false is given.
@@ -84,7 +86,7 @@ BlMorphicWindowHostSpace >> fullsize: aBoolean [
 	morphicWindow fullsize: aBoolean.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicWindowHostSpace >> initialize [
 	super initialize.
 	
@@ -92,13 +94,13 @@ BlMorphicWindowHostSpace >> initialize [
 	isFullSize := false
 ]
 
-{ #category : #'text input' }
+{ #category : 'text input' }
 BlMorphicWindowHostSpace >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
 	^ morphicWindow isTextInputActive
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlMorphicWindowHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -107,18 +109,18 @@ BlMorphicWindowHostSpace >> logicalSize [
 	^ morphicWindow spaceExtent asLogicalSize
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlMorphicWindowHostSpace >> morphicWindow [
 	^ morphicWindow
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlMorphicWindowHostSpace >> morphicWindow: aWindow [
 	morphicWindow := aWindow.
 	morphicWindow hostSpace: self
 ]
 
-{ #category : #'host space - testing' }
+{ #category : 'host space - testing' }
 BlMorphicWindowHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 	<return: #Boolean>
@@ -126,13 +128,13 @@ BlMorphicWindowHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicWindowHostSpace >> newBlHostRendererSurface [
 
 	^ BlHostRendererFormSurface newForHostSpace: self
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlMorphicWindowHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -141,7 +143,7 @@ BlMorphicWindowHostSpace >> physicalSize [
 	^ (morphicWindow spaceExtent x @ morphicWindow spaceExtent y) asPhysicalSize
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
@@ -149,14 +151,14 @@ BlMorphicWindowHostSpace >> position [
 	^ morphicWindow position
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen corrdinates"
 	
 	morphicWindow position: aPoint
 ]
 
-{ #category : #'host space - displaying' }
+{ #category : 'host space - displaying' }
 BlMorphicWindowHostSpace >> show [
 	| anExtent |
 	
@@ -165,7 +167,7 @@ BlMorphicWindowHostSpace >> show [
 	morphicWindow extent: anExtent
 ]
 
-{ #category : #'text input' }
+{ #category : 'text input' }
 BlMorphicWindowHostSpace >> startTextInput [
 	"Start accepting Unicode text input events.
 	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
@@ -174,7 +176,7 @@ BlMorphicWindowHostSpace >> startTextInput [
 	morphicWindow  startTextInput
 ]
 
-{ #category : #'text input' }
+{ #category : 'text input' }
 BlMorphicWindowHostSpace >> startTextInputAtRectangle: aRectangle [
 	"Start accepting Unicode text input events.
 	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
@@ -183,14 +185,14 @@ BlMorphicWindowHostSpace >> startTextInputAtRectangle: aRectangle [
 	morphicWindow  requestTextEditingAt: aRectangle
 ]
 
-{ #category : #'text input' }
+{ #category : 'text input' }
 BlMorphicWindowHostSpace >> stopTextInput [
 	"Stop receiving any text input events"
 	morphicWindow requestStopTextEditing 
 
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> title [
 	"Return window's title as a string"
 	<return: #String>
@@ -198,14 +200,14 @@ BlMorphicWindowHostSpace >> title [
 	^ morphicWindow title
 ]
 
-{ #category : #'window - properties' }
+{ #category : 'window - properties' }
 BlMorphicWindowHostSpace >> title: aString [
 	"Change window's title"
 
 	morphicWindow title: aString
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : 'host space - geometry' }
 BlMorphicWindowHostSpace >> windowExtent: anExtent [
 	morphicWindow spaceExtent: anExtent
 ]

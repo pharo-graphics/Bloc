@@ -2,42 +2,44 @@
 I am fired when host window changed its size
 "
 Class {
-	#name : #BlMorphicWindowResizeEvent,
-	#superclass : #BlMorphicWindowEvent,
+	#name : 'BlMorphicWindowResizeEvent',
+	#superclass : 'BlMorphicWindowEvent',
 	#instVars : [
 		'width',
 		'height'
 	],
-	#category : 'BlocHost-Morphic-Events'
+	#category : 'BlocHost-Morphic-Events',
+	#package : 'BlocHost-Morphic',
+	#tag : 'Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWindowResizeEvent >> height [
 	^ height
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWindowResizeEvent >> height: anObject [
 	height := anObject
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlMorphicWindowResizeEvent >> sentTo:anObject [
 	"Dispatch the receiver into anObject"
 	^anObject handleWindowResize: self.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWindowResizeEvent >> type [
 	^ #windowResize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWindowResizeEvent >> width [
 	^ width
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicWindowResizeEvent >> width: anObject [
 	width := anObject
 ]

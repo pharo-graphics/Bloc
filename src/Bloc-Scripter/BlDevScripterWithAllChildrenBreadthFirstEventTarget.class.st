@@ -1,17 +1,19 @@
 Class {
-	#name : #BlDevScripterWithAllChildrenBreadthFirstEventTarget,
-	#superclass : #BlDevScripterEventTarget,
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#name : 'BlDevScripterWithAllChildrenBreadthFirstEventTarget',
+	#superclass : 'BlDevScripterEventTarget',
+	#category : 'Bloc-Scripter-Scripter-Targets',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Targets'
 }
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterWithAllChildrenBreadthFirstEventTarget >> findTargetIn: anElement [
 	<return: #Collection of: #BlElement>
 
 	^ anElement withAllChildrenBreadthFirst
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterWithAllChildrenBreadthFirstEventTarget >> printOn: aStream [
 	aStream 
 		nextPutAll: 'withAllChildrenBreadthFirst'

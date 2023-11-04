@@ -17,12 +17,14 @@ Available actions (see implementation at {{gtMethod:BlElementSelection>>#initial
 
 "
 Class {
-	#name : #BlDevHalosEventListener,
-	#superclass : #BlEventListener,
-	#category : #'Bloc-DevTool-Core'
+	#name : 'BlDevHalosEventListener',
+	#superclass : 'BlEventListener',
+	#category : 'Bloc-DevTool-Core',
+	#package : 'Bloc-DevTool',
+	#tag : 'Core'
 }
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BlDevHalosEventListener >> mouseDownEvent: anEvent [
 	(anEvent modifiers isShift and: [ anEvent modifiers isAlt ])
 		ifTrue: [ BlElementSelection on: anEvent target ]

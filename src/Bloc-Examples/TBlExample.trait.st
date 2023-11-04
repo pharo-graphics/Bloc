@@ -2,11 +2,13 @@
 I contain useful helper methods that simplify creation of examples
 "
 Trait {
-	#name : #TBlExample,
-	#category : #'Bloc-Examples-Traits'
+	#name : 'TBlExample',
+	#category : 'Bloc-Examples-Traits',
+	#package : 'Bloc-Examples',
+	#tag : 'Traits'
 }
 
-{ #category : #opening }
+{ #category : 'opening' }
 TBlExample classSide >> openInWindow: anElement named: aTitleString extent: aPoint [
 	"Open a given element in a window of a provided extent and specified title"
 
@@ -27,7 +29,7 @@ TBlExample classSide >> openInWindow: anElement named: aTitleString extent: aPoi
 	aSpace show
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 TBlExample classSide >> spaceBackground [
 	^ Color white
 ]

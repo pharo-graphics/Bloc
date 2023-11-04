@@ -1,10 +1,12 @@
 Class {
-	#name : #BlMouseProcessorEnterLeaveExamples,
-	#superclass : #BlMouseProcessorExamples,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseProcessorEnterLeaveExamples',
+	#superclass : 'BlMouseProcessorExamples',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorEnterLeaveExamples >> mouseEnter [
 	<gtExample>
 	| aScripter |
@@ -44,7 +46,7 @@ BlMouseProcessorEnterLeaveExamples >> mouseEnter [
 	^ aScripter
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorEnterLeaveExamples >> mouseLeave [
 	<gtExample>
 	| aScripter |
@@ -78,7 +80,7 @@ BlMouseProcessorEnterLeaveExamples >> mouseLeave [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorEnterLeaveExamples >> mouseLeaveDueToRemovalFromScene [
 	<gtExample>
 	| aScripter |
@@ -121,7 +123,7 @@ BlMouseProcessorEnterLeaveExamples >> mouseLeaveDueToRemovalFromScene [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorEnterLeaveExamples >> scripterElement [
 	<gtExample>
 	

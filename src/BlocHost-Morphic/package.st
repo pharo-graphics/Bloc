@@ -1,1 +1,1 @@
-Package { #name : #'BlocHost-Morphic' }
+Package { #name : 'BlocHost-Morphic' }

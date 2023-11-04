@@ -4,40 +4,42 @@ I represent an intermediate pulling step, that begun with a `BlPullStartEvent` a
 I know the initial position (in space) where the pull started, and the current position where the pull dragging is located.
 "
 Class {
-	#name : #BlPullEvent,
-	#superclass : #BlEvent,
+	#name : 'BlPullEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'initialDragPosition',
 		'currentDragPosition'
 	],
-	#category : #'Bloc-PullAndSlide-Events'
+	#category : 'Bloc-PullAndSlide-Events',
+	#package : 'Bloc-PullAndSlide',
+	#tag : 'Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPullEvent >> currentPosition [
 
 	^ currentDragPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPullEvent >> currentPosition: aPoint [
 
 	currentDragPosition := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPullEvent >> deltaFromInitialPosition [
 
 	^ currentDragPosition - initialDragPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPullEvent >> initialPosition [
 
 	^ initialDragPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPullEvent >> initialPosition: aPoint [
 
 	initialDragPosition := aPoint

@@ -3,22 +3,24 @@ I am a concrete vertical orientation
 
 "
 Class {
-	#name : #BlLayoutVertical,
-	#superclass : #BlLayoutOrientation,
-	#category : 'Bloc-Layouts-Support'
+	#name : 'BlLayoutVertical',
+	#superclass : 'BlLayoutOrientation',
+	#category : 'Bloc-Layouts-Support',
+	#package : 'Bloc',
+	#tag : 'Layouts-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutVertical >> isHorizontal [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutVertical >> isVertical [
 	^ true
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlLayoutVertical >> of: anObject [
 	^ anObject vertical
 ]

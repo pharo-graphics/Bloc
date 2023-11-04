@@ -16,18 +16,19 @@ element size: 400@200.
 
 "
 Class {
-	#name : #BAPdfExporter,
-	#superclass : #BAFileExporter,
-	#category : #'Bloc-Alexandrie-Exporter'
+	#name : 'BAPdfExporter',
+	#superclass : 'BAFileExporter',
+	#category : 'Bloc-Alexandrie-Exporter',
+	#package : 'Bloc-Alexandrie-Exporter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAPdfExporter >> extension [
 
 	^ 'pdf'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BAPdfExporter >> finishExport: aCanvas [
 	"Answer a file reference to the exported PDF."
 
@@ -37,7 +38,7 @@ BAPdfExporter >> finishExport: aCanvas [
 	^ self target
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BAPdfExporter >> newCanvas: anExtent [
 
 	| aSurface |

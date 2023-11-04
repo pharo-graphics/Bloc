@@ -3,8 +3,8 @@ I represent a child holder  within infinite element and store data related to ch
 
 "
 Class {
-	#name : #BlInfiniteHolder,
-	#superclass : #Object,
+	#name : 'BlInfiniteHolder',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -18,26 +18,28 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : #'Bloc-Infinite-Core'
+	#category : 'Bloc-Infinite-Core',
+	#package : 'Bloc-Infinite',
+	#tag : 'Core'
 }
 
-{ #category : #'private - position' }
+{ #category : 'private - position' }
 BlInfiniteHolder >> clearOldPosition [
 
 	preLayoutPosition := NoPosition
 ]
 
-{ #category : #'private - flags changing' }
+{ #category : 'private - flags changing' }
 BlInfiniteHolder >> clearReturnedFromScrap [
 	self flags clearReturnedFromScrap
 ]
 
-{ #category : #'private - flags changing' }
+{ #category : 'private - flags changing' }
 BlInfiniteHolder >> clearTmpDetached [
 	self flags clearTmpDetached
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteHolder >> dataSourcePosition [
 	"Returns the datasource position of the item represented by this ElementHolder."
 	<return: #Number>
@@ -45,19 +47,19 @@ BlInfiniteHolder >> dataSourcePosition [
 	^ infiniteElement dataSourcePositionOf: self
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlInfiniteHolder >> detachInfiniteElement [
 
 	infiniteElement := nil
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlInfiniteHolder >> detachRecycler [
 	"Set returned from scrap flag to false"
 	self clearReturnedFromScrap
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlInfiniteHolder >> flagRemovedAndOffsetPosition: aNewPosition by: anOffset applyToPreLayout: applyToPreLayout [
 
 	self flags addRemoved.
@@ -65,12 +67,12 @@ BlInfiniteHolder >> flagRemovedAndOffsetPosition: aNewPosition by: anOffset appl
 	position := aNewPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteHolder >> flags [
 	^ flags
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlInfiniteHolder >> infiniteElement [
 	"Return an infinite element a child of which a hold.
 	infiniteElement may be nil if I am not attached, for example if
@@ -80,7 +82,7 @@ BlInfiniteHolder >> infiniteElement [
 	^ infiniteElement
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlInfiniteHolder >> infiniteElement: anInfiniteElement [
 	"Set an infinite element a child of which a hold.
 	anInfiniteElement must not be nil"
@@ -88,7 +90,7 @@ BlInfiniteHolder >> infiniteElement: anInfiniteElement [
 	infiniteElement := anInfiniteElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteHolder >> initialize [
 	super initialize.
 	
@@ -98,42 +100,42 @@ BlInfiniteHolder >> initialize [
 	flags := BlInfiniteElementHolderFlags new
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> isBound [
 	^ self flags hasBound
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> isChanged [
 	^ self flags hasUpdate
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> isInvalid [
 	^ self flags hasInvalid
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> isRemoved [
 	^ self flags hasRemoved
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> isTmpDetached [
 	^ self flags hasTmpDetached
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> isUpdated [
 	^ self flags hasUpdate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteHolder >> itemElement [
 	^ itemElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteHolder >> itemId [
 	"Returns The itemId represented by this ElementHolder if datasource has stable ids, `BlInfiniteElement noId` otherwise"
 	<return: #Number>
@@ -141,12 +143,12 @@ BlInfiniteHolder >> itemId [
 	^ itemId
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlInfiniteHolder >> itemId: anIdemId [
 	itemId := anIdemId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteHolder >> layoutPosition [
 	"Returns the position of the ElementHolder in terms of the latest layout pass"
 	<return: #Number>
@@ -156,12 +158,12 @@ BlInfiniteHolder >> layoutPosition [
 		ifFalse: [ preLayoutPosition ]
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> needsUpdate [
 	^ self flags hasUpdate
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlInfiniteHolder >> offsetPositionBy: anOffset applyToPreLayout: shouldApplyOnPreLayout [
 	
 	preLayoutPosition = NoPosition
@@ -174,7 +176,7 @@ BlInfiniteHolder >> offsetPositionBy: anOffset applyToPreLayout: shouldApplyOnPr
 	itemElement constraints infinite insetsDirty: true
 ]
 
-{ #category : #'private - position' }
+{ #category : 'private - position' }
 BlInfiniteHolder >> position [
 	"For inner use ONLY! Instead try #layoutPosition or #dataSourcePosition"
 	<return: #Number>
@@ -182,19 +184,19 @@ BlInfiniteHolder >> position [
 	^ position
 ]
 
-{ #category : #'private - position' }
+{ #category : 'private - position' }
 BlInfiniteHolder >> position: aPosition [
 	"For inner use ONLY!"
 	position := aPosition
 ]
 
-{ #category : #'private - position' }
+{ #category : 'private - position' }
 BlInfiniteHolder >> preLayoutPosition: aPosition [
 	"For inner use ONLY!"
 	preLayoutPosition := aPosition
 ]
 
-{ #category : #'private - invalidate' }
+{ #category : 'private - invalidate' }
 BlInfiniteHolder >> reset [
 
 	flags clear.
@@ -203,26 +205,26 @@ BlInfiniteHolder >> reset [
 	preLayoutPosition := NoPosition
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> shouldIgnore [
 	^ self flags hasIgnore
 ]
 
-{ #category : #'private - flags changing' }
+{ #category : 'private - flags changing' }
 BlInfiniteHolder >> startIgnoring [
 	"Start ignoring an element I represent"
 
 	self flags addIgnore
 ]
 
-{ #category : #'private - flags changing' }
+{ #category : 'private - flags changing' }
 BlInfiniteHolder >> stopIgnoring [
 	"Stop ignoring an element I represent"
 
 	self flags clearIgnore
 ]
 
-{ #category : #'private - flags testing' }
+{ #category : 'private - flags testing' }
 BlInfiniteHolder >> wasReturnedFromScrap [
 	<return: #Boolean>
 

@@ -1,6 +1,6 @@
-Extension { #name : #TextAction }
+Extension { #name : 'TextAction' }
 
-{ #category : #'*Bloc-Text-Rope' }
+{ #category : '*Bloc-Text-Rope' }
 TextAction >> applyToBlText: aBlText [
 
 	self class = TextAction

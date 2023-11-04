@@ -1,13 +1,15 @@
 Class {
-	#name : #BlMorphicFormSurfaceRenderer,
-	#superclass : #BlHostSurfaceRenderer,
+	#name : 'BlMorphicFormSurfaceRenderer',
+	#superclass : 'BlHostSurfaceRenderer',
 	#instVars : [
 		'spaceHostMorph'
 	],
-	#category : #'BlocHost-Morphic-Host - Common'
+	#category : 'BlocHost-Morphic-Host - Common',
+	#package : 'BlocHost-Morphic',
+	#tag : 'Host - Common'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMorphicFormSurfaceRenderer >> initializeForSurface: aSurface [
 
 	| anExternalForm |
@@ -21,20 +23,20 @@ BlMorphicFormSurfaceRenderer >> initializeForSurface: aSurface [
 	aSurface form: anExternalForm
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlMorphicFormSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 	"Render a given surface on a host space"
 
 	spaceHostMorph form: aSurface form
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicFormSurfaceRenderer >> spaceHostMorph [
 
 	^ spaceHostMorph
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMorphicFormSurfaceRenderer >> spaceHostMorph: aBlMorphicSpaceHostMorph [
 
 	spaceHostMorph := aBlMorphicSpaceHostMorph

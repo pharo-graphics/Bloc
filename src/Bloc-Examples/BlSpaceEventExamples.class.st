@@ -3,12 +3,14 @@ I contain examples of space related events
 
 "
 Class {
-	#name : #BlSpaceEventExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlSpaceEventExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlSpaceEventExamples >> ignoreSpaceEventsAfterCloseRequest [
 	<gtExample>
 	<noTest>
@@ -25,7 +27,7 @@ BlSpaceEventExamples >> ignoreSpaceEventsAfterCloseRequest [
 	^ aSpace
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceEventExamples >> space [
 	<gtExample>
 
@@ -34,7 +36,7 @@ BlSpaceEventExamples >> space [
 		  yourself
 ]
 
-{ #category : #'show / close' }
+{ #category : 'show / close' }
 BlSpaceEventExamples >> spaceClosed [
 	<gtExample>
 	<noTest>
@@ -52,7 +54,7 @@ BlSpaceEventExamples >> spaceClosed [
 	^ aSpace
 ]
 
-{ #category : #'show / close' }
+{ #category : 'show / close' }
 BlSpaceEventExamples >> spaceDestroyed [
 	<gtExample>
 	<noTest>
@@ -74,7 +76,7 @@ BlSpaceEventExamples >> spaceDestroyed [
 	^ aSpace
 ]
 
-{ #category : #'show / close' }
+{ #category : 'show / close' }
 BlSpaceEventExamples >> spaceShown [
 	<gtExample>
 	<noTest>

@@ -1,14 +1,16 @@
 Class {
-	#name : #BlNodeBasedLayout,
-	#superclass : #BlLayout,
-	#category : 'Bloc-Layouts-Basic'
+	#name : 'BlNodeBasedLayout',
+	#superclass : 'BlLayout',
+	#category : 'Bloc-Layouts-Basic',
+	#package : 'Bloc',
+	#tag : 'Layouts-Basic'
 }
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlNodeBasedLayout >> layout: aParentLayoutNode [
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlNodeBasedLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	| aParentNode |
 	
@@ -34,11 +36,11 @@ BlNodeBasedLayout >> layout: anElement in: aRectangle context: aBlElementBoundsU
 		eachChildNode element applyLayoutIn: eachChildNode layoutBounds context: aBlElementBoundsUpdateContext ].
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlNodeBasedLayout >> measure: aParentLayoutNode [
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlNodeBasedLayout >> measure: anElement with: anExtentSpec [
 	| aParentNode |
 
@@ -57,7 +59,7 @@ BlNodeBasedLayout >> measure: anElement with: anExtentSpec [
 	self measureIgnored: anElement with: anExtentSpec
 ]
 
-{ #category : #'private - measurement' }
+{ #category : 'private - measurement' }
 BlNodeBasedLayout >> preMeasureChildNode: aChildNode [
 	"Perform a basic independent measurement of each child node"
 
@@ -73,7 +75,7 @@ BlNodeBasedLayout >> preMeasureChildNode: aChildNode [
 				resizer: aChildNode verticalResizer)) ]
 ]
 
-{ #category : #'private - measurement' }
+{ #category : 'private - measurement' }
 BlNodeBasedLayout >> preMeasureChildrenNodes: aParentNode [
 	"Perform a basic independent measurement of each child node"
 

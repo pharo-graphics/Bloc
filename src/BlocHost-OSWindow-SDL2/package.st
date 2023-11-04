@@ -1,1 +1,1 @@
-Package { #name : #'BlocHost-OSWindow-SDL2' }
+Package { #name : 'BlocHost-OSWindow-SDL2' }

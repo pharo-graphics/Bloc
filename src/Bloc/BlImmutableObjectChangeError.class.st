@@ -1,28 +1,30 @@
 Class {
-	#name : #BlImmutableObjectChangeError,
-	#superclass : #Error,
+	#name : 'BlImmutableObjectChangeError',
+	#superclass : 'Error',
 	#instVars : [
 		'object'
 	],
-	#category : 'Bloc-Basic-Errors'
+	#category : 'Bloc-Basic-Errors',
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlImmutableObjectChangeError class >> object: anObject [
 	^ self new object: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlImmutableObjectChangeError >> description [
 	^ self object printString, ' is immutable and can not be changed'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlImmutableObjectChangeError >> object [
 	^ object
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlImmutableObjectChangeError >> object: anObject [
 	object := anObject
 ]
